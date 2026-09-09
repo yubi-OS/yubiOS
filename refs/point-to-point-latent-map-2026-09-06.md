@@ -144,3 +144,15 @@ Each candidate records `delta = {pole_shift_geodesic, occupied_sectors_delta, is
 Request field `names` (string[] aligned with the vectors) carries each item's file name; the ladder's change/remove text cites it ("Remove item #212 (skills/foo/SKILL.md)") and falls back to the label, then the ordinal.
 
 **Wayfinder prompt (2026-09-08).** Every rung carries `prompt`: a copy-ready instruction naming the literal file to open (`change`, `remove`), the nearest neighbour to fold into (`remove`), or the exemplar files to model new content on (`add`, `change`), plus the re-run check (same d/seed/threshold, `rule_hash` must match, predicted pole/occupied/isolated deltas, keep-if-sign-matches rule). `nss.prompt` echoes the ideal rung. The agent guide for the loop is served at `/AGENT.md` (source `tools/point-map/AGENT.md`).
+
+## 12. Addendum 2026-09-09: field findings from the first refs/ wayfinder loop
+
+First full loop on the `refs/` corpus (N=155 baseline, 10 map runs, worker ids 32-39, fixed instrument d=9 / seed=20260906 / threshold=median / K=40): 2 rungs kept, 5 reverted on failed sign-checks, 1 destructive `remove` declined on judgment, loop terminated at the fixpoint. Three findings for this spec:
+
+**1. Rung predictions understate real re-embed movement by an order of magnitude.** Predictions come from applying the candidate action to the bit matrix and refitting on a frozen basis. A real edit changes every embedding, so PCA recompute moves the whole cloud: predicted pole shifts of 0.03-0.6 rad measured at 1.2-1.7 rad. Pole-shift sign is nearly always positive, so it carries no signal; `isolated_delta` is the only usable sign discriminator (5/7 applied rungs failed on it). Recommendation: weight the decision rule toward the isolated delta and treat pole-shift predictions as ordinal at best.
+
+**2. The ingestion window is part of the instrument.** Texts are embedded from their first 2000 characters. An edit that appends structure beyond char 2000 measures exactly zero - a CHANGE rung sat invisible on the map until its new sections were restructured inside the window. Agents applying `change` rungs must land the new structure inside the first ~1800 chars; over-large restructures also overshoot (one restructure moved iso +10 against a -13 prediction and was reverted). A compact block near the top is the working pattern.
+
+**3. `rule_hash` cannot stay constant across a live loop.** It hashes the full rule object, which embeds the per-column medians and the PCA axes - both re-derive whenever the corpus changes (N shifts, medians move). "rule_hash must match" is therefore only satisfiable on no-op re-runs of an unchanged corpus. The identity contract that matters across an iteration loop is the (d, seed, threshold, K) tuple; treat rule_hash as a run fingerprint, not a comparability key.
+
+Also observed: the ladder walk on a fixed corpus state is deterministic (a confirming re-run reproduced the ladder exactly), so once every rung on a ladder has been measured and failed, the loop has no remaining rungs - that state is the loop's fixpoint, not a stall.
