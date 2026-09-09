@@ -40,7 +40,22 @@ gate v2 = 0.303.
 | 1 | L1 change | post-cycle-4 resolution table on `repo-history-skill-cycle-4` | iso −4 | 43 → 41 (−2) | KEEP (sign correct; prediction is a synthetic one-bit estimate, real edit carried more content) |
 | 2 | L1 change | broken Source path + Figure D.1 fix in `appendix-D-manifold-coord` | iso −2 | 41 (0 bits, quantization-silent) | KEEP (task check passed; real broken-reference fix) |
 | 3 | L2 add | `chromium-provenance-overlay-status-2026-09-09.md` (first refs/ record for OMN-165) | iso −1 | 41 → 39 (−2) | KEEP (sign correct) |
-| 4 | L3 add | this doc | iso −1 | (pending map) | pending |
+| 4 | L3 add | this doc (wayfinder results record) | iso −1 | 39 → 38 (−1) | KEEP (exact match) |
+| 5 | L2 add | `linear-workspace-sweep-2026-09-09.md` | iso −1 | 38 (0) | KEEP (sign-neutral; task check governs per AGENT.md v0.2) |
+| 6 | L1 change | dependency map + open questions on appendix-D | iso −2 | 38 (0) | KEEP (2nd silent edit on this doc; rung recorded content-resistant) |
+| 7 | L3 add | `org-repo-census-2026-09-09.md` | iso −1 | 38 (0) | KEEP (task check) |
+| 8 | L2 add | `blockers-drift-check-2026-09-09.md` (B-ROCK1-OFFLINE superseded — GPU runner gone, replaced by HIGH-MEM `ubuntu`; B-VGPU-VM-UNZIP retirement condition met, 3 green runs) | iso −1 | 38 → 37 (−1) | KEEP (exact match) |
+| 9 | L4 add | `arm64-path-a-status-2026-09-09.md` (48-day refresh; OMN-36 due 2026-09-12 while Backlog/unowned — flagged) | iso +1 | 37 (0) | KEEP (sign-neutral; rung was negative-scored) |
+| 10 | L5 change | verified status section on the vgpu trust-boundary doc | iso +1 | 37 (0) | KEEP (task check) |
+
+**Round-2 final:** isolated 43 → 37 over 10 cycles (map trail 51 → 61, frame `f90cf5ba805322a5`
+frozen throughout). 10 of 10 edits kept on task-check grounds; 2 sign-exact matches, 2
+sign-correct with half/none magnitude, 6 quantization-silent. 6 files added, 3 docs amended.
+Gate at close: v2 = 0.306, gate_pass = false — per the gate's own note, that is the measurement
+on this coordinate, not evidence about the corpus; the identity (V2 ≥ 0.40 ⟺ 2/V2 ≤ 5) holds
+trivially with both sides false. `task_verdict` remains not-tested: every claim in every added
+doc was verified against a live API on 2026-09-09, but no independent graded editor has scored
+the edits.
 
 ## Limitations
 
