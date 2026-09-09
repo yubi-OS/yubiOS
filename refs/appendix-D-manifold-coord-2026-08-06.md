@@ -65,7 +65,7 @@ Paired statistics (per-seed Δ = sphere − flat):
   (R² ≈ 1.0000); the flat arm cannot represent cos(3φ) at K=2, so its
   best fit is worse than the corpus-mean prediction (negative R²).
 
-See Figure D.1 for the grouped bar chart with error bars.
+The grouped bar chart with error bars is `papers/charts/chart-manifold-coord-2026-08-06-v3.png` (no in-repo figure carries the number D.1).
 
 ## Interpretation
 
@@ -120,4 +120,4 @@ noise). Both controls work in both PRs; the remaining open items are a
 higher-degree S² positive control and a second-corpus re-run of the
 ablation itself.
 
-Source: `papers/data/manifold-coord-benchmark-2026-08-06/manifold-coord-benchmark-results-v3.json`.
+Source: `papers/data/manifold-coord-benchmark-2026-08-06/manifold-coord-benchmark-results.json` (the only benchmark-results JSON in that directory; its `version` field reads `v2 - designed after advisor critique of PR #192`, 10 seeds — matching Table D.1's 10-seed run). The v3-named chart is `papers/charts/chart-manifold-coord-2026-08-06-v3.png`; a `manifold-coord-benchmark-results-v3.json` does not exist on main as of 2026-09-09.
