@@ -2,6 +2,19 @@
 
 Status: design + CI plan. Written 2026-07-25. Sources dated the same day.
 
+## Failure modes and recovery baseline
+
+Per the ADR-031 posture (virtio-gpu default / vfio-user preferred / IOMMU-gated passthrough; enforcement post-launch):
+
+- **Passthrough with no working IOMMU** — a DMA-capable device reading unlocked key material. Recovery: refuse at the gate; enable passthrough only on an isolated IOMMU group with a documented deviation (§2 rule 2).
+- **vfio-user socket over-exposed** — the device-model peer reaches negotiated DMA windows. Recovery: socket mode 0600, VMM-user-owned, single host namespace until the protocol has authentication (§2 rule 4).
+- **GPU state coupled into the unlock path** — vGPU presence changes boot/unlock behaviour. Recovery: re-run the full LUKS2 FIDO2 + homed + pam-u2f + fTPM suite with a vGPU attached (invariant 5, §1).
+- **Pinned CI inputs drift** (bcvk patch, libvfio-user commit) — a silently-ignoring build. Recovery: the workflow SKIPs loudly on patch failure; refresh pins before re-asserting results (§4).
+
+**Claim validation / benchmark sources:** claims here rest on the upstream pins named in the Inputs list — kernel VFIO/iommufd docs, the qemu.org vfio-user protocol spec, QEMU 10.1 upstream client — refresh against upstream releases before citing forward.
+
+**Promotion gate:** this doc stays research/design-class; promotion to enforcement requires the roadmap-promotion-gates fields (owner/deployment target, trust boundary, evidence target, recovery behavior) answered with CI evidence from the rock1 vGPU lane.
+
 Inputs analysed:
 
 - `k-amin07/47cb06e4598e0c81f2b42904c6909329` (gist) â a bare-metal GPU-passthrough
