@@ -195,3 +195,13 @@ This document integrates with the yubiOS declarative-policy substrate — OPA/Re
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## Status (verified 2026-09-09)
+
+The workflow this doc analyzes, `ci_test-vgpu-vm.yml`, is green on current main: three
+consecutive successful runs on 2026-09-09 (34408180552 at `a25d95c7`; 34410693076 and
+34410693069 at `55b68ca8`), all on the rock1 self-hosted ARM64 runner. The B-VGPU-VM-UNZIP
+host-deps gap that blocked the sealed-UKI leg is fixed in code (`unzip` in the apt block) and
+its retirement condition is met — see `refs/blockers-drift-check-2026-09-09.md`. The
+architecture analysis above (ADR-031 rule 5, vfio-user preference, IOMMU-gated passthrough)
+is unchanged.
