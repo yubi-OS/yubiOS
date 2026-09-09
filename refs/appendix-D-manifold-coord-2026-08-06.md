@@ -121,3 +121,22 @@ higher-degree S² positive control and a second-corpus re-run of the
 ablation itself.
 
 Source: `papers/data/manifold-coord-benchmark-2026-08-06/manifold-coord-benchmark-results.json` (the only benchmark-results JSON in that directory; its `version` field reads `v2 - designed after advisor critique of PR #192`, 10 seeds — matching Table D.1's 10-seed run). The v3-named chart is `papers/charts/chart-manifold-coord-2026-08-06-v3.png`; a `manifold-coord-benchmark-results-v3.json` does not exist on main as of 2026-09-09.
+
+## Dependency map (added 2026-09-09)
+
+- Data: `papers/data/manifold-coord-benchmark-2026-08-06/manifold-coord-benchmark-results.json`
+  (10-seed per-seed R², per-seed λ, per-seed Δ, summary; version field `v2`).
+- Chart: `papers/charts/chart-manifold-coord-2026-08-06-v3.png` (grouped bars with error bars);
+  earlier single-chart variant `papers/charts/chart-manifold-coord-2026-08-06.png`.
+- Generator: `papers/scripts/manifold-coord-benchmark-2026-08-06.py`.
+- Companion PRs: #192 (Appendix C.3 primary benchmark, merged) and #193 (this appendix,
+  merged). Both verified merged on 2026-09-09.
+
+## Open questions (added 2026-09-09)
+
+- The doc body describes the "v3 Fix A" design, but the only benchmark-results JSON in the data
+  directory carries `version: v2 - designed after advisor critique of PR #192`. Either the v3
+  run's JSON was never saved under a distinct name or the file was updated in place — needs the
+  original run's stdout or a re-run of the script to resolve. Do not guess.
+- The remaining benchmark open items from the body stand: a higher-degree S² positive control
+  and a second-corpus re-run of the ablation.
