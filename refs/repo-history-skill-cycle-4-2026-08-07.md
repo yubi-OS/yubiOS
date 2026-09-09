@@ -97,3 +97,23 @@ The corpus-saturation story is consistent: 7-9 of 9 primitives always survive th
 ## Empirical Validation
 
 Cycle 4 ships. Next cycle (cycle 5) requires another user override; top carryover hypotheses are semantic-similarity join (cycle-5 candidate #1) and a Mode D batch on the top-10 cycle-4 actionable sparse cells.
+
+## Post-cycle-4 resolution (verified 2026-09-09)
+
+The audit table above lists 12 sparse-cell dispositions from the 2026-08-07 cycle-4 fit, 10 of them framed as open cycle-5 batch work. Re-verified against the live APIs on 2026-09-09 (GitHub REST for issues/releases, Linear GraphQL for OMNs): 9 of the 10 open candidates are now closed, and the only still-open item is exactly the one cycle 4 deferred as structurally hard. Recorded below so the audit table is not read as still-open work.
+
+| Item | Cycle-4 disposition | Verified 2026-09-09 |
+|---|---|---|
+| Linear OMN-101 (`has_purpose`) | Cycle-5 batch candidate | **Done** — completedAt `2026-07-26T04:07:35.303Z` (ADR-031 GPU trust boundary work) |
+| Linear OMN-5 (`has_purpose`) | Cycle-5 batch candidate | **Done** — completedAt `2026-07-25T02:58:42.031Z` |
+| Linear OMN-33 (`has_pr_ref`) | Cycle-5 batch candidate | **Done** — completedAt `2026-07-25T01:56:43.747Z` |
+| Linear OMN-97 (`has_sha`) | Cycle-5 batch candidate | **Done** — completedAt `2026-07-30T09:04:34.088Z` |
+| Linear OMN-99 (`has_state_progression`) | "STRUCTURALLY HARD (Done state but body has 'merged'; check if reword). Defer." | **Done** — completedAt `2026-07-30T23:41:37.830Z`; closed as "bcvk: upstream --extra-qemu-arg landed, in-run CI patch retired" — the open 'check if reword' question is resolved, no reword was needed |
+| Linear OMN-164 (`has_pr_ref`) | "CLOSED by mode-D batch 1" | **Done** — completedAt `n/a` (confirms the cycle-4 note) |
+| GitHub issue #87 (`has_linear_ref`) | Cycle-5 batch candidate | **Closed** `2026-07-25T01:56:44Z` |
+| GitHub issue #84 (`has_linear_ref`) | Cycle-5 batch candidate | **Closed** `2026-07-22T01:14:19Z` |
+| GitHub issue #62 (`has_linear_ref`) | Cycle-5 batch candidate | **Closed** `2026-07-11T11:51:25Z` |
+| Linear OMN-140 (`has_state_progression`) | "STRUCTURALLY HARD. Defer." | **Still In Progress** — completedAt null, last activity 2026-08-24 (drift-correction pass) — the cycle-4 deferral stands |
+| Release v0.7.1 (`has_sha`) | Cycle-5 batch candidate | **Published** `2026-08-01T13:44:30Z` (tag target `main`) — the SHA evidence the `has_sha` flip needed already exists on the release object |
+
+Net: the `has_state_progression` structural-hard diagnosis held (OMN-140 still unflippable with a null `completedAt`), while OMN-99's terminal state landed naturally weeks later — no reword required. The remaining cycle-5 backlog from this doc is OMN-140 only.
