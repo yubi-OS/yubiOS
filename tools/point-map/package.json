@@ -1,0 +1,10 @@
+{
+  "name": "sos-point-map",
+  "private": true,
+  "version": "0.2.0",
+  "scripts": {
+    "test": "node test-pointmap.js && node test-api.mjs && node --test test-tar.mjs",
+    "build": "node build.mjs"
+  },
+  "devDependencies": { "esbuild": "0.25.12" }
+}

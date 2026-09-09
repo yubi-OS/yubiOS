@@ -1,0 +1,1279 @@
+{
+  "repo": "yubi-OS/yubiOS",
+  "pinned_commit": "84785eb321b2cbb8ddc3e46a52612d86cddf9e90",
+  "total_files": 159,
+  "inventory": [
+    {
+      "path": "refs/0pointer-poettering-systemd-vision-2026-07-23.md",
+      "bytes": 10263,
+      "sha256": "2a192f5a987d8775e33f9b889f0729c81d363eeae2fcdbc3adce8cb8f6878de7",
+      "title": "0pointer.net / Lennart Poettering & Amutable \u00e2\u0080\u0094 systemd Architecture Vision",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-0pointer-knowledge.md, originally researched 2026-06-23)_ Lennart Poettering: creator of systemd, PulseAudio, Avahi. Blog \"Pid Eins\" (0pointer.net/blog)",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/acoustic-optical-phonons-bridge-2026-09-01.md",
+      "bytes": 19611,
+      "sha256": "3b4c776e81f88973050395d8f2389d3283125fc154970003331128c5c2cc4568",
+      "title": "Acoustic/optical phonons \u2192 curved-corpus program \u2014 bridge, 2026-09-01",
+      "summary": "**Companion to:** `refs/twenty-two-links-synthesis-and-photophysics-bridge-2026-08-25.md` (the photophysics bridge this extends), `tools/phonon-dispersion/`",
+      "relevance": "Phonons, Photophysics, Curve/RSI, Lean-Identities"
+    },
+    {
+      "path": "refs/actions-checkout-v6-includeif-investigation-2026-07-29.md",
+      "bytes": 12860,
+      "sha256": "85b120d25299e3e392012a4439ff0c5630bb96bb4b94e7948f2271efe2da16a1",
+      "title": "actions/checkout v6 includeIf auth failure \u00e2\u0080\u0094 investigation & fix",
+      "summary": "**Investigation date:** 2026-07-29 **Reporter context:** all 22 sibling workflows under `.github/workflows/` on `yubi-OS/yubiOS` main, on `ubuntu-24.04` runner image build `20260720.247`, runner 2.336",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/adjacent-problems-container-isolation-2026-09-01.md",
+      "bytes": 4694,
+      "sha256": "4068095e58d25eacecf6e13a2dc9ffd2fcb08692a6781a5d883dfdabe61d5dc3",
+      "title": "Adjacent problems: container isolation on an immutable Linux host",
+      "summary": "Date: 2026-09-01. Axis: NSS 6/12 Adjacent problems. Origin: SOS Agent FIT #10 lens `L4-NSS-Adjacent_problems`; one of five files filling the empty cell at z-band 0 /",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/adjacent-problems-curve-corpus-primitives-2026-09-01.md",
+      "bytes": 5175,
+      "sha256": "cad01046dcdb604e432379117b427eae74ca37249173713c62c94286e32c0878",
+      "title": "Adjacent problems: the curve, the corpus, and its learned primitives",
+      "summary": "Date: 2026-09-01. Axis: NSS 6/12 Adjacent problems. Origin: SOS Agent FIT #10 lens `L4-NSS-Adjacent_problems`; one of five files written to fill the empty cell at z-band 0 /",
+      "relevance": "Curve/RSI, EnvHarness"
+    },
+    {
+      "path": "refs/adjacent-problems-fido2-secure-boot-2026-09-01.md",
+      "bytes": 4800,
+      "sha256": "6e23002a6825b71044ca905c54e5042544ed1187cbf45d071dd502d1ed328a98",
+      "title": "Adjacent problems: YubiKey FIDO2 at the boot boundary",
+      "summary": "Date: 2026-09-01. Axis: NSS 6/12 Adjacent problems. Origin: SOS Agent FIT #10 lens `L4-NSS-Adjacent_problems`; one of five files filling the empty cell at z-band 0 /",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/adjacent-problems-rootless-privilege-2026-09-01.md",
+      "bytes": 4800,
+      "sha256": "55baa6085648929260469d89ac5c3aa314b065ec289f215e921a959f6d43b837",
+      "title": "Adjacent problems: rootless builds and runtime privilege",
+      "summary": "Date: 2026-09-01. Axis: NSS 6/12 Adjacent problems. Origin: SOS Agent FIT #10 lens `L4-NSS-Adjacent_problems` on `yubi-OS/yubiOS` (591 files); one of five files written to fill",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/adjacent-problems-verification-chain-2026-09-01.md",
+      "bytes": 6011,
+      "sha256": "234f95f3418abde3dd38b30e3ae3247c3c58f55540275645cbab459d4e66e152",
+      "title": "Adjacent problems: the verification chain (boot to runtime)",
+      "summary": "Date: 2026-09-01. Axis: NSS 6/12 Adjacent problems (per `skills/nss-adjacent-problems`). Origin: SOS Agent FIT #10 on `yubi-OS/yubiOS` main (591 files) surfaced lens",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/adr-033-misbehavior-cutoff-policy-2026-07-28.md",
+      "bytes": 11956,
+      "sha256": "326aef6be9f09d792fd6cd0cf91482a34aa11134e458f0a5985532be0668ee14",
+      "title": "Misbehavior-Triggered PCI-Mediation Cutoff [SOLO]",
+      "summary": "<last-reviewed-against-blockers>2026-07-28</last-reviewed-against-blockers> Source: ideate-solo (no dialogue \u00e2\u0080\u0094 autonomous variation generation)",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/adr-033-prior-art-search-2026-07-28.md",
+      "bytes": 16641,
+      "sha256": "d04e244f3ac3ae58a69e673c1bbe46dd9552f6b9fb40a85ccce6d1f17cc5042a",
+      "title": "ADR-033 \u00e2\u0080\u0094 Prior-art search: behavioral cut-off of AI/ML workloads via PCI device mediation",
+      "summary": "Linear: OMN-145 (companion to OMN-144 ADR proposal, OMN-146 scope decision, OMN-147 trigger model) Parent draft: `refs/adr-033-misbehavior-cutoff-policy-2026-07-28.md` ([SOLO] ideation, Variation 3 fi",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/appendix-D-manifold-coord-2026-08-06.md",
+      "bytes": 7140,
+      "sha256": "af1c6160bf3586db36de8c527fc69c05d13bc108c3ba9d65a8f4fd96c757d841",
+      "title": "Appendix D \u2014 Manifold-Coordinate Benchmark (Rigorous Re-Test)",
+      "summary": "PR #193's complement to PR #192 v4's primary synthetic-manifold benchmark (Appendix C.3, 50 seeds, off-span targets at PR #192's basis capacity). PR #193",
+      "relevance": "Curve/RSI, Lean-Identities"
+    },
+    {
+      "path": "refs/arm64-ftpm-phase-f0-2026-07-23.md",
+      "bytes": 4680,
+      "sha256": "7714e2f8973866e4c207f888f65d7455daf9185ff3260b27b57a25362778610c",
+      "title": "Phase F0: QEMU ARM64 bring-up (ADR-018)",
+      "summary": "_Refreshed: 2026-07-23 (renamed from refs/arm64-ftpm-phase-f0.md, no date suffix previously)_ Status check 2026-07-23: Phase F0 (QEMU bring-up) work is superseded in practice by the live ARM64 Phase F",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/arm64-path-a-b-board-status-2026-07-23.md",
+      "bytes": 4937,
+      "sha256": "29b0561bc7ac6312bdf619564c1e42d1cfb47d7518840187d3d4224ce4e1965f",
+      "title": "ARM64 Path A / Path B Board Status",
+      "summary": "_Refreshed: 2026-07-23 (renamed from refs/path-a-b-board-status.md; original content dated 2026-07-11, retained below)_ Status check 2026-07-23: cross-checked against live BLOCKERS.md \u00e2\u0080\u0094 B-ARM64-PATH",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/arm64-rk-board-status-2026-07-17.md",
+      "bytes": 3871,
+      "sha256": "8d9e00531e12436e1c8b050155a3728949acda1bc05627f8ff1ff45e7d120278",
+      "title": "ARM64 RK board status: 2026-07-17",
+      "summary": "Status: workflow evidence updated 2026-07-21; Path A hardware proof still required. Path A means owner-owned root of trust on real hardware: TF-A trusted-board-boot, OP-TEE as BL32, StandaloneMM with ",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/arm64-zstd-efi-zboot-bcvk-2026-07-23.md",
+      "bytes": 5507,
+      "sha256": "2a694e031f289bc8c3d5866063027933967d75aa1c1f09b0eeb7a65c3428f318",
+      "title": "ARM64 EFI zboot + zstd blocker (bcvk DirectBoot)",
+      "summary": "_Refreshed: 2026-07-23 (renamed from refs/zstd-efi-zboot-bcvk.md, no date suffix previously)_ The exact commit yubiOS pins (`3a18e8a25992d1643707e2cebdd6e9bb2bd7d3b9`) **is Daan De Meyer's own zstd EF",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/arxiv-2607.09967-vs-learned-latent-curve-2026-08-04.md",
+      "bytes": 9238,
+      "sha256": "b0ab09b3df273071c58057f7231659655e4d6d3c34a96bac9b75b4d84558fbe4",
+      "title": "arXiv:2607.09967 vs. `learned-latent-curve` \u00e2\u0080\u0094 Sourcing Check",
+      "summary": "**Requested by:** Jenny Latuu (session verification: \"did arXiv:2607.09967 get used to make any of the learned-curve skills or anything in the skills at all?\") **Verdict: NOT USED.** No skill in the c",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/assets-repo-repoint-verification-2026-07-28.md",
+      "bytes": 9416,
+      "sha256": "ed9b33adcf04c936910680284a0af90f002913d76f937683addf7c2c9362258d",
+      "title": "Assets repo repoint \u00e2\u0080\u0094 verification audit (2026-07-28)",
+      "summary": "title: \"Assets repo repoint \u00e2\u0080\u0094 verification audit (2026-07-28)\" auditor: sauna (auto-audit, parallel non-CI task)",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/attested-bootc-gpu-cutover-2026-07-30.md",
+      "bytes": 21470,
+      "sha256": "c42bdd1578d282d5a77e525eb161ea5ee31194aba9240e3b786ae0d0f7e13471",
+      "title": "Attested bootc\u00e2\u0086\u0092libvirt\u00e2\u0086\u0092GPU cutover: prior art & novelty verdict",
+      "summary": "**Source:** parallel-deep-research (3 streams: deep-dive on synthesis, per-component prior art, comparative + novelty verdict) **Internal prior art checked:** yubiOS ADR-031 (mechanism), ADR-033 (runt",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/bcvk-swtpm-ci-2026-07-23.md",
+      "bytes": 3492,
+      "sha256": "bd7f059daf356bef3bcbad695b742634da9706a0d7cc4cb32d0324a759b4db1c",
+      "title": "bcvk swtpm CI",
+      "summary": "_Refreshed: 2026-07-23 (renamed from refs/bcvk-swtpm-ci.md, no date suffix previously)_ Cross-checked 2026-07-23 against refs/bootc-dev-org-releases-2026-07-23.md: bcvk's own upstream (bootc-dev/bcvk)",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/bootc-composefs-sealed-flow-2026-07-22.md",
+      "bytes": 12519,
+      "sha256": "5df85feba7c54febe298329750cc1cfc620fd8abdbd7625b337120ca948653b2",
+      "title": "bootc composefs and sealed UKI flow \u00e2\u0080\u0094 2026-07-22",
+      "summary": "Status: researched implementation boundary; current install smoke strengthened, sealed promotion still gated. This note audits the attached Duck.ai discussion about using EROFS with",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/bootc-dev-org-releases-2026-07-23.md",
+      "bytes": 6648,
+      "sha256": "5f15c96beac9cc3dc0d2694440115ad550df29c57050f014599927a471b9683e",
+      "title": "bootc-dev Org \u00e2\u0080\u0094 Repos, Releases, Upstream FIDO2/LUKS Status",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-bootc-dev-org.md, originally fetched 2026-05-10)_ **bootc-dev/bootc v1.16.4 released 2026-07-15.** yubiOS's own BLOCKERS.md (as of 2026-07-22) states: \"",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/bootc-uki-libvirt-gpu-passthrough-2026-08-07.md",
+      "bytes": 29400,
+      "sha256": "ef44a0cb7b786fb96ebb63a02bf42c0555dfc01725fd08a7385fdb0aebc30dc9",
+      "title": "bootc-UKI host + libvirt/QEMU GPU passthrough \u00e2\u0080\u0094 host-level cutoff vs. libvfio-user vGPU budget",
+      "summary": "A bootc/UKI host running yubiOS can hand a GPU to a libvirt/QEMU VM via VFIO/IOMMU passthrough \u00e2\u0080\u0094 but the passthrough boundary is binary (one VM owns the whole device, no per-container allocation) an",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/bootc-upgrade-rollback-sysext-portable-test-spec-2026-08-04.md",
+      "bytes": 78864,
+      "sha256": "99f5ad0bbc9a56e4fef1fd06e8bca50052ff328ec695e3d03023f4d7f8a31aaa",
+      "title": "Spec: bootc upgrade/rollback + sysext + portable-service VM test coverage",
+      "summary": "**Linear**: OMN-156 (Backlog, High, team `OMN`, no current assignee, filed 2026-08-01 from `refs/testing-production-gaps-2026-08-01.md` per PR #156 commit `3e74579c8e50`). **Author**: fresh-context re",
+      "relevance": "Curve/RSI, Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/ci-evidence-2026-07-21.md",
+      "bytes": 7635,
+      "sha256": "6bebdf8c7c7bd21c2014f231d90af67518122794a2fd796e875af692a3bd39c9",
+      "title": "CI Evidence Review \u00e2\u0080\u0094 2026-07-21",
+      "summary": "Status: point-in-time evidence from the complete logs of eight requested workflow runs This note records what the reviewed runs actually prove, and what they do not. All 41 jobs in the eight runs comp",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/complex-ginzburg-landau-skill-emergence.md",
+      "bytes": 20854,
+      "sha256": "e2ec3a204c5d7b7962281b0ef66e6a840879fbfdafb196a8ee3fa2b78e561428",
+      "title": "Complex Ginzburg\u2013Landau and Skill Emergence as a Phase Transition",
+      "summary": "**Local ref/ entry.** To be added to the next cycle of `guided-curve-ideate`. **Skill:** guided-curve-ideate (cycles 1\u201323 prior; cycle 24 onward)",
+      "relevance": "Lean-Identities"
+    },
+    {
+      "path": "refs/covenant-conflict-policy-2026-07-25.md",
+      "bytes": 6466,
+      "sha256": "40f7b7e3ac8cdfe6adaeb8e950bed87424b0b44280010a526bbd4fc66492f36a",
+      "title": "yubiOS covenant conflict policy",
+      "summary": "**Status:** draft, staged for review / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-82 refs/operating-covenant-2026-07-25.md (OMN-70)",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/current-position-evidence-2026-07-25.md",
+      "bytes": 9177,
+      "sha256": "c264d55f067658e671e4943797a1076494cfdbccf24fed983a42311cbcf3b51b",
+      "title": "Current Position and Evidence Boundary",
+      "summary": "Source: OMN-68 (team OMNI-AGENT), section 1 of the yubiOS Business and Stewardship Plan. Grounded in the live BLOCKERS.md as of 2026-07-22 and the repo itself as inspected on 2026-07-25. Referenced by",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/curve-guided-rsi-and-self-differential-2026-08-04.md",
+      "bytes": 17081,
+      "sha256": "b09f99f75c1feb0ddb14bee9fcf3634796876d7102324415ccbb56945cedb07f",
+      "title": "Differential curve: curve-guided-rsi \u00c3\u0097 curve-guided-rsi-self",
+      "summary": "**Author:** OMNI-AGENT (`foil-copy-overrate@duck.com`) **Pipeline:** `session/diff-curves/differential_pipeline.py`",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/curve-guided-rsi-v1-cycle4-all-skills-2026-08-04.md",
+      "bytes": 7752,
+      "sha256": "a8b606bf3f205b6aa306840e770f5e17d840c6db0c37f3573bcf1d8115dff83a",
+      "title": "curve-guided-rsi v1 \u00e2\u0080\u0094 cycle 4 (ALL-SKILLS substantive run)",
+      "summary": "**Skill under test:** curve-guided-rsi v1 **Corpus:** 63 yubiOS skills (62 pre-existing + `curve-guided-rsi` itself)",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/curve-guided-rsi-v1-cycles-2-3-run-2026-08-04.md",
+      "bytes": 11381,
+      "sha256": "879bec39a0f90550e23350f4ce5286687432ae25b60e771e6ede420e20a41d74",
+      "title": "curve-guided-rsi v1 \u00e2\u0080\u0094 cycles 2-3 (continuation)",
+      "summary": "**Skill under test:** curve-guided-rsi v1 **Corpus:** 63 yubiOS skills (unchanged from cycle 1)",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/curve-guided-rsi-v1-fitness-test-run-2026-08-04.md",
+      "bytes": 13223,
+      "sha256": "7e95a8626aab8f30c3feadeb2b75668e883f4f48ec565ee6871acf970b3343fb",
+      "title": "curve-guided-rsi v1 fitness-test run",
+      "summary": "**Skill under test:** curve-guided-rsi v1 **Corpus:** 63 yubiOS skills (62 pre-existing + the new `curve-guided-rsi` itself with manual primitive coverage)",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/curve-guided-rsi-v2-cycle5-deep-research-2026-08-04.md",
+      "bytes": 13184,
+      "sha256": "9d5d7251cc68c8a9f09a5809f618022f76aed9892498e0a0fa5e3d3c8cfc74e5",
+      "title": "curve-guided-rsi Cycle 5 \u00e2\u0080\u0094 Deep-Research Corpus Growth Run (2026-08-04)",
+      "summary": "contract: \"Cycle 5 run log for curve-guided-rsi on the yubiOS 69-skill expanded corpus (63 existing + 6 new from deep research). Records the corpus growth strategy (deep research \u00e2\u0086\u0092 gap-fill skills \u00e2",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/customer-roi-model-2026-07-25.md",
+      "bytes": 8315,
+      "sha256": "2ca0723d56658abdf28c3cb9165603e24edb6272dbdb38df66a0b53b02dab395",
+      "title": "Customer ROI Model",
+      "summary": "Source: OMN-78 (team OMNI-AGENT), section 7 of the yubiOS Business and Stewardship Plan. Extends the ROI baseline worksheet in refs/pilot-collateral-roi-baseline-2026-07-25.md (OMN-84, PR #113) with a",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/customer-roi-model-2026-07-26.md",
+      "bytes": 10972,
+      "sha256": "954ecf9be578e1c9b62f4f8418777f876a55e77c7ba8a8a9d062f16d94e13b55",
+      "title": "Customer ROI Model (refresh)",
+      "summary": "Source: OMN-78 (team OMNI-AGENT), section 7 of the yubiOS Business and Stewardship Plan. Refresh of the 2026-07-25 ref to incorporate the OMN-78 checklist items explicitly, with the same scope, formul",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/cycle4-results-2026-08-06.md",
+      "bytes": 6058,
+      "sha256": "fec995620cf906022e109904d21773642574c09d0c70c798d34c93a73dae74f6",
+      "title": "Hyperspherical-Harmonic Curve \u00e2\u0080\u0094 Cycle 4 Results",
+      "summary": "**Run type:** single full-corpus run on all 70 skills in the yubiOS software-skill corpus **Source paper:** `papers/learned-latent-curves-2026-08-05.tex` / `.pdf`",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/cycle5-results-2026-08-06.md",
+      "bytes": 10710,
+      "sha256": "c6e270bde214ac696ddd88142065e2e545197cc905e4bf96db8a2fcd41ab641c",
+      "title": "Hyperspherical-Harmonic Curve \u00e2\u0080\u0094 Cycle 5 Results",
+      "summary": "**Run type:** RSI Cycle 5 corpus audit + closed-loop re-fit on the yubiOS software-skill corpus (all 70 skills) **Source paper:** `papers/learned-latent-curves-2026-08-05.tex` / `.pdf` (\u00c2\u00a78.5 \u00e2\u0080\u0094 this",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/days-0-30-safe-offer-2026-07-25.md",
+      "bytes": 6827,
+      "sha256": "403da098b7d8243c0c4328e04cf64fc5f8d2d622fc342fe27a40c93fe10d388b",
+      "title": "Days 0-30: Make the Offer Safe to Discuss",
+      "summary": "Source: OMN-65 (team OMNI-AGENT), part of the yubiOS Business and Stewardship Plan. Drafted by the-cult follower agent, grounded in BLOCKERS.md as of 2026-07-22 and the OMN-65 issue body. Lay out the ",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/days-31-60-narrow-product-2026-07-25.md",
+      "bytes": 9521,
+      "sha256": "f6c73f7efd68583524a2968a4526d7f10eb31ce6f2fb0d01d7d32dd5f62059d8",
+      "title": "Days 31-60: Prove the Narrow Product",
+      "summary": "Source: OMN-66 (team OMNI-AGENT), part of the yubiOS Business and Stewardship Plan. Builds on refs/days-0-30-safe-offer-2026-07-25.md (OMN-65, PR #103). Grounded in the live BLOCKERS.md as of 2026-07-",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/days-61-90-willingness-to-pay-2026-07-25.md",
+      "bytes": 7661,
+      "sha256": "80ef4914f5b1ab3c8236953c1bdda35a398dbc1d101a26ea28e8e74898c44f5f",
+      "title": "Days 61-90: Test Willingness to Pay",
+      "summary": "Source: OMN-67 (team OMNI-AGENT), part of the yubiOS Business and Stewardship Plan. Last of the sequential days-0-30/31-60/61-90 trio; builds on refs/days-0-30-safe-offer-2026-07-25.md (OMN-65, PR 103",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/debug-with-cli-2026-08-01.md",
+      "bytes": 9250,
+      "sha256": "ef71a20cbbadc19e800a64a01b719507e7eac1c86631a5ebc0c4ee388849d483",
+      "title": "Debug with CLI \u00e2\u0080\u0094 `debug-with-cli` skill (2026-08-01)",
+      "summary": "The yubiOS CI loop has a recurring latency bottleneck: every dispatch (`ci_test-vm.yml`, `ci_test-vgpu-vm.yml`, the sealed-UKI VM lane, etc.) round-trips through GitHub Actions, which costs 15\u00e2\u0080\u009345 mi",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/decisions-deferrals-rejected-models-2026-07-25.md",
+      "bytes": 9688,
+      "sha256": "30432104ad575e8a7d4d6284160a4d3b314def09a2efd5cd1f71fd18aff965ea",
+      "title": "yubiOS decisions, deferrals, and rejected models \u00e2\u0080\u0094 decision log",
+      "summary": "**Status:** decision log compiled from landed drafts; contradiction-checked / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-79 OMN-79 asks to make adoption, deferral, and rejecti",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/dhi-io-base-image-digest-rotation-2026-09-08.md",
+      "bytes": 3987,
+      "sha256": "a5b23fac9bf653532ba422bef2308a0963d97b1b468522a632b2f438ad5ec133",
+      "title": "dhi.io Base Images \u2014 Digest Rotation Checklist",
+      "summary": "Cross-reference: approved image digests live only in ../PINNED.md; the FROM images used by yubiOS builds are gated by the yubiOS.rego build policy (approved registries, digest-pinned, provenance requi",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/differential-curve-use-case-skill-land-grab-detection-2026-08-04.md",
+      "bytes": 8297,
+      "sha256": "375e4e6670b13abb8a7d3296017abed03e4caeb9011b2837632304b20abb0096",
+      "title": "Differential curve use case: Skill Land-Grab Detection from Self-Doc Corpus",
+      "summary": "**Source:** ideate-solo one-pager at `session/diff-curves/ideate-differential-use-case-solo-2026-08-04.md` **Finalist:** V3 \u00e2\u0080\u0094 \"Skill Land-Grab Detection from Self-Doc Corpus\" (scored 18/20)",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/digest-bump-checklist-2026-07-25.md",
+      "bytes": 11073,
+      "sha256": "b2e1d91bce7e88e6f17fef29861e5460358bc8c86a1e38ebce8e342b7199fd05",
+      "title": "yubiOS digest bump checklist",
+      "summary": "**Status:** checklist derived directly from PINNED.md's own structure and policy / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-61 OMN-61 asks for the canonical set of files, va",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/docker-bake-consolidation-2026-07-17.md",
+      "bytes": 7404,
+      "sha256": "b326054e69c9c5eea47cb83fb88b7db6a4b850ff17060a8a472e21ed17883c17",
+      "title": "Docker Bake consolidation: 2026-07-17",
+      "summary": "Status: implemented and statically validated on `agent/unify-yubios-bake`; runtime CI and registry publication remain PR validation gates. `yubiOS-bake.hcl` is the single source of truth for Docker bu",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/docker-build-policies-reference-2026-07-23.md",
+      "bytes": 7173,
+      "sha256": "60914d9f0bd110e8b382338250bbafac05286bac6ff50ef394248b60fc522bf4",
+      "title": "Docker Build Policies (OPA/Rego) Reference",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-docker-build-policies.md, originally researched 2026-06-25)_ **Correction to prior research:** the old note said \"`docker buildx policy eval` does NOT e",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/edgeless-reproducible-mkosi-research-2026-07-30.md",
+      "bytes": 31459,
+      "sha256": "288dfe71f691d0b2fe3076c4af5eac061fea17e548143d7a97f64e99fcfd32da",
+      "title": "Deep Research: `edgelesssys/reproducible-mkosi`",
+      "summary": "**Source:** Three parallel subagent deep-dives (Stream 1: repo deep-dive, Stream 2: prior-art-search, Stream 3: yubiOS comparative analysis) **Target URL:** https://github.com/edgelesssys/reproducible",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/endlessh-openwrt-fit-2026-07-17.md",
+      "bytes": 14406,
+      "sha256": "bb88f2df9b7e08b3b8939ffa7acaa5a35a8f5e0270b9ac4db3b5f8c18ae25ad3",
+      "title": "endlessh OpenWrt fit analysis: 2026-07-17",
+      "summary": "Status: research note for issue #87 Scope: evaluate how `skeeto/endlessh` fits the OpenWrt WireGuard SSH deception LAN roadmap in FUTURE.md.",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/entity-governance-legal-2026-07-25.md",
+      "bytes": 9530,
+      "sha256": "616bed6acb23174f524b70c8586dbb3446c7ed4772eee76bcf2af9aaaf4b71be",
+      "title": "yubiOS entity, governance, and legal review track",
+      "summary": "**Status:** decisions and review tracks framed, none resolved (require Jenny/real counsel) / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-72 OMN-72 asks for five things: the nea",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/envharness-lean-replacement-audit-2026-09-01.md",
+      "bytes": 7728,
+      "sha256": "4f3660fb749780d3fa0c08a6cb9569e3e3db623b969bbea620bda6ff73e99fcb",
+      "title": "Can CurvedCorpus.lean take the place of envharness's inner workings? \u2014 audit, 2026-09-01",
+      "summary": "**Subject:** google-research/envharness (arXiv:2608.19880), link #1 of the 22-link synthesis",
+      "relevance": "Photophysics, Lean-Identities, EnvHarness"
+    },
+    {
+      "path": "refs/external-benchmarks-sources-2026-07-25.md",
+      "bytes": 10957,
+      "sha256": "3b77fb45c4ab241eda133cb4dfaa36af77f6607c84100b2cea3182179bae9a41",
+      "title": "External Benchmarks and Sources",
+      "summary": "Source: OMN-80 (team OMNI-AGENT), section 13 of the yubiOS Business and Stewardship Plan. Every claim below is cited to a specific external source with retrieval date 2026-07-25. This doc supports pri",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/external-benchmarks-sources-2026-07-26.md",
+      "bytes": 11800,
+      "sha256": "8d32df5ca818b98ea3d07fd90f211116624afb21c0c0f76302b60841be1018f5",
+      "title": "External Benchmarks and Sources (refresh)",
+      "summary": "Source: OMN-80 (team OMNI-AGENT), section 13 of the yubiOS Business and Stewardship Plan. Refresh of the 2026-07-25 ref to incorporate the OMN-80 checklist items explicitly, with the same scope, caden",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/fedora-bootc-base-images-status-2026-07-23.md",
+      "bytes": 5979,
+      "sha256": "0fd83a3558583d960e86e6af10a5259ab08f0bc8382bb3bd825aebd891e5a05d",
+      "title": "Upstream Fedora/CentOS bootc Base Image Repos",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-bootc-upstream-base-images.md, originally scoped 2026-05-11)_ **Correction/nuance:** that file flagged bootc-dev/bootc **v1.16.4 released 2026-07-15** a",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/fido2-ci-emulator-status-2026-07-23.md",
+      "bytes": 5494,
+      "sha256": "9a6d2294209cacd1b66e16b08fc3c290d404162131e3ed43c3c8edc0a49b18b8",
+      "title": "FIDO2 Software Emulator for CI \u00e2\u0080\u0094 Research Findings",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-fido2-ci-emulator.md, originally updated 2026-05-10)_ **passless is now the clearly correct, actively-maintained choice** \u00e2\u0080\u0094 and yubiOS is already usin",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/firmware-rk-workflow-2026-07-17.md",
+      "bytes": 3366,
+      "sha256": "73ec30e5e3e1594628b2a1d03d23a5d4628021ec9f4a4cfb90f995a60c15b5be",
+      "title": "RK firmware workflow split: 2026-07-17",
+      "summary": "Status: workflow live; complete-log evidence added 2026-07-21. Add `.github/workflows/ci_firmware-rk.yml` as the orchestrated firmware lane and remove the top-level `ci.yml` path that dispatched `ci_t",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/first-90-days-2026-07-25.md",
+      "bytes": 9222,
+      "sha256": "5be420919560a982bc158cd84dfb9ec91af752cbc0fa87ae9cd02cd309c207eb",
+      "title": "First 90 Days: Operational Execution Plan",
+      "summary": "Source: OMN-76 (team OMNI-AGENT), section 11 of the yubiOS Business and Stewardship Plan. Reconciles the sequential days-0-30/31-60/61-90 trio (OMN-65 PR #103, OMN-66 PR #105, OMN-67 PR #111) with the",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/first-90-days-2026-07-28.md",
+      "bytes": 10906,
+      "sha256": "919486341e42a5c0409a283ebd8ac268f3542e200180bcc6d4b7c0147a0929c3",
+      "title": "First 90 Days: Operational Execution Plan",
+      "summary": "**Supersedes:** `refs/first-90-days-2026-07-25.md` (preserved for historical context; treat as stale, do not cite). Source: OMN-76 (team OMNI-AGENT), section 11 of the yubiOS Business and Stewardship ",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/fork-upstream-drift-detection-schedule-2026-08-04.md",
+      "bytes": 10854,
+      "sha256": "f7087e84f89c704fbb0ea36a13af22841ed7a5ee035c1c51dcee981b7ae1a3a7",
+      "title": "Fork-Upstream Drift Detection Schedule \u00e2\u0080\u0094 yubios CI Hygiene (2026-08-04)",
+      "summary": "contract: \"Daily cron schedule that detects drift between the yubi-OS fork HEAD and the upstream HEAD for every fork in the yubi-OS org. Catches the case where a fork falls behind upstream (e.g. after",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/fractalrabbit-falsification-harness-2026-08-06.md",
+      "bytes": 13485,
+      "sha256": "254eafb048d456b994f4ac8796319643fbf648c560ca5f12d05c3f556377f554",
+      "title": "Falsification harness for `curve-rsi` against synthetic stochastic corpora",
+      "summary": "**PR scope:** Adds `papers/fractalrabbit-falsification/` (3 Python files + README) to `yubi-OS/yubiOS` and this `refs/` writeup. Lands the harness, the simulator,",
+      "relevance": "Curve/RSI, Lean-Identities"
+    },
+    {
+      "path": "refs/frost-panfrost-lockout-2026-07-17.md",
+      "bytes": 6704,
+      "sha256": "95865b18705a9dd95ca8eb8d9061ac0825dc6bd5e644ed69656601438a4be787",
+      "title": "Frost Panfrost/RK lockout research: 2026-07-17",
+      "summary": "Status: research/design complete; kernel prototype and hardware proof still required. Turn the Frost roadmap item into an honest staged design: what can be done with current Linux/Panfrost/cgroup cont",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/gap-map-hyperspherical-harmonic-curve-2026-08-05.md",
+      "bytes": 14227,
+      "sha256": "139a33012fa9aa8a99f34aa21e0fce8b04fff59245f7c310028048e5cc73b004",
+      "title": "Gap Map: hyperspherical-harmonic-curve",
+      "summary": "Artifact: skills/github-yubios-KS9n5GAT/hyperspherical-harmonic-curve/SKILL.md (v1, 549 lines, cycle-1 RSI) Mapper: Sauna (autonomous via ideate-solo + advisor + NSS)",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/hyperspherical-harmonic-curve-2026-08-05.md",
+      "bytes": 14210,
+      "sha256": "e7bfc5cad4dd1b9341bd7554c89acbf5c338319cfb1f49ea34862628030527bf",
+      "title": "Hyperspherical Harmonic Curve [SOLO]",
+      "summary": "Source: ideate-solo (no dialogue) Finalist: Hyperspherical Harmonic Curve (Interpretation D, advisor-revised)",
+      "relevance": "Curve/RSI, Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/hyperspherical-harmonic-curve-v1-fit-2026-08-05.md",
+      "bytes": 8729,
+      "sha256": "58c99bdeeb4e13952b5530b7d4e65a92b782308b08c2086b5a25ab072902d3b3",
+      "title": "hyperspherical-harmonic-curve v1 fitness-test [OMN-163]",
+      "summary": "**Skill under test:** `hyperspherical-harmonic-curve` v1 **Corpus:** github-yubios skills (49 \u00e2\u0086\u0092 70, alphabetical subset \u00e2\u0086\u0092 full corpus)",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/image-builder-cli-fork-status-2026-07-23.md",
+      "bytes": 4803,
+      "sha256": "140b1854f63eb6033867c111570ff3281d2906cfe6adb3b7d05c7fb34f3d505b",
+      "title": "yubi-OS/image-builder-cli Fork \u00e2\u0080\u0094 Status Update",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-image-builder-cli-fork.md, originally forked/scoped 2026-05-11)_ **`yubi-OS/image-builder-cli` returns 404 as of 2026-07-23** \u00e2\u0080\u0094 it is not in the curre",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/kernel-rootfs-split-2026-07-29.md",
+      "bytes": 13276,
+      "sha256": "3451099e188e173d933f3499aed5fbf98764e73e1e28671b1a107c1390f239c7",
+      "title": "Kernel+rootfs split \u00e2\u0080\u0094 research and design note (2026-07-29)",
+      "summary": "> Companion to ADR-032. Read this for the upstream-source citations, the surveyed alternatives, and the Phase 1/Phase 2 cut. ADR-032 is the policy decision; this note is the ground truth that produced",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/kvm-arm-nested-virtualization-2026-08-07.md",
+      "bytes": 19126,
+      "sha256": "4c00000052abeed3d6a750a7cbe4cbea8ab8181e89e8eb09e9cb0f429db51c9d",
+      "title": "KVM-on-ARM Nested Virtualization \u2014 Verification and Enablement",
+      "summary": "The 7/13/2026 Duck.ai (GPT-5.4 mini) conversation about `kvm_arm=nested` is **directionally correct but partly stale**: the verification path it gives (`/sys/module/kvm_arm/parameters/nested`, `modpro",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/learned-latent-curve-rsi-v10-2026-08-03.md",
+      "bytes": 18970,
+      "sha256": "46102af12941420a2eaf0352937d50c5c579393c490d987140eeeecab3ffc475",
+      "title": "Recursive self-improvement v10 on `learned-latent-curve` [SOLO]",
+      "summary": "Source: ideate-solo \u00e2\u0086\u0092 recursive-self-improvement loop \u00e2\u0086\u0092 10 cycles with fresh-context subagents Scope: full bounded fixpoint loop on the github-yubios skill `learned-latent-curve/SKILL.md`",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/learned-latent-curve-rsi-v11-v12-2026-08-03.md",
+      "bytes": 12459,
+      "sha256": "fa410ad6a93a7b3fbea9fa3ae741aca4415e03eabad2d25d629903c70b8ff8d7",
+      "title": "Recursive self-improvement v11+v12 on `learned-latent-curve` [SOLO]",
+      "summary": "Source: continuation of the RSI v10 loop past the user-override 10-cycle cap Scope: cycles 11+12 closing the 3 residual Extend gaps at v10",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/learned-latent-curve-skill-quality-map-2026-08-03.md",
+      "bytes": 15044,
+      "sha256": "2e6648569b7a82d5cfe1cb55792032c4f43206a1a72cfc8dfba2dfef2187520b",
+      "title": "Learned latent curve: 1-D \u00e2\u0086\u0092 384-D embedding of github-yubios skills [SOLO]",
+      "summary": "Source: ideate-solo \u00e2\u0086\u0092 matrix experiment \u00e2\u0086\u0092 corrected diagnosis Scope: one skill, one application, one methodological lesson",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/learned-latent-curve-yubios-artifact-primitives-coverage-flow-2026-08-04.md",
+      "bytes": 14169,
+      "sha256": "33c6e516d576d3c0c851865e9d8bbde5726f314443e094925d1c2030f2348edc",
+      "title": "learned-latent-curve on yubiOS: full flow document",
+      "summary": "**Status:** Consolidated flow \u00e2\u0080\u0094 supersedes v1, v2, v3 (which are deleted on merge of this doc's PR). v4 remains as a separate NEGATIVE-finding artifact. **Companion artifact (kept separate):** `refs",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/lensing-question-space-brainstorm-2026-08-13.md",
+      "bytes": 14439,
+      "sha256": "618586f616b7cde5727def7e868c73b0f418883fa733a259c72758f9f0fe0731",
+      "title": "Lensing the Question Space: Academic Anchors and Gap Map",
+      "summary": "**Brainstorm, 2026-08-13.** Connects `is-this-x-2026-08-12` + `learned-latent-curves-2026-08-06` to established proofs, then names the gaps in the chain: question space (is-this-x) \u2192 intent space \u2192 nu",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/lensing-question-space-findings-2026-08-13.md",
+      "bytes": 14632,
+      "sha256": "dcc3f8e301b374f5b4eddf1151031b4ec0383cc30fda4f046b859c2159dcd489",
+      "title": "FINDINGS.1 \u2014 Lensing the Question Space + Spherical Diffusion (SLERP extension)",
+      "summary": "**2026-08-13.** Consolidates lensing-question-space-brainstorm-2026-08-13.md and extends it: geodesic (SLERP-style) interpolation on the hypersphere as the generator of a diffusion process, tying the ",
+      "relevance": "Lean-Identities"
+    },
+    {
+      "path": "refs/libvfio-user-bundle-decision-2026-07-30.md",
+      "bytes": 7148,
+      "sha256": "38d052de02cf9db120568559d83a4529fef95cab4931900ae7f9b518becd8ac3",
+      "title": "libvfio-user Build Strategy: Bundle vs Per-Runner \u00e2\u0080\u0094 Decision",
+      "summary": "<last-reviewed-against-blockers>2026-07-30</last-reviewed-against-blockers> Framing log: `session/omn-100-bundle-vs-per-runner-solo-2026-07-30.md` ([SOLO] ideation, V1+V4 finalists)",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/luks-fido2-e2e-test-2026-07-23.md",
+      "bytes": 4923,
+      "sha256": "dec5967d604f080869bd2a44b7dd2c8f11497bc50ee9bed7fbc7796631a3ac6c",
+      "title": "LUKS2 FIDO2 end-to-end test",
+      "summary": "_Refreshed: 2026-07-23 (renamed from refs/luks-fido2-e2e-test.md, no date suffix previously)_ Status check 2026-07-23: this file's \"Latest CI milestone\" section (run 29525332901, bootloader-update.ser",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/metrics-and-reporting-2026-07-25.md",
+      "bytes": 8297,
+      "sha256": "3ecf0f13c27c667f6f67ef0e390c983c0b9ea47b26840662afc5c603be85485a",
+      "title": "yubiOS metrics and reporting",
+      "summary": "**Status:** draft, several metrics flagged not-yet-measurable / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-75 OMN-75 asks for public project-health metrics and internal busine",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/mkosi-bcvk-fork-status-2026-07-23.md",
+      "bytes": 6022,
+      "sha256": "80a87a3c1807cb089a096a30e90f8e76b28bb42e11628f8342c788f23f864b3c",
+      "title": "mkosi + bcvk Fork Status",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-mkosi-bcvk-plan.md, originally updated 2026-05-10)_ **mkosi PKCS#11 UKI signing: confirmed supported upstream, and already implemented in yubiOS.** mkos",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/mkosi-tools-tree-tracking-2026-09-08.md",
+      "bytes": 3928,
+      "sha256": "5cb16432b358519e6ab9bc83f154491da44cb6aaa29fbe89e2b81f7925c5b223",
+      "title": "mkosi Tools Tree \u2014 Version Pinning & Tracking Plan",
+      "summary": "yubiOS builds its OS images with mkosi. mkosi's tools-tree mechanism lets the build run inside a pinned, mkosi-managed tool environment instead of the build host's ambient distro tools. Because the to",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/mode-attestation-measurement-2026-09-01.md",
+      "bytes": 4183,
+      "sha256": "877dacfaa606b42b418f83481c20d319dbf3c444e205df6879081c23f989f77f",
+      "title": "Mode axis: how attestation and measurement run (one-shot, daemon, dry-run)",
+      "summary": "Date: 2026-09-01. Axis: NSS 4/12 Mode (per `skills/nss-mode`). Origin: SOS Agent FIT #11 on `yubi-OS/yubiOS` main (596 files, basis reused from FIT #10) surfaced lens `L1-NSS-Mode`,",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/mode-container-isolation-2026-09-01.md",
+      "bytes": 3236,
+      "sha256": "89c5a31af2796eefc3226b2a055f339bdaecd4375b4c53f43bc8a24046a91dcf",
+      "title": "Mode axis: isolation boundaries by execution mode (container, nspawn, VM, unit)",
+      "summary": "Date: 2026-09-01. Axis: NSS 4/12 Mode. Origin: SOS Agent FIT #11 lens `L1-NSS-Mode` (cell z-band 1 / phi-sector 2, ring 7); one of four files filling the cell for the",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/mode-fido2-boot-unlock-2026-09-01.md",
+      "bytes": 3224,
+      "sha256": "9e93e0090d653b94de843591db485f0fbc0f65be342ec9cfbb13e253b49d026b",
+      "title": "Mode axis: FIDO2 unlock at boot, the one interactive step",
+      "summary": "Date: 2026-09-01. Axis: NSS 4/12 Mode. Origin: SOS Agent FIT #11 lens `L1-NSS-Mode` (cell z-band 1 / phi-sector 2, ring 7); one of four files filling the cell for the",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/mode-rootless-runtime-2026-09-01.md",
+      "bytes": 3464,
+      "sha256": "fc4deb391ae9adca4d91fe3d8d674325766ad2cdbafe2521e126ad7c24dd48c6",
+      "title": "Mode axis: rootless build and runtime, interactive vs batch vs daemon",
+      "summary": "Date: 2026-09-01. Axis: NSS 4/12 Mode. Origin: SOS Agent FIT #11 lens `L1-NSS-Mode` (cell z-band 1 / phi-sector 2, ring 7); one of four files filling the cell for the `baseline=11`",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/naming-licensing-provenance-2026-07-25.md",
+      "bytes": 9853,
+      "sha256": "58412013cb10ce7d3055285f1cdd0b891f7fc06b3964b646dab599159484fdd5",
+      "title": "yubiOS naming, licensing, and provenance risk register",
+      "summary": "**Status:** draft risk register, decisions flagged for Jenny, not resolved here / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-81 OMN-81 asks for a concise legal/structural risk",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/negative-skill-space-2026-07-28.md",
+      "bytes": 29143,
+      "sha256": "6341c1cbfe565ef2869a500421a4dc0ca95b6d180a7efbd148a22c97a3a6dc67",
+      "title": "Negative Skill Space \u00e2\u0080\u0094 Concept, Gap Map of idea-refine, and Recursive Self-Application",
+      "summary": "Origin session: the user's prompt: \"Conceptualize idea-refine and skill-build around the idea of negative skill space or rather always ask what you don't know, and map the gaps the skill has recursive",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/offer-pricing-architecture-2026-07-25.md",
+      "bytes": 9604,
+      "sha256": "012683b2b6cbaf13e565b856ab0719a86052ef9e43219b27ff97264ad26a4758",
+      "title": "yubiOS offer and pricing architecture",
+      "summary": "**Status:** draft, hypotheses unvalidated / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-71 This is the offer catalog and pricing architecture OMN-71 asks for, scoped by",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/openwrt-deception-proof-plan-2026-07-17.md",
+      "bytes": 5234,
+      "sha256": "448b59fbd07ba547e8de9e624a94b348b37415fe60e3684e0538bbf69f63491b",
+      "title": "OpenWrt deception LAN proof plan: 2026-07-17",
+      "summary": "Status: package/proof plan complete; VM/spare-router build and packet evidence still required. Turn the Endlessh/OpenWrt idea into a testable package and network proof that keeps the real SSH endpoint",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/openwrt-wireguard-deception-lan-prototype-2026-07-25.md",
+      "bytes": 8633,
+      "sha256": "5fac63ffc5eb46bc3b5a80ff1fb274ed5ace2f1025d9f513fc502099ec27435d",
+      "title": "OpenWrt WireGuard SSH deception LAN \u00e2\u0080\u0094 prototype design (design plan only, no live network)",
+      "summary": "**Status:** prototype design extending existing proof plan; no live network built / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-33 OMN-33's own description records real prior w",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/operating-covenant-2026-07-25.md",
+      "bytes": 7730,
+      "sha256": "7f6270fe46af369f4c6ccbe47ec5ff4c8b601eb3aceeba2609fb504c639b4ab8",
+      "title": "yubiOS public-interest operating covenant",
+      "summary": "**Status:** draft, staged for review / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-70 This covenant is the public commitment layer that sits on top of MISSION.md.",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/org-state-audit-2026-07-23.md",
+      "bytes": 6793,
+      "sha256": "279fc92dd99f05a86db933814f3dcdc5e0bf504975070b8372ec1e50f242c856",
+      "title": "yubiOS Org State Audit \u00e2\u0080\u0094 2026-07-23",
+      "summary": "- `conn_4K1E40LryOy6` (\"yubi-OS admin PAT (SU)\") is **expired** (401 Bad credentials). Confirms the stale warning already in `knowledge/INDEX.md`. - Working path: the managed GitHub connection (`foil-",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/osbuild-image-builder-2026-07-23.md",
+      "bytes": 7162,
+      "sha256": "8ae4e328c2981340a79eff6cb22fb6b6665920eedd89557fa8dcda5e52b4f3cf",
+      "title": "osbuild / Image Builder \u00e2\u0080\u0094 On-Premises Overview",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-osbuild-image-builder.md, originally researched 2026-05-11)_ **This is a significant change from the prior research** (which treated `image-builder-cli`",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/package-floor-verification-checklist-2026-08-04.md",
+      "bytes": 14019,
+      "sha256": "6a1faa030797787cfdd81ae9f5731e19985c9688a406e2eaf9c534a38b2c4a57",
+      "title": "Package-Floor Verification Checklist \u00e2\u0080\u0094 yubios Digest Bump Hygiene (2026-08-04)",
+      "summary": "contract: \"yubios package-floor verification checklist. The pre- and post-digest-bump verification protocol that ensures every digest bump in PINNED.md preserves the package-floor invariants (kernel \u00e2",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/papers-8-6-iteration-2026-08-07.md",
+      "bytes": 4437,
+      "sha256": "578db9ac0e8b198f33d2cafe804d88bb880320ace305b320c1d79237efe0f1bb",
+      "title": "Today's iteration of `papers/learned-latent-curves-2026-08-06.tex`",
+      "summary": "> Date: 2026-08-07. Cycle: today (2026-08-07T21:30 \u2192 present). > Author: Sauna, rsi-phi-skill cycle 1 (Fibonacci-sphere variant).",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/pilot-collateral-roi-baseline-2026-07-25.md",
+      "bytes": 8517,
+      "sha256": "94ea1ad45bafc9eb0977f3880e7b949ac05cd42a3af94d19502b4f20365b47e5",
+      "title": "yubiOS pilot collateral and ROI baseline",
+      "summary": "**Status:** SOW/data-sheet/worksheet templates drafted; no customer-specific numbers asserted / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-84 OMN-84 asks for the collateral ne",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/planning-cycle-2026-07-11.md",
+      "bytes": 7475,
+      "sha256": "37408412e66e67c4063fe900886a9764f9b17bd0c21dd71258996b1d47809ac8",
+      "title": "Planning cycle: 2026-07-11 docs and research pass",
+      "summary": "Status: completed for this documentation branch. Scope: markdown consistency, refs research refresh, and source-of-truth cleanup for yubiOS docs.",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/point-map-real-cloud-2026-09-06.md",
+      "bytes": 3434,
+      "sha256": "ab621fa22ad4c479e40856cadae4ba63fe93e49dc95cbd28543e86c0bff05f57",
+      "title": "point-map on a real embedding cloud: R0 vs Rabs (2026-09-06)",
+      "summary": "Spec: `refs/point-to-point-latent-map-2026-09-06.md`. Module: `tools/point-map/` (same `pointmap.js` deployed in the steady-orbit-sos Worker `/api/map` and the Sauna `sos-agent` app `/api/map`). 301 r",
+      "relevance": "Wayfinder/PointMap"
+    },
+    {
+      "path": "refs/point-to-point-latent-map-2026-09-06.md",
+      "bytes": 16596,
+      "sha256": "d5e7d3ae04f71e089965f4d252014a502004f812f2f7af666211c3d0ca92618d",
+      "title": "Point-to-point map for unlabeled latent space: from `CurvedCorpus.lean` + curve-compass to a browser/Worker module",
+      "summary": "**2026-09-06.** Source ingest: 99 `#github-yubios` skills (curve family read in full: `curve-compass-skill`, `curved-corpus-create`, `single-action-curve-rsi`, `hyperspherical-harmonic-curve`, `learne",
+      "relevance": "Wayfinder/PointMap, Curve/RSI, Lean-Identities"
+    },
+    {
+      "path": "refs/point-to-point-latent-map-solo-2026-09-06.md",
+      "bytes": 6930,
+      "sha256": "16b4dd69d9fe34ebe1aecc057f7754507113bae4d2c0279a01129b1467a7e0cf",
+      "title": "Point-to-point latent map [SOLO]",
+      "summary": "Source: ideate-solo (no dialogue) Scope class: systemic (architecture: proof \u2192 tool \u2192 deployable)",
+      "relevance": "Wayfinder/PointMap, Lean-Identities"
+    },
+    {
+      "path": "refs/post-quantum-tls-adoption-2026-07-23.md",
+      "bytes": 5872,
+      "sha256": "e52c1d9894c11b772452103de35729e51ea8f9e4c5a3010d2008ce41c3d3f7bc",
+      "title": "Post-Quantum TLS \u00e2\u0080\u0094 X25519MLKEM768 Adoption Status",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-cloudflare-pq-research.md, originally researched 2026-06-23)_ - **Cloudflare**: X25519MLKEM768 is fully deployed (not experimental) for Cloudflare-side ",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/pr-campaign-research-2026-07-16.md",
+      "bytes": 7737,
+      "sha256": "93801fd62cc96227cbd9eb6a1bba00b87a6df2ebfb4fa0bad3aa66f74f635e2c",
+      "title": "Public-relations campaign research: 2026-07-16",
+      "summary": "Status: completed research snapshot Deliverable: PR.md",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/pr-friend-map-2026-07-17.md",
+      "bytes": 12861,
+      "sha256": "0bd9d248e4942d23645dab1c2519c38642bb42927b5f500883268af536dc65f5",
+      "title": "Public-relations friend map: 2026-07-17",
+      "summary": "Status: active kickoff / quiet research Research date: 2026-07-17 UTC, which is 2026-07-16 PDT for the user context.",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/prior-art-autonomous-ideation-skill-2026-07-28.md",
+      "bytes": 21421,
+      "sha256": "b1fa8323072217a8fc1262ec03057036d2a95380763d649d22fb100b06527c5f",
+      "title": "Prior Art: Autonomous Ideation Skill",
+      "summary": "Source: prior-art-search (web research) What existing tools, frameworks, and research projects implement autonomous ideation \u00e2\u0080\u0094 generating, scoring, and converging on ideas without a human in the loo",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/prior-art-search-rsi-audit-2026-07-30.md",
+      "bytes": 12933,
+      "sha256": "16cd596b9525f20f8a0d234295a2dbeda314db28d137fb910b278d4afff0a034",
+      "title": "RSI Audit: prior-art-search v1 \u00e2\u0086\u0092 v1.6",
+      "summary": "' must be preserved as the first line of the pushed file). Verify the push succeeded by GETting the file after the PUT; report back the new blob SHA and commit SHA. If the PUT fails, do not retry with",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/prior-art-state-of-art-2026-07-30.md",
+      "bytes": 16795,
+      "sha256": "0ab5c5dd51e7db36a89606cf3a821bf95b185169ca930e38ec48127c2e000076",
+      "title": "Prior Art: yubiOS convergence scan",
+      "summary": "Source: prior-art-search (web research) Hits fetched in depth: 3 (bootc composefs backend; RHEL sealed images; 0pointer LUKS2 unlock blog)",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/public-security-funding-targets-2026-07-25.md",
+      "bytes": 9130,
+      "sha256": "9ce1e05598098ddc716279fe878ea554c61ca59ec729fbac1230d721ebcf0115",
+      "title": "yubiOS public-security funding targets",
+      "summary": "**Status:** target list + rationale, not an application \u00e2\u0080\u0094 no application drafted or submitted / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-86 OMN-86 asks for grants/sponsors",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/readiness-gates-gtm-2026-07-25.md",
+      "bytes": 11247,
+      "sha256": "009179d320c7538251dd42915bc83fee28da7edaa6ab1ff61bb4c446153899aa",
+      "title": "Readiness Gates and Go-to-Market",
+      "summary": "Source: OMN-73 (team OMNI-AGENT), section 5 of the yubiOS Business and Stewardship Plan. This is the Gate 1 definition that OMN-65 (PR #103) and OMN-67 (PR #111) referenced but could not draft themsel",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/readiness-gates-gtm-2026-07-28.md",
+      "bytes": 15009,
+      "sha256": "e2d8a899e750fa1fb0c5825ebdd27f4ff31691e0d745ffa85c47088174452c2d",
+      "title": "Readiness Gates and Go-to-Market",
+      "summary": "**Supersedes:** `refs/readiness-gates-gtm-2026-07-25.md` (preserved for historical context; treat as stale, do not cite). Source: OMN-73 (team OMNI-AGENT), section 5 of the yubiOS Business and Steward",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/recursive-self-improvement-audit-2026-07-28.md",
+      "bytes": 14179,
+      "sha256": "5312d601179d7104077ae567900a6a5561d3f41483123adca790b9c3c07c4075",
+      "title": "Audit: recursive-self-improvement skill (3-cycle self-validation)",
+      "summary": "Artifact: `skills/github-yubios-KS9n5GAT/recursive-self-improvement/SKILL.md` Mode: self-mode (3 cycles, gap-map \u00e2\u0086\u0092 edit \u00e2\u0086\u0092 re-map \u00e2\u0086\u0092 fixpoint rule)",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/refederated-identity-oidc-sigstore-privacy-2026-08-07.md",
+      "bytes": 18840,
+      "sha256": "fea7bb35f964fd9ec4c523f49c99845917f524381ed130db9e878a70a2768ade",
+      "title": "Refederated Identity in OIDC + Sigstore \u2014 Multi-Federation as Privacy Lever",
+      "summary": "> Research note extracted from a Duck.ai (GPT-5.4 mini) thread (4 prompts, 8/4/2026, ~7 minutes wall-clock). Jenny already has a built privacy-preserving multi-federation scheme from prior work and ex",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/release-gate-checklist-v2-2026-08-04.md",
+      "bytes": 21608,
+      "sha256": "60e7db71937d5616c6086835be6f1a25a0a29f78431e0a133d802d7fee56d6cd",
+      "title": "Release Gate Checklist v2 \u00e2\u0080\u0094 yubiOS v1 Launch Readiness (2026-08-04)",
+      "summary": "contract: \"yubiOS v1 launch readiness gate inventory. The 3 missing non-engineering gates (security audit, pricing-validity, reference-customer) needed to clear the 2026-09-13 milestone target on the ",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/repo-history-skill-2026-08-07.md",
+      "bytes": 23878,
+      "sha256": "edd808e4a765aacf6ce5bab2bdd22464d33f8d78d3f14a048d1e5b2e12520f8f",
+      "title": "Deep research \u2014 repo-history-skill \u2014 hypersphere RSI on git + Linear history",
+      "summary": "**Session date:** 2026-08-07 (Friday, 03:34 PT \u2014 Jenny-asleep self-mode window) **Author:** Sauna (per Jenny directive: \"new deep archival routine to build an refreshable repo-history-skill using hype",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/repo-history-skill-cycle-1-2026-08-07.md",
+      "bytes": 2090,
+      "sha256": "073e1f5a3ac5f6fd33432514de9d1d16dac63c73051b76d9953e31a73876f384",
+      "title": "repo-history-skill cycle 1 \u2014 first archive refresh",
+      "summary": "**Date:** 2026-08-07 (03:38 PT) **Repos:** `yubi-OS/yubiOS` (head f355223), `yubi-OS/agent-skills` (head 1cd9412c)",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/repo-history-skill-cycle-2-2026-08-07.md",
+      "bytes": 8276,
+      "sha256": "b1c8bf02d7219342d2aae47f99424c7e523b90bdb9e4e944de9507ce3de48b29",
+      "title": "repo-history-skill \u2014 Cycle 2 Results (2026-08-07)",
+      "summary": "A full cycle of the repo-history-skill \u2014 Mode B incremental refresh + cycle-2 RSI \u2014 ran on 2026-08-07 11:06 UTC against `yubi-OS/yubiOS` and `yubi-OS/agent-skills`. The cycle-1 ship (2026-08-07 03:38 ",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/repo-history-skill-cycle-3-2026-08-07.md",
+      "bytes": 6505,
+      "sha256": "32eb6830f9a121f3ca5466470a842d6b4e1f7d527502c312e9d3260948280227",
+      "title": "repo-history-skill \u2014 Cycle 3 Results (2026-08-07) \u2014 FINAL under 3-cycle RSI cap",
+      "summary": "Cycle 3 of repo-history-skill ran 2026-08-07 11:32 UTC \u2014 **FIXPOINT REACHED, RSI loop terminates.** - **Corpus grew 12%** (248 \u2192 279 items): PRs 34 + Issues **31** + Commits 60 + Releases 16 + Linear ",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/repo-history-skill-cycle-4-2026-08-07-changelog.md",
+      "bytes": 4354,
+      "sha256": "f9af9b3f1113919b458f42a4fabf93b924e06464658ee4022c7825db47ae528c",
+      "title": "repo-history-skill \u2014 Cycle 4 Changelog (2026-08-07)",
+      "summary": "**Mode:** B (incremental refresh) + cycle-4 RSI under user override of the 3-cycle RSI cap **Hypothesis:** \"The corpus after the 15 mode-D per-item edits (batches 1+2) needs re-fit + sparse-cell re-de",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/repo-history-skill-cycle-4-2026-08-07.md",
+      "bytes": 8929,
+      "sha256": "86fdee641de650e0959a9477ce387b7824c300e7435b04ab5bf2ebbcf73c4e6d",
+      "title": "repo-history-skill \u2014 Cycle 4 Results (2026-08-07)",
+      "summary": "A Mode B incremental refresh + cycle-4 RSI ran on 2026-08-07 12:25 PT against `yubi-OS/yubiOS` and `yubi-OS/agent-skills` after the 15 mode-D per-item edits (batches 1+2). The user explicitly overrode",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/repo-history-skill-deep-research-2026-08-07.md",
+      "bytes": 23878,
+      "sha256": "edd808e4a765aacf6ce5bab2bdd22464d33f8d78d3f14a048d1e5b2e12520f8f",
+      "title": "Deep research \u2014 repo-history-skill \u2014 hypersphere RSI on git + Linear history",
+      "summary": "**Session date:** 2026-08-07 (Friday, 03:34 PT \u2014 Jenny-asleep self-mode window) **Author:** Sauna (per Jenny directive: \"new deep archival routine to build an refreshable repo-history-skill using hype",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/repo-refs-skill-deep-research-2026-08-07.md",
+      "bytes": 17305,
+      "sha256": "79f608229d2afd4fc15ab90e7bfb1581b1361f9000d34208ff845e57664de842",
+      "title": "Repo Refs Skill \u2014 Deep Research & Conceptualization",
+      "summary": "**Author:** Sauna (cycle-1 RSI build, fresh-context gap-map subagent) **Skill under construction:** `repo-refs-skill`",
+      "relevance": "Curve/RSI, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/reproducible-builds-2026-07-22.md",
+      "bytes": 9721,
+      "sha256": "bd059453520e15874d6e89f731b2236c5ead35e397f26d1a44faf2d47a4887c4",
+      "title": "Reproducible build contract \u00e2\u0080\u0094 2026-07-22",
+      "summary": "This pass turns reproducibility from a pinning aspiration into executable tests for the production and TEST-only dev OCI subjects, the intended unsigned",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/research-refresh-2026-07-11.md",
+      "bytes": 6862,
+      "sha256": "fa19046e241fb2b643ad3bad23d1ee78adf09ad932a83138347f8ff6aee9eb83",
+      "title": "Research refresh: 2026-07-11 scheduled pass",
+      "summary": "Status: completed for `docs/research`. Scope: upstream drift check for active TODO lanes after the 2026-07-11 planning-cycle note.",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/rk3588-ddr-tpl-source-2026-07-29.md",
+      "bytes": 6375,
+      "sha256": "04bf6992251e394a636f6961d48820fdbf50072c9bc64dfc6ae38a37cc9914f1",
+      "title": "RK3588 DDR/TPL redistribution (2026-07-29)",
+      "summary": "> Source-grounded research supporting OMN-56 (\"Select and pin a redistributable RK3588 DDR/TPL source\") and the B-RK3588-TPL blocker. Companion to refs/arm64-rk-board-status-2026-07-17.md and refs/fir",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/roadmap-promotion-gates-2026-07-17.md",
+      "bytes": 4521,
+      "sha256": "01e4dd5938f07558d141148dc7de10f38e7379d91b9b1b3a24f227e06b62bfdc",
+      "title": "Roadmap promotion gates: 2026-07-17",
+      "summary": "Status: accepted planning guardrail for moving FUTURE work into active implementation. Every FUTURE item needs these fields before it moves into ADR, SPEC, CI, or implementation:",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/rsi-five-skill-pass-2026-07-29.md",
+      "bytes": 9368,
+      "sha256": "275aaafa874327bee5720b14e9dfbbc712e1b052dee3090e209c166dcd431897",
+      "title": "Recursive Self-Improvement \u00e2\u0080\u0094 Five-Skill Pass (2026-07-29)",
+      "summary": "On 2026-07-29, the `recursive-self-improvement` (RSI) skill was applied to 5 skills in `skills/`. All reached fixpoint. This document captures the cycle outcomes, the cap-override protocol change to R",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/rsi-phi-skill-deep-research-2026-08-07.md",
+      "bytes": 5049,
+      "sha256": "924b07f8e0ce62454f32b907954c46147e2c1f24164145bc14f6e24fd340e447",
+      "title": "`rsi-phi-skill` \u2014 Deep research backing the skill (2026-08-07)",
+      "summary": "> Source artifact for `skills/rsi-phi-skill/SKILL.md`. Captures the > investigation that produced the skill, the choices taken, and the",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/sbsign-pkcs11-validate-2026-07-23.md",
+      "bytes": 3422,
+      "sha256": "61a3d5c2aadf22e80efa65ae40ec3a9f6e3a9d51a8aa9fee708a1cf797b8044d",
+      "title": "systemd-sbsign PKCS#11 validation",
+      "summary": "_Refreshed: 2026-07-23 (renamed from refs/sbsign-pkcs11-validate.md, no date suffix previously)_ Cross-checked 2026-07-23 against refs/mkosi-bcvk-fork-status-2026-07-23.md: mkosi upstream (v27) confir",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/sealed-uki-vm-test-2026-07-30.md",
+      "bytes": 10460,
+      "sha256": "52572a87e58f52b6cfe66ea70a5817154c4dc2bf96ea1aed71eb18f7e0956819",
+      "title": "Sealed UKI VM test lane \u00e2\u0080\u0094 scoping the missing Secure Boot e2e proof",
+      "summary": "**Status:** Draft. Parent issue: OMN-53. **Trigger:** `ci_test_bootc-filesystem.yml` self-documents the gap at lines 6-7, 187-195, 314, 322 (verified by run #11 at `7eba4856e7`, completed/success on `",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/sectime-rk-secure-time-2026-07-17.md",
+      "bytes": 5412,
+      "sha256": "feb05ad586d03a262c814d484bdacd45d8d0590c87e87804e7778b7f2737c3fc",
+      "title": "SecTime RK secure-time evidence: 2026-07-17",
+      "summary": "Status: research/design complete; RK3399/RK3588 hardware evidence still required. Define what yubiOS can safely claim about secure-world time on the Rockchip ARM64 path before any ADR, policy, or owne",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/single-action-atom-merkle-2026-08-07.json",
+      "bytes": 4166,
+      "sha256": "50cc7287d3906a9205d52f53661e577ad9af5917c5fe9fc78c6e6b08b2fe5979",
+      "title": "{",
+      "summary": "\"session_id\": \"ses_02311d1deffe3OSD1UVOduG3ej\", \"timestamp_utc\": \"2026-08-08T02:55:00Z\",",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/single-action-atom-merkle-2026-08-07.md",
+      "bytes": 5357,
+      "sha256": "3b57dd9933b82c27a1d2e0cdc9f628e0fb0f5bbd17b40ea69a388fb0c4b49b47",
+      "title": "Single-Action Atom and Merkle-Tree Artifact \u2014 2026-08-07",
+      "summary": "**Session:** `ses_02311d1deffe3OSD1UVOduG3ej` **Space:** `#github-yubios` (admin)",
+      "relevance": "Curve/RSI, Lean-Identities"
+    },
+    {
+      "path": "refs/slsa-l3-sbom-cosign-integration-spec-2026-08-04.md",
+      "bytes": 82788,
+      "sha256": "a4373b2e142c444dab45f51454d6fa1eece81d0c04c26ce0b29c4deddab08949",
+      "title": "Spec: SLSA Build L3 + SPDX SBOM + cosign integration for yubiOS-ci + ci_mkosi-installer workflows",
+      "summary": "Bring the three release-time yubiOS workflows (`yubiOS-ci.yml`, `ci_mkosi-installer.yml`, `ci_dev_image.yml`) up to **SLSA Build L3** with an attached **SPDX SBOM**, **cosign-signed** attestation, and",
+      "relevance": "Curve/RSI, Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/slsa-provenance-tag-verification-2026-09-08.md",
+      "bytes": 4102,
+      "sha256": "72fb084907bb88c82f45fd80bc2a8d551d89457beb96b3295a276bb5a1578bb9",
+      "title": "SLSA Provenance \u2014 Tag Verification Checklist",
+      "summary": "yubiOS images are built in CI with SLSA provenance attestations attached. This note is the standing checklist for verifying that a given tag (or digest) someone hands you is actually covered by a vali",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/spherical-defocus-g1-2026-08-13.md",
+      "bytes": 5982,
+      "sha256": "074f25498b15e178cf4fc90653d97341ab7bc9f01907d04fac1625d60d0def79",
+      "title": "Spherical Defocus (G1): the heat semigroup on the question space",
+      "summary": "**refs draft, 2026-08-13.** Executed experiment G1 from `session/FINDINGS.1.md`. Companion to `papers/is-this-x-2026-08-12-Final` and `papers/learned-latent-curves-2026-08-06`. Seed 20260813, numpy on",
+      "relevance": "General-Ref"
+    },
+    {
+      "path": "refs/systemd-hardening-audit-2026-07-17.md",
+      "bytes": 4579,
+      "sha256": "8ef1c69c7c12ac639c1588b3b453f5c58e1872148067e346698b75809f541dfe",
+      "title": "systemd hardening audit: 2026-07-17",
+      "summary": "Status: static audit complete; target-image runtime validation still required. Audited repo-owned yubiOS services found by source search:",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/systemd-homed-reference-2026-07-23.md",
+      "bytes": 11179,
+      "sha256": "f9780e7cd7e6f14a4d41e00de7281249b82d808ae7b24564bfb070d0a9ebd8ad",
+      "title": "systemd-homed Reference",
+      "summary": "_Sources: man7.org (systemd 260~devel), deep research \u00e2\u0080\u0094 May 10, 2026 \u00e2\u0080\u0094 v261 updates appended 2026-07-23, see bottom section_ `systemd-homed.service` manages portable, self-contained home directori",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/systemd-unit-directive-reference-2026-07-23.md",
+      "bytes": 14353,
+      "sha256": "b9b5278f54c483363cc311c708595ed54b838240dfe84d68b7d0ccb133398669",
+      "title": "systemd Reference: exec/unit/service/directives",
+      "summary": "_Refreshed: June 23, 2026 \u00e2\u0080\u0094 Sources: man7.org systemd v260 \u00e2\u0080\u0094 v261 additions appended 2026-07-23, see bottom section_ **Hardened baseline combo (yubiOS services):**",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/systemd-upstream-progress-2026-07-21.md",
+      "bytes": 10942,
+      "sha256": "20027461aa80a2302b6c367be91456e7b2b612679682292582c7a3aa6bece8b9",
+      "title": "Project-Relevant Upstream Progress \u00e2\u0080\u0094 2026-07-21",
+      "summary": "Status: dated research snapshot; not a replacement for `PINNED.md` This review covers the upstreams most directly coupled to yubiOS's systemd image, update, boot, and OCI delivery model: `systemd/syst",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/systemd-v262-audit-2026-07-14.md",
+      "bytes": 4550,
+      "sha256": "c14e2509500990f683dcd338c9dc79fe5108a8f5fda09750ed50e2faf68ae1a7",
+      "title": "systemd v262 interface audit - 2026-07-14",
+      "summary": "Status: completed for `feat/systemd-v262-audit`. Scope: close the TODO.md audit for `/run/boot-loader-entries/`, the experimental `systemd-sysupdated` D-Bus API, and `updatectl` assumptions before ado",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/team-budget-use-of-funds-2026-07-25.md",
+      "bytes": 8096,
+      "sha256": "a9423f3d29ade22b7191f5ad9697ceeb91c4fecafc0eb502a96e70f1bab83893",
+      "title": "yubiOS team, budget, and use of funds \u00e2\u0080\u0094 Year 1 framework",
+      "summary": "**Status:** allocation logic and hiring order drafted; no dollar figures asserted / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-74 OMN-74 asks for a Year 1 budget envelope, an ",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/testing-production-gaps-2026-08-01.md",
+      "bytes": 14863,
+      "sha256": "c754dfe048e14e818d12f4348064b4ff8c3d06f0e34e4dfed07ed2132f82186f",
+      "title": "yubiOS testing & production gaps \u00e2\u0080\u0094 2026-08-01",
+      "summary": "Repo: `yubi-OS/yubiOS` @ `21ba013c910f6a2e1fa46646fd755adc0de88f13` Companion: `playbooks/` (README + 7 playbooks, same cycle)",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/three-year-revenue-cost-model-2026-07-25.md",
+      "bytes": 9197,
+      "sha256": "89d0a83d6030919ed859a445ad9cc77984b1071cc553713143b134a5b2ade0c4",
+      "title": "yubiOS three-year revenue and cost model \u00e2\u0080\u0094 framework, not a filled model",
+      "summary": "**Status:** structural framework only; no revenue/cost figures asserted / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-77 OMN-77 asks to validate assumptions, review a base case",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/twenty-two-links-synthesis-and-photophysics-bridge-2026-08-25.md",
+      "bytes": 20476,
+      "sha256": "963a03efb413485f28f3500c68f57c71377d9ed731b2fdd5c3e4ac2e8e1c1e08",
+      "title": "Synthesis of 22 external references + photophysics bridge \u2014 2026-08-25",
+      "summary": "**Companion to:** `tools/tautology-discerner/`, `tools/spectral-decomposer/`, and the",
+      "relevance": "Photophysics, Curve/RSI, Lean-Identities, EnvHarness"
+    },
+    {
+      "path": "refs/v261-base-image-bump-2026-07-23.md",
+      "bytes": 3733,
+      "sha256": "e716ad23cf9acf3707cd9086f0f6b2ffcbdb7026f3fd7eb0e57fa21b6067b128",
+      "title": "v261 base-image bump",
+      "summary": "_Refreshed: 2026-07-23 (renamed from refs/v261-base-image.md, no date suffix previously)_ Cross-checked 2026-07-23 against refs/fedora-bootc-base-images-status-2026-07-23.md: Fedora bootc base-images ",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/validate-input-shape-doctrine-2026-08-04.md",
+      "bytes": 73469,
+      "sha256": "9231e316fc0d124c86995b7f6c2b2dc8c5828cfb78011d7619f1ff81b8b30d1f",
+      "title": "Spec: Validate-Input-Shape Doctrine and CI Gate for yubiOS",
+      "summary": "**Document ID:** validate-input-shape-doctrine-2026-08-04 **Author context:** fresh-context research subagent (initiated by Ermine Daughtry / foil-copy-overrate)",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/vgpu-vfio-user-trust-boundary-2026-07-25.md",
+      "bytes": 13163,
+      "sha256": "4143d923ae9c91986de5009682452c2af6738a099ad73b0e5c2a32c663c0c60e",
+      "title": "vGPU / VFIO / vfio-user vs the yubiOS trust boundary",
+      "summary": "Status: design + CI plan. Written 2026-07-25. Sources dated the same day. Per the ADR-031 posture (virtio-gpu default / vfio-user preferred / IOMMU-gated passthrough; enforcement post-launch):",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/vm-e2e-run-29525332901.md",
+      "bytes": 5353,
+      "sha256": "4310f72b5ac6c1fc3b3b7bf6c2620e08db1d20891114c9b1d3c83dc2c14d4b30",
+      "title": "VM e2e run 29525332901 evidence",
+      "summary": "Workflow: `yubiOS VM e2e (tests/vm)` Run: https://github.com/yubi-OS/yubiOS/actions/runs/29525332901",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/who-pays-and-why-2026-07-25.md",
+      "bytes": 8571,
+      "sha256": "98b6af9bb00fb0dbcb37330c0aa97100103d8e1c36facd85df9315a4672bfd3b",
+      "title": "yubiOS \u00e2\u0080\u0094 who pays and why",
+      "summary": "**Status:** draft segment/positioning framework; segment selection unvalidated by real customer contact / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-69 OMN-69 asks for the ini",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/workflow-dispatch-reachability-spec-2026-08-04.md",
+      "bytes": 12297,
+      "sha256": "de131f13f0191f36b6c7e0d3214e1a65856d997e9774d49e9c2f0c11e77eba14",
+      "title": "workflow_dispatch Reachability Assertion \u00e2\u0080\u0094 yubiOS CI Hygiene (2026-08-04)",
+      "summary": "contract: \"yubiOS workflow_dispatch reachability assertion script. Asserts every .github/workflows/*.yml file that defines a workflow_dispatch trigger is reachable from at least one ci.yml group (firm",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/workflow-patterns-deep-dive-2026-07-30.md",
+      "bytes": 15311,
+      "sha256": "aaa8aab8b13cf646c6a27be4f0b25648fca0aaf90d64e3309eb89516e3e00de5",
+      "title": "yubiOS Workflow Patterns \u00e2\u0080\u0094 Deep Dive (2026-07-30)",
+      "summary": "Three subagents independently analyzed 24 workflow files in `yubi-OS/yubiOS` across three angles: **container + dind**, **action SHA + integrity**, and **crypto/signing**. Their findings converge on t",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/workflow-token-scope-audit-script-2026-08-04.md",
+      "bytes": 13350,
+      "sha256": "9fdf79edf7520c87240d1dbb8d0c09400e7b317af275d8877dc504aa58d5546e",
+      "title": "Workflow Token-Scope Audit Script \u00e2\u0080\u0094 yubiOS CI Hygiene (2026-08-04)",
+      "summary": "contract: \"yubiOS workflow token-scope audit script spec. The PR #148 cycle (2026-07-29) landed the GH_TK -> github.token cleanup; this script codifies the post-cleanup audit pattern as a re-runnable ",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/y33-fibonacci-sphere-applied-2026-08-07.md",
+      "bytes": 4700,
+      "sha256": "2beb624c0a61c2420c20c136b51582c1ef286f3cc4a6aba7a6d0096a8e49e0a9",
+      "title": "Y_3^3 + Fibonacci Sphere \u2014 APPLIED synthesis (2026-08-07)",
+      "summary": "> Companion to the two y33 papers > (`y33-fibonacci-sphere-paper-method-equation-block-2026-08-07.md` +",
+      "relevance": "Curve/RSI"
+    },
+    {
+      "path": "refs/y33-fibonacci-sphere-paper-method-equation-block-2026-08-07.md",
+      "bytes": 20578,
+      "sha256": "d72f99d9e4566c310b4b87a279d5c4e4e972bb5df0c452dd930ccc64b9b7e935",
+      "title": "Y_3^3 Spherical Harmonic + Fibonacci Sphere Sampling \u2014 Method Equation Block for learned-latent-curves-2026-08-06.tex",
+      "summary": "> Extracted from Duck.ai (GPT-5.4 mini) conversation, dated 8/6/2026, 9:29:00 PM \u2014 9:33:28 PM. Six user prompts; clean LaTeX equation block as the final artifact. A clean 3-equation LaTeX block that m",
+      "relevance": "Curve/RSI, Lean-Identities"
+    },
+    {
+      "path": "refs/y33-fibonacci-sphere-paper-revised-passage-2026-08-07.md",
+      "bytes": 17431,
+      "sha256": "80e107236595ae317abedbd8391361d9e9d2d01946ee1dfb77d4e73444ba3ff2",
+      "title": "Y\u00e2\u0082\u0083\u00c2\u00b3 + Fibonacci Sphere \u00e2\u0080\u0094 Revised Passage Patch for `learned-latent-curves-2026-08-06.tex`",
+      "summary": "A **table-based revised passage** for the paper's hyperspherical-harmonic section. The edit inserts a Fibonacci-sphere sampling scheme + a Y\u00e2\u0082\u0083\u00c2\u00b3 angular probe right after the Riemann-sphere sentence.",
+      "relevance": "Curve/RSI, Lean-Identities"
+    },
+    {
+      "path": "refs/yubikey-hw-validation-scenarios-2026-07-25.md",
+      "bytes": 8697,
+      "sha256": "8a676c9be6a2f4dc93d8074b89b5f4e03794061f75d4c1f58365e5c75bca4870",
+      "title": "Minimum real-hardware YubiKey validation scenarios",
+      "summary": "**Status:** proposed / **Owner:** follower session (the-cult FOLLOWER_2) / **Linear:** OMN-63 `BLOCKERS.md` (B-REAL-FIDO2) states that SoftHSM and swu2f exercise the software/CI",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/yubios-ci-strategy-history-2026-07-23.md",
+      "bytes": 5539,
+      "sha256": "fbbc4728cad49e26d354aa9c5e41595ef26dc8fec2d992ee593a42150eff43e7",
+      "title": "yubiOS CI Strategy \u00e2\u0080\u0094 Historical Origin, Superseded by CI_MAP.md",
+      "summary": "_Refreshed: 2026-07-23 (supersedes refs/archive-yubiOS-ci-strategy.md, originally updated 2026-05-10)_ **The live, authoritative CI reference is `CI_MAP.md` at the repo root, regenerated from the `mai",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/yubios-reproducibility-equivalents-2026-07-30.md",
+      "bytes": 10848,
+      "sha256": "6b1905f70bc4f93517bd88cb33b6041117525a7f873c43f51526d26a8e590ce6",
+      "title": "yubiOS Reproducibility Equivalents \u00e2\u0080\u0094 Research Note",
+      "summary": "**Trigger:** Deep research on https://github.com/edgelesssys/reproducible-mkosi surfaced as a prior-art candidate for \"what could yubiOS borrow?\". The follow-up inspection of `yubi-OS/yubiOS` main rev",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/yubios-scamper-product-brief-investor-memo-2026-08-07.md",
+      "bytes": 24910,
+      "sha256": "8b0fcbcf0e75353b22454b49d9933c49de2d2f4bae9d580ca9bbc934852e6b36",
+      "title": "yubiOS SCAMPER + Product Brief + Investor Memo (Restrained Sizing)",
+      "summary": "**Source:** Duck.ai (OpenAI GPT-5.4 mini) \u00e2\u0080\u0094 5-prompt ideation thread, 8/2/2026, 2:11\u00e2\u0080\u00932:32 AM local. Extracted from `session/attachments/rVZPUeMb-173e04fb.txt` block 5 (lines 831\u00e2\u0080\u00931108). Jenny ran",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/yubios-stress-test-assertions-2026-08-07.md",
+      "bytes": 18181,
+      "sha256": "bb8b11436ef8e2ceb9a3899692a0cbacbdcc3592be1b9ff39b100f8b5350dcd0",
+      "title": "yubiOS Adversarial Stress Test \u2014 Design Claims vs. Demonstrated Properties",
+      "summary": "yubiOS makes a coherent design story (UKI + bootc + composefs + FIDO2 + YubiKey), but most of it is **goal**, not demonstrated security outcome. The repo labels itself \"groundwork / work in progress,\"",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/yubios-trust-proof-playbook-checklist-2026-08-07.md",
+      "bytes": 27937,
+      "sha256": "6731a87b8532692df684c35f39e868f9471473f15476f764d1b9c65a1a6f83d0",
+      "title": "yubiOS Trust-Proof Playbook + Printable Checklist",
+      "summary": "**Topic:** yubiOS trust-proof checklist \u2014 the printable + playbook artifacts, their structure, and integration with yubiOS CI. **Source:** Duck.ai (GPT-5.4 mini) conversation block 4 of 7, dated 8/2/2",
+      "relevance": "Lean-Identities, yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/yubios-versioning-scheme-2026-08-04.md",
+      "bytes": 9413,
+      "sha256": "fc16c2484bde54bc700b2512a8fee74d18fa89e6fcd9455b6794710aff65a309",
+      "title": "yubios Versioning Scheme Decision (2026-08-04)",
+      "summary": "contract: \"yubios versioning scheme \u00e2\u0080\u0094 formal decision document for the de-facto scheme already in use as of v0.7.1 (first formal 'v'-prefixed tag, 2026-08-01T13:44:30Z). Codifies the semver major.mi",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/zboot-workaround-runner-qemu-audit-2026-07-25.md",
+      "bytes": 6206,
+      "sha256": "b25071bd0683a7ca68358f83870b1d6e3d783023d1a3bd893ed570667cb0ba31",
+      "title": "Zboot Workaround Runner/QEMU Audit",
+      "summary": "Source: OMN-59 (team OMNI-AGENT), confirming the exact runner/QEMU version window still requiring the pinned zstd EFI zboot workaround (B-QEMU-ZBOOT in BLOCKERS.md). Directly checked live CI run logs ",
+      "relevance": "yubiOS-OS-Arch"
+    },
+    {
+      "path": "refs/zernike-fit-2026-08-24.md",
+      "bytes": 4760,
+      "sha256": "53b6b4e9bb4da54540c5bb5c02aa5302385f345021dffc65cdfd5b811210dc4b",
+      "title": "Zernike polynomials: where they fit in the curved-corpus program",
+      "summary": "**2026-08-24.** Audit question: do Zernike polynomials appear anywhere in the three papers (learned-latent-curves 2026-08-06, is-this-x 2026-08-12, curved-corpus-unified 2026-08-22-v2)?",
+      "relevance": "Curve/RSI, Lean-Identities"
+    }
+  ]
+}

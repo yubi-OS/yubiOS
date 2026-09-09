@@ -1,0 +1,17 @@
+# SOS AGENT v0.2
+
+Full contract: https://steady-orbit.systems-a.workers.dev/AGENT.md
+UI: https://steady-orbit.systems-a.workers.dev/map/
+
+GET /api/health
+POST /api/repo-items {repo,subdir?,ref?}: sorted full text/path items and truncation flags; pin a commit SHA.
+POST /api/embed {texts,source?}: full-content UTF8 chunks, 768-D pooled vectors, SHA256/coverage/cache metadata.
+POST /api/map {texts|vectors,names,d?,seed?,threshold?,K?,T?,baseline_id?,persist?}: frozen-frame MapResult plus comparison.
+GET /api/maps
+GET /api/maps/:id
+POST /api/maps/compare {before_id,after_id}
+GET /map/pointmap.js
+
+Create a baseline once. Reuse baseline_id for edits. K=2..40; map N=10..400,D=2..768. Names must be unique and aligned. No client-side PCA required.
+Geometry is diagnostic; task_verdict remains not-tested until an independent task verifier is run. Sectors carry no validated NSS meaning. No automatic deletions. Spectroscopy summaries are not admitted coordinates. Do not send secrets to shared public map storage.
+Legacy /api/assess,/api/fits,/api/narrate remain separate from the wayfinder.

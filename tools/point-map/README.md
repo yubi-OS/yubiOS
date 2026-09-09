@@ -1,33 +1,43 @@
-# point-map: proof-carrying map for unlabeled latent space
+# SOS point map v0.2
 
-Browser prototype of the scheme in `refs/point-to-point-latent-map-2026-09-06.md`.
-Open `index.html` in a browser (no build, no deps). Same geometry as the SOS agent's
-`fit.ts` (PCA2 → stereographic lift → S²), so the module drops into the Worker.
+Live UI: https://steady-orbit.systems-a.workers.dev/map/
 
-Pipeline: identity keys (ordinal + FNV-1a hash) → binarization rule R0 (top-d PCA axes,
-per-column median; `rule_hash` printed) → k-shell + S² placement + Φ ladder → atom edges
-(Lean §1–3 shadows) → curveball null with per-trade margin certificates (Lean §8–10) →
-compass Metropolis on F_T (Lean §7) → slerp bridge + closed-form defocus (Lean §6, §14).
+Contract: [AGENT.md](AGENT.md). Audit: [wayfinder audit](../../refs/wayfinder-audit-2026-09-09.md). Source findings: [point-map spec, Addenda 12–13](../../refs/point-to-point-latent-map-2026-09-06.md).
 
-Certificates are split into `identity` (must all pass; a red one is a code defect) and
-`measurement` (may fail; a failure is a finding). Exclusion-only language throughout.
+## Test and build
 
-## Ingestion modes (texts source)
+Node 22+; tests have no external dependencies:
 
-- **Pasted lines**: one item per line (≥ 10 items).
-- **Upload SKILL.md files**: each file = one item, labeled by its frontmatter `name:` (falls back to filename).
-- **Upload a folder** (`webkitdirectory`): one digest item per immediate subfolder — all `.md`/`.txt` files in that subtree concatenated (SKILL.md first, then README, then alphabetical; ~2000-char cap, bge's context limit), labeled by the subfolder name or the SKILL.md frontmatter `name:`.
-- **Repo path**: `owner/repo` or full URL, optional `/subdir` — `POST /api/repo-items` pulls the repo tarball server-side (codeload, in-memory, per the sos-agent egress-IP fix), filters text files to the subdir, one item per file (max 400), labeled by repo path. Folder + file + line + repo items can be mixed in one map.
+```sh
+node tools/point-map/test-pointmap.js
+node tools/point-map/test-api.mjs
+node --test tools/point-map/test-tar.mjs
+```
 
-- **Grouping rule**: the picked folder's own name is stripped; digests group by the next path segment, so picking `skills/` yields one digest per skill subfolder. Files directly in the picked root become one "(files at <root>)" digest.
-- **Server-budget fallback**: if the Worker dies mid-map (Cloudflare 1102/503), the page automatically re-runs the identical pipeline client-side and marks the result `mapped client-side (server budget)`. Same code, same certificates; only the D1 row is missing.
+Numerical tests include the real 301×24 fixture. Provider/DB calls in the API suite are explicit test doubles. Live 159-reference re-embedding evidence is in `data/wayfinder-v0.2-verification-2026-09-09.json`.
 
-## NSS ladder (`map.nss`)
+Install the pinned dev dependency from this directory, then `npm run build`. `build.mjs` inserts the one canonical `pointmap.js` module into the Worker template and bundles `lib/*.mjs` with esbuild 0.25.12. The generated `worker.js` is the deployment artifact; it is not tracked as a second handwritten source.
 
-12 azimuthal sectors → NSS axes (Audience … Recursion). Candidate atomic actions (add / change / remove) are each refit and measured (`pole_shift_geodesic`, `occupied_sectors_delta`, `isolated_delta`, `pc12_delta`), scored and ranked L1–L5 with a plain-English `recommendation`. Request field `ideal` (1–5) picks the target rung; the page shows the ladder under the Wall with a radio per rung.
+## Cloudflare deployment mapping
 
-## Other endpoints
+Existing Worker: `steady-orbit`. Preserve its existing AI, DB, SITE and VEC bindings and secrets. No destructive schema migration. Upload `worker.js` as module `index.js`.
 
-- `POST /api/embed {texts, source}` — bge-base-en-v1.5, stored in Vectorize `sos-embeddings`.
-- `POST /api/vector/search {text, topK}` — cosine search over everything embedded.
-- `POST /api/repo-items {repo, subdir}` — tarball → items (max 400).
+| SITE KV key | Source |
+|---|---|
+| pointmap.js | pointmap.js |
+| map-app.js | app.js |
+| map-index.html | index.html |
+| AGENT.md | AGENT.md |
+| llms.txt | llms.txt |
+
+Back up Worker source/settings and the five keys before deployment. Compare source hashes to avoid overwriting concurrent changes; verify all five public assets and API health after propagation. The legacy marketing/chat/FIT endpoints are retained in `worker-base.js`.
+
+## Scope and limitations
+
+- Full-content byte coverage with explicit size bounds; lossy pooled embeddings are not semantic completeness.
+- Same frozen frame plus matching instrument is required for edit comparisons. Raw embeddings up to 768-D are accepted directly.
+- Geometric candidates require source inspection and an independent task verifier. No inferred NSS meaning, automatic deletions, or geometric keep/revert rule.
+- `changed_input_names` and `quantization_silent_names` distinguish a changed document/embedding from unchanged binary coordinates.
+- Fixed-attempt switch null, analytical identity checks, finite-sample tail estimates. Sampling convergence and predictive quality remain separate evidence requirements.
+- Spectroscopy blocks are non-admitted diagnostics. No measured Raman/IR response is claimed.
+- Existing map storage is shared/public. Do not submit secrets. The Sauna app mirror remains on its previous version.

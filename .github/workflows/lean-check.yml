@@ -60,6 +60,13 @@ jobs:
       - name: Install numpy
         run: python3 -m pip install --quiet numpy
 
+      - name: point-map numerical, API and archive regressions
+        run: |
+          node --version
+          node tools/point-map/test-pointmap.js
+          node tools/point-map/test-api.mjs
+          node --test tools/point-map/test-tar.mjs
+
       - name: corpus-auditor selftest
         run: python3 tools/corpus-auditor/auditor.py --selftest
 

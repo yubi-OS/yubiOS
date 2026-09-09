@@ -1,0 +1,59 @@
+{
+  "source_sha": "84785eb321b2cbb8ddc3e46a52612d86cddf9e90",
+  "envharness_sha": "fab7d57441f06b75c73a900e04561d4d7600f361",
+  "tests": {
+    "numerical_pass": 57,
+    "api_pass": 36,
+    "api_marker_count": 1,
+    "tar_pass": 10
+  },
+  "live_map_ids": [
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "comparisons": [
+    {
+      "case": "noop",
+      "id": 46,
+      "frame": "07cb0c4994f0cc8a",
+      "changed_names": [],
+      "unchanged_anchors": 159,
+      "bits_changed_total": 0,
+      "max_displacement": 0,
+      "isolated_delta": 0,
+      "cache_hits": 159,
+      "task_verdict": "not-tested"
+    },
+    {
+      "case": "spec-correction",
+      "id": 47,
+      "frame": "07cb0c4994f0cc8a",
+      "changed_names": [],
+      "unchanged_anchors": 159,
+      "bits_changed_total": 0,
+      "max_displacement": 0,
+      "isolated_delta": 0,
+      "cache_hits": 158,
+      "task_verdict": "not-tested"
+    }
+  ],
+  "note": "These are engineering regressions, not a measured 10/10 useful-edit rate. Map47 is input-changed but binary-quantization-silent.",
+  "quantization_diagnostic": {
+    "changed_content_names": [
+      "refs/point-to-point-latent-map-2026-09-06.md"
+    ],
+    "representation_drift_names": [
+      "refs/repo-history-skill-2026-08-07.md"
+    ],
+    "quantization_silent_names": [
+      "refs/point-to-point-latent-map-2026-09-06.md",
+      "refs/repo-history-skill-2026-08-07.md"
+    ],
+    "unchanged_input_anchors": 157,
+    "unchanged_anchors": 159
+  },
+  "deployment_id": "00b06b5a85274f4dada07f31ba51ee10"
+}

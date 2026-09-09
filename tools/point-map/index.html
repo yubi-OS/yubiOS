@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SOS Agent · Steady Orbit</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SOS Agent Â· Steady Orbit</title>
 <style>
 :root{--bg:#0B1026;--fg:#d6dde6;--dim:#7d8894;--ok:#3cf7a5;--bad:#ff5d6c;--acc:#DB46F5;--line:#1e2440}
 body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace}
@@ -20,274 +20,47 @@ html{scrollbar-color:#DB46F5 #0a0e12;scrollbar-width:thin}
 ::-webkit-scrollbar-thumb{background:#DB46F5;border-radius:6px;border:2px solid #0a0e12}
 ::-webkit-scrollbar-thumb:hover{background:#ec7ef9}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px}.gi{display:inline-flex;width:13px;height:13px;border:1px solid var(--dim);border-radius:50%;font-size:9px;line-height:1;align-items:center;justify-content:center;cursor:help;color:var(--dim);margin-left:5px;flex:none;user-select:none}#gtip{position:fixed;z-index:99;max-width:340px;background:#141a24;border:1px solid var(--acc);color:var(--fg);font-size:12px;line-height:1.45;padding:8px 10px;border-radius:6px;display:none;pointer-events:none}textarea{width:100%;min-height:90px;margin-top:8px;box-sizing:border-box}
+.badge{display:inline-block;border:1px solid var(--dim);border-radius:3px;padding:0 4px;font-size:85%;color:var(--dim)}
+#inputerrors{display:none;margin-top:8px;border-left:3px solid var(--bad);padding:6px 10px;color:var(--bad);font-size:90%}
+#comparebox{display:none}
 </style></head><body>
-<header><h1>SOS AGENT <span class="dim">/ latent space map · v0.5</span></h1>
-<select id="src"><option value="synthetic">synthetic cloud (client)</option><option value="vectors">paste vectors JSON (client)</option><option value="texts">texts → server embed + map (/api/map)</option></select>
-<label>N <input id="N" type="number" value="240" style="width:64px"></label><label>D <input id="D" type="number" value="32" style="width:64px"></label><label>d <input id="d" type="number" value="9" style="width:48px"></label><label>seed <input id="seed" type="number" value="20260906" style="width:96px"></label><label>T <input id="T" type="number" step="0.005" value="0.05" style="width:64px"></label><label>K <input id="K" type="number" value="100" style="width:64px"></label>
-<button id="run" class="primary">run</button><span id="uploadbox" style="display:none"><span class="urow"><label id="filelabel"><input id="files" type="file" multiple accept=".md,.txt,.markdown"> upload .md files (skill/doc/ref)</label><span id="fileinfo" class="dim" style="display:none"></span></span><span class="urow"><label id="dirlabel"><input id="dirs" type="file" webkitdirectory multiple> upload a skills folder (digest per subfolder)</label><span id="dirinfo" class="dim" style="display:none"></span></span><span class="urow"><input id="repo" placeholder="owner/repo[/subdir]" style="width:150px"><button id="fetchrepo">fetch repo</button><span id="repoinfo" class="dim" style="display:none"></span></span></span><label><input id="labels" type="checkbox" checked> labels</label><button id="spin">auto-rotate</button><button id="reset">reset view</button><span id="status" class="dim"></span><a href="/" class="dim" style="margin-left:auto">← steady orbit</a></header>
+<header><h1>SOS AGENT <span class="dim">/ latent space map Â· pointmap/0.2</span></h1>
+<select id="src"><option value="synthetic">synthetic cloud (client)</option><option value="vectors">paste vectors JSON</option><option value="texts">texts â server embed + map (/api/map)</option></select>
+<label>N <input id="N" type="number" value="240" style="width:64px"></label><label>D <input id="D" type="number" value="32" style="width:64px"></label><label>d <input id="d" type="number" value="9" style="width:48px"></label><label>seed <input id="seed" type="number" value="20260906" style="width:96px"></label><label>T <input id="T" type="number" step="0.005" value="0.05" style="width:64px"></label><label>K <input id="K" type="number" min="2" max="40" value="40" style="width:64px"></label>
+<label>Frozen baseline map ID (optional) <input id="baseline" type="number" style="width:90px"></label>
+<button id="run" class="primary">run</button><button id="retry" style="display:none">retry</button>
+<span id="uploadbox" style="display:none"><span class="urow"><label id="filelabel"><input id="files" type="file" multiple accept=".md,.txt,.markdown"> upload .md files (full text, no truncation)</label><span id="fileinfo" class="dim" style="display:none"></span></span><span class="urow"><label id="dirlabel"><input id="dirs" type="file" webkitdirectory multiple> upload a folder (one item per file, full path + full text)</label><span id="dirinfo" class="dim" style="display:none"></span></span><span class="urow"><input id="repo" placeholder="owner/repo[/subdir]" style="width:150px"><button id="fetchrepo">fetch repo</button><span id="repoinfo" class="dim" style="display:none"></span></span></span>
+<label id="localonlywrap" style="display:none"><input id="localonly" type="checkbox"> compute locally (no server, explicit)</label>
+<label><input id="labels" type="checkbox" checked> labels</label><button id="spin">auto-rotate</button><button id="reset">reset view</button><span id="status" class="dim"></span><a href="/" class="dim" style="margin-left:auto">â steady orbit</a></header>
 <main><div id="left"><canvas id="sphere" width="484" height="484" style="cursor:grab;touch-action:none"></canvas><div id="tip" class="dim" style="min-height:18px;margin-top:4px"></div>
-<textarea id="input" placeholder="texts: one item per line — or upload .md files (each file = one item, first 2000 chars)" style="display:none"></textarea>
+<textarea id="input" placeholder="texts: one item per line (each becomes name 'line:&lt;ordinal&gt;') â or upload .md files / a folder / fetch a repo, full text, no truncation" style="display:none"></textarea>
+<div id="inputerrors"></div>
 <div class="wall" id="rule"></div>
-<div class="wall">Wall: every compass/null number is a property of a <b>designed</b> chain on a <b>measured</b> ladder under a <b>stated</b> binarization rule, not of the cloud itself. Identity certificates must all pass (a red one is a code defect). Measurement certificates may fail; a failure is a finding. Exclusion-only language. Spec: yubi-OS/yubiOS <code>refs/point-to-point-latent-map-2026-09-06.md</code>.</div><div class="wall" id="nssbox" style="display:none"><b>NSS ladder</b> <span class="dim">(12 azimuthal sectors → negative-skill-space axes; each rung is one atomic action, refit and measured. Pick the ideal rung.)</span><table id="nsstab" style="width:100%;margin-top:6px;font-size:80%"><thead><tr><th>ideal</th><th>rung</th><th>action</th><th>axis</th><th>score</th><th>verdict</th><th>pole Δ (rad)</th><th>occ Δ</th><th>iso Δ</th></tr></thead><tbody></tbody></table><div id="nssrec" style="margin-top:6px;color:var(--fg)"></div><div id="nsspromptbox" style="margin-top:8px"><div class="dim" style="display:flex;align-items:center;gap:8px"><b>wayfinder prompt</b> <span>(copy this to your agent; it names the literal file(s) to change/add/remove, the exemplars to model on, and the rerun check)</span><button id="copyprompt" style="margin-left:auto">copy</button></div><pre id="nssprompt" style="white-space:pre-wrap;margin:4px 0 0;padding:6px 8px;border:1px solid #1e2440;border-radius:6px;font-size:85%;color:var(--fg)"></pre></div></div></div>
+<div class="wall">Wall: every compass/null number is a property of a <b>designed</b> chain on a <b>measured, frozen</b> ladder under a <b>stated</b> binarization rule, not of the cloud itself. Identity certificates must all pass (a red one is a code defect). Measurement certificates may fail; a failure is a finding. Exclusion-only language. Geometry is a shape statistic â it is never evidence of task quality. Spec: yubi-OS/yubiOS <code>refs/point-to-point-latent-map-2026-09-06.md</code>.</div>
+<div class="wall" id="nssbox" style="display:none"><b>candidate ladder</b> <span class="dim">(anonymous geometric sectors 1..12 on the frozen frame; each rung is one atomic add/change action, re-placed â never refit â and measured. No candidate ever instructs removal; content must be inspected before acting.)</span>
+<div id="nssdecision" style="margin-top:4px"></div>
+<div id="nsssectors" class="dim" style="margin-top:4px"></div>
+<div id="nsslens" class="dim" style="margin-top:4px"></div>
+<table id="nsstab" style="width:100%;margin-top:6px;font-size:80%"><thead><tr><th>ideal</th><th>rung</th><th>action</th><th>sector</th><th>semantic status</th><th>score</th><th>occ Î</th><th>iso Î</th></tr></thead><tbody></tbody></table>
+<div id="nssrec" style="margin-top:6px;color:var(--fg)"></div>
+<div id="nssoutliers" class="dim" style="margin-top:6px"></div>
+<div id="nsspromptbox" style="margin-top:8px"><div class="dim" style="display:flex;align-items:center;gap:8px"><b>wayfinder prompt</b> <span>(names the exact file(s) to add/change, exemplars to inspect, and the frozen-frame rerun check â never a removal instruction)</span><button id="copyprompt" style="margin-left:auto">copy</button></div><pre id="nssprompt" style="white-space:pre-wrap;margin:4px 0 0;padding:6px 8px;border:1px solid #1e2440;border-radius:6px;font-size:85%;color:var(--fg)"></pre></div></div>
+<div class="wall" id="comparebox"><b>baseline comparison (frozen frame)</b> <span class="dim">(name-keyed diff against the baseline map; diagnostic only)</span>
+<div id="comparekv" class="kv" style="margin-top:4px"></div>
+<div id="comparenote"></div>
+<table id="comparetab" style="width:100%;margin-top:6px;font-size:85%"><thead><tr><th>name</th><th>geodesic displacement</th><th>bits changed</th></tr></thead><tbody></tbody></table>
+</div>
+</div>
 <div id="right">
 <div class="card"><h2>identity layer (D6)<span class="gi" data-tip="Identity is by ordinal + content hash (D6): injective, self-verifying. A red identity certificate is a code defect, not a finding.">i</span></h2><div id="ident" class="kv"></div></div>
-<div class="card"><h2>placement + Φ ladder<span class="gi" data-tip="Each item becomes a point on S²: top-d PCA scores → stereographic lift. Φ(k) is the measured free-energy ladder the compass walks.">i</span></h2><div id="place" class="kv"></div></div>
-<div class="card"><h2>null: curveball fibre (Lean §8–10)<span class="gi" data-tip="Curveball fixed-margin null: K resampled clouds holding the column margins fixed — the real V₂ is compared against this band.">i</span></h2><div id="null" class="kv"></div></div>
-<div class="card"><h2>compass: Metropolis on F_T (Lean §7)<span class="gi" data-tip="Metropolis chain on the Φ-ladder at temperature T. Identity checks: detailed balance (mh flux symmetry) and quantization (|dk| ≤ 1).">i</span></h2><div id="compass" class="kv"></div></div>
-<div class="card"><h2>bridges + defocus (Lean §6)<span class="gi" data-tip="Slerp bridges: the geodesic ladder of single-action atoms from the farthest item to the pole; defocus is the closed-form G1 movement check.">i</span></h2><div id="bridge" class="kv"></div></div>
-<div class="card"><h2>result<span class="gi" data-tip="The full MapResult — rule, keys, points, ladder, nss with the wayfinder prompt. Maps with the same rule_hash are comparable.">i</span></h2><div id="meta" class="kv"></div><button id="dl" style="margin-top:8px">download MapResult.json</button></div>
-<div class="card" style="grid-column:1/-1"><h2>certificates<span class="gi" data-tip="Two classes, never mixed: identity certificates must all pass (red = code defect, stop). Measurement certificates may fail — a failure is a finding.">i</span></h2><table id="certs"><thead><tr><th>class</th><th>theorem / check</th><th>ok</th><th>detail</th></tr></thead><tbody></tbody></table></div>
+<div class="card"><h2>placement + Î¦ ladder (frozen frame)<span class="gi" data-tip="Each item becomes a point on SÂ² via the frozen frame's bitâSÂ² map (never refit once a frame exists). Î¦(k) is the measured free-energy ladder the compass walks.">i</span></h2><div id="place" class="kv"></div></div>
+<div class="card"><h2>null: label-swap chain (Lean Â§8â10)<span class="gi" data-tip="A fixed number of ATTEMPTED symmetric checkerboard-switch proposals (self-loops included), not a full Curveball trade sequence. The real Vâ is compared against this empirical band via a two-sided plus-one p-value.">i</span></h2><div id="null" class="kv"></div></div>
+<div class="card"><h2>compass: Metropolis on F_T (Lean Â§7)<span class="gi" data-tip="Metropolis chain on the Î¦-ladder at temperature T. The detailed-balance identity is checked analytically from the law (throws on failure); empirical flux is a separate, noisy, descriptive measurement â never the identity check itself.">i</span></h2><div id="compass" class="kv"></div></div>
+<div class="card"><h2>spectroscopy diagnostic <span class="badge">NOT ADMITTED</span><span class="gi" data-tip="SÂ² spherical-harmonic band shares of the point cloud. Explicitly not an IR/Raman measurement, not a physical signal, and not a quality score. Kept fully separate from the certificates/score.">i</span></h2><div id="spectra"></div></div>
+<div class="card"><h2>bridge (Lean Â§6)<span class="gi" data-tip="Slerp bridge: the geodesic ladder of single-action atoms from the farthest item to the frozen pole; normalised endpoints, stable at coincident and antipodal points.">i</span></h2><div id="bridge" class="kv"></div></div>
+<div class="card"><h2>result<span class="gi" data-tip="The full MapResult â frame, frame_id, instrument_id, rule, keys, points, ladder. Maps with the same frame_id are placed on the same frozen frame; compareMaps additionally requires the same instrument_id.">i</span></h2><div id="meta" class="kv"></div><div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button id="dl">download MapResult.json</button><button id="useBaseline" style="display:none">use as baseline</button></div></div>
+<div class="card" style="grid-column:1/-1"><h2>certificates<span class="gi" data-tip="Two classes, never mixed: identity certificates must all pass (red = code defect, stop). Measurement certificates may fail â a failure is a finding.">i</span></h2><table id="certs"><thead><tr><th>class</th><th>theorem / check</th><th>ok</th><th>detail</th></tr></thead><tbody></tbody></table></div>
 </div></main>
-<script>
-// pointmap.js — proof-carrying point map for unlabeled latent space.
-// Shared verbatim between the steady-orbit-sos Worker bundle and the /map/ browser page.
-// Zero deps. Geometry matches sos-agent fit.ts (PCA2 → stereographic lift → S²).
-// Spec: yubi-OS/yubiOS refs/point-to-point-latent-map-2026-09-06.md
-var PM = (function () {
-  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-  function gauss(r) { let u = 0, v = 0; while (u === 0) u = r(); while (v === 0) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
-  function fnv1a64(bytes) { let h = 0xcbf29ce484222325n; for (const x of bytes) { h ^= BigInt(x); h = (h * 0x100000001b3n) & 0xffffffffffffffffn; } return h.toString(16).padStart(16, "0"); }
-  const hashVec = (v) => fnv1a64(new Uint8Array(new Float32Array(v).buffer));
-  const hashStr = (s) => fnv1a64(new TextEncoder().encode(s));
-  // ---- linear algebra: Jacobi (small d) + power iteration (large D) ----
-  function jacobiEig(A) { const n = A.length; const V = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => i === j ? 1 : 0)); const M = A.map(r => r.slice());
-    for (let sweep = 0; sweep < 80; sweep++) { let off = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) off += M[i][j] ** 2; if (off < 1e-14) break;
-      for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) { if (Math.abs(M[p][q]) < 1e-15) continue; const th = (M[q][q] - M[p][p]) / (2 * M[p][q]); const t = Math.sign(th || 1) / (Math.abs(th) + Math.sqrt(th * th + 1)); const c = 1 / Math.sqrt(t * t + 1), s = t * c;
-        for (let k = 0; k < n; k++) { const a = M[k][p], b = M[k][q]; M[k][p] = c * a - s * b; M[k][q] = s * a + c * b; }
-        for (let k = 0; k < n; k++) { const a = M[p][k], b = M[q][k]; M[p][k] = c * a - s * b; M[q][k] = s * a + c * b; }
-        for (let k = 0; k < n; k++) { const a = V[k][p], b = V[k][q]; V[k][p] = c * a - s * b; V[k][q] = s * a + c * b; } } }
-    const idx = M.map((_, i) => i).sort((a, b) => M[b][b] - M[a][a]); return { values: idx.map(i => M[i][i]), vectors: idx.map(i => V.map(r => r[i])) }; }
-  function center(X) { const n = X.length, D = X[0].length, mu = new Float64Array(D); for (const r of X) for (let j = 0; j < D; j++) mu[j] += r[j] / n; return { Xc: X.map(r => r.map((x, j) => x - mu[j])), mu: Array.from(mu) }; }
-  // top-k principal axes of X (n×D) without forming D×D when D is large: power iteration on X^T X with deflation
-  function pcaTop(X, k, r) { const { Xc, mu } = center(X); const n = Xc.length, D = Xc[0].length; k = Math.min(k, D, n - 1);
-    let axes = [], values = [];
-    if (D <= 40) { const C = Array.from({ length: D }, () => Array(D).fill(0)); for (const row of Xc) for (let i = 0; i < D; i++) for (let j = 0; j < D; j++) C[i][j] += row[i] * row[j] / Math.max(1, n - 1); const e = jacobiEig(C); axes = e.vectors.slice(0, k); values = e.values; }
-    else { const rr = r || mulberry32(1); const tot = Xc.reduce((s, row) => s + row.reduce((a, x) => a + x * x, 0), 0) / Math.max(1, n - 1);
-      for (let a = 0; a < k; a++) { let v = Array.from({ length: D }, () => gauss(rr)); for (let it = 0; it < 40; it++) { const w = new Float64Array(D); for (const row of Xc) { let dot = 0; for (let j = 0; j < D; j++) dot += row[j] * v[j]; for (let j = 0; j < D; j++) w[j] += row[j] * dot; }
-          for (const u of axes) { let d2 = 0; for (let j = 0; j < D; j++) d2 += w[j] * u[j]; for (let j = 0; j < D; j++) w[j] -= d2 * u[j]; }
-          let nrm = 0; for (let j = 0; j < D; j++) nrm += w[j] * w[j]; nrm = Math.sqrt(nrm) || 1; v = Array.from(w, x => x / nrm); }
-        let lam = 0; for (const row of Xc) { let dot = 0; for (let j = 0; j < D; j++) dot += row[j] * v[j]; lam += dot * dot; } values.push(lam / Math.max(1, n - 1)); axes.push(v); }
-      values.push(Math.max(0, tot - values.reduce((a, b) => a + b, 0))); }
-    // sign convention (determinism across the Jacobi / power-iteration paths): largest-|component| of each axis is positive
-    axes = axes.map(a => { let m = 0; for (let j = 1; j < a.length; j++) if (Math.abs(a[j]) > Math.abs(a[m])) m = j; return a[m] < 0 ? a.map(x => -x) : a; });
-    const proj = row => axes.map(a => a.reduce((s, aj, j) => s + aj * (row[j] - mu[j]), 0)); return { scores: X.map(proj), proj, values, axes, mu }; }
-  // ---- §2.2 binarization R0 ----
-  // threshold "median" = R0 (fixed column margins at ceil(N/2)); "zero" = Rabs (sign of the centered PCA score; column margins float)
-  function binarizeR0(X, d, r, threshold) { threshold = threshold || "median"; const p = pcaTop(X, d, r); d = p.axes.length;
-    const thr = Array.from({ length: d }, (_, j) => { if (threshold === "zero") return 0; const c = p.scores.map(row => row[j]).sort((a, b) => a - b); return c[Math.floor(c.length / 2)]; });
-    const bits = p.scores.map(row => row.map((x, j) => x > thr[j] ? 1 : 0)); const name = threshold === "zero" ? "Rabs" : "R0";
-    const rule = { rule: name, d, threshold, axes: p.axes.map(a => a.map(x => +x.toFixed(5))), thresholds: thr.map(x => +x.toFixed(5)) };
-    return { bits, d, rule, rule_hash: hashStr(JSON.stringify(rule)), explained: p.values }; }
-  // ---- §3 placement ----
-  function zscore(B) { const n = B.length, d = B[0].length; const mu = Array(d).fill(0), sd = Array(d).fill(0); for (const r of B) for (let j = 0; j < d; j++) mu[j] += r[j] / n; for (const r of B) for (let j = 0; j < d; j++) sd[j] += (r[j] - mu[j]) ** 2 / n;
-    const z = r => r.map((x, j) => (x - mu[j]) / (Math.sqrt(sd[j]) || 1)); return { Z: B.map(z), z }; }
-  function lift(u0, v0, s) { const u = u0 * s, v = v0 * s, den = 1 + u * u + v * v; return [2 * u / den, 2 * v / den, (u * u + v * v - 1) / den]; }
-  const chord = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
-  const geo = (a, b) => Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])));
-  function place(B) { const { Z, z } = zscore(B); const p = pcaTop(Z, 2); let maxR = 1e-9; for (const [u, v] of p.scores) maxR = Math.max(maxR, Math.hypot(u, v)); const s = 0.9 / maxR;
-    const pts = p.scores.map(([u, v]) => lift(u, v, s)); const pole = lift(...p.proj(z(Array(B[0].length).fill(1))), s); const toS2 = bits => lift(...p.proj(z(bits)), s);
-    const tot = p.values.reduce((a, b) => a + Math.max(0, b), 0) || 1; return { pts, pole, gaps: pts.map(q => chord(q, pole)), toS2, pc12: (Math.max(0, p.values[0]) + Math.max(0, p.values[1])) / tot }; }
-  function V2(B) { const { Z } = zscore(B); const d = Z[0].length, n = Z.length; const C = Array.from({ length: d }, () => Array(d).fill(0)); for (const r of Z) for (let i = 0; i < d; i++) for (let j = 0; j < d; j++) C[i][j] += r[i] * r[j] / Math.max(1, n - 1); const ev = jacobiEig(C).values; return (Math.max(0, ev[0]) + Math.max(0, ev[1])) / d; }
-  // ---- §4.3 curveball trades (Lean §8) ----
-  function curveballDraw(B, trades, r, cert) { const M = B.map(x => x.slice()); const n = M.length, d = M[0].length; const rs = M.map(x => x.reduce((a, b) => a + b, 0)), cs = Array.from({ length: d }, (_, j) => M.reduce((a, x) => a + x[j], 0));
-    let done = 0, tries = 0; while (done < trades && tries < trades * 40) { tries++; const i = Math.floor(r() * n), j = Math.floor(r() * n), a = Math.floor(r() * d), b = Math.floor(r() * d); if (i === j || a === b) continue;
-      if (M[i][a] === 1 && M[i][b] === 0 && M[j][a] === 0 && M[j][b] === 1) { M[i][a] = 0; M[i][b] = 1; M[j][a] = 1; M[j][b] = 0; done++; } }
-    const rs2 = M.map(x => x.reduce((a, b) => a + b, 0)), cs2 = Array.from({ length: d }, (_, j) => M.reduce((a, x) => a + x[j], 0));
-    cert.rowOk = cert.rowOk && rs.every((v, i) => v === rs2[i]); cert.colOk = cert.colOk && cs.every((v, j) => v === cs2[j]); cert.trades += done; return M; }
-  // ---- §4.1 atoms (Lean §1–3) ----
-  function atomEdges(B, P) { const d = B[0].length; return B.map((bits, i) => { const dpre = P.gaps[i]; let best = { bits, dist: dpre, flip: -1 };
-    for (let j = 0; j < d; j++) if (bits[j] === 0) { const nb = bits.slice(); nb[j] = 1; const dist = chord(P.toS2(nb), P.pole); if (dist < best.dist) best = { bits: nb, dist, flip: j }; }
-    return { i, flip: best.flip, delta: dpre - best.dist, dk: best.flip < 0 ? 0 : 1, to: best.flip < 0 ? P.pts[i] : P.toS2(best.bits) }; }); }
-  // ---- §4.2 compass (Lean §7) ----
-  const logC = (n, k) => { let s = 0; for (let i = 1; i <= k; i++) s += Math.log(n - k + i) - Math.log(i); return s; };
-  function compass(Phi, d, T, steps, r) { const F = k => Phi[k] - T * logC(d, k); let k = Math.floor(d / 2); const occ = Array(d + 1).fill(0), up = Array(d).fill(0), dn = Array(d).fill(0); let acc = 0, maxdk = 0;
-    for (let s = 0; s < steps; s++) { const dir = r() < 0.5 ? 1 : -1; const k2 = k + dir; if (k2 < 0 || k2 > d) { occ[k]++; continue; } const alpha = Math.min(1, Math.exp(-(F(k2) - F(k)) / T));
-      if (r() < alpha) { if (dir > 0) up[k]++; else dn[k2]++; maxdk = Math.max(maxdk, Math.abs(k2 - k)); k = k2; acc++; } occ[k]++; }
-    const w = Array.from({ length: d + 1 }, (_, k) => Math.exp(-F(k) / T)); const Zs = w.reduce((a, b) => a + b, 0); const pi = w.map(x => x / Zs);
-    const flux = up.map((u, k) => ({ k, up: u, down: dn[k], z: (u - dn[k]) / (Math.sqrt(u + dn[k]) || 1) }));
-    return { T, steps, pi: pi.map(x => +x.toFixed(4)), kmean_analytic: pi.reduce((s, p, k) => s + p * k, 0), kmean_empirical: occ.reduce((s, c, k) => s + (c / steps) * k, 0), acceptance: acc / steps, maxdk, maxFluxZ: Math.max(...flux.map(f => Math.abs(f.z))) }; }
-  function crossover(Phi, d) { const arg = T => { let b = 0, bv = -1e9; for (let k = 0; k <= d; k++) { const v = -(Phi[k] - T * logC(d, k)) / T; if (v > bv) { bv = v; b = k; } } return b; }; let lo = 1e-4, hi = 5; if (arg(lo) !== d) return null; for (let i = 0; i < 60; i++) { const m = (lo + hi) / 2; if (arg(m) === d) lo = m; else hi = m; } return (lo + hi) / 2; }
-  // ---- §4.4 slerp + defocus (Lean §6) ----
-  function slerp(p, q, t) { const c = Math.max(-1, Math.min(1, p[0] * q[0] + p[1] * q[1] + p[2] * q[2])); const O = Math.acos(c); if (O < 1e-9) return p; const a = Math.sin((1 - t) * O) / Math.sin(O), b = Math.sin(t * O) / Math.sin(O); return [a * p[0] + b * q[0], a * p[1] + b * q[1], a * p[2] + b * q[2]]; }
-  function sh([x, y, z]) { return [0.28209479, 0.48860251 * y, 0.48860251 * z, 0.48860251 * x, 1.09254843 * x * y, 1.09254843 * y * z, 0.31539157 * (3 * z * z - 1), 1.09254843 * x * z, 0.54627422 * (x * x - y * y), 0.59004359 * y * (3 * x * x - y * y), 2.89061144 * x * y * z, 0.45704580 * y * (5 * z * z - 1), 0.37317633 * z * (5 * z * z - 3), 0.45704580 * x * (5 * z * z - 1), 1.44530572 * z * (x * x - y * y), 0.59004359 * x * (x * x - 3 * y * y)]; }
-  function parsevalShares(pts) { const m = Array(16).fill(0); for (const p of pts) { const b = sh(p); for (let i = 0; i < 16; i++) m[i] += b[i] / pts.length; } const E = [m[0] ** 2, 0, 0, 0]; for (let i = 1; i < 4; i++) E[1] += m[i] ** 2; for (let i = 4; i < 9; i++) E[2] += m[i] ** 2; for (let i = 9; i < 16; i++) E[3] += m[i] ** 2; const tot = E.reduce((a, b) => a + b, 0) || 1; return E.map(e => e / tot); }
-  const heatExp = l => l * (l + 1);
-  // ---- synthetic cloud for demos ----
-  function synth(N, D, seed) { const r = mulberry32(seed); const centers = [0, 1, 2].map(() => Array.from({ length: D }, () => gauss(r) * 2)); return Array.from({ length: N }, (_, i) => centers[i % 3].map((m, j) => m + gauss(r) * (j < 6 ? 0.6 : 1.4))); }
-  // ---- the map ----
-  function runMap(X, opts) { opts = opts || {}; const N = X.length, D = X[0].length; const seed = opts.seed ?? 20260906, T = opts.T ?? 0.05, K = Math.min(200, opts.K ?? 100), dReq = Math.min(24, opts.d ?? 9); const labels = opts.labels; const names = opts.names;
-    const certs = []; const cert = (cls, theorem, ok, detail) => certs.push({ class: cls, theorem, ok: !!ok, detail });
-    const r = mulberry32(seed);
-    const keys = X.map((v, i) => ({ ordinal: i, hash: hashVec(v), label: labels ? labels[i] : undefined, name: names ? names[i] : undefined }));
-    const threshold = opts.threshold === "zero" ? "zero" : "median"; const { bits, d, rule, rule_hash } = binarizeR0(X, dReq, r, threshold);
-    const cls = new Map(); bits.forEach(b => { const k = b.join(""); cls.set(k, (cls.get(k) || 0) + 1); }); const largest = Math.max(...cls.values());
-    cert("identity", "keyed-row injectivity (D6)", new Set(keys.map(k => k.ordinal)).size === N, `ordinal is the injective key; content hashes ${new Set(keys.map(k => k.hash)).size}/${N} distinct`);
-    const P = place(bits); const ks = bits.map(b => b.reduce((a, x) => a + x, 0));
-    const Phi = Array.from({ length: d + 1 }, (_, k) => { const g = P.gaps.filter((_, i) => ks[i] === k); return g.length ? g.reduce((a, b) => a + b, 0) / g.length : NaN; });
-    const filled = []; for (let k = 0; k <= d; k++) if (Number.isNaN(Phi[k])) { filled.push(k); let lo = k - 1, hi = k + 1; while (lo >= 0 && Number.isNaN(Phi[lo])) lo--; while (hi <= d && Number.isNaN(Phi[hi])) hi++; Phi[k] = lo < 0 ? Phi[hi] : hi > d ? Phi[lo] : Phi[lo] + (Phi[hi] - Phi[lo]) * (k - lo) / (hi - lo); }
-    const drops = Phi.slice(0, d).map((p, k) => p - Phi[k + 1]); const sumDrops = drops.reduce((a, b) => a + b, 0);
-    cert("identity", "phi_ladder_telescope (Lean §5)", Math.abs(sumDrops - (Phi[0] - Phi[d])) < 1e-9, `Σdrops=${sumDrops.toFixed(6)} vs Φ(0)−Φ(d)=${(Phi[0] - Phi[d]).toFixed(6)}${filled.length ? `; empty shells ${filled.join(",")} linearly interpolated (stated)` : ""}`);
-    const v2 = V2(bits); cert("identity", "gate_rank_identity (Lean §4)", true, `V₂=${v2.toFixed(4)} ⇔ r̂=2/V₂=${(2 / v2).toFixed(2)} ${2 / v2 <= 5 ? "≤ 5" : "> 5"}; a rank test, not evidence`);
-    const A = atomEdges(bits, P); const minDelta = Math.min(...A.map(a => a.delta)); let run = 0, mono = true; for (const dl of A.map(a => a.delta).sort((a, b) => b - a)) { if (run + dl < run - 1e-12) mono = false; run += dl; }
-    cert("identity", "atom_delta_nonneg (Lean §1)", minDelta >= -1e-12, `${A.filter(a => a.flip >= 0).length}/${N} items have a strictly improving flip; min Δ=${minDelta.toExponential(2)}`);
-    cert("identity", "quantization max|dk|=1 (compass)", A.every(a => a.dk <= 1), `max dk=${Math.max(...A.map(a => a.dk))}`);
-    cert("identity", "corpus_sum_nonneg + cumulative_monotone (Lean §2–3)", mono && run >= 0, `ΣΔ=${run.toFixed(4)}, prefix sums monotone=${mono}`);
-    const trades = 5 * N * d; const c8 = { rowOk: true, colOk: true, trades: 0 }; const rn = mulberry32(seed ^ 0x9e3779b9); const nulls = []; for (let k = 0; k < K; k++) nulls.push(V2(curveballDraw(bits, trades, rn, c8)));
-    const E0 = nulls.reduce((a, b) => a + b, 0) / K, SD0 = Math.sqrt(nulls.reduce((a, b) => a + (b - E0) ** 2, 0) / (K - 1)); const admissible = SD0 >= 1e-3; const z = (v2 - E0) / SD0;
-    const verdict = !admissible ? "not-tested (degenerate null)" : Math.abs(z) >= 3 ? (z > 0 ? "excluded" : "excluded (inverted)") : "not-excluded";
-    cert("identity", "trade_preserves_rowSum (Lean §8)", c8.rowOk, `${c8.trades} trades over ${K} draws`); cert("identity", "trade_preserves_colSum (Lean §8)", c8.colOk, `${c8.trades} trades over ${K} draws`);
-    cert("measurement", "membership: SD₀[V₂] ≥ 1e-3", admissible, `SD₀=${SD0.toExponential(3)}`);
-    cert("measurement", "ΔV₂z vs fixed-margin null (exclusion-only)", admissible && Math.abs(z) >= 3, admissible ? `ΔV₂=${(v2 - E0).toFixed(4)}, z=${z.toFixed(2)} → ${verdict}` : "void (inadmissible coordinate)");
-    const C = compass(Phi, d, T, 60000, mulberry32(seed + 7)); const Tx = crossover(Phi, d);
-    cert("identity", "mh_flux_symm / detailed balance (Lean §7)", C.maxFluxZ <= 3, `max |z(J)| over rungs = ${C.maxFluxZ.toFixed(2)}`); cert("identity", "quantization on accepted moves", C.maxdk <= 1, `max|dk|=${C.maxdk}`);
-    const worst = A.reduce((b, a) => a.delta > b.delta ? a : b, A[0]); const ts = [0, 0.1, 0.25, 0.5, 0.75, 1]; const rungs = ts.map(t => slerp(P.pts[worst.i], P.pole, t)); let monoG = true; for (let i = 1; i < rungs.length; i++) if (geo(rungs[i], P.pole) > geo(rungs[i - 1], P.pole) + 1e-9) monoG = false;
-    cert("identity", "slerp bridge: geodesic to target non-increasing", monoG, `item ${worst.i} → pole, ${rungs.length} rungs`);
-    const E = parsevalShares(P.pts); const decay = [0.05, 0.2, 1].map(t => ({ t, E: E.map((e, l) => e * Math.exp(-2 * heatExp(l) * t)) }));
-    cert("identity", "heat_exponent_monotone (Lean §6)", [0, 1, 2, 3].every((l, i, a) => i === 0 || heatExp(a[i - 1]) < heatExp(l)), `ℓ(ℓ+1) = ${[0, 1, 2, 3].map(heatExp).join(",")}`);
-    cert("identity", "heat_exp_dominates_hamming (Lean §14)", [1, 2, 3].every(l => l < heatExp(l)), "sphere penalty strictly harsher than H(d,2) for ℓ≥1");
-    // ---- NSS ladder (L1..L5): 12 azimuthal sectors -> 12 NSS axes (same sectoring as sos-agent). Candidate ATOMIC actions
-    //      (add one item / remove one item / change one bit) are inserted, the sphere is REFIT, and the effect on the pole,
-    //      sector occupancy and isolation is MEASURED. Rungs are ranked by measured movement; one rung is the selected ideal.
-    //      Direction is free: shift the pole or fill a gap. Nothing here is "toward the ideal pole" by fiat.
-    const NSS_AXES = ["Audience", "Inputs", "Outputs", "Mode", "Assumption set", "Adjacent problems", "Failure modes", "Lifecycle", "Composition", "Knowledge sources", "Calibration", "Recursion"];
-    const sectorOf = ([x, y]) => Math.min(11, Math.floor(((Math.atan2(y, x) + Math.PI) / (2 * Math.PI)) * 12));
-    const sectorCounts = Array(12).fill(0); P.pts.forEach(p => sectorCounts[sectorOf(p)]++);
-    const isolatedCount = (pts, rr = 0.095) => pts.filter((p, i) => !pts.some((q, j) => j !== i && chord(p, q) < rr)).length;
-    const baseOcc = sectorCounts.filter(c => c > 0).length, baseIso = isolatedCount(P.pts);
-    const measure = (B2) => { const P2 = place(B2); const sc = Array(12).fill(0); P2.pts.forEach(p => sc[sectorOf(p)]++); return { pole_shift_geodesic: +geo(P.pole, P2.pole).toFixed(4), occupied_sectors_delta: sc.filter(c => c > 0).length - baseOcc, isolated_delta: isolatedCount(P2.pts) - baseIso, pc12_delta: +(P2.pc12 - P.pc12).toFixed(4) }; };
-    const scoreOf = (m) => +(m.occupied_sectors_delta * 1.0 - 0.5 * m.isolated_delta + m.pole_shift_geodesic).toFixed(4);
-    const bitName = (j) => `bit ${j} (PCA axis ${j} ${threshold === "zero" ? "> 0" : "> median"})`;
-    const nameOf = (i) => { const k = keys[i]; if (k && k.name) return `#${i} (${String(k.name).slice(0, 60)})`; if (k && k.label) return `#${i} "${String(k.label).slice(0, 40)}"`; return `#${i}`; };
-    const fileOf = (i) => { const k = keys[i]; return k && k.name ? `"${String(k.name).slice(0, 80)}"` : k && k.label ? `"${String(k.label).slice(0, 60)}"` : `item #${i}`; };
-    const ham = (a, b) => a.reduce((acc, v, j) => acc + (v !== b[j] ? 1 : 0), 0);
-    const exemplars = (target, pred, n = 3) => bits.map((r, k) => ({ k, h: ham(r, target) })).filter(o => pred(o.k)).sort((a, b) => a.h - b.h).slice(0, n).map(o => fileOf(o.k));
-    const recheck = (m) => `Then re-run the map on the edited corpus with the same d=${d}, seed=${seed}, threshold=${threshold} (rule_hash ${rule_hash} must match, C1) and compare against the prediction: pole shift ${m.pole_shift_geodesic} rad, occupied sectors ${m.occupied_sectors_delta >= 0 ? "+" : ""}${m.occupied_sectors_delta}, isolated ${m.isolated_delta >= 0 ? "+" : ""}${m.isolated_delta}. Keep the edit if the measured move matches in sign; otherwise revert and take the next rung.`;
-    const meanZ = P.pts.reduce((a, p) => a + p[2], 0) / N;
-    const cands = [];
-    // add: one item whose pattern lands in an empty (or thinnest) sector
-    const patterns = []; if (d <= 12) { for (let m = 0; m < (1 << d); m++) patterns.push(Array.from({ length: d }, (_, j) => (m >> j) & 1)); } else { const rp = mulberry32(seed + 99); for (let m = 0; m < 2000; m++) patterns.push(Array.from({ length: d }, () => rp() < 0.5 ? 1 : 0)); }
-    const patPts = patterns.map(b => P.toS2(b));
-    const thin = sectorCounts.map((c, sIdx) => ({ sIdx, c })).sort((a, b) => a.c - b.c).slice(0, 4);
-    for (const { sIdx, c } of thin) { const phi = -Math.PI + ((sIdx + 0.5) / 12) * 2 * Math.PI; const rr = Math.sqrt(Math.max(0, 1 - meanZ * meanZ)); const center = [rr * Math.cos(phi), rr * Math.sin(phi), meanZ];
-      let bi = 0, bd = 1e9; patPts.forEach((q, i) => { const dd = geo(q, center); if (dd < bd) { bd = dd; bi = i; } }); const pat = patterns[bi]; const fill = 3;
-      const m = measure(bits.concat(Array.from({ length: fill }, () => pat.slice()))); const on = pat.map((v, j) => v ? j : -1).filter(j => j >= 0), off = pat.map((v, j) => v ? -1 : j).filter(j => j >= 0);
-      cands.push({ action: "add", axis: NSS_AXES[sIdx], sector: sIdx, sector_count: c, pattern: pat, fill_size: fill, delta: m, score: scoreOf(m), exemplars: exemplars(pat, () => true),
-        prompt: `ADD: create ${fill} new file${fill > 1 ? "s" : ""} in this corpus that land in the ${c === 0 ? "empty" : "thin"} '${NSS_AXES[sIdx]}' sector. Model them on the existing items nearest the target pattern: ${exemplars(pat, () => true).join(", ") || "(none)"}. Each new file should combine what those exemplars share (their common headings, vocabulary, and structure) and omit what only one of them has. Name each file for its subject, not for the sector. ${recheck(m)}`,
-        hypothesis: `an item covering ${on.length ? on.map(bitName).join(", ") : "no bits"} and not ${off.length ? "bits " + off.join(",") : "any other bit"} lands in the ${c === 0 ? "empty" : "thin (" + c + " item" + (c === 1 ? "" : "s") + ")"} '${NSS_AXES[sIdx]}' sector`,
-        method: `insert ${fill} co-located synthetic copies of the pattern, refit PCA2 + stereographic lift, remeasure pole / sectors / isolation`,
-        recommendation: `Add ${fill} item${fill > 1 ? "s" : ""} that ${on.length ? "cover " + on.map(bitName).join(" and ") : "cover none of the bits"}${off.length ? " but not bit" + (off.length > 1 ? "s " : " ") + off.join(", ") : ""}. That pattern lands in the ${c === 0 ? "empty" : "thinly occupied"} '${NSS_AXES[sIdx]}' sector. Measured after refit: pole shifts ${m.pole_shift_geodesic} rad, occupied sectors ${m.occupied_sectors_delta >= 0 ? "+" : ""}${m.occupied_sectors_delta}, isolated points ${m.isolated_delta >= 0 ? "+" : ""}${m.isolated_delta}.` }); }
-    // change: the strongest single-action atoms (flip one bit on one item)
-    const topAtoms = A.filter(a => a.flip >= 0).sort((a, b) => b.delta - a.delta).slice(0, 3);
-    for (const a of topAtoms) { const B2 = bits.map(r => r.slice()); B2[a.i][a.flip] = 1; const m = measure(B2);
-      cands.push({ action: "change", axis: NSS_AXES[sectorOf(P.pts[a.i])], item: a.i, label: keys[a.i].label ?? null, flip_bit: a.flip, atom_delta: +a.delta.toFixed(4), delta: m, score: scoreOf(m), exemplars: exemplars(bits[a.i], k => k !== a.i && bits[k][a.flip] === 1),
-        prompt: `CHANGE: open ${fileOf(a.i)}. It sits in the '${NSS_AXES[sectorOf(P.pts[a.i])]}' sector with ${bitName(a.flip)} off. Edit it so it acquires what these nearest neighbours that have that bit on share: ${exemplars(bits[a.i], k => k !== a.i && bits[k][a.flip] === 1).join(", ") || "(no exemplar with that bit on)"}. Add the sections, terms, or structure those files have and this one lacks; leave the rest of the file as it is. ${recheck(m)}`,
-        hypothesis: `turning ${bitName(a.flip)} on for item ${nameOf(a.i)} is its geodesic single-action atom (Δ=${a.delta.toFixed(3)} toward the pole)`,
-        method: `flip the bit, refit, remeasure`, recommendation: `Change item ${nameOf(a.i)}: turn on ${bitName(a.flip)} (its single-action atom, Δ=${a.delta.toFixed(3)}, Lean §1). Measured after refit: pole shifts ${m.pole_shift_geodesic} rad, occupied sectors ${m.occupied_sectors_delta >= 0 ? "+" : ""}${m.occupied_sectors_delta}, isolated points ${m.isolated_delta >= 0 ? "+" : ""}${m.isolated_delta}.` }); }
-    // remove: the most isolated item and the item farthest from the pole
-    const nn = P.pts.map((p, i) => Math.min(...P.pts.map((q, j) => j === i ? Infinity : chord(p, q)))); const isoI = nn.indexOf(Math.max(...nn)); const farI = P.gaps.indexOf(Math.max(...P.gaps));
-    const nnIdx = (i) => { let b = -1, bd = Infinity; P.pts.forEach((q, j) => { if (j !== i) { const dd = chord(P.pts[i], q); if (dd < bd) { bd = dd; b = j; } } }); return b; };
-    for (const [i, why] of [[isoI, `the most isolated point (nearest neighbour ${nn[isoI].toFixed(3)} away)`], [farI, `the point farthest from the all-ones pole (gap ${P.gaps[farI].toFixed(3)})`]]) { if (i < 0 || N <= 10) continue; const B2 = bits.filter((_, k) => k !== i); const m = measure(B2); const nj = nnIdx(i);
-      cands.push({ action: "remove", axis: NSS_AXES[sectorOf(P.pts[i])], item: i, label: keys[i].label ?? null, delta: m, score: scoreOf(m), nearest: nj >= 0 ? fileOf(nj) : null,
-        prompt: `REMOVE: delete ${fileOf(i)} from the corpus, ${why}, in the '${NSS_AXES[sectorOf(P.pts[i])]}' sector. If it holds content worth keeping, fold that content into its nearest neighbour ${nj >= 0 ? fileOf(nj) : "(none)"} first, then delete the file. ${recheck(m)}`, hypothesis: `item ${nameOf(i)} is ${why}; removing it changes the fit`, method: `drop the row, refit, remeasure`,
-        recommendation: `Remove item ${nameOf(i)}, ${why}, in the '${NSS_AXES[sectorOf(P.pts[i])]}' sector. Measured after refit: pole shifts ${m.pole_shift_geodesic} rad, occupied sectors ${m.occupied_sectors_delta >= 0 ? "+" : ""}${m.occupied_sectors_delta}, isolated points ${m.isolated_delta >= 0 ? "+" : ""}${m.isolated_delta}.` }); }
-    const seen = new Set(); const ladder = cands.sort((a, b) => b.score - a.score).filter(c => { const k = c.action + ":" + (c.item ?? c.sector); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 5)
-      .map((c, r) => ({ rung: "L" + (r + 1), ...c, prompt: `[L${r + 1} · ${c.action} · ${c.axis}] ${c.prompt}`, verdict: (Math.abs(c.delta.pole_shift_geodesic) > 0.02 || c.delta.occupied_sectors_delta !== 0 || c.delta.isolated_delta !== 0) ? "moves" : "no measurable move", caveat: "measured on this cloud under this rule; a re-embed with new text will land near, not on, the synthetic pattern" }));
-    const idealReq = Number(opts.ideal); const idealIdx = Number.isInteger(idealReq) && idealReq >= 1 && idealReq <= ladder.length ? idealReq - 1 : 0;
-    const nss = { axes: NSS_AXES, sector_counts: sectorCounts, empty_sectors: sectorCounts.map((c, i) => c === 0 ? NSS_AXES[i] : null).filter(Boolean), base: { occupied_sectors: baseOcc, isolated: baseIso }, ladder, ideal: ladder.length ? ladder[idealIdx].rung : null, recommendation: ladder.length ? ladder[idealIdx].recommendation : "no candidate actions (cloud too small)", prompt: ladder.length ? ladder[idealIdx].prompt : null };
-    const shells = Array.from({ length: d + 1 }, (_, k) => ks.filter(x => x === k).length);
-    return { version: "pointmap/0.1", rule_hash, rule: { rule: rule.rule, d, threshold, note: threshold === "zero" ? "top-d PCA axes of the centered cloud; bit_j = [score_j > 0] (sign rule; column margins float)" : "top-d PCA axes of the centered cloud; bit_j = [score_j > median_j] (column margins fixed at ceil(N/2))" }, seed, n: N, D, d, keys,
-      classes: { count: cls.size, largest, unresolvable_pairs: [...cls.values()].reduce((s, c) => s + c * (c - 1) / 2, 0) },
-      k: ks, pts: P.pts.map(p => p.map(x => +x.toFixed(5))), pole: P.pole.map(x => +x.toFixed(5)), gaps: P.gaps.map(x => +x.toFixed(5)), pc12: +P.pc12.toFixed(4), v2: +v2.toFixed(5),
-      ladder: { Phi: Phi.map(x => +x.toFixed(4)), drops: drops.map(x => +x.toFixed(4)), interpolated_shells: filled }, shells,
-      atoms: A.map(a => ({ i: a.i, flip: a.flip, delta: +a.delta.toFixed(5), to: a.to.map(x => +x.toFixed(5)) })),
-      null: { kind: "curveball fixed-margin (Lean §8–10)", K, trades_per_draw: trades, E0: +E0.toFixed(5), SD0: +SD0.toFixed(6), z: admissible ? +z.toFixed(2) : null, admissible, verdict, stationary_law: "uniform on the fibre (Lean §10); irreducibility not checked at this N·d" },
-      compass: { ...C, kmean_analytic: +C.kmean_analytic.toFixed(4), kmean_empirical: +C.kmean_empirical.toFixed(4), acceptance: +C.acceptance.toFixed(3), maxFluxZ: +C.maxFluxZ.toFixed(2), Tx: Tx === null ? null : +Tx.toFixed(6), wall: "property of a designed chain on a measured ladder, not of the cloud" },
-      bridge: { i: worst.i, ts, rungs: rungs.map(p => p.map(x => +x.toFixed(5))) },
-      nss,
-      spectra: { S2_parseval: E.map(x => +x.toFixed(4)), decay: decay.map(o => ({ t: o.t, E: o.E.map(x => +x.toExponential(2)) })) },
-      certificates: certs, summary: { identity_failures: certs.filter(c => c.class === "identity" && !c.ok).length, measurement_red: certs.filter(c => c.class === "measurement" && !c.ok).length } }; }
-  // stated preprocessing for big-D clouds: top-k PCA scores (same sign convention), so servers with tight CPU budgets see k-D input
-  function reduce(X, k, seed) { const p = pcaTop(X, k, mulberry32(seed ?? 1)); return { scores: p.scores.map(r => r.map(x => +x.toFixed(6))), explained: p.values.slice(0, k).map(x => +x.toFixed(6)) }; }
-  return { runMap, synth, mulberry32, slerp, hashVec, hashStr, reduce };
-})();
-
-const $=id=>document.getElementById(id);let last=null;
-$("src").onchange=()=>{$("input").style.display=$("src").value==="synthetic"?"none":"block";const tx=$("src").value==="texts";$("uploadbox").style.display=tx?"flex":"none";$("fileinfo").style.display="none";$("dirinfo").style.display="none";$("repoinfo").style.display="none";$("files").value="";$("dirs").value=""};
-let idealRung=1;function renderNSS(R){const N=R.nss;const box=$("nssbox");if(!N||!N.ladder||!N.ladder.length){box.style.display="none";return}box.style.display="";const cur=N.ideal||"L1";idealRung=+cur.slice(1)||1;$("nsstab").querySelector("tbody").innerHTML=N.ladder.map((r,i)=>`<tr><td><input type="radio" name="ideal" value="${i+1}" ${r.rung===cur?"checked":""}></td><td><b>${r.rung}</b></td><td>${r.action||""}${r.item!==undefined?` #${r.item}`:""}</td><td>${r.axis||""}</td><td>${r.score}</td><td class="${r.verdict==="moves"?"ok":"dim"}">${r.verdict}</td><td>${r.delta.pole_shift_geodesic}</td><td>${r.delta.occupied_sectors_delta}</td><td>${r.delta.isolated_delta}</td></tr>`).join("");$("nssrec").innerHTML=`<b>${cur}</b> · ${N.ladder[idealRung-1].recommendation}${N.empty_sectors.length?` <span class="dim">Empty sectors: ${N.empty_sectors.join(", ")}.</span>`:""}`;$("nssprompt").textContent=N.ladder[idealRung-1].prompt||"";$("nsstab").querySelectorAll("input[name=ideal]").forEach(el=>el.onchange=()=>{idealRung=+el.value;const L=last.nss.ladder[idealRung-1];last.nss.ideal=L.rung;last.nss.recommendation=L.recommendation;last.nss.prompt=L.prompt;$("nssrec").innerHTML=`<b>${L.rung}</b> · ${L.recommendation}`;$("nssprompt").textContent=L.prompt||""});$("copyprompt").onclick=()=>{navigator.clipboard.writeText($("nssprompt").textContent).then(()=>{$("copyprompt").textContent="copied";setTimeout(()=>$("copyprompt").textContent="copy",1200)})}}
-
-const GLOSSARY={
-"pole":"\u03c1* = 1\u1d48, the all-ones pole: the top of the Boolean lattice \u2014 every one of the corpus's own d axes fully on. gap[i] is the geodesic distance to it \u2014 how many of the corpus's own dimensions item i is absent on. A reference direction of the designed rule, not a goal; it moves with rule_hash.",
-"rule_hash":"Fingerprint of the binarization rule (top-d PCA axes + thresholds). Two maps are comparable only if it matches (C1).",
-"\u0394V\u2082z":"The real cloud's V\u2082 minus the null mean, in standard deviations. Exclusion-only: the null is excluded or not, never confirmed.",
-"V\u2082":"Variance share of the first two principal components. The rank identity r\u0302 = 2/V\u2082 is the effective rank the sphere geometry sees.",
-"measurement classes":"Distinct d-bit vectors in the cloud and the size of the largest \u2014 how much of the item space the rule actually distinguishes.",
-"keys":"Identity layer (D6): the ordinal is the injective key; content hashes distinguish items byte-for-byte.",
-"pairs unresolvable":"Items whose bit vectors are identical under the rule \u2014 the map cannot tell them apart by measurement; only names/hashes do.",
-"\u03a6(k)":"Measured free-energy ladder over Hamming shells k. The compass is a designed chain on this measured ladder.",
-"Hamming shells":"How many items sit at each Hamming weight k (number of bits on under the rule).",
-"K / trades":"K curveball null draws, each trading a fixed number of column margins; E\u2080 \u00b1 SD\u2080 is the null's V\u2082 band.",
-"E\u2080":"Mean and spread of the null's V\u2082 over K draws \u2014 the band the real cloud's V\u2082 is compared against.",
-"verdict":"Exclusion-only language: a null is excluded or not excluded (\u03b1 = 0.01), never \u201cconfirmed\u201d.",
-"stationary law":"Empirical distribution of the compass chain's Hamming weight \u2014 compared against the analytic \u03c0_T(k).",
-"\u03c0_T(k)":"Boltzmann distribution over Hamming shells at temperature T \u2014 the analytic occupancy prediction the chain is checked against.",
-"acceptance":"Metropolis acceptance rate of the compass chain at T. Near the analytic prediction when detailed balance holds (identity cert).",
-"T\u00d7":"Temperature where the \u03a6-ladder stops being monotone (compass crossover). \u201cnone\u201d = \u03a6 monotone at T\u21920.",
-"steps":"Single Metropolis chain length (60k), no restarts \u2014 one chain, so no burn-in ambiguity.",
-"atoms":"Single-action atoms (Lean \u00a71): the one bit whose flip moves each item geodesically closest to the pole. \u0394 = geodesic gain."
-};
-const gi=(k)=>{const lk=k.toLowerCase();for(const g in GLOSSARY)if(lk.includes(g))return` <span class="gi" data-tip="${GLOSSARY[g].replace(/"/g,"&quot;")}">i</span>`;return""};
-
-function kv(id,o){$(id).innerHTML=Object.entries(o).map(([k,v])=>`<span class="dim">${k}${gi(k)}</span><span>${v}</span>`).join("")}
-function render(R){last=R;renderNSS(R);$("rule").innerHTML=`<b>rule</b> ${R.rule.rule}: ${R.rule.note} (d=${R.d}). rule_hash=<b>${R.rule_hash}</b>. Two maps are comparable only if rule_hash matches (C1).`;
- kv("ident",{"items (N) / latent dim (D)":`${R.n} / ${R.D}`,"keys":`ordinal ${R.n}/${R.n} injective; ${new Set(R.keys.map(k=>k.hash)).size} distinct content hashes`,"measurement classes":`${R.classes.count} distinct ${R.d}-bit vectors (largest ${R.classes.largest})`,"pairs unresolvable by measurement":R.classes.unresolvable_pairs});
- kv("place",{"PC1+PC2 (share)":R.pc12,"V₂ ⇒ r̂=2/V₂ (rank identity)":`${R.v2} ⇒ ${(2/R.v2).toFixed(2)}`,"Φ(k)":R.ladder.Phi.join(" "),"Hamming shells":R.shells.join(" "),"pole":R.pole.join(", ")});
- kv("null",{"K / trades per draw":`${R.null.K} / ${R.null.trades_per_draw}`,"V₂ real":R.v2,"E₀ ± SD₀":`${R.null.E0} ± ${R.null.SD0}`,"ΔV₂z":R.null.z??"void","verdict":R.null.verdict,"stationary law":R.null.stationary_law});
- kv("compass",{"T":R.compass.T,"⟨k⟩ analytic / empirical":`${R.compass.kmean_analytic} / ${R.compass.kmean_empirical}`,"π_T(k)":R.compass.pi.join(" "),"acceptance":R.compass.acceptance,"T×":R.compass.Tx??"none (Φ non-monotone at T→0)","steps":`${R.compass.steps} (single chain)`});
- kv("bridge",{"Parseval E_ℓ (ℓ=0..3)":R.spectra.S2_parseval.join(" "),"defocus t=0.05":R.spectra.decay[0].E.join(" "),"defocus t=0.2":R.spectra.decay[1].E.join(" "),"bridge":`item ${R.bridge.i} → pole, ${R.bridge.rungs.length} rungs`});
- kv("meta",{"version":R.version,"seed":R.seed,"identity failures":R.summary.identity_failures,"measurement red":R.summary.measurement_red,"source":R.source||"client"});
- $("certs").querySelector("tbody").innerHTML=R.certificates.map(c=>`<tr><td class="dim">${c.class}</td><td>${c.theorem}</td><td class="${c.ok?"ok":"bad"}">${c.ok?"PASS":"FAIL"}</td><td class="dim">${c.detail}</td></tr>`).join("");
- draw(R);$("status").textContent=`done · ${R.summary.identity_failures} identity failures · ${R.summary.measurement_red} measurement red`}
-const view={yaw:0.61,pitch:-0.44,zoom:1};let dragging=null,spin=!matchMedia("(prefers-reduced-motion: reduce)").matches,hover=-1,screen=[],poleXY=null;
-function rot([x,y,z]){const a=view.yaw,b=view.pitch;const x1=x*Math.cos(a)+z*Math.sin(a),z1=-x*Math.sin(a)+z*Math.cos(a);return[x1,y*Math.cos(b)-z1*Math.sin(b),y*Math.sin(b)+z1*Math.cos(b)]}
-function labelOf(R,i){const k=R.keys[i];const l=k&&k.label?String(k.label):null;return l?l.replace(/^skills\//,"").replace(/\/SKILL\.md$/,"").replace(/^refs\//,"r/"):"#"+i}
-function draw(R){if(!R)return;const cv=$("sphere"),g=cv.getContext("2d"),W=cv.width,Rr=(W/2-18)*view.zoom,cx=W/2,cy=W/2;g.clearRect(0,0,W,W);
- const S=p=>{const[x,y,z]=rot(p);return[cx+x*Rr,cy-y*Rr,z]};screen=[];
- g.strokeStyle="#1e2440";g.lineWidth=1;g.beginPath();g.arc(cx,cy,Rr,0,2*Math.PI);g.stroke();
- for(let lat=-60;lat<=60;lat+=30){g.beginPath();for(let a=0;a<=360;a+=4){const th=lat*Math.PI/180,ph=a*Math.PI/180;const[px,py,pz]=S([Math.cos(th)*Math.cos(ph),Math.cos(th)*Math.sin(ph),Math.sin(th)]);if(pz<0){g.moveTo(px,py);continue}a===0?g.moveTo(px,py):g.lineTo(px,py)}g.stroke()}
- for(const a of R.atoms){if(a.flip<0)continue;const[x1,y1,z1]=S(R.pts[a.i]),[x2,y2,z2]=S(a.to);if(z1<0&&z2<0)continue;g.strokeStyle="rgba(60,247,165,0.22)";g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke()}
- const front=[];R.pts.forEach((p,i)=>{const[x,y,z]=S(p);screen.push([x,y,z,i]);const h=200+120*(R.k[i]/R.d);g.fillStyle=z<0?`hsla(${h},70%,55%,0.18)`:`hsla(${h},80%,60%,0.9)`;g.beginPath();g.arc(x,y,z<0?1.6:(i===hover?4.5:2.6),0,2*Math.PI);g.fill();if(z>=0)front.push([x,y,z,i])});
- if($("labels").checked){g.font="9px monospace";const taken=[];front.sort((a,b)=>b[2]-a[2]);for(const[x,y,z,i]of front){const lx=x+5,ly=y+3;if(taken.some(([tx,ty])=>Math.abs(tx-lx)<58&&Math.abs(ty-ly)<9))continue;taken.push([lx,ly]);g.fillStyle=`rgba(214,221,230,${0.35+0.55*z})`;g.fillText(labelOf(R,i).slice(0,14),lx,ly)}}
- g.strokeStyle="#DB46F5";g.lineWidth=2;g.beginPath();R.bridge.rungs.forEach((q,i)=>{const[x,y]=S(q);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();R.bridge.rungs.forEach(q=>{const[x,y]=S(q);g.fillStyle="#DB46F5";g.beginPath();g.arc(x,y,2.5,0,2*Math.PI);g.fill()});
- const[px,py]=S(R.pole);poleXY=[px,py];g.strokeStyle="#fff";g.lineWidth=1.5;g.beginPath();g.arc(px,py,6,0,2*Math.PI);g.stroke();g.fillStyle="#fff";g.font="11px monospace";g.fillText("p* (all-ones pole)",px+9,py-6);
- if(hover>=0){const[x,y]=S(R.pts[hover]);g.fillStyle="#fff";g.font="11px monospace";g.fillText(labelOf(R,hover),x+8,y-8)}
- g.fillStyle="#7d8894";g.font="11px monospace";g.fillText("drag to rotate · wheel to zoom · hover a point · hue = k-shell · green = atom Δ≥0 · violet = slerp",12,W-10)}
-(function(){const cv=$("sphere");const pos=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
- cv.addEventListener("pointerdown",e=>{dragging=pos(e);cv.style.cursor="grabbing";cv.setPointerCapture(e.pointerId)});
- cv.addEventListener("pointerup",e=>{dragging=null;cv.style.cursor="grab"});cv.addEventListener("pointerleave",()=>{dragging=null;hover=-1;$("tip").textContent="";draw(last)});
- cv.addEventListener("pointermove",e=>{const[x,y]=pos(e);if(dragging){view.yaw+=(x-dragging[0])*0.01;view.pitch=Math.max(-1.5,Math.min(1.5,view.pitch-(y-dragging[1])*0.01));dragging=[x,y];draw(last);return}
-  if(poleXY&&(poleXY[0]-x)**2+(poleXY[1]-y)**2<900){if(hover!==-1){hover=-1;draw(last)}$("tip").textContent="ρ* all-ones pole — 1ᴽ: every one of the corpus’s own d axes fully on. gap[i] = geodesic distance to it = how many of the corpus’s own dimensions item i is absent on. A reference direction of the designed rule, not a goal.";return}let best=-1,bd=64;for(const[sx,sy,sz,i]of screen){if(sz<0)continue;const d=(sx-x)**2+(sy-y)**2;if(d<bd){bd=d;best=i}}
-  if(best!==hover){hover=best;if(last&&best>=0){const a=last.atoms[best];$("tip").textContent=`#${best} ${labelOf(last,best)} · k=${last.k[best]} · gap=${last.gaps[best]} · atom Δ=${a?a.delta:"-"}${a&&a.flip>=0?" (flip bit "+a.flip+")":""} · hash ${last.keys[best].hash}`}else $("tip").textContent="";draw(last)}});
- cv.addEventListener("wheel",e=>{e.preventDefault();view.zoom=Math.max(0.5,Math.min(3,view.zoom*(e.deltaY<0?1.1:0.9)));draw(last)},{passive:false});
- $("labels").onchange=()=>draw(last);$("reset").onclick=()=>{view.yaw=0.61;view.pitch=-0.44;view.zoom=1;draw(last)};
- const tick=()=>{if(!spin)return;view.yaw+=0.008;draw(last);requestAnimationFrame(tick)};$("spin").textContent=spin?"stop":"auto-rotate";tick();$("spin").onclick=()=>{spin=!spin;$("spin").textContent=spin?"stop":"auto-rotate";tick()};})();
-async function postJSON(u,body,tries=3){let r,txt;for(let a=1;a<=tries;a++){r=await fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});txt=await r.text();
- if(!(r.status===502||r.status===503)||a===tries)break;$("status").textContent=`server hiccup (HTTP ${r.status}) — retry ${a}/${tries-1}…`;await new Promise(res=>setTimeout(res,1500*a))}
- try{return JSON.parse(txt)}catch(e){throw new Error(`HTTP ${r.status} — the free-plan Worker hit its CPU budget. Retry, use fewer items, or add Workers Paid ($5/mo) for a 30s CPU limit.`)}}
-async function maybeReduce(X,opts){if(X.length&&X[0].length>40){$("status").textContent=`reducing ${X.length}×${X[0].length} → top-24 PCA (server budget)…`;const R=PM.reduce(X,24,opts.seed||1);const share=(R.explained.slice(0,9).reduce((a,b)=>a+b,0)/R.explained.reduce((a,b)=>a+b,0)).toFixed(2);return{scores:R.scores,note:`input D>40 → PM.reduce to top-24 PCA (top-9 variance share ${share})`}}return{scores:X,note:null}}
-async function run(){const opts={d:+$("d").value,seed:+$("seed").value,T:+$("T").value,K:+$("K").value,ideal:idealRung};$("status").textContent="running…";try{
- if($("src").value==="synthetic"){render(PM.runMap(PM.synth(+$("N").value,+$("D").value,opts.seed),opts))}
- else if($("src").value==="vectors"){const X=JSON.parse($("input").value);const{scores,note}=await maybeReduce(X,opts);let j;try{j=await postJSON("/api/map",{vectors:scores,...opts})}catch(e){$("status").textContent=`server map failed (${String(e.message).slice(0,60)}) — mapping client-side…`;j={id:null,map:PM.runMap(scores,opts)};j.map.source=(j.map.source||"vectors")+" · mapped client-side (server budget)"}j.map.source=(j.map.source||"vectors")+(note?` · ${note}`:"");render(j.map)}
- else{const items=$("input").value.split("\n").map(s=>s.trim()).filter(Boolean).map(s=>({text:s,label:s.slice(0,80)}));
- for(const f of $("files").files){const txt=(await f.text()).slice(0,2000).trim();if(txt.length<50)continue;const nm=txt.match(/^name:\s*(.+)$/m);const label=nm?nm[1].trim().slice(0,80):f.name.replace(/\.(md|markdown|txt)$/i,"");items.push({text:txt,label,name:f.name})}
- const rels=[...$("dirs").files].filter(f=>/\.(md|markdown|txt)$/i.test(f.name));const roots=new Set(rels.map(f=>(f.webkitRelativePath||f.name).split("/")[0]));const below=rels.every(f=>{const s=(f.webkitRelativePath||f.name).split("/");return s.length>1&&roots.size===1});const groups=new Map();for(const f of rels){const seg=(f.webkitRelativePath||f.name).split("/");let key;if(below)key=seg.length>1?seg[1]:"(files at "+seg[0]+")";else key=seg[0];if(!groups.has(key))groups.set(key,[]);groups.get(key).push(f)}
- for(const[name,fs]of groups){const order=[...fs].sort((a,b)=>{const w=f=>/skill\.md$/i.test(f.name)?0:/readme/i.test(f.name)?1:2;return w(a)-w(b)||a.name.localeCompare(b.name)});let digest="",label=name;for(const f of order){if(digest.length>2400)break;digest+=(digest?"\n\n":"")+"## "+f.name+"\n"+(await f.text()).slice(0,1200)}const skill=order.find(f=>/skill\.md$/i.test(f.name));if(skill){const nm=(await skill.text()).match(/^name:\s*(.+)$/m);if(nm)label=nm[1].trim().slice(0,80)}if(digest.trim().length>50)items.push({text:digest.slice(0,2000),label,name:name+"/"+(skill||order[0]).name})}
- for(const it of repoItems)items.push({text:it.text,label:it.label,name:it.label});
- if(items.length<10)throw new Error(`need at least 10 items — have ${items.length} (${$("files").files.length} file(s), ${$("dirs").files.length} folder file(s), ${repoItems.length} repo item(s) + pasted lines)`);if(items.length>400)throw new Error("max 400 items per map");
- $("status").textContent=`embedding ${items.length} items…`;const e=await postJSON("/api/embed",{texts:items.map(i=>i.text)});const{scores,note}=await maybeReduce(e.vectors,opts);$("status").textContent="mapping…";let j;try{j=await postJSON("/api/map",{vectors:scores,labels:items.map(i=>i.label),names:items.map(i=>i.name??null),...opts})}catch(e){$("status").textContent=`server map failed (${String(e.message).slice(0,60)}) — mapping client-side…`;j={id:null,map:PM.runMap(scores,{...opts,labels:items.map(i=>i.label),names:items.map(i=>i.name??null)})};j.map.source=(j.map.source||"texts")+" · mapped client-side (server budget)"}j.map.source=(j.map.source||"texts")+(note?` · ${note}`:"");render(j.map)}
-}catch(e){$("status").textContent="error: "+e.message}}
-let repoItems=[];
-$("fetchrepo").onclick=async()=>{const repo=$("repo").value.trim();if(!repo)return;const m=repo.match(/^(.*?)(?:\/(?:tree\/[^/]+)?)?\/(\w[\w.-]*\/(?:(?:[\w.-]+\/)*)?([\w.-]+))\/?$/) ;$("repoinfo").textContent="fetching…";$("repoinfo").style.display="inline";
- try{const parts=repo.replace(/^https?:\/\/github\.com\//,"").replace(/\.git$/,"").split("/").filter(Boolean);const sub=parts.length>2?parts.slice(2).join("/"):"";const j=await postJSON("/api/repo-items",{repo:parts.slice(0,2).join("/"),subdir:sub});repoItems=j.items;$("repoinfo").textContent=`${j.n} items from ${j.repo}${j.subdir?"/"+j.subdir:""}`;}catch(e){repoItems=[];$("repoinfo").textContent="error: "+e.message}};
-$("files").onchange=()=>{const n=$("files").files.length;if(n){$("fileinfo").textContent=`${n} file(s) loaded`;$("fileinfo").style.display="inline"}};
-$("run").onclick=run;$("dl").onclick=()=>{if(!last)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(last,null,1)],{type:"application/json"}));a.download=`MapResult-${last.rule_hash}.json`;a.click()};setTimeout(run,90);
-</script><script>const gt=document.createElement("div");gt.id="gtip";document.body.appendChild(gt);document.addEventListener("mouseover",e=>{const g=e.target.closest(".gi");if(g){gt.textContent=g.dataset.tip;gt.style.display="block";const r=g.getBoundingClientRect();let x=r.left+14,y=r.top-10;if(x+350>innerWidth)x=r.left-354;gt.style.left=Math.max(4,x)+"px";gt.style.top=Math.max(4,y)+"px"}else gt.style.display="none"});</script></body></html>
+<script src="/map/pointmap.js"></script>
+<script src="/map/app.js"></script>
+</body></html>
