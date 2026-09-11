@@ -1,0 +1,120 @@
+{
+  "schema": "wayfinder-scope/1",
+  "lean_file": "papers/data/lean/WayfinderBounds.lean",
+  "toolchain": "leanprover/lean4:v4.33.0",
+  "dependencies": "core Lean 4 only (no mathlib, no Batteries, no external imports)",
+  "generated_for_branch": "lean-check-wayfinder-bounds-2026-09-10",
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "forbidden_axioms": [
+    "sorryAx"
+  ],
+  "axiom_policy": "Every declaration listed in `theorems` must appear in the `#print axioms` output of the pinned kernel run. Its reported axiom set must be a subset of `permitted_axioms` (the three core Lean assumptions). Any other axiom, and in particular `sorryAx`, fails the gate. The gate parses the kernel's printed output; it does not grep source comments.",
+  "frozen_graph_assumption": "All theorems in the graph sections assume a simple graph in which every edge NOT incident to the single edited vertex is frozen: unchanged in presence and endpoints across the edit. Row lists are assumed to enumerate each old vertex exactly once with its pre-edit degree. Lean does not prove that the runtime constructs such a list; that is a runtime obligation.",
+  "theorems": [
+    {
+      "name": "WayfinderBounds.stable_on",
+      "status": "lean-proved",
+      "statement": "radius < margin and -radius <= delta implies 0 < margin + delta (Int)",
+      "runtime_counterpart": "tools/point-map signed threshold margin diagnostic",
+      "runtime_predicate": "score > 0 (bit on) stays true when the integer margin strictly exceeds the integer perturbation radius"
+    },
+    {
+      "name": "WayfinderBounds.stable_off",
+      "status": "lean-proved",
+      "statement": "margin <= -radius and delta <= radius implies margin + delta <= 0 (Int)",
+      "runtime_counterpart": "tools/point-map signed threshold margin diagnostic",
+      "runtime_predicate": "score > 0 (bit on) stays false; equality at 0 is deliberately permitted because the runtime test is strict"
+    },
+    {
+      "name": "WayfinderBounds.crossing_on_iff",
+      "status": "lean-proved",
+      "statement": "0 < margin + delta <-> -margin < delta (Int)",
+      "runtime_counterpart": "threshold-crossing diagnostic",
+      "runtime_predicate": "exact crossing boundary for the on-side; no numerical error term is modelled"
+    },
+    {
+      "name": "WayfinderBounds.crossing_off_iff",
+      "status": "lean-proved",
+      "statement": "margin + delta <= 0 <-> delta <= -margin (Int)",
+      "runtime_counterpart": "threshold-crossing diagnostic",
+      "runtime_predicate": "exact crossing boundary for the off-side, equality included"
+    },
+    {
+      "name": "WayfinderBounds.old_vertex_after_add",
+      "status": "lean-proved",
+      "statement": "iso (degree + edgeNat edge) = iso degree - hit degree edge",
+      "runtime_counterpart": "per-old-vertex isolation update during an ADD",
+      "runtime_predicate": "a vertex is isolated iff its integer degree is 0; only a previously isolated vertex that the new vertex attaches to can lose isolation"
+    },
+    {
+      "name": "WayfinderBounds.after_old_count",
+      "status": "lean-proved",
+      "statement": "afterOldIso rows = oldIso rows - hitIso rows",
+      "runtime_counterpart": "ADD neighbour ledger sum",
+      "runtime_predicate": "summed over every old vertex exactly once"
+    },
+    {
+      "name": "WayfinderBounds.add_isolation_delta",
+      "status": "lean-proved",
+      "statement": "(afterOldIso rows + iso (newDegree rows)) - oldIso rows = iso (newDegree rows) - hitIso rows",
+      "runtime_counterpart": "exact ADD isolated-vertex ledger emitted by the point-map neighbour diagnostic",
+      "runtime_predicate": "delta(isolated count) = new vertex isolated indicator - count of old isolated vertices it attached to"
+    },
+    {
+      "name": "WayfinderBounds.chg_hit_eval",
+      "status": "lean-proved",
+      "statement": "chgHit rest before after = (if rest = 0 then before-indicator - after-indicator else 0)",
+      "runtime_counterpart": "per-neighbour isolation update during a CHANGE",
+      "runtime_predicate": "only a neighbour whose frozen (non-incident) degree is 0 can change isolation state, and only via the toggled edge"
+    },
+    {
+      "name": "WayfinderBounds.change_neighbour_ledger",
+      "status": "lean-proved",
+      "statement": "afterIsoC rows - oldIsoC rows = chgLedger rows",
+      "runtime_counterpart": "CHANGE neighbour ledger sum",
+      "runtime_predicate": "summed over every other old vertex exactly once, frozen edges excluded from `rest`"
+    },
+    {
+      "name": "WayfinderBounds.change_isolation_delta",
+      "status": "lean-proved",
+      "statement": "(afterIsoC rows + iso (degAfterOf rows)) - (oldIsoC rows + iso (degBeforeOf rows)) = chgLedger rows + (iso (degAfterOf rows) - iso (degBeforeOf rows))",
+      "runtime_counterpart": "exact CHANGE isolated-vertex ledger emitted by the point-map neighbour diagnostic",
+      "runtime_predicate": "delta(isolated count) = neighbour ledger + the changed vertex's own isolation-indicator change; the changed vertex's degrees are recomputed from the same rows, not supplied independently"
+    },
+    {
+      "name": "WayfinderBounds.change_neutral",
+      "status": "lean-proved",
+      "statement": "if every row has before = after then chgLedger rows = 0",
+      "runtime_counterpart": "neutral CHANGE / neutral ADD regression case",
+      "runtime_predicate": "an edit that toggles no incident edge must report a zero isolation ledger"
+    }
+  ],
+  "runtime_verified_not_lean_proved": [
+    {
+      "obligation": "row-construction correspondence",
+      "detail": "That tools/point-map enumerates each old vertex exactly once, with the correct pre-edit degree, and with `rest` excluding edges incident to the edited vertex. Checked by runtime tests, not by the kernel."
+    },
+    {
+      "obligation": "simple-graph and frozen-edge premises",
+      "detail": "That the runtime graph is simple and that all non-incident edges are unchanged across the edit. Assumed, not proved."
+    },
+    {
+      "obligation": "integer-margin correspondence",
+      "detail": "That the runtime score/threshold arithmetic is exact-integer and that its perturbation radius is a genuine bound. Any floating-point score must be reduced to exact integers before these theorems apply."
+    }
+  ],
+  "nonclaims": [
+    "No fluid, velocity, pressure, or vorticity equation is proved, imported, or implied.",
+    "No Navier-Stokes / Euler result is claimed; openai/NavierStokesAndEuler is not imported and no Millennium claim is made.",
+    "No floating-point error bound is proved; all statements are exact integer arithmetic.",
+    "No probabilistic certificate, confidence interval, or calibration claim is proved.",
+    "No claim about prediction accuracy, pre-edit forecasting skill, ranking quality, or semantic task grading.",
+    "A checked ledger identity is not evidence that the runtime ledger is correctly wired; see runtime_verified_not_lean_proved.",
+    "Retrospective replay agreement on stored maps is not a forecasting result.",
+    "No keep/revert, deletion, or ranking rule is justified by these theorems."
+  ]
+}
