@@ -41,3 +41,13 @@ Back up Worker source/settings and the five keys before deployment. Compare sour
 - Fixed-attempt switch null, analytical identity checks, finite-sample tail estimates. Sampling convergence and predictive quality remain separate evidence requirements.
 - Spectroscopy blocks are non-admitted diagnostics. No measured Raman/IR response is claimed.
 - Existing map storage is shared/public. Do not submit secrets. The Sauna app mirror remains on its previous version.
+
+## wayfinder-math/1
+
+Eleven threshold and ADD/CHANGE ledger theorems in `papers/data/lean/WayfinderBounds.lean` are kernel-checked on core Lean 4.33.0. The scope manifest and printed-axiom checker run in the existing Lean CI job. Exact integer/count statements do not certify float error bounds or forecast quality.
+
+Run the added suites: `node test-math.mjs`, `node test-preview.mjs`, `node test-storage.mjs`. Math tests include 38,172 exhaustive graph cases and the compact historical maps 51–61 fixture. Their ten exact replays are retrospective. `pointmap.baseline.js` is a test-only historical oracle, never served to the UI.
+
+The `/api/map/preview` endpoint validates every untouched source SHA256 and frozen anchor, computes an actual candidate without inserting a map, and returns a named-neighbour ledger and margins. UI previews preserve the saved baseline. Homepage source now lives in `home.html`; deploy it to SITE KV `index.html`. Copy agent guide fetches `/AGENT.md` as the sole source.
+
+Storage packs diagnostic objects losslessly into numeric tuples; API reads decode the same public fields. A 400×768,d=24 test stores 1,294,143 bytes rather than the 2,100,906-byte expanded object. The safe storage cap is 1.9 MB; oversize persistence returns 413 instead of silently dropping diagnostics.

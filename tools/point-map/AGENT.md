@@ -84,3 +84,48 @@ Null output includes empirical tail estimates and their finite resolution, SD ad
 The spectra card reports SH degree shares, even/odd blocks, rank-0+2/rank-1 blocks and heat eigenvalues `l(l+1)`. These are diagnostic shape summaries, explicitly not admitted as new scientific coordinates. No dipole derivative, polarizability tensor, response kernel, physical frequency, lifetime or temperature is measured. Raman/IR selection rules need those observables and a matched null before use; no new physics term enters wayfinder ranking.
 
 Preserve recorded negatives from the papers and bridges: A1 admission failed, Gaunt coupling was negative, FCS factorization was not identifiable, uniform Pennes loss cancels from admitted ratios, and the margin-clean second-branch test excluded it. A successful Lean CI run reproduces identities and seeded checks; it does not prove semantic edit quality.
+
+
+## Math diagnostics and candidate preview (wayfinder-math/1)
+
+The geometric instrument remains `pointmap/0.2`. Additional diagnostics do not change its frozen frames, bit assignments, sector geometry, null calculations or rung ranking. Existing v0.2 text baselines remain usable.
+
+**Proof scope:** `papers/data/lean/WayfinderBounds.lean` contains 11 core-Lean 4.33.0 theorems for strict threshold inequalities and exact ADD/CHANGE isolation ledgers. CI compiles them and checks the printed axioms against `wayfinder-scope.json`. These integer/count theorems do not certify floating-point arithmetic, adequate perturbation bounds, statistical significance, forecasts or task quality. Runtime adjacency construction and unchanged-anchor correspondence are checked separately.
+
+`map.math_diagnostics` reports signed margins in score units, distances to the threshold, bit values and conditional stability states. Per-axis thresholds and norms are shared under `axes`; per-input margins are under `per_input`. Without a numerical error bound the state is `needs-roundoff-bound`. Optional `perturbation_linf >= 0` and `roundoff_budget > 0` are caller-supplied, unverified assumptions. Any returned `stable-on`/`stable-off` state is conditional, never a certified floating-point or probabilistic guarantee. A near threshold state is `undetermined`, not a prediction that a text edit will flip the bit.
+
+### Preview an actual candidate before applying it
+
+`POST /api/map/preview` accepts the **full resulting corpus**, not only the candidate:
+
+```json
+{
+  "baseline_id": 123,
+  "texts": ["every unchanged original document", "the edited or added document"],
+  "names": ["docs/original.md", "docs/candidate.md"],
+  "target": { "action": "change", "name": "docs/candidate.md" },
+  "predicted_delta": -1
+}
+```
+
+The two-row example shows the schema only; a real request needs 10..400 rows. Use `action: "add"` for exactly one new name or `"change"` for one existing name. An unchanged target is accepted as an explicit no-op. Every non-target source SHA256 must match the baseline. Deletions, two changed sources, missing names, stale content and conflicting frame/settings are rejected before embedding.
+
+Pass **no** d, K, T, seed, frame, steps, threshold, ideal, preprocessing_id, labels, vectors or persist field to preview; it inherits the baseline instrument. `predicted_delta` is optional and finite. Diagnostic budgets are optional. The baseline must contain v0.2 full-precision points and chunked/v1 source hashes; otherwise create a new text baseline.
+
+The response includes `preview: true`, `persisted: false`, an ephemeral `map`, `math_ledger`, target margins, source hashes and unchanged-anchor counts. It never creates a map row, modifies a repository or writes Vectorize. The existing content-hash embedding cache may be updated. A storage outage returns 503; stale sources/anchors return 409; invalid shapes/budgets return 422.
+
+### Read the exact local ledger
+
+For ADD:
+
+`delta(isolated) = indicator(new degree == 0) - previously isolated neighbours touched`.
+
+For CHANGE, each neighbour's new degree is `old degree - old edge + new edge`, and the isolation ledger sums the zero-degree indicator differences plus the moved point's own indicator change. The ledger names the actual neighbours. It requires one added or moved point and an unchanged surrounding graph. Arithmetic disagreement with an independent recount halts the result; unsupported multi-item transitions are `not-applicable`.
+
+`math_ledger.reduction.ratio` is observed reduction / predicted reduction, only when the prediction is a strict decrease. Zero or positive predicted deltas are ineligible. This ratio describes the geometric model; it is neither calibrated confidence nor semantic quality.
+
+The UI's **Use as baseline** button retains the exact submitted text corpus in memory. Its candidate panel can preview one ADD or CHANGE without overwriting that baseline. Reloading clears this in-browser corpus, so create a fresh saved text baseline before using the panel again. The map prompt includes preview instructions; the homepage **Copy agent guide** button fetches this authoritative file rather than copying a baked-in recipe.
+
+Stored diagnostics use a lossless tuple encoding to stay within D1's row limit. Public reads decode the same object schema; frames and numbers are unchanged. An oversized stored result fails explicitly, with `persist:false` available for an ephemeral ordinary map.
+
+**Evidence boundary:** the exact ledger replays all ten historical PR 230 transitions, including three silent CHANGE operations and three neutral ADD operations. This is retrospective verification. It does not turn the historical 4/10 sign agreement into a 10/10 forecast result. Independent factual/task grading still governs whether a candidate should be kept.

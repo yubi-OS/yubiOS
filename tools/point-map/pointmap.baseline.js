@@ -27,7 +27,6 @@ var PM = (function () {
     threshold: "median", preprocessing_id: "raw/v1"
   };
   var ISO_RADIUS = 0.095;   // chord radius that defines an "isolated" point
-  var DIAGNOSTICS_VERSION = "wayfinder-math/1";   // additive diagnostics layer; the 0.2 instrument is unchanged
   var SECTORS = 12;         // anonymous geometric azimuthal sectors, numbered 1..12
   var FLUX_TOL = 1e-9;
 
@@ -443,9 +442,6 @@ var PM = (function () {
     opts = opts || {};
     const cfg = validate(X, opts);
     const { N, D, K, T, seed, steps, threshold, preprocessing_id } = cfg;
-    // additive diagnostics budgets: validated here so a bad budget fails before any work.
-    const perturbation_linf = reqBudget(opts.perturbation_linf, "perturbation_linf");
-    const roundoff_budget = reqBudget(opts.roundoff_budget, "roundoff_budget");
 
     // a freshly built frame is validated with the same rules as a supplied one: huge-but-finite
     // inputs can overflow the covariance and produce a non-finite frame, and that must surface as a
@@ -664,236 +660,11 @@ var PM = (function () {
       },
       spectra,
       certificates: certs,
-      math_diagnostics: {
-        diagnostics_version: DIAGNOSTICS_VERSION,
-        perturbation_linf, roundoff_budget,
-        radius: ISO_RADIUS,
-        units: MARGIN_UNITS,
-        axes: frame.input_pca.axes.map((axis,j)=>({axis:j,threshold:frame.input_pca.thresholds[j],norm1:axis.reduce((a,x)=>a+Math.abs(x),0),norm2:Math.hypot(...axis)})),
-        encoding: "per-input signed margins; thresholds/norms are shared in axes; no values are truncated",
-        per_input: X.map((row, i) => ({
-          index: i, name: cfg.names ? cfg.names[i] : null,
-          margins: projectionMargins(frame, row, perturbation_linf === null ? 0 : perturbation_linf,
-            roundoff_budget === null ? undefined : roundoff_budget).map(m => ({
-              axis:m.axis, signed_margin:m.signed_margin, distance_to_threshold:m.distance_to_threshold,
-              perturbation_bound:m.perturbation_bound, bit:m.bit, status:m.status
-            }))
-        })),
-        scope: MARGIN_SCOPE + " Diagnostic only: no new score, ranking or claim is derived from these margins."
-      },
       summary: {
         identity_failures: certs.filter(c => c.class === "identity" && !c.ok).length,
         measurement_red: certs.filter(c => c.class === "measurement" && !c.ok).length
       }
     };
-  }
-
-
-  // ---- wayfinder-math/1: additive diagnostics ------------------------------
-  // Everything below is DIAGNOSTIC. It does not touch the frame, the hashes, the geometry, the
-  // certificates or any 0.2 result field, and it introduces no score, ranking or probability.
-  function reqBudget(v, label) {
-    if (v === undefined || v === null) return null;
-    if (typeof v !== "number" || !Number.isFinite(v) || v < 0) throw new RangeError(label + " must be a finite number >= 0 (got " + String(v) + ")");
-    return v;
-  }
-  var MARGIN_UNITS = "score units of this frozen axis (axis-scaled input units)";
-  var MARGIN_SCOPE = "Conditional on the supplied L-infinity input perturbation and floating-point roundoff bounds; a half-space stability statement about this frozen axis only. No claim about text edits.";
-
-  // Signed distance of one input vector to each frozen per-axis threshold, on the axes the frame
-  // already carries. Nothing is refitted here.
-  function projectionMargins(frame, vector, epsilonInf, roundoffBudget) {
-    if (!frame || typeof frame !== "object" || !frame.input_pca) throw new TypeError("projectionMargins(frame, vector, ...) needs a frame with input_pca");
-    const fp = frame.input_pca;
-    if(!Array.isArray(fp.mu)||!fp.mu.length||fp.mu.some(x=>!Number.isFinite(x))||!Array.isArray(fp.axes)||!Array.isArray(fp.thresholds)||fp.axes.length!==fp.thresholds.length||fp.thresholds.some(x=>!Number.isFinite(x))||fp.axes.some(a=>!Array.isArray(a)||a.length!==fp.mu.length||a.some(x=>!Number.isFinite(x))))throw new RangeError("invalid finite projection frame");
-    if (!Array.isArray(fp.mu) || !Array.isArray(fp.axes) || !Array.isArray(fp.thresholds)) throw new TypeError("frame.input_pca must carry arrays mu, axes, thresholds");
-    if (!Array.isArray(vector)) throw new TypeError("vector must be an array of finite numbers");
-    if (vector.length !== fp.mu.length) throw new RangeError("vector length " + vector.length + " does not match the frame input D=" + fp.mu.length);
-    for (let k = 0; k < vector.length; k++) { const x = vector[k]; if (typeof x !== "number" || !Number.isFinite(x)) throw new RangeError("vector[" + k + "] must be a finite number (got " + String(x) + ")"); }
-    const eps = epsilonInf === undefined || epsilonInf === null ? 0 : reqBudget(epsilonInf, "epsilonInf");
-    const round = reqBudget(roundoffBudget, "roundoffBudget");
-    return fp.axes.map((axis, j) => {
-      let score = 0; for (let k = 0; k < axis.length; k++) score += axis[k] * (vector[k] - fp.mu[k]);
-      const threshold = fp.thresholds[j];
-      const signed = score - threshold;
-      let norm1 = 0; for (let k = 0; k < axis.length; k++) norm1 += Math.abs(axis[k]);
-      let norm2 = 0; for (let k = 0; k < axis.length; k++) norm2 += axis[k] * axis[k];
-      norm2 = Math.sqrt(norm2);
-      const radius = round === null ? null : eps * norm1 + round;
-      if(!Number.isFinite(score)||!Number.isFinite(signed)||!Number.isFinite(norm1)||!Number.isFinite(norm2)||(radius!==null&&!Number.isFinite(radius)))throw new RangeError("projection bound overflow");
-      const status = radius === null ? "needs-roundoff-bound"
-        : signed > radius ? "stable-on"
-        : signed <= -radius ? "stable-off"
-        : "undetermined";
-      return {
-        axis: j, score, threshold, signed_margin: signed,
-        norm1, norm2,
-        distance_to_threshold: Math.abs(signed),
-        distance_l2_to_hyperplane: norm2 ? Math.abs(signed) / norm2 : null,
-        perturbation_bound: radius,
-        bound_validation: "caller-supplied-unverified", certified:false,
-        bit: score > threshold ? 1 : 0,          // identical rule to frameOps().bitsOf
-        status, units: MARGIN_UNITS, scope: MARGIN_SCOPE
-      };
-    });
-  }
-
-  // exact isolated-count deltas on a simple graph. Identity arithmetic, not a measurement.
-  function checkEdges(v, label) {
-    if (!Array.isArray(v)) throw new TypeError(label + " must be an array of 0/1 edge flags");
-    v.forEach((e, i) => { if (e !== 0 && e !== 1) throw new RangeError("invalid " + label + "[" + i + "]: edges must be 0 or 1 (got " + String(e) + ")"); });
-  }
-  function checkDegrees(d) {
-    if (!Array.isArray(d)) throw new TypeError("oldDegrees must be an array of non-negative integers");
-    d.forEach((x, i) => { if (!Number.isInteger(x) || x < 0) throw new RangeError("invalid degree[" + i + "]: " + String(x)); });
-  }
-  function isolationDeltaAdd(oldDegrees, newEdges) {
-    checkDegrees(oldDegrees); checkEdges(newEdges, "newEdges");
-    if (oldDegrees.length !== newEdges.length) throw new RangeError("invalid ledger: degrees/edges length mismatch");
-    const newDegree = newEdges.reduce((a, b) => a + b, 0);
-    let touched = 0;
-    for (let i = 0; i < oldDegrees.length; i++) if (oldDegrees[i] === 0 && newEdges[i] === 1) touched++;
-    return { delta: (newDegree === 0 ? 1 : 0) - touched, new_degree: newDegree, previous_isolates_touched: touched };
-  }
-  function isolationDeltaChange(oldDegrees, oldEdges, newEdges, vertex) {
-    checkDegrees(oldDegrees); checkEdges(oldEdges, "oldEdges"); checkEdges(newEdges, "newEdges");
-    const n = oldDegrees.length;
-    if (!Number.isInteger(vertex) || vertex < 0 || vertex >= n) throw new RangeError("invalid vertex " + String(vertex));
-    if (oldEdges.length !== n || newEdges.length !== n) throw new RangeError("invalid ledger: edge row length mismatch");
-    if (oldEdges[vertex] !== 0 || newEdges[vertex] !== 0) throw new RangeError("invalid ledger: self-loop on the moved vertex");
-    if (oldEdges.reduce((a, b) => a + b, 0) !== oldDegrees[vertex]) throw new RangeError("invalid ledger: old degree disagrees with the old edge row");
-    const newDegree = newEdges.reduce((a, b) => a + b, 0);
-    let delta = (newDegree === 0 ? 1 : 0) - (oldDegrees[vertex] === 0 ? 1 : 0);
-    const touched = [];
-    for (let j = 0; j < n; j++) {
-      if (j === vertex) continue;
-      const post = oldDegrees[j] - oldEdges[j] + newEdges[j];   // deg'_j = deg_j - old edge + new edge
-      if (post < 0) throw new RangeError("invalid ledger: negative post-degree at " + j);
-      if (oldEdges[j] !== newEdges[j]) touched.push(j);
-      delta += (post === 0 ? 1 : 0) - (oldDegrees[j] === 0 ? 1 : 0);
-    }
-    return { delta, new_degree: newDegree, old_degree: oldDegrees[vertex], touched_neighbours: touched };
-  }
-
-  // ---- explainTransition ----------------------------------------------------
-  function degreesOf(P) {
-    return P.map((p, i) => P.reduce((acc, q, j) => acc + (j !== i && chord(p, q) < ISO_RADIUS ? 1 : 0), 0));
-  }
-  function samePoint(p, q) { return p.length === q.length && p.every((x, i) => x === q[i]); }
-  function pointsOf(res, which) {
-    if (!res || typeof res !== "object") throw new TypeError(which + " must be a runMap result");
-    if (!Array.isArray(res.pts_full)) return null;
-    for (const p of res.pts_full) if (!Array.isArray(p) || p.length !== 3 || p.some(x => typeof x !== "number" || !Number.isFinite(x))) return null;
-    return res.pts_full;
-  }
-  function notApplicable(reason, extra) {
-    return Object.assign({
-      diagnostics_version: DIAGNOSTICS_VERSION, kind: "not-applicable", reason,
-      added_name: null, moved_name: null, ledger: null,
-      correspondence: { status: "not-applicable", note: "no ledger is claimed for this transition" },
-      reduction: { eligible: false, ratio: null, reason: "no applicable ledger", scope: RATIO_SCOPE },
-      retrospective: true, scope: TRANSITION_SCOPE
-    }, extra || {});
-  }
-  var TRANSITION_SCOPE = "Retrospective post-edit reconstruction on one frozen frame: it explains where the isolated count went, it is not a pre-edit forecast and not a prediction.";
-  var RATIO_SCOPE = "A geometric ledger ratio of observed to predicted isolated-count reduction. Not calibrated confidence and not task quality.";
-
-  function explainTransition(before, after, opts) {
-    opts = opts || {};
-    if (!before || !after) throw new TypeError("explainTransition(before, after) needs two runMap results");
-    if (before.frame_id !== after.frame_id) throw new RangeError("frame_id mismatch (" + before.frame_id + " vs " + after.frame_id + "): the two maps are not on the same frozen frame");
-    if (before.instrument_id !== after.instrument_id) throw new RangeError("instrument_id mismatch (" + before.instrument_id + " vs " + after.instrument_id + "): settings differ between the two runs");
-    const bi = nameIndex(before, "before"), ai = nameIndex(after, "after");
-    let predicted = null;
-    if (opts.predicted_delta !== undefined && opts.predicted_delta !== null) {
-      if (typeof opts.predicted_delta !== "number" || !Number.isFinite(opts.predicted_delta)) throw new RangeError("predicted_delta must be a finite number (got " + String(opts.predicted_delta) + ")");
-      predicted = opts.predicted_delta;
-    }
-    const reduction = (actual) => {
-      if (predicted === null) return { eligible: false, ratio: null, reason: "no predicted_delta supplied", scope: RATIO_SCOPE };
-      if (predicted >= 0) return { eligible: false, ratio: null, reason: "prediction is not a strict decrease", scope: RATIO_SCOPE };
-      return { eligible: true, ratio: (-actual) / (-predicted), predicted_delta: predicted, scope: RATIO_SCOPE };
-    };
-
-    const PB = pointsOf(before, "before"), PA = pointsOf(after, "after");
-    if (!PB || !PA) return notApplicable("missing full-precision pts_full on " + (!PB ? "before" : "after") + ": rounded pts are not exact enough for r=" + ISO_RADIUS + " adjacency");
-    if (PB.length !== bi.size || PA.length !== ai.size) return notApplicable("names and pts_full disagree in length");
-
-    // measurement: isolated counts recomputed from the coordinates, independent of any ledger
-    const isoB = isolatedCount(PB), isoA = isolatedCount(PA);
-    if (Number.isInteger(before.isolated) && before.isolated !== isoB) throw new Error("before.isolated " + before.isolated + " disagrees with the isolated count recomputed from before.pts_full (" + isoB + ")");
-    if (Number.isInteger(after.isolated) && after.isolated !== isoA) throw new Error("after.isolated " + after.isolated + " disagrees with the isolated count recomputed from after.pts_full (" + isoA + ")");
-    const actual = isoA - isoB;
-    const measurement = { class: "measurement", isolated_before: isoB, isolated_after: isoA, actual_delta: actual,
-      note: "the isolated counts are a measurement of this corpus on the frozen frame; the ledger arithmetic above is an identity, these two counts are not" };
-
-    const added = [], removed = [];
-    for (const n of ai.keys()) if (!bi.has(n)) added.push(n);
-    for (const n of bi.keys()) if (!ai.has(n)) removed.push(n);
-    const moved = [];
-    for (const [n, i] of bi) if (ai.has(n) && !samePoint(PB[i], PA[ai.get(n)])) moved.push(n);
-
-    const finish = (kind, ledger, extra) => {
-      if (ledger.delta !== actual) {
-        throw new Error("math ledger mismatch: " + kind + " ledger predicts an isolated-count delta of " + ledger.delta +
-          " but the independently recomputed delta is " + actual + " — this is an arithmetic failure, not a measurement disagreement");
-      }
-      return Object.assign({
-        diagnostics_version: DIAGNOSTICS_VERSION, kind,
-        added_name: null, moved_name: null,
-        ledger: Object.assign({ class: "identity", actual_delta: actual }, ledger),
-        measurement,
-        correspondence: { status: "lean-known", theorem:kind === "ADD" ? "WayfinderBounds.add_isolation_delta" : "WayfinderBounds.change_isolation_delta",
-          note:"Exact integer/count identity kernel-checked on Lean 4.33.0. Runtime adjacency construction and floating-point bounds remain separate obligations." },
-        reduction: reduction(actual),
-        retrospective: true, scope: TRANSITION_SCOPE
-      }, extra || {});
-    };
-
-    if (removed.length) return notApplicable("removed name(s) (" + removed.slice(0, 5).join(", ") + "): only ADD (exactly one new name) and CHANGE (no names added or removed) carry a ledger");
-    if (added.length > 1) return notApplicable("ADD requires exactly 1 new name, got " + added.length + " (" + added.slice(0, 5).join(", ") + ")");
-
-    const degB = degreesOf(PB);
-    if (added.length === 1) {
-      if (moved.length) return notApplicable("ADD requires every old edge unchanged, but " + moved.length + " common point(s) moved (" + moved.slice(0, 5).join(", ") + ")");
-      const q = ai.get(added[0]);
-      const links = [], touchedNames = [];
-      for (const [n, i] of bi) {
-        const e = chord(PA[ai.get(n)], PA[q]) < ISO_RADIUS ? 1 : 0;
-        links[i] = e;
-        if (e === 1 && degB[i] === 0) touchedNames.push(n);
-      }
-      const L = isolationDeltaAdd(degB, links);
-      return finish("ADD", {
-        theorem: "isolated'(G + v) - isolated(G) = [deg(v) = 0] - #{u : deg(u) = 0 and u ~ v}",
-        delta: L.delta, new_degree: L.new_degree,
-        previous_isolates_touched: L.previous_isolates_touched,
-        previous_isolates_touched_names: touchedNames,
-        radius: ISO_RADIUS
-      }, { added_name: added[0] });
-    }
-
-    if (moved.length > 1) return notApplicable("CHANGE covers 0 or 1 moved common point, got " + moved.length + " (" + moved.slice(0, 5).join(", ") + ")");
-    if (moved.length === 0) {
-      return finish("CHANGE", {
-        theorem: "no point moved on the frozen frame: the adjacency graph, and therefore the isolated count, is unchanged",
-        delta: 0, new_degree: null, touched_neighbour_names: [], radius: ISO_RADIUS
-      }, { moved_name: null, correspondence:{status:"lean-known",theorem:"WayfinderBounds.change_neutral",note:"Unchanged adjacency and degrees checked at runtime; the neutral exact ledger is kernel-checked."} });
-    }
-    const name = moved[0], v = bi.get(name);
-    const oldEdges = [], newEdges = [], touchedNames = [];
-    for (const [n, i] of bi) {
-      oldEdges[i] = i !== v && chord(PB[i], PB[v]) < ISO_RADIUS ? 1 : 0;
-      newEdges[i] = i !== v && chord(PA[ai.get(n)], PA[ai.get(name)]) < ISO_RADIUS ? 1 : 0;
-    }
-    const C = isolationDeltaChange(degB, oldEdges, newEdges, v);
-    const nameByIndex = new Map(); for (const [n, i] of bi) nameByIndex.set(i, n);
-    C.touched_neighbours.forEach(j => touchedNames.push(nameByIndex.get(j)));
-    return finish("CHANGE", {
-      theorem: "deg'_j = deg_j - [j ~ v before] + [j ~ v after]; isolated' - isolated = sum_j ([deg'_j = 0] - [deg_j = 0])",
-      delta: C.delta, new_degree: C.new_degree, old_degree: C.old_degree,
-      touched_neighbour_names: touchedNames, radius: ISO_RADIUS
-    }, { moved_name: name });
   }
 
   // ---- before/after comparison on one frozen frame --------------------------
@@ -906,7 +677,7 @@ var PM = (function () {
     });
     return idx;
   }
-  function compareMaps(before, after, diagnosticsOptions) {
+  function compareMaps(before, after) {
     if (!before || !after) throw new TypeError("compareMaps(before, after) needs two runMap results");
     if (before.frame_id !== after.frame_id) throw new RangeError("frame_id mismatch (" + before.frame_id + " vs " + after.frame_id + "): the two maps are not on the same frozen frame");
     if (before.instrument_id !== after.instrument_id) throw new RangeError("instrument_id mismatch (" + before.instrument_id + " vs " + after.instrument_id + "): settings differ between the two runs");
@@ -959,9 +730,7 @@ var PM = (function () {
       geometry_decision: changed.length ? "moved" : "stable",
       geometry_decision_note: "diagnostic only: geometry says where points went on a frozen frame, it does not say whether the change was correct or useful",
       task_verdict: "not-tested",
-      task_verdict_note: "whether the underlying task improved is not tested here and must be checked by a task-specific independent verifier",
-      // additive: the exact isolated-count ledger for this transition (same frame, same name set).
-      math_ledger: explainTransition(before, after, diagnosticsOptions)
+      task_verdict_note: "whether the underlying task improved is not tested here and must be checked by a task-specific independent verifier"
     };
   }
 
@@ -970,8 +739,6 @@ var PM = (function () {
 
   return {
     runMap, compareMaps, synth, mulberry32, slerp, hashVec, hashStr, reduce, buildFrame,
-    projectionMargins, explainTransition,
-    _internal: { V2, nullDraw, assertFluxIdentity, pcaTop, frameOps, stationary, sectorIndex, isolatedCount, canonical, hashObj, validate,
-      isolationDeltaAdd, isolationDeltaChange, degreesOf, reqBudget, DIAGNOSTICS_VERSION }
+    _internal: { V2, nullDraw, assertFluxIdentity, pcaTop, frameOps, stationary, sectorIndex, isolatedCount, canonical, hashObj, validate }
   };
 })();

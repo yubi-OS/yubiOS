@@ -39,6 +39,29 @@ jobs:
           ! grep -n "sorry" papers/data/lean/CurvedCorpus.lean
           echo "NO_SORRY_OK"
 
+      - name: Check WayfinderBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/WayfinderBounds.lean > /tmp/wayfinder-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/WayfinderBounds.lean"
+            cat /tmp/wayfinder-axioms.txt
+            exit 1
+          }
+          cat /tmp/wayfinder-axioms.txt
+          echo "LEAN_OK: papers/data/lean/WayfinderBounds.lean checks with no sorry"
+
+      - name: Validate scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 -c "import json; d=json.load(open('papers/data/lean/wayfinder-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+
+      - name: Assert printed axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/wayfinder-axioms.txt \
+            --manifest papers/data/lean/wayfinder-scope.json
+
   verify-measurements:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -66,6 +89,9 @@ jobs:
           node tools/point-map/test-pointmap.js
           node tools/point-map/test-api.mjs
           node --test tools/point-map/test-tar.mjs
+          node tools/point-map/test-math.mjs
+          node tools/point-map/test-preview.mjs
+          node tools/point-map/test-storage.mjs
 
       - name: corpus-auditor selftest
         run: python3 tools/corpus-auditor/auditor.py --selftest

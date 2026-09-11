@@ -3,8 +3,12 @@
   "private": true,
   "version": "0.2.0",
   "scripts": {
-    "test": "node test-pointmap.js && node test-api.mjs && node --test test-tar.mjs",
-    "build": "node build.mjs"
+    "test": "node test-pointmap.js && node test-api.mjs && node --test test-tar.mjs && node test-math.mjs && node test-preview.mjs && node test-storage.mjs",
+    "build": "node build.mjs",
+    "test:browser": "node browser-tests/make-fixtures.mjs && node browser-tests/browser-test.mjs"
   },
-  "devDependencies": { "esbuild": "0.25.12" }
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "puppeteer-core": "25.5.0"
+  }
 }

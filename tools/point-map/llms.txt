@@ -15,3 +15,6 @@ GET /map/pointmap.js
 Create a baseline once. Reuse baseline_id for edits. K=2..40; map N=10..400,D=2..768. Names must be unique and aligned. No client-side PCA required.
 Geometry is diagnostic; task_verdict remains not-tested until an independent task verifier is run. Sectors carry no validated NSS meaning. No automatic deletions. Spectroscopy summaries are not admitted coordinates. Do not send secrets to shared public map storage.
 Legacy /api/assess,/api/fits,/api/narrate remain separate from the wayfinder.
+
+POST /api/map/preview {baseline_id,texts,names,target:{action:"add"|"change",name},predicted_delta?}: actual candidate, frozen frame, exact local ledger; no map/repository/Vectorize writes. Embedding cache may change.
+Optional diagnostic budgets perturbation_linf>=0 and roundoff_budget>0 are caller-supplied/unverified, excluded from instrument identity. map.math_diagnostics is additive to pointmap/0.2.

@@ -23,6 +23,12 @@ html{scrollbar-color:#DB46F5 #0a0e12;scrollbar-width:thin}
 .badge{display:inline-block;border:1px solid var(--dim);border-radius:3px;padding:0 4px;font-size:85%;color:var(--dim)}
 #inputerrors{display:none;margin-top:8px;border-left:3px solid var(--bad);padding:6px 10px;color:var(--bad);font-size:90%}
 #comparebox{display:none}
+.candrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:6px}
+#canderrors{display:none;margin-top:8px;border-left:3px solid var(--bad);padding:6px 10px;color:var(--bad);font-size:90%}
+#previewout{display:none;margin-top:10px;border-left:3px solid var(--acc);padding:8px 10px}
+#previewout h3{font-size:12px;margin:10px 0 4px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+#previewout h3:first-child{margin-top:0}
+#candbaseline{margin-bottom:8px}
 </style></head><body>
 <header><h1>SOS AGENT <span class="dim">/ latent space map · pointmap/0.2</span></h1>
 <select id="src"><option value="synthetic">synthetic cloud (client)</option><option value="vectors">paste vectors JSON</option><option value="texts">texts → server embed + map (/api/map)</option></select>
@@ -59,6 +65,19 @@ html{scrollbar-color:#DB46F5 #0a0e12;scrollbar-width:thin}
 <div class="card"><h2>spectroscopy diagnostic <span class="badge">NOT ADMITTED</span><span class="gi" data-tip="S² spherical-harmonic band shares of the point cloud. Explicitly not an IR/Raman measurement, not a physical signal, and not a quality score. Kept fully separate from the certificates/score.">i</span></h2><div id="spectra"></div></div>
 <div class="card"><h2>bridge (Lean §6)<span class="gi" data-tip="Slerp bridge: the geodesic ladder of single-action atoms from the farthest item to the frozen pole; normalised endpoints, stable at coincident and antipodal points.">i</span></h2><div id="bridge" class="kv"></div></div>
 <div class="card"><h2>result<span class="gi" data-tip="The full MapResult — frame, frame_id, instrument_id, rule, keys, points, ladder. Maps with the same frame_id are placed on the same frozen frame; compareMaps additionally requires the same instrument_id.">i</span></h2><div id="meta" class="kv"></div><div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button id="dl">download MapResult.json</button><button id="useBaseline" style="display:none">use as baseline</button></div></div>
+<div class="card" style="grid-column:1/-1"><h2>candidate preview — ephemeral, never persisted<span class="gi" data-tip="POST /api/map/preview measures ONE candidate ADD or CHANGE against a frozen stored baseline. It writes no map row, no repository commit and no Vectorize entry. The instrument (frame, d, K, T, seed, threshold) is inherited from the baseline and can never be set here.">i</span></h2>
+  <div id="candbaseline" class="dim"></div>
+  <div class="candrow">
+    <label>action <select id="candaction"><option value="add">ADD</option><option value="change">CHANGE</option></select></label>
+    <label>literal name <input id="candname" placeholder="skills/example/SKILL.md" style="width:280px"></label>
+    <label>predicted isolation delta <span class="dim">(optional)</span> <input id="canddelta" type="text" inputmode="decimal" placeholder="omitted" style="width:96px"></label>
+    <button id="preview" class="primary">preview</button>
+    <span id="candstatus" class="dim"></span>
+  </div>
+  <textarea id="candtext" placeholder="draft text for the candidate document — full content, no truncation"></textarea>
+  <div id="canderrors"></div>
+  <div id="previewout"></div>
+</div>
 <div class="card" style="grid-column:1/-1"><h2>certificates<span class="gi" data-tip="Two classes, never mixed: identity certificates must all pass (red = code defect, stop). Measurement certificates may fail — a failure is a finding.">i</span></h2><table id="certs"><thead><tr><th>class</th><th>theorem / check</th><th>ok</th><th>detail</th></tr></thead><tbody></tbody></table></div>
 </div></main>
 <script src="/map/pointmap.js"></script>

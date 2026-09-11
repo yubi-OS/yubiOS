@@ -7,7 +7,7 @@ function aligned(v,n,key,unique=false){
 }
 function options(body){
   const o={};
-  for(const [k,lo,hi,integer] of [['d',2,24,true],['K',2,40,true],['T',Number.MIN_VALUE,1e6,false],['seed',-2147483648,4294967295,true],['ideal',1,5,true],['steps',100,200000,true]]){
+  for(const [k,lo,hi,integer] of [['d',2,24,true],['K',2,40,true],['T',Number.MIN_VALUE,1e6,false],['seed',-2147483648,4294967295,true],['ideal',1,5,true],['steps',100,200000,true],['perturbation_linf',0,Number.MAX_VALUE,false],['roundoff_budget',Number.MIN_VALUE,Number.MAX_VALUE,false]]){
     if(body[k]==null)continue;const v=body[k];
     if(typeof v!=='number'||!Number.isFinite(v)||v<lo||v>hi||(integer&&!Number.isInteger(v)))throw new ApiError(422,`${k} must be ${integer?'an integer':'finite'} in ${lo}..${hi}`);o[k]=v;
   }
@@ -26,6 +26,7 @@ export async function mapRouteHandler(body,ctx){
   if(body.frame!==undefined)throw new ApiError(422,'use baseline_id; arbitrary frames are not accepted by the API');
   if(texts&&input.some(t=>typeof t!=='string'||!t.trim()))throw new ApiError(422,'texts must be nonempty strings');
   if(!texts){const D=input[0]?.length;if(!Number.isInteger(D)||D<2||D>768||input.some(r=>!Array.isArray(r)||r.length!==D||r.some(x=>typeof x!=='number'||!Number.isFinite(x))))throw new ApiError(422,'vectors must be finite rectangular rows, D=2..768');}
+  if(body.predicted_delta!=null&&(typeof body.predicted_delta!=='number'||!Number.isFinite(body.predicted_delta)))throw new ApiError(422,'predicted_delta must be a finite number');
   if(body.preprocessing_id!=null&&(typeof body.preprocessing_id!=='string'||!body.preprocessing_id.length))throw new ApiError(422,'preprocessing_id must be nonempty');
   const opts=options(body);let baseline=null;
   if(body.baseline_id!=null){
@@ -44,9 +45,12 @@ export async function mapRouteHandler(body,ctx){
   let map;try{map=PM.runMap(X,opts);}catch(e){throw new ApiError(422,`map identity/validation failed: ${e.message}`);}
   const source=texts?`texts:${embedding.model}`:'vectors';map.source=source;if(embedding)map.embedding_metadata=embedding.metadata;
   let comparison=null;
-  if(baseline){try{comparison=PM.compareMaps(baseline,map);}catch(e){comparison={comparable:false,task_verdict:'not-tested',reason:e.message};}}
+  if(baseline){try{comparison=PM.compareMaps(baseline,map,{predicted_delta:body.predicted_delta});}catch(e){if(!String(e.message).startsWith('name sets differ'))throw new ApiError(409,`comparison validation failed: ${e.message}`);comparison={comparable:false,task_verdict:'not-tested',reason:e.message};}}
+  let math_ledger=null;
+  const explain=ctx.explainTransition||(typeof PM.explainTransition==='function'?PM.explainTransition.bind(PM):null);
+  if(baseline&&explain){try{math_ledger=!ctx.explainTransition&&comparison?.math_ledger?comparison.math_ledger:explain(baseline,map,{predicted_delta:body.predicted_delta});}catch(e){throw new ApiError(409,`transition validation failed: ${e.message}`);}}
   const persist=body.persist!==false;const resultId=persist?await saveMap(map,source):null;
-  return {id:resultId,map,comparison,persisted:persist};
+  return {id:resultId,map,comparison,math_ledger,persisted:persist};
 }
 export async function mapsCompareHandler(body,ctx){
   const before=await ctx.loadStoredMap(id(body?.before_id,'before_id'));const after=await ctx.loadStoredMap(id(body?.after_id,'after_id'));
