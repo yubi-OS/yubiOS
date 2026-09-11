@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {encodeMap,decodeMap} from './lib/map-storage.mjs';
+const scope={TextEncoder,Uint8Array,Float32Array};vm.createContext(scope);
+vm.runInContext(fs.readFileSync(new URL('./pointmap.js',import.meta.url),'utf8'),scope);
+const PM=scope.PM;
+const m=PM.runMap(PM.synth(400,768,2),{d:24,K:2,steps:1000,perturbation_linf:0.1,roundoff_budget:1e-12,names:Array.from({length:400},(_,i)=>`docs/reference-${i}.md`)});
+const encoded=encodeMap(m),decoded=decodeMap(encoded);
+assert.ok(new TextEncoder().encode(encoded).length<1900000);
+assert.equal(JSON.stringify(decoded.math_diagnostics),JSON.stringify(m.math_diagnostics));
+assert.equal(decoded.frame_id,m.frame_id);assert.equal(decoded.instrument_id,m.instrument_id);
+assert.equal(JSON.stringify(decoded.bits),JSON.stringify(m.bits));
+const legacy={frame_id:'old',n:10};assert.deepEqual(decodeMap(encodeMap(legacy)),legacy);
+assert.throws(()=>encodeMap({...legacy,note:'x'.repeat(2000000)}),e=>e.status===413);
+console.log(JSON.stringify({checks:7,failed:0,unpacked_bytes:new TextEncoder().encode(JSON.stringify(m)).length,stored_bytes:new TextEncoder().encode(encoded).length,N:400,D:768,d:24,scope:'lossless diagnostic packing, unchanged frame and geometry'}));

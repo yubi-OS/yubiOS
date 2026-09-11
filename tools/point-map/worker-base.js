@@ -1,9 +1,11 @@
+import { encodeMap, decodeMap } from "./lib/map-storage.mjs";
 import { fetchCorpus } from "./lib/tar-corpus.mjs";
 // --- new/redesigned-route modules (see session/subagent/lib/*.mjs) ---
 import { ApiError, jsonResponse, errorResponse, readJsonLimited } from "./lib/http.mjs";
 import { embedDocuments, rememberChunkedEmbeddings } from "./lib/embed-pipeline.mjs";
 import { repoItemsHandler } from "./lib/repo-items.mjs";
 import { mapRouteHandler, mapsCompareHandler } from "./lib/map-route.mjs";
+import { mapPreviewHandler } from "./lib/preview-route.mjs";
 
 // src/github.ts
 var GH = "https://api.github.com";
@@ -789,6 +791,9 @@ POST /api/repo-items {"repo": "owner/repo", "subdir"?: "path", "ref"?: "branch-o
 POST /api/embed {"texts": string[]} -> { model, n, D, vectors, metadata }
 GET  /api/maps                 -> stored maps (metrics only)
 POST /api/maps/compare {"before_id": n, "after_id": n} -> comparison
+POST /api/map/preview {"baseline_id": n, "texts": [...full resulting corpus...], "names": [...], "target": {"action":"add"|"change","name":"..."}}
+     -> { preview:true, persisted:false, map, comparison, math_ledger, target, unchanged_source_count, unchanged_anchor_count, side_effects }
+     reads the stored baseline, re-embeds the actual candidate texts on the baseline's frozen frame and writes NOTHING (no map row, no Vectorize).
 GET  /api/health                -> read-only version info
 GET  /map/pointmap.js           -> static pointmap.js module
 `,
@@ -1071,15 +1076,35 @@ GET  /map/pointmap.js           -> static pointmap.js module
               await db.prepare(`CREATE TABLE IF NOT EXISTS maps (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT, rule_hash TEXT, seed INTEGER, n INTEGER, dim INTEGER, d INTEGER, v2 REAL, z_null REAL, verdict TEXT, classes INTEGER, identity_failures INTEGER, measurement_red INTEGER, source TEXT, map_json TEXT)`).run();
               const loadStoredMap = async (id) => {
                 const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                return row ? JSON.parse(row.map_json) : null;
+                return row ? decodeMap(row.map_json) : null;
               };
               const saveMap = async (map, source) => {
                 const ins = await db.prepare(`INSERT INTO maps (created_at, rule_hash, seed, n, dim, d, v2, z_null, verdict, classes, identity_failures, measurement_red, source, map_json) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`)
-                  .bind(new Date().toISOString(), map.rule_hash, map.seed, map.n, map.D, map.d, map.v2, map.null.z, map.null.verdict, map.classes.count, map.summary.identity_failures, map.summary.measurement_red, source, JSON.stringify(map)).run();
+                  .bind(new Date().toISOString(), map.rule_hash, map.seed, map.n, map.D, map.d, map.v2, map.null.z, map.null.verdict, map.classes.count, map.summary.identity_failures, map.summary.measurement_red, source, encodeMap(map)).run();
                 return ins?.meta?.last_row_id ?? (await db.prepare(`SELECT MAX(id) AS mid FROM maps`).first())?.mid;
               };
-              const { id, map, comparison } = await mapRouteHandler(body, { env, PM, embedDocuments, loadStoredMap, saveMap });
-              return json({ id, map, comparison });
+              const { id, map, comparison, math_ledger } = await mapRouteHandler(body, { env, PM, embedDocuments, loadStoredMap, saveMap });
+              return json({ id, map, comparison, ...(math_ledger ? { math_ledger } : {}) });
+            } catch (e) {
+              return errorResponse(e);
+            }
+          }
+          if (p === "/api/map/preview" && req.method === "POST") {
+            try {
+              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              // Read-only baseline load: no CREATE TABLE, no INSERT, no UPDATE.
+              // Storage outages are 503; only a successful empty SELECT means not found.
+              const loadStoredMap = async (id) => {
+                try {
+                  const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
+                  return row ? decodeMap(row.map_json) : null;
+                } catch (e) {
+                  console.error("preview baseline load failed:", String(e?.message || e));
+                  throw new ApiError(503, "map storage unavailable; retry later");
+                }
+              };
+              const result = await mapPreviewHandler(body, { env, PM, embedDocuments, loadStoredMap });
+              return json(result);
             } catch (e) {
               return errorResponse(e);
             }
@@ -1093,7 +1118,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
           if (mm && req.method === "GET") {
             const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(mm[1])).first();
             if (!row) return json({ error: "not found" }, 404);
-            return new Response(row.map_json, { headers: { "Content-Type": "application/json" } });
+            return json(decodeMap(row.map_json));
           }
           if (mm && req.method === "DELETE") { await db.prepare(`DELETE FROM maps WHERE id = ?`).bind(Number(mm[1])).run(); return json({ ok: true }); }
           if (p === "/api/maps/compare" && req.method === "POST") {
@@ -1101,7 +1126,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
               const body = await readJsonLimited(req, 8 * 1024 * 1024);
               const loadStoredMap = async (id) => {
                 const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                return row ? JSON.parse(row.map_json) : null;
+                return row ? decodeMap(row.map_json) : null;
               };
               const comparison = await mapsCompareHandler(body, { PM, loadStoredMap });
               return json({ comparison });
