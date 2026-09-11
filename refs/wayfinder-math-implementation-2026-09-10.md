@@ -62,3 +62,18 @@ Storage packing is lossless tuple encoding. Every map read path expands it to th
 The ten exact historical ledger replays remain retrospective. Three zero outcomes were unchanged CHANGE points; three were ADDs that joined already-connected neighbours. No new prospective edit benchmark is counted here, and the historical 4/10 sign agreement is not relabeled as 10/10 prediction.
 
 The final publication/deployment receipt is appended after remote CI and live verification. Existing `CurvedCorpus.lean`, measurement checks and all recorded scientific negatives are retained.
+
+
+## Final publication and live verification
+
+- PR [#231](https://github.com/yubi-OS/yubiOS/pull/231) merged as `41d5d47889e9c83b760944067ff8a2f87be0b176`.
+- Integrated branch CI: [https://github.com/yubi-OS/yubiOS/actions/runs/34570655611](https://github.com/yubi-OS/yubiOS/actions/runs/34570655611) passed all three jobs.
+- Main merge CI: [34570898261](https://github.com/yubi-OS/yubiOS/actions/runs/34570898261) passed.
+- Cloudflare Worker deployment `3413a5a0f7f44d45a9dc0f904632ee13` verified on the existing origin. All six public assets matched source SHA256.
+- Live API created text baseline **65** from 12 real refs documents. Stored diagnostic packing round-tripped exactly.
+- Preview noop: HTTP 200, `CHANGE`, isolated delta +0, 12 unchanged anchors, 9 target margin axes, no persisted map.
+- Preview change: HTTP 200, `CHANGE`, isolated delta +2, 11 unchanged anchors, 9 target margin axes, no persisted map.
+- Preview add: HTTP 200, `ADD`, isolated delta +1, 12 unchanged anchors, 9 target margin axes, no persisted map.
+- Saved map count did not change across the three previews. No repository or Vectorize writes occurred. Stale second-source mutation returned 409; zero roundoff budget returned 422.
+- Historical maps 51→52 still compare on the old frame and produce the exact -2 ledger.
+- The candidate texts were deliberately mechanical smoke tests; their +2/+1 isolation changes are recorded, not presented as improvements. No new prospective ten-edit success rate is claimed.
