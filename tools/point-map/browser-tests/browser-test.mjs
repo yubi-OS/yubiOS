@@ -113,10 +113,10 @@ async function run() {
       await page.waitForFunction("window.__clip.length > 0", { timeout: 8000 });
       const copied = await page.evaluate(() => window.__clip[0]);
 
-      check(`[${label}] copied text is byte-exact /AGENT.md`, copied === AGENT_MD,
+      check(`[${label}] copied text is a short introduction pointing to /AGENT.md`, copied.length < 1000 && copied !== AGENT_MD && copied.includes("https://steady-orbit.systems-a.workers.dev/AGENT.md") && copied.includes("source of truth"),
         `copied ${Buffer.byteLength(copied, "utf8")} bytes vs file ${AGENT_MD_BYTES.length} bytes`);
       check(`[${label}] copied text is NOT the old hardcoded recipe`,
-        !copied.includes("Ingest a corpus:") && copied.startsWith("# SOS AGENT"));
+        !copied.includes("Ingest a corpus:") && copied.startsWith("Use SOS Agent"));
       const okVisible = await page.$eval("#copyagent-ok", (e) => getComputedStyle(e).display !== "none");
       check(`[${label}] success indicator shown after a real copy`, okVisible);
 
@@ -125,37 +125,16 @@ async function run() {
       await page.close();
     }
 
-    // --- fetch failure must be visible, never a false "copied" ---
-    state.agentMdMode = "http500";   // in-process: node fetch to loopback is proxy-blocked here
-    {
+    // The introduction is independent of fetching the full guide.
+    for (const mode of ["http500", "empty"]) {
+      state.agentMdMode = mode;
       const page = await newPage(browser, DESKTOP, clipboardStub("ok", true));
-      await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
-      await clickSafe(page, "#copyagent");
-      await page.waitForFunction(
-        "document.getElementById('copyagent-err') && getComputedStyle(document.getElementById('copyagent-err')).display !== 'none'",
-        { timeout: 8000 });
-      const err = await page.$eval("#copyagent-err", (e) => e.textContent);
-      const href = await page.$eval("#copyagent-err a", (e) => e.getAttribute("href"));
-      const clip = await page.evaluate(() => window.__clip.length);
-      const okShown = await page.$eval("#copyagent-ok", (e) => getComputedStyle(e).display !== "none");
-      check("fetch failure surfaces a visible error", /couldn't copy the guide/.test(err), err.slice(0, 90));
-      check("fetch failure offers the /AGENT.md link", href === "/AGENT.md", href);
-      check("fetch failure copies NOTHING", clip === 0);
-      check("fetch failure never claims 'copied'", !okShown);
-      await page.screenshot({ path: path.join(shots, "home-copy-fetch-error.png") });
-      await page.close();
-    }
-
-    // --- empty guide is also a failure, not a silent empty copy ---
-    state.agentMdMode = "empty";
-    {
-      const page = await newPage(browser, DESKTOP, clipboardStub("ok", true));
-      await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
-      await clickSafe(page, "#copyagent");
-      await page.waitForFunction(
-        "getComputedStyle(document.getElementById('copyagent-err')).display !== 'none'", { timeout: 8000 });
-      const clip = await page.evaluate(() => window.__clip.length);
-      check("empty guide is rejected, nothing copied", clip === 0);
+      await page.goto(BASE + "/", {waitUntil:"domcontentloaded"});
+      await clickSafe(page,"#copyagent");
+      await page.waitForFunction("window.__clip.length > 0",{timeout:8000});
+      const copied=await page.evaluate(()=>window.__clip[0]);
+      check(mode+": introduction copies without fetching the full guide",copied.length<1000 && copied.includes("source of truth"));
+      check(mode+": introduction retains the canonical source URL",copied.includes("https://steady-orbit.systems-a.workers.dev/AGENT.md"));
       await page.close();
     }
 

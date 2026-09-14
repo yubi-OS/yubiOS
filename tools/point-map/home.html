@@ -489,24 +489,8 @@
         var okEl = document.getElementById("copyagent-ok");
         var errEl = document.getElementById("copyagent-err");
         var GUIDE_URL = "/AGENT.md";
-        var pending = null;
-
-        // Single source of truth: the guide text is whatever /AGENT.md currently
-        // serves. Fetched once on page init and cached for the life of the page.
-        // There is no hardcoded copy of the recipe to drift out of date.
-        function guide() {
-          if (!pending) {
-            pending = fetch(GUIDE_URL, { cache: "no-store" }).then(function (r) {
-              if (!r.ok) throw new Error("HTTP " + r.status);
-              return r.text();
-            }).then(function (t) {
-              if (!t || !t.trim()) throw new Error("empty guide");
-              return t;
-            }).catch(function (e) { pending = null; throw e; });
-          }
-          return pending;
-        }
-        guide().catch(function () {});   // warm the cache; a failure is surfaced on click, never swallowed
+        // Copies an introduction; AGENT.md remains the source of truth.
+        var INTRO_PROMPT = "Use SOS Agent to assess and improve the corpus I provide.\n\nFirst read https://steady-orbit.systems-a.workers.dev/AGENT.md in full and treat it as the source of truth for the current API, equations, constraints and workflow.\n\nFollow the guide to create a frozen baseline, preview candidate edits and verify their measured effects before changing the corpus. Keep task-quality checks separate from geometric measurements. If you cannot read the guide, stop rather than guessing.";
 
         function showOk() {
           errEl.style.display = "none";
@@ -539,13 +523,9 @@
 
         btn.addEventListener("click", function () {
           errEl.style.display = "none";
-          guide().then(function (text) {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(text).then(showOk).catch(function () { fallbackCopy(text); });
-            } else {
-              fallbackCopy(text);
-            }
-          }).catch(function (e) { showErr(e && e.message ? e.message : "fetch failed"); });
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(INTRO_PROMPT).then(showOk).catch(function () { fallbackCopy(INTRO_PROMPT); });
+          } else { fallbackCopy(INTRO_PROMPT); }
         });
       })();
     </script>

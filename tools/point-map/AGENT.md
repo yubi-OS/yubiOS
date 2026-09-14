@@ -124,7 +124,7 @@ For CHANGE, each neighbour's new degree is `old degree - old edge + new edge`, a
 
 `math_ledger.reduction.ratio` is observed reduction / predicted reduction, only when the prediction is a strict decrease. Zero or positive predicted deltas are ineligible. This ratio describes the geometric model; it is neither calibrated confidence nor semantic quality.
 
-The UI's **Use as baseline** button retains the exact submitted text corpus in memory. Its candidate panel can preview one ADD or CHANGE without overwriting that baseline. Reloading clears this in-browser corpus, so create a fresh saved text baseline before using the panel again. The map prompt includes preview instructions; the homepage **Copy agent guide** button fetches this authoritative file rather than copying a baked-in recipe.
+The UI's **Use as baseline** button retains the exact submitted text corpus in memory. Its candidate panel can preview one ADD or CHANGE without overwriting that baseline. Reloading clears this in-browser corpus, so create a fresh saved text baseline before using the panel again. The map prompt includes preview instructions; the homepage **Copy agent guide** button copies a concise introduction prompt directing the receiving agent to read this file as the source of truth.
 
 Stored diagnostics use a lossless tuple encoding to stay within D1's row limit. Public reads decode the same object schema; frames and numbers are unchanged. An oversized stored result fails explicitly, with `persist:false` available for an ephemeral ordinary map.
 
