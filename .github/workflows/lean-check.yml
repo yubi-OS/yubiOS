@@ -62,6 +62,34 @@ jobs:
             --axioms /tmp/wayfinder-axioms.txt \
             --manifest papers/data/lean/wayfinder-scope.json
 
+      - name: Check RadiusBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/RadiusBounds.lean > /tmp/radius-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/RadiusBounds.lean"
+            cat /tmp/radius-axioms.txt
+            exit 1
+          }
+          cat /tmp/radius-axioms.txt
+          echo "LEAN_OK: papers/data/lean/RadiusBounds.lean checks with no sorry"
+
+      - name: Assert no sorry in RadiusBounds.lean
+        run: |
+          ! grep -n "sorry" papers/data/lean/RadiusBounds.lean
+          echo "NO_SORRY_OK radius"
+
+      - name: Validate radius scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 -c "import json; d=json.load(open('papers/data/lean/radius-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('RADIUS_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+
+      - name: Assert printed radius axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/radius-axioms.txt \
+            --manifest papers/data/lean/radius-scope.json
+
   verify-measurements:
     runs-on: ubuntu-latest
     timeout-minutes: 30

@@ -1,0 +1,175 @@
+{
+  "schema": "wayfinder-scope/1",
+  "lean_file": "papers/data/lean/RadiusBounds.lean",
+  "toolchain": "leanprover/lean4:v4.33.0",
+  "dependencies": "core Lean 4 only (no mathlib, no Batteries, no external imports)",
+  "generated_for_branch": "lean-check-radius-2026-09-13",
+  "gate_reuse": "Checked by the existing, unmodified papers/data/lean/verify_wayfinder_axioms.py, invoked with --axioms <captured kernel output> --manifest papers/data/lean/radius-scope.json. No existing gate, test, or recorded negative was changed or relaxed to admit this file.",
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "forbidden_axioms": [
+    "sorryAx"
+  ],
+  "axiom_policy": "Every declaration listed in `theorems` must appear in the `#print axioms` output of the pinned kernel run. Its reported axiom set must be a subset of `permitted_axioms` (the three core Lean assumptions). Any other axiom, and in particular `sorryAx`, fails the gate. A missing declaration fails the gate. The gate parses the kernel's printed output; it does not grep source comments.",
+  "tie_convention": "A pair is CONNECTED at radius r iff d < r (strict); a tie d = r is NOT an edge. A point is ISOLATED at radius r iff r <= d, so ties fall on the off/isolated side. RadiusBounds.conn_iso_complementary pins this complementarity in the kernel.",
+  "perturbation_premise": "In the Int perturbation theorems, the bound 2*e on the change of a pair distance is a PREMISE supplied by the caller. Lean does not prove that the floating-point implementation respects any such bound; that is a runtime obligation.",
+  "theorems": [
+    {
+      "name": "RadiusBounds.conn_iso_complementary",
+      "status": "lean-proved",
+      "statement": "connAt distance radius + isoAt distance radius = 1 (Nat)",
+      "runtime_counterpart": "point-map strict-edge / isolation predicate pair",
+      "runtime_predicate": "edge iff d < r (strict); isolated iff r <= d; ties are isolated, never edges"
+    },
+    {
+      "name": "RadiusBounds.isoAt_le_one",
+      "status": "lean-proved",
+      "statement": "isoAt distance radius <= 1 (Nat)",
+      "runtime_counterpart": "per-point isolation indicator",
+      "runtime_predicate": "the indicator is a 0/1 bit, never a multiplicity"
+    },
+    {
+      "name": "RadiusBounds.isoAt_zero",
+      "status": "lean-proved",
+      "statement": "isoAt distance 0 = 1 (Nat)",
+      "runtime_counterpart": "degenerate radius-0 endpoint of a radius sweep",
+      "runtime_predicate": "at radius 0 no pair is an edge, so every point is isolated"
+    },
+    {
+      "name": "RadiusBounds.isoAt_tie",
+      "status": "lean-proved",
+      "statement": "isoAt distance distance = 1 (Nat)",
+      "runtime_counterpart": "exact strict-threshold tie case in the radius sweep",
+      "runtime_predicate": "at radius exactly equal to the nearest-neighbour distance the point counts as isolated"
+    },
+    {
+      "name": "RadiusBounds.isoAt_antitone",
+      "status": "lean-proved",
+      "statement": "r <= s implies isoAt distance s <= isoAt distance r (Nat)",
+      "runtime_counterpart": "per-point radius sweep",
+      "runtime_predicate": "a point that is isolated at a larger radius is isolated at every smaller radius"
+    },
+    {
+      "name": "RadiusBounds.isoCount_nil",
+      "status": "lean-proved",
+      "statement": "isoCount [] r = 0 (Nat)",
+      "runtime_counterpart": "empty-list base case of the isolate census",
+      "runtime_predicate": "no points means no isolates at any radius"
+    },
+    {
+      "name": "RadiusBounds.isoCount_cons",
+      "status": "lean-proved",
+      "statement": "isoCount (d :: ds) r = isoAt d r + isoCount ds r (Nat)",
+      "runtime_counterpart": "accumulation step of the isolate census",
+      "runtime_predicate": "the census sums each point's indicator exactly once"
+    },
+    {
+      "name": "RadiusBounds.radius_count_antitone",
+      "status": "lean-proved",
+      "statement": "r <= s implies isoCount distances s <= isoCount distances r (Nat)",
+      "runtime_counterpart": "I(r) isolate-count curve over a radius sweep",
+      "runtime_predicate": "the isolate count is antitone in the radius: enlarging the radius never increases it"
+    },
+    {
+      "name": "RadiusBounds.isoCount_le_length",
+      "status": "lean-proved",
+      "statement": "isoCount ds r <= ds.length (Nat)",
+      "runtime_counterpart": "I(r) normalisation sanity bound",
+      "runtime_predicate": "the isolate count never exceeds the number of points"
+    },
+    {
+      "name": "RadiusBounds.isolated_perturbation",
+      "status": "lean-proved",
+      "statement": "r + 2*e <= d and d <= dnew + 2*e implies r <= dnew (Int)",
+      "runtime_counterpart": "conditional isolate-persistence check under a bounded coordinate perturbation",
+      "runtime_predicate": "a pair with integer clearance at least 2*e stays a non-edge; the bound 2*e is a supplied premise, not a proved float property"
+    },
+    {
+      "name": "RadiusBounds.connected_perturbation",
+      "status": "lean-proved",
+      "statement": "d + 2*e < r and dnew <= d + 2*e implies dnew < r (Int)",
+      "runtime_counterpart": "conditional edge-persistence check under a bounded coordinate perturbation",
+      "runtime_predicate": "a strictly-interior pair stays an edge under the same premise; strictness matches the runtime d < r edge test"
+    },
+    {
+      "name": "RadiusBounds.perturbation_band",
+      "status": "lean-proved",
+      "statement": "dnew <= d + 2*e and d <= dnew + 2*e implies -(2*e) <= dnew - d and dnew - d <= 2*e (Int)",
+      "runtime_counterpart": "statement of the perturbation premise used by the two persistence theorems",
+      "runtime_predicate": "the two directional premises are exactly a symmetric band on the distance change"
+    },
+    {
+      "name": "RadiusBounds.clampLow_ge",
+      "status": "lean-proved",
+      "statement": "lo <= clampLow lo a (Int)",
+      "runtime_counterpart": "lower clip of an interval to the display window",
+      "runtime_predicate": "clipping never moves an endpoint below the window"
+    },
+    {
+      "name": "RadiusBounds.clampHigh_le",
+      "status": "lean-proved",
+      "statement": "clampHigh hi b <= hi (Int)",
+      "runtime_counterpart": "upper clip of an interval to the display window",
+      "runtime_predicate": "clipping never moves an endpoint above the window"
+    },
+    {
+      "name": "RadiusBounds.clipLen_nonneg",
+      "status": "lean-proved",
+      "statement": "0 <= clipLen lo hi a b (Int)",
+      "runtime_counterpart": "clipped extent of one axis",
+      "runtime_predicate": "an empty overlap reports 0, never a negative extent"
+    },
+    {
+      "name": "RadiusBounds.clipLen_le_window",
+      "status": "lean-proved",
+      "statement": "lo <= hi implies clipLen lo hi a b <= hi - lo (Int)",
+      "runtime_counterpart": "clipped extent of one axis",
+      "runtime_predicate": "a clipped extent never exceeds the window extent"
+    },
+    {
+      "name": "RadiusBounds.clipArea_nonneg",
+      "status": "lean-proved",
+      "statement": "0 <= clipArea lo1 hi1 a1 b1 lo2 hi2 a2 b2 (Int)",
+      "runtime_counterpart": "integer skeleton of the clipped-area diagnostic",
+      "runtime_predicate": "the exact integer clipped area is non-negative"
+    },
+    {
+      "name": "RadiusBounds.clipArea_le_window",
+      "status": "lean-proved",
+      "statement": "lo1 <= hi1 and lo2 <= hi2 implies clipArea lo1 hi1 a1 b1 lo2 hi2 a2 b2 <= (hi1 - lo1) * (hi2 - lo2) (Int)",
+      "runtime_counterpart": "integer skeleton of the clipped-area diagnostic",
+      "runtime_predicate": "the exact integer clipped area never exceeds the window area"
+    }
+  ],
+  "runtime_verified_not_lean_proved": [
+    {
+      "obligation": "float-to-integer correspondence",
+      "detail": "That the runtime's floating-point chord distances on the 0.2 frame, and the canonical radius 0.095, can be reduced to the exact Nat/Int order predicates used here. No float error bound is proved by the kernel."
+    },
+    {
+      "obligation": "perturbation budget",
+      "detail": "That a coordinate perturbation of magnitude e really induces a pair-distance change of at most 2*e in the runtime's metric and arithmetic. Supplied as a premise; checked, if at all, by runtime tests."
+    },
+    {
+      "obligation": "nearest-neighbour list construction",
+      "detail": "That the runtime builds the distance list used by I(r) with each point enumerated exactly once and with its true nearest-neighbour distance."
+    },
+    {
+      "obligation": "continuous clipped area and area/N",
+      "detail": "The runtime's clipped area and area/N ratio are RUNTIME-DERIVED floating-point quantities. Section 3 of RadiusBounds.lean is an exact integer lemma set only; it is NOT a kernel theorem about the runtime float area, and no correspondence between the two is proved."
+    }
+  ],
+  "nonclaims": [
+    "No floating-point error bound, metric correspondence, chord-distance identity, or scaling law is proved; all statements are exact integer arithmetic.",
+    "The continuous clipped area and area/N used by the runtime are runtime-derived, not new kernel theorems.",
+    "No probabilistic certificate, confidence interval, significance claim, or calibration claim is proved.",
+    "No Ginzburg-Landau / Allen-Cahn dynamics, vortex classification, winding number, physical phase, or thermodynamic statement follows from these theorems.",
+    "No claim about prediction accuracy, prospective forecasting skill, ranking quality, or semantic task grading.",
+    "The canonical radius 0.095 is unchanged; nothing here admits a new score, ranking, or keep/revert/delete policy.",
+    "A displayed radius sweep remains diagnostic; these theorems do not license changing the operative metric.",
+    "A checked identity here is not evidence that the runtime diagnostic is correctly wired; see runtime_verified_not_lean_proved."
+  ]
+}
