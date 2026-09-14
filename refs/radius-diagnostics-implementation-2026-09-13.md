@@ -53,3 +53,15 @@ The complete existing backend test chain passed, with new suites added rather th
 - Fresh-context general/smart review: initial findings were corrected; follow-up review returned **PASS**. The fixes retained scope labeling and made legacy read-time enrichment explicit/nonfatal while keeping preview fail-closed.
 
 Browser/API fixtures are labeled test doubles. Historical exact replays remain retrospective. Final remote CI, deployment and live-verification receipts follow below after publication.
+
+
+## Final publication and live verification
+
+- PR [#233](https://github.com/yubi-OS/yubiOS/pull/233) merged as `e9f999126db145ff481658d4fb6fb68f4b7cf649`. Integrated branch [CI](https://github.com/yubi-OS/yubiOS/actions/runs/34799688203) and merge [CI 34799911896](https://github.com/yubi-OS/yubiOS/actions/runs/34799911896) passed all jobs.
+- Cloudflare deployment `8fc5fed208814cdf9085033211c0b4da` is live. Four updated public assets matched SHA256; core JavaScript and the homepage short-introduction source remain byte-identical to pre-change.
+- Historical map76 now returns the verified profile `[74,70,64,46,38]` at radii `[.075,.085,.095,.105,.115]`; original bits, full points and frame remain unchanged.
+- Live noop preview against old text baseline65: HTTP200, canonical delta +0, 12 unchanged anchors, correctly bracketed same-sign interval, persisted=false.
+- Live change preview against old text baseline65: HTTP200, canonical delta +2, 11 unchanged anchors, correctly bracketed same-sign interval, persisted=false.
+- Live add preview against old text baseline65: HTTP200, canonical delta +1, 12 unchanged anchors, correctly bracketed same-sign interval, persisted=false.
+- Saved map count stayed 76 before and after previews: zero new rows. Radius override, zero distance-error bound and negative coordinate bound returned422.
+- These candidate texts are mechanical smoke tests, not a new forecast-quality benchmark. No +2/+1 geometry change is presented as an improvement.
