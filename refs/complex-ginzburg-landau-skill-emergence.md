@@ -323,3 +323,111 @@ If the predictions hold, the GL framing becomes a load-bearing causal model. If 
 ---
 
 *Local ref/ entry. Add to next cycle of guided-curve-ideate.*
+
+---
+
+## Errata — 2026-09-13
+
+**Append-only.** Nothing above this line has been edited or deleted. Sections 2.5,
+4.1, 4.6 and caveat 4 are left standing exactly as originally written so the
+record of what was claimed, and when, survives. This section states what is wrong
+with them and what replaces it. Where an original claim was empirical, the later
+falsification record — not this correction — remains the operative verdict.
+
+### E1. "Nonzero imaginary coefficients preclude a decreasing free energy" is too broad
+
+§2.5 states that for nonzero imaginary coefficients **no scalar free energy
+decreases monotonically**, and caveat 4 repeats it. That is correct for *generic*
+(unequal) coefficients but false for the **equal-coefficient** case, which is a
+set of measure zero the original text swept in with the rest.
+
+Take the normalized, **noise-free, deterministic** CGLE with `b = c = β`:
+
+$$
+\partial_t A = A + (1 + i\beta)\Delta A - (1 + i\beta)|A|^2 A.
+$$
+
+Move to the rotating frame `B = e^{i\beta t} A` and set
+
+$$
+G(B) = B - |B|^2 B + \Delta B,
+$$
+
+so that the equation becomes `∂_t B = (1 + iβ) G(B)`. For periodic or suitable
+no-flux boundary conditions define
+
+$$
+F[B] = \int \left( |\nabla B|^2 - |B|^2 + \tfrac12 |B|^4 \right) dx .
+$$
+
+The functional derivative is `−G`, hence
+
+$$
+\frac{dF}{dt} = -2\,\mathrm{Re}\!\int G^{*}(1 + i\beta)G\,dx = -2\int |G|^2 dx \le 0 .
+$$
+
+The reactive part `iβ` is annihilated by the real part, so it drops out of the
+dissipation rate entirely. Therefore:
+
+- **β = 0** is pure gradient (relaxational) flow — as §2.5 already said.
+- **Equal nonzero β** is *not* gradient flow, but it still admits `F` as a
+  **Lyapunov functional**: `Ḟ = −2‖G‖² ≤ 0`, with a purely reactive component
+  that does no work against `F`. Global phase rotation leaves `F` unchanged.
+- **Arbitrary unequal `b ≠ c`** carries **no such guarantee**. This is the case
+  §2.5 was reaching for, and for it the original statement stands.
+
+Two limits on how far this goes. `Ḟ ≤ 0` alone does **not** prove the original
+field converges to a time-independent state; and noise, forcing, or unequal
+coefficients each require separate analysis. The correction is about the
+*existence of a Lyapunov functional in one special case*, nothing more.
+
+Independent finite-periodic-system checks of the identity at β = 0, 0.7, 1.5 and
+−2 gave a maximum relative identity error of **5.10 × 10⁻¹⁶**. A direct
+unequal-coefficient counterexample at `b = 2, c = −1` produced a **positive**
+directional derivative of **1.730246 × 10⁻⁵**, confirmed independently by a
+symmetric energy difference of **1.730247 × 10⁻⁵** (16 sites, cosine perturbation
+of amplitude 0.01, real/imaginary amplitude ratio 0.05). The rise is a property of
+the vector field at that state, not an explicit-Euler integration artefact.
+
+The operator identity is corroborated by Aranson & Kramer, *The world of the
+complex Ginzburg–Landau equation*, RMP **74**, 99 (2002),
+[arXiv:cond-mat/0106115](https://arxiv.org/abs/cond-mat/0106115).
+
+### E2. `2/9 ≈ 0.78` is an arithmetic error, and the bound points the other way
+
+§4.1 reads ``V_2(N)`` should saturate "at a value near `2/9 ≈ 0.78`", and §4.6
+reasons from `0.7657 < 0.78`. Two separate faults:
+
+1. **The arithmetic is wrong.** `2/9 = 0.2222…`, not `0.78`. The numeral `0.78`
+   has no derivation anywhere in the original text; it appears to have been
+   carried forward unchecked, and §4.6's type-I/type-II reading is built on the
+   comparison `0.7657 < 0.78`, which is therefore unsupported as written.
+2. **The direction of the bound is inverted.** For a nonzero positive-semidefinite
+   9-D covariance, `2/9` is the **isotropic lower bound** on the top-two variance
+   share — the value attained when all nine eigenvalues are equal. Any anisotropy
+   *raises* `PC1 + PC2` above `2/9`; the trivial upper bound is 1. So `2/9` is a
+   **floor**, not a saturation ceiling, and a measurement of `0.7657` sits far
+   above that floor rather than approaching it from below.
+
+The later *Is This X?* paper already distinguishes this isotropic floor from
+ensemble-specific measured values; that treatment has precedence over §4.1 and
+§4.6, and this erratum makes the precedence explicit rather than restating it.
+
+This is a correction to a **bound and its arithmetic only**. It supplies no
+evidence that `V_2` saturates, no exponent, and no transition.
+
+### E3. The empirical falsifications are untouched by E1 and E2
+
+E1 fixes a statement about CGLE mathematics. E2 fixes an arithmetic error and the
+direction of a linear-algebra bound. **Neither reopens any empirical claim made in
+this note.** Specifically, the predictions recorded as **P2, P4 and P5** remain
+**falsified** under their own recorded protocols in the corpus's falsification
+record, and the retired Hodge/vortex interpretation and the dimensionally invalid
+quantized-flow claim remain retired. Correcting the `b = c` mathematics does not
+restore the phase-transition model in §3.5 or §4; it only removes an incorrect
+reason that was being offered for part of it.
+
+Nothing in this errata transports evidence of Ginzburg–Landau dynamics to the
+corpus. The corpus still has no autonomous field evolution and no independently
+measured amplitude or phase, so the analogy remains structural, exactly as
+caveats 1–3 and 6–7 above already state.

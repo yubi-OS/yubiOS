@@ -1,3 +1,4 @@
+import { radiusForRead } from './lib/radius-api.mjs';
 import { encodeMap, decodeMap } from "./lib/map-storage.mjs";
 import { fetchCorpus } from "./lib/tar-corpus.mjs";
 // --- new/redesigned-route modules (see session/subagent/lib/*.mjs) ---
@@ -1083,8 +1084,8 @@ GET  /map/pointmap.js           -> static pointmap.js module
                   .bind(new Date().toISOString(), map.rule_hash, map.seed, map.n, map.D, map.d, map.v2, map.null.z, map.null.verdict, map.classes.count, map.summary.identity_failures, map.summary.measurement_red, source, encodeMap(map)).run();
                 return ins?.meta?.last_row_id ?? (await db.prepare(`SELECT MAX(id) AS mid FROM maps`).first())?.mid;
               };
-              const { id, map, comparison, math_ledger } = await mapRouteHandler(body, { env, PM, embedDocuments, loadStoredMap, saveMap });
-              return json({ id, map, comparison, ...(math_ledger ? { math_ledger } : {}) });
+              const { id, map, comparison, math_ledger, radius_comparison } = await mapRouteHandler(body, { env, PM, embedDocuments, loadStoredMap, saveMap });
+              return json({ id, map, comparison, radius_comparison, ...(math_ledger ? { math_ledger } : {}) });
             } catch (e) {
               return errorResponse(e);
             }
@@ -1118,7 +1119,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
           if (mm && req.method === "GET") {
             const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(mm[1])).first();
             if (!row) return json({ error: "not found" }, 404);
-            return json(decodeMap(row.map_json));
+            return json(radiusForRead(decodeMap(row.map_json)));
           }
           if (mm && req.method === "DELETE") { await db.prepare(`DELETE FROM maps WHERE id = ?`).bind(Number(mm[1])).run(); return json({ ok: true }); }
           if (p === "/api/maps/compare" && req.method === "POST") {

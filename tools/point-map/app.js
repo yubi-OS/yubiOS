@@ -91,7 +91,7 @@ function renderNSS(R){
   $("nsstab").querySelector("tbody").innerHTML=rungs.length?rungs.map((r,i)=>`<tr><td><input type="radio" name="ideal" value="${i}" ${i===0?"checked":""}></td><td><b>${escapeHtml(r.rung)}</b></td><td>${escapeHtml(r.action)}${r.item!==undefined?` #${r.item}`:""}</td><td>${r.sector}</td><td class="dim">${escapeHtml(r.semantic_status)}</td><td>${r.score}</td><td>${r.delta.occupied_sectors_delta}</td><td>${r.delta.isolated_delta}</td></tr>`).join(""):`<tr><td colspan="8" class="dim">no candidates - ${escapeHtml(L.reason)}</td></tr>`;
   const outliers=(L.review_only_audit&&L.review_only_audit.outliers)||[];
   $("nssoutliers").innerHTML=outliers.length?`<b>review-only outliers</b> (${escapeHtml(L.review_only_audit.note)}): `+outliers.map(o=>`#${o.item} ${escapeHtml(o.name)} (sector ${o.sector}, ${escapeHtml(o.reason)}, ${escapeHtml(o.semantic_status)})`).join("; "):"";
-  function showPrompt(i){const r=rungs[i];$("nssprompt").textContent=r?r.prompt+"\n\nBefore changing the repository, preview the actual candidate text with POST /api/map/preview and the saved baseline_id, full resulting texts/names and target {action,name}. Inspect the touched-neighbour ledger and signed margins, then run the independent task check. Preview creates no map row or repository edit.":"";$("nssrec").innerHTML=r?`<b>${escapeHtml(r.rung)}</b> - sector ${r.sector} - ${escapeHtml(r.hypothesis)} <span class="dim">(${escapeHtml(r.caveat)})</span>`:""}
+  function showPrompt(i){const r=rungs[i];$("nssprompt").textContent=r?r.prompt+"\n\nBefore changing the repository, preview the actual candidate text with POST /api/map/preview and the saved baseline_id, full resulting texts/names and target {action,name}. Inspect the touched-neighbour ledger and signed margins, then run the independent task check. Preview creates no map row or repository edit."+RADIUS_PROMPT_NOTE:"";$("nssrec").innerHTML=r?`<b>${escapeHtml(r.rung)}</b> - sector ${r.sector} - ${escapeHtml(r.hypothesis)} <span class="dim">(${escapeHtml(r.caveat)})</span>`:""}
   $("nsstab").querySelectorAll("input[name=ideal]").forEach((el,i)=>{el.onchange=()=>showPrompt(i)});
   showPrompt(rungs.length?0:-1);
   $("copyprompt").onclick=()=>{navigator.clipboard.writeText($("nssprompt").textContent).then(()=>{$("copyprompt").textContent="copied";setTimeout(()=>$("copyprompt").textContent="copy",1200)})}
@@ -136,7 +136,7 @@ function render(R,id,comparison){
   kv("place",{"pc12 (raw-input PC1+PC2 share)":R.pc12===null||R.pc12===undefined?"n/a (frozen frame; see gate_rank)":R.pc12,"gate_rank v2 => rhat=2/v2":`${R.gate_rank.v2} => ${Number.isFinite(R.gate_rank.rhat)?R.gate_rank.rhat.toFixed(2):"inf"} (${R.gate_rank.ok?"<=5":"> 5"})`,"Phi(k)":R.ladder.Phi.join(" "),"Hamming shells":R.shells.join(" "),"pole":R.pole.join(", "),"frame_id":R.frame_id,"instrument_id":R.instrument_id});
   kv("null",{"K / attempts per draw":`${R.null.K} / ${R.null.attempts_per_draw}`,"accepted / attempted (total)":`${R.null.accepted_total} / ${R.null.attempted_total}`,"V2 real":R.v2,"E0 +/- SD0":`${R.null.E0} +/- ${R.null.SD0}`,"deltaV2z (descriptive)":R.null.z??"void","p (two-sided / resolution)":R.null.admissible?`${R.null.p_two_sided.toFixed(4)} / ${R.null.p_resolution.toFixed(4)}`:"void","verdict":R.null.verdict,"kind":escapeHtml(R.null.kind)});
   kv("compass",{"T":R.compass.T,"<k> analytic / empirical":`${R.compass.kmean_analytic.toFixed(4)} / ${R.compass.kmean_empirical.toFixed(4)}`,"detailed balance (identity, analytic)":R.compass.flux_identity_analytic.ok?`ok (max resid ${R.compass.flux_identity_analytic.max_abs_residual.toExponential(2)})`:"FAILED","empirical flux max|z| (measurement, descriptive)":R.compass.empirical_flux.maxAbsZ.toFixed(2),"acceptance":R.compass.acceptance,"T-crossover":R.compass.Tx??"none (Phi non-monotone at T->0)","steps":`${R.compass.steps} (single chain)`});
-  renderSpectra(R);
+  renderSpectra(R);renderRadiusProfile(R);
   kv("bridge",{"bridge":`item ${R.bridge.i} -> frozen pole, ${R.bridge.rungs.length} rungs (slerp)`});
   kv("meta",{"version":R.version,"map id":lastId===null?"local (no server id)":lastId,"seed":R.seed,"identity failures":R.summary.identity_failures,"measurement red":R.summary.measurement_red,"source":escapeHtml(R.source||"client")});
   $("useBaseline").style.display=lastId===null?"none":"inline-block";
@@ -411,6 +411,9 @@ function renderPreview(resp,sent){
     <h3>math ledger</h3>
     ${renderLedger(resp.math_ledger)}
 
+    <h3>radius profile + comparison (diagnostic only)</h3>
+    ${renderRadiusComparison(resp,String(t.name||""))}
+
     <h3>projection margins (diagnostic only)</h3>
     ${renderMargins(resp.map||{},String(t.name||""))}`;
   // Nothing above touches last / lastId / baselineSnapshot: the preview is displayed
@@ -435,3 +438,222 @@ $("preview").onclick=async()=>{
 };
 
 renderBaselineState(null,false);
+
+// ===========================================================================
+// radius-persistence diagnostics - ADDITIVE, DIAGNOSTIC ONLY
+// ---------------------------------------------------------------------------
+// Reads two blocks supplied by the backend module:
+//   map.radius_profile   (version "radius/1") on any saved or previewed map
+//   resp.radius_comparison on a preview response
+//
+// Deliberate non-features, each one a standing requirement:
+//   * NO radius control of any kind. The canonical radius is 0.095 and nothing
+//     rendered here can change the operative metric. The grid is predeclared by
+//     the backend; this file only displays what it was given.
+//   * NO "best radius" winner. No row is scored, ranked, coloured green or
+//     otherwise marked as preferable. The canonical row is marked as canonical -
+//     that is an identification, not a recommendation.
+//   * NO statistical confidence, p-value or quality score. The intervals are
+//     exact frozen-coordinate parameter clearances; they are not uncertainty
+//     intervals, not significance statements and not forecasts.
+//   * A map with no radius_profile (local synthetic, legacy stored map) renders
+//     an explicit "unavailable" note and is NOT an error.
+// ===========================================================================
+const RADIUS_PROFILE_VERSION="radius/1";
+const RADIUS_COMPARISON_VERSION="radius/1";
+
+const RADIUS_PROMPT_NOTE="\n\nThe preview response also carries a diagnostic-only radius_comparison block. Read canonical_delta at the canonical radius 0.095 as the operative isolation reading, and read the fixed-grid before/after/delta samples plus the exact same-delta and same-sign intervals around 0.095 as sensitivity to an instrument parameter. They are exact frozen-coordinate parameter clearances, not confidence intervals, not significance tests and not pre-edit forecasts. Never reselect the radius from that grid: 0.095 is canonical, the displayed sweep never changes the operative metric, and a sign that reverses elsewhere on the grid is an instrument-sensitivity finding to report, not a better reading to adopt.";
+
+const RADIUS_UNAVAILABLE_NOTE='<span class="dim">Expected for a local synthetic run or a stored map written before this diagnostic existed. This is not an error and nothing else on this page depends on it.</span>';
+
+function radiusNote(msg){return `<div class="wall">${msg}</div>`}
+
+// ---- shared readers -------------------------------------------------------
+
+function radiusProfileOf(map){
+  const rp=map&&map.radius_profile;
+  if(!rp||typeof rp!=="object")return{available:false,reason:map&&map.radius_profile_unavailable?escapeHtml(String(map.radius_profile_unavailable.reason)):"the loaded map carries no <code>radius_profile</code> block"};
+  if(rp.version!==RADIUS_PROFILE_VERSION)return{available:false,reason:`unsupported <code>radius_profile</code> version ${escapeHtml(String(rp.version))} (this page reads <code>${escapeHtml(RADIUS_PROFILE_VERSION)}</code>)`};
+  if(!Array.isArray(rp.samples))return{available:false,reason:"<code>radius_profile</code> carries no <code>samples</code> array"};
+  return{available:true,rp};
+}
+
+function radiusComparisonOf(resp){
+  const rc=resp&&resp.radius_comparison;
+  if(!rc||typeof rc!=="object")return{available:false,reason:"this preview response carries no <code>radius_comparison</code> block"};
+  if(rc.version!==RADIUS_COMPARISON_VERSION)return{available:false,reason:`unsupported <code>radius_comparison</code> version ${escapeHtml(String(rc.version))} (this page reads <code>${escapeHtml(RADIUS_COMPARISON_VERSION)}</code>)`};
+  if(!Array.isArray(rc.samples))return{available:false,reason:"<code>radius_comparison</code> carries no <code>samples</code> array"};
+  return{available:true,rc};
+}
+
+// Is this grid row the canonical radius? Compared on the profile's OWN declared
+// canonical_radius, never on a hardcoded 0.095, so a backend that ever moves the
+// canonical value cannot be silently contradicted by this page.
+function isCanonicalRow(radius,canonical){
+  return Number.isFinite(Number(radius))&&Number.isFinite(Number(canonical))&&Math.abs(Number(radius)-Number(canonical))<1e-12;
+}
+function canonicalCell(isC){
+  return isC?' <span class="badge">canonical</span>':"";
+}
+
+// ---- interval formatting --------------------------------------------------
+// Half-open by construction: delta-I is constant on (left,right], so the lower
+// end is normally OPEN and the upper end CLOSED. A domain end (0 or 2) is the
+// exception the backend flags with lower_closed:true, and it is labelled as a
+// domain boundary rather than a witness breakpoint.
+
+function fmtInterval(iv){
+  if(!iv||typeof iv!=="object")return '<code class="dim">not reported</code>';
+  const lo=iv.lower_closed===true?"[":"(";
+  const hi=iv.upper_closed===false?")":"]";
+  return `<code>${escapeHtml(lo)}${escapeHtml(num(iv.lower,10))}, ${escapeHtml(num(iv.upper,10))}${escapeHtml(hi)}</code>`;
+}
+
+function fmtWitnesses(b){
+  const w=(b&&Array.isArray(b.witnesses))?b.witnesses:[];
+  if(!w.length)return '<span class="dim">no witness pair is recorded for this end</span>';
+  return w.map(x=>`<code>${escapeHtml(String(x&&x.name))}</code> &rarr; <code>${escapeHtml(String(x&&x.nearest_name))}</code> <span class="dim">(${escapeHtml(String(x&&x.side))}, clearance ${escapeHtml(num(x&&x.clearance,10))})</span>`).join("; ");
+}
+
+// One boundary row: the endpoint itself, its DISTANCE from the canonical radius
+// (the number that says how close the canonical reading sits to flipping), the
+// shown/total witness budget, and the named witnesses.
+function fmtBoundaryRow(side,endpoint,b,canonical){
+  const d=(Number.isFinite(Number(endpoint))&&Number.isFinite(Number(canonical)))?Math.abs(Number(endpoint)-Number(canonical)):null;
+  const dom=(b&&b.domain_boundary)?' <span class="dim">- domain boundary: this end is the edge of the declared radius domain, not a witness breakpoint</span>':"";
+  const total=(b&&b.total!==undefined&&b.total!==null)?String(b.total):"unknown";
+  const shown=(b&&b.shown!==undefined&&b.shown!==null)?String(b.shown):"0";
+  const more=(b&&Number.isFinite(Number(b.total))&&Number.isFinite(Number(b.shown))&&Number(b.total)>Number(b.shown))
+    ? ` <span class="dim">(${escapeHtml(String(Number(b.total)-Number(b.shown)))} further witness pair(s) at this boundary are not listed)</span>`:"";
+  return `<tr>
+      <td>${escapeHtml(side)}</td>
+      <td><code>${escapeHtml(num(endpoint,10))}</code></td>
+      <td>${d===null?'<span class="dim">n/a</span>':`<b>${escapeHtml(num(d,10))}</b>`}</td>
+      <td>${escapeHtml(shown)} of ${escapeHtml(total)}${more}</td>
+      <td>${fmtWitnesses(b)}${dom}</td>
+    </tr>`;
+}
+
+function fmtIntervalBlock(title,iv,canonical,note){
+  if(!iv||typeof iv!=="object")return `<div class="wall">${escapeHtml(title)}: <span class="dim">not reported by the backend for this candidate.</span></div>`;
+  return `<div style="margin-top:8px"><b>${escapeHtml(title)}</b> ${fmtInterval(iv)} <span class="dim">around the canonical radius ${escapeHtml(num(canonical,4))}. ${escapeHtml(note)}</span></div>
+    <table style="margin-top:4px;font-size:85%"><thead><tr><th>end</th><th>radius</th><th>distance from canonical</th><th>witnesses shown</th><th>named witness pairs (item &rarr; nearest neighbour)</th></tr></thead><tbody>
+      ${fmtBoundaryRow("lower",iv.lower,iv.lower_boundary,canonical)}
+      ${fmtBoundaryRow("upper",iv.upper,iv.upper_boundary,canonical)}
+    </tbody></table>`;
+}
+
+// ---- bounds / robustness --------------------------------------------------
+// Bounds are caller-supplied and explicitly unvalidated/uncertified. When they
+// are absent the status is reported as-is and NO robustness verdict is claimed.
+
+function fmtBounds(bounds){
+  if(!bounds||typeof bounds!=="object")
+    return `<div class="wall bad">no <code>bounds</code> block was supplied, so <b>no robustness verdict is claimed</b> for any item. Clearances below are exact distances on the frozen frame; turning one into a stability statement needs a justified coordinate epsilon and distance error bound.</div>`;
+  const validated=bounds.validated===true,certified=bounds.certified===true;
+  const cls=(validated&&certified)?"dim":"bad";
+  return `<div class="wall ${cls}">bounds: coordinate_epsilon=<code>${escapeHtml(num(bounds.coordinate_epsilon,10))}</code>, distance_error_bound=<code>${escapeHtml(num(bounds.distance_error_bound,10))}</code>, validated=<b>${escapeHtml(String(validated))}</b>, certified=<b>${escapeHtml(String(certified))}</b>. Robustness statuses are <b>conditional on these caller-supplied bounds</b>; they are not numerical proofs, not probabilities and not independently validated.</div>`;
+}
+
+function fmtRobustness(rb){
+  if(!rb||typeof rb!=="object")return '<span class="dim">no robustness block - no verdict claimed</span>';
+  const st=String(rb.status===undefined?"unknown":rb.status);
+  const bad=/unknown|undetermined|needs-bound|not-claimed|missing/i.test(st);
+  const extra=Object.keys(rb).filter(k=>k!=="status")
+    .map(k=>`${escapeHtml(k)}=${escapeHtml(typeof rb[k]==="object"?JSON.stringify(rb[k]):String(rb[k]))}`).join(", ");
+  return `<b class="${bad?"bad":"dim"}">${escapeHtml(st)}</b>${extra?` <span class="dim">(${extra})</span>`:""}`;
+}
+
+// ---- map card: fixed-grid profile of the currently rendered map ------------
+
+function renderRadiusProfile(R){
+  const el=$("radiusprofile");
+  if(!el)return;
+  const P=radiusProfileOf(R);
+  if(!P.available){el.innerHTML=radiusNote(`radius profile unavailable: ${P.reason}. ${RADIUS_UNAVAILABLE_NOTE}`);return}
+  const rp=P.rp,canonical=rp.canonical_radius;
+  const dom=Array.isArray(rp.domain)?rp.domain:null;
+  const rows=rp.samples.map(s=>{
+    const isC=isCanonicalRow(s&&s.radius,canonical);
+    return `<tr>
+      <td>${escapeHtml(num(s&&s.radius,4))}${canonicalCell(isC)}</td>
+      <td>${isC?"<b>":""}${escapeHtml(String(s&&s.isolated))}${isC?"</b>":""}</td>
+      <td>${escapeHtml(num(s&&s.isolated_fraction,4))}</td>
+      <td>${escapeHtml(num(s&&s.area,6))}</td>
+      <td>${escapeHtml(num(s&&s.mean_area,6))}</td>
+    </tr>`}).join("");
+  el.innerHTML=`<div class="kv">
+      <span class="dim">canonical radius</span><span><b>${escapeHtml(num(canonical,4))}</b> <span class="dim">- fixed; the sweep below is displayed beside it and never replaces it</span></span>
+      <span class="dim">I(canonical) / N</span><span><b>${escapeHtml(String(rp.canonical_isolated))}</b> / ${escapeHtml(String(rp.n))}</span>
+      <span class="dim">declared radius domain</span><span>${dom?`<code>[${escapeHtml(num(dom[0],4))}, ${escapeHtml(num(dom[1],4))}]</code>`:'<span class="dim">not declared</span>'}</span>
+      <span class="dim">per-item clearances</span><span>${escapeHtml(String(Array.isArray(rp.per_item)?rp.per_item.length:0))} rows</span>
+    </div>
+    <table style="margin-top:6px;font-size:85%"><thead><tr><th>radius r</th><th>I(r)</th><th>isolated fraction</th><th>clipped area S_R</th><th>area per item S_R/N</th></tr></thead><tbody>${rows||`<tr><td colspan="5" class="dim">no samples</td></tr>`}</tbody></table>
+    <div class="wall dim">I(r) is the count of items whose nearest-neighbour clearance is at least r, so it is non-increasing in r; S_R = sum of min(R, c_i) carries distance units and is neither a count, a free energy nor a score. The grid is predeclared by the backend - no radius was selected after seeing these numbers, no row is ranked, and there is no best radius here.</div>
+    ${fmtBounds(rp.bounds)}
+    <div class="wall dim">${escapeHtml(String(rp.scope||""))}</div>`;
+}
+
+// ---- preview: before/after/delta over the same fixed grid ------------------
+
+function renderRadiusComparison(resp,targetName){
+  const C=radiusComparisonOf(resp);
+  const P=radiusProfileOf(resp&&resp.map);
+  if(!C.available&&!P.available)
+    return radiusNote(`radius diagnostics unavailable: ${C.reason}. ${RADIUS_UNAVAILABLE_NOTE}`);
+
+  let head="",table="",intervals="",target="";
+
+  if(C.available){
+    const rc=C.rc,canonical=rc.canonical_radius;
+    const rows=rc.samples.map(s=>{
+      const isC=isCanonicalRow(s&&s.radius,canonical);
+      const d=Number(s&&s.delta);
+      return `<tr>
+        <td>${escapeHtml(num(s&&s.radius,4))}${canonicalCell(isC)}</td>
+        <td>${escapeHtml(String(s&&s.before))}</td>
+        <td>${escapeHtml(String(s&&s.after))}</td>
+        <td>${isC?"<b>":""}${escapeHtml((Number.isFinite(d)&&d>0?"+":"")+String(s&&s.delta))}${isC?"</b>":""}</td>
+      </tr>`}).join("");
+    const cd=Number(rc.canonical_delta);
+    head=`<div class="kv">
+        <span class="dim">canonical radius</span><span><b>${escapeHtml(num(canonical,4))}</b></span>
+        <span class="dim">isolated-count delta at the canonical radius</span><span><b>${escapeHtml((Number.isFinite(cd)&&cd>0?"+":"")+String(rc.canonical_delta))}</b> <span class="dim">- this is the operative reading; the grid below is sensitivity, not a menu</span></span>
+        <span class="dim">reading</span><span>${rc.retrospective?'<b>retrospective</b> <span class="dim">- the candidate text is already embedded, so this compares two computed states. It is not a pre-edit forecast and agreement with a prediction is not improved forecasting.</span>':'<span class="dim">not labelled retrospective by the backend</span>'}</span>
+      </div>`;
+    table=`<table style="margin-top:6px;font-size:85%"><thead><tr><th>radius r</th><th>I(r) before</th><th>I(r) after</th><th>delta I(r)</th></tr></thead><tbody>${rows||`<tr><td colspan="4" class="dim">no samples</td></tr>`}</tbody></table>
+      <div class="wall dim">A delta whose sign differs elsewhere on this grid is sensitivity to an instrument parameter. It is a finding to report, not a reason to re-read the edit at another radius: ${escapeHtml(num(canonical,4))} stays canonical.</div>`;
+    intervals=fmtIntervalBlock("maximal same-delta interval",rc.exact_delta_interval,canonical,
+        "Widest interval containing the canonical radius on which delta I(r) is exactly this value. Half-open by construction: delta I is constant on (left, right].")
+      +fmtIntervalBlock("maximal same-sign interval",rc.same_sign_interval,canonical,
+        "Widest interval containing the canonical radius on which the sign of delta I(r) does not change.")
+      +`<div class="wall dim">Both intervals are exact clearances in the frozen coordinates - they are parameter ranges, not statistical uncertainty, not confidence intervals and not significance. The distance-from-canonical column is how far the canonical reading sits from flipping.</div>
+       <div class="wall dim">${escapeHtml(String(rc.scope||""))}</div>`;
+  }else{
+    head=radiusNote(`radius comparison unavailable: ${C.reason}. ${RADIUS_UNAVAILABLE_NOTE}`);
+  }
+
+  // Target clearance + conditional robustness, read from the previewed map's
+  // per_item rows. Absent rows are reported, never fabricated.
+  if(P.available){
+    const per=Array.isArray(P.rp.per_item)?P.rp.per_item:[];
+    const row=per.find(r=>r&&String(r.name)===String(targetName));
+    if(!row){
+      target=radiusNote(`no per-item clearance row is keyed to <code>${escapeHtml(String(targetName))}</code>, so no target clearance or robustness status is shown.`);
+    }else{
+      const ties=Array.isArray(row.nearest_ties)?row.nearest_ties:[];
+      target=`<div style="margin-top:8px"><b>target clearance</b> <span class="dim">for <code>${escapeHtml(String(row.name))}</code></span></div>
+        <div class="kv" style="margin-top:4px">
+          <span class="dim">nearest neighbour</span><span><code>${escapeHtml(String(row.nearest_name))}</code>${ties.length?` <span class="dim">(${escapeHtml(String(ties.length))} tied nearest: ${ties.map(t=>`<code>${escapeHtml(String(t))}</code>`).join(", ")})</span>`:""}</span>
+          <span class="dim">clearance c_i</span><span><b>${escapeHtml(num(row.clearance,10))}</b> <span class="dim">- the item stays isolated on [0, c_i]; a tie at r = c_i remains isolated</span></span>
+          <span class="dim">isolated at canonical radius</span><span><b>${escapeHtml(String(row.isolated_at_canonical))}</b></span>
+          <span class="dim">robustness (conditional)</span><span>${fmtRobustness(row.robustness)}</span>
+        </div>`;
+    }
+    target+=fmtBounds(P.rp.bounds);
+  }else{
+    target+=radiusNote(`target clearance unavailable: ${P.reason}. ${RADIUS_UNAVAILABLE_NOTE}`);
+  }
+
+  return head+table+intervals+target;
+}

@@ -27,3 +27,46 @@ one of these; merging or padding them to de-isolate is the same mistake by anoth
 - **Business-plan docs** form a large isolated tail: they share few primitives with the
 systems corpus by nature. Their isolation is structural, not a defect.
 - The census is a target list with a do-not-touch column, not a quality score.
+
+---
+
+## Errata — 2026-09-13
+
+**Append-only.** The table and its class labels above are unchanged.
+
+### "One class per doc" is wrong; the classes overlap
+
+The method note above states that class assignment is "one class per doc's
+dominant content". The table does not do that. Counting the table as written:
+
+- **66 class entries** across the eight rows (9 + 4 + 10 + 14 + 17 + 2 + 3 + 7)
+- **62 unique documents**
+- **4 duplicate entries** — four documents each appear in exactly two classes
+
+The four documents carried in two classes are:
+
+| Document | Classes it appears in |
+|---|---|
+| `chromium-provenance-overlay-status-2026-09-09.md` | dated status snapshots; chromium/runner (round-3) |
+| `days-31-60-narrow-product-2026-07-25.md` | dated status snapshots; business-plan docs |
+| `days-61-90-willingness-to-pay-2026-07-25.md` | dated status snapshots; business-plan docs |
+| `wayfinder-loop-results-2026-09-09.md` | dated status snapshots; method / bridge docs |
+
+So the categories are **overlapping**, not a partition, and the row counts sum to
+entries rather than to documents.
+
+### What this does and does not change
+
+- **The isolate count is unaffected.** There are still **62 isolated documents**,
+  and the census's unique-name set still matches the map-74 isolate set exactly.
+  The error is in the *wording of the method*, not in the geometry.
+- **No new classification is introduced here.** The eight class labels and every
+  row's membership stay exactly as recorded. This erratum only corrects the claim
+  that each document appears once.
+- Read the "Count" column as **entries in that class**, not as a share of a
+  partition of the 62. Summing the column double-counts the four documents above.
+- The reading notes in the section above remain valid; a document appearing under
+  two labels simply means both readings apply to it.
+
+As already stated, isolation is a geometry reading and the census is a target list
+with a do-not-touch column, not a quality score.

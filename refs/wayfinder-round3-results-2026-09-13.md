@@ -44,3 +44,78 @@ Family: `refs/wayfinder-loop-results-2026-09-09.md` (rounds 1-2).
   against a live API (GitHub runners, releases, issues, Linear OMN-36, systemd releases,
   chromium-provenance CI) on 2026-09-13, but no independent graded editor scored the edits.
 - All changes are append-only or reference-repointing; no deletions.
+
+---
+
+## Completion and errata — 2026-09-13
+
+**Append-only.** The cycle ledger, run facts and instrument readings above are
+left exactly as first recorded, including cycle 10's open `see final map` cell.
+This section closes that cell and records what the trail does and does not
+establish.
+
+### Final map (cycle 10 closed)
+
+| Field | Value |
+|---|---:|
+| Map id | **76** |
+| Items (N) | **176** |
+| Isolated I(0.095) | **64** |
+| V2 | **0.31855** |
+| Frozen frame | `a045c8d3f4ff939b` (unchanged) |
+
+The full isolated series therefore reads
+**61 → 62 → 63 → 62 → 63 → 62 → 62 → 62 → 63 → 64**, and the V2 series ends
+0.31597 → 0.3204 (map 73) → 0.32019 (map 75) → **0.31855** (map 76).
+
+All eleven stored maps 66–76 were retrieved and each isolation count was
+recomputed independently from full-precision stored coordinates; every
+recomputation matched the instrument. All eleven maps carry the same frame, and
+every point shared between consecutive maps had **exactly zero** coordinate
+movement across the whole trail.
+
+Cycle 10's generic rung predicted **+1** and the observed delta is **+1**. That
+makes the rung predictions exactly correct on **5 of the 8 ADDs**, and **5 of 9**
+across all nine recorded predictions. The ninth recorded operation — the cycle 8
+verification CHANGE — was logged without a prediction and is **not** assigned an
+invented one here. `task_verdict` remains **not-tested**: a correctly predicted
++1 isolate is an instrumentation success, not a demonstrated quality improvement,
+and no independent graded editor scored these edits.
+
+### Operations vs. PR diff: a discrepancy that is recorded, not resolved
+
+These two counts are different things and both are kept:
+
+| View | Count |
+|---|---|
+| **Runtime operation trail** (this ledger) | **8 ADDs + 2 source-text CHANGEs** |
+| **PR 232 file diff** | **8 added files + 1 modified existing file** |
+
+The run-facts line at the top of this document — "176 after (8 ADDs, 1 CHANGE)" —
+describes the **PR diff**, not the operation trail. Of the two runtime CHANGEs,
+cycle 1 (`cycle4-results-2026-08-06.md` reference repointing) appears in the PR
+diff as the one modified file. The cycle 8 runtime CHANGE — the live CI-state
+addendum on **`chromium-provenance-overlay-status-2026-09-09.md`** — **does not
+appear in the PR 232 diff at all.**
+
+The record does not explain why. No mechanism is asserted here, and in particular
+**no claim is made that every runtime source mutation shipped**. Anyone
+reconciling the repository against this trail should expect one runtime CHANGE
+with no corresponding committed diff hunk and should treat the cause as open.
+
+Both readings are independently useful and neither supersedes the other: the
+operation trail is what the instrument measured, the PR diff is what the
+repository received.
+
+### Instrument-parameter sensitivity (added after the fact)
+
+The isolation radius **0.095 is canonical and unchanged**. A separate, predeclared
+diagnostic sweep over radii 0.075 / 0.085 / 0.095 / 0.105 / 0.115 found that
+cycles **6, 9 and 10 reverse the sign** of their isolate delta somewhere on that
+grid, and cycle 4 becomes neutral. At r = 0.105 the first and last maps both read
+46 isolates.
+
+That is sensitivity to an instrument parameter. It is **not** evidence of physical
+glassiness, a thermodynamic transition, or a better radius, and no radius was
+selected after seeing these numbers. The radius profile belongs **beside** the
+single canonical count, never in place of it.
