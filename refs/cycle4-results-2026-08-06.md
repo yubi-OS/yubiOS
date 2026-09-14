@@ -3,7 +3,7 @@
 **Date:** 2026-08-06
 **Run type:** single full-corpus run on all 70 skills in the yubiOS software-skill corpus
 **Source paper:** `papers/learned-latent-curves-2026-08-05.tex` / `.pdf`
-**Source fitness-test:** `session/hyperspherical-harmonic-curve-v1-fitness-test.json`
+**Source fitness-test:** `refs/hyperspherical-harmonic-curve-v1-fit-2026-08-05.md`
 
 ## Headline result
 
@@ -34,14 +34,14 @@ This run is a single full-corpus pass with no error bars. The split sizes are fi
 
 ## Corpus coverage
 
-All 70 skills in the yubiOS software-skill corpus were included in the Phase B run, including the variant itself (`hyperspherical-harmonic-curve`). Phase A used the alphabetically-first-half split (49 skills). The full skill list (Phase B) is preserved at `session/hyperspherical-harmonic-curve-v1-fitness-test.json`.
+All 70 skills in the yubiOS software-skill corpus were included in the Phase B run, including the variant itself (`hyperspherical-harmonic-curve`). Phase A used the alphabetically-first-half split (49 skills). The full skill list (Phase B) is preserved at `refs/hyperspherical-harmonic-curve-v1-fit-2026-08-05.md`.
 
 ## Reproduction
 
 - Basis construction: deterministic given $(\ell, m)$.
 - MÃ¶bius refinement initial point: $\theta_0$ with $a = d = 1$, $b = c = 0$ (identity MÃ¶bius).
 - Ridge $\lambda$ is fixed across both models.
-- The exact code path that produced these numbers is in `session/learned-latent-curves-2026-08-05.tex` Â§6âÂ§8 and the v1 fitness test JSON in `session/`.
+- The exact code path that produced these numbers is in `papers/archived/learned-latent-curves-2026-08-05.tex` Â§6âÂ§8 ; the v1 fitness-test record is `refs/hyperspherical-harmonic-curve-v1-fit-2026-08-05.md` (the raw fitness-test JSON is session-scoped, not committed).
 
 
 
