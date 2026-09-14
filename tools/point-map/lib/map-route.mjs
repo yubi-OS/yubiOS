@@ -1,3 +1,4 @@
+import { radiusOptions, attachRadius } from './radius-api.mjs';
 import { ApiError } from './http.mjs';
 function id(v,n){if(!Number.isSafeInteger(v)||v<1)throw new ApiError(422,`${n} must be a positive integer`);return v;}
 function aligned(v,n,key,unique=false){
@@ -17,6 +18,7 @@ function options(body){
 export async function mapRouteHandler(body,ctx){
   const {env,PM,embedDocuments,loadStoredMap,saveMap}=ctx;
   if(!body||typeof body!=='object'||Array.isArray(body))throw new ApiError(422,'request must be an object');
+  const radiusOpts=radiusOptions(body);
   const texts=body.texts!==undefined;
   if(texts===(body.vectors!==undefined))throw new ApiError(422,'provide exactly one of texts or vectors');
   const input=texts?body.texts:body.vectors;
@@ -49,12 +51,13 @@ export async function mapRouteHandler(body,ctx){
   let math_ledger=null;
   const explain=ctx.explainTransition||(typeof PM.explainTransition==='function'?PM.explainTransition.bind(PM):null);
   if(baseline&&explain){try{math_ledger=!ctx.explainTransition&&comparison?.math_ledger?comparison.math_ledger:explain(baseline,map,{predicted_delta:body.predicted_delta});}catch(e){throw new ApiError(409,`transition validation failed: ${e.message}`);}}
+  const radius_comparison=attachRadius(map,baseline,radiusOpts);
   const persist=body.persist!==false;const resultId=persist?await saveMap(map,source):null;
-  return {id:resultId,map,comparison,math_ledger,persisted:persist};
+  return {id:resultId,map,comparison,math_ledger,radius_comparison,persisted:persist};
 }
 export async function mapsCompareHandler(body,ctx){
   const before=await ctx.loadStoredMap(id(body?.before_id,'before_id'));const after=await ctx.loadStoredMap(id(body?.after_id,'after_id'));
   if(!before||!after)throw new ApiError(404,'map not found');
   if(!before.frame||!after.frame)throw new ApiError(409,'legacy map has no frozen frame; create a new baseline');
-  try{return ctx.PM.compareMaps(before,after);}catch(e){throw new ApiError(409,e.message);}
+  try{const comparison=ctx.PM.compareMaps(before,after);const radius_comparison=attachRadius(after,before,radiusOptions(body));return {...comparison,radius_comparison};}catch(e){if(e instanceof ApiError)throw e;throw new ApiError(409,e.message);}
 }

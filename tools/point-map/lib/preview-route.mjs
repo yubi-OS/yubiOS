@@ -1,3 +1,4 @@
+import { radiusOptions } from './radius-api.mjs';
 // lib/preview-route.mjs
 // POST /api/map/preview — measure a CANDIDATE corpus under a frozen stored
 // baseline frame without changing any stored state.
@@ -53,7 +54,7 @@ function diagnosticOptions(body) {
     }
     out[key] = v;
   }
-  return out;
+  return {...out,...radiusOptions(body)};
 }
 
 /** Cheap, AI-free validation of the whole request shape. */
@@ -236,6 +237,7 @@ export async function mapPreviewHandler(body, ctx) {
       : "per-name comparison on the inherited frozen frame",
     math_ledger: result.math_ledger || { available: false, reason: "PM.explainTransition is not implemented in the loaded core" },
     map_diagnostics,
+    radius_comparison: result.radius_comparison,
     target: {
       action: target.action,
       name: target.name,

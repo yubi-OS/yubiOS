@@ -1,0 +1,1870 @@
+{
+ "_fixture": "TEST DOUBLE — hand-scoped radius contract fixtures for radius-browser-test.mjs. The arithmetic (I(r), area, mean_area, fractions) is computed by the stated definitions and is internally consistent; the clearances, names and witness pairs are invented to cover UI branches and are NOT measurements. The backend radius module is the parent's and was never executed here. No live API was contacted.",
+ "canonical_radius": 0.095,
+ "domain": [
+  0,
+  2
+ ],
+ "grid": [
+  0.075,
+  0.085,
+  0.095,
+  0.105,
+  0.115
+ ],
+ "baseline_names": [
+  "line:0",
+  "line:1",
+  "line:2",
+  "line:3",
+  "line:4",
+  "line:5",
+  "line:6",
+  "line:7",
+  "line:8",
+  "line:9",
+  "line:10",
+  "line:11",
+  "line:12",
+  "line:13"
+ ],
+ "baseline_profile": {
+  "version": "radius/1",
+  "canonical_radius": 0.095,
+  "domain": [
+   0,
+   2
+  ],
+  "radii": [
+   0.075,
+   0.085,
+   0.095,
+   0.105,
+   0.115
+  ],
+  "canonical_isolated": 9,
+  "n": 14,
+  "samples": [
+   {
+    "radius": 0.075,
+    "isolated": 12,
+    "isolated_fraction": 0.8571428571428571,
+    "area": 1.0099999999999998,
+    "mean_area": 0.07214285714285713
+   },
+   {
+    "radius": 0.085,
+    "isolated": 11,
+    "isolated_fraction": 0.7857142857142857,
+    "area": 1.1249999999999998,
+    "mean_area": 0.08035714285714284
+   },
+   {
+    "radius": 0.095,
+    "isolated": 9,
+    "isolated_fraction": 0.6428571428571429,
+    "area": 1.2289999999999999,
+    "mean_area": 0.08778571428571427
+   },
+   {
+    "radius": 0.105,
+    "isolated": 5,
+    "isolated_fraction": 0.35714285714285715,
+    "area": 1.2942,
+    "mean_area": 0.09244285714285715
+   },
+   {
+    "radius": 0.115,
+    "isolated": 4,
+    "isolated_fraction": 0.2857142857142857,
+    "area": 1.3392,
+    "mean_area": 0.09565714285714286
+   }
+  ],
+  "per_item": [
+   {
+    "name": "line:0",
+    "nearest_name": "line:1",
+    "nearest_ties": [],
+    "clearance": 0.04,
+    "isolated_at_canonical": false,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:1",
+    "nearest_name": "line:2",
+    "nearest_ties": [],
+    "clearance": 0.07,
+    "isolated_at_canonical": false,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:2",
+    "nearest_name": "line:3",
+    "nearest_ties": [],
+    "clearance": 0.08,
+    "isolated_at_canonical": false,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:3",
+    "nearest_name": "line:4",
+    "nearest_ties": [],
+    "clearance": 0.09,
+    "isolated_at_canonical": false,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:4",
+    "nearest_name": "line:5",
+    "nearest_ties": [],
+    "clearance": 0.094,
+    "isolated_at_canonical": false,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:5",
+    "nearest_name": "line:6",
+    "nearest_ties": [],
+    "clearance": 0.0952,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:6",
+    "nearest_name": "line:7",
+    "nearest_ties": [],
+    "clearance": 0.096,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:7",
+    "nearest_name": "line:8",
+    "nearest_ties": [],
+    "clearance": 0.1,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:8",
+    "nearest_name": "line:9",
+    "nearest_ties": [],
+    "clearance": 0.104,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:9",
+    "nearest_name": "line:10",
+    "nearest_ties": [],
+    "clearance": 0.11,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:10",
+    "nearest_name": "line:11",
+    "nearest_ties": [],
+    "clearance": 0.12,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:11",
+    "nearest_name": "line:12",
+    "nearest_ties": [],
+    "clearance": 0.15,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:12",
+    "nearest_name": "line:13",
+    "nearest_ties": [],
+    "clearance": 0.2,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   },
+   {
+    "name": "line:13",
+    "nearest_name": "line:0",
+    "nearest_ties": [],
+    "clearance": 0.3,
+    "isolated_at_canonical": true,
+    "robustness": {
+     "status": "conditional",
+     "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+    }
+   }
+  ],
+  "bounds": {
+   "coordinate_epsilon": 1e-9,
+   "distance_error_bound": 2e-9,
+   "validated": false,
+   "certified": false
+  },
+  "scope": "Exact frozen-coordinate radius sensitivity on the pinned frame. Diagnostic only: not a confidence interval, not a significance test, not a quality score, and not a prospective forecast. The canonical radius 0.095 is fixed; this grid is predeclared and no radius was selected after seeing the numbers. Domain r = 0..2 chord units."
+ },
+ "scenarios": {
+  "skills/new-candidate/SKILL.md": {
+   "action": "add",
+   "map_profile": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "domain": [
+     0,
+     2
+    ],
+    "radii": [
+     0.075,
+     0.085,
+     0.095,
+     0.105,
+     0.115
+    ],
+    "canonical_isolated": 10,
+    "n": 15,
+    "samples": [
+     {
+      "radius": 0.075,
+      "isolated": 13,
+      "isolated_fraction": 0.8666666666666667,
+      "area": 1.0849999999999997,
+      "mean_area": 0.07233333333333332
+     },
+     {
+      "radius": 0.085,
+      "isolated": 12,
+      "isolated_fraction": 0.8,
+      "area": 1.2099999999999997,
+      "mean_area": 0.08066666666666665
+     },
+     {
+      "radius": 0.095,
+      "isolated": 10,
+      "isolated_fraction": 0.6666666666666666,
+      "area": 1.3239999999999998,
+      "mean_area": 0.08826666666666666
+     },
+     {
+      "radius": 0.105,
+      "isolated": 5,
+      "isolated_fraction": 0.3333333333333333,
+      "area": 1.3917,
+      "mean_area": 0.09278
+     },
+     {
+      "radius": 0.115,
+      "isolated": 4,
+      "isolated_fraction": 0.26666666666666666,
+      "area": 1.4366999999999999,
+      "mean_area": 0.09577999999999999
+     }
+    ],
+    "per_item": [
+     {
+      "name": "line:0",
+      "nearest_name": "line:1",
+      "nearest_ties": [],
+      "clearance": 0.04,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:1",
+      "nearest_name": "line:2",
+      "nearest_ties": [],
+      "clearance": 0.07,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:2",
+      "nearest_name": "line:3",
+      "nearest_ties": [],
+      "clearance": 0.08,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:3",
+      "nearest_name": "line:4",
+      "nearest_ties": [],
+      "clearance": 0.09,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:4",
+      "nearest_name": "line:5",
+      "nearest_ties": [],
+      "clearance": 0.094,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:5",
+      "nearest_name": "line:6",
+      "nearest_ties": [],
+      "clearance": 0.0952,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:6",
+      "nearest_name": "line:7",
+      "nearest_ties": [],
+      "clearance": 0.096,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:7",
+      "nearest_name": "line:8",
+      "nearest_ties": [],
+      "clearance": 0.1,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:8",
+      "nearest_name": "line:9",
+      "nearest_ties": [],
+      "clearance": 0.104,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:9",
+      "nearest_name": "line:10",
+      "nearest_ties": [],
+      "clearance": 0.11,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:10",
+      "nearest_name": "line:11",
+      "nearest_ties": [],
+      "clearance": 0.12,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:11",
+      "nearest_name": "line:12",
+      "nearest_ties": [],
+      "clearance": 0.15,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:12",
+      "nearest_name": "line:13",
+      "nearest_ties": [],
+      "clearance": 0.2,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:13",
+      "nearest_name": "line:0",
+      "nearest_ties": [],
+      "clearance": 0.3,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "skills/new-candidate/SKILL.md",
+      "nearest_name": "line:5",
+      "nearest_ties": [
+       "line:5",
+       "line:6"
+      ],
+      "clearance": 0.0975,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "margin_to_canonical": 0.0025
+      }
+     }
+    ],
+    "bounds": {
+     "coordinate_epsilon": 1e-9,
+     "distance_error_bound": 2e-9,
+     "validated": false,
+     "certified": false
+    },
+    "scope": "Exact frozen-coordinate radius sensitivity on the pinned frame. Diagnostic only: not a confidence interval, not a significance test, not a quality score, and not a prospective forecast. The canonical radius 0.095 is fixed; this grid is predeclared and no radius was selected after seeing the numbers. Domain r = 0..2 chord units."
+   },
+   "radius_comparison": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "canonical_delta": 1,
+    "samples": [
+     {
+      "radius": 0.075,
+      "before": 12,
+      "after": 13,
+      "delta": 1
+     },
+     {
+      "radius": 0.085,
+      "before": 11,
+      "after": 12,
+      "delta": 1
+     },
+     {
+      "radius": 0.095,
+      "before": 9,
+      "after": 10,
+      "delta": 1
+     },
+     {
+      "radius": 0.105,
+      "before": 5,
+      "after": 5,
+      "delta": 0
+     },
+     {
+      "radius": 0.115,
+      "before": 4,
+      "after": 4,
+      "delta": 0
+     }
+    ],
+    "exact_delta_interval": {
+     "lower": 0,
+     "upper": 0.0975,
+     "lower_closed": true,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": true,
+      "witnesses": [],
+      "total": 0,
+      "shown": 0
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "after",
+        "name": "skills/new-candidate/SKILL.md",
+        "nearest_name": "line:5",
+        "clearance": 0.0975
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "same_sign_interval": {
+     "lower": 0,
+     "upper": 0.0975,
+     "lower_closed": true,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": true,
+      "witnesses": [],
+      "total": 0,
+      "shown": 0
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "after",
+        "name": "skills/new-candidate/SKILL.md",
+        "nearest_name": "line:5",
+        "clearance": 0.0975
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "retrospective": true,
+    "scope": "Retrospective radius comparison: the candidate text is already embedded, so both sides are computed states rather than a pre-edit prediction. Agreement with a predicted delta is not evidence of improved forecasting. Diagnostic only; the operative reading stays the canonical radius 0.095."
+   }
+  },
+  "line:3": {
+   "action": "change",
+   "map_profile": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "domain": [
+     0,
+     2
+    ],
+    "radii": [
+     0.075,
+     0.085,
+     0.095,
+     0.105,
+     0.115
+    ],
+    "canonical_isolated": 8,
+    "n": 14,
+    "samples": [
+     {
+      "radius": 0.075,
+      "isolated": 13,
+      "isolated_fraction": 0.9285714285714286,
+      "area": 1.015,
+      "mean_area": 0.0725
+     },
+     {
+      "radius": 0.085,
+      "isolated": 11,
+      "isolated_fraction": 0.7857142857142857,
+      "area": 1.1309999999999998,
+      "mean_area": 0.08078571428571427
+     },
+     {
+      "radius": 0.095,
+      "isolated": 8,
+      "isolated_fraction": 0.5714285714285714,
+      "area": 1.2299999999999998,
+      "mean_area": 0.08785714285714284
+     },
+     {
+      "radius": 0.105,
+      "isolated": 5,
+      "isolated_fraction": 0.35714285714285715,
+      "area": 1.2942,
+      "mean_area": 0.09244285714285715
+     },
+     {
+      "radius": 0.115,
+      "isolated": 4,
+      "isolated_fraction": 0.2857142857142857,
+      "area": 1.3392,
+      "mean_area": 0.09565714285714286
+     }
+    ],
+    "per_item": [
+     {
+      "name": "line:0",
+      "nearest_name": "line:1",
+      "nearest_ties": [],
+      "clearance": 0.04,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:1",
+      "nearest_name": "line:2",
+      "nearest_ties": [],
+      "clearance": 0.076,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:2",
+      "nearest_name": "line:3",
+      "nearest_ties": [],
+      "clearance": 0.08,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:3",
+      "nearest_name": "line:6",
+      "nearest_ties": [
+       "line:6"
+      ],
+      "clearance": 0.09,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "margin_to_canonical": 0.001
+      }
+     },
+     {
+      "name": "line:4",
+      "nearest_name": "line:5",
+      "nearest_ties": [],
+      "clearance": 0.094,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:5",
+      "nearest_name": "line:6",
+      "nearest_ties": [],
+      "clearance": 0.0952,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:6",
+      "nearest_name": "line:7",
+      "nearest_ties": [],
+      "clearance": 0.09,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:7",
+      "nearest_name": "line:8",
+      "nearest_ties": [],
+      "clearance": 0.1,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:8",
+      "nearest_name": "line:9",
+      "nearest_ties": [],
+      "clearance": 0.104,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:9",
+      "nearest_name": "line:10",
+      "nearest_ties": [],
+      "clearance": 0.11,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:10",
+      "nearest_name": "line:11",
+      "nearest_ties": [],
+      "clearance": 0.12,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:11",
+      "nearest_name": "line:12",
+      "nearest_ties": [],
+      "clearance": 0.15,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:12",
+      "nearest_name": "line:13",
+      "nearest_ties": [],
+      "clearance": 0.2,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:13",
+      "nearest_name": "line:0",
+      "nearest_ties": [],
+      "clearance": 0.3,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     }
+    ],
+    "bounds": {
+     "coordinate_epsilon": 1e-9,
+     "distance_error_bound": 2e-9,
+     "validated": false,
+     "certified": false
+    },
+    "scope": "Exact frozen-coordinate radius sensitivity on the pinned frame. Diagnostic only: not a confidence interval, not a significance test, not a quality score, and not a prospective forecast. The canonical radius 0.095 is fixed; this grid is predeclared and no radius was selected after seeing the numbers. Domain r = 0..2 chord units."
+   },
+   "radius_comparison": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "canonical_delta": -1,
+    "samples": [
+     {
+      "radius": 0.075,
+      "before": 12,
+      "after": 13,
+      "delta": 1
+     },
+     {
+      "radius": 0.085,
+      "before": 11,
+      "after": 11,
+      "delta": 0
+     },
+     {
+      "radius": 0.095,
+      "before": 9,
+      "after": 8,
+      "delta": -1
+     },
+     {
+      "radius": 0.105,
+      "before": 5,
+      "after": 5,
+      "delta": 0
+     },
+     {
+      "radius": 0.115,
+      "before": 4,
+      "after": 4,
+      "delta": 0
+     }
+    ],
+    "exact_delta_interval": {
+     "lower": 0.09,
+     "upper": 0.096,
+     "lower_closed": false,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "after",
+        "name": "line:6",
+        "nearest_name": "line:3",
+        "clearance": 0.09
+       },
+       {
+        "side": "after",
+        "name": "line:3",
+        "nearest_name": "line:6",
+        "clearance": 0.09
+       }
+      ],
+      "total": 4,
+      "shown": 2
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "before",
+        "name": "line:6",
+        "nearest_name": "line:7",
+        "clearance": 0.096
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "same_sign_interval": {
+     "lower": 0.09,
+     "upper": 0.096,
+     "lower_closed": false,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "after",
+        "name": "line:6",
+        "nearest_name": "line:3",
+        "clearance": 0.09
+       },
+       {
+        "side": "after",
+        "name": "line:3",
+        "nearest_name": "line:6",
+        "clearance": 0.09
+       }
+      ],
+      "total": 4,
+      "shown": 2
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "before",
+        "name": "line:6",
+        "nearest_name": "line:7",
+        "clearance": 0.096
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "retrospective": true,
+    "scope": "Retrospective radius comparison: the candidate text is already embedded, so both sides are computed states rather than a pre-edit prediction. Agreement with a predicted delta is not evidence of improved forecasting. Diagnostic only; the operative reading stays the canonical radius 0.095."
+   }
+  },
+  "refs/domain-end-candidate.md": {
+   "action": "add",
+   "map_profile": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "domain": [
+     0,
+     2
+    ],
+    "radii": [
+     0.075,
+     0.085,
+     0.095,
+     0.105,
+     0.115
+    ],
+    "canonical_isolated": 9,
+    "n": 14,
+    "samples": [
+     {
+      "radius": 0.075,
+      "isolated": 12,
+      "isolated_fraction": 0.8571428571428571,
+      "area": 1.0099999999999998,
+      "mean_area": 0.07214285714285713
+     },
+     {
+      "radius": 0.085,
+      "isolated": 11,
+      "isolated_fraction": 0.7857142857142857,
+      "area": 1.1249999999999998,
+      "mean_area": 0.08035714285714284
+     },
+     {
+      "radius": 0.095,
+      "isolated": 9,
+      "isolated_fraction": 0.6428571428571429,
+      "area": 1.2289999999999999,
+      "mean_area": 0.08778571428571427
+     },
+     {
+      "radius": 0.105,
+      "isolated": 5,
+      "isolated_fraction": 0.35714285714285715,
+      "area": 1.2942,
+      "mean_area": 0.09244285714285715
+     },
+     {
+      "radius": 0.115,
+      "isolated": 4,
+      "isolated_fraction": 0.2857142857142857,
+      "area": 1.3392,
+      "mean_area": 0.09565714285714286
+     }
+    ],
+    "per_item": [
+     {
+      "name": "line:0",
+      "nearest_name": "line:1",
+      "nearest_ties": [],
+      "clearance": 0.04,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:1",
+      "nearest_name": "line:2",
+      "nearest_ties": [],
+      "clearance": 0.07,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:2",
+      "nearest_name": "line:3",
+      "nearest_ties": [],
+      "clearance": 0.08,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:3",
+      "nearest_name": "line:4",
+      "nearest_ties": [],
+      "clearance": 0.09,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:4",
+      "nearest_name": "line:5",
+      "nearest_ties": [],
+      "clearance": 0.094,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:5",
+      "nearest_name": "line:6",
+      "nearest_ties": [],
+      "clearance": 0.0952,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:6",
+      "nearest_name": "line:7",
+      "nearest_ties": [],
+      "clearance": 0.096,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:7",
+      "nearest_name": "line:8",
+      "nearest_ties": [],
+      "clearance": 0.1,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:8",
+      "nearest_name": "line:9",
+      "nearest_ties": [],
+      "clearance": 0.104,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:9",
+      "nearest_name": "line:10",
+      "nearest_ties": [],
+      "clearance": 0.11,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:10",
+      "nearest_name": "line:11",
+      "nearest_ties": [],
+      "clearance": 0.12,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:11",
+      "nearest_name": "line:12",
+      "nearest_ties": [],
+      "clearance": 0.15,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:12",
+      "nearest_name": "line:13",
+      "nearest_ties": [],
+      "clearance": 0.2,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "refs/domain-end-candidate.md",
+      "nearest_name": "line:0",
+      "nearest_ties": [],
+      "clearance": 0.45,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     }
+    ],
+    "bounds": {
+     "coordinate_epsilon": 1e-9,
+     "distance_error_bound": 2e-9,
+     "validated": false,
+     "certified": false
+    },
+    "scope": "Exact frozen-coordinate radius sensitivity on the pinned frame. Diagnostic only: not a confidence interval, not a significance test, not a quality score, and not a prospective forecast. The canonical radius 0.095 is fixed; this grid is predeclared and no radius was selected after seeing the numbers. Domain r = 0..2 chord units."
+   },
+   "radius_comparison": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "canonical_delta": 0,
+    "samples": [
+     {
+      "radius": 0.075,
+      "before": 12,
+      "after": 12,
+      "delta": 0
+     },
+     {
+      "radius": 0.085,
+      "before": 11,
+      "after": 11,
+      "delta": 0
+     },
+     {
+      "radius": 0.095,
+      "before": 9,
+      "after": 9,
+      "delta": 0
+     },
+     {
+      "radius": 0.105,
+      "before": 5,
+      "after": 5,
+      "delta": 0
+     },
+     {
+      "radius": 0.115,
+      "before": 4,
+      "after": 4,
+      "delta": 0
+     }
+    ],
+    "exact_delta_interval": {
+     "lower": 0.2,
+     "upper": 2,
+     "lower_closed": false,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "before",
+        "name": "line:13",
+        "nearest_name": "line:0",
+        "clearance": 0.2
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     },
+     "upper_boundary": {
+      "domain_boundary": true,
+      "witnesses": [],
+      "total": 0,
+      "shown": 0
+     }
+    },
+    "same_sign_interval": {
+     "lower": 0.2,
+     "upper": 2,
+     "lower_closed": false,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "before",
+        "name": "line:13",
+        "nearest_name": "line:0",
+        "clearance": 0.2
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     },
+     "upper_boundary": {
+      "domain_boundary": true,
+      "witnesses": [],
+      "total": 0,
+      "shown": 0
+     }
+    },
+    "retrospective": true,
+    "scope": "Retrospective radius comparison: the candidate text is already embedded, so both sides are computed states rather than a pre-edit prediction. Agreement with a predicted delta is not evidence of improved forecasting. Diagnostic only; the operative reading stays the canonical radius 0.095."
+   }
+  },
+  "refs/<img src=x onerror=\"window.__pwned=1\">.md": {
+   "action": "add",
+   "map_profile": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "domain": [
+     0,
+     2
+    ],
+    "radii": [
+     0.075,
+     0.085,
+     0.095,
+     0.105,
+     0.115
+    ],
+    "canonical_isolated": 9,
+    "n": 14,
+    "samples": [
+     {
+      "radius": 0.075,
+      "isolated": 12,
+      "isolated_fraction": 0.8571428571428571,
+      "area": 1.0099999999999998,
+      "mean_area": 0.07214285714285713
+     },
+     {
+      "radius": 0.085,
+      "isolated": 11,
+      "isolated_fraction": 0.7857142857142857,
+      "area": 1.1249999999999998,
+      "mean_area": 0.08035714285714284
+     },
+     {
+      "radius": 0.095,
+      "isolated": 9,
+      "isolated_fraction": 0.6428571428571429,
+      "area": 1.2289999999999999,
+      "mean_area": 0.08778571428571427
+     },
+     {
+      "radius": 0.105,
+      "isolated": 5,
+      "isolated_fraction": 0.35714285714285715,
+      "area": 1.2942,
+      "mean_area": 0.09244285714285715
+     },
+     {
+      "radius": 0.115,
+      "isolated": 4,
+      "isolated_fraction": 0.2857142857142857,
+      "area": 1.3392,
+      "mean_area": 0.09565714285714286
+     }
+    ],
+    "per_item": [
+     {
+      "name": "refs/<img src=x onerror=\"window.__pwned=1\">.md",
+      "nearest_name": "<script>window.__pwned2=1</script>",
+      "nearest_ties": [
+       "<svg onload=\"window.__pwned3=1\">"
+      ],
+      "clearance": 0.04,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "<b onmouseover=\"window.__pwned4=1\">conditional</b>"
+      }
+     },
+     {
+      "name": "line:1",
+      "nearest_name": "line:2",
+      "nearest_ties": [],
+      "clearance": 0.07,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:2",
+      "nearest_name": "line:3",
+      "nearest_ties": [],
+      "clearance": 0.08,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:3",
+      "nearest_name": "line:4",
+      "nearest_ties": [],
+      "clearance": 0.09,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:4",
+      "nearest_name": "line:5",
+      "nearest_ties": [],
+      "clearance": 0.094,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:5",
+      "nearest_name": "line:6",
+      "nearest_ties": [],
+      "clearance": 0.0952,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:6",
+      "nearest_name": "line:7",
+      "nearest_ties": [],
+      "clearance": 0.096,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:7",
+      "nearest_name": "line:8",
+      "nearest_ties": [],
+      "clearance": 0.1,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:8",
+      "nearest_name": "line:9",
+      "nearest_ties": [],
+      "clearance": 0.104,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:9",
+      "nearest_name": "line:10",
+      "nearest_ties": [],
+      "clearance": 0.11,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:10",
+      "nearest_name": "line:11",
+      "nearest_ties": [],
+      "clearance": 0.12,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:11",
+      "nearest_name": "line:12",
+      "nearest_ties": [],
+      "clearance": 0.15,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:12",
+      "nearest_name": "line:13",
+      "nearest_ties": [],
+      "clearance": 0.2,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     },
+     {
+      "name": "line:13",
+      "nearest_name": "line:0",
+      "nearest_ties": [],
+      "clearance": 0.3,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "conditional",
+       "reason": "conditional on the caller-supplied, unvalidated coordinate bounds"
+      }
+     }
+    ],
+    "bounds": {
+     "coordinate_epsilon": 1e-9,
+     "distance_error_bound": 2e-9,
+     "validated": false,
+     "certified": false
+    },
+    "scope": "Exact frozen-coordinate radius sensitivity on the pinned frame. Diagnostic only: not a confidence interval, not a significance test, not a quality score, and not a prospective forecast. The canonical radius 0.095 is fixed; this grid is predeclared and no radius was selected after seeing the numbers. Domain r = 0..2 chord units."
+   },
+   "radius_comparison": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "canonical_delta": 0,
+    "samples": [
+     {
+      "radius": 0.075,
+      "before": 12,
+      "after": 12,
+      "delta": 0
+     },
+     {
+      "radius": 0.085,
+      "before": 11,
+      "after": 11,
+      "delta": 0
+     },
+     {
+      "radius": 0.095,
+      "before": 9,
+      "after": 9,
+      "delta": 0
+     },
+     {
+      "radius": 0.105,
+      "before": 5,
+      "after": 5,
+      "delta": 0
+     },
+     {
+      "radius": 0.115,
+      "before": 4,
+      "after": 4,
+      "delta": 0
+     }
+    ],
+    "exact_delta_interval": {
+     "lower": 0.09,
+     "upper": 0.096,
+     "lower_closed": false,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "<i onerror=\"window.__pwned5=1\">after</i>",
+        "name": "refs/<img src=x onerror=\"window.__pwned=1\">.md",
+        "nearest_name": "<img src=x onerror=\"window.__pwned=1\">",
+        "clearance": 0.09
+       }
+      ],
+      "total": 2,
+      "shown": 1
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "before",
+        "name": "<img src=x onerror=\"window.__pwned=1\">",
+        "nearest_name": "<img src=x onerror=\"window.__pwned=1\">",
+        "clearance": 0.096
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "same_sign_interval": {
+     "lower": 0.09,
+     "upper": 0.096,
+     "lower_closed": false,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "<i onerror=\"window.__pwned5=1\">after</i>",
+        "name": "refs/<img src=x onerror=\"window.__pwned=1\">.md",
+        "nearest_name": "<img src=x onerror=\"window.__pwned=1\">",
+        "clearance": 0.09
+       }
+      ],
+      "total": 2,
+      "shown": 1
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "before",
+        "name": "<img src=x onerror=\"window.__pwned=1\">",
+        "nearest_name": "<img src=x onerror=\"window.__pwned=1\">",
+        "clearance": 0.096
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "retrospective": true,
+    "scope": "Retrospective radius comparison: the candidate text is already embedded, so both sides are computed states rather than a pre-edit prediction. Agreement with a predicted delta is not evidence of improved forecasting. Diagnostic only; the operative reading stays the canonical radius 0.095."
+   }
+  },
+  "refs/no-bounds-candidate.md": {
+   "action": "add",
+   "map_profile": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "domain": [
+     0,
+     2
+    ],
+    "radii": [
+     0.075,
+     0.085,
+     0.095,
+     0.105,
+     0.115
+    ],
+    "canonical_isolated": 10,
+    "n": 15,
+    "samples": [
+     {
+      "radius": 0.075,
+      "isolated": 13,
+      "isolated_fraction": 0.8666666666666667,
+      "area": 1.0849999999999997,
+      "mean_area": 0.07233333333333332
+     },
+     {
+      "radius": 0.085,
+      "isolated": 12,
+      "isolated_fraction": 0.8,
+      "area": 1.2099999999999997,
+      "mean_area": 0.08066666666666665
+     },
+     {
+      "radius": 0.095,
+      "isolated": 10,
+      "isolated_fraction": 0.6666666666666666,
+      "area": 1.3239999999999998,
+      "mean_area": 0.08826666666666666
+     },
+     {
+      "radius": 0.105,
+      "isolated": 5,
+      "isolated_fraction": 0.3333333333333333,
+      "area": 1.3917,
+      "mean_area": 0.09278
+     },
+     {
+      "radius": 0.115,
+      "isolated": 4,
+      "isolated_fraction": 0.26666666666666666,
+      "area": 1.4366999999999999,
+      "mean_area": 0.09577999999999999
+     }
+    ],
+    "per_item": [
+     {
+      "name": "line:0",
+      "nearest_name": "line:1",
+      "nearest_ties": [],
+      "clearance": 0.04,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:1",
+      "nearest_name": "line:2",
+      "nearest_ties": [],
+      "clearance": 0.07,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:2",
+      "nearest_name": "line:3",
+      "nearest_ties": [],
+      "clearance": 0.08,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:3",
+      "nearest_name": "line:4",
+      "nearest_ties": [],
+      "clearance": 0.09,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:4",
+      "nearest_name": "line:5",
+      "nearest_ties": [],
+      "clearance": 0.094,
+      "isolated_at_canonical": false,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:5",
+      "nearest_name": "line:6",
+      "nearest_ties": [],
+      "clearance": 0.0952,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:6",
+      "nearest_name": "line:7",
+      "nearest_ties": [],
+      "clearance": 0.096,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:7",
+      "nearest_name": "line:8",
+      "nearest_ties": [],
+      "clearance": 0.1,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:8",
+      "nearest_name": "line:9",
+      "nearest_ties": [],
+      "clearance": 0.104,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:9",
+      "nearest_name": "line:10",
+      "nearest_ties": [],
+      "clearance": 0.11,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:10",
+      "nearest_name": "line:11",
+      "nearest_ties": [],
+      "clearance": 0.12,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:11",
+      "nearest_name": "line:12",
+      "nearest_ties": [],
+      "clearance": 0.15,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:12",
+      "nearest_name": "line:13",
+      "nearest_ties": [],
+      "clearance": 0.2,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "line:13",
+      "nearest_name": "line:0",
+      "nearest_ties": [],
+      "clearance": 0.3,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     },
+     {
+      "name": "refs/no-bounds-candidate.md",
+      "nearest_name": "line:2",
+      "nearest_ties": [],
+      "clearance": 0.0975,
+      "isolated_at_canonical": true,
+      "robustness": {
+       "status": "not-claimed",
+       "reason": "no bounds were supplied, so no robustness verdict is claimed"
+      }
+     }
+    ],
+    "scope": "Exact frozen-coordinate radius sensitivity on the pinned frame. Diagnostic only: not a confidence interval, not a significance test, not a quality score, and not a prospective forecast. The canonical radius 0.095 is fixed; this grid is predeclared and no radius was selected after seeing the numbers. Domain r = 0..2 chord units."
+   },
+   "radius_comparison": {
+    "version": "radius/1",
+    "canonical_radius": 0.095,
+    "canonical_delta": 1,
+    "samples": [
+     {
+      "radius": 0.075,
+      "before": 12,
+      "after": 13,
+      "delta": 1
+     },
+     {
+      "radius": 0.085,
+      "before": 11,
+      "after": 12,
+      "delta": 1
+     },
+     {
+      "radius": 0.095,
+      "before": 9,
+      "after": 10,
+      "delta": 1
+     },
+     {
+      "radius": 0.105,
+      "before": 5,
+      "after": 5,
+      "delta": 0
+     },
+     {
+      "radius": 0.115,
+      "before": 4,
+      "after": 4,
+      "delta": 0
+     }
+    ],
+    "exact_delta_interval": {
+     "lower": 0,
+     "upper": 0.0975,
+     "lower_closed": true,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": true,
+      "witnesses": [],
+      "total": 0,
+      "shown": 0
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "after",
+        "name": "skills/new-candidate/SKILL.md",
+        "nearest_name": "line:5",
+        "clearance": 0.0975
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "same_sign_interval": {
+     "lower": 0,
+     "upper": 0.0975,
+     "lower_closed": true,
+     "upper_closed": true,
+     "lower_boundary": {
+      "domain_boundary": true,
+      "witnesses": [],
+      "total": 0,
+      "shown": 0
+     },
+     "upper_boundary": {
+      "domain_boundary": false,
+      "witnesses": [
+       {
+        "side": "after",
+        "name": "skills/new-candidate/SKILL.md",
+        "nearest_name": "line:5",
+        "clearance": 0.0975
+       }
+      ],
+      "total": 1,
+      "shown": 1
+     }
+    },
+    "retrospective": true,
+    "scope": "Retrospective radius comparison: the candidate text is already embedded, so both sides are computed states rather than a pre-edit prediction. Agreement with a predicted delta is not evidence of improved forecasting. Diagnostic only; the operative reading stays the canonical radius 0.095."
+   }
+  },
+  "refs/legacy-no-profile.md": {
+   "action": "add",
+   "map_profile": null,
+   "radius_comparison": null
+  }
+ },
+ "names": {
+  "add": "skills/new-candidate/SKILL.md",
+  "change": "line:3",
+  "domain": "refs/domain-end-candidate.md",
+  "xss": "refs/<img src=x onerror=\"window.__pwned=1\">.md",
+  "nobounds": "refs/no-bounds-candidate.md",
+  "legacy": "refs/legacy-no-profile.md"
+ }
+}

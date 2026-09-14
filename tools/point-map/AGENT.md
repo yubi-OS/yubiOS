@@ -129,3 +129,33 @@ The UI's **Use as baseline** button retains the exact submitted text corpus in m
 Stored diagnostics use a lossless tuple encoding to stay within D1's row limit. Public reads decode the same object schema; frames and numbers are unchanged. An oversized stored result fails explicitly, with `persist:false` available for an ephemeral ordinary map.
 
 **Evidence boundary:** the exact ledger replays all ten historical PR 230 transitions, including three silent CHANGE operations and three neutral ADD operations. This is retrospective verification. It does not turn the historical 4/10 sign agreement into a 10/10 forecast result. Independent factual/task grading still governs whether a candidate should be kept.
+
+
+## Radius diagnostics (radius/1)
+
+The canonical isolation radius stays **0.095**. The pointmap/0.2 frame, hashes, coordinates, existing ledger and rung ranking are unchanged. Radius diagnostics describe the existing full-precision coordinates; they never select a different operative metric.
+
+`map.radius_profile` is included in new map/preview responses. Stored-map GETs can compute it without embedding or writing a row; a legacy record that cannot be enriched stays readable and carries an explicit `radius_profile_unavailable` reason. `radius_comparison` accompanies baseline map/preview results. The existing same-name `/api/maps/compare` response includes it inside `comparison`. Existing same-name restrictions remain; use candidate preview for a single ADD.
+
+The fixed display grid is `[0.075,0.085,0.095,0.105,0.115]`. Profile fields include:
+
+- `per_item`: literal name, nearest neighbour name, tie count, clearance and canonical isolated state;
+- `samples`: radius, I(r), isolated fraction, clipped area S_R and S_R/N;
+- `bounds`: optional coordinate/error assumptions, always `validated:false` and `certified:false`;
+- `canonical_radius`, `frame_id`, `instrument_id`, version and scope.
+
+For nearest-neighbour clearance c_i, strict graph edges d<r imply `I(r)=sum_i indicator(r<=c_i)`. A tie remains isolated. `S_R=integral_0^R I(r)dr=sum_i min(R,c_i)`. The area has chord-distance-times-count units; it is not free energy or a quality score. Compare profiles only on the same frozen frame/instrument and report N alongside totals.
+
+`radius_comparison` reports the fixed-grid before/after/delta counts and maximal `exact_delta_interval` and `same_sign_interval` around 0.095 within chord-radius domain [0,2]. Endpoints carry `lower_closed`/`upper_closed` flags and named boundary witnesses. At most eight witnesses are displayed per endpoint, with `total` and `shown`; path strings are not truncated. A domain endpoint is marked explicitly. Cells are evaluated at their right endpoint to preserve strict-threshold ties, including adjacent representable floating-point values.
+
+These are parameter-stability intervals with respect to the computed distances, not statistical confidence intervals or pre-edit forecasts. Preview has already embedded the actual candidate, but still writes no repository, saved map or Vectorize entry. The existing embedding cache may change.
+
+Optional API diagnostics: `coordinate_epsilon >= 0` bounds each point's displacement in 3-D chord units; `distance_error_bound > 0` is a caller-supplied bound on remaining distance/comparison error. They are distinct from the existing embedding-coordinate `perturbation_linf` and `roundoff_budget`. Both must be supplied before a conditional radius-stability state is emitted. Missing assumptions produce `needs-coordinate-bound` or `needs-error-bound`; insufficient clearance produces `undetermined`. Supplied bounds are not independently validated, and no state is a certified floating-point or probabilistic guarantee. Negative, zero error, non-finite or overflowing budgets are rejected before model work.
+
+Inputs named `radius`, `canonical_radius`, `isolation_radius`, `radii` or `radius_grid` are rejected: the grid is fixed and diagnostic-only. Do not optimize or reselect it based on the observed result.
+
+The core-Lean `RadiusBounds.lean` obligations and printed-axiom/scope checks accompany the runtime module. Integer order/count lemmas do not prove Float64 distances, actual displacement bounds or scientific admission. Continuous clipped area remains a runtime-derived identity, not a newly kernel-proved real integral.
+
+A degree-preserving graph null fixes the number of degree-zero vertices, so it is degenerate for I(r0). The exploratory radius-null probes do not admit a new ranking statistic. Existing GL phase-transition negatives remain in force; the corrected equal-coefficient CGLE energy identity does not change that.
+
+The homepage Copy agent guide button continues to copy a **short introduction prompt referencing AGENT.md** as the source of truth. Its behavior is unchanged.

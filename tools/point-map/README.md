@@ -51,3 +51,11 @@ Run the added suites: `node test-math.mjs`, `node test-preview.mjs`, `node test-
 The `/api/map/preview` endpoint validates every untouched source SHA256 and frozen anchor, computes an actual candidate without inserting a map, and returns a named-neighbour ledger and margins. UI previews preserve the saved baseline. Homepage source now lives in `home.html`; deploy it to SITE KV `index.html`. Copy agent guide copies a concise introduction prompt referencing `/AGENT.md` as the source of truth; it does not copy the full document.
 
 Storage packs diagnostic objects losslessly into numeric tuples; API reads decode the same public fields. A 400×768,d=24 test stores 1,294,143 bytes rather than the 2,100,906-byte expanded object. The safe storage cap is 1.9 MB; oversize persistence returns 413 instead of silently dropping diagnostics.
+
+## Radius diagnostics (radius/1)
+
+The diagnostic-only `lib/radius-diagnostics.mjs` computes nearest-neighbour clearances, I(r), clipped area and normalized area, and correctly bracketed intervals at the unchanged canonical radius0.095. Eighteen core-Lean declarations in `RadiusBounds.lean` are kernel-checked with a separate radius scope manifest; float/metric and continuous-integral correspondence remain runtime obligations.
+
+Run `node test-radius.mjs` and `node test-radius-extra.mjs`. These cover maps66–76, row permutations, rotations, threshold ties, adjacentFloat64 breakpoints, bounded perturbations and degree-null degeneracy. `npm run test:radius-browser` exercises new UI branches; `npm run test:browser` retains the short introduction prompt and old UI regressions. Browser/API doubles are labeled; deployment requires separate live checks.
+
+No new physics, operative radius control or ranking metric is introduced. Profiles and intervals are retrospective computed geometry, not confidence intervals or forecasting success.

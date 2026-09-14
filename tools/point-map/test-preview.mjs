@@ -336,6 +336,28 @@ async function happyPathTests() {
 }
 
 async function ledgerAndDiagnosticsTests() {
+  await test("radius profiles and transition intervals are real and nonoperative",async()=>{
+    const fx=await makeBaseline(),body={baseline_id:fx.baseline_id,texts:BASE_TEXTS,names:BASE_NAMES,target:{action:"change",name:BASE_NAMES[0]}};
+    const plain=await mapPreviewHandler(body,previewCtx(fx));
+    const bounded=await mapPreviewHandler({...body,coordinate_epsilon:0.001,distance_error_bound:1e-12},previewCtx(fx));
+    assert.equal(plain.map.radius_profile.version,"radius/1");
+    assert.equal(plain.map.radius_profile.canonical_isolated,plain.map.isolated);
+    assert.equal(plain.radius_comparison.canonical_delta,plain.math_ledger.ledger.delta);
+    assert.equal(plain.map.frame_id,bounded.map.frame_id);assert.equal(plain.map.instrument_id,bounded.map.instrument_id);
+    assert.deepEqual(plain.map.bits,bounded.map.bits);assert.deepEqual(plain.map.pts_full,bounded.map.pts_full);
+    assert.deepEqual(plain.map.ladder_candidates,bounded.map.ladder_candidates);
+    assert.equal(bounded.map.radius_profile.bounds.certified,false);
+    assert.equal(bounded.radius_comparison.exact_delta_interval.lower,0);
+    assert.equal(bounded.radius_comparison.exact_delta_interval.upper,2);
+  });
+  await test("radius override and zero distance-error bound fail before model work",async()=>{
+    const fx=await makeBaseline(),body={baseline_id:fx.baseline_id,texts:BASE_TEXTS,names:BASE_NAMES,target:{action:"change",name:BASE_NAMES[0]}};
+    const calls=fx.env._counters.aiCalls;
+    await expectApiError(()=>mapPreviewHandler({...body,radius:0.2},previewCtx(fx)),422,"canonical radius override");
+    await expectApiError(()=>mapPreviewHandler({...body,distance_error_bound:0},previewCtx(fx)),422,"zero distance-error bound");
+    assert.equal(fx.env._counters.aiCalls,calls);
+  });
+
   await test("real preview ledger and target margins execute",async()=>{
     const fx=await makeBaseline();
     const out=await mapPreviewHandler({baseline_id:fx.baseline_id,texts:BASE_TEXTS,names:BASE_NAMES,target:{action:"change",name:BASE_NAMES[0]}},previewCtx(fx));

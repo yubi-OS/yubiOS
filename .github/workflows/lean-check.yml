@@ -120,6 +120,8 @@ jobs:
           node tools/point-map/test-math.mjs
           node tools/point-map/test-preview.mjs
           node tools/point-map/test-storage.mjs
+          node tools/point-map/test-radius.mjs
+          node tools/point-map/test-radius-extra.mjs
 
       - name: corpus-auditor selftest
         run: python3 tools/corpus-auditor/auditor.py --selftest
