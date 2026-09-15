@@ -657,3 +657,11 @@ function renderRadiusComparison(resp,targetName){
 
   return head+table+intervals+target;
 }
+
+// ---- copy agent guide: the homepage's short introduction, pointing at /AGENT.md ----
+const INTRO_PROMPT="Use SOS Agent to assess and improve the corpus I provide.\n\nFirst read https://steady-orbit.systems-a.workers.dev/AGENT.md in full and treat it as the source of truth for the current API, equations, constraints and workflow.\n\nFollow the guide to create a frozen baseline, preview candidate edits and verify their measured effects before changing the corpus. Keep task-quality checks separate from geometric measurements. If you cannot read the guide, stop rather than guessing.";
+(function(){const btn=$("copyagent"),ok=$("copyagent-ok"),err=$("copyagent-err");if(!btn)return;
+ function show(el){ok.style.display=err.style.display="none";el.style.display="inline";setTimeout(()=>{el.style.display="none"},2500)}
+ function fallbackCopy(text){const ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.top="-1000px";document.body.appendChild(ta);ta.select();let done=false;try{done=document.execCommand("copy")===true}catch(e){done=false}document.body.removeChild(ta);if(done)show(ok);else{err.textContent="clipboard unavailable - open /AGENT.md and copy it manually";show(err)}}
+ btn.onclick=()=>{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(INTRO_PROMPT).then(()=>show(ok)).catch(()=>fallbackCopy(INTRO_PROMPT));else fallbackCopy(INTRO_PROMPT)};
+})();
