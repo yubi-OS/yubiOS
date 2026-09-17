@@ -194,14 +194,26 @@ for (const seed of [3, 11, 29]) {
     const X = PM.synth(30, 8, seed);
     const o = { d: 5, K: 8, T: 0.05, steps: 1200, seed: 7, names: X.map((_, i) => "n" + i) };
     const a = BASE.runMap(X, o), b = PM.runMap(X, o);
-    OLD_FIELDS.forEach(f => deepEq(b[f], a[f], "field drifted: " + f));
+    const ADD_RUNG_FIELDS = new Set(["rung_key", "joins", "creates_isolate", "joins_note", "target_pattern"]);
+    const stripLadder = (lc) => lc && lc.rungs ? { ...lc, rungs: lc.rungs.map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !ADD_RUNG_FIELDS.has(k) && k !== "prompt"))) } : lc;
+    const DROP = new Set([...ADD_RUNG_FIELDS, "prompt"]); // rung-only additive keys + the prompt text (gained two sentences); never numbers
+    const stripAny = (v) => { if (!v || typeof v !== "object") return v; if (Array.isArray(v)) return v.map(stripAny); return Object.fromEntries(Object.entries(v).filter(([k]) => !DROP.has(k)).map(([k, x]) => [k, stripAny(x)])); };
+    OLD_FIELDS.forEach(f => deepEq((f === "ladder_candidates" || f === "nss") ? stripAny(b[f]) : b[f], (f === "ladder_candidates" || f === "nss") ? stripAny(a[f]) : a[f], "field drifted: " + f));
+    // prompt text is compared separately: the historical prompt must be a prefix-compatible subset of the new one
+    for (const [i, r] of a.ladder_candidates.rungs.entries()) { const nb = b.ladder_candidates.rungs[i]; assert.ok(nb.prompt.startsWith(r.prompt.split("]")[0] + "]"), "prompt head drifted"); assert.ok(nb.prompt.includes("Inspect the actual content of those files"), "guardrail text dropped"); }
     assert.strictEqual(Object.keys(a).every(k => k in b), true);
   });
 }
 test("ladder candidate rung ranking is unchanged", () => {
   const X = PM.synth(30, 8, 5);
   const o = { d: 5, K: 8, steps: 1000, seed: 1, names: X.map((_, i) => "n" + i) };
-  deepEq(PM.runMap(X, o).ladder_candidates, BASE.runMap(X, o).ladder_candidates);
+  // Additive rung fields (rung_key, joins, creates_isolate, joins_note, target_pattern; placement/1, 2026-09-17)
+  // are stripped before comparison: the RANKING and every historical field must be byte-identical.
+  const ADDITIVE = new Set(["rung_key", "joins", "creates_isolate", "joins_note", "target_pattern"]);
+  const strip = (lc) => ({ ...lc, rungs: lc.rungs.map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !ADDITIVE.has(k) && k !== "prompt"))) });
+  deepEq(strip(PM.runMap(X, o).ladder_candidates), strip(BASE.runMap(X, o).ladder_candidates));
+  const rungs = PM.runMap(X, o).ladder_candidates.rungs;
+  for (const r of rungs) { assert.ok(typeof r.rung_key === "string" && r.rung_key.startsWith(r.action + ":"), "rung_key"); assert.ok(Array.isArray(r.joins), "joins"); }
 });
 test("compareMaps on identical inputs keeps its old field values", () => {
   const X = PM.synth(24, 6, 2);

@@ -337,6 +337,10 @@ var PM = (function () {
       };
     };
     const nameOf = (i) => { const k = keys[i]; return k && k.name ? k.name : (k && k.label ? k.label : "item #" + i); };
+    // which currently-isolated items stop being isolated under a candidate matrix (names, base rows only)
+    const baseIsoIdx = pts.map((p, i) => pts.some((q, j) => j !== i && chord(p, q) < ISO_RADIUS) ? -1 : i).filter(i => i >= 0);
+    const joinsOf = (B2) => { const pts2 = B2.map(ops.toS2); return baseIsoIdx.filter(i => pts2.some((q, j) => j !== i && chord(pts2[i], q) < ISO_RADIUS)).map(nameOf); };
+    const newRowIsolated = (B2) => { const pts2 = B2.map(ops.toS2); const n = pts2.length - 1; return !pts2.some((q, j) => j !== n && chord(pts2[n], q) < ISO_RADIUS); };
     const bitName = (j) => "bit " + j + " (frozen PCA axis " + j + " " + (threshold === "zero" ? "> 0" : "> frozen median") + ")";
     const ham = (a, b) => a.reduce((acc, v, j) => acc + (v !== b[j] ? 1 : 0), 0);
     const exemplars = (target, pred, n) => bits.map((r, k) => ({ k, h: ham(r, target) })).filter(o => pred(o.k)).sort((a, b) => a.h - b.h).slice(0, n || 3).map(o => nameOf(o.k));
@@ -363,20 +367,27 @@ var PM = (function () {
       let bi = 0, bd = Infinity;
       patPts.forEach((q, i) => { const dd = geo(q, target); if (dd < bd) { bd = dd; bi = i; } });
       const pat = patterns[bi];
-      const m = measure(bits.concat([pat.slice()]));           // atomic: exactly one row
+      const B2 = bits.concat([pat.slice()]);
+      const m = measure(B2);           // atomic: exactly one row
       const on = pat.map((v, j) => v ? j : -1).filter(j => j >= 0);
       const off = pat.map((v, j) => v ? -1 : j).filter(j => j >= 0);
-      const ex = exemplars(pat, () => true);
+      const joins = joinsOf(B2);
+      const ex = exemplars(pat, () => true);   // unchanged: nearest existing items by bit pattern
       cands.push({
         action: "add", rows_added: 1, sector: sIdx + 1, sector_count: c, semantic_status: "unvalidated",
         pattern: pat, frame_id, delta: m, score: -m.isolated_delta,
+        rung_key: "add:s" + (sIdx + 1) + ":" + pat.join(""),
+        joins, creates_isolate: newRowIsolated(B2),
+        joins_note: joins.length ? "the predicted isolated delta comes from these currently-isolated items gaining the synthetic row as a neighbour; a real document only realises it if its OWN embedding lands within chord 0.095 of them — write toward their content, then verify with /api/map/preview placement" : "no isolate is joined by this pattern; the predicted delta is the new row's own isolation status",
         exemplars: ex,
         hypothesis: "bit-space hypothesis: one item carrying " + (on.length ? on.map(bitName).join(", ") : "none of the bits") +
           (off.length ? " and not " + off.map(bitName).join(", ") : "") + " lands in geometric sector " + (sIdx + 1) +
           " (" + (c === 0 ? "empty" : c + " item" + (c === 1 ? "" : "s")) + ") under the frozen frame",
         method: "insert one synthetic row with that pattern, re-place on the FROZEN frame (no refit), remeasure occupancy and isolation",
-        prompt: "[add · geometric sector " + (sIdx + 1) + "] Write one new item for this corpus. Nearest existing items by bit pattern: " +
-          (ex.join(", ") || "(none)") + ". " + guardrails(m)
+        prompt: "[add · geometric sector " + (sIdx + 1) + "] Write one new item for this corpus" +
+          (joins.length ? " whose content sits next to " + joins.join(", ") + " (the isolated item(s) this rung would join)" : "") +
+          ". Nearest existing items by bit pattern: " + (ex.join(", ") || "(none)") +
+          ". Pass this rung as `rung` to POST /api/map/preview and read `placement` (achieved bits vs pattern, sector, joins_realised) before committing. " + guardrails(m)
       });
     }
     // (b) change — flip one bit on one item (the strongest single-action atoms)
@@ -384,9 +395,11 @@ var PM = (function () {
       const B2 = bits.map(r => r.slice()); B2[a.i][a.flip] = 1;
       const m = measure(B2);
       const ex = exemplars(bits[a.i], k => k !== a.i && bits[k][a.flip] === 1);
+      const joins = joinsOf(B2).filter(n => n !== nameOf(a.i));
       cands.push({
         action: "change", item: a.i, name: nameOf(a.i), flip_bit: a.flip, atom_delta: +a.delta.toFixed(5),
         sector: sectorIndex(pts[a.i]) + 1, semantic_status: "unvalidated", frame_id,
+        rung_key: "change:" + nameOf(a.i) + ":bit" + a.flip, target_pattern: B2[a.i].slice(), joins,
         delta: m, score: -m.isolated_delta, exemplars: ex,
         hypothesis: "bit-space hypothesis: turning on " + bitName(a.flip) + " for " + nameOf(a.i) +
           " is its single-action atom (delta=" + a.delta.toFixed(3) + " toward the frozen pole)",

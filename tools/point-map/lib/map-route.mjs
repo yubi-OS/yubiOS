@@ -1,5 +1,6 @@
 import { radiusOptions, attachRadius } from './radius-api.mjs';
 import { ApiError } from './http.mjs';
+import { placement } from './placement.mjs';
 import { MAX_ITEMS } from './limits.mjs';
 function id(v,n){if(!Number.isSafeInteger(v)||v<1)throw new ApiError(422,`${n} must be a positive integer`);return v;}
 function aligned(v,n,key,unique=false){
@@ -53,8 +54,15 @@ export async function mapRouteHandler(body,ctx){
   const explain=ctx.explainTransition||(typeof PM.explainTransition==='function'?PM.explainTransition.bind(PM):null);
   if(baseline&&explain){try{math_ledger=!ctx.explainTransition&&comparison?.math_ledger?comparison.math_ledger:explain(baseline,map,{predicted_delta:body.predicted_delta});}catch(e){throw new ApiError(409,`transition validation failed: ${e.message}`);}}
   const radius_comparison=attachRadius(map,baseline,radiusOpts);
+  // single ADD or single CHANGE against a baseline: report where the item landed even when compareMaps is name-set incomparable
+  let placement_block=null;
+  if(baseline&&Array.isArray(baseline.names)&&Array.isArray(baseline.pts_full)&&Array.isArray(baseline.bits)){
+    const added=map.names.filter(n=>!baseline.names.includes(n)); const removed=baseline.names.filter(n=>!map.names.includes(n));
+    if(added.length===1&&removed.length===0){try{placement_block=placement(baseline,map,added[0],'add',null);}catch(e){placement_block={available:false,reason:e.message};}}
+    else if(added.length===0&&removed.length===0&&comparison&&Array.isArray(comparison.changed_names)&&comparison.changed_names.length===1){try{placement_block=placement(baseline,map,comparison.changed_names[0],'change',null);}catch(e){placement_block={available:false,reason:e.message};}}
+  }
   const persist=body.persist!==false;const resultId=persist?await saveMap(map,source):null;
-  return {id:resultId,map,comparison,math_ledger,radius_comparison,persisted:persist};
+  return {id:resultId,map,comparison,math_ledger,radius_comparison,placement:placement_block,persisted:persist};
 }
 export async function mapsCompareHandler(body,ctx){
   const before=await ctx.loadStoredMap(id(body?.before_id,'before_id'));const after=await ctx.loadStoredMap(id(body?.after_id,'after_id'));

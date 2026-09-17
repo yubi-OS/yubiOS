@@ -31,6 +31,7 @@ import { MAX_ITEMS } from "./limits.mjs";
 import { sha256Hex } from "./chunking.mjs";
 import { validateDocs } from "./embed-pipeline.mjs";
 import { mapRouteHandler } from "./map-route.mjs";
+import { placement, validateRung } from "./placement.mjs";
 
 /** Settings the preview refuses to take from the caller. Rejecting (rather
  *  than ignoring) is the documented unambiguous policy. */
@@ -78,13 +79,15 @@ function validateRequest(body) {
   nonEmptyString(target.name, "target.name");
 
   const diagnostics = diagnosticOptions(body);
+  let rung = null;
+  if (body.rung !== undefined) { try { rung = validateRung(body.rung, Array.isArray(body.rung.pattern ?? body.rung.target_pattern) ? (body.rung.pattern ?? body.rung.target_pattern).length : NaN); } catch (e) { throw new ApiError(422, `rung: ${e.message}`); } }
 
   for (const key of INHERITED_ONLY) {
     if (body[key] !== undefined) {
       throw new ApiError(409, `preview inherits the baseline's frozen frame and settings; remove ${key} from the request`, { inherited_only: INHERITED_ONLY });
     }
   }
-  return { texts, names, target, diagnostics };
+  return { texts, names, target, diagnostics, rung };
 }
 
 /** The baseline must be a v0.2, frozen-frame, chunked/v1 TEXT baseline with
@@ -160,7 +163,7 @@ function resolveTargetDiff(beforeByName, afterByName, target) {
  */
 export async function mapPreviewHandler(body, ctx) {
   const { env, PM, embedDocuments, loadStoredMap } = ctx;
-  const { texts, names, target, diagnostics } = validateRequest(body);
+  const { texts, names, target, diagnostics, rung } = validateRequest(body);
   validateDocs(texts);
 
   const baseline = await loadStoredMap(body.baseline_id);
@@ -227,11 +230,19 @@ export async function mapPreviewHandler(body, ctx) {
     excluded_from_instrument_identity:true,
     note:"Conditional diagnostic budgets are excluded from the frozen instrument hash." };
 
+  let placementBlock = null;
+  try {
+    let r = rung;
+    if (r && r.pattern && r.pattern.length !== map.bits[0].length) throw new RangeError(`rung.pattern has ${r.pattern.length} bits, map has ${map.bits[0].length}`);
+    placementBlock = placement(baseline, map, target.name, target.action, r);
+  } catch (e) { throw new ApiError(422, `placement: ${e.message}`); }
+
   return {
     preview: true,
     persisted: false,
     baseline_id: body.baseline_id,
     map,
+    placement: placementBlock,
     comparison: result.comparison,
     comparison_note: target.action === "add"
       ? "name-set comparison is unsupported for ADD by the existing PM.compareMaps (same-name-set only); comparison.comparable is false and the per-anchor evidence is unchanged_anchor_count"

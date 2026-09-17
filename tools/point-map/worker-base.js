@@ -1090,8 +1090,8 @@ GET  /map/pointmap.js           -> static pointmap.js module
                 return await loadStoredMapJson(db, env, id);
               };
               const saveMap = async (map, source) => saveStoredMap(db, env, map, source);
-              const { id, map, comparison, math_ledger, radius_comparison } = await mapRouteHandler(body, { env, PM, embedDocuments, loadStoredMap, saveMap });
-              return json({ id, map, comparison, radius_comparison, ...(math_ledger ? { math_ledger } : {}) });
+              const { id, map, comparison, math_ledger, radius_comparison, placement } = await mapRouteHandler(body, { env, PM, embedDocuments, loadStoredMap, saveMap });
+              return json({ id, map, comparison, radius_comparison, placement, ...(math_ledger ? { math_ledger } : {}) });
             } catch (e) {
               return errorResponse(e);
             }
