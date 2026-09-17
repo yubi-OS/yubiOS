@@ -1,11 +1,11 @@
-# libvfio-user Build Strategy: Bundle vs Per-Runner â Decision
+# libvfio-user Build Strategy: Bundle vs Per-Runner — Decision
 
 <last-reviewed-against-blockers>2026-07-30</last-reviewed-against-blockers>
 
 Date: 2026-07-30
 Linear: OMN-100
 Framing log: `session/omn-100-bundle-vs-per-runner-solo-2026-07-30.md` ([SOLO] ideation, V1+V4 finalists)
-Established context: PR #137 (commit `a53332e`) â the per-runner build that opens this question. ADR-022 (Unified OCI Distribution â Per-Artifact Tags on `0mniteck/yubios`).
+Established context: PR #137 (commit `a53332e`) — the per-runner build that opens this question. ADR-022 (Unified OCI Distribution — Per-Artifact Tags on `0mniteck/yubios`).
 
 ## Decision
 
@@ -19,11 +19,11 @@ Five variations across five lenses:
 
 | Variation | Lens | Score (4-20) | Verdict |
 |---|---|---|---|
-| V1 â Bundle as OCI artifact | Simplification | 12 | Finalist (medium-term) |
-| V2 â Per-runner build (current) â keep it | Constraint-removal | 13 | Dropped (doesn't address the question) |
-| V3 â Hybrid AMD64-bundle + ARM64-per-runner | Audience-shift | 11 | Dropped (complicates without proportionate gain) |
-| V4 â Bundle only as a CI cache | Combination | 14 | **Finalist (near-term, first step)** |
-| V5 â Bundle via bcvk's image model | Inversion | 9 | Dropped (scope creep into bcvk) |
+| V1 — Bundle as OCI artifact | Simplification | 12 | Finalist (medium-term) |
+| V2 — Per-runner build (current) — keep it | Constraint-removal | 13 | Dropped (doesn't address the question) |
+| V3 — Hybrid AMD64-bundle + ARM64-per-runner | Audience-shift | 11 | Dropped (complicates without proportionate gain) |
+| V4 — Bundle only as a CI cache | Combination | 14 | **Finalist (near-term, first step)** |
+| V5 — Bundle via bcvk's image model | Inversion | 9 | Dropped (scope creep into bcvk) |
 
 The full generation log (including stress-tests of V1 and V4, critique of each, and the un-testable bet) lives at `session/omn-100-bundle-vs-per-runner-solo-2026-07-30.md`.
 
@@ -47,7 +47,7 @@ Measure hit rate over 5-10 runs via the cache-step logs. The workflow already st
 
 ### Step 2 (medium-term)
 
-* Add a `libvfio-user` target to `yubiOS-bake.hcl` that produces `0mniteck/yubios:libvfio-user-<sha>` â a scratch-rootfs with the pre-built binary + `samples/` directory.
+* Add a `libvfio-user` target to `yubiOS-bake.hcl` that produces `0mniteck/yubios:libvfio-user-<sha>` — a scratch-rootfs with the pre-built binary + `samples/` directory.
 * Extend the publish workflow leg with a new artifact publish (gated on `Docker_push=true`).
 * Update `ci_test-vgpu-vm.yml` to pull the digest instead of building.
 
@@ -75,29 +75,24 @@ Retire the meson/ninja stage in `ci_test-vgpu-vm.yml` once Step 2 is verified en
 * ADR-022 establishes the per-artifact OCI tag scheme that V1 leans on.
 
 
-
 ## Attestation coverage
 
 This document supports the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Least-privilege coverage
 
-This document applies least-privilege hardening: Linux capabilities (drop + ambient), ProtectSystem/ProtectHome, rootless execution, dynamic user, RBAC, PrivilegeBoundary. Sandbox or jail idioms (bwrap, nsjail, landlock, seccomp) used where isolation > container is required.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Continuous / adaptive coverage
 
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Cryptographic identity coverage
