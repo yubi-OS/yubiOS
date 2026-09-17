@@ -12,7 +12,7 @@ GET /api/maps/:id
 POST /api/maps/compare {before_id,after_id}
 GET /map/pointmap.js
 
-Create a baseline once. Reuse baseline_id for edits. K=2..40; map N=10..400,D=2..768. Names must be unique and aligned. No client-side PCA required.
+Create a baseline once. Reuse baseline_id for edits. K=2..40; map N=10..4000,D=2..768 (limits/2: 40 MB/120k chunks per request; <=1000 uncached docs/12k uncached chunks per request, warm via POST /api/embed batches of <=400; maps >1.9 MB persist via KV overflow). Names must be unique and aligned. No client-side PCA required.
 Geometry is diagnostic; task_verdict remains not-tested until an independent task verifier is run. Sectors carry no validated NSS meaning. No automatic deletions. Spectroscopy summaries are not admitted coordinates. Do not send secrets to shared public map storage.
 Legacy /api/assess,/api/fits,/api/narrate remain separate from the wayfinder.
 

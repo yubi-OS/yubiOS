@@ -68,3 +68,7 @@ No new physics, operative radius control or ranking metric is introduced. Profil
 
 `lib/axis-redundancy.mjs` (`POST /api/map/axis-redundancy`) runs the leave-one-out nearest-neighbour predictability of each frozen bit axis against K draws of `PM._internal.nullDraw` (margins preserved) and reports exclusion-only verdicts with `admitted:false` hard-coded; no embedding, nothing written. `lib/consistency-route.mjs` (`POST /api/map/consistency`) measures one candidate under 1..3 caller-supplied text variants through the real preview path and reports sign agreement, never a gate. Run `node test-axis-consistency.mjs` (15 checks). Neither touches frames, bits, null, radius or ranking.
 
+## limits/2 (2026-09-17)
+
+`lib/limits.mjs` centralizes corpus caps: 4000 items/documents, 40 MB and 120k chunks per request, 64 MiB JSON bodies. Per-request *uncached* embedding work is capped at 1000 docs / 12k chunks (413 with a warm-up hint: `POST /api/embed` in batches of <= 400); KV reads are bulk (100 keys per call). `lib/map-store.mjs` stores maps above 1.9 MB in SITE KV (`map-json:<id>`) behind a D1 pointer, so N=4000 maps persist; reads are unchanged. `pointmap.js` runMap and `radius-diagnostics` accept N <= 4000; axis trial N <= 1200. Run `node test-limits.mjs` (9 checks). Deploy metadata sets `limits.cpu_ms=300000`.
+

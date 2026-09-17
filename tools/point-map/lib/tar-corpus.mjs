@@ -9,8 +9,8 @@ export const SPECIAL = /(^|\/)(readme|license|makefile|dockerfile|containerfile)
 export const SKIP_DIRS = /(^|\/)(node_modules|vendor|dist|build|\.git|figs?|images?|assets|fonts)\//i;
 
 const MAX_DECOMPRESSED_BYTES = 256 * 1024 * 1024; // 256 MB
-const MAX_TOTAL_TEXT_CHARS = 16 * 1024 * 1024;   // 16 MB
-const MAX_ENTRIES = 10000;
+const MAX_TOTAL_TEXT_CHARS = 64 * 1024 * 1024;   // 64 MB (limits/2)
+const MAX_ENTRIES = 40000;
 const PER_FILE_CAP_CHARS = 200000;
 const MAX_FILE_SIZE_BYTES = 200000;              // 200 KB
 

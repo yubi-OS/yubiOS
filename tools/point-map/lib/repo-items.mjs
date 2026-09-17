@@ -22,7 +22,8 @@
 
 import { ApiError } from "./http.mjs";
 
-export const MAX_ITEMS = 400;
+import { MAX_ITEMS } from "./limits.mjs";
+export { MAX_ITEMS };
 
 function parseOwnerRepo(input, parseRepoUrl) {
   const repoIn = String(input || "").trim();

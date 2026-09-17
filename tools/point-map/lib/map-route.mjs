@@ -1,5 +1,6 @@
 import { radiusOptions, attachRadius } from './radius-api.mjs';
 import { ApiError } from './http.mjs';
+import { MAX_ITEMS } from './limits.mjs';
 function id(v,n){if(!Number.isSafeInteger(v)||v<1)throw new ApiError(422,`${n} must be a positive integer`);return v;}
 function aligned(v,n,key,unique=false){
   if(v===undefined)return;
@@ -22,7 +23,7 @@ export async function mapRouteHandler(body,ctx){
   const texts=body.texts!==undefined;
   if(texts===(body.vectors!==undefined))throw new ApiError(422,'provide exactly one of texts or vectors');
   const input=texts?body.texts:body.vectors;
-  if(!Array.isArray(input)||input.length<10||input.length>400)throw new ApiError(422,'need 10..400 items');
+  if(!Array.isArray(input)||input.length<10||input.length>MAX_ITEMS)throw new ApiError(422,`need 10..${MAX_ITEMS} items`);
   aligned(body.names,input.length,'names',true);aligned(body.labels,input.length,'labels');
   if(body.persist!==undefined&&typeof body.persist!=='boolean')throw new ApiError(422,'persist must be boolean');
   if(body.frame!==undefined)throw new ApiError(422,'use baseline_id; arbitrary frames are not accepted by the API');
