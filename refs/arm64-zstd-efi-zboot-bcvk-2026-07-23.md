@@ -1,8 +1,8 @@
 _Refreshed: 2026-07-23 (renamed from refs/zstd-efi-zboot-bcvk.md, no date suffix previously)_
 
-## â ï¸ Update: the upstream fix is now merged into QEMU 11.0
+## ⚠️ Update: the upstream fix is now merged into QEMU 11.0
 
-The exact commit yubiOS pins (`3a18e8a25992d1643707e2cebdd6e9bb2bd7d3b9`) **is Daan De Meyer's own zstd EFI zboot fix, authored by him and merged by Philippe Mathieu-DaudÃ© via PR on 2026-01-20, included in the QEMU 11.0 line.** This confirms yubiOS is already pinning the correct fix commit â nothing to change there. **The remaining open question for B-QEMU-ZBOOT is purely a runner-image question**: does the CI self-hosted runner's distro package manager ship QEMU 11.0+ yet? If yes, the pinned-workaround step in `ci_test-vm.yml` may already be removable. Recommend checking the self-hosted `rock1` runner's installed QEMU version against 11.0 as the next concrete step â this is a much closer target than "wait for an unmerged upstream fix."
+The exact commit yubiOS pins (`3a18e8a25992d1643707e2cebdd6e9bb2bd7d3b9`) **is Daan De Meyer's own zstd EFI zboot fix, authored by him and merged by Philippe Mathieu-Daudé via PR on 2026-01-20, included in the QEMU 11.0 line.** This confirms yubiOS is already pinning the correct fix commit — nothing to change there. **The remaining open question for B-QEMU-ZBOOT is purely a runner-image question**: does the CI self-hosted runner's distro package manager ship QEMU 11.0+ yet? If yes, the pinned-workaround step in `ci_test-vm.yml` may already be removable. Recommend checking the self-hosted `rock1` runner's installed QEMU version against 11.0 as the next concrete step — this is a much closer target than "wait for an unmerged upstream fix."
 
 # ARM64 EFI zboot + zstd blocker (bcvk DirectBoot)
 
