@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/arm64-ftpm-phase-f0.md, no date suffix previously)_
 
-Status check 2026-07-23: Phase F0 (QEMU bring-up) work is superseded in practice by the live ARM64 Phase F integration described in TODO.md's "ARM64 Phase F â fork-CI + integration" section â all component CIs (C1-C6, R1, V1) are green, and INT integration CI is fully restored per the 2026-07-07 root-cause fix (CFG_STMM_VOLATILE_STORAGE). This file's original Phase F0 QEMU-only scope has been absorbed into that broader, now-working pipeline. Kept as historical design rationale for PCR conventions and the fTPM-vs-YubiKey trust split, which remain accurate and unchanged.
+Status check 2026-07-23: Phase F0 (QEMU bring-up) work is superseded in practice by the live ARM64 Phase F integration described in TODO.md's "ARM64 Phase F — fork-CI + integration" section — all component CIs (C1-C6, R1, V1) are green, and INT integration CI is fully restored per the 2026-07-07 root-cause fix (CFG_STMM_VOLATILE_STORAGE). This file's original Phase F0 QEMU-only scope has been absorbed into that broader, now-working pipeline. Kept as historical design rationale for PCR conventions and the fTPM-vs-YubiKey trust split, which remain accurate and unchanged.
 
 # Phase F0: QEMU ARM64 bring-up (ADR-018)
 
