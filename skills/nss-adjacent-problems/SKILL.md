@@ -1,8 +1,23 @@
 ---
 name: nss-adjacent-problems
-description: "Sixth NSS axis (after Audience, Inputs, Outputs, Mode, Assumption set) -- the Adjacent problems axis scores a file's coverage of RELATED issues, alternative solutions, problem-family taxonomy, and prior-art cross-references. Per the 12-axis negative-skill-space sweep, each file should identify (a) the related problems it solves alongside the focal problem, (b) the alternative solutions that address the same need differently, (c) the problem family it sits in (e.g. secure-boot families: measured-boot + TPM-quote + UKI vs. signed-bootloader + UKI vs. vendor-keys + shim), and (d) the prior-art and RFC/survey cross-references that ground the choice. Used as the gap-finder for RSI cycle 13 on PR #207. Use when the request mentions NSS adjacent-problems axis, related-work, prior art, alternative solutions, problem-family taxonomy, problem framing, design space enumeration, RFC cross-reference, USPTO analogous-art, citation snowballing, see-also cross-linking, or cycle-13 NSS-adjacent-problems gap-finder. NOT for assumption-set enumeration (use nss-assumption-set), failure-mode enumeration (use negative-skill-space), mode axis (use nss-mode), or any other NSS axis."
+description: >-
+  Sixth NSS axis (after Audience, Inputs, Outputs, Mode, Assumption set) -- the Adjacent problems
+  axis scores a file's coverage of RELATED issues, alternative solutions, problem-family taxonomy,
+  and prior-art cross-references. Per the 12-axis negative-skill-space sweep, each file should
+  identify (a) the related problems it solves alongside the focal problem, (b) the alternative
+  solutions that address the same need differently, (c) the problem family it sits in (e.g.
+  secure-boot families: measured-boot + TPM-quote + UKI vs. signed-bootloader + UKI vs.
+  vendor-keys + shim), and (d) the prior-art and RFC/survey cross-references that ground the
+  choice. Used as the gap-finder for RSI cycle 13 on PR #207.
 ---
 # nss-adjacent-problems
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Use when the request mentions NSS adjacent-problems axis, related-work, prior art, alternative solutions, problem-family taxonomy, problem framing, design space enumeration, RFC cross-reference, USPTO analogous-art, citation snowballing, see-also cross-linking, or cycle-13 NSS-adjacent-problems gap-finder. NOT for assumption-set enumeration (use nss-assumption-set), failure-mode enumeration (use negative-skill-space), mode axis (use nss-mode), or any other NSS axis.
+
 
 The sixth of the twelve NSS axes (per `negative-skill-space`). The **Adjacent problems** axis scores a file's coverage of *related issues, alternative solutions, problem-family taxonomy, and prior-art cross-references* -- not the count of links, but the breadth AND correctness of the relationship map documented or evidenced in the file.
 

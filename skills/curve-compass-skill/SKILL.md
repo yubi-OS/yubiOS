@@ -1,10 +1,25 @@
 ---
 name: curve-compass-skill
 description: >-
-  Reversible quantized-atom dynamics on the empirical Phi ladder (skills79, d=9), with curated -L/--lens mode that emits each improvement as a guided-curve-ideate-format new idea: hypothesis + method + parameters + Δ + verdict + score. The historical corpus dynamics (is-this-x paper sec. 7) is maximally irreversible, so this skill builds a designed chain on the same measured potential Phi(k) where detailed balance holds by construction and the Ginzburg-Landau free energy returns legitimately. Crossover T_x = 0.041143 with C-PEAK at T=0.038304. v1.1.0 adds lens-format patch generation -- each suggested file edit is a measurable experiment with concrete hypothesis, method, parameters, observed delta, and honest verdict, NOT a templated section. Use when the request mentions free energy, detailed balance, reversibility, quantized atom, Metropolis or Monte-Carlo on a coverage ladder, trajectory stabilization, burn-in, autocorrelation time, split-Rhat, effective sample size, temperature sweep, crossover temperature, fluctuation or susceptibility peak, energy-entropy competition, absorbing dynamics, entropy production, irreversibility, new ideas scheme, lens-format patches, hypothesis-driven improvement, guided-curve-ideate integration, "is this X", null-standardized statistics, curve compass, or Phi ladder. NOT for generating corpora or calibrating detection on matrices (use curved-corpus-create), NOT for measuring an existing corpus's curve (use hyperspherical-harmonic-curve), and NOT a claim about the historical corpus -- everything measured here is a property of the designed chain.
+  Reversible quantized-atom dynamics on the empirical Phi ladder (skills79, d=9), with curated
+  -L/--lens mode that emits each improvement as a guided-curve-ideate-format new idea: hypothesis
+  + method + parameters + Δ + verdict + score. The historical corpus dynamics (is-this-x paper
+  sec. 7) is maximally irreversible, so this skill builds a designed chain on the same measured
+  potential Phi(k) where detailed balance holds by construction and the Ginzburg-Landau free
+  energy returns legitimately. Crossover T_x = 0.041143 with C-PEAK at T=0.038304. v1.1.0 adds
+  lens-format patch generation -- each suggested file edit is a measurable experiment with
+  concrete hypothesis, method, parameters, observed delta, and honest verdict, NOT a templated
+  section.
 ---
 
 # curve-compass-skill
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Use when the request mentions free energy, detailed balance, reversibility, quantized atom, Metropolis or Monte-Carlo on a coverage ladder, trajectory stabilization, burn-in, autocorrelation time, split-Rhat, effective sample size, temperature sweep, crossover temperature, fluctuation or susceptibility peak, energy-entropy competition, absorbing dynamics, entropy production, irreversibility, new ideas scheme, lens-format patches, hypothesis-driven improvement, guided-curve-ideate integration, "is this X", null-standardized statistics, curve compass, or Phi ladder. NOT for generating corpora or calibrating detection on matrices (use curved-corpus-create), NOT for measuring an existing corpus's curve (use hyperspherical-harmonic-curve), and NOT a claim about the historical corpus -- everything measured here is a property of the designed chain.
+
 
 The is-this-x paper closed the Ginzburg-Landau door twice. From the matrix
 side: the "critical point" is the null's own finite-size inflation, and the

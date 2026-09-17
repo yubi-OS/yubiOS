@@ -1,9 +1,21 @@
 ---
 name: nss-failure-modes
-description: "Cycle-14 deep-research synthesis for the NSS Failure modes axis (7/12 in negative-skill-space). For each file in a corpus, the Failure modes axis identifies WHAT CAN GO WRONG -- error cases, edge cases, partial-failure scenarios, footguns, TOCTOU races, partial-write hazards, retry-without-idempotency hazards, error-swallowing anti-patterns, misleading errors, unsafe defaults, untested error paths, security-failure-mode coverage, recovery-vs-detection coverage. Use when the 12-axis NSS sweep lands on failure modes as the highest-priority Extend gap, when auditing a script/unit/API/refs-note for blameless failure-mode coverage, when reviewing a 'happy-path' implementation that lacks error-path tests, when adding a Failure modes section next to Inputs/Outputs/Audience, when documenting sysexits.h exit codes, when classifying errno values into a project error catalog, when writing a runbook for incident responders, when designing negative tests (fault injection: SIGTERM, ENOSPC, EINTR, EIO, ETIMEDOUT, ENOENT, EACCES, EAGAIN), or when auditing recovery semantics for retry/idempotency/partial-completion/cancellation/timeout ambiguity. Triggers on: NSS failure modes axis, what can go wrong, error cases, footgun, blameless postmortem, FMEA, error catalog, sysexits.h, errno, failure mode catalog, runbook, blameless retrospective, recovery path, detection signal, severity, probability, cycle-14 NSS-failure-modes gap-finder. NOT for inputs (use nss-inputs), outputs (use nss-outputs), audience (use nss-audience), mode (use nss-mode), or any of the other 11 NSS axes."
+description: >-
+  Cycle-14 deep-research synthesis for the NSS Failure modes axis (7/12 in negative-skill-space).
+  For each file in a corpus, the Failure modes axis identifies WHAT CAN GO WRONG -- error cases,
+  edge cases, partial-failure scenarios, footguns, TOCTOU races, partial-write hazards,
+  retry-without-idempotency hazards, error-swallowing anti-patterns, misleading errors, unsafe
+  defaults, untested error paths, security-failure-mode coverage, recovery-vs-detection coverage.
 ---
 
 # nss-failure-modes
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Use when the 12-axis NSS sweep lands on failure modes as the highest-priority Extend gap, when auditing a script/unit/API/refs-note for blameless failure-mode coverage, when reviewing a 'happy-path' implementation that lacks error-path tests, when adding a Failure modes section next to Inputs/Outputs/Audience, when documenting sysexits.h exit codes, when classifying errno values into a project error catalog, when writing a runbook for incident responders, when designing negative tests (fault injection: SIGTERM, ENOSPC, EINTR, EIO, ETIMEDOUT, ENOENT, EACCES, EAGAIN), or when auditing recovery semantics for retry/idempotency/partial-completion/cancellation/timeout ambiguity. Triggers on: NSS failure modes axis, what can go wrong, error cases, footgun, blameless postmortem, FMEA, error catalog, sysexits.h, errno, failure mode catalog, runbook, blameless retrospective, recovery path, detection signal, severity, probability, cycle-14 NSS-failure-modes gap-finder. NOT for inputs (use nss-inputs), outputs (use nss-outputs), audience (use nss-audience), mode (use nss-mode), or any of the other 11 NSS axes.
+
 
 The **Failure modes** axis (7/12 of `negative-skill-space`) asks: **what can go wrong here, how would I know, and what would I do about it?** A file that documents only its happy path is a file whose recovery path is recoverable only by reading its postmortem history.
 

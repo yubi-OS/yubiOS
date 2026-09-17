@@ -194,11 +194,10 @@ Each cycle produces one one-line entry appended to this section, per the `recurs
 - 2026-07-30 cycle 4: Hypothesis "Tighten description frontmatter to add 'engineering' qualifier + cross-reference to `novelty-indication` is to Fix-drift on gap-N2 (description drift at L×S=9) flagged by `negative-skill-space` via fresh-context subagent on 2026-07-30." Edit: replaced description frontmatter at line 3 to lead with 'engineering' qualifier + explicit cross-reference to `novelty-indication` for patent prior art; no other sections modified; added this cycle-4 entry. Cap override: user directive 'yes' at cycle-4 entry per RSI cap-override protocol (cycle cap was 3/3 at cycle-3 audit; user explicitly chose path (a) over path (b)). Result: TBD pending cycle-4 re-map via fresh-context subagent. Continue to cycle-4 re-map (apply fixpoint rule on re-map result).
 - 2026-07-30 cycle 5: Hypothesis "Add `novelty-indication` to `## Interaction with Other Skills` is to close gap-N3 (description-body asymmetry: description frontmatter references `novelty-indication` but body's canonical pairing list does NOT list it) flagged by `negative-skill-space` via fresh-context subagent on 2026-07-30." Edit: appended a `novelty-indication` bullet to `## Interaction with Other Skills` documenting the engineering-vs-patent complementarity + added this cycle-5 entry. Cap override exhaustion: per RSI step-7 cap-override protocol, cycle 5 was the LAST allowed cycle. Result: gap-N3 CLOSED via cycle-5 fresh-context re-map — description cross-reference at line 3 and body Interaction bullet at line 159 now align; description↔body pairing-list asymmetry eliminated. gap-3 REDUCED from L×S=16 to ~8 as a side effect (PAIR-with-novelty-indication component now mitigated; EXTEND "Internal sources first" pre-step still absent). 4 closed (gap-1, gap-2, gap-N2, gap-N3); 1 reduced (gap-3); 8 noted-but-deferred Extends (gap-4..10, gap-N1) + 9 cycle-1-deferred unchanged; no new substantive gaps. Fixpoint rule: ALL 3 CONDITIONS PASS — (1) no new substantive gaps, (2) old Extends closed or reduced, (3) no new anti-patterns. Cycle cap exhausted (5/5) AND fixpoint reached — loop terminates per RSI step-7 protocol without mandatory escalation. Cycle-5 re-map saved to `session/subagent/prior-art-search-gap-map-v5-2026-07-30.md` (platform write-restricted to `session/subagent/` for this cycle).
 
+- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
 
 
-
-
-
+---
 
 ## Least Privilege coverage for prior art search (curve-guided-rsi cycle-4 substantive edit)
 
@@ -229,13 +228,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `segmentation` count moved 22→23/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
-
----
-
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
 This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey) integration is referenced.
@@ -253,8 +245,8 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 
 ## Declarative policy coverage
 
-This skill integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

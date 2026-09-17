@@ -1,9 +1,26 @@
 ---
 name: linkedin-browser-outreach
-description: "Send and read LinkedIn messages via a live cloud browser session (browser_use) instead of Beeper or the LinkedIn API, both of which have no outreach path. Use when the user wants to log into LinkedIn, message an existing chat, or run candidate/recruiter outreach on LinkedIn and has no Mac for a Beeper bridge. Covers the credential-safe login flow (never collect the password in chat, always let the human type it into the live browser view), locating and replying to existing threads, the one-sided-thread limitation (no compose box until the other party replies first), draft-then-approve rules for outbound messages to real people, and human-speed rate limiting. Does NOT solve finding 1st/2nd-degree connections -- LinkedIn has never exposed that graph via any API or bridge; candidate lists come from a manual LinkedIn data export or public profile research (see lead_research skill), never from this skill. Also flags the ToS risk: LinkedIn prohibits automated messaging/connecting even at human pacing, account restriction is a real possibility, this is the user's explicit informed choice each time. Triggers on: LinkedIn login via browser, browser automation LinkedIn, send LinkedIn message no Beeper, LinkedIn outreach no Mac, test LinkedIn login, human-speed LinkedIn send."
+description: >-
+  Send and read LinkedIn messages via a live cloud browser session (browser_use) instead of Beeper
+  or the LinkedIn API, both of which have no outreach path. Use when the user wants to log into
+  LinkedIn, message an existing chat, or run candidate/recruiter outreach on LinkedIn and has no
+  Mac for a Beeper bridge. Covers the credential-safe login flow (never collect the password in
+  chat, always let the human type it into the live browser view), locating and replying to
+  existing threads, the one-sided-thread limitation (no compose box until the other party replies
+  first), draft-then-approve rules for outbound messages to real people, and human-speed rate
+  limiting. Does NOT solve finding 1st/2nd-degree connections -- LinkedIn has never exposed that
+  graph via any API or bridge; candidate lists come from a manual LinkedIn data export or public
+  profile research (see lead_research skill), never from this skill.
 ---
 
 # LinkedIn browser outreach (no Beeper / no Mac path)
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Also flags the ToS risk: LinkedIn prohibits automated messaging/connecting even at human pacing, account restriction is a real possibility, this is the user's explicit informed choice each time. Triggers on: LinkedIn login via browser, browser automation LinkedIn, send LinkedIn message no Beeper, LinkedIn outreach no Mac, test LinkedIn login, human-speed LinkedIn send.
+
 
 ## When to use this instead of `beeper` or the LinkedIn connector
 
@@ -102,4 +119,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

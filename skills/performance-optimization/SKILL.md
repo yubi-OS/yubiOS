@@ -548,4 +548,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 
 ## Declarative policy coverage
 
-This skill integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

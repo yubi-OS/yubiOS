@@ -1,1 +1,201 @@
-LS0tCm5hbWU6IHdlYi1wZXJmCmRlc2NyaXB0aW9uOiBBbmFseXplcyB3ZWIgcGVyZm9ybWFuY2UgdXNpbmcgQ2hyb21lIERldlRvb2xzIE1DUC4gTWVhc3VyZXMgQ29yZSBXZWIgVml0YWxzIChMQ1AsIElOUCwgQ0xTKSBhbmQgc3VwcGxlbWVudGFyeSBtZXRyaWNzIChGQ1AsIFRCVCwgU3BlZWQgSW5kZXgpLCBpZGVudGlmaWVzIHJlbmRlci1ibG9ja2luZyByZXNvdXJjZXMsIG5ldHdvcmsgZGVwZW5kZW5jeSBjaGFpbnMsIGxheW91dCBzaGlmdHMsIGNhY2hpbmcgaXNzdWVzLCBhbmQgYWNjZXNzaWJpbGl0eSBnYXBzLiBVc2Ugd2hlbiBhc2tlZCB0byBhdWRpdCwgcHJvZmlsZSwgZGVidWcsIG9yIG9wdGltaXplIHBhZ2UgbG9hZCBwZXJmb3JtYW5jZSwgTGlnaHRob3VzZSBzY29yZXMsIG9yIHNpdGUgc3BlZWQuIEJpYXNlcyB0b3dhcmRzIHJldHJpZXZhbCBmcm9tIGN1cnJlbnQgZG9jdW1lbnRhdGlvbiBvdmVyIHByZS10cmFpbmVkIGtub3dsZWRnZS4KLS0tCgojIFdlYiBQZXJmb3JtYW5jZSBBdWRpdAoKWW91ciBrbm93bGVkZ2Ugb2Ygd2ViIHBlcmZvcm1hbmNlIG1ldHJpY3MsIHRocmVzaG9sZHMsIGFuZCB0b29saW5nIEFQSXMgbWF5IGJlIG91dGRhdGVkLiAqKlByZWZlciByZXRyaWV2YWwgb3ZlciBwcmUtdHJhaW5pbmcqKiB3aGVuIGNpdGluZyBzcGVjaWZpYyBudW1iZXJzIG9yIHJlY29tbWVuZGF0aW9ucy4KCiMjIFJldHJpZXZhbCBTb3VyY2VzCgp8IFNvdXJjZSB8IEhvdyB0byByZXRyaWV2ZSB8IFVzZSBmb3IgfAp8LS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS18Cnwgd2ViLmRldiB8IGBodHRwczovL3dlYi5kZXYvYXJ0aWNsZXMvdml0YWxzYCB8IENvcmUgV2ViIFZpdGFscyB0aHJlc2hvbGRzLCBkZWZpbml0aW9ucyB8CnwgQ2hyb21lIERldlRvb2xzIGRvY3MgfCBgaHR0cHM6Ly9kZXZlbG9wZXIuY2hyb21lLmNvbS9kb2NzL2RldnRvb2xzL3BlcmZvcm1hbmNlYCB8IFRvb2xpbmcgQVBJcywgdHJhY2UgYW5hbHlzaXMgfAp8IExpZ2h0aG91c2Ugc2NvcmluZyB8IGBodHRwczovL2RldmVsb3Blci5jaHJvbWUuY29tL2RvY3MvbGlnaHRob3VzZS9wZXJmb3JtYW5jZS9wZXJmb3JtYW5jZS1zY29yaW5nYCB8IFNjb3JlIHdlaWdodHMsIG1ldHJpYyB0aHJlc2hvbGRzIHwKCiMjIEZJUlNUOiBWZXJpZnkgTUNQIFRvb2xzIEF2YWlsYWJsZQoKKipSdW4gdGhpcyBiZWZvcmUgc3RhcnRpbmcuKiogVHJ5IGNhbGxpbmcgYG5hdmlnYXRlX3BhZ2VgIG9yIGBwZXJmb3JtYW5jZV9zdGFydF90cmFjZWAuIElmIHVuYXZhaWxhYmxlLCBTVE9Q4oCUdGhlIGNocm9tZS1kZXZ0b29scyBNQ1Agc2VydmVyIGlzbid0IGNvbmZpZ3VyZWQuCgpBc2sgdGhlIHVzZXIgdG8gYWRkIHRoaXMgdG8gdGhlaXIgTUNQIGNvbmZpZzoKCmBgYGpzb24KImNocm9tZS1kZXZ0b29scyI6IHsKICAidHlwZSI6ICJsb2NhbCIsCiAgImNvbW1hbmQiOiBbIm5weCIsICIteSIsICJjaHJvbWUtZGV2dG9vbHMtbWNwQGxhdGVzdCJdCn0KYGBgCgojIyBLZXkgR3VpZGVsaW5lcwoKLSAqKkJlIGFzc2VydGl2ZSoqOiBWZXJpZnkgY2xhaW1zIGJ5IGNoZWNraW5nIG5ldHdvcmsgcmVxdWVzdHMsIERPTSwgb3IgY29kZWJhc2XigJR0aGVuIHN0YXRlIGZpbmRpbmdzIGRlZmluaXRpdmVseS4KLSAqKlZlcmlmeSBiZWZvcmUgcmVjb21tZW5kaW5nKio6IENvbmZpcm0gc29tZXRoaW5nIGlzIHVudXNlZCBiZWZvcmUgc3VnZ2VzdGluZyByZW1vdmFsLgotICoqUXVhbnRpZnkgaW1wYWN0Kio6IFVzZSBlc3RpbWF0ZWQgc2F2aW5ncyBmcm9tIGluc2lnaHRzLiBEb24ndCBwcmlvcml0aXplIGNoYW5nZXMgd2l0aCAwbXMgaW1wYWN0LgotICoqU2tpcCBub24taXNzdWVzKio6IElmIHJlbmRlci1ibG9ja2luZyByZXNvdXJjZXMgaGF2ZSAwbXMgZXN0aW1hdGVkIGltcGFjdCwgbm90ZSBidXQgZG9uJ3QgcmVjb21tZW5kIGFjdGlvbi4KLSAqKkJlIHNwZWNpZmljKio6IFNheSAiY29tcHJlc3MgaGVyby5wbmcgKDQ1MEtCKSB0byBXZWJQIiBub3QgIm9wdGltaXplIGltYWdlcyIuCi0gKipQcmlvcml0aXplIHJ1dGhsZXNzbHkqKjogQSBzaXRlIHdpdGggMjAwbXMgTENQIGFuZCAwIENMUyBpcyBhbHJlYWR5IGV4Y2VsbGVudOKAlHNheSBzby4KCiMjIFF1aWNrIFJlZmVyZW5jZQoKfCBUYXNrIHwgVG9vbCBDYWxsIHwKfC0tLS0tLXwtLS0tLS0tLS0tLXwKfCBMb2FkIHBhZ2UgfCBgbmF2aWdhdGVfcGFnZSh1cmw6ICIuLi4iKWAgfAp8IFN0YXJ0IHRyYWNlIHwgYHBlcmZvcm1hbmNlX3N0YXJ0X3RyYWNlKGF1dG9TdG9wOiB0cnVlLCByZWxvYWQ6IHRydWUpYCB8CnwgQW5hbHl6ZSBpbnNpZ2h0IHwgYHBlcmZvcm1hbmNlX2FuYWx5emVfaW5zaWdodChpbnNpZ2h0U2V0SWQ6ICIuLi4iLCBpbnNpZ2h0TmFtZTogIi4uLiIpYCB8CnwgTGlzdCByZXF1ZXN0cyB8IGBsaXN0X25ldHdvcmtfcmVxdWVzdHMocmVzb3VyY2VUeXBlczogWyJTY3JpcHQiLCAiU3R5bGVzaGVldCIsIC4uLl0pYCB8CnwgUmVxdWVzdCBkZXRhaWxzIHwgYGdldF9uZXR3b3JrX3JlcXVlc3QocmVxaWQ6IDxpZD4pYCB8CnwgQTExeSBzbmFwc2hvdCB8IGB0YWtlX3NuYXBzaG90KHZlcmJvc2U6IHRydWUpYCB8CgojIyBXb3JrZmxvdwoKQ29weSB0aGlzIGNoZWNrbGlzdCB0byB0cmFjayBwcm9ncmVzczoKCmBgYApBdWRpdCBQcm9ncmVzczoKLSBbIF0gUGhhc2UgMTogUGVyZm9ybWFuY2UgdHJhY2UgKG5hdmlnYXRlICsgcmVjb3JkKQotIFsgXSBQaGFzZSAyOiBDb3JlIFdlYiBWaXRhbHMgYW5hbHlzaXMgKGluY2x1ZGVzIENMUyBjdWxwcml0cykKLSBbIF0gUGhhc2UgMzogTmV0d29yayBhbmFseXNpcwotIFsgXSBQaGFzZSA0OiBBY2Nlc3NpYmlsaXR5IHNuYXBzaG90Ci0gWyBdIFBoYXNlIDU6IENvZGViYXNlIGFuYWx5c2lzIChza2lwIGlmIHRoaXJkLXBhcnR5IHNpdGUpCmBgYAoKIyMjIFBoYXNlIDE6IFBlcmZvcm1hbmNlIFRyYWNlCgoxLiBOYXZpZ2F0ZSB0byB0aGUgdGFyZ2V0IFVSTDoKICAgYGBgCiAgIG5hdmlnYXRlX3BhZ2UodXJsOiAiPHRhcmdldC11cmw+IikKICAgYGBgCgoyLiBTdGFydCBhIHBlcmZvcm1hbmNlIHRyYWNlIHdpdGggcmVsb2FkIHRvIGNhcHR1cmUgY29sZC1sb2FkIG1ldHJpY3M6CiAgIGBgYAogICBwZXJmb3JtYW5jZV9zdGFydF90cmFjZShhdXRvU3RvcDogdHJ1ZSwgcmVsb2FkOiB0cnVlKQogICBgYGAKCjMuIFdhaXQgZm9yIHRyYWNlIGNvbXBsZXRpb24sIHRoZW4gcmV0cmlldmUgcmVzdWx0cy4KCioqVHJvdWJsZXNob290aW5nOioqCi0gSWYgdHJhY2UgcmV0dXJucyBlbXB0eSBvciBmYWlscywgdmVyaWZ5IHRoZSBwYWdlIGxvYWRlZCBjb3JyZWN0bHkgd2l0aCBgbmF2aWdhdGVfcGFnZWAgZmlyc3QKLSBJZiBpbnNpZ2h0IG5hbWVzIGRvbid0IG1hdGNoLCBpbnNwZWN0IHRoZSB0cmFjZSByZXNwb25zZSB0byBsaXN0IGF2YWlsYWJsZSBpbnNpZ2h0cwoKIyMjIFBoYXNlIDI6IENvcmUgV2ViIFZpdGFscyBBbmFseXNpcwoKVXNlIGBwZXJmb3JtYW5jZV9hbmFseXplX2luc2lnaHRgIHRvIGV4dHJhY3Qga2V5IG1ldHJpY3MuCgoqKk5vdGU6KiogSW5zaWdodCBuYW1lcyBtYXkgdmFyeSBhY3Jvc3MgQ2hyb21lIERldlRvb2xzIHZlcnNpb25zLiBJZiBhbiBpbnNpZ2h0IG5hbWUgZG9lc24ndCB3b3JrLCBjaGVjayB0aGUgYGluc2lnaHRTZXRJZGAgZnJvbSB0aGUgdHJhY2UgcmVzcG9uc2UgdG8gZGlzY292ZXIgYXZhaWxhYmxlIGluc2lnaHRzLgoKQ29tbW9uIGluc2lnaHQgbmFtZXM6Cgp8IE1ldHJpYyB8IEluc2lnaHQgTmFtZSB8IFdoYXQgdG8gTG9vayBGb3IgfAp8LS0tLS0tLS18LS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tfAp8IExDUCB8IGBMQ1BCcmVha2Rvd25gIHwgVGltZSB0byBsYXJnZXN0IGNvbnRlbnRmdWwgcGFpbnQ7IGJyZWFrZG93biBvZiBUVEZCLCByZXNvdXJjZSBsb2FkLCByZW5kZXIgZGVsYXkgfAp8IENMUyB8IGBDTFNDdWxwcml0c2AgfCBFbGVtZW50cyBjYXVzaW5nIGxheW91dCBzaGlmdHMgKGltYWdlcyB3aXRob3V0IGRpbWVuc2lvbnMsIGluamVjdGVkIGNvbnRlbnQsIGZvbnQgc3dhcHMpIHwKfCBSZW5kZXIgQmxvY2tpbmcgfCBgUmVuZGVyQmxvY2tpbmdgIHwgQ1NTL0pTIGJsb2NraW5nIGZpcnN0IHBhaW50IHwKfCBEb2N1bWVudCBMYXRlbmN5IHwgYERvY3VtZW50TGF0ZW5jeWAgfCBTZXJ2ZXIgcmVzcG9uc2UgdGltZSBpc3N1ZXMgfAp8IE5ldHdvcmsgRGVwZW5kZW5jaWVzIHwgYE5ldHdvcmtSZXF1ZXN0c0RlcEdyYXBoYCB8IFJlcXVlc3QgY2hhaW5zIGRlbGF5aW5nIGNyaXRpY2FsIHJlc291cmNlcyB8CgpFeGFtcGxlOgpgYGAKcGVyZm9ybWFuY2VfYW5hbHl6ZV9pbnNpZ2h0KGluc2lnaHRTZXRJZDogIjxpZC1mcm9tLXRyYWNlPiIsIGluc2lnaHROYW1lOiAiTENQQnJlYWtkb3duIikKYGBgCgoqKktleSB0aHJlc2hvbGRzIChnb29kL25lZWRzLWltcHJvdmVtZW50L3Bvb3IpOioqCi0gVFRGQjogPCA4MDBtcyAvIDwgMS44cyAvID4gMS44cwotIEZDUDogPCAxLjhzIC8gPCAzcyAvID4gM3MKLSBMQ1A6IDwgMi41cyAvIDwgNHMgLyA+IDRzCi0gSU5QOiA8IDIwMG1zIC8gPCA1MDBtcyAvID4gNTAwbXMKLSBUQlQ6IDwgMjAwbXMgLyA8IDYwMG1zIC8gPiA2MDBtcwotIENMUzogPCAwLjEgLyA8IDAuMjUgLyA+IDAuMjUKLSBTcGVlZCBJbmRleDogPCAzLjRzIC8gPCA1LjhzIC8gPiA1LjhzCgojIyMgUGhhc2UgMzogTmV0d29yayBBbmFseXNpcwoKTGlzdCBhbGwgbmV0d29yayByZXF1ZXN0cyB0byBpZGVudGlmeSBvcHRpbWl6YXRpb24gb3Bwb3J0dW5pdGllczoKYGBgCmxpc3RfbmV0d29ya19yZXF1ZXN0cyhyZXNvdXJjZVR5cGVzOiBbIlNjcmlwdCIsICJTdHlsZXNoZWV0IiwgIkRvY3VtZW50IiwgIkZvbnQiLCAiSW1hZ2UiXSkKYGBgCgoqKkxvb2sgZm9yOioqCgoxLiAqKlJlbmRlci1ibG9ja2luZyByZXNvdXJjZXMqKjogSlMvQ1NTIGluIGA8aGVhZD5gIHdpdGhvdXQgYGFzeW5jYC9gZGVmZXJgL2BtZWRpYWAgYXR0cmlidXRlcwoyLiAqKk5ldHdvcmsgY2hhaW5zKio6IFJlc291cmNlcyBkaXNjb3ZlcmVkIGxhdGUgYmVjYXVzZSB0aGV5IGRlcGVuZCBvbiBvdGhlciByZXNvdXJjZXMgbG9hZGluZyBmaXJzdCAoZS5nLiwgQ1NTIGltcG9ydHMsIEpTLWxvYWRlZCBmb250cykKMy4gKipNaXNzaW5nIHByZWxvYWRzKio6IENyaXRpY2FsIHJlc291cmNlcyAoZm9udHMsIGhlcm8gaW1hZ2VzLCBrZXkgc2NyaXB0cykgbm90IHByZWxvYWRlZAo0LiAqKkNhY2hpbmcgaXNzdWVzKio6IE1pc3Npbmcgb3Igd2VhayBgQ2FjaGUtQ29udHJvbGAsIGBFVGFnYCwgb3IgYExhc3QtTW9kaWZpZWRgIGhlYWRlcnMKNS4gKipMYXJnZSBwYXlsb2FkcyoqOiBVbmNvbXByZXNzZWQgb3Igb3ZlcnNpemVkIEpTL0NTUyBidW5kbGVzCjYuICoqVW51c2VkIHByZWNvbm5lY3RzKio6IElmIGZsYWdnZWQsIHZlcmlmeSBieSBjaGVja2luZyBpZiBBTlkgcmVxdWVzdHMgd2VudCB0byB0aGF0IG9yaWdpbi4gSWYgemVybyByZXF1ZXN0cywgaXQncyBkZWZpbml0aXZlbHkgdW51c2Vk4oCUcmVjb21tZW5kIHJlbW92YWwuIElmIHJlcXVlc3RzIGV4aXN0IGJ1dCBsb2FkZWQgbGF0ZSwgdGhlIHByZWNvbm5lY3QgbWF5IHN0aWxsIGJlIHZhbHVhYmxlLgoKRm9yIGRldGFpbGVkIHJlcXVlc3QgaW5mbzoKYGBgCmdldF9uZXR3b3JrX3JlcXVlc3QocmVxaWQ6IDxpZD4pCmBgYAoKIyMjIFBoYXNlIDQ6IEFjY2Vzc2liaWxpdHkgU25hcHNob3QKClRha2UgYW4gYWNjZXNzaWJpbGl0eSB0cmVlIHNuYXBzaG90OgpgYGAKdGFrZV9zbmFwc2hvdCh2ZXJib3NlOiB0cnVlKQpgYGAKCioqRmxhZyBoaWdoLWxldmVsIGdhcHM6KioKLSBNaXNzaW5nIG9yIGR1cGxpY2F0ZSBBUklBIElEcwotIEVsZW1lbnRzIHdpdGggcG9vciBjb250cmFzdCByYXRpb3MgKGNoZWNrIGFnYWluc3QgV0NBRyBBQTogNC41OjEgZm9yIG5vcm1hbCB0ZXh0LCAzOjEgZm9yIGxhcmdlIHRleHQpCi0gRm9jdXMgdHJhcHMgb3IgbWlzc2luZyBmb2N1cyBpbmRpY2F0b3JzCi0gSW50ZXJhY3RpdmUgZWxlbWVudHMgd2l0aG91dCBhY2Nlc3NpYmxlIG5hbWVzCgojIyBQaGFzZSA1OiBDb2RlYmFzZSBBbmFseXNpcwoKKipTa2lwIGlmIGF1ZGl0aW5nIGEgdGhpcmQtcGFydHkgc2l0ZSB3aXRob3V0IGNvZGViYXNlIGFjY2Vzcy4qKgoKQW5hbHl6ZSB0aGUgY29kZWJhc2UgdG8gdW5kZXJzdGFuZCB3aGVyZSBpbXByb3ZlbWVudHMgY2FuIGJlIG1hZGUuCgojIyMgRGV0ZWN0IEZyYW1ld29yayAmIEJ1bmRsZXIKClNlYXJjaCBmb3IgY29uZmlndXJhdGlvbiBmaWxlcyB0byBpZGVudGlmeSB0aGUgc3RhY2s6Cgp8IFRvb2wgfCBDb25maWcgRmlsZXMgfAp8LS0tLS0tfC0tLS0tLS0tLS0tLS0tfAp8IFdlYnBhY2sgfCBgd2VicGFjay5jb25maWcuanNgLCBgd2VicGFjay4qLmpzYCB8CnwgVml0ZSB8IGB2aXRlLmNvbmZpZy5qc2AsIGB2aXRlLmNvbmZpZy50c2AgfAp8IFJvbGx1cCB8IGByb2xsdXAuY29uZmlnLmpzYCwgYHJvbGx1cC5jb25maWcubWpzYCB8CnwgZXNidWlsZCB8IGBlc2J1aWxkLmNvbmZpZy5qc2AsIGJ1aWxkIHNjcmlwdHMgd2l0aCBgZXNidWlsZGAgfAp8IFBhcmNlbCB8IGAucGFyY2VscmNgLCBgcGFja2FnZS5qc29uYCAocGFyY2VsIGZpZWxkKSB8CnwgTmV4dC5qcyB8IGBuZXh0LmNvbmZpZy5qc2AsIGBuZXh0LmNvbmZpZy5tanNgIHwKfCBOdXh0IHwgYG51eHQuY29uZmlnLmpzYCwgYG51eHQuY29uZmlnLnRzYCB8CnwgU3ZlbHRlS2l0IHwgYHN2ZWx0ZS5jb25maWcuanNgIHwKfCBBc3RybyB8IGBhc3Ryby5jb25maWcubWpzYCB8CgpBbHNvIGNoZWNrIGBwYWNrYWdlLmpzb25gIGZvciBmcmFtZXdvcmsgZGVwZW5kZW5jaWVzIGFuZCBidWlsZCBzY3JpcHRzLgoKIyMjIFRyZWUtU2hha2luZyAmIERlYWQgQ29kZQoKLSAqKldlYnBhY2sqKjogQ2hlY2sgZm9yIGBtb2RlOiAncHJvZHVjdGlvbidgLCBgc2lkZUVmZmVjdHNgIGluIHBhY2thZ2UuanNvbiwgYHVzZWRFeHBvcnRzYCBvcHRpbWl6YXRpb24KLSAqKlZpdGUvUm9sbHVwKio6IFRyZWUtc2hha2luZyBlbmFibGVkIGJ5IGRlZmF1bHQ7IGNoZWNrIGZvciBgdHJlZXNoYWtlYCBvcHRpb25zCi0gKipMb29rIGZvcioqOiBCYXJyZWwgZmlsZXMgKGBpbmRleC5qc2AgcmUtZXhwb3J0cyksIGxhcmdlIHV0aWxpdHkgbGlicmFyaWVzIGltcG9ydGVkIHdob2xlc2FsZSAobG9kYXNoLCBtb21lbnQpCgojIyMgVW51c2VkIEpTL0NTUwoKLSBDaGVjayBmb3IgQ1NTLWluLUpTIHZzLiBzdGF0aWMgQ1NTIGV4dHJhY3Rpb24KLSBMb29rIGZvciBQdXJnZUNTUy9VbkNTUyBjb25maWd1cmF0aW9uIChUYWlsd2luZCdzIGBjb250ZW50YCBjb25maWcpCi0gSWRlbnRpZnkgZHluYW1pYyBpbXBvcnRzIHZzLiBlYWdlciBsb2FkaW5nCgojIyMgUG9seWZpbGxzCgotIENoZWNrIGZvciBgQGJhYmVsL3ByZXNldC1lbnZgIHRhcmdldHMgYW5kIGB1c2VCdWlsdEluc2Agc2V0dGluZwotIExvb2sgZm9yIGBjb3JlLWpzYCBpbXBvcnRzIChvZnRlbiBvdmVyc2l6ZWQpCi0gQ2hlY2sgYGJyb3dzZXJzbGlzdGAgY29uZmlnIGZvciBvdmVybHkgYnJvYWQgdGFyZ2V0aW5nCgojIyMgQ29tcHJlc3Npb24gJiBNaW5pZmljYXRpb24KCi0gQ2hlY2sgZm9yIGB0ZXJzZXJgLCBgZXNidWlsZGAsIG9yIGBzd2NgIG1pbmlmaWNhdGlvbgotIExvb2sgZm9yIGd6aXAvYnJvdGxpIGNvbXByZXNzaW9uIGluIGJ1aWxkIG91dHB1dCBvciBzZXJ2ZXIgY29uZmlnCi0gQ2hlY2sgZm9yIHNvdXJjZSBtYXBzIGluIHByb2R1Y3Rpb24gYnVpbGRzIChzaG91bGQgYmUgZXh0ZXJuYWwgb3IgZGlzYWJsZWQpCgojIyBPdXRwdXQgRm9ybWF0CgpQcmVzZW50IGZpbmRpbmdzIGFzOgoKMS4gKipDb3JlIFdlYiBWaXRhbHMgU3VtbWFyeSoqIC0gVGFibGUgd2l0aCBtZXRyaWMsIHZhbHVlLCBhbmQgcmF0aW5nIChnb29kL25lZWRzLWltcHJvdmVtZW50L3Bvb3IpCjIuICoqVG9wIElzc3VlcyoqIC0gUHJpb3JpdGl6ZWQgbGlzdCBvZiBwcm9ibGVtcyB3aXRoIGVzdGltYXRlZCBpbXBhY3QgKGhpZ2gvbWVkaXVtL2xvdykKMy4gKipSZWNvbW1lbmRhdGlvbnMqKiAtIFNwZWNpZmljLCBhY3Rpb25hYmxlIGZpeGVzIHdpdGggY29kZSBzbmlwcGV0cyBvciBjb25maWcgY2hhbmdlcwo0LiAqKkNvZGViYXNlIEZpbmRpbmdzKiogLSBGcmFtZXdvcmsvYnVuZGxlciBkZXRlY3RlZCwgb3B0aW1pemF0aW9uIG9wcG9ydHVuaXRpZXMgKG9taXQgaWYgbm8gY29kZWJhc2UgYWNjZXNzKQo=
+---
+name: web-perf
+description: Analyzes web performance using Chrome DevTools MCP. Measures Core Web Vitals (LCP, INP, CLS) and supplementary metrics (FCP, TBT, Speed Index), identifies render-blocking resources, network dependency chains, layout shifts, caching issues, and accessibility gaps. Use when asked to audit, profile, debug, or optimize page load performance, Lighthouse scores, or site speed. Biases towards retrieval from current documentation over pre-trained knowledge.
+---
+
+# Web Performance Audit
+
+Your knowledge of web performance metrics, thresholds, and tooling APIs may be outdated. **Prefer retrieval over pre-training** when citing specific numbers or recommendations.
+
+## Retrieval Sources
+
+| Source | How to retrieve | Use for |
+|--------|----------------|---------|
+| web.dev | `https://web.dev/articles/vitals` | Core Web Vitals thresholds, definitions |
+| Chrome DevTools docs | `https://developer.chrome.com/docs/devtools/performance` | Tooling APIs, trace analysis |
+| Lighthouse scoring | `https://developer.chrome.com/docs/lighthouse/performance/performance-scoring` | Score weights, metric thresholds |
+
+## FIRST: Verify MCP Tools Available
+
+**Run this before starting.** Try calling `navigate_page` or `performance_start_trace`. If unavailable, STOP—the chrome-devtools MCP server isn't configured.
+
+Ask the user to add this to their MCP config:
+
+```json
+"chrome-devtools": {
+  "type": "local",
+  "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
+}
+```
+
+## Key Guidelines
+
+- **Be assertive**: Verify claims by checking network requests, DOM, or codebase—then state findings definitively.
+- **Verify before recommending**: Confirm something is unused before suggesting removal.
+- **Quantify impact**: Use estimated savings from insights. Don't prioritize changes with 0ms impact.
+- **Skip non-issues**: If render-blocking resources have 0ms estimated impact, note but don't recommend action.
+- **Be specific**: Say "compress hero.png (450KB) to WebP" not "optimize images".
+- **Prioritize ruthlessly**: A site with 200ms LCP and 0 CLS is already excellent—say so.
+
+## Quick Reference
+
+| Task | Tool Call |
+|------|-----------|
+| Load page | `navigate_page(url: "...")` |
+| Start trace | `performance_start_trace(autoStop: true, reload: true)` |
+| Analyze insight | `performance_analyze_insight(insightSetId: "...", insightName: "...")` |
+| List requests | `list_network_requests(resourceTypes: ["Script", "Stylesheet", ...])` |
+| Request details | `get_network_request(reqid: <id>)` |
+| A11y snapshot | `take_snapshot(verbose: true)` |
+
+## Workflow
+
+Copy this checklist to track progress:
+
+```
+Audit Progress:
+- [ ] Phase 1: Performance trace (navigate + record)
+- [ ] Phase 2: Core Web Vitals analysis (includes CLS culprits)
+- [ ] Phase 3: Network analysis
+- [ ] Phase 4: Accessibility snapshot
+- [ ] Phase 5: Codebase analysis (skip if third-party site)
+```
+
+### Phase 1: Performance Trace
+
+1. Navigate to the target URL:
+   ```
+   navigate_page(url: "<target-url>")
+   ```
+
+2. Start a performance trace with reload to capture cold-load metrics:
+   ```
+   performance_start_trace(autoStop: true, reload: true)
+   ```
+
+3. Wait for trace completion, then retrieve results.
+
+**Troubleshooting:**
+- If trace returns empty or fails, verify the page loaded correctly with `navigate_page` first
+- If insight names don't match, inspect the trace response to list available insights
+
+### Phase 2: Core Web Vitals Analysis
+
+Use `performance_analyze_insight` to extract key metrics.
+
+**Note:** Insight names may vary across Chrome DevTools versions. If an insight name doesn't work, check the `insightSetId` from the trace response to discover available insights.
+
+Common insight names:
+
+| Metric | Insight Name | What to Look For |
+|--------|--------------|------------------|
+| LCP | `LCPBreakdown` | Time to largest contentful paint; breakdown of TTFB, resource load, render delay |
+| CLS | `CLSCulprits` | Elements causing layout shifts (images without dimensions, injected content, font swaps) |
+| Render Blocking | `RenderBlocking` | CSS/JS blocking first paint |
+| Document Latency | `DocumentLatency` | Server response time issues |
+| Network Dependencies | `NetworkRequestsDepGraph` | Request chains delaying critical resources |
+
+Example:
+```
+performance_analyze_insight(insightSetId: "<id-from-trace>", insightName: "LCPBreakdown")
+```
+
+**Key thresholds (good/needs-improvement/poor):**
+- TTFB: < 800ms / < 1.8s / > 1.8s
+- FCP: < 1.8s / < 3s / > 3s
+- LCP: < 2.5s / < 4s / > 4s
+- INP: < 200ms / < 500ms / > 500ms
+- TBT: < 200ms / < 600ms / > 600ms
+- CLS: < 0.1 / < 0.25 / > 0.25
+- Speed Index: < 3.4s / < 5.8s / > 5.8s
+
+### Phase 3: Network Analysis
+
+List all network requests to identify optimization opportunities:
+```
+list_network_requests(resourceTypes: ["Script", "Stylesheet", "Document", "Font", "Image"])
+```
+
+**Look for:**
+
+1. **Render-blocking resources**: JS/CSS in `<head>` without `async`/`defer`/`media` attributes
+2. **Network chains**: Resources discovered late because they depend on other resources loading first (e.g., CSS imports, JS-loaded fonts)
+3. **Missing preloads**: Critical resources (fonts, hero images, key scripts) not preloaded
+4. **Caching issues**: Missing or weak `Cache-Control`, `ETag`, or `Last-Modified` headers
+5. **Large payloads**: Uncompressed or oversized JS/CSS bundles
+6. **Unused preconnects**: If flagged, verify by checking if ANY requests went to that origin. If zero requests, it's definitively unused—recommend removal. If requests exist but loaded late, the preconnect may still be valuable.
+
+For detailed request info:
+```
+get_network_request(reqid: <id>)
+```
+
+### Phase 4: Accessibility Snapshot
+
+Take an accessibility tree snapshot:
+```
+take_snapshot(verbose: true)
+```
+
+**Flag high-level gaps:**
+- Missing or duplicate ARIA IDs
+- Elements with poor contrast ratios (check against WCAG AA: 4.5:1 for normal text, 3:1 for large text)
+- Focus traps or missing focus indicators
+- Interactive elements without accessible names
+
+## Phase 5: Codebase Analysis
+
+**Skip if auditing a third-party site without codebase access.**
+
+Analyze the codebase to understand where improvements can be made.
+
+### Detect Framework & Bundler
+
+Search for configuration files to identify the stack:
+
+| Tool | Config Files |
+|------|--------------|
+| Webpack | `webpack.config.js`, `webpack.*.js` |
+| Vite | `vite.config.js`, `vite.config.ts` |
+| Rollup | `rollup.config.js`, `rollup.config.mjs` |
+| esbuild | `esbuild.config.js`, build scripts with `esbuild` |
+| Parcel | `.parcelrc`, `package.json` (parcel field) |
+| Next.js | `next.config.js`, `next.config.mjs` |
+| Nuxt | `nuxt.config.js`, `nuxt.config.ts` |
+| SvelteKit | `svelte.config.js` |
+| Astro | `astro.config.mjs` |
+
+Also check `package.json` for framework dependencies and build scripts.
+
+### Tree-Shaking & Dead Code
+
+- **Webpack**: Check for `mode: 'production'`, `sideEffects` in package.json, `usedExports` optimization
+- **Vite/Rollup**: Tree-shaking enabled by default; check for `treeshake` options
+- **Look for**: Barrel files (`index.js` re-exports), large utility libraries imported wholesale (lodash, moment)
+
+### Unused JS/CSS
+
+- Check for CSS-in-JS vs. static CSS extraction
+- Look for PurgeCSS/UnCSS configuration (Tailwind's `content` config)
+- Identify dynamic imports vs. eager loading
+
+### Polyfills
+
+- Check for `@babel/preset-env` targets and `useBuiltIns` setting
+- Look for `core-js` imports (often oversized)
+- Check `browserslist` config for overly broad targeting
+
+### Compression & Minification
+
+- Check for `terser`, `esbuild`, or `swc` minification
+- Look for gzip/brotli compression in build output or server config
+- Check for source maps in production builds (should be external or disabled)
+
+## Output Format
+
+Present findings as:
+
+1. **Core Web Vitals Summary** - Table with metric, value, and rating (good/needs-improvement/poor)
+2. **Top Issues** - Prioritized list of problems with estimated impact (high/medium/low)
+3. **Recommendations** - Specific, actionable fixes with code snippets or config changes
+4. **Codebase Findings** - Framework/bundler detected, optimization opportunities (omit if no codebase access)

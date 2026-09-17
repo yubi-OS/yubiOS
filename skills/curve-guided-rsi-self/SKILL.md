@@ -1,12 +1,30 @@
 ---
 name: curve-guided-rsi-self
-description: "Closed-loop audit pipeline retargeted at self-doc corpora — fits a learned-latent-curve on SELF.md and SELF-CHANGELOG.md as separate corpora (or on the expanded 10-memory-file corpus including USER_PREFERENCES, COMPANY, RULES, SAUNA_IDENTITY, SAUNA_TOOLS, USER_PROFILE, USER_RELATIONSHIPS, RECENT_ACTIVITY, PROJECT_RULES), then uses sparse-cell detection as a prioritization lens for self-archaeology dispatch and recursive-self-improvement cycles on the top-priority gap rows. The offshoot of curve-guided-rsi where 'each version is its own corpus item' is the granularity rule that hits the ≥20-item curve-fit gate (with a decomposition rule for sub-20 corpora). The 9-D primitive basis is derived per-corpus — per-file primitives for SELF.md rows vs SELF-CHANGELOG.md entries, plus a unified 9-D memory-file basis for the expanded 10-memory-file corpus — and at least one whole-self output is required per RSI cycle per SELF.md Bias #11 (same-cadence drift). Outputs a per-cycle SELF-CHANGELOG entry recording the curve-t of each gap-fix and the sparse-cell-count delta before/after RSI, so downstream readers can verify the closed-loop metric FIRES. Use when SELF.md or SELF-CHANGELOG.md needs prioritized self-archaeology effort, when self-archaeology cadence fires (5 self-mode turns, per directive, weekly Sunday 9 AM Pacific), when drift is suspected across sessions and the gap-list needs ranking instead of flat enumeration, or any time 'curve-fit the changelog' / 'audit SELF.md with the curve' / 'sparse-cell SELF entry' / 'audit USER_PREFERENCES with the curve' / 'fit the curve on memory/' comes up. Triggers on 'curve-guided self', 'self-doc corpus audit', 'curve-prioritized self-archaeology', 'sparse-cell changelog', 'fit the curve on SELF', 'ranked gap-map for SELF', 'self-doc RSI', 'audit memory/', 'curve-fit the memory files'."
+description: >-
+  Closed-loop audit pipeline retargeted at self-doc corpora — fits a learned-latent-curve on
+  SELF.md and SELF-CHANGELOG.md as separate corpora (or on the expanded 10-memory-file corpus
+  including USER_PREFERENCES, COMPANY, RULES, SAUNA_IDENTITY, SAUNA_TOOLS, USER_PROFILE,
+  USER_RELATIONSHIPS, RECENT_ACTIVITY, PROJECT_RULES), then uses sparse-cell detection as a
+  prioritization lens for self-archaeology dispatch and recursive-self-improvement cycles on the
+  top-priority gap rows. The offshoot of curve-guided-rsi where 'each version is its own corpus
+  item' is the granularity rule that hits the ≥20-item curve-fit gate (with a decomposition rule
+  for sub-20 corpora). The 9-D primitive basis is derived per-corpus — per-file primitives for
+  SELF.md rows vs SELF-CHANGELOG.md entries, plus a unified 9-D memory-file basis for the expanded
+  10-memory-file corpus — and at least one whole-self output is required per RSI cycle per SELF.md
+  Bias #11 (same-cadence drift).
 license: "MIT"
 metadata:
   short-description: "Closed-loop self-doc audit — curve-fit SELF.md and SELF-CHANGELOG.md (or expanded 10-memory-file corpus) as separate corpora, sparse-cell prioritize self-archaeology + RSI"
 ---
 
 # Curve-Guided RSI for Self-Doc Corpora
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Outputs a per-cycle SELF-CHANGELOG entry recording the curve-t of each gap-fix and the sparse-cell-count delta before/after RSI, so downstream readers can verify the closed-loop metric FIRES. Use when SELF.md or SELF-CHANGELOG.md needs prioritized self-archaeology effort, when self-archaeology cadence fires (5 self-mode turns, per directive, weekly Sunday 9 AM Pacific), when drift is suspected across sessions and the gap-list needs ranking instead of flat enumeration, or any time 'curve-fit the changelog' / 'audit SELF.md with the curve' / 'sparse-cell SELF entry' / 'audit USER_PREFERENCES with the curve' / 'fit the curve on memory/' comes up. Triggers on 'curve-guided self', 'self-doc corpus audit', 'curve-prioritized self-archaeology', 'sparse-cell changelog', 'fit the curve on SELF', 'ranked gap-map for SELF', 'self-doc RSI', 'audit memory/', 'curve-fit the memory files'.
+
 
 The offshoot of `curve-guided-rsi` retargeted at the agent's own self-documents. The parent's three skills — `learned-latent-curve` (curve fit), `negative-skill-space` (gap map), and `recursive-self-improvement` (edit protocol) — were composed against the yubiOS skill corpus (≥69 skills, ≥20 gate trivially hit). This skill makes the same composition executable against the self-doc corpus (SELF.md + SELF-CHANGELOG.md, optionally expanded to all 10 memory files + PROJECT_RULES) where the ≥20-item gate is the binding constraint.
 
@@ -350,7 +368,6 @@ Cross-reference consistency:
 - `curve-guided-rsi`'s `## Interaction with Other Skills` names this skill as an offshoot in its body.
 - `self-archaeology`'s `## When to use` cadence (5-turn / per-directive / Sunday / drift) is the trigger set for when this skill fires.
 - `restful-self`'s `## Anti-patterns` (gap-finding theater, journaling, infinite pause) are the failure modes this skill's whole-self output requirement specifically guards against.
-
 
 
 ## Composition Rule reference (cross-skill)

@@ -73,6 +73,10 @@ If any item is unchecked, the loop hasn't closed — apply the missed practice b
 - 2026-07-29 cycle 1: Hypothesis "Adding a `## Verification` checklist closes the calibration gap (L4×S3=12 — agents have no signal that they applied token efficiency well) and begins closing the structural-parity gap (L4×S3=12 — sibling skills have `## Verification` at the bottom)." Edit: appended `## Verification` section with 8-item self-check (lines 47-60); created `## Changelog`. Result: re-map shows gap #1 (calibration) CLOSED (12 → ~4, falls out of real-gap filter); gap #2 (structural parity) REDUCED (12 → ~6, Verification endpoint present but Changelog + Red Flags still missing); no new substantive gaps ≥ L×S 6 introduced; no new anti-patterns (frontmatter parsed cleanly via js-yaml: name regex pass, description 726 chars, no angle brackets, structural lines intact); fixpoint NOT REACHED — gaps #3 (override cases, L3×S3=9), #4 (recovery move, L3×S3=9), #8 (context-isolation defer boundary, L3×S3=9) remain Extend candidates; continue to cycle 2.
 - 2026-07-29 cycle 2: Hypothesis "Adding `## Red Flags` closes residual of gap #2 (structural parity) and reduces gap #3 (override cases)." Edit: added `## Red Flags` section (6 bullets covering override cases, over-searching, misapplied batching, over-efficiency, re-fetch, and duplication) before `## Verification`; appended this changelog entry. Result: re-map shows gap #2 residual CLOSED (12 → ~3 — all three sibling endpoints now present), gap #3 (override cases) REDUCED (9 → ~4 via Red Flag bullet); no new substantive gaps ≥ L×S 6; no new anti-patterns; fixpoint reached.
 
+- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+
+---
 
 ## Note on least privilege coverage (curve-guided-rsi cycle-3 gap-fix)
 
@@ -106,13 +110,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 **Keywords introduced in this skill (cycle-5 RSI):** `trust chain`, `PCR`, `UKI`, `secure boot`
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `trust chain` count moved 23→24/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
-
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
-
----
 
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 

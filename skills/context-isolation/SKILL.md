@@ -60,8 +60,10 @@ When to skip: only when the task is bounded enough that no external API or skill
 
 - 2026-07-29 cycle 1: Hypothesis "Skill lacks explicit `## Interaction with Other Skills` section, creating asymmetry with downstream skills (`negative-skill-space`, `doubt-driven-development`, `recursive-self-improvement`, `code-review-and-quality`) that already point at it." Edit: added `## Interaction with Other Skills` section naming `token-efficiency`, `negative-skill-space`, `doubt-driven-development`, `recursive-self-improvement`, `using-agent-skills`, and `code-review-and-quality` as explicit pairs; created `## Changelog` section header per RSI cycle protocol. Result: re-map shows no new substantive gaps ≥ L×S 6 introduced; primary gap #1 closed (16→0), gap #6 closed (9→0), gap #5 reduced (16→9); js-yaml frontmatter validated clean; fixpoint reached.
 
+- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
 
 
+---
 
 ## Note on least privilege coverage (curve-guided-rsi v1 gap-fix)
 
@@ -96,13 +98,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `trust chain` count moved 23→24/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
-
----
-
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
 This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey) integration is referenced.
@@ -120,4 +115,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `attestation` primitive
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

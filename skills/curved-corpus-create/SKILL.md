@@ -1,10 +1,24 @@
 ---
 name: curved-corpus-create
 description: >-
-  Generate binary corpora with PRESCRIBED curved structure (planted real spherical-harmonic signal on a Fibonacci golden-angle S^2 lattice), matched null corpora (curveball / column-permutation / iid), a calibration pack (signal-recovery curve, false-positive rate, detection threshold), and an IS-THIS-X placement. v1.1.0 adds -L/--lens mode that emits each measurement and each suggested improvement as a guided-curve-ideate-format new idea (per cycle-34 L141-L146): hypothesis + method + parameters + delta + verdict + score + caveat. v1.1.0 also emits lens-format calibration packs -- each amplitude becomes a lens with measured power, FPR, dV2z, and an honest verdict, NOT a flat table. Use when you need ground truth for a curve/coverage measurement, calibrating V2 or PC1+PC2 gate, asking "would this pipeline detect a signal if one were there", setting a detection threshold, sizing N, validating atom delta on known curvature, producing null ensembles, lens-format patch generation, hypothesis-driven improvement, or placing a real corpus (yubiOS, NIST, CIS, SCAP-SSG) in null-standardized statistic space with exclusion-style verdicts. Trigger phrases: planted signal, synthetic corpus, ground truth, null model, curveball, false positive rate, statistical power, detection threshold, is this signal real, calibrate V2, standard candle, positive control, is this X, lens-format patches, new ideas scheme. NOT for measuring a corpus you already trust (use hyperspherical-harmonic-curve), NOT for running an RSI improvement loop (use rsi-phi-skill), and NOT for lens-format RSI patches (use curve-compass-skill).
+  Generate binary corpora with PRESCRIBED curved structure (planted real spherical-harmonic signal
+  on a Fibonacci golden-angle S^2 lattice), matched null corpora (curveball / column-permutation /
+  iid), a calibration pack (signal-recovery curve, false-positive rate, detection threshold), and
+  an IS-THIS-X placement. v1.1.0 adds -L/--lens mode that emits each measurement and each
+  suggested improvement as a guided-curve-ideate-format new idea (per cycle-34 L141-L146):
+  hypothesis + method + parameters + delta + verdict + score + caveat. v1.1.0 also emits
+  lens-format calibration packs -- each amplitude becomes a lens with measured power, FPR, dV2z,
+  and an honest verdict, NOT a flat table.
 ---
 
 # curved-corpus-create
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Use when you need ground truth for a curve/coverage measurement, calibrating V2 or PC1+PC2 gate, asking "would this pipeline detect a signal if one were there", setting a detection threshold, sizing N, validating atom delta on known curvature, producing null ensembles, lens-format patch generation, hypothesis-driven improvement, or placing a real corpus (yubiOS, NIST, CIS, SCAP-SSG) in null-standardized statistic space with exclusion-style verdicts. Trigger phrases: planted signal, synthetic corpus, ground truth, null model, curveball, false positive rate, statistical power, detection threshold, is this signal real, calibrate V2, standard candle, positive control, is this X, lens-format patches, new ideas scheme. NOT for measuring a corpus you already trust (use hyperspherical-harmonic-curve), NOT for running an RSI improvement loop (use rsi-phi-skill), and NOT for lens-format RSI patches (use curve-compass-skill).
+
 
 The generative inverse of the RSI curve regime. Every other skill in the
 family (rsi-phi-skill, hyperspherical-harmonic-curve,

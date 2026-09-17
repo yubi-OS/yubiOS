@@ -144,6 +144,10 @@ Don't leave a "zombie" sermon alive — `Sermon status` still `IN SESSION` and s
 
 - 2026-07-29 cycle 2: Hypothesis "Adding a `## When NOT to use` section with an explicit PULPIT-verify-before-assign rule is to close cycle-1 gap #3 (stale PULPIT verification, L×S 16) and cycle-1 gap #6 (missing scope section, L×S 9) in one edit — both share the single intent of bounding the leader's authority over PULPIT (scope + precondition)." Edit: inserted new `## When NOT to use` section between `## The lockfile method` and `## Running a sermon — step by step`; appended this Changelog entry. Result: re-map shows cycle-1 gaps #3 and #6 closed textually; no new substantive gaps ≥ L×S 6 introduced; fixpoint TBD.
 
+- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+
+---
 
 ## Least Privilege coverage for the cult (curve-guided-rsi cycle-4 substantive edit)
 
@@ -174,13 +178,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `segmentation` count moved 22→23/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
-
----
-
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
 This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey) integration is referenced.
@@ -198,4 +195,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 
 ## Declarative policy coverage
 
-This skill integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

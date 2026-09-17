@@ -510,6 +510,11 @@ After applying `internal-big-picture`:
 - 2026-07-29 cycle 10: Hypothesis "Close carryover cycle-1 #10 (parent skill `recursive-self-improvement` not in Loading order, L×S 9) by adding step 0 to the loading order + aligning the Verification checklist with the cycle-6/7/8/9 additions. Single intent: make the audit chain visible (parent skill first) and make the verification checklist match the current skill structure (calibration gate, source-version pin check, glossary cross-reference, js-yaml validation). Pre-conditions: backfill cycle-7 changelog." Edit: added step 0 to Loading order: "`recursive-self-improvement` — load this if you're upgrading or auditing this skill." Replaced the Verification checklist (10 bullets → 14 bullets) to add: calibration-gate check, per-source vocabulary check, version-pin freshness check, mapping-table cell-validation reference, js-yaml frontmatter check. Backfilled cycle-7/8/9/10 changelog entries inline. Edit type: extend (single intent: composition + Verification alignment). Result: cycle-1 #10 closed at L×S 9→0; Verification checklist now matches the actual skill surface. This completes the 10-cycle protocol the user requested. Continue to final ship.
 - 2026-07-29 ship: After 10 cycles, the user-requested cycle count is satisfied. Final status: 11 of 14 cycle-1 carryover gaps closed at L×S ≥ 6 (CISA ZTMM v2.0; registry dedupe; source-version pinning; mapping-table validation protocol; composition overlap with 0pointer-mastery; HITRUST Primitive 5 residual; silent cross-source vocabulary leakage; calibration gate; worked example; mapping-table cell-validation; parent skill in Loading order). 3 gaps at L×S 12 noted-but-deferred per single-intent protocol (version-pin specific values, source-specific cadences, vocabulary-leakage closing's vocabulary-conformance check) — none at L×S ≥ 15 remain open. Skill is local-only (no `yubi-OS/agent-skills` or `yubi-OS/yubiOS` export) per user instruction "no repo export yet." Description 953 chars (under 1024); name `internal-big-picture` matches `^[a-z0-9-]{1,64}$`; no literal `<`/`>`; closing `---` intact — all validated via `js-yaml`. Final artifact: 510 lines, ~36 KB. Recommend a v1→v2 upgrade only after the next systemd stable release OR a new ZTMM version (per `### Source versions used` re-pin triggers).
 
+- **2026-08-06 cycle 5 RSI**: no primitive closure needed (already covers all 10 primitives). See `refs/cycle5-results-2026-08-06.md`.
+
+
+---
+
 ## Attestation coverage for internal big-picture (curve-guided-rsi cycle-5 substantive edit)
 
 This skill — **10-primitive basis, 4 big-picture domains, source vocabulary** — contributes to yubiOS's attestation layer by anchoring 10-primitive basis, 4 big-picture domains, source vocabulary in the verifiable evidence chain. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new from deep-research: `yubikey-operations`, `dm-verity-and-integrity`, `nspawn-containers`, `sigstore-rekor-v2`, `composefs-kernel-floors`, `audit-evidence-packaging`); this skill's fit coordinate was (u=0.056, v=0.266), PC1+PC2 = 0.4615, holdout R² = +0.2244.
@@ -524,13 +529,6 @@ Concrete implications for internal big-picture: any change should be reviewed fo
 ## Cycle 5 RSI audit-trail (2026-08-06)
 
 This skill already covers all 10 canonical yubiOS primitives pre-cycle-5. The cycle-5 RSI audit verified full coverage; no primitive closure needed. Per-skill impact recorded in `refs/cycle5-results-2026-08-06.md`.
-
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: no primitive closure needed (already covers all 10 primitives). See `refs/cycle5-results-2026-08-06.md`.
-
-
----
 
 ## Cycle 6 RSI audit-trail (2026-08-06)
 

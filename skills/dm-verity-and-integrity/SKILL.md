@@ -150,6 +150,11 @@ The IMA measurement list is reflected in PCR 10. At attestation time (see `audit
 
 - 2026-08-04 cycle 5: **Initial v1.** New skill created per deep-research Stream 1 (coverage gaps) `dm-verity-and-integrity` proposal — dm-verity was only mentioned inline in `mkosi-image-builder` and `bootc-images`. The load-bearing invariant "dm-verity-verified /usr" is now first-class. Skill mapped to 10-primitive axes: P6 immutability (primary), P1 attestation (Merkle root is attestable), P5 continuous/adaptive (continuous verification at mount + runtime via IMA), P10 self-describing (signed composefs catalog). Frontmatter validated by `js-yaml`.
 
+- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+
+---
+
 ## Immutability coverage for dm-verity and integrity (curve-guided-rsi cycle-5 substantive edit)
 
 This skill — **dm-verity root hash, fs-verity signing, IMA policy, composefs catalog** — sits in a domain that benefits from explicit immutability (sysext, read-only mounts, fs-verity, OSTree, hermetic /usr, verity) coverage. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus; this skill's fit coordinate was (u=0.056, v=0.266), PC1+PC2 = 0.4615, holdout R² = +0.2244.
@@ -171,13 +176,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 **Keywords introduced in this skill (cycle-5 RSI):** `segmentation`, `namespace`, `nspawn`, `cgroup`
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `segmentation` count moved 22→23/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
-
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
-
----
 
 ## Cycle 6 RSI audit-trail (2026-08-06)
 

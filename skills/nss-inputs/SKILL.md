@@ -1,9 +1,21 @@
 ---
 name: nss-inputs
-description: "Cycle-9 deep-research synthesis for the NSS Inputs axis (axis 2/12 in negative-skill-space). For each file in a corpus, the Inputs axis identifies WHAT the file needs: environment variables, command-line arguments, configuration parameters, file inputs, stdin, request bodies/headers/paths, mounts, secrets, runtime/platform-provided values, plus type/presence/default/precedence/prerequisites/validation/failure behavior. Use when a 12-axis NSS sweep lands on inputs as the highest-priority Extend gap, when reviewing a file's input surface area, when writing schema-first configuration (Pydantic Settings, Zod, JSON Schema, OpenAPI), when adding an Inputs section next to a file's README/API reference, when documenting ARG vs ENV vs LABEL for Containerfiles, when describing workflow_dispatch inputs for GitHub Actions, when declaring mkosi Setting=value keys and --flag equivalents, when enumerating Environment= and EnvironmentFile= for systemd units, or when auditing test-data and prerequisite checklists before a file runs. Triggers on: NSS inputs axis, input contract, input surface area, env var declaration, CLI flag, config parameter, schema-first, validation, defaults, precedence, prerequisite, dependency declaration, what does this file need. NOT for outputs, audience, lifecycle, or any of the other 11 NSS axes (use negative-skill-space)."
+description: >-
+  Cycle-9 deep-research synthesis for the NSS Inputs axis (axis 2/12 in negative-skill-space). For
+  each file in a corpus, the Inputs axis identifies WHAT the file needs: environment variables,
+  command-line arguments, configuration parameters, file inputs, stdin, request
+  bodies/headers/paths, mounts, secrets, runtime/platform-provided values, plus
+  type/presence/default/precedence/prerequisites/validation/failure behavior.
 ---
 
 # nss-inputs
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Use when a 12-axis NSS sweep lands on inputs as the highest-priority Extend gap, when reviewing a file's input surface area, when writing schema-first configuration (Pydantic Settings, Zod, JSON Schema, OpenAPI), when adding an Inputs section next to a file's README/API reference, when documenting ARG vs ENV vs LABEL for Containerfiles, when describing workflow_dispatch inputs for GitHub Actions, when declaring mkosi Setting=value keys and --flag equivalents, when enumerating Environment= and EnvironmentFile= for systemd units, or when auditing test-data and prerequisite checklists before a file runs. Triggers on: NSS inputs axis, input contract, input surface area, env var declaration, CLI flag, config parameter, schema-first, validation, defaults, precedence, prerequisite, dependency declaration, what does this file need. NOT for outputs, audience, lifecycle, or any of the other 11 NSS axes (use negative-skill-space).
+
 
 The Inputs axis (2/12 of `negative-skill-space`) asks: **what does this
 file or skill need to run?** It is the qualitative counterpart of the
