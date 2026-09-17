@@ -138,6 +138,11 @@ The weekly bundle's Merkle root is what long-term auditors verify; daily bundles
 
 - 2026-08-04 cycle 5: **Initial v1.** New skill created per deep-research Stream 1 (coverage gaps) `audit-evidence-packaging` proposal — Stream 1 ranked this as the highest-leverage generic skill (P1 + P7, complements Stream 3's `sigstore-rekor-v2`). Closes the gap that the existing `slsa-provenance` skill covers SLSA L3 generically but does not cover the evidence-bundle pattern for HITRUST/CISA/Chronicle consumers. Skill mapped to 10-primitive axes: P1 attestation (primary — the attestation quote), P7 audit/evidence (evidence archive), P5 continuous/adaptive (re-emission cadence), P10 self-describing (manifest + Merkle root are self-describing). Frontmatter validated by `js-yaml`.
 
+- **2026-08-06 cycle 5 RSI**: closed `declarative policy` primitive gap (corpus-wide count 27→28/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+
+---
+
 ## Attestation coverage for audit evidence packaging (curve-guided-rsi cycle-5 substantive edit)
 
 This skill — **evidence bundle, Merkle root, YubiKey signature, Rekor v2 tile, TPM2 PCR quote** — contributes to yubiOS's attestation layer by anchoring evidence bundle, Merkle root, YubiKey signature, Rekor v2 tile, TPM2 PCR quote in the verifiable evidence chain. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new from deep-research: `yubikey-operations`, `dm-verity-and-integrity`, `nspawn-containers`, `sigstore-rekor-v2`, `composefs-kernel-floors`, `audit-evidence-packaging`); this skill's fit coordinate was (u=0.017, v=0.337), PC1+PC2 = 0.4615, holdout R² = +0.2244.
@@ -159,13 +164,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 **Keywords introduced in this skill (cycle-5 RSI):** `declarative policy`, `.rego`, `OPA`, `Build Policy`
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `declarative policy` count moved 27→28/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
-
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `declarative policy` primitive gap (corpus-wide count 27→28/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
-
----
 
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
