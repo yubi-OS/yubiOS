@@ -62,7 +62,7 @@ The deterministic fixer (with the round’s C1x extension: comprehensive UTF-8-a
 
 - **Axis trial** (loo-nn-vote/1, K=40): 5/9 axes excluded-from-fixed-margin-null, 4 not-excluded, total z +5.33 (descriptive, `admitted:false` always). Round 4 (map 78): 7/9, +5.36; round 3 (map 66): 9/9, +6.53.
 
-- **Declined ADD rungs by policy** (no synthetic refs docs): sector 6 (rows 40), 9 (41), 2 (42), 1 (105), 12 (153), 2-again (154?), 10/12 (233-batch). One decline row per sector per pass, per AGENT.md lesson 9.
+- **Declined ADD rungs by policy** (no synthetic refs docs): 6 rows across sectors 1, 2, 6, 9, 10, 12 (outcome rows 40, 41, 42, 105, 146, 153), per AGENT.md lesson 9.
 
 ## Incidents (on the record)
 
@@ -73,7 +73,11 @@ The deterministic fixer (with the round’s C1x extension: comprehensive UTF-8-a
 
 ## Receipts
 
-- Held draft PR: **#243** (`wayfinder-refs-round5-2026-09-17`), 31 commits: prep doc, 29 cycle commits, fixer C1x tooling commit, this results doc + refs tooling.
+- Held draft PR: **#243** (`wayfinder-refs-round5-2026-09-17`), 33 commits ahead of main: prep doc, 29 cycle commits, fixer C1x tooling commit, and two results-doc/tooling commits (the first results commit's ref update failed silently; the re-landed commit keeps it as parent, so both are in history).
 
 - All geometry ran on the live Worker (`steady-orbit`); maps 89-118 and 215 outcome rows are in shared public storage.
 
+
+## Correction (2026-09-17 06:20 Pacific)
+
+Receipts section corrected: 33 commits (not 31), and the declined-ADD list is 6 rows across sectors 1, 2, 6, 9, 10, 12 (rows 40/41/42/105/146/153).
