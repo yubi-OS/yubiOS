@@ -226,3 +226,41 @@ Because column margins are fixed under the null, the majority baseline of every 
 
 Reading: agreement means the isolated-delta sign is not sensitive to those phrasings; disagreement means the reading is perturbation-sensitive and should be treated as undetermined for planning. Neither outcome authorizes keeping, reverting or deleting; the independent task check still governs, and `task_verdict` stays `not-tested`.
 
+## Lessons learned (2026-09-17 session: four transplants, limits/2, refs round 4, skills round 1)
+
+Process and bootstrapping rules distilled from one day of operating this instrument end to end. Each one cost something to learn; treat them as part of the contract.
+
+### Bootstrapping a round
+
+1. **Pin the corpus to a 40-character commit SHA** and fetch it with `/api/repo-items` (`subdir`, `ref`). Drop empty files (`.gitkeep`) before mapping; the baseline's `names` is the frozen name set for the whole round.
+2. **Warm the embedding cache first.** `POST /api/embed {texts}` in batches of at most 400 documents (100 is comfortable: 495 skills documents took 5 batches, ~61 s). Only then `POST /api/map`. A cold `/api/map` on a large corpus either exceeds the per-request uncached budget (413) or the Worker's CPU budget.
+3. **Verify the baseline hash-matches your local copy** before editing anything: compare each `embedding_metadata.docs[i].sha256` to `sha256(local file)`. A mismatch means the after-map will silently become a two-transition corpus.
+4. **Chain `baseline_id`** cycle to cycle (81 → 83 → 84 …). The frame stays frozen; each after-map compares against the previous one. Never refit between cycles.
+5. **After-maps must use the exact baseline name set.** Building the corpus from the local tree instead of the baseline's `names` produced a stray map (82) with five extra files and an incomparable comparison. Read `names` from the baseline and only replace the target's text.
+6. **Write the independent task check before looking at any rung**, and freeze it. `skillcheck.sh` (mojibake, duplicate H2, TODO placeholders, skill-format frontmatter, template capability paragraphs, local links) and `taskcheck.sh` for refs/ were written first, run FAIL-before / PASS-after, and rerun unchanged on the committed file. Geometry is recorded next to the verdict; it never produces one.
+
+### Running cycles
+
+7. **Pre-register before editing.** `POST /api/outcomes` with verdict `pending` and the rung's `predicted_delta`; append the verdict row with `supersedes`. `verifier` is at most 200 characters (a 422 here made one geometry measurement land before its check row; the row says so).
+8. **Prefer a deterministic fixer over judgment edits.** Every kept edit this session was mechanical: fix mojibake, decode a base64-committed body, cut an over-long description at a sentence boundary and move the remainder verbatim into the body, replace a false template paragraph with a dated coverage note, merge duplicate sections keeping all non-duplicate text. If the fixer cannot reach PASS, revert and record `declined`; do not hand-edit to make geometry move.
+9. **Decline ADD rungs by policy** unless a real document is missing. Authoring a synthetic file to occupy a sector is padding. Record the decline once per sector so the ledger shows the decision.
+10. **Expect ladder exhaustion.** The generator returns five rungs; the skills round ran out of distinct CHANGE targets at cycle 6. AGENT.md's wording holds: exhaustion under this generator is not optimality. The sanctioned fallback is the literal exemplars the rungs name, in ladder order, with `predicted_delta: null` (no geometric prediction exists for an exemplar).
+11. **One file per commit, on a held branch, one draft PR per round.** Stack follow-up PRs on the round branch (the 82-file sweep, PR #240, stacks on round 1, PR #239) so a reviewer sees the instrument-named edits and the plain sweep separately.
+12. **Positive controls before real edits.** `POST /api/map/control` (n ≤ 6 per request; use several seeds) gives the frame's response band for known-different content. On refs/ frame `d3289271…` twelve splices never reduced isolation; the one real edit that did (−2) is read against that band, not against nothing.
+13. **Run the axis trial on every new baseline** and file the verdicts. On a 12-document map no axis is distinguishable from the null (no resolution); on 168–178-document maps 7–9 of 9 axes are. Neither number admits anything; both belong in the record.
+
+### Reading results honestly
+
+14. **Flat geometry is a result.** Six kept skills edits left the isolated count at 31 and were 0/4 sign-exact against predicted −1; four were quantization-silent. Report it as an instrument observation on that frame, not as failure of the edits or success of the instrument.
+15. **The real backlog is usually outside the geometry.** The frozen check failed on 88 of 112 SKILL.md; the ladder named 10 and fixed 6. A plain sweep with the same check and fixer cleared the other 82 with no map involved. When a check reveals a corpus-wide defect class, sweep it in its own PR and say the instrument was not consulted.
+16. **Counts only, with n.** Ledger contingencies, control summaries and axis trials never emit a rate, percentage or Gaussian tail. The historical 4/10 stays a historical count until prospective rows exist; the skills round added 4 comparable rows (0 exact) and 6 kept verdicts.
+
+### Operating the Worker
+
+17. **limits/2 walls and how to stay under them:** 4000 items; per-request uncached budget 1000 docs / 12k chunks (warm the cache); maps above 1.9 MB persist via KV overflow transparently; CPU budget 300 s (`limits.cpu_ms` in deploy metadata); `n_controls ≤ 6`; axis trial N ≤ 1200.
+18. **Test bindings with a strict fake.** The first limits/2 deploy bound `map.classes` (an object) into D1 and every persist returned 500 for nine minutes while `persist:false` kept working. In-memory fakes accepted the object; a strict fake that rejects undefined/boolean/object bindings on a real `runMap` output now guards it.
+19. **Deploy discipline:** re-download the live 13-module bundle, confirm every module still matches the last snapshot, replace only `index.js`, keep `main_module solar-entry.mjs` and `keep_bindings` for all binding types, then refresh SITE KV `AGENT.md` and `llms.txt`. Verify `/api/health` lists the expected module versions before using anything.
+20. **Client access:** any HTTP client works if it sends a `User-Agent`; a bare urllib/fetch default UA is refused at the edge. Build the Worker in the sandbox with `ESBUILD_BINARY_PATH` pointing at the cached esbuild binary.
+
+Tooling for the loop lives at `tools/skill-check/` (`skillcheck.sh`, `fixer.py`, `wayfinder-cycle.py`, README).
+
