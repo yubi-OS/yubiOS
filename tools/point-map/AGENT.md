@@ -262,5 +262,6 @@ Process and bootstrapping rules distilled from one day of operating this instrum
 19. **Deploy discipline:** re-download the live 13-module bundle, confirm every module still matches the last snapshot, replace only `index.js`, keep `main_module solar-entry.mjs` and `keep_bindings` for all binding types, then refresh SITE KV `AGENT.md` and `llms.txt`. Verify `/api/health` lists the expected module versions before using anything.
 20. **Client access:** any HTTP client works if it sends a `User-Agent`; a bare urllib/fetch default UA is refused at the edge. Build the Worker in the sandbox with `ESBUILD_BINARY_PATH` pointing at the cached esbuild binary.
 
-Tooling for the loop lives at `tools/skill-check/` (`skillcheck.sh`, `fixer.py`, `wayfinder-cycle.py`, README).
+21. **Check every file class the corpus contains, not just the one the spec names.** The frontmatter check covered `SKILL.md`; 362 reference/script/test files under the same skills were committed as raw base64 and passed everything because no check looked at them. A whole-file base64 probe (C7) is now part of the check. When a defect class shows up in one file type, scan all blobs for it before declaring the corpus clean.
 
+Tooling for the loop lives at `tools/skill-check/` (`skillcheck.sh`, `fixer.py`, `wayfinder-cycle.py`, README).

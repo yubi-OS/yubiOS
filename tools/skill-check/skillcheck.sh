@@ -36,4 +36,16 @@ PY
 else echo "C4 frontmatter spec: n/a (not SKILL.md)"; fi
 c5=$(grep -c 'This document applies least-privilege hardening\|This document integrates with the yubiOS declarative-policy substrate\|This document supports the yubiOS continuous-monitoring layer\|This document participates in the yubiOS root-of-trust chain\|This skill applies least-privilege hardening\|This skill integrates with the yubiOS declarative-policy substrate\|This skill supports the yubiOS continuous-monitoring layer\|This skill participates in the yubiOS root-of-trust chain' "$f"); [ "$c5" -eq 0 ] && echo "C5 template capability claims: 0 PASS" || { echo "C5 template capability claims: $c5 FAIL"; fail=1; }
 c6=0; d=$(dirname "$f"); for p in $(grep -o '](\./[^)#]*\|](scripts/[^)#]*\|](references/[^)#]*\|](assets/[^)#]*' "$f" | sed 's/^](//' | sort -u); do [ -e "$d/$p" ] || { echo "  unresolved local link: $p"; c6=$((c6+1)); }; done; [ "$c6" -eq 0 ] && echo "C6 unresolved local links: 0 PASS" || { echo "C6 unresolved local links: $c6 FAIL"; fail=1; }
+c7=$(python3 - "$f" <<'PY'
+import sys,re,base64
+s=open(sys.argv[1],'rb').read().decode('utf-8','replace').strip()
+ok=0
+if len(s)>40 and re.fullmatch(r'[A-Za-z0-9+/=\s]+',s):
+    try:
+        base64.b64decode(s,validate=False).decode('utf-8'); ok=1
+    except Exception: ok=0
+print(ok)
+PY
+); [ "$c7" -eq 0 ] && echo "C7 base64-encoded body: 0 PASS" || { echo "C7 base64-encoded body: 1 FAIL"; fail=1; }
+# C7 added 2026-09-17 after the skills round (362 reference/script files under skills/ were committed base64-encoded).
 [ $fail -eq 0 ] && echo "TASK CHECK: PASS" || echo "TASK CHECK: FAIL"
