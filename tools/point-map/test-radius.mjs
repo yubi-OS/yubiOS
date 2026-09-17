@@ -486,12 +486,12 @@ test("rejects a names/pts_full length disagreement", () => {
   throws(() => radiusProfile(makeMap(["a", "b", "c"], [[0, 0, 0], [0.5, 0, 0]])), "length mismatch");
 });
 
-test("rejects n outside 2..400", () => {
+test("rejects n outside 2..4000", () => {
   throws(() => radiusProfile(makeMap(["a"], [[0, 0, 0]])), "n=1 below the floor");
-  const n = 401;
+  const n = 4001;
   const names = Array.from({ length: n }, (_, i) => `p${i}`);
   const pts = Array.from({ length: n }, (_, i) => [i / n, 0, 0]);
-  throws(() => radiusProfile(makeMap(names, pts)), "n=401 above the ceiling");
+  throws(() => radiusProfile(makeMap(names, pts)), "n=4001 above the ceiling");
 });
 
 test("rejects a declared n that disagrees with the arrays", () => {

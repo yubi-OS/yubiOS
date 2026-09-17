@@ -27,6 +27,7 @@ import { radiusOptions } from './radius-api.mjs';
 // literal and tested as such.
 
 import { ApiError } from "./http.mjs";
+import { MAX_ITEMS } from "./limits.mjs";
 import { sha256Hex } from "./chunking.mjs";
 import { validateDocs } from "./embed-pipeline.mjs";
 import { mapRouteHandler } from "./map-route.mjs";
@@ -63,8 +64,8 @@ function validateRequest(body) {
   if (!Number.isSafeInteger(body.baseline_id) || body.baseline_id < 1) throw new ApiError(422, "baseline_id must be a positive integer");
 
   const { texts, names } = body;
-  if (!Array.isArray(texts) || texts.length < 10 || texts.length > 400) {
-    throw new ApiError(422, "texts must be the FULL resulting corpus as 10..400 items (not just the changed document)");
+  if (!Array.isArray(texts) || texts.length < 10 || texts.length > MAX_ITEMS) {
+    throw new ApiError(422, `texts must be the FULL resulting corpus as 10..${MAX_ITEMS} items (not just the changed document)`);
   }
   texts.forEach((t, i) => { if (typeof t !== "string" || !t.trim()) throw new ApiError(422, `texts[${i}] must be a nonempty string`); });
   if (!Array.isArray(names) || names.length !== texts.length) throw new ApiError(422, "names must contain one literal path per text");

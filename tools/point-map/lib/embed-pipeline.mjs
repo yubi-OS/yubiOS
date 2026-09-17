@@ -35,10 +35,8 @@ import {
   sha256Hex,
 } from "./chunking.mjs";
 
-export const MAX_DOCS = 400;
-export const MAX_CHARS_PER_DOC = 200000;
-export const MAX_TOTAL_BYTES = 2_000_000;
-export const MAX_CHUNKS_PER_REQUEST = 6000;
+import { MAX_DOCS, MAX_CHARS_PER_DOC, MAX_TOTAL_BYTES, MAX_CHUNKS_PER_REQUEST, MAX_UNCACHED_CHUNKS, MAX_UNCACHED_DOCS, EMBED_WARMUP_HINT } from "./limits.mjs";
+export { MAX_DOCS, MAX_CHARS_PER_DOC, MAX_TOTAL_BYTES, MAX_CHUNKS_PER_REQUEST, MAX_UNCACHED_CHUNKS, MAX_UNCACHED_DOCS };
 export const AI_BATCH_SIZE = 100;
 export const MODEL = "@cf/baai/bge-base-en-v1.5";
 
@@ -124,26 +122,26 @@ export async function embedDocuments(env, rawDocs) {
 
   const cached = new Array(perDoc.length).fill(null);
   if (env.SITE) {
-    await Promise.all(
-      perDoc.map(async (d, i) => {
-        let raw = null;
-        try {
-          raw = await env.SITE.get(d.cacheKey, "json");
-        } catch (e) {
-          // KV read failure is not a silent success path: treat as a cache
-          // miss (recompute), but do not hide the failure from logs.
-          console.error("embed cache read failed:", d.cacheKey, e?.message || e);
-          raw = null;
-        }
-        if (raw && Array.isArray(raw.vector) && raw.vector.length === 768 && raw.vector.every(x=>typeof x === "number" && Number.isFinite(x))) {
-          cached[i] = raw;
-          cacheHits++;
-        }
-      })
-    );
+    // Bulk KV reads (<=100 keys per call) keep subrequest counts low at N=4000.
+    // Falls back to per-key reads when the binding does not support arrays.
+    for (let i = 0; i < perDoc.length; i += 100) {
+      const slice = perDoc.slice(i, i + 100);
+      let bulk = null;
+      try { const r = await env.SITE.get(slice.map((d) => d.cacheKey), "json"); if (r && typeof r.get === "function") bulk = r; } catch (e) { bulk = null; }
+      for (let k = 0; k < slice.length; k++) {
+        const d = slice[k]; let raw = null;
+        try { raw = bulk ? (bulk.get(d.cacheKey) ?? null) : await env.SITE.get(d.cacheKey, "json"); }
+        catch (e) { console.error("embed cache read failed:", d.cacheKey, e?.message || e); raw = null; }
+        if (raw && Array.isArray(raw.vector) && raw.vector.length === 768) { cached[i + k] = raw; cacheHits++; }
+      }
+    }
   }
-
-  // Build the queue of (docIndex, chunkIndex, text, weight) for every
+  // Bound the work this request must do itself, not the corpus size.
+  let uncachedChunks = 0, uncachedDocs = 0;
+  perDoc.forEach((d, i) => { if (!cached[i]) { uncachedDocs++; uncachedChunks += d.chunks.length; } });
+  if (uncachedChunks > MAX_UNCACHED_CHUNKS || uncachedDocs > MAX_UNCACHED_DOCS) {
+    throw new ApiError(413, `this request would embed ${uncachedDocs} uncached documents / ${uncachedChunks} chunks, above the per-request budget (${MAX_UNCACHED_DOCS} docs / ${MAX_UNCACHED_CHUNKS} chunks); ${EMBED_WARMUP_HINT}`, { uncached_docs: uncachedDocs, uncached_chunks: uncachedChunks, cached_docs: cacheHits, max_uncached_docs: MAX_UNCACHED_DOCS, max_uncached_chunks: MAX_UNCACHED_CHUNKS });
+  }
   // uncached doc's chunks.
   const queue = [];
   perDoc.forEach((d, docIndex) => {

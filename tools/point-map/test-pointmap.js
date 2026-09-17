@@ -47,10 +47,10 @@ test("rejects non-finite cells (NaN / Infinity)", () => {
   const bad2 = X.map(r => r.slice()); bad2[2][1] = Infinity;
   throws(() => PM.runMap(bad2, opts()), /finite/i);
 });
-test("rejects N below 10 and above 400", () => {
+test("rejects N below 10 and above 4000", () => {
   throws(() => PM.runMap(cloud().slice(0, 9), opts({ names: names(9) })), /10\.\.400|N must/i);
-  const big = PM.synth(401, D, 3);
-  throws(() => PM.runMap(big, opts({ names: names(401) })), /10\.\.400|N must/i);
+  const big = PM.synth(4001, 2, 3);
+  throws(() => PM.runMap(big, opts({ names: names(4001) })), /10\.\.4000|N must/i);
 });
 test("rejects D below 2 and above 768", () => {
   throws(() => PM.runMap(X.map(r => [r[0]]), opts()), /D must|2\.\.768/i);

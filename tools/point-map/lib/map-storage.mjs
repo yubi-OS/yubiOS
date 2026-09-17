@@ -3,7 +3,8 @@ import { ApiError } from './http.mjs';
 // Storage-only encoding. Public responses retain the normal margin objects.
 // No numerical precision is removed; repeated JSON property names are eliminated.
 const FIELDS=['axis','signed_margin','distance_to_threshold','perturbation_bound','bit','status'];
-export function encodeMap(map) {
+export function encodeMap(map, opts = {}) {
+  const limit = opts.limit ?? 1900000;
   let stored=map;
   const md=map.math_diagnostics;
   if(md && Array.isArray(md.per_input)) {
@@ -12,7 +13,7 @@ export function encodeMap(map) {
   }
   const json=JSON.stringify(stored);
   const bytes=new TextEncoder().encode(json).length;
-  if(bytes>1900000) throw new ApiError(413,'map exceeds the safe D1 storage limit; use persist:false or a smaller corpus');
+  if(bytes>limit) throw new ApiError(413,`map (${bytes} bytes) exceeds the ${limit}-byte storage limit; use persist:false`);
   return json;
 }
 export function decodeMap(json) {

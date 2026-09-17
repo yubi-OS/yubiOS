@@ -18,7 +18,8 @@ export const DOMAIN = Object.freeze([0, 2]);
 
 const MAX_WITNESSES = 8;
 const MIN_N = 2;
-const MAX_N = 400;
+import { RADIUS_MAX_N } from "./limits.mjs";
+const MAX_N = RADIUS_MAX_N;
 const DIM = 3;
 
 const PROFILE_SCOPE =

@@ -1,5 +1,7 @@
 import { radiusForRead } from './lib/radius-api.mjs';
 import { encodeMap, decodeMap } from "./lib/map-storage.mjs";
+import { saveStoredMap, loadStoredMapJson, MAPS_DDL } from "./lib/map-store.mjs";
+import { JSON_BODY_LIMIT, LIMITS_VERSION, MAX_ITEMS as LIMIT_MAX_ITEMS } from "./lib/limits.mjs";
 import { fetchCorpus } from "./lib/tar-corpus.mjs";
 // --- new/redesigned-route modules (see session/subagent/lib/*.mjs) ---
 import { ApiError, jsonResponse, errorResponse, readJsonLimited } from "./lib/http.mjs";
@@ -826,7 +828,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
             } catch (e) {
               pointmapVersion = null;
             }
-            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION }, now: new Date().toISOString() });
+            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, limits: { version: LIMITS_VERSION, max_items: LIMIT_MAX_ITEMS }, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION }, now: new Date().toISOString() });
           }
           if (p === "/api/fits" && req.method === "GET") {
             return json({ fits: await listFits(db) });
@@ -1032,7 +1034,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
           }
           if (p === "/api/repo-items" && req.method === "POST") {
             try {
-              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               const result = await repoItemsHandler(body, { parseRepoUrl, fetchCorpus, githubToken: env.GITHUB_TOKEN });
               return json(result);
             } catch (e) {
@@ -1051,7 +1053,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
           }
           if (p === "/api/embed" && req.method === "POST") {
             try {
-              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               const rawDocs = Array.isArray(body.texts) ? body.texts : [];
               const embedded = await embedDocuments(env, rawDocs);
               const stored = await rememberChunkedEmbeddings(env, PM.hashStr, rawDocs, embedded.vectors, String(body.source || "/api/embed").slice(0, 120));
@@ -1082,17 +1084,12 @@ GET  /map/pointmap.js           -> static pointmap.js module
           }
           if (p === "/api/map" && req.method === "POST") {
             try {
-              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               await db.prepare(`CREATE TABLE IF NOT EXISTS maps (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT, rule_hash TEXT, seed INTEGER, n INTEGER, dim INTEGER, d INTEGER, v2 REAL, z_null REAL, verdict TEXT, classes INTEGER, identity_failures INTEGER, measurement_red INTEGER, source TEXT, map_json TEXT)`).run();
               const loadStoredMap = async (id) => {
-                const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                return row ? decodeMap(row.map_json) : null;
+                return await loadStoredMapJson(db, env, id);
               };
-              const saveMap = async (map, source) => {
-                const ins = await db.prepare(`INSERT INTO maps (created_at, rule_hash, seed, n, dim, d, v2, z_null, verdict, classes, identity_failures, measurement_red, source, map_json) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`)
-                  .bind(new Date().toISOString(), map.rule_hash, map.seed, map.n, map.D, map.d, map.v2, map.null.z, map.null.verdict, map.classes.count, map.summary.identity_failures, map.summary.measurement_red, source, encodeMap(map)).run();
-                return ins?.meta?.last_row_id ?? (await db.prepare(`SELECT MAX(id) AS mid FROM maps`).first())?.mid;
-              };
+              const saveMap = async (map, source) => saveStoredMap(db, env, map, source);
               const { id, map, comparison, math_ledger, radius_comparison } = await mapRouteHandler(body, { env, PM, embedDocuments, loadStoredMap, saveMap });
               return json({ id, map, comparison, radius_comparison, ...(math_ledger ? { math_ledger } : {}) });
             } catch (e) {
@@ -1101,13 +1098,12 @@ GET  /map/pointmap.js           -> static pointmap.js module
           }
           if (p === "/api/map/preview" && req.method === "POST") {
             try {
-              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               // Read-only baseline load: no CREATE TABLE, no INSERT, no UPDATE.
               // Storage outages are 503; only a successful empty SELECT means not found.
               const loadStoredMap = async (id) => {
                 try {
-                  const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                  return row ? decodeMap(row.map_json) : null;
+                  return await loadStoredMapJson(db, env, id);
                 } catch (e) {
                   console.error("preview baseline load failed:", String(e?.message || e));
                   throw new ApiError(503, "map storage unavailable; retry later");
@@ -1121,12 +1117,11 @@ GET  /map/pointmap.js           -> static pointmap.js module
           }
           if (p === "/api/map/control" && req.method === "POST") {
             try {
-              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               // Read-only baseline load, same discipline as preview: no CREATE TABLE, no INSERT.
               const loadStoredMap = async (id) => {
                 try {
-                  const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                  return row ? decodeMap(row.map_json) : null;
+                  return await loadStoredMapJson(db, env, id);
                 } catch (e) {
                   console.error("control baseline load failed:", String(e?.message || e));
                   throw new ApiError(503, "map storage unavailable; retry later");
@@ -1140,12 +1135,11 @@ GET  /map/pointmap.js           -> static pointmap.js module
           }
           if ((p === "/api/map/consistency" || p === "/api/map/axis-redundancy") && req.method === "POST") {
             try {
-              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               // Read-only map load, same discipline as preview: no CREATE TABLE, no INSERT.
               const loadStoredMap = async (id) => {
                 try {
-                  const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                  return row ? decodeMap(row.map_json) : null;
+                  return await loadStoredMapJson(db, env, id);
                 } catch (e) {
                   console.error("diagnostic map load failed:", String(e?.message || e));
                   throw new ApiError(503, "map storage unavailable; retry later");
@@ -1176,8 +1170,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
               }
               const body = await readJsonLimited(req, 1 * 1024 * 1024);
               const loadStoredMap = async (id) => {
-                const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                return row ? decodeMap(row.map_json) : null;
+                return await loadStoredMapJson(db, env, id);
               };
               const getOutcome = async (id) => {
                 const row = await db.prepare(`SELECT id, entry_json FROM outcomes WHERE id = ?`).bind(Number(id)).first();
@@ -1203,17 +1196,22 @@ GET  /map/pointmap.js           -> static pointmap.js module
           }
           let mm = p.match(/^\/api\/maps\/(\d+)$/);
           if (mm && req.method === "GET") {
-            const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(mm[1])).first();
-            if (!row) return json({ error: "not found" }, 404);
-            return json(radiusForRead(decodeMap(row.map_json)));
+            try {
+              const stored = await loadStoredMapJson(db, env, mm[1]);
+              if (!stored) return json({ error: "not found" }, 404);
+              return json(radiusForRead(stored));
+            } catch (e) { return errorResponse(e); }
           }
-          if (mm && req.method === "DELETE") { await db.prepare(`DELETE FROM maps WHERE id = ?`).bind(Number(mm[1])).run(); return json({ ok: true }); }
+          if (mm && req.method === "DELETE") {
+            // Remove a KV overflow body too, so a deleted map leaves no orphan.
+            try { const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(mm[1])).first(); const ptr = row ? JSON.parse(row.map_json) : null; if (ptr && ptr.__kv && env.SITE) await env.SITE.delete(ptr.__kv); } catch (e) { console.error("overflow cleanup skipped:", String(e?.message || e)); }
+            await db.prepare(`DELETE FROM maps WHERE id = ?`).bind(Number(mm[1])).run(); return json({ ok: true });
+          }
           if (p === "/api/maps/compare" && req.method === "POST") {
             try {
-              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               const loadStoredMap = async (id) => {
-                const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
-                return row ? decodeMap(row.map_json) : null;
+                return await loadStoredMapJson(db, env, id);
               };
               const comparison = await mapsCompareHandler(body, { PM, loadStoredMap });
               return json({ comparison });

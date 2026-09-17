@@ -413,27 +413,27 @@ async function repoItemsTests() {
     assert.deepEqual(labels, ["root-a/file1.md", "root-b/file2.md"], "without a shared root, paths must be returned unstripped");
   });
 
-  await test("repoItemsHandler: subdir filtering happens BEFORE the 400 cap -> over-cap after filtering is an explicit 413, not a silent slice", async () => {
+  await test("repoItemsHandler: subdir filtering happens BEFORE the 4000 cap -> over-cap after filtering is an explicit 413, not a silent slice", async () => {
     const tarRoot = "acme-widgets-abc1234/";
     const files = [];
-    for (let i = 0; i < 401; i++) files.push({ path: `${tarRoot}src/file${i}.ts`, text: "x", sizeBytes: 1 });
+    for (let i = 0; i < 4001; i++) files.push({ path: `${tarRoot}src/file${i}.ts`, text: "x", sizeBytes: 1 });
     for (let i = 0; i < 50; i++) files.push({ path: `${tarRoot}docs/file${i}.md`, text: "y", sizeBytes: 1 }); // outside subdir
     const fetchCorpus = async () => ({ ref: "main", meta: {}, files, truncated: false });
 
-    // Without a subdir filter, 401 items alone (ignoring docs/) already exceeds 400 -> 413.
+    // Without a subdir filter, 4001 items alone (ignoring docs/) already exceeds 4000 -> 413.
     await assertRejectsApiError(
       () => repoItemsHandler({ repo: "acme/widgets", subdir: "src" }, { parseRepoUrl, fetchCorpus, githubToken: null }),
       413,
-      "over-400 after subdir filter"
+      "over-4000 after subdir filter"
     );
 
     // But filtering to a smaller subdir first brings it under the cap and succeeds.
     const filesSmall = [];
     for (let i = 0; i < 5; i++) filesSmall.push({ path: `${tarRoot}src/file${i}.ts`, text: "x", sizeBytes: 1 });
-    for (let i = 0; i < 401; i++) filesSmall.push({ path: `${tarRoot}docs/file${i}.md`, text: "y", sizeBytes: 1 });
+    for (let i = 0; i < 4001; i++) filesSmall.push({ path: `${tarRoot}docs/file${i}.md`, text: "y", sizeBytes: 1 });
     const fetchCorpusSmall = async () => ({ ref: "main", meta: {}, files: filesSmall, truncated: false });
     const result = await repoItemsHandler({ repo: "acme/widgets", subdir: "src" }, { parseRepoUrl, fetchCorpus: fetchCorpusSmall, githubToken: null });
-    assert.equal(result.n, 5, "filtering to src/ (5 files) must succeed even though the full tree (406) would not");
+    assert.equal(result.n, 5, "filtering to src/ (5 files) must succeed even though the full tree (4006) would not");
   });
 
   await test("repoItemsHandler: an unresolvable ref surfaces as 502 with resolved_ref null — never a fabricated SHA", async () => {

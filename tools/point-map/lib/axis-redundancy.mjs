@@ -34,6 +34,7 @@
 //     `admit` are rejected.
 
 import { ApiError } from "./http.mjs";
+import { AXIS_TRIAL_MAX_N } from "./limits.mjs";
 
 export const VERSION = "axis-trial/1";
 export const STATISTIC = "loo-nn-vote/1";
@@ -167,6 +168,7 @@ export async function axisRedundancyHandler(body, ctx) {
   const map = await ctx.loadStoredMap(v.map_id);
   if (!map) throw new ApiError(404, "map not found");
   if (!map.frame || !Array.isArray(map.bits)) throw new ApiError(409, "legacy map has no frozen frame/bits; create a new baseline");
+  if (map.bits.length > AXIS_TRIAL_MAX_N) throw new ApiError(422, `axis trial is O(N^2 d K) and is limited to N <= ${AXIS_TRIAL_MAX_N} (map has ${map.bits.length} rows)`, { max_n: AXIS_TRIAL_MAX_N });
   const nullDraw = ctx.nullDraw || (ctx.PM && ctx.PM._internal && ctx.PM._internal.nullDraw);
   const mapK = Number.isInteger(map.K) ? map.K : (map.null && Number.isInteger(map.null.K) ? map.null.K : 40);
   const K = v.K ?? Math.min(MAX_K, mapK);

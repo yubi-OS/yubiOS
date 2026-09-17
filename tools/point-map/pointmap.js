@@ -115,7 +115,7 @@ var PM = (function () {
   function validate(X, opts) {
     if (!Array.isArray(X) || !Array.isArray(X[0])) throw new TypeError("X must be a rectangular array of numeric rows");
     const N = X.length;
-    if (N < 10 || N > 400) throw new RangeError("N must be in 10..400 (got " + N + ")");
+    if (N < 10 || N > 4000) throw new RangeError("N must be in 10..4000 (got " + N + ")");
     const D = X[0].length;
     if (!Number.isInteger(D) || D < 2 || D > 768) throw new RangeError("D must be an integer in 2..768 (got " + D + ")");
     for (let i = 0; i < N; i++) {

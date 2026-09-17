@@ -191,7 +191,7 @@ async function run(){
       renderInputErrors(errors);
        if(errors.length)throw new Error("Fix the reported empty inputs before mapping; no partial corpus is submitted.");
       if(items.length<10)throw new Error(`need at least 10 usable items - have ${items.length} (${errors.length} rejected, see above)`);
-      if(items.length>400)throw new Error("max 400 items per map");
+      if(items.length>4000)throw new Error("max 4000 items per map");
       $("status").textContent=`mapping ${items.length} items...`;
       const body={texts:items.map(i=>i.text),names:items.map(i=>i.name),labels:items.map(i=>i.label),...opts};
       const bl=$("baseline").value;if(bl!==""&&bl!==null)body.baseline_id=Number(bl);

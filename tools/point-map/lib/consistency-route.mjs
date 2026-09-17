@@ -29,6 +29,7 @@
 //     counts. No aggregate score, no averaging of deltas into a "consensus".
 
 import { ApiError } from "./http.mjs";
+import { MAX_ITEMS } from "./limits.mjs";
 import { sha256Hex } from "./chunking.mjs";
 import { mapPreviewHandler } from "./preview-route.mjs";
 
@@ -53,7 +54,7 @@ function validateRequest(body) {
   if (!body || typeof body !== "object" || Array.isArray(body)) throw new ApiError(422, "request must be an object");
   if (!Number.isSafeInteger(body.baseline_id) || body.baseline_id < 1) throw new ApiError(422, "baseline_id must be a positive integer");
   const { texts, names, target } = body;
-  if (!Array.isArray(texts) || texts.length < 10 || texts.length > 400) throw new ApiError(422, "texts must be the FULL resulting corpus (with the primary candidate) as 10..400 items");
+  if (!Array.isArray(texts) || texts.length < 10 || texts.length > MAX_ITEMS) throw new ApiError(422, `texts must be the FULL resulting corpus (with the primary candidate) as 10..${MAX_ITEMS} items`);
   texts.forEach((t, i) => { if (typeof t !== "string" || !t.trim()) throw new ApiError(422, `texts[${i}] must be a nonempty string`); });
   if (!Array.isArray(names) || names.length !== texts.length) throw new ApiError(422, "names must contain one literal path per text");
   names.forEach((n, i) => { if (typeof n !== "string" || !n.length) throw new ApiError(422, `names[${i}] must be a nonempty string`); });
