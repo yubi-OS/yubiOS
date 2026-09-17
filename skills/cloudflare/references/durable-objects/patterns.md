@@ -1,1 +1,201 @@
-IyBEdXJhYmxlIE9iamVjdHMgUGF0dGVybnMKCiMjIFdoZW4gdG8gVXNlIFdoaWNoIFBhdHRlcm4KCnwgTmVlZCB8IFBhdHRlcm4gfCBJRCBTdHJhdGVneSB8CnwtLS0tLS18LS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgUmF0ZSBsaW1pdCBwZXIgdXNlci9JUCB8IFJhdGUgTGltaXRpbmcgfCBgaWRGcm9tTmFtZShpZGVudGlmaWVyKWAgfAp8IE11dHVhbCBleGNsdXNpb24gfCBEaXN0cmlidXRlZCBMb2NrIHwgYGlkRnJvbU5hbWUocmVzb3VyY2UpYCB8CnwgPjFLIHJlcS9zIHRocm91Z2hwdXQgfCBTaGFyZGluZyB8IGBuZXdVbmlxdWVJZCgpYCBvciBoYXNoIHwKfCBSZWFsLXRpbWUgdXBkYXRlcyB8IFdlYlNvY2tldCBDb2xsYWIgfCBgaWRGcm9tTmFtZShyb29tKWAgfAp8IFVzZXIgc2Vzc2lvbnMgfCBTZXNzaW9uIE1hbmFnZW1lbnQgfCBgaWRGcm9tTmFtZShzZXNzaW9uSWQpYCB8CnwgQmFja2dyb3VuZCBjbGVhbnVwIHwgQWxhcm0tYmFzZWQgfCBBbnkgfAoKIyMgUlBDIHZzIGZldGNoKCkKCioqUlBDKiogKGNvbXBhdCDiiaUyMDI0LTA0LTAzKTogVHlwZS1zYWZlLCBzaW1wbGVyLCBkZWZhdWx0IGZvciBuZXcgcHJvamVjdHMgIAoqKmZldGNoKCkqKjogTGVnYWN5IGNvbXBhdCwgSFRUUCBzZW1hbnRpY3MsIHByb3h5aW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGNvdW50ID0gYXdhaXQgc3R1Yi5pbmNyZW1lbnQoKTsgIC8vIFJQQwpjb25zdCBjb3VudCA9IGF3YWl0IChhd2FpdCBzdHViLmZldGNoKHJlcSkpLmpzb24oKTsgIC8vIGZldGNoKCkKYGBgCgojIyBTaGFyZGluZyAoSGlnaCBUaHJvdWdocHV0KQoKU2luZ2xlIERPIH4xSyByZXEvcyBtYXguIFNoYXJkIGZvciBoaWdoZXIgdGhyb3VnaHB1dDoKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcTogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCB1c2VySWQgPSBuZXcgVVJMKHJlcS51cmwpLnNlYXJjaFBhcmFtcy5nZXQoInVzZXIiKTsKICAgIGNvbnN0IGhhc2ggPSBoYXNoQ29kZSh1c2VySWQpICUgMTAwOyAgLy8gMTAwIHNoYXJkcwogICAgY29uc3QgaWQgPSBlbnYuQ09VTlRFUi5pZEZyb21OYW1lKGBzaGFyZDoke2hhc2h9YCk7CiAgICByZXR1cm4gZW52LkNPVU5URVIuZ2V0KGlkKS5mZXRjaChyZXEpOwogIH0KfTsKCmZ1bmN0aW9uIGhhc2hDb2RlKHN0cjogc3RyaW5nKTogbnVtYmVyIHsKICBsZXQgaGFzaCA9IDA7CiAgZm9yIChsZXQgaSA9IDA7IGkgPCBzdHIubGVuZ3RoOyBpKyspIGhhc2ggPSAoKGhhc2ggPDwgNSkgLSBoYXNoKSArIHN0ci5jaGFyQ29kZUF0KGkpOwogIHJldHVybiBNYXRoLmFicyhoYXNoKTsKfQpgYGAKCioqRGVjaXNpb25zOioqCi0gKipTaGFyZCBjb3VudCoqOiAxMC0xMDAwIHR5cGljYWwgKHN0YXJ0IHdpdGggMTAwLCBtZWFzdXJlLCBhZGp1c3QpCi0gKipTaGFyZCBrZXkqKjogVXNlciBJRCwgSVAsIHNlc3Npb24gLSBtdXN0IGRpc3RyaWJ1dGUgZXZlbmx5ICh1c2UgaGFzaCkKLSAqKkFnZ3JlZ2F0aW9uKio6IENvb3JkaW5hdG9yIERPIG9yIGV4dGVybmFsIHN5c3RlbSAoRDEsIFIyKQoKIyMgUmF0ZSBMaW1pdGluZwoKYGBgdHlwZXNjcmlwdAphc3luYyBjaGVja0xpbWl0KGtleTogc3RyaW5nLCBsaW1pdDogbnVtYmVyLCB3aW5kb3dNczogbnVtYmVyKTogUHJvbWlzZTxib29sZWFuPiB7CiAgY29uc3QgcmVxID0gdGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygiU0VMRUNUIENPVU5UKCopIGFzIGNvdW50IEZST00gcmVxdWVzdHMgV0hFUkUga2V5ID0gPyBBTkQgdGltZXN0YW1wID4gPyIsIGtleSwgRGF0ZS5ub3coKSAtIHdpbmRvd01zKS5vbmUoKTsKICBpZiAocmVxLmNvdW50ID49IGxpbWl0KSByZXR1cm4gZmFsc2U7CiAgdGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygiSU5TRVJUIElOVE8gcmVxdWVzdHMgKGtleSwgdGltZXN0YW1wKSBWQUxVRVMgKD8sID8pIiwga2V5LCBEYXRlLm5vdygpKTsKICByZXR1cm4gdHJ1ZTsKfQpgYGAKCiMjIERpc3RyaWJ1dGVkIExvY2sKCmBgYHR5cGVzY3JpcHQKcHJpdmF0ZSBoZWxkID0gZmFsc2U7CmFzeW5jIGFjcXVpcmUodGltZW91dE1zID0gNTAwMCk6IFByb21pc2U8Ym9vbGVhbj4gewogIGlmICh0aGlzLmhlbGQpIHJldHVybiBmYWxzZTsKICB0aGlzLmhlbGQgPSB0cnVlOwogIGF3YWl0IHRoaXMuY3R4LnN0b3JhZ2Uuc2V0QWxhcm0oRGF0ZS5ub3coKSArIHRpbWVvdXRNcyk7CiAgcmV0dXJuIHRydWU7Cn0KYXN5bmMgcmVsZWFzZSgpIHsgdGhpcy5oZWxkID0gZmFsc2U7IGF3YWl0IHRoaXMuY3R4LnN0b3JhZ2UuZGVsZXRlQWxhcm0oKTsgfQphc3luYyBhbGFybSgpIHsgdGhpcy5oZWxkID0gZmFsc2U7IH0gIC8vIEF1dG8tcmVsZWFzZSBvbiB0aW1lb3V0CmBgYAoKIyMgSGliZXJuYXRpb24tQXdhcmUgUGF0dGVybgoKUHJlc2VydmUgc3RhdGUgYWNyb3NzIGhpYmVybmF0aW9uOgoKYGBgdHlwZXNjcmlwdAphc3luYyBmZXRjaChyZXE6IFJlcXVlc3QpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgY29uc3QgW2NsaWVudCwgc2VydmVyXSA9IE9iamVjdC52YWx1ZXMobmV3IFdlYlNvY2tldFBhaXIoKSk7CiAgY29uc3QgdXNlcklkID0gbmV3IFVSTChyZXEudXJsKS5zZWFyY2hQYXJhbXMuZ2V0KCJ1c2VyIik7CiAgc2VydmVyLnNlcmlhbGl6ZUF0dGFjaG1lbnQoeyB1c2VySWQgfSk7ICAvLyBTdXJ2aXZlcyBoaWJlcm5hdGlvbgogIHRoaXMuY3R4LmFjY2VwdFdlYlNvY2tldChzZXJ2ZXIsIFsicm9vbTpsb2JieSJdKTsKICBzZXJ2ZXIuc2VuZChKU09OLnN0cmluZ2lmeSh7IHR5cGU6ICJpbml0Iiwgc3RhdGU6IHRoaXMuY3R4LnN0b3JhZ2Uua3YuZ2V0KCJzdGF0ZSIpIH0pKTsKICByZXR1cm4gbmV3IFJlc3BvbnNlKG51bGwsIHsgc3RhdHVzOiAxMDEsIHdlYlNvY2tldDogY2xpZW50IH0pOwp9Cgphc3luYyB3ZWJTb2NrZXRNZXNzYWdlKHdzOiBXZWJTb2NrZXQsIG1zZzogc3RyaW5nKSB7CiAgY29uc3QgeyB1c2VySWQgfSA9IHdzLmRlc2VyaWFsaXplQXR0YWNobWVudCgpOyAgLy8gUmV0cmlldmUgYWZ0ZXIgd2FrZQogIGNvbnN0IHN0YXRlID0gdGhpcy5jdHguc3RvcmFnZS5rdi5nZXQoInN0YXRlIikgfHwge307CiAgc3RhdGVbdXNlcklkXSA9IEpTT04ucGFyc2UobXNnKTsKICB0aGlzLmN0eC5zdG9yYWdlLmt2LnB1dCgic3RhdGUiLCBzdGF0ZSk7CiAgZm9yIChjb25zdCBjIG9mIHRoaXMuY3R4LmdldFdlYlNvY2tldHMoInJvb206bG9iYnkiKSkgYy5zZW5kKG1zZyk7Cn0KYGBgCgojIyBSZWFsLXRpbWUgQ29sbGFib3JhdGlvbgoKQnJvYWRjYXN0IHVwZGF0ZXMgdG8gYWxsIGNvbm5lY3RlZCBjbGllbnRzOgoKYGBgdHlwZXNjcmlwdAphc3luYyB3ZWJTb2NrZXRNZXNzYWdlKHdzOiBXZWJTb2NrZXQsIG1zZzogc3RyaW5nKSB7CiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UobXNnKTsKICB0aGlzLmN0eC5zdG9yYWdlLmt2LnB1dCgiZG9jIiwgZGF0YS5jb250ZW50KTsgIC8vIFBlcnNpc3QKICBmb3IgKGNvbnN0IGMgb2YgdGhpcy5jdHguZ2V0V2ViU29ja2V0cygpKSBpZiAoYyAhPT0gd3MpIGMuc2VuZChtc2cpOyAgLy8gQnJvYWRjYXN0Cn0KYGBgCgojIyMgV2ViU29ja2V0IFJlY29ubmVjdGlvbgoKKipDbGllbnQtc2lkZSoqIChleHBvbmVudGlhbCBiYWNrb2ZmKToKYGBgdHlwZXNjcmlwdApjbGFzcyBSZXNpbGllbnRXUyB7CiAgcHJpdmF0ZSBkZWxheSA9IDEwMDA7CiAgY29ubmVjdCh1cmw6IHN0cmluZykgewogICAgY29uc3Qgd3MgPSBuZXcgV2ViU29ja2V0KHVybCk7CiAgICB3cy5vbmNsb3NlID0gKCkgPT4gc2V0VGltZW91dCgoKSA9PiB7CiAgICAgIHRoaXMuY29ubmVjdCh1cmwpOwogICAgICB0aGlzLmRlbGF5ID0gTWF0aC5taW4odGhpcy5kZWxheSAqIDIsIDMwMDAwKTsKICAgIH0sIHRoaXMuZGVsYXkpOwogIH0KfQpgYGAKCioqU2VydmVyLXNpZGUqKiAoY2xlYW51cCBvbiBjbG9zZSk6CmBgYHR5cGVzY3JpcHQKYXN5bmMgd2ViU29ja2V0Q2xvc2Uod3M6IFdlYlNvY2tldCwgY29kZTogbnVtYmVyLCByZWFzb246IHN0cmluZywgd2FzQ2xlYW46IGJvb2xlYW4pIHsKICBjb25zdCB7IHVzZXJJZCB9ID0gd3MuZGVzZXJpYWxpemVBdHRhY2htZW50KCk7CiAgdGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygiVVBEQVRFIHVzZXJzIFNFVCBvbmxpbmUgPSBmYWxzZSBXSEVSRSBpZCA9ID8iLCB1c2VySWQpOwogIGZvciAoY29uc3QgYyBvZiB0aGlzLmN0eC5nZXRXZWJTb2NrZXRzKCkpIGMuc2VuZChKU09OLnN0cmluZ2lmeSh7IHR5cGU6ICJ1c2VyX2xlZnQiLCB1c2VySWQgfSkpOwp9CmBgYAoKIyMgU2Vzc2lvbiBNYW5hZ2VtZW50CgpgYGB0eXBlc2NyaXB0CmFzeW5jIGNyZWF0ZVNlc3Npb24odXNlcklkOiBzdHJpbmcsIGRhdGE6IG9iamVjdCk6IFByb21pc2U8c3RyaW5nPiB7CiAgY29uc3QgaWQgPSBjcnlwdG8ucmFuZG9tVVVJRCgpLCBleHAgPSBEYXRlLm5vdygpICsgODY0MDAwMDA7CiAgdGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygiSU5TRVJUIElOVE8gc2Vzc2lvbnMgVkFMVUVTICg/LCA/LCA/LCA/KSIsIGlkLCB1c2VySWQsIEpTT04uc3RyaW5naWZ5KGRhdGEpLCBleHApOwogIGF3YWl0IHRoaXMuY3R4LnN0b3JhZ2Uuc2V0QWxhcm0oZXhwKTsKICByZXR1cm4gaWQ7Cn0KCmFzeW5jIGdldFNlc3Npb24oaWQ6IHN0cmluZyk6IFByb21pc2U8b2JqZWN0IHwgbnVsbD4gewogIGNvbnN0IHJvdyA9IHRoaXMuY3R4LnN0b3JhZ2Uuc3FsLmV4ZWMoIlNFTEVDVCBkYXRhIEZST00gc2Vzc2lvbnMgV0hFUkUgaWQgPSA/IEFORCBleHBpcmVzX2F0ID4gPyIsIGlkLCBEYXRlLm5vdygpKS5vbmUoKTsKICByZXR1cm4gcm93ID8gSlNPTi5wYXJzZShyb3cuZGF0YSkgOiBudWxsOwp9Cgphc3luYyBhbGFybSgpIHsgdGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygiREVMRVRFIEZST00gc2Vzc2lvbnMgV0hFUkUgZXhwaXJlc19hdCA8PSA/IiwgRGF0ZS5ub3coKSk7IH0KYGBgCgojIyBNdWx0aXBsZSBFdmVudHMgKFNpbmdsZSBBbGFybSkKClF1ZXVlIHBhdHRlcm4gdG8gc2NoZWR1bGUgbXVsdGlwbGUgZXZlbnRzOgoKYGBgdHlwZXNjcmlwdAphc3luYyBzY2hlZHVsZUV2ZW50KGlkOiBzdHJpbmcsIHJ1bkF0OiBudW1iZXIpIHsKICBhd2FpdCB0aGlzLmN0eC5zdG9yYWdlLnB1dChgZXZlbnQ6JHtpZH1gLCB7IGlkLCBydW5BdCB9KTsKICBjb25zdCBjdXJyID0gYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5nZXRBbGFybSgpOwogIGlmICghY3VyciB8fCBydW5BdCA8IGN1cnIpIGF3YWl0IHRoaXMuY3R4LnN0b3JhZ2Uuc2V0QWxhcm0ocnVuQXQpOwp9Cgphc3luYyBhbGFybSgpIHsKICBjb25zdCBldmVudHMgPSBhd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmxpc3QoeyBwcmVmaXg6ICJldmVudDoiIH0pLCBub3cgPSBEYXRlLm5vdygpOwogIGxldCBuZXh0ID0gbnVsbDsKICBmb3IgKGNvbnN0IFtrZXksIGV2XSBvZiBldmVudHMpIHsKICAgIGlmIChldi5ydW5BdCA8PSBub3cpIHsKICAgICAgYXdhaXQgdGhpcy5wcm9jZXNzRXZlbnQoZXYpOwogICAgICBhd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmRlbGV0ZShrZXkpOwogICAgfSBlbHNlIGlmICghbmV4dCB8fCBldi5ydW5BdCA8IG5leHQpIG5leHQgPSBldi5ydW5BdDsKICB9CiAgaWYgKG5leHQpIGF3YWl0IHRoaXMuY3R4LnN0b3JhZ2Uuc2V0QWxhcm0obmV4dCk7Cn0KYGBgCgojIyBHcmFjZWZ1bCBDbGVhbnVwCgpVc2UgYGN0eC53YWl0VW50aWwoKWAgdG8gY29tcGxldGUgd29yayBhZnRlciByZXNwb25zZToKCmBgYHR5cGVzY3JpcHQKYXN5bmMgbXlNZXRob2QoKSB7CiAgY29uc3QgcmVzcG9uc2UgPSB7IHN1Y2Nlc3M6IHRydWUgfTsKICB0aGlzLmN0eC53YWl0VW50aWwodGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygiREVMRVRFIEZST00gb2xkX2RhdGEgV0hFUkUgdGltZXN0YW1wIDwgPyIsIGN1dG9mZikpOwogIHJldHVybiByZXNwb25zZTsKfQpgYGAKCiMjIEJlc3QgUHJhY3RpY2VzCgotICoqRGVzaWduKio6IFVzZSBgaWRGcm9tTmFtZSgpYCBmb3IgY29vcmRpbmF0aW9uLCBgbmV3VW5pcXVlSWQoKWAgZm9yIHNoYXJkaW5nLCBtaW5pbWl6ZSBjb25zdHJ1Y3RvciB3b3JrCi0gKipTdG9yYWdlKio6IFByZWZlciBTUUxpdGUsIGJhdGNoIHdpdGggdHJhbnNhY3Rpb25zLCBzZXQgYWxhcm1zIGZvciBjbGVhbnVwLCB1c2UgUElUUiBiZWZvcmUgcmlza3kgb3BzCi0gKipQZXJmb3JtYW5jZSoqOiB+MUsgcmVxL3MgcGVyIERPIG1heCAtIHNoYXJkIGZvciBtb3JlLCBjYWNoZSBpbiBtZW1vcnksIHVzZSBhbGFybXMgZm9yIGRlZmVycmVkIHdvcmsKLSAqKlJlbGlhYmlsaXR5Kio6IEhhbmRsZSA1MDMgd2l0aCByZXRyeStiYWNrb2ZmLCBkZXNpZ24gZm9yIGNvbGQgc3RhcnRzLCB0ZXN0IG1pZ3JhdGlvbnMgd2l0aCBgLS1kcnktcnVuYAotICoqU2VjdXJpdHkqKjogVmFsaWRhdGUgaW5wdXRzIGluIFdvcmtlcnMsIHJhdGUgbGltaXQgRE8gY3JlYXRpb24sIHVzZSBqdXJpc2RpY3Rpb24gZm9yIGNvbXBsaWFuY2UKCiMjIFNlZSBBbHNvCgotICoqW0FQSV0oLi9hcGkubWQpKiogLSBjdHggbWV0aG9kcywgV2ViU29ja2V0IGhhbmRsZXJzCi0gKipbR290Y2hhc10oLi9nb3RjaGFzLm1kKSoqIC0gSGliZXJuYXRpb24gY2F2ZWF0cywgY29tbW9uIGVycm9ycwotICoqW0RPIFN0b3JhZ2VdKC4uL2RvLXN0b3JhZ2UvUkVBRE1FLm1kKSoqIC0gU3RvcmFnZSBwYXR0ZXJucyBhbmQgdHJhbnNhY3Rpb25zCg==
+# Durable Objects Patterns
+
+## When to Use Which Pattern
+
+| Need | Pattern | ID Strategy |
+|------|---------|-------------|
+| Rate limit per user/IP | Rate Limiting | `idFromName(identifier)` |
+| Mutual exclusion | Distributed Lock | `idFromName(resource)` |
+| >1K req/s throughput | Sharding | `newUniqueId()` or hash |
+| Real-time updates | WebSocket Collab | `idFromName(room)` |
+| User sessions | Session Management | `idFromName(sessionId)` |
+| Background cleanup | Alarm-based | Any |
+
+## RPC vs fetch()
+
+**RPC** (compat ≥2024-04-03): Type-safe, simpler, default for new projects  
+**fetch()**: Legacy compat, HTTP semantics, proxying
+
+```typescript
+const count = await stub.increment();  // RPC
+const count = await (await stub.fetch(req)).json();  // fetch()
+```
+
+## Sharding (High Throughput)
+
+Single DO ~1K req/s max. Shard for higher throughput:
+
+```typescript
+export default {
+  async fetch(req: Request, env: Env): Promise<Response> {
+    const userId = new URL(req.url).searchParams.get("user");
+    const hash = hashCode(userId) % 100;  // 100 shards
+    const id = env.COUNTER.idFromName(`shard:${hash}`);
+    return env.COUNTER.get(id).fetch(req);
+  }
+};
+
+function hashCode(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) hash = ((hash << 5) - hash) + str.charCodeAt(i);
+  return Math.abs(hash);
+}
+```
+
+**Decisions:**
+- **Shard count**: 10-1000 typical (start with 100, measure, adjust)
+- **Shard key**: User ID, IP, session - must distribute evenly (use hash)
+- **Aggregation**: Coordinator DO or external system (D1, R2)
+
+## Rate Limiting
+
+```typescript
+async checkLimit(key: string, limit: number, windowMs: number): Promise<boolean> {
+  const req = this.ctx.storage.sql.exec("SELECT COUNT(*) as count FROM requests WHERE key = ? AND timestamp > ?", key, Date.now() - windowMs).one();
+  if (req.count >= limit) return false;
+  this.ctx.storage.sql.exec("INSERT INTO requests (key, timestamp) VALUES (?, ?)", key, Date.now());
+  return true;
+}
+```
+
+## Distributed Lock
+
+```typescript
+private held = false;
+async acquire(timeoutMs = 5000): Promise<boolean> {
+  if (this.held) return false;
+  this.held = true;
+  await this.ctx.storage.setAlarm(Date.now() + timeoutMs);
+  return true;
+}
+async release() { this.held = false; await this.ctx.storage.deleteAlarm(); }
+async alarm() { this.held = false; }  // Auto-release on timeout
+```
+
+## Hibernation-Aware Pattern
+
+Preserve state across hibernation:
+
+```typescript
+async fetch(req: Request): Promise<Response> {
+  const [client, server] = Object.values(new WebSocketPair());
+  const userId = new URL(req.url).searchParams.get("user");
+  server.serializeAttachment({ userId });  // Survives hibernation
+  this.ctx.acceptWebSocket(server, ["room:lobby"]);
+  server.send(JSON.stringify({ type: "init", state: this.ctx.storage.kv.get("state") }));
+  return new Response(null, { status: 101, webSocket: client });
+}
+
+async webSocketMessage(ws: WebSocket, msg: string) {
+  const { userId } = ws.deserializeAttachment();  // Retrieve after wake
+  const state = this.ctx.storage.kv.get("state") || {};
+  state[userId] = JSON.parse(msg);
+  this.ctx.storage.kv.put("state", state);
+  for (const c of this.ctx.getWebSockets("room:lobby")) c.send(msg);
+}
+```
+
+## Real-time Collaboration
+
+Broadcast updates to all connected clients:
+
+```typescript
+async webSocketMessage(ws: WebSocket, msg: string) {
+  const data = JSON.parse(msg);
+  this.ctx.storage.kv.put("doc", data.content);  // Persist
+  for (const c of this.ctx.getWebSockets()) if (c !== ws) c.send(msg);  // Broadcast
+}
+```
+
+### WebSocket Reconnection
+
+**Client-side** (exponential backoff):
+```typescript
+class ResilientWS {
+  private delay = 1000;
+  connect(url: string) {
+    const ws = new WebSocket(url);
+    ws.onclose = () => setTimeout(() => {
+      this.connect(url);
+      this.delay = Math.min(this.delay * 2, 30000);
+    }, this.delay);
+  }
+}
+```
+
+**Server-side** (cleanup on close):
+```typescript
+async webSocketClose(ws: WebSocket, code: number, reason: string, wasClean: boolean) {
+  const { userId } = ws.deserializeAttachment();
+  this.ctx.storage.sql.exec("UPDATE users SET online = false WHERE id = ?", userId);
+  for (const c of this.ctx.getWebSockets()) c.send(JSON.stringify({ type: "user_left", userId }));
+}
+```
+
+## Session Management
+
+```typescript
+async createSession(userId: string, data: object): Promise<string> {
+  const id = crypto.randomUUID(), exp = Date.now() + 86400000;
+  this.ctx.storage.sql.exec("INSERT INTO sessions VALUES (?, ?, ?, ?)", id, userId, JSON.stringify(data), exp);
+  await this.ctx.storage.setAlarm(exp);
+  return id;
+}
+
+async getSession(id: string): Promise<object | null> {
+  const row = this.ctx.storage.sql.exec("SELECT data FROM sessions WHERE id = ? AND expires_at > ?", id, Date.now()).one();
+  return row ? JSON.parse(row.data) : null;
+}
+
+async alarm() { this.ctx.storage.sql.exec("DELETE FROM sessions WHERE expires_at <= ?", Date.now()); }
+```
+
+## Multiple Events (Single Alarm)
+
+Queue pattern to schedule multiple events:
+
+```typescript
+async scheduleEvent(id: string, runAt: number) {
+  await this.ctx.storage.put(`event:${id}`, { id, runAt });
+  const curr = await this.ctx.storage.getAlarm();
+  if (!curr || runAt < curr) await this.ctx.storage.setAlarm(runAt);
+}
+
+async alarm() {
+  const events = await this.ctx.storage.list({ prefix: "event:" }), now = Date.now();
+  let next = null;
+  for (const [key, ev] of events) {
+    if (ev.runAt <= now) {
+      await this.processEvent(ev);
+      await this.ctx.storage.delete(key);
+    } else if (!next || ev.runAt < next) next = ev.runAt;
+  }
+  if (next) await this.ctx.storage.setAlarm(next);
+}
+```
+
+## Graceful Cleanup
+
+Use `ctx.waitUntil()` to complete work after response:
+
+```typescript
+async myMethod() {
+  const response = { success: true };
+  this.ctx.waitUntil(this.ctx.storage.sql.exec("DELETE FROM old_data WHERE timestamp < ?", cutoff));
+  return response;
+}
+```
+
+## Best Practices
+
+- **Design**: Use `idFromName()` for coordination, `newUniqueId()` for sharding, minimize constructor work
+- **Storage**: Prefer SQLite, batch with transactions, set alarms for cleanup, use PITR before risky ops
+- **Performance**: ~1K req/s per DO max - shard for more, cache in memory, use alarms for deferred work
+- **Reliability**: Handle 503 with retry+backoff, design for cold starts, test migrations with `--dry-run`
+- **Security**: Validate inputs in Workers, rate limit DO creation, use jurisdiction for compliance
+
+## See Also
+
+- **[API](./api.md)** - ctx methods, WebSocket handlers
+- **[Gotchas](./gotchas.md)** - Hibernation caveats, common errors
+- **[DO Storage](../do-storage/README.md)** - Storage patterns and transactions

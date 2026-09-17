@@ -1,1 +1,178 @@
-IyBGbGFnc2hpcCBHb3RjaGFzICYgVHJvdWJsZXNob290aW5nCgojIyBDb21tb24gRXJyb3JzCgojIyMgRmxhZyBBbHdheXMgUmV0dXJucyBEZWZhdWx0IFZhbHVlCgoqKkNhdXNlOioqIEZsYWcgaXMgZGlzYWJsZWQgKGBlbmFibGVkOiBmYWxzZWApLCBvciBubyB0YXJnZXRpbmcgcnVsZXMgbWF0Y2gsIG9yIGV2YWx1YXRpb24gY29udGV4dCBpcyBtaXNzaW5nIGV4cGVjdGVkIGF0dHJpYnV0ZXMuCgoqKlNvbHV0aW9uOioqIENoZWNrIHRoZXNlIGluIG9yZGVyOgoKMS4gSXMgdGhlIGZsYWcgZW5hYmxlZD8gKGAiZW5hYmxlZCI6IHRydWVgKQoyLiBEbyB5b3VyIHRhcmdldGluZyBydWxlcyBtYXRjaCB0aGUgY29udGV4dCB5b3UncmUgcGFzc2luZz8KMy4gQXJlIHlvdSBwYXNzaW5nIHRoZSByaWdodCBhdHRyaWJ1dGVzIGluIHRoZSBldmFsdWF0aW9uIGNvbnRleHQ/CgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBCQUQg4oCUIG5vIGNvbnRleHQsIHJ1bGVzIGNhbid0IG1hdGNoCmNvbnN0IHZhbCA9IGF3YWl0IGVudi5GTEFHUy5nZXRCb29sZWFuVmFsdWUoIm15LWZsYWciLCBmYWxzZSk7CgovLyDinIUgR09PRCDigJQgcGFzcyBjb250ZXh0IGF0dHJpYnV0ZXMgdGhhdCBydWxlcyByZWZlcmVuY2UKY29uc3QgdmFsID0gYXdhaXQgZW52LkZMQUdTLmdldEJvb2xlYW5WYWx1ZSgibXktZmxhZyIsIGZhbHNlLCB7CiAgdXNlcklkOiAidXNlci00MiIsCiAgcGxhbjogImVudGVycHJpc2UiLAp9KTsKYGBgCgojIyMgVFlQRV9NSVNNQVRDSCBFcnJvciBpbiBEZXRhaWxzCgoqKkNhdXNlOioqIENhbGxpbmcgYSB0eXBlZCBtZXRob2Qgb24gYSBmbGFnIHdpdGggYSBkaWZmZXJlbnQgdHlwZSAoZS5nLiwgYGdldEJvb2xlYW5WYWx1ZWAgb24gYSBzdHJpbmcgZmxhZykuCgoqKlNvbHV0aW9uOioqIFVzZSB0aGUgbWV0aG9kIG1hdGNoaW5nIHRoZSBmbGFnJ3MgdmFyaWF0aW9uIHR5cGUuCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBCQUQg4oCUIGZsYWcgImNoZWNrb3V0LWZsb3ciIGhhcyBzdHJpbmcgdmFyaWF0aW9ucwpjb25zdCB2YWwgPSBhd2FpdCBlbnYuRkxBR1MuZ2V0Qm9vbGVhblZhbHVlKCJjaGVja291dC1mbG93IiwgZmFsc2UpOwoKLy8g4pyFIEdPT0QKY29uc3QgdmFsID0gYXdhaXQgZW52LkZMQUdTLmdldFN0cmluZ1ZhbHVlKCJjaGVja291dC1mbG93IiwgIm9yaWdpbmFsIik7CmBgYAoKIyMjIDQwOSBDb25mbGljdCBvbiBGbGFnIENyZWF0aW9uCgoqKkNhdXNlOioqIEEgZmxhZyB3aXRoIHRoYXQga2V5IGFscmVhZHkgZXhpc3RzIGluIHRoZSBhcHAuCgoqKlNvbHV0aW9uOioqIFVzZSBhIGRpZmZlcmVudCBrZXksIG9yIEdFVCArIFBVVCB0byB1cGRhdGUgdGhlIGV4aXN0aW5nIGZsYWcuCgojIyMgSW5jb25zaXN0ZW50IFJvbGxvdXQgUmVzdWx0cwoKKipDYXVzZToqKiBgdGFyZ2V0aW5nS2V5YCAob3IgdGhlIGNvbmZpZ3VyZWQgYnVja2V0aW5nIGF0dHJpYnV0ZSkgaXMgbWlzc2luZyBmcm9tIHRoZSBldmFsdWF0aW9uIGNvbnRleHQsIGNhdXNpbmcgcmFuZG9tIGJ1Y2tldGluZyBvbiBlYWNoIHJlcXVlc3QuCgoqKlNvbHV0aW9uOioqIEFsd2F5cyBwYXNzIGEgc3RhYmxlIGlkZW50aWZpZXI6CgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBCQUQg4oCUIG5vIHRhcmdldGluZ0tleSwgcm9sbG91dCBpcyByYW5kb20gcGVyIHJlcXVlc3QKY29uc3QgdmFsID0gYXdhaXQgZW52LkZMQUdTLmdldEJvb2xlYW5WYWx1ZSgiZ3JhZHVhbC1yb2xsb3V0IiwgZmFsc2UpOwoKLy8g4pyFIEdPT0Qg4oCUIHN0YWJsZSB1c2VySWQgZm9yIGNvbnNpc3RlbnQgYnVja2V0aW5nCmNvbnN0IHZhbCA9IGF3YWl0IGVudi5GTEFHUy5nZXRCb29sZWFuVmFsdWUoImdyYWR1YWwtcm9sbG91dCIsIGZhbHNlLCB7CiAgdXNlcklkOiBzZXNzaW9uVXNlcklkLAp9KTsKYGBgCgojIyMgVXBkYXRlIE92ZXJ3cml0ZXMgRW50aXJlIEZsYWcKCioqQ2F1c2U6KiogUFVUIHJlcGxhY2VzIHRoZSBmdWxsIGBGbGFnRGVmaW5pdGlvbmAuIFNlbmRpbmcgb25seSBjaGFuZ2VkIGZpZWxkcyBkZWxldGVzIHRoZSByZXN0LgoKKipTb2x1dGlvbjoqKiBBbHdheXMgcmVhZC1tb2RpZnktd3JpdGU6CgpgYGBiYXNoCiMg4p2MIEJBRCDigJQgb3ZlcndyaXRlcyB0aGUgZW50aXJlIGZsYWcsIGxvc2luZyBydWxlcy92YXJpYXRpb25zCmN1cmwgLVggUFVUIC1kICd7ImVuYWJsZWQiOiB0cnVlfScgLi4uCgojIOKchSBHT09EIOKAlCBHRVQgZmlyc3QsIG1vZGlmeSwgUFVUIGJhY2sKRkxBRz0kKGN1cmwgLXMgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkVE9LRU4iICIkVVJML2ZsYWdzL215LWZsYWciIHwganEgJy5yZXN1bHQnKQpVUERBVEVEPSQoZWNobyAiJEZMQUciIHwganEgJy5lbmFibGVkID0gdHJ1ZScpCmVjaG8gIiRVUERBVEVEIiB8IGN1cmwgLXMgLVggUFVUIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJFRPS0VOIiAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiAtZCBALSAiJFVSTC9mbGFncy9teS1mbGFnIgpgYGAKCiMjIyBSZWFkaW5nIFJFU1QgRW52ZWxvcGUgRmllbGRzCgoqKkNhdXNlOioqIE1hbmFnZW1lbnQgZW5kcG9pbnRzIHVzZSBDbG91ZGZsYXJlIHY0IGVudmVsb3Blcywgbm90IHJhdyBwYXlsb2Fkcy4KCioqU29sdXRpb246KiogUmVhZCBgLnJlc3VsdGAgZm9yIHN1Y2Nlc3NmdWwgcGF5bG9hZHMsIGAucmVzdWx0X2luZm8uY3Vyc29yYCBmb3IgcGFnaW5hdGlvbiwgYW5kIGAuZXJyb3JzW10ubWVzc2FnZWAgZm9yIGVycm9ycy4KCmBgYGJhc2gKanEgJy5yZXN1bHQnCmpxICcucmVzdWx0X2luZm8uY3Vyc29yJwpqcSAnLmVycm9yc1tdLm1lc3NhZ2UnCmBgYAoKIyMjIE1peGluZyBDYW1lbENhc2UgYW5kIFNuYWtlIENhc2UgaW4gUkVTVCBSZXNwb25zZXMKCioqQ2F1c2U6KiogTWFuYWdlbWVudCBBUEkgcmVzcG9uc2VzIGFyZSBwdWJsaWMgQVBJIEpTT04gYW5kIHVzZSBzbmFrZV9jYXNlLiBFdmFsdWF0aW9uIHJlc3BvbnNlcyB1c2UgT3BlbkZlYXR1cmUtc3R5bGUgY2FtZWxDYXNlLgoKKipTb2x1dGlvbjoqKiBGb3IgbWFuYWdlbWVudCBlbmRwb2ludHMgdXNlIGBkZWZhdWx0X3ZhcmlhdGlvbmAsIGBzZXJ2ZV92YXJpYXRpb25gLCBgdXBkYXRlZF9hdGAsIGB1cGRhdGVkX2J5YCwgYW5kIGNoYW5nZWxvZyBgZmxhZ19rZXlgLiBGb3IgYC9ldmFsdWF0ZWAsIHVzZSBgZmxhZ0tleWAsIGB2YXJpYW50YCwgYW5kIGByZWFzb25gLgoKIyMjIEZMQUdfTk9UX0ZPVU5EIGluIENsaWVudCBQcm92aWRlcgoKKipDYXVzZToqKiBGbGFnIGtleSBub3QgaW5jbHVkZWQgaW4gYHByZWZldGNoRmxhZ3NgIGFycmF5LgoKKipTb2x1dGlvbjoqKiBBZGQgdGhlIGZsYWcga2V5IHRvIGBwcmVmZXRjaEZsYWdzYCB3aGVuIGluaXRpYWxpemluZyBgRmxhZ3NoaXBDbGllbnRQcm92aWRlcmAuCgojIyMgQ2xpZW50IFByb3ZpZGVyIFRva2VuIEV4cG9zdXJlCgoqKkNhdXNlOioqIFRoZSBgYXV0aFRva2VuYCBwYXNzZWQgdG8gYEZsYWdzaGlwQ2xpZW50UHJvdmlkZXJgIGlzIHZpc2libGUgaW4gdGhlIGJyb3dzZXIuIEl0IGNhbiBldmFsdWF0ZSBmbGFncyBhY3Jvc3MgYWxsIGFwcHMgaW4gdGhlIGFjY291bnQuCgoqKlNvbHV0aW9uOioqIFVzZSBhIHRva2VuIHdpdGggbWluaW1hbCBwZXJtaXNzaW9ucyAoRmxhZ3NoaXAgRXZhbHVhdGUgb25seSkuIE5ldmVyIHVzZSBhIHRva2VuIHdpdGggd3JpdGUvbWFuYWdlbWVudCBwZXJtaXNzaW9ucyBpbiB0aGUgYnJvd3Nlci4KCi0tLQoKIyMgTGltaXRzCgp8IExpbWl0IHwgVmFsdWUgfCBOb3RlcyB8CnwtLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBGbGFnIGtleSBsZW5ndGggfCAxLTY0IGNoYXJzIHwgQWxwaGFudW1lcmljLCBoeXBoZW5zLCB1bmRlcnNjb3JlcyBvbmx5IHwKfCBGbGFnIGtleSBwYXR0ZXJuIHwgYC9eW2EtekEtWjAtOV8tXSskL2AgfCDigJQgfAp8IFZhcmlhdGlvbiB2YWx1ZSBzaXplIHwgMTBLQiBtYXggfCBQZXIgdmFyaWF0aW9uLCBzZXJpYWxpemVkIHwKfCBWYXJpYXRpb24gbmFtZSBsZW5ndGggfCA2NCBjaGFycyBtYXggfCBBbHBoYW51bWVyaWMsIGh5cGhlbnMsIHVuZGVyc2NvcmVzIHwKfCBEZXNjcmlwdGlvbiBsZW5ndGggfCA1MTIgY2hhcnMgbWF4IHwgTnVsbGFibGUgfAp8IEFwcCBuYW1lIGxlbmd0aCB8IDEtNjQgY2hhcnMgfCBBbHBoYW51bWVyaWMsIGh5cGhlbnMsIHVuZGVyc2NvcmVzIHwKfCBMb2dpY2FsIG5lc3RpbmcgZGVwdGggfCA2IGxldmVscyB8IEFORC9PUiBjb25kaXRpb25zIHwKfCBNdXRhdGlvbiByYXRlIGxpbWl0IHwgNjAgLyA2MHMgfCBQZXIgYWNjb3VudDphcHAgfAp8IFJlYWQgcmF0ZSBsaW1pdCB8IDYwMCAvIDYwcyB8IFBlciBhY2NvdW50OmFwcCB8CnwgUm9sbG91dCBwZXJjZW50YWdlIHwgMC0xMDAgfCBJbnRlZ2VyIHwKfCBSdWxlIHByaW9yaXRpZXMgfCBVbmlxdWUgaW50ZWdlcnMgPj0gMSB8IExvd2VyID0gZXZhbHVhdGVkIGZpcnN0IHwKCi0tLQoKIyMgQW50aS1QYXR0ZXJucwoKIyMjIEV2YWx1YXRpbmcgRmxhZ3MgaW4gYSBUaWdodCBMb29wCgpGbGFnIGV2YWx1YXRpb24gdmlhIHRoZSBiaW5kaW5nIGlzIGZhc3QgYnV0IG5vdCBmcmVlLiBBdm9pZCBldmFsdWF0aW5nIHRoZSBzYW1lIGZsYWcgcmVwZWF0ZWRseSBpbiBhIGxvb3Ag4oCUIGV2YWx1YXRlIG9uY2UgYW5kIHJldXNlIHRoZSByZXN1bHQuCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBCQUQKZm9yIChjb25zdCBpdGVtIG9mIGl0ZW1zKSB7CiAgY29uc3QgZW5hYmxlZCA9IGF3YWl0IGVudi5GTEFHUy5nZXRCb29sZWFuVmFsdWUoIm15LWZsYWciLCBmYWxzZSwgY3R4KTsKICAvLyAuLi4KfQoKLy8g4pyFIEdPT0QKY29uc3QgZW5hYmxlZCA9IGF3YWl0IGVudi5GTEFHUy5nZXRCb29sZWFuVmFsdWUoIm15LWZsYWciLCBmYWxzZSwgY3R4KTsKZm9yIChjb25zdCBpdGVtIG9mIGl0ZW1zKSB7CiAgLy8gdXNlIGBlbmFibGVkYAp9CmBgYAoKIyMjIFVzaW5nIHRoZSBTREsgSW5zaWRlIFdvcmtlcnMgV2hlbiBCaW5kaW5nIElzIEF2YWlsYWJsZQoKVGhlIGJpbmRpbmcgYXZvaWRzIEhUVFAgb3ZlcmhlYWQgZW50aXJlbHkuIE9ubHkgdXNlIHRoZSBTREsgaW5zaWRlIFdvcmtlcnMgd2hlbiB5b3Ugc3BlY2lmaWNhbGx5IG5lZWQgT3BlbkZlYXR1cmUgdmVuZG9yLW5ldXRyYWxpdHkuCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBVbm5lY2Vzc2FyeSBIVFRQIG92ZXJoZWFkIGluc2lkZSBhIFdvcmtlcgpjb25zdCBwcm92aWRlciA9IG5ldyBGbGFnc2hpcFNlcnZlclByb3ZpZGVyKHsKICBhcHBJZDogIi4uLiIsIGFjY291bnRJZDogIi4uLiIsIGF1dGhUb2tlbjogIi4uLiIsCn0pOwoKLy8g4pyFIFVzZSB0aGUgYmluZGluZyBkaXJlY3RseSwgb3IgcGFzcyBpdCB0byB0aGUgU0RLCmNvbnN0IHByb3ZpZGVyID0gbmV3IEZsYWdzaGlwU2VydmVyUHJvdmlkZXIoeyBiaW5kaW5nOiBlbnYuRkxBR1MgfSk7CmBgYAoKIyMjIFBhcnRpYWwgUFVUIFVwZGF0ZXMKClRoZSBmbGFnIHVwZGF0ZSBBUEkgKFBVVCkgcmVxdWlyZXMgdGhlIGNvbXBsZXRlIGBGbGFnRGVmaW5pdGlvbmAuIFNlbmRpbmcgb25seSBjaGFuZ2VkIGZpZWxkcyBzaWxlbnRseSBkcm9wcyBldmVyeXRoaW5nIGVsc2UuIEFsd2F5cyBHRVQgZmlyc3QsIHRoZW4gbW9kaWZ5IGFuZCBQVVQgYmFjayB0aGUgZnVsbCBvYmplY3QuCgojIyMgU3RhbGUgRmxhZyBDbGVhbnVwCgpGbGFncyB0aGF0IGFyZSBkaXNhYmxlZCBhbmQgbm8gbG9uZ2VyIHJlZmVyZW5jZWQgaW4gY29kZSBzaG91bGQgYmUgZGVsZXRlZC4gU3RhbGUgZmxhZ3MgY2x1dHRlciB0aGUgZGFzaGJvYXJkIGFuZCBtYWtlIGl0IGhhcmRlciB0byB1bmRlcnN0YW5kIHdoaWNoIGZsYWdzIGFyZSBhY3RpdmUuIEZvbGxvdyB0aGUgc2FmZSBkZWxldGlvbiB3b3JrZmxvdyBpbiBgcGF0dGVybnMubWRgLgoKLS0tCgojIyBQcm9wYWdhdGlvbiBCZWhhdmlvcgoKRmxhZyBjaGFuZ2VzIHByb3BhZ2F0ZSBnbG9iYWxseSB3aXRoaW4gc2Vjb25kcy4gRHVyaW5nIHRoZSBicmllZiBwcm9wYWdhdGlvbiB3aW5kb3csIHNvbWUgcmVnaW9ucyBtYXkgc2VydmUgdGhlIHByZXZpb3VzIHZhbHVlLiBBZnRlciBwcm9wYWdhdGlvbiBjb21wbGV0ZXMsIGFsbCBldmFsdWF0aW9ucyByZXR1cm4gdGhlIHVwZGF0ZWQgdmFsdWUuCgotIE5vIFdvcmtlciByZWRlcGxveW1lbnQgbmVlZGVkIGZvciBmbGFnIGNoYW5nZXMuCi0gSWYgdGhlIGRhc2hib2FyZCBpcyB0ZW1wb3JhcmlseSB1bmF2YWlsYWJsZSwgZXZhbHVhdGlvbiBjb250aW51ZXMgdXNpbmcgdGhlIGxhc3QgcHJvcGFnYXRlZCBjb25maWd1cmF0aW9uLgotIEZsYWcgY2hhbmdlcyBtYWRlIHZpYSB0aGUgUkVTVCBBUEkgYW5kIGRhc2hib2FyZCBhcmUgZXF1aXZhbGVudCDigJQgYm90aCB0cmlnZ2VyIHByb3BhZ2F0aW9uLgo=
+# Flagship Gotchas & Troubleshooting
+
+## Common Errors
+
+### Flag Always Returns Default Value
+
+**Cause:** Flag is disabled (`enabled: false`), or no targeting rules match, or evaluation context is missing expected attributes.
+
+**Solution:** Check these in order:
+
+1. Is the flag enabled? (`"enabled": true`)
+2. Do your targeting rules match the context you're passing?
+3. Are you passing the right attributes in the evaluation context?
+
+```typescript
+// ❌ BAD — no context, rules can't match
+const val = await env.FLAGS.getBooleanValue("my-flag", false);
+
+// ✅ GOOD — pass context attributes that rules reference
+const val = await env.FLAGS.getBooleanValue("my-flag", false, {
+  userId: "user-42",
+  plan: "enterprise",
+});
+```
+
+### TYPE_MISMATCH Error in Details
+
+**Cause:** Calling a typed method on a flag with a different type (e.g., `getBooleanValue` on a string flag).
+
+**Solution:** Use the method matching the flag's variation type.
+
+```typescript
+// ❌ BAD — flag "checkout-flow" has string variations
+const val = await env.FLAGS.getBooleanValue("checkout-flow", false);
+
+// ✅ GOOD
+const val = await env.FLAGS.getStringValue("checkout-flow", "original");
+```
+
+### 409 Conflict on Flag Creation
+
+**Cause:** A flag with that key already exists in the app.
+
+**Solution:** Use a different key, or GET + PUT to update the existing flag.
+
+### Inconsistent Rollout Results
+
+**Cause:** `targetingKey` (or the configured bucketing attribute) is missing from the evaluation context, causing random bucketing on each request.
+
+**Solution:** Always pass a stable identifier:
+
+```typescript
+// ❌ BAD — no targetingKey, rollout is random per request
+const val = await env.FLAGS.getBooleanValue("gradual-rollout", false);
+
+// ✅ GOOD — stable userId for consistent bucketing
+const val = await env.FLAGS.getBooleanValue("gradual-rollout", false, {
+  userId: sessionUserId,
+});
+```
+
+### Update Overwrites Entire Flag
+
+**Cause:** PUT replaces the full `FlagDefinition`. Sending only changed fields deletes the rest.
+
+**Solution:** Always read-modify-write:
+
+```bash
+# ❌ BAD — overwrites the entire flag, losing rules/variations
+curl -X PUT -d '{"enabled": true}' ...
+
+# ✅ GOOD — GET first, modify, PUT back
+FLAG=$(curl -s -H "Authorization: Bearer $TOKEN" "$URL/flags/my-flag" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.enabled = true')
+echo "$UPDATED" | curl -s -X PUT -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d @- "$URL/flags/my-flag"
+```
+
+### Reading REST Envelope Fields
+
+**Cause:** Management endpoints use Cloudflare v4 envelopes, not raw payloads.
+
+**Solution:** Read `.result` for successful payloads, `.result_info.cursor` for pagination, and `.errors[].message` for errors.
+
+```bash
+jq '.result'
+jq '.result_info.cursor'
+jq '.errors[].message'
+```
+
+### Mixing CamelCase and Snake Case in REST Responses
+
+**Cause:** Management API responses are public API JSON and use snake_case. Evaluation responses use OpenFeature-style camelCase.
+
+**Solution:** For management endpoints use `default_variation`, `serve_variation`, `updated_at`, `updated_by`, and changelog `flag_key`. For `/evaluate`, use `flagKey`, `variant`, and `reason`.
+
+### FLAG_NOT_FOUND in Client Provider
+
+**Cause:** Flag key not included in `prefetchFlags` array.
+
+**Solution:** Add the flag key to `prefetchFlags` when initializing `FlagshipClientProvider`.
+
+### Client Provider Token Exposure
+
+**Cause:** The `authToken` passed to `FlagshipClientProvider` is visible in the browser. It can evaluate flags across all apps in the account.
+
+**Solution:** Use a token with minimal permissions (Flagship Evaluate only). Never use a token with write/management permissions in the browser.
+
+---
+
+## Limits
+
+| Limit | Value | Notes |
+|-------|-------|-------|
+| Flag key length | 1-64 chars | Alphanumeric, hyphens, underscores only |
+| Flag key pattern | `/^[a-zA-Z0-9_-]+$/` | — |
+| Variation value size | 10KB max | Per variation, serialized |
+| Variation name length | 64 chars max | Alphanumeric, hyphens, underscores |
+| Description length | 512 chars max | Nullable |
+| App name length | 1-64 chars | Alphanumeric, hyphens, underscores |
+| Logical nesting depth | 6 levels | AND/OR conditions |
+| Mutation rate limit | 60 / 60s | Per account:app |
+| Read rate limit | 600 / 60s | Per account:app |
+| Rollout percentage | 0-100 | Integer |
+| Rule priorities | Unique integers >= 1 | Lower = evaluated first |
+
+---
+
+## Anti-Patterns
+
+### Evaluating Flags in a Tight Loop
+
+Flag evaluation via the binding is fast but not free. Avoid evaluating the same flag repeatedly in a loop — evaluate once and reuse the result.
+
+```typescript
+// ❌ BAD
+for (const item of items) {
+  const enabled = await env.FLAGS.getBooleanValue("my-flag", false, ctx);
+  // ...
+}
+
+// ✅ GOOD
+const enabled = await env.FLAGS.getBooleanValue("my-flag", false, ctx);
+for (const item of items) {
+  // use `enabled`
+}
+```
+
+### Using the SDK Inside Workers When Binding Is Available
+
+The binding avoids HTTP overhead entirely. Only use the SDK inside Workers when you specifically need OpenFeature vendor-neutrality.
+
+```typescript
+// ❌ Unnecessary HTTP overhead inside a Worker
+const provider = new FlagshipServerProvider({
+  appId: "...", accountId: "...", authToken: "...",
+});
+
+// ✅ Use the binding directly, or pass it to the SDK
+const provider = new FlagshipServerProvider({ binding: env.FLAGS });
+```
+
+### Partial PUT Updates
+
+The flag update API (PUT) requires the complete `FlagDefinition`. Sending only changed fields silently drops everything else. Always GET first, then modify and PUT back the full object.
+
+### Stale Flag Cleanup
+
+Flags that are disabled and no longer referenced in code should be deleted. Stale flags clutter the dashboard and make it harder to understand which flags are active. Follow the safe deletion workflow in `patterns.md`.
+
+---
+
+## Propagation Behavior
+
+Flag changes propagate globally within seconds. During the brief propagation window, some regions may serve the previous value. After propagation completes, all evaluations return the updated value.
+
+- No Worker redeployment needed for flag changes.
+- If the dashboard is temporarily unavailable, evaluation continues using the last propagated configuration.
+- Flag changes made via the REST API and dashboard are equivalent — both trigger propagation.

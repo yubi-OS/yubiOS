@@ -1,1 +1,85 @@
-IyBBbmFseXRpY3MgRW5naW5lIEdvdGNoYXMKCiMjIENyaXRpY2FsIElzc3VlcwoKIyMjIFNhbXBsaW5nIGF0IEhpZ2ggVm9sdW1lcwoKKipQcm9ibGVtOioqIFF1ZXJpZXMgcmV0dXJuIGZld2VyIHBvaW50cyB0aGFuIHdyaXR0ZW4gYXQgPjFNIHdyaXRlcy9taW4uCgoqKlNvbHV0aW9uOioqCmBgYHR5cGVzY3JpcHQKLy8gUHJlLWFnZ3JlZ2F0ZSBiZWZvcmUgd3JpdGluZwpsZXQgYnVmZmVyID0geyBjb3VudDogMCwgdG90YWw6IDAgfTsKYnVmZmVyLmNvdW50Kys7IGJ1ZmZlci50b3RhbCArPSB2YWx1ZTsKCi8vIFdyaXRlIG9uY2UgcGVyIHNlY29uZCBpbnN0ZWFkIG9mIHBlciByZXF1ZXN0CmlmIChEYXRlLm5vdygpICUgMTAwMCA9PT0gMCkgewogIGVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoeyBkb3VibGVzOiBbYnVmZmVyLmNvdW50LCBidWZmZXIudG90YWxdIH0pOwp9CmBgYAoKKipEZXRlY3Rpb246KiogYG5weCB3cmFuZ2xlciB0YWlsYCDihpIgbG9vayBmb3IgInNhbXBsaW5nIGVuYWJsZWQiCgojIyMgd3JpdGVEYXRhUG9pbnQgUmV0dXJucyB2b2lkCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBQb2ludGxlc3MgYXdhaXQKYXdhaXQgZW52LkFOQUxZVElDUy53cml0ZURhdGFQb2ludCh7Li4ufSk7CgovLyDinIUgRmlyZS1hbmQtZm9yZ2V0CmVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoey4uLn0pOwpgYGAKCldyaXRlcyBjYW4gZmFpbCBzaWxlbnRseS4gQ2hlY2sgdGFpbCBsb2dzLgoKIyMjIEluZGV4IHZzIEJsb2IKCnwgQ2FyZGluYWxpdHkgfCBVc2UgfCBFeGFtcGxlIHwKfC0tLS0tLS0tLS0tLS18LS0tLS18LS0tLS0tLS0tfAp8IE1pbGxpb25zIHwgKipJbmRleCoqIHwgdXNlcl9pZCwgYXBpX2tleSB8CnwgSHVuZHJlZHMgfCAqKkJsb2IqKiB8IGVuZHBvaW50LCBzdGF0dXNfY29kZSwgY291bnRyeSB8CgpgYGB0eXBlc2NyaXB0Ci8vIOKchSBDb3JyZWN0CnsgYmxvYnM6IFttZXRob2QsIHBhdGgsIHN0YXR1c10sIGluZGV4ZXM6IFt1c2VySWRdIH0KYGBgCgojIyMgQ2FuJ3QgUXVlcnkgZnJvbSBXb3JrZXJzCgpRdWVyeSBBUEkgcmVxdWlyZXMgSFRUUCBhdXRoLiBVc2UgZXh0ZXJuYWwgc2VydmljZSBvciBjYWNoZSBpbiBLVi9EMS4KCiMjIyBObyBDdXN0b20gVGltZXN0YW1wcwoKQXV0by1nZW5lcmF0ZWQgYXQgd3JpdGUgdGltZS4gU3RvcmUgb3JpZ2luYWwgaW4gYmxvYiBpZiBuZWVkZWQuCgojIyBDb21tb24gRXJyb3JzCgp8IEVycm9yIHwgRml4IHwKfC0tLS0tLS18LS0tLS18CnwgQmluZGluZyBub3QgZm91bmQgfCBDaGVjayB3cmFuZ2xlci5qc29uYywgcmVkZXBsb3kgfAp8IE5vIGRhdGEgaW4gcXVlcnkgfCBXYWl0IDMwczsgY2hlY2sgZGF0YXNldCBuYW1lOyBjaGVjayB0aW1lIHJhbmdlIHwKfCBRdWVyeSB0aW1lb3V0IHwgQWRkIHRpbWUgZmlsdGVyOyB1c2UgaW5kZXggZm9yIGZpbHRlcmluZyB8CgojIyBMaW1pdHMKCnwgUmVzb3VyY2UgfCBMaW1pdCB8CnwtLS0tLS0tLS0tfC0tLS0tLS18CnwgQmxvYnMgcGVyIHBvaW50IHwgMjAgfAp8IERvdWJsZXMgcGVyIHBvaW50IHwgMjAgfAp8IEluZGV4ZXMgcGVyIHBvaW50IHwgMSB8CnwgQmxvYi9JbmRleCBzaXplIHwgMTZLQiB8CnwgV3JpdGUgcmF0ZSAobm8gc2FtcGxpbmcpIHwgfjFNL21pbiB8CnwgUmV0ZW50aW9uIHwgOTAgZGF5cyB8CnwgUXVlcnkgdGltZW91dCB8IDMwcyB8CgojIyBCZXN0IFByYWN0aWNlcwoK4pyFIFByZS1hZ2dyZWdhdGUgYXQgaGlnaCB2b2x1bWVzICAK4pyFIFVzZSBpbmRleCBmb3IgaGlnaC1jYXJkaW5hbGl0eSAobWlsbGlvbnMpICAK4pyFIEFsd2F5cyBpbmNsdWRlIHRpbWUgZmlsdGVyIGluIHF1ZXJpZXMgIArinIUgRGVzaWduIHNjaGVtYSBiZWZvcmUgY29kaW5nICAKCuKdjCBEb24ndCBhd2FpdCB3cml0ZURhdGFQb2ludCAgCuKdjCBEb24ndCB1c2UgaW5kZXggZm9yIGxvdy1jYXJkaW5hbGl0eSAgCuKdjCBEb24ndCBxdWVyeSB3aXRob3V0IHRpbWUgcmFuZ2UgIArinYwgRG9uJ3QgYXNzdW1lIGFsbCB3cml0ZXMgc3VjY2VlZAo=
+# Analytics Engine Gotchas
+
+## Critical Issues
+
+### Sampling at High Volumes
+
+**Problem:** Queries return fewer points than written at >1M writes/min.
+
+**Solution:**
+```typescript
+// Pre-aggregate before writing
+let buffer = { count: 0, total: 0 };
+buffer.count++; buffer.total += value;
+
+// Write once per second instead of per request
+if (Date.now() % 1000 === 0) {
+  env.ANALYTICS.writeDataPoint({ doubles: [buffer.count, buffer.total] });
+}
+```
+
+**Detection:** `npx wrangler tail` → look for "sampling enabled"
+
+### writeDataPoint Returns void
+
+```typescript
+// ❌ Pointless await
+await env.ANALYTICS.writeDataPoint({...});
+
+// ✅ Fire-and-forget
+env.ANALYTICS.writeDataPoint({...});
+```
+
+Writes can fail silently. Check tail logs.
+
+### Index vs Blob
+
+| Cardinality | Use | Example |
+|-------------|-----|---------|
+| Millions | **Index** | user_id, api_key |
+| Hundreds | **Blob** | endpoint, status_code, country |
+
+```typescript
+// ✅ Correct
+{ blobs: [method, path, status], indexes: [userId] }
+```
+
+### Can't Query from Workers
+
+Query API requires HTTP auth. Use external service or cache in KV/D1.
+
+### No Custom Timestamps
+
+Auto-generated at write time. Store original in blob if needed.
+
+## Common Errors
+
+| Error | Fix |
+|-------|-----|
+| Binding not found | Check wrangler.jsonc, redeploy |
+| No data in query | Wait 30s; check dataset name; check time range |
+| Query timeout | Add time filter; use index for filtering |
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Blobs per point | 20 |
+| Doubles per point | 20 |
+| Indexes per point | 1 |
+| Blob/Index size | 16KB |
+| Write rate (no sampling) | ~1M/min |
+| Retention | 90 days |
+| Query timeout | 30s |
+
+## Best Practices
+
+✅ Pre-aggregate at high volumes  
+✅ Use index for high-cardinality (millions)  
+✅ Always include time filter in queries  
+✅ Design schema before coding  
+
+❌ Don't await writeDataPoint  
+❌ Don't use index for low-cardinality  
+❌ Don't query without time range  
+❌ Don't assume all writes succeed

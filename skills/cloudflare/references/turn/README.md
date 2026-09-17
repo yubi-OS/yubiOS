@@ -1,1 +1,82 @@
-IyBDbG91ZGZsYXJlIFRVUk4gU2VydmljZQoKRXhwZXJ0IGd1aWRhbmNlIGZvciBpbXBsZW1lbnRpbmcgQ2xvdWRmbGFyZSBUVVJOIFNlcnZpY2UgaW4gV2ViUlRDIGFwcGxpY2F0aW9ucy4KCiMjIE92ZXJ2aWV3CgpDbG91ZGZsYXJlIFRVUk4gKFRyYXZlcnNhbCBVc2luZyBSZWxheXMgYXJvdW5kIE5BVCkgU2VydmljZSBpcyBhIG1hbmFnZWQgcmVsYXkgc2VydmljZSBmb3IgV2ViUlRDIGFwcGxpY2F0aW9ucy4gVFVSTiBhY3RzIGFzIGEgcmVsYXkgcG9pbnQgZm9yIHRyYWZmaWMgYmV0d2VlbiBXZWJSVEMgY2xpZW50cyBhbmQgU0ZVcywgcGFydGljdWxhcmx5IHdoZW4gZGlyZWN0IHBlZXItdG8tcGVlciBjb21tdW5pY2F0aW9uIGlzIG9ic3RydWN0ZWQgYnkgTkFUcyBvciBmaXJld2FsbHMuIFRoZSBzZXJ2aWNlIHJ1bnMgb24gQ2xvdWRmbGFyZSdzIGdsb2JhbCBhbnljYXN0IG5ldHdvcmsgYWNyb3NzIDMxMCsgY2l0aWVzLgoKIyMgS2V5IENoYXJhY3RlcmlzdGljcwoKLSAqKkFueWNhc3QgQXJjaGl0ZWN0dXJlKio6IEF1dG9tYXRpY2FsbHkgY29ubmVjdHMgY2xpZW50cyB0byB0aGUgY2xvc2VzdCBDbG91ZGZsYXJlIGxvY2F0aW9uCi0gKipHbG9iYWwgTmV0d29yayoqOiBBdmFpbGFibGUgYWNyb3NzIENsb3VkZmxhcmUncyBlbnRpcmUgbmV0d29yayAoZXhjbHVkaW5nIENoaW5hIE5ldHdvcmspCi0gKipaZXJvIENvbmZpZ3VyYXRpb24qKjogTm8gbmVlZCB0byBtYW51YWxseSBzZWxlY3QgcmVnaW9ucyBvciBzZXJ2ZXJzCi0gKipQcm90b2NvbCBTdXBwb3J0Kio6IFNUVU4vVFVSTiBvdmVyIFVEUCwgVENQLCBhbmQgVExTCi0gKipGcmVlIFRpZXIqKjogRnJlZSB3aGVuIHVzZWQgd2l0aCBDbG91ZGZsYXJlIENhbGxzIFNGVSwgb3RoZXJ3aXNlICQwLjA1L0dCIG91dGJvdW5kCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKfCBGaWxlIHwgUHVycG9zZSB8CnwtLS0tLS18LS0tLS0tLS0tfAp8IFthcGkubWRdKC4vYXBpLm1kKSB8IENyZWRlbnRpYWxzIEFQSSwgVFVSTiBrZXkgbWFuYWdlbWVudCwgdHlwZXMsIGNvbnN0cmFpbnRzIHwKfCBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSB8IFdvcmtlciBzZXR1cCwgd3JhbmdsZXIuanNvbmMsIGVudiB2YXJzLCBJUCBhbGxvd2xpc3RpbmcgfAp8IFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgfCBJbXBsZW1lbnRhdGlvbiBwYXR0ZXJucywgdXNlIGNhc2VzLCBpbnRlZ3JhdGlvbiBleGFtcGxlcyB8CnwgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgfCBUcm91Ymxlc2hvb3RpbmcsIGxpbWl0cywgc2VjdXJpdHksIGNvbW1vbiBtaXN0YWtlcyB8CgojIyBSZWFkaW5nIE9yZGVyCgp8IFRhc2sgfCBGaWxlcyB0byBSZWFkIHwgRXN0LiBUb2tlbnMgfAp8LS0tLS0tfC0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tfAp8IFF1aWNrIHN0YXJ0IHwgUkVBRE1FIG9ubHkgfCB+NTAwIHwKfCBHZW5lcmF0ZSBjcmVkZW50aWFscyB8IFJFQURNRSDihpIgYXBpIHwgfjEzMDAgfAp8IFdvcmtlciBpbnRlZ3JhdGlvbiB8IFJFQURNRSDihpIgY29uZmlndXJhdGlvbiDihpIgcGF0dGVybnMgfCB+MjAwMCB8CnwgRGVidWcgY29ubmVjdGlvbiB8IGdvdGNoYXMgfCB+NzAwIHwKfCBTZWN1cml0eSByZXZpZXcgfCBhcGkg4oaSIGdvdGNoYXMgfCB+MTUwMCB8CnwgRW50ZXJwcmlzZSBmaXJld2FsbCB8IGNvbmZpZ3VyYXRpb24gfCB+NjAwIHwKCiMjIFNlcnZpY2UgQWRkcmVzc2VzIGFuZCBQb3J0cwoKIyMjIFNUVU4gb3ZlciBVRFAKLSAqKlByaW1hcnkqKjogYHN0dW4uY2xvdWRmbGFyZS5jb206MzQ3OC91ZHBgCi0gKipBbHRlcm5hdGUqKjogYHN0dW4uY2xvdWRmbGFyZS5jb206NTMvdWRwYCAoYmxvY2tlZCBieSBicm93c2Vycywgbm90IHJlY29tbWVuZGVkKQoKIyMjIFRVUk4gb3ZlciBVRFAKLSAqKlByaW1hcnkqKjogYHR1cm4uY2xvdWRmbGFyZS5jb206MzQ3OC91ZHBgCi0gKipBbHRlcm5hdGUqKjogYHR1cm4uY2xvdWRmbGFyZS5jb206NTMvdWRwYCAoYmxvY2tlZCBieSBicm93c2VycykKCiMjIyBUVVJOIG92ZXIgVENQCi0gKipQcmltYXJ5Kio6IGB0dXJuLmNsb3VkZmxhcmUuY29tOjM0NzgvdGNwYAotICoqQWx0ZXJuYXRlKio6IGB0dXJuLmNsb3VkZmxhcmUuY29tOjgwL3RjcGAKCiMjIyBUVVJOIG92ZXIgVExTCi0gKipQcmltYXJ5Kio6IGB0dXJuLmNsb3VkZmxhcmUuY29tOjUzNDkvdGNwYAotICoqQWx0ZXJuYXRlKio6IGB0dXJuLmNsb3VkZmxhcmUuY29tOjQ0My90Y3BgCgojIyBRdWljayBTdGFydAoKMS4gKipDcmVhdGUgVFVSTiBrZXkgdmlhIEFQSSoqOiBzZWUgW2FwaS5tZCNjcmVhdGUtdHVybi1rZXldKC4vYXBpLm1kI2NyZWF0ZS10dXJuLWtleSkKMi4gKipHZW5lcmF0ZSBjcmVkZW50aWFscyoqOiBzZWUgW2FwaS5tZCNnZW5lcmF0ZS10ZW1wb3JhcnktY3JlZGVudGlhbHNdKC4vYXBpLm1kI2dlbmVyYXRlLXRlbXBvcmFyeS1jcmVkZW50aWFscykKMy4gKipDb25maWd1cmUgV29ya2VyKio6IHNlZSBbY29uZmlndXJhdGlvbi5tZCNjbG91ZGZsYXJlLXdvcmtlci1pbnRlZ3JhdGlvbl0oLi9jb25maWd1cmF0aW9uLm1kI2Nsb3VkZmxhcmUtd29ya2VyLWludGVncmF0aW9uKQo0LiAqKkltcGxlbWVudCBjbGllbnQqKjogc2VlIFtwYXR0ZXJucy5tZCNiYXNpYy10dXJuLWNvbmZpZ3VyYXRpb24tYnJvd3Nlcl0oLi9wYXR0ZXJucy5tZCNiYXNpYy10dXJuLWNvbmZpZ3VyYXRpb24tYnJvd3NlcikKCiMjIFdoZW4gdG8gVXNlIFRVUk4KCi0gKipSZXN0cmljdGl2ZSBOQVRzKio6IFN5bW1ldHJpYyBOQVRzIHRoYXQgYmxvY2sgZGlyZWN0IGNvbm5lY3Rpb25zCi0gKipDb3Jwb3JhdGUgZmlyZXdhbGxzKio6IEVudmlyb25tZW50cyBibG9ja2luZyBXZWJSVEMgcG9ydHMKLSAqKk1vYmlsZSBuZXR3b3JrcyoqOiBDYXJyaWVyLWdyYWRlIE5BVCBzY2VuYXJpb3MKLSAqKlByZWRpY3RhYmxlIGNvbm5lY3Rpdml0eSoqOiBXaGVuIHJlbGlhYmlsaXR5ID4gZWZmaWNpZW5jeQoKIyMgUmVsYXRlZCBDbG91ZGZsYXJlIFNlcnZpY2VzCgotICoqQ2xvdWRmbGFyZSBDYWxscyBTRlUqKjogTWFuYWdlZCBTZWxlY3RpdmUgRm9yd2FyZGluZyBVbml0IChUVVJOIGZyZWUgd2hlbiB1c2VkIHdpdGggU0ZVKQotICoqQ2xvdWRmbGFyZSBTdHJlYW0qKjogVmlkZW8gc3RyZWFtaW5nIHdpdGggV0hJUC9XSEVQIHN1cHBvcnQKLSAqKkNsb3VkZmxhcmUgV29ya2VycyoqOiBCYWNrZW5kIGZvciBjcmVkZW50aWFsIGdlbmVyYXRpb24KLSAqKkNsb3VkZmxhcmUgS1YqKjogQ3JlZGVudGlhbCBjYWNoaW5nCi0gKipDbG91ZGZsYXJlIER1cmFibGUgT2JqZWN0cyoqOiBTZXNzaW9uIHN0YXRlIG1hbmFnZW1lbnQKCiMjIEFkZGl0aW9uYWwgUmVzb3VyY2VzCgotIFtDbG91ZGZsYXJlIENhbGxzIERvY3VtZW50YXRpb25dKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9jYWxscy8pCi0gW0Nsb3VkZmxhcmUgVFVSTiBTZXJ2aWNlIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yZWFsdGltZS90dXJuLykKLSBbQ2xvdWRmbGFyZSBBUEkgUmVmZXJlbmNlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYXBpL3Jlc291cmNlcy9jYWxscy9zdWJyZXNvdXJjZXMvdHVybi8pCi0gW09yYW5nZSBNZWV0cyAoT3BlbiBTb3VyY2UgRXhhbXBsZSldKGh0dHBzOi8vZ2l0aHViLmNvbS9jbG91ZGZsYXJlL29yYW5nZSkK
+# Cloudflare TURN Service
+
+Expert guidance for implementing Cloudflare TURN Service in WebRTC applications.
+
+## Overview
+
+Cloudflare TURN (Traversal Using Relays around NAT) Service is a managed relay service for WebRTC applications. TURN acts as a relay point for traffic between WebRTC clients and SFUs, particularly when direct peer-to-peer communication is obstructed by NATs or firewalls. The service runs on Cloudflare's global anycast network across 310+ cities.
+
+## Key Characteristics
+
+- **Anycast Architecture**: Automatically connects clients to the closest Cloudflare location
+- **Global Network**: Available across Cloudflare's entire network (excluding China Network)
+- **Zero Configuration**: No need to manually select regions or servers
+- **Protocol Support**: STUN/TURN over UDP, TCP, and TLS
+- **Free Tier**: Free when used with Cloudflare Calls SFU, otherwise $0.05/GB outbound
+
+## In This Reference
+
+| File | Purpose |
+|------|---------|
+| [api.md](./api.md) | Credentials API, TURN key management, types, constraints |
+| [configuration.md](./configuration.md) | Worker setup, wrangler.jsonc, env vars, IP allowlisting |
+| [patterns.md](./patterns.md) | Implementation patterns, use cases, integration examples |
+| [gotchas.md](./gotchas.md) | Troubleshooting, limits, security, common mistakes |
+
+## Reading Order
+
+| Task | Files to Read | Est. Tokens |
+|------|---------------|-------------|
+| Quick start | README only | ~500 |
+| Generate credentials | README → api | ~1300 |
+| Worker integration | README → configuration → patterns | ~2000 |
+| Debug connection | gotchas | ~700 |
+| Security review | api → gotchas | ~1500 |
+| Enterprise firewall | configuration | ~600 |
+
+## Service Addresses and Ports
+
+### STUN over UDP
+- **Primary**: `stun.cloudflare.com:3478/udp`
+- **Alternate**: `stun.cloudflare.com:53/udp` (blocked by browsers, not recommended)
+
+### TURN over UDP
+- **Primary**: `turn.cloudflare.com:3478/udp`
+- **Alternate**: `turn.cloudflare.com:53/udp` (blocked by browsers)
+
+### TURN over TCP
+- **Primary**: `turn.cloudflare.com:3478/tcp`
+- **Alternate**: `turn.cloudflare.com:80/tcp`
+
+### TURN over TLS
+- **Primary**: `turn.cloudflare.com:5349/tcp`
+- **Alternate**: `turn.cloudflare.com:443/tcp`
+
+## Quick Start
+
+1. **Create TURN key via API**: see [api.md#create-turn-key](./api.md#create-turn-key)
+2. **Generate credentials**: see [api.md#generate-temporary-credentials](./api.md#generate-temporary-credentials)
+3. **Configure Worker**: see [configuration.md#cloudflare-worker-integration](./configuration.md#cloudflare-worker-integration)
+4. **Implement client**: see [patterns.md#basic-turn-configuration-browser](./patterns.md#basic-turn-configuration-browser)
+
+## When to Use TURN
+
+- **Restrictive NATs**: Symmetric NATs that block direct connections
+- **Corporate firewalls**: Environments blocking WebRTC ports
+- **Mobile networks**: Carrier-grade NAT scenarios
+- **Predictable connectivity**: When reliability > efficiency
+
+## Related Cloudflare Services
+
+- **Cloudflare Calls SFU**: Managed Selective Forwarding Unit (TURN free when used with SFU)
+- **Cloudflare Stream**: Video streaming with WHIP/WHEP support
+- **Cloudflare Workers**: Backend for credential generation
+- **Cloudflare KV**: Credential caching
+- **Cloudflare Durable Objects**: Session state management
+
+## Additional Resources
+
+- [Cloudflare Calls Documentation](https://developers.cloudflare.com/calls/)
+- [Cloudflare TURN Service Docs](https://developers.cloudflare.com/realtime/turn/)
+- [Cloudflare API Reference](https://developers.cloudflare.com/api/resources/calls/subresources/turn/)
+- [Orange Meets (Open Source Example)](https://github.com/cloudflare/orange)

@@ -1,1 +1,188 @@
-IyBNdWx0aS1UZW5hbnQgUGF0dGVybnMKCiMjIEJpbGxpbmcgYnkgUGxhbgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBESVNQQVRDSEVSOiBEaXNwYXRjaE5hbWVzcGFjZTsKICBDVVNUT01FUlNfS1Y6IEtWTmFtZXNwYWNlOwp9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCB1c2VyV29ya2VyTmFtZSA9IG5ldyBVUkwocmVxdWVzdC51cmwpLmhvc3RuYW1lLnNwbGl0KCIuIilbMF07CiAgICBjb25zdCBjdXN0b21lclBsYW4gPSBhd2FpdCBlbnYuQ1VTVE9NRVJTX0tWLmdldCh1c2VyV29ya2VyTmFtZSk7CiAgICAKICAgIGNvbnN0IHBsYW5zID0gewogICAgICBlbnRlcnByaXNlOiB7IGNwdU1zOiA1MCwgc3ViUmVxdWVzdHM6IDUwIH0sCiAgICAgIHBybzogeyBjcHVNczogMjAsIHN1YlJlcXVlc3RzOiAyMCB9LAogICAgICBmcmVlOiB7IGNwdU1zOiAxMCwgc3ViUmVxdWVzdHM6IDUgfSwKICAgIH07CiAgICBjb25zdCBsaW1pdHMgPSBwbGFuc1tjdXN0b21lclBsYW4gYXMga2V5b2YgdHlwZW9mIHBsYW5zXSB8fCBwbGFucy5mcmVlOwogICAgCiAgICBjb25zdCB1c2VyV29ya2VyID0gZW52LkRJU1BBVENIRVIuZ2V0KHVzZXJXb3JrZXJOYW1lLCB7fSwgeyBsaW1pdHMgfSk7CiAgICByZXR1cm4gYXdhaXQgdXNlcldvcmtlci5mZXRjaChyZXF1ZXN0KTsKICB9LAp9OwpgYGAKCiMjIFJlc291cmNlIElzb2xhdGlvbgoKKipDb21wbGV0ZSBpc29sYXRpb246KiogQ3JlYXRlIHVuaXF1ZSByZXNvdXJjZXMgcGVyIGN1c3RvbWVyCi0gS1YgbmFtZXNwYWNlIHBlciBjdXN0b21lcgotIEQxIGRhdGFiYXNlIHBlciBjdXN0b21lcgotIFIyIGJ1Y2tldCBwZXIgY3VzdG9tZXIKCmBgYHR5cGVzY3JpcHQKY29uc3QgYmluZGluZ3MgPSBbewogIHR5cGU6ICJrdl9uYW1lc3BhY2UiLAogIG5hbWU6ICJVU0VSX0tWIiwKICBuYW1lc3BhY2VfaWQ6IGBjdXN0b21lci0ke2N1c3RvbWVySWR9LWt2YAp9XTsKYGBgCgojIyBIb3N0bmFtZSBSb3V0aW5nCgojIyMgV2lsZGNhcmQgUm91dGUgKFJlY29tbWVuZGVkKQpDb25maWd1cmUgYCovKmAgcm91dGUgb24gU2FhUyBkb21haW4g4oaSIGRpc3BhdGNoIFdvcmtlcgoKKipCZW5lZml0czoqKgotIFN1cHBvcnRzIHN1YmRvbWFpbnMgKyBjdXN0b20gdmFuaXR5IGRvbWFpbnMKLSBObyBwZXItcm91dGUgbGltaXRzIChyZWd1bGFyIFdvcmtlcnMgbGltaXRlZCB0byAxMDAgcm91dGVzKQotIFByb2dyYW1tYXRpYyBjb250cm9sCi0gV29ya3Mgd2l0aCBhbnkgRE5TIHByb3h5IHNldHRpbmdzCgoqKlNldHVwOioqCjEuIENsb3VkZmxhcmUgZm9yIFNhYVMgY3VzdG9tIGhvc3RuYW1lcwoyLiBGYWxsYmFjayBvcmlnaW4gKGR1bW15IGBBIDE5Mi4wLjIuMGAgaWYgV29ya2VyIGlzIG9yaWdpbikKMy4gRE5TIENOQU1FIHRvIFNhYVMgZG9tYWluCjQuIGAqLypgIHJvdXRlIOKGkiBkaXNwYXRjaCBXb3JrZXIKNS4gUm91dGluZyBsb2dpYyBpbiBkaXNwYXRjaCBXb3JrZXIKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgaG9zdG5hbWUgPSBuZXcgVVJMKHJlcXVlc3QudXJsKS5ob3N0bmFtZTsKICAgIGNvbnN0IGhvc3RuYW1lRGF0YSA9IGF3YWl0IGVudi5ST1VUSU5HX0tWLmdldChgaG9zdG5hbWU6JHtob3N0bmFtZX1gLCB7IHR5cGU6ICJqc29uIiB9KTsKICAgIAogICAgaWYgKCFob3N0bmFtZURhdGE/Lndvcmtlck5hbWUpIHsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiSG9zdG5hbWUgbm90IGNvbmZpZ3VyZWQiLCB7IHN0YXR1czogNDA0IH0pOwogICAgfQogICAgCiAgICBjb25zdCB1c2VyV29ya2VyID0gZW52LkRJU1BBVENIRVIuZ2V0KGhvc3RuYW1lRGF0YS53b3JrZXJOYW1lKTsKICAgIHJldHVybiBhd2FpdCB1c2VyV29ya2VyLmZldGNoKHJlcXVlc3QpOwogIH0sCn07CmBgYAoKIyMjIFN1YmRvbWFpbi1Pbmx5CjEuIFdpbGRjYXJkIEROUzogYCouc2Fhcy5jb21gIOKGkiBvcmlnaW4KMi4gUm91dGU6IGAqLnNhYXMuY29tLypgIOKGkiBkaXNwYXRjaCBXb3JrZXIKMy4gRXh0cmFjdCBzdWJkb21haW4gZm9yIHJvdXRpbmcKCiMjIyBPcmFuZ2UtdG8tT3JhbmdlIChPMk8pIEJlaGF2aW9yCgpXaGVuIGN1c3RvbWVycyB1c2UgQ2xvdWRmbGFyZSBhbmQgQ05BTUUgdG8geW91ciBXb3JrZXJzIGRvbWFpbjoKCnwgU2NlbmFyaW8gfCBCZWhhdmlvciB8IFJvdXRlIFBhdHRlcm4gfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLXwKfCBDdXN0b21lciBub3Qgb24gQ2xvdWRmbGFyZSB8IFN0YW5kYXJkIHJvdXRpbmcgfCBgKi8qYCBvciBgKi5kb21haW4uY29tLypgIHwKfCBDdXN0b21lciBvbiBDbG91ZGZsYXJlIChwcm94aWVkIENOQU1FKSB8IEludm9rZXMgV29ya2VyIGF0IGVkZ2UgfCBgKi8qYCByZXF1aXJlZCB8CnwgQ3VzdG9tZXIgb24gQ2xvdWRmbGFyZSAoRE5TLW9ubHkgQ05BTUUpIHwgU3RhbmRhcmQgcm91dGluZyB8IEFueSByb3V0ZSB3b3JrcyB8CgoqKlJlY29tbWVuZGF0aW9uOioqIEFsd2F5cyB1c2UgYCovKmAgd2lsZGNhcmQgZm9yIGNvbnNpc3RlbnQgTzJPIGJlaGF2aW9yLgoKIyMjIEN1c3RvbSBNZXRhZGF0YSBSb3V0aW5nCgpGb3IgQ2xvdWRmbGFyZSBmb3IgU2FhUzogU3RvcmUgd29ya2VyIG5hbWUgaW4gY3VzdG9tIGhvc3RuYW1lIGBjdXN0b21fbWV0YWRhdGFgLCByZXRyaWV2ZSBpbiBkaXNwYXRjaCB3b3JrZXIgdG8gcm91dGUgcmVxdWVzdHMuIFJlcXVpcmVzIGN1c3RvbSBob3N0bmFtZXMgYXMgc3ViZG9tYWlucyBvZiB5b3VyIGRvbWFpbi4KCiMjIE9ic2VydmFiaWxpdHkKCiMjIyBMb2dwdXNoCi0gRW5hYmxlIG9uIGRpc3BhdGNoIFdvcmtlciDihpIgY2FwdHVyZXMgYWxsIHVzZXIgV29ya2VyIGxvZ3MKLSBGaWx0ZXIgYnkgYE91dGNvbWVgIG9yIGBTY3JpcHQgTmFtZWAKCiMjIyBUYWlsIFdvcmtlcnMKLSBSZWFsLXRpbWUgbG9ncyB3aXRoIGN1c3RvbSBmb3JtYXR0aW5nCi0gUmVjZWl2ZXMgSFRUUCBzdGF0dXMsIGBjb25zb2xlLmxvZygpYCwgZXhjZXB0aW9ucywgZGlhZ25vc3RpY3MKCiMjIyBBbmFseXRpY3MgRW5naW5lCmBgYHR5cGVzY3JpcHQKLy8gVHJhY2sgdmlvbGF0aW9ucwplbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICBpbmRleGVzOiBbY3VzdG9tZXJOYW1lXSwKICBibG9iczogWyJjcHVfbGltaXRfZXhjZWVkZWQiXSwKfSk7CmBgYAoKIyMjIEdyYXBoUUwKYGBgZ3JhcGhxbApxdWVyeSB7CiAgdmlld2VyIHsKICAgIGFjY291bnRzKGZpbHRlcjoge2FjY291bnRUYWc6ICRhY2NvdW50SWR9KSB7CiAgICAgIHdvcmtlcnNJbnZvY2F0aW9uc0FkYXB0aXZlKGZpbHRlcjoge2Rpc3BhdGNoTmFtZXNwYWNlTmFtZTogInByb2R1Y3Rpb24ifSkgewogICAgICAgIHN1bSB7IHJlcXVlc3RzIGVycm9ycyBjcHVUaW1lIH0KICAgICAgfQogICAgfQogIH0KfQpgYGAKCiMjIFVzZSBDYXNlIEltcGxlbWVudGF0aW9ucwoKIyMjIEFJIENvZGUgRXhlY3V0aW9uCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gZGVwbG95R2VuZXJhdGVkQ29kZShuYW1lOiBzdHJpbmcsIGNvZGU6IHN0cmluZykgewogIGNvbnN0IGZpbGUgPSBuZXcgRmlsZShbY29kZV0sIGAke25hbWV9Lm1qc2AsIHsgdHlwZTogImFwcGxpY2F0aW9uL2phdmFzY3JpcHQrbW9kdWxlIiB9KTsKICBhd2FpdCBjbGllbnQud29ya2Vyc0ZvclBsYXRmb3Jtcy5kaXNwYXRjaC5uYW1lc3BhY2VzLnNjcmlwdHMudXBkYXRlKCJwcm9kdWN0aW9uIiwgbmFtZSwgewogICAgYWNjb3VudF9pZDogYWNjb3VudElkLAogICAgbWV0YWRhdGE6IHsgbWFpbl9tb2R1bGU6IGAke25hbWV9Lm1qc2AsIHRhZ3M6IFtuYW1lLCAiYWktZ2VuZXJhdGVkIl0gfSwKICAgIGZpbGVzOiBbZmlsZV0sCiAgfSk7Cn0KCi8vIFNob3J0IGxpbWl0cyBmb3IgdW50cnVzdGVkIGNvZGUKY29uc3QgdXNlcldvcmtlciA9IGVudi5ESVNQQVRDSEVSLmdldChzZXNzaW9uSWQsIHt9LCB7IGxpbWl0czogeyBjcHVNczogNSwgc3ViUmVxdWVzdHM6IDMgfSB9KTsKYGBgCgoqKlZpYmVTREs6KiogRm9yIEFJLXBvd2VyZWQgY29kZSBnZW5lcmF0aW9uICsgZGVwbG95bWVudCBwbGF0Zm9ybXMsIHNlZSBbVmliZVNES10oaHR0cHM6Ly9naXRodWIuY29tL2Nsb3VkZmxhcmUvdmliZXNkaykgLSBoYW5kbGVzIEFJIGdlbmVyYXRpb24sIHNhbmRib3ggZXhlY3V0aW9uLCBsaXZlIHByZXZpZXcsIGFuZCBkZXBsb3ltZW50LgoKUmVmZXJlbmNlOiBbQUkgVmliZSBDb2RpbmcgUGxhdGZvcm0gQXJjaGl0ZWN0dXJlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcmVmZXJlbmNlLWFyY2hpdGVjdHVyZS9kaWFncmFtcy9haS9haS12aWJlLWNvZGluZy1wbGF0Zm9ybS8pCgojIyMgRWRnZSBGdW5jdGlvbnMgUGxhdGZvcm0KYGBgdHlwZXNjcmlwdAovLyBSb3V0ZTogL2N1c3RvbWVyLWlkL2Z1bmN0aW9uLW5hbWUKY29uc3QgW2N1c3RvbWVySWQsIGZ1bmN0aW9uTmFtZV0gPSBuZXcgVVJMKHJlcXVlc3QudXJsKS5wYXRobmFtZS5zcGxpdCgiLyIpLmZpbHRlcihCb29sZWFuKTsKY29uc3Qgd29ya2VyTmFtZSA9IGAke2N1c3RvbWVySWR9LSR7ZnVuY3Rpb25OYW1lfWA7CmNvbnN0IHVzZXJXb3JrZXIgPSBlbnYuRElTUEFUQ0hFUi5nZXQod29ya2VyTmFtZSk7CmBgYAoKIyMjIFdlYnNpdGUgQnVpbGRlcgotIERlcGxveSBzdGF0aWMgYXNzZXRzICsgV29ya2VyIGNvZGUKLSBTZWUgW2FwaS5tZF0oLi9hcGkubWQjc3RhdGljLWFzc2V0cykgZm9yIGZ1bGwgaW1wbGVtZW50YXRpb24KLSBTYWx0IGhhc2hlcyBmb3IgYXNzZXQgaXNvbGF0aW9uCgojIyBCZXN0IFByYWN0aWNlcwoKIyMjIEFyY2hpdGVjdHVyZQotIE9uZSBuYW1lc3BhY2UgcGVyIGVudmlyb25tZW50IChwcm9kdWN0aW9uLCBzdGFnaW5nKQotIFBsYXRmb3JtIGxvZ2ljIGluIGRpc3BhdGNoIFdvcmtlciAoYXV0aCwgcmF0ZSBsaW1pdGluZywgdmFsaWRhdGlvbikKLSBJc29sYXRpb24gYXV0b21hdGljIChubyBzaGFyZWQgY2FjaGUsIHVudHJ1c3RlZCBtb2RlKQoKIyMjIFJvdXRpbmcKLSBVc2UgYCovKmAgd2lsZGNhcmQgcm91dGVzCi0gU3RvcmUgbWFwcGluZ3MgaW4gS1YKLSBIYW5kbGUgbWlzc2luZyBXb3JrZXJzIGdyYWNlZnVsbHkKCiMjIyBMaW1pdHMgJiBTZWN1cml0eQotIFNldCBjdXN0b20gbGltaXRzIGJ5IHBsYW4KLSBUcmFjayB2aW9sYXRpb25zIHdpdGggQW5hbHl0aWNzIEVuZ2luZQotIFVzZSBvdXRib3VuZCBXb3JrZXJzIGZvciBlZ3Jlc3MgY29udHJvbAotIFNhbml0aXplIHJlc3BvbnNlcwoKIyMjIFRhZ3MKLSBUYWcgYWxsIFdvcmtlcnM6IGN1c3RvbWVyIElELCBwbGFuLCBlbnZpcm9ubWVudAotIEVuYWJsZSBidWxrIG9wZXJhdGlvbnMKLSBGaWx0ZXIgZWZmaWNpZW50bHkKClNlZSBbUkVBRE1FLm1kXSguL1JFQURNRS5tZCksIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpLCBbYXBpLm1kXSguL2FwaS5tZCksIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpCg==
+# Multi-Tenant Patterns
+
+## Billing by Plan
+
+```typescript
+interface Env {
+  DISPATCHER: DispatchNamespace;
+  CUSTOMERS_KV: KVNamespace;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const userWorkerName = new URL(request.url).hostname.split(".")[0];
+    const customerPlan = await env.CUSTOMERS_KV.get(userWorkerName);
+    
+    const plans = {
+      enterprise: { cpuMs: 50, subRequests: 50 },
+      pro: { cpuMs: 20, subRequests: 20 },
+      free: { cpuMs: 10, subRequests: 5 },
+    };
+    const limits = plans[customerPlan as keyof typeof plans] || plans.free;
+    
+    const userWorker = env.DISPATCHER.get(userWorkerName, {}, { limits });
+    return await userWorker.fetch(request);
+  },
+};
+```
+
+## Resource Isolation
+
+**Complete isolation:** Create unique resources per customer
+- KV namespace per customer
+- D1 database per customer
+- R2 bucket per customer
+
+```typescript
+const bindings = [{
+  type: "kv_namespace",
+  name: "USER_KV",
+  namespace_id: `customer-${customerId}-kv`
+}];
+```
+
+## Hostname Routing
+
+### Wildcard Route (Recommended)
+Configure `*/*` route on SaaS domain → dispatch Worker
+
+**Benefits:**
+- Supports subdomains + custom vanity domains
+- No per-route limits (regular Workers limited to 100 routes)
+- Programmatic control
+- Works with any DNS proxy settings
+
+**Setup:**
+1. Cloudflare for SaaS custom hostnames
+2. Fallback origin (dummy `A 192.0.2.0` if Worker is origin)
+3. DNS CNAME to SaaS domain
+4. `*/*` route → dispatch Worker
+5. Routing logic in dispatch Worker
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const hostname = new URL(request.url).hostname;
+    const hostnameData = await env.ROUTING_KV.get(`hostname:${hostname}`, { type: "json" });
+    
+    if (!hostnameData?.workerName) {
+      return new Response("Hostname not configured", { status: 404 });
+    }
+    
+    const userWorker = env.DISPATCHER.get(hostnameData.workerName);
+    return await userWorker.fetch(request);
+  },
+};
+```
+
+### Subdomain-Only
+1. Wildcard DNS: `*.saas.com` → origin
+2. Route: `*.saas.com/*` → dispatch Worker
+3. Extract subdomain for routing
+
+### Orange-to-Orange (O2O) Behavior
+
+When customers use Cloudflare and CNAME to your Workers domain:
+
+| Scenario | Behavior | Route Pattern |
+|----------|----------|---------------|
+| Customer not on Cloudflare | Standard routing | `*/*` or `*.domain.com/*` |
+| Customer on Cloudflare (proxied CNAME) | Invokes Worker at edge | `*/*` required |
+| Customer on Cloudflare (DNS-only CNAME) | Standard routing | Any route works |
+
+**Recommendation:** Always use `*/*` wildcard for consistent O2O behavior.
+
+### Custom Metadata Routing
+
+For Cloudflare for SaaS: Store worker name in custom hostname `custom_metadata`, retrieve in dispatch worker to route requests. Requires custom hostnames as subdomains of your domain.
+
+## Observability
+
+### Logpush
+- Enable on dispatch Worker → captures all user Worker logs
+- Filter by `Outcome` or `Script Name`
+
+### Tail Workers
+- Real-time logs with custom formatting
+- Receives HTTP status, `console.log()`, exceptions, diagnostics
+
+### Analytics Engine
+```typescript
+// Track violations
+env.ANALYTICS.writeDataPoint({
+  indexes: [customerName],
+  blobs: ["cpu_limit_exceeded"],
+});
+```
+
+### GraphQL
+```graphql
+query {
+  viewer {
+    accounts(filter: {accountTag: $accountId}) {
+      workersInvocationsAdaptive(filter: {dispatchNamespaceName: "production"}) {
+        sum { requests errors cpuTime }
+      }
+    }
+  }
+}
+```
+
+## Use Case Implementations
+
+### AI Code Execution
+```typescript
+async function deployGeneratedCode(name: string, code: string) {
+  const file = new File([code], `${name}.mjs`, { type: "application/javascript+module" });
+  await client.workersForPlatforms.dispatch.namespaces.scripts.update("production", name, {
+    account_id: accountId,
+    metadata: { main_module: `${name}.mjs`, tags: [name, "ai-generated"] },
+    files: [file],
+  });
+}
+
+// Short limits for untrusted code
+const userWorker = env.DISPATCHER.get(sessionId, {}, { limits: { cpuMs: 5, subRequests: 3 } });
+```
+
+**VibeSDK:** For AI-powered code generation + deployment platforms, see [VibeSDK](https://github.com/cloudflare/vibesdk) - handles AI generation, sandbox execution, live preview, and deployment.
+
+Reference: [AI Vibe Coding Platform Architecture](https://developers.cloudflare.com/reference-architecture/diagrams/ai/ai-vibe-coding-platform/)
+
+### Edge Functions Platform
+```typescript
+// Route: /customer-id/function-name
+const [customerId, functionName] = new URL(request.url).pathname.split("/").filter(Boolean);
+const workerName = `${customerId}-${functionName}`;
+const userWorker = env.DISPATCHER.get(workerName);
+```
+
+### Website Builder
+- Deploy static assets + Worker code
+- See [api.md](./api.md#static-assets) for full implementation
+- Salt hashes for asset isolation
+
+## Best Practices
+
+### Architecture
+- One namespace per environment (production, staging)
+- Platform logic in dispatch Worker (auth, rate limiting, validation)
+- Isolation automatic (no shared cache, untrusted mode)
+
+### Routing
+- Use `*/*` wildcard routes
+- Store mappings in KV
+- Handle missing Workers gracefully
+
+### Limits & Security
+- Set custom limits by plan
+- Track violations with Analytics Engine
+- Use outbound Workers for egress control
+- Sanitize responses
+
+### Tags
+- Tag all Workers: customer ID, plan, environment
+- Enable bulk operations
+- Filter efficiently
+
+See [README.md](./README.md), [configuration.md](./configuration.md), [api.md](./api.md), [gotchas.md](./gotchas.md)

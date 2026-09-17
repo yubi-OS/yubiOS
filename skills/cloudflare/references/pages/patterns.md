@@ -1,1 +1,204 @@
-IyBQYXR0ZXJucwoKIyMgQVBJIFJvdXRlcwoKYGBgdHlwZXNjcmlwdAovLyBmdW5jdGlvbnMvYXBpL3RvZG9zL1tpZF0udHMKZXhwb3J0IGNvbnN0IG9uUmVxdWVzdEdldDogUGFnZXNGdW5jdGlvbjxFbnY+ID0gYXN5bmMgKHsgZW52LCBwYXJhbXMgfSkgPT4gewogIGNvbnN0IHRvZG8gPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB0b2RvcyBXSEVSRSBpZCA9ID8nKS5iaW5kKHBhcmFtcy5pZCkuZmlyc3QoKTsKICBpZiAoIXRvZG8pIHJldHVybiBuZXcgUmVzcG9uc2UoJ05vdCBmb3VuZCcsIHsgc3RhdHVzOiA0MDQgfSk7CiAgcmV0dXJuIFJlc3BvbnNlLmpzb24odG9kbyk7Cn07CgpleHBvcnQgY29uc3Qgb25SZXF1ZXN0UHV0OiBQYWdlc0Z1bmN0aW9uPEVudj4gPSBhc3luYyAoeyBlbnYsIHBhcmFtcywgcmVxdWVzdCB9KSA9PiB7CiAgY29uc3QgYm9keSA9IGF3YWl0IHJlcXVlc3QuanNvbigpOwogIGF3YWl0IGVudi5EQi5wcmVwYXJlKCdVUERBVEUgdG9kb3MgU0VUIHRpdGxlID0gPywgY29tcGxldGVkID0gPyBXSEVSRSBpZCA9ID8nKQogICAgLmJpbmQoYm9keS50aXRsZSwgYm9keS5jb21wbGV0ZWQsIHBhcmFtcy5pZCkucnVuKCk7CiAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyBzdWNjZXNzOiB0cnVlIH0pOwp9OwovLyBBbHNvOiBvblJlcXVlc3REZWxldGUsIG9uUmVxdWVzdFBvc3QKYGBgCgojIyBBdXRoIE1pZGRsZXdhcmUKCmBgYHR5cGVzY3JpcHQKLy8gZnVuY3Rpb25zL19taWRkbGV3YXJlLnRzCmNvbnN0IGF1dGg6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jIChjb250ZXh0KSA9PiB7CiAgaWYgKGNvbnRleHQucmVxdWVzdC51cmwuaW5jbHVkZXMoJy9wdWJsaWMvJykpIHJldHVybiBjb250ZXh0Lm5leHQoKTsKICBjb25zdCBhdXRoSGVhZGVyID0gY29udGV4dC5yZXF1ZXN0LmhlYWRlcnMuZ2V0KCdBdXRob3JpemF0aW9uJyk7CiAgaWYgKCFhdXRoSGVhZGVyPy5zdGFydHNXaXRoKCdCZWFyZXIgJykpIHsKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ1VuYXV0aG9yaXplZCcsIHsgc3RhdHVzOiA0MDEgfSk7CiAgfQogIAogIHRyeSB7CiAgICBjb25zdCBwYXlsb2FkID0gYXdhaXQgdmVyaWZ5SldUKGF1dGhIZWFkZXIuc3Vic3RyaW5nKDcpLCBjb250ZXh0LmVudi5KV1RfU0VDUkVUKTsKICAgIGNvbnRleHQuZGF0YS51c2VyID0gcGF5bG9hZDsKICAgIHJldHVybiBjb250ZXh0Lm5leHQoKTsKICB9IGNhdGNoIChlcnIpIHsKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ0ludmFsaWQgdG9rZW4nLCB7IHN0YXR1czogNDAxIH0pOwogIH0KfTsKZXhwb3J0IGNvbnN0IG9uUmVxdWVzdCA9IFthdXRoXTsKYGBgCgojIyBDT1JTCgpgYGB0eXBlc2NyaXB0Ci8vIGZ1bmN0aW9ucy9hcGkvX21pZGRsZXdhcmUudHMKY29uc3QgY29yc0hlYWRlcnMgPSB7CiAgJ0FjY2Vzcy1Db250cm9sLUFsbG93LU9yaWdpbic6ICcqJywKICAnQWNjZXNzLUNvbnRyb2wtQWxsb3ctTWV0aG9kcyc6ICdHRVQsIFBPU1QsIFBVVCwgREVMRVRFLCBPUFRJT05TJywKICAnQWNjZXNzLUNvbnRyb2wtQWxsb3ctSGVhZGVycyc6ICdDb250ZW50LVR5cGUsIEF1dGhvcml6YXRpb24nCn07CgpleHBvcnQgY29uc3Qgb25SZXF1ZXN0OiBQYWdlc0Z1bmN0aW9uID0gYXN5bmMgKGNvbnRleHQpID0+IHsKICBpZiAoY29udGV4dC5yZXF1ZXN0Lm1ldGhvZCA9PT0gJ09QVElPTlMnKSB7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKG51bGwsIHtoZWFkZXJzOiBjb3JzSGVhZGVyc30pOwogIH0KICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGNvbnRleHQubmV4dCgpOwogIE9iamVjdC5lbnRyaWVzKGNvcnNIZWFkZXJzKS5mb3JFYWNoKChbaywgdl0pID0+IHJlc3BvbnNlLmhlYWRlcnMuc2V0KGssIHYpKTsKICByZXR1cm4gcmVzcG9uc2U7Cn07CmBgYAoKIyMgRm9ybSBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdAovLyBmdW5jdGlvbnMvYXBpL2NvbnRhY3QudHMKZXhwb3J0IGNvbnN0IG9uUmVxdWVzdFBvc3Q6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jICh7IHJlcXVlc3QsIGVudiB9KSA9PiB7CiAgY29uc3QgZm9ybURhdGEgPSBhd2FpdCByZXF1ZXN0LmZvcm1EYXRhKCk7CiAgYXdhaXQgZW52LlFVRVVFLnNlbmQoe25hbWU6IGZvcm1EYXRhLmdldCgnbmFtZScpLCBlbWFpbDogZm9ybURhdGEuZ2V0KCdlbWFpbCcpfSk7CiAgcmV0dXJuIG5ldyBSZXNwb25zZSgnPGgxPlRoYW5rcyE8L2gxPicsIHsgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ3RleHQvaHRtbCcgfSB9KTsKfTsKYGBgCgojIyBCYWNrZ3JvdW5kIFRhc2tzCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBjb25zdCBvblJlcXVlc3RQb3N0OiBQYWdlc0Z1bmN0aW9uID0gYXN5bmMgKHsgcmVxdWVzdCwgd2FpdFVudGlsIH0pID0+IHsKICBjb25zdCBkYXRhID0gYXdhaXQgcmVxdWVzdC5qc29uKCk7CiAgd2FpdFVudGlsKGZldGNoKCdodHRwczovL2FwaS5leGFtcGxlLmNvbS93ZWJob29rJywgewogICAgbWV0aG9kOiAnUE9TVCcsIGJvZHk6IEpTT04uc3RyaW5naWZ5KGRhdGEpCiAgfSkpOwogIHJldHVybiBSZXNwb25zZS5qc29uKHsgcXVldWVkOiB0cnVlIH0pOwp9OwpgYGAKCiMjIEVycm9yIEhhbmRsaW5nCgpgYGB0eXBlc2NyaXB0Ci8vIGZ1bmN0aW9ucy9fbWlkZGxld2FyZS50cwpjb25zdCBlcnJvckhhbmRsZXI6IFBhZ2VzRnVuY3Rpb24gPSBhc3luYyAoY29udGV4dCkgPT4gewogIHRyeSB7CiAgICByZXR1cm4gYXdhaXQgY29udGV4dC5uZXh0KCk7CiAgfSBjYXRjaCAoZXJyb3IpIHsKICAgIGNvbnNvbGUuZXJyb3IoJ0Vycm9yOicsIGVycm9yKTsKICAgIGlmIChjb250ZXh0LnJlcXVlc3QudXJsLmluY2x1ZGVzKCcvYXBpLycpKSB7CiAgICAgIHJldHVybiBSZXNwb25zZS5qc29uKHsgZXJyb3I6IGVycm9yLm1lc3NhZ2UgfSwgeyBzdGF0dXM6IDUwMCB9KTsKICAgIH0KICAgIHJldHVybiBuZXcgUmVzcG9uc2UoYDxoMT5FcnJvcjwvaDE+PHA+JHtlcnJvci5tZXNzYWdlfTwvcD5gLCB7IAogICAgICBzdGF0dXM6IDUwMCwgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ3RleHQvaHRtbCcgfSAKICAgIH0pOwogIH0KfTsKZXhwb3J0IGNvbnN0IG9uUmVxdWVzdCA9IFtlcnJvckhhbmRsZXJdOwpgYGAKCiMjIENhY2hpbmcKCmBgYHR5cGVzY3JpcHQKLy8gZnVuY3Rpb25zL2FwaS9kYXRhLnRzCmV4cG9ydCBjb25zdCBvblJlcXVlc3RHZXQ6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jICh7IGVudiwgcmVxdWVzdCB9KSA9PiB7CiAgY29uc3QgY2FjaGVLZXkgPSBgZGF0YToke25ldyBVUkwocmVxdWVzdC51cmwpLnBhdGhuYW1lfWA7CiAgY29uc3QgY2FjaGVkID0gYXdhaXQgZW52LktWLmdldChjYWNoZUtleSwgJ2pzb24nKTsKICBpZiAoY2FjaGVkKSByZXR1cm4gUmVzcG9uc2UuanNvbihjYWNoZWQsIHsgaGVhZGVyczogeyAnWC1DYWNoZSc6ICdISVQnIH0gfSk7CiAgCiAgY29uc3QgZGF0YSA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIGRhdGEnKS5maXJzdCgpOwogIGF3YWl0IGVudi5LVi5wdXQoY2FjaGVLZXksIEpTT04uc3RyaW5naWZ5KGRhdGEpLCB7ZXhwaXJhdGlvblR0bDogMzYwMH0pOwogIHJldHVybiBSZXNwb25zZS5qc29uKGRhdGEsIHtoZWFkZXJzOiB7J1gtQ2FjaGUnOiAnTUlTUyd9fSk7Cn07CmBgYAoKIyMgU21hcnQgUGxhY2VtZW50IGZvciBEYXRhYmFzZSBBcHBzCgpFbmFibGUgU21hcnQgUGxhY2VtZW50IGZvciBhcHBzIHdpdGggRDEgb3IgY2VudHJhbGl6ZWQgZGF0YSBzb3VyY2VzOgoKYGBganNvbmMKLy8gd3JhbmdsZXIuanNvbmMKewogICJuYW1lIjogImdsb2JhbC1hcHAiLAogICJwbGFjZW1lbnQiOiB7CiAgICAibW9kZSI6ICJzbWFydCIKICB9LAogICJkMV9kYXRhYmFzZXMiOiBbewogICAgImJpbmRpbmciOiAiREIiLAogICAgImRhdGFiYXNlX2lkIjogInlvdXItZGItaWQiCiAgfV0KfQpgYGAKCmBgYHR5cGVzY3JpcHQKLy8gZnVuY3Rpb25zL2FwaS9kYXRhLnRzCmV4cG9ydCBjb25zdCBvblJlcXVlc3RHZXQ6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jICh7IGVudiB9KSA9PiB7CiAgLy8gU21hcnQgUGxhY2VtZW50IG9wdGltaXplcyBleGVjdXRpb24gbG9jYXRpb24gb3ZlciB0aW1lCiAgLy8gQmFsYW5jZXMgdXNlciBsb2NhdGlvbiB2cyBkYXRhYmFzZSBsb2NhdGlvbgogIGNvbnN0IGRhdGEgPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSBwcm9kdWN0cyBMSU1JVCAxMCcpLmFsbCgpOwogIHJldHVybiBSZXNwb25zZS5qc29uKGRhdGEpOwp9OwpgYGAKCioqQmVzdCBmb3IqKjogUmVhZC1oZWF2eSBhcHBzIHdpdGggRDEvRHVyYWJsZSBPYmplY3RzIGluIHNwZWNpZmljIHJlZ2lvbnMuICAKKipOb3QgbmVlZGVkKio6IEFwcHMgd2l0aG91dCBkYXRhIGxvY2FsaXR5IGNvbnN0cmFpbnRzIG9yIHdpdGggZXZlbmx5IGRpc3RyaWJ1dGVkIHRyYWZmaWMuCgojIyBGcmFtZXdvcmsgSW50ZWdyYXRpb24KCioqU3VwcG9ydGVkKiogKDIwMjYpOiBTdmVsdGVLaXQsIEFzdHJvLCBOdXh0LCBRd2lrLCBTb2xpZCBTdGFydAoKYGBgYmFzaApucG0gY3JlYXRlIGNsb3VkZmxhcmVAbGF0ZXN0IG15LWFwcCAtLSAtLWZyYW1ld29yaz1zdmVsdGUKYGBgCgojIyMgU3ZlbHRlS2l0CmBgYHR5cGVzY3JpcHQKLy8gc3JjL3JvdXRlcy8rcGFnZS5zZXJ2ZXIudHMKZXhwb3J0IGNvbnN0IGxvYWQgPSBhc3luYyAoeyBwbGF0Zm9ybSB9KSA9PiB7CiAgY29uc3QgdG9kb3MgPSBhd2FpdCBwbGF0Zm9ybS5lbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB0b2RvcycpLmFsbCgpOwogIHJldHVybiB7IHRvZG9zOiB0b2Rvcy5yZXN1bHRzIH07Cn07CmBgYAoKIyMjIEFzdHJvCmBgYGFzdHJvCi0tLQpjb25zdCB7IERCIH0gPSBBc3Ryby5sb2NhbHMucnVudGltZS5lbnY7CmNvbnN0IHRvZG9zID0gYXdhaXQgREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB0b2RvcycpLmFsbCgpOwotLS0KPHVsPnt0b2Rvcy5yZXN1bHRzLm1hcCh0ID0+IDxsaT57dC50aXRsZX08L2xpPil9PC91bD4KYGBgCgojIyMgTnV4dApgYGB0eXBlc2NyaXB0Ci8vIHNlcnZlci9hcGkvdG9kb3MuZ2V0LnRzCmV4cG9ydCBkZWZhdWx0IGRlZmluZUV2ZW50SGFuZGxlcihhc3luYyAoZXZlbnQpID0+IHsKICBjb25zdCB7IERCIH0gPSBldmVudC5jb250ZXh0LmNsb3VkZmxhcmUuZW52OwogIHJldHVybiBhd2FpdCBEQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHRvZG9zJykuYWxsKCk7Cn0pOwpgYGAKCioq4pqg77iPIEZyYW1ld29yayBTdGF0dXMqKiAoMjAyNik6Ci0g4pyFICoqU3VwcG9ydGVkKio6IFN2ZWx0ZUtpdCwgQXN0cm8sIE51eHQsIFF3aWssIFNvbGlkIFN0YXJ0Ci0g4p2MICoqRGVwcmVjYXRlZCoqOiBOZXh0LmpzIChgQGNsb3VkZmxhcmUvbmV4dC1vbi1wYWdlc2ApLCBSZW1peCAoYEByZW1peC1ydW4vY2xvdWRmbGFyZS1wYWdlc2ApCgpGb3IgZGVwcmVjYXRlZCBmcmFtZXdvcmtzLCBzZWUgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCNmcmFtZXdvcmstc3BlY2lmaWMpIGZvciBtaWdyYXRpb24gb3B0aW9ucy4KCltGcmFtZXdvcmsgR3VpZGVzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGFnZXMvZnJhbWV3b3JrLWd1aWRlcy8pCgojIyBNb25vcmVwbwoKRGFzaGJvYXJkIOKGkiBTZXR0aW5ncyDihpIgQnVpbGQg4oaSIFJvb3QgZGlyZWN0b3J5LiBTZXQgdG8gc3VicHJvamVjdCAoZS5nLiwgYGFwcHMvd2ViYCkuCgojIyBCZXN0IFByYWN0aWNlcwoKKipQZXJmb3JtYW5jZSoqOiBFeGNsdWRlIHN0YXRpYyB2aWEgYF9yb3V0ZXMuanNvbmA7IGNhY2hlIHdpdGggS1Y7IGtlZXAgYnVuZGxlIDwgMU1CICAKKipTZWN1cml0eSoqOiBVc2Ugc2VjcmV0cyAobm90IHZhcnMpOyB2YWxpZGF0ZSBpbnB1dHM7IHJhdGUgbGltaXQgd2l0aCBLVi9ETyAgCioqV29ya2Zsb3cqKjogUHJldmlldyBwZXIgYnJhbmNoOyBsb2NhbCBkZXYgd2l0aCBgd3JhbmdsZXIgcGFnZXMgZGV2YDsgaW5zdGFudCByb2xsYmFja3MgaW4gRGFzaGJvYXJkCg==
+# Patterns
+
+## API Routes
+
+```typescript
+// functions/api/todos/[id].ts
+export const onRequestGet: PagesFunction<Env> = async ({ env, params }) => {
+  const todo = await env.DB.prepare('SELECT * FROM todos WHERE id = ?').bind(params.id).first();
+  if (!todo) return new Response('Not found', { status: 404 });
+  return Response.json(todo);
+};
+
+export const onRequestPut: PagesFunction<Env> = async ({ env, params, request }) => {
+  const body = await request.json();
+  await env.DB.prepare('UPDATE todos SET title = ?, completed = ? WHERE id = ?')
+    .bind(body.title, body.completed, params.id).run();
+  return Response.json({ success: true });
+};
+// Also: onRequestDelete, onRequestPost
+```
+
+## Auth Middleware
+
+```typescript
+// functions/_middleware.ts
+const auth: PagesFunction<Env> = async (context) => {
+  if (context.request.url.includes('/public/')) return context.next();
+  const authHeader = context.request.headers.get('Authorization');
+  if (!authHeader?.startsWith('Bearer ')) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+  
+  try {
+    const payload = await verifyJWT(authHeader.substring(7), context.env.JWT_SECRET);
+    context.data.user = payload;
+    return context.next();
+  } catch (err) {
+    return new Response('Invalid token', { status: 401 });
+  }
+};
+export const onRequest = [auth];
+```
+
+## CORS
+
+```typescript
+// functions/api/_middleware.ts
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+};
+
+export const onRequest: PagesFunction = async (context) => {
+  if (context.request.method === 'OPTIONS') {
+    return new Response(null, {headers: corsHeaders});
+  }
+  const response = await context.next();
+  Object.entries(corsHeaders).forEach(([k, v]) => response.headers.set(k, v));
+  return response;
+};
+```
+
+## Form Handling
+
+```typescript
+// functions/api/contact.ts
+export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+  const formData = await request.formData();
+  await env.QUEUE.send({name: formData.get('name'), email: formData.get('email')});
+  return new Response('<h1>Thanks!</h1>', { headers: { 'Content-Type': 'text/html' } });
+};
+```
+
+## Background Tasks
+
+```typescript
+export const onRequestPost: PagesFunction = async ({ request, waitUntil }) => {
+  const data = await request.json();
+  waitUntil(fetch('https://api.example.com/webhook', {
+    method: 'POST', body: JSON.stringify(data)
+  }));
+  return Response.json({ queued: true });
+};
+```
+
+## Error Handling
+
+```typescript
+// functions/_middleware.ts
+const errorHandler: PagesFunction = async (context) => {
+  try {
+    return await context.next();
+  } catch (error) {
+    console.error('Error:', error);
+    if (context.request.url.includes('/api/')) {
+      return Response.json({ error: error.message }, { status: 500 });
+    }
+    return new Response(`<h1>Error</h1><p>${error.message}</p>`, { 
+      status: 500, headers: { 'Content-Type': 'text/html' } 
+    });
+  }
+};
+export const onRequest = [errorHandler];
+```
+
+## Caching
+
+```typescript
+// functions/api/data.ts
+export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
+  const cacheKey = `data:${new URL(request.url).pathname}`;
+  const cached = await env.KV.get(cacheKey, 'json');
+  if (cached) return Response.json(cached, { headers: { 'X-Cache': 'HIT' } });
+  
+  const data = await env.DB.prepare('SELECT * FROM data').first();
+  await env.KV.put(cacheKey, JSON.stringify(data), {expirationTtl: 3600});
+  return Response.json(data, {headers: {'X-Cache': 'MISS'}});
+};
+```
+
+## Smart Placement for Database Apps
+
+Enable Smart Placement for apps with D1 or centralized data sources:
+
+```jsonc
+// wrangler.jsonc
+{
+  "name": "global-app",
+  "placement": {
+    "mode": "smart"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_id": "your-db-id"
+  }]
+}
+```
+
+```typescript
+// functions/api/data.ts
+export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
+  // Smart Placement optimizes execution location over time
+  // Balances user location vs database location
+  const data = await env.DB.prepare('SELECT * FROM products LIMIT 10').all();
+  return Response.json(data);
+};
+```
+
+**Best for**: Read-heavy apps with D1/Durable Objects in specific regions.  
+**Not needed**: Apps without data locality constraints or with evenly distributed traffic.
+
+## Framework Integration
+
+**Supported** (2026): SvelteKit, Astro, Nuxt, Qwik, Solid Start
+
+```bash
+npm create cloudflare@latest my-app -- --framework=svelte
+```
+
+### SvelteKit
+```typescript
+// src/routes/+page.server.ts
+export const load = async ({ platform }) => {
+  const todos = await platform.env.DB.prepare('SELECT * FROM todos').all();
+  return { todos: todos.results };
+};
+```
+
+### Astro
+```astro
+---
+const { DB } = Astro.locals.runtime.env;
+const todos = await DB.prepare('SELECT * FROM todos').all();
+---
+<ul>{todos.results.map(t => <li>{t.title}</li>)}</ul>
+```
+
+### Nuxt
+```typescript
+// server/api/todos.get.ts
+export default defineEventHandler(async (event) => {
+  const { DB } = event.context.cloudflare.env;
+  return await DB.prepare('SELECT * FROM todos').all();
+});
+```
+
+**⚠️ Framework Status** (2026):
+- ✅ **Supported**: SvelteKit, Astro, Nuxt, Qwik, Solid Start
+- ❌ **Deprecated**: Next.js (`@cloudflare/next-on-pages`), Remix (`@remix-run/cloudflare-pages`)
+
+For deprecated frameworks, see [gotchas.md](./gotchas.md#framework-specific) for migration options.
+
+[Framework Guides](https://developers.cloudflare.com/pages/framework-guides/)
+
+## Monorepo
+
+Dashboard → Settings → Build → Root directory. Set to subproject (e.g., `apps/web`).
+
+## Best Practices
+
+**Performance**: Exclude static via `_routes.json`; cache with KV; keep bundle < 1MB  
+**Security**: Use secrets (not vars); validate inputs; rate limit with KV/DO  
+**Workflow**: Preview per branch; local dev with `wrangler pages dev`; instant rollbacks in Dashboard

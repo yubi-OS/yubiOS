@@ -1,1 +1,137 @@
-IyEvdXNyL2Jpbi9lbnYgYmFzaAojIFZhbGlkYXRlcyBhIFR1cm5zdGlsZSB3aWRnZXQgd2l0aG91dCBwbGFjaW5nIGl0cyBzZWNyZXQgaW4gYXJndW1lbnRzLAojIGV4cG9ydGVkIGVudmlyb25tZW50IHZhcmlhYmxlcywgbG9ncywgb3IgdGVtcG9yYXJ5IGZpbGVzLgoKc2V0ICt4CnNldCAtZXVvIHBpcGVmYWlsCgp1c2FnZSgpIHsKICBlY2hvICJVc2FnZTogcHJpbnRmICclcycgXCJcJFRVUk5TVElMRV9TRUNSRVRcIiB8ICQwIC0tc2l0ZWtleSA8c2l0ZWtleT4gLS1hY2NvdW50LWlkIDxhY2NvdW50LWlkPiAtLWV4cGVjdGVkLWRvbWFpbnMgJzxqc29uLWFycmF5PiciID4mMgogIGV4aXQgMgp9CgpuZWVkX2FyZygpIHsKICBpZiBbWyAteiAiJHsyLX0iIHx8ICIkMiIgPT0gLS0qIF1dOyB0aGVuCiAgICB1c2FnZQogIGZpCn0KClNJVEVLRVk9IiIKQUNDT1VOVF9JRD0iIgpFWFBFQ1RFRF9ET01BSU5TX0pTT049IiIKCndoaWxlIFtbICQjIC1ndCAwIF1dOyBkbwogIGNhc2UgIiQxIiBpbgogICAgLS1zaXRla2V5KQogICAgICBuZWVkX2FyZyAiJDEiICIkezItfSIKICAgICAgU0lURUtFWT0iJDIiCiAgICAgIHNoaWZ0IDIKICAgICAgOzsKICAgIC0tYWNjb3VudC1pZCkKICAgICAgbmVlZF9hcmcgIiQxIiAiJHsyLX0iCiAgICAgIEFDQ09VTlRfSUQ9IiQyIgogICAgICBzaGlmdCAyCiAgICAgIDs7CiAgICAtLWV4cGVjdGVkLWRvbWFpbnMpCiAgICAgIG5lZWRfYXJnICIkMSIgIiR7Mi19IgogICAgICBFWFBFQ1RFRF9ET01BSU5TX0pTT049IiQyIgogICAgICBzaGlmdCAyCiAgICAgIDs7CiAgICAqKSB1c2FnZSA7OwogIGVzYWMKZG9uZQoKW1sgLW4gIiRTSVRFS0VZIiAmJiAtbiAiJEFDQ09VTlRfSUQiICYmIC1uICIkRVhQRUNURURfRE9NQUlOU19KU09OIiBdXSB8fCB1c2FnZQo6ICIke0NMT1VERkxBUkVfQVBJX1RPS0VOOj9DTE9VREZMQVJFX0FQSV9UT0tFTiBtdXN0IGJlIHNldH0iCkFQSV9UT0tFTj0iJENMT1VERkxBUkVfQVBJX1RPS0VOIgp1bnNldCBDTE9VREZMQVJFX0FQSV9UT0tFTgpbWyAiJEFQSV9UT0tFTiIgPX4gXltBLVphLXowLTlfLV0rJCBdXSB8fCB7CiAgZWNobyAidmFsaWRhdGU6IENMT1VERkxBUkVfQVBJX1RPS0VOIGhhcyBhbiBpbnZhbGlkIGZvcm1hdCIgPiYyCiAgZXhpdCAxCn0KCmZvciBjb21tYW5kX25hbWUgaW4gY3VybCBqcSBweXRob24zOyBkbwogIGNvbW1hbmQgLXYgIiRjb21tYW5kX25hbWUiID4vZGV2L251bGwgMj4mMSB8fCB7CiAgICBlY2hvICJ2YWxpZGF0ZTogJGNvbW1hbmRfbmFtZSBpcyByZXF1aXJlZCIgPiYyCiAgICBleGl0IDEKICB9CmRvbmUKCmlmICEganEgLWUgJwogIHR5cGUgPT0gImFycmF5IiBhbmQKICBsZW5ndGggPiAwIGFuZAogIGFsbCguW107IHR5cGUgPT0gInN0cmluZyIgYW5kIGxlbmd0aCA+IDApCicgPDw8IiRFWFBFQ1RFRF9ET01BSU5TX0pTT04iID4vZGV2L251bGw7IHRoZW4KICBlY2hvICJ2YWxpZGF0ZTogLS1leHBlY3RlZC1kb21haW5zIG11c3QgYmUgYSBub24tZW1wdHkgSlNPTiBhcnJheSBvZiBkb21haW5zIiA+JjIKICBleGl0IDIKZmkKCldJREdFVF9TRUNSRVQ9IiIKSUZTPSByZWFkIC1yIC1kICcnIFdJREdFVF9TRUNSRVQgfHwgdHJ1ZQp0cmFwICd1bnNldCBBUElfVE9LRU4gV0lER0VUX1NFQ1JFVCBXSURHRVRfQVBJX1NFQ1JFVCBXSURHRVRfUkVTUE9OU0UgU0lURVZFUklGWV9SRVNQT05TRScgRVhJVAoKaWYgW1sgLXogIiRXSURHRVRfU0VDUkVUIiB8fCAiJFdJREdFVF9TRUNSRVQiID1+IFtbOnNwYWNlOl1dIF1dOyB0aGVuCiAgZWNobyAidmFsaWRhdGU6IHN0YW5kYXJkIGlucHV0IG11c3QgY29udGFpbiBvbmUgbm9uLWVtcHR5IHNlY3JldCB3aXRob3V0IHdoaXRlc3BhY2UiID4mMgogIGV4aXQgMQpmaQoKQUNDT1VOVF9FTkNPREVEPSIkKHB5dGhvbjMgLUkgLWMgJ2ltcG9ydCBzeXMsIHVybGxpYi5wYXJzZTsgcHJpbnQodXJsbGliLnBhcnNlLnF1b3RlKHN5cy5hcmd2WzFdLCBzYWZlPSIiKSknICIkQUNDT1VOVF9JRCIpIgpTSVRFS0VZX0VOQ09ERUQ9IiQocHl0aG9uMyAtSSAtYyAnaW1wb3J0IHN5cywgdXJsbGliLnBhcnNlOyBwcmludCh1cmxsaWIucGFyc2UucXVvdGUoc3lzLmFyZ3ZbMV0sIHNhZmU9IiIpKScgIiRTSVRFS0VZIikiCgppZiAhIFdJREdFVF9SRVNQT05TRT0iJCgKICBwcmludGYgJ2hlYWRlciA9ICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJXMiXG4nICIkQVBJX1RPS0VOIiB8CiAgICBjdXJsIC0tZGlzYWJsZSAtLWNvbmZpZyAtIC0tZmFpbCAtLXNpbGVudCAtLXNob3ctZXJyb3IgXAogICAgICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRBQ0NPVU5UX0VOQ09ERUQvY2hhbGxlbmdlcy93aWRnZXRzLyRTSVRFS0VZX0VOQ09ERUQiCikiOyB0aGVuCiAgZWNobyAidmFsaWRhdGU6IHdpZGdldCBtZXRhZGF0YSBsb29rdXAgZmFpbGVkIiA+JjIKICBleGl0IDEKZmkKCmlmICEgcHJpbnRmICclcycgIiRXSURHRVRfUkVTUE9OU0UiIHwganEgLWUgLS1hcmcgc2l0ZWtleSAiJFNJVEVLRVkiIC0tYXJnanNvbiBleHBlY3RlZCAiJEVYUEVDVEVEX0RPTUFJTlNfSlNPTiIgJwogIC4gYXMgJHdpZGdldAogIHwgKC5zdWNjZXNzID09IHRydWUpIGFuZAogICAgKC5yZXN1bHQuc2l0ZWtleSA9PSAkc2l0ZWtleSkgYW5kCiAgICAoKC5yZXN1bHQuY2xlYXJhbmNlX2xldmVsIHwgdHlwZSkgPT0gInN0cmluZyIpIGFuZAogICAgKC5yZXN1bHQuY2xlYXJhbmNlX2xldmVsIGFzICRjbGVhcmFuY2UgfCBbIm5vX2NsZWFyYW5jZSIsICJpbnRlcmFjdGl2ZSIsICJtYW5hZ2VkIiwgImpzY2hhbGxlbmdlIl0gfCBpbmRleCgkY2xlYXJhbmNlKSAhPSBudWxsKSBhbmQKICAgICgoLnJlc3VsdC5kb21haW5zIHwgdHlwZSkgPT0gImFycmF5IikgYW5kCiAgICAoYWxsKCRleHBlY3RlZFtdOyAuIGFzICRkb21haW4gfCAkd2lkZ2V0LnJlc3VsdC5kb21haW5zIHwgaW5kZXgoJGRvbWFpbikgIT0gbnVsbCkpCicgPi9kZXYvbnVsbDsgdGhlbgogIGVjaG8gInZhbGlkYXRlOiB3aWRnZXQgc2l0ZWtleSwgZG9tYWlucywgb3IgY2xlYXJhbmNlIGxldmVsIHdhcyBpbnZhbGlkIiA+JjIKICBleGl0IDEKZmkKCmlmICEgV0lER0VUX0FQSV9TRUNSRVQ9IiQocHJpbnRmICclcycgIiRXSURHRVRfUkVTUE9OU0UiIHwganEgLWVyICcucmVzdWx0LnNlY3JldCB8IHNlbGVjdCh0eXBlID09ICJzdHJpbmciIGFuZCB0ZXN0KCJeXFxTKyQiKSknKSI7IHRoZW4KICBlY2hvICJ2YWxpZGF0ZTogd2lkZ2V0IG1ldGFkYXRhIGRpZCBub3QgaW5jbHVkZSBhIHZhbGlkIHNlY3JldCIgPiYyCiAgZXhpdCAxCmZpCmlmIFtbICIkV0lER0VUX0FQSV9TRUNSRVQiICE9ICIkV0lER0VUX1NFQ1JFVCIgXV07IHRoZW4KICBlY2hvICJ2YWxpZGF0ZTogc2VjcmV0IGRvZXMgbm90IGJlbG9uZyB0byB0aGUgcmVxdWVzdGVkIHNpdGVrZXkiID4mMgogIGV4aXQgMQpmaQp1bnNldCBXSURHRVRfQVBJX1NFQ1JFVAp1bnNldCBXSURHRVRfUkVTUE9OU0UKCmlmICEgU0lURVZFUklGWV9SRVNQT05TRT0iJCgKICBwcmludGYgJyVzJyAiJFdJREdFVF9TRUNSRVQiIHwKICAgIHB5dGhvbjMgLUkgLWMgJ2ltcG9ydCBzeXMsdXJsbGliLnBhcnNlOyBwcmludCh1cmxsaWIucGFyc2UudXJsZW5jb2RlKHsic2VjcmV0IjpzeXMuc3RkaW4ucmVhZCgpLCJyZXNwb25zZSI6IlhYWFguRFVNTVkuVE9LRU4uWFhYWCJ9KSxlbmQ9IiIpJyB8CiAgICBjdXJsIC0tZGlzYWJsZSAtLWZhaWwgLS1zaWxlbnQgLS1zaG93LWVycm9yIFwKICAgICAgImh0dHBzOi8vY2hhbGxlbmdlcy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvdjAvc2l0ZXZlcmlmeSIgXAogICAgICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQiIFwKICAgICAgLS1kYXRhLWJpbmFyeSBALQopIjsgdGhlbgogIGVjaG8gInZhbGlkYXRlOiBkdW1teS10b2tlbiBzaXRldmVyaWZ5IHJlcXVlc3QgZmFpbGVkIiA+JjIKICBleGl0IDEKZmkKCmlmICEganEgLWUgJwogICguc3VjY2VzcyA9PSBmYWxzZSkgYW5kCiAgKCguWyJlcnJvci1jb2RlcyJdIHwgdHlwZSkgPT0gImFycmF5IikgYW5kCiAgKCguWyJlcnJvci1jb2RlcyJdIHwgaW5kZXgoImludmFsaWQtaW5wdXQtcmVzcG9uc2UiKSkgIT0gbnVsbCkgYW5kCiAgKCguWyJlcnJvci1jb2RlcyJdIHwgaW5kZXgoImludmFsaWQtaW5wdXQtc2VjcmV0IikpID09IG51bGwpCicgPDw8IiRTSVRFVkVSSUZZX1JFU1BPTlNFIiA+L2Rldi9udWxsOyB0aGVuCiAgZWNobyAidmFsaWRhdGU6IHNpdGV2ZXJpZnkgZGlkIG5vdCBjb25maXJtIHRoZSB3aWRnZXQgc2VjcmV0IiA+JjIKICBleGl0IDEKZmkKCnVuc2V0IFdJREdFVF9TRUNSRVQgU0lURVZFUklGWV9SRVNQT05TRQplY2hvICd7InN0YXR1cyI6Im9rIiwibWV0YWRhdGFfY2hlY2siOiJyYW4iLCJkdW1teV9zaXRldmVyaWZ5IjoicmFuIn0nCg==
+#!/usr/bin/env bash
+# Validates a Turnstile widget without placing its secret in arguments,
+# exported environment variables, logs, or temporary files.
+
+set +x
+set -euo pipefail
+
+usage() {
+  echo "Usage: printf '%s' \"\$TURNSTILE_SECRET\" | $0 --sitekey <sitekey> --account-id <account-id> --expected-domains '<json-array>'" >&2
+  exit 2
+}
+
+need_arg() {
+  if [[ -z "${2-}" || "$2" == --* ]]; then
+    usage
+  fi
+}
+
+SITEKEY=""
+ACCOUNT_ID=""
+EXPECTED_DOMAINS_JSON=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --sitekey)
+      need_arg "$1" "${2-}"
+      SITEKEY="$2"
+      shift 2
+      ;;
+    --account-id)
+      need_arg "$1" "${2-}"
+      ACCOUNT_ID="$2"
+      shift 2
+      ;;
+    --expected-domains)
+      need_arg "$1" "${2-}"
+      EXPECTED_DOMAINS_JSON="$2"
+      shift 2
+      ;;
+    *) usage ;;
+  esac
+done
+
+[[ -n "$SITEKEY" && -n "$ACCOUNT_ID" && -n "$EXPECTED_DOMAINS_JSON" ]] || usage
+: "${CLOUDFLARE_API_TOKEN:?CLOUDFLARE_API_TOKEN must be set}"
+API_TOKEN="$CLOUDFLARE_API_TOKEN"
+unset CLOUDFLARE_API_TOKEN
+[[ "$API_TOKEN" =~ ^[A-Za-z0-9_-]+$ ]] || {
+  echo "validate: CLOUDFLARE_API_TOKEN has an invalid format" >&2
+  exit 1
+}
+
+for command_name in curl jq python3; do
+  command -v "$command_name" >/dev/null 2>&1 || {
+    echo "validate: $command_name is required" >&2
+    exit 1
+  }
+done
+
+if ! jq -e '
+  type == "array" and
+  length > 0 and
+  all(.[]; type == "string" and length > 0)
+' <<<"$EXPECTED_DOMAINS_JSON" >/dev/null; then
+  echo "validate: --expected-domains must be a non-empty JSON array of domains" >&2
+  exit 2
+fi
+
+WIDGET_SECRET=""
+IFS= read -r -d '' WIDGET_SECRET || true
+trap 'unset API_TOKEN WIDGET_SECRET WIDGET_API_SECRET WIDGET_RESPONSE SITEVERIFY_RESPONSE' EXIT
+
+if [[ -z "$WIDGET_SECRET" || "$WIDGET_SECRET" =~ [[:space:]] ]]; then
+  echo "validate: standard input must contain one non-empty secret without whitespace" >&2
+  exit 1
+fi
+
+ACCOUNT_ENCODED="$(python3 -I -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$ACCOUNT_ID")"
+SITEKEY_ENCODED="$(python3 -I -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$SITEKEY")"
+
+if ! WIDGET_RESPONSE="$(
+  printf 'header = "Authorization: Bearer %s"\n' "$API_TOKEN" |
+    curl --disable --config - --fail --silent --show-error \
+      "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ENCODED/challenges/widgets/$SITEKEY_ENCODED"
+)"; then
+  echo "validate: widget metadata lookup failed" >&2
+  exit 1
+fi
+
+if ! printf '%s' "$WIDGET_RESPONSE" | jq -e --arg sitekey "$SITEKEY" --argjson expected "$EXPECTED_DOMAINS_JSON" '
+  . as $widget
+  | (.success == true) and
+    (.result.sitekey == $sitekey) and
+    ((.result.clearance_level | type) == "string") and
+    (.result.clearance_level as $clearance | ["no_clearance", "interactive", "managed", "jschallenge"] | index($clearance) != null) and
+    ((.result.domains | type) == "array") and
+    (all($expected[]; . as $domain | $widget.result.domains | index($domain) != null))
+' >/dev/null; then
+  echo "validate: widget sitekey, domains, or clearance level was invalid" >&2
+  exit 1
+fi
+
+if ! WIDGET_API_SECRET="$(printf '%s' "$WIDGET_RESPONSE" | jq -er '.result.secret | select(type == "string" and test("^\\S+$"))')"; then
+  echo "validate: widget metadata did not include a valid secret" >&2
+  exit 1
+fi
+if [[ "$WIDGET_API_SECRET" != "$WIDGET_SECRET" ]]; then
+  echo "validate: secret does not belong to the requested sitekey" >&2
+  exit 1
+fi
+unset WIDGET_API_SECRET
+unset WIDGET_RESPONSE
+
+if ! SITEVERIFY_RESPONSE="$(
+  printf '%s' "$WIDGET_SECRET" |
+    python3 -I -c 'import sys,urllib.parse; print(urllib.parse.urlencode({"secret":sys.stdin.read(),"response":"XXXX.DUMMY.TOKEN.XXXX"}),end="")' |
+    curl --disable --fail --silent --show-error \
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify" \
+      -H "Content-Type: application/x-www-form-urlencoded" \
+      --data-binary @-
+)"; then
+  echo "validate: dummy-token siteverify request failed" >&2
+  exit 1
+fi
+
+if ! jq -e '
+  (.success == false) and
+  ((.["error-codes"] | type) == "array") and
+  ((.["error-codes"] | index("invalid-input-response")) != null) and
+  ((.["error-codes"] | index("invalid-input-secret")) == null)
+' <<<"$SITEVERIFY_RESPONSE" >/dev/null; then
+  echo "validate: siteverify did not confirm the widget secret" >&2
+  exit 1
+fi
+
+unset WIDGET_SECRET SITEVERIFY_RESPONSE
+echo '{"status":"ok","metadata_check":"ran","dummy_siteverify":"ran"}'

@@ -1,1 +1,157 @@
-IyBWYW5pbGxhIEhUTUwKCkZvciBzdGF0aWMgc2l0ZXMgb3IgYW55IHByb2plY3Qgd2l0aG91dCBhIEpTIGZyYW1ld29yay4gVGhlIHdpZGdldCByZW5kZXJzIGNsaWVudC1zaWRlOyB0aGUgZm9ybSBzdWJtaXRzIHRvIHdoYXRldmVyIGJhY2tlbmQgaGFuZGxlcyB5b3VyIGZvcm0gKGEgTm9kZS9QSFAvUnVieS9HbyBzZXJ2ZXIsIGEgQ2xvdWRmbGFyZSBXb3JrZXIsIGEgUGFnZXMgRnVuY3Rpb24sIGEgdGhpcmQtcGFydHkgZm9ybSBob3N0IHRoYXQgc3VwcG9ydHMgc2VydmVyLXNpZGUgaG9va3MsIGV0Yy4pLgoKYGBgaHRtbAo8IWRvY3R5cGUgaHRtbD4KPGh0bWw+Cgk8aGVhZD4KCQk8c2NyaXB0CgkJCXNyYz0iaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9hcGkuanMiCgkJCWFzeW5jCgkJCWRlZmVyCgkJPjwvc2NyaXB0PgoJPC9oZWFkPgoJPGJvZHk+CgkJPGZvcm0gYWN0aW9uPSIvYXBpL3N1YnNjcmliZSIgbWV0aG9kPSJQT1NUIj4KCQkJPGlucHV0IG5hbWU9ImVtYWlsIiB0eXBlPSJlbWFpbCIgcmVxdWlyZWQgLz4KCQkJPGRpdgoJCQkJY2xhc3M9ImNmLXR1cm5zdGlsZSIKCQkJCWRhdGEtc2l0ZWtleT0iWU9VUl9TSVRFS0VZIgoJCQkJZGF0YS1hY3Rpb249InN1YnNjcmliZSIKCQkJPjwvZGl2PgoJCQk8YnV0dG9uIHR5cGU9InN1Ym1pdCI+U3Vic2NyaWJlPC9idXR0b24+CgkJPC9mb3JtPgoJPC9ib2R5Pgo8L2h0bWw+CmBgYAoKV2hlbiB0aGUgZm9ybSBzdWJtaXRzLCB0aGUgYnJvd3NlciBpbmNsdWRlcyBgY2YtdHVybnN0aWxlLXJlc3BvbnNlYCBhdXRvbWF0aWNhbGx5LiBZb3VyIGJhY2tlbmQgcmVhZHMgaXQgYW5kIGNhbGxzIGNhbm9uaWNhbCBzaXRldmVyaWZ5LgoKIyMgQmFja2VuZCAoYW55IGxhbmd1YWdlKQoKQWRkIHRoaXMgdG8geW91ciBleGlzdGluZyBgL2FwaS9zdWJzY3JpYmVgIGhhbmRsZXIgYmVmb3JlIHRoZSByZXN0IG9mIGl0cyBsb2dpYzoKCmBgYGpzCi8vIE5vZGUgLyBmZXRjaCBpZGlvbQpjb25zdCBleHBlY3RlZEhvc3RuYW1lcyA9IG5ldyBTZXQoCgkocHJvY2Vzcy5lbnYuVFVSTlNUSUxFX0hPU1ROQU1FUyA/PyAnJykKCQkuc3BsaXQoJywnKQoJCS5tYXAoKGgpID0+IGgudHJpbSgpKQoJCS5maWx0ZXIoQm9vbGVhbiksCik7CmlmIChleHBlY3RlZEhvc3RuYW1lcy5zaXplID09PSAwKSByZXR1cm4gcmVzLnN0YXR1cyg0MDMpLmVuZCgpOwoKY29uc3QgdG9rZW4gPSByZXEuYm9keVsnY2YtdHVybnN0aWxlLXJlc3BvbnNlJ107CmNvbnN0IHIgPSBhd2FpdCBmZXRjaCgnaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5JywgewoJbWV0aG9kOiAnUE9TVCcsCgloZWFkZXJzOiB7ICdDb250ZW50LVR5cGUnOiAnYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkJyB9LAoJYm9keTogbmV3IFVSTFNlYXJjaFBhcmFtcyh7CgkJc2VjcmV0OiBwcm9jZXNzLmVudi5UVVJOU1RJTEVfU0VDUkVULAoJCXJlc3BvbnNlOiB0b2tlbiwKCQlyZW1vdGVpcDogcmVxLmlwLAoJfSksCn0pOwpjb25zdCByZXN1bHQgPSBhd2FpdCByLmpzb24oKTsKaWYgKAoJci5vayAhPT0gdHJ1ZSB8fAoJcmVzdWx0LnN1Y2Nlc3MgIT09IHRydWUgfHwKCXJlc3VsdC5hY3Rpb24gIT09ICdzdWJzY3JpYmUnIHx8CgkhZXhwZWN0ZWRIb3N0bmFtZXMuaGFzKHJlc3VsdC5ob3N0bmFtZSkKKSB7CglyZXR1cm4gcmVzLnN0YXR1cyg0MDMpLmVuZCgpOwp9Ci8vIGV4aXN0aW5nIGhhbmRsZXIgbG9naWMgcnVucyBoZXJlCmBgYAoKRXF1aXZhbGVudCBjYWxscyBpbiBvdGhlciBiYWNrZW5kIGxhbmd1YWdlcyAoZWFjaCBhbHNvIGNvbXBhcmVzIGByZXN1bHQuaG9zdG5hbWVgIHRvIGEgYFRVUk5TVElMRV9IT1NUTkFNRVNgIGFsbG93bGlzdCk6CgpgYGBydWJ5CiMgUnVieQpyZXF1aXJlICduZXQvaHR0cCc7IHJlcXVpcmUgJ3VyaSc7IHJlcXVpcmUgJ2pzb24nOyByZXF1aXJlICdzZXQnCmV4cGVjdGVkX2hvc3RuYW1lcyA9IChFTlZbJ1RVUk5TVElMRV9IT1NUTkFNRVMnXSB8fCAnJykuc3BsaXQoJywnKS5tYXAoJjpzdHJpcCkucmVqZWN0KCY6ZW1wdHk/KS50b19zZXQKaGFsdCA0MDMgaWYgZXhwZWN0ZWRfaG9zdG5hbWVzLmVtcHR5PwpyZXMgPSBOZXQ6OkhUVFAucG9zdF9mb3JtKFVSSSgnaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5JyksCiAgc2VjcmV0OiBFTlZbJ1RVUk5TVElMRV9TRUNSRVQnXSwgcmVzcG9uc2U6IHBhcmFtc1snY2YtdHVybnN0aWxlLXJlc3BvbnNlJ10sIHJlbW90ZWlwOiByZXF1ZXN0LmlwKQpyZXN1bHQgPSBKU09OLnBhcnNlKHJlcy5ib2R5KQpoYWx0IDQwMyB1bmxlc3MgcmVzLmlzX2E/KE5ldDo6SFRUUFN1Y2Nlc3MpICYmIHJlc3VsdFsnc3VjY2VzcyddID09IHRydWUgJiYgcmVzdWx0WydhY3Rpb24nXSA9PSAnc3Vic2NyaWJlJyAmJiBleHBlY3RlZF9ob3N0bmFtZXMuaW5jbHVkZT8ocmVzdWx0Wydob3N0bmFtZSddKQpgYGAKCmBgYHB5dGhvbgojIFB5dGhvbiAocmVxdWVzdHMpCmV4cGVjdGVkX2hvc3RuYW1lcyA9IHtoLnN0cmlwKCkgZm9yIGggaW4gb3MuZW52aXJvbi5nZXQoJ1RVUk5TVElMRV9IT1NUTkFNRVMnLCAnJykuc3BsaXQoJywnKSBpZiBoLnN0cmlwKCl9CmlmIG5vdCBleHBlY3RlZF9ob3N0bmFtZXM6CiAgICByZXR1cm4gJycsIDQwMwpyID0gcmVxdWVzdHMucG9zdCgnaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5JywKICAgIGRhdGE9eydzZWNyZXQnOiBvcy5lbnZpcm9uWydUVVJOU1RJTEVfU0VDUkVUJ10sCiAgICAgICAgICAncmVzcG9uc2UnOiBmb3JtWydjZi10dXJuc3RpbGUtcmVzcG9uc2UnXSwKICAgICAgICAgICdyZW1vdGVpcCc6IHJlcXVlc3QucmVtb3RlX2FkZHJ9KQpyZXN1bHQgPSByLmpzb24oKQppZiAobm90IHIub2sgb3IgcmVzdWx0LmdldCgnc3VjY2VzcycpIGlzIG5vdCBUcnVlIG9yIHJlc3VsdC5nZXQoJ2FjdGlvbicpICE9ICdzdWJzY3JpYmUnCiAgICAgICAgb3IgcmVzdWx0LmdldCgnaG9zdG5hbWUnKSBub3QgaW4gZXhwZWN0ZWRfaG9zdG5hbWVzKToKICAgIHJldHVybiAnJywgNDAzCmBgYAoKYHN1YnNjcmliZWAgaXMgdGhlIHN0YWJsZSBhY3Rpb24gZm9yIHRoaXMgc3VyZmFjZS4gUHJlc2VydmUgYW4gZXhpc3RpbmcgY3VzdG9tIG1pZ3JhdGlvbiBhY3Rpb24gYW5kIGNvbXBhcmUgdGhlIHJldHVybmVkIGFjdGlvbiB0byB0aGUgc2FtZSB2YWx1ZS4gU2l0ZXZlcmlmeSBpcyBtYW5kYXRvcnkgZm9yIGV2ZXJ5IHdpZGdldCBtb2RlLCBpbmNsdWRpbmcgcHJlLWNsZWFyYW5jZS4gU2V0IGBUVVJOU1RJTEVfSE9TVE5BTUVTYCB0byB0aGUgZGVwbG95bWVudC1zcGVjaWZpYyBmcm9udGVuZCBob3N0bmFtZXM7IGEgcHJvZHVjdGlvbiB2YWx1ZSBtdXN0IG5vdCBpbmNsdWRlIGBsb2NhbGhvc3RgIG9yIGAxMjcuMC4wLjFgLgoKIyMgVmFyaWFudDogQUpBWCBzdWJtaXQgaW5zdGVhZCBvZiBmb3JtIGFjdGlvbgoKRm9yIGFuIEFKQVggZmxvdywgcmVwbGFjZSB0aGUgbmF0aXZlIGZvcm0gYW5kIEFQSSBzY3JpcHQgd2l0aCBleHBsaWNpdCByZW5kZXJpbmcuIEtlZXAgdGhpcyBzdXJmYWNlJ3Mgd2lkZ2V0IElEIGFuZCByZXNldCBpdCBpbiBgZmluYWxseWAsIHdoaWNoIGNvdmVycyBuZXR3b3JrLCBKU09OLCB2YWxpZGF0aW9uLCBhbmQgc2VydmVyIGZhaWx1cmVzIGFzIHdlbGwgYXMgc3VjY2Vzc2Z1bCBzYW1lLXBhZ2UgY29tcGxldGlvbi4KCmBgYGh0bWwKPGZvcm0gaWQ9InN1YnNjcmliZS1mb3JtIj4KCTxpbnB1dCBuYW1lPSJlbWFpbCIgdHlwZT0iZW1haWwiIHJlcXVpcmVkIC8+Cgk8ZGl2IGlkPSJzdWJzY3JpYmUtdHVybnN0aWxlIj48L2Rpdj4KCTxidXR0b24gdHlwZT0ic3VibWl0Ij5TdWJzY3JpYmU8L2J1dHRvbj4KPC9mb3JtPgo8c2NyaXB0PgoJbGV0IHN1YnNjcmliZVdpZGdldElkOwoKCXdpbmRvdy5vblN1YnNjcmliZVR1cm5zdGlsZUxvYWQgPSAoKSA9PiB7CgkJc3Vic2NyaWJlV2lkZ2V0SWQgPSB3aW5kb3cudHVybnN0aWxlLnJlbmRlcigiI3N1YnNjcmliZS10dXJuc3RpbGUiLCB7CgkJCXNpdGVrZXk6ICJZT1VSX1NJVEVLRVkiLAoJCQlhY3Rpb246ICJzdWJzY3JpYmUiLAoJCX0pOwoJfTsKCglkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgic3Vic2NyaWJlLWZvcm0iKS5hZGRFdmVudExpc3RlbmVyKCJzdWJtaXQiLCBhc3luYyAoZXZlbnQpID0+IHsKCQlldmVudC5wcmV2ZW50RGVmYXVsdCgpOwoJCXRyeSB7CgkJCWNvbnN0IHJlcyA9IGF3YWl0IGZldGNoKCIvYXBpL3N1YnNjcmliZSIsIHsKCQkJCW1ldGhvZDogIlBPU1QiLAoJCQkJYm9keTogbmV3IEZvcm1EYXRhKGV2ZW50LmN1cnJlbnRUYXJnZXQpLAoJCQl9KTsKCQkJY29uc3QganNvbiA9IGF3YWl0IHJlcy5qc29uKCk7CgkJCWlmICghcmVzLm9rIHx8IGpzb24ub2sgIT09IHRydWUpIHRocm93IG5ldyBFcnJvcigiU3VibWlzc2lvbiBmYWlsZWQiKTsKCQkJLy8gcHJvY2VlZAoJCX0gY2F0Y2ggewoJCQkvLyBzdXJmYWNlIHRoZSBlcnJvcgoJCX0gZmluYWxseSB7CgkJCWlmIChzdWJzY3JpYmVXaWRnZXRJZCAhPT0gdW5kZWZpbmVkKSB7CgkJCQl3aW5kb3cudHVybnN0aWxlLnJlc2V0KHN1YnNjcmliZVdpZGdldElkKTsKCQkJfQoJCX0KCX0pOwo8L3NjcmlwdD4KPHNjcmlwdAoJc3JjPSJodHRwczovL2NoYWxsZW5nZXMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3YwL2FwaS5qcz9vbmxvYWQ9b25TdWJzY3JpYmVUdXJuc3RpbGVMb2FkJnJlbmRlcj1leHBsaWNpdCIKCWFzeW5jCglkZWZlcgo+PC9zY3JpcHQ+CmBgYAoKIyMgTm8gYmFja2VuZD8KCklmIHlvdXIgcHJvamVjdCBpcyBwdXJlLXN0YXRpYyAobm8gc2VydmVyLXNpZGUgaGFuZGxlciDigJQganVzdCBIVE1MIHNlcnZlZCBmcm9tIGEgQ0ROKSwgU3BpbiBkb2Vzbid0IGFwcGx5LiBTaXRldmVyaWZ5IGlzIHNlcnZlci1zaWRlIGJ5IGRlc2lnbi4gT3B0aW9uczoKCi0gQWRkIGEgQ2xvdWRmbGFyZSBQYWdlcyBGdW5jdGlvbiAoYGZ1bmN0aW9ucy9hcGkvc3Vic2NyaWJlLmpzYCkgdG8gaG9zdCB0aGUgc2l0ZXZlcmlmeSBjYWxsLgotIERlcGxveSBhIHRpbnkgQ2xvdWRmbGFyZSBXb3JrZXIgdGhhdCBkb2VzIHNpdGV2ZXJpZnkgYWdhaW5zdCB5b3VyIGV4aXN0aW5nIGZvcm0gaG9zdC4KLSBVc2UgYSB0aGlyZC1wYXJ0eSBmb3JtIGhvc3QgdGhhdCBleHBvc2VzIGEgc2VydmVyLXNpZGUgd2ViaG9vayB3aGVyZSB5b3UgY2FuIHdpcmUgc2l0ZXZlcmlmeS4KCiMjIFN1YnN0aXR1dGlvbnMKCnwgUGxhY2Vob2xkZXIgICAgICAgICB8IFJlcGxhY2Ugd2l0aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwKfCAtLS0tLS0tLS0tLS0tLS0tLS0tIHwgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gfAp8IGBZT1VSX1NJVEVLRVlgICAgICAgfCBUaGUgd2lkZ2V0IHNpdGUga2V5IGZyb20gU3RlcCA4ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8CnwgYC9hcGkvc3Vic2NyaWJlYCAgICB8IFRoZSBwYXRoIHRvIHlvdXIgZXhpc3RpbmcgZm9ybS1oYW5kbGluZyBlbmRwb2ludCAgICAgICAgICAgICAgICAgICAgIHwKfCBgVFVSTlNUSUxFX1NFQ1JFVGAgIHwgRW52LXZhciBuYW1lLiBWYWx1ZSBpcyB0aGUgc2VjcmV0IGNhcHR1cmVkIGluIFN0ZXAgOCwga2VwdCBvZmYgZGlzay4gfAo=
+# Vanilla HTML
+
+For static sites or any project without a JS framework. The widget renders client-side; the form submits to whatever backend handles your form (a Node/PHP/Ruby/Go server, a Cloudflare Worker, a Pages Function, a third-party form host that supports server-side hooks, etc.).
+
+```html
+<!doctype html>
+<html>
+	<head>
+		<script
+			src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+			async
+			defer
+		></script>
+	</head>
+	<body>
+		<form action="/api/subscribe" method="POST">
+			<input name="email" type="email" required />
+			<div
+				class="cf-turnstile"
+				data-sitekey="YOUR_SITEKEY"
+				data-action="subscribe"
+			></div>
+			<button type="submit">Subscribe</button>
+		</form>
+	</body>
+</html>
+```
+
+When the form submits, the browser includes `cf-turnstile-response` automatically. Your backend reads it and calls canonical siteverify.
+
+## Backend (any language)
+
+Add this to your existing `/api/subscribe` handler before the rest of its logic:
+
+```js
+// Node / fetch idiom
+const expectedHostnames = new Set(
+	(process.env.TURNSTILE_HOSTNAMES ?? '')
+		.split(',')
+		.map((h) => h.trim())
+		.filter(Boolean),
+);
+if (expectedHostnames.size === 0) return res.status(403).end();
+
+const token = req.body['cf-turnstile-response'];
+const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+	method: 'POST',
+	headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+	body: new URLSearchParams({
+		secret: process.env.TURNSTILE_SECRET,
+		response: token,
+		remoteip: req.ip,
+	}),
+});
+const result = await r.json();
+if (
+	r.ok !== true ||
+	result.success !== true ||
+	result.action !== 'subscribe' ||
+	!expectedHostnames.has(result.hostname)
+) {
+	return res.status(403).end();
+}
+// existing handler logic runs here
+```
+
+Equivalent calls in other backend languages (each also compares `result.hostname` to a `TURNSTILE_HOSTNAMES` allowlist):
+
+```ruby
+# Ruby
+require 'net/http'; require 'uri'; require 'json'; require 'set'
+expected_hostnames = (ENV['TURNSTILE_HOSTNAMES'] || '').split(',').map(&:strip).reject(&:empty?).to_set
+halt 403 if expected_hostnames.empty?
+res = Net::HTTP.post_form(URI('https://challenges.cloudflare.com/turnstile/v0/siteverify'),
+  secret: ENV['TURNSTILE_SECRET'], response: params['cf-turnstile-response'], remoteip: request.ip)
+result = JSON.parse(res.body)
+halt 403 unless res.is_a?(Net::HTTPSuccess) && result['success'] == true && result['action'] == 'subscribe' && expected_hostnames.include?(result['hostname'])
+```
+
+```python
+# Python (requests)
+expected_hostnames = {h.strip() for h in os.environ.get('TURNSTILE_HOSTNAMES', '').split(',') if h.strip()}
+if not expected_hostnames:
+    return '', 403
+r = requests.post('https://challenges.cloudflare.com/turnstile/v0/siteverify',
+    data={'secret': os.environ['TURNSTILE_SECRET'],
+          'response': form['cf-turnstile-response'],
+          'remoteip': request.remote_addr})
+result = r.json()
+if (not r.ok or result.get('success') is not True or result.get('action') != 'subscribe'
+        or result.get('hostname') not in expected_hostnames):
+    return '', 403
+```
+
+`subscribe` is the stable action for this surface. Preserve an existing custom migration action and compare the returned action to the same value. Siteverify is mandatory for every widget mode, including pre-clearance. Set `TURNSTILE_HOSTNAMES` to the deployment-specific frontend hostnames; a production value must not include `localhost` or `127.0.0.1`.
+
+## Variant: AJAX submit instead of form action
+
+For an AJAX flow, replace the native form and API script with explicit rendering. Keep this surface's widget ID and reset it in `finally`, which covers network, JSON, validation, and server failures as well as successful same-page completion.
+
+```html
+<form id="subscribe-form">
+	<input name="email" type="email" required />
+	<div id="subscribe-turnstile"></div>
+	<button type="submit">Subscribe</button>
+</form>
+<script>
+	let subscribeWidgetId;
+
+	window.onSubscribeTurnstileLoad = () => {
+		subscribeWidgetId = window.turnstile.render("#subscribe-turnstile", {
+			sitekey: "YOUR_SITEKEY",
+			action: "subscribe",
+		});
+	};
+
+	document.getElementById("subscribe-form").addEventListener("submit", async (event) => {
+		event.preventDefault();
+		try {
+			const res = await fetch("/api/subscribe", {
+				method: "POST",
+				body: new FormData(event.currentTarget),
+			});
+			const json = await res.json();
+			if (!res.ok || json.ok !== true) throw new Error("Submission failed");
+			// proceed
+		} catch {
+			// surface the error
+		} finally {
+			if (subscribeWidgetId !== undefined) {
+				window.turnstile.reset(subscribeWidgetId);
+			}
+		}
+	});
+</script>
+<script
+	src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onSubscribeTurnstileLoad&render=explicit"
+	async
+	defer
+></script>
+```
+
+## No backend?
+
+If your project is pure-static (no server-side handler — just HTML served from a CDN), Spin doesn't apply. Siteverify is server-side by design. Options:
+
+- Add a Cloudflare Pages Function (`functions/api/subscribe.js`) to host the siteverify call.
+- Deploy a tiny Cloudflare Worker that does siteverify against your existing form host.
+- Use a third-party form host that exposes a server-side webhook where you can wire siteverify.
+
+## Substitutions
+
+| Placeholder         | Replace with                                                         |
+| ------------------- | -------------------------------------------------------------------- |
+| `YOUR_SITEKEY`      | The widget site key from Step 8                                      |
+| `/api/subscribe`    | The path to your existing form-handling endpoint                     |
+| `TURNSTILE_SECRET`  | Env-var name. Value is the secret captured in Step 8, kept off disk. |

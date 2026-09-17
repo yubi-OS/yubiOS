@@ -1,1 +1,184 @@
-IyBTZW5kaW5nIEVtYWlscyDigJQgUkVTVCBBUEkKClNlbmQgZW1haWxzIHZpYSBIVFRQIHJlcXVlc3RzIGZyb20gYW55IGFwcGxpY2F0aW9uLiBJZiB5b3VyIGFwcCBydW5zIG9uIENsb3VkZmxhcmUgV29ya2VycywgdXNlIHRoZSBbV29ya2VycyBiaW5kaW5nXShzZW5kaW5nLm1kKSBpbnN0ZWFkIOKAlCBzaW1wbGVyIGFuZCBtb3JlIHBlcmZvcm1hbnQuCgpGb3IgdGhlIGZ1bGwgT3BlbkFQSSBzcGVjaWZpY2F0aW9uLCByZWZlciB0byB0aGUgW0VtYWlsIFNlbmRpbmcgQVBJIHJlZmVyZW5jZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FwaS9yZXNvdXJjZXMvZW1haWxfc2VuZGluZy9tZXRob2RzL3NlbmQpLgoKIyMgRW5kcG9pbnQKCmBgYApQT1NUIGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vZW1haWwvc2VuZGluZy9zZW5kCmBgYAoKIyMgQXV0aGVudGljYXRpb24KCkF1dGhlbnRpY2F0ZSB3aXRoIGEgW0Nsb3VkZmxhcmUgQVBJIHRva2VuXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vZnVuZGFtZW50YWxzL2FwaS9nZXQtc3RhcnRlZC9jcmVhdGUtdG9rZW4vKSB0aGF0IGhhcyBlbWFpbCBzZW5kaW5nIHBlcm1pc3Npb246CgpgYGAKQXV0aG9yaXphdGlvbjogQmVhcmVyIDxBUElfVE9LRU4+CmBgYAoKIyMgUmVxdWVzdCBGaWVsZHMKCioqSU1QT1JUQU5UOioqIFRoZSBSRVNUIEFQSSB1c2VzIGRpZmZlcmVudCBmaWVsZCBuYW1lcyB0aGFuIHRoZSBXb3JrZXJzIGJpbmRpbmcgaW4gc29tZSBjYXNlcy4KCnwgRmllbGQgfCBUeXBlIHwgUmVxdWlyZWQgfCBEZXNjcmlwdGlvbiB8CnwtLS0tLS0tfC0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYHRvYCB8IHN0cmluZyBvciBzdHJpbmdbXSB8IFllcyB8IFJlY2lwaWVudChzKSwgbWF4IDUwIGNvbWJpbmVkIHdpdGggY2MvYmNjIHwKfCBgZnJvbWAgfCBzdHJpbmcgb3IgYHthZGRyZXNzLCBuYW1lfWAgfCBZZXMgfCBTZW5kZXIg4oCUICoqdXNlcyBgYWRkcmVzc2Agbm90IGBlbWFpbGAqKiBmb3Igb2JqZWN0IGZvcm0gfAp8IGBzdWJqZWN0YCB8IHN0cmluZyB8IFllcyB8IEVtYWlsIHN1YmplY3QgbGluZSB8CnwgYGh0bWxgIHwgc3RyaW5nIHwgTm8qIHwgSFRNTCBib2R5IHwKfCBgdGV4dGAgfCBzdHJpbmcgfCBObyogfCBQbGFpbiB0ZXh0IGJvZHkgfAp8IGBjY2AgfCBzdHJpbmcgb3Igc3RyaW5nW10gfCBObyB8IENDIHJlY2lwaWVudHMgfAp8IGBiY2NgIHwgc3RyaW5nIG9yIHN0cmluZ1tdIHwgTm8gfCBCQ0MgcmVjaXBpZW50cyB8CnwgYHJlcGx5X3RvYCB8IHN0cmluZyBvciBge2FkZHJlc3MsIG5hbWV9YCB8IE5vIHwgKipTbmFrZV9jYXNlKiosIG5vdCBjYW1lbENhc2UgfAp8IGBhdHRhY2htZW50c2AgfCBhcnJheSB8IE5vIHwgRmlsZSBhdHRhY2htZW50cyBhbmQgaW5saW5lIGltYWdlcyB8CnwgYGhlYWRlcnNgIHwgb2JqZWN0IHwgTm8gfCBDdXN0b20gZW1haWwgaGVhZGVycyB8CgoqQXQgbGVhc3Qgb25lIG9mIGBodG1sYCBvciBgdGV4dGAgcmVxdWlyZWQuIEluY2x1ZGUgYm90aCBmb3IgYmVzdCBkZWxpdmVyYWJpbGl0eS4KCioqS2V5IGRpZmZlcmVuY2VzIGZyb20gV29ya2VycyBiaW5kaW5nOioqIGBmcm9tYCB1c2VzIGBhZGRyZXNzYCAoUkVTVCkgdnMgYGVtYWlsYCAoV29ya2VycyksIGByZXBseV90b2AgKFJFU1QpIHZzIGByZXBseVRvYCAoV29ya2VycyksIGBjb250ZW50X2lkYCAoUkVTVCkgdnMgYGNvbnRlbnRJZGAgKFdvcmtlcnMpIGZvciBpbmxpbmUgYXR0YWNobWVudHMsIGVycm9ycyB1c2UgbnVtZXJpYyBjb2RlcyAoUkVTVCkgdnMgc3RyaW5nIGBFXypgIGNvZGVzIChXb3JrZXJzKSwgYW5kIHJlc3BvbnNlcyByZXR1cm4gZGVsaXZlcnkgc3RhdHVzIChgZGVsaXZlcmVkYC9gcGVybWFuZW50X2JvdW5jZXNgL2BxdWV1ZWRgKSBpbnN0ZWFkIG9mIGp1c3QgYG1lc3NhZ2VJZGAuCgojIyBFeGFtcGxlcwoKU2ltcGxlIHNlbmQ6CgpgYGBiYXNoCmN1cmwgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vZW1haWwvc2VuZGluZy9zZW5kIiBcCiAgLS1oZWFkZXIgIkF1dGhvcml6YXRpb246IEJlYXJlciA8QVBJX1RPS0VOPiIgXAogIC0taGVhZGVyICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtLWRhdGEgJ3sKICAgICJ0byI6ICJ1c2VyQGV4YW1wbGUuY29tIiwKICAgICJmcm9tIjogIndlbGNvbWVAeW91cmRvbWFpbi5jb20iLAogICAgInN1YmplY3QiOiAiV2VsY29tZSEiLAogICAgImh0bWwiOiAiPGgxPldlbGNvbWUhPC9oMT48cD5UaGFua3MgZm9yIHNpZ25pbmcgdXAuPC9wPiIsCiAgICAidGV4dCI6ICJXZWxjb21lISBUaGFua3MgZm9yIHNpZ25pbmcgdXAuIgogIH0nCmBgYAoKTXVsdGlwbGUgcmVjaXBpZW50cyB3aXRoIENDL0JDQzoKCmBgYGJhc2gKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS9lbWFpbC9zZW5kaW5nL3NlbmQiIFwKICAtLWhlYWRlciAiQXV0aG9yaXphdGlvbjogQmVhcmVyIDxBUElfVE9LRU4+IiBcCiAgLS1oZWFkZXIgIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC0tZGF0YSAnewogICAgInRvIjogWyJ1c2VyMUBleGFtcGxlLmNvbSIsICJ1c2VyMkBleGFtcGxlLmNvbSJdLAogICAgImNjIjogWyJtYW5hZ2VyQGNvbXBhbnkuY29tIl0sCiAgICAiYmNjIjogWyJhcmNoaXZlQGNvbXBhbnkuY29tIl0sCiAgICAiZnJvbSI6IHsgImFkZHJlc3MiOiAib3JkZXJzQHlvdXJkb21haW4uY29tIiwgIm5hbWUiOiAiT3JkZXJzIiB9LAogICAgInJlcGx5X3RvIjogInN1cHBvcnRAeW91cmRvbWFpbi5jb20iLAogICAgInN1YmplY3QiOiAiT3JkZXIgQ29uZmlybWF0aW9uIiwKICAgICJodG1sIjogIjxoMT5Zb3VyIG9yZGVyIGlzIGNvbmZpcm1lZDwvaDE+IiwKICAgICJ0ZXh0IjogIllvdXIgb3JkZXIgaXMgY29uZmlybWVkIgogIH0nCmBgYAoKV2l0aCBhdHRhY2htZW50czoKCmBgYGJhc2gKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS9lbWFpbC9zZW5kaW5nL3NlbmQiIFwKICAtLWhlYWRlciAiQXV0aG9yaXphdGlvbjogQmVhcmVyIDxBUElfVE9LRU4+IiBcCiAgLS1oZWFkZXIgIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC0tZGF0YSAnewogICAgInRvIjogImN1c3RvbWVyQGV4YW1wbGUuY29tIiwKICAgICJmcm9tIjogImludm9pY2VzQHlvdXJkb21haW4uY29tIiwKICAgICJzdWJqZWN0IjogIllvdXIgSW52b2ljZSIsCiAgICAiaHRtbCI6ICI8aDE+SW52b2ljZSBhdHRhY2hlZDwvaDE+IiwKICAgICJhdHRhY2htZW50cyI6IFsKICAgICAgewogICAgICAgICJjb250ZW50IjogIkpWQkVSaTB4TGpRS0plTGp6OU1LLi4uIiwKICAgICAgICAiZmlsZW5hbWUiOiAiaW52b2ljZS5wZGYiLAogICAgICAgICJ0eXBlIjogImFwcGxpY2F0aW9uL3BkZiIsCiAgICAgICAgImRpc3Bvc2l0aW9uIjogImF0dGFjaG1lbnQiCiAgICAgIH0KICAgIF0KICB9JwpgYGAKCldpdGggaW5saW5lIGltYWdlcyAoZW1iZWRkZWQgdmlhIGBjaWQ6YCBVUkkpOgoKYGBgYmFzaApjdXJsICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L2VtYWlsL3NlbmRpbmcvc2VuZCIgXAogIC0taGVhZGVyICJBdXRob3JpemF0aW9uOiBCZWFyZXIgPEFQSV9UT0tFTj4iIFwKICAtLWhlYWRlciAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLS1kYXRhICd7CiAgICAidG8iOiAidXNlckBleGFtcGxlLmNvbSIsCiAgICAiZnJvbSI6ICJuZXdzbGV0dGVyQHlvdXJkb21haW4uY29tIiwKICAgICJzdWJqZWN0IjogIkNoZWNrIHRoaXMgb3V0IiwKICAgICJodG1sIjogIjxoMT5IZWxsbyE8L2gxPjxpbWcgc3JjPVwiY2lkOmxvZ29cIj4iLAogICAgImF0dGFjaG1lbnRzIjogWwogICAgICB7CiAgICAgICAgImNvbnRlbnQiOiAiaVZCT1J3MEtHZ29BQUFBTlNVaEVVZy4uLiIsCiAgICAgICAgImZpbGVuYW1lIjogImxvZ28ucG5nIiwKICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAgICJkaXNwb3NpdGlvbiI6ICJpbmxpbmUiLAogICAgICAgICJjb250ZW50X2lkIjogImxvZ28iCiAgICAgIH0KICAgIF0KICB9JwpgYGAKCkF0dGFjaG1lbnQgZmllbGRzIGRpZmZlciBieSB0eXBlOgotICoqUmVndWxhciBhdHRhY2htZW50Kio6IGBjb250ZW50YCAoYmFzZTY0KSwgYGZpbGVuYW1lYCwgYHR5cGVgIChNSU1FKSwgYGRpc3Bvc2l0aW9uOiAiYXR0YWNobWVudCJgCi0gKipJbmxpbmUgaW1hZ2UqKjogYGNvbnRlbnRgIChiYXNlNjQpLCBgZmlsZW5hbWVgLCBgdHlwZWAgKE1JTUUpLCBgZGlzcG9zaXRpb246ICJpbmxpbmUiYCwgYGNvbnRlbnRfaWRgIChyZWZlcmVuY2VkIGluIEhUTUwgYXMgYGNpZDo8Y29udGVudF9pZD5gKQoKV2l0aCBjdXN0b20gaGVhZGVyczoKCmBgYGJhc2gKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS9lbWFpbC9zZW5kaW5nL3NlbmQiIFwKICAtLWhlYWRlciAiQXV0aG9yaXphdGlvbjogQmVhcmVyIDxBUElfVE9LRU4+IiBcCiAgLS1oZWFkZXIgIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC0tZGF0YSAnewogICAgInRvIjogInVzZXJAZXhhbXBsZS5jb20iLAogICAgImZyb20iOiAibm90aWZpY2F0aW9uc0B5b3VyZG9tYWluLmNvbSIsCiAgICAic3ViamVjdCI6ICJZb3VyIHdlZWtseSBkaWdlc3QiLAogICAgImh0bWwiOiAiPGgxPldlZWtseSBEaWdlc3Q8L2gxPiIsCiAgICAiaGVhZGVycyI6IHsKICAgICAgIkxpc3QtVW5zdWJzY3JpYmUiOiAiPGh0dHBzOi8veW91cmRvbWFpbi5jb20vdW5zdWJzY3JpYmU/aWQ9YWJjMTIzPiIsCiAgICAgICJMaXN0LVVuc3Vic2NyaWJlLVBvc3QiOiAiTGlzdC1VbnN1YnNjcmliZT1PbmUtQ2xpY2siLAogICAgICAiWC1DYW1wYWlnbi1JRCI6ICJ3ZWVrbHktZGlnZXN0LTIwMjYtMDMiCiAgICB9CiAgfScKYGBgCgpTZWUgdGhlIFtlbWFpbCBoZWFkZXJzIHJlZmVyZW5jZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2VtYWlsLXNlcnZpY2UvcmVmZXJlbmNlL2hlYWRlcnMvKSBmb3IgdGhlIGZ1bGwgbGlzdCBvZiBhbGxvd2VkIGhlYWRlcnMuCgojIyBSZXNwb25zZQoKU3VjY2VzczoKCmBgYGpzb24KewogICJzdWNjZXNzIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgIm1lc3NhZ2VzIjogW10sCiAgInJlc3VsdCI6IHsKICAgICJkZWxpdmVyZWQiOiBbInJlY2lwaWVudEBleGFtcGxlLmNvbSJdLAogICAgInBlcm1hbmVudF9ib3VuY2VzIjogW10sCiAgICAicXVldWVkIjogW10KICB9Cn0KYGBgCgpFcnJvciAobnVtZXJpYyBjb2Rlcywgbm90IGBFXypgIHN0cmluZyBjb2RlcyBsaWtlIFdvcmtlcnMpOgoKYGBganNvbgp7CiAgInN1Y2Nlc3MiOiBmYWxzZSwKICAiZXJyb3JzIjogW3sgImNvZGUiOiAxMDAwLCAibWVzc2FnZSI6ICJTZW5kZXIgZG9tYWluIG5vdCB2ZXJpZmllZCIgfV0sCiAgInJlc3VsdCI6IG51bGwKfQpgYGAKCiMjIEVycm9yIEhhbmRsaW5nCgp8IFN0YXR1cyB8IE1lYW5pbmcgfCBSZXRyeT8gfAp8LS0tLS0tLS18LS0tLS0tLS0tfC0tLS0tLS0tfAp8IDIwMCB8IFN1Y2Nlc3MgfCBOL0EgfAp8IDQwMCB8IFZhbGlkYXRpb24gZXJyb3IgfCBObyDigJQgZml4IHRoZSByZXF1ZXN0IHwKfCA0MDEgfCBJbnZhbGlkIEFQSSB0b2tlbiB8IE5vIOKAlCBjaGVjayB5b3VyIHRva2VuIHwKfCA0MjkgfCBSYXRlIGxpbWl0ZWQgfCBZZXMg4oCUIGV4cG9uZW50aWFsIGJhY2tvZmYgfAp8IDUwMCB8IFNlcnZlciBlcnJvciB8IFllcyDigJQgZXhwb25lbnRpYWwgYmFja29mZiB8CgpPbmx5IHJldHJ5IG9uIDQyOSBhbmQgNTAwLiBWYWxpZGF0aW9uIGVycm9ycyAoNDAwKSB3b24ndCBzdWNjZWVkIG9uIHJldHJ5Lgo=
+# Sending Emails — REST API
+
+Send emails via HTTP requests from any application. If your app runs on Cloudflare Workers, use the [Workers binding](sending.md) instead — simpler and more performant.
+
+For the full OpenAPI specification, refer to the [Email Sending API reference](https://developers.cloudflare.com/api/resources/email_sending/methods/send).
+
+## Endpoint
+
+```
+POST https://api.cloudflare.com/client/v4/accounts/{account_id}/email/sending/send
+```
+
+## Authentication
+
+Authenticate with a [Cloudflare API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) that has email sending permission:
+
+```
+Authorization: Bearer <API_TOKEN>
+```
+
+## Request Fields
+
+**IMPORTANT:** The REST API uses different field names than the Workers binding in some cases.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `to` | string or string[] | Yes | Recipient(s), max 50 combined with cc/bcc |
+| `from` | string or `{address, name}` | Yes | Sender — **uses `address` not `email`** for object form |
+| `subject` | string | Yes | Email subject line |
+| `html` | string | No* | HTML body |
+| `text` | string | No* | Plain text body |
+| `cc` | string or string[] | No | CC recipients |
+| `bcc` | string or string[] | No | BCC recipients |
+| `reply_to` | string or `{address, name}` | No | **Snake_case**, not camelCase |
+| `attachments` | array | No | File attachments and inline images |
+| `headers` | object | No | Custom email headers |
+
+*At least one of `html` or `text` required. Include both for best deliverability.
+
+**Key differences from Workers binding:** `from` uses `address` (REST) vs `email` (Workers), `reply_to` (REST) vs `replyTo` (Workers), `content_id` (REST) vs `contentId` (Workers) for inline attachments, errors use numeric codes (REST) vs string `E_*` codes (Workers), and responses return delivery status (`delivered`/`permanent_bounces`/`queued`) instead of just `messageId`.
+
+## Examples
+
+Simple send:
+
+```bash
+curl "https://api.cloudflare.com/client/v4/accounts/{account_id}/email/sending/send" \
+  --header "Authorization: Bearer <API_TOKEN>" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "to": "user@example.com",
+    "from": "welcome@yourdomain.com",
+    "subject": "Welcome!",
+    "html": "<h1>Welcome!</h1><p>Thanks for signing up.</p>",
+    "text": "Welcome! Thanks for signing up."
+  }'
+```
+
+Multiple recipients with CC/BCC:
+
+```bash
+curl "https://api.cloudflare.com/client/v4/accounts/{account_id}/email/sending/send" \
+  --header "Authorization: Bearer <API_TOKEN>" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "to": ["user1@example.com", "user2@example.com"],
+    "cc": ["manager@company.com"],
+    "bcc": ["archive@company.com"],
+    "from": { "address": "orders@yourdomain.com", "name": "Orders" },
+    "reply_to": "support@yourdomain.com",
+    "subject": "Order Confirmation",
+    "html": "<h1>Your order is confirmed</h1>",
+    "text": "Your order is confirmed"
+  }'
+```
+
+With attachments:
+
+```bash
+curl "https://api.cloudflare.com/client/v4/accounts/{account_id}/email/sending/send" \
+  --header "Authorization: Bearer <API_TOKEN>" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "to": "customer@example.com",
+    "from": "invoices@yourdomain.com",
+    "subject": "Your Invoice",
+    "html": "<h1>Invoice attached</h1>",
+    "attachments": [
+      {
+        "content": "JVBERi0xLjQKJeLjz9MK...",
+        "filename": "invoice.pdf",
+        "type": "application/pdf",
+        "disposition": "attachment"
+      }
+    ]
+  }'
+```
+
+With inline images (embedded via `cid:` URI):
+
+```bash
+curl "https://api.cloudflare.com/client/v4/accounts/{account_id}/email/sending/send" \
+  --header "Authorization: Bearer <API_TOKEN>" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "to": "user@example.com",
+    "from": "newsletter@yourdomain.com",
+    "subject": "Check this out",
+    "html": "<h1>Hello!</h1><img src=\"cid:logo\">",
+    "attachments": [
+      {
+        "content": "iVBORw0KGgoAAAANSUhEUg...",
+        "filename": "logo.png",
+        "type": "image/png",
+        "disposition": "inline",
+        "content_id": "logo"
+      }
+    ]
+  }'
+```
+
+Attachment fields differ by type:
+- **Regular attachment**: `content` (base64), `filename`, `type` (MIME), `disposition: "attachment"`
+- **Inline image**: `content` (base64), `filename`, `type` (MIME), `disposition: "inline"`, `content_id` (referenced in HTML as `cid:<content_id>`)
+
+With custom headers:
+
+```bash
+curl "https://api.cloudflare.com/client/v4/accounts/{account_id}/email/sending/send" \
+  --header "Authorization: Bearer <API_TOKEN>" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "to": "user@example.com",
+    "from": "notifications@yourdomain.com",
+    "subject": "Your weekly digest",
+    "html": "<h1>Weekly Digest</h1>",
+    "headers": {
+      "List-Unsubscribe": "<https://yourdomain.com/unsubscribe?id=abc123>",
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+      "X-Campaign-ID": "weekly-digest-2026-03"
+    }
+  }'
+```
+
+See the [email headers reference](https://developers.cloudflare.com/email-service/reference/headers/) for the full list of allowed headers.
+
+## Response
+
+Success:
+
+```json
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "delivered": ["recipient@example.com"],
+    "permanent_bounces": [],
+    "queued": []
+  }
+}
+```
+
+Error (numeric codes, not `E_*` string codes like Workers):
+
+```json
+{
+  "success": false,
+  "errors": [{ "code": 1000, "message": "Sender domain not verified" }],
+  "result": null
+}
+```
+
+## Error Handling
+
+| Status | Meaning | Retry? |
+|--------|---------|--------|
+| 200 | Success | N/A |
+| 400 | Validation error | No — fix the request |
+| 401 | Invalid API token | No — check your token |
+| 429 | Rate limited | Yes — exponential backoff |
+| 500 | Server error | Yes — exponential backoff |
+
+Only retry on 429 and 500. Validation errors (400) won't succeed on retry.

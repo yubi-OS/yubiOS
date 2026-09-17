@@ -1,1 +1,194 @@
-IyMgT3JpZ2luIFR5cGVzCgojIyMgRGlyZWN0IElQIE9yaWdpbgoKVXNlIHdoZW4gb3JpZ2luIGlzIGEgc2luZ2xlIHNlcnZlciB3aXRoIHN0YXRpYyBJUC4KCioqVHlwZVNjcmlwdCBTREs6KioKYGBgdHlwZXNjcmlwdApjb25zdCBhcHAgPSBhd2FpdCBjbGllbnQuc3BlY3RydW0uYXBwcy5jcmVhdGUoewogIHpvbmVfaWQ6ICd5b3VyLXpvbmUtaWQnLAogIHByb3RvY29sOiAndGNwLzIyJywKICBkbnM6IHsgdHlwZTogJ0NOQU1FJywgbmFtZTogJ3NzaC5leGFtcGxlLmNvbScgfSwKICBvcmlnaW5fZGlyZWN0OiBbJ3RjcDovLzE5Mi4wLjIuMToyMiddLAogIGlwX2ZpcmV3YWxsOiB0cnVlLAogIHRsczogJ29mZicsCn0pOwpgYGAKCioqVGVycmFmb3JtOioqCmBgYGhjbApyZXNvdXJjZSAiY2xvdWRmbGFyZV9zcGVjdHJ1bV9hcHBsaWNhdGlvbiIgInNzaCIgewogIHpvbmVfaWQgID0gdmFyLnpvbmVfaWQKICBwcm90b2NvbCA9ICJ0Y3AvMjIiCgogIGRucyB7CiAgICB0eXBlID0gIkNOQU1FIgogICAgbmFtZSA9ICJzc2guZXhhbXBsZS5jb20iCiAgfQoKICBvcmlnaW5fZGlyZWN0ICAgICAgPSBbInRjcDovLzE5Mi4wLjIuMToyMiJdCiAgaXBfZmlyZXdhbGwgICAgICAgID0gdHJ1ZQogIHRscyAgICAgICAgICAgICAgICA9ICJvZmYiCiAgYXJnb19zbWFydF9yb3V0aW5nID0gdHJ1ZQp9CmBgYAoKIyMjIENOQU1FIE9yaWdpbgoKVXNlIHdoZW4gb3JpZ2luIGlzIGEgaG9zdG5hbWUgKG5vdCBzdGF0aWMgSVApLiBTcGVjdHJ1bSByZXNvbHZlcyBETlMgZHluYW1pY2FsbHkuCgoqKlR5cGVTY3JpcHQgU0RLOioqCmBgYHR5cGVzY3JpcHQKY29uc3QgYXBwID0gYXdhaXQgY2xpZW50LnNwZWN0cnVtLmFwcHMuY3JlYXRlKHsKICB6b25lX2lkOiAneW91ci16b25lLWlkJywKICBwcm90b2NvbDogJ3RjcC8zMzA2JywKICBkbnM6IHsgdHlwZTogJ0NOQU1FJywgbmFtZTogJ2RiLmV4YW1wbGUuY29tJyB9LAogIG9yaWdpbl9kbnM6IHsgbmFtZTogJ2RiLXByaW1hcnkuaW50ZXJuYWwuZXhhbXBsZS5jb20nIH0sCiAgb3JpZ2luX3BvcnQ6IDMzMDYsCiAgdGxzOiAnZnVsbCcsCn0pOwpgYGAKCioqVGVycmFmb3JtOioqCmBgYGhjbApyZXNvdXJjZSAiY2xvdWRmbGFyZV9zcGVjdHJ1bV9hcHBsaWNhdGlvbiIgImRhdGFiYXNlIiB7CiAgem9uZV9pZCAgPSB2YXIuem9uZV9pZAogIHByb3RvY29sID0gInRjcC8zMzA2IgoKICBkbnMgewogICAgdHlwZSA9ICJDTkFNRSIKICAgIG5hbWUgPSAiZGIuZXhhbXBsZS5jb20iCiAgfQoKICBvcmlnaW5fZG5zIHsKICAgIG5hbWUgPSAiZGItcHJpbWFyeS5pbnRlcm5hbC5leGFtcGxlLmNvbSIKICB9CgogIG9yaWdpbl9wb3J0ICAgICAgICA9IDMzMDYKICB0bHMgICAgICAgICAgICAgICAgPSAiZnVsbCIKICBhcmdvX3NtYXJ0X3JvdXRpbmcgPSB0cnVlCn0KYGBgCgojIyMgTG9hZCBCYWxhbmNlciBPcmlnaW4KClVzZSBmb3IgaGlnaCBhdmFpbGFiaWxpdHkgYW5kIGZhaWxvdmVyLgoKKipUZXJyYWZvcm06KioKYGBgaGNsCnJlc291cmNlICJjbG91ZGZsYXJlX2xvYWRfYmFsYW5jZXIiICJnYW1lX2xiIiB7CiAgem9uZV9pZCAgICAgICAgICA9IHZhci56b25lX2lkCiAgbmFtZSAgICAgICAgICAgICA9ICJnYW1lLWxiLmV4YW1wbGUuY29tIgogIGRlZmF1bHRfcG9vbF9pZHMgPSBbY2xvdWRmbGFyZV9sb2FkX2JhbGFuY2VyX3Bvb2wuZ2FtZV9wb29sLmlkXQp9CgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9sb2FkX2JhbGFuY2VyX3Bvb2wiICJnYW1lX3Bvb2wiIHsKICBuYW1lICAgID0gImdhbWUtcHJpbWFyeSIKICBvcmlnaW5zIHsgbmFtZSA9ICJnYW1lLTEiOyBhZGRyZXNzID0gIjE5Mi4wLjIuMSIgfQogIG1vbml0b3IgPSBjbG91ZGZsYXJlX2xvYWRfYmFsYW5jZXJfbW9uaXRvci50Y3BfbW9uaXRvci5pZAp9CgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9sb2FkX2JhbGFuY2VyX21vbml0b3IiICJ0Y3BfbW9uaXRvciIgewogIHR5cGUgPSAidGNwIjsgcG9ydCA9IDI1NTY1OyBpbnRlcnZhbCA9IDYwOyB0aW1lb3V0ID0gNQp9CgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9zcGVjdHJ1bV9hcHBsaWNhdGlvbiIgImdhbWUiIHsKICB6b25lX2lkICA9IHZhci56b25lX2lkCiAgcHJvdG9jb2wgPSAidGNwLzI1NTY1IgogIGRucyB7IHR5cGUgPSAiQ05BTUUiOyBuYW1lID0gImdhbWUuZXhhbXBsZS5jb20iIH0KICBvcmlnaW5fZG5zIHsgbmFtZSA9IGNsb3VkZmxhcmVfbG9hZF9iYWxhbmNlci5nYW1lX2xiLm5hbWUgfQogIG9yaWdpbl9wb3J0ID0gMjU1NjUKfQpgYGAKCiMjIFRMUyBDb25maWd1cmF0aW9uCgp8IE1vZGUgfCBEZXNjcmlwdGlvbiB8IFVzZSBDYXNlIHwgT3JpZ2luIENlcnQgfAp8LS0tLS0tfC0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tfAp8IGBvZmZgIHwgTm8gVExTIHwgTm9uLWVuY3J5cHRlZCAoU1NILCBnYW1pbmcpIHwgTm8gfAp8IGBmbGV4aWJsZWAgfCBUTFMgY2xpZW504oaSQ0YsIHBsYWluIENG4oaSb3JpZ2luIHwgVGVzdGluZyB8IE5vIHwKfCBgZnVsbGAgfCBUTFMgZW5kLXRvLWVuZCwgc2VsZi1zaWduZWQgT0sgfCBQcm9kdWN0aW9uIHwgWWVzIChhbnkpIHwKfCBgc3RyaWN0YCB8IEZ1bGwgKyB2YWxpZCBjZXJ0IHZlcmlmaWNhdGlvbiB8IE1heCBzZWN1cml0eSB8IFllcyAoQ0EpIHwKCioqRXhhbXBsZToqKgpgYGB0eXBlc2NyaXB0CmNvbnN0IGFwcCA9IGF3YWl0IGNsaWVudC5zcGVjdHJ1bS5hcHBzLmNyZWF0ZSh7CiAgem9uZV9pZDogJ3lvdXItem9uZS1pZCcsCiAgcHJvdG9jb2w6ICd0Y3AvMzMwNicsCiAgZG5zOiB7IHR5cGU6ICdDTkFNRScsIG5hbWU6ICdkYi5leGFtcGxlLmNvbScgfSwKICBvcmlnaW5fZGlyZWN0OiBbJ3RjcDovLzE5Mi4wLjIuMTozMzA2J10sCiAgdGxzOiAnc3RyaWN0JywgIC8vIFZhbGlkYXRlcyBvcmlnaW4gY2VydGlmaWNhdGUKfSk7CmBgYAoKIyMgUHJveHkgUHJvdG9jb2wKCkZvcndhcmRzIHJlYWwgY2xpZW50IElQIHRvIG9yaWdpbi4gT3JpZ2luIG11c3Qgc3VwcG9ydCBwYXJzaW5nLgoKfCBWZXJzaW9uIHwgUHJvdG9jb2wgfCBVc2UgQ2FzZSB8CnwtLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IGBvZmZgIHwgLSB8IE9yaWdpbiBkb2Vzbid0IG5lZWQgY2xpZW50IElQIHwKfCBgdjFgIHwgVENQIHwgTW9zdCBUQ1AgYXBwcyAoU1NILCBkYXRhYmFzZXMpIHwKfCBgdjJgIHwgVENQIHwgSGlnaC1wZXJmb3JtYW5jZSBUQ1AgfAp8IGBzaW1wbGVgIHwgVURQIHwgVURQIGFwcGxpY2F0aW9ucyB8CgoqKkNvbXBhdGliaWxpdHk6KioKLSAqKnYxKio6IEhBUHJveHksIG5naW54LCBTU0gsIG1vc3QgZGF0YWJhc2VzCi0gKip2MioqOiBIQVByb3h5IDEuNSssIG5naW54IDEuMTErCi0gKipzaW1wbGUqKjogQ2xvdWRmbGFyZS1zcGVjaWZpYyBVRFAgZm9ybWF0CgoqKkVuYWJsZToqKgpgYGB0eXBlc2NyaXB0CmNvbnN0IGFwcCA9IGF3YWl0IGNsaWVudC5zcGVjdHJ1bS5hcHBzLmNyZWF0ZSh7CiAgLy8gLi4uCiAgcHJveHlfcHJvdG9jb2w6ICd2MScsICAvLyBPcmlnaW4gbXVzdCBwYXJzZSBQUk9YWSBoZWFkZXIKfSk7CmBgYAoKKipPcmlnaW4gQ29uZmlnIChuZ2lueCk6KioKYGBgbmdpbngKc3RyZWFtIHsKICAgIHNlcnZlciB7CiAgICAgICAgbGlzdGVuIDIyIHByb3h5X3Byb3RvY29sOwogICAgICAgIHByb3h5X3Bhc3MgYmFja2VuZDoyMjsKICAgIH0KfQpgYGAKCiMjIElQIEFjY2VzcyBSdWxlcwoKRW5hYmxlIGBpcF9maXJld2FsbDogdHJ1ZWAgdGhlbiBjb25maWd1cmUgem9uZS1sZXZlbCBmaXJld2FsbCBydWxlcy4KCmBgYHR5cGVzY3JpcHQKY29uc3QgYXBwID0gYXdhaXQgY2xpZW50LnNwZWN0cnVtLmFwcHMuY3JlYXRlKHsKICAvLyAuLi4KICBpcF9maXJld2FsbDogdHJ1ZSwgIC8vIEFwcGxpZXMgem9uZSBmaXJld2FsbCBydWxlcwp9KTsKYGBgCgojIyBQb3J0IFJhbmdlcyAoRW50ZXJwcmlzZSBPbmx5KQoKYGBgaGNsCnJlc291cmNlICJjbG91ZGZsYXJlX3NwZWN0cnVtX2FwcGxpY2F0aW9uIiAiZ2FtZV9jbHVzdGVyIiB7CiAgem9uZV9pZCAgPSB2YXIuem9uZV9pZAogIHByb3RvY29sID0gInRjcC8yNTU2NS0yNTU3NSIKCiAgZG5zIHsKICAgIHR5cGUgPSAiQ05BTUUiCiAgICBuYW1lID0gImdhbWVzLmV4YW1wbGUuY29tIgogIH0KCiAgb3JpZ2luX2RpcmVjdCA9IFsidGNwOi8vMTkyLjAuMi4xIl0KICAKICBvcmlnaW5fcG9ydCB7CiAgICBzdGFydCA9IDI1NTY1CiAgICBlbmQgICA9IDI1NTc1CiAgfQp9CmBgYAoKIyMgU2VlIEFsc28KCi0gW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkgLSBQcm90b2NvbC1zcGVjaWZpYyBleGFtcGxlcwotIFthcGkubWRdKGFwaS5tZCkgLSBSRVNUL1NESyByZWZlcmVuY2UK
+## Origin Types
+
+### Direct IP Origin
+
+Use when origin is a single server with static IP.
+
+**TypeScript SDK:**
+```typescript
+const app = await client.spectrum.apps.create({
+  zone_id: 'your-zone-id',
+  protocol: 'tcp/22',
+  dns: { type: 'CNAME', name: 'ssh.example.com' },
+  origin_direct: ['tcp://192.0.2.1:22'],
+  ip_firewall: true,
+  tls: 'off',
+});
+```
+
+**Terraform:**
+```hcl
+resource "cloudflare_spectrum_application" "ssh" {
+  zone_id  = var.zone_id
+  protocol = "tcp/22"
+
+  dns {
+    type = "CNAME"
+    name = "ssh.example.com"
+  }
+
+  origin_direct      = ["tcp://192.0.2.1:22"]
+  ip_firewall        = true
+  tls                = "off"
+  argo_smart_routing = true
+}
+```
+
+### CNAME Origin
+
+Use when origin is a hostname (not static IP). Spectrum resolves DNS dynamically.
+
+**TypeScript SDK:**
+```typescript
+const app = await client.spectrum.apps.create({
+  zone_id: 'your-zone-id',
+  protocol: 'tcp/3306',
+  dns: { type: 'CNAME', name: 'db.example.com' },
+  origin_dns: { name: 'db-primary.internal.example.com' },
+  origin_port: 3306,
+  tls: 'full',
+});
+```
+
+**Terraform:**
+```hcl
+resource "cloudflare_spectrum_application" "database" {
+  zone_id  = var.zone_id
+  protocol = "tcp/3306"
+
+  dns {
+    type = "CNAME"
+    name = "db.example.com"
+  }
+
+  origin_dns {
+    name = "db-primary.internal.example.com"
+  }
+
+  origin_port        = 3306
+  tls                = "full"
+  argo_smart_routing = true
+}
+```
+
+### Load Balancer Origin
+
+Use for high availability and failover.
+
+**Terraform:**
+```hcl
+resource "cloudflare_load_balancer" "game_lb" {
+  zone_id          = var.zone_id
+  name             = "game-lb.example.com"
+  default_pool_ids = [cloudflare_load_balancer_pool.game_pool.id]
+}
+
+resource "cloudflare_load_balancer_pool" "game_pool" {
+  name    = "game-primary"
+  origins { name = "game-1"; address = "192.0.2.1" }
+  monitor = cloudflare_load_balancer_monitor.tcp_monitor.id
+}
+
+resource "cloudflare_load_balancer_monitor" "tcp_monitor" {
+  type = "tcp"; port = 25565; interval = 60; timeout = 5
+}
+
+resource "cloudflare_spectrum_application" "game" {
+  zone_id  = var.zone_id
+  protocol = "tcp/25565"
+  dns { type = "CNAME"; name = "game.example.com" }
+  origin_dns { name = cloudflare_load_balancer.game_lb.name }
+  origin_port = 25565
+}
+```
+
+## TLS Configuration
+
+| Mode | Description | Use Case | Origin Cert |
+|------|-------------|----------|-------------|
+| `off` | No TLS | Non-encrypted (SSH, gaming) | No |
+| `flexible` | TLS client→CF, plain CF→origin | Testing | No |
+| `full` | TLS end-to-end, self-signed OK | Production | Yes (any) |
+| `strict` | Full + valid cert verification | Max security | Yes (CA) |
+
+**Example:**
+```typescript
+const app = await client.spectrum.apps.create({
+  zone_id: 'your-zone-id',
+  protocol: 'tcp/3306',
+  dns: { type: 'CNAME', name: 'db.example.com' },
+  origin_direct: ['tcp://192.0.2.1:3306'],
+  tls: 'strict',  // Validates origin certificate
+});
+```
+
+## Proxy Protocol
+
+Forwards real client IP to origin. Origin must support parsing.
+
+| Version | Protocol | Use Case |
+|---------|----------|----------|
+| `off` | - | Origin doesn't need client IP |
+| `v1` | TCP | Most TCP apps (SSH, databases) |
+| `v2` | TCP | High-performance TCP |
+| `simple` | UDP | UDP applications |
+
+**Compatibility:**
+- **v1**: HAProxy, nginx, SSH, most databases
+- **v2**: HAProxy 1.5+, nginx 1.11+
+- **simple**: Cloudflare-specific UDP format
+
+**Enable:**
+```typescript
+const app = await client.spectrum.apps.create({
+  // ...
+  proxy_protocol: 'v1',  // Origin must parse PROXY header
+});
+```
+
+**Origin Config (nginx):**
+```nginx
+stream {
+    server {
+        listen 22 proxy_protocol;
+        proxy_pass backend:22;
+    }
+}
+```
+
+## IP Access Rules
+
+Enable `ip_firewall: true` then configure zone-level firewall rules.
+
+```typescript
+const app = await client.spectrum.apps.create({
+  // ...
+  ip_firewall: true,  // Applies zone firewall rules
+});
+```
+
+## Port Ranges (Enterprise Only)
+
+```hcl
+resource "cloudflare_spectrum_application" "game_cluster" {
+  zone_id  = var.zone_id
+  protocol = "tcp/25565-25575"
+
+  dns {
+    type = "CNAME"
+    name = "games.example.com"
+  }
+
+  origin_direct = ["tcp://192.0.2.1"]
+  
+  origin_port {
+    start = 25565
+    end   = 25575
+  }
+}
+```
+
+## See Also
+
+- [patterns.md](patterns.md) - Protocol-specific examples
+- [api.md](api.md) - REST/SDK reference

@@ -1,1 +1,158 @@
-IyBHb3RjaGFzICYgQmVzdCBQcmFjdGljZXMKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAic2V0U3RhdGUoKSBub3Qgc3luY2luZyIKCioqQ2F1c2U6KiogTXV0YXRpbmcgc3RhdGUgZGlyZWN0bHkgb3Igbm90IGNhbGxpbmcgYHNldFN0YXRlKClgIGFmdGVyIG1vZGlmaWNhdGlvbnMgIAoqKlNvbHV0aW9uOioqIEFsd2F5cyB1c2UgYHNldFN0YXRlKClgIHdpdGggaW1tdXRhYmxlIHVwZGF0ZXM6CmBgYHRzCi8vIOKdjCB0aGlzLnN0YXRlLmNvdW50KysKLy8g4pyFIHRoaXMuc2V0U3RhdGUoey4uLnRoaXMuc3RhdGUsIGNvdW50OiB0aGlzLnN0YXRlLmNvdW50ICsgMX0pCmBgYAoKIyMjICJNZXNzYWdlIGhpc3RvcnkgZ3Jvd3MgdW5ib3VuZGVkIChBSUNoYXRBZ2VudCkiCgoqKkNhdXNlOioqIGB0aGlzLm1lc3NhZ2VzYCBpbiBgQUlDaGF0QWdlbnRgIGFjY3VtdWxhdGVzIGFsbCBtZXNzYWdlcyBpbmRlZmluaXRlbHkgIAoqKlNvbHV0aW9uOioqIE1hbnVhbGx5IHRyaW0gb2xkIG1lc3NhZ2VzIHBlcmlvZGljYWxseToKYGBgdHMKZXhwb3J0IGNsYXNzIENoYXRBZ2VudCBleHRlbmRzIEFJQ2hhdEFnZW50PEVudj4gewogIGFzeW5jIG9uQ2hhdE1lc3NhZ2Uob25GaW5pc2gpIHsKICAgIC8vIEtlZXAgb25seSBsYXN0IDUwIG1lc3NhZ2VzCiAgICBpZiAodGhpcy5tZXNzYWdlcy5sZW5ndGggPiA1MCkgewogICAgICB0aGlzLm1lc3NhZ2VzID0gdGhpcy5tZXNzYWdlcy5zbGljZSgtNTApOwogICAgfQogICAgCiAgICByZXR1cm4gdGhpcy5zdHJlYW1UZXh0KHsgbW9kZWw6IG9wZW5haSgiZ3B0LTQiKSwgbWVzc2FnZXM6IHRoaXMubWVzc2FnZXMsIG9uRmluaXNoIH0pOwogIH0KfQpgYGAKCiMjIyAiU1FMIGluamVjdGlvbiB2dWxuZXJhYmlsaXR5IgoKKipDYXVzZToqKiBEaXJlY3Qgc3RyaW5nIGludGVycG9sYXRpb24gaW4gU1FMIHF1ZXJpZXMKKipTb2x1dGlvbjoqKiBVc2UgcGFyYW1ldGVyaXplZCBxdWVyaWVzOgpgYGB0cwovLyDinYwgdGhpcy5zcWxgLi4uV0hFUkUgaWQgPSAnJHt1c2VySWR9J2AKLy8g4pyFIHRoaXMuc3FsYC4uLldIRVJFIGlkID0gJHt1c2VySWR9YApgYGAKCiMjIyAiV2ViU29ja2V0IGNvbm5lY3Rpb24gdGltZW91dCIKCioqQ2F1c2U6KiogTm90IGNhbGxpbmcgYGNvbm4uYWNjZXB0KClgIGluIGBvbkNvbm5lY3RgCioqU29sdXRpb246KiogQWx3YXlzIGFjY2VwdCBjb25uZWN0aW9uczoKYGBgdHMKYXN5bmMgb25Db25uZWN0KGNvbm46IENvbm5lY3Rpb24sIGN0eDogQ29ubmVjdGlvbkNvbnRleHQpIHsgY29ubi5hY2NlcHQoKTsgY29ubi5zZXRTdGF0ZSh7dXNlcklkOiAiMTIzIn0pOyB9CmBgYAoKIyMjICJTY2hlZHVsZSBsaW1pdCBleGNlZWRlZCIKCioqQ2F1c2U6KiogTW9yZSB0aGFuIDEwMDAgc2NoZWR1bGVkIHRhc2tzIHBlciBhZ2VudAoqKlNvbHV0aW9uOioqIENsZWFuIHVwIG9sZCBzY2hlZHVsZXMgYW5kIGxpbWl0IGNyZWF0aW9uIHJhdGU6CmBgYHRzCmFzeW5jIGNoZWNrU2NoZWR1bGVzKCkgeyBpZiAoKGF3YWl0IHRoaXMuZ2V0U2NoZWR1bGVzKCkpLmxlbmd0aCA+IDgwMCkgY29uc29sZS53YXJuKCJOZWFyIGxpbWl0ISIpOyB9CmBgYAoKIyMjICJBSSBHYXRld2F5IHVuYXZhaWxhYmxlIgoKKipDYXVzZToqKiBBSSBzZXJ2aWNlIHRpbWVvdXQgb3IgcXVvdGEgZXhjZWVkZWQgIAoqKlNvbHV0aW9uOioqIEFkZCBlcnJvciBoYW5kbGluZyBhbmQgZmFsbGJhY2tzOgpgYGB0cwp0cnkgeyAKICByZXR1cm4gYXdhaXQgdGhpcy5lbnYuQUkucnVuKG1vZGVsLCB7cHJvbXB0fSk7IAp9IGNhdGNoIChlKSB7IAogIGNvbnNvbGUuZXJyb3IoIkFJIGVycm9yOiIsIGUpOwogIHJldHVybiB7ZXJyb3I6ICJVbmF2YWlsYWJsZSJ9OyAKfQpgYGAKCiMjIyAiQGNhbGxhYmxlIG1ldGhvZCByZXR1cm5zIHVuZGVmaW5lZCIKCioqQ2F1c2U6KiogTWV0aG9kIGRvZXNuJ3QgcmV0dXJuIEpTT04tc2VyaWFsaXphYmxlIHZhbHVlLCBvciBoYXMgbm9uLXNlcmlhbGl6YWJsZSB0eXBlcyAgCioqU29sdXRpb246KiogRW5zdXJlIHJldHVybiB2YWx1ZXMgYXJlIHBsYWluIG9iamVjdHMvYXJyYXlzL3ByaW1pdGl2ZXM6CmBgYHRzCi8vIOKdjCBSZXR1cm5zIGNsYXNzIGluc3RhbmNlCkBjYWxsYWJsZSgpCmFzeW5jIGdldERhdGEoKSB7IHJldHVybiBuZXcgRGF0ZSgpOyB9CgovLyDinIUgUmV0dXJucyBzZXJpYWxpemFibGUgb2JqZWN0CkBjYWxsYWJsZSgpCmFzeW5jIGdldERhdGEoKSB7IHJldHVybiB7IHRpbWVzdGFtcDogRGF0ZS5ub3coKSB9OyB9CmBgYAoKIyMjICJSZXN1bWFibGUgc3RyZWFtIG5vdCByZXN1bWluZyIKCioqQ2F1c2U6KiogU3RyZWFtIElEIG11c3QgYmUgZGV0ZXJtaW5pc3RpYyBmb3IgcmVzdW1wdGlvbiB0byB3b3JrICAKKipTb2x1dGlvbjoqKiBVc2UgQUlDaGF0QWdlbnQgKGF1dG9tYXRpYykgb3IgZW5zdXJlIGNvbnNpc3RlbnQgc3RyZWFtIElEczoKYGBgdHMKLy8gQUlDaGF0QWdlbnQgaGFuZGxlcyB0aGlzIGF1dG9tYXRpY2FsbHkKZXhwb3J0IGNsYXNzIENoYXRBZ2VudCBleHRlbmRzIEFJQ2hhdEFnZW50PEVudj4gewogIC8vIFJlc3VtcHRpb24gd29ya3Mgb3V0IG9mIHRoZSBib3gKfQpgYGAKCiMjIyAiTUNQIGNvbm5lY3Rpb24gbG9zcyBvbiBoaWJlcm5hdGlvbiIKCioqQ2F1c2U6KiogTUNQIHNlcnZlciBjb25uZWN0aW9ucyBkb24ndCBzdXJ2aXZlIGhpYmVybmF0aW9uICAKKipTb2x1dGlvbjoqKiBSZS1yZWdpc3RlciBzZXJ2ZXJzIGluIGBvblN0YXJ0KClgIG9yIGNoZWNrIGNvbm5lY3Rpb24gc3RhdHVzOgpgYGB0cwpvblN0YXJ0KCkgewogIC8vIFJlLXJlZ2lzdGVyIE1DUCBzZXJ2ZXJzIGFmdGVyIGhpYmVybmF0aW9uCiAgYXdhaXQgdGhpcy5tY3AucmVnaXN0ZXJTZXJ2ZXIoImdpdGh1YiIsIHsgdXJsOiBlbnYuTUNQX1VSTCwgYXV0aDogey4uLn0gfSk7Cn0KYGBgCgojIyMgIkFnZW50IG5vdCBmb3VuZCIKCioqQ2F1c2U6KiogRHVyYWJsZSBPYmplY3QgYmluZGluZyBtaXNzaW5nIG9yIGluY29ycmVjdCBjbGFzcyBuYW1lICAKKipTb2x1dGlvbjoqKiBWZXJpZnkgRE8gYmluZGluZyBpbiB3cmFuZ2xlci5qc29uYyBhbmQgY2xhc3MgbmFtZSBtYXRjaGVzCgojIyBSYXRlIExpbWl0cyAmIFF1b3RhcwoKfCBSZXNvdXJjZS9MaW1pdCB8IFZhbHVlIHwgTm90ZXMgfAp8LS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tfC0tLS0tLS18CnwgQ1BVIHBlciByZXF1ZXN0IHwgMzBzIChzdGQpLCAzMDBzIChtYXgpIHwgU2V0IGluIHdyYW5nbGVyLmpzb25jIHwKfCBNZW1vcnkgcGVyIGluc3RhbmNlIHwgMTI4TUIgfCBTaGFyZWQgd2l0aCBXZWJTb2NrZXRzIHwKfCBTdG9yYWdlIHBlciBhZ2VudCB8IDEwR0IgfCBTUUxpdGUgc3RvcmFnZSB8CnwgU2NoZWR1bGVkIHRhc2tzIHwgMTAwMCBwZXIgYWdlbnQgfCBNb25pdG9yIHdpdGggYGdldFNjaGVkdWxlcygpYCB8CnwgV2ViU29ja2V0IGNvbm5lY3Rpb25zIHwgVW5saW1pdGVkIHwgV2l0aGluIG1lbW9yeSBsaW1pdHMgfAp8IFNRTCBjb2x1bW5zIHwgMTAwIHwgUGVyIHRhYmxlIHwKfCBTUUwgcm93IHNpemUgfCAyTUIgfCBLZXkgKyB2YWx1ZSB8CnwgV2ViU29ja2V0IG1lc3NhZ2UgfCAzMk1pQiB8IE1heCBzaXplIHwKfCBETyByZXF1ZXN0cy9zZWMgfCB+MTAwMCB8IFBlciB1bmlxdWUgRE8gaW5zdGFuY2U7IHJhdGUgbGltaXQgaWYgbmVlZGVkIHwKfCBBSSBHYXRld2F5IChXb3JrZXJzIEFJKSB8IE1vZGVsLXNwZWNpZmljIHwgQ2hlY2sgZGFzaGJvYXJkIGZvciBsaW1pdHMgfAp8IE1DUCByZXF1ZXN0cyB8IERlcGVuZHMgb24gc2VydmVyIHwgSW1wbGVtZW50IHJldHJ5L2JhY2tvZmYgfAoKIyMgQmVzdCBQcmFjdGljZXMKCiMjIyBTdGF0ZSBNYW5hZ2VtZW50Ci0gVXNlIGltbXV0YWJsZSB1cGRhdGVzOiBgc2V0U3RhdGUoey4uLnRoaXMuc3RhdGUsIGtleTogbmV3VmFsdWV9KWAKLSBUcmltIHVuYm91bmRlZCBhcnJheXMgKG1lc3NhZ2VzLCBsb2dzKSBwZXJpb2RpY2FsbHkKLSBTdG9yZSBsYXJnZSBkYXRhIGluIFNRTCwgbm90IHN0YXRlCgojIyMgU1FMIFVzYWdlCi0gQ3JlYXRlIHRhYmxlcyBpbiBgb25TdGFydCgpYCwgbm90IGBvblJlcXVlc3QoKWAKLSBVc2UgcGFyYW1ldGVyaXplZCBxdWVyaWVzOiBgYCBzcWxgV0hFUkUgaWQgPSAke2lkfWAgYGAgKE5PVCBgYCBzcWxgV0hFUkUgaWQgPSAnJHtpZH0nYCBgYCkKLSBJbmRleCBmcmVxdWVudGx5IHF1ZXJpZWQgY29sdW1ucwoKIyMjIFNjaGVkdWxpbmcKLSBNb25pdG9yIHNjaGVkdWxlIGNvdW50OiBgYXdhaXQgdGhpcy5nZXRTY2hlZHVsZXMoKWAKLSBDYW5jZWwgY29tcGxldGVkIHRhc2tzIHRvIHN0YXkgdW5kZXIgMTAwMCBsaW1pdAotIFVzZSBjcm9uIHN0cmluZ3MgZm9yIHJlY3VycmluZyB0YXNrcwoKIyMjIFdlYlNvY2tldHMKLSBBbHdheXMgY2FsbCBgY29ubi5hY2NlcHQoKWAgaW4gYG9uQ29ubmVjdCgpYAotIEhhbmRsZSBjbGllbnQgZGlzY29ubmVjdHMgZ3JhY2VmdWxseQotIEJyb2FkY2FzdCB0byBgdGhpcy5jb25uZWN0aW9uc2AgZWZmaWNpZW50bHkKCiMjIyBBSSBJbnRlZ3JhdGlvbgotIFVzZSBgQUlDaGF0QWdlbnRgIGZvciBjaGF0IGludGVyZmFjZXMgKGF1dG8tc3RyZWFtaW5nLCByZXN1bXB0aW9uKQotIFRyaW0gbWVzc2FnZSBoaXN0b3J5IHRvIGF2b2lkIHRva2VuIGxpbWl0cwotIEhhbmRsZSBBSSBlcnJvcnMgd2l0aCB0cnkvY2F0Y2ggYW5kIGZhbGxiYWNrcwoKIyMjIFByb2R1Y3Rpb24gRGVwbG95bWVudAotICoqUmF0ZSBsaW1pdGluZzoqKiBJbXBsZW1lbnQgcmVxdWVzdCB0aHJvdHRsaW5nIGZvciBoaWdoLXRyYWZmaWMgYWdlbnRzICg+MTAwMCByZXEvcykKLSAqKk1vbml0b3Jpbmc6KiogTG9nIGNyaXRpY2FsIGVycm9ycywgdHJhY2sgc2NoZWR1bGUgY291bnQsIG1vbml0b3Igc3RvcmFnZSB1c2FnZQotICoqR3JhY2VmdWwgZGVncmFkYXRpb246KiogSGFuZGxlIEFJIHNlcnZpY2Ugb3V0YWdlcyB3aXRoIGZhbGxiYWNrcwotICoqTWVzc2FnZSB0cmltbWluZzoqKiBFbmZvcmNlIG1heCBoaXN0b3J5IGxlbmd0aCAoZS5nLiwgMTAwIG1lc3NhZ2VzKSBpbiBBSUNoYXRBZ2VudAotICoqTUNQIHJlbGlhYmlsaXR5OioqIFJlLXJlZ2lzdGVyIHNlcnZlcnMgb24gaGliZXJuYXRpb24sIGltcGxlbWVudCByZXRyeSBsb2dpYwo=
+# Gotchas & Best Practices
+
+## Common Errors
+
+### "setState() not syncing"
+
+**Cause:** Mutating state directly or not calling `setState()` after modifications  
+**Solution:** Always use `setState()` with immutable updates:
+```ts
+// ❌ this.state.count++
+// ✅ this.setState({...this.state, count: this.state.count + 1})
+```
+
+### "Message history grows unbounded (AIChatAgent)"
+
+**Cause:** `this.messages` in `AIChatAgent` accumulates all messages indefinitely  
+**Solution:** Manually trim old messages periodically:
+```ts
+export class ChatAgent extends AIChatAgent<Env> {
+  async onChatMessage(onFinish) {
+    // Keep only last 50 messages
+    if (this.messages.length > 50) {
+      this.messages = this.messages.slice(-50);
+    }
+    
+    return this.streamText({ model: openai("gpt-4"), messages: this.messages, onFinish });
+  }
+}
+```
+
+### "SQL injection vulnerability"
+
+**Cause:** Direct string interpolation in SQL queries
+**Solution:** Use parameterized queries:
+```ts
+// ❌ this.sql`...WHERE id = '${userId}'`
+// ✅ this.sql`...WHERE id = ${userId}`
+```
+
+### "WebSocket connection timeout"
+
+**Cause:** Not calling `conn.accept()` in `onConnect`
+**Solution:** Always accept connections:
+```ts
+async onConnect(conn: Connection, ctx: ConnectionContext) { conn.accept(); conn.setState({userId: "123"}); }
+```
+
+### "Schedule limit exceeded"
+
+**Cause:** More than 1000 scheduled tasks per agent
+**Solution:** Clean up old schedules and limit creation rate:
+```ts
+async checkSchedules() { if ((await this.getSchedules()).length > 800) console.warn("Near limit!"); }
+```
+
+### "AI Gateway unavailable"
+
+**Cause:** AI service timeout or quota exceeded  
+**Solution:** Add error handling and fallbacks:
+```ts
+try { 
+  return await this.env.AI.run(model, {prompt}); 
+} catch (e) { 
+  console.error("AI error:", e);
+  return {error: "Unavailable"}; 
+}
+```
+
+### "@callable method returns undefined"
+
+**Cause:** Method doesn't return JSON-serializable value, or has non-serializable types  
+**Solution:** Ensure return values are plain objects/arrays/primitives:
+```ts
+// ❌ Returns class instance
+@callable()
+async getData() { return new Date(); }
+
+// ✅ Returns serializable object
+@callable()
+async getData() { return { timestamp: Date.now() }; }
+```
+
+### "Resumable stream not resuming"
+
+**Cause:** Stream ID must be deterministic for resumption to work  
+**Solution:** Use AIChatAgent (automatic) or ensure consistent stream IDs:
+```ts
+// AIChatAgent handles this automatically
+export class ChatAgent extends AIChatAgent<Env> {
+  // Resumption works out of the box
+}
+```
+
+### "MCP connection loss on hibernation"
+
+**Cause:** MCP server connections don't survive hibernation  
+**Solution:** Re-register servers in `onStart()` or check connection status:
+```ts
+onStart() {
+  // Re-register MCP servers after hibernation
+  await this.mcp.registerServer("github", { url: env.MCP_URL, auth: {...} });
+}
+```
+
+### "Agent not found"
+
+**Cause:** Durable Object binding missing or incorrect class name  
+**Solution:** Verify DO binding in wrangler.jsonc and class name matches
+
+## Rate Limits & Quotas
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| CPU per request | 30s (std), 300s (max) | Set in wrangler.jsonc |
+| Memory per instance | 128MB | Shared with WebSockets |
+| Storage per agent | 10GB | SQLite storage |
+| Scheduled tasks | 1000 per agent | Monitor with `getSchedules()` |
+| WebSocket connections | Unlimited | Within memory limits |
+| SQL columns | 100 | Per table |
+| SQL row size | 2MB | Key + value |
+| WebSocket message | 32MiB | Max size |
+| DO requests/sec | ~1000 | Per unique DO instance; rate limit if needed |
+| AI Gateway (Workers AI) | Model-specific | Check dashboard for limits |
+| MCP requests | Depends on server | Implement retry/backoff |
+
+## Best Practices
+
+### State Management
+- Use immutable updates: `setState({...this.state, key: newValue})`
+- Trim unbounded arrays (messages, logs) periodically
+- Store large data in SQL, not state
+
+### SQL Usage
+- Create tables in `onStart()`, not `onRequest()`
+- Use parameterized queries: `` sql`WHERE id = ${id}` `` (NOT `` sql`WHERE id = '${id}'` ``)
+- Index frequently queried columns
+
+### Scheduling
+- Monitor schedule count: `await this.getSchedules()`
+- Cancel completed tasks to stay under 1000 limit
+- Use cron strings for recurring tasks
+
+### WebSockets
+- Always call `conn.accept()` in `onConnect()`
+- Handle client disconnects gracefully
+- Broadcast to `this.connections` efficiently
+
+### AI Integration
+- Use `AIChatAgent` for chat interfaces (auto-streaming, resumption)
+- Trim message history to avoid token limits
+- Handle AI errors with try/catch and fallbacks
+
+### Production Deployment
+- **Rate limiting:** Implement request throttling for high-traffic agents (>1000 req/s)
+- **Monitoring:** Log critical errors, track schedule count, monitor storage usage
+- **Graceful degradation:** Handle AI service outages with fallbacks
+- **Message trimming:** Enforce max history length (e.g., 100 messages) in AIChatAgent
+- **MCP reliability:** Re-register servers on hibernation, implement retry logic

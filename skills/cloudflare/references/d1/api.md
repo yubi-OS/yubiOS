@@ -1,1 +1,196 @@
-IyBEMSBBUEkgUmVmZXJlbmNlCgojIyBQcmVwYXJlZCBTdGF0ZW1lbnRzIChSZXF1aXJlZCBmb3IgU2VjdXJpdHkpCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBORVZFUjogRGlyZWN0IHN0cmluZyBpbnRlcnBvbGF0aW9uIChTUUwgaW5qZWN0aW9uIHJpc2spCmNvbnN0IHJlc3VsdCA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKGBTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gJHt1c2VySWR9YCkuYWxsKCk7CgovLyDinIUgQ09SUkVDVDogUHJlcGFyZWQgc3RhdGVtZW50cyB3aXRoIGJpbmQoKQpjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuYWxsKCk7CgovLyBNdWx0aXBsZSBwYXJhbWV0ZXJzCmNvbnN0IHJlc3VsdCA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGVtYWlsID0gPyBBTkQgYWN0aXZlID0gPycpLmJpbmQoZW1haWwsIHRydWUpLmFsbCgpOwpgYGAKCiMjIFF1ZXJ5IEV4ZWN1dGlvbiBNZXRob2RzCgpgYGB0eXBlc2NyaXB0Ci8vIC5hbGwoKSAtIFJldHVybnMgYWxsIHJvd3MKY29uc3QgeyByZXN1bHRzLCBzdWNjZXNzLCBtZXRhIH0gPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBhY3RpdmUgPSA/JykuYmluZCh0cnVlKS5hbGwoKTsKLy8gcmVzdWx0czogQXJyYXkgb2Ygcm93IG9iamVjdHM7IHN1Y2Nlc3M6IGJvb2xlYW4KLy8gbWV0YTogeyBkdXJhdGlvbjogbnVtYmVyLCByb3dzX3JlYWQ6IG51bWJlciwgcm93c193cml0dGVuOiBudW1iZXIgfQoKLy8gLmZpcnN0KCkgLSBSZXR1cm5zIGZpcnN0IHJvdyBvciBudWxsCmNvbnN0IHVzZXIgPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuZmlyc3QoKTsKCi8vIC5maXJzdChjb2x1bW5OYW1lKSAtIFJldHVybnMgc2luZ2xlIGNvbHVtbiB2YWx1ZQpjb25zdCBlbWFpbCA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgZW1haWwgRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuZmlyc3QoJ2VtYWlsJyk7Ci8vIFJldHVybnMgc3RyaW5nIHwgbnVtYmVyIHwgbnVsbAoKLy8gLnJ1bigpIC0gRm9yIElOU0VSVC9VUERBVEUvREVMRVRFIChubyByb3cgZGF0YSByZXR1cm5lZCkKY29uc3QgcmVzdWx0ID0gYXdhaXQgZW52LkRCLnByZXBhcmUoJ1VQREFURSB1c2VycyBTRVQgbGFzdF9sb2dpbiA9ID8gV0hFUkUgaWQgPSA/JykuYmluZChEYXRlLm5vdygpLCB1c2VySWQpLnJ1bigpOwovLyByZXN1bHQubWV0YTogeyBkdXJhdGlvbiwgcm93c19yZWFkLCByb3dzX3dyaXR0ZW4sIGxhc3Rfcm93X2lkLCBjaGFuZ2VzIH0KCi8vIC5yYXcoKSAtIFJldHVybnMgYXJyYXkgb2YgYXJyYXlzIChlZmZpY2llbnQgZm9yIGxhcmdlIGRhdGFzZXRzKQpjb25zdCByYXdSZXN1bHRzID0gYXdhaXQgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCBpZCwgbmFtZSBGUk9NIHVzZXJzJykucmF3KCk7Ci8vIFtbMSwgJ0FsaWNlJ10sIFsyLCAnQm9iJ11dCmBgYAoKIyMgQmF0Y2ggT3BlcmF0aW9ucwoKYGBgdHlwZXNjcmlwdAovLyBFeGVjdXRlIG11bHRpcGxlIHF1ZXJpZXMgaW4gc2luZ2xlIHJvdW5kIHRyaXAgKGF0b21pYyB0cmFuc2FjdGlvbikKY29uc3QgcmVzdWx0cyA9IGF3YWl0IGVudi5EQi5iYXRjaChbCiAgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgaWQgPSA/JykuYmluZCgxKSwKICBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSBwb3N0cyBXSEVSRSBhdXRob3JfaWQgPSA/JykuYmluZCgxKSwKICBlbnYuREIucHJlcGFyZSgnVVBEQVRFIHVzZXJzIFNFVCBsYXN0X2FjY2VzcyA9ID8gV0hFUkUgaWQgPSA/JykuYmluZChEYXRlLm5vdygpLCAxKQpdKTsKLy8gcmVzdWx0cyBpcyBhcnJheTogW3Jlc3VsdDEsIHJlc3VsdDIsIHJlc3VsdDNdCgovLyBCYXRjaCB3aXRoIHNhbWUgcHJlcGFyZWQgc3RhdGVtZW50LCBkaWZmZXJlbnQgcGFyYW1zCmNvbnN0IHVzZXJJZHMgPSBbMSwgMiwgM107CmNvbnN0IHN0bXQgPSBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKTsKY29uc3QgcmVzdWx0cyA9IGF3YWl0IGVudi5EQi5iYXRjaCh1c2VySWRzLm1hcChpZCA9PiBzdG10LmJpbmQoaWQpKSk7CmBgYAoKIyMgVHJhbnNhY3Rpb25zICh2aWEgYmF0Y2gpCgpgYGB0eXBlc2NyaXB0Ci8vIEQxIGV4ZWN1dGVzIGJhdGNoKCkgYXMgYXRvbWljIHRyYW5zYWN0aW9uIC0gYWxsIHN1Y2NlZWQgb3IgYWxsIGZhaWwKY29uc3QgcmVzdWx0cyA9IGF3YWl0IGVudi5EQi5iYXRjaChbCiAgZW52LkRCLnByZXBhcmUoJ0lOU0VSVCBJTlRPIGFjY291bnRzIChpZCwgYmFsYW5jZSkgVkFMVUVTICg/LCA/KScpLmJpbmQoMSwgMTAwKSwKICBlbnYuREIucHJlcGFyZSgnSU5TRVJUIElOVE8gYWNjb3VudHMgKGlkLCBiYWxhbmNlKSBWQUxVRVMgKD8sID8pJykuYmluZCgyLCAyMDApLAogIGVudi5EQi5wcmVwYXJlKCdVUERBVEUgYWNjb3VudHMgU0VUIGJhbGFuY2UgPSBiYWxhbmNlIC0gPyBXSEVSRSBpZCA9ID8nKS5iaW5kKDUwLCAxKSwKICBlbnYuREIucHJlcGFyZSgnVVBEQVRFIGFjY291bnRzIFNFVCBiYWxhbmNlID0gYmFsYW5jZSArID8gV0hFUkUgaWQgPSA/JykuYmluZCg1MCwgMikKXSk7CmBgYAoKIyMgU2Vzc2lvbnMgQVBJIChQYWlkIFBsYW5zKQoKTG9uZy1ydW5uaW5nIHNlc3Npb25zIGZvciBvcGVyYXRpb25zIGV4Y2VlZGluZyAzMHMgdGltZW91dCAodXAgdG8gMTUgbWluKS4KCmBgYHR5cGVzY3JpcHQKY29uc3Qgc2Vzc2lvbiA9IGVudi5EQi53aXRoU2Vzc2lvbih7IHRpbWVvdXQ6IDYwMCB9KTsgLy8gMTAgbWluICgxLTkwMHMpCnRyeSB7CiAgYXdhaXQgc2Vzc2lvbi5wcmVwYXJlKCdDUkVBVEUgSU5ERVggaWR4X2xhcmdlIE9OIGJpZ190YWJsZShjb2x1bW4pJykucnVuKCk7CiAgYXdhaXQgc2Vzc2lvbi5wcmVwYXJlKCdBTkFMWVpFJykucnVuKCk7Cn0gZmluYWxseSB7CiAgc2Vzc2lvbi5jbG9zZSgpOyAvLyBDUklUSUNBTDogYWx3YXlzIGNsb3NlIHRvIHByZXZlbnQgbGVha3MKfQpgYGAKCioqVXNlIGNhc2VzKio6IE1pZ3JhdGlvbnMsIEFOQUxZWkUsIGxhcmdlIGluZGV4IGNyZWF0aW9uLCBidWxrIHRyYW5zZm9ybWF0aW9ucwoKIyMgUmVhZCBSZXBsaWNhdGlvbiAoUGFpZCBQbGFucykKClJvdXRlcyBxdWVyaWVzIHRvIG5lYXJlc3QgcmVwbGljYSBmb3IgbG93ZXIgbGF0ZW5jeS4gV3JpdGVzIGFsd2F5cyBnbyB0byBwcmltYXJ5LgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBEQjogRDFEYXRhYmFzZTsgICAgICAgICAgLy8gUHJpbWFyeSAod3JpdGVzKQogIERCX1JFUExJQ0E6IEQxRGF0YWJhc2U7ICAvLyBSZXBsaWNhIChyZWFkcykKfQoKLy8gUmVhZHM6IHVzZSByZXBsaWNhCmNvbnN0IHVzZXIgPSBhd2FpdCBlbnYuREJfUkVQTElDQS5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gPycpLmJpbmQodXNlcklkKS5maXJzdCgpOwoKLy8gV3JpdGVzOiB1c2UgcHJpbWFyeQphd2FpdCBlbnYuREIucHJlcGFyZSgnVVBEQVRFIHVzZXJzIFNFVCBsYXN0X2xvZ2luID0gPyBXSEVSRSBpZCA9ID8nKS5iaW5kKERhdGUubm93KCksIHVzZXJJZCkucnVuKCk7CgovLyBSZWFkLWFmdGVyLXdyaXRlOiB1c2UgcHJpbWFyeSBmb3IgY29uc2lzdGVuY3kgKHJlcGxpY2F0aW9uIGxhZyA8MTAwbXMtMnMpCmF3YWl0IGVudi5EQi5wcmVwYXJlKCdJTlNFUlQgSU5UTyBwb3N0cyAodGl0bGUpIFZBTFVFUyAoPyknKS5iaW5kKHRpdGxlKS5ydW4oKTsKY29uc3QgcG9zdCA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHBvc3RzIFdIRVJFIHRpdGxlID0gPycpLmJpbmQodGl0bGUpLmZpcnN0KCk7IC8vIFByaW1hcnkKYGBgCgojIyBFcnJvciBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdAphc3luYyBmdW5jdGlvbiBnZXRVc2VyKHVzZXJJZDogbnVtYmVyLCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICB0cnkgewogICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgaWQgPSA/JykuYmluZCh1c2VySWQpLmFsbCgpOwogICAgaWYgKCFyZXN1bHQuc3VjY2VzcykgcmV0dXJuIG5ldyBSZXNwb25zZSgnRGF0YWJhc2UgZXJyb3InLCB7IHN0YXR1czogNTAwIH0pOwogICAgaWYgKHJlc3VsdC5yZXN1bHRzLmxlbmd0aCA9PT0gMCkgcmV0dXJuIG5ldyBSZXNwb25zZSgnVXNlciBub3QgZm91bmQnLCB7IHN0YXR1czogNDA0IH0pOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24ocmVzdWx0LnJlc3VsdHNbMF0pOwogIH0gY2F0Y2ggKGVycm9yKSB7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCdJbnRlcm5hbCBlcnJvcicsIHsgc3RhdHVzOiA1MDAgfSk7CiAgfQp9CgovLyBDb25zdHJhaW50IHZpb2xhdGlvbnMKdHJ5IHsKICBhd2FpdCBlbnYuREIucHJlcGFyZSgnSU5TRVJUIElOVE8gdXNlcnMgKGVtYWlsLCBuYW1lKSBWQUxVRVMgKD8sID8pJykuYmluZChlbWFpbCwgbmFtZSkucnVuKCk7Cn0gY2F0Y2ggKGVycm9yKSB7CiAgaWYgKGVycm9yLm1lc3NhZ2U/LmluY2x1ZGVzKCdVTklRVUUgY29uc3RyYWludCBmYWlsZWQnKSkgcmV0dXJuIG5ldyBSZXNwb25zZSgnRW1haWwgZXhpc3RzJywgeyBzdGF0dXM6IDQwOSB9KTsKICB0aHJvdyBlcnJvcjsKfQpgYGAKCiMjIFJFU1QgQVBJIChIVFRQKSBBY2Nlc3MKCkFjY2VzcyBEMSBmcm9tIGV4dGVybmFsIHNlcnZpY2VzIChub24tV29ya2VyIGNvbnRleHRzKSB1c2luZyBDbG91ZGZsYXJlIEFQSS4KCmBgYHR5cGVzY3JpcHQKLy8gU2luZ2xlIHF1ZXJ5CmNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goCiAgYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8ke0FDQ09VTlRfSUR9L2QxL2RhdGFiYXNlLyR7REFUQUJBU0VfSUR9L3F1ZXJ5YCwKICB7CiAgICBtZXRob2Q6ICdQT1NUJywKICAgIGhlYWRlcnM6IHsKICAgICAgJ0F1dGhvcml6YXRpb24nOiBgQmVhcmVyICR7Q0xPVURGTEFSRV9BUElfVE9LRU59YCwKICAgICAgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJwogICAgfSwKICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsKICAgICAgc3FsOiAnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nLAogICAgICBwYXJhbXM6IFt1c2VySWRdCiAgICB9KQogIH0KKTsKCmNvbnN0IHsgcmVzdWx0LCBzdWNjZXNzLCBlcnJvcnMgfSA9IGF3YWl0IHJlc3BvbnNlLmpzb24oKTsKLy8gcmVzdWx0OiBbeyByZXN1bHRzOiBbLi4uXSwgc3VjY2VzczogdHJ1ZSwgbWV0YTogey4uLn0gfV0KCi8vIEJhdGNoIHF1ZXJpZXMgdmlhIEhUVFAKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaCgKICBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyR7QUNDT1VOVF9JRH0vZDEvZGF0YWJhc2UvJHtEQVRBQkFTRV9JRH0vcXVlcnlgLAogIHsKICAgIG1ldGhvZDogJ1BPU1QnLAogICAgaGVhZGVyczogewogICAgICAnQXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHtDTE9VREZMQVJFX0FQSV9UT0tFTn1gLAogICAgICAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nCiAgICB9LAogICAgYm9keTogSlNPTi5zdHJpbmdpZnkoWwogICAgICB7IHNxbDogJ1NFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgaWQgPSA/JywgcGFyYW1zOiBbMV0gfSwKICAgICAgeyBzcWw6ICdTRUxFQ1QgKiBGUk9NIHBvc3RzIFdIRVJFIGF1dGhvcl9pZCA9ID8nLCBwYXJhbXM6IFsxXSB9CiAgICBdKQogIH0KKTsKYGBgCgoqKlVzZSBjYXNlcyoqOiBTZXJ2ZXItc2lkZSBzY3JpcHRzLCBDSS9DRCBtaWdyYXRpb25zLCBhZG1pbmlzdHJhdGl2ZSB0b29scywgbm9uLVdvcmtlciBpbnRlZ3JhdGlvbnMKCiMjIFRlc3RpbmcgJiBEZWJ1Z2dpbmcKCmBgYHR5cGVzY3JpcHQKLy8gVml0ZXN0IHdpdGggdW5zdGFibGVfZGV2CmltcG9ydCB7IHVuc3RhYmxlX2RldiB9IGZyb20gJ3dyYW5nbGVyJzsKZGVzY3JpYmUoJ0QxJywgKCkgPT4gewogIGxldCB3b3JrZXI6IEF3YWl0ZWQ8UmV0dXJuVHlwZTx0eXBlb2YgdW5zdGFibGVfZGV2Pj47CiAgYmVmb3JlQWxsKGFzeW5jICgpID0+IHsgd29ya2VyID0gYXdhaXQgdW5zdGFibGVfZGV2KCdzcmMvaW5kZXgudHMnKTsgfSk7CiAgYWZ0ZXJBbGwoYXN5bmMgKCkgPT4geyBhd2FpdCB3b3JrZXIuc3RvcCgpOyB9KTsKICBpdCgncXVlcmllcyB1c2VycycsIGFzeW5jICgpID0+IHsgZXhwZWN0KChhd2FpdCB3b3JrZXIuZmV0Y2goJy91c2VycycpKS5zdGF0dXMpLnRvQmUoMjAwKTsgfSk7Cn0pOwoKLy8gRGVidWcgcXVlcnkgcGVyZm9ybWFuY2UKY29uc3QgcmVzdWx0ID0gYXdhaXQgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gdXNlcnMnKS5hbGwoKTsKY29uc29sZS5sb2coJ0R1cmF0aW9uOicsIHJlc3VsdC5tZXRhLmR1cmF0aW9uLCAnbXMnKTsKCi8vIFF1ZXJ5IHBsYW4gYW5hbHlzaXMKY29uc3QgcGxhbiA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdFWFBMQUlOIFFVRVJZIFBMQU4gU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBlbWFpbCA9ID8nKS5iaW5kKGVtYWlsKS5hbGwoKTsKYGBgCgpgYGBiYXNoCiMgSW5zcGVjdCBsb2NhbCBkYXRhYmFzZQpzcWxpdGUzIC53cmFuZ2xlci9zdGF0ZS92My9kMS88ZGF0YWJhc2UtaWQ+LnNxbGl0ZQoudGFibGVzOyAuc2NoZW1hIHVzZXJzOyBQUkFHTUEgdGFibGVfaW5mbyh1c2Vycyk7CmBgYAo=
+# D1 API Reference
+
+## Prepared Statements (Required for Security)
+
+```typescript
+// ❌ NEVER: Direct string interpolation (SQL injection risk)
+const result = await env.DB.prepare(`SELECT * FROM users WHERE id = ${userId}`).all();
+
+// ✅ CORRECT: Prepared statements with bind()
+const result = await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).all();
+
+// Multiple parameters
+const result = await env.DB.prepare('SELECT * FROM users WHERE email = ? AND active = ?').bind(email, true).all();
+```
+
+## Query Execution Methods
+
+```typescript
+// .all() - Returns all rows
+const { results, success, meta } = await env.DB.prepare('SELECT * FROM users WHERE active = ?').bind(true).all();
+// results: Array of row objects; success: boolean
+// meta: { duration: number, rows_read: number, rows_written: number }
+
+// .first() - Returns first row or null
+const user = await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first();
+
+// .first(columnName) - Returns single column value
+const email = await env.DB.prepare('SELECT email FROM users WHERE id = ?').bind(userId).first('email');
+// Returns string | number | null
+
+// .run() - For INSERT/UPDATE/DELETE (no row data returned)
+const result = await env.DB.prepare('UPDATE users SET last_login = ? WHERE id = ?').bind(Date.now(), userId).run();
+// result.meta: { duration, rows_read, rows_written, last_row_id, changes }
+
+// .raw() - Returns array of arrays (efficient for large datasets)
+const rawResults = await env.DB.prepare('SELECT id, name FROM users').raw();
+// [[1, 'Alice'], [2, 'Bob']]
+```
+
+## Batch Operations
+
+```typescript
+// Execute multiple queries in single round trip (atomic transaction)
+const results = await env.DB.batch([
+  env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(1),
+  env.DB.prepare('SELECT * FROM posts WHERE author_id = ?').bind(1),
+  env.DB.prepare('UPDATE users SET last_access = ? WHERE id = ?').bind(Date.now(), 1)
+]);
+// results is array: [result1, result2, result3]
+
+// Batch with same prepared statement, different params
+const userIds = [1, 2, 3];
+const stmt = env.DB.prepare('SELECT * FROM users WHERE id = ?');
+const results = await env.DB.batch(userIds.map(id => stmt.bind(id)));
+```
+
+## Transactions (via batch)
+
+```typescript
+// D1 executes batch() as atomic transaction - all succeed or all fail
+const results = await env.DB.batch([
+  env.DB.prepare('INSERT INTO accounts (id, balance) VALUES (?, ?)').bind(1, 100),
+  env.DB.prepare('INSERT INTO accounts (id, balance) VALUES (?, ?)').bind(2, 200),
+  env.DB.prepare('UPDATE accounts SET balance = balance - ? WHERE id = ?').bind(50, 1),
+  env.DB.prepare('UPDATE accounts SET balance = balance + ? WHERE id = ?').bind(50, 2)
+]);
+```
+
+## Sessions API (Paid Plans)
+
+Long-running sessions for operations exceeding 30s timeout (up to 15 min).
+
+```typescript
+const session = env.DB.withSession({ timeout: 600 }); // 10 min (1-900s)
+try {
+  await session.prepare('CREATE INDEX idx_large ON big_table(column)').run();
+  await session.prepare('ANALYZE').run();
+} finally {
+  session.close(); // CRITICAL: always close to prevent leaks
+}
+```
+
+**Use cases**: Migrations, ANALYZE, large index creation, bulk transformations
+
+## Read Replication (Paid Plans)
+
+Routes queries to nearest replica for lower latency. Writes always go to primary.
+
+```typescript
+interface Env {
+  DB: D1Database;          // Primary (writes)
+  DB_REPLICA: D1Database;  // Replica (reads)
+}
+
+// Reads: use replica
+const user = await env.DB_REPLICA.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first();
+
+// Writes: use primary
+await env.DB.prepare('UPDATE users SET last_login = ? WHERE id = ?').bind(Date.now(), userId).run();
+
+// Read-after-write: use primary for consistency (replication lag <100ms-2s)
+await env.DB.prepare('INSERT INTO posts (title) VALUES (?)').bind(title).run();
+const post = await env.DB.prepare('SELECT * FROM posts WHERE title = ?').bind(title).first(); // Primary
+```
+
+## Error Handling
+
+```typescript
+async function getUser(userId: number, env: Env): Promise<Response> {
+  try {
+    const result = await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).all();
+    if (!result.success) return new Response('Database error', { status: 500 });
+    if (result.results.length === 0) return new Response('User not found', { status: 404 });
+    return Response.json(result.results[0]);
+  } catch (error) {
+    return new Response('Internal error', { status: 500 });
+  }
+}
+
+// Constraint violations
+try {
+  await env.DB.prepare('INSERT INTO users (email, name) VALUES (?, ?)').bind(email, name).run();
+} catch (error) {
+  if (error.message?.includes('UNIQUE constraint failed')) return new Response('Email exists', { status: 409 });
+  throw error;
+}
+```
+
+## REST API (HTTP) Access
+
+Access D1 from external services (non-Worker contexts) using Cloudflare API.
+
+```typescript
+// Single query
+const response = await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/d1/database/${DATABASE_ID}/query`,
+  {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sql: 'SELECT * FROM users WHERE id = ?',
+      params: [userId]
+    })
+  }
+);
+
+const { result, success, errors } = await response.json();
+// result: [{ results: [...], success: true, meta: {...} }]
+
+// Batch queries via HTTP
+const response = await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/d1/database/${DATABASE_ID}/query`,
+  {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify([
+      { sql: 'SELECT * FROM users WHERE id = ?', params: [1] },
+      { sql: 'SELECT * FROM posts WHERE author_id = ?', params: [1] }
+    ])
+  }
+);
+```
+
+**Use cases**: Server-side scripts, CI/CD migrations, administrative tools, non-Worker integrations
+
+## Testing & Debugging
+
+```typescript
+// Vitest with unstable_dev
+import { unstable_dev } from 'wrangler';
+describe('D1', () => {
+  let worker: Awaited<ReturnType<typeof unstable_dev>>;
+  beforeAll(async () => { worker = await unstable_dev('src/index.ts'); });
+  afterAll(async () => { await worker.stop(); });
+  it('queries users', async () => { expect((await worker.fetch('/users')).status).toBe(200); });
+});
+
+// Debug query performance
+const result = await env.DB.prepare('SELECT * FROM users').all();
+console.log('Duration:', result.meta.duration, 'ms');
+
+// Query plan analysis
+const plan = await env.DB.prepare('EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = ?').bind(email).all();
+```
+
+```bash
+# Inspect local database
+sqlite3 .wrangler/state/v3/d1/<database-id>.sqlite
+.tables; .schema users; PRAGMA table_info(users);
+```

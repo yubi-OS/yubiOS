@@ -1,1 +1,74 @@
-IyBaYXJheiBQYXR0ZXJucwoKIyMgU1BBIFRyYWNraW5nCgoqKkhpc3RvcnkgQ2hhbmdlIFRyaWdnZXIgKFJlY29tbWVuZGVkKToqKiBDb25maWd1cmUgaW4gZGFzaGJvYXJkIC0gbm8gY29kZSBuZWVkZWQsIFphcmF6IGF1dG8tZGV0ZWN0cyByb3V0ZSBjaGFuZ2VzLgoKKipNYW51YWwgdHJhY2tpbmcgKFJlYWN0L1Z1ZS9OZXh0LmpzKToqKgpgYGBqYXZhc2NyaXB0Ci8vIE9uIHJvdXRlIGNoYW5nZQp6YXJhei50cmFjaygncGFnZXZpZXcnLCB7IHBhZ2VfcGF0aDogcGF0aG5hbWUsIHBhZ2VfdGl0bGU6IGRvY3VtZW50LnRpdGxlIH0pOwpgYGAKCiMjIFVzZXIgSWRlbnRpZmljYXRpb24KCmBgYGphdmFzY3JpcHQKLy8gTG9naW4KemFyYXouc2V0KHsgdXNlcklkOiB1c2VyLmlkLCBlbWFpbDogdXNlci5lbWFpbCwgcGxhbjogdXNlci5wbGFuIH0pOwp6YXJhei50cmFjaygnbG9naW4nLCB7IG1ldGhvZDogJ29hdXRoJyB9KTsKCi8vIExvZ291dCAtIHNldCB0byBudWxsIChjYW5ub3QgY2xlYXIpCnphcmF6LnNldCgndXNlcklkJywgbnVsbCk7CmBgYAoKIyMgRS1jb21tZXJjZSBGdW5uZWwKCnwgRXZlbnQgfCBNZXRob2QgfAp8LS0tLS0tLXwtLS0tLS0tLXwKfCBWaWV3IHwgYHphcmF6LmVjb21tZXJjZSgnUHJvZHVjdCBWaWV3ZWQnLCB7IHByb2R1Y3RfaWQsIG5hbWUsIHByaWNlIH0pYCB8CnwgQWRkIHRvIGNhcnQgfCBgemFyYXouZWNvbW1lcmNlKCdQcm9kdWN0IEFkZGVkJywgeyBwcm9kdWN0X2lkLCBxdWFudGl0eSB9KWAgfAp8IENoZWNrb3V0IHwgYHphcmF6LmVjb21tZXJjZSgnQ2hlY2tvdXQgU3RhcnRlZCcsIHsgY2FydF9pZCwgcHJvZHVjdHM6IFsuLi5dIH0pYCB8CnwgUHVyY2hhc2UgfCBgemFyYXouZWNvbW1lcmNlKCdPcmRlciBDb21wbGV0ZWQnLCB7IG9yZGVyX2lkLCB0b3RhbCwgcHJvZHVjdHMgfSlgIHwKCiMjIEEvQiBUZXN0aW5nCgpgYGBqYXZhc2NyaXB0CnphcmF6LnNldCgnZXhwZXJpbWVudF9jaGVja291dCcsIHZhcmlhbnQpOwp6YXJhei50cmFjaygnZXhwZXJpbWVudF92aWV3ZWQnLCB7IGV4cGVyaW1lbnRfaWQ6ICdjaGVja291dCcsIHZhcmlhbnQgfSk7Ci8vIE9uIGNvbnZlcnNpb24KemFyYXoudHJhY2soJ2V4cGVyaW1lbnRfY29udmVyc2lvbicsIHsgZXhwZXJpbWVudF9pZCwgdmFyaWFudCwgdmFsdWUgfSk7CmBgYAoKIyMgV29ya2VyIEludGVncmF0aW9uCgoqKkNvbnRleHQgRW5yaWNoZXIqKiAtIE1vZGlmeSBjb250ZXh0IGJlZm9yZSB0b29scyBleGVjdXRlOgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYpIHsKICAgIGNvbnN0IGJvZHkgPSBhd2FpdCByZXF1ZXN0Lmpzb24oKTsKICAgIGJvZHkuc3lzdGVtLnVzZXJSZWdpb24gPSByZXF1ZXN0LmNmPy5yZWdpb247CiAgICByZXR1cm4gUmVzcG9uc2UuanNvbihib2R5KTsKICB9Cn07CmBgYApDb25maWd1cmU6IFphcmF6ID4gU2V0dGluZ3MgPiBDb250ZXh0IEVucmljaGVycwoKKipXb3JrZXIgVmFyaWFibGVzKiogLSBDb21wdXRlIGR5bmFtaWMgdmFsdWVzIHNlcnZlci1zaWRlLCB1c2UgYXMgYHt7d29ya2VyLnZhcmlhYmxlX25hbWV9fWAuCgojIyBHVE0gTWlncmF0aW9uCgp8IEdUTSB8IFphcmF6IHwKfC0tLS0tfC0tLS0tLS18CnwgYGRhdGFMYXllci5wdXNoKHtldmVudDogJ3B1cmNoYXNlJ30pYCB8IGB6YXJhei5lY29tbWVyY2UoJ09yZGVyIENvbXBsZXRlZCcsIHsuLi59KWAgfAp8IGB7e1BhZ2UgVVJMfX1gIHwgYHt7c3lzdGVtLnBhZ2UudXJsfX1gIHwKfCBge3tQYWdlIFRpdGxlfX1gIHwgYHt7c3lzdGVtLnBhZ2UudGl0bGV9fWAgfAp8IFBhZ2UgVmlldyB0cmlnZ2VyIHwgUGFnZXZpZXcgdHJpZ2dlciB8CnwgQ2xpY2sgdHJpZ2dlciB8IENsaWNrIChzZWxlY3RvcjogYCpgKSB8CgojIyBCZXN0IFByYWN0aWNlcwoKMS4gVXNlIGRhc2hib2FyZCB0cmlnZ2VycyBvdmVyIGlubGluZSBjb2RlCjIuIEVuYWJsZSBIaXN0b3J5IENoYW5nZSBmb3IgU1BBcyAobm8gbWFudWFsIGNvZGUpCjMuIERlYnVnIHdpdGggYHphcmF6LmRlYnVnID0gdHJ1ZWAKNC4gSW1wbGVtZW50IGNvbnNlbnQgZWFybHkgKEdEUFIvQ0NQQSkKNS4gVXNlIENvbnRleHQgRW5yaWNoZXJzIGZvciBzZW5zaXRpdmUvc2VydmVyIGRhdGEK
+# Zaraz Patterns
+
+## SPA Tracking
+
+**History Change Trigger (Recommended):** Configure in dashboard - no code needed, Zaraz auto-detects route changes.
+
+**Manual tracking (React/Vue/Next.js):**
+```javascript
+// On route change
+zaraz.track('pageview', { page_path: pathname, page_title: document.title });
+```
+
+## User Identification
+
+```javascript
+// Login
+zaraz.set({ userId: user.id, email: user.email, plan: user.plan });
+zaraz.track('login', { method: 'oauth' });
+
+// Logout - set to null (cannot clear)
+zaraz.set('userId', null);
+```
+
+## E-commerce Funnel
+
+| Event | Method |
+|-------|--------|
+| View | `zaraz.ecommerce('Product Viewed', { product_id, name, price })` |
+| Add to cart | `zaraz.ecommerce('Product Added', { product_id, quantity })` |
+| Checkout | `zaraz.ecommerce('Checkout Started', { cart_id, products: [...] })` |
+| Purchase | `zaraz.ecommerce('Order Completed', { order_id, total, products })` |
+
+## A/B Testing
+
+```javascript
+zaraz.set('experiment_checkout', variant);
+zaraz.track('experiment_viewed', { experiment_id: 'checkout', variant });
+// On conversion
+zaraz.track('experiment_conversion', { experiment_id, variant, value });
+```
+
+## Worker Integration
+
+**Context Enricher** - Modify context before tools execute:
+```typescript
+export default {
+  async fetch(request, env) {
+    const body = await request.json();
+    body.system.userRegion = request.cf?.region;
+    return Response.json(body);
+  }
+};
+```
+Configure: Zaraz > Settings > Context Enrichers
+
+**Worker Variables** - Compute dynamic values server-side, use as `{{worker.variable_name}}`.
+
+## GTM Migration
+
+| GTM | Zaraz |
+|-----|-------|
+| `dataLayer.push({event: 'purchase'})` | `zaraz.ecommerce('Order Completed', {...})` |
+| `{{Page URL}}` | `{{system.page.url}}` |
+| `{{Page Title}}` | `{{system.page.title}}` |
+| Page View trigger | Pageview trigger |
+| Click trigger | Click (selector: `*`) |
+
+## Best Practices
+
+1. Use dashboard triggers over inline code
+2. Enable History Change for SPAs (no manual code)
+3. Debug with `zaraz.debug = true`
+4. Implement consent early (GDPR/CCPA)
+5. Use Context Enrichers for sensitive/server data

@@ -1,1 +1,188 @@
-IyMgV3JhbmdsZXIgQ29uZmlndXJhdGlvbgoKIyMjIEJhc2ljIENvbnRhaW5lciBDb25maWcKCmBgYGpzb25jCnsKICAibmFtZSI6ICJteS13b3JrZXIiLAogICJtYWluIjogInNyYy9pbmRleC50cyIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI2LTAxLTEwIiwKICAiY29udGFpbmVycyI6IFsKICAgIHsKICAgICAgImNsYXNzX25hbWUiOiAiTXlDb250YWluZXIiLAogICAgICAiaW1hZ2UiOiAiLi9Eb2NrZXJmaWxlIiwgIC8vIFBhdGggdG8gRG9ja2VyZmlsZSBvciBkaXJlY3Rvcnkgd2l0aCBEb2NrZXJmaWxlCiAgICAgICJpbnN0YW5jZV90eXBlIjogInN0YW5kYXJkLTEiLCAgLy8gUHJlZGVmaW5lZCBvciBjdXN0b20gKHNlZSBiZWxvdykKICAgICAgIm1heF9pbnN0YW5jZXMiOiAxMAogICAgfQogIF0sCiAgImR1cmFibGVfb2JqZWN0cyI6IHsKICAgICJiaW5kaW5ncyI6IFsKICAgICAgewogICAgICAgICJuYW1lIjogIk1ZX0NPTlRBSU5FUiIsCiAgICAgICAgImNsYXNzX25hbWUiOiAiTXlDb250YWluZXIiCiAgICAgIH0KICAgIF0KICB9LAogICJtaWdyYXRpb25zIjogWwogICAgewogICAgICAidGFnIjogInYxIiwKICAgICAgIm5ld19zcWxpdGVfY2xhc3NlcyI6IFsiTXlDb250YWluZXIiXSAgLy8gTXVzdCB1c2UgbmV3X3NxbGl0ZV9jbGFzc2VzCiAgICB9CiAgXQp9CmBgYAoKS2V5IGNvbmZpZyByZXF1aXJlbWVudHM6Ci0gYGltYWdlYCAtIFBhdGggdG8gRG9ja2VyZmlsZSBvciBkaXJlY3RvcnkgY29udGFpbmluZyBEb2NrZXJmaWxlCi0gYGNsYXNzX25hbWVgIC0gTXVzdCBtYXRjaCBDb250YWluZXIgY2xhc3MgZXhwb3J0IG5hbWUKLSBgbWF4X2luc3RhbmNlc2AgLSBNYXggY29uY3VycmVudCBjb250YWluZXIgaW5zdGFuY2VzCi0gTXVzdCBjb25maWd1cmUgRHVyYWJsZSBPYmplY3RzIGJpbmRpbmcgQU5EIG1pZ3JhdGlvbnMKCiMjIyBJbnN0YW5jZSBUeXBlcwoKIyMjIyBQcmVkZWZpbmVkIFR5cGVzCgp8IFR5cGUgfCB2Q1BVIHwgTWVtb3J5IHwgRGlzayB8CnwtLS0tLS18LS0tLS0tfC0tLS0tLS0tfC0tLS0tLXwKfCBsaXRlIHwgMS8xNiB8IDI1NiBNaUIgfCAyIEdCIHwKfCBiYXNpYyB8IDEvNCB8IDEgR2lCIHwgNCBHQiB8Cnwgc3RhbmRhcmQtMSB8IDEvMiB8IDQgR2lCIHwgOCBHQiB8Cnwgc3RhbmRhcmQtMiB8IDEgfCA2IEdpQiB8IDEyIEdCIHwKfCBzdGFuZGFyZC0zIHwgMiB8IDggR2lCIHwgMTYgR0IgfAp8IHN0YW5kYXJkLTQgfCA0IHwgMTIgR2lCIHwgMjAgR0IgfAoKYGBganNvbmMKewogICJjb250YWluZXJzIjogWwogICAgewogICAgICAiY2xhc3NfbmFtZSI6ICJNeUNvbnRhaW5lciIsCiAgICAgICJpbWFnZSI6ICIuL0RvY2tlcmZpbGUiLAogICAgICAiaW5zdGFuY2VfdHlwZSI6ICJzdGFuZGFyZC0yIiAgLy8gVXNlIHByZWRlZmluZWQgdHlwZQogICAgfQogIF0KfQpgYGAKCiMjIyMgQ3VzdG9tIFR5cGVzIChKYW4gMjAyNiBGZWF0dXJlKQoKYGBganNvbmMKewogICJjb250YWluZXJzIjogWwogICAgewogICAgICAiY2xhc3NfbmFtZSI6ICJNeUNvbnRhaW5lciIsCiAgICAgICJpbWFnZSI6ICIuL0RvY2tlcmZpbGUiLAogICAgICAiaW5zdGFuY2VfdHlwZV9jdXN0b20iOiB7CiAgICAgICAgInZjcHUiOiAyLCAgICAgICAgICAgICAgLy8gMS00IHZDUFUKICAgICAgICAibWVtb3J5X21pYiI6IDgxOTIsICAgICAvLyA1MTItMTIyODggTWlCICh1cCB0byAxMiBHaUIpCiAgICAgICAgImRpc2tfbWliIjogMTYzODQgICAgICAgLy8gMjA0OC0yMDQ4MCBNaUIgKHVwIHRvIDIwIEdCKQogICAgICB9CiAgICB9CiAgXQp9CmBgYAoKKipDdXN0b20gdHlwZSBjb25zdHJhaW50czoqKgotIE1pbmltdW0gMyBHaUIgbWVtb3J5IHBlciB2Q1BVCi0gTWF4aW11bSAyIEdCIGRpc2sgcGVyIDEgR2lCIG1lbW9yeQotIE1heCA0IHZDUFUsIDEyIEdpQiBtZW1vcnksIDIwIEdCIGRpc2sgcGVyIGNvbnRhaW5lcgoKIyMjIEFjY291bnQgTGltaXRzCgp8IFJlc291cmNlIHwgTGltaXQgfCBOb3RlcyB8CnwtLS0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBUb3RhbCBtZW1vcnkgKGFsbCBjb250YWluZXJzKSB8IDQwMCBHaUIgfCBBY3Jvc3MgYWxsIHJ1bm5pbmcgY29udGFpbmVycyB8CnwgVG90YWwgdkNQVSAoYWxsIGNvbnRhaW5lcnMpIHwgMTAwIHwgQWNyb3NzIGFsbCBydW5uaW5nIGNvbnRhaW5lcnMgfAp8IFRvdGFsIGRpc2sgKGFsbCBjb250YWluZXJzKSB8IDIgVEIgfCBBY3Jvc3MgYWxsIHJ1bm5pbmcgY29udGFpbmVycyB8CnwgSW1hZ2Ugc3RvcmFnZSBwZXIgYWNjb3VudCB8IDUwIEdCIHwgU3RvcmVkIGNvbnRhaW5lciBpbWFnZXMgfAoKIyMjIENvbnRhaW5lciBDbGFzcyBQcm9wZXJ0aWVzCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IENvbnRhaW5lciB9IGZyb20gIkBjbG91ZGZsYXJlL2NvbnRhaW5lcnMiOwoKZXhwb3J0IGNsYXNzIE15Q29udGFpbmVyIGV4dGVuZHMgQ29udGFpbmVyIHsKICAvLyBQb3J0IENvbmZpZ3VyYXRpb24KICBkZWZhdWx0UG9ydCA9IDgwODA7ICAgICAgICAgICAgIC8vIERlZmF1bHQgcG9ydCBmb3IgZmV0Y2goKSBjYWxscwogIHJlcXVpcmVkUG9ydHMgPSBbODA4MCwgOTA5MF07ICAgLy8gUG9ydHMgdG8gd2FpdCBmb3IgaW4gc3RhcnRBbmRXYWl0Rm9yUG9ydHMoKQoKICAvLyBMaWZlY3ljbGUKICBzbGVlcEFmdGVyID0gIjMwbSI7ICAgICAgICAgICAgIC8vIEluYWN0aXZpdHkgdGltZW91dCAoNW0sIDMwbSwgMmgsIGV0Yy4pCgogIC8vIE5ldHdvcmsKICBlbmFibGVJbnRlcm5ldCA9IHRydWU7ICAgICAgICAgIC8vIEFsbG93IG91dGJvdW5kIGludGVybmV0IGFjY2VzcwoKICAvLyBIZWFsdGggQ2hlY2sKICBwaW5nRW5kcG9pbnQgPSAiL2hlYWx0aCI7ICAgICAgIC8vIEhlYWx0aCBjaGVjayBlbmRwb2ludCBwYXRoCgogIC8vIEVudmlyb25tZW50CiAgZW52VmFycyA9IHsgICAgICAgICAgICAgICAgICAgICAvLyBFbnZpcm9ubWVudCB2YXJpYWJsZXMgcGFzc2VkIHRvIGNvbnRhaW5lcgogICAgTk9ERV9FTlY6ICJwcm9kdWN0aW9uIiwKICAgIExPR19MRVZFTDogImluZm8iCiAgfTsKCiAgLy8gU3RhcnR1cAogIGVudHJ5cG9pbnQgPSBbIi9iaW4vc3RhcnQuc2giXTsgLy8gT3ZlcnJpZGUgaW1hZ2UgZW50cnlwb2ludCAob3B0aW9uYWwpCn0KYGBgCgoqKlByb3BlcnR5IGRldGFpbHM6KioKCi0gKipgZGVmYXVsdFBvcnRgKio6IFBvcnQgdXNlZCB3aGVuIGNhbGxpbmcgYGNvbnRhaW5lci5mZXRjaCgpYCB3aXRob3V0IGV4cGxpY2l0IHBvcnQuIEZhbGxzIGJhY2sgdG8gcG9ydCAzMyBpZiBub3Qgc2V0LgoKLSAqKmByZXF1aXJlZFBvcnRzYCoqOiBBcnJheSBvZiBwb3J0cyB0aGF0IG11c3QgYmUgbGlzdGVuaW5nIGJlZm9yZSBgc3RhcnRBbmRXYWl0Rm9yUG9ydHMoKWAgcmV0dXJucy4gRmlyc3QgcG9ydCBiZWNvbWVzIGRlZmF1bHQgaWYgYGRlZmF1bHRQb3J0YCBub3Qgc2V0LgoKLSAqKmBzbGVlcEFmdGVyYCoqOiBEdXJhdGlvbiBzdHJpbmcgKGUuZy4sICI1bSIsICIzMG0iLCAiMmgiKS4gQ29udGFpbmVyIHN0b3BzIGFmdGVyIHRoaXMgcGVyaW9kIG9mIGluYWN0aXZpdHkuIFRpbWVyIHJlc2V0cyBvbiBlYWNoIHJlcXVlc3QuCgotICoqYGVuYWJsZUludGVybmV0YCoqOiBCb29sZWFuLiBJZiBgdHJ1ZWAsIGNvbnRhaW5lciBjYW4gbWFrZSBvdXRib3VuZCBIVFRQL1RDUCByZXF1ZXN0cy4KCi0gKipgcGluZ0VuZHBvaW50YCoqOiBQYXRoIHVzZWQgZm9yIGhlYWx0aCBjaGVja3MuIFNob3VsZCByZXNwb25kIHdpdGggMnh4IHN0YXR1cy4KCi0gKipgZW52VmFyc2AqKjogT2JqZWN0IG9mIGVudmlyb25tZW50IHZhcmlhYmxlcy4gTWVyZ2VkIHdpdGggcnVudGltZS1wcm92aWRlZCB2YXJzIChzZWUgYmVsb3cpLgoKLSAqKmBlbnRyeXBvaW50YCoqOiBBcnJheSBvZiBzdHJpbmdzLiBPdmVycmlkZXMgY29udGFpbmVyIGltYWdlJ3MgQ01EL0VOVFJZUE9JTlQuCgojIyMgUnVudGltZSBFbnZpcm9ubWVudCBWYXJpYWJsZXMKCkNsb3VkZmxhcmUgYXV0b21hdGljYWxseSBwcm92aWRlcyB0aGVzZSBlbnZpcm9ubWVudCB2YXJpYWJsZXMgdG8gY29udGFpbmVyczoKCnwgVmFyaWFibGUgfCBEZXNjcmlwdGlvbiB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYENMT1VERkxBUkVfQVBQTElDQVRJT05fSURgIHwgV29ya2VyIGFwcGxpY2F0aW9uIElEIHwKfCBgQ0xPVURGTEFSRV9DT1VOVFJZX0EyYCB8IFR3by1sZXR0ZXIgY291bnRyeSBjb2RlIG9mIHJlcXVlc3Qgb3JpZ2luIHwKfCBgQ0xPVURGTEFSRV9MT0NBVElPTmAgfCBDbG91ZGZsYXJlIGRhdGEgY2VudGVyIGxvY2F0aW9uIHwKfCBgQ0xPVURGTEFSRV9SRUdJT05gIHwgUmVnaW9uIGlkZW50aWZpZXIgfAp8IGBDTE9VREZMQVJFX0RVUkFCTEVfT0JKRUNUX0lEYCB8IENvbnRhaW5lcidzIER1cmFibGUgT2JqZWN0IElEIHwKCkN1c3RvbSBgZW52VmFyc2AgZnJvbSBDb250YWluZXIgY2xhc3MgYXJlIG1lcmdlZCB3aXRoIHRoZXNlLiBDdXN0b20gdmFycyBvdmVycmlkZSBydW50aW1lIHZhcnMgaWYgbmFtZXMgY29uZmxpY3QuCgojIyMgSW1hZ2UgTWFuYWdlbWVudAoKKipEaXN0cmlidXRpb24gbW9kZWw6KiogSW1hZ2VzIHByZS1mZXRjaGVkIHRvIGFsbCBnbG9iYWwgbG9jYXRpb25zIGJlZm9yZSBkZXBsb3ltZW50LiBFbnN1cmVzIGZhc3QgY29sZCBzdGFydHMgKDItM3MgdHlwaWNhbCkuCgoqKlJvbGxpbmcgZGVwbG95czoqKiBVbmxpa2UgV29ya2VycyAoaW5zdGFudCksIGNvbnRhaW5lciBkZXBsb3ltZW50cyByb2xsIG91dCBncmFkdWFsbHkuIE9sZCB2ZXJzaW9ucyBjb250aW51ZSBydW5uaW5nIGR1cmluZyByb2xsb3V0LgoKKipFcGhlbWVyYWwgZGlzazoqKiBDb250YWluZXIgZGlzayBpcyBlcGhlbWVyYWwgYW5kIHJlc2V0cyBvbiBlYWNoIHN0b3AuIFVzZSBEdXJhYmxlIE9iamVjdCBzdG9yYWdlIChgdGhpcy5jdHguc3RvcmFnZWApIGZvciBwZXJzaXN0ZW5jZS4KCiMjIHdyYW5nbGVyLnRvbWwgRm9ybWF0CgpgYGB0b21sCm5hbWUgPSAibXktd29ya2VyIgptYWluID0gInNyYy9pbmRleC50cyIKY29tcGF0aWJpbGl0eV9kYXRlID0gIjIwMjYtMDEtMTAiCgpbW2NvbnRhaW5lcnNdXQpjbGFzc19uYW1lID0gIk15Q29udGFpbmVyIgppbWFnZSA9ICIuL0RvY2tlcmZpbGUiCmluc3RhbmNlX3R5cGUgPSAic3RhbmRhcmQtMiIKbWF4X2luc3RhbmNlcyA9IDEwCgpbW2R1cmFibGVfb2JqZWN0cy5iaW5kaW5nc11dCm5hbWUgPSAiTVlfQ09OVEFJTkVSIgpjbGFzc19uYW1lID0gIk15Q29udGFpbmVyIgoKW1ttaWdyYXRpb25zXV0KdGFnID0gInYxIgpuZXdfc3FsaXRlX2NsYXNzZXMgPSBbIk15Q29udGFpbmVyIl0KYGBgCgpCb3RoIGB3cmFuZ2xlci5qc29uY2AgYW5kIGB3cmFuZ2xlci50b21sYCBhcmUgc3VwcG9ydGVkLiBVc2UgYHdyYW5nbGVyLmpzb25jYCBmb3IgY29tbWVudHMgYW5kIGJldHRlciBJREUgc3VwcG9ydC4K
+## Wrangler Configuration
+
+### Basic Container Config
+
+```jsonc
+{
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-01-10",
+  "containers": [
+    {
+      "class_name": "MyContainer",
+      "image": "./Dockerfile",  // Path to Dockerfile or directory with Dockerfile
+      "instance_type": "standard-1",  // Predefined or custom (see below)
+      "max_instances": 10
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MY_CONTAINER",
+        "class_name": "MyContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["MyContainer"]  // Must use new_sqlite_classes
+    }
+  ]
+}
+```
+
+Key config requirements:
+- `image` - Path to Dockerfile or directory containing Dockerfile
+- `class_name` - Must match Container class export name
+- `max_instances` - Max concurrent container instances
+- Must configure Durable Objects binding AND migrations
+
+### Instance Types
+
+#### Predefined Types
+
+| Type | vCPU | Memory | Disk |
+|------|------|--------|------|
+| lite | 1/16 | 256 MiB | 2 GB |
+| basic | 1/4 | 1 GiB | 4 GB |
+| standard-1 | 1/2 | 4 GiB | 8 GB |
+| standard-2 | 1 | 6 GiB | 12 GB |
+| standard-3 | 2 | 8 GiB | 16 GB |
+| standard-4 | 4 | 12 GiB | 20 GB |
+
+```jsonc
+{
+  "containers": [
+    {
+      "class_name": "MyContainer",
+      "image": "./Dockerfile",
+      "instance_type": "standard-2"  // Use predefined type
+    }
+  ]
+}
+```
+
+#### Custom Types (Jan 2026 Feature)
+
+```jsonc
+{
+  "containers": [
+    {
+      "class_name": "MyContainer",
+      "image": "./Dockerfile",
+      "instance_type_custom": {
+        "vcpu": 2,              // 1-4 vCPU
+        "memory_mib": 8192,     // 512-12288 MiB (up to 12 GiB)
+        "disk_mib": 16384       // 2048-20480 MiB (up to 20 GB)
+      }
+    }
+  ]
+}
+```
+
+**Custom type constraints:**
+- Minimum 3 GiB memory per vCPU
+- Maximum 2 GB disk per 1 GiB memory
+- Max 4 vCPU, 12 GiB memory, 20 GB disk per container
+
+### Account Limits
+
+| Resource | Limit | Notes |
+|----------|-------|-------|
+| Total memory (all containers) | 400 GiB | Across all running containers |
+| Total vCPU (all containers) | 100 | Across all running containers |
+| Total disk (all containers) | 2 TB | Across all running containers |
+| Image storage per account | 50 GB | Stored container images |
+
+### Container Class Properties
+
+```typescript
+import { Container } from "@cloudflare/containers";
+
+export class MyContainer extends Container {
+  // Port Configuration
+  defaultPort = 8080;             // Default port for fetch() calls
+  requiredPorts = [8080, 9090];   // Ports to wait for in startAndWaitForPorts()
+
+  // Lifecycle
+  sleepAfter = "30m";             // Inactivity timeout (5m, 30m, 2h, etc.)
+
+  // Network
+  enableInternet = true;          // Allow outbound internet access
+
+  // Health Check
+  pingEndpoint = "/health";       // Health check endpoint path
+
+  // Environment
+  envVars = {                     // Environment variables passed to container
+    NODE_ENV: "production",
+    LOG_LEVEL: "info"
+  };
+
+  // Startup
+  entrypoint = ["/bin/start.sh"]; // Override image entrypoint (optional)
+}
+```
+
+**Property details:**
+
+- **`defaultPort`**: Port used when calling `container.fetch()` without explicit port. Falls back to port 33 if not set.
+
+- **`requiredPorts`**: Array of ports that must be listening before `startAndWaitForPorts()` returns. First port becomes default if `defaultPort` not set.
+
+- **`sleepAfter`**: Duration string (e.g., "5m", "30m", "2h"). Container stops after this period of inactivity. Timer resets on each request.
+
+- **`enableInternet`**: Boolean. If `true`, container can make outbound HTTP/TCP requests.
+
+- **`pingEndpoint`**: Path used for health checks. Should respond with 2xx status.
+
+- **`envVars`**: Object of environment variables. Merged with runtime-provided vars (see below).
+
+- **`entrypoint`**: Array of strings. Overrides container image's CMD/ENTRYPOINT.
+
+### Runtime Environment Variables
+
+Cloudflare automatically provides these environment variables to containers:
+
+| Variable | Description |
+|----------|-------------|
+| `CLOUDFLARE_APPLICATION_ID` | Worker application ID |
+| `CLOUDFLARE_COUNTRY_A2` | Two-letter country code of request origin |
+| `CLOUDFLARE_LOCATION` | Cloudflare data center location |
+| `CLOUDFLARE_REGION` | Region identifier |
+| `CLOUDFLARE_DURABLE_OBJECT_ID` | Container's Durable Object ID |
+
+Custom `envVars` from Container class are merged with these. Custom vars override runtime vars if names conflict.
+
+### Image Management
+
+**Distribution model:** Images pre-fetched to all global locations before deployment. Ensures fast cold starts (2-3s typical).
+
+**Rolling deploys:** Unlike Workers (instant), container deployments roll out gradually. Old versions continue running during rollout.
+
+**Ephemeral disk:** Container disk is ephemeral and resets on each stop. Use Durable Object storage (`this.ctx.storage`) for persistence.
+
+## wrangler.toml Format
+
+```toml
+name = "my-worker"
+main = "src/index.ts"
+compatibility_date = "2026-01-10"
+
+[[containers]]
+class_name = "MyContainer"
+image = "./Dockerfile"
+instance_type = "standard-2"
+max_instances = 10
+
+[[durable_objects.bindings]]
+name = "MY_CONTAINER"
+class_name = "MyContainer"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MyContainer"]
+```
+
+Both `wrangler.jsonc` and `wrangler.toml` are supported. Use `wrangler.jsonc` for comments and better IDE support.

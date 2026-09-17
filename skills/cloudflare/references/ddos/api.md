@@ -1,1 +1,164 @@
-IyBERG9TIEFQSQoKIyMgRW5kcG9pbnRzCgojIyMgSFRUUCBERG9TIChMNykKCmBgYHR5cGVzY3JpcHQKLy8gWm9uZS1sZXZlbApQVVQgL3pvbmVzL3t6b25lSWR9L3J1bGVzZXRzL3BoYXNlcy9kZG9zX2w3L2VudHJ5cG9pbnQKR0VUIC96b25lcy97em9uZUlkfS9ydWxlc2V0cy9waGFzZXMvZGRvc19sNy9lbnRyeXBvaW50CgovLyBBY2NvdW50LWxldmVsIChFbnRlcnByaXNlIEFkdmFuY2VkKQpQVVQgL2FjY291bnRzL3thY2NvdW50SWR9L3J1bGVzZXRzL3BoYXNlcy9kZG9zX2w3L2VudHJ5cG9pbnQKR0VUIC9hY2NvdW50cy97YWNjb3VudElkfS9ydWxlc2V0cy9waGFzZXMvZGRvc19sNy9lbnRyeXBvaW50CmBgYAoKIyMjIE5ldHdvcmsgRERvUyAoTDMvNCkKCmBgYHR5cGVzY3JpcHQKLy8gQWNjb3VudC1sZXZlbCBvbmx5ClBVVCAvYWNjb3VudHMve2FjY291bnRJZH0vcnVsZXNldHMvcGhhc2VzL2Rkb3NfbDQvZW50cnlwb2ludApHRVQgL2FjY291bnRzL3thY2NvdW50SWR9L3J1bGVzZXRzL3BoYXNlcy9kZG9zX2w0L2VudHJ5cG9pbnQKYGBgCgojIyBUeXBlU2NyaXB0IFNESwoKKipTREsgVmVyc2lvbioqOiBSZXF1aXJlcyBgY2xvdWRmbGFyZWAgPj0gMy4wLjAgZm9yIHJ1bGVzZXQgcGhhc2UgbWV0aG9kcy4KCmBgYHR5cGVzY3JpcHQKaW1wb3J0IENsb3VkZmxhcmUgZnJvbSAiY2xvdWRmbGFyZSI7Cgpjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7IGFwaVRva2VuOiBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0FQSV9UT0tFTiB9KTsKCi8vIFNURVAgMTogRGlzY292ZXIgbWFuYWdlZCBydWxlc2V0IElEIChyZXF1aXJlZCBmb3Igb3ZlcnJpZGVzKQpjb25zdCBhbGxSdWxlc2V0cyA9IGF3YWl0IGNsaWVudC5ydWxlc2V0cy5saXN0KHsgem9uZV9pZDogem9uZUlkIH0pOwpjb25zdCBkZG9zUnVsZXNldCA9IGFsbFJ1bGVzZXRzLnJlc3VsdC5maW5kKAogIChyKSA9PiByLmtpbmQgPT09ICJtYW5hZ2VkIiAmJiByLnBoYXNlID09PSAiZGRvc19sNyIKKTsKaWYgKCFkZG9zUnVsZXNldCkgdGhyb3cgbmV3IEVycm9yKCJERG9TIG1hbmFnZWQgcnVsZXNldCBub3QgZm91bmQiKTsKY29uc3QgbWFuYWdlZFJ1bGVzZXRJZCA9IGRkb3NSdWxlc2V0LmlkOwoKLy8gU1RFUCAyOiBHZXQgY3VycmVudCBIVFRQIEREb1MgY29uZmlndXJhdGlvbgpjb25zdCBlbnRyeXBvaW50UnVsZXNldCA9IGF3YWl0IGNsaWVudC56b25lcy5ydWxlc2V0cy5waGFzZXMuZW50cnlwb2ludC5nZXQoImRkb3NfbDciLCB7CiAgem9uZV9pZDogem9uZUlkLAp9KTsKCi8vIFNURVAgMzogVXBkYXRlIEhUVFAgRERvUyBydWxlc2V0IHdpdGggb3ZlcnJpZGVzCmF3YWl0IGNsaWVudC56b25lcy5ydWxlc2V0cy5waGFzZXMuZW50cnlwb2ludC51cGRhdGUoImRkb3NfbDciLCB7CiAgem9uZV9pZDogem9uZUlkLAogIHJ1bGVzOiBbCiAgICB7CiAgICAgIGFjdGlvbjogImV4ZWN1dGUiLAogICAgICBleHByZXNzaW9uOiAidHJ1ZSIsCiAgICAgIGFjdGlvbl9wYXJhbWV0ZXJzOiB7CiAgICAgICAgaWQ6IG1hbmFnZWRSdWxlc2V0SWQsIC8vIEZyb20gZGlzY292ZXJ5IHN0ZXAKICAgICAgICBvdmVycmlkZXM6IHsKICAgICAgICAgIHNlbnNpdGl2aXR5X2xldmVsOiAibWVkaXVtIiwKICAgICAgICAgIGFjdGlvbjogIm1hbmFnZWRfY2hhbGxlbmdlIiwKICAgICAgICB9LAogICAgICB9LAogICAgfSwKICBdLAp9KTsKCi8vIE5ldHdvcmsgRERvUyAoYWNjb3VudCBsZXZlbCwgTDMvNCkKY29uc3QgbDRSdWxlc2V0cyA9IGF3YWl0IGNsaWVudC5ydWxlc2V0cy5saXN0KHsgYWNjb3VudF9pZDogYWNjb3VudElkIH0pOwpjb25zdCBsNERkb3NSdWxlc2V0ID0gbDRSdWxlc2V0cy5yZXN1bHQuZmluZCgKICAocikgPT4gci5raW5kID09PSAibWFuYWdlZCIgJiYgci5waGFzZSA9PT0gImRkb3NfbDQiCik7CmNvbnN0IGw0UnVsZXNldCA9IGF3YWl0IGNsaWVudC5hY2NvdW50cy5ydWxlc2V0cy5waGFzZXMuZW50cnlwb2ludC5nZXQoImRkb3NfbDQiLCB7CiAgYWNjb3VudF9pZDogYWNjb3VudElkLAp9KTsKYGBgCgojIyBBbGVydCBDb25maWd1cmF0aW9uCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBERG9TQWxlcnRDb25maWcgewogIG5hbWU6IHN0cmluZzsKICBlbmFibGVkOiBib29sZWFuOwogIGFsZXJ0X3R5cGU6ICJodHRwX2Rkb3NfYXR0YWNrX2FsZXJ0IiB8ICJsYXllcl8zXzRfZGRvc19hdHRhY2tfYWxlcnQiIAogICAgfCAiYWR2YW5jZWRfaHR0cF9kZG9zX2F0dGFja19hbGVydCIgfCAiYWR2YW5jZWRfbGF5ZXJfM180X2Rkb3NfYXR0YWNrX2FsZXJ0IjsKICBmaWx0ZXJzPzogewogICAgem9uZXM/OiBzdHJpbmdbXTsKICAgIGhvc3RuYW1lcz86IHN0cmluZ1tdOwogICAgcmVxdWVzdHNfcGVyX3NlY29uZD86IG51bWJlcjsKICAgIHBhY2tldHNfcGVyX3NlY29uZD86IG51bWJlcjsKICAgIG1lZ2FiaXRzX3Blcl9zZWNvbmQ/OiBudW1iZXI7CiAgICBpcF9wcmVmaXhlcz86IHN0cmluZ1tdOyAvLyBDSURSCiAgICBpcF9hZGRyZXNzZXM/OiBzdHJpbmdbXTsKICAgIHByb3RvY29scz86IHN0cmluZ1tdOwogIH07CiAgbWVjaGFuaXNtczogewogICAgZW1haWw/OiBBcnJheTx7IGlkOiBzdHJpbmcgfT47CiAgICB3ZWJob29rcz86IEFycmF5PHsgaWQ6IHN0cmluZyB9PjsKICAgIHBhZ2VyZHV0eT86IEFycmF5PHsgaWQ6IHN0cmluZyB9PjsKICB9Owp9CgovLyBDcmVhdGUgYWxlcnQKYXdhaXQgZmV0Y2goCiAgYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8ke2FjY291bnRJZH0vYWxlcnRpbmcvdjMvcG9saWNpZXNgLAogIHsKICAgIG1ldGhvZDogIlBPU1QiLAogICAgaGVhZGVyczogewogICAgICBBdXRob3JpemF0aW9uOiBgQmVhcmVyICR7YXBpVG9rZW59YCwKICAgICAgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIiwKICAgIH0sCiAgICBib2R5OiBKU09OLnN0cmluZ2lmeShhbGVydENvbmZpZyksCiAgfQopOwpgYGAKCiMjIFR5cGVkIE92ZXJyaWRlIEV4YW1wbGVzCgpgYGB0eXBlc2NyaXB0Ci8vIE92ZXJyaWRlIGJ5IGNhdGVnb3J5CmludGVyZmFjZSBDYXRlZ29yeU92ZXJyaWRlIHsKICBhY3Rpb246ICJleGVjdXRlIjsKICBleHByZXNzaW9uOiBzdHJpbmc7CiAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgIGlkOiBzdHJpbmc7CiAgICBvdmVycmlkZXM6IHsKICAgICAgY2F0ZWdvcmllcz86IEFycmF5PHsKICAgICAgICBjYXRlZ29yeTogImh0dHAtZmxvb2QiIHwgImh0dHAtYW5vbWFseSIgfCAidWRwLWZsb29kIiB8ICJzeW4tZmxvb2QiOwogICAgICAgIHNlbnNpdGl2aXR5X2xldmVsPzogImRlZmF1bHQiIHwgIm1lZGl1bSIgfCAibG93IiB8ICJlb2ZmIjsKICAgICAgICBhY3Rpb24/OiAiYmxvY2siIHwgIm1hbmFnZWRfY2hhbGxlbmdlIiB8ICJjaGFsbGVuZ2UiIHwgImxvZyI7CiAgICAgIH0+OwogICAgfTsKICB9Owp9CgovLyBPdmVycmlkZSBieSBydWxlIElECmludGVyZmFjZSBSdWxlT3ZlcnJpZGUgewogIGFjdGlvbjogImV4ZWN1dGUiOwogIGV4cHJlc3Npb246IHN0cmluZzsKICBhY3Rpb25fcGFyYW1ldGVyczogewogICAgaWQ6IHN0cmluZzsKICAgIG92ZXJyaWRlczogewogICAgICBydWxlcz86IEFycmF5PHsKICAgICAgICBpZDogc3RyaW5nOwogICAgICAgIGFjdGlvbj86ICJibG9jayIgfCAibWFuYWdlZF9jaGFsbGVuZ2UiIHwgImNoYWxsZW5nZSIgfCAibG9nIjsKICAgICAgICBzZW5zaXRpdml0eV9sZXZlbD86ICJkZWZhdWx0IiB8ICJtZWRpdW0iIHwgImxvdyIgfCAiZW9mZiI7CiAgICAgIH0+OwogICAgfTsKICB9Owp9CgovLyBFeGFtcGxlOiBPdmVycmlkZSBzcGVjaWZpYyBhZGFwdGl2ZSBydWxlCmNvbnN0IGFkYXB0aXZlT3ZlcnJpZGU6IFJ1bGVPdmVycmlkZSA9IHsKICBhY3Rpb246ICJleGVjdXRlIiwKICBleHByZXNzaW9uOiAidHJ1ZSIsCiAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgIGlkOiBtYW5hZ2VkUnVsZXNldElkLAogICAgb3ZlcnJpZGVzOiB7CiAgICAgIHJ1bGVzOiBbCiAgICAgICAgeyBpZDogIi4uLmFkYXB0aXZlLW9yaWdpbnMtcnVsZS1pZC4uLiIsIHNlbnNpdGl2aXR5X2xldmVsOiAibG93IiB9LAogICAgICBdLAogICAgfSwKICB9LAp9OwpgYGAKClNlZSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIGZvciBjb21wbGV0ZSBpbXBsZW1lbnRhdGlvbiBwYXR0ZXJucy4K
+# DDoS API
+
+## Endpoints
+
+### HTTP DDoS (L7)
+
+```typescript
+// Zone-level
+PUT /zones/{zoneId}/rulesets/phases/ddos_l7/entrypoint
+GET /zones/{zoneId}/rulesets/phases/ddos_l7/entrypoint
+
+// Account-level (Enterprise Advanced)
+PUT /accounts/{accountId}/rulesets/phases/ddos_l7/entrypoint
+GET /accounts/{accountId}/rulesets/phases/ddos_l7/entrypoint
+```
+
+### Network DDoS (L3/4)
+
+```typescript
+// Account-level only
+PUT /accounts/{accountId}/rulesets/phases/ddos_l4/entrypoint
+GET /accounts/{accountId}/rulesets/phases/ddos_l4/entrypoint
+```
+
+## TypeScript SDK
+
+**SDK Version**: Requires `cloudflare` >= 3.0.0 for ruleset phase methods.
+
+```typescript
+import Cloudflare from "cloudflare";
+
+const client = new Cloudflare({ apiToken: process.env.CLOUDFLARE_API_TOKEN });
+
+// STEP 1: Discover managed ruleset ID (required for overrides)
+const allRulesets = await client.rulesets.list({ zone_id: zoneId });
+const ddosRuleset = allRulesets.result.find(
+  (r) => r.kind === "managed" && r.phase === "ddos_l7"
+);
+if (!ddosRuleset) throw new Error("DDoS managed ruleset not found");
+const managedRulesetId = ddosRuleset.id;
+
+// STEP 2: Get current HTTP DDoS configuration
+const entrypointRuleset = await client.zones.rulesets.phases.entrypoint.get("ddos_l7", {
+  zone_id: zoneId,
+});
+
+// STEP 3: Update HTTP DDoS ruleset with overrides
+await client.zones.rulesets.phases.entrypoint.update("ddos_l7", {
+  zone_id: zoneId,
+  rules: [
+    {
+      action: "execute",
+      expression: "true",
+      action_parameters: {
+        id: managedRulesetId, // From discovery step
+        overrides: {
+          sensitivity_level: "medium",
+          action: "managed_challenge",
+        },
+      },
+    },
+  ],
+});
+
+// Network DDoS (account level, L3/4)
+const l4Rulesets = await client.rulesets.list({ account_id: accountId });
+const l4DdosRuleset = l4Rulesets.result.find(
+  (r) => r.kind === "managed" && r.phase === "ddos_l4"
+);
+const l4Ruleset = await client.accounts.rulesets.phases.entrypoint.get("ddos_l4", {
+  account_id: accountId,
+});
+```
+
+## Alert Configuration
+
+```typescript
+interface DDoSAlertConfig {
+  name: string;
+  enabled: boolean;
+  alert_type: "http_ddos_attack_alert" | "layer_3_4_ddos_attack_alert" 
+    | "advanced_http_ddos_attack_alert" | "advanced_layer_3_4_ddos_attack_alert";
+  filters?: {
+    zones?: string[];
+    hostnames?: string[];
+    requests_per_second?: number;
+    packets_per_second?: number;
+    megabits_per_second?: number;
+    ip_prefixes?: string[]; // CIDR
+    ip_addresses?: string[];
+    protocols?: string[];
+  };
+  mechanisms: {
+    email?: Array<{ id: string }>;
+    webhooks?: Array<{ id: string }>;
+    pagerduty?: Array<{ id: string }>;
+  };
+}
+
+// Create alert
+await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${accountId}/alerting/v3/policies`,
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(alertConfig),
+  }
+);
+```
+
+## Typed Override Examples
+
+```typescript
+// Override by category
+interface CategoryOverride {
+  action: "execute";
+  expression: string;
+  action_parameters: {
+    id: string;
+    overrides: {
+      categories?: Array<{
+        category: "http-flood" | "http-anomaly" | "udp-flood" | "syn-flood";
+        sensitivity_level?: "default" | "medium" | "low" | "eoff";
+        action?: "block" | "managed_challenge" | "challenge" | "log";
+      }>;
+    };
+  };
+}
+
+// Override by rule ID
+interface RuleOverride {
+  action: "execute";
+  expression: string;
+  action_parameters: {
+    id: string;
+    overrides: {
+      rules?: Array<{
+        id: string;
+        action?: "block" | "managed_challenge" | "challenge" | "log";
+        sensitivity_level?: "default" | "medium" | "low" | "eoff";
+      }>;
+    };
+  };
+}
+
+// Example: Override specific adaptive rule
+const adaptiveOverride: RuleOverride = {
+  action: "execute",
+  expression: "true",
+  action_parameters: {
+    id: managedRulesetId,
+    overrides: {
+      rules: [
+        { id: "...adaptive-origins-rule-id...", sensitivity_level: "low" },
+      ],
+    },
+  },
+};
+```
+
+See [patterns.md](./patterns.md) for complete implementation patterns.

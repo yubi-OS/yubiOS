@@ -1,1 +1,199 @@
-IyBBUEkgUmVmZXJlbmNlCgojIyBBU1NFVFMgQmluZGluZwoKVGhlIGBBU1NFVFNgIGJpbmRpbmcgcHJvdmlkZXMgYWNjZXNzIHRvIHN0YXRpYyBhc3NldHMgdmlhIHRoZSBgRmV0Y2hlcmAgaW50ZXJmYWNlLgoKIyMjIFR5cGUgRGVmaW5pdGlvbgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBBU1NFVFM6IEZldGNoZXI7Cn0KCmludGVyZmFjZSBGZXRjaGVyIHsKICBmZXRjaChpbnB1dDogUmVxdWVzdEluZm8gfCBVUkwsIGluaXQ/OiBSZXF1ZXN0SW5pdCk6IFByb21pc2U8UmVzcG9uc2U+Owp9CmBgYAoKIyMjIE1ldGhvZCBTaWduYXR1cmVzCgpgYGB0eXBlc2NyaXB0Ci8vIDEuIEZvcndhcmQgZW50aXJlIHJlcXVlc3QKYXdhaXQgZW52LkFTU0VUUy5mZXRjaChyZXF1ZXN0KTsKCi8vIDIuIFN0cmluZyBwYXRoIChob3N0bmFtZSBpZ25vcmVkLCBvbmx5IHBhdGggbWF0dGVycykKYXdhaXQgZW52LkFTU0VUUy5mZXRjaCgiaHR0cHM6Ly9hbnktaG9zdC9wYXRoL3RvL2Fzc2V0LnBuZyIpOwoKLy8gMy4gVVJMIG9iamVjdAphd2FpdCBlbnYuQVNTRVRTLmZldGNoKG5ldyBVUkwoIi9pbmRleC5odG1sIiwgcmVxdWVzdC51cmwpKTsKCi8vIDQuIENvbnN0cnVjdGVkIFJlcXVlc3Qgb2JqZWN0CmF3YWl0IGVudi5BU1NFVFMuZmV0Y2gobmV3IFJlcXVlc3QobmV3IFVSTCgiL2xvZ28ucG5nIiwgcmVxdWVzdC51cmwpLCB7CiAgbWV0aG9kOiAiR0VUIiwKICBoZWFkZXJzOiByZXF1ZXN0LmhlYWRlcnMKfSkpOwpgYGAKCioqS2V5IGJlaGF2aW9yczoqKgoKLSBIb3N0L29yaWdpbiBpcyBpZ25vcmVkIGZvciBzdHJpbmcvVVJMIGlucHV0cyAob25seSBwYXRoIGlzIHVzZWQpCi0gTWV0aG9kIG11c3QgYmUgR0VUIChvdGhlcnMgcmV0dXJuIDQwNSkKLSBSZXF1ZXN0IGhlYWRlcnMgcGFzcyB0aHJvdWdoIChhZmZlY3RzIHJlc3BvbnNlKQotIFJldHVybnMgc3RhbmRhcmQgYFJlc3BvbnNlYCBvYmplY3QKCiMjIFJlcXVlc3QgSGFuZGxpbmcKCiMjIyBQYXRoIFJlc29sdXRpb24KCmBgYHR5cGVzY3JpcHQKLy8gQWxsIHJlc29sdmUgdG8gc2FtZSBhc3NldDoKZW52LkFTU0VUUy5mZXRjaCgiaHR0cHM6Ly9leGFtcGxlLmNvbS9sb2dvLnBuZyIpCmVudi5BU1NFVFMuZmV0Y2goImh0dHBzOi8vaWdub3JlZC5ob3N0L2xvZ28ucG5nIikKZW52LkFTU0VUUy5mZXRjaCgiL2xvZ28ucG5nIikKYGBgCgpBc3NldHMgYXJlIHJlc29sdmVkIHJlbGF0aXZlIHRvIGNvbmZpZ3VyZWQgYGFzc2V0cy5kaXJlY3RvcnlgLgoKIyMjIEhlYWRlcnMKClJlcXVlc3QgaGVhZGVycyB0aGF0IGFmZmVjdCByZXNwb25zZToKCnwgSGVhZGVyIHwgRWZmZWN0IHwKfC0tLS0tLS0tfC0tLS0tLS0tfAp8IGBBY2NlcHQtRW5jb2RpbmdgIHwgQ29udHJvbHMgY29tcHJlc3Npb24gKGd6aXAsIGJyb3RsaSkgfAp8IGBSYW5nZWAgfCBFbmFibGVzIHBhcnRpYWwgY29udGVudCAoMjA2IHJlc3BvbnNlcykgfAp8IGBJZi1Ob25lLU1hdGNoYCB8IENvbmRpdGlvbmFsIHJlcXVlc3QgdmlhIEVUYWcgfAp8IGBJZi1Nb2RpZmllZC1TaW5jZWAgfCBDb25kaXRpb25hbCByZXF1ZXN0IHZpYSBtb2RpZmljYXRpb24gZGF0ZSB8CgpDdXN0b20gaGVhZGVycyBwYXNzIHRocm91Z2ggYnV0IGRvbid0IGFmZmVjdCBhc3NldCBzZXJ2aW5nLgoKIyMjIE1ldGhvZCBTdXBwb3J0Cgp8IE1ldGhvZCB8IFN1cHBvcnRlZCB8IFJlc3BvbnNlIHwKfC0tLS0tLS0tfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS18CnwgYEdFVGAgfCDinIUgWWVzIHwgQXNzZXQgY29udGVudCB8CnwgYEhFQURgIHwg4pyFIFllcyB8IEhlYWRlcnMgb25seSwgbm8gYm9keSB8CnwgYFBPU1RgLCBgUFVUYCwgZXRjLiB8IOKdjCBObyB8IDQwNSBNZXRob2QgTm90IEFsbG93ZWQgfAoKIyMgUmVzcG9uc2UgQmVoYXZpb3IKCiMjIyBDb250ZW50LVR5cGUgSW5mZXJlbmNlCgpBdXRvbWF0aWNhbGx5IHNldCBiYXNlZCBvbiBmaWxlIGV4dGVuc2lvbjoKCnwgRXh0ZW5zaW9uIHwgQ29udGVudC1UeXBlIHwKfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tfAp8IGAuaHRtbGAgfCBgdGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04YCB8CnwgYC5jc3NgIHwgYHRleHQvY3NzYCB8CnwgYC5qc2AgfCBgYXBwbGljYXRpb24vamF2YXNjcmlwdGAgfAp8IGAuanNvbmAgfCBgYXBwbGljYXRpb24vanNvbmAgfAp8IGAucG5nYCB8IGBpbWFnZS9wbmdgIHwKfCBgLmpwZ2AsIGAuanBlZ2AgfCBgaW1hZ2UvanBlZ2AgfAp8IGAuc3ZnYCB8IGBpbWFnZS9zdmcreG1sYCB8CnwgYC53b2ZmMmAgfCBgZm9udC93b2ZmMmAgfAoKIyMjIERlZmF1bHQgSGVhZGVycwoKUmVzcG9uc2VzIGluY2x1ZGU6CgpgYGAKQ29udGVudC1UeXBlOiA8aW5mZXJyZWQ+CkVUYWc6ICI8aGFzaD4iCkNhY2hlLUNvbnRyb2w6IHB1YmxpYywgbWF4LWFnZT0zNjAwCkNvbnRlbnQtRW5jb2Rpbmc6IGJyICAoaWYgc3VwcG9ydGVkIGFuZCBiZW5lZmljaWFsKQpgYGAKCioqQ2FjaGUtQ29udHJvbCBkZWZhdWx0czoqKgoKLSAxIGhvdXIgKGBtYXgtYWdlPTM2MDBgKSBmb3IgbW9zdCBhc3NldHMKLSBPdmVycmlkZSB2aWEgV29ya2VyIHJlc3BvbnNlIHRyYW5zZm9ybWF0aW9uIChzZWUgcGF0dGVybnMubWQ6MjctMzUpCgojIyMgQ29tcHJlc3Npb24KCkF1dG9tYXRpYyBjb21wcmVzc2lvbiBiYXNlZCBvbiBgQWNjZXB0LUVuY29kaW5nYDoKCi0gKipCcm90bGkqKiAoYGJyYCk6IFByZWZlcnJlZCwgYmVzdCBjb21wcmVzc2lvbgotICoqR3ppcCoqIChgZ3ppcGApOiBGYWxsYmFjawotICoqTm9uZSoqOiBJZiBjbGllbnQgZG9lc24ndCBzdXBwb3J0IG9yIGFzc2V0IHRvbyBzbWFsbAoKIyMjIEVUYWcgR2VuZXJhdGlvbgoKRVRhZ3MgYXJlIGNvbnRlbnQtYmFzZWQgaGFzaGVzOgoKYGBgCkVUYWc6ICJhM2IyYzFkNGU1ZjYuLi4iCmBgYAoKVXNlZCBmb3IgY29uZGl0aW9uYWwgcmVxdWVzdHMgKGBJZi1Ob25lLU1hdGNoYCkuIFJldHVybnMgYDMwNCBOb3QgTW9kaWZpZWRgIGlmIG1hdGNoLgoKIyMgRXJyb3IgUmVzcG9uc2VzCgp8IFN0YXR1cyB8IENvbmRpdGlvbiB8IEJlaGF2aW9yIHwKfC0tLS0tLS0tfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS18CnwgYDQwNGAgfCBBc3NldCBub3QgZm91bmQgfCBCb2R5IGRlcGVuZHMgb24gYG5vdF9mb3VuZF9oYW5kbGluZ2AgY29uZmlnIHwKfCBgNDA1YCB8IE5vbi1HRVQvSEVBRCBtZXRob2QgfCBgeyAiZXJyb3IiOiAiTWV0aG9kIG5vdCBhbGxvd2VkIiB9YCB8CnwgYDQxNmAgfCBJbnZhbGlkIFJhbmdlIGhlYWRlciB8IFJhbmdlIG5vdCBzYXRpc2ZpYWJsZSB8CgojIyMgNDA0IEhhbmRsaW5nCgpEZXBlbmRzIG9uIGNvbmZpZ3VyYXRpb24gKHNlZSBjb25maWd1cmF0aW9uLm1kOjQ1LTUyKToKCmBgYHR5cGVzY3JpcHQKLy8gbm90X2ZvdW5kX2hhbmRsaW5nOiAic2luZ2xlLXBhZ2UtYXBwbGljYXRpb24iCi8vIFJldHVybnMgL2luZGV4Lmh0bWwgd2l0aCAyMDAgc3RhdHVzCgovLyBub3RfZm91bmRfaGFuZGxpbmc6ICI0MDQtcGFnZSIKLy8gUmV0dXJucyAvNDA0Lmh0bWwgaWYgZXhpc3RzLCBlbHNlIDQwNCByZXNwb25zZQoKLy8gbm90X2ZvdW5kX2hhbmRsaW5nOiAibm9uZSIKLy8gUmV0dXJucyA0MDQgcmVzcG9uc2UKYGBgCgojIyBBZHZhbmNlZCBVc2FnZQoKIyMjIE1vZGlmeWluZyBSZXNwb25zZXMKCmBgYHR5cGVzY3JpcHQKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuQVNTRVRTLmZldGNoKHJlcXVlc3QpOwoKLy8gQ2xvbmUgYW5kIG1vZGlmeQpyZXR1cm4gbmV3IFJlc3BvbnNlKHJlc3BvbnNlLmJvZHksIHsKICBzdGF0dXM6IHJlc3BvbnNlLnN0YXR1cywKICBoZWFkZXJzOiB7CiAgICAuLi5PYmplY3QuZnJvbUVudHJpZXMocmVzcG9uc2UuaGVhZGVycyksCiAgICAnQ2FjaGUtQ29udHJvbCc6ICdwdWJsaWMsIG1heC1hZ2U9MzE1MzYwMDAnLAogICAgJ1gtQ3VzdG9tJzogJ3ZhbHVlJwogIH0KfSk7CmBgYAoKU2VlIHBhdHRlcm5zLm1kOjI3LTM1IGZvciBmdWxsIGV4YW1wbGUuCgojIyMgRXJyb3IgSGFuZGxpbmcKCmBgYHR5cGVzY3JpcHQKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuQVNTRVRTLmZldGNoKHJlcXVlc3QpOwoKaWYgKCFyZXNwb25zZS5vaykgewogIC8vIEFzc2V0IG5vdCBmb3VuZCBvciBlcnJvcgogIHJldHVybiBuZXcgUmVzcG9uc2UoJ0N1c3RvbSBlcnJvciBwYWdlJywgeyBzdGF0dXM6IDQwNCB9KTsKfQoKcmV0dXJuIHJlc3BvbnNlOwpgYGAKCiMjIyBDb25kaXRpb25hbCBTZXJ2aW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHVybCA9IG5ldyBVUkwocmVxdWVzdC51cmwpOwoKLy8gU2VydmUgZGlmZmVyZW50IGFzc2V0cyBiYXNlZCBvbiBjb25kaXRpb25zCmlmICh1cmwucGF0aG5hbWUgPT09ICcvJykgewogIHJldHVybiBlbnYuQVNTRVRTLmZldGNoKCcvaW5kZXguaHRtbCcpOwp9CgpyZXR1cm4gZW52LkFTU0VUUy5mZXRjaChyZXF1ZXN0KTsKYGBgCgpTZWUgcGF0dGVybnMubWQgZm9yIGNvbXBsZXRlIHBhdHRlcm5zLgo=
+# API Reference
+
+## ASSETS Binding
+
+The `ASSETS` binding provides access to static assets via the `Fetcher` interface.
+
+### Type Definition
+
+```typescript
+interface Env {
+  ASSETS: Fetcher;
+}
+
+interface Fetcher {
+  fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+}
+```
+
+### Method Signatures
+
+```typescript
+// 1. Forward entire request
+await env.ASSETS.fetch(request);
+
+// 2. String path (hostname ignored, only path matters)
+await env.ASSETS.fetch("https://any-host/path/to/asset.png");
+
+// 3. URL object
+await env.ASSETS.fetch(new URL("/index.html", request.url));
+
+// 4. Constructed Request object
+await env.ASSETS.fetch(new Request(new URL("/logo.png", request.url), {
+  method: "GET",
+  headers: request.headers
+}));
+```
+
+**Key behaviors:**
+
+- Host/origin is ignored for string/URL inputs (only path is used)
+- Method must be GET (others return 405)
+- Request headers pass through (affects response)
+- Returns standard `Response` object
+
+## Request Handling
+
+### Path Resolution
+
+```typescript
+// All resolve to same asset:
+env.ASSETS.fetch("https://example.com/logo.png")
+env.ASSETS.fetch("https://ignored.host/logo.png")
+env.ASSETS.fetch("/logo.png")
+```
+
+Assets are resolved relative to configured `assets.directory`.
+
+### Headers
+
+Request headers that affect response:
+
+| Header | Effect |
+|--------|--------|
+| `Accept-Encoding` | Controls compression (gzip, brotli) |
+| `Range` | Enables partial content (206 responses) |
+| `If-None-Match` | Conditional request via ETag |
+| `If-Modified-Since` | Conditional request via modification date |
+
+Custom headers pass through but don't affect asset serving.
+
+### Method Support
+
+| Method | Supported | Response |
+|--------|-----------|----------|
+| `GET` | ✅ Yes | Asset content |
+| `HEAD` | ✅ Yes | Headers only, no body |
+| `POST`, `PUT`, etc. | ❌ No | 405 Method Not Allowed |
+
+## Response Behavior
+
+### Content-Type Inference
+
+Automatically set based on file extension:
+
+| Extension | Content-Type |
+|-----------|--------------|
+| `.html` | `text/html; charset=utf-8` |
+| `.css` | `text/css` |
+| `.js` | `application/javascript` |
+| `.json` | `application/json` |
+| `.png` | `image/png` |
+| `.jpg`, `.jpeg` | `image/jpeg` |
+| `.svg` | `image/svg+xml` |
+| `.woff2` | `font/woff2` |
+
+### Default Headers
+
+Responses include:
+
+```
+Content-Type: <inferred>
+ETag: "<hash>"
+Cache-Control: public, max-age=3600
+Content-Encoding: br  (if supported and beneficial)
+```
+
+**Cache-Control defaults:**
+
+- 1 hour (`max-age=3600`) for most assets
+- Override via Worker response transformation (see patterns.md:27-35)
+
+### Compression
+
+Automatic compression based on `Accept-Encoding`:
+
+- **Brotli** (`br`): Preferred, best compression
+- **Gzip** (`gzip`): Fallback
+- **None**: If client doesn't support or asset too small
+
+### ETag Generation
+
+ETags are content-based hashes:
+
+```
+ETag: "a3b2c1d4e5f6..."
+```
+
+Used for conditional requests (`If-None-Match`). Returns `304 Not Modified` if match.
+
+## Error Responses
+
+| Status | Condition | Behavior |
+|--------|-----------|----------|
+| `404` | Asset not found | Body depends on `not_found_handling` config |
+| `405` | Non-GET/HEAD method | `{ "error": "Method not allowed" }` |
+| `416` | Invalid Range header | Range not satisfiable |
+
+### 404 Handling
+
+Depends on configuration (see configuration.md:45-52):
+
+```typescript
+// not_found_handling: "single-page-application"
+// Returns /index.html with 200 status
+
+// not_found_handling: "404-page"
+// Returns /404.html if exists, else 404 response
+
+// not_found_handling: "none"
+// Returns 404 response
+```
+
+## Advanced Usage
+
+### Modifying Responses
+
+```typescript
+const response = await env.ASSETS.fetch(request);
+
+// Clone and modify
+return new Response(response.body, {
+  status: response.status,
+  headers: {
+    ...Object.fromEntries(response.headers),
+    'Cache-Control': 'public, max-age=31536000',
+    'X-Custom': 'value'
+  }
+});
+```
+
+See patterns.md:27-35 for full example.
+
+### Error Handling
+
+```typescript
+const response = await env.ASSETS.fetch(request);
+
+if (!response.ok) {
+  // Asset not found or error
+  return new Response('Custom error page', { status: 404 });
+}
+
+return response;
+```
+
+### Conditional Serving
+
+```typescript
+const url = new URL(request.url);
+
+// Serve different assets based on conditions
+if (url.pathname === '/') {
+  return env.ASSETS.fetch('/index.html');
+}
+
+return env.ASSETS.fetch(request);
+```
+
+See patterns.md for complete patterns.

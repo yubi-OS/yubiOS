@@ -1,1 +1,237 @@
-IyBFbWFpbCBXb3JrZXJzIEFQSSBSZWZlcmVuY2UKCkNvbXBsZXRlIEFQSSByZWZlcmVuY2UgZm9yIENsb3VkZmxhcmUgRW1haWwgV29ya2VycyBydW50aW1lLgoKIyMgRm9yd2FyZGFibGVFbWFpbE1lc3NhZ2UgSW50ZXJmYWNlCgpUaGUgbWFpbiBpbnRlcmZhY2UgcGFzc2VkIHRvIGVtYWlsIGhhbmRsZXJzLgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRm9yd2FyZGFibGVFbWFpbE1lc3NhZ2UgewogIHJlYWRvbmx5IGZyb206IHN0cmluZzsgICAgICAgIC8vIEVudmVsb3BlIE1BSUwgRlJPTSAoU01UUCBzZW5kZXIpCiAgcmVhZG9ubHkgdG86IHN0cmluZzsgICAgICAgICAgLy8gRW52ZWxvcGUgUkNQVCBUTyAoU01UUCByZWNpcGllbnQpCiAgcmVhZG9ubHkgaGVhZGVyczogSGVhZGVyczsgICAgLy8gV2ViLXN0YW5kYXJkIEhlYWRlcnMgb2JqZWN0CiAgcmVhZG9ubHkgcmF3OiBSZWFkYWJsZVN0cmVhbTsgLy8gUmF3IE1JTUUgbWVzc2FnZSAoc2luZ2xlLXVzZSBzdHJlYW0pCiAgcmVhZG9ubHkgcmF3U2l6ZTogbnVtYmVyOyAgICAgLy8gVG90YWwgbWVzc2FnZSBzaXplIGluIGJ5dGVzCiAgCiAgc2V0UmVqZWN0KHJlYXNvbjogc3RyaW5nKTogdm9pZDsKICBmb3J3YXJkKHJjcHRUbzogc3RyaW5nLCBoZWFkZXJzPzogSGVhZGVycyk6IFByb21pc2U8dm9pZD47CiAgcmVwbHkobWVzc2FnZTogRW1haWxNZXNzYWdlKTogUHJvbWlzZTx2b2lkPjsKfQpgYGAKCiMjIyBQcm9wZXJ0aWVzCgp8IFByb3BlcnR5IHwgVHlwZSB8IERlc2NyaXB0aW9uIHwKfC0tLS0tLS0tLS18LS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYGZyb21gIHwgc3RyaW5nIHwgRW52ZWxvcGUgc2VuZGVyIChTTVRQIE1BSUwgRlJPTSkgLSB1c2UgZm9yIHNlY3VyaXR5IHwKfCBgdG9gIHwgc3RyaW5nIHwgRW52ZWxvcGUgcmVjaXBpZW50IChTTVRQIFJDUFQgVE8pIHwKfCBgaGVhZGVyc2AgfCBIZWFkZXJzIHwgTWVzc2FnZSBoZWFkZXJzIChTdWJqZWN0LCBNZXNzYWdlLUlELCBldGMuKSB8CnwgYHJhd2AgfCBSZWFkYWJsZVN0cmVhbSB8IFJhdyBNSU1FIG1lc3NhZ2UgKCoqc2luZ2xlLXVzZSoqLCBidWZmZXIgZmlyc3QpIHwKfCBgcmF3U2l6ZWAgfCBudW1iZXIgfCBNZXNzYWdlIHNpemUgaW4gYnl0ZXMgfAoKIyMjIE1ldGhvZHMKCiMjIyMgc2V0UmVqZWN0KHJlYXNvbjogc3RyaW5nKTogdm9pZAoKUmVqZWN0IHdpdGggcGVybWFuZW50IFNNVFAgNXh4IGVycm9yLiBFbWFpbCBub3QgZGVsaXZlcmVkLCBzZW5kZXIgbWF5IHJlY2VpdmUgYm91bmNlLgoKYGBgdHlwZXNjcmlwdAppZiAoYmxvY2tMaXN0LmluY2x1ZGVzKG1lc3NhZ2UuZnJvbSkpIHsKICBtZXNzYWdlLnNldFJlamVjdCgnU2VuZGVyIGJsb2NrZWQnKTsKfQpgYGAKCiMjIyMgZm9yd2FyZChyY3B0VG86IHN0cmluZywgaGVhZGVycz86IEhlYWRlcnMpOiBQcm9taXNlPHZvaWQ+CgpGb3J3YXJkIHRvIHZlcmlmaWVkIGRlc3RpbmF0aW9uLiBPbmx5IGBYLSpgIGN1c3RvbSBoZWFkZXJzIGFsbG93ZWQuCgpgYGB0eXBlc2NyaXB0CmF3YWl0IG1lc3NhZ2UuZm9yd2FyZCgnaW5ib3hAZXhhbXBsZS5jb20nKTsKCi8vIFdpdGggY3VzdG9tIGhlYWRlcnMKY29uc3QgaCA9IG5ldyBIZWFkZXJzKCk7Cmguc2V0KCdYLVByb2Nlc3NlZC1CeScsICd3b3JrZXInKTsKYXdhaXQgbWVzc2FnZS5mb3J3YXJkKCdpbmJveEBleGFtcGxlLmNvbScsIGgpOwpgYGAKCiMjIyMgcmVwbHkobWVzc2FnZTogRW1haWxNZXNzYWdlKTogUHJvbWlzZTx2b2lkPgoKU2VuZCBhIHJlcGx5IHRvIHRoZSBvcmlnaW5hbCBzZW5kZXIgKE1hcmNoIDIwMjUgZmVhdHVyZSkuCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IEVtYWlsTWVzc2FnZSB9IGZyb20gJ2Nsb3VkZmxhcmU6ZW1haWwnOwppbXBvcnQgeyBjcmVhdGVNaW1lTWVzc2FnZSB9IGZyb20gJ21pbWV0ZXh0JzsKCmNvbnN0IG1zZyA9IGNyZWF0ZU1pbWVNZXNzYWdlKCk7Cm1zZy5zZXRTZW5kZXIoeyBuYW1lOiAnU3VwcG9ydCcsIGFkZHI6ICdzdXBwb3J0QGV4YW1wbGUuY29tJyB9KTsKbXNnLnNldFJlY2lwaWVudChtZXNzYWdlLmZyb20pOwptc2cuc2V0U3ViamVjdChgUmU6ICR7bWVzc2FnZS5oZWFkZXJzLmdldCgnU3ViamVjdCcpfWApOwptc2cuc2V0SGVhZGVyKCdJbi1SZXBseS1UbycsIG1lc3NhZ2UuaGVhZGVycy5nZXQoJ01lc3NhZ2UtSUQnKSk7Cm1zZy5zZXRIZWFkZXIoJ1JlZmVyZW5jZXMnLCBtZXNzYWdlLmhlYWRlcnMuZ2V0KCdSZWZlcmVuY2VzJykgfHwgJycpOwptc2cuYWRkTWVzc2FnZSh7CiAgY29udGVudFR5cGU6ICd0ZXh0L3BsYWluJywKICBkYXRhOiAnVGhhbmsgeW91IGZvciB5b3VyIG1lc3NhZ2UuJwp9KTsKCmF3YWl0IG1lc3NhZ2UucmVwbHkobmV3IEVtYWlsTWVzc2FnZSgKICAnc3VwcG9ydEBleGFtcGxlLmNvbScsCiAgbWVzc2FnZS5mcm9tLAogIG1zZy5hc1JhdygpCikpOwpgYGAKCioqUmVxdWlyZW1lbnRzKio6Ci0gSW5jb21pbmcgZW1haWwgbmVlZHMgdmFsaWQgRE1BUkMKLSBSZXBseSBvbmNlIHBlciBldmVudCwgcmVjaXBpZW50ID0gYG1lc3NhZ2UuZnJvbWAKLSBTZW5kZXIgZG9tYWluID0gcmVjZWl2aW5nIGRvbWFpbiwgd2l0aCBETUFSQy9TUEYvREtJTQotIE1heCAxMDAgYFJlZmVyZW5jZXNgIGVudHJpZXMKLSBUaHJlYWRpbmc6IGBJbi1SZXBseS1Ub2AgKG9yaWdpbmFsIE1lc3NhZ2UtSUQpLCBgUmVmZXJlbmNlc2AsIG5ldyBgTWVzc2FnZS1JRGAKCiMjIEVtYWlsTWVzc2FnZSBDb25zdHJ1Y3RvcgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBFbWFpbE1lc3NhZ2UgfSBmcm9tICdjbG91ZGZsYXJlOmVtYWlsJzsKCm5ldyBFbWFpbE1lc3NhZ2UoZnJvbTogc3RyaW5nLCB0bzogc3RyaW5nLCByYXc6IFJlYWRhYmxlU3RyZWFtIHwgc3RyaW5nKQpgYGAKClVzZWQgZm9yIHNlbmRpbmcgZW1haWxzIChyZXBsaWVzIG9yIHZpYSBTZW5kRW1haWwgYmluZGluZykuIERvbWFpbiBtdXN0IGJlIHZlcmlmaWVkLgoKIyMgU2VuZEVtYWlsIEludGVyZmFjZQoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgU2VuZEVtYWlsIHsKICBzZW5kKG1lc3NhZ2U6IEVtYWlsTWVzc2FnZSk6IFByb21pc2U8dm9pZD47Cn0KCi8vIFVzYWdlCmF3YWl0IGVudi5FTUFJTC5zZW5kKG5ldyBFbWFpbE1lc3NhZ2UoZnJvbSwgdG8sIG1pbWVDb250ZW50KSk7CmBgYAoKIyMgU2VuZEVtYWlsIEJpbmRpbmcgVHlwZXMKCmBgYGpzb25jCnsKICAic2VuZF9lbWFpbCI6IFsKICAgIHsgIm5hbWUiOiAiRU1BSUwiIH0sICAvLyBUeXBlIDE6IEFueSB2ZXJpZmllZCBhZGRyZXNzCiAgICB7ICJuYW1lIjogIkxPR1MiLCAiZGVzdGluYXRpb25fYWRkcmVzcyI6ICJsb2dzQGV4YW1wbGUuY29tIiB9LCAgLy8gVHlwZSAyOiBTaW5nbGUgZGVzdAogICAgeyAibmFtZSI6ICJURUFNIiwgImFsbG93ZWRfZGVzdGluYXRpb25fYWRkcmVzc2VzIjogWyJhQGV4LmNvbSIsICJiQGV4LmNvbSJdIH0sICAvLyBUeXBlIDM6IERlc3QgYWxsb3dsaXN0CiAgICB7ICJuYW1lIjogIk5PUkVQTFkiLCAiYWxsb3dlZF9zZW5kZXJfYWRkcmVzc2VzIjogWyJub3JlcGx5QGV4LmNvbSJdIH0gIC8vIFR5cGUgNDogU2VuZGVyIGFsbG93bGlzdAogIF0KfQpgYGAKCiMjIHBvc3RhbC1taW1lIFBhcnNlZCBPdXRwdXQKCnBvc3RhbC1taW1lIHYyLjcuMyBwYXJzZXMgaW5jb21pbmcgZW1haWxzIGludG8gc3RydWN0dXJlZCBkYXRhLgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgUGFyc2VkRW1haWwgewogIGhlYWRlcnM6IEFycmF5PHsga2V5OiBzdHJpbmc7IHZhbHVlOiBzdHJpbmcgfT47CiAgZnJvbTogeyBuYW1lOiBzdHJpbmc7IGFkZHJlc3M6IHN0cmluZyB9IHwgbnVsbDsKICB0bzogQXJyYXk8eyBuYW1lOiBzdHJpbmc7IGFkZHJlc3M6IHN0cmluZyB9PiB8IHsgbmFtZTogc3RyaW5nOyBhZGRyZXNzOiBzdHJpbmcgfSB8IG51bGw7CiAgY2M6IEFycmF5PHsgbmFtZTogc3RyaW5nOyBhZGRyZXNzOiBzdHJpbmcgfT4gfCBudWxsOwogIGJjYzogQXJyYXk8eyBuYW1lOiBzdHJpbmc7IGFkZHJlc3M6IHN0cmluZyB9PiB8IG51bGw7CiAgc3ViamVjdDogc3RyaW5nOwogIG1lc3NhZ2VJZDogc3RyaW5nIHwgbnVsbDsKICBpblJlcGx5VG86IHN0cmluZyB8IG51bGw7CiAgcmVmZXJlbmNlczogc3RyaW5nIHwgbnVsbDsKICBkYXRlOiBzdHJpbmcgfCBudWxsOwogIGh0bWw6IHN0cmluZyB8IG51bGw7CiAgdGV4dDogc3RyaW5nIHwgbnVsbDsKICBhdHRhY2htZW50czogQXJyYXk8ewogICAgZmlsZW5hbWU6IHN0cmluZzsKICAgIG1pbWVUeXBlOiBzdHJpbmc7CiAgICBkaXNwb3NpdGlvbjogc3RyaW5nIHwgbnVsbDsKICAgIHJlbGF0ZWQ6IGJvb2xlYW47CiAgICBjb250ZW50SWQ6IHN0cmluZyB8IG51bGw7CiAgICBjb250ZW50OiBVaW50OEFycmF5OwogIH0+Owp9CmBgYAoKIyMjIFVzYWdlCgpgYGB0eXBlc2NyaXB0CmltcG9ydCBQb3N0YWxNaW1lIGZyb20gJ3Bvc3RhbC1taW1lJzsKCmNvbnN0IGJ1ZmZlciA9IGF3YWl0IG5ldyBSZXNwb25zZShtZXNzYWdlLnJhdykuYXJyYXlCdWZmZXIoKTsKY29uc3QgZW1haWwgPSBhd2FpdCBQb3N0YWxNaW1lLnBhcnNlKGJ1ZmZlcik7Cgpjb25zb2xlLmxvZyhlbWFpbC5zdWJqZWN0KTsKY29uc29sZS5sb2coZW1haWwuZnJvbT8uYWRkcmVzcyk7CmNvbnNvbGUubG9nKGVtYWlsLnRleHQpOwpjb25zb2xlLmxvZyhlbWFpbC5hdHRhY2htZW50cy5sZW5ndGgpOwpgYGAKCiMjIG1pbWV0ZXh0IEFQSSBRdWljayBSZWZlcmVuY2UKCm1pbWV0ZXh0IHYzLjAuMjcgY29tcG9zZXMgb3V0Z29pbmcgZW1haWxzLgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBjcmVhdGVNaW1lTWVzc2FnZSB9IGZyb20gJ21pbWV0ZXh0JzsKCmNvbnN0IG1zZyA9IGNyZWF0ZU1pbWVNZXNzYWdlKCk7CgovLyBTZW5kZXIKbXNnLnNldFNlbmRlcih7IG5hbWU6ICdKb2huIERvZScsIGFkZHI6ICdqb2huQGV4YW1wbGUuY29tJyB9KTsKCi8vIFJlY2lwaWVudHMKbXNnLnNldFJlY2lwaWVudCgnYWxpY2VAZXhhbXBsZS5jb20nKTsKbXNnLnNldFJlY2lwaWVudHMoWydib2JAZXhhbXBsZS5jb20nLCAnY2Fyb2xAZXhhbXBsZS5jb20nXSk7Cm1zZy5zZXRDYygnbWFuYWdlckBleGFtcGxlLmNvbScpOwptc2cuc2V0QmNjKFsnYXVkaXRAZXhhbXBsZS5jb20nXSk7CgovLyBIZWFkZXJzCm1zZy5zZXRTdWJqZWN0KCdNZWV0aW5nIE5vdGVzJyk7Cm1zZy5zZXRIZWFkZXIoJ0luLVJlcGx5LVRvJywgJzxwcmV2aW91cy1tZXNzYWdlLWlkPicpOwptc2cuc2V0SGVhZGVyKCdSZWZlcmVuY2VzJywgJzxtc2cxPiA8bXNnMj4nKTsKbXNnLnNldEhlYWRlcignTWVzc2FnZS1JRCcsIGA8JHtjcnlwdG8ucmFuZG9tVVVJRCgpfUBleGFtcGxlLmNvbT5gKTsKCi8vIENvbnRlbnQKbXNnLmFkZE1lc3NhZ2UoewogIGNvbnRlbnRUeXBlOiAndGV4dC9wbGFpbicsCiAgZGF0YTogJ1BsYWluIHRleHQgY29udGVudCcKfSk7Cgptc2cuYWRkTWVzc2FnZSh7CiAgY29udGVudFR5cGU6ICd0ZXh0L2h0bWwnLAogIGRhdGE6ICc8cD5IVE1MIGNvbnRlbnQ8L3A+Jwp9KTsKCi8vIEF0dGFjaG1lbnRzCm1zZy5hZGRBdHRhY2htZW50KHsKICBmaWxlbmFtZTogJ3JlcG9ydC5wZGYnLAogIGNvbnRlbnRUeXBlOiAnYXBwbGljYXRpb24vcGRmJywKICBkYXRhOiBwZGZCdWZmZXIgLy8gVWludDhBcnJheSBvciBiYXNlNjQgc3RyaW5nCn0pOwoKLy8gR2VuZXJhdGUgcmF3IE1JTUUKY29uc3QgcmF3ID0gbXNnLmFzUmF3KCk7IC8vIFJldHVybnMgc3RyaW5nCmBgYAoKIyMgVHlwZVNjcmlwdCBUeXBlcwoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyAKICBGb3J3YXJkYWJsZUVtYWlsTWVzc2FnZSwKICBFbWFpbE1lc3NhZ2UgCn0gZnJvbSAnY2xvdWRmbGFyZTplbWFpbCc7CgppbnRlcmZhY2UgRW52IHsKICBFTUFJTDogU2VuZEVtYWlsOwogIEVNQUlMX0FSQ0hJVkU6IEtWTmFtZXNwYWNlOwogIEFMTE9XRURfU0VOREVSUzogS1ZOYW1lc3BhY2U7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBlbWFpbCgKICAgIG1lc3NhZ2U6IEZvcndhcmRhYmxlRW1haWxNZXNzYWdlLAogICAgZW52OiBFbnYsCiAgICBjdHg6IEV4ZWN1dGlvbkNvbnRleHQKICApOiBQcm9taXNlPHZvaWQ+IHsKICAgIC8vIEZ1bGx5IHR5cGVkCiAgfQp9OwpgYGAK
+# Email Workers API Reference
+
+Complete API reference for Cloudflare Email Workers runtime.
+
+## ForwardableEmailMessage Interface
+
+The main interface passed to email handlers.
+
+```typescript
+interface ForwardableEmailMessage {
+  readonly from: string;        // Envelope MAIL FROM (SMTP sender)
+  readonly to: string;          // Envelope RCPT TO (SMTP recipient)
+  readonly headers: Headers;    // Web-standard Headers object
+  readonly raw: ReadableStream; // Raw MIME message (single-use stream)
+  readonly rawSize: number;     // Total message size in bytes
+  
+  setReject(reason: string): void;
+  forward(rcptTo: string, headers?: Headers): Promise<void>;
+  reply(message: EmailMessage): Promise<void>;
+}
+```
+
+### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `from` | string | Envelope sender (SMTP MAIL FROM) - use for security |
+| `to` | string | Envelope recipient (SMTP RCPT TO) |
+| `headers` | Headers | Message headers (Subject, Message-ID, etc.) |
+| `raw` | ReadableStream | Raw MIME message (**single-use**, buffer first) |
+| `rawSize` | number | Message size in bytes |
+
+### Methods
+
+#### setReject(reason: string): void
+
+Reject with permanent SMTP 5xx error. Email not delivered, sender may receive bounce.
+
+```typescript
+if (blockList.includes(message.from)) {
+  message.setReject('Sender blocked');
+}
+```
+
+#### forward(rcptTo: string, headers?: Headers): Promise<void>
+
+Forward to verified destination. Only `X-*` custom headers allowed.
+
+```typescript
+await message.forward('inbox@example.com');
+
+// With custom headers
+const h = new Headers();
+h.set('X-Processed-By', 'worker');
+await message.forward('inbox@example.com', h);
+```
+
+#### reply(message: EmailMessage): Promise<void>
+
+Send a reply to the original sender (March 2025 feature).
+
+```typescript
+import { EmailMessage } from 'cloudflare:email';
+import { createMimeMessage } from 'mimetext';
+
+const msg = createMimeMessage();
+msg.setSender({ name: 'Support', addr: 'support@example.com' });
+msg.setRecipient(message.from);
+msg.setSubject(`Re: ${message.headers.get('Subject')}`);
+msg.setHeader('In-Reply-To', message.headers.get('Message-ID'));
+msg.setHeader('References', message.headers.get('References') || '');
+msg.addMessage({
+  contentType: 'text/plain',
+  data: 'Thank you for your message.'
+});
+
+await message.reply(new EmailMessage(
+  'support@example.com',
+  message.from,
+  msg.asRaw()
+));
+```
+
+**Requirements**:
+- Incoming email needs valid DMARC
+- Reply once per event, recipient = `message.from`
+- Sender domain = receiving domain, with DMARC/SPF/DKIM
+- Max 100 `References` entries
+- Threading: `In-Reply-To` (original Message-ID), `References`, new `Message-ID`
+
+## EmailMessage Constructor
+
+```typescript
+import { EmailMessage } from 'cloudflare:email';
+
+new EmailMessage(from: string, to: string, raw: ReadableStream | string)
+```
+
+Used for sending emails (replies or via SendEmail binding). Domain must be verified.
+
+## SendEmail Interface
+
+```typescript
+interface SendEmail {
+  send(message: EmailMessage): Promise<void>;
+}
+
+// Usage
+await env.EMAIL.send(new EmailMessage(from, to, mimeContent));
+```
+
+## SendEmail Binding Types
+
+```jsonc
+{
+  "send_email": [
+    { "name": "EMAIL" },  // Type 1: Any verified address
+    { "name": "LOGS", "destination_address": "logs@example.com" },  // Type 2: Single dest
+    { "name": "TEAM", "allowed_destination_addresses": ["a@ex.com", "b@ex.com"] },  // Type 3: Dest allowlist
+    { "name": "NOREPLY", "allowed_sender_addresses": ["noreply@ex.com"] }  // Type 4: Sender allowlist
+  ]
+}
+```
+
+## postal-mime Parsed Output
+
+postal-mime v2.7.3 parses incoming emails into structured data.
+
+```typescript
+interface ParsedEmail {
+  headers: Array<{ key: string; value: string }>;
+  from: { name: string; address: string } | null;
+  to: Array<{ name: string; address: string }> | { name: string; address: string } | null;
+  cc: Array<{ name: string; address: string }> | null;
+  bcc: Array<{ name: string; address: string }> | null;
+  subject: string;
+  messageId: string | null;
+  inReplyTo: string | null;
+  references: string | null;
+  date: string | null;
+  html: string | null;
+  text: string | null;
+  attachments: Array<{
+    filename: string;
+    mimeType: string;
+    disposition: string | null;
+    related: boolean;
+    contentId: string | null;
+    content: Uint8Array;
+  }>;
+}
+```
+
+### Usage
+
+```typescript
+import PostalMime from 'postal-mime';
+
+const buffer = await new Response(message.raw).arrayBuffer();
+const email = await PostalMime.parse(buffer);
+
+console.log(email.subject);
+console.log(email.from?.address);
+console.log(email.text);
+console.log(email.attachments.length);
+```
+
+## mimetext API Quick Reference
+
+mimetext v3.0.27 composes outgoing emails.
+
+```typescript
+import { createMimeMessage } from 'mimetext';
+
+const msg = createMimeMessage();
+
+// Sender
+msg.setSender({ name: 'John Doe', addr: 'john@example.com' });
+
+// Recipients
+msg.setRecipient('alice@example.com');
+msg.setRecipients(['bob@example.com', 'carol@example.com']);
+msg.setCc('manager@example.com');
+msg.setBcc(['audit@example.com']);
+
+// Headers
+msg.setSubject('Meeting Notes');
+msg.setHeader('In-Reply-To', '<previous-message-id>');
+msg.setHeader('References', '<msg1> <msg2>');
+msg.setHeader('Message-ID', `<${crypto.randomUUID()}@example.com>`);
+
+// Content
+msg.addMessage({
+  contentType: 'text/plain',
+  data: 'Plain text content'
+});
+
+msg.addMessage({
+  contentType: 'text/html',
+  data: '<p>HTML content</p>'
+});
+
+// Attachments
+msg.addAttachment({
+  filename: 'report.pdf',
+  contentType: 'application/pdf',
+  data: pdfBuffer // Uint8Array or base64 string
+});
+
+// Generate raw MIME
+const raw = msg.asRaw(); // Returns string
+```
+
+## TypeScript Types
+
+```typescript
+import { 
+  ForwardableEmailMessage,
+  EmailMessage 
+} from 'cloudflare:email';
+
+interface Env {
+  EMAIL: SendEmail;
+  EMAIL_ARCHIVE: KVNamespace;
+  ALLOWED_SENDERS: KVNamespace;
+}
+
+export default {
+  async email(
+    message: ForwardableEmailMessage,
+    env: Env,
+    ctx: ExecutionContext
+  ): Promise<void> {
+    // Fully typed
+  }
+};
+```

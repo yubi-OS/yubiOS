@@ -1,1 +1,139 @@
-IyBXb3JrZXJkIEdvdGNoYXMKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAiTWlzc2luZyBjb21wYXRpYmlsaXR5IGRhdGUiCioqQ2F1c2U6KiogQ29tcGF0aWJpbGl0eSBkYXRlIG5vdCBzZXQKKipTb2x1dGlvbjoqKgrinYwgV3Jvbmc6CmBgYGNhcG5wCmNvbnN0IHdvcmtlciA6V29ya2VyZC5Xb3JrZXIgPSAoCiAgc2VydmljZVdvcmtlclNjcmlwdCA9IGVtYmVkICJ3b3JrZXIuanMiCikKYGBgCgrinIUgQ29ycmVjdDoKYGBgY2FwbnAKY29uc3Qgd29ya2VyIDpXb3JrZXJkLldvcmtlciA9ICgKICBzZXJ2aWNlV29ya2VyU2NyaXB0ID0gZW1iZWQgIndvcmtlci5qcyIsCiAgY29tcGF0aWJpbGl0eURhdGUgPSAiMjAyNC0wMS0xNSIgICMgQWx3YXlzIHNldCEKKQpgYGAKCiMjIyBXcm9uZyBCaW5kaW5nIFR5cGUKKipQcm9ibGVtOioqIEpTT04gbm90IHBhcnNlZAoqKkNhdXNlOioqIFVzaW5nIGB0ZXh0ID0gJ3sia2V5IjoidmFsdWUifSdgIGluc3RlYWQgb2YgYGpzb25gCioqU29sdXRpb246KiogVXNlIGBqc29uID0gJ3sia2V5IjoidmFsdWUifSdgIGZvciBwYXJzZWQgb2JqZWN0cwoKIyMjIFNlcnZpY2UgdnMgTmFtZXNwYWNlCioqUHJvYmxlbToqKiBDYW5ub3QgY3JlYXRlIERPIGluc3RhbmNlCioqQ2F1c2U6KiogVXNpbmcgYHNlcnZpY2UgPSAicm9vbS1zZXJ2aWNlImAgZm9yIER1cmFibGUgT2JqZWN0CioqU29sdXRpb246KiogVXNlIGBkdXJhYmxlT2JqZWN0TmFtZXNwYWNlID0gIlJvb20iYCBmb3IgRE8gYmluZGluZ3MKCiMjIyBNb2R1bGUgTmFtZSBNaXNtYXRjaAoqKlByb2JsZW06KiogSW1wb3J0IGZhaWxzCioqQ2F1c2U6KiogTW9kdWxlIG5hbWUgaW5jbHVkZXMgcGF0aDogYG5hbWUgPSAic3JjL2luZGV4LmpzImAKKipTb2x1dGlvbjoqKiBVc2Ugc2ltcGxlIG5hbWVzOiBgbmFtZSA9ICJpbmRleC5qcyJgLCBlbWJlZCB3aXRoIHBhdGgKCiMjIE5ldHdvcmsgQWNjZXNzCgoqKlByb2JsZW06KiogRmV0Y2ggZmFpbHMgd2l0aCBuZXR3b3JrIGVycm9yCioqQ2F1c2U6KiogTm8gbmV0d29yayBzZXJ2aWNlIGNvbmZpZ3VyZWQgKHdvcmtlcmQgaGFzIG5vIGdsb2JhbCBmZXRjaCkKKipTb2x1dGlvbjoqKiBBZGQgbmV0d29yayBzZXJ2aWNlIGJpbmRpbmc6CmBgYGNhcG5wCnNlcnZpY2VzID0gWyhuYW1lID0gImludGVybmV0IiwgbmV0d29yayA9IChhbGxvdyA9IFsicHVibGljIl0pKV0KYmluZGluZ3MgPSBbKG5hbWUgPSAiTkVUIiwgc2VydmljZSA9ICJpbnRlcm5ldCIpXQpgYGAKCk9yIGV4dGVybmFsIHNlcnZpY2U6CmBgYGNhcG5wCmJpbmRpbmdzID0gWyhuYW1lID0gIkFQSSIsIHNlcnZpY2UgPSAoZXh0ZXJuYWwgPSAoYWRkcmVzcyA9ICJhcGkuY29tOjQ0MyIsIGh0dHAgPSAoc3R5bGUgPSB0bHMpKSkpXQpgYGAKCiMjIyAiV29ya2VyIG5vdCByZXNwb25kaW5nIgoqKkNhdXNlOioqIFNvY2tldCBtaXNjb25maWd1cmVkLCBubyBmZXRjaCBoYW5kbGVyLCBvciBwb3J0IHVuYXZhaWxhYmxlCioqU29sdXRpb246KiogVmVyaWZ5IHNvY2tldCBgYWRkcmVzc2AgbWF0Y2hlcywgd29ya2VyIGV4cG9ydHMgYGZldGNoKClgLCBwb3J0IGF2YWlsYWJsZQoKIyMjICJCaW5kaW5nIG5vdCBmb3VuZCIKKipDYXVzZToqKiBOYW1lIG1pc21hdGNoIG9yIHNlcnZpY2UgZG9lc24ndCBleGlzdAoqKlNvbHV0aW9uOioqIENoZWNrIGJpbmRpbmcgbmFtZSBpbiBjb25maWcgbWF0Y2hlcyBjb2RlIChgZW52LkJJTkRJTkdgIGZvciBFUyBtb2R1bGVzKQoKIyMjICJNb2R1bGUgbm90IGZvdW5kIgoqKkNhdXNlOioqIE1vZHVsZSBuYW1lIGRvZXNuJ3QgbWF0Y2ggaW1wb3J0IG9yIGJhZCBlbWJlZCBwYXRoCioqU29sdXRpb246KiogTW9kdWxlIGBuYW1lYCBtdXN0IG1hdGNoIGltcG9ydCBwYXRoIGV4YWN0bHksIHZlcmlmeSBgZW1iZWRgIHBhdGgKCiMjIyAiQ29tcGF0aWJpbGl0eSBlcnJvciIKKipDYXVzZToqKiBEYXRlIG5vdCBzZXQgb3IgQVBJIHVuYXZhaWxhYmxlIG9uIHRoYXQgZGF0ZQoqKlNvbHV0aW9uOioqIFNldCBgY29tcGF0aWJpbGl0eURhdGVgLCB2ZXJpZnkgQVBJIGF2YWlsYWJsZSBvbiB0aGF0IGRhdGUKCiMjIFBlcmZvcm1hbmNlIElzc3VlcwoKKipQcm9ibGVtOioqIEhpZ2ggbWVtb3J5IHVzYWdlCioqQ2F1c2U6KiogTGFyZ2UgY2FjaGVzIG9yIG1hbnkgaXNvbGF0ZXMKKipTb2x1dGlvbjoqKiBTZXQgY2FjaGUgbGltaXRzLCByZWR1Y2UgaXNvbGF0ZSBjb3VudCwgb3IgdXNlIFY4IGZsYWdzIChjYXV0aW9uKQoKKipQcm9ibGVtOioqIFNsb3cgc3RhcnR1cAoqKkNhdXNlOioqIE1hbnkgbW9kdWxlcyBvciBjb21wbGV4IGNvbmZpZwoqKlNvbHV0aW9uOioqIENvbXBpbGUgdG8gYmluYXJ5IChgd29ya2VyZCBjb21waWxlYCksIHJlZHVjZSBpbXBvcnRzCgoqKlByb2JsZW06KiogUmVxdWVzdCB0aW1lb3V0cwoqKkNhdXNlOioqIEV4dGVybmFsIHNlcnZpY2UgaXNzdWVzIG9yIEROUyBwcm9ibGVtcwoqKlNvbHV0aW9uOioqIENoZWNrIGNvbm5lY3Rpdml0eSwgRE5TIHJlc29sdXRpb24sIFRMUyBoYW5kc2hha2UKCiMjIEJ1aWxkIElzc3VlcwoKKipQcm9ibGVtOioqIENhcCduIFByb3RvIHN5bnRheCBlcnJvcnMKKipDYXVzZToqKiBJbnZhbGlkIGNvbmZpZyBvciBtaXNzaW5nIHNjaGVtYQoqKlNvbHV0aW9uOioqIEluc3RhbGwgY2FwbnByb3RvIHRvb2xzLCB2YWxpZGF0ZTogYGNhcG5wIGNvbXBpbGUgLUkuIGNvbmZpZy5jYXBucGAKCioqUHJvYmxlbToqKiBFbWJlZCBwYXRoIG5vdCBmb3VuZAoqKkNhdXNlOioqIFBhdGggcmVsYXRpdmUgdG8gY29uZmlnIGZpbGUKKipTb2x1dGlvbjoqKiBVc2UgY29ycmVjdCByZWxhdGl2ZSBwYXRoIG9yIGFic29sdXRlIHBhdGgKCioqUHJvYmxlbToqKiBWOCBmbGFncyBjYXVzZSBjcmFzaGVzCioqQ2F1c2U6KiogVW5zYWZlIFY4IGZsYWdzCioqU29sdXRpb246Kiog4pqg77iPIFY4IGZsYWdzIHVuc3VwcG9ydGVkIGluIHByb2R1Y3Rpb24uIFRlc3QgdGhvcm91Z2hseSBiZWZvcmUgdXNlLgoKIyMgU2VjdXJpdHkgSXNzdWVzCgoqKlByb2JsZW06KiogSGFyZGNvZGVkIHNlY3JldHMgaW4gY29uZmlnCioqQ2F1c2U6KiogYHRleHRgIGJpbmRpbmcgd2l0aCBzZWNyZXQgdmFsdWUKKipTb2x1dGlvbjoqKiBVc2UgYGZyb21FbnZpcm9ubWVudGAgdG8gbG9hZCBmcm9tIGVudiB2YXJzCgoqKlByb2JsZW06KiogT3Zlcmx5IGJyb2FkIG5ldHdvcmsgYWNjZXNzCioqQ2F1c2U6KiogYG5ldHdvcmsgPSAoYWxsb3cgPSBbIioiXSlgCioqU29sdXRpb246KiogUmVzdHJpY3QgdG8gYGFsbG93ID0gWyJwdWJsaWMiXWAgb3Igc3BlY2lmaWMgaG9zdHMKCioqUHJvYmxlbToqKiBFeHRyYWN0YWJsZSBjcnlwdG8ga2V5cwoqKkNhdXNlOioqIGBjcnlwdG9LZXkgPSAoZXh0cmFjdGFibGUgPSB0cnVlLCAuLi4pYAoqKlNvbHV0aW9uOioqIFNldCBgZXh0cmFjdGFibGUgPSBmYWxzZWAgdW5sZXNzIGV4cG9ydCByZXF1aXJlZAoKIyMgQ29tcGF0aWJpbGl0eSBDaGFuZ2VzCgoqKlByb2JsZW06KiogQnJlYWtpbmcgY2hhbmdlcyBhZnRlciBjb21wYXQgZGF0ZSB1cGRhdGUKKipDYXVzZToqKiBOZXcgZmxhZ3MgZW5hYmxlZCBiZXR3ZWVuIGRhdGVzCioqU29sdXRpb246KiogUmV2aWV3IFtjb21wYXQgZGF0ZXMgZG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvY29uZmlndXJhdGlvbi9jb21wYXRpYmlsaXR5LWRhdGVzLyksIHRlc3QgbG9jYWxseSBmaXJzdAoKKipQcm9ibGVtOioqICJDb21wYXRpYmlsaXR5IGRhdGUgbm90IHN1cHBvcnRlZCIKKipDYXVzZToqKiBXb3JrZXJkIHZlcnNpb24gb2xkZXIgdGhhbiBjb21wYXQgZGF0ZQoqKlNvbHV0aW9uOioqIFVwZGF0ZSB3b3JrZXJkIGJpbmFyeSAodmVyc2lvbiA9IG1heCBjb21wYXQgZGF0ZSBzdXBwb3J0ZWQpCgojIyBMaW1pdHMKCnwgUmVzb3VyY2UvTGltaXQgfCBWYWx1ZSB8IE5vdGVzIHwKfC0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLXwtLS0tLS0tfAp8IFY4IGZsYWdzIHwgVW5zdXBwb3J0ZWQgaW4gcHJvZHVjdGlvbiB8IFVzZSB3aXRoIGNhdXRpb24gfAp8IENvbXBhdGliaWxpdHkgZGF0ZSB8IE11c3QgbWF0Y2ggd29ya2VyZCB2ZXJzaW9uIHwgVXBkYXRlIGlmIG1pc21hdGNoIHwKfCBNb2R1bGUgY291bnQgfCBBZmZlY3RzIHN0YXJ0dXAgdGltZSB8IE1hbnkgaW1wb3J0cyBzbG93IHwKCiMjIFRyb3VibGVzaG9vdGluZyBTdGVwcwoKMS4gKipFbmFibGUgdmVyYm9zZSBsb2dnaW5nKio6IGB3b3JrZXJkIHNlcnZlIGNvbmZpZy5jYXBucCAtLXZlcmJvc2VgCjIuICoqQ2hlY2sgbG9ncyoqOiBMb29rIGZvciBlcnJvciBtZXNzYWdlcywgc3RhY2sgdHJhY2VzCjMuICoqVmFsaWRhdGUgY29uZmlnKio6IGBjYXBucCBjb21waWxlIC1JLiBjb25maWcuY2FwbnBgCjQuICoqVGVzdCBiaW5kaW5ncyoqOiBMb2cgYE9iamVjdC5rZXlzKGVudilgIHRvIHZlcmlmeQo1LiAqKkNoZWNrIHZlcnNpb25zKio6IFdvcmtlcmQgdmVyc2lvbiB2cyBjb21wYXQgZGF0ZQo2LiAqKklzb2xhdGUgaXNzdWUqKjogTWluaW1hbCByZXBybyBjb25maWcKNy4gKipSZXZpZXcgc2NoZW1hKio6IFt3b3JrZXJkLmNhcG5wXShodHRwczovL2dpdGh1Yi5jb20vY2xvdWRmbGFyZS93b3JrZXJkL2Jsb2IvbWFpbi9zcmMvd29ya2VyZC9zZXJ2ZXIvd29ya2VyZC5jYXBucCkKClNlZSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSBmb3IgY29uZmlnIGRldGFpbHMsIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgZm9yIHdvcmtpbmcgZXhhbXBsZXMsIFthcGkubWRdKC4vYXBpLm1kKSBmb3IgcnVudGltZSBBUElzLgo=
+# Workerd Gotchas
+
+## Common Errors
+
+### "Missing compatibility date"
+**Cause:** Compatibility date not set
+**Solution:**
+❌ Wrong:
+```capnp
+const worker :Workerd.Worker = (
+  serviceWorkerScript = embed "worker.js"
+)
+```
+
+✅ Correct:
+```capnp
+const worker :Workerd.Worker = (
+  serviceWorkerScript = embed "worker.js",
+  compatibilityDate = "2024-01-15"  # Always set!
+)
+```
+
+### Wrong Binding Type
+**Problem:** JSON not parsed
+**Cause:** Using `text = '{"key":"value"}'` instead of `json`
+**Solution:** Use `json = '{"key":"value"}'` for parsed objects
+
+### Service vs Namespace
+**Problem:** Cannot create DO instance
+**Cause:** Using `service = "room-service"` for Durable Object
+**Solution:** Use `durableObjectNamespace = "Room"` for DO bindings
+
+### Module Name Mismatch
+**Problem:** Import fails
+**Cause:** Module name includes path: `name = "src/index.js"`
+**Solution:** Use simple names: `name = "index.js"`, embed with path
+
+## Network Access
+
+**Problem:** Fetch fails with network error
+**Cause:** No network service configured (workerd has no global fetch)
+**Solution:** Add network service binding:
+```capnp
+services = [(name = "internet", network = (allow = ["public"]))]
+bindings = [(name = "NET", service = "internet")]
+```
+
+Or external service:
+```capnp
+bindings = [(name = "API", service = (external = (address = "api.com:443", http = (style = tls))))]
+```
+
+### "Worker not responding"
+**Cause:** Socket misconfigured, no fetch handler, or port unavailable
+**Solution:** Verify socket `address` matches, worker exports `fetch()`, port available
+
+### "Binding not found"
+**Cause:** Name mismatch or service doesn't exist
+**Solution:** Check binding name in config matches code (`env.BINDING` for ES modules)
+
+### "Module not found"
+**Cause:** Module name doesn't match import or bad embed path
+**Solution:** Module `name` must match import path exactly, verify `embed` path
+
+### "Compatibility error"
+**Cause:** Date not set or API unavailable on that date
+**Solution:** Set `compatibilityDate`, verify API available on that date
+
+## Performance Issues
+
+**Problem:** High memory usage
+**Cause:** Large caches or many isolates
+**Solution:** Set cache limits, reduce isolate count, or use V8 flags (caution)
+
+**Problem:** Slow startup
+**Cause:** Many modules or complex config
+**Solution:** Compile to binary (`workerd compile`), reduce imports
+
+**Problem:** Request timeouts
+**Cause:** External service issues or DNS problems
+**Solution:** Check connectivity, DNS resolution, TLS handshake
+
+## Build Issues
+
+**Problem:** Cap'n Proto syntax errors
+**Cause:** Invalid config or missing schema
+**Solution:** Install capnproto tools, validate: `capnp compile -I. config.capnp`
+
+**Problem:** Embed path not found
+**Cause:** Path relative to config file
+**Solution:** Use correct relative path or absolute path
+
+**Problem:** V8 flags cause crashes
+**Cause:** Unsafe V8 flags
+**Solution:** ⚠️ V8 flags unsupported in production. Test thoroughly before use.
+
+## Security Issues
+
+**Problem:** Hardcoded secrets in config
+**Cause:** `text` binding with secret value
+**Solution:** Use `fromEnvironment` to load from env vars
+
+**Problem:** Overly broad network access
+**Cause:** `network = (allow = ["*"])`
+**Solution:** Restrict to `allow = ["public"]` or specific hosts
+
+**Problem:** Extractable crypto keys
+**Cause:** `cryptoKey = (extractable = true, ...)`
+**Solution:** Set `extractable = false` unless export required
+
+## Compatibility Changes
+
+**Problem:** Breaking changes after compat date update
+**Cause:** New flags enabled between dates
+**Solution:** Review [compat dates docs](https://developers.cloudflare.com/workers/configuration/compatibility-dates/), test locally first
+
+**Problem:** "Compatibility date not supported"
+**Cause:** Workerd version older than compat date
+**Solution:** Update workerd binary (version = max compat date supported)
+
+## Limits
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| V8 flags | Unsupported in production | Use with caution |
+| Compatibility date | Must match workerd version | Update if mismatch |
+| Module count | Affects startup time | Many imports slow |
+
+## Troubleshooting Steps
+
+1. **Enable verbose logging**: `workerd serve config.capnp --verbose`
+2. **Check logs**: Look for error messages, stack traces
+3. **Validate config**: `capnp compile -I. config.capnp`
+4. **Test bindings**: Log `Object.keys(env)` to verify
+5. **Check versions**: Workerd version vs compat date
+6. **Isolate issue**: Minimal repro config
+7. **Review schema**: [workerd.capnp](https://github.com/cloudflare/workerd/blob/main/src/workerd/server/workerd.capnp)
+
+See [configuration.md](./configuration.md) for config details, [patterns.md](./patterns.md) for working examples, [api.md](./api.md) for runtime APIs.

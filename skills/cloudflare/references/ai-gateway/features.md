@@ -1,1 +1,96 @@
-IyBGZWF0dXJlcyAmIENhcGFiaWxpdGllcwoKIyMgQ2FjaGluZwoKRGFzaGJvYXJkOiBTZXR0aW5ncyDihpIgQ2FjaGUgUmVzcG9uc2VzIOKGkiBFbmFibGUKCmBgYHR5cGVzY3JpcHQKLy8gQ3VzdG9tIFRUTCAoMSBob3VyKQpoZWFkZXJzOiB7ICdjZi1haWctY2FjaGUtdHRsJzogJzM2MDAnIH0KCi8vIFNraXAgY2FjaGUKaGVhZGVyczogeyAnY2YtYWlnLXNraXAtY2FjaGUnOiAndHJ1ZScgfQoKLy8gQ3VzdG9tIGNhY2hlIGtleQpoZWFkZXJzOiB7ICdjZi1haWctY2FjaGUta2V5JzogJ2dyZWV0aW5nLWVuJyB9CmBgYAoKKipMaW1pdHM6KiogVFRMIDYwcyAtIDMwIGRheXMuICoqRG9lcyBOT1Qgd29yayB3aXRoIHN0cmVhbWluZy4qKgoKIyMgUmF0ZSBMaW1pdGluZwoKRGFzaGJvYXJkOiBTZXR0aW5ncyDihpIgUmF0ZS1saW1pdGluZyDihpIgRW5hYmxlCgotICoqRml4ZWQgd2luZG93OioqIFJlc2V0cyBhdCBpbnRlcnZhbHMKLSAqKlNsaWRpbmcgd2luZG93OioqIFJvbGxpbmcgd2luZG93IChtb3JlIGFjY3VyYXRlKQotIFJldHVybnMgYDQyOWAgd2hlbiBleGNlZWRlZAoKIyMgR3VhcmRyYWlscwoKRGFzaGJvYXJkOiBTZXR0aW5ncyDihpIgR3VhcmRyYWlscyDihpIgRW5hYmxlCgpGaWx0ZXIgcHJvbXB0cy9yZXNwb25zZXMgZm9yIGluYXBwcm9wcmlhdGUgY29udGVudC4gQWN0aW9uczogRmxhZyAobG9nKSBvciBCbG9jayAocmVqZWN0KS4KCiMjIERhdGEgTG9zcyBQcmV2ZW50aW9uIChETFApCgpEYXNoYm9hcmQ6IFNldHRpbmdzIOKGkiBETFAg4oaSIEVuYWJsZQoKRGV0ZWN0IFBJSSAoZW1haWxzLCBTU05zLCBjcmVkaXQgY2FyZHMpLiBBY3Rpb25zOiBGbGFnLCBCbG9jaywgb3IgUmVkYWN0LgoKIyMgQmlsbGluZyBNb2RlcwoKfCBNb2RlIHwgRGVzY3JpcHRpb24gfCBTZXR1cCB8CnwtLS0tLS18LS0tLS0tLS0tLS0tLXwtLS0tLS0tfAp8ICoqVW5pZmllZCBCaWxsaW5nKiogfCBQYXkgdGhyb3VnaCBDbG91ZGZsYXJlLCBubyBwcm92aWRlciBrZXlzIHwgVXNlIGBjZi1haWctYXV0aG9yaXphdGlvbmAgaGVhZGVyIG9ubHkgfAp8ICoqQllPSyoqIHwgU3RvcmUgcHJvdmlkZXIga2V5cyBpbiBkYXNoYm9hcmQgfCBBZGQga2V5cyBpbiBQcm92aWRlciBLZXlzIHNlY3Rpb24gfAp8ICoqUGFzcy10aHJvdWdoKiogfCBTZW5kIHByb3ZpZGVyIGtleSB3aXRoIGVhY2ggcmVxdWVzdCB8IEluY2x1ZGUgcHJvdmlkZXIncyBhdXRoIGhlYWRlciB8CgojIyBaZXJvIERhdGEgUmV0ZW50aW9uCgpEYXNoYm9hcmQ6IFNldHRpbmdzIOKGkiBQcml2YWN5IOKGkiBaZXJvIERhdGEgUmV0ZW50aW9uCgpObyBwcm9tcHRzL3Jlc3BvbnNlcyBzdG9yZWQuIFJlcXVlc3QgY291bnRzIGFuZCBjb3N0cyBzdGlsbCB0cmFja2VkLgoKIyMgTG9nZ2luZwoKRGFzaGJvYXJkOiBTZXR0aW5ncyDihpIgTG9ncyDihpIgRW5hYmxlICh1cCB0byAxME0gbG9ncykKCkVhY2ggZW50cnk6IHByb21wdCwgcmVzcG9uc2UsIHByb3ZpZGVyLCBtb2RlbCwgdG9rZW5zLCBjb3N0LCBkdXJhdGlvbiwgY2FjaGUgc3RhdHVzLCBtZXRhZGF0YS4KCmBgYHR5cGVzY3JpcHQKLy8gU2tpcCBsb2dnaW5nIGZvciByZXF1ZXN0CmhlYWRlcnM6IHsgJ2NmLWFpZy1jb2xsZWN0LWxvZyc6ICdmYWxzZScgfQpgYGAKCioqRXhwb3J0OioqIFVzZSBMb2dwdXNoIHRvIFMzLCBHQ1MsIERhdGFkb2csIFNwbHVuaywgZXRjLgoKIyMgQ3VzdG9tIENvc3QgVHJhY2tpbmcKCkZvciBtb2RlbHMgbm90IGluIENsb3VkZmxhcmUncyBwcmljaW5nIGRhdGFiYXNlOgoKRGFzaGJvYXJkOiBHYXRld2F5IOKGkiBTZXR0aW5ncyDihpIgQ3VzdG9tIENvc3RzCgpPciB2aWEgQVBJOiBzZXQgYG1vZGVsYCwgYGlucHV0X2Nvc3RgLCBgb3V0cHV0X2Nvc3RgLgoKIyMgU3VwcG9ydGVkIFByb3ZpZGVycyAoMjIrKQoKfCBQcm92aWRlciB8IFVuaWZpZWQgQVBJIHwgTm90ZXMgfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tfC0tLS0tLS18CnwgT3BlbkFJIHwgYG9wZW5haS9ncHQtNG9gIHwgRnVsbCBzdXBwb3J0IHwKfCBBbnRocm9waWMgfCBgYW50aHJvcGljL2NsYXVkZS1zb25uZXQtNC01YCB8IEZ1bGwgc3VwcG9ydCB8CnwgR29vZ2xlIEFJIHwgYGdvb2dsZS1haS1zdHVkaW8vZ2VtaW5pLTIuMC1mbGFzaGAgfCBGdWxsIHN1cHBvcnQgfAp8IFdvcmtlcnMgQUkgfCBgd29ya2Vyc2FpL0BjZi9tZXRhL2xsYW1hLTNgIHwgTmF0aXZlIHwKfCBBenVyZSBPcGVuQUkgfCBgYXp1cmUtb3BlbmFpLypgIHwgRGVwbG95bWVudCBuYW1lcyB8CnwgQVdTIEJlZHJvY2sgfCBQcm92aWRlciBlbmRwb2ludCBvbmx5IHwgYC9iZWRyb2NrLypgIHwKfCBHcm9xIHwgYGdyb3EvKmAgfCBGYXN0IGluZmVyZW5jZSB8CnwgTWlzdHJhbCwgQ29oZXJlLCBQZXJwbGV4aXR5LCB4QUksIERlZXBTZWVrLCBDZXJlYnJhcyB8IEZ1bGwgc3VwcG9ydCB8IC0gfAoKIyMgQmVzdCBQcmFjdGljZXMKCjEuIEVuYWJsZSBjYWNoaW5nIGZvciBkZXRlcm1pbmlzdGljIHByb21wdHMKMi4gU2V0IHJhdGUgbGltaXRzIHRvIHByZXZlbnQgYWJ1c2UKMy4gVXNlIGd1YXJkcmFpbHMgZm9yIHVzZXItZmFjaW5nIEFJCjQuIEVuYWJsZSBETFAgZm9yIHNlbnNpdGl2ZSBkYXRhCjUuIFVzZSB1bmlmaWVkIGJpbGxpbmcgb3IgQllPSyBmb3Igc2ltcGxlciBrZXkgbWFuYWdlbWVudAo2LiBFbmFibGUgbG9nZ2luZyBmb3IgZGVidWdnaW5nCjcuIFVzZSB6ZXJvIGRhdGEgcmV0ZW50aW9uIHdoZW4gcHJpdmFjeSByZXF1aXJlZAo=
+# Features & Capabilities
+
+## Caching
+
+Dashboard: Settings → Cache Responses → Enable
+
+```typescript
+// Custom TTL (1 hour)
+headers: { 'cf-aig-cache-ttl': '3600' }
+
+// Skip cache
+headers: { 'cf-aig-skip-cache': 'true' }
+
+// Custom cache key
+headers: { 'cf-aig-cache-key': 'greeting-en' }
+```
+
+**Limits:** TTL 60s - 30 days. **Does NOT work with streaming.**
+
+## Rate Limiting
+
+Dashboard: Settings → Rate-limiting → Enable
+
+- **Fixed window:** Resets at intervals
+- **Sliding window:** Rolling window (more accurate)
+- Returns `429` when exceeded
+
+## Guardrails
+
+Dashboard: Settings → Guardrails → Enable
+
+Filter prompts/responses for inappropriate content. Actions: Flag (log) or Block (reject).
+
+## Data Loss Prevention (DLP)
+
+Dashboard: Settings → DLP → Enable
+
+Detect PII (emails, SSNs, credit cards). Actions: Flag, Block, or Redact.
+
+## Billing Modes
+
+| Mode | Description | Setup |
+|------|-------------|-------|
+| **Unified Billing** | Pay through Cloudflare, no provider keys | Use `cf-aig-authorization` header only |
+| **BYOK** | Store provider keys in dashboard | Add keys in Provider Keys section |
+| **Pass-through** | Send provider key with each request | Include provider's auth header |
+
+## Zero Data Retention
+
+Dashboard: Settings → Privacy → Zero Data Retention
+
+No prompts/responses stored. Request counts and costs still tracked.
+
+## Logging
+
+Dashboard: Settings → Logs → Enable (up to 10M logs)
+
+Each entry: prompt, response, provider, model, tokens, cost, duration, cache status, metadata.
+
+```typescript
+// Skip logging for request
+headers: { 'cf-aig-collect-log': 'false' }
+```
+
+**Export:** Use Logpush to S3, GCS, Datadog, Splunk, etc.
+
+## Custom Cost Tracking
+
+For models not in Cloudflare's pricing database:
+
+Dashboard: Gateway → Settings → Custom Costs
+
+Or via API: set `model`, `input_cost`, `output_cost`.
+
+## Supported Providers (22+)
+
+| Provider | Unified API | Notes |
+|----------|-------------|-------|
+| OpenAI | `openai/gpt-4o` | Full support |
+| Anthropic | `anthropic/claude-sonnet-4-5` | Full support |
+| Google AI | `google-ai-studio/gemini-2.0-flash` | Full support |
+| Workers AI | `workersai/@cf/meta/llama-3` | Native |
+| Azure OpenAI | `azure-openai/*` | Deployment names |
+| AWS Bedrock | Provider endpoint only | `/bedrock/*` |
+| Groq | `groq/*` | Fast inference |
+| Mistral, Cohere, Perplexity, xAI, DeepSeek, Cerebras | Full support | - |
+
+## Best Practices
+
+1. Enable caching for deterministic prompts
+2. Set rate limits to prevent abuse
+3. Use guardrails for user-facing AI
+4. Enable DLP for sensitive data
+5. Use unified billing or BYOK for simpler key management
+6. Enable logging for debugging
+7. Use zero data retention when privacy required

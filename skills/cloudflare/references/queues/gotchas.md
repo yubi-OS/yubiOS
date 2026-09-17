@@ -1,1 +1,206 @@
-IyBRdWV1ZXMgR290Y2hhcyAmIFRyb3VibGVzaG9vdGluZwoKIyMgQ1JJVElDQUw6IFRvcCBQcm9kdWN0aW9uIE1pc3Rha2VzCgojIyMgMS4gIkVudGlyZSBCYXRjaCBSZXRyaWVkIEFmdGVyIFNpbmdsZSBFcnJvciIKCioqUHJvYmxlbToqKiBUaHJvd2luZyB1bmNhdWdodCBlcnJvciBpbiBxdWV1ZSBoYW5kbGVyIHJldHJpZXMgdGhlIGVudGlyZSBiYXRjaCwgbm90IGp1c3QgdGhlIGZhaWxlZCBtZXNzYWdlICAKKipDYXVzZToqKiBVbmNhdWdodCBleGNlcHRpb25zIHByb3BhZ2F0ZSB0byB0aGUgcnVudGltZSwgdHJpZ2dlcmluZyBiYXRjaC1sZXZlbCByZXRyeSAgCioqU29sdXRpb246KiogQWx3YXlzIHdyYXAgaW5kaXZpZHVhbCBtZXNzYWdlIHByb2Nlc3NpbmcgaW4gdHJ5L2NhdGNoIGFuZCBjYWxsIGBtc2cucmV0cnkoKWAgZXhwbGljaXRseQoKYGBgdHlwZXNjcmlwdAovLyDinYwgQkFEOiBUaHJvd3MgZXJyb3IsIHJldHJpZXMgZW50aXJlIGJhdGNoCmFzeW5jIHF1ZXVlKGJhdGNoOiBNZXNzYWdlQmF0Y2gpOiBQcm9taXNlPHZvaWQ+IHsKICBmb3IgKGNvbnN0IG1zZyBvZiBiYXRjaC5tZXNzYWdlcykgewogICAgYXdhaXQgcmlza3lPcGVyYXRpb24obXNnLmJvZHkpOyAvLyBJZiB0aGlzIHRocm93cywgZW50aXJlIGJhdGNoIHJldHJpZXMKICAgIG1zZy5hY2soKTsKICB9Cn0KCi8vIOKchSBHT09EOiBDYXRjaCBwZXIgbWVzc2FnZSwgaGFuZGxlIGluZGl2aWR1YWxseQphc3luYyBxdWV1ZShiYXRjaDogTWVzc2FnZUJhdGNoKTogUHJvbWlzZTx2b2lkPiB7CiAgZm9yIChjb25zdCBtc2cgb2YgYmF0Y2gubWVzc2FnZXMpIHsKICAgIHRyeSB7CiAgICAgIGF3YWl0IHJpc2t5T3BlcmF0aW9uKG1zZy5ib2R5KTsKICAgICAgbXNnLmFjaygpOwogICAgfSBjYXRjaCAoZXJyb3IpIHsKICAgICAgbXNnLnJldHJ5KHsgZGVsYXlTZWNvbmRzOiA2MCB9KTsKICAgIH0KICB9Cn0KYGBgCgojIyMgMi4gIk1lc3NhZ2VzIFJldHJ5IEZvcmV2ZXIiCgoqKlByb2JsZW06KiogTWVzc2FnZXMgbm90IGV4cGxpY2l0bHkgYWNrJ2Qgb3IgcmV0cnknZCB3aWxsIGF1dG8tcmV0cnkgaW5kZWZpbml0ZWx5ICAKKipDYXVzZToqKiBSdW50aW1lIGRlZmF1bHQgYmVoYXZpb3IgcmV0cmllcyB1bmhhbmRsZWQgbWVzc2FnZXMgdW50aWwgYG1heF9yZXRyaWVzYCByZWFjaGVkICAKKipTb2x1dGlvbjoqKiBBbHdheXMgY2FsbCBgbXNnLmFjaygpYCBvciBgbXNnLnJldHJ5KClgIGZvciBlYWNoIG1lc3NhZ2UuIE5ldmVyIGxlYXZlIG1lc3NhZ2VzIHVuaGFuZGxlZC4KCmBgYHR5cGVzY3JpcHQKLy8g4p2MIEJBRDogU2tpcHBlZCBtZXNzYWdlcyBhdXRvLXJldHJ5IGZvcmV2ZXIKYXN5bmMgcXVldWUoYmF0Y2g6IE1lc3NhZ2VCYXRjaCk6IFByb21pc2U8dm9pZD4gewogIGZvciAoY29uc3QgbXNnIG9mIGJhdGNoLm1lc3NhZ2VzKSB7CiAgICBpZiAoc2hvdWxkUHJvY2Vzcyhtc2cuYm9keSkpIHsKICAgICAgYXdhaXQgcHJvY2Vzcyhtc2cuYm9keSk7CiAgICAgIG1zZy5hY2soKTsKICAgIH0KICAgIC8vIE1pc3Npbmc6IG1zZy5hY2soKSBmb3Igc2tpcHBlZCBtZXNzYWdlcyAtIHRoZXkgd2lsbCByZXRyeSEKICB9Cn0KCi8vIOKchSBHT09EOiBFeHBsaWNpdGx5IGhhbmRsZSBhbGwgbWVzc2FnZXMKYXN5bmMgcXVldWUoYmF0Y2g6IE1lc3NhZ2VCYXRjaCk6IFByb21pc2U8dm9pZD4gewogIGZvciAoY29uc3QgbXNnIG9mIGJhdGNoLm1lc3NhZ2VzKSB7CiAgICBpZiAoc2hvdWxkUHJvY2Vzcyhtc2cuYm9keSkpIHsKICAgICAgYXdhaXQgcHJvY2Vzcyhtc2cuYm9keSk7CiAgICAgIG1zZy5hY2soKTsKICAgIH0gZWxzZSB7CiAgICAgIG1zZy5hY2soKTsgLy8gRXhwbGljaXRseSBhY2sgZXZlbiBpZiBub3QgcHJvY2Vzc2luZwogICAgfQogIH0KfQpgYGAKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAiRHVwbGljYXRlIE1lc3NhZ2UgUHJvY2Vzc2luZyIKCioqUHJvYmxlbToqKiBTYW1lIG1lc3NhZ2UgcHJvY2Vzc2VkIG11bHRpcGxlIHRpbWVzICAKKipDYXVzZToqKiBBdC1sZWFzdC1vbmNlIGRlbGl2ZXJ5IGd1YXJhbnRlZSBtZWFucyBkdXBsaWNhdGVzIGFyZSBwb3NzaWJsZSBkdXJpbmcgcmV0cmllcyAgCioqU29sdXRpb246KiogRGVzaWduIGNvbnN1bWVycyB0byBiZSBpZGVtcG90ZW50IGJ5IHRyYWNraW5nIHByb2Nlc3NlZCBtZXNzYWdlIElEcyBpbiBLViB3aXRoIGV4cGlyYXRpb24gVFRMCgpgYGB0eXBlc2NyaXB0CmFzeW5jIHF1ZXVlKGJhdGNoOiBNZXNzYWdlQmF0Y2gsIGVudjogRW52KTogUHJvbWlzZTx2b2lkPiB7CiAgZm9yIChjb25zdCBtc2cgb2YgYmF0Y2gubWVzc2FnZXMpIHsKICAgIGNvbnN0IHByb2Nlc3NlZCA9IGF3YWl0IGVudi5QUk9DRVNTRURfS1YuZ2V0KG1zZy5pZCk7CiAgICBpZiAocHJvY2Vzc2VkKSB7CiAgICAgIG1zZy5hY2soKTsKICAgICAgY29udGludWU7CiAgICB9CiAgICAKICAgIGF3YWl0IHByb2Nlc3NNZXNzYWdlKG1zZy5ib2R5KTsKICAgIGF3YWl0IGVudi5QUk9DRVNTRURfS1YucHV0KG1zZy5pZCwgJzEnLCB7IGV4cGlyYXRpb25UdGw6IDg2NDAwIH0pOwogICAgbXNnLmFjaygpOwogIH0KfQpgYGAKCiMjIyAiUHVsbCBDb25zdW1lciBDYW4ndCBEZWNvZGUgTWVzc2FnZXMiCgoqKlByb2JsZW06KiogUHVsbCBjb25zdW1lciBvciBkYXNoYm9hcmQgc2hvd3MgdW5yZWFkYWJsZSBtZXNzYWdlIGJvZGllcyAgCioqQ2F1c2U6KiogTWVzc2FnZXMgc2VudCB3aXRoIGB2OGAgY29udGVudCB0eXBlIGFyZSBvbmx5IGRlY29kYWJsZSBieSBXb3JrZXJzIHB1c2ggY29uc3VtZXJzICAKKipTb2x1dGlvbjoqKiBVc2UgYGpzb25gIGNvbnRlbnQgdHlwZSBmb3IgcHVsbCBjb25zdW1lcnMgb3IgZGFzaGJvYXJkIHZpc2liaWxpdHkKCmBgYHR5cGVzY3JpcHQKLy8gVXNlIGpzb24gZm9yIHB1bGwgY29uc3VtZXJzCmF3YWl0IGVudi5NWV9RVUVVRS5zZW5kKGRhdGEsIHsgY29udGVudFR5cGU6ICdqc29uJyB9KTsKCi8vIFVzZSB2OCBvbmx5IGZvciBwdXNoIGNvbnN1bWVycyB3aXRoIGNvbXBsZXggSlMgdHlwZXMKYXdhaXQgZW52Lk1ZX1FVRVVFLnNlbmQoeyBkYXRlOiBuZXcgRGF0ZSgpLCB0YWdzOiBuZXcgU2V0KCkgfSwgeyBjb250ZW50VHlwZTogJ3Y4JyB9KTsKYGBgCgojIyMgIk1lc3NhZ2VzIE5vdCBCZWluZyBEZWxpdmVyZWQiCgoqKlByb2JsZW06KiogTWVzc2FnZXMgc2VudCBidXQgY29uc3VtZXIgbm90IHByb2Nlc3NpbmcgIAoqKkNhdXNlOioqIFF1ZXVlIHBhdXNlZCwgY29uc3VtZXIgbm90IGNvbmZpZ3VyZWQsIG9yIGNvbnN1bWVyIGVycm9ycyAgCioqU29sdXRpb246KiogQ2hlY2sgcXVldWUgc3RhdHVzIHdpdGggYHdyYW5nbGVyIHF1ZXVlcyBsaXN0YCwgdmVyaWZ5IGNvbnN1bWVyIGNvbmZpZ3VyZWQgd2l0aCBgd3JhbmdsZXIgcXVldWVzIGNvbnN1bWVyIGFkZGAsIGFuZCBjaGVjayBsb2dzIHdpdGggYHdyYW5nbGVyIHRhaWxgCgojIyMgIkhpZ2ggRGVhZCBMZXR0ZXIgUXVldWUgUmF0ZSIKCioqUHJvYmxlbToqKiBNYW55IG1lc3NhZ2VzIGVuZGluZyB1cCBpbiBETFEgIAoqKkNhdXNlOioqIENvbnN1bWVyIHJlcGVhdGVkbHkgZmFpbGluZyB0byBwcm9jZXNzIG1lc3NhZ2VzIGFmdGVyIG1heCByZXRyaWVzICAKKipTb2x1dGlvbjoqKiBSZXZpZXcgY29uc3VtZXIgZXJyb3IgbG9ncywgY2hlY2sgZXh0ZXJuYWwgZGVwZW5kZW5jeSBhdmFpbGFiaWxpdHksIHZlcmlmeSBtZXNzYWdlIGZvcm1hdCBtYXRjaGVzIGV4cGVjdGF0aW9ucywgb3IgaW5jcmVhc2UgcmV0cnkgZGVsYXkKCiMjIEVycm9yIENsYXNzaWZpY2F0aW9uIFBhdHRlcm5zCgpDbGFzc2lmeSBlcnJvcnMgdG8gZGVjaWRlIHdoZXRoZXIgdG8gcmV0cnkgb3IgRExROgoKYGBgdHlwZXNjcmlwdAphc3luYyBxdWV1ZShiYXRjaDogTWVzc2FnZUJhdGNoLCBlbnY6IEVudik6IFByb21pc2U8dm9pZD4gewogIGZvciAoY29uc3QgbXNnIG9mIGJhdGNoLm1lc3NhZ2VzKSB7CiAgICB0cnkgewogICAgICBhd2FpdCBwcm9jZXNzTWVzc2FnZShtc2cuYm9keSk7CiAgICAgIG1zZy5hY2soKTsKICAgIH0gY2F0Y2ggKGVycm9yKSB7CiAgICAgIC8vIFRyYW5zaWVudCBlcnJvcnM6IHJldHJ5IHdpdGggYmFja29mZgogICAgICBpZiAoaXNSZXRyeWFibGUoZXJyb3IpKSB7CiAgICAgICAgY29uc3QgZGVsYXkgPSBNYXRoLm1pbigzMCAqICgyICoqIG1zZy5hdHRlbXB0cyksIDQzMjAwKTsKICAgICAgICBtc2cucmV0cnkoeyBkZWxheVNlY29uZHM6IGRlbGF5IH0pOwogICAgICB9IAogICAgICAvLyBQZXJtYW5lbnQgZXJyb3JzOiBhY2sgdG8gYXZvaWQgaW5maW5pdGUgcmV0cmllcwogICAgICBlbHNlIHsKICAgICAgICBjb25zb2xlLmVycm9yKCdQZXJtYW5lbnQgZXJyb3IsIHNlbmRpbmcgdG8gRExROicsIGVycm9yKTsKICAgICAgICBhd2FpdCBlbnYuRVJST1JfTE9HLnB1dChtc2cuaWQsIEpTT04uc3RyaW5naWZ5KHsgbXNnOiBtc2cuYm9keSwgZXJyb3I6IFN0cmluZyhlcnJvcikgfSkpOwogICAgICAgIG1zZy5hY2soKTsgLy8gUHJldmVudCBmdXJ0aGVyIHJldHJpZXMKICAgICAgfQogICAgfQogIH0KfQoKZnVuY3Rpb24gaXNSZXRyeWFibGUoZXJyb3I6IHVua25vd24pOiBib29sZWFuIHsKICBpZiAoZXJyb3IgaW5zdGFuY2VvZiBSZXNwb25zZSkgewogICAgLy8gUmV0cnk6IHJhdGUgbGltaXRzLCB0aW1lb3V0cywgc2VydmVyIGVycm9ycwogICAgcmV0dXJuIGVycm9yLnN0YXR1cyA9PT0gNDI5IHx8IGVycm9yLnN0YXR1cyA+PSA1MDA7CiAgfQogIGlmIChlcnJvciBpbnN0YW5jZW9mIEVycm9yKSB7CiAgICAvLyBEb24ndCByZXRyeTogdmFsaWRhdGlvbiwgYXV0aCwgbm90IGZvdW5kCiAgICByZXR1cm4gIWVycm9yLm1lc3NhZ2UuaW5jbHVkZXMoJ3ZhbGlkYXRpb24nKSAmJiAKICAgICAgICAgICAhZXJyb3IubWVzc2FnZS5pbmNsdWRlcygndW5hdXRob3JpemVkJykgJiYKICAgICAgICAgICAhZXJyb3IubWVzc2FnZS5pbmNsdWRlcygnbm90IGZvdW5kJyk7CiAgfQogIHJldHVybiBmYWxzZTsgLy8gVW5rbm93biBlcnJvcnMgZG9uJ3QgcmV0cnkKfQpgYGAKCiMjIyAiQ1BVIFRpbWUgRXhjZWVkZWQgaW4gQ29uc3VtZXIiCgoqKlByb2JsZW06KiogQ29uc3VtZXIgZmFpbHMgd2l0aCBDUFUgdGltZSBsaW1pdCBleGNlZWRlZCAgCioqQ2F1c2U6KiogQ29uc3VtZXIgcHJvY2Vzc2luZyBleGNlZWRpbmcgMzBzIGRlZmF1bHQgQ1BVIHRpbWUgbGltaXQgIAoqKlNvbHV0aW9uOioqIEluY3JlYXNlIENQVSBsaW1pdCBpbiB3cmFuZ2xlci5qc29uYzogYHsgImxpbWl0cyI6IHsgImNwdV9tcyI6IDMwMDAwMCB9IH1gICg1IG1pbnV0ZXMgbWF4KQoKIyMgQ29udGVudCBUeXBlIERlY2lzaW9uIEd1aWRlCgoqKldoZW4gdG8gdXNlIGVhY2ggY29udGVudCB0eXBlOioqCgp8IENvbnRlbnQgVHlwZSB8IFVzZSBXaGVuIHwgUmVhZGFibGUgQnkgfCBTdXBwb3J0cyB8CnwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLXwKfCBganNvbmAgKGRlZmF1bHQpIHwgUHVsbCBjb25zdW1lcnMsIGRhc2hib2FyZCB2aXNpYmlsaXR5LCBzaW1wbGUgb2JqZWN0cyB8IEFsbCAocHVzaC9wdWxsL2Rhc2hib2FyZCkgfCBKU09OLXNlcmlhbGl6YWJsZSB0eXBlcyBvbmx5IHwKfCBgdjhgIHwgUHVzaCBjb25zdW1lcnMgb25seSwgY29tcGxleCBKUyBvYmplY3RzIHwgUHVzaCBjb25zdW1lcnMgb25seSB8IERhdGUsIE1hcCwgU2V0LCBCaWdJbnQsIHR5cGVkIGFycmF5cyB8CnwgYHRleHRgIHwgU3RyaW5nLW9ubHkgcGF5bG9hZHMgfCBBbGwgfCBTdHJpbmdzIG9ubHkgfAp8IGBieXRlc2AgfCBCaW5hcnkgZGF0YSAoaW1hZ2VzLCBmaWxlcykgfCBBbGwgfCBBcnJheUJ1ZmZlciwgVWludDhBcnJheSB8CgoqKkRlY2lzaW9uIHRyZWU6KioKMS4gTmVlZCB0byB2aWV3IGluIGRhc2hib2FyZCBvciB1c2UgcHVsbCBjb25zdW1lcj8g4oaSIFVzZSBganNvbmAKMi4gTmVlZCBEYXRlLCBNYXAsIFNldCwgb3Igb3RoZXIgVjggdHlwZXM/IOKGkiBVc2UgYHY4YCAocHVzaCBjb25zdW1lcnMgb25seSkKMy4gSnVzdCBzdHJpbmdzPyDihpIgVXNlIGB0ZXh0YAo0LiBCaW5hcnkgZGF0YT8g4oaSIFVzZSBgYnl0ZXNgCgpgYGB0eXBlc2NyaXB0Ci8vIERhc2hib2FyZC9wdWxsOiB1c2UganNvbgphd2FpdCBlbnYuUVVFVUUuc2VuZCh7IGlkOiAxMjMsIG5hbWU6ICd0ZXN0JyB9LCB7IGNvbnRlbnRUeXBlOiAnanNvbicgfSk7CgovLyBDb21wbGV4IEpTIHR5cGVzIChwdXNoIG9ubHkpOiB1c2UgdjgKYXdhaXQgZW52LlFVRVVFLnNlbmQoeyAKICBjcmVhdGVkOiBuZXcgRGF0ZSgpLCAKICB0YWdzOiBuZXcgU2V0KFsnYScsICdiJ10pIAp9LCB7IGNvbnRlbnRUeXBlOiAndjgnIH0pOwpgYGAKCiMjIExpbWl0cwoKfCBMaW1pdCB8IFZhbHVlIHwgTm90ZXMgfAp8LS0tLS0tLXwtLS0tLS0tfC0tLS0tLS18CnwgTWF4IHF1ZXVlcyB8IDEwLDAwMCB8IFBlciBhY2NvdW50IHwKfCBNZXNzYWdlIHNpemUgfCAxMjggS0IgfCBNYXhpbXVtIHBlciBtZXNzYWdlIHwKfCBCYXRjaCBzaXplIChjb25zdW1lcikgfCAxMDAgbWVzc2FnZXMgfCBNYXhpbXVtIG1lc3NhZ2VzIHBlciBiYXRjaCB8CnwgQmF0Y2ggc2l6ZSAoc2VuZEJhdGNoKSB8IDEwMCBtc2dzIG9yIDI1NiBLQiB8IFdoaWNoZXZlciBsaW1pdCByZWFjaGVkIGZpcnN0IHwKfCBUaHJvdWdocHV0IHwgNSwwMDAgbXNncy9zZWMgfCBQZXIgcXVldWUgfAp8IFJldGVudGlvbiB8IDQtMTQgZGF5cyB8IENvbmZpZ3VyYWJsZSByZXRlbnRpb24gcGVyaW9kIHwKfCBNYXggYmFja2xvZyB8IDI1IEdCIHwgTWF4aW11bSBxdWV1ZSBiYWNrbG9nIHNpemUgfAp8IE1heCBkZWxheSB8IDEyIGhvdXJzICg0MywyMDBzKSB8IE1heGltdW0gbWVzc2FnZSBkZWxheSB8CnwgTWF4IHJldHJpZXMgfCAxMDAgfCBNYXhpbXVtIHJldHJ5IGF0dGVtcHRzIHwKfCBDUFUgdGltZSBkZWZhdWx0IHwgMzBzIHwgUGVyIGNvbnN1bWVyIGludm9jYXRpb24gfAp8IENQVSB0aW1lIG1heCB8IDMwMHMgKDUgbWluKSB8IENvbmZpZ3VyYWJsZSB2aWEgYGxpbWl0cy5jcHVfbXNgIHwKfCBPcGVyYXRpb25zIHBlciBtZXNzYWdlIHwgMyAod3JpdGUgKyByZWFkICsgZGVsZXRlKSB8IEJhc2UgY29zdCBwZXIgbWVzc2FnZSB8CnwgUHJpY2luZyB8ICQwLjQwIHBlciAxTSBvcGVyYXRpb25zIHwgQWZ0ZXIgMU0gZnJlZSBvcGVyYXRpb25zIHwKfCBNZXNzYWdlIGNoYXJnaW5nIHwgUGVyIDY0IEtCIGNodW5rIHwgTWVzc2FnZXMgY2hhcmdlZCBpbiA2NCBLQiBpbmNyZW1lbnRzIHwK
+# Queues Gotchas & Troubleshooting
+
+## CRITICAL: Top Production Mistakes
+
+### 1. "Entire Batch Retried After Single Error"
+
+**Problem:** Throwing uncaught error in queue handler retries the entire batch, not just the failed message  
+**Cause:** Uncaught exceptions propagate to the runtime, triggering batch-level retry  
+**Solution:** Always wrap individual message processing in try/catch and call `msg.retry()` explicitly
+
+```typescript
+// ❌ BAD: Throws error, retries entire batch
+async queue(batch: MessageBatch): Promise<void> {
+  for (const msg of batch.messages) {
+    await riskyOperation(msg.body); // If this throws, entire batch retries
+    msg.ack();
+  }
+}
+
+// ✅ GOOD: Catch per message, handle individually
+async queue(batch: MessageBatch): Promise<void> {
+  for (const msg of batch.messages) {
+    try {
+      await riskyOperation(msg.body);
+      msg.ack();
+    } catch (error) {
+      msg.retry({ delaySeconds: 60 });
+    }
+  }
+}
+```
+
+### 2. "Messages Retry Forever"
+
+**Problem:** Messages not explicitly ack'd or retry'd will auto-retry indefinitely  
+**Cause:** Runtime default behavior retries unhandled messages until `max_retries` reached  
+**Solution:** Always call `msg.ack()` or `msg.retry()` for each message. Never leave messages unhandled.
+
+```typescript
+// ❌ BAD: Skipped messages auto-retry forever
+async queue(batch: MessageBatch): Promise<void> {
+  for (const msg of batch.messages) {
+    if (shouldProcess(msg.body)) {
+      await process(msg.body);
+      msg.ack();
+    }
+    // Missing: msg.ack() for skipped messages - they will retry!
+  }
+}
+
+// ✅ GOOD: Explicitly handle all messages
+async queue(batch: MessageBatch): Promise<void> {
+  for (const msg of batch.messages) {
+    if (shouldProcess(msg.body)) {
+      await process(msg.body);
+      msg.ack();
+    } else {
+      msg.ack(); // Explicitly ack even if not processing
+    }
+  }
+}
+```
+
+## Common Errors
+
+### "Duplicate Message Processing"
+
+**Problem:** Same message processed multiple times  
+**Cause:** At-least-once delivery guarantee means duplicates are possible during retries  
+**Solution:** Design consumers to be idempotent by tracking processed message IDs in KV with expiration TTL
+
+```typescript
+async queue(batch: MessageBatch, env: Env): Promise<void> {
+  for (const msg of batch.messages) {
+    const processed = await env.PROCESSED_KV.get(msg.id);
+    if (processed) {
+      msg.ack();
+      continue;
+    }
+    
+    await processMessage(msg.body);
+    await env.PROCESSED_KV.put(msg.id, '1', { expirationTtl: 86400 });
+    msg.ack();
+  }
+}
+```
+
+### "Pull Consumer Can't Decode Messages"
+
+**Problem:** Pull consumer or dashboard shows unreadable message bodies  
+**Cause:** Messages sent with `v8` content type are only decodable by Workers push consumers  
+**Solution:** Use `json` content type for pull consumers or dashboard visibility
+
+```typescript
+// Use json for pull consumers
+await env.MY_QUEUE.send(data, { contentType: 'json' });
+
+// Use v8 only for push consumers with complex JS types
+await env.MY_QUEUE.send({ date: new Date(), tags: new Set() }, { contentType: 'v8' });
+```
+
+### "Messages Not Being Delivered"
+
+**Problem:** Messages sent but consumer not processing  
+**Cause:** Queue paused, consumer not configured, or consumer errors  
+**Solution:** Check queue status with `wrangler queues list`, verify consumer configured with `wrangler queues consumer add`, and check logs with `wrangler tail`
+
+### "High Dead Letter Queue Rate"
+
+**Problem:** Many messages ending up in DLQ  
+**Cause:** Consumer repeatedly failing to process messages after max retries  
+**Solution:** Review consumer error logs, check external dependency availability, verify message format matches expectations, or increase retry delay
+
+## Error Classification Patterns
+
+Classify errors to decide whether to retry or DLQ:
+
+```typescript
+async queue(batch: MessageBatch, env: Env): Promise<void> {
+  for (const msg of batch.messages) {
+    try {
+      await processMessage(msg.body);
+      msg.ack();
+    } catch (error) {
+      // Transient errors: retry with backoff
+      if (isRetryable(error)) {
+        const delay = Math.min(30 * (2 ** msg.attempts), 43200);
+        msg.retry({ delaySeconds: delay });
+      } 
+      // Permanent errors: ack to avoid infinite retries
+      else {
+        console.error('Permanent error, sending to DLQ:', error);
+        await env.ERROR_LOG.put(msg.id, JSON.stringify({ msg: msg.body, error: String(error) }));
+        msg.ack(); // Prevent further retries
+      }
+    }
+  }
+}
+
+function isRetryable(error: unknown): boolean {
+  if (error instanceof Response) {
+    // Retry: rate limits, timeouts, server errors
+    return error.status === 429 || error.status >= 500;
+  }
+  if (error instanceof Error) {
+    // Don't retry: validation, auth, not found
+    return !error.message.includes('validation') && 
+           !error.message.includes('unauthorized') &&
+           !error.message.includes('not found');
+  }
+  return false; // Unknown errors don't retry
+}
+```
+
+### "CPU Time Exceeded in Consumer"
+
+**Problem:** Consumer fails with CPU time limit exceeded  
+**Cause:** Consumer processing exceeding 30s default CPU time limit  
+**Solution:** Increase CPU limit in wrangler.jsonc: `{ "limits": { "cpu_ms": 300000 } }` (5 minutes max)
+
+## Content Type Decision Guide
+
+**When to use each content type:**
+
+| Content Type | Use When | Readable By | Supports |
+|--------------|----------|-------------|----------|
+| `json` (default) | Pull consumers, dashboard visibility, simple objects | All (push/pull/dashboard) | JSON-serializable types only |
+| `v8` | Push consumers only, complex JS objects | Push consumers only | Date, Map, Set, BigInt, typed arrays |
+| `text` | String-only payloads | All | Strings only |
+| `bytes` | Binary data (images, files) | All | ArrayBuffer, Uint8Array |
+
+**Decision tree:**
+1. Need to view in dashboard or use pull consumer? → Use `json`
+2. Need Date, Map, Set, or other V8 types? → Use `v8` (push consumers only)
+3. Just strings? → Use `text`
+4. Binary data? → Use `bytes`
+
+```typescript
+// Dashboard/pull: use json
+await env.QUEUE.send({ id: 123, name: 'test' }, { contentType: 'json' });
+
+// Complex JS types (push only): use v8
+await env.QUEUE.send({ 
+  created: new Date(), 
+  tags: new Set(['a', 'b']) 
+}, { contentType: 'v8' });
+```
+
+## Limits
+
+| Limit | Value | Notes |
+|-------|-------|-------|
+| Max queues | 10,000 | Per account |
+| Message size | 128 KB | Maximum per message |
+| Batch size (consumer) | 100 messages | Maximum messages per batch |
+| Batch size (sendBatch) | 100 msgs or 256 KB | Whichever limit reached first |
+| Throughput | 5,000 msgs/sec | Per queue |
+| Retention | 4-14 days | Configurable retention period |
+| Max backlog | 25 GB | Maximum queue backlog size |
+| Max delay | 12 hours (43,200s) | Maximum message delay |
+| Max retries | 100 | Maximum retry attempts |
+| CPU time default | 30s | Per consumer invocation |
+| CPU time max | 300s (5 min) | Configurable via `limits.cpu_ms` |
+| Operations per message | 3 (write + read + delete) | Base cost per message |
+| Pricing | $0.40 per 1M operations | After 1M free operations |
+| Message charging | Per 64 KB chunk | Messages charged in 64 KB increments |

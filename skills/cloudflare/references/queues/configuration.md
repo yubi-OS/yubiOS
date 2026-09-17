@@ -1,1 +1,144 @@
-IyBRdWV1ZXMgQ29uZmlndXJhdGlvbgoKIyMgQ3JlYXRlIFF1ZXVlCgpgYGBiYXNoCndyYW5nbGVyIHF1ZXVlcyBjcmVhdGUgbXktcXVldWUKd3JhbmdsZXIgcXVldWVzIGNyZWF0ZSBteS1xdWV1ZSAtLXJldGVudGlvbi1wZXJpb2QtaG91cnM9MzM2ICAjIDE0IGRheXMKd3JhbmdsZXIgcXVldWVzIGNyZWF0ZSBteS1xdWV1ZSAtLWRlbGl2ZXJ5LWRlbGF5LXNlY3M9MzAwCmBgYAoKIyMgUHJvZHVjZXIgQmluZGluZwoKKip3cmFuZ2xlci5qc29uYzoqKgpgYGBqc29uYwp7CiAgInF1ZXVlcyI6IHsKICAgICJwcm9kdWNlcnMiOiBbCiAgICAgIHsKICAgICAgICAicXVldWUiOiAibXktcXVldWUtbmFtZSIsCiAgICAgICAgImJpbmRpbmciOiAiTVlfUVVFVUUiLAogICAgICAgICJkZWxpdmVyeV9kZWxheSI6IDYwICAvLyBPcHRpb25hbDogZGVmYXVsdCBkZWxheSBpbiBzZWNvbmRzCiAgICAgIH0KICAgIF0KICB9Cn0KYGBgCgojIyBDb25zdW1lciBDb25maWd1cmF0aW9uIChQdXNoLWJhc2VkKQoKKip3cmFuZ2xlci5qc29uYzoqKgpgYGBqc29uYwp7CiAgInF1ZXVlcyI6IHsKICAgICJjb25zdW1lcnMiOiBbCiAgICAgIHsKICAgICAgICAicXVldWUiOiAibXktcXVldWUtbmFtZSIsCiAgICAgICAgIm1heF9iYXRjaF9zaXplIjogMTAsICAgICAgICAgICAvLyAxLTEwMCwgZGVmYXVsdCAxMAogICAgICAgICJtYXhfYmF0Y2hfdGltZW91dCI6IDUsICAgICAgICAgLy8gMC02MHMsIGRlZmF1bHQgNQogICAgICAgICJtYXhfcmV0cmllcyI6IDMsICAgICAgICAgICAgICAgLy8gZGVmYXVsdCAzLCBtYXggMTAwCiAgICAgICAgImRlYWRfbGV0dGVyX3F1ZXVlIjogIm15LWRscSIsICAvLyBvcHRpb25hbAogICAgICAgICJyZXRyeV9kZWxheSI6IDMwMCAgICAgICAgICAgICAgLy8gb3B0aW9uYWw6IGRlbGF5IHJldHJpZXMgaW4gc2Vjb25kcwogICAgICB9CiAgICBdCiAgfQp9CmBgYAoKIyMgQ29uc3VtZXIgQ29uZmlndXJhdGlvbiAoUHVsbC1iYXNlZCkKCioqd3JhbmdsZXIuanNvbmM6KioKYGBganNvbmMKewogICJxdWV1ZXMiOiB7CiAgICAiY29uc3VtZXJzIjogWwogICAgICB7CiAgICAgICAgInF1ZXVlIjogIm15LXF1ZXVlLW5hbWUiLAogICAgICAgICJ0eXBlIjogImh0dHBfcHVsbCIsCiAgICAgICAgInZpc2liaWxpdHlfdGltZW91dF9tcyI6IDUwMDAsICAvLyBkZWZhdWx0IDMwMDAwLCBtYXggMTJoCiAgICAgICAgIm1heF9yZXRyaWVzIjogNSwKICAgICAgICAiZGVhZF9sZXR0ZXJfcXVldWUiOiAibXktZGxxIgogICAgICB9CiAgICBdCiAgfQp9CmBgYAoKIyMgVHlwZVNjcmlwdCBUeXBlcwoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBNWV9RVUVVRTogUXVldWU8TWVzc2FnZUJvZHk+OwogIEFOQUxZVElDU19RVUVVRTogUXVldWU8QW5hbHl0aWNzRXZlbnQ+Owp9CgppbnRlcmZhY2UgTWVzc2FnZUJvZHkgewogIGlkOiBzdHJpbmc7CiAgYWN0aW9uOiAnY3JlYXRlJyB8ICd1cGRhdGUnIHwgJ2RlbGV0ZSc7CiAgZGF0YTogUmVjb3JkPHN0cmluZywgYW55PjsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHF1ZXVlKGJhdGNoOiBNZXNzYWdlQmF0Y2g8TWVzc2FnZUJvZHk+LCBlbnY6IEVudik6IFByb21pc2U8dm9pZD4gewogICAgZm9yIChjb25zdCBtc2cgb2YgYmF0Y2gubWVzc2FnZXMpIHsKICAgICAgY29uc29sZS5sb2cobXNnLmJvZHkuYWN0aW9uKTsKICAgICAgbXNnLmFjaygpOwogICAgfQogIH0KfSBzYXRpc2ZpZXMgRXhwb3J0ZWRIYW5kbGVyPEVudj47CmBgYAoKIyMgQ29udGVudCBUeXBlIFNlbGVjdGlvbgoKQ2hvb3NlIGNvbnRlbnQgdHlwZSBiYXNlZCBvbiBjb25zdW1lciB0eXBlIGFuZCBkYXRhIHJlcXVpcmVtZW50czoKCnwgQ29udGVudCBUeXBlIHwgVXNlIFdoZW4gfCBSZWFkYWJsZSBCeSB8IFN1cHBvcnRzIHwgU2l6ZSB8CnwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS18CnwgYGpzb25gIHwgUHVsbCBjb25zdW1lcnMsIGRhc2hib2FyZCB2aXNpYmlsaXR5LCBzaW1wbGUgb2JqZWN0cyB8IEFsbCAocHVzaC9wdWxsL2Rhc2hib2FyZCkgfCBKU09OLXNlcmlhbGl6YWJsZSB0eXBlcyBvbmx5IHwgTWVkaXVtIHwKfCBgdjhgIHwgUHVzaCBjb25zdW1lcnMgb25seSwgY29tcGxleCBKUyBvYmplY3RzIHwgUHVzaCBjb25zdW1lcnMgb25seSB8IERhdGUsIE1hcCwgU2V0LCBCaWdJbnQsIHR5cGVkIGFycmF5cyB8IFNtYWxsIHwKfCBgdGV4dGAgfCBTdHJpbmctb25seSBwYXlsb2FkcyB8IEFsbCB8IFN0cmluZ3Mgb25seSB8IFNtYWxsZXN0IHwKfCBgYnl0ZXNgIHwgQmluYXJ5IGRhdGEgKGltYWdlcywgZmlsZXMpIHwgQWxsIHwgQXJyYXlCdWZmZXIsIFVpbnQ4QXJyYXkgfCBWYXJpYWJsZSB8CgoqKkRlY2lzaW9uIHRyZWU6KioKMS4gTmVlZCB0byB2aWV3IGluIGRhc2hib2FyZCBvciB1c2UgcHVsbCBjb25zdW1lcj8g4oaSIFVzZSBganNvbmAKMi4gTmVlZCBEYXRlLCBNYXAsIFNldCwgb3Igb3RoZXIgVjggdHlwZXM/IOKGkiBVc2UgYHY4YCAocHVzaCBjb25zdW1lcnMgb25seSkKMy4gSnVzdCBzdHJpbmdzPyDihpIgVXNlIGB0ZXh0YAo0LiBCaW5hcnkgZGF0YT8g4oaSIFVzZSBgYnl0ZXNgCgpgYGB0eXBlc2NyaXB0Ci8vIEpTT046IEdvb2QgZm9yIHNpbXBsZSBvYmplY3RzLCBwdWxsIGNvbnN1bWVycywgZGFzaGJvYXJkIHZpc2liaWxpdHkKYXdhaXQgZW52LlFVRVVFLnNlbmQoeyBpZDogMTIzLCBuYW1lOiAndGVzdCcgfSwgeyBjb250ZW50VHlwZTogJ2pzb24nIH0pOwoKLy8gVjg6IEdvb2QgZm9yIERhdGUsIE1hcCwgU2V0IChwdXNoIGNvbnN1bWVycyBvbmx5KQphd2FpdCBlbnYuUVVFVUUuc2VuZCh7IAogIGNyZWF0ZWQ6IG5ldyBEYXRlKCksIAogIHRhZ3M6IG5ldyBTZXQoWydhJywgJ2InXSkgCn0sIHsgY29udGVudFR5cGU6ICd2OCcgfSk7CgovLyBUZXh0OiBTaW1wbGUgc3RyaW5ncwphd2FpdCBlbnYuUVVFVUUuc2VuZCgncHJvY2Vzcy11c2VyLTEyMycsIHsgY29udGVudFR5cGU6ICd0ZXh0JyB9KTsKCi8vIEJ5dGVzOiBCaW5hcnkgZGF0YQphd2FpdCBlbnYuUVVFVUUuc2VuZChpbWFnZUJ1ZmZlciwgeyBjb250ZW50VHlwZTogJ2J5dGVzJyB9KTsKYGBgCgoqKkRlZmF1bHQgYmVoYXZpb3I6KiogSWYgbm90IHNwZWNpZmllZCwgQ2xvdWRmbGFyZSBhdXRvLXNlbGVjdHMgYGpzb25gIGZvciBKU09OLXNlcmlhbGl6YWJsZSBvYmplY3RzIGFuZCBgdjhgIGZvciBjb21wbGV4IHR5cGVzLgoKKipJTVBPUlRBTlQ6KiogYHY4YCBtZXNzYWdlcyBjYW5ub3QgYmUgcmVhZCBieSBwdWxsIGNvbnN1bWVycyBvciB2aWV3ZWQgaW4gdGhlIGRhc2hib2FyZC4gVXNlIGBqc29uYCBpZiB5b3UgbmVlZCB2aXNpYmlsaXR5IG9yIHB1bGwtYmFzZWQgY29uc3VtcHRpb24uCgojIyBDTEkgQ29tbWFuZHMKCmBgYGJhc2gKIyBDb25zdW1lciBtYW5hZ2VtZW50CndyYW5nbGVyIHF1ZXVlcyBjb25zdW1lciBhZGQgbXktcXVldWUgbXktd29ya2VyIC0tYmF0Y2gtc2l6ZT01MCAtLW1heC1yZXRyaWVzPTUKd3JhbmdsZXIgcXVldWVzIGNvbnN1bWVyIGh0dHAgYWRkIG15LXF1ZXVlCndyYW5nbGVyIHF1ZXVlcyBjb25zdW1lciB3b3JrZXIgcmVtb3ZlIG15LXF1ZXVlIG15LXdvcmtlcgp3cmFuZ2xlciBxdWV1ZXMgY29uc3VtZXIgaHR0cCByZW1vdmUgbXktcXVldWUKCiMgUXVldWUgb3BlcmF0aW9ucwp3cmFuZ2xlciBxdWV1ZXMgbGlzdAp3cmFuZ2xlciBxdWV1ZXMgcGF1c2UgbXktcXVldWUKd3JhbmdsZXIgcXVldWVzIHJlc3VtZSBteS1xdWV1ZQp3cmFuZ2xlciBxdWV1ZXMgcHVyZ2UgbXktcXVldWUKd3JhbmdsZXIgcXVldWVzIGRlbGV0ZSBteS1xdWV1ZQpgYGAK
+# Queues Configuration
+
+## Create Queue
+
+```bash
+wrangler queues create my-queue
+wrangler queues create my-queue --retention-period-hours=336  # 14 days
+wrangler queues create my-queue --delivery-delay-secs=300
+```
+
+## Producer Binding
+
+**wrangler.jsonc:**
+```jsonc
+{
+  "queues": {
+    "producers": [
+      {
+        "queue": "my-queue-name",
+        "binding": "MY_QUEUE",
+        "delivery_delay": 60  // Optional: default delay in seconds
+      }
+    ]
+  }
+}
+```
+
+## Consumer Configuration (Push-based)
+
+**wrangler.jsonc:**
+```jsonc
+{
+  "queues": {
+    "consumers": [
+      {
+        "queue": "my-queue-name",
+        "max_batch_size": 10,           // 1-100, default 10
+        "max_batch_timeout": 5,         // 0-60s, default 5
+        "max_retries": 3,               // default 3, max 100
+        "dead_letter_queue": "my-dlq",  // optional
+        "retry_delay": 300              // optional: delay retries in seconds
+      }
+    ]
+  }
+}
+```
+
+## Consumer Configuration (Pull-based)
+
+**wrangler.jsonc:**
+```jsonc
+{
+  "queues": {
+    "consumers": [
+      {
+        "queue": "my-queue-name",
+        "type": "http_pull",
+        "visibility_timeout_ms": 5000,  // default 30000, max 12h
+        "max_retries": 5,
+        "dead_letter_queue": "my-dlq"
+      }
+    ]
+  }
+}
+```
+
+## TypeScript Types
+
+```typescript
+interface Env {
+  MY_QUEUE: Queue<MessageBody>;
+  ANALYTICS_QUEUE: Queue<AnalyticsEvent>;
+}
+
+interface MessageBody {
+  id: string;
+  action: 'create' | 'update' | 'delete';
+  data: Record<string, any>;
+}
+
+export default {
+  async queue(batch: MessageBatch<MessageBody>, env: Env): Promise<void> {
+    for (const msg of batch.messages) {
+      console.log(msg.body.action);
+      msg.ack();
+    }
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## Content Type Selection
+
+Choose content type based on consumer type and data requirements:
+
+| Content Type | Use When | Readable By | Supports | Size |
+|--------------|----------|-------------|----------|------|
+| `json` | Pull consumers, dashboard visibility, simple objects | All (push/pull/dashboard) | JSON-serializable types only | Medium |
+| `v8` | Push consumers only, complex JS objects | Push consumers only | Date, Map, Set, BigInt, typed arrays | Small |
+| `text` | String-only payloads | All | Strings only | Smallest |
+| `bytes` | Binary data (images, files) | All | ArrayBuffer, Uint8Array | Variable |
+
+**Decision tree:**
+1. Need to view in dashboard or use pull consumer? → Use `json`
+2. Need Date, Map, Set, or other V8 types? → Use `v8` (push consumers only)
+3. Just strings? → Use `text`
+4. Binary data? → Use `bytes`
+
+```typescript
+// JSON: Good for simple objects, pull consumers, dashboard visibility
+await env.QUEUE.send({ id: 123, name: 'test' }, { contentType: 'json' });
+
+// V8: Good for Date, Map, Set (push consumers only)
+await env.QUEUE.send({ 
+  created: new Date(), 
+  tags: new Set(['a', 'b']) 
+}, { contentType: 'v8' });
+
+// Text: Simple strings
+await env.QUEUE.send('process-user-123', { contentType: 'text' });
+
+// Bytes: Binary data
+await env.QUEUE.send(imageBuffer, { contentType: 'bytes' });
+```
+
+**Default behavior:** If not specified, Cloudflare auto-selects `json` for JSON-serializable objects and `v8` for complex types.
+
+**IMPORTANT:** `v8` messages cannot be read by pull consumers or viewed in the dashboard. Use `json` if you need visibility or pull-based consumption.
+
+## CLI Commands
+
+```bash
+# Consumer management
+wrangler queues consumer add my-queue my-worker --batch-size=50 --max-retries=5
+wrangler queues consumer http add my-queue
+wrangler queues consumer worker remove my-queue my-worker
+wrangler queues consumer http remove my-queue
+
+# Queue operations
+wrangler queues list
+wrangler queues pause my-queue
+wrangler queues resume my-queue
+wrangler queues purge my-queue
+wrangler queues delete my-queue
+```

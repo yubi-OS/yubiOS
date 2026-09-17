@@ -1,1 +1,138 @@
-IyBDbG91ZGZsYXJlIFdvcmtlcnMgU21hcnQgUGxhY2VtZW50CgpBdXRvbWF0aWMgd29ya2xvYWQgcGxhY2VtZW50IG9wdGltaXphdGlvbiB0byBtaW5pbWl6ZSBsYXRlbmN5IGJ5IHJ1bm5pbmcgV29ya2VycyBjbG9zZXIgdG8gYmFja2VuZCBpbmZyYXN0cnVjdHVyZSByYXRoZXIgdGhhbiBlbmQgdXNlcnMuCgojIyBDb3JlIENvbmNlcHQKClNtYXJ0IFBsYWNlbWVudCBhdXRvbWF0aWNhbGx5IGFuYWx5emVzIFdvcmtlciByZXF1ZXN0IGR1cmF0aW9uIGFjcm9zcyBDbG91ZGZsYXJlJ3MgZ2xvYmFsIG5ldHdvcmsgYW5kIGludGVsbGlnZW50bHkgcm91dGVzIHJlcXVlc3RzIHRvIG9wdGltYWwgZGF0YSBjZW50ZXIgbG9jYXRpb25zLiBJbnN0ZWFkIG9mIGRlZmF1bHRpbmcgdG8gdGhlIGxvY2F0aW9uIGNsb3Nlc3QgdG8gdGhlIGVuZCB1c2VyLCBTbWFydCBQbGFjZW1lbnQgY2FuIGZvcndhcmQgcmVxdWVzdHMgdG8gbG9jYXRpb25zIGNsb3NlciB0byBiYWNrZW5kIGluZnJhc3RydWN0dXJlIHdoZW4gdGhpcyByZWR1Y2VzIG92ZXJhbGwgcmVxdWVzdCBkdXJhdGlvbi4KCiMjIyBXaGVuIHRvIFVzZQoKKipFbmFibGUgU21hcnQgUGxhY2VtZW50IHdoZW46KioKLSBXb3JrZXIgbWFrZXMgbXVsdGlwbGUgcm91bmQgdHJpcHMgdG8gYmFja2VuZCBzZXJ2aWNlcy9kYXRhYmFzZXMKLSBCYWNrZW5kIGluZnJhc3RydWN0dXJlIGlzIGdlb2dyYXBoaWNhbGx5IGNvbmNlbnRyYXRlZAotIFJlcXVlc3QgZHVyYXRpb24gZG9taW5hdGVkIGJ5IGJhY2tlbmQgbGF0ZW5jeSByYXRoZXIgdGhhbiBuZXR3b3JrIGxhdGVuY3kgZnJvbSB1c2VyCi0gUnVubmluZyBiYWNrZW5kIGxvZ2ljIGluIFdvcmtlcnMgKEFQSXMsIGRhdGEgYWdncmVnYXRpb24sIFNTUiB3aXRoIERCIGNhbGxzKQotIFdvcmtlciB1c2VzIGBmZXRjaGAgaGFuZGxlciAobm90IFJQQyBtZXRob2RzKQoKKipEbyBOT1QgZW5hYmxlIGZvcjoqKgotIFdvcmtlcnMgc2VydmluZyBvbmx5IHN0YXRpYyBjb250ZW50IG9yIGNhY2hlZCByZXNwb25zZXMKLSBXb3JrZXJzIHdpdGhvdXQgc2lnbmlmaWNhbnQgYmFja2VuZCBjb21tdW5pY2F0aW9uCi0gUHVyZSBlZGdlIGxvZ2ljIChhdXRoIGNoZWNrcywgcmVkaXJlY3RzLCBzaW1wbGUgdHJhbnNmb3JtYXRpb25zKQotIFdvcmtlcnMgd2l0aG91dCBmZXRjaCBldmVudCBoYW5kbGVycwotIFdvcmtlcnMgd2l0aCBSUEMgbWV0aG9kcyBvciBuYW1lZCBlbnRyeXBvaW50cyAob25seSBgZmV0Y2hgIGhhbmRsZXJzIGFyZSBhZmZlY3RlZCkKLSBQYWdlcy9Bc3NldHMgV29ya2VycyB3aXRoIGBydW5fd29ya2VyX2ZpcnN0ID0gdHJ1ZWAgKGRlZ3JhZGVzIGFzc2V0IHNlcnZpbmcpCgojIyMgRGVjaXNpb24gVHJlZQoKYGBgCkRvZXMgeW91ciBXb3JrZXIgaGF2ZSBhIGZldGNoIGhhbmRsZXI/CuKUnOKUgCBObyDihpIgU21hcnQgUGxhY2VtZW50IHdvbid0IHdvcmsgKHNraXApCuKUlOKUgCBZZXMKICAg4pSCCiAgIERvZXMgaXQgbWFrZSBtdWx0aXBsZSBiYWNrZW5kIGNhbGxzIChEQi9BUEkpPwogICDilJzilIAgTm8g4oaSIERvbid0IGVuYWJsZSAod29uJ3QgaGVscCkKICAg4pSU4pSAIFllcwogICAgICDilIIKICAgICAgSXMgYmFja2VuZCBnZW9ncmFwaGljYWxseSBjb25jZW50cmF0ZWQ/CiAgICAgIOKUnOKUgCBObyAoZ2xvYmFsbHkgZGlzdHJpYnV0ZWQpIOKGkiBQcm9iYWJseSB3b24ndCBoZWxwCiAgICAgIOKUlOKUgCBZZXMgb3IgdW5jZXJ0YWluCiAgICAgICAgIOKUggogICAgICAgICBEb2VzIGl0IHNlcnZlIHN0YXRpYyBhc3NldHMgd2l0aCBydW5fd29ya2VyX2ZpcnN0PXRydWU/CiAgICAgICAgIOKUnOKUgCBZZXMg4oaSIERvbid0IGVuYWJsZSAod2lsbCBodXJ0IHBlcmZvcm1hbmNlKQogICAgICAgICDilJTilIAgTm8g4oaSIEVuYWJsZSBTbWFydCBQbGFjZW1lbnQKICAgICAgICAgICAg4pSCCiAgICAgICAgICAgIEFmdGVyIDE1bWluLCBjaGVjayBwbGFjZW1lbnRfc3RhdHVzCiAgICAgICAgICAgIOKUnOKUgCBTVUNDRVNTIOKGkiBNb25pdG9yIG1ldHJpY3MKICAgICAgICAgICAg4pSc4pSAIElOU1VGRklDSUVOVF9JTlZPQ0FUSU9OUyDihpIgTmVlZCBtb3JlIHRyYWZmaWMKICAgICAgICAgICAg4pSU4pSAIFVOU1VQUE9SVEVEX0FQUExJQ0FUSU9OIOKGkiBEaXNhYmxlIChodXJ0aW5nIHBlcmZvcm1hbmNlKQpgYGAKCiMjIyBLZXkgQXJjaGl0ZWN0dXJlIFBhdHRlcm4KCioqUmVjb21tZW5kZWQ6KiogU3BsaXQgZnVsbC1zdGFjayBhcHBsaWNhdGlvbnMgaW50byBzZXBhcmF0ZSBXb3JrZXJzOgpgYGAKVXNlciDihpIgRnJvbnRlbmQgV29ya2VyIChhdCBlZGdlLCBjbG9zZSB0byB1c2VyKQogICAgICAgICDihpMgU2VydmljZSBCaW5kaW5nCiAgICAgICBCYWNrZW5kIFdvcmtlciAoU21hcnQgUGxhY2VtZW50IGVuYWJsZWQsIGNsb3NlIHRvIERCL0FQSSkKICAgICAgICAg4oaTCiAgICAgICBEYXRhYmFzZS9CYWNrZW5kIFNlcnZpY2UKYGBgCgpUaGlzIG1haW50YWlucyBmYXN0LCByZWFjdGl2ZSBmcm9udGVuZHMgd2hpbGUgb3B0aW1pemluZyBiYWNrZW5kIGxhdGVuY3kuCgojIyBRdWljayBTdGFydAoKYGBganNvbmMKLy8gd3JhbmdsZXIuanNvbmMKewogICJwbGFjZW1lbnQiOiB7CiAgICAibW9kZSI6ICJzbWFydCIgIC8vIG9yICJvZmYiIHRvIGV4cGxpY2l0bHkgZGlzYWJsZQogIH0KfQpgYGAKCkRlcGxveSBhbmQgd2FpdCAxNSBtaW51dGVzIGZvciBhbmFseXNpcy4gQ2hlY2sgc3RhdHVzIHZpYSBBUEkgb3IgZGFzaGJvYXJkIG1ldHJpY3MuCgoqKlRvIGRpc2FibGU6KiogU2V0IGAibW9kZSI6ICJvZmYiYCBvciByZW1vdmUgYHBsYWNlbWVudGAgZmllbGQgZW50aXJlbHkgKGJvdGggZXF1aXZhbGVudCkuCgojIyBSZXF1aXJlbWVudHMKCi0gV3JhbmdsZXIgMi4yMC4wKwotIEFuYWx5c2lzIHRpbWU6IFVwIHRvIDE1IG1pbnV0ZXMgYWZ0ZXIgZW5hYmxpbmcKLSBUcmFmZmljIHJlcXVpcmVtZW50czogQ29uc2lzdGVudCB0cmFmZmljIGZyb20gbXVsdGlwbGUgZ2xvYmFsIGxvY2F0aW9ucwotIEF2YWlsYWJsZSBvbiBhbGwgV29ya2VycyBwbGFucyAoRnJlZSwgUGFpZCwgRW50ZXJwcmlzZSkKCiMjIFBsYWNlbWVudCBTdGF0dXMgVmFsdWVzCgpgYGB0eXBlc2NyaXB0CnR5cGUgUGxhY2VtZW50U3RhdHVzID0gCiAgfCB1bmRlZmluZWQgIC8vIE5vdCB5ZXQgYW5hbHl6ZWQKICB8ICdTVUNDRVNTJyAgLy8gU3VjY2Vzc2Z1bGx5IG9wdGltaXplZAogIHwgJ0lOU1VGRklDSUVOVF9JTlZPQ0FUSU9OUycgIC8vIE5vdCBlbm91Z2ggdHJhZmZpYwogIHwgJ1VOU1VQUE9SVEVEX0FQUExJQ0FUSU9OJzsgIC8vIE1hZGUgV29ya2VyIHNsb3dlciAocmV2ZXJ0ZWQpCmBgYAoKIyMgQ0xJIENvbW1hbmRzCgpgYGBiYXNoCiMgRGVwbG95IHdpdGggU21hcnQgUGxhY2VtZW50CndyYW5nbGVyIGRlcGxveQoKIyBDaGVjayBwbGFjZW1lbnQgc3RhdHVzCmN1cmwgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkVE9LRU4iIFwKICBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJEFDQ09VTlRfSUQvd29ya2Vycy9zZXJ2aWNlcy8kV09SS0VSX05BTUUgXAogIHwganEgLnJlc3VsdC5wbGFjZW1lbnRfc3RhdHVzCgojIE1vbml0b3IKd3JhbmdsZXIgdGFpbCB5b3VyLXdvcmtlci1uYW1lIC0taGVhZGVyIGNmLXBsYWNlbWVudApgYGAKCiMjIFJlYWRpbmcgT3JkZXIKCioqRmlyc3QgdGltZT8qKiBTdGFydCBoZXJlOgoxLiBUaGlzIFJFQURNRSAtIHVuZGVyc3RhbmQgY29yZSBjb25jZXB0cyBhbmQgd2hlbiB0byB1c2UgU21hcnQgUGxhY2VtZW50CjIuIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gc2V0IHVwIHdyYW5nbGVyLmpzb25jIGFuZCB1bmRlcnN0YW5kIGxpbWl0YXRpb25zCjMuIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBzZWUgcHJhY3RpY2FsIGV4YW1wbGVzIGZvciB5b3VyIHVzZSBjYXNlCjQuIFthcGkubWRdKC4vYXBpLm1kKSAtIG1vbml0b3IgYW5kIHZlcmlmeSBTbWFydCBQbGFjZW1lbnQgaXMgd29ya2luZwo1LiBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIHRyb3VibGVzaG9vdCBjb21tb24gaXNzdWVzCgoqKlF1aWNrIGxvb2t1cDoqKgotICJTaG91bGQgSSBlbmFibGUgU21hcnQgUGxhY2VtZW50PyIg4oaSIFNlZSAiV2hlbiB0byBVc2UiIGFib3ZlCi0gIkhvdyBkbyBJIGNvbmZpZ3VyZSBpdD8iIOKGkiBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKQotICJIb3cgZG8gSSBzcGxpdCBmcm9udGVuZC9iYWNrZW5kPyIg4oaSIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkKLSAiV2h5IGlzbid0IGl0IHdvcmtpbmc/IiDihpIgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gd3JhbmdsZXIuanNvbmMgc2V0dXAsIG1vZGUgdmFsdWVzLCB2YWxpZGF0aW9uIHJ1bGVzCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gUGxhY2VtZW50IFN0YXR1cyBBUEksIGNmLXBsYWNlbWVudCBoZWFkZXIsIG1vbml0b3JpbmcKLSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gRnJvbnRlbmQvYmFja2VuZCBzcGxpdCwgZGF0YWJhc2Ugd29ya2VycywgU1NSIHBhdHRlcm5zCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBUcm91Ymxlc2hvb3RpbmcgSU5TVUZGSUNJRU5UX0lOVk9DQVRJT05TLCBwZXJmb3JtYW5jZSBpc3N1ZXMKCiMjIFNlZSBBbHNvCgotIFt3b3JrZXJzXSguLi93b3JrZXJzLykgLSBXb3JrZXIgcnVudGltZSBhbmQgZmV0Y2ggaGFuZGxlcnMKLSBbZDFdKC4uL2QxLykgLSBEMSBkYXRhYmFzZSB0aGF0IGJlbmVmaXRzIGZyb20gU21hcnQgUGxhY2VtZW50Ci0gW2R1cmFibGUtb2JqZWN0c10oLi4vZHVyYWJsZS1vYmplY3RzLykgLSBEdXJhYmxlIE9iamVjdHMgd2l0aCBiYWNrZW5kIGxvZ2ljCi0gW2JpbmRpbmdzXSguLi9iaW5kaW5ncy8pIC0gU2VydmljZSBiaW5kaW5ncyBmb3IgZnJvbnRlbmQvYmFja2VuZCBzcGxpdAo=
+# Cloudflare Workers Smart Placement
+
+Automatic workload placement optimization to minimize latency by running Workers closer to backend infrastructure rather than end users.
+
+## Core Concept
+
+Smart Placement automatically analyzes Worker request duration across Cloudflare's global network and intelligently routes requests to optimal data center locations. Instead of defaulting to the location closest to the end user, Smart Placement can forward requests to locations closer to backend infrastructure when this reduces overall request duration.
+
+### When to Use
+
+**Enable Smart Placement when:**
+- Worker makes multiple round trips to backend services/databases
+- Backend infrastructure is geographically concentrated
+- Request duration dominated by backend latency rather than network latency from user
+- Running backend logic in Workers (APIs, data aggregation, SSR with DB calls)
+- Worker uses `fetch` handler (not RPC methods)
+
+**Do NOT enable for:**
+- Workers serving only static content or cached responses
+- Workers without significant backend communication
+- Pure edge logic (auth checks, redirects, simple transformations)
+- Workers without fetch event handlers
+- Workers with RPC methods or named entrypoints (only `fetch` handlers are affected)
+- Pages/Assets Workers with `run_worker_first = true` (degrades asset serving)
+
+### Decision Tree
+
+```
+Does your Worker have a fetch handler?
+├─ No → Smart Placement won't work (skip)
+└─ Yes
+   │
+   Does it make multiple backend calls (DB/API)?
+   ├─ No → Don't enable (won't help)
+   └─ Yes
+      │
+      Is backend geographically concentrated?
+      ├─ No (globally distributed) → Probably won't help
+      └─ Yes or uncertain
+         │
+         Does it serve static assets with run_worker_first=true?
+         ├─ Yes → Don't enable (will hurt performance)
+         └─ No → Enable Smart Placement
+            │
+            After 15min, check placement_status
+            ├─ SUCCESS → Monitor metrics
+            ├─ INSUFFICIENT_INVOCATIONS → Need more traffic
+            └─ UNSUPPORTED_APPLICATION → Disable (hurting performance)
+```
+
+### Key Architecture Pattern
+
+**Recommended:** Split full-stack applications into separate Workers:
+```
+User → Frontend Worker (at edge, close to user)
+         ↓ Service Binding
+       Backend Worker (Smart Placement enabled, close to DB/API)
+         ↓
+       Database/Backend Service
+```
+
+This maintains fast, reactive frontends while optimizing backend latency.
+
+## Quick Start
+
+```jsonc
+// wrangler.jsonc
+{
+  "placement": {
+    "mode": "smart"  // or "off" to explicitly disable
+  }
+}
+```
+
+Deploy and wait 15 minutes for analysis. Check status via API or dashboard metrics.
+
+**To disable:** Set `"mode": "off"` or remove `placement` field entirely (both equivalent).
+
+## Requirements
+
+- Wrangler 2.20.0+
+- Analysis time: Up to 15 minutes after enabling
+- Traffic requirements: Consistent traffic from multiple global locations
+- Available on all Workers plans (Free, Paid, Enterprise)
+
+## Placement Status Values
+
+```typescript
+type PlacementStatus = 
+  | undefined  // Not yet analyzed
+  | 'SUCCESS'  // Successfully optimized
+  | 'INSUFFICIENT_INVOCATIONS'  // Not enough traffic
+  | 'UNSUPPORTED_APPLICATION';  // Made Worker slower (reverted)
+```
+
+## CLI Commands
+
+```bash
+# Deploy with Smart Placement
+wrangler deploy
+
+# Check placement status
+curl -H "Authorization: Bearer $TOKEN" \
+  https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/services/$WORKER_NAME \
+  | jq .result.placement_status
+
+# Monitor
+wrangler tail your-worker-name --header cf-placement
+```
+
+## Reading Order
+
+**First time?** Start here:
+1. This README - understand core concepts and when to use Smart Placement
+2. [configuration.md](./configuration.md) - set up wrangler.jsonc and understand limitations
+3. [patterns.md](./patterns.md) - see practical examples for your use case
+4. [api.md](./api.md) - monitor and verify Smart Placement is working
+5. [gotchas.md](./gotchas.md) - troubleshoot common issues
+
+**Quick lookup:**
+- "Should I enable Smart Placement?" → See "When to Use" above
+- "How do I configure it?" → [configuration.md](./configuration.md)
+- "How do I split frontend/backend?" → [patterns.md](./patterns.md)
+- "Why isn't it working?" → [gotchas.md](./gotchas.md)
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - wrangler.jsonc setup, mode values, validation rules
+- [api.md](./api.md) - Placement Status API, cf-placement header, monitoring
+- [patterns.md](./patterns.md) - Frontend/backend split, database workers, SSR patterns
+- [gotchas.md](./gotchas.md) - Troubleshooting INSUFFICIENT_INVOCATIONS, performance issues
+
+## See Also
+
+- [workers](../workers/) - Worker runtime and fetch handlers
+- [d1](../d1/) - D1 database that benefits from Smart Placement
+- [durable-objects](../durable-objects/) - Durable Objects with backend logic
+- [bindings](../bindings/) - Service bindings for frontend/backend split

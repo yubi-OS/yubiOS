@@ -1,1 +1,50 @@
-IyBSMiBTUUwgQ29uZmlndXJhdGlvbgoKQXV0aCBhbmQgc2V0dXAuIEZvciB0aGUgY3VycmVudCBwZXJtaXNzaW9uIG1hdHJpeCBhbmQgd3JhbmdsZXIgZmxhZ3MsIHB1bGwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yMi1zcWwvcmVmZXJlbmNlL3dyYW5nbGVyLWNvbW1hbmRzL2AgYW5kIHRoZSBSMiBEYXRhIENhdGFsb2cgbWFuYWdlLWNhdGFsb2dzIGRvYy4KCiMjIFByZXJlcXVpc2l0ZXMKCi0gUjIgYnVja2V0IHdpdGggRGF0YSBDYXRhbG9nIGVuYWJsZWQgKFtyMi1kYXRhLWNhdGFsb2cvY29uZmlndXJhdGlvbi5tZF0oLi4vcjItZGF0YS1jYXRhbG9nL2NvbmZpZ3VyYXRpb24ubWQpKQotIFIyIEFQSSB0b2tlbjogKipSMiBTdG9yYWdlIEFkbWluIFJlYWQgJiBXcml0ZSoqIChpbmNsdWRlcyBSMiBTUUwgUmVhZCksIG9yIGFkZCAqKlIyIFNRTCBSZWFkKiogZXhwbGljaXRseQotIFdyYW5nbGVyIENMSSAoZm9yIENMSSBxdWVyaWVzKQoKPiBPcGVuLWJldGEgbGltaXRhdGlvbjogUjIgU3RvcmFnZSAqKkFkbWluIFJlYWQgJiBXcml0ZSBpcyByZXF1aXJlZCBldmVuIGZvciByZWFkLW9ubHkgUjIgU1FMIHF1ZXJpZXMqKi4KCiMjIEVuYWJsZSBDYXRhbG9nICsgR2V0IFdhcmVob3VzZQoKYGBgYmFzaApucHggd3JhbmdsZXIgcjIgYnVja2V0IGNhdGFsb2cgZW5hYmxlIG15LWJ1Y2tldApgYGAKCllvdSBxdWVyeSBieSAqKndhcmVob3VzZSoqIG5hbWUgKGB7QUNDT1VOVF9JRH1fe0JVQ0tFVH1gKSwgc2hvd24gaW4gdGhlIG91dHB1dCBhbG9uZ3NpZGUgdGhlIENhdGFsb2cgVVJJLgoKIyMgQ29uZmlndXJlIEF1dGgKCiMjIyBXcmFuZ2xlciBDTEkKCmBgYGJhc2gKZXhwb3J0IFdSQU5HTEVSX1IyX1NRTF9BVVRIX1RPS0VOPTx5b3VyLXRva2VuPgojIG9yIGEgLmVudiBmaWxlIGluIHRoZSBwcm9qZWN0IGRpciAoYXV0by1sb2FkZWQpOiBXUkFOR0xFUl9SMl9TUUxfQVVUSF9UT0tFTj08eW91ci10b2tlbj4KYGBgCgo+IFdyYW5nbGVyIGRvZXMgKipub3QqKiB1c2UgdGhlIGB3cmFuZ2xlciBsb2dpbmAgT0F1dGggc2Vzc2lvbiBmb3IgUjIgU1FMIOKAlCB0aGUgZW52IHZhciBpcyByZXF1aXJlZC4KCiMjIyBSRVNUIEFQSQoKYGBgYmFzaApjdXJsIC1YIFBPU1QgXAogICJodHRwczovL2FwaS5zcWwuY2xvdWRmbGFyZXN0b3JhZ2UuY29tL2FwaS92MS9hY2NvdW50cy8kQUNDT1VOVF9JRC9yMi1zcWwvcXVlcnkvJEJVQ0tFVCIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJFRPS0VOIiAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3sicXVlcnkiOiAiU0VMRUNUICogRlJPTSBkZWZhdWx0Lm15X3RhYmxlIExJTUlUIDEwIn0nCmBgYAoKIyMgVmVyaWZ5IFNldHVwCgpgYGBiYXNoCm5weCB3cmFuZ2xlciByMiBzcWwgcXVlcnkgIiR7QUNDT1VOVF9JRH1fbXktYnVja2V0IiAiU0hPVyBEQVRBQkFTRVMiCm5weCB3cmFuZ2xlciByMiBzcWwgcXVlcnkgIiR7QUNDT1VOVF9JRH1fbXktYnVja2V0IiAiU0hPVyBUQUJMRVMgSU4gZGVmYXVsdCIKYGBgCgojIyBTZWUgQWxzbwoKLSBbYXBpLm1kXShhcGkubWQpIOKAlCBTUUwgc3ludGF4IMK3IFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIOKAlCBxdWVyeSBleGFtcGxlcyDCtyBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkg4oCUIHRyb3VibGVzaG9vdGluZwo=
+# R2 SQL Configuration
+
+Auth and setup. For the current permission matrix and wrangler flags, pull `https://developers.cloudflare.com/r2-sql/reference/wrangler-commands/` and the R2 Data Catalog manage-catalogs doc.
+
+## Prerequisites
+
+- R2 bucket with Data Catalog enabled ([r2-data-catalog/configuration.md](../r2-data-catalog/configuration.md))
+- R2 API token: **R2 Storage Admin Read & Write** (includes R2 SQL Read), or add **R2 SQL Read** explicitly
+- Wrangler CLI (for CLI queries)
+
+> Open-beta limitation: R2 Storage **Admin Read & Write is required even for read-only R2 SQL queries**.
+
+## Enable Catalog + Get Warehouse
+
+```bash
+npx wrangler r2 bucket catalog enable my-bucket
+```
+
+You query by **warehouse** name (`{ACCOUNT_ID}_{BUCKET}`), shown in the output alongside the Catalog URI.
+
+## Configure Auth
+
+### Wrangler CLI
+
+```bash
+export WRANGLER_R2_SQL_AUTH_TOKEN=<your-token>
+# or a .env file in the project dir (auto-loaded): WRANGLER_R2_SQL_AUTH_TOKEN=<your-token>
+```
+
+> Wrangler does **not** use the `wrangler login` OAuth session for R2 SQL — the env var is required.
+
+### REST API
+
+```bash
+curl -X POST \
+  "https://api.sql.cloudflarestorage.com/api/v1/accounts/$ACCOUNT_ID/r2-sql/query/$BUCKET" \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"query": "SELECT * FROM default.my_table LIMIT 10"}'
+```
+
+## Verify Setup
+
+```bash
+npx wrangler r2 sql query "${ACCOUNT_ID}_my-bucket" "SHOW DATABASES"
+npx wrangler r2 sql query "${ACCOUNT_ID}_my-bucket" "SHOW TABLES IN default"
+```
+
+## See Also
+
+- [api.md](api.md) — SQL syntax · [patterns.md](patterns.md) — query examples · [gotchas.md](gotchas.md) — troubleshooting

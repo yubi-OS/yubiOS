@@ -1,1 +1,463 @@
-IyBXb3JrZXJzIEJlc3QgUHJhY3RpY2VzIOKAlCBSdWxlcwoKRWFjaCBydWxlIGhhcyBhbiBpbXBlcmF0aXZlIHN1bW1hcnksIHdoYXQgdG8gY2hlY2ssIHRoZSBjb3JyZWN0IHBhdHRlcm4sIGFuZCBhbiBhbnRpLXBhdHRlcm4gd2hlcmUgYXBwbGljYWJsZS4gQ29kZSBleGFtcGxlcyBhcmUgcGxhaW4gVHlwZVNjcmlwdCDigJQgbm8gTURYIGNvbXBvbmVudHMuCgpXaGVuIGEgcnVsZSBpbnZvbHZlcyBjb25maWcgZmllbGRzIG9yIEFQSSBzaWduYXR1cmVzIHRoYXQgbWF5IGV2b2x2ZSwgYSAqKlJldHJpZXZlKiogY2FsbG91dCByZW1pbmRzIHlvdSB0byBjaGVjayB0aGUgbGF0ZXN0IGRvY3Mgb3IgdHlwZXMgYmVmb3JlIGZsYWdnaW5nLiBBbGwgZG9jIHBhdGhzIGFyZSByZWxhdGl2ZSB0byBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tYC4KCi0tLQoKIyMgQ29uZmlndXJhdGlvbgoKIyMjIEtlZXAgY29tcGF0aWJpbGl0eV9kYXRlIGN1cnJlbnQKClNldCBgY29tcGF0aWJpbGl0eV9kYXRlYCB0byB0b2RheSBvbiBuZXcgcHJvamVjdHMuIFVwZGF0ZSBwZXJpb2RpY2FsbHkgb24gZXhpc3Rpbmcgb25lcyB0byBhY2Nlc3MgbmV3IEFQSXMgYW5kIGZpeGVzLgoKKipDaGVjayoqOiBgY29tcGF0aWJpbGl0eV9kYXRlYCBleGlzdHMuIEZsYWcgaWYgb2xkZXIgdGhhbiA2IG1vbnRocy4KCmBgYGpzb25jCi8vIHdyYW5nbGVyLmpzb25jCnsKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIiR0b2RheSIsICAvLyBSZXBsYWNlIHdpdGggdG9kYXkncyBkYXRlIChZWVlZLU1NLUREKQogICJjb21wYXRpYmlsaXR5X2ZsYWdzIjogWyJub2RlanNfY29tcGF0Il0KfQpgYGAKCioqUmV0cmlldmUqKjogY3VycmVudCBjb21wYXRpYmlsaXR5IGRhdGVzIGF0IGAvd29ya2Vycy9jb25maWd1cmF0aW9uL2NvbXBhdGliaWxpdHktZGF0ZXMvYC4KCiMjIyBFbmFibGUgbm9kZWpzX2NvbXBhdAoKVGhlIGBub2RlanNfY29tcGF0YCBmbGFnIGVuYWJsZXMgTm9kZS5qcyBidWlsdC1pbiBtb2R1bGVzIChgbm9kZTpjcnlwdG9gLCBgbm9kZTpidWZmZXJgLCBgbm9kZTpzdHJlYW1gKS4gTWFueSBsaWJyYXJpZXMgcmVxdWlyZSBpdC4gTWlzc2luZyB0aGlzIGZsYWcgY2F1c2VzIGNyeXB0aWMgaW1wb3J0IGVycm9ycyBhdCBydW50aW1lLgoKKipDaGVjayoqOiBgY29tcGF0aWJpbGl0eV9mbGFnc2AgaW5jbHVkZXMgYCJub2RlanNfY29tcGF0ImAuCgpgYGBqc29uYwp7CiAgImNvbXBhdGliaWxpdHlfZmxhZ3MiOiBbIm5vZGVqc19jb21wYXQiXQp9CmBgYAoKIyMjIEdlbmVyYXRlIGJpbmRpbmcgdHlwZXMgd2l0aCB3cmFuZ2xlciB0eXBlcwoKTmV2ZXIgaGFuZC13cml0ZSB0aGUgYEVudmAgaW50ZXJmYWNlLiBSdW4gYHdyYW5nbGVyIHR5cGVzYCB0byBnZW5lcmF0ZSBpdCBmcm9tIHRoZSB3cmFuZ2xlciBjb25maWcuIFJlLXJ1biBhZnRlciBhZGRpbmcgb3IgcmVuYW1pbmcgYW55IGJpbmRpbmcuCgoqKkNoZWNrKio6IG5vIG1hbnVhbGx5IGRlZmluZWQgYEVudmAgb3IgYGludGVyZmFjZSBFbnZgIHRoYXQgZHVwbGljYXRlcyB3cmFuZ2xlciBjb25maWcgYmluZGluZ3MuIExvb2sgZm9yIGBzYXRpc2ZpZXMgRXhwb3J0ZWRIYW5kbGVyPEVudj5gIHBhdHRlcm4gb24gdGhlIGRlZmF1bHQgZXhwb3J0LgoKYGBgdHMKLy8gR2VuZXJhdGVkIGJ5IHdyYW5nbGVyIHR5cGVzIOKAlCBhbHdheXMgbWF0Y2hlcyBhY3R1YWwgY29uZmlnCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IHZhbHVlID0gYXdhaXQgZW52Lk1ZX0tWLmdldCgia2V5Iik7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKHZhbHVlKTsKICB9LAp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgpBbnRpLXBhdHRlcm46CmBgYHRzCi8vIEhhbmQtd3JpdHRlbiBFbnYgdGhhdCBkcmlmdHMgZnJvbSBhY3R1YWwgYmluZGluZ3MKaW50ZXJmYWNlIEVudiB7CiAgTVlfS1Y6IEtWTmFtZXNwYWNlOyAgLy8gV2hhdCBpZiB0aGUgYmluZGluZyBuYW1lIGNoYW5nZWQ/Cn0KYGBgCgojIyMgU3RvcmUgc2VjcmV0cyB3aXRoIHdyYW5nbGVyIHNlY3JldAoKU2VjcmV0cyBtdXN0IG5ldmVyIGFwcGVhciBpbiB3cmFuZ2xlciBjb25maWcgb3Igc291cmNlIGNvZGUuIFVzZSBgd3JhbmdsZXIgc2VjcmV0IHB1dGAgYW5kIGFjY2VzcyB2aWEgYGVudmAgYXQgcnVudGltZS4gTm9uLXNlY3JldCBjb25maWcgZ29lcyBpbiBgdmFyc2AuCgoqKkNoZWNrKio6IG5vIHN0cmluZyBsaXRlcmFscyB0aGF0IGxvb2sgbGlrZSBBUEkga2V5cywgdG9rZW5zLCBvciBjcmVkZW50aWFscy4gVmVyaWZ5IGAuZW52YCBpcyBpbiBgLmdpdGlnbm9yZWAgZm9yIGxvY2FsIGRldi4KCmBgYGpzb25jCnsKICAidmFycyI6IHsKICAgICJBUElfQkFTRV9VUkwiOiAiaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20iICAvLyBOb24tc2VjcmV0OiBPSyBpbiBjb25maWcKICB9CiAgLy8gU2VjcmV0cyBzZXQgdmlhOiB3cmFuZ2xlciBzZWNyZXQgcHV0IEFQSV9LRVkKfQpgYGAKCkFudGktcGF0dGVybjoKYGBganNvbmMKewogICJ2YXJzIjogewogICAgIkFQSV9LRVkiOiAic2stbGl2ZS1hYmMxMjMuLi4iICAvLyBTZWNyZXQgaW4gdmVyc2lvbiBjb250cm9sCiAgfQp9CmBgYAoKIyMjIFVzZSB3cmFuZ2xlci5qc29uYyBmb3IgY29uZmlnCgpQcmVmZXIgYHdyYW5nbGVyLmpzb25jYCBvdmVyIGB3cmFuZ2xlci50b21sYC4gTmV3ZXIgZmVhdHVyZXMgYXJlIEpTT04tb25seS4gSlNPTkMgc3VwcG9ydHMgY29tbWVudHMgZm9yIGRvY3VtZW50aW5nIGNvbmZpZyBkZWNpc2lvbnMuCgoqKkNoZWNrKio6IHByb2plY3QgdXNlcyBgd3JhbmdsZXIuanNvbmNgIChvciBgd3JhbmdsZXIuanNvbmApLiBGbGFnIGB3cmFuZ2xlci50b21sYCBpbiBuZXcgcHJvamVjdHMuCgotLS0KCiMjIFJlcXVlc3QgJiBSZXNwb25zZSBIYW5kbGluZwoKIyMjIFN0cmVhbSByZXF1ZXN0IGFuZCByZXNwb25zZSBib2RpZXMKCldvcmtlcnMgaGF2ZSBhIDEyOCBNQiBtZW1vcnkgbGltaXQuIEJ1ZmZlcmluZyBlbnRpcmUgYm9kaWVzIHdpdGggYGF3YWl0IHJlc3BvbnNlLnRleHQoKWAgb3IgYGF3YWl0IHJlcXVlc3QuYXJyYXlCdWZmZXIoKWAgY3Jhc2hlcyBvbiBsYXJnZSBwYXlsb2Fkcy4gU3RyZWFtIGRhdGEgdGhyb3VnaCB1c2luZyBgVHJhbnNmb3JtU3RyZWFtYCBvciBwYXNzIGByZXNwb25zZS5ib2R5YCBkaXJlY3RseS4KCioqQ2hlY2sqKjogYW55IGBhd2FpdCByZXNwb25zZS50ZXh0KClgLCBgYXdhaXQgcmVzcG9uc2UuanNvbigpYCwgb3IgYGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKClgIG9uIGRhdGEgdGhhdCBjb3VsZCBiZSBsYXJnZSBvciB1bmJvdW5kZWQuIFNtYWxsLCBib3VuZGVkIHBheWxvYWRzIChrbm93bi1zaXplIEpTT04sIGNvbmZpZyBmaWxlcykgYXJlIGZpbmUgdG8gYnVmZmVyLgoKQ29ycmVjdCDigJQgc3RyZWFtIHRocm91Z2g6CmBgYHRzCmFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tL2xhcmdlLWRhdGFzZXQiKTsKICByZXR1cm4gbmV3IFJlc3BvbnNlKHJlc3BvbnNlLmJvZHksIHJlc3BvbnNlKTsKfQpgYGAKCkNvcnJlY3Qg4oCUIGNvbmNhdGVuYXRlIG11bHRpcGxlIHN0cmVhbXM6CmBgYHRzCmFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgY29uc3QgdXJscyA9IFsiaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20vcGFydC0xIiwgImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tL3BhcnQtMiJdOwogIGNvbnN0IHsgcmVhZGFibGUsIHdyaXRhYmxlIH0gPSBuZXcgVHJhbnNmb3JtU3RyZWFtKCk7CgogIC8vIFRyYWNrIHRoZSBwaXBlbGluZSBwcm9taXNlIOKAlCBkb24ndCBsZXQgaXQgZmxvYXQKICBjdHgud2FpdFVudGlsKChhc3luYyAoKSA9PiB7CiAgICBmb3IgKGNvbnN0IHVybCBvZiB1cmxzKSB7CiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2godXJsKTsKICAgICAgaWYgKHJlc3BvbnNlLmJvZHkpIHsKICAgICAgICBhd2FpdCByZXNwb25zZS5ib2R5LnBpcGVUbyh3cml0YWJsZSwgeyBwcmV2ZW50Q2xvc2U6IHRydWUgfSk7CiAgICAgIH0KICAgIH0KICAgIGF3YWl0IHdyaXRhYmxlLmNsb3NlKCk7CiAgfSkoKSk7CgogIHJldHVybiBuZXcgUmVzcG9uc2UocmVhZGFibGUsIHsKICAgIGhlYWRlcnM6IHsgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW0iIH0sCiAgfSk7Cn0KYGBgCgpBbnRpLXBhdHRlcm46CmBgYHRzCi8vIEJ1ZmZlcnMgZW50aXJlIGJvZHkg4oCUIGNyYXNoZXMgb24gbGFyZ2UgcGF5bG9hZHMKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaCgiaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20vbGFyZ2UtZGF0YXNldCIpOwpjb25zdCB0ZXh0ID0gYXdhaXQgcmVzcG9uc2UudGV4dCgpOwpyZXR1cm4gbmV3IFJlc3BvbnNlKHRleHQpOwpgYGAKCioqUmV0cmlldmUqKjogc3RyZWFtaW5nIEFQSXMgYXQgYC93b3JrZXJzL3J1bnRpbWUtYXBpcy9zdHJlYW1zL2AuCgojIyMgVXNlIHdhaXRVbnRpbCBmb3Igd29yayBhZnRlciB0aGUgcmVzcG9uc2UKCmBjdHgud2FpdFVudGlsKClgIHBlcmZvcm1zIGJhY2tncm91bmQgd29yayAoYW5hbHl0aWNzLCBjYWNoZSB3cml0ZXMsIHdlYmhvb2tzKSBhZnRlciB0aGUgcmVzcG9uc2UgaXMgc2VudC4gS2VlcHMgcmVzcG9uc2UgZmFzdC4gMzAtc2Vjb25kIHRpbWUgbGltaXQgYWZ0ZXIgcmVzcG9uc2UuCgoqKkNoZWNrKio6IGJhY2tncm91bmQgd29yayB1c2VzIGBjdHgud2FpdFVudGlsKClgLCBub3QgaW5saW5lIGBhd2FpdGAuIERvIG5vdCBkZXN0cnVjdHVyZSBgY3R4YCDigJQgaXQgbG9zZXMgdGhlIGB0aGlzYCBiaW5kaW5nIGFuZCB0aHJvd3MgIklsbGVnYWwgaW52b2NhdGlvbiIuCgpgYGB0cwphc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IGRhdGEgPSBhd2FpdCBwcm9jZXNzUmVxdWVzdChyZXF1ZXN0KTsKCiAgY3R4LndhaXRVbnRpbChsb2dUb0FuYWx5dGljcyhlbnYsIGRhdGEpKTsKICBjdHgud2FpdFVudGlsKHVwZGF0ZUNhY2hlKGVudiwgZGF0YSkpOwoKICByZXR1cm4gUmVzcG9uc2UuanNvbihkYXRhKTsKfQpgYGAKCkFudGktcGF0dGVybjoKYGBgdHMKLy8gRGVzdHJ1Y3R1cmluZyBjdHggbG9zZXMgdGhlIHRoaXMgYmluZGluZwpjb25zdCB7IHdhaXRVbnRpbCB9ID0gY3R4OyAgLy8gIklsbGVnYWwgaW52b2NhdGlvbiIgYXQgcnVudGltZQp3YWl0VW50aWwoc29tZVByb21pc2UpOwpgYGAKCi0tLQoKIyMgQXJjaGl0ZWN0dXJlCgojIyMgVXNlIGJpbmRpbmdzIGZvciBDbG91ZGZsYXJlIHNlcnZpY2VzLCBub3QgUkVTVCBBUElzCgpCaW5kaW5ncyAoS1YsIFIyLCBEMSwgUXVldWVzLCBXb3JrZmxvd3MpIGFyZSBkaXJlY3QsIGluLXByb2Nlc3MgcmVmZXJlbmNlcyDigJQgbm8gbmV0d29yayBob3AsIG5vIGF1dGhlbnRpY2F0aW9uLCBubyBleHRyYSBsYXRlbmN5LiBVc2luZyB0aGUgQ2xvdWRmbGFyZSBSRVNUIEFQSSBmcm9tIGEgV29ya2VyIHdhc3RlcyB0aW1lIGFuZCBhZGRzIGNvbXBsZXhpdHkuCgoqKkNoZWNrKio6IG5vIGBmZXRjaCgiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0Ly4uLiIpYCBjYWxscyBmb3Igc2VydmljZXMgYXZhaWxhYmxlIGFzIGJpbmRpbmdzLgoKYGBgdHMKLy8gQmluZGluZyDigJQgZGlyZWN0LCB6ZXJvLWNvc3QKY29uc3Qgb2JqZWN0ID0gYXdhaXQgZW52Lk1ZX0JVQ0tFVC5nZXQoIm15LWZpbGUiKTsKYGBgCgpBbnRpLXBhdHRlcm46CmBgYHRzCi8vIFJFU1QgQVBJIGZyb20gaW5zaWRlIGEgV29ya2VyIOKAlCB1bm5lY2Vzc2FyeSBvdmVyaGVhZApjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKAogICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvLi4uL3IyL2J1Y2tldHMvLi4uL29iamVjdHMvbXktZmlsZSIsCiAgeyBoZWFkZXJzOiB7IEF1dGhvcml6YXRpb246IGBCZWFyZXIgJHtlbnYuQ0ZfQVBJX1RPS0VOfWAgfSB9Cik7CmBgYAoKIyMjIFVzZSBRdWV1ZXMgYW5kIFdvcmtmbG93cyBmb3IgYXN5bmMgYW5kIGJhY2tncm91bmQgd29yawoKTG9uZy1ydW5uaW5nLCByZXRyaWFibGUsIG9yIG5vbi11cmdlbnQgdGFza3Mgc2hvdWxkIG5vdCBibG9jayBhIHJlcXVlc3QuCgotICoqUXVldWVzKio6IGRlY291cGxlIHByb2R1Y2VyIGZyb20gY29uc3VtZXIuIEZhbi1vdXQsIGJ1ZmZlcmluZy9iYXRjaGluZywgc2ltcGxlIHNpbmdsZS1zdGVwIGJhY2tncm91bmQgam9icy4gQXQtbGVhc3Qtb25jZSBkZWxpdmVyeS4KLSAqKldvcmtmbG93cyoqOiBtdWx0aS1zdGVwIGR1cmFibGUgZXhlY3V0aW9uLiBFYWNoIHN0ZXAncyByZXR1cm4gdmFsdWUgaXMgcGVyc2lzdGVkOyBvbmx5IGZhaWxlZCBzdGVwcyByZXRyeS4gQ2FuIHJ1biBmb3IgaG91cnMvZGF5cy93ZWVrcy4KLSAqKkJvdGggdG9nZXRoZXIqKjogUXVldWUgYnVmZmVycyBoaWdoLXRocm91Z2hwdXQgZW50cnksIGNvbnN1bWVyIGNyZWF0ZXMgV29ya2Zsb3cgaW5zdGFuY2VzIGZvciBjb21wbGV4IHByb2Nlc3NpbmcuCgoqKkNoZWNrKio6IGxvbmctcnVubmluZyB3b3JrIChlbWFpbCBzZW5kcywgd2ViaG9va3MsIG11bHRpLXN0ZXAgcHJvY2Vzc2VzKSBpcyBvZmZsb2FkZWQgdG8gUXVldWVzIG9yIFdvcmtmbG93cywgbm90IGRvbmUgaW5saW5lIGluIHRoZSBmZXRjaCBoYW5kbGVyLgoKYGBgdHMKYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgY29uc3Qgb3JkZXIgPSBhd2FpdCByZXF1ZXN0Lmpzb248eyBpZDogc3RyaW5nOyB0eXBlOiBzdHJpbmcgfT4oKTsKCiAgaWYgKG9yZGVyLnR5cGUgPT09ICJzaW1wbGUiKSB7CiAgICBhd2FpdCBlbnYuT1JERVJfUVVFVUUuc2VuZCh7IG9yZGVySWQ6IG9yZGVyLmlkLCBhY3Rpb246ICJzZW5kLWVtYWlsIiB9KTsKICB9IGVsc2UgewogICAgYXdhaXQgZW52LkZVTEZJTExNRU5UX1dPUktGTE9XLmNyZWF0ZSh7IHBhcmFtczogeyBvcmRlcklkOiBvcmRlci5pZCB9IH0pOwogIH0KCiAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyBzdGF0dXM6ICJhY2NlcHRlZCIgfSwgeyBzdGF0dXM6IDIwMiB9KTsKfQpgYGAKCioqUmV0cmlldmUqKjogYC9xdWV1ZXMvYCBhbmQgYC93b3JrZmxvd3MvYCBmb3IgY3VycmVudCBBUElzLiBGb3IgV29ya2Zsb3ctc3BlY2lmaWMgcnVsZXMsIHNlZSBbUnVsZXMgb2YgV29ya2Zsb3dzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Zsb3dzL2J1aWxkL3J1bGVzLW9mLXdvcmtmbG93cy8pLgoKIyMjIFVzZSBzZXJ2aWNlIGJpbmRpbmdzIGZvciBXb3JrZXItdG8tV29ya2VyIGNvbW11bmljYXRpb24KClNlcnZpY2UgYmluZGluZ3MgYXJlIHplcm8tY29zdCwgYnlwYXNzIHRoZSBwdWJsaWMgaW50ZXJuZXQsIGFuZCBzdXBwb3J0IHR5cGUtc2FmZSBSUEMuIERvIG5vdCBjYWxsIGFub3RoZXIgV29ya2VyIHZpYSBpdHMgcHVibGljIFVSTC4KCioqQ2hlY2sqKjogV29ya2VyLXRvLVdvcmtlciBjYWxscyB1c2UgYGVudi5TRVJWSUNFX05BTUUubWV0aG9kKClgIChSUEMpIG9yIGBlbnYuU0VSVklDRV9OQU1FLmZldGNoKClgLCBub3QgYGZldGNoKCJodHRwczovL215LW90aGVyLXdvcmtlci5leGFtcGxlLmNvbS8uLi4iKWAuCgpgYGB0cwppbXBvcnQgeyBXb3JrZXJFbnRyeXBvaW50IH0gZnJvbSAiY2xvdWRmbGFyZTp3b3JrZXJzIjsKCmV4cG9ydCBjbGFzcyBBdXRoU2VydmljZSBleHRlbmRzIFdvcmtlckVudHJ5cG9pbnQgewogIGFzeW5jIHZlcmlmeVRva2VuKHRva2VuOiBzdHJpbmcpOiBQcm9taXNlPHsgdXNlcklkOiBzdHJpbmc7IHZhbGlkOiBib29sZWFuIH0+IHsKICAgIHJldHVybiB7IHVzZXJJZDogInVzZXItMTIzIiwgdmFsaWQ6IHRydWUgfTsKICB9Cn0KCi8vIENhbGxlciBXb3JrZXIKY29uc3QgYXV0aCA9IGF3YWl0IGVudi5BVVRIX1NFUlZJQ0UudmVyaWZ5VG9rZW4odG9rZW4pOwpgYGAKCioqUmV0cmlldmUqKjogdmVyaWZ5IGBXb3JrZXJFbnRyeXBvaW50YCBpbXBvcnQgcGF0aCBhbmQgc2lnbmF0dXJlIGFnYWluc3QgbGF0ZXN0IGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYC4KCiMjIyBVc2UgSHlwZXJkcml2ZSBmb3IgZXh0ZXJuYWwgZGF0YWJhc2UgY29ubmVjdGlvbnMKCkh5cGVyZHJpdmUgbWFpbnRhaW5zIGEgcmVnaW9uYWwgY29ubmVjdGlvbiBwb29sLCBlbGltaW5hdGluZyBwZXItcmVxdWVzdCBUQ1AgKyBUTFMgKyBhdXRoIGNvc3QgKG9mdGVuIDMwMC01MDBtcykuIENyZWF0ZSBhIG5ldyBgQ2xpZW50YCBwZXIgcmVxdWVzdCDigJQgSHlwZXJkcml2ZSBtYW5hZ2VzIHRoZSB1bmRlcmx5aW5nIHBvb2wuIFJlcXVpcmVzIGBub2RlanNfY29tcGF0YC4KCioqQ2hlY2sqKjogYW55IGBuZXcgQ2xpZW50KClgIG9yIGRhdGFiYXNlIGNvbm5lY3Rpb24gdGhhdCB1c2VzIGEgZGlyZWN0IGNvbm5lY3Rpb24gc3RyaW5nIGluc3RlYWQgb2YgYGVudi5IWVBFUkRSSVZFLmNvbm5lY3Rpb25TdHJpbmdgLgoKYGBganNvbmMKewogICJoeXBlcmRyaXZlIjogW3sgImJpbmRpbmciOiAiSFlQRVJEUklWRSIsICJpZCI6ICI8WU9VUl9IWVBFUkRSSVZFX0lEPiIgfV0KfQpgYGAKCmBgYHRzCmltcG9ydCB7IENsaWVudCB9IGZyb20gInBnIjsKCmFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IGNsaWVudCA9IG5ldyBDbGllbnQoeyBjb25uZWN0aW9uU3RyaW5nOiBlbnYuSFlQRVJEUklWRS5jb25uZWN0aW9uU3RyaW5nIH0pOwogIGF3YWl0IGNsaWVudC5jb25uZWN0KCk7CiAgY29uc3QgcmVzdWx0ID0gYXdhaXQgY2xpZW50LnF1ZXJ5KCJTRUxFQ1QgaWQsIG5hbWUgRlJPTSB1c2VycyBMSU1JVCAxMCIpOwogIHJldHVybiBSZXNwb25zZS5qc29uKHJlc3VsdC5yb3dzKTsKfQpgYGAKCioqUmV0cmlldmUqKjogYC9oeXBlcmRyaXZlL2AgZm9yIGN1cnJlbnQgY29uZmlndXJhdGlvbiBhbmQgc3VwcG9ydGVkIGRhdGFiYXNlcy4KCi0tLQoKIyMgT2JzZXJ2YWJpbGl0eQoKIyMjIEVuYWJsZSBXb3JrZXJzIExvZ3MgYW5kIFRyYWNlcwoKRW5hYmxlIGBvYnNlcnZhYmlsaXR5YCBpbiB3cmFuZ2xlciBjb25maWcgYmVmb3JlIGRlcGxveWluZyB0byBwcm9kdWN0aW9uLiBVc2UgYGhlYWRfc2FtcGxpbmdfcmF0ZWAgdG8gY29udHJvbCB2b2x1bWUgYW5kIGNvc3QuIFVzZSBzdHJ1Y3R1cmVkIEpTT04gbG9nZ2luZyDigJQgYGNvbnNvbGUubG9nKEpTT04uc3RyaW5naWZ5KHsuLi59KSlgIOKAlCBzbyBsb2dzIGFyZSBzZWFyY2hhYmxlLiBVc2UgYGNvbnNvbGUuZXJyb3JgIGZvciBlcnJvcnMgKGFwcGVhcnMgYXQgZXJyb3Igc2V2ZXJpdHkgaW4gdGhlIGRhc2hib2FyZCkuCgoqKkNoZWNrKio6IGBvYnNlcnZhYmlsaXR5LmVuYWJsZWRgIGlzIGB0cnVlYCBpbiBjb25maWcuIExvZ2dpbmcgdXNlcyBzdHJ1Y3R1cmVkIEpTT04sIG5vdCBzdHJpbmcgY29uY2F0ZW5hdGlvbi4KCmBgYGpzb25jCnsKICAib2JzZXJ2YWJpbGl0eSI6IHsKICAgICJlbmFibGVkIjogdHJ1ZSwKICAgICJsb2dzIjogeyAiaGVhZF9zYW1wbGluZ19yYXRlIjogMSB9LAogICAgInRyYWNlcyI6IHsgImVuYWJsZWQiOiB0cnVlLCAiaGVhZF9zYW1wbGluZ19yYXRlIjogMC4wMSB9CiAgfQp9CmBgYAoKYGBgdHMKLy8gU3RydWN0dXJlZCBKU09OIOKAlCBzZWFyY2hhYmxlIGFuZCBmaWx0ZXJhYmxlCmNvbnNvbGUubG9nKEpTT04uc3RyaW5naWZ5KHsgbWVzc2FnZTogImluY29taW5nIHJlcXVlc3QiLCBtZXRob2Q6IHJlcXVlc3QubWV0aG9kLCBwYXRoOiB1cmwucGF0aG5hbWUgfSkpOwoKLy8gRXJyb3Igc2V2ZXJpdHkKY29uc29sZS5lcnJvcihKU09OLnN0cmluZ2lmeSh7IG1lc3NhZ2U6ICJyZXF1ZXN0IGZhaWxlZCIsIGVycm9yOiBlIGluc3RhbmNlb2YgRXJyb3IgPyBlLm1lc3NhZ2UgOiBTdHJpbmcoZSkgfSkpOwpgYGAKCkFudGktcGF0dGVybjoKYGBgdHMKLy8gVW5zdHJ1Y3R1cmVkIHN0cmluZyBsb2dzIOKAlCBoYXJkIHRvIHF1ZXJ5CmNvbnNvbGUubG9nKCJHb3QgYSByZXF1ZXN0IHRvICIgKyB1cmwucGF0aG5hbWUpOwpgYGAKCioqUmV0cmlldmUqKjogYC93b3JrZXJzL29ic2VydmFiaWxpdHkvbG9ncy93b3JrZXJzLWxvZ3MvYCBhbmQgYC93b3JrZXJzL29ic2VydmFiaWxpdHkvdHJhY2VzL2AgZm9yIGN1cnJlbnQgY29uZmlnIG9wdGlvbnMuCgotLS0KCiMjIENvZGUgUGF0dGVybnMKCiMjIyBEbyBub3Qgc3RvcmUgcmVxdWVzdC1zY29wZWQgc3RhdGUgaW4gZ2xvYmFsIHNjb3BlCgpXb3JrZXJzIHJldXNlIGlzb2xhdGVzIGFjcm9zcyByZXF1ZXN0cy4gTW9kdWxlLWxldmVsIG11dGFibGUgdmFyaWFibGVzIGNhdXNlIGNyb3NzLXJlcXVlc3QgZGF0YSBsZWFrcywgc3RhbGUgc3RhdGUsIGFuZCAiQ2Fubm90IHBlcmZvcm0gSS9PIG9uIGJlaGFsZiBvZiBhIGRpZmZlcmVudCByZXF1ZXN0IiBlcnJvcnMuCgoqKkNoZWNrKio6IG5vIG11dGFibGUgYGxldGAvYHZhcmAgYXQgbW9kdWxlIHNjb3BlIHRoYXQgZ2V0cyBhc3NpZ25lZCBpbnNpZGUgYSBoYW5kbGVyLiBQYXNzIHN0YXRlIHRocm91Z2ggZnVuY3Rpb24gYXJndW1lbnRzLgoKYGBgdHMKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCB1c2VySWQgPSByZXF1ZXN0LmhlYWRlcnMuZ2V0KCJYLVVzZXItSWQiKTsKICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IGhhbmRsZVJlcXVlc3QodXNlcklkLCBlbnYpOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24ocmVzdWx0KTsKICB9LAp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgpBbnRpLXBhdHRlcm46CmBgYHRzCi8vIE1vZHVsZS1sZXZlbCBtdXRhYmxlIHN0YXRlIOKAlCBsZWFrcyBiZXR3ZWVuIHJlcXVlc3RzCmxldCBjdXJyZW50VXNlcjogc3RyaW5nIHwgbnVsbCA9IG51bGw7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjdXJyZW50VXNlciA9IHJlcXVlc3QuaGVhZGVycy5nZXQoIlgtVXNlci1JZCIpOyAgLy8gVmlzaWJsZSB0byBuZXh0IHJlcXVlc3QKICAgIC8vIC4uLgogIH0sCn07CmBgYAoKIyMjIEFsd2F5cyBhd2FpdCBvciB3YWl0VW50aWwgUHJvbWlzZXMKCkEgUHJvbWlzZSB0aGF0IGlzIG5vdCBgYXdhaXRgZWQsIGByZXR1cm5gZWQsIG9yIHBhc3NlZCB0byBgY3R4LndhaXRVbnRpbCgpYCBpcyBhIGZsb2F0aW5nIHByb21pc2UuIENhdXNlczogZHJvcHBlZCByZXN1bHRzLCBzd2FsbG93ZWQgZXJyb3JzLCB1bmZpbmlzaGVkIHdvcmsuIFRoZSBydW50aW1lIG1heSB0ZXJtaW5hdGUgdGhlIGlzb2xhdGUgYmVmb3JlIGl0IGNvbXBsZXRlcy4KCioqQ2hlY2sqKjogZXZlcnkgYGZldGNoKClgLCBgZW52LioucHV0KClgLCBgZW52Liouc2VuZCgpYCwgYW5kIGFueSBvdGhlciBhc3luYyBjYWxsIGlzIGhhbmRsZWQuIEVuYWJsZSBgbm8tZmxvYXRpbmctcHJvbWlzZXNgIGxpbnQgcnVsZS4KCmBgYGJhc2gKIyBFU0xpbnQKbnB4IGVzbGludCAtLXJ1bGUgJ3siQHR5cGVzY3JpcHQtZXNsaW50L25vLWZsb2F0aW5nLXByb21pc2VzIjogImVycm9yIn0nIHNyYy8KCiMgb3hsaW50Cm5weCBveGxpbnQgLS1kZW55IHR5cGVzY3JpcHQvbm8tZmxvYXRpbmctcHJvbWlzZXMgc3JjLwpgYGAKCmBgYHRzCi8vIENvcnJlY3Q6IGF3YWl0IHdoZW4geW91IG5lZWQgdGhlIHJlc3VsdApjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKCJodHRwczovL2FwaS5leGFtcGxlLmNvbS9wcm9jZXNzIiwgeyBtZXRob2Q6ICJQT1NUIiwgYm9keTogSlNPTi5zdHJpbmdpZnkoZGF0YSkgfSk7CgovLyBDb3JyZWN0OiB3YWl0VW50aWwgd2hlbiB5b3UgZG9uJ3QgbmVlZCB0aGUgcmVzdWx0IGJlZm9yZSByZXNwb25kaW5nCmN0eC53YWl0VW50aWwoZmV0Y2goImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tL3dlYmhvb2siLCB7IG1ldGhvZDogIlBPU1QiLCBib2R5OiBKU09OLnN0cmluZ2lmeShkYXRhKSB9KSk7CmBgYAoKQW50aS1wYXR0ZXJuOgpgYGB0cwovLyBGbG9hdGluZyBwcm9taXNlIOKAlCByZXN1bHQgZHJvcHBlZCwgZXJyb3Igc3dhbGxvd2VkCmZldGNoKCJodHRwczovL2FwaS5leGFtcGxlLmNvbS93ZWJob29rIiwgeyBtZXRob2Q6ICJQT1NUIiwgYm9keTogSlNPTi5zdHJpbmdpZnkoZGF0YSkgfSk7CmBgYAoKIyMjIEJlIGF3YXJlIG9mIHBsYXRmb3JtIGxpbWl0cwoKV29ya2VycyBoYXZlIGEgMTBtcyBDUFUgdGltZSBsaW1pdCAoQnVuZGxlZCkgb3IgMzBzIChTdGFuZGFyZC9VbmJvdW5kKS4gSGVhdnkgc3luY2hyb25vdXMgd29yayDigJQgdGlnaHQgbG9vcHMsIGxhcmdlIEpTT04gcGFyc2luZywgY29tcHV0ZS1pbnRlbnNpdmUgY3J5cHRvIOKAlCBjYW4gaGl0IHRoZSBDUFUgbGltaXQgYW5kIHRlcm1pbmF0ZSB0aGUgcmVxdWVzdC4KCioqQ2hlY2sqKjogY29tcHV0ZS1oZWF2eSBvcGVyYXRpb25zIHRoYXQgcnVuIHN5bmNocm9ub3VzbHkuIENvbnNpZGVyIGJyZWFraW5nIHdvcmsgaW50byBzbWFsbGVyIGNodW5rcywgb2ZmbG9hZGluZyB0byBRdWV1ZXMvV29ya2Zsb3dzLCBvciB1c2luZyBXZWJBc3NlbWJseSBmb3IgQ1BVLWludGVuc2l2ZSB0YXNrcy4KCioqUmV0cmlldmUqKjogY3VycmVudCBsaW1pdHMgYXQgYC93b3JrZXJzL3BsYXRmb3JtL2xpbWl0cy9gLgoKLS0tCgojIyBTZWN1cml0eQoKIyMjIFVzZSBXZWIgQ3J5cHRvIGZvciBzZWN1cmUgdG9rZW4gZ2VuZXJhdGlvbgoKVXNlIGBjcnlwdG8ucmFuZG9tVVVJRCgpYCBmb3IgdW5pcXVlIElEcyBhbmQgYGNyeXB0by5nZXRSYW5kb21WYWx1ZXMoKWAgZm9yIHJhbmRvbSBieXRlcy4gYE1hdGgucmFuZG9tKClgIGlzIG5vdCBjcnlwdG9ncmFwaGljYWxseSBzZWN1cmUuCgpGb3IgY29tcGFyaW5nIHNlY3JldHMgKEFQSSBrZXlzLCBITUFDIHNpZ25hdHVyZXMpLCB1c2UgYGNyeXB0by5zdWJ0bGUudGltaW5nU2FmZUVxdWFsKClgLiBIYXNoIGJvdGggdmFsdWVzIHRvIGEgZml4ZWQgc2l6ZSBmaXJzdCDigJQgZG8gbm90IHNob3J0LWNpcmN1aXQgb24gbGVuZ3RoIG1pc21hdGNoIChsZWFrcyBsZW5ndGggdmlhIHRpbWluZykuCgoqKkNoZWNrKio6IG5vIGBNYXRoLnJhbmRvbSgpYCBmb3Igc2VjdXJpdHktc2Vuc2l0aXZlIHZhbHVlcy4gU2VjcmV0IGNvbXBhcmlzb25zIHVzZSBgdGltaW5nU2FmZUVxdWFsYCB3aXRoIGZpeGVkLXNpemUgaGFzaGluZy4KCmBgYHRzCi8vIFNlY3VyZSByYW5kb20gVVVJRApjb25zdCBzZXNzaW9uSWQgPSBjcnlwdG8ucmFuZG9tVVVJRCgpOwoKLy8gU2VjdXJlIHJhbmRvbSBieXRlcwpjb25zdCB0b2tlbkJ5dGVzID0gbmV3IFVpbnQ4QXJyYXkoMzIpOwpjcnlwdG8uZ2V0UmFuZG9tVmFsdWVzKHRva2VuQnl0ZXMpOwpjb25zdCB0b2tlbiA9IEFycmF5LmZyb20odG9rZW5CeXRlcykubWFwKChiKSA9PiBiLnRvU3RyaW5nKDE2KS5wYWRTdGFydCgyLCAiMCIpKS5qb2luKCIiKTsKYGBgCgpgYGB0cwovLyBDb25zdGFudC10aW1lIGNvbXBhcmlzb24g4oCUIGhhc2ggZmlyc3QgdG8gYXZvaWQgbGVuZ3RoIGxlYWsKYXN5bmMgZnVuY3Rpb24gdmVyaWZ5VG9rZW4ocHJvdmlkZWQ6IHN0cmluZywgZXhwZWN0ZWQ6IHN0cmluZyk6IFByb21pc2U8Ym9vbGVhbj4gewogIGNvbnN0IGVuY29kZXIgPSBuZXcgVGV4dEVuY29kZXIoKTsKICBjb25zdCBbcHJvdmlkZWRIYXNoLCBleHBlY3RlZEhhc2hdID0gYXdhaXQgUHJvbWlzZS5hbGwoWwogICAgY3J5cHRvLnN1YnRsZS5kaWdlc3QoIlNIQS0yNTYiLCBlbmNvZGVyLmVuY29kZShwcm92aWRlZCkpLAogICAgY3J5cHRvLnN1YnRsZS5kaWdlc3QoIlNIQS0yNTYiLCBlbmNvZGVyLmVuY29kZShleHBlY3RlZCkpLAogIF0pOwogIHJldHVybiBjcnlwdG8uc3VidGxlLnRpbWluZ1NhZmVFcXVhbChwcm92aWRlZEhhc2gsIGV4cGVjdGVkSGFzaCk7Cn0KYGBgCgpBbnRpLXBhdHRlcm46CmBgYHRzCi8vIFByZWRpY3RhYmxlIOKAlCBub3QgY3J5cHRvZ3JhcGhpY2FsbHkgc2VjdXJlCmNvbnN0IHRva2VuID0gTWF0aC5yYW5kb20oKS50b1N0cmluZygzNikuc3Vic3RyaW5nKDIpOwoKLy8gVGltaW5nIHNpZGUtY2hhbm5lbCDigJQgbGVha3MgaW5mb3JtYXRpb24gYWJvdXQgdGhlIGV4cGVjdGVkIHZhbHVlCnJldHVybiBwcm92aWRlZCA9PT0gZXhwZWN0ZWQ7CmBgYAoKKipSZXRyaWV2ZSoqOiBgL3dvcmtlcnMvcnVudGltZS1hcGlzL3dlYi1jcnlwdG8vYCBmb3IgY3VycmVudCBBUEkgc3VyZmFjZS4KCiMjIyBFeHBsaWNpdCBlcnJvciBoYW5kbGluZyBvdmVyIHBhc3NUaHJvdWdoT25FeGNlcHRpb24KCmBwYXNzVGhyb3VnaE9uRXhjZXB0aW9uKClgIGlzIGEgZmFpbC1vcGVuIG1lY2hhbmlzbSB0aGF0IHNlbmRzIHJlcXVlc3RzIHRvIHRoZSBvcmlnaW4gd2hlbiB0aGUgV29ya2VyIHRocm93cy4gSXQgaGlkZXMgYnVncyBhbmQgbWFrZXMgZGVidWdnaW5nIGRpZmZpY3VsdC4gVXNlIGV4cGxpY2l0IHRyeS9jYXRjaCB3aXRoIHN0cnVjdHVyZWQgZXJyb3IgcmVzcG9uc2VzLgoKKipDaGVjayoqOiBubyBgY3R4LnBhc3NUaHJvdWdoT25FeGNlcHRpb24oKWAgY2FsbHMuIEVycm9yIGhhbmRsaW5nIHVzZXMgdHJ5L2NhdGNoIHdpdGggc3RydWN0dXJlZCBKU09OIGVycm9yIHJlc3BvbnNlcyBhbmQgYGNvbnNvbGUuZXJyb3JgLgoKYGBgdHMKYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCk6IFByb21pc2U8UmVzcG9uc2U+IHsKICB0cnkgewogICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgaGFuZGxlUmVxdWVzdChyZXF1ZXN0LCBlbnYpOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24ocmVzdWx0KTsKICB9IGNhdGNoIChlcnJvcikgewogICAgY29uc3QgbWVzc2FnZSA9IGVycm9yIGluc3RhbmNlb2YgRXJyb3IgPyBlcnJvci5tZXNzYWdlIDogIlVua25vd24gZXJyb3IiOwogICAgY29uc29sZS5lcnJvcihKU09OLnN0cmluZ2lmeSh7IG1lc3NhZ2U6ICJ1bmhhbmRsZWQgZXJyb3IiLCBlcnJvcjogbWVzc2FnZSwgcGF0aDogbmV3IFVSTChyZXF1ZXN0LnVybCkucGF0aG5hbWUgfSkpOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyBlcnJvcjogIkludGVybmFsIHNlcnZlciBlcnJvciIgfSwgeyBzdGF0dXM6IDUwMCB9KTsKICB9Cn0KYGBgCgotLS0KCiMjIERldmVsb3BtZW50ICYgVGVzdGluZwoKIyMjIFRlc3Qgd2l0aCBAY2xvdWRmbGFyZS92aXRlc3QtcG9vbC13b3JrZXJzCgpSdW5zIHRlc3RzIGluc2lkZSB0aGUgV29ya2VycyBydW50aW1lIHdpdGggcmVhbCBiaW5kaW5ncy4gQ2F0Y2hlcyBpc3N1ZXMgdGhhdCBOb2RlLmpzLWJhc2VkIHRlc3RzIG1pc3MuCgoqKktub3duIHBpdGZhbGwqKjogdGhlIFZpdGVzdCBwb29sIGF1dG8taW5qZWN0cyBgbm9kZWpzX2NvbXBhdGAsIHNvIHRlc3RzIHBhc3MgZXZlbiBpZiB5b3VyIHdyYW5nbGVyIGNvbmZpZyBpcyBtaXNzaW5nIHRoZSBmbGFnLiBBbHdheXMgY29uZmlybSB5b3VyIGB3cmFuZ2xlci5qc29uY2AgaW5jbHVkZXMgYG5vZGVqc19jb21wYXRgIGlmIHlvdXIgY29kZSBkZXBlbmRzIG9uIE5vZGUuanMgYnVpbHQtaW5zLgoKKipDaGVjayoqOiB0ZXN0IHNldHVwIHVzZXMgYEBjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnNgLiBUZXN0cyBjb3ZlciBudWxsYWJsZSByZXR1cm5zIChlLmcuLCBLViBgLmdldCgpYCByZXR1cm5pbmcgYG51bGxgKS4KCmBgYHRzCmltcG9ydCB7IGRlc2NyaWJlLCBpdCwgZXhwZWN0IH0gZnJvbSAidml0ZXN0IjsKaW1wb3J0IHsgZW52IH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKCmRlc2NyaWJlKCJLViBvcGVyYXRpb25zIiwgKCkgPT4gewogIGl0KCJzaG91bGQgc3RvcmUgYW5kIHJldHJpZXZlIGEgdmFsdWUiLCBhc3luYyAoKSA9PiB7CiAgICBhd2FpdCBlbnYuTVlfS1YucHV0KCJrZXkiLCAidmFsdWUiKTsKICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IGVudi5NWV9LVi5nZXQoImtleSIpOwogICAgZXhwZWN0KHJlc3VsdCkudG9CZSgidmFsdWUiKTsKICB9KTsKCiAgaXQoInNob3VsZCByZXR1cm4gbnVsbCBmb3IgbWlzc2luZyBrZXlzIiwgYXN5bmMgKCkgPT4gewogICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgZW52Lk1ZX0tWLmdldCgibm9uZXhpc3RlbnQiKTsKICAgIGV4cGVjdChyZXN1bHQpLnRvQmVOdWxsKCk7CiAgfSk7Cn0pOwpgYGAKCioqUmV0cmlldmUqKjogYC93b3JrZXJzL3Rlc3Rpbmcvdml0ZXN0LWludGVncmF0aW9uL2AgZm9yIGN1cnJlbnQgc2V0dXAgYW5kIGNvbmZpZ3VyYXRpb24uCg==
+# Workers Best Practices — Rules
+
+Each rule has an imperative summary, what to check, the correct pattern, and an anti-pattern where applicable. Code examples are plain TypeScript — no MDX components.
+
+When a rule involves config fields or API signatures that may evolve, a **Retrieve** callout reminds you to check the latest docs or types before flagging. All doc paths are relative to `https://developers.cloudflare.com`.
+
+---
+
+## Configuration
+
+### Keep compatibility_date current
+
+Set `compatibility_date` to today on new projects. Update periodically on existing ones to access new APIs and fixes.
+
+**Check**: `compatibility_date` exists. Flag if older than 6 months.
+
+```jsonc
+// wrangler.jsonc
+{
+  "compatibility_date": "$today",  // Replace with today's date (YYYY-MM-DD)
+  "compatibility_flags": ["nodejs_compat"]
+}
+```
+
+**Retrieve**: current compatibility dates at `/workers/configuration/compatibility-dates/`.
+
+### Enable nodejs_compat
+
+The `nodejs_compat` flag enables Node.js built-in modules (`node:crypto`, `node:buffer`, `node:stream`). Many libraries require it. Missing this flag causes cryptic import errors at runtime.
+
+**Check**: `compatibility_flags` includes `"nodejs_compat"`.
+
+```jsonc
+{
+  "compatibility_flags": ["nodejs_compat"]
+}
+```
+
+### Generate binding types with wrangler types
+
+Never hand-write the `Env` interface. Run `wrangler types` to generate it from the wrangler config. Re-run after adding or renaming any binding.
+
+**Check**: no manually defined `Env` or `interface Env` that duplicates wrangler config bindings. Look for `satisfies ExportedHandler<Env>` pattern on the default export.
+
+```ts
+// Generated by wrangler types — always matches actual config
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const value = await env.MY_KV.get("key");
+    return new Response(value);
+  },
+} satisfies ExportedHandler<Env>;
+```
+
+Anti-pattern:
+```ts
+// Hand-written Env that drifts from actual bindings
+interface Env {
+  MY_KV: KVNamespace;  // What if the binding name changed?
+}
+```
+
+### Store secrets with wrangler secret
+
+Secrets must never appear in wrangler config or source code. Use `wrangler secret put` and access via `env` at runtime. Non-secret config goes in `vars`.
+
+**Check**: no string literals that look like API keys, tokens, or credentials. Verify `.env` is in `.gitignore` for local dev.
+
+```jsonc
+{
+  "vars": {
+    "API_BASE_URL": "https://api.example.com"  // Non-secret: OK in config
+  }
+  // Secrets set via: wrangler secret put API_KEY
+}
+```
+
+Anti-pattern:
+```jsonc
+{
+  "vars": {
+    "API_KEY": "sk-live-abc123..."  // Secret in version control
+  }
+}
+```
+
+### Use wrangler.jsonc for config
+
+Prefer `wrangler.jsonc` over `wrangler.toml`. Newer features are JSON-only. JSONC supports comments for documenting config decisions.
+
+**Check**: project uses `wrangler.jsonc` (or `wrangler.json`). Flag `wrangler.toml` in new projects.
+
+---
+
+## Request & Response Handling
+
+### Stream request and response bodies
+
+Workers have a 128 MB memory limit. Buffering entire bodies with `await response.text()` or `await request.arrayBuffer()` crashes on large payloads. Stream data through using `TransformStream` or pass `response.body` directly.
+
+**Check**: any `await response.text()`, `await response.json()`, or `await response.arrayBuffer()` on data that could be large or unbounded. Small, bounded payloads (known-size JSON, config files) are fine to buffer.
+
+Correct — stream through:
+```ts
+async fetch(request: Request, env: Env): Promise<Response> {
+  const response = await fetch("https://api.example.com/large-dataset");
+  return new Response(response.body, response);
+}
+```
+
+Correct — concatenate multiple streams:
+```ts
+async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  const urls = ["https://api.example.com/part-1", "https://api.example.com/part-2"];
+  const { readable, writable } = new TransformStream();
+
+  // Track the pipeline promise — don't let it float
+  ctx.waitUntil((async () => {
+    for (const url of urls) {
+      const response = await fetch(url);
+      if (response.body) {
+        await response.body.pipeTo(writable, { preventClose: true });
+      }
+    }
+    await writable.close();
+  })());
+
+  return new Response(readable, {
+    headers: { "Content-Type": "application/octet-stream" },
+  });
+}
+```
+
+Anti-pattern:
+```ts
+// Buffers entire body — crashes on large payloads
+const response = await fetch("https://api.example.com/large-dataset");
+const text = await response.text();
+return new Response(text);
+```
+
+**Retrieve**: streaming APIs at `/workers/runtime-apis/streams/`.
+
+### Use waitUntil for work after the response
+
+`ctx.waitUntil()` performs background work (analytics, cache writes, webhooks) after the response is sent. Keeps response fast. 30-second time limit after response.
+
+**Check**: background work uses `ctx.waitUntil()`, not inline `await`. Do not destructure `ctx` — it loses the `this` binding and throws "Illegal invocation".
+
+```ts
+async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  const data = await processRequest(request);
+
+  ctx.waitUntil(logToAnalytics(env, data));
+  ctx.waitUntil(updateCache(env, data));
+
+  return Response.json(data);
+}
+```
+
+Anti-pattern:
+```ts
+// Destructuring ctx loses the this binding
+const { waitUntil } = ctx;  // "Illegal invocation" at runtime
+waitUntil(somePromise);
+```
+
+---
+
+## Architecture
+
+### Use bindings for Cloudflare services, not REST APIs
+
+Bindings (KV, R2, D1, Queues, Workflows) are direct, in-process references — no network hop, no authentication, no extra latency. Using the Cloudflare REST API from a Worker wastes time and adds complexity.
+
+**Check**: no `fetch("https://api.cloudflare.com/client/v4/...")` calls for services available as bindings.
+
+```ts
+// Binding — direct, zero-cost
+const object = await env.MY_BUCKET.get("my-file");
+```
+
+Anti-pattern:
+```ts
+// REST API from inside a Worker — unnecessary overhead
+const response = await fetch(
+  "https://api.cloudflare.com/client/v4/accounts/.../r2/buckets/.../objects/my-file",
+  { headers: { Authorization: `Bearer ${env.CF_API_TOKEN}` } }
+);
+```
+
+### Use Queues and Workflows for async and background work
+
+Long-running, retriable, or non-urgent tasks should not block a request.
+
+- **Queues**: decouple producer from consumer. Fan-out, buffering/batching, simple single-step background jobs. At-least-once delivery.
+- **Workflows**: multi-step durable execution. Each step's return value is persisted; only failed steps retry. Can run for hours/days/weeks.
+- **Both together**: Queue buffers high-throughput entry, consumer creates Workflow instances for complex processing.
+
+**Check**: long-running work (email sends, webhooks, multi-step processes) is offloaded to Queues or Workflows, not done inline in the fetch handler.
+
+```ts
+async fetch(request: Request, env: Env): Promise<Response> {
+  const order = await request.json<{ id: string; type: string }>();
+
+  if (order.type === "simple") {
+    await env.ORDER_QUEUE.send({ orderId: order.id, action: "send-email" });
+  } else {
+    await env.FULFILLMENT_WORKFLOW.create({ params: { orderId: order.id } });
+  }
+
+  return Response.json({ status: "accepted" }, { status: 202 });
+}
+```
+
+**Retrieve**: `/queues/` and `/workflows/` for current APIs. For Workflow-specific rules, see [Rules of Workflows](https://developers.cloudflare.com/workflows/build/rules-of-workflows/).
+
+### Use service bindings for Worker-to-Worker communication
+
+Service bindings are zero-cost, bypass the public internet, and support type-safe RPC. Do not call another Worker via its public URL.
+
+**Check**: Worker-to-Worker calls use `env.SERVICE_NAME.method()` (RPC) or `env.SERVICE_NAME.fetch()`, not `fetch("https://my-other-worker.example.com/...")`.
+
+```ts
+import { WorkerEntrypoint } from "cloudflare:workers";
+
+export class AuthService extends WorkerEntrypoint {
+  async verifyToken(token: string): Promise<{ userId: string; valid: boolean }> {
+    return { userId: "user-123", valid: true };
+  }
+}
+
+// Caller Worker
+const auth = await env.AUTH_SERVICE.verifyToken(token);
+```
+
+**Retrieve**: verify `WorkerEntrypoint` import path and signature against latest `@cloudflare/workers-types`.
+
+### Use Hyperdrive for external database connections
+
+Hyperdrive maintains a regional connection pool, eliminating per-request TCP + TLS + auth cost (often 300-500ms). Create a new `Client` per request — Hyperdrive manages the underlying pool. Requires `nodejs_compat`.
+
+**Check**: any `new Client()` or database connection that uses a direct connection string instead of `env.HYPERDRIVE.connectionString`.
+
+```jsonc
+{
+  "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "<YOUR_HYPERDRIVE_ID>" }]
+}
+```
+
+```ts
+import { Client } from "pg";
+
+async fetch(request: Request, env: Env): Promise<Response> {
+  const client = new Client({ connectionString: env.HYPERDRIVE.connectionString });
+  await client.connect();
+  const result = await client.query("SELECT id, name FROM users LIMIT 10");
+  return Response.json(result.rows);
+}
+```
+
+**Retrieve**: `/hyperdrive/` for current configuration and supported databases.
+
+---
+
+## Observability
+
+### Enable Workers Logs and Traces
+
+Enable `observability` in wrangler config before deploying to production. Use `head_sampling_rate` to control volume and cost. Use structured JSON logging — `console.log(JSON.stringify({...}))` — so logs are searchable. Use `console.error` for errors (appears at error severity in the dashboard).
+
+**Check**: `observability.enabled` is `true` in config. Logging uses structured JSON, not string concatenation.
+
+```jsonc
+{
+  "observability": {
+    "enabled": true,
+    "logs": { "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 }
+  }
+}
+```
+
+```ts
+// Structured JSON — searchable and filterable
+console.log(JSON.stringify({ message: "incoming request", method: request.method, path: url.pathname }));
+
+// Error severity
+console.error(JSON.stringify({ message: "request failed", error: e instanceof Error ? e.message : String(e) }));
+```
+
+Anti-pattern:
+```ts
+// Unstructured string logs — hard to query
+console.log("Got a request to " + url.pathname);
+```
+
+**Retrieve**: `/workers/observability/logs/workers-logs/` and `/workers/observability/traces/` for current config options.
+
+---
+
+## Code Patterns
+
+### Do not store request-scoped state in global scope
+
+Workers reuse isolates across requests. Module-level mutable variables cause cross-request data leaks, stale state, and "Cannot perform I/O on behalf of a different request" errors.
+
+**Check**: no mutable `let`/`var` at module scope that gets assigned inside a handler. Pass state through function arguments.
+
+```ts
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const userId = request.headers.get("X-User-Id");
+    const result = await handleRequest(userId, env);
+    return Response.json(result);
+  },
+} satisfies ExportedHandler<Env>;
+```
+
+Anti-pattern:
+```ts
+// Module-level mutable state — leaks between requests
+let currentUser: string | null = null;
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    currentUser = request.headers.get("X-User-Id");  // Visible to next request
+    // ...
+  },
+};
+```
+
+### Always await or waitUntil Promises
+
+A Promise that is not `await`ed, `return`ed, or passed to `ctx.waitUntil()` is a floating promise. Causes: dropped results, swallowed errors, unfinished work. The runtime may terminate the isolate before it completes.
+
+**Check**: every `fetch()`, `env.*.put()`, `env.*.send()`, and any other async call is handled. Enable `no-floating-promises` lint rule.
+
+```bash
+# ESLint
+npx eslint --rule '{"@typescript-eslint/no-floating-promises": "error"}' src/
+
+# oxlint
+npx oxlint --deny typescript/no-floating-promises src/
+```
+
+```ts
+// Correct: await when you need the result
+const response = await fetch("https://api.example.com/process", { method: "POST", body: JSON.stringify(data) });
+
+// Correct: waitUntil when you don't need the result before responding
+ctx.waitUntil(fetch("https://api.example.com/webhook", { method: "POST", body: JSON.stringify(data) }));
+```
+
+Anti-pattern:
+```ts
+// Floating promise — result dropped, error swallowed
+fetch("https://api.example.com/webhook", { method: "POST", body: JSON.stringify(data) });
+```
+
+### Be aware of platform limits
+
+Workers have a 10ms CPU time limit (Bundled) or 30s (Standard/Unbound). Heavy synchronous work — tight loops, large JSON parsing, compute-intensive crypto — can hit the CPU limit and terminate the request.
+
+**Check**: compute-heavy operations that run synchronously. Consider breaking work into smaller chunks, offloading to Queues/Workflows, or using WebAssembly for CPU-intensive tasks.
+
+**Retrieve**: current limits at `/workers/platform/limits/`.
+
+---
+
+## Security
+
+### Use Web Crypto for secure token generation
+
+Use `crypto.randomUUID()` for unique IDs and `crypto.getRandomValues()` for random bytes. `Math.random()` is not cryptographically secure.
+
+For comparing secrets (API keys, HMAC signatures), use `crypto.subtle.timingSafeEqual()`. Hash both values to a fixed size first — do not short-circuit on length mismatch (leaks length via timing).
+
+**Check**: no `Math.random()` for security-sensitive values. Secret comparisons use `timingSafeEqual` with fixed-size hashing.
+
+```ts
+// Secure random UUID
+const sessionId = crypto.randomUUID();
+
+// Secure random bytes
+const tokenBytes = new Uint8Array(32);
+crypto.getRandomValues(tokenBytes);
+const token = Array.from(tokenBytes).map((b) => b.toString(16).padStart(2, "0")).join("");
+```
+
+```ts
+// Constant-time comparison — hash first to avoid length leak
+async function verifyToken(provided: string, expected: string): Promise<boolean> {
+  const encoder = new TextEncoder();
+  const [providedHash, expectedHash] = await Promise.all([
+    crypto.subtle.digest("SHA-256", encoder.encode(provided)),
+    crypto.subtle.digest("SHA-256", encoder.encode(expected)),
+  ]);
+  return crypto.subtle.timingSafeEqual(providedHash, expectedHash);
+}
+```
+
+Anti-pattern:
+```ts
+// Predictable — not cryptographically secure
+const token = Math.random().toString(36).substring(2);
+
+// Timing side-channel — leaks information about the expected value
+return provided === expected;
+```
+
+**Retrieve**: `/workers/runtime-apis/web-crypto/` for current API surface.
+
+### Explicit error handling over passThroughOnException
+
+`passThroughOnException()` is a fail-open mechanism that sends requests to the origin when the Worker throws. It hides bugs and makes debugging difficult. Use explicit try/catch with structured error responses.
+
+**Check**: no `ctx.passThroughOnException()` calls. Error handling uses try/catch with structured JSON error responses and `console.error`.
+
+```ts
+async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  try {
+    const result = await handleRequest(request, env);
+    return Response.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error(JSON.stringify({ message: "unhandled error", error: message, path: new URL(request.url).pathname }));
+    return Response.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+```
+
+---
+
+## Development & Testing
+
+### Test with @cloudflare/vitest-pool-workers
+
+Runs tests inside the Workers runtime with real bindings. Catches issues that Node.js-based tests miss.
+
+**Known pitfall**: the Vitest pool auto-injects `nodejs_compat`, so tests pass even if your wrangler config is missing the flag. Always confirm your `wrangler.jsonc` includes `nodejs_compat` if your code depends on Node.js built-ins.
+
+**Check**: test setup uses `@cloudflare/vitest-pool-workers`. Tests cover nullable returns (e.g., KV `.get()` returning `null`).
+
+```ts
+import { describe, it, expect } from "vitest";
+import { env } from "cloudflare:test";
+
+describe("KV operations", () => {
+  it("should store and retrieve a value", async () => {
+    await env.MY_KV.put("key", "value");
+    const result = await env.MY_KV.get("key");
+    expect(result).toBe("value");
+  });
+
+  it("should return null for missing keys", async () => {
+    const result = await env.MY_KV.get("nonexistent");
+    expect(result).toBeNull();
+  });
+});
+```
+
+**Retrieve**: `/workers/testing/vitest-integration/` for current setup and configuration.

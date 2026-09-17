@@ -1,1 +1,44 @@
-IyBPYnNlcnZhYmlsaXR5CgpGZXRjaCBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWdlbnRzL2FwaS1yZWZlcmVuY2Uvb2JzZXJ2YWJpbGl0eS8gZm9yIGNvbXBsZXRlIGRvY3VtZW50YXRpb24uCgpBZ2VudHMgZW1pdCBzdHJ1Y3R1cmVkIGV2ZW50cyB2aWEgTm9kZS5qcyBgZGlhZ25vc3RpY3NfY2hhbm5lbGAuIFN1YnNjcmliZSBpbiBkZXZlbG9wbWVudCBvciBmb3J3YXJkIHZpYSBUYWlsIFdvcmtlcnMgaW4gcHJvZHVjdGlvbi4KCiMjIFN1YnNjcmliZSB0byBFdmVudHMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgc3Vic2NyaWJlIH0gZnJvbSAiYWdlbnRzL29ic2VydmFiaWxpdHkiOwoKc3Vic2NyaWJlKCJhZ2VudHM6cnBjIiwgKGV2ZW50KSA9PiB7CiAgY29uc29sZS5sb2coYFJQQyBjYWxsOiAke2V2ZW50LnBheWxvYWQubWV0aG9kfWApOwp9KTsKCnN1YnNjcmliZSgiYWdlbnRzOnN0YXRlIiwgKGV2ZW50KSA9PiB7CiAgY29uc29sZS5sb2coYFN0YXRlIGNoYW5nZSBvbiAke2V2ZW50LmFnZW50fWApOwp9KTsKYGBgCgojIyBBdmFpbGFibGUgQ2hhbm5lbHMKCnwgQ2hhbm5lbCB8IEV2ZW50cyB8CnwtLS0tLS0tLS18LS0tLS0tLS18CnwgYGFnZW50czpzdGF0ZWAgfCBTdGF0ZSBjaGFuZ2VzIHwKfCBgYWdlbnRzOnJwY2AgfCBgQGNhbGxhYmxlYCBpbnZvY2F0aW9ucyB8CnwgYGFnZW50czptZXNzYWdlYCB8IFdlYlNvY2tldCBtZXNzYWdlcyB8CnwgYGFnZW50czpzY2hlZHVsZWAgfCBTY2hlZHVsZSB0cmlnZ2VycyB8CnwgYGFnZW50czpsaWZlY3ljbGVgIHwgQWdlbnQgc3RhcnQsIGNvbm5lY3QsIGRpc2Nvbm5lY3QgfAp8IGBhZ2VudHM6d29ya2Zsb3dgIHwgV29ya2Zsb3cgcHJvZ3Jlc3MsIGNvbXBsZXRpb24sIGVycm9ycyB8CnwgYGFnZW50czptY3BgIHwgTUNQIHNlcnZlciBjb25uZWN0aW9ucywgdG9vbCBjYWxscyB8CnwgYGFnZW50czplbWFpbGAgfCBFbWFpbCByZWNlaXZlZCB8CgojIyBQZXItQWdlbnQgT3ZlcnJpZGUKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGNsYXNzIE15QWdlbnQgZXh0ZW5kcyBBZ2VudDxFbnYsIFN0YXRlPiB7CiAgb2JzZXJ2YWJpbGl0eSA9IHVuZGVmaW5lZDsgLy8gZGlzYWJsZSBmb3IgdGhpcyBhZ2VudAp9CmBgYAoKIyMgUHJvZHVjdGlvbjogVGFpbCBXb3JrZXJzCgpJbiBwcm9kdWN0aW9uLCBldmVudHMgYXBwZWFyIGFzIGBkaWFnbm9zdGljc0NoYW5uZWxFdmVudHNgIG9uIHRoZSBUYWlsIFdvcmtlciBgZXZlbnRgIG9iamVjdC4gQXR0YWNoIGEgVGFpbCBXb3JrZXIgdG8geW91ciBhZ2VudCdzIFdvcmtlciB0byBmb3J3YXJkIGV2ZW50cyB0byB5b3VyIG9ic2VydmFiaWxpdHkgcGxhdGZvcm0uCg==
+# Observability
+
+Fetch https://developers.cloudflare.com/agents/api-reference/observability/ for complete documentation.
+
+Agents emit structured events via Node.js `diagnostics_channel`. Subscribe in development or forward via Tail Workers in production.
+
+## Subscribe to Events
+
+```typescript
+import { subscribe } from "agents/observability";
+
+subscribe("agents:rpc", (event) => {
+  console.log(`RPC call: ${event.payload.method}`);
+});
+
+subscribe("agents:state", (event) => {
+  console.log(`State change on ${event.agent}`);
+});
+```
+
+## Available Channels
+
+| Channel | Events |
+|---------|--------|
+| `agents:state` | State changes |
+| `agents:rpc` | `@callable` invocations |
+| `agents:message` | WebSocket messages |
+| `agents:schedule` | Schedule triggers |
+| `agents:lifecycle` | Agent start, connect, disconnect |
+| `agents:workflow` | Workflow progress, completion, errors |
+| `agents:mcp` | MCP server connections, tool calls |
+| `agents:email` | Email received |
+
+## Per-Agent Override
+
+```typescript
+export class MyAgent extends Agent<Env, State> {
+  observability = undefined; // disable for this agent
+}
+```
+
+## Production: Tail Workers
+
+In production, events appear as `diagnosticsChannelEvents` on the Tail Worker `event` object. Attach a Tail Worker to your agent's Worker to forward events to your observability platform.

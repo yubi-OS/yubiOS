@@ -1,1 +1,125 @@
-IyBHb3RjaGFzICYgVHJvdWJsZXNob290aW5nCgojIyBDb21tb24gRXJyb3JzCgojIyMgIlNjaGVtYSBWYWxpZGF0aW9uIDIuMCBub3Qgd29ya2luZyBhZnRlciBtaWdyYXRpb24iCgoqKkNhdXNlOioqIENsYXNzaWMgcnVsZXMgc3RpbGwgYWN0aXZlLCBjb25mbGljdGluZyB3aXRoIG5ldyBzeXN0ZW0KKipTb2x1dGlvbjoqKgoxLiBEZWxldGUgQUxMIENsYXNzaWMgc2NoZW1hIHZhbGlkYXRpb24gcnVsZXMKMi4gQ2xlYXIgQ2xvdWRmbGFyZSBjYWNoZSAod2FpdCA1IG1pbikKMy4gUmUtdXBsb2FkIHNjaGVtYSB2aWEgbmV3IFNjaGVtYSBWYWxpZGF0aW9uIDIuMCBpbnRlcmZhY2UKNC4gVmVyaWZ5IGluIFNlY3VyaXR5ID4gRXZlbnRzCjUuIENoZWNrIGFjdGlvbiBpcyBzZXQgKExvZy9CbG9jaykKCiMjIyAiU2NoZW1hIHZhbGlkYXRpb24gYmxvY2tpbmcgdmFsaWQgcmVxdWVzdHMiCgoqKkNhdXNlOioqIFNjaGVtYSB0b28gcmVzdHJpY3RpdmUsIG1pc3NpbmcgZmllbGRzLCBvciBpbmNvcnJlY3QgdHlwZXMKKipTb2x1dGlvbjoqKiAKMS4gQ2hlY2sgRmlyZXdhbGwgRXZlbnRzIGZvciB2aW9sYXRpb24gZGV0YWlscwoyLiBSZXZpZXcgc2NoZW1hIGluIFNldHRpbmdzCjMuIFRlc3Qgc2NoZW1hIGluIFN3YWdnZXIgRWRpdG9yCjQuIFVzZSBMb2cgbW9kZSB0byB2YWxpZGF0ZSBiZWZvcmUgYmxvY2tpbmcKNS4gVXBkYXRlIHNjaGVtYSB3aXRoIGNvcnJlY3Qgc3BlY2lmaWNhdGlvbnMKNi4gRW5zdXJlIFNjaGVtYSBWYWxpZGF0aW9uIDIuMCAobm90IENsYXNzaWMpCgojIyMgIkpXVCB2YWxpZGF0aW9uIGZhaWxpbmciCgoqKkNhdXNlOioqIEpXS1MgbWlzbWF0Y2ggd2l0aCBJZFAsIGV4cGlyZWQgdG9rZW4sIHdyb25nIGhlYWRlci9jb29raWUgbmFtZSwgb3IgY2xvY2sgc2tldwoqKlNvbHV0aW9uOioqIAoxLiBWZXJpZnkgSldLUyBtYXRjaGVzIElkUCBjb25maWd1cmF0aW9uCjIuIENoZWNrIHRva2VuIGBleHBgIGNsYWltIGlzIHZhbGlkCjMuIENvbmZpcm0gaGVhZGVyL2Nvb2tpZSBuYW1lIG1hdGNoZXMgY29uZmlnCjQuIFRlc3QgdG9rZW4gYXQgand0LmlvCjUuIEFjY291bnQgZm9yIGNsb2NrIHNrZXcgKMKxNSBtaW4gdG9sZXJhbmNlKQo2LiBVc2UgbW9kZXJuIHN5bnRheDogYGlzX2p3dF92YWxpZChodHRwLnJlcXVlc3Quand0LnBheWxvYWRbIntjb25maWdfaWR9Il1bMF0pYAoKIyMjICJCT0xBIGRldGVjdGlvbiBmYWxzZSBwb3NpdGl2ZXMiCgoqKkNhdXNlOioqIExlZ2l0aW1hdGUgc2VxdWVudGlhbCBhY2Nlc3MgcGF0dGVybnMsIGJ1bGsgb3BlcmF0aW9ucywgb3Igc2Vuc2l0aXZpdHkgdG9vIGhpZ2gKKipTb2x1dGlvbjoqKgoxLiBSZXZpZXcgQk9MQSBldmVudHMgaW4gU2VjdXJpdHkgPiBFdmVudHMKMi4gTG93ZXIgc2Vuc2l0aXZpdHkgdGhyZXNob2xkIChIaWdoIOKGkiBNZWRpdW0g4oaSIExvdykKMy4gRXhjbHVkZSBsZWdpdGltYXRlIGJ1bGsgb3BlcmF0aW9ucyBmcm9tIGRldGVjdGlvbgo0LiBFbnN1cmUgc2Vzc2lvbiBpZGVudGlmaWVycyB1bmlxdWVseSBpZGVudGlmeSB1c2Vycwo1LiBWZXJpZnkgbWluaW11bSB0cmFmZmljIHJlcXVpcmVtZW50cyBtZXQgKDEwMDArIHJlcS9kYXkpCgojIyMgIlJpc2sgbGFiZWxzIG5vdCBhcHBlYXJpbmcgaW4gZmlyZXdhbGwgcnVsZXMiCgoqKkNhdXNlOioqIEZlYXR1cmUgbm90IGVuYWJsZWQsIGluc3VmZmljaWVudCB0cmFmZmljLCBvciBtaXNzaW5nIHNlc3Npb24gaWRlbnRpZmllcnMKKipTb2x1dGlvbjoqKgoxLiBWZXJpZnkgU2NoZW1hIFZhbGlkYXRpb24gMi4wIGVuYWJsZWQKMi4gRW5hYmxlIEJPTEEgRGV0ZWN0aW9uIGluIHNjaGVtYSBzZXR0aW5ncwozLiBDb25maWd1cmUgc2Vzc2lvbiBpZGVudGlmaWVycyAocmVxdWlyZWQgZm9yIEJPTEEpCjQuIFdhaXQgMjQtNDhoIGZvciBNTCBtb2RlbCB0cmFpbmluZwo1LiBDaGVjayBtaW5pbXVtIHRyYWZmaWMgdGhyZXNob2xkcyBtZXQKCiMjIyAiRW5kcG9pbnQgZGlzY292ZXJ5IG5vdCBmaW5kaW5nIEFQSXMiCgoqKkNhdXNlOioqIEluc3VmZmljaWVudCB0cmFmZmljICg8NTAwIHJlcXMvMTBkKSwgbm9uLTJ4eCByZXNwb25zZXMsIFdvcmtlciBkaXJlY3QgcmVxdWVzdHMsIG9yIGluY29ycmVjdCBzZXNzaW9uIElEIGNvbmZpZwoqKlNvbHV0aW9uOioqIEVuc3VyZSA1MDArIHJlcXVlc3RzIGluIDEwIGRheXMsIDJ4eCByZXNwb25zZXMgZnJvbSBlZGdlIChub3QgV29ya2VycyBkaXJlY3QpLCBjb25maWd1cmUgc2Vzc2lvbiBJRHMgY29ycmVjdGx5LiBNTCB1cGRhdGVzIGRhaWx5LgoKIyMjICJTZXF1ZW5jZSBkZXRlY3Rpb24gZmFsc2UgcG9zaXRpdmVzIgoKKipDYXVzZToqKiBMb29rYmFjayB3aW5kb3cgaXNzdWVzLCBub24tdW5pcXVlIHNlc3Npb24gSURzLCBvciBtb2RlbCBzZW5zaXRpdml0eQoqKlNvbHV0aW9uOioqIAoxLiBSZXZpZXcgbG9va2JhY2sgc2V0dGluZ3MgKDEwIHJlcXMgdG8gbWFuYWdlZCBlbmRwb2ludHMsIDEwbWluIHdpbmRvdykKMi4gRW5zdXJlIHNlc3Npb24gSUQgdW5pcXVlbmVzcyBwZXIgdXNlciAobm90IHNoYXJlZCB0b2tlbnMpCjMuIEFkanVzdCBwb3NpdGl2ZS9uZWdhdGl2ZSBtb2RlbCBiYWxhbmNlCjQuIEV4Y2x1ZGUgbGVnaXRpbWF0ZSB3b3JrZmxvd3MgZnJvbSBkZXRlY3Rpb24KCiMjIyAiR3JhcGhRTCBwcm90ZWN0aW9uIGJsb2NraW5nIHZhbGlkIHF1ZXJpZXMiCgoqKkNhdXNlOioqIFF1ZXJ5IGRlcHRoL3NpemUgbGltaXRzIHRvbyByZXN0cmljdGl2ZSwgY29tcGxleCBidXQgbGVnaXRpbWF0ZSBxdWVyaWVzCioqU29sdXRpb246KioKMS4gUmV2aWV3IGJsb2NrZWQgcXVlcnkgcGF0dGVybnMgaW4gU2VjdXJpdHkgPiBFdmVudHMKMi4gSW5jcmVhc2UgbWF4X2RlcHRoIChkZWZhdWx0OiAxMCkgaWYgbmVlZGVkCjMuIEluY3JlYXNlIG1heF9zaXplIChkZWZhdWx0OiAxMDBLQikgZm9yIGNvbXBsZXggcXVlcmllcwo0LiBXaGl0ZWxpc3Qgc3BlY2lmaWMgcXVlcnkgc2lnbmF0dXJlcwo1LiBVc2UgTG9nIG1vZGUgdG8gdHVuZSBiZWZvcmUgYmxvY2tpbmcKCiMjIyAiVG9rZW4gaW52YWxpZCIKCioqQ2F1c2U6KiogQ29uZmlndXJhdGlvbiBlcnJvciwgSldLUyBtaXNtYXRjaCwgb3IgZXhwaXJlZCB0b2tlbgoqKlNvbHV0aW9uOioqIFZlcmlmeSBjb25maWcgbWF0Y2hlcyBJZFAsIHVwZGF0ZSBKV0tTLCBjaGVjayB0b2tlbiBleHBpcmF0aW9uCgojIyMgIlNjaGVtYSB2aW9sYXRpb24iCgoqKkNhdXNlOioqIE1pc3NpbmcgcmVxdWlyZWQgZmllbGRzLCB3cm9uZyBkYXRhIHR5cGVzLCBvciBzcGVjIG1pc21hdGNoCioqU29sdXRpb246KiogUmV2aWV3IHNjaGVtYSBhZ2FpbnN0IGFjdHVhbCByZXF1ZXN0cywgZW5zdXJlIGFsbCByZXF1aXJlZCBmaWVsZHMgcHJlc2VudCwgdmFsaWRhdGUgdHlwZXMgbWF0Y2ggc3BlYwoKIyMjICJGYWxsdGhyb3VnaCIKCioqQ2F1c2U6KiogVW5rbm93biBlbmRwb2ludCBvciBwYXR0ZXJuIG1pc21hdGNoCioqU29sdXRpb246KiogVXBkYXRlIHNjaGVtYSB3aXRoIGFsbCBlbmRwb2ludHMsIGNoZWNrIHBhdGggcGF0dGVybiBtYXRjaGluZwoKIyMjICJtVExTIGZhaWxlZCIKCioqQ2F1c2U6KiogQ2VydGlmaWNhdGUgdW50cnVzdGVkL2V4cGlyZWQgb3Igd3JvbmcgQ0EKKipTb2x1dGlvbjoqKiBWZXJpZnkgY2VydCBjaGFpbiwgY2hlY2sgZXhwaXJhdGlvbiwgY29uZmlybSBjb3JyZWN0IENBIHVwbG9hZGVkCgojIyBMaW1pdHMgKDIwMjYpCgp8IFJlc291cmNlL0xpbWl0IHwgVmFsdWUgfCBOb3RlcyB8CnwtLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBPcGVuQVBJIHZlcnNpb24gfCB2My4wLnggb25seSB8IE5vIGV4dGVybmFsIHJlZnMsIG11c3QgYmUgdmFsaWQgfAp8IFNjaGVtYSBvcGVyYXRpb25zIHwgMTBLIChFbnRlcnByaXNlKSB8IENvbnRhY3QgZm9yIGhpZ2hlciBsaW1pdHMgfAp8IEpXVCB2YWxpZGF0aW9uIHNvdXJjZXMgfCBIZWFkZXJzL2Nvb2tpZXMgb25seSB8IE5vIHF1ZXJ5IHBhcmFtcy9ib2R5IHwKfCBFbmRwb2ludCBkaXNjb3ZlcnkgfCA1MDArIHJlcXMvMTBkIHwgTWluaW11bSBmb3IgTUwgbW9kZWwgfAp8IFBhdGggbm9ybWFsaXphdGlvbiB8IEF1dG9tYXRpYyB8IGAvcHJvZmlsZS8yMzhgIOKGkiBgL3Byb2ZpbGUve3ZhcjF9YCB8CnwgU2NoZW1hIHBhcmFtZXRlcnMgfCBObyBgY29udGVudGAgZmllbGQgfCBObyBvYmplY3QgcGFyYW0gdmFsaWRhdGlvbiB8CnwgQk9MQSBkZXRlY3Rpb24gfCAxMDAwKyByZXFzL2RheS9lbmRwb2ludCB8IFBlci1lbmRwb2ludCBtaW5pbXVtIHwKfCBTZXNzaW9uIElEIHVuaXF1ZW5lc3MgfCBSZXF1aXJlZCB8IEJPTEEvU2VxdWVuY2UgbmVlZCB1bmlxdWUgSURzIHwKfCBHcmFwaFFMIG1heCBkZXB0aCB8IDEtNTAgfCBEZWZhdWx0OiAxMCB8CnwgR3JhcGhRTCBtYXggc2l6ZSB8IDFLQi0xTUIgfCBEZWZhdWx0OiAxMDBLQiB8CnwgSldUIGNsYWltIG5lc3RpbmcgfCAxMCBsZXZlbHMgbWF4IHwgVXNlIGRvdCBub3RhdGlvbiB8CnwgbVRMUyBDQSBjZXJ0aWZpY2F0ZXMgfCA1IGN1c3RvbSBtYXggfCBDRi1tYW5hZ2VkIHVubGltaXRlZCB8CnwgU2NoZW1hIHVwbG9hZCBzaXplIHwgNU1CIG1heCB8IENvbXByZXNzZWQgT3BlbkFQSSBzcGVjIHwKfCBWb2x1bWV0cmljIGFidXNlIGJhc2VsaW5lIHwgNyBkYXlzIHRyYWluaW5nIHwgSW5pdGlhbCBNTCBwZXJpb2QgfAp8IEF1dGggUG9zdHVyZSByZWZyZXNoIHwgRGFpbHkgfCBVcGRhdGVkIG5pZ2h0bHkgfAoKIyMgU2VlIEFsc28KCi0gW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIC0gU2V0dXAgZ3VpZGVzIHRvIGF2b2lkIGNvbW1vbiBpc3N1ZXMKLSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSAtIEJlc3QgcHJhY3RpY2VzIGFuZCBwcm9ncmVzc2l2ZSByb2xsb3V0Ci0gW0FQSSBTaGllbGQgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FwaS1zaGllbGQvKQo=
+# Gotchas & Troubleshooting
+
+## Common Errors
+
+### "Schema Validation 2.0 not working after migration"
+
+**Cause:** Classic rules still active, conflicting with new system
+**Solution:**
+1. Delete ALL Classic schema validation rules
+2. Clear Cloudflare cache (wait 5 min)
+3. Re-upload schema via new Schema Validation 2.0 interface
+4. Verify in Security > Events
+5. Check action is set (Log/Block)
+
+### "Schema validation blocking valid requests"
+
+**Cause:** Schema too restrictive, missing fields, or incorrect types
+**Solution:** 
+1. Check Firewall Events for violation details
+2. Review schema in Settings
+3. Test schema in Swagger Editor
+4. Use Log mode to validate before blocking
+5. Update schema with correct specifications
+6. Ensure Schema Validation 2.0 (not Classic)
+
+### "JWT validation failing"
+
+**Cause:** JWKS mismatch with IdP, expired token, wrong header/cookie name, or clock skew
+**Solution:** 
+1. Verify JWKS matches IdP configuration
+2. Check token `exp` claim is valid
+3. Confirm header/cookie name matches config
+4. Test token at jwt.io
+5. Account for clock skew (±5 min tolerance)
+6. Use modern syntax: `is_jwt_valid(http.request.jwt.payload["{config_id}"][0])`
+
+### "BOLA detection false positives"
+
+**Cause:** Legitimate sequential access patterns, bulk operations, or sensitivity too high
+**Solution:**
+1. Review BOLA events in Security > Events
+2. Lower sensitivity threshold (High → Medium → Low)
+3. Exclude legitimate bulk operations from detection
+4. Ensure session identifiers uniquely identify users
+5. Verify minimum traffic requirements met (1000+ req/day)
+
+### "Risk labels not appearing in firewall rules"
+
+**Cause:** Feature not enabled, insufficient traffic, or missing session identifiers
+**Solution:**
+1. Verify Schema Validation 2.0 enabled
+2. Enable BOLA Detection in schema settings
+3. Configure session identifiers (required for BOLA)
+4. Wait 24-48h for ML model training
+5. Check minimum traffic thresholds met
+
+### "Endpoint discovery not finding APIs"
+
+**Cause:** Insufficient traffic (<500 reqs/10d), non-2xx responses, Worker direct requests, or incorrect session ID config
+**Solution:** Ensure 500+ requests in 10 days, 2xx responses from edge (not Workers direct), configure session IDs correctly. ML updates daily.
+
+### "Sequence detection false positives"
+
+**Cause:** Lookback window issues, non-unique session IDs, or model sensitivity
+**Solution:** 
+1. Review lookback settings (10 reqs to managed endpoints, 10min window)
+2. Ensure session ID uniqueness per user (not shared tokens)
+3. Adjust positive/negative model balance
+4. Exclude legitimate workflows from detection
+
+### "GraphQL protection blocking valid queries"
+
+**Cause:** Query depth/size limits too restrictive, complex but legitimate queries
+**Solution:**
+1. Review blocked query patterns in Security > Events
+2. Increase max_depth (default: 10) if needed
+3. Increase max_size (default: 100KB) for complex queries
+4. Whitelist specific query signatures
+5. Use Log mode to tune before blocking
+
+### "Token invalid"
+
+**Cause:** Configuration error, JWKS mismatch, or expired token
+**Solution:** Verify config matches IdP, update JWKS, check token expiration
+
+### "Schema violation"
+
+**Cause:** Missing required fields, wrong data types, or spec mismatch
+**Solution:** Review schema against actual requests, ensure all required fields present, validate types match spec
+
+### "Fallthrough"
+
+**Cause:** Unknown endpoint or pattern mismatch
+**Solution:** Update schema with all endpoints, check path pattern matching
+
+### "mTLS failed"
+
+**Cause:** Certificate untrusted/expired or wrong CA
+**Solution:** Verify cert chain, check expiration, confirm correct CA uploaded
+
+## Limits (2026)
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| OpenAPI version | v3.0.x only | No external refs, must be valid |
+| Schema operations | 10K (Enterprise) | Contact for higher limits |
+| JWT validation sources | Headers/cookies only | No query params/body |
+| Endpoint discovery | 500+ reqs/10d | Minimum for ML model |
+| Path normalization | Automatic | `/profile/238` → `/profile/{var1}` |
+| Schema parameters | No `content` field | No object param validation |
+| BOLA detection | 1000+ reqs/day/endpoint | Per-endpoint minimum |
+| Session ID uniqueness | Required | BOLA/Sequence need unique IDs |
+| GraphQL max depth | 1-50 | Default: 10 |
+| GraphQL max size | 1KB-1MB | Default: 100KB |
+| JWT claim nesting | 10 levels max | Use dot notation |
+| mTLS CA certificates | 5 custom max | CF-managed unlimited |
+| Schema upload size | 5MB max | Compressed OpenAPI spec |
+| Volumetric abuse baseline | 7 days training | Initial ML period |
+| Auth Posture refresh | Daily | Updated nightly |
+
+## See Also
+
+- [configuration.md](configuration.md) - Setup guides to avoid common issues
+- [patterns.md](patterns.md) - Best practices and progressive rollout
+- [API Shield Docs](https://developers.cloudflare.com/api-shield/)

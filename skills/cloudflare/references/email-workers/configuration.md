@@ -1,1 +1,112 @@
-IyBFbWFpbCBXb3JrZXJzIENvbmZpZ3VyYXRpb24KCiMjIHdyYW5nbGVyLmpzb25jCgpgYGBqc29uYwp7CiAgIm5hbWUiOiAiZW1haWwtd29ya2VyIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wMS0yNyIsCiAgInNlbmRfZW1haWwiOiBbCiAgICB7ICJuYW1lIjogIkVNQUlMIiB9LCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIFVucmVzdHJpY3RlZAogICAgeyAibmFtZSI6ICJFTUFJTF9MT0dTIiwgImRlc3RpbmF0aW9uX2FkZHJlc3MiOiAibG9nc0BleGFtcGxlLmNvbSIgfSwgIC8vIFNpbmdsZSBkZXN0CiAgICB7ICJuYW1lIjogIkVNQUlMX1RFQU0iLCAiYWxsb3dlZF9kZXN0aW5hdGlvbl9hZGRyZXNzZXMiOiBbImFAZXguY29tIiwgImJAZXguY29tIl0gfSwKICAgIHsgIm5hbWUiOiAiRU1BSUxfTk9SRVBMWSIsICJhbGxvd2VkX3NlbmRlcl9hZGRyZXNzZXMiOiBbIm5vcmVwbHlAZXguY29tIl0gfQogIF0sCiAgImt2X25hbWVzcGFjZXMiOiBbeyAiYmluZGluZyI6ICJBUkNISVZFIiwgImlkIjogInh4eCIgfV0sCiAgInIyX2J1Y2tldHMiOiBbeyAiYmluZGluZyI6ICJBVFRBQ0hNRU5UUyIsICJidWNrZXRfbmFtZSI6ICJlbWFpbC1hdHRhY2htZW50cyIgfV0sCiAgInZhcnMiOiB7ICJXRUJIT09LX1VSTCI6ICJodHRwczovL2hvb2tzLmV4YW1wbGUuY29tIiB9Cn0KYGBgCgojIyBUeXBlU2NyaXB0IFR5cGVzCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIEVNQUlMOiBTZW5kRW1haWw7CiAgQVJDSElWRTogS1ZOYW1lc3BhY2U7CiAgQVRUQUNITUVOVFM6IFIyQnVja2V0OwogIFdFQkhPT0tfVVJMOiBzdHJpbmc7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBlbWFpbChtZXNzYWdlOiBGb3J3YXJkYWJsZUVtYWlsTWVzc2FnZSwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCkge30KfTsKYGBgCgojIyBEZXBlbmRlbmNpZXMKCmBgYGJhc2gKbnBtIGluc3RhbGwgcG9zdGFsLW1pbWUgbWltZXRleHQKbnBtIGluc3RhbGwgLUQgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcyB3cmFuZ2xlciB0eXBlc2NyaXB0CmBgYAoKVXNlIHBvc3RhbC1taW1lIHYyLngsIG1pbWV0ZXh0IHYzLnguCgojIyB0c2NvbmZpZy5qc29uCgpgYGBqc29uCnsKICAiY29tcGlsZXJPcHRpb25zIjogewogICAgInRhcmdldCI6ICJFUzIwMjIiLCAibW9kdWxlIjogIkVTMjAyMiIsICJsaWIiOiBbIkVTMjAyMiJdLAogICAgInR5cGVzIjogWyJAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzIl0sCiAgICAibW9kdWxlUmVzb2x1dGlvbiI6ICJidW5kbGVyIiwgInN0cmljdCI6IHRydWUKICB9Cn0KYGBgCgojIyBMb2NhbCBEZXZlbG9wbWVudAoKYGBgYmFzaApucHggd3JhbmdsZXIgZGV2CgojIFRlc3QgcmVjZWl2aW5nCmN1cmwgLS1yZXF1ZXN0IFBPU1QgJ2h0dHA6Ly9sb2NhbGhvc3Q6ODc4Ny9jZG4tY2dpL2hhbmRsZXIvZW1haWwnIFwKICAtLXVybC1xdWVyeSAnZnJvbT1zZW5kZXJAZXhhbXBsZS5jb20nIC0tdXJsLXF1ZXJ5ICd0bz1yZWNpcGllbnRAZXhhbXBsZS5jb20nIFwKICAtLWhlYWRlciAnQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluJyAtLWRhdGEtcmF3ICdTdWJqZWN0OiBUZXN0XG5cbkhlbGxvJwpgYGAKClNlbnQgZW1haWxzIHdyaXRlIHRvIGxvY2FsIGAuZW1sYCBmaWxlcy4KCiMjIERlcGxveW1lbnQgQ2hlY2tsaXN0CgotIFsgXSBFbmFibGUgRW1haWwgUm91dGluZyBpbiBkYXNoYm9hcmQKLSBbIF0gVmVyaWZ5IGRlc3RpbmF0aW9uIGFkZHJlc3NlcwotIFsgXSBDb25maWd1cmUgRE1BUkMvU1BGL0RLSU0gZm9yIHNlbmRpbmcKLSBbIF0gQ3JlYXRlIEtWL1IyIHJlc291cmNlcyBpZiBuZWVkZWQKLSBbIF0gVXBkYXRlIHdyYW5nbGVyLmpzb25jIHdpdGggcHJvZHVjdGlvbiBJRHMKCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRlcGxveQpucHggd3JhbmdsZXIgZGVwbG95bWVudHMgbGlzdApgYGAKCiMjIERhc2hib2FyZCBTZXR1cAoKMS4gKipFbWFpbCBSb3V0aW5nOioqIERvbWFpbiDihpIgRW1haWwg4oaSIEVuYWJsZSBFbWFpbCBSb3V0aW5nCjIuICoqVmVyaWZ5IGFkZHJlc3NlczoqKiBFbWFpbCDihpIgRGVzdGluYXRpb24gYWRkcmVzc2VzIOKGkiBBZGQgJiB2ZXJpZnkKMy4gKipCaW5kIFdvcmtlcjoqKiBFbWFpbCDihpIgRW1haWwgV29ya2VycyDihpIgQ3JlYXRlIHJvdXRlIOKGkiBTZWxlY3QgcGF0dGVybiAmIFdvcmtlcgo0LiAqKkRNQVJDOioqIEFkZCBUWFQgYF9kbWFyYy5kb21haW4uY29tYDogYHY9RE1BUkMxOyBwPXF1YXJhbnRpbmU7YAoKIyMgU2VjcmV0cwoKYGBgYmFzaApucHggd3JhbmdsZXIgc2VjcmV0IHB1dCBBUElfS0VZCiMgQWNjZXNzOiBlbnYuQVBJX0tFWQpgYGAKCiMjIE1vbml0b3JpbmcKCmBgYGJhc2gKbnB4IHdyYW5nbGVyIHRhaWwKbnB4IHdyYW5nbGVyIHRhaWwgLS1zdGF0dXMgZXJyb3IKbnB4IHdyYW5nbGVyIHRhaWwgLS1mb3JtYXQganNvbgpgYGAKCiMjIFRyb3VibGVzaG9vdGluZwoKfCBFcnJvciB8IEZpeCB8CnwtLS0tLS0tfC0tLS0tfAp8ICJCaW5kaW5nIG5vdCBmb3VuZCIgfCBDaGVjayBgc2VuZF9lbWFpbGAgbmFtZSBtYXRjaGVzIGNvZGUgfAp8ICJJbnZhbGlkIGRlc3RpbmF0aW9uIiB8IFZlcmlmeSBpbiBFbWFpbCBSb3V0aW5nIGRhc2hib2FyZCB8CnwgVHlwZSBlcnJvcnMgfCBJbnN0YWxsIGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYCB8Cg==
+# Email Workers Configuration
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "name": "email-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-27",
+  "send_email": [
+    { "name": "EMAIL" },                                    // Unrestricted
+    { "name": "EMAIL_LOGS", "destination_address": "logs@example.com" },  // Single dest
+    { "name": "EMAIL_TEAM", "allowed_destination_addresses": ["a@ex.com", "b@ex.com"] },
+    { "name": "EMAIL_NOREPLY", "allowed_sender_addresses": ["noreply@ex.com"] }
+  ],
+  "kv_namespaces": [{ "binding": "ARCHIVE", "id": "xxx" }],
+  "r2_buckets": [{ "binding": "ATTACHMENTS", "bucket_name": "email-attachments" }],
+  "vars": { "WEBHOOK_URL": "https://hooks.example.com" }
+}
+```
+
+## TypeScript Types
+
+```typescript
+interface Env {
+  EMAIL: SendEmail;
+  ARCHIVE: KVNamespace;
+  ATTACHMENTS: R2Bucket;
+  WEBHOOK_URL: string;
+}
+
+export default {
+  async email(message: ForwardableEmailMessage, env: Env, ctx: ExecutionContext) {}
+};
+```
+
+## Dependencies
+
+```bash
+npm install postal-mime mimetext
+npm install -D @cloudflare/workers-types wrangler typescript
+```
+
+Use postal-mime v2.x, mimetext v3.x.
+
+## tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022", "module": "ES2022", "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types"],
+    "moduleResolution": "bundler", "strict": true
+  }
+}
+```
+
+## Local Development
+
+```bash
+npx wrangler dev
+
+# Test receiving
+curl --request POST 'http://localhost:8787/cdn-cgi/handler/email' \
+  --url-query 'from=sender@example.com' --url-query 'to=recipient@example.com' \
+  --header 'Content-Type: text/plain' --data-raw 'Subject: Test\n\nHello'
+```
+
+Sent emails write to local `.eml` files.
+
+## Deployment Checklist
+
+- [ ] Enable Email Routing in dashboard
+- [ ] Verify destination addresses
+- [ ] Configure DMARC/SPF/DKIM for sending
+- [ ] Create KV/R2 resources if needed
+- [ ] Update wrangler.jsonc with production IDs
+
+```bash
+npx wrangler deploy
+npx wrangler deployments list
+```
+
+## Dashboard Setup
+
+1. **Email Routing:** Domain → Email → Enable Email Routing
+2. **Verify addresses:** Email → Destination addresses → Add & verify
+3. **Bind Worker:** Email → Email Workers → Create route → Select pattern & Worker
+4. **DMARC:** Add TXT `_dmarc.domain.com`: `v=DMARC1; p=quarantine;`
+
+## Secrets
+
+```bash
+npx wrangler secret put API_KEY
+# Access: env.API_KEY
+```
+
+## Monitoring
+
+```bash
+npx wrangler tail
+npx wrangler tail --status error
+npx wrangler tail --format json
+```
+
+## Troubleshooting
+
+| Error | Fix |
+|-------|-----|
+| "Binding not found" | Check `send_email` name matches code |
+| "Invalid destination" | Verify in Email Routing dashboard |
+| Type errors | Install `@cloudflare/workers-types` |

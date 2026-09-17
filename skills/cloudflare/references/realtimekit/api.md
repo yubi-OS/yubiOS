@@ -1,1 +1,212 @@
-IyBSZWFsdGltZUtpdCBBUEkgUmVmZXJlbmNlCgpDb21wbGV0ZSBBUEkgcmVmZXJlbmNlIGZvciBNZWV0aW5nIG9iamVjdCwgUkVTVCBlbmRwb2ludHMsIGFuZCBTREsgbWV0aG9kcy4KCiMjIE1lZXRpbmcgT2JqZWN0IEFQSQoKIyMjIGBtZWV0aW5nLnNlbGZgIC0gTG9jYWwgUGFydGljaXBhbnQKCmBgYHR5cGVzY3JpcHQKLy8gUHJvcGVydGllczogaWQsIHVzZXJJZCwgbmFtZSwgYXVkaW9FbmFibGVkLCB2aWRlb0VuYWJsZWQsIHNjcmVlblNoYXJlRW5hYmxlZCwgYXVkaW9UcmFjaywgdmlkZW9UcmFjaywgc2NyZWVuU2hhcmVUcmFja3MsIHJvb21Kb2luZWQsIHJvb21TdGF0ZQovLyBNZXRob2RzCmF3YWl0IG1lZXRpbmcuc2VsZi5lbmFibGVBdWRpbygpIC8gZGlzYWJsZUF1ZGlvKCkgLyBlbmFibGVWaWRlbygpIC8gZGlzYWJsZVZpZGVvKCkgLyBlbmFibGVTY3JlZW5TaGFyZSgpIC8gZGlzYWJsZVNjcmVlblNoYXJlKCkKYXdhaXQgbWVldGluZy5zZWxmLnNldE5hbWUoIk5hbWUiKSAgLy8gQmVmb3JlIGpvaW4gb25seQphd2FpdCBtZWV0aW5nLnNlbGYuc2V0RGV2aWNlKGRldmljZSkKY29uc3QgZGV2aWNlcyA9IGF3YWl0IG1lZXRpbmcuc2VsZi5nZXRBbGxEZXZpY2VzKCkgLyBnZXRBdWRpb0RldmljZXMoKSAvIGdldFZpZGVvRGV2aWNlcygpIC8gZ2V0U3BlYWtlckRldmljZXMoKQovLyBFdmVudHM6ICdyb29tSm9pbmVkJywgJ2F1ZGlvVXBkYXRlJywgJ3ZpZGVvVXBkYXRlJywgJ3NjcmVlblNoYXJlVXBkYXRlJywgJ2RldmljZVVwZGF0ZScsICdkZXZpY2VMaXN0VXBkYXRlJwptZWV0aW5nLnNlbGYub24oJ3Jvb21Kb2luZWQnLCAoKSA9PiB7fSkKbWVldGluZy5zZWxmLm9uKCdhdWRpb1VwZGF0ZScsICh7IGF1ZGlvRW5hYmxlZCwgYXVkaW9UcmFjayB9KSA9PiB7fSkKYGBgCgojIyMgYG1lZXRpbmcucGFydGljaXBhbnRzYCAtIFJlbW90ZSBQYXJ0aWNpcGFudHMKCioqQ29sbGVjdGlvbnMqKjoKYGBgdHlwZXNjcmlwdAptZWV0aW5nLnBhcnRpY2lwYW50cy5qb2luZWQgLyBhY3RpdmUgLyB3YWl0bGlzdGVkIC8gcGlubmVkICAvLyBNYXBzCmNvbnN0IHBhcnRpY2lwYW50cyA9IG1lZXRpbmcucGFydGljaXBhbnRzLmpvaW5lZC50b0FycmF5KCkKY29uc3QgY291bnQgPSBtZWV0aW5nLnBhcnRpY2lwYW50cy5qb2luZWQuc2l6ZSgpCmNvbnN0IHAgPSBtZWV0aW5nLnBhcnRpY2lwYW50cy5qb2luZWQuZ2V0KCdwZWVyLWlkJykKYGBgCgoqKlBhcnRpY2lwYW50IFByb3BlcnRpZXMqKjoKYGBgdHlwZXNjcmlwdApwYXJ0aWNpcGFudC5pZCAvIHVzZXJJZCAvIG5hbWUKcGFydGljaXBhbnQuYXVkaW9FbmFibGVkIC8gdmlkZW9FbmFibGVkIC8gc2NyZWVuU2hhcmVFbmFibGVkCnBhcnRpY2lwYW50LmF1ZGlvVHJhY2sgLyB2aWRlb1RyYWNrIC8gc2NyZWVuU2hhcmVUcmFja3MKYGBgCgoqKkV2ZW50cyoqOgpgYGB0eXBlc2NyaXB0Cm1lZXRpbmcucGFydGljaXBhbnRzLmpvaW5lZC5vbigncGFydGljaXBhbnRKb2luZWQnLCAocGFydGljaXBhbnQpID0+IHt9KQptZWV0aW5nLnBhcnRpY2lwYW50cy5qb2luZWQub24oJ3BhcnRpY2lwYW50TGVmdCcsIChwYXJ0aWNpcGFudCkgPT4ge30pCmBgYAoKIyMjIGBtZWV0aW5nLm1ldGFgIC0gTWV0YWRhdGEKYGBgdHlwZXNjcmlwdAptZWV0aW5nLm1ldGEubWVldGluZ0lkIC8gbWVldGluZ1RpdGxlIC8gbWVldGluZ1N0YXJ0ZWRUaW1lc3RhbXAKYGBgCgojIyMgYG1lZXRpbmcuY2hhdGAgLSBDaGF0CmBgYHR5cGVzY3JpcHQKbWVldGluZy5jaGF0Lm1lc3NhZ2VzICAvLyBBcnJheQphd2FpdCBtZWV0aW5nLmNoYXQuc2VuZFRleHRNZXNzYWdlKCJIZWxsbyIpIC8gc2VuZEltYWdlTWVzc2FnZShmaWxlKQptZWV0aW5nLmNoYXQub24oJ2NoYXRVcGRhdGUnLCAoeyBtZXNzYWdlLCBtZXNzYWdlcyB9KSA9PiB7fSkKYGBgCgojIyMgYG1lZXRpbmcucG9sbHNgIC0gUG9sbGluZwpgYGB0eXBlc2NyaXB0Cm1lZXRpbmcucG9sbHMuaXRlbXMgIC8vIEFycmF5CmF3YWl0IG1lZXRpbmcucG9sbHMuY3JlYXRlKHF1ZXN0aW9uLCBvcHRpb25zLCBhbm9ueW1vdXMsIGhpZGVWb3RlcykKYXdhaXQgbWVldGluZy5wb2xscy52b3RlKHBvbGxJZCwgb3B0aW9uSW5kZXgpCmBgYAoKIyMjIGBtZWV0aW5nLnBsdWdpbnNgIC0gQ29sbGFib3JhdGl2ZSBBcHBzCmBgYHR5cGVzY3JpcHQKbWVldGluZy5wbHVnaW5zLmFsbCAgLy8gQXJyYXkKYXdhaXQgbWVldGluZy5wbHVnaW5zLmFjdGl2YXRlKHBsdWdpbklkKSAvIGRlYWN0aXZhdGUoKQpgYGAKCiMjIyBgbWVldGluZy5haWAgLSBBSSBGZWF0dXJlcwpgYGB0eXBlc2NyaXB0Cm1lZXRpbmcuYWkudHJhbnNjcmlwdHMgIC8vIExpdmUgdHJhbnNjcmlwdGlvbnMgKHdoZW4gZW5hYmxlZCBpbiBQcmVzZXQpCmBgYAoKIyMjIENvcmUgTWV0aG9kcwpgYGB0eXBlc2NyaXB0CmF3YWl0IG1lZXRpbmcuam9pbigpICAgLy8gRW1pdHMgJ3Jvb21Kb2luZWQnIG9uIG1lZXRpbmcuc2VsZgphd2FpdCBtZWV0aW5nLmxlYXZlKCkKYGBgCgojIyBUeXBlU2NyaXB0IFR5cGVzCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB0eXBlIHsgUmVhbHRpbWVLaXRDbGllbnQsIFN0YXRlcywgVUlDb25maWcsIFBhcnRpY2lwYW50IH0gZnJvbSAnQGNsb3VkZmxhcmUvcmVhbHRpbWVraXQnOwoKLy8gTWFpbiBpbnRlcmZhY2UKaW50ZXJmYWNlIFJlYWx0aW1lS2l0Q2xpZW50IHsKICBzZWxmOiBTZWxmU3RhdGU7ICAgICAgICAgIC8vIExvY2FsIHBhcnRpY2lwYW50IChpZCwgdXNlcklkLCBuYW1lLCBhdWRpb0VuYWJsZWQsIHZpZGVvRW5hYmxlZCwgcm9vbUpvaW5lZCwgcm9vbVN0YXRlKQogIHBhcnRpY2lwYW50czogeyBqb2luZWQsIGFjdGl2ZSwgd2FpdGxpc3RlZCwgcGlubmVkIH07ICAvLyBSZWFjdGl2ZSBNYXBzCiAgY2hhdDogQ2hhdE5hbWVzcGFjZTsgICAgICAvLyBtZXNzYWdlc1tdLCBzZW5kVGV4dE1lc3NhZ2UoKSwgc2VuZEltYWdlTWVzc2FnZSgpCiAgcG9sbHM6IFBvbGxzTmFtZXNwYWNlOyAgICAvLyBpdGVtc1tdLCBjcmVhdGUoKSwgdm90ZSgpCiAgcGx1Z2luczogUGx1Z2luc05hbWVzcGFjZTsgIC8vIGFsbFtdLCBhY3RpdmF0ZSgpLCBkZWFjdGl2YXRlKCkKICBhaTogQUlOYW1lc3BhY2U7ICAgICAgICAgIC8vIHRyYW5zY3JpcHRzW10KICBtZXRhOiBNZXRhU3RhdGU7ICAgICAgICAgIC8vIG1lZXRpbmdJZCwgbWVldGluZ1RpdGxlLCBtZWV0aW5nU3RhcnRlZFRpbWVzdGFtcAogIGpvaW4oKTogUHJvbWlzZTx2b2lkPjsKICBsZWF2ZSgpOiBQcm9taXNlPHZvaWQ+Owp9CgovLyBQYXJ0aWNpcGFudCAoc2VsZiAmIHJlbW90ZSBzaGFyZSBzYW1lIHNoYXBlKQppbnRlcmZhY2UgUGFydGljaXBhbnQgewogIGlkOiBzdHJpbmc7ICAgICAgICAgICAgICAgICAgICAgIC8vIFBlZXIgSUQgKGNoYW5nZXMgb24gcmVqb2luKQogIHVzZXJJZDogc3RyaW5nOyAgICAgICAgICAgICAgICAgIC8vIFBlcnNpc3RlbnQgcGFydGljaXBhbnQgSUQKICBuYW1lOiBzdHJpbmc7CiAgYXVkaW9FbmFibGVkOiBib29sZWFuOwogIHZpZGVvRW5hYmxlZDogYm9vbGVhbjsKICBzY3JlZW5TaGFyZUVuYWJsZWQ6IGJvb2xlYW47CiAgYXVkaW9UcmFjazogTWVkaWFTdHJlYW1UcmFjayB8IG51bGw7CiAgdmlkZW9UcmFjazogTWVkaWFTdHJlYW1UcmFjayB8IG51bGw7CiAgc2NyZWVuU2hhcmVUcmFja3M6IE1lZGlhU3RyZWFtVHJhY2tbXTsKfQpgYGAKCiMjIFN0b3JlIEFyY2hpdGVjdHVyZQoKUmVhbHRpbWVLaXQgdXNlcyByZWFjdGl2ZSBzdG9yZSAoZXZlbnQtZHJpdmVuIHVwZGF0ZXMsIGxpdmUgTWFwcyk6CgpgYGB0eXBlc2NyaXB0Ci8vIFN1YnNjcmliZSB0byBzdGF0ZSBjaGFuZ2VzCm1lZXRpbmcuc2VsZi5vbignYXVkaW9VcGRhdGUnLCAoeyBhdWRpb0VuYWJsZWQsIGF1ZGlvVHJhY2sgfSkgPT4ge30pOwptZWV0aW5nLnBhcnRpY2lwYW50cy5qb2luZWQub24oJ3BhcnRpY2lwYW50Sm9pbmVkJywgKHApID0+IHt9KTsKCi8vIEFjY2VzcyBjdXJyZW50IHN0YXRlIHN5bmNocm9ub3VzbHkKY29uc3QgaXNBdWRpb09uID0gbWVldGluZy5zZWxmLmF1ZGlvRW5hYmxlZDsKY29uc3QgY291bnQgPSBtZWV0aW5nLnBhcnRpY2lwYW50cy5qb2luZWQuc2l6ZSgpOwpgYGAKCioqS2V5IHByaW5jaXBsZXM6KiogU3RhdGUgdXBkYXRlcyBlbWl0IGV2ZW50cyBhZnRlciBjaGFuZ2VzLiBVc2UgYC50b0FycmF5KClgIHNwYXJpbmdseS4gQ29sbGVjdGlvbnMgYXJlIGxpdmUgTWFwcy4KCiMjIFJFU1QgQVBJCgpCYXNlOiBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS9yZWFsdGltZS9raXQve2FwcF9pZH1gCgojIyMgTWVldGluZ3MKYGBgYmFzaApHRVQgICAgL21lZXRpbmdzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBMaXN0IGFsbApHRVQgICAgL21lZXRpbmdzL3ttZWV0aW5nX2lkfSAgICAgICAgICAgICAgICAgICAgICAgIyBHZXQgZGV0YWlscwpQT1NUICAgL21lZXRpbmdzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBDcmVhdGU6IHsidGl0bGUiOiAiLi4uIn0KUEFUQ0ggIC9tZWV0aW5ncy97bWVldGluZ19pZH0gICAgICAgICAgICAgICAgICAgICAgICMgVXBkYXRlOiB7InRpdGxlIjogIi4uLiIsICJyZWNvcmRfb25fc3RhcnQiOiB0cnVlfQpgYGAKCiMjIyBQYXJ0aWNpcGFudHMKYGBgYmFzaApHRVQgICAgL21lZXRpbmdzL3ttZWV0aW5nX2lkfS9wYXJ0aWNpcGFudHMgICAgICAgICAgICAgICAgICAgICAgICAgICMgTGlzdCBhbGwKR0VUICAgIC9tZWV0aW5ncy97bWVldGluZ19pZH0vcGFydGljaXBhbnRzL3twYXJ0aWNpcGFudF9pZH0gICAgICAgICAjIEdldCBkZXRhaWxzClBPU1QgICAvbWVldGluZ3Mve21lZXRpbmdfaWR9L3BhcnRpY2lwYW50cyAgICAgICAgICAgICAgICAgICAgICAgICAgIyBBZGQ6IHsibmFtZSI6ICIuLi4iLCAicHJlc2V0X25hbWUiOiAiLi4uIiwgImN1c3RvbV9wYXJ0aWNpcGFudF9pZCI6ICIuLi4ifQpQQVRDSCAgL21lZXRpbmdzL3ttZWV0aW5nX2lkfS9wYXJ0aWNpcGFudHMve3BhcnRpY2lwYW50X2lkfSAgICAgICAgICMgVXBkYXRlOiB7Im5hbWUiOiAiLi4uIiwgInByZXNldF9uYW1lIjogIi4uLiJ9CkRFTEVURSAvbWVldGluZ3Mve21lZXRpbmdfaWR9L3BhcnRpY2lwYW50cy97cGFydGljaXBhbnRfaWR9ICAgICAgICAgIyBEZWxldGUKUE9TVCAgIC9tZWV0aW5ncy97bWVldGluZ19pZH0vcGFydGljaXBhbnRzL3twYXJ0aWNpcGFudF9pZH0vdG9rZW4gICAjIFJlZnJlc2ggdG9rZW4KYGBgCgojIyMgQWN0aXZlIFNlc3Npb24KYGBgYmFzaApHRVQgIC9tZWV0aW5ncy97bWVldGluZ19pZH0vYWN0aXZlLXNlc3Npb24gICAgICAgICAgICAgICAjIEdldCBhY3RpdmUgc2Vzc2lvbgpQT1NUIC9tZWV0aW5ncy97bWVldGluZ19pZH0vYWN0aXZlLXNlc3Npb24va2ljayAgICAgICAgICAjIEtpY2sgdXNlcnM6IHsidXNlcl9pZHMiOiBbImlkMSIsICJpZDIiXX0KUE9TVCAvbWVldGluZ3Mve21lZXRpbmdfaWR9L2FjdGl2ZS1zZXNzaW9uL2tpY2stYWxsICAgICAgIyBLaWNrIGFsbApQT1NUIC9tZWV0aW5ncy97bWVldGluZ19pZH0vYWN0aXZlLXNlc3Npb24vcG9sbCAgICAgICAgICAjIENyZWF0ZSBwb2xsOiB7InF1ZXN0aW9uIjogIi4uLiIsICJvcHRpb25zIjogWy4uLl0sICJhbm9ueW1vdXMiOiBmYWxzZX0KYGBgCgojIyMgUmVjb3JkaW5nCmBgYGJhc2gKR0VUICAvcmVjb3JkaW5ncz9tZWV0aW5nX2lkPXttZWV0aW5nX2lkfSAgICAgICAgICAgICAgICAgIyBMaXN0IHJlY29yZGluZ3MKR0VUICAvcmVjb3JkaW5ncy9hY3RpdmUtcmVjb3JkaW5nL3ttZWV0aW5nX2lkfSAgICAgICAgICAgIyBHZXQgYWN0aXZlIHJlY29yZGluZwpQT1NUIC9yZWNvcmRpbmdzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFN0YXJ0OiB7Im1lZXRpbmdfaWQiOiAiLi4uIiwgInR5cGUiOiAiY29tcG9zaXRlIn0gKG9yICJ0cmFjayIpClBVVCAgL3JlY29yZGluZ3Mve3JlY29yZGluZ19pZH0gICAgICAgICAgICAgICAgICAgICAgICAgICMgQ29udHJvbDogeyJhY3Rpb24iOiAicGF1c2UifSAob3IgInJlc3VtZSIsICJzdG9wIikKUE9TVCAvcmVjb3JkaW5ncy90cmFjayAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBUcmFjayByZWNvcmRpbmc6IHsibWVldGluZ19pZCI6ICIuLi4iLCAibGF5ZXJzIjogWy4uLl19CmBgYAoKIyMjIExpdmVzdHJlYW1pbmcKYGBgYmFzaApHRVQgIC9saXZlc3RyZWFtcz9leGNsdWRlX21lZXRpbmdzPWZhbHNlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIExpc3QgYWxsCkdFVCAgL2xpdmVzdHJlYW1zL3tsaXZlc3RyZWFtX2lkfSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgR2V0IGRldGFpbHMKUE9TVCAvbWVldGluZ3Mve21lZXRpbmdfaWR9L2xpdmVzdHJlYW1zICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBTdGFydCBmb3IgbWVldGluZwpQT1NUIC9tZWV0aW5ncy97bWVldGluZ19pZH0vYWN0aXZlLWxpdmVzdHJlYW0vc3RvcCAgICAgICAgICAgICAgICAgICAgICAjIFN0b3AKUE9TVCAvbGl2ZXN0cmVhbXMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBDcmVhdGUgaW5kZXBlbmRlbnQ6IHJldHVybnMge2luZ2VzdF9zZXJ2ZXIsIHN0cmVhbV9rZXksIHBsYXliYWNrX3VybH0KYGBgCgojIyMgU2Vzc2lvbnMgJiBBbmFseXRpY3MKYGBgYmFzaApHRVQgIC9zZXNzaW9ucyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIExpc3QgYWxsCkdFVCAgL3Nlc3Npb25zL3tzZXNzaW9uX2lkfSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgR2V0IGRldGFpbHMKR0VUICAvc2Vzc2lvbnMve3Nlc3Npb25faWR9L3BhcnRpY2lwYW50cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBMaXN0IHBhcnRpY2lwYW50cwpHRVQgIC9zZXNzaW9ucy97c2Vzc2lvbl9pZH0vcGFydGljaXBhbnRzL3twYXJ0aWNpcGFudF9pZH0gICAgICAgICAgICAgICAjIENhbGwgc3RhdHMKR0VUICAvc2Vzc2lvbnMve3Nlc3Npb25faWR9L2NoYXQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBEb3dubG9hZCBjaGF0IENTVgpHRVQgIC9zZXNzaW9ucy97c2Vzc2lvbl9pZH0vdHJhbnNjcmlwdCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIERvd25sb2FkIHRyYW5zY3JpcHQgQ1NWCkdFVCAgL3Nlc3Npb25zL3tzZXNzaW9uX2lkfS9zdW1tYXJ5ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgR2V0IHN1bW1hcnkKUE9TVCAvc2Vzc2lvbnMve3Nlc3Npb25faWR9L3N1bW1hcnkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBHZW5lcmF0ZSBzdW1tYXJ5CkdFVCAgL2FuYWx5dGljcy9kYXl3aXNlP3N0YXJ0X2RhdGU9WVlZWS1NTS1ERCZlbmRfZGF0ZT1ZWVlZLU1NLUREICAgICAgIyBEYXktd2lzZSBhbmFseXRpY3MKR0VUICAvYW5hbHl0aWNzL2xpdmVzdHJlYW1zL292ZXJhbGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBMaXZlc3RyZWFtIGFuYWx5dGljcwpgYGAKCiMjIyBXZWJob29rcwpgYGBiYXNoCkdFVCAgICAvd2ViaG9va3MgICAgICAgICAgICAgICAgICAgICMgTGlzdCBhbGwKUE9TVCAgIC93ZWJob29rcyAgICAgICAgICAgICAgICAgICAgIyBDcmVhdGU6IHsidXJsIjogImh0dHBzOi8vLi4uIiwgImV2ZW50cyI6IFsic2Vzc2lvbi5zdGFydGVkIiwgInNlc3Npb24uZW5kZWQiXX0KUEFUQ0ggIC93ZWJob29rcy97d2ViaG9va19pZH0gICAgICAgIyBVcGRhdGUKREVMRVRFIC93ZWJob29rcy97d2ViaG9va19pZH0gICAgICAgIyBEZWxldGUKYGBgCgojIyBTZXNzaW9uIExpZmVjeWNsZQoKYGBgCkluaXRpYWxpemF0aW9uIOKGkiBKb2luIEludGVudCDihpIgW1dhaXRsaXN0P10g4oaSIE1lZXRpbmcgU2NyZWVuIChTdGFnZSkg4oaSIEVuZGVkCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4oaTIEFwcHJvdmVkCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBbUmVqZWN0ZWQg4oaSIEVuZGVkXQpgYGAKClVJIEtpdCBoYW5kbGVzIHN0YXRlIHRyYW5zaXRpb25zIGF1dG9tYXRpY2FsbHkuCgojIyBTZWUgQWxzbwoKLSBbQ29uZmlndXJhdGlvbl0oLi9jb25maWd1cmF0aW9uLm1kKSAtIFNldHVwIGFuZCBpbnN0YWxsYXRpb24KLSBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpIC0gVXNhZ2UgZXhhbXBsZXMKLSBbUkVBRE1FXSguL1JFQURNRS5tZCkgLSBPdmVydmlldyBhbmQgcXVpY2sgc3RhcnQK
+# RealtimeKit API Reference
+
+Complete API reference for Meeting object, REST endpoints, and SDK methods.
+
+## Meeting Object API
+
+### `meeting.self` - Local Participant
+
+```typescript
+// Properties: id, userId, name, audioEnabled, videoEnabled, screenShareEnabled, audioTrack, videoTrack, screenShareTracks, roomJoined, roomState
+// Methods
+await meeting.self.enableAudio() / disableAudio() / enableVideo() / disableVideo() / enableScreenShare() / disableScreenShare()
+await meeting.self.setName("Name")  // Before join only
+await meeting.self.setDevice(device)
+const devices = await meeting.self.getAllDevices() / getAudioDevices() / getVideoDevices() / getSpeakerDevices()
+// Events: 'roomJoined', 'audioUpdate', 'videoUpdate', 'screenShareUpdate', 'deviceUpdate', 'deviceListUpdate'
+meeting.self.on('roomJoined', () => {})
+meeting.self.on('audioUpdate', ({ audioEnabled, audioTrack }) => {})
+```
+
+### `meeting.participants` - Remote Participants
+
+**Collections**:
+```typescript
+meeting.participants.joined / active / waitlisted / pinned  // Maps
+const participants = meeting.participants.joined.toArray()
+const count = meeting.participants.joined.size()
+const p = meeting.participants.joined.get('peer-id')
+```
+
+**Participant Properties**:
+```typescript
+participant.id / userId / name
+participant.audioEnabled / videoEnabled / screenShareEnabled
+participant.audioTrack / videoTrack / screenShareTracks
+```
+
+**Events**:
+```typescript
+meeting.participants.joined.on('participantJoined', (participant) => {})
+meeting.participants.joined.on('participantLeft', (participant) => {})
+```
+
+### `meeting.meta` - Metadata
+```typescript
+meeting.meta.meetingId / meetingTitle / meetingStartedTimestamp
+```
+
+### `meeting.chat` - Chat
+```typescript
+meeting.chat.messages  // Array
+await meeting.chat.sendTextMessage("Hello") / sendImageMessage(file)
+meeting.chat.on('chatUpdate', ({ message, messages }) => {})
+```
+
+### `meeting.polls` - Polling
+```typescript
+meeting.polls.items  // Array
+await meeting.polls.create(question, options, anonymous, hideVotes)
+await meeting.polls.vote(pollId, optionIndex)
+```
+
+### `meeting.plugins` - Collaborative Apps
+```typescript
+meeting.plugins.all  // Array
+await meeting.plugins.activate(pluginId) / deactivate()
+```
+
+### `meeting.ai` - AI Features
+```typescript
+meeting.ai.transcripts  // Live transcriptions (when enabled in Preset)
+```
+
+### Core Methods
+```typescript
+await meeting.join()   // Emits 'roomJoined' on meeting.self
+await meeting.leave()
+```
+
+## TypeScript Types
+
+```typescript
+import type { RealtimeKitClient, States, UIConfig, Participant } from '@cloudflare/realtimekit';
+
+// Main interface
+interface RealtimeKitClient {
+  self: SelfState;          // Local participant (id, userId, name, audioEnabled, videoEnabled, roomJoined, roomState)
+  participants: { joined, active, waitlisted, pinned };  // Reactive Maps
+  chat: ChatNamespace;      // messages[], sendTextMessage(), sendImageMessage()
+  polls: PollsNamespace;    // items[], create(), vote()
+  plugins: PluginsNamespace;  // all[], activate(), deactivate()
+  ai: AINamespace;          // transcripts[]
+  meta: MetaState;          // meetingId, meetingTitle, meetingStartedTimestamp
+  join(): Promise<void>;
+  leave(): Promise<void>;
+}
+
+// Participant (self & remote share same shape)
+interface Participant {
+  id: string;                      // Peer ID (changes on rejoin)
+  userId: string;                  // Persistent participant ID
+  name: string;
+  audioEnabled: boolean;
+  videoEnabled: boolean;
+  screenShareEnabled: boolean;
+  audioTrack: MediaStreamTrack | null;
+  videoTrack: MediaStreamTrack | null;
+  screenShareTracks: MediaStreamTrack[];
+}
+```
+
+## Store Architecture
+
+RealtimeKit uses reactive store (event-driven updates, live Maps):
+
+```typescript
+// Subscribe to state changes
+meeting.self.on('audioUpdate', ({ audioEnabled, audioTrack }) => {});
+meeting.participants.joined.on('participantJoined', (p) => {});
+
+// Access current state synchronously
+const isAudioOn = meeting.self.audioEnabled;
+const count = meeting.participants.joined.size();
+```
+
+**Key principles:** State updates emit events after changes. Use `.toArray()` sparingly. Collections are live Maps.
+
+## REST API
+
+Base: `https://api.cloudflare.com/client/v4/accounts/{account_id}/realtime/kit/{app_id}`
+
+### Meetings
+```bash
+GET    /meetings                                    # List all
+GET    /meetings/{meeting_id}                       # Get details
+POST   /meetings                                    # Create: {"title": "..."}
+PATCH  /meetings/{meeting_id}                       # Update: {"title": "...", "record_on_start": true}
+```
+
+### Participants
+```bash
+GET    /meetings/{meeting_id}/participants                          # List all
+GET    /meetings/{meeting_id}/participants/{participant_id}         # Get details
+POST   /meetings/{meeting_id}/participants                          # Add: {"name": "...", "preset_name": "...", "custom_participant_id": "..."}
+PATCH  /meetings/{meeting_id}/participants/{participant_id}         # Update: {"name": "...", "preset_name": "..."}
+DELETE /meetings/{meeting_id}/participants/{participant_id}         # Delete
+POST   /meetings/{meeting_id}/participants/{participant_id}/token   # Refresh token
+```
+
+### Active Session
+```bash
+GET  /meetings/{meeting_id}/active-session               # Get active session
+POST /meetings/{meeting_id}/active-session/kick          # Kick users: {"user_ids": ["id1", "id2"]}
+POST /meetings/{meeting_id}/active-session/kick-all      # Kick all
+POST /meetings/{meeting_id}/active-session/poll          # Create poll: {"question": "...", "options": [...], "anonymous": false}
+```
+
+### Recording
+```bash
+GET  /recordings?meeting_id={meeting_id}                 # List recordings
+GET  /recordings/active-recording/{meeting_id}           # Get active recording
+POST /recordings                                         # Start: {"meeting_id": "...", "type": "composite"} (or "track")
+PUT  /recordings/{recording_id}                          # Control: {"action": "pause"} (or "resume", "stop")
+POST /recordings/track                                   # Track recording: {"meeting_id": "...", "layers": [...]}
+```
+
+### Livestreaming
+```bash
+GET  /livestreams?exclude_meetings=false                                # List all
+GET  /livestreams/{livestream_id}                                       # Get details
+POST /meetings/{meeting_id}/livestreams                                 # Start for meeting
+POST /meetings/{meeting_id}/active-livestream/stop                      # Stop
+POST /livestreams                                                       # Create independent: returns {ingest_server, stream_key, playback_url}
+```
+
+### Sessions & Analytics
+```bash
+GET  /sessions                                                          # List all
+GET  /sessions/{session_id}                                             # Get details
+GET  /sessions/{session_id}/participants                                # List participants
+GET  /sessions/{session_id}/participants/{participant_id}               # Call stats
+GET  /sessions/{session_id}/chat                                        # Download chat CSV
+GET  /sessions/{session_id}/transcript                                  # Download transcript CSV
+GET  /sessions/{session_id}/summary                                     # Get summary
+POST /sessions/{session_id}/summary                                     # Generate summary
+GET  /analytics/daywise?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD      # Day-wise analytics
+GET  /analytics/livestreams/overall                                     # Livestream analytics
+```
+
+### Webhooks
+```bash
+GET    /webhooks                    # List all
+POST   /webhooks                    # Create: {"url": "https://...", "events": ["session.started", "session.ended"]}
+PATCH  /webhooks/{webhook_id}       # Update
+DELETE /webhooks/{webhook_id}       # Delete
+```
+
+## Session Lifecycle
+
+```
+Initialization → Join Intent → [Waitlist?] → Meeting Screen (Stage) → Ended
+                                   ↓ Approved
+                               [Rejected → Ended]
+```
+
+UI Kit handles state transitions automatically.
+
+## See Also
+
+- [Configuration](./configuration.md) - Setup and installation
+- [Patterns](./patterns.md) - Usage examples
+- [README](./README.md) - Overview and quick start

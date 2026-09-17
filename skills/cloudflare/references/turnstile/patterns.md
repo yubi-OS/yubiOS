@@ -1,1 +1,193 @@
-IyBDb21tb24gUGF0dGVybnMKCiMjIEZvcm0gSW50ZWdyYXRpb24KCiMjIyBCYXNpYyBGb3JtIChJbXBsaWNpdCBSZW5kZXJpbmcpCgpgYGBodG1sCjwhRE9DVFlQRSBodG1sPgo8aHRtbD4KPGhlYWQ+CiAgPHNjcmlwdCBzcmM9Imh0dHBzOi8vY2hhbGxlbmdlcy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvdjAvYXBpLmpzIiBhc3luYyBkZWZlcj48L3NjcmlwdD4KPC9oZWFkPgo8Ym9keT4KICA8Zm9ybSBhY3Rpb249Ii9zdWJtaXQiIG1ldGhvZD0iUE9TVCI+CiAgICA8aW5wdXQgdHlwZT0iZW1haWwiIG5hbWU9ImVtYWlsIiByZXF1aXJlZD4KICAgIDxkaXYgY2xhc3M9ImNmLXR1cm5zdGlsZSIgZGF0YS1zaXRla2V5PSJZT1VSX1NJVEVfS0VZIj48L2Rpdj4KICAgIDxidXR0b24gdHlwZT0ic3VibWl0Ij5TdWJtaXQ8L2J1dHRvbj4KICA8L2Zvcm0+CjwvYm9keT4KPC9odG1sPgpgYGAKCiMjIyBDb250cm9sbGVkIEZvcm0gKEV4cGxpY2l0IFJlbmRlcmluZykKCmBgYGphdmFzY3JpcHQKPHNjcmlwdCBzcmM9Imh0dHBzOi8vY2hhbGxlbmdlcy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvdjAvYXBpLmpzP3JlbmRlcj1leHBsaWNpdCI+PC9zY3JpcHQ+CjxzY3JpcHQ+CmxldCB3aWRnZXRJZCA9IHdpbmRvdy50dXJuc3RpbGUucmVuZGVyKCcjY29udGFpbmVyJywgewogIHNpdGVrZXk6ICdZT1VSX1NJVEVfS0VZJywKICBjYWxsYmFjazogKHRva2VuKSA9PiBjb25zb2xlLmxvZygnVG9rZW46JywgdG9rZW4pCn0pOwoKZm9ybS5hZGRFdmVudExpc3RlbmVyKCdzdWJtaXQnLCBhc3luYyAoZSkgPT4gewogIGUucHJldmVudERlZmF1bHQoKTsKICBjb25zdCB0b2tlbiA9IHdpbmRvdy50dXJuc3RpbGUuZ2V0UmVzcG9uc2Uod2lkZ2V0SWQpOwogIGlmICghdG9rZW4pIHJldHVybjsKICAKICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKCcvc3VibWl0JywgewogICAgbWV0aG9kOiAnUE9TVCcsCiAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7ICdjZi10dXJuc3RpbGUtcmVzcG9uc2UnOiB0b2tlbiB9KQogIH0pOwogIAogIGlmICghcmVzcG9uc2Uub2spIHdpbmRvdy50dXJuc3RpbGUucmVzZXQod2lkZ2V0SWQpOwp9KTsKPC9zY3JpcHQ+CmBgYAoKIyMgRnJhbWV3b3JrIFBhdHRlcm5zCgojIyMgUmVhY3QKCmBgYHRzeAppbXBvcnQgeyB1c2VTdGF0ZSB9IGZyb20gJ3JlYWN0JzsKaW1wb3J0IFR1cm5zdGlsZSBmcm9tICdAbWFyc2lkZXYvcmVhY3QtdHVybnN0aWxlJzsKCmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEZvcm0oKSB7CiAgY29uc3QgW3Rva2VuLCBzZXRUb2tlbl0gPSB1c2VTdGF0ZTxzdHJpbmcgfCBudWxsPihudWxsKTsKCiAgcmV0dXJuICgKICAgIDxmb3JtIG9uU3VibWl0PXthc3luYyAoZSkgPT4gewogICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgIGlmICghdG9rZW4pIHJldHVybjsKICAgICAgYXdhaXQgZmV0Y2goJy9hcGkvc3VibWl0JywgeyAKICAgICAgICBtZXRob2Q6ICdQT1NUJywKICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7ICdjZi10dXJuc3RpbGUtcmVzcG9uc2UnOiB0b2tlbiB9KQogICAgICB9KTsKICAgIH19PgogICAgICA8VHVybnN0aWxlIHNpdGVLZXk9IllPVVJfU0lURV9LRVkiIG9uU3VjY2Vzcz17c2V0VG9rZW59IC8+CiAgICAgIDxidXR0b24gZGlzYWJsZWQ9eyF0b2tlbn0+U3VibWl0PC9idXR0b24+CiAgICA8L2Zvcm0+CiAgKTsKfQpgYGAKCiMjIyBWdWUgLyBTdmVsdGUKCmBgYHZ1ZQo8IS0tIFZ1ZTogbnBtIGluc3RhbGwgdnVlLXR1cm5zdGlsZSAtLT4KPFZ1ZVR1cm5zdGlsZSA6c2l0ZS1rZXk9IlNJVEVfS0VZIiBAc3VjY2Vzcz0idG9rZW4gPSAkZXZlbnQiIC8+Cgo8IS0tIFN2ZWx0ZTogbnBtIGluc3RhbGwgc3ZlbHRlLXR1cm5zdGlsZSAtLT4KPFR1cm5zdGlsZSBzaXRlS2V5PXtTSVRFX0tFWX0gb246dHVybnN0aWxlLWNhbGxiYWNrPXsoZSkgPT4gdG9rZW4gPSBlLmRldGFpbC50b2tlbn0gLz4KYGBgCgojIyBTZXJ2ZXIgVmFsaWRhdGlvbgoKIyMjIENsb3VkZmxhcmUgV29ya2VycwoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBUVVJOU1RJTEVfU0VDUkVUOiBzdHJpbmc7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGlmIChyZXF1ZXN0Lm1ldGhvZCAhPT0gJ1BPU1QnKSB7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ01ldGhvZCBub3QgYWxsb3dlZCcsIHsgc3RhdHVzOiA0MDUgfSk7CiAgICB9CiAgICAKICAgIGNvbnN0IGZvcm1EYXRhID0gYXdhaXQgcmVxdWVzdC5mb3JtRGF0YSgpOwogICAgY29uc3QgdG9rZW4gPSBmb3JtRGF0YS5nZXQoJ2NmLXR1cm5zdGlsZS1yZXNwb25zZScpOwogICAgCiAgICBpZiAoIXRva2VuKSB7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ01pc3NpbmcgdG9rZW4nLCB7IHN0YXR1czogNDAwIH0pOwogICAgfQogICAgCiAgICAvLyBWYWxpZGF0ZSB0b2tlbgogICAgY29uc3QgaXAgPSByZXF1ZXN0LmhlYWRlcnMuZ2V0KCdDRi1Db25uZWN0aW5nLUlQJyk7CiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBmZXRjaCgnaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5JywgewogICAgICBtZXRob2Q6ICdQT1NUJywKICAgICAgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nIH0sCiAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsKICAgICAgICBzZWNyZXQ6IGVudi5UVVJOU1RJTEVfU0VDUkVULAogICAgICAgIHJlc3BvbnNlOiB0b2tlbiwKICAgICAgICByZW1vdGVpcDogaXAKICAgICAgfSkKICAgIH0pOwogICAgCiAgICBjb25zdCB2YWxpZGF0aW9uID0gYXdhaXQgcmVzdWx0Lmpzb24oKTsKICAgIAogICAgaWYgKCF2YWxpZGF0aW9uLnN1Y2Nlc3MpIHsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnQ0FQVENIQSB2YWxpZGF0aW9uIGZhaWxlZCcsIHsgc3RhdHVzOiA0MDMgfSk7CiAgICB9CiAgICAKICAgIC8vIFByb2Nlc3MgZm9ybS4uLgogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnU3VjY2VzcycpOwogIH0KfTsKYGBgCgojIyMgUGFnZXMgRnVuY3Rpb25zCgpgYGB0eXBlc2NyaXB0Ci8vIGZ1bmN0aW9ucy9zdWJtaXQudHMgLSBzYW1lIHBhdHRlcm4gYXMgV29ya2VycywgdXNlIGN0eC5lbnYgYW5kIGN0eC5yZXF1ZXN0CmV4cG9ydCBjb25zdCBvblJlcXVlc3RQb3N0OiBQYWdlc0Z1bmN0aW9uPHsgVFVSTlNUSUxFX1NFQ1JFVDogc3RyaW5nIH0+ID0gYXN5bmMgKGN0eCkgPT4gewogIGNvbnN0IHRva2VuID0gKGF3YWl0IGN0eC5yZXF1ZXN0LmZvcm1EYXRhKCkpLmdldCgnY2YtdHVybnN0aWxlLXJlc3BvbnNlJyk7CiAgLy8gVmFsaWRhdGUgd2l0aCBjdHguZW52LlRVUk5TVElMRV9TRUNSRVQgKHNhbWUgYXMgV29ya2VycyBwYXR0ZXJuIGFib3ZlKQp9OwpgYGAKCiMjIEFkdmFuY2VkIFBhdHRlcm5zCgojIyMgUHJlLUNsZWFyYW5jZSAoSW52aXNpYmxlKQoKYGBgaHRtbAo8ZGl2IGlkPSJ0dXJuc3RpbGUtcHJlY2hlY2siPjwvZGl2Pgo8Zm9ybSBpZD0icHJvdGVjdGVkLWZvcm0iIHN0eWxlPSJkaXNwbGF5OiBub25lOyI+CiAgPGJ1dHRvbiB0eXBlPSJzdWJtaXQiPlN1Ym1pdDwvYnV0dG9uPgo8L2Zvcm0+Cgo8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9hcGkuanM/cmVuZGVyPWV4cGxpY2l0Ij48L3NjcmlwdD4KPHNjcmlwdD4KbGV0IGNhY2hlZFRva2VuID0gbnVsbDsKCndpbmRvdy5vbmxvYWQgPSAoKSA9PiB7CiAgd2luZG93LnR1cm5zdGlsZS5yZW5kZXIoJyN0dXJuc3RpbGUtcHJlY2hlY2snLCB7CiAgICBzaXRla2V5OiAnWU9VUl9TSVRFX0tFWScsCiAgICBzaXplOiAnaW52aXNpYmxlJywKICAgIGNhbGxiYWNrOiAodG9rZW4pID0+IHsKICAgICAgY2FjaGVkVG9rZW4gPSB0b2tlbjsKICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Byb3RlY3RlZC1mb3JtJykuc3R5bGUuZGlzcGxheSA9ICdibG9jayc7CiAgICB9CiAgfSk7Cn07Cjwvc2NyaXB0PgpgYGAKCiMjIyBUb2tlbiBSZWZyZXNoIG9uIEV4cGlyeQoKYGBgamF2YXNjcmlwdApsZXQgd2lkZ2V0SWQgPSB3aW5kb3cudHVybnN0aWxlLnJlbmRlcignI2NvbnRhaW5lcicsIHsKICBzaXRla2V5OiAnWU9VUl9TSVRFX0tFWScsCiAgJ3JlZnJlc2gtZXhwaXJlZCc6ICdtYW51YWwnLAogICdleHBpcmVkLWNhbGxiYWNrJzogKCkgPT4gewogICAgY29uc29sZS5sb2coJ1Rva2VuIGV4cGlyZWQsIHJlZnJlc2hpbmcuLi4nKTsKICAgIHdpbmRvdy50dXJuc3RpbGUucmVzZXQod2lkZ2V0SWQpOwogIH0KfSk7CmBgYAoKIyMgVGVzdGluZwoKIyMjIEVudmlyb25tZW50LUJhc2VkIEtleXMKCmBgYGphdmFzY3JpcHQKY29uc3QgU0lURV9LRVkgPSBwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gJ3Byb2R1Y3Rpb24nCiAgPyAnWU9VUl9QUk9EVUNUSU9OX1NJVEVfS0VZJwogIDogJzF4MDAwMDAwMDAwMDAwMDAwMDAwMDBBQSc7IC8vIEFsd2F5cyBwYXNzZXMKCmNvbnN0IFNFQ1JFVF9LRVkgPSBwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gJ3Byb2R1Y3Rpb24nCiAgPyBwcm9jZXNzLmVudi5UVVJOU1RJTEVfU0VDUkVUCiAgOiAnMXgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwQUEnOwpgYGAK
+# Common Patterns
+
+## Form Integration
+
+### Basic Form (Implicit Rendering)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+  <form action="/submit" method="POST">
+    <input type="email" name="email" required>
+    <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY"></div>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
+```
+
+### Controlled Form (Explicit Rendering)
+
+```javascript
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+<script>
+let widgetId = window.turnstile.render('#container', {
+  sitekey: 'YOUR_SITE_KEY',
+  callback: (token) => console.log('Token:', token)
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const token = window.turnstile.getResponse(widgetId);
+  if (!token) return;
+  
+  const response = await fetch('/submit', {
+    method: 'POST',
+    body: JSON.stringify({ 'cf-turnstile-response': token })
+  });
+  
+  if (!response.ok) window.turnstile.reset(widgetId);
+});
+</script>
+```
+
+## Framework Patterns
+
+### React
+
+```tsx
+import { useState } from 'react';
+import Turnstile from '@marsidev/react-turnstile';
+
+export default function Form() {
+  const [token, setToken] = useState<string | null>(null);
+
+  return (
+    <form onSubmit={async (e) => {
+      e.preventDefault();
+      if (!token) return;
+      await fetch('/api/submit', { 
+        method: 'POST',
+        body: JSON.stringify({ 'cf-turnstile-response': token })
+      });
+    }}>
+      <Turnstile siteKey="YOUR_SITE_KEY" onSuccess={setToken} />
+      <button disabled={!token}>Submit</button>
+    </form>
+  );
+}
+```
+
+### Vue / Svelte
+
+```vue
+<!-- Vue: npm install vue-turnstile -->
+<VueTurnstile :site-key="SITE_KEY" @success="token = $event" />
+
+<!-- Svelte: npm install svelte-turnstile -->
+<Turnstile siteKey={SITE_KEY} on:turnstile-callback={(e) => token = e.detail.token} />
+```
+
+## Server Validation
+
+### Cloudflare Workers
+
+```typescript
+interface Env {
+  TURNSTILE_SECRET: string;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    if (request.method !== 'POST') {
+      return new Response('Method not allowed', { status: 405 });
+    }
+    
+    const formData = await request.formData();
+    const token = formData.get('cf-turnstile-response');
+    
+    if (!token) {
+      return new Response('Missing token', { status: 400 });
+    }
+    
+    // Validate token
+    const ip = request.headers.get('CF-Connecting-IP');
+    const result = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: env.TURNSTILE_SECRET,
+        response: token,
+        remoteip: ip
+      })
+    });
+    
+    const validation = await result.json();
+    
+    if (!validation.success) {
+      return new Response('CAPTCHA validation failed', { status: 403 });
+    }
+    
+    // Process form...
+    return new Response('Success');
+  }
+};
+```
+
+### Pages Functions
+
+```typescript
+// functions/submit.ts - same pattern as Workers, use ctx.env and ctx.request
+export const onRequestPost: PagesFunction<{ TURNSTILE_SECRET: string }> = async (ctx) => {
+  const token = (await ctx.request.formData()).get('cf-turnstile-response');
+  // Validate with ctx.env.TURNSTILE_SECRET (same as Workers pattern above)
+};
+```
+
+## Advanced Patterns
+
+### Pre-Clearance (Invisible)
+
+```html
+<div id="turnstile-precheck"></div>
+<form id="protected-form" style="display: none;">
+  <button type="submit">Submit</button>
+</form>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+<script>
+let cachedToken = null;
+
+window.onload = () => {
+  window.turnstile.render('#turnstile-precheck', {
+    sitekey: 'YOUR_SITE_KEY',
+    size: 'invisible',
+    callback: (token) => {
+      cachedToken = token;
+      document.getElementById('protected-form').style.display = 'block';
+    }
+  });
+};
+</script>
+```
+
+### Token Refresh on Expiry
+
+```javascript
+let widgetId = window.turnstile.render('#container', {
+  sitekey: 'YOUR_SITE_KEY',
+  'refresh-expired': 'manual',
+  'expired-callback': () => {
+    console.log('Token expired, refreshing...');
+    window.turnstile.reset(widgetId);
+  }
+});
+```
+
+## Testing
+
+### Environment-Based Keys
+
+```javascript
+const SITE_KEY = process.env.NODE_ENV === 'production'
+  ? 'YOUR_PRODUCTION_SITE_KEY'
+  : '1x00000000000000000000AA'; // Always passes
+
+const SECRET_KEY = process.env.NODE_ENV === 'production'
+  ? process.env.TURNSTILE_SECRET
+  : '1x0000000000000000000000000000000AA';
+```

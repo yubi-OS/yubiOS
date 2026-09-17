@@ -1,1 +1,175 @@
-IyBXb3JrZmxvdyBQYXR0ZXJucwoKIyMgSW1hZ2UgUHJvY2Vzc2luZyBQaXBlbGluZQoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgSW1hZ2VQcm9jZXNzaW5nV29ya2Zsb3cgZXh0ZW5kcyBXb3JrZmxvd0VudHJ5cG9pbnQ8RW52LCBQYXJhbXM+IHsKICBhc3luYyBydW4oZXZlbnQsIHN0ZXApIHsKICAgIGNvbnN0IGltYWdlRGF0YSA9IGF3YWl0IHN0ZXAuZG8oJ2ZldGNoJywgYXN5bmMgKCkgPT4gKGF3YWl0IHRoaXMuZW52LkJVQ0tFVC5nZXQoZXZlbnQucGF5bG9hZC5pbWFnZUtleSkpLmFycmF5QnVmZmVyKCkpOwogICAgY29uc3QgZGVzY3JpcHRpb24gPSBhd2FpdCBzdGVwLmRvKCdnZW5lcmF0ZSBkZXNjcmlwdGlvbicsIGFzeW5jICgpID0+IAogICAgICBhd2FpdCB0aGlzLmVudi5BSS5ydW4oJ0BjZi9sbGF2YS1oZi9sbGF2YS0xLjUtN2ItaGYnLCB7aW1hZ2U6IEFycmF5LmZyb20obmV3IFVpbnQ4QXJyYXkoaW1hZ2VEYXRhKSksIHByb21wdDogJ0Rlc2NyaWJlIHRoaXMgaW1hZ2UnLCBtYXhfdG9rZW5zOiA1MH0pCiAgICApOwogICAgYXdhaXQgc3RlcC53YWl0Rm9yRXZlbnQoJ2F3YWl0IGFwcHJvdmFsJywgeyB0eXBlOiAnYXBwcm92ZWQnLCB0aW1lb3V0OiAnMjRoJyB9KTsKICAgIGF3YWl0IHN0ZXAuZG8oJ3B1Ymxpc2gnLCBhc3luYyAoKSA9PiBhd2FpdCB0aGlzLmVudi5CVUNLRVQucHV0KGBwdWJsaWMvJHtldmVudC5wYXlsb2FkLmltYWdlS2V5fWAsIGltYWdlRGF0YSkpOwogIH0KfQpgYGAKCiMjIFVzZXIgTGlmZWN5Y2xlCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBjbGFzcyBVc2VyTGlmZWN5Y2xlV29ya2Zsb3cgZXh0ZW5kcyBXb3JrZmxvd0VudHJ5cG9pbnQ8RW52LCBQYXJhbXM+IHsKICBhc3luYyBydW4oZXZlbnQsIHN0ZXApIHsKICAgIGF3YWl0IHN0ZXAuZG8oJ3dlbGNvbWUgZW1haWwnLCBhc3luYyAoKSA9PiBhd2FpdCBzZW5kRW1haWwoZXZlbnQucGF5bG9hZC5lbWFpbCwgJ1dlbGNvbWUhJykpOwogICAgYXdhaXQgc3RlcC5zbGVlcCgndHJpYWwgcGVyaW9kJywgJzcgZGF5cycpOwogICAgY29uc3QgaGFzQ29udmVydGVkID0gYXdhaXQgc3RlcC5kbygnY2hlY2sgY29udmVyc2lvbicsIGFzeW5jICgpID0+IHsKICAgICAgY29uc3QgdXNlciA9IGF3YWl0IHRoaXMuZW52LkRCLnByZXBhcmUoJ1NFTEVDVCBzdWJzY3JpcHRpb25fc3RhdHVzIEZST00gdXNlcnMgV0hFUkUgaWQgPSA/JykuYmluZChldmVudC5wYXlsb2FkLnVzZXJJZCkuZmlyc3QoKTsKICAgICAgcmV0dXJuIHVzZXIuc3Vic2NyaXB0aW9uX3N0YXR1cyA9PT0gJ2FjdGl2ZSc7CiAgICB9KTsKICAgIGlmICghaGFzQ29udmVydGVkKSBhd2FpdCBzdGVwLmRvKCd0cmlhbCBleHBpcmF0aW9uIGVtYWlsJywgYXN5bmMgKCkgPT4gYXdhaXQgc2VuZEVtYWlsKGV2ZW50LnBheWxvYWQuZW1haWwsICdUcmlhbCBlbmRpbmcnKSk7CiAgfQp9CmBgYAoKIyMgRGF0YSBQaXBlbGluZQoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgRGF0YVBpcGVsaW5lV29ya2Zsb3cgZXh0ZW5kcyBXb3JrZmxvd0VudHJ5cG9pbnQ8RW52LCBQYXJhbXM+IHsKICBhc3luYyBydW4oZXZlbnQsIHN0ZXApIHsKICAgIGNvbnN0IHJhd0RhdGEgPSBhd2FpdCBzdGVwLmRvKCdleHRyYWN0Jywge3JldHJpZXM6IHsgbGltaXQ6IDEwLCBkZWxheTogJzMwcycsIGJhY2tvZmY6ICdleHBvbmVudGlhbCcgfX0sIGFzeW5jICgpID0+IHsKICAgICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goZXZlbnQucGF5bG9hZC5zb3VyY2VVcmwpOwogICAgICBpZiAoIXJlcy5vaykgdGhyb3cgbmV3IEVycm9yKCdGZXRjaCBmYWlsZWQnKTsKICAgICAgcmV0dXJuIHJlcy5qc29uKCk7CiAgICB9KTsKICAgIGNvbnN0IHRyYW5zZm9ybWVkID0gYXdhaXQgc3RlcC5kbygndHJhbnNmb3JtJywgYXN5bmMgKCkgPT4gCiAgICAgIHJhd0RhdGEubWFwKGl0ZW0gPT4gKHsgaWQ6IGl0ZW0uaWQsIG5vcm1hbGl6ZWQ6IG5vcm1hbGl6ZURhdGEoaXRlbSkgfSkpCiAgICApOwogICAgY29uc3QgZGF0YVJlZiA9IGF3YWl0IHN0ZXAuZG8oJ3N0b3JlJywgYXN5bmMgKCkgPT4gewogICAgICBjb25zdCBrZXkgPSBgcHJvY2Vzc2VkLyR7RGF0ZS5ub3coKX0uanNvbmA7CiAgICAgIGF3YWl0IHRoaXMuZW52LkJVQ0tFVC5wdXQoa2V5LCBKU09OLnN0cmluZ2lmeSh0cmFuc2Zvcm1lZCkpOwogICAgICByZXR1cm4geyBrZXkgfTsKICAgIH0pOwogICAgYXdhaXQgc3RlcC5kbygnbG9hZCcsIGFzeW5jICgpID0+IHsKICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IChhd2FpdCB0aGlzLmVudi5CVUNLRVQuZ2V0KGRhdGFSZWYua2V5KSkuanNvbigpOwogICAgICBmb3IgKGxldCBpID0gMDsgaSA8IGRhdGEubGVuZ3RoOyBpICs9IDEwMCkgewogICAgICAgIGF3YWl0IHRoaXMuZW52LkRCLmJhdGNoKGRhdGEuc2xpY2UoaSwgaSArIDEwMCkubWFwKGl0ZW0gPT4gCiAgICAgICAgICB0aGlzLmVudi5EQi5wcmVwYXJlKCdJTlNFUlQgSU5UTyByZWNvcmRzIFZBTFVFUyAoPywgPyknKS5iaW5kKGl0ZW0uaWQsIGl0ZW0ubm9ybWFsaXplZCkKICAgICAgICApKTsKICAgICAgfQogICAgfSk7CiAgfQp9CmBgYAoKIyMgSHVtYW4taW4tdGhlLUxvb3AgQXBwcm92YWwKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGNsYXNzIEFwcHJvdmFsV29ya2Zsb3cgZXh0ZW5kcyBXb3JrZmxvd0VudHJ5cG9pbnQ8RW52LCBQYXJhbXM+IHsKICBhc3luYyBydW4oZXZlbnQsIHN0ZXApIHsKICAgIGF3YWl0IHN0ZXAuZG8oJ2NyZWF0ZSBhcHByb3ZhbCcsIGFzeW5jICgpID0+IGF3YWl0IHRoaXMuZW52LkRCLnByZXBhcmUoJ0lOU0VSVCBJTlRPIGFwcHJvdmFscyAoaWQsIHVzZXJfaWQsIHN0YXR1cykgVkFMVUVTICg/LCA/LCA/KScpLmJpbmQoZXZlbnQuaW5zdGFuY2VJZCwgZXZlbnQucGF5bG9hZC51c2VySWQsICdwZW5kaW5nJykucnVuKCkpOwogICAgdHJ5IHsKICAgICAgY29uc3QgYXBwcm92YWwgPSBhd2FpdCBzdGVwLndhaXRGb3JFdmVudDx7IGFwcHJvdmVkOiBib29sZWFuIH0+KCd3YWl0IGZvciBhcHByb3ZhbCcsIHsgdHlwZTogJ2FwcHJvdmFsLXJlc3BvbnNlJywgdGltZW91dDogJzQ4aCcgfSk7CiAgICAgIGlmIChhcHByb3ZhbC5hcHByb3ZlZCkgeyBhd2FpdCBzdGVwLmRvKCdwcm9jZXNzIGFwcHJvdmFsJywgYXN5bmMgKCkgPT4ge30pOyB9IAogICAgICBlbHNlIHsgYXdhaXQgc3RlcC5kbygnaGFuZGxlIHJlamVjdGlvbicsIGFzeW5jICgpID0+IHt9KTsgfQogICAgfSBjYXRjaCAoZSkgewogICAgICBhd2FpdCBzdGVwLmRvKCdhdXRvIHJlamVjdCcsIGFzeW5jICgpID0+IGF3YWl0IHRoaXMuZW52LkRCLnByZXBhcmUoJ1VQREFURSBhcHByb3ZhbHMgU0VUIHN0YXR1cyA9ID8gV0hFUkUgaWQgPSA/JykuYmluZCgnYXV0by1yZWplY3RlZCcsIGV2ZW50Lmluc3RhbmNlSWQpLnJ1bigpKTsKICAgIH0KICB9Cn0KYGBgCgojIyBUZXN0aW5nIFdvcmtmbG93cwoKIyMjIFNldHVwCgpgYGB0eXBlc2NyaXB0Ci8vIHZpdGVzdC5jb25maWcudHMKaW1wb3J0IHsgZGVmaW5lV29ya2Vyc0NvbmZpZyB9IGZyb20gJ0BjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnMvY29uZmlnJzsKCmV4cG9ydCBkZWZhdWx0IGRlZmluZVdvcmtlcnNDb25maWcoewogIHRlc3Q6IHsKICAgIHBvb2xPcHRpb25zOiB7CiAgICAgIHdvcmtlcnM6IHsKICAgICAgICB3cmFuZ2xlcjogeyBjb25maWdQYXRoOiAnLi93cmFuZ2xlci5qc29uYycgfQogICAgICB9CiAgICB9CiAgfQp9KTsKYGBgCgojIyMgSW50cm9zcGVjdGlvbiBBUEkKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgaW50cm9zcGVjdFdvcmtmbG93SW5zdGFuY2UgfSBmcm9tICdjbG91ZGZsYXJlOnRlc3QnOwoKY29uc3QgaW5zdGFuY2UgPSBhd2FpdCBlbnYuTVlfV09SS0ZMT1cuY3JlYXRlKHsgcGFyYW1zOiB7IHVzZXJJZDogJzEyMycgfSB9KTsKY29uc3QgaW50cm9zcGVjdG9yID0gYXdhaXQgaW50cm9zcGVjdFdvcmtmbG93SW5zdGFuY2UoZW52Lk1ZX1dPUktGTE9XLCBpbnN0YW5jZS5pZCk7CgovLyBXYWl0IGZvciBzdGVwIGNvbXBsZXRpb24KY29uc3QgcmVzdWx0ID0gYXdhaXQgaW50cm9zcGVjdG9yLndhaXRGb3JTdGVwUmVzdWx0KHsgbmFtZTogJ2ZldGNoIHVzZXInLCBpbmRleDogMCB9KTsKCi8vIE1vY2sgc3RlcCBiZWhhdmlvcgphd2FpdCBpbnRyb3NwZWN0b3IubW9kaWZ5KGFzeW5jIChtKSA9PiB7CiAgYXdhaXQgbS5tb2NrU3RlcFJlc3VsdCh7IG5hbWU6ICdhcGkgY2FsbCcgfSwgeyBtb2NrZWQ6IHRydWUgfSk7Cn0pOwpgYGAKCiMjIEJlc3QgUHJhY3RpY2VzCgojIyMg4pyFIERPCgoxLiAqKkdyYW51bGFyIHN0ZXBzKio6IE9uZSBBUEkgY2FsbCBwZXIgc3RlcCAodW5sZXNzIHByb3ZpbmcgaWRlbXBvdGVuY3kpCjIuICoqSWRlbXBvdGVuY3kqKjogQ2hlY2stdGhlbi1leGVjdXRlOyB1c2UgaWRlbXBvdGVuY3kga2V5cwozLiAqKkRldGVybWluaXN0aWMgbmFtZXMqKjogVXNlIHN0YXRpYyBvciBzdGVwLW91dHB1dC1iYXNlZCBuYW1lcwo0LiAqKlJldHVybiBzdGF0ZSoqOiBQZXJzaXN0IHZpYSBzdGVwIHJldHVybnMsIG5vdCB2YXJpYWJsZXMKNS4gKipBbHdheXMgYXdhaXQqKjogYGF3YWl0IHN0ZXAuZG8oKWAsIGF2b2lkIGRhbmdsaW5nIHByb21pc2VzCjYuICoqRGV0ZXJtaW5pc3RpYyBjb25kaXRpb25hbHMqKjogQmFzZSBvbiBgZXZlbnQucGF5bG9hZGAgb3Igc3RlcCBvdXRwdXRzCjcuICoqU3RvcmUgbGFyZ2UgZGF0YSBleHRlcm5hbGx5Kio6IFIyL0tWIGZvciBkYXRhIGV4Y2VlZGluZyBzdGVwIHJldHVybiBsaW1pdCwgcmV0dXJuIHJlZnMKOC4gKipCYXRjaCBjcmVhdGlvbioqOiBgY3JlYXRlQmF0Y2goKWAgZm9yIG11bHRpcGxlIGluc3RhbmNlcwoKIyMjIOKdjCBET04nVAoKMS4gKipPbmUgZ2lhbnQgc3RlcCoqOiBCcmVha3MgZHVyYWJpbGl0eSAmIHJldHJ5IGNvbnRyb2wKMi4gKipTdGF0ZSBvdXRzaWRlIHN0ZXBzKio6IExvc3Qgb24gaGliZXJuYXRpb24KMy4gKipNdXRhdGUgZXZlbnRzKio6IEV2ZW50cyBpbW11dGFibGUsIHJldHVybiBuZXcgc3RhdGUKNC4gKipOb24tZGV0ZXJtaW5pc3RpYyBsb2dpYyBvdXRzaWRlIHN0ZXBzKio6IGBNYXRoLnJhbmRvbSgpYCwgYERhdGUubm93KClgIG11c3QgYmUgaW4gc3RlcHMKNS4gKipTaWRlIGVmZmVjdHMgb3V0c2lkZSBzdGVwcyoqOiBNYXkgZHVwbGljYXRlIG9uIHJlc3RhcnQKNi4gKipOb24tZGV0ZXJtaW5pc3RpYyBzdGVwIG5hbWVzKio6IFByZXZlbnRzIGNhY2hpbmcKNy4gKipJZ25vcmUgdGltZW91dHMqKjogYHdhaXRGb3JFdmVudGAgdGhyb3dzLCB1c2UgdHJ5LWNhdGNoCjguICoqUmV1c2UgaW5zdGFuY2UgSURzKio6IE11c3QgYmUgdW5pcXVlIHdpdGhpbiByZXRlbnRpb24KCiMjIE9yY2hlc3RyYXRpb24gUGF0dGVybnMKCiMjIyBGYW4tT3V0IChQYXJhbGxlbCBQcm9jZXNzaW5nKQpgYGB0eXBlc2NyaXB0CmNvbnN0IGZpbGVzID0gYXdhaXQgc3RlcC5kbygnbGlzdCcsIGFzeW5jICgpID0+IHRoaXMuZW52LkJVQ0tFVC5saXN0KCkpOwphd2FpdCBQcm9taXNlLmFsbChmaWxlcy5vYmplY3RzLm1hcCgoZmlsZSwgaSkgPT4gc3RlcC5kbyhgcHJvY2VzcyAke2l9YCwgYXN5bmMgKCkgPT4gcHJvY2Vzc0ZpbGUoYXdhaXQgKGF3YWl0IHRoaXMuZW52LkJVQ0tFVC5nZXQoZmlsZS5rZXkpKS5hcnJheUJ1ZmZlcigpKSkpKTsKYGBgCgojIyMgUGFyZW50LUNoaWxkIFdvcmtmbG93cwpgYGB0eXBlc2NyaXB0CmNvbnN0IGNoaWxkID0gYXdhaXQgc3RlcC5kbygnc3RhcnQgY2hpbGQnLCBhc3luYyAoKSA9PiBhd2FpdCB0aGlzLmVudi5DSElMRF9XT1JLRkxPVy5jcmVhdGUoe2lkOiBgY2hpbGQtJHtldmVudC5pbnN0YW5jZUlkfWAsIHBhcmFtczogeyBkYXRhOiByZXN1bHQuZGF0YSB9fSkpOwphd2FpdCBzdGVwLmRvKCdvdGhlciB3b3JrJywgYXN5bmMgKCkgPT4gY29uc29sZS5sb2coYENoaWxkIHN0YXJ0ZWQ6ICR7Y2hpbGQuaWR9YCkpOwpgYGAKCiMjIyBSYWNlIFBhdHRlcm4KYGBgdHlwZXNjcmlwdApjb25zdCB3aW5uZXIgPSBhd2FpdCBQcm9taXNlLnJhY2UoWwogIHN0ZXAuZG8oJ29wdGlvbiBBJywgYXN5bmMgKCkgPT4gc2xvd09wZXJhdGlvbigpKSwKICBzdGVwLmRvKCdvcHRpb24gQicsIGFzeW5jICgpID0+IGZhc3RPcGVyYXRpb24oKSkKXSk7CmBgYAoKIyMjIFNjaGVkdWxlZCBXb3JrZmxvdyBDaGFpbgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsgYXN5bmMgc2NoZWR1bGVkKGV2ZW50LCBlbnYpIHsgYXdhaXQgZW52LkRBSUxZX1dPUktGTE9XLmNyZWF0ZSh7aWQ6IGBkYWlseS0ke2V2ZW50LnNjaGVkdWxlZFRpbWV9YCwgcGFyYW1zOiB7IHRpbWVzdGFtcDogZXZlbnQuc2NoZWR1bGVkVGltZSB9fSk7IH19OwpleHBvcnQgY2xhc3MgRGFpbHlXb3JrZmxvdyBleHRlbmRzIFdvcmtmbG93RW50cnlwb2ludDxFbnYsIFBhcmFtcz4gewogIGFzeW5jIHJ1bihldmVudCwgc3RlcCkgewogICAgYXdhaXQgc3RlcC5kbygnZGFpbHkgdGFzaycsIGFzeW5jICgpID0+IHt9KTsKICAgIGF3YWl0IHN0ZXAuc2xlZXAoJ3dhaXQgNyBkYXlzJywgJzcgZGF5cycpOwogICAgYXdhaXQgc3RlcC5kbygnd2Vla2x5IGZvbGxvd3VwJywgYXN5bmMgKCkgPT4ge30pOwogIH0KfQpgYGAKClNlZTogW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCksIFthcGkubWRdKC4vYXBpLm1kKSwgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkK
+# Workflow Patterns
+
+## Image Processing Pipeline
+
+```typescript
+export class ImageProcessingWorkflow extends WorkflowEntrypoint<Env, Params> {
+  async run(event, step) {
+    const imageData = await step.do('fetch', async () => (await this.env.BUCKET.get(event.payload.imageKey)).arrayBuffer());
+    const description = await step.do('generate description', async () => 
+      await this.env.AI.run('@cf/llava-hf/llava-1.5-7b-hf', {image: Array.from(new Uint8Array(imageData)), prompt: 'Describe this image', max_tokens: 50})
+    );
+    await step.waitForEvent('await approval', { type: 'approved', timeout: '24h' });
+    await step.do('publish', async () => await this.env.BUCKET.put(`public/${event.payload.imageKey}`, imageData));
+  }
+}
+```
+
+## User Lifecycle
+
+```typescript
+export class UserLifecycleWorkflow extends WorkflowEntrypoint<Env, Params> {
+  async run(event, step) {
+    await step.do('welcome email', async () => await sendEmail(event.payload.email, 'Welcome!'));
+    await step.sleep('trial period', '7 days');
+    const hasConverted = await step.do('check conversion', async () => {
+      const user = await this.env.DB.prepare('SELECT subscription_status FROM users WHERE id = ?').bind(event.payload.userId).first();
+      return user.subscription_status === 'active';
+    });
+    if (!hasConverted) await step.do('trial expiration email', async () => await sendEmail(event.payload.email, 'Trial ending'));
+  }
+}
+```
+
+## Data Pipeline
+
+```typescript
+export class DataPipelineWorkflow extends WorkflowEntrypoint<Env, Params> {
+  async run(event, step) {
+    const rawData = await step.do('extract', {retries: { limit: 10, delay: '30s', backoff: 'exponential' }}, async () => {
+      const res = await fetch(event.payload.sourceUrl);
+      if (!res.ok) throw new Error('Fetch failed');
+      return res.json();
+    });
+    const transformed = await step.do('transform', async () => 
+      rawData.map(item => ({ id: item.id, normalized: normalizeData(item) }))
+    );
+    const dataRef = await step.do('store', async () => {
+      const key = `processed/${Date.now()}.json`;
+      await this.env.BUCKET.put(key, JSON.stringify(transformed));
+      return { key };
+    });
+    await step.do('load', async () => {
+      const data = await (await this.env.BUCKET.get(dataRef.key)).json();
+      for (let i = 0; i < data.length; i += 100) {
+        await this.env.DB.batch(data.slice(i, i + 100).map(item => 
+          this.env.DB.prepare('INSERT INTO records VALUES (?, ?)').bind(item.id, item.normalized)
+        ));
+      }
+    });
+  }
+}
+```
+
+## Human-in-the-Loop Approval
+
+```typescript
+export class ApprovalWorkflow extends WorkflowEntrypoint<Env, Params> {
+  async run(event, step) {
+    await step.do('create approval', async () => await this.env.DB.prepare('INSERT INTO approvals (id, user_id, status) VALUES (?, ?, ?)').bind(event.instanceId, event.payload.userId, 'pending').run());
+    try {
+      const approval = await step.waitForEvent<{ approved: boolean }>('wait for approval', { type: 'approval-response', timeout: '48h' });
+      if (approval.approved) { await step.do('process approval', async () => {}); } 
+      else { await step.do('handle rejection', async () => {}); }
+    } catch (e) {
+      await step.do('auto reject', async () => await this.env.DB.prepare('UPDATE approvals SET status = ? WHERE id = ?').bind('auto-rejected', event.instanceId).run());
+    }
+  }
+}
+```
+
+## Testing Workflows
+
+### Setup
+
+```typescript
+// vitest.config.ts
+import { defineWorkersConfig } from '@cloudflare/vitest-pool-workers/config';
+
+export default defineWorkersConfig({
+  test: {
+    poolOptions: {
+      workers: {
+        wrangler: { configPath: './wrangler.jsonc' }
+      }
+    }
+  }
+});
+```
+
+### Introspection API
+
+```typescript
+import { introspectWorkflowInstance } from 'cloudflare:test';
+
+const instance = await env.MY_WORKFLOW.create({ params: { userId: '123' } });
+const introspector = await introspectWorkflowInstance(env.MY_WORKFLOW, instance.id);
+
+// Wait for step completion
+const result = await introspector.waitForStepResult({ name: 'fetch user', index: 0 });
+
+// Mock step behavior
+await introspector.modify(async (m) => {
+  await m.mockStepResult({ name: 'api call' }, { mocked: true });
+});
+```
+
+## Best Practices
+
+### ✅ DO
+
+1. **Granular steps**: One API call per step (unless proving idempotency)
+2. **Idempotency**: Check-then-execute; use idempotency keys
+3. **Deterministic names**: Use static or step-output-based names
+4. **Return state**: Persist via step returns, not variables
+5. **Always await**: `await step.do()`, avoid dangling promises
+6. **Deterministic conditionals**: Base on `event.payload` or step outputs
+7. **Store large data externally**: R2/KV for data exceeding step return limit, return refs
+8. **Batch creation**: `createBatch()` for multiple instances
+
+### ❌ DON'T
+
+1. **One giant step**: Breaks durability & retry control
+2. **State outside steps**: Lost on hibernation
+3. **Mutate events**: Events immutable, return new state
+4. **Non-deterministic logic outside steps**: `Math.random()`, `Date.now()` must be in steps
+5. **Side effects outside steps**: May duplicate on restart
+6. **Non-deterministic step names**: Prevents caching
+7. **Ignore timeouts**: `waitForEvent` throws, use try-catch
+8. **Reuse instance IDs**: Must be unique within retention
+
+## Orchestration Patterns
+
+### Fan-Out (Parallel Processing)
+```typescript
+const files = await step.do('list', async () => this.env.BUCKET.list());
+await Promise.all(files.objects.map((file, i) => step.do(`process ${i}`, async () => processFile(await (await this.env.BUCKET.get(file.key)).arrayBuffer()))));
+```
+
+### Parent-Child Workflows
+```typescript
+const child = await step.do('start child', async () => await this.env.CHILD_WORKFLOW.create({id: `child-${event.instanceId}`, params: { data: result.data }}));
+await step.do('other work', async () => console.log(`Child started: ${child.id}`));
+```
+
+### Race Pattern
+```typescript
+const winner = await Promise.race([
+  step.do('option A', async () => slowOperation()),
+  step.do('option B', async () => fastOperation())
+]);
+```
+
+### Scheduled Workflow Chain
+```typescript
+export default { async scheduled(event, env) { await env.DAILY_WORKFLOW.create({id: `daily-${event.scheduledTime}`, params: { timestamp: event.scheduledTime }}); }};
+export class DailyWorkflow extends WorkflowEntrypoint<Env, Params> {
+  async run(event, step) {
+    await step.do('daily task', async () => {});
+    await step.sleep('wait 7 days', '7 days');
+    await step.do('weekly followup', async () => {});
+  }
+}
+```
+
+See: [configuration.md](./configuration.md), [api.md](./api.md), [gotchas.md](./gotchas.md)

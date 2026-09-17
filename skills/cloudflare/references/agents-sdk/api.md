@@ -1,1 +1,190 @@
-IyBBUEkgUmVmZXJlbmNlCgojIyBBZ2VudCBDbGFzc2VzCgojIyMgQUlDaGF0QWdlbnQKCkZvciBBSSBjaGF0IHdpdGggYXV0by1zdHJlYW1pbmcsIG1lc3NhZ2UgaGlzdG9yeSwgdG9vbHMsIHJlc3VtYWJsZSBzdHJlYW1pbmcuCgpgYGB0cwppbXBvcnQgeyBBSUNoYXRBZ2VudCB9IGZyb20gIkBjbG91ZGZsYXJlL2FpLWNoYXQiOwppbXBvcnQgeyBvcGVuYWkgfSBmcm9tICJAYWktc2RrL29wZW5haSI7CgpleHBvcnQgY2xhc3MgQ2hhdEFnZW50IGV4dGVuZHMgQUlDaGF0QWdlbnQ8RW52PiB7CiAgYXN5bmMgb25DaGF0TWVzc2FnZShvbkZpbmlzaCkgewogICAgcmV0dXJuIHRoaXMuc3RyZWFtVGV4dCh7CiAgICAgIG1vZGVsOiBvcGVuYWkoImdwdC00IiksCiAgICAgIG1lc3NhZ2VzOiB0aGlzLm1lc3NhZ2VzLCAvLyBBdXRvLW1hbmFnZWQgbWVzc2FnZSBoaXN0b3J5CiAgICAgIHRvb2xzOiB7CiAgICAgICAgZ2V0V2VhdGhlcjogewogICAgICAgICAgZGVzY3JpcHRpb246ICJHZXQgd2VhdGhlciIsCiAgICAgICAgICBwYXJhbWV0ZXJzOiB6Lm9iamVjdCh7IGNpdHk6IHouc3RyaW5nKCkgfSksCiAgICAgICAgICBleGVjdXRlOiBhc3luYyAoeyBjaXR5IH0pID0+IGBTdW5ueSwgNzLCsEYgaW4gJHtjaXR5fWAKICAgICAgICB9CiAgICAgIH0sCiAgICAgIG9uRmluaXNoLCAvLyBQZXJzaXN0IHJlc3BvbnNlIHRvIHRoaXMubWVzc2FnZXMKICAgIH0pOwogIH0KfQpgYGAKCiMjIyBBZ2VudCAoQmFzZSBDbGFzcykKCkZ1bGwgY29udHJvbCBmb3IgY3VzdG9tIGxvZ2ljLCBXZWJTb2NrZXRzLCBlbWFpbCwgYW5kIFNRTC4KCmBgYHRzCmltcG9ydCB7IEFnZW50IH0gZnJvbSAiYWdlbnRzIjsKCmV4cG9ydCBjbGFzcyBNeUFnZW50IGV4dGVuZHMgQWdlbnQ8RW52LCBTdGF0ZT4gewogIC8vIExpZmVjeWNsZSBtZXRob2RzIGJlbG93Cn0KYGBgCgoqKlR5cGUgcGFyYW1zOioqIGBBZ2VudDxFbnYsIFN0YXRlLCBDb25uU3RhdGU+YCAtIEVudiBiaW5kaW5ncywgYWdlbnQgc3RhdGUsIGNvbm5lY3Rpb24gc3RhdGUKCiMjIExpZmVjeWNsZSBIb29rcwoKYGBgdHMKb25TdGFydCgpIHsgLy8gSW5pdC9yZXN0YXJ0CiAgdGhpcy5zcWxgQ1JFQVRFIFRBQkxFIElGIE5PVCBFWElTVFMgdXNlcnMgKGlkIFRFWFQsIG5hbWUgVEVYVClgOwp9Cgphc3luYyBvblJlcXVlc3QocmVxOiBSZXF1ZXN0KSB7IC8vIEhUVFAKICBjb25zdCB7cGF0aG5hbWV9ID0gbmV3IFVSTChyZXEudXJsKTsKICBpZiAocGF0aG5hbWUgPT09ICIvdXNlcnMiKSByZXR1cm4gUmVzcG9uc2UuanNvbih0aGlzLnNxbDx7aWQsbmFtZX0+YFNFTEVDVCAqIEZST00gdXNlcnNgKTsKICByZXR1cm4gbmV3IFJlc3BvbnNlKCJOb3QgZm91bmQiLCB7c3RhdHVzOiA0MDR9KTsKfQoKYXN5bmMgb25Db25uZWN0KGNvbm46IENvbm5lY3Rpb248Q29ublN0YXRlPiwgY3R4OiBDb25uZWN0aW9uQ29udGV4dCkgeyAvLyBXZWJTb2NrZXQKICBjb25uLmFjY2VwdCgpOwogIGNvbm4uc2V0U3RhdGUoe3VzZXJJZDogY3R4LnJlcXVlc3QuaGVhZGVycy5nZXQoIlgtVXNlci1JRCIpfSk7CiAgY29ubi5zZW5kKEpTT04uc3RyaW5naWZ5KHt0eXBlOiAiY29ubmVjdGVkIiwgc3RhdGU6IHRoaXMuc3RhdGV9KSk7Cn0KCmFzeW5jIG9uTWVzc2FnZShjb25uOiBDb25uZWN0aW9uPENvbm5TdGF0ZT4sIG1zZzogV1NNZXNzYWdlKSB7IC8vIFdTIG1lc3NhZ2VzCiAgY29uc3QgbSA9IEpTT04ucGFyc2UobXNnIGFzIHN0cmluZyk7CiAgdGhpcy5zZXRTdGF0ZSh7bWVzc2FnZXM6IFsuLi50aGlzLnN0YXRlLm1lc3NhZ2VzLCBtXX0pOwogIHRoaXMuY29ubmVjdGlvbnMuZm9yRWFjaChjID0+IGMuc2VuZChKU09OLnN0cmluZ2lmeShtKSkpOwp9Cgphc3luYyBvbkVtYWlsKGVtYWlsOiBBZ2VudEVtYWlsKSB7IC8vIEVtYWlsIHJvdXRpbmcKICB0aGlzLnNxbGBJTlNFUlQgSU5UTyBlbWFpbHMgKGZyb21fYWRkcixzdWJqZWN0LGJvZHkpIFZBTFVFUyAoJHtlbWFpbC5mcm9tfSwke2VtYWlsLmhlYWRlcnMuZ2V0KCJzdWJqZWN0Iil9LCR7YXdhaXQgZW1haWwudGV4dCgpfSlgOwp9CmBgYAoKIyMgU3RhdGUsIFNRTCwgU2NoZWR1bGluZwoKYGBgdHMKLy8gU3RhdGUKdGhpcy5zZXRTdGF0ZSh7Y291bnQ6IDQyfSk7IC8vIEF1dG8tc3luY3MKdGhpcy5zZXRTdGF0ZSh7Li4udGhpcy5zdGF0ZSwgY291bnQ6IHRoaXMuc3RhdGUuY291bnQgKyAxfSk7CgovLyBTUUwgKHBhcmFtZXRlcml6ZWQgcXVlcmllcyBwcmV2ZW50IGluamVjdGlvbikKdGhpcy5zcWxgQ1JFQVRFIFRBQkxFIElGIE5PVCBFWElTVFMgdXNlcnMgKGlkIFRFWFQgUFJJTUFSWSBLRVksIG5hbWUgVEVYVClgOwp0aGlzLnNxbGBJTlNFUlQgSU5UTyB1c2VycyAoaWQsbmFtZSkgVkFMVUVTICgke3VzZXJJZH0sJHtuYW1lfSlgOwpjb25zdCB1c2VycyA9IHRoaXMuc3FsPHtpZCxuYW1lfT5gU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ICR7dXNlcklkfWA7CgovLyBTY2hlZHVsaW5nCmF3YWl0IHRoaXMuc2NoZWR1bGUobmV3IERhdGUoIjIwMjYtMTItMjUiKSwgInNlbmRHcmVldGluZyIsIHttc2c6IkhpIn0pOyAvLyBEYXRlCmF3YWl0IHRoaXMuc2NoZWR1bGUoNjAsICJjaGVja1N0YXR1cyIsIHt9KTsgLy8gRGVsYXkgKHNlYykKYXdhaXQgdGhpcy5zY2hlZHVsZSgiMCAwICogKiAqIiwgImRhaWx5Q2xlYW51cCIsIHt9KTsgLy8gQ3Jvbgphd2FpdCB0aGlzLmNhbmNlbFNjaGVkdWxlKHNjaGVkdWxlSWQpOwpgYGAKCiMjIFJQQyBNZXRob2RzIChAY2FsbGFibGUpCgpgYGB0cwppbXBvcnQgeyBBZ2VudCwgY2FsbGFibGUgfSBmcm9tICJhZ2VudHMiOwoKZXhwb3J0IGNsYXNzIE15QWdlbnQgZXh0ZW5kcyBBZ2VudDxFbnY+IHsKICBAY2FsbGFibGUoKQogIGFzeW5jIHByb2Nlc3NUYXNrKGlucHV0OiB7dGV4dDogc3RyaW5nfSk6IFByb21pc2U8e3Jlc3VsdDogc3RyaW5nfT4gewogICAgcmV0dXJuIHsgcmVzdWx0OiBhd2FpdCB0aGlzLmVudi5BSS5ydW4oIkBjZi9tZXRhL2xsYW1hLTMuMS04Yi1pbnN0cnVjdCIsIHtwcm9tcHQ6IGlucHV0LnRleHR9KSB9OwogIH0KfQovLyBDbGllbnQ6IGNvbnN0IHJlc3VsdCA9IGF3YWl0IGFnZW50LnByb2Nlc3NUYXNrKHsgdGV4dDogIkhlbGxvIiB9KTsKLy8gTXVzdCByZXR1cm4gSlNPTi1zZXJpYWxpemFibGUgdmFsdWVzCmBgYAoKIyMgQ29ubmVjdGlvbnMgJiBBSQoKYGBgdHMKLy8gQ29ubmVjdGlvbnMgKHR5cGU6IEFnZW50PEVudiwgU3RhdGUsIENvbm5TdGF0ZT4pCnRoaXMuY29ubmVjdGlvbnMuZm9yRWFjaChjID0+IGMuc2VuZChKU09OLnN0cmluZ2lmeShtc2cpKSk7IC8vIEJyb2FkY2FzdApjb25uLnNldFN0YXRlKHt1c2VySWQ6IjEyMyJ9KTsgY29ubi5jbG9zZSgxMDAwLCAiR29vZGJ5ZSIpOwoKLy8gV29ya2VycyBBSQpjb25zdCByID0gYXdhaXQgdGhpcy5lbnYuQUkucnVuKCJAY2YvbWV0YS9sbGFtYS0zLjEtOGItaW5zdHJ1Y3QiLCB7cHJvbXB0fSk7CgovLyBNYW51YWwgc3RyZWFtaW5nIChwcmVmZXIgQUlDaGF0QWdlbnQpCmNvbnN0IHN0cmVhbSA9IGF3YWl0IGNsaWVudC5jaGF0LmNvbXBsZXRpb25zLmNyZWF0ZSh7bW9kZWw6ICJncHQtNCIsIG1lc3NhZ2VzLCBzdHJlYW06IHRydWV9KTsKZm9yIGF3YWl0IChjb25zdCBjaHVuayBvZiBzdHJlYW0pIGNvbm4uc2VuZChKU09OLnN0cmluZ2lmeSh7Y2h1bms6IGNodW5rLmNob2ljZXNbMF0uZGVsdGEuY29udGVudH0pKTsKYGBgCgoqKlR5cGUtc2FmZSBzdGF0ZToqKiBgQWdlbnQ8RW52LCBTdGF0ZSwgQ29ublN0YXRlPmAgLSB0aGlyZCBwYXJhbSB0eXBlcyBgY29ubi5zdGF0ZWAKCiMjIE1DUCBJbnRlZ3JhdGlvbgoKTW9kZWwgQ29udGV4dCBQcm90b2NvbCBmb3IgZXhwb3NpbmcgdG9vbHM6CgpgYGB0cwovLyBSZWdpc3RlciAmIHVzZSBNQ1Agc2VydmVyCmF3YWl0IHRoaXMubWNwLnJlZ2lzdGVyU2VydmVyKCJnaXRodWIiLCB7CiAgdXJsOiBlbnYuTUNQX1NFUlZFUl9VUkwsCiAgYXV0aDogeyB0eXBlOiAib2F1dGgiLCBjbGllbnRJZDogZW52LkdJVEhVQl9DTElFTlRfSUQsIGNsaWVudFNlY3JldDogZW52LkdJVEhVQl9DTElFTlRfU0VDUkVUIH0KfSk7CmNvbnN0IHRvb2xzID0gYXdhaXQgdGhpcy5tY3AuZ2V0QUlUb29scyhbImdpdGh1YiJdKTsKcmV0dXJuIHRoaXMuc3RyZWFtVGV4dCh7IG1vZGVsOiBvcGVuYWkoImdwdC00IiksIG1lc3NhZ2VzOiB0aGlzLm1lc3NhZ2VzLCB0b29scywgb25GaW5pc2ggfSk7CmBgYAoKIyMgVGFzayBRdWV1ZQoKYGBgdHMKYXdhaXQgdGhpcy5xdWV1ZSgicHJvY2Vzc1ZpZGVvIiwgeyB2aWRlb0lkOiAiYWJjMTIzIiB9KTsgLy8gQWRkIHRhc2sKY29uc3QgdGFza3MgPSBhd2FpdCB0aGlzLmRlcXVldWUoMTApOyAvLyBQcm9jZXNzIHVwIHRvIDEwCmBgYAoKIyMgQ29udGV4dCAmIENsZWFudXAKCmBgYHRzCmNvbnN0IGFnZW50ID0gZ2V0Q3VycmVudEFnZW50PE15QWdlbnQ+KCk7IC8vIEdldCBjdXJyZW50IGluc3RhbmNlCmFzeW5jIGRlc3Ryb3koKSB7IC8qIGNsZWFudXAgYmVmb3JlIGFnZW50IGRlc3Ryb3llZCAqLyB9CmBgYAoKIyMgQUkgSW50ZWdyYXRpb24KCmBgYHRzCi8vIFdvcmtlcnMgQUkKY29uc3QgciA9IGF3YWl0IHRoaXMuZW52LkFJLnJ1bigiQGNmL21ldGEvbGxhbWEtMy4xLThiLWluc3RydWN0Iiwge3Byb21wdH0pOwoKLy8gTWFudWFsIHN0cmVhbWluZyAocHJlZmVyIEFJQ2hhdEFnZW50IGZvciBhdXRvLXN0cmVhbWluZykKY29uc3Qgc3RyZWFtID0gYXdhaXQgY2xpZW50LmNoYXQuY29tcGxldGlvbnMuY3JlYXRlKHttb2RlbDogImdwdC00IiwgbWVzc2FnZXMsIHN0cmVhbTogdHJ1ZX0pOwpmb3IgYXdhaXQgKGNvbnN0IGNodW5rIG9mIHN0cmVhbSkgewogIGlmIChjaHVuay5jaG9pY2VzWzBdPy5kZWx0YT8uY29udGVudCkgY29ubi5zZW5kKEpTT04uc3RyaW5naWZ5KHtjaHVuazogY2h1bmsuY2hvaWNlc1swXS5kZWx0YS5jb250ZW50fSkpOwp9CmBgYAoKIyMgQ2xpZW50IEhvb2tzIChSZWFjdCkKCmBgYHRzCi8vIHVzZUFnZW50KCkgLSBXZWJTb2NrZXQgY29ubmVjdGlvbiArIFJQQwppbXBvcnQgeyB1c2VBZ2VudCB9IGZyb20gImFnZW50cy9yZWFjdCI7CmNvbnN0IGFnZW50ID0gdXNlQWdlbnQoeyBhZ2VudDogIk15QWdlbnQiLCBuYW1lOiAidXNlci0xMjMiIH0pOyAvLyBuYW1lIGZvciBpZEZyb21OYW1lCmNvbnN0IHJlc3VsdCA9IGF3YWl0IGFnZW50LnByb2Nlc3NUYXNrKHsgdGV4dDogIkhlbGxvIiB9KTsgLy8gQ2FsbCBAY2FsbGFibGUgbWV0aG9kcwovLyBhZ2VudC5yZWFkeVN0YXRlOiAwPUNPTk5FQ1RJTkcsIDE9T1BFTiwgMj1DTE9TSU5HLCAzPUNMT1NFRAoKLy8gdXNlQWdlbnRDaGF0KCkgLSBBSSBjaGF0IFVJCmltcG9ydCB7IHVzZUFnZW50Q2hhdCB9IGZyb20gIkBjbG91ZGZsYXJlL2FpLWNoYXQvcmVhY3QiOwpjb25zdCBhZ2VudCA9IHVzZUFnZW50KHsgYWdlbnQ6ICJDaGF0QWdlbnQiIH0pOwpjb25zdCB7IG1lc3NhZ2VzLCBpbnB1dCwgaGFuZGxlSW5wdXRDaGFuZ2UsIGhhbmRsZVN1Ym1pdCwgaXNMb2FkaW5nLCBzdG9wLCBjbGVhckhpc3RvcnkgfSA9IAogIHVzZUFnZW50Q2hhdCh7IAogICAgYWdlbnQsIAogICAgbWF4U3RlcHM6IDUsICAgICAgICAvLyBNYXggdG9vbCBpdGVyYXRpb25zCiAgICByZXN1bWU6IHRydWUsICAgICAgIC8vIEF1dG8tcmVzdW1lIG9uIGRpc2Nvbm5lY3QKICAgIG9uVG9vbENhbGw6IGFzeW5jICh0b29sQ2FsbCkgPT4gewogICAgICAvLyBDbGllbnQgdG9vbHMgKGh1bWFuLWluLXRoZS1sb29wKQogICAgICBpZiAodG9vbENhbGwudG9vbE5hbWUgPT09ICJjb25maXJtIikgcmV0dXJuIHsgb2s6IHdpbmRvdy5jb25maXJtKCJQcm9jZWVkPyIpIH07CiAgICB9CiAgfSk7Ci8vIHN0YXR1czogInJlYWR5IiB8ICJzdWJtaXR0ZWQiIHwgInN0cmVhbWluZyIgfCAiZXJyb3IiCmBgYAo=
+# API Reference
+
+## Agent Classes
+
+### AIChatAgent
+
+For AI chat with auto-streaming, message history, tools, resumable streaming.
+
+```ts
+import { AIChatAgent } from "@cloudflare/ai-chat";
+import { openai } from "@ai-sdk/openai";
+
+export class ChatAgent extends AIChatAgent<Env> {
+  async onChatMessage(onFinish) {
+    return this.streamText({
+      model: openai("gpt-4"),
+      messages: this.messages, // Auto-managed message history
+      tools: {
+        getWeather: {
+          description: "Get weather",
+          parameters: z.object({ city: z.string() }),
+          execute: async ({ city }) => `Sunny, 72°F in ${city}`
+        }
+      },
+      onFinish, // Persist response to this.messages
+    });
+  }
+}
+```
+
+### Agent (Base Class)
+
+Full control for custom logic, WebSockets, email, and SQL.
+
+```ts
+import { Agent } from "agents";
+
+export class MyAgent extends Agent<Env, State> {
+  // Lifecycle methods below
+}
+```
+
+**Type params:** `Agent<Env, State, ConnState>` - Env bindings, agent state, connection state
+
+## Lifecycle Hooks
+
+```ts
+onStart() { // Init/restart
+  this.sql`CREATE TABLE IF NOT EXISTS users (id TEXT, name TEXT)`;
+}
+
+async onRequest(req: Request) { // HTTP
+  const {pathname} = new URL(req.url);
+  if (pathname === "/users") return Response.json(this.sql<{id,name}>`SELECT * FROM users`);
+  return new Response("Not found", {status: 404});
+}
+
+async onConnect(conn: Connection<ConnState>, ctx: ConnectionContext) { // WebSocket
+  conn.accept();
+  conn.setState({userId: ctx.request.headers.get("X-User-ID")});
+  conn.send(JSON.stringify({type: "connected", state: this.state}));
+}
+
+async onMessage(conn: Connection<ConnState>, msg: WSMessage) { // WS messages
+  const m = JSON.parse(msg as string);
+  this.setState({messages: [...this.state.messages, m]});
+  this.connections.forEach(c => c.send(JSON.stringify(m)));
+}
+
+async onEmail(email: AgentEmail) { // Email routing
+  this.sql`INSERT INTO emails (from_addr,subject,body) VALUES (${email.from},${email.headers.get("subject")},${await email.text()})`;
+}
+```
+
+## State, SQL, Scheduling
+
+```ts
+// State
+this.setState({count: 42}); // Auto-syncs
+this.setState({...this.state, count: this.state.count + 1});
+
+// SQL (parameterized queries prevent injection)
+this.sql`CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, name TEXT)`;
+this.sql`INSERT INTO users (id,name) VALUES (${userId},${name})`;
+const users = this.sql<{id,name}>`SELECT * FROM users WHERE id = ${userId}`;
+
+// Scheduling
+await this.schedule(new Date("2026-12-25"), "sendGreeting", {msg:"Hi"}); // Date
+await this.schedule(60, "checkStatus", {}); // Delay (sec)
+await this.schedule("0 0 * * *", "dailyCleanup", {}); // Cron
+await this.cancelSchedule(scheduleId);
+```
+
+## RPC Methods (@callable)
+
+```ts
+import { Agent, callable } from "agents";
+
+export class MyAgent extends Agent<Env> {
+  @callable()
+  async processTask(input: {text: string}): Promise<{result: string}> {
+    return { result: await this.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {prompt: input.text}) };
+  }
+}
+// Client: const result = await agent.processTask({ text: "Hello" });
+// Must return JSON-serializable values
+```
+
+## Connections & AI
+
+```ts
+// Connections (type: Agent<Env, State, ConnState>)
+this.connections.forEach(c => c.send(JSON.stringify(msg))); // Broadcast
+conn.setState({userId:"123"}); conn.close(1000, "Goodbye");
+
+// Workers AI
+const r = await this.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {prompt});
+
+// Manual streaming (prefer AIChatAgent)
+const stream = await client.chat.completions.create({model: "gpt-4", messages, stream: true});
+for await (const chunk of stream) conn.send(JSON.stringify({chunk: chunk.choices[0].delta.content}));
+```
+
+**Type-safe state:** `Agent<Env, State, ConnState>` - third param types `conn.state`
+
+## MCP Integration
+
+Model Context Protocol for exposing tools:
+
+```ts
+// Register & use MCP server
+await this.mcp.registerServer("github", {
+  url: env.MCP_SERVER_URL,
+  auth: { type: "oauth", clientId: env.GITHUB_CLIENT_ID, clientSecret: env.GITHUB_CLIENT_SECRET }
+});
+const tools = await this.mcp.getAITools(["github"]);
+return this.streamText({ model: openai("gpt-4"), messages: this.messages, tools, onFinish });
+```
+
+## Task Queue
+
+```ts
+await this.queue("processVideo", { videoId: "abc123" }); // Add task
+const tasks = await this.dequeue(10); // Process up to 10
+```
+
+## Context & Cleanup
+
+```ts
+const agent = getCurrentAgent<MyAgent>(); // Get current instance
+async destroy() { /* cleanup before agent destroyed */ }
+```
+
+## AI Integration
+
+```ts
+// Workers AI
+const r = await this.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {prompt});
+
+// Manual streaming (prefer AIChatAgent for auto-streaming)
+const stream = await client.chat.completions.create({model: "gpt-4", messages, stream: true});
+for await (const chunk of stream) {
+  if (chunk.choices[0]?.delta?.content) conn.send(JSON.stringify({chunk: chunk.choices[0].delta.content}));
+}
+```
+
+## Client Hooks (React)
+
+```ts
+// useAgent() - WebSocket connection + RPC
+import { useAgent } from "agents/react";
+const agent = useAgent({ agent: "MyAgent", name: "user-123" }); // name for idFromName
+const result = await agent.processTask({ text: "Hello" }); // Call @callable methods
+// agent.readyState: 0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED
+
+// useAgentChat() - AI chat UI
+import { useAgentChat } from "@cloudflare/ai-chat/react";
+const agent = useAgent({ agent: "ChatAgent" });
+const { messages, input, handleInputChange, handleSubmit, isLoading, stop, clearHistory } = 
+  useAgentChat({ 
+    agent, 
+    maxSteps: 5,        // Max tool iterations
+    resume: true,       // Auto-resume on disconnect
+    onToolCall: async (toolCall) => {
+      // Client tools (human-in-the-loop)
+      if (toolCall.toolName === "confirm") return { ok: window.confirm("Proceed?") };
+    }
+  });
+// status: "ready" | "submitted" | "streaming" | "error"
+```

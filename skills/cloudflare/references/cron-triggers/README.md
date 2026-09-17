@@ -1,1 +1,99 @@
-IyBDbG91ZGZsYXJlIENyb24gVHJpZ2dlcnMKClNjaGVkdWxlIFdvcmtlcnMgZXhlY3V0aW9uIHVzaW5nIGNyb24gZXhwcmVzc2lvbnMuIFJ1bnMgb24gQ2xvdWRmbGFyZSdzIGdsb2JhbCBuZXR3b3JrIGR1cmluZyB1bmRlcnV0aWxpemVkIHBlcmlvZHMuCgojIyBLZXkgRmVhdHVyZXMKCi0gKipVVEMtb25seSBleGVjdXRpb24qKiAtIEFsbCBzY2hlZHVsZXMgcnVuIG9uIFVUQyB0aW1lCi0gKio1LWZpZWxkIGNyb24gc3ludGF4KiogLSBRdWFydHogc2NoZWR1bGVyIGV4dGVuc2lvbnMgKEwsIFcsICMpCi0gKipHbG9iYWwgcHJvcGFnYXRpb24qKiAtIDE1bWluIGRlcGxveW1lbnQgZGVsYXkKLSAqKkF0LWxlYXN0LW9uY2UgZGVsaXZlcnkqKiAtIFJhcmUgZHVwbGljYXRlIGV4ZWN1dGlvbnMgcG9zc2libGUKLSAqKldvcmtmbG93IGludGVncmF0aW9uKiogLSBUcmlnZ2VyIGxvbmctcnVubmluZyBtdWx0aS1zdGVwIHRhc2tzCi0gKipHcmVlbiBDb21wdXRlKiogLSBPcHRpb25hbCBjYXJib24tYXdhcmUgc2NoZWR1bGluZyBkdXJpbmcgbG93LWNhcmJvbiBwZXJpb2RzCgojIyBDcm9uIFN5bnRheAoKYGBgCiDilIzilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgbWludXRlICgwLTU5KQog4pSCIOKUjOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCBob3VyICgwLTIzKQog4pSCIOKUgiDilIzilIDilIDilIDilIDilIDilIDilIAgZGF5IG9mIG1vbnRoICgxLTMxKQog4pSCIOKUgiDilIIg4pSM4pSA4pSA4pSA4pSA4pSAIG1vbnRoICgxLTEyLCBKQU4tREVDKQog4pSCIOKUgiDilIIg4pSCIOKUjOKUgOKUgOKUgCBkYXkgb2Ygd2VlayAoMS03LCBTVU4tU0FULCAxPVN1bmRheSkKICogKiAqICogKgpgYGAKCioqU3BlY2lhbCBjaGFyczoqKiBgKmAgKGFueSksIGAsYCAobGlzdCksIGAtYCAocmFuZ2UpLCBgL2AgKHN0ZXApLCBgTGAgKGxhc3QpLCBgV2AgKHdlZWtkYXkpLCBgI2AgKG50aCkKCiMjIENvbW1vbiBTY2hlZHVsZXMKCmBgYGJhc2gKKi81ICogKiAqICogICAgICAgICMgRXZlcnkgNSBtaW51dGVzCjAgKiAqICogKiAgICAgICAgICAjIEhvdXJseQowIDIgKiAqICogICAgICAgICAgIyBEYWlseSAyYW0gVVRDIChvZmYtcGVhaykKMCA5ICogKiBNT04tRlJJICAgICMgV2Vla2RheXMgOWFtIFVUQwowIDAgMSAqICogICAgICAgICAgIyBNb250aGx5IDFzdCBtaWRuaWdodCBVVEMKMCA5IEwgKiAqICAgICAgICAgICMgTGFzdCBkYXkgb2YgbW9udGggOWFtIFVUQwowIDEwICogKiBNT04jMiAgICAgIyAybmQgTW9uZGF5IDEwYW0gVVRDCiovMTAgOS0xNyAqICogTU9OLUZSSSAgIyBFdmVyeSAxMG1pbiwgOWFtLTVwbSB3ZWVrZGF5cwpgYGAKCiMjIFF1aWNrIFN0YXJ0CgoqKndyYW5nbGVyLmpzb25jOioqCmBgYGpzb25jCnsKICAibmFtZSI6ICJteS1jcm9uLXdvcmtlciIsCiAgInRyaWdnZXJzIjogewogICAgImNyb25zIjogWyIqLzUgKiAqICogKiIsICIwIDIgKiAqICoiXQogIH0KfQpgYGAKCioqSGFuZGxlcjoqKgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBzY2hlZHVsZWQoCiAgICBjb250cm9sbGVyOiBTY2hlZHVsZWRDb250cm9sbGVyLAogICAgZW52OiBFbnYsCiAgICBjdHg6IEV4ZWN1dGlvbkNvbnRleHQsCiAgKTogUHJvbWlzZTx2b2lkPiB7CiAgICBjb25zb2xlLmxvZygiQ3JvbjoiLCBjb250cm9sbGVyLmNyb24pOwogICAgY29uc29sZS5sb2coIlRpbWU6IiwgbmV3IERhdGUoY29udHJvbGxlci5zY2hlZHVsZWRUaW1lKSk7CiAgICAKICAgIGN0eC53YWl0VW50aWwoYXN5bmNUYXNrKGVudikpOyAvLyBOb24tYmxvY2tpbmcKICB9LAp9OwpgYGAKCioqVGVzdCBsb2NhbGx5OioqCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRldgpjdXJsICJodHRwOi8vbG9jYWxob3N0Ojg3ODcvX19zY2hlZHVsZWQ/Y3Jvbj0qLzUrKisqKyorKiIKYGBgCgojIyBMaW1pdHMKCi0gKipGcmVlOioqIDMgdHJpZ2dlcnMvd29ya2VyLCAxMG1zIENQVQotICoqUGFpZDoqKiBVbmxpbWl0ZWQgdHJpZ2dlcnMsIDMwcyBDUFUgKDwxaHIgaW50ZXJ2YWwpIC8gMTVtaW4gQ1BVICjiiaUxaHIgaW50ZXJ2YWwpCi0gKipQcm9wYWdhdGlvbjoqKiAxNW1pbiBnbG9iYWwgZGVwbG95bWVudAotICoqVGltZXpvbmU6KiogVVRDIG9ubHkKCiMjIFJlYWRpbmcgT3JkZXIKCioqTmV3IHRvIGNyb24gdHJpZ2dlcnM/KiogU3RhcnQgaGVyZToKMS4gVGhpcyBSRUFETUUgLSBPdmVydmlldyBhbmQgcXVpY2sgc3RhcnQKMi4gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBTZXQgdXAgeW91ciBmaXJzdCBjcm9uIHRyaWdnZXIKMy4gW2FwaS5tZF0oLi9hcGkubWQpIC0gVW5kZXJzdGFuZCB0aGUgaGFuZGxlciBBUEkKNC4gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIENvbW1vbiB1c2UgY2FzZXMgYW5kIGV4YW1wbGVzCgoqKlRyb3VibGVzaG9vdGluZz8qKiBKdW1wIHRvIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpCgojIyBJbiBUaGlzIFJlZmVyZW5jZQotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gd3JhbmdsZXIgY29uZmlnLCBlbnYtc3BlY2lmaWMgc2NoZWR1bGVzLCBHcmVlbiBDb21wdXRlCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gU2NoZWR1bGVkQ29udHJvbGxlciwgbm9SZXRyeSgpLCB3YWl0VW50aWwsIHRlc3RpbmcgcGF0dGVybnMKLSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gVXNlIGNhc2VzLCBtb25pdG9yaW5nLCBxdWV1ZSBpbnRlZ3JhdGlvbiwgRHVyYWJsZSBPYmplY3RzCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBUaW1lem9uZSBpc3N1ZXMsIGlkZW1wb3RlbmN5LCBzZWN1cml0eSwgdGVzdGluZwoKIyMgU2VlIEFsc28KLSBbd29ya2Zsb3dzXSguLi93b3JrZmxvd3MvKSAtIEFsdGVybmF0aXZlIGZvciBsb25nLXJ1bm5pbmcgc2NoZWR1bGVkIHRhc2tzCi0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIFdvcmtlciBydW50aW1lIGRvY3VtZW50YXRpb24K
+# Cloudflare Cron Triggers
+
+Schedule Workers execution using cron expressions. Runs on Cloudflare's global network during underutilized periods.
+
+## Key Features
+
+- **UTC-only execution** - All schedules run on UTC time
+- **5-field cron syntax** - Quartz scheduler extensions (L, W, #)
+- **Global propagation** - 15min deployment delay
+- **At-least-once delivery** - Rare duplicate executions possible
+- **Workflow integration** - Trigger long-running multi-step tasks
+- **Green Compute** - Optional carbon-aware scheduling during low-carbon periods
+
+## Cron Syntax
+
+```
+ ┌─────────── minute (0-59)
+ │ ┌───────── hour (0-23)
+ │ │ ┌─────── day of month (1-31)
+ │ │ │ ┌───── month (1-12, JAN-DEC)
+ │ │ │ │ ┌─── day of week (1-7, SUN-SAT, 1=Sunday)
+ * * * * *
+```
+
+**Special chars:** `*` (any), `,` (list), `-` (range), `/` (step), `L` (last), `W` (weekday), `#` (nth)
+
+## Common Schedules
+
+```bash
+*/5 * * * *        # Every 5 minutes
+0 * * * *          # Hourly
+0 2 * * *          # Daily 2am UTC (off-peak)
+0 9 * * MON-FRI    # Weekdays 9am UTC
+0 0 1 * *          # Monthly 1st midnight UTC
+0 9 L * *          # Last day of month 9am UTC
+0 10 * * MON#2     # 2nd Monday 10am UTC
+*/10 9-17 * * MON-FRI  # Every 10min, 9am-5pm weekdays
+```
+
+## Quick Start
+
+**wrangler.jsonc:**
+```jsonc
+{
+  "name": "my-cron-worker",
+  "triggers": {
+    "crons": ["*/5 * * * *", "0 2 * * *"]
+  }
+}
+```
+
+**Handler:**
+```typescript
+export default {
+  async scheduled(
+    controller: ScheduledController,
+    env: Env,
+    ctx: ExecutionContext,
+  ): Promise<void> {
+    console.log("Cron:", controller.cron);
+    console.log("Time:", new Date(controller.scheduledTime));
+    
+    ctx.waitUntil(asyncTask(env)); // Non-blocking
+  },
+};
+```
+
+**Test locally:**
+```bash
+npx wrangler dev
+curl "http://localhost:8787/__scheduled?cron=*/5+*+*+*+*"
+```
+
+## Limits
+
+- **Free:** 3 triggers/worker, 10ms CPU
+- **Paid:** Unlimited triggers, 30s CPU (<1hr interval) / 15min CPU (≥1hr interval)
+- **Propagation:** 15min global deployment
+- **Timezone:** UTC only
+
+## Reading Order
+
+**New to cron triggers?** Start here:
+1. This README - Overview and quick start
+2. [configuration.md](./configuration.md) - Set up your first cron trigger
+3. [api.md](./api.md) - Understand the handler API
+4. [patterns.md](./patterns.md) - Common use cases and examples
+
+**Troubleshooting?** Jump to [gotchas.md](./gotchas.md)
+
+## In This Reference
+- [configuration.md](./configuration.md) - wrangler config, env-specific schedules, Green Compute
+- [api.md](./api.md) - ScheduledController, noRetry(), waitUntil, testing patterns
+- [patterns.md](./patterns.md) - Use cases, monitoring, queue integration, Durable Objects
+- [gotchas.md](./gotchas.md) - Timezone issues, idempotency, security, testing
+
+## See Also
+- [workflows](../workflows/) - Alternative for long-running scheduled tasks
+- [workers](../workers/) - Worker runtime documentation

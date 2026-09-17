@@ -1,1 +1,252 @@
-IyBTZW5kaW5nIEVtYWlscyDigJQgV29ya2VycyBCaW5kaW5nICYgQWdlbnRzIFNESwoKU2VuZCBlbWFpbHMgZnJvbSBDbG91ZGZsYXJlIFdvcmtlcnMgdXNpbmcgdGhlIG5hdGl2ZSBiaW5kaW5nLCBvciBmcm9tIEFJIGFnZW50cyB1c2luZyB0aGUgQWdlbnRzIFNESy4gSWYgeW91ciBhcHAgaXMgTk9UIG9uIFdvcmtlcnMsIHVzZSB0aGUgW1JFU1QgQVBJXShyZXN0LWFwaS5tZCkgaW5zdGVhZC4KCiMjIFdvcmtlcnMgQmluZGluZwoKIyMjIENvbmZpZ3VyYXRpb24KCmBgYGpzb25jCi8vIHdyYW5nbGVyLmpzb25jCnsKICAic2VuZF9lbWFpbCI6IFsKICAgIHsgIm5hbWUiOiAiRU1BSUwiIH0KICBdCn0KYGBgCgpGb3IgbG9jYWwgZGV2ZWxvcG1lbnQsIGFkZCBgInJlbW90ZSI6IHRydWVgIHNvIGVtYWlsIHNlbmRzIGFyZSBwcm94aWVkIHRvIHRoZSByZWFsIHNlcnZpY2U6CgpgYGBqc29uYwp7ICJzZW5kX2VtYWlsIjogW3sgIm5hbWUiOiAiRU1BSUwiLCAicmVtb3RlIjogdHJ1ZSB9XSB9CmBgYAoKUnVuIGBucHggd3JhbmdsZXIgdHlwZXNgIHRvIGF1dG8tZ2VuZXJhdGUgdGhlIGBFbnZgIGludGVyZmFjZSB3aXRoIHlvdXIgYEVNQUlMYCBiaW5kaW5nLiBUaGlzIHByb2R1Y2VzIGEgYHdvcmtlci1jb25maWd1cmF0aW9uLmQudHNgIHdpdGggdGhlIHJlYWwgYFNlbmRFbWFpbGAsIGBFbWFpbEF0dGFjaG1lbnRgLCBgRW1haWxBZGRyZXNzYCwgYW5kIHJlbGF0ZWQgdHlwZXMgZnJvbSB0aGUgd29ya2VyZCBydW50aW1lLiBBbHdheXMgdXNlIHRoZXNlIGdlbmVyYXRlZCB0eXBlcyDigJQgZG8gbm90IGRlZmluZSB0aGVtIG1hbnVhbGx5LgoKKipOb3RlOioqIFdvcmtlcnMgYmluZGluZyB1c2VzIGBlbWFpbGAgaW4gdGhlIGZyb20gb2JqZWN0IChgRW1haWxBZGRyZXNzYCB0eXBlKS4gUkVTVCBBUEkgdXNlcyBgYWRkcmVzc2AuIFNlZSBbcmVzdC1hcGkubWRdKHJlc3QtYXBpLm1kKS4KCiMjIHNlbmQoKQoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGVudi5FTUFJTC5zZW5kKHsKICAgICAgdG86ICJ1c2VyQGV4YW1wbGUuY29tIiwKICAgICAgZnJvbTogeyBlbWFpbDogIndlbGNvbWVAeW91cmRvbWFpbi5jb20iLCBuYW1lOiAiTXkgQXBwIiB9LAogICAgICBzdWJqZWN0OiAiV2VsY29tZSEiLAogICAgICBodG1sOiAiPGgxPldlbGNvbWUhPC9oMT48cD5UaGFua3MgZm9yIHNpZ25pbmcgdXAuPC9wPiIsCiAgICAgIHRleHQ6ICJXZWxjb21lISBUaGFua3MgZm9yIHNpZ25pbmcgdXAuIiwKICAgIH0pOwogICAgcmV0dXJuIG5ldyBSZXNwb25zZShgU2VudDogJHtyZXNwb25zZS5tZXNzYWdlSWR9YCk7CiAgfSwKfSBzYXRpc2ZpZXMgRXhwb3J0ZWRIYW5kbGVyPEVudj47CmBgYAoKTXVsdGlwbGUgcmVjaXBpZW50cyAobWF4IDUwIGNvbWJpbmVkIHRvICsgY2MgKyBiY2MpOgoKYGBgdHlwZXNjcmlwdApjb25zdCByZXNwb25zZSA9IGF3YWl0IGVudi5FTUFJTC5zZW5kKHsKICB0bzogWyJ1c2VyMUBleGFtcGxlLmNvbSIsICJ1c2VyMkBleGFtcGxlLmNvbSJdLAogIGNjOiBbIm1hbmFnZXJAY29tcGFueS5jb20iXSwKICBiY2M6IFsiYXJjaGl2ZUBjb21wYW55LmNvbSJdLAogIGZyb206IHsgZW1haWw6ICJvcmRlcnNAeW91cmRvbWFpbi5jb20iLCBuYW1lOiAiT3JkZXJzIiB9LAogIHJlcGx5VG86ICJzdXBwb3J0QHlvdXJkb21haW4uY29tIiwKICBzdWJqZWN0OiAiT3JkZXIgQ29uZmlybWF0aW9uICMxMjM0NSIsCiAgaHRtbDogIjxoMT5Zb3VyIG9yZGVyIGlzIGNvbmZpcm1lZDwvaDE+IiwKICB0ZXh0OiAiWW91ciBvcmRlciBpcyBjb25maXJtZWQiLAp9KTsKYGBgCgojIyBBdHRhY2htZW50cwoKKipJbXBvcnRhbnQ6KiogVGhlIFdvcmtlcnMgYmluZGluZyBhbmQgUkVTVCBBUEkgaGFuZGxlIGF0dGFjaG1lbnQgY29udGVudCBkaWZmZXJlbnRseToKLSAqKldvcmtlcnMgYmluZGluZzoqKiBgY29udGVudGAgYWNjZXB0cyBgc3RyaW5nIHwgQXJyYXlCdWZmZXIgfCBBcnJheUJ1ZmZlclZpZXdgLiBTdHJpbmdzIGFyZSB0cmVhdGVkIGFzICoqcmF3IGNvbnRlbnQqKiAobm90IGJhc2U2NCkuIEZvciB0ZXh0IGZpbGVzLCBwYXNzIHRoZSByYXcgc3RyaW5nLiBGb3IgYmluYXJ5IGZpbGVzIChpbWFnZXMsIFBERnMpLCBwYXNzIGFuIGBBcnJheUJ1ZmZlcmAuIE5vdGU6IGBBcnJheUJ1ZmZlcmAgZG9lcyBub3Qgd29yayB3aXRoIGAicmVtb3RlIjogdHJ1ZWAgaW4gbG9jYWwgZGV2IOKAlCBkZXBsb3kgdG8gdGVzdCBiaW5hcnkgYXR0YWNobWVudHMuCi0gKipSRVNUIEFQSToqKiBgY29udGVudGAgaXMgYWx3YXlzIGEgKipiYXNlNjQtZW5jb2RlZCBzdHJpbmcqKi4gU2VlIFtyZXN0LWFwaS5tZF0ocmVzdC1hcGkubWQpLgoKYGBgdHlwZXNjcmlwdAovLyBUZXh0IGZpbGUgYXR0YWNobWVudCDigJQgcGFzcyByYXcgc3RyaW5nIGNvbnRlbnQKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuRU1BSUwuc2VuZCh7CiAgdG86ICJjdXN0b21lckBleGFtcGxlLmNvbSIsCiAgZnJvbTogImludm9pY2VzQHlvdXJkb21haW4uY29tIiwKICBzdWJqZWN0OiAiWW91ciBSZXBvcnQiLAogIGh0bWw6ICI8aDE+UmVwb3J0IGF0dGFjaGVkPC9oMT4iLAogIHRleHQ6ICJSZXBvcnQgYXR0YWNoZWQuIiwKICBhdHRhY2htZW50czogW3sKICAgIGNvbnRlbnQ6ICJOYW1lLEFtb3VudFxuV2lkZ2V0IEEsMTAwXG5XaWRnZXQgQiwyNTAiLCAvLyBSYXcgdGV4dCwgTk9UIGJhc2U2NAogICAgZmlsZW5hbWU6ICJyZXBvcnQuY3N2IiwKICAgIHR5cGU6ICJ0ZXh0L2NzdiIsCiAgICBkaXNwb3NpdGlvbjogImF0dGFjaG1lbnQiLAogIH1dLAp9KTsKCi8vIEJpbmFyeSBmaWxlIGF0dGFjaG1lbnQg4oCUIHVzZSBBcnJheUJ1ZmZlcgpjb25zdCBwZGZCeXRlcyA9IGF3YWl0IGZldGNoUGRmRnJvbVNvbWV3aGVyZSgpOyAvLyBSZXR1cm5zIEFycmF5QnVmZmVyCmNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZW52LkVNQUlMLnNlbmQoewogIHRvOiAiY3VzdG9tZXJAZXhhbXBsZS5jb20iLAogIGZyb206ICJpbnZvaWNlc0B5b3VyZG9tYWluLmNvbSIsCiAgc3ViamVjdDogIllvdXIgSW52b2ljZSIsCiAgaHRtbDogIjxoMT5JbnZvaWNlIGF0dGFjaGVkPC9oMT4iLAogIHRleHQ6ICJJbnZvaWNlIGF0dGFjaGVkLiIsCiAgYXR0YWNobWVudHM6IFt7CiAgICBjb250ZW50OiBwZGZCeXRlcywKICAgIGZpbGVuYW1lOiAiaW52b2ljZS0xMjM0NS5wZGYiLAogICAgdHlwZTogImFwcGxpY2F0aW9uL3BkZiIsCiAgICBkaXNwb3NpdGlvbjogImF0dGFjaG1lbnQiLAogIH1dLAp9KTsKCi8vIElubGluZSBpbWFnZSDigJQgcmVmZXJlbmNlIGluIEhUTUwgd2l0aCBjaWQ6PGNvbnRlbnRJZD4KY29uc3QgaW1hZ2VCeXRlcyA9IGF3YWl0IGZldGNoSW1hZ2VGcm9tU29tZXdoZXJlKCk7IC8vIFJldHVybnMgQXJyYXlCdWZmZXIKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuRU1BSUwuc2VuZCh7CiAgdG86ICJ1c2VyQGV4YW1wbGUuY29tIiwKICBmcm9tOiAibWFya2V0aW5nQHlvdXJkb21haW4uY29tIiwKICBzdWJqZWN0OiAiTmV3IFByb2R1Y3QiLAogIGh0bWw6ICc8aW1nIHNyYz0iY2lkOnByb2R1Y3QtaGVybyIgYWx0PSJQcm9kdWN0IiAvPicsCiAgYXR0YWNobWVudHM6IFt7CiAgICBjb250ZW50OiBpbWFnZUJ5dGVzLAogICAgZmlsZW5hbWU6ICJwcm9kdWN0LnBuZyIsCiAgICB0eXBlOiAiaW1hZ2UvcG5nIiwKICAgIGRpc3Bvc2l0aW9uOiAiaW5saW5lIiwKICAgIGNvbnRlbnRJZDogInByb2R1Y3QtaGVybyIsCiAgfV0sCn0pOwpgYGAKClRvdGFsIGVtYWlsIHNpemUgKGJvZHkgKyBhdHRhY2htZW50cykgY2Fubm90IGV4Y2VlZCAyNSBNaUIuCgojIyBDdXN0b20gSGVhZGVycwoKT25seSB3aGl0ZWxpc3RlZCBoZWFkZXJzIGFsbG93ZWQuIFNlZSB0aGUgW2hlYWRlcnMgcmVmZXJlbmNlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vZW1haWwtc2VydmljZS9yZWZlcmVuY2UvaGVhZGVycy8pLgoKYGBgdHlwZXNjcmlwdApjb25zdCByZXNwb25zZSA9IGF3YWl0IGVudi5FTUFJTC5zZW5kKHsKICB0bzogInVzZXJAZXhhbXBsZS5jb20iLAogIGZyb206ICJub3RpZmljYXRpb25zQHlvdXJkb21haW4uY29tIiwKICBzdWJqZWN0OiAiWW91ciB3ZWVrbHkgZGlnZXN0IiwKICBodG1sOiAiPGgxPldlZWtseSBEaWdlc3Q8L2gxPiIsCiAgaGVhZGVyczogewogICAgIkluLVJlcGx5LVRvIjogIjxvcmlnaW5hbC1tZXNzYWdlLWlkQHlvdXJkb21haW4uY29tPiIsCiAgICAiTGlzdC1VbnN1YnNjcmliZSI6ICI8aHR0cHM6Ly95b3VyZG9tYWluLmNvbS91bnN1YnNjcmliZT9pZD1hYmMxMjM+IiwKICAgICJMaXN0LVVuc3Vic2NyaWJlLVBvc3QiOiAiTGlzdC1VbnN1YnNjcmliZT1PbmUtQ2xpY2siLAogICAgIlgtQ2FtcGFpZ24tSUQiOiAid2Vla2x5LWRpZ2VzdC0yMDI2LTAzIiwKICB9LAp9KTsKYGBgCgojIyBMZWdhY3kgRW1haWxNZXNzYWdlIEFQSQoKVGhlIGBFbWFpbE1lc3NhZ2VgIEFQSSByZW1haW5zIHN1cHBvcnRlZC4gVXNlcyByYXcgTUlNRSB2aWEgYG1pbWV0ZXh0YDoKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgRW1haWxNZXNzYWdlIH0gZnJvbSAiY2xvdWRmbGFyZTplbWFpbCI7CmltcG9ydCB7IGNyZWF0ZU1pbWVNZXNzYWdlIH0gZnJvbSAibWltZXRleHQiOwoKY29uc3QgbXNnID0gY3JlYXRlTWltZU1lc3NhZ2UoKTsKbXNnLnNldFNlbmRlcih7IG5hbWU6ICJTZW5kZXIiLCBhZGRyOiAic2VuZGVyQHlvdXJkb21haW4uY29tIiB9KTsKbXNnLnNldFJlY2lwaWVudCgicmVjaXBpZW50QGV4YW1wbGUuY29tIik7Cm1zZy5zZXRTdWJqZWN0KCJIZWxsbyIpOwptc2cuYWRkTWVzc2FnZSh7IGNvbnRlbnRUeXBlOiAidGV4dC9odG1sIiwgZGF0YTogIjxoMT5IZWxsbzwvaDE+IiB9KTsKCmF3YWl0IGVudi5FTUFJTC5zZW5kKG5ldyBFbWFpbE1lc3NhZ2UoInNlbmRlckB5b3VyZG9tYWluLmNvbSIsICJyZWNpcGllbnRAZXhhbXBsZS5jb20iLCBtc2cuYXNSYXcoKSkpOwpgYGAKClJlcXVpcmVzIGBucG0gaW5zdGFsbCBtaW1ldGV4dGAgYW5kIGAibm9kZWpzX2NvbXBhdCJgIGluIGNvbXBhdGliaWxpdHkgZmxhZ3MuCgojIyBBZ2VudHMgU0RLIEVtYWlsCgpBZ2VudHMgY2FuIHJlY2VpdmUgYW5kIHJlcGx5IHRvIGVtYWlscyBuYXRpdmVseSB2aWEgdGhlIEFnZW50cyBTREsuCgpgYGBqc29uYwovLyB3cmFuZ2xlci5qc29uYwp7CiAgImR1cmFibGVfb2JqZWN0cyI6IHsKICAgICJiaW5kaW5ncyI6IFt7ICJuYW1lIjogIkVtYWlsQWdlbnQiLCAiY2xhc3NfbmFtZSI6ICJFbWFpbEFnZW50IiB9XQogIH0sCiAgIm1pZ3JhdGlvbnMiOiBbeyAidGFnIjogInYxIiwgIm5ld19zcWxpdGVfY2xhc3NlcyI6IFsiRW1haWxBZ2VudCJdIH1dLAogICJzZW5kX2VtYWlsIjogW3sgIm5hbWUiOiAiRU1BSUwiLCAiZGVzdGluYXRpb25fYWRkcmVzcyI6ICJyZXBseUB5b3VyZG9tYWluLmNvbSIgfV0KfQpgYGAKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgQWdlbnQgfSBmcm9tICJhZ2VudHMiOwppbXBvcnQgeyB0eXBlIEFnZW50RW1haWwgfSBmcm9tICJhZ2VudHMvZW1haWwiOwppbXBvcnQgUG9zdGFsTWltZSBmcm9tICJwb3N0YWwtbWltZSI7CgpleHBvcnQgY2xhc3MgRW1haWxBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBhc3luYyBvbkVtYWlsKGVtYWlsOiBBZ2VudEVtYWlsKSB7CiAgICBjb25zdCBwYXJzZWQgPSBhd2FpdCBQb3N0YWxNaW1lLnBhcnNlKGF3YWl0IGVtYWlsLmdldFJhdygpKTsKICAgIGF3YWl0IHRoaXMucmVwbHlUb0VtYWlsKGVtYWlsLCB7CiAgICAgIGZyb21OYW1lOiAiTXkgQWdlbnQiLAogICAgICBzdWJqZWN0OiBgUmU6ICR7cGFyc2VkLnN1YmplY3R9YCwKICAgICAgYm9keTogIlRoYW5rcyBmb3IgeW91ciBlbWFpbCEgSSdsbCBsb29rIGludG8gdGhpcy4iLAogICAgfSk7CiAgfQp9CmBgYAoKUm91dGUgZW1haWxzIHRvIGFnZW50cyB3aXRoIHJlc29sdmVyczoKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgcm91dGVBZ2VudEVtYWlsIH0gZnJvbSAiYWdlbnRzIjsKaW1wb3J0IHsgY3JlYXRlQWRkcmVzc0Jhc2VkRW1haWxSZXNvbHZlciB9IGZyb20gImFnZW50cy9lbWFpbCI7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZW1haWwobWVzc2FnZSwgZW52KSB7CiAgICBhd2FpdCByb3V0ZUFnZW50RW1haWwobWVzc2FnZSwgZW52LCB7CiAgICAgIHJlc29sdmVyOiBjcmVhdGVBZGRyZXNzQmFzZWRFbWFpbFJlc29sdmVyKCJFbWFpbEFnZW50IiksCiAgICB9KTsKICB9LAp9OwpgYGAKClJlc29sdmVyIHR5cGVzOiBgY3JlYXRlQWRkcmVzc0Jhc2VkRW1haWxSZXNvbHZlcmAgKHJlY2lwaWVudCDihpIgaW5zdGFuY2UgbmFtZSksIGBjcmVhdGVTZWN1cmVSZXBseUVtYWlsUmVzb2x2ZXIoc2VjcmV0KWAgKEhNQUMtc2lnbmVkIHJlcGxpZXMpLCBgY3JlYXRlQ2F0Y2hBbGxFbWFpbFJlc29sdmVyKCJBZ2VudCIsICJkZWZhdWx0IilgIChzaW5nbGUgaW5ib3gpLiBVc2UgYGlzQXV0b1JlcGx5RW1haWwoZW1haWwuaGVhZGVycylgIHRvIHNraXAgdmFjYXRpb24gcmVzcG9uZGVycy4KCiMjIEVycm9yIEhhbmRsaW5nCgpgYGB0eXBlc2NyaXB0CnRyeSB7CiAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuRU1BSUwuc2VuZCh7IC8qIC4uLiAqLyB9KTsKfSBjYXRjaCAoZXJyb3IpIHsKICAvLyBlcnJvci5jb2RlIGlzIG9uZSBvZiB0aGUgRV8qIGVycm9yIGNvZGVzCiAgY29uc29sZS5lcnJvcihgRmFpbGVkOiAke2Vycm9yLmNvZGV9IC0gJHtlcnJvci5tZXNzYWdlfWApOwp9CmBgYAoKVGhlc2UgZXJyb3IgY29kZXMgYXJlIGZvciB0aGUgKipXb3JrZXJzIGJpbmRpbmcqKiAodGhyb3duIGFzIEVycm9yIG9iamVjdHMgd2l0aCBgLmNvZGVgIGFuZCBgLm1lc3NhZ2VgKS4gVGhlICoqUkVTVCBBUEkqKiByZXR1cm5zIHN0YW5kYXJkIENsb3VkZmxhcmUgQVBJIG51bWVyaWMgZXJyb3IgY29kZXMgaW5zdGVhZCDigJQgc2VlIFtyZXN0LWFwaS5tZF0ocmVzdC1hcGkubWQpLgoKfCBFcnJvciBDb2RlIHwgV2hhdCBJdCBNZWFucyB8IFdoYXQgdG8gRG8gfAp8LS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgYEVfVkFMSURBVElPTl9FUlJPUmAgfCBJbnZhbGlkIHBheWxvYWQgfCBDaGVjayBlbWFpbCBmb3JtYXQsIHJlcXVpcmVkIGZpZWxkcyB8CnwgYEVfRklFTERfTUlTU0lOR2AgfCBSZXF1aXJlZCBmaWVsZCBtaXNzaW5nIHwgQWRkIGB0b2AsIGBmcm9tYCwgb3IgYHN1YmplY3RgIHwKfCBgRV9UT09fTUFOWV9SRUNJUElFTlRTYCB8IENvbWJpbmVkIHRvL2NjL2JjYyBleGNlZWRzIDUwIHwgU3BsaXQgaW50byBtdWx0aXBsZSBzZW5kcyB8CnwgYEVfU0VOREVSX05PVF9WRVJJRklFRGAgfCBEb21haW4gbm90IG9uYm9hcmRlZCB8IFJ1biBgd3JhbmdsZXIgZW1haWwgc2VuZGluZyBlbmFibGUgeW91cmRvbWFpbi5jb21gIG9yIG9uYm9hcmQgaW4gRGFzaGJvYXJkIHwKfCBgRV9SRUNJUElFTlRfTk9UX0FMTE9XRURgIHwgUmVjaXBpZW50IG5vdCBpbiBhbGxvd2VkIGxpc3QgfCBBZGQgdG8gYGFsbG93ZWRfZGVzdGluYXRpb25fYWRkcmVzc2VzYCB8CnwgYEVfUkVDSVBJRU5UX1NVUFBSRVNTRURgIHwgQWRkcmVzcyBib3VuY2VkIG9yIHJlcG9ydGVkIHNwYW0gfCBSZW1vdmUgZnJvbSB5b3VyIGxpc3Q7IGNoZWNrIHN1cHByZXNzaW9uIGxpc3QgaW4gRGFzaGJvYXJkIHwKfCBgRV9TRU5ERVJfRE9NQUlOX05PVF9BVkFJTEFCTEVgIHwgRG9tYWluIG5vdCBhdmFpbGFibGUgZm9yIHNlbmRpbmcgfCBDb21wbGV0ZSBkb21haW4gb25ib2FyZGluZyB8CnwgYEVfQ09OVEVOVF9UT09fTEFSR0VgIHwgQ29udGVudCBleGNlZWRzIDI1IE1pQiB8IFJlZHVjZSBhdHRhY2htZW50cyBvciBib2R5IHwKfCBgRV9SQVRFX0xJTUlUX0VYQ0VFREVEYCB8IFJhdGUgbGltaXQgaGl0IHwgUmV0cnkgd2l0aCBleHBvbmVudGlhbCBiYWNrb2ZmIHwKfCBgRV9EQUlMWV9MSU1JVF9FWENFRURFRGAgfCBEYWlseSBxdW90YSByZWFjaGVkIHwgV2FpdCBvciByZXF1ZXN0IGxpbWl0IGluY3JlYXNlIHwKfCBgRV9ERUxJVkVSWV9GQUlMRURgIHwgU01UUCBkZWxpdmVyeSBmYWlsdXJlIHwgQ2hlY2sgcmVjaXBpZW50IGFkZHJlc3MsIHJldHJ5IGlmIHRyYW5zaWVudCB8CnwgYEVfSU5URVJOQUxfU0VSVkVSX0VSUk9SYCB8IFNlcnZpY2UgdGVtcG9yYXJpbHkgdW5hdmFpbGFibGUgfCBSZXRyeSB3aXRoIGV4cG9uZW50aWFsIGJhY2tvZmYgfAp8IGBFX0hFQURFUl9OT1RfQUxMT1dFRGAgfCBIZWFkZXIgbm90IG9uIHdoaXRlbGlzdCB8IFVzZSBhbiBhbGxvd2VkIGhlYWRlcjsgc2VlIFtoZWFkZXJzIHJlZmVyZW5jZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2VtYWlsLXNlcnZpY2UvcmVmZXJlbmNlL2hlYWRlcnMvKSB8CnwgYEVfSEVBREVSX1VTRV9BUElfRklFTERgIHwgTXVzdCB1c2UgQVBJIGZpZWxkIGluc3RlYWQgfCBTZXQgYEZyb21gLCBgVG9gLCBldGMuIHZpYSB0aGUgZGVkaWNhdGVkIEFQSSBmaWVsZHMsIG5vdCBgaGVhZGVyc2AgfAp8IGBFX0hFQURFUl9WQUxVRV9JTlZBTElEYCB8IEhlYWRlciB2YWx1ZSBpcyBtYWxmb3JtZWQgb3IgZW1wdHkgfCBGaXggdGhlIHZhbHVlIGZvcm1hdCAoZS5nLiwgTGlzdC1VbnN1YnNjcmliZSBuZWVkcyBhbmdsZS1icmFja2V0IFVSSXMpIHwKfCBgRV9IRUFERVJfVkFMVUVfVE9PX0xPTkdgIHwgSGVhZGVyIHZhbHVlIGV4Y2VlZHMgMiwwNDggYnl0ZXMgfCBTaG9ydGVuIHRoZSBoZWFkZXIgdmFsdWUgfAp8IGBFX0hFQURFUl9OQU1FX0lOVkFMSURgIHwgSW52YWxpZCBoZWFkZXIgbmFtZSB8IEZpeCBjaGFyYWN0ZXJzIG9yIGtlZXAgdW5kZXIgMTAwIGJ5dGVzIHwKfCBgRV9IRUFERVJTX1RPT19MQVJHRWAgfCBUb3RhbCBoZWFkZXJzIGV4Y2VlZCAxNiBLQiB8IFJlZHVjZSBudW1iZXIgb3Igc2l6ZSBvZiBjdXN0b20gaGVhZGVycyB8CnwgYEVfSEVBREVSU19UT09fTUFOWWAgfCBNb3JlIHRoYW4gMjAgbm9uLVggaGVhZGVycyB8IFJlZHVjZSB0byAyMCBvciBmZXdlciB3aGl0ZWxpc3RlZCBoZWFkZXJzIHwKCkZvciBgRV9SQVRFX0xJTUlUX0VYQ0VFREVEYCBhbmQgYEVfREVMSVZFUllfRkFJTEVEYCwgcmV0cnkgd2l0aCBleHBvbmVudGlhbCBiYWNrb2ZmLiBGb3IgdmFsaWRhdGlvbiBlcnJvcnMgKGBFX1ZBTElEQVRJT05fRVJST1JgLCBgRV9GSUVMRF9NSVNTSU5HYCwgYEVfU0VOREVSX05PVF9WRVJJRklFRGApLCBmaXggdGhlIHJlcXVlc3Qg4oCUIHJldHJ5aW5nIHdvbid0IGhlbHAuCgojIyBSZXN0cmljdGVkIEJpbmRpbmdzCgpSZXN0cmljdCB3aGljaCBgZnJvbWAgYWRkcmVzc2VzIGEgYmluZGluZyBjYW4gdXNlOgoKYGBganNvbmMKewogICJzZW5kX2VtYWlsIjogW3sKICAgICJuYW1lIjogIlJFU1RSSUNURURfRU1BSUwiLAogICAgImFsbG93ZWRfc2VuZGVyX2FkZHJlc3NlcyI6IFsibm9yZXBseUB5b3VyZG9tYWluLmNvbSIsICJzdXBwb3J0QHlvdXJkb21haW4uY29tIl0KICB9XQp9CmBgYAo=
+# Sending Emails — Workers Binding & Agents SDK
+
+Send emails from Cloudflare Workers using the native binding, or from AI agents using the Agents SDK. If your app is NOT on Workers, use the [REST API](rest-api.md) instead.
+
+## Workers Binding
+
+### Configuration
+
+```jsonc
+// wrangler.jsonc
+{
+  "send_email": [
+    { "name": "EMAIL" }
+  ]
+}
+```
+
+For local development, add `"remote": true` so email sends are proxied to the real service:
+
+```jsonc
+{ "send_email": [{ "name": "EMAIL", "remote": true }] }
+```
+
+Run `npx wrangler types` to auto-generate the `Env` interface with your `EMAIL` binding. This produces a `worker-configuration.d.ts` with the real `SendEmail`, `EmailAttachment`, `EmailAddress`, and related types from the workerd runtime. Always use these generated types — do not define them manually.
+
+**Note:** Workers binding uses `email` in the from object (`EmailAddress` type). REST API uses `address`. See [rest-api.md](rest-api.md).
+
+## send()
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const response = await env.EMAIL.send({
+      to: "user@example.com",
+      from: { email: "welcome@yourdomain.com", name: "My App" },
+      subject: "Welcome!",
+      html: "<h1>Welcome!</h1><p>Thanks for signing up.</p>",
+      text: "Welcome! Thanks for signing up.",
+    });
+    return new Response(`Sent: ${response.messageId}`);
+  },
+} satisfies ExportedHandler<Env>;
+```
+
+Multiple recipients (max 50 combined to + cc + bcc):
+
+```typescript
+const response = await env.EMAIL.send({
+  to: ["user1@example.com", "user2@example.com"],
+  cc: ["manager@company.com"],
+  bcc: ["archive@company.com"],
+  from: { email: "orders@yourdomain.com", name: "Orders" },
+  replyTo: "support@yourdomain.com",
+  subject: "Order Confirmation #12345",
+  html: "<h1>Your order is confirmed</h1>",
+  text: "Your order is confirmed",
+});
+```
+
+## Attachments
+
+**Important:** The Workers binding and REST API handle attachment content differently:
+- **Workers binding:** `content` accepts `string | ArrayBuffer | ArrayBufferView`. Strings are treated as **raw content** (not base64). For text files, pass the raw string. For binary files (images, PDFs), pass an `ArrayBuffer`. Note: `ArrayBuffer` does not work with `"remote": true` in local dev — deploy to test binary attachments.
+- **REST API:** `content` is always a **base64-encoded string**. See [rest-api.md](rest-api.md).
+
+```typescript
+// Text file attachment — pass raw string content
+const response = await env.EMAIL.send({
+  to: "customer@example.com",
+  from: "invoices@yourdomain.com",
+  subject: "Your Report",
+  html: "<h1>Report attached</h1>",
+  text: "Report attached.",
+  attachments: [{
+    content: "Name,Amount\nWidget A,100\nWidget B,250", // Raw text, NOT base64
+    filename: "report.csv",
+    type: "text/csv",
+    disposition: "attachment",
+  }],
+});
+
+// Binary file attachment — use ArrayBuffer
+const pdfBytes = await fetchPdfFromSomewhere(); // Returns ArrayBuffer
+const response = await env.EMAIL.send({
+  to: "customer@example.com",
+  from: "invoices@yourdomain.com",
+  subject: "Your Invoice",
+  html: "<h1>Invoice attached</h1>",
+  text: "Invoice attached.",
+  attachments: [{
+    content: pdfBytes,
+    filename: "invoice-12345.pdf",
+    type: "application/pdf",
+    disposition: "attachment",
+  }],
+});
+
+// Inline image — reference in HTML with cid:<contentId>
+const imageBytes = await fetchImageFromSomewhere(); // Returns ArrayBuffer
+const response = await env.EMAIL.send({
+  to: "user@example.com",
+  from: "marketing@yourdomain.com",
+  subject: "New Product",
+  html: '<img src="cid:product-hero" alt="Product" />',
+  attachments: [{
+    content: imageBytes,
+    filename: "product.png",
+    type: "image/png",
+    disposition: "inline",
+    contentId: "product-hero",
+  }],
+});
+```
+
+Total email size (body + attachments) cannot exceed 25 MiB.
+
+## Custom Headers
+
+Only whitelisted headers allowed. See the [headers reference](https://developers.cloudflare.com/email-service/reference/headers/).
+
+```typescript
+const response = await env.EMAIL.send({
+  to: "user@example.com",
+  from: "notifications@yourdomain.com",
+  subject: "Your weekly digest",
+  html: "<h1>Weekly Digest</h1>",
+  headers: {
+    "In-Reply-To": "<original-message-id@yourdomain.com>",
+    "List-Unsubscribe": "<https://yourdomain.com/unsubscribe?id=abc123>",
+    "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+    "X-Campaign-ID": "weekly-digest-2026-03",
+  },
+});
+```
+
+## Legacy EmailMessage API
+
+The `EmailMessage` API remains supported. Uses raw MIME via `mimetext`:
+
+```typescript
+import { EmailMessage } from "cloudflare:email";
+import { createMimeMessage } from "mimetext";
+
+const msg = createMimeMessage();
+msg.setSender({ name: "Sender", addr: "sender@yourdomain.com" });
+msg.setRecipient("recipient@example.com");
+msg.setSubject("Hello");
+msg.addMessage({ contentType: "text/html", data: "<h1>Hello</h1>" });
+
+await env.EMAIL.send(new EmailMessage("sender@yourdomain.com", "recipient@example.com", msg.asRaw()));
+```
+
+Requires `npm install mimetext` and `"nodejs_compat"` in compatibility flags.
+
+## Agents SDK Email
+
+Agents can receive and reply to emails natively via the Agents SDK.
+
+```jsonc
+// wrangler.jsonc
+{
+  "durable_objects": {
+    "bindings": [{ "name": "EmailAgent", "class_name": "EmailAgent" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["EmailAgent"] }],
+  "send_email": [{ "name": "EMAIL", "destination_address": "reply@yourdomain.com" }]
+}
+```
+
+```typescript
+import { Agent } from "agents";
+import { type AgentEmail } from "agents/email";
+import PostalMime from "postal-mime";
+
+export class EmailAgent extends Agent<Env, State> {
+  async onEmail(email: AgentEmail) {
+    const parsed = await PostalMime.parse(await email.getRaw());
+    await this.replyToEmail(email, {
+      fromName: "My Agent",
+      subject: `Re: ${parsed.subject}`,
+      body: "Thanks for your email! I'll look into this.",
+    });
+  }
+}
+```
+
+Route emails to agents with resolvers:
+
+```typescript
+import { routeAgentEmail } from "agents";
+import { createAddressBasedEmailResolver } from "agents/email";
+
+export default {
+  async email(message, env) {
+    await routeAgentEmail(message, env, {
+      resolver: createAddressBasedEmailResolver("EmailAgent"),
+    });
+  },
+};
+```
+
+Resolver types: `createAddressBasedEmailResolver` (recipient → instance name), `createSecureReplyEmailResolver(secret)` (HMAC-signed replies), `createCatchAllEmailResolver("Agent", "default")` (single inbox). Use `isAutoReplyEmail(email.headers)` to skip vacation responders.
+
+## Error Handling
+
+```typescript
+try {
+  const response = await env.EMAIL.send({ /* ... */ });
+} catch (error) {
+  // error.code is one of the E_* error codes
+  console.error(`Failed: ${error.code} - ${error.message}`);
+}
+```
+
+These error codes are for the **Workers binding** (thrown as Error objects with `.code` and `.message`). The **REST API** returns standard Cloudflare API numeric error codes instead — see [rest-api.md](rest-api.md).
+
+| Error Code | What It Means | What to Do |
+|------------|---------------|------------|
+| `E_VALIDATION_ERROR` | Invalid payload | Check email format, required fields |
+| `E_FIELD_MISSING` | Required field missing | Add `to`, `from`, or `subject` |
+| `E_TOO_MANY_RECIPIENTS` | Combined to/cc/bcc exceeds 50 | Split into multiple sends |
+| `E_SENDER_NOT_VERIFIED` | Domain not onboarded | Run `wrangler email sending enable yourdomain.com` or onboard in Dashboard |
+| `E_RECIPIENT_NOT_ALLOWED` | Recipient not in allowed list | Add to `allowed_destination_addresses` |
+| `E_RECIPIENT_SUPPRESSED` | Address bounced or reported spam | Remove from your list; check suppression list in Dashboard |
+| `E_SENDER_DOMAIN_NOT_AVAILABLE` | Domain not available for sending | Complete domain onboarding |
+| `E_CONTENT_TOO_LARGE` | Content exceeds 25 MiB | Reduce attachments or body |
+| `E_RATE_LIMIT_EXCEEDED` | Rate limit hit | Retry with exponential backoff |
+| `E_DAILY_LIMIT_EXCEEDED` | Daily quota reached | Wait or request limit increase |
+| `E_DELIVERY_FAILED` | SMTP delivery failure | Check recipient address, retry if transient |
+| `E_INTERNAL_SERVER_ERROR` | Service temporarily unavailable | Retry with exponential backoff |
+| `E_HEADER_NOT_ALLOWED` | Header not on whitelist | Use an allowed header; see [headers reference](https://developers.cloudflare.com/email-service/reference/headers/) |
+| `E_HEADER_USE_API_FIELD` | Must use API field instead | Set `From`, `To`, etc. via the dedicated API fields, not `headers` |
+| `E_HEADER_VALUE_INVALID` | Header value is malformed or empty | Fix the value format (e.g., List-Unsubscribe needs angle-bracket URIs) |
+| `E_HEADER_VALUE_TOO_LONG` | Header value exceeds 2,048 bytes | Shorten the header value |
+| `E_HEADER_NAME_INVALID` | Invalid header name | Fix characters or keep under 100 bytes |
+| `E_HEADERS_TOO_LARGE` | Total headers exceed 16 KB | Reduce number or size of custom headers |
+| `E_HEADERS_TOO_MANY` | More than 20 non-X headers | Reduce to 20 or fewer whitelisted headers |
+
+For `E_RATE_LIMIT_EXCEEDED` and `E_DELIVERY_FAILED`, retry with exponential backoff. For validation errors (`E_VALIDATION_ERROR`, `E_FIELD_MISSING`, `E_SENDER_NOT_VERIFIED`), fix the request — retrying won't help.
+
+## Restricted Bindings
+
+Restrict which `from` addresses a binding can use:
+
+```jsonc
+{
+  "send_email": [{
+    "name": "RESTRICTED_EMAIL",
+    "allowed_sender_addresses": ["noreply@yourdomain.com", "support@yourdomain.com"]
+  }]
+}
+```

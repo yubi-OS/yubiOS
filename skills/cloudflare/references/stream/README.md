@@ -1,1 +1,114 @@
-IyBDbG91ZGZsYXJlIFN0cmVhbQoKU2VydmVybGVzcyBsaXZlIGFuZCBvbi1kZW1hbmQgdmlkZW8gc3RyZWFtaW5nIHBsYXRmb3JtIHdpdGggb25lIEFQSS4KCiMjIE92ZXJ2aWV3CgpDbG91ZGZsYXJlIFN0cmVhbSBwcm92aWRlcyB2aWRlbyB1cGxvYWQsIHN0b3JhZ2UsIGVuY29kaW5nLCBhbmQgZGVsaXZlcnkgd2l0aG91dCBtYW5hZ2luZyBpbmZyYXN0cnVjdHVyZS4gUnVucyBvbiBDbG91ZGZsYXJlJ3MgZ2xvYmFsIG5ldHdvcmsuCgojIyMgS2V5IEZlYXR1cmVzCi0gKipPbi1kZW1hbmQgdmlkZW8qKjogVXBsb2FkLCBlbmNvZGUsIHN0b3JlLCBkZWxpdmVyCi0gKipMaXZlIHN0cmVhbWluZyoqOiBSVE1QUy9TUlQgaW5nZXN0aW9uIHdpdGggQUJSCi0gKipEaXJlY3QgY3JlYXRvciB1cGxvYWRzKio6IEVuZCB1c2VycyB1cGxvYWQgd2l0aG91dCBBUEkga2V5cwotICoqU2lnbmVkIFVSTHMqKjogVG9rZW4tYmFzZWQgYWNjZXNzIGNvbnRyb2wKLSAqKkFuYWx5dGljcyoqOiBTZXJ2ZXItc2lkZSBtZXRyaWNzIHZpYSBHcmFwaFFMCi0gKipXZWJob29rcyoqOiBQcm9jZXNzaW5nIG5vdGlmaWNhdGlvbnMKLSAqKkNhcHRpb25zKio6IFVwbG9hZCBvciBBSS1nZW5lcmF0ZSBzdWJ0aXRsZXMKLSAqKldhdGVybWFya3MqKjogQXBwbHkgYnJhbmRpbmcgdG8gdmlkZW9zCi0gKipEb3dubG9hZHMqKjogRW5hYmxlIE1QNCBvZmZsaW5lIHZpZXdpbmcKCiMjIENvcmUgQ29uY2VwdHMKCiMjIyBWaWRlbyBVcGxvYWQgTWV0aG9kcwoxLiAqKkFQSSBVcGxvYWQgKFRVUyBwcm90b2NvbCkqKjogRGlyZWN0IHNlcnZlciB1cGxvYWQKMi4gKipVcGxvYWQgZnJvbSBVUkwqKjogSW1wb3J0IGZyb20gZXh0ZXJuYWwgc291cmNlCjMuICoqRGlyZWN0IENyZWF0b3IgVXBsb2FkcyoqOiBVc2VyLWdlbmVyYXRlZCBjb250ZW50IChyZWNvbW1lbmRlZCkKCiMjIyBQbGF5YmFjayBPcHRpb25zCjEuICoqU3RyZWFtIFBsYXllciAoaWZyYW1lKSoqOiBCdWlsdC1pbiwgb3B0aW1pemVkIHBsYXllcgoyLiAqKkN1c3RvbSBQbGF5ZXIgKEhMUy9EQVNIKSoqOiBWaWRlby5qcywgSExTLmpzIGludGVncmF0aW9uCjMuICoqVGh1bWJuYWlscyoqOiBTdGF0aWMgb3IgYW5pbWF0ZWQgcHJldmlld3MKCiMjIyBBY2Nlc3MgQ29udHJvbAotICoqUHVibGljKio6IE5vIHJlc3RyaWN0aW9ucwotICoqcmVxdWlyZVNpZ25lZFVSTHMqKjogVG9rZW4tYmFzZWQgYWNjZXNzCi0gKiphbGxvd2VkT3JpZ2lucyoqOiBEb21haW4gcmVzdHJpY3Rpb25zCi0gKipBY2Nlc3MgUnVsZXMqKjogR2VvL0lQIHJlc3RyaWN0aW9ucyBpbiB0b2tlbnMKCiMjIyBMaXZlIFN0cmVhbWluZwotIFJUTVBTL1NSVCBpbmdlc3QgZnJvbSBPQlMsIEZGbXBlZwotIEF1dG9tYXRpYyByZWNvcmRpbmcgdG8gb24tZGVtYW5kCi0gU2ltdWxjYXN0IHRvIFlvdVR1YmUsIFR3aXRjaCwgZXRjLgotIFdlYlJUQyBzdXBwb3J0IGZvciBicm93c2VyIHN0cmVhbWluZwoKIyMgUXVpY2sgU3RhcnQKCioqVXBsb2FkIHZpZGVvIHZpYSBBUEkqKgpgYGBiYXNoCmN1cmwgLVggUE9TVCBcCiAgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vc3RyZWFtL2NvcHkiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIDxUT0tFTj4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3sidXJsIjogImh0dHBzOi8vZXhhbXBsZS5jb20vdmlkZW8ubXA0In0nCmBgYAoKKipFbWJlZCBwbGF5ZXIqKgpgYGBodG1sCjxpZnJhbWUKICBzcmM9Imh0dHBzOi8vY3VzdG9tZXItPENPREU+LmNsb3VkZmxhcmVzdHJlYW0uY29tLzxWSURFT19JRD4vaWZyYW1lIgogIHN0eWxlPSJib3JkZXI6IG5vbmU7IgogIGhlaWdodD0iNzIwIiB3aWR0aD0iMTI4MCIKICBhbGxvdz0iYWNjZWxlcm9tZXRlcjsgZ3lyb3Njb3BlOyBhdXRvcGxheTsgZW5jcnlwdGVkLW1lZGlhOyBwaWN0dXJlLWluLXBpY3R1cmU7IgogIGFsbG93ZnVsbHNjcmVlbj0idHJ1ZSIKPjwvaWZyYW1lPgpgYGAKCioqQ3JlYXRlIGxpdmUgaW5wdXQqKgpgYGBiYXNoCmN1cmwgLVggUE9TVCBcCiAgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vc3RyZWFtL2xpdmVfaW5wdXRzIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciA8VE9LRU4+IiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC1kICd7InJlY29yZGluZyI6IHsibW9kZSI6ICJhdXRvbWF0aWMifX0nCmBgYAoKIyMgTGltaXRzCgotIE1heCBmaWxlIHNpemU6IDMwIEdCCi0gTWF4IGZyYW1lIHJhdGU6IDYwIGZwcyAocmVjb21tZW5kZWQpCi0gU3VwcG9ydGVkIGZvcm1hdHM6IE1QNCwgTUtWLCBNT1YsIEFWSSwgRkxWLCBNUEVHLTIgVFMvUFMsIE1YRiwgTFhGLCBHWEYsIDNHUCwgV2ViTSwgTVBHLCBRdWlja1RpbWUKCiMjIFByaWNpbmcKCi0gJDUvMTAwMCBtaW4gc3RvcmVkCi0gJDEvMTAwMCBtaW4gZGVsaXZlcmVkCgojIyBSZXNvdXJjZXMKCi0gRGFzaGJvYXJkOiBodHRwczovL2Rhc2guY2xvdWRmbGFyZS5jb20vP3RvPS86YWNjb3VudC9zdHJlYW0KLSBBUEkgRG9jczogaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FwaS9yZXNvdXJjZXMvc3RyZWFtLwotIFN0cmVhbSBEb2NzOiBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc3RyZWFtLwoKIyMgUmVhZGluZyBPcmRlcgoKfCBPcmRlciB8IEZpbGUgfCBQdXJwb3NlIHwgV2hlbiB0byBVc2UgfAp8LS0tLS0tLXwtLS0tLS18LS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgMSB8IFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIHwgU2V0dXAgU0RLcywgZW52IHZhcnMsIHNpZ25pbmcga2V5cyB8IFN0YXJ0aW5nIG5ldyBwcm9qZWN0IHwKfCAyIHwgW2FwaS5tZF0oLi9hcGkubWQpIHwgT24tZGVtYW5kIHZpZGVvIEFQSXMgfCBJbXBsZW1lbnRpbmcgdXBsb2Fkcy9wbGF5YmFjayB8CnwgMyB8IFthcGktbGl2ZS5tZF0oLi9hcGktbGl2ZS5tZCkgfCBMaXZlIHN0cmVhbWluZyBBUElzIHwgQnVpbGRpbmcgbGl2ZSBzdHJlYW1pbmcgfAp8IDQgfCBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIHwgRnVsbC1zdGFjayBmbG93cywgVFVTLCBKV1Qgc2lnbmluZyB8IEltcGxlbWVudGluZyB3b3JrZmxvd3MgfAp8IDUgfCBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSB8IEVycm9ycywgbGltaXRzLCB0cm91Ymxlc2hvb3RpbmcgfCBEZWJ1Z2dpbmcgaXNzdWVzIHwKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gU2V0dXAsIGVudmlyb25tZW50IHZhcmlhYmxlcywgd3JhbmdsZXIgY29uZmlnCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gT24tZGVtYW5kIHZpZGVvIHVwbG9hZCwgcGxheWJhY2ssIG1hbmFnZW1lbnQgQVBJcwotIFthcGktbGl2ZS5tZF0oLi9hcGktbGl2ZS5tZCkgLSBMaXZlIHN0cmVhbWluZyAoUlRNUFMvU1JUL1dlYlJUQyksIHNpbXVsY2FzdAotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBGdWxsLXN0YWNrIGZsb3dzLCBzdGF0ZSBtYW5hZ2VtZW50LCBiZXN0IHByYWN0aWNlcwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gRXJyb3IgY29kZXMsIHRyb3VibGVzaG9vdGluZywgbGltaXRzCgojIyBTZWUgQWxzbwoKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gRGVwbG95IFN0cmVhbSBBUElzIGluIFdvcmtlcnMKLSBbcGFnZXNdKC4uL3BhZ2VzLykgLSBJbnRlZ3JhdGUgU3RyZWFtIHdpdGggUGFnZXMKLSBbd29ya2Vycy1haV0oLi4vd29ya2Vycy1haS8pIC0gQUktZ2VuZXJhdGUgY2FwdGlvbnMK
+# Cloudflare Stream
+
+Serverless live and on-demand video streaming platform with one API.
+
+## Overview
+
+Cloudflare Stream provides video upload, storage, encoding, and delivery without managing infrastructure. Runs on Cloudflare's global network.
+
+### Key Features
+- **On-demand video**: Upload, encode, store, deliver
+- **Live streaming**: RTMPS/SRT ingestion with ABR
+- **Direct creator uploads**: End users upload without API keys
+- **Signed URLs**: Token-based access control
+- **Analytics**: Server-side metrics via GraphQL
+- **Webhooks**: Processing notifications
+- **Captions**: Upload or AI-generate subtitles
+- **Watermarks**: Apply branding to videos
+- **Downloads**: Enable MP4 offline viewing
+
+## Core Concepts
+
+### Video Upload Methods
+1. **API Upload (TUS protocol)**: Direct server upload
+2. **Upload from URL**: Import from external source
+3. **Direct Creator Uploads**: User-generated content (recommended)
+
+### Playback Options
+1. **Stream Player (iframe)**: Built-in, optimized player
+2. **Custom Player (HLS/DASH)**: Video.js, HLS.js integration
+3. **Thumbnails**: Static or animated previews
+
+### Access Control
+- **Public**: No restrictions
+- **requireSignedURLs**: Token-based access
+- **allowedOrigins**: Domain restrictions
+- **Access Rules**: Geo/IP restrictions in tokens
+
+### Live Streaming
+- RTMPS/SRT ingest from OBS, FFmpeg
+- Automatic recording to on-demand
+- Simulcast to YouTube, Twitch, etc.
+- WebRTC support for browser streaming
+
+## Quick Start
+
+**Upload video via API**
+```bash
+curl -X POST \
+  "https://api.cloudflare.com/client/v4/accounts/{account_id}/stream/copy" \
+  -H "Authorization: Bearer <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://example.com/video.mp4"}'
+```
+
+**Embed player**
+```html
+<iframe
+  src="https://customer-<CODE>.cloudflarestream.com/<VIDEO_ID>/iframe"
+  style="border: none;"
+  height="720" width="1280"
+  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+  allowfullscreen="true"
+></iframe>
+```
+
+**Create live input**
+```bash
+curl -X POST \
+  "https://api.cloudflare.com/client/v4/accounts/{account_id}/stream/live_inputs" \
+  -H "Authorization: Bearer <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"recording": {"mode": "automatic"}}'
+```
+
+## Limits
+
+- Max file size: 30 GB
+- Max frame rate: 60 fps (recommended)
+- Supported formats: MP4, MKV, MOV, AVI, FLV, MPEG-2 TS/PS, MXF, LXF, GXF, 3GP, WebM, MPG, QuickTime
+
+## Pricing
+
+- $5/1000 min stored
+- $1/1000 min delivered
+
+## Resources
+
+- Dashboard: https://dash.cloudflare.com/?to=/:account/stream
+- API Docs: https://developers.cloudflare.com/api/resources/stream/
+- Stream Docs: https://developers.cloudflare.com/stream/
+
+## Reading Order
+
+| Order | File | Purpose | When to Use |
+|-------|------|---------|-------------|
+| 1 | [configuration.md](./configuration.md) | Setup SDKs, env vars, signing keys | Starting new project |
+| 2 | [api.md](./api.md) | On-demand video APIs | Implementing uploads/playback |
+| 3 | [api-live.md](./api-live.md) | Live streaming APIs | Building live streaming |
+| 4 | [patterns.md](./patterns.md) | Full-stack flows, TUS, JWT signing | Implementing workflows |
+| 5 | [gotchas.md](./gotchas.md) | Errors, limits, troubleshooting | Debugging issues |
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - Setup, environment variables, wrangler config
+- [api.md](./api.md) - On-demand video upload, playback, management APIs
+- [api-live.md](./api-live.md) - Live streaming (RTMPS/SRT/WebRTC), simulcast
+- [patterns.md](./patterns.md) - Full-stack flows, state management, best practices
+- [gotchas.md](./gotchas.md) - Error codes, troubleshooting, limits
+
+## See Also
+
+- [workers](../workers/) - Deploy Stream APIs in Workers
+- [pages](../pages/) - Integrate Stream with Pages
+- [workers-ai](../workers-ai/) - AI-generate captions

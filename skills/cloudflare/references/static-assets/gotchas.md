@@ -1,1 +1,162 @@
-IyMgQmVzdCBQcmFjdGljZXMKCiMjIyAxLiBVc2UgU2VsZWN0aXZlIFdvcmtlci1GaXJzdCBSb3V0aW5nCgpJbnN0ZWFkIG9mIGBydW5fd29ya2VyX2ZpcnN0ID0gdHJ1ZWAsIHVzZSBhcnJheSBwYXR0ZXJuczoKCmBgYGpzb25jCnsKICAiYXNzZXRzIjogewogICAgInJ1bl93b3JrZXJfZmlyc3QiOiBbCiAgICAgICIvYXBpLyoiLCAgICAgICAgICAgLy8gQVBJIHJvdXRlcwogICAgICAiL2FkbWluLyoiLCAgICAgICAgIC8vIEFkbWluIGFyZWEKICAgICAgIiEvYWRtaW4vYXNzZXRzLyoiICAvLyBFeGNlcHQgYWRtaW4gYXNzZXRzCiAgICBdCiAgfQp9CmBgYAoKKipCZW5lZml0czoqKgotIFJlZHVjZXMgV29ya2VyIGludm9jYXRpb25zCi0gTG93ZXJzIGNvc3RzCi0gSW1wcm92ZXMgYXNzZXQgZGVsaXZlcnkgcGVyZm9ybWFuY2UKCiMjIyAyLiBMZXZlcmFnZSBOYXZpZ2F0aW9uIFJlcXVlc3QgT3B0aW1pemF0aW9uCgpGb3IgU1BBcywgdXNlIGBjb21wYXRpYmlsaXR5X2RhdGUgPSAiMjAyNS0wNC0wMSJgIG9yIGxhdGVyOgoKYGBganNvbmMKewogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wNC0wMSIsCiAgImFzc2V0cyI6IHsKICAgICJub3RfZm91bmRfaGFuZGxpbmciOiAic2luZ2xlLXBhZ2UtYXBwbGljYXRpb24iCiAgfQp9CmBgYAoKTmF2aWdhdGlvbiByZXF1ZXN0cyBza2lwIFdvcmtlciBpbnZvY2F0aW9uLCByZWR1Y2luZyBjb3N0cy4KCiMjIyAzLiBUeXBlIFNhZmV0eSB3aXRoIEJpbmRpbmdzCgpBbHdheXMgdHlwZSB5b3VyIGVudmlyb25tZW50OgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBBU1NFVFM6IEZldGNoZXI7Cn0KYGBgCgojIyBDb21tb24gRXJyb3JzCgojIyMgIkFzc2V0IG5vdCBmb3VuZCIKCioqQ2F1c2U6KiogQXNzZXQgbm90IGluIGFzc2V0cyBkaXJlY3RvcnksIHdyb25nIHBhdGgsIG9yIGFzc2V0cyBub3QgZGVwbG95ZWQgIAoqKlNvbHV0aW9uOioqIFZlcmlmeSBhc3NldCBleGlzdHMsIGNoZWNrIHBhdGggY2FzZS1zZW5zaXRpdml0eSwgcmVkZXBsb3kgaWYgbmVlZGVkCgojIyMgIldvcmtlciBub3QgaW52b2tlZCBmb3IgYXNzZXQiCgoqKkNhdXNlOioqIEFzc2V0IHNlcnZlZCBkaXJlY3RseSwgYHJ1bl93b3JrZXJfZmlyc3RgIG5vdCBjb25maWd1cmVkICAKKipTb2x1dGlvbjoqKiBDb25maWd1cmUgYHJ1bl93b3JrZXJfZmlyc3RgIHBhdHRlcm5zIHRvIGluY2x1ZGUgYXNzZXQgcm91dGVzIChzZWUgY29uZmlndXJhdGlvbi5tZDo2Ni0xMDYpCgojIyMgIjQyOSBUb28gTWFueSBSZXF1ZXN0cyBvbiBmcmVlIHRpZXIiCgoqKkNhdXNlOioqIGBydW5fd29ya2VyX2ZpcnN0YCBwYXR0ZXJucyBpbnZva2UgV29ya2VyIGZvciBtYW55IHJlcXVlc3RzLCBoaXR0aW5nIGZyZWUgdGllciBsaW1pdHMgKDEwMGsgcmVxL2RheSkgIAoqKlNvbHV0aW9uOioqIFVzZSBtb3JlIHNlbGVjdGl2ZSBwYXR0ZXJucyB3aXRoIG5lZ2F0aXZlIGV4Y2x1c2lvbnMsIG9yIHVwZ3JhZGUgdG8gcGFpZCBwbGFuCgojIyMgIlNtYXJ0IFBsYWNlbWVudCBpbmNyZWFzZXMgbGF0ZW5jeSIKCioqQ2F1c2U6KiogYHJ1bl93b3JrZXJfZmlyc3Q9dHJ1ZWAgKyBTbWFydCBQbGFjZW1lbnQgcm91dGVzIGFsbCByZXF1ZXN0cyB0aHJvdWdoIHNpbmdsZSBzbWFydC1wbGFjZWQgbG9jYXRpb24gIAoqKlNvbHV0aW9uOioqIFVzZSBzZWxlY3RpdmUgcGF0dGVybnMgKGFycmF5IHN5bnRheCkgb3IgZGlzYWJsZSBTbWFydCBQbGFjZW1lbnQgZm9yIGFzc2V0LWhlYXZ5IGFwcHMKCiMjIyAiQ0YtQ2FjaGUtU3RhdHVzIGhlYWRlciB1bnJlbGlhYmxlIgoKKipDYXVzZToqKiBIZWFkZXIgaXMgcHJvYmFiaWxpc3RpY2FsbHkgYWRkZWQgZm9yIHByaXZhY3kgcmVhc29ucyAgCioqU29sdXRpb246KiogRG9uJ3QgcmVseSBvbiBgQ0YtQ2FjaGUtU3RhdHVzYCBmb3IgY3JpdGljYWwgcm91dGluZyBsb2dpYy4gVXNlIG90aGVyIHNpZ25hbHMgKEVUYWcsIGFnZSkuCgojIyMgIkpXVCBleHBpcmVkIGR1cmluZyBkZXBsb3ltZW50IgoKKipDYXVzZToqKiBMYXJnZSBhc3NldCBkZXBsb3ltZW50cyBleGNlZWQgSldUIHRva2VuIGxpZmV0aW1lICAKKipTb2x1dGlvbjoqKiBVcGRhdGUgdG8gV3JhbmdsZXIgNC4zNC4wKyAoYXV0b21hdGljIHRva2VuIHJlZnJlc2gpLCBvciByZWR1Y2UgYXNzZXQgY291bnQKCiMjIyAiQ2Fubm90IHVzZSAnYXNzZXRzJyB3aXRoICdzaXRlJyIKCioqQ2F1c2U6KiogTGVnYWN5IGBzaXRlYCBjb25maWcgY29uZmxpY3RzIHdpdGggbmV3IGBhc3NldHNgIGNvbmZpZyAgCioqU29sdXRpb246KiogTWlncmF0ZSBmcm9tIGBzaXRlYCB0byBgYXNzZXRzYCAoc2VlIGNvbmZpZ3VyYXRpb24ubWQpLiBSZW1vdmUgYHNpdGVgIGtleSBmcm9tIHdyYW5nbGVyLmpzb25jLgoKIyMjICJBc3NldHMgbm90IHVwZGF0aW5nIGFmdGVyIGRlcGxveW1lbnQiCgoqKkNhdXNlOioqIEJyb3dzZXIgb3IgQ0ROIGNhY2hlIHNlcnZpbmcgb2xkIGFzc2V0cyAgCioqU29sdXRpb246KiogCi0gSGFyZCByZWZyZXNoIGJyb3dzZXIgKENtZCtTaGlmdCtSIC8gQ3RybCtGNSkKLSBVc2UgY2FjaGUtYnVzdGluZyAoaGFzaGVkIGZpbGVuYW1lcykKLSBWZXJpZnkgZGVwbG95bWVudCBjb21wbGV0ZWQ6IGB3cmFuZ2xlciB0YWlsYAoKIyMgTGltaXRzCgp8IFJlc291cmNlL0xpbWl0IHwgRnJlZSB8IFBhaWQgfCBOb3RlcyB8CnwtLS0tLS0tLS0tLS0tLS0tfC0tLS0tLXwtLS0tLS18LS0tLS0tLXwKfCBNYXggYXNzZXQgc2l6ZSB8IDI1IE1pQiB8IDI1IE1pQiB8IFBlciBmaWxlIHwKfCBUb3RhbCBhc3NldHMgfCAyMCwwMDAgfCAqKjEwMCwwMDAqKiB8IFJlcXVpcmVzIFdyYW5nbGVyIDQuMzQuMCsgKFNlcCAyMDI1KSB8CnwgV29ya2VyIGludm9jYXRpb25zIHwgMTAway9kYXkgfCAxME0vbW9udGggfCBPcHRpbWl6ZSB3aXRoIGBydW5fd29ya2VyX2ZpcnN0YCBwYXR0ZXJucyB8CnwgQXNzZXQgc3RvcmFnZSB8IFVubGltaXRlZCB8IFVubGltaXRlZCB8IEluY2x1ZGVkIHwKCiMjIyBWZXJzaW9uIFJlcXVpcmVtZW50cwoKfCBGZWF0dXJlIHwgTWluaW11bSBXcmFuZ2xlciBWZXJzaW9uIHwKfC0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwKfCAxMDBrIGZpbGUgbGltaXQgKHBhaWQpIHwgNC4zNC4wIHwKfCBWaXRlIHBsdWdpbiB8IDQuMC4wICsgQGNsb3VkZmxhcmUvdml0ZS1wbHVnaW4gMS4wLjAgfAp8IE5hdmlnYXRpb24gb3B0aW1pemF0aW9uIHwgNC4wLjAgKyBjb21wYXRpYmlsaXR5X2RhdGU6ICIyMDI1LTA0LTAxIiB8CgojIyBQZXJmb3JtYW5jZSBUaXBzCgojIyMgMS4gVXNlIEhhc2hlZCBGaWxlbmFtZXMKCkVuYWJsZSBsb25nLXRlcm0gY2FjaGluZyB3aXRoIGNvbnRlbnQtaGFzaGVkIGZpbGVuYW1lczoKCmBgYAphcHAuYTNiMmMxZDQuanMKc3R5bGVzLmU1ZjZnN2g4LmNzcwpgYGAKCk1vc3QgYnVuZGxlcnMgKFZpdGUsIFdlYnBhY2ssIFBhcmNlbCkgZG8gdGhpcyBhdXRvbWF0aWNhbGx5LgoKIyMjIDIuIE1pbmltaXplIFdvcmtlciBJbnZvY2F0aW9ucwoKU2VydmUgYXNzZXRzIGRpcmVjdGx5IHdoZW4gcG9zc2libGU6CgpgYGBqc29uYwp7CiAgImFzc2V0cyI6IHsKICAgIC8vIE9ubHkgaW52b2tlIFdvcmtlciBmb3IgZHluYW1pYyByb3V0ZXMKICAgICJydW5fd29ya2VyX2ZpcnN0IjogWyIvYXBpLyoiLCAiL2F1dGgvKiJdCiAgfQp9CmBgYAoKIyMjIDMuIExldmVyYWdlIEJyb3dzZXIgQ2FjaGUKClNldCBhcHByb3ByaWF0ZSBgQ2FjaGUtQ29udHJvbGAgaGVhZGVyczoKCmBgYHR5cGVzY3JpcHQKLy8gVmVyc2lvbmVkIGFzc2V0cwonQ2FjaGUtQ29udHJvbCc6ICdwdWJsaWMsIG1heC1hZ2U9MzE1MzYwMDAsIGltbXV0YWJsZScKCi8vIEhUTUwgKHJldmFsaWRhdGUgb2Z0ZW4pCidDYWNoZS1Db250cm9sJzogJ3B1YmxpYywgbWF4LWFnZT0wLCBtdXN0LXJldmFsaWRhdGUnCmBgYAoKU2VlIHBhdHRlcm5zLm1kOjE2OS0xODkgZm9yIGltcGxlbWVudGF0aW9uLgoKIyMjIDQuIFVzZSAuYXNzZXRzaWdub3JlCgpSZWR1Y2UgdXBsb2FkIHRpbWUgYnkgZXhjbHVkaW5nIHVubmVjZXNzYXJ5IGZpbGVzOgoKYGBgCioubWFwCioubWQKLkRTX1N0b3JlCm5vZGVfbW9kdWxlcy8KYGBgCgpTZWUgY29uZmlndXJhdGlvbi5tZDoxMDctMTI2IGZvciBkZXRhaWxzLgo=
+## Best Practices
+
+### 1. Use Selective Worker-First Routing
+
+Instead of `run_worker_first = true`, use array patterns:
+
+```jsonc
+{
+  "assets": {
+    "run_worker_first": [
+      "/api/*",           // API routes
+      "/admin/*",         // Admin area
+      "!/admin/assets/*"  // Except admin assets
+    ]
+  }
+}
+```
+
+**Benefits:**
+- Reduces Worker invocations
+- Lowers costs
+- Improves asset delivery performance
+
+### 2. Leverage Navigation Request Optimization
+
+For SPAs, use `compatibility_date = "2025-04-01"` or later:
+
+```jsonc
+{
+  "compatibility_date": "2025-04-01",
+  "assets": {
+    "not_found_handling": "single-page-application"
+  }
+}
+```
+
+Navigation requests skip Worker invocation, reducing costs.
+
+### 3. Type Safety with Bindings
+
+Always type your environment:
+
+```typescript
+interface Env {
+  ASSETS: Fetcher;
+}
+```
+
+## Common Errors
+
+### "Asset not found"
+
+**Cause:** Asset not in assets directory, wrong path, or assets not deployed  
+**Solution:** Verify asset exists, check path case-sensitivity, redeploy if needed
+
+### "Worker not invoked for asset"
+
+**Cause:** Asset served directly, `run_worker_first` not configured  
+**Solution:** Configure `run_worker_first` patterns to include asset routes (see configuration.md:66-106)
+
+### "429 Too Many Requests on free tier"
+
+**Cause:** `run_worker_first` patterns invoke Worker for many requests, hitting free tier limits (100k req/day)  
+**Solution:** Use more selective patterns with negative exclusions, or upgrade to paid plan
+
+### "Smart Placement increases latency"
+
+**Cause:** `run_worker_first=true` + Smart Placement routes all requests through single smart-placed location  
+**Solution:** Use selective patterns (array syntax) or disable Smart Placement for asset-heavy apps
+
+### "CF-Cache-Status header unreliable"
+
+**Cause:** Header is probabilistically added for privacy reasons  
+**Solution:** Don't rely on `CF-Cache-Status` for critical routing logic. Use other signals (ETag, age).
+
+### "JWT expired during deployment"
+
+**Cause:** Large asset deployments exceed JWT token lifetime  
+**Solution:** Update to Wrangler 4.34.0+ (automatic token refresh), or reduce asset count
+
+### "Cannot use 'assets' with 'site'"
+
+**Cause:** Legacy `site` config conflicts with new `assets` config  
+**Solution:** Migrate from `site` to `assets` (see configuration.md). Remove `site` key from wrangler.jsonc.
+
+### "Assets not updating after deployment"
+
+**Cause:** Browser or CDN cache serving old assets  
+**Solution:** 
+- Hard refresh browser (Cmd+Shift+R / Ctrl+F5)
+- Use cache-busting (hashed filenames)
+- Verify deployment completed: `wrangler tail`
+
+## Limits
+
+| Resource/Limit | Free | Paid | Notes |
+|----------------|------|------|-------|
+| Max asset size | 25 MiB | 25 MiB | Per file |
+| Total assets | 20,000 | **100,000** | Requires Wrangler 4.34.0+ (Sep 2025) |
+| Worker invocations | 100k/day | 10M/month | Optimize with `run_worker_first` patterns |
+| Asset storage | Unlimited | Unlimited | Included |
+
+### Version Requirements
+
+| Feature | Minimum Wrangler Version |
+|---------|--------------------------|
+| 100k file limit (paid) | 4.34.0 |
+| Vite plugin | 4.0.0 + @cloudflare/vite-plugin 1.0.0 |
+| Navigation optimization | 4.0.0 + compatibility_date: "2025-04-01" |
+
+## Performance Tips
+
+### 1. Use Hashed Filenames
+
+Enable long-term caching with content-hashed filenames:
+
+```
+app.a3b2c1d4.js
+styles.e5f6g7h8.css
+```
+
+Most bundlers (Vite, Webpack, Parcel) do this automatically.
+
+### 2. Minimize Worker Invocations
+
+Serve assets directly when possible:
+
+```jsonc
+{
+  "assets": {
+    // Only invoke Worker for dynamic routes
+    "run_worker_first": ["/api/*", "/auth/*"]
+  }
+}
+```
+
+### 3. Leverage Browser Cache
+
+Set appropriate `Cache-Control` headers:
+
+```typescript
+// Versioned assets
+'Cache-Control': 'public, max-age=31536000, immutable'
+
+// HTML (revalidate often)
+'Cache-Control': 'public, max-age=0, must-revalidate'
+```
+
+See patterns.md:169-189 for implementation.
+
+### 4. Use .assetsignore
+
+Reduce upload time by excluding unnecessary files:
+
+```
+*.map
+*.md
+.DS_Store
+node_modules/
+```
+
+See configuration.md:107-126 for details.

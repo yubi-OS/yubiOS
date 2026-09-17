@@ -1,1 +1,102 @@
-IyBDbG91ZGZsYXJlIFRlcnJhZm9ybSBQcm92aWRlcgoKKipFeHBlcnQgZ3VpZGFuY2UgZm9yIENsb3VkZmxhcmUgVGVycmFmb3JtIFByb3ZpZGVyIC0gaW5mcmFzdHJ1Y3R1cmUgYXMgY29kZSBmb3IgQ2xvdWRmbGFyZSByZXNvdXJjZXMuKioKCiMjIENvcmUgUHJpbmNpcGxlcwoKLSAqKlByb3ZpZGVyLWZpcnN0Kio6IFVzZSBUZXJyYWZvcm0gcHJvdmlkZXIgZm9yIEFMTCBpbmZyYXN0cnVjdHVyZSAtIG5ldmVyIG1peCB3aXRoIHdyYW5nbGVyLmpzb25jIGZvciB0aGUgc2FtZSByZXNvdXJjZXMKLSAqKlN0YXRlIG1hbmFnZW1lbnQqKjogQWx3YXlzIHVzZSByZW1vdGUgc3RhdGUgKFMzLCBUZXJyYWZvcm0gQ2xvdWQsIGV0Yy4pIGZvciB0ZWFtIGVudmlyb25tZW50cwotICoqTW9kdWxhciBhcmNoaXRlY3R1cmUqKjogQ3JlYXRlIHJldXNhYmxlIG1vZHVsZXMgZm9yIGNvbW1vbiBwYXR0ZXJucyAoem9uZXMsIHdvcmtlcnMsIHBhZ2VzKQotICoqVmVyc2lvbiBwaW5uaW5nKio6IEFsd2F5cyBwaW4gcHJvdmlkZXIgdmVyc2lvbiB3aXRoIGB+PmAgZm9yIHByZWRpY3RhYmxlIHVwZ3JhZGVzCi0gKipTZWNyZXQgbWFuYWdlbWVudCoqOiBVc2UgdmFyaWFibGVzICsgZW52aXJvbm1lbnQgdmFycyBmb3Igc2Vuc2l0aXZlIGRhdGEgLSBuZXZlciBoYXJkY29kZSBBUEkgdG9rZW5zCgojIyBQcm92aWRlciBWZXJzaW9uCgp8IFZlcnNpb24gfCBTdGF0dXMgfCBOb3RlcyB8CnwtLS0tLS0tLS18LS0tLS0tLS18LS0tLS0tLXwKfCA1LnggfCBDdXJyZW50IHwgQXV0by1nZW5lcmF0ZWQgZnJvbSBPcGVuQVBJLCBicmVha2luZyBjaGFuZ2VzIGZyb20gdjQgfAp8IDQueCB8IExlZ2FjeSB8IE1hbnVhbCBtYWludGVuYW5jZSwgZGVwcmVjYXRlZCB8CgoqKkNyaXRpY2FsOioqIHY1IHJlbmFtZWQgbWFueSByZXNvdXJjZXMgKGBjbG91ZGZsYXJlX3JlY29yZGAg4oaSIGBjbG91ZGZsYXJlX2Ruc19yZWNvcmRgLCBgY2xvdWRmbGFyZV93b3JrZXJfKmAg4oaSIGBjbG91ZGZsYXJlX3dvcmtlcnNfKmApLiBTZWUgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCN2NS1icmVha2luZy1jaGFuZ2VzKSBmb3IgbWlncmF0aW9uIGRldGFpbHMuCgojIyBQcm92aWRlciBTZXR1cAoKIyMjIEJhc2ljIENvbmZpZ3VyYXRpb24KCmBgYGhjbAp0ZXJyYWZvcm0gewogIHJlcXVpcmVkX3ZlcnNpb24gPSAiPj0gMS4wIgogIAogIHJlcXVpcmVkX3Byb3ZpZGVycyB7CiAgICBjbG91ZGZsYXJlID0gewogICAgICBzb3VyY2UgID0gImNsb3VkZmxhcmUvY2xvdWRmbGFyZSIKICAgICAgdmVyc2lvbiA9ICJ+PiA1LjE1LjAiCiAgICB9CiAgfQp9Cgpwcm92aWRlciAiY2xvdWRmbGFyZSIgewogIGFwaV90b2tlbiA9IHZhci5jbG91ZGZsYXJlX2FwaV90b2tlbiAgIyBvciBDTE9VREZMQVJFX0FQSV9UT0tFTiBlbnYgdmFyCn0KYGBgCgojIyMgQXV0aGVudGljYXRpb24gTWV0aG9kcyAocHJpb3JpdHkgb3JkZXIpCgoxLiAqKkFQSSBUb2tlbioqIChSRUNPTU1FTkRFRCk6IGBhcGlfdG9rZW5gIG9yIGBDTE9VREZMQVJFX0FQSV9UT0tFTmAKICAgLSBDcmVhdGU6IERhc2hib2FyZCDihpIgTXkgUHJvZmlsZSDihpIgQVBJIFRva2VucwogICAtIFNjb3BlIHRvIHNwZWNpZmljIGFjY291bnRzL3pvbmVzIGZvciBzZWN1cml0eQogICAKMi4gKipHbG9iYWwgQVBJIEtleSoqIChMRUdBQ1kpOiBgYXBpX2tleWAgKyBgYXBpX2VtYWlsYCBvciBgQ0xPVURGTEFSRV9BUElfS0VZYCArIGBDTE9VREZMQVJFX0VNQUlMYAogICAtIExlc3Mgc2VjdXJlLCB1c2UgdG9rZW5zIGluc3RlYWQKICAgCjMuICoqVXNlciBTZXJ2aWNlIEtleSoqOiBgdXNlcl9zZXJ2aWNlX2tleWAgZm9yIE9yaWdpbiBDQSBjZXJ0aWZpY2F0ZXMKCgoKIyMgUXVpY2sgUmVmZXJlbmNlOiBDb21tb24gQ29tbWFuZHMKCmBgYGJhc2gKdGVycmFmb3JtIGluaXQgICAgICAgICAgIyBJbml0aWFsaXplIHByb3ZpZGVyCnRlcnJhZm9ybSBwbGFuICAgICAgICAgICMgUGxhbiBjaGFuZ2VzCnRlcnJhZm9ybSBhcHBseSAgICAgICAgICMgQXBwbHkgY2hhbmdlcwp0ZXJyYWZvcm0gZGVzdHJveSAgICAgICAjIERlc3Ryb3kgcmVzb3VyY2VzCnRlcnJhZm9ybSBpbXBvcnQgY2xvdWRmbGFyZV96b25lLmV4YW1wbGUgPHpvbmUtaWQ+ICAjIEltcG9ydCBleGlzdGluZwp0ZXJyYWZvcm0gc3RhdGUgbGlzdCAgICAjIExpc3QgcmVzb3VyY2VzIGluIHN0YXRlCnRlcnJhZm9ybSBvdXRwdXQgICAgICAgICMgU2hvdyBvdXRwdXRzCnRlcnJhZm9ybSBmbXQgLXJlY3Vyc2l2ZSAgIyBGb3JtYXQgY29kZQp0ZXJyYWZvcm0gdmFsaWRhdGUgICAgICAjIFZhbGlkYXRlIGNvbmZpZ3VyYXRpb24KYGBgCgojIyBJbXBvcnQgRXhpc3RpbmcgUmVzb3VyY2VzCgpVc2UgY2YtdGVycmFmb3JtaW5nIHRvIGdlbmVyYXRlIGNvbmZpZ3MgZnJvbSBleGlzdGluZyBDbG91ZGZsYXJlIHJlc291cmNlczoKCmBgYGJhc2gKIyBJbnN0YWxsCmJyZXcgaW5zdGFsbCBjbG91ZGZsYXJlL2Nsb3VkZmxhcmUvY2YtdGVycmFmb3JtaW5nCgojIEdlbmVyYXRlIEhDTCBmcm9tIGV4aXN0aW5nIHJlc291cmNlcwpjZi10ZXJyYWZvcm1pbmcgZ2VuZXJhdGUgLS1yZXNvdXJjZS10eXBlIGNsb3VkZmxhcmVfZG5zX3JlY29yZCAtLXpvbmUgPHpvbmUtaWQ+CgojIEltcG9ydCBpbnRvIFRlcnJhZm9ybSBzdGF0ZQpjZi10ZXJyYWZvcm1pbmcgaW1wb3J0IC0tcmVzb3VyY2UtdHlwZSBjbG91ZGZsYXJlX2Ruc19yZWNvcmQgLS16b25lIDx6b25lLWlkPgpgYGAKCiMjIFJlYWRpbmcgT3JkZXIKCjEuIFN0YXJ0IHdpdGggW1JFQURNRS5tZF0oLi9SRUFETUUubWQpIGZvciBwcm92aWRlciBzZXR1cCBhbmQgYXV0aGVudGljYXRpb24KMi4gUmV2aWV3IFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIGZvciByZXNvdXJjZSBjb25maWd1cmF0aW9ucwozLiBDaGVjayBbYXBpLm1kXSguL2FwaS5tZCkgZm9yIGRhdGEgc291cmNlcyBhbmQgZXhpc3RpbmcgcmVzb3VyY2UgcXVlcmllcwo0LiBTZWUgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSBmb3IgbXVsdGktZW52aXJvbm1lbnQgYW5kIENJL0NEIHBhdHRlcm5zCjUuIFJlYWQgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgZm9yIHN0YXRlIGRyaWZ0LCB2NSBicmVha2luZyBjaGFuZ2VzLCBhbmQgdHJvdWJsZXNob290aW5nCgojIyBJbiBUaGlzIFJlZmVyZW5jZQotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gUmVzb3VyY2VzIGZvciB6b25lcywgRE5TLCB3b3JrZXJzLCBLViwgUjIsIEQxLCBQYWdlcywgcnVsZXNldHMKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBEYXRhIHNvdXJjZXMgZm9yIGV4aXN0aW5nIHJlc291cmNlcwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBBcmNoaXRlY3R1cmUgcGF0dGVybnMsIG11bHRpLWVudiBzZXR1cCwgQ0kvQ0QgaW50ZWdyYXRpb24KLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIENvbW1vbiBpc3N1ZXMsIHNlY3VyaXR5LCBiZXN0IHByYWN0aWNlcwoKIyMgU2VlIEFsc28KLSBbcHVsdW1pXSguLi9wdWx1bWkvKSAtIEFsdGVybmF0aXZlIElhQyB0b29sIGZvciBDbG91ZGZsYXJlCi0gW3dyYW5nbGVyXSguLi93cmFuZ2xlci8pIC0gQ0xJIGRlcGxveW1lbnQgYWx0ZXJuYXRpdmUKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VyIHJ1bnRpbWUgZG9jdW1lbnRhdGlvbgo=
+# Cloudflare Terraform Provider
+
+**Expert guidance for Cloudflare Terraform Provider - infrastructure as code for Cloudflare resources.**
+
+## Core Principles
+
+- **Provider-first**: Use Terraform provider for ALL infrastructure - never mix with wrangler.jsonc for the same resources
+- **State management**: Always use remote state (S3, Terraform Cloud, etc.) for team environments
+- **Modular architecture**: Create reusable modules for common patterns (zones, workers, pages)
+- **Version pinning**: Always pin provider version with `~>` for predictable upgrades
+- **Secret management**: Use variables + environment vars for sensitive data - never hardcode API tokens
+
+## Provider Version
+
+| Version | Status | Notes |
+|---------|--------|-------|
+| 5.x | Current | Auto-generated from OpenAPI, breaking changes from v4 |
+| 4.x | Legacy | Manual maintenance, deprecated |
+
+**Critical:** v5 renamed many resources (`cloudflare_record` → `cloudflare_dns_record`, `cloudflare_worker_*` → `cloudflare_workers_*`). See [gotchas.md](./gotchas.md#v5-breaking-changes) for migration details.
+
+## Provider Setup
+
+### Basic Configuration
+
+```hcl
+terraform {
+  required_version = ">= 1.0"
+  
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 5.15.0"
+    }
+  }
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token  # or CLOUDFLARE_API_TOKEN env var
+}
+```
+
+### Authentication Methods (priority order)
+
+1. **API Token** (RECOMMENDED): `api_token` or `CLOUDFLARE_API_TOKEN`
+   - Create: Dashboard → My Profile → API Tokens
+   - Scope to specific accounts/zones for security
+   
+2. **Global API Key** (LEGACY): `api_key` + `api_email` or `CLOUDFLARE_API_KEY` + `CLOUDFLARE_EMAIL`
+   - Less secure, use tokens instead
+   
+3. **User Service Key**: `user_service_key` for Origin CA certificates
+
+
+
+## Quick Reference: Common Commands
+
+```bash
+terraform init          # Initialize provider
+terraform plan          # Plan changes
+terraform apply         # Apply changes
+terraform destroy       # Destroy resources
+terraform import cloudflare_zone.example <zone-id>  # Import existing
+terraform state list    # List resources in state
+terraform output        # Show outputs
+terraform fmt -recursive  # Format code
+terraform validate      # Validate configuration
+```
+
+## Import Existing Resources
+
+Use cf-terraforming to generate configs from existing Cloudflare resources:
+
+```bash
+# Install
+brew install cloudflare/cloudflare/cf-terraforming
+
+# Generate HCL from existing resources
+cf-terraforming generate --resource-type cloudflare_dns_record --zone <zone-id>
+
+# Import into Terraform state
+cf-terraforming import --resource-type cloudflare_dns_record --zone <zone-id>
+```
+
+## Reading Order
+
+1. Start with [README.md](./README.md) for provider setup and authentication
+2. Review [configuration.md](./configuration.md) for resource configurations
+3. Check [api.md](./api.md) for data sources and existing resource queries
+4. See [patterns.md](./patterns.md) for multi-environment and CI/CD patterns
+5. Read [gotchas.md](./gotchas.md) for state drift, v5 breaking changes, and troubleshooting
+
+## In This Reference
+- [configuration.md](./configuration.md) - Resources for zones, DNS, workers, KV, R2, D1, Pages, rulesets
+- [api.md](./api.md) - Data sources for existing resources
+- [patterns.md](./patterns.md) - Architecture patterns, multi-env setup, CI/CD integration
+- [gotchas.md](./gotchas.md) - Common issues, security, best practices
+
+## See Also
+- [pulumi](../pulumi/) - Alternative IaC tool for Cloudflare
+- [wrangler](../wrangler/) - CLI deployment alternative
+- [workers](../workers/) - Worker runtime documentation

@@ -1,1 +1,187 @@
-IyBQcm9ncmFtbWF0aWMgQVBJCgojIyBNaW5pZmxhcmUgQ2xhc3MKCmBgYHR5cGVzY3JpcHQKY2xhc3MgTWluaWZsYXJlIHsKICBjb25zdHJ1Y3RvcihvcHRpb25zOiBNaW5pZmxhcmVPcHRpb25zKTsKICAKICAvLyBMaWZlY3ljbGUKICByZWFkeTogUHJvbWlzZTxVUkw+OyAvLyBSZXNvbHZlcyB3aGVuIHNlcnZlciByZWFkeSwgcmV0dXJucyBVUkwKICBkaXNwb3NlKCk6IFByb21pc2U8dm9pZD47IC8vIENsZWFudXAgcmVzb3VyY2VzCiAgc2V0T3B0aW9ucyhvcHRpb25zOiBNaW5pZmxhcmVPcHRpb25zKTogUHJvbWlzZTx2b2lkPjsgLy8gUmVsb2FkIGNvbmZpZwogIAogIC8vIEV2ZW50IGRpc3BhdGNoaW5nCiAgZGlzcGF0Y2hGZXRjaCh1cmw6IHN0cmluZyB8IFVSTCB8IFJlcXVlc3QsIGluaXQ/OiBSZXF1ZXN0SW5pdCk6IFByb21pc2U8UmVzcG9uc2U+OwogIGdldFdvcmtlcihuYW1lPzogc3RyaW5nKTogUHJvbWlzZTxXb3JrZXI+OwogIAogIC8vIEJpbmRpbmdzIGFjY2VzcwogIGdldEJpbmRpbmdzPEJpbmRpbmdzID0gUmVjb3JkPHN0cmluZywgdW5rbm93bj4+KG5hbWU/OiBzdHJpbmcpOiBQcm9taXNlPEJpbmRpbmdzPjsKICBnZXRDZihuYW1lPzogc3RyaW5nKTogUHJvbWlzZTxJbmNvbWluZ1JlcXVlc3RDZlByb3BlcnRpZXMgfCB1bmRlZmluZWQ+OwogIGdldEtWTmFtZXNwYWNlKG5hbWU6IHN0cmluZyk6IFByb21pc2U8S1ZOYW1lc3BhY2U+OwogIGdldFIyQnVja2V0KG5hbWU6IHN0cmluZyk6IFByb21pc2U8UjJCdWNrZXQ+OwogIGdldER1cmFibGVPYmplY3ROYW1lc3BhY2UobmFtZTogc3RyaW5nKTogUHJvbWlzZTxEdXJhYmxlT2JqZWN0TmFtZXNwYWNlPjsKICBnZXREdXJhYmxlT2JqZWN0U3RvcmFnZShpZDogRHVyYWJsZU9iamVjdElkKTogUHJvbWlzZTxEdXJhYmxlT2JqZWN0U3RvcmFnZT47CiAgZ2V0RDFEYXRhYmFzZShuYW1lOiBzdHJpbmcpOiBQcm9taXNlPEQxRGF0YWJhc2U+OwogIGdldENhY2hlcygpOiBQcm9taXNlPENhY2hlU3RvcmFnZT47CiAgZ2V0UXVldWVQcm9kdWNlcihuYW1lOiBzdHJpbmcpOiBQcm9taXNlPFF1ZXVlUHJvZHVjZXI+OwogIAogIC8vIERlYnVnZ2luZwogIGdldEluc3BlY3RvclVSTCgpOiBQcm9taXNlPFVSTD47IC8vIENocm9tZSBEZXZUb29scyBpbnNwZWN0b3IgVVJMCn0KYGBgCgojIyBFdmVudCBEaXNwYXRjaGluZwoKKipGZXRjaCAobm8gSFRUUCBzZXJ2ZXIpOioqCmBgYGpzCmNvbnN0IHJlcyA9IGF3YWl0IG1mLmRpc3BhdGNoRmV0Y2goImh0dHA6Ly9sb2NhbGhvc3Q6ODc4Ny9wYXRoIiwgewogIG1ldGhvZDogIlBPU1QiLAogIGhlYWRlcnM6IHsgIkF1dGhvcml6YXRpb24iOiAiQmVhcmVyIHRva2VuIiB9LAogIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsgZGF0YTogInZhbHVlIiB9KSwKfSk7CmBgYAoKKipDdXN0b20gSG9zdCByb3V0aW5nOioqCmBgYGpzCmNvbnN0IHJlcyA9IGF3YWl0IG1mLmRpc3BhdGNoRmV0Y2goImh0dHA6Ly9sb2NhbGhvc3Q6ODc4Ny8iLCB7CiAgaGVhZGVyczogeyAiSG9zdCI6ICJhcGkuZXhhbXBsZS5jb20iIH0sCn0pOwpgYGAKCioqU2NoZWR1bGVkOioqCmBgYGpzCmNvbnN0IHdvcmtlciA9IGF3YWl0IG1mLmdldFdvcmtlcigpOwpjb25zdCByZXN1bHQgPSBhd2FpdCB3b3JrZXIuc2NoZWR1bGVkKHsgY3JvbjogIjMwICogKiAqICoiIH0pOwovLyByZXN1bHQ6IHsgb3V0Y29tZTogIm9rIiwgbm9SZXRyeTogZmFsc2UgfQpgYGAKCioqUXVldWU6KioKYGBganMKY29uc3Qgd29ya2VyID0gYXdhaXQgbWYuZ2V0V29ya2VyKCk7CmNvbnN0IHJlc3VsdCA9IGF3YWl0IHdvcmtlci5xdWV1ZSgicXVldWUtbmFtZSIsIFsKICB7IGlkOiAibXNnMSIsIHRpbWVzdGFtcDogbmV3IERhdGUoKSwgYm9keTogImRhdGEiLCBhdHRlbXB0czogMSB9LApdKTsKLy8gcmVzdWx0OiB7IG91dGNvbWU6ICJvayIsIHJldHJ5QWxsOiBmYWxzZSwgYWNrQWxsOiBmYWxzZSwgLi4uIH0KYGBgCgojIyBCaW5kaW5ncyBBY2Nlc3MKCioqRW52aXJvbm1lbnQgdmFyaWFibGVzOioqCmBgYGpzCi8vIEJhc2ljIHVzYWdlCmNvbnN0IGJpbmRpbmdzID0gYXdhaXQgbWYuZ2V0QmluZGluZ3MoKTsKY29uc29sZS5sb2coYmluZGluZ3MuU0VDUkVUX0tFWSk7CgovLyBXaXRoIHR5cGUgc2FmZXR5IChyZWNvbW1lbmRlZCk6CmludGVyZmFjZSBFbnYgewogIFNFQ1JFVF9LRVk6IHN0cmluZzsKICBBUElfVVJMOiBzdHJpbmc7CiAgS1Y6IEtWTmFtZXNwYWNlOwp9CmNvbnN0IGVudiA9IGF3YWl0IG1mLmdldEJpbmRpbmdzPEVudj4oKTsKZW52LlNFQ1JFVF9LRVk7IC8vIHN0cmluZyAodHlwZWQhKQplbnYuS1YuZ2V0KCJrZXkiKTsgLy8gS1ZOYW1lc3BhY2UgbWV0aG9kcyBhdmFpbGFibGUKYGBgCgoqKlJlcXVlc3QuY2Ygb2JqZWN0OioqCmBgYGpzCmNvbnN0IGNmID0gYXdhaXQgbWYuZ2V0Q2YoKTsKY29uc29sZS5sb2coY2Y/LmNvbG8pOyAvLyAiREZXIgpjb25zb2xlLmxvZyhjZj8uY291bnRyeSk7IC8vICJVUyIKYGBgCgoqKktWOioqCmBgYGpzCmNvbnN0IG5zID0gYXdhaXQgbWYuZ2V0S1ZOYW1lc3BhY2UoIlRFU1RfTkFNRVNQQUNFIik7CmF3YWl0IG5zLnB1dCgia2V5IiwgInZhbHVlIik7CmNvbnN0IHZhbHVlID0gYXdhaXQgbnMuZ2V0KCJrZXkiKTsKYGBgCgoqKlIyOioqCmBgYGpzCmNvbnN0IGJ1Y2tldCA9IGF3YWl0IG1mLmdldFIyQnVja2V0KCJCVUNLRVQiKTsKYXdhaXQgYnVja2V0LnB1dCgiZmlsZS50eHQiLCAiY29udGVudCIpOwpjb25zdCBvYmplY3QgPSBhd2FpdCBidWNrZXQuZ2V0KCJmaWxlLnR4dCIpOwpgYGAKCioqRHVyYWJsZSBPYmplY3RzOioqCmBgYGpzCmNvbnN0IG5zID0gYXdhaXQgbWYuZ2V0RHVyYWJsZU9iamVjdE5hbWVzcGFjZSgiQ09VTlRFUiIpOwpjb25zdCBpZCA9IG5zLmlkRnJvbU5hbWUoInRlc3QiKTsKY29uc3Qgc3R1YiA9IG5zLmdldChpZCk7CmNvbnN0IHJlcyA9IGF3YWl0IHN0dWIuZmV0Y2goImh0dHA6Ly9sb2NhbGhvc3QvIik7CgovLyBBY2Nlc3Mgc3RvcmFnZSBkaXJlY3RseToKY29uc3Qgc3RvcmFnZSA9IGF3YWl0IG1mLmdldER1cmFibGVPYmplY3RTdG9yYWdlKGlkKTsKYXdhaXQgc3RvcmFnZS5wdXQoImtleSIsICJ2YWx1ZSIpOwpgYGAKCioqRDE6KioKYGBganMKY29uc3QgZGIgPSBhd2FpdCBtZi5nZXREMURhdGFiYXNlKCJEQiIpOwphd2FpdCBkYi5leGVjKGBDUkVBVEUgVEFCTEUgdXNlcnMgKGlkIElOVEVHRVIgUFJJTUFSWSBLRVksIG5hbWUgVEVYVClgKTsKYXdhaXQgZGIucHJlcGFyZSgiSU5TRVJUIElOVE8gdXNlcnMgKG5hbWUpIFZBTFVFUyAoPykiKS5iaW5kKCJBbGljZSIpLnJ1bigpOwpgYGAKCioqQ2FjaGU6KioKYGBganMKY29uc3QgY2FjaGVzID0gYXdhaXQgbWYuZ2V0Q2FjaGVzKCk7CmNvbnN0IGRlZmF1bHRDYWNoZSA9IGNhY2hlcy5kZWZhdWx0Owphd2FpdCBkZWZhdWx0Q2FjaGUucHV0KCJodHRwOi8vZXhhbXBsZS5jb20iLCBuZXcgUmVzcG9uc2UoImNhY2hlZCIpKTsKYGBgCgoqKlF1ZXVlIHByb2R1Y2VyOioqCmBgYGpzCmNvbnN0IHByb2R1Y2VyID0gYXdhaXQgbWYuZ2V0UXVldWVQcm9kdWNlcigiUVVFVUUiKTsKYXdhaXQgcHJvZHVjZXIuc2VuZCh7IGJvZHk6ICJtZXNzYWdlIGRhdGEiIH0pOwpgYGAKCiMjIExpZmVjeWNsZQoKKipSZWxvYWQ6KioKYGBganMKYXdhaXQgbWYuc2V0T3B0aW9ucyh7CiAgc2NyaXB0UGF0aDogIndvcmtlci5qcyIsCiAgYmluZGluZ3M6IHsgVkVSU0lPTjogIjIuMCIgfSwKfSk7CmBgYAoKKipXYXRjaCAobWFudWFsKToqKgpgYGBqcwppbXBvcnQgeyB3YXRjaCB9IGZyb20gImZzIjsKCmNvbnN0IGNvbmZpZyA9IHsgc2NyaXB0UGF0aDogIndvcmtlci5qcyIgfTsKY29uc3QgbWYgPSBuZXcgTWluaWZsYXJlKGNvbmZpZyk7Cgp3YXRjaCgid29ya2VyLmpzIiwgYXN5bmMgKCkgPT4gewogIGNvbnNvbGUubG9nKCJSZWxvYWRpbmcuLi4iKTsKICBhd2FpdCBtZi5zZXRPcHRpb25zKGNvbmZpZyk7Cn0pOwpgYGAKCioqQ2xlYW51cDoqKgpgYGBqcwphd2FpdCBtZi5kaXNwb3NlKCk7CmBgYAoKIyMgRGVidWdnaW5nCgoqKkluc3BlY3RvciBVUkwgZm9yIERldlRvb2xzOioqCmBgYGpzCmNvbnN0IHVybCA9IGF3YWl0IG1mLmdldEluc3BlY3RvclVSTCgpOwpjb25zb2xlLmxvZyhgRGV2VG9vbHM6ICR7dXJsfWApOwovLyBPcGVuIGluIENocm9tZSBEZXZUb29scyBmb3IgYnJlYWtwb2ludHMsIHByb2ZpbGluZwpgYGAKCioqV2FpdCBmb3Igc2VydmVyIHJlYWR5OioqCmBgYGpzCmNvbnN0IG1mID0gbmV3IE1pbmlmbGFyZSh7IHNjcmlwdFBhdGg6ICJ3b3JrZXIuanMiIH0pOwpjb25zdCB1cmwgPSBhd2FpdCBtZi5yZWFkeTsgLy8gUHJvbWlzZTxVUkw+CmNvbnNvbGUubG9nKGBTZXJ2ZXIgcnVubmluZyBhdCAke3VybH1gKTsgLy8gaHR0cDovLzEyNy4wLjAuMTo4Nzg3CgovLyBOb3RlOiBkaXNwYXRjaEZldGNoKCkgd2FpdHMgYXV0b21hdGljYWxseSwgbm8gbmVlZCB0byBhd2FpdCByZWFkeQpjb25zdCByZXMgPSBhd2FpdCBtZi5kaXNwYXRjaEZldGNoKCJodHRwOi8vbG9jYWxob3N0LyIpOyAvLyBXb3JrcyBpbW1lZGlhdGVseQpgYGAKClNlZSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSBmb3IgYWxsIGNvbnN0cnVjdG9yIG9wdGlvbnMuCg==
+# Programmatic API
+
+## Miniflare Class
+
+```typescript
+class Miniflare {
+  constructor(options: MiniflareOptions);
+  
+  // Lifecycle
+  ready: Promise<URL>; // Resolves when server ready, returns URL
+  dispose(): Promise<void>; // Cleanup resources
+  setOptions(options: MiniflareOptions): Promise<void>; // Reload config
+  
+  // Event dispatching
+  dispatchFetch(url: string | URL | Request, init?: RequestInit): Promise<Response>;
+  getWorker(name?: string): Promise<Worker>;
+  
+  // Bindings access
+  getBindings<Bindings = Record<string, unknown>>(name?: string): Promise<Bindings>;
+  getCf(name?: string): Promise<IncomingRequestCfProperties | undefined>;
+  getKVNamespace(name: string): Promise<KVNamespace>;
+  getR2Bucket(name: string): Promise<R2Bucket>;
+  getDurableObjectNamespace(name: string): Promise<DurableObjectNamespace>;
+  getDurableObjectStorage(id: DurableObjectId): Promise<DurableObjectStorage>;
+  getD1Database(name: string): Promise<D1Database>;
+  getCaches(): Promise<CacheStorage>;
+  getQueueProducer(name: string): Promise<QueueProducer>;
+  
+  // Debugging
+  getInspectorURL(): Promise<URL>; // Chrome DevTools inspector URL
+}
+```
+
+## Event Dispatching
+
+**Fetch (no HTTP server):**
+```js
+const res = await mf.dispatchFetch("http://localhost:8787/path", {
+  method: "POST",
+  headers: { "Authorization": "Bearer token" },
+  body: JSON.stringify({ data: "value" }),
+});
+```
+
+**Custom Host routing:**
+```js
+const res = await mf.dispatchFetch("http://localhost:8787/", {
+  headers: { "Host": "api.example.com" },
+});
+```
+
+**Scheduled:**
+```js
+const worker = await mf.getWorker();
+const result = await worker.scheduled({ cron: "30 * * * *" });
+// result: { outcome: "ok", noRetry: false }
+```
+
+**Queue:**
+```js
+const worker = await mf.getWorker();
+const result = await worker.queue("queue-name", [
+  { id: "msg1", timestamp: new Date(), body: "data", attempts: 1 },
+]);
+// result: { outcome: "ok", retryAll: false, ackAll: false, ... }
+```
+
+## Bindings Access
+
+**Environment variables:**
+```js
+// Basic usage
+const bindings = await mf.getBindings();
+console.log(bindings.SECRET_KEY);
+
+// With type safety (recommended):
+interface Env {
+  SECRET_KEY: string;
+  API_URL: string;
+  KV: KVNamespace;
+}
+const env = await mf.getBindings<Env>();
+env.SECRET_KEY; // string (typed!)
+env.KV.get("key"); // KVNamespace methods available
+```
+
+**Request.cf object:**
+```js
+const cf = await mf.getCf();
+console.log(cf?.colo); // "DFW"
+console.log(cf?.country); // "US"
+```
+
+**KV:**
+```js
+const ns = await mf.getKVNamespace("TEST_NAMESPACE");
+await ns.put("key", "value");
+const value = await ns.get("key");
+```
+
+**R2:**
+```js
+const bucket = await mf.getR2Bucket("BUCKET");
+await bucket.put("file.txt", "content");
+const object = await bucket.get("file.txt");
+```
+
+**Durable Objects:**
+```js
+const ns = await mf.getDurableObjectNamespace("COUNTER");
+const id = ns.idFromName("test");
+const stub = ns.get(id);
+const res = await stub.fetch("http://localhost/");
+
+// Access storage directly:
+const storage = await mf.getDurableObjectStorage(id);
+await storage.put("key", "value");
+```
+
+**D1:**
+```js
+const db = await mf.getD1Database("DB");
+await db.exec(`CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)`);
+await db.prepare("INSERT INTO users (name) VALUES (?)").bind("Alice").run();
+```
+
+**Cache:**
+```js
+const caches = await mf.getCaches();
+const defaultCache = caches.default;
+await defaultCache.put("http://example.com", new Response("cached"));
+```
+
+**Queue producer:**
+```js
+const producer = await mf.getQueueProducer("QUEUE");
+await producer.send({ body: "message data" });
+```
+
+## Lifecycle
+
+**Reload:**
+```js
+await mf.setOptions({
+  scriptPath: "worker.js",
+  bindings: { VERSION: "2.0" },
+});
+```
+
+**Watch (manual):**
+```js
+import { watch } from "fs";
+
+const config = { scriptPath: "worker.js" };
+const mf = new Miniflare(config);
+
+watch("worker.js", async () => {
+  console.log("Reloading...");
+  await mf.setOptions(config);
+});
+```
+
+**Cleanup:**
+```js
+await mf.dispose();
+```
+
+## Debugging
+
+**Inspector URL for DevTools:**
+```js
+const url = await mf.getInspectorURL();
+console.log(`DevTools: ${url}`);
+// Open in Chrome DevTools for breakpoints, profiling
+```
+
+**Wait for server ready:**
+```js
+const mf = new Miniflare({ scriptPath: "worker.js" });
+const url = await mf.ready; // Promise<URL>
+console.log(`Server running at ${url}`); // http://127.0.0.1:8787
+
+// Note: dispatchFetch() waits automatically, no need to await ready
+const res = await mf.dispatchFetch("http://localhost/"); // Works immediately
+```
+
+See [configuration.md](./configuration.md) for all constructor options.

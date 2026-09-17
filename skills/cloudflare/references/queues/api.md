@@ -1,1 +1,206 @@
-IyBRdWV1ZXMgQVBJIFJlZmVyZW5jZQoKIyMgUHJvZHVjZXI6IFNlbmQgTWVzc2FnZXMKCmBgYHR5cGVzY3JpcHQKLy8gQmFzaWMgc2VuZAphd2FpdCBlbnYuTVlfUVVFVUUuc2VuZCh7IHVybDogcmVxdWVzdC51cmwsIHRpbWVzdGFtcDogRGF0ZS5ub3coKSB9KTsKCi8vIE9wdGlvbnM6IGRlbGF5IChtYXggNDMyMDBzKSwgY29udGVudFR5cGUgKGpzb258dGV4dHxieXRlc3x2OCkKYXdhaXQgZW52Lk1ZX1FVRVVFLnNlbmQobWVzc2FnZSwgeyBkZWxheVNlY29uZHM6IDYwMCB9KTsKYXdhaXQgZW52Lk1ZX1FVRVVFLnNlbmQobWVzc2FnZSwgeyBkZWxheVNlY29uZHM6IDAgfSk7IC8vIE92ZXJyaWRlIHF1ZXVlIGRlZmF1bHQKCi8vIEJhdGNoICh1cCB0byAxMDAgbXNncyBvciAyNTYgS0IpCmF3YWl0IGVudi5NWV9RVUVVRS5zZW5kQmF0Y2goWwogIHsgYm9keTogJ21zZzEnIH0sCiAgeyBib2R5OiAnbXNnMicgfSwKICB7IGJvZHk6ICdtc2czJywgb3B0aW9uczogeyBkZWxheVNlY29uZHM6IDMwMCB9IH0KXSk7CgovLyBOb24tYmxvY2tpbmcgd2l0aCBjdHgud2FpdFVudGlsIC0gc2VuZCBjb250aW51ZXMgYWZ0ZXIgcmVzcG9uc2UKY3R4LndhaXRVbnRpbChlbnYuTVlfUVVFVUUuc2VuZCh7IGRhdGE6ICdhc3luYycgfSkpOwoKLy8gQmFja2dyb3VuZCB0YXNrcyBpbiBxdWV1ZSBjb25zdW1lcgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgcXVldWUoYmF0Y2g6IE1lc3NhZ2VCYXRjaCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCk6IFByb21pc2U8dm9pZD4gewogICAgZm9yIChjb25zdCBtc2cgb2YgYmF0Y2gubWVzc2FnZXMpIHsKICAgICAgYXdhaXQgcHJvY2Vzc01lc3NhZ2UobXNnLmJvZHkpOwogICAgICAKICAgICAgLy8gRmlyZS1hbmQtZm9yZ2V0IGFuYWx5dGljcyAoZG9lc24ndCBibG9jayBhY2spCiAgICAgIGN0eC53YWl0VW50aWwoCiAgICAgICAgZW52LkFOQUxZVElDU19RVUVVRS5zZW5kKHsgbWVzc2FnZUlkOiBtc2cuaWQsIHByb2Nlc3NlZEF0OiBEYXRlLm5vdygpIH0pCiAgICAgICk7CiAgICAgIAogICAgICBtc2cuYWNrKCk7CiAgICB9CiAgfQp9OwpgYGAKCiMjIENvbnN1bWVyOiBQdXNoLWJhc2VkIChXb3JrZXIpCgpgYGB0eXBlc2NyaXB0Ci8vIFR5cGUtc2FmZSBoYW5kbGVyIHdpdGggRXhwb3J0ZWRIYW5kbGVyCmludGVyZmFjZSBFbnYgewogIE1ZX1FVRVVFOiBRdWV1ZTsKICBEQjogRDFEYXRhYmFzZTsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHF1ZXVlKGJhdGNoOiBNZXNzYWdlQmF0Y2g8TWVzc2FnZUJvZHk+LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTx2b2lkPiB7CiAgICAvLyBiYXRjaC5xdWV1ZSwgYmF0Y2gubWVzc2FnZXMubGVuZ3RoCiAgICBmb3IgKGNvbnN0IG1zZyBvZiBiYXRjaC5tZXNzYWdlcykgewogICAgICAvLyBtc2cuaWQsIG1zZy5ib2R5LCBtc2cudGltZXN0YW1wLCBtc2cuYXR0ZW1wdHMKICAgICAgdHJ5IHsKICAgICAgICBhd2FpdCBwcm9jZXNzTWVzc2FnZShtc2cuYm9keSk7CiAgICAgICAgbXNnLmFjaygpOwogICAgICB9IGNhdGNoIChlcnJvcikgewogICAgICAgIG1zZy5yZXRyeSh7IGRlbGF5U2Vjb25kczogNjAwIH0pOwogICAgICB9CiAgICB9CiAgfQp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgoqKkNSSVRJQ0FMIFdBUk5JTkdTOioqCgoxLiAqKk1lc3NhZ2VzIG5vdCBleHBsaWNpdGx5IGFjaydkIG9yIHJldHJ5J2Qgd2lsbCBhdXRvLXJldHJ5IGluZGVmaW5pdGVseSoqIHVudGlsIGBtYXhfcmV0cmllc2AgaXMgcmVhY2hlZC4gQWx3YXlzIGNhbGwgYG1zZy5hY2soKWAgb3IgYG1zZy5yZXRyeSgpYCBmb3IgZWFjaCBtZXNzYWdlLgoKMi4gKipUaHJvd2luZyB1bmNhdWdodCBlcnJvcnMgcmV0cmllcyB0aGUgRU5USVJFIGJhdGNoKiosIG5vdCBqdXN0IHRoZSBmYWlsZWQgbWVzc2FnZS4gQWx3YXlzIHdyYXAgaW5kaXZpZHVhbCBtZXNzYWdlIHByb2Nlc3NpbmcgaW4gdHJ5L2NhdGNoIGFuZCBjYWxsIGBtc2cucmV0cnkoKWAgZXhwbGljaXRseSBwZXIgbWVzc2FnZS4KCmBgYHR5cGVzY3JpcHQKLy8g4p2MIEJBRDogVW5jYXVnaHQgZXJyb3IgcmV0cmllcyBlbnRpcmUgYmF0Y2gKYXN5bmMgcXVldWUoYmF0Y2g6IE1lc3NhZ2VCYXRjaCk6IFByb21pc2U8dm9pZD4gewogIGZvciAoY29uc3QgbXNnIG9mIGJhdGNoLm1lc3NhZ2VzKSB7CiAgICBhd2FpdCByaXNreU9wZXJhdGlvbihtc2cuYm9keSk7IC8vIElmIHRoaXMgdGhyb3dzLCBlbnRpcmUgYmF0Y2ggcmV0cmllcwogICAgbXNnLmFjaygpOwogIH0KfQoKLy8g4pyFIEdPT0Q6IENhdGNoIHBlciBtZXNzYWdlLCBoYW5kbGUgaW5kaXZpZHVhbGx5CmFzeW5jIHF1ZXVlKGJhdGNoOiBNZXNzYWdlQmF0Y2gpOiBQcm9taXNlPHZvaWQ+IHsKICBmb3IgKGNvbnN0IG1zZyBvZiBiYXRjaC5tZXNzYWdlcykgewogICAgdHJ5IHsKICAgICAgYXdhaXQgcmlza3lPcGVyYXRpb24obXNnLmJvZHkpOwogICAgICBtc2cuYWNrKCk7CiAgICB9IGNhdGNoIChlcnJvcikgewogICAgICBtc2cucmV0cnkoeyBkZWxheVNlY29uZHM6IDYwIH0pOwogICAgfQogIH0KfQpgYGAKCiMjIEFjay9SZXRyeSBQcmVjZWRlbmNlIFJ1bGVzCgoxLiAqKlBlci1tZXNzYWdlIGNhbGxzIHRha2UgcHJlY2VkZW5jZSoqOiBJZiB5b3UgY2FsbCBib3RoIGBtc2cuYWNrKClgIGFuZCBgbXNnLnJldHJ5KClgLCBsYXN0IGNhbGwgd2lucwoyLiAqKkJhdGNoIGNhbGxzIGRvbid0IG92ZXJyaWRlKio6IGBiYXRjaC5hY2tBbGwoKWAgb25seSBhZmZlY3RzIG1lc3NhZ2VzIHdpdGhvdXQgZXhwbGljaXQgYWNrL3JldHJ5CjMuICoqTm8gYWN0aW9uID0gYXV0b21hdGljIHJldHJ5Kio6IE1lc3NhZ2VzIHdpdGggbm8gZXhwbGljaXQgYWN0aW9uIHJldHJ5IHdpdGggY29uZmlndXJlZCBkZWxheQoKYGBgdHlwZXNjcmlwdAphc3luYyBxdWV1ZShiYXRjaDogTWVzc2FnZUJhdGNoKTogUHJvbWlzZTx2b2lkPiB7CiAgZm9yIChjb25zdCBtc2cgb2YgYmF0Y2gubWVzc2FnZXMpIHsKICAgIG1zZy5hY2soKTsgICAgICAgIC8vIE1lc3NhZ2UgbWFya2VkIGZvciBhY2sKICAgIG1zZy5yZXRyeSgpOyAgICAgIC8vIE92ZXJyaWRlcyBhY2sgLSBtZXNzYWdlIHdpbGwgcmV0cnkKICB9CiAgCiAgYmF0Y2guYWNrQWxsKCk7ICAgICAvLyBPbmx5IGFmZmVjdHMgbWVzc2FnZXMgbm90IGV4cGxpY2l0bHkgaGFuZGxlZCBhYm92ZQp9CmBgYAoKIyMgQmF0Y2ggT3BlcmF0aW9ucwoKYGBgdHlwZXNjcmlwdAovLyBBY2tub3dsZWRnZSBlbnRpcmUgYmF0Y2gKdHJ5IHsKICBhd2FpdCBidWxrUHJvY2VzcyhiYXRjaC5tZXNzYWdlcyk7CiAgYmF0Y2guYWNrQWxsKCk7Cn0gY2F0Y2ggKGVycm9yKSB7CiAgYmF0Y2gucmV0cnlBbGwoeyBkZWxheVNlY29uZHM6IDMwMCB9KTsKfQpgYGAKCiMjIEV4cG9uZW50aWFsIEJhY2tvZmYKCmBgYHR5cGVzY3JpcHQKYXN5bmMgcXVldWUoYmF0Y2g6IE1lc3NhZ2VCYXRjaCwgZW52OiBFbnYpOiBQcm9taXNlPHZvaWQ+IHsKICBmb3IgKGNvbnN0IG1zZyBvZiBiYXRjaC5tZXNzYWdlcykgewogICAgdHJ5IHsKICAgICAgYXdhaXQgcHJvY2Vzc01lc3NhZ2UobXNnLmJvZHkpOwogICAgICBtc2cuYWNrKCk7CiAgICB9IGNhdGNoIChlcnJvcikgewogICAgICAvLyAzMHMsIDYwcywgMTIwcywgMjQwcywgNDgwcywgLi4uIHVwIHRvIDEyaCBtYXgKICAgICAgY29uc3QgZGVsYXkgPSBNYXRoLm1pbigzMCAqICgyICoqIG1zZy5hdHRlbXB0cyksIDQzMjAwKTsKICAgICAgbXNnLnJldHJ5KHsgZGVsYXlTZWNvbmRzOiBkZWxheSB9KTsKICAgIH0KICB9Cn0KYGBgCgojIyBNdWx0aXBsZSBRdWV1ZXMsIFNpbmdsZSBDb25zdW1lcgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgcXVldWUoYmF0Y2g6IE1lc3NhZ2VCYXRjaCwgZW52OiBFbnYpOiBQcm9taXNlPHZvaWQ+IHsKICAgIHN3aXRjaCAoYmF0Y2gucXVldWUpIHsKICAgICAgY2FzZSAnaGlnaC1wcmlvcml0eSc6IGF3YWl0IHByb2Nlc3NVcmdlbnQoYmF0Y2gubWVzc2FnZXMpOyBicmVhazsKICAgICAgY2FzZSAnbG93LXByaW9yaXR5JzogYXdhaXQgcHJvY2Vzc0RlZmVycmVkKGJhdGNoLm1lc3NhZ2VzKTsgYnJlYWs7CiAgICAgIGNhc2UgJ2VtYWlsJzogYXdhaXQgc2VuZEVtYWlscyhiYXRjaC5tZXNzYWdlcyk7IGJyZWFrOwogICAgICBkZWZhdWx0OiBiYXRjaC5yZXRyeUFsbCgpOwogICAgfQogIH0KfTsKYGBgCgojIyBDb25zdW1lcjogUHVsbC1iYXNlZCAoSFRUUCkKCmBgYHR5cGVzY3JpcHQKLy8gUHVsbCBtZXNzYWdlcwpjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKAogIGBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJHtBQ0NPVU5UX0lEfS9xdWV1ZXMvJHtRVUVVRV9JRH0vbWVzc2FnZXMvcHVsbGAsCiAgewogICAgbWV0aG9kOiAnUE9TVCcsCiAgICBoZWFkZXJzOiB7ICdhdXRob3JpemF0aW9uJzogYEJlYXJlciAke0FQSV9UT0tFTn1gLCAnY29udGVudC10eXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nIH0sCiAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IHZpc2liaWxpdHlfdGltZW91dF9tczogNjAwMCwgYmF0Y2hfc2l6ZTogNTAgfSkKICB9Cik7Cgpjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuanNvbigpOwoKLy8gQWNrbm93bGVkZ2UKYXdhaXQgZmV0Y2goCiAgYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8ke0FDQ09VTlRfSUR9L3F1ZXVlcy8ke1FVRVVFX0lEfS9tZXNzYWdlcy9hY2tgLAogIHsKICAgIG1ldGhvZDogJ1BPU1QnLAogICAgaGVhZGVyczogeyAnYXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHtBUElfVE9LRU59YCwgJ2NvbnRlbnQtdHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9LAogICAgYm9keTogSlNPTi5zdHJpbmdpZnkoewogICAgICBhY2tzOiBbeyBsZWFzZV9pZDogbXNnLmxlYXNlX2lkIH1dLAogICAgICByZXRyaWVzOiBbeyBsZWFzZV9pZDogbXNnMi5sZWFzZV9pZCwgZGVsYXlfc2Vjb25kczogNjAwIH1dCiAgICB9KQogIH0KKTsKYGBgCgojIyBJbnRlcmZhY2VzCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBNZXNzYWdlQmF0Y2g8Qm9keSA9IHVua25vd24+IHsKICByZWFkb25seSBxdWV1ZTogc3RyaW5nOwogIHJlYWRvbmx5IG1lc3NhZ2VzOiBNZXNzYWdlPEJvZHk+W107CiAgYWNrQWxsKCk6IHZvaWQ7CiAgcmV0cnlBbGwob3B0aW9ucz86IFF1ZXVlUmV0cnlPcHRpb25zKTogdm9pZDsKfQoKaW50ZXJmYWNlIE1lc3NhZ2U8Qm9keSA9IHVua25vd24+IHsKICByZWFkb25seSBpZDogc3RyaW5nOwogIHJlYWRvbmx5IHRpbWVzdGFtcDogRGF0ZTsKICByZWFkb25seSBib2R5OiBCb2R5OwogIHJlYWRvbmx5IGF0dGVtcHRzOiBudW1iZXI7CiAgYWNrKCk6IHZvaWQ7CiAgcmV0cnkob3B0aW9ucz86IFF1ZXVlUmV0cnlPcHRpb25zKTogdm9pZDsKfQoKaW50ZXJmYWNlIFF1ZXVlU2VuZE9wdGlvbnMgewogIGNvbnRlbnRUeXBlPzogJ3RleHQnIHwgJ2J5dGVzJyB8ICdqc29uJyB8ICd2OCc7CiAgZGVsYXlTZWNvbmRzPzogbnVtYmVyOyAvLyAwLTQzMjAwCn0KYGBgCg==
+# Queues API Reference
+
+## Producer: Send Messages
+
+```typescript
+// Basic send
+await env.MY_QUEUE.send({ url: request.url, timestamp: Date.now() });
+
+// Options: delay (max 43200s), contentType (json|text|bytes|v8)
+await env.MY_QUEUE.send(message, { delaySeconds: 600 });
+await env.MY_QUEUE.send(message, { delaySeconds: 0 }); // Override queue default
+
+// Batch (up to 100 msgs or 256 KB)
+await env.MY_QUEUE.sendBatch([
+  { body: 'msg1' },
+  { body: 'msg2' },
+  { body: 'msg3', options: { delaySeconds: 300 } }
+]);
+
+// Non-blocking with ctx.waitUntil - send continues after response
+ctx.waitUntil(env.MY_QUEUE.send({ data: 'async' }));
+
+// Background tasks in queue consumer
+export default {
+  async queue(batch: MessageBatch, env: Env, ctx: ExecutionContext): Promise<void> {
+    for (const msg of batch.messages) {
+      await processMessage(msg.body);
+      
+      // Fire-and-forget analytics (doesn't block ack)
+      ctx.waitUntil(
+        env.ANALYTICS_QUEUE.send({ messageId: msg.id, processedAt: Date.now() })
+      );
+      
+      msg.ack();
+    }
+  }
+};
+```
+
+## Consumer: Push-based (Worker)
+
+```typescript
+// Type-safe handler with ExportedHandler
+interface Env {
+  MY_QUEUE: Queue;
+  DB: D1Database;
+}
+
+export default {
+  async queue(batch: MessageBatch<MessageBody>, env: Env, ctx: ExecutionContext): Promise<void> {
+    // batch.queue, batch.messages.length
+    for (const msg of batch.messages) {
+      // msg.id, msg.body, msg.timestamp, msg.attempts
+      try {
+        await processMessage(msg.body);
+        msg.ack();
+      } catch (error) {
+        msg.retry({ delaySeconds: 600 });
+      }
+    }
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+**CRITICAL WARNINGS:**
+
+1. **Messages not explicitly ack'd or retry'd will auto-retry indefinitely** until `max_retries` is reached. Always call `msg.ack()` or `msg.retry()` for each message.
+
+2. **Throwing uncaught errors retries the ENTIRE batch**, not just the failed message. Always wrap individual message processing in try/catch and call `msg.retry()` explicitly per message.
+
+```typescript
+// ❌ BAD: Uncaught error retries entire batch
+async queue(batch: MessageBatch): Promise<void> {
+  for (const msg of batch.messages) {
+    await riskyOperation(msg.body); // If this throws, entire batch retries
+    msg.ack();
+  }
+}
+
+// ✅ GOOD: Catch per message, handle individually
+async queue(batch: MessageBatch): Promise<void> {
+  for (const msg of batch.messages) {
+    try {
+      await riskyOperation(msg.body);
+      msg.ack();
+    } catch (error) {
+      msg.retry({ delaySeconds: 60 });
+    }
+  }
+}
+```
+
+## Ack/Retry Precedence Rules
+
+1. **Per-message calls take precedence**: If you call both `msg.ack()` and `msg.retry()`, last call wins
+2. **Batch calls don't override**: `batch.ackAll()` only affects messages without explicit ack/retry
+3. **No action = automatic retry**: Messages with no explicit action retry with configured delay
+
+```typescript
+async queue(batch: MessageBatch): Promise<void> {
+  for (const msg of batch.messages) {
+    msg.ack();        // Message marked for ack
+    msg.retry();      // Overrides ack - message will retry
+  }
+  
+  batch.ackAll();     // Only affects messages not explicitly handled above
+}
+```
+
+## Batch Operations
+
+```typescript
+// Acknowledge entire batch
+try {
+  await bulkProcess(batch.messages);
+  batch.ackAll();
+} catch (error) {
+  batch.retryAll({ delaySeconds: 300 });
+}
+```
+
+## Exponential Backoff
+
+```typescript
+async queue(batch: MessageBatch, env: Env): Promise<void> {
+  for (const msg of batch.messages) {
+    try {
+      await processMessage(msg.body);
+      msg.ack();
+    } catch (error) {
+      // 30s, 60s, 120s, 240s, 480s, ... up to 12h max
+      const delay = Math.min(30 * (2 ** msg.attempts), 43200);
+      msg.retry({ delaySeconds: delay });
+    }
+  }
+}
+```
+
+## Multiple Queues, Single Consumer
+
+```typescript
+export default {
+  async queue(batch: MessageBatch, env: Env): Promise<void> {
+    switch (batch.queue) {
+      case 'high-priority': await processUrgent(batch.messages); break;
+      case 'low-priority': await processDeferred(batch.messages); break;
+      case 'email': await sendEmails(batch.messages); break;
+      default: batch.retryAll();
+    }
+  }
+};
+```
+
+## Consumer: Pull-based (HTTP)
+
+```typescript
+// Pull messages
+const response = await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/queues/${QUEUE_ID}/messages/pull`,
+  {
+    method: 'POST',
+    headers: { 'authorization': `Bearer ${API_TOKEN}`, 'content-type': 'application/json' },
+    body: JSON.stringify({ visibility_timeout_ms: 6000, batch_size: 50 })
+  }
+);
+
+const data = await response.json();
+
+// Acknowledge
+await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/queues/${QUEUE_ID}/messages/ack`,
+  {
+    method: 'POST',
+    headers: { 'authorization': `Bearer ${API_TOKEN}`, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      acks: [{ lease_id: msg.lease_id }],
+      retries: [{ lease_id: msg2.lease_id, delay_seconds: 600 }]
+    })
+  }
+);
+```
+
+## Interfaces
+
+```typescript
+interface MessageBatch<Body = unknown> {
+  readonly queue: string;
+  readonly messages: Message<Body>[];
+  ackAll(): void;
+  retryAll(options?: QueueRetryOptions): void;
+}
+
+interface Message<Body = unknown> {
+  readonly id: string;
+  readonly timestamp: Date;
+  readonly body: Body;
+  readonly attempts: number;
+  ack(): void;
+  retry(options?: QueueRetryOptions): void;
+}
+
+interface QueueSendOptions {
+  contentType?: 'text' | 'bytes' | 'json' | 'v8';
+  delaySeconds?: number; // 0-43200
+}
+```

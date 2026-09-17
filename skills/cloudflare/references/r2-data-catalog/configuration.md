@@ -1,1 +1,98 @@
-IyBSMiBEYXRhIENhdGFsb2cgQ29uZmlndXJhdGlvbgoKRW5hYmxlIHRoZSBjYXRhbG9nLCBjcmVhdGUgdG9rZW5zLCB0dXJuIG9uIGF1dG9tYXRpYyBtYWludGVuYW5jZSwgY29ubmVjdCBjbGllbnRzLiBGb3IgZXhoYXVzdGl2ZSB0b2tlbi9wZXJtaXNzaW9uIG9wdGlvbnMgYW5kIG1haW50ZW5hbmNlIHNldHRpbmdzLCBwdWxsIGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjIvZGF0YS1jYXRhbG9nL21hbmFnZS1jYXRhbG9ncy9gIGFuZCBgLi4uL3RhYmxlLW1haW50ZW5hbmNlL2AuCgojIyBTdGVwIDE6IENyZWF0ZSBCdWNrZXQgKyBFbmFibGUgQ2F0YWxvZwoKYGBgYmFzaApucHggd3JhbmdsZXIgcjIgYnVja2V0IGNyZWF0ZSBteS1idWNrZXQKbnB4IHdyYW5nbGVyIHIyIGJ1Y2tldCBjYXRhbG9nIGVuYWJsZSBteS1idWNrZXQKYGBgCgpgZW5hYmxlYCBvdXRwdXRzIHRoZSB0d28gdmFsdWVzIHVzZWQgZXZlcnl3aGVyZToKCmBgYApXYXJlaG91c2U6ICAgNDQ4MmExY2Q0M2JmNTE5NzY1N2FlMWQ4NjM2YzQxNGFfbXktYnVja2V0ICAgIyB7QUNDT1VOVF9JRH1fe0JVQ0tFVH0KQ2F0YWxvZyBVUkk6IGh0dHBzOi8vY2F0YWxvZy5jbG91ZGZsYXJlc3RvcmFnZS5jb20vNDQ4MmExY2Q0M2JmNTE5NzY1N2FlMWQ4NjM2YzQxNGEvbXktYnVja2V0CmBgYAoKRW5hYmxpbmcgY3JlYXRlcyBgX19yMl9kYXRhX2NhdGFsb2cvYCBtZXRhZGF0YSBpbiB0aGUgYnVja2V0OyBleGlzdGluZyBvYmplY3RzIGFyZSB1bnRvdWNoZWQuCgojIyBTdGVwIDI6IENyZWF0ZSBhbiBBUEkgVG9rZW4KCkRhc2hib2FyZCDihpIgKipSMioqIOKGkiAqKk1hbmFnZSBSMiBBUEkgdG9rZW5zKiog4oaSICoqQ3JlYXRlIEFQSSB0b2tlbioqLgoKKipTaW1wbGVzdDoqKiBvbmUgdG9rZW4gd2l0aCAqKlIyIFN0b3JhZ2UgQWRtaW4gUmVhZCAmIFdyaXRlKiogKyAqKlIyIERhdGEgQ2F0YWxvZyBSZWFkICYgV3JpdGUqKiwgc2NvcGVkIHRvIHlvdXIgYnVja2V0KHMpLiBBZGQgKipSMiBTUUwgUmVhZCoqIGlmIHlvdSBhbHNvIHF1ZXJ5LiBUaGlzIHRva2VuIHdvcmtzIGZvciB0aGUgSWNlYmVyZyBSRVNUIEFQSSwgY29udHJvbC1wbGFuZSBBUEksIFIyIFNRTCwgYW5kIEdyYXBoUUwgQW5hbHl0aWNzLiBUb2tlbiBjcmVhdGlvbiBhbHNvIHlpZWxkcyBTMyBBY2Nlc3MgS2V5IElEIC8gU2VjcmV0IChuZWVkZWQgb25seSBmb3IgU3Bhcmsgb3JwaGFuLWZpbGUgcmVtb3ZhbCkuCgo+IE9wZW4tYmV0YSBsaW1pdGF0aW9uOiBSMiBTdG9yYWdlICoqQWRtaW4gV3JpdGUgaXMgcmVxdWlyZWQgZXZlbiBmb3IgcmVhZC1vbmx5IGRhdGEgYWNjZXNzKiouIFNlZSB0aGUgbWFuYWdlLWNhdGFsb2dzIGRvYyBmb3IgdGhlIGN1cnJlbnQgcGVybWlzc2lvbiBtYXRyaXguCgojIyBTdGVwIDM6IEVuYWJsZSBBdXRvbWF0aWMgTWFpbnRlbmFuY2UgKFJlY29tbWVuZGVkKQoKUjIgRGF0YSBDYXRhbG9nIHJ1bnMgY29tcGFjdGlvbiBhbmQgc25hcHNob3QgZXhwaXJhdGlvbiBmb3IgeW91LgoKYGBgYmFzaAojIENvbXBhY3Rpb24g4oCUIG1lcmdlcyBzbWFsbCBmaWxlcyAodGFyZ2V0IHNpemUgTUI7IGRlZmF1bHQgMTI4KQpucHggd3JhbmdsZXIgcjIgYnVja2V0IGNhdGFsb2cgY29tcGFjdGlvbiBlbmFibGUgbXktYnVja2V0IFwKICAtLXRhcmdldC1zaXplIDEyOCAtLXRva2VuICRBUElfVE9LRU4KCiMgU25hcHNob3QgZXhwaXJhdGlvbiDigJQgcmVtb3ZlcyBvbGQgc25hcHNob3RzIEFORCB0aGVpciB1bnJlZmVyZW5jZWQgZGF0YSBmaWxlcwpucHggd3JhbmdsZXIgcjIgYnVja2V0IGNhdGFsb2cgc25hcHNob3QtZXhwaXJhdGlvbiBlbmFibGUgbXktYnVja2V0IFwKICAtLXRva2VuICRBUElfVE9LRU4gLS1vbGRlci10aGFuLWRheXMgNyAtLXJldGFpbi1sYXN0IDEwCmBgYAoKQ29tcGFjdGlvbiBuZWVkcyBhICoqc3RvcmVkIGNyZWRlbnRpYWwqKiB0byBhY2Nlc3MgZmlsZXMuIGBjb21wYWN0aW9uIGVuYWJsZWAgKGFuZCB0aGUgZGFzaGJvYXJkIHdpemFyZCkgc3RvcmVzIGl0IGF1dG9tYXRpY2FsbHk7IHB1cmUtQVBJIHNldHVwcyBtdXN0IGNhbGwgYC9jcmVkZW50aWFsYCAoc2VlIFthcGkubWRdKGFwaS5tZCkpLgoKPiBDb21wYWN0aW9uIHRyaWdnZXJzICoqaG91cmx5Kiogd2l0aCAqKm5vIGhhcmQgdGhyb3VnaHB1dCBjYXAqKiAodGhlIGZvcm1lciAyIEdCL2hvdXIgbGltaXQgd2FzIGxpZnRlZCkuIFNuYXBzaG90IGV4cGlyYXRpb24gZGVsZXRlcyB1bnJlZmVyZW5jZWQgZGF0YSBmaWxlcyBhdXRvbWF0aWNhbGx5IChzaW5jZSBBcHJpbCAyMDI2KSDigJQgbWFudWFsIG9ycGhhbiBjbGVhbnVwIGlzIHJhcmVseSBuZWVkZWQuIEZvciB0YXJnZXQtc2l6ZSBndWlkYW5jZSBwZXIgd29ya2xvYWQsIHNlZSB0aGUgdGFibGUtbWFpbnRlbmFuY2UgZG9jLgoKIyMgU3RlcCA0OiBWZXJpZnkKCmBgYGJhc2gKbnB4IHdyYW5nbGVyIHIyIGJ1Y2tldCBjYXRhbG9nIHN0YXR1cyBteS1idWNrZXQKIyBvciBjb250cm9sLXBsYW5lIEFQSToKY3VybCAtcyAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRBQ0NPVU5UX0lEL3IyLWNhdGFsb2cvJEJVQ0tFVCIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJEFQSV9UT0tFTiIKYGBgCgpFeHBlY3QgYCJzdGF0dXMiOiAiYWN0aXZlImAsIGBjb21wYWN0aW9uLnN0YXRlOiAiZW5hYmxlZCJgLCBgY3JlZGVudGlhbF9zdGF0dXM6ICJwcmVzZW50ImAuCgojIyBDbGllbnQgQ29ubmVjdGlvbgoKIyMjIFB5SWNlYmVyZwoKYGBgcHl0aG9uCmltcG9ydCBvcwpmcm9tIHB5aWNlYmVyZy5jYXRhbG9nLnJlc3QgaW1wb3J0IFJlc3RDYXRhbG9nCgpjYXRhbG9nID0gUmVzdENhdGFsb2coCiAgICBuYW1lPSJyMl9jYXRhbG9nIiwKICAgIHdhcmVob3VzZT1vcy5lbnZpcm9uWyJSMl9XQVJFSE9VU0UiXSwgICAjIHtBQ0NPVU5UX0lEfV97QlVDS0VUfQogICAgdXJpPW9zLmVudmlyb25bIlIyX0NBVEFMT0dfVVJJIl0sICAgICAgICMgaHR0cHM6Ly9jYXRhbG9nLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS97QUNDT1VOVF9JRH0ve0JVQ0tFVH0KICAgIHRva2VuPW9zLmVudmlyb25bIlIyX1RPS0VOIl0sCikKcHJpbnQoY2F0YWxvZy5saXN0X25hbWVzcGFjZXMoKSkgICAgICAgICAgICAjIGNvbm5lY3Rpb24gdGVzdApgYGAKCiMjIyBQeVNwYXJrIC8gRHVja0RCIC8gVHJpbm8gLyBTbm93Zmxha2UKCkZ1bGwsIGN1cnJlbnQgZW5naW5lIGNvbmZpZ3MgbGl2ZSBhdCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyL2RhdGEtY2F0YWxvZy9jb25maWctZXhhbXBsZXMvYC4gQSB2ZXJpZmllZCBQeVNwYXJrIHNlc3Npb24gdGVtcGxhdGUgaXMgaW4gW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCNweXNwYXJrLXNlc3Npb24pIChuZWVkcyBJY2ViZXJnIDEuNi4xIGFuZCBgWC1JY2ViZXJnLUFjY2Vzcy1EZWxlZ2F0aW9uOiB2ZW5kZWQtY3JlZGVudGlhbHNgKS4KCiMjIEVudmlyb25tZW50IFZhcmlhYmxlcyBQYXR0ZXJuCgpgYGBiYXNoCiMgLmVudiAobmV2ZXIgY29tbWl0KQpSMl9DQVRBTE9HX1VSST1odHRwczovL2NhdGFsb2cuY2xvdWRmbGFyZXN0b3JhZ2UuY29tLzxBQ0NPVU5UX0lEPi88QlVDS0VUPgpSMl9XQVJFSE9VU0U9PEFDQ09VTlRfSUQ+XzxCVUNLRVQ+ClIyX1RPS0VOPTxhcGktdG9rZW4+CmBgYAoKIyMgRGlzYWJsZSBDYXRhbG9nCgpgYGBiYXNoCm5weCB3cmFuZ2xlciByMiBidWNrZXQgY2F0YWxvZyBkaXNhYmxlIG15LWJ1Y2tldApgYGAKClByZXNlcnZlcyBkYXRhIGFuZCBtZXRhZGF0YTsgdGFibGVzIGJlY29tZSBpbmFjY2Vzc2libGUgdmlhIHRoZSBjYXRhbG9nIHVudGlsIHJlLWVuYWJsZWQuCgojIyBTZWUgQWxzbwoKLSBbYXBpLm1kXShhcGkubWQpIOKAlCBjb250cm9sLXBsYW5lICsgUHlJY2ViZXJnIEFQSSDCtyBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkg4oCUIGF1dGggJiBtYWludGVuYW5jZSB0cm91Ymxlc2hvb3RpbmcK
+# R2 Data Catalog Configuration
+
+Enable the catalog, create tokens, turn on automatic maintenance, connect clients. For exhaustive token/permission options and maintenance settings, pull `https://developers.cloudflare.com/r2/data-catalog/manage-catalogs/` and `.../table-maintenance/`.
+
+## Step 1: Create Bucket + Enable Catalog
+
+```bash
+npx wrangler r2 bucket create my-bucket
+npx wrangler r2 bucket catalog enable my-bucket
+```
+
+`enable` outputs the two values used everywhere:
+
+```
+Warehouse:   4482a1cd43bf5197657ae1d8636c414a_my-bucket   # {ACCOUNT_ID}_{BUCKET}
+Catalog URI: https://catalog.cloudflarestorage.com/4482a1cd43bf5197657ae1d8636c414a/my-bucket
+```
+
+Enabling creates `__r2_data_catalog/` metadata in the bucket; existing objects are untouched.
+
+## Step 2: Create an API Token
+
+Dashboard → **R2** → **Manage R2 API tokens** → **Create API token**.
+
+**Simplest:** one token with **R2 Storage Admin Read & Write** + **R2 Data Catalog Read & Write**, scoped to your bucket(s). Add **R2 SQL Read** if you also query. This token works for the Iceberg REST API, control-plane API, R2 SQL, and GraphQL Analytics. Token creation also yields S3 Access Key ID / Secret (needed only for Spark orphan-file removal).
+
+> Open-beta limitation: R2 Storage **Admin Write is required even for read-only data access**. See the manage-catalogs doc for the current permission matrix.
+
+## Step 3: Enable Automatic Maintenance (Recommended)
+
+R2 Data Catalog runs compaction and snapshot expiration for you.
+
+```bash
+# Compaction — merges small files (target size MB; default 128)
+npx wrangler r2 bucket catalog compaction enable my-bucket \
+  --target-size 128 --token $API_TOKEN
+
+# Snapshot expiration — removes old snapshots AND their unreferenced data files
+npx wrangler r2 bucket catalog snapshot-expiration enable my-bucket \
+  --token $API_TOKEN --older-than-days 7 --retain-last 10
+```
+
+Compaction needs a **stored credential** to access files. `compaction enable` (and the dashboard wizard) stores it automatically; pure-API setups must call `/credential` (see [api.md](api.md)).
+
+> Compaction triggers **hourly** with **no hard throughput cap** (the former 2 GB/hour limit was lifted). Snapshot expiration deletes unreferenced data files automatically (since April 2026) — manual orphan cleanup is rarely needed. For target-size guidance per workload, see the table-maintenance doc.
+
+## Step 4: Verify
+
+```bash
+npx wrangler r2 bucket catalog status my-bucket
+# or control-plane API:
+curl -s "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2-catalog/$BUCKET" \
+  -H "Authorization: Bearer $API_TOKEN"
+```
+
+Expect `"status": "active"`, `compaction.state: "enabled"`, `credential_status: "present"`.
+
+## Client Connection
+
+### PyIceberg
+
+```python
+import os
+from pyiceberg.catalog.rest import RestCatalog
+
+catalog = RestCatalog(
+    name="r2_catalog",
+    warehouse=os.environ["R2_WAREHOUSE"],   # {ACCOUNT_ID}_{BUCKET}
+    uri=os.environ["R2_CATALOG_URI"],       # https://catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}
+    token=os.environ["R2_TOKEN"],
+)
+print(catalog.list_namespaces())            # connection test
+```
+
+### PySpark / DuckDB / Trino / Snowflake
+
+Full, current engine configs live at `https://developers.cloudflare.com/r2/data-catalog/config-examples/`. A verified PySpark session template is in [patterns.md](patterns.md#pyspark-session) (needs Iceberg 1.6.1 and `X-Iceberg-Access-Delegation: vended-credentials`).
+
+## Environment Variables Pattern
+
+```bash
+# .env (never commit)
+R2_CATALOG_URI=https://catalog.cloudflarestorage.com/<ACCOUNT_ID>/<BUCKET>
+R2_WAREHOUSE=<ACCOUNT_ID>_<BUCKET>
+R2_TOKEN=<api-token>
+```
+
+## Disable Catalog
+
+```bash
+npx wrangler r2 bucket catalog disable my-bucket
+```
+
+Preserves data and metadata; tables become inaccessible via the catalog until re-enabled.
+
+## See Also
+
+- [api.md](api.md) — control-plane + PyIceberg API · [gotchas.md](gotchas.md) — auth & maintenance troubleshooting

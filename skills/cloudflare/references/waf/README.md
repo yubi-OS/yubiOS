@@ -1,1 +1,113 @@
-IyBDbG91ZGZsYXJlIFdBRiBFeHBlcnQgU2tpbGwgUmVmZXJlbmNlCgoqKkV4cGVydGlzZSoqOiBDbG91ZGZsYXJlIFdlYiBBcHBsaWNhdGlvbiBGaXJld2FsbCAoV0FGKSBjb25maWd1cmF0aW9uLCBjdXN0b20gcnVsZXMsIG1hbmFnZWQgcnVsZXNldHMsIHJhdGUgbGltaXRpbmcsIGF0dGFjayBkZXRlY3Rpb24sIGFuZCBBUEkgaW50ZWdyYXRpb24KCiMjIE92ZXJ2aWV3CgpDbG91ZGZsYXJlIFdBRiBwcm90ZWN0cyB3ZWIgYXBwbGljYXRpb25zIGZyb20gYXR0YWNrcyB0aHJvdWdoIG1hbmFnZWQgcnVsZXNldHMgYW5kIGN1c3RvbSBydWxlcy4KCioqRGV0ZWN0aW9uIChNYW5hZ2VkIFJ1bGVzZXRzKSoqCi0gUHJlLWNvbmZpZ3VyZWQgcnVsZXMgbWFpbnRhaW5lZCBieSBDbG91ZGZsYXJlCi0gQ1ZFLWJhc2VkIHJ1bGVzLCBPV0FTUCBUb3AgMTAgY292ZXJhZ2UKLSBUaHJlZSBtYWluIHJ1bGVzZXRzOiBDbG91ZGZsYXJlIE1hbmFnZWQsIE9XQVNQIENSUywgRXhwb3NlZCBDcmVkZW50aWFscwotIEFjdGlvbnM6IGxvZywgYmxvY2ssIGNoYWxsZW5nZSwganNfY2hhbGxlbmdlLCBtYW5hZ2VkX2NoYWxsZW5nZQoKKipNaXRpZ2F0aW9uIChDdXN0b20gUnVsZXMgJiBSYXRlIExpbWl0aW5nKSoqCi0gQ3VzdG9tIGV4cHJlc3Npb25zIHVzaW5nIFdpcmVmaWx0ZXIgc3ludGF4Ci0gQXR0YWNrIHNjb3JlLWJhc2VkIGJsb2NraW5nIChgY2Yud2FmLnNjb3JlYCkKLSBSYXRlIGxpbWl0aW5nIHdpdGggcGVyLUlQLCBwZXItdXNlciwgb3IgY3VzdG9tIGNoYXJhY3RlcmlzdGljcwotIEFjdGlvbnM6IGJsb2NrLCBjaGFsbGVuZ2UsIGpzX2NoYWxsZW5nZSwgbWFuYWdlZF9jaGFsbGVuZ2UsIGxvZywgc2tpcAoKIyMgUXVpY2sgU3RhcnQKCiMjIyBEZXBsb3kgQ2xvdWRmbGFyZSBNYW5hZ2VkIFJ1bGVzZXQKYGBgdHlwZXNjcmlwdAppbXBvcnQgQ2xvdWRmbGFyZSBmcm9tICdjbG91ZGZsYXJlJzsKCmNvbnN0IGNsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsgYXBpVG9rZW46IHByb2Nlc3MuZW52LkNGX0FQSV9UT0tFTiB9KTsKCi8vIERlcGxveSBtYW5hZ2VkIHJ1bGVzZXQgdG8gem9uZQphd2FpdCBjbGllbnQucnVsZXNldHMuY3JlYXRlKHsKICB6b25lX2lkOiAnem9uZV9pZCcsCiAga2luZDogJ3pvbmUnLAogIHBoYXNlOiAnaHR0cF9yZXF1ZXN0X2ZpcmV3YWxsX21hbmFnZWQnLAogIG5hbWU6ICdEZXBsb3kgQ2xvdWRmbGFyZSBNYW5hZ2VkIFJ1bGVzZXQnLAogIHJ1bGVzOiBbewogICAgYWN0aW9uOiAnZXhlY3V0ZScsCiAgICBhY3Rpb25fcGFyYW1ldGVyczogewogICAgICBpZDogJ2VmYjdiOGM5NDlhYzQ2NTBhMDk3MzZmYzM3NmU5YWVlJywgLy8gQ2xvdWRmbGFyZSBNYW5hZ2VkIFJ1bGVzZXQKICAgIH0sCiAgICBleHByZXNzaW9uOiAndHJ1ZScsCiAgICBlbmFibGVkOiB0cnVlLAogIH1dLAp9KTsKYGBgCgojIyMgQ3JlYXRlIEN1c3RvbSBSdWxlCmBgYHR5cGVzY3JpcHQKLy8gQmxvY2sgcmVxdWVzdHMgd2l0aCBhdHRhY2sgc2NvcmUgPj0gNDAKYXdhaXQgY2xpZW50LnJ1bGVzZXRzLmNyZWF0ZSh7CiAgem9uZV9pZDogJ3pvbmVfaWQnLAogIGtpbmQ6ICd6b25lJywKICBwaGFzZTogJ2h0dHBfcmVxdWVzdF9maXJld2FsbF9jdXN0b20nLAogIG5hbWU6ICdDdXN0b20gV0FGIFJ1bGVzJywKICBydWxlczogW3sKICAgIGFjdGlvbjogJ2Jsb2NrJywKICAgIGV4cHJlc3Npb246ICdjZi53YWYuc2NvcmUgZ3QgNDAnLAogICAgZGVzY3JpcHRpb246ICdCbG9jayBoaWdoIGF0dGFjayBzY29yZXMnLAogICAgZW5hYmxlZDogdHJ1ZSwKICB9XSwKfSk7CmBgYAoKIyMjIENyZWF0ZSBSYXRlIExpbWl0CmBgYHR5cGVzY3JpcHQKYXdhaXQgY2xpZW50LnJ1bGVzZXRzLmNyZWF0ZSh7CiAgem9uZV9pZDogJ3pvbmVfaWQnLAogIGtpbmQ6ICd6b25lJywKICBwaGFzZTogJ2h0dHBfcmF0ZWxpbWl0JywKICBuYW1lOiAnQVBJIFJhdGUgTGltaXRzJywKICBydWxlczogW3sKICAgIGFjdGlvbjogJ2Jsb2NrJywKICAgIGV4cHJlc3Npb246ICdodHRwLnJlcXVlc3QudXJpLnBhdGggZXEgIi9hcGkvbG9naW4iJywKICAgIGFjdGlvbl9wYXJhbWV0ZXJzOiB7CiAgICAgIHJhdGVsaW1pdDogewogICAgICAgIGNoYXJhY3RlcmlzdGljczogWydjZi5jb2xvLmlkJywgJ2lwLnNyYyddLAogICAgICAgIHBlcmlvZDogNjAsCiAgICAgICAgcmVxdWVzdHNfcGVyX3BlcmlvZDogMTAsCiAgICAgICAgbWl0aWdhdGlvbl90aW1lb3V0OiA2MDAsCiAgICAgIH0sCiAgICB9LAogICAgZW5hYmxlZDogdHJ1ZSwKICB9XSwKfSk7CmBgYAoKIyMgTWFuYWdlZCBSdWxlc2V0IFF1aWNrIFJlZmVyZW5jZQoKfCBSdWxlc2V0IE5hbWUgfCBJRCB8IENvdmVyYWdlIHwKfC0tLS0tLS0tLS0tLS0tfC0tLS18LS0tLS0tLS0tfCAKfCBDbG91ZGZsYXJlIE1hbmFnZWQgfCBgZWZiN2I4Yzk0OWFjNDY1MGEwOTczNmZjMzc2ZTlhZWVgIHwgT1dBU1AgVG9wIDEwLCBDVkVzIHwKfCBPV0FTUCBDb3JlIFJ1bGVzZXQgfCBgNDgxNDM4NGE5ZTVkNDk5MWI5ODE1ZGNmYzI1ZDJmMWZgIHwgT1dBU1AgTW9kU2VjdXJpdHkgQ1JTIHwKfCBFeHBvc2VkIENyZWRlbnRpYWxzIENoZWNrIHwgYGMyZTE4NDA4MTEyMDQxM2M4NmMzYWI3ZTE0MDY5NjA1YCB8IENyZWRlbnRpYWwgc3R1ZmZpbmcgfAoKIyMgUGhhc2VzCgpXQUYgcnVsZXMgZXhlY3V0ZSBpbiBzcGVjaWZpYyBwaGFzZXM6Ci0gYGh0dHBfcmVxdWVzdF9maXJld2FsbF9tYW5hZ2VkYCAtIE1hbmFnZWQgcnVsZXNldHMKLSBgaHR0cF9yZXF1ZXN0X2ZpcmV3YWxsX2N1c3RvbWAgLSBDdXN0b20gcnVsZXMKLSBgaHR0cF9yYXRlbGltaXRgIC0gUmF0ZSBsaW1pdGluZyBydWxlcwotIGBodHRwX3JlcXVlc3Rfc2JmbWAgLSBTdXBlciBCb3QgRmlnaHQgTW9kZSAoUHJvKykKCiMjIFJlYWRpbmcgT3JkZXIKCjEuICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gU0RLIG1ldGhvZHMsIGV4cHJlc3Npb25zLCBhY3Rpb25zLCBwYXJhbWV0ZXJzCjIuICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBTZXR1cCB3aXRoIFdyYW5nbGVyLCBUZXJyYWZvcm0sIFB1bHVtaQozLiAqKltwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpKiogLSBDb21tb24gcGF0dGVybnM6IGRlcGxveSBtYW5hZ2VkLCByYXRlIGxpbWl0aW5nLCBza2lwLCBvdmVycmlkZQo0LiAqKltnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSoqIC0gRXhlY3V0aW9uIG9yZGVyLCBsaW1pdHMsIGV4cHJlc3Npb24gZXJyb3JzCgojIyBTZWUgQWxzbwoKLSBbQ2xvdWRmbGFyZSBXQUYgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dhZi8pCi0gW1J1bGVzZXQgRW5naW5lXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcnVsZXNldC1lbmdpbmUvKQotIFtFeHByZXNzaW9uIFJlZmVyZW5jZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3J1bGVzZXQtZW5naW5lL3J1bGVzLWxhbmd1YWdlLyk=
+# Cloudflare WAF Expert Skill Reference
+
+**Expertise**: Cloudflare Web Application Firewall (WAF) configuration, custom rules, managed rulesets, rate limiting, attack detection, and API integration
+
+## Overview
+
+Cloudflare WAF protects web applications from attacks through managed rulesets and custom rules.
+
+**Detection (Managed Rulesets)**
+- Pre-configured rules maintained by Cloudflare
+- CVE-based rules, OWASP Top 10 coverage
+- Three main rulesets: Cloudflare Managed, OWASP CRS, Exposed Credentials
+- Actions: log, block, challenge, js_challenge, managed_challenge
+
+**Mitigation (Custom Rules & Rate Limiting)**
+- Custom expressions using Wirefilter syntax
+- Attack score-based blocking (`cf.waf.score`)
+- Rate limiting with per-IP, per-user, or custom characteristics
+- Actions: block, challenge, js_challenge, managed_challenge, log, skip
+
+## Quick Start
+
+### Deploy Cloudflare Managed Ruleset
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({ apiToken: process.env.CF_API_TOKEN });
+
+// Deploy managed ruleset to zone
+await client.rulesets.create({
+  zone_id: 'zone_id',
+  kind: 'zone',
+  phase: 'http_request_firewall_managed',
+  name: 'Deploy Cloudflare Managed Ruleset',
+  rules: [{
+    action: 'execute',
+    action_parameters: {
+      id: 'efb7b8c949ac4650a09736fc376e9aee', // Cloudflare Managed Ruleset
+    },
+    expression: 'true',
+    enabled: true,
+  }],
+});
+```
+
+### Create Custom Rule
+```typescript
+// Block requests with attack score >= 40
+await client.rulesets.create({
+  zone_id: 'zone_id',
+  kind: 'zone',
+  phase: 'http_request_firewall_custom',
+  name: 'Custom WAF Rules',
+  rules: [{
+    action: 'block',
+    expression: 'cf.waf.score gt 40',
+    description: 'Block high attack scores',
+    enabled: true,
+  }],
+});
+```
+
+### Create Rate Limit
+```typescript
+await client.rulesets.create({
+  zone_id: 'zone_id',
+  kind: 'zone',
+  phase: 'http_ratelimit',
+  name: 'API Rate Limits',
+  rules: [{
+    action: 'block',
+    expression: 'http.request.uri.path eq "/api/login"',
+    action_parameters: {
+      ratelimit: {
+        characteristics: ['cf.colo.id', 'ip.src'],
+        period: 60,
+        requests_per_period: 10,
+        mitigation_timeout: 600,
+      },
+    },
+    enabled: true,
+  }],
+});
+```
+
+## Managed Ruleset Quick Reference
+
+| Ruleset Name | ID | Coverage |
+|--------------|----|---------| 
+| Cloudflare Managed | `efb7b8c949ac4650a09736fc376e9aee` | OWASP Top 10, CVEs |
+| OWASP Core Ruleset | `4814384a9e5d4991b9815dcfc25d2f1f` | OWASP ModSecurity CRS |
+| Exposed Credentials Check | `c2e184081120413c86c3ab7e14069605` | Credential stuffing |
+
+## Phases
+
+WAF rules execute in specific phases:
+- `http_request_firewall_managed` - Managed rulesets
+- `http_request_firewall_custom` - Custom rules
+- `http_ratelimit` - Rate limiting rules
+- `http_request_sbfm` - Super Bot Fight Mode (Pro+)
+
+## Reading Order
+
+1. **[api.md](api.md)** - SDK methods, expressions, actions, parameters
+2. **[configuration.md](configuration.md)** - Setup with Wrangler, Terraform, Pulumi
+3. **[patterns.md](patterns.md)** - Common patterns: deploy managed, rate limiting, skip, override
+4. **[gotchas.md](gotchas.md)** - Execution order, limits, expression errors
+
+## See Also
+
+- [Cloudflare WAF Docs](https://developers.cloudflare.com/waf/)
+- [Ruleset Engine](https://developers.cloudflare.com/ruleset-engine/)
+- [Expression Reference](https://developers.cloudflare.com/ruleset-engine/rules-language/)

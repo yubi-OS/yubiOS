@@ -1,1 +1,167 @@
-IyBDb25maWd1cmF0aW9uCgojIyBEaXNwYXRjaCBOYW1lc3BhY2UgQmluZGluZwoKIyMjIHdyYW5nbGVyLmpzb25jCmBgYGpzb25jCnsKICAiJHNjaGVtYSI6ICIuL25vZGVfbW9kdWxlcy93cmFuZ2xlci9jb25maWctc2NoZW1hLmpzb24iLAogICJkaXNwYXRjaF9uYW1lc3BhY2VzIjogW3sKICAgICJiaW5kaW5nIjogIkRJU1BBVENIRVIiLAogICAgIm5hbWVzcGFjZSI6ICJwcm9kdWN0aW9uIgogIH1dCn0KYGBgCgojIyBXb3JrZXIgSXNvbGF0aW9uIE1vZGUKCldvcmtlcnMgaW4gYSBuYW1lc3BhY2UgcnVuIGluICoqdW50cnVzdGVkIG1vZGUqKiBieSBkZWZhdWx0IGZvciBzZWN1cml0eToKLSBObyBhY2Nlc3MgdG8gYHJlcXVlc3QuY2ZgIG9iamVjdAotIElzb2xhdGVkIGNhY2hlIHBlciBXb3JrZXIgKG5vIHNoYXJlZCBjYWNoZSkKLSBgY2FjaGVzLmRlZmF1bHRgIGRpc2FibGVkCgojIyMgRW5hYmxlIFRydXN0ZWQgTW9kZQoKRm9yIGludGVybmFsIHBsYXRmb3JtcyB3aGVyZSB5b3UgY29udHJvbCBhbGwgY29kZToKCmBgYGJhc2gKY3VybCAtWCBQVVQgXAogICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJEFDQ09VTlRfSUQvd29ya2Vycy9kaXNwYXRjaC9uYW1lc3BhY2VzLyROQU1FU1BBQ0UiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iIFwKICAtZCAneyJuYW1lIjogIickTkFNRVNQQUNFJyIsICJ0cnVzdGVkX3dvcmtlcnMiOiB0cnVlfScKYGBgCgoqKkNhdmVhdHM6KioKLSBXb3JrZXJzIHNoYXJlIGNhY2hlIHdpdGhpbiBuYW1lc3BhY2UgKHVzZSBjYWNoZSBrZXkgcHJlZml4ZXM6IGBjdXN0b21lci0ke2lkfToke2tleX1gKQotIGByZXF1ZXN0LmNmYCBvYmplY3QgYWNjZXNzaWJsZQotIFJlZGVwbG95IGV4aXN0aW5nIFdvcmtlcnMgYWZ0ZXIgZW5hYmxpbmcgdHJ1c3RlZCBtb2RlCgoqKldoZW4gdG8gdXNlOioqIEludGVybmFsIHBsYXRmb3JtcywgQS9CIHRlc3RpbmcgcGxhdGZvcm1zLCBuZWVkIGdlb2xvY2F0aW9uIGRhdGEKCgojIyMgV2l0aCBPdXRib3VuZCBXb3JrZXIKYGBganNvbmMKewogICJkaXNwYXRjaF9uYW1lc3BhY2VzIjogW3sKICAgICJiaW5kaW5nIjogIkRJU1BBVENIRVIiLAogICAgIm5hbWVzcGFjZSI6ICJwcm9kdWN0aW9uIiwKICAgICJvdXRib3VuZCI6IHsKICAgICAgInNlcnZpY2UiOiAib3V0Ym91bmQtd29ya2VyIiwKICAgICAgInBhcmFtZXRlcnMiOiBbImN1c3RvbWVyX2NvbnRleHQiXQogICAgfQogIH1dCn0KYGBgCgojIyBXcmFuZ2xlciBDb21tYW5kcwoKYGBgYmFzaAp3cmFuZ2xlciBkaXNwYXRjaC1uYW1lc3BhY2UgbGlzdAp3cmFuZ2xlciBkaXNwYXRjaC1uYW1lc3BhY2UgZ2V0IHByb2R1Y3Rpb24Kd3JhbmdsZXIgZGlzcGF0Y2gtbmFtZXNwYWNlIGNyZWF0ZSBwcm9kdWN0aW9uCndyYW5nbGVyIGRpc3BhdGNoLW5hbWVzcGFjZSBkZWxldGUgc3RhZ2luZwp3cmFuZ2xlciBkaXNwYXRjaC1uYW1lc3BhY2UgcmVuYW1lIG9sZCBuZXcKYGBgCgojIyBDdXN0b20gTGltaXRzCgpTZXQgQ1BVIHRpbWUgYW5kIHN1YnJlcXVlc3QgbGltaXRzIHBlciBpbnZvY2F0aW9uOgoKYGBgdHlwZXNjcmlwdApjb25zdCB1c2VyV29ya2VyID0gZW52LkRJU1BBVENIRVIuZ2V0KAogIHdvcmtlck5hbWUsCiAge30sCiAgewogICAgbGltaXRzOiB7IAogICAgICBjcHVNczogMTAsICAgICAgICAvLyBNYXggQ1BVIG1zCiAgICAgIHN1YlJlcXVlc3RzOiA1ICAgIC8vIE1heCBmZXRjaCgpIGNhbGxzCiAgICB9CiAgfQopOwpgYGAKCkhhbmRsZSBsaW1pdCB2aW9sYXRpb25zOgpgYGB0eXBlc2NyaXB0CnRyeSB7CiAgcmV0dXJuIGF3YWl0IHVzZXJXb3JrZXIuZmV0Y2gocmVxdWVzdCk7Cn0gY2F0Y2ggKGUpIHsKICBpZiAoZS5tZXNzYWdlLmluY2x1ZGVzKCJDUFUgdGltZSBsaW1pdCIpKSB7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJDUFUgbGltaXQgZXhjZWVkZWQiLCB7IHN0YXR1czogNDI5IH0pOwogIH0KICB0aHJvdyBlOwp9CmBgYAoKIyMgU3RhdGljIEFzc2V0cwoKRGVwbG95IEhUTUwvQ1NTL2ltYWdlcyB3aXRoIFdvcmtlcnMuIFNlZSBbYXBpLm1kXSguL2FwaS5tZCNzdGF0aWMtYXNzZXRzKSBmb3IgdXBsb2FkIHByb2Nlc3MuCgojIyMgV3JhbmdsZXIKYGBganNvbmMKewogICJuYW1lIjogImN1c3RvbWVyLXNpdGUiLAogICJtYWluIjogIi4vc3JjL2luZGV4LmpzIiwKICAiYXNzZXRzIjogewogICAgImRpcmVjdG9yeSI6ICIuL3B1YmxpYyIsCiAgICAiYmluZGluZyI6ICJBU1NFVFMiCiAgfQp9CmBgYAoKYGBgYmFzaApucHggd3JhbmdsZXIgZGVwbG95IC0tbmFtZSBjdXN0b21lci1zaXRlIC0tZGlzcGF0Y2gtbmFtZXNwYWNlIHByb2R1Y3Rpb24KYGBgCgojIyMgRGFzaGJvYXJkIERlcGxveW1lbnQKCkFsdGVybmF0aXZlIHRvIENMSToKCjEuIFVwbG9hZCBXb3JrZXIgZmlsZSBpbiBkYXNoYm9hcmQKMi4gQWRkIGAtLWRpc3BhdGNoLW5hbWVzcGFjZWAgZmxhZzogYHdyYW5nbGVyIGRlcGxveSAtLWRpc3BhdGNoLW5hbWVzcGFjZSBwcm9kdWN0aW9uYAozLiBPciBjb25maWd1cmUgaW4gd3JhbmdsZXIuanNvbmMgdW5kZXIgYGRpc3BhdGNoX25hbWVzcGFjZXNgCgpTZWUgW2FwaS5tZF0oLi9hcGkubWQpIGZvciBwcm9ncmFtbWF0aWMgZGVwbG95bWVudCB2aWEgUkVTVCBBUEkgb3IgU0RLLgoKIyMgVGFncwoKT3JnYW5pemUvc2VhcmNoIFdvcmtlcnMgKG1heCA4L3NjcmlwdCk6CgpgYGBiYXNoCiMgU2V0IHRhZ3MKY3VybCAtWCBQVVQgIi4uLi90YWdzIiAtZCAnWyJjdXN0b21lci0xMjMiLCAicHJvIiwgInByb2R1Y3Rpb24iXScKCiMgRmlsdGVyIGJ5IHRhZwpjdXJsICIuLi4vc2NyaXB0cz90YWdzPXByb2R1Y3Rpb24lM0F5ZXMiCgojIERlbGV0ZSBieSB0YWcKY3VybCAtWCBERUxFVEUgIi4uLi9zY3JpcHRzP3RhZ3M9Y3VzdG9tZXItMTIzJTNBeWVzIgpgYGAKCkNvbW1vbiBwYXR0ZXJuczogYGN1c3RvbWVyLTEyM2AsIGBmcmVlfHByb3xlbnRlcnByaXNlYCwgYHByb2R1Y3Rpb258c3RhZ2luZ2AKCiMjIEJpbmRpbmdzCgoqKlN1cHBvcnRlZCBiaW5kaW5nIHR5cGVzOioqIDI5IHRvdGFsIGluY2x1ZGluZyBLViwgRDEsIFIyLCBEdXJhYmxlIE9iamVjdHMsIEFuYWx5dGljcyBFbmdpbmUsIFNlcnZpY2UsIEFzc2V0cywgUXVldWUsIFZlY3Rvcml6ZSwgSHlwZXJkcml2ZSwgV29ya2Zsb3csIEFJLCBCcm93c2VyLCBhbmQgbW9yZS4KCkFkZCB2aWEgQVBJIG1ldGFkYXRhIChzZWUgW2FwaS5tZF0oLi9hcGkubWQjZGVwbG95LXdpdGgtYmluZGluZ3MpKToKYGBganNvbgp7CiAgImJpbmRpbmdzIjogWwogICAgeyJ0eXBlIjogImt2X25hbWVzcGFjZSIsICJuYW1lIjogIlVTRVJfS1YiLCAibmFtZXNwYWNlX2lkIjogIi4uLiJ9LAogICAgeyJ0eXBlIjogInIyX2J1Y2tldCIsICJuYW1lIjogIlNUT1JBR0UiLCAiYnVja2V0X25hbWUiOiAiLi4uIn0sCiAgICB7InR5cGUiOiAiZDEiLCAibmFtZSI6ICJEQiIsICJpZCI6ICIuLi4ifQogIF0KfQpgYGAKClByZXNlcnZlIGV4aXN0aW5nIGJpbmRpbmdzOgpgYGBqc29uCnsKICAiYmluZGluZ3MiOiBbeyJ0eXBlIjogInIyX2J1Y2tldCIsICJuYW1lIjogIlNUT1JBR0UiLCAiYnVja2V0X25hbWUiOiAibmV3In1dLAogICJrZWVwX2JpbmRpbmdzIjogWyJrdl9uYW1lc3BhY2UiLCAiZDEiXSAgLy8gUHJlc2VydmVzIGV4aXN0aW5nIGJpbmRpbmdzIG9mIHRoZXNlIHR5cGVzCn0KYGBgCgpGb3IgY29tcGxldGUgYmluZGluZyB0eXBlIHJlZmVyZW5jZSwgc2VlIFtiaW5kaW5nc10oLi4vYmluZGluZ3MvKSBkb2N1bWVudGF0aW9uCgpTZWUgW1JFQURNRS5tZF0oLi9SRUFETUUubWQpLCBbYXBpLm1kXSguL2FwaS5tZCksIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCksIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpCg==
+# Configuration
+
+## Dispatch Namespace Binding
+
+### wrangler.jsonc
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "dispatch_namespaces": [{
+    "binding": "DISPATCHER",
+    "namespace": "production"
+  }]
+}
+```
+
+## Worker Isolation Mode
+
+Workers in a namespace run in **untrusted mode** by default for security:
+- No access to `request.cf` object
+- Isolated cache per Worker (no shared cache)
+- `caches.default` disabled
+
+### Enable Trusted Mode
+
+For internal platforms where you control all code:
+
+```bash
+curl -X PUT \
+  "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/dispatch/namespaces/$NAMESPACE" \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -d '{"name": "'$NAMESPACE'", "trusted_workers": true}'
+```
+
+**Caveats:**
+- Workers share cache within namespace (use cache key prefixes: `customer-${id}:${key}`)
+- `request.cf` object accessible
+- Redeploy existing Workers after enabling trusted mode
+
+**When to use:** Internal platforms, A/B testing platforms, need geolocation data
+
+
+### With Outbound Worker
+```jsonc
+{
+  "dispatch_namespaces": [{
+    "binding": "DISPATCHER",
+    "namespace": "production",
+    "outbound": {
+      "service": "outbound-worker",
+      "parameters": ["customer_context"]
+    }
+  }]
+}
+```
+
+## Wrangler Commands
+
+```bash
+wrangler dispatch-namespace list
+wrangler dispatch-namespace get production
+wrangler dispatch-namespace create production
+wrangler dispatch-namespace delete staging
+wrangler dispatch-namespace rename old new
+```
+
+## Custom Limits
+
+Set CPU time and subrequest limits per invocation:
+
+```typescript
+const userWorker = env.DISPATCHER.get(
+  workerName,
+  {},
+  {
+    limits: { 
+      cpuMs: 10,        // Max CPU ms
+      subRequests: 5    // Max fetch() calls
+    }
+  }
+);
+```
+
+Handle limit violations:
+```typescript
+try {
+  return await userWorker.fetch(request);
+} catch (e) {
+  if (e.message.includes("CPU time limit")) {
+    return new Response("CPU limit exceeded", { status: 429 });
+  }
+  throw e;
+}
+```
+
+## Static Assets
+
+Deploy HTML/CSS/images with Workers. See [api.md](./api.md#static-assets) for upload process.
+
+### Wrangler
+```jsonc
+{
+  "name": "customer-site",
+  "main": "./src/index.js",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  }
+}
+```
+
+```bash
+npx wrangler deploy --name customer-site --dispatch-namespace production
+```
+
+### Dashboard Deployment
+
+Alternative to CLI:
+
+1. Upload Worker file in dashboard
+2. Add `--dispatch-namespace` flag: `wrangler deploy --dispatch-namespace production`
+3. Or configure in wrangler.jsonc under `dispatch_namespaces`
+
+See [api.md](./api.md) for programmatic deployment via REST API or SDK.
+
+## Tags
+
+Organize/search Workers (max 8/script):
+
+```bash
+# Set tags
+curl -X PUT ".../tags" -d '["customer-123", "pro", "production"]'
+
+# Filter by tag
+curl ".../scripts?tags=production%3Ayes"
+
+# Delete by tag
+curl -X DELETE ".../scripts?tags=customer-123%3Ayes"
+```
+
+Common patterns: `customer-123`, `free|pro|enterprise`, `production|staging`
+
+## Bindings
+
+**Supported binding types:** 29 total including KV, D1, R2, Durable Objects, Analytics Engine, Service, Assets, Queue, Vectorize, Hyperdrive, Workflow, AI, Browser, and more.
+
+Add via API metadata (see [api.md](./api.md#deploy-with-bindings)):
+```json
+{
+  "bindings": [
+    {"type": "kv_namespace", "name": "USER_KV", "namespace_id": "..."},
+    {"type": "r2_bucket", "name": "STORAGE", "bucket_name": "..."},
+    {"type": "d1", "name": "DB", "id": "..."}
+  ]
+}
+```
+
+Preserve existing bindings:
+```json
+{
+  "bindings": [{"type": "r2_bucket", "name": "STORAGE", "bucket_name": "new"}],
+  "keep_bindings": ["kv_namespace", "d1"]  // Preserves existing bindings of these types
+}
+```
+
+For complete binding type reference, see [bindings](../bindings/) documentation
+
+See [README.md](./README.md), [api.md](./api.md), [patterns.md](./patterns.md), [gotchas.md](./gotchas.md)

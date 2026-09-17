@@ -1,1 +1,88 @@
-IyBWZWN0b3JpemUgQVBJIFJlZmVyZW5jZQoKIyMgVHlwZXMKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIFZlY3Rvcml6ZVZlY3RvciB7CiAgaWQ6IHN0cmluZzsgICAgICAgICAgICAgICAgICAgIC8vIE1heCA2NCBieXRlcwogIHZhbHVlczogbnVtYmVyW107ICAgICAgICAgICAgICAvLyBNdXN0IG1hdGNoIGluZGV4IGRpbWVuc2lvbnMKICBuYW1lc3BhY2U/OiBzdHJpbmc7ICAgICAgICAgICAgLy8gT3B0aW9uYWwgcGFydGl0aW9uIChtYXggNjQgYnl0ZXMpCiAgbWV0YWRhdGE/OiBSZWNvcmQ8c3RyaW5nLCBhbnk+OyAvLyBNYXggMTAgS2lCCn0KYGBgCgojIyBRdWVyeQoKYGBgdHlwZXNjcmlwdApjb25zdCBtYXRjaGVzID0gYXdhaXQgZW52LlZFQ1RPUklaRS5xdWVyeShxdWVyeVZlY3RvciwgewogIHRvcEs6IDEwLCAgICAgICAgICAgICAgICAgICAgICAgIC8vIE1heCAxMDAgKG9yIDIwIHdpdGggcmV0dXJuVmFsdWVzL3JldHVybk1ldGFkYXRhOiJhbGwiKQogIHJldHVybk1ldGFkYXRhOiAiaW5kZXhlZCIsICAgICAgIC8vICJub25lIiB8ICJpbmRleGVkIiB8ICJhbGwiCiAgcmV0dXJuVmFsdWVzOiBmYWxzZSwKICBuYW1lc3BhY2U6ICJ0ZW5hbnQtMTIzIiwKICBmaWx0ZXI6IHsgY2F0ZWdvcnk6ICJkb2NzIiB9Cn0pOwovLyBtYXRjaGVzLm1hdGNoZXNbMF0gPSB7IGlkLCBzY29yZSwgbWV0YWRhdGE/IH0KYGBgCgoqKnJldHVybk1ldGFkYXRhOioqIGAibm9uZSJgIChmYXN0ZXN0KSDihpIgYCJpbmRleGVkImAgKHJlY29tbWVuZGVkKSDihpIgYCJhbGwiYCAodG9wSyBtYXggMjApCgoqKnF1ZXJ5QnlJZCAoVjIgb25seSk6KiogU2VhcmNoIHVzaW5nIGV4aXN0aW5nIHZlY3RvciBhcyBxdWVyeS4KYGBgdHlwZXNjcmlwdAphd2FpdCBlbnYuVkVDVE9SSVpFLnF1ZXJ5QnlJZCgiZG9jLTEyMyIsIHsgdG9wSzogNSB9KTsKYGBgCgojIyBJbnNlcnQvVXBzZXJ0CgpgYGB0eXBlc2NyaXB0Ci8vIEluc2VydDogaWdub3JlcyBkdXBsaWNhdGVzIChrZWVwcyBmaXJzdCkKYXdhaXQgZW52LlZFQ1RPUklaRS5pbnNlcnQoW3sgaWQsIHZhbHVlcywgbWV0YWRhdGEgfV0pOwoKLy8gVXBzZXJ0OiBvdmVyd3JpdGVzIGR1cGxpY2F0ZXMgKGtlZXBzIGxhc3QpCmF3YWl0IGVudi5WRUNUT1JJWkUudXBzZXJ0KFt7IGlkLCB2YWx1ZXMsIG1ldGFkYXRhIH1dKTsKYGBgCgoqKk1heCAxLDAwMCB2ZWN0b3JzIHBlciBjYWxsIChXb3JrZXJzKSAvIDUsMDAwIChIVFRQIEFQSSkuKiogUXVlcnlhYmxlIGFmdGVyIDUtMTAgc2Vjb25kcy4KCiMjIE90aGVyIE9wZXJhdGlvbnMKCmBgYHR5cGVzY3JpcHQKLy8gR2V0IGJ5IElEcwpjb25zdCB2ZWN0b3JzID0gYXdhaXQgZW52LlZFQ1RPUklaRS5nZXRCeUlkcyhbImlkMSIsICJpZDIiXSk7CgovLyBEZWxldGUgKG1heCAxMDAwIElEcyBwZXIgY2FsbCkKYXdhaXQgZW52LlZFQ1RPUklaRS5kZWxldGVCeUlkcyhbImlkMSIsICJpZDIiXSk7CgovLyBJbmRleCBpbmZvCmNvbnN0IGluZm8gPSBhd2FpdCBlbnYuVkVDVE9SSVpFLmRlc2NyaWJlKCk7Ci8vIHsgZGltZW5zaW9ucywgbWV0cmljLCB2ZWN0b3JDb3VudCB9CmBgYAoKIyMgRmlsdGVyaW5nCgpSZXF1aXJlcyBtZXRhZGF0YSBpbmRleC4gRmlsdGVyIG9wZXJhdG9yczoKCnwgT3BlcmF0b3IgfCBFeGFtcGxlIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tfAp8IGAkZXFgIChpbXBsaWNpdCkgfCBgeyBjYXRlZ29yeTogImRvY3MiIH1gIHwKfCBgJG5lYCB8IGB7IHN0YXR1czogeyAkbmU6ICJkZWxldGVkIiB9IH1gIHwKfCBgJGluYCAvIGAkbmluYCB8IGB7IHRhZzogeyAkaW46IFsic2FsZSJdIH0gfWAgfAp8IGAkbHRgLCBgJGx0ZWAsIGAkZ3RgLCBgJGd0ZWAgfCBgeyBwcmljZTogeyAkbHQ6IDEwMCB9IH1gIHwKCioqQ29uc3RyYWludHM6KiogTWF4IDIwNDggYnl0ZXMsIG5vIGRvdHMvYCRgIGluIGtleXMsIHZhbHVlczogc3RyaW5nL251bWJlci9ib29sZWFuL251bGwuCgojIyBQZXJmb3JtYW5jZQoKfCBDb25maWd1cmF0aW9uIHwgdG9wSyBMaW1pdCB8IFNwZWVkIHwKfC0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwtLS0tLS0tfAp8IE5vIG1ldGFkYXRhIHwgMTAwIHwgRmFzdGVzdCB8CnwgYHJldHVybk1ldGFkYXRhOiAiaW5kZXhlZCJgIHwgMTAwIHwgRmFzdCB8CnwgYHJldHVybk1ldGFkYXRhOiAiYWxsImAgfCAyMCB8IFNsb3dlciB8CnwgYHJldHVyblZhbHVlczogdHJ1ZWAgfCAyMCB8IFNsb3dlciB8CgoqKkJhdGNoIG9wZXJhdGlvbnM6KiogQWx3YXlzIGJhdGNoICgxLDAwMC9jYWxsIHZpYSBXb3JrZXJzLCA1LDAwMCB2aWEgSFRUUCBBUEkpIGZvciBvcHRpbWFsIHRocm91Z2hwdXQuCgpgYGB0eXBlc2NyaXB0CmZvciAobGV0IGkgPSAwOyBpIDwgdmVjdG9ycy5sZW5ndGg7IGkgKz0gMTAwMCkgewogIGF3YWl0IGVudi5WRUNUT1JJWkUudXBzZXJ0KHZlY3RvcnMuc2xpY2UoaSwgaSArIDEwMDApKTsKfQpgYGAK
+# Vectorize API Reference
+
+## Types
+
+```typescript
+interface VectorizeVector {
+  id: string;                    // Max 64 bytes
+  values: number[];              // Must match index dimensions
+  namespace?: string;            // Optional partition (max 64 bytes)
+  metadata?: Record<string, any>; // Max 10 KiB
+}
+```
+
+## Query
+
+```typescript
+const matches = await env.VECTORIZE.query(queryVector, {
+  topK: 10,                        // Max 100 (or 20 with returnValues/returnMetadata:"all")
+  returnMetadata: "indexed",       // "none" | "indexed" | "all"
+  returnValues: false,
+  namespace: "tenant-123",
+  filter: { category: "docs" }
+});
+// matches.matches[0] = { id, score, metadata? }
+```
+
+**returnMetadata:** `"none"` (fastest) → `"indexed"` (recommended) → `"all"` (topK max 20)
+
+**queryById (V2 only):** Search using existing vector as query.
+```typescript
+await env.VECTORIZE.queryById("doc-123", { topK: 5 });
+```
+
+## Insert/Upsert
+
+```typescript
+// Insert: ignores duplicates (keeps first)
+await env.VECTORIZE.insert([{ id, values, metadata }]);
+
+// Upsert: overwrites duplicates (keeps last)
+await env.VECTORIZE.upsert([{ id, values, metadata }]);
+```
+
+**Max 1,000 vectors per call (Workers) / 5,000 (HTTP API).** Queryable after 5-10 seconds.
+
+## Other Operations
+
+```typescript
+// Get by IDs
+const vectors = await env.VECTORIZE.getByIds(["id1", "id2"]);
+
+// Delete (max 1000 IDs per call)
+await env.VECTORIZE.deleteByIds(["id1", "id2"]);
+
+// Index info
+const info = await env.VECTORIZE.describe();
+// { dimensions, metric, vectorCount }
+```
+
+## Filtering
+
+Requires metadata index. Filter operators:
+
+| Operator | Example |
+|----------|---------|
+| `$eq` (implicit) | `{ category: "docs" }` |
+| `$ne` | `{ status: { $ne: "deleted" } }` |
+| `$in` / `$nin` | `{ tag: { $in: ["sale"] } }` |
+| `$lt`, `$lte`, `$gt`, `$gte` | `{ price: { $lt: 100 } }` |
+
+**Constraints:** Max 2048 bytes, no dots/`$` in keys, values: string/number/boolean/null.
+
+## Performance
+
+| Configuration | topK Limit | Speed |
+|--------------|------------|-------|
+| No metadata | 100 | Fastest |
+| `returnMetadata: "indexed"` | 100 | Fast |
+| `returnMetadata: "all"` | 20 | Slower |
+| `returnValues: true` | 20 | Slower |
+
+**Batch operations:** Always batch (1,000/call via Workers, 5,000 via HTTP API) for optimal throughput.
+
+```typescript
+for (let i = 0; i < vectors.length; i += 1000) {
+  await env.VECTORIZE.upsert(vectors.slice(i, i + 1000));
+}
+```

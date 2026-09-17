@@ -1,1 +1,51 @@
-IyB0dXJuc3RpbGUtc3BpbiAoc2tpbGwpCgpFbmQtdG8tZW5kIHNldHVwIHNraWxsIGZvciBDbG91ZGZsYXJlIFR1cm5zdGlsZS4gTG9hZHMgd2hlbiBhbiBhZ2VudCBpcyBhc2tlZCB0byBhZGQgVHVybnN0aWxlLCBzZXQgdXAgQ0FQVENIQSwgb3IgcHJvdGVjdCBhIGZvcm0gZnJvbSBib3RzLgoKYFNLSUxMLm1kYCBpcyB0aGUgY2Fub25pY2FsIG1hY2hpbmUtcmVhZGFibGUgYmVoYXZpb3IuIFRoZSBob3N0ZWQgcHJvbXB0IGF0IFtgZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvc3Bpbi9wcm9tcHQubWRgXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3NwaW4vcHJvbXB0Lm1kKSBwYWNrYWdlcyB0aGUgc2FtZSBiZWhhdmlvciBmb3IgYWdlbnRzIHRoYXQgZG8gbm90IGhhdmUgdGhpcyBidW5kbGUgaW5zdGFsbGVkLiBQcm9kdWN0IHJlcXVpcmVtZW50cyBjb21lIGZyb20gdGhlIFtUdXJuc3RpbGUgZG9jdW1lbnRhdGlvbl0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS8pLgoKIyMgTGF5b3V0Cgp8IEZpbGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8IFB1cnBvc2UgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSB8IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gfAp8IGBTS0lMTC5tZGAgICAgICAgICAgICAgICAgICAgICAgICB8IE1haW4gd2l6YXJkIGluc3RydWN0aW9ucyBmb3IgdGhlIGFnZW50ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGBzY3JpcHRzL2F1dGgtcHJvYmUuc2hgICAgICAgICAgICB8IFByb2JlcyB0aGUgY3VzdG9tZXIncyBDbG91ZGZsYXJlIEFQSSB0b2tlbiBmb3IgVHVybnN0aWxlIHNjb3BlICAgICAgICAgfAp8IGBzY3JpcHRzL3dpZGdldC1jcmVhdGUuc2hgICAgICAgICB8IENyZWF0ZXMgdGhlIFR1cm5zdGlsZSB3aWRnZXQgdmlhIHRoZSBDbG91ZGZsYXJlIEFQSSAgICAgICAgICAgICAgICAgICAgfAp8IGBzY3JpcHRzL3ZhbGlkYXRlLnNoYCAgICAgICAgICAgICB8IER1bW15LXNpdGV2ZXJpZnkgKyBob3N0bmFtZSBjaGVjayBhdCB0aGUgZW5kIG9mIHRoZSB3aXphcmQgICAgICAgICAgICAgfAp8IGBzY3JpcHRzL3BlcnNpc3Qtc2tpbGwuc2hgICAgICAgICB8IEluc3RhbGxzIHRoZSBjYW5vbmljYWwgc2tpbGwgYnVuZGxlIGludG8gdGhlIHVzZXIncyByZXBvICAgICAgICAgICAgICAgfAp8IGByZWZlcmVuY2VzL3ZhbmlsbGEtaHRtbC5tZGAgICAgICB8IENvZGUgc25pcHBldCBmb3Igc3RhdGljIC8gdmFuaWxsYSBIVE1MIHByb2plY3RzICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGByZWZlcmVuY2VzL25leHRqcy1hcHAubWRgICAgICAgICB8IENvZGUgc25pcHBldCBmb3IgTmV4dC5qcyBBcHAgUm91dGVyIHByb2plY3RzICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGByZWZlcmVuY2VzL25leHRqcy1wYWdlcy5tZGAgICAgICB8IENvZGUgc25pcHBldCBmb3IgTmV4dC5qcyBQYWdlcyBSb3V0ZXIgcHJvamVjdHMgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGByZWZlcmVuY2VzL2FzdHJvLm1kYCAgICAgICAgICAgICB8IENvZGUgc25pcHBldCBmb3IgQXN0cm8gcHJvamVjdHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGByZWZlcmVuY2VzL3N2ZWx0ZWtpdC5tZGAgICAgICAgICB8IENvZGUgc25pcHBldCBmb3IgU3ZlbHRlS2l0IHByb2plY3RzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGByZWZlcmVuY2VzL2h1Z28ubWRgICAgICAgICAgICAgICB8IENvZGUgc25pcHBldCBmb3IgSHVnbyBwcm9qZWN0cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGB0ZXN0cy92YWxpZGF0aW9uLm1kYCAgICAgICAgICAgICB8IFZhbGlkYXRpb24gY2FzZXMgbWF0Y2hpbmcgdGhlIGFzc2VydGlvbnMgaW4gdGhlIFBSRCAgICAgICAgICAgICAgICAgICAgfAoKIyMgSG93IGFnZW50cyBsb2FkIGl0CgpBZ2VudHMgdGhhdCBsb2FkIHNraWxsIGJ1bmRsZXMgZnJvbSBgZ2l0aHViLmNvbS9jbG91ZGZsYXJlL3NraWxsc2Agd2lsbCBwaWNrIHRoaXMgdXAgYXV0b21hdGljYWxseS4gRm9yIGFnZW50cyB0aGF0IGxvYWQgc2tpbGxzIG91dCBvZiBhIGxvY2FsIGRpcmVjdG9yeSwgY2xvbmUgdGhlIGJ1bmRsZSBvbmNlIGFuZCBzeW1saW5rIGl0OgoKYGBgc2gKZ2l0IGNsb25lIGh0dHBzOi8vZ2l0aHViLmNvbS9jbG91ZGZsYXJlL3NraWxscyB+Ly5jb25maWcvY2xvdWRmbGFyZS1za2lsbHMKbG4gLXMgfi8uY29uZmlnL2Nsb3VkZmxhcmUtc2tpbGxzL3NraWxscy90dXJuc3RpbGUtc3BpbiB+Ly5jbGF1ZGUvc2tpbGxzL3R1cm5zdGlsZS1zcGluCmBgYAoKSWYgY2xvbmluZyBpcyBub3QgYW4gb3B0aW9uLCB0aGUgaG9zdGVkIHNpbmdsZS1maWxlIHByb21wdCBpcyBhIHJlYWQtb25seSBmYWxsYmFjazoKCmBgYHNoCm1rZGlyIC1wIC5jbGF1ZGUvc2tpbGxzL3R1cm5zdGlsZS1zcGluICYmIFwKICBjdXJsIC1zU0wgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS9zcGluL3Byb21wdC5tZCBcCiAgLW8gLmNsYXVkZS9za2lsbHMvdHVybnN0aWxlLXNwaW4vU0tJTEwubWQKYGBgCgpUaGUgc2luZ2xlLWZpbGUgaW5zdGFsbCBkb2VzIG5vdCBpbmNsdWRlIGBzY3JpcHRzL2Agb3IgYHJlZmVyZW5jZXMvYDsgdGhlIGhvc3RlZCBwcm9tcHQgZmV0Y2hlcyB0aG9zZSBvbiBkZW1hbmQgd2l0aCBgZmV0Y2hfc3Bpbl9zY3JpcHRgLiBgc2NyaXB0cy9wZXJzaXN0LXNraWxsLnNoYCByZXF1aXJlcyB0aGUgY2xvbmVkIGJ1bmRsZSBhYm92ZSBhbmQgY2Fubm90IGJlIHVzZWQgZnJvbSBhIHNpbmdsZS1maWxlIGluc3RhbGwuIEZvciBvdGhlciBhZ2VudHMsIHNlZSB0aGUgdGFibGUgaW4gW2BTS0lMTC5tZGBdKC4vU0tJTEwubWQjc3RlcC0xMS0tcGVyc2lzdC10aGUtc2tpbGwpLgoKIyMgS2VlcCB0aGUgaG9zdGVkIHByb21wdCBpbiBzeW5jCgpBbnkgYmVoYXZpb3JhbCBjaGFuZ2UgdG8gYFNLSUxMLm1kYCBtdXN0IGFsc28gYmUgYXBwbGllZCB0byBgcHVibGljL3R1cm5zdGlsZS9zcGluL3Byb21wdC5tZGAgaW4gdGhlIGBjbG91ZGZsYXJlLWRvY3NgIHJlcG9zaXRvcnkuIFRoZSBob3N0ZWQgZmlsZSBhZGRzIGJvb3RzdHJhcCBpbnN0cnVjdGlvbnMsIGJ1dCBpdHMgd2l6YXJkLCBzZWN1cml0eSBib3VuZGFyaWVzLCByZWNvdmVyeSBmbG93LCBhbmQgdmFsaWRhdGlvbiByZXF1aXJlbWVudHMgbXVzdCBtYXRjaCB0aGlzIHNraWxsLgoKIyMgUmVsYXRlZAoKLSBbQ2Fub25pY2FsIGRvY3MgcGFnZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS9zcGluLykKLSBbYGNsb3VkZmxhcmUvc2tpbGxzYF0oaHR0cHM6Ly9naXRodWIuY29tL2Nsb3VkZmxhcmUvc2tpbGxzKSDigJQgcm9vdCBpbmRleCBmb3IgYWxsIENsb3VkZmxhcmUgYWdlbnQgc2tpbGxzCi0gW1R1cm5zdGlsZSBzZXJ2ZXItc2lkZSB2YWxpZGF0aW9uXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL2dldC1zdGFydGVkL3NlcnZlci1zaWRlLXZhbGlkYXRpb24vKSDigJQgY2Fub25pY2FsIHNpdGV2ZXJpZnkgcmVmZXJlbmNlCg==
+# turnstile-spin (skill)
+
+End-to-end setup skill for Cloudflare Turnstile. Loads when an agent is asked to add Turnstile, set up CAPTCHA, or protect a form from bots.
+
+`SKILL.md` is the canonical machine-readable behavior. The hosted prompt at [`developers.cloudflare.com/turnstile/spin/prompt.md`](https://developers.cloudflare.com/turnstile/spin/prompt.md) packages the same behavior for agents that do not have this bundle installed. Product requirements come from the [Turnstile documentation](https://developers.cloudflare.com/turnstile/).
+
+## Layout
+
+| File                              | Purpose                                                                |
+| --------------------------------- | ---------------------------------------------------------------------- |
+| `SKILL.md`                        | Main wizard instructions for the agent                                 |
+| `scripts/auth-probe.sh`           | Probes the customer's Cloudflare API token for Turnstile scope         |
+| `scripts/widget-create.sh`        | Creates the Turnstile widget via the Cloudflare API                    |
+| `scripts/validate.sh`             | Dummy-siteverify + hostname check at the end of the wizard             |
+| `scripts/persist-skill.sh`        | Installs the canonical skill bundle into the user's repo               |
+| `references/vanilla-html.md`      | Code snippet for static / vanilla HTML projects                        |
+| `references/nextjs-app.md`        | Code snippet for Next.js App Router projects                           |
+| `references/nextjs-pages.md`      | Code snippet for Next.js Pages Router projects                         |
+| `references/astro.md`             | Code snippet for Astro projects                                        |
+| `references/sveltekit.md`         | Code snippet for SvelteKit projects                                    |
+| `references/hugo.md`              | Code snippet for Hugo projects                                         |
+| `tests/validation.md`             | Validation cases matching the assertions in the PRD                    |
+
+## How agents load it
+
+Agents that load skill bundles from `github.com/cloudflare/skills` will pick this up automatically. For agents that load skills out of a local directory, clone the bundle once and symlink it:
+
+```sh
+git clone https://github.com/cloudflare/skills ~/.config/cloudflare-skills
+ln -s ~/.config/cloudflare-skills/skills/turnstile-spin ~/.claude/skills/turnstile-spin
+```
+
+If cloning is not an option, the hosted single-file prompt is a read-only fallback:
+
+```sh
+mkdir -p .claude/skills/turnstile-spin && \
+  curl -sSL https://developers.cloudflare.com/turnstile/spin/prompt.md \
+  -o .claude/skills/turnstile-spin/SKILL.md
+```
+
+The single-file install does not include `scripts/` or `references/`; the hosted prompt fetches those on demand with `fetch_spin_script`. `scripts/persist-skill.sh` requires the cloned bundle above and cannot be used from a single-file install. For other agents, see the table in [`SKILL.md`](./SKILL.md#step-11--persist-the-skill).
+
+## Keep the hosted prompt in sync
+
+Any behavioral change to `SKILL.md` must also be applied to `public/turnstile/spin/prompt.md` in the `cloudflare-docs` repository. The hosted file adds bootstrap instructions, but its wizard, security boundaries, recovery flow, and validation requirements must match this skill.
+
+## Related
+
+- [Canonical docs page](https://developers.cloudflare.com/turnstile/spin/)
+- [`cloudflare/skills`](https://github.com/cloudflare/skills) — root index for all Cloudflare agent skills
+- [Turnstile server-side validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/) — canonical siteverify reference

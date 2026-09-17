@@ -1,1 +1,150 @@
-IyBUZXJyYWZvcm0gVHJvdWJsZXNob290aW5nICYgQmVzdCBQcmFjdGljZXMKCkNvbW1vbiBpc3N1ZXMsIHNlY3VyaXR5IGNvbnNpZGVyYXRpb25zLCBhbmQgYmVzdCBwcmFjdGljZXMuCgojIyBTdGF0ZSBEcmlmdCBJc3N1ZXMKClNvbWUgcmVzb3VyY2VzIGhhdmUga25vd24gc3RhdGUgZHJpZnQuIEFkZCBsaWZlY3ljbGUgYmxvY2tzIHRvIHByZXZlbnQgcGVycGV0dWFsIGRpZmZzOgoKfCBSZXNvdXJjZSB8IERyaWZ0IEF0dHJpYnV0ZXMgfCBXb3JrYXJvdW5kIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwKfCBgY2xvdWRmbGFyZV9wYWdlc19wcm9qZWN0YCB8IGBkZXBsb3ltZW50X2NvbmZpZ3MuKmAgfCBgaWdub3JlX2NoYW5nZXMgPSBbZGVwbG95bWVudF9jb25maWdzXWAgfAp8IGBjbG91ZGZsYXJlX3dvcmtlcnNfc2NyaXB0YCB8IHNlY3JldHMgcmV0dXJuZWQgYXMgUkVEQUNURUQgfCBgaWdub3JlX2NoYW5nZXMgPSBbc2VjcmV0X3RleHRfYmluZGluZ11gIHwKfCBgY2xvdWRmbGFyZV9sb2FkX2JhbGFuY2VyYCB8IGBhZGFwdGl2ZV9yb3V0aW5nYCwgYHJhbmRvbV9zdGVlcmluZ2AgfCBgaWdub3JlX2NoYW5nZXMgPSBbYWRhcHRpdmVfcm91dGluZywgcmFuZG9tX3N0ZWVyaW5nXWAgfAp8IGBjbG91ZGZsYXJlX3dvcmtlcnNfa3ZgIHwgc3BlY2lhbCBjaGFycyBpbiBrZXlzICg8IDUuMTYuMCkgfCBVcGdyYWRlIHRvIDUuMTYuMCsgfAoKYGBgaGNsCiMgRXhhbXBsZTogSWdub3JlIHNlY3JldCBkcmlmdApyZXNvdXJjZSAiY2xvdWRmbGFyZV93b3JrZXJzX3NjcmlwdCIgImFwaSIgewogIGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZAogIG5hbWUgPSAiYXBpLXdvcmtlciIKICBjb250ZW50ID0gZmlsZSgid29ya2VyLmpzIikKICBzZWNyZXRfdGV4dF9iaW5kaW5nIHsgbmFtZSA9ICJBUElfS0VZIjsgdGV4dCA9IHZhci5hcGlfa2V5IH0KICAKICBsaWZlY3ljbGUgewogICAgaWdub3JlX2NoYW5nZXMgPSBbc2VjcmV0X3RleHRfYmluZGluZ10KICB9Cn0KYGBgCgojIyB2NSBCcmVha2luZyBDaGFuZ2VzCgpQcm92aWRlciB2NSBpcyBjdXJyZW50IChhdXRvLWdlbmVyYXRlZCBmcm9tIE9wZW5BUEkpLiB2NOKGknY1IGhhcyBicmVha2luZyBjaGFuZ2VzOgoKKipSZXNvdXJjZSBSZW5hbWVzOioqCgp8IHY0IFJlc291cmNlIHwgdjUgUmVzb3VyY2UgfCBOb3RlcyB8CnwtLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18LS0tLS0tLXwKfCBgY2xvdWRmbGFyZV9yZWNvcmRgIHwgYGNsb3VkZmxhcmVfZG5zX3JlY29yZGAgfCB8CnwgYGNsb3VkZmxhcmVfd29ya2VyX3NjcmlwdGAgfCBgY2xvdWRmbGFyZV93b3JrZXJzX3NjcmlwdGAgfCBOb3RlOiBwbHVyYWwgfAp8IGBjbG91ZGZsYXJlX3dvcmtlcl8qYCB8IGBjbG91ZGZsYXJlX3dvcmtlcnNfKmAgfCBBbGwgd29ya2VyIHJlc291cmNlcyB8CnwgYGNsb3VkZmxhcmVfYWNjZXNzXypgIHwgYGNsb3VkZmxhcmVfemVyb190cnVzdF8qYCB8IEFjY2VzcyDihpIgWmVybyBUcnVzdCB8CgoqKkF0dHJpYnV0ZSBDaGFuZ2VzOioqCgp8IHY0IEF0dHJpYnV0ZSB8IHY1IEF0dHJpYnV0ZSB8IFJlc291cmNlcyB8CnwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLXwKfCBgem9uZWAgfCBgbmFtZWAgfCB6b25lIHwKfCBgYWNjb3VudF9pZGAgfCBgYWNjb3VudC5pZGAgfCB6b25lIChvYmplY3Qgc3ludGF4KSB8CnwgYGtleWAgfCBga2V5X25hbWVgIHwgS1YgfAp8IGBsb2NhdGlvbl9oaW50YCB8IGBsb2NhdGlvbmAgfCBSMiB8CgoqKlN0YXRlIE1pZ3JhdGlvbjoqKgoKYGBgYmFzaAojIFJlbmFtZSByZXNvdXJjZXMgaW4gc3RhdGUgYWZ0ZXIgdjUgdXBncmFkZQp0ZXJyYWZvcm0gc3RhdGUgbXYgY2xvdWRmbGFyZV9yZWNvcmQuZXhhbXBsZSBjbG91ZGZsYXJlX2Ruc19yZWNvcmQuZXhhbXBsZQp0ZXJyYWZvcm0gc3RhdGUgbXYgY2xvdWRmbGFyZV93b3JrZXJfc2NyaXB0LmFwaSBjbG91ZGZsYXJlX3dvcmtlcnNfc2NyaXB0LmFwaQpgYGAKCiMjIFJlc291cmNlLVNwZWNpZmljIEdvdGNoYXMKCiMjIyBSMiBMb2NhdGlvbiBDYXNlIFNlbnNpdGl2aXR5CgoqKlByb2JsZW06KiogVGVycmFmb3JtIGNyZWF0ZXMgUjIgYnVja2V0IGJ1dCBmYWlscyBvbiBzdWJzZXF1ZW50IGFwcGxpZXMgIAoqKkNhdXNlOioqIExvY2F0aW9uIG11c3QgYmUgVVBQRVJDQVNFICAKKipTb2x1dGlvbjoqKiBVc2UgYFdOQU1gLCBgRU5BTWAsIGBXRVVSYCwgYEVFVVJgLCBgQVBBQ2AgKG5vdCBgd25hbWAsIGBlbmFtYCwgZXRjLikKCmBgYGhjbApyZXNvdXJjZSAiY2xvdWRmbGFyZV9yMl9idWNrZXQiICJhc3NldHMiIHsKICBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQKICBuYW1lID0gImFzc2V0cyIKICBsb2NhdGlvbiA9ICJXTkFNIiAgIyBVUFBFUkNBU0UgcmVxdWlyZWQKfQpgYGAKCiMjIyBLViBTcGVjaWFsIENoYXJhY3RlcnMgKDwgNS4xNi4wKQoKKipQcm9ibGVtOioqIEtleXMgd2l0aCBgK2AsIGAjYCwgYCVgIGNhdXNlIGVuY29kaW5nIGlzc3VlcyAgCioqQ2F1c2U6KiogVVJMIGVuY29kaW5nIGJ1ZyBpbiBwcm92aWRlciA8IDUuMTYuMCAgCioqU29sdXRpb246KiogVXBncmFkZSB0byA1LjE2LjArIG9yIGF2b2lkIHNwZWNpYWwgY2hhcnMgaW4ga2V5cwoKIyMjIEQxIE1pZ3JhdGlvbnMKCioqUHJvYmxlbToqKiBUZXJyYWZvcm0gY3JlYXRlcyBkYXRhYmFzZSBidXQgc2NoZW1hIGlzIGVtcHR5ICAKKipDYXVzZToqKiBUZXJyYWZvcm0gb25seSBjcmVhdGVzIEQxIHJlc291cmNlLCBub3Qgc2NoZW1hICAKKipTb2x1dGlvbjoqKiBSdW4gbWlncmF0aW9ucyB2aWEgd3JhbmdsZXIgYWZ0ZXIgVGVycmFmb3JtIGFwcGx5CgpgYGBiYXNoCiMgQWZ0ZXIgdGVycmFmb3JtIGFwcGx5CndyYW5nbGVyIGQxIG1pZ3JhdGlvbnMgYXBwbHkgPGRiLW5hbWU+CmBgYAoKIyMjIFdvcmtlciBTY3JpcHQgU2l6ZSBMaW1pdAoKKipQcm9ibGVtOioqIFdvcmtlciBkZXBsb3ltZW50IGZhaWxzIHdpdGggInNjcmlwdCB0b28gbGFyZ2UiICAKKipDYXVzZToqKiBXb3JrZXIgc2NyaXB0ICsgZGVwZW5kZW5jaWVzIGV4Y2VlZCAxMCBNQiBsaW1pdCAgCioqU29sdXRpb246KiogVXNlIGNvZGUgc3BsaXR0aW5nLCBleHRlcm5hbCBkZXBlbmRlbmNpZXMsIG9yIG1pbmlmaWNhdGlvbgoKIyMjIFBhZ2VzIFByb2plY3QgRHJpZnQKCioqUHJvYmxlbToqKiBQYWdlcyBwcm9qZWN0IHNob3dzIHBlcnBldHVhbCBkaWZmIG9uIGBkZXBsb3ltZW50X2NvbmZpZ3NgICAKKipDYXVzZToqKiBDbG91ZGZsYXJlIEFQSSBhZGRzIGRlZmF1bHQgdmFsdWVzIG5vdCBpbiBUZXJyYWZvcm0gc3RhdGUgIAoqKlNvbHV0aW9uOioqIEFkZCBsaWZlY3ljbGUgaWdub3JlIGJsb2NrIChzZWUgU3RhdGUgRHJpZnQgdGFibGUgYWJvdmUpCgojIyBDb21tb24gRXJyb3JzCgojIyMgIkVycm9yOiBjb3VsZG4ndCBmaW5kIHJlc291cmNlIgoKKipDYXVzZToqKiBSZXNvdXJjZSB3YXMgZGVsZXRlZCBvdXRzaWRlIFRlcnJhZm9ybSAgCioqU29sdXRpb246KiogSW1wb3J0IHJlc291cmNlIGJhY2sgaW50byBzdGF0ZSB3aXRoIGB0ZXJyYWZvcm0gaW1wb3J0IGNsb3VkZmxhcmVfem9uZS5leGFtcGxlIDx6b25lLWlkPmAgb3IgcmVtb3ZlIGZyb20gc3RhdGUgd2l0aCBgdGVycmFmb3JtIHN0YXRlIHJtIGNsb3VkZmxhcmVfem9uZS5leGFtcGxlYAoKIyMjICI0MDkgQ29uZmxpY3Qgb24gd29ya2VyIGRlcGxveW1lbnQiCgoqKkNhdXNlOioqIFdvcmtlciBiZWluZyBkZXBsb3llZCBieSBib3RoIFRlcnJhZm9ybSBhbmQgd3JhbmdsZXIgc2ltdWx0YW5lb3VzbHkgIAoqKlNvbHV0aW9uOioqIENob29zZSBvbmUgZGVwbG95bWVudCBtZXRob2Q7IGlmIHVzaW5nIFRlcnJhZm9ybSwgcmVtb3ZlIHdyYW5nbGVyIGRlcGxveW1lbnRzCgojIyMgIkROUyByZWNvcmQgYWxyZWFkeSBleGlzdHMiCgoqKkNhdXNlOioqIEV4aXN0aW5nIEROUyByZWNvcmQgbm90IGltcG9ydGVkIGludG8gVGVycmFmb3JtIHN0YXRlICAKKipTb2x1dGlvbjoqKiBGaW5kIHJlY29yZCBJRCBpbiBDbG91ZGZsYXJlIGRhc2hib2FyZCBhbmQgaW1wb3J0IHdpdGggYHRlcnJhZm9ybSBpbXBvcnQgY2xvdWRmbGFyZV9kbnNfcmVjb3JkLmV4YW1wbGUgPHpvbmUtaWQ+LzxyZWNvcmQtaWQ+YAoKIyMjICJJbnZhbGlkIHByb3ZpZGVyIGNvbmZpZ3VyYXRpb24iCgoqKkNhdXNlOioqIEFQSSB0b2tlbiBtaXNzaW5nLCBpbnZhbGlkLCBvciBsYWNraW5nIHJlcXVpcmVkIHBlcm1pc3Npb25zICAKKipTb2x1dGlvbjoqKiBTZXQgYENMT1VERkxBUkVfQVBJX1RPS0VOYCBlbnZpcm9ubWVudCB2YXJpYWJsZSBvciBjaGVjayB0b2tlbiBwZXJtaXNzaW9ucyBpbiBkYXNoYm9hcmQKCiMjIyAiU3RhdGUgbG9ja2luZyBlcnJvcnMiCgoqKkNhdXNlOioqIE11bHRpcGxlIGNvbmN1cnJlbnQgVGVycmFmb3JtIHJ1bnMgb3Igc3RhbGUgbG9jayBmcm9tIGNyYXNoZWQgcHJvY2VzcyAgCioqU29sdXRpb246KiogUmVtb3ZlIHN0YWxlIGxvY2sgd2l0aCBgdGVycmFmb3JtIGZvcmNlLXVubG9jayA8bG9jay1pZD5gICh1c2Ugd2l0aCBjYXV0aW9uKQoKIyMgTGltaXRzCgp8IFJlc291cmNlIHwgTGltaXQgfCBOb3RlcyB8CnwtLS0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBBUEkgdG9rZW4gcmF0ZSBsaW1pdCB8IFZhcmllcyBieSBwbGFuIHwgVXNlIGBhcGlfY2xpZW50X2xvZ2dpbmcgPSB0cnVlYCB0byBkZWJ1Zwp8IFdvcmtlciBzY3JpcHQgc2l6ZSB8IDEwIE1CIHwgSW5jbHVkZXMgYWxsIGRlcGVuZGVuY2llcwp8IEtWIGtleXMgcGVyIG5hbWVzcGFjZSB8IFVubGltaXRlZCB8IFBheSBwZXIgb3BlcmF0aW9uCnwgUjIgc3RvcmFnZSB8IFVubGltaXRlZCB8IFBheSBwZXIgR0IKfCBEMSBkYXRhYmFzZXMgfCA1MCwwMDAgcGVyIGFjY291bnQgfCBGcmVlIHRpZXI6IDEwCnwgUGFnZXMgcHJvamVjdHMgfCA1MDAgcGVyIGFjY291bnQgfCAxMDAgZm9yIGZyZWUgYWNjb3VudHMKfCBETlMgcmVjb3JkcyB8IDMsNTAwIHBlciB6b25lIHwgRnJlZSBwbGFuCgojIyBTZWUgQWxzbwoKLSBbUkVBRE1FXSguL1JFQURNRS5tZCkgLSBQcm92aWRlciBzZXR1cAotIFtDb25maWd1cmF0aW9uXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gUmVzb3VyY2VzCi0gW0FQSV0oLi9hcGkubWQpIC0gRGF0YSBzb3VyY2VzCi0gW1BhdHRlcm5zXSguL3BhdHRlcm5zLm1kKSAtIFVzZSBjYXNlcwotIFByb3ZpZGVyIGRvY3M6IGh0dHBzOi8vcmVnaXN0cnkudGVycmFmb3JtLmlvL3Byb3ZpZGVycy9jbG91ZGZsYXJlL2Nsb3VkZmxhcmUvbGF0ZXN0L2RvY3MK
+# Terraform Troubleshooting & Best Practices
+
+Common issues, security considerations, and best practices.
+
+## State Drift Issues
+
+Some resources have known state drift. Add lifecycle blocks to prevent perpetual diffs:
+
+| Resource | Drift Attributes | Workaround |
+|----------|------------------|------------|
+| `cloudflare_pages_project` | `deployment_configs.*` | `ignore_changes = [deployment_configs]` |
+| `cloudflare_workers_script` | secrets returned as REDACTED | `ignore_changes = [secret_text_binding]` |
+| `cloudflare_load_balancer` | `adaptive_routing`, `random_steering` | `ignore_changes = [adaptive_routing, random_steering]` |
+| `cloudflare_workers_kv` | special chars in keys (< 5.16.0) | Upgrade to 5.16.0+ |
+
+```hcl
+# Example: Ignore secret drift
+resource "cloudflare_workers_script" "api" {
+  account_id = var.account_id
+  name = "api-worker"
+  content = file("worker.js")
+  secret_text_binding { name = "API_KEY"; text = var.api_key }
+  
+  lifecycle {
+    ignore_changes = [secret_text_binding]
+  }
+}
+```
+
+## v5 Breaking Changes
+
+Provider v5 is current (auto-generated from OpenAPI). v4→v5 has breaking changes:
+
+**Resource Renames:**
+
+| v4 Resource | v5 Resource | Notes |
+|-------------|-------------|-------|
+| `cloudflare_record` | `cloudflare_dns_record` | |
+| `cloudflare_worker_script` | `cloudflare_workers_script` | Note: plural |
+| `cloudflare_worker_*` | `cloudflare_workers_*` | All worker resources |
+| `cloudflare_access_*` | `cloudflare_zero_trust_*` | Access → Zero Trust |
+
+**Attribute Changes:**
+
+| v4 Attribute | v5 Attribute | Resources |
+|--------------|--------------|-----------|
+| `zone` | `name` | zone |
+| `account_id` | `account.id` | zone (object syntax) |
+| `key` | `key_name` | KV |
+| `location_hint` | `location` | R2 |
+
+**State Migration:**
+
+```bash
+# Rename resources in state after v5 upgrade
+terraform state mv cloudflare_record.example cloudflare_dns_record.example
+terraform state mv cloudflare_worker_script.api cloudflare_workers_script.api
+```
+
+## Resource-Specific Gotchas
+
+### R2 Location Case Sensitivity
+
+**Problem:** Terraform creates R2 bucket but fails on subsequent applies  
+**Cause:** Location must be UPPERCASE  
+**Solution:** Use `WNAM`, `ENAM`, `WEUR`, `EEUR`, `APAC` (not `wnam`, `enam`, etc.)
+
+```hcl
+resource "cloudflare_r2_bucket" "assets" {
+  account_id = var.account_id
+  name = "assets"
+  location = "WNAM"  # UPPERCASE required
+}
+```
+
+### KV Special Characters (< 5.16.0)
+
+**Problem:** Keys with `+`, `#`, `%` cause encoding issues  
+**Cause:** URL encoding bug in provider < 5.16.0  
+**Solution:** Upgrade to 5.16.0+ or avoid special chars in keys
+
+### D1 Migrations
+
+**Problem:** Terraform creates database but schema is empty  
+**Cause:** Terraform only creates D1 resource, not schema  
+**Solution:** Run migrations via wrangler after Terraform apply
+
+```bash
+# After terraform apply
+wrangler d1 migrations apply <db-name>
+```
+
+### Worker Script Size Limit
+
+**Problem:** Worker deployment fails with "script too large"  
+**Cause:** Worker script + dependencies exceed 10 MB limit  
+**Solution:** Use code splitting, external dependencies, or minification
+
+### Pages Project Drift
+
+**Problem:** Pages project shows perpetual diff on `deployment_configs`  
+**Cause:** Cloudflare API adds default values not in Terraform state  
+**Solution:** Add lifecycle ignore block (see State Drift table above)
+
+## Common Errors
+
+### "Error: couldn't find resource"
+
+**Cause:** Resource was deleted outside Terraform  
+**Solution:** Import resource back into state with `terraform import cloudflare_zone.example <zone-id>` or remove from state with `terraform state rm cloudflare_zone.example`
+
+### "409 Conflict on worker deployment"
+
+**Cause:** Worker being deployed by both Terraform and wrangler simultaneously  
+**Solution:** Choose one deployment method; if using Terraform, remove wrangler deployments
+
+### "DNS record already exists"
+
+**Cause:** Existing DNS record not imported into Terraform state  
+**Solution:** Find record ID in Cloudflare dashboard and import with `terraform import cloudflare_dns_record.example <zone-id>/<record-id>`
+
+### "Invalid provider configuration"
+
+**Cause:** API token missing, invalid, or lacking required permissions  
+**Solution:** Set `CLOUDFLARE_API_TOKEN` environment variable or check token permissions in dashboard
+
+### "State locking errors"
+
+**Cause:** Multiple concurrent Terraform runs or stale lock from crashed process  
+**Solution:** Remove stale lock with `terraform force-unlock <lock-id>` (use with caution)
+
+## Limits
+
+| Resource | Limit | Notes |
+|----------|-------|-------|
+| API token rate limit | Varies by plan | Use `api_client_logging = true` to debug
+| Worker script size | 10 MB | Includes all dependencies
+| KV keys per namespace | Unlimited | Pay per operation
+| R2 storage | Unlimited | Pay per GB
+| D1 databases | 50,000 per account | Free tier: 10
+| Pages projects | 500 per account | 100 for free accounts
+| DNS records | 3,500 per zone | Free plan
+
+## See Also
+
+- [README](./README.md) - Provider setup
+- [Configuration](./configuration.md) - Resources
+- [API](./api.md) - Data sources
+- [Patterns](./patterns.md) - Use cases
+- Provider docs: https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs

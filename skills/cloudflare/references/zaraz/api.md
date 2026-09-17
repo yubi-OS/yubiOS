@@ -1,1 +1,112 @@
-IyBaYXJheiBXZWIgQVBJCgpDbGllbnQtc2lkZSBKYXZhU2NyaXB0IEFQSSBmb3IgdHJhY2tpbmcgZXZlbnRzLCBzZXR0aW5nIHByb3BlcnRpZXMsIGFuZCBtYW5hZ2luZyBjb25zZW50LgoKIyMgemFyYXoudHJhY2soKQoKYGBgamF2YXNjcmlwdAp6YXJhei50cmFjaygnYnV0dG9uX2NsaWNrJyk7CnphcmF6LnRyYWNrKCdwdXJjaGFzZScsIHsgdmFsdWU6IDk5Ljk5LCBjdXJyZW5jeTogJ1VTRCcsIGl0ZW1faWQ6ICcxMjM0NScgfSk7CnphcmF6LnRyYWNrKCdwYWdldmlldycsIHsgcGFnZV9wYXRoOiAnL3Byb2R1Y3RzJywgcGFnZV90aXRsZTogJ1Byb2R1Y3RzJyB9KTsgLy8gU1BBCmBgYAoKKipQYXJhbXM6KiogYGV2ZW50TmFtZWAgKHN0cmluZyksIGBwcm9wZXJ0aWVzYCAob2JqZWN0LCBvcHRpb25hbCkuIEZpcmUtYW5kLWZvcmdldC4KCiMjIHphcmF6LnNldCgpCgpgYGBqYXZhc2NyaXB0CnphcmF6LnNldCgndXNlcklkJywgJ3VzZXJfMTIzNDUnKTsKemFyYXouc2V0KHsgZW1haWw6ICdbZW1haWwgcHJvdGVjdGVkXScsIHBsYW46ICdwcmVtaXVtJywgY291bnRyeTogJ1VTJyB9KTsKYGBgCgpQcm9wZXJ0aWVzIHBlcnNpc3QgZm9yIHBhZ2Ugc2Vzc2lvbi4gVXNlIGZvciB1c2VyIGlkZW50aWZpY2F0aW9uIGFuZCBzZWdtZW50YXRpb24uCgojIyB6YXJhei5lY29tbWVyY2UoKQoKYGBgamF2YXNjcmlwdAp6YXJhei5lY29tbWVyY2UoJ1Byb2R1Y3QgVmlld2VkJywgeyBwcm9kdWN0X2lkOiAnU0tVMTIzJywgbmFtZTogJ1dpZGdldCcsIHByaWNlOiA0OS45OSB9KTsKemFyYXouZWNvbW1lcmNlKCdQcm9kdWN0IEFkZGVkJywgeyBwcm9kdWN0X2lkOiAnU0tVMTIzJywgcXVhbnRpdHk6IDIsIHByaWNlOiA0OS45OSB9KTsKemFyYXouZWNvbW1lcmNlKCdPcmRlciBDb21wbGV0ZWQnLCB7CiAgb3JkZXJfaWQ6ICdPUkQtNzg5JywgdG90YWw6IDE0OS45OCwgY3VycmVuY3k6ICdVU0QnLAogIHByb2R1Y3RzOiBbeyBwcm9kdWN0X2lkOiAnU0tVMTIzJywgcXVhbnRpdHk6IDIsIHByaWNlOiA0OS45OSB9XQp9KTsKYGBgCgoqKkV2ZW50czoqKiBgUHJvZHVjdCBWaWV3ZWRgLCBgUHJvZHVjdCBBZGRlZGAsIGBQcm9kdWN0IFJlbW92ZWRgLCBgQ2FydCBWaWV3ZWRgLCBgQ2hlY2tvdXQgU3RhcnRlZGAsIGBPcmRlciBDb21wbGV0ZWRgCgpUb29scyBhdXRvLW1hcCB0byBHQTQsIEZhY2Vib29rIENBUEksIGV0Yy4KCiMjIFN5c3RlbSBQcm9wZXJ0aWVzIChUcmlnZ2VycykKCmBgYAp7e3N5c3RlbS5wYWdlLnVybH19ICAge3tzeXN0ZW0ucGFnZS50aXRsZX19ICAge3tzeXN0ZW0ucGFnZS5yZWZlcnJlcn19Cnt7c3lzdGVtLmRldmljZS5pcH19ICB7e3N5c3RlbS5kZXZpY2UudXNlckFnZW50fX0gIHt7c3lzdGVtLmRldmljZS5sYW5ndWFnZX19Cnt7c3lzdGVtLmNvb2tpZXMubmFtZX19ICB7e2NsaWVudC5fX3phcmF6VHJhY2sudXNlcklkfX0KYGBgCgojIyB6YXJhei5jb25zZW50CgpgYGBqYXZhc2NyaXB0Ci8vIENoZWNrCmNvbnN0IHB1cnBvc2VzID0gemFyYXouY29uc2VudC5nZXRBbGwoKTsgLy8geyBhbmFseXRpY3M6IHRydWUsIG1hcmtldGluZzogZmFsc2UgfQoKLy8gU2V0CnphcmF6LmNvbnNlbnQubW9kYWwgPSB0cnVlOyAvLyBTaG93IG1vZGFsCnphcmF6LmNvbnNlbnQuc2V0QWxsKHsgYW5hbHl0aWNzOiB0cnVlLCBtYXJrZXRpbmc6IGZhbHNlIH0pOwp6YXJhei5jb25zZW50LnNldCgnbWFya2V0aW5nJywgdHJ1ZSk7CgovLyBMaXN0ZW4KemFyYXouY29uc2VudC5hZGRFdmVudExpc3RlbmVyKCdjb25zZW50Q2hhbmdlZCcsICgpID0+IHsKICBpZiAoemFyYXouY29uc2VudC5nZXRBbGwoKS5tYXJrZXRpbmcpIHphcmF6LnRyYWNrKCdtYXJrZXRpbmdfY29uc2VudF9ncmFudGVkJyk7Cn0pOwpgYGAKCioqRmxvdzoqKiBDb25maWd1cmUgcHVycG9zZXMgaW4gZGFzaGJvYXJkIOKGkiBNYXAgdG9vbHMgdG8gcHVycG9zZXMg4oaSIFNob3cgbW9kYWwvc2V0IHByb2dyYW1tYXRpY2FsbHkg4oaSIFRvb2xzIGZpcmUgd2hlbiBhbGxvd2VkCgojIyB6YXJhei5kZWJ1ZwoKYGBgamF2YXNjcmlwdAp6YXJhei5kZWJ1ZyA9IHRydWU7CnphcmF6LnRyYWNrKCd0ZXN0X2V2ZW50Jyk7CmNvbnNvbGUubG9nKHphcmF6LnRvb2xzKTsgLy8gVmlldyBsb2FkZWQgdG9vbHMKYGBgCgojIyBDb29raWUgTWV0aG9kcwoKYGBgamF2YXNjcmlwdAp6YXJhei5nZXRDb29raWUoJ3Nlc3Npb25faWQnKTsgIC8vIFphcmF6IG5hbWVzcGFjZQp6YXJhei5yZWFkQ29va2llKCdfZ2EnKTsgICAgICAgIC8vIEFueSBjb29raWUKYGBgCgojIyBBc3luYyBCZWhhdmlvcgoKQWxsIG1ldGhvZHMgZmlyZS1hbmQtZm9yZ2V0LiBFdmVudHMgYmF0Y2hlZCBhbmQgc2VudCBhc3luY2hyb25vdXNseToKCmBgYGphdmFzY3JpcHQKemFyYXoudHJhY2soJ2V2ZW50MScpOwp6YXJhei5zZXQoJ3Byb3AnLCAndmFsdWUnKTsKemFyYXoudHJhY2soJ2V2ZW50MicpOyAvLyBBbGwgYmF0Y2hlZApgYGAKCiMjIFR5cGVTY3JpcHQgVHlwZXMKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIFphcmF6IHsKICB0cmFjayhldmVudDogc3RyaW5nLCBwcm9wZXJ0aWVzPzogUmVjb3JkPHN0cmluZywgdW5rbm93bj4pOiB2b2lkOwogIHNldChrZXk6IHN0cmluZywgdmFsdWU6IHVua25vd24pOiB2b2lkOwogIHNldChwcm9wZXJ0aWVzOiBSZWNvcmQ8c3RyaW5nLCB1bmtub3duPik6IHZvaWQ7CiAgZWNvbW1lcmNlKGV2ZW50OiBzdHJpbmcsIHByb3BlcnRpZXM6IFJlY29yZDxzdHJpbmcsIHVua25vd24+KTogdm9pZDsKICBjb25zZW50OiB7CiAgICBnZXRBbGwoKTogUmVjb3JkPHN0cmluZywgYm9vbGVhbj47CiAgICBzZXRBbGwocHVycG9zZXM6IFJlY29yZDxzdHJpbmcsIGJvb2xlYW4+KTogdm9pZDsKICAgIHNldChwdXJwb3NlOiBzdHJpbmcsIHZhbHVlOiBib29sZWFuKTogdm9pZDsKICAgIGFkZEV2ZW50TGlzdGVuZXIoZXZlbnQ6ICdjb25zZW50Q2hhbmdlZCcsIGNhbGxiYWNrOiAoKSA9PiB2b2lkKTogdm9pZDsKICAgIG1vZGFsOiBib29sZWFuOwogIH07CiAgZGVidWc6IGJvb2xlYW47CiAgdG9vbHM/OiBzdHJpbmdbXTsKICBnZXRDb29raWUobmFtZTogc3RyaW5nKTogc3RyaW5nIHwgdW5kZWZpbmVkOwogIHJlYWRDb29raWUobmFtZTogc3RyaW5nKTogc3RyaW5nIHwgdW5kZWZpbmVkOwp9CmRlY2xhcmUgZ2xvYmFsIHsgaW50ZXJmYWNlIFdpbmRvdyB7IHphcmF6OiBaYXJhejsgfSB9CmBgYAo=
+# Zaraz Web API
+
+Client-side JavaScript API for tracking events, setting properties, and managing consent.
+
+## zaraz.track()
+
+```javascript
+zaraz.track('button_click');
+zaraz.track('purchase', { value: 99.99, currency: 'USD', item_id: '12345' });
+zaraz.track('pageview', { page_path: '/products', page_title: 'Products' }); // SPA
+```
+
+**Params:** `eventName` (string), `properties` (object, optional). Fire-and-forget.
+
+## zaraz.set()
+
+```javascript
+zaraz.set('userId', 'user_12345');
+zaraz.set({ email: '[email protected]', plan: 'premium', country: 'US' });
+```
+
+Properties persist for page session. Use for user identification and segmentation.
+
+## zaraz.ecommerce()
+
+```javascript
+zaraz.ecommerce('Product Viewed', { product_id: 'SKU123', name: 'Widget', price: 49.99 });
+zaraz.ecommerce('Product Added', { product_id: 'SKU123', quantity: 2, price: 49.99 });
+zaraz.ecommerce('Order Completed', {
+  order_id: 'ORD-789', total: 149.98, currency: 'USD',
+  products: [{ product_id: 'SKU123', quantity: 2, price: 49.99 }]
+});
+```
+
+**Events:** `Product Viewed`, `Product Added`, `Product Removed`, `Cart Viewed`, `Checkout Started`, `Order Completed`
+
+Tools auto-map to GA4, Facebook CAPI, etc.
+
+## System Properties (Triggers)
+
+```
+{{system.page.url}}   {{system.page.title}}   {{system.page.referrer}}
+{{system.device.ip}}  {{system.device.userAgent}}  {{system.device.language}}
+{{system.cookies.name}}  {{client.__zarazTrack.userId}}
+```
+
+## zaraz.consent
+
+```javascript
+// Check
+const purposes = zaraz.consent.getAll(); // { analytics: true, marketing: false }
+
+// Set
+zaraz.consent.modal = true; // Show modal
+zaraz.consent.setAll({ analytics: true, marketing: false });
+zaraz.consent.set('marketing', true);
+
+// Listen
+zaraz.consent.addEventListener('consentChanged', () => {
+  if (zaraz.consent.getAll().marketing) zaraz.track('marketing_consent_granted');
+});
+```
+
+**Flow:** Configure purposes in dashboard → Map tools to purposes → Show modal/set programmatically → Tools fire when allowed
+
+## zaraz.debug
+
+```javascript
+zaraz.debug = true;
+zaraz.track('test_event');
+console.log(zaraz.tools); // View loaded tools
+```
+
+## Cookie Methods
+
+```javascript
+zaraz.getCookie('session_id');  // Zaraz namespace
+zaraz.readCookie('_ga');        // Any cookie
+```
+
+## Async Behavior
+
+All methods fire-and-forget. Events batched and sent asynchronously:
+
+```javascript
+zaraz.track('event1');
+zaraz.set('prop', 'value');
+zaraz.track('event2'); // All batched
+```
+
+## TypeScript Types
+
+```typescript
+interface Zaraz {
+  track(event: string, properties?: Record<string, unknown>): void;
+  set(key: string, value: unknown): void;
+  set(properties: Record<string, unknown>): void;
+  ecommerce(event: string, properties: Record<string, unknown>): void;
+  consent: {
+    getAll(): Record<string, boolean>;
+    setAll(purposes: Record<string, boolean>): void;
+    set(purpose: string, value: boolean): void;
+    addEventListener(event: 'consentChanged', callback: () => void): void;
+    modal: boolean;
+  };
+  debug: boolean;
+  tools?: string[];
+  getCookie(name: string): string | undefined;
+  readCookie(name: string): string | undefined;
+}
+declare global { interface Window { zaraz: Zaraz; } }
+```

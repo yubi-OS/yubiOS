@@ -1,1 +1,146 @@
-IyBFbWFpbCBIYW5kbGluZwoKRmV0Y2ggaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FnZW50cy9hcGktcmVmZXJlbmNlL2VtYWlsLyBmb3IgY29tcGxldGUgZG9jdW1lbnRhdGlvbi4KCiMjIE92ZXJ2aWV3CgpBZ2VudHMgcmVjZWl2ZSBhbmQgcmVwbHkgdG8gZW1haWxzIHZpYSBDbG91ZGZsYXJlIEVtYWlsIFJvdXRpbmcuCgojIyBXcmFuZ2xlciBDb25maWd1cmF0aW9uCgpgYGBqc29uYwp7CiAgImR1cmFibGVfb2JqZWN0cyI6IHsKICAgICJiaW5kaW5ncyI6IFt7ICJuYW1lIjogIkVtYWlsQWdlbnQiLCAiY2xhc3NfbmFtZSI6ICJFbWFpbEFnZW50IiB9XQogIH0sCiAgIm1pZ3JhdGlvbnMiOiBbeyAidGFnIjogInYxIiwgIm5ld19zcWxpdGVfY2xhc3NlcyI6IFsiRW1haWxBZ2VudCJdIH1dLAogICJzZW5kX2VtYWlsIjogWwogICAgeyAibmFtZSI6ICJTRUIiLCAiZGVzdGluYXRpb25fYWRkcmVzcyI6ICJyZXBseUB5b3VyZG9tYWluLmNvbSIgfQogIF0KfQpgYGAKCiMjIEJhc2ljIEVtYWlsIEhhbmRsZXIKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgQWdlbnQgfSBmcm9tICJhZ2VudHMiOwppbXBvcnQgeyB0eXBlIEFnZW50RW1haWwgfSBmcm9tICJhZ2VudHMvZW1haWwiOwppbXBvcnQgUG9zdGFsTWltZSBmcm9tICJwb3N0YWwtbWltZSI7CgpleHBvcnQgY2xhc3MgRW1haWxBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBhc3luYyBvbkVtYWlsKGVtYWlsOiBBZ2VudEVtYWlsKSB7CiAgICBjb25zdCByYXcgPSBhd2FpdCBlbWFpbC5nZXRSYXcoKTsKICAgIGNvbnN0IHBhcnNlZCA9IGF3YWl0IFBvc3RhbE1pbWUucGFyc2UocmF3KTsKCiAgICBjb25zb2xlLmxvZygiRnJvbToiLCBlbWFpbC5mcm9tKTsKICAgIGNvbnNvbGUubG9nKCJTdWJqZWN0OiIsIHBhcnNlZC5zdWJqZWN0KTsKCiAgICBhd2FpdCB0aGlzLnJlcGx5VG9FbWFpbChlbWFpbCwgewogICAgICBmcm9tTmFtZTogIk15IEFnZW50IiwKICAgICAgc3ViamVjdDogYFJlOiAke3BhcnNlZC5zdWJqZWN0fWAsCiAgICAgIGJvZHk6ICJUaGFua3MgZm9yIHlvdXIgZW1haWwhIgogICAgfSk7CiAgfQp9CmBgYAoKIyMgUm91dGluZyBFbWFpbHMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgcm91dGVBZ2VudFJlcXVlc3QsIHJvdXRlQWdlbnRFbWFpbCB9IGZyb20gImFnZW50cyI7CmltcG9ydCB7IGNyZWF0ZUFkZHJlc3NCYXNlZEVtYWlsUmVzb2x2ZXIgfSBmcm9tICJhZ2VudHMvZW1haWwiOwoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGVtYWlsKG1lc3NhZ2UsIGVudikgewogICAgYXdhaXQgcm91dGVBZ2VudEVtYWlsKG1lc3NhZ2UsIGVudiwgewogICAgICByZXNvbHZlcjogY3JlYXRlQWRkcmVzc0Jhc2VkRW1haWxSZXNvbHZlcigiRW1haWxBZ2VudCIpCiAgICB9KTsKICB9LAoKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYpIHsKICAgIHJldHVybiByb3V0ZUFnZW50UmVxdWVzdChyZXF1ZXN0LCBlbnYpID8/IG5ldyBSZXNwb25zZSgiTm90IGZvdW5kIiwgeyBzdGF0dXM6IDQwNCB9KTsKICB9Cn07CmBgYAoKIyMgUmVzb2x2ZXJzCgojIyMgQWRkcmVzcy1CYXNlZCAoSW5ib3VuZCBNYWlsKQoKUm91dGVzIGJhc2VkIG9uIHJlY2lwaWVudCBhZGRyZXNzOgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBjcmVhdGVBZGRyZXNzQmFzZWRFbWFpbFJlc29sdmVyIH0gZnJvbSAiYWdlbnRzL2VtYWlsIjsKCmNvbnN0IHJlc29sdmVyID0gY3JlYXRlQWRkcmVzc0Jhc2VkRW1haWxSZXNvbHZlcigiRW1haWxBZ2VudCIpOwovLyBzdXBwb3J0QGV4YW1wbGUuY29tIOKGkiBFbWFpbEFnZW50LCBpbnN0YW5jZSAic3VwcG9ydCIKLy8gTm90aWZpY2F0aW9uQWdlbnQrdXNlcjEyM0BleGFtcGxlLmNvbSDihpIgTm90aWZpY2F0aW9uQWdlbnQsIGluc3RhbmNlICJ1c2VyMTIzIgpgYGAKCiMjIyBTZWN1cmUgUmVwbHkgKFJlcGx5IEZsb3dzKQoKVmVyaWZpZXMgcmVwbGllcyBhcmUgYXV0aGVudGljIHVzaW5nIEhNQUMtU0hBMjU2IHNpZ25hdHVyZXM6CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGNyZWF0ZVNlY3VyZVJlcGx5RW1haWxSZXNvbHZlciB9IGZyb20gImFnZW50cy9lbWFpbCI7Cgpjb25zdCByZXNvbHZlciA9IGNyZWF0ZVNlY3VyZVJlcGx5RW1haWxSZXNvbHZlcihlbnYuRU1BSUxfU0VDUkVULCB7CiAgbWF4QWdlOiA3ICogMjQgKiA2MCAqIDYwLCAvLyA3IGRheXMgKGRlZmF1bHQ6IDMwIGRheXMpCiAgb25JbnZhbGlkU2lnbmF0dXJlOiAoZW1haWwsIHJlYXNvbikgPT4gewogICAgY29uc29sZS53YXJuKGBJbnZhbGlkIHNpZ25hdHVyZSBmcm9tICR7ZW1haWwuZnJvbX06ICR7cmVhc29ufWApOwogIH0KfSk7CmBgYAoKU2lnbiBvdXRib3VuZCBlbWFpbHMgdG8gZW5hYmxlIHNlY3VyZSByZXBseSByb3V0aW5nOgoKYGBgdHlwZXNjcmlwdAphd2FpdCB0aGlzLnJlcGx5VG9FbWFpbChlbWFpbCwgewogIGZyb21OYW1lOiAiTXkgQWdlbnQiLAogIGJvZHk6ICJUaGFua3MhIiwKICBzZWNyZXQ6IHRoaXMuZW52LkVNQUlMX1NFQ1JFVCAgLy8gU2lnbnMgaGVhZGVycyBmb3Igc2VjdXJlIHJlcGx5IHJvdXRpbmcKfSk7CmBgYAoKIyMjIENhdGNoLUFsbCAoU2luZ2xlIEluc3RhbmNlKQoKUm91dGVzIGFsbCBlbWFpbHMgdG8gb25lIGFnZW50IGluc3RhbmNlOgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBjcmVhdGVDYXRjaEFsbEVtYWlsUmVzb2x2ZXIgfSBmcm9tICJhZ2VudHMvZW1haWwiOwoKY29uc3QgcmVzb2x2ZXIgPSBjcmVhdGVDYXRjaEFsbEVtYWlsUmVzb2x2ZXIoIkVtYWlsQWdlbnQiLCAiZGVmYXVsdCIpOwpgYGAKCiMjIyBDb21iaW5pbmcgUmVzb2x2ZXJzCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGVtYWlsKG1lc3NhZ2UsIGVudikgewogIGNvbnN0IHNlY3VyZVJlcGx5ID0gY3JlYXRlU2VjdXJlUmVwbHlFbWFpbFJlc29sdmVyKGVudi5FTUFJTF9TRUNSRVQpOwogIGNvbnN0IGFkZHJlc3NCYXNlZCA9IGNyZWF0ZUFkZHJlc3NCYXNlZEVtYWlsUmVzb2x2ZXIoIkVtYWlsQWdlbnQiKTsKCiAgYXdhaXQgcm91dGVBZ2VudEVtYWlsKG1lc3NhZ2UsIGVudiwgewogICAgcmVzb2x2ZXI6IGFzeW5jIChlbWFpbCwgZW52KSA9PiB7CiAgICAgIC8vIFRyeSBzZWN1cmUgcmVwbHkgZmlyc3QKICAgICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgc2VjdXJlUmVwbHkoZW1haWwsIGVudik7CiAgICAgIGlmIChyZXN1bHQpIHJldHVybiByZXN1bHQ7CiAgICAgIC8vIEZhbGwgYmFjayB0byBhZGRyZXNzLWJhc2VkCiAgICAgIHJldHVybiBhZGRyZXNzQmFzZWQoZW1haWwsIGVudik7CiAgICB9CiAgfSk7Cn0KYGBgCgojIyBVdGlsaXRpZXMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgaXNBdXRvUmVwbHlFbWFpbCB9IGZyb20gImFnZW50cy9lbWFpbCI7Cgphc3luYyBvbkVtYWlsKGVtYWlsOiBBZ2VudEVtYWlsKSB7CiAgaWYgKGlzQXV0b1JlcGx5RW1haWwoZW1haWwuaGVhZGVycykpIHsKICAgIC8vIFNraXAgYXV0by1yZXBsaWVzICh2YWNhdGlvbiwgb3V0LW9mLW9mZmljZSwgZXRjLikKICAgIHJldHVybjsKICB9CiAgLy8gUHJvY2VzcyBlbWFpbC4uLgp9CmBgYAo=
+# Email Handling
+
+Fetch https://developers.cloudflare.com/agents/api-reference/email/ for complete documentation.
+
+## Overview
+
+Agents receive and reply to emails via Cloudflare Email Routing.
+
+## Wrangler Configuration
+
+```jsonc
+{
+  "durable_objects": {
+    "bindings": [{ "name": "EmailAgent", "class_name": "EmailAgent" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["EmailAgent"] }],
+  "send_email": [
+    { "name": "SEB", "destination_address": "reply@yourdomain.com" }
+  ]
+}
+```
+
+## Basic Email Handler
+
+```typescript
+import { Agent } from "agents";
+import { type AgentEmail } from "agents/email";
+import PostalMime from "postal-mime";
+
+export class EmailAgent extends Agent<Env, State> {
+  async onEmail(email: AgentEmail) {
+    const raw = await email.getRaw();
+    const parsed = await PostalMime.parse(raw);
+
+    console.log("From:", email.from);
+    console.log("Subject:", parsed.subject);
+
+    await this.replyToEmail(email, {
+      fromName: "My Agent",
+      subject: `Re: ${parsed.subject}`,
+      body: "Thanks for your email!"
+    });
+  }
+}
+```
+
+## Routing Emails
+
+```typescript
+import { routeAgentRequest, routeAgentEmail } from "agents";
+import { createAddressBasedEmailResolver } from "agents/email";
+
+export default {
+  async email(message, env) {
+    await routeAgentEmail(message, env, {
+      resolver: createAddressBasedEmailResolver("EmailAgent")
+    });
+  },
+
+  async fetch(request, env) {
+    return routeAgentRequest(request, env) ?? new Response("Not found", { status: 404 });
+  }
+};
+```
+
+## Resolvers
+
+### Address-Based (Inbound Mail)
+
+Routes based on recipient address:
+
+```typescript
+import { createAddressBasedEmailResolver } from "agents/email";
+
+const resolver = createAddressBasedEmailResolver("EmailAgent");
+// support@example.com → EmailAgent, instance "support"
+// NotificationAgent+user123@example.com → NotificationAgent, instance "user123"
+```
+
+### Secure Reply (Reply Flows)
+
+Verifies replies are authentic using HMAC-SHA256 signatures:
+
+```typescript
+import { createSecureReplyEmailResolver } from "agents/email";
+
+const resolver = createSecureReplyEmailResolver(env.EMAIL_SECRET, {
+  maxAge: 7 * 24 * 60 * 60, // 7 days (default: 30 days)
+  onInvalidSignature: (email, reason) => {
+    console.warn(`Invalid signature from ${email.from}: ${reason}`);
+  }
+});
+```
+
+Sign outbound emails to enable secure reply routing:
+
+```typescript
+await this.replyToEmail(email, {
+  fromName: "My Agent",
+  body: "Thanks!",
+  secret: this.env.EMAIL_SECRET  // Signs headers for secure reply routing
+});
+```
+
+### Catch-All (Single Instance)
+
+Routes all emails to one agent instance:
+
+```typescript
+import { createCatchAllEmailResolver } from "agents/email";
+
+const resolver = createCatchAllEmailResolver("EmailAgent", "default");
+```
+
+### Combining Resolvers
+
+```typescript
+async email(message, env) {
+  const secureReply = createSecureReplyEmailResolver(env.EMAIL_SECRET);
+  const addressBased = createAddressBasedEmailResolver("EmailAgent");
+
+  await routeAgentEmail(message, env, {
+    resolver: async (email, env) => {
+      // Try secure reply first
+      const result = await secureReply(email, env);
+      if (result) return result;
+      // Fall back to address-based
+      return addressBased(email, env);
+    }
+  });
+}
+```
+
+## Utilities
+
+```typescript
+import { isAutoReplyEmail } from "agents/email";
+
+async onEmail(email: AgentEmail) {
+  if (isAutoReplyEmail(email.headers)) {
+    // Skip auto-replies (vacation, out-of-office, etc.)
+    return;
+  }
+  // Process email...
+}
+```

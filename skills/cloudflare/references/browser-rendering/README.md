@@ -1,1 +1,78 @@
-IyBDbG91ZGZsYXJlIEJyb3dzZXIgUmVuZGVyaW5nIFNraWxsIFJlZmVyZW5jZQoKKipEZXNjcmlwdGlvbioqOiBFeHBlcnQga25vd2xlZGdlIGZvciBDbG91ZGZsYXJlIEJyb3dzZXIgUmVuZGVyaW5nIC0gY29udHJvbCBoZWFkbGVzcyBDaHJvbWUgb24gQ2xvdWRmbGFyZSdzIGdsb2JhbCBuZXR3b3JrIGZvciBicm93c2VyIGF1dG9tYXRpb24sIHNjcmVlbnNob3RzLCBQREZzLCB3ZWIgc2NyYXBpbmcsIHRlc3RpbmcsIGFuZCBjb250ZW50IGdlbmVyYXRpb24uCgoqKldoZW4gdG8gdXNlKio6IEFueSB0YXNrIGludm9sdmluZyBDbG91ZGZsYXJlIEJyb3dzZXIgUmVuZGVyaW5nIGluY2x1ZGluZzogdGFraW5nIHNjcmVlbnNob3RzLCBnZW5lcmF0aW5nIFBERnMsIHdlYiBzY3JhcGluZywgYnJvd3NlciBhdXRvbWF0aW9uLCB0ZXN0aW5nIHdlYiBhcHBsaWNhdGlvbnMsIGV4dHJhY3Rpbmcgc3RydWN0dXJlZCBkYXRhLCBjYXB0dXJpbmcgcGFnZSBtZXRyaWNzLCBvciBhdXRvbWF0aW5nIGJyb3dzZXIgaW50ZXJhY3Rpb25zLgoKIyMgRGVjaXNpb24gVHJlZQoKIyMjIFJFU1QgQVBJIHZzIFdvcmtlcnMgQmluZGluZ3MKCioqVXNlIFJFU1QgQVBJIHdoZW46KioKLSBPbmUtb2ZmLCBzdGF0ZWxlc3MgdGFza3MgKHNjcmVlbnNob3QsIFBERiwgY29udGVudCBmZXRjaCkKLSBObyBXb3JrZXJzIGluZnJhc3RydWN0dXJlIHlldAotIFNpbXBsZSBpbnRlZ3JhdGlvbnMgZnJvbSBleHRlcm5hbCBzZXJ2aWNlcwotIE5lZWQgcXVpY2sgcHJvdG90eXBpbmcgd2l0aG91dCBkZXBsb3ltZW50CgoqKlVzZSBXb3JrZXJzIEJpbmRpbmdzIHdoZW46KioKLSBDb21wbGV4IGJyb3dzZXIgYXV0b21hdGlvbiB3b3JrZmxvd3MKLSBOZWVkIHNlc3Npb24gcmV1c2UgZm9yIHBlcmZvcm1hbmNlCi0gTXVsdGlwbGUgcGFnZSBpbnRlcmFjdGlvbnMgcGVyIHJlcXVlc3QKLSBDdXN0b20gc2NyaXB0aW5nIGFuZCBsb2dpYyByZXF1aXJlZAotIEJ1aWxkaW5nIHByb2R1Y3Rpb24gYXBwbGljYXRpb25zCgojIyMgUHVwcGV0ZWVyIHZzIFBsYXl3cmlnaHQKCnwgRmVhdHVyZSB8IFB1cHBldGVlciB8IFBsYXl3cmlnaHQgfAp8LS0tLS0tLS0tfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwKfCBBUEkgU3R5bGUgfCBDaHJvbWUgRGV2VG9vbHMgUHJvdG9jb2wgfCBIaWdoLWxldmVsIGFic3RyYWN0aW9ucyB8CnwgU2VsZWN0b3JzIHwgQ1NTLCBYUGF0aCB8IENTUywgdGV4dCwgcm9sZSwgdGVzdC1pZCB8CnwgQmVzdCBmb3IgfCBBZHZhbmNlZCBjb250cm9sLCBDRFAgYWNjZXNzIHwgUXVpY2sgYXV0b21hdGlvbiwgdGVzdGluZyB8CnwgTGVhcm5pbmcgY3VydmUgfCBTdGVlcGVyIHwgR2VudGxlciB8CgoqKlVzZSBQdXBwZXRlZXI6KiogTmVlZCBDRFAgcHJvdG9jb2wgYWNjZXNzLCBDaHJvbWUtc3BlY2lmaWMgZmVhdHVyZXMsIG1pZ3JhdGlvbiBmcm9tIGV4aXN0aW5nIFB1cHBldGVlciBjb2RlCioqVXNlIFBsYXl3cmlnaHQ6KiogTW9kZXJuIHNlbGVjdG9yIEFQSXMsIGNyb3NzLWJyb3dzZXIgcGF0dGVybnMsIGZhc3RlciBkZXZlbG9wbWVudAoKIyMgVGllciBMaW1pdHMgU3VtbWFyeQoKfCBMaW1pdCB8IEZyZWUgVGllciB8IFBhaWQgVGllciB8CnwtLS0tLS0tfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tfAp8IERhaWx5IGJyb3dzZXIgdGltZSB8IDEwIG1pbnV0ZXMgfCBVbmxpbWl0ZWQqIHwKfCBDb25jdXJyZW50IHNlc3Npb25zIHwgMyB8IDMwIHwKfCBSZXF1ZXN0cyBwZXIgbWludXRlIHwgNiB8IDE4MCB8CgoqU3ViamVjdCB0byBmYWlyLXVzZSBwb2xpY3kuIFNlZSBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkgZm9yIGRldGFpbHMuCgojIyBSZWFkaW5nIE9yZGVyCgoqKk5ldyB0byBCcm93c2VyIFJlbmRlcmluZzoqKgoxLiBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkgLSBTZXR1cCBhbmQgZGVwbG95bWVudAoyLiBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSAtIENvbW1vbiB1c2UgY2FzZXMgd2l0aCBleGFtcGxlcwozLiBbYXBpLm1kXShhcGkubWQpIC0gQVBJIHJlZmVyZW5jZQo0LiBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkgLSBBdm9pZCBjb21tb24gcGl0ZmFsbHMKCioqU3BlY2lmaWMgdGFzazoqKgotICoqU2V0dXAvZGVwbG95bWVudCoqIOKGkiBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkKLSAqKkFQSSByZWZlcmVuY2UvZW5kcG9pbnRzKiog4oaSIFthcGkubWRdKGFwaS5tZCkKLSAqKkV4YW1wbGUgY29kZS9wYXR0ZXJucyoqIOKGkiBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKQotICoqRGVidWdnaW5nL3Ryb3VibGVzaG9vdGluZyoqIOKGkiBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkKCioqUkVTVCBBUEkgdXNlcnM6KioKLSBTdGFydCB3aXRoIFthcGkubWRdKGFwaS5tZCkgUkVTVCBBUEkgc2VjdGlvbgotIENoZWNrIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSBmb3IgcmF0ZSBsaW1pdHMKCioqV29ya2VycyB1c2VyczoqKgotIFN0YXJ0IHdpdGggW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpCi0gUmV2aWV3IFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIGZvciBzZXNzaW9uIG1hbmFnZW1lbnQKLSBSZWZlcmVuY2UgW2FwaS5tZF0oYXBpLm1kKSBmb3IgV29ya2VycyBCaW5kaW5ncwoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKCi0gKipbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkqKiAtIFNldHVwLCBkZXBsb3ltZW50LCB3cmFuZ2xlciBjb25maWcsIGNvbXBhdGliaWxpdHkKLSAqKlthcGkubWRdKGFwaS5tZCkqKiAtIFJFU1QgQVBJIGVuZHBvaW50cyArIFdvcmtlcnMgQmluZGluZ3MgKFB1cHBldGVlci9QbGF5d3JpZ2h0KQotICoqW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkqKiAtIENvbW1vbiBwYXR0ZXJucywgdXNlIGNhc2VzLCByZWFsIGV4YW1wbGVzCi0gKipbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkqKiAtIFRyb3VibGVzaG9vdGluZywgYmVzdCBwcmFjdGljZXMsIHRpZXIgbGltaXRzLCBjb21tb24gZXJyb3JzCgojIyBTZWUgQWxzbwoKLSBbQ2xvdWRmbGFyZSBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYnJvd3Nlci1yZW5kZXJpbmcvKQo=
+# Cloudflare Browser Rendering Skill Reference
+
+**Description**: Expert knowledge for Cloudflare Browser Rendering - control headless Chrome on Cloudflare's global network for browser automation, screenshots, PDFs, web scraping, testing, and content generation.
+
+**When to use**: Any task involving Cloudflare Browser Rendering including: taking screenshots, generating PDFs, web scraping, browser automation, testing web applications, extracting structured data, capturing page metrics, or automating browser interactions.
+
+## Decision Tree
+
+### REST API vs Workers Bindings
+
+**Use REST API when:**
+- One-off, stateless tasks (screenshot, PDF, content fetch)
+- No Workers infrastructure yet
+- Simple integrations from external services
+- Need quick prototyping without deployment
+
+**Use Workers Bindings when:**
+- Complex browser automation workflows
+- Need session reuse for performance
+- Multiple page interactions per request
+- Custom scripting and logic required
+- Building production applications
+
+### Puppeteer vs Playwright
+
+| Feature | Puppeteer | Playwright |
+|---------|-----------|------------|
+| API Style | Chrome DevTools Protocol | High-level abstractions |
+| Selectors | CSS, XPath | CSS, text, role, test-id |
+| Best for | Advanced control, CDP access | Quick automation, testing |
+| Learning curve | Steeper | Gentler |
+
+**Use Puppeteer:** Need CDP protocol access, Chrome-specific features, migration from existing Puppeteer code
+**Use Playwright:** Modern selector APIs, cross-browser patterns, faster development
+
+## Tier Limits Summary
+
+| Limit | Free Tier | Paid Tier |
+|-------|-----------|-----------|
+| Daily browser time | 10 minutes | Unlimited* |
+| Concurrent sessions | 3 | 30 |
+| Requests per minute | 6 | 180 |
+
+*Subject to fair-use policy. See [gotchas.md](gotchas.md) for details.
+
+## Reading Order
+
+**New to Browser Rendering:**
+1. [configuration.md](configuration.md) - Setup and deployment
+2. [patterns.md](patterns.md) - Common use cases with examples
+3. [api.md](api.md) - API reference
+4. [gotchas.md](gotchas.md) - Avoid common pitfalls
+
+**Specific task:**
+- **Setup/deployment** → [configuration.md](configuration.md)
+- **API reference/endpoints** → [api.md](api.md)
+- **Example code/patterns** → [patterns.md](patterns.md)
+- **Debugging/troubleshooting** → [gotchas.md](gotchas.md)
+
+**REST API users:**
+- Start with [api.md](api.md) REST API section
+- Check [gotchas.md](gotchas.md) for rate limits
+
+**Workers users:**
+- Start with [configuration.md](configuration.md)
+- Review [patterns.md](patterns.md) for session management
+- Reference [api.md](api.md) for Workers Bindings
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Setup, deployment, wrangler config, compatibility
+- **[api.md](api.md)** - REST API endpoints + Workers Bindings (Puppeteer/Playwright)
+- **[patterns.md](patterns.md)** - Common patterns, use cases, real examples
+- **[gotchas.md](gotchas.md)** - Troubleshooting, best practices, tier limits, common errors
+
+## See Also
+
+- [Cloudflare Docs](https://developers.cloudflare.com/browser-rendering/)

@@ -1,1 +1,79 @@
-IyBDbG91ZGZsYXJlIEFydGlmYWN0cwoKU3RvcmUgdmVyc2lvbmVkIGZpbGUgdHJlZXMgYmVoaW5kIGEgcmVwby1zdHlsZSBpbnRlcmZhY2UgdGhhdCB3b3JrcyBmcm9tIFdvcmtlcnMsIHRoZSBSRVNUIEFQSSwgYW5kIEdpdC1jb21wYXRpYmxlIHRvb2xpbmcuCgojIyBPdmVydmlldwoKVXNlICoqQXJ0aWZhY3RzKiogd2hlbiB0aGUgdGhpbmcgeW91IG5lZWQgdG8gc3RvcmUgaXMgYSB2ZXJzaW9uZWQgZmlsZXN5c3RlbSB0cmVlIHJhdGhlciB0aGFuIGEgc2luZ2xlIG9iamVjdCwga2V5LCBvciBTUUwgcm93LgoKVHlwaWNhbCBBcnRpZmFjdHMgdXNlIGNhc2VzOgotIEdpdC1zdHlsZSByZXBvc2l0b3JpZXMKLSBQZXItYWdlbnQsIHBlci1zZXNzaW9uLCBvciBwZXItdGFzayByZXBvcwotIEJ1aWxkIG91dHB1dHMgYW5kIGRlcGxveW1lbnQgYnVuZGxlcwotIENoZWNrcG9pbnRzIGFuZCBnZW5lcmF0ZWQgYXNzZXRzCi0gU2hhcmVkIGZpbGUgdHJlZXMgcGFzc2VkIGJldHdlZW4gZGV2ZWxvcGVyIHRvb2xzIGFuZCBXb3JrZXJzCgpBcnRpZmFjdHMgaXMgYSBnb29kIGZpdCB3aGVuIHRoZSBzYW1lIGNvbnRlbnQgbmVlZHMgdG8gYmUgYWRkcmVzc2FibGUgZnJvbSAqKldvcmtlcnMqKiwgdGhlICoqUkVTVCBBUEkqKiwgYW5kICoqR2l0LWNvbXBhdGlibGUgY2xpZW50cyoqLgoKQXJ0aWZhY3RzIGlzIGVzcGVjaWFsbHkgdXNlZnVsIGZvciBhZ2VudCBhbmQgYXV0b21hdGlvbiB3b3JrZmxvd3Mgd2hlcmUgZWFjaCB1bml0IG9mIHdvcmsgc2hvdWxkIGhhdmUgaXRzIG93biBpc29sYXRlZCByZXBvIGFuZCB0b2tlbi4KCioqUHJlZmVyIHJldHJpZXZhbCBvdmVyIG1lbW9yeSoqIGZvciBjdXJyZW50IGF2YWlsYWJpbGl0eSwgYXV0aGVudGljYXRpb24gZGV0YWlscywgcm91dGUgc2hhcGVzLCBsaW1pdHMsIGFuZCBwcmljaW5nLiBTdGFydCBhdCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FydGlmYWN0cy9gLgoKIyMgV2hlbiB0byBVc2UgQXJ0aWZhY3RzCgp8IE5lZWQgfCBVc2UgfCBXaHkgfAp8LS0tLS0tfC0tLS0tfC0tLS0tfAp8IFZlcnNpb25lZCBmaWxlIHRyZWVzIHN1Y2ggYXMgcmVwb3MsIGJ1aWxkIG91dHB1dHMsIGNoZWNrcG9pbnRzLCBvciBnZW5lcmF0ZWQgYXNzZXRzIHwgQXJ0aWZhY3RzIHwgQXJ0aWZhY3RzIHN0b3JlcyBhbmQgc2hhcmVzICoqdmVyc2lvbmVkIGZpbGVzeXN0ZW0gY29udGVudCoqIHwKfCBBIGdpdC1jb21wYXRpYmxlIHdvcmtmbG93IHdpdGggYGNsb25lYCwgYGZldGNoYCwgYHB1bGxgLCBvciBgcHVzaGAgfCBBcnRpZmFjdHMgfCBBcnRpZmFjdHMgZXhwb3NlcyAqKmdpdC1vdmVyLUhUVFBTIHJlbW90ZXMqKiBhbmQgcmVwby1zY29wZWQgdG9rZW5zIHwKfCBUaGUgc2FtZSBhcnRpZmFjdCBhY2Nlc3NpYmxlIGZyb20gV29ya2VycywgSFRUUCBBUElzLCBhbmQgZGV2ZWxvcGVyIHRvb2xpbmcgfCBBcnRpZmFjdHMgfCBBcnRpZmFjdHMgaXMgYXZhaWxhYmxlIHRocm91Z2ggYSAqKldvcmtlcnMgYmluZGluZyoqLCAqKlJFU1QgQVBJKiosIGFuZCAqKmdpdC1jb21wYXRpYmxlIGludGVyZmFjZSoqIHwKfCBMYXJnZSBmaWxlcyBieSBvYmplY3Qga2V5LCBhcHAgY29uZmlnIGJ5IGtleSwgb3IgcmVsYXRpb25hbCBhcHAgZGF0YSB8IFIyLCBLViwgb3IgRDEgfCBVc2Ugc3RvcmFnZSBwcm9kdWN0cyBkaXJlY3RseSB3aGVuIHlvdSBuZWVkICoqb2JqZWN0cywga2V5LXZhbHVlIGVudHJpZXMsIG9yIFNRTCByb3dzKiosIG5vdCB2ZXJzaW9uZWQgZmlsZSB0cmVlcyB8CgojIyBSZWNvbW1lbmRlZCBXb3JrZmxvdwoKLSBDcmVhdGUgb25lIHJlcG8gcGVyIGFnZW50LCBzZXNzaW9uLCB1c2VyIHdvcmtzcGFjZSwgb3IgdGFzayB3aGVuIHdvcmsgc2hvdWxkIHN0YXkgaXNvbGF0ZWQuCi0gRm9yayBmcm9tIGEgc3RhYmxlIGJhc2VsaW5lIHdoZW4gbWFueSByZXBvcyBuZWVkIHRoZSBzYW1lIHN0YXJ0ZXIgZmlsZXMgb3IgcHJvbXB0cy4KLSBVc2UgYnJhbmNoZXMgb25seSB3aGVuIGNvbGxhYm9yYXRvcnMgc2hhcmUgdGhlIHNhbWUgbGlmZWN5Y2xlIGFuZCBuZWVkIHRvIHdvcmsgaW4gb25lIHJlcG8uCi0gVXNlIG5hbWVzcGFjZXMgdG8gc2VwYXJhdGUgZW52aXJvbm1lbnRzLCB0ZWFtcywgb3IgaGlnaC1yYXRlIHdvcmtsb2Fkcy4KCiMjIFF1aWNrIFN0YXJ0CgoqKkZyb20gYSBXb3JrZXI6KioKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgQVJUSUZBQ1RTOiBBcnRpZmFjdHM7Cn0KCmNvbnN0IGNyZWF0ZWQgPSBhd2FpdCBlbnYuQVJUSUZBQ1RTLmNyZWF0ZSgic3RhcnRlci1yZXBvIik7Ci8vIGNyZWF0ZWQucmVtb3RlIC0+IGdpdCByZW1vdGUgVVJMCi8vIGNyZWF0ZWQudG9rZW4gLT4gaW5pdGlhbCByZXBvIHRva2VuCmBgYAoKKipGcm9tIHRoZSBSRVNUIEFQSToqKgoKVXNlIHRoZSBuYW1lc3BhY2Utc2NvcGVkIEFydGlmYWN0cyBiYXNlIFVSTCBwbHVzIGEgZ2F0ZXdheSBKV1QuIEZvciBpbXBvcnRzIGZyb20gZXhpc3RpbmcgSFRUUFMgcmVtb3RlcywgdXNlIHRoZSBSRVNUIEFQSSByYXRoZXIgdGhhbiB0aGUgV29ya2VycyBiaW5kaW5nLgoKIyMgUmVhZGluZyBPcmRlcgoKfCBUYXNrIHwgUmVhZCB8CnwtLS0tLS18LS0tLS0tfAp8IERlY2lkZSB3aGV0aGVyIEFydGlmYWN0cyBpcyB0aGUgcmlnaHQgcHJvZHVjdCB8IFJFQURNRSBvbmx5IHwKfCBDcmVhdGUgb3IgbWFuYWdlIHJlcG9zIGZyb20gYSBXb3JrZXIgfCBSRUFETUUg4oaSIGNvbmZpZ3VyYXRpb24ubWQg4oaSIGFwaS5tZCB8CnwgSW50ZWdyYXRlIEFydGlmYWN0cyBmcm9tIGFuIGV4dGVybmFsIHN5c3RlbSB8IFJFQURNRSDihpIgYXBpLm1kIHwKfCBTZXQgdXAgYWdlbnQgb3Igc2FuZGJveCB3b3JrZmxvd3MgfCBSRUFETUUg4oaSIGNvbmZpZ3VyYXRpb24ubWQgfAp8IFZlcmlmeSBleGFjdCBhdXRoLCByb3V0ZXMsIGxpbWl0cywgb3IgcHJpY2luZyB8IExpdmUgZG9jcyBmaXJzdDogYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hcnRpZmFjdHMvYCB8CgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSAqKlthcGkubWRdKGFwaS5tZCkqKiAtIFdvcmtlcnMgYmluZGluZyBtZXRob2RzLCBSRVNUIHJvdXRlcywgdG9rZW4gYW5kIHJlcG8gb3BlcmF0aW9ucwotICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBXcmFuZ2xlciBiaW5kaW5nIHNoYXBlLCBXb3JrZXIgdHlwaW5nLCBSRVNUIGNvbmZpZ3VyYXRpb24gZ3VpZGFuY2UKCiMjIFNlZSBBbHNvCgotIFtDbG91ZGZsYXJlIEFydGlmYWN0cyBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYXJ0aWZhY3RzLykKLSBbQXJ0aWZhY3RzIEdpdCBQcm90b2NvbCBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYXJ0aWZhY3RzL2FwaS9naXQtcHJvdG9jb2wvKQotIFtBcnRpZmFjdEZTIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hcnRpZmFjdHMvYXBpL2FydGlmYWN0ZnMvKQotIFtDbG91ZGZsYXJlIFdvcmtlcnMgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvKQotIFtDbG91ZGZsYXJlIER1cmFibGUgT2JqZWN0cyBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vZHVyYWJsZS1vYmplY3RzLykKLSBbQ2xvdWRmbGFyZSBSMiBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjIvKQotIFtDbG91ZGZsYXJlIEQxIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9kMS8pCg==
+# Cloudflare Artifacts
+
+Store versioned file trees behind a repo-style interface that works from Workers, the REST API, and Git-compatible tooling.
+
+## Overview
+
+Use **Artifacts** when the thing you need to store is a versioned filesystem tree rather than a single object, key, or SQL row.
+
+Typical Artifacts use cases:
+- Git-style repositories
+- Per-agent, per-session, or per-task repos
+- Build outputs and deployment bundles
+- Checkpoints and generated assets
+- Shared file trees passed between developer tools and Workers
+
+Artifacts is a good fit when the same content needs to be addressable from **Workers**, the **REST API**, and **Git-compatible clients**.
+
+Artifacts is especially useful for agent and automation workflows where each unit of work should have its own isolated repo and token.
+
+**Prefer retrieval over memory** for current availability, authentication details, route shapes, limits, and pricing. Start at `https://developers.cloudflare.com/artifacts/`.
+
+## When to Use Artifacts
+
+| Need | Use | Why |
+|------|-----|-----|
+| Versioned file trees such as repos, build outputs, checkpoints, or generated assets | Artifacts | Artifacts stores and shares **versioned filesystem content** |
+| A git-compatible workflow with `clone`, `fetch`, `pull`, or `push` | Artifacts | Artifacts exposes **git-over-HTTPS remotes** and repo-scoped tokens |
+| The same artifact accessible from Workers, HTTP APIs, and developer tooling | Artifacts | Artifacts is available through a **Workers binding**, **REST API**, and **git-compatible interface** |
+| Large files by object key, app config by key, or relational app data | R2, KV, or D1 | Use storage products directly when you need **objects, key-value entries, or SQL rows**, not versioned file trees |
+
+## Recommended Workflow
+
+- Create one repo per agent, session, user workspace, or task when work should stay isolated.
+- Fork from a stable baseline when many repos need the same starter files or prompts.
+- Use branches only when collaborators share the same lifecycle and need to work in one repo.
+- Use namespaces to separate environments, teams, or high-rate workloads.
+
+## Quick Start
+
+**From a Worker:**
+
+```typescript
+interface Env {
+  ARTIFACTS: Artifacts;
+}
+
+const created = await env.ARTIFACTS.create("starter-repo");
+// created.remote -> git remote URL
+// created.token -> initial repo token
+```
+
+**From the REST API:**
+
+Use the namespace-scoped Artifacts base URL plus a gateway JWT. For imports from existing HTTPS remotes, use the REST API rather than the Workers binding.
+
+## Reading Order
+
+| Task | Read |
+|------|------|
+| Decide whether Artifacts is the right product | README only |
+| Create or manage repos from a Worker | README → configuration.md → api.md |
+| Integrate Artifacts from an external system | README → api.md |
+| Set up agent or sandbox workflows | README → configuration.md |
+| Verify exact auth, routes, limits, or pricing | Live docs first: `https://developers.cloudflare.com/artifacts/` |
+
+## In This Reference
+
+- **[api.md](api.md)** - Workers binding methods, REST routes, token and repo operations
+- **[configuration.md](configuration.md)** - Wrangler binding shape, Worker typing, REST configuration guidance
+
+## See Also
+
+- [Cloudflare Artifacts Docs](https://developers.cloudflare.com/artifacts/)
+- [Artifacts Git Protocol Docs](https://developers.cloudflare.com/artifacts/api/git-protocol/)
+- [ArtifactFS Docs](https://developers.cloudflare.com/artifacts/api/artifactfs/)
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
+- [Cloudflare Durable Objects Docs](https://developers.cloudflare.com/durable-objects/)
+- [Cloudflare R2 Docs](https://developers.cloudflare.com/r2/)
+- [Cloudflare D1 Docs](https://developers.cloudflare.com/d1/)

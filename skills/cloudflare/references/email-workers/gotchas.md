@@ -1,1 +1,125 @@
-IyBFbWFpbCBXb3JrZXJzIEdvdGNoYXMKCiMjIENyaXRpY2FsIElzc3VlcwoKIyMjIFJlYWRhYmxlU3RyZWFtIFNpbmdsZS1Vc2UKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HOiBTdHJlYW0gY29uc3VtZWQgdHdpY2UKY29uc3QgZW1haWwgPSBhd2FpdCBQb3N0YWxNaW1lLnBhcnNlKGF3YWl0IG5ldyBSZXNwb25zZShtZXNzYWdlLnJhdykuYXJyYXlCdWZmZXIoKSk7CmNvbnN0IHJhd1RleHQgPSBhd2FpdCBuZXcgUmVzcG9uc2UobWVzc2FnZS5yYXcpLnRleHQoKTsgLy8gRU1QVFkhCgovLyDinIUgQ09SUkVDVDogQnVmZmVyIGZpcnN0CmNvbnN0IGJ1ZmZlciA9IGF3YWl0IG5ldyBSZXNwb25zZShtZXNzYWdlLnJhdykuYXJyYXlCdWZmZXIoKTsKY29uc3QgZW1haWwgPSBhd2FpdCBQb3N0YWxNaW1lLnBhcnNlKGJ1ZmZlcik7CmNvbnN0IHJhd1RleHQgPSBuZXcgVGV4dERlY29kZXIoKS5kZWNvZGUoYnVmZmVyKTsKYGBgCgojIyMgY3R4LndhaXRVbnRpbCgpIEVycm9ycyBTaWxlbnQKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIEVycm9ycyBkcm9wcGVkIHNpbGVudGx5CmN0eC53YWl0VW50aWwoZmV0Y2god2ViaG9va1VybCwgeyBtZXRob2Q6ICdQT1NUJywgYm9keTogZGF0YSB9KSk7CgovLyDinIUgQ2F0Y2ggYW5kIGxvZwpjdHgud2FpdFVudGlsKAogIGZldGNoKHdlYmhvb2tVcmwsIHsgbWV0aG9kOiAnUE9TVCcsIGJvZHk6IGRhdGEgfSkKICAgIC5jYXRjaChlcnIgPT4gZW52LkVSUk9SX0xPRy5wdXQoYGVycm9yOiR7RGF0ZS5ub3coKX1gLCBlcnIubWVzc2FnZSkpCik7CmBgYAoKIyMgU2VjdXJpdHkKCiMjIyBFbnZlbG9wZSB2cyBIZWFkZXIgRnJvbSAoU3Bvb2ZpbmcpCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGVudmVsb3BlRnJvbSA9IG1lc3NhZ2UuZnJvbTsgICAgICAgICAgICAgICAvLyBTTVRQIE1BSUwgRlJPTSAodHJ1c3RlZCkKY29uc3QgaGVhZGVyRnJvbSA9IChhd2FpdCBQb3N0YWxNaW1lLnBhcnNlKGJ1ZmZlcikpLmZyb20/LmFkZHJlc3M7IC8vICh1bnRydXN0ZWQpCi8vIFVzZSBlbnZlbG9wZSBmb3Igc2VjdXJpdHkgZGVjaXNpb25zCmBgYAoKIyMjIElucHV0IFZhbGlkYXRpb24KCmBgYHR5cGVzY3JpcHQKaWYgKG1lc3NhZ2UucmF3U2l6ZSA+IDVfMDAwXzAwMCkgeyBtZXNzYWdlLnNldFJlamVjdCgnVG9vIGxhcmdlJyk7IHJldHVybjsgfQppZiAoKG1lc3NhZ2UuaGVhZGVycy5nZXQoJ1N1YmplY3QnKSB8fCAnJykubGVuZ3RoID4gMTAwMCkgewogIG1lc3NhZ2Uuc2V0UmVqZWN0KCdJbnZhbGlkIHN1YmplY3QnKTsgcmV0dXJuOwp9CmBgYAoKIyMjIERNQVJDIGZvciBSZXBsaWVzCgpSZXBsaWVzIGZhaWwgc2lsZW50bHkgd2l0aG91dCBETUFSQy4gVmVyaWZ5OiBgZGlnIFRYVCBfZG1hcmMuZXhhbXBsZS5jb21gCgojIyBQYXJzaW5nCgojIyMgQWRkcmVzcyBQYXJzaW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGVtYWlsID0gYXdhaXQgUG9zdGFsTWltZS5wYXJzZShidWZmZXIpOwpjb25zdCBmcm9tQWRkcmVzcyA9IGVtYWlsLmZyb20/LmFkZHJlc3MgfHwgJ3Vua25vd24nOwpjb25zdCB0b0FkZHJlc3NlcyA9IEFycmF5LmlzQXJyYXkoZW1haWwudG8pID8gZW1haWwudG8ubWFwKHQgPT4gdC5hZGRyZXNzKSA6IFtlbWFpbC50bz8uYWRkcmVzc107CmBgYAoKIyMjIENoYXJhY3RlciBFbmNvZGluZwoKTGV0IHBvc3RhbC1taW1lIGhhbmRsZSBkZWNvZGluZyAtIGBlbWFpbC5zdWJqZWN0YCwgYGVtYWlsLnRleHRgLCBgZW1haWwuaHRtbGAgYXJlIFVURi04LgoKIyMgQVBJIEJlaGF2aW9yCgojIyMgc2V0UmVqZWN0KCkgdnMgdGhyb3cKCmBgYHR5cGVzY3JpcHQKLy8gc2V0UmVqZWN0KCkgZm9yIFNNVFAgcmVqZWN0aW9uCmlmIChibG9ja0xpc3QuaW5jbHVkZXMobWVzc2FnZS5mcm9tKSkgeyBtZXNzYWdlLnNldFJlamVjdCgnQmxvY2tlZCcpOyByZXR1cm47IH0KCi8vIHRocm93IGZvciB3b3JrZXIgZXJyb3JzCmlmICghZW52LktWKSB0aHJvdyBuZXcgRXJyb3IoJ0tWIG5vdCBjb25maWd1cmVkJyk7CmBgYAoKIyMjIGZvcndhcmQoKSBPbmx5IFgtKiBIZWFkZXJzCgpgYGB0eXBlc2NyaXB0CmhlYWRlcnMuc2V0KCdYLVByb2Nlc3NlZC1CeScsICd3b3JrZXInKTsgIC8vIOKchSBXb3JrcwpoZWFkZXJzLnNldCgnU3ViamVjdCcsICdNb2RpZmllZCcpOyAgICAgICAgLy8g4p2MIERyb3BwZWQKYGBgCgojIyMgUmVwbHkgUmVxdWlyZXMgVmVyaWZpZWQgRG9tYWluCgpgYGB0eXBlc2NyaXB0Ci8vIFVzZSBzYW1lIGRvbWFpbiBhcyByZWNlaXZpbmcgYWRkcmVzcwpjb25zdCByZWNlaXZpbmdEb21haW4gPSBtZXNzYWdlLnRvLnNwbGl0KCdAJylbMV07CmF3YWl0IG1lc3NhZ2UucmVwbHkobmV3IEVtYWlsTWVzc2FnZShgbm9yZXBseUAke3JlY2VpdmluZ0RvbWFpbn1gLCBtZXNzYWdlLmZyb20sIHJhd01pbWUpKTsKYGBgCgojIyBQZXJmb3JtYW5jZQoKIyMjIENQVSBMaW1pdAoKYGBgdHlwZXNjcmlwdAovLyBTa2lwIHBhcnNpbmcgbGFyZ2UgZW1haWxzCmlmIChtZXNzYWdlLnJhd1NpemUgPiA1XzAwMF8wMDApIHsKICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoJ2luYm94QGV4YW1wbGUuY29tJyk7CiAgcmV0dXJuOwp9CmBgYAoKTW9uaXRvcjogYG5weCB3cmFuZ2xlciB0YWlsYAoKIyMgTGltaXRzCgp8IExpbWl0IHwgVmFsdWUgfAp8LS0tLS0tLXwtLS0tLS0tfAp8IE1heCBtZXNzYWdlIHNpemUgfCAyNSBNaUIgfAp8IE1heCBydWxlcy96b25lIHwgMjAwIHwKfCBDUFUgdGltZSAoZnJlZS9wYWlkKSB8IDEwbXMgLyAzMHMgZGVmYXVsdCwgNW1pbiBtYXggfAp8IFJlcGx5IFJlZmVyZW5jZXMgfCAxMDAgfAoKIyMgQ29tbW9uIEVycm9ycwoKfCBFcnJvciB8IEZpeCB8CnwtLS0tLS0tfC0tLS0tfAp8ICJBZGRyZXNzIG5vdCB2ZXJpZmllZCIgfCBBZGQgaW4gRW1haWwgUm91dGluZyBkYXNoYm9hcmQgfAp8ICJFeGNlZWRlZCBDUFUgdGltZSIgfCBVc2UgYGN0eC53YWl0VW50aWwoKWAgb3IgdXBncmFkZSB8CnwgIlN0cmVhbSBpcyBsb2NrZWQiIHwgQnVmZmVyIGBtZXNzYWdlLnJhd2AgZmlyc3QgfAp8IFNpbGVudCByZXBseSBmYWlsdXJlIHwgQ2hlY2sgRE1BUkMgcmVjb3JkcyB8Cg==
+# Email Workers Gotchas
+
+## Critical Issues
+
+### ReadableStream Single-Use
+
+```typescript
+// ❌ WRONG: Stream consumed twice
+const email = await PostalMime.parse(await new Response(message.raw).arrayBuffer());
+const rawText = await new Response(message.raw).text(); // EMPTY!
+
+// ✅ CORRECT: Buffer first
+const buffer = await new Response(message.raw).arrayBuffer();
+const email = await PostalMime.parse(buffer);
+const rawText = new TextDecoder().decode(buffer);
+```
+
+### ctx.waitUntil() Errors Silent
+
+```typescript
+// ❌ Errors dropped silently
+ctx.waitUntil(fetch(webhookUrl, { method: 'POST', body: data }));
+
+// ✅ Catch and log
+ctx.waitUntil(
+  fetch(webhookUrl, { method: 'POST', body: data })
+    .catch(err => env.ERROR_LOG.put(`error:${Date.now()}`, err.message))
+);
+```
+
+## Security
+
+### Envelope vs Header From (Spoofing)
+
+```typescript
+const envelopeFrom = message.from;               // SMTP MAIL FROM (trusted)
+const headerFrom = (await PostalMime.parse(buffer)).from?.address; // (untrusted)
+// Use envelope for security decisions
+```
+
+### Input Validation
+
+```typescript
+if (message.rawSize > 5_000_000) { message.setReject('Too large'); return; }
+if ((message.headers.get('Subject') || '').length > 1000) {
+  message.setReject('Invalid subject'); return;
+}
+```
+
+### DMARC for Replies
+
+Replies fail silently without DMARC. Verify: `dig TXT _dmarc.example.com`
+
+## Parsing
+
+### Address Parsing
+
+```typescript
+const email = await PostalMime.parse(buffer);
+const fromAddress = email.from?.address || 'unknown';
+const toAddresses = Array.isArray(email.to) ? email.to.map(t => t.address) : [email.to?.address];
+```
+
+### Character Encoding
+
+Let postal-mime handle decoding - `email.subject`, `email.text`, `email.html` are UTF-8.
+
+## API Behavior
+
+### setReject() vs throw
+
+```typescript
+// setReject() for SMTP rejection
+if (blockList.includes(message.from)) { message.setReject('Blocked'); return; }
+
+// throw for worker errors
+if (!env.KV) throw new Error('KV not configured');
+```
+
+### forward() Only X-* Headers
+
+```typescript
+headers.set('X-Processed-By', 'worker');  // ✅ Works
+headers.set('Subject', 'Modified');        // ❌ Dropped
+```
+
+### Reply Requires Verified Domain
+
+```typescript
+// Use same domain as receiving address
+const receivingDomain = message.to.split('@')[1];
+await message.reply(new EmailMessage(`noreply@${receivingDomain}`, message.from, rawMime));
+```
+
+## Performance
+
+### CPU Limit
+
+```typescript
+// Skip parsing large emails
+if (message.rawSize > 5_000_000) {
+  await message.forward('inbox@example.com');
+  return;
+}
+```
+
+Monitor: `npx wrangler tail`
+
+## Limits
+
+| Limit | Value |
+|-------|-------|
+| Max message size | 25 MiB |
+| Max rules/zone | 200 |
+| CPU time (free/paid) | 10ms / 30s default, 5min max |
+| Reply References | 100 |
+
+## Common Errors
+
+| Error | Fix |
+|-------|-----|
+| "Address not verified" | Add in Email Routing dashboard |
+| "Exceeded CPU time" | Use `ctx.waitUntil()` or upgrade |
+| "Stream is locked" | Buffer `message.raw` first |
+| Silent reply failure | Check DMARC records |

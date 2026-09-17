@@ -1,1 +1,94 @@
-IyBDbG91ZGZsYXJlIFdvcmtlcnMgQW5hbHl0aWNzIEVuZ2luZSBSZWZlcmVuY2UKCkV4cGVydCBndWlkYW5jZSBmb3IgaW1wbGVtZW50aW5nIHVubGltaXRlZC1jYXJkaW5hbGl0eSBhbmFseXRpY3MgYXQgc2NhbGUgdXNpbmcgQ2xvdWRmbGFyZSBXb3JrZXJzIEFuYWx5dGljcyBFbmdpbmUuCgojIyBXaGF0IGlzIEFuYWx5dGljcyBFbmdpbmU/CgpUaW1lLXNlcmllcyBhbmFseXRpY3MgZGF0YWJhc2UgZGVzaWduZWQgZm9yIGhpZ2gtY2FyZGluYWxpdHkgZGF0YSAobWlsbGlvbnMgb2YgdW5pcXVlIGRpbWVuc2lvbnMpLiBXcml0ZSBkYXRhIHBvaW50cyBmcm9tIFdvcmtlcnMsIHF1ZXJ5IHZpYSBTUUwgQVBJLiBVc2UgZm9yOgotIEN1c3RvbSB1c2VyLWZhY2luZyBhbmFseXRpY3MgZGFzaGJvYXJkcwotIFVzYWdlLWJhc2VkIGJpbGxpbmcgJiBtZXRlcmluZwotIFBlci1jdXN0b21lci9wZXItZmVhdHVyZSBtb25pdG9yaW5nCi0gSGlnaC1mcmVxdWVuY3kgaW5zdHJ1bWVudGF0aW9uIHdpdGhvdXQgcGVyZm9ybWFuY2UgaW1wYWN0CgoqKktleSBDYXBhYmlsaXR5OioqIFRyYWNrIG1ldHJpY3Mgd2l0aCB1bmxpbWl0ZWQgdW5pcXVlIHZhbHVlcyAoZS5nLiwgbWlsbGlvbnMgb2YgdXNlciBJRHMsIEFQSSBrZXlzKSB3aXRob3V0IHBlcmZvcm1hbmNlIGRlZ3JhZGF0aW9uLgoKIyMgQ29yZSBDb25jZXB0cwoKfCBDb25jZXB0IHwgRGVzY3JpcHRpb24gfCBFeGFtcGxlIHwKfC0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tfC0tLS0tLS0tLXwKfCAqKkRhdGFzZXQqKiB8IExvZ2ljYWwgdGFibGUgZm9yIHJlbGF0ZWQgbWV0cmljcyB8IGBhcGlfcmVxdWVzdHNgLCBgdXNlcl9ldmVudHNgIHwKfCAqKkRhdGEgUG9pbnQqKiB8IFNpbmdsZSBtZWFzdXJlbWVudCB3aXRoIHRpbWVzdGFtcCB8IE9uZSBBUEkgcmVxdWVzdCdzIG1ldHJpY3MgfAp8ICoqQmxvYnMqKiB8IFN0cmluZyBkaW1lbnNpb25zIChtYXggMjApIHwgZW5kcG9pbnQsIG1ldGhvZCwgc3RhdHVzLCB1c2VyX2lkIHwKfCAqKkRvdWJsZXMqKiB8IE51bWVyaWMgdmFsdWVzIChtYXggMjApIHwgbGF0ZW5jeV9tcywgcmVxdWVzdF9jb3VudCwgYnl0ZXMgfAp8ICoqSW5kZXhlcyoqIHwgRmlsdGVyZWQgYmxvYnMgZm9yIGVmZmljaWVudCBxdWVyaWVzIHwgY3VzdG9tZXJfaWQsIGFwaV9rZXkgfAoKIyMgUmVhZGluZyBPcmRlcgoKfCBUYXNrIHwgU3RhcnQgSGVyZSB8IFRoZW4gUmVhZCB8CnwtLS0tLS18LS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tfAp8ICoqRmlyc3QtdGltZSBzZXR1cCoqIHwgW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIOKGkiBbYXBpLm1kXShhcGkubWQpIOKGkiBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSB8IHwKfCAqKldyaXRpbmcgZGF0YSoqIHwgW2FwaS5tZF0oYXBpLm1kKSDihpIgW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpIChzYW1wbGluZykgfCB8CnwgKipRdWVyeWluZyBkYXRhKiogfCBbYXBpLm1kXShhcGkubWQpIChTUUwgQVBJKSDihpIgW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkgKGV4YW1wbGVzKSB8IHwKfCAqKkRlYnVnZ2luZyoqIHwgW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpIOKGkiBbYXBpLm1kXShhcGkubWQpIChsaW1pdHMpIHwgfAp8ICoqT3B0aW1pemF0aW9uKiogfCBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSAoYW50aS1wYXR0ZXJucykg4oaSIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSB8IHwKCiMjIFdoZW4gdG8gVXNlIEFuYWx5dGljcyBFbmdpbmUKCmBgYApOZWVkIHRvIHRyYWNrIG1ldHJpY3M/IOKGkiBZZXMKICDihpMKTWlsbGlvbnMgb2YgdW5pcXVlIGRpbWVuc2lvbiB2YWx1ZXM/IOKGkiBZZXMKICAgIOKGkwogIE5lZWQgcmVhbC10aW1lIHF1ZXJpZXM/IOKGkiBZZXMKICAgICAg4oaTCiAgICBVc2UgQW5hbHl0aWNzIEVuZ2luZSDinJMKCkFsdGVybmF0aXZlIHNjZW5hcmlvczoKLSBMb3cgY2FyZGluYWxpdHkgKDwxMGsgdW5pcXVlIHZhbHVlcykg4oaSIFdvcmtlcnMgQW5hbHl0aWNzIChmcmVlIHRpZXIpCi0gQ29tcGxleCBqb2lucy9yZWxhdGlvbnMg4oaSIEQxIERhdGFiYXNlCi0gTG9ncy9kZWJ1Z2dpbmcg4oaSIFRhaWwgV29ya2VycyAobG9ncHVzaCkKLSBFeHRlcm5hbCB0b29scyDihpIgU2VuZCB0byBleHRlcm5hbCBhbmFseXRpY3MgKERhdGFkb2csIGV0Yy4pCmBgYAoKIyMgUXVpY2sgU3RhcnQKCjEuIEFkZCBiaW5kaW5nIHRvIGB3cmFuZ2xlci5qc29uY2A6CmBgYGpzb25jCnsKICAiYW5hbHl0aWNzX2VuZ2luZV9kYXRhc2V0cyI6IFsKICAgIHsgImJpbmRpbmciOiAiQU5BTFlUSUNTIiwgImRhdGFzZXQiOiAibXlfZXZlbnRzIiB9CiAgXQp9CmBgYAoKMi4gV3JpdGUgZGF0YSBwb2ludHMgKGZpcmUtYW5kLWZvcmdldCwgbm8gYXdhaXQpOgpgYGB0eXBlc2NyaXB0CmVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoewogIGJsb2JzOiBbIi9hcGkvdXNlcnMiLCAiR0VUIiwgIjIwMCJdLAogIGRvdWJsZXM6IFsxNDUuMiwgMV0sICAvLyBsYXRlbmN5X21zLCBjb3VudAogIGluZGV4ZXM6IFtjdXN0b21lcklkXQp9KTsKYGBgCgozLiBRdWVyeSB2aWEgU1FMIEFQSSAoSFRUUCk6CmBgYHNxbApTRUxFQ1QgYmxvYjEsIFNVTShkb3VibGUyKSBBUyB0b3RhbF9yZXF1ZXN0cwpGUk9NIG15X2V2ZW50cwpXSEVSRSBpbmRleDEgPSAnY3VzdG9tZXJfMTIzJwogIEFORCB0aW1lc3RhbXAgPj0gTk9XKCkgLSBJTlRFUlZBTCAnNycgREFZCkdST1VQIEJZIGJsb2IxCk9SREVSIEJZIHRvdGFsX3JlcXVlc3RzIERFU0MKYGBgCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSAqKltjb25maWd1cmF0aW9uLm1kXShjb25maWd1cmF0aW9uLm1kKSoqIC0gU2V0dXAsIGJpbmRpbmdzLCBUeXBlU2NyaXB0IHR5cGVzLCBsaW1pdHMKLSAqKlthcGkubWRdKGFwaS5tZCkqKiAtIGB3cml0ZURhdGFQb2ludCgpYCwgU1FMIEFQSSwgcXVlcnkgc3ludGF4Ci0gKipbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSoqIC0gVXNlIGNhc2VzLCBleGFtcGxlcywgYW50aS1wYXR0ZXJucwotICoqW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpKiogLSBTYW1wbGluZywgaW5kZXggc2VsZWN0aW9uLCB0cm91Ymxlc2hvb3RpbmcKCiMjIFNlZSBBbHNvCgotIFtDbG91ZGZsYXJlIEFuYWx5dGljcyBFbmdpbmUgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FuYWx5dGljcy9hbmFseXRpY3MtZW5naW5lLykKLSBbR3JhcGhRTCBBbmFseXRpY3MgQVBJIFJlZmVyZW5jZV0oLi4vZ3JhcGhxbC1hcGkvKSAtIFF1ZXJ5IGJ1aWx0LWluIENsb3VkZmxhcmUgYW5hbHl0aWNzIChIVFRQLCBXb3JrZXJzLCBETlMsIEZpcmV3YWxsLCBldGMuKQotIFtPYnNlcnZhYmlsaXR5IFJlZmVyZW5jZV0oLi4vb2JzZXJ2YWJpbGl0eS8pIC0gV29ya2VycyBMb2dzLCBUcmFjZXMsIGFuZCByZWFsLXRpbWUgZGVidWdnaW5nCg==
+# Cloudflare Workers Analytics Engine Reference
+
+Expert guidance for implementing unlimited-cardinality analytics at scale using Cloudflare Workers Analytics Engine.
+
+## What is Analytics Engine?
+
+Time-series analytics database designed for high-cardinality data (millions of unique dimensions). Write data points from Workers, query via SQL API. Use for:
+- Custom user-facing analytics dashboards
+- Usage-based billing & metering
+- Per-customer/per-feature monitoring
+- High-frequency instrumentation without performance impact
+
+**Key Capability:** Track metrics with unlimited unique values (e.g., millions of user IDs, API keys) without performance degradation.
+
+## Core Concepts
+
+| Concept | Description | Example |
+|---------|-------------|---------|
+| **Dataset** | Logical table for related metrics | `api_requests`, `user_events` |
+| **Data Point** | Single measurement with timestamp | One API request's metrics |
+| **Blobs** | String dimensions (max 20) | endpoint, method, status, user_id |
+| **Doubles** | Numeric values (max 20) | latency_ms, request_count, bytes |
+| **Indexes** | Filtered blobs for efficient queries | customer_id, api_key |
+
+## Reading Order
+
+| Task | Start Here | Then Read |
+|------|------------|-----------|
+| **First-time setup** | [configuration.md](configuration.md) → [api.md](api.md) → [patterns.md](patterns.md) | |
+| **Writing data** | [api.md](api.md) → [gotchas.md](gotchas.md) (sampling) | |
+| **Querying data** | [api.md](api.md) (SQL API) → [patterns.md](patterns.md) (examples) | |
+| **Debugging** | [gotchas.md](gotchas.md) → [api.md](api.md) (limits) | |
+| **Optimization** | [patterns.md](patterns.md) (anti-patterns) → [gotchas.md](gotchas.md) | |
+
+## When to Use Analytics Engine
+
+```
+Need to track metrics? → Yes
+  ↓
+Millions of unique dimension values? → Yes
+    ↓
+  Need real-time queries? → Yes
+      ↓
+    Use Analytics Engine ✓
+
+Alternative scenarios:
+- Low cardinality (<10k unique values) → Workers Analytics (free tier)
+- Complex joins/relations → D1 Database
+- Logs/debugging → Tail Workers (logpush)
+- External tools → Send to external analytics (Datadog, etc.)
+```
+
+## Quick Start
+
+1. Add binding to `wrangler.jsonc`:
+```jsonc
+{
+  "analytics_engine_datasets": [
+    { "binding": "ANALYTICS", "dataset": "my_events" }
+  ]
+}
+```
+
+2. Write data points (fire-and-forget, no await):
+```typescript
+env.ANALYTICS.writeDataPoint({
+  blobs: ["/api/users", "GET", "200"],
+  doubles: [145.2, 1],  // latency_ms, count
+  indexes: [customerId]
+});
+```
+
+3. Query via SQL API (HTTP):
+```sql
+SELECT blob1, SUM(double2) AS total_requests
+FROM my_events
+WHERE index1 = 'customer_123'
+  AND timestamp >= NOW() - INTERVAL '7' DAY
+GROUP BY blob1
+ORDER BY total_requests DESC
+```
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Setup, bindings, TypeScript types, limits
+- **[api.md](api.md)** - `writeDataPoint()`, SQL API, query syntax
+- **[patterns.md](patterns.md)** - Use cases, examples, anti-patterns
+- **[gotchas.md](gotchas.md)** - Sampling, index selection, troubleshooting
+
+## See Also
+
+- [Cloudflare Analytics Engine Docs](https://developers.cloudflare.com/analytics/analytics-engine/)
+- [GraphQL Analytics API Reference](../graphql-api/) - Query built-in Cloudflare analytics (HTTP, Workers, DNS, Firewall, etc.)
+- [Observability Reference](../observability/) - Workers Logs, Traces, and real-time debugging

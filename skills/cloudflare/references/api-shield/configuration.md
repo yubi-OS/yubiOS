@@ -1,1 +1,192 @@
-IyBDb25maWd1cmF0aW9uCgojIyBTY2hlbWEgVmFsaWRhdGlvbiAyLjAgU2V0dXAKCj4g4pqg77iPICoqQ2xhc3NpYyBTY2hlbWEgVmFsaWRhdGlvbiBkZXByZWNhdGVkLioqIFVzZSBTY2hlbWEgVmFsaWRhdGlvbiAyLjAuCgoqKlVwbG9hZCBzY2hlbWEgKERhc2hib2FyZCk6KioKYGBgClNlY3VyaXR5ID4gQVBJIFNoaWVsZCA+IFNjaGVtYSBWYWxpZGF0aW9uID4gQWRkIHZhbGlkYXRpb24KLSBVcGxvYWQgLnltbC8ueWFtbC8uanNvbiAoT3BlbkFQSSB2My4wKQotIEVuZHBvaW50cyBhdXRvLWFkZGVkIHRvIEVuZHBvaW50IE1hbmFnZW1lbnQKLSBBY3Rpb246IExvZyB8IEJsb2NrIHwgTm9uZQotIEJvZHkgaW5zcGVjdGlvbjogSlNPTiBwYXlsb2FkcwpgYGAKCioqQ2hhbmdlIHZhbGlkYXRpb24gYWN0aW9uOioqCmBgYApTZWN1cml0eSA+IEFQSSBTaGllbGQgPiBTZXR0aW5ncyA+IFNjaGVtYSBWYWxpZGF0aW9uClBlci1lbmRwb2ludDogRmlsdGVyIOKGkiBlbGxpcHNlcyDihpIgQ2hhbmdlIGFjdGlvbgpEZWZhdWx0IGFjdGlvbjogU2V0IGdsb2JhbCBtaXRpZ2F0aW9uIGFjdGlvbgpgYGAKCioqTWlncmF0aW9uIGZyb20gQ2xhc3NpYzoqKgpgYGAKMS4gRXhwb3J0IGV4aXN0aW5nIHNjaGVtYSAoaWYgYXZhaWxhYmxlKQoyLiBEZWxldGUgYWxsIENsYXNzaWMgc2NoZW1hIHZhbGlkYXRpb24gcnVsZXMKMy4gV2FpdCA1IG1pbiBmb3IgY2FjaGUgY2xlYXIKNC4gUmUtdXBsb2FkIHZpYSBTY2hlbWEgVmFsaWRhdGlvbiAyLjAgaW50ZXJmYWNlCjUuIFZlcmlmeSBpbiBTZWN1cml0eSA+IEV2ZW50cwpgYGAKCioqRmFsbHRocm91Z2ggcnVsZSoqIChjYXRjaC1hbGwgdW5rbm93biBlbmRwb2ludHMpOgpgYGAKU2VjdXJpdHkgPiBBUEkgU2hpZWxkID4gU2V0dGluZ3MgPiBGYWxsdGhyb3VnaCA+IFVzZSBUZW1wbGF0ZQotIFNlbGVjdCBob3N0bmFtZXMKLSBDcmVhdGUgcnVsZSB3aXRoIGNmLmFwaV9nYXRld2F5LmZhbGx0aHJvdWdoX3RyaWdnZXJlZAotIEFjdGlvbjogTG9nIChkaXNjb3Zlcikgb3IgQmxvY2sgKHN0cmljdCkKYGBgCgoqKkJvZHkgaW5zcGVjdGlvbjoqKiBTdXBwb3J0cyBgYXBwbGljYXRpb24vanNvbmAsIGAqLypgLCBgYXBwbGljYXRpb24vKmAuIERpc2FibGUgb3JpZ2luIE1JTUUgc25pZmZpbmcgdG8gcHJldmVudCBieXBhc3Nlcy4KCiMjIEpXVCBWYWxpZGF0aW9uCgoqKlNldHVwIHRva2VuIGNvbmZpZzoqKgpgYGAKU2VjdXJpdHkgPiBBUEkgU2hpZWxkID4gU2V0dGluZ3MgPiBKV1QgU2V0dGluZ3MgPiBBZGQgY29uZmlndXJhdGlvbgotIE5hbWU6ICJBdXRoMCBKV1QgQ29uZmlnIgotIExvY2F0aW9uOiBIZWFkZXIvQ29va2llICsgbmFtZSAoZS5nLiwgIkF1dGhvcml6YXRpb24iKQotIEpXS1M6IFBhc3RlIHB1YmxpYyBrZXlzIGZyb20gSWRQCmBgYAoKKipDcmVhdGUgdmFsaWRhdGlvbiBydWxlOioqCmBgYApTZWN1cml0eSA+IEFQSSBTaGllbGQgPiBBUEkgUnVsZXMgPiBBZGQgcnVsZQotIEhvc3RuYW1lOiBhcGkuZXhhbXBsZS5jb20KLSBEZXNlbGVjdCBlbmRwb2ludHMgdG8gaWdub3JlCi0gVG9rZW4gY29uZmlnOiBTZWxlY3QgY29uZmlnCi0gRW5mb3JjZSBwcmVzZW5jZTogSWdub3JlIG9yIE1hcmsgYXMgbm9uLWNvbXBsaWFudAotIEFjdGlvbjogTG9nL0Jsb2NrL0NoYWxsZW5nZQpgYGAKCioqUmF0ZSBsaW1pdCBieSBKV1QgY2xhaW06KioKYGBgd2lyZWZpbHRlcgpsb29rdXBfanNvbl9zdHJpbmcoaHR0cC5yZXF1ZXN0Lmp3dC5jbGFpbXNbIntjb25maWdfaWR9Il1bMF0sICJzdWIiKQpgYGAKCioqU3BlY2lhbCBjYXNlczoqKgotIFR3byBKV1RzLCBkaWZmZXJlbnQgSWRQczogQ3JlYXRlIDIgY29uZmlncywgc2VsZWN0IGJvdGgsICJWYWxpZGF0ZSBhbGwiCi0gSWRQIG1pZ3JhdGlvbjogMiBjb25maWdzICsgMiBydWxlcywgYWRqdXN0IGFjdGlvbnMgcGVyIHN0YXRlCi0gQmVhcmVyIHByZWZpeDogQVBJIFNoaWVsZCBoYW5kbGVzIHdpdGgvd2l0aG91dAotIE5lc3RlZCBjbGFpbXM6IERvdCBub3RhdGlvbiBgdXNlci5lbWFpbGAKCiMjIE11dHVhbCBUTFMgKG1UTFMpCgoqKlNldHVwOioqCmBgYApTU0wvVExTID4gQ2xpZW50IENlcnRpZmljYXRlcyA+IENyZWF0ZSBDZXJ0aWZpY2F0ZQotIEdlbmVyYXRlIENGLW1hbmFnZWQgQ0EgKGFsbCBwbGFucykKLSBVcGxvYWQgY3VzdG9tIENBIChFbnRlcnByaXNlLCBtYXggNSkKYGBgCgoqKkNvbmZpZ3VyZSBtVExTIHJ1bGU6KioKYGBgClNlY3VyaXR5ID4gQVBJIFNoaWVsZCA+IG1UTFMKLSBTZWxlY3QgaG9zdG5hbWUocykKLSBDaG9vc2UgY2VydGlmaWNhdGUocykKLSBBY3Rpb246IEJsb2NrL0xvZy9DaGFsbGVuZ2UKYGBgCgoqKlRlc3Q6KioKYGBgYmFzaApvcGVuc3NsIHJlcSAteDUwOSAtbmV3a2V5IHJzYTo0MDk2IC1rZXlvdXQgY2xpZW50LWtleS5wZW0gLW91dCBjbGllbnQtY2VydC5wZW0gLWRheXMgMzY1CmN1cmwgaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20vZW5kcG9pbnQgLS1jZXJ0IGNsaWVudC1jZXJ0LnBlbSAtLWtleSBjbGllbnQta2V5LnBlbQpgYGAKCiMjIFNlc3Npb24gSWRlbnRpZmllcnMKCkNyaXRpY2FsIGZvciBCT0xBIERldGVjdGlvbiwgU2VxdWVuY2UgTWl0aWdhdGlvbiwgYW5kIGFuYWx5dGljcy4gQ29uZmlndXJlIGhlYWRlci9jb29raWUgdGhhdCB1bmlxdWVseSBJRHMgQVBJIHVzZXJzLgoKKipFeGFtcGxlczoqKiBKV1Qgc3ViIGNsYWltLCBzZXNzaW9uIHRva2VuLCBBUEkga2V5LCBjdXN0b20gdXNlciBJRCBoZWFkZXIKCioqQ29uZmlndXJlOioqCmBgYApTZWN1cml0eSA+IEFQSSBTaGllbGQgPiBTZXR0aW5ncyA+IFNlc3Npb24gSWRlbnRpZmllcnMKLSBUeXBlOiBIZWFkZXIvQ29va2llCi0gTmFtZTogIlgtVXNlci1JRCIgb3IgIkF1dGhvcml6YXRpb24iCmBgYAoKIyMgQk9MQSBEZXRlY3Rpb24KCkRldGVjdHMgQnJva2VuIE9iamVjdCBMZXZlbCBBdXRob3JpemF0aW9uIGF0dGFja3MgKGVudW1lcmF0aW9uICsgcGFyYW1ldGVyIHBvbGx1dGlvbikuCgoqKkVuYWJsZToqKgpgYGAKU2VjdXJpdHkgPiBBUEkgU2hpZWxkID4gU2NoZW1hIFZhbGlkYXRpb24gPiBbU2VsZWN0IFNjaGVtYV0gPiBCT0xBIERldGVjdGlvbgotIEVuYWJsZSBkZXRlY3Rpb24KLSBUaHJlc2hvbGQ6IFNlbnNpdGl2aXR5IGxldmVsIChMb3cvTWVkaXVtL0hpZ2gpCi0gQWN0aW9uOiBMb2cgb3IgQmxvY2sKYGBgCgoqKlJlcXVpcmVtZW50czoqKgotIFNjaGVtYSBWYWxpZGF0aW9uIDIuMCBlbmFibGVkCi0gU2Vzc2lvbiBpZGVudGlmaWVycyBjb25maWd1cmVkCi0gTWluaW11bSB0cmFmZmljOiAxMDAwKyByZXF1ZXN0cy9kYXkgcGVyIGVuZHBvaW50CgojIyBBdXRoZW50aWNhdGlvbiBQb3N0dXJlCgpJZGVudGlmaWVzIHVucHJvdGVjdGVkIG9yIGluY29uc2lzdGVudGx5IHByb3RlY3RlZCBlbmRwb2ludHMuCgoqKlZpZXcgcmVwb3J0OioqCmBgYApTZWN1cml0eSA+IEFQSSBTaGllbGQgPiBBdXRoZW50aWNhdGlvbiBQb3N0dXJlCi0gU2hvd3MgZW5kcG9pbnRzIGxhY2tpbmcgSldUL21UTFMKLSBIaWdobGlnaHRzIG1peGVkIGF1dGhlbnRpY2F0aW9uIHBhdHRlcm5zCmBgYAoKKipSZW1lZGlhdGU6KioKMS4gUmV2aWV3IGZsYWdnZWQgZW5kcG9pbnRzCjIuIEFkZCBKV1QgdmFsaWRhdGlvbiBydWxlcwozLiBDb25maWd1cmUgbVRMUyBmb3Igc2Vuc2l0aXZlIGVuZHBvaW50cwo0LiBNb25pdG9yIHBvc3R1cmUgc2NvcmUKCiMjIFZvbHVtZXRyaWMgQWJ1c2UgKyBHcmFwaFFMCgoqKlZvbHVtZXRyaWMgQWJ1c2UgRGV0ZWN0aW9uOioqCmBTZWN1cml0eSA+IEFQSSBTaGllbGQgPiBTZXR0aW5ncyA+IFZvbHVtZXRyaWMgQWJ1c2UgRGV0ZWN0aW9uYAotIEVuYWJsZSBwZXItZW5kcG9pbnQgbW9uaXRvcmluZywgc2V0IHRocmVzaG9sZHMsIGFjdGlvbjogTG9nIHwgQ2hhbGxlbmdlIHwgQmxvY2sKCioqR3JhcGhRTCBQcm90ZWN0aW9uOioqCmBTZWN1cml0eSA+IEFQSSBTaGllbGQgPiBTZXR0aW5ncyA+IEdyYXBoUUwgUHJvdGVjdGlvbmAKLSBNYXggcXVlcnkgZGVwdGg6IDEwLCBtYXggc2l6ZTogMTAwS0IsIGJsb2NrIGludHJvc3BlY3Rpb24gKHByb2R1Y3Rpb24pCgojIyBUZXJyYWZvcm0KCmBgYGhjbAojIFNlc3Npb24gaWRlbnRpZmllcgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9hcGlfc2hpZWxkIiAibWFpbiIgewogIHpvbmVfaWQgPSB2YXIuem9uZV9pZAogIGF1dGhfaWRfY2hhcmFjdGVyaXN0aWNzIHsKICAgIHR5cGUgPSAiaGVhZGVyIgogICAgbmFtZSA9ICJBdXRob3JpemF0aW9uIgogIH0KfQoKIyBBZGQgZW5kcG9pbnQKcmVzb3VyY2UgImNsb3VkZmxhcmVfYXBpX3NoaWVsZF9vcGVyYXRpb24iICJ1c2Vyc19nZXQiIHsKICB6b25lX2lkICA9IHZhci56b25lX2lkCiAgbWV0aG9kICAgPSAiR0VUIgogIGhvc3QgICAgID0gImFwaS5leGFtcGxlLmNvbSIKICBlbmRwb2ludCA9ICIvYXBpL3VzZXJzL3tpZH0iCn0KCiMgSldUIHZhbGlkYXRpb24gcnVsZQpyZXNvdXJjZSAiY2xvdWRmbGFyZV9ydWxlc2V0IiAiand0X3ZhbGlkYXRpb24iIHsKICB6b25lX2lkID0gdmFyLnpvbmVfaWQKICBuYW1lICAgID0gIkFQSSBKV1QgVmFsaWRhdGlvbiIKICBraW5kICAgID0gInpvbmUiCiAgcGhhc2UgICA9ICJodHRwX3JlcXVlc3RfZmlyZXdhbGxfY3VzdG9tIgoKICBydWxlcyB7CiAgICBhY3Rpb24gPSAiYmxvY2siCiAgICBleHByZXNzaW9uID0gIihodHRwLmhvc3QgZXEgXCJhcGkuZXhhbXBsZS5jb21cIiBhbmQgbm90IGlzX2p3dF92YWxpZChodHRwLnJlcXVlc3Quand0LnBheWxvYWRbXCJ7Y29uZmlnX2lkfVwiXVswXSkpIgogICAgZGVzY3JpcHRpb24gPSAiQmxvY2sgaW52YWxpZCBKV1RzIgogIH0KfQpgYGAKCiMjIFNlZSBBbHNvCgotIFthcGkubWRdKGFwaS5tZCkgLSBBUEkgZW5kcG9pbnRzIGFuZCBXb3JrZXJzIGludGVncmF0aW9uCi0gW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkgLSBGaXJld2FsbCBydWxlcyBhbmQgZGVwbG95bWVudCBwYXR0ZXJucwotIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSAtIFRyb3VibGVzaG9vdGluZyBhbmQgbGltaXRzCg==
+# Configuration
+
+## Schema Validation 2.0 Setup
+
+> ⚠️ **Classic Schema Validation deprecated.** Use Schema Validation 2.0.
+
+**Upload schema (Dashboard):**
+```
+Security > API Shield > Schema Validation > Add validation
+- Upload .yml/.yaml/.json (OpenAPI v3.0)
+- Endpoints auto-added to Endpoint Management
+- Action: Log | Block | None
+- Body inspection: JSON payloads
+```
+
+**Change validation action:**
+```
+Security > API Shield > Settings > Schema Validation
+Per-endpoint: Filter → ellipses → Change action
+Default action: Set global mitigation action
+```
+
+**Migration from Classic:**
+```
+1. Export existing schema (if available)
+2. Delete all Classic schema validation rules
+3. Wait 5 min for cache clear
+4. Re-upload via Schema Validation 2.0 interface
+5. Verify in Security > Events
+```
+
+**Fallthrough rule** (catch-all unknown endpoints):
+```
+Security > API Shield > Settings > Fallthrough > Use Template
+- Select hostnames
+- Create rule with cf.api_gateway.fallthrough_triggered
+- Action: Log (discover) or Block (strict)
+```
+
+**Body inspection:** Supports `application/json`, `*/*`, `application/*`. Disable origin MIME sniffing to prevent bypasses.
+
+## JWT Validation
+
+**Setup token config:**
+```
+Security > API Shield > Settings > JWT Settings > Add configuration
+- Name: "Auth0 JWT Config"
+- Location: Header/Cookie + name (e.g., "Authorization")
+- JWKS: Paste public keys from IdP
+```
+
+**Create validation rule:**
+```
+Security > API Shield > API Rules > Add rule
+- Hostname: api.example.com
+- Deselect endpoints to ignore
+- Token config: Select config
+- Enforce presence: Ignore or Mark as non-compliant
+- Action: Log/Block/Challenge
+```
+
+**Rate limit by JWT claim:**
+```wirefilter
+lookup_json_string(http.request.jwt.claims["{config_id}"][0], "sub")
+```
+
+**Special cases:**
+- Two JWTs, different IdPs: Create 2 configs, select both, "Validate all"
+- IdP migration: 2 configs + 2 rules, adjust actions per state
+- Bearer prefix: API Shield handles with/without
+- Nested claims: Dot notation `user.email`
+
+## Mutual TLS (mTLS)
+
+**Setup:**
+```
+SSL/TLS > Client Certificates > Create Certificate
+- Generate CF-managed CA (all plans)
+- Upload custom CA (Enterprise, max 5)
+```
+
+**Configure mTLS rule:**
+```
+Security > API Shield > mTLS
+- Select hostname(s)
+- Choose certificate(s)
+- Action: Block/Log/Challenge
+```
+
+**Test:**
+```bash
+openssl req -x509 -newkey rsa:4096 -keyout client-key.pem -out client-cert.pem -days 365
+curl https://api.example.com/endpoint --cert client-cert.pem --key client-key.pem
+```
+
+## Session Identifiers
+
+Critical for BOLA Detection, Sequence Mitigation, and analytics. Configure header/cookie that uniquely IDs API users.
+
+**Examples:** JWT sub claim, session token, API key, custom user ID header
+
+**Configure:**
+```
+Security > API Shield > Settings > Session Identifiers
+- Type: Header/Cookie
+- Name: "X-User-ID" or "Authorization"
+```
+
+## BOLA Detection
+
+Detects Broken Object Level Authorization attacks (enumeration + parameter pollution).
+
+**Enable:**
+```
+Security > API Shield > Schema Validation > [Select Schema] > BOLA Detection
+- Enable detection
+- Threshold: Sensitivity level (Low/Medium/High)
+- Action: Log or Block
+```
+
+**Requirements:**
+- Schema Validation 2.0 enabled
+- Session identifiers configured
+- Minimum traffic: 1000+ requests/day per endpoint
+
+## Authentication Posture
+
+Identifies unprotected or inconsistently protected endpoints.
+
+**View report:**
+```
+Security > API Shield > Authentication Posture
+- Shows endpoints lacking JWT/mTLS
+- Highlights mixed authentication patterns
+```
+
+**Remediate:**
+1. Review flagged endpoints
+2. Add JWT validation rules
+3. Configure mTLS for sensitive endpoints
+4. Monitor posture score
+
+## Volumetric Abuse + GraphQL
+
+**Volumetric Abuse Detection:**
+`Security > API Shield > Settings > Volumetric Abuse Detection`
+- Enable per-endpoint monitoring, set thresholds, action: Log | Challenge | Block
+
+**GraphQL Protection:**
+`Security > API Shield > Settings > GraphQL Protection`
+- Max query depth: 10, max size: 100KB, block introspection (production)
+
+## Terraform
+
+```hcl
+# Session identifier
+resource "cloudflare_api_shield" "main" {
+  zone_id = var.zone_id
+  auth_id_characteristics {
+    type = "header"
+    name = "Authorization"
+  }
+}
+
+# Add endpoint
+resource "cloudflare_api_shield_operation" "users_get" {
+  zone_id  = var.zone_id
+  method   = "GET"
+  host     = "api.example.com"
+  endpoint = "/api/users/{id}"
+}
+
+# JWT validation rule
+resource "cloudflare_ruleset" "jwt_validation" {
+  zone_id = var.zone_id
+  name    = "API JWT Validation"
+  kind    = "zone"
+  phase   = "http_request_firewall_custom"
+
+  rules {
+    action = "block"
+    expression = "(http.host eq \"api.example.com\" and not is_jwt_valid(http.request.jwt.payload[\"{config_id}\"][0]))"
+    description = "Block invalid JWTs"
+  }
+}
+```
+
+## See Also
+
+- [api.md](api.md) - API endpoints and Workers integration
+- [patterns.md](patterns.md) - Firewall rules and deployment patterns
+- [gotchas.md](gotchas.md) - Troubleshooting and limits

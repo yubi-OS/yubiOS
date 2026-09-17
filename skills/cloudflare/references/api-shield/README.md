@@ -1,1 +1,44 @@
-IyBDbG91ZGZsYXJlIEFQSSBTaGllbGQgUmVmZXJlbmNlCgpFeHBlcnQgZ3VpZGFuY2UgZm9yIEFQSSBTaGllbGQgLSBjb21wcmVoZW5zaXZlIEFQSSBzZWN1cml0eSBzdWl0ZSBmb3IgZGlzY292ZXJ5LCBwcm90ZWN0aW9uLCBhbmQgbW9uaXRvcmluZy4KCiMjIFJlYWRpbmcgT3JkZXIKCnwgVGFzayB8IEZpbGVzIHRvIFJlYWQgfAp8LS0tLS0tfC0tLS0tLS0tLS0tLS0tLXwKfCBJbml0aWFsIHNldHVwIHwgUkVBRE1FIOKGkiBjb25maWd1cmF0aW9uLm1kIHwKfCBJbXBsZW1lbnQgSldUIHZhbGlkYXRpb24gfCBjb25maWd1cmF0aW9uLm1kIOKGkiBhcGkubWQgfAp8IEFkZCBzY2hlbWEgdmFsaWRhdGlvbiB8IGNvbmZpZ3VyYXRpb24ubWQg4oaSIHBhdHRlcm5zLm1kIHwKfCBEZXRlY3QgQVBJIGF0dGFja3MgfCBwYXR0ZXJucy5tZCDihpIgYXBpLm1kIHwKfCBEZWJ1ZyBpc3N1ZXMgfCBnb3RjaGFzLm1kIHwKCiMjIEZlYXR1cmUgU2VsZWN0aW9uCgpXaGF0IHByb3RlY3Rpb24gZG8geW91IG5lZWQ/CgpgYGAK4pSc4pSAIFZhbGlkYXRlIHJlcXVlc3QvcmVzcG9uc2Ugc3RydWN0dXJlIOKGkiBTY2hlbWEgVmFsaWRhdGlvbiAyLjAgKGNvbmZpZ3VyYXRpb24ubWQpCuKUnOKUgCBWZXJpZnkgYXV0aCB0b2tlbnMg4oaSIEpXVCBWYWxpZGF0aW9uIChjb25maWd1cmF0aW9uLm1kKQrilJzilIAgQ2xpZW50IGNlcnRpZmljYXRlcyDihpIgbVRMUyAoY29uZmlndXJhdGlvbi5tZCkK4pSc4pSAIERldGVjdCBCT0xBIGF0dGFja3Mg4oaSIEJPTEEgRGV0ZWN0aW9uIChwYXR0ZXJucy5tZCkK4pSc4pSAIFRyYWNrIGF1dGggY292ZXJhZ2Ug4oaSIEF1dGggUG9zdHVyZSAocGF0dGVybnMubWQpCuKUnOKUgCBTdG9wIHZvbHVtZXRyaWMgYWJ1c2Ug4oaSIEFidXNlIERldGVjdGlvbiAocGF0dGVybnMubWQpCuKUlOKUgCBEaXNjb3ZlciBzaGFkb3cgQVBJcyDihpIgQVBJIERpc2NvdmVyeSAoYXBpLm1kKQpgYGAKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBTZXR1cCwgc2Vzc2lvbiBpZGVudGlmaWVycywgcnVsZXMsIHRva2VuL21UTFMgY29uZmlncwotICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gRW5kcG9pbnQgbWFuYWdlbWVudCwgZGlzY292ZXJ5LCB2YWxpZGF0aW9uIEFQSXMsIEdyYXBoUUwgb3BlcmF0aW9ucwotICoqW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkqKiAtIENvbW1vbiBwYXR0ZXJucywgcHJvZ3Jlc3NpdmUgcm9sbG91dCwgT1dBU1AgbWFwcGluZ3MsIHdvcmtmbG93cwotICoqW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpKiogLSBUcm91Ymxlc2hvb3RpbmcsIGZhbHNlIHBvc2l0aXZlcywgcGVyZm9ybWFuY2UsIGJlc3QgcHJhY3RpY2VzCgojIyBRdWljayBTdGFydAoKQVBJIFNoaWVsZDogRW50ZXJwcmlzZS1ncmFkZSBBUEkgc2VjdXJpdHkgKERpc2NvdmVyeSwgU2NoZW1hIFZhbGlkYXRpb24gMi4wLCBKV1QsIG1UTFMsIEJPTEEgRGV0ZWN0aW9uLCBBdXRoIFBvc3R1cmUpLiBBdmFpbGFibGUgYXMgRW50ZXJwcmlzZSBhZGQtb24gd2l0aCBwcmV2aWV3IGFjY2Vzcy4KCiMjIFNlZSBBbHNvCgotIFtBUEkgU2hpZWxkIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hcGktc2hpZWxkLykKLSBbQVBJIFJlZmVyZW5jZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FwaS9yZXNvdXJjZXMvYXBpX2dhdGV3YXkvKQotIFtPV0FTUCBBUEkgU2VjdXJpdHkgVG9wIDEwXShodHRwczovL293YXNwLm9yZy93d3ctcHJvamVjdC1hcGktc2VjdXJpdHkvKQo=
+# Cloudflare API Shield Reference
+
+Expert guidance for API Shield - comprehensive API security suite for discovery, protection, and monitoring.
+
+## Reading Order
+
+| Task | Files to Read |
+|------|---------------|
+| Initial setup | README → configuration.md |
+| Implement JWT validation | configuration.md → api.md |
+| Add schema validation | configuration.md → patterns.md |
+| Detect API attacks | patterns.md → api.md |
+| Debug issues | gotchas.md |
+
+## Feature Selection
+
+What protection do you need?
+
+```
+├─ Validate request/response structure → Schema Validation 2.0 (configuration.md)
+├─ Verify auth tokens → JWT Validation (configuration.md)
+├─ Client certificates → mTLS (configuration.md)
+├─ Detect BOLA attacks → BOLA Detection (patterns.md)
+├─ Track auth coverage → Auth Posture (patterns.md)
+├─ Stop volumetric abuse → Abuse Detection (patterns.md)
+└─ Discover shadow APIs → API Discovery (api.md)
+```
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Setup, session identifiers, rules, token/mTLS configs
+- **[api.md](api.md)** - Endpoint management, discovery, validation APIs, GraphQL operations
+- **[patterns.md](patterns.md)** - Common patterns, progressive rollout, OWASP mappings, workflows
+- **[gotchas.md](gotchas.md)** - Troubleshooting, false positives, performance, best practices
+
+## Quick Start
+
+API Shield: Enterprise-grade API security (Discovery, Schema Validation 2.0, JWT, mTLS, BOLA Detection, Auth Posture). Available as Enterprise add-on with preview access.
+
+## See Also
+
+- [API Shield Docs](https://developers.cloudflare.com/api-shield/)
+- [API Reference](https://developers.cloudflare.com/api/resources/api_gateway/)
+- [OWASP API Security Top 10](https://owasp.org/www-project-api-security/)

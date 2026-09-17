@@ -1,1 +1,211 @@
-IyBDb25maWd1cmF0aW9uCgojIyBXcmFuZ2xlciBJbnRlZ3JhdGlvbgoKIyMjIFdvcmtlcnMgQmluZGluZyBTZXR1cAoKQWRkIHRvIGB3cmFuZ2xlci50b21sYDoKCmBgYHRvbWwKbmFtZSA9ICJteS1pbWFnZS13b3JrZXIiCm1haW4gPSAic3JjL2luZGV4LnRzIgpjb21wYXRpYmlsaXR5X2RhdGUgPSAiMjAyNC0wMS0wMSIKCltpbWFnZXNdCmJpbmRpbmcgPSAiSU1BR0VTIgpgYGAKCkFjY2VzcyBpbiBXb3JrZXI6CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIElNQUdFUzogSW1hZ2VCaW5kaW5nOwp9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICByZXR1cm4gYXdhaXQgZW52LklNQUdFUwogICAgICAuaW5wdXQoaW1hZ2VCdWZmZXIpCiAgICAgIC50cmFuc2Zvcm0oeyB3aWR0aDogODAwIH0pCiAgICAgIC5vdXRwdXQoKQogICAgICAucmVzcG9uc2UoKTsKICB9Cn07CmBgYAoKIyMjIFVwbG9hZCB2aWEgU2NyaXB0CgpXcmFuZ2xlciBkb2Vzbid0IGhhdmUgYnVpbHQtaW4gSW1hZ2VzIGNvbW1hbmRzLCB1c2UgUkVTVCBBUEk6CgpgYGB0eXBlc2NyaXB0Ci8vIHNjcmlwdHMvdXBsb2FkLWltYWdlLnRzCmltcG9ydCBmcyBmcm9tICdmcyc7CmltcG9ydCBGb3JtRGF0YSBmcm9tICdmb3JtLWRhdGEnOwoKYXN5bmMgZnVuY3Rpb24gdXBsb2FkSW1hZ2UoZmlsZVBhdGg6IHN0cmluZykgewogIGNvbnN0IGFjY291bnRJZCA9IHByb2Nlc3MuZW52LkNMT1VERkxBUkVfQUNDT1VOVF9JRCE7CiAgY29uc3QgYXBpVG9rZW4gPSBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0FQSV9UT0tFTiE7CiAgCiAgY29uc3QgZm9ybURhdGEgPSBuZXcgRm9ybURhdGEoKTsKICBmb3JtRGF0YS5hcHBlbmQoJ2ZpbGUnLCBmcy5jcmVhdGVSZWFkU3RyZWFtKGZpbGVQYXRoKSk7CiAgCiAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaCgKICAgIGBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJHthY2NvdW50SWR9L2ltYWdlcy92MWAsCiAgICB7CiAgICAgIG1ldGhvZDogJ1BPU1QnLAogICAgICBoZWFkZXJzOiB7CiAgICAgICAgJ0F1dGhvcml6YXRpb24nOiBgQmVhcmVyICR7YXBpVG9rZW59YCwKICAgICAgfSwKICAgICAgYm9keTogZm9ybURhdGEsCiAgICB9CiAgKTsKICAKICBjb25zdCByZXN1bHQgPSBhd2FpdCByZXNwb25zZS5qc29uKCk7CiAgY29uc29sZS5sb2coJ1VwbG9hZGVkOicsIHJlc3VsdCk7Cn0KCnVwbG9hZEltYWdlKCcuL3Bob3RvLmpwZycpOwpgYGAKCiMjIyBFbnZpcm9ubWVudCBWYXJpYWJsZXMKClN0b3JlIGFjY291bnQgaGFzaCBmb3IgVVJMIGNvbnN0cnVjdGlvbjoKCmBgYHRvbWwKW3ZhcnNdCklNQUdFU19BQ0NPVU5UX0hBU0ggPSAieW91ci1hY2NvdW50LWhhc2giCkFDQ09VTlRfSUQgPSAieW91ci1hY2NvdW50LWlkIgpgYGAKCkFjY2VzcyBpbiBXb3JrZXI6CgpgYGB0eXBlc2NyaXB0CmNvbnN0IGltYWdlVXJsID0gYGh0dHBzOi8vaW1hZ2VkZWxpdmVyeS5uZXQvJHtlbnYuSU1BR0VTX0FDQ09VTlRfSEFTSH0vJHtpbWFnZUlkfS9wdWJsaWNgOwpgYGAKCiMjIFZhcmlhbnRzIENvbmZpZ3VyYXRpb24KClZhcmlhbnRzIGFyZSBuYW1lZCBwcmVzZXRzIGZvciB0cmFuc2Zvcm1hdGlvbnMuCgojIyMgQ3JlYXRlIFZhcmlhbnQgKERhc2hib2FyZCkKCjEuIE5hdmlnYXRlIHRvIEltYWdlcyDihpIgVmFyaWFudHMKMi4gQ2xpY2sgIkNyZWF0ZSBWYXJpYW50IgozLiBTZXQgbmFtZSAoZS5nLiwgYHRodW1ibmFpbGApCjQuIENvbmZpZ3VyZTogYHdpZHRoPTIwMCxoZWlnaHQ9MjAwLGZpdD1jb3ZlcmAKCiMjIyBDcmVhdGUgVmFyaWFudCAoQVBJKQoKYGBgYmFzaApjdXJsIC1YIFBPU1QgXAogIGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vaW1hZ2VzL3YxL3ZhcmlhbnRzIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIHthcGlfdG9rZW59IiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC1kICd7CiAgICAiaWQiOiAidGh1bWJuYWlsIiwKICAgICJvcHRpb25zIjogewogICAgICAid2lkdGgiOiAyMDAsCiAgICAgICJoZWlnaHQiOiAyMDAsCiAgICAgICJmaXQiOiAiY292ZXIiCiAgICB9LAogICAgIm5ldmVyUmVxdWlyZVNpZ25lZFVSTHMiOiB0cnVlCiAgfScKYGBgCgojIyMgVXNlIFZhcmlhbnQKCmBgYApodHRwczovL2ltYWdlZGVsaXZlcnkubmV0L3thY2NvdW50X2hhc2h9L3tpbWFnZV9pZH0vdGh1bWJuYWlsCmBgYAoKIyMjIENvbW1vbiBWYXJpYW50IFByZXNldHMKCmBgYGpzb24KewogICJ0aHVtYm5haWwiOiB7CiAgICAid2lkdGgiOiAyMDAsCiAgICAiaGVpZ2h0IjogMjAwLAogICAgImZpdCI6ICJjb3ZlciIKICB9LAogICJhdmF0YXIiOiB7CiAgICAid2lkdGgiOiAxMjgsCiAgICAiaGVpZ2h0IjogMTI4LAogICAgImZpdCI6ICJjb3ZlciIsCiAgICAiZ3Jhdml0eSI6ICJmYWNlIgogIH0sCiAgImhlcm8iOiB7CiAgICAid2lkdGgiOiAxOTIwLAogICAgImhlaWdodCI6IDEwODAsCiAgICAiZml0IjogImNvdmVyIiwKICAgICJxdWFsaXR5IjogOTAKICB9LAogICJtb2JpbGUiOiB7CiAgICAid2lkdGgiOiA2NDAsCiAgICAiZml0IjogInNjYWxlLWRvd24iLAogICAgInF1YWxpdHkiOiA4MCwKICAgICJmb3JtYXQiOiAiYXZpZiIKICB9Cn0KYGBgCgojIyBBdXRoZW50aWNhdGlvbgoKIyMjIEFQSSBUb2tlbiAoUmVjb21tZW5kZWQpCgpHZW5lcmF0ZSBhdDogRGFzaGJvYXJkIOKGkiBNeSBQcm9maWxlIOKGkiBBUEkgVG9rZW5zCgpSZXF1aXJlZCBwZXJtaXNzaW9uczoKLSBBY2NvdW50IOKGkiBDbG91ZGZsYXJlIEltYWdlcyDihpIgRWRpdAoKYGBgYmFzaApjdXJsIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIge2FwaV90b2tlbn0iIFwKICBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L2ltYWdlcy92MQpgYGAKCiMjIyBBUEkgS2V5IChMZWdhY3kpCgpgYGBiYXNoCmN1cmwgLUggIlgtQXV0aC1FbWFpbDoge2VtYWlsfSIgXAogICAgIC1IICJYLUF1dGgtS2V5OiB7YXBpX2tleX0iIFwKICBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L2ltYWdlcy92MQpgYGAKCiMjIFNpZ25lZCBVUkxzCgpGb3IgcHJpdmF0ZSBpbWFnZXMsIGVuYWJsZSBzaWduZWQgVVJMczoKCmBgYGJhc2gKIyBVcGxvYWQgd2l0aCBzaWduZWQgVVJMcyByZXF1aXJlZApjdXJsIC1YIFBPU1QgXAogIGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vaW1hZ2VzL3YxIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIHthcGlfdG9rZW59IiBcCiAgLUYgZmlsZT1AcHJpdmF0ZS5qcGcgXAogIC1GIHJlcXVpcmVTaWduZWRVUkxzPXRydWUKYGBgCgpHZW5lcmF0ZSBzaWduZWQgVVJMOgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBjcmVhdGVIbWFjIH0gZnJvbSAnY3J5cHRvJzsKCmZ1bmN0aW9uIHNpZ25VcmwoaW1hZ2VJZDogc3RyaW5nLCB2YXJpYW50OiBzdHJpbmcsIGV4cGlyeTogbnVtYmVyLCBrZXk6IHN0cmluZyk6IHN0cmluZyB7CiAgY29uc3QgcGF0aCA9IGAvJHtpbWFnZUlkfS8ke3ZhcmlhbnR9YDsKICBjb25zdCB0b1NpZ24gPSBgJHtwYXRofSR7ZXhwaXJ5fWA7CiAgY29uc3Qgc2lnbmF0dXJlID0gY3JlYXRlSG1hYygnc2hhMjU2Jywga2V5KQogICAgLnVwZGF0ZSh0b1NpZ24pCiAgICAuZGlnZXN0KCdoZXgnKTsKICAKICByZXR1cm4gYGh0dHBzOi8vaW1hZ2VkZWxpdmVyeS5uZXQve2hhc2h9JHtwYXRofT9leHA9JHtleHBpcnl9JnNpZz0ke3NpZ25hdHVyZX1gOwp9CgovLyBTaWduIFVSTCB2YWxpZCBmb3IgMSBob3VyCmNvbnN0IHNpZ25lZFVybCA9IHNpZ25VcmwoJ2ltYWdlLWlkJywgJ3B1YmxpYycsIERhdGUubm93KCkgKyAzNjAwLCBlbnYuU0lHTklOR19LRVkpOwpgYGAKCiMjIExvY2FsIERldmVsb3BtZW50CgpgYGBiYXNoCm5weCB3cmFuZ2xlciBkZXYgLS1yZW1vdGUKYGBgCgpNdXN0IHVzZSBgLS1yZW1vdGVgIGZvciBJbWFnZXMgYmluZGluZyBhY2Nlc3MuCg==
+# Configuration
+
+## Wrangler Integration
+
+### Workers Binding Setup
+
+Add to `wrangler.toml`:
+
+```toml
+name = "my-image-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[images]
+binding = "IMAGES"
+```
+
+Access in Worker:
+
+```typescript
+interface Env {
+  IMAGES: ImageBinding;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    return await env.IMAGES
+      .input(imageBuffer)
+      .transform({ width: 800 })
+      .output()
+      .response();
+  }
+};
+```
+
+### Upload via Script
+
+Wrangler doesn't have built-in Images commands, use REST API:
+
+```typescript
+// scripts/upload-image.ts
+import fs from 'fs';
+import FormData from 'form-data';
+
+async function uploadImage(filePath: string) {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID!;
+  const apiToken = process.env.CLOUDFLARE_API_TOKEN!;
+  
+  const formData = new FormData();
+  formData.append('file', fs.createReadStream(filePath));
+  
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${accountId}/images/v1`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiToken}`,
+      },
+      body: formData,
+    }
+  );
+  
+  const result = await response.json();
+  console.log('Uploaded:', result);
+}
+
+uploadImage('./photo.jpg');
+```
+
+### Environment Variables
+
+Store account hash for URL construction:
+
+```toml
+[vars]
+IMAGES_ACCOUNT_HASH = "your-account-hash"
+ACCOUNT_ID = "your-account-id"
+```
+
+Access in Worker:
+
+```typescript
+const imageUrl = `https://imagedelivery.net/${env.IMAGES_ACCOUNT_HASH}/${imageId}/public`;
+```
+
+## Variants Configuration
+
+Variants are named presets for transformations.
+
+### Create Variant (Dashboard)
+
+1. Navigate to Images → Variants
+2. Click "Create Variant"
+3. Set name (e.g., `thumbnail`)
+4. Configure: `width=200,height=200,fit=cover`
+
+### Create Variant (API)
+
+```bash
+curl -X POST \
+  https://api.cloudflare.com/client/v4/accounts/{account_id}/images/v1/variants \
+  -H "Authorization: Bearer {api_token}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "thumbnail",
+    "options": {
+      "width": 200,
+      "height": 200,
+      "fit": "cover"
+    },
+    "neverRequireSignedURLs": true
+  }'
+```
+
+### Use Variant
+
+```
+https://imagedelivery.net/{account_hash}/{image_id}/thumbnail
+```
+
+### Common Variant Presets
+
+```json
+{
+  "thumbnail": {
+    "width": 200,
+    "height": 200,
+    "fit": "cover"
+  },
+  "avatar": {
+    "width": 128,
+    "height": 128,
+    "fit": "cover",
+    "gravity": "face"
+  },
+  "hero": {
+    "width": 1920,
+    "height": 1080,
+    "fit": "cover",
+    "quality": 90
+  },
+  "mobile": {
+    "width": 640,
+    "fit": "scale-down",
+    "quality": 80,
+    "format": "avif"
+  }
+}
+```
+
+## Authentication
+
+### API Token (Recommended)
+
+Generate at: Dashboard → My Profile → API Tokens
+
+Required permissions:
+- Account → Cloudflare Images → Edit
+
+```bash
+curl -H "Authorization: Bearer {api_token}" \
+  https://api.cloudflare.com/client/v4/accounts/{account_id}/images/v1
+```
+
+### API Key (Legacy)
+
+```bash
+curl -H "X-Auth-Email: {email}" \
+     -H "X-Auth-Key: {api_key}" \
+  https://api.cloudflare.com/client/v4/accounts/{account_id}/images/v1
+```
+
+## Signed URLs
+
+For private images, enable signed URLs:
+
+```bash
+# Upload with signed URLs required
+curl -X POST \
+  https://api.cloudflare.com/client/v4/accounts/{account_id}/images/v1 \
+  -H "Authorization: Bearer {api_token}" \
+  -F file=@private.jpg \
+  -F requireSignedURLs=true
+```
+
+Generate signed URL:
+
+```typescript
+import { createHmac } from 'crypto';
+
+function signUrl(imageId: string, variant: string, expiry: number, key: string): string {
+  const path = `/${imageId}/${variant}`;
+  const toSign = `${path}${expiry}`;
+  const signature = createHmac('sha256', key)
+    .update(toSign)
+    .digest('hex');
+  
+  return `https://imagedelivery.net/{hash}${path}?exp=${expiry}&sig=${signature}`;
+}
+
+// Sign URL valid for 1 hour
+const signedUrl = signUrl('image-id', 'public', Date.now() + 3600, env.SIGNING_KEY);
+```
+
+## Local Development
+
+```bash
+npx wrangler dev --remote
+```
+
+Must use `--remote` for Images binding access.

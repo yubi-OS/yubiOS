@@ -1,1 +1,68 @@
-IyBDbG91ZGZsYXJlIFNuaXBwZXRzIFNraWxsIFJlZmVyZW5jZQoKIyMgRGVzY3JpcHRpb24KRXhwZXJ0IGd1aWRhbmNlIGZvciAqKkNsb3VkZmxhcmUgU25pcHBldHMgT05MWSoqIC0gYSBsaWdodHdlaWdodCBKYXZhU2NyaXB0LWJhc2VkIGVkZ2UgbG9naWMgcGxhdGZvcm0gZm9yIG1vZGlmeWluZyBIVFRQIHJlcXVlc3RzIGFuZCByZXNwb25zZXMuIFNuaXBwZXRzIHJ1biBhcyBwYXJ0IG9mIHRoZSBSdWxlc2V0IEVuZ2luZSBhbmQgYXJlIGluY2x1ZGVkIGF0IG5vIGFkZGl0aW9uYWwgY29zdCBvbiBwYWlkIHBsYW5zIChQcm8sIEJ1c2luZXNzLCBFbnRlcnByaXNlKS4KCiMjIFdoYXQgQXJlIFNuaXBwZXRzPwpTbmlwcGV0cyBhcmUgSmF2YVNjcmlwdCBmdW5jdGlvbnMgZXhlY3V0ZWQgYXQgdGhlIGVkZ2UgYXMgcGFydCBvZiBDbG91ZGZsYXJlJ3MgUnVsZXNldCBFbmdpbmUuIEtleSBjaGFyYWN0ZXJpc3RpY3M6Ci0gKipFeGVjdXRpb24gdGltZSoqOiA1bXMgQ1BVIGxpbWl0IHBlciByZXF1ZXN0Ci0gKipTaXplIGxpbWl0Kio6IDMyS0IgcGVyIHNuaXBwZXQKLSAqKlJ1bnRpbWUqKjogVjggaXNvbGF0ZSAoc3Vic2V0IG9mIFdvcmtlcnMgQVBJcykKLSAqKlN1YnJlcXVlc3RzKio6IDItNSBmZXRjaCBjYWxscyBkZXBlbmRpbmcgb24gcGxhbgotICoqQ29zdCoqOiBJbmNsdWRlZCB3aXRoIFByby9CdXNpbmVzcy9FbnRlcnByaXNlIHBsYW5zCgojIyBTbmlwcGV0cyB2cyBXb3JrZXJzIERlY2lzaW9uIE1hdHJpeAoKfCBGYWN0b3IgfCBDaG9vc2UgU25pcHBldHMgSWYuLi4gfCBDaG9vc2UgV29ya2VycyBJZi4uLiB8CnwtLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLXwKfCAqKkNvbXBsZXhpdHkqKiB8IFNpbXBsZSByZXF1ZXN0L3Jlc3BvbnNlIG1vZGlmaWNhdGlvbnMgfCBDb21wbGV4IGJ1c2luZXNzIGxvZ2ljLCByb3V0aW5nLCBtaWRkbGV3YXJlIHwKfCAqKkV4ZWN1dGlvbiB0aW1lKiogfCA8NW1zIHN1ZmZpY2llbnQgfCBOZWVkID41bXMgb3IgdmFyaWFibGUgdGltZSB8CnwgKipTdWJyZXF1ZXN0cyoqIHwgMi01IGZldGNoIGNhbGxzIHN1ZmZpY2llbnQgfCBOZWVkID41IHN1YnJlcXVlc3RzIG9yIGNvbXBsZXggb3JjaGVzdHJhdGlvbiB8CnwgKipDb2RlIHNpemUqKiB8IDwzMktCIHN1ZmZpY2llbnQgfCBOZWVkID4zMktCIG9yIG5wbSBkZXBlbmRlbmNpZXMgfAp8ICoqQ29zdCoqIHwgV2FudCB6ZXJvIGFkZGl0aW9uYWwgY29zdCB8IENhbiBhZmZvcmQgJDUvbW8gKyB1c2FnZSB8CnwgKipBUElzKiogfCBOZWVkIGJhc2ljIGZldGNoLCBoZWFkZXJzLCBVUkwgfCBOZWVkIEtWLCBEMSwgUjIsIER1cmFibGUgT2JqZWN0cywgY3JvbiB0cmlnZ2VycyB8CnwgKipEZXBsb3ltZW50KiogfCBOZWVkIHJ1bGUtYmFzZWQgdHJpZ2dlcnMgfCBXYW50IGN1c3RvbSByb3V0aW5nIGxvZ2ljIHwKCioqUnVsZSBvZiB0aHVtYioqOiBVc2UgU25pcHBldHMgZm9yIG1vZGlmaWNhdGlvbnMsIFdvcmtlcnMgZm9yIGFwcGxpY2F0aW9ucy4KCiMjIEV4ZWN1dGlvbiBNb2RlbAoxLiBSZXF1ZXN0IGFycml2ZXMgYXQgQ2xvdWRmbGFyZSBlZGdlCjIuIFJ1bGVzZXQgRW5naW5lIGV2YWx1YXRlcyBzbmlwcGV0IHJ1bGVzIChmaWx0ZXIgZXhwcmVzc2lvbnMpCjMuIElmIHJ1bGUgbWF0Y2hlcywgc25pcHBldCBleGVjdXRlcyB3aXRoaW4gNW1zIGxpbWl0CjQuIE1vZGlmaWVkIHJlcXVlc3QvcmVzcG9uc2UgY29udGludWVzIHRocm91Z2ggcGlwZWxpbmUKNS4gUmVzcG9uc2UgcmV0dXJuZWQgdG8gY2xpZW50CgpTbmlwcGV0cyBleGVjdXRlIHN5bmNocm9ub3VzbHkgaW4gdGhlIHJlcXVlc3QgcGF0aCAtIHBlcmZvcm1hbmNlIGlzIGNyaXRpY2FsLgoKIyMgUmVhZGluZyBPcmRlcgoxLiAqKltjb25maWd1cmF0aW9uLm1kXShjb25maWd1cmF0aW9uLm1kKSoqIC0gU3RhcnQgaGVyZTogc2V0dXAsIGRlcGxveW1lbnQgbWV0aG9kcyAoRGFzaGJvYXJkL0FQSS9UZXJyYWZvcm0pCjIuICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gQ29yZSBBUElzOiBSZXF1ZXN0LCBSZXNwb25zZSwgaGVhZGVycywgYHJlcXVlc3QuY2ZgIHByb3BlcnRpZXMKMy4gKipbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSoqIC0gUmVhbC13b3JsZCBleGFtcGxlczogZ2VvLXJvdXRpbmcsIEEvQiB0ZXN0cywgc2VjdXJpdHkgaGVhZGVycwo0LiAqKltnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSoqIC0gVHJvdWJsZXNob290aW5nOiBjb21tb24gZXJyb3JzLCBwZXJmb3JtYW5jZSB0aXBzLCBBUEkgbGltaXRhdGlvbnMKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBTZXR1cCwgZGVwbG95bWVudCwgY29uZmlndXJhdGlvbgotICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gQVBJIGVuZHBvaW50cywgbWV0aG9kcywgaW50ZXJmYWNlcwotICoqW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkqKiAtIENvbW1vbiBwYXR0ZXJucywgdXNlIGNhc2VzLCBleGFtcGxlcwotICoqW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpKiogLSBUcm91Ymxlc2hvb3RpbmcsIGJlc3QgcHJhY3RpY2VzLCBsaW1pdGF0aW9ucwoKIyMgUXVpY2sgU3RhcnQKYGBgamF2YXNjcmlwdAovLyBTbmlwcGV0OiBBZGQgc2VjdXJpdHkgaGVhZGVycwpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCkgewogICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChyZXF1ZXN0KTsKICAgIGNvbnN0IG5ld1Jlc3BvbnNlID0gbmV3IFJlc3BvbnNlKHJlc3BvbnNlLmJvZHksIHJlc3BvbnNlKTsKICAgIG5ld1Jlc3BvbnNlLmhlYWRlcnMuc2V0KCJYLUZyYW1lLU9wdGlvbnMiLCAiREVOWSIpOwogICAgbmV3UmVzcG9uc2UuaGVhZGVycy5zZXQoIlgtQ29udGVudC1UeXBlLU9wdGlvbnMiLCAibm9zbmlmZiIpOwogICAgcmV0dXJuIG5ld1Jlc3BvbnNlOwogIH0KfQpgYGAKCkRlcGxveSB2aWEgRGFzaGJvYXJkIChSdWxlcyDihpIgU25pcHBldHMpIG9yIEFQSS9UZXJyYWZvcm0uIFNlZSBjb25maWd1cmF0aW9uLm1kIGZvciBkZXRhaWxzLgoKIyMgU2VlIEFsc28KCi0gW0Nsb3VkZmxhcmUgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3J1bGVzL3NuaXBwZXRzLykK
+# Cloudflare Snippets Skill Reference
+
+## Description
+Expert guidance for **Cloudflare Snippets ONLY** - a lightweight JavaScript-based edge logic platform for modifying HTTP requests and responses. Snippets run as part of the Ruleset Engine and are included at no additional cost on paid plans (Pro, Business, Enterprise).
+
+## What Are Snippets?
+Snippets are JavaScript functions executed at the edge as part of Cloudflare's Ruleset Engine. Key characteristics:
+- **Execution time**: 5ms CPU limit per request
+- **Size limit**: 32KB per snippet
+- **Runtime**: V8 isolate (subset of Workers APIs)
+- **Subrequests**: 2-5 fetch calls depending on plan
+- **Cost**: Included with Pro/Business/Enterprise plans
+
+## Snippets vs Workers Decision Matrix
+
+| Factor | Choose Snippets If... | Choose Workers If... |
+|--------|----------------------|---------------------|
+| **Complexity** | Simple request/response modifications | Complex business logic, routing, middleware |
+| **Execution time** | <5ms sufficient | Need >5ms or variable time |
+| **Subrequests** | 2-5 fetch calls sufficient | Need >5 subrequests or complex orchestration |
+| **Code size** | <32KB sufficient | Need >32KB or npm dependencies |
+| **Cost** | Want zero additional cost | Can afford $5/mo + usage |
+| **APIs** | Need basic fetch, headers, URL | Need KV, D1, R2, Durable Objects, cron triggers |
+| **Deployment** | Need rule-based triggers | Want custom routing logic |
+
+**Rule of thumb**: Use Snippets for modifications, Workers for applications.
+
+## Execution Model
+1. Request arrives at Cloudflare edge
+2. Ruleset Engine evaluates snippet rules (filter expressions)
+3. If rule matches, snippet executes within 5ms limit
+4. Modified request/response continues through pipeline
+5. Response returned to client
+
+Snippets execute synchronously in the request path - performance is critical.
+
+## Reading Order
+1. **[configuration.md](configuration.md)** - Start here: setup, deployment methods (Dashboard/API/Terraform)
+2. **[api.md](api.md)** - Core APIs: Request, Response, headers, `request.cf` properties
+3. **[patterns.md](patterns.md)** - Real-world examples: geo-routing, A/B tests, security headers
+4. **[gotchas.md](gotchas.md)** - Troubleshooting: common errors, performance tips, API limitations
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Setup, deployment, configuration
+- **[api.md](api.md)** - API endpoints, methods, interfaces
+- **[patterns.md](patterns.md)** - Common patterns, use cases, examples
+- **[gotchas.md](gotchas.md)** - Troubleshooting, best practices, limitations
+
+## Quick Start
+```javascript
+// Snippet: Add security headers
+export default {
+  async fetch(request) {
+    const response = await fetch(request);
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.set("X-Frame-Options", "DENY");
+    newResponse.headers.set("X-Content-Type-Options", "nosniff");
+    return newResponse;
+  }
+}
+```
+
+Deploy via Dashboard (Rules → Snippets) or API/Terraform. See configuration.md for details.
+
+## See Also
+
+- [Cloudflare Docs](https://developers.cloudflare.com/rules/snippets/)

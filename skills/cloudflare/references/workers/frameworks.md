@@ -1,1 +1,197 @@
-IyBXb3JrZXJzIEZyYW1ld29ya3MKCiMjIEhvbm8gKFJlY29tbWVuZGVkKQoKV29ya2Vycy1uYXRpdmUgd2ViIGZyYW1ld29yayB3aXRoIGV4Y2VsbGVudCBUeXBlU2NyaXB0IHN1cHBvcnQgYW5kIG1pZGRsZXdhcmUgZWNvc3lzdGVtLgoKYGBgYmFzaApucG0gaW5zdGFsbCBob25vCmBgYAoKIyMjIEJhc2ljIFNldHVwCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IEhvbm8gfSBmcm9tICdob25vJzsKCmNvbnN0IGFwcCA9IG5ldyBIb25vKCk7CgphcHAuZ2V0KCcvJywgKGMpID0+IGMudGV4dCgnSGVsbG8gV29ybGQhJykpOwphcHAucG9zdCgnL2FwaS91c2VycycsIGFzeW5jIChjKSA9PiB7CiAgY29uc3QgYm9keSA9IGF3YWl0IGMucmVxLmpzb24oKTsKICByZXR1cm4gYy5qc29uKHsgaWQ6IDEsIC4uLmJvZHkgfSwgMjAxKTsKfSk7CgpleHBvcnQgZGVmYXVsdCBhcHA7CmBgYAoKIyMjIFR5cGVkIEVudmlyb25tZW50CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB0eXBlIHsgRW52IH0gZnJvbSAnLi8ud3JhbmdsZXIvdHlwZXMvcnVudGltZSc7Cgpjb25zdCBhcHAgPSBuZXcgSG9ubzx7IEJpbmRpbmdzOiBFbnYgfT4oKTsKCmFwcC5nZXQoJy9kYXRhJywgYXN5bmMgKGMpID0+IHsKICBjb25zdCB2YWx1ZSA9IGF3YWl0IGMuZW52Lk1ZX0tWLmdldCgna2V5Jyk7ICAvLyBGdWxseSB0eXBlZAogIHJldHVybiBjLnRleHQodmFsdWUgfHwgJ05vdCBmb3VuZCcpOwp9KTsKYGBgCgojIyMgTWlkZGxld2FyZQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBjb3JzIH0gZnJvbSAnaG9uby9jb3JzJzsKaW1wb3J0IHsgbG9nZ2VyIH0gZnJvbSAnaG9uby9sb2dnZXInOwoKYXBwLnVzZSgnKicsIGxvZ2dlcigpKTsKYXBwLnVzZSgnL2FwaS8qJywgY29ycyh7IG9yaWdpbjogJyonIH0pKTsKCi8vIEN1c3RvbSBtaWRkbGV3YXJlCmFwcC51c2UoJy9wcm90ZWN0ZWQvKicsIGFzeW5jIChjLCBuZXh0KSA9PiB7CiAgY29uc3QgYXV0aCA9IGMucmVxLmhlYWRlcignQXV0aG9yaXphdGlvbicpOwogIGlmICghYXV0aD8uc3RhcnRzV2l0aCgnQmVhcmVyICcpKSByZXR1cm4gYy50ZXh0KCdVbmF1dGhvcml6ZWQnLCA0MDEpOwogIGF3YWl0IG5leHQoKTsKfSk7CmBgYAoKIyMjIFJlcXVlc3QgVmFsaWRhdGlvbiAoWm9kKQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyB6VmFsaWRhdG9yIH0gZnJvbSAnQGhvbm8vem9kLXZhbGlkYXRvcic7CmltcG9ydCB7IHogfSBmcm9tICd6b2QnOwoKY29uc3Qgc2NoZW1hID0gei5vYmplY3QoewogIG5hbWU6IHouc3RyaW5nKCkubWluKDEpLAogIGVtYWlsOiB6LnN0cmluZygpLmVtYWlsKCksCn0pOwoKYXBwLnBvc3QoJy91c2VycycsIHpWYWxpZGF0b3IoJ2pzb24nLCBzY2hlbWEpLCBhc3luYyAoYykgPT4gewogIGNvbnN0IHZhbGlkYXRlZCA9IGMucmVxLnZhbGlkKCdqc29uJyk7ICAvLyBUeXBlLXNhZmUsIHZhbGlkYXRlZCBkYXRhCiAgcmV0dXJuIGMuanNvbih7IGlkOiAxLCAuLi52YWxpZGF0ZWQgfSk7Cn0pOwpgYGAKCioqRXJyb3IgaGFuZGxpbmcqKjogQXV0b21hdGljIDQwMCByZXNwb25zZSB3aXRoIHZhbGlkYXRpb24gZXJyb3JzCgojIyMgUm91dGUgR3JvdXBzCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGFwaSA9IG5ldyBIb25vKCkuYmFzZVBhdGgoJy9hcGknKTsKCmFwaS5nZXQoJy91c2VycycsIChjKSA9PiBjLmpzb24oW10pKTsKYXBpLnBvc3QoJy91c2VycycsIChjKSA9PiBjLmpzb24oeyBpZDogMSB9KSk7CgphcHAucm91dGUoJy8nLCBhcGkpOyAgLy8gTW91bnRzIGF0IC9hcGkvKgpgYGAKCiMjIyBFcnJvciBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdAphcHAub25FcnJvcigoZXJyLCBjKSA9PiB7CiAgY29uc29sZS5lcnJvcihlcnIpOwogIHJldHVybiBjLmpzb24oeyBlcnJvcjogZXJyLm1lc3NhZ2UgfSwgNTAwKTsKfSk7CgphcHAubm90Rm91bmQoKGMpID0+IGMuanNvbih7IGVycm9yOiAnTm90IEZvdW5kJyB9LCA0MDQpKTsKYGBgCgojIyMgQWNjZXNzaW5nIEV4ZWN1dGlvbkNvbnRleHQKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpIHsKICAgIHJldHVybiBhcHAuZmV0Y2gocmVxdWVzdCwgZW52LCBjdHgpOwogIH0sCn07CgovLyBJbiByb3V0ZSBoYW5kbGVyczoKYXBwLmdldCgnL2xvZycsIChjKSA9PiB7CiAgYy5leGVjdXRpb25DdHgud2FpdFVudGlsKGxvZ1JlcXVlc3QoYy5yZXEpKTsKICByZXR1cm4gYy50ZXh0KCdPSycpOwp9KTsKYGBgCgojIyMgT3BlbkFQSS9Td2FnZ2VyIChIb25vIE9wZW5BUEkpCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IE9wZW5BUElIb25vLCBjcmVhdGVSb3V0ZSwgeiB9IGZyb20gJ0Bob25vL3pvZC1vcGVuYXBpJzsKCmNvbnN0IGFwcCA9IG5ldyBPcGVuQVBJSG9ubygpOwoKY29uc3Qgcm91dGUgPSBjcmVhdGVSb3V0ZSh7CiAgbWV0aG9kOiAnZ2V0JywKICBwYXRoOiAnL3VzZXJzL3tpZH0nLAogIHJlcXVlc3Q6IHsgcGFyYW1zOiB6Lm9iamVjdCh7IGlkOiB6LnN0cmluZygpIH0pIH0sCiAgcmVzcG9uc2VzOiB7CiAgICAyMDA6IHsgZGVzY3JpcHRpb246ICdVc2VyIGZvdW5kJywgY29udGVudDogeyAnYXBwbGljYXRpb24vanNvbic6IHsgc2NoZW1hOiB6Lm9iamVjdCh7IGlkOiB6LnN0cmluZygpIH0pIH0gfSB9LAogIH0sCn0pOwoKYXBwLm9wZW5hcGkocm91dGUsIChjKSA9PiB7CiAgY29uc3QgeyBpZCB9ID0gYy5yZXEudmFsaWQoJ3BhcmFtJyk7CiAgcmV0dXJuIGMuanNvbih7IGlkIH0pOwp9KTsKCmFwcC5kb2MoJy9vcGVuYXBpLmpzb24nLCB7IG9wZW5hcGk6ICczLjAuMCcsIGluZm86IHsgdmVyc2lvbjogJzEuMC4wJywgdGl0bGU6ICdBUEknIH0gfSk7CmBgYAoKIyMjIFRlc3Rpbmcgd2l0aCBIb25vCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGRlc2NyaWJlLCBpdCwgZXhwZWN0IH0gZnJvbSAndml0ZXN0JzsKaW1wb3J0IGFwcCBmcm9tICcuLi9zcmMvaW5kZXgnOwoKZGVzY3JpYmUoJ0FQSScsICgpID0+IHsKICBpdCgnR0VUIC8nLCBhc3luYyAoKSA9PiB7CiAgICBjb25zdCByZXMgPSBhd2FpdCBhcHAucmVxdWVzdCgnLycpOwogICAgZXhwZWN0KHJlcy5zdGF0dXMpLnRvQmUoMjAwKTsKICAgIGV4cGVjdChhd2FpdCByZXMudGV4dCgpKS50b0JlKCdIZWxsbyBXb3JsZCEnKTsKICB9KTsKfSk7CmBgYAoKIyMgT3RoZXIgRnJhbWV3b3JrcwoKIyMjIGl0dHktcm91dGVyIChNaW5pbWFsaXN0KQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBSb3V0ZXIgfSBmcm9tICdpdHR5LXJvdXRlcic7Cgpjb25zdCByb3V0ZXIgPSBSb3V0ZXIoKTsKCnJvdXRlci5nZXQoJy91c2Vycy86aWQnLCAoeyBwYXJhbXMgfSkgPT4gbmV3IFJlc3BvbnNlKHBhcmFtcy5pZCkpOwoKZXhwb3J0IGRlZmF1bHQgeyBmZXRjaDogcm91dGVyLmhhbmRsZSB9OwpgYGAKCioqVXNlIGNhc2UqKjogVGlueSBidW5kbGUgc2l6ZSAofjUwMCBieXRlcyksIHNpbXBsZSByb3V0aW5nIG5lZWRzCgojIyMgV29ya3RvcCAoQWR2YW5jZWQpCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IFJvdXRlciB9IGZyb20gJ3dvcmt0b3AnOwoKY29uc3Qgcm91dGVyID0gbmV3IFJvdXRlcigpOwoKcm91dGVyLmFkZCgnR0VUJywgJy91c2Vycy86aWQnLCAocmVxLCByZXMpID0+IHsKICByZXMuc2VuZCgyMDAsIHsgaWQ6IHJlcS5wYXJhbXMuaWQgfSk7Cn0pOwoKcm91dGVyLmxpc3RlbigpOwpgYGAKCioqVXNlIGNhc2UqKjogQWR2YW5jZWQgcm91dGluZywgYnVpbHQtaW4gQ09SUy9jYWNoZSB1dGlsaXRpZXMKCiMjIEZyYW1ld29yayBDb21wYXJpc29uCgp8IEZyYW1ld29yayB8IEJ1bmRsZSBTaXplIHwgVHlwZVNjcmlwdCB8IE1pZGRsZXdhcmUgfCBWYWxpZGF0aW9uIHwgQmVzdCBGb3IgfAp8LS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IEhvbm8gfCB+MTJLQiB8IEV4Y2VsbGVudCB8IFJpY2ggfCBab2QgfCBQcm9kdWN0aW9uIGFwcHMgfAp8IGl0dHktcm91dGVyIHwgfjUwMEIgfCBHb29kIHwgQmFzaWMgfCBNYW51YWwgfCBNaW5pbWFsIEFQSXMgfAp8IFdvcmt0b3AgfCB+OEtCIHwgR29vZCB8IEFkdmFuY2VkIHwgTWFudWFsIHwgQ29tcGxleCByb3V0aW5nIHwKCiMjIFNlZSBBbHNvCgotIFtQYXR0ZXJuc10oLi9wYXR0ZXJucy5tZCkgLSBDb21tb24gd29ya2Zsb3dzCi0gW0FQSV0oLi9hcGkubWQpIC0gUnVudGltZSBBUElzCi0gW0dvdGNoYXNdKC4vZ290Y2hhcy5tZCkgLSBGcmFtZXdvcmstc3BlY2lmaWMgaXNzdWVzCg==
+# Workers Frameworks
+
+## Hono (Recommended)
+
+Workers-native web framework with excellent TypeScript support and middleware ecosystem.
+
+```bash
+npm install hono
+```
+
+### Basic Setup
+
+```typescript
+import { Hono } from 'hono';
+
+const app = new Hono();
+
+app.get('/', (c) => c.text('Hello World!'));
+app.post('/api/users', async (c) => {
+  const body = await c.req.json();
+  return c.json({ id: 1, ...body }, 201);
+});
+
+export default app;
+```
+
+### Typed Environment
+
+```typescript
+import type { Env } from './.wrangler/types/runtime';
+
+const app = new Hono<{ Bindings: Env }>();
+
+app.get('/data', async (c) => {
+  const value = await c.env.MY_KV.get('key');  // Fully typed
+  return c.text(value || 'Not found');
+});
+```
+
+### Middleware
+
+```typescript
+import { cors } from 'hono/cors';
+import { logger } from 'hono/logger';
+
+app.use('*', logger());
+app.use('/api/*', cors({ origin: '*' }));
+
+// Custom middleware
+app.use('/protected/*', async (c, next) => {
+  const auth = c.req.header('Authorization');
+  if (!auth?.startsWith('Bearer ')) return c.text('Unauthorized', 401);
+  await next();
+});
+```
+
+### Request Validation (Zod)
+
+```typescript
+import { zValidator } from '@hono/zod-validator';
+import { z } from 'zod';
+
+const schema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+});
+
+app.post('/users', zValidator('json', schema), async (c) => {
+  const validated = c.req.valid('json');  // Type-safe, validated data
+  return c.json({ id: 1, ...validated });
+});
+```
+
+**Error handling**: Automatic 400 response with validation errors
+
+### Route Groups
+
+```typescript
+const api = new Hono().basePath('/api');
+
+api.get('/users', (c) => c.json([]));
+api.post('/users', (c) => c.json({ id: 1 }));
+
+app.route('/', api);  // Mounts at /api/*
+```
+
+### Error Handling
+
+```typescript
+app.onError((err, c) => {
+  console.error(err);
+  return c.json({ error: err.message }, 500);
+});
+
+app.notFound((c) => c.json({ error: 'Not Found' }, 404));
+```
+
+### Accessing ExecutionContext
+
+```typescript
+export default {
+  fetch(request: Request, env: Env, ctx: ExecutionContext) {
+    return app.fetch(request, env, ctx);
+  },
+};
+
+// In route handlers:
+app.get('/log', (c) => {
+  c.executionCtx.waitUntil(logRequest(c.req));
+  return c.text('OK');
+});
+```
+
+### OpenAPI/Swagger (Hono OpenAPI)
+
+```typescript
+import { OpenAPIHono, createRoute, z } from '@hono/zod-openapi';
+
+const app = new OpenAPIHono();
+
+const route = createRoute({
+  method: 'get',
+  path: '/users/{id}',
+  request: { params: z.object({ id: z.string() }) },
+  responses: {
+    200: { description: 'User found', content: { 'application/json': { schema: z.object({ id: z.string() }) } } },
+  },
+});
+
+app.openapi(route, (c) => {
+  const { id } = c.req.valid('param');
+  return c.json({ id });
+});
+
+app.doc('/openapi.json', { openapi: '3.0.0', info: { version: '1.0.0', title: 'API' } });
+```
+
+### Testing with Hono
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import app from '../src/index';
+
+describe('API', () => {
+  it('GET /', async () => {
+    const res = await app.request('/');
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe('Hello World!');
+  });
+});
+```
+
+## Other Frameworks
+
+### itty-router (Minimalist)
+
+```typescript
+import { Router } from 'itty-router';
+
+const router = Router();
+
+router.get('/users/:id', ({ params }) => new Response(params.id));
+
+export default { fetch: router.handle };
+```
+
+**Use case**: Tiny bundle size (~500 bytes), simple routing needs
+
+### Worktop (Advanced)
+
+```typescript
+import { Router } from 'worktop';
+
+const router = new Router();
+
+router.add('GET', '/users/:id', (req, res) => {
+  res.send(200, { id: req.params.id });
+});
+
+router.listen();
+```
+
+**Use case**: Advanced routing, built-in CORS/cache utilities
+
+## Framework Comparison
+
+| Framework | Bundle Size | TypeScript | Middleware | Validation | Best For |
+|-----------|-------------|------------|------------|------------|----------|
+| Hono | ~12KB | Excellent | Rich | Zod | Production apps |
+| itty-router | ~500B | Good | Basic | Manual | Minimal APIs |
+| Worktop | ~8KB | Good | Advanced | Manual | Complex routing |
+
+## See Also
+
+- [Patterns](./patterns.md) - Common workflows
+- [API](./api.md) - Runtime APIs
+- [Gotchas](./gotchas.md) - Framework-specific issues

@@ -1,1 +1,169 @@
-IyBCb3QgTWFuYWdlbWVudCBBUEkKCiMjIFdvcmtlcnM6IEJvdE1hbmFnZW1lbnQgSW50ZXJmYWNlCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBCb3RNYW5hZ2VtZW50IHsKICBzY29yZTogbnVtYmVyOyAgICAgICAgICAgICAgLy8gMS05OSAoRW50ZXJwcmlzZSksIDAgaWYgbm90IGNvbXB1dGVkCiAgdmVyaWZpZWRCb3Q6IGJvb2xlYW47ICAgICAgIC8vIElzIHZlcmlmaWVkIGJvdAogIHN0YXRpY1Jlc291cmNlOiBib29sZWFuOyAgICAvLyBTZXJ2ZXMgc3RhdGljIHJlc291cmNlCiAgamEzSGFzaDogc3RyaW5nOyAgICAgICAgICAgIC8vIEpBMyBmaW5nZXJwcmludCAoRW50ZXJwcmlzZSwgSFRUUFMgb25seSkKICBqYTQ6IHN0cmluZzsgICAgICAgICAgICAgICAgLy8gSkE0IGZpbmdlcnByaW50IChFbnRlcnByaXNlLCBIVFRQUyBvbmx5KQogIGpzRGV0ZWN0aW9uPzogewogICAgcGFzc2VkOiBib29sZWFuOyAgICAgICAgICAvLyBQYXNzZWQgSlMgZGV0ZWN0aW9uIChpZiBlbmFibGVkKQogIH07CiAgZGV0ZWN0aW9uSWRzOiBudW1iZXJbXTsgICAgIC8vIEhldXJpc3RpYyBkZXRlY3Rpb24gSURzCiAgY29ycG9yYXRlUHJveHk/OiBib29sZWFuOyAgIC8vIEZyb20gY29ycG9yYXRlIHByb3h5IChFbnRlcnByaXNlKQp9CgovLyBERVBSRUNBVEVEOiBVc2UgYm90TWFuYWdlbWVudC5zY29yZSBpbnN0ZWFkCi8vIHJlcXVlc3QuY2YuY2xpZW50VHJ1c3RTY29yZSAobGVnYWN5LCBkdXBsaWNhdGUgb2YgYm90TWFuYWdlbWVudC5zY29yZSkKCi8vIEFjY2VzcyB2aWEgcmVxdWVzdC5jZgppbXBvcnQgdHlwZSB7IEluY29taW5nUmVxdWVzdENmUHJvcGVydGllcyB9IGZyb20gJ0BjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXMnOwoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCBjZiA9IHJlcXVlc3QuY2YgYXMgSW5jb21pbmdSZXF1ZXN0Q2ZQcm9wZXJ0aWVzIHwgdW5kZWZpbmVkOwogICAgY29uc3QgYm90TWdtdCA9IGNmPy5ib3RNYW5hZ2VtZW50OwogICAgCiAgICBpZiAoIWJvdE1nbXQpIHJldHVybiBmZXRjaChyZXF1ZXN0KTsKICAgIGlmIChib3RNZ210LnZlcmlmaWVkQm90KSByZXR1cm4gZmV0Y2gocmVxdWVzdCk7IC8vIEFsbG93IHZlcmlmaWVkIGJvdHMKICAgIGlmIChib3RNZ210LnNjb3JlID09PSAxKSByZXR1cm4gbmV3IFJlc3BvbnNlKCdCbG9ja2VkJywgeyBzdGF0dXM6IDQwMyB9KTsKICAgIGlmIChib3RNZ210LnNjb3JlIDwgMzApIHJldHVybiBuZXcgUmVzcG9uc2UoJ0NoYWxsZW5nZSByZXF1aXJlZCcsIHsgc3RhdHVzOiA0MjkgfSk7CiAgICAKICAgIHJldHVybiBmZXRjaChyZXF1ZXN0KTsKICB9Cn07CmBgYAoKIyMgV0FGIEZpZWxkcyBSZWZlcmVuY2UKCmBgYHR4dAojIFNjb3JlIGZpZWxkcwpjZi5ib3RfbWFuYWdlbWVudC5zY29yZSAgICAgICAgICAgICAgICAgICAgIyAwLTk5ICgwID0gbm90IGNvbXB1dGVkKQpjZi5ib3RfbWFuYWdlbWVudC52ZXJpZmllZF9ib3QgICAgICAgICAgICAgIyBib29sZWFuCmNmLmJvdF9tYW5hZ2VtZW50LnN0YXRpY19yZXNvdXJjZSAgICAgICAgICAjIGJvb2xlYW4KY2YuYm90X21hbmFnZW1lbnQuamEzX2hhc2ggICAgICAgICAgICAgICAgICMgc3RyaW5nIChFbnRlcnByaXNlKQpjZi5ib3RfbWFuYWdlbWVudC5qYTQgICAgICAgICAgICAgICAgICAgICAgIyBzdHJpbmcgKEVudGVycHJpc2UpCmNmLmJvdF9tYW5hZ2VtZW50LmRldGVjdGlvbl9pZHMgICAgICAgICAgICAjIGFycmF5CmNmLmJvdF9tYW5hZ2VtZW50LmpzX2RldGVjdGlvbi5wYXNzZWQgICAgICAjIGJvb2xlYW4KY2YuYm90X21hbmFnZW1lbnQuY29ycG9yYXRlX3Byb3h5ICAgICAgICAgICMgYm9vbGVhbiAoRW50ZXJwcmlzZSkKY2YudmVyaWZpZWRfYm90X2NhdGVnb3J5ICAgICAgICAgICAgICAgICAgICMgc3RyaW5nCgojIFdvcmtlcnMgZXF1aXZhbGVudApyZXF1ZXN0LmNmLmJvdE1hbmFnZW1lbnQuc2NvcmUKcmVxdWVzdC5jZi5ib3RNYW5hZ2VtZW50LnZlcmlmaWVkQm90CnJlcXVlc3QuY2YuYm90TWFuYWdlbWVudC5qYTNIYXNoCnJlcXVlc3QuY2YuYm90TWFuYWdlbWVudC5qYTQKcmVxdWVzdC5jZi5ib3RNYW5hZ2VtZW50LmpzRGV0ZWN0aW9uLnBhc3NlZApyZXF1ZXN0LmNmLnZlcmlmaWVkQm90Q2F0ZWdvcnkKYGBgCgojIyBKQTQgU2lnbmFscyAoRW50ZXJwcmlzZSkKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHR5cGUgeyBJbmNvbWluZ1JlcXVlc3RDZlByb3BlcnRpZXMgfSBmcm9tICdAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzJzsKCmludGVyZmFjZSBKQTRTaWduYWxzIHsKICAvLyBSYXRpb3MgKDAuMC0xLjApCiAgaGV1cmlzdGljX3JhdGlvXzFoPzogbnVtYmVyOyAgLy8gRnJhY3Rpb24gZmxhZ2dlZCBieSBoZXVyaXN0aWNzCiAgYnJvd3Nlcl9yYXRpb18xaD86IG51bWJlcjsgICAgLy8gRnJhY3Rpb24gZnJvbSByZWFsIGJyb3dzZXJzICAKICBjYWNoZV9yYXRpb18xaD86IG51bWJlcjsgICAgICAvLyBGcmFjdGlvbiBoaXR0aW5nIGNhY2hlCiAgaDJoM19yYXRpb18xaD86IG51bWJlcjsgICAgICAgLy8gRnJhY3Rpb24gdXNpbmcgSFRUUC8yIG9yIEhUVFAvMwogIC8vIFJhbmtzIChyZWxhdGl2ZSBwb3NpdGlvbiBpbiBkaXN0cmlidXRpb24pCiAgdWFzX3JhbmtfMWg/OiBudW1iZXI7ICAgICAgICAgLy8gVXNlci1BZ2VudCBkaXZlcnNpdHkgcmFuawogIHBhdGhzX3JhbmtfMWg/OiBudW1iZXI7ICAgICAgIC8vIFBhdGggZGl2ZXJzaXR5IHJhbmsKICByZXFzX3JhbmtfMWg/OiBudW1iZXI7ICAgICAgICAvLyBSZXF1ZXN0IHZvbHVtZSByYW5rCiAgaXBzX3JhbmtfMWg/OiBudW1iZXI7ICAgICAgICAgLy8gSVAgZGl2ZXJzaXR5IHJhbmsKICAvLyBRdWFudGlsZXMgKDAuMC0xLjAsIHBlcmNlbnRpbGUgaW4gZGlzdHJpYnV0aW9uKQogIHJlcXNfcXVhbnRpbGVfMWg/OiBudW1iZXI7ICAgIC8vIFJlcXVlc3Qgdm9sdW1lIHF1YW50aWxlCiAgaXBzX3F1YW50aWxlXzFoPzogbnVtYmVyOyAgICAgLy8gSVAgY291bnQgcXVhbnRpbGUKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCBjZiA9IHJlcXVlc3QuY2YgYXMgSW5jb21pbmdSZXF1ZXN0Q2ZQcm9wZXJ0aWVzIHwgdW5kZWZpbmVkOwogICAgY29uc3QgamE0U2lnbmFscyA9IGNmPy5qYTRTaWduYWxzIGFzIEpBNFNpZ25hbHMgfCB1bmRlZmluZWQ7CiAgICAKICAgIGlmICghamE0U2lnbmFscykgcmV0dXJuIGZldGNoKHJlcXVlc3QpOyAvLyBOb3QgYXZhaWxhYmxlIGZvciBIVFRQIG9yIFdvcmtlciByb3V0aW5nCiAgICAKICAgIC8vIENoZWNrIGZvciBhbm9tYWxvdXMgYmVoYXZpb3IKICAgIC8vIEhpZ2ggaGV1cmlzdGljX3JhdGlvIG9yIGxvdyBicm93c2VyX3JhdGlvID0gc3VzcGljaW91cwogICAgY29uc3QgaGV1cmlzdGljUmF0aW8gPSBqYTRTaWduYWxzLmhldXJpc3RpY19yYXRpb18xaCA/PyAwOwogICAgY29uc3QgYnJvd3NlclJhdGlvID0gamE0U2lnbmFscy5icm93c2VyX3JhdGlvXzFoID8/IDA7CiAgICAKICAgIGlmIChoZXVyaXN0aWNSYXRpbyA+IDAuNSB8fCBicm93c2VyUmF0aW8gPCAwLjMpIHsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnU3VzcGljaW91cyB0cmFmZmljJywgeyBzdGF0dXM6IDQwMyB9KTsKICAgIH0KICAgIAogICAgcmV0dXJuIGZldGNoKHJlcXVlc3QpOwogIH0KfTsKYGBgCgojIyBDb21tb24gUGF0dGVybnMKClNlZSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIGZvciBXb3JrZXJzIGV4YW1wbGVzOiBtb2JpbGUgYXBwIGFsbG93bGlzdGluZywgY29ycG9yYXRlIHByb3h5IGV4ZW1wdGlvbiwgZGF0YWNlbnRlciBkZXRlY3Rpb24sIGNvbmRpdGlvbmFsIGRlbGF5LCBhbmQgbW9yZS4KCiMjIEJvdCBBbmFseXRpY3MKCiMjIyBBY2Nlc3MgTG9jYXRpb25zCi0gRGFzaGJvYXJkOiBTZWN1cml0eSA+IEJvdHMgKG9sZCkgb3IgU2VjdXJpdHkgPiBBbmFseXRpY3MgPiBCb3QgYW5hbHlzaXMgKG5ldykKLSBHcmFwaFFMIEFQSSBmb3IgcHJvZ3JhbW1hdGljIGFjY2VzcwotIFNlY3VyaXR5IEV2ZW50cyAmIFNlY3VyaXR5IEFuYWx5dGljcwotIExvZ3B1c2gvTG9ncHVsbAoKIyMjIEF2YWlsYWJsZSBEYXRhCi0gKipFbnRlcnByaXNlIEJNKio6IEJvdCBzY29yZXMgKDEtOTkpLCBib3Qgc2NvcmUgc291cmNlLCBkaXN0cmlidXRpb24KLSAqKlByby9CdXNpbmVzcyoqOiBCb3QgZ3JvdXBpbmdzIChhdXRvbWF0ZWQsIGxpa2VseSBhdXRvbWF0ZWQsIGxpa2VseSBodW1hbikKLSBUb3AgYXR0cmlidXRlczogSVBzLCBwYXRocywgdXNlciBhZ2VudHMsIGNvdW50cmllcwotIERldGVjdGlvbiBzb3VyY2VzOiBIZXVyaXN0aWNzLCBNTCwgQUQsIEpTRAotIFZlcmlmaWVkIGJvdCBjYXRlZ29yaWVzCgojIyMgVGltZSBSYW5nZXMKLSAqKkVudGVycHJpc2UgQk0qKjogVXAgdG8gMSB3ZWVrIGF0IGEgdGltZSwgMzAgZGF5cyBoaXN0b3J5Ci0gKipQcm8vQnVzaW5lc3MqKjogVXAgdG8gNzIgaG91cnMgYXQgYSB0aW1lLCAzMCBkYXlzIGhpc3RvcnkKLSBSZWFsLXRpbWUgaW4gbW9zdCBjYXNlcywgYWRhcHRpdmUgc2FtcGxpbmcgKDEtMTAlIGRlcGVuZGluZyBvbiB2b2x1bWUpCgojIyBMb2dwdXNoIEZpZWxkcwoKYGBgdHh0CkJvdFNjb3JlICAgICAgICAgICAgICAjIDEtOTkgb3IgMCBpZiBub3QgY29tcHV0ZWQKQm90U2NvcmVTcmMgICAgICAgICAgICMgRGV0ZWN0aW9uIGVuZ2luZSAoTUwsIEhldXJpc3RpY3MsIGV0Yy4pCkJvdFRhZ3MgICAgICAgICAgICAgICAjIENsYXNzaWZpY2F0aW9uIHRhZ3MKQm90RGV0ZWN0aW9uSURzICAgICAgICMgSGV1cmlzdGljIGRldGVjdGlvbiBJRHMKYGBgCgoqKkJvdFNjb3JlU3JjIHZhbHVlczoqKgotIGAiSGV1cmlzdGljcyJgIC0gS25vd24gZmluZ2VycHJpbnQKLSBgIk1hY2hpbmUgTGVhcm5pbmciYCAtIE1MIG1vZGVsCi0gYCJBbm9tYWx5IERldGVjdGlvbiJgIC0gQmFzZWxpbmUgYW5vbWFseQotIGAiSlMgRGV0ZWN0aW9uImAgLSBKYXZhU2NyaXB0IGNoZWNrCi0gYCJDbG91ZGZsYXJlIFNlcnZpY2UiYCAtIFplcm8gVHJ1c3QKLSBgIk5vdCBDb21wdXRlZCJgIC0gU2NvcmUgPSAwCgpBY2Nlc3MgdmlhIExvZ3B1c2ggKHN0cmVhbSB0byBjbG91ZCBzdG9yYWdlL1NJRU0pLCBMb2dwdWxsIChBUEkgdG8gZmV0Y2ggbG9ncyksIG9yIEdyYXBoUUwgQVBJIChxdWVyeSBhbmFseXRpY3MgZGF0YSkuCgojIyBUZXN0aW5nIHdpdGggTWluaWZsYXJlCgpNaW5pZmxhcmUgcHJvdmlkZXMgbW9jayBib3RNYW5hZ2VtZW50IGRhdGEgZm9yIGxvY2FsIGRldmVsb3BtZW50OgoKKipEZWZhdWx0IHZhbHVlczoqKgotIGBzY29yZTogOTlgIChodW1hbikKLSBgdmVyaWZpZWRCb3Q6IGZhbHNlYAotIGBjb3Jwb3JhdGVQcm94eTogZmFsc2VgCi0gYGphM0hhc2g6ICIyNWI0ODgyYzJiY2I1MGNkNmI0NjlmZjI4YzU5Njc0MiJgCi0gYHN0YXRpY1Jlc291cmNlOiBmYWxzZWAKLSBgZGV0ZWN0aW9uSWRzOiBbXWAKCioqT3ZlcnJpZGUgaW4gdGVzdHM6KioKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBnZXRQbGF0Zm9ybVByb3h5IH0gZnJvbSAnd3JhbmdsZXInOwoKY29uc3QgeyBjZiwgZGlzcG9zZSB9ID0gYXdhaXQgZ2V0UGxhdGZvcm1Qcm94eSgpOwovLyBjZi5ib3RNYW5hZ2VtZW50IGlzIGZyb3plbiBtb2NrIG9iamVjdApleHBlY3QoY2YuYm90TWFuYWdlbWVudC5zY29yZSkudG9CZSg5OSk7CmBgYAoKRm9yIGN1c3RvbSB0ZXN0IGRhdGEsIG1vY2sgcmVxdWVzdC5jZiBpbiB5b3VyIHRlc3Qgc2V0dXAuCg==
+# Bot Management API
+
+## Workers: BotManagement Interface
+
+```typescript
+interface BotManagement {
+  score: number;              // 1-99 (Enterprise), 0 if not computed
+  verifiedBot: boolean;       // Is verified bot
+  staticResource: boolean;    // Serves static resource
+  ja3Hash: string;            // JA3 fingerprint (Enterprise, HTTPS only)
+  ja4: string;                // JA4 fingerprint (Enterprise, HTTPS only)
+  jsDetection?: {
+    passed: boolean;          // Passed JS detection (if enabled)
+  };
+  detectionIds: number[];     // Heuristic detection IDs
+  corporateProxy?: boolean;   // From corporate proxy (Enterprise)
+}
+
+// DEPRECATED: Use botManagement.score instead
+// request.cf.clientTrustScore (legacy, duplicate of botManagement.score)
+
+// Access via request.cf
+import type { IncomingRequestCfProperties } from '@cloudflare/workers-types';
+
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const cf = request.cf as IncomingRequestCfProperties | undefined;
+    const botMgmt = cf?.botManagement;
+    
+    if (!botMgmt) return fetch(request);
+    if (botMgmt.verifiedBot) return fetch(request); // Allow verified bots
+    if (botMgmt.score === 1) return new Response('Blocked', { status: 403 });
+    if (botMgmt.score < 30) return new Response('Challenge required', { status: 429 });
+    
+    return fetch(request);
+  }
+};
+```
+
+## WAF Fields Reference
+
+```txt
+# Score fields
+cf.bot_management.score                    # 0-99 (0 = not computed)
+cf.bot_management.verified_bot             # boolean
+cf.bot_management.static_resource          # boolean
+cf.bot_management.ja3_hash                 # string (Enterprise)
+cf.bot_management.ja4                      # string (Enterprise)
+cf.bot_management.detection_ids            # array
+cf.bot_management.js_detection.passed      # boolean
+cf.bot_management.corporate_proxy          # boolean (Enterprise)
+cf.verified_bot_category                   # string
+
+# Workers equivalent
+request.cf.botManagement.score
+request.cf.botManagement.verifiedBot
+request.cf.botManagement.ja3Hash
+request.cf.botManagement.ja4
+request.cf.botManagement.jsDetection.passed
+request.cf.verifiedBotCategory
+```
+
+## JA4 Signals (Enterprise)
+
+```typescript
+import type { IncomingRequestCfProperties } from '@cloudflare/workers-types';
+
+interface JA4Signals {
+  // Ratios (0.0-1.0)
+  heuristic_ratio_1h?: number;  // Fraction flagged by heuristics
+  browser_ratio_1h?: number;    // Fraction from real browsers  
+  cache_ratio_1h?: number;      // Fraction hitting cache
+  h2h3_ratio_1h?: number;       // Fraction using HTTP/2 or HTTP/3
+  // Ranks (relative position in distribution)
+  uas_rank_1h?: number;         // User-Agent diversity rank
+  paths_rank_1h?: number;       // Path diversity rank
+  reqs_rank_1h?: number;        // Request volume rank
+  ips_rank_1h?: number;         // IP diversity rank
+  // Quantiles (0.0-1.0, percentile in distribution)
+  reqs_quantile_1h?: number;    // Request volume quantile
+  ips_quantile_1h?: number;     // IP count quantile
+}
+
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const cf = request.cf as IncomingRequestCfProperties | undefined;
+    const ja4Signals = cf?.ja4Signals as JA4Signals | undefined;
+    
+    if (!ja4Signals) return fetch(request); // Not available for HTTP or Worker routing
+    
+    // Check for anomalous behavior
+    // High heuristic_ratio or low browser_ratio = suspicious
+    const heuristicRatio = ja4Signals.heuristic_ratio_1h ?? 0;
+    const browserRatio = ja4Signals.browser_ratio_1h ?? 0;
+    
+    if (heuristicRatio > 0.5 || browserRatio < 0.3) {
+      return new Response('Suspicious traffic', { status: 403 });
+    }
+    
+    return fetch(request);
+  }
+};
+```
+
+## Common Patterns
+
+See [patterns.md](./patterns.md) for Workers examples: mobile app allowlisting, corporate proxy exemption, datacenter detection, conditional delay, and more.
+
+## Bot Analytics
+
+### Access Locations
+- Dashboard: Security > Bots (old) or Security > Analytics > Bot analysis (new)
+- GraphQL API for programmatic access
+- Security Events & Security Analytics
+- Logpush/Logpull
+
+### Available Data
+- **Enterprise BM**: Bot scores (1-99), bot score source, distribution
+- **Pro/Business**: Bot groupings (automated, likely automated, likely human)
+- Top attributes: IPs, paths, user agents, countries
+- Detection sources: Heuristics, ML, AD, JSD
+- Verified bot categories
+
+### Time Ranges
+- **Enterprise BM**: Up to 1 week at a time, 30 days history
+- **Pro/Business**: Up to 72 hours at a time, 30 days history
+- Real-time in most cases, adaptive sampling (1-10% depending on volume)
+
+## Logpush Fields
+
+```txt
+BotScore              # 1-99 or 0 if not computed
+BotScoreSrc           # Detection engine (ML, Heuristics, etc.)
+BotTags               # Classification tags
+BotDetectionIDs       # Heuristic detection IDs
+```
+
+**BotScoreSrc values:**
+- `"Heuristics"` - Known fingerprint
+- `"Machine Learning"` - ML model
+- `"Anomaly Detection"` - Baseline anomaly
+- `"JS Detection"` - JavaScript check
+- `"Cloudflare Service"` - Zero Trust
+- `"Not Computed"` - Score = 0
+
+Access via Logpush (stream to cloud storage/SIEM), Logpull (API to fetch logs), or GraphQL API (query analytics data).
+
+## Testing with Miniflare
+
+Miniflare provides mock botManagement data for local development:
+
+**Default values:**
+- `score: 99` (human)
+- `verifiedBot: false`
+- `corporateProxy: false`
+- `ja3Hash: "25b4882c2bcb50cd6b469ff28c596742"`
+- `staticResource: false`
+- `detectionIds: []`
+
+**Override in tests:**
+```typescript
+import { getPlatformProxy } from 'wrangler';
+
+const { cf, dispose } = await getPlatformProxy();
+// cf.botManagement is frozen mock object
+expect(cf.botManagement.score).toBe(99);
+```
+
+For custom test data, mock request.cf in your test setup.

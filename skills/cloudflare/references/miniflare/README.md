@@ -1,1 +1,105 @@
-IyBNaW5pZmxhcmUKCkxvY2FsIHNpbXVsYXRvciBmb3IgQ2xvdWRmbGFyZSBXb3JrZXJzIGRldmVsb3BtZW50L3Rlc3RpbmcuIFJ1bnMgV29ya2VycyBpbiB3b3JrZXJkIHNhbmRib3ggaW1wbGVtZW50aW5nIHJ1bnRpbWUgQVBJcyAtIG5vIGludGVybmV0IHJlcXVpcmVkLgoKIyMgRmVhdHVyZXMKCi0gRnVsbC1mZWF0dXJlZDogS1YsIER1cmFibGUgT2JqZWN0cywgUjIsIEQxLCBXZWJTb2NrZXRzLCBRdWV1ZXMKLSBGdWxseS1sb2NhbDogdGVzdCB3aXRob3V0IGludGVybmV0LCBpbnN0YW50IHJlbG9hZAotIFR5cGVTY3JpcHQtbmF0aXZlOiBkZXRhaWxlZCBsb2dnaW5nLCBzb3VyY2UgbWFwcwotIEFkdmFuY2VkIHRlc3Rpbmc6IGRpc3BhdGNoIGV2ZW50cyB3aXRob3V0IEhUVFAsIHNpbXVsYXRlIFdvcmtlciBjb25uZWN0aW9ucwoKIyMgV2hlbiB0byBVc2UKCioqRGVjaXNpb24gdHJlZSBmb3IgdGVzdGluZyBXb3JrZXJzOioqCgpgYGAKTmVlZCB0byB0ZXN0IFdvcmtlcnM/CuKUggrilJzilIAgVW5pdCB0ZXN0cyBmb3IgYnVzaW5lc3MgbG9naWMgb25seT8K4pSCICDilJTilIAgZ2V0UGxhdGZvcm1Qcm94eSAoVml0ZXN0L0plc3QpIOKGkiBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQjZ2V0cGxhdGZvcm1wcm94eSkK4pSCICAgICBGYXN0LCBubyBIVFRQLCBkaXJlY3QgYmluZGluZyBhY2Nlc3MK4pSCCuKUnOKUgCBJbnRlZ3JhdGlvbiB0ZXN0cyB3aXRoIGZ1bGwgcnVudGltZT8K4pSCICDilJzilIAgU2luZ2xlIFdvcmtlcj8K4pSCICDilIIgIOKUlOKUgCBNaW5pZmxhcmUgQVBJIOKGkiBbUXVpY2sgU3RhcnRdKCNxdWljay1zdGFydCkK4pSCICDilIIgICAgIEZ1bGwgY29udHJvbCwgcHJvZ3JhbW1hdGljIGFjY2VzcwrilIIgIOKUggrilIIgIOKUnOKUgCBNdWx0aXBsZSBXb3JrZXJzICsgc2VydmljZSBiaW5kaW5ncz8K4pSCICDilIIgIOKUlOKUgCBNaW5pZmxhcmUgd29ya2VycyBhcnJheSDihpIgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCNtdWx0aXBsZS13b3JrZXJzKQrilIIgIOKUgiAgICAgU2hhcmVkIHN0b3JhZ2UsIGludGVyLXdvcmtlciBjYWxscwrilIIgIOKUggrilIIgIOKUlOKUgCBWaXRlc3QgdGVzdCBydW5uZXIgaW50ZWdyYXRpb24/CuKUgiAgICAg4pSU4pSAIHZpdGVzdC1wb29sLXdvcmtlcnMg4oaSIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCN2aXRlc3QtcG9vbC13b3JrZXJzKQrilIIgICAgICAgIEZ1bGwgV29ya2VycyBlbnYgaW4gVml0ZXN0CuKUggrilJTilIAgTG9jYWwgZGV2IHNlcnZlcj8KICAg4pSU4pSAIHdyYW5nbGVyIGRldiAobm90IE1pbmlmbGFyZSkKICAgICAgSG90IHJlbG9hZCwgYXV0b21hdGljIGNvbmZpZwpgYGAKCioqVXNlIE1pbmlmbGFyZSBmb3I6KioKLSBJbnRlZ3JhdGlvbiB0ZXN0cyB3aXRoIGZ1bGwgV29ya2VyIHJ1bnRpbWUKLSBUZXN0aW5nIGJpbmRpbmdzL3N0b3JhZ2UgbG9jYWxseQotIE11bHRpcGxlIFdvcmtlcnMgd2l0aCBzZXJ2aWNlIGJpbmRpbmdzCi0gUHJvZ3JhbW1hdGljIGV2ZW50IGRpc3BhdGNoIChmZXRjaCwgcXVldWUsIHNjaGVkdWxlZCkKCioqVXNlIGdldFBsYXRmb3JtUHJveHkgZm9yOioqCi0gRmFzdCB1bml0IHRlc3RzIG9mIGJ1c2luZXNzIGxvZ2ljCi0gVGVzdGluZyB3aXRob3V0IEhUVFAgb3ZlcmhlYWQKLSBWaXRlc3QvSmVzdCBlbnZpcm9ubWVudHMKCioqVXNlIFdyYW5nbGVyIGZvcjoqKgotIExvY2FsIGRldmVsb3BtZW50IHdvcmtmbG93Ci0gUHJvZHVjdGlvbiBkZXBsb3ltZW50cwoKIyMgU2V0dXAKCmBgYGJhc2gKbnBtIGkgLUQgbWluaWZsYXJlCmBgYAoKUmVxdWlyZXMgRVMgbW9kdWxlcyBpbiBgcGFja2FnZS5qc29uYDoKYGBganNvbgp7InR5cGUiOiAibW9kdWxlIn0KYGBgCgojIyBRdWljayBTdGFydAoKYGBganMKaW1wb3J0IHsgTWluaWZsYXJlIH0gZnJvbSAibWluaWZsYXJlIjsKCmNvbnN0IG1mID0gbmV3IE1pbmlmbGFyZSh7CiAgbW9kdWxlczogdHJ1ZSwKICBzY3JpcHQ6IGAKICAgIGV4cG9ydCBkZWZhdWx0IHsKICAgICAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52LCBjdHgpIHsKICAgICAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJIZWxsbyBNaW5pZmxhcmUhIik7CiAgICAgIH0KICAgIH0KICBgLAp9KTsKCmNvbnN0IHJlcyA9IGF3YWl0IG1mLmRpc3BhdGNoRmV0Y2goImh0dHA6Ly9sb2NhbGhvc3Q6ODc4Ny8iKTsKY29uc29sZS5sb2coYXdhaXQgcmVzLnRleHQoKSk7IC8vIEhlbGxvIE1pbmlmbGFyZSEKYXdhaXQgbWYuZGlzcG9zZSgpOwpgYGAKCiMjIFJlYWRpbmcgT3JkZXIKCioqTmV3IHRvIE1pbmlmbGFyZT8qKiBTdGFydCBoZXJlOgoxLiBbUXVpY2sgU3RhcnRdKCNxdWljay1zdGFydCkgLSBSdW5uaW5nIGluIDIgbWludXRlcwoyLiBbV2hlbiB0byBVc2VdKCN3aGVuLXRvLXVzZSkgLSBDaG9vc2UgeW91ciB0ZXN0aW5nIGFwcHJvYWNoCjMuIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBUZXN0aW5nIHBhdHRlcm5zIChnZXRQbGF0Zm9ybVByb3h5LCBWaXRlc3QsIG5vZGU6dGVzdCkKNC4gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBDb25maWd1cmUgYmluZGluZ3MsIHN0b3JhZ2UsIG11bHRpcGxlIHdvcmtlcnMKCioqVHJvdWJsZXNob290aW5nOioqCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBDb21tb24gZXJyb3JzIGFuZCBkZWJ1Z2dpbmcKCioqQVBJIHJlZmVyZW5jZToqKgotIFthcGkubWRdKC4vYXBpLm1kKSAtIENvbXBsZXRlIG1ldGhvZCByZWZlcmVuY2UKCiMjIFNlZSBBbHNvCi0gW3dyYW5nbGVyXSguLi93cmFuZ2xlci8pIC0gQ0xJIHRvb2wgdGhhdCBlbWJlZHMgTWluaWZsYXJlIGZvciBgd3JhbmdsZXIgZGV2YAotIFt3b3JrZXJkXSguLi93b3JrZXJkLykgLSBSdW50aW1lIHRoYXQgcG93ZXJzIE1pbmlmbGFyZQotIFt3b3JrZXJzXSguLi93b3JrZXJzLykgLSBXb3JrZXJzIHJ1bnRpbWUgQVBJIGRvY3VtZW50YXRpb24K
+# Miniflare
+
+Local simulator for Cloudflare Workers development/testing. Runs Workers in workerd sandbox implementing runtime APIs - no internet required.
+
+## Features
+
+- Full-featured: KV, Durable Objects, R2, D1, WebSockets, Queues
+- Fully-local: test without internet, instant reload
+- TypeScript-native: detailed logging, source maps
+- Advanced testing: dispatch events without HTTP, simulate Worker connections
+
+## When to Use
+
+**Decision tree for testing Workers:**
+
+```
+Need to test Workers?
+│
+├─ Unit tests for business logic only?
+│  └─ getPlatformProxy (Vitest/Jest) → [patterns.md](./patterns.md#getplatformproxy)
+│     Fast, no HTTP, direct binding access
+│
+├─ Integration tests with full runtime?
+│  ├─ Single Worker?
+│  │  └─ Miniflare API → [Quick Start](#quick-start)
+│  │     Full control, programmatic access
+│  │
+│  ├─ Multiple Workers + service bindings?
+│  │  └─ Miniflare workers array → [configuration.md](./configuration.md#multiple-workers)
+│  │     Shared storage, inter-worker calls
+│  │
+│  └─ Vitest test runner integration?
+│     └─ vitest-pool-workers → [patterns.md](./patterns.md#vitest-pool-workers)
+│        Full Workers env in Vitest
+│
+└─ Local dev server?
+   └─ wrangler dev (not Miniflare)
+      Hot reload, automatic config
+```
+
+**Use Miniflare for:**
+- Integration tests with full Worker runtime
+- Testing bindings/storage locally
+- Multiple Workers with service bindings
+- Programmatic event dispatch (fetch, queue, scheduled)
+
+**Use getPlatformProxy for:**
+- Fast unit tests of business logic
+- Testing without HTTP overhead
+- Vitest/Jest environments
+
+**Use Wrangler for:**
+- Local development workflow
+- Production deployments
+
+## Setup
+
+```bash
+npm i -D miniflare
+```
+
+Requires ES modules in `package.json`:
+```json
+{"type": "module"}
+```
+
+## Quick Start
+
+```js
+import { Miniflare } from "miniflare";
+
+const mf = new Miniflare({
+  modules: true,
+  script: `
+    export default {
+      async fetch(request, env, ctx) {
+        return new Response("Hello Miniflare!");
+      }
+    }
+  `,
+});
+
+const res = await mf.dispatchFetch("http://localhost:8787/");
+console.log(await res.text()); // Hello Miniflare!
+await mf.dispose();
+```
+
+## Reading Order
+
+**New to Miniflare?** Start here:
+1. [Quick Start](#quick-start) - Running in 2 minutes
+2. [When to Use](#when-to-use) - Choose your testing approach
+3. [patterns.md](./patterns.md) - Testing patterns (getPlatformProxy, Vitest, node:test)
+4. [configuration.md](./configuration.md) - Configure bindings, storage, multiple workers
+
+**Troubleshooting:**
+- [gotchas.md](./gotchas.md) - Common errors and debugging
+
+**API reference:**
+- [api.md](./api.md) - Complete method reference
+
+## See Also
+- [wrangler](../wrangler/) - CLI tool that embeds Miniflare for `wrangler dev`
+- [workerd](../workerd/) - Runtime that powers Miniflare
+- [workers](../workers/) - Workers runtime API documentation

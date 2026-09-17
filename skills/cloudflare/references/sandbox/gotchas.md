@@ -1,1 +1,194 @@
-IyBHb3RjaGFzICYgQmVzdCBQcmFjdGljZXMKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAiQ29udGFpbmVyIHJ1bm5pbmcgaW5kZWZpbml0ZWx5IgoKKipDYXVzZToqKiBga2VlcEFsaXZlOiB0cnVlYCB3aXRob3V0IGNhbGxpbmcgYGRlc3Ryb3koKWAKKipTb2x1dGlvbjoqKiBBbHdheXMgY2FsbCBgZGVzdHJveSgpYCB3aGVuIGRvbmUgd2l0aCBrZWVwQWxpdmUgY29udGFpbmVycwoKYGBgdHlwZXNjcmlwdApjb25zdCBzYW5kYm94ID0gZ2V0U2FuZGJveChlbnYuU2FuZGJveCwgJ3RlbXAnLCB7IGtlZXBBbGl2ZTogdHJ1ZSB9KTsKdHJ5IHsKICBjb25zdCByZXN1bHQgPSBhd2FpdCBzYW5kYm94LmV4ZWMoJ3B5dGhvbiBzY3JpcHQucHknKTsKICByZXR1cm4gcmVzdWx0LnN0ZG91dDsKfSBmaW5hbGx5IHsKICBhd2FpdCBzYW5kYm94LmRlc3Ryb3koKTsgIC8vIFJFUVVJUkVEIHRvIGZyZWUgcmVzb3VyY2VzCn0KYGBgCgojIyMgIkNPTlRBSU5FUl9OT1RfUkVBRFkiCgoqKkNhdXNlOioqIENvbnRhaW5lciBzdGlsbCBwcm92aXNpb25pbmcgKGZpcnN0IHJlcXVlc3Qgb3IgYWZ0ZXIgc2xlZXApCioqU29sdXRpb246KiogUmV0cnkgYWZ0ZXIgMi0zcwoKYGBgdHlwZXNjcmlwdAphc3luYyBmdW5jdGlvbiBleGVjV2l0aFJldHJ5KHNhbmRib3gsIGNtZCkgewogIGZvciAobGV0IGkgPSAwOyBpIDwgMzsgaSsrKSB7CiAgICB0cnkgewogICAgICByZXR1cm4gYXdhaXQgc2FuZGJveC5leGVjKGNtZCk7CiAgICB9IGNhdGNoIChlKSB7CiAgICAgIGlmIChlLmNvZGUgPT09ICdDT05UQUlORVJfTk9UX1JFQURZJykgewogICAgICAgIGF3YWl0IG5ldyBQcm9taXNlKHIgPT4gc2V0VGltZW91dChyLCAyMDAwKSk7CiAgICAgICAgY29udGludWU7CiAgICAgIH0KICAgICAgdGhyb3cgZTsKICAgIH0KICB9Cn0KYGBgCgojIyMgIkNvbm5lY3Rpb24gcmVmdXNlZDogY29udGFpbmVyIHBvcnQgbm90IGZvdW5kIgoKKipDYXVzZToqKiBNaXNzaW5nIGBFWFBPU0VgIGRpcmVjdGl2ZSBpbiBEb2NrZXJmaWxlCioqU29sdXRpb246KiogQWRkIGBFWFBPU0UgPHBvcnQ+YCB0byBEb2NrZXJmaWxlIChvbmx5IG5lZWRlZCBmb3IgYHdyYW5nbGVyIGRldmAsIHByb2R1Y3Rpb24gYXV0by1leHBvc2VzKQoKIyMjICJQcmV2aWV3IFVSTHMgbm90IHdvcmtpbmciCgoqKkNhdXNlOioqIEN1c3RvbSBkb21haW4gbm90IGNvbmZpZ3VyZWQsIHdpbGRjYXJkIEROUyBtaXNzaW5nLCBgbm9ybWFsaXplSWRgIG5vdCBzZXQsIG9yIGBwcm94eVRvU2FuZGJveCgpYCBub3QgY2FsbGVkCioqU29sdXRpb246KiogQ2hlY2s6CjEuIEN1c3RvbSBkb21haW4gY29uZmlndXJlZD8gKG5vdCBgLndvcmtlcnMuZGV2YCkKMi4gV2lsZGNhcmQgRE5TIHNldCB1cD8gKGAqLmRvbWFpbi5jb20g4oaSIHdvcmtlci5kb21haW4uY29tYCkKMy4gYG5vcm1hbGl6ZUlkOiB0cnVlYCBpbiBnZXRTYW5kYm94Pwo0LiBgcHJveHlUb1NhbmRib3goKWAgY2FsbGVkIGZpcnN0IGluIGZldGNoPwoKIyMjICJTbG93IGZpcnN0IHJlcXVlc3QiCgoqKkNhdXNlOioqIENvbGQgc3RhcnQgKGNvbnRhaW5lciBwcm92aXNpb25pbmcpCioqU29sdXRpb246KioKLSBVc2UgYHNsZWVwQWZ0ZXJgIGluc3RlYWQgb2YgY3JlYXRpbmcgbmV3IHNhbmRib3hlcwotIFByZS13YXJtIHdpdGggY3JvbiB0cmlnZ2VycwotIFNldCBga2VlcEFsaXZlOiB0cnVlYCBmb3IgY3JpdGljYWwgc2FuZGJveGVzCgojIyMgIkZpbGUgbm90IHBlcnNpc3RpbmciCgoqKkNhdXNlOioqIEZpbGVzIGluIGAvdG1wYCBvciBvdGhlciBlcGhlbWVyYWwgcGF0aHMKKipTb2x1dGlvbjoqKiBVc2UgYC93b3Jrc3BhY2VgIGZvciBwZXJzaXN0ZW50IGZpbGVzCgojIyMgIkJ1Y2tldCBtb3VudGluZyBkb2Vzbid0IHdvcmsgbG9jYWxseSIKCioqQ2F1c2U6KiogQnVja2V0IG1vdW50aW5nIHJlcXVpcmVzIEZVU0UsIG5vdCBhdmFpbGFibGUgaW4gYHdyYW5nbGVyIGRldmAKKipTb2x1dGlvbjoqKiBUZXN0IGJ1Y2tldCBtb3VudGluZyBpbiBwcm9kdWN0aW9uIG9ubHkuIFVzZSBtb2NrIGRhdGEgbG9jYWxseS4KCiMjIyAiRGlmZmVyZW50IG5vcm1hbGl6ZUlkID0gZGlmZmVyZW50IHNhbmRib3giCgoqKkNhdXNlOioqIENoYW5naW5nIGBub3JtYWxpemVJZGAgb3B0aW9uIGNoYW5nZXMgRHVyYWJsZSBPYmplY3QgSUQKKipTb2x1dGlvbjoqKiBTZXQgYG5vcm1hbGl6ZUlkYCBjb25zaXN0ZW50bHkuIGBub3JtYWxpemVJZDogdHJ1ZWAgbG93ZXJjYXNlcyB0aGUgSUQuCgpgYGB0eXBlc2NyaXB0Ci8vIFRoZXNlIGNyZWF0ZSBESUZGRVJFTlQgc2FuZGJveGVzOgpnZXRTYW5kYm94KGVudi5TYW5kYm94LCAnTXlBcHAnKTsgICAgICAgICAgICAgIC8vIERPIElEOiBoYXNoKCdNeUFwcCcpCmdldFNhbmRib3goZW52LlNhbmRib3gsICdNeUFwcCcsIHsgbm9ybWFsaXplSWQ6IHRydWUgfSk7ICAvLyBETyBJRDogaGFzaCgnbXlhcHAnKQpgYGAKCiMjIyAiQ29kZSBjb250ZXh0IHZhcmlhYmxlcyBkaXNhcHBlYXJlZCIKCioqQ2F1c2U6KiogQ29udGFpbmVyIHJlc3RhcnQgY2xlYXJzIGNvZGUgY29udGV4dCBzdGF0ZQoqKlNvbHV0aW9uOioqIENvZGUgY29udGV4dHMgYXJlIGVwaGVtZXJhbC4gUmVjcmVhdGUgY29udGV4dCBhZnRlciBjb250YWluZXIgc2xlZXAvd2FrZS4KCiMjIFBlcmZvcm1hbmNlIE9wdGltaXphdGlvbgoKIyMjIFNhbmRib3ggSUQgU3RyYXRlZ3kKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIEJBRDogTmV3IHNhbmRib3ggZXZlcnkgdGltZSAoc2xvdykKY29uc3Qgc2FuZGJveCA9IGdldFNhbmRib3goZW52LlNhbmRib3gsIGB1c2VyLSR7RGF0ZS5ub3coKX1gKTsKCi8vIOKchSBHT09EOiBSZXVzZSBwZXIgdXNlcgpjb25zdCBzYW5kYm94ID0gZ2V0U2FuZGJveChlbnYuU2FuZGJveCwgYHVzZXItJHt1c2VySWR9YCk7CmBgYAoKIyMjIFNsZWVwICYgVHJhZmZpYyBDb25maWcKCmBgYHR5cGVzY3JpcHQKLy8gQ29zdC1vcHRpbWl6ZWQKZ2V0U2FuZGJveChlbnYuU2FuZGJveCwgJ2lkJywgeyBzbGVlcEFmdGVyOiAnMzBtJywga2VlcEFsaXZlOiBmYWxzZSB9KTsKCi8vIEFsd2F5cy1vbiAocmVxdWlyZXMgZGVzdHJveSgpKQpnZXRTYW5kYm94KGVudi5TYW5kYm94LCAnaWQnLCB7IGtlZXBBbGl2ZTogdHJ1ZSB9KTsKYGBgCgpgYGBqc29uYwovLyBIaWdoIHRyYWZmaWM6IGluY3JlYXNlIG1heF9pbnN0YW5jZXMKeyAiY29udGFpbmVycyI6IFt7ICJjbGFzc19uYW1lIjogIlNhbmRib3giLCAibWF4X2luc3RhbmNlcyI6IDUwIH1dIH0KYGBgCgojIyBTZWN1cml0eSBCZXN0IFByYWN0aWNlcwoKIyMjIFNhbmRib3ggSXNvbGF0aW9uCi0gRWFjaCBzYW5kYm94ID0gaXNvbGF0ZWQgY29udGFpbmVyIChmaWxlc3lzdGVtLCBuZXR3b3JrLCBwcm9jZXNzZXMpCi0gVXNlIHVuaXF1ZSBzYW5kYm94IElEcyBwZXIgdGVuYW50IGZvciBtdWx0aS10ZW5hbnQgYXBwcwotIFNhbmRib3hlcyBjYW5ub3QgY29tbXVuaWNhdGUgZGlyZWN0bHkKCiMjIyBJbnB1dCBWYWxpZGF0aW9uCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBEQU5HRVJPVVM6IENvbW1hbmQgaW5qZWN0aW9uCmNvbnN0IHJlc3VsdCA9IGF3YWl0IHNhbmRib3guZXhlYyhgcHl0aG9uMyAtYyAiJHt1c2VyQ29kZX0iYCk7CgovLyDinIUgU0FGRTogV3JpdGUgdG8gZmlsZSwgZXhlY3V0ZSBmaWxlCmF3YWl0IHNhbmRib3gud3JpdGVGaWxlKCcvd29ya3NwYWNlL3VzZXJfY29kZS5weScsIHVzZXJDb2RlKTsKY29uc3QgcmVzdWx0ID0gYXdhaXQgc2FuZGJveC5leGVjKCdweXRob24zIC93b3Jrc3BhY2UvdXNlcl9jb2RlLnB5Jyk7CmBgYAoKIyMjIFJlc291cmNlIExpbWl0cwoKYGBgdHlwZXNjcmlwdAovLyBUaW1lb3V0IGxvbmctcnVubmluZyBjb21tYW5kcwpjb25zdCByZXN1bHQgPSBhd2FpdCBzYW5kYm94LmV4ZWMoJ3B5dGhvbjMgc2NyaXB0LnB5JywgewogIHRpbWVvdXQ6IDMwMDAwICAvLyAzMCBzZWNvbmRzCn0pOwpgYGAKCiMjIyBTZWNyZXRzIE1hbmFnZW1lbnQKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIE5FVkVSIGhhcmRjb2RlIHNlY3JldHMKY29uc3QgdG9rZW4gPSAnZ2hwX2FiYzEyMyc7CgovLyDinIUgVXNlIGVudmlyb25tZW50IHNlY3JldHMKY29uc3QgdG9rZW4gPSBlbnYuR0lUSFVCX1RPS0VOOwoKLy8gUGFzcyB0byBzYW5kYm94IHZpYSBleGVjIGVudgpjb25zdCByZXN1bHQgPSBhd2FpdCBzYW5kYm94LmV4ZWMoJ2dpdCBjbG9uZSAuLi4nLCB7CiAgZW52OiB7IEdJVF9UT0tFTjogdG9rZW4gfQp9KTsKYGBgCgojIyMgUHJldmlldyBVUkwgU2VjdXJpdHkKUHJldmlldyBVUkxzIGluY2x1ZGUgYXV0by1nZW5lcmF0ZWQgdG9rZW5zOgpgYGAKaHR0cHM6Ly84MDgwLXNhbmRib3gtYWJjMTIzZGVmNDU2LnlvdXJkb21haW4uY29tCmBgYApUb2tlbiBjaGFuZ2VzIG9uIGVhY2ggZXhwb3NlIG9wZXJhdGlvbiwgcHJldmVudGluZyB1bmF1dGhvcml6ZWQgYWNjZXNzLgoKIyMgTGltaXRzCgp8IFJlc291cmNlIHwgTGl0ZSB8IFN0YW5kYXJkIHwgSGVhdnkgfAp8LS0tLS0tLS0tLXwtLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tfAp8IFJBTSB8IDI1Nk1CIHwgNTEyTUIgfCAxR0IgfAp8IHZDUFUgfCAwLjUgfCAxIHwgMiB8Cgp8IE9wZXJhdGlvbiB8IERlZmF1bHQgVGltZW91dCB8IE92ZXJyaWRlIHwKfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLXwKfCBDb250YWluZXIgcHJvdmlzaW9uaW5nIHwgMzBzIHwgYFNBTkRCT1hfSU5TVEFOQ0VfVElNRU9VVF9NU2AgfAp8IFBvcnQgcmVhZGluZXNzIHwgOTBzIHwgYFNBTkRCT1hfUE9SVF9USU1FT1VUX01TYCB8CnwgZXhlYygpIHwgTm9uZSAobm8gZGVmYXVsdCkgfCBgdGltZW91dGAgb3B0aW9uIHwKfCBzbGVlcEFmdGVyIHwgMTBtIHwgYHNsZWVwQWZ0ZXJgIG9wdGlvbiB8CgoqKlBlcmZvcm1hbmNlKio6Ci0gKipGaXJzdCBkZXBsb3kqKjogMi0zIG1pbiBmb3IgY29udGFpbmVyIGJ1aWxkCi0gKipDb2xkIHN0YXJ0Kio6IDItM3Mgd2hlbiB3YWtpbmcgZnJvbSBzbGVlcAotICoqQnVja2V0IG1vdW50aW5nKio6IFByb2R1Y3Rpb24gb25seSAoRlVTRSBub3QgaW4gZGV2KQoKIyMgUHJvZHVjdGlvbiBHdWlkZQoKU2VlOiBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC9ndWlkZXMvcHJvZHVjdGlvbi1kZXBsb3ltZW50LwoKIyMgUmVzb3VyY2VzCgotIFtPZmZpY2lhbCBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8pCi0gW0FQSSBSZWZlcmVuY2VdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9zYW5kYm94L2FwaS8pCi0gW0V4YW1wbGVzXShodHRwczovL2dpdGh1Yi5jb20vY2xvdWRmbGFyZS9zYW5kYm94LXNkay90cmVlL21haW4vZXhhbXBsZXMpCi0gW25wbSBQYWNrYWdlXShodHRwczovL3d3dy5ucG1qcy5jb20vcGFja2FnZS9AY2xvdWRmbGFyZS9zYW5kYm94KQotIFtEaXNjb3JkIFN1cHBvcnRdKGh0dHBzOi8vZGlzY29yZC5jbG91ZGZsYXJlLmNvbSkK
+# Gotchas & Best Practices
+
+## Common Errors
+
+### "Container running indefinitely"
+
+**Cause:** `keepAlive: true` without calling `destroy()`
+**Solution:** Always call `destroy()` when done with keepAlive containers
+
+```typescript
+const sandbox = getSandbox(env.Sandbox, 'temp', { keepAlive: true });
+try {
+  const result = await sandbox.exec('python script.py');
+  return result.stdout;
+} finally {
+  await sandbox.destroy();  // REQUIRED to free resources
+}
+```
+
+### "CONTAINER_NOT_READY"
+
+**Cause:** Container still provisioning (first request or after sleep)
+**Solution:** Retry after 2-3s
+
+```typescript
+async function execWithRetry(sandbox, cmd) {
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await sandbox.exec(cmd);
+    } catch (e) {
+      if (e.code === 'CONTAINER_NOT_READY') {
+        await new Promise(r => setTimeout(r, 2000));
+        continue;
+      }
+      throw e;
+    }
+  }
+}
+```
+
+### "Connection refused: container port not found"
+
+**Cause:** Missing `EXPOSE` directive in Dockerfile
+**Solution:** Add `EXPOSE <port>` to Dockerfile (only needed for `wrangler dev`, production auto-exposes)
+
+### "Preview URLs not working"
+
+**Cause:** Custom domain not configured, wildcard DNS missing, `normalizeId` not set, or `proxyToSandbox()` not called
+**Solution:** Check:
+1. Custom domain configured? (not `.workers.dev`)
+2. Wildcard DNS set up? (`*.domain.com → worker.domain.com`)
+3. `normalizeId: true` in getSandbox?
+4. `proxyToSandbox()` called first in fetch?
+
+### "Slow first request"
+
+**Cause:** Cold start (container provisioning)
+**Solution:**
+- Use `sleepAfter` instead of creating new sandboxes
+- Pre-warm with cron triggers
+- Set `keepAlive: true` for critical sandboxes
+
+### "File not persisting"
+
+**Cause:** Files in `/tmp` or other ephemeral paths
+**Solution:** Use `/workspace` for persistent files
+
+### "Bucket mounting doesn't work locally"
+
+**Cause:** Bucket mounting requires FUSE, not available in `wrangler dev`
+**Solution:** Test bucket mounting in production only. Use mock data locally.
+
+### "Different normalizeId = different sandbox"
+
+**Cause:** Changing `normalizeId` option changes Durable Object ID
+**Solution:** Set `normalizeId` consistently. `normalizeId: true` lowercases the ID.
+
+```typescript
+// These create DIFFERENT sandboxes:
+getSandbox(env.Sandbox, 'MyApp');              // DO ID: hash('MyApp')
+getSandbox(env.Sandbox, 'MyApp', { normalizeId: true });  // DO ID: hash('myapp')
+```
+
+### "Code context variables disappeared"
+
+**Cause:** Container restart clears code context state
+**Solution:** Code contexts are ephemeral. Recreate context after container sleep/wake.
+
+## Performance Optimization
+
+### Sandbox ID Strategy
+
+```typescript
+// ❌ BAD: New sandbox every time (slow)
+const sandbox = getSandbox(env.Sandbox, `user-${Date.now()}`);
+
+// ✅ GOOD: Reuse per user
+const sandbox = getSandbox(env.Sandbox, `user-${userId}`);
+```
+
+### Sleep & Traffic Config
+
+```typescript
+// Cost-optimized
+getSandbox(env.Sandbox, 'id', { sleepAfter: '30m', keepAlive: false });
+
+// Always-on (requires destroy())
+getSandbox(env.Sandbox, 'id', { keepAlive: true });
+```
+
+```jsonc
+// High traffic: increase max_instances
+{ "containers": [{ "class_name": "Sandbox", "max_instances": 50 }] }
+```
+
+## Security Best Practices
+
+### Sandbox Isolation
+- Each sandbox = isolated container (filesystem, network, processes)
+- Use unique sandbox IDs per tenant for multi-tenant apps
+- Sandboxes cannot communicate directly
+
+### Input Validation
+
+```typescript
+// ❌ DANGEROUS: Command injection
+const result = await sandbox.exec(`python3 -c "${userCode}"`);
+
+// ✅ SAFE: Write to file, execute file
+await sandbox.writeFile('/workspace/user_code.py', userCode);
+const result = await sandbox.exec('python3 /workspace/user_code.py');
+```
+
+### Resource Limits
+
+```typescript
+// Timeout long-running commands
+const result = await sandbox.exec('python3 script.py', {
+  timeout: 30000  // 30 seconds
+});
+```
+
+### Secrets Management
+
+```typescript
+// ❌ NEVER hardcode secrets
+const token = 'ghp_abc123';
+
+// ✅ Use environment secrets
+const token = env.GITHUB_TOKEN;
+
+// Pass to sandbox via exec env
+const result = await sandbox.exec('git clone ...', {
+  env: { GIT_TOKEN: token }
+});
+```
+
+### Preview URL Security
+Preview URLs include auto-generated tokens:
+```
+https://8080-sandbox-abc123def456.yourdomain.com
+```
+Token changes on each expose operation, preventing unauthorized access.
+
+## Limits
+
+| Resource | Lite | Standard | Heavy |
+|----------|------|----------|-------|
+| RAM | 256MB | 512MB | 1GB |
+| vCPU | 0.5 | 1 | 2 |
+
+| Operation | Default Timeout | Override |
+|-----------|----------------|----------|
+| Container provisioning | 30s | `SANDBOX_INSTANCE_TIMEOUT_MS` |
+| Port readiness | 90s | `SANDBOX_PORT_TIMEOUT_MS` |
+| exec() | None (no default) | `timeout` option |
+| sleepAfter | 10m | `sleepAfter` option |
+
+**Performance**:
+- **First deploy**: 2-3 min for container build
+- **Cold start**: 2-3s when waking from sleep
+- **Bucket mounting**: Production only (FUSE not in dev)
+
+## Production Guide
+
+See: https://developers.cloudflare.com/sandbox/guides/production-deployment/
+
+## Resources
+
+- [Official Docs](https://developers.cloudflare.com/sandbox/)
+- [API Reference](https://developers.cloudflare.com/sandbox/api/)
+- [Examples](https://github.com/cloudflare/sandbox-sdk/tree/main/examples)
+- [npm Package](https://www.npmjs.com/package/@cloudflare/sandbox)
+- [Discord Support](https://discord.cloudflare.com)

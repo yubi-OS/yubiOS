@@ -1,1 +1,111 @@
-IyMgQmVzdCBQcmFjdGljZXMgU3VtbWFyeQoKKipTbWFydCBTaGllbGQgTm90ZToqKiBBcmdvIFNtYXJ0IFJvdXRpbmcgZXZvbHZpbmcgaW50byBTbWFydCBTaGllbGQuIEJlc3QgcHJhY3RpY2VzIGJlbG93IHJlbWFpbiBhcHBsaWNhYmxlOyBtb25pdG9yIENsb3VkZmxhcmUgY2hhbmdlbG9nIGZvciBTbWFydCBTaGllbGQgdXBkYXRlcy4KCjEuICoqQWx3YXlzIGNoZWNrIGVkaXRhYmlsaXR5KiogYmVmb3JlIGF0dGVtcHRpbmcgdG8gZW5hYmxlL2Rpc2FibGUgQXJnbwoyLiAqKlNldCB1cCBiaWxsaW5nIG5vdGlmaWNhdGlvbnMqKiB0byBhdm9pZCB1bmV4cGVjdGVkIGNvc3RzCjMuICoqQ29tYmluZSB3aXRoIFRpZXJlZCBDYWNoZSoqIGZvciBtYXhpbXVtIHBlcmZvcm1hbmNlIGJlbmVmaXQKNC4gKipVc2UgaW4gcHJvZHVjdGlvbiBvbmx5KiogLSBkaXNhYmxlIGZvciBkZXYvc3RhZ2luZyB0byBjb250cm9sIGNvc3RzCjUuICoqTW9uaXRvciBhbmFseXRpY3MqKiAtIHJlcXVpcmUgNTAwKyByZXF1ZXN0cyBpbiA0OGggZm9yIGRldGFpbGVkIG1ldHJpY3MKNi4gKipIYW5kbGUgZXJyb3JzIGdyYWNlZnVsbHkqKiAtIGNoZWNrIGZvciBiaWxsaW5nLCBwZXJtaXNzaW9ucywgem9uZSBjb21wYXRpYmlsaXR5CjcuICoqVGVzdCBjb25maWd1cmF0aW9uIGNoYW5nZXMqKiBpbiBzdGFnaW5nIGJlZm9yZSBwcm9kdWN0aW9uCjguICoqVXNlIFR5cGVTY3JpcHQgU0RLKiogZm9yIHR5cGUgc2FmZXR5IGFuZCBiZXR0ZXIgZGV2ZWxvcGVyIGV4cGVyaWVuY2UKOS4gKipJbXBsZW1lbnQgcmV0cnkgbG9naWMqKiBmb3IgQVBJIGNhbGxzIGluIHByb2R1Y3Rpb24gc3lzdGVtcwoxMC4gKipEb2N1bWVudCB6b25lLXNwZWNpZmljIHNldHRpbmdzKiogZm9yIHRlYW0gdmlzaWJpbGl0eQoKIyMgQ29tbW9uIEVycm9ycwoKIyMjICJBcmdvIHVuYXZhaWxhYmxlIgoKKipQcm9ibGVtOioqIEFQSSByZXR1cm5zIGVycm9yICJBcmdvIFNtYXJ0IFJvdXRpbmcgaXMgdW5hdmFpbGFibGUgZm9yIHRoaXMgem9uZSIKCioqQ2F1c2U6KiogWm9uZSBub3QgZWxpZ2libGUgb3IgYmlsbGluZyBub3Qgc2V0IHVwCgoqKlNvbHV0aW9uOioqCjEuIFZlcmlmeSB6b25lIGhhcyBFbnRlcnByaXNlIG9yIGhpZ2hlciBwbGFuCjIuIENoZWNrIGJpbGxpbmcgaXMgY29uZmlndXJlZCBpbiBBY2NvdW50IOKGkiBCaWxsaW5nCjMuIEVuc3VyZSBwYXltZW50IG1ldGhvZCBpcyB2YWxpZCBhbmQgY3VycmVudAo0LiBDb250YWN0IENsb3VkZmxhcmUgc3VwcG9ydCBpZiBlbGlnaWJpbGl0eSB1bmNsZWFyCgojIyMgIkNhbm5vdCBlbmFibGUvZGlzYWJsZSIKCioqUHJvYmxlbToqKiBBUEkgY2FsbCBzdWNjZWVkcyBidXQgc3RhdHVzIHJlbWFpbnMgdW5jaGFuZ2VkLCBvciBgZWRpdGFibGU6IGZhbHNlYCBpbiBHRVQgcmVzcG9uc2UKCioqQ2F1c2U6KiogSW5zdWZmaWNpZW50IHBlcm1pc3Npb25zIG9yIHpvbmUgcmVzdHJpY3Rpb25zCgoqKlNvbHV0aW9uOioqCjEuIENoZWNrIEFQSSB0b2tlbiBoYXMgYFpvbmU6QXJnbyBTbWFydCBSb3V0aW5nOkVkaXRgIHBlcm1pc3Npb24KMi4gVmVyaWZ5IGBlZGl0YWJsZTogdHJ1ZWAgaW4gR0VUIHJlc3BvbnNlIGJlZm9yZSBhdHRlbXB0aW5nIFBBVENICjMuIElmIGBlZGl0YWJsZTogZmFsc2VgLCBjaGVjazoKICAgLSBCaWxsaW5nIGNvbmZpZ3VyZWQgZm9yIGFjY291bnQKICAgLSBab25lIHBsYW4gaW5jbHVkZXMgQXJnbyAoRW50ZXJwcmlzZSspCiAgIC0gTm8gYWN0aXZlIHpvbmUgaG9sZHMgb3Igc3VzcGVuc2lvbnMKICAgLSBBUEkgdG9rZW4gaGFzIGNvcnJlY3Qgc2NvcGVzCgojIyMgYGVkaXRhYmxlOiBmYWxzZWAgRXJyb3IKCioqUHJvYmxlbToqKiBHRVQgcmVxdWVzdCByZXR1cm5zIGAiZWRpdGFibGUiOiBmYWxzZWAsIHByZXZlbnRpbmcgZW5hYmxlL2Rpc2FibGUKCioqQ2F1c2U6KiogWm9uZS1sZXZlbCByZXN0cmljdGlvbnMgZnJvbSBiaWxsaW5nLCBwbGFuLCBvciBwZXJtaXNzaW9ucwoKKipTb2x1dGlvbiBQYXR0ZXJuOioqCmBgYHR5cGVzY3JpcHQKY29uc3Qgc3RhdHVzID0gYXdhaXQgY2xpZW50LmFyZ28uc21hcnRSb3V0aW5nLmdldCh7IHpvbmVfaWQ6IHpvbmVJZCB9KTsKCmlmICghc3RhdHVzLmVkaXRhYmxlKSB7CiAgLy8gRG9uJ3QgYXR0ZW1wdCB0byBtb2RpZnkgLSB3aWxsIGZhaWwKICBjb25zb2xlLmVycm9yKCdDYW5ub3QgbW9kaWZ5IEFyZ28gc2V0dGluZ3M6Jyk7CiAgY29uc29sZS5lcnJvcignLSBDaGVjayBiaWxsaW5nIGlzIGNvbmZpZ3VyZWQnKTsKICBjb25zb2xlLmVycm9yKCctIFZlcmlmeSB6b25lIGhhcyBFbnRlcnByaXNlKyBwbGFuJyk7CiAgY29uc29sZS5lcnJvcignLSBDb25maXJtIEFQSSB0b2tlbiBoYXMgRWRpdCBwZXJtaXNzaW9uJyk7CiAgdGhyb3cgbmV3IEVycm9yKCdBcmdvIGlzIG5vdCBlZGl0YWJsZSBmb3IgdGhpcyB6b25lJyk7Cn0KCi8vIFNhZmUgdG8gcHJvY2VlZCB3aXRoIGVuYWJsZS9kaXNhYmxlCmF3YWl0IGNsaWVudC5hcmdvLnNtYXJ0Um91dGluZy5lZGl0KHsgem9uZV9pZDogem9uZUlkLCB2YWx1ZTogJ29uJyB9KTsKYGBgCgojIyMgUmF0ZSBMaW1pdGluZwoKKipQcm9ibGVtOioqIGA0MjkgVG9vIE1hbnkgUmVxdWVzdHNgIGVycm9yIGZyb20gQVBJCgoqKkNhdXNlOioqIEV4Y2VlZGVkIEFQSSByYXRlIGxpbWl0cyAodHlwaWNhbGx5IDEyMDAgcmVxdWVzdHMgcGVyIDUgbWludXRlcykKCioqU29sdXRpb246KioKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBSYXRlTGltaXRFcnJvciB9IGZyb20gJ2Nsb3VkZmxhcmUnOwoKdHJ5IHsKICBhd2FpdCBjbGllbnQuYXJnby5zbWFydFJvdXRpbmcuZWRpdCh7IHpvbmVfaWQ6IHpvbmVJZCwgdmFsdWU6ICdvbicgfSk7Cn0gY2F0Y2ggKGVycm9yKSB7CiAgaWYgKGVycm9yIGluc3RhbmNlb2YgUmF0ZUxpbWl0RXJyb3IpIHsKICAgIGNvbnN0IHJldHJ5QWZ0ZXIgPSBlcnJvci5yZXNwb25zZT8uaGVhZGVycy5nZXQoJ3JldHJ5LWFmdGVyJyk7CiAgICBjb25zb2xlLmxvZyhgUmF0ZSBsaW1pdGVkLiBSZXRyeSBhZnRlciAke3JldHJ5QWZ0ZXJ9IHNlY29uZHNgKTsKICAgIAogICAgLy8gSW1wbGVtZW50IGV4cG9uZW50aWFsIGJhY2tvZmYKICAgIGF3YWl0IG5ldyBQcm9taXNlKHJlc29sdmUgPT4gc2V0VGltZW91dChyZXNvbHZlLCAocmV0cnlBZnRlciB8fCA2MCkgKiAxMDAwKSk7CiAgICAvLyBSZXRyeSByZXF1ZXN0CiAgfQp9CmBgYAoKIyMgTGltaXRzCgp8IFJlc291cmNlL0xpbWl0IHwgVmFsdWUgfCBOb3RlcyB8CnwtLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBNaW4gcmVxdWVzdHMgZm9yIGFuYWx5dGljcyB8IDUwMCBpbiA0OGggfCBGb3IgZGV0YWlsZWQgbWV0cmljcyB2aWEgR3JhcGhRTCB8CnwgWm9uZXMgc3VwcG9ydGVkIHwgRW50ZXJwcmlzZSsgfCBDaGVjayB6b25lIHBsYW4gaW4gZGFzaGJvYXJkIHwKfCBCaWxsaW5nIHJlcXVpcmVtZW50IHwgTXVzdCBiZSBjb25maWd1cmVkIHwgQmVmb3JlIGVuYWJsaW5nOyB2ZXJpZnkgcGF5bWVudCBtZXRob2QgfAp8IEFQSSByYXRlIGxpbWl0IHwgMTIwMCByZXEgLyA1IG1pbiB8IFBlciBBUEkgdG9rZW4gYWNyb3NzIGFsbCBlbmRwb2ludHMgfAp8IFNwZWN0cnVtIGFwcHMgfCBObyBoYXJkIGxpbWl0IHwgRWFjaCBhcHAgY2FuIGVuYWJsZSBBcmdvIGluZGVwZW5kZW50bHkgfAp8IFRyYWZmaWMgY291bnRpbmcgfCBQcm94aWVkIG9ubHkgfCBPbmx5IG9yYW5nZS1jbG91ZGVkIEROUyByZWNvcmRzIGNvdW50IHwKfCBERG9TL1dBRiBleGVtcHRpb24gfCBZZXMgfCBNaXRpZ2F0ZWQgdHJhZmZpYyBleGNsdWRlZCBmcm9tIGJpbGxpbmcgfAp8IEFuYWx5dGljcyBsYXRlbmN5IHwgMS01IG1pbnV0ZXMgfCBSZWFsLXRpbWUgbWV0cmljcyBub3QgYXZhaWxhYmxlIHwKCiMjIEFkZGl0aW9uYWwgUmVzb3VyY2VzCgotIFtPZmZpY2lhbCBBcmdvIFNtYXJ0IFJvdXRpbmcgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FyZ28tc21hcnQtcm91dGluZy8pCi0gW0Nsb3VkZmxhcmUgU21hcnQgU2hpZWxkXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc21hcnQtc2hpZWxkLykKLSBbQVBJIEF1dGhlbnRpY2F0aW9uXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vZnVuZGFtZW50YWxzL2FwaS9nZXQtc3RhcnRlZC9jcmVhdGUtdG9rZW4vKQotIFtDbG91ZGZsYXJlIFR5cGVTY3JpcHQgU0RLXShodHRwczovL2dpdGh1Yi5jb20vY2xvdWRmbGFyZS9jbG91ZGZsYXJlLXR5cGVzY3JpcHQpCi0gW0Nsb3VkZmxhcmUgUHl0aG9uIFNES10oaHR0cHM6Ly9naXRodWIuY29tL2Nsb3VkZmxhcmUvY2xvdWRmbGFyZS1weXRob24pCg==
+## Best Practices Summary
+
+**Smart Shield Note:** Argo Smart Routing evolving into Smart Shield. Best practices below remain applicable; monitor Cloudflare changelog for Smart Shield updates.
+
+1. **Always check editability** before attempting to enable/disable Argo
+2. **Set up billing notifications** to avoid unexpected costs
+3. **Combine with Tiered Cache** for maximum performance benefit
+4. **Use in production only** - disable for dev/staging to control costs
+5. **Monitor analytics** - require 500+ requests in 48h for detailed metrics
+6. **Handle errors gracefully** - check for billing, permissions, zone compatibility
+7. **Test configuration changes** in staging before production
+8. **Use TypeScript SDK** for type safety and better developer experience
+9. **Implement retry logic** for API calls in production systems
+10. **Document zone-specific settings** for team visibility
+
+## Common Errors
+
+### "Argo unavailable"
+
+**Problem:** API returns error "Argo Smart Routing is unavailable for this zone"
+
+**Cause:** Zone not eligible or billing not set up
+
+**Solution:**
+1. Verify zone has Enterprise or higher plan
+2. Check billing is configured in Account → Billing
+3. Ensure payment method is valid and current
+4. Contact Cloudflare support if eligibility unclear
+
+### "Cannot enable/disable"
+
+**Problem:** API call succeeds but status remains unchanged, or `editable: false` in GET response
+
+**Cause:** Insufficient permissions or zone restrictions
+
+**Solution:**
+1. Check API token has `Zone:Argo Smart Routing:Edit` permission
+2. Verify `editable: true` in GET response before attempting PATCH
+3. If `editable: false`, check:
+   - Billing configured for account
+   - Zone plan includes Argo (Enterprise+)
+   - No active zone holds or suspensions
+   - API token has correct scopes
+
+### `editable: false` Error
+
+**Problem:** GET request returns `"editable": false`, preventing enable/disable
+
+**Cause:** Zone-level restrictions from billing, plan, or permissions
+
+**Solution Pattern:**
+```typescript
+const status = await client.argo.smartRouting.get({ zone_id: zoneId });
+
+if (!status.editable) {
+  // Don't attempt to modify - will fail
+  console.error('Cannot modify Argo settings:');
+  console.error('- Check billing is configured');
+  console.error('- Verify zone has Enterprise+ plan');
+  console.error('- Confirm API token has Edit permission');
+  throw new Error('Argo is not editable for this zone');
+}
+
+// Safe to proceed with enable/disable
+await client.argo.smartRouting.edit({ zone_id: zoneId, value: 'on' });
+```
+
+### Rate Limiting
+
+**Problem:** `429 Too Many Requests` error from API
+
+**Cause:** Exceeded API rate limits (typically 1200 requests per 5 minutes)
+
+**Solution:**
+```typescript
+import { RateLimitError } from 'cloudflare';
+
+try {
+  await client.argo.smartRouting.edit({ zone_id: zoneId, value: 'on' });
+} catch (error) {
+  if (error instanceof RateLimitError) {
+    const retryAfter = error.response?.headers.get('retry-after');
+    console.log(`Rate limited. Retry after ${retryAfter} seconds`);
+    
+    // Implement exponential backoff
+    await new Promise(resolve => setTimeout(resolve, (retryAfter || 60) * 1000));
+    // Retry request
+  }
+}
+```
+
+## Limits
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| Min requests for analytics | 500 in 48h | For detailed metrics via GraphQL |
+| Zones supported | Enterprise+ | Check zone plan in dashboard |
+| Billing requirement | Must be configured | Before enabling; verify payment method |
+| API rate limit | 1200 req / 5 min | Per API token across all endpoints |
+| Spectrum apps | No hard limit | Each app can enable Argo independently |
+| Traffic counting | Proxied only | Only orange-clouded DNS records count |
+| DDoS/WAF exemption | Yes | Mitigated traffic excluded from billing |
+| Analytics latency | 1-5 minutes | Real-time metrics not available |
+
+## Additional Resources
+
+- [Official Argo Smart Routing Docs](https://developers.cloudflare.com/argo-smart-routing/)
+- [Cloudflare Smart Shield](https://developers.cloudflare.com/smart-shield/)
+- [API Authentication](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
+- [Cloudflare TypeScript SDK](https://github.com/cloudflare/cloudflare-typescript)
+- [Cloudflare Python SDK](https://github.com/cloudflare/cloudflare-python)

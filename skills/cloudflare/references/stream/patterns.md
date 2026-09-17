@@ -1,1 +1,184 @@
-IyBTdHJlYW0gUGF0dGVybnMKCkNvbW1vbiB3b3JrZmxvd3MsIGZ1bGwtc3RhY2sgZmxvd3MsIGFuZCBiZXN0IHByYWN0aWNlcy4KCiMjIFJlYWN0IFN0cmVhbSBQbGF5ZXIKCmBucG0gaW5zdGFsbCBAY2xvdWRmbGFyZS9zdHJlYW0tcmVhY3RgCgpgYGB0c3gKaW1wb3J0IHsgU3RyZWFtIH0gZnJvbSAnQGNsb3VkZmxhcmUvc3RyZWFtLXJlYWN0JzsKCmV4cG9ydCBmdW5jdGlvbiBWaWRlb1BsYXllcih7IHZpZGVvSWQsIHRva2VuIH06IHsgdmlkZW9JZDogc3RyaW5nOyB0b2tlbj86IHN0cmluZyB9KSB7CiAgcmV0dXJuIDxTdHJlYW0gY29udHJvbHMgc3JjPXt0b2tlbiA/IGAke3ZpZGVvSWR9P3Rva2VuPSR7dG9rZW59YCA6IHZpZGVvSWR9IHJlc3BvbnNpdmUgLz47Cn0KYGBgCgojIyBGdWxsLVN0YWNrIFVwbG9hZCBGbG93CgoqKkJhY2tlbmQgQVBJIChXb3JrZXJzL1BhZ2VzKSoqCmBgYHR5cGVzY3JpcHQKaW1wb3J0IENsb3VkZmxhcmUgZnJvbSAnY2xvdWRmbGFyZSc7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCB7IHZpZGVvTmFtZSB9ID0gYXdhaXQgcmVxdWVzdC5qc29uKCk7CiAgICBjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7IGFwaVRva2VuOiBlbnYuQ0ZfQVBJX1RPS0VOIH0pOwogICAgY29uc3QgeyB1cGxvYWRVUkwsIHVpZCB9ID0gYXdhaXQgY2xpZW50LnN0cmVhbS5kaXJlY3RVcGxvYWQuY3JlYXRlKHsKICAgICAgYWNjb3VudF9pZDogZW52LkNGX0FDQ09VTlRfSUQsCiAgICAgIG1heER1cmF0aW9uU2Vjb25kczogMzYwMCwKICAgICAgcmVxdWlyZVNpZ25lZFVSTHM6IHRydWUsCiAgICAgIG1ldGE6IHsgbmFtZTogdmlkZW9OYW1lIH0KICAgIH0pOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyB1cGxvYWRVUkwsIHVpZCB9KTsKICB9Cn07CmBgYAoKKipGcm9udGVuZCBjb21wb25lbnQqKgpgYGB0c3gKaW1wb3J0IHsgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7CgpleHBvcnQgZnVuY3Rpb24gVmlkZW9VcGxvYWRlcigpIHsKICBjb25zdCBbdXBsb2FkaW5nLCBzZXRVcGxvYWRpbmddID0gdXNlU3RhdGUoZmFsc2UpOwogIGNvbnN0IFtwcm9ncmVzcywgc2V0UHJvZ3Jlc3NdID0gdXNlU3RhdGUoMCk7CiAgCiAgYXN5bmMgZnVuY3Rpb24gaGFuZGxlVXBsb2FkKGZpbGU6IEZpbGUpIHsKICAgIHNldFVwbG9hZGluZyh0cnVlKTsKICAgIGNvbnN0IHsgdXBsb2FkVVJMLCB1aWQgfSA9IGF3YWl0IGZldGNoKCcvYXBpL3VwbG9hZC11cmwnLCB7CiAgICAgIG1ldGhvZDogJ1BPU1QnLAogICAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IHZpZGVvTmFtZTogZmlsZS5uYW1lIH0pCiAgICB9KS50aGVuKHIgPT4gci5qc29uKCkpOwogICAgCiAgICBjb25zdCB4aHIgPSBuZXcgWE1MSHR0cFJlcXVlc3QoKTsKICAgIHhoci51cGxvYWQub25wcm9ncmVzcyA9IChlKSA9PiBzZXRQcm9ncmVzcygoZS5sb2FkZWQgLyBlLnRvdGFsKSAqIDEwMCk7CiAgICB4aHIub25sb2FkID0gKCkgPT4geyBzZXRVcGxvYWRpbmcoZmFsc2UpOyB3aW5kb3cubG9jYXRpb24uaHJlZiA9IGAvdmlkZW9zLyR7dWlkfWA7IH07CiAgICB4aHIub3BlbignUE9TVCcsIHVwbG9hZFVSTCk7CiAgICBjb25zdCBmb3JtRGF0YSA9IG5ldyBGb3JtRGF0YSgpOwogICAgZm9ybURhdGEuYXBwZW5kKCdmaWxlJywgZmlsZSk7CiAgICB4aHIuc2VuZChmb3JtRGF0YSk7CiAgfQogIAogIHJldHVybiAoCiAgICA8ZGl2PgogICAgICA8aW5wdXQgdHlwZT0iZmlsZSIgYWNjZXB0PSJ2aWRlby8qIiBvbkNoYW5nZT17KGUpID0+IGUudGFyZ2V0LmZpbGVzPy5bMF0gJiYgaGFuZGxlVXBsb2FkKGUudGFyZ2V0LmZpbGVzWzBdKX0gZGlzYWJsZWQ9e3VwbG9hZGluZ30gLz4KICAgICAge3VwbG9hZGluZyAmJiA8cHJvZ3Jlc3MgdmFsdWU9e3Byb2dyZXNzfSBtYXg9ezEwMH0gLz59CiAgICA8L2Rpdj4KICApOwp9CmBgYAoKIyMgVFVTIFJlc3VtYWJsZSBVcGxvYWQKCkZvciBsYXJnZSBmaWxlcyAoPjUwME1CKS4gYG5wbSBpbnN0YWxsIHR1cy1qcy1jbGllbnRgCgpgYGB0eXBlc2NyaXB0CmltcG9ydCAqIGFzIHR1cyBmcm9tICd0dXMtanMtY2xpZW50JzsKCmFzeW5jIGZ1bmN0aW9uIHVwbG9hZFdpdGhUVVMoZmlsZTogRmlsZSwgdXBsb2FkVVJMOiBzdHJpbmcsIG9uUHJvZ3Jlc3M/OiAocGN0OiBudW1iZXIpID0+IHZvaWQpIHsKICByZXR1cm4gbmV3IFByb21pc2U8c3RyaW5nPigocmVzb2x2ZSwgcmVqZWN0KSA9PiB7CiAgICBjb25zdCB1cGxvYWQgPSBuZXcgdHVzLlVwbG9hZChmaWxlLCB7CiAgICAgIGVuZHBvaW50OiB1cGxvYWRVUkwsCiAgICAgIHJldHJ5RGVsYXlzOiBbMCwgMzAwMCwgNTAwMCwgMTAwMDAsIDIwMDAwXSwKICAgICAgY2h1bmtTaXplOiA1MCAqIDEwMjQgKiAxMDI0LAogICAgICBtZXRhZGF0YTogeyBmaWxlbmFtZTogZmlsZS5uYW1lLCBmaWxldHlwZTogZmlsZS50eXBlIH0sCiAgICAgIG9uRXJyb3I6IHJlamVjdCwKICAgICAgb25Qcm9ncmVzczogKHVwLCB0b3RhbCkgPT4gb25Qcm9ncmVzcz8uKCh1cCAvIHRvdGFsKSAqIDEwMCksCiAgICAgIG9uU3VjY2VzczogKCkgPT4gcmVzb2x2ZSh1cGxvYWQudXJsPy5zcGxpdCgnLycpLnBvcCgpIHx8ICcnKQogICAgfSk7CiAgICB1cGxvYWQuc3RhcnQoKTsKICB9KTsKfQpgYGAKCiMjIFZpZGVvIFN0YXRlIFBvbGxpbmcKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gd2FpdEZvclZpZGVvUmVhZHkoY2xpZW50OiBDbG91ZGZsYXJlLCBhY2NvdW50SWQ6IHN0cmluZywgdmlkZW9JZDogc3RyaW5nKSB7CiAgZm9yIChsZXQgaSA9IDA7IGkgPCA2MDsgaSsrKSB7CiAgICBjb25zdCB2aWRlbyA9IGF3YWl0IGNsaWVudC5zdHJlYW0udmlkZW9zLmdldCh2aWRlb0lkLCB7IGFjY291bnRfaWQ6IGFjY291bnRJZCB9KTsKICAgIGlmICh2aWRlby5yZWFkeVRvU3RyZWFtIHx8IHZpZGVvLnN0YXR1cy5zdGF0ZSA9PT0gJ2Vycm9yJykgcmV0dXJuIHZpZGVvOwogICAgYXdhaXQgbmV3IFByb21pc2UocmVzb2x2ZSA9PiBzZXRUaW1lb3V0KHJlc29sdmUsIDUwMDApKTsKICB9CiAgdGhyb3cgbmV3IEVycm9yKCdWaWRlbyBwcm9jZXNzaW5nIHRpbWVvdXQnKTsKfQpgYGAKCiMjIFdlYmhvb2sgSGFuZGxlcgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCBzaWduYXR1cmUgPSByZXF1ZXN0LmhlYWRlcnMuZ2V0KCdXZWJob29rLVNpZ25hdHVyZScpOwogICAgY29uc3QgYm9keSA9IGF3YWl0IHJlcXVlc3QudGV4dCgpOwogICAgaWYgKCFzaWduYXR1cmUgfHwgIWF3YWl0IHZlcmlmeVdlYmhvb2soc2lnbmF0dXJlLCBib2R5LCBlbnYuV0VCSE9PS19TRUNSRVQpKSB7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ1VuYXV0aG9yaXplZCcsIHsgc3RhdHVzOiA0MDEgfSk7CiAgICB9CiAgICBjb25zdCBwYXlsb2FkID0gSlNPTi5wYXJzZShib2R5KTsKICAgIGlmIChwYXlsb2FkLnJlYWR5VG9TdHJlYW0pIGNvbnNvbGUubG9nKGBWaWRlbyAke3BheWxvYWQudWlkfSByZWFkeWApOwogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnT0snKTsKICB9Cn07Cgphc3luYyBmdW5jdGlvbiB2ZXJpZnlXZWJob29rKHNpZzogc3RyaW5nLCBib2R5OiBzdHJpbmcsIHNlY3JldDogc3RyaW5nKTogUHJvbWlzZTxib29sZWFuPiB7CiAgY29uc3QgcGFydHMgPSBPYmplY3QuZnJvbUVudHJpZXMoc2lnLnNwbGl0KCcsJykubWFwKHAgPT4gcC5zcGxpdCgnPScpKSk7CiAgY29uc3QgdGltZXN0YW1wID0gcGFyc2VJbnQocGFydHMudGltZSB8fCAnMCcsIDEwKTsKICBpZiAoTWF0aC5hYnMoRGF0ZS5ub3coKSAvIDEwMDAgLSB0aW1lc3RhbXApID4gMzAwKSByZXR1cm4gZmFsc2U7CiAgCiAgY29uc3Qga2V5ID0gYXdhaXQgY3J5cHRvLnN1YnRsZS5pbXBvcnRLZXkoCiAgICAncmF3JywgbmV3IFRleHRFbmNvZGVyKCkuZW5jb2RlKHNlY3JldCksIHsgbmFtZTogJ0hNQUMnLCBoYXNoOiAnU0hBLTI1NicgfSwgZmFsc2UsIFsnc2lnbiddCiAgKTsKICBjb25zdCBjb21wdXRlZCA9IGF3YWl0IGNyeXB0by5zdWJ0bGUuc2lnbignSE1BQycsIGtleSwgbmV3IFRleHRFbmNvZGVyKCkuZW5jb2RlKGAke3RpbWVzdGFtcH0uJHtib2R5fWApKTsKICBjb25zdCBoZXggPSBBcnJheS5mcm9tKG5ldyBVaW50OEFycmF5KGNvbXB1dGVkKSwgYiA9PiBiLnRvU3RyaW5nKDE2KS5wYWRTdGFydCgyLCAnMCcpKS5qb2luKCcnKTsKICByZXR1cm4gaGV4ID09PSBwYXJ0cy5zaWcxOwp9CmBgYAoKIyMgU2VsZi1TaWduIEpXVCAoSGlnaCBWb2x1bWUgVG9rZW5zKQoKRm9yID4xayB0b2tlbnMvZGF5LiBQcmVyZXF1aXNpdGVzOiBDcmVhdGUgc2lnbmluZyBrZXkgKHNlZSBjb25maWd1cmF0aW9uLm1kKS4KCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gc2VsZlNpZ25Ub2tlbihrZXlJZDogc3RyaW5nLCBqd2tCYXNlNjQ6IHN0cmluZywgdmlkZW9JZDogc3RyaW5nLCBleHBpcmVzSW4gPSAzNjAwKSB7CiAgY29uc3Qga2V5ID0gYXdhaXQgY3J5cHRvLnN1YnRsZS5pbXBvcnRLZXkoCiAgICAnandrJywgSlNPTi5wYXJzZShhdG9iKGp3a0Jhc2U2NCkpLCB7IG5hbWU6ICdSU0FTU0EtUEtDUzEtdjFfNScsIGhhc2g6ICdTSEEtMjU2JyB9LCBmYWxzZSwgWydzaWduJ10KICApOwogIGNvbnN0IG5vdyA9IE1hdGguZmxvb3IoRGF0ZS5ub3coKSAvIDEwMDApOwogIGNvbnN0IGhlYWRlciA9IGJ0b2EoSlNPTi5zdHJpbmdpZnkoeyBhbGc6ICdSUzI1NicsIGtpZDoga2V5SWQgfSkpLnJlcGxhY2UoLz0vZywgJycpLnJlcGxhY2UoL1wrL2csICctJykucmVwbGFjZSgvXC8vZywgJ18nKTsKICBjb25zdCBwYXlsb2FkID0gYnRvYShKU09OLnN0cmluZ2lmeSh7IHN1YjogdmlkZW9JZCwga2lkOiBrZXlJZCwgZXhwOiBub3cgKyBleHBpcmVzSW4sIG5iZjogbm93IH0pKQogICAgLnJlcGxhY2UoLz0vZywgJycpLnJlcGxhY2UoL1wrL2csICctJykucmVwbGFjZSgvXC8vZywgJ18nKTsKICBjb25zdCBtZXNzYWdlID0gYCR7aGVhZGVyfS4ke3BheWxvYWR9YDsKICBjb25zdCBzaWcgPSBhd2FpdCBjcnlwdG8uc3VidGxlLnNpZ24oJ1JTQVNTQS1QS0NTMS12MV81Jywga2V5LCBuZXcgVGV4dEVuY29kZXIoKS5lbmNvZGUobWVzc2FnZSkpOwogIGNvbnN0IGI2NFNpZyA9IGJ0b2EoU3RyaW5nLmZyb21DaGFyQ29kZSguLi5uZXcgVWludDhBcnJheShzaWcpKSkucmVwbGFjZSgvPS9nLCAnJykucmVwbGFjZSgvXCsvZywgJy0nKS5yZXBsYWNlKC9cLy9nLCAnXycpOwogIHJldHVybiBgJHttZXNzYWdlfS4ke2I2NFNpZ31gOwp9CgovLyBXaXRoIGFjY2VzcyBydWxlcyAoZ2VvLXJlc3RyaWN0aW9uKQpjb25zdCBwYXlsb2FkV2l0aFJ1bGVzID0gewogIHN1YjogdmlkZW9JZCwga2lkOiBrZXlJZCwgZXhwOiBub3cgKyAzNjAwLCBuYmY6IG5vdywKICBhY2Nlc3NSdWxlczogW3sgdHlwZTogJ2lwLmdlb2lwLmNvdW50cnknLCBhY3Rpb246ICdhbGxvdycsIGNvdW50cnk6IFsnVVMnXSB9XQp9OwpgYGAKCiMjIEJlc3QgUHJhY3RpY2VzCgotICoqVXNlIERpcmVjdCBDcmVhdG9yIFVwbG9hZHMqKiAtIEF2b2lkIHByb3h5aW5nIHRocm91Z2ggc2VydmVycwotICoqRW5hYmxlIHJlcXVpcmVTaWduZWRVUkxzKiogLSBDb250cm9sIHByaXZhdGUgY29udGVudCBhY2Nlc3MKLSAqKlNlbGYtc2lnbiB0b2tlbnMgYXQgc2NhbGUqKiAtIFVzZSBzaWduaW5nIGtleXMgZm9yID4xay9kYXkKLSAqKlNldCBhbGxvd2VkT3JpZ2lucyoqIC0gUHJldmVudCBob3RsaW5raW5nCi0gKipVc2Ugd2ViaG9va3Mgb3ZlciBwb2xsaW5nKiogLSBFZmZpY2llbnQgc3RhdHVzIHVwZGF0ZXMKLSAqKlNldCBtYXhEdXJhdGlvblNlY29uZHMqKiAtIFByZXZlbnQgYWJ1c2UKLSAqKkVuYWJsZSBsaXZlIHJlY29yZGluZ3MqKiAtIEF1dG8gVk9EIGFmdGVyIHN0cmVhbQoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKCi0gW1JFQURNRS5tZF0oLi9SRUFETUUubWQpIC0gT3ZlcnZpZXcgYW5kIHF1aWNrIHN0YXJ0Ci0gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBTZXR1cCBhbmQgY29uZmlnCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gT24tZGVtYW5kIHZpZGVvIEFQSXMKLSBbYXBpLWxpdmUubWRdKC4vYXBpLWxpdmUubWQpIC0gTGl2ZSBzdHJlYW1pbmcgQVBJcwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gRXJyb3IgY29kZXMsIHRyb3VibGVzaG9vdGluZwoKIyMgU2VlIEFsc28KCi0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIERlcGxveSBTdHJlYW0gQVBJcyBpbiBXb3JrZXJzCi0gW3BhZ2VzXSguLi9wYWdlcy8pIC0gSW50ZWdyYXRlIFN0cmVhbSB3aXRoIFBhZ2VzCg==
+# Stream Patterns
+
+Common workflows, full-stack flows, and best practices.
+
+## React Stream Player
+
+`npm install @cloudflare/stream-react`
+
+```tsx
+import { Stream } from '@cloudflare/stream-react';
+
+export function VideoPlayer({ videoId, token }: { videoId: string; token?: string }) {
+  return <Stream controls src={token ? `${videoId}?token=${token}` : videoId} responsive />;
+}
+```
+
+## Full-Stack Upload Flow
+
+**Backend API (Workers/Pages)**
+```typescript
+import Cloudflare from 'cloudflare';
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const { videoName } = await request.json();
+    const client = new Cloudflare({ apiToken: env.CF_API_TOKEN });
+    const { uploadURL, uid } = await client.stream.directUpload.create({
+      account_id: env.CF_ACCOUNT_ID,
+      maxDurationSeconds: 3600,
+      requireSignedURLs: true,
+      meta: { name: videoName }
+    });
+    return Response.json({ uploadURL, uid });
+  }
+};
+```
+
+**Frontend component**
+```tsx
+import { useState } from 'react';
+
+export function VideoUploader() {
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  
+  async function handleUpload(file: File) {
+    setUploading(true);
+    const { uploadURL, uid } = await fetch('/api/upload-url', {
+      method: 'POST',
+      body: JSON.stringify({ videoName: file.name })
+    }).then(r => r.json());
+    
+    const xhr = new XMLHttpRequest();
+    xhr.upload.onprogress = (e) => setProgress((e.loaded / e.total) * 100);
+    xhr.onload = () => { setUploading(false); window.location.href = `/videos/${uid}`; };
+    xhr.open('POST', uploadURL);
+    const formData = new FormData();
+    formData.append('file', file);
+    xhr.send(formData);
+  }
+  
+  return (
+    <div>
+      <input type="file" accept="video/*" onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0])} disabled={uploading} />
+      {uploading && <progress value={progress} max={100} />}
+    </div>
+  );
+}
+```
+
+## TUS Resumable Upload
+
+For large files (>500MB). `npm install tus-js-client`
+
+```typescript
+import * as tus from 'tus-js-client';
+
+async function uploadWithTUS(file: File, uploadURL: string, onProgress?: (pct: number) => void) {
+  return new Promise<string>((resolve, reject) => {
+    const upload = new tus.Upload(file, {
+      endpoint: uploadURL,
+      retryDelays: [0, 3000, 5000, 10000, 20000],
+      chunkSize: 50 * 1024 * 1024,
+      metadata: { filename: file.name, filetype: file.type },
+      onError: reject,
+      onProgress: (up, total) => onProgress?.((up / total) * 100),
+      onSuccess: () => resolve(upload.url?.split('/').pop() || '')
+    });
+    upload.start();
+  });
+}
+```
+
+## Video State Polling
+
+```typescript
+async function waitForVideoReady(client: Cloudflare, accountId: string, videoId: string) {
+  for (let i = 0; i < 60; i++) {
+    const video = await client.stream.videos.get(videoId, { account_id: accountId });
+    if (video.readyToStream || video.status.state === 'error') return video;
+    await new Promise(resolve => setTimeout(resolve, 5000));
+  }
+  throw new Error('Video processing timeout');
+}
+```
+
+## Webhook Handler
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const signature = request.headers.get('Webhook-Signature');
+    const body = await request.text();
+    if (!signature || !await verifyWebhook(signature, body, env.WEBHOOK_SECRET)) {
+      return new Response('Unauthorized', { status: 401 });
+    }
+    const payload = JSON.parse(body);
+    if (payload.readyToStream) console.log(`Video ${payload.uid} ready`);
+    return new Response('OK');
+  }
+};
+
+async function verifyWebhook(sig: string, body: string, secret: string): Promise<boolean> {
+  const parts = Object.fromEntries(sig.split(',').map(p => p.split('=')));
+  const timestamp = parseInt(parts.time || '0', 10);
+  if (Math.abs(Date.now() / 1000 - timestamp) > 300) return false;
+  
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+  );
+  const computed = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${timestamp}.${body}`));
+  const hex = Array.from(new Uint8Array(computed), b => b.toString(16).padStart(2, '0')).join('');
+  return hex === parts.sig1;
+}
+```
+
+## Self-Sign JWT (High Volume Tokens)
+
+For >1k tokens/day. Prerequisites: Create signing key (see configuration.md).
+
+```typescript
+async function selfSignToken(keyId: string, jwkBase64: string, videoId: string, expiresIn = 3600) {
+  const key = await crypto.subtle.importKey(
+    'jwk', JSON.parse(atob(jwkBase64)), { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['sign']
+  );
+  const now = Math.floor(Date.now() / 1000);
+  const header = btoa(JSON.stringify({ alg: 'RS256', kid: keyId })).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  const payload = btoa(JSON.stringify({ sub: videoId, kid: keyId, exp: now + expiresIn, nbf: now }))
+    .replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  const message = `${header}.${payload}`;
+  const sig = await crypto.subtle.sign('RSASSA-PKCS1-v1_5', key, new TextEncoder().encode(message));
+  const b64Sig = btoa(String.fromCharCode(...new Uint8Array(sig))).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  return `${message}.${b64Sig}`;
+}
+
+// With access rules (geo-restriction)
+const payloadWithRules = {
+  sub: videoId, kid: keyId, exp: now + 3600, nbf: now,
+  accessRules: [{ type: 'ip.geoip.country', action: 'allow', country: ['US'] }]
+};
+```
+
+## Best Practices
+
+- **Use Direct Creator Uploads** - Avoid proxying through servers
+- **Enable requireSignedURLs** - Control private content access
+- **Self-sign tokens at scale** - Use signing keys for >1k/day
+- **Set allowedOrigins** - Prevent hotlinking
+- **Use webhooks over polling** - Efficient status updates
+- **Set maxDurationSeconds** - Prevent abuse
+- **Enable live recordings** - Auto VOD after stream
+
+## In This Reference
+
+- [README.md](./README.md) - Overview and quick start
+- [configuration.md](./configuration.md) - Setup and config
+- [api.md](./api.md) - On-demand video APIs
+- [api-live.md](./api-live.md) - Live streaming APIs
+- [gotchas.md](./gotchas.md) - Error codes, troubleshooting
+
+## See Also
+
+- [workers](../workers/) - Deploy Stream APIs in Workers
+- [pages](../pages/) - Integrate Stream with Pages

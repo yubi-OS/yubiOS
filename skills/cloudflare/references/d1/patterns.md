@@ -1,1 +1,189 @@
-IyBEMSBQYXR0ZXJucyAmIEJlc3QgUHJhY3RpY2VzCgojIyBQYWdpbmF0aW9uCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZ1bmN0aW9uIGdldFVzZXJzKHsgcGFnZSwgcGFnZVNpemUgfTogeyBwYWdlOiBudW1iZXI7IHBhZ2VTaXplOiBudW1iZXIgfSwgZW52OiBFbnYpIHsKICBjb25zdCBvZmZzZXQgPSAocGFnZSAtIDEpICogcGFnZVNpemU7CiAgY29uc3QgW2NvdW50UmVzdWx0LCBkYXRhUmVzdWx0XSA9IGF3YWl0IGVudi5EQi5iYXRjaChbCiAgICBlbnYuREIucHJlcGFyZSgnU0VMRUNUIENPVU5UKCopIGFzIHRvdGFsIEZST00gdXNlcnMnKSwKICAgIGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHVzZXJzIE9SREVSIEJZIGNyZWF0ZWRfYXQgREVTQyBMSU1JVCA/IE9GRlNFVCA/JykuYmluZChwYWdlU2l6ZSwgb2Zmc2V0KQogIF0pOwogIHJldHVybiB7IGRhdGE6IGRhdGFSZXN1bHQucmVzdWx0cywgdG90YWw6IGNvdW50UmVzdWx0LnJlc3VsdHNbMF0udG90YWwsIHBhZ2UsIHBhZ2VTaXplLCB0b3RhbFBhZ2VzOiBNYXRoLmNlaWwoY291bnRSZXN1bHQucmVzdWx0c1swXS50b3RhbCAvIHBhZ2VTaXplKSB9Owp9CmBgYAoKIyMgQ29uZGl0aW9uYWwgUXVlcmllcwoKYGBgdHlwZXNjcmlwdAphc3luYyBmdW5jdGlvbiBzZWFyY2hVc2VycyhmaWx0ZXJzOiB7IG5hbWU/OiBzdHJpbmc7IGVtYWlsPzogc3RyaW5nOyBhY3RpdmU/OiBib29sZWFuIH0sIGVudjogRW52KSB7CiAgY29uc3QgY29uZGl0aW9uczogc3RyaW5nW10gPSBbXSwgcGFyYW1zOiAoc3RyaW5nIHwgbnVtYmVyIHwgYm9vbGVhbiB8IG51bGwpW10gPSBbXTsKICBpZiAoZmlsdGVycy5uYW1lKSB7IGNvbmRpdGlvbnMucHVzaCgnbmFtZSBMSUtFID8nKTsgcGFyYW1zLnB1c2goYCUke2ZpbHRlcnMubmFtZX0lYCk7IH0KICBpZiAoZmlsdGVycy5lbWFpbCkgeyBjb25kaXRpb25zLnB1c2goJ2VtYWlsID0gPycpOyBwYXJhbXMucHVzaChmaWx0ZXJzLmVtYWlsKTsgfQogIGlmIChmaWx0ZXJzLmFjdGl2ZSAhPT0gdW5kZWZpbmVkKSB7IGNvbmRpdGlvbnMucHVzaCgnYWN0aXZlID0gPycpOyBwYXJhbXMucHVzaChmaWx0ZXJzLmFjdGl2ZSA/IDEgOiAwKTsgfQogIGNvbnN0IHdoZXJlQ2xhdXNlID0gY29uZGl0aW9ucy5sZW5ndGggPiAwID8gYFdIRVJFICR7Y29uZGl0aW9ucy5qb2luKCcgQU5EICcpfWAgOiAnJzsKICByZXR1cm4gYXdhaXQgZW52LkRCLnByZXBhcmUoYFNFTEVDVCAqIEZST00gdXNlcnMgJHt3aGVyZUNsYXVzZX1gKS5iaW5kKC4uLnBhcmFtcykuYWxsKCk7Cn0KYGBgCgojIyBCdWxrIEluc2VydAoKYGBgdHlwZXNjcmlwdAphc3luYyBmdW5jdGlvbiBidWxrSW5zZXJ0VXNlcnModXNlcnM6IEFycmF5PHsgbmFtZTogc3RyaW5nOyBlbWFpbDogc3RyaW5nIH0+LCBlbnY6IEVudikgewogIGNvbnN0IHN0bXQgPSBlbnYuREIucHJlcGFyZSgnSU5TRVJUIElOVE8gdXNlcnMgKG5hbWUsIGVtYWlsKSBWQUxVRVMgKD8sID8pJyk7CiAgY29uc3QgYmF0Y2ggPSB1c2Vycy5tYXAodXNlciA9PiBzdG10LmJpbmQodXNlci5uYW1lLCB1c2VyLmVtYWlsKSk7CiAgcmV0dXJuIGF3YWl0IGVudi5EQi5iYXRjaChiYXRjaCk7Cn0KYGBgCgojIyBDYWNoaW5nIHdpdGggS1YKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gZ2V0Q2FjaGVkVXNlcih1c2VySWQ6IG51bWJlciwgZW52OiB7IERCOiBEMURhdGFiYXNlOyBDQUNIRTogS1ZOYW1lc3BhY2UgfSkgewogIGNvbnN0IGNhY2hlS2V5ID0gYHVzZXI6JHt1c2VySWR9YDsKICBjb25zdCBjYWNoZWQgPSBhd2FpdCBlbnYuQ0FDSEU/LmdldChjYWNoZUtleSwgJ2pzb24nKTsKICBpZiAoY2FjaGVkKSByZXR1cm4gY2FjaGVkOwogIGNvbnN0IHVzZXIgPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuZmlyc3QoKTsKICBpZiAodXNlcikgYXdhaXQgZW52LkNBQ0hFPy5wdXQoY2FjaGVLZXksIEpTT04uc3RyaW5naWZ5KHVzZXIpLCB7IGV4cGlyYXRpb25UdGw6IDMwMCB9KTsKICByZXR1cm4gdXNlcjsKfQpgYGAKCiMjIFF1ZXJ5IE9wdGltaXphdGlvbgoKYGBgdHlwZXNjcmlwdAovLyDinIUgVXNlIGluZGV4ZXMgaW4gV0hFUkUgY2xhdXNlcwpjb25zdCB1c2VycyA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGVtYWlsID0gPycpLmJpbmQoZW1haWwpLmFsbCgpOwoKLy8g4pyFIExpbWl0IHJlc3VsdCBzZXRzCmNvbnN0IHJlY2VudFBvc3RzID0gYXdhaXQgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gcG9zdHMgT1JERVIgQlkgY3JlYXRlZF9hdCBERVNDIExJTUlUIDEwMCcpLmFsbCgpOwoKLy8g4pyFIFVzZSBiYXRjaCgpIGZvciBtdWx0aXBsZSBpbmRlcGVuZGVudCBxdWVyaWVzCmNvbnN0IFt1c2VyLCBwb3N0cywgY29tbWVudHNdID0gYXdhaXQgZW52LkRCLmJhdGNoKFsKICBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCksCiAgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gcG9zdHMgV0hFUkUgdXNlcl9pZCA9ID8nKS5iaW5kKHVzZXJJZCksCiAgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gY29tbWVudHMgV0hFUkUgdXNlcl9pZCA9ID8nKS5iaW5kKHVzZXJJZCkKXSk7CgovLyDinYwgQXZvaWQgTisxIHF1ZXJpZXMKZm9yIChjb25zdCBwb3N0IG9mIHBvc3RzKSB7CiAgY29uc3QgYXV0aG9yID0gYXdhaXQgZW52LkRCLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgaWQgPSA/JykuYmluZChwb3N0LnVzZXJfaWQpLmZpcnN0KCk7IC8vIEJhZDogbXVsdGlwbGUgcm91bmQgdHJpcHMKfQoKLy8g4pyFIFVzZSBKT0lOcyBpbnN0ZWFkCmNvbnN0IHBvc3RzV2l0aEF1dGhvcnMgPSBhd2FpdCBlbnYuREIucHJlcGFyZShgCiAgU0VMRUNUIHBvc3RzLiosIHVzZXJzLm5hbWUgYXMgYXV0aG9yX25hbWUKICBGUk9NIHBvc3RzCiAgSk9JTiB1c2VycyBPTiBwb3N0cy51c2VyX2lkID0gdXNlcnMuaWQKYCkuYWxsKCk7CmBgYAoKIyMgTXVsdGktVGVuYW50IFNhYVMKCmBgYHR5cGVzY3JpcHQKLy8gRWFjaCB0ZW5hbnQgZ2V0cyBvd24gZGF0YWJhc2UKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogeyBba2V5OiBgVEVOQU5UXyR7c3RyaW5nfWBdOiBEMURhdGFiYXNlIH0pIHsKICAgIGNvbnN0IHRlbmFudElkID0gcmVxdWVzdC5oZWFkZXJzLmdldCgnWC1UZW5hbnQtSUQnKTsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBlbnZbYFRFTkFOVF8ke3RlbmFudElkfWBdLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gcmVjb3JkcycpLmFsbCgpOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oZGF0YS5yZXN1bHRzKTsKICB9Cn0KYGBgCgojIyBTZXNzaW9uIFN0b3JhZ2UKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gY3JlYXRlU2Vzc2lvbih1c2VySWQ6IG51bWJlciwgdG9rZW46IHN0cmluZywgZW52OiBFbnYpIHsKICBjb25zdCBleHBpcmVzQXQgPSBuZXcgRGF0ZShEYXRlLm5vdygpICsgNyAqIDI0ICogNjAgKiA2MCAqIDEwMDApLnRvSVNPU3RyaW5nKCk7CiAgcmV0dXJuIGF3YWl0IGVudi5EQi5wcmVwYXJlKCdJTlNFUlQgSU5UTyBzZXNzaW9ucyAodXNlcl9pZCwgdG9rZW4sIGV4cGlyZXNfYXQpIFZBTFVFUyAoPywgPywgPyknKS5iaW5kKHVzZXJJZCwgdG9rZW4sIGV4cGlyZXNBdCkucnVuKCk7Cn0KCmFzeW5jIGZ1bmN0aW9uIHZhbGlkYXRlU2Vzc2lvbih0b2tlbjogc3RyaW5nLCBlbnY6IEVudikgewogIHJldHVybiBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUIHMuKiwgdS5lbWFpbCBGUk9NIHNlc3Npb25zIHMgSk9JTiB1c2VycyB1IE9OIHMudXNlcl9pZCA9IHUuaWQgV0hFUkUgcy50b2tlbiA9ID8gQU5EIHMuZXhwaXJlc19hdCA+IENVUlJFTlRfVElNRVNUQU1QJykuYmluZCh0b2tlbikuZmlyc3QoKTsKfQpgYGAKCiMjIEFuYWx5dGljcy9FdmVudHMKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gbG9nRXZlbnQoZXZlbnQ6IHsgdHlwZTogc3RyaW5nOyB1c2VySWQ/OiBudW1iZXI7IG1ldGFkYXRhOiBvYmplY3QgfSwgZW52OiBFbnYpIHsKICByZXR1cm4gYXdhaXQgZW52LkRCLnByZXBhcmUoJ0lOU0VSVCBJTlRPIGV2ZW50cyAodHlwZSwgdXNlcl9pZCwgbWV0YWRhdGEpIFZBTFVFUyAoPywgPywgPyknKS5iaW5kKGV2ZW50LnR5cGUsIGV2ZW50LnVzZXJJZCB8fCBudWxsLCBKU09OLnN0cmluZ2lmeShldmVudC5tZXRhZGF0YSkpLnJ1bigpOwp9Cgphc3luYyBmdW5jdGlvbiBnZXRFdmVudFN0YXRzKHN0YXJ0RGF0ZTogc3RyaW5nLCBlbmREYXRlOiBzdHJpbmcsIGVudjogRW52KSB7CiAgcmV0dXJuIGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgdHlwZSwgQ09VTlQoKikgYXMgY291bnQgRlJPTSBldmVudHMgV0hFUkUgdGltZXN0YW1wIEJFVFdFRU4gPyBBTkQgPyBHUk9VUCBCWSB0eXBlIE9SREVSIEJZIGNvdW50IERFU0MnKS5iaW5kKHN0YXJ0RGF0ZSwgZW5kRGF0ZSkuYWxsKCk7Cn0KYGBgCgojIyBSZWFkIFJlcGxpY2F0aW9uIFBhdHRlcm4gKFBhaWQgUGxhbnMpCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgeyBEQjogRDFEYXRhYmFzZTsgREJfUkVQTElDQTogRDFEYXRhYmFzZTsgfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KSB7CiAgICBpZiAocmVxdWVzdC5tZXRob2QgPT09ICdHRVQnKSB7CiAgICAgIC8vIFJlYWRzOiB1c2UgcmVwbGljYSBmb3IgbG93ZXIgbGF0ZW5jeQogICAgICBjb25zdCB1c2VycyA9IGF3YWl0IGVudi5EQl9SRVBMSUNBLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgYWN0aXZlID0gMScpLmFsbCgpOwogICAgICByZXR1cm4gUmVzcG9uc2UuanNvbih1c2Vycy5yZXN1bHRzKTsKICAgIH0KICAgIAogICAgaWYgKHJlcXVlc3QubWV0aG9kID09PSAnUE9TVCcpIHsKICAgICAgY29uc3QgeyBuYW1lLCBlbWFpbCB9ID0gYXdhaXQgcmVxdWVzdC5qc29uKCk7CiAgICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdJTlNFUlQgSU5UTyB1c2VycyAobmFtZSwgZW1haWwpIFZBTFVFUyAoPywgPyknKS5iaW5kKG5hbWUsIGVtYWlsKS5ydW4oKTsKICAgICAgCiAgICAgIC8vIFJlYWQtYWZ0ZXItd3JpdGU6IHVzZSBwcmltYXJ5IGZvciBjb25zaXN0ZW5jeSAocmVwbGljYXRpb24gbGFnIDwxMDBtcy0ycykKICAgICAgY29uc3QgdXNlciA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gPycpLmJpbmQocmVzdWx0Lm1ldGEubGFzdF9yb3dfaWQpLmZpcnN0KCk7CiAgICAgIHJldHVybiBSZXNwb25zZS5qc29uKHVzZXIsIHsgc3RhdHVzOiAyMDEgfSk7CiAgICB9CiAgfQp9CmBgYAoKKipVc2UgcmVwbGljYXMgZm9yKio6IEFuYWx5dGljcyBkYXNoYm9hcmRzLCBzZWFyY2ggcmVzdWx0cywgcHVibGljIHF1ZXJpZXMgKGV2ZW50dWFsIGNvbnNpc3RlbmN5IE9LKSAgCioqVXNlIHByaW1hcnkgZm9yKio6IFJlYWQtYWZ0ZXItd3JpdGUsIGZpbmFuY2lhbCB0cmFuc2FjdGlvbnMsIGF1dGhlbnRpY2F0aW9uIChjb25zaXN0ZW5jeSByZXF1aXJlZCkKCiMjIFNlc3Npb25zIEFQSSBQYXR0ZXJuIChQYWlkIFBsYW5zKQoKYGBgdHlwZXNjcmlwdAovLyBNaWdyYXRpb24gd2l0aCBsb25nLXJ1bm5pbmcgc2Vzc2lvbiAodXAgdG8gMTUgbWluKQphc3luYyBmdW5jdGlvbiBydW5NaWdyYXRpb24oZW52OiBFbnYpIHsKICBjb25zdCBzZXNzaW9uID0gZW52LkRCLndpdGhTZXNzaW9uKHsgdGltZW91dDogNjAwIH0pOyAvLyAxMCBtaW4KICB0cnkgewogICAgYXdhaXQgc2Vzc2lvbi5wcmVwYXJlKCdDUkVBVEUgSU5ERVggaWR4X3VzZXJzX2VtYWlsIE9OIHVzZXJzKGVtYWlsKScpLnJ1bigpOwogICAgYXdhaXQgc2Vzc2lvbi5wcmVwYXJlKCdDUkVBVEUgSU5ERVggaWR4X3Bvc3RzX3VzZXIgT04gcG9zdHModXNlcl9pZCknKS5ydW4oKTsKICAgIGF3YWl0IHNlc3Npb24ucHJlcGFyZSgnQU5BTFlaRScpLnJ1bigpOwogIH0gZmluYWxseSB7CiAgICBzZXNzaW9uLmNsb3NlKCk7IC8vIEFsd2F5cyBjbG9zZSB0byBwcmV2ZW50IGxlYWtzCiAgfQp9CgovLyBCdWxrIHRyYW5zZm9ybWF0aW9uIHdpdGggYmF0Y2hpbmcKYXN5bmMgZnVuY3Rpb24gdHJhbnNmb3JtTGFyZ2VEYXRhc2V0KGVudjogRW52KSB7CiAgY29uc3Qgc2Vzc2lvbiA9IGVudi5EQi53aXRoU2Vzc2lvbih7IHRpbWVvdXQ6IDkwMCB9KTsgLy8gMTUgbWluIG1heAogIHRyeSB7CiAgICBjb25zdCBCQVRDSF9TSVpFID0gMTAwMDsKICAgIGxldCBvZmZzZXQgPSAwOwogICAgd2hpbGUgKHRydWUpIHsKICAgICAgY29uc3Qgcm93cyA9IGF3YWl0IHNlc3Npb24ucHJlcGFyZSgnU0VMRUNUIGlkLCBkYXRhIEZST00gbGVnYWN5IExJTUlUID8gT0ZGU0VUID8nKS5iaW5kKEJBVENIX1NJWkUsIG9mZnNldCkuYWxsKCk7CiAgICAgIGlmIChyb3dzLnJlc3VsdHMubGVuZ3RoID09PSAwKSBicmVhazsKICAgICAgY29uc3QgdXBkYXRlcyA9IHJvd3MucmVzdWx0cy5tYXAocm93ID0+IAogICAgICAgIHNlc3Npb24ucHJlcGFyZSgnVVBEQVRFIGxlZ2FjeSBTRVQgbmV3X2RhdGEgPSA/IFdIRVJFIGlkID0gPycpLmJpbmQodHJhbnNmb3JtKHJvdy5kYXRhKSwgcm93LmlkKQogICAgICApOwogICAgICBhd2FpdCBzZXNzaW9uLmJhdGNoKHVwZGF0ZXMpOwogICAgICBvZmZzZXQgKz0gQkFUQ0hfU0laRTsKICAgIH0KICB9IGZpbmFsbHkgeyBzZXNzaW9uLmNsb3NlKCk7IH0KfQpgYGAKCiMjIFRpbWUgVHJhdmVsICYgQmFja3VwcwoKYGBgYmFzaAp3cmFuZ2xlciBkMSB0aW1lLXRyYXZlbCByZXN0b3JlIDxkYi1uYW1lPiAtLXRpbWVzdGFtcD0iMjAyNC0wMS0xNVQxNDozMDowMFoiICAjIFBvaW50LWluLXRpbWUKd3JhbmdsZXIgZDEgdGltZS10cmF2ZWwgaW5mbyA8ZGItbmFtZT4gICMgTGlzdCByZXN0b3JlIHBvaW50cyAoNyBkYXlzIGZyZWUsIDMwIGRheXMgcGFpZCkKd3JhbmdsZXIgZDEgZXhwb3J0IDxkYi1uYW1lPiAtLXJlbW90ZSAtLW91dHB1dD0uL2JhY2t1cC5zcWwgICMgRnVsbCBleHBvcnQKd3JhbmdsZXIgZDEgZXhwb3J0IDxkYi1uYW1lPiAtLXJlbW90ZSAtLW5vLXNjaGVtYSAtLW91dHB1dD0uL2RhdGEuc3FsICAjIERhdGEgb25seQp3cmFuZ2xlciBkMSBleGVjdXRlIDxkYi1uYW1lPiAtLXJlbW90ZSAtLWZpbGU9Li9iYWNrdXAuc3FsICAjIEltcG9ydApgYGAK
+# D1 Patterns & Best Practices
+
+## Pagination
+
+```typescript
+async function getUsers({ page, pageSize }: { page: number; pageSize: number }, env: Env) {
+  const offset = (page - 1) * pageSize;
+  const [countResult, dataResult] = await env.DB.batch([
+    env.DB.prepare('SELECT COUNT(*) as total FROM users'),
+    env.DB.prepare('SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?').bind(pageSize, offset)
+  ]);
+  return { data: dataResult.results, total: countResult.results[0].total, page, pageSize, totalPages: Math.ceil(countResult.results[0].total / pageSize) };
+}
+```
+
+## Conditional Queries
+
+```typescript
+async function searchUsers(filters: { name?: string; email?: string; active?: boolean }, env: Env) {
+  const conditions: string[] = [], params: (string | number | boolean | null)[] = [];
+  if (filters.name) { conditions.push('name LIKE ?'); params.push(`%${filters.name}%`); }
+  if (filters.email) { conditions.push('email = ?'); params.push(filters.email); }
+  if (filters.active !== undefined) { conditions.push('active = ?'); params.push(filters.active ? 1 : 0); }
+  const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+  return await env.DB.prepare(`SELECT * FROM users ${whereClause}`).bind(...params).all();
+}
+```
+
+## Bulk Insert
+
+```typescript
+async function bulkInsertUsers(users: Array<{ name: string; email: string }>, env: Env) {
+  const stmt = env.DB.prepare('INSERT INTO users (name, email) VALUES (?, ?)');
+  const batch = users.map(user => stmt.bind(user.name, user.email));
+  return await env.DB.batch(batch);
+}
+```
+
+## Caching with KV
+
+```typescript
+async function getCachedUser(userId: number, env: { DB: D1Database; CACHE: KVNamespace }) {
+  const cacheKey = `user:${userId}`;
+  const cached = await env.CACHE?.get(cacheKey, 'json');
+  if (cached) return cached;
+  const user = await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first();
+  if (user) await env.CACHE?.put(cacheKey, JSON.stringify(user), { expirationTtl: 300 });
+  return user;
+}
+```
+
+## Query Optimization
+
+```typescript
+// ✅ Use indexes in WHERE clauses
+const users = await env.DB.prepare('SELECT * FROM users WHERE email = ?').bind(email).all();
+
+// ✅ Limit result sets
+const recentPosts = await env.DB.prepare('SELECT * FROM posts ORDER BY created_at DESC LIMIT 100').all();
+
+// ✅ Use batch() for multiple independent queries
+const [user, posts, comments] = await env.DB.batch([
+  env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId),
+  env.DB.prepare('SELECT * FROM posts WHERE user_id = ?').bind(userId),
+  env.DB.prepare('SELECT * FROM comments WHERE user_id = ?').bind(userId)
+]);
+
+// ❌ Avoid N+1 queries
+for (const post of posts) {
+  const author = await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(post.user_id).first(); // Bad: multiple round trips
+}
+
+// ✅ Use JOINs instead
+const postsWithAuthors = await env.DB.prepare(`
+  SELECT posts.*, users.name as author_name
+  FROM posts
+  JOIN users ON posts.user_id = users.id
+`).all();
+```
+
+## Multi-Tenant SaaS
+
+```typescript
+// Each tenant gets own database
+export default {
+  async fetch(request: Request, env: { [key: `TENANT_${string}`]: D1Database }) {
+    const tenantId = request.headers.get('X-Tenant-ID');
+    const data = await env[`TENANT_${tenantId}`].prepare('SELECT * FROM records').all();
+    return Response.json(data.results);
+  }
+}
+```
+
+## Session Storage
+
+```typescript
+async function createSession(userId: number, token: string, env: Env) {
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+  return await env.DB.prepare('INSERT INTO sessions (user_id, token, expires_at) VALUES (?, ?, ?)').bind(userId, token, expiresAt).run();
+}
+
+async function validateSession(token: string, env: Env) {
+  return await env.DB.prepare('SELECT s.*, u.email FROM sessions s JOIN users u ON s.user_id = u.id WHERE s.token = ? AND s.expires_at > CURRENT_TIMESTAMP').bind(token).first();
+}
+```
+
+## Analytics/Events
+
+```typescript
+async function logEvent(event: { type: string; userId?: number; metadata: object }, env: Env) {
+  return await env.DB.prepare('INSERT INTO events (type, user_id, metadata) VALUES (?, ?, ?)').bind(event.type, event.userId || null, JSON.stringify(event.metadata)).run();
+}
+
+async function getEventStats(startDate: string, endDate: string, env: Env) {
+  return await env.DB.prepare('SELECT type, COUNT(*) as count FROM events WHERE timestamp BETWEEN ? AND ? GROUP BY type ORDER BY count DESC').bind(startDate, endDate).all();
+}
+```
+
+## Read Replication Pattern (Paid Plans)
+
+```typescript
+interface Env { DB: D1Database; DB_REPLICA: D1Database; }
+
+export default {
+  async fetch(request: Request, env: Env) {
+    if (request.method === 'GET') {
+      // Reads: use replica for lower latency
+      const users = await env.DB_REPLICA.prepare('SELECT * FROM users WHERE active = 1').all();
+      return Response.json(users.results);
+    }
+    
+    if (request.method === 'POST') {
+      const { name, email } = await request.json();
+      const result = await env.DB.prepare('INSERT INTO users (name, email) VALUES (?, ?)').bind(name, email).run();
+      
+      // Read-after-write: use primary for consistency (replication lag <100ms-2s)
+      const user = await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(result.meta.last_row_id).first();
+      return Response.json(user, { status: 201 });
+    }
+  }
+}
+```
+
+**Use replicas for**: Analytics dashboards, search results, public queries (eventual consistency OK)  
+**Use primary for**: Read-after-write, financial transactions, authentication (consistency required)
+
+## Sessions API Pattern (Paid Plans)
+
+```typescript
+// Migration with long-running session (up to 15 min)
+async function runMigration(env: Env) {
+  const session = env.DB.withSession({ timeout: 600 }); // 10 min
+  try {
+    await session.prepare('CREATE INDEX idx_users_email ON users(email)').run();
+    await session.prepare('CREATE INDEX idx_posts_user ON posts(user_id)').run();
+    await session.prepare('ANALYZE').run();
+  } finally {
+    session.close(); // Always close to prevent leaks
+  }
+}
+
+// Bulk transformation with batching
+async function transformLargeDataset(env: Env) {
+  const session = env.DB.withSession({ timeout: 900 }); // 15 min max
+  try {
+    const BATCH_SIZE = 1000;
+    let offset = 0;
+    while (true) {
+      const rows = await session.prepare('SELECT id, data FROM legacy LIMIT ? OFFSET ?').bind(BATCH_SIZE, offset).all();
+      if (rows.results.length === 0) break;
+      const updates = rows.results.map(row => 
+        session.prepare('UPDATE legacy SET new_data = ? WHERE id = ?').bind(transform(row.data), row.id)
+      );
+      await session.batch(updates);
+      offset += BATCH_SIZE;
+    }
+  } finally { session.close(); }
+}
+```
+
+## Time Travel & Backups
+
+```bash
+wrangler d1 time-travel restore <db-name> --timestamp="2024-01-15T14:30:00Z"  # Point-in-time
+wrangler d1 time-travel info <db-name>  # List restore points (7 days free, 30 days paid)
+wrangler d1 export <db-name> --remote --output=./backup.sql  # Full export
+wrangler d1 export <db-name> --remote --no-schema --output=./data.sql  # Data only
+wrangler d1 execute <db-name> --remote --file=./backup.sql  # Import
+```

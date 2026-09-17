@@ -1,1 +1,66 @@
-IyBDbG91ZGZsYXJlIEFQSSBJbnRlZ3JhdGlvbgoKR3VpZGUgZm9yIHdvcmtpbmcgd2l0aCBDbG91ZGZsYXJlJ3MgUkVTVCBBUEkgLSBhdXRoZW50aWNhdGlvbiwgU0RLIHVzYWdlLCBjb21tb24gcGF0dGVybnMsIGFuZCB0cm91Ymxlc2hvb3RpbmcuCgojIyBRdWljayBEZWNpc2lvbiBUcmVlCgpgYGAKSG93IGFyZSB5b3UgY2FsbGluZyB0aGUgQ2xvdWRmbGFyZSBBUEk/CuKUnOKUgCBGcm9tIFdvcmtlcnMgcnVudGltZSDihpIgVXNlIGJpbmRpbmdzLCBub3QgUkVTVCBBUEkgKHNlZSAuLi9iaW5kaW5ncy8pCuKUnOKUgCBTZXJ2ZXItc2lkZSAoTm9kZS9QeXRob24vR28pIOKGkiBPZmZpY2lhbCBTREsgKHNlZSBhcGkubWQpCuKUnOKUgCBDTEkvc2NyaXB0cyDihpIgV3JhbmdsZXIgb3IgY3VybCAoc2VlIGNvbmZpZ3VyYXRpb24ubWQpCuKUnOKUgCBJbmZyYXN0cnVjdHVyZS1hcy1jb2RlIOKGkiBTZWUgLi4vcHVsdW1pLyBvciAuLi90ZXJyYWZvcm0vCuKUlOKUgCBPbmUtb2ZmIHJlcXVlc3RzIOKGkiBjdXJsIGV4YW1wbGVzIChzZWUgYXBpLm1kKQpgYGAKCiMjIFNESyBTZWxlY3Rpb24KCnwgTGFuZ3VhZ2UgfCBQYWNrYWdlIHwgQmVzdCBGb3IgfCBEZWZhdWx0IFJldHJpZXMgfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLXwKfCBUeXBlU2NyaXB0IHwgYGNsb3VkZmxhcmVgIHwgTm9kZS5qcywgQnVuLCBOZXh0LmpzLCBXb3JrZXJzIHwgMiB8CnwgUHl0aG9uIHwgYGNsb3VkZmxhcmVgIHwgRmFzdEFQSSwgRGphbmdvLCBzY3JpcHRzIHwgMiB8CnwgR28gfCBgY2xvdWRmbGFyZS1nby92NGAgfCBDTEkgdG9vbHMsIG1pY3Jvc2VydmljZXMgfCAxMCB8CgpBbGwgU0RLcyBhcmUgU3RhaW5sZXNzLWdlbmVyYXRlZCBmcm9tIE9wZW5BUEkgc3BlYyAoY29uc2lzdGVudCBBUElzKS4KCiMjIEF1dGhlbnRpY2F0aW9uIE1ldGhvZHMKCnwgTWV0aG9kIHwgU2VjdXJpdHkgfCBVc2UgQ2FzZSB8IFNjb3BlIHwKfC0tLS0tLS0tfC0tLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tfAp8ICoqQVBJIFRva2VuKiog4pyTIHwgU2NvcGVkLCByb3RhdGFibGUgfCBQcm9kdWN0aW9uIHwgUGVyLXpvbmUgb3IgYWNjb3VudCB8CnwgQVBJIEtleSArIEVtYWlsIHwgRnVsbCBhY2NvdW50IGFjY2VzcyB8IExlZ2FjeSBvbmx5IHwgRXZlcnl0aGluZyB8CnwgVXNlciBTZXJ2aWNlIEtleSB8IExpbWl0ZWQgfCBPcmlnaW4gQ0EgY2VydHMgb25seSB8IE9yaWdpbiBDQSB8CgoqKkFsd2F5cyB1c2UgQVBJIHRva2VucyoqIGZvciBuZXcgcHJvamVjdHMuCgojIyBSYXRlIExpbWl0cwoKfCBMaW1pdCB8IFZhbHVlIHwKfC0tLS0tLS18LS0tLS0tLXwKfCBQZXIgdXNlci90b2tlbiB8IDEyMDAgcmVxdWVzdHMgLyA1IG1pbnV0ZXMgfAp8IFBlciBJUCB8IDIwMCByZXF1ZXN0cyAvIHNlY29uZCB8CnwgR3JhcGhRTCB8IDMyMCAvIDUgbWludXRlcyAoY29zdC1iYXNlZCkgfAoKIyMgUmVhZGluZyBPcmRlcgoKfCBUYXNrIHwgRmlsZXMgdG8gUmVhZCB8CnwtLS0tLS18LS0tLS0tLS0tLS0tLS0tfAp8IEluaXRpYWxpemUgU0RLIGNsaWVudCB8IGFwaS5tZCB8CnwgQ29uZmlndXJlIGF1dGgvdGltZW91dC9yZXRyeSB8IGNvbmZpZ3VyYXRpb24ubWQgfAp8IEZpbmQgdXNhZ2UgcGF0dGVybnMgfCBwYXR0ZXJucy5tZCB8CnwgRGVidWcgZXJyb3JzL3JhdGUgbGltaXRzIHwgZ290Y2hhcy5tZCB8CnwgUHJvZHVjdC1zcGVjaWZpYyBBUElzIHwgLi4vd29ya2Vycy8sIC4uL3IyLywgLi4va3YvLCBldGMuIHwKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gU0RLIGNsaWVudCBpbml0aWFsaXphdGlvbiwgcGFnaW5hdGlvbiwgZXJyb3IgaGFuZGxpbmcsIGV4YW1wbGVzCi0gKipbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkqKiAtIEVudmlyb25tZW50IHZhcmlhYmxlcywgU0RLIGNvbmZpZywgV3JhbmdsZXIgc2V0dXAKLSAqKltwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpKiogLSBSZWFsLXdvcmxkIHBhdHRlcm5zLCBiYXRjaCBvcGVyYXRpb25zLCB3b3JrZmxvd3MKLSAqKltnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSoqIC0gUmF0ZSBsaW1pdHMsIFNESy1zcGVjaWZpYyBpc3N1ZXMsIHRyb3VibGVzaG9vdGluZwoKIyMgU2VlIEFsc28KCi0gW0Nsb3VkZmxhcmUgQVBJIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hcGkvKQotIFtCaW5kaW5ncyBSZWZlcmVuY2VdKC4uL2JpbmRpbmdzLykgLSBXb3JrZXJzIHJ1bnRpbWUgYmluZGluZ3MgKHByZWZlcnJlZCBvdmVyIFJFU1QgQVBJKQotIFtXcmFuZ2xlciBSZWZlcmVuY2VdKC4uL3dyYW5nbGVyLykgLSBDTEkgdG9vbCBmb3IgQ2xvdWRmbGFyZSBkZXZlbG9wbWVudAotIFtHcmFwaFFMIEFuYWx5dGljcyBBUEkgUmVmZXJlbmNlXSguLi9ncmFwaHFsLWFwaS8pIC0gQW5hbHl0aWNzIGRhdGEgdmlhIEdyYXBoUUwgKHNlcGFyYXRlIGVuZHBvaW50IGZyb20gUkVTVCBBUEkpCg==
+# Cloudflare API Integration
+
+Guide for working with Cloudflare's REST API - authentication, SDK usage, common patterns, and troubleshooting.
+
+## Quick Decision Tree
+
+```
+How are you calling the Cloudflare API?
+├─ From Workers runtime → Use bindings, not REST API (see ../bindings/)
+├─ Server-side (Node/Python/Go) → Official SDK (see api.md)
+├─ CLI/scripts → Wrangler or curl (see configuration.md)
+├─ Infrastructure-as-code → See ../pulumi/ or ../terraform/
+└─ One-off requests → curl examples (see api.md)
+```
+
+## SDK Selection
+
+| Language | Package | Best For | Default Retries |
+|----------|---------|----------|-----------------|
+| TypeScript | `cloudflare` | Node.js, Bun, Next.js, Workers | 2 |
+| Python | `cloudflare` | FastAPI, Django, scripts | 2 |
+| Go | `cloudflare-go/v4` | CLI tools, microservices | 10 |
+
+All SDKs are Stainless-generated from OpenAPI spec (consistent APIs).
+
+## Authentication Methods
+
+| Method | Security | Use Case | Scope |
+|--------|----------|----------|-------|
+| **API Token** ✓ | Scoped, rotatable | Production | Per-zone or account |
+| API Key + Email | Full account access | Legacy only | Everything |
+| User Service Key | Limited | Origin CA certs only | Origin CA |
+
+**Always use API tokens** for new projects.
+
+## Rate Limits
+
+| Limit | Value |
+|-------|-------|
+| Per user/token | 1200 requests / 5 minutes |
+| Per IP | 200 requests / second |
+| GraphQL | 320 / 5 minutes (cost-based) |
+
+## Reading Order
+
+| Task | Files to Read |
+|------|---------------|
+| Initialize SDK client | api.md |
+| Configure auth/timeout/retry | configuration.md |
+| Find usage patterns | patterns.md |
+| Debug errors/rate limits | gotchas.md |
+| Product-specific APIs | ../workers/, ../r2/, ../kv/, etc. |
+
+## In This Reference
+
+- **[api.md](api.md)** - SDK client initialization, pagination, error handling, examples
+- **[configuration.md](configuration.md)** - Environment variables, SDK config, Wrangler setup
+- **[patterns.md](patterns.md)** - Real-world patterns, batch operations, workflows
+- **[gotchas.md](gotchas.md)** - Rate limits, SDK-specific issues, troubleshooting
+
+## See Also
+
+- [Cloudflare API Docs](https://developers.cloudflare.com/api/)
+- [Bindings Reference](../bindings/) - Workers runtime bindings (preferred over REST API)
+- [Wrangler Reference](../wrangler/) - CLI tool for Cloudflare development
+- [GraphQL Analytics API Reference](../graphql-api/) - Analytics data via GraphQL (separate endpoint from REST API)

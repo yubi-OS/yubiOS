@@ -1,1 +1,174 @@
-IyBDb2RlIFJldmlldyDigJQgV29ya2VycwoKSG93IHRvIHJldmlldyBXb3JrZXJzIGNvZGUgZm9yIHR5cGUgY29ycmVjdG5lc3MsIEFQSSB1c2FnZSwgY29uZmlnIHZhbGlkaXR5LCBhbmQgYmVzdCBwcmFjdGljZXMuIFRoaXMgaXMgc2VsZi1jb250YWluZWQg4oCUIGRvIG5vdCBhc3N1bWUgYWNjZXNzIHRvIG90aGVyIHNraWxscy4KCiMjIFJldHJpZXZhbAoKUHJlZmVyIHJldHJpZXZhbCBvdmVyIHByZS10cmFpbmluZy4gVHlwZXMsIGNvbmZpZyBzY2hlbWFzLCBhbmQgQVBJcyBjaGFuZ2Ugd2l0aCBjb21wYXRpYmlsaXR5IGRhdGVzIGFuZCBuZXcgYmluZGluZ3MuCgojIyMgV29ya2VycyB0eXBlcwoKRmV0Y2ggdGhlIGxhdGVzdCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AgYmVmb3JlIHJldmlld2luZy4gVGhlIHByb2plY3QgbWF5IGhhdmUgYW4gb2xkZXIgdmVyc2lvbiBpbnN0YWxsZWQuCgpgYGBiYXNoCm1rZGlyIC1wIC90bXAvd29ya2Vycy10eXBlcy1sYXRlc3QgJiYgXAogIG5wbSBwYWNrIEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXMgLS1wYWNrLWRlc3RpbmF0aW9uIC90bXAvd29ya2Vycy10eXBlcy1sYXRlc3QgJiYgXAogIHRhciAteHpmIC90bXAvd29ya2Vycy10eXBlcy1sYXRlc3QvY2xvdWRmbGFyZS13b3JrZXJzLXR5cGVzLSoudGd6IC1DIC90bXAvd29ya2Vycy10eXBlcy1sYXRlc3QKIyBUeXBlcyBhcmUgYXQgL3RtcC93b3JrZXJzLXR5cGVzLWxhdGVzdC9wYWNrYWdlL2luZGV4LmQudHMKYGBgCgpTZWFyY2ggdGhpcyBmaWxlIGZvciB0aGUgc3BlY2lmaWMgdHlwZSwgY2xhc3MsIG9yIGludGVyZmFjZSB1bmRlciByZXZpZXcuIERvIG5vdCBndWVzcyB0eXBlIG5hbWVzLgoKQWx0ZXJuYXRpdmU6IGBucHggd3JhbmdsZXIgdHlwZXNgIGdlbmVyYXRlcyBhIHR5cGVkIGBFbnZgIGludGVyZmFjZSBmcm9tIHRoZSBsb2NhbCB3cmFuZ2xlciBjb25maWcuCgpGYWxsYmFjazogcmVhZCBgbm9kZV9tb2R1bGVzL0BjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXMvaW5kZXguZC50c2AuIE5vdGUgdGhlIGluc3RhbGxlZCB2ZXJzaW9uLgoKIyMjIFdyYW5nbGVyIGNvbmZpZyBzY2hlbWEKClRoZSBhdXRob3JpdGF0aXZlIHNjaGVtYSBpcyBidW5kbGVkIHdpdGggd3JhbmdsZXIgYXMgYGNvbmZpZy1zY2hlbWEuanNvbmAgKEpTT04gU2NoZW1hIGRyYWZ0LTA3KS4KCmBgYGJhc2gKIyBSZWFkIGZyb20gbG9jYWwgbm9kZV9tb2R1bGVzCmNhdCBub2RlX21vZHVsZXMvd3JhbmdsZXIvY29uZmlnLXNjaGVtYS5qc29uCmBgYAoKRG8gbm90IGd1ZXNzIGZpZWxkIG5hbWVzIG9yIHN0cnVjdHVyZXMg4oCUIGxvb2sgdGhlbSB1cC4KCiMjIyBDbG91ZGZsYXJlIGRvY3MKClVzZSB0aGUgQ2xvdWRmbGFyZSBkb2NzIHNlYXJjaCB0b29sIGlmIGF2YWlsYWJsZSwgb3IgZmV0Y2ggZnJvbSBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvYC4gVGhlIGJlc3QgcHJhY3RpY2VzIHBhZ2UgbGl2ZXMgYXQgYC93b3JrZXJzL2Jlc3QtcHJhY3RpY2VzL3dvcmtlcnMtYmVzdC1wcmFjdGljZXMvYC4KCi0tLQoKIyMgVHlwZSBWYWxpZGF0aW9uCgojIyMgRW52IGludGVyZmFjZQoKLSBFdmVyeSBiaW5kaW5nIG11c3QgaGF2ZSBhIHNwZWNpZmljIHR5cGUuIEZsYWcgYGFueWAsIGB1bmtub3duYCwgYG9iamVjdGAsIG9yIGBSZWNvcmQ8c3RyaW5nLCB1bmtub3duPmAgb24gYmluZGluZ3MuCi0gQmluZGluZyB0eXBlcyB0aGF0IGFjY2VwdCBnZW5lcmljIHBhcmFtZXRlcnMgKER1cmFibGUgT2JqZWN0IG5hbWVzcGFjZXMsIFF1ZXVlcywgU2VydmljZSBiaW5kaW5ncyBmb3IgUlBDKSBtdXN0IGluY2x1ZGUgdGhlbS4gUmVhZCB0aGUgdHlwZSBkZWZpbml0aW9uIHRvIGNvbmZpcm0gd2hpY2ggdHlwZXMgYXJlIGdlbmVyaWMuCi0gQmluZGluZyBuYW1lcyBtdXN0IG1hdGNoIHRoZSB3cmFuZ2xlciBjb25maWcgZXhhY3RseS4KLSBQcmVmZXIgZ2VuZXJhdGVkIHR5cGVzIGZyb20gYHdyYW5nbGVyIHR5cGVzYCBvdmVyIGhhbmQtd3JpdHRlbiBpbnRlcmZhY2VzLgoKIyMjIEhhbmRsZXIgYW5kIGNsYXNzIHNpZ25hdHVyZXMKClZlcmlmeSBhZ2FpbnN0IGN1cnJlbnQgdHlwZSBkZWZpbml0aW9ucyDigJQgZG8gbm90IGFzc3VtZSBzaWduYXR1cmVzIGFyZSBzdGFibGUuCgotIENvcnJlY3QgaW1wb3J0IHBhdGggKG1vc3QgV29ya2VycyBwbGF0Zm9ybSBjbGFzc2VzIGltcG9ydCBmcm9tIGAiY2xvdWRmbGFyZTp3b3JrZXJzImApCi0gR2VuZXJpYyB0eXBlIHBhcmFtZXRlciBvbiBiYXNlIGNsYXNzZXMgKGUuZy4sIGBEdXJhYmxlT2JqZWN0PEVudj5gKQotIEJpbmRpbmcgYWNjZXNzIHBhdHRlcm46IGBlbnYuWGAgaW4gbW9kdWxlIGV4cG9ydCBoYW5kbGVycywgYHRoaXMuZW52LlhgIGluIGNsYXNzZXMgZXh0ZW5kaW5nIHBsYXRmb3JtIGJhc2UgY2xhc3NlcwotIGBFeGVjdXRpb25Db250ZXh0YCBhcyB0aGUgdGhpcmQgcGFyYW0gaW4gbW9kdWxlIGV4cG9ydCBoYW5kbGVycyAobmVlZGVkIGZvciBgY3R4LndhaXRVbnRpbCgpYCkKLSBgZmV0Y2goKWAgaGFuZGxlcnMgbXVzdCByZXR1cm4gYFByb21pc2U8UmVzcG9uc2U+YAoKIyMjIEJpbmRpbmcgYWNjZXNzIOKAlCB0aGUgbW9zdCBjb21tb24gZXJyb3IKCi0gKipNb2R1bGUgZXhwb3J0IGhhbmRsZXJzKiogKGBmZXRjaGAsIGBzY2hlZHVsZWRgLCBgcXVldWVgLCBgZW1haWxgKTogYmluZGluZ3MgdmlhIGBlbnYuWGAgcGFyYW1ldGVyCi0gKipQbGF0Zm9ybSBiYXNlIGNsYXNzZXMqKiAoYFdvcmtlckVudHJ5cG9pbnRgLCBgRHVyYWJsZU9iamVjdGAsIGBXb3JrZmxvd2AsIGBBZ2VudGApOiBiaW5kaW5ncyB2aWEgYHRoaXMuZW52LlhgCgpGbGFnIGBlbnYuWGAgaW5zaWRlIGEgY2xhc3MgZXh0ZW5kaW5nIGEgcGxhdGZvcm0gYmFzZSBjbGFzcy4gRmxhZyBgdGhpcy5lbnYuWGAgaW5zaWRlIGEgbW9kdWxlIGV4cG9ydCBoYW5kbGVyLgoKIyMjIFR5cGUgaW50ZWdyaXR5IHJ1bGVzCgp8IFJ1bGUgfCBEZXRhaWwgfAp8LS0tLS0tfC0tLS0tLS0tfAp8IE5vIGBhbnlgIHwgTmV2ZXIgb24gYmluZGluZyB0eXBlcywgaGFuZGxlciBwYXJhbXMsIG9yIEFQSSByZXNwb25zZXMgfAp8IE5vIGRvdWJsZS1jYXN0aW5nIHwgYGFzIHVua25vd24gYXMgVGAgaGlkZXMgcmVhbCBpbmNvbXBhdGliaWxpdGllcyDigJQgZml4IHRoZSB1bmRlcmx5aW5nIGRlc2lnbiB8CnwgSnVzdGlmeSBzdXBwcmVzc2lvbnMgfCBgQHRzLWlnbm9yZWAvYEB0cy1leHBlY3QtZXJyb3JgIG11c3QgaW5jbHVkZSBhIGNvbW1lbnQgZXhwbGFpbmluZyB3aHkgfAp8IFByZWZlciBgc2F0aXNmaWVzYCB8IFVzZSBgc2F0aXNmaWVzIEV4cG9ydGVkSGFuZGxlcjxFbnY+YCBvdmVyIGBhc2Ag4oCUIHZhbGlkYXRlcyB3aXRob3V0IHdpZGVuaW5nIHwKfCBWYWxpZGF0ZSwgZG8gbm90IGFzc2VydCB8IFNjaGVtYSBvciB0eXBlIGd1YXJkIGZvciB1bnR5cGVkIGRhdGEgKEpTT04sIHBhcnNlZCBib2RpZXMpLCBub3QgYGFzYCB8CgojIyMgU3RhbGUgY2xhc3MgcGF0dGVybnMKCk9sZCBwYXR0ZXJucyBzdXJ2aXZlIGluIGNvZGViYXNlcyBsb25nIGFmdGVyIEFQSXMgY2hhbmdlLgoKLSAqKmBleHRlbmRzYCB2cyBgaW1wbGVtZW50c2AqKjogcGxhdGZvcm0gY2xhc3NlcyB1c2UgYGV4dGVuZHNgLCBub3QgYGltcGxlbWVudHNgLiBUaGUgYGltcGxlbWVudHNgIHBhdHRlcm4gaXMgbGVnYWN5IGFuZCBsb3NlcyBgdGhpcy5jdHhgLCBgdGhpcy5lbnZgLgotICoqSW1wb3J0IHBhdGhzKio6IHZlcmlmeSBtb2R1bGUgc3BlY2lmaWVycyBtYXRjaCB3aGF0IHR5cGVzIGFjdHVhbGx5IGV4cG9ydC4gQ29tbW9uIG1pc3Rha2U6IHdyb25nIHBhdGggZm9yIGAiY2xvdWRmbGFyZTp3b3JrZXJzImAgdnMgYCJjbG91ZGZsYXJlOndvcmtmbG93cyJgLgotICoqUmVuYW1lZCBwcm9wZXJ0aWVzKio6IGUuZy4sIGB0aGlzLnN0YXRlYCB0byBgdGhpcy5jdHhgIGluIER1cmFibGUgT2JqZWN0cy4gU2VhcmNoIHR5cGVzIHRvIGNvbmZpcm0uCi0gKipDb25zdHJ1Y3RvciBzaWduYXR1cmVzKio6IGJhc2UgY2xhc3MgY29uc3RydWN0b3JzIGNoYW5nZS4gVmVyaWZ5IGV4cGVjdGVkIHBhcmFtZXRlcnMuCgotLS0KCiMjIENvbmZpZyBWYWxpZGF0aW9uCgojIyMgUmVxdWlyZWQgZmllbGRzCgpGb3IgZXhlY3V0YWJsZSBleGFtcGxlcywgdmVyaWZ5OiBgbmFtZWAsIGBjb21wYXRpYmlsaXR5X2RhdGVgLCBgbWFpbmAuIENoZWNrIHRoZSBzY2hlbWEgZm9yIGN1cnJlbnQgcmVxdWlyZWQgZmllbGRzLgoKIyMjIENvbmZpZyBmb3JtYXQKCi0gKipKU09OQyoqIChgd3JhbmdsZXIuanNvbmNgKSDigJQgcHJlZmVycmVkIGZvciBuZXcgcHJvamVjdHMKLSAqKkpTT04qKiAoYHdyYW5nbGVyLmpzb25gKSDigJQgdmFsaWQgYnV0IG5vIGNvbW1lbnRzCi0gKipUT01MKiogKGB3cmFuZ2xlci50b21sYCkg4oCUIGxlZ2FjeTsgYWNjZXB0YWJsZSBpbiBleGlzdGluZyBjb250ZW50LCBmbGFnIGluIG5ldyBwcm9qZWN0cwoKIyMjIEJpbmRpbmctY29kZSBjb25zaXN0ZW5jeQoKMS4gRXZlcnkgYGVudi5YYCByZWZlcmVuY2UgaW4gY29kZSBoYXMgYSBjb3JyZXNwb25kaW5nIGJpbmRpbmcgZGVjbGFyYXRpb24gaW4gY29uZmlnCjIuIEV2ZXJ5IGJpbmRpbmcgaW4gY29uZmlnIGlzIHJlZmVyZW5jZWQgaW4gY29kZSAod2FybiBvbiB1bnVzZWQpCjMuIE5hbWVzIG1hdGNoIGV4YWN0bHkgKGNhc2Utc2Vuc2l0aXZlKQo0LiBGb3IgRHVyYWJsZSBPYmplY3RzOiBgY2xhc3NfbmFtZWAgbWF0Y2hlcyB0aGUgZXhwb3J0ZWQgY2xhc3MgbmFtZQoKIyMjIENvbW1vbiBjb25maWcgbWlzdGFrZXMKCnwgQ2hlY2sgfCBXaGF0IHRvIGxvb2sgZm9yIHwKfC0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS18CnwgU3RhbGUgYGNvbXBhdGliaWxpdHlfZGF0ZWAgfCBTaG91bGQgYmUgcmVjZW50OyB1c2UgYCR0b2RheWAgcGxhY2Vob2xkZXIgaW4gZG9jcyB8CnwgTWlzc2luZyBETyBtaWdyYXRpb25zIHwgRXZlcnkgbmV3IERPIGNsYXNzIG5lZWRzIGEgbWlncmF0aW9uIGVudHJ5IHwKfCBCaW5kaW5nIG5hbWUgbWlzbWF0Y2ggfCBDb25maWcgYGJpbmRpbmdgL2BuYW1lYCBtdXN0IG1hdGNoIGBlbnYuWGAgaW4gY29kZSB8CnwgU2VjcmV0cyBpbiBjb25maWcgfCBOZXZlciBpbiBgdmFyc2Ag4oCUIHVzZSBgd3JhbmdsZXIgc2VjcmV0IHB1dGAgfAp8IFdyb25nIGJpbmRpbmcga2V5IHwgVmVyaWZ5IHRvcC1sZXZlbCBrZXkgbmFtZSBhZ2FpbnN0IHRoZSBzY2hlbWEgfAp8IE1pc3NpbmcgZW50cnlwb2ludCB8IGBtYWluYCByZXF1aXJlZCBmb3IgZXhlY3V0YWJsZSBXb3JrZXJzIHwKCi0tLQoKIyMgQW50aS1QYXR0ZXJucyB0byBGbGFnCgpTZWUgdGhlIGZ1bGwgYW50aS1wYXR0ZXJucyB0YWJsZSBpbiBgU0tJTEwubWRgLiBUaGUgdHlwZS1zcGVjaWZpYyBvbmVzIHRvIHdhdGNoIGZvciBkdXJpbmcgcmV2aWV3OgoKLSAqKmBhbnlgIG9uIGBFbnZgIG9yIGhhbmRsZXIgcGFyYW1zKiog4oCUIGRlZmVhdHMgdHlwZSBzYWZldHkgZm9yIGFsbCBkb3duc3RyZWFtIGJpbmRpbmcgYWNjZXNzCi0gKipgYXMgdW5rbm93biBhcyBUYCoqIOKAlCBoaWRlcyByZWFsIHR5cGUgaW5jb21wYXRpYmlsaXRpZXM7IGZpeCB0aGUgdW5kZXJseWluZyBkZXNpZ24KLSAqKmBAdHMtaWdub3JlYC9gQHRzLWV4cGVjdC1lcnJvcmAgd2l0aG91dCBleHBsYW5hdGlvbioqIOKAlCBtYXNrcyBlcnJvcnMgc2lsZW50bHk7IHJlcXVpcmUgYSBqdXN0aWZ5aW5nIGNvbW1lbnQKLSAqKmBpbXBsZW1lbnRzYCBpbnN0ZWFkIG9mIGBleHRlbmRzYCBvbiBwbGF0Zm9ybSBiYXNlIGNsYXNzZXMqKiDigJQgbGVnYWN5IHBhdHRlcm47IGxvc2VzIGB0aGlzLmN0eGAsIGB0aGlzLmVudmAKLSAqKmBlbnYuWGAgaW5zaWRlIGNsYXNzIGJvZHkqKiDigJQgc2hvdWxkIGJlIGB0aGlzLmVudi5YYCBpbiBwbGF0Zm9ybSBiYXNlIGNsYXNzZXMKLSAqKmB0aGlzLmVudi5YYCBpbiBtb2R1bGUgZXhwb3J0IGhhbmRsZXIqKiDigJQgc2hvdWxkIGJlIGBlbnYuWGAgcGFyYW1ldGVyCi0gKipOb24tc2VyaWFsaXphYmxlIHZhbHVlcyBhY3Jvc3MgYm91bmRhcmllcyoqIOKAlCBgUmVzcG9uc2VgLCBgRXJyb3JgIGluIHN0ZXAvcXVldWUgY29tcGlsZXMgYnV0IGZhaWxzIGF0IHJ1bnRpbWUKCi0tLQoKIyMgU2VyaWFsaXphdGlvbiBCb3VuZGFyaWVzCgpEYXRhIGNyb3NzaW5nIHRoZXNlIGJvdW5kYXJpZXMgbXVzdCBiZSBzdHJ1Y3R1cmVkLWNsb25lIHNlcmlhbGl6YWJsZToKCi0gKipRdWV1ZSBtZXNzYWdlcyoqOiBib2R5IHBhc3NlZCB0byBgLnNlbmQoKWAgb3IgYC5zZW5kQmF0Y2goKWAKLSAqKldvcmtmbG93IHN0ZXAgcmV0dXJuIHZhbHVlcyoqOiBwZXJzaXN0ZWQgdG8gZHVyYWJsZSBzdG9yYWdlCi0gKipETyBzdG9yYWdlKio6IHZhbHVlcyBpbiBgc3RvcmFnZS5wdXQoKWAgb3IgU1FMCi0gKipgcG9zdE1lc3NhZ2UoKWAqKjogV2ViU29ja2V0IG1lc3NhZ2VzCgpOb24tc2VyaWFsaXphYmxlIHR5cGVzIHRvIGZsYWc6IGBSZXNwb25zZWAsIGBSZXF1ZXN0YCwgYEVycm9yYCwgZnVuY3Rpb25zLCBjbGFzcyBpbnN0YW5jZXMgd2l0aCBtZXRob2RzLCBgTWFwYC9gU2V0YCwgYFN5bWJvbGAuCgpWYWxpZDogcGxhaW4gb2JqZWN0cywgYXJyYXlzLCBzdHJpbmdzLCBudW1iZXJzLCBib29sZWFucywgbnVsbCwgYEFycmF5QnVmZmVyYCwgYERhdGVgLgoKLS0tCgojIyBSZXZpZXcgUHJvY2VzcwoKMS4gKipSZXRyaWV2ZSoqIOKAlCBmZXRjaCBsYXRlc3Qgd29ya2VycyB0eXBlcywgd3JhbmdsZXIgc2NoZW1hLCBhbmQgYmVzdCBwcmFjdGljZXMgcGFnZQoyLiAqKlJlYWQgZnVsbCBmaWxlcyoqIOKAlCBub3QganVzdCBkaWZmczsgY29udGV4dCBtYXR0ZXJzIGZvciBiaW5kaW5nIGFjY2VzcyBwYXR0ZXJucwozLiAqKkNhdGVnb3JpemUgY29kZSoqIOKAlCBkZXRlcm1pbmVzIHdoYXQgdG8gY2hlY2s6CiAgIC0gKipJbGx1c3RyYXRpdmUqKiAoY29uY2VwdCBkZW1vLCBjb21tZW50cyBmb3IgbW9zdCBsb2dpYyk6IHZlcmlmeSBjb3JyZWN0IEFQSSBuYW1lcyBhbmQgcmVhbGlzdGljIHNpZ25hdHVyZXMKICAgLSAqKkRlbW9uc3RyYXRpdmUqKiAoZnVuY3Rpb25hbCBzbmlwcGV0LCB3b3VsZCB3b3JrIGluIGNvbnRleHQpOiB2ZXJpZnkgc3ludGF4LCBjb3JyZWN0IEFQSXMsIGNvcnJlY3QgYmluZGluZyBhY2Nlc3MKICAgLSAqKkV4ZWN1dGFibGUqKiAoc3RhbmRhbG9uZSwgcnVucyB3aXRob3V0IG1vZGlmaWNhdGlvbik6IHZlcmlmeSBjb21waWxlcywgcnVucywgaW5jbHVkZXMgaW1wb3J0cyBhbmQgY29uZmlnCjQuICoqQ2hlY2sgdHlwZXMqKiDigJQgYmluZGluZyBhY2Nlc3MgcGF0dGVybiwgaGFuZGxlciBzaWduYXR1cmVzLCBubyBgYW55YCwgbm8gdW5zYWZlIGNhc3RzCjUuICoqQ2hlY2sgY29uZmlnKiog4oCUIGNvbXBhdGliaWxpdHlfZGF0ZSwgbm9kZWpzX2NvbXBhdCwgb2JzZXJ2YWJpbGl0eSwgc2VjcmV0cywgYmluZGluZy1jb2RlIGNvbnNpc3RlbmN5CjYuICoqQ2hlY2sgcGF0dGVybnMqKiDigJQgc3RyZWFtaW5nLCBmbG9hdGluZyBwcm9taXNlcywgZ2xvYmFsIHN0YXRlLCBzZXJpYWxpemF0aW9uIGJvdW5kYXJpZXMKNy4gKipDaGVjayBzZWN1cml0eSoqIOKAlCBjcnlwdG8gdXNhZ2UsIHNlY3JldCBoYW5kbGluZywgdGltaW5nLXNhZmUgY29tcGFyaXNvbnMsIGVycm9yIGhhbmRsaW5nCjguICoqVmFsaWRhdGUgd2l0aCB0b29scyoqIOKAlCBgbnB4IHRzYyAtLW5vRW1pdGAsIGxpbnQgZm9yIGBuby1mbG9hdGluZy1wcm9taXNlc2AKOS4gKipBc3Nlc3MgcmlzayoqIOKAlCBISUdIIChhdXRoLCBjcnlwdG8sIGJpbmRpbmdzKSwgTUVESVVNIChidXNpbmVzcyBsb2dpYywgY29uZmlnKSwgTE9XIChzdHlsZSwgY29tbWVudHMpCgojIyMgT3V0cHV0IGZvcm1hdAoKYGBgCioqW1NFVkVSSVRZXSoqIEJyaWVmIGRlc2NyaXB0aW9uCmBmaWxlLnRzOjQyYCDigJQgZXhwbGFuYXRpb24gd2l0aCBldmlkZW5jZQpTdWdnZXN0ZWQgZml4OiBgY29kZWAKYGBgCgpTZXZlcml0eTogKipDUklUSUNBTCoqIChzZWN1cml0eSwgZGF0YSBsb3NzLCBjcmFzaCkgfCAqKkhJR0gqKiAodHlwZSBlcnJvciwgd3JvbmcgQVBJLCBicm9rZW4gY29uZmlnKSB8ICoqTUVESVVNKiogKG1pc3NpbmcgdmFsaWRhdGlvbiwgZWRnZSBjYXNlKSB8ICoqTE9XKiogKHN0eWxlLCBtaW5vciBpbXByb3ZlbWVudCkK
+# Code Review — Workers
+
+How to review Workers code for type correctness, API usage, config validity, and best practices. This is self-contained — do not assume access to other skills.
+
+## Retrieval
+
+Prefer retrieval over pre-training. Types, config schemas, and APIs change with compatibility dates and new bindings.
+
+### Workers types
+
+Fetch the latest `@cloudflare/workers-types` before reviewing. The project may have an older version installed.
+
+```bash
+mkdir -p /tmp/workers-types-latest && \
+  npm pack @cloudflare/workers-types --pack-destination /tmp/workers-types-latest && \
+  tar -xzf /tmp/workers-types-latest/cloudflare-workers-types-*.tgz -C /tmp/workers-types-latest
+# Types are at /tmp/workers-types-latest/package/index.d.ts
+```
+
+Search this file for the specific type, class, or interface under review. Do not guess type names.
+
+Alternative: `npx wrangler types` generates a typed `Env` interface from the local wrangler config.
+
+Fallback: read `node_modules/@cloudflare/workers-types/index.d.ts`. Note the installed version.
+
+### Wrangler config schema
+
+The authoritative schema is bundled with wrangler as `config-schema.json` (JSON Schema draft-07).
+
+```bash
+# Read from local node_modules
+cat node_modules/wrangler/config-schema.json
+```
+
+Do not guess field names or structures — look them up.
+
+### Cloudflare docs
+
+Use the Cloudflare docs search tool if available, or fetch from `https://developers.cloudflare.com/workers/`. The best practices page lives at `/workers/best-practices/workers-best-practices/`.
+
+---
+
+## Type Validation
+
+### Env interface
+
+- Every binding must have a specific type. Flag `any`, `unknown`, `object`, or `Record<string, unknown>` on bindings.
+- Binding types that accept generic parameters (Durable Object namespaces, Queues, Service bindings for RPC) must include them. Read the type definition to confirm which types are generic.
+- Binding names must match the wrangler config exactly.
+- Prefer generated types from `wrangler types` over hand-written interfaces.
+
+### Handler and class signatures
+
+Verify against current type definitions — do not assume signatures are stable.
+
+- Correct import path (most Workers platform classes import from `"cloudflare:workers"`)
+- Generic type parameter on base classes (e.g., `DurableObject<Env>`)
+- Binding access pattern: `env.X` in module export handlers, `this.env.X` in classes extending platform base classes
+- `ExecutionContext` as the third param in module export handlers (needed for `ctx.waitUntil()`)
+- `fetch()` handlers must return `Promise<Response>`
+
+### Binding access — the most common error
+
+- **Module export handlers** (`fetch`, `scheduled`, `queue`, `email`): bindings via `env.X` parameter
+- **Platform base classes** (`WorkerEntrypoint`, `DurableObject`, `Workflow`, `Agent`): bindings via `this.env.X`
+
+Flag `env.X` inside a class extending a platform base class. Flag `this.env.X` inside a module export handler.
+
+### Type integrity rules
+
+| Rule | Detail |
+|------|--------|
+| No `any` | Never on binding types, handler params, or API responses |
+| No double-casting | `as unknown as T` hides real incompatibilities — fix the underlying design |
+| Justify suppressions | `@ts-ignore`/`@ts-expect-error` must include a comment explaining why |
+| Prefer `satisfies` | Use `satisfies ExportedHandler<Env>` over `as` — validates without widening |
+| Validate, do not assert | Schema or type guard for untyped data (JSON, parsed bodies), not `as` |
+
+### Stale class patterns
+
+Old patterns survive in codebases long after APIs change.
+
+- **`extends` vs `implements`**: platform classes use `extends`, not `implements`. The `implements` pattern is legacy and loses `this.ctx`, `this.env`.
+- **Import paths**: verify module specifiers match what types actually export. Common mistake: wrong path for `"cloudflare:workers"` vs `"cloudflare:workflows"`.
+- **Renamed properties**: e.g., `this.state` to `this.ctx` in Durable Objects. Search types to confirm.
+- **Constructor signatures**: base class constructors change. Verify expected parameters.
+
+---
+
+## Config Validation
+
+### Required fields
+
+For executable examples, verify: `name`, `compatibility_date`, `main`. Check the schema for current required fields.
+
+### Config format
+
+- **JSONC** (`wrangler.jsonc`) — preferred for new projects
+- **JSON** (`wrangler.json`) — valid but no comments
+- **TOML** (`wrangler.toml`) — legacy; acceptable in existing content, flag in new projects
+
+### Binding-code consistency
+
+1. Every `env.X` reference in code has a corresponding binding declaration in config
+2. Every binding in config is referenced in code (warn on unused)
+3. Names match exactly (case-sensitive)
+4. For Durable Objects: `class_name` matches the exported class name
+
+### Common config mistakes
+
+| Check | What to look for |
+|-------|-----------------|
+| Stale `compatibility_date` | Should be recent; use `$today` placeholder in docs |
+| Missing DO migrations | Every new DO class needs a migration entry |
+| Binding name mismatch | Config `binding`/`name` must match `env.X` in code |
+| Secrets in config | Never in `vars` — use `wrangler secret put` |
+| Wrong binding key | Verify top-level key name against the schema |
+| Missing entrypoint | `main` required for executable Workers |
+
+---
+
+## Anti-Patterns to Flag
+
+See the full anti-patterns table in `SKILL.md`. The type-specific ones to watch for during review:
+
+- **`any` on `Env` or handler params** — defeats type safety for all downstream binding access
+- **`as unknown as T`** — hides real type incompatibilities; fix the underlying design
+- **`@ts-ignore`/`@ts-expect-error` without explanation** — masks errors silently; require a justifying comment
+- **`implements` instead of `extends` on platform base classes** — legacy pattern; loses `this.ctx`, `this.env`
+- **`env.X` inside class body** — should be `this.env.X` in platform base classes
+- **`this.env.X` in module export handler** — should be `env.X` parameter
+- **Non-serializable values across boundaries** — `Response`, `Error` in step/queue compiles but fails at runtime
+
+---
+
+## Serialization Boundaries
+
+Data crossing these boundaries must be structured-clone serializable:
+
+- **Queue messages**: body passed to `.send()` or `.sendBatch()`
+- **Workflow step return values**: persisted to durable storage
+- **DO storage**: values in `storage.put()` or SQL
+- **`postMessage()`**: WebSocket messages
+
+Non-serializable types to flag: `Response`, `Request`, `Error`, functions, class instances with methods, `Map`/`Set`, `Symbol`.
+
+Valid: plain objects, arrays, strings, numbers, booleans, null, `ArrayBuffer`, `Date`.
+
+---
+
+## Review Process
+
+1. **Retrieve** — fetch latest workers types, wrangler schema, and best practices page
+2. **Read full files** — not just diffs; context matters for binding access patterns
+3. **Categorize code** — determines what to check:
+   - **Illustrative** (concept demo, comments for most logic): verify correct API names and realistic signatures
+   - **Demonstrative** (functional snippet, would work in context): verify syntax, correct APIs, correct binding access
+   - **Executable** (standalone, runs without modification): verify compiles, runs, includes imports and config
+4. **Check types** — binding access pattern, handler signatures, no `any`, no unsafe casts
+5. **Check config** — compatibility_date, nodejs_compat, observability, secrets, binding-code consistency
+6. **Check patterns** — streaming, floating promises, global state, serialization boundaries
+7. **Check security** — crypto usage, secret handling, timing-safe comparisons, error handling
+8. **Validate with tools** — `npx tsc --noEmit`, lint for `no-floating-promises`
+9. **Assess risk** — HIGH (auth, crypto, bindings), MEDIUM (business logic, config), LOW (style, comments)
+
+### Output format
+
+```
+**[SEVERITY]** Brief description
+`file.ts:42` — explanation with evidence
+Suggested fix: `code`
+```
+
+Severity: **CRITICAL** (security, data loss, crash) | **HIGH** (type error, wrong API, broken config) | **MEDIUM** (missing validation, edge case) | **LOW** (style, minor improvement)

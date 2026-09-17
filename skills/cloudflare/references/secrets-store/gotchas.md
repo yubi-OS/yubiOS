@@ -1,1 +1,97 @@
-IyBHb3RjaGFzCgojIyBDb21tb24gRXJyb3JzCgojIyMgIi5nZXQoKSBUaHJvd3Mgb24gRXJyb3IiCgoqKkNhdXNlOioqIEFzc3VtaW5nIGAuZ2V0KClgIHJldHVybnMgbnVsbCBvbiBmYWlsdXJlIGluc3RlYWQgb2YgdGhyb3dpbmcgIAoqKlNvbHV0aW9uOioqIEFsd2F5cyB3cmFwIGAuZ2V0KClgIGNhbGxzIGluIHRyeS9jYXRjaCBibG9ja3MgdG8gaGFuZGxlIGVycm9ycyBncmFjZWZ1bGx5CgpgYGB0eXBlc2NyaXB0CnRyeSB7CiAgY29uc3Qga2V5ID0gYXdhaXQgZW52LkFQSV9LRVkuZ2V0KCk7Cn0gY2F0Y2ggKGVycm9yKSB7CiAgcmV0dXJuIG5ldyBSZXNwb25zZSgiQ29uZmlndXJhdGlvbiBlcnJvciIsIHsgc3RhdHVzOiA1MDAgfSk7Cn0KYGBgCgojIyMgIkxvZ2dpbmcgU2VjcmV0IFZhbHVlcyIKCioqQ2F1c2U6KiogQWNjaWRlbnRhbGx5IGxvZ2dpbmcgc2VjcmV0IHZhbHVlcyBpbiBjb25zb2xlIG9yIGVycm9yIG1lc3NhZ2VzICAKKipTb2x1dGlvbjoqKiBPbmx5IGxvZyBtZXRhZGF0YSAoZS5nLiwgIlJldHJpZXZlZCBBUElfS0VZIikgbmV2ZXIgdGhlIGFjdHVhbCBzZWNyZXQgdmFsdWUKCiMjIyAiTW9kdWxlLUxldmVsIFNlY3JldCBBY2Nlc3MiCgoqKkNhdXNlOioqIEF0dGVtcHRpbmcgdG8gYWNjZXNzIHNlY3JldHMgZHVyaW5nIG1vZHVsZSBpbml0aWFsaXphdGlvbiBiZWZvcmUgZW52IGlzIGF2YWlsYWJsZSAgCioqU29sdXRpb246KiogQ2FjaGUgc2VjcmV0cyBpbiByZXF1ZXN0IHNjb3BlIG9ubHksIG5vdCBhdCBtb2R1bGUgbGV2ZWwKCiMjIyAiU2VjcmV0IG5vdCBmb3VuZCBpbiBzdG9yZSIKCioqQ2F1c2U6KiogU2VjcmV0IG5hbWUgZG9lc24ndCBleGlzdCwgY2FzZSBtaXNtYXRjaCwgbWlzc2luZyB3b3JrZXJzIHNjb3BlLCBvciBpbmNvcnJlY3Qgc3RvcmVfaWQgIAoqKlNvbHV0aW9uOioqIFZlcmlmeSBzZWNyZXQgZXhpc3RzIHdpdGggYHdyYW5nbGVyIHNlY3JldHMtc3RvcmUgc2VjcmV0IGxpc3QgPHN0b3JlLWlkPiAtLXJlbW90ZWAsIGNoZWNrIG5hbWUgbWF0Y2hlcyBleGFjdGx5IChjYXNlLXNlbnNpdGl2ZSksIGVuc3VyZSBzZWNyZXQgaGFzIGB3b3JrZXJzYCBzY29wZSwgYW5kIHZlcmlmeSBjb3JyZWN0IHN0b3JlX2lkCgojIyMgIlNjb3BlIE1pc21hdGNoIgoKKipDYXVzZToqKiBTZWNyZXQgZXhpc3RzIGJ1dCBtaXNzaW5nIGB3b3JrZXJzYCBzY29wZSAob25seSBoYXMgYGFpLWdhdGV3YXlgIHNjb3BlKSAgCioqU29sdXRpb246KiogVXBkYXRlIHNlY3JldCBzY29wZXM6IGB3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHNlY3JldCB1cGRhdGUgPHN0b3JlLWlkPiAtLW5hbWUgU0VDUkVUIC0tc2NvcGVzIHdvcmtlcnMgLS1yZW1vdGVgIG9yIGFkZCB2aWEgRGFzaGJvYXJkCgojIyMgIkpTT04gUGFyc2luZyBGYWlsdXJlIgoKKipDYXVzZToqKiBTdG9yaW5nIGludmFsaWQgSlNPTiBpbiBzZWNyZXQsIHRoZW4gZmFpbGluZyB0byBwYXJzZSBkdXJpbmcgcnVudGltZSAgCioqU29sdXRpb246KiogVmFsaWRhdGUgSlNPTiBiZWZvcmUgc3RvcmluZzoKCmBgYGJhc2gKIyBWYWxpZGF0ZSBiZWZvcmUgc3RvcmluZwplY2hvICd7ImtleSI6InZhbHVlIn0nIHwganEgLiAmJiBcCiAgZWNobyAneyJrZXkiOiJ2YWx1ZSJ9JyB8IHdyYW5nbGVyIHNlY3JldHMtc3RvcmUgc2VjcmV0IGNyZWF0ZSA8c3RvcmUtaWQ+IFwKICAgIC0tbmFtZSBDT05GSUcgLS1zY29wZXMgd29ya2VycyAtLXJlbW90ZQpgYGAKClJ1bnRpbWUgcGFyc2luZyB3aXRoIGVycm9yIGhhbmRsaW5nOgoKYGBgdHlwZXNjcmlwdAp0cnkgewogIGNvbnN0IGNvbmZpZ1N0ciA9IGF3YWl0IGVudi5DT05GSUcuZ2V0KCk7CiAgY29uc3QgY29uZmlnID0gSlNPTi5wYXJzZShjb25maWdTdHIpOwp9IGNhdGNoIChlcnJvcikgewogIGNvbnNvbGUuZXJyb3IoIkludmFsaWQgY29uZmlnIEpTT046IiwgZXJyb3IpOwogIHJldHVybiBuZXcgUmVzcG9uc2UoIkludmFsaWQgY29uZmlndXJhdGlvbiIsIHsgc3RhdHVzOiA1MDAgfSk7Cn0KYGBgCgojIyMgIkNhbm5vdCBhY2Nlc3Mgc2VjcmV0IGluIGxvY2FsIGRldiIKCioqQ2F1c2U6KiogQXR0ZW1wdGluZyB0byBhY2Nlc3MgcHJvZHVjdGlvbiBzZWNyZXRzIGluIGxvY2FsIGRldmVsb3BtZW50IGVudmlyb25tZW50ICAKKipTb2x1dGlvbjoqKiBDcmVhdGUgbG9jYWwtb25seSBzZWNyZXRzICh3aXRob3V0IGAtLXJlbW90ZWAgZmxhZykgZm9yIGRldmVsb3BtZW50OiBgd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgY3JlYXRlIDxzdG9yZS1pZD4gLS1uYW1lIEFQSV9LRVkgLS1zY29wZXMgd29ya2Vyc2AKCiMjIyAiUHJvcGVydHkgJ2dldCcgZG9lcyBub3QgZXhpc3QiCgoqKkNhdXNlOioqIE1pc3NpbmcgVHlwZVNjcmlwdCB0eXBlIGRlZmluaXRpb24gZm9yIHNlY3JldCBiaW5kaW5nICAKKipTb2x1dGlvbjoqKiBEZWZpbmUgaW50ZXJmYWNlIHdpdGggZ2V0IG1ldGhvZDogYGludGVyZmFjZSBFbnYgeyBBUElfS0VZOiB7IGdldCgpOiBQcm9taXNlPHN0cmluZz4gfTsgfWAKCiMjIyAiQmluZGluZyBhbHJlYWR5IGV4aXN0cyIKCioqQ2F1c2U6KiogRHVwbGljYXRlIGJpbmRpbmcgaW4gZGFzaGJvYXJkIG9yIGNvbmZsaWN0IGJldHdlZW4gd3JhbmdsZXIuanNvbmMgYW5kIGRhc2hib2FyZCAgCioqU29sdXRpb246KiogUmVtb3ZlIGR1cGxpY2F0ZSBmcm9tIGRhc2hib2FyZCBTZXR0aW5ncyDihpIgQmluZGluZ3MsIGNoZWNrIGZvciBjb25mbGljdHMsIG9yIGRlbGV0ZSBvbGQgV29ya2VyIHNlY3JldCB3aXRoIGB3cmFuZ2xlciBzZWNyZXQgZGVsZXRlIEFQSV9LRVlgCgojIyMgIkFjY291bnQgc2VjcmV0IHF1b3RhIGV4Y2VlZGVkIgoKKipDYXVzZToqKiBBY2NvdW50IGhhcyByZWFjaGVkIDEwMCBzZWNyZXQgbGltaXQgKGJldGEpICAKKipTb2x1dGlvbjoqKiBDaGVjayBxdW90YSB3aXRoIGB3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHF1b3RhIC0tcmVtb3RlYCwgZGVsZXRlIHVudXNlZCBzZWNyZXRzLCBjb25zb2xpZGF0ZSBkdXBsaWNhdGVzLCBvciBjb250YWN0IENsb3VkZmxhcmUgZm9yIGluY3JlYXNlCgojIyBMaW1pdHMKCnwgTGltaXQgfCBWYWx1ZSB8IE5vdGVzIHwKfC0tLS0tLS18LS0tLS0tLXwtLS0tLS0tfAp8IE1heCBzZWNyZXRzIHBlciBhY2NvdW50IHwgMTAwIHwgQmV0YSBsaW1pdCB8CnwgTWF4IHN0b3JlcyBwZXIgYWNjb3VudCB8IDEgfCBCZXRhIGxpbWl0IHwKfCBNYXggc2VjcmV0IHNpemUgfCAxMDI0IGJ5dGVzIHwgUGVyIHNlY3JldCB8CnwgTG9jYWwgc2VjcmV0cyB8IERvbid0IGNvdW50IHRvd2FyZCBsaW1pdCB8IE9ubHkgcHJvZHVjdGlvbiBzZWNyZXRzIGNvdW50IHwKfCBTY29wZXMgYXZhaWxhYmxlIHwgYHdvcmtlcnNgLCBgYWktZ2F0ZXdheWAgfCBNdXN0IGhhdmUgY29ycmVjdCBzY29wZSBmb3IgYWNjZXNzIHwKfCBTY29wZSB8IEFjY291bnQtbGV2ZWwgfCBDYW4gYmUgcmV1c2VkIGFjcm9zcyBtdWx0aXBsZSBXb3JrZXJzIHwKfCBBY2Nlc3MgbWV0aG9kIHwgYGF3YWl0IGVudi5CSU5ESU5HLmdldCgpYCB8IEFzeW5jIG9ubHksIHRocm93cyBvbiBlcnJvciB8CnwgTWFuYWdlbWVudCB8IENlbnRyYWxpemVkIHwgVmlhIHNlY3JldHMtc3RvcmUgY29tbWFuZHMgfAp8IExvY2FsIGRldiB8IFNlcGFyYXRlIGxvY2FsIHNlY3JldHMgfCBVc2Ugd2l0aG91dCBgLS1yZW1vdGVgIGZsYWcgfAp8IFJlZ2lvbmFsIGF2YWlsYWJpbGl0eSB8IEdsb2JhbCBleGNlcHQgQ2hpbmEgTmV0d29yayB8IFVuYXZhaWxhYmxlIGluIENoaW5hIE5ldHdvcmsgfAoKU2VlOiBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSwgW2FwaS5tZF0oLi9hcGkubWQpLCBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpCg==
+# Gotchas
+
+## Common Errors
+
+### ".get() Throws on Error"
+
+**Cause:** Assuming `.get()` returns null on failure instead of throwing  
+**Solution:** Always wrap `.get()` calls in try/catch blocks to handle errors gracefully
+
+```typescript
+try {
+  const key = await env.API_KEY.get();
+} catch (error) {
+  return new Response("Configuration error", { status: 500 });
+}
+```
+
+### "Logging Secret Values"
+
+**Cause:** Accidentally logging secret values in console or error messages  
+**Solution:** Only log metadata (e.g., "Retrieved API_KEY") never the actual secret value
+
+### "Module-Level Secret Access"
+
+**Cause:** Attempting to access secrets during module initialization before env is available  
+**Solution:** Cache secrets in request scope only, not at module level
+
+### "Secret not found in store"
+
+**Cause:** Secret name doesn't exist, case mismatch, missing workers scope, or incorrect store_id  
+**Solution:** Verify secret exists with `wrangler secrets-store secret list <store-id> --remote`, check name matches exactly (case-sensitive), ensure secret has `workers` scope, and verify correct store_id
+
+### "Scope Mismatch"
+
+**Cause:** Secret exists but missing `workers` scope (only has `ai-gateway` scope)  
+**Solution:** Update secret scopes: `wrangler secrets-store secret update <store-id> --name SECRET --scopes workers --remote` or add via Dashboard
+
+### "JSON Parsing Failure"
+
+**Cause:** Storing invalid JSON in secret, then failing to parse during runtime  
+**Solution:** Validate JSON before storing:
+
+```bash
+# Validate before storing
+echo '{"key":"value"}' | jq . && \
+  echo '{"key":"value"}' | wrangler secrets-store secret create <store-id> \
+    --name CONFIG --scopes workers --remote
+```
+
+Runtime parsing with error handling:
+
+```typescript
+try {
+  const configStr = await env.CONFIG.get();
+  const config = JSON.parse(configStr);
+} catch (error) {
+  console.error("Invalid config JSON:", error);
+  return new Response("Invalid configuration", { status: 500 });
+}
+```
+
+### "Cannot access secret in local dev"
+
+**Cause:** Attempting to access production secrets in local development environment  
+**Solution:** Create local-only secrets (without `--remote` flag) for development: `wrangler secrets-store secret create <store-id> --name API_KEY --scopes workers`
+
+### "Property 'get' does not exist"
+
+**Cause:** Missing TypeScript type definition for secret binding  
+**Solution:** Define interface with get method: `interface Env { API_KEY: { get(): Promise<string> }; }`
+
+### "Binding already exists"
+
+**Cause:** Duplicate binding in dashboard or conflict between wrangler.jsonc and dashboard  
+**Solution:** Remove duplicate from dashboard Settings → Bindings, check for conflicts, or delete old Worker secret with `wrangler secret delete API_KEY`
+
+### "Account secret quota exceeded"
+
+**Cause:** Account has reached 100 secret limit (beta)  
+**Solution:** Check quota with `wrangler secrets-store quota --remote`, delete unused secrets, consolidate duplicates, or contact Cloudflare for increase
+
+## Limits
+
+| Limit | Value | Notes |
+|-------|-------|-------|
+| Max secrets per account | 100 | Beta limit |
+| Max stores per account | 1 | Beta limit |
+| Max secret size | 1024 bytes | Per secret |
+| Local secrets | Don't count toward limit | Only production secrets count |
+| Scopes available | `workers`, `ai-gateway` | Must have correct scope for access |
+| Scope | Account-level | Can be reused across multiple Workers |
+| Access method | `await env.BINDING.get()` | Async only, throws on error |
+| Management | Centralized | Via secrets-store commands |
+| Local dev | Separate local secrets | Use without `--remote` flag |
+| Regional availability | Global except China Network | Unavailable in China Network |
+
+See: [configuration.md](./configuration.md), [api.md](./api.md), [patterns.md](./patterns.md)

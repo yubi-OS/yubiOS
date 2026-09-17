@@ -1,1 +1,193 @@
-IyBUdW5uZWwgQVBJCgojIyBDbG91ZGZsYXJlIEFQSSBBY2Nlc3MKCioqQmFzZSBVUkwqKjogYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NGAKCioqQXV0aGVudGljYXRpb24qKjoKYGBgYmFzaApBdXRob3JpemF0aW9uOiBCZWFyZXIgJHtDRl9BUElfVE9LRU59CmBgYAoKIyMgVHlwZVNjcmlwdCBTREsKCkluc3RhbGw6IGBucG0gaW5zdGFsbCBjbG91ZGZsYXJlYAoKYGBgdHlwZXNjcmlwdAppbXBvcnQgQ2xvdWRmbGFyZSBmcm9tICdjbG91ZGZsYXJlJzsKCmNvbnN0IGNmID0gbmV3IENsb3VkZmxhcmUoewogIGFwaVRva2VuOiBwcm9jZXNzLmVudi5DRl9BUElfVE9LRU4sCn0pOwoKY29uc3QgYWNjb3VudElkID0gcHJvY2Vzcy5lbnYuQ0ZfQUNDT1VOVF9JRDsKYGBgCgojIyBDcmVhdGUgVHVubmVsCgojIyMgY1VSTApgYGBiYXNoCmN1cmwgLVggUE9TVCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS90dW5uZWxzIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAke0NGX0FQSV9UT0tFTn0iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLS1kYXRhICd7CiAgICAibmFtZSI6ICJteS10dW5uZWwiLAogICAgInR1bm5lbF9zZWNyZXQiOiAiPGJhc2U2NC1zZWNyZXQ+IgogIH0nCmBgYAoKIyMjIFR5cGVTY3JpcHQKYGBgdHlwZXNjcmlwdApjb25zdCB0dW5uZWwgPSBhd2FpdCBjZi56ZXJvVHJ1c3QudHVubmVscy5jcmVhdGUoewogIGFjY291bnRfaWQ6IGFjY291bnRJZCwKICBuYW1lOiAnbXktdHVubmVsJywKICB0dW5uZWxfc2VjcmV0OiBCdWZmZXIuZnJvbShjcnlwdG8ucmFuZG9tQnl0ZXMoMzIpKS50b1N0cmluZygnYmFzZTY0JyksCn0pOwoKY29uc29sZS5sb2coYFR1bm5lbCBJRDogJHt0dW5uZWwuaWR9YCk7CmBgYAoKIyMgTGlzdCBUdW5uZWxzCgojIyMgY1VSTApgYGBiYXNoCmN1cmwgLVggR0VUICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L3R1bm5lbHMiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfQVBJX1RPS0VOfSIKYGBgCgojIyMgVHlwZVNjcmlwdApgYGB0eXBlc2NyaXB0CmNvbnN0IHR1bm5lbHMgPSBhd2FpdCBjZi56ZXJvVHJ1c3QudHVubmVscy5saXN0KHsKICBhY2NvdW50X2lkOiBhY2NvdW50SWQsCn0pOwoKZm9yIChjb25zdCB0dW5uZWwgb2YgdHVubmVscy5yZXN1bHQpIHsKICBjb25zb2xlLmxvZyhgJHt0dW5uZWwubmFtZX06ICR7dHVubmVsLmlkfWApOwp9CmBgYAoKIyMgR2V0IFR1bm5lbCBJbmZvCgojIyMgY1VSTApgYGBiYXNoCmN1cmwgLVggR0VUICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L3R1bm5lbHMve3R1bm5lbF9pZH0iIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfQVBJX1RPS0VOfSIKYGBgCgojIyMgVHlwZVNjcmlwdApgYGB0eXBlc2NyaXB0CmNvbnN0IHR1bm5lbCA9IGF3YWl0IGNmLnplcm9UcnVzdC50dW5uZWxzLmdldCh0dW5uZWxJZCwgewogIGFjY291bnRfaWQ6IGFjY291bnRJZCwKfSk7Cgpjb25zb2xlLmxvZyhgU3RhdHVzOiAke3R1bm5lbC5zdGF0dXN9YCk7CmNvbnNvbGUubG9nKGBDb25uZWN0aW9uczogJHt0dW5uZWwuY29ubmVjdGlvbnM/Lmxlbmd0aCB8fCAwfWApOwpgYGAKCiMjIFVwZGF0ZSBUdW5uZWwgQ29uZmlnCgojIyMgY1VSTApgYGBiYXNoCmN1cmwgLVggUFVUICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L3R1bm5lbHMve3R1bm5lbF9pZH0vY29uZmlndXJhdGlvbnMiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfQVBJX1RPS0VOfSIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtLWRhdGEgJ3sKICAgICJjb25maWciOiB7CiAgICAgICJpbmdyZXNzIjogWwogICAgICAgIHsiaG9zdG5hbWUiOiAiYXBwLmV4YW1wbGUuY29tIiwgInNlcnZpY2UiOiAiaHR0cDovL2xvY2FsaG9zdDo4MDAwIn0sCiAgICAgICAgeyJzZXJ2aWNlIjogImh0dHBfc3RhdHVzOjQwNCJ9CiAgICAgIF0KICAgIH0KICB9JwpgYGAKCiMjIyBUeXBlU2NyaXB0CmBgYHR5cGVzY3JpcHQKY29uc3QgY29uZmlnID0gYXdhaXQgY2YuemVyb1RydXN0LnR1bm5lbHMuY29uZmlndXJhdGlvbnMudXBkYXRlKAogIHR1bm5lbElkLAogIHsKICAgIGFjY291bnRfaWQ6IGFjY291bnRJZCwKICAgIGNvbmZpZzogewogICAgICBpbmdyZXNzOiBbCiAgICAgICAgeyBob3N0bmFtZTogJ2FwcC5leGFtcGxlLmNvbScsIHNlcnZpY2U6ICdodHRwOi8vbG9jYWxob3N0OjgwMDAnIH0sCiAgICAgICAgeyBzZXJ2aWNlOiAnaHR0cF9zdGF0dXM6NDA0JyB9LAogICAgICBdLAogICAgfSwKICB9Cik7CmBgYAoKIyMgRGVsZXRlIFR1bm5lbAoKIyMjIGNVUkwKYGBgYmFzaApjdXJsIC1YIERFTEVURSAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS90dW5uZWxzL3t0dW5uZWxfaWR9IiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAke0NGX0FQSV9UT0tFTn0iCmBgYAoKIyMjIFR5cGVTY3JpcHQKYGBgdHlwZXNjcmlwdAphd2FpdCBjZi56ZXJvVHJ1c3QudHVubmVscy5kZWxldGUodHVubmVsSWQsIHsKICBhY2NvdW50X2lkOiBhY2NvdW50SWQsCn0pOwpgYGAKCiMjIFRva2VuLUJhc2VkIFR1bm5lbHMgKENvbmZpZyBTb3VyY2U6IENsb3VkZmxhcmUpCgpUb2tlbi1iYXNlZCB0dW5uZWxzIHN0b3JlIGNvbmZpZyBpbiBDbG91ZGZsYXJlIGRhc2hib2FyZCBpbnN0ZWFkIG9mIGxvY2FsIGZpbGVzLgoKIyMjIFZpYSBEYXNoYm9hcmQKMS4gKipaZXJvIFRydXN0KiogPiAqKk5ldHdvcmtzKiogPiAqKlR1bm5lbHMqKgoyLiAqKkNyZWF0ZSBhIHR1bm5lbCoqID4gKipDbG91ZGZsYXJlZCoqCjMuIENvbmZpZ3VyZSByb3V0ZXMgaW4gZGFzaGJvYXJkCjQuIENvcHkgdG9rZW4KNS4gUnVuIG9uIG9yaWdpbjoKYGBgYmFzaApjbG91ZGZsYXJlZCBzZXJ2aWNlIGluc3RhbGwgPFRPS0VOPgpgYGAKCiMjIyBWaWEgVG9rZW4KYGBgYmFzaAojIFJ1biB3aXRoIHRva2VuIChubyBjb25maWcgZmlsZSBuZWVkZWQpCmNsb3VkZmxhcmVkIHR1bm5lbCAtLW5vLWF1dG91cGRhdGUgcnVuIC0tdG9rZW4gJHtUVU5ORUxfVE9LRU59CgojIERvY2tlcgpkb2NrZXIgcnVuIGNsb3VkZmxhcmUvY2xvdWRmbGFyZWQ6bGF0ZXN0IHR1bm5lbCAtLW5vLWF1dG91cGRhdGUgcnVuIC0tdG9rZW4gJHtUVU5ORUxfVE9LRU59CmBgYAoKIyMjIEdldCBUdW5uZWwgVG9rZW4gKFR5cGVTY3JpcHQpCmBgYHR5cGVzY3JpcHQKLy8gR2V0IHR1bm5lbCB0byByZXRyaWV2ZSB0b2tlbgpjb25zdCB0dW5uZWwgPSBhd2FpdCBjZi56ZXJvVHJ1c3QudHVubmVscy5nZXQodHVubmVsSWQsIHsKICBhY2NvdW50X2lkOiBhY2NvdW50SWQsCn0pOwoKLy8gVG9rZW4gYXZhaWxhYmxlIGluIHR1bm5lbC50b2tlbiAob25seSBmb3IgY29uZmlnIHNvdXJjZTogY2xvdWRmbGFyZSkKY29uc3QgdG9rZW4gPSB0dW5uZWwudG9rZW47CmBgYAoKIyMgRE5TIFJvdXRlcyBBUEkKCmBgYGJhc2gKIyBDcmVhdGUgRE5TIHJvdXRlCmN1cmwgLVggUE9TVCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS90dW5uZWxzL3t0dW5uZWxfaWR9L2Nvbm5lY3Rpb25zIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAke0NGX0FQSV9UT0tFTn0iIFwKICAtLWRhdGEgJ3siaG9zdG5hbWUiOiAiYXBwLmV4YW1wbGUuY29tIn0nCgojIERlbGV0ZSByb3V0ZQpjdXJsIC1YIERFTEVURSAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS90dW5uZWxzL3t0dW5uZWxfaWR9L2Nvbm5lY3Rpb25zL3tyb3V0ZV9pZH0iIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfQVBJX1RPS0VOfSIKYGBgCgojIyBQcml2YXRlIE5ldHdvcmsgUm91dGVzIEFQSQoKYGBgYmFzaAojIEFkZCBJUCByb3V0ZQpjdXJsIC1YIFBPU1QgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vdHVubmVscy97dHVubmVsX2lkfS9yb3V0ZXMiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfQVBJX1RPS0VOfSIgXAogIC0tZGF0YSAneyJpcF9uZXR3b3JrIjogIjEwLjAuMC4wLzgifScKCiMgTGlzdCBJUCByb3V0ZXMKY3VybCAtWCBHRVQgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vdHVubmVscy97dHVubmVsX2lkfS9yb3V0ZXMiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfQVBJX1RPS0VOfSIKYGBgCg==
+# Tunnel API
+
+## Cloudflare API Access
+
+**Base URL**: `https://api.cloudflare.com/client/v4`
+
+**Authentication**:
+```bash
+Authorization: Bearer ${CF_API_TOKEN}
+```
+
+## TypeScript SDK
+
+Install: `npm install cloudflare`
+
+```typescript
+import Cloudflare from 'cloudflare';
+
+const cf = new Cloudflare({
+  apiToken: process.env.CF_API_TOKEN,
+});
+
+const accountId = process.env.CF_ACCOUNT_ID;
+```
+
+## Create Tunnel
+
+### cURL
+```bash
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "name": "my-tunnel",
+    "tunnel_secret": "<base64-secret>"
+  }'
+```
+
+### TypeScript
+```typescript
+const tunnel = await cf.zeroTrust.tunnels.create({
+  account_id: accountId,
+  name: 'my-tunnel',
+  tunnel_secret: Buffer.from(crypto.randomBytes(32)).toString('base64'),
+});
+
+console.log(`Tunnel ID: ${tunnel.id}`);
+```
+
+## List Tunnels
+
+### cURL
+```bash
+curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}"
+```
+
+### TypeScript
+```typescript
+const tunnels = await cf.zeroTrust.tunnels.list({
+  account_id: accountId,
+});
+
+for (const tunnel of tunnels.result) {
+  console.log(`${tunnel.name}: ${tunnel.id}`);
+}
+```
+
+## Get Tunnel Info
+
+### cURL
+```bash
+curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels/{tunnel_id}" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}"
+```
+
+### TypeScript
+```typescript
+const tunnel = await cf.zeroTrust.tunnels.get(tunnelId, {
+  account_id: accountId,
+});
+
+console.log(`Status: ${tunnel.status}`);
+console.log(`Connections: ${tunnel.connections?.length || 0}`);
+```
+
+## Update Tunnel Config
+
+### cURL
+```bash
+curl -X PUT "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels/{tunnel_id}/configurations" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "config": {
+      "ingress": [
+        {"hostname": "app.example.com", "service": "http://localhost:8000"},
+        {"service": "http_status:404"}
+      ]
+    }
+  }'
+```
+
+### TypeScript
+```typescript
+const config = await cf.zeroTrust.tunnels.configurations.update(
+  tunnelId,
+  {
+    account_id: accountId,
+    config: {
+      ingress: [
+        { hostname: 'app.example.com', service: 'http://localhost:8000' },
+        { service: 'http_status:404' },
+      ],
+    },
+  }
+);
+```
+
+## Delete Tunnel
+
+### cURL
+```bash
+curl -X DELETE "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels/{tunnel_id}" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}"
+```
+
+### TypeScript
+```typescript
+await cf.zeroTrust.tunnels.delete(tunnelId, {
+  account_id: accountId,
+});
+```
+
+## Token-Based Tunnels (Config Source: Cloudflare)
+
+Token-based tunnels store config in Cloudflare dashboard instead of local files.
+
+### Via Dashboard
+1. **Zero Trust** > **Networks** > **Tunnels**
+2. **Create a tunnel** > **Cloudflared**
+3. Configure routes in dashboard
+4. Copy token
+5. Run on origin:
+```bash
+cloudflared service install <TOKEN>
+```
+
+### Via Token
+```bash
+# Run with token (no config file needed)
+cloudflared tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+
+# Docker
+docker run cloudflare/cloudflared:latest tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+```
+
+### Get Tunnel Token (TypeScript)
+```typescript
+// Get tunnel to retrieve token
+const tunnel = await cf.zeroTrust.tunnels.get(tunnelId, {
+  account_id: accountId,
+});
+
+// Token available in tunnel.token (only for config source: cloudflare)
+const token = tunnel.token;
+```
+
+## DNS Routes API
+
+```bash
+# Create DNS route
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels/{tunnel_id}/connections" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}" \
+  --data '{"hostname": "app.example.com"}'
+
+# Delete route
+curl -X DELETE "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels/{tunnel_id}/connections/{route_id}" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}"
+```
+
+## Private Network Routes API
+
+```bash
+# Add IP route
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels/{tunnel_id}/routes" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}" \
+  --data '{"ip_network": "10.0.0.0/8"}'
+
+# List IP routes
+curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/tunnels/{tunnel_id}/routes" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}"
+```

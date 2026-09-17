@@ -1,1 +1,155 @@
-IyBQaXBlbGluZXMgQ29uZmlndXJhdGlvbgoKVGVtcGxhdGVzIGZvciBjcmVhdGluZyBzdHJlYW1zLCBzaW5rcywgYW5kIHBpcGVsaW5lcyB2aWEgQ0xJLCBSRVNULCBvciBUZXJyYWZvcm0uIEZvciB0aGUgZnVsbCBmbGFnL2ZpZWxkIGxpc3QgYW5kIGFsbG93ZWQgdmFsdWVzLCBwdWxsIGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGlwZWxpbmVzL3JlZmVyZW5jZS93cmFuZ2xlci1jb21tYW5kcy9gIGFuZCB0aGUgc3RyZWFtcy9zaW5rcy9waXBlbGluZXMgZG9jcy4KCiMjIE5hbWluZyBSdWxlcwoKLSAqKlN0cmVhbXMsIHNpbmtzLCBwaXBlbGluZXMqKiB1c2UgdW5kZXJzY29yZXM6IGBteV9zdHJlYW1gLCBgbXlfc2lua2AsIGBteV9waXBlbGluZWAuCi0gKipCdWNrZXRzKiogdXNlIGh5cGhlbnM6IGBteS1idWNrZXRgLgoKIyMgU2NoZW1hIChTdHJ1Y3R1cmVkIFN0cmVhbXMpCgpTY2hlbWEgaXMgYSBKU09OIG9iamVjdCB3aXRoIGEgYGZpZWxkc2AgYXJyYXk7IGVhY2ggZmllbGQgaGFzIGBuYW1lYCwgYHR5cGVgLCBgcmVxdWlyZWRgLgoKYGBganNvbgp7CiAgImZpZWxkcyI6IFsKICAgIHsgIm5hbWUiOiAiZXZlbnRfaWQiLCAidHlwZSI6ICJzdHJpbmciLCAicmVxdWlyZWQiOiB0cnVlIH0sCiAgICB7ICJuYW1lIjogImFtb3VudCIsICJ0eXBlIjogImZsb2F0NjQiLCAicmVxdWlyZWQiOiBmYWxzZSB9CiAgXQp9CmBgYAoKRmllbGQgdHlwZXMgaW5jbHVkZSBgc3RyaW5nYCwgYGJvb2xgLCBgaW50MzIvNjRgLCBgZmxvYXQzMi82NGAsIGB0aW1lc3RhbXBgLCBganNvbmAsIGBiaW5hcnlgLCBgbGlzdGAsIGBzdHJ1Y3RgICh3aXRoIG5lc3RlZCBgaXRlbXNgL2BmaWVsZHNgKS4gRm9yIHRoZSBhdXRob3JpdGF0aXZlIHR5cGUgbGlzdCwgc2VlIGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGlwZWxpbmVzL3NxbC1yZWZlcmVuY2Uvc3FsLWRhdGEtdHlwZXMvYC4KClVuc3RydWN0dXJlZCBzdHJlYW1zIChubyBzY2hlbWEpIHN0b3JlIGV2ZXJ5dGhpbmcgaW4gYSBzaW5nbGUgYHZhbHVlYCBjb2x1bW4uCgo+IFBpcGVsaW5lcyBhdXRvLWFkZHMgYF9faW5nZXN0X3RzYCAoVElNRVNUQU1QLCBkYXktcGFydGl0aW9uZWQpLiBEbyAqKm5vdCoqIGluY2x1ZGUgaXQgaW4geW91ciBzY2hlbWEuCgojIyBPcHRpb24gQTogSW50ZXJhY3RpdmUgKFNpbXBsZXN0KQoKYGBgYmFzaApucHggd3JhbmdsZXIgcGlwZWxpbmVzIHNldHVwICAgIyBjcmVhdGVzIHN0cmVhbSArIHNpbmsgKyBwaXBlbGluZSwgb3B0aW9uYWxseSBidWNrZXQgKyBjYXRhbG9nCmBgYAoKIyMgT3B0aW9uIEI6IFdyYW5nbGVyIENMSSAoRXhwbGljaXQpCgpgYGBiYXNoCiMgMS4gU3RyZWFtCm5weCB3cmFuZ2xlciBwaXBlbGluZXMgc3RyZWFtcyBjcmVhdGUgbXlfc3RyZWFtIC0tc2NoZW1hLWZpbGUgc2NoZW1hLmpzb24KCiMgMi4gU2luayDigJQgUjIgRGF0YSBDYXRhbG9nIChJY2ViZXJnKS4gQ3JlYXRlcyB0aGUgbmFtZXNwYWNlICsgdGFibGUuCm5weCB3cmFuZ2xlciBwaXBlbGluZXMgc2lua3MgY3JlYXRlIG15X3NpbmsgXAogIC0tdHlwZSByMi1kYXRhLWNhdGFsb2cgXAogIC0tYnVja2V0IG15LWJ1Y2tldCAtLW5hbWVzcGFjZSBteV9uYW1lc3BhY2UgLS10YWJsZSBteV90YWJsZSBcCiAgLS1jYXRhbG9nLXRva2VuICRBUElfVE9LRU4gXAogIC0tY29tcHJlc3Npb24genN0ZCAtLXJvbGwtaW50ZXJ2YWwgMzAwCgojIDJiLiBTaW5rIOKAlCBSMiByYXcgUGFycXVldCAoYWx0ZXJuYXRpdmUpCm5weCB3cmFuZ2xlciBwaXBlbGluZXMgc2lua3MgY3JlYXRlIG15X3NpbmsgXAogIC0tdHlwZSByMiAtLWJ1Y2tldCBteS1idWNrZXQgLS1mb3JtYXQgcGFycXVldCBcCiAgLS1wYXRoIGFuYWx5dGljcy9ldmVudHMgLS1wYXJ0aXRpb25pbmcgInllYXI9JVkvbW9udGg9JW0vZGF5PSVkIiBcCiAgLS1hY2Nlc3Mta2V5LWlkICRLRVkgLS1zZWNyZXQtYWNjZXNzLWtleSAkU0VDUkVUCgojIDMuIFBpcGVsaW5lIChTUUwgY29ubmVjdHMgc3RyZWFtIOKGkiBzaW5rKQpucHggd3JhbmdsZXIgcGlwZWxpbmVzIGNyZWF0ZSBteV9waXBlbGluZSBcCiAgLS1zcWwgIklOU0VSVCBJTlRPIG15X3NpbmsgU0VMRUNUICogRlJPTSBteV9zdHJlYW0iCmBgYAoKVHVuaW5nIGtub2JzIChgLS1jb21wcmVzc2lvbmAsIGAtLXJvbGwtaW50ZXJ2YWxgLCBgLS1yb2xsLXNpemVgLCBldGMuKSBhbmQgdGhlaXIgYWxsb3dlZCB2YWx1ZXMvZGVmYXVsdHMgY2hhbmdlIOKAlCBwdWxsIHRoZSB3cmFuZ2xlci1jb21tYW5kcyBhbmQgc2lua3MgZG9jcyByYXRoZXIgdGhhbiBoYXJkY29kaW5nLiBSdWxlIG9mIHRodW1iOiBwcm9kIGAtLXJvbGwtaW50ZXJ2YWwgMzAwK2AsIGRldiBgMTBgIChjcmVhdGVzIG1hbnkgc21hbGwgZmlsZXMpLgoKPiAqKuKaoO+4jyBQaXBlbGluZXMgYXJlIGltbXV0YWJsZS4qKiBTUUwsIHNjaGVtYSwgYW5kIHNpbmsgY29uZmlnIGNhbid0IGJlIGNoYW5nZWQg4oCUIGRlbGV0ZSBhbmQgcmVjcmVhdGUuCgojIyBPcHRpb24gQzogUkVTVCBBUEkgKFByb2dyYW1tYXRpYykKCkJhc2U6IGBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJEFDQ09VTlRfSUQvcGlwZWxpbmVzL3YxYAoKYGBgYmFzaAojIFN0cmVhbQpjdXJsIC1YIFBPU1QgIiRCQVNFX1VSTC9zdHJlYW1zIiAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiAtZCAnewogICAgIm5hbWUiOiAibXlfc3RyZWFtIiwKICAgICJodHRwIjogeyJlbmFibGVkIjogdHJ1ZSwgImF1dGhlbnRpY2F0aW9uIjogZmFsc2V9LAogICAgInNjaGVtYSI6IHsiZmllbGRzIjogW3sibmFtZSI6ICJldmVudF9pZCIsICJ0eXBlIjogInN0cmluZyIsICJyZXF1aXJlZCI6IHRydWV9XX0KICB9JwoKIyBTaW5rIOKAlCBOT1RFIFJFU1QgZmllbGQgbmFtZXMgZGlmZmVyIGZyb20gQ0xJIGZsYWdzIChzZWUgdGFibGUpCmN1cmwgLVggUE9TVCAiJEJBU0VfVVJML3NpbmtzIiAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiAtZCAnewogICAgIm5hbWUiOiAibXlfc2luayIsICJ0eXBlIjogInIyX2RhdGFfY2F0YWxvZyIsCiAgICAiY29uZmlnIjogeyJidWNrZXQiOiAibXktYnVja2V0IiwgIm5hbWVzcGFjZSI6ICJteV9uYW1lc3BhY2UiLAogICAgICAgICAgICAgICAidGFibGVfbmFtZSI6ICJteV90YWJsZSIsICJ0b2tlbiI6ICInJEFQSV9UT0tFTiciLAogICAgICAgICAgICAgICAicm9sbGluZ19wb2xpY3kiOiB7ImludGVydmFsX3NlY29uZHMiOiAzMDB9fSwKICAgICJmb3JtYXQiOiB7InR5cGUiOiAicGFycXVldCJ9CiAgfScKCiMgUGlwZWxpbmUKY3VybCAtWCBQT1NUICIkQkFTRV9VUkwvcGlwZWxpbmVzIiAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3sibmFtZSI6ICJteV9waXBlbGluZSIsICJzcWwiOiAiSU5TRVJUIElOVE8gbXlfc2luayBTRUxFQ1QgKiBGUk9NIG15X3N0cmVhbTsifScKYGBgCgoqKlJFU1QgZmllbGQgbmFtZXMg4omgIENMSSBmbGFncyoqIChjb21tb24gZmFpbHVyZSDigJQgbm90IG9idmlvdXMgZnJvbSBkb2NzKToKCnwgUkVTVCAoY29uZmlnIGJvZHkpIHwgQ0xJIGZsYWcgfCBHb3RjaGEgfAp8LS0tLS0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLXwKfCBgInR5cGUiOiAicjJfZGF0YV9jYXRhbG9nImAgfCBgLS10eXBlIHIyLWRhdGEtY2F0YWxvZ2AgfCB1bmRlcnNjb3JlcyB2cyBoeXBoZW5zIHwKfCBgInRhYmxlX25hbWUiYCB8IGAtLXRhYmxlYCB8IGRpZmZlcmVudCBrZXkgfAp8IGAidG9rZW4iYCB8IGAtLWNhdGFsb2ctdG9rZW5gIHwgZGlmZmVyZW50IGtleSB8CnwgYCJmb3JtYXQiOiB7InR5cGUiOiAicGFycXVldCJ9YCB8IChpbXBsaWVkKSB8IHJlcXVpcmVkIGluIFJFU1QsIG9taXR0ZWQgaW4gQ0xJIHwKCiMjIFdvcmtlciBCaW5kaW5nCgpgYGBqc29uYwovLyB3cmFuZ2xlci5qc29uYwp7ICJwaXBlbGluZXMiOiBbIHsgInN0cmVhbSI6ICI8U1RSRUFNX0lEPiIsICJiaW5kaW5nIjogIk1ZX1NUUkVBTSIgfSBdIH0KYGBgCgo+IEJpbmRpbmcgZmllbGQgaXMgYCJzdHJlYW0iYCBhcyBvZiBKdW5lIDIwMjYgKHdhcyBgInBpcGVsaW5lImAsIHN0aWxsIGFjY2VwdGVkKS4gVXNlIHRoZSAqKnN0cmVhbSBJRCoqIChgd3JhbmdsZXIgcGlwZWxpbmVzIHN0cmVhbXMgbGlzdGApLCBub3QgdGhlIHBpcGVsaW5lIElELiBSZWRlcGxveSBhZnRlciBhZGRpbmcuIEdlbmVyYXRlIHR5cGVkIGJpbmRpbmdzIHdpdGggYG5weCB3cmFuZ2xlciB0eXBlc2Ag4oaSIGBQaXBlbGluZTxDbG91ZGZsYXJlLk15U3RyZWFtUmVjb3JkPmAgZnJvbSBgY2xvdWRmbGFyZTpwaXBlbGluZXNgLgoKIyMgVGVycmFmb3JtCgpSZXNvdXJjZXM6IGBjbG91ZGZsYXJlX3BpcGVsaW5lX3N0cmVhbWAsIGBjbG91ZGZsYXJlX3BpcGVsaW5lX3NpbmtgLCBgY2xvdWRmbGFyZV9waXBlbGluZWAuIEZvciBjdXJyZW50IGF0dHJpYnV0ZSBzY2hlbWFzIHB1bGwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9waXBlbGluZXMvcmVmZXJlbmNlL3RlcnJhZm9ybS9gLgoKYGBgaGNsCnJlc291cmNlICJjbG91ZGZsYXJlX3BpcGVsaW5lX3N0cmVhbSIgIm15X3N0cmVhbSIgewogIGFjY291bnRfaWQgICAgID0gdmFyLmNsb3VkZmxhcmVfYWNjb3VudF9pZAogIG5hbWUgICAgICAgICAgID0gIm15X3N0cmVhbSIKICBmb3JtYXQgICAgICAgICA9IHsgdHlwZSA9ICJqc29uIiB9CiAgc2NoZW1hICAgICAgICAgPSB7IGZpZWxkcyA9IFt7IG5hbWUgPSAidmFsdWUiLCB0eXBlID0gImpzb24iLCByZXF1aXJlZCA9IHRydWUgfV0gfQogIGh0dHAgICAgICAgICAgID0geyBlbmFibGVkID0gdHJ1ZSwgYXV0aGVudGljYXRpb24gPSBmYWxzZSwgY29ycyA9IHt9IH0KICB3b3JrZXJfYmluZGluZyA9IHsgZW5hYmxlZCA9IGZhbHNlIH0KfQoKcmVzb3VyY2UgImNsb3VkZmxhcmVfcGlwZWxpbmVfc2luayIgIm15X3NpbmsiIHsKICBhY2NvdW50X2lkID0gdmFyLmNsb3VkZmxhcmVfYWNjb3VudF9pZAogIG5hbWUgICAgICAgPSAibXlfc2luayIKICB0eXBlICAgICAgID0gInIyX2RhdGFfY2F0YWxvZyIKICBmb3JtYXQgICAgID0geyB0eXBlID0gInBhcnF1ZXQiIH0KICBzY2hlbWEgICAgID0geyBmaWVsZHMgPSBbXSB9CiAgY29uZmlnICAgICA9IHsKICAgIGFjY291bnRfaWQgPSB2YXIuY2xvdWRmbGFyZV9hY2NvdW50X2lkCiAgICBidWNrZXQgICAgID0gY2xvdWRmbGFyZV9yMl9idWNrZXQucGlwZWxpbmVfYnVja2V0Lm5hbWUKICAgIHRhYmxlX25hbWUgPSAibXlfdGFibGUiCiAgICB0b2tlbiAgICAgID0gdmFyLmNhdGFsb2dfdG9rZW4KICB9Cn0KCnJlc291cmNlICJjbG91ZGZsYXJlX3BpcGVsaW5lIiAibXlfcGlwZWxpbmUiIHsKICBhY2NvdW50X2lkID0gdmFyLmNsb3VkZmxhcmVfYWNjb3VudF9pZAogIG5hbWUgICAgICAgPSAibXlfcGlwZWxpbmUiCiAgc3FsICAgICAgICA9ICJJTlNFUlQgSU5UTyAke2Nsb3VkZmxhcmVfcGlwZWxpbmVfc2luay5teV9zaW5rLm5hbWV9IFNFTEVDVCAqIEZST00gJHtjbG91ZGZsYXJlX3BpcGVsaW5lX3N0cmVhbS5teV9zdHJlYW0ubmFtZX0iCn0KYGBgCgojIyBDcmVkZW50aWFscwoKfCBUeXBlIHwgUGVybWlzc2lvbiB8CnwtLS0tLS18LS0tLS0tLS0tLS0tfAp8IENhdGFsb2cgdG9rZW4gKEljZWJlcmcgc2luaykgfCBSMiBTdG9yYWdlIEFkbWluIFImVyArIFIyIERhdGEgQ2F0YWxvZyBSJlcgfAp8IFIyIGNyZWRlbnRpYWxzIChyYXcgc2luaykgfCBPYmplY3QgUmVhZCAmIFdyaXRlIHwKfCBIVFRQIGluZ2VzdCB0b2tlbiB8IFdvcmtlcnMgUGlwZWxpbmVzIFNlbmQgKG9ubHkgaWYgc3RyZWFtIGF1dGggZW5hYmxlZCkgfAoKIyMgU2VlIEFsc28KCi0gW2FwaS5tZF0oYXBpLm1kKSDigJQgc2VuZGluZyBldmVudHMsIFJFU1QgQVBJLCBsaWZlY3ljbGUgwrcgW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpIOKAlCBpbW11dGFiaWxpdHksIFJFU1TiiaBDTEkK
+# Pipelines Configuration
+
+Templates for creating streams, sinks, and pipelines via CLI, REST, or Terraform. For the full flag/field list and allowed values, pull `https://developers.cloudflare.com/pipelines/reference/wrangler-commands/` and the streams/sinks/pipelines docs.
+
+## Naming Rules
+
+- **Streams, sinks, pipelines** use underscores: `my_stream`, `my_sink`, `my_pipeline`.
+- **Buckets** use hyphens: `my-bucket`.
+
+## Schema (Structured Streams)
+
+Schema is a JSON object with a `fields` array; each field has `name`, `type`, `required`.
+
+```json
+{
+  "fields": [
+    { "name": "event_id", "type": "string", "required": true },
+    { "name": "amount", "type": "float64", "required": false }
+  ]
+}
+```
+
+Field types include `string`, `bool`, `int32/64`, `float32/64`, `timestamp`, `json`, `binary`, `list`, `struct` (with nested `items`/`fields`). For the authoritative type list, see `https://developers.cloudflare.com/pipelines/sql-reference/sql-data-types/`.
+
+Unstructured streams (no schema) store everything in a single `value` column.
+
+> Pipelines auto-adds `__ingest_ts` (TIMESTAMP, day-partitioned). Do **not** include it in your schema.
+
+## Option A: Interactive (Simplest)
+
+```bash
+npx wrangler pipelines setup   # creates stream + sink + pipeline, optionally bucket + catalog
+```
+
+## Option B: Wrangler CLI (Explicit)
+
+```bash
+# 1. Stream
+npx wrangler pipelines streams create my_stream --schema-file schema.json
+
+# 2. Sink — R2 Data Catalog (Iceberg). Creates the namespace + table.
+npx wrangler pipelines sinks create my_sink \
+  --type r2-data-catalog \
+  --bucket my-bucket --namespace my_namespace --table my_table \
+  --catalog-token $API_TOKEN \
+  --compression zstd --roll-interval 300
+
+# 2b. Sink — R2 raw Parquet (alternative)
+npx wrangler pipelines sinks create my_sink \
+  --type r2 --bucket my-bucket --format parquet \
+  --path analytics/events --partitioning "year=%Y/month=%m/day=%d" \
+  --access-key-id $KEY --secret-access-key $SECRET
+
+# 3. Pipeline (SQL connects stream → sink)
+npx wrangler pipelines create my_pipeline \
+  --sql "INSERT INTO my_sink SELECT * FROM my_stream"
+```
+
+Tuning knobs (`--compression`, `--roll-interval`, `--roll-size`, etc.) and their allowed values/defaults change — pull the wrangler-commands and sinks docs rather than hardcoding. Rule of thumb: prod `--roll-interval 300+`, dev `10` (creates many small files).
+
+> **⚠️ Pipelines are immutable.** SQL, schema, and sink config can't be changed — delete and recreate.
+
+## Option C: REST API (Programmatic)
+
+Base: `https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/pipelines/v1`
+
+```bash
+# Stream
+curl -X POST "$BASE_URL/streams" -H "Authorization: Bearer $API_TOKEN" \
+  -H "Content-Type: application/json" -d '{
+    "name": "my_stream",
+    "http": {"enabled": true, "authentication": false},
+    "schema": {"fields": [{"name": "event_id", "type": "string", "required": true}]}
+  }'
+
+# Sink — NOTE REST field names differ from CLI flags (see table)
+curl -X POST "$BASE_URL/sinks" -H "Authorization: Bearer $API_TOKEN" \
+  -H "Content-Type: application/json" -d '{
+    "name": "my_sink", "type": "r2_data_catalog",
+    "config": {"bucket": "my-bucket", "namespace": "my_namespace",
+               "table_name": "my_table", "token": "'$API_TOKEN'",
+               "rolling_policy": {"interval_seconds": 300}},
+    "format": {"type": "parquet"}
+  }'
+
+# Pipeline
+curl -X POST "$BASE_URL/pipelines" -H "Authorization: Bearer $API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "my_pipeline", "sql": "INSERT INTO my_sink SELECT * FROM my_stream;"}'
+```
+
+**REST field names ≠ CLI flags** (common failure — not obvious from docs):
+
+| REST (config body) | CLI flag | Gotcha |
+|--------------------|----------|--------|
+| `"type": "r2_data_catalog"` | `--type r2-data-catalog` | underscores vs hyphens |
+| `"table_name"` | `--table` | different key |
+| `"token"` | `--catalog-token` | different key |
+| `"format": {"type": "parquet"}` | (implied) | required in REST, omitted in CLI |
+
+## Worker Binding
+
+```jsonc
+// wrangler.jsonc
+{ "pipelines": [ { "stream": "<STREAM_ID>", "binding": "MY_STREAM" } ] }
+```
+
+> Binding field is `"stream"` as of June 2026 (was `"pipeline"`, still accepted). Use the **stream ID** (`wrangler pipelines streams list`), not the pipeline ID. Redeploy after adding. Generate typed bindings with `npx wrangler types` → `Pipeline<Cloudflare.MyStreamRecord>` from `cloudflare:pipelines`.
+
+## Terraform
+
+Resources: `cloudflare_pipeline_stream`, `cloudflare_pipeline_sink`, `cloudflare_pipeline`. For current attribute schemas pull `https://developers.cloudflare.com/pipelines/reference/terraform/`.
+
+```hcl
+resource "cloudflare_pipeline_stream" "my_stream" {
+  account_id     = var.cloudflare_account_id
+  name           = "my_stream"
+  format         = { type = "json" }
+  schema         = { fields = [{ name = "value", type = "json", required = true }] }
+  http           = { enabled = true, authentication = false, cors = {} }
+  worker_binding = { enabled = false }
+}
+
+resource "cloudflare_pipeline_sink" "my_sink" {
+  account_id = var.cloudflare_account_id
+  name       = "my_sink"
+  type       = "r2_data_catalog"
+  format     = { type = "parquet" }
+  schema     = { fields = [] }
+  config     = {
+    account_id = var.cloudflare_account_id
+    bucket     = cloudflare_r2_bucket.pipeline_bucket.name
+    table_name = "my_table"
+    token      = var.catalog_token
+  }
+}
+
+resource "cloudflare_pipeline" "my_pipeline" {
+  account_id = var.cloudflare_account_id
+  name       = "my_pipeline"
+  sql        = "INSERT INTO ${cloudflare_pipeline_sink.my_sink.name} SELECT * FROM ${cloudflare_pipeline_stream.my_stream.name}"
+}
+```
+
+## Credentials
+
+| Type | Permission |
+|------|------------|
+| Catalog token (Iceberg sink) | R2 Storage Admin R&W + R2 Data Catalog R&W |
+| R2 credentials (raw sink) | Object Read & Write |
+| HTTP ingest token | Workers Pipelines Send (only if stream auth enabled) |
+
+## See Also
+
+- [api.md](api.md) — sending events, REST API, lifecycle · [gotchas.md](gotchas.md) — immutability, REST≠CLI

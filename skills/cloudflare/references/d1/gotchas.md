@@ -1,1 +1,98 @@
-IyBEMSBHb3RjaGFzICYgVHJvdWJsZXNob290aW5nCgojIyBDb21tb24gRXJyb3JzCgojIyMgIlNRTCBJbmplY3Rpb24gVnVsbmVyYWJpbGl0eSIKCioqQ2F1c2U6KiogVXNpbmcgc3RyaW5nIGludGVycG9sYXRpb24gaW5zdGVhZCBvZiBwcmVwYXJlZCBzdGF0ZW1lbnRzIHdpdGggYmluZCgpICAKKipTb2x1dGlvbjoqKiBBTFdBWVMgdXNlIHByZXBhcmVkIHN0YXRlbWVudHM6IGBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuYWxsKClgIGluc3RlYWQgb2Ygc3RyaW5nIGludGVycG9sYXRpb24gd2hpY2ggYWxsb3dzIGF0dGFja2VycyB0byBpbmplY3QgbWFsaWNpb3VzIFNRTAoKIyMjICJubyBzdWNoIHRhYmxlIgoKKipDYXVzZToqKiBUYWJsZSBkb2Vzbid0IGV4aXN0IGJlY2F1c2UgbWlncmF0aW9ucyBoYXZlbid0IGJlZW4gcnVuLCBvciB1c2luZyB3cm9uZyBkYXRhYmFzZSBiaW5kaW5nICAKKipTb2x1dGlvbjoqKiBSdW4gbWlncmF0aW9ucyB1c2luZyBgd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBhcHBseSA8ZGItbmFtZT4gLS1yZW1vdGVgIGFuZCB2ZXJpZnkgYmluZGluZyBuYW1lIGluIHdyYW5nbGVyLmpzb25jIG1hdGNoZXMgY29kZQoKIyMjICJVTklRVUUgY29uc3RyYWludCBmYWlsZWQiCgoqKkNhdXNlOioqIEF0dGVtcHRpbmcgdG8gaW5zZXJ0IGR1cGxpY2F0ZSB2YWx1ZSBpbiBjb2x1bW4gd2l0aCBVTklRVUUgY29uc3RyYWludCAgCioqU29sdXRpb246KiogQ2F0Y2ggZXJyb3IgYW5kIHJldHVybiA0MDkgQ29uZmxpY3Qgc3RhdHVzIGNvZGUKCiMjIyAiUXVlcnkgVGltZW91dCAoMzBzIGV4Y2VlZGVkKSIKCioqQ2F1c2U6KiogUXVlcnkgZXhlY3V0aW9uIGV4Y2VlZHMgMzAgc2Vjb25kIHRpbWVvdXQgbGltaXQgIAoqKlNvbHV0aW9uOioqIEJyZWFrIGludG8gc21hbGxlciBxdWVyaWVzLCBhZGQgaW5kZXhlcyB0byBzcGVlZCB1cCBxdWVyaWVzLCBvciByZWR1Y2UgZGF0YXNldCBzaXplCgojIyMgIk4rMSBRdWVyeSBQcm9ibGVtIgoKKipDYXVzZToqKiBNYWtpbmcgbXVsdGlwbGUgaW5kaXZpZHVhbCBxdWVyaWVzIGluIGEgbG9vcCBpbnN0ZWFkIG9mIHNpbmdsZSBvcHRpbWl6ZWQgcXVlcnkgIAoqKlNvbHV0aW9uOioqIFVzZSBKT0lOIHRvIGZldGNoIHJlbGF0ZWQgZGF0YSBpbiBzaW5nbGUgcXVlcnkgb3IgdXNlIGBiYXRjaCgpYCBtZXRob2QgZm9yIG11bHRpcGxlIHF1ZXJpZXMKCiMjIyAiTWlzc2luZyBJbmRleGVzIgoKKipDYXVzZToqKiBRdWVyaWVzIHBlcmZvcm1pbmcgZnVsbCB0YWJsZSBzY2FucyB3aXRob3V0IGluZGV4ZXMgIAoqKlNvbHV0aW9uOioqIFVzZSBgRVhQTEFJTiBRVUVSWSBQTEFOYCB0byBjaGVjayBpZiBpbmRleCBpcyB1c2VkLCB0aGVuIGNyZWF0ZSBpbmRleCB3aXRoIGBDUkVBVEUgSU5ERVggaWR4X3VzZXJzX2VtYWlsIE9OIHVzZXJzKGVtYWlsKWAKCiMjIyAiQm9vbGVhbiBUeXBlIElzc3VlcyIKCioqQ2F1c2U6KiogU1FMaXRlIHVzZXMgSU5URUdFUiAoMC8xKSBub3QgbmF0aXZlIGJvb2xlYW4gdHlwZSAgCioqU29sdXRpb246KiogQmluZCAxIG9yIDAgaW5zdGVhZCBvZiB0cnVlL2ZhbHNlIHdoZW4gd29ya2luZyB3aXRoIGJvb2xlYW4gdmFsdWVzCgojIyMgIkRhdGUvVGltZSBUeXBlIElzc3VlcyIKCioqQ2F1c2U6KiogU1FMaXRlIGRvZXNuJ3QgaGF2ZSBuYXRpdmUgREFURS9USU1FIHR5cGVzICAKKipTb2x1dGlvbjoqKiBVc2UgVEVYVCAoSVNPIDg2MDEgZm9ybWF0KSBvciBJTlRFR0VSICh1bml4IHRpbWVzdGFtcCkgZm9yIGRhdGUvdGltZSB2YWx1ZXMKCiMjIFBsYW4gVGllciBMaW1pdHMKCnwgTGltaXQgfCBGcmVlIFRpZXIgfCBQYWlkIFBsYW5zIHwgTm90ZXMgfAp8LS0tLS0tLXwtLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18LS0tLS0tLXwKfCBEYXRhYmFzZSBzaXplIHwgNTAwIE1CIHwgMTAgR0IgfCBEZXNpZ24gZm9yIG11bHRpcGxlIERCcyBwZXIgdGVuYW50IG9uIHBhaWQgfAp8IFJvdyBzaXplIHwgMSBNQiB8IDEgTUIgfCBTdG9yZSBsYXJnZSBmaWxlcyBpbiBSMiwgbm90IEQxIHwKfCBRdWVyeSB0aW1lb3V0IHwgMzBzIHwgMzBzICg5MDBzIHdpdGggc2Vzc2lvbnMpIHwgVXNlIHNlc3Npb25zIEFQSSBmb3IgbWlncmF0aW9ucyB8CnwgQmF0Y2ggc2l6ZSB8IDEsMDAwIHN0YXRlbWVudHMgfCAxMCwwMDAgc3RhdGVtZW50cyB8IFNwbGl0IGxhcmdlIGJhdGNoZXMgYWNjb3JkaW5nbHkgfAp8IFRpbWUgVHJhdmVsIHwgNyBkYXlzIHwgMzAgZGF5cyB8IFBvaW50LWluLXRpbWUgcmVjb3Zlcnkgd2luZG93IHwKfCBSZWFkIHJlcGxpY2FzIHwg4p2MIE5vdCBhdmFpbGFibGUgfCDinIUgQXZhaWxhYmxlIHwgUGFpZCBhZGQtb24gZm9yIGxvd2VyIGxhdGVuY3kgfAp8IFNlc3Npb25zIEFQSSB8IOKdjCBOb3QgYXZhaWxhYmxlIHwg4pyFIFVwIHRvIDE1IG1pbiB8IEZvciBtaWdyYXRpb25zIGFuZCBoZWF2eSBvcGVyYXRpb25zIHwKfCBDb25jdXJyZW50IHJlcXVlc3RzIHwgMTAsMDAwL21pbiB8IEhpZ2hlciB8IENvbnRhY3Qgc3VwcG9ydCBmb3IgY3VzdG9tIGxpbWl0cyB8CgojIyBQcm9kdWN0aW9uIEdvdGNoYXMKCiMjIyAiQmF0Y2ggc2l6ZSBleGNlZWRlZCIKCioqQ2F1c2U6KiogQXR0ZW1wdGluZyB0byBzZW5kID4xLDAwMCBzdGF0ZW1lbnRzIG9uIGZyZWUgdGllciBvciA+MTAsMDAwIG9uIHBhaWQgIAoqKlNvbHV0aW9uOioqIENodW5rIGJhdGNoZXM6IGBmb3IgKGxldCBpID0gMDsgaSA8IHN0bXRzLmxlbmd0aDsgaSArPSBNQVhfQkFUQ0gpIGF3YWl0IGVudi5EQi5iYXRjaChzdG10cy5zbGljZShpLCBpICsgTUFYX0JBVENIKSlgCgojIyMgIlNlc3Npb24gbm90IGNsb3NlZCAvIHJlc291cmNlIGxlYWsiCgoqKkNhdXNlOioqIEZvcmdvdCB0byBjYWxsIGBzZXNzaW9uLmNsb3NlKClgIGFmdGVyIHVzaW5nIHNlc3Npb25zIEFQSSAgCioqU29sdXRpb246KiogQWx3YXlzIHVzZSB0cnkvZmluYWxseSBibG9jazogYHRyeSB7IGF3YWl0IHNlc3Npb24ucHJlcGFyZSguLi4pIH0gZmluYWxseSB7IHNlc3Npb24uY2xvc2UoKSB9YAoKIyMjICJSZXBsaWNhdGlvbiBsYWcgY2F1c2luZyBzdGFsZSByZWFkcyIKCioqQ2F1c2U6KiogUmVhZGluZyBmcm9tIHJlcGxpY2EgaW1tZWRpYXRlbHkgYWZ0ZXIgd3JpdGUgLSByZXBsaWNhdGlvbiBsYWcgY2FuIGJlIDEwMG1zLTJzICAKKipTb2x1dGlvbjoqKiBVc2UgcHJpbWFyeSBmb3IgcmVhZC1hZnRlci13cml0ZTogYGF3YWl0IGVudi5EQi5wcmVwYXJlKC4uLilgIG5vdCBgZW52LkRCX1JFUExJQ0FgCgojIyMgIk1pZ3JhdGlvbiBhcHBsaWVkIHRvIGxvY2FsIGJ1dCBub3QgcmVtb3RlIgoKKipDYXVzZToqKiBGb3Jnb3QgYC0tcmVtb3RlYCBmbGFnIHdoZW4gYXBwbHlpbmcgbWlncmF0aW9ucyAgCioqU29sdXRpb246KiogQWx3YXlzIHJ1biBgd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBhcHBseSA8ZGItbmFtZT4gLS1yZW1vdGVgIGZvciBwcm9kdWN0aW9uCgojIyMgIkZvcmVpZ24ga2V5IGNvbnN0cmFpbnQgZmFpbGVkIgoKKipDYXVzZToqKiBJbnNlcnRpbmcgcm93IHdpdGggRksgdG8gbm9uLWV4aXN0ZW50IHBhcmVudCwgb3IgZGVsZXRpbmcgcGFyZW50IGJlZm9yZSBjaGlsZHJlbiAgCioqU29sdXRpb246KiogRW5hYmxlIEZLIGVuZm9yY2VtZW50OiBgUFJBR01BIGZvcmVpZ25fa2V5cyA9IE9OO2AgYW5kIHVzZSBPTiBERUxFVEUgQ0FTQ0FERSBpbiBzY2hlbWEKCiMjIyAiQkxPQiBkYXRhIGNvcnJ1cHRlZCBvbiBleHBvcnQiCgoqKkNhdXNlOioqIEQxIGV4cG9ydCBtYXkgbm90IGhhbmRsZSBCTE9CIGNvcnJlY3RseSAgCioqU29sdXRpb246KiogU3RvcmUgYmluYXJ5IGZpbGVzIGluIFIyLCBvbmx5IHN0b3JlIFIyIFVSTHMva2V5cyBpbiBEMQoKIyMjICJEYXRhYmFzZSBzaXplIGFwcHJvYWNoaW5nIGxpbWl0IgoKKipDYXVzZToqKiBTdG9yaW5nIHRvbyBtdWNoIGRhdGEgaW4gc2luZ2xlIGRhdGFiYXNlICAKKipTb2x1dGlvbjoqKiBIb3Jpem9udGFsIHNjYWxlLW91dDogY3JlYXRlIHBlci10ZW5hbnQvcGVyLXVzZXIgZGF0YWJhc2VzLCBhcmNoaXZlIG9sZCBkYXRhLCBvciB1cGdyYWRlIHRvIHBhaWQgcGxhbgoKIyMjICJMb2NhbCBkZXYgdnMgcHJvZHVjdGlvbiBiZWhhdmlvciBkaWZmZXJzIgoKKipDYXVzZToqKiBMb2NhbCB1c2VzIFNRTGl0ZSBmaWxlLCBwcm9kdWN0aW9uIHVzZXMgZGlzdHJpYnV0ZWQgRDEgLSBkaWZmZXJlbnQgcGVyZm9ybWFuY2UvbGltaXRzICAKKipTb2x1dGlvbjoqKiBBbHdheXMgdGVzdCBtaWdyYXRpb25zIG9uIHJlbW90ZSB3aXRoIGAtLXJlbW90ZWAgZmxhZyBiZWZvcmUgcHJvZHVjdGlvbiByb2xsb3V0Cg==
+# D1 Gotchas & Troubleshooting
+
+## Common Errors
+
+### "SQL Injection Vulnerability"
+
+**Cause:** Using string interpolation instead of prepared statements with bind()  
+**Solution:** ALWAYS use prepared statements: `env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).all()` instead of string interpolation which allows attackers to inject malicious SQL
+
+### "no such table"
+
+**Cause:** Table doesn't exist because migrations haven't been run, or using wrong database binding  
+**Solution:** Run migrations using `wrangler d1 migrations apply <db-name> --remote` and verify binding name in wrangler.jsonc matches code
+
+### "UNIQUE constraint failed"
+
+**Cause:** Attempting to insert duplicate value in column with UNIQUE constraint  
+**Solution:** Catch error and return 409 Conflict status code
+
+### "Query Timeout (30s exceeded)"
+
+**Cause:** Query execution exceeds 30 second timeout limit  
+**Solution:** Break into smaller queries, add indexes to speed up queries, or reduce dataset size
+
+### "N+1 Query Problem"
+
+**Cause:** Making multiple individual queries in a loop instead of single optimized query  
+**Solution:** Use JOIN to fetch related data in single query or use `batch()` method for multiple queries
+
+### "Missing Indexes"
+
+**Cause:** Queries performing full table scans without indexes  
+**Solution:** Use `EXPLAIN QUERY PLAN` to check if index is used, then create index with `CREATE INDEX idx_users_email ON users(email)`
+
+### "Boolean Type Issues"
+
+**Cause:** SQLite uses INTEGER (0/1) not native boolean type  
+**Solution:** Bind 1 or 0 instead of true/false when working with boolean values
+
+### "Date/Time Type Issues"
+
+**Cause:** SQLite doesn't have native DATE/TIME types  
+**Solution:** Use TEXT (ISO 8601 format) or INTEGER (unix timestamp) for date/time values
+
+## Plan Tier Limits
+
+| Limit | Free Tier | Paid Plans | Notes |
+|-------|-----------|------------|-------|
+| Database size | 500 MB | 10 GB | Design for multiple DBs per tenant on paid |
+| Row size | 1 MB | 1 MB | Store large files in R2, not D1 |
+| Query timeout | 30s | 30s (900s with sessions) | Use sessions API for migrations |
+| Batch size | 1,000 statements | 10,000 statements | Split large batches accordingly |
+| Time Travel | 7 days | 30 days | Point-in-time recovery window |
+| Read replicas | ❌ Not available | ✅ Available | Paid add-on for lower latency |
+| Sessions API | ❌ Not available | ✅ Up to 15 min | For migrations and heavy operations |
+| Concurrent requests | 10,000/min | Higher | Contact support for custom limits |
+
+## Production Gotchas
+
+### "Batch size exceeded"
+
+**Cause:** Attempting to send >1,000 statements on free tier or >10,000 on paid  
+**Solution:** Chunk batches: `for (let i = 0; i < stmts.length; i += MAX_BATCH) await env.DB.batch(stmts.slice(i, i + MAX_BATCH))`
+
+### "Session not closed / resource leak"
+
+**Cause:** Forgot to call `session.close()` after using sessions API  
+**Solution:** Always use try/finally block: `try { await session.prepare(...) } finally { session.close() }`
+
+### "Replication lag causing stale reads"
+
+**Cause:** Reading from replica immediately after write - replication lag can be 100ms-2s  
+**Solution:** Use primary for read-after-write: `await env.DB.prepare(...)` not `env.DB_REPLICA`
+
+### "Migration applied to local but not remote"
+
+**Cause:** Forgot `--remote` flag when applying migrations  
+**Solution:** Always run `wrangler d1 migrations apply <db-name> --remote` for production
+
+### "Foreign key constraint failed"
+
+**Cause:** Inserting row with FK to non-existent parent, or deleting parent before children  
+**Solution:** Enable FK enforcement: `PRAGMA foreign_keys = ON;` and use ON DELETE CASCADE in schema
+
+### "BLOB data corrupted on export"
+
+**Cause:** D1 export may not handle BLOB correctly  
+**Solution:** Store binary files in R2, only store R2 URLs/keys in D1
+
+### "Database size approaching limit"
+
+**Cause:** Storing too much data in single database  
+**Solution:** Horizontal scale-out: create per-tenant/per-user databases, archive old data, or upgrade to paid plan
+
+### "Local dev vs production behavior differs"
+
+**Cause:** Local uses SQLite file, production uses distributed D1 - different performance/limits  
+**Solution:** Always test migrations on remote with `--remote` flag before production rollout

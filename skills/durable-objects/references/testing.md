@@ -1,1 +1,264 @@
-IyBUZXN0aW5nIER1cmFibGUgT2JqZWN0cwoKVXNlIGBAY2xvdWRmbGFyZS92aXRlc3QtcG9vbC13b3JrZXJzYCB0byB0ZXN0IERPcyBpbnNpZGUgdGhlIFdvcmtlcnMgcnVudGltZS4KCiMjIFNldHVwCgojIyMgSW5zdGFsbCBEZXBlbmRlbmNpZXMKCmBgYGJhc2gKbnBtIGkgLUQgdml0ZXN0QH4zLjIuMCBAY2xvdWRmbGFyZS92aXRlc3QtcG9vbC13b3JrZXJzCmBgYAoKIyMjIHZpdGVzdC5jb25maWcudHMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgZGVmaW5lV29ya2Vyc0NvbmZpZyB9IGZyb20gIkBjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnMvY29uZmlnIjsKCmV4cG9ydCBkZWZhdWx0IGRlZmluZVdvcmtlcnNDb25maWcoewogIHRlc3Q6IHsKICAgIHBvb2xPcHRpb25zOiB7CiAgICAgIHdvcmtlcnM6IHsKICAgICAgICB3cmFuZ2xlcjogeyBjb25maWdQYXRoOiAiLi93cmFuZ2xlci50b21sIiB9LAogICAgICB9LAogICAgfSwKICB9LAp9KTsKYGBgCgojIyMgVHlwZVNjcmlwdCBDb25maWcgKHRlc3QvdHNjb25maWcuanNvbikKCmBgYGpzb25jCnsKICAiZXh0ZW5kcyI6ICIuLi90c2NvbmZpZy5qc29uIiwKICAiY29tcGlsZXJPcHRpb25zIjogewogICAgIm1vZHVsZVJlc29sdXRpb24iOiAiYnVuZGxlciIsCiAgICAidHlwZXMiOiBbIkBjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnMiXQogIH0sCiAgImluY2x1ZGUiOiBbIi4vKiovKi50cyIsICIuLi9zcmMvd29ya2VyLWNvbmZpZ3VyYXRpb24uZC50cyJdCn0KYGBgCgojIyMgRW52aXJvbm1lbnQgVHlwZXMgKGVudi5kLnRzKQoKYGBgdHlwZXNjcmlwdApkZWNsYXJlIG1vZHVsZSAiY2xvdWRmbGFyZTp0ZXN0IiB7CiAgaW50ZXJmYWNlIFByb3ZpZGVkRW52IGV4dGVuZHMgRW52IHt9Cn0KYGBgCgojIyBVbml0IFRlc3RzIChEaXJlY3QgRE8gQWNjZXNzKQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBlbnYgfSBmcm9tICJjbG91ZGZsYXJlOnRlc3QiOwppbXBvcnQgeyBkZXNjcmliZSwgaXQsIGV4cGVjdCB9IGZyb20gInZpdGVzdCI7CgpkZXNjcmliZSgiQ291bnRlciBETyIsICgpID0+IHsKICBpdCgic2hvdWxkIGluY3JlbWVudCIsIGFzeW5jICgpID0+IHsKICAgIGNvbnN0IHN0dWIgPSBlbnYuQ09VTlRFUi5nZXRCeU5hbWUoInRlc3QtY291bnRlciIpOwogICAgCiAgICBleHBlY3QoYXdhaXQgc3R1Yi5pbmNyZW1lbnQoKSkudG9CZSgxKTsKICAgIGV4cGVjdChhd2FpdCBzdHViLmluY3JlbWVudCgpKS50b0JlKDIpOwogICAgZXhwZWN0KGF3YWl0IHN0dWIuZ2V0Q291bnQoKSkudG9CZSgyKTsKICB9KTsKCiAgaXQoImlzb2xhdGVzIGRpZmZlcmVudCBpbnN0YW5jZXMiLCBhc3luYyAoKSA9PiB7CiAgICBjb25zdCBzdHViMSA9IGVudi5DT1VOVEVSLmdldEJ5TmFtZSgiY291bnRlci0xIik7CiAgICBjb25zdCBzdHViMiA9IGVudi5DT1VOVEVSLmdldEJ5TmFtZSgiY291bnRlci0yIik7CiAgICAKICAgIGF3YWl0IHN0dWIxLmluY3JlbWVudCgpOwogICAgYXdhaXQgc3R1YjEuaW5jcmVtZW50KCk7CiAgICBhd2FpdCBzdHViMi5pbmNyZW1lbnQoKTsKICAgIAogICAgZXhwZWN0KGF3YWl0IHN0dWIxLmdldENvdW50KCkpLnRvQmUoMik7CiAgICBleHBlY3QoYXdhaXQgc3R1YjIuZ2V0Q291bnQoKSkudG9CZSgxKTsKICB9KTsKfSk7CmBgYAoKIyMgSW50ZWdyYXRpb24gVGVzdHMgKEhUVFAgdmlhIFNFTEYpCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IFNFTEYgfSBmcm9tICJjbG91ZGZsYXJlOnRlc3QiOwppbXBvcnQgeyBkZXNjcmliZSwgaXQsIGV4cGVjdCB9IGZyb20gInZpdGVzdCI7CgpkZXNjcmliZSgiV29ya2VyIEhUVFAiLCAoKSA9PiB7CiAgaXQoInNob3VsZCBpbmNyZW1lbnQgdmlhIFBPU1QiLCBhc3luYyAoKSA9PiB7CiAgICBjb25zdCByZXMgPSBhd2FpdCBTRUxGLmZldGNoKCJodHRwOi8vZXhhbXBsZS5jb20/aWQ9dGVzdCIsIHsKICAgICAgbWV0aG9kOiAiUE9TVCIsCiAgICB9KTsKICAgIAogICAgZXhwZWN0KHJlcy5zdGF0dXMpLnRvQmUoMjAwKTsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXMuanNvbjx7IGNvdW50OiBudW1iZXIgfT4oKTsKICAgIGV4cGVjdChkYXRhLmNvdW50KS50b0JlKDEpOwogIH0pOwoKICBpdCgic2hvdWxkIGdldCBjb3VudCB2aWEgR0VUIiwgYXN5bmMgKCkgPT4gewogICAgYXdhaXQgU0VMRi5mZXRjaCgiaHR0cDovL2V4YW1wbGUuY29tP2lkPWdldC10ZXN0IiwgeyBtZXRob2Q6ICJQT1NUIiB9KTsKICAgIGF3YWl0IFNFTEYuZmV0Y2goImh0dHA6Ly9leGFtcGxlLmNvbT9pZD1nZXQtdGVzdCIsIHsgbWV0aG9kOiAiUE9TVCIgfSk7CiAgICAKICAgIGNvbnN0IHJlcyA9IGF3YWl0IFNFTEYuZmV0Y2goImh0dHA6Ly9leGFtcGxlLmNvbT9pZD1nZXQtdGVzdCIpOwogICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlcy5qc29uPHsgY291bnQ6IG51bWJlciB9PigpOwogICAgZXhwZWN0KGRhdGEuY291bnQpLnRvQmUoMik7CiAgfSk7Cn0pOwpgYGAKCiMjIERpcmVjdCBJbnRlcm5hbCBBY2Nlc3MKClVzZSBgcnVuSW5EdXJhYmxlT2JqZWN0KClgIHRvIGFjY2VzcyBpbnN0YW5jZSBpbnRlcm5hbHMgYW5kIHN0b3JhZ2U6CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGVudiwgcnVuSW5EdXJhYmxlT2JqZWN0IH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKaW1wb3J0IHsgZGVzY3JpYmUsIGl0LCBleHBlY3QgfSBmcm9tICJ2aXRlc3QiOwppbXBvcnQgeyBDb3VudGVyIH0gZnJvbSAiLi4vc3JjIjsKCmRlc2NyaWJlKCJETyBpbnRlcm5hbHMiLCAoKSA9PiB7CiAgaXQoImNhbiB2ZXJpZnkgc3RvcmFnZSBkaXJlY3RseSIsIGFzeW5jICgpID0+IHsKICAgIGNvbnN0IHN0dWIgPSBlbnYuQ09VTlRFUi5nZXRCeU5hbWUoImRpcmVjdC10ZXN0Iik7CiAgICBhd2FpdCBzdHViLmluY3JlbWVudCgpOwogICAgYXdhaXQgc3R1Yi5pbmNyZW1lbnQoKTsKCiAgICBhd2FpdCBydW5JbkR1cmFibGVPYmplY3Qoc3R1YiwgYXN5bmMgKGluc3RhbmNlOiBDb3VudGVyLCBzdGF0ZSkgPT4gewogICAgICBleHBlY3QoaW5zdGFuY2UpLnRvQmVJbnN0YW5jZU9mKENvdW50ZXIpOwogICAgICAKICAgICAgY29uc3QgcmVzdWx0ID0gc3RhdGUuc3RvcmFnZS5zcWwKICAgICAgICAuZXhlYzx7IHZhbHVlOiBudW1iZXIgfT4oCiAgICAgICAgICAiU0VMRUNUIHZhbHVlIEZST00gY291bnRlcnMgV0hFUkUgbmFtZSA9ID8iLAogICAgICAgICAgImRlZmF1bHQiCiAgICAgICAgKQogICAgICAgIC5vbmUoKTsKICAgICAgZXhwZWN0KHJlc3VsdC52YWx1ZSkudG9CZSgyKTsKICAgIH0pOwogIH0pOwp9KTsKYGBgCgojIyBMaXN0IERPIElEcwoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBlbnYsIGxpc3REdXJhYmxlT2JqZWN0SWRzIH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKaW1wb3J0IHsgZGVzY3JpYmUsIGl0LCBleHBlY3QgfSBmcm9tICJ2aXRlc3QiOwoKZGVzY3JpYmUoIkRPIGxpc3RpbmciLCAoKSA9PiB7CiAgaXQoImNhbiBsaXN0IGFsbCBJRHMgaW4gbmFtZXNwYWNlIiwgYXN5bmMgKCkgPT4gewogICAgY29uc3QgaWQxID0gZW52LkNPVU5URVIuaWRGcm9tTmFtZSgibGlzdC0xIik7CiAgICBjb25zdCBpZDIgPSBlbnYuQ09VTlRFUi5pZEZyb21OYW1lKCJsaXN0LTIiKTsKICAgIAogICAgYXdhaXQgZW52LkNPVU5URVIuZ2V0KGlkMSkuaW5jcmVtZW50KCk7CiAgICBhd2FpdCBlbnYuQ09VTlRFUi5nZXQoaWQyKS5pbmNyZW1lbnQoKTsKICAgIAogICAgY29uc3QgaWRzID0gYXdhaXQgbGlzdER1cmFibGVPYmplY3RJZHMoZW52LkNPVU5URVIpOwogICAgZXhwZWN0KGlkcy5sZW5ndGgpLnRvQmUoMik7CiAgICBleHBlY3QoaWRzLnNvbWUoaWQgPT4gaWQuZXF1YWxzKGlkMSkpKS50b0JlKHRydWUpOwogICAgZXhwZWN0KGlkcy5zb21lKGlkID0+IGlkLmVxdWFscyhpZDIpKSkudG9CZSh0cnVlKTsKICB9KTsKfSk7CmBgYAoKIyMgVGVzdGluZyBBbGFybXMKClVzZSBgcnVuRHVyYWJsZU9iamVjdEFsYXJtKClgIHRvIHRyaWdnZXIgYWxhcm1zIGltbWVkaWF0ZWx5OgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBlbnYsIHJ1bkluRHVyYWJsZU9iamVjdCwgcnVuRHVyYWJsZU9iamVjdEFsYXJtIH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKaW1wb3J0IHsgZGVzY3JpYmUsIGl0LCBleHBlY3QgfSBmcm9tICJ2aXRlc3QiOwoKZGVzY3JpYmUoIkRPIGFsYXJtcyIsICgpID0+IHsKICBpdCgiY2FuIHRyaWdnZXIgYWxhcm1zIGltbWVkaWF0ZWx5IiwgYXN5bmMgKCkgPT4gewogICAgY29uc3Qgc3R1YiA9IGVudi5DT1VOVEVSLmdldEJ5TmFtZSgiYWxhcm0tdGVzdCIpOwogICAgYXdhaXQgc3R1Yi5pbmNyZW1lbnQoKTsKICAgIGF3YWl0IHN0dWIuaW5jcmVtZW50KCk7CiAgICBleHBlY3QoYXdhaXQgc3R1Yi5nZXRDb3VudCgpKS50b0JlKDIpOwoKICAgIC8vIFNjaGVkdWxlIGFsYXJtCiAgICBhd2FpdCBydW5JbkR1cmFibGVPYmplY3Qoc3R1YiwgYXN5bmMgKGluc3RhbmNlLCBzdGF0ZSkgPT4gewogICAgICBhd2FpdCBzdGF0ZS5zdG9yYWdlLnNldEFsYXJtKERhdGUubm93KCkgKyA2MF8wMDApOwogICAgfSk7CgogICAgLy8gRXhlY3V0ZSBpbW1lZGlhdGVseSB3aXRob3V0IHdhaXRpbmcKICAgIGNvbnN0IHJhbiA9IGF3YWl0IHJ1bkR1cmFibGVPYmplY3RBbGFybShzdHViKTsKICAgIGV4cGVjdChyYW4pLnRvQmUodHJ1ZSk7CgogICAgLy8gVmVyaWZ5IGFsYXJtIGhhbmRsZXIgcmFuIChpZiBpdCByZXNldHMgY291bnRlcikKICAgIGV4cGVjdChhd2FpdCBzdHViLmdldENvdW50KCkpLnRvQmUoMCk7CgogICAgLy8gTm8gYWxhcm0gc2NoZWR1bGVkIG5vdwogICAgY29uc3QgcmFuQWdhaW4gPSBhd2FpdCBydW5EdXJhYmxlT2JqZWN0QWxhcm0oc3R1Yik7CiAgICBleHBlY3QocmFuQWdhaW4pLnRvQmUoZmFsc2UpOwogIH0pOwp9KTsKYGBgCgpFeGFtcGxlIGFsYXJtIGhhbmRsZXI6CmBgYHR5cGVzY3JpcHQKYXN5bmMgYWxhcm0oKTogUHJvbWlzZTx2b2lkPiB7CiAgdGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygiREVMRVRFIEZST00gY291bnRlcnMiKTsKfQpgYGAKCiMjIFRlc3QgSXNvbGF0aW9uCgpFYWNoIHRlc3QgZ2V0cyBpc29sYXRlZCBzdG9yYWdlIGF1dG9tYXRpY2FsbHkuIERPcyBmcm9tIG9uZSB0ZXN0IGRvbid0IGFmZmVjdCBvdGhlcnM6CgpgYGB0eXBlc2NyaXB0CmRlc2NyaWJlKCJJc29sYXRpb24iLCAoKSA9PiB7CiAgaXQoImZpcnN0IHRlc3QgY3JlYXRlcyBETyIsIGFzeW5jICgpID0+IHsKICAgIGNvbnN0IHN0dWIgPSBlbnYuQ09VTlRFUi5nZXRCeU5hbWUoImlzb2xhdGVkIik7CiAgICBhd2FpdCBzdHViLmluY3JlbWVudCgpOwogICAgZXhwZWN0KGF3YWl0IHN0dWIuZ2V0Q291bnQoKSkudG9CZSgxKTsKICB9KTsKCiAgaXQoInNlY29uZCB0ZXN0IGhhcyBmcmVzaCBzdGF0ZSIsIGFzeW5jICgpID0+IHsKICAgIGNvbnN0IGlkcyA9IGF3YWl0IGxpc3REdXJhYmxlT2JqZWN0SWRzKGVudi5DT1VOVEVSKTsKICAgIGV4cGVjdChpZHMubGVuZ3RoKS50b0JlKDApOyAvLyBQcmV2aW91cyB0ZXN0J3MgRE8gaXMgZ29uZQogICAgCiAgICBjb25zdCBzdHViID0gZW52LkNPVU5URVIuZ2V0QnlOYW1lKCJpc29sYXRlZCIpOwogICAgZXhwZWN0KGF3YWl0IHN0dWIuZ2V0Q291bnQoKSkudG9CZSgwKTsgLy8gRnJlc2ggaW5zdGFuY2UKICB9KTsKfSk7CmBgYAoKIyMgU1FMaXRlIFN0b3JhZ2UgVGVzdGluZwoKYGBgdHlwZXNjcmlwdApkZXNjcmliZSgiU1FMaXRlIiwgKCkgPT4gewogIGl0KCJjYW4gdmVyaWZ5IFNRTCBzdG9yYWdlIiwgYXN5bmMgKCkgPT4gewogICAgY29uc3Qgc3R1YiA9IGVudi5DT1VOVEVSLmdldEJ5TmFtZSgic3FsaXRlLXRlc3QiKTsKICAgIGF3YWl0IHN0dWIuaW5jcmVtZW50KCJwYWdlLXZpZXdzIik7CiAgICBhd2FpdCBzdHViLmluY3JlbWVudCgicGFnZS12aWV3cyIpOwogICAgYXdhaXQgc3R1Yi5pbmNyZW1lbnQoImFwaS1jYWxscyIpOwoKICAgIGF3YWl0IHJ1bkluRHVyYWJsZU9iamVjdChzdHViLCBhc3luYyAoaW5zdGFuY2UsIHN0YXRlKSA9PiB7CiAgICAgIGNvbnN0IHJvd3MgPSBzdGF0ZS5zdG9yYWdlLnNxbAogICAgICAgIC5leGVjPHsgbmFtZTogc3RyaW5nOyB2YWx1ZTogbnVtYmVyIH0+KAogICAgICAgICAgIlNFTEVDVCBuYW1lLCB2YWx1ZSBGUk9NIGNvdW50ZXJzIE9SREVSIEJZIG5hbWUiCiAgICAgICAgKQogICAgICAgIC50b0FycmF5KCk7CgogICAgICBleHBlY3Qocm93cykudG9FcXVhbChbCiAgICAgICAgeyBuYW1lOiAiYXBpLWNhbGxzIiwgdmFsdWU6IDEgfSwKICAgICAgICB7IG5hbWU6ICJwYWdlLXZpZXdzIiwgdmFsdWU6IDIgfSwKICAgICAgXSk7CgogICAgICBleHBlY3Qoc3RhdGUuc3RvcmFnZS5zcWwuZGF0YWJhc2VTaXplKS50b0JlR3JlYXRlclRoYW4oMCk7CiAgICB9KTsKICB9KTsKfSk7CmBgYAoKIyMgUnVubmluZyBUZXN0cwoKYGBgYmFzaApucHggdml0ZXN0ICAgICAgICAjIFdhdGNoIG1vZGUKbnB4IHZpdGVzdCBydW4gICAgIyBTaW5nbGUgcnVuCmBgYAoKcGFja2FnZS5qc29uOgpgYGBqc29uCnsKICAic2NyaXB0cyI6IHsKICAgICJ0ZXN0IjogInZpdGVzdCIKICB9Cn0KYGBgCg==
+# Testing Durable Objects
+
+Use `@cloudflare/vitest-pool-workers` to test DOs inside the Workers runtime.
+
+## Setup
+
+### Install Dependencies
+
+```bash
+npm i -D vitest@~3.2.0 @cloudflare/vitest-pool-workers
+```
+
+### vitest.config.ts
+
+```typescript
+import { defineWorkersConfig } from "@cloudflare/vitest-pool-workers/config";
+
+export default defineWorkersConfig({
+  test: {
+    poolOptions: {
+      workers: {
+        wrangler: { configPath: "./wrangler.toml" },
+      },
+    },
+  },
+});
+```
+
+### TypeScript Config (test/tsconfig.json)
+
+```jsonc
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "types": ["@cloudflare/vitest-pool-workers"]
+  },
+  "include": ["./**/*.ts", "../src/worker-configuration.d.ts"]
+}
+```
+
+### Environment Types (env.d.ts)
+
+```typescript
+declare module "cloudflare:test" {
+  interface ProvidedEnv extends Env {}
+}
+```
+
+## Unit Tests (Direct DO Access)
+
+```typescript
+import { env } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+
+describe("Counter DO", () => {
+  it("should increment", async () => {
+    const stub = env.COUNTER.getByName("test-counter");
+    
+    expect(await stub.increment()).toBe(1);
+    expect(await stub.increment()).toBe(2);
+    expect(await stub.getCount()).toBe(2);
+  });
+
+  it("isolates different instances", async () => {
+    const stub1 = env.COUNTER.getByName("counter-1");
+    const stub2 = env.COUNTER.getByName("counter-2");
+    
+    await stub1.increment();
+    await stub1.increment();
+    await stub2.increment();
+    
+    expect(await stub1.getCount()).toBe(2);
+    expect(await stub2.getCount()).toBe(1);
+  });
+});
+```
+
+## Integration Tests (HTTP via SELF)
+
+```typescript
+import { SELF } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+
+describe("Worker HTTP", () => {
+  it("should increment via POST", async () => {
+    const res = await SELF.fetch("http://example.com?id=test", {
+      method: "POST",
+    });
+    
+    expect(res.status).toBe(200);
+    const data = await res.json<{ count: number }>();
+    expect(data.count).toBe(1);
+  });
+
+  it("should get count via GET", async () => {
+    await SELF.fetch("http://example.com?id=get-test", { method: "POST" });
+    await SELF.fetch("http://example.com?id=get-test", { method: "POST" });
+    
+    const res = await SELF.fetch("http://example.com?id=get-test");
+    const data = await res.json<{ count: number }>();
+    expect(data.count).toBe(2);
+  });
+});
+```
+
+## Direct Internal Access
+
+Use `runInDurableObject()` to access instance internals and storage:
+
+```typescript
+import { env, runInDurableObject } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+import { Counter } from "../src";
+
+describe("DO internals", () => {
+  it("can verify storage directly", async () => {
+    const stub = env.COUNTER.getByName("direct-test");
+    await stub.increment();
+    await stub.increment();
+
+    await runInDurableObject(stub, async (instance: Counter, state) => {
+      expect(instance).toBeInstanceOf(Counter);
+      
+      const result = state.storage.sql
+        .exec<{ value: number }>(
+          "SELECT value FROM counters WHERE name = ?",
+          "default"
+        )
+        .one();
+      expect(result.value).toBe(2);
+    });
+  });
+});
+```
+
+## List DO IDs
+
+```typescript
+import { env, listDurableObjectIds } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+
+describe("DO listing", () => {
+  it("can list all IDs in namespace", async () => {
+    const id1 = env.COUNTER.idFromName("list-1");
+    const id2 = env.COUNTER.idFromName("list-2");
+    
+    await env.COUNTER.get(id1).increment();
+    await env.COUNTER.get(id2).increment();
+    
+    const ids = await listDurableObjectIds(env.COUNTER);
+    expect(ids.length).toBe(2);
+    expect(ids.some(id => id.equals(id1))).toBe(true);
+    expect(ids.some(id => id.equals(id2))).toBe(true);
+  });
+});
+```
+
+## Testing Alarms
+
+Use `runDurableObjectAlarm()` to trigger alarms immediately:
+
+```typescript
+import { env, runInDurableObject, runDurableObjectAlarm } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+
+describe("DO alarms", () => {
+  it("can trigger alarms immediately", async () => {
+    const stub = env.COUNTER.getByName("alarm-test");
+    await stub.increment();
+    await stub.increment();
+    expect(await stub.getCount()).toBe(2);
+
+    // Schedule alarm
+    await runInDurableObject(stub, async (instance, state) => {
+      await state.storage.setAlarm(Date.now() + 60_000);
+    });
+
+    // Execute immediately without waiting
+    const ran = await runDurableObjectAlarm(stub);
+    expect(ran).toBe(true);
+
+    // Verify alarm handler ran (if it resets counter)
+    expect(await stub.getCount()).toBe(0);
+
+    // No alarm scheduled now
+    const ranAgain = await runDurableObjectAlarm(stub);
+    expect(ranAgain).toBe(false);
+  });
+});
+```
+
+Example alarm handler:
+```typescript
+async alarm(): Promise<void> {
+  this.ctx.storage.sql.exec("DELETE FROM counters");
+}
+```
+
+## Test Isolation
+
+Each test gets isolated storage automatically. DOs from one test don't affect others:
+
+```typescript
+describe("Isolation", () => {
+  it("first test creates DO", async () => {
+    const stub = env.COUNTER.getByName("isolated");
+    await stub.increment();
+    expect(await stub.getCount()).toBe(1);
+  });
+
+  it("second test has fresh state", async () => {
+    const ids = await listDurableObjectIds(env.COUNTER);
+    expect(ids.length).toBe(0); // Previous test's DO is gone
+    
+    const stub = env.COUNTER.getByName("isolated");
+    expect(await stub.getCount()).toBe(0); // Fresh instance
+  });
+});
+```
+
+## SQLite Storage Testing
+
+```typescript
+describe("SQLite", () => {
+  it("can verify SQL storage", async () => {
+    const stub = env.COUNTER.getByName("sqlite-test");
+    await stub.increment("page-views");
+    await stub.increment("page-views");
+    await stub.increment("api-calls");
+
+    await runInDurableObject(stub, async (instance, state) => {
+      const rows = state.storage.sql
+        .exec<{ name: string; value: number }>(
+          "SELECT name, value FROM counters ORDER BY name"
+        )
+        .toArray();
+
+      expect(rows).toEqual([
+        { name: "api-calls", value: 1 },
+        { name: "page-views", value: 2 },
+      ]);
+
+      expect(state.storage.sql.databaseSize).toBeGreaterThan(0);
+    });
+  });
+});
+```
+
+## Running Tests
+
+```bash
+npx vitest        # Watch mode
+npx vitest run    # Single run
+```
+
+package.json:
+```json
+{
+  "scripts": {
+    "test": "vitest"
+  }
+}
+```

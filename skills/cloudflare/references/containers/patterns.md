@@ -1,1 +1,202 @@
-IyMgUm91dGluZyBQYXR0ZXJucwoKIyMjIFNlc3Npb24gQWZmaW5pdHkgKFN0YXRlZnVsKQoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgU2Vzc2lvbkJhY2tlbmQgZXh0ZW5kcyBDb250YWluZXIgewogIGRlZmF1bHRQb3J0ID0gMzAwMDsKICBzbGVlcEFmdGVyID0gIjMwbSI7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudikgewogICAgY29uc3Qgc2Vzc2lvbklkID0gcmVxdWVzdC5oZWFkZXJzLmdldCgiWC1TZXNzaW9uLUlEIikgfHwgY3J5cHRvLnJhbmRvbVVVSUQoKTsKICAgIGNvbnN0IGNvbnRhaW5lciA9IGVudi5TRVNTSU9OX0JBQ0tFTkQuZ2V0QnlOYW1lKHNlc3Npb25JZCk7CiAgICBhd2FpdCBjb250YWluZXIuc3RhcnRBbmRXYWl0Rm9yUG9ydHMoKTsKICAgIHJldHVybiBjb250YWluZXIuZmV0Y2gocmVxdWVzdCk7CiAgfQp9OwpgYGAKCioqVXNlOioqIFVzZXIgc2Vzc2lvbnMsIFdlYlNvY2tldCwgc3RhdGVmdWwgZ2FtZXMsIHBlci11c2VyIGNhY2hpbmcuCgojIyMgTG9hZCBCYWxhbmNpbmcgKFN0YXRlbGVzcykKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KSB7CiAgICBjb25zdCBjb250YWluZXIgPSBlbnYuU1RBVEVMRVNTX0FQSS5nZXRSYW5kb20oKTsKICAgIGF3YWl0IGNvbnRhaW5lci5zdGFydEFuZFdhaXRGb3JQb3J0cygpOwogICAgcmV0dXJuIGNvbnRhaW5lci5mZXRjaChyZXF1ZXN0KTsKICB9Cn07CmBgYAoKKipVc2U6KiogU3RhdGVsZXNzIEhUVFAgQVBJcywgQ1BVLWludGVuc2l2ZSB3b3JrLCByZWFkLW9ubHkgcXVlcmllcy4KCiMjIyBTaW5nbGV0b24gUGF0dGVybgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpIHsKICAgIGNvbnN0IGNvbnRhaW5lciA9IGVudi5HTE9CQUxfU0VSVklDRS5nZXRCeU5hbWUoInNpbmdsZXRvbiIpOwogICAgYXdhaXQgY29udGFpbmVyLnN0YXJ0QW5kV2FpdEZvclBvcnRzKCk7CiAgICByZXR1cm4gY29udGFpbmVyLmZldGNoKHJlcXVlc3QpOwogIH0KfTsKYGBgCgoqKlVzZToqKiBHbG9iYWwgY2FjaGUsIGNlbnRyYWxpemVkIGNvb3JkaW5hdG9yLCBzaW5nbGUgc291cmNlIG9mIHRydXRoLgoKIyMgV2ViU29ja2V0IEZvcndhcmRpbmcKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KSB7CiAgICBpZiAocmVxdWVzdC5oZWFkZXJzLmdldCgiVXBncmFkZSIpID09PSAid2Vic29ja2V0IikgewogICAgICBjb25zdCBzZXNzaW9uSWQgPSByZXF1ZXN0LmhlYWRlcnMuZ2V0KCJYLVNlc3Npb24tSUQiKSB8fCBjcnlwdG8ucmFuZG9tVVVJRCgpOwogICAgICBjb25zdCBjb250YWluZXIgPSBlbnYuV1NfQkFDS0VORC5nZXRCeU5hbWUoc2Vzc2lvbklkKTsKICAgICAgYXdhaXQgY29udGFpbmVyLnN0YXJ0QW5kV2FpdEZvclBvcnRzKCk7CiAgICAgIAogICAgICAvLyDimqDvuI8gTVVTVCB1c2UgZmV0Y2goKSwgbm90IGNvbnRhaW5lckZldGNoKCkKICAgICAgcmV0dXJuIGNvbnRhaW5lci5mZXRjaChyZXF1ZXN0KTsKICAgIH0KICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIk5vdCBhIFdlYlNvY2tldCByZXF1ZXN0IiwgeyBzdGF0dXM6IDQwMCB9KTsKICB9Cn07CmBgYAoKKirimqDvuI8gQ3JpdGljYWw6KiogQWx3YXlzIHVzZSBgZmV0Y2goKWAgZm9yIFdlYlNvY2tldC4KCiMjIEdyYWNlZnVsIFNodXRkb3duCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBjbGFzcyBHcmFjZWZ1bENvbnRhaW5lciBleHRlbmRzIENvbnRhaW5lciB7CiAgcHJpdmF0ZSBjb25uZWN0aW9ucyA9IG5ldyBTZXQ8V2ViU29ja2V0PigpOwoKICBvblN0b3AoKSB7CiAgICAvLyBTSUdURVJNIHJlY2VpdmVkLCAxNSBtaW51dGVzIHVudGlsIFNJR0tJTEwKICAgIGZvciAoY29uc3Qgd3Mgb2YgdGhpcy5jb25uZWN0aW9ucykgewogICAgICB3cy5jbG9zZSgxMDAxLCAiU2VydmVyIHNodXR0aW5nIGRvd24iKTsKICAgIH0KICAgIHRoaXMuY3R4LnN0b3JhZ2UucHV0KCJzaHV0ZG93bi10aW1lIiwgRGF0ZS5ub3coKSk7CiAgfQoKICBvbkFjdGl2aXR5RXhwaXJlZCgpOiBib29sZWFuIHsKICAgIHJldHVybiB0aGlzLmNvbm5lY3Rpb25zLnNpemUgPiAwOyAgLy8gS2VlcCBhbGl2ZSBpZiBjb25uZWN0aW9ucwogIH0KfQpgYGAKCiMjIENvbmN1cnJlbnQgUmVxdWVzdCBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgU2FmZUNvbnRhaW5lciBleHRlbmRzIENvbnRhaW5lciB7CiAgcHJpdmF0ZSBpbml0aWFsaXplZCA9IGZhbHNlOwoKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0KSB7CiAgICBhd2FpdCB0aGlzLmN0eC5ibG9ja0NvbmN1cnJlbmN5V2hpbGUoYXN5bmMgKCkgPT4gewogICAgICBpZiAoIXRoaXMuaW5pdGlhbGl6ZWQpIHsKICAgICAgICBhd2FpdCB0aGlzLnN0YXJ0QW5kV2FpdEZvclBvcnRzKCk7CiAgICAgICAgdGhpcy5pbml0aWFsaXplZCA9IHRydWU7CiAgICAgIH0KICAgIH0pOwogICAgcmV0dXJuIHN1cGVyLmZldGNoKHJlcXVlc3QpOwogIH0KfQpgYGAKCioqVXNlOioqIE9uZS10aW1lIGluaXRpYWxpemF0aW9uLCBwcmV2ZW50aW5nIGNvbmN1cnJlbnQgc3RhcnR1cC4KCiMjIEFjdGl2aXR5IFRpbWVvdXQgUmVuZXdhbAoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgTG9uZ1J1bm5pbmdDb250YWluZXIgZXh0ZW5kcyBDb250YWluZXIgewogIHNsZWVwQWZ0ZXIgPSAiNW0iOwoKICBhc3luYyBwcm9jZXNzTG9uZ0pvYihkYXRhOiB1bmtub3duKSB7CiAgICBjb25zdCBpbnRlcnZhbCA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgdGhpcy5jdHguc3RvcmFnZS5wdXQoImtlZXBhbGl2ZSIsIERhdGUubm93KCkpOwogICAgfSwgNjAwMDApOwoKICAgIHRyeSB7CiAgICAgIGF3YWl0IHRoaXMuZG9Mb25nV29yayhkYXRhKTsKICAgIH0gZmluYWxseSB7CiAgICAgIGNsZWFySW50ZXJ2YWwoaW50ZXJ2YWwpOwogICAgfQogIH0KfQpgYGAKCioqVXNlOioqIExvbmcgb3BlcmF0aW9ucyBleGNlZWRpbmcgYHNsZWVwQWZ0ZXJgLgoKIyMgTXVsdGlwbGUgUG9ydCBSb3V0aW5nCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBjbGFzcyBNdWx0aVBvcnRDb250YWluZXIgZXh0ZW5kcyBDb250YWluZXIgewogIHJlcXVpcmVkUG9ydHMgPSBbODA4MCwgODA4MSwgOTA5MF07CgogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QpIHsKICAgIGNvbnN0IHBhdGggPSBuZXcgVVJMKHJlcXVlc3QudXJsKS5wYXRobmFtZTsKICAgIGlmIChwYXRoLnN0YXJ0c1dpdGgoIi9ncnBjIikpIHRoaXMuc3dpdGNoUG9ydCg4MDgxKTsKICAgIGVsc2UgaWYgKHBhdGguc3RhcnRzV2l0aCgiL21ldHJpY3MiKSkgdGhpcy5zd2l0Y2hQb3J0KDkwOTApOwogICAgcmV0dXJuIHN1cGVyLmZldGNoKHJlcXVlc3QpOwogIH0KfQpgYGAKCioqVXNlOioqIE11bHRpLXByb3RvY29sIHNlcnZpY2VzIChIVFRQICsgZ1JQQyksIHNlcGFyYXRlIG1ldHJpY3MgZW5kcG9pbnRzLgoKIyMgV29ya2Zsb3cgSW50ZWdyYXRpb24KCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgV29ya2Zsb3dFbnRyeXBvaW50IH0gZnJvbSAiY2xvdWRmbGFyZTp3b3JrZXJzIjsKCmV4cG9ydCBjbGFzcyBQcm9jZXNzaW5nV29ya2Zsb3cgZXh0ZW5kcyBXb3JrZmxvd0VudHJ5cG9pbnQgewogIGFzeW5jIHJ1bihldmVudCwgc3RlcCkgewogICAgY29uc3QgY29udGFpbmVyID0gdGhpcy5lbnYuUFJPQ0VTU09SLmdldEJ5TmFtZShldmVudC5wYXlsb2FkLmpvYklkKTsKICAgIAogICAgYXdhaXQgc3RlcC5kbygic3RhcnQiLCBhc3luYyAoKSA9PiB7CiAgICAgIGF3YWl0IGNvbnRhaW5lci5zdGFydEFuZFdhaXRGb3JQb3J0cygpOwogICAgfSk7CiAgICAKICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IHN0ZXAuZG8oInByb2Nlc3MiLCBhc3luYyAoKSA9PiB7CiAgICAgIHJldHVybiBjb250YWluZXIuZmV0Y2goIi9wcm9jZXNzIiwgewogICAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGV2ZW50LnBheWxvYWQuZGF0YSkKICAgICAgfSkudGhlbihyID0+IHIuanNvbigpKTsKICAgIH0pOwogICAgCiAgICByZXR1cm4gcmVzdWx0OwogIH0KfQpgYGAKCioqVXNlOioqIE9yY2hlc3RyYXRpbmcgbXVsdGktc3RlcCBjb250YWluZXIgb3BlcmF0aW9ucywgZHVyYWJsZSBleGVjdXRpb24uCgojIyBRdWV1ZSBDb25zdW1lciBJbnRlZ3JhdGlvbgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgcXVldWUoYmF0Y2gsIGVudikgewogICAgZm9yIChjb25zdCBtc2cgb2YgYmF0Y2gubWVzc2FnZXMpIHsKICAgICAgdHJ5IHsKICAgICAgICBjb25zdCBjb250YWluZXIgPSBlbnYuUFJPQ0VTU09SLmdldEJ5TmFtZShtc2cuYm9keS5qb2JJZCk7CiAgICAgICAgYXdhaXQgY29udGFpbmVyLnN0YXJ0QW5kV2FpdEZvclBvcnRzKCk7CiAgICAgICAgCiAgICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBjb250YWluZXIuZmV0Y2goIi9wcm9jZXNzIiwgewogICAgICAgICAgbWV0aG9kOiAiUE9TVCIsCiAgICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeShtc2cuYm9keSkKICAgICAgICB9KTsKICAgICAgICAKICAgICAgICByZXNwb25zZS5vayA/IG1zZy5hY2soKSA6IG1zZy5yZXRyeSgpOwogICAgICB9IGNhdGNoIChlcnIpIHsKICAgICAgICBjb25zb2xlLmVycm9yKCJRdWV1ZSBwcm9jZXNzaW5nIGVycm9yOiIsIGVycik7CiAgICAgICAgbXNnLnJldHJ5KCk7CiAgICAgIH0KICAgIH0KICB9Cn07CmBgYAoKKipVc2U6KiogQXN5bmNocm9ub3VzIGpvYiBwcm9jZXNzaW5nLCBiYXRjaCBvcGVyYXRpb25zLCBldmVudC1kcml2ZW4gZXhlY3V0aW9uLgo=
+## Routing Patterns
+
+### Session Affinity (Stateful)
+
+```typescript
+export class SessionBackend extends Container {
+  defaultPort = 3000;
+  sleepAfter = "30m";
+}
+
+export default {
+  async fetch(request: Request, env: Env) {
+    const sessionId = request.headers.get("X-Session-ID") || crypto.randomUUID();
+    const container = env.SESSION_BACKEND.getByName(sessionId);
+    await container.startAndWaitForPorts();
+    return container.fetch(request);
+  }
+};
+```
+
+**Use:** User sessions, WebSocket, stateful games, per-user caching.
+
+### Load Balancing (Stateless)
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env) {
+    const container = env.STATELESS_API.getRandom();
+    await container.startAndWaitForPorts();
+    return container.fetch(request);
+  }
+};
+```
+
+**Use:** Stateless HTTP APIs, CPU-intensive work, read-only queries.
+
+### Singleton Pattern
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env) {
+    const container = env.GLOBAL_SERVICE.getByName("singleton");
+    await container.startAndWaitForPorts();
+    return container.fetch(request);
+  }
+};
+```
+
+**Use:** Global cache, centralized coordinator, single source of truth.
+
+## WebSocket Forwarding
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env) {
+    if (request.headers.get("Upgrade") === "websocket") {
+      const sessionId = request.headers.get("X-Session-ID") || crypto.randomUUID();
+      const container = env.WS_BACKEND.getByName(sessionId);
+      await container.startAndWaitForPorts();
+      
+      // ⚠️ MUST use fetch(), not containerFetch()
+      return container.fetch(request);
+    }
+    return new Response("Not a WebSocket request", { status: 400 });
+  }
+};
+```
+
+**⚠️ Critical:** Always use `fetch()` for WebSocket.
+
+## Graceful Shutdown
+
+```typescript
+export class GracefulContainer extends Container {
+  private connections = new Set<WebSocket>();
+
+  onStop() {
+    // SIGTERM received, 15 minutes until SIGKILL
+    for (const ws of this.connections) {
+      ws.close(1001, "Server shutting down");
+    }
+    this.ctx.storage.put("shutdown-time", Date.now());
+  }
+
+  onActivityExpired(): boolean {
+    return this.connections.size > 0;  // Keep alive if connections
+  }
+}
+```
+
+## Concurrent Request Handling
+
+```typescript
+export class SafeContainer extends Container {
+  private initialized = false;
+
+  async fetch(request: Request) {
+    await this.ctx.blockConcurrencyWhile(async () => {
+      if (!this.initialized) {
+        await this.startAndWaitForPorts();
+        this.initialized = true;
+      }
+    });
+    return super.fetch(request);
+  }
+}
+```
+
+**Use:** One-time initialization, preventing concurrent startup.
+
+## Activity Timeout Renewal
+
+```typescript
+export class LongRunningContainer extends Container {
+  sleepAfter = "5m";
+
+  async processLongJob(data: unknown) {
+    const interval = setInterval(() => {
+      this.ctx.storage.put("keepalive", Date.now());
+    }, 60000);
+
+    try {
+      await this.doLongWork(data);
+    } finally {
+      clearInterval(interval);
+    }
+  }
+}
+```
+
+**Use:** Long operations exceeding `sleepAfter`.
+
+## Multiple Port Routing
+
+```typescript
+export class MultiPortContainer extends Container {
+  requiredPorts = [8080, 8081, 9090];
+
+  async fetch(request: Request) {
+    const path = new URL(request.url).pathname;
+    if (path.startsWith("/grpc")) this.switchPort(8081);
+    else if (path.startsWith("/metrics")) this.switchPort(9090);
+    return super.fetch(request);
+  }
+}
+```
+
+**Use:** Multi-protocol services (HTTP + gRPC), separate metrics endpoints.
+
+## Workflow Integration
+
+```typescript
+import { WorkflowEntrypoint } from "cloudflare:workers";
+
+export class ProcessingWorkflow extends WorkflowEntrypoint {
+  async run(event, step) {
+    const container = this.env.PROCESSOR.getByName(event.payload.jobId);
+    
+    await step.do("start", async () => {
+      await container.startAndWaitForPorts();
+    });
+    
+    const result = await step.do("process", async () => {
+      return container.fetch("/process", {
+        method: "POST",
+        body: JSON.stringify(event.payload.data)
+      }).then(r => r.json());
+    });
+    
+    return result;
+  }
+}
+```
+
+**Use:** Orchestrating multi-step container operations, durable execution.
+
+## Queue Consumer Integration
+
+```typescript
+export default {
+  async queue(batch, env) {
+    for (const msg of batch.messages) {
+      try {
+        const container = env.PROCESSOR.getByName(msg.body.jobId);
+        await container.startAndWaitForPorts();
+        
+        const response = await container.fetch("/process", {
+          method: "POST",
+          body: JSON.stringify(msg.body)
+        });
+        
+        response.ok ? msg.ack() : msg.retry();
+      } catch (err) {
+        console.error("Queue processing error:", err);
+        msg.retry();
+      }
+    }
+  }
+};
+```
+
+**Use:** Asynchronous job processing, batch operations, event-driven execution.

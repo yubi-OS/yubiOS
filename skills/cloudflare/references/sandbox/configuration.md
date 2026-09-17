@@ -1,1 +1,143 @@
-IyBDb25maWd1cmF0aW9uCgojIyBnZXRTYW5kYm94IE9wdGlvbnMKCmBgYHR5cGVzY3JpcHQKY29uc3Qgc2FuZGJveCA9IGdldFNhbmRib3goZW52LlNhbmRib3gsICdzYW5kYm94LWlkJywgewogIG5vcm1hbGl6ZUlkOiB0cnVlLCAgICAgICAgIC8vIGxvd2VyY2FzZSBJRCAocmVxdWlyZWQgZm9yIHByZXZpZXcgVVJMcykKICBzbGVlcEFmdGVyOiAnMTBtJywgICAgICAgICAvLyBzbGVlcCBhZnRlciBpbmFjdGl2aXR5OiAnNW0nLCAnMWgnLCAnMmQnIChkZWZhdWx0OiAnMTBtJykKICBrZWVwQWxpdmU6IGZhbHNlLCAgICAgICAgICAvLyBmYWxzZSA9IGF1dG8tdGltZW91dCwgdHJ1ZSA9IG5ldmVyIHNsZWVwCiAgCiAgY29udGFpbmVyVGltZW91dHM6IHsKICAgIGluc3RhbmNlR2V0VGltZW91dE1TOiAzMDAwMCwgIC8vIDMwcyBmb3IgcHJvdmlzaW9uaW5nIChkZWZhdWx0OiAzMDAwMCkKICAgIHBvcnRSZWFkeVRpbWVvdXRNUzogOTAwMDAgICAgIC8vIDkwcyBmb3IgY29udGFpbmVyIHN0YXJ0dXAgKGRlZmF1bHQ6IDkwMDAwKQogIH0KfSk7CmBgYAoKKipTbGVlcCBDb25maWcqKjoKLSBgc2xlZXBBZnRlcmA6IER1cmF0aW9uIHN0cmluZyAoZS5nLiwgJzVtJywgJzEwbScsICcxaCcpIC0gZGVmYXVsdDogJzEwbScKLSBga2VlcEFsaXZlOiBmYWxzZWA6IEF1dG8tc2xlZXAgKGRlZmF1bHQsIGNvc3Qtb3B0aW1pemVkKQotIGBrZWVwQWxpdmU6IHRydWVgOiBOZXZlciBzbGVlcCAoaGlnaGVyIGNvc3QsIHJlcXVpcmVzIGV4cGxpY2l0IGBkZXN0cm95KClgKQotIFNsZWVwaW5nIHNhbmRib3hlcyB3YWtlIGF1dG9tYXRpY2FsbHkgKGNvbGQgc3RhcnQpCgojIyBJbnN0YW5jZSBUeXBlcwoKd3JhbmdsZXIuanNvbmMgYGluc3RhbmNlX3R5cGVgOgotIGBsaXRlYDogMjU2TUIgUkFNLCAwLjUgdkNQVSAoZGVmYXVsdCkKLSBgc3RhbmRhcmRgOiA1MTJNQiBSQU0sIDEgdkNQVQotIGBoZWF2eWA6IDFHQiBSQU0sIDIgdkNQVQoKIyMgRG9ja2VyZmlsZSBQYXR0ZXJucwoKKipCYXNpYyoqOgpgYGBkb2NrZXJmaWxlCkZST00gZG9ja2VyLmlvL2Nsb3VkZmxhcmUvc2FuZGJveDowLjcuMApSVU4gcGlwMyBpbnN0YWxsIC0tbm8tY2FjaGUtZGlyIHBhbmRhcyBudW1weQpFWFBPU0UgODA4MCAgIyBSZXF1aXJlZCBmb3Igd3JhbmdsZXIgZGV2CmBgYAoKKipTY2llbnRpZmljKio6CmBgYGRvY2tlcmZpbGUKRlJPTSBkb2NrZXIuaW8vY2xvdWRmbGFyZS9zYW5kYm94OjAuNy4wClJVTiBwaXAzIGluc3RhbGwgLS1uby1jYWNoZS1kaXIgXAogICAganVweXRlci1zZXJ2ZXIgaXB5a2VybmVsIG1hdHBsb3RsaWIgXAogICAgcGFuZGFzIHNlYWJvcm4gcGxvdGx5IHNjaXB5IHNjaWtpdC1sZWFybgpgYGAKCioqTm9kZS5qcyoqOgpgYGBkb2NrZXJmaWxlCkZST00gZG9ja2VyLmlvL2Nsb3VkZmxhcmUvc2FuZGJveDowLjcuMApSVU4gbnBtIGluc3RhbGwgLWcgdHlwZXNjcmlwdCB0cy1ub2RlCmBgYAoKKipDUklUSUNBTCoqOiBgRVhQT1NFYCByZXF1aXJlZCBmb3IgYHdyYW5nbGVyIGRldmAgcG9ydCBhY2Nlc3MuIFByb2R1Y3Rpb24gYXV0by1leHBvc2VzIGFsbCBwb3J0cy4KCiMjIENMSSBDb21tYW5kcwoKYGBgYmFzaAojIERldgp3cmFuZ2xlciBkZXYgICAgICAgICAgICAgICAgICAgICMgU3RhcnQgbG9jYWwgZGV2IHNlcnZlcgp3cmFuZ2xlciBkZXBsb3kgICAgICAgICAgICAgICAgICMgRGVwbG95IHRvIHByb2R1Y3Rpb24Kd3JhbmdsZXIgdGFpbCAgICAgICAgICAgICAgICAgICAjIE1vbml0b3IgbG9ncwp3cmFuZ2xlciBjb250YWluZXJzIGxpc3QgICAgICAgICMgQ2hlY2sgY29udGFpbmVyIHN0YXR1cwp3cmFuZ2xlciBzZWNyZXQgcHV0IEtFWSAgICAgICAgICMgU2V0IHNlY3JldApgYGAKCiMjIEVudmlyb25tZW50ICYgU2VjcmV0cwoKKip3cmFuZ2xlci5qc29uYyoqOgpgYGBqc29uYwp7CiAgInZhcnMiOiB7CiAgICAiRU5WSVJPTk1FTlQiOiAicHJvZHVjdGlvbiIsCiAgICAiQVBJX1VSTCI6ICJodHRwczovL2FwaS5leGFtcGxlLmNvbSIKICB9LAogICJyMl9idWNrZXRzIjogW3sKICAgICJiaW5kaW5nIjogIkRBVEFfQlVDS0VUIiwKICAgICJidWNrZXRfbmFtZSI6ICJteS1kYXRhLWJ1Y2tldCIKICB9XQp9CmBgYAoKKipVc2FnZSoqOgpgYGB0eXBlc2NyaXB0CmNvbnN0IHRva2VuID0gZW52LkdJVEhVQl9UT0tFTjsgIC8vIEZyb20gd3JhbmdsZXIgc2VjcmV0CmF3YWl0IHNhbmRib3guZXhlYygnZ2l0IGNsb25lIC4uLicsIHsKICBlbnY6IHsgR0lUX1RPS0VOOiB0b2tlbiB9Cn0pOwpgYGAKCiMjIFByZXZpZXcgVVJMIFNldHVwCgoqKlByZXJlcXVpc2l0ZXMqKjoKLSBDdXN0b20gZG9tYWluIHdpdGggd2lsZGNhcmQgRE5TOiBgKi55b3VyZG9tYWluLmNvbSDihpIgd29ya2VyLnlvdXJkb21haW4uY29tYAotIGAud29ya2Vycy5kZXZgIGRvbWFpbnMgTk9UIHN1cHBvcnRlZAotIGBub3JtYWxpemVJZDogdHJ1ZWAgaW4gZ2V0U2FuZGJveAotIGBwcm94eVRvU2FuZGJveCgpYCBjYWxsZWQgZmlyc3QgaW4gZmV0Y2ggaGFuZGxlcgoKIyMgQ3JvbiBUcmlnZ2VycyAoUHJlLXdhcm1pbmcpCgpgYGBqc29uYwp7CiAgInRyaWdnZXJzIjogewogICAgImNyb25zIjogWyIqLzUgKiAqICogKiJdICAvLyBFdmVyeSA1IG1pbnV0ZXMKICB9Cn0KYGBgCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBzY2hlZHVsZWQoZXZlbnQ6IFNjaGVkdWxlZEV2ZW50LCBlbnY6IEVudikgewogICAgY29uc3Qgc2FuZGJveCA9IGdldFNhbmRib3goZW52LlNhbmRib3gsICdtYWluJyk7CiAgICBhd2FpdCBzYW5kYm94LmV4ZWMoJ2VjaG8gImtlZXBhbGl2ZSInKTsgIC8vIFdha2Ugc2FuZGJveAogIH0KfTsKYGBgCgojIyBMb2dnaW5nIENvbmZpZ3VyYXRpb24KCioqd3JhbmdsZXIuanNvbmMqKjoKYGBganNvbmMKewogICJ2YXJzIjogewogICAgIlNBTkRCT1hfTE9HX0xFVkVMIjogImRlYnVnIiwgIC8vIGRlYnVnIHwgaW5mbyB8IHdhcm4gfCBlcnJvciAoZGVmYXVsdDogaW5mbykKICAgICJTQU5EQk9YX0xPR19GT1JNQVQiOiAicHJldHR5IiAvLyBqc29uIHwgcHJldHR5IChkZWZhdWx0OiBqc29uKQogIH0KfQpgYGAKCioqRGV2Kio6IGBkZWJ1Z2AgKyBgcHJldHR5YC4gKipQcm9kdWN0aW9uKio6IGBpbmZvYC9gd2FybmAgKyBganNvbmAuCgojIyBUaW1lb3V0IEVudmlyb25tZW50IE92ZXJyaWRlcwoKT3ZlcnJpZGUgZGVmYXVsdCB0aW1lb3V0cyB2aWEgZW52aXJvbm1lbnQgdmFyaWFibGVzOgoKYGBganNvbmMKewogICJ2YXJzIjogewogICAgIlNBTkRCT1hfSU5TVEFOQ0VfVElNRU9VVF9NUyI6ICI2MDAwMCIsICAvLyBPdmVycmlkZSBpbnN0YW5jZUdldFRpbWVvdXRNUwogICAgIlNBTkRCT1hfUE9SVF9USU1FT1VUX01TIjogIjEyMDAwMCIgICAgICAvLyBPdmVycmlkZSBwb3J0UmVhZHlUaW1lb3V0TVMKICB9Cn0KYGBgCg==
+# Configuration
+
+## getSandbox Options
+
+```typescript
+const sandbox = getSandbox(env.Sandbox, 'sandbox-id', {
+  normalizeId: true,         // lowercase ID (required for preview URLs)
+  sleepAfter: '10m',         // sleep after inactivity: '5m', '1h', '2d' (default: '10m')
+  keepAlive: false,          // false = auto-timeout, true = never sleep
+  
+  containerTimeouts: {
+    instanceGetTimeoutMS: 30000,  // 30s for provisioning (default: 30000)
+    portReadyTimeoutMS: 90000     // 90s for container startup (default: 90000)
+  }
+});
+```
+
+**Sleep Config**:
+- `sleepAfter`: Duration string (e.g., '5m', '10m', '1h') - default: '10m'
+- `keepAlive: false`: Auto-sleep (default, cost-optimized)
+- `keepAlive: true`: Never sleep (higher cost, requires explicit `destroy()`)
+- Sleeping sandboxes wake automatically (cold start)
+
+## Instance Types
+
+wrangler.jsonc `instance_type`:
+- `lite`: 256MB RAM, 0.5 vCPU (default)
+- `standard`: 512MB RAM, 1 vCPU
+- `heavy`: 1GB RAM, 2 vCPU
+
+## Dockerfile Patterns
+
+**Basic**:
+```dockerfile
+FROM docker.io/cloudflare/sandbox:0.7.0
+RUN pip3 install --no-cache-dir pandas numpy
+EXPOSE 8080  # Required for wrangler dev
+```
+
+**Scientific**:
+```dockerfile
+FROM docker.io/cloudflare/sandbox:0.7.0
+RUN pip3 install --no-cache-dir \
+    jupyter-server ipykernel matplotlib \
+    pandas seaborn plotly scipy scikit-learn
+```
+
+**Node.js**:
+```dockerfile
+FROM docker.io/cloudflare/sandbox:0.7.0
+RUN npm install -g typescript ts-node
+```
+
+**CRITICAL**: `EXPOSE` required for `wrangler dev` port access. Production auto-exposes all ports.
+
+## CLI Commands
+
+```bash
+# Dev
+wrangler dev                    # Start local dev server
+wrangler deploy                 # Deploy to production
+wrangler tail                   # Monitor logs
+wrangler containers list        # Check container status
+wrangler secret put KEY         # Set secret
+```
+
+## Environment & Secrets
+
+**wrangler.jsonc**:
+```jsonc
+{
+  "vars": {
+    "ENVIRONMENT": "production",
+    "API_URL": "https://api.example.com"
+  },
+  "r2_buckets": [{
+    "binding": "DATA_BUCKET",
+    "bucket_name": "my-data-bucket"
+  }]
+}
+```
+
+**Usage**:
+```typescript
+const token = env.GITHUB_TOKEN;  // From wrangler secret
+await sandbox.exec('git clone ...', {
+  env: { GIT_TOKEN: token }
+});
+```
+
+## Preview URL Setup
+
+**Prerequisites**:
+- Custom domain with wildcard DNS: `*.yourdomain.com → worker.yourdomain.com`
+- `.workers.dev` domains NOT supported
+- `normalizeId: true` in getSandbox
+- `proxyToSandbox()` called first in fetch handler
+
+## Cron Triggers (Pre-warming)
+
+```jsonc
+{
+  "triggers": {
+    "crons": ["*/5 * * * *"]  // Every 5 minutes
+  }
+}
+```
+
+```typescript
+export default {
+  async scheduled(event: ScheduledEvent, env: Env) {
+    const sandbox = getSandbox(env.Sandbox, 'main');
+    await sandbox.exec('echo "keepalive"');  // Wake sandbox
+  }
+};
+```
+
+## Logging Configuration
+
+**wrangler.jsonc**:
+```jsonc
+{
+  "vars": {
+    "SANDBOX_LOG_LEVEL": "debug",  // debug | info | warn | error (default: info)
+    "SANDBOX_LOG_FORMAT": "pretty" // json | pretty (default: json)
+  }
+}
+```
+
+**Dev**: `debug` + `pretty`. **Production**: `info`/`warn` + `json`.
+
+## Timeout Environment Overrides
+
+Override default timeouts via environment variables:
+
+```jsonc
+{
+  "vars": {
+    "SANDBOX_INSTANCE_TIMEOUT_MS": "60000",  // Override instanceGetTimeoutMS
+    "SANDBOX_PORT_TIMEOUT_MS": "120000"      // Override portReadyTimeoutMS
+  }
+}
+```

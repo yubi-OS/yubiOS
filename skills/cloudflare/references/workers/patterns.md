@@ -1,1 +1,198 @@
-IyBXb3JrZXJzIFBhdHRlcm5zCgojIyBFcnJvciBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdApjbGFzcyBIVFRQRXJyb3IgZXh0ZW5kcyBFcnJvciB7CiAgY29uc3RydWN0b3IocHVibGljIHN0YXR1czogbnVtYmVyLCBtZXNzYWdlOiBzdHJpbmcpIHsgc3VwZXIobWVzc2FnZSk7IH0KfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgdHJ5IHsKICAgICAgcmV0dXJuIGF3YWl0IGhhbmRsZVJlcXVlc3QocmVxdWVzdCwgZW52KTsKICAgIH0gY2F0Y2ggKGVycm9yKSB7CiAgICAgIGlmIChlcnJvciBpbnN0YW5jZW9mIEhUVFBFcnJvcikgewogICAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoSlNPTi5zdHJpbmdpZnkoeyBlcnJvcjogZXJyb3IubWVzc2FnZSB9KSwgewogICAgICAgICAgc3RhdHVzOiBlcnJvci5zdGF0dXMsIGhlYWRlcnM6IHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9CiAgICAgICAgfSk7CiAgICAgIH0KICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnSW50ZXJuYWwgU2VydmVyIEVycm9yJywgeyBzdGF0dXM6IDUwMCB9KTsKICAgIH0KICB9LAp9OwpgYGAKCiMjIENPUlMKCmBgYHR5cGVzY3JpcHQKY29uc3QgY29yc0hlYWRlcnMgPSB7ICdBY2Nlc3MtQ29udHJvbC1BbGxvdy1PcmlnaW4nOiAnKicsICdBY2Nlc3MtQ29udHJvbC1BbGxvdy1NZXRob2RzJzogJ0dFVCwgUE9TVCwgUFVULCBERUxFVEUsIE9QVElPTlMnIH07CmlmIChyZXF1ZXN0Lm1ldGhvZCA9PT0gJ09QVElPTlMnKSByZXR1cm4gbmV3IFJlc3BvbnNlKG51bGwsIHsgaGVhZGVyczogY29yc0hlYWRlcnMgfSk7CmBgYAoKIyMgUm91dGluZwoKYGBgdHlwZXNjcmlwdApjb25zdCByb3V0ZXIgPSB7ICdHRVQgL2FwaS91c2Vycyc6IGhhbmRsZUdldFVzZXJzLCAnUE9TVCAvYXBpL3VzZXJzJzogaGFuZGxlQ3JlYXRlVXNlciB9OwoKY29uc3QgaGFuZGxlciA9IHJvdXRlcltgJHtyZXF1ZXN0Lm1ldGhvZH0gJHt1cmwucGF0aG5hbWV9YF07CnJldHVybiBoYW5kbGVyID8gaGFuZGxlcihyZXF1ZXN0LCBlbnYpIDogbmV3IFJlc3BvbnNlKCdOb3QgRm91bmQnLCB7IHN0YXR1czogNDA0IH0pOwpgYGAKCioqUHJvZHVjdGlvbioqOiBVc2UgSG9ubywgaXR0eS1yb3V0ZXIsIG9yIFdvcmt0b3AgKHNlZSBbZnJhbWV3b3Jrcy5tZF0oLi9mcmFtZXdvcmtzLm1kKSkKCiMjIFJlcXVlc3QgVmFsaWRhdGlvbiAoWm9kKQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyB6IH0gZnJvbSAnem9kJzsKCmNvbnN0IHVzZXJTY2hlbWEgPSB6Lm9iamVjdCh7CiAgbmFtZTogei5zdHJpbmcoKS5taW4oMSkubWF4KDEwMCksCiAgZW1haWw6IHouc3RyaW5nKCkuZW1haWwoKSwKICBhZ2U6IHoubnVtYmVyKCkuaW50KCkucG9zaXRpdmUoKS5vcHRpb25hbCgpLAp9KTsKCmFzeW5jIGZ1bmN0aW9uIGhhbmRsZUNyZWF0ZVVzZXIocmVxdWVzdDogUmVxdWVzdCkgewogIHRyeSB7CiAgICBjb25zdCBib2R5ID0gYXdhaXQgcmVxdWVzdC5qc29uKCk7CiAgICBjb25zdCB2YWxpZGF0ZWQgPSB1c2VyU2NoZW1hLnBhcnNlKGJvZHkpOyAgLy8gVGhyb3dzIG9uIGludmFsaWQgZGF0YQogICAgcmV0dXJuIG5ldyBSZXNwb25zZShKU09OLnN0cmluZ2lmeSh7IGlkOiAxLCAuLi52YWxpZGF0ZWQgfSksIHsKICAgICAgc3RhdHVzOiAyMDEsCiAgICAgIGhlYWRlcnM6IHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9LAogICAgfSk7CiAgfSBjYXRjaCAoZXJyKSB7CiAgICBpZiAoZXJyIGluc3RhbmNlb2Ygei5ab2RFcnJvcikgewogICAgICByZXR1cm4gbmV3IFJlc3BvbnNlKEpTT04uc3RyaW5naWZ5KHsgZXJyb3JzOiBlcnIuZXJyb3JzIH0pLCB7IHN0YXR1czogNDAwIH0pOwogICAgfQogICAgdGhyb3cgZXJyOwogIH0KfQpgYGAKCioqV2l0aCBIb25vKio6IFVzZSBgQGhvbm8vem9kLXZhbGlkYXRvcmAgZm9yIGF1dG9tYXRpYyB2YWxpZGF0aW9uIChzZWUgW2ZyYW1ld29ya3MubWRdKC4vZnJhbWV3b3Jrcy5tZCkpCgojIyBQZXJmb3JtYW5jZQoKYGBgdHlwZXNjcmlwdAovLyDinYwgU2VxdWVudGlhbApjb25zdCB1c2VyID0gYXdhaXQgZmV0Y2goJy9hcGkvdXNlci8xJyk7CmNvbnN0IHBvc3RzID0gYXdhaXQgZmV0Y2goJy9hcGkvcG9zdHM/dXNlcj0xJyk7CgovLyDinIUgUGFyYWxsZWwKY29uc3QgW3VzZXIsIHBvc3RzXSA9IGF3YWl0IFByb21pc2UuYWxsKFtmZXRjaCgnL2FwaS91c2VyLzEnKSwgZmV0Y2goJy9hcGkvcG9zdHM/dXNlcj0xJyldKTsKYGBgCgojIyBTdHJlYW1pbmcKCmBgYHR5cGVzY3JpcHQKY29uc3Qgc3RyZWFtID0gbmV3IFJlYWRhYmxlU3RyZWFtKHsKICBhc3luYyBzdGFydChjb250cm9sbGVyKSB7CiAgICBmb3IgKGxldCBpID0gMDsgaSA8IDEwMDA7IGkrKykgewogICAgICBjb250cm9sbGVyLmVucXVldWUobmV3IFRleHRFbmNvZGVyKCkuZW5jb2RlKGBJdGVtICR7aX1cbmApKTsKICAgICAgaWYgKGkgJSAxMDAgPT09IDApIGF3YWl0IG5ldyBQcm9taXNlKHIgPT4gc2V0VGltZW91dChyLCAwKSk7CiAgICB9CiAgICBjb250cm9sbGVyLmNsb3NlKCk7CiAgfQp9KTsKYGBgCgojIyBUcmFuc2Zvcm0gU3RyZWFtcwoKYGBgdHlwZXNjcmlwdApyZXNwb25zZS5ib2R5LnBpcGVUaHJvdWdoKG5ldyBUZXh0RGVjb2RlclN0cmVhbSgpKS5waXBlVGhyb3VnaCgKICBuZXcgVHJhbnNmb3JtU3RyZWFtKHsgdHJhbnNmb3JtKGNodW5rLCBjKSB7IGMuZW5xdWV1ZShjaHVuay50b1VwcGVyQ2FzZSgpKTsgfSB9KQopLnBpcGVUaHJvdWdoKG5ldyBUZXh0RW5jb2RlclN0cmVhbSgpKTsKYGBgCgojIyBUZXN0aW5nCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGRlc2NyaWJlLCBpdCwgZXhwZWN0IH0gZnJvbSAndml0ZXN0JzsKaW1wb3J0IHdvcmtlciBmcm9tICcuLi9zcmMvaW5kZXgnOwoKZGVzY3JpYmUoJ1dvcmtlcicsICgpID0+IHsKICBpdCgncmV0dXJucyAyMDAnLCBhc3luYyAoKSA9PiB7CiAgICBjb25zdCByZXEgPSBuZXcgUmVxdWVzdCgnaHR0cDovL2xvY2FsaG9zdC8nKTsKICAgIGNvbnN0IGVudiA9IHsgTVlfVkFSOiAndGVzdCcgfTsKICAgIGNvbnN0IGN0eCA9IHsgd2FpdFVudGlsOiAoKSA9PiB7fSwgcGFzc1Rocm91Z2hPbkV4Y2VwdGlvbjogKCkgPT4ge30gfTsKICAgIGV4cGVjdCgoYXdhaXQgd29ya2VyLmZldGNoKHJlcSwgZW52LCBjdHgpKS5zdGF0dXMpLnRvQmUoMjAwKTsKICB9KTsKfSk7CmBgYAoKIyMgRGVwbG95bWVudAoKYGBgYmFzaApucHggd3JhbmdsZXIgZGVwbG95ICAgICAgICAgICAgICAjIHByb2R1Y3Rpb24KbnB4IHdyYW5nbGVyIGRlcGxveSAtLWVudiBzdGFnaW5nCm5weCB3cmFuZ2xlciB2ZXJzaW9ucyB1cGxvYWQgLS1tZXNzYWdlICJBZGQgZmVhdHVyZSIKbnB4IHdyYW5nbGVyIHJvbGxiYWNrCmBgYAoKIyMgTW9uaXRvcmluZwoKYGBgdHlwZXNjcmlwdApjb25zdCBzdGFydCA9IERhdGUubm93KCk7CmNvbnN0IHJlc3BvbnNlID0gYXdhaXQgaGFuZGxlUmVxdWVzdChyZXF1ZXN0LCBlbnYpOwpjdHgud2FpdFVudGlsKGVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoewogIGRvdWJsZXM6IFtEYXRlLm5vdygpIC0gc3RhcnRdLCBibG9iczogW3JlcXVlc3QudXJsLCBTdHJpbmcocmVzcG9uc2Uuc3RhdHVzKV0KfSkpOwpgYGAKCiMjIFNlY3VyaXR5ICYgUmF0ZSBMaW1pdGluZwoKYGBgdHlwZXNjcmlwdAovLyBTZWN1cml0eSBoZWFkZXJzCmNvbnN0IHNlY3VyaXR5ID0geyAnWC1Db250ZW50LVR5cGUtT3B0aW9ucyc6ICdub3NuaWZmJywgJ1gtRnJhbWUtT3B0aW9ucyc6ICdERU5ZJyB9OwoKLy8gQXV0aApjb25zdCBhdXRoID0gcmVxdWVzdC5oZWFkZXJzLmdldCgnQXV0aG9yaXphdGlvbicpOwppZiAoIWF1dGg/LnN0YXJ0c1dpdGgoJ0JlYXJlciAnKSkgcmV0dXJuIG5ldyBSZXNwb25zZSgnVW5hdXRob3JpemVkJywgeyBzdGF0dXM6IDQwMSB9KTsKCi8vIEdyYWR1YWwgcm9sbG91dHMgKGRldGVybWluaXN0aWMgdXNlciBidWNrZXRpbmcpCmNvbnN0IGhhc2ggPSBhd2FpdCBjcnlwdG8uc3VidGxlLmRpZ2VzdCgnU0hBLTI1NicsIG5ldyBUZXh0RW5jb2RlcigpLmVuY29kZSh1c2VySWQpKTsKaWYgKG5ldyBVaW50OEFycmF5KGhhc2gpWzBdICUgMTAwIDwgcm9sbG91dFBlcmNlbnQpIHJldHVybiBuZXdGZWF0dXJlKHJlcXVlc3QpOwpgYGAKClJhdGUgbGltaXRpbmc6IFNlZSBbRHVyYWJsZSBPYmplY3RzXSguLi9kdXJhYmxlLW9iamVjdHMvUkVBRE1FLm1kKQoKIyMgUjIgTXVsdGlwYXJ0IFVwbG9hZAoKYGBgdHlwZXNjcmlwdAovLyBGb3IgZmlsZXMgPiAxMDBNQgpjb25zdCB1cGxvYWQgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmNyZWF0ZU11bHRpcGFydFVwbG9hZCgnbGFyZ2UtZmlsZS5iaW4nKTsKdHJ5IHsKICBjb25zdCBwYXJ0cyA9IFtdOwogIGZvciAobGV0IGkgPSAwOyBpIDwgY2h1bmtzLmxlbmd0aDsgaSsrKSB7CiAgICBwYXJ0cy5wdXNoKGF3YWl0IHVwbG9hZC51cGxvYWRQYXJ0KGkgKyAxLCBjaHVua3NbaV0pKTsKICB9CiAgYXdhaXQgdXBsb2FkLmNvbXBsZXRlKHBhcnRzKTsKfSBjYXRjaCAoZXJyKSB7IGF3YWl0IHVwbG9hZC5hYm9ydCgpOyB0aHJvdyBlcnI7IH0KYGBgCgpQYXJhbGxlbCB1cGxvYWRzLCByZXN1bWUgb24gZmFpbHVyZSwgaGFuZGxlIGZpbGVzID4gNUdCCgojIyBXb3JrZmxvd3MgKFN0ZXAgT3JjaGVzdHJhdGlvbikKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgV29ya2Zsb3dFbnRyeXBvaW50LCBXb3JrZmxvd1N0ZXAsIFdvcmtmbG93RXZlbnQgfSBmcm9tICdjbG91ZGZsYXJlOndvcmtlcnMnOwoKZXhwb3J0IGNsYXNzIE15V29ya2Zsb3cgZXh0ZW5kcyBXb3JrZmxvd0VudHJ5cG9pbnQgewogIGFzeW5jIHJ1bihldmVudDogV29ya2Zsb3dFdmVudDx7IHVzZXJJZDogc3RyaW5nIH0+LCBzdGVwOiBXb3JrZmxvd1N0ZXApIHsKICAgIGNvbnN0IHVzZXIgPSBhd2FpdCBzdGVwLmRvKCdmZXRjaC11c2VyJywgYXN5bmMgKCkgPT4gCiAgICAgIGZldGNoKGAvYXBpL3VzZXJzLyR7ZXZlbnQucGF5bG9hZC51c2VySWR9YCkudGhlbihyID0+IHIuanNvbigpKQogICAgKTsKICAgIGF3YWl0IHN0ZXAuc2xlZXAoJ3dhaXQnLCAnMSBob3VyJyk7CiAgICBhd2FpdCBzdGVwLmRvKCdub3RpZnknLCBhc3luYyAoKSA9PiBzZW5kRW1haWwodXNlci5lbWFpbCkpOwogIH0KfQpgYGAKCk11bHRpLXN0ZXAgam9icyB3aXRoIGF1dG9tYXRpYyByZXRyaWVzLCBzdGF0ZSBwZXJzaXN0ZW5jZSwgcmVzdW1lIGZyb20gZmFpbHVyZQoKIyMgU2VlIEFsc28KCi0gW0FQSV0oLi9hcGkubWQpIC0gUnVudGltZSBBUElzCi0gW0dvdGNoYXNdKC4vZ290Y2hhcy5tZCkgLSBDb21tb24gaXNzdWVzCi0gW0NvbmZpZ3VyYXRpb25dKC4vY29uZmlndXJhdGlvbi5tZCkgLSBTZXR1cAotIFtGcmFtZXdvcmtzXSguL2ZyYW1ld29ya3MubWQpIC0gSG9ubywgcm91dGluZywgdmFsaWRhdGlvbgo=
+# Workers Patterns
+
+## Error Handling
+
+```typescript
+class HTTPError extends Error {
+  constructor(public status: number, message: string) { super(message); }
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    try {
+      return await handleRequest(request, env);
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        return new Response(JSON.stringify({ error: error.message }), {
+          status: error.status, headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      return new Response('Internal Server Error', { status: 500 });
+    }
+  },
+};
+```
+
+## CORS
+
+```typescript
+const corsHeaders = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' };
+if (request.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
+```
+
+## Routing
+
+```typescript
+const router = { 'GET /api/users': handleGetUsers, 'POST /api/users': handleCreateUser };
+
+const handler = router[`${request.method} ${url.pathname}`];
+return handler ? handler(request, env) : new Response('Not Found', { status: 404 });
+```
+
+**Production**: Use Hono, itty-router, or Worktop (see [frameworks.md](./frameworks.md))
+
+## Request Validation (Zod)
+
+```typescript
+import { z } from 'zod';
+
+const userSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  age: z.number().int().positive().optional(),
+});
+
+async function handleCreateUser(request: Request) {
+  try {
+    const body = await request.json();
+    const validated = userSchema.parse(body);  // Throws on invalid data
+    return new Response(JSON.stringify({ id: 1, ...validated }), {
+      status: 201,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      return new Response(JSON.stringify({ errors: err.errors }), { status: 400 });
+    }
+    throw err;
+  }
+}
+```
+
+**With Hono**: Use `@hono/zod-validator` for automatic validation (see [frameworks.md](./frameworks.md))
+
+## Performance
+
+```typescript
+// ❌ Sequential
+const user = await fetch('/api/user/1');
+const posts = await fetch('/api/posts?user=1');
+
+// ✅ Parallel
+const [user, posts] = await Promise.all([fetch('/api/user/1'), fetch('/api/posts?user=1')]);
+```
+
+## Streaming
+
+```typescript
+const stream = new ReadableStream({
+  async start(controller) {
+    for (let i = 0; i < 1000; i++) {
+      controller.enqueue(new TextEncoder().encode(`Item ${i}\n`));
+      if (i % 100 === 0) await new Promise(r => setTimeout(r, 0));
+    }
+    controller.close();
+  }
+});
+```
+
+## Transform Streams
+
+```typescript
+response.body.pipeThrough(new TextDecoderStream()).pipeThrough(
+  new TransformStream({ transform(chunk, c) { c.enqueue(chunk.toUpperCase()); } })
+).pipeThrough(new TextEncoderStream());
+```
+
+## Testing
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import worker from '../src/index';
+
+describe('Worker', () => {
+  it('returns 200', async () => {
+    const req = new Request('http://localhost/');
+    const env = { MY_VAR: 'test' };
+    const ctx = { waitUntil: () => {}, passThroughOnException: () => {} };
+    expect((await worker.fetch(req, env, ctx)).status).toBe(200);
+  });
+});
+```
+
+## Deployment
+
+```bash
+npx wrangler deploy              # production
+npx wrangler deploy --env staging
+npx wrangler versions upload --message "Add feature"
+npx wrangler rollback
+```
+
+## Monitoring
+
+```typescript
+const start = Date.now();
+const response = await handleRequest(request, env);
+ctx.waitUntil(env.ANALYTICS.writeDataPoint({
+  doubles: [Date.now() - start], blobs: [request.url, String(response.status)]
+}));
+```
+
+## Security & Rate Limiting
+
+```typescript
+// Security headers
+const security = { 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY' };
+
+// Auth
+const auth = request.headers.get('Authorization');
+if (!auth?.startsWith('Bearer ')) return new Response('Unauthorized', { status: 401 });
+
+// Gradual rollouts (deterministic user bucketing)
+const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(userId));
+if (new Uint8Array(hash)[0] % 100 < rolloutPercent) return newFeature(request);
+```
+
+Rate limiting: See [Durable Objects](../durable-objects/README.md)
+
+## R2 Multipart Upload
+
+```typescript
+// For files > 100MB
+const upload = await env.MY_BUCKET.createMultipartUpload('large-file.bin');
+try {
+  const parts = [];
+  for (let i = 0; i < chunks.length; i++) {
+    parts.push(await upload.uploadPart(i + 1, chunks[i]));
+  }
+  await upload.complete(parts);
+} catch (err) { await upload.abort(); throw err; }
+```
+
+Parallel uploads, resume on failure, handle files > 5GB
+
+## Workflows (Step Orchestration)
+
+```typescript
+import { WorkflowEntrypoint, WorkflowStep, WorkflowEvent } from 'cloudflare:workers';
+
+export class MyWorkflow extends WorkflowEntrypoint {
+  async run(event: WorkflowEvent<{ userId: string }>, step: WorkflowStep) {
+    const user = await step.do('fetch-user', async () => 
+      fetch(`/api/users/${event.payload.userId}`).then(r => r.json())
+    );
+    await step.sleep('wait', '1 hour');
+    await step.do('notify', async () => sendEmail(user.email));
+  }
+}
+```
+
+Multi-step jobs with automatic retries, state persistence, resume from failure
+
+## See Also
+
+- [API](./api.md) - Runtime APIs
+- [Gotchas](./gotchas.md) - Common issues
+- [Configuration](./configuration.md) - Setup
+- [Frameworks](./frameworks.md) - Hono, routing, validation

@@ -1,1 +1,213 @@
-IyBUVVJOIEltcGxlbWVudGF0aW9uIFBhdHRlcm5zCgpQcm9kdWN0aW9uLXJlYWR5IHBhdHRlcm5zIGZvciBpbXBsZW1lbnRpbmcgQ2xvdWRmbGFyZSBUVVJOIGluIFdlYlJUQyBhcHBsaWNhdGlvbnMuCgojIyBQcmVyZXF1aXNpdGVzCgpCZWZvcmUgaW1wbGVtZW50aW5nIHRoZXNlIHBhdHRlcm5zLCBlbnN1cmUgeW91IGhhdmU6Ci0gVFVSTiBrZXkgY3JlYXRlZDogc2VlIFthcGkubWQjY3JlYXRlLXR1cm4ta2V5XSguL2FwaS5tZCNjcmVhdGUtdHVybi1rZXkpCi0gV29ya2VyIGNvbmZpZ3VyZWQ6IHNlZSBbY29uZmlndXJhdGlvbi5tZCNjbG91ZGZsYXJlLXdvcmtlci1pbnRlZ3JhdGlvbl0oLi9jb25maWd1cmF0aW9uLm1kI2Nsb3VkZmxhcmUtd29ya2VyLWludGVncmF0aW9uKQoKIyMgQmFzaWMgVFVSTiBDb25maWd1cmF0aW9uIChCcm93c2VyKQoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgUlRDSWNlU2VydmVyIHsKICB1cmxzOiBzdHJpbmcgfCBzdHJpbmdbXTsKICB1c2VybmFtZT86IHN0cmluZzsKICBjcmVkZW50aWFsPzogc3RyaW5nOwogIGNyZWRlbnRpYWxUeXBlPzogInBhc3N3b3JkIiB8ICJvYXV0aCI7Cn0KCmFzeW5jIGZ1bmN0aW9uIGdldFRVUk5Db25maWcoKTogUHJvbWlzZTxSVENJY2VTZXJ2ZXJbXT4gewogIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goJy9hcGkvdHVybi1jcmVkZW50aWFscycpOwogIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5qc29uKCk7CiAgCiAgcmV0dXJuIFsKICAgIHsKICAgICAgdXJsczogJ3N0dW46c3R1bi5jbG91ZGZsYXJlLmNvbTozNDc4JwogICAgfSwKICAgIHsKICAgICAgdXJsczogWwogICAgICAgICd0dXJuOnR1cm4uY2xvdWRmbGFyZS5jb206MzQ3OD90cmFuc3BvcnQ9dWRwJywKICAgICAgICAndHVybjp0dXJuLmNsb3VkZmxhcmUuY29tOjM0Nzg/dHJhbnNwb3J0PXRjcCcsCiAgICAgICAgJ3R1cm5zOnR1cm4uY2xvdWRmbGFyZS5jb206NTM0OT90cmFuc3BvcnQ9dGNwJywKICAgICAgICAndHVybnM6dHVybi5jbG91ZGZsYXJlLmNvbTo0NDM/dHJhbnNwb3J0PXRjcCcKICAgICAgXSwKICAgICAgdXNlcm5hbWU6IGRhdGEudXNlcm5hbWUsCiAgICAgIGNyZWRlbnRpYWw6IGRhdGEuY3JlZGVudGlhbCwKICAgICAgY3JlZGVudGlhbFR5cGU6ICdwYXNzd29yZCcKICAgIH0KICBdOwp9CgovLyBVc2UgaW4gUlRDUGVlckNvbm5lY3Rpb24KY29uc3QgaWNlU2VydmVycyA9IGF3YWl0IGdldFRVUk5Db25maWcoKTsKY29uc3QgcGVlckNvbm5lY3Rpb24gPSBuZXcgUlRDUGVlckNvbm5lY3Rpb24oeyBpY2VTZXJ2ZXJzIH0pOwpgYGAKCiMjIFBvcnQgU2VsZWN0aW9uIFN0cmF0ZWd5CgpSZWNvbW1lbmRlZCBvcmRlciBmb3IgYnJvd3NlciBjbGllbnRzOgoKMS4gKiozNDc4L3VkcCoqIChwcmltYXJ5LCBsb3dlc3QgbGF0ZW5jeSkKMi4gKiozNDc4L3RjcCoqIChmYWxsYmFjayBmb3IgVURQLWJsb2NrZWQgbmV0d29ya3MpCjMuICoqNTM0OS90bHMqKiAoY29ycG9yYXRlIGZpcmV3YWxscywgbW9zdCByZWxpYWJsZSkKNC4gKio0NDMvdGxzKiogKGFsdGVybmF0ZSBUTFMgcG9ydCwgZmlyZXdhbGwtZnJpZW5kbHkpCgoqKkF2b2lkIHBvcnQgNTMqKuKAlGJsb2NrZWQgYnkgQ2hyb21lIGFuZCBGaXJlZm94LgoKYGBgdHlwZXNjcmlwdApmdW5jdGlvbiBmaWx0ZXJJQ0VTZXJ2ZXJzRm9yQnJvd3Nlcih1cmxzOiBzdHJpbmdbXSk6IHN0cmluZ1tdIHsKICByZXR1cm4gdXJscwogICAgLmZpbHRlcih1cmwgPT4gIXVybC5pbmNsdWRlcygnOjUzJykpICAvLyBSZW1vdmUgcG9ydCA1MwogICAgLnNvcnQoKGEsIGIpID0+IHsKICAgICAgLy8gUHJpb3JpdGl6ZSBVRFAgb3ZlciBUQ1Agb3ZlciBUTFMKICAgICAgaWYgKGEuaW5jbHVkZXMoJ3RyYW5zcG9ydD11ZHAnKSkgcmV0dXJuIC0xOwogICAgICBpZiAoYi5pbmNsdWRlcygndHJhbnNwb3J0PXVkcCcpKSByZXR1cm4gMTsKICAgICAgaWYgKGEuaW5jbHVkZXMoJ3RyYW5zcG9ydD10Y3AnKSAmJiAhYS5zdGFydHNXaXRoKCd0dXJuczonKSkgcmV0dXJuIC0xOwogICAgICBpZiAoYi5pbmNsdWRlcygndHJhbnNwb3J0PXRjcCcpICYmICFiLnN0YXJ0c1dpdGgoJ3R1cm5zOicpKSByZXR1cm4gMTsKICAgICAgcmV0dXJuIDA7CiAgICB9KTsKfQpgYGAKCiMjIENyZWRlbnRpYWwgUmVmcmVzaCAoTWlkLVNlc3Npb24pCgpXaGVuIGNyZWRlbnRpYWxzIGV4cGlyZSBkdXJpbmcgbG9uZyBjYWxsczoKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gcmVmcmVzaFRVUk5DcmVkZW50aWFscyhwYzogUlRDUGVlckNvbm5lY3Rpb24pOiBQcm9taXNlPHZvaWQ+IHsKICBjb25zdCBuZXdDcmVkcyA9IGF3YWl0IGZldGNoKCcvdHVybi1jcmVkZW50aWFscycpLnRoZW4ociA9PiByLmpzb24oKSk7CiAgY29uc3QgY29uZmlnID0gcGMuZ2V0Q29uZmlndXJhdGlvbigpOwogIGNvbmZpZy5pY2VTZXJ2ZXJzID0gbmV3Q3JlZHMuaWNlU2VydmVyczsKICBwYy5zZXRDb25maWd1cmF0aW9uKGNvbmZpZyk7CiAgLy8gTm90ZTogc2V0Q29uZmlndXJhdGlvbigpIGRvZXMgTk9UIHRyaWdnZXIgSUNFIHJlc3RhcnQKICAvLyBDb21iaW5lIHdpdGggcmVzdGFydEljZSgpIGlmIGNvbm5lY3Rpb24gZmFpbHMKfQoKLy8gQXV0by1yZWZyZXNoIGJlZm9yZSBleHBpcnkKc2V0SW50ZXJ2YWwoYXN5bmMgKCkgPT4gewogIGF3YWl0IHJlZnJlc2hUVVJOQ3JlZGVudGlhbHMocGVlckNvbm5lY3Rpb24pOwp9LCAzMDAwMDAwKTsgIC8vIDUwIG1pbnV0ZXMgaWYgVFRMIGlzIDEgaG91cgpgYGAKCiMjIElDRSBSZXN0YXJ0IFBhdHRlcm4KCkFmdGVyIG5ldHdvcmsgY2hhbmdlLCBUVVJOIHNlcnZlciBtYWludGVuYW5jZSwgb3IgY3JlZGVudGlhbCBleHBpcnk6CgpgYGB0eXBlc2NyaXB0CnBjLmFkZEV2ZW50TGlzdGVuZXIoJ2ljZWNvbm5lY3Rpb25zdGF0ZWNoYW5nZScsIGFzeW5jICgpID0+IHsKICBpZiAocGMuaWNlQ29ubmVjdGlvblN0YXRlID09PSAnZmFpbGVkJykgewogICAgY29uc29sZS53YXJuKCdJQ0UgY29ubmVjdGlvbiBmYWlsZWQsIHJlc3RhcnRpbmcuLi4nKTsKICAgIAogICAgLy8gUmVmcmVzaCBjcmVkZW50aWFscwogICAgYXdhaXQgcmVmcmVzaFRVUk5DcmVkZW50aWFscyhwYyk7CiAgICAKICAgIC8vIFRyaWdnZXIgSUNFIHJlc3RhcnQKICAgIHBjLnJlc3RhcnRJY2UoKTsKICAgIGNvbnN0IG9mZmVyID0gYXdhaXQgcGMuY3JlYXRlT2ZmZXIoeyBpY2VSZXN0YXJ0OiB0cnVlIH0pOwogICAgYXdhaXQgcGMuc2V0TG9jYWxEZXNjcmlwdGlvbihvZmZlcik7CiAgICAKICAgIC8vIFNlbmQgb2ZmZXIgdG8gcGVlciB2aWEgc2lnbmFsaW5nIGNoYW5uZWwuLi4KICB9Cn0pOwpgYGAKCiMjIENyZWRlbnRpYWxzIENhY2hpbmcgUGF0dGVybgoKYGBgdHlwZXNjcmlwdApjbGFzcyBUVVJOQ3JlZGVudGlhbHNNYW5hZ2VyIHsKICBwcml2YXRlIGNyZWRzOiB7IHVzZXJuYW1lOiBzdHJpbmc7IGNyZWRlbnRpYWw6IHN0cmluZzsgdXJsczogc3RyaW5nW107IGV4cGlyZXNBdDogbnVtYmVyOyB9IHwgbnVsbCA9IG51bGw7CgogIGFzeW5jIGdldENyZWRlbnRpYWxzKGtleUlkOiBzdHJpbmcsIGtleVNlY3JldDogc3RyaW5nKTogUHJvbWlzZTxSVENJY2VTZXJ2ZXJbXT4gewogICAgY29uc3Qgbm93ID0gRGF0ZS5ub3coKTsKICAgIAogICAgaWYgKHRoaXMuY3JlZHMgJiYgdGhpcy5jcmVkcy5leHBpcmVzQXQgPiBub3cpIHsKICAgICAgcmV0dXJuIHRoaXMuYnVpbGRJY2VTZXJ2ZXJzKHRoaXMuY3JlZHMpOwogICAgfQoKICAgIGNvbnN0IHR0bCA9IDM2MDA7CiAgICBpZiAodHRsID4gMTcyODAwKSB0aHJvdyBuZXcgRXJyb3IoJ1RUTCBtYXggNDhocnMnKTsKCiAgICBjb25zdCByZXMgPSBhd2FpdCBmZXRjaCgKICAgICAgYGh0dHBzOi8vcnRjLmxpdmUuY2xvdWRmbGFyZS5jb20vdjEvdHVybi9rZXlzLyR7a2V5SWR9L2NyZWRlbnRpYWxzL2dlbmVyYXRlYCwKICAgICAgewogICAgICAgIG1ldGhvZDogJ1BPU1QnLAogICAgICAgIGhlYWRlcnM6IHsgJ0F1dGhvcml6YXRpb24nOiBgQmVhcmVyICR7a2V5U2VjcmV0fWAsICdDb250ZW50LVR5cGUnOiAnYXBwbGljYXRpb24vanNvbicgfSwKICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IHR0bCB9KQogICAgICB9CiAgICApOwoKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXMuanNvbigpOwogICAgY29uc3QgZmlsdGVyZWRVcmxzID0gZGF0YS5pY2VTZXJ2ZXJzLnVybHMuZmlsdGVyKCh1cmw6IHN0cmluZykgPT4gIXVybC5pbmNsdWRlcygnOjUzJykpOwoKICAgIHRoaXMuY3JlZHMgPSB7CiAgICAgIHVzZXJuYW1lOiBkYXRhLmljZVNlcnZlcnMudXNlcm5hbWUsCiAgICAgIGNyZWRlbnRpYWw6IGRhdGEuaWNlU2VydmVycy5jcmVkZW50aWFsLAogICAgICB1cmxzOiBmaWx0ZXJlZFVybHMsCiAgICAgIGV4cGlyZXNBdDogbm93ICsgKHR0bCAqIDEwMDApIC0gNjAwMDAKICAgIH07CgogICAgcmV0dXJuIHRoaXMuYnVpbGRJY2VTZXJ2ZXJzKHRoaXMuY3JlZHMpOwogIH0KCiAgcHJpdmF0ZSBidWlsZEljZVNlcnZlcnMoYzogeyB1c2VybmFtZTogc3RyaW5nOyBjcmVkZW50aWFsOiBzdHJpbmc7IHVybHM6IHN0cmluZ1tdIH0pOiBSVENJY2VTZXJ2ZXJbXSB7CiAgICByZXR1cm4gWwogICAgICB7IHVybHM6ICdzdHVuOnN0dW4uY2xvdWRmbGFyZS5jb206MzQ3OCcgfSwKICAgICAgeyB1cmxzOiBjLnVybHMsIHVzZXJuYW1lOiBjLnVzZXJuYW1lLCBjcmVkZW50aWFsOiBjLmNyZWRlbnRpYWwsIGNyZWRlbnRpYWxUeXBlOiAncGFzc3dvcmQnIGFzIGNvbnN0IH0KICAgIF07CiAgfQp9CmBgYAoKIyMgQ29tbW9uIFVzZSBDYXNlcwoKYGBgdHlwZXNjcmlwdAovLyBWaWRlbyBjb25mZXJlbmNpbmc6IFRVUk4gYXMgZmFsbGJhY2sKY29uc3QgY29uZmlnID0geyBpY2VTZXJ2ZXJzOiBhd2FpdCBnZXRUVVJOQ29uZmlnKCksIGljZVRyYW5zcG9ydFBvbGljeTogJ2FsbCcgfTsKCi8vIElvVC9wcmVkaWN0YWJsZSBjb25uZWN0aXZpdHk6IGZvcmNlIFRVUk4KY29uc3QgY29uZmlnID0geyBpY2VTZXJ2ZXJzOiBhd2FpdCBnZXRUVVJOQ29uZmlnKCksIGljZVRyYW5zcG9ydFBvbGljeTogJ3JlbGF5JyB9OwoKLy8gU2NyZWVuIHNoYXJpbmc6IHJlZHVjZSBvdmVyaGVhZApjb25zdCBwYyA9IG5ldyBSVENQZWVyQ29ubmVjdGlvbih7IGljZVNlcnZlcnM6IGF3YWl0IGdldFRVUk5Db25maWcoKSwgYnVuZGxlUG9saWN5OiAnbWF4LWJ1bmRsZScgfSk7CmBgYAoKIyMgSW50ZWdyYXRpb24gd2l0aCBDbG91ZGZsYXJlIENhbGxzIFNGVQoKYGBgdHlwZXNjcmlwdAovLyBUVVJOIGlzIGF1dG9tYXRpY2FsbHkgdXNlZCB3aGVuIG5lZWRlZAovLyBDbG91ZGZsYXJlIENhbGxzIGhhbmRsZXMgVFVSTiArIFNGVSBjb29yZGluYXRpb24KY29uc3Qgc2Vzc2lvbiA9IGF3YWl0IGNhbGxzQ2xpZW50LmNyZWF0ZVNlc3Npb24oewogIGFwcElkOiAneW91ci1hcHAtaWQnLAogIHNlc3Npb25JZDogJ21lZXRpbmctMTIzJwp9KTsKYGBgCgojIyBEZWJ1Z2dpbmcgSUNFIENvbm5lY3Rpdml0eQoKYGBgdHlwZXNjcmlwdApwYy5hZGRFdmVudExpc3RlbmVyKCdpY2VjYW5kaWRhdGUnLCAoZXZlbnQpID0+IHsKICBpZiAoZXZlbnQuY2FuZGlkYXRlKSB7CiAgICBjb25zb2xlLmxvZygnSUNFIGNhbmRpZGF0ZTonLCBldmVudC5jYW5kaWRhdGUudHlwZSwgZXZlbnQuY2FuZGlkYXRlLnByb3RvY29sKTsKICB9Cn0pOwoKcGMuYWRkRXZlbnRMaXN0ZW5lcignaWNlY29ubmVjdGlvbnN0YXRlY2hhbmdlJywgKCkgPT4gewogIGNvbnNvbGUubG9nKCdJQ0Ugc3RhdGU6JywgcGMuaWNlQ29ubmVjdGlvblN0YXRlKTsKfSk7CgovLyBDaGVjayBzZWxlY3RlZCBjYW5kaWRhdGUgcGFpcgpjb25zdCBzdGF0cyA9IGF3YWl0IHBjLmdldFN0YXRzKCk7CnN0YXRzLmZvckVhY2gocmVwb3J0ID0+IHsKICBpZiAocmVwb3J0LnR5cGUgPT09ICdjYW5kaWRhdGUtcGFpcicgJiYgcmVwb3J0LnNlbGVjdGVkKSB7CiAgICBjb25zb2xlLmxvZygnU2VsZWN0ZWQ6JywgcmVwb3J0KTsKICB9Cn0pOwpgYGAKCiMjIFNlZSBBbHNvCgotIFthcGkubWRdKC4vYXBpLm1kKSAtIENyZWRlbnRpYWwgZ2VuZXJhdGlvbiBBUEksIHR5cGVzCi0gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBXb3JrZXIgc2V0dXAsIGVudmlyb25tZW50IHZhcmlhYmxlcwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gQ29tbW9uIG1pc3Rha2VzLCB0cm91Ymxlc2hvb3RpbmcK
+# TURN Implementation Patterns
+
+Production-ready patterns for implementing Cloudflare TURN in WebRTC applications.
+
+## Prerequisites
+
+Before implementing these patterns, ensure you have:
+- TURN key created: see [api.md#create-turn-key](./api.md#create-turn-key)
+- Worker configured: see [configuration.md#cloudflare-worker-integration](./configuration.md#cloudflare-worker-integration)
+
+## Basic TURN Configuration (Browser)
+
+```typescript
+interface RTCIceServer {
+  urls: string | string[];
+  username?: string;
+  credential?: string;
+  credentialType?: "password" | "oauth";
+}
+
+async function getTURNConfig(): Promise<RTCIceServer[]> {
+  const response = await fetch('/api/turn-credentials');
+  const data = await response.json();
+  
+  return [
+    {
+      urls: 'stun:stun.cloudflare.com:3478'
+    },
+    {
+      urls: [
+        'turn:turn.cloudflare.com:3478?transport=udp',
+        'turn:turn.cloudflare.com:3478?transport=tcp',
+        'turns:turn.cloudflare.com:5349?transport=tcp',
+        'turns:turn.cloudflare.com:443?transport=tcp'
+      ],
+      username: data.username,
+      credential: data.credential,
+      credentialType: 'password'
+    }
+  ];
+}
+
+// Use in RTCPeerConnection
+const iceServers = await getTURNConfig();
+const peerConnection = new RTCPeerConnection({ iceServers });
+```
+
+## Port Selection Strategy
+
+Recommended order for browser clients:
+
+1. **3478/udp** (primary, lowest latency)
+2. **3478/tcp** (fallback for UDP-blocked networks)
+3. **5349/tls** (corporate firewalls, most reliable)
+4. **443/tls** (alternate TLS port, firewall-friendly)
+
+**Avoid port 53**—blocked by Chrome and Firefox.
+
+```typescript
+function filterICEServersForBrowser(urls: string[]): string[] {
+  return urls
+    .filter(url => !url.includes(':53'))  // Remove port 53
+    .sort((a, b) => {
+      // Prioritize UDP over TCP over TLS
+      if (a.includes('transport=udp')) return -1;
+      if (b.includes('transport=udp')) return 1;
+      if (a.includes('transport=tcp') && !a.startsWith('turns:')) return -1;
+      if (b.includes('transport=tcp') && !b.startsWith('turns:')) return 1;
+      return 0;
+    });
+}
+```
+
+## Credential Refresh (Mid-Session)
+
+When credentials expire during long calls:
+
+```typescript
+async function refreshTURNCredentials(pc: RTCPeerConnection): Promise<void> {
+  const newCreds = await fetch('/turn-credentials').then(r => r.json());
+  const config = pc.getConfiguration();
+  config.iceServers = newCreds.iceServers;
+  pc.setConfiguration(config);
+  // Note: setConfiguration() does NOT trigger ICE restart
+  // Combine with restartIce() if connection fails
+}
+
+// Auto-refresh before expiry
+setInterval(async () => {
+  await refreshTURNCredentials(peerConnection);
+}, 3000000);  // 50 minutes if TTL is 1 hour
+```
+
+## ICE Restart Pattern
+
+After network change, TURN server maintenance, or credential expiry:
+
+```typescript
+pc.addEventListener('iceconnectionstatechange', async () => {
+  if (pc.iceConnectionState === 'failed') {
+    console.warn('ICE connection failed, restarting...');
+    
+    // Refresh credentials
+    await refreshTURNCredentials(pc);
+    
+    // Trigger ICE restart
+    pc.restartIce();
+    const offer = await pc.createOffer({ iceRestart: true });
+    await pc.setLocalDescription(offer);
+    
+    // Send offer to peer via signaling channel...
+  }
+});
+```
+
+## Credentials Caching Pattern
+
+```typescript
+class TURNCredentialsManager {
+  private creds: { username: string; credential: string; urls: string[]; expiresAt: number; } | null = null;
+
+  async getCredentials(keyId: string, keySecret: string): Promise<RTCIceServer[]> {
+    const now = Date.now();
+    
+    if (this.creds && this.creds.expiresAt > now) {
+      return this.buildIceServers(this.creds);
+    }
+
+    const ttl = 3600;
+    if (ttl > 172800) throw new Error('TTL max 48hrs');
+
+    const res = await fetch(
+      `https://rtc.live.cloudflare.com/v1/turn/keys/${keyId}/credentials/generate`,
+      {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${keySecret}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ttl })
+      }
+    );
+
+    const data = await res.json();
+    const filteredUrls = data.iceServers.urls.filter((url: string) => !url.includes(':53'));
+
+    this.creds = {
+      username: data.iceServers.username,
+      credential: data.iceServers.credential,
+      urls: filteredUrls,
+      expiresAt: now + (ttl * 1000) - 60000
+    };
+
+    return this.buildIceServers(this.creds);
+  }
+
+  private buildIceServers(c: { username: string; credential: string; urls: string[] }): RTCIceServer[] {
+    return [
+      { urls: 'stun:stun.cloudflare.com:3478' },
+      { urls: c.urls, username: c.username, credential: c.credential, credentialType: 'password' as const }
+    ];
+  }
+}
+```
+
+## Common Use Cases
+
+```typescript
+// Video conferencing: TURN as fallback
+const config = { iceServers: await getTURNConfig(), iceTransportPolicy: 'all' };
+
+// IoT/predictable connectivity: force TURN
+const config = { iceServers: await getTURNConfig(), iceTransportPolicy: 'relay' };
+
+// Screen sharing: reduce overhead
+const pc = new RTCPeerConnection({ iceServers: await getTURNConfig(), bundlePolicy: 'max-bundle' });
+```
+
+## Integration with Cloudflare Calls SFU
+
+```typescript
+// TURN is automatically used when needed
+// Cloudflare Calls handles TURN + SFU coordination
+const session = await callsClient.createSession({
+  appId: 'your-app-id',
+  sessionId: 'meeting-123'
+});
+```
+
+## Debugging ICE Connectivity
+
+```typescript
+pc.addEventListener('icecandidate', (event) => {
+  if (event.candidate) {
+    console.log('ICE candidate:', event.candidate.type, event.candidate.protocol);
+  }
+});
+
+pc.addEventListener('iceconnectionstatechange', () => {
+  console.log('ICE state:', pc.iceConnectionState);
+});
+
+// Check selected candidate pair
+const stats = await pc.getStats();
+stats.forEach(report => {
+  if (report.type === 'candidate-pair' && report.selected) {
+    console.log('Selected:', report);
+  }
+});
+```
+
+## See Also
+
+- [api.md](./api.md) - Credential generation API, types
+- [configuration.md](./configuration.md) - Worker setup, environment variables
+- [gotchas.md](./gotchas.md) - Common mistakes, troubleshooting

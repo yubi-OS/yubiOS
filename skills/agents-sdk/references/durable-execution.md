@@ -1,1 +1,51 @@
-IyBEdXJhYmxlIEV4ZWN1dGlvbgoKRmV0Y2ggaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FnZW50cy9hcGktcmVmZXJlbmNlL2R1cmFibGUtZXhlY3V0aW9uLyBmb3IgY29tcGxldGUgZG9jdW1lbnRhdGlvbi4KCkZpYmVycyBsZXQgYWdlbnQgd29yayBzdXJ2aXZlIER1cmFibGUgT2JqZWN0IGV2aWN0aW9uLiBQcm9ncmVzcyBpcyBjaGVja3BvaW50ZWQgdG8gU1FMaXRlOyBvbiByZWNvdmVyeSwgeW91IGRlY2lkZSB3aGF0IHRvIGRvLgoKIyMgYHJ1bkZpYmVyYAoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgTXlBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBhc3luYyBvblJlcXVlc3QocmVxdWVzdDogUmVxdWVzdCkgewogICAgYXdhaXQgdGhpcy5ydW5GaWJlcigicHJvY2Vzcy1kYXRhIiwgYXN5bmMgKGN0eCkgPT4gewogICAgICBjb25zdCBzdGVwMSA9IGF3YWl0IGZldGNoRGF0YSgpOwogICAgICBjdHguc3Rhc2goeyBzdGVwOiAxLCBkYXRhOiBzdGVwMSB9KTsKCiAgICAgIGNvbnN0IHN0ZXAyID0gYXdhaXQgdHJhbnNmb3JtKHN0ZXAxKTsKICAgICAgY3R4LnN0YXNoKHsgc3RlcDogMiwgcmVzdWx0OiBzdGVwMiB9KTsKCiAgICAgIHRoaXMuc2V0U3RhdGUoeyByZXN1bHQ6IHN0ZXAyIH0pOwogICAgfSk7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJTdGFydGVkIik7CiAgfQoKICBhc3luYyBvbkZpYmVyUmVjb3ZlcmVkKGN0eCkgewogICAgY29uc3QgY2hlY2twb2ludCA9IGN0eC5zdGFzaDsKICAgIGlmIChjaGVja3BvaW50LnN0ZXAgPT09IDEpIHsKICAgICAgY29uc3Qgc3RlcDIgPSBhd2FpdCB0cmFuc2Zvcm0oY2hlY2twb2ludC5kYXRhKTsKICAgICAgdGhpcy5zZXRTdGF0ZSh7IHJlc3VsdDogc3RlcDIgfSk7CiAgICB9CiAgfQp9CmBgYAoKIyMgS2V5IEFQSXMKCnwgQVBJIHwgUHVycG9zZSB8CnwtLS0tLXwtLS0tLS0tLS18CnwgYHRoaXMucnVuRmliZXIobmFtZSwgZm4pYCB8IFN0YXJ0IGEgbmFtZWQgZmliZXIgfAp8IGBjdHguc3Rhc2hgIC8gYHRoaXMuc3Rhc2hgIHwgUmVhZCBsYXRlc3QgY2hlY2twb2ludCB8CnwgYGN0eC5zdGFzaCA9IGRhdGFgIHwgV3JpdGUgY2hlY2twb2ludCAoSlNPTi1zZXJpYWxpemFibGUpIHwKfCBgb25GaWJlclJlY292ZXJlZChjdHgpYCB8IENhbGxlZCBvbiBETyByZXN0YXJ0IGlmIGZpYmVyIHdhcyBpbi1mbGlnaHQgfAp8IGBrZWVwQWxpdmUoKWAgfCBQcmV2ZW50IGhpYmVybmF0aW9uIHdoaWxlIGZpYmVyIHJ1bnMgfAp8IGBrZWVwQWxpdmVXaGlsZShmbilgIHwgS2VlcCBhbGl2ZSBmb3IgZHVyYXRpb24gb2YgYXN5bmMgZnVuY3Rpb24gfAoKIyMgSW1wb3J0YW50CgotIGBzdGFzaGAgcmVwbGFjZXMgdGhlIGVudGlyZSBjaGVja3BvaW50IOKAlCBub3QgYSBtZXJnZQotIFRoZSBsYW1iZGEgaXMgTk9UIHJlc3RvcmVkIG9uIHJlY292ZXJ5IOKAlCBvbmx5IHRoZSBzdGFzaCBkYXRhIGlzLiBZb3UgbXVzdCByZS1kZXJpdmUgd2hhdCB0byBkbyBpbiBgb25GaWJlclJlY292ZXJlZGAKLSBObyBhdXRvLXJldHJ5IG9uIHRocm93IOKAlCBoYW5kbGUgZXJyb3JzIHlvdXJzZWxmCi0gRm9yIGxvbmctcnVubmluZyBwaXBlbGluZXMgd2l0aCBhdXRvbWF0aWMgcmV0cmllcywgdXNlIFdvcmtmbG93cyBpbnN0ZWFkCi0gRmlsdGVyIGNvbmN1cnJlbnQgZmliZXJzIGJ5IGBjdHgubmFtZWAgaW4gYG9uRmliZXJSZWNvdmVyZWRgCg==
+# Durable Execution
+
+Fetch https://developers.cloudflare.com/agents/api-reference/durable-execution/ for complete documentation.
+
+Fibers let agent work survive Durable Object eviction. Progress is checkpointed to SQLite; on recovery, you decide what to do.
+
+## `runFiber`
+
+```typescript
+export class MyAgent extends Agent<Env, State> {
+  async onRequest(request: Request) {
+    await this.runFiber("process-data", async (ctx) => {
+      const step1 = await fetchData();
+      ctx.stash({ step: 1, data: step1 });
+
+      const step2 = await transform(step1);
+      ctx.stash({ step: 2, result: step2 });
+
+      this.setState({ result: step2 });
+    });
+    return new Response("Started");
+  }
+
+  async onFiberRecovered(ctx) {
+    const checkpoint = ctx.stash;
+    if (checkpoint.step === 1) {
+      const step2 = await transform(checkpoint.data);
+      this.setState({ result: step2 });
+    }
+  }
+}
+```
+
+## Key APIs
+
+| API | Purpose |
+|-----|---------|
+| `this.runFiber(name, fn)` | Start a named fiber |
+| `ctx.stash` / `this.stash` | Read latest checkpoint |
+| `ctx.stash = data` | Write checkpoint (JSON-serializable) |
+| `onFiberRecovered(ctx)` | Called on DO restart if fiber was in-flight |
+| `keepAlive()` | Prevent hibernation while fiber runs |
+| `keepAliveWhile(fn)` | Keep alive for duration of async function |
+
+## Important
+
+- `stash` replaces the entire checkpoint — not a merge
+- The lambda is NOT restored on recovery — only the stash data is. You must re-derive what to do in `onFiberRecovered`
+- No auto-retry on throw — handle errors yourself
+- For long-running pipelines with automatic retries, use Workflows instead
+- Filter concurrent fibers by `ctx.name` in `onFiberRecovered`

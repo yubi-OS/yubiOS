@@ -1,1 +1,185 @@
-IyBDbG91ZGZsYXJlIER1cmFibGUgT2JqZWN0cwoKRXhwZXJ0IGd1aWRhbmNlIGZvciBidWlsZGluZyBzdGF0ZWZ1bCBhcHBsaWNhdGlvbnMgd2l0aCBDbG91ZGZsYXJlIER1cmFibGUgT2JqZWN0cy4KCiMjIFJlYWRpbmcgT3JkZXIKCjEuICoqRmlyc3QgdGltZT8qKiBSZWFkIHRoaXMgb3ZlcnZpZXcgKyBRdWljayBTdGFydAoyLiAqKlNldHRpbmcgdXA/KiogU2VlIFtDb25maWd1cmF0aW9uXSguL2NvbmZpZ3VyYXRpb24ubWQpCjMuICoqQnVpbGRpbmcgZmVhdHVyZXM/KiogVXNlIGRlY2lzaW9uIHRyZWVzIGJlbG93IOKGkiBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpCjQuICoqRGVidWdnaW5nIGlzc3Vlcz8qKiBDaGVjayBbR290Y2hhc10oLi9nb3RjaGFzLm1kKQo1LiAqKkRlZXAgZGl2ZT8qKiBbQVBJXSguL2FwaS5tZCkgYW5kIFtETyBTdG9yYWdlXSguLi9kby1zdG9yYWdlL1JFQURNRS5tZCkKCiMjIE92ZXJ2aWV3CgpEdXJhYmxlIE9iamVjdHMgY29tYmluZSBjb21wdXRlIHdpdGggc3RvcmFnZSBpbiBnbG9iYWxseS11bmlxdWUsIHN0cm9uZ2x5LWNvbnNpc3RlbnQgcGFja2FnZXM6Ci0gKipHbG9iYWxseSB1bmlxdWUgaW5zdGFuY2VzKio6IEVhY2ggRE8gaGFzIHVuaXF1ZSBJRCBmb3IgbXVsdGktY2xpZW50IGNvb3JkaW5hdGlvbgotICoqQ28tbG9jYXRlZCBzdG9yYWdlKio6IEZhc3QsIHN0cm9uZ2x5LWNvbnNpc3RlbnQgc3RvcmFnZSB3aXRoIGNvbXB1dGUKLSAqKkF1dG9tYXRpYyBwbGFjZW1lbnQqKjogT2JqZWN0cyBzcGF3biBuZWFyIGZpcnN0IHJlcXVlc3QgbG9jYXRpb24KLSAqKlN0YXRlZnVsIHNlcnZlcmxlc3MqKjogSW4tbWVtb3J5IHN0YXRlICsgcGVyc2lzdGVudCBzdG9yYWdlCi0gKipTaW5nbGUtdGhyZWFkZWQqKjogU2VyaWFsIHJlcXVlc3QgcHJvY2Vzc2luZyAobm8gcmFjZSBjb25kaXRpb25zKQoKIyMgUnVsZXMgb2YgRHVyYWJsZSBPYmplY3RzCgpDcml0aWNhbCBydWxlcyBwcmV2ZW50aW5nIG1vc3QgcHJvZHVjdGlvbiBpc3N1ZXM6CgoxLiAqKk9uZSBhbGFybSBwZXIgRE8qKiAtIFNjaGVkdWxlIG11bHRpcGxlIGV2ZW50cyB2aWEgcXVldWUgcGF0dGVybgoyLiAqKn4xSyByZXEvcyBwZXIgRE8gbWF4KiogLSBTaGFyZCBmb3IgaGlnaGVyIHRocm91Z2hwdXQKMy4gKipDb25zdHJ1Y3RvciBydW5zIGV2ZXJ5IHdha2UqKiAtIEtlZXAgaW5pdGlhbGl6YXRpb24gbGlnaHQ7IHVzZSBsYXp5IGxvYWRpbmcKNC4gKipIaWJlcm5hdGlvbiBjbGVhcnMgbWVtb3J5KiogLSBJbi1tZW1vcnkgc3RhdGUgbG9zdDsgcGVyc2lzdCBjcml0aWNhbCBkYXRhCjUuICoqVXNlIGBjdHgud2FpdFVudGlsKClgIGZvciBjbGVhbnVwKiogLSBFbnN1cmVzIGNvbXBsZXRpb24gYWZ0ZXIgcmVzcG9uc2Ugc2VudAo2LiAqKk5vIHNldFRpbWVvdXQgZm9yIHBlcnNpc3RlbmNlKiogLSBVc2UgYHNldEFsYXJtKClgIGZvciByZWxpYWJsZSBzY2hlZHVsaW5nCgojIyBDb3JlIENvbmNlcHRzCgojIyMgQ2xhc3MgU3RydWN0dXJlCkFsbCBET3MgZXh0ZW5kIGBEdXJhYmxlT2JqZWN0YCBiYXNlIGNsYXNzIHdpdGggY29uc3RydWN0b3IgcmVjZWl2aW5nIGBEdXJhYmxlT2JqZWN0U3RhdGVgIChzdG9yYWdlLCBXZWJTb2NrZXRzLCBhbGFybXMpIGFuZCBgRW52YCAoYmluZGluZ3MpLgoKIyMjIExpZmVjeWNsZSBTdGF0ZXMKCmBgYApbTm90IENyZWF0ZWRdIOKGkiBbQWN0aXZlXSDih4QgW0hpYmVybmF0ZWRdIOKGkiBbRXZpY3RlZF0KICAgICAgICAgICAgICAgICAgIOKGkwogICAgICAgICAgICAgIFtEZXN0cm95ZWRdCmBgYAoKLSAqKk5vdCBDcmVhdGVkKio6IERPIElEIGV4aXN0cyBidXQgaW5zdGFuY2UgbmV2ZXIgc3Bhd25lZAotICoqQWN0aXZlKio6IFByb2Nlc3NpbmcgcmVxdWVzdHMsIGluLW1lbW9yeSBzdGF0ZSB2YWxpZCwgYmlsbGVkIHBlciBHQi1ob3VyCi0gKipIaWJlcm5hdGVkKio6IFdlYlNvY2tldCBjb25uZWN0aW9ucyBvcGVuIGJ1dCB6ZXJvIGNvbXB1dGUsIHplcm8gY29zdAotICoqRXZpY3RlZCoqOiBSZW1vdmVkIGZyb20gbWVtb3J5OyBuZXh0IHJlcXVlc3QgdHJpZ2dlcnMgY29sZCBzdGFydAotICoqRGVzdHJveWVkKio6IERhdGEgZGVsZXRlZCB2aWEgbWlncmF0aW9uIG9yIG1hbnVhbCBkZWxldGlvbgoKIyMjIEFjY2Vzc2luZyBmcm9tIFdvcmtlcnMKV29ya2VycyB1c2UgYmluZGluZ3MgdG8gZ2V0IHN0dWJzLCB0aGVuIGNhbGwgUlBDIG1ldGhvZHMgZGlyZWN0bHkgKHJlY29tbWVuZGVkKSBvciB1c2UgZmV0Y2ggaGFuZGxlciAobGVnYWN5KS4KCioqUlBDIHZzIGZldGNoKCkgZGVjaXNpb246KioKYGBgCuKUnOKUgCBOZXcgcHJvamVjdCArIGNvbXBhdCDiiaUyMDI0LTA0LTAzIOKGkiBSUEMgKHR5cGUtc2FmZSwgc2ltcGxlcikK4pSc4pSAIE5lZWQgSFRUUCBzZW1hbnRpY3MgKGhlYWRlcnMsIHN0YXR1cykg4oaSIGZldGNoKCkK4pSc4pSAIFByb3h5aW5nIHJlcXVlc3RzIHRvIERPIOKGkiBmZXRjaCgpCuKUlOKUgCBMZWdhY3kgY29tcGF0aWJpbGl0eSDihpIgZmV0Y2goKQpgYGAKClNlZSBbUGF0dGVybnM6IFJQQyB2cyBmZXRjaCgpXSguL3BhdHRlcm5zLm1kKSBmb3IgZXhhbXBsZXMuCgojIyMgSUQgR2VuZXJhdGlvbgotIGBpZEZyb21OYW1lKClgOiBEZXRlcm1pbmlzdGljLCBuYW1lZCBjb29yZGluYXRpb24gKHJhdGUgbGltaXRpbmcsIGxvY2tzKQotIGBuZXdVbmlxdWVJZCgpYDogUmFuZG9tIElEcyBmb3Igc2hhcmRpbmcgaGlnaC10aHJvdWdocHV0IHdvcmtsb2FkcwotIGBpZEZyb21TdHJpbmcoKWA6IERlcml2ZSBmcm9tIGV4aXN0aW5nIElEcwotIEp1cmlzZGljdGlvbiBvcHRpb246IERhdGEgbG9jYWxpdHkgY29tcGxpYW5jZQoKIyMjIFN0b3JhZ2UgT3B0aW9ucwoKKipXaGljaCBzdG9yYWdlIEFQST8qKgpgYGAK4pSc4pSAIFN0cnVjdHVyZWQgZGF0YSwgcmVsYXRpb25zLCB0cmFuc2FjdGlvbnMg4oaSIFNRTGl0ZSAocmVjb21tZW5kZWQpCuKUnOKUgCBTaW1wbGUgS1Ygb24gU1FMaXRlIERPIOKGkiBjdHguc3RvcmFnZS5rdiAoc3luYyBLVikK4pSU4pSAIExlZ2FjeSBLVi1vbmx5IERPIOKGkiBjdHguc3RvcmFnZSAoYXN5bmMgS1YpCmBgYAoKLSAqKlNRTGl0ZSoqIChyZWNvbW1lbmRlZCk6IFN0cnVjdHVyZWQgZGF0YSwgdHJhbnNhY3Rpb25zLCAxMEdCL0RPCi0gKipTeW5jaHJvbm91cyBLViBBUEkqKjogU2ltcGxlIGtleS12YWx1ZSBvbiBTUUxpdGUgb2JqZWN0cwotICoqQXN5bmNocm9ub3VzIEtWIEFQSSoqOiBMZWdhY3kvYWR2YW5jZWQgdXNlIGNhc2VzCgpTZWUgW0RPIFN0b3JhZ2VdKC4uL2RvLXN0b3JhZ2UvUkVBRE1FLm1kKSBmb3IgZGVlcCBkaXZlLgoKIyMjIFNwZWNpYWwgRmVhdHVyZXMKLSAqKkFsYXJtcyoqOiBTY2hlZHVsZSBmdXR1cmUgZXhlY3V0aW9uIHBlci1ETyAoMSBwZXIgRE8gLSB1c2UgcXVldWUgcGF0dGVybiBmb3IgbXVsdGlwbGUpCi0gKipXZWJTb2NrZXQgSGliZXJuYXRpb24qKjogWmVyby1jb3N0IGlkbGUgY29ubmVjdGlvbnMgKG1lbW9yeSBjbGVhcmVkIG9uIGhpYmVybmF0aW9uKQotICoqUG9pbnQtaW4tVGltZSBSZWNvdmVyeSoqOiBSZXN0b3JlIHRvIGFueSBwb2ludCBpbiAzMCBkYXlzIChTUUxpdGUgb25seSkKCiMjIFF1aWNrIFN0YXJ0CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IER1cmFibGVPYmplY3QgfSBmcm9tICJjbG91ZGZsYXJlOndvcmtlcnMiOwoKZXhwb3J0IGNsYXNzIENvdW50ZXIgZXh0ZW5kcyBEdXJhYmxlT2JqZWN0PEVudj4gewogIGFzeW5jIGluY3JlbWVudCgpOiBQcm9taXNlPG51bWJlcj4gewogICAgY29uc3QgcmVzdWx0ID0gdGhpcy5jdHguc3RvcmFnZS5zcWwuZXhlYygKICAgICAgYElOU0VSVCBJTlRPIGNvdW50ZXJzIChpZCwgdmFsdWUpIFZBTFVFUyAoMSwgMSkKICAgICAgIE9OIENPTkZMSUNUKGlkKSBETyBVUERBVEUgU0VUIHZhbHVlID0gdmFsdWUgKyAxCiAgICAgICBSRVRVUk5JTkcgdmFsdWVgCiAgICApLm9uZSgpOwogICAgcmV0dXJuIHJlc3VsdC52YWx1ZTsKICB9Cn0KCi8vIFdvcmtlciBhY2Nlc3MKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgaWQgPSBlbnYuQ09VTlRFUi5pZEZyb21OYW1lKCJnbG9iYWwiKTsKICAgIGNvbnN0IHN0dWIgPSBlbnYuQ09VTlRFUi5nZXQoaWQpOwogICAgY29uc3QgY291bnQgPSBhd2FpdCBzdHViLmluY3JlbWVudCgpOwogICAgcmV0dXJuIG5ldyBSZXNwb25zZShgQ291bnQ6ICR7Y291bnR9YCk7CiAgfQp9OwpgYGAKCiMjIERlY2lzaW9uIFRyZWVzCgojIyMgV2hhdCBkbyB5b3UgbmVlZD8KCmBgYArilJzilIAgQ29vcmRpbmF0ZSByZXF1ZXN0cyAocmF0ZSBsaW1pdCwgbG9jaywgc2Vzc2lvbikK4pSCICAg4oaSIGlkRnJvbU5hbWUoaWRlbnRpZmllcikg4oaSIFtQYXR0ZXJuczogUmF0ZSBMaW1pdGluZy9Mb2Nrc10oLi9wYXR0ZXJucy5tZCkK4pSCCuKUnOKUgCBIaWdoIHRocm91Z2hwdXQgKD4xSyByZXEvcykK4pSCICAg4oaSIFNoYXJkaW5nIHdpdGggbmV3VW5pcXVlSWQoKSBvciBoYXNoIOKGkiBbUGF0dGVybnM6IFNoYXJkaW5nXSguL3BhdHRlcm5zLm1kKQrilIIK4pSc4pSAIFJlYWwtdGltZSB1cGRhdGVzIChXZWJTb2NrZXQsIGNoYXQsIGNvbGxhYikK4pSCICAg4oaSIFdlYlNvY2tldCBoaWJlcm5hdGlvbiArIHJvb20gcGF0dGVybiDihpIgW1BhdHRlcm5zOiBSZWFsLXRpbWVdKC4vcGF0dGVybnMubWQpCuKUggrilJzilIAgQmFja2dyb3VuZCB3b3JrIChjbGVhbnVwLCBub3RpZmljYXRpb25zLCBzY2hlZHVsZWQgdGFza3MpCuKUgiAgIOKGkiBBbGFybXMgKyBxdWV1ZSBwYXR0ZXJuICgxIGFsYXJtL0RPKSDihpIgW1BhdHRlcm5zOiBNdWx0aXBsZSBFdmVudHNdKC4vcGF0dGVybnMubWQpCuKUggrilJTilIAgVXNlciBzZXNzaW9ucyB3aXRoIGV4cGlyYXRpb24KICAgIOKGkiBTZXNzaW9uIHBhdHRlcm4gKyBhbGFybSBjbGVhbnVwIOKGkiBbUGF0dGVybnM6IFNlc3Npb24gTWFuYWdlbWVudF0oLi9wYXR0ZXJucy5tZCkKYGBgCgojIyMgV2hpY2ggYWNjZXNzIHBhdHRlcm4/CgpgYGAK4pSc4pSAIE5ldyBwcm9qZWN0ICsgdHlwZWQgbWV0aG9kcyDihpIgUlBDIChjb21wYXQg4omlMjAyNC0wNC0wMykK4pSc4pSAIE5lZWQgSFRUUCBzZW1hbnRpY3Mg4oaSIGZldGNoKCkK4pSc4pSAIFByb3h5aW5nIHRvIERPIOKGkiBmZXRjaCgpCuKUlOKUgCBMZWdhY3kgY29tcGF0IOKGkiBmZXRjaCgpCmBgYAoKU2VlIFtQYXR0ZXJuczogUlBDIHZzIGZldGNoKCldKC4vcGF0dGVybnMubWQpIGZvciBleGFtcGxlcy4KCiMjIyBXaGljaCBzdG9yYWdlPwoKYGBgCuKUnOKUgCBTdHJ1Y3R1cmVkIGRhdGEsIFNRTCBxdWVyaWVzLCB0cmFuc2FjdGlvbnMg4oaSIFNRTGl0ZSAocmVjb21tZW5kZWQpCuKUnOKUgCBTaW1wbGUgS1Ygb24gU1FMaXRlIERPIOKGkiBjdHguc3RvcmFnZS5rdiAoc3luYyBBUEkpCuKUlOKUgCBMZWdhY3kgS1Ytb25seSBETyDihpIgY3R4LnN0b3JhZ2UgKGFzeW5jIEFQSSkKYGBgCgpTZWUgW0RPIFN0b3JhZ2VdKC4uL2RvLXN0b3JhZ2UvUkVBRE1FLm1kKSBmb3IgY29tcGxldGUgZ3VpZGUuCgojIyBFc3NlbnRpYWwgQ29tbWFuZHMKCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRldiAgICAgICAgICAgICAgIyBMb2NhbCBkZXYgd2l0aCBET3MKbnB4IHdyYW5nbGVyIGRldiAtLXJlbW90ZSAgICAgIyBUZXN0IGFnYWluc3QgcHJvZCBET3MKbnB4IHdyYW5nbGVyIGRlcGxveSAgICAgICAgICAgIyBEZXBsb3kgKyBhdXRvLWFwcGx5IG1pZ3JhdGlvbnMKYGBgCgojIyBSZXNvdXJjZXMKCioqRG9jcyoqOiBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vZHVyYWJsZS1vYmplY3RzLyAgCioqQVBJIFJlZmVyZW5jZSoqOiBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vZHVyYWJsZS1vYmplY3RzL2FwaS8gIAoqKkV4YW1wbGVzKio6IGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9kdXJhYmxlLW9iamVjdHMvZXhhbXBsZXMvCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSAqKltDb25maWd1cmF0aW9uXSguL2NvbmZpZ3VyYXRpb24ubWQpKiogLSB3cmFuZ2xlci5qc29uYyBzZXR1cCwgbWlncmF0aW9ucywgYmluZGluZ3MsIGVudmlyb25tZW50cwotICoqW0FQSV0oLi9hcGkubWQpKiogLSBDbGFzcyBzdHJ1Y3R1cmUsIGN0eCBtZXRob2RzLCBhbGFybXMsIFdlYlNvY2tldCBoaWJlcm5hdGlvbgotICoqW1BhdHRlcm5zXSguL3BhdHRlcm5zLm1kKSoqIC0gU2hhcmRpbmcsIHJhdGUgbGltaXRpbmcsIGxvY2tzLCByZWFsLXRpbWUsIHNlc3Npb25zCi0gKipbR290Y2hhc10oLi9nb3RjaGFzLm1kKSoqIC0gTGltaXRzLCBoaWJlcm5hdGlvbiBjYXZlYXRzLCBjb21tb24gZXJyb3JzCgojIyBTZWUgQWxzbwoKLSAqKltETyBTdG9yYWdlXSguLi9kby1zdG9yYWdlL1JFQURNRS5tZCkqKiAtIFNRTGl0ZSwgS1YsIHRyYW5zYWN0aW9ucyAoZGV0YWlsZWQgc3RvcmFnZSBndWlkZSkKLSAqKltXb3JrZXJzXSguLi93b3JrZXJzL1JFQURNRS5tZCkqKiAtIENvcmUgV29ya2VycyBydW50aW1lIGZlYXR1cmVzCi0gKipbV2ViU29ja2V0c10oLi4vd2Vic29ja2V0cy9SRUFETUUubWQpKiogLSBXZWJTb2NrZXQgQVBJcyBhbmQgcGF0dGVybnMK
+# Cloudflare Durable Objects
+
+Expert guidance for building stateful applications with Cloudflare Durable Objects.
+
+## Reading Order
+
+1. **First time?** Read this overview + Quick Start
+2. **Setting up?** See [Configuration](./configuration.md)
+3. **Building features?** Use decision trees below → [Patterns](./patterns.md)
+4. **Debugging issues?** Check [Gotchas](./gotchas.md)
+5. **Deep dive?** [API](./api.md) and [DO Storage](../do-storage/README.md)
+
+## Overview
+
+Durable Objects combine compute with storage in globally-unique, strongly-consistent packages:
+- **Globally unique instances**: Each DO has unique ID for multi-client coordination
+- **Co-located storage**: Fast, strongly-consistent storage with compute
+- **Automatic placement**: Objects spawn near first request location
+- **Stateful serverless**: In-memory state + persistent storage
+- **Single-threaded**: Serial request processing (no race conditions)
+
+## Rules of Durable Objects
+
+Critical rules preventing most production issues:
+
+1. **One alarm per DO** - Schedule multiple events via queue pattern
+2. **~1K req/s per DO max** - Shard for higher throughput
+3. **Constructor runs every wake** - Keep initialization light; use lazy loading
+4. **Hibernation clears memory** - In-memory state lost; persist critical data
+5. **Use `ctx.waitUntil()` for cleanup** - Ensures completion after response sent
+6. **No setTimeout for persistence** - Use `setAlarm()` for reliable scheduling
+
+## Core Concepts
+
+### Class Structure
+All DOs extend `DurableObject` base class with constructor receiving `DurableObjectState` (storage, WebSockets, alarms) and `Env` (bindings).
+
+### Lifecycle States
+
+```
+[Not Created] → [Active] ⇄ [Hibernated] → [Evicted]
+                   ↓
+              [Destroyed]
+```
+
+- **Not Created**: DO ID exists but instance never spawned
+- **Active**: Processing requests, in-memory state valid, billed per GB-hour
+- **Hibernated**: WebSocket connections open but zero compute, zero cost
+- **Evicted**: Removed from memory; next request triggers cold start
+- **Destroyed**: Data deleted via migration or manual deletion
+
+### Accessing from Workers
+Workers use bindings to get stubs, then call RPC methods directly (recommended) or use fetch handler (legacy).
+
+**RPC vs fetch() decision:**
+```
+├─ New project + compat ≥2024-04-03 → RPC (type-safe, simpler)
+├─ Need HTTP semantics (headers, status) → fetch()
+├─ Proxying requests to DO → fetch()
+└─ Legacy compatibility → fetch()
+```
+
+See [Patterns: RPC vs fetch()](./patterns.md) for examples.
+
+### ID Generation
+- `idFromName()`: Deterministic, named coordination (rate limiting, locks)
+- `newUniqueId()`: Random IDs for sharding high-throughput workloads
+- `idFromString()`: Derive from existing IDs
+- Jurisdiction option: Data locality compliance
+
+### Storage Options
+
+**Which storage API?**
+```
+├─ Structured data, relations, transactions → SQLite (recommended)
+├─ Simple KV on SQLite DO → ctx.storage.kv (sync KV)
+└─ Legacy KV-only DO → ctx.storage (async KV)
+```
+
+- **SQLite** (recommended): Structured data, transactions, 10GB/DO
+- **Synchronous KV API**: Simple key-value on SQLite objects
+- **Asynchronous KV API**: Legacy/advanced use cases
+
+See [DO Storage](../do-storage/README.md) for deep dive.
+
+### Special Features
+- **Alarms**: Schedule future execution per-DO (1 per DO - use queue pattern for multiple)
+- **WebSocket Hibernation**: Zero-cost idle connections (memory cleared on hibernation)
+- **Point-in-Time Recovery**: Restore to any point in 30 days (SQLite only)
+
+## Quick Start
+
+```typescript
+import { DurableObject } from "cloudflare:workers";
+
+export class Counter extends DurableObject<Env> {
+  async increment(): Promise<number> {
+    const result = this.ctx.storage.sql.exec(
+      `INSERT INTO counters (id, value) VALUES (1, 1)
+       ON CONFLICT(id) DO UPDATE SET value = value + 1
+       RETURNING value`
+    ).one();
+    return result.value;
+  }
+}
+
+// Worker access
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const id = env.COUNTER.idFromName("global");
+    const stub = env.COUNTER.get(id);
+    const count = await stub.increment();
+    return new Response(`Count: ${count}`);
+  }
+};
+```
+
+## Decision Trees
+
+### What do you need?
+
+```
+├─ Coordinate requests (rate limit, lock, session)
+│   → idFromName(identifier) → [Patterns: Rate Limiting/Locks](./patterns.md)
+│
+├─ High throughput (>1K req/s)
+│   → Sharding with newUniqueId() or hash → [Patterns: Sharding](./patterns.md)
+│
+├─ Real-time updates (WebSocket, chat, collab)
+│   → WebSocket hibernation + room pattern → [Patterns: Real-time](./patterns.md)
+│
+├─ Background work (cleanup, notifications, scheduled tasks)
+│   → Alarms + queue pattern (1 alarm/DO) → [Patterns: Multiple Events](./patterns.md)
+│
+└─ User sessions with expiration
+    → Session pattern + alarm cleanup → [Patterns: Session Management](./patterns.md)
+```
+
+### Which access pattern?
+
+```
+├─ New project + typed methods → RPC (compat ≥2024-04-03)
+├─ Need HTTP semantics → fetch()
+├─ Proxying to DO → fetch()
+└─ Legacy compat → fetch()
+```
+
+See [Patterns: RPC vs fetch()](./patterns.md) for examples.
+
+### Which storage?
+
+```
+├─ Structured data, SQL queries, transactions → SQLite (recommended)
+├─ Simple KV on SQLite DO → ctx.storage.kv (sync API)
+└─ Legacy KV-only DO → ctx.storage (async API)
+```
+
+See [DO Storage](../do-storage/README.md) for complete guide.
+
+## Essential Commands
+
+```bash
+npx wrangler dev              # Local dev with DOs
+npx wrangler dev --remote     # Test against prod DOs
+npx wrangler deploy           # Deploy + auto-apply migrations
+```
+
+## Resources
+
+**Docs**: https://developers.cloudflare.com/durable-objects/  
+**API Reference**: https://developers.cloudflare.com/durable-objects/api/  
+**Examples**: https://developers.cloudflare.com/durable-objects/examples/
+
+## In This Reference
+
+- **[Configuration](./configuration.md)** - wrangler.jsonc setup, migrations, bindings, environments
+- **[API](./api.md)** - Class structure, ctx methods, alarms, WebSocket hibernation
+- **[Patterns](./patterns.md)** - Sharding, rate limiting, locks, real-time, sessions
+- **[Gotchas](./gotchas.md)** - Limits, hibernation caveats, common errors
+
+## See Also
+
+- **[DO Storage](../do-storage/README.md)** - SQLite, KV, transactions (detailed storage guide)
+- **[Workers](../workers/README.md)** - Core Workers runtime features
+- **[WebSockets](../websockets/README.md)** - WebSocket APIs and patterns

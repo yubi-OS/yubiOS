@@ -1,1 +1,181 @@
-IyBUcm91Ymxlc2hvb3RpbmcgJiBCZXN0IFByYWN0aWNlcwoKIyMgQ29tbW9uIEVycm9ycwoKIyMjICJObyBidW5kbGVyL2J1aWxkIHN0ZXAiIC0gUHVsdW1pIHVwbG9hZHMgcmF3IGNvZGUKCioqUHJvYmxlbToqKiBXb3JrZXIgZmFpbHMgd2l0aCAiQ2Fubm90IHVzZSBpbXBvcnQgc3RhdGVtZW50IG91dHNpZGUgYSBtb2R1bGUiICAKKipDYXVzZToqKiBQdWx1bWkgZG9lc24ndCBidW5kbGUgV29ya2VyIGNvZGUgLSB1cGxvYWRzIGV4YWN0bHkgd2hhdCB5b3UgcHJvdmlkZSAgCioqU29sdXRpb246KiogQnVpbGQgV29ya2VyIEJFRk9SRSBQdWx1bWkgZGVwbG95CgpgYGB0eXBlc2NyaXB0Ci8vIFdST05HOiBQdWx1bWkgd29uJ3QgYnVuZGxlIHRoaXMKY29uc3Qgd29ya2VyID0gbmV3IGNsb3VkZmxhcmUuV29ya2VyU2NyaXB0KCJ3b3JrZXIiLCB7CiAgICBjb250ZW50OiBmcy5yZWFkRmlsZVN5bmMoIi4vc3JjL2luZGV4LnRzIiwgInV0ZjgiKSwgLy8gUmF3IFRTIGZpbGUKfSk7CgovLyBSSUdIVDogQnVpbGQgZmlyc3QsIHRoZW4gZGVwbG95CmltcG9ydCAqIGFzIGNvbW1hbmQgZnJvbSAiQHB1bHVtaS9jb21tYW5kIjsKY29uc3QgYnVpbGQgPSBuZXcgY29tbWFuZC5sb2NhbC5Db21tYW5kKCJidWlsZCIsIHsKICAgIGNyZWF0ZTogIm5wbSBydW4gYnVpbGQiLAogICAgZGlyOiAiLi93b3JrZXIiLAp9KTsKY29uc3Qgd29ya2VyID0gbmV3IGNsb3VkZmxhcmUuV29ya2VyU2NyaXB0KCJ3b3JrZXIiLCB7CiAgICBjb250ZW50OiBidWlsZC5zdGRvdXQuYXBwbHkoKCkgPT4gZnMucmVhZEZpbGVTeW5jKCIuL3dvcmtlci9kaXN0L2luZGV4LmpzIiwgInV0ZjgiKSksCn0sIHtkZXBlbmRzT246IFtidWlsZF19KTsKYGBgCgojIyMgIndyYW5nbGVyLnRvbWwgbm90IGNvbnN1bWVkIiAtIENvbmZpZyBkcmlmdAoKKipQcm9ibGVtOioqIExvY2FsIHdyYW5nbGVyIGRldiB3b3JrcywgUHVsdW1pIGRlcGxveSBmYWlscyAgCioqQ2F1c2U6KiogUHVsdW1pIGlnbm9yZXMgd3JhbmdsZXIudG9tbCAtIG11c3QgZHVwbGljYXRlIGNvbmZpZyAgCioqU29sdXRpb246KiogR2VuZXJhdGUgd3JhbmdsZXIudG9tbCBmcm9tIFB1bHVtaSBvciBrZWVwIHN5bmNlZCBtYW51YWxseQoKYGBgdHlwZXNjcmlwdAovLyBQYXR0ZXJuOiBFeHBvcnQgUHVsdW1pIGNvbmZpZyB0byB3cmFuZ2xlci50b21sCmNvbnN0IHdvcmtlckNvbmZpZyA9IHsKICAgIG5hbWU6ICJteS13b3JrZXIiLAogICAgY29tcGF0aWJpbGl0eURhdGU6ICIyMDI1LTAxLTAxIiwKICAgIGNvbXBhdGliaWxpdHlGbGFnczogWyJub2RlanNfY29tcGF0Il0sCn07CgpuZXcgY29tbWFuZC5sb2NhbC5Db21tYW5kKCJnZW5lcmF0ZS13cmFuZ2xlciIsIHsKICAgIGNyZWF0ZTogcHVsdW1pLmludGVycG9sYXRlYGNhdCA+IHdyYW5nbGVyLnRvbWwgPDxFT0YKbmFtZSA9ICIke3dvcmtlckNvbmZpZy5uYW1lfSIKY29tcGF0aWJpbGl0eV9kYXRlID0gIiR7d29ya2VyQ29uZmlnLmNvbXBhdGliaWxpdHlEYXRlfSIKY29tcGF0aWJpbGl0eV9mbGFncyA9ICR7SlNPTi5zdHJpbmdpZnkod29ya2VyQ29uZmlnLmNvbXBhdGliaWxpdHlGbGFncyl9CkVPRmAsCn0pOwpgYGAKCiMjIyAiRmFsc2Ugbm8tY2hhbmdlcyBkZXRlY3Rpb24iIC0gQ29udGVudCBTSEEgdW5jaGFuZ2VkCgoqKlByb2JsZW06KiogV29ya2VyIGNvZGUgdXBkYXRlZCwgUHVsdW1pIHNheXMgIm5vIGNoYW5nZXMiICAKKipDYXVzZToqKiBDb250ZW50IGhhc2ggaWRlbnRpY2FsICh3aGl0ZXNwYWNlL2NvbW1lbnQtb25seSBjaGFuZ2UpICAKKipTb2x1dGlvbjoqKiBBZGQgYnVpbGQgdGltZXN0YW1wIG9yIHZlcnNpb24gdG8gZm9yY2UgdXBkYXRlCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHZlcnNpb24gPSBEYXRlLm5vdygpLnRvU3RyaW5nKCk7CmNvbnN0IHdvcmtlciA9IG5ldyBjbG91ZGZsYXJlLldvcmtlclNjcmlwdCgid29ya2VyIiwgewogICAgY29udGVudDogY29kZSwKICAgIHBsYWluVGV4dEJpbmRpbmdzOiBbe25hbWU6ICJWRVJTSU9OIiwgdGV4dDogdmVyc2lvbn1dLCAvLyBGb3JjZXMgbmV3IGRlcGxveW1lbnQKfSk7CmBgYAoKIyMjICJEMSBtaWdyYXRpb25zIGRvbid0IHJ1biBvbiBwdWx1bWkgdXAiCgoqKlByb2JsZW06KiogRGF0YWJhc2Ugc2NoZW1hIG5vdCBhcHBsaWVkIGFmdGVyIEQxIGRhdGFiYXNlIGNyZWF0ZWQgIAoqKkNhdXNlOioqIFB1bHVtaSBjcmVhdGVzIGRhdGFiYXNlIGJ1dCBkb2Vzbid0IHJ1biBtaWdyYXRpb25zICAKKipTb2x1dGlvbjoqKiBVc2UgQ29tbWFuZCByZXNvdXJjZSB3aXRoIGRlcGVuZHNPbgoKYGBgdHlwZXNjcmlwdApjb25zdCBkYiA9IG5ldyBjbG91ZGZsYXJlLkQxRGF0YWJhc2UoImRiIiwge2FjY291bnRJZCwgbmFtZTogIm15ZGIifSk7CgovLyBSdW4gbWlncmF0aW9ucyBhZnRlciBEQiBjcmVhdGVkCmNvbnN0IG1pZ3JhdGlvbiA9IG5ldyBjb21tYW5kLmxvY2FsLkNvbW1hbmQoIm1pZ3JhdGUiLCB7CiAgICBjcmVhdGU6IHB1bHVtaS5pbnRlcnBvbGF0ZWB3cmFuZ2xlciBkMSBleGVjdXRlICR7ZGIubmFtZX0gLS1maWxlIC4vc2NoZW1hLnNxbGAsCn0sIHtkZXBlbmRzT246IFtkYl19KTsKCi8vIFdvcmtlciBkZXBlbmRzIG9uIG1pZ3JhdGlvbnMKY29uc3Qgd29ya2VyID0gbmV3IGNsb3VkZmxhcmUuV29ya2VyU2NyaXB0KCJ3b3JrZXIiLCB7CiAgICBkMURhdGFiYXNlQmluZGluZ3M6IFt7bmFtZTogIkRCIiwgZGF0YWJhc2VJZDogZGIuaWR9XSwKfSwge2RlcGVuZHNPbjogW21pZ3JhdGlvbl19KTsKYGBgCgojIyMgIk1pc3NpbmcgcmVxdWlyZWQgcHJvcGVydHkgJ2FjY291bnRJZCciCgoqKlByb2JsZW06KiogYEVycm9yOiBNaXNzaW5nIHJlcXVpcmVkIHByb3BlcnR5ICdhY2NvdW50SWQnYCAgCioqQ2F1c2U6KiogQWNjb3VudCBJRCBub3QgcHJvdmlkZWQgaW4gcmVzb3VyY2UgY29uZmlndXJhdGlvbiAgCioqU29sdXRpb246KiogQWRkIHRvIHN0YWNrIGNvbmZpZwoKYGBgeWFtbAojIFB1bHVtaS48c3RhY2s+LnlhbWwKY29uZmlnOgogIGNsb3VkZmxhcmU6YWNjb3VudElkOiAiYWJjMTIzLi4uIgpgYGAKCiMjIyAiQmluZGluZyBuYW1lIG1pc21hdGNoIgoKKipQcm9ibGVtOioqIFdvcmtlciBmYWlscyB3aXRoICJlbnYuTVlfS1YgaXMgdW5kZWZpbmVkIiAgCioqQ2F1c2U6KiogQmluZGluZyBuYW1lIGluIFB1bHVtaSAhPSBuYW1lIGluIFdvcmtlciBjb2RlICAKKipTb2x1dGlvbjoqKiBNYXRjaCBleGFjdGx5IChjYXNlLXNlbnNpdGl2ZSkKCmBgYHR5cGVzY3JpcHQKLy8gUHVsdW1pCmt2TmFtZXNwYWNlQmluZGluZ3M6IFt7bmFtZTogIk1ZX0tWIiwgbmFtZXNwYWNlSWQ6IGt2LmlkfV0KCi8vIFdvcmtlciBjb2RlCmV4cG9ydCBkZWZhdWx0IHsgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52KSB7IGF3YWl0IGVudi5NWV9LVi5nZXQoImtleSIpOyB9fQpgYGAKCiMjIyAiQVBJIHRva2VuIHBlcm1pc3Npb25zIGluc3VmZmljaWVudCIKCioqUHJvYmxlbToqKiBgRXJyb3I6IGF1dGhlbnRpY2F0aW9uIGVycm9yICgxMDAwMClgICAKKipDYXVzZToqKiBUb2tlbiBsYWNrcyByZXF1aXJlZCBwZXJtaXNzaW9ucyAgCioqU29sdXRpb246KiogR3JhbnQgdG9rZW4gcGVybWlzc2lvbnM6IEFjY291bnQuV29ya2VycyBTY3JpcHRzOkVkaXQsIEFjY291bnQuQWNjb3VudCBTZXR0aW5nczpSZWFkCgojIyMgIlJlc291cmNlIG5vdCBmb3VuZCBhZnRlciBpbXBvcnQiCgoqKlByb2JsZW06KiogSW1wb3J0ZWQgcmVzb3VyY2Ugc2hvd3MgYXMgY2hhbmdlZCBvbiBuZXh0IGBwdWx1bWkgdXBgICAKKipDYXVzZToqKiBTdGF0ZSBtaXNtYXRjaCBiZXR3ZWVuIGFjdHVhbCByZXNvdXJjZSBhbmQgUHVsdW1pIGNvbmZpZyAgCioqU29sdXRpb246KiogQ2hlY2sgcHJvcGVydHkgbmFtZXMvdHlwZXMgbWF0Y2ggZXhhY3RseQoKYGBgYmFzaApwdWx1bWkgaW1wb3J0IGNsb3VkZmxhcmU6aW5kZXgvd29ya2VyU2NyaXB0OldvcmtlclNjcmlwdCBteS13b3JrZXIgPGFjY291bnRfaWQ+Lzx3b3JrZXJfbmFtZT4KcHVsdW1pIHByZXZpZXcgIyBJZiBzaG93cyBjaGFuZ2VzLCBhZGp1c3QgUHVsdW1pIGNvZGUgdG8gbWF0Y2ggYWN0dWFsIHJlc291cmNlCmBgYAoKIyMjICJ2Ni54IFdvcmtlciB2ZXJzaW9uaW5nIGNvbmZ1c2lvbiIKCioqUHJvYmxlbToqKiBXb3JrZXIgZGVwbG95ZWQgYnV0IG5vdCByZWNlaXZpbmcgdHJhZmZpYyAgCioqQ2F1c2U6KiogdjYueCByZXF1aXJlcyBXb3JrZXIgKyBXb3JrZXJWZXJzaW9uICsgV29ya2Vyc0RlcGxveW1lbnQgKDMgcmVzb3VyY2VzKSAgCioqU29sdXRpb246KiogVXNlIFdvcmtlclNjcmlwdCAoYXV0by12ZXJzaW9uaW5nKSBPUiBmdWxsIHZlcnNpb25pbmcgcGF0dGVybgoKYGBgdHlwZXNjcmlwdAovLyBTSU1QTEU6IFdvcmtlclNjcmlwdCBhdXRvLXZlcnNpb25zIChkZWZhdWx0IGJlaGF2aW9yKQpjb25zdCB3b3JrZXIgPSBuZXcgY2xvdWRmbGFyZS5Xb3JrZXJTY3JpcHQoIndvcmtlciIsIHsKICAgIGFjY291bnRJZCwgbmFtZTogIm15LXdvcmtlciIsIGNvbnRlbnQ6IGNvZGUsCn0pOwoKLy8gQURWQU5DRUQ6IE1hbnVhbCB2ZXJzaW9uaW5nIGZvciBncmFkdWFsIHJvbGxvdXRzICh2Ni54KQpjb25zdCB3b3JrZXIgPSBuZXcgY2xvdWRmbGFyZS5Xb3JrZXIoIndvcmtlciIsIHthY2NvdW50SWQsIG5hbWU6ICJteS13b3JrZXIifSk7CmNvbnN0IHZlcnNpb24gPSBuZXcgY2xvdWRmbGFyZS5Xb3JrZXJWZXJzaW9uKCJ2MSIsIHsKICAgIGFjY291bnRJZCwgd29ya2VySWQ6IHdvcmtlci5pZCwgY29udGVudDogY29kZSwgY29tcGF0aWJpbGl0eURhdGU6ICIyMDI1LTAxLTAxIiwKfSk7CmNvbnN0IGRlcGxveW1lbnQgPSBuZXcgY2xvdWRmbGFyZS5Xb3JrZXJzRGVwbG95bWVudCgicHJvZCIsIHsKICAgIGFjY291bnRJZCwgd29ya2VySWQ6IHdvcmtlci5pZCwgdmVyc2lvbklkOiB2ZXJzaW9uLmlkLAp9KTsKYGBgCgojIyBCZXN0IFByYWN0aWNlcwoKMS4gKipBbHdheXMgc2V0IGNvbXBhdGliaWxpdHlEYXRlKiogLSBMb2NrcyBXb3JrZXIgYmVoYXZpb3IsIHByZXZlbnRzIGJyZWFraW5nIGNoYW5nZXMKMi4gKipCdWlsZCBiZWZvcmUgZGVwbG95KiogLSBQdWx1bWkgZG9lc24ndCBidW5kbGU7IHVzZSBDb21tYW5kIHJlc291cmNlIG9yIENJIGJ1aWxkIHN0ZXAKMy4gKipNYXRjaCBiaW5kaW5nIG5hbWVzKiogLSBDYXNlLXNlbnNpdGl2ZSwgbXVzdCBtYXRjaCBiZXR3ZWVuIFB1bHVtaSBhbmQgV29ya2VyIGNvZGUKNC4gKipVc2UgZGVwZW5kc09uIGZvciBtaWdyYXRpb25zKiogLSBFbnN1cmUgRDEgbWlncmF0aW9ucyBydW4gYmVmb3JlIFdvcmtlciBkZXBsb3lzCjUuICoqVmVyc2lvbiBXb3JrZXIgY29udGVudCoqIC0gQWRkIFZFUlNJT04gYmluZGluZyB0byBmb3JjZSByZWRlcGxveW1lbnQgb24gY29udGVudCBjaGFuZ2VzCjYuICoqU3RvcmUgc2VjcmV0cyBpbiBzdGFjayBjb25maWcqKiAtIFVzZSBgcHVsdW1pIGNvbmZpZyBzZXQgLS1zZWNyZXRgIGZvciBBUEkga2V5cwoKIyMgTGltaXRzCgp8IFJlc291cmNlIHwgTGltaXQgfCBOb3RlcyB8CnwtLS0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBXb3JrZXIgc2NyaXB0IHNpemUgfCAxMCBNQiB8IEluY2x1ZGVzIGFsbCBkZXBlbmRlbmNpZXMsIGFmdGVyIGNvbXByZXNzaW9uIHwKfCBXb3JrZXIgQ1BVIHRpbWUgfCAxMG1zIChmcmVlKSwgMzBzIGRlZmF1bHQgLyA1bWluIG1heCAocGFpZCkgfCBQZXIgcmVxdWVzdCB8CnwgS1Yga2V5cyBwZXIgbmFtZXNwYWNlIHwgVW5saW1pdGVkIHwgMTAwMCBvcHMvc2VjIHdyaXRlLCAxMDBrIG9wcy9zZWMgcmVhZCB8CnwgUjIgc3RvcmFnZSB8IFVubGltaXRlZCB8IENsYXNzIEEgb3BzOiAxTS9tbyBmcmVlLCBDbGFzcyBCOiAxME0vbW8gZnJlZSB8CnwgRDEgZGF0YWJhc2VzIHwgNTAsMDAwIHBlciBhY2NvdW50IHwgRnJlZTogMTAgcGVyIGFjY291bnQsIDUgR0IgZWFjaCB8CnwgUXVldWVzIHwgMTAsMDAwIHBlciBhY2NvdW50IHwgRnJlZTogMU0gb3BzL2RheSB8CnwgUGFnZXMgcHJvamVjdHMgfCA1MDAgcGVyIGFjY291bnQgfCBGcmVlOiAxMDAgcHJvamVjdHMgfAp8IEFQSSByZXF1ZXN0cyB8IFZhcmllcyBieSBwbGFuIHwgfjEyMDAgcmVxLzVtaW4gb24gZnJlZSB8CgojIyBSZXNvdXJjZXMKCi0gKipQdWx1bWkgUmVnaXN0cnk6KiogaHR0cHM6Ly93d3cucHVsdW1pLmNvbS9yZWdpc3RyeS9wYWNrYWdlcy9jbG91ZGZsYXJlLwotICoqQVBJIERvY3M6KiogaHR0cHM6Ly93d3cucHVsdW1pLmNvbS9yZWdpc3RyeS9wYWNrYWdlcy9jbG91ZGZsYXJlL2FwaS1kb2NzLwotICoqR2l0SHViOioqIGh0dHBzOi8vZ2l0aHViLmNvbS9wdWx1bWkvcHVsdW1pLWNsb3VkZmxhcmUKLSAqKkNsb3VkZmxhcmUgRG9jczoqKiBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vCi0gKipXb3JrZXJzIERvY3M6KiogaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvCgotLS0KU2VlOiBbUkVBRE1FLm1kXSguL1JFQURNRS5tZCksIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpLCBbYXBpLm1kXSguL2FwaS5tZCksIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkK
+# Troubleshooting & Best Practices
+
+## Common Errors
+
+### "No bundler/build step" - Pulumi uploads raw code
+
+**Problem:** Worker fails with "Cannot use import statement outside a module"  
+**Cause:** Pulumi doesn't bundle Worker code - uploads exactly what you provide  
+**Solution:** Build Worker BEFORE Pulumi deploy
+
+```typescript
+// WRONG: Pulumi won't bundle this
+const worker = new cloudflare.WorkerScript("worker", {
+    content: fs.readFileSync("./src/index.ts", "utf8"), // Raw TS file
+});
+
+// RIGHT: Build first, then deploy
+import * as command from "@pulumi/command";
+const build = new command.local.Command("build", {
+    create: "npm run build",
+    dir: "./worker",
+});
+const worker = new cloudflare.WorkerScript("worker", {
+    content: build.stdout.apply(() => fs.readFileSync("./worker/dist/index.js", "utf8")),
+}, {dependsOn: [build]});
+```
+
+### "wrangler.toml not consumed" - Config drift
+
+**Problem:** Local wrangler dev works, Pulumi deploy fails  
+**Cause:** Pulumi ignores wrangler.toml - must duplicate config  
+**Solution:** Generate wrangler.toml from Pulumi or keep synced manually
+
+```typescript
+// Pattern: Export Pulumi config to wrangler.toml
+const workerConfig = {
+    name: "my-worker",
+    compatibilityDate: "2025-01-01",
+    compatibilityFlags: ["nodejs_compat"],
+};
+
+new command.local.Command("generate-wrangler", {
+    create: pulumi.interpolate`cat > wrangler.toml <<EOF
+name = "${workerConfig.name}"
+compatibility_date = "${workerConfig.compatibilityDate}"
+compatibility_flags = ${JSON.stringify(workerConfig.compatibilityFlags)}
+EOF`,
+});
+```
+
+### "False no-changes detection" - Content SHA unchanged
+
+**Problem:** Worker code updated, Pulumi says "no changes"  
+**Cause:** Content hash identical (whitespace/comment-only change)  
+**Solution:** Add build timestamp or version to force update
+
+```typescript
+const version = Date.now().toString();
+const worker = new cloudflare.WorkerScript("worker", {
+    content: code,
+    plainTextBindings: [{name: "VERSION", text: version}], // Forces new deployment
+});
+```
+
+### "D1 migrations don't run on pulumi up"
+
+**Problem:** Database schema not applied after D1 database created  
+**Cause:** Pulumi creates database but doesn't run migrations  
+**Solution:** Use Command resource with dependsOn
+
+```typescript
+const db = new cloudflare.D1Database("db", {accountId, name: "mydb"});
+
+// Run migrations after DB created
+const migration = new command.local.Command("migrate", {
+    create: pulumi.interpolate`wrangler d1 execute ${db.name} --file ./schema.sql`,
+}, {dependsOn: [db]});
+
+// Worker depends on migrations
+const worker = new cloudflare.WorkerScript("worker", {
+    d1DatabaseBindings: [{name: "DB", databaseId: db.id}],
+}, {dependsOn: [migration]});
+```
+
+### "Missing required property 'accountId'"
+
+**Problem:** `Error: Missing required property 'accountId'`  
+**Cause:** Account ID not provided in resource configuration  
+**Solution:** Add to stack config
+
+```yaml
+# Pulumi.<stack>.yaml
+config:
+  cloudflare:accountId: "abc123..."
+```
+
+### "Binding name mismatch"
+
+**Problem:** Worker fails with "env.MY_KV is undefined"  
+**Cause:** Binding name in Pulumi != name in Worker code  
+**Solution:** Match exactly (case-sensitive)
+
+```typescript
+// Pulumi
+kvNamespaceBindings: [{name: "MY_KV", namespaceId: kv.id}]
+
+// Worker code
+export default { async fetch(request, env) { await env.MY_KV.get("key"); }}
+```
+
+### "API token permissions insufficient"
+
+**Problem:** `Error: authentication error (10000)`  
+**Cause:** Token lacks required permissions  
+**Solution:** Grant token permissions: Account.Workers Scripts:Edit, Account.Account Settings:Read
+
+### "Resource not found after import"
+
+**Problem:** Imported resource shows as changed on next `pulumi up`  
+**Cause:** State mismatch between actual resource and Pulumi config  
+**Solution:** Check property names/types match exactly
+
+```bash
+pulumi import cloudflare:index/workerScript:WorkerScript my-worker <account_id>/<worker_name>
+pulumi preview # If shows changes, adjust Pulumi code to match actual resource
+```
+
+### "v6.x Worker versioning confusion"
+
+**Problem:** Worker deployed but not receiving traffic  
+**Cause:** v6.x requires Worker + WorkerVersion + WorkersDeployment (3 resources)  
+**Solution:** Use WorkerScript (auto-versioning) OR full versioning pattern
+
+```typescript
+// SIMPLE: WorkerScript auto-versions (default behavior)
+const worker = new cloudflare.WorkerScript("worker", {
+    accountId, name: "my-worker", content: code,
+});
+
+// ADVANCED: Manual versioning for gradual rollouts (v6.x)
+const worker = new cloudflare.Worker("worker", {accountId, name: "my-worker"});
+const version = new cloudflare.WorkerVersion("v1", {
+    accountId, workerId: worker.id, content: code, compatibilityDate: "2025-01-01",
+});
+const deployment = new cloudflare.WorkersDeployment("prod", {
+    accountId, workerId: worker.id, versionId: version.id,
+});
+```
+
+## Best Practices
+
+1. **Always set compatibilityDate** - Locks Worker behavior, prevents breaking changes
+2. **Build before deploy** - Pulumi doesn't bundle; use Command resource or CI build step
+3. **Match binding names** - Case-sensitive, must match between Pulumi and Worker code
+4. **Use dependsOn for migrations** - Ensure D1 migrations run before Worker deploys
+5. **Version Worker content** - Add VERSION binding to force redeployment on content changes
+6. **Store secrets in stack config** - Use `pulumi config set --secret` for API keys
+
+## Limits
+
+| Resource | Limit | Notes |
+|----------|-------|-------|
+| Worker script size | 10 MB | Includes all dependencies, after compression |
+| Worker CPU time | 10ms (free), 30s default / 5min max (paid) | Per request |
+| KV keys per namespace | Unlimited | 1000 ops/sec write, 100k ops/sec read |
+| R2 storage | Unlimited | Class A ops: 1M/mo free, Class B: 10M/mo free |
+| D1 databases | 50,000 per account | Free: 10 per account, 5 GB each |
+| Queues | 10,000 per account | Free: 1M ops/day |
+| Pages projects | 500 per account | Free: 100 projects |
+| API requests | Varies by plan | ~1200 req/5min on free |
+
+## Resources
+
+- **Pulumi Registry:** https://www.pulumi.com/registry/packages/cloudflare/
+- **API Docs:** https://www.pulumi.com/registry/packages/cloudflare/api-docs/
+- **GitHub:** https://github.com/pulumi/pulumi-cloudflare
+- **Cloudflare Docs:** https://developers.cloudflare.com/
+- **Workers Docs:** https://developers.cloudflare.com/workers/
+
+---
+See: [README.md](./README.md), [configuration.md](./configuration.md), [api.md](./api.md), [patterns.md](./patterns.md)

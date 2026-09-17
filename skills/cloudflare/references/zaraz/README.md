@@ -1,1 +1,111 @@
-IyBDbG91ZGZsYXJlIFphcmF6CgpFeHBlcnQgZ3VpZGFuY2UgZm9yIENsb3VkZmxhcmUgWmFyYXogLSBzZXJ2ZXItc2lkZSB0YWcgbWFuYWdlciBmb3IgbG9hZGluZyB0aGlyZC1wYXJ0eSB0b29scyBhdCB0aGUgZWRnZS4KCiMjIFdoYXQgaXMgWmFyYXo/CgpaYXJheiBvZmZsb2FkcyB0aGlyZC1wYXJ0eSBzY3JpcHRzIChhbmFseXRpY3MsIGFkcywgY2hhdCwgbWFya2V0aW5nKSB0byBDbG91ZGZsYXJlJ3MgZWRnZSwgaW1wcm92aW5nIHNpdGUgc3BlZWQsIHByaXZhY3ksIGFuZCBzZWN1cml0eS4gWmVybyBjbGllbnQtc2lkZSBwZXJmb3JtYW5jZSBpbXBhY3QuCgoqKkNvcmUgQ29uY2VwdHM6KioKLSAqKlNlcnZlci1zaWRlIGV4ZWN1dGlvbioqIC0gU2NyaXB0cyBydW4gb24gQ2xvdWRmbGFyZSwgbm90IHVzZXIncyBicm93c2VyCi0gKipTaW5nbGUgSFRUUCByZXF1ZXN0KiogLSBBbGwgdG9vbHMgbG9hZGVkIHZpYSBvbmUgZW5kcG9pbnQKLSAqKlByaXZhY3ktZmlyc3QqKiAtIENvbnRyb2wgZGF0YSBzZW50IHRvIHRoaXJkIHBhcnRpZXMKLSAqKk5vIGNsaWVudC1zaWRlIEpTIG92ZXJoZWFkKiogLSBNaW5pbWFsIGJyb3dzZXIgaW1wYWN0CgojIyBRdWljayBTdGFydAoKMS4gTmF2aWdhdGUgdG8gZG9tYWluID4gWmFyYXogaW4gQ2xvdWRmbGFyZSBkYXNoYm9hcmQKMi4gQ2xpY2sgIlN0YXJ0IHNldHVwIgozLiBBZGQgdG9vbHMgKEdvb2dsZSBBbmFseXRpY3MsIEZhY2Vib29rIFBpeGVsLCBldGMuKQo0LiBDb25maWd1cmUgdHJpZ2dlcnMgKHdoZW4gdG9vbHMgZmlyZSkKNS4gQWRkIHRyYWNraW5nIGNvZGUgdG8geW91ciBzaXRlOgoKYGBgamF2YXNjcmlwdAovLyBUcmFjayBwYWdlIHZpZXcKemFyYXoudHJhY2soJ3BhZ2VfdmlldycpOwoKLy8gVHJhY2sgY3VzdG9tIGV2ZW50CnphcmF6LnRyYWNrKCdidXR0b25fY2xpY2snLCB7IGJ1dHRvbl9pZDogJ2N0YScgfSk7CgovLyBTZXQgdXNlciBwcm9wZXJ0aWVzCnphcmF6LnNldCgndXNlcklkJywgJ3VzZXJfMTIzJyk7CmBgYAoKIyMgV2hlbiB0byBVc2UgWmFyYXoKCioqVXNlIFphcmF6IHdoZW46KioKLSBBZGRpbmcgbXVsdGlwbGUgdGhpcmQtcGFydHkgdG9vbHMgKGFuYWx5dGljcywgYWRzLCBtYXJrZXRpbmcpCi0gU2l0ZSBwZXJmb3JtYW5jZSBpcyBjcml0aWNhbCAobm8gY2xpZW50LXNpZGUgSlMgb3ZlcmhlYWQpCi0gUHJpdmFjeSBjb21wbGlhbmNlIHJlcXVpcmVkIChHRFBSLCBDQ1BBKQotIE5vbi10ZWNobmljYWwgdGVhbXMgbmVlZCB0byBtYW5hZ2UgdG9vbHMKCioqVXNlIFdvcmtlcnMgZGlyZWN0bHkgd2hlbjoqKgotIEJ1aWxkaW5nIGN1c3RvbSBzZXJ2ZXItc2lkZSB0cmFja2luZyBsb2dpYwotIE5lZWQgZnVsbCBjb250cm9sIG92ZXIgZGF0YSBwcm9jZXNzaW5nCi0gSW50ZWdyYXRpbmcgd2l0aCBjb21wbGV4IGJhY2tlbmQgc3lzdGVtcwotIFphcmF6J3MgdG9vbCBsaWJyYXJ5IGRvZXNuJ3QgbWVldCBuZWVkcwoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKCnwgRmlsZSB8IFB1cnBvc2UgfCBXaGVuIHRvIFJlYWQgfAp8LS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLXwKfCBbYXBpLm1kXSguL2FwaS5tZCkgfCBXZWIgQVBJLCB6YXJheiBvYmplY3QsIGNvbnNlbnQgbWV0aG9kcyB8IEltcGxlbWVudGluZyB0cmFja2luZyBjYWxscyB8CnwgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgfCBEYXNoYm9hcmQgc2V0dXAsIHRyaWdnZXJzLCB0b29scyB8IEluaXRpYWwgc2V0dXAsIGFkZGluZyB0b29scyB8CnwgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSB8IFNQQSwgZS1jb21tZXJjZSwgV29ya2VyIGludGVncmF0aW9uIHwgQmVzdCBwcmFjdGljZXMsIGNvbW1vbiBzY2VuYXJpb3MgfAp8IFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIHwgVHJvdWJsZXNob290aW5nLCBsaW1pdHMsIHBpdGZhbGxzIHwgRGVidWdnaW5nIGlzc3VlcyB8CgojIyBSZWFkaW5nIE9yZGVyIGJ5IFRhc2sKCnwgVGFzayB8IEZpbGVzIHRvIFJlYWQgfAp8LS0tLS0tfC0tLS0tLS0tLS0tLS0tLXwKfCBBZGQgYW5hbHl0aWNzIHRvIHNpdGUgfCBSRUFETUUg4oaSIGNvbmZpZ3VyYXRpb24ubWQgfAp8IFRyYWNrIGN1c3RvbSBldmVudHMgfCBSRUFETUUg4oaSIGFwaS5tZCB8CnwgRGVidWcgdHJhY2tpbmcgaXNzdWVzIHwgZ290Y2hhcy5tZCB8CnwgU1BBIHRyYWNraW5nIHwgYXBpLm1kIOKGkiBwYXR0ZXJucy5tZCAoU1BBIHNlY3Rpb24pIHwKfCBFLWNvbW1lcmNlIHRyYWNraW5nIHwgYXBpLm1kI2Vjb21tZXJjZSDihpIgcGF0dGVybnMubWQjZWNvbW1lcmNlIHwKfCBXb3JrZXIgaW50ZWdyYXRpb24gfCBwYXR0ZXJucy5tZCN3b3JrZXItaW50ZWdyYXRpb24gfAp8IEdEUFIgY29tcGxpYW5jZSB8IGFwaS5tZCNjb25zZW50IOKGkiBjb25maWd1cmF0aW9uLm1kI2NvbnNlbnQgfAoKIyMgRGVjaXNpb24gVHJlZQoKYGBgCldoYXQgZG8geW91IG5lZWQ/CgrilJzilIAgVHJhY2sgZXZlbnRzIGluIGJyb3dzZXIg4oaSIGFwaS5tZArilIIgICDilJzilIAgUGFnZSB2aWV3cywgY2xpY2tzIOKGkiB6YXJhei50cmFjaygpCuKUgiAgIOKUnOKUgCBVc2VyIHByb3BlcnRpZXMg4oaSIHphcmF6LnNldCgpCuKUgiAgIOKUlOKUgCBFLWNvbW1lcmNlIOKGkiB6YXJhei5lY29tbWVyY2UoKQrilIIK4pSc4pSAIENvbmZpZ3VyZSBaYXJheiDihpIgY29uZmlndXJhdGlvbi5tZArilIIgICDilJzilIAgQWRkIEdBNC9GYWNlYm9vayDihpIgdG9vbHMgc2V0dXAK4pSCICAg4pSc4pSAIFdoZW4gdG9vbHMgZmlyZSDihpIgdHJpZ2dlcnMK4pSCICAg4pSU4pSAIEdEUFIgY29uc2VudCDihpIgY29uc2VudCBwdXJwb3NlcwrilIIK4pSc4pSAIEludGVncmF0ZSB3aXRoIFdvcmtlcnMg4oaSIHBhdHRlcm5zLm1kI3dvcmtlci1pbnRlZ3JhdGlvbgrilIIgICDilJzilIAgRW5yaWNoIGNvbnRleHQg4oaSIENvbnRleHQgRW5yaWNoZXJzCuKUgiAgIOKUlOKUgCBJbmplY3QgdHJhY2tpbmcg4oaSIEhUTUwgcmV3cml0aW5nCuKUggrilJTilIAgRGVidWcgaXNzdWVzIOKGkiBnb3RjaGFzLm1kCiAgICDilJzilIAgRXZlbnRzIG5vdCBmaXJpbmcg4oaSIHRyb3VibGVzaG9vdGluZwogICAg4pSc4pSAIENvbnNlbnQgaXNzdWVzIOKGkiBjb25zZW50IGRlYnVnZ2luZwogICAg4pSU4pSAIFBlcmZvcm1hbmNlIOKGkiBkZWJ1Z2dpbmcgdG9vbHMKYGBgCgojIyBLZXkgRmVhdHVyZXMKCi0gKioxMDArIFByZS1idWlsdCBUb29scyoqIC0gR0E0LCBGYWNlYm9vaywgR29vZ2xlIEFkcywgVGlrVG9rLCBldGMuCi0gKipaZXJvIENsaWVudCBJbXBhY3QqKiAtIFJ1bnMgYXQgQ2xvdWRmbGFyZSdzIGVkZ2UsIG5vdCBicm93c2VyCi0gKipQcml2YWN5IENvbnRyb2xzKiogLSBDb25zZW50IG1hbmFnZW1lbnQsIGRhdGEgZmlsdGVyaW5nCi0gKipDdXN0b20gVG9vbHMqKiAtIEJ1aWxkIE1hbmFnZWQgQ29tcG9uZW50cyBmb3IgcHJvcHJpZXRhcnkgc3lzdGVtcwotICoqV29ya2VyIEludGVncmF0aW9uKiogLSBFbnJpY2ggY29udGV4dCwgY29tcHV0ZSBkeW5hbWljIHZhbHVlcwotICoqRGVidWcgTW9kZSoqIC0gUmVhbC10aW1lIGV2ZW50IGluc3BlY3Rpb24KCiMjIFJlZmVyZW5jZQoKLSBbWmFyYXogRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3phcmF6LykKLSBbV2ViIEFQSV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3phcmF6L3dlYi1hcGkvKQotIFtNYW5hZ2VkIENvbXBvbmVudHNdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS96YXJhei9hZHZhbmNlZC9sb2FkLWN1c3RvbS1tYW5hZ2VkLWNvbXBvbmVudC8pCgotLS0KClRoaXMgc2tpbGwgZm9jdXNlcyBleGNsdXNpdmVseSBvbiBaYXJhei4gRm9yIFdvcmtlcnMgZGV2ZWxvcG1lbnQsIHNlZSBgY2xvdWRmbGFyZS13b3JrZXJzYCBza2lsbC4K
+# Cloudflare Zaraz
+
+Expert guidance for Cloudflare Zaraz - server-side tag manager for loading third-party tools at the edge.
+
+## What is Zaraz?
+
+Zaraz offloads third-party scripts (analytics, ads, chat, marketing) to Cloudflare's edge, improving site speed, privacy, and security. Zero client-side performance impact.
+
+**Core Concepts:**
+- **Server-side execution** - Scripts run on Cloudflare, not user's browser
+- **Single HTTP request** - All tools loaded via one endpoint
+- **Privacy-first** - Control data sent to third parties
+- **No client-side JS overhead** - Minimal browser impact
+
+## Quick Start
+
+1. Navigate to domain > Zaraz in Cloudflare dashboard
+2. Click "Start setup"
+3. Add tools (Google Analytics, Facebook Pixel, etc.)
+4. Configure triggers (when tools fire)
+5. Add tracking code to your site:
+
+```javascript
+// Track page view
+zaraz.track('page_view');
+
+// Track custom event
+zaraz.track('button_click', { button_id: 'cta' });
+
+// Set user properties
+zaraz.set('userId', 'user_123');
+```
+
+## When to Use Zaraz
+
+**Use Zaraz when:**
+- Adding multiple third-party tools (analytics, ads, marketing)
+- Site performance is critical (no client-side JS overhead)
+- Privacy compliance required (GDPR, CCPA)
+- Non-technical teams need to manage tools
+
+**Use Workers directly when:**
+- Building custom server-side tracking logic
+- Need full control over data processing
+- Integrating with complex backend systems
+- Zaraz's tool library doesn't meet needs
+
+## In This Reference
+
+| File | Purpose | When to Read |
+|------|---------|--------------|
+| [api.md](./api.md) | Web API, zaraz object, consent methods | Implementing tracking calls |
+| [configuration.md](./configuration.md) | Dashboard setup, triggers, tools | Initial setup, adding tools |
+| [patterns.md](./patterns.md) | SPA, e-commerce, Worker integration | Best practices, common scenarios |
+| [gotchas.md](./gotchas.md) | Troubleshooting, limits, pitfalls | Debugging issues |
+
+## Reading Order by Task
+
+| Task | Files to Read |
+|------|---------------|
+| Add analytics to site | README → configuration.md |
+| Track custom events | README → api.md |
+| Debug tracking issues | gotchas.md |
+| SPA tracking | api.md → patterns.md (SPA section) |
+| E-commerce tracking | api.md#ecommerce → patterns.md#ecommerce |
+| Worker integration | patterns.md#worker-integration |
+| GDPR compliance | api.md#consent → configuration.md#consent |
+
+## Decision Tree
+
+```
+What do you need?
+
+├─ Track events in browser → api.md
+│   ├─ Page views, clicks → zaraz.track()
+│   ├─ User properties → zaraz.set()
+│   └─ E-commerce → zaraz.ecommerce()
+│
+├─ Configure Zaraz → configuration.md
+│   ├─ Add GA4/Facebook → tools setup
+│   ├─ When tools fire → triggers
+│   └─ GDPR consent → consent purposes
+│
+├─ Integrate with Workers → patterns.md#worker-integration
+│   ├─ Enrich context → Context Enrichers
+│   └─ Inject tracking → HTML rewriting
+│
+└─ Debug issues → gotchas.md
+    ├─ Events not firing → troubleshooting
+    ├─ Consent issues → consent debugging
+    └─ Performance → debugging tools
+```
+
+## Key Features
+
+- **100+ Pre-built Tools** - GA4, Facebook, Google Ads, TikTok, etc.
+- **Zero Client Impact** - Runs at Cloudflare's edge, not browser
+- **Privacy Controls** - Consent management, data filtering
+- **Custom Tools** - Build Managed Components for proprietary systems
+- **Worker Integration** - Enrich context, compute dynamic values
+- **Debug Mode** - Real-time event inspection
+
+## Reference
+
+- [Zaraz Docs](https://developers.cloudflare.com/zaraz/)
+- [Web API](https://developers.cloudflare.com/zaraz/web-api/)
+- [Managed Components](https://developers.cloudflare.com/zaraz/advanced/load-custom-managed-component/)
+
+---
+
+This skill focuses exclusively on Zaraz. For Workers development, see `cloudflare-workers` skill.

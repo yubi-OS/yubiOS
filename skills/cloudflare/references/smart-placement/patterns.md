@@ -1,1 +1,183 @@
-IyBTbWFydCBQbGFjZW1lbnQgUGF0dGVybnMKCiMjIEJhY2tlbmQgV29ya2VyIHdpdGggRGF0YWJhc2UgQWNjZXNzCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IHVzZXIgPSBhd2FpdCBlbnYuREFUQUJBU0UucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuZmlyc3QoKTsKICAgIGNvbnN0IG9yZGVycyA9IGF3YWl0IGVudi5EQVRBQkFTRS5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIG9yZGVycyBXSEVSRSB1c2VyX2lkID0gPycpLmJpbmQodXNlcklkKS5hbGwoKTsKICAgIHJldHVybiBSZXNwb25zZS5qc29uKHsgdXNlciwgb3JkZXJzIH0pOwogIH0KfTsKYGBgCgpgYGBqc29uYwp7ICJwbGFjZW1lbnQiOiB7ICJtb2RlIjogInNtYXJ0IiB9LCAiZDFfZGF0YWJhc2VzIjogW3sgImJpbmRpbmciOiAiREFUQUJBU0UiLCAiZGF0YWJhc2VfaWQiOiAieHh4IiB9XSB9CmBgYAoKIyMgRnJvbnRlbmQgKyBCYWNrZW5kIFNwbGl0IChTZXJ2aWNlIEJpbmRpbmdzKQoKKipGcm9udGVuZDoqKiBSdW5zIGF0IGVkZ2UgZm9yIGZhc3QgdXNlciByZXNwb25zZQoqKkJhY2tlbmQ6KiogU21hcnQgUGxhY2VtZW50IHJ1bnMgY2xvc2UgdG8gZGF0YWJhc2UKCmBgYHR5cGVzY3JpcHQKLy8gRnJvbnRlbmQgV29ya2VyIC0gcm91dGVzIHJlcXVlc3RzIHRvIGJhY2tlbmQKaW50ZXJmYWNlIEVudiB7CiAgQkFDS0VORDogRmV0Y2hlcjsgIC8vIFNlcnZpY2UgQmluZGluZyB0byBiYWNrZW5kIFdvcmtlcgp9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBpZiAobmV3IFVSTChyZXF1ZXN0LnVybCkucGF0aG5hbWUuc3RhcnRzV2l0aCgnL2FwaS8nKSkgewogICAgICByZXR1cm4gZW52LkJBQ0tFTkQuZmV0Y2gocmVxdWVzdCk7ICAvLyBGb3J3YXJkIHRvIGJhY2tlbmQKICAgIH0KICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ0Zyb250ZW5kIGNvbnRlbnQnKTsKICB9Cn07CgovLyBCYWNrZW5kIFdvcmtlciAtIGRhdGFiYXNlIG9wZXJhdGlvbnMKaW50ZXJmYWNlIEJhY2tlbmRFbnYgewogIERBVEFCQVNFOiBEMURhdGFiYXNlOwp9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBCYWNrZW5kRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgZGF0YSA9IGF3YWl0IGVudi5EQVRBQkFTRS5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHRhYmxlJykuYWxsKCk7CiAgICByZXR1cm4gUmVzcG9uc2UuanNvbihkYXRhKTsKICB9Cn07CmBgYAoKKipDUklUSUNBTDoqKiBVc2UgZmV0Y2gtYmFzZWQgU2VydmljZSBCaW5kaW5ncyAoc2hvd24gYWJvdmUpLiBJZiB1c2luZyBSUEMgd2l0aCBgV29ya2VyRW50cnlwb2ludGAsIFNtYXJ0IFBsYWNlbWVudCB3aWxsIE5PVCBvcHRpbWl6ZSB0aG9zZSBtZXRob2QgY2FsbHMgLSBvbmx5IGBmZXRjaGAgaGFuZGxlcnMgYXJlIGFmZmVjdGVkLgoKKipSUEMgdnMgRmV0Y2ggLSBDUklUSUNBTDoqKiBTbWFydCBQbGFjZW1lbnQgT05MWSB3b3JrcyB3aXRoIGZldGNoLWJhc2VkIGJpbmRpbmdzLCBOT1QgUlBDLgoKYGBgdHlwZXNjcmlwdAovLyDinYwgUlBDIC0gU21hcnQgUGxhY2VtZW50IGhhcyBOTyBFRkZFQ1Qgb24gYmFja2VuZCBSUEMgbWV0aG9kcwpleHBvcnQgY2xhc3MgQmFja2VuZFJQQyBleHRlbmRzIFdvcmtlckVudHJ5cG9pbnQgewogIGFzeW5jIGdldERhdGEoKSB7CiAgICAvLyBBTFdBWVMgcnVucyBhdCBlZGdlLCBTbWFydCBQbGFjZW1lbnQgaWdub3JlZAogICAgcmV0dXJuIGF3YWl0IHRoaXMuZW52LkRBVEFCQVNFLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gdGFibGUnKS5hbGwoKTsKICB9Cn0KCi8vIOKchSBGZXRjaCAtIFNtYXJ0IFBsYWNlbWVudCBXT1JLUwpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICAvLyBSdW5zIGNsb3NlIHRvIERBVEFCQVNFIHdoZW4gU21hcnQgUGxhY2VtZW50IGVuYWJsZWQKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBlbnYuREFUQUJBU0UucHJlcGFyZSgnU0VMRUNUICogRlJPTSB0YWJsZScpLmFsbCgpOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oZGF0YSk7CiAgfQp9OwpgYGAKCiMjIEV4dGVybmFsIEFQSSBJbnRlZ3JhdGlvbgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCBhcGlVcmwgPSAnaHR0cHM6Ly9hcGkucGFydG5lci5jb20nOwogICAgY29uc3QgaGVhZGVycyA9IHsgJ0F1dGhvcml6YXRpb24nOiBgQmVhcmVyICR7ZW52LkFQSV9LRVl9YCB9OwogICAgCiAgICBjb25zdCBbcHJvZmlsZSwgdHJhbnNhY3Rpb25zXSA9IGF3YWl0IFByb21pc2UuYWxsKFsKICAgICAgZmV0Y2goYCR7YXBpVXJsfS9wcm9maWxlYCwgeyBoZWFkZXJzIH0pLAogICAgICBmZXRjaChgJHthcGlVcmx9L3RyYW5zYWN0aW9uc2AsIHsgaGVhZGVycyB9KQogICAgXSk7CiAgICAKICAgIHJldHVybiBSZXNwb25zZS5qc29uKHsgCiAgICAgIHByb2ZpbGU6IGF3YWl0IHByb2ZpbGUuanNvbigpLCAKICAgICAgdHJhbnNhY3Rpb25zOiBhd2FpdCB0cmFuc2FjdGlvbnMuanNvbigpCiAgICB9KTsKICB9Cn07CmBgYAoKIyMgU1NSIC8gQVBJIEdhdGV3YXkgUGF0dGVybgoKYGBgdHlwZXNjcmlwdAovLyBGcm9udGVuZCAoZWRnZSkgLSBhdXRoL3JvdXRpbmcgY2xvc2UgdG8gdXNlcgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpIHsKICAgIGlmICghcmVxdWVzdC5oZWFkZXJzLmdldCgnQXV0aG9yaXphdGlvbicpKSB7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ1VuYXV0aG9yaXplZCcsIHsgc3RhdHVzOiA0MDEgfSk7CiAgICB9CiAgICBjb25zdCBkYXRhID0gYXdhaXQgZW52LkJBQ0tFTkQuZmV0Y2gocmVxdWVzdCk7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKHJlbmRlclBhZ2UoYXdhaXQgZGF0YS5qc29uKCkpLCB7IAogICAgICBoZWFkZXJzOiB7ICdDb250ZW50LVR5cGUnOiAndGV4dC9odG1sJyB9IAogICAgfSk7CiAgfQp9OwoKLy8gQmFja2VuZCAoU21hcnQgUGxhY2VtZW50KSAtIERCIG9wZXJhdGlvbnMgY2xvc2UgdG8gZGF0YQpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpIHsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBlbnYuREFUQUJBU0UucHJlcGFyZSgnU0VMRUNUICogRlJPTSBwYWdlcyBXSEVSRSBpZCA9ID8nKS5iaW5kKHBhZ2VJZCkuZmlyc3QoKTsKICAgIHJldHVybiBSZXNwb25zZS5qc29uKGRhdGEpOwogIH0KfTsKYGBgCgojIyBEdXJhYmxlIE9iamVjdHMgd2l0aCBTbWFydCBQbGFjZW1lbnQKCioqS2V5IHByaW5jaXBsZToqKiBTbWFydCBQbGFjZW1lbnQgZG9lcyBOT1QgY29udHJvbCBXSEVSRSBEdXJhYmxlIE9iamVjdHMgcnVuLiBET3MgYWx3YXlzIHJ1biBpbiB0aGVpciBkZXNpZ25hdGVkIHJlZ2lvbiAoYmFzZWQgb24ganVyaXNkaWN0aW9uIG9yIHNtYXJ0IGxvY2F0aW9uIGhpbnRzKS4KCioqV2hhdCBTbWFydCBQbGFjZW1lbnQgRE9FUyBhZmZlY3Q6KiogVGhlIGxvY2F0aW9uIG9mIHRoZSBjb29yZGluYXRvciBXb3JrZXIncyBgZmV0Y2hgIGhhbmRsZXIgdGhhdCBtYWtlcyBjYWxscyB0byBtdWx0aXBsZSBET3MuCgoqKlBhdHRlcm46KiogRW5hYmxlIFNtYXJ0IFBsYWNlbWVudCBvbiBjb29yZGluYXRvciBXb3JrZXIgdGhhdCBhZ2dyZWdhdGVzIGRhdGEgZnJvbSBtdWx0aXBsZSBET3M6CgpgYGB0eXBlc2NyaXB0Ci8vIFdvcmtlciB3aXRoIFNtYXJ0IFBsYWNlbWVudCAtIGFnZ3JlZ2F0ZXMgZGF0YSBmcm9tIG11bHRpcGxlIERPcwpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCB1c2VySWQgPSBuZXcgVVJMKHJlcXVlc3QudXJsKS5zZWFyY2hQYXJhbXMuZ2V0KCd1c2VyJyk7CiAgICAKICAgIC8vIEdldCBETyBzdHVicwogICAgY29uc3QgdXNlckRPID0gZW52LlVTRVJfRE8uZ2V0KGVudi5VU0VSX0RPLmlkRnJvbU5hbWUodXNlcklkKSk7CiAgICBjb25zdCBhbmFseXRpY3NJRCA9IGVudi5BTkFMWVRJQ1NfRE8uaWRGcm9tTmFtZShgYW5hbHl0aWNzLSR7dXNlcklkfWApOwogICAgY29uc3QgYW5hbHl0aWNzRE8gPSBlbnYuQU5BTFlUSUNTX0RPLmdldChhbmFseXRpY3NJRCk7CiAgICAKICAgIC8vIEZldGNoIGZyb20gbXVsdGlwbGUgRE9zCiAgICBjb25zdCBbdXNlckRhdGEsIGFuYWx5dGljc0RhdGFdID0gYXdhaXQgUHJvbWlzZS5hbGwoWwogICAgICB1c2VyRE8uZmV0Y2gobmV3IFJlcXVlc3QoJ2h0dHBzOi8vZG8vcHJvZmlsZScpKSwKICAgICAgYW5hbHl0aWNzRE8uZmV0Y2gobmV3IFJlcXVlc3QoJ2h0dHBzOi8vZG8vc3RhdHMnKSkKICAgIF0pOwogICAgCiAgICByZXR1cm4gUmVzcG9uc2UuanNvbih7CiAgICAgIHVzZXI6IGF3YWl0IHVzZXJEYXRhLmpzb24oKSwKICAgICAgYW5hbHl0aWNzOiBhd2FpdCBhbmFseXRpY3NEYXRhLmpzb24oKQogICAgfSk7CiAgfQp9OwpgYGAKCmBgYGpzb25jCi8vIHdyYW5nbGVyLmpzb25jCnsKICAicGxhY2VtZW50IjogeyAibW9kZSI6ICJzbWFydCIgfSwKICAiZHVyYWJsZV9vYmplY3RzIjogewogICAgImJpbmRpbmdzIjogWwogICAgICB7ICJuYW1lIjogIlVTRVJfRE8iLCAiY2xhc3NfbmFtZSI6ICJVc2VyRE8iIH0sCiAgICAgIHsgIm5hbWUiOiAiQU5BTFlUSUNTX0RPIiwgImNsYXNzX25hbWUiOiAiQW5hbHl0aWNzRE8iIH0KICAgIF0KICB9Cn0KYGBgCgoqKldoZW4gdGhpcyBoZWxwczoqKiAKLSBXb3JrZXIncyBgZmV0Y2hgIGhhbmRsZXIgcnVucyBjbG9zZXIgdG8gRE8gcmVnaW9ucywgcmVkdWNpbmcgbmV0d29yayBsYXRlbmN5IGZvciBtdWx0aXBsZSBETyBjYWxscwotIE1vc3QgYmVuZWZpY2lhbCB3aGVuIERPcyBhcmUgZ2VvZ3JhcGhpY2FsbHkgY29uY2VudHJhdGVkIG9yIGluIHNwZWNpZmljIGp1cmlzZGljdGlvbnMKLSBIZWxwcyB3aGVuIGNvb3JkaW5hdG9yIG1ha2VzIG1hbnkgc2VxdWVudGlhbCBvciBwYXJhbGxlbCBETyBjYWxscwoKKipXaGVuIHRoaXMgRE9FU04nVCBoZWxwOioqCi0gRE9zIGFyZSBnbG9iYWxseSBkaXN0cmlidXRlZCAobm8gc2luZ2xlIG9wdGltYWwgV29ya2VyIGxvY2F0aW9uKQotIFdvcmtlciBvbmx5IGNhbGxzIGEgc2luZ2xlIERPCi0gRE8gY2FsbHMgYXJlIGluZnJlcXVlbnQgb3IgY2FjaGVkCgojIyBCZXN0IFByYWN0aWNlcwoKLSBTcGxpdCBmdWxsLXN0YWNrIGFwcHM6IGZyb250ZW5kIGF0IGVkZ2UsIGJhY2tlbmQgd2l0aCBTbWFydCBQbGFjZW1lbnQKLSBVc2UgZmV0Y2gtYmFzZWQgU2VydmljZSBCaW5kaW5ncyAobm90IFJQQykKLSBFbmFibGUgZm9yIGJhY2tlbmQgbG9naWM6IEFQSXMsIGRhdGEgYWdncmVnYXRpb24sIERCIG9wZXJhdGlvbnMKLSBEb24ndCBlbmFibGUgZm9yOiBzdGF0aWMgY29udGVudCwgZWRnZSBsb2dpYywgUlBDIG1ldGhvZHMsIFBhZ2VzIHdpdGggYHJ1bl93b3JrZXJfZmlyc3RgCi0gV2FpdCAxNSsgbWluIGZvciBhbmFseXNpcywgdmVyaWZ5IGBwbGFjZW1lbnRfc3RhdHVzID0gU1VDQ0VTU2AK
+# Smart Placement Patterns
+
+## Backend Worker with Database Access
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const user = await env.DATABASE.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first();
+    const orders = await env.DATABASE.prepare('SELECT * FROM orders WHERE user_id = ?').bind(userId).all();
+    return Response.json({ user, orders });
+  }
+};
+```
+
+```jsonc
+{ "placement": { "mode": "smart" }, "d1_databases": [{ "binding": "DATABASE", "database_id": "xxx" }] }
+```
+
+## Frontend + Backend Split (Service Bindings)
+
+**Frontend:** Runs at edge for fast user response
+**Backend:** Smart Placement runs close to database
+
+```typescript
+// Frontend Worker - routes requests to backend
+interface Env {
+  BACKEND: Fetcher;  // Service Binding to backend Worker
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    if (new URL(request.url).pathname.startsWith('/api/')) {
+      return env.BACKEND.fetch(request);  // Forward to backend
+    }
+    return new Response('Frontend content');
+  }
+};
+
+// Backend Worker - database operations
+interface BackendEnv {
+  DATABASE: D1Database;
+}
+
+export default {
+  async fetch(request: Request, env: BackendEnv): Promise<Response> {
+    const data = await env.DATABASE.prepare('SELECT * FROM table').all();
+    return Response.json(data);
+  }
+};
+```
+
+**CRITICAL:** Use fetch-based Service Bindings (shown above). If using RPC with `WorkerEntrypoint`, Smart Placement will NOT optimize those method calls - only `fetch` handlers are affected.
+
+**RPC vs Fetch - CRITICAL:** Smart Placement ONLY works with fetch-based bindings, NOT RPC.
+
+```typescript
+// ❌ RPC - Smart Placement has NO EFFECT on backend RPC methods
+export class BackendRPC extends WorkerEntrypoint {
+  async getData() {
+    // ALWAYS runs at edge, Smart Placement ignored
+    return await this.env.DATABASE.prepare('SELECT * FROM table').all();
+  }
+}
+
+// ✅ Fetch - Smart Placement WORKS
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    // Runs close to DATABASE when Smart Placement enabled
+    const data = await env.DATABASE.prepare('SELECT * FROM table').all();
+    return Response.json(data);
+  }
+};
+```
+
+## External API Integration
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const apiUrl = 'https://api.partner.com';
+    const headers = { 'Authorization': `Bearer ${env.API_KEY}` };
+    
+    const [profile, transactions] = await Promise.all([
+      fetch(`${apiUrl}/profile`, { headers }),
+      fetch(`${apiUrl}/transactions`, { headers })
+    ]);
+    
+    return Response.json({ 
+      profile: await profile.json(), 
+      transactions: await transactions.json()
+    });
+  }
+};
+```
+
+## SSR / API Gateway Pattern
+
+```typescript
+// Frontend (edge) - auth/routing close to user
+export default {
+  async fetch(request: Request, env: Env) {
+    if (!request.headers.get('Authorization')) {
+      return new Response('Unauthorized', { status: 401 });
+    }
+    const data = await env.BACKEND.fetch(request);
+    return new Response(renderPage(await data.json()), { 
+      headers: { 'Content-Type': 'text/html' } 
+    });
+  }
+};
+
+// Backend (Smart Placement) - DB operations close to data
+export default {
+  async fetch(request: Request, env: Env) {
+    const data = await env.DATABASE.prepare('SELECT * FROM pages WHERE id = ?').bind(pageId).first();
+    return Response.json(data);
+  }
+};
+```
+
+## Durable Objects with Smart Placement
+
+**Key principle:** Smart Placement does NOT control WHERE Durable Objects run. DOs always run in their designated region (based on jurisdiction or smart location hints).
+
+**What Smart Placement DOES affect:** The location of the coordinator Worker's `fetch` handler that makes calls to multiple DOs.
+
+**Pattern:** Enable Smart Placement on coordinator Worker that aggregates data from multiple DOs:
+
+```typescript
+// Worker with Smart Placement - aggregates data from multiple DOs
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const userId = new URL(request.url).searchParams.get('user');
+    
+    // Get DO stubs
+    const userDO = env.USER_DO.get(env.USER_DO.idFromName(userId));
+    const analyticsID = env.ANALYTICS_DO.idFromName(`analytics-${userId}`);
+    const analyticsDO = env.ANALYTICS_DO.get(analyticsID);
+    
+    // Fetch from multiple DOs
+    const [userData, analyticsData] = await Promise.all([
+      userDO.fetch(new Request('https://do/profile')),
+      analyticsDO.fetch(new Request('https://do/stats'))
+    ]);
+    
+    return Response.json({
+      user: await userData.json(),
+      analytics: await analyticsData.json()
+    });
+  }
+};
+```
+
+```jsonc
+// wrangler.jsonc
+{
+  "placement": { "mode": "smart" },
+  "durable_objects": {
+    "bindings": [
+      { "name": "USER_DO", "class_name": "UserDO" },
+      { "name": "ANALYTICS_DO", "class_name": "AnalyticsDO" }
+    ]
+  }
+}
+```
+
+**When this helps:** 
+- Worker's `fetch` handler runs closer to DO regions, reducing network latency for multiple DO calls
+- Most beneficial when DOs are geographically concentrated or in specific jurisdictions
+- Helps when coordinator makes many sequential or parallel DO calls
+
+**When this DOESN'T help:**
+- DOs are globally distributed (no single optimal Worker location)
+- Worker only calls a single DO
+- DO calls are infrequent or cached
+
+## Best Practices
+
+- Split full-stack apps: frontend at edge, backend with Smart Placement
+- Use fetch-based Service Bindings (not RPC)
+- Enable for backend logic: APIs, data aggregation, DB operations
+- Don't enable for: static content, edge logic, RPC methods, Pages with `run_worker_first`
+- Wait 15+ min for analysis, verify `placement_status = SUCCESS`

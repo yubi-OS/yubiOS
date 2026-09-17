@@ -1,1 +1,118 @@
-IyBHcmFwaFFMIEFuYWx5dGljcyBBUEkgQ29uZmlndXJhdGlvbgoKIyMgQXV0aGVudGljYXRpb24KCiMjIyBBUEkgVG9rZW4gKFJlY29tbWVuZGVkKQoKfCBQZXJtaXNzaW9uIHwgU2NvcGUgfCBVc2UgQ2FzZSB8CnwtLS0tLS0tLS0tLS18LS0tLS0tLXwtLS0tLS0tLS0tfAp8ICoqQWNjb3VudCBBbmFseXRpY3M6IFJlYWQqKiB8IEFjY291bnQtd2lkZSB8IFdvcmtlcnMsIFIyLCBLViwgRDEsIERPLCBBSSwgTmV0d29yayBBbmFseXRpY3MgfAp8ICoqWm9uZSBBbmFseXRpY3M6IFJlYWQqKiB8IFBlci16b25lIHwgSFRUUCByZXF1ZXN0cywgRmlyZXdhbGwsIEROUywgTG9hZCBCYWxhbmNpbmcgfAp8ICoqQWxsIHpvbmVzIC0gQW5hbHl0aWNzOiBSZWFkKiogfCBBbGwgem9uZXMgfCBNdWx0aS16b25lIEhUVFAvRmlyZXdhbGwvRE5TIHF1ZXJpZXMgfAoKQ3JlYXRlIHRva2VucyBhdDogW2Rhc2guY2xvdWRmbGFyZS5jb20gPiBBY2NvdW50IEFQSSBUb2tlbnNdKGh0dHBzOi8vZGFzaC5jbG91ZGZsYXJlLmNvbS8/dG89LzphY2NvdW50L2FwaS10b2tlbnMpCgpgYGBiYXNoCiMgVmVyaWZ5IHRva2VuCmN1cmwgLXMgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2dyYXBocWwgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENGX0FQSV9UT0tFTiIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtLWRhdGEgJ3sicXVlcnkiOiJ7IHZpZXdlciB7IHpvbmVzKGZpbHRlcjoge3pvbmVUYWc6IFwiWk9ORV9JRFwifSkgeyBodHRwUmVxdWVzdHNBZGFwdGl2ZUdyb3VwcyhsaW1pdDogMSwgZmlsdGVyOiB7ZGF0ZXRpbWVfZ3Q6IFwiMjAyNS0wMS0wMVQwMDowMDowMFpcIn0pIHsgY291bnQgfSB9IH0gfSJ9JwpgYGAKCiMjIyBBUEkgS2V5ICsgRW1haWwgKExlZ2FjeSkKCk5vdCByZWNvbW1lbmRlZC4gVXNlIGBYLUF1dGgtRW1haWxgICsgYFgtQXV0aC1LZXlgIGhlYWRlcnMgaW5zdGVhZCBvZiBgQXV0aG9yaXphdGlvbjogQmVhcmVyYC4KCiMjIENsaWVudCBTZXR1cAoKIyMjIGN1cmwKCmBgYGJhc2gKY3VybCAtcyBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvZ3JhcGhxbCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0ZfQVBJX1RPS0VOIiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC0tZGF0YSAnewogICAgInF1ZXJ5IjogInF1ZXJ5KCR6b25lVGFnOiBzdHJpbmchLCAkc3RhcnQ6IFRpbWUhLCAkZW5kOiBUaW1lISkgeyB2aWV3ZXIgeyB6b25lcyhmaWx0ZXI6IHt6b25lVGFnOiAkem9uZVRhZ30pIHsgaHR0cFJlcXVlc3RzQWRhcHRpdmVHcm91cHMoZmlsdGVyOiB7ZGF0ZXRpbWVfZ3Q6ICRzdGFydCwgZGF0ZXRpbWVfbHQ6ICRlbmR9LCBsaW1pdDogMTAsIG9yZGVyQnk6IFtkYXRldGltZUZpdmVNaW51dGVzX0RFU0NdKSB7IGNvdW50IGRpbWVuc2lvbnMgeyBkYXRldGltZUZpdmVNaW51dGVzIH0gfSB9IH0gfSIsCiAgICAidmFyaWFibGVzIjogeyAiem9uZVRhZyI6ICJaT05FX0lEIiwgInN0YXJ0IjogIjIwMjUtMDEtMDFUMDA6MDA6MDBaIiwgImVuZCI6ICIyMDI1LTAxLTAyVDAwOjAwOjAwWiIgfQogIH0nIHwganEgLgpgYGAKCiMjIyBUeXBlU2NyaXB0IC8gSmF2YVNjcmlwdAoKYGBgdHlwZXNjcmlwdApjb25zdCBHUkFQSFFMX0VORFBPSU5UID0gImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9ncmFwaHFsIjsKCmFzeW5jIGZ1bmN0aW9uIHF1ZXJ5R3JhcGhRTDxUPihxdWVyeTogc3RyaW5nLCB2YXJpYWJsZXM6IFJlY29yZDxzdHJpbmcsIHVua25vd24+ID0ge30pOiBQcm9taXNlPFQ+IHsKICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKEdSQVBIUUxfRU5EUE9JTlQsIHsKICAgIG1ldGhvZDogIlBPU1QiLAogICAgaGVhZGVyczogeyBBdXRob3JpemF0aW9uOiBgQmVhcmVyICR7cHJvY2Vzcy5lbnYuQ0ZfQVBJX1RPS0VOfWAsICJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiIgfSwKICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsgcXVlcnksIHZhcmlhYmxlcyB9KSwKICB9KTsKICBpZiAoIXJlc3BvbnNlLm9rKSB0aHJvdyBuZXcgRXJyb3IoYEhUVFAgJHtyZXNwb25zZS5zdGF0dXN9OiAke3Jlc3BvbnNlLnN0YXR1c1RleHR9YCk7CiAgY29uc3QganNvbiA9IGF3YWl0IHJlc3BvbnNlLmpzb24oKSBhcyB7IGRhdGE6IFQgfCBudWxsOyBlcnJvcnM/OiB7IG1lc3NhZ2U6IHN0cmluZyB9W10gfTsKICBpZiAoanNvbi5lcnJvcnM/Lmxlbmd0aCkgdGhyb3cgbmV3IEVycm9yKGpzb24uZXJyb3JzLm1hcCgoZSkgPT4gZS5tZXNzYWdlKS5qb2luKCI7ICIpKTsKICByZXR1cm4ganNvbi5kYXRhITsKfQpgYGAKCiMjIyBQeXRob24KCmBgYHB5dGhvbgppbXBvcnQgcmVxdWVzdHMsIG9zCgpkZWYgcXVlcnlfZ3JhcGhxbChxdWVyeTogc3RyLCB2YXJpYWJsZXM6IGRpY3QgPSBOb25lKSAtPiBkaWN0OgogICAgciA9IHJlcXVlc3RzLnBvc3QoImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9ncmFwaHFsIiwKICAgICAgICBoZWFkZXJzPXsiQXV0aG9yaXphdGlvbiI6IGYiQmVhcmVyIHtvcy5lbnZpcm9uWydDRl9BUElfVE9LRU4nXX0iLCAiQ29udGVudC1UeXBlIjogImFwcGxpY2F0aW9uL2pzb24ifSwKICAgICAgICBqc29uPXsicXVlcnkiOiBxdWVyeSwgInZhcmlhYmxlcyI6IHZhcmlhYmxlcyBvciB7fX0pCiAgICByLnJhaXNlX2Zvcl9zdGF0dXMoKQogICAgcmVzdWx0ID0gci5qc29uKCkKICAgIGlmIHJlc3VsdC5nZXQoImVycm9ycyIpOgogICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiOyAiLmpvaW4oZVsibWVzc2FnZSJdIGZvciBlIGluIHJlc3VsdFsiZXJyb3JzIl0pKQogICAgcmV0dXJuIHJlc3VsdFsiZGF0YSJdCmBgYAoKIyMjIEZyb20gYSBDbG91ZGZsYXJlIFdvcmtlcgoKU3RvcmUgdGhlIEFQSSB0b2tlbiBhcyBhIHNlY3JldCAoYENGX0FQSV9UT0tFTmApLiBVc2Ugc3RhbmRhcmQgYGZldGNoYCB0byBQT1NUIHRvIGBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvZ3JhcGhxbGAgd2l0aCB0aGUgc2FtZSBKU09OIGJvZHkgZm9ybWF0IGFzIGFib3ZlLiBBbHdheXMgY2hlY2sgYHJlc3BvbnNlLmVycm9yc2Ag4oCUIEdyYXBoUUwgcmV0dXJucyAyMDAgZXZlbiBvbiBxdWVyeSBmYWlsdXJlcy4KCiMjIEdyYXBoUUwgQVBJIEV4cGxvcmVyCgpJbnRlcmFjdGl2ZSBleHBsb3JlciBhdCBbZ3JhcGhxbC5jbG91ZGZsYXJlLmNvbV0oaHR0cHM6Ly9ncmFwaHFsLmNsb3VkZmxhcmUuY29tLykg4oCUIHByb3ZpZGVzIHNjaGVtYSBkb2NzLCBhdXRvY29tcGxldGUsIHZhcmlhYmxlIHBhbmVsLCBhbmQgc2hhcmVhYmxlIHF1ZXJpZXMuIEF1dGhlbnRpY2F0ZXMgdmlhIHlvdXIgQ2xvdWRmbGFyZSBkYXNoYm9hcmQgc2Vzc2lvbi4KCiMjIFNjaGVtYSBJbnRyb3NwZWN0aW9uCgpgYGBncmFwaHFsCiMgTGlzdCB6b25lLXNjb3BlZCBkYXRhc2V0cwp7IF9fdHlwZShuYW1lOiAiem9uZSIpIHsgZmllbGRzIHsgbmFtZSBkZXNjcmlwdGlvbiB9IH0gfQoKIyBMaXN0IGFjY291bnQtc2NvcGVkIGRhdGFzZXRzCnsgX190eXBlKG5hbWU6ICJhY2NvdW50IikgeyBmaWVsZHMgeyBuYW1lIGRlc2NyaXB0aW9uIH0gfSB9CgojIERpc2NvdmVyIGRpbWVuc2lvbnMgZm9yIGEgZGF0YXNldAp7IF9fdHlwZShuYW1lOiAiWm9uZUh0dHBSZXF1ZXN0c0FkYXB0aXZlR3JvdXBzRGltZW5zaW9ucyIpIHsKICBmaWVsZHMgeyBuYW1lIHR5cGUgeyBuYW1lIGtpbmQgfSB9Cn0gfQoKIyBEaXNjb3ZlciBmaWx0ZXIgb3BlcmF0b3JzIGZvciBhIGRhdGFzZXQKeyBfX3R5cGUobmFtZTogIlpvbmVIdHRwUmVxdWVzdHNBZGFwdGl2ZUdyb3Vwc0ZpbHRlcl9JbnB1dE9iamVjdCIpIHsKICBpbnB1dEZpZWxkcyB7IG5hbWUgdHlwZSB7IG5hbWUga2luZCB9IH0KfSB9CmBgYAoKIyMgRmluZGluZyBZb3VyIFpvbmUgYW5kIEFjY291bnQgSURzCgotICoqWm9uZSBJRCoqOiBEYXNoYm9hcmQgPiBzZWxlY3Qgem9uZSA+IE92ZXJ2aWV3IChyaWdodCBzaWRlYmFyKSwgb3IgdmlhIEFQSQotICoqQWNjb3VudCBJRCoqOiBEYXNoYm9hcmQgPiBBY2NvdW50IEhvbWUgVVJMLCBvciB2aWEgQVBJCgpgYGBiYXNoCmN1cmwgLXMgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENGX0FQSV9UT0tFTiIgfCBqcSAnLnJlc3VsdFtdIHwge25hbWUsIGlkfScKY3VybCAtcyBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0ZfQVBJX1RPS0VOIiB8IGpxICcucmVzdWx0W10gfCB7bmFtZSwgaWR9JwpgYGAKCiMjIFNlZSBBbHNvCgotIFtSRUFETUUubWRdKFJFQURNRS5tZCkgLSBPdmVydmlldywgZGVjaXNpb24gdHJlZSwgZGF0YXNldCBpbmRleAotIFthcGkubWRdKGFwaS5tZCkgLSBRdWVyeSBzdHJ1Y3R1cmUsIGFnZ3JlZ2F0aW9uIGZpZWxkcywgZmlsdGVyaW5nIG9wZXJhdG9ycwotIFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIC0gQ29tbW9uIHF1ZXJ5IHBhdHRlcm5zICh0aW1lLXNlcmllcywgdG9wLU4sIHBlci1wcm9kdWN0KQotIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSAtIFJhdGUgbGltaXRzLCBzYW1wbGluZywgdHJvdWJsZXNob290aW5nCg==
+# GraphQL Analytics API Configuration
+
+## Authentication
+
+### API Token (Recommended)
+
+| Permission | Scope | Use Case |
+|------------|-------|----------|
+| **Account Analytics: Read** | Account-wide | Workers, R2, KV, D1, DO, AI, Network Analytics |
+| **Zone Analytics: Read** | Per-zone | HTTP requests, Firewall, DNS, Load Balancing |
+| **All zones - Analytics: Read** | All zones | Multi-zone HTTP/Firewall/DNS queries |
+
+Create tokens at: [dash.cloudflare.com > Account API Tokens](https://dash.cloudflare.com/?to=/:account/api-tokens)
+
+```bash
+# Verify token
+curl -s https://api.cloudflare.com/client/v4/graphql \
+  -H "Authorization: Bearer $CF_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  --data '{"query":"{ viewer { zones(filter: {zoneTag: \"ZONE_ID\"}) { httpRequestsAdaptiveGroups(limit: 1, filter: {datetime_gt: \"2025-01-01T00:00:00Z\"}) { count } } } }"}'
+```
+
+### API Key + Email (Legacy)
+
+Not recommended. Use `X-Auth-Email` + `X-Auth-Key` headers instead of `Authorization: Bearer`.
+
+## Client Setup
+
+### curl
+
+```bash
+curl -s https://api.cloudflare.com/client/v4/graphql \
+  -H "Authorization: Bearer $CF_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "query": "query($zoneTag: string!, $start: Time!, $end: Time!) { viewer { zones(filter: {zoneTag: $zoneTag}) { httpRequestsAdaptiveGroups(filter: {datetime_gt: $start, datetime_lt: $end}, limit: 10, orderBy: [datetimeFiveMinutes_DESC]) { count dimensions { datetimeFiveMinutes } } } } }",
+    "variables": { "zoneTag": "ZONE_ID", "start": "2025-01-01T00:00:00Z", "end": "2025-01-02T00:00:00Z" }
+  }' | jq .
+```
+
+### TypeScript / JavaScript
+
+```typescript
+const GRAPHQL_ENDPOINT = "https://api.cloudflare.com/client/v4/graphql";
+
+async function queryGraphQL<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${process.env.CF_API_TOKEN}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ query, variables }),
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  const json = await response.json() as { data: T | null; errors?: { message: string }[] };
+  if (json.errors?.length) throw new Error(json.errors.map((e) => e.message).join("; "));
+  return json.data!;
+}
+```
+
+### Python
+
+```python
+import requests, os
+
+def query_graphql(query: str, variables: dict = None) -> dict:
+    r = requests.post("https://api.cloudflare.com/client/v4/graphql",
+        headers={"Authorization": f"Bearer {os.environ['CF_API_TOKEN']}", "Content-Type": "application/json"},
+        json={"query": query, "variables": variables or {}})
+    r.raise_for_status()
+    result = r.json()
+    if result.get("errors"):
+        raise Exception("; ".join(e["message"] for e in result["errors"]))
+    return result["data"]
+```
+
+### From a Cloudflare Worker
+
+Store the API token as a secret (`CF_API_TOKEN`). Use standard `fetch` to POST to `https://api.cloudflare.com/client/v4/graphql` with the same JSON body format as above. Always check `response.errors` — GraphQL returns 200 even on query failures.
+
+## GraphQL API Explorer
+
+Interactive explorer at [graphql.cloudflare.com](https://graphql.cloudflare.com/) — provides schema docs, autocomplete, variable panel, and shareable queries. Authenticates via your Cloudflare dashboard session.
+
+## Schema Introspection
+
+```graphql
+# List zone-scoped datasets
+{ __type(name: "zone") { fields { name description } } }
+
+# List account-scoped datasets
+{ __type(name: "account") { fields { name description } } }
+
+# Discover dimensions for a dataset
+{ __type(name: "ZoneHttpRequestsAdaptiveGroupsDimensions") {
+  fields { name type { name kind } }
+} }
+
+# Discover filter operators for a dataset
+{ __type(name: "ZoneHttpRequestsAdaptiveGroupsFilter_InputObject") {
+  inputFields { name type { name kind } }
+} }
+```
+
+## Finding Your Zone and Account IDs
+
+- **Zone ID**: Dashboard > select zone > Overview (right sidebar), or via API
+- **Account ID**: Dashboard > Account Home URL, or via API
+
+```bash
+curl -s https://api.cloudflare.com/client/v4/zones -H "Authorization: Bearer $CF_API_TOKEN" | jq '.result[] | {name, id}'
+curl -s https://api.cloudflare.com/client/v4/accounts -H "Authorization: Bearer $CF_API_TOKEN" | jq '.result[] | {name, id}'
+```
+
+## See Also
+
+- [README.md](README.md) - Overview, decision tree, dataset index
+- [api.md](api.md) - Query structure, aggregation fields, filtering operators
+- [patterns.md](patterns.md) - Common query patterns (time-series, top-N, per-product)
+- [gotchas.md](gotchas.md) - Rate limits, sampling, troubleshooting

@@ -1,1 +1,121 @@
-IyEvdXNyL2Jpbi9lbnYgYmFzaAojIENyZWF0ZXMgYSBUdXJuc3RpbGUgd2lkZ2V0IHdpdGhvdXQgd3JpdGluZyBjcmVkZW50aWFscyBvciB0aGUgcmVzcG9uc2UgdG8gZGlzay4KCnNldCAreApzZXQgLXVvIHBpcGVmYWlsCgpuZWVkX2FyZygpIHsKICBpZiBbWyAteiAiJHsyLX0iIHx8ICIkMiIgPT0gLS0qIF1dOyB0aGVuCiAgICBlY2hvICJ3aWRnZXQtY3JlYXRlOiBtaXNzaW5nIHZhbHVlIGZvciAkMSIgPiYyCiAgICBleGl0IDIKICBmaQp9CgpNT0RFPSJtYW5hZ2VkIgpBQ0NPVU5UX0lEPSIiCk5BTUU9IiIKRE9NQUlOUz0iIgoKd2hpbGUgW1sgJCMgLWd0IDAgXV07IGRvCiAgY2FzZSAiJDEiIGluCiAgICAtLWFjY291bnQtaWQpIG5lZWRfYXJnICIkMSIgIiR7Mi19IjsgQUNDT1VOVF9JRD0iJDIiOyBzaGlmdCAyIDs7CiAgICAtLW5hbWUpIG5lZWRfYXJnICIkMSIgIiR7Mi19IjsgTkFNRT0iJDIiOyBzaGlmdCAyIDs7CiAgICAtLWRvbWFpbnMpIG5lZWRfYXJnICIkMSIgIiR7Mi19IjsgRE9NQUlOUz0iJDIiOyBzaGlmdCAyIDs7CiAgICAtLW1vZGUpIG5lZWRfYXJnICIkMSIgIiR7Mi19IjsgTU9ERT0iJDIiOyBzaGlmdCAyIDs7CiAgICAqKSBlY2hvICJ3aWRnZXQtY3JlYXRlOiB1bmtub3duIGFyZyAkMSIgPiYyOyBleGl0IDIgOzsKICBlc2FjCmRvbmUKCjogIiR7Q0xPVURGTEFSRV9BUElfVE9LRU46P0NMT1VERkxBUkVfQVBJX1RPS0VOIG11c3QgYmUgc2V0fSIKQVBJX1RPS0VOPSIkQ0xPVURGTEFSRV9BUElfVE9LRU4iCnVuc2V0IENMT1VERkxBUkVfQVBJX1RPS0VOCltbIC1uICIkQUNDT1VOVF9JRCIgXV0gfHwgeyBlY2hvICJ3aWRnZXQtY3JlYXRlOiAtLWFjY291bnQtaWQgcmVxdWlyZWQiID4mMjsgZXhpdCAyOyB9CltbIC1uICIkTkFNRSIgXV0gfHwgeyBlY2hvICJ3aWRnZXQtY3JlYXRlOiAtLW5hbWUgcmVxdWlyZWQiID4mMjsgZXhpdCAyOyB9CltbIC1uICIkRE9NQUlOUyIgXV0gfHwgeyBlY2hvICJ3aWRnZXQtY3JlYXRlOiAtLWRvbWFpbnMgcmVxdWlyZWQiID4mMjsgZXhpdCAyOyB9CltbICIkQVBJX1RPS0VOIiA9fiBeW0EtWmEtejAtOV8tXSskIF1dIHx8IHsKICBlY2hvICJ3aWRnZXQtY3JlYXRlOiBDTE9VREZMQVJFX0FQSV9UT0tFTiBoYXMgYW4gaW52YWxpZCBmb3JtYXQiID4mMgogIGV4aXQgMQp9CmNhc2UgIiRNT0RFIiBpbgogIG1hbmFnZWR8aW52aXNpYmxlfG5vbi1pbnRlcmFjdGl2ZSkgOzsKICAqKSBlY2hvICJ3aWRnZXQtY3JlYXRlOiB1bnN1cHBvcnRlZCBtb2RlIiA+JjI7IGV4aXQgMiA7Owplc2FjCgpmb3IgY29tbWFuZF9uYW1lIGluIGN1cmwgcHl0aG9uMzsgZG8KICBjb21tYW5kIC12ICIkY29tbWFuZF9uYW1lIiA+L2Rldi9udWxsIDI+JjEgfHwgewogICAgZWNobyAid2lkZ2V0LWNyZWF0ZTogJGNvbW1hbmRfbmFtZSBpcyByZXF1aXJlZCIgPiYyCiAgICBleGl0IDEKICB9CmRvbmUKCkJPRFlfSlNPTj0iJChweXRob24zIC1JIC1jICcKaW1wb3J0IGpzb24sIHN5cwpuYW1lLCBkb21haW5zX2NzdiwgbW9kZSA9IHN5cy5hcmd2WzFdLCBzeXMuYXJndlsyXSwgc3lzLmFyZ3ZbM10KZG9tYWlucyA9IFtkb21haW4uc3RyaXAoKSBmb3IgZG9tYWluIGluIGRvbWFpbnNfY3N2LnNwbGl0KCIsIikgaWYgZG9tYWluLnN0cmlwKCldCmlmIG5vdCBkb21haW5zOgogICAgcmFpc2UgU3lzdGVtRXhpdCgyKQpwcmludChqc29uLmR1bXBzKHsibmFtZSI6IG5hbWUsICJkb21haW5zIjogZG9tYWlucywgIm1vZGUiOiBtb2RlfSkpCicgIiROQU1FIiAiJERPTUFJTlMiICIkTU9ERSIpIiB8fCB7CiAgZWNobyAid2lkZ2V0LWNyZWF0ZTogLS1kb21haW5zIG11c3QgaW5jbHVkZSBhdCBsZWFzdCBvbmUgZG9tYWluIiA+JjIKICBleGl0IDIKfQpBQ0NPVU5UX0VOQ09ERUQ9IiQocHl0aG9uMyAtSSAtYyAnaW1wb3J0IHN5cyx1cmxsaWIucGFyc2U7IHByaW50KHVybGxpYi5wYXJzZS5xdW90ZShzeXMuYXJndlsxXSwgc2FmZT0iIikpJyAiJEFDQ09VTlRfSUQiKSIKCmlmICEgQVBJX1JFU1BPTlNFPSIkKAogIHByaW50ZiAnaGVhZGVyID0gIkF1dGhvcml6YXRpb246IEJlYXJlciAlcyJcbicgIiRBUElfVE9LRU4iIHwKICAgIGN1cmwgLS1kaXNhYmxlIC0tY29uZmlnIC0gLS1zaWxlbnQgLS1zaG93LWVycm9yIC0td3JpdGUtb3V0ICQnXG4le2h0dHBfY29kZX0nIC1YIFBPU1QgXAogICAgICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRBQ0NPVU5UX0VOQ09ERUQvY2hhbGxlbmdlcy93aWRnZXRzIiBcCiAgICAgIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAgICAgLS1kYXRhICIkQk9EWV9KU09OIgopIjsgdGhlbgogIGVjaG8gIndpZGdldC1jcmVhdGU6IENsb3VkZmxhcmUgQVBJIHJlcXVlc3QgZmFpbGVkIiA+JjIKICBlY2hvICd7InN0YXR1cyI6ImVycm9yIiwiY29kZSI6MCwibWVzc2FnZSI6IkNsb3VkZmxhcmUgQVBJIHJlcXVlc3QgZmFpbGVkIn0nCiAgZXhpdCAxCmZpCnVuc2V0IEJPRFlfSlNPTgp1bnNldCBBUElfVE9LRU4KCkhUVFBfQ09ERT0iJHtBUElfUkVTUE9OU0UjIyokJ1xuJ30iClJFU1BPTlNFX0JPRFk9IiR7QVBJX1JFU1BPTlNFJSQnXG4nKn0iCnVuc2V0IEFQSV9SRVNQT05TRQoKaWYgISBwcmludGYgJyVzJyAiJFJFU1BPTlNFX0JPRFkiIHwgcHl0aG9uMyAtSSAtYyAnCmltcG9ydCBqc29uCmltcG9ydCByZQppbXBvcnQgc3lzCgpodHRwX2NvZGUgPSBzeXMuYXJndlsxXQp0cnk6CiAgICBkYXRhID0ganNvbi5sb2FkKHN5cy5zdGRpbikKZXhjZXB0IEV4Y2VwdGlvbjoKICAgIHByaW50KGYid2lkZ2V0LWNyZWF0ZTogbm9uLUpTT04gcmVzcG9uc2UgKEhUVFAge2h0dHBfY29kZX0pIiwgZmlsZT1zeXMuc3RkZXJyKQogICAgcHJpbnQoanNvbi5kdW1wcyh7InN0YXR1cyI6ImVycm9yIiwiY29kZSI6MCwibWVzc2FnZSI6IkNsb3VkZmxhcmUgQVBJIHJldHVybmVkIGFuIGludmFsaWQgcmVzcG9uc2UifSkpCiAgICByYWlzZSBTeXN0ZW1FeGl0KDEpCgplcnJvcnMgPSBkYXRhLmdldCgiZXJyb3JzIikgaWYgaXNpbnN0YW5jZShkYXRhLCBkaWN0KSBlbHNlIFtdCmZpcnN0ID0gZXJyb3JzWzBdIGlmIGlzaW5zdGFuY2UoZXJyb3JzLCBsaXN0KSBhbmQgZXJyb3JzIGFuZCBpc2luc3RhbmNlKGVycm9yc1swXSwgZGljdCkgZWxzZSB7fQpjb2RlID0gZmlyc3QuZ2V0KCJjb2RlIiwgMCkKaWYgbm90IGlzaW5zdGFuY2UoZGF0YSwgZGljdCkgb3IgZGF0YS5nZXQoInN1Y2Nlc3MiKSBpcyBub3QgVHJ1ZToKICAgIHByaW50KGYid2lkZ2V0LWNyZWF0ZTogcmVxdWVzdCBmYWlsZWQgKEhUVFAge2h0dHBfY29kZX0sIGNvZGU9e2NvZGV9KSIsIGZpbGU9c3lzLnN0ZGVycikKICAgIHByaW50KGpzb24uZHVtcHMoeyJzdGF0dXMiOiJlcnJvciIsImNvZGUiOmNvZGUsIm1lc3NhZ2UiOiJDbG91ZGZsYXJlIEFQSSByZXF1ZXN0IGZhaWxlZCJ9KSkKICAgIHJhaXNlIFN5c3RlbUV4aXQoMSkKCnJlc3VsdCA9IGRhdGEuZ2V0KCJyZXN1bHQiKQpzaXRla2V5ID0gcmVzdWx0LmdldCgic2l0ZWtleSIpIGlmIGlzaW5zdGFuY2UocmVzdWx0LCBkaWN0KSBlbHNlIE5vbmUKc2VjcmV0ID0gcmVzdWx0LmdldCgic2VjcmV0IikgaWYgaXNpbnN0YW5jZShyZXN1bHQsIGRpY3QpIGVsc2UgTm9uZQppZiBub3QgKAogICAgaXNpbnN0YW5jZShzaXRla2V5LCBzdHIpCiAgICBhbmQgcmUuZnVsbG1hdGNoKHIiXFN7MSwyNTZ9Iiwgc2l0ZWtleSkKICAgIGFuZCBpc2luc3RhbmNlKHNlY3JldCwgc3RyKQogICAgYW5kIHJlLmZ1bGxtYXRjaChyIlxTezEsMTAyNH0iLCBzZWNyZXQpCik6CiAgICBwcmludCgid2lkZ2V0LWNyZWF0ZTogQVBJIHJldHVybmVkIGludmFsaWQgd2lkZ2V0IGNyZWRlbnRpYWxzIiwgZmlsZT1zeXMuc3RkZXJyKQogICAgcHJpbnQoanNvbi5kdW1wcyh7InN0YXR1cyI6ImVycm9yIiwiY29kZSI6MCwibWVzc2FnZSI6IkNsb3VkZmxhcmUgQVBJIHJldHVybmVkIGludmFsaWQgd2lkZ2V0IGNyZWRlbnRpYWxzIn0pKQogICAgcmFpc2UgU3lzdGVtRXhpdCgxKQoKcHJpbnQoanNvbi5kdW1wcyh7InN0YXR1cyI6Im9rIiwic2l0ZWtleSI6c2l0ZWtleSwic2VjcmV0IjpzZWNyZXR9KSkKJyAiJEhUVFBfQ09ERSI7IHRoZW4KICB1bnNldCBSRVNQT05TRV9CT0RZCiAgZXhpdCAxCmZpCnVuc2V0IFJFU1BPTlNFX0JPRFkK
+#!/usr/bin/env bash
+# Creates a Turnstile widget without writing credentials or the response to disk.
+
+set +x
+set -uo pipefail
+
+need_arg() {
+  if [[ -z "${2-}" || "$2" == --* ]]; then
+    echo "widget-create: missing value for $1" >&2
+    exit 2
+  fi
+}
+
+MODE="managed"
+ACCOUNT_ID=""
+NAME=""
+DOMAINS=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --account-id) need_arg "$1" "${2-}"; ACCOUNT_ID="$2"; shift 2 ;;
+    --name) need_arg "$1" "${2-}"; NAME="$2"; shift 2 ;;
+    --domains) need_arg "$1" "${2-}"; DOMAINS="$2"; shift 2 ;;
+    --mode) need_arg "$1" "${2-}"; MODE="$2"; shift 2 ;;
+    *) echo "widget-create: unknown arg $1" >&2; exit 2 ;;
+  esac
+done
+
+: "${CLOUDFLARE_API_TOKEN:?CLOUDFLARE_API_TOKEN must be set}"
+API_TOKEN="$CLOUDFLARE_API_TOKEN"
+unset CLOUDFLARE_API_TOKEN
+[[ -n "$ACCOUNT_ID" ]] || { echo "widget-create: --account-id required" >&2; exit 2; }
+[[ -n "$NAME" ]] || { echo "widget-create: --name required" >&2; exit 2; }
+[[ -n "$DOMAINS" ]] || { echo "widget-create: --domains required" >&2; exit 2; }
+[[ "$API_TOKEN" =~ ^[A-Za-z0-9_-]+$ ]] || {
+  echo "widget-create: CLOUDFLARE_API_TOKEN has an invalid format" >&2
+  exit 1
+}
+case "$MODE" in
+  managed|invisible|non-interactive) ;;
+  *) echo "widget-create: unsupported mode" >&2; exit 2 ;;
+esac
+
+for command_name in curl python3; do
+  command -v "$command_name" >/dev/null 2>&1 || {
+    echo "widget-create: $command_name is required" >&2
+    exit 1
+  }
+done
+
+BODY_JSON="$(python3 -I -c '
+import json, sys
+name, domains_csv, mode = sys.argv[1], sys.argv[2], sys.argv[3]
+domains = [domain.strip() for domain in domains_csv.split(",") if domain.strip()]
+if not domains:
+    raise SystemExit(2)
+print(json.dumps({"name": name, "domains": domains, "mode": mode}))
+' "$NAME" "$DOMAINS" "$MODE")" || {
+  echo "widget-create: --domains must include at least one domain" >&2
+  exit 2
+}
+ACCOUNT_ENCODED="$(python3 -I -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$ACCOUNT_ID")"
+
+if ! API_RESPONSE="$(
+  printf 'header = "Authorization: Bearer %s"\n' "$API_TOKEN" |
+    curl --disable --config - --silent --show-error --write-out $'\n%{http_code}' -X POST \
+      "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ENCODED/challenges/widgets" \
+      -H "Content-Type: application/json" \
+      --data "$BODY_JSON"
+)"; then
+  echo "widget-create: Cloudflare API request failed" >&2
+  echo '{"status":"error","code":0,"message":"Cloudflare API request failed"}'
+  exit 1
+fi
+unset BODY_JSON
+unset API_TOKEN
+
+HTTP_CODE="${API_RESPONSE##*$'\n'}"
+RESPONSE_BODY="${API_RESPONSE%$'\n'*}"
+unset API_RESPONSE
+
+if ! printf '%s' "$RESPONSE_BODY" | python3 -I -c '
+import json
+import re
+import sys
+
+http_code = sys.argv[1]
+try:
+    data = json.load(sys.stdin)
+except Exception:
+    print(f"widget-create: non-JSON response (HTTP {http_code})", file=sys.stderr)
+    print(json.dumps({"status":"error","code":0,"message":"Cloudflare API returned an invalid response"}))
+    raise SystemExit(1)
+
+errors = data.get("errors") if isinstance(data, dict) else []
+first = errors[0] if isinstance(errors, list) and errors and isinstance(errors[0], dict) else {}
+code = first.get("code", 0)
+if not isinstance(data, dict) or data.get("success") is not True:
+    print(f"widget-create: request failed (HTTP {http_code}, code={code})", file=sys.stderr)
+    print(json.dumps({"status":"error","code":code,"message":"Cloudflare API request failed"}))
+    raise SystemExit(1)
+
+result = data.get("result")
+sitekey = result.get("sitekey") if isinstance(result, dict) else None
+secret = result.get("secret") if isinstance(result, dict) else None
+if not (
+    isinstance(sitekey, str)
+    and re.fullmatch(r"\S{1,256}", sitekey)
+    and isinstance(secret, str)
+    and re.fullmatch(r"\S{1,1024}", secret)
+):
+    print("widget-create: API returned invalid widget credentials", file=sys.stderr)
+    print(json.dumps({"status":"error","code":0,"message":"Cloudflare API returned invalid widget credentials"}))
+    raise SystemExit(1)
+
+print(json.dumps({"status":"ok","sitekey":sitekey,"secret":secret}))
+' "$HTTP_CODE"; then
+  unset RESPONSE_BODY
+  exit 1
+fi
+unset RESPONSE_BODY

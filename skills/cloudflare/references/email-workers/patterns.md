@@ -1,1 +1,102 @@
-IyBFbWFpbCBXb3JrZXJzIFBhdHRlcm5zCgojIyBQYXJzZSBFbWFpbAoKYGBgdHlwZXNjcmlwdAppbXBvcnQgUG9zdGFsTWltZSBmcm9tICdwb3N0YWwtbWltZSc7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZW1haWwobWVzc2FnZSwgZW52LCBjdHgpIHsKICAgIGNvbnN0IGJ1ZmZlciA9IGF3YWl0IG5ldyBSZXNwb25zZShtZXNzYWdlLnJhdykuYXJyYXlCdWZmZXIoKTsKICAgIGNvbnN0IGVtYWlsID0gYXdhaXQgUG9zdGFsTWltZS5wYXJzZShidWZmZXIpOwogICAgY29uc29sZS5sb2coZW1haWwuZnJvbSwgZW1haWwuc3ViamVjdCwgZW1haWwudGV4dCwgZW1haWwuYXR0YWNobWVudHMubGVuZ3RoKTsKICAgIGF3YWl0IG1lc3NhZ2UuZm9yd2FyZCgnaW5ib3hAZXhhbXBsZS5jb20nKTsKICB9Cn07CmBgYAoKIyMgRmlsdGVyaW5nCgpgYGB0eXBlc2NyaXB0Ci8vIEFsbG93bGlzdCBmcm9tIEtWCmNvbnN0IGFsbG93TGlzdCA9IGF3YWl0IGVudi5BTExPV0VEX1NFTkRFUlMuZ2V0KCdsaXN0JywgJ2pzb24nKSB8fCBbXTsKaWYgKCFhbGxvd0xpc3QuaW5jbHVkZXMobWVzc2FnZS5mcm9tKSkgewogIG1lc3NhZ2Uuc2V0UmVqZWN0KCdOb3QgYWxsb3dlZCcpOwogIHJldHVybjsKfQoKLy8gU2l6ZSBjaGVjayAoYXZvaWQgcGFyc2luZyBsYXJnZSBlbWFpbHMpCmlmIChtZXNzYWdlLnJhd1NpemUgPiA1XzAwMF8wMDApIHsKICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoJ2luYm94QGV4YW1wbGUuY29tJyk7IC8vIEZvcndhcmQgd2l0aG91dCBwYXJzaW5nCiAgcmV0dXJuOwp9CmBgYAoKIyMgQXV0by1SZXBseSB3aXRoIFRocmVhZGluZwoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBFbWFpbE1lc3NhZ2UgfSBmcm9tICdjbG91ZGZsYXJlOmVtYWlsJzsKaW1wb3J0IHsgY3JlYXRlTWltZU1lc3NhZ2UgfSBmcm9tICdtaW1ldGV4dCc7Cgpjb25zdCBtc2cgPSBjcmVhdGVNaW1lTWVzc2FnZSgpOwptc2cuc2V0U2VuZGVyKHsgYWRkcjogJ3N1cHBvcnRAZXhhbXBsZS5jb20nIH0pOwptc2cuc2V0UmVjaXBpZW50KG1lc3NhZ2UuZnJvbSk7Cm1zZy5zZXRTdWJqZWN0KGBSZTogJHttZXNzYWdlLmhlYWRlcnMuZ2V0KCdTdWJqZWN0Jyl9YCk7Cm1zZy5zZXRIZWFkZXIoJ0luLVJlcGx5LVRvJywgbWVzc2FnZS5oZWFkZXJzLmdldCgnTWVzc2FnZS1JRCcpIHx8ICcnKTsKbXNnLmFkZE1lc3NhZ2UoeyBjb250ZW50VHlwZTogJ3RleHQvcGxhaW4nLCBkYXRhOiAnVGhhbmsgeW91LiBXZSB3aWxsIHJlc3BvbmQuJyB9KTsKCmF3YWl0IG1lc3NhZ2UucmVwbHkobmV3IEVtYWlsTWVzc2FnZSgnc3VwcG9ydEBleGFtcGxlLmNvbScsIG1lc3NhZ2UuZnJvbSwgbXNnLmFzUmF3KCkpKTsKYGBgCgojIyBSYXRlLUxpbWl0ZWQgQXV0by1SZXBseQoKYGBgdHlwZXNjcmlwdApjb25zdCByYXRlS2V5ID0gYHJhdGU6JHttZXNzYWdlLmZyb219YDsKaWYgKCFhd2FpdCBlbnYuUkFURV9MSU1JVC5nZXQocmF0ZUtleSkpIHsKICAvLyBTZW5kIHJlcGx5Li4uCiAgY3R4LndhaXRVbnRpbChlbnYuUkFURV9MSU1JVC5wdXQocmF0ZUtleSwgJzEnLCB7IGV4cGlyYXRpb25UdGw6IDM2MDAgfSkpOwp9CmBgYAoKIyMgU3ViamVjdC1CYXNlZCBSb3V0aW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHN1YmplY3QgPSAobWVzc2FnZS5oZWFkZXJzLmdldCgnU3ViamVjdCcpIHx8ICcnKS50b0xvd2VyQ2FzZSgpOwppZiAoc3ViamVjdC5pbmNsdWRlcygnYmlsbGluZycpKSBhd2FpdCBtZXNzYWdlLmZvcndhcmQoJ2JpbGxpbmdAZXhhbXBsZS5jb20nKTsKZWxzZSBpZiAoc3ViamVjdC5pbmNsdWRlcygnc3VwcG9ydCcpKSBhd2FpdCBtZXNzYWdlLmZvcndhcmQoJ3N1cHBvcnRAZXhhbXBsZS5jb20nKTsKZWxzZSBhd2FpdCBtZXNzYWdlLmZvcndhcmQoJ2dlbmVyYWxAZXhhbXBsZS5jb20nKTsKYGBgCgojIyBNdWx0aS1UZW5hbnQgUm91dGluZwoKYGBgdHlwZXNjcmlwdAovLyBzdXBwb3J0K3RlbmFudDEyM0BleGFtcGxlLmNvbSDihpIgdGVuYW50MTIzCmNvbnN0IHRlbmFudElkID0gbWVzc2FnZS50by5zcGxpdCgnQCcpWzBdLm1hdGNoKC9cKyguKykkLyk/LlsxXSB8fCAnZGVmYXVsdCc7CmNvbnN0IGNvbmZpZyA9IGF3YWl0IGVudi5URU5BTlRfQ09ORklHLmdldCh0ZW5hbnRJZCwgJ2pzb24nKTsKY29uZmlnPy5mb3J3YXJkVG8gPyBhd2FpdCBtZXNzYWdlLmZvcndhcmQoY29uZmlnLmZvcndhcmRUbykgOiBtZXNzYWdlLnNldFJlamVjdCgnVW5rbm93bicpOwpgYGAKCiMjIEFyY2hpdmUgJiBFeHRyYWN0IEF0dGFjaG1lbnRzCgpgYGB0eXBlc2NyaXB0Ci8vIEFyY2hpdmUgdG8gS1YKY3R4LndhaXRVbnRpbChlbnYuQVJDSElWRS5wdXQoYGVtYWlsOiR7RGF0ZS5ub3coKX1gLCBKU09OLnN0cmluZ2lmeSh7CiAgZnJvbTogbWVzc2FnZS5mcm9tLCBzdWJqZWN0OiBlbWFpbC5zdWJqZWN0Cn0pKSk7CgovLyBBdHRhY2htZW50cyB0byBSMgpmb3IgKGNvbnN0IGF0dCBvZiBlbWFpbC5hdHRhY2htZW50cykgewogIGN0eC53YWl0VW50aWwoZW52LlIyLnB1dChgJHtEYXRlLm5vdygpfS0ke2F0dC5maWxlbmFtZX1gLCBhdHQuY29udGVudCkpOwp9CmBgYAoKIyMgV2ViaG9vayBJbnRlZ3JhdGlvbgoKYGBgdHlwZXNjcmlwdApjdHgud2FpdFVudGlsKAogIGZldGNoKGVudi5XRUJIT09LX1VSTCwgewogICAgbWV0aG9kOiAnUE9TVCcsCiAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IGZyb206IG1lc3NhZ2UuZnJvbSwgc3ViamVjdDogbWVzc2FnZS5oZWFkZXJzLmdldCgnU3ViamVjdCcpIH0pCiAgfSkuY2F0Y2goZXJyID0+IGNvbnNvbGUuZXJyb3IoZXJyKSkKKTsKYGBgCg==
+# Email Workers Patterns
+
+## Parse Email
+
+```typescript
+import PostalMime from 'postal-mime';
+
+export default {
+  async email(message, env, ctx) {
+    const buffer = await new Response(message.raw).arrayBuffer();
+    const email = await PostalMime.parse(buffer);
+    console.log(email.from, email.subject, email.text, email.attachments.length);
+    await message.forward('inbox@example.com');
+  }
+};
+```
+
+## Filtering
+
+```typescript
+// Allowlist from KV
+const allowList = await env.ALLOWED_SENDERS.get('list', 'json') || [];
+if (!allowList.includes(message.from)) {
+  message.setReject('Not allowed');
+  return;
+}
+
+// Size check (avoid parsing large emails)
+if (message.rawSize > 5_000_000) {
+  await message.forward('inbox@example.com'); // Forward without parsing
+  return;
+}
+```
+
+## Auto-Reply with Threading
+
+```typescript
+import { EmailMessage } from 'cloudflare:email';
+import { createMimeMessage } from 'mimetext';
+
+const msg = createMimeMessage();
+msg.setSender({ addr: 'support@example.com' });
+msg.setRecipient(message.from);
+msg.setSubject(`Re: ${message.headers.get('Subject')}`);
+msg.setHeader('In-Reply-To', message.headers.get('Message-ID') || '');
+msg.addMessage({ contentType: 'text/plain', data: 'Thank you. We will respond.' });
+
+await message.reply(new EmailMessage('support@example.com', message.from, msg.asRaw()));
+```
+
+## Rate-Limited Auto-Reply
+
+```typescript
+const rateKey = `rate:${message.from}`;
+if (!await env.RATE_LIMIT.get(rateKey)) {
+  // Send reply...
+  ctx.waitUntil(env.RATE_LIMIT.put(rateKey, '1', { expirationTtl: 3600 }));
+}
+```
+
+## Subject-Based Routing
+
+```typescript
+const subject = (message.headers.get('Subject') || '').toLowerCase();
+if (subject.includes('billing')) await message.forward('billing@example.com');
+else if (subject.includes('support')) await message.forward('support@example.com');
+else await message.forward('general@example.com');
+```
+
+## Multi-Tenant Routing
+
+```typescript
+// support+tenant123@example.com → tenant123
+const tenantId = message.to.split('@')[0].match(/\+(.+)$/)?.[1] || 'default';
+const config = await env.TENANT_CONFIG.get(tenantId, 'json');
+config?.forwardTo ? await message.forward(config.forwardTo) : message.setReject('Unknown');
+```
+
+## Archive & Extract Attachments
+
+```typescript
+// Archive to KV
+ctx.waitUntil(env.ARCHIVE.put(`email:${Date.now()}`, JSON.stringify({
+  from: message.from, subject: email.subject
+})));
+
+// Attachments to R2
+for (const att of email.attachments) {
+  ctx.waitUntil(env.R2.put(`${Date.now()}-${att.filename}`, att.content));
+}
+```
+
+## Webhook Integration
+
+```typescript
+ctx.waitUntil(
+  fetch(env.WEBHOOK_URL, {
+    method: 'POST',
+    body: JSON.stringify({ from: message.from, subject: message.headers.get('Subject') })
+  }).catch(err => console.error(err))
+);
+```

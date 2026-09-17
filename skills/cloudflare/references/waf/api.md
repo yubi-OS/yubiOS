@@ -1,1 +1,202 @@
-IyBBUEkgUmVmZXJlbmNlCgojIyBTREsgU2V0dXAKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IENsb3VkZmxhcmUgZnJvbSAnY2xvdWRmbGFyZSc7Cgpjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7CiAgYXBpVG9rZW46IHByb2Nlc3MuZW52LkNGX0FQSV9UT0tFTiwKfSk7CmBgYAoKIyMgQ29yZSBNZXRob2RzCgpgYGB0eXBlc2NyaXB0Ci8vIExpc3QgcnVsZXNldHMKYXdhaXQgY2xpZW50LnJ1bGVzZXRzLmxpc3QoeyB6b25lX2lkOiAnem9uZV9pZCcsIHBoYXNlOiAnaHR0cF9yZXF1ZXN0X2ZpcmV3YWxsX21hbmFnZWQnIH0pOwoKLy8gR2V0IHJ1bGVzZXQKYXdhaXQgY2xpZW50LnJ1bGVzZXRzLmdldCh7IHpvbmVfaWQ6ICd6b25lX2lkJywgcnVsZXNldF9pZDogJ3J1bGVzZXRfaWQnIH0pOwoKLy8gQ3JlYXRlIHJ1bGVzZXQKYXdhaXQgY2xpZW50LnJ1bGVzZXRzLmNyZWF0ZSh7CiAgem9uZV9pZDogJ3pvbmVfaWQnLAogIGtpbmQ6ICd6b25lJywKICBwaGFzZTogJ2h0dHBfcmVxdWVzdF9maXJld2FsbF9jdXN0b20nLAogIG5hbWU6ICdDdXN0b20gV0FGIFJ1bGVzJywKICBydWxlczogW3sgYWN0aW9uOiAnYmxvY2snLCBleHByZXNzaW9uOiAnY2Yud2FmLnNjb3JlIGd0IDQwJywgZW5hYmxlZDogdHJ1ZSB9XSwKfSk7CgovLyBVcGRhdGUgcnVsZXNldCAoaW5jbHVkZSBydWxlIGlkIHRvIGtlZXAgZXhpc3RpbmcsIG9taXQgaWQgZm9yIG5ldyBydWxlcykKYXdhaXQgY2xpZW50LnJ1bGVzZXRzLnVwZGF0ZSh7CiAgem9uZV9pZDogJ3pvbmVfaWQnLAogIHJ1bGVzZXRfaWQ6ICdydWxlc2V0X2lkJywKICBydWxlczogWwogICAgeyBpZDogJ3J1bGVfaWQnLCBhY3Rpb246ICdibG9jaycsIGV4cHJlc3Npb246ICdjZi53YWYuc2NvcmUgZ3QgNDAnLCBlbmFibGVkOiB0cnVlIH0sCiAgICB7IGFjdGlvbjogJ2NoYWxsZW5nZScsIGV4cHJlc3Npb246ICdodHRwLnJlcXVlc3QudXJpLnBhdGggY29udGFpbnMgIi9hZG1pbiInLCBlbmFibGVkOiB0cnVlIH0sCiAgXSwKfSk7CgovLyBEZWxldGUgcnVsZXNldAphd2FpdCBjbGllbnQucnVsZXNldHMuZGVsZXRlKHsgem9uZV9pZDogJ3pvbmVfaWQnLCBydWxlc2V0X2lkOiAncnVsZXNldF9pZCcgfSk7CmBgYAoKIyMgQWN0aW9ucyAmIFBoYXNlcwoKIyMjIEFjdGlvbnMgYnkgUGhhc2UKCnwgQWN0aW9uIHwgQ3VzdG9tIHwgTWFuYWdlZCB8IFJhdGUgTGltaXQgfCBEZXNjcmlwdGlvbiB8CnwtLS0tLS0tLXwtLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYGJsb2NrYCB8IOKchSB8IOKdjCB8IOKchSB8IEJsb2NrIHJlcXVlc3Qgd2l0aCA0MDMgfAp8IGBjaGFsbGVuZ2VgIHwg4pyFIHwg4p2MIHwg4pyFIHwgU2hvdyBDQVBUQ0hBIGNoYWxsZW5nZSB8CnwgYGpzX2NoYWxsZW5nZWAgfCDinIUgfCDinYwgfCDinIUgfCBKUy1iYXNlZCBjaGFsbGVuZ2UgfAp8IGBtYW5hZ2VkX2NoYWxsZW5nZWAgfCDinIUgfCDinYwgfCDinIUgfCBTbWFydCBjaGFsbGVuZ2UgKHJlY29tbWVuZGVkKSB8CnwgYGxvZ2AgfCDinIUgfCDinYwgfCDinIUgfCBMb2cgb25seSwgZG9uJ3QgYmxvY2sgfAp8IGBza2lwYCB8IOKchSB8IOKdjCB8IOKdjCB8IFNraXAgcnVsZSBldmFsdWF0aW9uIHwKfCBgZXhlY3V0ZWAgfCDinYwgfCDinIUgfCDinYwgfCBEZXBsb3kgbWFuYWdlZCBydWxlc2V0IHwKCiMjIyBQaGFzZXMgKEV4ZWN1dGlvbiBPcmRlcikKCjEuIGBodHRwX3JlcXVlc3RfZmlyZXdhbGxfY3VzdG9tYCAtIEN1c3RvbSBydWxlcyAoZmlyc3QgbGluZSBvZiBkZWZlbnNlKQoyLiBgaHR0cF9yZXF1ZXN0X2ZpcmV3YWxsX21hbmFnZWRgIC0gTWFuYWdlZCBydWxlc2V0cyAocHJlLWNvbmZpZ3VyZWQgcHJvdGVjdGlvbikKMy4gYGh0dHBfcmF0ZWxpbWl0YCAtIFJhdGUgbGltaXRpbmcgKHJlcXVlc3QgdGhyb3R0bGluZykKNC4gYGh0dHBfcmVxdWVzdF9zYmZtYCAtIFN1cGVyIEJvdCBGaWdodCBNb2RlIChQcm8rIG9ubHkpCgojIyBFeHByZXNzaW9uIFN5bnRheAoKIyMjIEZpZWxkcwoKYGBgdHlwZXNjcmlwdAovLyBSZXF1ZXN0IHByb3BlcnRpZXMKaHR0cC5yZXF1ZXN0Lm1ldGhvZCAgICAgICAgICAvLyBHRVQsIFBPU1QsIGV0Yy4KaHR0cC5yZXF1ZXN0LnVyaS5wYXRoICAgICAgICAvLyAvYXBpL3VzZXJzCmh0dHAuaG9zdCAgICAgICAgICAgICAgICAgICAgLy8gZXhhbXBsZS5jb20KCi8vIElQIGFuZCBHZW9sb2NhdGlvbgppcC5zcmMgICAgICAgICAgICAgICAgICAgICAgIC8vIDE5Mi4wLjIuMQppcC5nZW9pcC5jb3VudHJ5ICAgICAgICAgICAgLy8gVVMsIEdCLCBldGMuCmlwLmdlb2lwLmNvbnRpbmVudCAgICAgICAgICAvLyBOQSwgRVUsIGV0Yy4KCi8vIEF0dGFjayBkZXRlY3Rpb24KY2Yud2FmLnNjb3JlICAgICAgICAgICAgICAgICAvLyAwLTEwMCBhdHRhY2sgc2NvcmUKY2Yud2FmLnNjb3JlLnNxbGkgICAgICAgICAgIC8vIFNRTCBpbmplY3Rpb24gc2NvcmUKY2Yud2FmLnNjb3JlLnhzcyAgICAgICAgICAgIC8vIFhTUyBzY29yZQoKLy8gSGVhZGVycyAmIENvb2tpZXMKaHR0cC5yZXF1ZXN0LmhlYWRlcnNbImF1dGhvcml6YXRpb24iXVswXQpodHRwLnJlcXVlc3QuY29va2llc1sic2Vzc2lvbiJdWzBdCmxvd2VyKGh0dHAudXNlcl9hZ2VudCkgICAgICAvLyBMb3dlcmNhc2UgdXNlciBhZ2VudApgYGAKCiMjIyBPcGVyYXRvcnMKCmBgYHR5cGVzY3JpcHQKLy8gQ29tcGFyaXNvbgplcSAgICAgIC8vIEVxdWFsCm5lICAgICAgLy8gTm90IGVxdWFsCmx0ICAgICAgLy8gTGVzcyB0aGFuCmxlICAgICAgLy8gTGVzcyB0aGFuIG9yIGVxdWFsCmd0ICAgICAgLy8gR3JlYXRlciB0aGFuCmdlICAgICAgLy8gR3JlYXRlciB0aGFuIG9yIGVxdWFsCgovLyBTdHJpbmcgbWF0Y2hpbmcKY29udGFpbnMgICAgICAgIC8vIFN1YnN0cmluZyBtYXRjaAptYXRjaGVzICAgICAgICAgLy8gUmVnZXggbWF0Y2ggKHVzZSBjYXJlZnVsbHkpCnN0YXJ0c193aXRoICAgICAvLyBQcmVmaXggbWF0Y2gKZW5kc193aXRoICAgICAgIC8vIFN1ZmZpeCBtYXRjaAoKLy8gTGlzdCBvcGVyYXRpb25zCmluICAgICAgICAgICAgICAvLyBWYWx1ZSBpbiBsaXN0Cm5vdCAgICAgICAgICAgICAvLyBMb2dpY2FsIE5PVAphbmQgICAgICAgICAgICAgLy8gTG9naWNhbCBBTkQKb3IgICAgICAgICAgICAgIC8vIExvZ2ljYWwgT1IKYGBgCgojIyMgRXhwcmVzc2lvbiBFeGFtcGxlcwoKYGBgdHlwZXNjcmlwdAonY2Yud2FmLnNjb3JlIGd0IDQwJyAvLyBBdHRhY2sgc2NvcmUKJ2h0dHAucmVxdWVzdC51cmkucGF0aCBlcSAiL2FwaS9sb2dpbiIgYW5kIGh0dHAucmVxdWVzdC5tZXRob2QgZXEgIlBPU1QiJyAvLyBQYXRoICsgbWV0aG9kCidpcC5zcmMgaW4gezE5Mi4wLjIuMC8yNCAyMDMuMC4xMTMuMC8yNH0nIC8vIElQIGJsb2NraW5nCidpcC5nZW9pcC5jb3VudHJ5IGluIHsiQ04iICJSVSIgIktQIn0nIC8vIENvdW50cnkgYmxvY2tpbmcKJ2h0dHAudXNlcl9hZ2VudCBjb250YWlucyAiYm90IicgLy8gVXNlciBhZ2VudAonbm90IGh0dHAucmVxdWVzdC5oZWFkZXJzWyJhdXRob3JpemF0aW9uIl1bMF0nIC8vIEhlYWRlciBjaGVjawonKGNmLndhZi5zY29yZS5zcWxpIGd0IDIwIG9yIGNmLndhZi5zY29yZS54c3MgZ3QgMjApIGFuZCBodHRwLnJlcXVlc3QudXJpLnBhdGggc3RhcnRzX3dpdGggIi9hcGkiJyAvLyBDb21wbGV4CmBgYAoKIyMgUmF0ZSBMaW1pdGluZyBDb25maWd1cmF0aW9uCgpgYGB0eXBlc2NyaXB0CnsKICBhY3Rpb246ICdibG9jaycsCiAgZXhwcmVzc2lvbjogJ2h0dHAucmVxdWVzdC51cmkucGF0aCBzdGFydHNfd2l0aCAiL2FwaSInLAogIGFjdGlvbl9wYXJhbWV0ZXJzOiB7CiAgICByYXRlbGltaXQ6IHsKICAgICAgLy8gQ2hhcmFjdGVyaXN0aWNzIGRlZmluZSB1bmlxdWVuZXNzOiAnaXAuc3JjJywgJ2NmLmNvbG8uaWQnLCAKICAgICAgLy8gJ2h0dHAucmVxdWVzdC5oZWFkZXJzWyJrZXkiXVswXScsICdodHRwLnJlcXVlc3QuY29va2llc1sic2Vzc2lvbiJdWzBdJwogICAgICBjaGFyYWN0ZXJpc3RpY3M6IFsnY2YuY29sby5pZCcsICdpcC5zcmMnXSwgLy8gUmVjb21tZW5kZWQ6IHBlci1JUCBwZXItZGF0YWNlbnRlcgogICAgICBwZXJpb2Q6IDYwLCAgICAgICAgICAgICAgICAgICAgICAvLyBUaW1lIHdpbmRvdyBpbiBzZWNvbmRzCiAgICAgIHJlcXVlc3RzX3Blcl9wZXJpb2Q6IDEwMCwgICAgICAgIC8vIE1heCByZXF1ZXN0cyBpbiBwZXJpb2QKICAgICAgbWl0aWdhdGlvbl90aW1lb3V0OiA2MDAsICAgICAgICAgLy8gQmxvY2sgZHVyYXRpb24gaW4gc2Vjb25kcwogICAgICBjb3VudGluZ19leHByZXNzaW9uOiAnaHR0cC5yZXF1ZXN0Lm1ldGhvZCBuZSAiR0VUIicsIC8vIE9wdGlvbmFsOiBmaWx0ZXIgY291bnRlZCByZXF1ZXN0cwogICAgICByZXF1ZXN0c190b19vcmlnaW46IGZhbHNlLCAgICAgICAvLyBDb3VudCBhbGwgcmVxdWVzdHMgKG5vdCBqdXN0IG9yaWdpbiBoaXRzKQogICAgfSwKICB9LAogIGVuYWJsZWQ6IHRydWUsCn0KYGBgCgojIyBNYW5hZ2VkIFJ1bGVzZXQgRGVwbG95bWVudAoKYGBgdHlwZXNjcmlwdAp7CiAgYWN0aW9uOiAnZXhlY3V0ZScsCiAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgIGlkOiAnZWZiN2I4Yzk0OWFjNDY1MGEwOTczNmZjMzc2ZTlhZWUnLCAvLyBDbG91ZGZsYXJlIE1hbmFnZWQKICAgIG92ZXJyaWRlczogewogICAgICAvLyBPdmVycmlkZSBzcGVjaWZpYyBydWxlcwogICAgICBydWxlczogWwogICAgICAgIHsgaWQ6ICc1ZGU3ZWRmYTY0OGM0ZDY4OTFkYzNlN2Y4NDUzNGZmYScsIGFjdGlvbjogJ2xvZycsIGVuYWJsZWQ6IHRydWUgfSwKICAgICAgXSwKICAgICAgLy8gT3ZlcnJpZGUgY2F0ZWdvcmllczogJ3dvcmRwcmVzcycsICdzcWxpJywgJ3hzcycsICdyY2UnLCBldGMuCiAgICAgIGNhdGVnb3JpZXM6IFsKICAgICAgICB7IGNhdGVnb3J5OiAnd29yZHByZXNzJywgZW5hYmxlZDogZmFsc2UgfSwKICAgICAgICB7IGNhdGVnb3J5OiAnc3FsaScsIGFjdGlvbjogJ2xvZycgfSwKICAgICAgXSwKICAgIH0sCiAgfSwKICBleHByZXNzaW9uOiAndHJ1ZScsCiAgZW5hYmxlZDogdHJ1ZSwKfQpgYGAKCiMjIFNraXAgUnVsZXMKClNraXAgcnVsZXMgYnlwYXNzIHN1YnNlcXVlbnQgcnVsZSBldmFsdWF0aW9uLiBUd28gc2tpcCB0eXBlczoKCioqU2tpcCBjdXJyZW50IHJ1bGVzZXQqKjogU2tpcCByZW1haW5pbmcgcnVsZXMgaW4gY3VycmVudCBwaGFzZSBvbmx5CmBgYHR5cGVzY3JpcHQKewogIGFjdGlvbjogJ3NraXAnLAogIGFjdGlvbl9wYXJhbWV0ZXJzOiB7CiAgICBydWxlc2V0OiAnY3VycmVudCcsIC8vIFNraXAgcmVzdCBvZiBjdXJyZW50IHJ1bGVzZXQKICB9LAogIGV4cHJlc3Npb246ICdodHRwLnJlcXVlc3QudXJpLnBhdGggZW5kc193aXRoICIuanBnIiBvciBodHRwLnJlcXVlc3QudXJpLnBhdGggZW5kc193aXRoICIuY3NzIicsCiAgZW5hYmxlZDogdHJ1ZSwKfQpgYGAKCioqU2tpcCBlbnRpcmUgcGhhc2VzKio6IFNraXAgb25lIG9yIG1vcmUgcGhhc2VzIGNvbXBsZXRlbHkKYGBgdHlwZXNjcmlwdAp7CiAgYWN0aW9uOiAnc2tpcCcsCiAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgIHBoYXNlczogWydodHRwX3JlcXVlc3RfZmlyZXdhbGxfbWFuYWdlZCcsICdodHRwX3JhdGVsaW1pdCddLCAvLyBTa2lwIG11bHRpcGxlIHBoYXNlcwogIH0sCiAgZXhwcmVzc2lvbjogJ2lwLnNyYyBpbiB7MTkyLjAuMi4wLzI0IDIwMy4wLjExMy4wLzI0fScsCiAgZW5hYmxlZDogdHJ1ZSwKfQpgYGAKCioqTm90ZSoqOiBTa2lwIHJ1bGVzIGluIGN1c3RvbSBwaGFzZSBjYW4gc2tpcCBtYW5hZ2VkL3JhdGVsaW1pdCBwaGFzZXMsIGJ1dCBub3QgdmljZSB2ZXJzYSAoZXhlY3V0aW9uIG9yZGVyKS4=
+# API Reference
+
+## SDK Setup
+
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({
+  apiToken: process.env.CF_API_TOKEN,
+});
+```
+
+## Core Methods
+
+```typescript
+// List rulesets
+await client.rulesets.list({ zone_id: 'zone_id', phase: 'http_request_firewall_managed' });
+
+// Get ruleset
+await client.rulesets.get({ zone_id: 'zone_id', ruleset_id: 'ruleset_id' });
+
+// Create ruleset
+await client.rulesets.create({
+  zone_id: 'zone_id',
+  kind: 'zone',
+  phase: 'http_request_firewall_custom',
+  name: 'Custom WAF Rules',
+  rules: [{ action: 'block', expression: 'cf.waf.score gt 40', enabled: true }],
+});
+
+// Update ruleset (include rule id to keep existing, omit id for new rules)
+await client.rulesets.update({
+  zone_id: 'zone_id',
+  ruleset_id: 'ruleset_id',
+  rules: [
+    { id: 'rule_id', action: 'block', expression: 'cf.waf.score gt 40', enabled: true },
+    { action: 'challenge', expression: 'http.request.uri.path contains "/admin"', enabled: true },
+  ],
+});
+
+// Delete ruleset
+await client.rulesets.delete({ zone_id: 'zone_id', ruleset_id: 'ruleset_id' });
+```
+
+## Actions & Phases
+
+### Actions by Phase
+
+| Action | Custom | Managed | Rate Limit | Description |
+|--------|--------|---------|------------|-------------|
+| `block` | ✅ | ❌ | ✅ | Block request with 403 |
+| `challenge` | ✅ | ❌ | ✅ | Show CAPTCHA challenge |
+| `js_challenge` | ✅ | ❌ | ✅ | JS-based challenge |
+| `managed_challenge` | ✅ | ❌ | ✅ | Smart challenge (recommended) |
+| `log` | ✅ | ❌ | ✅ | Log only, don't block |
+| `skip` | ✅ | ❌ | ❌ | Skip rule evaluation |
+| `execute` | ❌ | ✅ | ❌ | Deploy managed ruleset |
+
+### Phases (Execution Order)
+
+1. `http_request_firewall_custom` - Custom rules (first line of defense)
+2. `http_request_firewall_managed` - Managed rulesets (pre-configured protection)
+3. `http_ratelimit` - Rate limiting (request throttling)
+4. `http_request_sbfm` - Super Bot Fight Mode (Pro+ only)
+
+## Expression Syntax
+
+### Fields
+
+```typescript
+// Request properties
+http.request.method          // GET, POST, etc.
+http.request.uri.path        // /api/users
+http.host                    // example.com
+
+// IP and Geolocation
+ip.src                       // 192.0.2.1
+ip.geoip.country            // US, GB, etc.
+ip.geoip.continent          // NA, EU, etc.
+
+// Attack detection
+cf.waf.score                 // 0-100 attack score
+cf.waf.score.sqli           // SQL injection score
+cf.waf.score.xss            // XSS score
+
+// Headers & Cookies
+http.request.headers["authorization"][0]
+http.request.cookies["session"][0]
+lower(http.user_agent)      // Lowercase user agent
+```
+
+### Operators
+
+```typescript
+// Comparison
+eq      // Equal
+ne      // Not equal
+lt      // Less than
+le      // Less than or equal
+gt      // Greater than
+ge      // Greater than or equal
+
+// String matching
+contains        // Substring match
+matches         // Regex match (use carefully)
+starts_with     // Prefix match
+ends_with       // Suffix match
+
+// List operations
+in              // Value in list
+not             // Logical NOT
+and             // Logical AND
+or              // Logical OR
+```
+
+### Expression Examples
+
+```typescript
+'cf.waf.score gt 40' // Attack score
+'http.request.uri.path eq "/api/login" and http.request.method eq "POST"' // Path + method
+'ip.src in {192.0.2.0/24 203.0.113.0/24}' // IP blocking
+'ip.geoip.country in {"CN" "RU" "KP"}' // Country blocking
+'http.user_agent contains "bot"' // User agent
+'not http.request.headers["authorization"][0]' // Header check
+'(cf.waf.score.sqli gt 20 or cf.waf.score.xss gt 20) and http.request.uri.path starts_with "/api"' // Complex
+```
+
+## Rate Limiting Configuration
+
+```typescript
+{
+  action: 'block',
+  expression: 'http.request.uri.path starts_with "/api"',
+  action_parameters: {
+    ratelimit: {
+      // Characteristics define uniqueness: 'ip.src', 'cf.colo.id', 
+      // 'http.request.headers["key"][0]', 'http.request.cookies["session"][0]'
+      characteristics: ['cf.colo.id', 'ip.src'], // Recommended: per-IP per-datacenter
+      period: 60,                      // Time window in seconds
+      requests_per_period: 100,        // Max requests in period
+      mitigation_timeout: 600,         // Block duration in seconds
+      counting_expression: 'http.request.method ne "GET"', // Optional: filter counted requests
+      requests_to_origin: false,       // Count all requests (not just origin hits)
+    },
+  },
+  enabled: true,
+}
+```
+
+## Managed Ruleset Deployment
+
+```typescript
+{
+  action: 'execute',
+  action_parameters: {
+    id: 'efb7b8c949ac4650a09736fc376e9aee', // Cloudflare Managed
+    overrides: {
+      // Override specific rules
+      rules: [
+        { id: '5de7edfa648c4d6891dc3e7f84534ffa', action: 'log', enabled: true },
+      ],
+      // Override categories: 'wordpress', 'sqli', 'xss', 'rce', etc.
+      categories: [
+        { category: 'wordpress', enabled: false },
+        { category: 'sqli', action: 'log' },
+      ],
+    },
+  },
+  expression: 'true',
+  enabled: true,
+}
+```
+
+## Skip Rules
+
+Skip rules bypass subsequent rule evaluation. Two skip types:
+
+**Skip current ruleset**: Skip remaining rules in current phase only
+```typescript
+{
+  action: 'skip',
+  action_parameters: {
+    ruleset: 'current', // Skip rest of current ruleset
+  },
+  expression: 'http.request.uri.path ends_with ".jpg" or http.request.uri.path ends_with ".css"',
+  enabled: true,
+}
+```
+
+**Skip entire phases**: Skip one or more phases completely
+```typescript
+{
+  action: 'skip',
+  action_parameters: {
+    phases: ['http_request_firewall_managed', 'http_ratelimit'], // Skip multiple phases
+  },
+  expression: 'ip.src in {192.0.2.0/24 203.0.113.0/24}',
+  enabled: true,
+}
+```
+
+**Note**: Skip rules in custom phase can skip managed/ratelimit phases, but not vice versa (execution order).

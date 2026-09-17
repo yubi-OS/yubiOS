@@ -1,1 +1,180 @@
-IyBUYWlsIFdvcmtlcnMgQ29tbW9uIFBhdHRlcm5zCgojIyBDb21tdW5pdHkgTGlicmFyaWVzCgpXaGlsZSBtb3N0IHRhaWwgV29ya2VyIGltcGxlbWVudGF0aW9ucyBhcmUgY3VzdG9tLCB0aGVzZSBsaWJyYXJpZXMgbWF5IGhlbHA6CgoqKkxvZ2dpbmcvT2JzZXJ2YWJpbGl0eToqKgotICoqQXhpb20qKiAtIGBheGlvbS1jbG91ZGZsYXJlLXdvcmtlcnNgIChucG0pIC0gRGlyZWN0IEF4aW9tIGludGVncmF0aW9uCi0gKipCYXNlbGltZSoqIC0gU0RLIGZvciBCYXNlbGltZSBvYnNlcnZhYmlsaXR5IHBsYXRmb3JtCi0gKipMb2dGbGFyZSoqIC0gU3RydWN0dXJlZCBsb2cgYWdncmVnYXRpb24KCioqVHlwZSBEZWZpbml0aW9uczoqKgotICoqQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcyoqIC0gT2ZmaWNpYWwgVHlwZVNjcmlwdCB0eXBlcyAodXNlIGBUcmFjZUl0ZW1gKQoKKipOb3RlOioqIE1vc3QgaW50ZWdyYXRpb25zIHJlcXVpcmUgY3VzdG9tIHRhaWwgaGFuZGxlciBpbXBsZW1lbnRhdGlvbi4gU2VlIGludGVncmF0aW9uIGV4YW1wbGVzIGJlbG93LgoKIyMgQmFzaWMgUGF0dGVybnMKCiMjIyBIVFRQIEVuZHBvaW50IExvZ2dpbmcKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgewogICAgY29uc3QgcGF5bG9hZCA9IGV2ZW50cy5tYXAoZXZlbnQgPT4gKHsKICAgICAgc2NyaXB0OiBldmVudC5zY3JpcHROYW1lLAogICAgICB0aW1lc3RhbXA6IGV2ZW50LmV2ZW50VGltZXN0YW1wLAogICAgICBvdXRjb21lOiBldmVudC5vdXRjb21lLAogICAgICB1cmw6IGV2ZW50LmV2ZW50Py5yZXF1ZXN0Py51cmwsCiAgICAgIHN0YXR1czogZXZlbnQuZXZlbnQ/LnJlc3BvbnNlPy5zdGF0dXMsCiAgICAgIGxvZ3M6IGV2ZW50LmxvZ3MsCiAgICAgIGV4Y2VwdGlvbnM6IGV2ZW50LmV4Y2VwdGlvbnMsCiAgICB9KSk7CiAgICAKICAgIGN0eC53YWl0VW50aWwoCiAgICAgIGZldGNoKGVudi5MT0dfRU5EUE9JTlQsIHsKICAgICAgICBtZXRob2Q6ICJQT1NUIiwKICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeShwYXlsb2FkKSwKICAgICAgfSkKICAgICk7CiAgfQp9OwpgYGAKCiMjIyBFcnJvciBUcmFja2luZyBPbmx5CgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyB0YWlsKGV2ZW50cywgZW52LCBjdHgpIHsKICAgIGNvbnN0IGVycm9ycyA9IGV2ZW50cy5maWx0ZXIoZSA9PiAKICAgICAgZS5vdXRjb21lID09PSAnZXhjZXB0aW9uJyB8fCBlLmV4Y2VwdGlvbnMubGVuZ3RoID4gMAogICAgKTsKICAgIAogICAgaWYgKGVycm9ycy5sZW5ndGggPT09IDApIHJldHVybjsKICAgIAogICAgY3R4LndhaXRVbnRpbCgKICAgICAgZmV0Y2goZW52LkVSUk9SX0VORFBPSU5ULCB7CiAgICAgICAgbWV0aG9kOiAiUE9TVCIsCiAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoZXJyb3JzKSwKICAgICAgfSkKICAgICk7CiAgfQp9OwpgYGAKCiMjIFN0b3JhZ2UgSW50ZWdyYXRpb24KCiMjIyBLViBTdG9yYWdlIHdpdGggVFRMCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyB0YWlsKGV2ZW50cywgZW52LCBjdHgpIHsKICAgIGN0eC53YWl0VW50aWwoCiAgICAgIFByb21pc2UuYWxsKGV2ZW50cy5tYXAoZXZlbnQgPT4KICAgICAgICBlbnYuTE9HU19LVi5wdXQoCiAgICAgICAgICBgbG9nOiR7ZXZlbnQuc2NyaXB0TmFtZX06JHtldmVudC5ldmVudFRpbWVzdGFtcH1gLAogICAgICAgICAgSlNPTi5zdHJpbmdpZnkoZXZlbnQpLAogICAgICAgICAgeyBleHBpcmF0aW9uVHRsOiA4NjQwMCB9ICAvLyAyNCBob3VycwogICAgICAgICkKICAgICAgKSkKICAgICk7CiAgfQp9OwpgYGAKCiMjIyBBbmFseXRpY3MgRW5naW5lIE1ldHJpY3MKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgewogICAgY3R4LndhaXRVbnRpbCgKICAgICAgUHJvbWlzZS5hbGwoZXZlbnRzLm1hcChldmVudCA9PgogICAgICAgIGVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoewogICAgICAgICAgYmxvYnM6IFtldmVudC5zY3JpcHROYW1lLCBldmVudC5vdXRjb21lXSwKICAgICAgICAgIGRvdWJsZXM6IFsxLCBldmVudC5ldmVudD8ucmVzcG9uc2U/LnN0YXR1cyA/PyAwXSwKICAgICAgICAgIGluZGV4ZXM6IFtldmVudC5ldmVudD8ucmVxdWVzdD8uY2Y/LmNvbG8gPz8gJ3Vua25vd24nXSwKICAgICAgICB9KQogICAgICApKQogICAgKTsKICB9Cn07CmBgYAoKIyMgRmlsdGVyaW5nICYgUm91dGluZwoKRmlsdGVyIGJ5IHJvdXRlLCBvdXRjb21lLCBvciBvdGhlciBjcml0ZXJpYToKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgewogICAgLy8gUm91dGUgZmlsdGVyaW5nCiAgICBjb25zdCBhcGlFdmVudHMgPSBldmVudHMuZmlsdGVyKGUgPT4gCiAgICAgIGUuZXZlbnQ/LnJlcXVlc3Q/LnVybD8uaW5jbHVkZXMoJy9hcGkvJykKICAgICk7CiAgICAKICAgIC8vIE11bHRpLWRlc3RpbmF0aW9uIHJvdXRpbmcKICAgIGNvbnN0IGVycm9ycyA9IGV2ZW50cy5maWx0ZXIoZSA9PiBlLm91dGNvbWUgPT09ICdleGNlcHRpb24nKTsKICAgIGNvbnN0IHN1Y2Nlc3MgPSBldmVudHMuZmlsdGVyKGUgPT4gZS5vdXRjb21lID09PSAnb2snKTsKICAgIAogICAgY29uc3QgdGFza3MgPSBbXTsKICAgIGlmIChlcnJvcnMubGVuZ3RoID4gMCkgewogICAgICB0YXNrcy5wdXNoKGZldGNoKGVudi5FUlJPUl9FTkRQT0lOVCwgewogICAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGVycm9ycyksCiAgICAgIH0pKTsKICAgIH0KICAgIGlmIChzdWNjZXNzLmxlbmd0aCA+IDApIHsKICAgICAgdGFza3MucHVzaChmZXRjaChlbnYuU1VDQ0VTU19FTkRQT0lOVCwgewogICAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHN1Y2Nlc3MpLAogICAgICB9KSk7CiAgICB9CiAgICAKICAgIGN0eC53YWl0VW50aWwoUHJvbWlzZS5hbGwodGFza3MpKTsKICB9Cn07CmBgYAoKIyMgU2FtcGxpbmcKClJlZHVjZSBjb3N0cyBieSBwcm9jZXNzaW5nIG9ubHkgYSBwZXJjZW50YWdlIG9mIGV2ZW50czoKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgewogICAgaWYgKE1hdGgucmFuZG9tKCkgPiAwLjEpIHJldHVybjsgIC8vIDEwJSBzYW1wbGUgcmF0ZQogICAgY3R4LndhaXRVbnRpbChmZXRjaChlbnYuTE9HX0VORFBPSU5ULCB7CiAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICBib2R5OiBKU09OLnN0cmluZ2lmeShldmVudHMpLAogICAgfSkpOwogIH0KfTsKYGBgCgojIyBBZHZhbmNlZCBQYXR0ZXJucwoKIyMjIEJhdGNoaW5nIHdpdGggRHVyYWJsZSBPYmplY3RzCgpBY2N1bXVsYXRlIGV2ZW50cyBiZWZvcmUgc2VuZGluZzoKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgewogICAgY29uc3QgYmF0Y2ggPSBlbnYuQkFUQ0hfRE8uZ2V0KGVudi5CQVRDSF9ETy5pZEZyb21OYW1lKCJiYXRjaCIpKTsKICAgIGN0eC53YWl0VW50aWwoYmF0Y2guZmV0Y2goImh0dHBzOi8vYmF0Y2gvYWRkIiwgewogICAgICBtZXRob2Q6ICJQT1NUIiwKICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoZXZlbnRzKSwKICAgIH0pKTsKICB9Cn07CmBgYAoKU2VlIGR1cmFibGUtb2JqZWN0cyBza2lsbCBmb3IgZnVsbCBpbXBsZW1lbnRhdGlvbi4KCiMjIyBXb3JrZXJzIGZvciBQbGF0Zm9ybXMKCkR5bmFtaWMgZGlzcGF0Y2ggc2VuZHMgVFdPIGV2ZW50cyBwZXIgcmVxdWVzdC4gRmlsdGVyIGJ5IGBzY3JpcHROYW1lYCB0byBkaXN0aW5ndWlzaCBkaXNwYXRjaCB2cyB1c2VyIFdvcmtlciBldmVudHMuCgojIyMgRXJyb3IgSGFuZGxpbmcKCkFsd2F5cyB3cmFwIGV4dGVybmFsIGNhbGxzLiBTZWUgZ290Y2hhcy5tZCBmb3IgZmFsbGJhY2sgc3RvcmFnZSBwYXR0ZXJuLgo=
+# Tail Workers Common Patterns
+
+## Community Libraries
+
+While most tail Worker implementations are custom, these libraries may help:
+
+**Logging/Observability:**
+- **Axiom** - `axiom-cloudflare-workers` (npm) - Direct Axiom integration
+- **Baselime** - SDK for Baselime observability platform
+- **LogFlare** - Structured log aggregation
+
+**Type Definitions:**
+- **@cloudflare/workers-types** - Official TypeScript types (use `TraceItem`)
+
+**Note:** Most integrations require custom tail handler implementation. See integration examples below.
+
+## Basic Patterns
+
+### HTTP Endpoint Logging
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    const payload = events.map(event => ({
+      script: event.scriptName,
+      timestamp: event.eventTimestamp,
+      outcome: event.outcome,
+      url: event.event?.request?.url,
+      status: event.event?.response?.status,
+      logs: event.logs,
+      exceptions: event.exceptions,
+    }));
+    
+    ctx.waitUntil(
+      fetch(env.LOG_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(payload),
+      })
+    );
+  }
+};
+```
+
+### Error Tracking Only
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    const errors = events.filter(e => 
+      e.outcome === 'exception' || e.exceptions.length > 0
+    );
+    
+    if (errors.length === 0) return;
+    
+    ctx.waitUntil(
+      fetch(env.ERROR_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(errors),
+      })
+    );
+  }
+};
+```
+
+## Storage Integration
+
+### KV Storage with TTL
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    ctx.waitUntil(
+      Promise.all(events.map(event =>
+        env.LOGS_KV.put(
+          `log:${event.scriptName}:${event.eventTimestamp}`,
+          JSON.stringify(event),
+          { expirationTtl: 86400 }  // 24 hours
+        )
+      ))
+    );
+  }
+};
+```
+
+### Analytics Engine Metrics
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    ctx.waitUntil(
+      Promise.all(events.map(event =>
+        env.ANALYTICS.writeDataPoint({
+          blobs: [event.scriptName, event.outcome],
+          doubles: [1, event.event?.response?.status ?? 0],
+          indexes: [event.event?.request?.cf?.colo ?? 'unknown'],
+        })
+      ))
+    );
+  }
+};
+```
+
+## Filtering & Routing
+
+Filter by route, outcome, or other criteria:
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    // Route filtering
+    const apiEvents = events.filter(e => 
+      e.event?.request?.url?.includes('/api/')
+    );
+    
+    // Multi-destination routing
+    const errors = events.filter(e => e.outcome === 'exception');
+    const success = events.filter(e => e.outcome === 'ok');
+    
+    const tasks = [];
+    if (errors.length > 0) {
+      tasks.push(fetch(env.ERROR_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(errors),
+      }));
+    }
+    if (success.length > 0) {
+      tasks.push(fetch(env.SUCCESS_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(success),
+      }));
+    }
+    
+    ctx.waitUntil(Promise.all(tasks));
+  }
+};
+```
+
+## Sampling
+
+Reduce costs by processing only a percentage of events:
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    if (Math.random() > 0.1) return;  // 10% sample rate
+    ctx.waitUntil(fetch(env.LOG_ENDPOINT, {
+      method: "POST",
+      body: JSON.stringify(events),
+    }));
+  }
+};
+```
+
+## Advanced Patterns
+
+### Batching with Durable Objects
+
+Accumulate events before sending:
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    const batch = env.BATCH_DO.get(env.BATCH_DO.idFromName("batch"));
+    ctx.waitUntil(batch.fetch("https://batch/add", {
+      method: "POST",
+      body: JSON.stringify(events),
+    }));
+  }
+};
+```
+
+See durable-objects skill for full implementation.
+
+### Workers for Platforms
+
+Dynamic dispatch sends TWO events per request. Filter by `scriptName` to distinguish dispatch vs user Worker events.
+
+### Error Handling
+
+Always wrap external calls. See gotchas.md for fallback storage pattern.

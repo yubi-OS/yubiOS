@@ -1,1 +1,285 @@
-IyEvdXNyL2Jpbi9lbnYgYmFzaAojIFByb2JlcyBDbG91ZGZsYXJlIEFQSSBhdXRoIHN0YXRlIGZvciB0aGUgVHVybnN0aWxlIFNwaW4gYWdlbnQuCiMKIyBSZWFkczoKIyAgICRDTE9VREZMQVJFX0FQSV9UT0tFTiAgKHJlcXVpcmVkKQojICAgJENMT1VERkxBUkVfQUNDT1VOVF9JRCAob3B0aW9uYWw7IGlmIHNldCwgbXVzdCBiZSBvbmUgb2YgdGhlIHRva2VuJ3MgYWNjb3VudHMpCiMKIyBSZXF1aXJlczogYmFzaCwgY3VybCwgcHl0aG9uMy4gT3B0aW9uYWw6IGEgdXNlci1hcHByb3ZlZCBXUkFOR0xFUl9CSU4gZm9yIGFjY291bnQgZW51bWVyYXRpb24uCiMKIyBPdXRwdXRzIEpTT04gdG8gc3Rkb3V0LCBhbHdheXMgZXhpdHMgMC4gVGhlIGFnZW50IHJlYWRzIGBzdGF0dXNgOgojICAgIm9rIiAgICAgICAgICAgICAgICA7IHNlbGVjdGVkIGFjY291bnQgcGFzc2VkIHRoZSBUdXJuc3RpbGUgRWRpdC1zY29wZSBwcm9iZQojICAgIm1pc3NpbmdfdG9rZW4iICAgICA7IG5vIHRva2VuIHNldCwgcHl0aG9uMyB1bmF2YWlsYWJsZSwgb3IgYWNjb3VudCBlbnVtZXJhdGlvbiBmYWlsZWQKIyAgICJtaXNzaW5nX3Njb3BlIiAgICAgOyB0b2tlbiBsYWNrcyBBY2NvdW50LlR1cm5zdGlsZTpFZGl0IG9uIHRoZSBzZWxlY3RlZCBhY2NvdW50CiMgICAibXVsdGlwbGVfYWNjb3VudHMiIDsgdG9rZW4gY292ZXJzID4xIGFjY291bnRzIGFuZCAkQ0xPVURGTEFSRV9BQ0NPVU5UX0lEIGlzIHVuc2V0CiMgICAiYWNjb3VudF9taXNtYXRjaCIgIDsgJENMT1VERkxBUkVfQUNDT1VOVF9JRCBpcyBzZXQgYnV0IGlzIG5vdCBpbiB0aGUgdG9rZW4ncyBhY2NvdW50cyBsaXN0CiMgICAibmV0d29ya19mYWlsdXJlIiAgIDsgdGhlIEVkaXQtc2NvcGUgcHJvYmUgY291bGQgbm90IHJlYWNoIHRoZSBDbG91ZGZsYXJlIEFQSQojICAgInVwc3RyZWFtX2ZhaWx1cmUiICA7IHRoZSBFZGl0LXNjb3BlIHByb2JlIHJldHVybmVkIGFuIHVuZXhwZWN0ZWQgdXBzdHJlYW0gcmVzcG9uc2UKIwojIEFjY291bnQgZW51bWVyYXRpb24gdXNlcyBgV1JBTkdMRVJfQklOIHdob2FtaSAtLWpzb25gIG9ubHkgd2hlbiBXUkFOR0xFUl9CSU4gaXMKIyBhbiBhcHByb3ZlZCBjYW5vbmljYWwgYWJzb2x1dGUgcGF0aCBvdXRzaWRlIFBST0pFQ1RfUk9PVCBhbmQgV1JBTkdMRVJfVkVSU0lPTgojIG1hdGNoZXMgaXQgZXhhY3RseS4gT3RoZXJ3aXNlIHRoZSBjYWxsZXIgbXVzdCBzdXBwbHkgJENMT1VERkxBUkVfQUNDT1VOVF9JRC4KIwojIEh1bWFuLXJlYWRhYmxlIGRpYWdub3N0aWNzIGdvIHRvIHN0ZGVyci4KCnNldCAreApzZXQgLXVvIHBpcGVmYWlsCgplbWl0KCkgewogIGVjaG8gIiQxIgogIGV4aXQgMAp9CgppZiAhIGNvbW1hbmQgLXYgcHl0aG9uMyA+L2Rldi9udWxsIDI+JjE7IHRoZW4KICBlY2hvICJhdXRoLXByb2JlOiBweXRob24zIGlzIHJlcXVpcmVkIGJ1dCBub3QgZm91bmQgaW4gUEFUSC4iID4mMgogIGVtaXQgJ3sic3RhdHVzIjoibWlzc2luZ190b2tlbiIsInJlYXNvbiI6InB5dGhvbjNfbm90X2F2YWlsYWJsZSJ9JwpmaQoKdG9rZW49IiR7Q0xPVURGTEFSRV9BUElfVE9LRU46LX0iCnVuc2V0IENMT1VERkxBUkVfQVBJX1RPS0VOCmRlY2xhcmVkX2FjY291bnQ9IiR7Q0xPVURGTEFSRV9BQ0NPVU5UX0lEOi19IgoKaWYgWyAteiAiJHRva2VuIiBdOyB0aGVuCiAgZWNobyAiYXV0aC1wcm9iZTogXCRDTE9VREZMQVJFX0FQSV9UT0tFTiBpcyBub3Qgc2V0LiIgPiYyCiAgZW1pdCAneyJzdGF0dXMiOiJtaXNzaW5nX3Rva2VuIiwicmVhc29uIjoibm9fZW52X3ZhciJ9JwpmaQppZiBbWyAhICIkdG9rZW4iID1+IF5bQS1aYS16MC05Xy1dKyQgXV07IHRoZW4KICBlY2hvICJhdXRoLXByb2JlOiBDTE9VREZMQVJFX0FQSV9UT0tFTiBoYXMgYW4gaW52YWxpZCBmb3JtYXQuIiA+JjIKICBlbWl0ICd7InN0YXR1cyI6Im1pc3NpbmdfdG9rZW4iLCJyZWFzb24iOiJpbnZhbGlkX3Rva2VuX2Zvcm1hdCJ9JwpmaQoKYWNjb3VudHNfanNvbj0iIgphY2NvdW50X2NvdW50PTAKCmlmIFsgLW4gIiR7V1JBTkdMRVJfQklOOi19IiBdOyB0aGVuCiAgaWYgW1sgIiRXUkFOR0xFUl9CSU4iICE9IC8qIHx8ICEgLXggIiRXUkFOR0xFUl9CSU4iIF1dOyB0aGVuCiAgICBlY2hvICJhdXRoLXByb2JlOiBXUkFOR0xFUl9CSU4gbXVzdCBiZSBhbiBleGVjdXRhYmxlIGFic29sdXRlIHBhdGguIiA+JjIKICAgIGVtaXQgJ3sic3RhdHVzIjoibWlzc2luZ190b2tlbiIsInJlYXNvbiI6ImludmFsaWRfd3JhbmdsZXJfcGF0aCJ9JwogIGZpCgogIHdyYW5nbGVyX2Jpbj0kKHB5dGhvbjMgLUkgLWMgJ2ltcG9ydCBvcyxzeXM7IHByaW50KG9zLnBhdGgucmVhbHBhdGgoc3lzLmFyZ3ZbMV0pKScgIiRXUkFOR0xFUl9CSU4iKQogIGlmIFsgIiR3cmFuZ2xlcl9iaW4iICE9ICIkV1JBTkdMRVJfQklOIiBdOyB0aGVuCiAgICBlY2hvICJhdXRoLXByb2JlOiBXUkFOR0xFUl9CSU4gbXVzdCBiZSBjYW5vbmljYWwsIHdpdGhvdXQgc3ltbGlua3MuIiA+JjIKICAgIGVtaXQgJ3sic3RhdHVzIjoibWlzc2luZ190b2tlbiIsInJlYXNvbiI6Im5vbmNhbm9uaWNhbF93cmFuZ2xlcl9wYXRoIn0nCiAgZmkKICBpZiBbIC1uICIke1BST0pFQ1RfUk9PVDotfSIgXTsgdGhlbgogICAgcHJvamVjdF9yb290PSQocHl0aG9uMyAtSSAtYyAnaW1wb3J0IG9zLHN5czsgcHJpbnQob3MucGF0aC5yZWFscGF0aChzeXMuYXJndlsxXSkpJyAiJFBST0pFQ1RfUk9PVCIpCiAgICBpZiBbWyAiJHdyYW5nbGVyX2JpbiIgPT0gIiRwcm9qZWN0X3Jvb3QiIHx8ICIkd3JhbmdsZXJfYmluIiA9PSAiJHByb2plY3Rfcm9vdC8iKiBdXTsgdGhlbgogICAgICBlY2hvICJhdXRoLXByb2JlOiBXUkFOR0xFUl9CSU4gbXVzdCBiZSBvdXRzaWRlIFBST0pFQ1RfUk9PVC4iID4mMgogICAgICBlbWl0ICd7InN0YXR1cyI6Im1pc3NpbmdfdG9rZW4iLCJyZWFzb24iOiJwcm9qZWN0X2xvY2FsX3dyYW5nbGVyIn0nCiAgICBmaQogIGZpCiAgaWYgWyAteiAiJHtXUkFOR0xFUl9WRVJTSU9OOi19IiBdOyB0aGVuCiAgICBlY2hvICJhdXRoLXByb2JlOiBXUkFOR0xFUl9WRVJTSU9OIGlzIHJlcXVpcmVkIHdpdGggV1JBTkdMRVJfQklOLiIgPiYyCiAgICBlbWl0ICd7InN0YXR1cyI6Im1pc3NpbmdfdG9rZW4iLCJyZWFzb24iOiJtaXNzaW5nX3dyYW5nbGVyX3ZlcnNpb24ifScKICBmaQoKICBhY3R1YWxfdmVyc2lvbj0kKAogICAgIiR3cmFuZ2xlcl9iaW4iIC0tdmVyc2lvbiAyPi9kZXYvbnVsbCB8CiAgICAgIHB5dGhvbjMgLUkgLWMgJ2ltcG9ydCByZSxzeXM7IG09cmUuc2VhcmNoKHIiXGIoXGQrXC5cZCtcLlxkKylcYiIsIHN5cy5zdGRpbi5yZWFkKCkpOyBwcmludChtLmdyb3VwKDEpIGlmIG0gZWxzZSAiIiknCiAgKQogIGlmIFsgIiRhY3R1YWxfdmVyc2lvbiIgIT0gIiRXUkFOR0xFUl9WRVJTSU9OIiBdOyB0aGVuCiAgICBlY2hvICJhdXRoLXByb2JlOiBXUkFOR0xFUl9CSU4gdmVyc2lvbiBkb2VzIG5vdCBtYXRjaCBXUkFOR0xFUl9WRVJTSU9OLiIgPiYyCiAgICBlbWl0ICd7InN0YXR1cyI6Im1pc3NpbmdfdG9rZW4iLCJyZWFzb24iOiJ3cmFuZ2xlcl92ZXJzaW9uX21pc21hdGNoIn0nCiAgZmkKCiAgd2hvYW1pX2pzb249JChDTE9VREZMQVJFX0FQSV9UT0tFTj0iJHRva2VuIiAiJHdyYW5nbGVyX2JpbiIgd2hvYW1pIC0tanNvbiAyPi9kZXYvbnVsbCB8fCB0cnVlKQogIGlmIFsgLW4gIiR3aG9hbWlfanNvbiIgXSAmJiBbICIkKHByaW50ZiAnJXMnICIkd2hvYW1pX2pzb24iIHwgaGVhZCAtYyAxKSIgPSAieyIgXTsgdGhlbgogICAgYWNjb3VudHNfanNvbj0kKHByaW50ZiAnJXMnICIkd2hvYW1pX2pzb24iIHwgcHl0aG9uMyAtSSAtYyAnCmltcG9ydCBqc29uLCBzeXMKdHJ5OgogICAgZCA9IGpzb24ubG9hZChzeXMuc3RkaW4pCiAgICBwcmludChqc29uLmR1bXBzKGQuZ2V0KCJhY2NvdW50cyIpIG9yIFtdKSkKZXhjZXB0IEV4Y2VwdGlvbjoKICAgIHByaW50KCJbXSIpCicpCiAgICBhY2NvdW50X2NvdW50PSQocHJpbnRmICclcycgIiRhY2NvdW50c19qc29uIiB8IHB5dGhvbjMgLUkgLWMgJwppbXBvcnQganNvbiwgc3lzCnRyeToKICAgIHByaW50KGxlbihqc29uLmxvYWQoc3lzLnN0ZGluKSkpCmV4Y2VwdCBFeGNlcHRpb246CiAgICBwcmludCgwKQonKQogIGZpCmZpCgppZiBbICIkYWNjb3VudF9jb3VudCIgPSAiMCIgXSAmJiBbIC1uICIkZGVjbGFyZWRfYWNjb3VudCIgXTsgdGhlbgogICMgTm8gd3JhbmdsZXIsIGJ1dCB1c2VyIGdhdmUgdXMgYW4gYWNjb3VudC4gVHJ1c3QgaXQgYW5kIHNraXAgZW51bWVyYXRpb24uCiAgYWNjb3VudHNfanNvbj0iW3tcImlkXCI6JChweXRob24zIC1JIC1jICdpbXBvcnQganNvbiwgc3lzOyBwcmludChqc29uLmR1bXBzKHN5cy5hcmd2WzFdKSknICIkZGVjbGFyZWRfYWNjb3VudCIpfV0iCiAgYWNjb3VudF9jb3VudD0xCmZpCgppZiBbICIkYWNjb3VudF9jb3VudCIgPSAiMCIgXTsgdGhlbgogIGVjaG8gImF1dGgtcHJvYmU6IGNvdWxkIG5vdCBlbnVtZXJhdGUgYWNjb3VudHMuIEV4cG9ydCBDTE9VREZMQVJFX0FDQ09VTlRfSUQgb3IgcHJvdmlkZSBhbiBhcHByb3ZlZCBXUkFOR0xFUl9CSU4gYW5kIFdSQU5HTEVSX1ZFUlNJT04uIiA+JjIKICBlbWl0ICd7InN0YXR1cyI6Im1pc3NpbmdfdG9rZW4iLCJyZWFzb24iOiJub19hY2NvdW50cyJ9JwpmaQoKaWYgWyAtbiAiJGRlY2xhcmVkX2FjY291bnQiIF07IHRoZW4KICBpbl9saXN0PSQocHJpbnRmICclcycgIiRhY2NvdW50c19qc29uIiB8IHB5dGhvbjMgLUkgLWMgJwppbXBvcnQganNvbiwgc3lzCnRhcmdldCA9IHN5cy5hcmd2WzFdCnRyeToKICAgIGFjY291bnRzID0ganNvbi5sb2FkKHN5cy5zdGRpbikKZXhjZXB0IEV4Y2VwdGlvbjoKICAgIHByaW50KCJmYWxzZSIpOyBzeXMuZXhpdCgwKQpwcmludCgidHJ1ZSIgaWYgYW55KChhIG9yIHt9KS5nZXQoImlkIikgPT0gdGFyZ2V0IGZvciBhIGluIGFjY291bnRzKSBlbHNlICJmYWxzZSIpCicgIiRkZWNsYXJlZF9hY2NvdW50IikKICBpZiBbICIkaW5fbGlzdCIgIT0gInRydWUiIF07IHRoZW4KICAgIGVjaG8gImF1dGgtcHJvYmU6IFwkQ0xPVURGTEFSRV9BQ0NPVU5UX0lEICgkZGVjbGFyZWRfYWNjb3VudCkgaXMgbm90IG9uZSBvZiB0aGUgdG9rZW4ncyBhY2NvdW50cy4iID4mMgogICAgZW1pdCAiJChweXRob24zIC1JIC1jICcKaW1wb3J0IGpzb24sIHN5cwpkZWNsYXJlZCwgYWNjb3VudHNfcmF3ID0gc3lzLmFyZ3ZbMV0sIHN5cy5hcmd2WzJdCnRyeToKICAgIGFjY291bnRzID0ganNvbi5sb2FkcyhhY2NvdW50c19yYXcpCmV4Y2VwdCBFeGNlcHRpb246CiAgICBhY2NvdW50cyA9IFtdCnByaW50KGpzb24uZHVtcHMoeyJzdGF0dXMiOiJhY2NvdW50X21pc21hdGNoIiwiZGVjbGFyZWQiOmRlY2xhcmVkLCJhY2NvdW50cyI6YWNjb3VudHN9KSkKJyAiJGRlY2xhcmVkX2FjY291bnQiICIkYWNjb3VudHNfanNvbiIpIgogIGZpCiAgYWNjb3VudF9pZD0iJGRlY2xhcmVkX2FjY291bnQiCmVsaWYgWyAiJGFjY291bnRfY291bnQiID0gIjEiIF07IHRoZW4KICBhY2NvdW50X2lkPSQocHJpbnRmICclcycgIiRhY2NvdW50c19qc29uIiB8IHB5dGhvbjMgLUkgLWMgJwppbXBvcnQganNvbiwgc3lzCnRyeToKICAgIHByaW50KGpzb24ubG9hZChzeXMuc3RkaW4pWzBdWyJpZCJdKQpleGNlcHQgRXhjZXB0aW9uOgogICAgcHJpbnQoIiIpCicpCiAgaWYgWyAteiAiJGFjY291bnRfaWQiIF07IHRoZW4KICAgIGVjaG8gImF1dGgtcHJvYmU6IGFjY291bnRzIGxpc3QgaGFkIG9uZSBlbnRyeSBidXQgbm8gaWQgZmllbGQuIiA+JjIKICAgIGVtaXQgJ3sic3RhdHVzIjoibWlzc2luZ190b2tlbiIsInJlYXNvbiI6Im1hbGZvcm1lZF9hY2NvdW50cyJ9JwogIGZpCmVsc2UKICBlY2hvICJhdXRoLXByb2JlOiB0b2tlbiBjb3ZlcnMgJGFjY291bnRfY291bnQgYWNjb3VudHM7IGFzayB0aGUgdXNlciB0byBwaWNrIG9uZSwgdGhlbiBleHBvcnQgXCRDTE9VREZMQVJFX0FDQ09VTlRfSUQgYW5kIHJlLXJ1bi4iID4mMgogIGVtaXQgIiQocHl0aG9uMyAtSSAtYyAnCmltcG9ydCBqc29uLCBzeXMKdHJ5OgogICAgYWNjb3VudHMgPSBqc29uLmxvYWRzKHN5cy5hcmd2WzFdKQpleGNlcHQgRXhjZXB0aW9uOgogICAgYWNjb3VudHMgPSBbXQpwcmludChqc29uLmR1bXBzKHsic3RhdHVzIjoibXVsdGlwbGVfYWNjb3VudHMiLCJhY2NvdW50cyI6YWNjb3VudHN9KSkKJyAiJGFjY291bnRzX2pzb24iKSIKZmkKCiMgRWRpdC1zY29wZSBwcm9iZS4gQSBHRVQgL2NoYWxsZW5nZXMvd2lkZ2V0cyB3b3VsZCBhdXRob3JpemUgYSBSZWFkLW9ubHkKIyB0b2tlbjsgdG8gdmVyaWZ5IEVkaXQgc3BlY2lmaWNhbGx5LCBQT1NUIHdpdGggYW4gaW50ZW50aW9uYWxseSBpbnZhbGlkCiMgcGF5bG9hZCBhbmQgaW50ZXJwcmV0IHRoZSByZXNwb25zZToKIyAgIDQwMSBvciA0MDMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4oaSIHRva2VuIGxhY2tzIEVkaXQKIyAgIDIwMCB3aXRoIHN1Y2Nlc3M6ZmFsc2UsIGVycm9yc1swXS5jb2RlPTEwMDAwIOKGkiB0b2tlbiBsYWNrcyBFZGl0CiMgICA0MDAvNDIyIG9yIDIwMCB3aXRoIHZhbGlkYXRpb24gZXJyb3IgY29kZXMgIOKGkiBFZGl0IHNjb3BlIE9LCiMKIyBUaGUgQVBJIHJlamVjdHMgdGhlIGVtcHR5LW5hbWUvZW1wdHktZG9tYWlucyBwYXlsb2FkIHdpdGggNDAwIHRvZGF5LCBzbwojIG5vIHdpZGdldCBpcyBjcmVhdGVkLiBJZiB2YWxpZGF0aW9uIGV2ZXIgbG9vc2VucyBhbmQgdGhlIHByb2JlIGFjY2lkZW50YWxseQojIGNyZWF0ZXMgb25lLCB3ZSBkZXRlY3QgdGhlIHJldHVybmVkIHNpdGVrZXkgYW5kIERFTEVURSBpdCBhcyBhIHNhZmV0eSBuZXQKIyBzbyB0aGUgcHJvYmUgc3RheXMgc2lkZS1lZmZlY3QtZnJlZS4KYWNjb3VudF9lbmM9JChweXRob24zIC1JIC1jICdpbXBvcnQgc3lzLCB1cmxsaWIucGFyc2U7IHByaW50KHVybGxpYi5wYXJzZS5xdW90ZShzeXMuYXJndlsxXSwgc2FmZT0iIikpJyAiJGFjY291bnRfaWQiKQoKaWYgISBwcm9iZV9yZXNwb25zZT0iJCgKICBwcmludGYgJ2hlYWRlciA9ICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJXMiXG4nICIkdG9rZW4iIHwKICAgIGN1cmwgLS1kaXNhYmxlIC0tY29uZmlnIC0gLS1zaWxlbnQgLS1zaG93LWVycm9yIC0td3JpdGUtb3V0ICQnXG4le2h0dHBfY29kZX0nIC1YIFBPU1QgXAogICAgICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRhY2NvdW50X2VuYy9jaGFsbGVuZ2VzL3dpZGdldHMiIFwKICAgICAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogICAgICAtLWRhdGEgJ3sibmFtZSI6IiIsImRvbWFpbnMiOltdfScKKSI7IHRoZW4KICBlY2hvICJhdXRoLXByb2JlOiBuZXR3b3JrIGZhaWx1cmUgcHJvYmluZyBFZGl0IHNjb3BlIG9uIGFjY291bnQgJGFjY291bnRfaWQuIiA+JjIKICBlbWl0ICd7InN0YXR1cyI6Im5ldHdvcmtfZmFpbHVyZSIsImFjY291bnRfaWQiOiInIiRhY2NvdW50X2lkIicifScKZmkKCmVkaXRfY29kZT0iJHtwcm9iZV9yZXNwb25zZSMjKiQnXG4nfSIKcHJvYmVfYm9keT0iJHtwcm9iZV9yZXNwb25zZSUkJ1xuJyp9Igpwcm9iZV9vdXRwdXQ9JChwcmludGYgJyVzJyAiJHByb2JlX2JvZHkiIHwgcHl0aG9uMyAtSSAtYyAnCmltcG9ydCBqc29uLCBzeXMKaHR0cF9jb2RlID0gc3lzLmFyZ3ZbMV0KdmVyZGljdCA9ICJ1bmtub3duIgpjcmVhdGVkX3NpdGVrZXkgPSAiIgp0cnk6CiAgICByYXcgPSBzeXMuc3RkaW4ucmVhZCgpCiAgICBkYXRhID0ganNvbi5sb2FkcyhyYXcpIGlmIHJhdyBlbHNlIHt9CmV4Y2VwdCBFeGNlcHRpb246CiAgICBkYXRhID0gTm9uZQppZiBpc2luc3RhbmNlKGRhdGEsIGRpY3QpOgogICAgZXJyb3JzID0gZGF0YS5nZXQoImVycm9ycyIpIG9yIFtdCiAgICBpZiBub3QgaXNpbnN0YW5jZShlcnJvcnMsIGxpc3QpOgogICAgICAgIGVycm9ycyA9IFtdCiAgICBmaXJzdCA9IChlcnJvcnNbMF0gb3Ige30pIGlmIGVycm9ycyBlbHNlIHt9CiAgICBpZiBub3QgaXNpbnN0YW5jZShmaXJzdCwgZGljdCk6CiAgICAgICAgZmlyc3QgPSB7fQogICAgZmlyc3RfY29kZSA9IGZpcnN0LmdldCgiY29kZSIsIDApCiAgICBpZiBodHRwX2NvZGUgaW4gKCI0MDEiLCAiNDAzIik6CiAgICAgICAgdmVyZGljdCA9ICJtaXNzaW5nX3Njb3BlIgogICAgZWxpZiBodHRwX2NvZGUgPT0gIjIwMCIgYW5kIGRhdGEuZ2V0KCJzdWNjZXNzIikgaXMgRmFsc2UgYW5kIGZpcnN0X2NvZGUgPT0gMTAwMDA6CiAgICAgICAgdmVyZGljdCA9ICJtaXNzaW5nX3Njb3BlIgogICAgZWxpZiBodHRwX2NvZGUgaW4gKCI0MDAiLCAiNDIyIik6CiAgICAgICAgdmVyZGljdCA9ICJzY29wZV9vayIKICAgIGVsaWYgaHR0cF9jb2RlID09ICIyMDAiOgogICAgICAgICMgQW55IDIwMCB0aGF0IGdvdCBwYXN0IGF1dGggbWVhbnMgc2NvcGUgaXMgZmluZSAod2hldGhlciBzdWNjZXNzIG9yIG5vdCkuCiAgICAgICAgdmVyZGljdCA9ICJzY29wZV9vayIKICAgIGVsc2U6CiAgICAgICAgdmVyZGljdCA9IGYidW5leHBlY3RlZF97aHR0cF9jb2RlfSIKICAgICMgRGV0ZWN0IGFjY2lkZW50YWwgd2lkZ2V0IGNyZWF0aW9uIChzYWZldHkgbmV0IGlmIEFQSSB2YWxpZGF0aW9uIGV2ZXIKICAgICMgYWNjZXB0cyB0aGUgZW1wdHktbmFtZS9lbXB0eS1kb21haW5zIHByb2JlIHBheWxvYWQpLgogICAgcmVzdWx0ID0gZGF0YS5nZXQoInJlc3VsdCIpCiAgICBpZiBpc2luc3RhbmNlKHJlc3VsdCwgZGljdCkgYW5kIGRhdGEuZ2V0KCJzdWNjZXNzIikgaXMgVHJ1ZToKICAgICAgICBzayA9IHJlc3VsdC5nZXQoInNpdGVrZXkiLCAiIikKICAgICAgICBpZiBpc2luc3RhbmNlKHNrLCBzdHIpIGFuZCBzazoKICAgICAgICAgICAgY3JlYXRlZF9zaXRla2V5ID0gc2sKcHJpbnQoZiJ7dmVyZGljdH18e2NyZWF0ZWRfc2l0ZWtleX0iKQonICIkZWRpdF9jb2RlIikKdW5zZXQgcHJvYmVfYm9keSBwcm9iZV9yZXNwb25zZQp2ZXJkaWN0PSIke3Byb2JlX291dHB1dCUlfCp9IgpjcmVhdGVkX3NpdGVrZXk9IiR7cHJvYmVfb3V0cHV0Iyp8fSIKWyAiJGNyZWF0ZWRfc2l0ZWtleSIgPSAiJHByb2JlX291dHB1dCIgXSAmJiBjcmVhdGVkX3NpdGVrZXk9IiIKCiMgSWYgdGhlIHByb2JlIHVuZXhwZWN0ZWRseSBjcmVhdGVkIGEgd2lkZ2V0IChBUEkgdmFsaWRhdGlvbiBsb29zZW5lZCksCiMgREVMRVRFIGl0IHNvIHRoZSBwcm9iZSBzdGF5cyBzaWRlLWVmZmVjdC1mcmVlLgppZiBbIC1uICIkY3JlYXRlZF9zaXRla2V5IiBdOyB0aGVuCiAgZWNobyAiYXV0aC1wcm9iZTogcHJvYmUgdW5leHBlY3RlZGx5IGNyZWF0ZWQgd2lkZ2V0ICRjcmVhdGVkX3NpdGVrZXk7IGNsZWFuaW5nIHVwLi4uIiA+JjIKICBza19lbmM9JChweXRob24zIC1JIC1jICdpbXBvcnQgc3lzLCB1cmxsaWIucGFyc2U7IHByaW50KHVybGxpYi5wYXJzZS5xdW90ZShzeXMuYXJndlsxXSwgc2FmZT0iIikpJyAiJGNyZWF0ZWRfc2l0ZWtleSIpCiAgY2xlYW51cF9jb2RlPSQoCiAgICBwcmludGYgJ2hlYWRlciA9ICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJXMiXG4nICIkdG9rZW4iIHwKICAgICAgY3VybCAtLWRpc2FibGUgLS1jb25maWcgLSAtLXNpbGVudCAtLXNob3ctZXJyb3IgLS1vdXRwdXQgL2Rldi9udWxsIC0td3JpdGUtb3V0ICIle2h0dHBfY29kZX0iIC1YIERFTEVURSBcCiAgICAgICAgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kYWNjb3VudF9lbmMvY2hhbGxlbmdlcy93aWRnZXRzLyRza19lbmMiIHx8IGVjaG8gIjAwMCIKICApCiAgY2FzZSAiJGNsZWFudXBfY29kZSIgaW4KICAgIDIqKSBlY2hvICJhdXRoLXByb2JlOiBjbGVhbnVwIERFTEVURSBmb3Igd2lkZ2V0ICRjcmVhdGVkX3NpdGVrZXkgc3VjY2VlZGVkIChIVFRQICRjbGVhbnVwX2NvZGUpLiIgPiYyIDs7CiAgICAqKSAgZWNobyAiYXV0aC1wcm9iZTogY2xlYW51cCBERUxFVEUgZm9yIHdpZGdldCAkY3JlYXRlZF9zaXRla2V5IEZBSUxFRCAoSFRUUCAkY2xlYW51cF9jb2RlKS4gUGxlYXNlIHJlbW92ZSBpdCBmcm9tIHRoZSBUdXJuc3RpbGUgZGFzaGJvYXJkIG1hbnVhbGx5LiIgPiYyIDs7CiAgZXNhYwpmaQoKY2FzZSAiJHZlcmRpY3QiIGluCiAgc2NvcGVfb2spCiAgICBlbWl0ICIkKHB5dGhvbjMgLUkgLWMgJwppbXBvcnQganNvbiwgc3lzCmFjY291bnRfaWQsIGFjY291bnRzX3JhdyA9IHN5cy5hcmd2WzFdLCBzeXMuYXJndlsyXQp0cnk6CiAgICBhY2NvdW50cyA9IGpzb24ubG9hZHMoYWNjb3VudHNfcmF3KQpleGNlcHQgRXhjZXB0aW9uOgogICAgYWNjb3VudHMgPSBbXQpwcmludChqc29uLmR1bXBzKHsic3RhdHVzIjoib2siLCJhY2NvdW50X2lkIjphY2NvdW50X2lkLCJhY2NvdW50cyI6YWNjb3VudHN9KSkKJyAiJGFjY291bnRfaWQiICIkYWNjb3VudHNfanNvbiIpIgogICAgOzsKICBtaXNzaW5nX3Njb3BlKQogICAgZWNobyAiYXV0aC1wcm9iZTogdG9rZW4gY2Fubm90IHdyaXRlIC9jaGFsbGVuZ2VzL3dpZGdldHMgb24gYWNjb3VudCAkYWNjb3VudF9pZCAoSFRUUCAkZWRpdF9jb2RlKS4gTWlzc2luZyBBY2NvdW50LlR1cm5zdGlsZTpFZGl0LiIgPiYyCiAgICBlbWl0ICIkKHB5dGhvbjMgLUkgLWMgJwppbXBvcnQganNvbiwgc3lzCmFjY291bnRfaWQsIGh0dHBfY29kZSA9IHN5cy5hcmd2WzFdLCBzeXMuYXJndlsyXQp0cnk6CiAgICBjb2RlX251bSA9IGludChodHRwX2NvZGUpCmV4Y2VwdCBWYWx1ZUVycm9yOgogICAgY29kZV9udW0gPSAwCnByaW50KGpzb24uZHVtcHMoeyJzdGF0dXMiOiJtaXNzaW5nX3Njb3BlIiwiYWNjb3VudF9pZCI6YWNjb3VudF9pZCwiaHR0cF9jb2RlIjpjb2RlX251bX0pKQonICIkYWNjb3VudF9pZCIgIiRlZGl0X2NvZGUiKSIKICAgIDs7CiAgKikKICAgIGVjaG8gImF1dGgtcHJvYmU6IHVuZXhwZWN0ZWQgcmVzcG9uc2UgcHJvYmluZyBFZGl0IHNjb3BlIG9uIGFjY291bnQgJGFjY291bnRfaWQgKEhUVFAgJGVkaXRfY29kZSkuIiA+JjIKICAgIGVtaXQgIiQocHl0aG9uMyAtSSAtYyAnCmltcG9ydCBqc29uLCBzeXMKYWNjb3VudF9pZCwgaHR0cF9jb2RlID0gc3lzLmFyZ3ZbMV0sIHN5cy5hcmd2WzJdCnRyeToKICAgIGNvZGVfbnVtID0gaW50KGh0dHBfY29kZSkKZXhjZXB0IFZhbHVlRXJyb3I6CiAgICBjb2RlX251bSA9IDAKcHJpbnQoanNvbi5kdW1wcyh7InN0YXR1cyI6InVwc3RyZWFtX2ZhaWx1cmUiLCJhY2NvdW50X2lkIjphY2NvdW50X2lkLCJodHRwX2NvZGUiOmNvZGVfbnVtfSkpCicgIiRhY2NvdW50X2lkIiAiJGVkaXRfY29kZSIpIgogICAgOzsKZXNhYwo=
+#!/usr/bin/env bash
+# Probes Cloudflare API auth state for the Turnstile Spin agent.
+#
+# Reads:
+#   $CLOUDFLARE_API_TOKEN  (required)
+#   $CLOUDFLARE_ACCOUNT_ID (optional; if set, must be one of the token's accounts)
+#
+# Requires: bash, curl, python3. Optional: a user-approved WRANGLER_BIN for account enumeration.
+#
+# Outputs JSON to stdout, always exits 0. The agent reads `status`:
+#   "ok"                ; selected account passed the Turnstile Edit-scope probe
+#   "missing_token"     ; no token set, python3 unavailable, or account enumeration failed
+#   "missing_scope"     ; token lacks Account.Turnstile:Edit on the selected account
+#   "multiple_accounts" ; token covers >1 accounts and $CLOUDFLARE_ACCOUNT_ID is unset
+#   "account_mismatch"  ; $CLOUDFLARE_ACCOUNT_ID is set but is not in the token's accounts list
+#   "network_failure"   ; the Edit-scope probe could not reach the Cloudflare API
+#   "upstream_failure"  ; the Edit-scope probe returned an unexpected upstream response
+#
+# Account enumeration uses `WRANGLER_BIN whoami --json` only when WRANGLER_BIN is
+# an approved canonical absolute path outside PROJECT_ROOT and WRANGLER_VERSION
+# matches it exactly. Otherwise the caller must supply $CLOUDFLARE_ACCOUNT_ID.
+#
+# Human-readable diagnostics go to stderr.
+
+set +x
+set -uo pipefail
+
+emit() {
+  echo "$1"
+  exit 0
+}
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "auth-probe: python3 is required but not found in PATH." >&2
+  emit '{"status":"missing_token","reason":"python3_not_available"}'
+fi
+
+token="${CLOUDFLARE_API_TOKEN:-}"
+unset CLOUDFLARE_API_TOKEN
+declared_account="${CLOUDFLARE_ACCOUNT_ID:-}"
+
+if [ -z "$token" ]; then
+  echo "auth-probe: \$CLOUDFLARE_API_TOKEN is not set." >&2
+  emit '{"status":"missing_token","reason":"no_env_var"}'
+fi
+if [[ ! "$token" =~ ^[A-Za-z0-9_-]+$ ]]; then
+  echo "auth-probe: CLOUDFLARE_API_TOKEN has an invalid format." >&2
+  emit '{"status":"missing_token","reason":"invalid_token_format"}'
+fi
+
+accounts_json=""
+account_count=0
+
+if [ -n "${WRANGLER_BIN:-}" ]; then
+  if [[ "$WRANGLER_BIN" != /* || ! -x "$WRANGLER_BIN" ]]; then
+    echo "auth-probe: WRANGLER_BIN must be an executable absolute path." >&2
+    emit '{"status":"missing_token","reason":"invalid_wrangler_path"}'
+  fi
+
+  wrangler_bin=$(python3 -I -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$WRANGLER_BIN")
+  if [ "$wrangler_bin" != "$WRANGLER_BIN" ]; then
+    echo "auth-probe: WRANGLER_BIN must be canonical, without symlinks." >&2
+    emit '{"status":"missing_token","reason":"noncanonical_wrangler_path"}'
+  fi
+  if [ -n "${PROJECT_ROOT:-}" ]; then
+    project_root=$(python3 -I -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$PROJECT_ROOT")
+    if [[ "$wrangler_bin" == "$project_root" || "$wrangler_bin" == "$project_root/"* ]]; then
+      echo "auth-probe: WRANGLER_BIN must be outside PROJECT_ROOT." >&2
+      emit '{"status":"missing_token","reason":"project_local_wrangler"}'
+    fi
+  fi
+  if [ -z "${WRANGLER_VERSION:-}" ]; then
+    echo "auth-probe: WRANGLER_VERSION is required with WRANGLER_BIN." >&2
+    emit '{"status":"missing_token","reason":"missing_wrangler_version"}'
+  fi
+
+  actual_version=$(
+    "$wrangler_bin" --version 2>/dev/null |
+      python3 -I -c 'import re,sys; m=re.search(r"\b(\d+\.\d+\.\d+)\b", sys.stdin.read()); print(m.group(1) if m else "")'
+  )
+  if [ "$actual_version" != "$WRANGLER_VERSION" ]; then
+    echo "auth-probe: WRANGLER_BIN version does not match WRANGLER_VERSION." >&2
+    emit '{"status":"missing_token","reason":"wrangler_version_mismatch"}'
+  fi
+
+  whoami_json=$(CLOUDFLARE_API_TOKEN="$token" "$wrangler_bin" whoami --json 2>/dev/null || true)
+  if [ -n "$whoami_json" ] && [ "$(printf '%s' "$whoami_json" | head -c 1)" = "{" ]; then
+    accounts_json=$(printf '%s' "$whoami_json" | python3 -I -c '
+import json, sys
+try:
+    d = json.load(sys.stdin)
+    print(json.dumps(d.get("accounts") or []))
+except Exception:
+    print("[]")
+')
+    account_count=$(printf '%s' "$accounts_json" | python3 -I -c '
+import json, sys
+try:
+    print(len(json.load(sys.stdin)))
+except Exception:
+    print(0)
+')
+  fi
+fi
+
+if [ "$account_count" = "0" ] && [ -n "$declared_account" ]; then
+  # No wrangler, but user gave us an account. Trust it and skip enumeration.
+  accounts_json="[{\"id\":$(python3 -I -c 'import json, sys; print(json.dumps(sys.argv[1]))' "$declared_account")}]"
+  account_count=1
+fi
+
+if [ "$account_count" = "0" ]; then
+  echo "auth-probe: could not enumerate accounts. Export CLOUDFLARE_ACCOUNT_ID or provide an approved WRANGLER_BIN and WRANGLER_VERSION." >&2
+  emit '{"status":"missing_token","reason":"no_accounts"}'
+fi
+
+if [ -n "$declared_account" ]; then
+  in_list=$(printf '%s' "$accounts_json" | python3 -I -c '
+import json, sys
+target = sys.argv[1]
+try:
+    accounts = json.load(sys.stdin)
+except Exception:
+    print("false"); sys.exit(0)
+print("true" if any((a or {}).get("id") == target for a in accounts) else "false")
+' "$declared_account")
+  if [ "$in_list" != "true" ]; then
+    echo "auth-probe: \$CLOUDFLARE_ACCOUNT_ID ($declared_account) is not one of the token's accounts." >&2
+    emit "$(python3 -I -c '
+import json, sys
+declared, accounts_raw = sys.argv[1], sys.argv[2]
+try:
+    accounts = json.loads(accounts_raw)
+except Exception:
+    accounts = []
+print(json.dumps({"status":"account_mismatch","declared":declared,"accounts":accounts}))
+' "$declared_account" "$accounts_json")"
+  fi
+  account_id="$declared_account"
+elif [ "$account_count" = "1" ]; then
+  account_id=$(printf '%s' "$accounts_json" | python3 -I -c '
+import json, sys
+try:
+    print(json.load(sys.stdin)[0]["id"])
+except Exception:
+    print("")
+')
+  if [ -z "$account_id" ]; then
+    echo "auth-probe: accounts list had one entry but no id field." >&2
+    emit '{"status":"missing_token","reason":"malformed_accounts"}'
+  fi
+else
+  echo "auth-probe: token covers $account_count accounts; ask the user to pick one, then export \$CLOUDFLARE_ACCOUNT_ID and re-run." >&2
+  emit "$(python3 -I -c '
+import json, sys
+try:
+    accounts = json.loads(sys.argv[1])
+except Exception:
+    accounts = []
+print(json.dumps({"status":"multiple_accounts","accounts":accounts}))
+' "$accounts_json")"
+fi
+
+# Edit-scope probe. A GET /challenges/widgets would authorize a Read-only
+# token; to verify Edit specifically, POST with an intentionally invalid
+# payload and interpret the response:
+#   401 or 403                                  → token lacks Edit
+#   200 with success:false, errors[0].code=10000 → token lacks Edit
+#   400/422 or 200 with validation error codes  → Edit scope OK
+#
+# The API rejects the empty-name/empty-domains payload with 400 today, so
+# no widget is created. If validation ever loosens and the probe accidentally
+# creates one, we detect the returned sitekey and DELETE it as a safety net
+# so the probe stays side-effect-free.
+account_enc=$(python3 -I -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$account_id")
+
+if ! probe_response="$(
+  printf 'header = "Authorization: Bearer %s"\n' "$token" |
+    curl --disable --config - --silent --show-error --write-out $'\n%{http_code}' -X POST \
+      "https://api.cloudflare.com/client/v4/accounts/$account_enc/challenges/widgets" \
+      -H "Content-Type: application/json" \
+      --data '{"name":"","domains":[]}'
+)"; then
+  echo "auth-probe: network failure probing Edit scope on account $account_id." >&2
+  emit '{"status":"network_failure","account_id":"'"$account_id"'"}'
+fi
+
+edit_code="${probe_response##*$'\n'}"
+probe_body="${probe_response%$'\n'*}"
+probe_output=$(printf '%s' "$probe_body" | python3 -I -c '
+import json, sys
+http_code = sys.argv[1]
+verdict = "unknown"
+created_sitekey = ""
+try:
+    raw = sys.stdin.read()
+    data = json.loads(raw) if raw else {}
+except Exception:
+    data = None
+if isinstance(data, dict):
+    errors = data.get("errors") or []
+    if not isinstance(errors, list):
+        errors = []
+    first = (errors[0] or {}) if errors else {}
+    if not isinstance(first, dict):
+        first = {}
+    first_code = first.get("code", 0)
+    if http_code in ("401", "403"):
+        verdict = "missing_scope"
+    elif http_code == "200" and data.get("success") is False and first_code == 10000:
+        verdict = "missing_scope"
+    elif http_code in ("400", "422"):
+        verdict = "scope_ok"
+    elif http_code == "200":
+        # Any 200 that got past auth means scope is fine (whether success or not).
+        verdict = "scope_ok"
+    else:
+        verdict = f"unexpected_{http_code}"
+    # Detect accidental widget creation (safety net if API validation ever
+    # accepts the empty-name/empty-domains probe payload).
+    result = data.get("result")
+    if isinstance(result, dict) and data.get("success") is True:
+        sk = result.get("sitekey", "")
+        if isinstance(sk, str) and sk:
+            created_sitekey = sk
+print(f"{verdict}|{created_sitekey}")
+' "$edit_code")
+unset probe_body probe_response
+verdict="${probe_output%%|*}"
+created_sitekey="${probe_output#*|}"
+[ "$created_sitekey" = "$probe_output" ] && created_sitekey=""
+
+# If the probe unexpectedly created a widget (API validation loosened),
+# DELETE it so the probe stays side-effect-free.
+if [ -n "$created_sitekey" ]; then
+  echo "auth-probe: probe unexpectedly created widget $created_sitekey; cleaning up..." >&2
+  sk_enc=$(python3 -I -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$created_sitekey")
+  cleanup_code=$(
+    printf 'header = "Authorization: Bearer %s"\n' "$token" |
+      curl --disable --config - --silent --show-error --output /dev/null --write-out "%{http_code}" -X DELETE \
+        "https://api.cloudflare.com/client/v4/accounts/$account_enc/challenges/widgets/$sk_enc" || echo "000"
+  )
+  case "$cleanup_code" in
+    2*) echo "auth-probe: cleanup DELETE for widget $created_sitekey succeeded (HTTP $cleanup_code)." >&2 ;;
+    *)  echo "auth-probe: cleanup DELETE for widget $created_sitekey FAILED (HTTP $cleanup_code). Please remove it from the Turnstile dashboard manually." >&2 ;;
+  esac
+fi
+
+case "$verdict" in
+  scope_ok)
+    emit "$(python3 -I -c '
+import json, sys
+account_id, accounts_raw = sys.argv[1], sys.argv[2]
+try:
+    accounts = json.loads(accounts_raw)
+except Exception:
+    accounts = []
+print(json.dumps({"status":"ok","account_id":account_id,"accounts":accounts}))
+' "$account_id" "$accounts_json")"
+    ;;
+  missing_scope)
+    echo "auth-probe: token cannot write /challenges/widgets on account $account_id (HTTP $edit_code). Missing Account.Turnstile:Edit." >&2
+    emit "$(python3 -I -c '
+import json, sys
+account_id, http_code = sys.argv[1], sys.argv[2]
+try:
+    code_num = int(http_code)
+except ValueError:
+    code_num = 0
+print(json.dumps({"status":"missing_scope","account_id":account_id,"http_code":code_num}))
+' "$account_id" "$edit_code")"
+    ;;
+  *)
+    echo "auth-probe: unexpected response probing Edit scope on account $account_id (HTTP $edit_code)." >&2
+    emit "$(python3 -I -c '
+import json, sys
+account_id, http_code = sys.argv[1], sys.argv[2]
+try:
+    code_num = int(http_code)
+except ValueError:
+    code_num = 0
+print(json.dumps({"status":"upstream_failure","account_id":account_id,"http_code":code_num}))
+' "$account_id" "$edit_code")"
+    ;;
+esac

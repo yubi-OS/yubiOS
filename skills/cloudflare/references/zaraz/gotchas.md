@@ -1,1 +1,81 @@
-IyBaYXJheiBHb3RjaGFzCgojIyBFdmVudHMgTm90IEZpcmluZwoKKipDaGVjazoqKgoxLiBUb29sIGVuYWJsZWQgaW4gZGFzaGJvYXJkIChncmVlbiBkb3QpCjIuIFRyaWdnZXIgY29uZGl0aW9ucyBtZXQKMy4gQ29uc2VudCBncmFudGVkIGZvciB0b29sJ3MgcHVycG9zZQo0LiBUb29sIGNyZWRlbnRpYWxzIGNvcnJlY3QgKEdBNDogYEctWFhYWFhYWFhYWGAsIEZCOiBudW1lcmljIG9ubHkpCgoqKkRlYnVnOioqCmBgYGphdmFzY3JpcHQKemFyYXouZGVidWcgPSB0cnVlOwpjb25zb2xlLmxvZygnVG9vbHM6JywgemFyYXoudG9vbHMpOwpjb25zb2xlLmxvZygnQ29uc2VudDonLCB6YXJhei5jb25zZW50LmdldEFsbCgpKTsKYGBgCgojIyBDb25zZW50IElzc3VlcwoKKipNb2RhbCBub3Qgc2hvd2luZzoqKgpgYGBqYXZhc2NyaXB0Ci8vIENsZWFyIGNvbnNlbnQgY29va2llCmRvY3VtZW50LmNvb2tpZSA9ICd6YXJhei1jb25zZW50PTsgZXhwaXJlcz1UaHUsIDAxIEphbiAxOTcwIDAwOjAwOjAwIFVUQzsgcGF0aD0vOyc7CmxvY2F0aW9uLnJlbG9hZCgpOwpgYGAKCioqVG9vbHMgZmlyaW5nIGJlZm9yZSBjb25zZW50OioqIE1hcCB0b29sIHRvIGNvbnNlbnQgcHVycG9zZSB3aXRoICJEbyBub3QgbG9hZCB1bnRpbCBjb25zZW50IGdyYW50ZWQiLgoKIyMgU1BBIFRyYWNraW5nCgoqKlJvdXRlIGNoYW5nZXMgbm90IHRyYWNrZWQ6KioKMS4gQ29uZmlndXJlIEhpc3RvcnkgQ2hhbmdlIHRyaWdnZXIgaW4gZGFzaGJvYXJkCjIuIEhhc2ggcm91dGluZyAoYCMvcGF0aGApIHJlcXVpcmVzIG1hbnVhbCB0cmFja2luZzoKYGBgamF2YXNjcmlwdAp3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignaGFzaGNoYW5nZScsICgpID0+IHsKICB6YXJhei50cmFjaygncGFnZXZpZXcnLCB7IHBhZ2VfcGF0aDogbG9jYXRpb24ucGF0aG5hbWUgKyBsb2NhdGlvbi5oYXNoIH0pOwp9KTsKYGBgCgoqKlJlYWN0IGZpeDoqKgpgYGBqYXZhc2NyaXB0CmNvbnN0IGxvY2F0aW9uID0gdXNlTG9jYXRpb24oKTsKdXNlRWZmZWN0KCgpID0+IHsKICB6YXJhei50cmFjaygncGFnZXZpZXcnLCB7IHBhZ2VfcGF0aDogbG9jYXRpb24ucGF0aG5hbWUgfSk7Cn0sIFtsb2NhdGlvbl0pOyAvLyBJbmNsdWRlIGRlcGVuZGVuY3kKYGBgCgojIyBQZXJmb3JtYW5jZQoKKipTbG93IHBhZ2UgbG9hZDoqKgotIEF1ZGl0IHRvb2wgY291bnQgKDUwKyBkZWdyYWRlcyBwZXJmb3JtYW5jZSkKLSBEaXNhYmxlIGJsb2NraW5nIHRyaWdnZXJzIHVubGVzcyByZXF1aXJlZAotIFJlZHVjZSBldmVudCBwYXlsb2FkIHNpemUgKDwxMDBLQikKCiMjIFRvb2wtU3BlY2lmaWMgSXNzdWVzCgp8IFRvb2wgfCBJc3N1ZSB8IEZpeCB8CnwtLS0tLS18LS0tLS0tLXwtLS0tLXwKfCBHQTQgfCBFdmVudHMgbm90IGluIHJlYWwtdGltZSB8IFdhaXQgNS0xMCBtaW4sIHVzZSBEZWJ1Z1ZpZXcgfAp8IEZhY2Vib29rIHwgSW52YWxpZCBQaXhlbCBJRCB8IFVzZSBudW1lcmljIG9ubHkgKG5vIGBmYnB4X2AgcHJlZml4KSB8CnwgR29vZ2xlIEFkcyB8IENvbnZlcnNpb25zIG5vdCBhdHRyaWJ1dGVkIHwgSW5jbHVkZSBgc2VuZF90bzogJ0FXLVhYWC9MQUJFTCdgIHwKCiMjIERhdGEgTGF5ZXIKCi0gUHJvcGVydGllcyBwZXJzaXN0IHBlciBwYWdlIG9ubHkgLSBzZXQgb24gZWFjaCBwYWdlIGxvYWQKLSBOZXN0ZWQgYWNjZXNzOiBge3tjbGllbnQuX196YXJhelRyYWNrLnVzZXIucGxhbn19YAoKIyMgTGltaXRzCgp8IFJlc291cmNlIHwgTGltaXQgfAp8LS0tLS0tLS0tLXwtLS0tLS0tfAp8IFJlcXVlc3Qgc2l6ZSB8IDEwMEtCIHwKfCBDb25zZW50IHB1cnBvc2VzIHwgMjAgfAp8IEFQSSByYXRlIHwgMTAwMCByZXEvc2VjIHwKCiMjIFdoZW4gTk9UIHRvIFVzZSBaYXJhegoKLSBTZXJ2ZXItdG8tc2VydmVyIHRyYWNraW5nICh1c2UgV29ya2VycykKLSBSZWFsLXRpbWUgYmlkaXJlY3Rpb25hbCBjb21tdW5pY2F0aW9uCi0gQmluYXJ5IGRhdGEgdHJhbnNtaXNzaW9uCi0gQXV0aGVudGljYXRpb24gZmxvd3MK
+# Zaraz Gotchas
+
+## Events Not Firing
+
+**Check:**
+1. Tool enabled in dashboard (green dot)
+2. Trigger conditions met
+3. Consent granted for tool's purpose
+4. Tool credentials correct (GA4: `G-XXXXXXXXXX`, FB: numeric only)
+
+**Debug:**
+```javascript
+zaraz.debug = true;
+console.log('Tools:', zaraz.tools);
+console.log('Consent:', zaraz.consent.getAll());
+```
+
+## Consent Issues
+
+**Modal not showing:**
+```javascript
+// Clear consent cookie
+document.cookie = 'zaraz-consent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+location.reload();
+```
+
+**Tools firing before consent:** Map tool to consent purpose with "Do not load until consent granted".
+
+## SPA Tracking
+
+**Route changes not tracked:**
+1. Configure History Change trigger in dashboard
+2. Hash routing (`#/path`) requires manual tracking:
+```javascript
+window.addEventListener('hashchange', () => {
+  zaraz.track('pageview', { page_path: location.pathname + location.hash });
+});
+```
+
+**React fix:**
+```javascript
+const location = useLocation();
+useEffect(() => {
+  zaraz.track('pageview', { page_path: location.pathname });
+}, [location]); // Include dependency
+```
+
+## Performance
+
+**Slow page load:**
+- Audit tool count (50+ degrades performance)
+- Disable blocking triggers unless required
+- Reduce event payload size (<100KB)
+
+## Tool-Specific Issues
+
+| Tool | Issue | Fix |
+|------|-------|-----|
+| GA4 | Events not in real-time | Wait 5-10 min, use DebugView |
+| Facebook | Invalid Pixel ID | Use numeric only (no `fbpx_` prefix) |
+| Google Ads | Conversions not attributed | Include `send_to: 'AW-XXX/LABEL'` |
+
+## Data Layer
+
+- Properties persist per page only - set on each page load
+- Nested access: `{{client.__zarazTrack.user.plan}}`
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Request size | 100KB |
+| Consent purposes | 20 |
+| API rate | 1000 req/sec |
+
+## When NOT to Use Zaraz
+
+- Server-to-server tracking (use Workers)
+- Real-time bidirectional communication
+- Binary data transmission
+- Authentication flows

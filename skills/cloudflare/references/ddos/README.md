@@ -1,1 +1,41 @@
-IyBDbG91ZGZsYXJlIEREb1MgUHJvdGVjdGlvbgoKQXV0b25vbW91cywgYWx3YXlzLW9uIHByb3RlY3Rpb24gYWdhaW5zdCBERG9TIGF0dGFja3MgYWNyb3NzIEwzLzQgYW5kIEw3LgoKIyMgUHJvdGVjdGlvbiBUeXBlcwoKLSAqKkhUVFAgRERvUyAoTDcpKio6IFByb3RlY3RzIEhUVFAvSFRUUFMgdHJhZmZpYywgcGhhc2UgYGRkb3NfbDdgLCB6b25lL2FjY291bnQgbGV2ZWwKLSAqKk5ldHdvcmsgRERvUyAoTDMvNCkqKjogVURQL1NZTi9ETlMgZmxvb2RzLCBwaGFzZSBgZGRvc19sNGAsIGFjY291bnQgbGV2ZWwgb25seQotICoqQWRhcHRpdmUgRERvUyoqOiBMZWFybnMgNy1kYXkgYmFzZWxpbmUsIGRldGVjdHMgZGV2aWF0aW9ucywgNCBwcm9maWxlIHR5cGVzIChPcmlnaW5zLCBVc2VyLUFnZW50cywgTG9jYXRpb25zLCBQcm90b2NvbHMpCgojIyBQbGFuIEF2YWlsYWJpbGl0eQoKfCBGZWF0dXJlIHwgRnJlZSB8IFBybyB8IEJ1c2luZXNzIHwgRW50ZXJwcmlzZSB8IEVudGVycHJpc2UgQWR2YW5jZWQgfAp8LS0tLS0tLS0tfC0tLS0tLXwtLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS18CnwgSFRUUCBERG9TIChMNykgfCDinJMgfCDinJMgfCDinJMgfCDinJMgfCDinJMgfAp8IE5ldHdvcmsgRERvUyAoTDMvNCkgfCDinJMgfCDinJMgfCDinJMgfCDinJMgfCDinJMgfAp8IE92ZXJyaWRlIHJ1bGVzIHwgMSB8IDEgfCAxIHwgMSB8IDEwIHwKfCBDdXN0b20gZXhwcmVzc2lvbnMgfCDinJcgfCDinJcgfCDinJcgfCDinJcgfCDinJMgfAp8IExvZyBhY3Rpb24gfCDinJcgfCDinJcgfCDinJcgfCDinJcgfCDinJMgfAp8IEFkYXB0aXZlIEREb1MgfCDinJcgfCDinJcgfCDinJcgfCDinJMgfCDinJMgfAp8IEFsZXJ0IGZpbHRlcnMgfCBCYXNpYyB8IEJhc2ljIHwgQmFzaWMgfCBBZHZhbmNlZCB8IEFkdmFuY2VkIHwKCiMjIEFjdGlvbnMgJiBTZW5zaXRpdml0eQoKLSAqKkFjdGlvbnMqKjogYGJsb2NrYCwgYG1hbmFnZWRfY2hhbGxlbmdlYCwgYGNoYWxsZW5nZWAsIGBsb2dgIChFbnRlcnByaXNlIEFkdmFuY2VkIG9ubHkpCi0gKipTZW5zaXRpdml0eSoqOiBgZGVmYXVsdGAgKGhpZ2gpLCBgbWVkaXVtYCwgYGxvd2AsIGBlb2ZmYCAoZXNzZW50aWFsbHkgb2ZmKQotICoqT3ZlcnJpZGUqKjogQnkgY2F0ZWdvcnkvdGFnIG9yIGluZGl2aWR1YWwgcnVsZSBJRAotICoqU2NvcGUqKjogWm9uZS1sZXZlbCBvdmVycmlkZXMgdGFrZSBwcmVjZWRlbmNlIG92ZXIgYWNjb3VudC1sZXZlbAoKIyMgUmVhZGluZyBPcmRlcgoKfCBGaWxlIHwgUHVycG9zZSB8IFN0YXJ0IEhlcmUgSWYuLi4gfAp8LS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS18CnwgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgfCBEYXNoYm9hcmQgc2V0dXAsIHJ1bGUgc3RydWN0dXJlLCBhZGFwdGl2ZSBwcm9maWxlcyB8IFlvdSdyZSBzZXR0aW5nIHVwIEREb1MgcHJvdGVjdGlvbiBmb3IgdGhlIGZpcnN0IHRpbWUgfAp8IFthcGkubWRdKC4vYXBpLm1kKSB8IEFQSSBlbmRwb2ludHMsIFNESyB1c2FnZSwgcnVsZXNldCBJRCBkaXNjb3ZlcnkgfCBZb3UncmUgYXV0b21hdGluZyBjb25maWd1cmF0aW9uIG9yIG5lZWQgcHJvZ3JhbW1hdGljIGFjY2VzcyB8CnwgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSB8IFByb3RlY3Rpb24gc3RyYXRlZ2llcywgZGVmZW5zZS1pbi1kZXB0aCwgZHluYW1pYyByZXNwb25zZSB8IFlvdSBuZWVkIGltcGxlbWVudGF0aW9uIHBhdHRlcm5zIG9yIGxheWVyZWQgc2VjdXJpdHkgfAp8IFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIHwgRmFsc2UgcG9zaXRpdmVzLCB0dW5pbmcsIGVycm9yIGhhbmRsaW5nIHwgWW91J3JlIHRyb3VibGVzaG9vdGluZyBvciBvcHRpbWl6aW5nIGV4aXN0aW5nIHByb3RlY3Rpb24gfAoKIyMgU2VlIEFsc28KLSBbd2FmXSguLi93YWYvKSAtIEFwcGxpY2F0aW9uLWxheWVyIHNlY3VyaXR5IHJ1bGVzCi0gW2JvdC1tYW5hZ2VtZW50XSguLi9ib3QtbWFuYWdlbWVudC8pIC0gQm90IGRldGVjdGlvbiBhbmQgbWl0aWdhdGlvbgo=
+# Cloudflare DDoS Protection
+
+Autonomous, always-on protection against DDoS attacks across L3/4 and L7.
+
+## Protection Types
+
+- **HTTP DDoS (L7)**: Protects HTTP/HTTPS traffic, phase `ddos_l7`, zone/account level
+- **Network DDoS (L3/4)**: UDP/SYN/DNS floods, phase `ddos_l4`, account level only
+- **Adaptive DDoS**: Learns 7-day baseline, detects deviations, 4 profile types (Origins, User-Agents, Locations, Protocols)
+
+## Plan Availability
+
+| Feature | Free | Pro | Business | Enterprise | Enterprise Advanced |
+|---------|------|-----|----------|------------|---------------------|
+| HTTP DDoS (L7) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Network DDoS (L3/4) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Override rules | 1 | 1 | 1 | 1 | 10 |
+| Custom expressions | ✗ | ✗ | ✗ | ✗ | ✓ |
+| Log action | ✗ | ✗ | ✗ | ✗ | ✓ |
+| Adaptive DDoS | ✗ | ✗ | ✗ | ✓ | ✓ |
+| Alert filters | Basic | Basic | Basic | Advanced | Advanced |
+
+## Actions & Sensitivity
+
+- **Actions**: `block`, `managed_challenge`, `challenge`, `log` (Enterprise Advanced only)
+- **Sensitivity**: `default` (high), `medium`, `low`, `eoff` (essentially off)
+- **Override**: By category/tag or individual rule ID
+- **Scope**: Zone-level overrides take precedence over account-level
+
+## Reading Order
+
+| File | Purpose | Start Here If... |
+|------|---------|------------------|
+| [configuration.md](./configuration.md) | Dashboard setup, rule structure, adaptive profiles | You're setting up DDoS protection for the first time |
+| [api.md](./api.md) | API endpoints, SDK usage, ruleset ID discovery | You're automating configuration or need programmatic access |
+| [patterns.md](./patterns.md) | Protection strategies, defense-in-depth, dynamic response | You need implementation patterns or layered security |
+| [gotchas.md](./gotchas.md) | False positives, tuning, error handling | You're troubleshooting or optimizing existing protection |
+
+## See Also
+- [waf](../waf/) - Application-layer security rules
+- [bot-management](../bot-management/) - Bot detection and mitigation

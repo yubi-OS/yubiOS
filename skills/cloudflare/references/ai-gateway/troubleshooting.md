@@ -1,1 +1,88 @@
-IyBBSSBHYXRld2F5IFRyb3VibGVzaG9vdGluZwoKIyMgQ29tbW9uIEVycm9ycwoKfCBFcnJvciB8IENhdXNlIHwgRml4IHwKfC0tLS0tLS18LS0tLS0tLXwtLS0tLXwKfCA0MDEgfCBNaXNzaW5nIGBjZi1haWctYXV0aG9yaXphdGlvbmAgaGVhZGVyIHwgQWRkIGhlYWRlciB3aXRoIENGIEFQSSB0b2tlbiB8CnwgNDAzIHwgSW52YWxpZCBwcm92aWRlciBrZXkgLyBCWU9LIGV4cGlyZWQgfCBDaGVjayBwcm92aWRlciBrZXkgaW4gZGFzaGJvYXJkIHwKfCA0MjkgfCBSYXRlIGxpbWl0IGV4Y2VlZGVkIHwgSW5jcmVhc2UgbGltaXQgb3IgaW1wbGVtZW50IGJhY2tvZmYgfAoKIyMjIDQwMSBGaXgKCmBgYHR5cGVzY3JpcHQKY29uc3QgY2xpZW50ID0gbmV3IE9wZW5BSSh7CiAgYmFzZVVSTDogYGh0dHBzOi8vZ2F0ZXdheS5haS5jbG91ZGZsYXJlLmNvbS92MS8ke2FjY291bnRJZH0vJHtnYXRld2F5SWR9L29wZW5haWAsCiAgZGVmYXVsdEhlYWRlcnM6IHsgJ2NmLWFpZy1hdXRob3JpemF0aW9uJzogYEJlYXJlciAke0NGX0FQSV9UT0tFTn1gIH0KfSk7CmBgYAoKIyMjIDQyOSBSZXRyeSBQYXR0ZXJuCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZ1bmN0aW9uIHJlcXVlc3RXaXRoUmV0cnkoZm4sIG1heFJldHJpZXMgPSAzKSB7CiAgZm9yIChsZXQgaSA9IDA7IGkgPCBtYXhSZXRyaWVzOyBpKyspIHsKICAgIHRyeSB7IHJldHVybiBhd2FpdCBmbigpOyB9CiAgICBjYXRjaCAoZSkgewogICAgICBpZiAoZS5zdGF0dXMgPT09IDQyOSAmJiBpIDwgbWF4UmV0cmllcyAtIDEpIHsKICAgICAgICBhd2FpdCBuZXcgUHJvbWlzZShyID0+IHNldFRpbWVvdXQociwgTWF0aC5wb3coMiwgaSkgKiAxMDAwKSk7CiAgICAgICAgY29udGludWU7CiAgICAgIH0KICAgICAgdGhyb3cgZTsKICAgIH0KICB9Cn0KYGBgCgojIyBHb3RjaGFzCgp8IElzc3VlIHwgUmVhbGl0eSB8CnwtLS0tLS0tfC0tLS0tLS0tLXwKfCBNZXRhZGF0YSBsaW1pdHMgfCBNYXggNSBlbnRyaWVzLCBmbGF0IG9ubHkgKG5vIG5lc3RpbmcpIHwKfCBDYWNoZSBrZXkgY29sbGlzaW9uIHwgVXNlIHVuaXF1ZSBrZXlzIHBlciBleHBlY3RlZCByZXNwb25zZSB8CnwgQllPSyArIFVuaWZpZWQgQmlsbGluZyB8IE11dHVhbGx5IGV4Y2x1c2l2ZSB8CnwgUmF0ZSBsaW1pdCBzY29wZSB8IFBlci1nYXRld2F5LCBub3QgcGVyLXVzZXIgKHVzZSBkeW5hbWljIHJvdXRpbmcgZm9yIHBlci11c2VyKSB8CnwgTG9nIGRlbGF5IHwgMzAtNjAgc2Vjb25kcyBub3JtYWwgfAp8IFN0cmVhbWluZyArIGNhY2hpbmcgfCAqKkluY29tcGF0aWJsZSoqIHwKfCBNb2RlbCBuYW1lICh1bmlmaWVkIEFQSSkgfCBQcmVmaXggcmVxdWlyZWQ6IGBvcGVuYWkvZ3B0LTRvYCwgbm90IGBncHQtNG9gIHwKCiMjIENhY2hlIE5vdCBXb3JraW5nCgoqKkNhdXNlczoqKgotIERpZmZlcmVudCByZXF1ZXN0IHBhcmFtcyAodGVtcGVyYXR1cmUsIGV0Yy4pCi0gU3RyZWFtaW5nIGVuYWJsZWQKLSBDYWNoaW5nIGRpc2FibGVkIGluIHNldHRpbmdzCgoqKkNoZWNrOioqIGByZXNwb25zZS5oZWFkZXJzLmdldCgnY2YtYWlnLWNhY2hlLXN0YXR1cycpYCDihpIgSElUIG9yIE1JU1MKCiMjIExvZ3MgTm90IEFwcGVhcmluZwoKMS4gQ2hlY2sgbG9nZ2luZyBlbmFibGVkOiBEYXNoYm9hcmQg4oaSIEdhdGV3YXkg4oaSIFNldHRpbmdzCjIuIFJlbW92ZSBgY2YtYWlnLWNvbGxlY3QtbG9nOiBmYWxzZWAgaGVhZGVyCjMuIFdhaXQgMzAtNjAgc2Vjb25kcwo0LiBDaGVjayBsb2cgbGltaXQgKDEwTSBkZWZhdWx0KQoKIyMgRGVidWdnaW5nCgpgYGBiYXNoCiMgVGVzdCBjb25uZWN0aXZpdHkKY3VybCAtdiBodHRwczovL2dhdGV3YXkuYWkuY2xvdWRmbGFyZS5jb20vdjEve2FjY291bnR9L3tnYXRld2F5fS9vcGVuYWkvbW9kZWxzIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRPUEVOQUlfS0VZIiBcCiAgLUggImNmLWFpZy1hdXRob3JpemF0aW9uOiBCZWFyZXIgJENGX1RPS0VOIgpgYGAKCmBgYHR5cGVzY3JpcHQKLy8gQ2hlY2sgcmVzcG9uc2UgaGVhZGVycwpjb25zb2xlLmxvZygnQ2FjaGU6JywgcmVzcG9uc2UuaGVhZGVycy5nZXQoJ2NmLWFpZy1jYWNoZS1zdGF0dXMnKSk7CmNvbnNvbGUubG9nKCdSZXF1ZXN0IElEOicsIHJlc3BvbnNlLmhlYWRlcnMuZ2V0KCdjZi1yYXknKSk7CmBgYAoKIyMgQW5hbHl0aWNzCgpEYXNoYm9hcmQg4oaSIEFJIEdhdGV3YXkg4oaSIFNlbGVjdCBnYXRld2F5CgoqKk1ldHJpY3M6KiogUmVxdWVzdHMsIHRva2VucywgbGF0ZW5jeSAocDUwL3A5NS9wOTkpLCBjYWNoZSBoaXQgcmF0ZSwgY29zdHMKCioqTG9nIGZpbHRlcnM6KiogYHN0YXR1czogZXJyb3JgLCBgcHJvdmlkZXI6IG9wZW5haWAsIGBjb3N0ID4gMC4wMWAsIGBkdXJhdGlvbiA+IDEwMDBgCgoqKkV4cG9ydDoqKiBMb2dwdXNoIHRvIFMzL0dDUy9EYXRhZG9nL1NwbHVuawo=
+# AI Gateway Troubleshooting
+
+## Common Errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| 401 | Missing `cf-aig-authorization` header | Add header with CF API token |
+| 403 | Invalid provider key / BYOK expired | Check provider key in dashboard |
+| 429 | Rate limit exceeded | Increase limit or implement backoff |
+
+### 401 Fix
+
+```typescript
+const client = new OpenAI({
+  baseURL: `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/openai`,
+  defaultHeaders: { 'cf-aig-authorization': `Bearer ${CF_API_TOKEN}` }
+});
+```
+
+### 429 Retry Pattern
+
+```typescript
+async function requestWithRetry(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try { return await fn(); }
+    catch (e) {
+      if (e.status === 429 && i < maxRetries - 1) {
+        await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+        continue;
+      }
+      throw e;
+    }
+  }
+}
+```
+
+## Gotchas
+
+| Issue | Reality |
+|-------|---------|
+| Metadata limits | Max 5 entries, flat only (no nesting) |
+| Cache key collision | Use unique keys per expected response |
+| BYOK + Unified Billing | Mutually exclusive |
+| Rate limit scope | Per-gateway, not per-user (use dynamic routing for per-user) |
+| Log delay | 30-60 seconds normal |
+| Streaming + caching | **Incompatible** |
+| Model name (unified API) | Prefix required: `openai/gpt-4o`, not `gpt-4o` |
+
+## Cache Not Working
+
+**Causes:**
+- Different request params (temperature, etc.)
+- Streaming enabled
+- Caching disabled in settings
+
+**Check:** `response.headers.get('cf-aig-cache-status')` → HIT or MISS
+
+## Logs Not Appearing
+
+1. Check logging enabled: Dashboard → Gateway → Settings
+2. Remove `cf-aig-collect-log: false` header
+3. Wait 30-60 seconds
+4. Check log limit (10M default)
+
+## Debugging
+
+```bash
+# Test connectivity
+curl -v https://gateway.ai.cloudflare.com/v1/{account}/{gateway}/openai/models \
+  -H "Authorization: Bearer $OPENAI_KEY" \
+  -H "cf-aig-authorization: Bearer $CF_TOKEN"
+```
+
+```typescript
+// Check response headers
+console.log('Cache:', response.headers.get('cf-aig-cache-status'));
+console.log('Request ID:', response.headers.get('cf-ray'));
+```
+
+## Analytics
+
+Dashboard → AI Gateway → Select gateway
+
+**Metrics:** Requests, tokens, latency (p50/p95/p99), cache hit rate, costs
+
+**Log filters:** `status: error`, `provider: openai`, `cost > 0.01`, `duration > 1000`
+
+**Export:** Logpush to S3/GCS/Datadog/Splunk

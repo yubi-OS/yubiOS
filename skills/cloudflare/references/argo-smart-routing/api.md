@@ -1,1 +1,240 @@
-IyMgQVBJIFJlZmVyZW5jZQoKKipOb3RlIG9uIFNtYXJ0IFNoaWVsZDoqKiBBcmdvIFNtYXJ0IFJvdXRpbmcgaXMgYmVpbmcgaW50ZWdyYXRlZCBpbnRvIENsb3VkZmxhcmUncyBTbWFydCBTaGllbGQgcHJvZHVjdC4gQVBJIGVuZHBvaW50cyByZW1haW4gc3RhYmxlOyBleGlzdGluZyBpbnRlZ3JhdGlvbnMgY29udGludWUgdG8gd29yayB3aXRob3V0IGNoYW5nZXMuCgojIyMgQmFzZSBFbmRwb2ludApgYGAKaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0CmBgYAoKIyMjIEF1dGhlbnRpY2F0aW9uClVzZSBBUEkgdG9rZW5zIHdpdGggWm9uZTpBcmdvIFNtYXJ0IFJvdXRpbmc6RWRpdCBwZXJtaXNzaW9uczoKCmBgYGJhc2gKIyBIZWFkZXJzIHJlcXVpcmVkClgtQXV0aC1FbWFpbDogdXNlckBleGFtcGxlLmNvbQpBdXRob3JpemF0aW9uOiBCZWFyZXIgWU9VUl9BUElfVE9LRU4KYGBgCgojIyMgR2V0IEFyZ28gU21hcnQgUm91dGluZyBTdGF0dXMKCioqRW5kcG9pbnQ6KiogYEdFVCAvem9uZXMve3pvbmVfaWR9L2FyZ28vc21hcnRfcm91dGluZ2AKCioqRGVzY3JpcHRpb246KiogUmV0cmlldmVzIGN1cnJlbnQgQXJnbyBTbWFydCBSb3V0aW5nIGVuYWJsZW1lbnQgc3RhdHVzLgoKKipjVVJMIEV4YW1wbGU6KioKYGBgYmFzaApjdXJsIC1YIEdFVCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzL3t6b25lX2lkfS9hcmdvL3NtYXJ0X3JvdXRpbmciIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIFlPVVJfQVBJX1RPS0VOIiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIKYGBgCgoqKlJlc3BvbnNlOioqCmBgYGpzb24KewogICJyZXN1bHQiOiB7CiAgICAiaWQiOiAic21hcnRfcm91dGluZyIsCiAgICAidmFsdWUiOiAib24iLAogICAgImVkaXRhYmxlIjogdHJ1ZSwKICAgICJtb2RpZmllZF9vbiI6ICIyMDI0LTAxLTExVDEyOjAwOjAwWiIKICB9LAogICJzdWNjZXNzIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgIm1lc3NhZ2VzIjogW10KfQpgYGAKCioqVHlwZVNjcmlwdCBTREsgRXhhbXBsZToqKgpgYGB0eXBlc2NyaXB0CmltcG9ydCBDbG91ZGZsYXJlIGZyb20gJ2Nsb3VkZmxhcmUnOwoKY29uc3QgY2xpZW50ID0gbmV3IENsb3VkZmxhcmUoewogIGFwaVRva2VuOiBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0FQSV9UT0tFTgp9KTsKCmNvbnN0IHN0YXR1cyA9IGF3YWl0IGNsaWVudC5hcmdvLnNtYXJ0Um91dGluZy5nZXQoeyB6b25lX2lkOiAneW91ci16b25lLWlkJyB9KTsKY29uc29sZS5sb2coYEFyZ28gc3RhdHVzOiAke3N0YXR1cy52YWx1ZX0sIGVkaXRhYmxlOiAke3N0YXR1cy5lZGl0YWJsZX1gKTsKYGBgCgoqKlB5dGhvbiBTREsgRXhhbXBsZToqKgpgYGBweXRob24KZnJvbSBjbG91ZGZsYXJlIGltcG9ydCBDbG91ZGZsYXJlCgpjbGllbnQgPSBDbG91ZGZsYXJlKGFwaV90b2tlbj1vcy5lbnZpcm9uLmdldCgnQ0xPVURGTEFSRV9BUElfVE9LRU4nKSkKCnN0YXR1cyA9IGNsaWVudC5hcmdvLnNtYXJ0X3JvdXRpbmcuZ2V0KHpvbmVfaWQ9J3lvdXItem9uZS1pZCcpCnByaW50KGYiQXJnbyBzdGF0dXM6IHtzdGF0dXMudmFsdWV9LCBlZGl0YWJsZToge3N0YXR1cy5lZGl0YWJsZX0iKQpgYGAKCiMjIyBVcGRhdGUgQXJnbyBTbWFydCBSb3V0aW5nIFN0YXR1cwoKKipFbmRwb2ludDoqKiBgUEFUQ0ggL3pvbmVzL3t6b25lX2lkfS9hcmdvL3NtYXJ0X3JvdXRpbmdgCgoqKkRlc2NyaXB0aW9uOioqIEVuYWJsZSBvciBkaXNhYmxlIEFyZ28gU21hcnQgUm91dGluZyBmb3IgYSB6b25lLgoKKipSZXF1ZXN0IEJvZHk6KioKYGBganNvbgp7CiAgInZhbHVlIjogIm9uIiAgLy8gb3IgIm9mZiIKfQpgYGAKCioqY1VSTCBFeGFtcGxlOioqCmBgYGJhc2gKY3VybCAtWCBQQVRDSCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzL3t6b25lX2lkfS9hcmdvL3NtYXJ0X3JvdXRpbmciIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIFlPVVJfQVBJX1RPS0VOIiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC1kICd7InZhbHVlIjogIm9uIn0nCmBgYAoKKipUeXBlU2NyaXB0IFNESyBFeGFtcGxlOioqCmBgYHR5cGVzY3JpcHQKY29uc3QgcmVzdWx0ID0gYXdhaXQgY2xpZW50LmFyZ28uc21hcnRSb3V0aW5nLmVkaXQoewogIHpvbmVfaWQ6ICd5b3VyLXpvbmUtaWQnLAogIHZhbHVlOiAnb24nLAp9KTsKY29uc29sZS5sb2coYFVwZGF0ZWQ6ICR7cmVzdWx0LnZhbHVlfSBhdCAke3Jlc3VsdC5tb2RpZmllZF9vbn1gKTsKYGBgCgoqKlB5dGhvbiBTREsgRXhhbXBsZToqKgpgYGBweXRob24KcmVzdWx0ID0gY2xpZW50LmFyZ28uc21hcnRfcm91dGluZy5lZGl0KAogICAgem9uZV9pZD0neW91ci16b25lLWlkJywKICAgIHZhbHVlPSdvbicKKQpwcmludChmIlVwZGF0ZWQ6IHtyZXN1bHQudmFsdWV9IGF0IHtyZXN1bHQubW9kaWZpZWRfb259IikKYGBgCgojIyBDaGVja2luZyBFZGl0YWJpbGl0eSBCZWZvcmUgVXBkYXRlcwoKKipDcml0aWNhbDoqKiBBbHdheXMgY2hlY2sgdGhlIGBlZGl0YWJsZWAgZmllbGQgYmVmb3JlIGF0dGVtcHRpbmcgdG8gZW5hYmxlL2Rpc2FibGUgQXJnby4gV2hlbiBgZWRpdGFibGU6IGZhbHNlYCwgdGhlIHpvbmUgaGFzIHJlc3RyaWN0aW9ucyAoYmlsbGluZyBub3QgY29uZmlndXJlZCwgaW5zdWZmaWNpZW50IHBlcm1pc3Npb25zLCBvciBwbGFuIGxpbWl0YXRpb25zKS4KCioqUGF0dGVybjoqKgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZ1bmN0aW9uIHNhZmVseUVuYWJsZUFyZ28oY2xpZW50OiBDbG91ZGZsYXJlLCB6b25lSWQ6IHN0cmluZyk6IFByb21pc2U8Ym9vbGVhbj4gewogIGNvbnN0IHN0YXR1cyA9IGF3YWl0IGNsaWVudC5hcmdvLnNtYXJ0Um91dGluZy5nZXQoeyB6b25lX2lkOiB6b25lSWQgfSk7CiAgCiAgaWYgKCFzdGF0dXMuZWRpdGFibGUpIHsKICAgIGNvbnNvbGUuZXJyb3IoJ0Nhbm5vdCBtb2RpZnkgQXJnbzogZWRpdGFibGU9ZmFsc2UgKGNoZWNrIGJpbGxpbmcvcGVybWlzc2lvbnMpJyk7CiAgICByZXR1cm4gZmFsc2U7CiAgfQogIAogIGlmIChzdGF0dXMudmFsdWUgPT09ICdvbicpIHsKICAgIGNvbnNvbGUubG9nKCdBcmdvIGFscmVhZHkgZW5hYmxlZCcpOwogICAgcmV0dXJuIHRydWU7CiAgfQogIAogIGF3YWl0IGNsaWVudC5hcmdvLnNtYXJ0Um91dGluZy5lZGl0KHsgem9uZV9pZDogem9uZUlkLCB2YWx1ZTogJ29uJyB9KTsKICBjb25zb2xlLmxvZygnQXJnbyBlbmFibGVkIHN1Y2Nlc3NmdWxseScpOwogIHJldHVybiB0cnVlOwp9CmBgYAoKKipQeXRob24gUGF0dGVybjoqKgpgYGBweXRob24KZGVmIHNhZmVseV9lbmFibGVfYXJnbyhjbGllbnQ6IENsb3VkZmxhcmUsIHpvbmVfaWQ6IHN0cikgLT4gYm9vbDoKICAgIHN0YXR1cyA9IGNsaWVudC5hcmdvLnNtYXJ0X3JvdXRpbmcuZ2V0KHpvbmVfaWQ9em9uZV9pZCkKICAgIAogICAgaWYgbm90IHN0YXR1cy5lZGl0YWJsZToKICAgICAgICBwcmludCgnQ2Fubm90IG1vZGlmeSBBcmdvOiBlZGl0YWJsZT1mYWxzZSAoY2hlY2sgYmlsbGluZy9wZXJtaXNzaW9ucyknKQogICAgICAgIHJldHVybiBGYWxzZQogICAgCiAgICBpZiBzdGF0dXMudmFsdWUgPT0gJ29uJzoKICAgICAgICBwcmludCgnQXJnbyBhbHJlYWR5IGVuYWJsZWQnKQogICAgICAgIHJldHVybiBUcnVlCiAgICAKICAgIGNsaWVudC5hcmdvLnNtYXJ0X3JvdXRpbmcuZWRpdCh6b25lX2lkPXpvbmVfaWQsIHZhbHVlPSdvbicpCiAgICBwcmludCgnQXJnbyBlbmFibGVkIHN1Y2Nlc3NmdWxseScpCiAgICByZXR1cm4gVHJ1ZQpgYGAKCiMjIEVycm9yIEhhbmRsaW5nCgpUaGUgVHlwZVNjcmlwdCBTREsgcHJvdmlkZXMgdHlwZWQgZXJyb3IgY2xhc3NlcyBmb3Igcm9idXN0IGVycm9yIGhhbmRsaW5nOgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgQ2xvdWRmbGFyZSBmcm9tICdjbG91ZGZsYXJlJzsKaW1wb3J0IHsgQVBJRXJyb3IsIEFQSUNvbm5lY3Rpb25FcnJvciwgUmF0ZUxpbWl0RXJyb3IgfSBmcm9tICdjbG91ZGZsYXJlJzsKCmFzeW5jIGZ1bmN0aW9uIGVuYWJsZUFyZ29XaXRoRXJyb3JIYW5kbGluZyhjbGllbnQ6IENsb3VkZmxhcmUsIHpvbmVJZDogc3RyaW5nKSB7CiAgdHJ5IHsKICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IGNsaWVudC5hcmdvLnNtYXJ0Um91dGluZy5lZGl0KHsKICAgICAgem9uZV9pZDogem9uZUlkLAogICAgICB2YWx1ZTogJ29uJywKICAgIH0pOwogICAgcmV0dXJuIHJlc3VsdDsKICB9IGNhdGNoIChlcnJvcikgewogICAgaWYgKGVycm9yIGluc3RhbmNlb2YgUmF0ZUxpbWl0RXJyb3IpIHsKICAgICAgY29uc29sZS5lcnJvcignUmF0ZSBsaW1pdGVkLiBSZXRyeSBhZnRlcjonLCBlcnJvci5yZXNwb25zZT8uaGVhZGVycy5nZXQoJ3JldHJ5LWFmdGVyJykpOwogICAgICAvLyBJbXBsZW1lbnQgZXhwb25lbnRpYWwgYmFja29mZgogICAgfSBlbHNlIGlmIChlcnJvciBpbnN0YW5jZW9mIEFQSUVycm9yKSB7CiAgICAgIGNvbnNvbGUuZXJyb3IoJ0FQSSBlcnJvcjonLCBlcnJvci5zdGF0dXMsIGVycm9yLm1lc3NhZ2UpOwogICAgICBpZiAoZXJyb3Iuc3RhdHVzID09PSA0MDMpIHsKICAgICAgICBjb25zb2xlLmVycm9yKCdQZXJtaXNzaW9uIGRlbmllZCAtIGNoZWNrIEFQSSB0b2tlbiBzY29wZXMnKTsKICAgICAgfSBlbHNlIGlmIChlcnJvci5zdGF0dXMgPT09IDQwMCkgewogICAgICAgIGNvbnNvbGUuZXJyb3IoJ0JhZCByZXF1ZXN0IC0gdmVyaWZ5IHpvbmVfaWQgYW5kIHBheWxvYWQnKTsKICAgICAgfQogICAgfSBlbHNlIGlmIChlcnJvciBpbnN0YW5jZW9mIEFQSUNvbm5lY3Rpb25FcnJvcikgewogICAgICBjb25zb2xlLmVycm9yKCdDb25uZWN0aW9uIGZhaWxlZDonLCBlcnJvci5tZXNzYWdlKTsKICAgICAgLy8gUmV0cnkgd2l0aCBleHBvbmVudGlhbCBiYWNrb2ZmCiAgICB9IGVsc2UgewogICAgICBjb25zb2xlLmVycm9yKCdVbmV4cGVjdGVkIGVycm9yOicsIGVycm9yKTsKICAgIH0KICAgIHRocm93IGVycm9yOwogIH0KfQpgYGAKCioqUHl0aG9uIEVycm9yIEhhbmRsaW5nOioqCmBgYHB5dGhvbgpmcm9tIGNsb3VkZmxhcmUgaW1wb3J0IENsb3VkZmxhcmUsIEFQSUVycm9yLCBSYXRlTGltaXRFcnJvcgoKZGVmIGVuYWJsZV9hcmdvX3dpdGhfZXJyb3JfaGFuZGxpbmcoY2xpZW50OiBDbG91ZGZsYXJlLCB6b25lX2lkOiBzdHIpOgogICAgdHJ5OgogICAgICAgIHJlc3VsdCA9IGNsaWVudC5hcmdvLnNtYXJ0X3JvdXRpbmcuZWRpdCh6b25lX2lkPXpvbmVfaWQsIHZhbHVlPSdvbicpCiAgICAgICAgcmV0dXJuIHJlc3VsdAogICAgZXhjZXB0IFJhdGVMaW1pdEVycm9yIGFzIGU6CiAgICAgICAgcHJpbnQoZiJSYXRlIGxpbWl0ZWQuIFJldHJ5IGFmdGVyOiB7ZS5yZXNwb25zZS5oZWFkZXJzLmdldCgncmV0cnktYWZ0ZXInKX0iKQogICAgICAgIHJhaXNlCiAgICBleGNlcHQgQVBJRXJyb3IgYXMgZToKICAgICAgICBwcmludChmIkFQSSBlcnJvcjoge2Uuc3RhdHVzfSAtIHtlLm1lc3NhZ2V9IikKICAgICAgICBpZiBlLnN0YXR1cyA9PSA0MDM6CiAgICAgICAgICAgIHByaW50KCdQZXJtaXNzaW9uIGRlbmllZCAtIGNoZWNrIEFQSSB0b2tlbiBzY29wZXMnKQogICAgICAgIGVsaWYgZS5zdGF0dXMgPT0gNDAwOgogICAgICAgICAgICBwcmludCgnQmFkIHJlcXVlc3QgLSB2ZXJpZnkgem9uZV9pZCBhbmQgcGF5bG9hZCcpCiAgICAgICAgcmFpc2UKICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICBwcmludChmIlVuZXhwZWN0ZWQgZXJyb3I6IHtlfSIpCiAgICAgICAgcmFpc2UKYGBgCgojIyBSZXNwb25zZSBTY2hlbWEKCkFsbCBBcmdvIFNtYXJ0IFJvdXRpbmcgQVBJIHJlc3BvbnNlcyBmb2xsb3cgdGhpcyBzdHJ1Y3R1cmU6CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBBcmdvU21hcnRSb3V0aW5nUmVzcG9uc2UgewogIHJlc3VsdDogewogICAgaWQ6ICdzbWFydF9yb3V0aW5nJzsKICAgIHZhbHVlOiAnb24nIHwgJ29mZic7CiAgICBlZGl0YWJsZTogYm9vbGVhbjsKICAgIG1vZGlmaWVkX29uOiBzdHJpbmc7IC8vIElTTyA4NjAxIHRpbWVzdGFtcAogIH07CiAgc3VjY2VzczogYm9vbGVhbjsKICBlcnJvcnM6IEFycmF5PHsKICAgIGNvZGU6IG51bWJlcjsKICAgIG1lc3NhZ2U6IHN0cmluZzsKICB9PjsKICBtZXNzYWdlczogQXJyYXk8c3RyaW5nPjsKfQpgYGAKCiMjIEtleSBSZXNwb25zZSBGaWVsZHMKCnwgRmllbGQgfCBUeXBlIHwgRGVzY3JpcHRpb24gfAp8LS0tLS0tLXwtLS0tLS18LS0tLS0tLS0tLS0tLXwKfCBgdmFsdWVgIHwgYCJvbiIgXHwgIm9mZiJgIHwgQ3VycmVudCBlbmFibGVtZW50IHN0YXR1cyB8CnwgYGVkaXRhYmxlYCB8IGBib29sZWFuYCB8IFdoZXRoZXIgY2hhbmdlcyBhcmUgYWxsb3dlZCAoY2hlY2sgYmVmb3JlIFBBVENIKSB8CnwgYG1vZGlmaWVkX29uYCB8IGBzdHJpbmdgIHwgSVNPIHRpbWVzdGFtcCBvZiBsYXN0IG1vZGlmaWNhdGlvbiB8CnwgYHN1Y2Nlc3NgIHwgYGJvb2xlYW5gIHwgV2hldGhlciByZXF1ZXN0IHN1Y2NlZWRlZCB8CnwgYGVycm9yc2AgfCBgQXJyYXlgIHwgRXJyb3IgZGV0YWlscyBpZiBgc3VjY2VzczogZmFsc2Vg
+## API Reference
+
+**Note on Smart Shield:** Argo Smart Routing is being integrated into Cloudflare's Smart Shield product. API endpoints remain stable; existing integrations continue to work without changes.
+
+### Base Endpoint
+```
+https://api.cloudflare.com/client/v4
+```
+
+### Authentication
+Use API tokens with Zone:Argo Smart Routing:Edit permissions:
+
+```bash
+# Headers required
+X-Auth-Email: user@example.com
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+### Get Argo Smart Routing Status
+
+**Endpoint:** `GET /zones/{zone_id}/argo/smart_routing`
+
+**Description:** Retrieves current Argo Smart Routing enablement status.
+
+**cURL Example:**
+```bash
+curl -X GET "https://api.cloudflare.com/client/v4/zones/{zone_id}/argo/smart_routing" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json"
+```
+
+**Response:**
+```json
+{
+  "result": {
+    "id": "smart_routing",
+    "value": "on",
+    "editable": true,
+    "modified_on": "2024-01-11T12:00:00Z"
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}
+```
+
+**TypeScript SDK Example:**
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({
+  apiToken: process.env.CLOUDFLARE_API_TOKEN
+});
+
+const status = await client.argo.smartRouting.get({ zone_id: 'your-zone-id' });
+console.log(`Argo status: ${status.value}, editable: ${status.editable}`);
+```
+
+**Python SDK Example:**
+```python
+from cloudflare import Cloudflare
+
+client = Cloudflare(api_token=os.environ.get('CLOUDFLARE_API_TOKEN'))
+
+status = client.argo.smart_routing.get(zone_id='your-zone-id')
+print(f"Argo status: {status.value}, editable: {status.editable}")
+```
+
+### Update Argo Smart Routing Status
+
+**Endpoint:** `PATCH /zones/{zone_id}/argo/smart_routing`
+
+**Description:** Enable or disable Argo Smart Routing for a zone.
+
+**Request Body:**
+```json
+{
+  "value": "on"  // or "off"
+}
+```
+
+**cURL Example:**
+```bash
+curl -X PATCH "https://api.cloudflare.com/client/v4/zones/{zone_id}/argo/smart_routing" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"value": "on"}'
+```
+
+**TypeScript SDK Example:**
+```typescript
+const result = await client.argo.smartRouting.edit({
+  zone_id: 'your-zone-id',
+  value: 'on',
+});
+console.log(`Updated: ${result.value} at ${result.modified_on}`);
+```
+
+**Python SDK Example:**
+```python
+result = client.argo.smart_routing.edit(
+    zone_id='your-zone-id',
+    value='on'
+)
+print(f"Updated: {result.value} at {result.modified_on}")
+```
+
+## Checking Editability Before Updates
+
+**Critical:** Always check the `editable` field before attempting to enable/disable Argo. When `editable: false`, the zone has restrictions (billing not configured, insufficient permissions, or plan limitations).
+
+**Pattern:**
+```typescript
+async function safelyEnableArgo(client: Cloudflare, zoneId: string): Promise<boolean> {
+  const status = await client.argo.smartRouting.get({ zone_id: zoneId });
+  
+  if (!status.editable) {
+    console.error('Cannot modify Argo: editable=false (check billing/permissions)');
+    return false;
+  }
+  
+  if (status.value === 'on') {
+    console.log('Argo already enabled');
+    return true;
+  }
+  
+  await client.argo.smartRouting.edit({ zone_id: zoneId, value: 'on' });
+  console.log('Argo enabled successfully');
+  return true;
+}
+```
+
+**Python Pattern:**
+```python
+def safely_enable_argo(client: Cloudflare, zone_id: str) -> bool:
+    status = client.argo.smart_routing.get(zone_id=zone_id)
+    
+    if not status.editable:
+        print('Cannot modify Argo: editable=false (check billing/permissions)')
+        return False
+    
+    if status.value == 'on':
+        print('Argo already enabled')
+        return True
+    
+    client.argo.smart_routing.edit(zone_id=zone_id, value='on')
+    print('Argo enabled successfully')
+    return True
+```
+
+## Error Handling
+
+The TypeScript SDK provides typed error classes for robust error handling:
+
+```typescript
+import Cloudflare from 'cloudflare';
+import { APIError, APIConnectionError, RateLimitError } from 'cloudflare';
+
+async function enableArgoWithErrorHandling(client: Cloudflare, zoneId: string) {
+  try {
+    const result = await client.argo.smartRouting.edit({
+      zone_id: zoneId,
+      value: 'on',
+    });
+    return result;
+  } catch (error) {
+    if (error instanceof RateLimitError) {
+      console.error('Rate limited. Retry after:', error.response?.headers.get('retry-after'));
+      // Implement exponential backoff
+    } else if (error instanceof APIError) {
+      console.error('API error:', error.status, error.message);
+      if (error.status === 403) {
+        console.error('Permission denied - check API token scopes');
+      } else if (error.status === 400) {
+        console.error('Bad request - verify zone_id and payload');
+      }
+    } else if (error instanceof APIConnectionError) {
+      console.error('Connection failed:', error.message);
+      // Retry with exponential backoff
+    } else {
+      console.error('Unexpected error:', error);
+    }
+    throw error;
+  }
+}
+```
+
+**Python Error Handling:**
+```python
+from cloudflare import Cloudflare, APIError, RateLimitError
+
+def enable_argo_with_error_handling(client: Cloudflare, zone_id: str):
+    try:
+        result = client.argo.smart_routing.edit(zone_id=zone_id, value='on')
+        return result
+    except RateLimitError as e:
+        print(f"Rate limited. Retry after: {e.response.headers.get('retry-after')}")
+        raise
+    except APIError as e:
+        print(f"API error: {e.status} - {e.message}")
+        if e.status == 403:
+            print('Permission denied - check API token scopes')
+        elif e.status == 400:
+            print('Bad request - verify zone_id and payload')
+        raise
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        raise
+```
+
+## Response Schema
+
+All Argo Smart Routing API responses follow this structure:
+
+```typescript
+interface ArgoSmartRoutingResponse {
+  result: {
+    id: 'smart_routing';
+    value: 'on' | 'off';
+    editable: boolean;
+    modified_on: string; // ISO 8601 timestamp
+  };
+  success: boolean;
+  errors: Array<{
+    code: number;
+    message: string;
+  }>;
+  messages: Array<string>;
+}
+```
+
+## Key Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `value` | `"on" \| "off"` | Current enablement status |
+| `editable` | `boolean` | Whether changes are allowed (check before PATCH) |
+| `modified_on` | `string` | ISO timestamp of last modification |
+| `success` | `boolean` | Whether request succeeded |
+| `errors` | `Array` | Error details if `success: false`

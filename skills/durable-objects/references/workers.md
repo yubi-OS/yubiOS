@@ -1,1 +1,346 @@
-IyBDbG91ZGZsYXJlIFdvcmtlcnMgQmVzdCBQcmFjdGljZXMKCkhpZ2gtbGV2ZWwgZ3VpZGFuY2UgZm9yIFdvcmtlcnMgdGhhdCBpbnZva2UgRHVyYWJsZSBPYmplY3RzLgoKIyMgV3JhbmdsZXIgQ29uZmlndXJhdGlvbgoKIyMjIHdyYW5nbGVyLmpzb25jIChSZWNvbW1lbmRlZCkKCmBgYGpzb25jCnsKICAiJHNjaGVtYSI6ICJub2RlX21vZHVsZXMvd3JhbmdsZXIvY29uZmlnLXNjaGVtYS5qc29uIiwKICAibmFtZSI6ICJteS13b3JrZXIiLAogICJtYWluIjogInNyYy9pbmRleC50cyIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI0LTEyLTAxIiwKICAiY29tcGF0aWJpbGl0eV9mbGFncyI6IFsibm9kZWpzX2NvbXBhdCJdLAoKICAiZHVyYWJsZV9vYmplY3RzIjogewogICAgImJpbmRpbmdzIjogWwogICAgICB7ICJuYW1lIjogIkNIQVRfUk9PTSIsICJjbGFzc19uYW1lIjogIkNoYXRSb29tIiB9LAogICAgICB7ICJuYW1lIjogIlVTRVJfU0VTU0lPTiIsICJjbGFzc19uYW1lIjogIlVzZXJTZXNzaW9uIiB9CiAgICBdCiAgfSwKCiAgIm1pZ3JhdGlvbnMiOiBbCiAgICB7ICJ0YWciOiAidjEiLCAibmV3X3NxbGl0ZV9jbGFzc2VzIjogWyJDaGF0Um9vbSIsICJVc2VyU2Vzc2lvbiJdIH0KICBdLAoKICAvLyBFbnZpcm9ubWVudCB2YXJpYWJsZXMKICAidmFycyI6IHsKICAgICJFTlZJUk9OTUVOVCI6ICJwcm9kdWN0aW9uIgogIH0sCgogIC8vIEtWIG5hbWVzcGFjZXMKICAia3ZfbmFtZXNwYWNlcyI6IFsKICAgIHsgImJpbmRpbmciOiAiQ09ORklHIiwgImlkIjogImFiYzEyMyIgfQogIF0sCgogIC8vIFIyIGJ1Y2tldHMKICAicjJfYnVja2V0cyI6IFsKICAgIHsgImJpbmRpbmciOiAiVVBMT0FEUyIsICJidWNrZXRfbmFtZSI6ICJteS11cGxvYWRzIiB9CiAgXSwKCiAgLy8gRDEgZGF0YWJhc2VzCiAgImQxX2RhdGFiYXNlcyI6IFsKICAgIHsgImJpbmRpbmciOiAiREIiLCAiZGF0YWJhc2VfaWQiOiAieHl6Nzg5IiB9CiAgXQp9CmBgYAoKIyMjIHdyYW5nbGVyLnRvbWwgKEFsdGVybmF0aXZlKQoKYGBgdG9tbApuYW1lID0gIm15LXdvcmtlciIKbWFpbiA9ICJzcmMvaW5kZXgudHMiCmNvbXBhdGliaWxpdHlfZGF0ZSA9ICIyMDI0LTEyLTAxIgpjb21wYXRpYmlsaXR5X2ZsYWdzID0gWyJub2RlanNfY29tcGF0Il0KCltbZHVyYWJsZV9vYmplY3RzLmJpbmRpbmdzXV0KbmFtZSA9ICJDSEFUX1JPT00iCmNsYXNzX25hbWUgPSAiQ2hhdFJvb20iCgpbW21pZ3JhdGlvbnNdXQp0YWcgPSAidjEiCm5ld19zcWxpdGVfY2xhc3NlcyA9IFsiQ2hhdFJvb20iXQoKW3ZhcnNdCkVOVklST05NRU5UID0gInByb2R1Y3Rpb24iCmBgYAoKIyMgVHlwZVNjcmlwdCBUeXBlcwoKIyMjIEVudmlyb25tZW50IEludGVyZmFjZQoKYGBgdHlwZXNjcmlwdAovLyBzcmMvdHlwZXMudHMKaW1wb3J0IHsgQ2hhdFJvb20gfSBmcm9tICIuL2R1cmFibGUtb2JqZWN0cy9jaGF0LXJvb20iOwppbXBvcnQgeyBVc2VyU2Vzc2lvbiB9IGZyb20gIi4vZHVyYWJsZS1vYmplY3RzL3VzZXItc2Vzc2lvbiI7CgpleHBvcnQgaW50ZXJmYWNlIEVudiB7CiAgLy8gRHVyYWJsZSBPYmplY3RzCiAgQ0hBVF9ST09NOiBEdXJhYmxlT2JqZWN0TmFtZXNwYWNlPENoYXRSb29tPjsKICBVU0VSX1NFU1NJT046IER1cmFibGVPYmplY3ROYW1lc3BhY2U8VXNlclNlc3Npb24+OwoKICAvLyBLVgogIENPTkZJRzogS1ZOYW1lc3BhY2U7CgogIC8vIFIyCiAgVVBMT0FEUzogUjJCdWNrZXQ7CgogIC8vIEQxCiAgREI6IEQxRGF0YWJhc2U7CgogIC8vIEVudmlyb25tZW50IHZhcmlhYmxlcwogIEVOVklST05NRU5UOiBzdHJpbmc7CiAgQVBJX0tFWTogc3RyaW5nOyAvLyBGcm9tIHNlY3JldHMKfQpgYGAKCiMjIyBFeHBvcnQgRHVyYWJsZSBPYmplY3QgQ2xhc3NlcwoKYGBgdHlwZXNjcmlwdAovLyBzcmMvaW5kZXgudHMKZXhwb3J0IHsgQ2hhdFJvb20gfSBmcm9tICIuL2R1cmFibGUtb2JqZWN0cy9jaGF0LXJvb20iOwpleHBvcnQgeyBVc2VyU2Vzc2lvbiB9IGZyb20gIi4vZHVyYWJsZS1vYmplY3RzL3VzZXItc2Vzc2lvbiI7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCk6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIC8vIFdvcmtlciBoYW5kbGVyCiAgfSwKfTsKYGBgCgojIyBXb3JrZXIgSGFuZGxlciBQYXR0ZXJuCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgdXJsID0gbmV3IFVSTChyZXF1ZXN0LnVybCk7CgogICAgdHJ5IHsKICAgICAgLy8gUm91dGUgdG8gYXBwcm9wcmlhdGUgaGFuZGxlcgogICAgICBpZiAodXJsLnBhdGhuYW1lLnN0YXJ0c1dpdGgoIi9hcGkvcm9vbXMiKSkgewogICAgICAgIHJldHVybiBoYW5kbGVSb29tcyhyZXF1ZXN0LCBlbnYpOwogICAgICB9CiAgICAgIGlmICh1cmwucGF0aG5hbWUuc3RhcnRzV2l0aCgiL2FwaS91c2VycyIpKSB7CiAgICAgICAgcmV0dXJuIGhhbmRsZVVzZXJzKHJlcXVlc3QsIGVudik7CiAgICAgIH0KCiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIk5vdCBGb3VuZCIsIHsgc3RhdHVzOiA0MDQgfSk7CiAgICB9IGNhdGNoIChlcnJvcikgewogICAgICBjb25zb2xlLmVycm9yKCJSZXF1ZXN0IGZhaWxlZDoiLCBlcnJvcik7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIkludGVybmFsIFNlcnZlciBFcnJvciIsIHsgc3RhdHVzOiA1MDAgfSk7CiAgICB9CiAgfSwKfTsKCmFzeW5jIGZ1bmN0aW9uIGhhbmRsZVJvb21zKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IHVybCA9IG5ldyBVUkwocmVxdWVzdC51cmwpOwogIGNvbnN0IHJvb21JZCA9IHVybC5zZWFyY2hQYXJhbXMuZ2V0KCJyb29tIik7CgogIGlmICghcm9vbUlkKSB7CiAgICByZXR1cm4gUmVzcG9uc2UuanNvbih7IGVycm9yOiAiTWlzc2luZyByb29tIHBhcmFtZXRlciIgfSwgeyBzdGF0dXM6IDQwMCB9KTsKICB9CgogIGNvbnN0IHN0dWIgPSBlbnYuQ0hBVF9ST09NLmdldEJ5TmFtZShyb29tSWQpOwoKICBpZiAocmVxdWVzdC5tZXRob2QgPT09ICJQT1NUIikgewogICAgY29uc3QgYm9keSA9IGF3YWl0IHJlcXVlc3QuanNvbjx7IHVzZXJJZDogc3RyaW5nOyBtZXNzYWdlOiBzdHJpbmcgfT4oKTsKICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IHN0dWIuc2VuZE1lc3NhZ2UoYm9keS51c2VySWQsIGJvZHkubWVzc2FnZSk7CiAgICByZXR1cm4gUmVzcG9uc2UuanNvbihyZXN1bHQpOwogIH0KCiAgY29uc3QgbWVzc2FnZXMgPSBhd2FpdCBzdHViLmdldE1lc3NhZ2VzKCk7CiAgcmV0dXJuIFJlc3BvbnNlLmpzb24obWVzc2FnZXMpOwp9CmBgYAoKIyMgUmVxdWVzdCBWYWxpZGF0aW9uCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IHogfSBmcm9tICJ6b2QiOwoKY29uc3QgU2VuZE1lc3NhZ2VTY2hlbWEgPSB6Lm9iamVjdCh7CiAgdXNlcklkOiB6LnN0cmluZygpLm1pbigxKSwKICBtZXNzYWdlOiB6LnN0cmluZygpLm1pbigxKS5tYXgoMTAwMCksCn0pOwoKYXN5bmMgZnVuY3Rpb24gaGFuZGxlU2VuZE1lc3NhZ2UocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgY29uc3QgYm9keSA9IGF3YWl0IHJlcXVlc3QuanNvbigpOwogIGNvbnN0IHJlc3VsdCA9IFNlbmRNZXNzYWdlU2NoZW1hLnNhZmVQYXJzZShib2R5KTsKCiAgaWYgKCFyZXN1bHQuc3VjY2VzcykgewogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oCiAgICAgIHsgZXJyb3I6ICJWYWxpZGF0aW9uIGZhaWxlZCIsIGRldGFpbHM6IHJlc3VsdC5lcnJvci5pc3N1ZXMgfSwKICAgICAgeyBzdGF0dXM6IDQwMCB9CiAgICApOwogIH0KCiAgY29uc3Qgc3R1YiA9IGVudi5DSEFUX1JPT00uZ2V0QnlOYW1lKHJlc3VsdC5kYXRhLnVzZXJJZCk7CiAgY29uc3QgbWVzc2FnZSA9IGF3YWl0IHN0dWIuc2VuZE1lc3NhZ2UocmVzdWx0LmRhdGEudXNlcklkLCByZXN1bHQuZGF0YS5tZXNzYWdlKTsKICByZXR1cm4gUmVzcG9uc2UuanNvbihtZXNzYWdlKTsKfQpgYGAKCiMjIE9ic2VydmFiaWxpdHkgJiBMb2dnaW5nCgojIyMgU3RydWN0dXJlZCBMb2dnaW5nCgpgYGB0eXBlc2NyaXB0CmZ1bmN0aW9uIGxvZyhsZXZlbDogImluZm8iIHwgIndhcm4iIHwgImVycm9yIiwgbWVzc2FnZTogc3RyaW5nLCBkYXRhPzogUmVjb3JkPHN0cmluZywgdW5rbm93bj4pIHsKICBjb25zb2xlLmxvZyhKU09OLnN0cmluZ2lmeSh7CiAgICBsZXZlbCwKICAgIG1lc3NhZ2UsCiAgICB0aW1lc3RhbXA6IG5ldyBEYXRlKCkudG9JU09TdHJpbmcoKSwKICAgIC4uLmRhdGEsCiAgfSkpOwp9CgovLyBVc2FnZQpsb2coImluZm8iLCAiUmVxdWVzdCByZWNlaXZlZCIsIHsgcGF0aDogdXJsLnBhdGhuYW1lLCBtZXRob2Q6IHJlcXVlc3QubWV0aG9kIH0pOwpsb2coImVycm9yIiwgIkRPIGNhbGwgZmFpbGVkIiwgeyByb29tSWQsIGVycm9yOiBTdHJpbmcoZXJyb3IpIH0pOwpgYGAKCiMjIyBSZXF1ZXN0IFRyYWNpbmcKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gaGFuZGxlUmVxdWVzdChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICBjb25zdCByZXF1ZXN0SWQgPSBjcnlwdG8ucmFuZG9tVVVJRCgpOwogIGNvbnN0IHN0YXJ0VGltZSA9IERhdGUubm93KCk7CgogIHRyeSB7CiAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IHByb2Nlc3NSZXF1ZXN0KHJlcXVlc3QsIGVudik7CgogICAgbG9nKCJpbmZvIiwgIlJlcXVlc3QgY29tcGxldGVkIiwgewogICAgICByZXF1ZXN0SWQsCiAgICAgIGR1cmF0aW9uOiBEYXRlLm5vdygpIC0gc3RhcnRUaW1lLAogICAgICBzdGF0dXM6IHJlc3BvbnNlLnN0YXR1cywKICAgIH0pOwoKICAgIHJldHVybiByZXNwb25zZTsKICB9IGNhdGNoIChlcnJvcikgewogICAgbG9nKCJlcnJvciIsICJSZXF1ZXN0IGZhaWxlZCIsIHsKICAgICAgcmVxdWVzdElkLAogICAgICBkdXJhdGlvbjogRGF0ZS5ub3coKSAtIHN0YXJ0VGltZSwKICAgICAgZXJyb3I6IFN0cmluZyhlcnJvciksCiAgICB9KTsKICAgIHRocm93IGVycm9yOwogIH0KfQpgYGAKCiMjIyBUYWlsIFdvcmtlcnMgKFByb2R1Y3Rpb24pCgpGb3IgcHJvZHVjdGlvbiBsb2dnaW5nLCB1c2UgVGFpbCBXb3JrZXJzIHRvIGZvcndhcmQgbG9nczoKCmBgYGpzb25jCi8vIHdyYW5nbGVyLmpzb25jCnsKICAidGFpbF9jb25zdW1lcnMiOiBbCiAgICB7ICJzZXJ2aWNlIjogImxvZy1jb2xsZWN0b3IiIH0KICBdCn0KYGBgCgojIyBFcnJvciBIYW5kbGluZwoKIyMjIEdyYWNlZnVsIERPIEVycm9ycwoKYGBgdHlwZXNjcmlwdAphc3luYyBmdW5jdGlvbiBjYWxsRE8oc3R1YjogRHVyYWJsZU9iamVjdFN0dWI8Q2hhdFJvb20+LCBtZXRob2Q6IHN0cmluZyk6IFByb21pc2U8UmVzcG9uc2U+IHsKICB0cnkgewogICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgc3R1Yi5nZXRNZXNzYWdlcygpOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24ocmVzdWx0KTsKICB9IGNhdGNoIChlcnJvcikgewogICAgaWYgKGVycm9yIGluc3RhbmNlb2YgRXJyb3IpIHsKICAgICAgLy8gRE8gdGhyZXcgYW4gZXJyb3IKICAgICAgbG9nKCJlcnJvciIsICJETyBvcGVyYXRpb24gZmFpbGVkIiwgeyBlcnJvcjogZXJyb3IubWVzc2FnZSB9KTsKICAgICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oCiAgICAgICAgeyBlcnJvcjogIlNlcnZpY2UgdGVtcG9yYXJpbHkgdW5hdmFpbGFibGUiIH0sCiAgICAgICAgeyBzdGF0dXM6IDUwMyB9CiAgICAgICk7CiAgICB9CiAgICB0aHJvdyBlcnJvcjsKICB9Cn0KYGBgCgojIyMgVGltZW91dCBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdAphc3luYyBmdW5jdGlvbiB3aXRoVGltZW91dDxUPihwcm9taXNlOiBQcm9taXNlPFQ+LCBtczogbnVtYmVyKTogUHJvbWlzZTxUPiB7CiAgY29uc3QgdGltZW91dCA9IG5ldyBQcm9taXNlPG5ldmVyPigoXywgcmVqZWN0KSA9PgogICAgc2V0VGltZW91dCgoKSA9PiByZWplY3QobmV3IEVycm9yKCJUaW1lb3V0IikpLCBtcykKICApOwogIHJldHVybiBQcm9taXNlLnJhY2UoW3Byb21pc2UsIHRpbWVvdXRdKTsKfQoKLy8gVXNhZ2UKY29uc3QgcmVzdWx0ID0gYXdhaXQgd2l0aFRpbWVvdXQoc3R1Yi5wcm9jZXNzRGF0YShkYXRhKSwgNTAwMCk7CmBgYAoKIyMgQ09SUyBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdApmdW5jdGlvbiBjb3JzSGVhZGVycygpOiBIZWFkZXJzSW5pdCB7CiAgcmV0dXJuIHsKICAgICJBY2Nlc3MtQ29udHJvbC1BbGxvdy1PcmlnaW4iOiAiKiIsCiAgICAiQWNjZXNzLUNvbnRyb2wtQWxsb3ctTWV0aG9kcyI6ICJHRVQsIFBPU1QsIFBVVCwgREVMRVRFLCBPUFRJT05TIiwKICAgICJBY2Nlc3MtQ29udHJvbC1BbGxvdy1IZWFkZXJzIjogIkNvbnRlbnQtVHlwZSwgQXV0aG9yaXphdGlvbiIsCiAgfTsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgaWYgKHJlcXVlc3QubWV0aG9kID09PSAiT1BUSU9OUyIpIHsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZShudWxsLCB7IGhlYWRlcnM6IGNvcnNIZWFkZXJzKCkgfSk7CiAgICB9CgogICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBoYW5kbGVSZXF1ZXN0KHJlcXVlc3QsIGVudik7CiAgICAKICAgIC8vIEFkZCBDT1JTIGhlYWRlcnMgdG8gcmVzcG9uc2UKICAgIGNvbnN0IG5ld0hlYWRlcnMgPSBuZXcgSGVhZGVycyhyZXNwb25zZS5oZWFkZXJzKTsKICAgIE9iamVjdC5lbnRyaWVzKGNvcnNIZWFkZXJzKCkpLmZvckVhY2goKFtrLCB2XSkgPT4gbmV3SGVhZGVycy5zZXQoaywgdikpOwogICAgCiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKHJlc3BvbnNlLmJvZHksIHsKICAgICAgc3RhdHVzOiByZXNwb25zZS5zdGF0dXMsCiAgICAgIGhlYWRlcnM6IG5ld0hlYWRlcnMsCiAgICB9KTsKICB9LAp9OwpgYGAKCiMjIFNlY3JldHMgTWFuYWdlbWVudAoKU2V0IHNlY3JldHMgdmlhIHdyYW5nbGVyIENMSSAobm90IGluIGNvbmZpZyBmaWxlcyk6CgpgYGBiYXNoCndyYW5nbGVyIHNlY3JldCBwdXQgQVBJX0tFWQp3cmFuZ2xlciBzZWNyZXQgcHV0IERBVEFCQVNFX1VSTApgYGAKCkFjY2VzcyBpbiBjb2RlOgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IGFwaUtleSA9IGVudi5BUElfS0VZOyAvLyBGcm9tIHNlY3JldAogICAgLy8gLi4uCiAgfSwKfTsKYGBgCgojIyBEZXZlbG9wbWVudCBDb21tYW5kcwoKYGBgYmFzaAojIExvY2FsIGRldmVsb3BtZW50CndyYW5nbGVyIGRldgoKIyBEZXBsb3kKd3JhbmdsZXIgZGVwbG95CgojIFRhaWwgbG9ncwp3cmFuZ2xlciB0YWlsCgojIExpc3QgRE9zCndyYW5nbGVyIGQxIGV4ZWN1dGUgREIgLS1jb21tYW5kICJTRUxFQ1QgKiBGUk9NIF9jZl9ETyIKYGBgCg==
+# Cloudflare Workers Best Practices
+
+High-level guidance for Workers that invoke Durable Objects.
+
+## Wrangler Configuration
+
+### wrangler.jsonc (Recommended)
+
+```jsonc
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-12-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "durable_objects": {
+    "bindings": [
+      { "name": "CHAT_ROOM", "class_name": "ChatRoom" },
+      { "name": "USER_SESSION", "class_name": "UserSession" }
+    ]
+  },
+
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["ChatRoom", "UserSession"] }
+  ],
+
+  // Environment variables
+  "vars": {
+    "ENVIRONMENT": "production"
+  },
+
+  // KV namespaces
+  "kv_namespaces": [
+    { "binding": "CONFIG", "id": "abc123" }
+  ],
+
+  // R2 buckets
+  "r2_buckets": [
+    { "binding": "UPLOADS", "bucket_name": "my-uploads" }
+  ],
+
+  // D1 databases
+  "d1_databases": [
+    { "binding": "DB", "database_id": "xyz789" }
+  ]
+}
+```
+
+### wrangler.toml (Alternative)
+
+```toml
+name = "my-worker"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[durable_objects.bindings]]
+name = "CHAT_ROOM"
+class_name = "ChatRoom"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ChatRoom"]
+
+[vars]
+ENVIRONMENT = "production"
+```
+
+## TypeScript Types
+
+### Environment Interface
+
+```typescript
+// src/types.ts
+import { ChatRoom } from "./durable-objects/chat-room";
+import { UserSession } from "./durable-objects/user-session";
+
+export interface Env {
+  // Durable Objects
+  CHAT_ROOM: DurableObjectNamespace<ChatRoom>;
+  USER_SESSION: DurableObjectNamespace<UserSession>;
+
+  // KV
+  CONFIG: KVNamespace;
+
+  // R2
+  UPLOADS: R2Bucket;
+
+  // D1
+  DB: D1Database;
+
+  // Environment variables
+  ENVIRONMENT: string;
+  API_KEY: string; // From secrets
+}
+```
+
+### Export Durable Object Classes
+
+```typescript
+// src/index.ts
+export { ChatRoom } from "./durable-objects/chat-room";
+export { UserSession } from "./durable-objects/user-session";
+
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Worker handler
+  },
+};
+```
+
+## Worker Handler Pattern
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const url = new URL(request.url);
+
+    try {
+      // Route to appropriate handler
+      if (url.pathname.startsWith("/api/rooms")) {
+        return handleRooms(request, env);
+      }
+      if (url.pathname.startsWith("/api/users")) {
+        return handleUsers(request, env);
+      }
+
+      return new Response("Not Found", { status: 404 });
+    } catch (error) {
+      console.error("Request failed:", error);
+      return new Response("Internal Server Error", { status: 500 });
+    }
+  },
+};
+
+async function handleRooms(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const roomId = url.searchParams.get("room");
+
+  if (!roomId) {
+    return Response.json({ error: "Missing room parameter" }, { status: 400 });
+  }
+
+  const stub = env.CHAT_ROOM.getByName(roomId);
+
+  if (request.method === "POST") {
+    const body = await request.json<{ userId: string; message: string }>();
+    const result = await stub.sendMessage(body.userId, body.message);
+    return Response.json(result);
+  }
+
+  const messages = await stub.getMessages();
+  return Response.json(messages);
+}
+```
+
+## Request Validation
+
+```typescript
+import { z } from "zod";
+
+const SendMessageSchema = z.object({
+  userId: z.string().min(1),
+  message: z.string().min(1).max(1000),
+});
+
+async function handleSendMessage(request: Request, env: Env): Promise<Response> {
+  const body = await request.json();
+  const result = SendMessageSchema.safeParse(body);
+
+  if (!result.success) {
+    return Response.json(
+      { error: "Validation failed", details: result.error.issues },
+      { status: 400 }
+    );
+  }
+
+  const stub = env.CHAT_ROOM.getByName(result.data.userId);
+  const message = await stub.sendMessage(result.data.userId, result.data.message);
+  return Response.json(message);
+}
+```
+
+## Observability & Logging
+
+### Structured Logging
+
+```typescript
+function log(level: "info" | "warn" | "error", message: string, data?: Record<string, unknown>) {
+  console.log(JSON.stringify({
+    level,
+    message,
+    timestamp: new Date().toISOString(),
+    ...data,
+  }));
+}
+
+// Usage
+log("info", "Request received", { path: url.pathname, method: request.method });
+log("error", "DO call failed", { roomId, error: String(error) });
+```
+
+### Request Tracing
+
+```typescript
+async function handleRequest(request: Request, env: Env): Promise<Response> {
+  const requestId = crypto.randomUUID();
+  const startTime = Date.now();
+
+  try {
+    const response = await processRequest(request, env);
+
+    log("info", "Request completed", {
+      requestId,
+      duration: Date.now() - startTime,
+      status: response.status,
+    });
+
+    return response;
+  } catch (error) {
+    log("error", "Request failed", {
+      requestId,
+      duration: Date.now() - startTime,
+      error: String(error),
+    });
+    throw error;
+  }
+}
+```
+
+### Tail Workers (Production)
+
+For production logging, use Tail Workers to forward logs:
+
+```jsonc
+// wrangler.jsonc
+{
+  "tail_consumers": [
+    { "service": "log-collector" }
+  ]
+}
+```
+
+## Error Handling
+
+### Graceful DO Errors
+
+```typescript
+async function callDO(stub: DurableObjectStub<ChatRoom>, method: string): Promise<Response> {
+  try {
+    const result = await stub.getMessages();
+    return Response.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      // DO threw an error
+      log("error", "DO operation failed", { error: error.message });
+      return Response.json(
+        { error: "Service temporarily unavailable" },
+        { status: 503 }
+      );
+    }
+    throw error;
+  }
+}
+```
+
+### Timeout Handling
+
+```typescript
+async function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  const timeout = new Promise<never>((_, reject) =>
+    setTimeout(() => reject(new Error("Timeout")), ms)
+  );
+  return Promise.race([promise, timeout]);
+}
+
+// Usage
+const result = await withTimeout(stub.processData(data), 5000);
+```
+
+## CORS Handling
+
+```typescript
+function corsHeaders(): HeadersInit {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    if (request.method === "OPTIONS") {
+      return new Response(null, { headers: corsHeaders() });
+    }
+
+    const response = await handleRequest(request, env);
+    
+    // Add CORS headers to response
+    const newHeaders = new Headers(response.headers);
+    Object.entries(corsHeaders()).forEach(([k, v]) => newHeaders.set(k, v));
+    
+    return new Response(response.body, {
+      status: response.status,
+      headers: newHeaders,
+    });
+  },
+};
+```
+
+## Secrets Management
+
+Set secrets via wrangler CLI (not in config files):
+
+```bash
+wrangler secret put API_KEY
+wrangler secret put DATABASE_URL
+```
+
+Access in code:
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const apiKey = env.API_KEY; // From secret
+    // ...
+  },
+};
+```
+
+## Development Commands
+
+```bash
+# Local development
+wrangler dev
+
+# Deploy
+wrangler deploy
+
+# Tail logs
+wrangler tail
+
+# List DOs
+wrangler d1 execute DB --command "SELECT * FROM _cf_DO"
+```

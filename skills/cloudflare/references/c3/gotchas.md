@@ -1,1 +1,92 @@
-IyBDMyBUcm91Ymxlc2hvb3RpbmcKCiMjIERlcGxveW1lbnQgSXNzdWVzCgojIyMgUGxhY2Vob2xkZXIgSURzCgoqKkVycm9yOioqICJJbnZhbGlkIG5hbWVzcGFjZSBJRCIgIAoqKkZpeDoqKiBSZXBsYWNlIHBsYWNlaG9sZGVycyBpbiB3cmFuZ2xlci5qc29uYyB3aXRoIHJlYWwgSURzOgpgYGBiYXNoCm5weCB3cmFuZ2xlciBrdiBuYW1lc3BhY2UgY3JlYXRlIE1ZX0tWICAjIEdldCByZWFsIElECmBgYAoKIyMjIEF1dGhlbnRpY2F0aW9uCgoqKkVycm9yOioqICJOb3QgYXV0aGVudGljYXRlZCIgIAoqKkZpeDoqKiBgbnB4IHdyYW5nbGVyIGxvZ2luYCBvciBzZXQgYENMT1VERkxBUkVfQVBJX1RPS0VOYAoKIyMjIE5hbWUgQ29uZmxpY3QKCioqRXJyb3I6KiogIldvcmtlciBhbHJlYWR5IGV4aXN0cyIgIAoqKkZpeDoqKiBDaGFuZ2UgYG5hbWVgIGluIHdyYW5nbGVyLmpzb25jCgojIyBQbGF0Zm9ybSBTZWxlY3Rpb24KCnwgTmVlZCB8IFBsYXRmb3JtIHwKfC0tLS0tLXwtLS0tLS0tLS0tfAp8IEdpdCBpbnRlZ3JhdGlvbiwgYnJhbmNoIHByZXZpZXdzIHwgYC0tcGxhdGZvcm09cGFnZXNgIHwKfCBEdXJhYmxlIE9iamVjdHMsIEQxLCBRdWV1ZXMgfCBXb3JrZXJzIChkZWZhdWx0KSB8CgpXcm9uZyBwbGF0Zm9ybT8gUmVjcmVhdGUgd2l0aCBjb3JyZWN0IGAtLXBsYXRmb3JtYCBmbGFnLgoKIyMgVHlwZVNjcmlwdCBJc3N1ZXMKCioqIkNhbm5vdCBmaW5kIG5hbWUgJ0tWTmFtZXNwYWNlJyIqKgpgYGBiYXNoCm5wbSBydW4gY2YtdHlwZWdlbiAgIyBSZWdlbmVyYXRlIHR5cGVzCiMgUmVzdGFydCBUUyBzZXJ2ZXIgaW4gZWRpdG9yCmBgYAoKKipNaXNzaW5nIHR5cGVzIGFmdGVyIGNvbmZpZyBjaGFuZ2U6KiogUmUtcnVuIGBucG0gcnVuIGNmLXR5cGVnZW5gCgojIyBQYWNrYWdlIE1hbmFnZXIKCioqTXVsdGlwbGUgbG9ja2ZpbGVzIGNhdXNpbmcgaXNzdWVzOioqCmBgYGJhc2gKcm0gcG5wbS1sb2NrLnlhbWwgICMgSWYgdXNpbmcgbnBtCnJtIHBhY2thZ2UtbG9jay5qc29uICAjIElmIHVzaW5nIHBucG0KYGBgCgojIyBDSS9DRAoKKipDSSBoYW5ncyBvbiBwcm9tcHRzOioqCmBgYGJhc2gKbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCBteS1hcHAgLS0gXAogIC0tdHlwZT1oZWxsby13b3JsZCAtLWxhbmc9dHMgLS1uby1naXQgLS1uby1kZXBsb3kKYGBgCgoqKkF1dGggaW4gQ0k6KioKYGBgeWFtbAplbnY6CiAgQ0xPVURGTEFSRV9BUElfVE9LRU46ICR7eyBzZWNyZXRzLkNMT1VERkxBUkVfQVBJX1RPS0VOIH19CiAgQ0xPVURGTEFSRV9BQ0NPVU5UX0lEOiAke3sgc2VjcmV0cy5DTE9VREZMQVJFX0FDQ09VTlRfSUQgfX0KYGBgCgojIyBGcmFtZXdvcmstU3BlY2lmaWMKCnwgRnJhbWV3b3JrIHwgSXNzdWUgfCBGaXggfAp8LS0tLS0tLS0tLS18LS0tLS0tLXwtLS0tLXwKfCBOZXh0LmpzIHwgY3JlYXRlLW5leHQtYXBwIGZhaWxlZCB8IGBucG0gY2FjaGUgY2xlYW4gLS1mb3JjZWAsIHJldHJ5IHwKfCBBc3RybyB8IEFkYXB0ZXIgbWlzc2luZyB8IEluc3RhbGwgYEBhc3Ryb2pzL2Nsb3VkZmxhcmVgIHwKfCBSZW1peCB8IE1vZHVsZSBlcnJvcnMgfCBVcGRhdGUgYEByZW1peC1ydW4vY2xvdWRmbGFyZSpgIHwKCiMjIENvbXBhdGliaWxpdHkgRGF0ZQoKKioiRmVhdHVyZSBYIHJlcXVpcmVzIGNvbXBhdGliaWxpdHlfZGF0ZSA+PSAuLi4iKiogIAoqKkZpeDoqKiBVcGRhdGUgYGNvbXBhdGliaWxpdHlfZGF0ZWAgaW4gd3JhbmdsZXIuanNvbmMgdG8gdG9kYXkncyBkYXRlCgojIyBOb2RlLmpzIFZlcnNpb24KCioqIk5vZGUuanMgdmVyc2lvbiBub3Qgc3VwcG9ydGVkIioqICAKKipGaXg6KiogSW5zdGFsbCBOb2RlLmpzIDE4KyAoYG52bSBpbnN0YWxsIDIwYCkKCiMjIFF1aWNrIFJlZmVyZW5jZQoKfCBFcnJvciB8IENhdXNlIHwgRml4IHwKfC0tLS0tLS18LS0tLS0tLXwtLS0tLXwKfCBJbnZhbGlkIG5hbWVzcGFjZSBJRCB8IFBsYWNlaG9sZGVyIGJpbmRpbmcgfCBDcmVhdGUgcmVzb3VyY2UsIHVwZGF0ZSBjb25maWcgfAp8IE5vdCBhdXRoZW50aWNhdGVkIHwgTm8gbG9naW4gfCBgbnB4IHdyYW5nbGVyIGxvZ2luYCB8CnwgQ2Fubm90IGZpbmQgS1ZOYW1lc3BhY2UgfCBNaXNzaW5nIHR5cGVzIHwgYG5wbSBydW4gY2YtdHlwZWdlbmAgfAp8IFdvcmtlciBhbHJlYWR5IGV4aXN0cyB8IE5hbWUgY29uZmxpY3QgfCBDaGFuZ2UgYG5hbWVgIHwKfCBDSSBoYW5ncyB8IE1pc3NpbmcgZmxhZ3MgfCBBZGQgLS10eXBlLCAtLWxhbmcsIC0tbm8tZGVwbG95IHwKfCBUZW1wbGF0ZSBub3QgZm91bmQgfCBCYWQgbmFtZSB8IENoZWNrIGNsb3VkZmxhcmUvdGVtcGxhdGVzIHwK
+# C3 Troubleshooting
+
+## Deployment Issues
+
+### Placeholder IDs
+
+**Error:** "Invalid namespace ID"  
+**Fix:** Replace placeholders in wrangler.jsonc with real IDs:
+```bash
+npx wrangler kv namespace create MY_KV  # Get real ID
+```
+
+### Authentication
+
+**Error:** "Not authenticated"  
+**Fix:** `npx wrangler login` or set `CLOUDFLARE_API_TOKEN`
+
+### Name Conflict
+
+**Error:** "Worker already exists"  
+**Fix:** Change `name` in wrangler.jsonc
+
+## Platform Selection
+
+| Need | Platform |
+|------|----------|
+| Git integration, branch previews | `--platform=pages` |
+| Durable Objects, D1, Queues | Workers (default) |
+
+Wrong platform? Recreate with correct `--platform` flag.
+
+## TypeScript Issues
+
+**"Cannot find name 'KVNamespace'"**
+```bash
+npm run cf-typegen  # Regenerate types
+# Restart TS server in editor
+```
+
+**Missing types after config change:** Re-run `npm run cf-typegen`
+
+## Package Manager
+
+**Multiple lockfiles causing issues:**
+```bash
+rm pnpm-lock.yaml  # If using npm
+rm package-lock.json  # If using pnpm
+```
+
+## CI/CD
+
+**CI hangs on prompts:**
+```bash
+npm create cloudflare@latest my-app -- \
+  --type=hello-world --lang=ts --no-git --no-deploy
+```
+
+**Auth in CI:**
+```yaml
+env:
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+```
+
+## Framework-Specific
+
+| Framework | Issue | Fix |
+|-----------|-------|-----|
+| Next.js | create-next-app failed | `npm cache clean --force`, retry |
+| Astro | Adapter missing | Install `@astrojs/cloudflare` |
+| Remix | Module errors | Update `@remix-run/cloudflare*` |
+
+## Compatibility Date
+
+**"Feature X requires compatibility_date >= ..."**  
+**Fix:** Update `compatibility_date` in wrangler.jsonc to today's date
+
+## Node.js Version
+
+**"Node.js version not supported"**  
+**Fix:** Install Node.js 18+ (`nvm install 20`)
+
+## Quick Reference
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| Invalid namespace ID | Placeholder binding | Create resource, update config |
+| Not authenticated | No login | `npx wrangler login` |
+| Cannot find KVNamespace | Missing types | `npm run cf-typegen` |
+| Worker already exists | Name conflict | Change `name` |
+| CI hangs | Missing flags | Add --type, --lang, --no-deploy |
+| Template not found | Bad name | Check cloudflare/templates |

@@ -1,1 +1,122 @@
-IyBSMiBEYXRhIENhdGFsb2cgQVBJIFJlZmVyZW5jZQoKVHdvIEFQSXM6IHRoZSAqKmNvbnRyb2wtcGxhbmUgUkVTVCBBUEkqKiAoQ2xvdWRmbGFyZS1zcGVjaWZpYykgYW5kIHRoZSAqKkljZWJlcmcgUkVTVCBjYXRhbG9nIEFQSSoqIChzdGFuZGFyZCwgdXNlZCB2aWEgUHlJY2ViZXJnL1B5U3BhcmspLiBGb3IgUHlJY2ViZXJnIG1ldGhvZCBkZXRhaWxzIHB1bGwgYGh0dHBzOi8vcHkuaWNlYmVyZy5hcGFjaGUub3JnL2A7IGZvciBlbmdpbmUgY29uZmlncyBzZWUgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yMi9kYXRhLWNhdGFsb2cvY29uZmlnLWV4YW1wbGVzL2AuCgojIyBDb250cm9sLVBsYW5lIFJFU1QgQVBJCgpCYXNlOiBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3tBQ0NPVU5UX0lEfS9yMi1jYXRhbG9nL3tCVUNLRVR9YApBdXRoOiBgQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU5gCgp8IE9wZXJhdGlvbiB8IE1ldGhvZCB8IFBhdGggfAp8LS0tLS0tLS0tLS18LS0tLS0tLS18LS0tLS0tfAp8IEdldCBjYXRhbG9nIGRldGFpbHMgfCBHRVQgfCBgL3IyLWNhdGFsb2cve2J1Y2tldH1gIHwKfCBFbmFibGUgLyBkaXNhYmxlIHwgUE9TVCB8IGAvcjItY2F0YWxvZy97YnVja2V0fS9lbmFibGVgIMK3IGAvZGlzYWJsZWAgfAp8IFN0b3JlIGNvbXBhY3Rpb24gY3JlZGVudGlhbCB8IFBPU1QgfCBgL3IyLWNhdGFsb2cve2J1Y2tldH0vY3JlZGVudGlhbGAgfAp8IExpc3QgbmFtZXNwYWNlcyB8IEdFVCB8IGAvbmFtZXNwYWNlc2AgfAp8IExpc3QgdGFibGVzIHwgR0VUIHwgYC9uYW1lc3BhY2VzL3tuc30vdGFibGVzYCB8CnwgKipHZXQgdGFibGUgbWV0YWRhdGEqKiB8IEdFVCB8IGAvbmFtZXNwYWNlcy97bnN9L3RhYmxlcy97dGFibGV9YCB8CnwgR2V0L3VwZGF0ZSBtYWludGVuYW5jZSBjb25maWcgfCBHRVQvUE9TVCB8IGAvbWFpbnRlbmFuY2UtY29uZmlnc2AgYW5kIGAvbmFtZXNwYWNlcy97bnN9L3RhYmxlcy97dGFibGV9L21haW50ZW5hbmNlLWNvbmZpZ3NgIHwKCkxpc3QgZW5kcG9pbnRzIGFjY2VwdCBgP3JldHVybl91dWlkcz10cnVlYCwgYD9yZXR1cm5fZGV0YWlscz10cnVlYCwgYD9wYXJlbnQ9e25zfWAsIGFuZCBwYWdpbmF0aW9uLiAqKk5lc3RlZCBuYW1lc3BhY2VzIHVzZSBgJTFGYCAoVW5pdCBTZXBhcmF0b3IpKiosIG5vdCBgL2Agb3IgYC5gOiBgL25hbWVzcGFjZXMvcGFyZW50JTFGY2hpbGQvdGFibGVzYC4KCmBgYGJhc2gKIyBDYXRhbG9nIGRldGFpbHMgKHN0YXR1cywgbWFpbnRlbmFuY2VfY29uZmlnLCBjcmVkZW50aWFsX3N0YXR1cykKY3VybCAtcyAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRBQ0NPVU5UX0lEL3IyLWNhdGFsb2cvJEJVQ0tFVCIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJEFQSV9UT0tFTiIKCiMgU3RvcmUgdG9rZW4gZm9yIGNvbXBhY3Rpb24gKHB1cmUtQVBJIHNldHVwcykKY3VybCAtcyAtWCBQT1NUICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJEFDQ09VTlRfSUQvcjItY2F0YWxvZy8kQlVDS0VUL2NyZWRlbnRpYWwiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCAneyJ0b2tlbiI6ICInJEFQSV9UT0tFTicifScKCiMgVXBkYXRlIG1haW50ZW5hbmNlIGNvbmZpZyAoYWxsIGZpZWxkcyBvcHRpb25hbDsgdGFibGUtbGV2ZWwgb3ZlcnJpZGVzIGNhdGFsb2ctbGV2ZWwpCmN1cmwgLXMgLVggUE9TVCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRBQ0NPVU5UX0lEL3IyLWNhdGFsb2cvJEJVQ0tFVC9tYWludGVuYW5jZS1jb25maWdzIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIiAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3siY29tcGFjdGlvbiI6IHsic3RhdGUiOiAiZW5hYmxlZCIsICJ0YXJnZXRfc2l6ZV9tYiI6ICIyNTYifSwKICAgICAgICJzbmFwc2hvdF9leHBpcmF0aW9uIjogeyJzdGF0ZSI6ICJlbmFibGVkIiwgIm1pbl9zbmFwc2hvdHNfdG9fa2VlcCI6IDEwLCAibWF4X3NuYXBzaG90X2FnZSI6ICI3ZCJ9fScKYGBgCgojIyMgR2V0IFRhYmxlIChtZXRhZGF0YSBpbnRyb3NwZWN0aW9uKQoKYEdFVCAvbmFtZXNwYWNlcy97bnN9L3RhYmxlcy97dGFibGV9YCByZXR1cm5zIHNjaGVtYSwgcGFydGl0aW9uIHNwZWMsIHNvcnQgb3JkZXIsIGFuZCBzbmFwc2hvdCBpbmZvIOKAlCBsaWtlIEljZWJlcmcgImxvYWQgdGFibGUiIGJ1dCBvbiB0aGUgY29udHJvbCBwbGFuZSwgd2l0aCBzbmFwc2hvdHMgcHJ1bmVkIHRvIHRoZSBtb3N0IHJlY2VudCAxMC4gKE5ld2VyIHRoYW4gdGhlIHB1Ymxpc2hlZCBBUEkgZG9jcy4pCgpgYGBiYXNoCmN1cmwgLXMgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQUNDT1VOVF9JRC9yMi1jYXRhbG9nLyRCVUNLRVQvbmFtZXNwYWNlcy9saXZlL3RhYmxlcy9lYXJ0aHF1YWtlcyIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJEFQSV9UT0tFTiIKYGBgCgpgYGBqc29uCnsicmVzdWx0IjogewogICJpZGVudGlmaWVyIjogeyJuYW1lc3BhY2UiOiBbImxpdmUiXSwgIm5hbWUiOiAiZWFydGhxdWFrZXMifSwKICAidGFibGVfdXVpZCI6ICIwMTllZGNjZi0zYWM4LTczZTMtLi4uIiwKICAibWV0YWRhdGFfbG9jYXRpb24iOiAiczM6Ly9saXZlLWRhdGEvX19yMl9kYXRhX2NhdGFsb2cvLi4uL21ldGFkYXRhLzAxMjI1LS4uLi5tZXRhZGF0YS5qc29uIiwKICAidG90YWxfc25hcHNob3RzIjogMTIyNSwKICAicmV0dXJuZWRfc25hcHNob3RzIjogMTAsCiAgIm1ldGFkYXRhIjogeyAvKiBzdGFuZGFyZCBJY2ViZXJnIFRhYmxlTWV0YWRhdGE6IHNjaGVtYXMsIHBhcnRpdGlvbi1zcGVjcywgc29ydC1vcmRlcnMsCiAgICAgICAgICAgICAgICAgICBwcm9wZXJ0aWVzLCBjdXJyZW50LXNuYXBzaG90LWlkLCBzbmFwc2hvdHMgKOKJpDEwKSwgc25hcHNob3QtbG9nLCByZWZzICovIH0KfSwgInN1Y2Nlc3MiOiB0cnVlfQpgYGAKCnwgRmllbGQgfCBEZXNjcmlwdGlvbiB8CnwtLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYGlkZW50aWZpZXJgIHwgYHtuYW1lc3BhY2U6IFsuLi5dLCBuYW1lfWAgfAp8IGB0YWJsZV91dWlkYCB8IEljZWJlcmcgdGFibGUgVVVJRCB8CnwgYG1ldGFkYXRhX2xvY2F0aW9uYCB8IFIyIHBhdGggdG8gY3VycmVudCBtZXRhZGF0YSBmaWxlIHwKfCBgdG90YWxfc25hcHNob3RzYCB8IFRvdGFsIGJlZm9yZSBwcnVuaW5nIHwKfCBgcmV0dXJuZWRfc25hcHNob3RzYCB8IENvdW50IGluIGBtZXRhZGF0YS5zbmFwc2hvdHNgIChtYXggMTApIHwKfCBgbWV0YWRhdGFgIHwgU3RhbmRhcmQgW0ljZWJlcmcgVGFibGVNZXRhZGF0YV0oaHR0cHM6Ly9pY2ViZXJnLmFwYWNoZS5vcmcvc3BlYy8jdGFibGUtbWV0YWRhdGEtZmllbGRzKSwgYXJyYXlzIHBydW5lZCB0byAxMCB8CgojIyMgRXJyb3IgRm9ybWF0CgpgYGBqc29uCnsic3VjY2VzcyI6IGZhbHNlLCAiZXJyb3JzIjogW3siY29kZSI6IDEwMDAwLCAibWVzc2FnZSI6ICJBdXRoZW50aWNhdGlvbiBlcnJvciJ9XX0KYGBgCgpTdGFuZGFyZCBIVFRQIGNvZGVzICg0MDEgYXV0aCwgNDAzIHBlcm1zLCA0MDQgbm90IGVuYWJsZWQvZm91bmQsIDQwOSBjb25mbGljdCkuCgojIyBJY2ViZXJnIFJFU1QgQ2F0YWxvZyBBUEkgKHZpYSBQeUljZWJlcmcpCgpTdGFuZGFyZCBbSWNlYmVyZyBSRVNUIENhdGFsb2ddKGh0dHBzOi8vZ2l0aHViLmNvbS9hcGFjaGUvaWNlYmVyZy9ibG9iL21haW4vb3Blbi1hcGkvcmVzdC1jYXRhbG9nLW9wZW4tYXBpLnlhbWwpLiBCYXNlOiBgaHR0cHM6Ly9jYXRhbG9nLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS97QUNDT1VOVF9JRH0ve0JVQ0tFVH1gLiBUaGUgYC9jb25maWdgIHJvdXRlIG5lZWRzIGA/d2FyZWhvdXNlPXtXQVJFSE9VU0V9YC4KCmBgYHB5dGhvbgpmcm9tIHB5aWNlYmVyZy5jYXRhbG9nLnJlc3QgaW1wb3J0IFJlc3RDYXRhbG9nCmNhdGFsb2cgPSBSZXN0Q2F0YWxvZyhuYW1lPSJyMiIsIHdhcmVob3VzZT1XQVJFSE9VU0UsIHVyaT1DQVRBTE9HX1VSSSwgdG9rZW49VE9LRU4pCmBgYAoKQ29tbW9uIG9wZXJhdGlvbnMgKHNlZSBQeUljZWJlcmcgZG9jcyBmb3IgZnVsbCBzaWduYXR1cmVzKToKCmBgYHB5dGhvbgpjYXRhbG9nLmNyZWF0ZV9uYW1lc3BhY2VfaWZfbm90X2V4aXN0cygibG9ncyIpCmNhdGFsb2cubGlzdF90YWJsZXMoImxvZ3MiKQp0YWJsZSA9IGNhdGFsb2cuY3JlYXRlX3RhYmxlKCgibG9ncyIsICJldmVudHMiKSwgc2NoZW1hPXNjaGVtYSkgICAjIHB5aWNlYmVyZy5zY2hlbWEuU2NoZW1hCnRhYmxlID0gY2F0YWxvZy5sb2FkX3RhYmxlKCgibG9ncyIsICJldmVudHMiKSkKdGFibGUuYXBwZW5kKHB5YXJyb3dfdGFibGUpICAgICAgICAgICMgYWxzbyAub3ZlcndyaXRlKC4uLikKdGFibGUuc2Nhbihyb3dfZmlsdGVyPSJpZCA+IDEwMCIpLnRvX3BhbmRhcygpCmBgYAoKU2NoZW1hIGV2b2x1dGlvbiAoYWRkIG51bGxhYmxlIGNvbHVtbnM7IHdpZGVuIHR5cGVzIG9ubHkpOgpgYGBweXRob24Kd2l0aCB0YWJsZS51cGRhdGVfc2NoZW1hKCkgYXMgdToKICAgIHUuYWRkX2NvbHVtbigidXNlcl9pZCIsIExvbmdUeXBlKCksIGRvYz0iVXNlciBJRCIpCiAgICB1LnJlbmFtZV9jb2x1bW4oIm1zZyIsICJtZXNzYWdlIikKYGBgCgpUaW1lLXRyYXZlbDoKYGBgcHl0aG9uCnRhYmxlLnNjYW4oc25hcHNob3RfaWQ9dGFibGUuc25hcHNob3RzKClbLTJdLnNuYXBzaG90X2lkKQp0YWJsZS5zY2FuKGFzX29mX3RpbWVzdGFtcD1tc19lcG9jaCkKYGBgCgojIyBNYW51YWwgTWFpbnRlbmFuY2UgKFB5U3BhcmspCgpQcmVmZXIgYXV0b21hdGljIG1haW50ZW5hbmNlIChjb250cm9sLXBsYW5lIEFQSS93cmFuZ2xlcikuIEZvciBtYW51YWwgY29udHJvbCBvciB2ZXJ5IGxhcmdlIHRhYmxlcywgdXNlIFNwYXJrIHByb2NlZHVyZXMgKGByZXdyaXRlX2RhdGFfZmlsZXNgLCBgcmV3cml0ZV9tYW5pZmVzdHNgLCBgZXhwaXJlX3NuYXBzaG90c2AsIGByZW1vdmVfb3JwaGFuX2ZpbGVzYCkuIFNlZSBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyL2RhdGEtY2F0YWxvZy90YWJsZS1tYWludGVuYW5jZS9gLgoKYGBgcHl0aG9uCnNwYXJrLnNxbCgiQ0FMTCByMmRjLnN5c3RlbS5yZXdyaXRlX2RhdGFfZmlsZXModGFibGUgPT4gJ25zLnRibCcpIikKIyBPcnBoYW4gcmVtb3ZhbCBSRVFVSVJFUyBTMyBjcmVkZW50aWFscyAodmVuZGVkIGNyZWRzIGZhaWwgd2l0aCBOb0F1dGhXaXRoQVdTRXhjZXB0aW9uKQpzcGFyay5zcWwoIkNBTEwgcjJkYy5zeXN0ZW0ucmVtb3ZlX29ycGhhbl9maWxlcyh0YWJsZSA9PiAnbnMudGJsJywgb2xkZXJfdGhhbiA9PiBUSU1FU1RBTVAgJzIwMjYtMDItMjggMDA6MDA6MDAnKSIpCmBgYAoKIyMgU2VlIEFsc28KCi0gW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIMK3IFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIMK3IFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKQo=
+# R2 Data Catalog API Reference
+
+Two APIs: the **control-plane REST API** (Cloudflare-specific) and the **Iceberg REST catalog API** (standard, used via PyIceberg/PySpark). For PyIceberg method details pull `https://py.iceberg.apache.org/`; for engine configs see `https://developers.cloudflare.com/r2/data-catalog/config-examples/`.
+
+## Control-Plane REST API
+
+Base: `https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/r2-catalog/{BUCKET}`
+Auth: `Authorization: Bearer $API_TOKEN`
+
+| Operation | Method | Path |
+|-----------|--------|------|
+| Get catalog details | GET | `/r2-catalog/{bucket}` |
+| Enable / disable | POST | `/r2-catalog/{bucket}/enable` · `/disable` |
+| Store compaction credential | POST | `/r2-catalog/{bucket}/credential` |
+| List namespaces | GET | `/namespaces` |
+| List tables | GET | `/namespaces/{ns}/tables` |
+| **Get table metadata** | GET | `/namespaces/{ns}/tables/{table}` |
+| Get/update maintenance config | GET/POST | `/maintenance-configs` and `/namespaces/{ns}/tables/{table}/maintenance-configs` |
+
+List endpoints accept `?return_uuids=true`, `?return_details=true`, `?parent={ns}`, and pagination. **Nested namespaces use `%1F` (Unit Separator)**, not `/` or `.`: `/namespaces/parent%1Fchild/tables`.
+
+```bash
+# Catalog details (status, maintenance_config, credential_status)
+curl -s "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2-catalog/$BUCKET" \
+  -H "Authorization: Bearer $API_TOKEN"
+
+# Store token for compaction (pure-API setups)
+curl -s -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2-catalog/$BUCKET/credential" \
+  -H "Authorization: Bearer $API_TOKEN" -H "Content-Type: application/json" \
+  -d '{"token": "'$API_TOKEN'"}'
+
+# Update maintenance config (all fields optional; table-level overrides catalog-level)
+curl -s -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2-catalog/$BUCKET/maintenance-configs" \
+  -H "Authorization: Bearer $API_TOKEN" -H "Content-Type: application/json" \
+  -d '{"compaction": {"state": "enabled", "target_size_mb": "256"},
+       "snapshot_expiration": {"state": "enabled", "min_snapshots_to_keep": 10, "max_snapshot_age": "7d"}}'
+```
+
+### Get Table (metadata introspection)
+
+`GET /namespaces/{ns}/tables/{table}` returns schema, partition spec, sort order, and snapshot info — like Iceberg "load table" but on the control plane, with snapshots pruned to the most recent 10. (Newer than the published API docs.)
+
+```bash
+curl -s "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2-catalog/$BUCKET/namespaces/live/tables/earthquakes" \
+  -H "Authorization: Bearer $API_TOKEN"
+```
+
+```json
+{"result": {
+  "identifier": {"namespace": ["live"], "name": "earthquakes"},
+  "table_uuid": "019edccf-3ac8-73e3-...",
+  "metadata_location": "s3://live-data/__r2_data_catalog/.../metadata/01225-....metadata.json",
+  "total_snapshots": 1225,
+  "returned_snapshots": 10,
+  "metadata": { /* standard Iceberg TableMetadata: schemas, partition-specs, sort-orders,
+                   properties, current-snapshot-id, snapshots (≤10), snapshot-log, refs */ }
+}, "success": true}
+```
+
+| Field | Description |
+|-------|-------------|
+| `identifier` | `{namespace: [...], name}` |
+| `table_uuid` | Iceberg table UUID |
+| `metadata_location` | R2 path to current metadata file |
+| `total_snapshots` | Total before pruning |
+| `returned_snapshots` | Count in `metadata.snapshots` (max 10) |
+| `metadata` | Standard [Iceberg TableMetadata](https://iceberg.apache.org/spec/#table-metadata-fields), arrays pruned to 10 |
+
+### Error Format
+
+```json
+{"success": false, "errors": [{"code": 10000, "message": "Authentication error"}]}
+```
+
+Standard HTTP codes (401 auth, 403 perms, 404 not enabled/found, 409 conflict).
+
+## Iceberg REST Catalog API (via PyIceberg)
+
+Standard [Iceberg REST Catalog](https://github.com/apache/iceberg/blob/main/open-api/rest-catalog-open-api.yaml). Base: `https://catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}`. The `/config` route needs `?warehouse={WAREHOUSE}`.
+
+```python
+from pyiceberg.catalog.rest import RestCatalog
+catalog = RestCatalog(name="r2", warehouse=WAREHOUSE, uri=CATALOG_URI, token=TOKEN)
+```
+
+Common operations (see PyIceberg docs for full signatures):
+
+```python
+catalog.create_namespace_if_not_exists("logs")
+catalog.list_tables("logs")
+table = catalog.create_table(("logs", "events"), schema=schema)   # pyiceberg.schema.Schema
+table = catalog.load_table(("logs", "events"))
+table.append(pyarrow_table)          # also .overwrite(...)
+table.scan(row_filter="id > 100").to_pandas()
+```
+
+Schema evolution (add nullable columns; widen types only):
+```python
+with table.update_schema() as u:
+    u.add_column("user_id", LongType(), doc="User ID")
+    u.rename_column("msg", "message")
+```
+
+Time-travel:
+```python
+table.scan(snapshot_id=table.snapshots()[-2].snapshot_id)
+table.scan(as_of_timestamp=ms_epoch)
+```
+
+## Manual Maintenance (PySpark)
+
+Prefer automatic maintenance (control-plane API/wrangler). For manual control or very large tables, use Spark procedures (`rewrite_data_files`, `rewrite_manifests`, `expire_snapshots`, `remove_orphan_files`). See `https://developers.cloudflare.com/r2/data-catalog/table-maintenance/`.
+
+```python
+spark.sql("CALL r2dc.system.rewrite_data_files(table => 'ns.tbl')")
+# Orphan removal REQUIRES S3 credentials (vended creds fail with NoAuthWithAWSException)
+spark.sql("CALL r2dc.system.remove_orphan_files(table => 'ns.tbl', older_than => TIMESTAMP '2026-02-28 00:00:00')")
+```
+
+## See Also
+
+- [configuration.md](configuration.md) · [patterns.md](patterns.md) · [gotchas.md](gotchas.md)

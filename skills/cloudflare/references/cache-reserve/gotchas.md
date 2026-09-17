@@ -1,1 +1,132 @@
-IyBDYWNoZSBSZXNlcnZlIEdvdGNoYXMKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAiQXNzZXRzIE5vdCBCZWluZyBDYWNoZWQgaW4gQ2FjaGUgUmVzZXJ2ZSIKCioqQ2F1c2U6KiogQXNzZXQgaXMgbm90IGNhY2hlYWJsZSwgVFRMIDwgMTAgaG91cnMsIENvbnRlbnQtTGVuZ3RoIGhlYWRlciBtaXNzaW5nLCBvciBibG9ja2luZyBoZWFkZXJzIHByZXNlbnQgKFNldC1Db29raWUsIFZhcnk6ICopICAKKipTb2x1dGlvbjoqKiBFbnN1cmUgbWluaW11bSBUVEwgb2YgMTArIGhvdXJzIChgQ2FjaGUtQ29udHJvbDogcHVibGljLCBtYXgtYWdlPTM2MDAwYCksIGFkZCBDb250ZW50LUxlbmd0aCBoZWFkZXIsIHJlbW92ZSBTZXQtQ29va2llIGhlYWRlciwgYW5kIHNldCBgVmFyeTogQWNjZXB0LUVuY29kaW5nYCAobm90ICopCgojIyMgIlJhbmdlIFJlcXVlc3RzIE5vdCBXb3JraW5nIiAoVmlkZW8gU2Vla2luZyBGYWlscykKCioqQ2F1c2U6KiogQ2FjaGUgUmVzZXJ2ZSBkb2VzICoqTk9UKiogc3VwcG9ydCByYW5nZSByZXF1ZXN0cyAoSFRUUCAyMDYgUGFydGlhbCBDb250ZW50KSAgCioqU29sdXRpb246KiogUmFuZ2UgcmVxdWVzdHMgYnlwYXNzIENhY2hlIFJlc2VydmUgZW50aXJlbHkuIEZvciB2aWRlbyBzdHJlYW1pbmcgd2l0aCBzZWVraW5nOgotIFVzZSBlZGdlIGNhY2hlIG9ubHkgKHNob3J0ZXIgVFRMcykKLSBDb25zaWRlciBSMiB3aXRoIGRpcmVjdCBhY2Nlc3MgZm9yIHJhbmdlLWhlYXZ5IHdvcmtsb2FkcwotIEFjY2VwdCB0aGF0IHNlZWthYmxlIGNvbnRlbnQgd29uJ3QgYmVuZWZpdCBmcm9tIENhY2hlIFJlc2VydmUgcGVyc2lzdGVuY2UKCiMjIyAiT3JpZ2luIEJhbmR3aWR0aCBIaWdoZXIgVGhhbiBFeHBlY3RlZCIKCioqQ2F1c2U6KiogQ2FjaGUgUmVzZXJ2ZSBmZXRjaGVzICoqdW5jb21wcmVzc2VkKiogY29udGVudCBmcm9tIG9yaWdpbiwgZXZlbiB0aG91Z2ggaXQgc2VydmVzIGNvbXByZXNzZWQgdG8gdmlzaXRvcnMgIAoqKlNvbHV0aW9uOioqIAotIElmIG9yaWdpbiBjaGFyZ2VzIGJ5IGJhbmR3aWR0aCwgZmFjdG9yIGluIHVuY29tcHJlc3NlZCB0cmFuc2ZlciBjb3N0cwotIENhY2hlIFJlc2VydmUgY29tcHJlc3NlcyBmb3IgdmlzaXRvcnMgYXV0b21hdGljYWxseSAoc2F2ZXMgdmlzaXRvciBiYW5kd2lkdGgpCi0gQ29tcGFyZTogb3JpZ2luIGVncmVzcyBzYXZpbmdzIHZzIGhpZ2hlciB1bmNvbXByZXNzZWQgZmV0Y2ggY29zdHMKCiMjIyAiQ2xvdWRmbGFyZSBJbWFnZXMgTm90IENhY2hpbmcgd2l0aCBDYWNoZSBSZXNlcnZlIgoKKipDYXVzZToqKiBDbG91ZGZsYXJlIEltYWdlcyB3aXRoIGBWYXJ5OiBBY2NlcHRgIGhlYWRlciAoZm9ybWF0IG5lZ290aWF0aW9uKSBpcyBpbmNvbXBhdGlibGUgd2l0aCBDYWNoZSBSZXNlcnZlICAKKipTb2x1dGlvbjoqKiAKLSBDYWNoZSBSZXNlcnZlIHNpbGVudGx5IHNraXBzIGltYWdlcyB3aXRoIFZhcnkgZm9yIGZvcm1hdCBuZWdvdGlhdGlvbgotIE9yaWdpbmFsIGltYWdlcyAobm9uLXRyYW5zZm9ybWVkKSBtYXkgc3RpbGwgYmUgZWxpZ2libGUKLSBVc2UgQ2xvdWRmbGFyZSBJbWFnZXMgdmFyaWFudHMgb3IgZWRnZSBjYWNoZSBmb3IgdHJhbnNmb3JtZWQgaW1hZ2VzCgojIyMgIkhpZ2ggQ2xhc3MgQSBPcGVyYXRpb25zIENvc3RzIgoKKipDYXVzZToqKiBGcmVxdWVudCBjYWNoZSBtaXNzZXMsIHNob3J0IFRUTHMsIG9yIGZyZXF1ZW50IHJldmFsaWRhdGlvbiAgCioqU29sdXRpb246KiogSW5jcmVhc2UgVFRMIGZvciBzdGFibGUgY29udGVudCAoMjQrIGhvdXJzKSwgZW5hYmxlIFRpZXJlZCBDYWNoZSB0byByZWR1Y2UgZGlyZWN0IENhY2hlIFJlc2VydmUgbWlzc2VzLCBvciB1c2Ugc3RhbGUtd2hpbGUtcmV2YWxpZGF0ZQoKIyMjICJQdXJnZSBOb3QgV29ya2luZyBhcyBFeHBlY3RlZCIKCioqQ2F1c2U6KiogUHVyZ2UgYnkgdGFnIG9ubHkgdHJpZ2dlcnMgcmV2YWxpZGF0aW9uIGJ1dCBkb2Vzbid0IHJlbW92ZSBmcm9tIENhY2hlIFJlc2VydmUgc3RvcmFnZSAgCioqU29sdXRpb246KiogVXNlIHB1cmdlIGJ5IFVSTCBmb3IgaW1tZWRpYXRlIHJlbW92YWwsIG9yIGRpc2FibGUgQ2FjaGUgUmVzZXJ2ZSB0aGVuIGNsZWFyIGFsbCBkYXRhIGZvciBjb21wbGV0ZSByZW1vdmFsCgojIyMgIk8yTyAoT3JhbmdlLXRvLU9yYW5nZSkgQXNzZXRzIE5vdCBDYWNoaW5nIgoKKipDYXVzZToqKiBPcmFuZ2UtdG8tT3JhbmdlIChwcm94aWVkIHpvbmUgcmVxdWVzdGluZyBhbm90aGVyIHByb3hpZWQgem9uZSBvbiBDbG91ZGZsYXJlKSBieXBhc3NlcyBDYWNoZSBSZXNlcnZlICAKKipTb2x1dGlvbjoqKiAKLSAqKldoYXQgaXMgTzJPKio6IFpvbmUgQSAocHJveGllZCkg4oaSIFpvbmUgQiAocHJveGllZCksIGJvdGggb24gQ2xvdWRmbGFyZQotICoqRGV0ZWN0aW9uKio6IENoZWNrIGBjZi1jYWNoZS1zdGF0dXNgIGZvciBgQllQQVNTYCBhbmQgcmV2aWV3IHJlcXVlc3QgcGF0aAotICoqV29ya2Fyb3VuZCoqOiBVc2UgUjIgb3IgZGlyZWN0IG9yaWdpbiBhY2Nlc3MgaW5zdGVhZCBvZiBPMk8gcHJveHkgY2hhaW5zCgojIyMgIkNhY2hlIFJlc2VydmUgbXVzdCBiZSBPRkYgYmVmb3JlIGNsZWFyaW5nIGRhdGEiCgoqKkNhdXNlOioqIEF0dGVtcHRpbmcgdG8gY2xlYXIgQ2FjaGUgUmVzZXJ2ZSBkYXRhIHdoaWxlIGl0J3Mgc3RpbGwgZW5hYmxlZCAgCioqU29sdXRpb246KiogRGlzYWJsZSBDYWNoZSBSZXNlcnZlIGZpcnN0LCB3YWl0IGJyaWVmbHkgZm9yIHByb3BhZ2F0aW9uICg1cyksIHRoZW4gY2xlYXIgZGF0YSAoY2FuIHRha2UgdXAgdG8gMjQgaG91cnMpCgojIyBMaW1pdHMKCnwgTGltaXQgfCBWYWx1ZSB8IE5vdGVzIHwKfC0tLS0tLS18LS0tLS0tLXwtLS0tLS0tfAp8IE1pbmltdW0gVFRMIHwgMTAgaG91cnMgKDM2MDAwIHNlY29uZHMpIHwgQXNzZXRzIHdpdGggc2hvcnRlciBUVEwgbm90IGVsaWdpYmxlIHwKfCBEZWZhdWx0IHJldGVudGlvbiB8IDMwIGRheXMgKDI1OTIwMDAgc2Vjb25kcykgfCBDb25maWd1cmFibGUgfAp8IE1heGltdW0gZmlsZSBzaXplIHwgU2FtZSBhcyBSMiBsaW1pdHMgfCBObyBwcmFjdGljYWwgbGltaXQgfAp8IFB1cmdlL2NsZWFyIHRpbWUgfCBVcCB0byAyNCBob3VycyB8IENvbXBsZXRlIHByb3BhZ2F0aW9uIHRpbWUgfAp8IFBsYW4gcmVxdWlyZW1lbnQgfCBQYWlkIENhY2hlIFJlc2VydmUgb3IgU21hcnQgU2hpZWxkIHwgTm90IGF2YWlsYWJsZSBvbiBmcmVlIHBsYW5zIHwKfCBDb250ZW50LUxlbmd0aCBoZWFkZXIgfCBSZXF1aXJlZCB8IE11c3QgYmUgcHJlc2VudCBmb3IgZWxpZ2liaWxpdHkgfAp8IFNldC1Db29raWUgaGVhZGVyIHwgQmxvY2tzIGNhY2hpbmcgfCBNdXN0IG5vdCBiZSBwcmVzZW50IChvciB1c2UgcHJpdmF0ZSBkaXJlY3RpdmUpIHwKfCBWYXJ5IGhlYWRlciB8IENhbm5vdCBiZSAqIHwgQ2FuIHVzZSBWYXJ5OiBBY2NlcHQtRW5jb2RpbmcgfAp8IEltYWdlIHRyYW5zZm9ybWF0aW9ucyB8IFZhcmlhbnRzIG5vdCBlbGlnaWJsZSB8IE9yaWdpbmFsIGltYWdlcyBvbmx5IHwKfCBSYW5nZSByZXF1ZXN0cyB8IE5PVCBzdXBwb3J0ZWQgfCBIVFRQIDIwNiBieXBhc3NlcyBDYWNoZSBSZXNlcnZlIHwKfCBDb21wcmVzc2lvbiB8IEZldGNoZXMgdW5jb21wcmVzc2VkIHwgU2VydmVzIGNvbXByZXNzZWQgdG8gdmlzaXRvcnMgfAp8IFdvcmtlciBjb250cm9sIHwgWm9uZS1sZXZlbCBvbmx5IHwgQ2Fubm90IGNvbnRyb2wgcGVyLXJlcXVlc3QgfAp8IE8yTyByZXF1ZXN0cyB8IEJ5cGFzc2VkIHwgT3JhbmdlLXRvLU9yYW5nZSBub3QgZWxpZ2libGUgfAoKIyMgQWRkaXRpb25hbCBSZXNvdXJjZXMKCi0gKipPZmZpY2lhbCBEb2NzKio6IGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9jYWNoZS9hZHZhbmNlZC1jb25maWd1cmF0aW9uL2NhY2hlLXJlc2VydmUvCi0gKipBUEkgUmVmZXJlbmNlKio6IGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hcGkvcmVzb3VyY2VzL2NhY2hlL3N1YnJlc291cmNlcy9jYWNoZV9yZXNlcnZlLwotICoqQ2FjaGUgUnVsZXMqKjogaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2NhY2hlL2hvdy10by9jYWNoZS1ydWxlcy8KLSAqKldvcmtlcnMgQ2FjaGUgQVBJKio6IGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzL3J1bnRpbWUtYXBpcy9jYWNoZS8KLSAqKlIyIERvY3VtZW50YXRpb24qKjogaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyLwotICoqU21hcnQgU2hpZWxkKio6IGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9zbWFydC1zaGllbGQvCi0gKipUaWVyZWQgQ2FjaGUqKjogaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2NhY2hlL2hvdy10by90aWVyZWQtY2FjaGUvCgojIyBUcm91Ymxlc2hvb3RpbmcgRmxvd2NoYXJ0CgpBc3NldCBub3QgY2FjaGluZyBpbiBDYWNoZSBSZXNlcnZlPwoKYGBgCjEuIElzIENhY2hlIFJlc2VydmUgZW5hYmxlZCBmb3Igem9uZT8KICAg4oaSIE5vOiBFbmFibGUgdmlhIERhc2hib2FyZCBvciBBUEkKICAg4oaSIFllczogQ29udGludWUgdG8gc3RlcCAyCgoyLiBJcyBUaWVyZWQgQ2FjaGUgZW5hYmxlZD8KICAg4oaSIE5vOiBFbmFibGUgVGllcmVkIENhY2hlIChyZXF1aXJlZCEpCiAgIOKGkiBZZXM6IENvbnRpbnVlIHRvIHN0ZXAgMwoKMy4gRG9lcyBhc3NldCBoYXZlIFRUTCDiiaUgMTAgaG91cnM/CiAgIOKGkiBObzogSW5jcmVhc2UgdmlhIENhY2hlIFJ1bGVzIChlZGdlX3R0bCBvdmVycmlkZSkKICAg4oaSIFllczogQ29udGludWUgdG8gc3RlcCA0Cgo0LiBJcyBDb250ZW50LUxlbmd0aCBoZWFkZXIgcHJlc2VudD8KICAg4oaSIE5vOiBGaXggb3JpZ2luIHRvIGluY2x1ZGUgQ29udGVudC1MZW5ndGgKICAg4oaSIFllczogQ29udGludWUgdG8gc3RlcCA1Cgo1LiBJcyBTZXQtQ29va2llIGhlYWRlciBwcmVzZW50PwogICDihpIgWWVzOiBSZW1vdmUgU2V0LUNvb2tpZSBvciBzY29wZSBhcHByb3ByaWF0ZWx5CiAgIOKGkiBObzogQ29udGludWUgdG8gc3RlcCA2Cgo2LiBJcyBWYXJ5IGhlYWRlciBzZXQgdG8gKj8KICAg4oaSIFllczogQ2hhbmdlIHRvIHNwZWNpZmljIHZhbHVlIChlLmcuLCBBY2NlcHQtRW5jb2RpbmcpCiAgIOKGkiBObzogQ29udGludWUgdG8gc3RlcCA3Cgo3LiBJcyB0aGlzIGEgcmFuZ2UgcmVxdWVzdD8KICAg4oaSIFllczogUmFuZ2UgcmVxdWVzdHMgYnlwYXNzIENhY2hlIFJlc2VydmUgKG5vdCBzdXBwb3J0ZWQpCiAgIOKGkiBObzogQ29udGludWUgdG8gc3RlcCA4Cgo4LiBJcyB0aGlzIGFuIE8yTyAoT3JhbmdlLXRvLU9yYW5nZSkgcmVxdWVzdD8KICAg4oaSIFllczogTzJPIGJ5cGFzc2VzIENhY2hlIFJlc2VydmUKICAg4oaSIE5vOiBDb250aW51ZSB0byBzdGVwIDkKCjkuIENoZWNrIExvZ3B1c2ggQ2FjaGVSZXNlcnZlVXNlZCBmaWVsZAogICDihpIgRmlsdGVyIGxvZ3MgdG8gc2VlIGlmIGFzc2V0cyBldmVyIGhpdCBDYWNoZSBSZXNlcnZlCiAgIOKGkiBWZXJpZnkgY2YtY2FjaGUtc3RhdHVzIGhlYWRlciAoc2hvdWxkIGJlIEhJVCBhZnRlciBmaXJzdCByZXF1ZXN0KQpgYGAKCiMjIFNlZSBBbHNvCgotIFtSRUFETUVdKC4vUkVBRE1FLm1kKSAtIE92ZXJ2aWV3IGFuZCBjb3JlIGNvbmNlcHRzCi0gW0NvbmZpZ3VyYXRpb25dKC4vY29uZmlndXJhdGlvbi5tZCkgLSBTZXR1cCBhbmQgQ2FjaGUgUnVsZXMKLSBbQVBJIFJlZmVyZW5jZV0oLi9hcGkubWQpIC0gUHVyZ2luZyBhbmQgbW9uaXRvcmluZwotIFtQYXR0ZXJuc10oLi9wYXR0ZXJucy5tZCkgLSBCZXN0IHByYWN0aWNlcyBhbmQgb3B0aW1pemF0aW9uCg==
+# Cache Reserve Gotchas
+
+## Common Errors
+
+### "Assets Not Being Cached in Cache Reserve"
+
+**Cause:** Asset is not cacheable, TTL < 10 hours, Content-Length header missing, or blocking headers present (Set-Cookie, Vary: *)  
+**Solution:** Ensure minimum TTL of 10+ hours (`Cache-Control: public, max-age=36000`), add Content-Length header, remove Set-Cookie header, and set `Vary: Accept-Encoding` (not *)
+
+### "Range Requests Not Working" (Video Seeking Fails)
+
+**Cause:** Cache Reserve does **NOT** support range requests (HTTP 206 Partial Content)  
+**Solution:** Range requests bypass Cache Reserve entirely. For video streaming with seeking:
+- Use edge cache only (shorter TTLs)
+- Consider R2 with direct access for range-heavy workloads
+- Accept that seekable content won't benefit from Cache Reserve persistence
+
+### "Origin Bandwidth Higher Than Expected"
+
+**Cause:** Cache Reserve fetches **uncompressed** content from origin, even though it serves compressed to visitors  
+**Solution:** 
+- If origin charges by bandwidth, factor in uncompressed transfer costs
+- Cache Reserve compresses for visitors automatically (saves visitor bandwidth)
+- Compare: origin egress savings vs higher uncompressed fetch costs
+
+### "Cloudflare Images Not Caching with Cache Reserve"
+
+**Cause:** Cloudflare Images with `Vary: Accept` header (format negotiation) is incompatible with Cache Reserve  
+**Solution:** 
+- Cache Reserve silently skips images with Vary for format negotiation
+- Original images (non-transformed) may still be eligible
+- Use Cloudflare Images variants or edge cache for transformed images
+
+### "High Class A Operations Costs"
+
+**Cause:** Frequent cache misses, short TTLs, or frequent revalidation  
+**Solution:** Increase TTL for stable content (24+ hours), enable Tiered Cache to reduce direct Cache Reserve misses, or use stale-while-revalidate
+
+### "Purge Not Working as Expected"
+
+**Cause:** Purge by tag only triggers revalidation but doesn't remove from Cache Reserve storage  
+**Solution:** Use purge by URL for immediate removal, or disable Cache Reserve then clear all data for complete removal
+
+### "O2O (Orange-to-Orange) Assets Not Caching"
+
+**Cause:** Orange-to-Orange (proxied zone requesting another proxied zone on Cloudflare) bypasses Cache Reserve  
+**Solution:** 
+- **What is O2O**: Zone A (proxied) → Zone B (proxied), both on Cloudflare
+- **Detection**: Check `cf-cache-status` for `BYPASS` and review request path
+- **Workaround**: Use R2 or direct origin access instead of O2O proxy chains
+
+### "Cache Reserve must be OFF before clearing data"
+
+**Cause:** Attempting to clear Cache Reserve data while it's still enabled  
+**Solution:** Disable Cache Reserve first, wait briefly for propagation (5s), then clear data (can take up to 24 hours)
+
+## Limits
+
+| Limit | Value | Notes |
+|-------|-------|-------|
+| Minimum TTL | 10 hours (36000 seconds) | Assets with shorter TTL not eligible |
+| Default retention | 30 days (2592000 seconds) | Configurable |
+| Maximum file size | Same as R2 limits | No practical limit |
+| Purge/clear time | Up to 24 hours | Complete propagation time |
+| Plan requirement | Paid Cache Reserve or Smart Shield | Not available on free plans |
+| Content-Length header | Required | Must be present for eligibility |
+| Set-Cookie header | Blocks caching | Must not be present (or use private directive) |
+| Vary header | Cannot be * | Can use Vary: Accept-Encoding |
+| Image transformations | Variants not eligible | Original images only |
+| Range requests | NOT supported | HTTP 206 bypasses Cache Reserve |
+| Compression | Fetches uncompressed | Serves compressed to visitors |
+| Worker control | Zone-level only | Cannot control per-request |
+| O2O requests | Bypassed | Orange-to-Orange not eligible |
+
+## Additional Resources
+
+- **Official Docs**: https://developers.cloudflare.com/cache/advanced-configuration/cache-reserve/
+- **API Reference**: https://developers.cloudflare.com/api/resources/cache/subresources/cache_reserve/
+- **Cache Rules**: https://developers.cloudflare.com/cache/how-to/cache-rules/
+- **Workers Cache API**: https://developers.cloudflare.com/workers/runtime-apis/cache/
+- **R2 Documentation**: https://developers.cloudflare.com/r2/
+- **Smart Shield**: https://developers.cloudflare.com/smart-shield/
+- **Tiered Cache**: https://developers.cloudflare.com/cache/how-to/tiered-cache/
+
+## Troubleshooting Flowchart
+
+Asset not caching in Cache Reserve?
+
+```
+1. Is Cache Reserve enabled for zone?
+   → No: Enable via Dashboard or API
+   → Yes: Continue to step 2
+
+2. Is Tiered Cache enabled?
+   → No: Enable Tiered Cache (required!)
+   → Yes: Continue to step 3
+
+3. Does asset have TTL ≥ 10 hours?
+   → No: Increase via Cache Rules (edge_ttl override)
+   → Yes: Continue to step 4
+
+4. Is Content-Length header present?
+   → No: Fix origin to include Content-Length
+   → Yes: Continue to step 5
+
+5. Is Set-Cookie header present?
+   → Yes: Remove Set-Cookie or scope appropriately
+   → No: Continue to step 6
+
+6. Is Vary header set to *?
+   → Yes: Change to specific value (e.g., Accept-Encoding)
+   → No: Continue to step 7
+
+7. Is this a range request?
+   → Yes: Range requests bypass Cache Reserve (not supported)
+   → No: Continue to step 8
+
+8. Is this an O2O (Orange-to-Orange) request?
+   → Yes: O2O bypasses Cache Reserve
+   → No: Continue to step 9
+
+9. Check Logpush CacheReserveUsed field
+   → Filter logs to see if assets ever hit Cache Reserve
+   → Verify cf-cache-status header (should be HIT after first request)
+```
+
+## See Also
+
+- [README](./README.md) - Overview and core concepts
+- [Configuration](./configuration.md) - Setup and Cache Rules
+- [API Reference](./api.md) - Purging and monitoring
+- [Patterns](./patterns.md) - Best practices and optimization

@@ -1,1 +1,122 @@
-IyBDbG91ZGZsYXJlIEJpbmRpbmdzIFNraWxsIFJlZmVyZW5jZQoKRXhwZXJ0IGd1aWRhbmNlIG9uIENsb3VkZmxhcmUgV29ya2VycyBCaW5kaW5ncyAtIHRoZSBydW50aW1lIEFQSXMgdGhhdCBjb25uZWN0IFdvcmtlcnMgdG8gQ2xvdWRmbGFyZSBwbGF0Zm9ybSByZXNvdXJjZXMuCgojIyBXaGF0IEFyZSBCaW5kaW5ncz8KCkJpbmRpbmdzIGFyZSBob3cgV29ya2VycyBhY2Nlc3MgQ2xvdWRmbGFyZSByZXNvdXJjZXMgKHN0b3JhZ2UsIGNvbXB1dGUsIHNlcnZpY2VzKSB2aWEgdGhlIGBlbnZgIG9iamVjdC4gVGhleSdyZSBjb25maWd1cmVkIGluIGB3cmFuZ2xlci5qc29uY2AsIHR5cGUtc2FmZSB2aWEgVHlwZVNjcmlwdCwgYW5kIHplcm8tb3ZlcmhlYWQgYXQgcnVudGltZS4KCiMjIFJlYWRpbmcgT3JkZXIKCjEuICoqVGhpcyBmaWxlKiogLSBCaW5kaW5nIGNhdGFsb2cgYW5kIHNlbGVjdGlvbiBndWlkZQoyLiAqKlthcGkubWRdKGFwaS5tZCkqKiAtIFR5cGVTY3JpcHQgdHlwZXMgYW5kIGVudiBhY2Nlc3MgcGF0dGVybnMKMy4gKipbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkqKiAtIENvbXBsZXRlIHdyYW5nbGVyLmpzb25jIGV4YW1wbGVzCjQuICoqW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkqKiAtIEJlc3QgcHJhY3RpY2VzIGFuZCBjb21tb24gcGF0dGVybnMKNS4gKipbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkqKiAtIENyaXRpY2FsIHBpdGZhbGxzIGFuZCB0cm91Ymxlc2hvb3RpbmcKCiMjIEJpbmRpbmcgQ2F0YWxvZwoKIyMjIFN0b3JhZ2UgQmluZGluZ3MKCnwgQmluZGluZyB8IFVzZSBDYXNlIHwgQWNjZXNzIFBhdHRlcm4gfAp8LS0tLS0tLS0tfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLXwKfCAqKktWKiogfCBLZXktdmFsdWUgY2FjaGUsIENETi1iYWNrZWQgcmVhZHMgfCBgZW52Lk1ZX0tWLmdldChrZXkpYCB8CnwgKipSMioqIHwgT2JqZWN0IHN0b3JhZ2UgKFMzLWNvbXBhdGlibGUpIHwgYGVudi5NWV9CVUNLRVQuZ2V0KGtleSlgIHwKfCAqKkQxKiogfCBTUUwgZGF0YWJhc2UgKFNRTGl0ZSkgfCBgZW52LkRCLnByZXBhcmUoc3FsKS5hbGwoKWAgfAp8ICoqRHVyYWJsZSBPYmplY3RzKiogfCBDb29yZGluYXRpb24sIHJlYWwtdGltZSBzdGF0ZSB8IGBlbnYuTVlfRE8uZ2V0KGlkKWAgfAp8ICoqVmVjdG9yaXplKiogfCBWZWN0b3IgZW1iZWRkaW5ncyBzZWFyY2ggfCBgZW52LlZFQ1RPUklaRS5xdWVyeSh2ZWN0b3IpYCB8CnwgKipRdWV1ZXMqKiB8IEFzeW5jIG1lc3NhZ2UgcHJvY2Vzc2luZyB8IGBlbnYuTVlfUVVFVUUuc2VuZChtc2cpYCB8CgojIyMgQ29tcHV0ZSBCaW5kaW5ncwoKfCBCaW5kaW5nIHwgVXNlIENhc2UgfCBBY2Nlc3MgUGF0dGVybiB8CnwtLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tfAp8ICoqU2VydmljZSoqIHwgV29ya2VyLXRvLVdvcmtlciBSUEMgfCBgZW52Lk1ZX1NFUlZJQ0UuZmV0Y2gocmVxKWAgfAp8ICoqV29ya2VycyBBSSoqIHwgTExNIGluZmVyZW5jZSB8IGBlbnYuQUkucnVuKG1vZGVsLCBpbnB1dClgIHwKfCAqKkJyb3dzZXIgUmVuZGVyaW5nKiogfCBIZWFkbGVzcyBDaHJvbWUgfCBgZW52LkJST1dTRVIuZmV0Y2godXJsKWAgfAoKIyMjIFBsYXRmb3JtIEJpbmRpbmdzCgp8IEJpbmRpbmcgfCBVc2UgQ2FzZSB8IEFjY2VzcyBQYXR0ZXJuIHwKfC0tLS0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS18CnwgKipBbmFseXRpY3MgRW5naW5lKiogfCBDdXN0b20gbWV0cmljcyB8IGBlbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KGRhdGEpYCB8CnwgKiptVExTKiogfCBDbGllbnQgY2VydGlmaWNhdGVzIHwgYGVudi5NWV9DRVJUYCAoc3RyaW5nKSB8CnwgKipIeXBlcmRyaXZlKiogfCBEYXRhYmFzZSBwb29saW5nIHwgYGVudi5IWVBFUkRSSVZFLmNvbm5lY3Rpb25TdHJpbmdgIHwKfCAqKlJhdGUgTGltaXRpbmcqKiB8IFJlcXVlc3QgdGhyb3R0bGluZyB8IGBlbnYuUkFURV9MSU1JVEVSLmxpbWl0KGlkKWAgfAp8ICoqV29ya2Zsb3dzKiogfCBMb25nLXJ1bm5pbmcgd29ya2Zsb3dzIHwgYGVudi5NWV9XT1JLRkxPVy5jcmVhdGUoKWAgfAoKIyMjIENvbmZpZ3VyYXRpb24gQmluZGluZ3MKCnwgQmluZGluZyB8IFVzZSBDYXNlIHwgQWNjZXNzIFBhdHRlcm4gfAp8LS0tLS0tLS0tfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLXwKfCAqKkVudmlyb25tZW50IFZhcmlhYmxlcyoqIHwgTm9uLXNlbnNpdGl2ZSBjb25maWcgfCBgZW52LkFQSV9VUkxgIChzdHJpbmcpIHwKfCAqKlNlY3JldHMqKiB8IFNlbnNpdGl2ZSB2YWx1ZXMgfCBgZW52LkFQSV9LRVlgIChzdHJpbmcpIHwKfCAqKlRleHQvRGF0YSBCbG9icyoqIHwgU3RhdGljIGZpbGVzIHwgYGVudi5NWV9CTE9CYCAoc3RyaW5nKSB8CnwgKipXQVNNKiogfCBXZWJBc3NlbWJseSBtb2R1bGVzIHwgYGVudi5NWV9XQVNNYCAoV2ViQXNzZW1ibHkuTW9kdWxlKSB8CgojIyBRdWljayBTZWxlY3Rpb24gR3VpZGUKCioqTmVlZCBwZXJzaXN0ZW50IHN0b3JhZ2U/KioKLSBLZXktdmFsdWUgPCAyNU1CIOKGkiAqKktWKioKLSBGaWxlcy9vYmplY3RzIOKGkiAqKlIyKioKLSBSZWxhdGlvbmFsIGRhdGEg4oaSICoqRDEqKgotIFJlYWwtdGltZSBjb29yZGluYXRpb24g4oaSICoqRHVyYWJsZSBPYmplY3RzKioKCioqTmVlZCBBSS9jb21wdXRlPyoqCi0gTExNIGluZmVyZW5jZSDihpIgKipXb3JrZXJzIEFJKioKLSBTY3JhcGluZy9QREZzIOKGkiAqKkJyb3dzZXIgUmVuZGVyaW5nKioKLSBDYWxsIGFub3RoZXIgV29ya2VyIOKGkiAqKlNlcnZpY2UgYmluZGluZyoqCgoqKk5lZWQgYXN5bmMgcHJvY2Vzc2luZz8qKgotIEJhY2tncm91bmQgam9icyDihpIgKipRdWV1ZXMqKgoKKipOZWVkIGNvbmZpZz8qKgotIFB1YmxpYyB2YWx1ZXMg4oaSICoqRW52aXJvbm1lbnQgVmFyaWFibGVzKioKLSBTZWNyZXRzIOKGkiAqKlNlY3JldHMqKiAobmV2ZXIgY29tbWl0KQoKIyMgUXVpY2sgU3RhcnQKCjEuICoqQWRkIGJpbmRpbmcgdG8gd3JhbmdsZXIuanNvbmM6KioKYGBganNvbmMKewogICJrdl9uYW1lc3BhY2VzIjogWwogICAgeyAiYmluZGluZyI6ICJNWV9LViIsICJpZCI6ICJ5b3VyLWt2LWlkIiB9CiAgXQp9CmBgYAoKMi4gKipHZW5lcmF0ZSB0eXBlczoqKgpgYGBiYXNoCm5weCB3cmFuZ2xlciB0eXBlcwpgYGAKCjMuICoqQWNjZXNzIGluIFdvcmtlcjoqKgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYsIGN0eCkgewogICAgYXdhaXQgZW52Lk1ZX0tWLnB1dCgna2V5JywgJ3ZhbHVlJyk7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCdPSycpOwogIH0KfQpgYGAKCiMjIFR5cGUgU2FmZXR5CgpCaW5kaW5ncyBhcmUgZnVsbHkgdHlwZWQgdmlhIGB3cmFuZ2xlciB0eXBlc2AuIFNlZSBbYXBpLm1kXShhcGkubWQpIGZvciBkZXRhaWxzLgoKIyMgTGltaXRzCgotIDY0IGJpbmRpbmdzIG1heCBwZXIgV29ya2VyIChhbGwgdHlwZXMgY29tYmluZWQpCi0gU2VlIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSBmb3IgcGVyLWJpbmRpbmcgbGltaXRzCgojIyBLZXkgQ29uY2VwdHMKCioqWmVyby1vdmVyaGVhZCBhY2Nlc3M6KiogQmluZGluZ3MgY29tcGlsZWQgaW50byBXb3JrZXIsIG5vIG5ldHdvcmsgY2FsbHMgdG8gYWNjZXNzCioqVHlwZS1zYWZlOioqIEZ1bGwgVHlwZVNjcmlwdCBzdXBwb3J0IHZpYSBgd3JhbmdsZXIgdHlwZXNgCioqUGVyLWVudmlyb25tZW50OioqIERpZmZlcmVudCBJRHMgZm9yIGRldi9zdGFnaW5nL3Byb2R1Y3Rpb24KKipTZWNyZXRzIHZzIFZhcnM6KiogU2VjcmV0cyBlbmNyeXB0ZWQgYXQgcmVzdCwgbmV2ZXIgaW4gY29uZmlnIGZpbGVzCgojIyBTZWUgQWxzbwoKLSBbQ2xvdWRmbGFyZSBEb2NzOiBCaW5kaW5nc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvcnVudGltZS1hcGlzL2JpbmRpbmdzLykKLSBbV3JhbmdsZXIgQ29uZmlndXJhdGlvbl0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvd3JhbmdsZXIvY29uZmlndXJhdGlvbi8pCg==
+# Cloudflare Bindings Skill Reference
+
+Expert guidance on Cloudflare Workers Bindings - the runtime APIs that connect Workers to Cloudflare platform resources.
+
+## What Are Bindings?
+
+Bindings are how Workers access Cloudflare resources (storage, compute, services) via the `env` object. They're configured in `wrangler.jsonc`, type-safe via TypeScript, and zero-overhead at runtime.
+
+## Reading Order
+
+1. **This file** - Binding catalog and selection guide
+2. **[api.md](api.md)** - TypeScript types and env access patterns
+3. **[configuration.md](configuration.md)** - Complete wrangler.jsonc examples
+4. **[patterns.md](patterns.md)** - Best practices and common patterns
+5. **[gotchas.md](gotchas.md)** - Critical pitfalls and troubleshooting
+
+## Binding Catalog
+
+### Storage Bindings
+
+| Binding | Use Case | Access Pattern |
+|---------|----------|----------------|
+| **KV** | Key-value cache, CDN-backed reads | `env.MY_KV.get(key)` |
+| **R2** | Object storage (S3-compatible) | `env.MY_BUCKET.get(key)` |
+| **D1** | SQL database (SQLite) | `env.DB.prepare(sql).all()` |
+| **Durable Objects** | Coordination, real-time state | `env.MY_DO.get(id)` |
+| **Vectorize** | Vector embeddings search | `env.VECTORIZE.query(vector)` |
+| **Queues** | Async message processing | `env.MY_QUEUE.send(msg)` |
+
+### Compute Bindings
+
+| Binding | Use Case | Access Pattern |
+|---------|----------|----------------|
+| **Service** | Worker-to-Worker RPC | `env.MY_SERVICE.fetch(req)` |
+| **Workers AI** | LLM inference | `env.AI.run(model, input)` |
+| **Browser Rendering** | Headless Chrome | `env.BROWSER.fetch(url)` |
+
+### Platform Bindings
+
+| Binding | Use Case | Access Pattern |
+|---------|----------|----------------|
+| **Analytics Engine** | Custom metrics | `env.ANALYTICS.writeDataPoint(data)` |
+| **mTLS** | Client certificates | `env.MY_CERT` (string) |
+| **Hyperdrive** | Database pooling | `env.HYPERDRIVE.connectionString` |
+| **Rate Limiting** | Request throttling | `env.RATE_LIMITER.limit(id)` |
+| **Workflows** | Long-running workflows | `env.MY_WORKFLOW.create()` |
+
+### Configuration Bindings
+
+| Binding | Use Case | Access Pattern |
+|---------|----------|----------------|
+| **Environment Variables** | Non-sensitive config | `env.API_URL` (string) |
+| **Secrets** | Sensitive values | `env.API_KEY` (string) |
+| **Text/Data Blobs** | Static files | `env.MY_BLOB` (string) |
+| **WASM** | WebAssembly modules | `env.MY_WASM` (WebAssembly.Module) |
+
+## Quick Selection Guide
+
+**Need persistent storage?**
+- Key-value < 25MB → **KV**
+- Files/objects → **R2**
+- Relational data → **D1**
+- Real-time coordination → **Durable Objects**
+
+**Need AI/compute?**
+- LLM inference → **Workers AI**
+- Scraping/PDFs → **Browser Rendering**
+- Call another Worker → **Service binding**
+
+**Need async processing?**
+- Background jobs → **Queues**
+
+**Need config?**
+- Public values → **Environment Variables**
+- Secrets → **Secrets** (never commit)
+
+## Quick Start
+
+1. **Add binding to wrangler.jsonc:**
+```jsonc
+{
+  "kv_namespaces": [
+    { "binding": "MY_KV", "id": "your-kv-id" }
+  ]
+}
+```
+
+2. **Generate types:**
+```bash
+npx wrangler types
+```
+
+3. **Access in Worker:**
+```typescript
+export default {
+  async fetch(request, env, ctx) {
+    await env.MY_KV.put('key', 'value');
+    return new Response('OK');
+  }
+}
+```
+
+## Type Safety
+
+Bindings are fully typed via `wrangler types`. See [api.md](api.md) for details.
+
+## Limits
+
+- 64 bindings max per Worker (all types combined)
+- See [gotchas.md](gotchas.md) for per-binding limits
+
+## Key Concepts
+
+**Zero-overhead access:** Bindings compiled into Worker, no network calls to access
+**Type-safe:** Full TypeScript support via `wrangler types`
+**Per-environment:** Different IDs for dev/staging/production
+**Secrets vs Vars:** Secrets encrypted at rest, never in config files
+
+## See Also
+
+- [Cloudflare Docs: Bindings](https://developers.cloudflare.com/workers/runtime-apis/bindings/)
+- [Wrangler Configuration](https://developers.cloudflare.com/workers/wrangler/configuration/)

@@ -1,1 +1,86 @@
-IyBHb3RjaGFzICYgQmVzdCBQcmFjdGljZXMKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAxMDAwOiAiU25pcHBldCBleGVjdXRpb24gZmFpbGVkIgpSdW50aW1lIGVycm9yIG9yIHN5bnRheCBlcnJvci4gV3JhcCBjb2RlIGluIHRyeS9jYXRjaDoKYGBgamF2YXNjcmlwdAp0cnkgeyByZXR1cm4gYXdhaXQgZmV0Y2gocmVxdWVzdCk7IH0KY2F0Y2ggKGVycm9yKSB7IHJldHVybiBuZXcgUmVzcG9uc2UoYEVycm9yOiAke2Vycm9yLm1lc3NhZ2V9YCwgeyBzdGF0dXM6IDUwMCB9KTsgfQpgYGAKCiMjIyAxMTAwOiAiRXhjZWVkZWQgZXhlY3V0aW9uIGxpbWl0IgpDb2RlIHRha2VzID41bXMgQ1BVLiBTaW1wbGlmeSBsb2dpYyBvciBtb3ZlIHRvIFdvcmtlcnMuCgojIyMgMTIwMTogIk11bHRpcGxlIG9yaWdpbiBmZXRjaGVzIgpDYWxsIGBmZXRjaChyZXF1ZXN0KWAgZXhhY3RseSBvbmNlOgpgYGBqYXZhc2NyaXB0Ci8vIOKdjCBNdWx0aXBsZSBvcmlnaW4gZmV0Y2hlcwpjb25zdCByMSA9IGF3YWl0IGZldGNoKHJlcXVlc3QpOyBjb25zdCByMiA9IGF3YWl0IGZldGNoKHJlcXVlc3QpOwovLyDinIUgU2luZ2xlIGZldGNoLCByZXVzZSByZXNwb25zZQpjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKHJlcXVlc3QpOwpgYGAKCiMjIyAxMjAyOiAiU3VicmVxdWVzdCBsaW1pdCBleGNlZWRlZCIKUHJvOiAyIHN1YnJlcXVlc3RzLCBCdXNpbmVzcy9FbnRlcnByaXNlOiA1LiBSZWR1Y2UgZmV0Y2ggY2FsbHMuCgojIyMgIkNhbm5vdCBzZXQgcHJvcGVydHkgb24gaW1tdXRhYmxlIG9iamVjdCIKQ2xvbmUgYmVmb3JlIG1vZGlmeWluZzoKYGBgamF2YXNjcmlwdApjb25zdCBtb2RpZmllZFJlcXVlc3QgPSBuZXcgUmVxdWVzdChyZXF1ZXN0KTsKbW9kaWZpZWRSZXF1ZXN0LmhlYWRlcnMuc2V0KCJYLUN1c3RvbSIsICJ2YWx1ZSIpOwpgYGAKCiMjIyAiY2FjaGVzIGlzIG5vdCBkZWZpbmVkIgpDYWNoZSBBUEkgTk9UIGF2YWlsYWJsZSBpbiBTbmlwcGV0cy4gVXNlIFdvcmtlcnMuCgojIyMgIk1vZHVsZSBub3QgZm91bmQiClNuaXBwZXRzIGRvbid0IHN1cHBvcnQgYGltcG9ydGAuIFVzZSBpbmxpbmUgY29kZSBvciBXb3JrZXJzLgoKIyMgQmVzdCBQcmFjdGljZXMKCiMjIyBQZXJmb3JtYW5jZQotIEtlZXAgY29kZSA8MTBLQiAoMzJLQiBsaW1pdCkKLSBPcHRpbWl6ZSBmb3IgNW1zIENQVQotIENsb25lIG9ubHkgd2hlbiBtb2RpZnlpbmcKLSBNaW5pbWl6ZSBzdWJyZXF1ZXN0cwoKIyMjIFNlY3VyaXR5Ci0gVmFsaWRhdGUgYWxsIGlucHV0cwotIFVzZSBXZWIgQ3J5cHRvIEFQSSBmb3IgaGFzaGluZwotIFNhbml0aXplIGhlYWRlcnMgYmVmb3JlIG9yaWdpbgotIERvbid0IGxvZyBzZWNyZXRzCgojIyMgRGVidWdnaW5nCmBgYGphdmFzY3JpcHQKbmV3UmVzcG9uc2UuaGVhZGVycy5zZXQoIlgtRGVidWctQ291bnRyeSIsIHJlcXVlc3QuY2YuY291bnRyeSk7CmBgYApgYGBiYXNoCmN1cmwgLUggIlgtVGVzdDogdHJ1ZSIgaHR0cHM6Ly9leGFtcGxlLmNvbSAtdgpgYGAKCiMjIEF2YWlsYWJsZSBBUElzCgoqKuKchSBBdmFpbGFibGU6KiogYGZldGNoKClgLCBgUmVxdWVzdGAsIGBSZXNwb25zZWAsIGBIZWFkZXJzYCwgYFVSTGAsIGBjcnlwdG8uc3VidGxlYCwgYGNyeXB0by5yYW5kb21VVUlEKClgLCBgYXRvYigpYC9gYnRvYSgpYCwgYEpTT05gCgoqKuKdjCBOT1QgQXZhaWxhYmxlOioqIGBjYWNoZXNgLCBgS1ZgLCBgRDFgLCBgUjJgLCBgRHVyYWJsZSBPYmplY3RzYCwgYFdlYlNvY2tldGAsIGBIVE1MUmV3cml0ZXJgLCBgaW1wb3J0YCwgTm9kZS5qcyBBUElzCgojIyBMaW1pdHMKCnwgUmVzb3VyY2UgfCBMaW1pdCB8CnwtLS0tLS0tLS0tfC0tLS0tLS18CnwgU25pcHBldCBzaXplIHwgMzJLQiB8CnwgRXhlY3V0aW9uIHRpbWUgfCA1bXMgQ1BVIHwKfCBTdWJyZXF1ZXN0cyAoUHJvL0JpeikgfCAyLzUgfAp8IFNuaXBwZXRzL3pvbmUgfCAyMCB8CgojIyBQZXJmb3JtYW5jZSBCZW5jaG1hcmtzCgp8IE9wZXJhdGlvbiB8IFRpbWUgfAp8LS0tLS0tLS0tLS18LS0tLS0tfAp8IEhlYWRlciBzZXQgfCA8MC4xbXMgfAp8IFVSTCBwYXJzaW5nIHwgPDAuMm1zIHwKfCBmZXRjaCgpIHwgMS0zbXMgfAp8IFNIQS0yNTYgfCAwLjUtMW1zIHwKCioqTWlncmF0ZSB0byBXb3JrZXJzIHdoZW46KiogPjVtcyBuZWVkZWQsID41IHN1YnJlcXVlc3RzLCBuZWVkIHN0b3JhZ2UgKEtWL0QxL1IyKSwgbmVlZCBucG0gcGFja2FnZXMsID4zMktCIGNvZGUK
+# Gotchas & Best Practices
+
+## Common Errors
+
+### 1000: "Snippet execution failed"
+Runtime error or syntax error. Wrap code in try/catch:
+```javascript
+try { return await fetch(request); }
+catch (error) { return new Response(`Error: ${error.message}`, { status: 500 }); }
+```
+
+### 1100: "Exceeded execution limit"
+Code takes >5ms CPU. Simplify logic or move to Workers.
+
+### 1201: "Multiple origin fetches"
+Call `fetch(request)` exactly once:
+```javascript
+// ❌ Multiple origin fetches
+const r1 = await fetch(request); const r2 = await fetch(request);
+// ✅ Single fetch, reuse response
+const response = await fetch(request);
+```
+
+### 1202: "Subrequest limit exceeded"
+Pro: 2 subrequests, Business/Enterprise: 5. Reduce fetch calls.
+
+### "Cannot set property on immutable object"
+Clone before modifying:
+```javascript
+const modifiedRequest = new Request(request);
+modifiedRequest.headers.set("X-Custom", "value");
+```
+
+### "caches is not defined"
+Cache API NOT available in Snippets. Use Workers.
+
+### "Module not found"
+Snippets don't support `import`. Use inline code or Workers.
+
+## Best Practices
+
+### Performance
+- Keep code <10KB (32KB limit)
+- Optimize for 5ms CPU
+- Clone only when modifying
+- Minimize subrequests
+
+### Security
+- Validate all inputs
+- Use Web Crypto API for hashing
+- Sanitize headers before origin
+- Don't log secrets
+
+### Debugging
+```javascript
+newResponse.headers.set("X-Debug-Country", request.cf.country);
+```
+```bash
+curl -H "X-Test: true" https://example.com -v
+```
+
+## Available APIs
+
+**✅ Available:** `fetch()`, `Request`, `Response`, `Headers`, `URL`, `crypto.subtle`, `crypto.randomUUID()`, `atob()`/`btoa()`, `JSON`
+
+**❌ NOT Available:** `caches`, `KV`, `D1`, `R2`, `Durable Objects`, `WebSocket`, `HTMLRewriter`, `import`, Node.js APIs
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Snippet size | 32KB |
+| Execution time | 5ms CPU |
+| Subrequests (Pro/Biz) | 2/5 |
+| Snippets/zone | 20 |
+
+## Performance Benchmarks
+
+| Operation | Time |
+|-----------|------|
+| Header set | <0.1ms |
+| URL parsing | <0.2ms |
+| fetch() | 1-3ms |
+| SHA-256 | 0.5-1ms |
+
+**Migrate to Workers when:** >5ms needed, >5 subrequests, need storage (KV/D1/R2), need npm packages, >32KB code

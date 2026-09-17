@@ -1,1 +1,111 @@
-IyBDMyAoY3JlYXRlLWNsb3VkZmxhcmUpCgpPZmZpY2lhbCBDTEkgZm9yIHNjYWZmb2xkaW5nIENsb3VkZmxhcmUgV29ya2VycyBhbmQgUGFnZXMgcHJvamVjdHMgd2l0aCB0ZW1wbGF0ZXMsIFR5cGVTY3JpcHQsIGFuZCBpbnN0YW50IGRlcGxveW1lbnQuCgojIyBRdWljayBTdGFydAoKYGBgYmFzaAojIEludGVyYWN0aXZlIChyZWNvbW1lbmRlZCBmb3IgZmlyc3QtdGltZSkKbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCBteS1hcHAKCiMgV29ya2VyIChBUEkvV2ViU29ja2V0L0Nyb24pCm5wbSBjcmVhdGUgY2xvdWRmbGFyZUBsYXRlc3QgbXktYXBpIC0tIC0tdHlwZT1oZWxsby13b3JsZCAtLXRzCgojIFBhZ2VzIChzdGF0aWMvU1NHL2Z1bGwtc3RhY2spCm5wbSBjcmVhdGUgY2xvdWRmbGFyZUBsYXRlc3QgbXktc2l0ZSAtLSAtLXR5cGU9d2ViLWFwcCAtLWZyYW1ld29yaz1hc3RybyAtLXBsYXRmb3JtPXBhZ2VzCmBgYAoKIyMgUGxhdGZvcm0gRGVjaXNpb24gVHJlZQoKYGBgCldoYXQgYXJlIHlvdSBidWlsZGluZz8KCuKUnOKUgCBBUEkgLyBXZWJTb2NrZXQgLyBDcm9uIC8gRW1haWwgaGFuZGxlcgrilIIgICDilJTilIAgV29ya2VycyAoZGVmYXVsdCkgLSBubyAtLXBsYXRmb3JtIGZsYWcgbmVlZGVkCuKUgiAgICAgICBucG0gY3JlYXRlIGNsb3VkZmxhcmVAbGF0ZXN0IG15LWFwaSAtLSAtLXR5cGU9aGVsbG8td29ybGQKCuKUnOKUgCBTdGF0aWMgc2l0ZSAvIFNTRyAvIERvY3VtZW50YXRpb24K4pSCICAg4pSU4pSAIFBhZ2VzIC0gcmVxdWlyZXMgLS1wbGF0Zm9ybT1wYWdlcwrilIIgICAgICAgbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCBteS1zaXRlIC0tIC0tdHlwZT13ZWItYXBwIC0tZnJhbWV3b3JrPWFzdHJvIC0tcGxhdGZvcm09cGFnZXMKCuKUnOKUgCBGdWxsLXN0YWNrIGFwcCAoTmV4dC5qcy9SZW1peC9TdmVsdGVLaXQpCuKUgiAgIOKUnOKUgCBOZWVkIER1cmFibGUgT2JqZWN0cywgUXVldWVzLCBvciBXb3JrZXJzLW9ubHkgZmVhdHVyZXM/CuKUgiAgIOKUgiAgIOKUlOKUgCBXb3JrZXJzIChkZWZhdWx0KQrilIIgICDilJTilIAgT3RoZXJ3aXNlIHVzZSBQYWdlcyBmb3IgZ2l0IGludGVncmF0aW9uIGFuZCBicmFuY2ggcHJldmlld3MK4pSCICAgICAgIOKUlOKUgCBBZGQgLS1wbGF0Zm9ybT1wYWdlcwoK4pSU4pSAIENvbnZlcnQgZXhpc3RpbmcgcHJvamVjdAogICAg4pSU4pSAIG5wbSBjcmVhdGUgY2xvdWRmbGFyZUBsYXRlc3QgLiAtLSAtLXR5cGU9cHJlLWV4aXN0aW5nIC0tZXhpc3Rpbmctc2NyaXB0PS4vc3JjL3dvcmtlci50cwpgYGAKCioqQ3JpdGljYWw6KiogUGFnZXMgcHJvamVjdHMgcmVxdWlyZSBgLS1wbGF0Zm9ybT1wYWdlc2AgZmxhZy4gV2l0aG91dCBpdCwgQzMgZGVmYXVsdHMgdG8gV29ya2Vycy4KCiMjIEludGVyYWN0aXZlIEZsb3cKCldoZW4gcnVuIHdpdGhvdXQgZmxhZ3MsIEMzIHByb21wdHMgaW4gdGhpcyBvcmRlcjoKCjEuICoqUHJvamVjdCBuYW1lKiogLSBEaXJlY3RvcnkgdG8gY3JlYXRlIChkZWZhdWx0cyB0byBjdXJyZW50IGRpciB3aXRoIGAuYCkKMi4gKipBcHBsaWNhdGlvbiB0eXBlKiogLSBgaGVsbG8td29ybGRgLCBgd2ViLWFwcGAsIGBkZW1vYCwgYHByZS1leGlzdGluZ2AsIGByZW1vdGUtdGVtcGxhdGVgCjMuICoqUGxhdGZvcm0qKiAtIGB3b3JrZXJzYCAoZGVmYXVsdCkgb3IgYHBhZ2VzYCAoZm9yIHdlYiBhcHBzIG9ubHkpCjQuICoqRnJhbWV3b3JrKiogLSBJZiB3ZWItYXBwOiBgbmV4dGAsIGByZW1peGAsIGBhc3Ryb2AsIGByZWFjdC1yb3V0ZXJgLCBgc29saWRgLCBgc3ZlbHRlYCwgZXRjLgo1LiAqKlR5cGVTY3JpcHQqKiAtIGB5ZXNgIChyZWNvbW1lbmRlZCkgb3IgYG5vYAo2LiAqKkdpdCoqIC0gSW5pdGlhbGl6ZSByZXBvc2l0b3J5PyBgeWVzYCBvciBgbm9gCjcuICoqRGVwbG95KiogLSBEZXBsb3kgbm93PyBgeWVzYCBvciBgbm9gIChyZXF1aXJlcyBgd3JhbmdsZXIgbG9naW5gKQoKIyMgSW5zdGFsbGF0aW9uIE1ldGhvZHMKCmBgYGJhc2gKIyBOUE0KbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdAoKIyBZYXJuCnlhcm4gY3JlYXRlIGNsb3VkZmxhcmUKCiMgUE5QTQpwbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdApgYGAKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgp8IEZpbGUgfCBQdXJwb3NlIHwgVXNlIFdoZW4gfAp8LS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8ICoqYXBpLm1kKiogfCBDb21wbGV0ZSBDTEkgZmxhZyByZWZlcmVuY2UgfCBTY3JpcHRpbmcsIENJL0NELCBhZHZhbmNlZCB1c2FnZSB8CnwgKipjb25maWd1cmF0aW9uLm1kKiogfCBHZW5lcmF0ZWQgZmlsZXMsIGJpbmRpbmdzLCB0eXBlcyB8IFVuZGVyc3RhbmRpbmcgb3V0cHV0LCBjdXN0b21pemF0aW9uIHwKfCAqKnBhdHRlcm5zLm1kKiogfCBXb3JrZmxvd3MsIENJL0NELCBtb25vcmVwb3MgfCBSZWFsLXdvcmxkIGludGVncmF0aW9uIHwKfCAqKmdvdGNoYXMubWQqKiB8IFRyb3VibGVzaG9vdGluZyBmYWlsdXJlcyB8IERlcGxveW1lbnQgYmxvY2tlZCwgZXJyb3JzIHwKCiMjIFJlYWRpbmcgT3JkZXIKCnwgVGFzayB8IFJlYWQgfAp8LS0tLS0tfC0tLS0tLXwKfCBDcmVhdGUgZmlyc3QgcHJvamVjdCB8IFJFQURNRSBvbmx5IHwKfCBTZXQgdXAgQ0kvQ0QgfCBSRUFETUUg4oaSIGFwaSDihpIgcGF0dGVybnMgfAp8IERlYnVnIGZhaWxlZCBkZXBsb3kgfCBnb3RjaGFzIHwKfCBVbmRlcnN0YW5kIGdlbmVyYXRlZCBmaWxlcyB8IGNvbmZpZ3VyYXRpb24gfAp8IEZ1bGwgQ0xJIHJlZmVyZW5jZSB8IGFwaSB8CnwgQ3JlYXRlIGN1c3RvbSB0ZW1wbGF0ZSB8IHBhdHRlcm5zIOKGkiBjb25maWd1cmF0aW9uIHwKfCBDb252ZXJ0IGV4aXN0aW5nIHByb2plY3QgfCBSRUFETUUg4oaSIHBhdHRlcm5zIHwKCiMjIFBvc3QtQ3JlYXRpb24KCmBgYGJhc2gKY2QgbXktYXBwCgojIExvY2FsIGRldiB3aXRoIGhvdCByZWxvYWQKbnBtIHJ1biBkZXYKCiMgR2VuZXJhdGUgVHlwZVNjcmlwdCB0eXBlcyBmb3IgYmluZGluZ3MKbnBtIHJ1biBjZi10eXBlZ2VuCgojIERlcGxveSB0byBDbG91ZGZsYXJlCm5wbSBydW4gZGVwbG95CmBgYAoKIyMgU2VlIEFsc28KCi0gKip3b3JrZXJzL1JFQURNRS5tZCoqIC0gV29ya2VycyBydW50aW1lLCBiaW5kaW5ncywgQVBJcwotICoqd29ya2Vycy1haS9SRUFETUUubWQqKiAtIEFJL01MIG1vZGVscwotICoqcGFnZXMvUkVBRE1FLm1kKiogLSBQYWdlcy1zcGVjaWZpYyBmZWF0dXJlcwotICoqd3JhbmdsZXIvUkVBRE1FLm1kKiogLSBXcmFuZ2xlciBDTEkgYmV5b25kIGluaXRpYWwgc2V0dXAKLSAqKmQxL1JFQURNRS5tZCoqIC0gU1FMaXRlIGRhdGFiYXNlCi0gKipyMi9SRUFETUUubWQqKiAtIE9iamVjdCBzdG9yYWdlCg==
+# C3 (create-cloudflare)
+
+Official CLI for scaffolding Cloudflare Workers and Pages projects with templates, TypeScript, and instant deployment.
+
+## Quick Start
+
+```bash
+# Interactive (recommended for first-time)
+npm create cloudflare@latest my-app
+
+# Worker (API/WebSocket/Cron)
+npm create cloudflare@latest my-api -- --type=hello-world --ts
+
+# Pages (static/SSG/full-stack)
+npm create cloudflare@latest my-site -- --type=web-app --framework=astro --platform=pages
+```
+
+## Platform Decision Tree
+
+```
+What are you building?
+
+├─ API / WebSocket / Cron / Email handler
+│   └─ Workers (default) - no --platform flag needed
+│       npm create cloudflare@latest my-api -- --type=hello-world
+
+├─ Static site / SSG / Documentation
+│   └─ Pages - requires --platform=pages
+│       npm create cloudflare@latest my-site -- --type=web-app --framework=astro --platform=pages
+
+├─ Full-stack app (Next.js/Remix/SvelteKit)
+│   ├─ Need Durable Objects, Queues, or Workers-only features?
+│   │   └─ Workers (default)
+│   └─ Otherwise use Pages for git integration and branch previews
+│       └─ Add --platform=pages
+
+└─ Convert existing project
+    └─ npm create cloudflare@latest . -- --type=pre-existing --existing-script=./src/worker.ts
+```
+
+**Critical:** Pages projects require `--platform=pages` flag. Without it, C3 defaults to Workers.
+
+## Interactive Flow
+
+When run without flags, C3 prompts in this order:
+
+1. **Project name** - Directory to create (defaults to current dir with `.`)
+2. **Application type** - `hello-world`, `web-app`, `demo`, `pre-existing`, `remote-template`
+3. **Platform** - `workers` (default) or `pages` (for web apps only)
+4. **Framework** - If web-app: `next`, `remix`, `astro`, `react-router`, `solid`, `svelte`, etc.
+5. **TypeScript** - `yes` (recommended) or `no`
+6. **Git** - Initialize repository? `yes` or `no`
+7. **Deploy** - Deploy now? `yes` or `no` (requires `wrangler login`)
+
+## Installation Methods
+
+```bash
+# NPM
+npm create cloudflare@latest
+
+# Yarn
+yarn create cloudflare
+
+# PNPM
+pnpm create cloudflare@latest
+```
+
+## In This Reference
+
+| File | Purpose | Use When |
+|------|---------|----------|
+| **api.md** | Complete CLI flag reference | Scripting, CI/CD, advanced usage |
+| **configuration.md** | Generated files, bindings, types | Understanding output, customization |
+| **patterns.md** | Workflows, CI/CD, monorepos | Real-world integration |
+| **gotchas.md** | Troubleshooting failures | Deployment blocked, errors |
+
+## Reading Order
+
+| Task | Read |
+|------|------|
+| Create first project | README only |
+| Set up CI/CD | README → api → patterns |
+| Debug failed deploy | gotchas |
+| Understand generated files | configuration |
+| Full CLI reference | api |
+| Create custom template | patterns → configuration |
+| Convert existing project | README → patterns |
+
+## Post-Creation
+
+```bash
+cd my-app
+
+# Local dev with hot reload
+npm run dev
+
+# Generate TypeScript types for bindings
+npm run cf-typegen
+
+# Deploy to Cloudflare
+npm run deploy
+```
+
+## See Also
+
+- **workers/README.md** - Workers runtime, bindings, APIs
+- **workers-ai/README.md** - AI/ML models
+- **pages/README.md** - Pages-specific features
+- **wrangler/README.md** - Wrangler CLI beyond initial setup
+- **d1/README.md** - SQLite database
+- **r2/README.md** - Object storage

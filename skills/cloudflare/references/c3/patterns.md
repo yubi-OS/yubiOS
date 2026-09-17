@@ -1,1 +1,82 @@
-IyBDMyBVc2FnZSBQYXR0ZXJucwoKIyMgUXVpY2sgV29ya2Zsb3dzCgpgYGBiYXNoCiMgVHlwZVNjcmlwdCBBUEkgV29ya2VyCm5wbSBjcmVhdGUgY2xvdWRmbGFyZUBsYXRlc3QgbXktYXBpIC0tIC0tdHlwZT1oZWxsby13b3JsZCAtLWxhbmc9dHMgLS1kZXBsb3kKCiMgTmV4dC5qcyBvbiBQYWdlcwpucG0gY3JlYXRlIGNsb3VkZmxhcmVAbGF0ZXN0IG15LWFwcCAtLSAtLXR5cGU9d2ViLWFwcCAtLWZyYW1ld29yaz1uZXh0IC0tcGxhdGZvcm09cGFnZXMgLS10cyAtLWRlcGxveQoKIyBBc3RybyBzdGF0aWMgc2l0ZSAgCm5wbSBjcmVhdGUgY2xvdWRmbGFyZUBsYXRlc3QgbXktYmxvZyAtLSAtLXR5cGU9d2ViLWFwcCAtLWZyYW1ld29yaz1hc3RybyAtLXBsYXRmb3JtPXBhZ2VzIC0tdHMKYGBgCgojIyBDSS9DRCAoR2l0SHViIEFjdGlvbnMpCgpgYGB5YW1sCi0gbmFtZTogRGVwbG95CiAgcnVuOiBucG0gcnVuIGRlcGxveQogIGVudjoKICAgIENMT1VERkxBUkVfQVBJX1RPS0VOOiAke3sgc2VjcmV0cy5DTE9VREZMQVJFX0FQSV9UT0tFTiB9fQogICAgQ0xPVURGTEFSRV9BQ0NPVU5UX0lEOiAke3sgc2VjcmV0cy5DTE9VREZMQVJFX0FDQ09VTlRfSUQgfX0KYGBgCgoqKk5vbi1pbnRlcmFjdGl2ZSByZXF1aXJlczoqKgpgYGBiYXNoCi0tdHlwZT08dmFsdWU+ICAgICAgICMgUmVxdWlyZWQKLS1uby1naXQgICAgICAgICAgICAgIyBSZWNvbW1lbmRlZCAoQ0kgYWxyZWFkeSBpbiBnaXQpCi0tbm8tZGVwbG95ICAgICAgICAgICMgRGVwbG95IHNlcGFyYXRlbHkgd2l0aCBzZWNyZXRzCi0tZnJhbWV3b3JrPTx2YWx1ZT4gICMgRm9yIHdlYi1hcHAKLS10cyAvIC0tbm8tdHMgICAgICAgIyBSZXF1aXJlZApgYGAKCiMjIE1vbm9yZXBvCgpDMyBkZXRlY3RzIHdvcmtzcGFjZSBjb25maWcgKGBwYWNrYWdlLmpzb25gIHdvcmtzcGFjZXMgb3IgYHBucG0td29ya3NwYWNlLnlhbWxgKS4KCmBgYGJhc2gKY2QgcGFja2FnZXMvCm5wbSBjcmVhdGUgY2xvdWRmbGFyZUBsYXRlc3QgbXktd29ya2VyIC0tIC0tdHlwZT1oZWxsby13b3JsZCAtLWxhbmc9dHMgLS1uby1kZXBsb3kKYGBgCgojIyBDdXN0b20gVGVtcGxhdGVzCgpgYGBiYXNoCiMgR2l0SHViIHJlcG8KbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCAtLSAtLXRlbXBsYXRlPXVzZXJuYW1lL3JlcG8KbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCAtLSAtLXRlbXBsYXRlPWNsb3VkZmxhcmUvdGVtcGxhdGVzL3dvcmtlci1vcGVuYXBpCgojIExvY2FsIHBhdGgKbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCBteS1hcHAgLS0gLS10ZW1wbGF0ZT0uLi9teS10ZW1wbGF0ZQpgYGAKCioqVGVtcGxhdGUgcmVxdWlyZXMgYGMzLmNvbmZpZy5qc29uYDoqKgpgYGBqc29uCnsKICAibmFtZSI6ICJteS10ZW1wbGF0ZSIsCiAgImNhdGVnb3J5IjogImhlbGxvLXdvcmxkIiwKICAiY29waWVzIjogW3sgInBhdGgiOiAic3JjLyIgfSwgeyAicGF0aCI6ICJ3cmFuZ2xlci5qc29uYyIgfV0sCiAgInRyYW5zZm9ybXMiOiBbeyAicGF0aCI6ICJwYWNrYWdlLmpzb24iLCAianNvbmMiOiB7ICJuYW1lIjogInt7cHJvamVjdE5hbWV9fSIgfX1dCn0KYGBgCgojIyBFeGlzdGluZyBQcm9qZWN0cwoKYGBgYmFzaAojIEFkZCBDbG91ZGZsYXJlIHRvIGV4aXN0aW5nIFdvcmtlcgpucG0gY3JlYXRlIGNsb3VkZmxhcmVAbGF0ZXN0IC4gLS0gLS10eXBlPXByZS1leGlzdGluZyAtLWV4aXN0aW5nLXNjcmlwdD0uL2Rpc3QvaW5kZXguanMKCiMgQWRkIHRvIGV4aXN0aW5nIGZyYW1ld29yayBhcHAKbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCAuIC0tIC0tdHlwZT13ZWItYXBwIC0tZnJhbWV3b3JrPW5leHQgLS1wbGF0Zm9ybT1wYWdlcyAtLXRzCmBgYAoKIyMgUG9zdC1DcmVhdGlvbiBDaGVja2xpc3QKCjEuIFJldmlldyBgd3JhbmdsZXIuanNvbmNgIC0gc2V0IGBjb21wYXRpYmlsaXR5X2RhdGVgLCB2ZXJpZnkgYG5hbWVgCjIuIENyZWF0ZSBiaW5kaW5nczogYHdyYW5nbGVyIGt2IG5hbWVzcGFjZSBjcmVhdGVgLCBgd3JhbmdsZXIgZDEgY3JlYXRlYCwgYHdyYW5nbGVyIHIyIGJ1Y2tldCBjcmVhdGVgCjMuIEdlbmVyYXRlIHR5cGVzOiBgbnBtIHJ1biBjZi10eXBlZ2VuYAo0LiBUZXN0OiBgbnBtIHJ1biBkZXZgCjUuIERlcGxveTogYG5wbSBydW4gZGVwbG95YAo2LiBTZXQgc2VjcmV0czogYHdyYW5nbGVyIHNlY3JldCBwdXQgU0VDUkVUX05BTUVgCg==
+# C3 Usage Patterns
+
+## Quick Workflows
+
+```bash
+# TypeScript API Worker
+npm create cloudflare@latest my-api -- --type=hello-world --lang=ts --deploy
+
+# Next.js on Pages
+npm create cloudflare@latest my-app -- --type=web-app --framework=next --platform=pages --ts --deploy
+
+# Astro static site  
+npm create cloudflare@latest my-blog -- --type=web-app --framework=astro --platform=pages --ts
+```
+
+## CI/CD (GitHub Actions)
+
+```yaml
+- name: Deploy
+  run: npm run deploy
+  env:
+    CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+```
+
+**Non-interactive requires:**
+```bash
+--type=<value>       # Required
+--no-git             # Recommended (CI already in git)
+--no-deploy          # Deploy separately with secrets
+--framework=<value>  # For web-app
+--ts / --no-ts       # Required
+```
+
+## Monorepo
+
+C3 detects workspace config (`package.json` workspaces or `pnpm-workspace.yaml`).
+
+```bash
+cd packages/
+npm create cloudflare@latest my-worker -- --type=hello-world --lang=ts --no-deploy
+```
+
+## Custom Templates
+
+```bash
+# GitHub repo
+npm create cloudflare@latest -- --template=username/repo
+npm create cloudflare@latest -- --template=cloudflare/templates/worker-openapi
+
+# Local path
+npm create cloudflare@latest my-app -- --template=../my-template
+```
+
+**Template requires `c3.config.json`:**
+```json
+{
+  "name": "my-template",
+  "category": "hello-world",
+  "copies": [{ "path": "src/" }, { "path": "wrangler.jsonc" }],
+  "transforms": [{ "path": "package.json", "jsonc": { "name": "{{projectName}}" }}]
+}
+```
+
+## Existing Projects
+
+```bash
+# Add Cloudflare to existing Worker
+npm create cloudflare@latest . -- --type=pre-existing --existing-script=./dist/index.js
+
+# Add to existing framework app
+npm create cloudflare@latest . -- --type=web-app --framework=next --platform=pages --ts
+```
+
+## Post-Creation Checklist
+
+1. Review `wrangler.jsonc` - set `compatibility_date`, verify `name`
+2. Create bindings: `wrangler kv namespace create`, `wrangler d1 create`, `wrangler r2 bucket create`
+3. Generate types: `npm run cf-typegen`
+4. Test: `npm run dev`
+5. Deploy: `npm run deploy`
+6. Set secrets: `wrangler secret put SECRET_NAME`

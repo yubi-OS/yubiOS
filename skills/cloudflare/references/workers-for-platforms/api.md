@@ -1,1 +1,196 @@
-IyBBUEkgT3BlcmF0aW9ucwoKIyMgRGVwbG95IFVzZXIgV29ya2VyCgpgYGBiYXNoCmN1cmwgLVggUFVUIFwKICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRBQ0NPVU5UX0lEL3dvcmtlcnMvZGlzcGF0Y2gvbmFtZXNwYWNlcy8kTkFNRVNQQUNFL3NjcmlwdHMvJFNDUklQVF9OQU1FIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIiBcCiAgLUYgJ21ldGFkYXRhPXsibWFpbl9tb2R1bGUiOiAid29ya2VyLm1qcyJ9O3R5cGU9YXBwbGljYXRpb24vanNvbicgXAogIC1GICd3b3JrZXIubWpzPUB3b3JrZXIubWpzO3R5cGU9YXBwbGljYXRpb24vamF2YXNjcmlwdCttb2R1bGUnCmBgYAoKIyMjIFR5cGVTY3JpcHQgU0RLCmBgYHR5cGVzY3JpcHQKaW1wb3J0IENsb3VkZmxhcmUgZnJvbSAiY2xvdWRmbGFyZSI7Cgpjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7IGFwaVRva2VuOiBwcm9jZXNzLmVudi5BUElfVE9LRU4gfSk7Cgpjb25zdCBzY3JpcHRGaWxlID0gbmV3IEZpbGUoW3NjcmlwdENvbnRlbnRdLCBgJHtzY3JpcHROYW1lfS5tanNgLCB7CiAgdHlwZTogImFwcGxpY2F0aW9uL2phdmFzY3JpcHQrbW9kdWxlIiwKfSk7Cgphd2FpdCBjbGllbnQud29ya2Vyc0ZvclBsYXRmb3Jtcy5kaXNwYXRjaC5uYW1lc3BhY2VzLnNjcmlwdHMudXBkYXRlKAogIG5hbWVzcGFjZSwgc2NyaXB0TmFtZSwKICB7CiAgICBhY2NvdW50X2lkOiBhY2NvdW50SWQsCiAgICBtZXRhZGF0YTogeyBtYWluX21vZHVsZTogYCR7c2NyaXB0TmFtZX0ubWpzYCB9LAogICAgZmlsZXM6IFtzY3JpcHRGaWxlXSwKICB9Cik7CmBgYAoKIyMgVHlwZVNjcmlwdCBUeXBlcwoKYGBgdHlwZXNjcmlwdAppbXBvcnQgdHlwZSB7IERpc3BhdGNoTmFtZXNwYWNlIH0gZnJvbSAnQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcyc7CgppbnRlcmZhY2UgRGlzcGF0Y2hOYW1lc3BhY2UgewogIGdldChuYW1lOiBzdHJpbmcsIG9wdGlvbnM/OiBSZWNvcmQ8c3RyaW5nLCB1bmtub3duPiwgZGlzcGF0Y2hPcHRpb25zPzogRHluYW1pY0Rpc3BhdGNoT3B0aW9ucyk6IEZldGNoZXI7Cn0KCmludGVyZmFjZSBEeW5hbWljRGlzcGF0Y2hPcHRpb25zIHsKICBsaW1pdHM/OiBEeW5hbWljRGlzcGF0Y2hMaW1pdHM7CiAgb3V0Ym91bmQ/OiBSZWNvcmQ8c3RyaW5nLCB1bmtub3duPjsKfQoKaW50ZXJmYWNlIER5bmFtaWNEaXNwYXRjaExpbWl0cyB7CiAgY3B1TXM/OiBudW1iZXI7ICAgICAgICAvLyBNYXggQ1BVIG1pbGxpc2Vjb25kcwogIHN1YlJlcXVlc3RzPzogbnVtYmVyOyAgLy8gTWF4IGZldGNoKCkgY2FsbHMKfQoKLy8gVXNhZ2UKY29uc3QgdXNlcldvcmtlciA9IGVudi5ESVNQQVRDSEVSLmdldCgnY3VzdG9tZXItMTIzJywge30sIHsKICBsaW1pdHM6IHsgY3B1TXM6IDUwLCBzdWJSZXF1ZXN0czogMjAgfSwKICBvdXRib3VuZDogeyBjdXN0b21lcklkOiAnMTIzJywgdXJsOiByZXF1ZXN0LnVybCB9Cn0pOwpgYGAKCiMjIERlcGxveSB3aXRoIEJpbmRpbmdzCmBgYGJhc2gKY3VybCAtWCBQVVQgIi4uLi9zY3JpcHRzLyRTQ1JJUFRfTkFNRSIgXAogIC1GICdtZXRhZGF0YT17CiAgICAibWFpbl9tb2R1bGUiOiAid29ya2VyLm1qcyIsCiAgICAiYmluZGluZ3MiOiBbCiAgICAgIHsidHlwZSI6ICJrdl9uYW1lc3BhY2UiLCAibmFtZSI6ICJNWV9LViIsICJuYW1lc3BhY2VfaWQiOiAiJyRLVl9JRCcifQogICAgXSwKICAgICJ0YWdzIjogWyJjdXN0b21lci0xMjMiLCAicHJvZHVjdGlvbiJdLAogICAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI2LTAxLTAxIiAgLy8gVXNlIGN1cnJlbnQgZGF0ZSBmb3IgbmV3IHByb2plY3RzCiAgfTt0eXBlPWFwcGxpY2F0aW9uL2pzb24nIFwKICAtRiAnd29ya2VyLm1qcz1Ad29ya2VyLm1qczt0eXBlPWFwcGxpY2F0aW9uL2phdmFzY3JpcHQrbW9kdWxlJwpgYGAKCiMjIExpc3QvRGVsZXRlIFdvcmtlcnMKCmBgYGJhc2gKIyBMaXN0CmN1cmwgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQUNDT1VOVF9JRC93b3JrZXJzL2Rpc3BhdGNoL25hbWVzcGFjZXMvJE5BTUVTUEFDRS9zY3JpcHRzIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIgoKIyBEZWxldGUgYnkgbmFtZQpjdXJsIC1YIERFTEVURSAiLi4uL3NjcmlwdHMvJFNDUklQVF9OQU1FIiAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iCgojIERlbGV0ZSBieSB0YWcKY3VybCAtWCBERUxFVEUgIi4uLi9zY3JpcHRzP3RhZ3M9Y3VzdG9tZXItMTIzJTNBeWVzIiAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iCmBgYAoKKipQYWdpbmF0aW9uOioqIFNESyBzdXBwb3J0cyBhc3luYyBpdGVyYXRpb24uIE1hbnVhbDogYWRkIGA/cGVyX3BhZ2U9MTAwJnBhZ2U9MWAgcXVlcnkgcGFyYW1zLgoKIyMgU3RhdGljIEFzc2V0cwoKKiozLXN0ZXAgcHJvY2VzczoqKiBDcmVhdGUgc2Vzc2lvbiDihpIgVXBsb2FkIGZpbGVzIOKGkiBEZXBsb3kgV29ya2VyCgojIyMgMS4gQ3JlYXRlIFVwbG9hZCBTZXNzaW9uCmBgYGJhc2gKY3VybCAtWCBQT1NUICIuLi4vc2NyaXB0cy8kU0NSSVBUX05BTUUvYXNzZXRzLXVwbG9hZC1zZXNzaW9uIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIiBcCiAgLWQgJ3sKICAgICJtYW5pZmVzdCI6IHsKICAgICAgIi9pbmRleC5odG1sIjogeyJoYXNoIjogIjA4ZjFkZmRhNDU3NDI4NGFiM2MyMTY2NmQxZWU4YzdkNCIsICJzaXplIjogMTIzNH0KICAgIH0KICB9JwojIFJldHVybnM6IGp3dCwgYnVja2V0cwpgYGAKCioqSGFzaDoqKiBTSEEtMjU2IHRydW5jYXRlZCB0byBmaXJzdCAxNiBieXRlcyAoMzIgaGV4IGNoYXJhY3RlcnMpCgojIyMgMi4gVXBsb2FkIEZpbGVzCmBgYGJhc2gKY3VybCAtWCBQT1NUICIuLi4vd29ya2Vycy9hc3NldHMvdXBsb2FkP2Jhc2U2ND10cnVlIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkVVBMT0FEX0pXVCIgXAogIC1GICcwOGYxZGZkYTQ1NzQyODRhYjNjMjE2NjZkMWVlOGM3ZDQ9PEJBU0U2NF9DT05URU5UPicKIyBSZXR1cm5zOiBjb21wbGV0aW9uIGp3dApgYGAKCioqTXVsdGlwbGUgYnVja2V0czoqKiBVcGxvYWQgdG8gYWxsIHJldHVybmVkIGJ1Y2tldCBVUkxzICh0eXBpY2FsbHkgMiBmb3IgcmVkdW5kYW5jeSkgdXNpbmcgc2FtZSBKV1QgYW5kIGhhc2guCgojIyMgMy4gRGVwbG95IHdpdGggQXNzZXRzCmBgYGJhc2gKY3VybCAtWCBQVVQgIi4uLi9zY3JpcHRzLyRTQ1JJUFRfTkFNRSIgXAogIC1GICdtZXRhZGF0YT17CiAgICAibWFpbl9tb2R1bGUiOiAiaW5kZXguanMiLAogICAgImFzc2V0cyI6IHsiand0IjogIjxDT01QTEVUSU9OX1RPS0VOPiJ9LAogICAgImJpbmRpbmdzIjogW3sidHlwZSI6ICJhc3NldHMiLCAibmFtZSI6ICJBU1NFVFMifV0KICB9O3R5cGU9YXBwbGljYXRpb24vanNvbicgXAogIC1GICdpbmRleC5qcz1leHBvcnQgZGVmYXVsdCB7Li4ufTt0eXBlPWFwcGxpY2F0aW9uL2phdmFzY3JpcHQrbW9kdWxlJwpgYGAKCioqQXNzZXQgSXNvbGF0aW9uOioqIEFzc2V0cyBzaGFyZWQgYWNyb3NzIG5hbWVzcGFjZSBieSBkZWZhdWx0LiBGb3IgY3VzdG9tZXIgaXNvbGF0aW9uLCBzYWx0IGhhc2g6IGBzaGEyNTYoY3VzdG9tZXJJZCArIGZpbGVDb250ZW50cykuc2xpY2UoMCwgMzIpYAoKIyMgRGlzcGF0Y2ggV29ya2VycwoKIyMjIFN1YmRvbWFpbiBSb3V0aW5nCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgdXNlcldvcmtlck5hbWUgPSBuZXcgVVJMKHJlcXVlc3QudXJsKS5ob3N0bmFtZS5zcGxpdCgiLiIpWzBdOwogICAgY29uc3QgdXNlcldvcmtlciA9IGVudi5ESVNQQVRDSEVSLmdldCh1c2VyV29ya2VyTmFtZSk7CiAgICByZXR1cm4gYXdhaXQgdXNlcldvcmtlci5mZXRjaChyZXF1ZXN0KTsKICB9LAp9OwpgYGAKCiMjIyBQYXRoIFJvdXRpbmcKYGBgdHlwZXNjcmlwdApjb25zdCBwYXRoUGFydHMgPSBuZXcgVVJMKHJlcXVlc3QudXJsKS5wYXRobmFtZS5zcGxpdCgiLyIpLmZpbHRlcihCb29sZWFuKTsKY29uc3QgdXNlcldvcmtlciA9IGVudi5ESVNQQVRDSEVSLmdldChwYXRoUGFydHNbMF0pOwpyZXR1cm4gYXdhaXQgdXNlcldvcmtlci5mZXRjaChyZXF1ZXN0KTsKYGBgCgojIyMgS1YgUm91dGluZwpgYGB0eXBlc2NyaXB0CmNvbnN0IGhvc3RuYW1lID0gbmV3IFVSTChyZXF1ZXN0LnVybCkuaG9zdG5hbWU7CmNvbnN0IHVzZXJXb3JrZXJOYW1lID0gYXdhaXQgZW52LlJPVVRJTkdfS1YuZ2V0KGhvc3RuYW1lKTsKY29uc3QgdXNlcldvcmtlciA9IGVudi5ESVNQQVRDSEVSLmdldCh1c2VyV29ya2VyTmFtZSk7CnJldHVybiBhd2FpdCB1c2VyV29ya2VyLmZldGNoKHJlcXVlc3QpOwpgYGAKCiMjIE91dGJvdW5kIFdvcmtlcnMKCkNvbnRyb2wgZXh0ZXJuYWwgZmV0Y2ggZnJvbSB1c2VyIFdvcmtlcnM6CgojIyMgQ29uZmlndXJlCmBgYHR5cGVzY3JpcHQKY29uc3QgdXNlcldvcmtlciA9IGVudi5ESVNQQVRDSEVSLmdldCgKICB3b3JrZXJOYW1lLCB7fSwKICB7IG91dGJvdW5kOiB7IGN1c3RvbWVyX2NvbnRleHQ6IHsgY3VzdG9tZXJfbmFtZTogd29ya2VyTmFtZSwgdXJsOiByZXF1ZXN0LnVybCB9IH0gfQopOwpgYGAKCiMjIyBJbXBsZW1lbnQKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCBjdXN0b21lck5hbWUgPSBlbnYuY3VzdG9tZXJfbmFtZTsKICAgIGNvbnN0IHVybCA9IG5ldyBVUkwocmVxdWVzdC51cmwpOwogICAgCiAgICAvLyBCbG9jayBkb21haW5zCiAgICBpZiAoWyJtYWxpY2lvdXMuY29tIl0uc29tZShkID0+IHVybC5ob3N0bmFtZS5pbmNsdWRlcyhkKSkpIHsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiQmxvY2tlZCIsIHsgc3RhdHVzOiA0MDMgfSk7CiAgICB9CiAgICAKICAgIC8vIEluamVjdCBhdXRoCiAgICBpZiAodXJsLmhvc3RuYW1lID09PSAiYXBpLmV4YW1wbGUuY29tIikgewogICAgICBjb25zdCBoZWFkZXJzID0gbmV3IEhlYWRlcnMocmVxdWVzdC5oZWFkZXJzKTsKICAgICAgaGVhZGVycy5zZXQoIkF1dGhvcml6YXRpb24iLCBgQmVhcmVyICR7Z2VuZXJhdGVKV1QoY3VzdG9tZXJOYW1lKX1gKTsKICAgICAgcmV0dXJuIGZldGNoKG5ldyBSZXF1ZXN0KHJlcXVlc3QsIHsgaGVhZGVycyB9KSk7CiAgICB9CiAgICAKICAgIHJldHVybiBmZXRjaChyZXF1ZXN0KTsKICB9LAp9OwpgYGAKCioqTm90ZToqKiBEb2Vzbid0IGludGVyY2VwdCBETy9tVExTIGZldGNoLgoKU2VlIFtSRUFETUUubWRdKC4vUkVBRE1FLm1kKSwgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCksIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCksIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpCg==
+# API Operations
+
+## Deploy User Worker
+
+```bash
+curl -X PUT \
+  "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/dispatch/namespaces/$NAMESPACE/scripts/$SCRIPT_NAME" \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -F 'metadata={"main_module": "worker.mjs"};type=application/json' \
+  -F 'worker.mjs=@worker.mjs;type=application/javascript+module'
+```
+
+### TypeScript SDK
+```typescript
+import Cloudflare from "cloudflare";
+
+const client = new Cloudflare({ apiToken: process.env.API_TOKEN });
+
+const scriptFile = new File([scriptContent], `${scriptName}.mjs`, {
+  type: "application/javascript+module",
+});
+
+await client.workersForPlatforms.dispatch.namespaces.scripts.update(
+  namespace, scriptName,
+  {
+    account_id: accountId,
+    metadata: { main_module: `${scriptName}.mjs` },
+    files: [scriptFile],
+  }
+);
+```
+
+## TypeScript Types
+
+```typescript
+import type { DispatchNamespace } from '@cloudflare/workers-types';
+
+interface DispatchNamespace {
+  get(name: string, options?: Record<string, unknown>, dispatchOptions?: DynamicDispatchOptions): Fetcher;
+}
+
+interface DynamicDispatchOptions {
+  limits?: DynamicDispatchLimits;
+  outbound?: Record<string, unknown>;
+}
+
+interface DynamicDispatchLimits {
+  cpuMs?: number;        // Max CPU milliseconds
+  subRequests?: number;  // Max fetch() calls
+}
+
+// Usage
+const userWorker = env.DISPATCHER.get('customer-123', {}, {
+  limits: { cpuMs: 50, subRequests: 20 },
+  outbound: { customerId: '123', url: request.url }
+});
+```
+
+## Deploy with Bindings
+```bash
+curl -X PUT ".../scripts/$SCRIPT_NAME" \
+  -F 'metadata={
+    "main_module": "worker.mjs",
+    "bindings": [
+      {"type": "kv_namespace", "name": "MY_KV", "namespace_id": "'$KV_ID'"}
+    ],
+    "tags": ["customer-123", "production"],
+    "compatibility_date": "2026-01-01"  // Use current date for new projects
+  };type=application/json' \
+  -F 'worker.mjs=@worker.mjs;type=application/javascript+module'
+```
+
+## List/Delete Workers
+
+```bash
+# List
+curl "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/dispatch/namespaces/$NAMESPACE/scripts" \
+  -H "Authorization: Bearer $API_TOKEN"
+
+# Delete by name
+curl -X DELETE ".../scripts/$SCRIPT_NAME" -H "Authorization: Bearer $API_TOKEN"
+
+# Delete by tag
+curl -X DELETE ".../scripts?tags=customer-123%3Ayes" -H "Authorization: Bearer $API_TOKEN"
+```
+
+**Pagination:** SDK supports async iteration. Manual: add `?per_page=100&page=1` query params.
+
+## Static Assets
+
+**3-step process:** Create session → Upload files → Deploy Worker
+
+### 1. Create Upload Session
+```bash
+curl -X POST ".../scripts/$SCRIPT_NAME/assets-upload-session" \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -d '{
+    "manifest": {
+      "/index.html": {"hash": "08f1dfda4574284ab3c21666d1ee8c7d4", "size": 1234}
+    }
+  }'
+# Returns: jwt, buckets
+```
+
+**Hash:** SHA-256 truncated to first 16 bytes (32 hex characters)
+
+### 2. Upload Files
+```bash
+curl -X POST ".../workers/assets/upload?base64=true" \
+  -H "Authorization: Bearer $UPLOAD_JWT" \
+  -F '08f1dfda4574284ab3c21666d1ee8c7d4=<BASE64_CONTENT>'
+# Returns: completion jwt
+```
+
+**Multiple buckets:** Upload to all returned bucket URLs (typically 2 for redundancy) using same JWT and hash.
+
+### 3. Deploy with Assets
+```bash
+curl -X PUT ".../scripts/$SCRIPT_NAME" \
+  -F 'metadata={
+    "main_module": "index.js",
+    "assets": {"jwt": "<COMPLETION_TOKEN>"},
+    "bindings": [{"type": "assets", "name": "ASSETS"}]
+  };type=application/json' \
+  -F 'index.js=export default {...};type=application/javascript+module'
+```
+
+**Asset Isolation:** Assets shared across namespace by default. For customer isolation, salt hash: `sha256(customerId + fileContents).slice(0, 32)`
+
+## Dispatch Workers
+
+### Subdomain Routing
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const userWorkerName = new URL(request.url).hostname.split(".")[0];
+    const userWorker = env.DISPATCHER.get(userWorkerName);
+    return await userWorker.fetch(request);
+  },
+};
+```
+
+### Path Routing
+```typescript
+const pathParts = new URL(request.url).pathname.split("/").filter(Boolean);
+const userWorker = env.DISPATCHER.get(pathParts[0]);
+return await userWorker.fetch(request);
+```
+
+### KV Routing
+```typescript
+const hostname = new URL(request.url).hostname;
+const userWorkerName = await env.ROUTING_KV.get(hostname);
+const userWorker = env.DISPATCHER.get(userWorkerName);
+return await userWorker.fetch(request);
+```
+
+## Outbound Workers
+
+Control external fetch from user Workers:
+
+### Configure
+```typescript
+const userWorker = env.DISPATCHER.get(
+  workerName, {},
+  { outbound: { customer_context: { customer_name: workerName, url: request.url } } }
+);
+```
+
+### Implement
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const customerName = env.customer_name;
+    const url = new URL(request.url);
+    
+    // Block domains
+    if (["malicious.com"].some(d => url.hostname.includes(d))) {
+      return new Response("Blocked", { status: 403 });
+    }
+    
+    // Inject auth
+    if (url.hostname === "api.example.com") {
+      const headers = new Headers(request.headers);
+      headers.set("Authorization", `Bearer ${generateJWT(customerName)}`);
+      return fetch(new Request(request, { headers }));
+    }
+    
+    return fetch(request);
+  },
+};
+```
+
+**Note:** Doesn't intercept DO/mTLS fetch.
+
+See [README.md](./README.md), [configuration.md](./configuration.md), [patterns.md](./patterns.md), [gotchas.md](./gotchas.md)

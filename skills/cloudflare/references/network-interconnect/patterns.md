@@ -1,1 +1,166 @@
-IyBDTkkgUGF0dGVybnMKClNlZSBbUkVBRE1FLm1kXShSRUFETUUubWQpIGZvciBvdmVydmlldy4KCiMjIEhpZ2ggQXZhaWxhYmlsaXR5CgoqKkNyaXRpY2FsOioqIERlc2lnbiBmb3IgcmVzaWxpZW5jZSBmcm9tIGRheSBvbmUuCgoqKlJlcXVpcmVtZW50czoqKgotIERldmljZS1sZXZlbCBkaXZlcnNpdHkgKHNlcGFyYXRlIGhhcmR3YXJlKQotIEJhY2t1cCBJbnRlcm5ldCBjb25uZWN0aXZpdHkgKG5vIFNMQSBvbiBDTkkpCi0gTmV0d29yay1yZXNpbGllbnQgbG9jYXRpb25zIHByZWZlcnJlZAotIFJlZ3VsYXIgZmFpbG92ZXIgdGVzdGluZwoKKipBcmNoaXRlY3R1cmU6KioKYGBgCllvdXIgTmV0d29yayBBIOKUgOKUgDEwRyBDTkkgdjLilIDilIA+IENGIENDUiBEZXZpY2UgMQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCCllvdXIgTmV0d29yayBCIOKUgOKUgDEwRyBDTkkgdjLilIDilIA+IENGIENDUiBEZXZpY2UgMgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBDRiBHbG9iYWwgTmV0d29yayAoQVMxMzMzNSkKYGBgCgoqKkNhcGFjaXR5IFBsYW5uaW5nOioqCi0gUGxhbiBhY3Jvc3MgYWxsIGxpbmtzCi0gQWNjb3VudCBmb3IgZmFpbG92ZXIgc2NlbmFyaW9zCi0gWW91ciByZXNwb25zaWJpbGl0eQoKIyMgUGF0dGVybjogTWFnaWMgVHJhbnNpdCArIENOSSB2MgoKKipVc2UgQ2FzZToqKiBERG9TIHByb3RlY3Rpb24sIHByaXZhdGUgY29ubmVjdGl2aXR5LCBubyBHUkUgb3ZlcmhlYWQuCgpgYGB0eXBlc2NyaXB0Ci8vIDEuIENyZWF0ZSBpbnRlcmNvbm5lY3QKY29uc3QgaWMgPSBhd2FpdCBjbGllbnQubmV0d29ya0ludGVyY29ubmVjdHMuaW50ZXJjb25uZWN0cy5jcmVhdGUoewogIGFjY291bnRfaWQ6IGlkLAogIHR5cGU6ICdkaXJlY3QnLAogIGZhY2lsaXR5OiAnRVdSMScsCiAgc3BlZWQ6ICcxMEcnLAogIG5hbWU6ICdtYWdpYy10cmFuc2l0LXByaW1hcnknLAp9KTsKCi8vIDIuIFBvbGwgdW50aWwgYWN0aXZlCmNvbnN0IHN0YXR1cyA9IGF3YWl0IHBvbGxVbnRpbEFjdGl2ZShpZCwgaWMuaWQpOwoKLy8gMy4gQ29uZmlndXJlIE1hZ2ljIFRyYW5zaXQgdHVubmVsIHZpYSBEYXNoYm9hcmQvQVBJCmBgYAoKKipCZW5lZml0czoqKiAxNTAwIE1UVSBib3RoIHdheXMsIHNpbXBsaWZpZWQgcm91dGluZy4KCiMjIFBhdHRlcm46IE11bHRpLUNsb3VkIEh5YnJpZAoKKipVc2UgQ2FzZToqKiBBV1MvR0NQIHdvcmtsb2FkcyB3aXRoIENsb3VkZmxhcmUuCgoqKkFXUyBEaXJlY3QgQ29ubmVjdDoqKgpgYGB0eXBlc2NyaXB0Ci8vIDEuIE9yZGVyIERpcmVjdCBDb25uZWN0IGluIEFXUyBDb25zb2xlCi8vIDIuIEdldCBMT0EgKyBWTEFOIGZyb20gQVdTCi8vIDMuIFNlbmQgdG8gQ0YgYWNjb3VudCB0ZWFtIChubyBBUEkpCi8vIDQuIENvbmZpZ3VyZSBzdGF0aWMgcm91dGVzIGluIE1hZ2ljIFdBTgoKYXdhaXQgY29uZmlndXJlU3RhdGljUm91dGVzKGlkLCB7CiAgcHJlZml4OiAnMTAuMC4wLjAvOCcsCiAgbmV4dGhvcDogJ2F3cy1kaXJlY3QtY29ubmVjdCcsCn0pOwpgYGAKCioqR0NQIENsb3VkIEludGVyY29ubmVjdDoqKgpgYGAKMS4gR2V0IFZMQU4gYXR0YWNobWVudCBwYWlyaW5nIGtleSBmcm9tIEdDUCBDb25zb2xlCjIuIENyZWF0ZSB2aWEgRGFzaGJvYXJkOiBJbnRlcmNvbm5lY3RzIOKGkiBDcmVhdGUg4oaSIENsb3VkIEludGVyY29ubmVjdCDihpIgR29vZ2xlCiAgIC0gRW50ZXIgcGFpcmluZyBrZXksIG5hbWUsIE1UVSwgc3BlZWQKMy4gQ29uZmlndXJlIHN0YXRpYyByb3V0ZXMgaW4gTWFnaWMgV0FOIChCR1Agcm91dGVzIGZyb20gR0NQIGlnbm9yZWQpCjQuIENvbmZpZ3VyZSBjdXN0b20gbGVhcm5lZCByb3V0ZXMgaW4gR0NQIENsb3VkIFJvdXRlcgpgYGAKCioqTm90ZToqKiBEYXNoYm9hcmQtb25seS4gTm8gQVBJL1NESyBzdXBwb3J0IHlldC4KCiMjIFBhdHRlcm46IE11bHRpLUxvY2F0aW9uIEhBCgoqKlVzZSBDYXNlOioqIDk5Ljk5JSsgdXB0aW1lLgoKYGBgdHlwZXNjcmlwdAovLyBQcmltYXJ5IChOWSkKY29uc3QgcHJpbWFyeSA9IGF3YWl0IGNsaWVudC5uZXR3b3JrSW50ZXJjb25uZWN0cy5pbnRlcmNvbm5lY3RzLmNyZWF0ZSh7CiAgYWNjb3VudF9pZDogaWQsCiAgdHlwZTogJ2RpcmVjdCcsCiAgZmFjaWxpdHk6ICdFV1IxJywKICBzcGVlZDogJzEwRycsCiAgbmFtZTogJ3ByaW1hcnktZXdyMScsCn0pOwoKLy8gU2Vjb25kYXJ5IChOWSwgZGlmZmVyZW50IGhhcmR3YXJlKQpjb25zdCBzZWNvbmRhcnkgPSBhd2FpdCBjbGllbnQubmV0d29ya0ludGVyY29ubmVjdHMuaW50ZXJjb25uZWN0cy5jcmVhdGUoewogIGFjY291bnRfaWQ6IGlkLAogIHR5cGU6ICdkaXJlY3QnLAogIGZhY2lsaXR5OiAnRVdSMicsCiAgc3BlZWQ6ICcxMEcnLAogIG5hbWU6ICdzZWNvbmRhcnktZXdyMicsCn0pOwoKLy8gVGVydGlhcnkgKExBLCBkaWZmZXJlbnQgZ2VvZ3JhcGh5KQpjb25zdCB0ZXJ0aWFyeSA9IGF3YWl0IGNsaWVudC5uZXR3b3JrSW50ZXJjb25uZWN0cy5pbnRlcmNvbm5lY3RzLmNyZWF0ZSh7CiAgYWNjb3VudF9pZDogaWQsCiAgdHlwZTogJ3BhcnRuZXInLAogIGZhY2lsaXR5OiAnTEFYMScsCiAgc3BlZWQ6ICcxMEcnLAogIG5hbWU6ICd0ZXJ0aWFyeS1sYXgxJywKfSk7CgovLyBCR1AgbG9jYWwgcHJlZmVyZW5jZXM6Ci8vIFByaW1hcnk6IDIwMAovLyBTZWNvbmRhcnk6IDE1MAovLyBUZXJ0aWFyeTogMTAwCi8vIEludGVybmV0OiBMYXN0IHJlc29ydApgYGAKCiMjIFBhdHRlcm46IFBhcnRuZXIgSW50ZXJjb25uZWN0IChFcXVpbml4KQoKKipVc2UgQ2FzZToqKiBRdWljayBkZXBsb3ltZW50LCBubyBjb2xvY2F0aW9uLgoKKipTZXR1cDoqKgoxLiBPcmRlciB2aXJ0dWFsIGNpcmN1aXQgaW4gRXF1aW5peCBGYWJyaWMgUG9ydGFsCjIuIFNlbGVjdCBDbG91ZGZsYXJlIGFzIGRlc3RpbmF0aW9uCjMuIENob29zZSBmYWNpbGl0eQo0LiBTZW5kIGRldGFpbHMgdG8gQ0YgYWNjb3VudCB0ZWFtCjUuIENGIGFjY2VwdHMgaW4gcG9ydGFsCjYuIENvbmZpZ3VyZSBCR1AKCioqTm8gQVBJIGF1dG9tYXRpb24qKiDigJMgcGFydG5lciBwb3J0YWxzIG1hbmFnZWQgc2VwYXJhdGVseS4KCiMjIEZhaWxvdmVyICYgU2VjdXJpdHkKCioqRmFpbG92ZXIgQmVzdCBQcmFjdGljZXM6KioKLSBVc2UgQkdQIGxvY2FsIHByZWZlcmVuY2VzIGZvciBwcmlvcml0eQotIENvbmZpZ3VyZSBCRkQgZm9yIGZhc3QgZGV0ZWN0aW9uICh2MSkKLSBUZXN0IHJlZ3VsYXJseSB3aXRoIHRyYWZmaWMgc2hpZnQKLSBEb2N1bWVudCBydW5ib29rcwoKKipTZWN1cml0eToqKgotIEJHUCBwYXNzd29yZCBhdXRoZW50aWNhdGlvbgotIEJHUCByb3V0ZSBmaWx0ZXJpbmcKLSBNb25pdG9yIHVuZXhwZWN0ZWQgcm91dGVzCi0gTWFnaWMgRmlyZXdhbGwgZm9yIEREb1MvdGhyZWF0cwotIE1pbmltdW0gQVBJIHRva2VuIHBlcm1pc3Npb25zCi0gUm90YXRlIGNyZWRlbnRpYWxzIHBlcmlvZGljYWxseQoKIyMgRGVjaXNpb24gTWF0cml4Cgp8IFJlcXVpcmVtZW50IHwgUmVjb21tZW5kZWQgfAp8LS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tfAp8IENvbGxvY2F0ZWQgd2l0aCBDRiB8IERpcmVjdCB8CnwgTm90IGNvbGxvY2F0ZWQgfCBQYXJ0bmVyIHwKfCBBV1MvR0NQIHdvcmtsb2FkcyB8IENsb3VkIHwKfCAxNTAwIE1UVSBib3RoIHdheXMgfCB2MiB8CnwgVkxBTiB0YWdnaW5nIHwgdjEgfAp8IFB1YmxpYyBwZWVyaW5nIHwgdjEgfAp8IFNpbXBsZXN0IGNvbmZpZyB8IHYyIHwKfCBCRkQgZmFzdCBmYWlsb3ZlciB8IHYxIHwKfCBMQUNQIGJ1bmRsaW5nIHwgdjEgfAoKIyMgUmVzb3VyY2VzCgotIFtNYWdpYyBUcmFuc2l0IERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9tYWdpYy10cmFuc2l0LykKLSBbTWFnaWMgV0FOIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9tYWdpYy13YW4vKQotIFtBcmdvIFNtYXJ0IFJvdXRpbmddKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hcmdvLykK
+# CNI Patterns
+
+See [README.md](README.md) for overview.
+
+## High Availability
+
+**Critical:** Design for resilience from day one.
+
+**Requirements:**
+- Device-level diversity (separate hardware)
+- Backup Internet connectivity (no SLA on CNI)
+- Network-resilient locations preferred
+- Regular failover testing
+
+**Architecture:**
+```
+Your Network A ──10G CNI v2──> CF CCR Device 1
+                                     │
+Your Network B ──10G CNI v2──> CF CCR Device 2
+                                     │
+                            CF Global Network (AS13335)
+```
+
+**Capacity Planning:**
+- Plan across all links
+- Account for failover scenarios
+- Your responsibility
+
+## Pattern: Magic Transit + CNI v2
+
+**Use Case:** DDoS protection, private connectivity, no GRE overhead.
+
+```typescript
+// 1. Create interconnect
+const ic = await client.networkInterconnects.interconnects.create({
+  account_id: id,
+  type: 'direct',
+  facility: 'EWR1',
+  speed: '10G',
+  name: 'magic-transit-primary',
+});
+
+// 2. Poll until active
+const status = await pollUntilActive(id, ic.id);
+
+// 3. Configure Magic Transit tunnel via Dashboard/API
+```
+
+**Benefits:** 1500 MTU both ways, simplified routing.
+
+## Pattern: Multi-Cloud Hybrid
+
+**Use Case:** AWS/GCP workloads with Cloudflare.
+
+**AWS Direct Connect:**
+```typescript
+// 1. Order Direct Connect in AWS Console
+// 2. Get LOA + VLAN from AWS
+// 3. Send to CF account team (no API)
+// 4. Configure static routes in Magic WAN
+
+await configureStaticRoutes(id, {
+  prefix: '10.0.0.0/8',
+  nexthop: 'aws-direct-connect',
+});
+```
+
+**GCP Cloud Interconnect:**
+```
+1. Get VLAN attachment pairing key from GCP Console
+2. Create via Dashboard: Interconnects → Create → Cloud Interconnect → Google
+   - Enter pairing key, name, MTU, speed
+3. Configure static routes in Magic WAN (BGP routes from GCP ignored)
+4. Configure custom learned routes in GCP Cloud Router
+```
+
+**Note:** Dashboard-only. No API/SDK support yet.
+
+## Pattern: Multi-Location HA
+
+**Use Case:** 99.99%+ uptime.
+
+```typescript
+// Primary (NY)
+const primary = await client.networkInterconnects.interconnects.create({
+  account_id: id,
+  type: 'direct',
+  facility: 'EWR1',
+  speed: '10G',
+  name: 'primary-ewr1',
+});
+
+// Secondary (NY, different hardware)
+const secondary = await client.networkInterconnects.interconnects.create({
+  account_id: id,
+  type: 'direct',
+  facility: 'EWR2',
+  speed: '10G',
+  name: 'secondary-ewr2',
+});
+
+// Tertiary (LA, different geography)
+const tertiary = await client.networkInterconnects.interconnects.create({
+  account_id: id,
+  type: 'partner',
+  facility: 'LAX1',
+  speed: '10G',
+  name: 'tertiary-lax1',
+});
+
+// BGP local preferences:
+// Primary: 200
+// Secondary: 150
+// Tertiary: 100
+// Internet: Last resort
+```
+
+## Pattern: Partner Interconnect (Equinix)
+
+**Use Case:** Quick deployment, no colocation.
+
+**Setup:**
+1. Order virtual circuit in Equinix Fabric Portal
+2. Select Cloudflare as destination
+3. Choose facility
+4. Send details to CF account team
+5. CF accepts in portal
+6. Configure BGP
+
+**No API automation** – partner portals managed separately.
+
+## Failover & Security
+
+**Failover Best Practices:**
+- Use BGP local preferences for priority
+- Configure BFD for fast detection (v1)
+- Test regularly with traffic shift
+- Document runbooks
+
+**Security:**
+- BGP password authentication
+- BGP route filtering
+- Monitor unexpected routes
+- Magic Firewall for DDoS/threats
+- Minimum API token permissions
+- Rotate credentials periodically
+
+## Decision Matrix
+
+| Requirement | Recommended |
+|-------------|-------------|
+| Collocated with CF | Direct |
+| Not collocated | Partner |
+| AWS/GCP workloads | Cloud |
+| 1500 MTU both ways | v2 |
+| VLAN tagging | v1 |
+| Public peering | v1 |
+| Simplest config | v2 |
+| BFD fast failover | v1 |
+| LACP bundling | v1 |
+
+## Resources
+
+- [Magic Transit Docs](https://developers.cloudflare.com/magic-transit/)
+- [Magic WAN Docs](https://developers.cloudflare.com/magic-wan/)
+- [Argo Smart Routing](https://developers.cloudflare.com/argo/)

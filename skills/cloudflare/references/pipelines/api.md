@@ -1,1 +1,124 @@
-IyBQaXBlbGluZXMgQVBJIFJlZmVyZW5jZQoKQ29kZSB0ZW1wbGF0ZXMgYW5kIHZlcmlmaWVkIGJlaGF2aW9yLiBGb3IgdGhlIGZ1bGwgU1FMIGZ1bmN0aW9uIHNldCBhbmQgSFRUUCBzdGF0dXMgc2VtYW50aWNzLCBwdWxsIGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGlwZWxpbmVzL3NxbC1yZWZlcmVuY2UvYCBhbmQgdGhlIHN0cmVhbXMgZG9jcy4KCiMjIFdvcmtlciBCaW5kaW5nIEludGVyZmFjZQoKYGBgdHlwZXNjcmlwdAovLyBmcm9tIGNsb3VkZmxhcmU6cGlwZWxpbmVzIC8gQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcwppbnRlcmZhY2UgUGlwZWxpbmU8VCA9IGFueT4geyBzZW5kKHJlY29yZHM6IFRbXSk6IFByb21pc2U8dm9pZD47IH0KCmludGVyZmFjZSBFbnYgeyBNWV9TVFJFQU06IFBpcGVsaW5lOyB9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxOiBSZXF1ZXN0LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgYXdhaXQgZW52Lk1ZX1NUUkVBTS5zZW5kKFt7IGV2ZW50X2lkOiBjcnlwdG8ucmFuZG9tVVVJRCgpLCBhbW91bnQ6IDI5Ljk5IH1dKTsKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIk9LIik7CiAgfQp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgotIGBzZW5kKClgIHRha2VzIGFuICoqYXJyYXkqKiwgcmV0dXJucyBgUHJvbWlzZTx2b2lkPmAgKG5vIGNvbmZpcm1hdGlvbiBwYXlsb2FkKS4KLSBUaHJvd3Mgb24gbmV0d29yayBlcnJvcnMg4oCUIHdyYXAgaW4gdHJ5L2NhdGNoIG9yIHVzZSBgY3R4LndhaXRVbnRpbCgpYCBmb3IgZmlyZS1hbmQtZm9yZ2V0LgotIFZhbGlkYXRpb24gZXJyb3JzIGFyZSAqKm5vdCoqIHRocm93biBoZXJlIChkZWZlcnJlZCBkdXJpbmcgcHJvY2Vzc2luZyDigJQgc2VlIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSkuCi0gUGF5bG9hZC9yYXRlIGxpbWl0cyBhcHBseSDigJQgY2hlY2sgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9waXBlbGluZXMvcGxhdGZvcm0vbGltaXRzL2AgYmVmb3JlIHNpemluZyBiYXRjaGVzLgoKIyMgSFRUUCBJbmdlc3QKCmBgYApodHRwczovL3tzdHJlYW0taWR9LmluZ2VzdC5jbG91ZGZsYXJlLmNvbQpgYGAKCkdldCBge3N0cmVhbS1pZH1gIGZyb20gYG5weCB3cmFuZ2xlciBwaXBlbGluZXMgc3RyZWFtcyBsaXN0YC4KCmBgYGJhc2gKIyBCYXRjaCAocHJlZmVycmVkKQpjdXJsIC1YIFBPU1QgaHR0cHM6Ly97c3RyZWFtLWlkfS5pbmdlc3QuY2xvdWRmbGFyZS5jb20gXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCAnW3siZXZlbnRfaWQiOiJldnQtMSIsImFtb3VudCI6MjkuOTl9LHsiZXZlbnRfaWQiOiJldnQtMiIsImFtb3VudCI6MTQuOTl9XScKCiMgU2luZ2xlIGV2ZW50IOKAlCBhdXRvLXdyYXBwZWQgaW4gYW4gYXJyYXkKY3VybCAtWCBQT1NUIGh0dHBzOi8ve3N0cmVhbS1pZH0uaW5nZXN0LmNsb3VkZmxhcmUuY29tIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiAtZCAneyJldmVudF9pZCI6ImV2dC0zIiwiYW1vdW50Ijo5Ljk5fScKYGBgCgpJZiBzdHJlYW0gYXV0aCBpcyBlbmFibGVkLCBhZGQgYC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJFRPS0VOImAgKHRva2VuIG5lZWRzICoqV29ya2VycyBQaXBlbGluZXMgU2VuZCoqKS4gU3RhbmRhcmQgSFRUUCBzdGF0dXMgY29kZXMgYXBwbHkgKDQwMCBpbnZhbGlkLCA0MDEgYXV0aCwgNDEzIHRvbyBsYXJnZSwgNDI5IHJhdGUtbGltaXRlZCwgNXh4IHJldHJ5KS4KCj4gKipKU09OIG9ubHkqKiDigJQgbm8gQXZybywgUHJvdG9idWYsIG9yIENTViBpbnB1dC4KCiMjIFJFU1QgTWFuYWdlbWVudCBBUEkKCkJhc2U6IGBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJEFDQ09VTlRfSUQvcGlwZWxpbmVzL3YxYAoKYGBgYmFzaAojIExpc3QKY3VybCAtcyAiJEJBU0VfVVJML3N0cmVhbXMiICAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIgpjdXJsIC1zICIkQkFTRV9VUkwvc2lua3MiICAgICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iCmN1cmwgLXMgIiRCQVNFX1VSTC9waXBlbGluZXMiIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJEFQSV9UT0tFTiIKCiMgR2V0IG9uZSAocGlwZWxpbmUgR0VUIGluY2x1ZGVzIHN0YXR1cyArIGZhaWx1cmVfcmVhc29uIOKAlCB1c2VmdWwgZm9yIGRlYnVnZ2luZykKY3VybCAtcyAiJEJBU0VfVVJML3BpcGVsaW5lcy97cGlwZWxpbmUtaWR9IiAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iCgojIERlbGV0ZSBpbiByZXZlcnNlIG9yZGVyOiBwaXBlbGluZSDihpIgc2luayDihpIgc3RyZWFtCmN1cmwgLVggREVMRVRFICIkQkFTRV9VUkwvcGlwZWxpbmVzL3tpZH0iIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJEFQSV9UT0tFTiIKY3VybCAtWCBERUxFVEUgIiRCQVNFX1VSTC9zaW5rcy97aWR9IiAgICAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIgpjdXJsIC1YIERFTEVURSAiJEJBU0VfVVJML3N0cmVhbXMve2lkfSIgICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iCmBgYAoKPiBgd3JhbmdsZXIgcGlwZWxpbmVzIGRlbGV0ZWAgZGVmYXVsdHMgdG8gIm5vIiBub24taW50ZXJhY3RpdmVseSDigJQgdXNlIHRoZSBSRVNUIEFQSSBmb3IgYXV0b21hdGVkIGNsZWFudXAuIERlbGV0aW5nIGEgc3RyZWFtIHJlbW92ZXMgYnVmZmVyZWQgZXZlbnRzIGFuZCBkZXBlbmRlbnQgcGlwZWxpbmVzLgoKIyMjIFBpcGVsaW5lIExpZmVjeWNsZSBTdGF0ZXMKCnwgU3RhdHVzIHwgTWVhbmluZyB8CnwtLS0tLS0tLXwtLS0tLS0tLS18CnwgYHJ1bm5pbmdgIHwgQWN0aXZlLCBwcm9jZXNzaW5nIGV2ZW50cyB8CnwgYGluaXRpYWxpemluZ2AgfCBTdGFydGluZyB1cCAobWludXRlcyBhZnRlciBjcmVhdGlvbiBvciByZWNvdmVyeSkgfAp8IGBmYWlsZWRgIHwgU3RvcHBlZCBvbiBlcnJvciDigJQgY2hlY2sgYGZhaWx1cmVfcmVhc29uYCAoZXhwaXJlZCB0b2tlbiwgZGVsZXRlZCBidWNrZXQsIGRpc2FibGVkIGNhdGFsb2cpIHwKCj4gQSBgR0VUYCBvbiBhIHNpbmsgc2hvd3MgYHNjaGVtYS5maWVsZHM6IFtdYCDigJQgZXhwZWN0ZWQuIFRoZSBzaW5rIGluaGVyaXRzIHNjaGVtYSBmcm9tIHRoZSBzdHJlYW0gdmlhIHRoZSBwaXBlbGluZSBTUUwuCgojIyBQaXBlbGluZSBTUUwgKFRyYW5zZm9ybXMpCgpSb3ctbGV2ZWwgb25seSDigJQgbm8gR1JPVVAgQlkvYWdncmVnYXRpb24uIENURXMgKGBXSVRIYCkgYW5kIGBVTk5FU1RgIGFyZSBzdXBwb3J0ZWQuIEZ1bGwgZnVuY3Rpb24gbGlzdDogYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9waXBlbGluZXMvc3FsLXJlZmVyZW5jZS9gLgoKYGBgc3FsCi0tIFBhc3N0aHJvdWdoIC8gZmlsdGVyIC8gZW5yaWNoCklOU0VSVCBJTlRPIG15X3NpbmsgU0VMRUNUICogRlJPTSBteV9zdHJlYW07CklOU0VSVCBJTlRPIG15X3NpbmsgU0VMRUNUICogRlJPTSBteV9zdHJlYW0gV0hFUkUgYW1vdW50ID4gMTA7CklOU0VSVCBJTlRPIG15X3NpbmsKU0VMRUNUIGV2ZW50X2lkLCBVUFBFUihjYXRlZ29yeSkgQVMgY2F0ZWdvcnksIGFtb3VudCAqIDEuMSBBUyBhbW91bnRfd2l0aF90YXgKRlJPTSBteV9zdHJlYW07CgotLSBDVEUKV0lUSCBmaWx0ZXJlZCBBUyAoU0VMRUNUIGV2ZW50X2lkLCBhbW91bnQgRlJPTSBteV9zdHJlYW0gV0hFUkUgYW1vdW50ID4gNTApCklOU0VSVCBJTlRPIG15X3NpbmsgU0VMRUNUICogRlJPTSBmaWx0ZXJlZDsKCi0tIFVOTkVTVCBhcnJheXMgKG9uZSBwZXIgU0VMRUNUKQpTRUxFQ1QgVU5ORVNUKHRhZ3MpIEFTIHRhZyBGUk9NIG15X3N0cmVhbTsKYGBgCgpTdXBwb3J0ZWQgY2F0ZWdvcmllczogc3RyaW5nLCByZWdleCwgaGFzaGluZyAoYHNoYTI1NmApLCBKU09OIGV4dHJhY3Rpb24sIHRpbWVzdGFtcCBjb252ZXJzaW9uLCBjb25kaXRpb25hbCAoYENBU0VgKSwgYENBU1RgLCBgQ09BTEVTQ0VgLCBtYXRoL2NvbXBhcmlzb24gb3BlcmF0b3JzLgoKIyMgVmVyaWZ5aW5nIEVuZC10by1FbmQgRGF0YSBGbG93CgpgYGBiYXNoCiMgMS4gUGlwZWxpbmUgcnVubmluZyAobm90IGluaXRpYWxpemluZy9mYWlsZWQpPwpjdXJsIC1zICIkQkFTRV9VUkwvcGlwZWxpbmVzL3tpZH0iIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJEFQSV9UT0tFTiIKCiMgMi4gVGFibGUgY3JlYXRlZCB5ZXQ/ICgz4oCTNyBtaW4gb24gZmlyc3QgZmx1c2gpCmN1cmwgLXMgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQUNDT1VOVF9JRC9yMi1jYXRhbG9nLyRCVUNLRVQvbmFtZXNwYWNlcy9teV9ucy90YWJsZXMiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iCgojIDMuIERhdGEgcHJlc2VudD8gKFIyIFNRTCkKY3VybCAtcyAtWCBQT1NUIFwKICAiaHR0cHM6Ly9hcGkuc3FsLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS9hcGkvdjEvYWNjb3VudHMvJEFDQ09VTlRfSUQvcjItc3FsL3F1ZXJ5LyRCVUNLRVQiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCAneyJxdWVyeSI6ICJTRUxFQ1QgQ09VTlQoKikgQVMgdG90YWwgRlJPTSBteV9ucy5teV90YWJsZSJ9JwpgYGAKCj4gRXhwZWN0ICoqM+KAkzcgbWludXRlcyoqIGZyb20gZmlyc3Qgc2VuZCB0byBmaXJzdCBxdWVyeWFibGUgZGF0YS4gU3Vic2VxdWVudCBmbHVzaGVzIGFyZSBtdWNoIGZhc3Rlci4KCiMjIFNlZSBBbHNvCgotIFtjb25maWd1cmF0aW9uLm1kXShjb25maWd1cmF0aW9uLm1kKSDigJQgY3JlYXRpbmcgcmVzb3VyY2VzIMK3IFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIOKAlCBwcm9kdWNlcnMsIExvZ3B1c2gsIG9ic2VydmFiaWxpdHkKLSBbcjItc3FsL2FwaS5tZF0oLi4vcjItc3FsL2FwaS5tZCkg4oCUIHF1ZXJ5aW5nIHJlc3VsdHMK
+# Pipelines API Reference
+
+Code templates and verified behavior. For the full SQL function set and HTTP status semantics, pull `https://developers.cloudflare.com/pipelines/sql-reference/` and the streams docs.
+
+## Worker Binding Interface
+
+```typescript
+// from cloudflare:pipelines / @cloudflare/workers-types
+interface Pipeline<T = any> { send(records: T[]): Promise<void>; }
+
+interface Env { MY_STREAM: Pipeline; }
+
+export default {
+  async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    await env.MY_STREAM.send([{ event_id: crypto.randomUUID(), amount: 29.99 }]);
+    return new Response("OK");
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+- `send()` takes an **array**, returns `Promise<void>` (no confirmation payload).
+- Throws on network errors — wrap in try/catch or use `ctx.waitUntil()` for fire-and-forget.
+- Validation errors are **not** thrown here (deferred during processing — see [gotchas.md](gotchas.md)).
+- Payload/rate limits apply — check `https://developers.cloudflare.com/pipelines/platform/limits/` before sizing batches.
+
+## HTTP Ingest
+
+```
+https://{stream-id}.ingest.cloudflare.com
+```
+
+Get `{stream-id}` from `npx wrangler pipelines streams list`.
+
+```bash
+# Batch (preferred)
+curl -X POST https://{stream-id}.ingest.cloudflare.com \
+  -H "Content-Type: application/json" \
+  -d '[{"event_id":"evt-1","amount":29.99},{"event_id":"evt-2","amount":14.99}]'
+
+# Single event — auto-wrapped in an array
+curl -X POST https://{stream-id}.ingest.cloudflare.com \
+  -H "Content-Type: application/json" -d '{"event_id":"evt-3","amount":9.99}'
+```
+
+If stream auth is enabled, add `-H "Authorization: Bearer $TOKEN"` (token needs **Workers Pipelines Send**). Standard HTTP status codes apply (400 invalid, 401 auth, 413 too large, 429 rate-limited, 5xx retry).
+
+> **JSON only** — no Avro, Protobuf, or CSV input.
+
+## REST Management API
+
+Base: `https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/pipelines/v1`
+
+```bash
+# List
+curl -s "$BASE_URL/streams"   -H "Authorization: Bearer $API_TOKEN"
+curl -s "$BASE_URL/sinks"     -H "Authorization: Bearer $API_TOKEN"
+curl -s "$BASE_URL/pipelines" -H "Authorization: Bearer $API_TOKEN"
+
+# Get one (pipeline GET includes status + failure_reason — useful for debugging)
+curl -s "$BASE_URL/pipelines/{pipeline-id}" -H "Authorization: Bearer $API_TOKEN"
+
+# Delete in reverse order: pipeline → sink → stream
+curl -X DELETE "$BASE_URL/pipelines/{id}" -H "Authorization: Bearer $API_TOKEN"
+curl -X DELETE "$BASE_URL/sinks/{id}"     -H "Authorization: Bearer $API_TOKEN"
+curl -X DELETE "$BASE_URL/streams/{id}"   -H "Authorization: Bearer $API_TOKEN"
+```
+
+> `wrangler pipelines delete` defaults to "no" non-interactively — use the REST API for automated cleanup. Deleting a stream removes buffered events and dependent pipelines.
+
+### Pipeline Lifecycle States
+
+| Status | Meaning |
+|--------|---------|
+| `running` | Active, processing events |
+| `initializing` | Starting up (minutes after creation or recovery) |
+| `failed` | Stopped on error — check `failure_reason` (expired token, deleted bucket, disabled catalog) |
+
+> A `GET` on a sink shows `schema.fields: []` — expected. The sink inherits schema from the stream via the pipeline SQL.
+
+## Pipeline SQL (Transforms)
+
+Row-level only — no GROUP BY/aggregation. CTEs (`WITH`) and `UNNEST` are supported. Full function list: `https://developers.cloudflare.com/pipelines/sql-reference/`.
+
+```sql
+-- Passthrough / filter / enrich
+INSERT INTO my_sink SELECT * FROM my_stream;
+INSERT INTO my_sink SELECT * FROM my_stream WHERE amount > 10;
+INSERT INTO my_sink
+SELECT event_id, UPPER(category) AS category, amount * 1.1 AS amount_with_tax
+FROM my_stream;
+
+-- CTE
+WITH filtered AS (SELECT event_id, amount FROM my_stream WHERE amount > 50)
+INSERT INTO my_sink SELECT * FROM filtered;
+
+-- UNNEST arrays (one per SELECT)
+SELECT UNNEST(tags) AS tag FROM my_stream;
+```
+
+Supported categories: string, regex, hashing (`sha256`), JSON extraction, timestamp conversion, conditional (`CASE`), `CAST`, `COALESCE`, math/comparison operators.
+
+## Verifying End-to-End Data Flow
+
+```bash
+# 1. Pipeline running (not initializing/failed)?
+curl -s "$BASE_URL/pipelines/{id}" -H "Authorization: Bearer $API_TOKEN"
+
+# 2. Table created yet? (3–7 min on first flush)
+curl -s "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2-catalog/$BUCKET/namespaces/my_ns/tables" \
+  -H "Authorization: Bearer $API_TOKEN"
+
+# 3. Data present? (R2 SQL)
+curl -s -X POST \
+  "https://api.sql.cloudflarestorage.com/api/v1/accounts/$ACCOUNT_ID/r2-sql/query/$BUCKET" \
+  -H "Authorization: Bearer $API_TOKEN" -H "Content-Type: application/json" \
+  -d '{"query": "SELECT COUNT(*) AS total FROM my_ns.my_table"}'
+```
+
+> Expect **3–7 minutes** from first send to first queryable data. Subsequent flushes are much faster.
+
+## See Also
+
+- [configuration.md](configuration.md) — creating resources · [patterns.md](patterns.md) — producers, Logpush, observability
+- [r2-sql/api.md](../r2-sql/api.md) — querying results

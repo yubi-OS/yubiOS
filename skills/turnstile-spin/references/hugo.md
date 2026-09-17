@@ -1,1 +1,114 @@
-IyBIdWdvCgpGb3IgSHVnbyBzdGF0aWMgc2l0ZXMuIFRoZSB3aWRnZXQgcmVuZGVycyBvbiBhbnkgcGFnZSB0aGF0IGluY2x1ZGVzIHRoZSBwYXJ0aWFsOyBzaXRldmVyaWZ5IGhhcHBlbnMgYXQgd2hhdGV2ZXIgYmFja2VuZCBoYW5kbGVzIHlvdXIgZm9ybSBzdWJtaXNzaW9ucyAoYSBDbG91ZGZsYXJlIFBhZ2VzIEZ1bmN0aW9uLCBhIFdvcmtlciwgYW4gZXh0ZXJuYWwgQVBJLCBvciBhIGZvcm0gaG9zdCB3aXRoIGEgc2VydmVyLXNpZGUgaG9vaykuCgpgYGBodG1sIHRpdGxlPSJsYXlvdXRzL3BhcnRpYWxzL3R1cm5zdGlsZS5odG1sIgo8c2NyaXB0CglzcmM9Imh0dHBzOi8vY2hhbGxlbmdlcy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvdjAvYXBpLmpzIgoJYXN5bmMKCWRlZmVyCj48L3NjcmlwdD4KCjxmb3JtIGFjdGlvbj0ie3sgLlNpdGUuUGFyYW1zLnR1cm5zdGlsZUZvcm1FbmRwb2ludCB9fSIgbWV0aG9kPSJQT1NUIj4KCTxpbnB1dCBuYW1lPSJlbWFpbCIgdHlwZT0iZW1haWwiIHJlcXVpcmVkIC8+Cgk8ZGl2CgkJY2xhc3M9ImNmLXR1cm5zdGlsZSIKCQlkYXRhLXNpdGVrZXk9Int7IC5TaXRlLlBhcmFtcy50dXJuc3RpbGVTaXRla2V5IH19IgoJCWRhdGEtYWN0aW9uPSJzdWJzY3JpYmUiCgk+PC9kaXY+Cgk8YnV0dG9uIHR5cGU9InN1Ym1pdCI+U3Vic2NyaWJlPC9idXR0b24+CjwvZm9ybT4KYGBgCgpBZGQgdGhlIHBhcmFtcyB0byB5b3VyIHNpdGUgY29uZmlnOgoKYGBgdG9tbCB0aXRsZT0iaHVnby50b21sIgpbcGFyYW1zXQp0dXJuc3RpbGVTaXRla2V5ID0gIllPVVJfU0lURUtFWSIKdHVybnN0aWxlRm9ybUVuZHBvaW50ID0gIi9hcGkvc3Vic2NyaWJlIiAgIyBwYXRoIHRvIHlvdXIgZXhpc3RpbmcgZm9ybSBoYW5kbGVyCmBgYAoKUmVmZXJlbmNlIHRoZSBwYXJ0aWFsIGZyb20gYW55IGxheW91dCBvciBjb250ZW50IGZpbGU6CgpgYGB0ZXh0Cnt7IHBhcnRpYWwgInR1cm5zdGlsZS5odG1sIiAuIH19CmBgYAoKIyMgQmFja2VuZCAod2hlcmUgc2l0ZXZlcmlmeSBsaXZlcykKCkh1Z28gZG9lc24ndCBob3N0IHNlcnZlci1zaWRlIGNvZGUsIHNvIHRoZSBmb3JtIGVuZHBvaW50IG11c3QgbGl2ZSBlbHNld2hlcmUuIFR3byBjb21tb24gc2V0dXBzOgoKKipDbG91ZGZsYXJlIFBhZ2VzIEZ1bmN0aW9uKiogKGBmdW5jdGlvbnMvYXBpL3N1YnNjcmliZS5qc2ApOgoKYGBganMKZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIG9uUmVxdWVzdFBvc3QoeyByZXF1ZXN0LCBlbnYgfSkgewoJY29uc3QgZm9ybSA9IGF3YWl0IHJlcXVlc3QuZm9ybURhdGEoKTsKCWNvbnN0IHRva2VuID0gZm9ybS5nZXQoImNmLXR1cm5zdGlsZS1yZXNwb25zZSIpOwoKCWNvbnN0IGV4cGVjdGVkSG9zdG5hbWVzID0gbmV3IFNldCgKCQkoZW52LlRVUk5TVElMRV9IT1NUTkFNRVMgPz8gIiIpCgkJCS5zcGxpdCgiLCIpCgkJCS5tYXAoKGgpID0+IGgudHJpbSgpKQoJCQkuZmlsdGVyKEJvb2xlYW4pLAoJKTsKCWlmIChleHBlY3RlZEhvc3RuYW1lcy5zaXplID09PSAwKSB7CgkJcmV0dXJuIG5ldyBSZXNwb25zZSgiZm9yYmlkZGVuIiwgeyBzdGF0dXM6IDQwMyB9KTsKCX0KCgljb25zdCByID0gYXdhaXQgZmV0Y2goImh0dHBzOi8vY2hhbGxlbmdlcy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvdjAvc2l0ZXZlcmlmeSIsIHsKCQltZXRob2Q6ICJQT1NUIiwKCQloZWFkZXJzOiB7ICJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkIiB9LAoJCWJvZHk6IG5ldyBVUkxTZWFyY2hQYXJhbXMoewoJCQlzZWNyZXQ6IGVudi5UVVJOU1RJTEVfU0VDUkVULAoJCQlyZXNwb25zZTogdG9rZW4sCgkJCXJlbW90ZWlwOiByZXF1ZXN0LmhlYWRlcnMuZ2V0KCJDRi1Db25uZWN0aW5nLUlQIiksCgkJfSksCgl9KTsKCWNvbnN0IHJlc3VsdCA9IGF3YWl0IHIuanNvbigpOwoJaWYgKAoJCXIub2sgIT09IHRydWUgfHwKCQlyZXN1bHQuc3VjY2VzcyAhPT0gdHJ1ZSB8fAoJCXJlc3VsdC5hY3Rpb24gIT09ICJzdWJzY3JpYmUiIHx8CgkJIWV4cGVjdGVkSG9zdG5hbWVzLmhhcyhyZXN1bHQuaG9zdG5hbWUpCgkpIHsKCQlyZXR1cm4gbmV3IFJlc3BvbnNlKCJmb3JiaWRkZW4iLCB7IHN0YXR1czogNDAzIH0pOwoJfQoKCS8vIHByb2Nlc3Mgc3Vic2NyaWJlCglyZXR1cm4gbmV3IFJlc3BvbnNlKCJvayIpOwp9CmBgYAoKYHN1YnNjcmliZWAgaXMgdGhlIHN0YWJsZSBhY3Rpb24gZm9yIHRoaXMgc3VyZmFjZS4gUHJlc2VydmUgYW4gZXhpc3RpbmcgY3VzdG9tIG1pZ3JhdGlvbiBhY3Rpb24gYW5kIGNvbXBhcmUgdGhlIHJldHVybmVkIGFjdGlvbiB0byB0aGUgc2FtZSB2YWx1ZS4gU2l0ZXZlcmlmeSBpcyBtYW5kYXRvcnkgZm9yIGV2ZXJ5IHdpZGdldCBtb2RlLCBpbmNsdWRpbmcgcHJlLWNsZWFyYW5jZS4gU2V0IGBUVVJOU1RJTEVfSE9TVE5BTUVTYCB0byB0aGUgZGVwbG95bWVudC1zcGVjaWZpYyBmcm9udGVuZCBob3N0bmFtZXM7IGEgcHJvZHVjdGlvbiB2YWx1ZSBtdXN0IG5vdCBpbmNsdWRlIGBsb2NhbGhvc3RgIG9yIGAxMjcuMC4wLjFgLgoKQWZ0ZXIgdGhlIHVzZXIgYXBwcm92ZXMgYSBjYW5vbmljYWwgYWJzb2x1dGUgYFdSQU5HTEVSX0JJTmAgb3V0c2lkZSB0aGUgcHJvamVjdCwgc2V0IHRoZSBzZWNyZXQgd2l0aCBgKHNldCAreDsgcHJpbnRmICclcycgIiRXSURHRVRfU0VDUkVUIiB8ICIkV1JBTkdMRVJfQklOIiBwYWdlcyBzZWNyZXQgcHV0IFRVUk5TVElMRV9TRUNSRVQpYCAob3IgdXNlIHRoZSBkYXNoYm9hcmQncyBQYWdlcyDihpIgeW91ciBwcm9qZWN0IOKGkiBTZXR0aW5ncyDihpIgRW52aXJvbm1lbnQgdmFyaWFibGVzIOKGkiBBZGQgc2VjcmV0KS4KCioqRXh0ZXJuYWwgYmFja2VuZCoqOiBhbnkgTm9kZS9SdWJ5L1B5dGhvbi9HbyBoYW5kbGVyIGNhbiBkbyB0aGUgc2FtZSBjYWxsLiBTZWUgdGhlIFt2YW5pbGxhLWh0bWwgcmVmZXJlbmNlXSguL3ZhbmlsbGEtaHRtbC5tZCkgZm9yIG5vbi1DbG91ZGZsYXJlLXNwZWNpZmljIHNuaXBwZXRzLgoKIyMgVmFyaWFudDogc2hvcnRjb2RlIGZvciBjb250ZW50IGZpbGVzCgpJZiB5b3Ugd2FudCB0byBkcm9wIHRoZSB3aWRnZXQgaW50byBNYXJrZG93biBjb250ZW50IChub3QganVzdCBsYXlvdXRzKSwgY3JlYXRlIGEgc2hvcnRjb2RlOgoKYGBgaHRtbCB0aXRsZT0ibGF5b3V0cy9zaG9ydGNvZGVzL3R1cm5zdGlsZS1mb3JtLmh0bWwiCnt7IHBhcnRpYWwgInR1cm5zdGlsZS5odG1sIiAuIH19CmBgYAoKVXNlIGluIGNvbnRlbnQ6CgpgYGBtYXJrZG93biB0aXRsZT0iY29udGVudC9jb250YWN0Lm1kIgotLS0KdGl0bGU6IENvbnRhY3QKLS0tCgpDb250YWN0IHVzOgoKe3s8IHR1cm5zdGlsZS1mb3JtID59fQpgYGAKCiMjIFN1YnN0aXR1dGlvbnMKCnwgUGxhY2Vob2xkZXIgICAgICAgICAgICAgIHwgUmVwbGFjZSB3aXRoICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSB8IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHwKfCBgWU9VUl9TSVRFS0VZYCAgICAgICAgICAgfCBUaGUgd2lkZ2V0IHNpdGUga2V5IGZyb20gU3RlcCA4ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8CnwgYHR1cm5zdGlsZUZvcm1FbmRwb2ludGAgIHwgVGhlIHBhdGggb3IgVVJMIHRvIHlvdXIgZm9ybSBoYW5kbGVyIChQYWdlcyBGdW5jdGlvbiwgV29ya2VyLCBldGMuKSAgfAp8IGBUVVJOU1RJTEVfU0VDUkVUYCAgICAgICB8IEVudi12YXIgbmFtZSBpbiB5b3VyIGJhY2tlbmQuIFZhbHVlIGlzIHRoZSBzZWNyZXQgY2FwdHVyZWQgaW4gU3RlcCA4LnwK
+# Hugo
+
+For Hugo static sites. The widget renders on any page that includes the partial; siteverify happens at whatever backend handles your form submissions (a Cloudflare Pages Function, a Worker, an external API, or a form host with a server-side hook).
+
+```html title="layouts/partials/turnstile.html"
+<script
+	src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+	async
+	defer
+></script>
+
+<form action="{{ .Site.Params.turnstileFormEndpoint }}" method="POST">
+	<input name="email" type="email" required />
+	<div
+		class="cf-turnstile"
+		data-sitekey="{{ .Site.Params.turnstileSitekey }}"
+		data-action="subscribe"
+	></div>
+	<button type="submit">Subscribe</button>
+</form>
+```
+
+Add the params to your site config:
+
+```toml title="hugo.toml"
+[params]
+turnstileSitekey = "YOUR_SITEKEY"
+turnstileFormEndpoint = "/api/subscribe"  # path to your existing form handler
+```
+
+Reference the partial from any layout or content file:
+
+```text
+{{ partial "turnstile.html" . }}
+```
+
+## Backend (where siteverify lives)
+
+Hugo doesn't host server-side code, so the form endpoint must live elsewhere. Two common setups:
+
+**Cloudflare Pages Function** (`functions/api/subscribe.js`):
+
+```js
+export async function onRequestPost({ request, env }) {
+	const form = await request.formData();
+	const token = form.get("cf-turnstile-response");
+
+	const expectedHostnames = new Set(
+		(env.TURNSTILE_HOSTNAMES ?? "")
+			.split(",")
+			.map((h) => h.trim())
+			.filter(Boolean),
+	);
+	if (expectedHostnames.size === 0) {
+		return new Response("forbidden", { status: 403 });
+	}
+
+	const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+		method: "POST",
+		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		body: new URLSearchParams({
+			secret: env.TURNSTILE_SECRET,
+			response: token,
+			remoteip: request.headers.get("CF-Connecting-IP"),
+		}),
+	});
+	const result = await r.json();
+	if (
+		r.ok !== true ||
+		result.success !== true ||
+		result.action !== "subscribe" ||
+		!expectedHostnames.has(result.hostname)
+	) {
+		return new Response("forbidden", { status: 403 });
+	}
+
+	// process subscribe
+	return new Response("ok");
+}
+```
+
+`subscribe` is the stable action for this surface. Preserve an existing custom migration action and compare the returned action to the same value. Siteverify is mandatory for every widget mode, including pre-clearance. Set `TURNSTILE_HOSTNAMES` to the deployment-specific frontend hostnames; a production value must not include `localhost` or `127.0.0.1`.
+
+After the user approves a canonical absolute `WRANGLER_BIN` outside the project, set the secret with `(set +x; printf '%s' "$WIDGET_SECRET" | "$WRANGLER_BIN" pages secret put TURNSTILE_SECRET)` (or use the dashboard's Pages → your project → Settings → Environment variables → Add secret).
+
+**External backend**: any Node/Ruby/Python/Go handler can do the same call. See the [vanilla-html reference](./vanilla-html.md) for non-Cloudflare-specific snippets.
+
+## Variant: shortcode for content files
+
+If you want to drop the widget into Markdown content (not just layouts), create a shortcode:
+
+```html title="layouts/shortcodes/turnstile-form.html"
+{{ partial "turnstile.html" . }}
+```
+
+Use in content:
+
+```markdown title="content/contact.md"
+---
+title: Contact
+---
+
+Contact us:
+
+{{< turnstile-form >}}
+```
+
+## Substitutions
+
+| Placeholder              | Replace with                                                         |
+| ------------------------ | -------------------------------------------------------------------- |
+| `YOUR_SITEKEY`           | The widget site key from Step 8                                      |
+| `turnstileFormEndpoint`  | The path or URL to your form handler (Pages Function, Worker, etc.)  |
+| `TURNSTILE_SECRET`       | Env-var name in your backend. Value is the secret captured in Step 8.|

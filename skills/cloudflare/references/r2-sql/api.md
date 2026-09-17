@@ -1,1 +1,121 @@
-IyBSMiBTUUwgQVBJIFJlZmVyZW5jZQoKUmVhZC1vbmx5IFNRTCBvdmVyIEljZWJlcmcgKEFwYWNoZSBEYXRhRnVzaW9uKS4gUXVlcnkgdGVtcGxhdGVzIG9ubHkuIEZvciB0aGUgYXV0aG9yaXRhdGl2ZSBsaXN0IG9mIHN1cHBvcnRlZCBzeW50YXgsIGZ1bmN0aW9ucywgZGF0YSB0eXBlcywgYW5kIGxpbWl0YXRpb25zLCBwdWxsIHRoZSBTUUwgcmVmZXJlbmNlIChgc3FsLXJlZmVyZW5jZS9gLCBgLi4uL2FnZ3JlZ2F0ZS1mdW5jdGlvbnMvYCwgYC4uLi9zY2FsYXItZnVuY3Rpb25zL2AsIGAuLi4vY29tcGxleC10eXBlcy9gKSBhbmQgYHJlZmVyZW5jZS9saW1pdGF0aW9ucy1iZXN0LXByYWN0aWNlcy9gLgoKIyMgUXVlcnkgRW5kcG9pbnQKCmBgYApQT1NUIGh0dHBzOi8vYXBpLnNxbC5jbG91ZGZsYXJlc3RvcmFnZS5jb20vYXBpL3YxL2FjY291bnRzL3tBQ0NPVU5UX0lEfS9yMi1zcWwvcXVlcnkve0JVQ0tFVH0KQXV0aG9yaXphdGlvbjogQmVhcmVyIDx0b2tlbj4KQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uCkJvZHk6IHsicXVlcnkiOiAiPFNRTD4ifQpgYGAKCkNMSTogYG5weCB3cmFuZ2xlciByMiBzcWwgcXVlcnkgIntXQVJFSE9VU0V9IiAiPFNRTD4iYCAod2l0aCBgV1JBTkdMRVJfUjJfU1FMX0FVVEhfVE9LRU5gKS4KCiMjIFJlc3BvbnNlIEZvcm1hdAoKYGBganNvbgp7CiAgInJlc3VsdCI6IHsKICAgICJyZXF1ZXN0X2lkIjogImRxZS1wcm9kLTAxLi4uIiwKICAgICJzY2hlbWEiOiBbeyJuYW1lIjogImNudCIsICJkZXNjcmlwdG9yIjogeyJ0eXBlIjogeyJuYW1lIjogImludDY0In0sICJudWxsYWJsZSI6IGZhbHNlfX1dLAogICAgInJvd3MiOiBbeyJjYXRlZ29yeSI6ICJFbGVjdHJvbmljcyIsICJjbnQiOiAxMjM0NX1dLAogICAgIm1ldHJpY3MiOiB7InIyX3JlcXVlc3RzX2NvdW50IjogNSwgImZpbGVzX3NjYW5uZWQiOiAyOSwgImJ5dGVzX3NjYW5uZWQiOiAxMjM0NTY3OCwgImNhY2hlX2hpdHMiOiAwfQogIH0sCiAgInN1Y2Nlc3MiOiB0cnVlLCAiZXJyb3JzIjogW10KfQpgYGAKCkVycm9yOiBgeyJyZXN1bHQiOiBudWxsLCAic3VjY2VzcyI6IGZhbHNlLCAiZXJyb3JzIjogW3siY29kZSI6IDQwMDAzLCAibWVzc2FnZSI6ICIuLi4ifV19YC4gYGJ5dGVzX3NjYW5uZWRgIOKJiCBiaWxsYWJsZSBkYXRhLgoKIyMgUXVlcnkgU3RydWN0dXJlCgpgYGBzcWwKU0VMRUNUIFtESVNUSU5DVF0gY29sdW1ucyB8IGV4cHJlc3Npb25zIHwgYWdncmVnYXRpb25zCkZST00gbmFtZXNwYWNlLnRhYmxlIFthbGlhc10KWyBbSU5ORVJ8TEVGVHxSSUdIVHxGVUxMIE9VVEVSfENST1NTXSBKT0lOIG5hbWVzcGFjZS50YWJsZTIgYWxpYXMyIE9OIC4uLiBdCltXSEVSRSAuLi5dIFtHUk9VUCBCWSAuLi5dIFtIQVZJTkcgLi4uXQpbUVVBTElGWSB3aW5kb3dfcHJlZGljYXRlXQpbT1JERVIgQlkgZXhwciBbQVNDfERFU0NdXQpbTElNSVQgbl0gICAgICAgICAgICAgICAgICAgICAgICAgIC0tIGRlZmF1bHQgNTAwLCBtYXggMTAsMDAwCmBgYAoKIyMgU2NoZW1hIERpc2NvdmVyeQoKYGBgc3FsClNIT1cgREFUQUJBU0VTOyAgICAgICAgICAgIC0tIGxpc3QgbmFtZXNwYWNlcyAoYWxpYXNlczogU0hPVyBOQU1FU1BBQ0VTIC8gU0hPVyBTQ0hFTUFTKQpTSE9XIFRBQkxFUyBJTiBuYW1lc3BhY2U7CkRFU0NSSUJFIG5hbWVzcGFjZS50YWJsZTsgIC0tIGNvbHVtbnMsIHR5cGVzLCBwYXJ0aXRpb24ga2V5cwpFWFBMQUlOIFtGT1JNQVQgSlNPTl0gU0VMRUNUIC4uLjsgICAtLSBleGVjdXRpb24gcGxhbiAoZnJlZTsgbm8gZGF0YSBzY2FubmVkKQpgYGAKCiMjIEpPSU5zIC8gU3VicXVlcmllcyAvIENURXMgLyBTZXQgT3BzCgpgYGBzcWwKLS0gSk9JTnM6IGFsbCB0eXBlcyArIG11bHRpLXdheQpTRUxFQ1Qgei5kb21haW4sIENPVU5UKCopIEFTIGNudApGUk9NIG5zLnpvbmVzIHoKSU5ORVIgSk9JTiBucy5odHRwX3JlcXVlc3RzIGggT04gei56b25lX2lkID0gaC56b25lX2lkCkxFRlQgIEpPSU4gbnMuZmlyZXdhbGxfZXZlbnRzIGYgT04gei56b25lX2lkID0gZi56b25lX2lkCkdST1VQIEJZIHouZG9tYWluIE9SREVSIEJZIGNudCBERVNDIExJTUlUIDIwOwoKLS0gU3VicXVlcmllczogSU4gLyBFWElTVFMgLyBzY2FsYXIgLyBkZXJpdmVkClNFTEVDVCAqIEZST00gbnMudDEgV0hFUkUgaWQgSU4gKFNFTEVDVCBpZCBGUk9NIG5zLnQyIFdIRVJFIHggPiAwKTsKU0VMRUNUIGNvbCwgKFNFTEVDVCBDT1VOVCgqKSBGUk9NIG5zLnQyIHMgV0hFUkUgcy5pZCA9IHQuaWQpIEFTIGNudCBGUk9NIG5zLnQxIHQ7CgotLSBNdWx0aS10YWJsZSBDVEUgd2l0aCBKT0lOCldJVEggdG9wIEFTIChTRUxFQ1Qgem9uZV9pZCwgQ09VTlQoKikgQVMgcmVxIEZST00gbnMuaHR0cF9yZXF1ZXN0cyBHUk9VUCBCWSB6b25lX2lkIE9SREVSIEJZIHJlcSBERVNDIExJTUlUIDUwKQpTRUxFQ1QgdC56b25lX2lkLCB0LnJlcSBGUk9NIHRvcCB0IExFRlQgSk9JTiBucy56b25lcyB6IE9OIHQuem9uZV9pZCA9IHouem9uZV9pZDsKCi0tIFNldCBvcHM6IFVOSU9OIC8gVU5JT04gQUxMIC8gSU5URVJTRUNUIC8gRVhDRVBUClNFTEVDVCB6b25lX2lkIEZST00gbnMuZmlyZXdhbGxfZXZlbnRzIFdIRVJFIGFjdGlvbiA9ICdibG9jaycKVU5JT04gU0VMRUNUIHpvbmVfaWQgRlJPTSBucy5odHRwX3JlcXVlc3RzIFdIRVJFIHJpc2tfc2NvcmUgPiAwLjg7CmBgYAoKIyMgV2luZG93IEZ1bmN0aW9ucwoKVXNlIGlubGluZSBgT1ZFUiAoLi4uKWAuIFNlZSB0aGUgU1FMIHJlZmVyZW5jZSBmb3IgdGhlIGZ1bGwgbGlzdCBvZiBzdXBwb3J0ZWQgd2luZG93IGZ1bmN0aW9ucyBhbmQgZnJhbWUgc3ludGF4LgoKYGBgc3FsClNFTEVDVCBldmVudF9pZCwKICAgICAgIFJPV19OVU1CRVIoKSBPVkVSIChQQVJUSVRJT04gQlkgbWFnX3R5cGUgT1JERVIgQlkgbWFnbml0dWRlIERFU0MpIEFTIHJuLAogICAgICAgTEFHKG1hZ25pdHVkZSwgMiwgMC4wKSBPVkVSIChPUkRFUiBCWSBvY2N1cnJlZF9hdCkgQVMgcHJldjIsICAgLS0gb2Zmc2V0ICsgZGVmYXVsdAogICAgICAgTlRIX1ZBTFVFKG1hZ25pdHVkZSwgMikgT1ZFUiAoT1JERVIgQlkgbWFnbml0dWRlIERFU0MpIEFTIG4yLAogICAgICAgU1VNKG1hZ25pdHVkZSkgT1ZFUiAoT1JERVIgQlkgb2NjdXJyZWRfYXQpIEFTIHJ1bm5pbmcsCiAgICAgICBBVkcobWFnbml0dWRlKSBPVkVSIChPUkRFUiBCWSBtYWduaXR1ZGUgUk9XUyBCRVRXRUVOIDIgUFJFQ0VESU5HIEFORCBDVVJSRU5UIFJPVykgQVMgbW92aW5nX2F2ZwpGUk9NIG5zLmVhcnRocXVha2VzOwoKLS0gUVVBTElGWTogZmlsdGVyIG9uIGEgd2luZG93IHJlc3VsdCAodG9wIHJvdyBwZXIgcGFydGl0aW9uKQpTRUxFQ1QgZXZlbnRfaWQsIG1hZ190eXBlLCBtYWduaXR1ZGUgRlJPTSBucy5lYXJ0aHF1YWtlcwpRVUFMSUZZIFJPV19OVU1CRVIoKSBPVkVSIChQQVJUSVRJT04gQlkgbWFnX3R5cGUgT1JERVIgQlkgbWFnbml0dWRlIERFU0MpID0gMTsKYGBgCgojIyBGdW5jdGlvbnMKCkFnZ3JlZ2F0ZSwgc2NhbGFyLCBKU09OLCBhbmQgYXJyYXkvbWFwIGZ1bmN0aW9uIGNhdGFsb2dzIGFyZSBpbiB0aGUgZG9jcyDigJQgcHVsbCBgc3FsLXJlZmVyZW5jZS9hZ2dyZWdhdGUtZnVuY3Rpb25zL2AgYW5kIGAuLi4vc2NhbGFyLWZ1bmN0aW9ucy9gLiBKU09OIGZ1bmN0aW9ucyBhY2NlcHQgdmFyaWFkaWMgcGF0aHMsIGUuZy4gYGpzb25fZ2V0X2ludChkb2MsICd1c2VyJywgJ3Byb2ZpbGUnLCAnbGV2ZWwnKWAuCgojIyBEYXRhIFR5cGVzCgpgaW50ZWdlcmAsIGBmbG9hdGAsIGBzdHJpbmdgIChzaW5nbGUgcXVvdGVzKSwgYGJvb2xlYW5gLCBgdGltZXN0YW1wYCAoUkZDMzMzOSAqKndpdGggdGltZXpvbmUqKiksIGBkYXRlYCAoSVNPIDg2MDEpLCBgc3RydWN0YCwgYGFycmF5YCAoMS1pbmRleGVkKSwgYG1hcGAuIE5vIGltcGxpY2l0IGNvbnZlcnNpb25zIOKAlCBxdW90ZSBzdHJpbmdzLCBpbmNsdWRlIHRpbWV6b25lIG9uIHRpbWVzdGFtcHMsIGRvbid0IHF1b3RlIGludGVnZXJzLiBGdWxsIHR5cGUgZG9jczogYHNxbC1yZWZlcmVuY2UvYC4KCmBgYHNxbApXSEVSRSBzdGF0dXMgPSAyMDAgQU5EIG1ldGhvZCA9ICdHRVQnICAgICAgICAgICAgICAtLSBub3QgJzIwMCcsIG5vdCBHRVQKICBBTkQgdHMgPj0gJzIwMjYtMDEtMDFUMDA6MDA6MDBaJyAgICAgICAgICAgICAgICAgLS0gbm90ICcyMDI2LTAxLTAxJwpgYGAKCiMjIENvbXBsZXggVHlwZXMgKHF1aWNrIGV4YW1wbGVzOyBmdWxsIHJlZiBpbiBkb2NzKQoKYGBgc3FsClNFTEVDVCBwcmljaW5nWydwcmljZSddIEFTIHByaWNlLCBnZXRfZmllbGQocHJpY2luZywgJ2Rpc2NvdW50JykgQVMgZGlzYyBGUk9NIG5zLnQ7ICAtLSBzdHJ1Y3QKU0VMRUNUIHRhZ3NbMV0gQVMgZmlyc3RfdGFnLCBhcnJheV9sZW5ndGgodGFncykgQVMgbiBGUk9NIG5zLnQ7ICAgICAgICAgICAgICAgICAgICAgICAtLSBhcnJheSAoMS1pbmRleGVkKQpTRUxFQ1QgbWFwX2tleXMobWV0YSksIG1hcF9leHRyYWN0KG1ldGEsICdzb3VyY2UnKSBGUk9NIG5zLnQ7ICAgICAgICAgICAgICAgICAgICAgICAgIC0tIG1hcApgYGAKCiMjIEVycm9ycwoKRmFpbGVkIHF1ZXJpZXMgcmV0dXJuIGB7InN1Y2Nlc3MiOiBmYWxzZSwgImVycm9ycyI6IFt7ImNvZGUiOiAuLi4sICJtZXNzYWdlIjogLi4ufV19YC4gRm9yIGVycm9yIGNvZGVzIGFuZCB0cm91Ymxlc2hvb3RpbmcsIHNlZSBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyLXNxbC90cm91Ymxlc2hvb3RpbmcvYC4KCiMjIFNlZSBBbHNvCgotIFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIOKAlCBxdWVyeSBleGFtcGxlcyDCtyBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkg4oCUIGxpbWl0cyAmIHdvcmthcm91bmRzIMK3IFtjb25maWd1cmF0aW9uLm1kXShjb25maWd1cmF0aW9uLm1kKQo=
+# R2 SQL API Reference
+
+Read-only SQL over Iceberg (Apache DataFusion). Query templates only. For the authoritative list of supported syntax, functions, data types, and limitations, pull the SQL reference (`sql-reference/`, `.../aggregate-functions/`, `.../scalar-functions/`, `.../complex-types/`) and `reference/limitations-best-practices/`.
+
+## Query Endpoint
+
+```
+POST https://api.sql.cloudflarestorage.com/api/v1/accounts/{ACCOUNT_ID}/r2-sql/query/{BUCKET}
+Authorization: Bearer <token>
+Content-Type: application/json
+Body: {"query": "<SQL>"}
+```
+
+CLI: `npx wrangler r2 sql query "{WAREHOUSE}" "<SQL>"` (with `WRANGLER_R2_SQL_AUTH_TOKEN`).
+
+## Response Format
+
+```json
+{
+  "result": {
+    "request_id": "dqe-prod-01...",
+    "schema": [{"name": "cnt", "descriptor": {"type": {"name": "int64"}, "nullable": false}}],
+    "rows": [{"category": "Electronics", "cnt": 12345}],
+    "metrics": {"r2_requests_count": 5, "files_scanned": 29, "bytes_scanned": 12345678, "cache_hits": 0}
+  },
+  "success": true, "errors": []
+}
+```
+
+Error: `{"result": null, "success": false, "errors": [{"code": 40003, "message": "..."}]}`. `bytes_scanned` ≈ billable data.
+
+## Query Structure
+
+```sql
+SELECT [DISTINCT] columns | expressions | aggregations
+FROM namespace.table [alias]
+[ [INNER|LEFT|RIGHT|FULL OUTER|CROSS] JOIN namespace.table2 alias2 ON ... ]
+[WHERE ...] [GROUP BY ...] [HAVING ...]
+[QUALIFY window_predicate]
+[ORDER BY expr [ASC|DESC]]
+[LIMIT n]                          -- default 500, max 10,000
+```
+
+## Schema Discovery
+
+```sql
+SHOW DATABASES;            -- list namespaces (aliases: SHOW NAMESPACES / SHOW SCHEMAS)
+SHOW TABLES IN namespace;
+DESCRIBE namespace.table;  -- columns, types, partition keys
+EXPLAIN [FORMAT JSON] SELECT ...;   -- execution plan (free; no data scanned)
+```
+
+## JOINs / Subqueries / CTEs / Set Ops
+
+```sql
+-- JOINs: all types + multi-way
+SELECT z.domain, COUNT(*) AS cnt
+FROM ns.zones z
+INNER JOIN ns.http_requests h ON z.zone_id = h.zone_id
+LEFT  JOIN ns.firewall_events f ON z.zone_id = f.zone_id
+GROUP BY z.domain ORDER BY cnt DESC LIMIT 20;
+
+-- Subqueries: IN / EXISTS / scalar / derived
+SELECT * FROM ns.t1 WHERE id IN (SELECT id FROM ns.t2 WHERE x > 0);
+SELECT col, (SELECT COUNT(*) FROM ns.t2 s WHERE s.id = t.id) AS cnt FROM ns.t1 t;
+
+-- Multi-table CTE with JOIN
+WITH top AS (SELECT zone_id, COUNT(*) AS req FROM ns.http_requests GROUP BY zone_id ORDER BY req DESC LIMIT 50)
+SELECT t.zone_id, t.req FROM top t LEFT JOIN ns.zones z ON t.zone_id = z.zone_id;
+
+-- Set ops: UNION / UNION ALL / INTERSECT / EXCEPT
+SELECT zone_id FROM ns.firewall_events WHERE action = 'block'
+UNION SELECT zone_id FROM ns.http_requests WHERE risk_score > 0.8;
+```
+
+## Window Functions
+
+Use inline `OVER (...)`. See the SQL reference for the full list of supported window functions and frame syntax.
+
+```sql
+SELECT event_id,
+       ROW_NUMBER() OVER (PARTITION BY mag_type ORDER BY magnitude DESC) AS rn,
+       LAG(magnitude, 2, 0.0) OVER (ORDER BY occurred_at) AS prev2,   -- offset + default
+       NTH_VALUE(magnitude, 2) OVER (ORDER BY magnitude DESC) AS n2,
+       SUM(magnitude) OVER (ORDER BY occurred_at) AS running,
+       AVG(magnitude) OVER (ORDER BY magnitude ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg
+FROM ns.earthquakes;
+
+-- QUALIFY: filter on a window result (top row per partition)
+SELECT event_id, mag_type, magnitude FROM ns.earthquakes
+QUALIFY ROW_NUMBER() OVER (PARTITION BY mag_type ORDER BY magnitude DESC) = 1;
+```
+
+## Functions
+
+Aggregate, scalar, JSON, and array/map function catalogs are in the docs — pull `sql-reference/aggregate-functions/` and `.../scalar-functions/`. JSON functions accept variadic paths, e.g. `json_get_int(doc, 'user', 'profile', 'level')`.
+
+## Data Types
+
+`integer`, `float`, `string` (single quotes), `boolean`, `timestamp` (RFC3339 **with timezone**), `date` (ISO 8601), `struct`, `array` (1-indexed), `map`. No implicit conversions — quote strings, include timezone on timestamps, don't quote integers. Full type docs: `sql-reference/`.
+
+```sql
+WHERE status = 200 AND method = 'GET'              -- not '200', not GET
+  AND ts >= '2026-01-01T00:00:00Z'                 -- not '2026-01-01'
+```
+
+## Complex Types (quick examples; full ref in docs)
+
+```sql
+SELECT pricing['price'] AS price, get_field(pricing, 'discount') AS disc FROM ns.t;  -- struct
+SELECT tags[1] AS first_tag, array_length(tags) AS n FROM ns.t;                       -- array (1-indexed)
+SELECT map_keys(meta), map_extract(meta, 'source') FROM ns.t;                         -- map
+```
+
+## Errors
+
+Failed queries return `{"success": false, "errors": [{"code": ..., "message": ...}]}`. For error codes and troubleshooting, see `https://developers.cloudflare.com/r2-sql/troubleshooting/`.
+
+## See Also
+
+- [patterns.md](patterns.md) — query examples · [gotchas.md](gotchas.md) — limits & workarounds · [configuration.md](configuration.md)

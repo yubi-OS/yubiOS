@@ -1,1 +1,200 @@
-IyBBUEkgUmVmZXJlbmNlCgojIyBCaW5kaW5nIEFQSQoKIyMjIEJhc2ljIEFjY2VzcwoKKipDUklUSUNBTCoqOiBBc3luYyBgLmdldCgpYCByZXF1aXJlZCAtIHNlY3JldHMgTk9UIGRpcmVjdGx5IGF2YWlsYWJsZS4KCioqYC5nZXQoKWAgdGhyb3dzIG9uIGVycm9yKiogLSBkb2VzIE5PVCByZXR1cm4gbnVsbC4gQWx3YXlzIHVzZSB0cnkvY2F0Y2guCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIEFQSV9LRVk6IHsgZ2V0KCk6IFByb21pc2U8c3RyaW5nPiB9Owp9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCBhcGlLZXkgPSBhd2FpdCBlbnYuQVBJX0tFWS5nZXQoKTsKICAgIHJldHVybiBmZXRjaCgiaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20iLCB7CiAgICAgIGhlYWRlcnM6IHsgIkF1dGhvcml6YXRpb24iOiBgQmVhcmVyICR7YXBpS2V5fWAgfQogICAgfSk7CiAgfQp9CmBgYAoKIyMjIEVycm9yIEhhbmRsaW5nCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIHRyeSB7CiAgICAgIGNvbnN0IGFwaUtleSA9IGF3YWl0IGVudi5BUElfS0VZLmdldCgpOwogICAgICByZXR1cm4gZmV0Y2goImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiwgewogICAgICAgIGhlYWRlcnM6IHsgIkF1dGhvcml6YXRpb24iOiBgQmVhcmVyICR7YXBpS2V5fWAgfQogICAgICB9KTsKICAgIH0gY2F0Y2ggKGVycm9yKSB7CiAgICAgIGNvbnNvbGUuZXJyb3IoIlNlY3JldCBhY2Nlc3MgZmFpbGVkOiIsIGVycm9yKTsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiQ29uZmlndXJhdGlvbiBlcnJvciIsIHsgc3RhdHVzOiA1MDAgfSk7CiAgICB9CiAgfQp9CmBgYAoKIyMjIE11bHRpcGxlIFNlY3JldHMgJiBQYXR0ZXJucwoKYGBgdHlwZXNjcmlwdAovLyBQYXJhbGxlbCBmZXRjaApjb25zdCBbc3RyaXBlS2V5LCBzZW5kZ3JpZEtleV0gPSBhd2FpdCBQcm9taXNlLmFsbChbCiAgZW52LlNUUklQRV9LRVkuZ2V0KCksCiAgZW52LlNFTkRHUklEX0tFWS5nZXQoKQpdKTsKCi8vIOKdjCBNaXNzaW5nIC5nZXQoKQpjb25zdCBrZXkgPSBlbnYuQVBJX0tFWTsKCi8vIOKdjCBNb2R1bGUtbGV2ZWwgY2FjaGUKY29uc3QgQ0FDSEVEX0tFWSA9IGF3YWl0IGVudi5BUElfS0VZLmdldCgpOyAvLyBGYWlscwoKLy8g4pyFIFJlcXVlc3Qtc2NvcGUgY2FjaGUKY29uc3Qga2V5ID0gYXdhaXQgZW52LkFQSV9LRVkuZ2V0KCk7IC8vIE9LIC0gcmV1c2Ugd2l0aGluIHJlcXVlc3QKYGBgCgojIyBSRVNUIEFQSQoKQmFzZTogYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NGAKCiMjIyBBdXRoCgpgYGBiYXNoCmN1cmwgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0ZfVE9LRU4iIFwKICBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJEFDQ09VTlRfSUQvc2VjcmV0c19zdG9yZS9zdG9yZXMKYGBgCgojIyMgU3RvcmUgT3BlcmF0aW9ucwoKYGBgYmFzaAojIExpc3QKR0VUIC9hY2NvdW50cy97YWNjb3VudF9pZH0vc2VjcmV0c19zdG9yZS9zdG9yZXMKCiMgQ3JlYXRlClBPU1QgL2FjY291bnRzL3thY2NvdW50X2lkfS9zZWNyZXRzX3N0b3JlL3N0b3Jlcwp7Im5hbWUiOiAibXktc3RvcmUifQoKIyBEZWxldGUKREVMRVRFIC9hY2NvdW50cy97YWNjb3VudF9pZH0vc2VjcmV0c19zdG9yZS9zdG9yZXMve3N0b3JlX2lkfQpgYGAKCiMjIyBTZWNyZXQgT3BlcmF0aW9ucwoKYGBgYmFzaAojIExpc3QKR0VUIC9hY2NvdW50cy97YWNjb3VudF9pZH0vc2VjcmV0c19zdG9yZS9zdG9yZXMve3N0b3JlX2lkfS9zZWNyZXRzCgojIENyZWF0ZSAoc2luZ2xlKQpQT1NUIC9hY2NvdW50cy97YWNjb3VudF9pZH0vc2VjcmV0c19zdG9yZS9zdG9yZXMve3N0b3JlX2lkfS9zZWNyZXRzCnsKICAibmFtZSI6ICJteV9zZWNyZXQiLAogICJ2YWx1ZSI6ICJzZWNyZXRfdmFsdWUiLAogICJzY29wZXMiOiBbIndvcmtlcnMiXSwKICAiY29tbWVudCI6ICJPcHRpb25hbCIKfQoKIyBDcmVhdGUgKGJhdGNoKQpQT1NUIC9hY2NvdW50cy97YWNjb3VudF9pZH0vc2VjcmV0c19zdG9yZS9zdG9yZXMve3N0b3JlX2lkfS9zZWNyZXRzClsKICB7Im5hbWUiOiAic2VjcmV0X29uZSIsICJ2YWx1ZSI6ICJ2YWwxIiwgInNjb3BlcyI6IFsid29ya2VycyJdfSwKICB7Im5hbWUiOiAic2VjcmV0X3R3byIsICJ2YWx1ZSI6ICJ2YWwyIiwgInNjb3BlcyI6IFsid29ya2VycyIsICJhaS1nYXRld2F5Il19Cl0KCiMgR2V0IG1ldGFkYXRhCkdFVCAvYWNjb3VudHMve2FjY291bnRfaWR9L3NlY3JldHNfc3RvcmUvc3RvcmVzL3tzdG9yZV9pZH0vc2VjcmV0cy97c2VjcmV0X2lkfQoKIyBVcGRhdGUKUEFUQ0ggL2FjY291bnRzL3thY2NvdW50X2lkfS9zZWNyZXRzX3N0b3JlL3N0b3Jlcy97c3RvcmVfaWR9L3NlY3JldHMve3NlY3JldF9pZH0KeyJ2YWx1ZSI6ICJuZXdfdmFsdWUiLCAiY29tbWVudCI6ICJVcGRhdGVkIn0KCiMgRGVsZXRlIChzaW5nbGUpCkRFTEVURSAvYWNjb3VudHMve2FjY291bnRfaWR9L3NlY3JldHNfc3RvcmUvc3RvcmVzL3tzdG9yZV9pZH0vc2VjcmV0cy97c2VjcmV0X2lkfQoKIyBEZWxldGUgKGJhdGNoKQpERUxFVEUgL2FjY291bnRzL3thY2NvdW50X2lkfS9zZWNyZXRzX3N0b3JlL3N0b3Jlcy97c3RvcmVfaWR9L3NlY3JldHMKeyJzZWNyZXRfaWRzIjogWyJpZC0xIiwgImlkLTIiXX0KCiMgRHVwbGljYXRlClBPU1QgL2FjY291bnRzL3thY2NvdW50X2lkfS9zZWNyZXRzX3N0b3JlL3N0b3Jlcy97c3RvcmVfaWR9L3NlY3JldHMve3NlY3JldF9pZH0vZHVwbGljYXRlCnsibmFtZSI6ICJuZXdfbmFtZSJ9CgojIFF1b3RhCkdFVCAvYWNjb3VudHMve2FjY291bnRfaWR9L3NlY3JldHNfc3RvcmUvcXVvdGEKYGBgCgojIyMgUmVzcG9uc2VzCgpTdWNjZXNzOgpgYGBqc29uCnsKICAic3VjY2VzcyI6IHRydWUsCiAgInJlc3VsdCI6IHsKICAgICJpZCI6ICJzZWNyZXQtaWQtMTIzIiwKICAgICJuYW1lIjogIm15X3NlY3JldCIsCiAgICAiY3JlYXRlZCI6ICIyMDI1LTAxLTExVDEyOjAwOjAwWiIsCiAgICAic2NvcGVzIjogWyJ3b3JrZXJzIl0KICB9Cn0KYGBgCgpFcnJvcjoKYGBganNvbgp7CiAgInN1Y2Nlc3MiOiBmYWxzZSwKICAiZXJyb3JzIjogW3siY29kZSI6IDEwMDAwLCAibWVzc2FnZSI6ICJOYW1lIGV4aXN0cyJ9XQp9CmBgYAoKIyMgVHlwZVNjcmlwdCBIZWxwZXJzCgpPZmZpY2lhbCB0eXBlcyBhdmFpbGFibGUgdmlhIGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYDoKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHR5cGUgeyBTZWNyZXRzU3RvcmVTZWNyZXQgfSBmcm9tICJAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzIjsKCmludGVyZmFjZSBFbnYgewogIFNUUklQRV9BUElfS0VZOiBTZWNyZXRzU3RvcmVTZWNyZXQ7CiAgREFUQUJBU0VfVVJMOiBTZWNyZXRzU3RvcmVTZWNyZXQ7CiAgV09SS0VSX1NFQ1JFVDogc3RyaW5nOyAvLyBSZWd1bGFyIFdvcmtlciBzZWNyZXQgKGRpcmVjdCBhY2Nlc3MpCn0KYGBgCgpDdXN0b20gaGVscGVyIHR5cGU6CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBTZWNyZXRzU3RvcmVCaW5kaW5nIHsKICBnZXQoKTogUHJvbWlzZTxzdHJpbmc+Owp9CgovLyBGYWxsYmFjayBoZWxwZXIKYXN5bmMgZnVuY3Rpb24gZ2V0U2VjcmV0V2l0aEZhbGxiYWNrKAogIHByaW1hcnk6IFNlY3JldHNTdG9yZUJpbmRpbmcsCiAgZmFsbGJhY2s/OiBTZWNyZXRzU3RvcmVCaW5kaW5nCik6IFByb21pc2U8c3RyaW5nPiB7CiAgdHJ5IHsKICAgIHJldHVybiBhd2FpdCBwcmltYXJ5LmdldCgpOwogIH0gY2F0Y2ggKGVycm9yKSB7CiAgICBpZiAoZmFsbGJhY2spIHJldHVybiBhd2FpdCBmYWxsYmFjay5nZXQoKTsKICAgIHRocm93IGVycm9yOwogIH0KfQoKLy8gQmF0Y2ggaGVscGVyCmFzeW5jIGZ1bmN0aW9uIGdldEFsbFNlY3JldHMoCiAgc2VjcmV0czogUmVjb3JkPHN0cmluZywgU2VjcmV0c1N0b3JlQmluZGluZz4KKTogUHJvbWlzZTxSZWNvcmQ8c3RyaW5nLCBzdHJpbmc+PiB7CiAgY29uc3QgZW50cmllcyA9IGF3YWl0IFByb21pc2UuYWxsKAogICAgT2JqZWN0LmVudHJpZXMoc2VjcmV0cykubWFwKGFzeW5jIChbaywgdl0pID0+IFtrLCBhd2FpdCB2LmdldCgpXSkKICApOwogIHJldHVybiBPYmplY3QuZnJvbUVudHJpZXMoZW50cmllcyk7Cn0KYGBgCgpTZWU6IFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpLCBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpLCBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKQo=
+# API Reference
+
+## Binding API
+
+### Basic Access
+
+**CRITICAL**: Async `.get()` required - secrets NOT directly available.
+
+**`.get()` throws on error** - does NOT return null. Always use try/catch.
+
+```typescript
+interface Env {
+  API_KEY: { get(): Promise<string> };
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const apiKey = await env.API_KEY.get();
+    return fetch("https://api.example.com", {
+      headers: { "Authorization": `Bearer ${apiKey}` }
+    });
+  }
+}
+```
+
+### Error Handling
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    try {
+      const apiKey = await env.API_KEY.get();
+      return fetch("https://api.example.com", {
+        headers: { "Authorization": `Bearer ${apiKey}` }
+      });
+    } catch (error) {
+      console.error("Secret access failed:", error);
+      return new Response("Configuration error", { status: 500 });
+    }
+  }
+}
+```
+
+### Multiple Secrets & Patterns
+
+```typescript
+// Parallel fetch
+const [stripeKey, sendgridKey] = await Promise.all([
+  env.STRIPE_KEY.get(),
+  env.SENDGRID_KEY.get()
+]);
+
+// ❌ Missing .get()
+const key = env.API_KEY;
+
+// ❌ Module-level cache
+const CACHED_KEY = await env.API_KEY.get(); // Fails
+
+// ✅ Request-scope cache
+const key = await env.API_KEY.get(); // OK - reuse within request
+```
+
+## REST API
+
+Base: `https://api.cloudflare.com/client/v4`
+
+### Auth
+
+```bash
+curl -H "Authorization: Bearer $CF_TOKEN" \
+  https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/secrets_store/stores
+```
+
+### Store Operations
+
+```bash
+# List
+GET /accounts/{account_id}/secrets_store/stores
+
+# Create
+POST /accounts/{account_id}/secrets_store/stores
+{"name": "my-store"}
+
+# Delete
+DELETE /accounts/{account_id}/secrets_store/stores/{store_id}
+```
+
+### Secret Operations
+
+```bash
+# List
+GET /accounts/{account_id}/secrets_store/stores/{store_id}/secrets
+
+# Create (single)
+POST /accounts/{account_id}/secrets_store/stores/{store_id}/secrets
+{
+  "name": "my_secret",
+  "value": "secret_value",
+  "scopes": ["workers"],
+  "comment": "Optional"
+}
+
+# Create (batch)
+POST /accounts/{account_id}/secrets_store/stores/{store_id}/secrets
+[
+  {"name": "secret_one", "value": "val1", "scopes": ["workers"]},
+  {"name": "secret_two", "value": "val2", "scopes": ["workers", "ai-gateway"]}
+]
+
+# Get metadata
+GET /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}
+
+# Update
+PATCH /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}
+{"value": "new_value", "comment": "Updated"}
+
+# Delete (single)
+DELETE /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}
+
+# Delete (batch)
+DELETE /accounts/{account_id}/secrets_store/stores/{store_id}/secrets
+{"secret_ids": ["id-1", "id-2"]}
+
+# Duplicate
+POST /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}/duplicate
+{"name": "new_name"}
+
+# Quota
+GET /accounts/{account_id}/secrets_store/quota
+```
+
+### Responses
+
+Success:
+```json
+{
+  "success": true,
+  "result": {
+    "id": "secret-id-123",
+    "name": "my_secret",
+    "created": "2025-01-11T12:00:00Z",
+    "scopes": ["workers"]
+  }
+}
+```
+
+Error:
+```json
+{
+  "success": false,
+  "errors": [{"code": 10000, "message": "Name exists"}]
+}
+```
+
+## TypeScript Helpers
+
+Official types available via `@cloudflare/workers-types`:
+
+```typescript
+import type { SecretsStoreSecret } from "@cloudflare/workers-types";
+
+interface Env {
+  STRIPE_API_KEY: SecretsStoreSecret;
+  DATABASE_URL: SecretsStoreSecret;
+  WORKER_SECRET: string; // Regular Worker secret (direct access)
+}
+```
+
+Custom helper type:
+
+```typescript
+interface SecretsStoreBinding {
+  get(): Promise<string>;
+}
+
+// Fallback helper
+async function getSecretWithFallback(
+  primary: SecretsStoreBinding,
+  fallback?: SecretsStoreBinding
+): Promise<string> {
+  try {
+    return await primary.get();
+  } catch (error) {
+    if (fallback) return await fallback.get();
+    throw error;
+  }
+}
+
+// Batch helper
+async function getAllSecrets(
+  secrets: Record<string, SecretsStoreBinding>
+): Promise<Record<string, string>> {
+  const entries = await Promise.all(
+    Object.entries(secrets).map(async ([k, v]) => [k, await v.get()])
+  );
+  return Object.fromEntries(entries);
+}
+```
+
+See: [configuration.md](./configuration.md), [patterns.md](./patterns.md), [gotchas.md](./gotchas.md)

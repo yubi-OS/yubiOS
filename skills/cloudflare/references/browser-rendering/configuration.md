@@ -1,1 +1,78 @@
-IyBDb25maWd1cmF0aW9uICYgU2V0dXAKCiMjIEluc3RhbGxhdGlvbgoKYGBgYmFzaApucG0gaW5zdGFsbCBAY2xvdWRmbGFyZS9wdXBwZXRlZXIgICMgb3IgQGNsb3VkZmxhcmUvcGxheXdyaWdodApgYGAKCioqVXNlIENsb3VkZmxhcmUgcGFja2FnZXMqKiAtIHN0YW5kYXJkIGBwdXBwZXRlZXJgL2BwbGF5d3JpZ2h0YCB3b24ndCB3b3JrIGluIFdvcmtlcnMuCgojIyB3cmFuZ2xlci5qc29uCgpgYGBqc29uCnsKICAibmFtZSI6ICJicm93c2VyLXdvcmtlciIsCiAgIm1haW4iOiAic3JjL2luZGV4LnRzIiwKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLAogICJjb21wYXRpYmlsaXR5X2ZsYWdzIjogWyJub2RlanNfY29tcGF0Il0sCiAgImJyb3dzZXIiOiB7CiAgICAiYmluZGluZyI6ICJNWUJST1dTRVIiCiAgfQp9CmBgYAoKKipSZXF1aXJlZDoqKiBgbm9kZWpzX2NvbXBhdGAgZmxhZyBhbmQgYGJyb3dzZXIuYmluZGluZ2AuCgojIyBUeXBlU2NyaXB0CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIE1ZQlJPV1NFUjogRmV0Y2hlcjsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgLy8gLi4uCiAgfQp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgojIyBEZXZlbG9wbWVudAoKYGBgYmFzaAp3cmFuZ2xlciBkZXYgLS1yZW1vdGUgICMgLS1yZW1vdGUgcmVxdWlyZWQgZm9yIGJyb3dzZXIgYmluZGluZwpgYGAKCioqTG9jYWwgbW9kZSBkb2VzIE5PVCBzdXBwb3J0IEJyb3dzZXIgUmVuZGVyaW5nKiogLSBtdXN0IHVzZSBgLS1yZW1vdGVgLgoKIyMgUkVTVCBBUEkKCk5vIHdyYW5nbGVyIGNvbmZpZyBuZWVkZWQuIEdldCBBUEkgdG9rZW4gd2l0aCAiQnJvd3NlciBSZW5kZXJpbmcgLSBFZGl0IiBwZXJtaXNzaW9uLgoKYGBgYmFzaApjdXJsIC1YIFBPU1QgXAogICdodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRJZH0vYnJvd3Nlci1yZW5kZXJpbmcvc2NyZWVuc2hvdCcgXAogIC1IICdBdXRob3JpemF0aW9uOiBCZWFyZXIgVE9LRU4nIFwKICAtZCAneyJ1cmwiOiAiaHR0cHM6Ly9leGFtcGxlLmNvbSJ9JyAtLW91dHB1dCBzY3JlZW5zaG90LnBuZwpgYGAKCiMjIFJlcXVpcmVtZW50cwoKfCBSZXF1aXJlbWVudCB8IFZhbHVlIHwKfC0tLS0tLS0tLS0tLS18LS0tLS0tLXwKfCBOb2RlLmpzIGNvbXBhdGliaWxpdHkgfCBgbm9kZWpzX2NvbXBhdGAgZmxhZyB8CnwgQ29tcGF0aWJpbGl0eSBkYXRlIHwgMjAyMy0wMy0wMSsgfAp8IE1vZHVsZSBmb3JtYXQgfCBFUyBtb2R1bGVzIG9ubHkgfAp8IEJyb3dzZXIgfCBDaHJvbWl1bSAxMTkrIChubyBGaXJlZm94L1NhZmFyaSkgfAoKKipOb3Qgc3VwcG9ydGVkOioqIFdlYkdMLCBXZWJSVEMsIGV4dGVuc2lvbnMsIGBmaWxlOi8vYCBwcm90b2NvbCwgU2VydmljZSBXb3JrZXIgc3ludGF4LgoKIyMgVHJvdWJsZXNob290aW5nCgp8IEVycm9yIHwgU29sdXRpb24gfAp8LS0tLS0tLXwtLS0tLS0tLS0tfAp8IGBNWUJST1dTRVIgaXMgdW5kZWZpbmVkYCB8IFVzZSBgd3JhbmdsZXIgZGV2IC0tcmVtb3RlYCB8CnwgYG5vZGVqc19jb21wYXQgbm90IGVuYWJsZWRgIHwgQWRkIHRvIGBjb21wYXRpYmlsaXR5X2ZsYWdzYCB8CnwgYE1vZHVsZSBub3QgZm91bmRgIHwgYG5wbSBpbnN0YWxsIEBjbG91ZGZsYXJlL3B1cHBldGVlcmAgfAp8IGBCcm93c2VyIFJlbmRlcmluZyBub3QgYXZhaWxhYmxlYCB8IEVuYWJsZSBpbiBkYXNoYm9hcmQgfAo=
+# Configuration & Setup
+
+## Installation
+
+```bash
+npm install @cloudflare/puppeteer  # or @cloudflare/playwright
+```
+
+**Use Cloudflare packages** - standard `puppeteer`/`playwright` won't work in Workers.
+
+## wrangler.json
+
+```json
+{
+  "name": "browser-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "browser": {
+    "binding": "MYBROWSER"
+  }
+}
+```
+
+**Required:** `nodejs_compat` flag and `browser.binding`.
+
+## TypeScript
+
+```typescript
+interface Env {
+  MYBROWSER: Fetcher;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    // ...
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## Development
+
+```bash
+wrangler dev --remote  # --remote required for browser binding
+```
+
+**Local mode does NOT support Browser Rendering** - must use `--remote`.
+
+## REST API
+
+No wrangler config needed. Get API token with "Browser Rendering - Edit" permission.
+
+```bash
+curl -X POST \
+  'https://api.cloudflare.com/client/v4/accounts/{accountId}/browser-rendering/screenshot' \
+  -H 'Authorization: Bearer TOKEN' \
+  -d '{"url": "https://example.com"}' --output screenshot.png
+```
+
+## Requirements
+
+| Requirement | Value |
+|-------------|-------|
+| Node.js compatibility | `nodejs_compat` flag |
+| Compatibility date | 2023-03-01+ |
+| Module format | ES modules only |
+| Browser | Chromium 119+ (no Firefox/Safari) |
+
+**Not supported:** WebGL, WebRTC, extensions, `file://` protocol, Service Worker syntax.
+
+## Troubleshooting
+
+| Error | Solution |
+|-------|----------|
+| `MYBROWSER is undefined` | Use `wrangler dev --remote` |
+| `nodejs_compat not enabled` | Add to `compatibility_flags` |
+| `Module not found` | `npm install @cloudflare/puppeteer` |
+| `Browser Rendering not available` | Enable in dashboard |

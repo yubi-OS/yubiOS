@@ -1,1 +1,197 @@
-IyBDbG91ZGZsYXJlIFdvcmtlcnMgQUkKCkV4cGVydCBndWlkYW5jZSBmb3IgQ2xvdWRmbGFyZSBXb3JrZXJzIEFJIC0gc2VydmVybGVzcyBHUFUtcG93ZXJlZCBBSSBpbmZlcmVuY2UgYXQgdGhlIGVkZ2UuCgojIyBPdmVydmlldwoKV29ya2VycyBBSSBwcm92aWRlczoKLSA1MCsgcHJlLXRyYWluZWQgbW9kZWxzIChMTE1zLCBlbWJlZGRpbmdzLCBpbWFnZSBnZW5lcmF0aW9uLCBzcGVlY2gtdG8tdGV4dCwgdHJhbnNsYXRpb24pCi0gTmF0aXZlIFdvcmtlcnMgYmluZGluZyAobm8gZXh0ZXJuYWwgQVBJIGNhbGxzKQotIFBheS1wZXItdXNlIHByaWNpbmcgKG5ldXJvbnMgY29uc3VtZWQgcGVyIGluZmVyZW5jZSkKLSBPcGVuQUktY29tcGF0aWJsZSBSRVNUIEFQSQotIFN0cmVhbWluZyBzdXBwb3J0IGZvciB0ZXh0IGdlbmVyYXRpb24KLSBGdW5jdGlvbiBjYWxsaW5nIHdpdGggY29tcGF0aWJsZSBtb2RlbHMKCioqQXJjaGl0ZWN0dXJlKio6IEluZmVyZW5jZSBydW5zIG9uIENsb3VkZmxhcmUncyBHUFUgbmV0d29yay4gTW9kZWxzIGxvYWQgb24gZmlyc3QgcmVxdWVzdCAoY29sZCBzdGFydCAxLTNzKSwgc3Vic2VxdWVudCByZXF1ZXN0cyBhcmUgZmFzdGVyLgoKIyMgUXVpY2sgU3RhcnQKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgQUk6IEFpOwp9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpIHsKICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZW52LkFJLnJ1bignQGNmL21ldGEvbGxhbWEtMy4xLThiLWluc3RydWN0JywgewogICAgICBtZXNzYWdlczogW3sgcm9sZTogJ3VzZXInLCBjb250ZW50OiAnV2hhdCBpcyBDbG91ZGZsYXJlPycgfV0KICAgIH0pOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24ocmVzcG9uc2UpOwogIH0KfTsKYGBgCgpgYGBiYXNoCiMgU2V0dXAgLSBhZGQgYmluZGluZyB0byB3cmFuZ2xlci5qc29uYwp3cmFuZ2xlciBkZXYgLS1yZW1vdGUgICMgTXVzdCB1c2UgLS1yZW1vdGUgZm9yIEFJCndyYW5nbGVyIGRlcGxveQpgYGAKCiMjIE1vZGVsIFNlbGVjdGlvbiBEZWNpc2lvbiBUcmVlCgojIyMgVGV4dCBHZW5lcmF0aW9uIChDaGF0L0NvbXBsZXRpb24pCgoqKlF1YWxpdHkgUHJpb3JpdHkqKjoKLSAqKkJlc3QgcXVhbGl0eSoqOiBgQGNmL21ldGEvbGxhbWEtMy4xLTcwYi1pbnN0cnVjdGAgKGV4cGVuc2l2ZSwgfjIwMDAgbmV1cm9ucykKLSAqKkJhbGFuY2VkKio6IGBAY2YvbWV0YS9sbGFtYS0zLjEtOGItaW5zdHJ1Y3RgIChnb29kIHF1YWxpdHksIH4yMDAgbmV1cm9ucykKLSAqKkZhc3Rlc3QvY2hlYXBlc3QqKjogYEBjZi9taXN0cmFsL21pc3RyYWwtN2ItaW5zdHJ1Y3QtdjAuMWAgKH41MCBuZXVyb25zKQoKKipGdW5jdGlvbiBDYWxsaW5nKio6Ci0gVXNlIGBAY2YvbWV0YS9sbGFtYS0zLjEtOGItaW5zdHJ1Y3RgIG9yIGBAY2YvbWV0YS9sbGFtYS0zLjEtNzBiLWluc3RydWN0YCAobmF0aXZlIHRvb2wgc3VwcG9ydCkKCioqQ29kZSBHZW5lcmF0aW9uKio6Ci0gVXNlIGBAY2YvZGVlcHNlZWstYWkvZGVlcHNlZWstY29kZXItNi43Yi1pbnN0cnVjdGAgKHNwZWNpYWxpemVkIGZvciBjb2RlKQoKIyMjIEVtYmVkZGluZ3MgKFNlbWFudGljIFNlYXJjaC9SQUcpCgoqKkVuZ2xpc2ggdGV4dCoqOgotICoqQmVzdCoqOiBgQGNmL2JhYWkvYmdlLWxhcmdlLWVuLXYxLjVgICgxMDI0IGRpbXMsIGhpZ2hlc3QgcXVhbGl0eSkKLSAqKkJhbGFuY2VkKio6IGBAY2YvYmFhaS9iZ2UtYmFzZS1lbi12MS41YCAoNzY4IGRpbXMsIGdvb2QgcXVhbGl0eSkKLSAqKkZhc3QqKjogYEBjZi9iYWFpL2JnZS1zbWFsbC1lbi12MS41YCAoMzg0IGRpbXMsIGxvd2VyIHF1YWxpdHkgYnV0IGZhc3QpCgoqKk11bHRpbGluZ3VhbCoqOgotIFVzZSBgQGhmL3NlbnRlbmNlLXRyYW5zZm9ybWVycy9wYXJhcGhyYXNlLW11bHRpbGluZ3VhbC1taW5pbG0tbDEyLXYyYAoKIyMjIEltYWdlIEdlbmVyYXRpb24KCi0gKipTdGFibGUgRGlmZnVzaW9uKio6IGBAY2Yvc3RhYmlsaXR5YWkvc3RhYmxlLWRpZmZ1c2lvbi14bC1iYXNlLTEuMGAgKH4xMCwwMDAgbmV1cm9ucykKLSAqKlBvcnRyYWl0cyoqOiBgQGNmL2x5a29uL2RyZWFtc2hhcGVyLTgtbGNtYCAob3B0aW1pemVkIGZvciBmYWNlcykKCiMjIyBPdGhlciBUYXNrcwoKLSAqKlNwZWVjaC10by10ZXh0Kio6IGBAY2Yvb3BlbmFpL3doaXNwZXJgCi0gKipUcmFuc2xhdGlvbioqOiBgQGNmL21ldGEvbTJtMTAwLTEuMmJgICgxMDAgbGFuZ3VhZ2VzKQotICoqSW1hZ2UgY2xhc3NpZmljYXRpb24qKjogYEBjZi9taWNyb3NvZnQvcmVzbmV0LTUwYAoKIyMgU0RLIEFwcHJvYWNoIERlY2lzaW9uIFRyZWUKCiMjIyBOYXRpdmUgQmluZGluZyAoUmVjb21tZW5kZWQpCgoqKldoZW4qKjogQnVpbGRpbmcgV29ya2Vycy9QYWdlcyB3aXRoIFR5cGVTY3JpcHQgIAoqKldoeSoqOiBaZXJvIGV4dGVybmFsIGRlcGVuZGVuY2llcywgYmVzdCBwZXJmb3JtYW5jZSwgbmF0aXZlIHR5cGVzCgpgYGB0eXBlc2NyaXB0CmF3YWl0IGVudi5BSS5ydW4obW9kZWwsIGlucHV0KTsKYGBgCgojIyMgUkVTVCBBUEkKCioqV2hlbioqOiBFeHRlcm5hbCBzZXJ2aWNlcywgbm9uLVdvcmtlcnMgZW52aXJvbm1lbnRzLCB0ZXN0aW5nICAKKipXaHkqKjogU3RhbmRhcmQgSFRUUCwgd29ya3MgYW55d2hlcmUKCmBgYGJhc2gKY3VybCBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvPEFDQ09VTlRfSUQ+L2FpL3J1bi9AY2YvbWV0YS9sbGFtYS0zLjEtOGItaW5zdHJ1Y3QgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgPEFQSV9UT0tFTj4iIFwKICAtZCAneyJtZXNzYWdlcyI6W3sicm9sZSI6InVzZXIiLCJjb250ZW50IjoiSGVsbG8ifV19JwpgYGAKCiMjIyBWZXJjZWwgQUkgU0RLIEludGVncmF0aW9uCgoqKldoZW4qKjogVXNpbmcgVmVyY2VsIEFJIFNESyBmZWF0dXJlcyAoc3RyZWFtaW5nIFVJLCB0b29sIGNhbGxpbmcgYWJzdHJhY3Rpb25zKSAgCioqV2h5Kio6IFVuaWZpZWQgaW50ZXJmYWNlIGFjcm9zcyBwcm92aWRlcnMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgb3BlbmFpIH0gZnJvbSAnQGFpLXNkay9vcGVuYWknOwoKY29uc3QgbW9kZWwgPSBvcGVuYWkoJ21vZGVsLW5hbWUnLCB7CiAgYmFzZVVSTDogJ2h0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy88QUNDT1VOVF9JRD4vYWkvdjEnLAogIGhlYWRlcnM6IHsgQXV0aG9yaXphdGlvbjogJ0JlYXJlciA8QVBJX1RPS0VOPicgfQp9KTsKYGBgCgojIyBSQUcgdnMgRGlyZWN0IEdlbmVyYXRpb24KCiMjIyBVc2UgUkFHIChWZWN0b3JpemUgKyBXb3JrZXJzIEFJKSBXaGVuOgotIEFuc3dlcmluZyBxdWVzdGlvbnMgYWJvdXQgc3BlY2lmaWMgZG9jdW1lbnRzL2RhdGEKLSBOZWVkIGZhY3R1YWwgYWNjdXJhY3kgZnJvbSBrbm93biBjb3JwdXMKLSBDb250ZXh0IGV4Y2VlZHMgbW9kZWwncyB3aW5kb3cgKD40SyB0b2tlbnMpCi0gQnVpbGRpbmcga25vd2xlZGdlIGJhc2UgY2hhdAoKIyMjIFVzZSBEaXJlY3QgR2VuZXJhdGlvbiBXaGVuOgotIENyZWF0aXZlIHdyaXRpbmcsIGJyYWluc3Rvcm1pbmcKLSBHZW5lcmFsIGtub3dsZWRnZSBxdWVzdGlvbnMKLSBTbWFsbCBjb250ZXh0IGZpdHMgaW4gcHJvbXB0ICg8NEsgdG9rZW5zKQotIENvc3Qgb3B0aW1pemF0aW9uIChSQUcgYWRkcyBlbWJlZGRpbmcgKyB2ZWN0b3Igc2VhcmNoIGNvc3RzKQoKIyMgUGxhdGZvcm0gTGltaXRzCgp8IExpbWl0IHwgRnJlZSBUaWVyIHwgUGFpZCBQbGFucyB8CnwtLS0tLS0tfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwKfCBOZXVyb25zL2RheSB8IDEwLDAwMCB8IFBheSBwZXIgdXNlIHwKfCBSYXRlIGxpbWl0IHwgVmFyaWVzIGJ5IG1vZGVsIHwgSGlnaGVyIChjb250YWN0IHN1cHBvcnQpIHwKfCBDb250ZXh0IHdpbmRvdyB8IE1vZGVsIGRlcGVuZGVudCAoMkstOEspIHwgU2FtZSB8CnwgU3RyZWFtaW5nIHwg4pyFIFN1cHBvcnRlZCB8IOKchSBTdXBwb3J0ZWQgfAp8IEZ1bmN0aW9uIGNhbGxpbmcgfCDinIUgU3VwcG9ydGVkIChzZWxlY3QgbW9kZWxzKSB8IOKchSBTdXBwb3J0ZWQgfAoKKipQcmljaW5nKio6IEZyZWUgMTBLIG5ldXJvbnMvZGF5LCB0aGVuIHBheSBwZXIgbmV1cm9uIGNvbnN1bWVkICh2YXJpZXMgYnkgbW9kZWwpCgojIyBDb21tb24gVGFza3MKCmBgYHR5cGVzY3JpcHQKLy8gU3RyZWFtaW5nIHRleHQgZ2VuZXJhdGlvbgpjb25zdCBzdHJlYW0gPSBhd2FpdCBlbnYuQUkucnVuKG1vZGVsLCB7IG1lc3NhZ2VzLCBzdHJlYW06IHRydWUgfSk7CmZvciBhd2FpdCAoY29uc3QgY2h1bmsgb2Ygc3RyZWFtKSB7CiAgY29uc29sZS5sb2coY2h1bmsucmVzcG9uc2UpOwp9CgovLyBFbWJlZGRpbmdzIGZvciBSQUcKY29uc3QgeyBkYXRhIH0gPSBhd2FpdCBlbnYuQUkucnVuKCdAY2YvYmFhaS9iZ2UtYmFzZS1lbi12MS41JywgewogIHRleHQ6IFsnUXVlcnkgdGV4dCcsICdEb2N1bWVudCAxJywgJ0RvY3VtZW50IDInXQp9KTsKCi8vIEZ1bmN0aW9uIGNhbGxpbmcKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuQUkucnVuKCdAY2YvbWV0YS9sbGFtYS0zLjEtOGItaW5zdHJ1Y3QnLCB7CiAgbWVzc2FnZXM6IFt7IHJvbGU6ICd1c2VyJywgY29udGVudDogJ1doYXQgaXMgdGhlIHdlYXRoZXI/JyB9XSwKICB0b29sczogW3sKICAgIHR5cGU6ICdmdW5jdGlvbicsCiAgICBmdW5jdGlvbjogeyBuYW1lOiAnZ2V0V2VhdGhlcicsIHBhcmFtZXRlcnM6IHsgLi4uIH0gfQogIH1dCn0pOwpgYGAKCiMjIERldmVsb3BtZW50IFdvcmtmbG93CgpgYGBiYXNoCiMgQWx3YXlzIHVzZSAtLXJlbW90ZSBmb3IgQUkgKGxvY2FsIGRvZXNuJ3QgaGF2ZSBtb2RlbHMpCndyYW5nbGVyIGRldiAtLXJlbW90ZQoKIyBEZXBsb3kgdG8gcHJvZHVjdGlvbgp3cmFuZ2xlciBkZXBsb3kKCiMgVmlldyBtb2RlbCBjYXRhbG9nCiMgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMtYWkvbW9kZWxzLwpgYGAKCiMjIFJlYWRpbmcgT3JkZXIKCioqU3RhcnQgaGVyZSoqOiBRdWljayBTdGFydCBhYm92ZSDihpIgY29uZmlndXJhdGlvbi5tZCAoc2V0dXApCgoqKkNvbW1vbiB0YXNrcyoqOgotIEZpcnN0IHRpbWUgc2V0dXA6IGNvbmZpZ3VyYXRpb24ubWQg4oaSIEFkZCBiaW5kaW5nICsgZGVwbG95Ci0gQ2hvb3NlIG1vZGVsOiBNb2RlbCBTZWxlY3Rpb24gRGVjaXNpb24gVHJlZSAoYWJvdmUpIOKGkiBhcGkubWQKLSBCdWlsZCBSQUc6IHBhdHRlcm5zLm1kIOKGkiBWZWN0b3JpemUgaW50ZWdyYXRpb24KLSBPcHRpbWl6ZSBjb3N0czogTW9kZWwgU2VsZWN0aW9uICsgZ290Y2hhcy5tZCAocmF0ZSBsaW1pdHMpCi0gRGVidWdnaW5nOiBnb3RjaGFzLm1kIOKGkiBDb21tb24gZXJyb3JzCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIHdyYW5nbGVyLmpzb25jIHNldHVwLCBUeXBlU2NyaXB0IHR5cGVzLCBiaW5kaW5ncywgZW52aXJvbm1lbnQgdmFyaWFibGVzCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gZW52LkFJLnJ1bigpLCBzdHJlYW1pbmcsIGZ1bmN0aW9uIGNhbGxpbmcsIFJFU1QgQVBJLCByZXNwb25zZSB0eXBlcwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBSQUcgd2l0aCBWZWN0b3JpemUsIHByb21wdCBlbmdpbmVlcmluZywgYmF0Y2hpbmcsIGVycm9yIGhhbmRsaW5nLCBjYWNoaW5nCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBEZXByZWNhdGVkIEBjbG91ZGZsYXJlL2FpIHBhY2thZ2UsIHJhdGUgbGltaXRzLCBwcmljaW5nLCBjb21tb24gZXJyb3JzCgojIyBTZWUgQWxzbwoKLSBbdmVjdG9yaXplXSguLi92ZWN0b3JpemUvKSAtIFZlY3RvciBkYXRhYmFzZSBmb3IgUkFHIHBhdHRlcm5zCi0gW2FpLWdhdGV3YXldKC4uL2FpLWdhdGV3YXkvKSAtIENhY2hpbmcsIHJhdGUgbGltaXRpbmcsIGFuYWx5dGljcyBmb3IgQUkgcmVxdWVzdHMKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VyIHJ1bnRpbWUgYW5kIGZldGNoIGhhbmRsZXIgcGF0dGVybnMK
+# Cloudflare Workers AI
+
+Expert guidance for Cloudflare Workers AI - serverless GPU-powered AI inference at the edge.
+
+## Overview
+
+Workers AI provides:
+- 50+ pre-trained models (LLMs, embeddings, image generation, speech-to-text, translation)
+- Native Workers binding (no external API calls)
+- Pay-per-use pricing (neurons consumed per inference)
+- OpenAI-compatible REST API
+- Streaming support for text generation
+- Function calling with compatible models
+
+**Architecture**: Inference runs on Cloudflare's GPU network. Models load on first request (cold start 1-3s), subsequent requests are faster.
+
+## Quick Start
+
+```typescript
+interface Env {
+  AI: Ai;
+}
+
+export default {
+  async fetch(request: Request, env: Env) {
+    const response = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+      messages: [{ role: 'user', content: 'What is Cloudflare?' }]
+    });
+    return Response.json(response);
+  }
+};
+```
+
+```bash
+# Setup - add binding to wrangler.jsonc
+wrangler dev --remote  # Must use --remote for AI
+wrangler deploy
+```
+
+## Model Selection Decision Tree
+
+### Text Generation (Chat/Completion)
+
+**Quality Priority**:
+- **Best quality**: `@cf/meta/llama-3.1-70b-instruct` (expensive, ~2000 neurons)
+- **Balanced**: `@cf/meta/llama-3.1-8b-instruct` (good quality, ~200 neurons)
+- **Fastest/cheapest**: `@cf/mistral/mistral-7b-instruct-v0.1` (~50 neurons)
+
+**Function Calling**:
+- Use `@cf/meta/llama-3.1-8b-instruct` or `@cf/meta/llama-3.1-70b-instruct` (native tool support)
+
+**Code Generation**:
+- Use `@cf/deepseek-ai/deepseek-coder-6.7b-instruct` (specialized for code)
+
+### Embeddings (Semantic Search/RAG)
+
+**English text**:
+- **Best**: `@cf/baai/bge-large-en-v1.5` (1024 dims, highest quality)
+- **Balanced**: `@cf/baai/bge-base-en-v1.5` (768 dims, good quality)
+- **Fast**: `@cf/baai/bge-small-en-v1.5` (384 dims, lower quality but fast)
+
+**Multilingual**:
+- Use `@hf/sentence-transformers/paraphrase-multilingual-minilm-l12-v2`
+
+### Image Generation
+
+- **Stable Diffusion**: `@cf/stabilityai/stable-diffusion-xl-base-1.0` (~10,000 neurons)
+- **Portraits**: `@cf/lykon/dreamshaper-8-lcm` (optimized for faces)
+
+### Other Tasks
+
+- **Speech-to-text**: `@cf/openai/whisper`
+- **Translation**: `@cf/meta/m2m100-1.2b` (100 languages)
+- **Image classification**: `@cf/microsoft/resnet-50`
+
+## SDK Approach Decision Tree
+
+### Native Binding (Recommended)
+
+**When**: Building Workers/Pages with TypeScript  
+**Why**: Zero external dependencies, best performance, native types
+
+```typescript
+await env.AI.run(model, input);
+```
+
+### REST API
+
+**When**: External services, non-Workers environments, testing  
+**Why**: Standard HTTP, works anywhere
+
+```bash
+curl https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/ai/run/@cf/meta/llama-3.1-8b-instruct \
+  -H "Authorization: Bearer <API_TOKEN>" \
+  -d '{"messages":[{"role":"user","content":"Hello"}]}'
+```
+
+### Vercel AI SDK Integration
+
+**When**: Using Vercel AI SDK features (streaming UI, tool calling abstractions)  
+**Why**: Unified interface across providers
+
+```typescript
+import { openai } from '@ai-sdk/openai';
+
+const model = openai('model-name', {
+  baseURL: 'https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/ai/v1',
+  headers: { Authorization: 'Bearer <API_TOKEN>' }
+});
+```
+
+## RAG vs Direct Generation
+
+### Use RAG (Vectorize + Workers AI) When:
+- Answering questions about specific documents/data
+- Need factual accuracy from known corpus
+- Context exceeds model's window (>4K tokens)
+- Building knowledge base chat
+
+### Use Direct Generation When:
+- Creative writing, brainstorming
+- General knowledge questions
+- Small context fits in prompt (<4K tokens)
+- Cost optimization (RAG adds embedding + vector search costs)
+
+## Platform Limits
+
+| Limit | Free Tier | Paid Plans |
+|-------|-----------|------------|
+| Neurons/day | 10,000 | Pay per use |
+| Rate limit | Varies by model | Higher (contact support) |
+| Context window | Model dependent (2K-8K) | Same |
+| Streaming | ✅ Supported | ✅ Supported |
+| Function calling | ✅ Supported (select models) | ✅ Supported |
+
+**Pricing**: Free 10K neurons/day, then pay per neuron consumed (varies by model)
+
+## Common Tasks
+
+```typescript
+// Streaming text generation
+const stream = await env.AI.run(model, { messages, stream: true });
+for await (const chunk of stream) {
+  console.log(chunk.response);
+}
+
+// Embeddings for RAG
+const { data } = await env.AI.run('@cf/baai/bge-base-en-v1.5', {
+  text: ['Query text', 'Document 1', 'Document 2']
+});
+
+// Function calling
+const response = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+  messages: [{ role: 'user', content: 'What is the weather?' }],
+  tools: [{
+    type: 'function',
+    function: { name: 'getWeather', parameters: { ... } }
+  }]
+});
+```
+
+## Development Workflow
+
+```bash
+# Always use --remote for AI (local doesn't have models)
+wrangler dev --remote
+
+# Deploy to production
+wrangler deploy
+
+# View model catalog
+# https://developers.cloudflare.com/workers-ai/models/
+```
+
+## Reading Order
+
+**Start here**: Quick Start above → configuration.md (setup)
+
+**Common tasks**:
+- First time setup: configuration.md → Add binding + deploy
+- Choose model: Model Selection Decision Tree (above) → api.md
+- Build RAG: patterns.md → Vectorize integration
+- Optimize costs: Model Selection + gotchas.md (rate limits)
+- Debugging: gotchas.md → Common errors
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - wrangler.jsonc setup, TypeScript types, bindings, environment variables
+- [api.md](./api.md) - env.AI.run(), streaming, function calling, REST API, response types
+- [patterns.md](./patterns.md) - RAG with Vectorize, prompt engineering, batching, error handling, caching
+- [gotchas.md](./gotchas.md) - Deprecated @cloudflare/ai package, rate limits, pricing, common errors
+
+## See Also
+
+- [vectorize](../vectorize/) - Vector database for RAG patterns
+- [ai-gateway](../ai-gateway/) - Caching, rate limiting, analytics for AI requests
+- [workers](../workers/) - Worker runtime and fetch handler patterns

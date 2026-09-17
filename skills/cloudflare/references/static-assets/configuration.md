@@ -1,1 +1,186 @@
-IyMgQ29uZmlndXJhdGlvbgoKIyMjIEJhc2ljIFNldHVwCgpNaW5pbWFsIGNvbmZpZ3VyYXRpb24gcmVxdWlyZXMgb25seSBgYXNzZXRzLmRpcmVjdG9yeWA6CgpgYGBqc29uYwp7CiAgIm5hbWUiOiAibXktd29ya2VyIiwKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLCAgLy8gVXNlIGN1cnJlbnQgZGF0ZSBmb3IgbmV3IHByb2plY3RzCiAgImFzc2V0cyI6IHsKICAgICJkaXJlY3RvcnkiOiAiLi9kaXN0IgogIH0KfQpgYGAKCiMjIyBGdWxsIENvbmZpZ3VyYXRpb24gT3B0aW9ucwoKYGBganNvbmMKewogICJuYW1lIjogIm15LXdvcmtlciIsCiAgIm1haW4iOiAic3JjL2luZGV4LnRzIiwKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLAogICJhc3NldHMiOiB7CiAgICAiZGlyZWN0b3J5IjogIi4vZGlzdCIsCiAgICAiYmluZGluZyI6ICJBU1NFVFMiLAogICAgIm5vdF9mb3VuZF9oYW5kbGluZyI6ICJzaW5nbGUtcGFnZS1hcHBsaWNhdGlvbiIsCiAgICAiaHRtbF9oYW5kbGluZyI6ICJhdXRvLXRyYWlsaW5nLXNsYXNoIiwKICAgICJydW5fd29ya2VyX2ZpcnN0IjogWyIvYXBpLyoiLCAiIS9hcGkvZG9jcy8qIl0KICB9Cn0KYGBgCgoqKkNvbmZpZ3VyYXRpb24ga2V5czoqKgoKLSBgZGlyZWN0b3J5YCAoc3RyaW5nLCByZXF1aXJlZCk6IFBhdGggdG8gYXNzZXRzIGZvbGRlciAoZS5nLiBgLi9kaXN0YCwgYC4vcHVibGljYCwgYC4vYnVpbGRgKQotIGBiaW5kaW5nYCAoc3RyaW5nLCBvcHRpb25hbCk6IE5hbWUgdG8gYWNjZXNzIGFzc2V0cyBpbiBXb3JrZXIgY29kZSAoZS5nLiBgZW52LkFTU0VUU2ApLiBEZWZhdWx0OiBgIkFTU0VUUyJgCi0gYG5vdF9mb3VuZF9oYW5kbGluZ2AgKHN0cmluZywgb3B0aW9uYWwpOiBCZWhhdmlvciB3aGVuIGFzc2V0IG5vdCBmb3VuZAogIC0gYCJzaW5nbGUtcGFnZS1hcHBsaWNhdGlvbiJgOiBTZXJ2ZSBgL2luZGV4Lmh0bWxgIGZvciBub24tYXNzZXQgcGF0aHMgKGRlZmF1bHQgZm9yIFNQQXMpCiAgLSBgIjQwNC1wYWdlImA6IFNlcnZlIGAvNDA0Lmh0bWxgIGlmIHByZXNlbnQsIG90aGVyd2lzZSA0MDQKICAtIGAibm9uZSJgOiBSZXR1cm4gNDA0IGZvciBtaXNzaW5nIGFzc2V0cwotIGBodG1sX2hhbmRsaW5nYCAoc3RyaW5nLCBvcHRpb25hbCk6IFVSTCB0cmFpbGluZyBzbGFzaCBiZWhhdmlvcgotIGBydW5fd29ya2VyX2ZpcnN0YCAoYm9vbGVhbiB8IHN0cmluZ1tdLCBvcHRpb25hbCk6IFJvdXRlcyB0aGF0IGludm9rZSBXb3JrZXIgYmVmb3JlIGNoZWNraW5nIGFzc2V0cwoKIyMjIG5vdF9mb3VuZF9oYW5kbGluZyBNb2RlcwoKfCBNb2RlIHwgQmVoYXZpb3IgfCBVc2UgQ2FzZSB8CnwtLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IGAic2luZ2xlLXBhZ2UtYXBwbGljYXRpb24iYCB8IFNlcnZlIGAvaW5kZXguaHRtbGAgZm9yIG5vbi1hc3NldCByZXF1ZXN0cyB8IFJlYWN0LCBWdWUsIEFuZ3VsYXIgU1BBcyB8CnwgYCI0MDQtcGFnZSJgIHwgU2VydmUgYC80MDQuaHRtbGAgaWYgZXhpc3RzLCBlbHNlIDQwNCB8IFN0YXRpYyBzaXRlcyB3aXRoIGN1c3RvbSBlcnJvciBwYWdlIHwKfCBgIm5vbmUiYCB8IFJldHVybiA0MDQgZm9yIG1pc3NpbmcgYXNzZXRzIHwgQVBJLWZpcnN0IG9yIGN1c3RvbSByb3V0aW5nIHwKCiMjIyBodG1sX2hhbmRsaW5nIE1vZGVzCgpDb250cm9scyB0cmFpbGluZyBzbGFzaCBiZWhhdmlvciBmb3IgSFRNTCBmaWxlczoKCnwgTW9kZSB8IGAvcGFnZWAgfCBgL3BhZ2UvYCB8IFVzZSBDYXNlIHwKfC0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IGAiYXV0by10cmFpbGluZy1zbGFzaCJgIHwgUmVkaXJlY3QgdG8gYC9wYWdlL2AgaWYgYC9wYWdlL2luZGV4Lmh0bWxgIGV4aXN0cyB8IFNlcnZlIGAvcGFnZS9pbmRleC5odG1sYCB8IERlZmF1bHQsIFNFTy1mcmllbmRseSB8CnwgYCJmb3JjZS10cmFpbGluZy1zbGFzaCJgIHwgQWx3YXlzIHJlZGlyZWN0IHRvIGAvcGFnZS9gIHwgU2VydmUgaWYgZXhpc3RzIHwgQ29uc2lzdGVudCB0cmFpbGluZyBzbGFzaGVzIHwKfCBgImRyb3AtdHJhaWxpbmctc2xhc2giYCB8IFNlcnZlIGlmIGV4aXN0cyB8IFJlZGlyZWN0IHRvIGAvcGFnZWAgfCBDbGVhbmVyIFVSTHMgfAp8IGAibm9uZSJgIHwgTm8gbW9kaWZpY2F0aW9uIHwgTm8gbW9kaWZpY2F0aW9uIHwgQ3VzdG9tIHJvdXRpbmcgbG9naWMgfAoKKipEZWZhdWx0OioqIGAiYXV0by10cmFpbGluZy1zbGFzaCJgCgojIyMgcnVuX3dvcmtlcl9maXJzdCBDb25maWd1cmF0aW9uCgpDb250cm9scyB3aGljaCByZXF1ZXN0cyBpbnZva2UgV29ya2VyIGJlZm9yZSBjaGVja2luZyBhc3NldHMuCgoqKkJvb2xlYW4gc3ludGF4OioqCgpgYGBqc29uYwp7CiAgImFzc2V0cyI6IHsKICAgICJydW5fd29ya2VyX2ZpcnN0IjogdHJ1ZSAgLy8gQUxMIHJlcXVlc3RzIGludm9rZSBXb3JrZXIKICB9Cn0KYGBgCgoqKkFycmF5IHN5bnRheCAocmVjb21tZW5kZWQpOioqCgpgYGBqc29uYwp7CiAgImFzc2V0cyI6IHsKICAgICJydW5fd29ya2VyX2ZpcnN0IjogWwogICAgICAiL2FwaS8qIiwgICAgICAgICAgIC8vIFBvc2l0aXZlIHBhdHRlcm46IG1hdGNoIEFQSSByb3V0ZXMKICAgICAgIi9hZG1pbi8qIiwgICAgICAgICAvLyBNYXRjaCBhZG1pbiByb3V0ZXMKICAgICAgIiEvYWRtaW4vYXNzZXRzLyoiICAvLyBOZWdhdGl2ZSBwYXR0ZXJuOiBleGNsdWRlIGFkbWluIGFzc2V0cwogICAgXQogIH0KfQpgYGAKCioqUGF0dGVybiBydWxlczoqKgoKLSBHbG9iIHBhdHRlcm5zOiBgKmAgKGFueSBjaGFycyksIGAqKmAgKGFueSBwYXRoIHNlZ21lbnRzKQotIE5lZ2F0aXZlIHBhdHRlcm5zOiBQcmVmaXggd2l0aCBgIWAgdG8gZXhjbHVkZQotIFByZWNlZGVuY2U6IE5lZ2F0aXZlIHBhdHRlcm5zIG92ZXJyaWRlIHBvc2l0aXZlIHBhdHRlcm5zCi0gRGVmYXVsdDogYGZhbHNlYCAoYXNzZXRzIHNlcnZlZCBkaXJlY3RseSkKCioqRGVjaXNpb24gZ3VpZGFuY2U6KioKCi0gVXNlIGB0cnVlYCBmb3IgQVBJLWZpcnN0IGFwcHMgKGZldyBzdGF0aWMgYXNzZXRzKQotIFVzZSBhcnJheSBwYXR0ZXJucyBmb3IgaHlicmlkIGFwcHMgKEFQSXMgKyBzdGF0aWMgYXNzZXRzKQotIFVzZSBgZmFsc2VgIGZvciBzdGF0aWMtZmlyc3Qgc2l0ZXMgKG1pbmltYWwgZHluYW1pYyByb3V0ZXMpCgojIyMgLmFzc2V0c2lnbm9yZSBGaWxlCgpFeGNsdWRlIGZpbGVzIGZyb20gdXBsb2FkIHVzaW5nIGAuYXNzZXRzaWdub3JlYCAoc2FtZSBzeW50YXggYXMgYC5naXRpZ25vcmVgKToKCmBgYAojIC5hc3NldHNpZ25vcmUKX3dvcmtlci5qcwoqLm1hcAoqLm1kCm5vZGVfbW9kdWxlcy8KLmdpdC8KYGBgCgoqKkNvbW1vbiBwYXR0ZXJuczoqKgoKLSBgX3dvcmtlci5qc2AgLSBFeGNsdWRlIFdvcmtlciBjb2RlIGZyb20gYXNzZXRzCi0gYCoubWFwYCAtIEV4Y2x1ZGUgc291cmNlIG1hcHMKLSBgKi5tZGAgLSBFeGNsdWRlIG1hcmtkb3duIGZpbGVzCi0gRGV2ZWxvcG1lbnQgYXJ0aWZhY3RzCgojIyMgVml0ZSBQbHVnaW4gSW50ZWdyYXRpb24KCkZvciBWaXRlLWJhc2VkIHByb2plY3RzLCB1c2UgYEBjbG91ZGZsYXJlL3ZpdGUtcGx1Z2luYDoKCmBgYHR5cGVzY3JpcHQKLy8gdml0ZS5jb25maWcudHMKaW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSAndml0ZSc7CmltcG9ydCB7IGNsb3VkZmxhcmUgfSBmcm9tICdAY2xvdWRmbGFyZS92aXRlLXBsdWdpbic7CgpleHBvcnQgZGVmYXVsdCBkZWZpbmVDb25maWcoewogIHBsdWdpbnM6IFsKICAgIGNsb3VkZmxhcmUoewogICAgICBhc3NldHM6IHsKICAgICAgICBkaXJlY3Rvcnk6ICcuL2Rpc3QnLAogICAgICAgIGJpbmRpbmc6ICdBU1NFVFMnCiAgICAgIH0KICAgIH0pCiAgXQp9KTsKYGBgCgoqKkZlYXR1cmVzOioqCgotIEF1dG9tYXRpYyBhc3NldCBkZXRlY3Rpb24gZHVyaW5nIGRldgotIEhvdCBtb2R1bGUgcmVwbGFjZW1lbnQgZm9yIGFzc2V0cwotIFByb2R1Y3Rpb24gYnVpbGQgaW50ZWdyYXRpb24KLSBSZXF1aXJlczogV3JhbmdsZXIgNC4wLjArLCBgQGNsb3VkZmxhcmUvdml0ZS1wbHVnaW5gIDEuMC4wKwoKIyMjIEtleSBDb21wYXRpYmlsaXR5IERhdGVzCgp8IERhdGUgfCBGZWF0dXJlIHwgSW1wYWN0IHwKfC0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS18CnwgYDIwMjUtMDQtMDFgIHwgTmF2aWdhdGlvbiByZXF1ZXN0IG9wdGltaXphdGlvbiB8IFNQQXMgc2tpcCBXb3JrZXIgZm9yIG5hdmlnYXRpb24sIHJlZHVjaW5nIGNvc3RzIHwKClVzZSBjdXJyZW50IGRhdGUgZm9yIG5ldyBwcm9qZWN0cy4gU2VlIFtDb21wYXRpYmlsaXR5IERhdGVzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy9jb25maWd1cmF0aW9uL2NvbXBhdGliaWxpdHktZGF0ZXMvKSBmb3IgZnVsbCBsaXN0LgoKIyMjIEVudmlyb25tZW50LVNwZWNpZmljIENvbmZpZ3VyYXRpb24KClVzZSBgd3JhbmdsZXIuanNvbmNgIGVudmlyb25tZW50cyBmb3IgZGlmZmVyZW50IGNvbmZpZ3M6CgpgYGBqc29uYwp7CiAgIm5hbWUiOiAibXktd29ya2VyIiwKICAiYXNzZXRzIjogeyAiZGlyZWN0b3J5IjogIi4vZGlzdCIgfSwKICAiZW52IjogewogICAgInN0YWdpbmciOiB7CiAgICAgICJhc3NldHMiOiB7CiAgICAgICAgIm5vdF9mb3VuZF9oYW5kbGluZyI6ICI0MDQtcGFnZSIKICAgICAgfQogICAgfSwKICAgICJwcm9kdWN0aW9uIjogewogICAgICAiYXNzZXRzIjogewogICAgICAgICJub3RfZm91bmRfaGFuZGxpbmciOiAic2luZ2xlLXBhZ2UtYXBwbGljYXRpb24iCiAgICAgIH0KICAgIH0KICB9Cn0KYGBgCgpEZXBsb3kgd2l0aDogYHdyYW5nbGVyIGRlcGxveSAtLWVudiBzdGFnaW5nYAo=
+## Configuration
+
+### Basic Setup
+
+Minimal configuration requires only `assets.directory`:
+
+```jsonc
+{
+  "name": "my-worker",
+  "compatibility_date": "2025-01-01",  // Use current date for new projects
+  "assets": {
+    "directory": "./dist"
+  }
+}
+```
+
+### Full Configuration Options
+
+```jsonc
+{
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*", "!/api/docs/*"]
+  }
+}
+```
+
+**Configuration keys:**
+
+- `directory` (string, required): Path to assets folder (e.g. `./dist`, `./public`, `./build`)
+- `binding` (string, optional): Name to access assets in Worker code (e.g. `env.ASSETS`). Default: `"ASSETS"`
+- `not_found_handling` (string, optional): Behavior when asset not found
+  - `"single-page-application"`: Serve `/index.html` for non-asset paths (default for SPAs)
+  - `"404-page"`: Serve `/404.html` if present, otherwise 404
+  - `"none"`: Return 404 for missing assets
+- `html_handling` (string, optional): URL trailing slash behavior
+- `run_worker_first` (boolean | string[], optional): Routes that invoke Worker before checking assets
+
+### not_found_handling Modes
+
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| `"single-page-application"` | Serve `/index.html` for non-asset requests | React, Vue, Angular SPAs |
+| `"404-page"` | Serve `/404.html` if exists, else 404 | Static sites with custom error page |
+| `"none"` | Return 404 for missing assets | API-first or custom routing |
+
+### html_handling Modes
+
+Controls trailing slash behavior for HTML files:
+
+| Mode | `/page` | `/page/` | Use Case |
+|------|---------|----------|----------|
+| `"auto-trailing-slash"` | Redirect to `/page/` if `/page/index.html` exists | Serve `/page/index.html` | Default, SEO-friendly |
+| `"force-trailing-slash"` | Always redirect to `/page/` | Serve if exists | Consistent trailing slashes |
+| `"drop-trailing-slash"` | Serve if exists | Redirect to `/page` | Cleaner URLs |
+| `"none"` | No modification | No modification | Custom routing logic |
+
+**Default:** `"auto-trailing-slash"`
+
+### run_worker_first Configuration
+
+Controls which requests invoke Worker before checking assets.
+
+**Boolean syntax:**
+
+```jsonc
+{
+  "assets": {
+    "run_worker_first": true  // ALL requests invoke Worker
+  }
+}
+```
+
+**Array syntax (recommended):**
+
+```jsonc
+{
+  "assets": {
+    "run_worker_first": [
+      "/api/*",           // Positive pattern: match API routes
+      "/admin/*",         // Match admin routes
+      "!/admin/assets/*"  // Negative pattern: exclude admin assets
+    ]
+  }
+}
+```
+
+**Pattern rules:**
+
+- Glob patterns: `*` (any chars), `**` (any path segments)
+- Negative patterns: Prefix with `!` to exclude
+- Precedence: Negative patterns override positive patterns
+- Default: `false` (assets served directly)
+
+**Decision guidance:**
+
+- Use `true` for API-first apps (few static assets)
+- Use array patterns for hybrid apps (APIs + static assets)
+- Use `false` for static-first sites (minimal dynamic routes)
+
+### .assetsignore File
+
+Exclude files from upload using `.assetsignore` (same syntax as `.gitignore`):
+
+```
+# .assetsignore
+_worker.js
+*.map
+*.md
+node_modules/
+.git/
+```
+
+**Common patterns:**
+
+- `_worker.js` - Exclude Worker code from assets
+- `*.map` - Exclude source maps
+- `*.md` - Exclude markdown files
+- Development artifacts
+
+### Vite Plugin Integration
+
+For Vite-based projects, use `@cloudflare/vite-plugin`:
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite';
+import { cloudflare } from '@cloudflare/vite-plugin';
+
+export default defineConfig({
+  plugins: [
+    cloudflare({
+      assets: {
+        directory: './dist',
+        binding: 'ASSETS'
+      }
+    })
+  ]
+});
+```
+
+**Features:**
+
+- Automatic asset detection during dev
+- Hot module replacement for assets
+- Production build integration
+- Requires: Wrangler 4.0.0+, `@cloudflare/vite-plugin` 1.0.0+
+
+### Key Compatibility Dates
+
+| Date | Feature | Impact |
+|------|---------|--------|
+| `2025-04-01` | Navigation request optimization | SPAs skip Worker for navigation, reducing costs |
+
+Use current date for new projects. See [Compatibility Dates](https://developers.cloudflare.com/workers/configuration/compatibility-dates/) for full list.
+
+### Environment-Specific Configuration
+
+Use `wrangler.jsonc` environments for different configs:
+
+```jsonc
+{
+  "name": "my-worker",
+  "assets": { "directory": "./dist" },
+  "env": {
+    "staging": {
+      "assets": {
+        "not_found_handling": "404-page"
+      }
+    },
+    "production": {
+      "assets": {
+        "not_found_handling": "single-page-application"
+      }
+    }
+  }
+}
+```
+
+Deploy with: `wrangler deploy --env staging`

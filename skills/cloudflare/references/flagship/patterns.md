@@ -1,1 +1,469 @@
-IyBGbGFnc2hpcCBQYXR0ZXJucyAmIEJlc3QgUHJhY3RpY2VzCgojIyBFdmFsdWF0aW5nIEZsYWdzIGluIFdvcmtlcnMgKEJpbmRpbmcpCgojIyMgU2ltcGxlIEJvb2xlYW4gVG9nZ2xlCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IHNob3dOZXdVSSA9IGF3YWl0IGVudi5GTEFHUy5nZXRCb29sZWFuVmFsdWUoIm5ldy11aSIsIGZhbHNlLCB7CiAgICAgIHVzZXJJZDogInVzZXItNDIiLAogICAgfSk7CgogICAgaWYgKHNob3dOZXdVSSkgewogICAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJOZXcgVUkiKTsKICAgIH0KICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIkNsYXNzaWMgVUkiKTsKICB9LAp9OwpgYGAKCiMjIyBNdWx0aS1WYXJpYW50IFN0cmluZyBGbGFnCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGNoZWNrb3V0RmxvdyA9IGF3YWl0IGVudi5GTEFHUy5nZXRTdHJpbmdWYWx1ZSgKICAiY2hlY2tvdXQtZmxvdyIsCiAgIm9yaWdpbmFsIiwKICB7IHVzZXJJZCwgY291bnRyeTogIlVTIiB9LAopOwoKc3dpdGNoIChjaGVja291dEZsb3cpIHsKICBjYXNlICJzdHJlYW1saW5lZCI6CiAgICByZXR1cm4gaGFuZGxlU3RyZWFtbGluZWQocmVxdWVzdCk7CiAgY2FzZSAib25lLWNsaWNrIjoKICAgIHJldHVybiBoYW5kbGVPbmVDbGljayhyZXF1ZXN0KTsKICBkZWZhdWx0OgogICAgcmV0dXJuIGhhbmRsZU9yaWdpbmFsKHJlcXVlc3QpOwp9CmBgYAoKIyMjIEpTT04gQ29uZmlnIEZsYWcKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIFJhdGVMaW1pdENvbmZpZyB7CiAgcnBtOiBudW1iZXI7CiAgYnVyc3Q6IG51bWJlcjsKfQoKY29uc3QgbGltaXRzID0gYXdhaXQgZW52LkZMQUdTLmdldE9iamVjdFZhbHVlPFJhdGVMaW1pdENvbmZpZz4oCiAgInJhdGUtbGltaXRzIiwKICB7IHJwbTogMTAwLCBidXJzdDogMjAgfSwKICB7IHBsYW46IHVzZXJQbGFuIH0sCik7CmBgYAoKIyMjIFVzaW5nIERldGFpbHMgZm9yIE9ic2VydmFiaWxpdHkKCmBgYHR5cGVzY3JpcHQKY29uc3QgZGV0YWlscyA9IGF3YWl0IGVudi5GTEFHUy5nZXRCb29sZWFuRGV0YWlscygibmV3LWNoZWNrb3V0IiwgZmFsc2UsIHsKICB1c2VySWQ6ICJ1c2VyLTQyIiwKfSk7Cgpjb25zb2xlLmxvZyhkZXRhaWxzLnZhbHVlKTsgICAgIC8vIHRydWUKY29uc29sZS5sb2coZGV0YWlscy52YXJpYW50KTsgICAvLyAib24iCmNvbnNvbGUubG9nKGRldGFpbHMucmVhc29uKTsgICAgLy8gIlRBUkdFVElOR19NQVRDSCIKY29uc29sZS5sb2coZGV0YWlscy5lcnJvckNvZGUpOyAvLyB1bmRlZmluZWQgKG5vIGVycm9yKQpgYGAKCi0tLQoKIyMgRXZhbHVhdGluZyBGbGFncyB3aXRoIE9wZW5GZWF0dXJlIChXb3JrZXJzKQoKIyMjIEJpbmRpbmcgUGFzc3Rocm91Z2ggKFJlY29tbWVuZGVkKQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBPcGVuRmVhdHVyZSB9IGZyb20gIkBvcGVuZmVhdHVyZS9zZXJ2ZXItc2RrIjsKaW1wb3J0IHsgRmxhZ3NoaXBTZXJ2ZXJQcm92aWRlciB9IGZyb20gIkBjbG91ZGZsYXJlL2ZsYWdzaGlwIjsKCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGF3YWl0IE9wZW5GZWF0dXJlLnNldFByb3ZpZGVyQW5kV2FpdCgKICAgICAgbmV3IEZsYWdzaGlwU2VydmVyUHJvdmlkZXIoeyBiaW5kaW5nOiBlbnYuRkxBR1MgfSksCiAgICApOwogICAgY29uc3QgY2xpZW50ID0gT3BlbkZlYXR1cmUuZ2V0Q2xpZW50KCk7CgogICAgY29uc3QgZW5hYmxlZCA9IGF3YWl0IGNsaWVudC5nZXRCb29sZWFuVmFsdWUoIm5ldy1jaGVja291dCIsIGZhbHNlLCB7CiAgICAgIHRhcmdldGluZ0tleTogInVzZXItNDIiLAogICAgICBwbGFuOiAiZW50ZXJwcmlzZSIsCiAgICAgIGNvdW50cnk6ICJVUyIsCiAgICB9KTsKCiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKGVuYWJsZWQgPyAiTmV3IGNoZWNrb3V0IiA6ICJTdGFuZGFyZCBjaGVja291dCIpOwogIH0sCn07CmBgYAoKIyMjIE1pZ3JhdGlvbiBmcm9tIEFub3RoZXIgUHJvdmlkZXIKCk9ubHkgdGhlIHByb3ZpZGVyIGluaXRpYWxpemF0aW9uIGNoYW5nZXMg4oCUIGV2YWx1YXRpb24gY2FsbCBzaXRlcyBzdGF5IHRoZSBzYW1lOgoKYGBgdHlwZXNjcmlwdAovLyDinYwgQmVmb3JlIChMYXVuY2hEYXJrbHkpCmF3YWl0IE9wZW5GZWF0dXJlLnNldFByb3ZpZGVyQW5kV2FpdCgKICBuZXcgTGF1bmNoRGFya2x5UHJvdmlkZXIoeyBzZGtLZXk6ICIuLi4iIH0pLAopOwoKLy8g4pyFIEFmdGVyIChGbGFnc2hpcCkKYXdhaXQgT3BlbkZlYXR1cmUuc2V0UHJvdmlkZXJBbmRXYWl0KAogIG5ldyBGbGFnc2hpcFNlcnZlclByb3ZpZGVyKHsgYmluZGluZzogZW52LkZMQUdTIH0pLAopOwoKLy8gRXZhbHVhdGlvbiBjb2RlIGlzIHVuY2hhbmdlZApjb25zdCBlbmFibGVkID0gYXdhaXQgY2xpZW50LmdldEJvb2xlYW5WYWx1ZSgibXktZmxhZyIsIGZhbHNlLCB7CiAgdGFyZ2V0aW5nS2V5OiAidXNlci00MiIsCn0pOwpgYGAKCi0tLQoKIyMgTWFuYWdpbmcgRmxhZ3MgdmlhIFJFU1QgQVBJCgpBbGwgZXhhbXBsZXMgdXNlIGBhcGkuY2xvdWRmbGFyZS5jb21gLiBTZXQgYENMT1VERkxBUkVfQUNDT1VOVF9JRGAsIGBGTEFHU0hJUF9BUFBfSURgLCBhbmQgYENMT1VERkxBUkVfQVBJX1RPS0VOYCBmaXJzdC4KCiMjIyBDcmVhdGUgYSBCb29sZWFuIEZsYWcKCmBgYGJhc2gKY3VybCAtcyAtWCBQT1NUIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCAnewogICAgImtleSI6ICJuZXctZmVhdHVyZSIsCiAgICAiZGVmYXVsdF92YXJpYXRpb24iOiAib2ZmIiwKICAgICJ2YXJpYXRpb25zIjogeyAib24iOiB0cnVlLCAib2ZmIjogZmFsc2UgfSwKICAgICJydWxlcyI6IFtdLAogICAgImRlc2NyaXB0aW9uIjogIkVuYWJsZSB0aGUgbmV3IGZlYXR1cmUiLAogICAgImVuYWJsZWQiOiBmYWxzZQogIH0nIFwKICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRDTE9VREZMQVJFX0FDQ09VTlRfSUQvZmxhZ3NoaXAvYXBwcy8kRkxBR1NISVBfQVBQX0lEL2ZsYWdzIiB8IGpxIC4KYGBgCgojIyMgQ3JlYXRlIGEgRmxhZyB3aXRoIEludGVybmFsLU9ubHkgVGFyZ2V0aW5nCgpgYGBiYXNoCmN1cmwgLXMgLVggUE9TVCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3sKICAgICJrZXkiOiAiYmV0YS1mZWF0dXJlIiwKICAgICJkZWZhdWx0X3ZhcmlhdGlvbiI6ICJvZmYiLAogICAgInZhcmlhdGlvbnMiOiB7ICJvbiI6IHRydWUsICJvZmYiOiBmYWxzZSB9LAogICAgInJ1bGVzIjogWwogICAgICB7CiAgICAgICAgInByaW9yaXR5IjogMSwKICAgICAgICAiY29uZGl0aW9ucyI6IFsKICAgICAgICAgIHsgImF0dHJpYnV0ZSI6ICJlbWFpbCIsICJvcGVyYXRvciI6ICJlbmRzX3dpdGgiLCAidmFsdWUiOiAiQGNsb3VkZmxhcmUuY29tIiB9CiAgICAgICAgXSwKICAgICAgICAic2VydmVfdmFyaWF0aW9uIjogIm9uIgogICAgICB9CiAgICBdLAogICAgImRlc2NyaXB0aW9uIjogIkJldGEgZmVhdHVyZSBmb3IgaW50ZXJuYWwgdXNlcnMiLAogICAgImVuYWJsZWQiOiB0cnVlCiAgfScgXAogICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJENMT1VERkxBUkVfQUNDT1VOVF9JRC9mbGFnc2hpcC9hcHBzLyRGTEFHU0hJUF9BUFBfSUQvZmxhZ3MiIHwganEgLgpgYGAKCiMjIyBDcmVhdGUgYSBKU09OIENvbmZpZyBGbGFnCgpgYGBiYXNoCmN1cmwgLXMgLVggUE9TVCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3sKICAgICJrZXkiOiAicmF0ZS1saW1pdHMiLAogICAgImRlZmF1bHRfdmFyaWF0aW9uIjogInN0YW5kYXJkIiwKICAgICJ2YXJpYXRpb25zIjogewogICAgICAic3RhbmRhcmQiOiB7ICJycG0iOiAxMDAsICJidXJzdCI6IDIwIH0sCiAgICAgICJwcmVtaXVtIjogeyAicnBtIjogMTAwMCwgImJ1cnN0IjogMjAwIH0KICAgIH0sCiAgICAicnVsZXMiOiBbCiAgICAgIHsKICAgICAgICAicHJpb3JpdHkiOiAxLAogICAgICAgICJjb25kaXRpb25zIjogWwogICAgICAgICAgeyAiYXR0cmlidXRlIjogInBsYW4iLCAib3BlcmF0b3IiOiAiaW4iLCAidmFsdWUiOiBbImVudGVycHJpc2UiLCAiYnVzaW5lc3MiXSB9CiAgICAgICAgXSwKICAgICAgICAic2VydmVfdmFyaWF0aW9uIjogInByZW1pdW0iCiAgICAgIH0KICAgIF0sCiAgICAiZGVzY3JpcHRpb24iOiAiUmF0ZSBsaW1pdCBjb25maWd1cmF0aW9uIGJ5IHBsYW4iLAogICAgImVuYWJsZWQiOiB0cnVlCiAgfScgXAogICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJENMT1VERkxBUkVfQUNDT1VOVF9JRC9mbGFnc2hpcC9hcHBzLyRGTEFHU0hJUF9BUFBfSUQvZmxhZ3MiIHwganEgLgpgYGAKCiMjIyBSZWFkIGEgRmxhZwoKYGBgYmFzaApjdXJsIC1zIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENMT1VERkxBUkVfQVBJX1RPS0VOIiBcCiAgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQ0xPVURGTEFSRV9BQ0NPVU5UX0lEL2ZsYWdzaGlwL2FwcHMvJEZMQUdTSElQX0FQUF9JRC9mbGFncy9uZXctZmVhdHVyZSIgfCBqcSAuCmBgYAoKIyMjIExpc3QgQWxsIEZsYWdzICh3aXRoIHBhZ2luYXRpb24pCgpgYGBiYXNoCmN1cmwgLXMgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRDTE9VREZMQVJFX0FDQ09VTlRfSUQvZmxhZ3NoaXAvYXBwcy8kRkxBR1NISVBfQVBQX0lEL2ZsYWdzP2xpbWl0PTUwIiB8IGpxIC4KYGBgCgpJZiBgcmVzdWx0X2luZm8uY3Vyc29yYCBpcyBub24tbnVsbCwgZmV0Y2ggdGhlIG5leHQgcGFnZToKCmBgYGJhc2gKY3VybCAtcyAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgXAogICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJENMT1VERkxBUkVfQUNDT1VOVF9JRC9mbGFnc2hpcC9hcHBzLyRGTEFHU0hJUF9BUFBfSUQvZmxhZ3M/bGltaXQ9NTAmY3Vyc29yPTxjdXJzb3I+IiB8IGpxIC4KYGBgCgojIyMgVXBkYXRlIGEgRmxhZyAoRnVsbCBSZXBsYWNlKQoKVXBkYXRlcyB1c2UgUFVUIHdpdGggdGhlIGZ1bGwgYEZsYWdEZWZpbml0aW9uYC4gQWx3YXlzIEdFVCBmaXJzdCwgbW9kaWZ5LCB0aGVuIFBVVCBiYWNrLgoKYGBgYmFzaAojIDEuIFJlYWQgY3VycmVudCBmbGFnCkZMQUc9JChjdXJsIC1zIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENMT1VERkxBUkVfQVBJX1RPS0VOIiBcCiAgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQ0xPVURGTEFSRV9BQ0NPVU5UX0lEL2ZsYWdzaGlwL2FwcHMvJEZMQUdTSElQX0FQUF9JRC9mbGFncy9uZXctZmVhdHVyZSIgfCBqcSAnLnJlc3VsdCcpCgojIDIuIE1vZGlmeSAoZS5nLiwgZW5hYmxlIHRoZSBmbGFnKQpVUERBVEVEPSQoZWNobyAiJEZMQUciIHwganEgJy5lbmFibGVkID0gdHJ1ZScpCgojIDMuIFBVVCBiYWNrCmVjaG8gIiRVUERBVEVEIiB8IGN1cmwgLXMgLVggUFVUIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCBALSBcCiAgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQ0xPVURGTEFSRV9BQ0NPVU5UX0lEL2ZsYWdzaGlwL2FwcHMvJEZMQUdTSElQX0FQUF9JRC9mbGFncy9uZXctZmVhdHVyZSIgfCBqcSAuCmBgYAoKIyMjIFRvZ2dsZSBhIEZsYWcgT24KClJlYWQtbW9kaWZ5LXdyaXRlIHRvIHNldCBgZW5hYmxlZDogdHJ1ZWA6CgpgYGBiYXNoCkJBU0U9Imh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQ0xPVURGTEFSRV9BQ0NPVU5UX0lEL2ZsYWdzaGlwL2FwcHMvJEZMQUdTSElQX0FQUF9JRC9mbGFncyIKCkZMQUc9JChjdXJsIC1zIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENMT1VERkxBUkVfQVBJX1RPS0VOIiAiJEJBU0UvbmV3LWZlYXR1cmUiIHwganEgJy5yZXN1bHQnKQpVUERBVEVEPSQoZWNobyAiJEZMQUciIHwganEgJy5lbmFibGVkID0gdHJ1ZScpCmVjaG8gIiRVUERBVEVEIiB8IGN1cmwgLXMgLVggUFVUIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCBALSAiJEJBU0UvbmV3LWZlYXR1cmUiIHwganEgLgpgYGAKCiMjIyBUb2dnbGUgYSBGbGFnIE9mZiAoRGlzYWJsZSkKClNhbWUgcGF0dGVybiwgc2V0IGBlbmFibGVkOiBmYWxzZWAuIFRoZSBmbGFnIGltbWVkaWF0ZWx5IHJldHVybnMgaXRzIGRlZmF1bHQgdmFyaWF0aW9uIGZvciBhbGwgZXZhbHVhdGlvbnMuCgpgYGBiYXNoCkJBU0U9Imh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQ0xPVURGTEFSRV9BQ0NPVU5UX0lEL2ZsYWdzaGlwL2FwcHMvJEZMQUdTSElQX0FQUF9JRC9mbGFncyIKCkZMQUc9JChjdXJsIC1zIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENMT1VERkxBUkVfQVBJX1RPS0VOIiAiJEJBU0UvbmV3LWZlYXR1cmUiIHwganEgJy5yZXN1bHQnKQpVUERBVEVEPSQoZWNobyAiJEZMQUciIHwganEgJy5lbmFibGVkID0gZmFsc2UnKQplY2hvICIkVVBEQVRFRCIgfCBjdXJsIC1zIC1YIFBVVCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgQC0gIiRCQVNFL25ldy1mZWF0dXJlIiB8IGpxIC4KYGBgCgojIyMgQWRkIGEgVGFyZ2V0aW5nIFJ1bGUgdG8gYW4gRXhpc3RpbmcgRmxhZwoKQXBwZW5kIGEgcnVsZSB0byB0aGUgZXhpc3RpbmcgcnVsZXMgYXJyYXkuIFBpY2sgYSBwcmlvcml0eSB0aGF0IGRvZXNuJ3QgY29sbGlkZSB3aXRoIGV4aXN0aW5nIHJ1bGVzLgoKYGBgYmFzaApCQVNFPSJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJENMT1VERkxBUkVfQUNDT1VOVF9JRC9mbGFnc2hpcC9hcHBzLyRGTEFHU0hJUF9BUFBfSUQvZmxhZ3MiCgpGTEFHPSQoY3VybCAtcyAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgIiRCQVNFL25ldy1mZWF0dXJlIiB8IGpxICcucmVzdWx0JykKVVBEQVRFRD0kKGVjaG8gIiRGTEFHIiB8IGpxICcucnVsZXMgKz0gW3sKICAicHJpb3JpdHkiOiAyLAogICJjb25kaXRpb25zIjogW3sgImF0dHJpYnV0ZSI6ICJwbGFuIiwgIm9wZXJhdG9yIjogImVxdWFscyIsICJ2YWx1ZSI6ICJlbnRlcnByaXNlIiB9XSwKICAic2VydmVfdmFyaWF0aW9uIjogIm9uIgp9XScpCmVjaG8gIiRVUERBVEVEIiB8IGN1cmwgLXMgLVggUFVUIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCBALSAiJEJBU0UvbmV3LWZlYXR1cmUiIHwganEgLgpgYGAKCiMjIyBDaGFuZ2UgUm9sbG91dCBQZXJjZW50YWdlCgpVcGRhdGUgdGhlIHJvbGxvdXQgcGVyY2VudGFnZSBvbiBhbiBleGlzdGluZyBydWxlIChlLmcuLCBydWxlIGF0IGluZGV4IDApOgoKYGBgYmFzaApCQVNFPSJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJENMT1VERkxBUkVfQUNDT1VOVF9JRC9mbGFnc2hpcC9hcHBzLyRGTEFHU0hJUF9BUFBfSUQvZmxhZ3MiCgpGTEFHPSQoY3VybCAtcyAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgIiRCQVNFL2dyYWR1YWwtcm9sbG91dCIgfCBqcSAnLnJlc3VsdCcpClVQREFURUQ9JChlY2hvICIkRkxBRyIgfCBqcSAnLnJ1bGVzWzBdLnJvbGxvdXQucGVyY2VudGFnZSA9IDUwJykKZWNobyAiJFVQREFURUQiIHwgY3VybCAtcyAtWCBQVVQgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENMT1VERkxBUkVfQVBJX1RPS0VOIiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC1kIEAtICIkQkFTRS9ncmFkdWFsLXJvbGxvdXQiIHwganEgLgpgYGAKCiMjIyBDaGFuZ2UgRGVmYXVsdCBWYXJpYXRpb24KCmBgYGJhc2gKQkFTRT0iaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRDTE9VREZMQVJFX0FDQ09VTlRfSUQvZmxhZ3NoaXAvYXBwcy8kRkxBR1NISVBfQVBQX0lEL2ZsYWdzIgoKRkxBRz0kKGN1cmwgLXMgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iICIkQkFTRS9uZXctZmVhdHVyZSIgfCBqcSAnLnJlc3VsdCcpClVQREFURUQ9JChlY2hvICIkRkxBRyIgfCBqcSAnLmRlZmF1bHRfdmFyaWF0aW9uID0gIm9uIicpCmVjaG8gIiRVUERBVEVEIiB8IGN1cmwgLXMgLVggUFVUIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCBALSAiJEJBU0UvbmV3LWZlYXR1cmUiIHwganEgLgpgYGAKCiMjIyBBZGQgYSBOZXcgVmFyaWF0aW9uCgpgYGBiYXNoCkJBU0U9Imh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8kQ0xPVURGTEFSRV9BQ0NPVU5UX0lEL2ZsYWdzaGlwL2FwcHMvJEZMQUdTSElQX0FQUF9JRC9mbGFncyIKCkZMQUc9JChjdXJsIC1zIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJENMT1VERkxBUkVfQVBJX1RPS0VOIiAiJEJBU0UvY2hlY2tvdXQtZmxvdyIgfCBqcSAnLnJlc3VsdCcpClVQREFURUQ9JChlY2hvICIkRkxBRyIgfCBqcSAnLnZhcmlhdGlvbnNbInRyZWF0bWVudC1jIl0gPSAibWluaW1hbCInKQplY2hvICIkVVBEQVRFRCIgfCBjdXJsIC1zIC1YIFBVVCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgQC0gIiRCQVNFL2NoZWNrb3V0LWZsb3ciIHwganEgLgpgYGAKCiMjIyBSZW1vdmUgYSBSdWxlCgpSZW1vdmUgYSBydWxlIGJ5IGZpbHRlcmluZyBvbiBwcmlvcml0eToKCmBgYGJhc2gKQkFTRT0iaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRDTE9VREZMQVJFX0FDQ09VTlRfSUQvZmxhZ3NoaXAvYXBwcy8kRkxBR1NISVBfQVBQX0lEL2ZsYWdzIgoKRkxBRz0kKGN1cmwgLXMgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iICIkQkFTRS9uZXctZmVhdHVyZSIgfCBqcSAnLnJlc3VsdCcpClVQREFURUQ9JChlY2hvICIkRkxBRyIgfCBqcSAnLnJ1bGVzID0gWy5ydWxlc1tdIHwgc2VsZWN0KC5wcmlvcml0eSAhPSAyKV0nKQplY2hvICIkVVBEQVRFRCIgfCBjdXJsIC1zIC1YIFBVVCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgQC0gIiRCQVNFL25ldy1mZWF0dXJlIiB8IGpxIC4KYGBgCgojIyMgRGVsZXRlIGEgRmxhZwoKYGBgYmFzaApjdXJsIC1zIC1YIERFTEVURSBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRDTE9VREZMQVJFX0FDQ09VTlRfSUQvZmxhZ3NoaXAvYXBwcy8kRkxBR1NISVBfQVBQX0lEL2ZsYWdzL29sZC1mZWF0dXJlIiB8IGpxIC4KYGBgCgotLS0KCiMjIFRhcmdldGluZyBSdWxlIFBhdHRlcm5zCgojIyMgRW50ZXJwcmlzZS1Pbmx5IEFjY2VzcwoKYGBganNvbgp7CiAgInByaW9yaXR5IjogMSwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsgImF0dHJpYnV0ZSI6ICJwbGFuIiwgIm9wZXJhdG9yIjogImVxdWFscyIsICJ2YWx1ZSI6ICJlbnRlcnByaXNlIiB9CiAgXSwKICAic2VydmVfdmFyaWF0aW9uIjogIm9uIgp9CmBgYAoKIyMjIENvdW50cnktQmFzZWQgVGFyZ2V0aW5nIHdpdGggTG9naWNhbCBBTkQvT1IKClRhcmdldCBlbnRlcnByaXNlIHVzZXJzIGluIHRoZSBVUyBvciBDYW5hZGE6CgpgYGBqc29uCnsKICAicHJpb3JpdHkiOiAxLAogICJjb25kaXRpb25zIjogWwogICAgewogICAgICAibG9naWNhbF9vcGVyYXRvciI6ICJBTkQiLAogICAgICAiY2xhdXNlcyI6IFsKICAgICAgICB7ICJhdHRyaWJ1dGUiOiAicGxhbiIsICJvcGVyYXRvciI6ICJlcXVhbHMiLCAidmFsdWUiOiAiZW50ZXJwcmlzZSIgfSwKICAgICAgICB7CiAgICAgICAgICAibG9naWNhbF9vcGVyYXRvciI6ICJPUiIsCiAgICAgICAgICAiY2xhdXNlcyI6IFsKICAgICAgICAgICAgeyAiYXR0cmlidXRlIjogImNvdW50cnkiLCAib3BlcmF0b3IiOiAiZXF1YWxzIiwgInZhbHVlIjogIlVTIiB9LAogICAgICAgICAgICB7ICJhdHRyaWJ1dGUiOiAiY291bnRyeSIsICJvcGVyYXRvciI6ICJlcXVhbHMiLCAidmFsdWUiOiAiQ0EiIH0KICAgICAgICAgIF0KICAgICAgICB9CiAgICAgIF0KICAgIH0KICBdLAogICJzZXJ2ZV92YXJpYXRpb24iOiAib24iCn0KYGBgCgojIyMgUGVyY2VudGFnZSBSb2xsb3V0CgpHcmFkdWFsbHkgcm9sbCBvdXQgdG8gMTAlIG9mIHVzZXJzOgoKYGBganNvbgp7CiAgInByaW9yaXR5IjogMSwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsgImF0dHJpYnV0ZSI6ICJ0YXJnZXRpbmdLZXkiLCAib3BlcmF0b3IiOiAibm90X2VxdWFscyIsICJ2YWx1ZSI6ICIiIH0KICBdLAogICJzZXJ2ZV92YXJpYXRpb24iOiAib24iLAogICJyb2xsb3V0IjogewogICAgInBlcmNlbnRhZ2UiOiAxMCwKICAgICJhdHRyaWJ1dGUiOiAidGFyZ2V0aW5nS2V5IgogIH0KfQpgYGAKCiMjIyBBL0IvbiAoTXVsdGktVmFyaWFudCkgVGVzdGluZwoKVG8gc3BsaXQgdHJhZmZpYyBhY3Jvc3MgTiB2YXJpYW50cywgY3JlYXRlIG9uZSBydWxlIHBlciB2YXJpYW50IHdpdGggKipjdW11bGF0aXZlKiogcm9sbG91dCBwZXJjZW50YWdlcy4gRmxhZ3NoaXAgZXZhbHVhdGVzIHJ1bGVzIGluIHByaW9yaXR5IG9yZGVyLiBJZiBhIHJ1bGUncyBjb25kaXRpb25zIG1hdGNoIGJ1dCB0aGUgdXNlciBtaXNzZXMgdGhhdCBydWxlJ3Mgcm9sbG91dCBwZXJjZW50YWdlLCBldmFsdWF0aW9uIGNvbnRpbnVlcyB0byB0aGUgbmV4dCBydWxlLiBVc2UgdGhlIHNhbWUgc3RhYmxlIHJvbGxvdXQgYXR0cmlidXRlIG9uIGV2ZXJ5IHJ1bGUgc28gZWFjaCB1c2VyIGlzIGNvbXBhcmVkIGFnYWluc3QgdGhlIHNhbWUgYnVja2V0IGFzIHRoZSB0aHJlc2hvbGRzIGluY3JlYXNlLgoKVGhlIGV4YW1wbGUgdXNlcyBgY29uZGl0aW9uczogW11gIGJlY2F1c2UgdGhlIHJ1bGVzIGFyZSBpbnRlbmRlZCB0byBtYXRjaCBldmVyeSBjb250ZXh0LiBGb3Igc3RpY2t5IHVzZXIgYXNzaWdubWVudCwgY2FsbGVycyBtdXN0IHN0aWxsIHBhc3MgdGhlIGNvbmZpZ3VyZWQgYnVja2V0aW5nIGF0dHJpYnV0ZSAoYHRhcmdldGluZ0tleWAgaGVyZSk7IG90aGVyd2lzZSBGbGFnc2hpcCB1c2VzIGEgcmFuZG9tIGJ1Y2tldCBwZXIgcmVxdWVzdC4KCkZvciBleGFtcGxlLCB0byBzcGxpdCB0cmFmZmljIDMwJSAvIDQwJSAvIDMwJSBhY3Jvc3MgdmFyaWFudHMgQSwgQiwgYW5kIEM6Cgp8IFZhcmlhbnQgfCBTaGFyZSB8IEN1bXVsYXRpdmUgdGhyZXNob2xkIHwKfC0tLS0tLS0tLXwtLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS18CnwgQSAgICAgICB8IDMwJSAgIHwgMzAgICAgICAgICAgICAgICAgICAgfAp8IEIgICAgICAgfCA0MCUgICB8IDcwICAgICAgICAgICAgICAgICAgIHwKfCBDICAgICAgIHwgMzAlICAgfCAxMDAgICAgICAgICAgICAgICAgICB8CgpgYGBqc29uCiJydWxlcyI6IFsKICB7CiAgICAicHJpb3JpdHkiOiAxLAogICAgImNvbmRpdGlvbnMiOiBbXSwKICAgICJzZXJ2ZV92YXJpYXRpb24iOiAidmFyaWFudC1hIiwKICAgICJyb2xsb3V0IjogeyAicGVyY2VudGFnZSI6IDMwLCAiYXR0cmlidXRlIjogInRhcmdldGluZ0tleSIgfQogIH0sCiAgewogICAgInByaW9yaXR5IjogMiwKICAgICJjb25kaXRpb25zIjogW10sCiAgICAic2VydmVfdmFyaWF0aW9uIjogInZhcmlhbnQtYiIsCiAgICAicm9sbG91dCI6IHsgInBlcmNlbnRhZ2UiOiA3MCwgImF0dHJpYnV0ZSI6ICJ0YXJnZXRpbmdLZXkiIH0KICB9LAogIHsKICAgICJwcmlvcml0eSI6IDMsCiAgICAiY29uZGl0aW9ucyI6IFtdLAogICAgInNlcnZlX3ZhcmlhdGlvbiI6ICJ2YXJpYW50LWMiLAogICAgInJvbGxvdXQiOiB7ICJwZXJjZW50YWdlIjogMTAwLCAiYXR0cmlidXRlIjogInRhcmdldGluZ0tleSIgfQogIH0KXQpgYGAKCktleSBwb2ludHM6Ci0gUnVsZXMgYXJlIGV2YWx1YXRlZCBsb3dlc3QtcHJpb3JpdHktbnVtYmVyIGZpcnN0LiBBIHVzZXIgd2hvIGZhbGxzIGludG8gcnVsZSAxJ3MgMC0zMCUgYnVja2V0IGdldHMgYHZhcmlhbnQtYWAgYW5kIGlzIG5vdCBldmFsdWF0ZWQgZnVydGhlci4KLSBSdWxlIDIncyA3MCUgdGhyZXNob2xkIGNvdmVycyB0aGUgbmV4dCA0MCUgb2YgdXNlcnMgKDMxLTcwJSkuCi0gUnVsZSAzJ3MgMTAwJSB0aHJlc2hvbGQgY2F0Y2hlcyB0aGUgcmVtYWluaW5nIDMwJSAoNzEtMTAwJSkuCi0gQWx3YXlzIHNldCB0aGUgbGFzdCBydWxlIHRvIGAxMDBgIHNvIGV2ZXJ5IGNvbnRleHQgd2l0aCB0aGUgYnVja2V0aW5nIGF0dHJpYnV0ZSBpcyBhc3NpZ25lZCBhIHZhcmlhbnQuCi0gRm9yIHN0aWNreSBBL0IvbiBhc3NpZ25tZW50LCBwYXNzIGEgc3RhYmxlIGB0YXJnZXRpbmdLZXlgIG9yIGNvbmZpZ3VyZWQgYnVja2V0aW5nIGF0dHJpYnV0ZS4gV2l0aG91dCBpdCwgcm9sbG91dCBhc3NpZ25tZW50IGlzIHJhbmRvbSBwZXIgcmVxdWVzdCwgd2hpY2ggY2FuIGJlIHVzZWZ1bCBmb3IgcmVxdWVzdC1sZXZlbCBzYW1wbGluZyBidXQgaXMgdXN1YWxseSB3cm9uZyBmb3IgdXNlciBleHBlcmltZW50cy4KLSBBIHBlcmNlbnRhZ2Ugcm9sbG91dCBtYXRjaCByZXBvcnRzIHJlYXNvbiBgU1BMSVRgIGluIGV2YWx1YXRpb24gZGV0YWlscy4KCiMjIyBQcm9ncmVzc2l2ZSBSb2xsb3V0IFdvcmtmbG93CgoxLiBDcmVhdGUgZmxhZyB3aXRoIDUlIHJvbGxvdXQsIGVuYWJsZSBpdAoyLiBNb25pdG9yIG1ldHJpY3MKMy4gSW5jcmVhc2UgdG8gMjUlIOKGkiA1MCUg4oaSIDEwMCUgYnkgdXBkYXRpbmcgdGhlIGByb2xsb3V0LnBlcmNlbnRhZ2VgCjQuIE9uY2UgYXQgMTAwJSwgcmVtb3ZlIHRoZSBydWxlIGFuZCBzZXQgYGRlZmF1bHRfdmFyaWF0aW9uYCB0byB0aGUgd2lubmluZyB2YXJpYXRpb24KNS4gRXZlbnR1YWxseSByZW1vdmUgdGhlIGZsYWcgYW5kIHRoZSBjb2RlIGJyYW5jaAoKLS0tCgojIyBTYWZlIERlbGV0aW9uIFdvcmtmbG93CgoxLiAqKkRpc2FibGUqKiB0aGUgZmxhZyBmaXJzdCAoYGVuYWJsZWQ6IGZhbHNlYCkg4oCUIGNvbmZpcm1zIG5vdGhpbmcgZGVwZW5kcyBvbiBpdCBiZWluZyBhY3RpdmUKMi4gKipNb25pdG9yKiogZm9yIHVuZXhwZWN0ZWQgYmVoYXZpb3IKMy4gKipSZW1vdmUqKiBmbGFnIGV2YWx1YXRpb24gY29kZSBmcm9tIHlvdXIgYXBwbGljYXRpb24KNC4gKipEZXBsb3kqKiB0aGUgY29kZSBjaGFuZ2UKNS4gKipEZWxldGUqKiB0aGUgZmxhZyB2aWEgQVBJCg==
+# Flagship Patterns & Best Practices
+
+## Evaluating Flags in Workers (Binding)
+
+### Simple Boolean Toggle
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const showNewUI = await env.FLAGS.getBooleanValue("new-ui", false, {
+      userId: "user-42",
+    });
+
+    if (showNewUI) {
+      return new Response("New UI");
+    }
+    return new Response("Classic UI");
+  },
+};
+```
+
+### Multi-Variant String Flag
+
+```typescript
+const checkoutFlow = await env.FLAGS.getStringValue(
+  "checkout-flow",
+  "original",
+  { userId, country: "US" },
+);
+
+switch (checkoutFlow) {
+  case "streamlined":
+    return handleStreamlined(request);
+  case "one-click":
+    return handleOneClick(request);
+  default:
+    return handleOriginal(request);
+}
+```
+
+### JSON Config Flag
+
+```typescript
+interface RateLimitConfig {
+  rpm: number;
+  burst: number;
+}
+
+const limits = await env.FLAGS.getObjectValue<RateLimitConfig>(
+  "rate-limits",
+  { rpm: 100, burst: 20 },
+  { plan: userPlan },
+);
+```
+
+### Using Details for Observability
+
+```typescript
+const details = await env.FLAGS.getBooleanDetails("new-checkout", false, {
+  userId: "user-42",
+});
+
+console.log(details.value);     // true
+console.log(details.variant);   // "on"
+console.log(details.reason);    // "TARGETING_MATCH"
+console.log(details.errorCode); // undefined (no error)
+```
+
+---
+
+## Evaluating Flags with OpenFeature (Workers)
+
+### Binding Passthrough (Recommended)
+
+```typescript
+import { OpenFeature } from "@openfeature/server-sdk";
+import { FlagshipServerProvider } from "@cloudflare/flagship";
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    await OpenFeature.setProviderAndWait(
+      new FlagshipServerProvider({ binding: env.FLAGS }),
+    );
+    const client = OpenFeature.getClient();
+
+    const enabled = await client.getBooleanValue("new-checkout", false, {
+      targetingKey: "user-42",
+      plan: "enterprise",
+      country: "US",
+    });
+
+    return new Response(enabled ? "New checkout" : "Standard checkout");
+  },
+};
+```
+
+### Migration from Another Provider
+
+Only the provider initialization changes — evaluation call sites stay the same:
+
+```typescript
+// ❌ Before (LaunchDarkly)
+await OpenFeature.setProviderAndWait(
+  new LaunchDarklyProvider({ sdkKey: "..." }),
+);
+
+// ✅ After (Flagship)
+await OpenFeature.setProviderAndWait(
+  new FlagshipServerProvider({ binding: env.FLAGS }),
+);
+
+// Evaluation code is unchanged
+const enabled = await client.getBooleanValue("my-flag", false, {
+  targetingKey: "user-42",
+});
+```
+
+---
+
+## Managing Flags via REST API
+
+All examples use `api.cloudflare.com`. Set `CLOUDFLARE_ACCOUNT_ID`, `FLAGSHIP_APP_ID`, and `CLOUDFLARE_API_TOKEN` first.
+
+### Create a Boolean Flag
+
+```bash
+curl -s -X POST \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "key": "new-feature",
+    "default_variation": "off",
+    "variations": { "on": true, "off": false },
+    "rules": [],
+    "description": "Enable the new feature",
+    "enabled": false
+  }' \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags" | jq .
+```
+
+### Create a Flag with Internal-Only Targeting
+
+```bash
+curl -s -X POST \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "key": "beta-feature",
+    "default_variation": "off",
+    "variations": { "on": true, "off": false },
+    "rules": [
+      {
+        "priority": 1,
+        "conditions": [
+          { "attribute": "email", "operator": "ends_with", "value": "@cloudflare.com" }
+        ],
+        "serve_variation": "on"
+      }
+    ],
+    "description": "Beta feature for internal users",
+    "enabled": true
+  }' \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags" | jq .
+```
+
+### Create a JSON Config Flag
+
+```bash
+curl -s -X POST \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "key": "rate-limits",
+    "default_variation": "standard",
+    "variations": {
+      "standard": { "rpm": 100, "burst": 20 },
+      "premium": { "rpm": 1000, "burst": 200 }
+    },
+    "rules": [
+      {
+        "priority": 1,
+        "conditions": [
+          { "attribute": "plan", "operator": "in", "value": ["enterprise", "business"] }
+        ],
+        "serve_variation": "premium"
+      }
+    ],
+    "description": "Rate limit configuration by plan",
+    "enabled": true
+  }' \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags" | jq .
+```
+
+### Read a Flag
+
+```bash
+curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags/new-feature" | jq .
+```
+
+### List All Flags (with pagination)
+
+```bash
+curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags?limit=50" | jq .
+```
+
+If `result_info.cursor` is non-null, fetch the next page:
+
+```bash
+curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags?limit=50&cursor=<cursor>" | jq .
+```
+
+### Update a Flag (Full Replace)
+
+Updates use PUT with the full `FlagDefinition`. Always GET first, modify, then PUT back.
+
+```bash
+# 1. Read current flag
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags/new-feature" | jq '.result')
+
+# 2. Modify (e.g., enable the flag)
+UPDATED=$(echo "$FLAG" | jq '.enabled = true')
+
+# 3. PUT back
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags/new-feature" | jq .
+```
+
+### Toggle a Flag On
+
+Read-modify-write to set `enabled: true`:
+
+```bash
+BASE="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags"
+
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$BASE/new-feature" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.enabled = true')
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- "$BASE/new-feature" | jq .
+```
+
+### Toggle a Flag Off (Disable)
+
+Same pattern, set `enabled: false`. The flag immediately returns its default variation for all evaluations.
+
+```bash
+BASE="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags"
+
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$BASE/new-feature" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.enabled = false')
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- "$BASE/new-feature" | jq .
+```
+
+### Add a Targeting Rule to an Existing Flag
+
+Append a rule to the existing rules array. Pick a priority that doesn't collide with existing rules.
+
+```bash
+BASE="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags"
+
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$BASE/new-feature" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.rules += [{
+  "priority": 2,
+  "conditions": [{ "attribute": "plan", "operator": "equals", "value": "enterprise" }],
+  "serve_variation": "on"
+}]')
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- "$BASE/new-feature" | jq .
+```
+
+### Change Rollout Percentage
+
+Update the rollout percentage on an existing rule (e.g., rule at index 0):
+
+```bash
+BASE="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags"
+
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$BASE/gradual-rollout" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.rules[0].rollout.percentage = 50')
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- "$BASE/gradual-rollout" | jq .
+```
+
+### Change Default Variation
+
+```bash
+BASE="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags"
+
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$BASE/new-feature" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.default_variation = "on"')
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- "$BASE/new-feature" | jq .
+```
+
+### Add a New Variation
+
+```bash
+BASE="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags"
+
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$BASE/checkout-flow" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.variations["treatment-c"] = "minimal"')
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- "$BASE/checkout-flow" | jq .
+```
+
+### Remove a Rule
+
+Remove a rule by filtering on priority:
+
+```bash
+BASE="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags"
+
+FLAG=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$BASE/new-feature" | jq '.result')
+UPDATED=$(echo "$FLAG" | jq '.rules = [.rules[] | select(.priority != 2)]')
+echo "$UPDATED" | curl -s -X PUT \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- "$BASE/new-feature" | jq .
+```
+
+### Delete a Flag
+
+```bash
+curl -s -X DELETE \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps/$FLAGSHIP_APP_ID/flags/old-feature" | jq .
+```
+
+---
+
+## Targeting Rule Patterns
+
+### Enterprise-Only Access
+
+```json
+{
+  "priority": 1,
+  "conditions": [
+    { "attribute": "plan", "operator": "equals", "value": "enterprise" }
+  ],
+  "serve_variation": "on"
+}
+```
+
+### Country-Based Targeting with Logical AND/OR
+
+Target enterprise users in the US or Canada:
+
+```json
+{
+  "priority": 1,
+  "conditions": [
+    {
+      "logical_operator": "AND",
+      "clauses": [
+        { "attribute": "plan", "operator": "equals", "value": "enterprise" },
+        {
+          "logical_operator": "OR",
+          "clauses": [
+            { "attribute": "country", "operator": "equals", "value": "US" },
+            { "attribute": "country", "operator": "equals", "value": "CA" }
+          ]
+        }
+      ]
+    }
+  ],
+  "serve_variation": "on"
+}
+```
+
+### Percentage Rollout
+
+Gradually roll out to 10% of users:
+
+```json
+{
+  "priority": 1,
+  "conditions": [
+    { "attribute": "targetingKey", "operator": "not_equals", "value": "" }
+  ],
+  "serve_variation": "on",
+  "rollout": {
+    "percentage": 10,
+    "attribute": "targetingKey"
+  }
+}
+```
+
+### A/B/n (Multi-Variant) Testing
+
+To split traffic across N variants, create one rule per variant with **cumulative** rollout percentages. Flagship evaluates rules in priority order. If a rule's conditions match but the user misses that rule's rollout percentage, evaluation continues to the next rule. Use the same stable rollout attribute on every rule so each user is compared against the same bucket as the thresholds increase.
+
+The example uses `conditions: []` because the rules are intended to match every context. For sticky user assignment, callers must still pass the configured bucketing attribute (`targetingKey` here); otherwise Flagship uses a random bucket per request.
+
+For example, to split traffic 30% / 40% / 30% across variants A, B, and C:
+
+| Variant | Share | Cumulative threshold |
+|---------|-------|----------------------|
+| A       | 30%   | 30                   |
+| B       | 40%   | 70                   |
+| C       | 30%   | 100                  |
+
+```json
+"rules": [
+  {
+    "priority": 1,
+    "conditions": [],
+    "serve_variation": "variant-a",
+    "rollout": { "percentage": 30, "attribute": "targetingKey" }
+  },
+  {
+    "priority": 2,
+    "conditions": [],
+    "serve_variation": "variant-b",
+    "rollout": { "percentage": 70, "attribute": "targetingKey" }
+  },
+  {
+    "priority": 3,
+    "conditions": [],
+    "serve_variation": "variant-c",
+    "rollout": { "percentage": 100, "attribute": "targetingKey" }
+  }
+]
+```
+
+Key points:
+- Rules are evaluated lowest-priority-number first. A user who falls into rule 1's 0-30% bucket gets `variant-a` and is not evaluated further.
+- Rule 2's 70% threshold covers the next 40% of users (31-70%).
+- Rule 3's 100% threshold catches the remaining 30% (71-100%).
+- Always set the last rule to `100` so every context with the bucketing attribute is assigned a variant.
+- For sticky A/B/n assignment, pass a stable `targetingKey` or configured bucketing attribute. Without it, rollout assignment is random per request, which can be useful for request-level sampling but is usually wrong for user experiments.
+- A percentage rollout match reports reason `SPLIT` in evaluation details.
+
+### Progressive Rollout Workflow
+
+1. Create flag with 5% rollout, enable it
+2. Monitor metrics
+3. Increase to 25% → 50% → 100% by updating the `rollout.percentage`
+4. Once at 100%, remove the rule and set `default_variation` to the winning variation
+5. Eventually remove the flag and the code branch
+
+---
+
+## Safe Deletion Workflow
+
+1. **Disable** the flag first (`enabled: false`) — confirms nothing depends on it being active
+2. **Monitor** for unexpected behavior
+3. **Remove** flag evaluation code from your application
+4. **Deploy** the code change
+5. **Delete** the flag via API

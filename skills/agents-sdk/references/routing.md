@@ -1,1 +1,75 @@
-IyBSb3V0aW5nCgpGZXRjaCBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWdlbnRzL2FwaS1yZWZlcmVuY2Uvcm91dGluZy8gZm9yIGNvbXBsZXRlIGRvY3VtZW50YXRpb24uCgojIyBEZWZhdWx0IFVSTCBQYXR0ZXJuCgpgL2FnZW50cy97a2ViYWItY2xhc3MtbmFtZX0ve2luc3RhbmNlLW5hbWV9YAoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyByb3V0ZUFnZW50UmVxdWVzdCB9IGZyb20gImFnZW50cyI7CgpleHBvcnQgZGVmYXVsdCB7CiAgZmV0Y2g6IChyZXEsIGVudikgPT4KICAgIHJvdXRlQWdlbnRSZXF1ZXN0KHJlcSwgZW52KSA/PyBuZXcgUmVzcG9uc2UoIk5vdCBmb3VuZCIsIHsgc3RhdHVzOiA0MDQgfSkKfTsKYGBgCgp8IENsYXNzIHwgVVJMIHwKfC0tLS0tLS18LS0tLS18CnwgYENvdW50ZXJgIHwgYC9hZ2VudHMvY291bnRlci91c2VyLTEyM2AgfAp8IGBDaGF0Um9vbWAgfCBgL2FnZW50cy9jaGF0LXJvb20vbG9iYnlgIHwKfCBgTXlBZ2VudGAgfCBgL2FnZW50cy9teS1hZ2VudC9kZWZhdWx0YCB8CgpTdWJwYXRocyBhZnRlciB0aGUgaW5zdGFuY2UgbmFtZSAoZS5nLiBgL2FnZW50cy9teS1hZ2VudC9kZWZhdWx0L2FwaS9kYXRhYCkgcm91dGUgdG8gYG9uUmVxdWVzdGAuCgojIyBDdXN0b20gUm91dGluZyB3aXRoIGBnZXRBZ2VudEJ5TmFtZWAKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgZ2V0QWdlbnRCeU5hbWUgfSBmcm9tICJhZ2VudHMiOwoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcSwgZW52KSB7CiAgICBjb25zdCB1cmwgPSBuZXcgVVJMKHJlcS51cmwpOwogICAgaWYgKHVybC5wYXRobmFtZS5zdGFydHNXaXRoKCIvYXBpLyIpKSB7CiAgICAgIGNvbnN0IGFnZW50ID0gZ2V0QWdlbnRCeU5hbWUoZW52Lk15QWdlbnQsICJzaW5nbGV0b24iKTsKICAgICAgcmV0dXJuIGFnZW50LmZldGNoKHJlcSk7CiAgICB9CiAgICByZXR1cm4gcm91dGVBZ2VudFJlcXVlc3QocmVxLCBlbnYpOwogIH0KfTsKYGBgCgojIyBPcHRpb25zCgpgYGB0eXBlc2NyaXB0CnJvdXRlQWdlbnRSZXF1ZXN0KHJlcSwgZW52LCB7CiAgY29yczogdHJ1ZSwKICBwcmVmaXg6ICIvYXBpL2FnZW50cyIsCiAgbG9jYXRpb25IaW50OiAiZW5hbSIsCiAganVyaXNkaWN0aW9uOiAiZXUiLAogIHByb3BzOiB7IHVzZXJJZDogIjEyMyIgfSwKICBvbkJlZm9yZUNvbm5lY3Q6IGFzeW5jIChyZXEpID0+IHsgLyogYXV0aCBjaGVjayAqLyB9LAogIG9uQmVmb3JlUmVxdWVzdDogYXN5bmMgKHJlcSkgPT4geyAvKiBhdXRoIGNoZWNrICovIH0KfSk7CmBgYAoKYHByb3BzYCBhcmUgZGVsaXZlcmVkIHRvIGBvblN0YXJ0KHByb3BzKWAgb24gZmlyc3QgYWNjZXNzLgoKIyMgQ2xpZW50IFNpZGUKCmBgYHRzeAp1c2VBZ2VudCh7CiAgYWdlbnQ6ICJNeUFnZW50IiwKICBuYW1lOiAiaW5zdGFuY2UtMSIsCiAgaG9zdDogImh0dHBzOi8vbXktd29ya2VyLndvcmtlcnMuZGV2IiwKICBiYXNlUGF0aDogIi9hcGkvYWdlbnRzIiwKICBwYXRoOiAiL2N1c3RvbS1zdWJwYXRoIgp9KTsKYGBgCgojIyBDb21tb24gTWlzdGFrZXMKCi0gQ2xhc3MgbmFtZSBgTXlBZ2VudGAgYmVjb21lcyBrZWJhYiBgbXktYWdlbnRgIGluIFVSTHMg4oCUIG1hdGNoIGV4YWN0bHkKLSAiTmFtZXNwYWNlIG5vdCBmb3VuZCIgZXJyb3IgPSB0aGUgYGNsYXNzX25hbWVgIGluIHdyYW5nbGVyIGRvZXNuJ3QgbWF0Y2ggeW91ciBleHBvcnRlZCBjbGFzcwotIElmIGBzZW5kSWRlbnRpdHlPbkNvbm5lY3Q6IGZhbHNlYCwgdGhlIGByZWFkeWAgcHJvbWlzZSBvbiB0aGUgY2xpZW50IG1heSBuZXZlciByZXNvbHZlIOKAlCB1c2Ugc3RhdGUgc3luYyBpbnN0ZWFkCg==
+# Routing
+
+Fetch https://developers.cloudflare.com/agents/api-reference/routing/ for complete documentation.
+
+## Default URL Pattern
+
+`/agents/{kebab-class-name}/{instance-name}`
+
+```typescript
+import { routeAgentRequest } from "agents";
+
+export default {
+  fetch: (req, env) =>
+    routeAgentRequest(req, env) ?? new Response("Not found", { status: 404 })
+};
+```
+
+| Class | URL |
+|-------|-----|
+| `Counter` | `/agents/counter/user-123` |
+| `ChatRoom` | `/agents/chat-room/lobby` |
+| `MyAgent` | `/agents/my-agent/default` |
+
+Subpaths after the instance name (e.g. `/agents/my-agent/default/api/data`) route to `onRequest`.
+
+## Custom Routing with `getAgentByName`
+
+```typescript
+import { getAgentByName } from "agents";
+
+export default {
+  async fetch(req, env) {
+    const url = new URL(req.url);
+    if (url.pathname.startsWith("/api/")) {
+      const agent = getAgentByName(env.MyAgent, "singleton");
+      return agent.fetch(req);
+    }
+    return routeAgentRequest(req, env);
+  }
+};
+```
+
+## Options
+
+```typescript
+routeAgentRequest(req, env, {
+  cors: true,
+  prefix: "/api/agents",
+  locationHint: "enam",
+  jurisdiction: "eu",
+  props: { userId: "123" },
+  onBeforeConnect: async (req) => { /* auth check */ },
+  onBeforeRequest: async (req) => { /* auth check */ }
+});
+```
+
+`props` are delivered to `onStart(props)` on first access.
+
+## Client Side
+
+```tsx
+useAgent({
+  agent: "MyAgent",
+  name: "instance-1",
+  host: "https://my-worker.workers.dev",
+  basePath: "/api/agents",
+  path: "/custom-subpath"
+});
+```
+
+## Common Mistakes
+
+- Class name `MyAgent` becomes kebab `my-agent` in URLs — match exactly
+- "Namespace not found" error = the `class_name` in wrangler doesn't match your exported class
+- If `sendIdentityOnConnect: false`, the `ready` promise on the client may never resolve — use state sync instead

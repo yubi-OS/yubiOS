@@ -1,1 +1,185 @@
-IyBXb3JrZXJzIENvbmZpZ3VyYXRpb24KCiMjIHdyYW5nbGVyLmpzb25jIChSZWNvbW1lbmRlZCkKCmBgYGpzb25jCnsKICAiJHNjaGVtYSI6ICIuL25vZGVfbW9kdWxlcy93cmFuZ2xlci9jb25maWctc2NoZW1hLmpzb24iLAogICJuYW1lIjogIm15LXdvcmtlciIsCiAgIm1haW4iOiAic3JjL2luZGV4LnRzIiwKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLCAvLyBVc2UgY3VycmVudCBkYXRlIGZvciBuZXcgcHJvamVjdHMKICAKICAvLyBCaW5kaW5ncyAobm9uLWluaGVyaXRhYmxlKQogICJ2YXJzIjogeyAiRU5WSVJPTk1FTlQiOiAicHJvZHVjdGlvbiIgfSwKICAia3ZfbmFtZXNwYWNlcyI6IFt7ICJiaW5kaW5nIjogIk1ZX0tWIiwgImlkIjogImFiYzEyMyIgfV0sCiAgInIyX2J1Y2tldHMiOiBbeyAiYmluZGluZyI6ICJNWV9CVUNLRVQiLCAiYnVja2V0X25hbWUiOiAibXktYnVja2V0IiB9XSwKICAiZDFfZGF0YWJhc2VzIjogW3sgImJpbmRpbmciOiAiREIiLCAiZGF0YWJhc2VfbmFtZSI6ICJteS1kYiIsICJkYXRhYmFzZV9pZCI6ICJ4eXo3ODkiIH1dLAogIAogIC8vIEVudmlyb25tZW50cwogICJlbnYiOiB7CiAgICAic3RhZ2luZyI6IHsKICAgICAgInZhcnMiOiB7ICJFTlZJUk9OTUVOVCI6ICJzdGFnaW5nIiB9LAogICAgICAia3ZfbmFtZXNwYWNlcyI6IFt7ICJiaW5kaW5nIjogIk1ZX0tWIiwgImlkIjogInN0YWdpbmctaWQiIH1dCiAgICB9CiAgfQp9CmBgYAoKIyMgQ29uZmlndXJhdGlvbiBSdWxlcwoKKipJbmhlcml0YWJsZSoqOiBgbmFtZWAsIGBtYWluYCwgYGNvbXBhdGliaWxpdHlfZGF0ZWAsIGByb3V0ZXNgLCBgd29ya2Vyc19kZXZgICAKKipOb24taW5oZXJpdGFibGUqKjogQWxsIGJpbmRpbmdzIChgdmFyc2AsIGBrdl9uYW1lc3BhY2VzYCwgYHIyX2J1Y2tldHNgLCBldGMuKSAgCioqVG9wLWxldmVsIG9ubHkqKjogYG1pZ3JhdGlvbnNgLCBga2VlcF92YXJzYCwgYHNlbmRfbWV0cmljc2AKCioqQUxXQVlTIHNldCBgY29tcGF0aWJpbGl0eV9kYXRlYCB0byBjdXJyZW50IGRhdGUgZm9yIG5ldyBwcm9qZWN0cyoqCgojIyBCaW5kaW5ncwoKYGBganNvbmMKewogIC8vIEVudmlyb25tZW50IHZhcmlhYmxlcyAtIGFjY2VzcyB2aWEgZW52LlZBUl9OQU1FCiAgInZhcnMiOiB7ICJFTlZJUk9OTUVOVCI6ICJwcm9kdWN0aW9uIiB9LAogIAogIC8vIEtWIChrZXktdmFsdWUgc3RvcmFnZSkKICAia3ZfbmFtZXNwYWNlcyI6IFt7ICJiaW5kaW5nIjogIk1ZX0tWIiwgImlkIjogImFiYzEyMyIgfV0sCiAgCiAgLy8gUjIgKG9iamVjdCBzdG9yYWdlKQogICJyMl9idWNrZXRzIjogW3sgImJpbmRpbmciOiAiTVlfQlVDS0VUIiwgImJ1Y2tldF9uYW1lIjogIm15LWJ1Y2tldCIgfV0sCiAgCiAgLy8gRDEgKFNRTCBkYXRhYmFzZSkKICAiZDFfZGF0YWJhc2VzIjogW3sgImJpbmRpbmciOiAiREIiLCAiZGF0YWJhc2VfbmFtZSI6ICJteS1kYiIsICJkYXRhYmFzZV9pZCI6ICJ4eXo3ODkiIH1dLAogIAogIC8vIER1cmFibGUgT2JqZWN0cyAoc3RhdGVmdWwgY29vcmRpbmF0aW9uKQogICJkdXJhYmxlX29iamVjdHMiOiB7CiAgICAiYmluZGluZ3MiOiBbeyAibmFtZSI6ICJDT1VOVEVSIiwgImNsYXNzX25hbWUiOiAiQ291bnRlciIgfV0KICB9LAogIAogIC8vIFF1ZXVlcyAobWVzc2FnZSBxdWV1ZXMpCiAgInF1ZXVlcyI6IHsKICAgICJwcm9kdWNlcnMiOiBbeyAiYmluZGluZyI6ICJNWV9RVUVVRSIsICJxdWV1ZSI6ICJteS1xdWV1ZSIgfV0sCiAgICAiY29uc3VtZXJzIjogW3sgInF1ZXVlIjogIm15LXF1ZXVlIiwgIm1heF9iYXRjaF9zaXplIjogMTAgfV0KICB9LAogIAogIC8vIFNlcnZpY2UgYmluZGluZ3MgKHdvcmtlci10by13b3JrZXIgUlBDKQogICJzZXJ2aWNlcyI6IFt7ICJiaW5kaW5nIjogIlNFUlZJQ0VfQiIsICJzZXJ2aWNlIjogInNlcnZpY2UtYiIgfV0sCiAgCiAgLy8gQW5hbHl0aWNzIEVuZ2luZQogICJhbmFseXRpY3NfZW5naW5lX2RhdGFzZXRzIjogW3sgImJpbmRpbmciOiAiQU5BTFlUSUNTIiB9XQp9CmBgYAoKIyMjIFNlY3JldHMKClNldCB2aWEgQ0xJIChuZXZlciBpbiBjb25maWcpOgoKYGBgYmFzaApucHggd3JhbmdsZXIgc2VjcmV0IHB1dCBBUElfS0VZCmBgYAoKQWNjZXNzOiBgZW52LkFQSV9LRVlgCgojIyMgQXV0b21hdGljIFByb3Zpc2lvbmluZyAoQmV0YSkKCkJpbmRpbmdzIHdpdGhvdXQgSURzIGFyZSBhdXRvLWNyZWF0ZWQ6CgpgYGBqc29uYwp7ICJrdl9uYW1lc3BhY2VzIjogW3sgImJpbmRpbmciOiAiTVlfS1YiIH1dIH0gIC8vIElEIGFkZGVkIG9uIGRlcGxveQpgYGAKCiMjIFJvdXRlcyAmIFRyaWdnZXJzCgpgYGBqc29uYwp7CiAgInJvdXRlcyI6IFsKICAgIHsgInBhdHRlcm4iOiAiZXhhbXBsZS5jb20vKiIsICJ6b25lX25hbWUiOiAiZXhhbXBsZS5jb20iIH0KICBdLAogICJ0cmlnZ2VycyI6IHsKICAgICJjcm9ucyI6IFsiMCAqLzYgKiAqICoiXSAgLy8gRXZlcnkgNiBob3VycwogIH0KfQpgYGAKCiMjIFR5cGVTY3JpcHQgU2V0dXAKCiMjIyBBdXRvbWF0aWMgVHlwZSBHZW5lcmF0aW9uIChSZWNvbW1lbmRlZCkKCmBgYGJhc2gKbnBtIGluc3RhbGwgLUQgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcwpucHggd3JhbmdsZXIgdHlwZXMgICMgR2VuZXJhdGVzIC53cmFuZ2xlci90eXBlcy9ydW50aW1lLmQudHMgZnJvbSB3cmFuZ2xlci5qc29uYwpgYGAKCmB0c2NvbmZpZy5qc29uYDoKCmBgYGpzb25jCnsKICAiY29tcGlsZXJPcHRpb25zIjogewogICAgInRhcmdldCI6ICJFUzIwMjIiLAogICAgImxpYiI6IFsiRVMyMDIyIl0sCiAgICAidHlwZXMiOiBbIkBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXMiXQogIH0sCiAgImluY2x1ZGUiOiBbIi53cmFuZ2xlci90eXBlcy8qKi8qLnRzIiwgInNyYy8qKi8qIl0KfQpgYGAKCkltcG9ydCBnZW5lcmF0ZWQgdHlwZXM6CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB0eXBlIHsgRW52IH0gZnJvbSAnLi8ud3JhbmdsZXIvdHlwZXMvcnVudGltZSc7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCk6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGF3YWl0IGVudi5NWV9LVi5nZXQoJ2tleScpOyAgLy8gRnVsbHkgdHlwZWQsIGF1dG9jb21wbGV0ZSB3b3JrcwogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnT0snKTsKICB9LAp9OwpgYGAKClJlLXJ1biBgbnB4IHdyYW5nbGVyIHR5cGVzYCBhZnRlciBjaGFuZ2luZyBiaW5kaW5ncyBpbiB3cmFuZ2xlci5qc29uYwoKIyMjIE1hbnVhbCBUeXBlIERlZmluaXRpb24gKExlZ2FjeSkKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgTVlfS1Y6IEtWTmFtZXNwYWNlOwogIERCOiBEMURhdGFiYXNlOwogIEFQSV9LRVk6IHN0cmluZzsKfQpgYGAKCiMjIEFkdmFuY2VkIE9wdGlvbnMKCmBgYGpzb25jCnsKICAvLyBBdXRvLWxvY2F0ZSBjb21wdXRlIG5lYXIgZGF0YSBzb3VyY2VzCiAgInBsYWNlbWVudCI6IHsgIm1vZGUiOiAic21hcnQiIH0sCiAgCiAgLy8gRW5hYmxlIE5vZGUuanMgYnVpbHQtaW5zIChCdWZmZXIsIHByb2Nlc3MsIHBhdGgsIGV0Yy4pCiAgImNvbXBhdGliaWxpdHlfZmxhZ3MiOiBbIm5vZGVqc19jb21wYXQiXSwKICAKICAvLyBPYnNlcnZhYmlsaXR5ICgxMCUgc2FtcGxpbmcpCiAgIm9ic2VydmFiaWxpdHkiOiB7ICJlbmFibGVkIjogdHJ1ZSwgImhlYWRfc2FtcGxpbmdfcmF0ZSI6IDAuMSB9Cn0KYGBgCgojIyMgTm9kZS5qcyBDb21wYXRpYmlsaXR5Cgpgbm9kZWpzX2NvbXBhdGAgZW5hYmxlczoKLSBgQnVmZmVyYCwgYHByb2Nlc3MuZW52YCwgYHBhdGhgLCBgc3RyZWFtYAotIENvbW1vbkpTIGByZXF1aXJlKClgIGZvciBOb2RlIG1vZHVsZXMKLSBgbm9kZTpgIGltcG9ydHMgKGUuZy4sIGBpbXBvcnQgeyBCdWZmZXIgfSBmcm9tICdub2RlOmJ1ZmZlcidgKQoKKipOb3RlOioqIEFkZHMgfjEtMm1zIGNvbGQgc3RhcnQgb3ZlcmhlYWQuIFVzZSBXb3JrZXJzIEFQSXMgKFIyLCBLVikgd2hlbiBwb3NzaWJsZQoKIyMgRGVwbG95bWVudCBDb21tYW5kcwoKYGBgYmFzaApucHggd3JhbmdsZXIgZGVwbG95ICAgICAgICAgICAgICAjIFByb2R1Y3Rpb24KbnB4IHdyYW5nbGVyIGRlcGxveSAtLWVudiBzdGFnaW5nCm5weCB3cmFuZ2xlciBkZXBsb3kgLS1kcnktcnVuICAgICMgVmFsaWRhdGUgb25seQpgYGAKCiMjIFNlZSBBbHNvCgotIFtBUEldKC4vYXBpLm1kKSAtIFJ1bnRpbWUgQVBJcyBhbmQgYmluZGluZ3MgdXNhZ2UKLSBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpIC0gRGVwbG95bWVudCBzdHJhdGVnaWVzCi0gW1dyYW5nbGVyXSguLi93cmFuZ2xlci9SRUFETUUubWQpIC0gQ0xJIHJlZmVyZW5jZQo=
+# Workers Configuration
+
+## wrangler.jsonc (Recommended)
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01", // Use current date for new projects
+  
+  // Bindings (non-inheritable)
+  "vars": { "ENVIRONMENT": "production" },
+  "kv_namespaces": [{ "binding": "MY_KV", "id": "abc123" }],
+  "r2_buckets": [{ "binding": "MY_BUCKET", "bucket_name": "my-bucket" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "my-db", "database_id": "xyz789" }],
+  
+  // Environments
+  "env": {
+    "staging": {
+      "vars": { "ENVIRONMENT": "staging" },
+      "kv_namespaces": [{ "binding": "MY_KV", "id": "staging-id" }]
+    }
+  }
+}
+```
+
+## Configuration Rules
+
+**Inheritable**: `name`, `main`, `compatibility_date`, `routes`, `workers_dev`  
+**Non-inheritable**: All bindings (`vars`, `kv_namespaces`, `r2_buckets`, etc.)  
+**Top-level only**: `migrations`, `keep_vars`, `send_metrics`
+
+**ALWAYS set `compatibility_date` to current date for new projects**
+
+## Bindings
+
+```jsonc
+{
+  // Environment variables - access via env.VAR_NAME
+  "vars": { "ENVIRONMENT": "production" },
+  
+  // KV (key-value storage)
+  "kv_namespaces": [{ "binding": "MY_KV", "id": "abc123" }],
+  
+  // R2 (object storage)
+  "r2_buckets": [{ "binding": "MY_BUCKET", "bucket_name": "my-bucket" }],
+  
+  // D1 (SQL database)
+  "d1_databases": [{ "binding": "DB", "database_name": "my-db", "database_id": "xyz789" }],
+  
+  // Durable Objects (stateful coordination)
+  "durable_objects": {
+    "bindings": [{ "name": "COUNTER", "class_name": "Counter" }]
+  },
+  
+  // Queues (message queues)
+  "queues": {
+    "producers": [{ "binding": "MY_QUEUE", "queue": "my-queue" }],
+    "consumers": [{ "queue": "my-queue", "max_batch_size": 10 }]
+  },
+  
+  // Service bindings (worker-to-worker RPC)
+  "services": [{ "binding": "SERVICE_B", "service": "service-b" }],
+  
+  // Analytics Engine
+  "analytics_engine_datasets": [{ "binding": "ANALYTICS" }]
+}
+```
+
+### Secrets
+
+Set via CLI (never in config):
+
+```bash
+npx wrangler secret put API_KEY
+```
+
+Access: `env.API_KEY`
+
+### Automatic Provisioning (Beta)
+
+Bindings without IDs are auto-created:
+
+```jsonc
+{ "kv_namespaces": [{ "binding": "MY_KV" }] }  // ID added on deploy
+```
+
+## Routes & Triggers
+
+```jsonc
+{
+  "routes": [
+    { "pattern": "example.com/*", "zone_name": "example.com" }
+  ],
+  "triggers": {
+    "crons": ["0 */6 * * *"]  // Every 6 hours
+  }
+}
+```
+
+## TypeScript Setup
+
+### Automatic Type Generation (Recommended)
+
+```bash
+npm install -D @cloudflare/workers-types
+npx wrangler types  # Generates .wrangler/types/runtime.d.ts from wrangler.jsonc
+```
+
+`tsconfig.json`:
+
+```jsonc
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": [".wrangler/types/**/*.ts", "src/**/*"]
+}
+```
+
+Import generated types:
+
+```typescript
+import type { Env } from './.wrangler/types/runtime';
+
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    await env.MY_KV.get('key');  // Fully typed, autocomplete works
+    return new Response('OK');
+  },
+};
+```
+
+Re-run `npx wrangler types` after changing bindings in wrangler.jsonc
+
+### Manual Type Definition (Legacy)
+
+```typescript
+interface Env {
+  MY_KV: KVNamespace;
+  DB: D1Database;
+  API_KEY: string;
+}
+```
+
+## Advanced Options
+
+```jsonc
+{
+  // Auto-locate compute near data sources
+  "placement": { "mode": "smart" },
+  
+  // Enable Node.js built-ins (Buffer, process, path, etc.)
+  "compatibility_flags": ["nodejs_compat"],
+  
+  // Observability (10% sampling)
+  "observability": { "enabled": true, "head_sampling_rate": 0.1 }
+}
+```
+
+### Node.js Compatibility
+
+`nodejs_compat` enables:
+- `Buffer`, `process.env`, `path`, `stream`
+- CommonJS `require()` for Node modules
+- `node:` imports (e.g., `import { Buffer } from 'node:buffer'`)
+
+**Note:** Adds ~1-2ms cold start overhead. Use Workers APIs (R2, KV) when possible
+
+## Deployment Commands
+
+```bash
+npx wrangler deploy              # Production
+npx wrangler deploy --env staging
+npx wrangler deploy --dry-run    # Validate only
+```
+
+## See Also
+
+- [API](./api.md) - Runtime APIs and bindings usage
+- [Patterns](./patterns.md) - Deployment strategies
+- [Wrangler](../wrangler/README.md) - CLI reference

@@ -1,1 +1,171 @@
-IyBTdGF0ZSAmIFNjaGVkdWxpbmcKCkZldGNoIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9zdG9yZS1hbmQtc3luYy1zdGF0ZS8gYW5kIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9zY2hlZHVsZS10YXNrcy8gZm9yIGNvbXBsZXRlIGRvY3VtZW50YXRpb24uCgojIyBTdGF0ZSBNYW5hZ2VtZW50CgpTdGF0ZSBwZXJzaXN0cyB0byBTUUxpdGUgYW5kIGJyb2FkY2FzdHMgdG8gY29ubmVjdGVkIGNsaWVudHMgYXV0b21hdGljYWxseS4KCiMjIyBEZWZpbmUgVHlwZWQgU3RhdGUKCmBgYHR5cGVzY3JpcHQKdHlwZSBTdGF0ZSA9IHsgCiAgY291bnQ6IG51bWJlcjsKICBpdGVtczogc3RyaW5nW107Cn07CgpleHBvcnQgY2xhc3MgTXlBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBpbml0aWFsU3RhdGU6IFN0YXRlID0geyBjb3VudDogMCwgaXRlbXM6IFtdIH07Cn0KYGBgCgojIyMgUmVhZCBhbmQgVXBkYXRlCgpgYGB0eXBlc2NyaXB0Ci8vIFJlYWQgKGxhenktbG9hZGVkIGZyb20gU1FMaXRlKQpjb25zdCBjb3VudCA9IHRoaXMuc3RhdGUuY291bnQ7CgovLyBXcml0ZSAoc3luYywgcGVyc2lzdHMsIGJyb2FkY2FzdHMpCnRoaXMuc2V0U3RhdGUoeyBjb3VudDogdGhpcy5zdGF0ZS5jb3VudCArIDEgfSk7CmBgYAoKIyMjIFZhbGlkYXRpb24gSG9vawoKYHZhbGlkYXRlU3RhdGVDaGFuZ2UoKWAgcnVucyBzeW5jaHJvbm91c2x5IGJlZm9yZSBzdGF0ZSBwZXJzaXN0cy4gVGhyb3cgdG8gcmVqZWN0IHRoZSB1cGRhdGUuCgpgYGB0eXBlc2NyaXB0CnZhbGlkYXRlU3RhdGVDaGFuZ2UobmV4dFN0YXRlOiBTdGF0ZSwgc291cmNlOiBDb25uZWN0aW9uIHwgInNlcnZlciIpIHsKICBpZiAobmV4dFN0YXRlLmNvdW50IDwgMCkgewogICAgdGhyb3cgbmV3IEVycm9yKCJDb3VudCBjYW5ub3QgYmUgbmVnYXRpdmUiKTsKICB9Cn0KYGBgCgojIyMgRXhlY3V0aW9uIE9yZGVyCgoxLiBgdmFsaWRhdGVTdGF0ZUNoYW5nZShuZXh0U3RhdGUsIHNvdXJjZSlgIC0gc3luYywgZ2F0aW5nCjIuIFN0YXRlIHBlcnNpc3RlZCB0byBTUUxpdGUKMy4gU3RhdGUgYnJvYWRjYXN0IHRvIGNvbm5lY3RlZCBjbGllbnRzCjQuIGBvblN0YXRlVXBkYXRlKG5leHRTdGF0ZSwgc291cmNlKWAgLSBhc3luYyB2aWEgYGN0eC53YWl0VW50aWxgLCBub24tZ2F0aW5nCgojIyMgQ2xpZW50LVNpZGUgU3luYyAoUmVhY3QpCgpgYGB0c3gKaW1wb3J0IHsgdXNlQWdlbnQgfSBmcm9tICJhZ2VudHMvcmVhY3QiOwoKZnVuY3Rpb24gQXBwKCkgewogIGNvbnN0IFtzdGF0ZSwgc2V0TG9jYWxTdGF0ZV0gPSB1c2VTdGF0ZTxTdGF0ZT4oeyBjb3VudDogMCB9KTsKICAKICBjb25zdCBhZ2VudCA9IHVzZUFnZW50PFN0YXRlPih7CiAgICBhZ2VudDogIk15QWdlbnQiLAogICAgbmFtZTogImluc3RhbmNlLTEiLAogICAgb25TdGF0ZVVwZGF0ZTogKG5ld1N0YXRlKSA9PiBzZXRMb2NhbFN0YXRlKG5ld1N0YXRlKQogIH0pOwoKICByZXR1cm4gPGJ1dHRvbiBvbkNsaWNrPXsoKSA9PiBhZ2VudC5zZXRTdGF0ZSh7IGNvdW50OiBzdGF0ZS5jb3VudCArIDEgfSl9PgogICAgQ291bnQ6IHtzdGF0ZS5jb3VudH0KICA8L2J1dHRvbj47Cn0KYGBgCgojIyBTUUwgQVBJCgpEaXJlY3QgU1FMaXRlIGFjY2VzcyBmb3IgY3VzdG9tIHF1ZXJpZXM6CgpgYGB0eXBlc2NyaXB0Ci8vIENyZWF0ZSB0YWJsZQp0aGlzLnNxbGAKICBDUkVBVEUgVEFCTEUgSUYgTk9UIEVYSVNUUyBpdGVtcyAoCiAgICBpZCBURVhUIFBSSU1BUlkgS0VZLAogICAgbmFtZSBURVhULAogICAgY3JlYXRlZF9hdCBJTlRFR0VSIERFRkFVTFQgKHVuaXhlcG9jaCgpKQogICkKYDsKCi8vIEluc2VydAp0aGlzLnNxbGBJTlNFUlQgSU5UTyBpdGVtcyAoaWQsIG5hbWUpIFZBTFVFUyAoJHtpZH0sICR7bmFtZX0pYDsKCi8vIFF1ZXJ5IHdpdGggdHlwZXMKY29uc3QgaXRlbXMgPSB0aGlzLnNxbDx7IGlkOiBzdHJpbmc7IG5hbWU6IHN0cmluZyB9PmAKICBTRUxFQ1QgKiBGUk9NIGl0ZW1zIFdIRVJFIG5hbWUgTElLRSAke2AlJHtzZWFyY2h9JWB9CmA7CmBgYAoKIyMgU2NoZWR1bGluZwoKIyMjIFNjaGVkdWxlIFR5cGVzCgp8IE1vZGUgfCBTeW50YXggfCBVc2UgQ2FzZSB8CnwtLS0tLS18LS0tLS0tLS18LS0tLS0tLS0tLXwKfCBEZWxheSB8IGB0aGlzLnNjaGVkdWxlKDYwLCAuLi4pYCB8IFJ1biBpbiA2MCBzZWNvbmRzIHwKfCBEYXRlIHwgYHRoaXMuc2NoZWR1bGUobmV3IERhdGUoLi4uKSwgLi4uKWAgfCBSdW4gYXQgc3BlY2lmaWMgdGltZSB8CnwgQ3JvbiB8IGB0aGlzLnNjaGVkdWxlKCIwIDggKiAqICoiLCAuLi4pYCB8IFJlY3VycmluZyBzY2hlZHVsZSB8CnwgSW50ZXJ2YWwgfCBgdGhpcy5zY2hlZHVsZUV2ZXJ5KDMwLCAuLi4pYCB8IEZpeGVkIGludGVydmFsIChldmVyeSAzMHMpIHwKCiMjIyBFeGFtcGxlcwoKYGBgdHlwZXNjcmlwdAovLyBEZWxheSAoc2Vjb25kcykKYXdhaXQgdGhpcy5zY2hlZHVsZSg2MCwgImNoZWNrU3RhdHVzIiwgeyBpZDogImFiYzEyMyIgfSk7CgovLyBTcGVjaWZpYyBkYXRlCmF3YWl0IHRoaXMuc2NoZWR1bGUobmV3IERhdGUoIjIwMjUtMTItMjVUMDA6MDA6MDBaIiksICJzZW5kR3JlZXRpbmciLCB7IHRvOiAidXNlciIgfSk7CgovLyBDcm9uIChyZWN1cnJpbmcpCmF3YWl0IHRoaXMuc2NoZWR1bGUoIjAgOSAqICogMS01IiwgIndlZWtkYXlSZXBvcnQiLCB7fSk7CgovLyBGaXhlZCBpbnRlcnZhbCAoZXZlcnkgMzAgc2Vjb25kcywgb3ZlcmxhcCBwcmV2ZW50aW9uIGJ1aWx0LWluKQphd2FpdCB0aGlzLnNjaGVkdWxlRXZlcnkoMzAsICJwb2xsVXBkYXRlcyIpOwphd2FpdCB0aGlzLnNjaGVkdWxlRXZlcnkoMzAwLCAic3luY0RhdGEiLCB7IHNvdXJjZTogImFwaSIgfSk7CmBgYAoKIyMjIEhhbmRsZXIKCmBgYHR5cGVzY3JpcHQKYXN5bmMgc2VuZEdyZWV0aW5nKHBheWxvYWQ6IHsgdG86IHN0cmluZyB9LCBzY2hlZHVsZTogU2NoZWR1bGUpIHsKICBjb25zb2xlLmxvZyhgU2VuZGluZyBncmVldGluZyB0byAke3BheWxvYWQudG99YCk7CiAgLy8gQ3JvbiBzY2hlZHVsZXMgYXV0by1yZXNjaGVkdWxlOyBvbmUtdGltZSBzY2hlZHVsZXMgYXJlIGRlbGV0ZWQKfQpgYGAKCiMjIyBNYW5hZ2UgU2NoZWR1bGVzCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHNjaGVkdWxlcyA9IHRoaXMuZ2V0U2NoZWR1bGVzKCk7CmNvbnN0IGNyb25zID0gdGhpcy5nZXRTY2hlZHVsZXMoeyB0eXBlOiAiY3JvbiIgfSk7CmF3YWl0IHRoaXMuY2FuY2VsU2NoZWR1bGUoc2NoZWR1bGUuaWQpOwpgYGAKCiMjIyBSZXRyeSBvbiBTY2hlZHVsZXMKCmBgYHR5cGVzY3JpcHQKYXdhaXQgdGhpcy5zY2hlZHVsZSg2MCwgInRhc2siLCBwYXlsb2FkLCB7IHJldHJ5OiB7IG1heEF0dGVtcHRzOiAzIH0gfSk7CmF3YWl0IHRoaXMuc2NoZWR1bGVFdmVyeSgzMCwgInBvbGwiLCB1bmRlZmluZWQsIHsgcmV0cnk6IHsgbWF4QXR0ZW1wdHM6IDIgfSB9KTsKYGBgCgojIyBMaWZlY3ljbGUgQ2FsbGJhY2tzCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBjbGFzcyBNeUFnZW50IGV4dGVuZHMgQWdlbnQ8RW52LCBTdGF0ZT4gewogIGFzeW5jIG9uU3RhcnQoKSB7CiAgICAvLyBBZ2VudCBzdGFydGVkIG9yIHdva2UgZnJvbSBoaWJlcm5hdGlvbgogIH0KCiAgb25Db25uZWN0KGNvbm46IENvbm5lY3Rpb24sIGN0eDogQ29ubmVjdGlvbkNvbnRleHQpIHsKICAgIC8vIFdlYlNvY2tldCBjb25uZWN0ZWQKICB9CgogIG9uTWVzc2FnZShjb25uOiBDb25uZWN0aW9uLCBtZXNzYWdlOiBXU01lc3NhZ2UpIHsKICAgIC8vIFdlYlNvY2tldCBtZXNzYWdlIChub24tUlBDKQogIH0KCiAgb25TdGF0ZVVwZGF0ZShzdGF0ZTogU3RhdGUsIHNvdXJjZTogQ29ubmVjdGlvbiB8ICJzZXJ2ZXIiKSB7CiAgICAvLyBTdGF0ZSBjaGFuZ2VkIChhc3luYywgbm9uLWJsb2NraW5nKQogIH0KCiAgb25FcnJvcihlcnJvcjogdW5rbm93bikgewogICAgLy8gRXJyb3IgaGFuZGxlcgogICAgdGhyb3cgZXJyb3I7IC8vIFJlLXRocm93IHRvIHByb3BhZ2F0ZQogIH0KfQpgYGAK
+# State & Scheduling
+
+Fetch https://developers.cloudflare.com/agents/api-reference/store-and-sync-state/ and https://developers.cloudflare.com/agents/api-reference/schedule-tasks/ for complete documentation.
+
+## State Management
+
+State persists to SQLite and broadcasts to connected clients automatically.
+
+### Define Typed State
+
+```typescript
+type State = { 
+  count: number;
+  items: string[];
+};
+
+export class MyAgent extends Agent<Env, State> {
+  initialState: State = { count: 0, items: [] };
+}
+```
+
+### Read and Update
+
+```typescript
+// Read (lazy-loaded from SQLite)
+const count = this.state.count;
+
+// Write (sync, persists, broadcasts)
+this.setState({ count: this.state.count + 1 });
+```
+
+### Validation Hook
+
+`validateStateChange()` runs synchronously before state persists. Throw to reject the update.
+
+```typescript
+validateStateChange(nextState: State, source: Connection | "server") {
+  if (nextState.count < 0) {
+    throw new Error("Count cannot be negative");
+  }
+}
+```
+
+### Execution Order
+
+1. `validateStateChange(nextState, source)` - sync, gating
+2. State persisted to SQLite
+3. State broadcast to connected clients
+4. `onStateUpdate(nextState, source)` - async via `ctx.waitUntil`, non-gating
+
+### Client-Side Sync (React)
+
+```tsx
+import { useAgent } from "agents/react";
+
+function App() {
+  const [state, setLocalState] = useState<State>({ count: 0 });
+  
+  const agent = useAgent<State>({
+    agent: "MyAgent",
+    name: "instance-1",
+    onStateUpdate: (newState) => setLocalState(newState)
+  });
+
+  return <button onClick={() => agent.setState({ count: state.count + 1 })}>
+    Count: {state.count}
+  </button>;
+}
+```
+
+## SQL API
+
+Direct SQLite access for custom queries:
+
+```typescript
+// Create table
+this.sql`
+  CREATE TABLE IF NOT EXISTS items (
+    id TEXT PRIMARY KEY,
+    name TEXT,
+    created_at INTEGER DEFAULT (unixepoch())
+  )
+`;
+
+// Insert
+this.sql`INSERT INTO items (id, name) VALUES (${id}, ${name})`;
+
+// Query with types
+const items = this.sql<{ id: string; name: string }>`
+  SELECT * FROM items WHERE name LIKE ${`%${search}%`}
+`;
+```
+
+## Scheduling
+
+### Schedule Types
+
+| Mode | Syntax | Use Case |
+|------|--------|----------|
+| Delay | `this.schedule(60, ...)` | Run in 60 seconds |
+| Date | `this.schedule(new Date(...), ...)` | Run at specific time |
+| Cron | `this.schedule("0 8 * * *", ...)` | Recurring schedule |
+| Interval | `this.scheduleEvery(30, ...)` | Fixed interval (every 30s) |
+
+### Examples
+
+```typescript
+// Delay (seconds)
+await this.schedule(60, "checkStatus", { id: "abc123" });
+
+// Specific date
+await this.schedule(new Date("2025-12-25T00:00:00Z"), "sendGreeting", { to: "user" });
+
+// Cron (recurring)
+await this.schedule("0 9 * * 1-5", "weekdayReport", {});
+
+// Fixed interval (every 30 seconds, overlap prevention built-in)
+await this.scheduleEvery(30, "pollUpdates");
+await this.scheduleEvery(300, "syncData", { source: "api" });
+```
+
+### Handler
+
+```typescript
+async sendGreeting(payload: { to: string }, schedule: Schedule) {
+  console.log(`Sending greeting to ${payload.to}`);
+  // Cron schedules auto-reschedule; one-time schedules are deleted
+}
+```
+
+### Manage Schedules
+
+```typescript
+const schedules = this.getSchedules();
+const crons = this.getSchedules({ type: "cron" });
+await this.cancelSchedule(schedule.id);
+```
+
+### Retry on Schedules
+
+```typescript
+await this.schedule(60, "task", payload, { retry: { maxAttempts: 3 } });
+await this.scheduleEvery(30, "poll", undefined, { retry: { maxAttempts: 2 } });
+```
+
+## Lifecycle Callbacks
+
+```typescript
+export class MyAgent extends Agent<Env, State> {
+  async onStart() {
+    // Agent started or woke from hibernation
+  }
+
+  onConnect(conn: Connection, ctx: ConnectionContext) {
+    // WebSocket connected
+  }
+
+  onMessage(conn: Connection, message: WSMessage) {
+    // WebSocket message (non-RPC)
+  }
+
+  onStateUpdate(state: State, source: Connection | "server") {
+    // State changed (async, non-blocking)
+  }
+
+  onError(error: unknown) {
+    // Error handler
+    throw error; // Re-throw to propagate
+  }
+}
+```

@@ -1,1 +1,88 @@
-IyBDbG91ZGZsYXJlIFBhZ2VzCgpKQU1zdGFjayBwbGF0Zm9ybSBmb3IgZnVsbC1zdGFjayBhcHBzIG9uIENsb3VkZmxhcmUncyBnbG9iYWwgbmV0d29yay4KCiMjIEtleSBGZWF0dXJlcwoKLSAqKkdpdC1iYXNlZCBkZXBsb3lzKio6IEF1dG8tZGVwbG95IGZyb20gR2l0SHViL0dpdExhYgotICoqUHJldmlldyBkZXBsb3ltZW50cyoqOiBVbmlxdWUgVVJMIHBlciBicmFuY2gvUFIKLSAqKlBhZ2VzIEZ1bmN0aW9ucyoqOiBGaWxlLWJhc2VkIHNlcnZlcmxlc3Mgcm91dGluZyAoV29ya2VycyBydW50aW1lKQotICoqU3RhdGljICsgZHluYW1pYyoqOiBTbWFydCBhc3NldCBjYWNoaW5nICsgZWRnZSBjb21wdXRlCi0gKipTbWFydCBQbGFjZW1lbnQqKjogQXV0b21hdGljIGZ1bmN0aW9uIG9wdGltaXphdGlvbiBiYXNlZCBvbiB0cmFmZmljIHBhdHRlcm5zCi0gKipGcmFtZXdvcmsgb3B0aW1pemVkKio6IFN2ZWx0ZUtpdCwgQXN0cm8sIE51eHQsIFF3aWssIFNvbGlkIFN0YXJ0CgojIyBEZXBsb3ltZW50IE1ldGhvZHMKCiMjIyAxLiBHaXQgSW50ZWdyYXRpb24gKFByb2R1Y3Rpb24pCkRhc2hib2FyZCDihpIgV29ya2VycyAmIFBhZ2VzIOKGkiBDcmVhdGUg4oaSIENvbm5lY3QgdG8gR2l0IOKGkiBDb25maWd1cmUgYnVpbGQKCiMjIyAyLiBEaXJlY3QgVXBsb2FkCmBgYGJhc2gKbnB4IHdyYW5nbGVyIHBhZ2VzIGRlcGxveSAuL2Rpc3QgLS1wcm9qZWN0LW5hbWU9bXktcHJvamVjdApucHggd3JhbmdsZXIgcGFnZXMgZGVwbG95IC4vZGlzdCAtLXByb2plY3QtbmFtZT1teS1wcm9qZWN0IC0tYnJhbmNoPXN0YWdpbmcKYGBgCgojIyMgMy4gQzMgQ0xJCmBgYGJhc2gKbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCBteS1hcHAKIyBTZWxlY3QgZnJhbWV3b3JrIOKGkiBhdXRvLXNldHVwICsgZGVwbG95CmBgYAoKIyMgdnMgV29ya2VycwoKLSAqKlBhZ2VzKio6IFN0YXRpYyBzaXRlcywgSkFNc3RhY2ssIGZyYW1ld29ya3MsIGdpdCB3b3JrZmxvdywgZmlsZS1iYXNlZCByb3V0aW5nCi0gKipXb3JrZXJzKio6IFB1cmUgQVBJcywgY29tcGxleCByb3V0aW5nLCBXZWJTb2NrZXRzLCBzY2hlZHVsZWQgdGFza3MsIGVtYWlsIGhhbmRsZXJzCi0gKipDb21iaW5lKio6IFBhZ2VzIEZ1bmN0aW9ucyB1c2UgV29ya2VycyBydW50aW1lLCBjYW4gYmluZCB0byBXb3JrZXJzCgojIyBRdWljayBTdGFydAoKYGBgYmFzaAojIENyZWF0ZQpucG0gY3JlYXRlIGNsb3VkZmxhcmVAbGF0ZXN0CgojIExvY2FsIGRldgpucHggd3JhbmdsZXIgcGFnZXMgZGV2IC4vZGlzdAoKIyBEZXBsb3kKbnB4IHdyYW5nbGVyIHBhZ2VzIGRlcGxveSAuL2Rpc3QgLS1wcm9qZWN0LW5hbWU9bXktcHJvamVjdAoKIyBUeXBlcwpucHggd3JhbmdsZXIgdHlwZXMgLS1wYXRoPScuL2Z1bmN0aW9ucy90eXBlcy5kLnRzJwoKIyBTZWNyZXRzCmVjaG8gInZhbHVlIiB8IG5weCB3cmFuZ2xlciBwYWdlcyBzZWNyZXQgcHV0IEtFWSAtLXByb2plY3QtbmFtZT1teS1wcm9qZWN0CgojIExvZ3MKbnB4IHdyYW5nbGVyIHBhZ2VzIGRlcGxveW1lbnQgdGFpbCAtLXByb2plY3QtbmFtZT1teS1wcm9qZWN0CmBgYAoKIyMgUmVzb3VyY2VzCgotIFtQYWdlcyBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGFnZXMvKQotIFtGdW5jdGlvbnMgQVBJXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGFnZXMvZnVuY3Rpb25zL2FwaS1yZWZlcmVuY2UvKQotIFtGcmFtZXdvcmsgR3VpZGVzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGFnZXMvZnJhbWV3b3JrLWd1aWRlcy8pCi0gW0Rpc2NvcmQgI2Z1bmN0aW9uc10oaHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy81OTUzMTc5OTAxOTEzOTg5MzMvOTEwOTc4MjIzOTY4NTE4MTQ0KQoKIyMgUmVhZGluZyBPcmRlcgoKKipOZXcgdG8gUGFnZXM/KiogU3RhcnQgaGVyZToKMS4gUkVBRE1FLm1kICh5b3UgYXJlIGhlcmUpIC0gT3ZlcnZpZXcgJiBxdWljayBzdGFydAoyLiBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIFByb2plY3Qgc2V0dXAsIHdyYW5nbGVyLmpzb25jLCBiaW5kaW5ncwozLiBbYXBpLm1kXSguL2FwaS5tZCkgLSBGdW5jdGlvbnMgQVBJLCByb3V0aW5nLCBjb250ZXh0CjQuIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBDb21tb24gaW1wbGVtZW50YXRpb25zCjUuIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gVHJvdWJsZXNob290aW5nICYgcGl0ZmFsbHMKCioqUXVpY2sgcmVmZXJlbmNlPyoqIEp1bXAgdG8gcmVsZXZhbnQgZmlsZSBhYm92ZS4KCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gd3JhbmdsZXIuanNvbmMsIGJ1aWxkLCBlbnYgdmFycywgU21hcnQgUGxhY2VtZW50Ci0gW2FwaS5tZF0oLi9hcGkubWQpIC0gRnVuY3Rpb25zIEFQSSwgYmluZGluZ3MsIGNvbnRleHQsIGFkdmFuY2VkIG1vZGUKLSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gRnVsbC1zdGFjayBwYXR0ZXJucywgZnJhbWV3b3JrIGludGVncmF0aW9uCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBCdWlsZCBpc3N1ZXMsIGxpbWl0cywgZGVidWdnaW5nLCBmcmFtZXdvcmsgd2FybmluZ3MKCiMjIFNlZSBBbHNvCgotIFtwYWdlcy1mdW5jdGlvbnNdKC4uL3BhZ2VzLWZ1bmN0aW9ucy8pIC0gRmlsZS1iYXNlZCByb3V0aW5nLCBtaWRkbGV3YXJlCi0gW2QxXSguLi9kMS8pIC0gU1FMIGRhdGFiYXNlIGZvciBQYWdlcyBGdW5jdGlvbnMKLSBba3ZdKC4uL2t2LykgLSBLZXktdmFsdWUgc3RvcmFnZSBmb3IgY2FjaGluZy9zdGF0ZQo=
+# Cloudflare Pages
+
+JAMstack platform for full-stack apps on Cloudflare's global network.
+
+## Key Features
+
+- **Git-based deploys**: Auto-deploy from GitHub/GitLab
+- **Preview deployments**: Unique URL per branch/PR
+- **Pages Functions**: File-based serverless routing (Workers runtime)
+- **Static + dynamic**: Smart asset caching + edge compute
+- **Smart Placement**: Automatic function optimization based on traffic patterns
+- **Framework optimized**: SvelteKit, Astro, Nuxt, Qwik, Solid Start
+
+## Deployment Methods
+
+### 1. Git Integration (Production)
+Dashboard → Workers & Pages → Create → Connect to Git → Configure build
+
+### 2. Direct Upload
+```bash
+npx wrangler pages deploy ./dist --project-name=my-project
+npx wrangler pages deploy ./dist --project-name=my-project --branch=staging
+```
+
+### 3. C3 CLI
+```bash
+npm create cloudflare@latest my-app
+# Select framework → auto-setup + deploy
+```
+
+## vs Workers
+
+- **Pages**: Static sites, JAMstack, frameworks, git workflow, file-based routing
+- **Workers**: Pure APIs, complex routing, WebSockets, scheduled tasks, email handlers
+- **Combine**: Pages Functions use Workers runtime, can bind to Workers
+
+## Quick Start
+
+```bash
+# Create
+npm create cloudflare@latest
+
+# Local dev
+npx wrangler pages dev ./dist
+
+# Deploy
+npx wrangler pages deploy ./dist --project-name=my-project
+
+# Types
+npx wrangler types --path='./functions/types.d.ts'
+
+# Secrets
+echo "value" | npx wrangler pages secret put KEY --project-name=my-project
+
+# Logs
+npx wrangler pages deployment tail --project-name=my-project
+```
+
+## Resources
+
+- [Pages Docs](https://developers.cloudflare.com/pages/)
+- [Functions API](https://developers.cloudflare.com/pages/functions/api-reference/)
+- [Framework Guides](https://developers.cloudflare.com/pages/framework-guides/)
+- [Discord #functions](https://discord.com/channels/595317990191398933/910978223968518144)
+
+## Reading Order
+
+**New to Pages?** Start here:
+1. README.md (you are here) - Overview & quick start
+2. [configuration.md](./configuration.md) - Project setup, wrangler.jsonc, bindings
+3. [api.md](./api.md) - Functions API, routing, context
+4. [patterns.md](./patterns.md) - Common implementations
+5. [gotchas.md](./gotchas.md) - Troubleshooting & pitfalls
+
+**Quick reference?** Jump to relevant file above.
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - wrangler.jsonc, build, env vars, Smart Placement
+- [api.md](./api.md) - Functions API, bindings, context, advanced mode
+- [patterns.md](./patterns.md) - Full-stack patterns, framework integration
+- [gotchas.md](./gotchas.md) - Build issues, limits, debugging, framework warnings
+
+## See Also
+
+- [pages-functions](../pages-functions/) - File-based routing, middleware
+- [d1](../d1/) - SQL database for Pages Functions
+- [kv](../kv/) - Key-value storage for caching/state

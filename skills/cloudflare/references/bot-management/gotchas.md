@@ -1,1 +1,114 @@
-IyBCb3QgTWFuYWdlbWVudCBHb3RjaGFzCgojIyBDb21tb24gRXJyb3JzCgojIyMgIkJvdCBTY29yZSA9IDAiCgoqKkNhdXNlOioqIEJvdCBNYW5hZ2VtZW50IGRpZG4ndCBydW4gKGludGVybmFsIENsb3VkZmxhcmUgcmVxdWVzdCwgV29ya2VyIHJvdXRpbmcgdG8gem9uZSAoT3JhbmdlLXRvLU9yYW5nZSksIG9yIHJlcXVlc3QgaGFuZGxlZCBiZWZvcmUgQk0gKFJlZGlyZWN0IFJ1bGVzLCBldGMuKSkgIAoqKlNvbHV0aW9uOioqIENoZWNrIHJlcXVlc3QgZmxvdyBhbmQgZW5zdXJlIEJvdCBNYW5hZ2VtZW50IHJ1bnMgaW4gcmVxdWVzdCBsaWZlY3ljbGUKCiMjIyAiSmF2YVNjcmlwdCBEZXRlY3Rpb25zIE5vdCBXb3JraW5nIgoKKipDYXVzZToqKiBganNfZGV0ZWN0aW9uLnBhc3NlZGAgYWx3YXlzIGZhbHNlIG9yIHVuZGVmaW5lZCBkdWUgdG86IENTUCBoZWFkZXJzIGRvbid0IGFsbG93IGAvY2RuLWNnaS9jaGFsbGVuZ2UtcGxhdGZvcm0vYCwgdXNpbmcgb24gZmlyc3QgcGFnZSB2aXNpdCAobmVlZHMgSFRNTCBwYWdlIGZpcnN0KSwgYWQgYmxvY2tlcnMgb3IgZGlzYWJsZWQgSlMsIEpTRCBub3QgZW5hYmxlZCBpbiBkYXNoYm9hcmQsIG9yIHVzaW5nIEJsb2NrIGFjdGlvbiAobXVzdCB1c2UgTWFuYWdlZCBDaGFsbGVuZ2UpICAKKipTb2x1dGlvbjoqKiBBZGQgQ1NQIGhlYWRlciBgQ29udGVudC1TZWN1cml0eS1Qb2xpY3k6IHNjcmlwdC1zcmMgJ3NlbGYnIC9jZG4tY2dpL2NoYWxsZW5nZS1wbGF0Zm9ybS87YCBhbmQgZW5zdXJlIEpTRCBpcyBlbmFibGVkIHdpdGggTWFuYWdlZCBDaGFsbGVuZ2UgYWN0aW9uCgojIyMgIkZhbHNlIFBvc2l0aXZlcyAoTGVnaXRpbWF0ZSBVc2VycyBCbG9ja2VkKSIKCioqQ2F1c2U6KiogQm90IGRldGVjdGlvbiBpbmNvcnJlY3RseSBmbGFnZ2luZyBsZWdpdGltYXRlIHVzZXJzICAKKipTb2x1dGlvbjoqKiBDaGVjayBCb3QgQW5hbHl0aWNzIGZvciBhZmZlY3RlZCBJUHMvcGF0aHMsIGlkZW50aWZ5IGRldGVjdGlvbiBzb3VyY2UgKE1MLCBIZXVyaXN0aWNzLCBldGMuKSwgY3JlYXRlIGV4Y2VwdGlvbiBydWxlIGxpa2UgYChjZi5ib3RfbWFuYWdlbWVudC5zY29yZSBsdCAzMCBhbmQgaHR0cC5yZXF1ZXN0LnVyaS5wYXRoIGVxICIvcHJvYmxlbWF0aWMtcGF0aCIpYCB3aXRoIEFjdGlvbjogU2tpcCAoQm90IE1hbmFnZW1lbnQpLCBvciBhbGxvd2xpc3QgYnkgSVAvQVNOL2NvdW50cnkKCiMjIyAiRmFsc2UgTmVnYXRpdmVzIChCb3RzIE5vdCBDYXVnaHQpIgoKKipDYXVzZToqKiBCb3RzIGJ5cGFzc2luZyBkZXRlY3Rpb24gIAoqKlNvbHV0aW9uOioqIExvd2VyIHNjb3JlIHRocmVzaG9sZCAoMzAg4oaSIDUwKSwgZW5hYmxlIEphdmFTY3JpcHQgRGV0ZWN0aW9ucywgYWRkIEpBMy9KQTQgZmluZ2VycHJpbnRpbmcgcnVsZXMsIG9yIHVzZSByYXRlIGxpbWl0aW5nIGFzIGZhbGxiYWNrCgojIyMgIlZlcmlmaWVkIEJvdCBCbG9ja2VkIgoKKipDYXVzZToqKiBTZWFyY2ggZW5naW5lIGJvdCBibG9ja2VkIGJ5IFdBRiBNYW5hZ2VkIFJ1bGVzIChub3QganVzdCBCb3QgTWFuYWdlbWVudCkgIAoqKlNvbHV0aW9uOioqIENyZWF0ZSBXQUYgZXhjZXB0aW9uIGZvciBzcGVjaWZpYyBydWxlIElEIGFuZCB2ZXJpZnkgYm90IHZpYSByZXZlcnNlIEROUwoKIyMjICJZYW5kZXggQm90IEJsb2NrZWQgRHVyaW5nIElQIFVwZGF0ZSIKCioqQ2F1c2U6KiogWWFuZGV4IHVwZGF0ZXMgYm90IElQczsgbmV3IElQcyB1bnJlY29nbml6ZWQgZm9yIDQ4aCBkdXJpbmcgcHJvcGFnYXRpb24gIAoqKlNvbHV0aW9uOioqIAoxLiBDaGVjayBTZWN1cml0eSBFdmVudHMgZm9yIHNwZWNpZmljIFdBRiBydWxlIElEIGJsb2NraW5nIFlhbmRleAoyLiBDcmVhdGUgV0FGIGV4Y2VwdGlvbjoKICAgYGBgdHh0CiAgIChodHRwLnVzZXJfYWdlbnQgY29udGFpbnMgIllhbmRleEJvdCIgYW5kIGlwLnNyYyBpbiB7PHlhbmRleC1pcC1yYW5nZT59KQogICBBY3Rpb246IFNraXAgKFdBRiBNYW5hZ2VkIFJ1bGVzZXQpCiAgIGBgYAozLiBNb25pdG9yIEJvdCBBbmFseXRpY3MgZm9yIDQ4aAo0LiBSZW1vdmUgZXhjZXB0aW9uIGFmdGVyIHByb3BhZ2F0aW9uIGNvbXBsZXRlcwoKSXNzdWUgcmVzb2x2ZXMgYXV0b21hdGljYWxseSBhZnRlciA0OGguIENvbnRhY3QgQ2xvdWRmbGFyZSBTdXBwb3J0IGlmIHBlcnNpc3RzLgoKIyMjICJKQTMvSkE0IE1pc3NpbmciCgoqKkNhdXNlOioqIE5vbi1IVFRQUyB0cmFmZmljLCBXb3JrZXIgcm91dGluZyB0cmFmZmljLCBPcmFuZ2UtdG8tT3JhbmdlIHRyYWZmaWMgdmlhIFdvcmtlciwgb3IgQm90IE1hbmFnZW1lbnQgc2tpcHBlZCAgCioqU29sdXRpb246KiogSkEzL0pBNCBvbmx5IGF2YWlsYWJsZSBmb3IgSFRUUFMvVExTIHRyYWZmaWM7IGNoZWNrIHJlcXVlc3Qgcm91dGluZwoKKipKQTMvSkE0IE5vdCBVc2VyLVVuaXF1ZToqKiBTYW1lIGJyb3dzZXIvbGlicmFyeSB2ZXJzaW9uID0gc2FtZSBmaW5nZXJwcmludAotIERvbid0IHVzZSBmb3IgdXNlciBpZGVudGlmaWNhdGlvbgotIFVzZSBmb3IgY2xpZW50IHByb2ZpbGluZyBvbmx5Ci0gRmluZ2VycHJpbnRzIGNoYW5nZSB3aXRoIGJyb3dzZXIgdXBkYXRlcwoKIyMgQm90IFZlcmlmaWNhdGlvbiBNZXRob2RzCgpDbG91ZGZsYXJlIHZlcmlmaWVzIGJvdHMgdmlhOgoKMS4gKipSZXZlcnNlIEROUyAoSVAgdmFsaWRhdGlvbik6KiogVHJhZGl0aW9uYWwgbWV0aG9k4oCUYm90IElQIHJlc29sdmVzIHRvIGV4cGVjdGVkIGRvbWFpbgoyLiAqKldlYiBCb3QgQXV0aDoqKiBNb2Rlcm4gY3J5cHRvZ3JhcGhpYyB2ZXJpZmljYXRpb27igJRmYXN0ZXIgcHJvcGFnYXRpb24KCldoZW4gYHZlcmlmaWVkQm90PXRydWVgLCBib3QgcGFzc2VkIGF0IGxlYXN0IG9uZSBtZXRob2QuCgoqKkluYWN0aXZlIHZlcmlmaWVkIGJvdHM6KiogSVBzIHJlbW92ZWQgYWZ0ZXIgMjRoIG9mIG5vIHRyYWZmaWMuCgojIyBEZXRlY3Rpb24gRW5naW5lIEJlaGF2aW9yCgp8IEVuZ2luZSB8IFNjb3JlIHwgVGltaW5nIHwgUGxhbiB8IE5vdGVzIHwKfC0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLS18LS0tLS0tfC0tLS0tLS18CnwgSGV1cmlzdGljcyB8IEFsd2F5cyAxIHwgSW1tZWRpYXRlIHwgQWxsIHwgS25vd24gZmluZ2VycHJpbnRz4oCUb3ZlcnJpZGVzIE1MIHwKfCBNTCB8IDEtOTkgfCBJbW1lZGlhdGUgfCBBbGwgfCBNYWpvcml0eSBvZiBkZXRlY3Rpb25zIHwKfCBBbm9tYWx5IERldGVjdGlvbiB8IEluZmx1ZW5jZXMgfCBBZnRlciBiYXNlbGluZSB8IEVudGVycHJpc2UgfCBPcHRpb25hbCwgYmFzZWxpbmUgYW5hbHlzaXMgfAp8IEphdmFTY3JpcHQgRGV0ZWN0aW9ucyB8IFBhc3MvZmFpbCB8IEFmdGVyIEpTIHwgUHJvKyB8IEhlYWRsZXNzIGJyb3dzZXIgZGV0ZWN0aW9uIHwKfCBDbG91ZGZsYXJlIFNlcnZpY2UgfCBOL0EgfCBOL0EgfCBFbnRlcnByaXNlIHwgWmVybyBUcnVzdCBpbnRlcm5hbCBzb3VyY2UgfAoKKipQcmlvcml0eToqKiBIZXVyaXN0aWNzID4gTUzigJRpZiBoZXVyaXN0aWMgbWF0Y2hlcywgc2NvcmU9MSByZWdhcmRsZXNzIG9mIE1MLgoKIyMgTGltaXRzCgp8IExpbWl0IHwgVmFsdWUgfCBOb3RlcyB8CnwtLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBCb3QgU2NvcmUgPSAwIHwgTWVhbnMgbm90IGNvbXB1dGVkIHwgTm90IHNjb3JlID0gMTAwIHwKfCBGaXJzdCByZXF1ZXN0IEpTRCBkYXRhIHwgTWF5IG5vdCBiZSBhdmFpbGFibGUgfCBKU0QgZGF0YSBhcHBlYXJzIG9uIHN1YnNlcXVlbnQgcmVxdWVzdHMgfAp8IFNjb3JlIGFjY3VyYWN5IHwgTm90IDEwMCUgZ3VhcmFudGVlZCB8IEZhbHNlIHBvc2l0aXZlcy9uZWdhdGl2ZXMgcG9zc2libGUgfAp8IEpTRCBvbiBmaXJzdCBIVE1MIHBhZ2UgdmlzaXQgfCBOb3Qgc3VwcG9ydGVkIHwgUmVxdWlyZXMgc3Vic2VxdWVudCBwYWdlIGxvYWQgfAp8IEpTRCByZXF1aXJlbWVudHMgfCBKYXZhU2NyaXB0LWVuYWJsZWQgYnJvd3NlciB8IFdvbid0IHdvcmsgd2l0aCBKUyBkaXNhYmxlZCBvciBhZCBibG9ja2VycyB8CnwgSlNEIEVUYWcgc3RyaXBwaW5nIHwgU3RyaXBzIEVUYWdzIGZyb20gSFRNTCByZXNwb25zZXMgfCBNYXkgYWZmZWN0IGNhY2hpbmcgYmVoYXZpb3IgfAp8IEpTRCBDU1AgY29tcGF0aWJpbGl0eSB8IFJlcXVpcmVzIHNwZWNpZmljIENTUCB8IE5vdCBjb21wYXRpYmxlIHdpdGggc29tZSBDU1AgY29uZmlndXJhdGlvbnMgfAp8IEpTRCBtZXRhIENTUCB0YWdzIHwgTm90IHN1cHBvcnRlZCB8IE11c3QgdXNlIEhUVFAgaGVhZGVycyB8CnwgSlNEIFdlYlNvY2tldCBzdXBwb3J0IHwgTm90IHN1cHBvcnRlZCB8IFdlYlNvY2tldCBlbmRwb2ludHMgd29uJ3Qgd29yayB3aXRoIEpTRCB8CnwgSlNEIG1vYmlsZSBhcHAgc3VwcG9ydCB8IE5hdGl2ZSBhcHBzIHdvbid0IHBhc3MgfCBPbmx5IHdvcmtzIGluIGJyb3dzZXJzIHwKfCBKQTMvSkE0IHRyYWZmaWMgdHlwZSB8IEhUVFBTL1RMUyBvbmx5IHwgTm90IGF2YWlsYWJsZSBmb3Igbm9uLUhUVFBTIHRyYWZmaWMgfAp8IEpBMy9KQTQgV29ya2VyIHJvdXRpbmcgfCBNaXNzaW5nIGZvciBXb3JrZXItcm91dGVkIHRyYWZmaWMgfCBDaGVjayByZXF1ZXN0IHJvdXRpbmcgfAp8IEpBMy9KQTQgdW5pcXVlbmVzcyB8IE5vdCB1bmlxdWUgcGVyIHVzZXIgfCBTaGFyZWQgYnkgY2xpZW50cyB3aXRoIHNhbWUgYnJvd3Nlci9saWJyYXJ5IHwKfCBKQTMvSkE0IHN0YWJpbGl0eSB8IENhbiBjaGFuZ2Ugd2l0aCB1cGRhdGVzIHwgQnJvd3Nlci9saWJyYXJ5IHVwZGF0ZXMgYWZmZWN0IGZpbmdlcnByaW50cyB8CnwgV0FGIGN1c3RvbSBydWxlcyAoRnJlZSkgfCA1IHwgVmFyaWVzIGJ5IHBsYW4gfAp8IFdBRiBjdXN0b20gcnVsZXMgKFBybykgfCAyMCB8IFZhcmllcyBieSBwbGFuIHwKfCBXQUYgY3VzdG9tIHJ1bGVzIChCdXNpbmVzcykgfCAxMDAgfCBWYXJpZXMgYnkgcGxhbiB8CnwgV0FGIGN1c3RvbSBydWxlcyAoRW50ZXJwcmlzZSkgfCAxLDAwMCsgfCBWYXJpZXMgYnkgcGxhbiB8CnwgV29ya2VycyBDUFUgdGltZSB8IFZhcmllcyBieSBwbGFuIHwgQXBwbGllcyB0byBib3QgbG9naWMgfAp8IEJvdCBBbmFseXRpY3Mgc2FtcGxpbmcgfCAxLTEwJSBhZGFwdGl2ZSB8IEhpZ2gtdm9sdW1lIHpvbmVzIHNhbXBsZWQgbW9yZSBhZ2dyZXNzaXZlbHkgfAp8IEJvdCBBbmFseXRpY3MgaGlzdG9yeSB8IDMwIGRheXMgbWF4IHwgSGlzdG9yaWNhbCBkYXRhIHJldGVudGlvbiBsaW1pdCB8CnwgQ1NQIHJlcXVpcmVtZW50cyBmb3IgSlNEIHwgTXVzdCBhbGxvdyBgL2Nkbi1jZ2kvY2hhbGxlbmdlLXBsYXRmb3JtL2AgfCBSZXF1aXJlZCBmb3IgSlNEIHRvIGZ1bmN0aW9uIHwKCiMjIyBQbGFuIFJlc3RyaWN0aW9ucwoKfCBGZWF0dXJlIHwgRnJlZSB8IFByby9CdXNpbmVzcyB8IEVudGVycHJpc2UgfAp8LS0tLS0tLS0tfC0tLS0tLXwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgR3JhbnVsYXIgc2NvcmVzICgxLTk5KSB8IE5vIHwgTm8gfCBZZXMgfAp8IEpBMy9KQTQgfCBObyB8IE5vIHwgWWVzIHwKfCBBbm9tYWx5IERldGVjdGlvbiB8IE5vIHwgTm8gfCBZZXMgfAp8IENvcnBvcmF0ZSBQcm94eSBkZXRlY3Rpb24gfCBObyB8IE5vIHwgWWVzIHwKfCBWZXJpZmllZCBib3QgY2F0ZWdvcmllcyB8IExpbWl0ZWQgfCBMaW1pdGVkIHwgRnVsbCB8CnwgQ3VzdG9tIFdBRiBydWxlcyB8IDUgfCAyMC8xMDAgfCAxLDAwMCsgfAo=
+# Bot Management Gotchas
+
+## Common Errors
+
+### "Bot Score = 0"
+
+**Cause:** Bot Management didn't run (internal Cloudflare request, Worker routing to zone (Orange-to-Orange), or request handled before BM (Redirect Rules, etc.))  
+**Solution:** Check request flow and ensure Bot Management runs in request lifecycle
+
+### "JavaScript Detections Not Working"
+
+**Cause:** `js_detection.passed` always false or undefined due to: CSP headers don't allow `/cdn-cgi/challenge-platform/`, using on first page visit (needs HTML page first), ad blockers or disabled JS, JSD not enabled in dashboard, or using Block action (must use Managed Challenge)  
+**Solution:** Add CSP header `Content-Security-Policy: script-src 'self' /cdn-cgi/challenge-platform/;` and ensure JSD is enabled with Managed Challenge action
+
+### "False Positives (Legitimate Users Blocked)"
+
+**Cause:** Bot detection incorrectly flagging legitimate users  
+**Solution:** Check Bot Analytics for affected IPs/paths, identify detection source (ML, Heuristics, etc.), create exception rule like `(cf.bot_management.score lt 30 and http.request.uri.path eq "/problematic-path")` with Action: Skip (Bot Management), or allowlist by IP/ASN/country
+
+### "False Negatives (Bots Not Caught)"
+
+**Cause:** Bots bypassing detection  
+**Solution:** Lower score threshold (30 → 50), enable JavaScript Detections, add JA3/JA4 fingerprinting rules, or use rate limiting as fallback
+
+### "Verified Bot Blocked"
+
+**Cause:** Search engine bot blocked by WAF Managed Rules (not just Bot Management)  
+**Solution:** Create WAF exception for specific rule ID and verify bot via reverse DNS
+
+### "Yandex Bot Blocked During IP Update"
+
+**Cause:** Yandex updates bot IPs; new IPs unrecognized for 48h during propagation  
+**Solution:** 
+1. Check Security Events for specific WAF rule ID blocking Yandex
+2. Create WAF exception:
+   ```txt
+   (http.user_agent contains "YandexBot" and ip.src in {<yandex-ip-range>})
+   Action: Skip (WAF Managed Ruleset)
+   ```
+3. Monitor Bot Analytics for 48h
+4. Remove exception after propagation completes
+
+Issue resolves automatically after 48h. Contact Cloudflare Support if persists.
+
+### "JA3/JA4 Missing"
+
+**Cause:** Non-HTTPS traffic, Worker routing traffic, Orange-to-Orange traffic via Worker, or Bot Management skipped  
+**Solution:** JA3/JA4 only available for HTTPS/TLS traffic; check request routing
+
+**JA3/JA4 Not User-Unique:** Same browser/library version = same fingerprint
+- Don't use for user identification
+- Use for client profiling only
+- Fingerprints change with browser updates
+
+## Bot Verification Methods
+
+Cloudflare verifies bots via:
+
+1. **Reverse DNS (IP validation):** Traditional method—bot IP resolves to expected domain
+2. **Web Bot Auth:** Modern cryptographic verification—faster propagation
+
+When `verifiedBot=true`, bot passed at least one method.
+
+**Inactive verified bots:** IPs removed after 24h of no traffic.
+
+## Detection Engine Behavior
+
+| Engine | Score | Timing | Plan | Notes |
+|--------|-------|--------|------|-------|
+| Heuristics | Always 1 | Immediate | All | Known fingerprints—overrides ML |
+| ML | 1-99 | Immediate | All | Majority of detections |
+| Anomaly Detection | Influences | After baseline | Enterprise | Optional, baseline analysis |
+| JavaScript Detections | Pass/fail | After JS | Pro+ | Headless browser detection |
+| Cloudflare Service | N/A | N/A | Enterprise | Zero Trust internal source |
+
+**Priority:** Heuristics > ML—if heuristic matches, score=1 regardless of ML.
+
+## Limits
+
+| Limit | Value | Notes |
+|-------|-------|-------|
+| Bot Score = 0 | Means not computed | Not score = 100 |
+| First request JSD data | May not be available | JSD data appears on subsequent requests |
+| Score accuracy | Not 100% guaranteed | False positives/negatives possible |
+| JSD on first HTML page visit | Not supported | Requires subsequent page load |
+| JSD requirements | JavaScript-enabled browser | Won't work with JS disabled or ad blockers |
+| JSD ETag stripping | Strips ETags from HTML responses | May affect caching behavior |
+| JSD CSP compatibility | Requires specific CSP | Not compatible with some CSP configurations |
+| JSD meta CSP tags | Not supported | Must use HTTP headers |
+| JSD WebSocket support | Not supported | WebSocket endpoints won't work with JSD |
+| JSD mobile app support | Native apps won't pass | Only works in browsers |
+| JA3/JA4 traffic type | HTTPS/TLS only | Not available for non-HTTPS traffic |
+| JA3/JA4 Worker routing | Missing for Worker-routed traffic | Check request routing |
+| JA3/JA4 uniqueness | Not unique per user | Shared by clients with same browser/library |
+| JA3/JA4 stability | Can change with updates | Browser/library updates affect fingerprints |
+| WAF custom rules (Free) | 5 | Varies by plan |
+| WAF custom rules (Pro) | 20 | Varies by plan |
+| WAF custom rules (Business) | 100 | Varies by plan |
+| WAF custom rules (Enterprise) | 1,000+ | Varies by plan |
+| Workers CPU time | Varies by plan | Applies to bot logic |
+| Bot Analytics sampling | 1-10% adaptive | High-volume zones sampled more aggressively |
+| Bot Analytics history | 30 days max | Historical data retention limit |
+| CSP requirements for JSD | Must allow `/cdn-cgi/challenge-platform/` | Required for JSD to function |
+
+### Plan Restrictions
+
+| Feature | Free | Pro/Business | Enterprise |
+|---------|------|--------------|------------|
+| Granular scores (1-99) | No | No | Yes |
+| JA3/JA4 | No | No | Yes |
+| Anomaly Detection | No | No | Yes |
+| Corporate Proxy detection | No | No | Yes |
+| Verified bot categories | Limited | Limited | Full |
+| Custom WAF rules | 5 | 20/100 | 1,000+ |

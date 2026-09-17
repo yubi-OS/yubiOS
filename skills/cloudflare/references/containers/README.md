@@ -1,1 +1,85 @@
-IyBDbG91ZGZsYXJlIENvbnRhaW5lcnMgU2tpbGwgUmVmZXJlbmNlCgoqKkFQUExJRVMgVE86IENsb3VkZmxhcmUgQ29udGFpbmVycyBPTkxZIC0gTk9UIGdlbmVyYWwgQ2xvdWRmbGFyZSBXb3JrZXJzKioKClVzZSB3aGVuIHdvcmtpbmcgd2l0aCBDbG91ZGZsYXJlIENvbnRhaW5lcnM6IGRlcGxveWluZyBjb250YWluZXJpemVkIGFwcHMgb24gV29ya2VycyBwbGF0Zm9ybSwgY29uZmlndXJpbmcgY29udGFpbmVyLWVuYWJsZWQgRHVyYWJsZSBPYmplY3RzLCBtYW5hZ2luZyBjb250YWluZXIgbGlmZWN5Y2xlLCBvciBpbXBsZW1lbnRpbmcgc3RhdGVmdWwvc3RhdGVsZXNzIGNvbnRhaW5lciBwYXR0ZXJucy4KCiMjIEJldGEgU3RhdHVzCgrimqDvuI8gQ29udGFpbmVycyBpcyBjdXJyZW50bHkgaW4gKipiZXRhKiouIEFQSSBtYXkgY2hhbmdlIHdpdGhvdXQgbm90aWNlLiBObyBTTEEgZ3VhcmFudGVlcy4gQ3VzdG9tIGluc3RhbmNlIHR5cGVzIGFkZGVkIEphbiAyMDI2LgoKIyMgQ29yZSBDb25jZXB0cwoKKipDb250YWluZXIgYXMgRHVyYWJsZSBPYmplY3Q6KiogRWFjaCBjb250YWluZXIgaXMgYSBEdXJhYmxlIE9iamVjdCB3aXRoIHBlcnNpc3RlbnQgaWRlbnRpdHkuIEFjY2Vzc2VkIHZpYSBgZ2V0QnlOYW1lKGlkKWAgb3IgYGdldFJhbmRvbSgpYC4KCioqSW1hZ2UgZGVwbG95bWVudDoqKiBJbWFnZXMgcHJlLWZldGNoZWQgZ2xvYmFsbHkuIERlcGxveW1lbnRzIHVzZSByb2xsaW5nIHN0cmF0ZWd5IChub3QgaW5zdGFudCBsaWtlIFdvcmtlcnMpLgoKKipMaWZlY3ljbGU6KiogY29sZCBzdGFydCAoMi0zcykg4oaSIHJ1bm5pbmcg4oaSIGBzbGVlcEFmdGVyYCB0aW1lb3V0IOKGkiBzdG9wcGVkLiBObyBhdXRvc2NhbGluZyAtIG1hbnVhbCBsb2FkIGJhbGFuY2luZyB2aWEgYGdldFJhbmRvbSgpYC4KCioqUGVyc2lzdGVudCBpZGVudGl0eSwgZXBoZW1lcmFsIGRpc2s6KiogQ29udGFpbmVyIElEIHBlcnNpc3RzLCBidXQgZGlzayByZXNldHMgb24gc3RvcC4gVXNlIER1cmFibGUgT2JqZWN0IHN0b3JhZ2UgZm9yIHBlcnNpc3RlbmNlLgoKIyMgUXVpY2sgU3RhcnQKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgQ29udGFpbmVyIH0gZnJvbSAiQGNsb3VkZmxhcmUvY29udGFpbmVycyI7CgpleHBvcnQgY2xhc3MgTXlDb250YWluZXIgZXh0ZW5kcyBDb250YWluZXIgewogIGRlZmF1bHRQb3J0ID0gODA4MDsKICBzbGVlcEFmdGVyID0gIjMwbSI7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudikgewogICAgY29uc3QgY29udGFpbmVyID0gZW52Lk1ZX0NPTlRBSU5FUi5nZXRCeU5hbWUoImluc3RhbmNlLTEiKTsKICAgIGF3YWl0IGNvbnRhaW5lci5zdGFydEFuZFdhaXRGb3JQb3J0cygpOwogICAgcmV0dXJuIGNvbnRhaW5lci5mZXRjaChyZXF1ZXN0KTsKICB9Cn07CmBgYAoKIyMgUmVhZGluZyBPcmRlcgoKfCBUYXNrIHwgRmlsZXMgfAp8LS0tLS0tfC0tLS0tLS18CnwgU2V0dXAgbmV3IGNvbnRhaW5lciBwcm9qZWN0IHwgUkVBRE1FIOKGkiBjb25maWd1cmF0aW9uLm1kIHwKfCBJbXBsZW1lbnQgY29udGFpbmVyIGxvZ2ljIHwgUkVBRE1FIOKGkiBhcGkubWQg4oaSIHBhdHRlcm5zLm1kIHwKfCBDaG9vc2Ugcm91dGluZyBwYXR0ZXJuIHwgcGF0dGVybnMubWQgKHJvdXRpbmcgc2VjdGlvbikgfAp8IERlYnVnIGlzc3VlcyB8IGdvdGNoYXMubWQgfAp8IFByb2R1Y3Rpb24gaGFyZGVuaW5nIHwgZ290Y2hhcy5tZCDihpIgcGF0dGVybnMubWQgKGxpZmVjeWNsZSkgfAoKIyMgUm91dGluZyBEZWNpc2lvbiBUcmVlCgoqKkhvdyBzaG91bGQgcmVxdWVzdHMgcmVhY2ggY29udGFpbmVycz8qKgoKLSAqKlNhbWUgdXNlci9zZXNzaW9uIOKGkiBzYW1lIGNvbnRhaW5lcjoqKiBVc2UgYGdldEJ5TmFtZShzZXNzaW9uSWQpYCBmb3Igc2Vzc2lvbiBhZmZpbml0eQotICoqU3RhdGVsZXNzLCBzcHJlYWQgbG9hZDoqKiBVc2UgYGdldFJhbmRvbSgpYCBmb3IgbG9hZCBiYWxhbmNpbmcKLSAqKkpvYiBwZXIgY29udGFpbmVyOioqIFVzZSBgZ2V0QnlOYW1lKGpvYklkKWAgKyBleHBsaWNpdCBsaWZlY3ljbGUgbWFuYWdlbWVudAotICoqU2luZ2xlIGdsb2JhbCBpbnN0YW5jZToqKiBVc2UgYGdldEJ5TmFtZSgic2luZ2xldG9uIilgCgojIyBXaGVuIHRvIFVzZSBDb250YWluZXJzIHZzIFdvcmtlcnMKCioqVXNlIENvbnRhaW5lcnMgd2hlbjoqKgotIE5lZWQgc3RhdGVmdWwsIGxvbmctbGl2ZWQgcHJvY2Vzc2VzIChzZXNzaW9ucywgV2ViU29ja2V0cywgZ2FtZXMpCi0gUnVubmluZyBleGlzdGluZyBjb250YWluZXJpemVkIGFwcHMgKE5vZGUuanMsIFB5dGhvbiwgY3VzdG9tIGJpbmFyaWVzKQotIE5lZWQgZmlsZXN5c3RlbSBhY2Nlc3Mgb3Igc3BlY2lmaWMgc3lzdGVtIGRlcGVuZGVuY2llcwotIFBlci11c2VyL3Nlc3Npb24gaXNvbGF0aW9uIHdpdGggZGVkaWNhdGVkIGNvbXB1dGUKCioqVXNlIFdvcmtlcnMgd2hlbjoqKgotIFN0YXRlbGVzcyBIVFRQIGhhbmRsZXJzCi0gU3ViLW1pbGxpc2Vjb25kIGNvbGQgc3RhcnRzIHJlcXVpcmVkCi0gQXV0by1zY2FsaW5nIHRvIHplcm8gY3JpdGljYWwKLSBTaW1wbGUgcmVxdWVzdC9yZXNwb25zZSBwYXR0ZXJucwoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKCi0gKipbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkqKiAtIFdyYW5nbGVyIGNvbmZpZywgaW5zdGFuY2UgdHlwZXMsIENvbnRhaW5lciBjbGFzcyBwcm9wZXJ0aWVzLCBlbnZpcm9ubWVudCB2YXJpYWJsZXMsIGFjY291bnQgbGltaXRzCi0gKipbYXBpLm1kXShhcGkubWQpKiogLSBDb250YWluZXIgY2xhc3MgQVBJLCBzdGFydHVwIG1ldGhvZHMsIGNvbW11bmljYXRpb24gKEhUVFAvVENQL1dlYlNvY2tldCksIHJvdXRpbmcgaGVscGVycywgbGlmZWN5Y2xlIGhvb2tzLCBzY2hlZHVsaW5nLCBzdGF0ZSBpbnNwZWN0aW9uCi0gKipbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSoqIC0gUm91dGluZyBwYXR0ZXJucyAoc2Vzc2lvbiBhZmZpbml0eSwgbG9hZCBiYWxhbmNpbmcsIHNpbmdsZXRvbiksIFdlYlNvY2tldCBmb3J3YXJkaW5nLCBncmFjZWZ1bCBzaHV0ZG93biwgV29ya2Zsb3cvUXVldWUgaW50ZWdyYXRpb24KLSAqKltnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSoqIC0gQ3JpdGljYWwgZ290Y2hhcyAoV2ViU29ja2V0LCBzdGFydHVwIG1ldGhvZHMpLCBjb21tb24gZXJyb3JzIHdpdGggc29sdXRpb25zLCBzcGVjaWZpYyBsaW1pdHMsIGJldGEgY2F2ZWF0cwoKIyMgU2VlIEFsc28KCi0gW0R1cmFibGUgT2JqZWN0c10oLi4vZHVyYWJsZS1vYmplY3RzLykgLSBDb250YWluZXJzIGV4dGVuZCBEdXJhYmxlIE9iamVjdHMKLSBbV29ya2Zsb3dzXSguLi93b3JrZmxvd3MvKSAtIE9yY2hlc3RyYXRlIGNvbnRhaW5lciBvcGVyYXRpb25zCi0gW1F1ZXVlc10oLi4vcXVldWVzLykgLSBUcmlnZ2VyIGNvbnRhaW5lcnMgZnJvbSBxdWV1ZSBtZXNzYWdlcwotIFtDbG91ZGZsYXJlIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9jb250YWluZXJzLykK
+# Cloudflare Containers Skill Reference
+
+**APPLIES TO: Cloudflare Containers ONLY - NOT general Cloudflare Workers**
+
+Use when working with Cloudflare Containers: deploying containerized apps on Workers platform, configuring container-enabled Durable Objects, managing container lifecycle, or implementing stateful/stateless container patterns.
+
+## Beta Status
+
+⚠️ Containers is currently in **beta**. API may change without notice. No SLA guarantees. Custom instance types added Jan 2026.
+
+## Core Concepts
+
+**Container as Durable Object:** Each container is a Durable Object with persistent identity. Accessed via `getByName(id)` or `getRandom()`.
+
+**Image deployment:** Images pre-fetched globally. Deployments use rolling strategy (not instant like Workers).
+
+**Lifecycle:** cold start (2-3s) → running → `sleepAfter` timeout → stopped. No autoscaling - manual load balancing via `getRandom()`.
+
+**Persistent identity, ephemeral disk:** Container ID persists, but disk resets on stop. Use Durable Object storage for persistence.
+
+## Quick Start
+
+```typescript
+import { Container } from "@cloudflare/containers";
+
+export class MyContainer extends Container {
+  defaultPort = 8080;
+  sleepAfter = "30m";
+}
+
+export default {
+  async fetch(request: Request, env: Env) {
+    const container = env.MY_CONTAINER.getByName("instance-1");
+    await container.startAndWaitForPorts();
+    return container.fetch(request);
+  }
+};
+```
+
+## Reading Order
+
+| Task | Files |
+|------|-------|
+| Setup new container project | README → configuration.md |
+| Implement container logic | README → api.md → patterns.md |
+| Choose routing pattern | patterns.md (routing section) |
+| Debug issues | gotchas.md |
+| Production hardening | gotchas.md → patterns.md (lifecycle) |
+
+## Routing Decision Tree
+
+**How should requests reach containers?**
+
+- **Same user/session → same container:** Use `getByName(sessionId)` for session affinity
+- **Stateless, spread load:** Use `getRandom()` for load balancing
+- **Job per container:** Use `getByName(jobId)` + explicit lifecycle management
+- **Single global instance:** Use `getByName("singleton")`
+
+## When to Use Containers vs Workers
+
+**Use Containers when:**
+- Need stateful, long-lived processes (sessions, WebSockets, games)
+- Running existing containerized apps (Node.js, Python, custom binaries)
+- Need filesystem access or specific system dependencies
+- Per-user/session isolation with dedicated compute
+
+**Use Workers when:**
+- Stateless HTTP handlers
+- Sub-millisecond cold starts required
+- Auto-scaling to zero critical
+- Simple request/response patterns
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Wrangler config, instance types, Container class properties, environment variables, account limits
+- **[api.md](api.md)** - Container class API, startup methods, communication (HTTP/TCP/WebSocket), routing helpers, lifecycle hooks, scheduling, state inspection
+- **[patterns.md](patterns.md)** - Routing patterns (session affinity, load balancing, singleton), WebSocket forwarding, graceful shutdown, Workflow/Queue integration
+- **[gotchas.md](gotchas.md)** - Critical gotchas (WebSocket, startup methods), common errors with solutions, specific limits, beta caveats
+
+## See Also
+
+- [Durable Objects](../durable-objects/) - Containers extend Durable Objects
+- [Workflows](../workflows/) - Orchestrate container operations
+- [Queues](../queues/) - Trigger containers from queue messages
+- [Cloudflare Docs](https://developers.cloudflare.com/containers/)

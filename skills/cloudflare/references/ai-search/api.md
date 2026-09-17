@@ -1,1 +1,87 @@
-IyBBSSBTZWFyY2ggQVBJIFJlZmVyZW5jZQoKIyMgV29ya2VycyBCaW5kaW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGFuc3dlciA9IGF3YWl0IGVudi5BSS5hdXRvcmFnKCJpbnN0YW5jZS1uYW1lIikuYWlTZWFyY2gob3B0aW9ucyk7CmNvbnN0IHJlc3VsdHMgPSBhd2FpdCBlbnYuQUkuYXV0b3JhZygiaW5zdGFuY2UtbmFtZSIpLnNlYXJjaChvcHRpb25zKTsKY29uc3QgaW5zdGFuY2VzID0gYXdhaXQgZW52LkFJLmF1dG9yYWcoIl8iKS5saXN0SW5zdGFuY2VzKCk7CmBgYAoKIyMgYWlTZWFyY2goKSBPcHRpb25zCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBBaVNlYXJjaE9wdGlvbnMgewogIHF1ZXJ5OiBzdHJpbmc7ICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBVc2VyIHF1ZXJ5CiAgbW9kZWw6IHN0cmluZzsgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIFdvcmtlcnMgQUkgbW9kZWwgSUQKICBzeXN0ZW1fcHJvbXB0Pzogc3RyaW5nOyAgICAgICAgICAgICAgICAgLy8gTExNIGluc3RydWN0aW9ucwogIHJld3JpdGVfcXVlcnk/OiBib29sZWFuOyAgICAgICAgICAgICAgICAvLyBGaXggdHlwb3MgKGRlZmF1bHQ6IGZhbHNlKQogIG1heF9udW1fcmVzdWx0cz86IG51bWJlcjsgICAgICAgICAgICAgICAvLyBNYXggY2h1bmtzIChkZWZhdWx0OiAxMCkKICByYW5raW5nX29wdGlvbnM/OiB7IHNjb3JlX3RocmVzaG9sZD86IG51bWJlciB9OyAvLyAwLjAtMS4wIChkZWZhdWx0OiAwLjMpCiAgcmVyYW5raW5nPzogeyBlbmFibGVkOiBib29sZWFuOyBtb2RlbDogc3RyaW5nIH07CiAgc3RyZWFtPzogYm9vbGVhbjsgICAgICAgICAgICAgICAgICAgICAgIC8vIFN0cmVhbSByZXNwb25zZSAoZGVmYXVsdDogZmFsc2UpCiAgZmlsdGVycz86IEZpbHRlcjsgICAgICAgICAgICAgICAgICAgICAgIC8vIE1ldGFkYXRhIGZpbHRlcnMKICBwYWdlPzogc3RyaW5nOyAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gUGFnaW5hdGlvbiB0b2tlbgp9CmBgYAoKIyMgUmVzcG9uc2UKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEFpU2VhcmNoUmVzcG9uc2UgewogIHNlYXJjaF9xdWVyeTogc3RyaW5nOyAgICAgIC8vIFF1ZXJ5IHVzZWQgKHJld3JpdHRlbiBpZiBlbmFibGVkKQogIHJlc3BvbnNlOiBzdHJpbmc7ICAgICAgICAgIC8vIEFJLWdlbmVyYXRlZCBhbnN3ZXIKICBkYXRhOiBTZWFyY2hSZXN1bHRbXTsgICAgICAvLyBSZXRyaWV2ZWQgY2h1bmtzCiAgaGFzX21vcmU6IGJvb2xlYW47CiAgbmV4dF9wYWdlPzogc3RyaW5nOwp9CgppbnRlcmZhY2UgU2VhcmNoUmVzdWx0IHsKICBpZDogc3RyaW5nOwogIHNjb3JlOiBudW1iZXI7CiAgY29udGVudDogc3RyaW5nOwogIG1ldGFkYXRhOiB7IGZpbGVuYW1lOiBzdHJpbmc7IGZvbGRlcjogc3RyaW5nOyB0aW1lc3RhbXA6IG51bWJlciB9Owp9CmBgYAoKIyMgRmlsdGVycwoKYGBgdHlwZXNjcmlwdAovLyBDb21wYXJpc29uCnsgY29sdW1uOiAiZm9sZGVyIiwgb3BlcmF0b3I6ICJndGUiLCB2YWx1ZTogImRvY3MvIiB9CgovLyBDb21wb3VuZAp7IG9wZXJhdG9yOiAiYW5kIiwgZmlsdGVyczogWwogIHsgY29sdW1uOiAiZm9sZGVyIiwgb3BlcmF0b3I6ICJndGUiLCB2YWx1ZTogImRvY3MvIiB9LAogIHsgY29sdW1uOiAidGltZXN0YW1wIiwgb3BlcmF0b3I6ICJndGUiLCB2YWx1ZTogMTcwNDA2NzIwMCB9Cl19CmBgYAoKKipPcGVyYXRvcnM6KiogYGVxYCwgYG5lYCwgYGd0YCwgYGd0ZWAsIGBsdGAsIGBsdGVgCgoqKkJ1aWx0LWluIG1ldGFkYXRhOioqIGBmaWxlbmFtZWAsIGBmb2xkZXJgLCBgdGltZXN0YW1wYCAoVW5peCBzZWNvbmRzKQoKIyMgU3RyZWFtaW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHN0cmVhbSA9IGF3YWl0IGVudi5BSS5hdXRvcmFnKCJkb2NzIikuYWlTZWFyY2goeyBxdWVyeSwgbW9kZWwsIHN0cmVhbTogdHJ1ZSB9KTsKcmV0dXJuIG5ldyBSZXNwb25zZShzdHJlYW0sIHsgaGVhZGVyczogeyAiQ29udGVudC1UeXBlIjogInRleHQvZXZlbnQtc3RyZWFtIiB9IH0pOwpgYGAKCiMjIEVycm9yIFR5cGVzCgp8IEVycm9yIHwgQ2F1c2UgfAp8LS0tLS0tLXwtLS0tLS0tfAp8IGBBdXRvUkFHTm90Rm91bmRFcnJvcmAgfCBJbnN0YW5jZSBkb2Vzbid0IGV4aXN0IHwKfCBgQXV0b1JBR1VuYXV0aG9yaXplZEVycm9yYCB8IEludmFsaWQvbWlzc2luZyB0b2tlbiB8CnwgYEF1dG9SQUdWYWxpZGF0aW9uRXJyb3JgIHwgSW52YWxpZCBwYXJhbWV0ZXJzIHwKCiMjIFJFU1QgQVBJCgpgYGBiYXNoCmN1cmwgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3tBQ0NPVU5UX0lEfS9hdXRvcmFnL3JhZ3Mve05BTUV9L2FpLXNlYXJjaCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciB7VE9LRU59IiBcCiAgLWQgJ3sicXVlcnkiOiAiLi4uIiwgIm1vZGVsIjogIkBjZi9tZXRhL2xsYW1hLTMuMy03MGItaW5zdHJ1Y3QtZnA4LWZhc3QifScKYGBgCgpSZXF1aXJlcyBTZXJ2aWNlIEFQSSB0b2tlbiB3aXRoICJBSSBTZWFyY2ggLSBSZWFkIiBwZXJtaXNzaW9uLgo=
+# AI Search API Reference
+
+## Workers Binding
+
+```typescript
+const answer = await env.AI.autorag("instance-name").aiSearch(options);
+const results = await env.AI.autorag("instance-name").search(options);
+const instances = await env.AI.autorag("_").listInstances();
+```
+
+## aiSearch() Options
+
+```typescript
+interface AiSearchOptions {
+  query: string;                          // User query
+  model: string;                          // Workers AI model ID
+  system_prompt?: string;                 // LLM instructions
+  rewrite_query?: boolean;                // Fix typos (default: false)
+  max_num_results?: number;               // Max chunks (default: 10)
+  ranking_options?: { score_threshold?: number }; // 0.0-1.0 (default: 0.3)
+  reranking?: { enabled: boolean; model: string };
+  stream?: boolean;                       // Stream response (default: false)
+  filters?: Filter;                       // Metadata filters
+  page?: string;                          // Pagination token
+}
+```
+
+## Response
+
+```typescript
+interface AiSearchResponse {
+  search_query: string;      // Query used (rewritten if enabled)
+  response: string;          // AI-generated answer
+  data: SearchResult[];      // Retrieved chunks
+  has_more: boolean;
+  next_page?: string;
+}
+
+interface SearchResult {
+  id: string;
+  score: number;
+  content: string;
+  metadata: { filename: string; folder: string; timestamp: number };
+}
+```
+
+## Filters
+
+```typescript
+// Comparison
+{ column: "folder", operator: "gte", value: "docs/" }
+
+// Compound
+{ operator: "and", filters: [
+  { column: "folder", operator: "gte", value: "docs/" },
+  { column: "timestamp", operator: "gte", value: 1704067200 }
+]}
+```
+
+**Operators:** `eq`, `ne`, `gt`, `gte`, `lt`, `lte`
+
+**Built-in metadata:** `filename`, `folder`, `timestamp` (Unix seconds)
+
+## Streaming
+
+```typescript
+const stream = await env.AI.autorag("docs").aiSearch({ query, model, stream: true });
+return new Response(stream, { headers: { "Content-Type": "text/event-stream" } });
+```
+
+## Error Types
+
+| Error | Cause |
+|-------|-------|
+| `AutoRAGNotFoundError` | Instance doesn't exist |
+| `AutoRAGUnauthorizedError` | Invalid/missing token |
+| `AutoRAGValidationError` | Invalid parameters |
+
+## REST API
+
+```bash
+curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/autorag/rags/{NAME}/ai-search \
+  -H "Authorization: Bearer {TOKEN}" \
+  -d '{"query": "...", "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast"}'
+```
+
+Requires Service API token with "AI Search - Read" permission.

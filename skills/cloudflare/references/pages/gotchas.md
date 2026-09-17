@@ -1,1 +1,203 @@
-IyBHb3RjaGFzCgojIyBGdW5jdGlvbnMgTm90IFJ1bm5pbmcKCioqUHJvYmxlbSoqOiBGdW5jdGlvbiBlbmRwb2ludHMgcmV0dXJuIDQwNCBvciBkb24ndCBleGVjdXRlICAKKipDYXVzZXMqKjogYF9yb3V0ZXMuanNvbmAgZXhjbHVkZXMgcGF0aDsgd3JvbmcgZmlsZSBleHRlbnNpb24gKGAuanN4YC9gLnRzeGApOyBGdW5jdGlvbnMgZGlyIG5vdCBhdCBvdXRwdXQgcm9vdCAgCioqU29sdXRpb24qKjogQ2hlY2sgYF9yb3V0ZXMuanNvbmAsIHJlbmFtZSB0byBgLnRzYC9gLmpzYCwgdmVyaWZ5IGJ1aWxkIG91dHB1dCBzdHJ1Y3R1cmUKCiMjIDQwNCBvbiBTdGF0aWMgQXNzZXRzCgoqKlByb2JsZW0qKjogU3RhdGljIGZpbGVzIG5vdCBzZXJ2aW5nICAKKipDYXVzZXMqKjogQnVpbGQgb3V0cHV0IGRpciBtaXNjb25maWd1cmVkOyBGdW5jdGlvbnMgY2F0Y2hpbmcgcmVxdWVzdHM7IEFkdmFuY2VkIG1vZGUgbWlzc2luZyBgZW52LkFTU0VUUy5mZXRjaCgpYCAgCioqU29sdXRpb24qKjogVmVyaWZ5IG91dHB1dCBkaXIsIGFkZCBleGNsdXNpb25zIHRvIGBfcm91dGVzLmpzb25gLCBjYWxsIGBlbnYuQVNTRVRTLmZldGNoKClgIGluIGBfd29ya2VyLmpzYAoKIyMgQmluZGluZ3MgTm90IFdvcmtpbmcKCioqUHJvYmxlbSoqOiBgZW52LkJJTkRJTkdgIHVuZGVmaW5lZCBvciBlcnJvcnMgIAoqKkNhdXNlcyoqOiB3cmFuZ2xlci5qc29uYyBzeW50YXggZXJyb3I7IHdyb25nIGJpbmRpbmcgSURzOyBtaXNzaW5nIGAuZGV2LnZhcnNgOyBvdXQtb2Ytc3luYyB0eXBlcyAgCioqU29sdXRpb24qKjogVmFsaWRhdGUgY29uZmlnLCB2ZXJpZnkgSURzLCBjcmVhdGUgYC5kZXYudmFyc2AsIHJ1biBgbnB4IHdyYW5nbGVyIHR5cGVzYAoKIyMgQnVpbGQgRmFpbHVyZXMKCioqUHJvYmxlbSoqOiBEZXBsb3ltZW50IGZhaWxzIGR1cmluZyBidWlsZCAgCioqQ2F1c2VzKio6IFdyb25nIGJ1aWxkIGNvbW1hbmQvb3V0cHV0IGRpcjsgTm9kZSB2ZXJzaW9uIGluY29tcGF0aWJpbGl0eTsgbWlzc2luZyBlbnYgdmFyczsgMjBtaW4gdGltZW91dDsgT09NICAKKipTb2x1dGlvbioqOiBDaGVjayBEYXNoYm9hcmQg4oaSIERlcGxveW1lbnRzIOKGkiBCdWlsZCBsb2c7IHZlcmlmeSBzZXR0aW5nczsgYWRkIGAubnZtcmNgOyBvcHRpbWl6ZSBidWlsZAoKIyMgTWlkZGxld2FyZSBOb3QgUnVubmluZwoKKipQcm9ibGVtKio6IE1pZGRsZXdhcmUgZG9lc24ndCBleGVjdXRlICAKKipDYXVzZXMqKjogV3JvbmcgZmlsZW5hbWUgKG5vdCBgX21pZGRsZXdhcmUudHNgKTsgbWlzc2luZyBgb25SZXF1ZXN0YCBleHBvcnQ7IGRpZG4ndCBjYWxsIGBuZXh0KClgICAKKipTb2x1dGlvbioqOiBSZW5hbWUgZmlsZSB3aXRoIHVuZGVyc2NvcmUgcHJlZml4OyBleHBvcnQgaGFuZGxlcjsgY2FsbCBgbmV4dCgpYCBvciByZXR1cm4gUmVzcG9uc2UKCiMjIEhlYWRlcnMvUmVkaXJlY3RzIE5vdCBXb3JraW5nCgoqKlByb2JsZW0qKjogYF9oZWFkZXJzYCBvciBgX3JlZGlyZWN0c2Agbm90IGFwcGx5aW5nICAKKipDYXVzZXMqKjogT25seSB3b3JrIGZvciBzdGF0aWMgYXNzZXRzOyBGdW5jdGlvbnMgb3ZlcnJpZGU7IHN5bnRheCBlcnJvcnM7IGV4Y2VlZGVkIGxpbWl0cyAgCioqU29sdXRpb24qKjogU2V0IGhlYWRlcnMgaW4gUmVzcG9uc2Ugb2JqZWN0IGZvciBGdW5jdGlvbnM7IHZlcmlmeSBzeW50YXg7IGNoZWNrIGxpbWl0cyAoMTAwIGhlYWRlcnMsIDIsMTAwIHJlZGlyZWN0cykKCiMjIFR5cGVTY3JpcHQgRXJyb3JzCgoqKlByb2JsZW0qKjogVHlwZSBlcnJvcnMgaW4gRnVuY3Rpb25zIGNvZGUgIAoqKkNhdXNlcyoqOiBUeXBlcyBub3QgZ2VuZXJhdGVkOyBFbnYgaW50ZXJmYWNlIGRvZXNuJ3QgbWF0Y2ggd3JhbmdsZXIuanNvbmMgIAoqKlNvbHV0aW9uKio6IFJ1biBgbnB4IHdyYW5nbGVyIHR5cGVzIC0tcGF0aD0nLi9mdW5jdGlvbnMvdHlwZXMuZC50cydgOyB1cGRhdGUgRW52IGludGVyZmFjZQoKIyMgTG9jYWwgRGV2IElzc3VlcwoKKipQcm9ibGVtKio6IERldiBzZXJ2ZXIgZXJyb3JzIG9yIGJpbmRpbmdzIGRvbid0IHdvcmsgIAoqKkNhdXNlcyoqOiBQb3J0IGNvbmZsaWN0OyBiaW5kaW5ncyBub3QgcGFzc2VkOyBsb2NhbCB2cyBIVFRQUyBkaWZmZXJlbmNlcyAgCioqU29sdXRpb24qKjogVXNlIGAtLXBvcnQ9MzAwMGA7IHBhc3MgYmluZGluZ3MgdmlhIENMSSBvciB3cmFuZ2xlci5qc29uYzsgYWNjb3VudCBmb3IgSFRUUC9IVFRQUyBkaWZmZXJlbmNlcwoKIyMgUGVyZm9ybWFuY2UgSXNzdWVzCgoqKlByb2JsZW0qKjogU2xvdyByZXNwb25zZXMgb3IgQ1BVIGxpbWl0IGVycm9ycyAgCioqQ2F1c2VzKio6IEZ1bmN0aW9ucyBpbnZva2VkIGZvciBzdGF0aWMgYXNzZXRzOyBjb2xkIHN0YXJ0czsgMTBtcyBDUFUgbGltaXQgKGZyZWUpIC8gMzBzIGRlZmF1bHQgKHBhaWQpOyBsYXJnZSBidW5kbGUgIAoqKlNvbHV0aW9uKio6IEV4Y2x1ZGUgc3RhdGljIHZpYSBgX3JvdXRlcy5qc29uYDsgb3B0aW1pemUgaG90IHBhdGhzOyBrZWVwIGJ1bmRsZSA8IDFNQgoKIyMgRnJhbWV3b3JrLVNwZWNpZmljCgojIyMg4pqg77iPIERlcHJlY2F0ZWQgRnJhbWV3b3JrcwoKKipOZXh0LmpzKio6IE9mZmljaWFsIGFkYXB0ZXIgKGBAY2xvdWRmbGFyZS9uZXh0LW9uLXBhZ2VzYCkgKipkZXByZWNhdGVkKiogYW5kIHVubWFpbnRhaW5lZC4KLSAqKlByb2JsZW0qKjogTm8gdXBkYXRlcyBzaW5jZSAyMDI0OyBpbmNvbXBhdGlibGUgd2l0aCBOZXh0LmpzIDE1KzsgbWlzc2luZyBBcHAgUm91dGVyIGZlYXR1cmVzCi0gKipDYXVzZSoqOiBDbG91ZGZsYXJlIGRpc2NvbnRpbnVlZCBvZmZpY2lhbCBzdXBwb3J0OyBjb21tdW5pdHkgZm9yayBleGlzdHMgYnV0IGxpbWl0ZWQKLSAqKlNvbHV0aW9ucyoqOgogIDEuICoqUmVjb21tZW5kZWQqKjogVXNlIFZlcmNlbCAob2ZmaWNpYWwgTmV4dC5qcyBob3N0KQogIDIuICoqQWR2YW5jZWQqKjogU2VsZi1ob3N0IG9uIFdvcmtlcnMgdXNpbmcgY3VzdG9tIGFkYXB0ZXIgKGNvbXBsZXgsIHVuc3VwcG9ydGVkKQogIDMuICoqTWlncmF0aW9uKio6IFN3aXRjaCB0byBTdmVsdGVLaXQvTnV4dCAoc2ltaWxhciBEWCwgZnVsbCBQYWdlcyBzdXBwb3J0KQoKKipSZW1peCoqOiBPZmZpY2lhbCBhZGFwdGVyIChgQHJlbWl4LXJ1bi9jbG91ZGZsYXJlLXBhZ2VzYCkgKipkZXByZWNhdGVkKiouCi0gKipQcm9ibGVtKio6IE5vIG1haW50ZW5hbmNlIGZyb20gUmVtaXggdGVhbTsgY29tcGF0aWJpbGl0eSBpc3N1ZXMgd2l0aCBSZW1peCB2MisKLSAqKkNhdXNlKio6IFJlbWl4IHRlYW0gZGVwcmVjYXRlZCBhbGwgZnJhbWV3b3JrIGFkYXB0ZXJzCi0gKipTb2x1dGlvbnMqKjoKICAxLiAqKlJlY29tbWVuZGVkKio6IE1pZ3JhdGUgdG8gU3ZlbHRlS2l0IChzaW1pbGFyIGZpbGUtYmFzZWQgcm91dGluZywgYmV0dGVyIERYKQogIDIuICoqQWx0ZXJuYXRpdmUqKjogVXNlIEFzdHJvIChzdGF0aWMtZmlyc3Qgd2l0aCBvcHRpb25hbCBTU1IpCiAgMy4gKipXb3JrYXJvdW5kKio6IENvbnRpbnVlIHVzaW5nIGRlcHJlY2F0ZWQgYWRhcHRlciAobm8gZnV0dXJlIHN1cHBvcnQpCgojIyMg4pyFIFN1cHBvcnRlZCBGcmFtZXdvcmtzCgoqKlN2ZWx0ZUtpdCoqOgotIFVzZSBgQHN2ZWx0ZWpzL2FkYXB0ZXItY2xvdWRmbGFyZWAKLSBBY2Nlc3MgYmluZGluZ3MgdmlhIGBwbGF0Zm9ybS5lbnZgIGluIHNlcnZlciBsb2FkIGZ1bmN0aW9ucwotIFNldCBgcGxhdGZvcm06ICdjbG91ZGZsYXJlJ2AgaW4gYHN2ZWx0ZS5jb25maWcuanNgCgoqKkFzdHJvKio6Ci0gQnVpbHQtaW4gQ2xvdWRmbGFyZSBhZGFwdGVyCi0gQWNjZXNzIGJpbmRpbmdzIHZpYSBgQXN0cm8ubG9jYWxzLnJ1bnRpbWUuZW52YAoKKipOdXh0Kio6Ci0gU2V0IGBuaXRyby5wcmVzZXQ6ICdjbG91ZGZsYXJlLXBhZ2VzJ2AgaW4gYG51eHQuY29uZmlnLnRzYAotIEFjY2VzcyBiaW5kaW5ncyB2aWEgYGV2ZW50LmNvbnRleHQuY2xvdWRmbGFyZS5lbnZgCgoqKlF3aWssIFNvbGlkIFN0YXJ0Kio6Ci0gQnVpbHQtaW4gb3Igb2ZmaWNpYWwgQ2xvdWRmbGFyZSBhZGFwdGVycyBhdmFpbGFibGUKLSBDaGVjayByZXNwZWN0aXZlIGZyYW1ld29yayBkb2NzIGZvciBiaW5kaW5nIGFjY2VzcwoKIyMgRGVidWdnaW5nCgpgYGB0eXBlc2NyaXB0Ci8vIExvZyByZXF1ZXN0IGRldGFpbHMKY29uc29sZS5sb2coJ1JlcXVlc3Q6JywgeyBtZXRob2Q6IHJlcXVlc3QubWV0aG9kLCB1cmw6IHJlcXVlc3QudXJsIH0pOwpjb25zb2xlLmxvZygnRW52OicsIE9iamVjdC5rZXlzKGVudikpOwpjb25zb2xlLmxvZygnUGFyYW1zOicsIHBhcmFtcyk7CmBgYAoKKipWaWV3IGxvZ3MqKjogYG5weCB3cmFuZ2xlciBwYWdlcyBkZXBsb3ltZW50IHRhaWwgLS1wcm9qZWN0LW5hbWU9bXktcHJvamVjdGAKCiMjIFNtYXJ0IFBsYWNlbWVudCBJc3N1ZXMKCiMjIyBJbmNyZWFzZWQgQ29sZCBTdGFydCBMYXRlbmN5CgoqKlByb2JsZW0qKjogRmlyc3QgcmVxdWVzdHMgc2xvd2VyIGFmdGVyIGVuYWJsaW5nIFNtYXJ0IFBsYWNlbWVudCAgCioqQ2F1c2UqKjogSW5pdGlhbCBvcHRpbWl6YXRpb24gcGVyaW9kIHdoaWxlIHN5c3RlbSBsZWFybnMgdHJhZmZpYyBwYXR0ZXJucyAgCioqU29sdXRpb24qKjogRXhwZWN0ZWQgYmVoYXZpb3IgZHVyaW5nIGZpcnN0IDI0LTQ4IGhvdXJzOyBtb25pdG9yIGxhdGVuY3kgdHJlbmRzIG92ZXIgdGltZQoKIyMjIEluY29uc2lzdGVudCBSZXNwb25zZSBUaW1lcwoKKipQcm9ibGVtKio6IExhdGVuY3kgdmFyaWVzIHNpZ25pZmljYW50bHkgYWNyb3NzIHJlcXVlc3RzIGR1cmluZyBpbml0aWFsIGRlcGxveW1lbnQgIAoqKkNhdXNlKio6IFNtYXJ0IFBsYWNlbWVudCB0ZXN0aW5nIGRpZmZlcmVudCBleGVjdXRpb24gbG9jYXRpb25zIHRvIGZpbmQgb3B0aW1hbCBwbGFjZW1lbnQgIAoqKlNvbHV0aW9uKio6IE5vcm1hbCBkdXJpbmcgbGVhcm5pbmcgcGhhc2U7IHN0YWJpbGl6ZXMgYWZ0ZXIgdHJhZmZpYyBwYXR0ZXJucyBlbWVyZ2UgKDEtMiBkYXlzKQoKIyMjIE5vIFBlcmZvcm1hbmNlIEltcHJvdmVtZW50CgoqKlByb2JsZW0qKjogU21hcnQgUGxhY2VtZW50IGVuYWJsZWQgYnV0IG5vIGxhdGVuY3kgcmVkdWN0aW9uIG9ic2VydmVkICAKKipDYXVzZSoqOiBUcmFmZmljIGV2ZW5seSBkaXN0cmlidXRlZCBnbG9iYWxseSwgb3Igbm8gZGF0YSBsb2NhbGl0eSBjb25zdHJhaW50cyAgCioqU29sdXRpb24qKjogU21hcnQgUGxhY2VtZW50IG1vc3QgZWZmZWN0aXZlIHdpdGggY2VudHJhbGl6ZWQgZGF0YSAoRDEvRE8pIG9yIHJlZ2lvbmFsIHRyYWZmaWM7IGRpc2FibGUgaWYgbm8gYmVuZWZpdAoKIyMgUmVtb3RlIEJpbmRpbmdzIElzc3VlcwoKIyMjIEFjY2lkZW50YWxseSBNb2RpZmllZCBQcm9kdWN0aW9uIERhdGEKCioqUHJvYmxlbSoqOiBMb2NhbCBkZXYgd2l0aCBgLS1yZW1vdGVgIGFsdGVyZWQgcHJvZHVjdGlvbiBkYXRhYmFzZS9LViAgCioqQ2F1c2UqKjogUmVtb3RlIGJpbmRpbmdzIGNvbm5lY3QgZGlyZWN0bHkgdG8gcHJvZHVjdGlvbiByZXNvdXJjZXM7IHdyaXRlcyBhcmUgcmVhbCAgCioqU29sdXRpb24qKjogCi0gVXNlIGAtLXJlbW90ZWAgb25seSBmb3IgcmVhZC1oZWF2eSBkZWJ1Z2dpbmcKLSBDcmVhdGUgc2VwYXJhdGUgcHJldmlldyBlbnZpcm9ubWVudHMgZm9yIHRlc3RpbmcKLSBOZXZlciB1c2UgYC0tcmVtb3RlYCBmb3Igd3JpdGUgb3BlcmF0aW9ucyBkdXJpbmcgZGV2ZWxvcG1lbnQKCiMjIyBSZW1vdGUgQmluZGluZyBBdXRoIEVycm9ycwoKKipQcm9ibGVtKio6IGBucHggd3JhbmdsZXIgcGFnZXMgZGV2IC0tcmVtb3RlYCBmYWlscyB3aXRoICJVbmF1dGhvcml6ZWQiIG9yIGF1dGggZXJyb3IgIAoqKkNhdXNlKio6IE5vdCBsb2dnZWQgaW4sIHNlc3Npb24gZXhwaXJlZCwgb3IgaW5zdWZmaWNpZW50IGFjY291bnQgcGVybWlzc2lvbnMgIAoqKlNvbHV0aW9uKio6IAoxLiBSdW4gYG5weCB3cmFuZ2xlciBsb2dpbmAgdG8gcmUtYXV0aGVudGljYXRlCjIuIFZlcmlmeSBhY2NvdW50IGhhcyBhY2Nlc3MgdG8gcHJvamVjdCBhbmQgYmluZGluZ3MKMy4gQ2hlY2sgYmluZGluZyBJRHMgbWF0Y2ggcHJvZHVjdGlvbiBjb25maWd1cmF0aW9uCgojIyMgU2xvdyBMb2NhbCBEZXYgd2l0aCBSZW1vdGUgQmluZGluZ3MKCioqUHJvYmxlbSoqOiBMb2NhbCBkZXYgc2VydmVyIHNsb3cgd2hlbiB1c2luZyBgLS1yZW1vdGVgICAKKipDYXVzZSoqOiBFdmVyeSByZXF1ZXN0IG1ha2VzIG5ldHdvcmsgY2FsbHMgdG8gcHJvZHVjdGlvbiBiaW5kaW5ncyAgCioqU29sdXRpb24qKjogVXNlIGxvY2FsIGJpbmRpbmdzIGZvciBkZXZlbG9wbWVudDsgcmVzZXJ2ZSBgLS1yZW1vdGVgIGZvciBmaW5hbCB2YWxpZGF0aW9uCgojIyBDb21tb24gRXJyb3JzCgojIyMgIk1vZHVsZSBub3QgZm91bmQiCioqQ2F1c2UqKjogRGVwZW5kZW5jaWVzIG5vdCBidW5kbGVkIG9yIGJ1aWxkIG91dHB1dCBpbmNvcnJlY3QgIAoqKlNvbHV0aW9uKio6IENoZWNrIGJ1aWxkIG91dHB1dCBkaXJlY3RvcnksIGVuc3VyZSBkZXBlbmRlbmNpZXMgYnVuZGxlZAoKIyMjICJCaW5kaW5nIG5vdCBmb3VuZCIKKipDYXVzZSoqOiBCaW5kaW5nIG5vdCBjb25maWd1cmVkIG9yIHR5cGVzIG91dCBvZiBzeW5jICAKKipTb2x1dGlvbioqOiBWZXJpZnkgd3JhbmdsZXIuanNvbmMsIHJ1biBgbnB4IHdyYW5nbGVyIHR5cGVzYAoKIyMjICJSZXF1ZXN0IGV4Y2VlZGVkIENQVSBsaW1pdCIKKipDYXVzZSoqOiBDb2RlIGV4ZWN1dGlvbiB0b28gc2xvdyBvciBoZWF2eSBjb21wdXRlICAKKipTb2x1dGlvbioqOiBPcHRpbWl6ZSBob3QgcGF0aHMsIHVwZ3JhZGUgdG8gV29ya2VycyBQYWlkCgojIyMgIlNjcmlwdCB0b28gbGFyZ2UiCioqQ2F1c2UqKjogQnVuZGxlIHNpemUgZXhjZWVkcyBsaW1pdCAgCioqU29sdXRpb24qKjogVHJlZS1zaGFrZSwgdXNlIGR5bmFtaWMgaW1wb3J0cywgY29kZS1zcGxpdAoKIyMjICJUb28gbWFueSBzdWJyZXF1ZXN0cyIKKipDYXVzZSoqOiBFeGNlZWRlZCA1MCBzdWJyZXF1ZXN0IGxpbWl0ICAKKipTb2x1dGlvbioqOiBCYXRjaCBvciByZWR1Y2UgZmV0Y2ggY2FsbHMKCiMjIyAiS1Yga2V5IG5vdCBmb3VuZCIKKipDYXVzZSoqOiBLZXkgZG9lc24ndCBleGlzdCBvciB3cm9uZyBuYW1lc3BhY2UgIAoqKlNvbHV0aW9uKio6IENoZWNrIG5hbWVzcGFjZSBtYXRjaGVzIGVudmlyb25tZW50CgojIyMgIkQxIGVycm9yIgoqKkNhdXNlKio6IFdyb25nIGRhdGFiYXNlX2lkIG9yIG1pc3NpbmcgbWlncmF0aW9ucyAgCioqU29sdXRpb24qKjogVmVyaWZ5IGNvbmZpZywgcnVuIGB3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGxpc3RgCgojIyBMaW1pdHMgUmVmZXJlbmNlIChKYW4gMjAyNikKCnwgUmVzb3VyY2UgfCBGcmVlIHwgUGFpZCB8CnwtLS0tLS0tLS0tfC0tLS0tLXwtLS0tLS18CnwgRnVuY3Rpb25zIFJlcXVlc3RzIHwgMTAway9kYXkgfCBVbmxpbWl0ZWQgfAp8IENQVSBUaW1lIHwgMTBtcy9yZXEgfCAzMHMgZGVmYXVsdCwgNW1pbiBtYXggfAp8IE1lbW9yeSB8IDEyOE1CIHwgMTI4TUIgfAp8IFNjcmlwdCBTaXplIHwgMU1CIHwgMTBNQiB8CnwgU3VicmVxdWVzdHMgfCA1MC9yZXEgfCAxMCwwMDAvcmVxIHwKfCBEZXBsb3ltZW50cyB8IDUwMC9tb250aCB8IDUsMDAwL21vbnRoIHwKCioqVGlwKio6IEhpdHRpbmcgQ1BVIGxpbWl0PyBPcHRpbWl6ZSBob3QgcGF0aHMgb3IgdXBncmFkZSB0byBXb3JrZXJzIFBhaWQgcGxhbi4KCltGdWxsIGxpbWl0c10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3BhZ2VzL3BsYXRmb3JtL2xpbWl0cy8pCgojIyBHZXR0aW5nIEhlbHAKCjEuIENoZWNrIFtQYWdlcyBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcGFnZXMvKQoyLiBTZWFyY2ggW0Rpc2NvcmQgI2Z1bmN0aW9uc10oaHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy81OTUzMTc5OTAxOTEzOTg5MzMvOTEwOTc4MjIzOTY4NTE4MTQ0KQozLiBSZXZpZXcgW1dvcmtlcnMgRXhhbXBsZXNdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzL2V4YW1wbGVzLykKNC4gQ2hlY2sgZnJhbWV3b3JrLXNwZWNpZmljIGRvY3MvYWRhcHRlcnMK
+# Gotchas
+
+## Functions Not Running
+
+**Problem**: Function endpoints return 404 or don't execute  
+**Causes**: `_routes.json` excludes path; wrong file extension (`.jsx`/`.tsx`); Functions dir not at output root  
+**Solution**: Check `_routes.json`, rename to `.ts`/`.js`, verify build output structure
+
+## 404 on Static Assets
+
+**Problem**: Static files not serving  
+**Causes**: Build output dir misconfigured; Functions catching requests; Advanced mode missing `env.ASSETS.fetch()`  
+**Solution**: Verify output dir, add exclusions to `_routes.json`, call `env.ASSETS.fetch()` in `_worker.js`
+
+## Bindings Not Working
+
+**Problem**: `env.BINDING` undefined or errors  
+**Causes**: wrangler.jsonc syntax error; wrong binding IDs; missing `.dev.vars`; out-of-sync types  
+**Solution**: Validate config, verify IDs, create `.dev.vars`, run `npx wrangler types`
+
+## Build Failures
+
+**Problem**: Deployment fails during build  
+**Causes**: Wrong build command/output dir; Node version incompatibility; missing env vars; 20min timeout; OOM  
+**Solution**: Check Dashboard → Deployments → Build log; verify settings; add `.nvmrc`; optimize build
+
+## Middleware Not Running
+
+**Problem**: Middleware doesn't execute  
+**Causes**: Wrong filename (not `_middleware.ts`); missing `onRequest` export; didn't call `next()`  
+**Solution**: Rename file with underscore prefix; export handler; call `next()` or return Response
+
+## Headers/Redirects Not Working
+
+**Problem**: `_headers` or `_redirects` not applying  
+**Causes**: Only work for static assets; Functions override; syntax errors; exceeded limits  
+**Solution**: Set headers in Response object for Functions; verify syntax; check limits (100 headers, 2,100 redirects)
+
+## TypeScript Errors
+
+**Problem**: Type errors in Functions code  
+**Causes**: Types not generated; Env interface doesn't match wrangler.jsonc  
+**Solution**: Run `npx wrangler types --path='./functions/types.d.ts'`; update Env interface
+
+## Local Dev Issues
+
+**Problem**: Dev server errors or bindings don't work  
+**Causes**: Port conflict; bindings not passed; local vs HTTPS differences  
+**Solution**: Use `--port=3000`; pass bindings via CLI or wrangler.jsonc; account for HTTP/HTTPS differences
+
+## Performance Issues
+
+**Problem**: Slow responses or CPU limit errors  
+**Causes**: Functions invoked for static assets; cold starts; 10ms CPU limit (free) / 30s default (paid); large bundle  
+**Solution**: Exclude static via `_routes.json`; optimize hot paths; keep bundle < 1MB
+
+## Framework-Specific
+
+### ⚠️ Deprecated Frameworks
+
+**Next.js**: Official adapter (`@cloudflare/next-on-pages`) **deprecated** and unmaintained.
+- **Problem**: No updates since 2024; incompatible with Next.js 15+; missing App Router features
+- **Cause**: Cloudflare discontinued official support; community fork exists but limited
+- **Solutions**:
+  1. **Recommended**: Use Vercel (official Next.js host)
+  2. **Advanced**: Self-host on Workers using custom adapter (complex, unsupported)
+  3. **Migration**: Switch to SvelteKit/Nuxt (similar DX, full Pages support)
+
+**Remix**: Official adapter (`@remix-run/cloudflare-pages`) **deprecated**.
+- **Problem**: No maintenance from Remix team; compatibility issues with Remix v2+
+- **Cause**: Remix team deprecated all framework adapters
+- **Solutions**:
+  1. **Recommended**: Migrate to SvelteKit (similar file-based routing, better DX)
+  2. **Alternative**: Use Astro (static-first with optional SSR)
+  3. **Workaround**: Continue using deprecated adapter (no future support)
+
+### ✅ Supported Frameworks
+
+**SvelteKit**:
+- Use `@sveltejs/adapter-cloudflare`
+- Access bindings via `platform.env` in server load functions
+- Set `platform: 'cloudflare'` in `svelte.config.js`
+
+**Astro**:
+- Built-in Cloudflare adapter
+- Access bindings via `Astro.locals.runtime.env`
+
+**Nuxt**:
+- Set `nitro.preset: 'cloudflare-pages'` in `nuxt.config.ts`
+- Access bindings via `event.context.cloudflare.env`
+
+**Qwik, Solid Start**:
+- Built-in or official Cloudflare adapters available
+- Check respective framework docs for binding access
+
+## Debugging
+
+```typescript
+// Log request details
+console.log('Request:', { method: request.method, url: request.url });
+console.log('Env:', Object.keys(env));
+console.log('Params:', params);
+```
+
+**View logs**: `npx wrangler pages deployment tail --project-name=my-project`
+
+## Smart Placement Issues
+
+### Increased Cold Start Latency
+
+**Problem**: First requests slower after enabling Smart Placement  
+**Cause**: Initial optimization period while system learns traffic patterns  
+**Solution**: Expected behavior during first 24-48 hours; monitor latency trends over time
+
+### Inconsistent Response Times
+
+**Problem**: Latency varies significantly across requests during initial deployment  
+**Cause**: Smart Placement testing different execution locations to find optimal placement  
+**Solution**: Normal during learning phase; stabilizes after traffic patterns emerge (1-2 days)
+
+### No Performance Improvement
+
+**Problem**: Smart Placement enabled but no latency reduction observed  
+**Cause**: Traffic evenly distributed globally, or no data locality constraints  
+**Solution**: Smart Placement most effective with centralized data (D1/DO) or regional traffic; disable if no benefit
+
+## Remote Bindings Issues
+
+### Accidentally Modified Production Data
+
+**Problem**: Local dev with `--remote` altered production database/KV  
+**Cause**: Remote bindings connect directly to production resources; writes are real  
+**Solution**: 
+- Use `--remote` only for read-heavy debugging
+- Create separate preview environments for testing
+- Never use `--remote` for write operations during development
+
+### Remote Binding Auth Errors
+
+**Problem**: `npx wrangler pages dev --remote` fails with "Unauthorized" or auth error  
+**Cause**: Not logged in, session expired, or insufficient account permissions  
+**Solution**: 
+1. Run `npx wrangler login` to re-authenticate
+2. Verify account has access to project and bindings
+3. Check binding IDs match production configuration
+
+### Slow Local Dev with Remote Bindings
+
+**Problem**: Local dev server slow when using `--remote`  
+**Cause**: Every request makes network calls to production bindings  
+**Solution**: Use local bindings for development; reserve `--remote` for final validation
+
+## Common Errors
+
+### "Module not found"
+**Cause**: Dependencies not bundled or build output incorrect  
+**Solution**: Check build output directory, ensure dependencies bundled
+
+### "Binding not found"
+**Cause**: Binding not configured or types out of sync  
+**Solution**: Verify wrangler.jsonc, run `npx wrangler types`
+
+### "Request exceeded CPU limit"
+**Cause**: Code execution too slow or heavy compute  
+**Solution**: Optimize hot paths, upgrade to Workers Paid
+
+### "Script too large"
+**Cause**: Bundle size exceeds limit  
+**Solution**: Tree-shake, use dynamic imports, code-split
+
+### "Too many subrequests"
+**Cause**: Exceeded 50 subrequest limit  
+**Solution**: Batch or reduce fetch calls
+
+### "KV key not found"
+**Cause**: Key doesn't exist or wrong namespace  
+**Solution**: Check namespace matches environment
+
+### "D1 error"
+**Cause**: Wrong database_id or missing migrations  
+**Solution**: Verify config, run `wrangler d1 migrations list`
+
+## Limits Reference (Jan 2026)
+
+| Resource | Free | Paid |
+|----------|------|------|
+| Functions Requests | 100k/day | Unlimited |
+| CPU Time | 10ms/req | 30s default, 5min max |
+| Memory | 128MB | 128MB |
+| Script Size | 1MB | 10MB |
+| Subrequests | 50/req | 10,000/req |
+| Deployments | 500/month | 5,000/month |
+
+**Tip**: Hitting CPU limit? Optimize hot paths or upgrade to Workers Paid plan.
+
+[Full limits](https://developers.cloudflare.com/pages/platform/limits/)
+
+## Getting Help
+
+1. Check [Pages Docs](https://developers.cloudflare.com/pages/)
+2. Search [Discord #functions](https://discord.com/channels/595317990191398933/910978223968518144)
+3. Review [Workers Examples](https://developers.cloudflare.com/workers/examples/)
+4. Check framework-specific docs/adapters

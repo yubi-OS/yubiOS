@@ -1,1 +1,91 @@
-IyBCcm93c2VyIFJlbmRlcmluZyBQYXR0ZXJucwoKIyMgQmFzaWMgV29ya2VyCgpgYGB0eXBlc2NyaXB0CmltcG9ydCBwdXBwZXRlZXIgZnJvbSAiQGNsb3VkZmxhcmUvcHVwcGV0ZWVyIjsKCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYpIHsKICAgIGNvbnN0IGJyb3dzZXIgPSBhd2FpdCBwdXBwZXRlZXIubGF1bmNoKGVudi5NWUJST1dTRVIpOwogICAgdHJ5IHsKICAgICAgY29uc3QgcGFnZSA9IGF3YWl0IGJyb3dzZXIubmV3UGFnZSgpOwogICAgICBhd2FpdCBwYWdlLmdvdG8oImh0dHBzOi8vZXhhbXBsZS5jb20iKTsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZShhd2FpdCBwYWdlLmNvbnRlbnQoKSk7CiAgICB9IGZpbmFsbHkgewogICAgICBhd2FpdCBicm93c2VyLmNsb3NlKCk7IC8vIEFMV0FZUyBpbiBmaW5hbGx5CiAgICB9CiAgfQp9OwpgYGAKCiMjIFNlc3Npb24gUmV1c2UKCktlZXAgc2Vzc2lvbnMgYWxpdmUgZm9yIHBlcmZvcm1hbmNlOgpgYGB0eXBlc2NyaXB0CmxldCBzZXNzaW9uSWQgPSBhd2FpdCBlbnYuU0VTU0lPTl9LVi5nZXQoImJyb3dzZXItc2Vzc2lvbiIpOwppZiAoc2Vzc2lvbklkKSB7CiAgYnJvd3NlciA9IGF3YWl0IHB1cHBldGVlci5jb25uZWN0KGVudi5NWUJST1dTRVIsIHNlc3Npb25JZCk7Cn0gZWxzZSB7CiAgYnJvd3NlciA9IGF3YWl0IHB1cHBldGVlci5sYXVuY2goZW52Lk1ZQlJPV1NFUiwgeyBrZWVwX2FsaXZlOiA2MDAwMDAgfSk7CiAgYXdhaXQgZW52LlNFU1NJT05fS1YucHV0KCJicm93c2VyLXNlc3Npb24iLCBicm93c2VyLnNlc3Npb25JZCgpLCB7IGV4cGlyYXRpb25UdGw6IDYwMCB9KTsKfQovLyBEb24ndCBjbG9zZSBicm93c2VyIHRvIGtlZXAgc2Vzc2lvbiBhbGl2ZQpgYGAKCiMjIENvbW1vbiBPcGVyYXRpb25zCgp8IFRhc2sgfCBDb2RlIHwKfC0tLS0tLXwtLS0tLS18CnwgU2NyZWVuc2hvdCB8IGBhd2FpdCBwYWdlLnNjcmVlbnNob3QoeyB0eXBlOiAicG5nIiwgZnVsbFBhZ2U6IHRydWUgfSlgIHwKfCBQREYgfCBgYXdhaXQgcGFnZS5wZGYoeyBmb3JtYXQ6ICJBNCIsIHByaW50QmFja2dyb3VuZDogdHJ1ZSB9KWAgfAp8IEV4dHJhY3QgZGF0YSB8IGBhd2FpdCBwYWdlLmV2YWx1YXRlKCgpID0+IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ2gxJykudGV4dENvbnRlbnQpYCB8CnwgRmlsbCBmb3JtIHwgYGF3YWl0IHBhZ2UudHlwZSgnI2lucHV0JywgJ3ZhbHVlJyk7IGF3YWl0IHBhZ2UuY2xpY2soJ2J1dHRvbicpYCB8CnwgV2FpdCBuYXYgfCBgYXdhaXQgUHJvbWlzZS5hbGwoW3BhZ2Uud2FpdEZvck5hdmlnYXRpb24oKSwgcGFnZS5jbGljaygnYScpXSlgIHwKCiMjIFBhcmFsbGVsIFNjcmFwaW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHBhZ2VzID0gYXdhaXQgUHJvbWlzZS5hbGwodXJscy5tYXAoKCkgPT4gYnJvd3Nlci5uZXdQYWdlKCkpKTsKYXdhaXQgUHJvbWlzZS5hbGwocGFnZXMubWFwKChwLCBpKSA9PiBwLmdvdG8odXJsc1tpXSkpKTsKY29uc3QgdGl0bGVzID0gYXdhaXQgUHJvbWlzZS5hbGwocGFnZXMubWFwKHAgPT4gcC50aXRsZSgpKSk7CmBgYAoKIyMgUGxheXdyaWdodCBTZWxlY3RvcnMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgbGF1bmNoIH0gZnJvbSAiQGNsb3VkZmxhcmUvcGxheXdyaWdodCI7CmNvbnN0IGJyb3dzZXIgPSBhd2FpdCBsYXVuY2goZW52Lk1ZQlJPV1NFUik7CmF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCJidXR0b24iLCB7IG5hbWU6ICJTaWduIGluIiB9KS5jbGljaygpOwphd2FpdCBwYWdlLmdldEJ5TGFiZWwoIkVtYWlsIikuZmlsbCgidXNlckBleGFtcGxlLmNvbSIpOwphd2FpdCBwYWdlLmdldEJ5VGVzdElkKCJzdWJtaXQtYnV0dG9uIikuY2xpY2soKTsKYGBgCgojIyBJbmNvZ25pdG8gQ29udGV4dHMKCklzb2xhdGVkIHNlc3Npb25zIHdpdGhvdXQgbXVsdGlwbGUgYnJvd3NlcnM6CmBgYHR5cGVzY3JpcHQKY29uc3QgY3R4MSA9IGF3YWl0IGJyb3dzZXIuY3JlYXRlSW5jb2duaXRvQnJvd3NlckNvbnRleHQoKTsKY29uc3QgY3R4MiA9IGF3YWl0IGJyb3dzZXIuY3JlYXRlSW5jb2duaXRvQnJvd3NlckNvbnRleHQoKTsKLy8gRWFjaCBoYXMgaXNvbGF0ZWQgY29va2llcy9zdG9yYWdlCmBgYAoKIyMgUXVvdGEgQ2hlY2sKCmBgYHR5cGVzY3JpcHQKY29uc3QgbGltaXRzID0gYXdhaXQgcHVwcGV0ZWVyLmxpbWl0cyhlbnYuTVlCUk9XU0VSKTsKaWYgKGxpbWl0cy5yZW1haW5pbmcgPCA2MDAwMCkgcmV0dXJuIG5ldyBSZXNwb25zZSgiUXVvdGEgbG93IiwgeyBzdGF0dXM6IDQyOSB9KTsKYGBgCgojIyBFcnJvciBIYW5kbGluZwoKYGBgdHlwZXNjcmlwdAp0cnkgewogIGF3YWl0IHBhZ2UuZ290byh1cmwsIHsgdGltZW91dDogMzAwMDAsIHdhaXRVbnRpbDogIm5ldHdvcmtpZGxlMCIgfSk7Cn0gY2F0Y2ggKGUpIHsKICBpZiAoZS5tZXNzYWdlLmluY2x1ZGVzKCJ0aW1lb3V0IikpIHJldHVybiBuZXcgUmVzcG9uc2UoIlRpbWVvdXQiLCB7IHN0YXR1czogNTA0IH0pOwogIGlmIChlLm1lc3NhZ2UuaW5jbHVkZXMoIlNlc3Npb24gbGltaXQiKSkgcmV0dXJuIG5ldyBSZXNwb25zZSgiVG9vIG1hbnkgc2Vzc2lvbnMiLCB7IHN0YXR1czogNDI5IH0pOwp9IGZpbmFsbHkgewogIGlmIChicm93c2VyKSBhd2FpdCBicm93c2VyLmNsb3NlKCk7Cn0KYGBgCg==
+# Browser Rendering Patterns
+
+## Basic Worker
+
+```typescript
+import puppeteer from "@cloudflare/puppeteer";
+
+export default {
+  async fetch(request, env) {
+    const browser = await puppeteer.launch(env.MYBROWSER);
+    try {
+      const page = await browser.newPage();
+      await page.goto("https://example.com");
+      return new Response(await page.content());
+    } finally {
+      await browser.close(); // ALWAYS in finally
+    }
+  }
+};
+```
+
+## Session Reuse
+
+Keep sessions alive for performance:
+```typescript
+let sessionId = await env.SESSION_KV.get("browser-session");
+if (sessionId) {
+  browser = await puppeteer.connect(env.MYBROWSER, sessionId);
+} else {
+  browser = await puppeteer.launch(env.MYBROWSER, { keep_alive: 600000 });
+  await env.SESSION_KV.put("browser-session", browser.sessionId(), { expirationTtl: 600 });
+}
+// Don't close browser to keep session alive
+```
+
+## Common Operations
+
+| Task | Code |
+|------|------|
+| Screenshot | `await page.screenshot({ type: "png", fullPage: true })` |
+| PDF | `await page.pdf({ format: "A4", printBackground: true })` |
+| Extract data | `await page.evaluate(() => document.querySelector('h1').textContent)` |
+| Fill form | `await page.type('#input', 'value'); await page.click('button')` |
+| Wait nav | `await Promise.all([page.waitForNavigation(), page.click('a')])` |
+
+## Parallel Scraping
+
+```typescript
+const pages = await Promise.all(urls.map(() => browser.newPage()));
+await Promise.all(pages.map((p, i) => p.goto(urls[i])));
+const titles = await Promise.all(pages.map(p => p.title()));
+```
+
+## Playwright Selectors
+
+```typescript
+import { launch } from "@cloudflare/playwright";
+const browser = await launch(env.MYBROWSER);
+await page.getByRole("button", { name: "Sign in" }).click();
+await page.getByLabel("Email").fill("user@example.com");
+await page.getByTestId("submit-button").click();
+```
+
+## Incognito Contexts
+
+Isolated sessions without multiple browsers:
+```typescript
+const ctx1 = await browser.createIncognitoBrowserContext();
+const ctx2 = await browser.createIncognitoBrowserContext();
+// Each has isolated cookies/storage
+```
+
+## Quota Check
+
+```typescript
+const limits = await puppeteer.limits(env.MYBROWSER);
+if (limits.remaining < 60000) return new Response("Quota low", { status: 429 });
+```
+
+## Error Handling
+
+```typescript
+try {
+  await page.goto(url, { timeout: 30000, waitUntil: "networkidle0" });
+} catch (e) {
+  if (e.message.includes("timeout")) return new Response("Timeout", { status: 504 });
+  if (e.message.includes("Session limit")) return new Response("Too many sessions", { status: 429 });
+} finally {
+  if (browser) await browser.close();
+}
+```

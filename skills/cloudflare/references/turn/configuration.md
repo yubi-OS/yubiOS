@@ -1,1 +1,179 @@
-IyBUVVJOIENvbmZpZ3VyYXRpb24KClNldHVwIGFuZCBjb25maWd1cmF0aW9uIGZvciBDbG91ZGZsYXJlIFRVUk4gc2VydmljZSBpbiBXb3JrZXJzIGFuZCBhcHBsaWNhdGlvbnMuCgojIyBFbnZpcm9ubWVudCBWYXJpYWJsZXMKCmBgYGJhc2gKIyAuZW52CkNMT1VERkxBUkVfQUNDT1VOVF9JRD15b3VyX2FjY291bnRfaWQKQ0xPVURGTEFSRV9BUElfVE9LRU49eW91cl9hcGlfdG9rZW4KVFVSTl9LRVlfSUQ9eW91cl90dXJuX2tleV9pZApUVVJOX0tFWV9TRUNSRVQ9eW91cl90dXJuX2tleV9zZWNyZXQKYGBgCgpWYWxpZGF0ZSB3aXRoIHpvZDoKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgeiB9IGZyb20gJ3pvZCc7Cgpjb25zdCBlbnZTY2hlbWEgPSB6Lm9iamVjdCh7CiAgQ0xPVURGTEFSRV9BQ0NPVU5UX0lEOiB6LnN0cmluZygpLm1pbigxKSwKICBDTE9VREZMQVJFX0FQSV9UT0tFTjogei5zdHJpbmcoKS5taW4oMSksCiAgVFVSTl9LRVlfSUQ6IHouc3RyaW5nKCkubWluKDEpLAogIFRVUk5fS0VZX1NFQ1JFVDogei5zdHJpbmcoKS5taW4oMSkKfSk7CgpleHBvcnQgY29uc3QgY29uZmlnID0gZW52U2NoZW1hLnBhcnNlKHByb2Nlc3MuZW52KTsKYGBgCgojIyB3cmFuZ2xlci5qc29uYwoKYGBganNvbmMKewogICJuYW1lIjogInR1cm4tY3JlZGVudGlhbHMtYXBpIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wMS0wMSIsCiAgInZhcnMiOiB7CiAgICAiVFVSTl9LRVlfSUQiOiAieW91ci10dXJuLWtleS1pZCIgIC8vIE5vbi1zZW5zaXRpdmUsIGNhbiBiZSBpbiB2YXJzCiAgfSwKICAiZW52IjogewogICAgInByb2R1Y3Rpb24iOiB7CiAgICAgICJrdl9uYW1lc3BhY2VzIjogWwogICAgICAgIHsKICAgICAgICAgICJiaW5kaW5nIjogIkNSRURFTlRJQUxTX0NBQ0hFIiwKICAgICAgICAgICJpZCI6ICJ5b3VyLWt2LW5hbWVzcGFjZS1pZCIKICAgICAgICB9CiAgICAgIF0KICAgIH0KICB9Cn0KYGBgCgoqKlN0b3JlIHNlY3JldHMgc2VwYXJhdGVseSoqOgpgYGBiYXNoCndyYW5nbGVyIHNlY3JldCBwdXQgVFVSTl9LRVlfU0VDUkVUCmBgYAoKIyMgQ2xvdWRmbGFyZSBXb3JrZXIgSW50ZWdyYXRpb24KCiMjIyBXb3JrZXIgQmluZGluZyBUeXBlcwoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBUVVJOX0tFWV9JRDogc3RyaW5nOwogIFRVUk5fS0VZX1NFQ1JFVDogc3RyaW5nOwogIENSRURFTlRJQUxTX0NBQ0hFPzogS1ZOYW1lc3BhY2U7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIC8vIFNlZSBwYXR0ZXJucy5tZCBmb3IgaW1wbGVtZW50YXRpb24KICB9Cn0KYGBgCgojIyMgQmFzaWMgV29ya2VyIEV4YW1wbGUKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgaWYgKHJlcXVlc3QudXJsLmVuZHNXaXRoKCcvdHVybi1jcmVkZW50aWFscycpKSB7CiAgICAgIC8vIFZhbGlkYXRlIGNsaWVudCBhdXRoCiAgICAgIGNvbnN0IGF1dGhIZWFkZXIgPSByZXF1ZXN0LmhlYWRlcnMuZ2V0KCdBdXRob3JpemF0aW9uJyk7CiAgICAgIGlmICghYXV0aEhlYWRlcikgewogICAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ1VuYXV0aG9yaXplZCcsIHsgc3RhdHVzOiA0MDEgfSk7CiAgICAgIH0KCiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goCiAgICAgICAgYGh0dHBzOi8vcnRjLmxpdmUuY2xvdWRmbGFyZS5jb20vdjEvdHVybi9rZXlzLyR7ZW52LlRVUk5fS0VZX0lEfS9jcmVkZW50aWFscy9nZW5lcmF0ZWAsCiAgICAgICAgewogICAgICAgICAgbWV0aG9kOiAnUE9TVCcsCiAgICAgICAgICBoZWFkZXJzOiB7CiAgICAgICAgICAgICdBdXRob3JpemF0aW9uJzogYEJlYXJlciAke2Vudi5UVVJOX0tFWV9TRUNSRVR9YCwKICAgICAgICAgICAgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJwogICAgICAgICAgfSwKICAgICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsgdHRsOiAzNjAwIH0pCiAgICAgICAgfQogICAgICApOwoKICAgICAgaWYgKCFyZXNwb25zZS5vaykgewogICAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ0ZhaWxlZCB0byBnZW5lcmF0ZSBjcmVkZW50aWFscycsIHsgc3RhdHVzOiA1MDAgfSk7CiAgICAgIH0KCiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5qc29uKCk7CgogICAgICAvLyBGaWx0ZXIgcG9ydCA1MyBmb3IgYnJvd3NlciBjbGllbnRzCiAgICAgIGNvbnN0IGZpbHRlcmVkVXJscyA9IGRhdGEuaWNlU2VydmVycy51cmxzLmZpbHRlcigKICAgICAgICAodXJsOiBzdHJpbmcpID0+ICF1cmwuaW5jbHVkZXMoJzo1MycpCiAgICAgICk7CgogICAgICByZXR1cm4gUmVzcG9uc2UuanNvbih7CiAgICAgICAgaWNlU2VydmVyczogWwogICAgICAgICAgeyB1cmxzOiAnc3R1bjpzdHVuLmNsb3VkZmxhcmUuY29tOjM0NzgnIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgIHVybHM6IGZpbHRlcmVkVXJscywKICAgICAgICAgICAgdXNlcm5hbWU6IGRhdGEuaWNlU2VydmVycy51c2VybmFtZSwKICAgICAgICAgICAgY3JlZGVudGlhbDogZGF0YS5pY2VTZXJ2ZXJzLmNyZWRlbnRpYWwKICAgICAgICAgIH0KICAgICAgICBdCiAgICAgIH0pOwogICAgfQoKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ05vdCBmb3VuZCcsIHsgc3RhdHVzOiA0MDQgfSk7CiAgfQp9OwpgYGAKCiMjIElQIEFsbG93bGlzdGluZyAoRW50ZXJwcmlzZS9GaXJld2FsbCkKCkZvciBzdHJpY3QgZmlyZXdhbGxzLCBhbGxvd2xpc3QgdGhlc2UgSVBzIGZvciBgdHVybi5jbG91ZGZsYXJlLmNvbWA6Cgp8IFR5cGUgfCBBZGRyZXNzIHwgUHJvdG9jb2wgfAp8LS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IElQdjQgfCAxNDEuMTAxLjkwLjEvMzIgfCBBbGwgfAp8IElQdjQgfCAxNjIuMTU5LjIwNy4xLzMyIHwgQWxsIHwKfCBJUHY2IHwgMmEwNjo5OGMxOjMyMDA6OjEvMTI4IHwgQWxsIHwKfCBJUHY2IHwgMjYwNjo0NzAwOjQ4OjoxLzEyOCB8IEFsbCB8CgoqKklNUE9SVEFOVCoqOiBUaGVzZSBJUHMgbWF5IGNoYW5nZSB3aXRoIDE0LWRheSBub3RpY2UuIE1vbml0b3IgRE5TOgoKYGBgYmFzaAojIENoZWNrIEEgYW5kIEFBQUEgcmVjb3JkcwpkaWcgdHVybi5jbG91ZGZsYXJlLmNvbSBBCmRpZyB0dXJuLmNsb3VkZmxhcmUuY29tIEFBQUEKYGBgCgpTZXQgdXAgYXV0b21hdGVkIG1vbml0b3JpbmcgdG8gZGV0ZWN0IElQIGNoYW5nZXMgYW5kIHVwZGF0ZSBhbGxvd2xpc3RzIHdpdGhpbiAxNCBkYXlzLgoKIyMgSVB2NiBTdXBwb3J0CgotICoqQ2xpZW50LXRvLVRVUk4qKjogQm90aCBJUHY0IGFuZCBJUHY2IHN1cHBvcnRlZAotICoqUmVsYXkgYWRkcmVzc2VzKio6IElQdjQgb25seSAobm8gUkZDIDYxNTYgc3VwcG9ydCkKLSAqKlRDUCByZWxheWluZyoqOiBOb3Qgc3VwcG9ydGVkIChSRkMgNjA2MikKCkNsaWVudHMgY2FuIGNvbm5lY3QgdmlhIElQdjYsIGJ1dCByZWxheWVkIHRyYWZmaWMgdXNlcyBJUHY0IGFkZHJlc3Nlcy4KCiMjIFRMUyBDb25maWd1cmF0aW9uCgojIyMgU3VwcG9ydGVkIFRMUyBWZXJzaW9ucwotIFRMUyAxLjEKLSBUTFMgMS4yCi0gVExTIDEuMwoKIyMjIFJlY29tbWVuZGVkIENpcGhlcnMgKFRMUyAxLjMpCi0gQUVBRC1BRVMxMjgtR0NNLVNIQTI1NgotIEFFQUQtQUVTMjU2LUdDTS1TSEEzODQKLSBBRUFELUNIQUNIQTIwLVBPTFkxMzA1LVNIQTI1NgoKIyMjIFJlY29tbWVuZGVkIENpcGhlcnMgKFRMUyAxLjIpCi0gRUNESEUtRUNEU0EtQUVTMTI4LUdDTS1TSEEyNTYKLSBFQ0RIRS1SU0EtQUVTMTI4LUdDTS1TSEEyNTYKLSBFQ0RIRS1SU0EtQUVTMTI4LVNIQSAoYWxzbyBUTFMgMS4xKQotIEFFUzEyOC1HQ00tU0hBMjU2CgojIyBTZWUgQWxzbwoKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBUVVJOIGtleSBjcmVhdGlvbiwgY3JlZGVudGlhbCBnZW5lcmF0aW9uIEFQSQotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBGdWxsIFdvcmtlciBpbXBsZW1lbnRhdGlvbiBwYXR0ZXJucwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gU2VjdXJpdHkgYmVzdCBwcmFjdGljZXMsIHRyb3VibGVzaG9vdGluZwo=
+# TURN Configuration
+
+Setup and configuration for Cloudflare TURN service in Workers and applications.
+
+## Environment Variables
+
+```bash
+# .env
+CLOUDFLARE_ACCOUNT_ID=your_account_id
+CLOUDFLARE_API_TOKEN=your_api_token
+TURN_KEY_ID=your_turn_key_id
+TURN_KEY_SECRET=your_turn_key_secret
+```
+
+Validate with zod:
+
+```typescript
+import { z } from 'zod';
+
+const envSchema = z.object({
+  CLOUDFLARE_ACCOUNT_ID: z.string().min(1),
+  CLOUDFLARE_API_TOKEN: z.string().min(1),
+  TURN_KEY_ID: z.string().min(1),
+  TURN_KEY_SECRET: z.string().min(1)
+});
+
+export const config = envSchema.parse(process.env);
+```
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "name": "turn-credentials-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "vars": {
+    "TURN_KEY_ID": "your-turn-key-id"  // Non-sensitive, can be in vars
+  },
+  "env": {
+    "production": {
+      "kv_namespaces": [
+        {
+          "binding": "CREDENTIALS_CACHE",
+          "id": "your-kv-namespace-id"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Store secrets separately**:
+```bash
+wrangler secret put TURN_KEY_SECRET
+```
+
+## Cloudflare Worker Integration
+
+### Worker Binding Types
+
+```typescript
+interface Env {
+  TURN_KEY_ID: string;
+  TURN_KEY_SECRET: string;
+  CREDENTIALS_CACHE?: KVNamespace;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    // See patterns.md for implementation
+  }
+}
+```
+
+### Basic Worker Example
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    if (request.url.endsWith('/turn-credentials')) {
+      // Validate client auth
+      const authHeader = request.headers.get('Authorization');
+      if (!authHeader) {
+        return new Response('Unauthorized', { status: 401 });
+      }
+
+      const response = await fetch(
+        `https://rtc.live.cloudflare.com/v1/turn/keys/${env.TURN_KEY_ID}/credentials/generate`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${env.TURN_KEY_SECRET}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ttl: 3600 })
+        }
+      );
+
+      if (!response.ok) {
+        return new Response('Failed to generate credentials', { status: 500 });
+      }
+
+      const data = await response.json();
+
+      // Filter port 53 for browser clients
+      const filteredUrls = data.iceServers.urls.filter(
+        (url: string) => !url.includes(':53')
+      );
+
+      return Response.json({
+        iceServers: [
+          { urls: 'stun:stun.cloudflare.com:3478' },
+          {
+            urls: filteredUrls,
+            username: data.iceServers.username,
+            credential: data.iceServers.credential
+          }
+        ]
+      });
+    }
+
+    return new Response('Not found', { status: 404 });
+  }
+};
+```
+
+## IP Allowlisting (Enterprise/Firewall)
+
+For strict firewalls, allowlist these IPs for `turn.cloudflare.com`:
+
+| Type | Address | Protocol |
+|------|---------|----------|
+| IPv4 | 141.101.90.1/32 | All |
+| IPv4 | 162.159.207.1/32 | All |
+| IPv6 | 2a06:98c1:3200::1/128 | All |
+| IPv6 | 2606:4700:48::1/128 | All |
+
+**IMPORTANT**: These IPs may change with 14-day notice. Monitor DNS:
+
+```bash
+# Check A and AAAA records
+dig turn.cloudflare.com A
+dig turn.cloudflare.com AAAA
+```
+
+Set up automated monitoring to detect IP changes and update allowlists within 14 days.
+
+## IPv6 Support
+
+- **Client-to-TURN**: Both IPv4 and IPv6 supported
+- **Relay addresses**: IPv4 only (no RFC 6156 support)
+- **TCP relaying**: Not supported (RFC 6062)
+
+Clients can connect via IPv6, but relayed traffic uses IPv4 addresses.
+
+## TLS Configuration
+
+### Supported TLS Versions
+- TLS 1.1
+- TLS 1.2
+- TLS 1.3
+
+### Recommended Ciphers (TLS 1.3)
+- AEAD-AES128-GCM-SHA256
+- AEAD-AES256-GCM-SHA384
+- AEAD-CHACHA20-POLY1305-SHA256
+
+### Recommended Ciphers (TLS 1.2)
+- ECDHE-ECDSA-AES128-GCM-SHA256
+- ECDHE-RSA-AES128-GCM-SHA256
+- ECDHE-RSA-AES128-SHA (also TLS 1.1)
+- AES128-GCM-SHA256
+
+## See Also
+
+- [api.md](./api.md) - TURN key creation, credential generation API
+- [patterns.md](./patterns.md) - Full Worker implementation patterns
+- [gotchas.md](./gotchas.md) - Security best practices, troubleshooting

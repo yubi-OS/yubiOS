@@ -1,1 +1,64 @@
-IyBDbG91ZGZsYXJlIFIyIFNRTAoKU2VydmVybGVzcywgZGlzdHJpYnV0ZWQsICoqcmVhZC1vbmx5KiogcXVlcnkgZW5naW5lIChBcGFjaGUgRGF0YUZ1c2lvbikgZm9yIEFwYWNoZSBJY2ViZXJnIHRhYmxlcyBpbiBSMiBEYXRhIENhdGFsb2cuCgojIyBEb2N1bWVudGF0aW9uCgpGb3IgZnVsbCBmdW5jdGlvbiBsaXN0cywgZGF0YSB0eXBlcywgYW5kIHByaWNpbmcsICoqcmV0cmlldmUgdGhlIGxpdmUgZG9jcyoqIOKAlCB1c2UgdGhlIENsb3VkZmxhcmUgTUNQIGBkb2NzYCB0b29sIGlmIGF2YWlsYWJsZSwgb3RoZXJ3aXNlIGB3ZWJmZXRjaGAuCgp8IFRvcGljIHwgVVJMIHwKfC0tLS0tLS18LS0tLS18CnwgT3ZlcnZpZXcgLyBnZXQgc3RhcnRlZCB8IGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjItc3FsL2dldC1zdGFydGVkL2AgfAp8IFF1ZXJ5IGRhdGEgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyLXNxbC9xdWVyeS1kYXRhL2AgfAp8IFNRTCByZWZlcmVuY2UgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyLXNxbC9zcWwtcmVmZXJlbmNlL2AgfAp8IEFnZ3JlZ2F0ZSBmdW5jdGlvbnMgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyLXNxbC9zcWwtcmVmZXJlbmNlL2FnZ3JlZ2F0ZS1mdW5jdGlvbnMvYCB8CnwgU2NhbGFyIGZ1bmN0aW9ucyB8IGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjItc3FsL3NxbC1yZWZlcmVuY2Uvc2NhbGFyLWZ1bmN0aW9ucy9gIHwKfCBDb21wbGV4IHR5cGVzIHwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yMi1zcWwvc3FsLXJlZmVyZW5jZS9jb21wbGV4LXR5cGVzL2AgfAp8IExpbWl0YXRpb25zICYgYmVzdCBwcmFjdGljZXMgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyLXNxbC9yZWZlcmVuY2UvbGltaXRhdGlvbnMtYmVzdC1wcmFjdGljZXMvYCB8CnwgV3JhbmdsZXIgY29tbWFuZHMgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyLXNxbC9yZWZlcmVuY2Uvd3JhbmdsZXItY29tbWFuZHMvYCB8CnwgUHJpY2luZyB8IGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjItc3FsL3BsYXRmb3JtL3ByaWNpbmcvYCB8CgojIyBDb25uZWN0aW9uIFZhbHVlcwoKfCBWYWx1ZSB8IEZvcm1hdCB8CnwtLS0tLS0tfC0tLS0tLS0tfAp8IFJFU1QgZW5kcG9pbnQgfCBgaHR0cHM6Ly9hcGkuc3FsLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS9hcGkvdjEvYWNjb3VudHMve0FDQ09VTlRfSUR9L3IyLXNxbC9xdWVyeS97QlVDS0VUfWAgfAp8IFdyYW5nbGVyIHwgYG5weCB3cmFuZ2xlciByMiBzcWwgcXVlcnkgIntXQVJFSE9VU0V9IiAiPFNRTD4iYCB3aXRoIGBXUkFOR0xFUl9SMl9TUUxfQVVUSF9UT0tFTmAgc2V0IHwKfCBXYXJlaG91c2UgfCBge0FDQ09VTlRfSUR9X3tCVUNLRVR9YCB8Cgo+IFRoZSBSRVNUIGVuZHBvaW50IGlzIGBhcGkuc3FsLmNsb3VkZmxhcmVzdG9yYWdlLmNvbWAg4oCUICoqbm90KiogYGFwaS5jbG91ZGZsYXJlLmNvbS8uLi4vcjIvc3FsYC4KCiMjIFF1aWNrIFN0YXJ0CgpgYGBiYXNoCm5weCB3cmFuZ2xlciByMiBidWNrZXQgY2F0YWxvZyBlbmFibGUgbXktYnVja2V0ICAgICAgICAgICAjIDEuIGVuYWJsZSBjYXRhbG9nCmV4cG9ydCBXUkFOR0xFUl9SMl9TUUxfQVVUSF9UT0tFTj08cjItdG9rZW4+ICAgICAgICAgICAgICAjIDIuIGF1dGggKEFkbWluIFImVyArIFIyIFNRTCBSZWFkKQpucHggd3JhbmdsZXIgcjIgc3FsIHF1ZXJ5ICIkQUNDT1VOVF9JRCJfbXktYnVja2V0IFwKICAiU0VMRUNUICogRlJPTSBkZWZhdWx0Lm15X3RhYmxlIExJTUlUIDEwIiAgICAgICAgICAgICAgICAjIDMuIHF1ZXJ5CmBgYAoKIyMgU1FMIFN1cmZhY2UKClIyIFNRTCBpcyByZWFkLW9ubHkgYW5kIHN1cHBvcnRzIGEgYnJvYWQgYW5hbHl0aWNhbCBTUUwgc3VyZmFjZSAoU0VMRUNULCBKT0lOcywgc3VicXVlcmllcywgQ1RFcywgc2V0IG9wZXJhdGlvbnMsIHdpbmRvdyBmdW5jdGlvbnMsIGFuZCBhZ2dyZWdhdGUvc2NhbGFyL0pTT04gZnVuY3Rpb25zIG92ZXIgY29tcGxleCB0eXBlcykuIEZvciB0aGUgYXV0aG9yaXRhdGl2ZSwgY3VycmVudCBsaXN0IG9mIHN1cHBvcnRlZCBzeW50YXgsIGZ1bmN0aW9ucywgYW5kIGxpbWl0YXRpb25zLCBzZWUgdGhlIFNRTCByZWZlcmVuY2UgYW5kIGxpbWl0YXRpb25zIGRvY3MgbGlua2VkIGFib3ZlLiBbYXBpLm1kXShhcGkubWQpIGhhcyBxdWVyeSB0ZW1wbGF0ZXMuCgojIyBXaGVuIHRvIFVzZQoKKipVc2UgZm9yOioqIFNRTCBhbmFseXRpY3Mgb3ZlciBJY2ViZXJnIChsb2dzLCBCSSwgZnJhdWQsIGFkLWhvYyksIG11bHRpLWNsb3VkIHF1ZXJpZXMgd2l0aG91dCBlZ3Jlc3MsIGRhc2hib2FyZHMgKHF1ZXJ5IGZyb20gYSBXb3JrZXIgdmlhIEhUVFApLgoKKipEb24ndCB1c2UgZm9yOioqIHdyaXRlcyAodXNlIFB5U3BhcmsvUHlJY2ViZXJnKSBvciByZWFsLXRpbWUgT0xUUCAoPDEwMCBtcykuCgojIyBObyBXb3JrZXJzIEJpbmRpbmcKClRoZXJlIGlzIG5vIGBlbnYuUjJfU1FMYCBiaW5kaW5nLiBRdWVyeSBmcm9tIGEgV29ya2VyIHZpYSBgZmV0Y2goKWAgdG8gdGhlIFJFU1QgZW5kcG9pbnQgd2l0aCB0aGUgdG9rZW4gYXMgYSBzZWNyZXQgKHNlZSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kI2Rhc2hib2FyZC13b3JrZXIpKS4KCiMjIFJlYWRpbmcgT3JkZXIKCjEuIFtjb25maWd1cmF0aW9uLm1kXShjb25maWd1cmF0aW9uLm1kKSDigJQgZW5hYmxlIGNhdGFsb2csIHRva2VucywgZW52IHNldHVwCjIuIFthcGkubWRdKGFwaS5tZCkg4oCUIFNRTCBzeW50YXggdGVtcGxhdGVzLCBKT0lOL3dpbmRvdyBleGFtcGxlcywgcmVzcG9uc2UgZm9ybWF0LCBkYXRhIHR5cGVzCjMuIFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIOKAlCBDTEkvUkVTVC9Xb3JrZXIgcXVlcmllcywgdXNlIGNhc2VzLCBwYWdpbmF0aW9uLCBwZXJmb3JtYW5jZQo0LiBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkg4oCUIHdoYXQgd29ya3MgdnMuIG5vdCwgcGVyZm9ybWFuY2UsIHRyb3VibGVzaG9vdGluZwoKIyMgU2VlIEFsc28KCi0gW3IyLWRhdGEtY2F0YWxvZ10oLi4vcjItZGF0YS1jYXRhbG9nLykg4oCUIFB5SWNlYmVyZy9QeVNwYXJrLCB0YWJsZSBtYW5hZ2VtZW50Ci0gW3BpcGVsaW5lc10oLi4vcGlwZWxpbmVzLykg4oCUIHN0cmVhbWluZyBpbmdlc3QgaW50byBxdWVyeWFibGUgdGFibGVzCg==
+# Cloudflare R2 SQL
+
+Serverless, distributed, **read-only** query engine (Apache DataFusion) for Apache Iceberg tables in R2 Data Catalog.
+
+## Documentation
+
+For full function lists, data types, and pricing, **retrieve the live docs** — use the Cloudflare MCP `docs` tool if available, otherwise `webfetch`.
+
+| Topic | URL |
+|-------|-----|
+| Overview / get started | `https://developers.cloudflare.com/r2-sql/get-started/` |
+| Query data | `https://developers.cloudflare.com/r2-sql/query-data/` |
+| SQL reference | `https://developers.cloudflare.com/r2-sql/sql-reference/` |
+| Aggregate functions | `https://developers.cloudflare.com/r2-sql/sql-reference/aggregate-functions/` |
+| Scalar functions | `https://developers.cloudflare.com/r2-sql/sql-reference/scalar-functions/` |
+| Complex types | `https://developers.cloudflare.com/r2-sql/sql-reference/complex-types/` |
+| Limitations & best practices | `https://developers.cloudflare.com/r2-sql/reference/limitations-best-practices/` |
+| Wrangler commands | `https://developers.cloudflare.com/r2-sql/reference/wrangler-commands/` |
+| Pricing | `https://developers.cloudflare.com/r2-sql/platform/pricing/` |
+
+## Connection Values
+
+| Value | Format |
+|-------|--------|
+| REST endpoint | `https://api.sql.cloudflarestorage.com/api/v1/accounts/{ACCOUNT_ID}/r2-sql/query/{BUCKET}` |
+| Wrangler | `npx wrangler r2 sql query "{WAREHOUSE}" "<SQL>"` with `WRANGLER_R2_SQL_AUTH_TOKEN` set |
+| Warehouse | `{ACCOUNT_ID}_{BUCKET}` |
+
+> The REST endpoint is `api.sql.cloudflarestorage.com` — **not** `api.cloudflare.com/.../r2/sql`.
+
+## Quick Start
+
+```bash
+npx wrangler r2 bucket catalog enable my-bucket           # 1. enable catalog
+export WRANGLER_R2_SQL_AUTH_TOKEN=<r2-token>              # 2. auth (Admin R&W + R2 SQL Read)
+npx wrangler r2 sql query "$ACCOUNT_ID"_my-bucket \
+  "SELECT * FROM default.my_table LIMIT 10"                # 3. query
+```
+
+## SQL Surface
+
+R2 SQL is read-only and supports a broad analytical SQL surface (SELECT, JOINs, subqueries, CTEs, set operations, window functions, and aggregate/scalar/JSON functions over complex types). For the authoritative, current list of supported syntax, functions, and limitations, see the SQL reference and limitations docs linked above. [api.md](api.md) has query templates.
+
+## When to Use
+
+**Use for:** SQL analytics over Iceberg (logs, BI, fraud, ad-hoc), multi-cloud queries without egress, dashboards (query from a Worker via HTTP).
+
+**Don't use for:** writes (use PySpark/PyIceberg) or real-time OLTP (<100 ms).
+
+## No Workers Binding
+
+There is no `env.R2_SQL` binding. Query from a Worker via `fetch()` to the REST endpoint with the token as a secret (see [patterns.md](patterns.md#dashboard-worker)).
+
+## Reading Order
+
+1. [configuration.md](configuration.md) — enable catalog, tokens, env setup
+2. [api.md](api.md) — SQL syntax templates, JOIN/window examples, response format, data types
+3. [patterns.md](patterns.md) — CLI/REST/Worker queries, use cases, pagination, performance
+4. [gotchas.md](gotchas.md) — what works vs. not, performance, troubleshooting
+
+## See Also
+
+- [r2-data-catalog](../r2-data-catalog/) — PyIceberg/PySpark, table management
+- [pipelines](../pipelines/) — streaming ingest into queryable tables

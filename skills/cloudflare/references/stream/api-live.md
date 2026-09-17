@@ -1,1 +1,195 @@
-IyBTdHJlYW0gTGl2ZSBTdHJlYW1pbmcgQVBJCgpMaXZlIGlucHV0IGNyZWF0aW9uLCBzdGF0dXMgY2hlY2tpbmcsIHNpbXVsY2FzdCwgYW5kIFdlYlJUQyBzdHJlYW1pbmcuCgojIyBDcmVhdGUgTGl2ZSBJbnB1dAoKIyMjIFVzaW5nIENsb3VkZmxhcmUgU0RLCgpgYGB0eXBlc2NyaXB0CmltcG9ydCBDbG91ZGZsYXJlIGZyb20gJ2Nsb3VkZmxhcmUnOwoKY29uc3QgY2xpZW50ID0gbmV3IENsb3VkZmxhcmUoeyBhcGlUb2tlbjogZW52LkNGX0FQSV9UT0tFTiB9KTsKCmNvbnN0IGxpdmVJbnB1dCA9IGF3YWl0IGNsaWVudC5zdHJlYW0ubGl2ZUlucHV0cy5jcmVhdGUoewogIGFjY291bnRfaWQ6IGVudi5DRl9BQ0NPVU5UX0lELAogIHJlY29yZGluZzogeyBtb2RlOiAnYXV0b21hdGljJywgdGltZW91dFNlY29uZHM6IDMwIH0sCiAgZGVsZXRlUmVjb3JkaW5nQWZ0ZXJEYXlzOiAzMAp9KTsKCi8vIFJldHVybnM6IHsgdWlkLCBydG1wcywgc3J0LCB3ZWJSVEMgfQpgYGAKCiMjIyBSYXcgZmV0Y2ggQVBJCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZ1bmN0aW9uIGNyZWF0ZUxpdmVJbnB1dChhY2NvdW50SWQ6IHN0cmluZywgYXBpVG9rZW46IHN0cmluZykgewogIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goCiAgICBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyR7YWNjb3VudElkfS9zdHJlYW0vbGl2ZV9pbnB1dHNgLAogICAgewogICAgICBtZXRob2Q6ICdQT1NUJywKICAgICAgaGVhZGVyczogeyAnQXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHthcGlUb2tlbn1gLCAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nIH0sCiAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsKICAgICAgICByZWNvcmRpbmc6IHsgbW9kZTogJ2F1dG9tYXRpYycsIHRpbWVvdXRTZWNvbmRzOiAzMCB9LAogICAgICAgIGRlbGV0ZVJlY29yZGluZ0FmdGVyRGF5czogMzAKICAgICAgfSkKICAgIH0KICApOwogIGNvbnN0IHsgcmVzdWx0IH0gPSBhd2FpdCByZXNwb25zZS5qc29uKCk7CiAgcmV0dXJuIHsKICAgIHVpZDogcmVzdWx0LnVpZCwKICAgIHJ0bXBzOiB7IHVybDogcmVzdWx0LnJ0bXBzLnVybCwgc3RyZWFtS2V5OiByZXN1bHQucnRtcHMuc3RyZWFtS2V5IH0sCiAgICBzcnQ6IHsgdXJsOiByZXN1bHQuc3J0LnVybCwgc3RyZWFtSWQ6IHJlc3VsdC5zcnQuc3RyZWFtSWQsIHBhc3NwaHJhc2U6IHJlc3VsdC5zcnQucGFzc3BocmFzZSB9LAogICAgd2ViUlRDOiByZXN1bHQud2ViUlRDCiAgfTsKfQpgYGAKCiMjIENoZWNrIExpdmUgU3RhdHVzCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZ1bmN0aW9uIGdldExpdmVTdGF0dXMoYWNjb3VudElkOiBzdHJpbmcsIGxpdmVJbnB1dElkOiBzdHJpbmcsIGFwaVRva2VuOiBzdHJpbmcpIHsKICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKAogICAgYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8ke2FjY291bnRJZH0vc3RyZWFtL2xpdmVfaW5wdXRzLyR7bGl2ZUlucHV0SWR9YCwKICAgIHsgaGVhZGVyczogeyAnQXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHthcGlUb2tlbn1gIH0gfQogICk7CiAgY29uc3QgeyByZXN1bHQgfSA9IGF3YWl0IHJlc3BvbnNlLmpzb24oKTsKICByZXR1cm4gewogICAgaXNMaXZlOiByZXN1bHQuc3RhdHVzPy5jdXJyZW50Py5zdGF0ZSA9PT0gJ2Nvbm5lY3RlZCcsCiAgICByZWNvcmRpbmc6IHJlc3VsdC5yZWNvcmRpbmcsCiAgICBzdGF0dXM6IHJlc3VsdC5zdGF0dXMKICB9Owp9CmBgYAoKIyMgU2ltdWxjYXN0IChMaXZlIE91dHB1dHMpCgojIyMgQ3JlYXRlIE91dHB1dAoKYGBgdHlwZXNjcmlwdAphc3luYyBmdW5jdGlvbiBjcmVhdGVMaXZlT3V0cHV0KAogIGFjY291bnRJZDogc3RyaW5nLCBsaXZlSW5wdXRJZDogc3RyaW5nLCBhcGlUb2tlbjogc3RyaW5nLAogIG91dHB1dFVybDogc3RyaW5nLCBzdHJlYW1LZXk6IHN0cmluZwopIHsKICByZXR1cm4gZmV0Y2goCiAgICBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyR7YWNjb3VudElkfS9zdHJlYW0vbGl2ZV9pbnB1dHMvJHtsaXZlSW5wdXRJZH0vb3V0cHV0c2AsCiAgICB7CiAgICAgIG1ldGhvZDogJ1BPU1QnLAogICAgICBoZWFkZXJzOiB7ICdBdXRob3JpemF0aW9uJzogYEJlYXJlciAke2FwaVRva2VufWAsICdDb250ZW50LVR5cGUnOiAnYXBwbGljYXRpb24vanNvbicgfSwKICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoewogICAgICAgIHVybDogYCR7b3V0cHV0VXJsfS8ke3N0cmVhbUtleX1gLAogICAgICAgIGVuYWJsZWQ6IHRydWUsCiAgICAgICAgc3RyZWFtS2V5IC8vIEZvciBwbGF0Zm9ybXMgbGlrZSBZb3VUdWJlLCBUd2l0Y2gKICAgICAgfSkKICAgIH0KICApLnRoZW4ociA9PiByLmpzb24oKSk7Cn0KYGBgCgojIyMgRXhhbXBsZTogU2ltdWxjYXN0IHRvIFlvdVR1YmUgKyBUd2l0Y2gKCmBgYHR5cGVzY3JpcHQKY29uc3QgbGl2ZUlucHV0ID0gYXdhaXQgY3JlYXRlTGl2ZUlucHV0KGFjY291bnRJZCwgYXBpVG9rZW4pOwoKLy8gQWRkIFlvdVR1YmUgb3V0cHV0CmF3YWl0IGNyZWF0ZUxpdmVPdXRwdXQoCiAgYWNjb3VudElkLCBsaXZlSW5wdXQudWlkLCBhcGlUb2tlbiwKICAncnRtcDovL2EucnRtcC55b3V0dWJlLmNvbS9saXZlMicsCiAgJ3lvdXIteW91dHViZS1zdHJlYW0ta2V5JwopOwoKLy8gQWRkIFR3aXRjaCBvdXRwdXQKYXdhaXQgY3JlYXRlTGl2ZU91dHB1dCgKICBhY2NvdW50SWQsIGxpdmVJbnB1dC51aWQsIGFwaVRva2VuLAogICdydG1wOi8vbGl2ZS50d2l0Y2gudHYvYXBwJywKICAneW91ci10d2l0Y2gtc3RyZWFtLWtleScKKTsKYGBgCgojIyBXZWJSVEMgU3RyZWFtaW5nIChXSElQL1dIRVApCgojIyMgQnJvd3NlciB0byBTdHJlYW0gKFdISVApCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZ1bmN0aW9uIHN0YXJ0V2ViUlRDQnJvYWRjYXN0KGxpdmVJbnB1dElkOiBzdHJpbmcpIHsKICBjb25zdCBwYyA9IG5ldyBSVENQZWVyQ29ubmVjdGlvbigpOwogIAogIC8vIEFkZCBsb2NhbCBtZWRpYSB0cmFja3MKICBjb25zdCBzdHJlYW0gPSBhd2FpdCBuYXZpZ2F0b3IubWVkaWFEZXZpY2VzLmdldFVzZXJNZWRpYSh7IHZpZGVvOiB0cnVlLCBhdWRpbzogdHJ1ZSB9KTsKICBzdHJlYW0uZ2V0VHJhY2tzKCkuZm9yRWFjaCh0cmFjayA9PiBwYy5hZGRUcmFjayh0cmFjaywgc3RyZWFtKSk7CiAgCiAgLy8gQ3JlYXRlIG9mZmVyCiAgY29uc3Qgb2ZmZXIgPSBhd2FpdCBwYy5jcmVhdGVPZmZlcigpOwogIGF3YWl0IHBjLnNldExvY2FsRGVzY3JpcHRpb24ob2ZmZXIpOwogIAogIC8vIFNlbmQgdG8gU3RyZWFtIHZpYSBXSElQCiAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaCgKICAgIGBodHRwczovL2N1c3RvbWVyLTxDT0RFPi5jbG91ZGZsYXJlc3RyZWFtLmNvbS8ke2xpdmVJbnB1dElkfS93ZWJSVEMvcHVibGlzaGAsCiAgICB7CiAgICAgIG1ldGhvZDogJ1BPU1QnLAogICAgICBoZWFkZXJzOiB7ICdDb250ZW50LVR5cGUnOiAnYXBwbGljYXRpb24vc2RwJyB9LAogICAgICBib2R5OiBvZmZlci5zZHAKICAgIH0KICApOwogIAogIGNvbnN0IGFuc3dlciA9IGF3YWl0IHJlc3BvbnNlLnRleHQoKTsKICBhd2FpdCBwYy5zZXRSZW1vdGVEZXNjcmlwdGlvbih7IHR5cGU6ICdhbnN3ZXInLCBzZHA6IGFuc3dlciB9KTsKfQpgYGAKCiMjIyBTdHJlYW0gdG8gQnJvd3NlciAoV0hFUCkKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gcGxheVdlYlJUQ1N0cmVhbSh2aWRlb0lkOiBzdHJpbmcpIHsKICBjb25zdCBwYyA9IG5ldyBSVENQZWVyQ29ubmVjdGlvbigpOwogIAogIHBjLmFkZFRyYW5zY2VpdmVyKCd2aWRlbycsIHsgZGlyZWN0aW9uOiAncmVjdm9ubHknIH0pOwogIHBjLmFkZFRyYW5zY2VpdmVyKCdhdWRpbycsIHsgZGlyZWN0aW9uOiAncmVjdm9ubHknIH0pOwogIAogIGNvbnN0IG9mZmVyID0gYXdhaXQgcGMuY3JlYXRlT2ZmZXIoKTsKICBhd2FpdCBwYy5zZXRMb2NhbERlc2NyaXB0aW9uKG9mZmVyKTsKICAKICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKAogICAgYGh0dHBzOi8vY3VzdG9tZXItPENPREU+LmNsb3VkZmxhcmVzdHJlYW0uY29tLyR7dmlkZW9JZH0vd2ViUlRDL3BsYXlgLAogICAgewogICAgICBtZXRob2Q6ICdQT1NUJywKICAgICAgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL3NkcCcgfSwKICAgICAgYm9keTogb2ZmZXIuc2RwCiAgICB9CiAgKTsKICAKICBjb25zdCBhbnN3ZXIgPSBhd2FpdCByZXNwb25zZS50ZXh0KCk7CiAgYXdhaXQgcGMuc2V0UmVtb3RlRGVzY3JpcHRpb24oeyB0eXBlOiAnYW5zd2VyJywgc2RwOiBhbnN3ZXIgfSk7CiAgCiAgcmV0dXJuIHBjOwp9CmBgYAoKIyMgUmVjb3JkaW5nIFNldHRpbmdzCgp8IE1vZGUgfCBCZWhhdmlvciB8CnwtLS0tLS18LS0tLS0tLS0tLXwKfCBgYXV0b21hdGljYCB8IFJlY29yZCBhbGwgbGl2ZSBzdHJlYW1zIHwKfCBgb2ZmYCB8IE5vIHJlY29yZGluZyB8CnwgYHRpbWVvdXRTZWNvbmRzYCB8IFN0b3AgcmVjb3JkaW5nIGFmdGVyIE4gc2Vjb25kcyBvZiBpbmFjdGl2aXR5IHwKCmBgYHR5cGVzY3JpcHQKY29uc3QgcmVjb3JkaW5nQ29uZmlnID0gewogIG1vZGU6ICdhdXRvbWF0aWMnLAogIHRpbWVvdXRTZWNvbmRzOiAzMCwgLy8gQXV0by1zdG9wIDMwcyBhZnRlciBzdHJlYW0gZW5kcwogIHJlcXVpcmVTaWduZWRVUkxzOiB0cnVlLCAvLyBSZXF1aXJlIHRva2VuIGZvciBWT0QgcGxheWJhY2sKICBhbGxvd2VkT3JpZ2luczogWydodHRwczovL3lvdXJkb21haW4uY29tJ10KfTsKYGBgCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSBbUkVBRE1FLm1kXSguL1JFQURNRS5tZCkgLSBPdmVydmlldyBhbmQgcXVpY2sgc3RhcnQKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBPbi1kZW1hbmQgdmlkZW8gQVBJcwotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gU2V0dXAgYW5kIGNvbmZpZwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBGdWxsLXN0YWNrIGZsb3dzLCBiZXN0IHByYWN0aWNlcwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gRXJyb3IgY29kZXMsIHRyb3VibGVzaG9vdGluZwoKIyMgU2VlIEFsc28KCi0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIERlcGxveSBsaXZlIEFQSXMgaW4gV29ya2Vycwo=
+# Stream Live Streaming API
+
+Live input creation, status checking, simulcast, and WebRTC streaming.
+
+## Create Live Input
+
+### Using Cloudflare SDK
+
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({ apiToken: env.CF_API_TOKEN });
+
+const liveInput = await client.stream.liveInputs.create({
+  account_id: env.CF_ACCOUNT_ID,
+  recording: { mode: 'automatic', timeoutSeconds: 30 },
+  deleteRecordingAfterDays: 30
+});
+
+// Returns: { uid, rtmps, srt, webRTC }
+```
+
+### Raw fetch API
+
+```typescript
+async function createLiveInput(accountId: string, apiToken: string) {
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/live_inputs`,
+    {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${apiToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        recording: { mode: 'automatic', timeoutSeconds: 30 },
+        deleteRecordingAfterDays: 30
+      })
+    }
+  );
+  const { result } = await response.json();
+  return {
+    uid: result.uid,
+    rtmps: { url: result.rtmps.url, streamKey: result.rtmps.streamKey },
+    srt: { url: result.srt.url, streamId: result.srt.streamId, passphrase: result.srt.passphrase },
+    webRTC: result.webRTC
+  };
+}
+```
+
+## Check Live Status
+
+```typescript
+async function getLiveStatus(accountId: string, liveInputId: string, apiToken: string) {
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/live_inputs/${liveInputId}`,
+    { headers: { 'Authorization': `Bearer ${apiToken}` } }
+  );
+  const { result } = await response.json();
+  return {
+    isLive: result.status?.current?.state === 'connected',
+    recording: result.recording,
+    status: result.status
+  };
+}
+```
+
+## Simulcast (Live Outputs)
+
+### Create Output
+
+```typescript
+async function createLiveOutput(
+  accountId: string, liveInputId: string, apiToken: string,
+  outputUrl: string, streamKey: string
+) {
+  return fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/live_inputs/${liveInputId}/outputs`,
+    {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${apiToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        url: `${outputUrl}/${streamKey}`,
+        enabled: true,
+        streamKey // For platforms like YouTube, Twitch
+      })
+    }
+  ).then(r => r.json());
+}
+```
+
+### Example: Simulcast to YouTube + Twitch
+
+```typescript
+const liveInput = await createLiveInput(accountId, apiToken);
+
+// Add YouTube output
+await createLiveOutput(
+  accountId, liveInput.uid, apiToken,
+  'rtmp://a.rtmp.youtube.com/live2',
+  'your-youtube-stream-key'
+);
+
+// Add Twitch output
+await createLiveOutput(
+  accountId, liveInput.uid, apiToken,
+  'rtmp://live.twitch.tv/app',
+  'your-twitch-stream-key'
+);
+```
+
+## WebRTC Streaming (WHIP/WHEP)
+
+### Browser to Stream (WHIP)
+
+```typescript
+async function startWebRTCBroadcast(liveInputId: string) {
+  const pc = new RTCPeerConnection();
+  
+  // Add local media tracks
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+  stream.getTracks().forEach(track => pc.addTrack(track, stream));
+  
+  // Create offer
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  
+  // Send to Stream via WHIP
+  const response = await fetch(
+    `https://customer-<CODE>.cloudflarestream.com/${liveInputId}/webRTC/publish`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/sdp' },
+      body: offer.sdp
+    }
+  );
+  
+  const answer = await response.text();
+  await pc.setRemoteDescription({ type: 'answer', sdp: answer });
+}
+```
+
+### Stream to Browser (WHEP)
+
+```typescript
+async function playWebRTCStream(videoId: string) {
+  const pc = new RTCPeerConnection();
+  
+  pc.addTransceiver('video', { direction: 'recvonly' });
+  pc.addTransceiver('audio', { direction: 'recvonly' });
+  
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  
+  const response = await fetch(
+    `https://customer-<CODE>.cloudflarestream.com/${videoId}/webRTC/play`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/sdp' },
+      body: offer.sdp
+    }
+  );
+  
+  const answer = await response.text();
+  await pc.setRemoteDescription({ type: 'answer', sdp: answer });
+  
+  return pc;
+}
+```
+
+## Recording Settings
+
+| Mode | Behavior |
+|------|----------|
+| `automatic` | Record all live streams |
+| `off` | No recording |
+| `timeoutSeconds` | Stop recording after N seconds of inactivity |
+
+```typescript
+const recordingConfig = {
+  mode: 'automatic',
+  timeoutSeconds: 30, // Auto-stop 30s after stream ends
+  requireSignedURLs: true, // Require token for VOD playback
+  allowedOrigins: ['https://yourdomain.com']
+};
+```
+
+## In This Reference
+
+- [README.md](./README.md) - Overview and quick start
+- [api.md](./api.md) - On-demand video APIs
+- [configuration.md](./configuration.md) - Setup and config
+- [patterns.md](./patterns.md) - Full-stack flows, best practices
+- [gotchas.md](./gotchas.md) - Error codes, troubleshooting
+
+## See Also
+
+- [workers](../workers/) - Deploy live APIs in Workers

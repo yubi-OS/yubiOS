@@ -1,1 +1,141 @@
-IyBTdHJlYW0gQ29uZmlndXJhdGlvbgoKU2V0dXAsIGVudmlyb25tZW50IHZhcmlhYmxlcywgYW5kIHdyYW5nbGVyIGNvbmZpZ3VyYXRpb24uCgojIyBJbnN0YWxsYXRpb24KCmBgYGJhc2gKIyBPZmZpY2lhbCBDbG91ZGZsYXJlIFNESyAoTm9kZS5qcywgV29ya2VycywgUGFnZXMpCm5wbSBpbnN0YWxsIGNsb3VkZmxhcmUKCiMgUmVhY3QgY29tcG9uZW50IGxpYnJhcnkKbnBtIGluc3RhbGwgQGNsb3VkZmxhcmUvc3RyZWFtLXJlYWN0CgojIFRVUyByZXN1bWFibGUgdXBsb2FkcyAobGFyZ2UgZmlsZXMpCm5wbSBpbnN0YWxsIHR1cy1qcy1jbGllbnQKYGBgCgojIyBFbnZpcm9ubWVudCBWYXJpYWJsZXMKCmBgYGJhc2gKIyBSZXF1aXJlZApDRl9BQ0NPVU5UX0lEPXlvdXItYWNjb3VudC1pZApDRl9BUElfVE9LRU49eW91ci1hcGktdG9rZW4KCiMgRm9yIHNpZ25lZCBVUkxzIChoaWdoIHZvbHVtZSkKU1RSRUFNX0tFWV9JRD15b3VyLWtleS1pZApTVFJFQU1fSldLPWJhc2U2NC1lbmNvZGVkLWp3awoKIyBGb3Igd2ViaG9va3MKV0VCSE9PS19TRUNSRVQ9eW91ci13ZWJob29rLXNlY3JldAoKIyBDdXN0b21lciBzdWJkb21haW4gKGZyb20gZGFzaGJvYXJkKQpTVFJFQU1fQ1VTVE9NRVJfQ09ERT15b3VyLWN1c3RvbWVyLWNvZGUKYGBgCgojIyBXcmFuZ2xlciBDb25maWd1cmF0aW9uCgpgYGBqc29uYwp7CiAgIm5hbWUiOiAic3RyZWFtLXdvcmtlciIsCiAgIm1haW4iOiAic3JjL2luZGV4LnRzIiwKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLCAvLyBVc2UgY3VycmVudCBkYXRlIGZvciBuZXcgcHJvamVjdHMKICAidmFycyI6IHsKICAgICJDRl9BQ0NPVU5UX0lEIjogInlvdXItYWNjb3VudC1pZCIKICB9CiAgLy8gU3RvcmUgc2VjcmV0czogd3JhbmdsZXIgc2VjcmV0IHB1dCBDRl9BUElfVE9LRU4KICAvLyB3cmFuZ2xlciBzZWNyZXQgcHV0IFNUUkVBTV9LRVlfSUQKICAvLyB3cmFuZ2xlciBzZWNyZXQgcHV0IFNUUkVBTV9KV0sKICAvLyB3cmFuZ2xlciBzZWNyZXQgcHV0IFdFQkhPT0tfU0VDUkVUCn0KYGBgCgojIyBTaWduaW5nIEtleXMgKEhpZ2ggVm9sdW1lKQoKQ3JlYXRlIG9uY2UgZm9yIHNlbGYtc2lnbmluZyB0b2tlbnMgKHRob3VzYW5kcyBvZiBkYWlseSB1c2VycykuCgoqKkNyZWF0ZSBrZXkqKgpgYGBiYXNoCmN1cmwgLVggUE9TVCBcCiAgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vc3RyZWFtL2tleXMiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIDxBUElfVE9LRU4+IgoKIyBTYXZlIGBpZGAgYW5kIGBqd2tgIChiYXNlNjQpIGZyb20gcmVzcG9uc2UKYGBgCgoqKlN0b3JlIGluIHNlY3JldHMqKgpgYGBiYXNoCndyYW5nbGVyIHNlY3JldCBwdXQgU1RSRUFNX0tFWV9JRAp3cmFuZ2xlciBzZWNyZXQgcHV0IFNUUkVBTV9KV0sKYGBgCgojIyBXZWJob29rcwoKKipTZXR1cCB3ZWJob29rIFVSTCoqCmBgYGJhc2gKY3VybCAtWCBQVVQgXAogICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L3N0cmVhbS93ZWJob29rIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciA8QVBJX1RPS0VOPiIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCAneyJub3RpZmljYXRpb25VcmwiOiAiaHR0cHM6Ly95b3VyLXdvcmtlci53b3JrZXJzLmRldi93ZWJob29rIn0nCgojIFNhdmUgdGhlIHJldHVybmVkIGBzZWNyZXRgIGZvciBzaWduYXR1cmUgdmVyaWZpY2F0aW9uCmBgYAoKKipTdG9yZSBzZWNyZXQqKgpgYGBiYXNoCndyYW5nbGVyIHNlY3JldCBwdXQgV0VCSE9PS19TRUNSRVQKYGBgCgojIyBEaXJlY3QgVXBsb2FkIC8gTGl2ZSAvIFdhdGVybWFyayBDb25maWcKCmBgYHR5cGVzY3JpcHQKLy8gRGlyZWN0IHVwbG9hZApjb25zdCB1cGxvYWRDb25maWcgPSB7CiAgbWF4RHVyYXRpb25TZWNvbmRzOiAzNjAwLAogIGV4cGlyeTogbmV3IERhdGUoRGF0ZS5ub3coKSArIDM2MDAwMDApLnRvSVNPU3RyaW5nKCksCiAgcmVxdWlyZVNpZ25lZFVSTHM6IHRydWUsCiAgYWxsb3dlZE9yaWdpbnM6IFsnaHR0cHM6Ly95b3VyZG9tYWluLmNvbSddLAogIG1ldGE6IHsgY3JlYXRvcjogJ3VzZXItMTIzJyB9Cn07CgovLyBMaXZlIGlucHV0CmNvbnN0IGxpdmVDb25maWcgPSB7CiAgcmVjb3JkaW5nOiB7IG1vZGU6ICdhdXRvbWF0aWMnLCB0aW1lb3V0U2Vjb25kczogMzAgfSwKICBkZWxldGVSZWNvcmRpbmdBZnRlckRheXM6IDMwCn07CgovLyBXYXRlcm1hcmsKY29uc3Qgd2F0ZXJtYXJrID0gewogIG5hbWU6ICdMb2dvJywgb3BhY2l0eTogMC43LCBwYWRkaW5nOiAyMCwKICBwb3NpdGlvbjogJ2xvd2VyUmlnaHQnLCBzY2FsZTogMC4xNQp9OwpgYGAKCiMjIEFjY2VzcyBSdWxlcyAmIFBsYXllciBDb25maWcKCmBgYHR5cGVzY3JpcHQKLy8gQWNjZXNzIHJ1bGVzOiBhbGxvdyBVUy9DQSwgYmxvY2sgQ04vUlUsIG9yIElQIGFsbG93bGlzdApjb25zdCBnZW9SZXN0cmljdCA9IFsKICB7IHR5cGU6ICdpcC5nZW9pcC5jb3VudHJ5JywgYWN0aW9uOiAnYWxsb3cnLCBjb3VudHJ5OiBbJ1VTJywgJ0NBJ10gfSwKICB7IHR5cGU6ICdhbnknLCBhY3Rpb246ICdibG9jaycgfQpdOwoKLy8gUGxheWVyIHBhcmFtcyBmb3IgaWZyYW1lCmNvbnN0IHBsYXllclBhcmFtcyA9IG5ldyBVUkxTZWFyY2hQYXJhbXMoewogIGF1dG9wbGF5OiAndHJ1ZScsIG11dGVkOiAndHJ1ZScsIHByZWxvYWQ6ICdhdXRvJywgZGVmYXVsdFRleHRUcmFjazogJ2VuJwp9KTsKYGBgCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSBbUkVBRE1FLm1kXSguL1JFQURNRS5tZCkgLSBPdmVydmlldyBhbmQgcXVpY2sgc3RhcnQKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBPbi1kZW1hbmQgdmlkZW8gQVBJcwotIFthcGktbGl2ZS5tZF0oLi9hcGktbGl2ZS5tZCkgLSBMaXZlIHN0cmVhbWluZyBBUElzCi0gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIEZ1bGwtc3RhY2sgZmxvd3MsIGJlc3QgcHJhY3RpY2VzCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBFcnJvciBjb2RlcywgdHJvdWJsZXNob290aW5nCgojIyBTZWUgQWxzbwoKLSBbd3JhbmdsZXJdKC4uL3dyYW5nbGVyLykgLSBXcmFuZ2xlciBDTEkgYW5kIGNvbmZpZ3VyYXRpb24KLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gRGVwbG95IFN0cmVhbSBBUElzIGluIFdvcmtlcnMK
+# Stream Configuration
+
+Setup, environment variables, and wrangler configuration.
+
+## Installation
+
+```bash
+# Official Cloudflare SDK (Node.js, Workers, Pages)
+npm install cloudflare
+
+# React component library
+npm install @cloudflare/stream-react
+
+# TUS resumable uploads (large files)
+npm install tus-js-client
+```
+
+## Environment Variables
+
+```bash
+# Required
+CF_ACCOUNT_ID=your-account-id
+CF_API_TOKEN=your-api-token
+
+# For signed URLs (high volume)
+STREAM_KEY_ID=your-key-id
+STREAM_JWK=base64-encoded-jwk
+
+# For webhooks
+WEBHOOK_SECRET=your-webhook-secret
+
+# Customer subdomain (from dashboard)
+STREAM_CUSTOMER_CODE=your-customer-code
+```
+
+## Wrangler Configuration
+
+```jsonc
+{
+  "name": "stream-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01", // Use current date for new projects
+  "vars": {
+    "CF_ACCOUNT_ID": "your-account-id"
+  }
+  // Store secrets: wrangler secret put CF_API_TOKEN
+  // wrangler secret put STREAM_KEY_ID
+  // wrangler secret put STREAM_JWK
+  // wrangler secret put WEBHOOK_SECRET
+}
+```
+
+## Signing Keys (High Volume)
+
+Create once for self-signing tokens (thousands of daily users).
+
+**Create key**
+```bash
+curl -X POST \
+  "https://api.cloudflare.com/client/v4/accounts/{account_id}/stream/keys" \
+  -H "Authorization: Bearer <API_TOKEN>"
+
+# Save `id` and `jwk` (base64) from response
+```
+
+**Store in secrets**
+```bash
+wrangler secret put STREAM_KEY_ID
+wrangler secret put STREAM_JWK
+```
+
+## Webhooks
+
+**Setup webhook URL**
+```bash
+curl -X PUT \
+  "https://api.cloudflare.com/client/v4/accounts/{account_id}/stream/webhook" \
+  -H "Authorization: Bearer <API_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"notificationUrl": "https://your-worker.workers.dev/webhook"}'
+
+# Save the returned `secret` for signature verification
+```
+
+**Store secret**
+```bash
+wrangler secret put WEBHOOK_SECRET
+```
+
+## Direct Upload / Live / Watermark Config
+
+```typescript
+// Direct upload
+const uploadConfig = {
+  maxDurationSeconds: 3600,
+  expiry: new Date(Date.now() + 3600000).toISOString(),
+  requireSignedURLs: true,
+  allowedOrigins: ['https://yourdomain.com'],
+  meta: { creator: 'user-123' }
+};
+
+// Live input
+const liveConfig = {
+  recording: { mode: 'automatic', timeoutSeconds: 30 },
+  deleteRecordingAfterDays: 30
+};
+
+// Watermark
+const watermark = {
+  name: 'Logo', opacity: 0.7, padding: 20,
+  position: 'lowerRight', scale: 0.15
+};
+```
+
+## Access Rules & Player Config
+
+```typescript
+// Access rules: allow US/CA, block CN/RU, or IP allowlist
+const geoRestrict = [
+  { type: 'ip.geoip.country', action: 'allow', country: ['US', 'CA'] },
+  { type: 'any', action: 'block' }
+];
+
+// Player params for iframe
+const playerParams = new URLSearchParams({
+  autoplay: 'true', muted: 'true', preload: 'auto', defaultTextTrack: 'en'
+});
+```
+
+## In This Reference
+
+- [README.md](./README.md) - Overview and quick start
+- [api.md](./api.md) - On-demand video APIs
+- [api-live.md](./api-live.md) - Live streaming APIs
+- [patterns.md](./patterns.md) - Full-stack flows, best practices
+- [gotchas.md](./gotchas.md) - Error codes, troubleshooting
+
+## See Also
+
+- [wrangler](../wrangler/) - Wrangler CLI and configuration
+- [workers](../workers/) - Deploy Stream APIs in Workers

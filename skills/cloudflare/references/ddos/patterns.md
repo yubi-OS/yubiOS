@@ -1,1 +1,174 @@
-IyBERG9TIFByb3RlY3Rpb24gUGF0dGVybnMKCiMjIEFsbG93bGlzdCBUcnVzdGVkIElQcwoKYGBgdHlwZXNjcmlwdApjb25zdCBjb25maWcgPSB7CiAgZGVzY3JpcHRpb246ICJBbGxvd2xpc3QgdHJ1c3RlZCBJUHMiLAogIHJ1bGVzOiBbewogICAgZXhwcmVzc2lvbjogImlwLnNyYyBpbiB7IDIwMy4wLjExMy4wLzI0IDE5Mi4wLjIuMSB9IiwKICAgIGFjdGlvbjogImV4ZWN1dGUiLAogICAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgICAgaWQ6IG1hbmFnZWRSdWxlc2V0SWQsCiAgICAgIG92ZXJyaWRlczogeyBzZW5zaXRpdml0eV9sZXZlbDogImVvZmYiIH0sCiAgICB9LAogIH1dLAp9OwoKYXdhaXQgY2xpZW50LmFjY291bnRzLnJ1bGVzZXRzLnBoYXNlcy5lbnRyeXBvaW50LnVwZGF0ZSgiZGRvc19sNyIsIHsKICBhY2NvdW50X2lkOiBhY2NvdW50SWQsCiAgLi4uY29uZmlnLAp9KTsKYGBgCgojIyBSb3V0ZS1zcGVjaWZpYyBTZW5zaXRpdml0eQoKYGBgdHlwZXNjcmlwdApjb25zdCBjb25maWcgPSB7CiAgZGVzY3JpcHRpb246ICJSb3V0ZS1zcGVjaWZpYyBwcm90ZWN0aW9uIiwKICBydWxlczogWwogICAgewogICAgICBleHByZXNzaW9uOiAibm90IGh0dHAucmVxdWVzdC51cmkucGF0aCBtYXRjaGVzIFwiXi9hcGkvXCIiLAogICAgICBhY3Rpb246ICJleGVjdXRlIiwKICAgICAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgICAgICBpZDogbWFuYWdlZFJ1bGVzZXRJZCwKICAgICAgICBvdmVycmlkZXM6IHsgc2Vuc2l0aXZpdHlfbGV2ZWw6ICJkZWZhdWx0IiwgYWN0aW9uOiAiYmxvY2siIH0sCiAgICAgIH0sCiAgICB9LAogICAgewogICAgICBleHByZXNzaW9uOiAiaHR0cC5yZXF1ZXN0LnVyaS5wYXRoIG1hdGNoZXMgXCJeL2FwaS9cIiIsCiAgICAgIGFjdGlvbjogImV4ZWN1dGUiLAogICAgICBhY3Rpb25fcGFyYW1ldGVyczogewogICAgICAgIGlkOiBtYW5hZ2VkUnVsZXNldElkLAogICAgICAgIG92ZXJyaWRlczogeyBzZW5zaXRpdml0eV9sZXZlbDogImxvdyIsIGFjdGlvbjogIm1hbmFnZWRfY2hhbGxlbmdlIiB9LAogICAgICB9LAogICAgfSwKICBdLAp9OwpgYGAKCiMjIFByb2dyZXNzaXZlIEVuaGFuY2VtZW50CgpgYGB0eXBlc2NyaXB0CmVudW0gUHJvdGVjdGlvbkxldmVsIHsgTU9OSVRPUklORyA9ICJtb25pdG9yaW5nIiwgTE9XID0gImxvdyIsIE1FRElVTSA9ICJtZWRpdW0iLCBISUdIID0gImhpZ2giIH0KCmNvbnN0IGxldmVsQ29uZmlnID0gewogIFtQcm90ZWN0aW9uTGV2ZWwuTU9OSVRPUklOR106IHsgYWN0aW9uOiAibG9nIiwgc2Vuc2l0aXZpdHk6ICJlb2ZmIiB9LAogIFtQcm90ZWN0aW9uTGV2ZWwuTE9XXTogeyBhY3Rpb246ICJtYW5hZ2VkX2NoYWxsZW5nZSIsIHNlbnNpdGl2aXR5OiAibG93IiB9LAogIFtQcm90ZWN0aW9uTGV2ZWwuTUVESVVNXTogeyBhY3Rpb246ICJtYW5hZ2VkX2NoYWxsZW5nZSIsIHNlbnNpdGl2aXR5OiAibWVkaXVtIiB9LAogIFtQcm90ZWN0aW9uTGV2ZWwuSElHSF06IHsgYWN0aW9uOiAiYmxvY2siLCBzZW5zaXRpdml0eTogImRlZmF1bHQiIH0sCn0gYXMgY29uc3Q7Cgphc3luYyBmdW5jdGlvbiBzZXRQcm90ZWN0aW9uTGV2ZWwoem9uZUlkOiBzdHJpbmcsIGxldmVsOiBQcm90ZWN0aW9uTGV2ZWwsIHJ1bGVzZXRJZDogc3RyaW5nLCBjbGllbnQ6IENsb3VkZmxhcmUpIHsKICBjb25zdCBzZXR0aW5ncyA9IGxldmVsQ29uZmlnW2xldmVsXTsKICByZXR1cm4gY2xpZW50LnpvbmVzLnJ1bGVzZXRzLnBoYXNlcy5lbnRyeXBvaW50LnVwZGF0ZSgiZGRvc19sNyIsIHsKICAgIHpvbmVfaWQ6IHpvbmVJZCwKICAgIHJ1bGVzOiBbewogICAgICBleHByZXNzaW9uOiAidHJ1ZSIsCiAgICAgIGFjdGlvbjogImV4ZWN1dGUiLAogICAgICBhY3Rpb25fcGFyYW1ldGVyczogeyBpZDogcnVsZXNldElkLCBvdmVycmlkZXM6IHsgYWN0aW9uOiBzZXR0aW5ncy5hY3Rpb24sIHNlbnNpdGl2aXR5X2xldmVsOiBzZXR0aW5ncy5zZW5zaXRpdml0eSB9IH0sCiAgICB9XSwKICB9KTsKfQpgYGAKCiMjIER5bmFtaWMgUmVzcG9uc2UgdG8gQXR0YWNrcwoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsgQ0xPVURGTEFSRV9BUElfVE9LRU46IHN0cmluZzsgWk9ORV9JRDogc3RyaW5nOyBLVjogS1ZOYW1lc3BhY2U7IH0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGlmIChyZXF1ZXN0LnVybC5pbmNsdWRlcygiL2F0dGFjay1kZXRlY3RlZCIpKSB7CiAgICAgIGNvbnN0IGF0dGFja0RhdGEgPSBhd2FpdCByZXF1ZXN0Lmpzb24oKTsKICAgICAgYXdhaXQgZW52LktWLnB1dChgYXR0YWNrOiR7RGF0ZS5ub3coKX1gLCBKU09OLnN0cmluZ2lmeShhdHRhY2tEYXRhKSwgeyBleHBpcmF0aW9uVHRsOiA4NjQwMCB9KTsKICAgICAgY29uc3QgcmVjZW50QXR0YWNrcyA9IGF3YWl0IGdldFJlY2VudEF0dGFja3MoZW52LktWKTsKICAgICAgaWYgKHJlY2VudEF0dGFja3MubGVuZ3RoID4gNSkgewogICAgICAgIGF3YWl0IHNldFByb3RlY3Rpb25MZXZlbChlbnYuWk9ORV9JRCwgUHJvdGVjdGlvbkxldmVsLkhJR0gsIG1hbmFnZWRSdWxlc2V0SWQsIGNsaWVudCk7CiAgICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiUHJvdGVjdGlvbiBpbmNyZWFzZWQiKTsKICAgICAgfQogICAgfQogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiT0siKTsKICB9LAogIGFzeW5jIHNjaGVkdWxlZChldmVudDogU2NoZWR1bGVkRXZlbnQsIGVudjogRW52KTogUHJvbWlzZTx2b2lkPiB7CiAgICBjb25zdCByZWNlbnRBdHRhY2tzID0gYXdhaXQgZ2V0UmVjZW50QXR0YWNrcyhlbnYuS1YpOwogICAgaWYgKHJlY2VudEF0dGFja3MubGVuZ3RoID09PSAwKSBhd2FpdCBzZXRQcm90ZWN0aW9uTGV2ZWwoZW52LlpPTkVfSUQsIFByb3RlY3Rpb25MZXZlbC5NRURJVU0sIG1hbmFnZWRSdWxlc2V0SWQsIGNsaWVudCk7CiAgfSwKfTsKYGBgCgojIyBNdWx0aS1ydWxlIFRpZXJlZCBQcm90ZWN0aW9uIChFbnRlcnByaXNlIEFkdmFuY2VkKQoKYGBgdHlwZXNjcmlwdApjb25zdCBjb25maWcgPSB7CiAgZGVzY3JpcHRpb246ICJNdWx0aS10aWVyIEREb1MgcHJvdGVjdGlvbiIsCiAgcnVsZXM6IFsKICAgIHsKICAgICAgZXhwcmVzc2lvbjogIm5vdCBpcC5zcmMgaW4gJGtub3duX2lwcyBhbmQgbm90IGNmLmJvdF9tYW5hZ2VtZW50LnNjb3JlIGd0IDMwIiwKICAgICAgYWN0aW9uOiAiZXhlY3V0ZSIsCiAgICAgIGFjdGlvbl9wYXJhbWV0ZXJzOiB7IGlkOiBtYW5hZ2VkUnVsZXNldElkLCBvdmVycmlkZXM6IHsgc2Vuc2l0aXZpdHlfbGV2ZWw6ICJkZWZhdWx0IiwgYWN0aW9uOiAiYmxvY2siIH0gfSwKICAgIH0sCiAgICB7CiAgICAgIGV4cHJlc3Npb246ICJjZi5ib3RfbWFuYWdlbWVudC52ZXJpZmllZF9ib3QiLAogICAgICBhY3Rpb246ICJleGVjdXRlIiwKICAgICAgYWN0aW9uX3BhcmFtZXRlcnM6IHsgaWQ6IG1hbmFnZWRSdWxlc2V0SWQsIG92ZXJyaWRlczogeyBzZW5zaXRpdml0eV9sZXZlbDogIm1lZGl1bSIsIGFjdGlvbjogIm1hbmFnZWRfY2hhbGxlbmdlIiB9IH0sCiAgICB9LAogICAgewogICAgICBleHByZXNzaW9uOiAiaXAuc3JjIGluICR0cnVzdGVkX2lwcyIsCiAgICAgIGFjdGlvbjogImV4ZWN1dGUiLAogICAgICBhY3Rpb25fcGFyYW1ldGVyczogeyBpZDogbWFuYWdlZFJ1bGVzZXRJZCwgb3ZlcnJpZGVzOiB7IHNlbnNpdGl2aXR5X2xldmVsOiAibG93IiB9IH0sCiAgICB9LAogIF0sCn07CmBgYAoKIyMgRGVmZW5zZSBpbiBEZXB0aAoKTGF5ZXJlZCBzZWN1cml0eSBzdGFjazogRERvUyArIFdBRiArIFJhdGUgTGltaXRpbmcgKyBCb3QgTWFuYWdlbWVudC4KCmBgYHR5cGVzY3JpcHQKLy8gTGF5ZXIgMTogRERvUyAodm9sdW1ldHJpYyBhdHRhY2tzKQphd2FpdCBjbGllbnQuem9uZXMucnVsZXNldHMucGhhc2VzLmVudHJ5cG9pbnQudXBkYXRlKCJkZG9zX2w3IiwgewogIHpvbmVfaWQ6IHpvbmVJZCwKICBydWxlczogW3sgZXhwcmVzc2lvbjogInRydWUiLCBhY3Rpb246ICJleGVjdXRlIiwgYWN0aW9uX3BhcmFtZXRlcnM6IHsgaWQ6IGRkb3NSdWxlc2V0SWQsIG92ZXJyaWRlczogeyBzZW5zaXRpdml0eV9sZXZlbDogIm1lZGl1bSIgfSB9IH1dLAp9KTsKCi8vIExheWVyIDI6IFdBRiAoZXhwbG9pdCBwcm90ZWN0aW9uKQphd2FpdCBjbGllbnQuem9uZXMucnVsZXNldHMucGhhc2VzLmVudHJ5cG9pbnQudXBkYXRlKCJodHRwX3JlcXVlc3RfZmlyZXdhbGxfbWFuYWdlZCIsIHsKICB6b25lX2lkOiB6b25lSWQsCiAgcnVsZXM6IFt7IGV4cHJlc3Npb246ICJ0cnVlIiwgYWN0aW9uOiAiZXhlY3V0ZSIsIGFjdGlvbl9wYXJhbWV0ZXJzOiB7IGlkOiB3YWZSdWxlc2V0SWQgfSB9XSwKfSk7CgovLyBMYXllciAzOiBSYXRlIExpbWl0aW5nIChhYnVzZSBwcmV2ZW50aW9uKQphd2FpdCBjbGllbnQuem9uZXMucnVsZXNldHMucGhhc2VzLmVudHJ5cG9pbnQudXBkYXRlKCJodHRwX3JhdGVsaW1pdCIsIHsKICB6b25lX2lkOiB6b25lSWQsCiAgcnVsZXM6IFt7IGV4cHJlc3Npb246ICJodHRwLnJlcXVlc3QudXJpLnBhdGggZXEgXCIvYXBpL2xvZ2luXCIiLCBhY3Rpb246ICJibG9jayIsIHJhdGVsaW1pdDogeyBjaGFyYWN0ZXJpc3RpY3M6IFsiaXAuc3JjIl0sIHBlcmlvZDogNjAsIHJlcXVlc3RzX3Blcl9wZXJpb2Q6IDUgfSB9XSwKfSk7CgovLyBMYXllciA0OiBCb3QgTWFuYWdlbWVudCAoYXV0b21hdGlvbiBkZXRlY3Rpb24pCmF3YWl0IGNsaWVudC56b25lcy5ydWxlc2V0cy5waGFzZXMuZW50cnlwb2ludC51cGRhdGUoImh0dHBfcmVxdWVzdF9zYmZtIiwgewogIHpvbmVfaWQ6IHpvbmVJZCwKICBydWxlczogW3sgZXhwcmVzc2lvbjogImNmLmJvdF9tYW5hZ2VtZW50LnNjb3JlIGx0IDMwIiwgYWN0aW9uOiAibWFuYWdlZF9jaGFsbGVuZ2UiIH1dLAp9KTsKYGBgCgojIyBDYWNoZSBTdHJhdGVneSBmb3IgRERvUyBNaXRpZ2F0aW9uCgpFeGNsdWRlIHF1ZXJ5IHN0cmluZ3MgZnJvbSBjYWNoZSBrZXkgdG8gY291bnRlciByYW5kb21pemVkIHF1ZXJ5IHBhcmFtZXRlciBhdHRhY2tzLgoKYGBgdHlwZXNjcmlwdApjb25zdCBjYWNoZVJ1bGUgPSB7CiAgZXhwcmVzc2lvbjogImh0dHAucmVxdWVzdC51cmkucGF0aCBtYXRjaGVzIFwiXi9hcGkvXCIiLAogIGFjdGlvbjogInNldF9jYWNoZV9zZXR0aW5ncyIsCiAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgIGNhY2hlOiB0cnVlLAogICAgY2FjaGVfa2V5OiB7IGlnbm9yZV9xdWVyeV9zdHJpbmdzX29yZGVyOiB0cnVlLCBjdXN0b21fa2V5OiB7IHF1ZXJ5X3N0cmluZzogeyBleGNsdWRlOiB7IGFsbDogdHJ1ZSB9IH0gfSB9LAogIH0sCn07Cgphd2FpdCBjbGllbnQuem9uZXMucnVsZXNldHMucGhhc2VzLmVudHJ5cG9pbnQudXBkYXRlKCJodHRwX3JlcXVlc3RfY2FjaGVfc2V0dGluZ3MiLCB7IHpvbmVfaWQ6IHpvbmVJZCwgcnVsZXM6IFtjYWNoZVJ1bGVdIH0pOwpgYGAKCioqUmF0aW9uYWxlKio6IEF0dGFja2VycyByYW5kb21pemUgcXVlcnkgc3RyaW5ncyAoYD9yYW5kb209MTIzNDU2YCkgdG8gYnlwYXNzIGNhY2hlLiBFeGNsdWRpbmcgcXVlcnkgcGFyYW1zIGVuc3VyZXMgY2FjaGUgaGl0cyBhYnNvcmIgYXR0YWNrIHRyYWZmaWMuCgpTZWUgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgZm9yIHJ1bGUgc3RydWN0dXJlIGRldGFpbHMuCg==
+# DDoS Protection Patterns
+
+## Allowlist Trusted IPs
+
+```typescript
+const config = {
+  description: "Allowlist trusted IPs",
+  rules: [{
+    expression: "ip.src in { 203.0.113.0/24 192.0.2.1 }",
+    action: "execute",
+    action_parameters: {
+      id: managedRulesetId,
+      overrides: { sensitivity_level: "eoff" },
+    },
+  }],
+};
+
+await client.accounts.rulesets.phases.entrypoint.update("ddos_l7", {
+  account_id: accountId,
+  ...config,
+});
+```
+
+## Route-specific Sensitivity
+
+```typescript
+const config = {
+  description: "Route-specific protection",
+  rules: [
+    {
+      expression: "not http.request.uri.path matches \"^/api/\"",
+      action: "execute",
+      action_parameters: {
+        id: managedRulesetId,
+        overrides: { sensitivity_level: "default", action: "block" },
+      },
+    },
+    {
+      expression: "http.request.uri.path matches \"^/api/\"",
+      action: "execute",
+      action_parameters: {
+        id: managedRulesetId,
+        overrides: { sensitivity_level: "low", action: "managed_challenge" },
+      },
+    },
+  ],
+};
+```
+
+## Progressive Enhancement
+
+```typescript
+enum ProtectionLevel { MONITORING = "monitoring", LOW = "low", MEDIUM = "medium", HIGH = "high" }
+
+const levelConfig = {
+  [ProtectionLevel.MONITORING]: { action: "log", sensitivity: "eoff" },
+  [ProtectionLevel.LOW]: { action: "managed_challenge", sensitivity: "low" },
+  [ProtectionLevel.MEDIUM]: { action: "managed_challenge", sensitivity: "medium" },
+  [ProtectionLevel.HIGH]: { action: "block", sensitivity: "default" },
+} as const;
+
+async function setProtectionLevel(zoneId: string, level: ProtectionLevel, rulesetId: string, client: Cloudflare) {
+  const settings = levelConfig[level];
+  return client.zones.rulesets.phases.entrypoint.update("ddos_l7", {
+    zone_id: zoneId,
+    rules: [{
+      expression: "true",
+      action: "execute",
+      action_parameters: { id: rulesetId, overrides: { action: settings.action, sensitivity_level: settings.sensitivity } },
+    }],
+  });
+}
+```
+
+## Dynamic Response to Attacks
+
+```typescript
+interface Env { CLOUDFLARE_API_TOKEN: string; ZONE_ID: string; KV: KVNamespace; }
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    if (request.url.includes("/attack-detected")) {
+      const attackData = await request.json();
+      await env.KV.put(`attack:${Date.now()}`, JSON.stringify(attackData), { expirationTtl: 86400 });
+      const recentAttacks = await getRecentAttacks(env.KV);
+      if (recentAttacks.length > 5) {
+        await setProtectionLevel(env.ZONE_ID, ProtectionLevel.HIGH, managedRulesetId, client);
+        return new Response("Protection increased");
+      }
+    }
+    return new Response("OK");
+  },
+  async scheduled(event: ScheduledEvent, env: Env): Promise<void> {
+    const recentAttacks = await getRecentAttacks(env.KV);
+    if (recentAttacks.length === 0) await setProtectionLevel(env.ZONE_ID, ProtectionLevel.MEDIUM, managedRulesetId, client);
+  },
+};
+```
+
+## Multi-rule Tiered Protection (Enterprise Advanced)
+
+```typescript
+const config = {
+  description: "Multi-tier DDoS protection",
+  rules: [
+    {
+      expression: "not ip.src in $known_ips and not cf.bot_management.score gt 30",
+      action: "execute",
+      action_parameters: { id: managedRulesetId, overrides: { sensitivity_level: "default", action: "block" } },
+    },
+    {
+      expression: "cf.bot_management.verified_bot",
+      action: "execute",
+      action_parameters: { id: managedRulesetId, overrides: { sensitivity_level: "medium", action: "managed_challenge" } },
+    },
+    {
+      expression: "ip.src in $trusted_ips",
+      action: "execute",
+      action_parameters: { id: managedRulesetId, overrides: { sensitivity_level: "low" } },
+    },
+  ],
+};
+```
+
+## Defense in Depth
+
+Layered security stack: DDoS + WAF + Rate Limiting + Bot Management.
+
+```typescript
+// Layer 1: DDoS (volumetric attacks)
+await client.zones.rulesets.phases.entrypoint.update("ddos_l7", {
+  zone_id: zoneId,
+  rules: [{ expression: "true", action: "execute", action_parameters: { id: ddosRulesetId, overrides: { sensitivity_level: "medium" } } }],
+});
+
+// Layer 2: WAF (exploit protection)
+await client.zones.rulesets.phases.entrypoint.update("http_request_firewall_managed", {
+  zone_id: zoneId,
+  rules: [{ expression: "true", action: "execute", action_parameters: { id: wafRulesetId } }],
+});
+
+// Layer 3: Rate Limiting (abuse prevention)
+await client.zones.rulesets.phases.entrypoint.update("http_ratelimit", {
+  zone_id: zoneId,
+  rules: [{ expression: "http.request.uri.path eq \"/api/login\"", action: "block", ratelimit: { characteristics: ["ip.src"], period: 60, requests_per_period: 5 } }],
+});
+
+// Layer 4: Bot Management (automation detection)
+await client.zones.rulesets.phases.entrypoint.update("http_request_sbfm", {
+  zone_id: zoneId,
+  rules: [{ expression: "cf.bot_management.score lt 30", action: "managed_challenge" }],
+});
+```
+
+## Cache Strategy for DDoS Mitigation
+
+Exclude query strings from cache key to counter randomized query parameter attacks.
+
+```typescript
+const cacheRule = {
+  expression: "http.request.uri.path matches \"^/api/\"",
+  action: "set_cache_settings",
+  action_parameters: {
+    cache: true,
+    cache_key: { ignore_query_strings_order: true, custom_key: { query_string: { exclude: { all: true } } } },
+  },
+};
+
+await client.zones.rulesets.phases.entrypoint.update("http_request_cache_settings", { zone_id: zoneId, rules: [cacheRule] });
+```
+
+**Rationale**: Attackers randomize query strings (`?random=123456`) to bypass cache. Excluding query params ensures cache hits absorb attack traffic.
+
+See [configuration.md](./configuration.md) for rule structure details.

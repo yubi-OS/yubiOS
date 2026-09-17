@@ -1,1 +1,163 @@
-IyBCb3QgTWFuYWdlbWVudCBDb25maWd1cmF0aW9uCgojIyBQcm9kdWN0IFRpZXJzCgoqKk5vdGU6KiogRGFzaGJvYXJkIHBhdGhzIGRpZmZlciBiZXR3ZWVuIG9sZCBhbmQgbmV3IFVJOgotICoqTmV3OioqIFNlY3VyaXR5ID4gU2V0dGluZ3MgPiBGaWx0ZXIgIkJvdCB0cmFmZmljIgotICoqT2xkOioqIFNlY3VyaXR5ID4gQm90cwoKQm90aCBVSXMgYWNjZXNzIHNhbWUgc2V0dGluZ3MuCgojIyMgQm90IFNjb3JlIEdyb3VwaW5ncyAoUHJvL0J1c2luZXNzKQoKUHJvL0J1c2luZXNzIHVzZXJzIHNlZSBib3Qgc2NvcmUgZ3JvdXBpbmdzIGluc3RlYWQgb2YgZ3JhbnVsYXIgMS05OSBzY29yZXM6Cgp8IFNjb3JlIHwgR3JvdXBpbmcgfCBNZWFuaW5nIHwKfC0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS18CnwgMCB8IE5vdCBjb21wdXRlZCB8IEJvdCBNYW5hZ2VtZW50IGRpZG4ndCBydW4gfAp8IDEgfCBBdXRvbWF0ZWQgfCBEZWZpbml0ZSBib3QgKGhldXJpc3RpYyBtYXRjaCkgfAp8IDItMjkgfCBMaWtlbHkgYXV0b21hdGVkIHwgUHJvYmFibHkgYm90IChNTCBkZXRlY3Rpb24pIHwKfCAzMC05OSB8IExpa2VseSBodW1hbiB8IFByb2JhYmx5IGh1bWFuIHwKfCBOL0EgfCBWZXJpZmllZCBib3QgfCBBbGxvd2xpc3RlZCBnb29kIGJvdCB8CgpFbnRlcnByaXNlIHBsYW5zIGdldCBncmFudWxhciAxLTk5IHNjb3JlcyBmb3IgY3VzdG9tIHRocmVzaG9sZHMuCgojIyMgQm90IEZpZ2h0IE1vZGUgKEZyZWUpCi0gQXV0by1ibG9ja3MgZGVmaW5pdGUgYm90cyAoc2NvcmU9MSksIGV4Y2x1ZGVzIHZlcmlmaWVkIGJvdHMgYnkgZGVmYXVsdAotIEphdmFTY3JpcHQgRGV0ZWN0aW9ucyBhbHdheXMgZW5hYmxlZCwgbm8gY29uZmlndXJhdGlvbiBvcHRpb25zCgojIyMgU3VwZXIgQm90IEZpZ2h0IE1vZGUgKFByby9CdXNpbmVzcykKYGBgdHh0CkRhc2hib2FyZDogU2VjdXJpdHkgPiBCb3RzID4gQ29uZmlndXJlCi0gRGVmaW5pdGVseSBhdXRvbWF0ZWQ6IEJsb2NrL0NoYWxsZW5nZQotIExpa2VseSBhdXRvbWF0ZWQ6IENoYWxsZW5nZS9BbGxvdyAgCi0gVmVyaWZpZWQgYm90czogQWxsb3cgKHJlY29tbWVuZGVkKQotIFN0YXRpYyByZXNvdXJjZSBwcm90ZWN0aW9uOiBPTiAobWF5IGJsb2NrIG1haWwgY2xpZW50cykKLSBKYXZhU2NyaXB0IERldGVjdGlvbnM6IE9wdGlvbmFsCmBgYAoKIyMjIEJvdCBNYW5hZ2VtZW50IGZvciBFbnRlcnByaXNlCmBgYHR4dApEYXNoYm9hcmQ6IFNlY3VyaXR5ID4gQm90cyA+IENvbmZpZ3VyZSA+IEF1dG8tdXBkYXRlczogT04gKHJlY29tbWVuZGVkKQoKIyBUZW1wbGF0ZSAxOiBCbG9jayBkZWZpbml0ZSBib3RzCihjZi5ib3RfbWFuYWdlbWVudC5zY29yZSBlcSAxIGFuZCBub3QgY2YuYm90X21hbmFnZW1lbnQudmVyaWZpZWRfYm90IGFuZCBub3QgY2YuYm90X21hbmFnZW1lbnQuc3RhdGljX3Jlc291cmNlKQpBY3Rpb246IEJsb2NrCgojIFRlbXBsYXRlIDI6IENoYWxsZW5nZSBsaWtlbHkgYm90cwooY2YuYm90X21hbmFnZW1lbnQuc2NvcmUgZ2UgMiBhbmQgY2YuYm90X21hbmFnZW1lbnQuc2NvcmUgbGUgMjkgYW5kIG5vdCBjZi5ib3RfbWFuYWdlbWVudC52ZXJpZmllZF9ib3QgYW5kIG5vdCBjZi5ib3RfbWFuYWdlbWVudC5zdGF0aWNfcmVzb3VyY2UpCkFjdGlvbjogTWFuYWdlZCBDaGFsbGVuZ2UKYGBgCgojIyBKYXZhU2NyaXB0IERldGVjdGlvbnMgU2V0dXAKCiMjIyBFbmFibGUgdmlhIERhc2hib2FyZApgYGB0eHQKU2VjdXJpdHkgPiBCb3RzID4gQ29uZmlndXJlIEJvdCBNYW5hZ2VtZW50ID4gSlMgRGV0ZWN0aW9uczogT04KClVwZGF0ZSBDU1A6IHNjcmlwdC1zcmMgJ3NlbGYnIC9jZG4tY2dpL2NoYWxsZW5nZS1wbGF0Zm9ybS87CmBgYAoKIyMjIE1hbnVhbCBKUyBJbmplY3Rpb24gKEFQSSkKYGBgaHRtbAo8c2NyaXB0PgpmdW5jdGlvbiBqc2RPbmxvYWQoKSB7CiAgd2luZG93LmNsb3VkZmxhcmUuanNkLmV4ZWN1dGVPbmNlKHsgY2FsbGJhY2s6IGZ1bmN0aW9uKHJlc3VsdCkgeyBjb25zb2xlLmxvZygnSlNEOicsIHJlc3VsdCk7IH0gfSk7Cn0KPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSIvY2RuLWNnaS9jaGFsbGVuZ2UtcGxhdGZvcm0vc2NyaXB0cy9qc2QvYXBpLmpzP29ubG9hZD1qc2RPbmxvYWQiIGFzeW5jPjwvc2NyaXB0PgpgYGAKCioqVXNlIEFQSSBmb3IqKjogU2VsZWN0aXZlIGRlcGxveW1lbnQgb24gc3BlY2lmaWMgcGFnZXMgIAoqKkRvbid0IGNvbWJpbmUqKjogWm9uZS13aWRlIHRvZ2dsZSArIG1hbnVhbCBpbmplY3Rpb24KCiMjIyBXQUYgUnVsZXMgZm9yIEpTRApgYGB0eHQKIyBORVZFUiB1c2Ugb24gZmlyc3QgcGFnZSB2aXNpdCAobmVlZHMgSFRNTCBwYWdlIGZpcnN0KQoobm90IGNmLmJvdF9tYW5hZ2VtZW50LmpzX2RldGVjdGlvbi5wYXNzZWQgYW5kIGh0dHAucmVxdWVzdC51cmkucGF0aCBlcSAiL2FwaS91c2VyL2NyZWF0ZSIgYW5kIGh0dHAucmVxdWVzdC5tZXRob2QgZXEgIlBPU1QiIGFuZCBub3QgY2YuYm90X21hbmFnZW1lbnQudmVyaWZpZWRfYm90KQpBY3Rpb246IE1hbmFnZWQgQ2hhbGxlbmdlIChhbHdheXMgdXNlIE1hbmFnZWQgQ2hhbGxlbmdlLCBub3QgQmxvY2spCmBgYAoKIyMjIExpbWl0YXRpb25zCi0gRmlyc3QgcmVxdWVzdCB3b24ndCBoYXZlIEpTRCBkYXRhIChuZWVkcyBIVE1MIHBhZ2UgZmlyc3QpCi0gU3RyaXBzIEVUYWdzIGZyb20gSFRNTCByZXNwb25zZXMKLSBOb3Qgc3VwcG9ydGVkIHdpdGggQ1NQIHZpYSBgPG1ldGE+YCB0YWdzCi0gV2Vic29ja2V0IGVuZHBvaW50cyBub3Qgc3VwcG9ydGVkCi0gTmF0aXZlIG1vYmlsZSBhcHBzIHdvbid0IHBhc3MKLSBjZl9jbGVhcmFuY2UgY29va2llOiAxNS1taW51dGUgbGlmZXNwYW4sIG1heCA0MDk2IGJ5dGVzCgojIyBfX2NmX2JtIENvb2tpZQoKQ2xvdWRmbGFyZSBzZXRzIGBfX2NmX2JtYCBjb29raWUgdG8gc21vb3RoIGJvdCBzY29yZXMgYWNyb3NzIHVzZXIgc2Vzc2lvbnM6CgotICoqUHVycG9zZToqKiBSZWR1Y2VzIGZhbHNlIHBvc2l0aXZlcyBmcm9tIHNjb3JlIHZvbGF0aWxpdHkKLSAqKlNjb3BlOioqIFBlci1kb21haW4sIEhUVFAtb25seQotICoqTGlmZXNwYW46KiogU2Vzc2lvbiBkdXJhdGlvbgotICoqUHJpdmFjeToqKiBObyBQSUnigJRvbmx5IHNlc3Npb24gY2xhc3NpZmljYXRpb24KLSAqKkF1dG9tYXRpYzoqKiBObyBjb25maWd1cmF0aW9uIHJlcXVpcmVkCgpCb3Qgc2NvcmVzIGZvciByZXBlYXQgdmlzaXRvcnMgY29uc2lkZXIgc2Vzc2lvbiBoaXN0b3J5IHZpYSB0aGlzIGNvb2tpZS4KCiMjIFN0YXRpYyBSZXNvdXJjZSBQcm90ZWN0aW9uCgoqKkZpbGUgRXh0ZW5zaW9ucyoqOiBpY28sIGpwZywgcG5nLCBqcGVnLCBnaWYsIGNzcywganMsIHRpZiwgdGlmZiwgYm1wLCBwaWN0LCB3ZWJwLCBzdmcsIHN2Z3osIGNsYXNzLCBqYXIsIHR4dCwgY3N2LCBkb2MsIGRvY3gsIHhscywgeGxzeCwgcGRmLCBwcywgcGxzLCBwcHQsIHBwdHgsIHR0Ziwgb3RmLCB3b2ZmLCB3b2ZmMiwgZW90LCBlcHMsIGVqcywgc3dmLCB0b3JyZW50LCBtaWRpLCBtaWQsIG0zdTgsIG00YSwgbXAzLCBvZ2csIHRzICAKKipQbHVzKio6IGAvLndlbGwta25vd24vYCBwYXRoIChhbGwgZmlsZXMpCgpgYGB0eHQKIyBFeGNsdWRlIHN0YXRpYyByZXNvdXJjZXMgZnJvbSBib3QgcnVsZXMKKGNmLmJvdF9tYW5hZ2VtZW50LnNjb3JlIGx0IDMwIGFuZCBub3QgY2YuYm90X21hbmFnZW1lbnQuc3RhdGljX3Jlc291cmNlKQpgYGAKCioqV0FSTklORyoqOiBNYXkgYmxvY2sgbWFpbCBjbGllbnRzIGZldGNoaW5nIHN0YXRpYyBpbWFnZXMKCiMjIEpBMy9KQTQgRmluZ2VycHJpbnRpbmcgKEVudGVycHJpc2UpCgpgYGB0eHQKIyBCbG9jayBzcGVjaWZpYyBhdHRhY2sgZmluZ2VycHJpbnQKKGNmLmJvdF9tYW5hZ2VtZW50LmphM19oYXNoIGVxICI4YjhlM2Q1ZTNlOGIzZDVlIikKCiMgQWxsb3cgbW9iaWxlIGFwcCBieSBmaW5nZXJwcmludAooY2YuYm90X21hbmFnZW1lbnQuamE0IGVxICJ5b3VyX21vYmlsZV9hcHBfZmluZ2VycHJpbnQiKQpgYGAKCk9ubHkgYXZhaWxhYmxlIGZvciBIVFRQUy9UTFMgdHJhZmZpYy4gTWlzc2luZyBmb3IgV29ya2VyLXJvdXRlZCB0cmFmZmljIG9yIEhUVFAgcmVxdWVzdHMuCgojIyBWZXJpZmllZCBCb3QgQ2F0ZWdvcmllcwoKYGBgdHh0CiMgQWxsb3cgc2VhcmNoIGVuZ2luZXMgb25seQooY2YudmVyaWZpZWRfYm90X2NhdGVnb3J5IGVxICJTZWFyY2ggRW5naW5lIENyYXdsZXIiKQoKIyBCbG9jayBBSSBjcmF3bGVycwooY2YudmVyaWZpZWRfYm90X2NhdGVnb3J5IGVxICJBSSBDcmF3bGVyIikKQWN0aW9uOiBCbG9jawoKIyBPciB1c2UgZGFzaGJvYXJkOiBTZWN1cml0eSA+IFNldHRpbmdzID4gQm90IE1hbmFnZW1lbnQgPiBCbG9jayBBSSBCb3RzCmBgYAoKfCBDYXRlZ29yeSB8IFN0cmluZyBWYWx1ZSB8IEV4YW1wbGUgfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS18CnwgQUkgQ3Jhd2xlciB8IGBBSSBDcmF3bGVyYCB8IEdQVEJvdCwgQ2xhdWRlLVdlYiB8CnwgQUkgQXNzaXN0YW50IHwgYEFJIEFzc2lzdGFudGAgfCBQZXJwbGV4aXR5LVVzZXIsIER1Y2tBc3Npc3RCb3QgfAp8IEFJIFNlYXJjaCB8IGBBSSBTZWFyY2hgIHwgT0FJLVNlYXJjaEJvdCB8CnwgQWNjZXNzaWJpbGl0eSB8IGBBY2Nlc3NpYmlsaXR5YCB8IEFjY2Vzc2libGUgV2ViIEJvdCB8CnwgQWNhZGVtaWMgUmVzZWFyY2ggfCBgQWNhZGVtaWMgUmVzZWFyY2hgIHwgTGlicmFyeSBvZiBDb25ncmVzcyB8CnwgQWR2ZXJ0aXNpbmcgJiBNYXJrZXRpbmcgfCBgQWR2ZXJ0aXNpbmcgJiBNYXJrZXRpbmdgIHwgR29vZ2xlIEFkc2JvdCB8CnwgQWdncmVnYXRvciB8IGBBZ2dyZWdhdG9yYCB8IFBpbnRlcmVzdCwgSW5kZWVkIHwKfCBBcmNoaXZlciB8IGBBcmNoaXZlcmAgfCBJbnRlcm5ldCBBcmNoaXZlLCBDb21tb25DcmF3bCB8CnwgRmVlZCBGZXRjaGVyIHwgYEZlZWQgRmV0Y2hlcmAgfCBSU1MvUG9kY2FzdCB1cGRhdGVycyB8CnwgTW9uaXRvcmluZyAmIEFuYWx5dGljcyB8IGBNb25pdG9yaW5nICYgQW5hbHl0aWNzYCB8IFVwdGltZSBtb25pdG9ycyB8CnwgUGFnZSBQcmV2aWV3IHwgYFBhZ2UgUHJldmlld2AgfCBGYWNlYm9vay9TbGFjayBsaW5rIHByZXZpZXcgfAp8IFNFTyB8IGBTZWFyY2ggRW5naW5lIE9wdGltaXphdGlvbmAgfCBHb29nbGUgTGlnaHRob3VzZSB8CnwgU2VjdXJpdHkgfCBgU2VjdXJpdHlgIHwgVnVsbmVyYWJpbGl0eSBzY2FubmVycyB8CnwgU29jaWFsIE1lZGlhIE1hcmtldGluZyB8IGBTb2NpYWwgTWVkaWEgTWFya2V0aW5nYCB8IEJyYW5kd2F0Y2ggfAp8IFdlYmhvb2tzIHwgYFdlYmhvb2tzYCB8IFBheW1lbnQgcHJvY2Vzc29ycyB8CnwgT3RoZXIgfCBgT3RoZXJgIHwgVW5jYXRlZ29yaXplZCBib3RzIHwKCiMjIEJlc3QgUHJhY3RpY2VzCgotICoqTUwgQXV0by1VcGRhdGVzKio6IEVuYWJsZSBvbiBFbnRlcnByaXNlIGZvciBsYXRlc3QgbW9kZWxzCi0gKipTdGFydCB3aXRoIE1hbmFnZWQgQ2hhbGxlbmdlKio6IFRlc3QgYmVmb3JlIGJsb2NraW5nCi0gKipBbHdheXMgZXhjbHVkZSB2ZXJpZmllZCBib3RzKio6IFVzZSBgbm90IGNmLmJvdF9tYW5hZ2VtZW50LnZlcmlmaWVkX2JvdGAKLSAqKkV4ZW1wdCBjb3Jwb3JhdGUgcHJveGllcyoqOiBGb3IgQjJCIHRyYWZmaWMgdmlhIGBjZi5ib3RfbWFuYWdlbWVudC5jb3Jwb3JhdGVfcHJveHlgCi0gKipVc2Ugc3RhdGljIHJlc291cmNlIGV4Y2VwdGlvbioqOiBJbXByb3ZlcyBwZXJmb3JtYW5jZSwgcmVkdWNlcyBvdmVyaGVhZAo=
+# Bot Management Configuration
+
+## Product Tiers
+
+**Note:** Dashboard paths differ between old and new UI:
+- **New:** Security > Settings > Filter "Bot traffic"
+- **Old:** Security > Bots
+
+Both UIs access same settings.
+
+### Bot Score Groupings (Pro/Business)
+
+Pro/Business users see bot score groupings instead of granular 1-99 scores:
+
+| Score | Grouping | Meaning |
+|-------|----------|---------|
+| 0 | Not computed | Bot Management didn't run |
+| 1 | Automated | Definite bot (heuristic match) |
+| 2-29 | Likely automated | Probably bot (ML detection) |
+| 30-99 | Likely human | Probably human |
+| N/A | Verified bot | Allowlisted good bot |
+
+Enterprise plans get granular 1-99 scores for custom thresholds.
+
+### Bot Fight Mode (Free)
+- Auto-blocks definite bots (score=1), excludes verified bots by default
+- JavaScript Detections always enabled, no configuration options
+
+### Super Bot Fight Mode (Pro/Business)
+```txt
+Dashboard: Security > Bots > Configure
+- Definitely automated: Block/Challenge
+- Likely automated: Challenge/Allow  
+- Verified bots: Allow (recommended)
+- Static resource protection: ON (may block mail clients)
+- JavaScript Detections: Optional
+```
+
+### Bot Management for Enterprise
+```txt
+Dashboard: Security > Bots > Configure > Auto-updates: ON (recommended)
+
+# Template 1: Block definite bots
+(cf.bot_management.score eq 1 and not cf.bot_management.verified_bot and not cf.bot_management.static_resource)
+Action: Block
+
+# Template 2: Challenge likely bots
+(cf.bot_management.score ge 2 and cf.bot_management.score le 29 and not cf.bot_management.verified_bot and not cf.bot_management.static_resource)
+Action: Managed Challenge
+```
+
+## JavaScript Detections Setup
+
+### Enable via Dashboard
+```txt
+Security > Bots > Configure Bot Management > JS Detections: ON
+
+Update CSP: script-src 'self' /cdn-cgi/challenge-platform/;
+```
+
+### Manual JS Injection (API)
+```html
+<script>
+function jsdOnload() {
+  window.cloudflare.jsd.executeOnce({ callback: function(result) { console.log('JSD:', result); } });
+}
+</script>
+<script src="/cdn-cgi/challenge-platform/scripts/jsd/api.js?onload=jsdOnload" async></script>
+```
+
+**Use API for**: Selective deployment on specific pages  
+**Don't combine**: Zone-wide toggle + manual injection
+
+### WAF Rules for JSD
+```txt
+# NEVER use on first page visit (needs HTML page first)
+(not cf.bot_management.js_detection.passed and http.request.uri.path eq "/api/user/create" and http.request.method eq "POST" and not cf.bot_management.verified_bot)
+Action: Managed Challenge (always use Managed Challenge, not Block)
+```
+
+### Limitations
+- First request won't have JSD data (needs HTML page first)
+- Strips ETags from HTML responses
+- Not supported with CSP via `<meta>` tags
+- Websocket endpoints not supported
+- Native mobile apps won't pass
+- cf_clearance cookie: 15-minute lifespan, max 4096 bytes
+
+## __cf_bm Cookie
+
+Cloudflare sets `__cf_bm` cookie to smooth bot scores across user sessions:
+
+- **Purpose:** Reduces false positives from score volatility
+- **Scope:** Per-domain, HTTP-only
+- **Lifespan:** Session duration
+- **Privacy:** No PII—only session classification
+- **Automatic:** No configuration required
+
+Bot scores for repeat visitors consider session history via this cookie.
+
+## Static Resource Protection
+
+**File Extensions**: ico, jpg, png, jpeg, gif, css, js, tif, tiff, bmp, pict, webp, svg, svgz, class, jar, txt, csv, doc, docx, xls, xlsx, pdf, ps, pls, ppt, pptx, ttf, otf, woff, woff2, eot, eps, ejs, swf, torrent, midi, mid, m3u8, m4a, mp3, ogg, ts  
+**Plus**: `/.well-known/` path (all files)
+
+```txt
+# Exclude static resources from bot rules
+(cf.bot_management.score lt 30 and not cf.bot_management.static_resource)
+```
+
+**WARNING**: May block mail clients fetching static images
+
+## JA3/JA4 Fingerprinting (Enterprise)
+
+```txt
+# Block specific attack fingerprint
+(cf.bot_management.ja3_hash eq "8b8e3d5e3e8b3d5e")
+
+# Allow mobile app by fingerprint
+(cf.bot_management.ja4 eq "your_mobile_app_fingerprint")
+```
+
+Only available for HTTPS/TLS traffic. Missing for Worker-routed traffic or HTTP requests.
+
+## Verified Bot Categories
+
+```txt
+# Allow search engines only
+(cf.verified_bot_category eq "Search Engine Crawler")
+
+# Block AI crawlers
+(cf.verified_bot_category eq "AI Crawler")
+Action: Block
+
+# Or use dashboard: Security > Settings > Bot Management > Block AI Bots
+```
+
+| Category | String Value | Example |
+|----------|--------------|---------|
+| AI Crawler | `AI Crawler` | GPTBot, Claude-Web |
+| AI Assistant | `AI Assistant` | Perplexity-User, DuckAssistBot |
+| AI Search | `AI Search` | OAI-SearchBot |
+| Accessibility | `Accessibility` | Accessible Web Bot |
+| Academic Research | `Academic Research` | Library of Congress |
+| Advertising & Marketing | `Advertising & Marketing` | Google Adsbot |
+| Aggregator | `Aggregator` | Pinterest, Indeed |
+| Archiver | `Archiver` | Internet Archive, CommonCrawl |
+| Feed Fetcher | `Feed Fetcher` | RSS/Podcast updaters |
+| Monitoring & Analytics | `Monitoring & Analytics` | Uptime monitors |
+| Page Preview | `Page Preview` | Facebook/Slack link preview |
+| SEO | `Search Engine Optimization` | Google Lighthouse |
+| Security | `Security` | Vulnerability scanners |
+| Social Media Marketing | `Social Media Marketing` | Brandwatch |
+| Webhooks | `Webhooks` | Payment processors |
+| Other | `Other` | Uncategorized bots |
+
+## Best Practices
+
+- **ML Auto-Updates**: Enable on Enterprise for latest models
+- **Start with Managed Challenge**: Test before blocking
+- **Always exclude verified bots**: Use `not cf.bot_management.verified_bot`
+- **Exempt corporate proxies**: For B2B traffic via `cf.bot_management.corporate_proxy`
+- **Use static resource exception**: Improves performance, reduces overhead

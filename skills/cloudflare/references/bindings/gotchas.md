@@ -1,1 +1,208 @@
-IyBCaW5kaW5nIEdvdGNoYXMgYW5kIFRyb3VibGVzaG9vdGluZwoKIyMgQ3JpdGljYWw6IEdsb2JhbCBTY29wZSBNdXRhdGlvbgoKIyMjIOKdjCBUSEUgIzEgR09UQ0hBOiBDYWNoaW5nIGVudiBpbiBHbG9iYWwgU2NvcGUKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIERBTkdFUk9VUyAtIGVudiBjYWNoZWQgYXQgZGVwbG95IHRpbWUKY29uc3QgYXBpS2V5ID0gZW52LkFQSV9LRVk7ICAvLyBFUlJPUjogZW52IG5vdCBhdmFpbGFibGUgaW4gZ2xvYmFsIHNjb3BlCgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpIHsKICAgIC8vIFVzZXMgdW5kZWZpbmVkIG9yIHN0YWxlIHZhbHVlIQogIH0KfQpgYGAKCioqV2h5IGl0IGJyZWFrczoqKgotIGBlbnZgIG5vdCBhdmFpbGFibGUgaW4gZ2xvYmFsIHNjb3BlCi0gSWYgdXNpbmcgd29ya2Fyb3VuZHMsIHNlY3JldHMgbWF5IG5vdCB1cGRhdGUgd2l0aG91dCByZWRlcGxveW1lbnQKLSBMZWFkcyB0byAiQ2Fubm90IHJlYWQgcHJvcGVydHkgJ1gnIG9mIHVuZGVmaW5lZCIgZXJyb3JzCgoqKuKchSBBbHdheXMgYWNjZXNzIGVudiBwZXItcmVxdWVzdDoqKgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudikgewogICAgY29uc3QgYXBpS2V5ID0gZW52LkFQSV9LRVk7ICAvLyBGcmVzaCBldmVyeSByZXF1ZXN0CiAgfQp9CmBgYAoKIyMgQ29tbW9uIEVycm9ycwoKIyMjICJlbnYuTVlfS1YgaXMgdW5kZWZpbmVkIgoKKipDYXVzZToqKiBOYW1lIG1pc21hdGNoIG9yIG5vdCBjb25maWd1cmVkICAKKipTb2x1dGlvbjoqKiBDaGVjayB3cmFuZ2xlci5qc29uYyAoY2FzZS1zZW5zaXRpdmUpLCBydW4gYG5weCB3cmFuZ2xlciB0eXBlc2AsIHZlcmlmeSBgbnB4IHdyYW5nbGVyIGt2IG5hbWVzcGFjZSBsaXN0YAoKIyMjICJQcm9wZXJ0eSAnTVlfS1YnIGRvZXMgbm90IGV4aXN0IG9uIHR5cGUgJ0VudiciCgoqKkNhdXNlOioqIFR5cGVzIG5vdCBnZW5lcmF0ZWQgIAoqKlNvbHV0aW9uOioqIGBucHggd3JhbmdsZXIgdHlwZXNgCgojIyMgInByZXZpZXdfaWQgaXMgcmVxdWlyZWQgZm9yIC0tcmVtb3RlIgoKKipDYXVzZToqKiBNaXNzaW5nIHByZXZpZXcgYmluZGluZyAgCioqU29sdXRpb246KiogQWRkIGAicHJldmlld19pZCI6ICJkZXYtaWQiYCBvciB1c2UgYG5weCB3cmFuZ2xlciBkZXZgIChsb2NhbCBtb2RlKQoKIyMjICJTZWNyZXQgdXBkYXRlZCBidXQgV29ya2VyIHN0aWxsIHVzZXMgb2xkIHZhbHVlIgoKKipDYXVzZToqKiBDYWNoZWQgaW4gZ2xvYmFsIHNjb3BlIG9yIG5vdCByZWRlcGxveWVkICAKKipTb2x1dGlvbjoqKiBBdm9pZCBnbG9iYWwgY2FjaGluZywgcmVkZXBsb3kgYWZ0ZXIgc2VjcmV0IGNoYW5nZQoKIyMjICJLViBnZXQoKSByZXR1cm5zIG51bGwgZm9yIGV4aXN0aW5nIGtleSIKCioqQ2F1c2U6KiogRXZlbnR1YWwgY29uc2lzdGVuY3kgKDYwcyksIHdyb25nIG5hbWVzcGFjZSwgd3JvbmcgZW52aXJvbm1lbnQgIAoqKlNvbHV0aW9uOioqCmBgYGJhc2gKIyBDaGVjayBrZXkgZXhpc3RzCm5weCB3cmFuZ2xlciBrdiBrZXkgZ2V0IC0tYmluZGluZz1NWV9LViAieW91ci1rZXkiCgojIFZlcmlmeSBuYW1lc3BhY2UgSUQKbnB4IHdyYW5nbGVyIGt2IG5hbWVzcGFjZSBsaXN0CgojIENoZWNrIGVudmlyb25tZW50Cm5weCB3cmFuZ2xlciBkZXBsb3ltZW50cyBsaXN0CmBgYAoKIyMjICJEMSBkYXRhYmFzZSBub3QgZm91bmQiCgoqKlNvbHV0aW9uOioqIGBucHggd3JhbmdsZXIgZDEgbGlzdGAsIHZlcmlmeSBJRCBpbiB3cmFuZ2xlci5qc29uYwoKIyMjICJTZXJ2aWNlIGJpbmRpbmcgcmV0dXJucyAnTm8gc3VjaCBzZXJ2aWNlJyIKCioqQ2F1c2U6KiogVGFyZ2V0IFdvcmtlciBub3QgZGVwbG95ZWQsIG5hbWUgbWlzbWF0Y2gsIGVudmlyb25tZW50IG1pc21hdGNoICAKKipTb2x1dGlvbjoqKgpgYGBiYXNoCiMgTGlzdCBkZXBsb3llZCBXb3JrZXJzCm5weCB3cmFuZ2xlciBkZXBsb3ltZW50cyBsaXN0IC0tbmFtZT10YXJnZXQtd29ya2VyCgojIENoZWNrIHNlcnZpY2UgYmluZGluZyBjb25maWcKY2F0IHdyYW5nbGVyLmpzb25jIHwgZ3JlcCAtQTIgc2VydmljZXMKCiMgRGVwbG95IHRhcmdldCBmaXJzdApjZCAuLi90YXJnZXQtd29ya2VyICYmIG5weCB3cmFuZ2xlciBkZXBsb3kKYGBgCgojIyMgIlJhdGUgbGltaXQgZXhjZWVkZWQiIG9uIEtWIHdyaXRlcwoKKipDYXVzZToqKiA+MSB3cml0ZS9zZWNvbmQgcGVyIGtleSAgCioqU29sdXRpb246KiogVXNlIGRpZmZlcmVudCBrZXlzLCBEdXJhYmxlIE9iamVjdHMsIG9yIFF1ZXVlcwoKIyMgVHlwZSBTYWZldHkgR290Y2hhcwoKIyMjIE1pc3NpbmcgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcwoKKipFcnJvcjoqKiBgQ2Fubm90IGZpbmQgbmFtZSAnUmVxdWVzdCdgICAKKipTb2x1dGlvbjoqKiBgbnBtIGluc3RhbGwgLUQgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AsIGFkZCB0byB0c2NvbmZpZy5qc29uIGAidHlwZXMiYAoKIyMjIEJpbmRpbmcgVHlwZSBNaXNtYXRjaGVzCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBXcm9uZyAtIEtWIHJldHVybnMgc3RyaW5nIHwgbnVsbApjb25zdCB2YWx1ZTogc3RyaW5nID0gYXdhaXQgZW52Lk1ZX0tWLmdldCgna2V5Jyk7CgovLyDinIUgSGFuZGxlIG51bGwKY29uc3QgdmFsdWUgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0KCdrZXknKTsKaWYgKCF2YWx1ZSkgcmV0dXJuIG5ldyBSZXNwb25zZSgnTm90IGZvdW5kJywgeyBzdGF0dXM6IDQwNCB9KTsKYGBgCgojIyBFbnZpcm9ubWVudCBHb3RjaGFzCgojIyMgV3JvbmcgRW52aXJvbm1lbnQgRGVwbG95ZWQKCioqU29sdXRpb246KiogQ2hlY2sgYG5weCB3cmFuZ2xlciBkZXBsb3ltZW50cyBsaXN0YCwgdXNlIGAtLWVudmAgZmxhZwoKIyMjIFNlY3JldHMgTm90IFBlci1FbnZpcm9ubWVudAoKKipTb2x1dGlvbjoqKiBTZXQgcGVyIGVudmlyb25tZW50OiBgbnB4IHdyYW5nbGVyIHNlY3JldCBwdXQgQVBJX0tFWSAtLWVudiBzdGFnaW5nYAoKIyMgRGV2ZWxvcG1lbnQgR290Y2hhcwoKKip3cmFuZ2xlciBkZXYgdnMgZGVwbG95OioqCi0gZGV2OiBVc2VzIGBwcmV2aWV3X2lkYCBvciBsb2NhbCBiaW5kaW5ncywgc2VjcmV0cyBub3QgYXZhaWxhYmxlCi0gZGVwbG95OiBVc2VzIHByb2R1Y3Rpb24gYGlkYCwgc2VjcmV0cyBhdmFpbGFibGUKCioqQWNjZXNzIHNlY3JldHMgaW4gZGV2OioqIGBucHggd3JhbmdsZXIgZGV2IC0tcmVtb3RlYCAgCioqUGVyc2lzdCBsb2NhbCBkYXRhOioqIGBucHggd3JhbmdsZXIgZGV2IC0tcGVyc2lzdGAKCiMjIFBlcmZvcm1hbmNlIEdvdGNoYXMKCiMjIyBTZXF1ZW50aWFsIEJpbmRpbmcgQ2FsbHMKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFNsb3cKY29uc3QgdXNlciA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCcuLi4nKS5maXJzdCgpOwpjb25zdCBjb25maWcgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0KCdjb25maWcnKTsKCi8vIOKchSBQYXJhbGxlbApjb25zdCBbdXNlciwgY29uZmlnXSA9IGF3YWl0IFByb21pc2UuYWxsKFsKICBlbnYuREIucHJlcGFyZSgnLi4uJykuZmlyc3QoKSwKICBlbnYuTVlfS1YuZ2V0KCdjb25maWcnKQpdKTsKYGBgCgojIyBTZWN1cml0eSBHb3RjaGFzCgoqKuKdjCBTZWNyZXRzIGluIGxvZ3M6KiogYGNvbnNvbGUubG9nKCdLZXk6JywgZW52LkFQSV9LRVkpYCAtIHZpc2libGUgaW4gZGFzaGJvYXJkICAKKirinIUqKiBgY29uc29sZS5sb2coJ0tleTonLCBlbnYuQVBJX0tFWSA/ICcqKionIDogJ21pc3NpbmcnKWAKCioq4p2MIEV4cG9zaW5nIGVudjoqKiBgcmV0dXJuIFJlc3BvbnNlLmpzb24oZW52KWAgLSBleHBvc2VzIGFsbCBiaW5kaW5ncyAgCioq4pyFKiogTmV2ZXIgcmV0dXJuIGVudiBvYmplY3QgaW4gcmVzcG9uc2VzCgojIyBMaW1pdHMgUmVmZXJlbmNlCgp8IFJlc291cmNlIHwgTGltaXQgfCBJbXBhY3QgfCBQbGFuIHwKfC0tLS0tLS0tLS18LS0tLS0tLXwtLS0tLS0tLXwtLS0tLS18CnwgKipCaW5kaW5ncyBwZXIgV29ya2VyKiogfCA2NCB0b3RhbCB8IEFsbCBiaW5kaW5nIHR5cGVzIGNvbWJpbmVkIHwgQWxsIHwKfCAqKkVudmlyb25tZW50IHZhcmlhYmxlcyoqIHwgNjQgbWF4LCA1S0IgZWFjaCB8IFBlciBXb3JrZXIgfCBBbGwgfAp8ICoqU2VjcmV0IHNpemUqKiB8IDFLQiB8IFBlciBzZWNyZXQgfCBBbGwgfAp8ICoqS1Yga2V5IHNpemUqKiB8IDUxMiBieXRlcyB8IFVURi04IGVuY29kZWQgfCBBbGwgfAp8ICoqS1YgdmFsdWUgc2l6ZSoqIHwgMjUgTUIgfCBQZXIgdmFsdWUgfCBBbGwgfAp8ICoqS1Ygd3JpdGVzIHBlciBrZXkqKiB8IDEvc2Vjb25kIHwgUGVyIGtleTsgZXhjZWVkaW5nID0gNDI5IGVycm9yIHwgQWxsIHwKfCAqKktWIGxpc3QoKSByZXN1bHRzKiogfCAxMDAwIGtleXMgfCBQZXIgY2FsbDsgdXNlIGN1cnNvciBmb3IgbW9yZSB8IEFsbCB8CnwgKipLViBvcGVyYXRpb25zKiogfCAxMDAwIHJlYWRzL2RheSB8IEZyZWUgdGllciBvbmx5IHwgRnJlZSB8CnwgKipSMiBvYmplY3Qgc2l6ZSoqIHwgNSBUQiB8IFBlciBvYmplY3QgfCBBbGwgfAp8ICoqUjIgb3BlcmF0aW9ucyoqIHwgMU0gQ2xhc3MgQS9tb250aCBmcmVlIHwgV3JpdGVzIHwgQWxsIHwKfCAqKkQxIGRhdGFiYXNlIHNpemUqKiB8IDEwIEdCIHwgUGVyIGRhdGFiYXNlIHwgQWxsIHwKfCAqKkQxIHJvd3MgcGVyIHF1ZXJ5KiogfCAxMDAsMDAwIHwgUmVzdWx0IHNldCBsaW1pdCB8IEFsbCB8CnwgKipEMSBkYXRhYmFzZXMqKiB8IDEwIHwgRnJlZSB0aWVyIHwgRnJlZSB8CnwgKipRdWV1ZSBiYXRjaCBzaXplKiogfCAxMDAgbWVzc2FnZXMgfCBQZXIgY29uc3VtZXIgYmF0Y2ggfCBBbGwgfAp8ICoqUXVldWUgbWVzc2FnZSBzaXplKiogfCAxMjggS0IgfCBQZXIgbWVzc2FnZSB8IEFsbCB8CnwgKipTZXJ2aWNlIGJpbmRpbmcgY2FsbHMqKiB8IFVubGltaXRlZCB8IENvdW50cyB0b3dhcmQgQ1BVIHRpbWUgfCBBbGwgfAp8ICoqRHVyYWJsZSBPYmplY3RzKiogfCAxTSByZXF1ZXN0cy9tb250aCBmcmVlIHwgRmlyc3QgMU0gfCBGcmVlIHwKCiMjIERlYnVnZ2luZyBUaXBzCgpgYGBiYXNoCiMgQ2hlY2sgY29uZmlndXJhdGlvbgpucHggd3JhbmdsZXIgZGVwbG95IC0tZHJ5LXJ1biAgICAgICAjIFZhbGlkYXRlIGNvbmZpZyB3aXRob3V0IGRlcGxveWluZwpucHggd3JhbmdsZXIga3YgbmFtZXNwYWNlIGxpc3QgICAgICAjIExpc3QgS1YgbmFtZXNwYWNlcwpucHggd3JhbmdsZXIgc2VjcmV0IGxpc3QgICAgICAgICAgICAjIExpc3Qgc2VjcmV0cyAobm90IHZhbHVlcykKbnB4IHdyYW5nbGVyIGRlcGxveW1lbnRzIGxpc3QgICAgICAgIyBSZWNlbnQgZGVwbG95bWVudHMKCiMgSW5zcGVjdCBiaW5kaW5ncwpucHggd3JhbmdsZXIga3Yga2V5IGxpc3QgLS1iaW5kaW5nPU1ZX0tWCm5weCB3cmFuZ2xlciBrdiBrZXkgZ2V0IC0tYmluZGluZz1NWV9LViAia2V5LW5hbWUiCm5weCB3cmFuZ2xlciByMiBvYmplY3QgZ2V0IG15LWJ1Y2tldC9maWxlLnR4dApucHggd3JhbmdsZXIgZDEgZXhlY3V0ZSBteS1kYiAtLWNvbW1hbmQ9IlNFTEVDVCAqIEZST00gc3FsaXRlX21hc3RlciIKCiMgVGVzdCBsb2NhbGx5Cm5weCB3cmFuZ2xlciBkZXYgICAgICAgICAgICAgICAgICAjIExvY2FsIG1vZGUKbnB4IHdyYW5nbGVyIGRldiAtLXJlbW90ZSAgICAgICAgICMgUHJvZHVjdGlvbiBiaW5kaW5ncwpucHggd3JhbmdsZXIgZGV2IC0tcGVyc2lzdCAgICAgICAgIyBQZXJzaXN0IGRhdGEgYWNyb3NzIHJlc3RhcnRzCgojIFZlcmlmeSB0eXBlcwpucHggd3JhbmdsZXIgdHlwZXMKY2F0IC53cmFuZ2xlci90eXBlcy9ydW50aW1lLmQudHMgfCBncmVwICJpbnRlcmZhY2UgRW52IgoKIyBEZWJ1ZyBzcGVjaWZpYyBiaW5kaW5nIGlzc3VlcwpucHggd3JhbmdsZXIgdGFpbCAgICAgICAgICAgICAgICAgIyBTdHJlYW0gbG9ncyBpbiByZWFsLXRpbWUKbnB4IHdyYW5nbGVyIHRhaWwgLS1mb3JtYXQ9cHJldHR5ICMgRm9ybWF0dGVkIGxvZ3MKYGBgCgojIyBTZWUgQWxzbwoKLSBbV29ya2VycyBMaW1pdHNdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzL3BsYXRmb3JtL2xpbWl0cy8pCi0gW1dyYW5nbGVyIENvbW1hbmRzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy93cmFuZ2xlci9jb21tYW5kcy8pCg==
+# Binding Gotchas and Troubleshooting
+
+## Critical: Global Scope Mutation
+
+### ❌ THE #1 GOTCHA: Caching env in Global Scope
+
+```typescript
+// ❌ DANGEROUS - env cached at deploy time
+const apiKey = env.API_KEY;  // ERROR: env not available in global scope
+
+export default {
+  async fetch(request: Request, env: Env) {
+    // Uses undefined or stale value!
+  }
+}
+```
+
+**Why it breaks:**
+- `env` not available in global scope
+- If using workarounds, secrets may not update without redeployment
+- Leads to "Cannot read property 'X' of undefined" errors
+
+**✅ Always access env per-request:**
+```typescript
+export default {
+  async fetch(request: Request, env: Env) {
+    const apiKey = env.API_KEY;  // Fresh every request
+  }
+}
+```
+
+## Common Errors
+
+### "env.MY_KV is undefined"
+
+**Cause:** Name mismatch or not configured  
+**Solution:** Check wrangler.jsonc (case-sensitive), run `npx wrangler types`, verify `npx wrangler kv namespace list`
+
+### "Property 'MY_KV' does not exist on type 'Env'"
+
+**Cause:** Types not generated  
+**Solution:** `npx wrangler types`
+
+### "preview_id is required for --remote"
+
+**Cause:** Missing preview binding  
+**Solution:** Add `"preview_id": "dev-id"` or use `npx wrangler dev` (local mode)
+
+### "Secret updated but Worker still uses old value"
+
+**Cause:** Cached in global scope or not redeployed  
+**Solution:** Avoid global caching, redeploy after secret change
+
+### "KV get() returns null for existing key"
+
+**Cause:** Eventual consistency (60s), wrong namespace, wrong environment  
+**Solution:**
+```bash
+# Check key exists
+npx wrangler kv key get --binding=MY_KV "your-key"
+
+# Verify namespace ID
+npx wrangler kv namespace list
+
+# Check environment
+npx wrangler deployments list
+```
+
+### "D1 database not found"
+
+**Solution:** `npx wrangler d1 list`, verify ID in wrangler.jsonc
+
+### "Service binding returns 'No such service'"
+
+**Cause:** Target Worker not deployed, name mismatch, environment mismatch  
+**Solution:**
+```bash
+# List deployed Workers
+npx wrangler deployments list --name=target-worker
+
+# Check service binding config
+cat wrangler.jsonc | grep -A2 services
+
+# Deploy target first
+cd ../target-worker && npx wrangler deploy
+```
+
+### "Rate limit exceeded" on KV writes
+
+**Cause:** >1 write/second per key  
+**Solution:** Use different keys, Durable Objects, or Queues
+
+## Type Safety Gotchas
+
+### Missing @cloudflare/workers-types
+
+**Error:** `Cannot find name 'Request'`  
+**Solution:** `npm install -D @cloudflare/workers-types`, add to tsconfig.json `"types"`
+
+### Binding Type Mismatches
+
+```typescript
+// ❌ Wrong - KV returns string | null
+const value: string = await env.MY_KV.get('key');
+
+// ✅ Handle null
+const value = await env.MY_KV.get('key');
+if (!value) return new Response('Not found', { status: 404 });
+```
+
+## Environment Gotchas
+
+### Wrong Environment Deployed
+
+**Solution:** Check `npx wrangler deployments list`, use `--env` flag
+
+### Secrets Not Per-Environment
+
+**Solution:** Set per environment: `npx wrangler secret put API_KEY --env staging`
+
+## Development Gotchas
+
+**wrangler dev vs deploy:**
+- dev: Uses `preview_id` or local bindings, secrets not available
+- deploy: Uses production `id`, secrets available
+
+**Access secrets in dev:** `npx wrangler dev --remote`  
+**Persist local data:** `npx wrangler dev --persist`
+
+## Performance Gotchas
+
+### Sequential Binding Calls
+
+```typescript
+// ❌ Slow
+const user = await env.DB.prepare('...').first();
+const config = await env.MY_KV.get('config');
+
+// ✅ Parallel
+const [user, config] = await Promise.all([
+  env.DB.prepare('...').first(),
+  env.MY_KV.get('config')
+]);
+```
+
+## Security Gotchas
+
+**❌ Secrets in logs:** `console.log('Key:', env.API_KEY)` - visible in dashboard  
+**✅** `console.log('Key:', env.API_KEY ? '***' : 'missing')`
+
+**❌ Exposing env:** `return Response.json(env)` - exposes all bindings  
+**✅** Never return env object in responses
+
+## Limits Reference
+
+| Resource | Limit | Impact | Plan |
+|----------|-------|--------|------|
+| **Bindings per Worker** | 64 total | All binding types combined | All |
+| **Environment variables** | 64 max, 5KB each | Per Worker | All |
+| **Secret size** | 1KB | Per secret | All |
+| **KV key size** | 512 bytes | UTF-8 encoded | All |
+| **KV value size** | 25 MB | Per value | All |
+| **KV writes per key** | 1/second | Per key; exceeding = 429 error | All |
+| **KV list() results** | 1000 keys | Per call; use cursor for more | All |
+| **KV operations** | 1000 reads/day | Free tier only | Free |
+| **R2 object size** | 5 TB | Per object | All |
+| **R2 operations** | 1M Class A/month free | Writes | All |
+| **D1 database size** | 10 GB | Per database | All |
+| **D1 rows per query** | 100,000 | Result set limit | All |
+| **D1 databases** | 10 | Free tier | Free |
+| **Queue batch size** | 100 messages | Per consumer batch | All |
+| **Queue message size** | 128 KB | Per message | All |
+| **Service binding calls** | Unlimited | Counts toward CPU time | All |
+| **Durable Objects** | 1M requests/month free | First 1M | Free |
+
+## Debugging Tips
+
+```bash
+# Check configuration
+npx wrangler deploy --dry-run       # Validate config without deploying
+npx wrangler kv namespace list      # List KV namespaces
+npx wrangler secret list            # List secrets (not values)
+npx wrangler deployments list       # Recent deployments
+
+# Inspect bindings
+npx wrangler kv key list --binding=MY_KV
+npx wrangler kv key get --binding=MY_KV "key-name"
+npx wrangler r2 object get my-bucket/file.txt
+npx wrangler d1 execute my-db --command="SELECT * FROM sqlite_master"
+
+# Test locally
+npx wrangler dev                  # Local mode
+npx wrangler dev --remote         # Production bindings
+npx wrangler dev --persist        # Persist data across restarts
+
+# Verify types
+npx wrangler types
+cat .wrangler/types/runtime.d.ts | grep "interface Env"
+
+# Debug specific binding issues
+npx wrangler tail                 # Stream logs in real-time
+npx wrangler tail --format=pretty # Formatted logs
+```
+
+## See Also
+
+- [Workers Limits](https://developers.cloudflare.com/workers/platform/limits/)
+- [Wrangler Commands](https://developers.cloudflare.com/workers/wrangler/commands/)

@@ -1,1 +1,105 @@
-IyBPYnNlcnZhYmlsaXR5IFBhdHRlcm5zCgojIyBVc2FnZS1CYXNlZCBCaWxsaW5nCgpgYGB0eXBlc2NyaXB0CmVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoewogIGJsb2JzOiBbY3VzdG9tZXJJZCwgcmVxdWVzdC51cmwsIHJlcXVlc3QubWV0aG9kXSwKICBkb3VibGVzOiBbMV0sIC8vIHJlcXVlc3RfY291bnQKICBpbmRleGVzOiBbY3VzdG9tZXJJZF0KfSk7CmBgYAoKYGBgc3FsClNFTEVDVCBibG9iMSBBUyBjdXN0b21lcl9pZCwgU1VNKF9zYW1wbGVfaW50ZXJ2YWwgKiBkb3VibGUxKSBBUyB0b3RhbF9jYWxscwpGUk9NIGFwaV91c2FnZSBXSEVSRSB0aW1lc3RhbXAgPj0gREFURV9UUlVOQygnbW9udGgnLCBOT1coKSkKR1JPVVAgQlkgY3VzdG9tZXJfaWQKYGBgCgojIyBQZXJmb3JtYW5jZSBNb25pdG9yaW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHN0YXJ0ID0gRGF0ZS5ub3coKTsKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaCh1cmwpOwplbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICBibG9iczogW3VybCwgcmVzcG9uc2Uuc3RhdHVzLnRvU3RyaW5nKCldLAogIGRvdWJsZXM6IFtEYXRlLm5vdygpIC0gc3RhcnQsIHJlc3BvbnNlLnN0YXR1c10KfSk7CmBgYAoKYGBgc3FsClNFTEVDVCBibG9iMSBBUyB1cmwsIEFWRyhkb3VibGUxKSBBUyBhdmdfbXMsIHBlcmNlbnRpbGUoZG91YmxlMSwgMC45NSkgQVMgcDk1X21zCkZST00gZmV0Y2hfbWV0cmljcyBXSEVSRSB0aW1lc3RhbXAgPj0gTk9XKCkgLSBJTlRFUlZBTCAnMScgSE9VUgpHUk9VUCBCWSB1cmwKYGBgCgojIyBFcnJvciBUcmFja2luZwoKYGBgdHlwZXNjcmlwdAplbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICBibG9iczogW2Vycm9yLm5hbWUsIHJlcXVlc3QudXJsLCByZXF1ZXN0Lm1ldGhvZF0sCiAgZG91YmxlczogWzFdLAogIGluZGV4ZXM6IFtlcnJvci5uYW1lXQp9KTsKYGBgCgojIyBNdWx0aS1UZW5hbnQgVHJhY2tpbmcKCmBgYHR5cGVzY3JpcHQKZW52LkFOQUxZVElDUy53cml0ZURhdGFQb2ludCh7CiAgaW5kZXhlczogW3RlbmFudElkXSwgLy8gZWZmaWNpZW50IGZpbHRlcmluZwogIGJsb2JzOiBbdGVuYW50SWQsIHVybC5wYXRobmFtZSwgbWV0aG9kLCBzdGF0dXNdLAogIGRvdWJsZXM6IFsxLCBkdXJhdGlvbiwgYnl0ZXNTaXplXQp9KTsKYGBgCgojIyBUYWlsIFdvcmtlciBMb2cgRmlsdGVyaW5nCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyB0YWlsKGV2ZW50cywgZW52LCBjdHgpIHsKICAgIGNvbnN0IGNyaXRpY2FsID0gZXZlbnRzLmZpbHRlcihlID0+IAogICAgICBlLmV4Y2VwdGlvbnMubGVuZ3RoID4gMCB8fCBlLmV2ZW50LndhbGxUaW1lID4gMTAwMDAwMAogICAgKTsKICAgIGlmIChjcml0aWNhbC5sZW5ndGggPT09IDApIHJldHVybjsKICAgIAogICAgY3R4LndhaXRVbnRpbCgKICAgICAgZmV0Y2goJ2h0dHBzOi8vbG9nZ2luZy5leGFtcGxlLmNvbS9pbmdlc3QnLCB7CiAgICAgICAgbWV0aG9kOiAnUE9TVCcsCiAgICAgICAgaGVhZGVyczogeyAnQXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHtlbnYuQVBJX0tFWX1gIH0sCiAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoY3JpdGljYWwubWFwKGUgPT4gKHsKICAgICAgICAgIG91dGNvbWU6IGUuZXZlbnQub3V0Y29tZSwKICAgICAgICAgIGNwdV9tczogZS5ldmVudC5jcHVUaW1lIC8gMTAwMCwKICAgICAgICAgIGVycm9yczogZS5leGNlcHRpb25zCiAgICAgICAgfSkpKQogICAgICB9KQogICAgKTsKICB9Cn07CmBgYAoKIyMgT3BlblRlbGVtZXRyeSBFeHBvcnQKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgewogICAgY29uc3Qgb3RlbFNwYW5zID0gZXZlbnRzLm1hcChlID0+ICh7CiAgICAgIHRyYWNlSWQ6IGdlbmVyYXRlSWQoMzIpLAogICAgICBzcGFuSWQ6IGdlbmVyYXRlSWQoMTYpLAogICAgICBuYW1lOiBlLnNjcmlwdE5hbWUgfHwgJ3dvcmtlci5yZXF1ZXN0JywKICAgICAgYXR0cmlidXRlczogWwogICAgICAgIHsga2V5OiAnd29ya2VyLm91dGNvbWUnLCB2YWx1ZTogeyBzdHJpbmdWYWx1ZTogZS5ldmVudC5vdXRjb21lIH0gfSwKICAgICAgICB7IGtleTogJ3dvcmtlci5jcHVfdGltZV91cycsIHZhbHVlOiB7IGludFZhbHVlOiBTdHJpbmcoZS5ldmVudC5jcHVUaW1lKSB9IH0KICAgICAgXQogICAgfSkpOwogICAgCiAgICBjdHgud2FpdFVudGlsKAogICAgICBmZXRjaCgnaHR0cHM6Ly9hcGkuaG9uZXljb21iLmlvL3YxL3RyYWNlcycsIHsKICAgICAgICBtZXRob2Q6ICdQT1NUJywKICAgICAgICBoZWFkZXJzOiB7ICdYLUhvbmV5Y29tYi1UZWFtJzogZW52LkhPTkVZQ09NQl9LRVkgfSwKICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IHJlc291cmNlU3BhbnM6IFt7IHNjb3BlU3BhbnM6IFt7IHNwYW5zOiBvdGVsU3BhbnMgfV0gfV0gfSkKICAgICAgfSkKICAgICk7CiAgfQp9OwpgYGAK
+# Observability Patterns
+
+## Usage-Based Billing
+
+```typescript
+env.ANALYTICS.writeDataPoint({
+  blobs: [customerId, request.url, request.method],
+  doubles: [1], // request_count
+  indexes: [customerId]
+});
+```
+
+```sql
+SELECT blob1 AS customer_id, SUM(_sample_interval * double1) AS total_calls
+FROM api_usage WHERE timestamp >= DATE_TRUNC('month', NOW())
+GROUP BY customer_id
+```
+
+## Performance Monitoring
+
+```typescript
+const start = Date.now();
+const response = await fetch(url);
+env.ANALYTICS.writeDataPoint({
+  blobs: [url, response.status.toString()],
+  doubles: [Date.now() - start, response.status]
+});
+```
+
+```sql
+SELECT blob1 AS url, AVG(double1) AS avg_ms, percentile(double1, 0.95) AS p95_ms
+FROM fetch_metrics WHERE timestamp >= NOW() - INTERVAL '1' HOUR
+GROUP BY url
+```
+
+## Error Tracking
+
+```typescript
+env.ANALYTICS.writeDataPoint({
+  blobs: [error.name, request.url, request.method],
+  doubles: [1],
+  indexes: [error.name]
+});
+```
+
+## Multi-Tenant Tracking
+
+```typescript
+env.ANALYTICS.writeDataPoint({
+  indexes: [tenantId], // efficient filtering
+  blobs: [tenantId, url.pathname, method, status],
+  doubles: [1, duration, bytesSize]
+});
+```
+
+## Tail Worker Log Filtering
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    const critical = events.filter(e => 
+      e.exceptions.length > 0 || e.event.wallTime > 1000000
+    );
+    if (critical.length === 0) return;
+    
+    ctx.waitUntil(
+      fetch('https://logging.example.com/ingest', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${env.API_KEY}` },
+        body: JSON.stringify(critical.map(e => ({
+          outcome: e.event.outcome,
+          cpu_ms: e.event.cpuTime / 1000,
+          errors: e.exceptions
+        })))
+      })
+    );
+  }
+};
+```
+
+## OpenTelemetry Export
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    const otelSpans = events.map(e => ({
+      traceId: generateId(32),
+      spanId: generateId(16),
+      name: e.scriptName || 'worker.request',
+      attributes: [
+        { key: 'worker.outcome', value: { stringValue: e.event.outcome } },
+        { key: 'worker.cpu_time_us', value: { intValue: String(e.event.cpuTime) } }
+      ]
+    }));
+    
+    ctx.waitUntil(
+      fetch('https://api.honeycomb.io/v1/traces', {
+        method: 'POST',
+        headers: { 'X-Honeycomb-Team': env.HONEYCOMB_KEY },
+        body: JSON.stringify({ resourceSpans: [{ scopeSpans: [{ spans: otelSpans }] }] })
+      })
+    );
+  }
+};
+```

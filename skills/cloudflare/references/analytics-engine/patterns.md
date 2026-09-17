@@ -1,1 +1,83 @@
-IyBBbmFseXRpY3MgRW5naW5lIFBhdHRlcm5zCgojIyBVc2UgQ2FzZXMKCnwgVXNlIENhc2UgfCBLZXkgTWV0cmljcyB8IEluZGV4IE9uIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IEFQSSBNZXRlcmluZyB8IHJlcXVlc3RzLCBieXRlcywgY29tcHV0ZV91bml0cyB8IGFwaV9rZXkgfAp8IEZlYXR1cmUgVXNhZ2UgfCBmZWF0dXJlLCBhY3Rpb24sIGR1cmF0aW9uIHwgdXNlcl9pZCB8CnwgRXJyb3IgVHJhY2tpbmcgfCBlcnJvcl90eXBlLCBlbmRwb2ludCwgY291bnQgfCBjdXN0b21lcl9pZCB8CnwgUGVyZm9ybWFuY2UgfCBsYXRlbmN5X21zLCBjYWNoZV9zdGF0dXMgfCBlbmRwb2ludCB8CnwgQS9CIFRlc3RpbmcgfCB2YXJpYW50LCBjb252ZXJzaW9ucyB8IHVzZXJfaWQgfAoKIyMgQVBJIE1ldGVyaW5nIChCaWxsaW5nKQoKYGBgdHlwZXNjcmlwdAplbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICBibG9iczogW3BhdGhuYW1lLCBtZXRob2QsIHN0YXR1cywgdGllcl0sCiAgZG91YmxlczogWzEsIGNvbXB1dGVVbml0cywgYnl0ZXMsIGxhdGVuY3lNc10sCiAgaW5kZXhlczogW2FwaUtleV0KfSk7CgovLyBRdWVyeTogTW9udGhseSB1c2FnZSBieSBjdXN0b21lcgovLyBTRUxFQ1QgaW5kZXgxIEFTIGFwaV9rZXksIFNVTShkb3VibGUyKSBBUyBjb21wdXRlX3VuaXRzCi8vIEZST00gdXNhZ2UgV0hFUkUgdGltZXN0YW1wID49IERBVEVfVFJVTkMoJ21vbnRoJywgTk9XKCkpIEdST1VQIEJZIGluZGV4MQpgYGAKCiMjIEVycm9yIFRyYWNraW5nCgpgYGB0eXBlc2NyaXB0CmVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoewogIGJsb2JzOiBbZW5kcG9pbnQsIG1ldGhvZCwgZXJyb3JOYW1lLCBlcnJvck1lc3NhZ2Uuc2xpY2UoMCwgMTAwMCldLAogIGRvdWJsZXM6IFsxLCB0aW1lVG9FcnJvck1zXSwKICBpbmRleGVzOiBbY3VzdG9tZXJJZF0KfSk7CmBgYAoKIyMgUGVyZm9ybWFuY2UgTW9uaXRvcmluZwoKYGBgdHlwZXNjcmlwdAplbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICBibG9iczogW3BhdGhuYW1lLCBtZXRob2QsIGNhY2hlU3RhdHVzLCBzdGF0dXNdLAogIGRvdWJsZXM6IFtsYXRlbmN5TXMsIDFdLAogIGluZGV4ZXM6IFt1c2VySWRdCn0pOwoKLy8gUXVlcnk6IFA5NSBsYXRlbmN5IGJ5IGVuZHBvaW50Ci8vIFNFTEVDVCBibG9iMSwgcXVhbnRpbGUoMC45NSkoZG91YmxlMSkgQVMgcDk1X21zIEZST00gcGVyZiBHUk9VUCBCWSBibG9iMQpgYGAKCiMjIEFudGktUGF0dGVybnMKCnwg4p2MIFdyb25nIHwg4pyFIENvcnJlY3QgfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS0tLXwKfCBgYXdhaXQgd3JpdGVEYXRhUG9pbnQoKWAgfCBgd3JpdGVEYXRhUG9pbnQoKWAgKGZpcmUtYW5kLWZvcmdldCkgfAp8IGBpbmRleGVzOiBbbWV0aG9kXWAgKGxvdyBjYXJkaW5hbGl0eSkgfCBgYmxvYnM6IFttZXRob2RdYCwgYGluZGV4ZXM6IFt1c2VySWRdYCB8CnwgYGJsb2JzOiBbSlNPTi5zdHJpbmdpZnkob2JqKV1gIHwgU3RvcmUgSUQgaW4gYmxvYiwgZnVsbCBvYmplY3QgaW4gRDEvS1YgfAp8IFdyaXRlIGV2ZXJ5IHJlcXVlc3QgYXQgMTBNL21pbiB8IFByZS1hZ2dyZWdhdGUgcGVyIHNlY29uZCB8CnwgUXVlcnkgZnJvbSBXb3JrZXIgfCBRdWVyeSBmcm9tIGV4dGVybmFsIHNlcnZpY2UvQVBJIHwKCiMjIEJlc3QgUHJhY3RpY2VzCgoxLiAqKkRlc2lnbiBzY2hlbWEgdXBmcm9udCoqIC0gRG9jdW1lbnQgYmxvYi9kb3VibGUvaW5kZXggYXNzaWdubWVudHMKMi4gKipBbHdheXMgaW5jbHVkZSBjb3VudCBtZXRyaWMqKiAtIGBkb3VibGVzOiBbbGF0ZW5jeSwgMV1gIGZvciBBVkcgY2FsY3VsYXRpb25zCjMuICoqVXNlIGVudW1zIGZvciBibG9icyoqIC0gQ29uc2lzdGVudCB2YWx1ZXMgbGlrZSBgU3RhdHVzLlNVQ0NFU1NgCjQuICoqSGFuZGxlIHNhbXBsaW5nKiogLSBVc2UgcmF0aW9zIChhdmdfbGF0ZW5jeSA9IFNVTShsYXRlbmN5KS9TVU0oY291bnQpKQo1LiAqKlRlc3QgcXVlcmllcyBlYXJseSoqIC0gVmFsaWRhdGUgc2NoZW1hIGJlZm9yZSBoZWF2eSB3cml0ZXMKCiMjIFNjaGVtYSBUZW1wbGF0ZQoKYGBgdHlwZXNjcmlwdAovKioKICogRGF0YXNldDogbXlfbWV0cmljcwogKiAKICogQmxvYnM6CiAqICAgYmxvYjE6IGVuZHBvaW50LCBibG9iMjogbWV0aG9kLCBibG9iMzogc3RhdHVzCiAqIAogKiBEb3VibGVzOgogKiAgIGRvdWJsZTE6IGxhdGVuY3lfbXMsIGRvdWJsZTI6IGNvdW50IChhbHdheXMgMSkKICogCiAqIEluZGV4ZXM6CiAqICAgaW5kZXgxOiBjdXN0b21lcl9pZCAoaGlnaCBjYXJkaW5hbGl0eSkKICovCmBgYAo=
+# Analytics Engine Patterns
+
+## Use Cases
+
+| Use Case | Key Metrics | Index On |
+|----------|-------------|----------|
+| API Metering | requests, bytes, compute_units | api_key |
+| Feature Usage | feature, action, duration | user_id |
+| Error Tracking | error_type, endpoint, count | customer_id |
+| Performance | latency_ms, cache_status | endpoint |
+| A/B Testing | variant, conversions | user_id |
+
+## API Metering (Billing)
+
+```typescript
+env.ANALYTICS.writeDataPoint({
+  blobs: [pathname, method, status, tier],
+  doubles: [1, computeUnits, bytes, latencyMs],
+  indexes: [apiKey]
+});
+
+// Query: Monthly usage by customer
+// SELECT index1 AS api_key, SUM(double2) AS compute_units
+// FROM usage WHERE timestamp >= DATE_TRUNC('month', NOW()) GROUP BY index1
+```
+
+## Error Tracking
+
+```typescript
+env.ANALYTICS.writeDataPoint({
+  blobs: [endpoint, method, errorName, errorMessage.slice(0, 1000)],
+  doubles: [1, timeToErrorMs],
+  indexes: [customerId]
+});
+```
+
+## Performance Monitoring
+
+```typescript
+env.ANALYTICS.writeDataPoint({
+  blobs: [pathname, method, cacheStatus, status],
+  doubles: [latencyMs, 1],
+  indexes: [userId]
+});
+
+// Query: P95 latency by endpoint
+// SELECT blob1, quantile(0.95)(double1) AS p95_ms FROM perf GROUP BY blob1
+```
+
+## Anti-Patterns
+
+| ❌ Wrong | ✅ Correct |
+|----------|-----------|
+| `await writeDataPoint()` | `writeDataPoint()` (fire-and-forget) |
+| `indexes: [method]` (low cardinality) | `blobs: [method]`, `indexes: [userId]` |
+| `blobs: [JSON.stringify(obj)]` | Store ID in blob, full object in D1/KV |
+| Write every request at 10M/min | Pre-aggregate per second |
+| Query from Worker | Query from external service/API |
+
+## Best Practices
+
+1. **Design schema upfront** - Document blob/double/index assignments
+2. **Always include count metric** - `doubles: [latency, 1]` for AVG calculations
+3. **Use enums for blobs** - Consistent values like `Status.SUCCESS`
+4. **Handle sampling** - Use ratios (avg_latency = SUM(latency)/SUM(count))
+5. **Test queries early** - Validate schema before heavy writes
+
+## Schema Template
+
+```typescript
+/**
+ * Dataset: my_metrics
+ * 
+ * Blobs:
+ *   blob1: endpoint, blob2: method, blob3: status
+ * 
+ * Doubles:
+ *   double1: latency_ms, double2: count (always 1)
+ * 
+ * Indexes:
+ *   index1: customer_id (high cardinality)
+ */
+```

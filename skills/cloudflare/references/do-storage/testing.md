@@ -1,1 +1,183 @@
-IyBETyBTdG9yYWdlIFRlc3RpbmcKClRlc3RpbmcgRHVyYWJsZSBPYmplY3RzIHdpdGggc3RvcmFnZSB1c2luZyBgdml0ZXN0LXBvb2wtd29ya2Vyc2AuCgojIyBTZXR1cAoKKip2aXRlc3QuY29uZmlnLnRzOioqCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgZGVmaW5lV29ya2Vyc0NvbmZpZyB9IGZyb20gIkBjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnMvY29uZmlnIjsKCmV4cG9ydCBkZWZhdWx0IGRlZmluZVdvcmtlcnNDb25maWcoewogIHRlc3Q6IHsKICAgIHBvb2xPcHRpb25zOiB7CiAgICAgIHdvcmtlcnM6IHsgd3JhbmdsZXI6IHsgY29uZmlnUGF0aDogIi4vd3JhbmdsZXIudG9tbCIgfSB9CiAgICB9CiAgfQp9KTsKYGBgCgoqKnBhY2thZ2UuanNvbjoqKiBBZGQgYEBjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnNgIGFuZCBgdml0ZXN0YCB0byBkZXZEZXBlbmRlbmNpZXMKCiMjIEJhc2ljIFRlc3RpbmcKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgZW52LCBydW5JbkR1cmFibGVPYmplY3QgfSBmcm9tICJjbG91ZGZsYXJlOnRlc3QiOwppbXBvcnQgeyBkZXNjcmliZSwgaXQsIGV4cGVjdCB9IGZyb20gInZpdGVzdCI7CgpkZXNjcmliZSgiQ291bnRlciBETyIsICgpID0+IHsKICBpdCgiaW5jcmVtZW50cyBjb3VudGVyIiwgYXN5bmMgKCkgPT4gewogICAgY29uc3QgaWQgPSBlbnYuQ09VTlRFUi5pZEZyb21OYW1lKCJ0ZXN0Iik7CiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBydW5JbkR1cmFibGVPYmplY3QoZW52LkNPVU5URVIsIGlkLCBhc3luYyAoaW5zdGFuY2UsIHN0YXRlKSA9PiB7CiAgICAgIGNvbnN0IHZhbDEgPSBhd2FpdCBpbnN0YW5jZS5pbmNyZW1lbnQoKTsKICAgICAgY29uc3QgdmFsMiA9IGF3YWl0IGluc3RhbmNlLmluY3JlbWVudCgpOwogICAgICByZXR1cm4geyB2YWwxLCB2YWwyIH07CiAgICB9KTsKICAgIGV4cGVjdChyZXN1bHQudmFsMSkudG9CZSgxKTsKICAgIGV4cGVjdChyZXN1bHQudmFsMikudG9CZSgyKTsKICB9KTsKfSk7CmBgYAoKIyMgVGVzdGluZyBTUUwgU3RvcmFnZQoKYGBgdHlwZXNjcmlwdAppdCgiY3JlYXRlcyBhbmQgcXVlcmllcyB1c2VycyIsIGFzeW5jICgpID0+IHsKICBjb25zdCBpZCA9IGVudi5VU0VSX01BTkFHRVIuaWRGcm9tTmFtZSgidGVzdCIpOwogIGF3YWl0IHJ1bkluRHVyYWJsZU9iamVjdChlbnYuVVNFUl9NQU5BR0VSLCBpZCwgYXN5bmMgKGluc3RhbmNlLCBzdGF0ZSkgPT4gewogICAgYXdhaXQgaW5zdGFuY2UuY3JlYXRlVXNlcigiYWxpY2VAZXhhbXBsZS5jb20iLCAiQWxpY2UiKTsKICAgIGNvbnN0IHVzZXIgPSBhd2FpdCBpbnN0YW5jZS5nZXRVc2VyKCJhbGljZUBleGFtcGxlLmNvbSIpOwogICAgZXhwZWN0KHVzZXIpLnRvRXF1YWwoeyBlbWFpbDogImFsaWNlQGV4YW1wbGUuY29tIiwgbmFtZTogIkFsaWNlIiB9KTsKICB9KTsKfSk7CgppdCgiaGFuZGxlcyBzY2hlbWEgbWlncmF0aW9ucyIsIGFzeW5jICgpID0+IHsKICBjb25zdCBpZCA9IGVudi5VU0VSX01BTkFHRVIuaWRGcm9tTmFtZSgibWlncmF0aW9uLXRlc3QiKTsKICBhd2FpdCBydW5JbkR1cmFibGVPYmplY3QoZW52LlVTRVJfTUFOQUdFUiwgaWQsIGFzeW5jIChpbnN0YW5jZSwgc3RhdGUpID0+IHsKICAgIGNvbnN0IHZlcnNpb24gPSBzdGF0ZS5zdG9yYWdlLnNxbC5leGVjKAogICAgICAiU0VMRUNUIHZhbHVlIEZST00gX21ldGEgV0hFUkUga2V5ID0gJ3NjaGVtYV92ZXJzaW9uJyIKICAgICkub25lKCk/LnZhbHVlOwogICAgZXhwZWN0KHZlcnNpb24pLnRvQmUoIjEiKTsKICB9KTsKfSk7CmBgYAoKIyMgVGVzdGluZyBBbGFybXMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgcnVuRHVyYWJsZU9iamVjdEFsYXJtIH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKCml0KCJwcm9jZXNzZXMgYmF0Y2ggb24gYWxhcm0iLCBhc3luYyAoKSA9PiB7CiAgY29uc3QgaWQgPSBlbnYuQkFUQ0hfUFJPQ0VTU09SLmlkRnJvbU5hbWUoInRlc3QiKTsKICAKICAvLyBBZGQgaXRlbXMKICBhd2FpdCBydW5JbkR1cmFibGVPYmplY3QoZW52LkJBVENIX1BST0NFU1NPUiwgaWQsIGFzeW5jIChpbnN0YW5jZSkgPT4gewogICAgYXdhaXQgaW5zdGFuY2UuYWRkSXRlbSgiaXRlbTEiKTsKICAgIGF3YWl0IGluc3RhbmNlLmFkZEl0ZW0oIml0ZW0yIik7CiAgfSk7CiAgCiAgLy8gVHJpZ2dlciBhbGFybQogIGF3YWl0IHJ1bkR1cmFibGVPYmplY3RBbGFybShlbnYuQkFUQ0hfUFJPQ0VTU09SLCBpZCk7CiAgCiAgLy8gVmVyaWZ5IHByb2Nlc3NlZAogIGF3YWl0IHJ1bkluRHVyYWJsZU9iamVjdChlbnYuQkFUQ0hfUFJPQ0VTU09SLCBpZCwgYXN5bmMgKGluc3RhbmNlLCBzdGF0ZSkgPT4gewogICAgY29uc3QgY291bnQgPSBzdGF0ZS5zdG9yYWdlLnNxbC5leGVjKAogICAgICAiU0VMRUNUIENPVU5UKCopIGFzIGNvdW50IEZST00gcHJvY2Vzc2VkX2l0ZW1zIgogICAgKS5vbmUoKS5jb3VudDsKICAgIGV4cGVjdChjb3VudCkudG9CZSgyKTsKICB9KTsKfSk7CmBgYAoKIyMgVGVzdGluZyBDb25jdXJyZW5jeQoKYGBgdHlwZXNjcmlwdAppdCgiaGFuZGxlcyBjb25jdXJyZW50IGluY3JlbWVudHMgc2FmZWx5IiwgYXN5bmMgKCkgPT4gewogIGNvbnN0IGlkID0gZW52LkNPVU5URVIuaWRGcm9tTmFtZSgiY29uY3VycmVudC10ZXN0Iik7CiAgCiAgLy8gUGFyYWxsZWwgaW5jcmVtZW50cwogIGNvbnN0IHJlc3VsdHMgPSBhd2FpdCBQcm9taXNlLmFsbChbCiAgICBydW5JbkR1cmFibGVPYmplY3QoZW52LkNPVU5URVIsIGlkLCAoaSkgPT4gaS5pbmNyZW1lbnQoKSksCiAgICBydW5JbkR1cmFibGVPYmplY3QoZW52LkNPVU5URVIsIGlkLCAoaSkgPT4gaS5pbmNyZW1lbnQoKSksCiAgICBydW5JbkR1cmFibGVPYmplY3QoZW52LkNPVU5URVIsIGlkLCAoaSkgPT4gaS5pbmNyZW1lbnQoKSkKICBdKTsKICAKICAvLyBBbGwgc2hvdWxkIGdldCB1bmlxdWUgdmFsdWVzCiAgZXhwZWN0KG5ldyBTZXQocmVzdWx0cykuc2l6ZSkudG9CZSgzKTsKICBleHBlY3QoTWF0aC5tYXgoLi4ucmVzdWx0cykpLnRvQmUoMyk7Cn0pOwpgYGAKCiMjIFRlc3QgSXNvbGF0aW9uCgpgYGB0eXBlc2NyaXB0Ci8vIFBlci10ZXN0IHVuaXF1ZSBJRHMKbGV0IHRlc3RJZDogc3RyaW5nOwpiZWZvcmVFYWNoKCgpID0+IHsgdGVzdElkID0gY3J5cHRvLnJhbmRvbVVVSUQoKTsgfSk7CgppdCgiaXNvbGF0ZWQgdGVzdCIsIGFzeW5jICgpID0+IHsKICBjb25zdCBpZCA9IGVudi5NWV9ETy5pZEZyb21OYW1lKHRlc3RJZCk7CiAgLy8gVXNlcyB1bmlxdWUgRE8gaW5zdGFuY2UKfSk7CgovLyBDbGVhbnVwIHBhdHRlcm4KaXQoIndpdGggY2xlYW51cCIsIGFzeW5jICgpID0+IHsKICBjb25zdCBpZCA9IGVudi5NWV9ETy5pZEZyb21OYW1lKCJjbGVhbnVwLXRlc3QiKTsKICB0cnkgewogICAgYXdhaXQgcnVuSW5EdXJhYmxlT2JqZWN0KGVudi5NWV9ETywgaWQsIGFzeW5jIChpbnN0YW5jZSkgPT4ge30pOwogIH0gZmluYWxseSB7CiAgICBhd2FpdCBydW5JbkR1cmFibGVPYmplY3QoZW52Lk1ZX0RPLCBpZCwgYXN5bmMgKGluc3RhbmNlLCBzdGF0ZSkgPT4gewogICAgICBhd2FpdCBzdGF0ZS5zdG9yYWdlLmRlbGV0ZUFsbCgpOwogICAgfSk7CiAgfQp9KTsKYGBgCgojIyBUZXN0aW5nIFBJVFIKCmBgYHR5cGVzY3JpcHQKaXQoInJlc3RvcmVzIGZyb20gYm9va21hcmsiLCBhc3luYyAoKSA9PiB7CiAgY29uc3QgaWQgPSBlbnYuTVlfRE8uaWRGcm9tTmFtZSgicGl0ci10ZXN0Iik7CiAgCiAgLy8gQ3JlYXRlIGNoZWNrcG9pbnQKICBjb25zdCBib29rbWFyayA9IGF3YWl0IHJ1bkluRHVyYWJsZU9iamVjdChlbnYuTVlfRE8sIGlkLCBhc3luYyAoaW5zdGFuY2UsIHN0YXRlKSA9PiB7CiAgICBhd2FpdCBzdGF0ZS5zdG9yYWdlLnB1dCgidmFsdWUiLCAxKTsKICAgIHJldHVybiBhd2FpdCBzdGF0ZS5zdG9yYWdlLmdldEN1cnJlbnRCb29rbWFyaygpOwogIH0pOwogIAogIC8vIE1vZGlmeSBhbmQgcmVzdG9yZQogIGF3YWl0IHJ1bkluRHVyYWJsZU9iamVjdChlbnYuTVlfRE8sIGlkLCBhc3luYyAoaW5zdGFuY2UsIHN0YXRlKSA9PiB7CiAgICBhd2FpdCBzdGF0ZS5zdG9yYWdlLnB1dCgidmFsdWUiLCAyKTsKICAgIGF3YWl0IHN0YXRlLnN0b3JhZ2Uub25OZXh0U2Vzc2lvblJlc3RvcmVCb29rbWFyayhib29rbWFyayk7CiAgICBzdGF0ZS5hYm9ydCgpOwogIH0pOwogIAogIC8vIFZlcmlmeSByZXN0b3JlZAogIGF3YWl0IHJ1bkluRHVyYWJsZU9iamVjdChlbnYuTVlfRE8sIGlkLCBhc3luYyAoaW5zdGFuY2UsIHN0YXRlKSA9PiB7CiAgICBjb25zdCB2YWx1ZSA9IGF3YWl0IHN0YXRlLnN0b3JhZ2UuZ2V0KCJ2YWx1ZSIpOwogICAgZXhwZWN0KHZhbHVlKS50b0JlKDEpOwogIH0pOwp9KTsKYGBgCgojIyBUZXN0aW5nIFRyYW5zYWN0aW9ucwoKYGBgdHlwZXNjcmlwdAppdCgicm9sbHMgYmFjayBvbiBlcnJvciIsIGFzeW5jICgpID0+IHsKICBjb25zdCBpZCA9IGVudi5CQU5LLmlkRnJvbU5hbWUoInRyYW5zYWN0aW9uLXRlc3QiKTsKICAKICBhd2FpdCBydW5JbkR1cmFibGVPYmplY3QoZW52LkJBTkssIGlkLCBhc3luYyAoaW5zdGFuY2UsIHN0YXRlKSA9PiB7CiAgICBhd2FpdCBzdGF0ZS5zdG9yYWdlLnB1dCgiYmFsYW5jZSIsIDEwMCk7CiAgICAKICAgIGF3YWl0IGV4cGVjdCgKICAgICAgc3RhdGUuc3RvcmFnZS50cmFuc2FjdGlvbihhc3luYyAoKSA9PiB7CiAgICAgICAgYXdhaXQgc3RhdGUuc3RvcmFnZS5wdXQoImJhbGFuY2UiLCA1MCk7CiAgICAgICAgdGhyb3cgbmV3IEVycm9yKCJDYW5jZWwiKTsKICAgICAgfSkKICAgICkucmVqZWN0cy50b1Rocm93KCJDYW5jZWwiKTsKICAgIAogICAgY29uc3QgYmFsYW5jZSA9IGF3YWl0IHN0YXRlLnN0b3JhZ2UuZ2V0KCJiYWxhbmNlIik7CiAgICBleHBlY3QoYmFsYW5jZSkudG9CZSgxMDApOyAvLyBSb2xsZWQgYmFjawogIH0pOwp9KTsKYGBgCg==
+# DO Storage Testing
+
+Testing Durable Objects with storage using `vitest-pool-workers`.
+
+## Setup
+
+**vitest.config.ts:**
+```typescript
+import { defineWorkersConfig } from "@cloudflare/vitest-pool-workers/config";
+
+export default defineWorkersConfig({
+  test: {
+    poolOptions: {
+      workers: { wrangler: { configPath: "./wrangler.toml" } }
+    }
+  }
+});
+```
+
+**package.json:** Add `@cloudflare/vitest-pool-workers` and `vitest` to devDependencies
+
+## Basic Testing
+
+```typescript
+import { env, runInDurableObject } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+
+describe("Counter DO", () => {
+  it("increments counter", async () => {
+    const id = env.COUNTER.idFromName("test");
+    const result = await runInDurableObject(env.COUNTER, id, async (instance, state) => {
+      const val1 = await instance.increment();
+      const val2 = await instance.increment();
+      return { val1, val2 };
+    });
+    expect(result.val1).toBe(1);
+    expect(result.val2).toBe(2);
+  });
+});
+```
+
+## Testing SQL Storage
+
+```typescript
+it("creates and queries users", async () => {
+  const id = env.USER_MANAGER.idFromName("test");
+  await runInDurableObject(env.USER_MANAGER, id, async (instance, state) => {
+    await instance.createUser("alice@example.com", "Alice");
+    const user = await instance.getUser("alice@example.com");
+    expect(user).toEqual({ email: "alice@example.com", name: "Alice" });
+  });
+});
+
+it("handles schema migrations", async () => {
+  const id = env.USER_MANAGER.idFromName("migration-test");
+  await runInDurableObject(env.USER_MANAGER, id, async (instance, state) => {
+    const version = state.storage.sql.exec(
+      "SELECT value FROM _meta WHERE key = 'schema_version'"
+    ).one()?.value;
+    expect(version).toBe("1");
+  });
+});
+```
+
+## Testing Alarms
+
+```typescript
+import { runDurableObjectAlarm } from "cloudflare:test";
+
+it("processes batch on alarm", async () => {
+  const id = env.BATCH_PROCESSOR.idFromName("test");
+  
+  // Add items
+  await runInDurableObject(env.BATCH_PROCESSOR, id, async (instance) => {
+    await instance.addItem("item1");
+    await instance.addItem("item2");
+  });
+  
+  // Trigger alarm
+  await runDurableObjectAlarm(env.BATCH_PROCESSOR, id);
+  
+  // Verify processed
+  await runInDurableObject(env.BATCH_PROCESSOR, id, async (instance, state) => {
+    const count = state.storage.sql.exec(
+      "SELECT COUNT(*) as count FROM processed_items"
+    ).one().count;
+    expect(count).toBe(2);
+  });
+});
+```
+
+## Testing Concurrency
+
+```typescript
+it("handles concurrent increments safely", async () => {
+  const id = env.COUNTER.idFromName("concurrent-test");
+  
+  // Parallel increments
+  const results = await Promise.all([
+    runInDurableObject(env.COUNTER, id, (i) => i.increment()),
+    runInDurableObject(env.COUNTER, id, (i) => i.increment()),
+    runInDurableObject(env.COUNTER, id, (i) => i.increment())
+  ]);
+  
+  // All should get unique values
+  expect(new Set(results).size).toBe(3);
+  expect(Math.max(...results)).toBe(3);
+});
+```
+
+## Test Isolation
+
+```typescript
+// Per-test unique IDs
+let testId: string;
+beforeEach(() => { testId = crypto.randomUUID(); });
+
+it("isolated test", async () => {
+  const id = env.MY_DO.idFromName(testId);
+  // Uses unique DO instance
+});
+
+// Cleanup pattern
+it("with cleanup", async () => {
+  const id = env.MY_DO.idFromName("cleanup-test");
+  try {
+    await runInDurableObject(env.MY_DO, id, async (instance) => {});
+  } finally {
+    await runInDurableObject(env.MY_DO, id, async (instance, state) => {
+      await state.storage.deleteAll();
+    });
+  }
+});
+```
+
+## Testing PITR
+
+```typescript
+it("restores from bookmark", async () => {
+  const id = env.MY_DO.idFromName("pitr-test");
+  
+  // Create checkpoint
+  const bookmark = await runInDurableObject(env.MY_DO, id, async (instance, state) => {
+    await state.storage.put("value", 1);
+    return await state.storage.getCurrentBookmark();
+  });
+  
+  // Modify and restore
+  await runInDurableObject(env.MY_DO, id, async (instance, state) => {
+    await state.storage.put("value", 2);
+    await state.storage.onNextSessionRestoreBookmark(bookmark);
+    state.abort();
+  });
+  
+  // Verify restored
+  await runInDurableObject(env.MY_DO, id, async (instance, state) => {
+    const value = await state.storage.get("value");
+    expect(value).toBe(1);
+  });
+});
+```
+
+## Testing Transactions
+
+```typescript
+it("rolls back on error", async () => {
+  const id = env.BANK.idFromName("transaction-test");
+  
+  await runInDurableObject(env.BANK, id, async (instance, state) => {
+    await state.storage.put("balance", 100);
+    
+    await expect(
+      state.storage.transaction(async () => {
+        await state.storage.put("balance", 50);
+        throw new Error("Cancel");
+      })
+    ).rejects.toThrow("Cancel");
+    
+    const balance = await state.storage.get("balance");
+    expect(balance).toBe(100); // Rolled back
+  });
+});
+```
