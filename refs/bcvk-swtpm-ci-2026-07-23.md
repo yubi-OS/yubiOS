@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/bcvk-swtpm-ci.md, no date suffix previously)_
 
-Cross-checked 2026-07-23 against refs/bootc-dev-org-releases-2026-07-23.md: bcvk's own upstream (bootc-dev/bcvk) is now at v0.18.0 (2026-07-02), still with no native USB-passthrough or swtpm-flag features documented upstream â confirms this file's premise that the `--swtpm`/`--swu2f` flags are yubiOS-fork-only additions, pinned via PINNED.md's immutable release-descendant commit, not something upstream bcvk ships natively. No drift found.
+Cross-checked 2026-07-23 against refs/bootc-dev-org-releases-2026-07-23.md: bcvk's own upstream (bootc-dev/bcvk) is now at v0.18.0 (2026-07-02), still with no native USB-passthrough or swtpm-flag features documented upstream — confirms this file's premise that the `--swtpm`/`--swu2f` flags are yubiOS-fork-only additions, pinned via PINNED.md's immutable release-descendant commit, not something upstream bcvk ships natively. No drift found.
 
 # bcvk swtpm CI
 
@@ -63,4 +63,4 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 **Blocking issues**: none identified at this cycle
 **Owner**: TBD
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8670). TODO: refine per file context.
+Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8670).
