@@ -75,7 +75,7 @@ Four new scripts land under `tests/vm/`, each dispatched by a new workflow:
 
 A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; a single workflow `.github/workflows/ci_test-sysext-portable.yml` covers G3+G4+G5. Both workflows are dispatched from `ci.yml` orchestrator via `workflow_dispatch` with `group=vm-tests` (per the PR #145 group-routing redesign at commit `9d6ec85d`).
 
-### 2.2 Test design â `tests/vm/test-bootc-upgrade.sh` (Gap G1 + G2)
+### 2.2 Test design — `tests/vm/test-bootc-upgrade.sh` (Gap G1 + G2)
 
 **Pre-conditions (host-deps on the runner):**
 
@@ -109,7 +109,7 @@ A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; 
 - The script exits 0 only if all 12 steps pass. Any assertion failure uploads the VM logs to GH artifacts and exits non-zero.
 - The CI matrix has 2 jobs (amd64 ubuntu-24.04 + arm64 self-hosted rock1 KVM). Both must be green for the workflow to be GREEN.
 
-### 2.3 Test design â `tests/vm/test-sysext-overlay.sh` (Gap G3)
+### 2.3 Test design — `tests/vm/test-sysext-overlay.sh` (Gap G3)
 
 **Pre-conditions:**
 
@@ -132,7 +132,7 @@ A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; 
 8. Mutate one byte of the sysext image at a critical offset (the signed catalog header per `composefs-kernel-floors` skill).
 9. Attempt `systemd-sysext refresh`; assert it exits non-zero with a signature-mismatch error from `verity-protected` signature verification.
 
-### 2.4 Test design â `tests/vm/test-portable-service.sh` (Gap G4)
+### 2.4 Test design — `tests/vm/test-portable-service.sh` (Gap G4)
 
 **Pre-conditions:**
 
@@ -153,7 +153,7 @@ A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; 
 
 7. Inside the attached service, attempt a privileged operation that the profile forbids (e.g., write to `/etc` from inside the service's RootImage). Assert the operation is denied per the profile selection (default profile denies `/etc` writes per `systemd.io/PORTABLE_SERVICES` profile matrix).
 
-### 2.5 Test design â `tests/vm/test-homed-migrate.sh` (Gap G5)
+### 2.5 Test design — `tests/vm/test-homed-migrate.sh` (Gap G5)
 
 **Pre-conditions:**
 
@@ -392,10 +392,6 @@ exit 0
 #   - systemd-sysext(8) (systemd v254+)
 #   - skills/github-yubios-KS9n5GAT/0pointer-mastery/SKILL.md (Modularity Ladder line 75)
 #
-# Linear: OMN-156
-
-set -euo pipefail
-
 # ---- Constants ------------------------------------------------------------
 
 readonly IMAGE_V07="${IMAGE_V07:-docker.io/0mniteck/yubios:v0.7.1}"
@@ -556,10 +552,6 @@ exit 0
 #   - portablectl(1) (systemd v254+; full semantics v258+)
 #   - skills/github-yubios-KS9n5GAT/0pointer-mastery/SKILL.md (Modularity Ladder line 83)
 #
-# Linear: OMN-156
-
-set -euo pipefail
-
 # ---- Constants ------------------------------------------------------------
 
 readonly IMAGE_V07="${IMAGE_V07:-docker.io/0mniteck/yubios:v0.7.1}"
@@ -706,10 +698,6 @@ exit 0
 #   - skills/github-yubios-KS9n5GAT/systemd-homed/SKILL.md
 #   - skills/github-yubios-KS9n5GAT/0pointer-mastery/SKILL.md (Home Directory Management line 178)
 #
-# Linear: OMN-156
-
-set -euo pipefail
-
 # ---- Source the real-u2f guard (inverse of CI passless) ------------------
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -1139,7 +1127,7 @@ The dispatcher preserves the existing input-forwarding logic (per commit `2f643a
 
 ## 5. Coverage matrix
 
-Each row maps a script + step to a Linear issue it closes. The matrix is the audit trail for OMN-156 â Done.
+Each row maps a script + step to a Linear issue it closes. The matrix is the audit trail for OMN-156 → Done.
 
 | Test script | Step | Gap | Closes | Asserts |
 | --- | --- | --- | --- | --- |
@@ -1161,9 +1149,9 @@ Each row maps a script + step to a Linear issue it closes. The matrix is the aud
 
 Linear state transitions:
 
-- OMN-156 moves Backlog â In Progress when the first PR adding the four scripts lands.
-- OMN-156 moves In Progress â In Review when both new workflows are GREEN on at least one matrix arch (amd64 first, then arm64 with rock1).
-- OMN-156 moves In Review â Done when both arches are GREEN + a sealed-UKI VM lane (OMN-53, GREEN at V83 on `sealed-uki-vm-lane-v2`) run still passes (no regression).
+- OMN-156 moves Backlog → In Progress when the first PR adding the four scripts lands.
+- OMN-156 moves In Progress → In Review when both new workflows are GREEN on at least one matrix arch (amd64 first, then arm64 with rock1).
+- OMN-156 moves In Review → Done when both arches are GREEN + a sealed-UKI VM lane (OMN-53, GREEN at V83 on `sealed-uki-vm-lane-v2`) run still passes (no regression).
 
 ---
 
@@ -1213,7 +1201,7 @@ The 3-sentence summary at the end of this spec, the Linear comment that will mov
 
 The sealed-UKI VM lane (OMN-53, PR #155 GREEN at V83 on `sealed-uki-vm-lane-v2`) proves signed-UKI boot with `--composefs-backend`. The new bootc-upgrade test exercises the post-install upgrade path. If a future yubiOS image lands with OMN-150 Phase 2 BLSConfig wired (commit `aa8f9de`) AND a signed UKI per OMN-52, the bootc-upgrade test must continue to pass (UKI-based boot is the same code path).
 
-**Risk**: the signed-UKI build chain (SoftHSM + systemd-sbsign) has been historically brittle (V36âV37 cross-version softhsm fix at commit `a50ecac42cc0`). Mitigation: re-run `ci_test_sealed-uki-vm.yml` after OMN-156 lands to confirm no regression; cross-reference both workflows in BLOCKERS.md.
+**Risk**: the signed-UKI build chain (SoftHSM + systemd-sbsign) has been historically brittle (V36→V37 cross-version softhsm fix at commit `a50ecac42cc0`). Mitigation: re-run `ci_test_sealed-uki-vm.yml` after OMN-156 lands to confirm no regression; cross-reference both workflows in BLOCKERS.md.
 
 ---
 
