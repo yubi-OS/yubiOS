@@ -10,11 +10,15 @@ import { D1_MAP_JSON_LIMIT, KV_MAP_JSON_LIMIT } from './limits.mjs';
 
 export const MAPS_DDL = `CREATE TABLE IF NOT EXISTS maps (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT, rule_hash TEXT, seed INTEGER, n INTEGER, dim INTEGER, d INTEGER, v2 REAL, z_null REAL, verdict TEXT, classes INTEGER, identity_failures INTEGER, measurement_red INTEGER, source TEXT, map_json TEXT)`;
 
+/** D1 binds only null/number/string (and ArrayBuffer). Every metric is coerced to one of those. */
+function prim(v) { if (v === null || v === undefined) return null; if (typeof v === 'number') return Number.isFinite(v) ? v : null; if (typeof v === 'string') return v; if (typeof v === 'boolean') return v ? 1 : 0; return null; }
 export function metricsOf(map, source) {
-  return [new Date().toISOString(), map.rule_hash ?? map.frame_id ?? null, map.seed ?? null, map.n ?? (map.names ? map.names.length : null), map.D ?? null, map.d ?? null,
-    map.V2 ?? map.v2 ?? null, map.null && map.null.z != null ? map.null.z : null, map.null && map.null.verdict ? map.null.verdict : (map.verdict ?? null),
-    map.classes ?? null, map.identity_failures ?? (map.certificates ? map.certificates.filter((c) => c.class === 'identity' && !c.ok).length : null),
-    map.measurement_red ?? (map.certificates ? map.certificates.filter((c) => c.class === 'measurement' && !c.ok).length : null), source ?? null];
+  const classes = map.classes && typeof map.classes === 'object' ? map.classes.count : map.classes;
+  const certs = Array.isArray(map.certificates) ? map.certificates : null;
+  return [new Date().toISOString(), prim(map.rule_hash ?? map.frame_id), prim(map.seed), prim(map.n ?? (map.names ? map.names.length : null)), prim(map.D), prim(map.d),
+    prim(map.V2 ?? map.v2), prim(map.null && map.null.z), prim(map.null && map.null.verdict != null ? map.null.verdict : map.verdict),
+    prim(classes), prim(map.identity_failures ?? (certs ? certs.filter((c) => c.class === 'identity' && !c.ok).length : null)),
+    prim(map.measurement_red ?? (certs ? certs.filter((c) => c.class === 'measurement' && !c.ok).length : null)), prim(source)].map((v) => (typeof v === 'object' && v !== null ? null : v));
 }
 
 /** Returns the new row id. Throws ApiError(413) only if the encoded map exceeds the KV limit too. */
