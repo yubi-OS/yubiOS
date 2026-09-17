@@ -60,3 +60,22 @@ Ledger for baseline 78: n_rows 4, n_pending 4, n_effective 0. Round 4 proper (in
 
 - Control route fix (memoized baseline load, n ≤ 6 per request) deployed to Worker `steady-orbit` at 2026-09-17T10:44:09Z (index.js only); committed to main with this document.
 - All API calls above went through the live Worker; map 78 and outcome rows 2–5 are in shared public storage.
+
+## 6. Round 4, cycle 1 — CHANGE `refs/current-position-evidence-2026-07-25.md` (row 2 → 6 → 7)
+
+Order of events (UTC, 2026-09-17): inspect source + exemplars (`sbsign-pkcs11-validate`, `bcvk-swtpm-ci`, `customer-roi-model`) → write `taskcheck.sh` and state defects → apply edit locally → check FAIL-before / PASS-after → PR #237 (`db6bb032`) → geometry measured on frozen baseline 78 → check row 6 filed (`supersedes 2`; a first filing was rejected 422 for a >200-char verifier, so the geometry measurement preceded the accepted row — noted in the row) → PR #237 squash-merged `31df51d5` → check rerun unchanged on the merged file → after-map 80 → verdict row 7 (`supersedes 6`).
+
+**Defects (all machine-checkable):** 4 mojibake occurrences (`OMN-65âs` etc.); 3 byte-duplicate `## Recommendation` blocks reading "Verdict: TBD per file context … TODO: refine" (repo-refs-skill cycles 1–3); 4 template coverage sections asserting the doc applies least-privilege hardening / integrates OPA policy / participates in the trust chain / supports runtime detection — false for a business evidence-boundary document.
+
+**Edit:** mojibake fixed; the 3 blocks replaced by one Recommendation ("KEEP as a dated snapshot; live `docs/BLOCKERS.md` supersedes"); the 4 sections replaced by one Coverage note stating the primitives do not apply. Sections Purpose … Open questions byte-identical except the 4 fixes (diff verified). 9,150 → 8,226 bytes.
+
+**Task check (frozen before the edit, geometry not consulted):** C1 mojibake bytes 4→0, C2 duplicate H2 1→0, C3 TODO placeholder lines 6→0, C4 unresolved refs/ paths 0→0, C5 false capability claims 4→0. FAIL → PASS; rerun on the merged file at `31df51d5` (sha256 `1ac1375d2f05…`, equal to the previewed candidate): PASS. **Verdict: kept**, on the check alone.
+
+**Geometry (recorded, not decisive):** preview on frozen baseline 78: isolated 39 → 37 (Δ −2; the pre-registered prediction was −1: sign exact, magnitude not), 3 bits changed, geodesic displacement 0.553, one neighbour touched (`yubios-scamper-product-brief-investor-memo-2026-08-07.md`), 177/177 anchors byte-equal, occupied sectors unchanged. Consistency with a weak variant (heading and first sentence reworded): −2/−2, `all_same_sign:true`. Radius exact-delta interval (0.0900, 0.1069] around 0.095. After-map **80** (baseline names only, target at `31df51d5`): same frame `d3289271e04ca764`, isolated 37, ledger CHANGE Δ −2 = comparison Δ. Against the §2 positive-control band on this frame (splices: Δ ∈ {0, +1, +2}, never negative), this real edit is the only negative Δ observed on frame `d3289271…` so far — one observation, not a rate.
+
+**Ledger for baseline 78 after cycle 1:** n_rows 6, pending 5 (rows 3–5 ADD predictions + the two superseded chain rows), superseded 2, effective 1, preregistered 1, sign-comparable 1, sign_exact_count 1, by_verdict kept 1, observed_source server 1. Forward sign-agreement count: 1/1, which is one row and says nothing yet.
+
+**Stray record:** map **79** was persisted from a 179-doc run at `31df51d5` (it includes this prep doc, so it is a two-transition corpus, not a valid after-map). Left in place; deleting it needs explicit authorization per AGENT.md.
+
+Cycles 2–4 (the three ADD rungs, predicted +1 each) have not been run.
+
