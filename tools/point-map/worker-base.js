@@ -7,6 +7,8 @@ import { embedDocuments, rememberChunkedEmbeddings } from "./lib/embed-pipeline.
 import { repoItemsHandler } from "./lib/repo-items.mjs";
 import { mapRouteHandler, mapsCompareHandler } from "./lib/map-route.mjs";
 import { mapPreviewHandler } from "./lib/preview-route.mjs";
+import { mapControlHandler, VERSION as CONTROL_VERSION } from "./lib/control-route.mjs";
+import { outcomesPostHandler, outcomesGetHandler, VERSION as OUTCOMES_VERSION } from "./lib/outcomes-route.mjs";
 
 // src/github.ts
 var GH = "https://api.github.com";
@@ -793,6 +795,9 @@ POST /api/embed {"texts": string[]} -> { model, n, D, vectors, metadata }
 GET  /api/maps                 -> stored maps (metrics only)
 POST /api/maps/compare {"before_id": n, "after_id": n} -> comparison
 POST /api/map/preview {"baseline_id": n, "texts": [...full resulting corpus...], "names": [...], "target": {"action":"add"|"change","name":"..."}}
+POST /api/map/control {"baseline_id": n, "texts": [...exact baseline corpus...], "names": [...], "n_controls"?: 2..12, "control_seed"?: int} -> positive control (nothing persisted)
+POST /api/outcomes {"baseline_id": n, "target": {...}, "predicted_delta"?, "after_id"? | "observed_delta"?, "task_check": {"verdict","verifier","notes"?}, "supersedes"?} -> append-only ledger row
+GET  /api/outcomes?baseline_id=n -> ledger rows + contingency of counts
      -> { preview:true, persisted:false, map, comparison, math_ledger, target, unchanged_source_count, unchanged_anchor_count, side_effects }
      reads the stored baseline, re-embeds the actual candidate texts on the baseline's frozen frame and writes NOTHING (no map row, no Vectorize).
 GET  /api/health                -> read-only version info
@@ -817,7 +822,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
             } catch (e) {
               pointmapVersion = null;
             }
-            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, now: new Date().toISOString() });
+            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION }, now: new Date().toISOString() });
           }
           if (p === "/api/fits" && req.method === "GET") {
             return json({ fits: await listFits(db) });
@@ -1109,6 +1114,62 @@ GET  /map/pointmap.js           -> static pointmap.js module
             } catch (e) {
               return errorResponse(e);
             }
+          }
+          if (p === "/api/map/control" && req.method === "POST") {
+            try {
+              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              // Read-only baseline load, same discipline as preview: no CREATE TABLE, no INSERT.
+              const loadStoredMap = async (id) => {
+                try {
+                  const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
+                  return row ? decodeMap(row.map_json) : null;
+                } catch (e) {
+                  console.error("control baseline load failed:", String(e?.message || e));
+                  throw new ApiError(503, "map storage unavailable; retry later");
+                }
+              };
+              const result = await mapControlHandler(body, { env, PM, embedDocuments, loadStoredMap });
+              return json(result);
+            } catch (e) {
+              return errorResponse(e);
+            }
+          }
+          if (p === "/api/outcomes" && (req.method === "POST" || req.method === "GET")) {
+            try {
+              // Append-only ledger table. Additive schema: never touches `maps`.
+              await db.prepare(`CREATE TABLE IF NOT EXISTS outcomes (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT, baseline_id INTEGER, after_id INTEGER, target_action TEXT, target_name TEXT, predicted_delta REAL, observed_delta REAL, observed_source TEXT, verdict TEXT, verifier TEXT, supersedes INTEGER, entry_json TEXT)`).run();
+              const rowToEntry = (r) => ({ id: r.id, ...JSON.parse(r.entry_json) });
+              if (req.method === "GET") {
+                const listOutcomes = async (baseline_id) => {
+                  const q = baseline_id == null
+                    ? db.prepare(`SELECT id, entry_json FROM outcomes ORDER BY id ASC`)
+                    : db.prepare(`SELECT id, entry_json FROM outcomes WHERE baseline_id = ? ORDER BY id ASC`).bind(Number(baseline_id));
+                  const { results } = await q.all();
+                  return (results || []).map(rowToEntry);
+                };
+                return json(await outcomesGetHandler(Object.fromEntries(url.searchParams), { listOutcomes }));
+              }
+              const body = await readJsonLimited(req, 1 * 1024 * 1024);
+              const loadStoredMap = async (id) => {
+                const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
+                return row ? decodeMap(row.map_json) : null;
+              };
+              const getOutcome = async (id) => {
+                const row = await db.prepare(`SELECT id, entry_json FROM outcomes WHERE id = ?`).bind(Number(id)).first();
+                return row ? rowToEntry(row) : null;
+              };
+              const insertOutcome = async (e) => {
+                const ins = await db.prepare(`INSERT INTO outcomes (created_at, baseline_id, after_id, target_action, target_name, predicted_delta, observed_delta, observed_source, verdict, verifier, supersedes, entry_json) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`)
+                  .bind(e.created_at, e.baseline_id, e.after_id, e.target.action, e.target.name, e.predicted_delta, e.observed_delta, e.observed_source, e.task_check.verdict, e.task_check.verifier, e.supersedes, JSON.stringify(e)).run();
+                return ins?.meta?.last_row_id ?? (await db.prepare(`SELECT MAX(id) AS mid FROM outcomes`).first())?.mid;
+              };
+              return json(await outcomesPostHandler(body, { loadStoredMap, insertOutcome, getOutcome, PM }), 201);
+            } catch (e) {
+              return errorResponse(e);
+            }
+          }
+          if (p.startsWith("/api/outcomes/") && (req.method === "DELETE" || req.method === "PUT" || req.method === "PATCH")) {
+            return json({ error: { status: 405, message: "the outcomes ledger is append-only: correct a row by POSTing a new row with supersedes" } }, 405);
           }
           if (p === "/api/maps" && req.method === "GET") {
             await db.prepare(`CREATE TABLE IF NOT EXISTS maps (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT, rule_hash TEXT, seed INTEGER, n INTEGER, dim INTEGER, d INTEGER, v2 REAL, z_null REAL, verdict TEXT, classes INTEGER, identity_failures INTEGER, measurement_red INTEGER, source TEXT, map_json TEXT)`).run();

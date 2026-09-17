@@ -59,3 +59,8 @@ The diagnostic-only `lib/radius-diagnostics.mjs` computes nearest-neighbour clea
 Run `node test-radius.mjs` and `node test-radius-extra.mjs`. These cover maps66–76, row permutations, rotations, threshold ties, adjacentFloat64 breakpoints, bounded perturbations and degree-null degeneracy. `npm run test:radius-browser` exercises new UI branches; `npm run test:browser` retains the short introduction prompt and old UI regressions. Browser/API doubles are labeled; deployment requires separate live checks.
 
 No new physics, operative radius control or ranking metric is introduced. Profiles and intervals are retrospective computed geometry, not confidence intervals or forecasting success.
+
+## Positive control and outcome ledger (calibration/1, outcomes/1)
+
+`lib/control-route.mjs` (`POST /api/map/control`) runs n seeded CutPaste-style splices of the exact baseline corpus through the real preview path and reports counts/min/median/max of the instrument response with n. The recipe is fixed and echoed; nothing is persisted. `lib/outcomes-route.mjs` (`POST`/`GET /api/outcomes`) is an append-only D1 ledger (`outcomes` table, additive) joining a pre-registered `predicted_delta` to a server-recomputed observed delta and an independent verifier's verdict; GET returns a contingency of counts only. Run `node test-control-outcomes.mjs` (32 checks; synthetic embedder, real pointmap.js and real preview path). Neither module touches `pointmap/0.2` frames, bits, nulls, radius or ranking. Methodology sources: CutPaste (arXiv:2104.04015), business-metric-aware forecasting (arXiv:2308.13118); rationale in `refs/pfister-keystone-methods-wayfinder-2026-09-17.md`.
+
