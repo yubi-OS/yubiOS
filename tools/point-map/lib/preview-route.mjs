@@ -90,7 +90,7 @@ function validateRequest(body) {
  *  per-document SHA256s and full-precision points/bits. Anything else (legacy,
  *  vector-sourced, metadata-less) is a 409 that asks for a new text baseline
  *  rather than a best-effort comparison on missing evidence. */
-function requireTextBaseline(baseline) {
+export function requireTextBaseline(baseline) {
   if (!baseline) throw new ApiError(404, "baseline not found");
   if (!baseline.frame || baseline.version !== "pointmap/0.2") {
     throw new ApiError(409, `baseline predates the v0.2 frozen-frame instrument; ${NEW_TEXT_BASELINE}`);

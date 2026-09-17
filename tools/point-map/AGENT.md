@@ -20,6 +20,9 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | GET | `/api/maps/:id` | complete stored MapResult |
 | POST | `/api/maps/compare` | `{before_id,after_id}`; conflicts return 409 |
 | DELETE | `/api/maps/:id` | delete one saved map; explicit user authorization required |
+| POST | `/api/map/control` | `{baseline_id, texts, names, n_controls?, control_seed?}` (the EXACT baseline corpus) — CutPaste-style positive control: n seeded splice CHANGEs measured through the preview path on the frozen frame; writes nothing; recipe fixed |
+| POST | `/api/outcomes` | `{baseline_id, target, predicted_delta?, after_id? \| observed_delta?, task_check:{verdict,verifier,notes?}, supersedes?}` — append-only pre-registration ledger row (201) |
+| GET | `/api/outcomes?baseline_id=` | ledger rows plus a contingency of COUNTS with n; never a rate |
 | POST | `/api/vector/search` | existing cosine search; its historical index may mix prefix and pooled-document representations; scores are not calibrated across ingestion versions |
 | GET | `/map/` | browser view, full-file uploads, frozen baseline selector, comparison panel |
 | GET | `/map/pointmap.js` | identical dependency-free numeric core used by Worker |
@@ -159,3 +162,40 @@ The core-Lean `RadiusBounds.lean` obligations and printed-axiom/scope checks acc
 A degree-preserving graph null fixes the number of degree-zero vertices, so it is degenerate for I(r0). The exploratory radius-null probes do not admit a new ranking statistic. Existing GL phase-transition negatives remain in force; the corrected equal-coefficient CGLE energy identity does not change that.
 
 The homepage Copy agent guide button continues to copy a **short introduction prompt referencing AGENT.md** as the source of truth. Its behavior is unchanged.
+
+
+## Positive control (calibration/1)
+
+The instrument is `pointmap/0.2`, unchanged. `POST /api/map/control` adds the one reference the wayfinder never had: a **known signal**. The stored checkerboard null randomizes bit margins and states the false-alarm side; nothing stated how the frozen isolation/displacement statistics respond to a content change of known size. Following CutPaste (Li, Sohn, Yoon, Pfister, CVPR 2021) and the is-this-x standard-candle discipline, the route cuts a contiguous donor segment into the middle 25% of a host document and measures each splice as an ordinary one-name CHANGE through `/api/map/preview` on the baseline frame.
+
+```json
+{ "baseline_id": 123, "texts": ["...every baseline document, byte-identical..."], "names": ["..."], "n_controls": 6, "control_seed": 20260917 }
+```
+
+- The corpus must equal the baseline exactly: every name present, every SHA256 equal, no extra names; otherwise 409 with the changed/added/missing names. Nothing is embedded before that gate passes.
+- The recipe is fixed: generator `cutpaste-splice/1`, splice fraction 0.25, centered window, same-length donor segment (whole donor if shorter), surrogate pairs never split. `splice_fraction`, `window`, `hosts`, `donors` and similar keys are rejected (422); instrument settings are rejected (409). `n_controls` (2..12, default 6) and `control_seed` are the only knobs and both are echoed, so a control cannot be tuned to the result it produces.
+- Per control: host, donor, splice offsets, before/synthetic SHA256, `isolated_delta` (comparison) and `ledger_actual_delta` (exact ledger, must agree), `bits_changed`, geodesic/chord displacement, `quantization_silent`, `occupied_sectors_delta`, `unchanged_anchor_count`, frame/instrument ids.
+- `summary`: counts by sign of `isolated_delta`, min/median/max of |Δisolated|, displacement and bits changed, `bits_moved_count`, `quantization_silent_count`, all with `n_measured`. `baseline_reference.null` echoes K/E0/SD0/p_resolution of the stored null. `no_change_reference` is the identity (a byte-identical CHANGE moves nothing).
+- Side effects: none beyond the disclosed embedding cache. `persisted:false`, `task_verdict:"not-applicable"`.
+
+Reading: a splice that moves zero bits on this frame says the instrument is quantization-silent at that content size for that document; a splice that changes the isolated count says the statistic responds to known-different content. Neither says anything about task quality, and no admitted coordinate, ranking term or keep/revert rule follows. Compare controls only on the same `frame_id`/`instrument_id`; report n with every count. The same summary on a different corpus is a different instrument reading, not a benchmark.
+
+## Outcome ledger (outcomes/1)
+
+Every count the wayfinder has ever reported ("2 kept, 5 reverted, 1 declined", "4/10 sign agreement") lived in prose. `POST /api/outcomes` gives them a typed, append-only home and, following business-metric-aware forecasting and the COVID public-forecast discipline, separates the **prediction** (frozen before the check) from the **decision outcome** (the independent verifier's verdict).
+
+Two-phase use:
+
+```json
+POST /api/outcomes  { "baseline_id": 123, "target": {"action":"change","name":"refs/x.md"}, "predicted_delta": -1, "task_check": {"verdict":"pending","verifier":"human reviewer"} }
+POST /api/outcomes  { "baseline_id": 123, "target": {"action":"change","name":"refs/x.md"}, "predicted_delta": -1, "after_id": 124, "supersedes": 7, "task_check": {"verdict":"reverted","verifier":"human reviewer","notes":"content check failed"} }
+```
+
+- Verdicts: `pending`, `kept`, `reverted`, `declined`, `abstained`, `neutral`. `verifier` names the independent checker; `geometry` is refused for any non-pending verdict.
+- With `after_id` the server recomputes the observed isolated delta with `PM.explainTransition` on the frozen frame (409 if frames differ or the transition moves a different name) and stores `observed_source:"server:explainTransition"`. A caller-supplied `observed_delta` is stored as `observed_source:"caller"`; the two are never mixed in one row. A row with neither records a prediction only.
+- Append-only: no PUT, PATCH or DELETE (405). A correction is a new row whose `supersedes` points at the earlier row (same baseline and target); both stay visible. A row that arrives with prediction and non-pending verdict together is stored with `preregistered:false`.
+- `score`, `quality`, `success_rate`, `rate`, `confidence`, `z` are rejected as inputs.
+- `GET /api/outcomes?baseline_id=` returns rows and a `contingency` of counts: `n_rows`, `n_pending`, `n_superseded`, `n_effective`, `n_preregistered`, `n_sign_comparable`, `sign_exact_count`, `by_verdict`, `predicted_sign_by_observed_sign`, `verdict_by_sign_exact`, `observed_source_counts`. No rate, percentage or z is computed. A sign-exact geometric prediction is an instrumentation outcome; a kept verdict does not imply the geometry predicted it. The historical 4/10 figure stays a historical count.
+
+Existing stored map rows, frames, ledgers, radius diagnostics and the `/map/` UI are unchanged by both additions. `GET /api/health` now lists the diagnostic module versions.
+
