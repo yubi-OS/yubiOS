@@ -152,6 +152,11 @@ cosign v3.x deprecated `--tlog-upload`. The flag `--tlog-upload=false` is no lon
 
 - 2026-08-04 cycle 5: **Initial v1.** New skill created per deep-research Stream 3 (upstream comparative) — Stream 3 ranked `sigstore-rekor-v2` as the top-pick highest-leverage corpus addition (Rekor v2 GA + tile-backed model + witness quorum are major upgrades over v1). The existing `slsa-provenance` skill covers Rekor v1 generically; this skill is the dedicated v2 reference. Skill mapped to 10-primitive axes: P1 attestation (primary), P7 audit/evidence (transparency log). Frontmatter validated by `js-yaml`.
 
+- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+
+---
+
 ## Attestation coverage for sigstore rekor v2 (curve-guided-rsi cycle-5 substantive edit)
 
 This skill — **TUF SigningConfig, witness quorum, tile-based log, cosign verify-attestation** — contributes to yubiOS's attestation layer by anchoring TUF SigningConfig, witness quorum, tile-based log, cosign verify-attestation in the verifiable evidence chain. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new from deep-research: `yubikey-operations`, `dm-verity-and-integrity`, `nspawn-containers`, `sigstore-rekor-v2`, `composefs-kernel-floors`, `audit-evidence-packaging`); this skill's fit coordinate was (u=0.556, v=0.993), PC1+PC2 = 0.4615, holdout R² = +0.2244.
@@ -174,13 +179,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `trust chain` count moved 23→24/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
-
----
-
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
 This skill's `declarative policy` primitive is closed by cycle-6 RSI. This skill's declarative policy (.rego / OPA / Build Policy) integration is referenced.
@@ -198,4 +196,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `least privilege` primi
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

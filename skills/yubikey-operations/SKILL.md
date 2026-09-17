@@ -158,6 +158,10 @@ yubiOS treats YubiKey enrollment as a **destructive** operation. Re-enrolling a 
 
 - 2026-08-04 cycle 5: **Initial v1.** New skill created per deep-research Stream 1 (coverage gaps) `yubikey-operations` proposal — closes the project-namesake gap (zero skills dedicated to YubiKey operations despite 4 skills referencing it inline). Skill mapped to 10-primitive axes: P8 cryptographic identity (primary), P2 trust chain (root of trust), P1 attestation (FIDO2 attestation cert), P7 audit/evidence (key-use log). Frontmatter validated by `js-yaml`: name regex OK, description ≤1024 chars, no `<`/`>`.
 
+- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+---
+
 ## Cryptographic identity coverage for YubiKey operations (curve-guided-rsi cycle-5 substantive edit)
 
 This skill — **YubiKey enrollment, PIV slot management, ssh-key derivation** — sits in a domain that benefits from explicit cryptographic-identity coverage. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus; this skill's fit coordinate was (u=0.508, v=0.497), PC1+PC2 = 0.4615, holdout R² = +0.2244.
@@ -179,12 +183,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `segmentation` count moved 22→23/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
----
-
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
 This skill's `declarative policy` primitive is closed by cycle-6 RSI. This skill's declarative policy (.rego / OPA / Build Policy) integration is referenced.
@@ -201,8 +199,8 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `immutability` primitiv
 
 ## Least-privilege coverage
 
-This skill applies least-privilege hardening: Linux capabilities (drop + ambient), ProtectSystem/ProtectHome, rootless execution, dynamic user, RBAC, PrivilegeBoundary. Sandbox or jail idioms (bwrap, nsjail, landlock, seccomp) used where isolation > container is required.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

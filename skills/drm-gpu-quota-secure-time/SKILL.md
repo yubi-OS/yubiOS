@@ -1,25 +1,26 @@
 ---
 name: drm-gpu-quota-secure-time
 description: >-
-  GPU resource-lockout design (per-cgroup VRAM quota + hard enforcement via
-  secure world) and ARM64 secure-time sourcing for OP-TEE on Rockchip
-  (CFG_SECURE_TIME_SOURCE_CNTPCT). Covers the real upstream DRM device-memory
-  cgroup effort ("dev" controller, not the old "drmcg" RFC), the real Panfrost
-  BO-allocation hook points (panfrost_ioctl_create_bo, panfrost_lookup_bos),
-  a from-scratch SMC-mailbox lockout pattern for boards without a merged
-  cgroup controller, and OP-TEE's CNTPCT-based secure clock on RK3399/RK3588.
-  Explicitly flags which APIs from casual research/chat notes are real
-  upstream kernel symbols versus invented/outdated ones, so implementation
-  doesn't cargo-cult a hallucinated function name. Use when designing GPU
-  memory quotas, per-cgroup GPU lockout, Panfrost/Mali resource limits, or
-  when wiring OP-TEE's secure time source on Rockchip SoCs. Triggers on: GPU
-  cgroup, drmcg, dev.memory.max, dev.region.max, DRM device memory cgroup,
-  Panfrost BO, panfrost_ioctl_create_bo, GPU lockout, VRAM quota, GPU SMC,
-  CFG_SECURE_TIME_SOURCE_CNTPCT, secure time source, CNTPCT, OP-TEE Rockchip
-  clock.
+  GPU resource-lockout design (per-cgroup VRAM quota + hard enforcement via secure world) and
+  ARM64 secure-time sourcing for OP-TEE on Rockchip (CFG_SECURE_TIME_SOURCE_CNTPCT). Covers the
+  real upstream DRM device-memory cgroup effort ("dev" controller, not the old "drmcg" RFC), the
+  real Panfrost BO-allocation hook points (panfrost_ioctl_create_bo, panfrost_lookup_bos), a
+  from-scratch SMC-mailbox lockout pattern for boards without a merged cgroup controller, and
+  OP-TEE's CNTPCT-based secure clock on RK3399/RK3588. Explicitly flags which APIs from casual
+  research/chat notes are real upstream kernel symbols versus invented/outdated ones, so
+  implementation doesn't cargo-cult a hallucinated function name. Use when designing GPU memory
+  quotas, per-cgroup GPU lockout, Panfrost/Mali resource limits, or when wiring OP-TEE's secure
+  time source on Rockchip SoCs.
 ---
 
 # GPU quota/lockout + ARM64 secure time (grounded corrections)
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Triggers on: GPU cgroup, drmcg, dev.memory.max, dev.region.max, DRM device memory cgroup, Panfrost BO, panfrost_ioctl_create_bo, GPU lockout, VRAM quota, GPU SMC, CFG_SECURE_TIME_SOURCE_CNTPCT, secure time source, CNTPCT, OP-TEE Rockchip clock.
+
 
 ## Why this skill exists
 
@@ -241,4 +242,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

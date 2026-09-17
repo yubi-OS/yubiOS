@@ -112,6 +112,10 @@ The yubiOS boot flow uses `dissect --mount-with-catalog` for the base /usr and `
 
 - 2026-08-04 cycle 5: **Initial v1.** New skill created per deep-research Stream 3 (upstream comparative) — Stream 3 ranked `composefs-kernel-floors` as the second-pick highest-leverage corpus addition (composefs is fully upstreamed but the kernel-floor dependency was uncurated in ADR-007). Low-effort short reference skill that closes the implicit-constraint gap. Skill mapped to 10-primitive axes: P6 immutability (kernel-floor is the immutability enforcement point), P10 self-describing (the signed catalog is a self-describing artifact). Frontmatter validated by `js-yaml`.
 
+- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+---
+
 ## Immutability coverage for composefs kernel floors (curve-guided-rsi cycle-5 substantive edit)
 
 This skill — **kernel ≥6.5 data-only OverlayFS, ≥6.6 verity=require, ≥6.12 file-backed EROFS** — sits in a domain that benefits from explicit immutability (sysext, read-only mounts, fs-verity, OSTree, hermetic /usr, verity) coverage. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus; this skill's fit coordinate was (u=0.661, v=0.672), PC1+PC2 = 0.4615, holdout R² = +0.2244.
@@ -133,12 +137,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `segmentation` count moved 22→23/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
----
-
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
 This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey) integration is referenced.
@@ -155,12 +153,12 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 
 ## Least-privilege coverage
 
-This skill applies least-privilege hardening: Linux capabilities (drop + ambient), ProtectSystem/ProtectHome, rootless execution, dynamic user, RBAC, PrivilegeBoundary. Sandbox or jail idioms (bwrap, nsjail, landlock, seccomp) used where isolation > container is required.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 ## Declarative policy coverage
 
-This skill integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

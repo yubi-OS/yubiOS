@@ -260,7 +260,6 @@ A script that runs `set -e` then calls `curl | jq | mount` but never says which 
 ### 8. refs/*.md (research note)
 
 ```markdown
-## Composition -- cycle 16
 
 - **Position in the corpus**: <e.g. "research note for ADR-NNN; sibling refs: refs/foo-bar-2026-08-04.md, refs/baz-qux-2026-08-05.md">
 - **Callers** (downstream artifacts that depend on this note): <e.g. "ADR-NNN; the corresponding playbook; the corresponding CI test">

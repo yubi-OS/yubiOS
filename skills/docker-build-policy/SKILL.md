@@ -1,23 +1,26 @@
 ---
 name: docker-build-policy
 description: >-
-  Write, wire, and debug Docker Build Policies (OPA/Rego) for the yubi-OS org —
-  the `docker buildx build --policy reset=true,strict=true,filename=yubiOS.rego`
-  supply-chain gate that vets every build input (FROM images) before any layer
-  executes. Covers the Rego policy schema (package docker, default deny, the
-  `input` object — input.local / input.image.ref / input.image.isCanonical /
-  input.image.hasProvenance — the `decision` object and `reason` messages),
-  the yubiOS.rego pattern (approved registries + digest-pinned), how to enable
-  it in a CI build job, buildx version requirements for `--policy`, and how to
-  test a policy locally. Use when enabling/editing yubiOS.rego, adding an
-  approved registry, requiring provenance, or debugging a policy-denied build.
-  Pairs with docker-buildx-rootless and rootless-container-builds. Triggers on:
-  .rego, rego policy, --policy, Build Policy, OPA docker, isCanonical,
-  hasProvenance, yubiOS.rego, policy reset=true strict=true, approved registry,
-  digest pinned build, supply chain build gate.
+  Write, wire, and debug Docker Build Policies (OPA/Rego) for the yubi-OS org — the `docker buildx
+  build --policy reset=true,strict=true,filename=yubiOS.rego` supply-chain gate that vets every
+  build input (FROM images) before any layer executes. Covers the Rego policy schema (package
+  docker, default deny, the `input` object — input.local / input.image.ref /
+  input.image.isCanonical / input.image.hasProvenance — the `decision` object and `reason`
+  messages), the yubiOS.rego pattern (approved registries + digest-pinned), how to enable it in a
+  CI build job, buildx version requirements for `--policy`, and how to test a policy locally. Use
+  when enabling/editing yubiOS.rego, adding an approved registry, requiring provenance, or
+  debugging a policy-denied build. Pairs with docker-buildx-rootless and
+  rootless-container-builds.
 ---
 
 # Docker Build Policy (.rego) — yubi-OS
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Triggers on: .rego, rego policy, --policy, Build Policy, OPA docker, isCanonical, hasProvenance, yubiOS.rego, policy reset=true strict=true, approved registry, digest pinned build, supply chain build gate.
+
 
 Source: https://docs.docker.com/build/policies/ · AGENTS.md build-policy pattern · PINNED.md
 
@@ -182,4 +185,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

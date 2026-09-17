@@ -146,6 +146,10 @@ yubiOS uses portable services for:
 
 - 2026-08-04 cycle 5: **Initial v1.** New skill created per deep-research Stream 1 (coverage gaps) `nspawn-containers` proposal — nspawn was implicit across `bcvk-virtualization`, `bootc-images`, and `mkosi-image-builder` but had no dedicated skill. The hermetic-image-rooted container pattern is now first-class. Skill mapped to 10-primitive axes: P9 segmentation (primary), P3 least privilege (user-namespace + bind scoping), P6 immutability (signed mkosi image as root), P4 declarative policy (nspawn flags as declarative). Frontmatter validated by `js-yaml`.
 
+- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+---
+
 ## Segmentation coverage for nspawn containers (curve-guided-rsi cycle-5 substantive edit)
 
 This skill — **RootImage=, --boot, --private-users, --network-bridge** — sits in a domain that benefits from explicit segmentation coverage (process, container, VM, network, hardware). Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus; this skill's fit coordinate was (u=0.559, v=0.175), PC1+PC2 = 0.4615, holdout R² = +0.2244.
@@ -167,12 +171,6 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `trust chain` count moved 23→24/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 
-## Changelog
-
-- **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
-
----
-
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
 This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey) integration is referenced.
@@ -189,4 +187,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `attestation` primitive
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

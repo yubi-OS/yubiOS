@@ -176,6 +176,18 @@ description: "..."
   `the-follower` (skipped: RSS-only, no canonical source).
 - **Integrity**: xrefcheck planned in `.github/workflows/ci.yml` group=docs.
 
+- **Citations**: quay.io manifest spec (https://quay.io/api/v1/, accessed 2026-08-12),
+  OCI distribution-spec (https://github.com/opencontainers/distribution-spec/blob/main/spec.md,
+  v1.1.0, commit pinned), BuildKit secrets spec (https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/secrets.md,
+  commit pinned).
+- **Prior art**: digest-pinning in NixOS / Guix / Fedora CoreOS (rejected -- not bootc).
+- **RFCs / standards**: RFC 8949 (CBOR, manifest serialization), RFC 8259 (JSON,
+  manifest metadata).
+- **DOI / stable identifiers**: stable URL `https://quay.io/fedora/fedora-bootc:45`
+  with digest suffix; DOI for any cited paper.
+- **See also**: ADR-016 (build-time digest pin decision), refs/fetch-fedora-bootc-manifest-2026-07-23.md
+  (the rotation handler), docs/CONTAINERFILE-DESIGN.md.
+
 ## Recursion -- cycle 17
 - **Provenance**: this SKILL.md is at v1.4.2; introduced_in 1.0.0 (2026-02-14).
 - **Self-archaeology**: cycle-17 patch adds the knowledge_sources + recursion blocks.
@@ -208,20 +220,6 @@ next_review: 2026-11-12
 
 # foo-research-note
 
-## Knowledge sources -- cycle 17
-- **Citations**: quay.io manifest spec (https://quay.io/api/v1/, accessed 2026-08-12),
-  OCI distribution-spec (https://github.com/opencontainers/distribution-spec/blob/main/spec.md,
-  v1.1.0, commit pinned), BuildKit secrets spec (https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/secrets.md,
-  commit pinned).
-- **Prior art**: digest-pinning in NixOS / Guix / Fedora CoreOS (rejected -- not bootc).
-- **RFCs / standards**: RFC 8949 (CBOR, manifest serialization), RFC 8259 (JSON,
-  manifest metadata).
-- **DOI / stable identifiers**: stable URL `https://quay.io/fedora/fedora-bootc:45`
-  with digest suffix; DOI for any cited paper.
-- **See also**: ADR-016 (build-time digest pin decision), refs/fetch-fedora-bootc-manifest-2026-07-23.md
-  (the rotation handler), docs/CONTAINERFILE-DESIGN.md.
-
-## Recursion -- cycle 17
 - **Provenance**: written 2026-08-12, revised 1 time (cycle-17 patch).
 - **Self-archaeology**: the original note predated the cycle-7 NSS sweep; the cycle-17
   patch adds the knowledge_sources + recursion blocks per the axis gap.

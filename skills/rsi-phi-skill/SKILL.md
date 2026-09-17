@@ -1,12 +1,29 @@
 ---
 name: rsi-phi-skill
-description: "Recursive self-improvement on the Fibonacci sphere — uses Vogel's golden-angle sphere sampling (i = t, so the Fibonacci index IS the parameter) and the native Y_3^3 = K sin³θ · cos(3φ) real spherical harmonic as the basis, extended to higher SH degree/order (ℓ=128/m=256 or vice-versa) for 384 symmetric azimuthal lobes. Deep-research subagents per cycle. Bounded hyper-sphere RSI loop, like recursive-self-improvement but on the Riemann-sphere parameter manifold instead of the flat [0,1]² line. Use when you want RSI on a manifold-shaped corpus (skill files, refs/, deep-research outputs) where the parameter t is naturally an azimuthal index, not a linear progress bar; when you need the basis itself to expose its 3-fold (or 384-fold) azimuthal structure on the sphere; or any time 'phi-indexed RSI', 'Fibonacci sphere skill corpus', 'sphere-aware recursive improvement', 'azimuthal lobe primitive', or 'phi-skill cycle' comes up. NOT for: flat-[0,1]² RSI (use recursive-self-improvement directly), single-file atom RSI (use single-action-curve-rsi), or non-recursive audits (use negative-skill-space)."
+description: >-
+  Recursive self-improvement on the Fibonacci sphere — uses Vogel's golden-angle sphere sampling
+  (i = t, so the Fibonacci index IS the parameter) and the native Y_3^3 = K sin³θ · cos(3φ) real
+  spherical harmonic as the basis, extended to higher SH degree/order (ℓ=128/m=256 or vice-versa)
+  for 384 symmetric azimuthal lobes. Deep-research subagents per cycle. Bounded hyper-sphere RSI
+  loop, like recursive-self-improvement but on the Riemann-sphere parameter manifold instead of
+  the flat [0,1]² line. Use when you want RSI on a manifold-shaped corpus (skill files, refs/,
+  deep-research outputs) where the parameter t is naturally an azimuthal index, not a linear
+  progress bar; when you need the basis itself to expose its 3-fold (or 384-fold) azimuthal
+  structure on the sphere; or any time 'phi-indexed RSI', 'Fibonacci sphere skill corpus',
+  'sphere-aware recursive improvement', 'azimuthal lobe primitive', or 'phi-skill cycle' comes up.
 license: "MIT"
 metadata:
   short-description: "Phi-indexed RSI on the Fibonacci sphere (i=t, Y_3^3 + 384 lobes)"
 ---
 
 # RSI-Phi Skill
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+NOT for: flat-[0,1]² RSI (use recursive-self-improvement directly), single-file atom RSI (use single-action-curve-rsi), or non-recursive audits (use negative-skill-space).
+
 
 A **Fibonacci-sphere variant** of `recursive-self-improvement`. The standard RSI loop fits a curve on the flat `[0,1]²` parameter manifold; this skill fits the same loop on the **Riemann sphere** `S²` sampled by Vogel's golden-angle Fibonacci scheme, with the native `Y_3^3(θ,φ) = K sin³θ · cos(3φ)` real spherical harmonic as the per-item basis, extended to `(ℓ=128, m=256)` (and the reverse) for **384 symmetric azimuthal lobes**.
 

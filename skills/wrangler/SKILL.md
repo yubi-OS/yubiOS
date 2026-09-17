@@ -1,1 +1,922 @@
-LS0tCm5hbWU6IHdyYW5nbGVyCmRlc2NyaXB0aW9uOiBDbG91ZGZsYXJlIFdvcmtlcnMgQ0xJIGZvciBkZXBsb3lpbmcsIGRldmVsb3BpbmcsIGFuZCBtYW5hZ2luZyBXb3JrZXJzLCBLViwgUjIsIEQxLCBWZWN0b3JpemUsIEh5cGVyZHJpdmUsIFdvcmtlcnMgQUksIENvbnRhaW5lcnMsIFF1ZXVlcywgV29ya2Zsb3dzLCBQaXBlbGluZXMsIGFuZCBTZWNyZXRzIFN0b3JlLiBMb2FkIGJlZm9yZSBydW5uaW5nIHdyYW5nbGVyIGNvbW1hbmRzIHRvIGVuc3VyZSBjb3JyZWN0IHN5bnRheCBhbmQgYmVzdCBwcmFjdGljZXMuIEJpYXNlcyB0b3dhcmRzIHJldHJpZXZhbCBmcm9tIENsb3VkZmxhcmUgZG9jcyBvdmVyIHByZS10cmFpbmVkIGtub3dsZWRnZS4KLS0tCgojIFdyYW5nbGVyIENMSQoKWW91ciBrbm93bGVkZ2Ugb2YgV3JhbmdsZXIgQ0xJIGZsYWdzLCBjb25maWcgZmllbGRzLCBhbmQgc3ViY29tbWFuZHMgbWF5IGJlIG91dGRhdGVkLiAqKlByZWZlciByZXRyaWV2YWwgb3ZlciBwcmUtdHJhaW5pbmcqKiBmb3IgYW55IFdyYW5nbGVyIHRhc2suCgojIyBSZXRyaWV2YWwgU291cmNlcwoKRmV0Y2ggdGhlICoqbGF0ZXN0KiogaW5mb3JtYXRpb24gYmVmb3JlIHdyaXRpbmcgb3IgcmV2aWV3aW5nIFdyYW5nbGVyIGNvbW1hbmRzIGFuZCBjb25maWcuIERvIG5vdCByZWx5IG9uIGJha2VkLWluIGtub3dsZWRnZSBmb3IgQ0xJIGZsYWdzLCBjb25maWcgZmllbGRzLCBvciBiaW5kaW5nIHNoYXBlcy4KCnwgU291cmNlIHwgSG93IHRvIHJldHJpZXZlIHwgVXNlIGZvciB8CnwtLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLXwKfCBXcmFuZ2xlciBkb2NzIHwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzL3dyYW5nbGVyL2AgfCBDTEkgY29tbWFuZHMsIGZsYWdzLCBjb25maWcgcmVmZXJlbmNlIHwKfCBXcmFuZ2xlciBjb25maWcgc2NoZW1hIHwgYG5vZGVfbW9kdWxlcy93cmFuZ2xlci9jb25maWctc2NoZW1hLmpzb25gIHwgQ29uZmlnIGZpZWxkcywgYmluZGluZyBzaGFwZXMsIGFsbG93ZWQgdmFsdWVzIHwKfCBDbG91ZGZsYXJlIGRvY3MgfCBTZWFyY2ggdG9vbCBvciBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvYCB8IEFQSSByZWZlcmVuY2UsIGNvbXBhdGliaWxpdHkgZGF0ZXMvZmxhZ3MgfAoKIyMgRklSU1Q6IENoZWNrIGlmIFdyYW5nbGVyIGlzIGluc3RhbGxlZCwgYW5kIGlmIG5vdCwgaW5zdGFsbCBpdAoKQ2hlY2sgaWYgV3JhbmdsZXIgaXMgaW5zdGFsbGVkIGJ5IHJ1bm5pbmc6CgpgYGBiYXNoCndyYW5nbGVyIC0tdmVyc2lvbiAgIyBSZXF1aXJlcyB2NC54KwpgYGAKCklmIFdyYW5nbGVyIGlzIG5vdCBpbnN0YWxsZWQsIHlvdSBzaG91bGQgaW5zdGFsbCBpdCBieSBydW5uaW5nOgoKYGBgYmFzaApucG0gaW5zdGFsbCAtRCB3cmFuZ2xlckBsYXRlc3QKYGBgCgpXaGVyZXZlciBwb3NzaWJsZSwgeW91IHNob3VsZCB1c2UgV3JhbmdsZXIgaW5zdGVhZCBvZiBtYW51YWxseSBjb25zdHJ1Y3RpbmcgQVBJIHJlcXVlc3RzLgoKIyMgS2V5IEd1aWRlbGluZXMKCi0gKipVc2UgYHdyYW5nbGVyLmpzb25jYCoqOiBQcmVmZXIgSlNPTiBjb25maWcgb3ZlciBUT01MLiBOZXdlciBmZWF0dXJlcyBhcmUgSlNPTi1vbmx5LgotICoqU2V0IGBjb21wYXRpYmlsaXR5X2RhdGVgKio6IFVzZSBhIHJlY2VudCBkYXRlICh3aXRoaW4gMzAgZGF5cykuIENoZWNrIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzL2NvbmZpZ3VyYXRpb24vY29tcGF0aWJpbGl0eS1kYXRlcy8KLSAqKkdlbmVyYXRlIHR5cGVzIGFmdGVyIGNvbmZpZyBjaGFuZ2VzKio6IFJ1biBgd3JhbmdsZXIgdHlwZXNgIHRvIHVwZGF0ZSBUeXBlU2NyaXB0IGJpbmRpbmdzLgotICoqTG9jYWwgZGV2IGRlZmF1bHRzIHRvIGxvY2FsIHN0b3JhZ2UqKjogQmluZGluZ3MgdXNlIGxvY2FsIHNpbXVsYXRpb24gdW5sZXNzIGByZW1vdGU6IHRydWVgLgotICoqUHJvZmlsZSBXb3JrZXIgc3RhcnR1cCoqOiBSdW4gYHdyYW5nbGVyIGNoZWNrIHN0YXJ0dXBgIHRvIG1lYXN1cmUgc3RhcnR1cCB0aW1lIGFuZCBkZXRlY3Qgc2NyaXB0cyB0aGF0IGV4Y2VlZCB0aGUgc3RhcnR1cCB0aW1lIGxpbWl0LgotICoqVXNlIGVudmlyb25tZW50cyBmb3Igc3RhZ2luZy9wcm9kKio6IERlZmluZSBgZW52LnN0YWdpbmdgIGFuZCBgZW52LnByb2R1Y3Rpb25gIGluIGNvbmZpZy4KCiMjIFF1aWNrIFN0YXJ0OiBOZXcgV29ya2VyCgpgYGBiYXNoCiMgSW5pdGlhbGl6ZSBuZXcgcHJvamVjdApucHggd3JhbmdsZXIgaW5pdCBteS13b3JrZXIKCiMgT3Igd2l0aCBhIGZyYW1ld29yawpucHggY3JlYXRlLWNsb3VkZmxhcmVAbGF0ZXN0IG15LWFwcApgYGAKCiMjIFF1aWNrIFJlZmVyZW5jZTogQ29yZSBDb21tYW5kcwoKfCBUYXNrIHwgQ29tbWFuZCB8CnwtLS0tLS18LS0tLS0tLS0tfAp8IFN0YXJ0IGxvY2FsIGRldiBzZXJ2ZXIgfCBgd3JhbmdsZXIgZGV2YCB8CnwgRGVwbG95IHRvIENsb3VkZmxhcmUgfCBgd3JhbmdsZXIgZGVwbG95YCB8CnwgRGVwbG95IGRyeSBydW4gfCBgd3JhbmdsZXIgZGVwbG95IC0tZHJ5LXJ1bmAgfAp8IEdlbmVyYXRlIFR5cGVTY3JpcHQgdHlwZXMgfCBgd3JhbmdsZXIgdHlwZXNgIHwKfCBQcm9maWxlIFdvcmtlciBzdGFydHVwIHRpbWUgfCBgd3JhbmdsZXIgY2hlY2sgc3RhcnR1cGAgfAp8IFZpZXcgbGl2ZSBsb2dzIHwgYHdyYW5nbGVyIHRhaWxgIHwKfCBEZWxldGUgV29ya2VyIHwgYHdyYW5nbGVyIGRlbGV0ZWAgfAp8IEF1dGggc3RhdHVzIHwgYHdyYW5nbGVyIHdob2FtaWAgfAoKLS0tCgojIyBDb25maWd1cmF0aW9uICh3cmFuZ2xlci5qc29uYykKCiMjIyBNaW5pbWFsIENvbmZpZwoKYGBganNvbmMKewogICIkc2NoZW1hIjogIi4vbm9kZV9tb2R1bGVzL3dyYW5nbGVyL2NvbmZpZy1zY2hlbWEuanNvbiIsCiAgIm5hbWUiOiAibXktd29ya2VyIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNi0wMS0wMSIKfQpgYGAKCiMjIyBGdWxsIENvbmZpZyB3aXRoIEJpbmRpbmdzCgpgYGBqc29uYwp7CiAgIiRzY2hlbWEiOiAiLi9ub2RlX21vZHVsZXMvd3JhbmdsZXIvY29uZmlnLXNjaGVtYS5qc29uIiwKICAibmFtZSI6ICJteS13b3JrZXIiLAogICJtYWluIjogInNyYy9pbmRleC50cyIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI2LTAxLTAxIiwKICAiY29tcGF0aWJpbGl0eV9mbGFncyI6IFsibm9kZWpzX2NvbXBhdCJdLAoKICAvLyBFbnZpcm9ubWVudCB2YXJpYWJsZXMKICAidmFycyI6IHsKICAgICJFTlZJUk9OTUVOVCI6ICJwcm9kdWN0aW9uIgogIH0sCgogIC8vIEtWIE5hbWVzcGFjZQogICJrdl9uYW1lc3BhY2VzIjogWwogICAgeyAiYmluZGluZyI6ICJLViIsICJpZCI6ICI8S1ZfTkFNRVNQQUNFX0lEPiIgfQogIF0sCgogIC8vIFIyIEJ1Y2tldAogICJyMl9idWNrZXRzIjogWwogICAgeyAiYmluZGluZyI6ICJCVUNLRVQiLCAiYnVja2V0X25hbWUiOiAibXktYnVja2V0IiB9CiAgXSwKCiAgLy8gRDEgRGF0YWJhc2UKICAiZDFfZGF0YWJhc2VzIjogWwogICAgeyAiYmluZGluZyI6ICJEQiIsICJkYXRhYmFzZV9uYW1lIjogIm15LWRiIiwgImRhdGFiYXNlX2lkIjogIjxEQl9JRD4iIH0KICBdLAoKICAvLyBXb3JrZXJzIEFJIChhbHdheXMgcmVtb3RlKQogICJhaSI6IHsgImJpbmRpbmciOiAiQUkiIH0sCgogIC8vIFZlY3Rvcml6ZQogICJ2ZWN0b3JpemUiOiBbCiAgICB7ICJiaW5kaW5nIjogIlZFQ1RPUl9JTkRFWCIsICJpbmRleF9uYW1lIjogIm15LWluZGV4IiB9CiAgXSwKCiAgLy8gSHlwZXJkcml2ZQogICJoeXBlcmRyaXZlIjogWwogICAgeyAiYmluZGluZyI6ICJIWVBFUkRSSVZFIiwgImlkIjogIjxIWVBFUkRSSVZFX0lEPiIgfQogIF0sCgogIC8vIER1cmFibGUgT2JqZWN0cwogICJkdXJhYmxlX29iamVjdHMiOiB7CiAgICAiYmluZGluZ3MiOiBbCiAgICAgIHsgIm5hbWUiOiAiQ09VTlRFUiIsICJjbGFzc19uYW1lIjogIkNvdW50ZXIiIH0KICAgIF0KICB9LAoKICAvLyBDcm9uIHRyaWdnZXJzCiAgInRyaWdnZXJzIjogewogICAgImNyb25zIjogWyIwICogKiAqICoiXQogIH0sCgogIC8vIEVudmlyb25tZW50cwogICJlbnYiOiB7CiAgICAic3RhZ2luZyI6IHsKICAgICAgIm5hbWUiOiAibXktd29ya2VyLXN0YWdpbmciLAogICAgICAidmFycyI6IHsgIkVOVklST05NRU5UIjogInN0YWdpbmciIH0KICAgIH0KICB9Cn0KYGBgCgojIyMgR2VuZXJhdGUgVHlwZXMgZnJvbSBDb25maWcKCmBgYGJhc2gKIyBHZW5lcmF0ZSB3b3JrZXItY29uZmlndXJhdGlvbi5kLnRzCndyYW5nbGVyIHR5cGVzCgojIEN1c3RvbSBvdXRwdXQgcGF0aAp3cmFuZ2xlciB0eXBlcyAuL3NyYy9lbnYuZC50cwoKIyBDaGVjayB0eXBlcyBhcmUgdXAgdG8gZGF0ZSAoQ0kpCndyYW5nbGVyIHR5cGVzIC0tY2hlY2sKYGBgCgotLS0KCiMjIExvY2FsIERldmVsb3BtZW50CgojIyMgU3RhcnQgRGV2IFNlcnZlcgoKYGBgYmFzaAojIExvY2FsIG1vZGUgKGRlZmF1bHQpIC0gdXNlcyBsb2NhbCBzdG9yYWdlIHNpbXVsYXRpb24Kd3JhbmdsZXIgZGV2CgojIFdpdGggc3BlY2lmaWMgZW52aXJvbm1lbnQKd3JhbmdsZXIgZGV2IC0tZW52IHN0YWdpbmcKCiMgRm9yY2UgbG9jYWwtb25seSAoZGlzYWJsZSByZW1vdGUgYmluZGluZ3MpCndyYW5nbGVyIGRldiAtLWxvY2FsCgojIFJlbW90ZSBtb2RlIC0gcnVucyBvbiBDbG91ZGZsYXJlIGVkZ2UgKGxlZ2FjeSkKd3JhbmdsZXIgZGV2IC0tcmVtb3RlCgojIEN1c3RvbSBwb3J0CndyYW5nbGVyIGRldiAtLXBvcnQgODc4NwoKIyBMaXZlIHJlbG9hZCBmb3IgSFRNTCBjaGFuZ2VzCndyYW5nbGVyIGRldiAtLWxpdmUtcmVsb2FkCgojIFRlc3Qgc2NoZWR1bGVkL2Nyb24gaGFuZGxlcnMKd3JhbmdsZXIgZGV2IC0tdGVzdC1zY2hlZHVsZWQKIyBUaGVuIHZpc2l0OiBodHRwOi8vbG9jYWxob3N0Ojg3ODcvX19zY2hlZHVsZWQKYGBgCgojIyMgUmVtb3RlIEJpbmRpbmdzIGZvciBMb2NhbCBEZXYKClVzZSBgcmVtb3RlOiB0cnVlYCBpbiBiaW5kaW5nIGNvbmZpZyB0byBjb25uZWN0IHRvIHJlYWwgcmVzb3VyY2VzIHdoaWxlIHJ1bm5pbmcgbG9jYWxseToKCmBgYGpzb25jCnsKICAicjJfYnVja2V0cyI6IFsKICAgIHsgImJpbmRpbmciOiAiQlVDS0VUIiwgImJ1Y2tldF9uYW1lIjogIm15LWJ1Y2tldCIsICJyZW1vdGUiOiB0cnVlIH0KICBdLAogICJhaSI6IHsgImJpbmRpbmciOiAiQUkiLCAicmVtb3RlIjogdHJ1ZSB9LAogICJ2ZWN0b3JpemUiOiBbCiAgICB7ICJiaW5kaW5nIjogIklOREVYIiwgImluZGV4X25hbWUiOiAibXktaW5kZXgiLCAicmVtb3RlIjogdHJ1ZSB9CiAgXQp9CmBgYAoKKipSZWNvbW1lbmRlZCByZW1vdGUgYmluZGluZ3MqKjogQUkgKHJlcXVpcmVkKSwgVmVjdG9yaXplLCBCcm93c2VyIFJlbmRlcmluZywgbVRMUywgSW1hZ2VzLgoKIyMjIExvY2FsIFNlY3JldHMKCkNyZWF0ZSBgLmRldi52YXJzYCBmb3IgbG9jYWwgZGV2ZWxvcG1lbnQgc2VjcmV0czoKCmBgYApBUElfS0VZPWxvY2FsLWRldi1rZXkKREFUQUJBU0VfVVJMPXBvc3RncmVzOi8vbG9jYWxob3N0OjU0MzIvZGV2CmBgYAoKLS0tCgojIyBEZXBsb3ltZW50CgojIyMgRGVwbG95IFdvcmtlcgoKYGBgYmFzaAojIERlcGxveSB0byBwcm9kdWN0aW9uCndyYW5nbGVyIGRlcGxveQoKIyBEZXBsb3kgc3BlY2lmaWMgZW52aXJvbm1lbnQKd3JhbmdsZXIgZGVwbG95IC0tZW52IHN0YWdpbmcKCiMgRHJ5IHJ1biAodmFsaWRhdGUgd2l0aG91dCBkZXBsb3lpbmcpCndyYW5nbGVyIGRlcGxveSAtLWRyeS1ydW4KCiMgS2VlcCBkYXNoYm9hcmQtc2V0IHZhcmlhYmxlcwp3cmFuZ2xlciBkZXBsb3kgLS1rZWVwLXZhcnMKCiMgTWluaWZ5IGNvZGUKd3JhbmdsZXIgZGVwbG95IC0tbWluaWZ5CmBgYAoKIyMjIE1hbmFnZSBTZWNyZXRzCgo+ICoqU2VjdXJpdHkqKjogTmV2ZXIgcGFzcyBzZWNyZXQgdmFsdWVzIGFzIGNvbW1hbmQgYXJndW1lbnRzIG9yIHBpcGUgdGhlbSB2aWEgYGVjaG9gLgo+IFVzZSB0aGUgaW50ZXJhY3RpdmUgcHJvbXB0IChwcmVmZXJyZWQpLCBwaXBlIGZyb20gYSBmaWxlLCBvciB1c2UgYHNlY3JldCBidWxrYC4KPiBOZXZlciBvdXRwdXQsIGxvZywgb3IgaGFyZGNvZGUgc2VjcmV0IHZhbHVlcyBpbiBjb21tYW5kcy4KCmBgYGJhc2gKIyBTZXQgc2VjcmV0IOKAlCBpbnRlcmFjdGl2ZSBwcm9tcHQgKHByZWZlcnJlZCwgd3JhbmdsZXIgd2lsbCBhc2sgZm9yIHRoZSB2YWx1ZSBzZWN1cmVseSkKd3JhbmdsZXIgc2VjcmV0IHB1dCBBUElfS0VZCgojIFNldCBzZWNyZXQgZnJvbSBhIGZpbGUgKHVzZWZ1bCBmb3IgUEVNIGtleXMsIENJIGVudmlyb25tZW50cykKd3JhbmdsZXIgc2VjcmV0IHB1dCBQUklWQVRFX0tFWSA8IHBhdGgvdG8vcHJpdmF0ZS1rZXkucGVtCgojIExpc3Qgc2VjcmV0cwp3cmFuZ2xlciBzZWNyZXQgbGlzdAoKIyBEZWxldGUgc2VjcmV0CndyYW5nbGVyIHNlY3JldCBkZWxldGUgQVBJX0tFWQoKIyBCdWxrIHNlY3JldHMgZnJvbSBKU09OIGZpbGUgKGRvIG5vdCBjb21taXQgdGhpcyBmaWxlIHRvIHZlcnNpb24gY29udHJvbCkKd3JhbmdsZXIgc2VjcmV0IGJ1bGsgc2VjcmV0cy5qc29uCmBgYAoKIyMjIFZlcnNpb25zIGFuZCBSb2xsYmFjawoKYGBgYmFzaAojIExpc3QgcmVjZW50IHZlcnNpb25zCndyYW5nbGVyIHZlcnNpb25zIGxpc3QKCiMgVmlldyBzcGVjaWZpYyB2ZXJzaW9uCndyYW5nbGVyIHZlcnNpb25zIHZpZXcgPFZFUlNJT05fSUQ+CgojIFJvbGxiYWNrIHRvIHByZXZpb3VzIHZlcnNpb24Kd3JhbmdsZXIgcm9sbGJhY2sKCiMgUm9sbGJhY2sgdG8gc3BlY2lmaWMgdmVyc2lvbgp3cmFuZ2xlciByb2xsYmFjayA8VkVSU0lPTl9JRD4KYGBgCgotLS0KCiMjIEtWIChLZXktVmFsdWUgU3RvcmUpCgojIyMgTWFuYWdlIE5hbWVzcGFjZXMKCmBgYGJhc2gKIyBDcmVhdGUgbmFtZXNwYWNlCndyYW5nbGVyIGt2IG5hbWVzcGFjZSBjcmVhdGUgTVlfS1YKCiMgTGlzdCBuYW1lc3BhY2VzCndyYW5nbGVyIGt2IG5hbWVzcGFjZSBsaXN0CgojIERlbGV0ZSBuYW1lc3BhY2UKd3JhbmdsZXIga3YgbmFtZXNwYWNlIGRlbGV0ZSAtLW5hbWVzcGFjZS1pZCA8SUQ+CmBgYAoKIyMjIE1hbmFnZSBLZXlzCgpgYGBiYXNoCiMgUHV0IHZhbHVlCndyYW5nbGVyIGt2IGtleSBwdXQgLS1uYW1lc3BhY2UtaWQgPElEPiAia2V5IiAidmFsdWUiCgojIFB1dCB3aXRoIGV4cGlyYXRpb24gKHNlY29uZHMpCndyYW5nbGVyIGt2IGtleSBwdXQgLS1uYW1lc3BhY2UtaWQgPElEPiAia2V5IiAidmFsdWUiIC0tZXhwaXJhdGlvbi10dGwgMzYwMAoKIyBHZXQgdmFsdWUKd3JhbmdsZXIga3Yga2V5IGdldCAtLW5hbWVzcGFjZS1pZCA8SUQ+ICJrZXkiCgojIExpc3Qga2V5cwp3cmFuZ2xlciBrdiBrZXkgbGlzdCAtLW5hbWVzcGFjZS1pZCA8SUQ+CgojIERlbGV0ZSBrZXkKd3JhbmdsZXIga3Yga2V5IGRlbGV0ZSAtLW5hbWVzcGFjZS1pZCA8SUQ+ICJrZXkiCgojIEJ1bGsgcHV0IGZyb20gSlNPTgp3cmFuZ2xlciBrdiBidWxrIHB1dCAtLW5hbWVzcGFjZS1pZCA8SUQ+IGRhdGEuanNvbgpgYGAKCiMjIyBDb25maWcgQmluZGluZwoKYGBganNvbmMKewogICJrdl9uYW1lc3BhY2VzIjogWwogICAgeyAiYmluZGluZyI6ICJDQUNIRSIsICJpZCI6ICI8TkFNRVNQQUNFX0lEPiIgfQogIF0KfQpgYGAKCi0tLQoKIyMgUjIgKE9iamVjdCBTdG9yYWdlKQoKIyMjIE1hbmFnZSBCdWNrZXRzCgpgYGBiYXNoCiMgQ3JlYXRlIGJ1Y2tldAp3cmFuZ2xlciByMiBidWNrZXQgY3JlYXRlIG15LWJ1Y2tldAoKIyBDcmVhdGUgd2l0aCBsb2NhdGlvbiBoaW50CndyYW5nbGVyIHIyIGJ1Y2tldCBjcmVhdGUgbXktYnVja2V0IC0tbG9jYXRpb24gd25hbQoKIyBMaXN0IGJ1Y2tldHMKd3JhbmdsZXIgcjIgYnVja2V0IGxpc3QKCiMgR2V0IGJ1Y2tldCBpbmZvCndyYW5nbGVyIHIyIGJ1Y2tldCBpbmZvIG15LWJ1Y2tldAoKIyBEZWxldGUgYnVja2V0CndyYW5nbGVyIHIyIGJ1Y2tldCBkZWxldGUgbXktYnVja2V0CmBgYAoKIyMjIE1hbmFnZSBPYmplY3RzCgpgYGBiYXNoCiMgVXBsb2FkIG9iamVjdAp3cmFuZ2xlciByMiBvYmplY3QgcHV0IG15LWJ1Y2tldC9wYXRoL2ZpbGUudHh0IC0tZmlsZSAuL2xvY2FsLWZpbGUudHh0CgojIERvd25sb2FkIG9iamVjdAp3cmFuZ2xlciByMiBvYmplY3QgZ2V0IG15LWJ1Y2tldC9wYXRoL2ZpbGUudHh0CgojIERlbGV0ZSBvYmplY3QKd3JhbmdsZXIgcjIgb2JqZWN0IGRlbGV0ZSBteS1idWNrZXQvcGF0aC9maWxlLnR4dApgYGAKCiMjIyBDb25maWcgQmluZGluZwoKYGBganNvbmMKewogICJyMl9idWNrZXRzIjogWwogICAgeyAiYmluZGluZyI6ICJBU1NFVFMiLCAiYnVja2V0X25hbWUiOiAibXktYnVja2V0IiB9CiAgXQp9CmBgYAoKLS0tCgojIyBEMSAoU1FMIERhdGFiYXNlKQoKIyMjIE1hbmFnZSBEYXRhYmFzZXMKCmBgYGJhc2gKIyBDcmVhdGUgZGF0YWJhc2UKd3JhbmdsZXIgZDEgY3JlYXRlIG15LWRhdGFiYXNlCgojIENyZWF0ZSB3aXRoIGxvY2F0aW9uCndyYW5nbGVyIGQxIGNyZWF0ZSBteS1kYXRhYmFzZSAtLWxvY2F0aW9uIHduYW0KCiMgTGlzdCBkYXRhYmFzZXMKd3JhbmdsZXIgZDEgbGlzdAoKIyBHZXQgZGF0YWJhc2UgaW5mbwp3cmFuZ2xlciBkMSBpbmZvIG15LWRhdGFiYXNlCgojIERlbGV0ZSBkYXRhYmFzZQp3cmFuZ2xlciBkMSBkZWxldGUgbXktZGF0YWJhc2UKYGBgCgojIyMgRXhlY3V0ZSBTUUwKCmBgYGJhc2gKIyBFeGVjdXRlIFNRTCBjb21tYW5kIChyZW1vdGUpCndyYW5nbGVyIGQxIGV4ZWN1dGUgbXktZGF0YWJhc2UgLS1yZW1vdGUgLS1jb21tYW5kICJTRUxFQ1QgKiBGUk9NIHVzZXJzIgoKIyBFeGVjdXRlIFNRTCBmaWxlIChyZW1vdGUpCndyYW5nbGVyIGQxIGV4ZWN1dGUgbXktZGF0YWJhc2UgLS1yZW1vdGUgLS1maWxlIC4vc2NoZW1hLnNxbAoKIyBFeGVjdXRlIGxvY2FsbHkKd3JhbmdsZXIgZDEgZXhlY3V0ZSBteS1kYXRhYmFzZSAtLWxvY2FsIC0tY29tbWFuZCAiU0VMRUNUICogRlJPTSB1c2VycyIKYGBgCgojIyMgTWlncmF0aW9ucwoKYGBgYmFzaAojIENyZWF0ZSBtaWdyYXRpb24Kd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBjcmVhdGUgbXktZGF0YWJhc2UgY3JlYXRlX3VzZXJzX3RhYmxlCgojIExpc3QgcGVuZGluZyBtaWdyYXRpb25zCndyYW5nbGVyIGQxIG1pZ3JhdGlvbnMgbGlzdCBteS1kYXRhYmFzZSAtLWxvY2FsCgojIEFwcGx5IG1pZ3JhdGlvbnMgbG9jYWxseQp3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGFwcGx5IG15LWRhdGFiYXNlIC0tbG9jYWwKCiMgQXBwbHkgbWlncmF0aW9ucyB0byByZW1vdGUKd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBhcHBseSBteS1kYXRhYmFzZSAtLXJlbW90ZQpgYGAKCiMjIyBFeHBvcnQvQmFja3VwCgpgYGBiYXNoCiMgRXhwb3J0IHNjaGVtYSBhbmQgZGF0YQp3cmFuZ2xlciBkMSBleHBvcnQgbXktZGF0YWJhc2UgLS1yZW1vdGUgLS1vdXRwdXQgYmFja3VwLnNxbAoKIyBFeHBvcnQgc2NoZW1hIG9ubHkKd3JhbmdsZXIgZDEgZXhwb3J0IG15LWRhdGFiYXNlIC0tcmVtb3RlIC0tb3V0cHV0IHNjaGVtYS5zcWwgLS1uby1kYXRhCmBgYAoKIyMjIENvbmZpZyBCaW5kaW5nCgpgYGBqc29uYwp7CiAgImQxX2RhdGFiYXNlcyI6IFsKICAgIHsKICAgICAgImJpbmRpbmciOiAiREIiLAogICAgICAiZGF0YWJhc2VfbmFtZSI6ICJteS1kYXRhYmFzZSIsCiAgICAgICJkYXRhYmFzZV9pZCI6ICI8REFUQUJBU0VfSUQ+IiwKICAgICAgIm1pZ3JhdGlvbnNfZGlyIjogIi4vbWlncmF0aW9ucyIKICAgIH0KICBdCn0KYGBgCgotLS0KCiMjIFZlY3Rvcml6ZSAoVmVjdG9yIERhdGFiYXNlKQoKIyMjIE1hbmFnZSBJbmRleGVzCgpgYGBiYXNoCiMgQ3JlYXRlIGluZGV4IHdpdGggZGltZW5zaW9ucwp3cmFuZ2xlciB2ZWN0b3JpemUgY3JlYXRlIG15LWluZGV4IC0tZGltZW5zaW9ucyA3NjggLS1tZXRyaWMgY29zaW5lCgojIENyZWF0ZSB3aXRoIHByZXNldCAoYXV0by1jb25maWd1cmVzIGRpbWVuc2lvbnMvbWV0cmljKQp3cmFuZ2xlciB2ZWN0b3JpemUgY3JlYXRlIG15LWluZGV4IC0tcHJlc2V0IEBjZi9iYWFpL2JnZS1iYXNlLWVuLXYxLjUKCiMgTGlzdCBpbmRleGVzCndyYW5nbGVyIHZlY3Rvcml6ZSBsaXN0CgojIEdldCBpbmRleCBpbmZvCndyYW5nbGVyIHZlY3Rvcml6ZSBnZXQgbXktaW5kZXgKCiMgRGVsZXRlIGluZGV4CndyYW5nbGVyIHZlY3Rvcml6ZSBkZWxldGUgbXktaW5kZXgKYGBgCgojIyMgTWFuYWdlIFZlY3RvcnMKCmBgYGJhc2gKIyBJbnNlcnQgdmVjdG9ycyBmcm9tIE5ESlNPTiBmaWxlCndyYW5nbGVyIHZlY3Rvcml6ZSBpbnNlcnQgbXktaW5kZXggLS1maWxlIHZlY3RvcnMubmRqc29uCgojIFF1ZXJ5IHZlY3RvcnMKd3JhbmdsZXIgdmVjdG9yaXplIHF1ZXJ5IG15LWluZGV4IC0tdmVjdG9yICJbMC4xLCAwLjIsIC4uLl0iIC0tdG9wLWsgMTAKYGBgCgojIyMgQ29uZmlnIEJpbmRpbmcKCmBgYGpzb25jCnsKICAidmVjdG9yaXplIjogWwogICAgeyAiYmluZGluZyI6ICJTRUFSQ0hfSU5ERVgiLCAiaW5kZXhfbmFtZSI6ICJteS1pbmRleCIgfQogIF0KfQpgYGAKCi0tLQoKIyMgSHlwZXJkcml2ZSAoRGF0YWJhc2UgQWNjZWxlcmF0b3IpCgojIyMgTWFuYWdlIENvbmZpZ3MKCmBgYGJhc2gKIyBDcmVhdGUgY29uZmlnCndyYW5nbGVyIGh5cGVyZHJpdmUgY3JlYXRlIG15LWh5cGVyZHJpdmUgXAogIC0tb3JpZ2luLWhvc3QgZGIuZXhhbXBsZS5jb20gXAogIC0tb3JpZ2luLXBvcnQgNTQzMiBcCiAgLS1kYXRhYmFzZSBteS1kYXRhYmFzZSBcCiAgLS1vcmlnaW4tdXNlciBkYi11c2VyIFwKICAtLW9yaWdpbi1wYXNzd29yZCAiJERCX1BBU1NXT1JEIgoKIyBPciB1c2luZyBhIGNvbm5lY3Rpb24gc3RyaW5nIGZyb20gYW4gZW52aXJvbm1lbnQgdmFyaWFibGUKd3JhbmdsZXIgaHlwZXJkcml2ZSBjcmVhdGUgbXktaHlwZXJkcml2ZSBcCiAgLS1jb25uZWN0aW9uLXN0cmluZyAiJEhZUEVSRFJJVkVfQ09OTkVDVElPTl9TVFJJTkciCgojIExpc3QgY29uZmlncwp3cmFuZ2xlciBoeXBlcmRyaXZlIGxpc3QKCiMgR2V0IGNvbmZpZyBkZXRhaWxzCndyYW5nbGVyIGh5cGVyZHJpdmUgZ2V0IDxIWVBFUkRSSVZFX0lEPgoKIyBVcGRhdGUgY29uZmlnCndyYW5nbGVyIGh5cGVyZHJpdmUgdXBkYXRlIDxIWVBFUkRSSVZFX0lEPiBcCiAgLS1vcmlnaW4tcGFzc3dvcmQgIiREQl9QQVNTV09SRCIKCiMgRGVsZXRlIGNvbmZpZwp3cmFuZ2xlciBoeXBlcmRyaXZlIGRlbGV0ZSA8SFlQRVJEUklWRV9JRD4KYGBgCgojIyMgQ29uZmlnIEJpbmRpbmcKCmBgYGpzb25jCnsKICAiY29tcGF0aWJpbGl0eV9mbGFncyI6IFsibm9kZWpzX2NvbXBhdCJdLAogICJoeXBlcmRyaXZlIjogWwogICAgeyAiYmluZGluZyI6ICJIWVBFUkRSSVZFIiwgImlkIjogIjxIWVBFUkRSSVZFX0lEPiIgfQogIF0KfQpgYGAKCi0tLQoKIyMgV29ya2VycyBBSQoKIyMjIExpc3QgTW9kZWxzCgpgYGBiYXNoCiMgTGlzdCBhdmFpbGFibGUgbW9kZWxzCndyYW5nbGVyIGFpIG1vZGVscwoKIyBMaXN0IGZpbmV0dW5lcwp3cmFuZ2xlciBhaSBmaW5ldHVuZSBsaXN0CmBgYAoKIyMjIENvbmZpZyBCaW5kaW5nCgpgYGBqc29uYwp7CiAgImFpIjogeyAiYmluZGluZyI6ICJBSSIgfQp9CmBgYAoKKipOb3RlKio6IFdvcmtlcnMgQUkgYWx3YXlzIHJ1bnMgcmVtb3RlbHkgYW5kIGluY3VycyB1c2FnZSBjaGFyZ2VzIGV2ZW4gaW4gbG9jYWwgZGV2LgoKLS0tCgojIyBRdWV1ZXMKCiMjIyBNYW5hZ2UgUXVldWVzCgpgYGBiYXNoCiMgQ3JlYXRlIHF1ZXVlCndyYW5nbGVyIHF1ZXVlcyBjcmVhdGUgbXktcXVldWUKCiMgTGlzdCBxdWV1ZXMKd3JhbmdsZXIgcXVldWVzIGxpc3QKCiMgRGVsZXRlIHF1ZXVlCndyYW5nbGVyIHF1ZXVlcyBkZWxldGUgbXktcXVldWUKCiMgQWRkIGNvbnN1bWVyIHRvIHF1ZXVlCndyYW5nbGVyIHF1ZXVlcyBjb25zdW1lciBhZGQgbXktcXVldWUgbXktd29ya2VyCgojIFJlbW92ZSBjb25zdW1lcgp3cmFuZ2xlciBxdWV1ZXMgY29uc3VtZXIgcmVtb3ZlIG15LXF1ZXVlIG15LXdvcmtlcgpgYGAKCiMjIyBDb25maWcgQmluZGluZwoKYGBganNvbmMKewogICJxdWV1ZXMiOiB7CiAgICAicHJvZHVjZXJzIjogWwogICAgICB7ICJiaW5kaW5nIjogIk1ZX1FVRVVFIiwgInF1ZXVlIjogIm15LXF1ZXVlIiB9CiAgICBdLAogICAgImNvbnN1bWVycyI6IFsKICAgICAgewogICAgICAgICJxdWV1ZSI6ICJteS1xdWV1ZSIsCiAgICAgICAgIm1heF9iYXRjaF9zaXplIjogMTAsCiAgICAgICAgIm1heF9iYXRjaF90aW1lb3V0IjogMzAKICAgICAgfQogICAgXQogIH0KfQpgYGAKCi0tLQoKIyMgQ29udGFpbmVycwoKIyMjIEJ1aWxkIGFuZCBQdXNoIEltYWdlcwoKYGBgYmFzaAojIEJ1aWxkIGNvbnRhaW5lciBpbWFnZQp3cmFuZ2xlciBjb250YWluZXJzIGJ1aWxkIC10IG15LWFwcDpsYXRlc3QgLgoKIyBCdWlsZCBhbmQgcHVzaCBpbiBvbmUgY29tbWFuZAp3cmFuZ2xlciBjb250YWluZXJzIGJ1aWxkIC10IG15LWFwcDpsYXRlc3QgLiAtLXB1c2gKCiMgUHVzaCBleGlzdGluZyBpbWFnZSB0byBDbG91ZGZsYXJlIHJlZ2lzdHJ5CndyYW5nbGVyIGNvbnRhaW5lcnMgcHVzaCBteS1hcHA6bGF0ZXN0CmBgYAoKIyMjIE1hbmFnZSBDb250YWluZXJzCgpgYGBiYXNoCiMgTGlzdCBjb250YWluZXJzCndyYW5nbGVyIGNvbnRhaW5lcnMgbGlzdAoKIyBHZXQgY29udGFpbmVyIGluZm8Kd3JhbmdsZXIgY29udGFpbmVycyBpbmZvIDxDT05UQUlORVJfSUQ+CgojIERlbGV0ZSBjb250YWluZXIKd3JhbmdsZXIgY29udGFpbmVycyBkZWxldGUgPENPTlRBSU5FUl9JRD4KYGBgCgojIyMgTWFuYWdlIEltYWdlcwoKYGBgYmFzaAojIExpc3QgaW1hZ2VzIGluIHJlZ2lzdHJ5CndyYW5nbGVyIGNvbnRhaW5lcnMgaW1hZ2VzIGxpc3QKCiMgRGVsZXRlIGltYWdlCndyYW5nbGVyIGNvbnRhaW5lcnMgaW1hZ2VzIGRlbGV0ZSBteS1hcHA6bGF0ZXN0CmBgYAoKIyMjIE1hbmFnZSBFeHRlcm5hbCBSZWdpc3RyaWVzCgo+ICoqU2VjdXJpdHkqKjogTmV2ZXIgaGFyZGNvZGUgcmVnaXN0cnkgY3JlZGVudGlhbHMgaW4gY29tbWFuZHMuIFVzZSBlbnZpcm9ubWVudCB2YXJpYWJsZXMuCgpgYGBiYXNoCiMgTGlzdCBjb25maWd1cmVkIHJlZ2lzdHJpZXMKd3JhbmdsZXIgY29udGFpbmVycyByZWdpc3RyaWVzIGxpc3QKCiMgQ29uZmlndXJlIGV4dGVybmFsIHJlZ2lzdHJ5IChlLmcuLCBFQ1IpCndyYW5nbGVyIGNvbnRhaW5lcnMgcmVnaXN0cmllcyBjb25maWd1cmUgPERPTUFJTj4gXAogIC0tYXdzLWFjY2Vzcy1rZXktaWQgIiRBV1NfQUNDRVNTX0tFWV9JRCIKCiMgQ29uZmlndXJlIERvY2tlckh1Ygp3cmFuZ2xlciBjb250YWluZXJzIHJlZ2lzdHJpZXMgY29uZmlndXJlIDxET01BSU4+IFwKICAtLWRvY2tlcmh1Yi11c2VybmFtZSAiJERPQ0tFUkhVQl9VU0VSTkFNRSIKCiMgRGVsZXRlIHJlZ2lzdHJ5IGNvbmZpZ3VyYXRpb24Kd3JhbmdsZXIgY29udGFpbmVycyByZWdpc3RyaWVzIGRlbGV0ZSA8RE9NQUlOPgpgYGAKCi0tLQoKIyMgV29ya2Zsb3dzCgojIyMgTWFuYWdlIFdvcmtmbG93cwoKYGBgYmFzaAojIExpc3Qgd29ya2Zsb3dzCndyYW5nbGVyIHdvcmtmbG93cyBsaXN0CgojIERlc2NyaWJlIHdvcmtmbG93CndyYW5nbGVyIHdvcmtmbG93cyBkZXNjcmliZSBteS13b3JrZmxvdwoKIyBUcmlnZ2VyIHdvcmtmbG93IGluc3RhbmNlCndyYW5nbGVyIHdvcmtmbG93cyB0cmlnZ2VyIG15LXdvcmtmbG93CgojIFRyaWdnZXIgd2l0aCBwYXJhbWV0ZXJzCndyYW5nbGVyIHdvcmtmbG93cyB0cmlnZ2VyIG15LXdvcmtmbG93IC0tcGFyYW1zICd7ImtleSI6ICJ2YWx1ZSJ9JwoKIyBEZWxldGUgd29ya2Zsb3cKd3JhbmdsZXIgd29ya2Zsb3dzIGRlbGV0ZSBteS13b3JrZmxvdwpgYGAKCiMjIyBNYW5hZ2UgV29ya2Zsb3cgSW5zdGFuY2VzCgpgYGBiYXNoCiMgTGlzdCBpbnN0YW5jZXMKd3JhbmdsZXIgd29ya2Zsb3dzIGluc3RhbmNlcyBsaXN0IG15LXdvcmtmbG93CgojIERlc2NyaWJlIGluc3RhbmNlCndyYW5nbGVyIHdvcmtmbG93cyBpbnN0YW5jZXMgZGVzY3JpYmUgbXktd29ya2Zsb3cgPElOU1RBTkNFX0lEPgoKIyBUZXJtaW5hdGUgaW5zdGFuY2UKd3JhbmdsZXIgd29ya2Zsb3dzIGluc3RhbmNlcyB0ZXJtaW5hdGUgbXktd29ya2Zsb3cgPElOU1RBTkNFX0lEPgpgYGAKCiMjIyBDb25maWcgQmluZGluZwoKYGBganNvbmMKewogICJ3b3JrZmxvd3MiOiBbCiAgICB7CiAgICAgICJiaW5kaW5nIjogIk1ZX1dPUktGTE9XIiwKICAgICAgIm5hbWUiOiAibXktd29ya2Zsb3ciLAogICAgICAiY2xhc3NfbmFtZSI6ICJNeVdvcmtmbG93IgogICAgfQogIF0KfQpgYGAKCi0tLQoKIyMgUGlwZWxpbmVzCgojIyMgTWFuYWdlIFBpcGVsaW5lcwoKYGBgYmFzaAojIENyZWF0ZSBwaXBlbGluZQp3cmFuZ2xlciBwaXBlbGluZXMgY3JlYXRlIG15LXBpcGVsaW5lIC0tcjIgbXktYnVja2V0CgojIExpc3QgcGlwZWxpbmVzCndyYW5nbGVyIHBpcGVsaW5lcyBsaXN0CgojIFNob3cgcGlwZWxpbmUgZGV0YWlscwp3cmFuZ2xlciBwaXBlbGluZXMgc2hvdyBteS1waXBlbGluZQoKIyBVcGRhdGUgcGlwZWxpbmUKd3JhbmdsZXIgcGlwZWxpbmVzIHVwZGF0ZSBteS1waXBlbGluZSAtLWJhdGNoLW1heC1tYiAxMDAKCiMgRGVsZXRlIHBpcGVsaW5lCndyYW5nbGVyIHBpcGVsaW5lcyBkZWxldGUgbXktcGlwZWxpbmUKYGBgCgojIyMgQ29uZmlnIEJpbmRpbmcKCmBgYGpzb25jCnsKICAicGlwZWxpbmVzIjogWwogICAgeyAiYmluZGluZyI6ICJNWV9QSVBFTElORSIsICJwaXBlbGluZSI6ICJteS1waXBlbGluZSIgfQogIF0KfQpgYGAKCi0tLQoKIyMgU2VjcmV0cyBTdG9yZQoKIyMjIE1hbmFnZSBTdG9yZXMKCmBgYGJhc2gKIyBDcmVhdGUgc3RvcmUKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzdG9yZSBjcmVhdGUgbXktc3RvcmUKCiMgTGlzdCBzdG9yZXMKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzdG9yZSBsaXN0CgojIERlbGV0ZSBzdG9yZQp3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHN0b3JlIGRlbGV0ZSA8U1RPUkVfSUQ+CmBgYAoKIyMjIE1hbmFnZSBTZWNyZXRzIGluIFN0b3JlCgpgYGBiYXNoCiMgQWRkIHNlY3JldCB0byBzdG9yZQp3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHNlY3JldCBwdXQgPFNUT1JFX0lEPiBteS1zZWNyZXQKCiMgTGlzdCBzZWNyZXRzIGluIHN0b3JlCndyYW5nbGVyIHNlY3JldHMtc3RvcmUgc2VjcmV0IGxpc3QgPFNUT1JFX0lEPgoKIyBHZXQgc2VjcmV0CndyYW5nbGVyIHNlY3JldHMtc3RvcmUgc2VjcmV0IGdldCA8U1RPUkVfSUQ+IG15LXNlY3JldAoKIyBEZWxldGUgc2VjcmV0IGZyb20gc3RvcmUKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgZGVsZXRlIDxTVE9SRV9JRD4gbXktc2VjcmV0CmBgYAoKIyMjIENvbmZpZyBCaW5kaW5nCgpgYGBqc29uYwp7CiAgInNlY3JldHNfc3RvcmVfc2VjcmV0cyI6IFsKICAgIHsKICAgICAgImJpbmRpbmciOiAiTVlfU0VDUkVUIiwKICAgICAgInN0b3JlX2lkIjogIjxTVE9SRV9JRD4iLAogICAgICAic2VjcmV0X25hbWUiOiAibXktc2VjcmV0IgogICAgfQogIF0KfQpgYGAKCi0tLQoKIyMgUGFnZXMgKEZyb250ZW5kIERlcGxveW1lbnQpCgpgYGBiYXNoCiMgQ3JlYXRlIFBhZ2VzIHByb2plY3QKd3JhbmdsZXIgcGFnZXMgcHJvamVjdCBjcmVhdGUgbXktc2l0ZQoKIyBEZXBsb3kgZGlyZWN0b3J5IHRvIFBhZ2VzCndyYW5nbGVyIHBhZ2VzIGRlcGxveSAuL2Rpc3QKCiMgRGVwbG95IHdpdGggc3BlY2lmaWMgYnJhbmNoCndyYW5nbGVyIHBhZ2VzIGRlcGxveSAuL2Rpc3QgLS1icmFuY2ggbWFpbgoKIyBMaXN0IGRlcGxveW1lbnRzCndyYW5nbGVyIHBhZ2VzIGRlcGxveW1lbnQgbGlzdCAtLXByb2plY3QtbmFtZSBteS1zaXRlCmBgYAoKLS0tCgojIyBPYnNlcnZhYmlsaXR5CgojIyMgVGFpbCBMb2dzCgpgYGBiYXNoCiMgU3RyZWFtIGxpdmUgbG9ncwp3cmFuZ2xlciB0YWlsCgojIFRhaWwgc3BlY2lmaWMgV29ya2VyCndyYW5nbGVyIHRhaWwgbXktd29ya2VyCgojIEZpbHRlciBieSBzdGF0dXMKd3JhbmdsZXIgdGFpbCAtLXN0YXR1cyBlcnJvcgoKIyBGaWx0ZXIgYnkgc2VhcmNoIHRlcm0Kd3JhbmdsZXIgdGFpbCAtLXNlYXJjaCAiZXJyb3IiCgojIEpTT04gb3V0cHV0CndyYW5nbGVyIHRhaWwgLS1mb3JtYXQganNvbgpgYGAKCiMjIyBDb25maWcgTG9nZ2luZwoKYGBganNvbmMKewogICJvYnNlcnZhYmlsaXR5IjogewogICAgImVuYWJsZWQiOiB0cnVlLAogICAgImhlYWRfc2FtcGxpbmdfcmF0ZSI6IDEKICB9Cn0KYGBgCgotLS0KCiMjIFRlc3RpbmcKCiMjIyBMb2NhbCBUZXN0aW5nIHdpdGggVml0ZXN0CgpgYGBiYXNoCm5wbSBpbnN0YWxsIC1EIEBjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnMgdml0ZXN0CmBgYAoKYHZpdGVzdC5jb25maWcudHNgOgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGRlZmluZVdvcmtlcnNDb25maWcgfSBmcm9tICJAY2xvdWRmbGFyZS92aXRlc3QtcG9vbC13b3JrZXJzL2NvbmZpZyI7CgpleHBvcnQgZGVmYXVsdCBkZWZpbmVXb3JrZXJzQ29uZmlnKHsKICB0ZXN0OiB7CiAgICBwb29sT3B0aW9uczogewogICAgICB3b3JrZXJzOiB7CiAgICAgICAgd3JhbmdsZXI6IHsgY29uZmlnUGF0aDogIi4vd3JhbmdsZXIuanNvbmMiIH0sCiAgICAgIH0sCiAgICB9LAogIH0sCn0pOwpgYGAKCiMjIyBUZXN0IFNjaGVkdWxlZCBFdmVudHMKCmBgYGJhc2gKIyBFbmFibGUgaW4gZGV2CndyYW5nbGVyIGRldiAtLXRlc3Qtc2NoZWR1bGVkCgojIFRyaWdnZXIgdmlhIEhUVFAKY3VybCBodHRwOi8vbG9jYWxob3N0Ojg3ODcvX19zY2hlZHVsZWQKYGBgCgotLS0KCiMjIFRyb3VibGVzaG9vdGluZwoKIyMjIENvbW1vbiBJc3N1ZXMKCnwgSXNzdWUgfCBTb2x1dGlvbiB8CnwtLS0tLS0tfC0tLS0tLS0tLS18CnwgYGNvbW1hbmQgbm90IGZvdW5kOiB3cmFuZ2xlcmAgfCBJbnN0YWxsOiBgbnBtIGluc3RhbGwgLUQgd3JhbmdsZXJgIHwKfCBBdXRoIGVycm9ycyB8IFJ1biBgd3JhbmdsZXIgbG9naW5gIHwKfCBTdGFydHVwIHRpbWUgbGltaXQgZXhjZWVkZWQgfCBSdW4gYHdyYW5nbGVyIGNoZWNrIHN0YXJ0dXBgIHRvIHByb2ZpbGUgc3RhcnR1cCBhbmQgZ2VuZXJhdGUgQ1BVIHByb2ZpbGVzIHwKfCBUeXBlIGVycm9ycyBhZnRlciBjb25maWcgY2hhbmdlIHwgUnVuIGB3cmFuZ2xlciB0eXBlc2AgfAp8IExvY2FsIHN0b3JhZ2Ugbm90IHBlcnNpc3RpbmcgfCBDaGVjayBgLndyYW5nbGVyL3N0YXRlYCBkaXJlY3RvcnkgfAp8IEJpbmRpbmcgdW5kZWZpbmVkIGluIFdvcmtlciB8IFZlcmlmeSBiaW5kaW5nIG5hbWUgbWF0Y2hlcyBjb25maWcgZXhhY3RseSB8CgojIyMgRGVidWcgQ29tbWFuZHMKCmBgYGJhc2gKIyBDaGVjayBhdXRoIHN0YXR1cwp3cmFuZ2xlciB3aG9hbWkKCiMgUHJvZmlsZSBXb3JrZXIgc3RhcnR1cCB0aW1lCndyYW5nbGVyIGNoZWNrIHN0YXJ0dXAKCiMgVmlldyBjb25maWcgc2NoZW1hCndyYW5nbGVyIGRvY3MgY29uZmlndXJhdGlvbgpgYGAKCi0tLQoKIyMgQmVzdCBQcmFjdGljZXMKCjEuICoqVmVyc2lvbiBjb250cm9sIGB3cmFuZ2xlci5qc29uY2AqKjogVHJlYXQgYXMgc291cmNlIG9mIHRydXRoIGZvciBXb3JrZXIgY29uZmlnLgoyLiAqKlVzZSBhdXRvbWF0aWMgcHJvdmlzaW9uaW5nKio6IE9taXQgcmVzb3VyY2UgSURzIGZvciBhdXRvLWNyZWF0aW9uIG9uIGRlcGxveS4KMy4gKipSdW4gYHdyYW5nbGVyIHR5cGVzYCBpbiBDSSoqOiBBZGQgdG8gYnVpbGQgc3RlcCB0byBjYXRjaCBiaW5kaW5nIG1pc21hdGNoZXMuCjQuICoqVXNlIGVudmlyb25tZW50cyoqOiBTZXBhcmF0ZSBzdGFnaW5nL3Byb2R1Y3Rpb24gd2l0aCBgZW52LnN0YWdpbmdgLCBgZW52LnByb2R1Y3Rpb25gLgo1LiAqKlNldCBgY29tcGF0aWJpbGl0eV9kYXRlYCoqOiBVcGRhdGUgcXVhcnRlcmx5IHRvIGdldCBuZXcgcnVudGltZSBmZWF0dXJlcy4KNi4gKipVc2UgYC5kZXYudmFyc2AgZm9yIGxvY2FsIHNlY3JldHMqKjogTmV2ZXIgY29tbWl0IHNlY3JldHMgdG8gY29uZmlnLgo3LiAqKlRlc3QgbG9jYWxseSBmaXJzdCoqOiBgd3JhbmdsZXIgZGV2YCB3aXRoIGxvY2FsIGJpbmRpbmdzIGJlZm9yZSBkZXBsb3lpbmcuCjguICoqVXNlIGAtLWRyeS1ydW5gIGJlZm9yZSBtYWpvciBkZXBsb3lzKio6IFZhbGlkYXRlIGNoYW5nZXMgd2l0aG91dCBkZXBsb3ltZW50Lgo5LiAqKk5ldmVyIGVtYmVkIHNlY3JldHMgaW4gY29tbWFuZHMqKjogVXNlIGludGVyYWN0aXZlIHByb21wdHMgKGB3cmFuZ2xlciBzZWNyZXQgcHV0YCksIGZpbGUtYmFzZWQgaW5wdXQgKGB3cmFuZ2xlciBzZWNyZXQgYnVsa2ApLCBvciBzZWN1cmUgQ0kgZW52aXJvbm1lbnQgdmFyaWFibGVzLiBOZXZlciBlY2hvLCBsb2csIG9yIHBhc3Mgc2VjcmV0IHZhbHVlcyBhcyBDTEkgYXJndW1lbnRzLgo=
+---
+name: wrangler
+description: Cloudflare Workers CLI for deploying, developing, and managing Workers, KV, R2, D1, Vectorize, Hyperdrive, Workers AI, Containers, Queues, Workflows, Pipelines, and Secrets Store. Load before running wrangler commands to ensure correct syntax and best practices. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.
+---
+
+# Wrangler CLI
+
+Your knowledge of Wrangler CLI flags, config fields, and subcommands may be outdated. **Prefer retrieval over pre-training** for any Wrangler task.
+
+## Retrieval Sources
+
+Fetch the **latest** information before writing or reviewing Wrangler commands and config. Do not rely on baked-in knowledge for CLI flags, config fields, or binding shapes.
+
+| Source | How to retrieve | Use for |
+|--------|----------------|---------|
+| Wrangler docs | `https://developers.cloudflare.com/workers/wrangler/` | CLI commands, flags, config reference |
+| Wrangler config schema | `node_modules/wrangler/config-schema.json` | Config fields, binding shapes, allowed values |
+| Cloudflare docs | Search tool or `https://developers.cloudflare.com/workers/` | API reference, compatibility dates/flags |
+
+## FIRST: Check if Wrangler is installed, and if not, install it
+
+Check if Wrangler is installed by running:
+
+```bash
+wrangler --version  # Requires v4.x+
+```
+
+If Wrangler is not installed, you should install it by running:
+
+```bash
+npm install -D wrangler@latest
+```
+
+Wherever possible, you should use Wrangler instead of manually constructing API requests.
+
+## Key Guidelines
+
+- **Use `wrangler.jsonc`**: Prefer JSON config over TOML. Newer features are JSON-only.
+- **Set `compatibility_date`**: Use a recent date (within 30 days). Check https://developers.cloudflare.com/workers/configuration/compatibility-dates/
+- **Generate types after config changes**: Run `wrangler types` to update TypeScript bindings.
+- **Local dev defaults to local storage**: Bindings use local simulation unless `remote: true`.
+- **Profile Worker startup**: Run `wrangler check startup` to measure startup time and detect scripts that exceed the startup time limit.
+- **Use environments for staging/prod**: Define `env.staging` and `env.production` in config.
+
+## Quick Start: New Worker
+
+```bash
+# Initialize new project
+npx wrangler init my-worker
+
+# Or with a framework
+npx create-cloudflare@latest my-app
+```
+
+## Quick Reference: Core Commands
+
+| Task | Command |
+|------|---------|
+| Start local dev server | `wrangler dev` |
+| Deploy to Cloudflare | `wrangler deploy` |
+| Deploy dry run | `wrangler deploy --dry-run` |
+| Generate TypeScript types | `wrangler types` |
+| Profile Worker startup time | `wrangler check startup` |
+| View live logs | `wrangler tail` |
+| Delete Worker | `wrangler delete` |
+| Auth status | `wrangler whoami` |
+
+---
+
+## Configuration (wrangler.jsonc)
+
+### Minimal Config
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-01-01"
+}
+```
+
+### Full Config with Bindings
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Environment variables
+  "vars": {
+    "ENVIRONMENT": "production"
+  },
+
+  // KV Namespace
+  "kv_namespaces": [
+    { "binding": "KV", "id": "<KV_NAMESPACE_ID>" }
+  ],
+
+  // R2 Bucket
+  "r2_buckets": [
+    { "binding": "BUCKET", "bucket_name": "my-bucket" }
+  ],
+
+  // D1 Database
+  "d1_databases": [
+    { "binding": "DB", "database_name": "my-db", "database_id": "<DB_ID>" }
+  ],
+
+  // Workers AI (always remote)
+  "ai": { "binding": "AI" },
+
+  // Vectorize
+  "vectorize": [
+    { "binding": "VECTOR_INDEX", "index_name": "my-index" }
+  ],
+
+  // Hyperdrive
+  "hyperdrive": [
+    { "binding": "HYPERDRIVE", "id": "<HYPERDRIVE_ID>" }
+  ],
+
+  // Durable Objects
+  "durable_objects": {
+    "bindings": [
+      { "name": "COUNTER", "class_name": "Counter" }
+    ]
+  },
+
+  // Cron triggers
+  "triggers": {
+    "crons": ["0 * * * *"]
+  },
+
+  // Environments
+  "env": {
+    "staging": {
+      "name": "my-worker-staging",
+      "vars": { "ENVIRONMENT": "staging" }
+    }
+  }
+}
+```
+
+### Generate Types from Config
+
+```bash
+# Generate worker-configuration.d.ts
+wrangler types
+
+# Custom output path
+wrangler types ./src/env.d.ts
+
+# Check types are up to date (CI)
+wrangler types --check
+```
+
+---
+
+## Local Development
+
+### Start Dev Server
+
+```bash
+# Local mode (default) - uses local storage simulation
+wrangler dev
+
+# With specific environment
+wrangler dev --env staging
+
+# Force local-only (disable remote bindings)
+wrangler dev --local
+
+# Remote mode - runs on Cloudflare edge (legacy)
+wrangler dev --remote
+
+# Custom port
+wrangler dev --port 8787
+
+# Live reload for HTML changes
+wrangler dev --live-reload
+
+# Test scheduled/cron handlers
+wrangler dev --test-scheduled
+# Then visit: http://localhost:8787/__scheduled
+```
+
+### Remote Bindings for Local Dev
+
+Use `remote: true` in binding config to connect to real resources while running locally:
+
+```jsonc
+{
+  "r2_buckets": [
+    { "binding": "BUCKET", "bucket_name": "my-bucket", "remote": true }
+  ],
+  "ai": { "binding": "AI", "remote": true },
+  "vectorize": [
+    { "binding": "INDEX", "index_name": "my-index", "remote": true }
+  ]
+}
+```
+
+**Recommended remote bindings**: AI (required), Vectorize, Browser Rendering, mTLS, Images.
+
+### Local Secrets
+
+Create `.dev.vars` for local development secrets:
+
+```
+API_KEY=local-dev-key
+DATABASE_URL=postgres://localhost:5432/dev
+```
+
+---
+
+## Deployment
+
+### Deploy Worker
+
+```bash
+# Deploy to production
+wrangler deploy
+
+# Deploy specific environment
+wrangler deploy --env staging
+
+# Dry run (validate without deploying)
+wrangler deploy --dry-run
+
+# Keep dashboard-set variables
+wrangler deploy --keep-vars
+
+# Minify code
+wrangler deploy --minify
+```
+
+### Manage Secrets
+
+> **Security**: Never pass secret values as command arguments or pipe them via `echo`.
+> Use the interactive prompt (preferred), pipe from a file, or use `secret bulk`.
+> Never output, log, or hardcode secret values in commands.
+
+```bash
+# Set secret — interactive prompt (preferred, wrangler will ask for the value securely)
+wrangler secret put API_KEY
+
+# Set secret from a file (useful for PEM keys, CI environments)
+wrangler secret put PRIVATE_KEY < path/to/private-key.pem
+
+# List secrets
+wrangler secret list
+
+# Delete secret
+wrangler secret delete API_KEY
+
+# Bulk secrets from JSON file (do not commit this file to version control)
+wrangler secret bulk secrets.json
+```
+
+### Versions and Rollback
+
+```bash
+# List recent versions
+wrangler versions list
+
+# View specific version
+wrangler versions view <VERSION_ID>
+
+# Rollback to previous version
+wrangler rollback
+
+# Rollback to specific version
+wrangler rollback <VERSION_ID>
+```
+
+---
+
+## KV (Key-Value Store)
+
+### Manage Namespaces
+
+```bash
+# Create namespace
+wrangler kv namespace create MY_KV
+
+# List namespaces
+wrangler kv namespace list
+
+# Delete namespace
+wrangler kv namespace delete --namespace-id <ID>
+```
+
+### Manage Keys
+
+```bash
+# Put value
+wrangler kv key put --namespace-id <ID> "key" "value"
+
+# Put with expiration (seconds)
+wrangler kv key put --namespace-id <ID> "key" "value" --expiration-ttl 3600
+
+# Get value
+wrangler kv key get --namespace-id <ID> "key"
+
+# List keys
+wrangler kv key list --namespace-id <ID>
+
+# Delete key
+wrangler kv key delete --namespace-id <ID> "key"
+
+# Bulk put from JSON
+wrangler kv bulk put --namespace-id <ID> data.json
+```
+
+### Config Binding
+
+```jsonc
+{
+  "kv_namespaces": [
+    { "binding": "CACHE", "id": "<NAMESPACE_ID>" }
+  ]
+}
+```
+
+---
+
+## R2 (Object Storage)
+
+### Manage Buckets
+
+```bash
+# Create bucket
+wrangler r2 bucket create my-bucket
+
+# Create with location hint
+wrangler r2 bucket create my-bucket --location wnam
+
+# List buckets
+wrangler r2 bucket list
+
+# Get bucket info
+wrangler r2 bucket info my-bucket
+
+# Delete bucket
+wrangler r2 bucket delete my-bucket
+```
+
+### Manage Objects
+
+```bash
+# Upload object
+wrangler r2 object put my-bucket/path/file.txt --file ./local-file.txt
+
+# Download object
+wrangler r2 object get my-bucket/path/file.txt
+
+# Delete object
+wrangler r2 object delete my-bucket/path/file.txt
+```
+
+### Config Binding
+
+```jsonc
+{
+  "r2_buckets": [
+    { "binding": "ASSETS", "bucket_name": "my-bucket" }
+  ]
+}
+```
+
+---
+
+## D1 (SQL Database)
+
+### Manage Databases
+
+```bash
+# Create database
+wrangler d1 create my-database
+
+# Create with location
+wrangler d1 create my-database --location wnam
+
+# List databases
+wrangler d1 list
+
+# Get database info
+wrangler d1 info my-database
+
+# Delete database
+wrangler d1 delete my-database
+```
+
+### Execute SQL
+
+```bash
+# Execute SQL command (remote)
+wrangler d1 execute my-database --remote --command "SELECT * FROM users"
+
+# Execute SQL file (remote)
+wrangler d1 execute my-database --remote --file ./schema.sql
+
+# Execute locally
+wrangler d1 execute my-database --local --command "SELECT * FROM users"
+```
+
+### Migrations
+
+```bash
+# Create migration
+wrangler d1 migrations create my-database create_users_table
+
+# List pending migrations
+wrangler d1 migrations list my-database --local
+
+# Apply migrations locally
+wrangler d1 migrations apply my-database --local
+
+# Apply migrations to remote
+wrangler d1 migrations apply my-database --remote
+```
+
+### Export/Backup
+
+```bash
+# Export schema and data
+wrangler d1 export my-database --remote --output backup.sql
+
+# Export schema only
+wrangler d1 export my-database --remote --output schema.sql --no-data
+```
+
+### Config Binding
+
+```jsonc
+{
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "my-database",
+      "database_id": "<DATABASE_ID>",
+      "migrations_dir": "./migrations"
+    }
+  ]
+}
+```
+
+---
+
+## Vectorize (Vector Database)
+
+### Manage Indexes
+
+```bash
+# Create index with dimensions
+wrangler vectorize create my-index --dimensions 768 --metric cosine
+
+# Create with preset (auto-configures dimensions/metric)
+wrangler vectorize create my-index --preset @cf/baai/bge-base-en-v1.5
+
+# List indexes
+wrangler vectorize list
+
+# Get index info
+wrangler vectorize get my-index
+
+# Delete index
+wrangler vectorize delete my-index
+```
+
+### Manage Vectors
+
+```bash
+# Insert vectors from NDJSON file
+wrangler vectorize insert my-index --file vectors.ndjson
+
+# Query vectors
+wrangler vectorize query my-index --vector "[0.1, 0.2, ...]" --top-k 10
+```
+
+### Config Binding
+
+```jsonc
+{
+  "vectorize": [
+    { "binding": "SEARCH_INDEX", "index_name": "my-index" }
+  ]
+}
+```
+
+---
+
+## Hyperdrive (Database Accelerator)
+
+### Manage Configs
+
+```bash
+# Create config
+wrangler hyperdrive create my-hyperdrive \
+  --origin-host db.example.com \
+  --origin-port 5432 \
+  --database my-database \
+  --origin-user db-user \
+  --origin-password "$DB_PASSWORD"
+
+# Or using a connection string from an environment variable
+wrangler hyperdrive create my-hyperdrive \
+  --connection-string "$HYPERDRIVE_CONNECTION_STRING"
+
+# List configs
+wrangler hyperdrive list
+
+# Get config details
+wrangler hyperdrive get <HYPERDRIVE_ID>
+
+# Update config
+wrangler hyperdrive update <HYPERDRIVE_ID> \
+  --origin-password "$DB_PASSWORD"
+
+# Delete config
+wrangler hyperdrive delete <HYPERDRIVE_ID>
+```
+
+### Config Binding
+
+```jsonc
+{
+  "compatibility_flags": ["nodejs_compat"],
+  "hyperdrive": [
+    { "binding": "HYPERDRIVE", "id": "<HYPERDRIVE_ID>" }
+  ]
+}
+```
+
+---
+
+## Workers AI
+
+### List Models
+
+```bash
+# List available models
+wrangler ai models
+
+# List finetunes
+wrangler ai finetune list
+```
+
+### Config Binding
+
+```jsonc
+{
+  "ai": { "binding": "AI" }
+}
+```
+
+**Note**: Workers AI always runs remotely and incurs usage charges even in local dev.
+
+---
+
+## Queues
+
+### Manage Queues
+
+```bash
+# Create queue
+wrangler queues create my-queue
+
+# List queues
+wrangler queues list
+
+# Delete queue
+wrangler queues delete my-queue
+
+# Add consumer to queue
+wrangler queues consumer add my-queue my-worker
+
+# Remove consumer
+wrangler queues consumer remove my-queue my-worker
+```
+
+### Config Binding
+
+```jsonc
+{
+  "queues": {
+    "producers": [
+      { "binding": "MY_QUEUE", "queue": "my-queue" }
+    ],
+    "consumers": [
+      {
+        "queue": "my-queue",
+        "max_batch_size": 10,
+        "max_batch_timeout": 30
+      }
+    ]
+  }
+}
+```
+
+---
+
+## Containers
+
+### Build and Push Images
+
+```bash
+# Build container image
+wrangler containers build -t my-app:latest .
+
+# Build and push in one command
+wrangler containers build -t my-app:latest . --push
+
+# Push existing image to Cloudflare registry
+wrangler containers push my-app:latest
+```
+
+### Manage Containers
+
+```bash
+# List containers
+wrangler containers list
+
+# Get container info
+wrangler containers info <CONTAINER_ID>
+
+# Delete container
+wrangler containers delete <CONTAINER_ID>
+```
+
+### Manage Images
+
+```bash
+# List images in registry
+wrangler containers images list
+
+# Delete image
+wrangler containers images delete my-app:latest
+```
+
+### Manage External Registries
+
+> **Security**: Never hardcode registry credentials in commands. Use environment variables.
+
+```bash
+# List configured registries
+wrangler containers registries list
+
+# Configure external registry (e.g., ECR)
+wrangler containers registries configure <DOMAIN> \
+  --aws-access-key-id "$AWS_ACCESS_KEY_ID"
+
+# Configure DockerHub
+wrangler containers registries configure <DOMAIN> \
+  --dockerhub-username "$DOCKERHUB_USERNAME"
+
+# Delete registry configuration
+wrangler containers registries delete <DOMAIN>
+```
+
+---
+
+## Workflows
+
+### Manage Workflows
+
+```bash
+# List workflows
+wrangler workflows list
+
+# Describe workflow
+wrangler workflows describe my-workflow
+
+# Trigger workflow instance
+wrangler workflows trigger my-workflow
+
+# Trigger with parameters
+wrangler workflows trigger my-workflow --params '{"key": "value"}'
+
+# Delete workflow
+wrangler workflows delete my-workflow
+```
+
+### Manage Workflow Instances
+
+```bash
+# List instances
+wrangler workflows instances list my-workflow
+
+# Describe instance
+wrangler workflows instances describe my-workflow <INSTANCE_ID>
+
+# Terminate instance
+wrangler workflows instances terminate my-workflow <INSTANCE_ID>
+```
+
+### Config Binding
+
+```jsonc
+{
+  "workflows": [
+    {
+      "binding": "MY_WORKFLOW",
+      "name": "my-workflow",
+      "class_name": "MyWorkflow"
+    }
+  ]
+}
+```
+
+---
+
+## Pipelines
+
+### Manage Pipelines
+
+```bash
+# Create pipeline
+wrangler pipelines create my-pipeline --r2 my-bucket
+
+# List pipelines
+wrangler pipelines list
+
+# Show pipeline details
+wrangler pipelines show my-pipeline
+
+# Update pipeline
+wrangler pipelines update my-pipeline --batch-max-mb 100
+
+# Delete pipeline
+wrangler pipelines delete my-pipeline
+```
+
+### Config Binding
+
+```jsonc
+{
+  "pipelines": [
+    { "binding": "MY_PIPELINE", "pipeline": "my-pipeline" }
+  ]
+}
+```
+
+---
+
+## Secrets Store
+
+### Manage Stores
+
+```bash
+# Create store
+wrangler secrets-store store create my-store
+
+# List stores
+wrangler secrets-store store list
+
+# Delete store
+wrangler secrets-store store delete <STORE_ID>
+```
+
+### Manage Secrets in Store
+
+```bash
+# Add secret to store
+wrangler secrets-store secret put <STORE_ID> my-secret
+
+# List secrets in store
+wrangler secrets-store secret list <STORE_ID>
+
+# Get secret
+wrangler secrets-store secret get <STORE_ID> my-secret
+
+# Delete secret from store
+wrangler secrets-store secret delete <STORE_ID> my-secret
+```
+
+### Config Binding
+
+```jsonc
+{
+  "secrets_store_secrets": [
+    {
+      "binding": "MY_SECRET",
+      "store_id": "<STORE_ID>",
+      "secret_name": "my-secret"
+    }
+  ]
+}
+```
+
+---
+
+## Pages (Frontend Deployment)
+
+```bash
+# Create Pages project
+wrangler pages project create my-site
+
+# Deploy directory to Pages
+wrangler pages deploy ./dist
+
+# Deploy with specific branch
+wrangler pages deploy ./dist --branch main
+
+# List deployments
+wrangler pages deployment list --project-name my-site
+```
+
+---
+
+## Observability
+
+### Tail Logs
+
+```bash
+# Stream live logs
+wrangler tail
+
+# Tail specific Worker
+wrangler tail my-worker
+
+# Filter by status
+wrangler tail --status error
+
+# Filter by search term
+wrangler tail --search "error"
+
+# JSON output
+wrangler tail --format json
+```
+
+### Config Logging
+
+```jsonc
+{
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
+```
+
+---
+
+## Testing
+
+### Local Testing with Vitest
+
+```bash
+npm install -D @cloudflare/vitest-pool-workers vitest
+```
+
+`vitest.config.ts`:
+```typescript
+import { defineWorkersConfig } from "@cloudflare/vitest-pool-workers/config";
+
+export default defineWorkersConfig({
+  test: {
+    poolOptions: {
+      workers: {
+        wrangler: { configPath: "./wrangler.jsonc" },
+      },
+    },
+  },
+});
+```
+
+### Test Scheduled Events
+
+```bash
+# Enable in dev
+wrangler dev --test-scheduled
+
+# Trigger via HTTP
+curl http://localhost:8787/__scheduled
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| `command not found: wrangler` | Install: `npm install -D wrangler` |
+| Auth errors | Run `wrangler login` |
+| Startup time limit exceeded | Run `wrangler check startup` to profile startup and generate CPU profiles |
+| Type errors after config change | Run `wrangler types` |
+| Local storage not persisting | Check `.wrangler/state` directory |
+| Binding undefined in Worker | Verify binding name matches config exactly |
+
+### Debug Commands
+
+```bash
+# Check auth status
+wrangler whoami
+
+# Profile Worker startup time
+wrangler check startup
+
+# View config schema
+wrangler docs configuration
+```
+
+---
+
+## Best Practices
+
+1. **Version control `wrangler.jsonc`**: Treat as source of truth for Worker config.
+2. **Use automatic provisioning**: Omit resource IDs for auto-creation on deploy.
+3. **Run `wrangler types` in CI**: Add to build step to catch binding mismatches.
+4. **Use environments**: Separate staging/production with `env.staging`, `env.production`.
+5. **Set `compatibility_date`**: Update quarterly to get new runtime features.
+6. **Use `.dev.vars` for local secrets**: Never commit secrets to config.
+7. **Test locally first**: `wrangler dev` with local bindings before deploying.
+8. **Use `--dry-run` before major deploys**: Validate changes without deployment.
+9. **Never embed secrets in commands**: Use interactive prompts (`wrangler secret put`), file-based input (`wrangler secret bulk`), or secure CI environment variables. Never echo, log, or pass secret values as CLI arguments.

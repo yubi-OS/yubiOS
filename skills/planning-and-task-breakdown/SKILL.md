@@ -9,6 +9,8 @@ description: Breaks work into ordered tasks. Use when you have a spec or clear r
 
 Decompose work into small, verifiable tasks with explicit acceptance criteria. Good task breakdown is the difference between an agent that completes work reliably and one that produces a tangled mess. Every task should be small enough to implement, test, and verify in a single focused session.
 
+[One paragraph summary of what we're building]
+
 ## When to Use
 
 - You have a spec and need to break it into implementable units
@@ -168,9 +170,6 @@ When using an external tracker, note it in `tasks/plan.md` (e.g. "Tasks tracked 
 ```markdown
 # Implementation Plan: [Feature/Project Name]
 
-## Overview
-[One paragraph summary of what we're building]
-
 ## Architecture Decisions
 - [Key decision 1 and rationale]
 - [Key decision 2 and rationale]
@@ -309,5 +308,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 
 ## Declarative policy coverage
 
-This skill integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
-Acceptance criteria are per-task and answer "did we build the right thing?". They sit on top of the project-wide Definition of Done, the standing bar every task clears before it counts as done. See `../../references/definition-of-done.md`.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

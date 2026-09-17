@@ -1,24 +1,25 @@
 ---
 name: docker-buildx-rootless
 description: >-
-  Docker CLI-level skill covering three topics: (1) dockerd rootless mode —
-  running the Docker daemon as a non-root user via user namespaces, daemon
-  socket location, systemd user unit, contexts; (2) docker buildx CLI —
-  builder instances, driver types (docker, docker-container, kubernetes,
-  remote), buildx create/use/inspect/rm, multi-platform builds, cache
-  management, bake; (3) Docker Build Policies (OPA/Rego) — the --policy flag,
-  policy file schema, input object fields, decision object, yubiOS yubiOS.rego
-  pattern. Use when setting up rootless dockerd, creating/managing buildx
-  builders, running multi-platform builds, writing or debugging Build Policy
-  .rego files, or working with docker buildx bake. Pairs with
-  rootless-container-builds (supply chain hardening) and the docker GitHub
-  Actions skills for CI. Triggers on: dockerd rootless, dockerd --rootless,
-  rootless daemon, buildx create, buildx use, buildx drivers, docker-container
-  driver, bake, docker-bake.hcl, --policy, Build Policy, OPA rego docker,
-  isCanonical, multi-platform buildx.
+  Docker CLI-level skill covering three topics: (1) dockerd rootless mode — running the Docker
+  daemon as a non-root user via user namespaces, daemon socket location, systemd user unit,
+  contexts; (2) docker buildx CLI — builder instances, driver types (docker, docker-container,
+  kubernetes, remote), buildx create/use/inspect/rm, multi-platform builds, cache management,
+  bake; (3) Docker Build Policies (OPA/Rego) — the --policy flag, policy file schema, input object
+  fields, decision object, yubiOS yubiOS.rego pattern. Use when setting up rootless dockerd,
+  creating/managing buildx builders, running multi-platform builds, writing or debugging Build
+  Policy .rego files, or working with docker buildx bake. Pairs with rootless-container-builds
+  (supply chain hardening) and the docker GitHub Actions skills for CI.
 ---
 
 # Docker Buildx + Rootless Daemon (CLI)
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Triggers on: dockerd rootless, dockerd --rootless, rootless daemon, buildx create, buildx use, buildx drivers, docker-container driver, bake, docker-bake.hcl, --policy, Build Policy, OPA rego docker, isCanonical, multi-platform buildx.
+
 
 ## Part 1 — dockerd Rootless Mode
 
@@ -434,4 +435,4 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 
 ## Continuous / adaptive coverage
 
-This skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

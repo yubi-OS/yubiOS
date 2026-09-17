@@ -1,1 +1,185 @@
-LS0tCm5hbWU6IHNhbmRib3gtbWlncmF0ZS10by1uZXh0CmRlc2NyaXB0aW9uOiBVc2Ugd2hlbiBwb3J0aW5nIGEgQ2xvdWRmbGFyZSBTYW5kYm94IGFwcCBmcm9tIHN0YWJsZSBAY2xvdWRmbGFyZS9zYW5kYm94IHRvIEBjbG91ZGZsYXJlL3NhbmRib3hAbmV4dCAoU2FuZGJveCBTREsgMS4wIHByZXZpZXcpLCBvciB3aGVuIHRoZSB1c2VyIGFza3MgdG8gbWlncmF0ZSBvciB1cGdyYWRlIHRvIFNhbmRib3ggMS4wIC8gQG5leHQuIE5vdCBmb3IgZGF5LXRvLWRheSBzdGFibGUgd29yayAoc2FuZGJveC1zdGFibGUpIG9yIG5ldyBAbmV4dCBhcHBzIChzYW5kYm94LW5leHQpLgotLS0KCiMgTWlncmF0ZSBzdGFibGUg4oaSIFNhbmRib3ggU0RLIDEuMCBwcmV2aWV3IChgQG5leHRgKQoKKipQZXJmb3JtKiogdGhlIHBvcnQuIEZvbGxvdyB0aGUgc3RlcHMgaW4gb3JkZXIuIERlcHRoIGxpdmVzIGluIGRvY3PigJRmZXRjaCB0aGUgbGlua2VkIHBhZ2Ugd2hlbiBhIHN0ZXAgbmVlZHMgZGV0YWlsLgoKSHVtYW4gZ3VpZGU6IFtNaWdyYXRlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8xLTAtcHJldmlldy9taWdyYXRlLykgwrcgWzEuMCBwcmV2aWV3XShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8xLTAtcHJldmlldy8pCgoqKk5ldyBwcm9qZWN0cyoqIHNob3VsZCBzdGFydCBvbiBgQG5leHRgICgqKmBzYW5kYm94LW5leHRgKiopLCBub3QgdGhpcyBza2lsbC4gKipEYXktdG8tZGF5IHN0YWJsZSB3b3JrKiog4oaSICoqYHNhbmRib3gtc3RhYmxlYCoqLiBEZXByZWNhdGVkLUFQSSBjbGVhbnVwICoqd2l0aG91dCoqIG1vdmluZyB0byBgQG5leHRgIOKGkiBbMjAyNiBkZXByZWNhdGlvbiBndWlkZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NhbmRib3gvZ3VpZGVzLzIwMjYtZGVwcmVjYXRpb24vKSBmaXJzdCBpZiBuZWVkZWQuCgpFeGlzdGluZyBhcHBzIHNob3VsZCBtaWdyYXRlICoqd2hlbiB5b3UgY2FuKiosIHNvIHlvdSBhcmUgcmVhZHkgd2hlbiAxLjAgYmVjb21lcyB0aGUgc3RhYmxlIHJlbGVhc2UuIERvICoqbm90KiogZm9yY2UgcHJvZHVjdGlvbiBjdXRvdmVyIHdpdGhvdXQgdGhlIHVzZXIgYWdyZWVpbmcuCgoqKlByZWZlciBpbnN0YWxsZWQgYEBuZXh0YCB0eXBlcyBhbmQgdGhlIG1pZ3JhdGUgZG9jIG92ZXIgbWVtb3J5LioqCgojIyBXb3JrZmxvdwoKMS4gKipSZXZpZXcqKiBoYXJkIHJ1bGVzIGFuZCB0aGUgcmVwbGFjZW1lbnQgbWFwICAKMi4gKipBdWRpdCoqIHRoZSBjb2RlYmFzZTsgbGlzdCBoaXRzIGFuZCB0YXJnZXQgc2hhcGVzICAKMy4gKipDbGFyaWZ5Kiogd2l0aCB0aGUgdXNlciAoY3V0b3ZlciwgYnJpZGdlLCBQeXRob24gaW1hZ2UsIHVuY2xlYXIgc2l0ZXMpICAKNC4gKipVcGdyYWRlKiogcGFja2FnZSwgaW1hZ2UsIGFuZCBjb2RlICAKNS4gKipWYWxpZGF0ZSoqICAKClN0b3AgYWZ0ZXIgYW55IHN0ZXAgdGhhdCBuZWVkcyBhIHVzZXIgZGVjaXNpb24uCgojIyBIYXJkIHJ1bGVzCgotIFdvcmtlciBwYWNrYWdlIGFuZCBjb250YWluZXIgaW1hZ2UgbXVzdCBiZSB0aGUgKipzYW1lKiogYEBuZXh0YCBsaW5lLiAgCi0gUHJvZHVjdGlvbiBjdXRvdmVyIHVzZXMgKippbW1lZGlhdGUqKiBjb250YWluZXIgcm9sbG91dC4gU3RhYmxlIGFuZCBgQG5leHRgIGNvbnRyb2wgcHJvdG9jb2xzIGFyZSBpbmNvbXBhdGlibGUgYm90aCB3YXlzOyBncmFkdWFsIHJvbGxvdXQgbGVhdmVzIGEgYnJva2VuIG1peGVkIHdpbmRvdy4gSW4tZmxpZ2h0IGNvbnRhaW5lciB3b3JrIGNhbiBzdG9wLiAgCi0gQWZ0ZXIgY3V0b3ZlciwgYGF3YWl0IHNhbmRib3guZXhlYyguLi4pYCBtZWFucyBwcm9jZXNzICoqc3RhcnRlZCoqLCBub3QgY29tbWFuZCAqKmZpbmlzaGVkKiouICAKLSBBcmd2IGlzIGFzLWlzIChubyBpbXBsaWNpdCBzaGVsbCkuIFNoZWxsIHN5bnRheCBuZWVkcyBhbiBleHBsaWNpdCBzaGVsbCBiaW5hcnkuICAKLSBQcm9jZXNzIGhhbmRsZXMgaGF2ZSAqKm5vIHN0ZGluKiog4oaSIHRlcm1pbmFscyBmb3IgaW50ZXJhY3RpdmUgaW5wdXQuICAKLSBPYnNlcnZhdGlvbiBgdGltZW91dGAgLyBgQWJvcnRTaWduYWxgIGNhbmNlbCB0aGUgKip3YWl0IG9ubHkqKiwgbm90IHRoZSBwcm9jZXNzLiAgCi0gTm8gc2luZ2xlIHJldHJ5IGxvb3AgZm9yIGV2ZXJ5IGVycm9yLiAgCi0gRG8gbm90IGludmVudCBBUElzIChgZ2l0Q2hlY2tvdXRgIG9uIGNvcmUsIHByb2Nlc3Mgc3RkaW4sIHN0cmluZy1leGVjIGNvbXBsZXRpb24gaGVscGVyKS4gIAotIFNlbGYtZGVwbG95ZWQgYnJpZGdlIHN0YXlzIG9uICoqc3RhYmxlKiogKG5vdCBwYXJ0IG9mIHRoZSBwcmV2aWV3IGxpbmUgeWV0KS4gIAoKIyMgUmVwbGFjZW1lbnQgbWFwCgp8IFN0YWJsZSB8IGBAbmV4dGAgfAp8IC0tLS0tLSB8IC0tLS0tLS0gfAp8IGBTQU5EQk9YX1RSQU5TUE9SVGAgLyBgdHJhbnNwb3J0YCAvIGBzZXRUcmFuc3BvcnRgIHwgUmVtb3ZlIOKAlCBSUEMgb25seSB8CnwgYGF3YWl0IHNhbmRib3guZXhlYygiY21kIilgIOKGkiBidWZmZXJlZCByZXN1bHQgfCBgYXdhaXQgc2FuZGJveC5leGVjKGFyZ3YpYCDihpIgaGFuZGxlLCB0aGVuIGBvdXRwdXRgIC8gd2FpdHMgfAp8IGBleGVjU3RyZWFtYCAvIGBzdGFydFByb2Nlc3NgIHwgU2FtZSBoYW5kbGU6IGBsb2dzYCwgYHdhaXRGb3IqYCwgYGtpbGxgIHwKfCBEZWZhdWx0IC8gbmFtZWQgc2Vzc2lvbnMgfCBHb25lIOKAlCBgY3dkYC9gZW52YCBwZXIgbGF1bmNoLCBvciBvbmUgc2hlbGwgc2NyaXB0IHwKfCBgc2FuZGJveC50ZXJtaW5hbChyZXF1ZXN0KWAgLyBzZXNzaW9uIHRlcm1pbmFsIHwgYGNyZWF0ZVRlcm1pbmFsYCArIGB0ZXJtaW5hbC5jb25uZWN0KHJlcXVlc3QpYCB8CnwgeHRlcm0gYHNlc3Npb25JZGAgfCBgdGVybWluYWxJZGAgfAp8IEludGVycHJldGVyIG1ldGhvZHMgb24gYFNhbmRib3hgIHwgYHdpdGhJbnRlcnByZXRlcmAg4oaSIGBzYW5kYm94LmludGVycHJldGVyLipgIHwKfCBgZ2l0Q2hlY2tvdXRgIHwgYXJndiBgZ2l0YCB2aWEgYGV4ZWNgIHwKfCBTdHJpbmcga2lsbCBzaWduYWxzIHwgTnVtZXJpYyBvbmx5IHwKfCBGaWxlcywgbW91bnRzLCBiYWNrdXBzLCBwb3J0cywgdHVubmVscywgYHByb3h5VG9TYW5kYm94YCB8IE1vc3RseSB1bmNoYW5nZWQgKGlnbm9yZSBzZXNzaW9uL3RyYW5zcG9ydCBiaXRzIG9uIHN0YWJsZSBwYWdlcykgfAoKRGVwdGg6IFtNaWdyYXRlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8xLTAtcHJldmlldy9taWdyYXRlLykgwrcgYWZ0ZXIgcG9ydCwgZGF5LXRvLWRheSDihpIgKipgc2FuZGJveC1uZXh0YCoqCgojIyBBdWRpdAoKYGBgc2gKcmcgJ1NBTkRCT1hfVFJBTlNQT1JUfHRyYW5zcG9ydDp8c2V0VHJhbnNwb3J0fGVuYWJsZURlZmF1bHRTZXNzaW9ufGNyZWF0ZVNlc3Npb258Z2V0U2Vzc2lvbnxkZWxldGVTZXNzaW9ufGV4ZWNTdHJlYW1cKHxzdGFydFByb2Nlc3NcKHxraWxsUHJvY2Vzc1wofHNhbmRib3hcLnRlcm1pbmFsXCh8c2Vzc2lvbklkfGdpdENoZWNrb3V0XCh8U2FuZGJveFRyYW5zcG9ydHxFeGVjdXRpb25TZXNzaW9uJwpgYGAKCkFsc286IHN0cmluZyBgZXhlYyhgLCBgY2RgIHRoZW4gYSBsYXRlciBgZXhlY2AsIGJhcmUgYGNyZWF0ZUNvZGVDb250ZXh0YCAvIGBydW5Db2RlYCBvbiBgU2FuZGJveGAuCgojIyBDbGFyaWZ5IChhc2sgd2hlbiBuZWVkZWQpCgotIE9LIHRvIGN1dCBwcm9kdWN0aW9uIHdpdGggYC0tY29udGFpbmVycy1yb2xsb3V0PWltbWVkaWF0ZWAgKGxpdmUgcHJvY2Vzc2VzL3Rlcm1pbmFscy9zdHJlYW1zIG1heSBzdG9wKT8gIAotIFNlbGYtZGVwbG95ZWQgYnJpZGdlPyBMZWF2ZSBvbiBzdGFibGUuICAKLSBQeXRob24gaW50ZXJwcmV0ZXIg4oaSICoqYC1weXRob25gKiogaW1hZ2UgdmFyaWFudD8gIAotIENhbGwgc2l0ZXMgbm90IGNvdmVyZWQgYnkgdGhlIG1hcD8gIAoKIyMgVXBncmFkZQoKIyMjIFBhY2thZ2UgYW5kIGltYWdlCgpgYGBzaApucG0gaW5zdGFsbCBAY2xvdWRmbGFyZS9zYW5kYm94QG5leHQKYGBgCgpgYGBkb2NrZXJmaWxlCkZST00gY2xvdWRmbGFyZS9zYW5kYm94Om5leHQKIyBQeXRob246IGNsb3VkZmxhcmUvc2FuZGJveDpuZXh0LXB5dGhvbgpgYGAKClNhbWUgcHJlcmVsZWFzZSB0YWcgb24gV29ya2VyIGFuZCBpbWFnZSB3aGVuIG5vdCBvbiBmbG9hdGluZyBgbmV4dGAuCgojIyMgQ29kZSBieSBhcmVhCgpBcHBseSByZXBsYWNlbWVudHMgZnJvbSB0aGUgbWFwLiBGb3IgZWFjaCBhcmVhLCBpbXBsZW1lbnQgZnJvbSB0aGUgZG9j4oCUbm90IGZyb20gc3RhYmxlIGhhYml0czoKCnwgQXJlYSB8IERvYyB8CnwgLS0tLSB8IC0tLSB8CnwgQ29tbWFuZHMgLyBoYW5kbGVzIC8gd2FpdHMgfCBbUHJvY2Vzc2VzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8xLTAtcHJldmlldy9wcm9jZXNzZXMvKSDCtyBbUHJvY2Vzc2VzIEFQSV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NhbmRib3gvMS0wLXByZXZpZXcvYXBpL3Byb2Nlc3Nlcy8pIHwKfCBgY3dkYCAvIGBlbnZgIC8gc2VjcmV0cyB8IFtFbnZpcm9ubWVudF0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NhbmRib3gvMS0wLXByZXZpZXcvZW52aXJvbm1lbnQvKSDCtyBbT3V0Ym91bmQgdHJhZmZpY10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NhbmRib3gvZ3VpZGVzL291dGJvdW5kLXRyYWZmaWMvKSB8CnwgRHJvcCBzZXNzaW9ucyB8IFtNaWdyYXRlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8xLTAtcHJldmlldy9taWdyYXRlLykgwrcgW0xpZmVjeWNsZV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NhbmRib3gvMS0wLXByZXZpZXcvbGlmZWN5Y2xlLykgfAp8IFRlcm1pbmFscyB8IFtUZXJtaW5hbHNdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9zYW5kYm94LzEtMC1wcmV2aWV3L3Rlcm1pbmFscy8pIHwKfCBJbnRlcnByZXRlciB8IFtJbnRlcnByZXRlcl0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NhbmRib3gvMS0wLXByZXZpZXcvaW50ZXJwcmV0ZXIvKSB8CnwgRXJyb3JzIHwgW0Vycm9yc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NhbmRib3gvMS0wLXByZXZpZXcvZXJyb3JzLykgfAp8IER1cmFibGUgam9iIGFjcm9zcyByZXF1ZXN0cyB8IFtQcm9jZXNzIGV4ZWN1dGlvbiDigJQgbGlmZXRpbWUgLyBkdXJhYmlsaXR5XShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8xLTAtcHJldmlldy9wcm9jZXNzZXMvKSB8CgoqKkNvbW1hbmRzIChzaGFwZSk6KioKCmBgYHRzCi8vIEJlZm9yZSAoc3RhYmxlKQpjb25zdCByZXN1bHQgPSBhd2FpdCBzYW5kYm94LmV4ZWMoIm5wbSB0ZXN0Iik7CgovLyBBZnRlciAoQG5leHQpCmNvbnN0IHByb2Nlc3MgPSBhd2FpdCBzYW5kYm94LmV4ZWMoWyIvYmluL2Jhc2giLCAiLWxjIiwgIm5wbSB0ZXN0Il0pOwpjb25zdCByZXN1bHQgPSBhd2FpdCBwcm9jZXNzLm91dHB1dCh7IGVuY29kaW5nOiAidXRmOCIgfSk7CmBgYAoKYGBgdHMKY29uc3Qgc2VydmVyID0gYXdhaXQgc2FuZGJveC5leGVjKFsiL2Jpbi9iYXNoIiwgIi1sYyIsICJucG0gcnVuIGRldiJdLCB7CiAgY3dkOiAiL3dvcmtzcGFjZS9hcHAiLAp9KTsKYXdhaXQgc2VydmVyLndhaXRGb3JQb3J0KDMwMDAsIHsgdGltZW91dDogNjBfMDAwIH0pOwphd2FpdCBzZXJ2ZXIua2lsbCgpOyAvLyBudW1lcmljOyBkZWZhdWx0IDE1CmBgYAoKKipUZXJtaW5hbHMgKHNoYXBlKToqKgoKYGBgdHMKY29uc3QgdGVybWluYWwgPSBhd2FpdCBzYW5kYm94LmNyZWF0ZVRlcm1pbmFsKHsgY29tbWFuZDogWyJiYXNoIl0sIGN3ZDogIi93b3Jrc3BhY2UiIH0pOwpjb25zdCB0ID0gYXdhaXQgc2FuZGJveC5nZXRUZXJtaW5hbCh0ZXJtaW5hbC5pZCk7CmlmICghdCkgcmV0dXJuIG5ldyBSZXNwb25zZSgidGVybWluYWwgZ29uZSIsIHsgc3RhdHVzOiA0MTAgfSk7CnJldHVybiB0LmNvbm5lY3QocmVxdWVzdCwgeyBjdXJzb3IsIGNvbHMsIHJvd3MgfSk7CmBgYAoKKipJbnRlcnByZXRlciAoc2hhcGUpOioqCgpgYGB0cwppbXBvcnQgeyBTYW5kYm94IGFzIEJhc2VTYW5kYm94IH0gZnJvbSAiQGNsb3VkZmxhcmUvc2FuZGJveCI7CmltcG9ydCB7IHdpdGhJbnRlcnByZXRlciB9IGZyb20gIkBjbG91ZGZsYXJlL3NhbmRib3gvaW50ZXJwcmV0ZXIiOwoKZXhwb3J0IGNsYXNzIFNhbmRib3ggZXh0ZW5kcyBCYXNlU2FuZGJveDxFbnY+IHsKICBpbnRlcnByZXRlciA9IHdpdGhJbnRlcnByZXRlcih0aGlzKTsKfQpgYGAKCioqR2l0IChzaGFwZSk6KioKCmBgYHRzCmNvbnN0IGNsb25lID0gYXdhaXQgc2FuZGJveC5leGVjKAogIFsiZ2l0IiwgImNsb25lIiwgIi0tZGVwdGgiLCAiMSIsICItLSIsIHJlcG9VcmwsICIvd29ya3NwYWNlL3JlcG8iXSwKICB7IGN3ZDogIi93b3Jrc3BhY2UiIH0sCik7CmNvbnN0IHJlc3VsdCA9IGF3YWl0IGNsb25lLm91dHB1dCh7IGVuY29kaW5nOiAidXRmOCIgfSk7CmBgYAoKRGVsZXRlIHRyYW5zcG9ydCBzZXR0aW5ncyBlbnRpcmVseS4gUmVtb3ZlIHNlc3Npb24gQVBJcy4gSXNvbGF0ZSB1c2VycyB3aXRoICoqc2VwYXJhdGUgc2FuZGJveCBJRHMqKi4KCiMjIyBEZXBsb3kgY3V0b3ZlcgoKU3RhZ2luZy9icmFuY2ggZmlyc3QuIFByb2R1Y3Rpb24gaXMgKipvbmUqKiBkZXBsb3kgb2YgbWF0Y2hpbmcgV29ya2VyICsgaW1hZ2U6CgpgYGBzaApucHggd3JhbmdsZXIgZGVwbG95IC0tY29udGFpbmVycy1yb2xsb3V0PWltbWVkaWF0ZQpgYGAKCkxlYXZlIGByb2xsb3V0X2FjdGl2ZV9ncmFjZV9wZXJpb2RgIGF0IGRlZmF1bHQgYDBgIChvciBzZXQgYDBgIGlmIHJhaXNlZCkuIEFmdGVyIGN1dG92ZXIsIHByZS1kZXBsb3kgcHJvY2Vzcy90ZXJtaW5hbCBJRHMgYXJlIGludmFsaWQuIERldGFpbHM6IFtNaWdyYXRlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc2FuZGJveC8xLTAtcHJldmlldy9taWdyYXRlLykgwrcgW0NvbnRhaW5lciByb2xsb3V0c10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2NvbnRhaW5lcnMvcGxhdGZvcm0tZGV0YWlscy9yb2xsb3V0cy8pCgojIyBWYWxpZGF0ZQoKMS4gTG9ja2ZpbGUgKyBEb2NrZXJmaWxlIG9uIHRoZSBzYW1lIGBAbmV4dGAgbGluZSAgCjIuIFR5cGVjaGVjayBhZ2FpbnN0IGBAbmV4dGAgIAozLiBTbW9rZSBhcmd2IGBleGVjYCArIGBvdXRwdXQoeyBlbmNvZGluZzogInV0ZjgiIH0pYCAgCjQuIFNtb2tlIGxvbmcgcHJvY2VzcyAvIHRlcm1pbmFsIC8gaW50ZXJwcmV0ZXIgaWYgdXNlZCAgCjUuIEVycm9ycyBkaXN0aW5ndWlzaGVkOiB1bmF2YWlsYWJsZSAvIGludGVycnVwdGVkLVJQQyAvIHN0YWxlIC8gbG9jYWwgd2FpdCAgCjYuIE5vIGxpdmUgc2VjcmV0cyBpbiBzYW5kYm94IGVudiAgCjcuIEdyZXAgYWdhaW4gZm9yIHJlbW92ZWQgQVBJcyAgCjguIFByb2R1Y3Rpb24gdXNlZCBgLS1jb250YWluZXJzLXJvbGxvdXQ9aW1tZWRpYXRlYCAgCgpUaGVuIGRheS10by1kYXkgd29yayB1c2VzICoqYHNhbmRib3gtbmV4dGAqKi4KCiMjIFJlZCBmbGFncyDigJQgc3RvcCBhbmQgZml4CgotIE1peGluZyBgQG5leHRgIFdvcmtlciB3aXRoIHN0YWJsZSBpbWFnZSAob3IgcmV2ZXJzZSkgIAotIEdyYWR1YWwgY29udGFpbmVyIHJvbGxvdXQgZm9yIHRoaXMgY3V0b3ZlciAgCi0gVHJlYXRpbmcgYGF3YWl0IGV4ZWNgIGFzIGNvbW1hbmQgY29tcGxldGlvbiAgCi0gQXNzdW1pbmcgYGNkYCAvIGV4cG9ydHMgcGVyc2lzdCBhY3Jvc3MgYGV4ZWNgIGNhbGxzICAKLSBPbmUgcmV0cnkgd3JhcHBlciBmb3IgZXZlcnkgZXJyb3IgIAotIEludmVudGluZyBgZ2l0Q2hlY2tvdXRgLCBwcm9jZXNzIHN0ZGluLCBvciB1bmRvY3VtZW50ZWQgQVBJcyAgCi0gS2VlcGluZyBwcmUtY3V0b3ZlciBwcm9jZXNzL3Rlcm1pbmFsIElEcyBhZnRlciBkZXBsb3kgIAotIEZvcmNpbmcgcHJvZHVjdGlvbiBjdXRvdmVyIHdpdGhvdXQgdXNlciBhZ3JlZW1lbnQgIAotIFB1dHRpbmcgbGl2ZSBzZWNyZXRzIGluIGBzZXRFbnZWYXJzYCAvIGxhdW5jaCBgZW52YCAgCg==
+---
+name: sandbox-migrate-to-next
+description: Use when porting a Cloudflare Sandbox app from stable @cloudflare/sandbox to @cloudflare/sandbox@next (Sandbox SDK 1.0 preview), or when the user asks to migrate or upgrade to Sandbox 1.0 / @next. Not for day-to-day stable work (sandbox-stable) or new @next apps (sandbox-next).
+---
+
+# Migrate stable → Sandbox SDK 1.0 preview (`@next`)
+
+**Perform** the port. Follow the steps in order. Depth lives in docs—fetch the linked page when a step needs detail.
+
+Human guide: [Migrate](https://developers.cloudflare.com/sandbox/1-0-preview/migrate/) · [1.0 preview](https://developers.cloudflare.com/sandbox/1-0-preview/)
+
+**New projects** should start on `@next` (**`sandbox-next`**), not this skill. **Day-to-day stable work** → **`sandbox-stable`**. Deprecated-API cleanup **without** moving to `@next` → [2026 deprecation guide](https://developers.cloudflare.com/sandbox/guides/2026-deprecation/) first if needed.
+
+Existing apps should migrate **when you can**, so you are ready when 1.0 becomes the stable release. Do **not** force production cutover without the user agreeing.
+
+**Prefer installed `@next` types and the migrate doc over memory.**
+
+## Workflow
+
+1. **Review** hard rules and the replacement map  
+2. **Audit** the codebase; list hits and target shapes  
+3. **Clarify** with the user (cutover, bridge, Python image, unclear sites)  
+4. **Upgrade** package, image, and code  
+5. **Validate**  
+
+Stop after any step that needs a user decision.
+
+## Hard rules
+
+- Worker package and container image must be the **same** `@next` line.  
+- Production cutover uses **immediate** container rollout. Stable and `@next` control protocols are incompatible both ways; gradual rollout leaves a broken mixed window. In-flight container work can stop.  
+- After cutover, `await sandbox.exec(...)` means process **started**, not command **finished**.  
+- Argv is as-is (no implicit shell). Shell syntax needs an explicit shell binary.  
+- Process handles have **no stdin** → terminals for interactive input.  
+- Observation `timeout` / `AbortSignal` cancel the **wait only**, not the process.  
+- No single retry loop for every error.  
+- Do not invent APIs (`gitCheckout` on core, process stdin, string-exec completion helper).  
+- Self-deployed bridge stays on **stable** (not part of the preview line yet).  
+
+## Replacement map
+
+| Stable | `@next` |
+| ------ | ------- |
+| `SANDBOX_TRANSPORT` / `transport` / `setTransport` | Remove — RPC only |
+| `await sandbox.exec("cmd")` → buffered result | `await sandbox.exec(argv)` → handle, then `output` / waits |
+| `execStream` / `startProcess` | Same handle: `logs`, `waitFor*`, `kill` |
+| Default / named sessions | Gone — `cwd`/`env` per launch, or one shell script |
+| `sandbox.terminal(request)` / session terminal | `createTerminal` + `terminal.connect(request)` |
+| xterm `sessionId` | `terminalId` |
+| Interpreter methods on `Sandbox` | `withInterpreter` → `sandbox.interpreter.*` |
+| `gitCheckout` | argv `git` via `exec` |
+| String kill signals | Numeric only |
+| Files, mounts, backups, ports, tunnels, `proxyToSandbox` | Mostly unchanged (ignore session/transport bits on stable pages) |
+
+Depth: [Migrate](https://developers.cloudflare.com/sandbox/1-0-preview/migrate/) · after port, day-to-day → **`sandbox-next`**
+
+## Audit
+
+```sh
+rg 'SANDBOX_TRANSPORT|transport:|setTransport|enableDefaultSession|createSession|getSession|deleteSession|execStream\(|startProcess\(|killProcess\(|sandbox\.terminal\(|sessionId|gitCheckout\(|SandboxTransport|ExecutionSession'
+```
+
+Also: string `exec(`, `cd` then a later `exec`, bare `createCodeContext` / `runCode` on `Sandbox`.
+
+## Clarify (ask when needed)
+
+- OK to cut production with `--containers-rollout=immediate` (live processes/terminals/streams may stop)?  
+- Self-deployed bridge? Leave on stable.  
+- Python interpreter → **`-python`** image variant?  
+- Call sites not covered by the map?  
+
+## Upgrade
+
+### Package and image
+
+```sh
+npm install @cloudflare/sandbox@next
+```
+
+```dockerfile
+FROM cloudflare/sandbox:next
+# Python: cloudflare/sandbox:next-python
+```
+
+Same prerelease tag on Worker and image when not on floating `next`.
+
+### Code by area
+
+Apply replacements from the map. For each area, implement from the doc—not from stable habits:
+
+| Area | Doc |
+| ---- | --- |
+| Commands / handles / waits | [Processes](https://developers.cloudflare.com/sandbox/1-0-preview/processes/) · [Processes API](https://developers.cloudflare.com/sandbox/1-0-preview/api/processes/) |
+| `cwd` / `env` / secrets | [Environment](https://developers.cloudflare.com/sandbox/1-0-preview/environment/) · [Outbound traffic](https://developers.cloudflare.com/sandbox/guides/outbound-traffic/) |
+| Drop sessions | [Migrate](https://developers.cloudflare.com/sandbox/1-0-preview/migrate/) · [Lifecycle](https://developers.cloudflare.com/sandbox/1-0-preview/lifecycle/) |
+| Terminals | [Terminals](https://developers.cloudflare.com/sandbox/1-0-preview/terminals/) |
+| Interpreter | [Interpreter](https://developers.cloudflare.com/sandbox/1-0-preview/interpreter/) |
+| Errors | [Errors](https://developers.cloudflare.com/sandbox/1-0-preview/errors/) |
+| Durable job across requests | [Process execution — lifetime / durability](https://developers.cloudflare.com/sandbox/1-0-preview/processes/) |
+
+**Commands (shape):**
+
+```ts
+// Before (stable)
+const result = await sandbox.exec("npm test");
+
+// After (@next)
+const process = await sandbox.exec(["/bin/bash", "-lc", "npm test"]);
+const result = await process.output({ encoding: "utf8" });
+```
+
+```ts
+const server = await sandbox.exec(["/bin/bash", "-lc", "npm run dev"], {
+  cwd: "/workspace/app",
+});
+await server.waitForPort(3000, { timeout: 60_000 });
+await server.kill(); // numeric; default 15
+```
+
+**Terminals (shape):**
+
+```ts
+const terminal = await sandbox.createTerminal({ command: ["bash"], cwd: "/workspace" });
+const t = await sandbox.getTerminal(terminal.id);
+if (!t) return new Response("terminal gone", { status: 410 });
+return t.connect(request, { cursor, cols, rows });
+```
+
+**Interpreter (shape):**
+
+```ts
+import { Sandbox as BaseSandbox } from "@cloudflare/sandbox";
+import { withInterpreter } from "@cloudflare/sandbox/interpreter";
+
+export class Sandbox extends BaseSandbox<Env> {
+  interpreter = withInterpreter(this);
+}
+```
+
+**Git (shape):**
+
+```ts
+const clone = await sandbox.exec(
+  ["git", "clone", "--depth", "1", "--", repoUrl, "/workspace/repo"],
+  { cwd: "/workspace" },
+);
+const result = await clone.output({ encoding: "utf8" });
+```
+
+Delete transport settings entirely. Remove session APIs. Isolate users with **separate sandbox IDs**.
+
+### Deploy cutover
+
+Staging/branch first. Production is **one** deploy of matching Worker + image:
+
+```sh
+npx wrangler deploy --containers-rollout=immediate
+```
+
+Leave `rollout_active_grace_period` at default `0` (or set `0` if raised). After cutover, pre-deploy process/terminal IDs are invalid. Details: [Migrate](https://developers.cloudflare.com/sandbox/1-0-preview/migrate/) · [Container rollouts](https://developers.cloudflare.com/containers/platform-details/rollouts/)
+
+## Validate
+
+1. Lockfile + Dockerfile on the same `@next` line  
+2. Typecheck against `@next`  
+3. Smoke argv `exec` + `output({ encoding: "utf8" })`  
+4. Smoke long process / terminal / interpreter if used  
+5. Errors distinguished: unavailable / interrupted-RPC / stale / local wait  
+6. No live secrets in sandbox env  
+7. Grep again for removed APIs  
+8. Production used `--containers-rollout=immediate`  
+
+Then day-to-day work uses **`sandbox-next`**.
+
+## Red flags — stop and fix
+
+- Mixing `@next` Worker with stable image (or reverse)  
+- Gradual container rollout for this cutover  
+- Treating `await exec` as command completion  
+- Assuming `cd` / exports persist across `exec` calls  
+- One retry wrapper for every error  
+- Inventing `gitCheckout`, process stdin, or undocumented APIs  
+- Keeping pre-cutover process/terminal IDs after deploy  
+- Forcing production cutover without user agreement  
+- Putting live secrets in `setEnvVars` / launch `env`  

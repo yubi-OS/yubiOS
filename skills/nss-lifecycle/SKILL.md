@@ -1,9 +1,26 @@
 ---
 name: nss-lifecycle
-description: "Cycle-15 deep-research synthesis for the NSS Lifecycle axis (axis 8/12 in negative-skill-space). For each file in a corpus, the Lifecycle axis identifies HOW THE FILE EVOLVES: versioning (SemVer 2.0.0 MAJOR.MINOR.PATCH), changelog (Keep-a-Changelog 1.1.0 Added/Changed/Deprecated/Removed/Fixed/Security), deprecation state (RFC 8594 Sunset header, RFC 9745 Deprecation header, planned removal in version X.Y.Z), migration guide presence (codemod, upgrade-helper, manual steps, validation), conventional-commit compatibility, release-drafter/automated changelog parsing, feature-flag lifecycle (temporary/permanent + expiry + archive), SBOM/versioned-evidence lifecycle (2026 CISA minimum elements), ADR-driven lifecycle decisions (Context/Decision/Status/Supersedes), and the negative states (Removed, Archived, Cancelled, Unknown). Use when the NSS 12-axis sweep lands on lifecycle as the highest-priority Extend gap, when a file lacks a Changelog section, when versioning is documented but lifecycle state machine is missing, when deprecation is announced without a Removal-in-version target, when a flag never reaches cleanup, when migration prose has no codemod/upgrade-helper, when a `Deprecated` entry has no replacement, when an SBOM is treated as a one-time compliance attachment rather than a versioned evidence artifact, when Sunset is confused with Deprecation, or when an ADR is orphaned from affected files. Triggers on: NSS lifecycle axis, changelog gap, SemVer lifecycle, keep-a-changelog 1.1.0, deprecation state, removal-in-version, sunset policy, migration guide, codemod, conventional commits lifecycle, feature flag cleanup, SBOM retention, ADR-driven deprecation, lifecycle stage transitions, experimental/beta/stable/deprecated/removed/archived. NOT for inputs (use nss-inputs), outputs (use nss-outputs), audience (use nss-audience), mode (use nss-mode), or any of the other 11 NSS axes."
+description: >-
+  Cycle-15 deep-research synthesis for the NSS Lifecycle axis (axis 8/12 in negative-skill-space).
+  For each file in a corpus, the Lifecycle axis identifies HOW THE FILE EVOLVES: versioning
+  (SemVer 2.0.0 MAJOR.MINOR.PATCH), changelog (Keep-a-Changelog 1.1.0
+  Added/Changed/Deprecated/Removed/Fixed/Security), deprecation state (RFC 8594 Sunset header, RFC
+  9745 Deprecation header, planned removal in version X.Y.Z), migration guide presence (codemod,
+  upgrade-helper, manual steps, validation), conventional-commit compatibility,
+  release-drafter/automated changelog parsing, feature-flag lifecycle (temporary/permanent +
+  expiry + archive), SBOM/versioned-evidence lifecycle (2026 CISA minimum elements), ADR-driven
+  lifecycle decisions (Context/Decision/Status/Supersedes), and the negative states (Removed,
+  Archived, Cancelled, Unknown).
 ---
 
 # nss-lifecycle
+
+## Extended description
+
+Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.
+
+Use when the NSS 12-axis sweep lands on lifecycle as the highest-priority Extend gap, when a file lacks a Changelog section, when versioning is documented but lifecycle state machine is missing, when deprecation is announced without a Removal-in-version target, when a flag never reaches cleanup, when migration prose has no codemod/upgrade-helper, when a `Deprecated` entry has no replacement, when an SBOM is treated as a one-time compliance attachment rather than a versioned evidence artifact, when Sunset is confused with Deprecation, or when an ADR is orphaned from affected files. Triggers on: NSS lifecycle axis, changelog gap, SemVer lifecycle, keep-a-changelog 1.1.0, deprecation state, removal-in-version, sunset policy, migration guide, codemod, conventional commits lifecycle, feature flag cleanup, SBOM retention, ADR-driven deprecation, lifecycle stage transitions, experimental/beta/stable/deprecated/removed/archived. NOT for inputs (use nss-inputs), outputs (use nss-outputs), audience (use nss-audience), mode (use nss-mode), or any of the other 11 NSS axes.
+
 
 The **Lifecycle** axis (8/12 of `negative-skill-space`) asks: **how does this
 file evolve, and what is the state machine + obligations between releases?**
@@ -440,8 +457,6 @@ adr: ADR-031
 decision_status: accepted
 ---
 
-## Lifecycle -- cycle 15
-
 **Stage**: stable (since 2026-08-12).
 **Introduced_in**: 0.9.0 (initial research note); **Last_changed_in**:
 1.4.2 (cycle-15 patch).
@@ -503,6 +518,30 @@ preserved; `## Changelog` block updated).
 #     - sha256:6a60ff82...:2026-08-05:replaced-by-current
 #   review_cadence: per build (CI re-emits SBOM on every main build)
 ```
+
+- **1.0.0** (2026-08-12) -- initial. Cycle-15 deep-research synthesis
+  for the NSS Lifecycle axis. Captures the eleven-field lifecycle
+  taxonomy (identity, stage, versioning, changelog entry,
+  deprecation record, migration guide, removal target, feature flag,
+  SBOM evidence, ADR linkage, review cadence), the eight-stage
+  state machine (experimental / beta / stable / deprecated /
+  removed / archived / cancelled / unknown), and the yubiOS-
+  specific patterns for Markdown / SKILL.md / docs/*.md, Containerfile
+  / mkosi / systemd units, Shell / Python / Ruby scripts, GitHub
+  Actions workflows, refs/*.md, feature flags, and SBOMs. Every
+  example and anti-pattern is grounded in the source-driven-
+  development deep-research pass on SemVer 2.0.0, Keep a Changelog
+  1.1.0, Conventional Commits 1.0.0, Release Drafter, RFC 8594
+  (Sunset HTTP header), RFC 9745 (Deprecation HTTP header),
+  Google API versioning policy, Square API lifecycle policy,
+  Kubernetes deprecation policy, LaunchDarkly flag lifecycle,
+  OpenFeature provider lifecycle, Node.js userland migrations,
+  Next.js codemods, the 2026 CISA SBOM minimum elements, NTIA SBOM
+  consumer playbook, Nygard ADR pattern, and AWS ADR process.
+  Cycle-15 ships ~40 lifecycle-aware incremental patches on PR
+  #207 branch `feat/rsi-compass-cycle7-nss-research-2026-08-12`,
+  one `## Lifecycle -- cycle 15` section per file, file-type-aware
+  comment syntax.
 
 ## Guidelines
 
@@ -682,32 +721,6 @@ For each cycle-15 patch that closes an NSS-lifecycle gap:
 11. **The next NSS sweep on the same file does NOT re-flag
     lifecycle as the top Extend gap.** If it does, the patch did
     not close the gap and the cycle-15 lens is a NO verdict.
-
-## Changelog
-
-- **1.0.0** (2026-08-12) -- initial. Cycle-15 deep-research synthesis
-  for the NSS Lifecycle axis. Captures the eleven-field lifecycle
-  taxonomy (identity, stage, versioning, changelog entry,
-  deprecation record, migration guide, removal target, feature flag,
-  SBOM evidence, ADR linkage, review cadence), the eight-stage
-  state machine (experimental / beta / stable / deprecated /
-  removed / archived / cancelled / unknown), and the yubiOS-
-  specific patterns for Markdown / SKILL.md / docs/*.md, Containerfile
-  / mkosi / systemd units, Shell / Python / Ruby scripts, GitHub
-  Actions workflows, refs/*.md, feature flags, and SBOMs. Every
-  example and anti-pattern is grounded in the source-driven-
-  development deep-research pass on SemVer 2.0.0, Keep a Changelog
-  1.1.0, Conventional Commits 1.0.0, Release Drafter, RFC 8594
-  (Sunset HTTP header), RFC 9745 (Deprecation HTTP header),
-  Google API versioning policy, Square API lifecycle policy,
-  Kubernetes deprecation policy, LaunchDarkly flag lifecycle,
-  OpenFeature provider lifecycle, Node.js userland migrations,
-  Next.js codemods, the 2026 CISA SBOM minimum elements, NTIA SBOM
-  consumer playbook, Nygard ADR pattern, and AWS ADR process.
-  Cycle-15 ships ~40 lifecycle-aware incremental patches on PR
-  #207 branch `feat/rsi-compass-cycle7-nss-research-2026-08-12`,
-  one `## Lifecycle -- cycle 15` section per file, file-type-aware
-  comment syntax.
 
 ## Maintainer
 

@@ -82,10 +82,132 @@ When the loop closes:
 When the loop continues or escalates:
 
 ```markdown
-## Changelog
+
 - 2026-07-28 cycle 1: Hypothesis "Section X is bloat." Edit: cut section X. Result: cut was right, but exposed a missing cross-reference — new gap: "Body now references `idea-kill` but the skill isn't in the workflow yet." Continue to cycle 2.
 - 2026-07-28 cycle 2: Hypothesis "Add the cross-reference." Edit: replaced `idea-kill` reference with a more general placeholder. Result: re-map clean; but user flagged during cycle 2 that the skill's *position* is the real problem. Escalate to user — no cycle 3.
 ```
+
+- 2026-07-28 cycle 1: Hypothesis "Establish v1 — the skill does not yet exist,
+  so cycle 1 cannot be gap-driven; instead, draft the body and immediately
+  subject it to `negative-skill-space` for the gap map that drives subsequent
+  cycles." Edit: wrote v1 from scratch (236 lines, 16.7 KB) with bounded
+  fixpoint loop, edit taxonomy, js-yaml frontmatter validation, and per-cycle
+  changelog audit trail. Result: applied `negative-skill-space` via
+  fresh-context subagent — 16 substantive gaps flagged (L×S ≥ 6), 8 ranked,
+  fixpoint not reached at v1. Continue to cycle 2.
+
+- 2026-07-28 cycle 2: Hypothesis "Close gap #1 (self-mode author bias
+  re-introduced after cycle 1, L×S 16) by making fresh-context subagent
+  mandatory for every cycle, not just cycle 1." Edit: strengthened Self-mode
+  bullet, Anti-pattern, Red Flag, and Verification-checklist entry to require
+  fresh-context per cycle with `doubt-driven-development` as a weaker
+  per-hypothesis substitute. Edit type: close a gap (single intent: bias
+  mitigation enforced at four points). Result: re-map via fresh-context
+  subagent — gap #1 PARTIALLY CLOSED (policy closed at four points;
+  implementation protocol and per-cycle enforcement signal still missing);
+  5 new substantive gaps introduced (top: substitution wedge L×S 12 — the
+  'weaker substitute' wording creates a loophole that invites 'DDD-only
+  satisfies the rule' misreading; plus `context-isolation` not composed
+  L×S 12, author-bias-throughout-cycle-2 L×S 12, compliance-without-detection
+  L×S 12, DDD-ambiguity L×S 9); fixpoint rule condition (1) FAILED;
+  cycle-1 gaps #2-#8 unchanged (expected under single-intent protocol).
+  Continue to cycle 3.
+
+- 2026-07-28 cycle 3: Hypothesis "Close the substitution wedge (cycle-2 map
+  gap #1, L×S 12) by removing the 'weaker substitute' framing and
+  clarifying that `doubt-driven-development` supplements but never replaces
+  the fresh-context subagent requirement." Edit: tightened Self-mode bullet
+  wording ('Per-hypothesis supplement that may run AFTER the subagent cycle
+  … does NOT substitute for fresh-context isolation'); added explicit Red
+  Flag for DDD-as-substitute misreading; tightened Verification checklist to
+  forbid DDD-as-substitute compliance claim; backfilled cycle-2 changelog
+  entry with actual result (was 'pending'). Edit type: close a gap (single
+  intent: loophole closure). Result: re-map via fresh-context subagent —
+  substitution wedge CLOSED textually airtight at 5 load-points (L153-154
+  Self-mode bullet, L192 Anti-pattern, L215 NEW Red Flag, L233 Verification,
+  L242-243 Changelog); fixpoint rule PASS (no new substantive gaps ≥ L×S 6,
+  cycle-2 gap #5 REDUCED from 9 to 6, all other gaps UNCHANGED with no
+  elevation); cycle-1 gaps #2-#8 unchanged by design (single-intent protocol
+  closes one gap per cycle; remaining carryover noted-but-deferred). Final v3
+  verdict: ship with cycle-1 gaps #2-#8 noted-but-deferred per skill's
+  step-7 escalation policy. Cycle-4 would require explicit user override of
+  the 3-cycle hard cap; recommended only if a re-evaluation event (drift
+  signal, repeated feedback, v1→v2 upgrade) triggers it.
+
+- 2026-07-29 cycle 4 (cap override; user directive at session start):
+  Hypothesis "Edit Step 7 (Bound the loop) and the description frontmatter
+  line to soften the 3-cycle cap from hard limit to soft-preference default
+  with a documented Cap override protocol, is to close gap N5 (cap-override
+  contradiction L×S 20) — the body said '3 cycles hard limit' while the user
+  has explicitly overridden the cap for this session." Edit: replaced Step 7
+  body line with 'soft-preference default' wording plus a new 'Cap override
+  protocol' sub-paragraph (record override in cycle-1 changelog, fixpoint
+  rule remains stopping signal, escalate at cycle 5+); updated description
+  from 'bound the loop at 3 cycles max' to 'bound the loop with a 3-cycle
+  soft-preference cap (overridable by user directive)'; updated
+  metadata.short-description '3-cycle cap' → 'soft-preference cap with user
+  override protocol'; trimmed description fragment '(name regex, description
+  length, no angle brackets)' (now lives only in body Step 4) to keep length
+  ≤ 1024. Edit type: fix drift (single intent: align body, description, and
+  metadata on the cap-override protocol). Result: re-map via main-thread
+  mapper (no subagent available — flagged in changelog) — gap N5 CLOSED
+  (cap-override now documented at 3 surfaces: description,
+  metadata.short-description, body Step 7); description drift introduced by
+  Step 7 edit was eliminated by the description+metadata edits (drift check
+  'description still says 3 cycles max: NO'); no other carryover gaps
+  elevated; N11 (the secondary gap about anti-pattern contradiction) falls
+  out automatically; cycle-1 gaps #2-#8 still noted-but-deferred per
+  single-intent protocol; condition-1 (no new substantive gaps) PASS — the
+  description/metadata trim did not surface new gaps; condition-2 (old
+  Extend gaps closed or reduced) PASS — N5 closed; condition-3 (no new
+  anti-patterns) PASS — no description drift, no scope creep, no frontmatter
+  corruption (js-yaml validates), no body-description contradiction. Fixpoint
+  reached at v4. Author-bias caveat: mapper and author share agent
+  architecture; the re-map was conducted in the main thread, not a
+  fresh-context subagent, because no subagent was provisioned for cycle 4
+  under the user's cap-override directive. This is a documented limitation
+  of self-mode under main-thread execution; a cycle-5 audit by a
+  fresh-context subagent would strengthen the fixpoint verdict.
+
+- 2026-08-06 cycle 5 (cap override; user directive "use the two following
+  instead"): Hypothesis "Add the two fractalrabbit-inspired stochastic RSI
+  extensions (co-travel clustering for coupled gaps; retro-preferential
+  trajectory) to close the corpus-scale gap surfaced by the falsification
+  harness (PR #191): the curve-rsi sparse-cell detector recovers only 55% of
+  planted outliers across 10 seeds. The two extensions replace the weakest
+  links in the deterministic loop with stochastic substitutes whose
+  convergence Darling (2018) proves." Edit: added a new
+  `## Stochastic RSI Extensions (fractalrabbit-inspired)` section with two
+  subsections (Co-travel clustering; Retro-preferential trajectory), each
+  grounded in fractalrabbit's three-tier model and the falsification
+  harness's empirical signal; added two corresponding anti-patterns
+  (cluster batching; α=0 before fixpoint) to Anti-patterns and Red Flags;
+  added two corresponding verification bullets (cluster cap; α > 0 until
+  fixpoint) to Verification; extended `## Interaction with Other Skills`
+  with `curve-guided-rsi` and `single-action-curve-rsi` as downstream
+  consumers; consolidated the body (the prior v4 file had four `## Changelog`
+  headers and a duplicated body half — the rewrite restored the missing
+  frontmatter and deduped the body to a single canonical copy). Edit type:
+  extend (single intent: add stochastic-extension section). Result:
+  frontmatter validated clean via `js-yaml` (name regex pass, description
+  750 chars ≤ 1024, no angle brackets, closing `---` intact); frontmatter
+  restored from missing-state; body deduped from 308 lines to ~290 (single
+  canonical copy); two new anti-patterns added at two surfaces each
+  (Anti-patterns + Red Flags); one new Verification bullet line; two new
+  Interaction entries. Fixpoint rule: condition-1 (no new substantive gaps
+  ≥ L×S 6 introduced) — to be confirmed by fresh-context subagent re-map
+  per the cycle-5 self-mode protocol; condition-2 (old Extend gaps) — N5
+  (cap-override protocol) unchanged and still satisfied; condition-3 (no
+  new anti-patterns) — two new anti-patterns are EXTENSIONS of the existing
+  single-intent protocol, not violations; the stochastic-extension
+  anti-patterns are themselves anti-patterns, so their addition does not
+  introduce new anti-patterns, it documents existing constraints. The new
+  sections reference `fractalrabbit-falsification-harness-2026-08-06.md`
+  on `yubi-OS/yubiOS` as the empirical signal. PENDING: fresh-context
+  subagent re-map to verify condition-1 (no other agent has run an NSS
+  pass on the rewritten file yet); cycle 5 ships the edit and the audit
+  caveat is recorded in this changelog entry, per the cycle-4 documented
+  self-mode main-thread limitation.
 
 ## Stochastic RSI Extensions (fractalrabbit-inspired)
 
@@ -326,130 +448,6 @@ After applying `recursive-self-improvement`:
 - [ ] If stochastic extensions applied: ONE cluster per cycle, α > 0
       until fixpoint, no batching across clusters (Stochastic RSI Extensions
       §Anti-patterns)
-
-## Changelog
-
-- 2026-07-28 cycle 1: Hypothesis "Establish v1 — the skill does not yet exist,
-  so cycle 1 cannot be gap-driven; instead, draft the body and immediately
-  subject it to `negative-skill-space` for the gap map that drives subsequent
-  cycles." Edit: wrote v1 from scratch (236 lines, 16.7 KB) with bounded
-  fixpoint loop, edit taxonomy, js-yaml frontmatter validation, and per-cycle
-  changelog audit trail. Result: applied `negative-skill-space` via
-  fresh-context subagent — 16 substantive gaps flagged (L×S ≥ 6), 8 ranked,
-  fixpoint not reached at v1. Continue to cycle 2.
-
-- 2026-07-28 cycle 2: Hypothesis "Close gap #1 (self-mode author bias
-  re-introduced after cycle 1, L×S 16) by making fresh-context subagent
-  mandatory for every cycle, not just cycle 1." Edit: strengthened Self-mode
-  bullet, Anti-pattern, Red Flag, and Verification-checklist entry to require
-  fresh-context per cycle with `doubt-driven-development` as a weaker
-  per-hypothesis substitute. Edit type: close a gap (single intent: bias
-  mitigation enforced at four points). Result: re-map via fresh-context
-  subagent — gap #1 PARTIALLY CLOSED (policy closed at four points;
-  implementation protocol and per-cycle enforcement signal still missing);
-  5 new substantive gaps introduced (top: substitution wedge L×S 12 — the
-  'weaker substitute' wording creates a loophole that invites 'DDD-only
-  satisfies the rule' misreading; plus `context-isolation` not composed
-  L×S 12, author-bias-throughout-cycle-2 L×S 12, compliance-without-detection
-  L×S 12, DDD-ambiguity L×S 9); fixpoint rule condition (1) FAILED;
-  cycle-1 gaps #2-#8 unchanged (expected under single-intent protocol).
-  Continue to cycle 3.
-
-- 2026-07-28 cycle 3: Hypothesis "Close the substitution wedge (cycle-2 map
-  gap #1, L×S 12) by removing the 'weaker substitute' framing and
-  clarifying that `doubt-driven-development` supplements but never replaces
-  the fresh-context subagent requirement." Edit: tightened Self-mode bullet
-  wording ('Per-hypothesis supplement that may run AFTER the subagent cycle
-  … does NOT substitute for fresh-context isolation'); added explicit Red
-  Flag for DDD-as-substitute misreading; tightened Verification checklist to
-  forbid DDD-as-substitute compliance claim; backfilled cycle-2 changelog
-  entry with actual result (was 'pending'). Edit type: close a gap (single
-  intent: loophole closure). Result: re-map via fresh-context subagent —
-  substitution wedge CLOSED textually airtight at 5 load-points (L153-154
-  Self-mode bullet, L192 Anti-pattern, L215 NEW Red Flag, L233 Verification,
-  L242-243 Changelog); fixpoint rule PASS (no new substantive gaps ≥ L×S 6,
-  cycle-2 gap #5 REDUCED from 9 to 6, all other gaps UNCHANGED with no
-  elevation); cycle-1 gaps #2-#8 unchanged by design (single-intent protocol
-  closes one gap per cycle; remaining carryover noted-but-deferred). Final v3
-  verdict: ship with cycle-1 gaps #2-#8 noted-but-deferred per skill's
-  step-7 escalation policy. Cycle-4 would require explicit user override of
-  the 3-cycle hard cap; recommended only if a re-evaluation event (drift
-  signal, repeated feedback, v1→v2 upgrade) triggers it.
-
-- 2026-07-29 cycle 4 (cap override; user directive at session start):
-  Hypothesis "Edit Step 7 (Bound the loop) and the description frontmatter
-  line to soften the 3-cycle cap from hard limit to soft-preference default
-  with a documented Cap override protocol, is to close gap N5 (cap-override
-  contradiction L×S 20) — the body said '3 cycles hard limit' while the user
-  has explicitly overridden the cap for this session." Edit: replaced Step 7
-  body line with 'soft-preference default' wording plus a new 'Cap override
-  protocol' sub-paragraph (record override in cycle-1 changelog, fixpoint
-  rule remains stopping signal, escalate at cycle 5+); updated description
-  from 'bound the loop at 3 cycles max' to 'bound the loop with a 3-cycle
-  soft-preference cap (overridable by user directive)'; updated
-  metadata.short-description '3-cycle cap' → 'soft-preference cap with user
-  override protocol'; trimmed description fragment '(name regex, description
-  length, no angle brackets)' (now lives only in body Step 4) to keep length
-  ≤ 1024. Edit type: fix drift (single intent: align body, description, and
-  metadata on the cap-override protocol). Result: re-map via main-thread
-  mapper (no subagent available — flagged in changelog) — gap N5 CLOSED
-  (cap-override now documented at 3 surfaces: description,
-  metadata.short-description, body Step 7); description drift introduced by
-  Step 7 edit was eliminated by the description+metadata edits (drift check
-  'description still says 3 cycles max: NO'); no other carryover gaps
-  elevated; N11 (the secondary gap about anti-pattern contradiction) falls
-  out automatically; cycle-1 gaps #2-#8 still noted-but-deferred per
-  single-intent protocol; condition-1 (no new substantive gaps) PASS — the
-  description/metadata trim did not surface new gaps; condition-2 (old
-  Extend gaps closed or reduced) PASS — N5 closed; condition-3 (no new
-  anti-patterns) PASS — no description drift, no scope creep, no frontmatter
-  corruption (js-yaml validates), no body-description contradiction. Fixpoint
-  reached at v4. Author-bias caveat: mapper and author share agent
-  architecture; the re-map was conducted in the main thread, not a
-  fresh-context subagent, because no subagent was provisioned for cycle 4
-  under the user's cap-override directive. This is a documented limitation
-  of self-mode under main-thread execution; a cycle-5 audit by a
-  fresh-context subagent would strengthen the fixpoint verdict.
-
-- 2026-08-06 cycle 5 (cap override; user directive "use the two following
-  instead"): Hypothesis "Add the two fractalrabbit-inspired stochastic RSI
-  extensions (co-travel clustering for coupled gaps; retro-preferential
-  trajectory) to close the corpus-scale gap surfaced by the falsification
-  harness (PR #191): the curve-rsi sparse-cell detector recovers only 55% of
-  planted outliers across 10 seeds. The two extensions replace the weakest
-  links in the deterministic loop with stochastic substitutes whose
-  convergence Darling (2018) proves." Edit: added a new
-  `## Stochastic RSI Extensions (fractalrabbit-inspired)` section with two
-  subsections (Co-travel clustering; Retro-preferential trajectory), each
-  grounded in fractalrabbit's three-tier model and the falsification
-  harness's empirical signal; added two corresponding anti-patterns
-  (cluster batching; α=0 before fixpoint) to Anti-patterns and Red Flags;
-  added two corresponding verification bullets (cluster cap; α > 0 until
-  fixpoint) to Verification; extended `## Interaction with Other Skills`
-  with `curve-guided-rsi` and `single-action-curve-rsi` as downstream
-  consumers; consolidated the body (the prior v4 file had four `## Changelog`
-  headers and a duplicated body half — the rewrite restored the missing
-  frontmatter and deduped the body to a single canonical copy). Edit type:
-  extend (single intent: add stochastic-extension section). Result:
-  frontmatter validated clean via `js-yaml` (name regex pass, description
-  750 chars ≤ 1024, no angle brackets, closing `---` intact); frontmatter
-  restored from missing-state; body deduped from 308 lines to ~290 (single
-  canonical copy); two new anti-patterns added at two surfaces each
-  (Anti-patterns + Red Flags); one new Verification bullet line; two new
-  Interaction entries. Fixpoint rule: condition-1 (no new substantive gaps
-  ≥ L×S 6 introduced) — to be confirmed by fresh-context subagent re-map
-  per the cycle-5 self-mode protocol; condition-2 (old Extend gaps) — N5
-  (cap-override protocol) unchanged and still satisfied; condition-3 (no
-  new anti-patterns) — two new anti-patterns are EXTENSIONS of the existing
-  single-intent protocol, not violations; the stochastic-extension
-  anti-patterns are themselves anti-patterns, so their addition does not
-  introduce new anti-patterns, it documents existing constraints. The new
-  sections reference `fractalrabbit-falsification-harness-2026-08-06.md`
-  on `yubi-OS/yubiOS` as the empirical signal. PENDING: fresh-context
-  subagent re-map to verify condition-1 (no other agent has run an NSS
-  pass on the rewritten file yet); cycle 5 ships the edit and the audit
-  caveat is recorded in this changelog entry, per the cycle-4 documented
-  self-mode main-thread limitation.
 
 ## Least Privilege coverage for recursive self improvement (curve-guided-rsi cycle-4 substantive edit)
 
