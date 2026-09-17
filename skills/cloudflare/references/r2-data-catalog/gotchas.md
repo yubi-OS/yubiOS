@@ -1,1 +1,55 @@
-IyBSMiBEYXRhIENhdGFsb2cgR290Y2hhcwoKQ29tbW9uIGZhaWx1cmUgbW9kZXMgYW5kIG9wZXJhdGlvbmFsIGJlaGF2aW9yLiBGb3IgbGltaXRzLCByZWNvbW1lbmRhdGlvbnMsIGFuZCBzdXBwb3J0ZWQgc2V0dGluZ3MsIHB1bGwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yMi9kYXRhLWNhdGFsb2cvYCBhbmQgYC4uLi90YWJsZS1tYWludGVuYW5jZS9gLgoKIyMgQ29ubmVjdGlvbiAvIEF1dGgKCi0gKipDYXRhbG9nIFVSSSAvIHdhcmVob3VzZSBtaXNtYXRjaCAobW9zdCBjb21tb24pLioqIENvcHkgYm90aCB2YWx1ZXMgZXhhY3RseSBmcm9tIGB3cmFuZ2xlciByMiBidWNrZXQgY2F0YWxvZyBlbmFibGVgIChDYXRhbG9nIFVSSSBgaHR0cHM6Ly9jYXRhbG9nLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS97QUNDT1VOVF9JRH0ve0JVQ0tFVH1gLCB3YXJlaG91c2UgYHtBQ0NPVU5UX0lEfV97QlVDS0VUfWApLiBNaXNtYXRjaGVkIHZhbHVlcyBmYWlsIHRvIGNvbm5lY3QuCi0gKio0MDEgVW5hdXRob3JpemVkKiog4oCUIHRva2VuIGxhY2tzIERhdGEgQ2F0YWxvZyBSJlcuIFRlc3Qgd2l0aCBgY2F0YWxvZy5saXN0X25hbWVzcGFjZXMoKWAuCi0gKio0MDMgb24gZGF0YSBmaWxlcyoqIOKAlCB0b2tlbiBsYWNrcyBSMiBTdG9yYWdlLiBPcGVuIGJldGEgcmVxdWlyZXMgKipBZG1pbiBSZWFkICYgV3JpdGUgb24gUjIgU3RvcmFnZSBldmVuIGZvciByZWFkLW9ubHkqKiBkYXRhIGFjY2Vzcy4KLSAqKmAvY29uZmlnYCAiV2FyZWhvdXNlIG5hbWUgbWlzc2luZyBpbiBxdWVyeSBwYXJhbSIqKiDigJQgdGhlIEljZWJlcmcgYC92MS9jb25maWdgIHJvdXRlIG5lZWRzIGA/d2FyZWhvdXNlPXtBQ0NPVU5UX0lEfV97QlVDS0VUfWAuIFB5SWNlYmVyZy9QeVNwYXJrIGFkZCBpdCBhdXRvbWF0aWNhbGx5IHdoZW4geW91IHNldCBgd2FyZWhvdXNlPWAuCgojIyBNYWludGVuYW5jZSBCZWhhdmlvciAodXBkYXRlZCkKCi0gKipObyB0aHJvdWdocHV0IGNhcCBvbiBjb21wYWN0aW9uLioqIFRoZSBmb3JtZXIgMiBHQi9ob3VyL3RhYmxlIGxpbWl0IGlzICoqbGlmdGVkKiog4oCUIGNvbXBhY3Rpb24gdHJpZ2dlcnMgaG91cmx5IGFuZCBwcm9jZXNzZXMgdGhlIGJhY2tsb2cgd2l0aCBubyBoYXJkIGNhcC4gTGFyZ2Ugc21hbGwtZmlsZSBiYWNrbG9ncyBzdGlsbCB0YWtlIG11bHRpcGxlIGhvdXJseSBjeWNsZXMuCi0gKipTbmFwc2hvdCBleHBpcmF0aW9uIGRlbGV0ZXMgZGF0YSBmaWxlcyoqIChzaW5jZSBBcHJpbCAyMDI2KSwgbm90IGp1c3QgbWV0YWRhdGEuIE1hbnVhbCBgcmVtb3ZlX29ycGhhbl9maWxlc2AgaXMgcmFyZWx5IG5lZWRlZC4KLSAqKkNvbXBhY3Rpb24gcmVxdWlyZXMgYSBzdG9yZWQgY3JlZGVudGlhbC4qKiBgd3JhbmdsZXIgLi4uIGNvbXBhY3Rpb24gZW5hYmxlYCBhbmQgdGhlIGRhc2hib2FyZCB3aXphcmQgc3RvcmUgaXQgYXV0b21hdGljYWxseTsgcHVyZS1BUEkgc2V0dXBzIG11c3QgUE9TVCBgL2NyZWRlbnRpYWxgLgotIENvbXBhY3Rpb24gaXMgKipQYXJxdWV0LW9ubHkqKi4KCiMjIFRhYmxlcyAmIFNjaGVtYQoKLSBgVGFibGVBbHJlYWR5RXhpc3RzRXJyb3JgIC8gYE5hbWVzcGFjZUFscmVhZHlFeGlzdHNFcnJvcmAg4oaSIHVzZSBgY3JlYXRlXypfaWZfbm90X2V4aXN0c2AgLyBsb2FkIGV4aXN0aW5nLgotIGA0MjIgVmFsaWRhdGlvbmAgb24gc2NoZW1hIHVwZGF0ZSDihpIgb25seSBhZGQgbnVsbGFibGUgY29sdW1ucyBhbmQgd2lkZW4gdHlwZXMgKGludOKGkmxvbmcsIGZsb2F04oaSZG91YmxlKS4KLSBgVHlwZUVycm9yOiBDYW5ub3QgY2FzdGAgb24gYXBwZW5kIOKGkiBQeUFycm93IHR5cGUg4omgIEljZWJlcmcgc2NoZW1hOyBjYXN0IHRvIGludDY0IChJY2ViZXJnIGRlZmF1bHQpOyBjaGVjayBgdGFibGUuc2NoZW1hKClgLgoKIyMgQ29uY3VycmVuY3kKCi0gYENvbW1pdEZhaWxlZEV4Y2VwdGlvbmAg4oaSIG9wdGltaXN0aWMtbG9ja2luZyBjb25mbGljdDsgcmV0cnkgd2l0aCBiYWNrb2ZmIChzZWUgW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCNjb25jdXJyZW50LXdyaXRlcy13aXRoLXJldHJ5LXB5aWNlYmVyZykpLgotIFN0YWxlIG1ldGFkYXRhIGFmdGVyIGV4dGVybmFsIHdyaXRlcyDihpIgcmVsb2FkOiBgdGFibGUgPSBjYXRhbG9nLmxvYWRfdGFibGUoKCJucyIsInRibCIpKWAuCgojIyBQeVNwYXJrIC8gSWNlYmVyZwoKfCBJc3N1ZSB8IEZpeCB8CnwtLS0tLS0tfC0tLS0tfAp8IENhdGFsb2cgYXV0aCBmYWlscyB8IEFkZCBoZWFkZXIgYFgtSWNlYmVyZy1BY2Nlc3MtRGVsZWdhdGlvbjogdmVuZGVkLWNyZWRlbnRpYWxzYCB8CnwgYE5vQXV0aFdpdGhBV1NFeGNlcHRpb25gIG9uIG9ycGhhbiByZW1vdmFsIHwgU3VwcGx5IFMzIGFjY2Vzcy9zZWNyZXQga2V5cyAodmVuZGVkIGNyZWRzIGRvbid0IHdvcmsgaGVyZSkgfAp8IFZlcnNpb24gbWlzbWF0Y2ggfCBVc2UgSWNlYmVyZyBgMS42LjFgIHwKfCBTbG93IGZpcnN0IHJ1biAofjMw4oCTNjBzKSB8IEpBUiBkb3dubG9hZDsgY2FjaGVkIGFmdGVyIHwKfCBSZW1vdGUgc2lnbmluZyBlcnJvcnMgfCBTZXQgYHMzLnJlbW90ZS1zaWduaW5nLWVuYWJsZWQ9ZmFsc2VgIHwKCiMjIE5lc3RlZCBOYW1lc3BhY2VzCgpDb250cm9sLXBsYW5lIFVSTCBzZXBhcmF0b3IgZm9yIG5lc3RlZCBuYW1lc3BhY2VzIGlzICoqYCUxRmAqKiAoVW5pdCBTZXBhcmF0b3IpLCBub3QgYC9gIG9yIGAuYDogYC9uYW1lc3BhY2VzL3BhcmVudCUxRmNoaWxkL3RhYmxlc2AuCgojIyBEZWJ1ZyBDaGVja2xpc3QKCjEuIGBucHggd3JhbmdsZXIgcjIgYnVja2V0IGNhdGFsb2cgc3RhdHVzIDxidWNrZXQ+YCDigJQgZW5hYmxlZD8KMi4gVG9rZW4gaGFzIFIyIFN0b3JhZ2UgKEFkbWluIFImVykgKyBSMiBEYXRhIENhdGFsb2cgKFImVyk/CjMuIGBjYXRhbG9nLmxpc3RfbmFtZXNwYWNlcygpYCBzdWNjZWVkcz8KNC4gQ2F0YWxvZyBVUkkgPSBgY2F0YWxvZy5jbG91ZGZsYXJlc3RvcmFnZS5jb20ve0FDQ09VTlRfSUR9L3tCVUNLRVR9YCwgd2FyZWhvdXNlID0gYHtBQ0NPVU5UX0lEfV97QlVDS0VUfWA/CjUuIE5hbWVzcGFjZSBjcmVhdGVkIGJlZm9yZSBgY3JlYXRlX3RhYmxlYD8KNi4gQ29tcGFjdGlvbiBlbmFibGVkICsgYGNyZWRlbnRpYWxfc3RhdHVzOiBwcmVzZW50YD8KCiMjIFNlZSBBbHNvCgotIFtjb25maWd1cmF0aW9uLm1kXShjb25maWd1cmF0aW9uLm1kKSDCtyBbYXBpLm1kXShhcGkubWQpIMK3IFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpCg==
+# R2 Data Catalog Gotchas
+
+Common failure modes and operational behavior. For limits, recommendations, and supported settings, pull `https://developers.cloudflare.com/r2/data-catalog/` and `.../table-maintenance/`.
+
+## Connection / Auth
+
+- **Catalog URI / warehouse mismatch (most common).** Copy both values exactly from `wrangler r2 bucket catalog enable` (Catalog URI `https://catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}`, warehouse `{ACCOUNT_ID}_{BUCKET}`). Mismatched values fail to connect.
+- **401 Unauthorized** — token lacks Data Catalog R&W. Test with `catalog.list_namespaces()`.
+- **403 on data files** — token lacks R2 Storage. Open beta requires **Admin Read & Write on R2 Storage even for read-only** data access.
+- **`/config` "Warehouse name missing in query param"** — the Iceberg `/v1/config` route needs `?warehouse={ACCOUNT_ID}_{BUCKET}`. PyIceberg/PySpark add it automatically when you set `warehouse=`.
+
+## Maintenance Behavior (updated)
+
+- **No throughput cap on compaction.** The former 2 GB/hour/table limit is **lifted** — compaction triggers hourly and processes the backlog with no hard cap. Large small-file backlogs still take multiple hourly cycles.
+- **Snapshot expiration deletes data files** (since April 2026), not just metadata. Manual `remove_orphan_files` is rarely needed.
+- **Compaction requires a stored credential.** `wrangler ... compaction enable` and the dashboard wizard store it automatically; pure-API setups must POST `/credential`.
+- Compaction is **Parquet-only**.
+
+## Tables & Schema
+
+- `TableAlreadyExistsError` / `NamespaceAlreadyExistsError` → use `create_*_if_not_exists` / load existing.
+- `422 Validation` on schema update → only add nullable columns and widen types (int→long, float→double).
+- `TypeError: Cannot cast` on append → PyArrow type ≠ Iceberg schema; cast to int64 (Iceberg default); check `table.schema()`.
+
+## Concurrency
+
+- `CommitFailedException` → optimistic-locking conflict; retry with backoff (see [patterns.md](patterns.md#concurrent-writes-with-retry-pyiceberg)).
+- Stale metadata after external writes → reload: `table = catalog.load_table(("ns","tbl"))`.
+
+## PySpark / Iceberg
+
+| Issue | Fix |
+|-------|-----|
+| Catalog auth fails | Add header `X-Iceberg-Access-Delegation: vended-credentials` |
+| `NoAuthWithAWSException` on orphan removal | Supply S3 access/secret keys (vended creds don't work here) |
+| Version mismatch | Use Iceberg `1.6.1` |
+| Slow first run (~30–60s) | JAR download; cached after |
+| Remote signing errors | Set `s3.remote-signing-enabled=false` |
+
+## Nested Namespaces
+
+Control-plane URL separator for nested namespaces is **`%1F`** (Unit Separator), not `/` or `.`: `/namespaces/parent%1Fchild/tables`.
+
+## Debug Checklist
+
+1. `npx wrangler r2 bucket catalog status <bucket>` — enabled?
+2. Token has R2 Storage (Admin R&W) + R2 Data Catalog (R&W)?
+3. `catalog.list_namespaces()` succeeds?
+4. Catalog URI = `catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}`, warehouse = `{ACCOUNT_ID}_{BUCKET}`?
+5. Namespace created before `create_table`?
+6. Compaction enabled + `credential_status: present`?
+
+## See Also
+
+- [configuration.md](configuration.md) · [api.md](api.md) · [patterns.md](patterns.md)

@@ -1,1 +1,110 @@
-IyBDbGllbnQgU0RLCgpGZXRjaCBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWdlbnRzL2FwaS1yZWZlcmVuY2UvY2xpZW50LXNkay8gZm9yIGNvbXBsZXRlIGRvY3VtZW50YXRpb24uCgojIyBSZWFjdDogYHVzZUFnZW50YAoKYGBgdHN4CmltcG9ydCB7IHVzZUFnZW50IH0gZnJvbSAiYWdlbnRzL3JlYWN0IjsKCmZ1bmN0aW9uIEFwcCgpIHsKICBjb25zdCBbc3RhdGUsIHNldFN0YXRlXSA9IHVzZVN0YXRlKHsgY291bnQ6IDAgfSk7CgogIGNvbnN0IGFnZW50ID0gdXNlQWdlbnQoewogICAgYWdlbnQ6ICJDb3VudGVyIiwKICAgIG5hbWU6ICJteS1pbnN0YW5jZSIsCiAgICBvblN0YXRlVXBkYXRlOiAobmV3U3RhdGUpID0+IHNldFN0YXRlKG5ld1N0YXRlKSwKICAgIG9uSWRlbnRpdHk6IChuYW1lLCBhZ2VudFR5cGUpID0+IGNvbnNvbGUubG9nKGBDb25uZWN0ZWQgdG8gJHtuYW1lfWApCiAgfSk7CgogIHJldHVybiA8YnV0dG9uIG9uQ2xpY2s9eygpID0+IGFnZW50LnNldFN0YXRlKHsgY291bnQ6IHN0YXRlLmNvdW50ICsgMSB9KX0+CiAgICB7c3RhdGUuY291bnR9CiAgPC9idXR0b24+Owp9CmBgYAoKIyMjIFR5cGVkIFJQQyB2aWEgYHN0dWJgCgpgYGB0c3gKY29uc3QgYWdlbnQgPSB1c2VBZ2VudDx0eXBlb2YgTXlBZ2VudD4oewogIGFnZW50OiAiTXlBZ2VudCIsCiAgbmFtZTogImRlZmF1bHQiCn0pOwoKY29uc3QgcmVzdWx0ID0gYXdhaXQgYWdlbnQuc3R1Yi5teU1ldGhvZChhcmcxLCBhcmcyKTsKYGBgCgojIyMgQXV0aCB2aWEgUXVlcnkgUGFyYW1zCgpgYGB0c3gKdXNlQWdlbnQoewogIGFnZW50OiAiTXlBZ2VudCIsCiAgbmFtZTogImRlZmF1bHQiLAogIHF1ZXJ5OiBhc3luYyAoKSA9PiBgdG9rZW49JHthd2FpdCBnZXRUb2tlbigpfWAsCiAgcXVlcnlEZXBzOiBbdG9rZW5WZXJzaW9uXQp9KTsKYGBgCgojIyBSZWFjdDogYHVzZUFnZW50Q2hhdGAKCmBgYHRzeAppbXBvcnQgeyB1c2VBZ2VudCB9IGZyb20gImFnZW50cy9yZWFjdCI7CmltcG9ydCB7IHVzZUFnZW50Q2hhdCB9IGZyb20gIkBjbG91ZGZsYXJlL2FpLWNoYXQvcmVhY3QiOwoKZnVuY3Rpb24gQ2hhdCgpIHsKICBjb25zdCBhZ2VudCA9IHVzZUFnZW50KHsgYWdlbnQ6ICJDaGF0QWdlbnQiLCBuYW1lOiAic2Vzc2lvbi0xIiB9KTsKCiAgY29uc3QgeyBtZXNzYWdlcywgaW5wdXQsIGhhbmRsZUlucHV0Q2hhbmdlLCBoYW5kbGVTdWJtaXQsIHN0YXR1cyB9ID0KICAgIHVzZUFnZW50Q2hhdCh7IGFnZW50IH0pOwoKICByZXR1cm4gKAogICAgPGRpdj4KICAgICAge21lc3NhZ2VzLm1hcCgobSkgPT4gPGRpdiBrZXk9e20uaWR9PnttLnJvbGV9OiB7bS5jb250ZW50fTwvZGl2Pil9CiAgICAgIDxmb3JtIG9uU3VibWl0PXtoYW5kbGVTdWJtaXR9PgogICAgICAgIDxpbnB1dCB2YWx1ZT17aW5wdXR9IG9uQ2hhbmdlPXtoYW5kbGVJbnB1dENoYW5nZX0gLz4KICAgICAgPC9mb3JtPgogICAgPC9kaXY+CiAgKTsKfQpgYGAKCiMjIFZhbmlsbGEgSlM6IGBBZ2VudENsaWVudGAKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgQWdlbnRDbGllbnQgfSBmcm9tICJhZ2VudHMvY2xpZW50IjsKCmNvbnN0IGNsaWVudCA9IG5ldyBBZ2VudENsaWVudCh7CiAgYWdlbnQ6ICJNeUFnZW50IiwKICBuYW1lOiAiZGVmYXVsdCIsCiAgaG9zdDogImh0dHBzOi8vbXktd29ya2VyLndvcmtlcnMuZGV2Igp9KTsKCmNsaWVudC5hZGRFdmVudExpc3RlbmVyKCJzdGF0ZVVwZGF0ZSIsIChlKSA9PiBjb25zb2xlLmxvZyhlLnN0YXRlKSk7CmNvbnN0IHJlc3VsdCA9IGF3YWl0IGNsaWVudC5jYWxsKCJteU1ldGhvZCIsIFthcmddKTsKY2xpZW50LmNsb3NlKCk7CmBgYAoKIyMgYGFnZW50RmV0Y2hgIGZvciBIVFRQLW9ubHkKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgYWdlbnRGZXRjaCB9IGZyb20gImFnZW50cy9jbGllbnQiOwoKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBhZ2VudEZldGNoKHsKICBhZ2VudDogIk15QWdlbnQiLAogIG5hbWU6ICJkZWZhdWx0IiwKICBob3N0OiAiaHR0cHM6Ly9teS13b3JrZXIud29ya2Vycy5kZXYiLAogIHBhdGg6ICIvYXBpL2RhdGEiCn0pOwpgYGAKCiMjIFN0cmVhbWluZyBSUEMKCmBgYHR5cGVzY3JpcHQKYXdhaXQgYWdlbnQuY2FsbCgic3RyZWFtUmVzdWx0cyIsIFsicXVlcnkiXSwgewogIHN0cmVhbTogewogICAgb25DaHVuazogKGRhdGEpID0+IGNvbnNvbGUubG9nKGRhdGEpLAogICAgb25Eb25lOiAoKSA9PiBjb25zb2xlLmxvZygiZG9uZSIpLAogICAgb25FcnJvcjogKGVycikgPT4gY29uc29sZS5lcnJvcihlcnIpCiAgfQp9KTsKYGBgCg==
+# Client SDK
+
+Fetch https://developers.cloudflare.com/agents/api-reference/client-sdk/ for complete documentation.
+
+## React: `useAgent`
+
+```tsx
+import { useAgent } from "agents/react";
+
+function App() {
+  const [state, setState] = useState({ count: 0 });
+
+  const agent = useAgent({
+    agent: "Counter",
+    name: "my-instance",
+    onStateUpdate: (newState) => setState(newState),
+    onIdentity: (name, agentType) => console.log(`Connected to ${name}`)
+  });
+
+  return <button onClick={() => agent.setState({ count: state.count + 1 })}>
+    {state.count}
+  </button>;
+}
+```
+
+### Typed RPC via `stub`
+
+```tsx
+const agent = useAgent<typeof MyAgent>({
+  agent: "MyAgent",
+  name: "default"
+});
+
+const result = await agent.stub.myMethod(arg1, arg2);
+```
+
+### Auth via Query Params
+
+```tsx
+useAgent({
+  agent: "MyAgent",
+  name: "default",
+  query: async () => `token=${await getToken()}`,
+  queryDeps: [tokenVersion]
+});
+```
+
+## React: `useAgentChat`
+
+```tsx
+import { useAgent } from "agents/react";
+import { useAgentChat } from "@cloudflare/ai-chat/react";
+
+function Chat() {
+  const agent = useAgent({ agent: "ChatAgent", name: "session-1" });
+
+  const { messages, input, handleInputChange, handleSubmit, status } =
+    useAgentChat({ agent });
+
+  return (
+    <div>
+      {messages.map((m) => <div key={m.id}>{m.role}: {m.content}</div>)}
+      <form onSubmit={handleSubmit}>
+        <input value={input} onChange={handleInputChange} />
+      </form>
+    </div>
+  );
+}
+```
+
+## Vanilla JS: `AgentClient`
+
+```typescript
+import { AgentClient } from "agents/client";
+
+const client = new AgentClient({
+  agent: "MyAgent",
+  name: "default",
+  host: "https://my-worker.workers.dev"
+});
+
+client.addEventListener("stateUpdate", (e) => console.log(e.state));
+const result = await client.call("myMethod", [arg]);
+client.close();
+```
+
+## `agentFetch` for HTTP-only
+
+```typescript
+import { agentFetch } from "agents/client";
+
+const response = await agentFetch({
+  agent: "MyAgent",
+  name: "default",
+  host: "https://my-worker.workers.dev",
+  path: "/api/data"
+});
+```
+
+## Streaming RPC
+
+```typescript
+await agent.call("streamResults", ["query"], {
+  stream: {
+    onChunk: (data) => console.log(data),
+    onDone: () => console.log("done"),
+    onError: (err) => console.error(err)
+  }
+});
+```

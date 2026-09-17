@@ -1,1 +1,85 @@
-IyBBSSBTZWFyY2ggUGF0dGVybnMKCiMjIHNlYXJjaCgpIHZzIGFpU2VhcmNoKCkKCnwgVXNlIHwgTWV0aG9kIHwgUmV0dXJucyB8CnwtLS0tLXwtLS0tLS0tLXwtLS0tLS0tLS18CnwgQ3VzdG9tIFVJLCBhbmFseXRpY3MgfCBgc2VhcmNoKClgIHwgUmF3IGNodW5rcyBvbmx5ICh+MTAwLTMwMG1zKSB8CnwgQ2hhdGJvdHMsIFEmQSB8IGBhaVNlYXJjaCgpYCB8IEFJIHJlc3BvbnNlICsgY2h1bmtzICh+NTAwLTIwMDBtcykgfAoKIyMgcmV3cml0ZV9xdWVyeQoKfCBTZXR0aW5nIHwgVXNlIFdoZW4gfAp8LS0tLS0tLS0tfC0tLS0tLS0tLS18CnwgYHRydWVgIHwgVXNlciBpbnB1dCAodHlwb3MsIHZhZ3VlIHF1ZXJpZXMpIHwKfCBgZmFsc2VgIHwgTExNLWdlbmVyYXRlZCBxdWVyaWVzIChhbHJlYWR5IG9wdGltaXplZCkgfAoKIyMgTXVsdGl0ZW5hbmN5IChGb2xkZXItQmFzZWQpCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGFuc3dlciA9IGF3YWl0IGVudi5BSS5hdXRvcmFnKCJzYWFzLWRvY3MiKS5haVNlYXJjaCh7CiAgcXVlcnk6ICJyZWZ1bmQgcG9saWN5IiwKICBtb2RlbDogIkBjZi9tZXRhL2xsYW1hLTMuMy03MGItaW5zdHJ1Y3QtZnA4LWZhc3QiLAogIGZpbHRlcnM6IHsKICAgIGNvbHVtbjogImZvbGRlciIsCiAgICBvcGVyYXRvcjogImd0ZSIsICAvLyAic3RhcnRzIHdpdGgiIHBhdHRlcm4KICAgIHZhbHVlOiBgdGVuYW50cy8ke3RlbmFudElkfS9gCiAgfQp9KTsKYGBgCgojIyBTdHJlYW1pbmcKCmBgYHR5cGVzY3JpcHQKY29uc3Qgc3RyZWFtID0gYXdhaXQgZW52LkFJLmF1dG9yYWcoImRvY3MiKS5haVNlYXJjaCh7CiAgcXVlcnksIG1vZGVsOiAiQGNmL21ldGEvbGxhbWEtMy4zLTcwYi1pbnN0cnVjdC1mcDgtZmFzdCIsIHN0cmVhbTogdHJ1ZQp9KTsKcmV0dXJuIG5ldyBSZXNwb25zZShzdHJlYW0sIHsgaGVhZGVyczogeyAiQ29udGVudC1UeXBlIjogInRleHQvZXZlbnQtc3RyZWFtIiB9IH0pOwpgYGAKCiMjIFNjb3JlIFRocmVzaG9sZAoKfCBUaHJlc2hvbGQgfCBVc2UgfAp8LS0tLS0tLS0tLS18LS0tLS18CnwgMC4zIChkZWZhdWx0KSB8IEJyb2FkIHJlY2FsbCwgZXhwbG9yYXRvcnkgfAp8IDAuNSB8IEJhbGFuY2VkLCBwcm9kdWN0aW9uIGRlZmF1bHQgfAp8IDAuNyB8IEhpZ2ggcHJlY2lzaW9uLCBjcml0aWNhbCBhY2N1cmFjeSB8CgojIyBTeXN0ZW0gUHJvbXB0IFRlbXBsYXRlCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHN5c3RlbVByb21wdCA9IGBZb3UgYXJlIGEgZG9jdW1lbnRhdGlvbiBhc3Npc3RhbnQuCi0gQW5zd2VyIE9OTFkgYmFzZWQgb24gcHJvdmlkZWQgY29udGV4dAotIElmIGNvbnRleHQgZG9lc24ndCBjb250YWluIGFuc3dlciwgc2F5ICJJIGRvbid0IGhhdmUgaW5mb3JtYXRpb24iCi0gSW5jbHVkZSBjb2RlIGV4YW1wbGVzIGZyb20gY29udGV4dGA7CmBgYAoKIyMgQ29tcG91bmQgRmlsdGVycwoKYGBgdHlwZXNjcmlwdAovLyBPUjogTXVsdGlwbGUgZm9sZGVycwpmaWx0ZXJzOiB7CiAgb3BlcmF0b3I6ICJvciIsCiAgZmlsdGVyczogWwogICAgeyBjb2x1bW46ICJmb2xkZXIiLCBvcGVyYXRvcjogImd0ZSIsIHZhbHVlOiAiZG9jcy9hcGkvIiB9LAogICAgeyBjb2x1bW46ICJmb2xkZXIiLCBvcGVyYXRvcjogImd0ZSIsIHZhbHVlOiAiZG9jcy9hdXRoLyIgfQogIF0KfQoKLy8gQU5EOiBGb2xkZXIgKyBkYXRlCmZpbHRlcnM6IHsKICBvcGVyYXRvcjogImFuZCIsCiAgZmlsdGVyczogWwogICAgeyBjb2x1bW46ICJmb2xkZXIiLCBvcGVyYXRvcjogImd0ZSIsIHZhbHVlOiAiZG9jcy8iIH0sCiAgICB7IGNvbHVtbjogInRpbWVzdGFtcCIsIG9wZXJhdG9yOiAiZ3RlIiwgdmFsdWU6IG9uZVdlZWtBZ29TZWNvbmRzIH0KICBdCn0KYGBgCgojIyBSZXJhbmtpbmcKCkVuYWJsZSBmb3IgaGlnaC1zdGFrZXMgdXNlIGNhc2VzIChhZGRzIH4zMDBtcyBsYXRlbmN5KToKCmBgYHR5cGVzY3JpcHQKcmVyYW5raW5nOiB7IGVuYWJsZWQ6IHRydWUsIG1vZGVsOiAiQGNmL2JhYWkvYmdlLXJlcmFua2VyLWJhc2UiIH0KYGBgCg==
+# AI Search Patterns
+
+## search() vs aiSearch()
+
+| Use | Method | Returns |
+|-----|--------|---------|
+| Custom UI, analytics | `search()` | Raw chunks only (~100-300ms) |
+| Chatbots, Q&A | `aiSearch()` | AI response + chunks (~500-2000ms) |
+
+## rewrite_query
+
+| Setting | Use When |
+|---------|----------|
+| `true` | User input (typos, vague queries) |
+| `false` | LLM-generated queries (already optimized) |
+
+## Multitenancy (Folder-Based)
+
+```typescript
+const answer = await env.AI.autorag("saas-docs").aiSearch({
+  query: "refund policy",
+  model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  filters: {
+    column: "folder",
+    operator: "gte",  // "starts with" pattern
+    value: `tenants/${tenantId}/`
+  }
+});
+```
+
+## Streaming
+
+```typescript
+const stream = await env.AI.autorag("docs").aiSearch({
+  query, model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast", stream: true
+});
+return new Response(stream, { headers: { "Content-Type": "text/event-stream" } });
+```
+
+## Score Threshold
+
+| Threshold | Use |
+|-----------|-----|
+| 0.3 (default) | Broad recall, exploratory |
+| 0.5 | Balanced, production default |
+| 0.7 | High precision, critical accuracy |
+
+## System Prompt Template
+
+```typescript
+const systemPrompt = `You are a documentation assistant.
+- Answer ONLY based on provided context
+- If context doesn't contain answer, say "I don't have information"
+- Include code examples from context`;
+```
+
+## Compound Filters
+
+```typescript
+// OR: Multiple folders
+filters: {
+  operator: "or",
+  filters: [
+    { column: "folder", operator: "gte", value: "docs/api/" },
+    { column: "folder", operator: "gte", value: "docs/auth/" }
+  ]
+}
+
+// AND: Folder + date
+filters: {
+  operator: "and",
+  filters: [
+    { column: "folder", operator: "gte", value: "docs/" },
+    { column: "timestamp", operator: "gte", value: oneWeekAgoSeconds }
+  ]
+}
+```
+
+## Reranking
+
+Enable for high-stakes use cases (adds ~300ms latency):
+
+```typescript
+reranking: { enabled: true, model: "@cf/baai/bge-reranker-base" }
+```

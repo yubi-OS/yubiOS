@@ -1,1 +1,65 @@
-IyBDbG91ZGZsYXJlIFJlYWx0aW1lIFNGVSBSZWZlcmVuY2UKCkV4cGVydCBndWlkYW5jZSBmb3IgYnVpbGRpbmcgcmVhbC10aW1lIGF1ZGlvL3ZpZGVvL2RhdGEgYXBwbGljYXRpb25zIHVzaW5nIENsb3VkZmxhcmUgUmVhbHRpbWUgU0ZVIChTZWxlY3RpdmUgRm9yd2FyZGluZyBVbml0KS4KCiMjIFJlYWRpbmcgT3JkZXIKCnwgVGFzayB8IEZpbGVzIHwgflRva2VucyB8CnwtLS0tLS18LS0tLS0tLXwtLS0tLS0tLS18CnwgTmV3IHByb2plY3QgfCBSRUFETUUg4oaSIGNvbmZpZ3VyYXRpb24gfCB+MTIwMCB8CnwgSW1wbGVtZW50IHB1Ymxpc2gvc3Vic2NyaWJlIHwgUkVBRE1FIOKGkiBhcGkgfCB+MTYwMCB8CnwgQWRkIFBhcnR5VHJhY2tzIHwgcGF0dGVybnMgKFBhcnR5VHJhY2tzIHNlY3Rpb24pIHwgfjgwMCB8CnwgQnVpbGQgcHJlc2VuY2Ugc3lzdGVtIHwgcGF0dGVybnMgKERPIHNlY3Rpb24pIHwgfjgwMCB8CnwgRGVidWcgY29ubmVjdGlvbiBpc3N1ZXMgfCBnb3RjaGFzIHwgfjcwMCB8CnwgU2NhbGUgdG8gbWlsbGlvbnMgfCBwYXR0ZXJucyAoQ2FzY2FkaW5nIHNlY3Rpb24pIHwgfjYwMCB8CnwgQWRkIHNpbXVsY2FzdCB8IHBhdHRlcm5zIChBZHZhbmNlZCBzZWN0aW9uKSB8IH41MDAgfAp8IENvbmZpZ3VyZSBUVVJOIHwgY29uZmlndXJhdGlvbiAoVFVSTiBzZWN0aW9uKSB8IH40MDAgfAoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKCi0gKipbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkqKiAtIFNldHVwLCBkZXBsb3ltZW50LCBlbnZpcm9ubWVudCB2YXJpYWJsZXMsIFdyYW5nbGVyIGNvbmZpZwotICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gU2Vzc2lvbnMsIHRyYWNrcywgZW5kcG9pbnRzLCByZXF1ZXN0L3Jlc3BvbnNlIHBhdHRlcm5zCi0gKipbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSoqIC0gQXJjaGl0ZWN0dXJlIHBhdHRlcm5zLCB1c2UgY2FzZXMsIGludGVncmF0aW9uIGV4YW1wbGVzCi0gKipbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkqKiAtIENvbW1vbiBpc3N1ZXMsIGRlYnVnZ2luZywgcGVyZm9ybWFuY2UsIHNlY3VyaXR5CgojIyBRdWljayBTdGFydAoKQ2xvdWRmbGFyZSBSZWFsdGltZSBTRlU6IFdlYlJUQyBpbmZyYXN0cnVjdHVyZSBvbiBnbG9iYWwgbmV0d29yayAoMzEwKyBjaXRpZXMpLiBBbnljYXN0IHJvdXRpbmcsIG5vIHJlZ2lvbmFsIGNvbnN0cmFpbnRzLCBwdWIvc3ViIG1vZGVsLgoKKipDb3JlIGNvbmNlcHRzOioqCi0gKipTZXNzaW9uczoqKiBXZWJSVEMgUGVlckNvbm5lY3Rpb24gdG8gQ2xvdWRmbGFyZSBlZGdlCi0gKipUcmFja3M6KiogQXVkaW8vdmlkZW8vZGF0YSBjaGFubmVscyB5b3UgcHVibGlzaCBvciBzdWJzY3JpYmUgdG8KLSAqKk5vIHJvb21zOioqIEJ1aWxkIHByZXNlbmNlIGxheWVyIHlvdXJzZWxmIHZpYSB0cmFjayBzaGFyaW5nIChzZWUgcGF0dGVybnMubWQpCgoqKk1lbnRhbCBtb2RlbDoqKiBZb3VyIGNsaWVudCBlc3RhYmxpc2hlcyBvbmUgV2ViUlRDIHNlc3Npb24sIHB1Ymxpc2hlcyB0cmFja3MgKGF1ZGlvL3ZpZGVvKSwgc2hhcmVzIHRyYWNrIElEcyB2aWEgeW91ciBiYWNrZW5kLCBvdGhlcnMgc3Vic2NyaWJlIHRvIHlvdXIgdHJhY2tzIHVzaW5nIHRyYWNrIElEcyArIHlvdXIgc2Vzc2lvbiBJRC4KCiMjIENob29zZSBZb3VyIEFwcHJvYWNoCgp8IEFwcHJvYWNoIHwgV2hlbiB0byBVc2UgfCBDb21wbGV4aXR5IHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgKipQYXJ0eVRyYWNrcyoqIHwgUHJvZHVjdGlvbiBhcHBzIHdpdGggZGV2aWNlIHN3aXRjaGluZywgUmVhY3QgfCBMb3cgLSBPYnNlcnZhYmxlLWJhc2VkLCBoYW5kbGVzIHJlY29ubmVjdGlvbnMgfAp8ICoqUmF3IEFQSSoqIHwgQ3VzdG9tIHJlcXVpcmVtZW50cywgbm9uLWJyb3dzZXIsIGxlYXJuaW5nIHwgTWVkaXVtIC0gRnVsbCBjb250cm9sLCBtYW51YWwgV2ViUlRDIGxpZmVjeWNsZSB8CnwgKipSZWFsdGltZUtpdCoqIHwgRW5kLXRvLWVuZCBTREsgd2l0aCBVSSBjb21wb25lbnRzIHwgTG93ZXN0IC0gTWFuYWdlZCBzdGF0ZSwgUmVhY3QgaG9va3MgfAoKKipSZWNvbW1lbmRhdGlvbjoqKiBTdGFydCB3aXRoIFBhcnR5VHJhY2tzIGZvciBtb3N0IHByb2R1Y3Rpb24gYXBwbGljYXRpb25zLiBTZWUgcGF0dGVybnMubWQgZm9yIFBhcnR5VHJhY2tzIGV4YW1wbGVzLgoKIyMgU0ZVIHZzIFJlYWx0aW1lS2l0CgotICoqUmVhbHRpbWUgU0ZVOioqIFdlYlJUQyBpbmZyYXN0cnVjdHVyZSAodGhpcyByZWZlcmVuY2UpLiBCdWlsZCB5b3VyIG93biBzaWduYWxpbmcsIHByZXNlbmNlLCBVSS4KLSAqKlJlYWx0aW1lS2l0OioqIFNESyBsYXllciBvbiB0b3Agb2YgU0ZVLiBJbmNsdWRlcyBSZWFjdCBob29rcywgc3RhdGUgbWFuYWdlbWVudCwgVUkgY29tcG9uZW50cy4gUGFydCBvZiBDbG91ZGZsYXJlIEFJIHBsYXRmb3JtLgoKVXNlIFNGVSBkaXJlY3RseSB3aGVuIHlvdSBuZWVkIGN1c3RvbSBzaWduYWxpbmcgb3Igbm9uLVJlYWN0IGZyYW1ld29yay4gVXNlIFJlYWx0aW1lS2l0IGZvciBmYXN0ZXIgZGV2ZWxvcG1lbnQgd2l0aCBSZWFjdC4KCiMjIFNldHVwCgpEYXNoYm9hcmQ6IGh0dHBzOi8vZGFzaC5jbG91ZGZsYXJlLmNvbS8/dG89LzphY2NvdW50L2NhbGxzCgpHZXQgYENBTExTX0FQUF9JRGAgYW5kIGBDQUxMU19BUFBfU0VDUkVUYCBmcm9tIGRhc2hib2FyZCwgdGhlbiBzZWUgY29uZmlndXJhdGlvbi5tZCBmb3IgZGVwbG95bWVudC4KCiMjIFNlZSBBbHNvCgotIFtPcmFuZ2UgTWVldHMgRGVtb10oaHR0cHM6Ly9kZW1vLm9yYW5nZS5jbG91ZGZsYXJlLmRldi8pCi0gW09yYW5nZSBTb3VyY2VdKGh0dHBzOi8vZ2l0aHViLmNvbS9jbG91ZGZsYXJlL29yYW5nZSkKLSBbQ2FsbHMgRXhhbXBsZXNdKGh0dHBzOi8vZ2l0aHViLmNvbS9jbG91ZGZsYXJlL2NhbGxzLWV4YW1wbGVzKQotIFtBUEkgUmVmZXJlbmNlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYXBpL3Jlc291cmNlcy9jYWxscy8pCi0gW1JlYWx0aW1lS2l0IERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzLWFpL3JlYWx0aW1la2l0LykK
+# Cloudflare Realtime SFU Reference
+
+Expert guidance for building real-time audio/video/data applications using Cloudflare Realtime SFU (Selective Forwarding Unit).
+
+## Reading Order
+
+| Task | Files | ~Tokens |
+|------|-------|---------|
+| New project | README → configuration | ~1200 |
+| Implement publish/subscribe | README → api | ~1600 |
+| Add PartyTracks | patterns (PartyTracks section) | ~800 |
+| Build presence system | patterns (DO section) | ~800 |
+| Debug connection issues | gotchas | ~700 |
+| Scale to millions | patterns (Cascading section) | ~600 |
+| Add simulcast | patterns (Advanced section) | ~500 |
+| Configure TURN | configuration (TURN section) | ~400 |
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Setup, deployment, environment variables, Wrangler config
+- **[api.md](api.md)** - Sessions, tracks, endpoints, request/response patterns
+- **[patterns.md](patterns.md)** - Architecture patterns, use cases, integration examples
+- **[gotchas.md](gotchas.md)** - Common issues, debugging, performance, security
+
+## Quick Start
+
+Cloudflare Realtime SFU: WebRTC infrastructure on global network (310+ cities). Anycast routing, no regional constraints, pub/sub model.
+
+**Core concepts:**
+- **Sessions:** WebRTC PeerConnection to Cloudflare edge
+- **Tracks:** Audio/video/data channels you publish or subscribe to
+- **No rooms:** Build presence layer yourself via track sharing (see patterns.md)
+
+**Mental model:** Your client establishes one WebRTC session, publishes tracks (audio/video), shares track IDs via your backend, others subscribe to your tracks using track IDs + your session ID.
+
+## Choose Your Approach
+
+| Approach | When to Use | Complexity |
+|----------|-------------|------------|
+| **PartyTracks** | Production apps with device switching, React | Low - Observable-based, handles reconnections |
+| **Raw API** | Custom requirements, non-browser, learning | Medium - Full control, manual WebRTC lifecycle |
+| **RealtimeKit** | End-to-end SDK with UI components | Lowest - Managed state, React hooks |
+
+**Recommendation:** Start with PartyTracks for most production applications. See patterns.md for PartyTracks examples.
+
+## SFU vs RealtimeKit
+
+- **Realtime SFU:** WebRTC infrastructure (this reference). Build your own signaling, presence, UI.
+- **RealtimeKit:** SDK layer on top of SFU. Includes React hooks, state management, UI components. Part of Cloudflare AI platform.
+
+Use SFU directly when you need custom signaling or non-React framework. Use RealtimeKit for faster development with React.
+
+## Setup
+
+Dashboard: https://dash.cloudflare.com/?to=/:account/calls
+
+Get `CALLS_APP_ID` and `CALLS_APP_SECRET` from dashboard, then see configuration.md for deployment.
+
+## See Also
+
+- [Orange Meets Demo](https://demo.orange.cloudflare.dev/)
+- [Orange Source](https://github.com/cloudflare/orange)
+- [Calls Examples](https://github.com/cloudflare/calls-examples)
+- [API Reference](https://developers.cloudflare.com/api/resources/calls/)
+- [RealtimeKit Docs](https://developers.cloudflare.com/workers-ai/realtimekit/)

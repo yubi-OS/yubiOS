@@ -1,1 +1,82 @@
-IyBEeW5hbWljIFJvdXRpbmcKCkNvbmZpZ3VyZSBjb21wbGV4IHJvdXRpbmcgaW4gZGFzaGJvYXJkIHdpdGhvdXQgY29kZSBjaGFuZ2VzLiBVc2Ugcm91dGUgbmFtZXMgaW5zdGVhZCBvZiBtb2RlbCBuYW1lcy4KCiMjIFVzYWdlCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHJlc3BvbnNlID0gYXdhaXQgY2xpZW50LmNoYXQuY29tcGxldGlvbnMuY3JlYXRlKHsKICBtb2RlbDogJ2R5bmFtaWMvc21hcnQtY2hhdCcsIC8vIFJvdXRlIG5hbWUgZnJvbSBkYXNoYm9hcmQKICBtZXNzYWdlczogW3sgcm9sZTogJ3VzZXInLCBjb250ZW50OiAnSGVsbG8hJyB9XQp9KTsKYGBgCgojIyBOb2RlIFR5cGVzCgp8IE5vZGUgfCBQdXJwb3NlIHwgVXNlIENhc2UgfAp8LS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8ICoqQ29uZGl0aW9uYWwqKiB8IEJyYW5jaCBvbiBtZXRhZGF0YSB8IFBhaWQgdnMgZnJlZSB1c2VycywgZ2VvIHJvdXRpbmcgfAp8ICoqUGVyY2VudGFnZSoqIHwgQS9CIHNwbGl0IHRyYWZmaWMgfCBNb2RlbCB0ZXN0aW5nLCBncmFkdWFsIHJvbGxvdXRzIHwKfCAqKlJhdGUgTGltaXQqKiB8IEVuZm9yY2UgcXVvdGFzIHwgUGVyLXVzZXIvdGVhbSBsaW1pdHMgfAp8ICoqQnVkZ2V0IExpbWl0KiogfCBDb3N0IHF1b3RhcyB8IFBlci11c2VyIHNwZW5kaW5nIGNhcHMgfAp8ICoqTW9kZWwqKiB8IENhbGwgcHJvdmlkZXIgfCBGaW5hbCBkZXN0aW5hdGlvbiB8CgojIyBNZXRhZGF0YQoKUGFzcyB2aWEgaGVhZGVyIChtYXggNSBlbnRyaWVzLCBmbGF0IG9ubHkpOgpgYGB0eXBlc2NyaXB0CmhlYWRlcnM6IHsKICAnY2YtYWlnLW1ldGFkYXRhJzogSlNPTi5zdHJpbmdpZnkoewogICAgdXNlcklkOiAndXNlci0xMjMnLAogICAgdGllcjogJ3BybycsCiAgICByZWdpb246ICd1cy1lYXN0JwogIH0pCn0KYGBgCgojIyBDb21tb24gUGF0dGVybnMKCioqTXVsdGktbW9kZWwgZmFsbGJhY2s6KioKYGBgClN0YXJ0IOKGkiBHUFQtNCDihpIgT24gZXJyb3I6IENsYXVkZSDihpIgT24gZXJyb3I6IExsYW1hCmBgYAoKKipUaWVyZWQgYWNjZXNzOioqCmBgYApDb25kaXRpb25hbDogdGllciA9PSAnZW50ZXJwcmlzZScg4oaSIEdQVC00IChubyBsaW1pdCkKQ29uZGl0aW9uYWw6IHRpZXIgPT0gJ3Bybycg4oaSIFJhdGUgTGltaXQgMTAwMC9ociDihpIgR1BULTRvCkNvbmRpdGlvbmFsOiB0aWVyID09ICdmcmVlJyDihpIgUmF0ZSBMaW1pdCAxMC9ociDihpIgR1BULTRvLW1pbmkKYGBgCgoqKkdyYWR1YWwgcm9sbG91dDoqKgpgYGAKUGVyY2VudGFnZTogMTAlIOKGkiBOZXcgbW9kZWwsIDkwJSDihpIgT2xkIG1vZGVsCmBgYAoKKipDb3N0LWJhc2VkIGZhbGxiYWNrOioqCmBgYApCdWRnZXQgTGltaXQ6ICQxMDAvZGF5IHBlciB0ZWFtSWQKICA8IDgwJTogR1BULTQKICA+PSA4MCU6IEdQVC00by1taW5pCiAgPj0gMTAwJTogRXJyb3IKYGBgCgojIyBWZXJzaW9uIE1hbmFnZW1lbnQKCi0gU2F2ZSBjaGFuZ2VzIGFzIG5ldyB2ZXJzaW9uCi0gVGVzdCB3aXRoIGBtb2RlbDogJ2R5bmFtaWMvcm91dGVAdjInYAotIFJvbGwgYmFjayBieSBkZXBsb3lpbmcgcHJldmlvdXMgdmVyc2lvbgoKIyMgTW9uaXRvcmluZwoKRGFzaGJvYXJkIOKGkiBHYXRld2F5IOKGkiBEeW5hbWljIFJvdXRlczoKLSBSZXF1ZXN0IGNvdW50IHBlciBwYXRoCi0gU3VjY2Vzcy9lcnJvciByYXRlcwotIExhdGVuY3kvY29zdCBieSBwYXRoCgojIyBMaW1pdGF0aW9ucwoKLSBNYXggNSBtZXRhZGF0YSBlbnRyaWVzCi0gVmFsdWVzOiBzdHJpbmcvbnVtYmVyL2Jvb2xlYW4vbnVsbCBvbmx5Ci0gTm8gbmVzdGVkIG9iamVjdHMKLSBSb3V0ZSBuYW1lczogYWxwaGFudW1lcmljICsgaHlwaGVucwo=
+# Dynamic Routing
+
+Configure complex routing in dashboard without code changes. Use route names instead of model names.
+
+## Usage
+
+```typescript
+const response = await client.chat.completions.create({
+  model: 'dynamic/smart-chat', // Route name from dashboard
+  messages: [{ role: 'user', content: 'Hello!' }]
+});
+```
+
+## Node Types
+
+| Node | Purpose | Use Case |
+|------|---------|----------|
+| **Conditional** | Branch on metadata | Paid vs free users, geo routing |
+| **Percentage** | A/B split traffic | Model testing, gradual rollouts |
+| **Rate Limit** | Enforce quotas | Per-user/team limits |
+| **Budget Limit** | Cost quotas | Per-user spending caps |
+| **Model** | Call provider | Final destination |
+
+## Metadata
+
+Pass via header (max 5 entries, flat only):
+```typescript
+headers: {
+  'cf-aig-metadata': JSON.stringify({
+    userId: 'user-123',
+    tier: 'pro',
+    region: 'us-east'
+  })
+}
+```
+
+## Common Patterns
+
+**Multi-model fallback:**
+```
+Start → GPT-4 → On error: Claude → On error: Llama
+```
+
+**Tiered access:**
+```
+Conditional: tier == 'enterprise' → GPT-4 (no limit)
+Conditional: tier == 'pro' → Rate Limit 1000/hr → GPT-4o
+Conditional: tier == 'free' → Rate Limit 10/hr → GPT-4o-mini
+```
+
+**Gradual rollout:**
+```
+Percentage: 10% → New model, 90% → Old model
+```
+
+**Cost-based fallback:**
+```
+Budget Limit: $100/day per teamId
+  < 80%: GPT-4
+  >= 80%: GPT-4o-mini
+  >= 100%: Error
+```
+
+## Version Management
+
+- Save changes as new version
+- Test with `model: 'dynamic/route@v2'`
+- Roll back by deploying previous version
+
+## Monitoring
+
+Dashboard → Gateway → Dynamic Routes:
+- Request count per path
+- Success/error rates
+- Latency/cost by path
+
+## Limitations
+
+- Max 5 metadata entries
+- Values: string/number/boolean/null only
+- No nested objects
+- Route names: alphanumeric + hyphens

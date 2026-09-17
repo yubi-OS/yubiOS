@@ -1,1 +1,79 @@
-IyBRdWV1ZSAmIFJldHJpZXMKCkZldGNoIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9xdWV1ZS10YXNrcy8gYW5kIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9yZXRyaWVzLyBmb3IgY29tcGxldGUgZG9jdW1lbnRhdGlvbi4KCiMjIEJ1aWx0LWluIFF1ZXVlCgpGSUZPIHF1ZXVlIHBlcnNpc3RlZCBpbiBTUUxpdGUuIFNlcXVlbnRpYWwgcHJvY2Vzc2luZywgb25lIGl0ZW0gYXQgYSB0aW1lLgoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgTXlBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBhc3luYyBvblJlcXVlc3QocmVxdWVzdDogUmVxdWVzdCkgewogICAgdGhpcy5xdWV1ZSgicHJvY2Vzc0l0ZW0iLCB7IGlkOiAiYWJjIiwgZGF0YTogIi4uLiIgfSk7CiAgICB0aGlzLnF1ZXVlKCJwcm9jZXNzSXRlbSIsIHsgaWQ6ICJkZWYiLCBkYXRhOiAiLi4uIiB9LCB7IHJldHJ5OiB7IG1heEF0dGVtcHRzOiA1IH0gfSk7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJRdWV1ZWQiKTsKICB9CgogIGFzeW5jIHByb2Nlc3NJdGVtKHBheWxvYWQ6IHsgaWQ6IHN0cmluZzsgZGF0YTogc3RyaW5nIH0sIHF1ZXVlSXRlbTogUXVldWVJdGVtKSB7CiAgICBhd2FpdCBkb1dvcmsocGF5bG9hZCk7CiAgfQp9CmBgYAoKIyMjIFF1ZXVlIE1hbmFnZW1lbnQKCmBgYHR5cGVzY3JpcHQKY29uc3QgaXRlbXMgPSB0aGlzLmdldFF1ZXVlKCk7CmNvbnN0IGJ5Q2FsbGJhY2sgPSB0aGlzLmdldFF1ZXVlcygicHJvY2Vzc0l0ZW0iKTsKdGhpcy5kZXF1ZXVlKGl0ZW1JZCk7CnRoaXMuZGVxdWV1ZUFsbCgpOwp0aGlzLmRlcXVldWVBbGxCeUNhbGxiYWNrKCJwcm9jZXNzSXRlbSIpOwpgYGAKCiMjIFJldHJpZXMKCkV4cG9uZW50aWFsIGJhY2tvZmYgd2l0aCBmdWxsIGppdHRlci4gRGVmYXVsdHM6IDMgYXR0ZW1wdHMsIDEwMG1zIGJhc2UsIDMwMDBtcyBtYXguCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHJlc3VsdCA9IGF3YWl0IHRoaXMucmV0cnkoCiAgYXN5bmMgKCkgPT4gewogICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tL2RhdGEiKTsKICAgIGlmICghcmVzLm9rKSB0aHJvdyBuZXcgRXJyb3IoYEhUVFAgJHtyZXMuc3RhdHVzfWApOwogICAgcmV0dXJuIHJlcy5qc29uKCk7CiAgfSwKICB7CiAgICBtYXhBdHRlbXB0czogNSwKICAgIGJhc2VEZWxheU1zOiAyMDAsCiAgICBtYXhEZWxheU1zOiA1MDAwLAogICAgc2hvdWxkUmV0cnk6IChlcnIsIG5leHRBdHRlbXB0KSA9PiB7CiAgICAgIGlmIChlcnIubWVzc2FnZS5pbmNsdWRlcygiNDI5IikpIHJldHVybiB0cnVlOwogICAgICBpZiAoZXJyLm1lc3NhZ2UuaW5jbHVkZXMoIjQwMSIpKSByZXR1cm4gZmFsc2U7CiAgICAgIHJldHVybiBuZXh0QXR0ZW1wdCA8PSAzOwogICAgfQogIH0KKTsKYGBgCgojIyMgUmV0cnkgb24gU2NoZWR1bGVzIGFuZCBRdWV1ZQoKYGBgdHlwZXNjcmlwdAphd2FpdCB0aGlzLnNjaGVkdWxlKDYwLCAidGFzayIsIHBheWxvYWQsIHsgcmV0cnk6IHsgbWF4QXR0ZW1wdHM6IDMgfSB9KTsKYXdhaXQgdGhpcy5zY2hlZHVsZUV2ZXJ5KDMwLCAicG9sbCIsIHVuZGVmaW5lZCwgeyByZXRyeTogeyBtYXhBdHRlbXB0czogMiB9IH0pOwp0aGlzLnF1ZXVlKCJoYW5kbGVyIiwgcGF5bG9hZCwgeyByZXRyeTogeyBtYXhBdHRlbXB0czogNSB9IH0pOwpgYGAKCiMjIyBDbGFzcy1sZXZlbCBEZWZhdWx0cwoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgTXlBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBzdGF0aWMgb3B0aW9ucyA9IHsKICAgIHJldHJ5OiB7IG1heEF0dGVtcHRzOiA1LCBiYXNlRGVsYXlNczogMjAwLCBtYXhEZWxheU1zOiAxMDAwMCB9CiAgfTsKfQpgYGAKCiMjIEltcG9ydGFudAoKLSBgc2hvdWxkUmV0cnlgIG9ubHkgd29ya3Mgb24gYHRoaXMucmV0cnkoKWAg4oCUIG5vdCBvbiBzY2hlZHVsZS9xdWV1ZSAoY2FsbGJhY2tzIGFyZW4ndCBzZXJpYWxpemFibGUpCi0gUXVldWUgcmV0cmllcyBibG9jayBoZWFkLW9mLWxpbmU7IGxvbmcgZGVsYXlzIGtlZXAgdGhlIERPIGF3YWtlIOKAlCB1c2UgYHNjaGVkdWxlYCBmb3IgbG9uZyB3YWl0cyBpbnN0ZWFkCi0gTm8gZGVhZC1sZXR0ZXIgcXVldWUg4oCUIGZhaWxlZCBpdGVtcyBhcmUgcmVtb3ZlZCBhZnRlciByZXRyaWVzIGV4aGF1c3RlZAo=
+# Queue & Retries
+
+Fetch https://developers.cloudflare.com/agents/api-reference/queue-tasks/ and https://developers.cloudflare.com/agents/api-reference/retries/ for complete documentation.
+
+## Built-in Queue
+
+FIFO queue persisted in SQLite. Sequential processing, one item at a time.
+
+```typescript
+export class MyAgent extends Agent<Env, State> {
+  async onRequest(request: Request) {
+    this.queue("processItem", { id: "abc", data: "..." });
+    this.queue("processItem", { id: "def", data: "..." }, { retry: { maxAttempts: 5 } });
+    return new Response("Queued");
+  }
+
+  async processItem(payload: { id: string; data: string }, queueItem: QueueItem) {
+    await doWork(payload);
+  }
+}
+```
+
+### Queue Management
+
+```typescript
+const items = this.getQueue();
+const byCallback = this.getQueues("processItem");
+this.dequeue(itemId);
+this.dequeueAll();
+this.dequeueAllByCallback("processItem");
+```
+
+## Retries
+
+Exponential backoff with full jitter. Defaults: 3 attempts, 100ms base, 3000ms max.
+
+```typescript
+const result = await this.retry(
+  async () => {
+    const res = await fetch("https://api.example.com/data");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  },
+  {
+    maxAttempts: 5,
+    baseDelayMs: 200,
+    maxDelayMs: 5000,
+    shouldRetry: (err, nextAttempt) => {
+      if (err.message.includes("429")) return true;
+      if (err.message.includes("401")) return false;
+      return nextAttempt <= 3;
+    }
+  }
+);
+```
+
+### Retry on Schedules and Queue
+
+```typescript
+await this.schedule(60, "task", payload, { retry: { maxAttempts: 3 } });
+await this.scheduleEvery(30, "poll", undefined, { retry: { maxAttempts: 2 } });
+this.queue("handler", payload, { retry: { maxAttempts: 5 } });
+```
+
+### Class-level Defaults
+
+```typescript
+export class MyAgent extends Agent<Env, State> {
+  static options = {
+    retry: { maxAttempts: 5, baseDelayMs: 200, maxDelayMs: 10000 }
+  };
+}
+```
+
+## Important
+
+- `shouldRetry` only works on `this.retry()` — not on schedule/queue (callbacks aren't serializable)
+- Queue retries block head-of-line; long delays keep the DO awake — use `schedule` for long waits instead
+- No dead-letter queue — failed items are removed after retries exhausted

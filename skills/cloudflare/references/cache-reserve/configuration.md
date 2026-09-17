@@ -1,1 +1,169 @@
-IyBDYWNoZSBSZXNlcnZlIENvbmZpZ3VyYXRpb24KCiMjIERhc2hib2FyZCBTZXR1cAoKKipNaW5pbXVtIHN0ZXBzIHRvIGVuYWJsZToqKgoKYGBgYmFzaAojIE5hdmlnYXRlIHRvIGRhc2hib2FyZApodHRwczovL2Rhc2guY2xvdWRmbGFyZS5jb20vY2FjaGluZy9jYWNoZS1yZXNlcnZlCgojIENsaWNrICJFbmFibGUgU3RvcmFnZSBTeW5jIiBvciAiUHVyY2hhc2UiIGJ1dHRvbgpgYGAKCioqUHJlcmVxdWlzaXRlczoqKgotIFBhaWQgQ2FjaGUgUmVzZXJ2ZSBwbGFuIG9yIFNtYXJ0IFNoaWVsZCBBZHZhbmNlZCByZXF1aXJlZAotIFRpZXJlZCBDYWNoZSAqKnJlcXVpcmVkKiogZm9yIENhY2hlIFJlc2VydmUgdG8gZnVuY3Rpb24gb3B0aW1hbGx5CgojIyBBUEkgQ29uZmlndXJhdGlvbgoKIyMjIFJFU1QgQVBJCgpgYGBiYXNoCiMgRW5hYmxlCmN1cmwgLVggUEFUQ0ggImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC96b25lcy8kWk9ORV9JRC9jYWNoZS9jYWNoZV9yZXNlcnZlIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIiAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3sidmFsdWUiOiAib24ifScKCiMgQ2hlY2sgc3RhdHVzCmN1cmwgLVggR0VUICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvem9uZXMvJFpPTkVfSUQvY2FjaGUvY2FjaGVfcmVzZXJ2ZSIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJEFQSV9UT0tFTiIKYGBgCgojIyMgVHlwZVNjcmlwdCBTREsKCmBgYGJhc2gKbnBtIGluc3RhbGwgY2xvdWRmbGFyZQpgYGAKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IENsb3VkZmxhcmUgZnJvbSAnY2xvdWRmbGFyZSc7Cgpjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7CiAgYXBpVG9rZW46IHByb2Nlc3MuZW52LkNMT1VERkxBUkVfQVBJX1RPS0VOLAp9KTsKCi8vIEVuYWJsZSBDYWNoZSBSZXNlcnZlCmF3YWl0IGNsaWVudC5jYWNoZS5jYWNoZVJlc2VydmUuZWRpdCh7CiAgem9uZV9pZDogJ2FiYzEyMycsCiAgdmFsdWU6ICdvbicsCn0pOwoKLy8gR2V0IENhY2hlIFJlc2VydmUgc3RhdHVzCmNvbnN0IHN0YXR1cyA9IGF3YWl0IGNsaWVudC5jYWNoZS5jYWNoZVJlc2VydmUuZ2V0KHsKICB6b25lX2lkOiAnYWJjMTIzJywKfSk7CmNvbnNvbGUubG9nKHN0YXR1cy52YWx1ZSk7IC8vICdvbicgb3IgJ29mZicKYGBgCgojIyMgUHl0aG9uIFNESwoKYGBgYmFzaApwaXAgaW5zdGFsbCBjbG91ZGZsYXJlCmBgYAoKYGBgcHl0aG9uCmZyb20gY2xvdWRmbGFyZSBpbXBvcnQgQ2xvdWRmbGFyZQoKY2xpZW50ID0gQ2xvdWRmbGFyZShhcGlfdG9rZW49b3MuZW52aXJvbi5nZXQoIkNMT1VERkxBUkVfQVBJX1RPS0VOIikpCgojIEVuYWJsZSBDYWNoZSBSZXNlcnZlCmNsaWVudC5jYWNoZS5jYWNoZV9yZXNlcnZlLmVkaXQoCiAgICB6b25lX2lkPSJhYmMxMjMiLAogICAgdmFsdWU9Im9uIgopCgojIEdldCBDYWNoZSBSZXNlcnZlIHN0YXR1cwpzdGF0dXMgPSBjbGllbnQuY2FjaGUuY2FjaGVfcmVzZXJ2ZS5nZXQoem9uZV9pZD0iYWJjMTIzIikKcHJpbnQoc3RhdHVzLnZhbHVlKSAgIyAnb24nIG9yICdvZmYnCmBgYAoKIyMjIFRlcnJhZm9ybQoKYGBgaGNsCnRlcnJhZm9ybSB7CiAgcmVxdWlyZWRfcHJvdmlkZXJzIHsKICAgIGNsb3VkZmxhcmUgPSB7CiAgICAgIHNvdXJjZSAgPSAiY2xvdWRmbGFyZS9jbG91ZGZsYXJlIgogICAgICB2ZXJzaW9uID0gIn4+IDQuMCIKICAgIH0KICB9Cn0KCnByb3ZpZGVyICJjbG91ZGZsYXJlIiB7CiAgYXBpX3Rva2VuID0gdmFyLmNsb3VkZmxhcmVfYXBpX3Rva2VuCn0KCnJlc291cmNlICJjbG91ZGZsYXJlX3pvbmVfY2FjaGVfcmVzZXJ2ZSIgImV4YW1wbGUiIHsKICB6b25lX2lkID0gdmFyLnpvbmVfaWQKICBlbmFibGVkID0gdHJ1ZQp9CgojIFRpZXJlZCBDYWNoZSBpcyByZXF1aXJlZCBmb3IgQ2FjaGUgUmVzZXJ2ZQpyZXNvdXJjZSAiY2xvdWRmbGFyZV90aWVyZWRfY2FjaGUiICJleGFtcGxlIiB7CiAgem9uZV9pZCAgICA9IHZhci56b25lX2lkCiAgY2FjaGVfdHlwZSA9ICJzbWFydCIKfQpgYGAKCiMjIyBQdWx1bWkKCmBgYHR5cGVzY3JpcHQKaW1wb3J0ICogYXMgY2xvdWRmbGFyZSBmcm9tICJAcHVsdW1pL2Nsb3VkZmxhcmUiOwoKLy8gRW5hYmxlIENhY2hlIFJlc2VydmUKY29uc3QgY2FjaGVSZXNlcnZlID0gbmV3IGNsb3VkZmxhcmUuWm9uZUNhY2hlUmVzZXJ2ZSgiZXhhbXBsZSIsIHsKICB6b25lSWQ6IHpvbmVJZCwKICBlbmFibGVkOiB0cnVlLAp9KTsKCi8vIEVuYWJsZSBUaWVyZWQgQ2FjaGUgKHJlcXVpcmVkKQpjb25zdCB0aWVyZWRDYWNoZSA9IG5ldyBjbG91ZGZsYXJlLlRpZXJlZENhY2hlKCJleGFtcGxlIiwgewogIHpvbmVJZDogem9uZUlkLAogIGNhY2hlVHlwZTogInNtYXJ0IiwKfSk7CmBgYAoKIyMjIFJlcXVpcmVkIEFQSSBUb2tlbiBQZXJtaXNzaW9ucwoKLSBgWm9uZSBTZXR0aW5ncyBSZWFkYAotIGBab25lIFNldHRpbmdzIFdyaXRlYAotIGBab25lIFJlYWRgCi0gYFpvbmUgV3JpdGVgCgojIyBDYWNoZSBSdWxlcyBJbnRlZ3JhdGlvbgoKQ29udHJvbCBDYWNoZSBSZXNlcnZlIGVsaWdpYmlsaXR5IHZpYSBDYWNoZSBSdWxlczoKCmBgYHR5cGVzY3JpcHQKLy8gRW5hYmxlIGZvciBzdGF0aWMgYXNzZXRzCnsKICBhY3Rpb246ICdzZXRfY2FjaGVfc2V0dGluZ3MnLAogIGFjdGlvbl9wYXJhbWV0ZXJzOiB7CiAgICBjYWNoZV9yZXNlcnZlOiB7IGVsaWdpYmxlOiB0cnVlLCBtaW5pbXVtX2ZpbGVfdHRsOiA4NjQwMCB9LAogICAgZWRnZV90dGw6IHsgbW9kZTogJ292ZXJyaWRlX29yaWdpbicsIGRlZmF1bHQ6IDg2NDAwIH0sCiAgICBjYWNoZTogdHJ1ZQogIH0sCiAgZXhwcmVzc2lvbjogJyhodHRwLnJlcXVlc3QudXJpLnBhdGggbWF0Y2hlcyAiXFwuKGpwZ3xwbmd8d2VicHxwZGZ8emlwKSQiKScKfQoKLy8gRGlzYWJsZSBmb3IgQVBJcwp7CiAgYWN0aW9uOiAnc2V0X2NhY2hlX3NldHRpbmdzJywKICBhY3Rpb25fcGFyYW1ldGVyczogeyBjYWNoZV9yZXNlcnZlOiB7IGVsaWdpYmxlOiBmYWxzZSB9IH0sCiAgZXhwcmVzc2lvbjogJyhodHRwLnJlcXVlc3QudXJpLnBhdGggbWF0Y2hlcyAiXi9hcGkvIiknCn0KCi8vIENyZWF0ZSB2aWEgQVBJOiBQVVQgdG8gem9uZXMve3pvbmVfaWR9L3J1bGVzZXRzL3BoYXNlcy9odHRwX3JlcXVlc3RfY2FjaGVfc2V0dGluZ3MvZW50cnlwb2ludApgYGAKCiMjIFdyYW5nbGVyIEludGVncmF0aW9uCgpDYWNoZSBSZXNlcnZlIHdvcmtzIGF1dG9tYXRpY2FsbHkgd2l0aCBXb3JrZXJzIGRlcGxveWVkIHZpYSBXcmFuZ2xlci4gTm8gc3BlY2lhbCB3cmFuZ2xlci5qc29uYyBjb25maWd1cmF0aW9uIG5lZWRlZCAtIGVuYWJsZSBDYWNoZSBSZXNlcnZlIHZpYSBEYXNoYm9hcmQgb3IgQVBJIGZvciB0aGUgem9uZS4KCiMjIFNlZSBBbHNvCgotIFtSRUFETUVdKC4vUkVBRE1FLm1kKSAtIE92ZXJ2aWV3IGFuZCBjb3JlIGNvbmNlcHRzCi0gW0FQSSBSZWZlcmVuY2VdKC4vYXBpLm1kKSAtIFB1cmdpbmcgYW5kIG1vbml0b3JpbmcgQVBJcwotIFtQYXR0ZXJuc10oLi9wYXR0ZXJucy5tZCkgLSBCZXN0IHByYWN0aWNlcyBhbmQgb3B0aW1pemF0aW9uCi0gW0dvdGNoYXNdKC4vZ290Y2hhcy5tZCkgLSBDb21tb24gaXNzdWVzIGFuZCB0cm91Ymxlc2hvb3RpbmcK
+# Cache Reserve Configuration
+
+## Dashboard Setup
+
+**Minimum steps to enable:**
+
+```bash
+# Navigate to dashboard
+https://dash.cloudflare.com/caching/cache-reserve
+
+# Click "Enable Storage Sync" or "Purchase" button
+```
+
+**Prerequisites:**
+- Paid Cache Reserve plan or Smart Shield Advanced required
+- Tiered Cache **required** for Cache Reserve to function optimally
+
+## API Configuration
+
+### REST API
+
+```bash
+# Enable
+curl -X PATCH "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/cache/cache_reserve" \
+  -H "Authorization: Bearer $API_TOKEN" -H "Content-Type: application/json" \
+  -d '{"value": "on"}'
+
+# Check status
+curl -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/cache/cache_reserve" \
+  -H "Authorization: Bearer $API_TOKEN"
+```
+
+### TypeScript SDK
+
+```bash
+npm install cloudflare
+```
+
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({
+  apiToken: process.env.CLOUDFLARE_API_TOKEN,
+});
+
+// Enable Cache Reserve
+await client.cache.cacheReserve.edit({
+  zone_id: 'abc123',
+  value: 'on',
+});
+
+// Get Cache Reserve status
+const status = await client.cache.cacheReserve.get({
+  zone_id: 'abc123',
+});
+console.log(status.value); // 'on' or 'off'
+```
+
+### Python SDK
+
+```bash
+pip install cloudflare
+```
+
+```python
+from cloudflare import Cloudflare
+
+client = Cloudflare(api_token=os.environ.get("CLOUDFLARE_API_TOKEN"))
+
+# Enable Cache Reserve
+client.cache.cache_reserve.edit(
+    zone_id="abc123",
+    value="on"
+)
+
+# Get Cache Reserve status
+status = client.cache.cache_reserve.get(zone_id="abc123")
+print(status.value)  # 'on' or 'off'
+```
+
+### Terraform
+
+```hcl
+terraform {
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
+
+resource "cloudflare_zone_cache_reserve" "example" {
+  zone_id = var.zone_id
+  enabled = true
+}
+
+# Tiered Cache is required for Cache Reserve
+resource "cloudflare_tiered_cache" "example" {
+  zone_id    = var.zone_id
+  cache_type = "smart"
+}
+```
+
+### Pulumi
+
+```typescript
+import * as cloudflare from "@pulumi/cloudflare";
+
+// Enable Cache Reserve
+const cacheReserve = new cloudflare.ZoneCacheReserve("example", {
+  zoneId: zoneId,
+  enabled: true,
+});
+
+// Enable Tiered Cache (required)
+const tieredCache = new cloudflare.TieredCache("example", {
+  zoneId: zoneId,
+  cacheType: "smart",
+});
+```
+
+### Required API Token Permissions
+
+- `Zone Settings Read`
+- `Zone Settings Write`
+- `Zone Read`
+- `Zone Write`
+
+## Cache Rules Integration
+
+Control Cache Reserve eligibility via Cache Rules:
+
+```typescript
+// Enable for static assets
+{
+  action: 'set_cache_settings',
+  action_parameters: {
+    cache_reserve: { eligible: true, minimum_file_ttl: 86400 },
+    edge_ttl: { mode: 'override_origin', default: 86400 },
+    cache: true
+  },
+  expression: '(http.request.uri.path matches "\\.(jpg|png|webp|pdf|zip)$")'
+}
+
+// Disable for APIs
+{
+  action: 'set_cache_settings',
+  action_parameters: { cache_reserve: { eligible: false } },
+  expression: '(http.request.uri.path matches "^/api/")'
+}
+
+// Create via API: PUT to zones/{zone_id}/rulesets/phases/http_request_cache_settings/entrypoint
+```
+
+## Wrangler Integration
+
+Cache Reserve works automatically with Workers deployed via Wrangler. No special wrangler.jsonc configuration needed - enable Cache Reserve via Dashboard or API for the zone.
+
+## See Also
+
+- [README](./README.md) - Overview and core concepts
+- [API Reference](./api.md) - Purging and monitoring APIs
+- [Patterns](./patterns.md) - Best practices and optimization
+- [Gotchas](./gotchas.md) - Common issues and troubleshooting

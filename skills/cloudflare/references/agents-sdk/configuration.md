@@ -1,1 +1,182 @@
-IyBDb25maWd1cmF0aW9uCgojIyBXcmFuZ2xlciBTZXR1cAoKYGBganNvbmMKewogICJuYW1lIjogIm15LWFnZW50cy1hcHAiLAogICJkdXJhYmxlX29iamVjdHMiOiB7CiAgICAiYmluZGluZ3MiOiBbCiAgICAgIHsibmFtZSI6ICJNeUFnZW50IiwgImNsYXNzX25hbWUiOiAiTXlBZ2VudCJ9CiAgICBdCiAgfSwKICAibWlncmF0aW9ucyI6IFsKICAgIHsidGFnIjogInYxIiwgIm5ld19zcWxpdGVfY2xhc3NlcyI6IFsiTXlBZ2VudCJdfQogIF0sCiAgImFpIjogewogICAgImJpbmRpbmciOiAiQUkiCiAgfQp9CmBgYAoKIyMgRW52aXJvbm1lbnQgQmluZGluZ3MKCioqVHlwZS1zYWZlIHBhdHRlcm46KioKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgQUk/OiBBaTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBXb3JrZXJzIEFJCiAgTXlBZ2VudD86IER1cmFibGVPYmplY3ROYW1lc3BhY2U8TXlBZ2VudD47CiAgQ2hhdEFnZW50PzogRHVyYWJsZU9iamVjdE5hbWVzcGFjZTxDaGF0QWdlbnQ+OwogIERCPzogRDFEYXRhYmFzZTsgICAgICAgICAgICAgICAgICAgICAgLy8gRDEgZGF0YWJhc2UKICBLVj86IEtWTmFtZXNwYWNlOyAgICAgICAgICAgICAgICAgICAgIC8vIEtWIHN0b3JhZ2UKICBSMj86IFIyQnVja2V0OyAgICAgICAgICAgICAgICAgICAgICAgIC8vIFIyIGJ1Y2tldAogIE9QRU5BSV9BUElfS0VZPzogc3RyaW5nOyAgICAgICAgICAgICAgLy8gU2VjcmV0cwogIEdJVEhVQl9DTElFTlRfSUQ/OiBzdHJpbmc7ICAgICAgICAgICAgLy8gTUNQIE9BdXRoIGNyZWRlbnRpYWxzCiAgR0lUSFVCX0NMSUVOVF9TRUNSRVQ/OiBzdHJpbmc7CiAgUVVFVUU/OiBRdWV1ZTsgICAgICAgICAgICAgICAgICAgICAgICAvLyBRdWV1ZXMKfQpgYGAKCioqQmVzdCBwcmFjdGljZToqKiBEZWZpbmUgYWxsIERPIGJpbmRpbmdzIGluIEVudiBpbnRlcmZhY2UgZm9yIHR5cGUgc2FmZXR5LgoKIyMgRGVwbG95bWVudAoKYGBgYmFzaAojIExvY2FsIGRldgpucHggd3JhbmdsZXIgZGV2CgojIERlcGxveSBwcm9kdWN0aW9uCm5weCB3cmFuZ2xlciBkZXBsb3kKCiMgU2V0IHNlY3JldHMKbnB4IHdyYW5nbGVyIHNlY3JldCBwdXQgT1BFTkFJX0FQSV9LRVkKYGBgCgojIyBBZ2VudCBSb3V0aW5nCgoqKlJlY29tbWVuZGVkOiBVc2Ugcm91dGUgaGVscGVycyoqCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IHJvdXRlQWdlbnRSZXF1ZXN0IH0gZnJvbSAiYWdlbnRzIjsKCmV4cG9ydCBkZWZhdWx0IHsKICBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudikgewogICAgcmV0dXJuIHJvdXRlQWdlbnRSZXF1ZXN0KHJlcXVlc3QsIGVudik7CiAgfQp9CmBgYAoKSGVscGVyIHJvdXRlcyByZXF1ZXN0cyB0byBhZ2VudHMgYXV0b21hdGljYWxseSBiYXNlZCBvbiBVUkwgcGF0dGVybnMuCgoqKk1hbnVhbCByb3V0aW5nIChhZHZhbmNlZCk6KioKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KSB7CiAgICBjb25zdCB1cmwgPSBuZXcgVVJMKHJlcXVlc3QudXJsKTsKICAgIAogICAgLy8gTmFtZWQgSUQgKGRldGVybWluaXN0aWMpCiAgICBjb25zdCBpZCA9IGVudi5NeUFnZW50LmlkRnJvbU5hbWUoInVzZXItMTIzIik7CiAgICAKICAgIC8vIFJhbmRvbSBJRCAoZnJvbSBVUkwgcGFyYW0pCiAgICAvLyBjb25zdCBpZCA9IGVudi5NeUFnZW50LmlkRnJvbVN0cmluZyh1cmwuc2VhcmNoUGFyYW1zLmdldCgiaWQiKSk7CiAgICAKICAgIGNvbnN0IHN0dWIgPSBlbnYuTXlBZ2VudC5nZXQoaWQpOwogICAgcmV0dXJuIHN0dWIuZmV0Y2gocmVxdWVzdCk7CiAgfQp9CmBgYAoKKipNdWx0aS1hZ2VudCBzZXR1cDoqKgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyByb3V0ZUFnZW50UmVxdWVzdCB9IGZyb20gImFnZW50cyI7CgpleHBvcnQgZGVmYXVsdCB7CiAgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpIHsKICAgIGNvbnN0IHVybCA9IG5ldyBVUkwocmVxdWVzdC51cmwpOwogICAgCiAgICAvLyBSb3V0ZSBieSBwYXRoCiAgICBpZiAodXJsLnBhdGhuYW1lLnN0YXJ0c1dpdGgoIi9jaGF0IikpIHsKICAgICAgcmV0dXJuIHJvdXRlQWdlbnRSZXF1ZXN0KHJlcXVlc3QsIGVudiwgIkNoYXRBZ2VudCIpOwogICAgfQogICAgaWYgKHVybC5wYXRobmFtZS5zdGFydHNXaXRoKCIvdGFzayIpKSB7CiAgICAgIHJldHVybiByb3V0ZUFnZW50UmVxdWVzdChyZXF1ZXN0LCBlbnYsICJUYXNrQWdlbnQiKTsKICAgIH0KICAgIAogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiTm90IGZvdW5kIiwgeyBzdGF0dXM6IDQwNCB9KTsKICB9Cn0KYGBgCgojIyBFbWFpbCBSb3V0aW5nCgoqKkNvZGUgc2V0dXA6KioKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgcm91dGVBZ2VudEVtYWlsIH0gZnJvbSAiYWdlbnRzIjsKCmV4cG9ydCBkZWZhdWx0IHsKICBmZXRjaDogKHJlcTogUmVxdWVzdCwgZW52OiBFbnYpID0+IHJvdXRlQWdlbnRSZXF1ZXN0KHJlcSwgZW52KSwKICBlbWFpbDogKG1lc3NhZ2U6IEZvcndhcmRhYmxlRW1haWxNZXNzYWdlLCBlbnY6IEVudikgPT4gewogICAgcmV0dXJuIHJvdXRlQWdlbnRFbWFpbChtZXNzYWdlLCBlbnYpOwogIH0KfQpgYGAKCioqRGFzaGJvYXJkIHNldHVwOioqCgpDb25maWd1cmUgZW1haWwgcm91dGluZyBpbiBDbG91ZGZsYXJlIGRhc2hib2FyZDoKCmBgYApEZXN0aW5hdGlvbjogV29ya2VycyB3aXRoIER1cmFibGUgT2JqZWN0cwpXb3JrZXI6IG15LWFnZW50cy1hcHAKYGBgCgpUaGVuIGhhbmRsZSBpbiBhZ2VudDoKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGNsYXNzIEVtYWlsQWdlbnQgZXh0ZW5kcyBBZ2VudDxFbnY+IHsKICBhc3luYyBvbkVtYWlsKGVtYWlsOiBBZ2VudEVtYWlsKSB7CiAgICBjb25zdCB0ZXh0ID0gYXdhaXQgZW1haWwudGV4dCgpOwogICAgLy8gUHJvY2VzcyBlbWFpbAogIH0KfQpgYGAKCiMjIEFJIEdhdGV3YXkgKE9wdGlvbmFsKQoKYGBgdHlwZXNjcmlwdAovLyBFbmFibGUgY2FjaGluZy9yb3V0aW5nIHRocm91Z2ggQUkgR2F0ZXdheQpjb25zdCByZXNwb25zZSA9IGF3YWl0IHRoaXMuZW52LkFJLnJ1bigKICAiQGNmL21ldGEvbGxhbWEtMy4xLThiLWluc3RydWN0IiwKICB7IHByb21wdCB9LAogIHsKICAgIGdhdGV3YXk6IHsKICAgICAgaWQ6ICJteS1nYXRld2F5LWlkIiwKICAgICAgc2tpcENhY2hlOiBmYWxzZSwKICAgICAgY2FjaGVUdGw6IDM2MDAKICAgIH0KICB9Cik7CmBgYAoKIyMgTUNQIENvbmZpZ3VyYXRpb24gKE9wdGlvbmFsKQoKRm9yIGV4cG9zaW5nIHRvb2xzIHZpYSBNb2RlbCBDb250ZXh0IFByb3RvY29sOgoKYGBgdHlwZXNjcmlwdAovLyB3cmFuZ2xlci5qc29uYyAtIEFkZCBNQ1AgT0F1dGggc2VjcmV0cwp7CiAgInZhcnMiOiB7CiAgICAiTUNQX1NFUlZFUl9VUkwiOiAiaHR0cHM6Ly9tY3AuZXhhbXBsZS5jb20iCiAgfQp9CgovLyBTZXQgc2VjcmV0cyB2aWEgQ0xJCi8vIG5weCB3cmFuZ2xlciBzZWNyZXQgcHV0IEdJVEhVQl9DTElFTlRfSUQKLy8gbnB4IHdyYW5nbGVyIHNlY3JldCBwdXQgR0lUSFVCX0NMSUVOVF9TRUNSRVQKYGBgCgpUaGVuIHJlZ2lzdGVyIGluIGFnZW50IGNvZGUgKHNlZSBhcGkubWQgTUNQIHNlY3Rpb24pLgo=
+# Configuration
+
+## Wrangler Setup
+
+```jsonc
+{
+  "name": "my-agents-app",
+  "durable_objects": {
+    "bindings": [
+      {"name": "MyAgent", "class_name": "MyAgent"}
+    ]
+  },
+  "migrations": [
+    {"tag": "v1", "new_sqlite_classes": ["MyAgent"]}
+  ],
+  "ai": {
+    "binding": "AI"
+  }
+}
+```
+
+## Environment Bindings
+
+**Type-safe pattern:**
+
+```typescript
+interface Env {
+  AI?: Ai;                              // Workers AI
+  MyAgent?: DurableObjectNamespace<MyAgent>;
+  ChatAgent?: DurableObjectNamespace<ChatAgent>;
+  DB?: D1Database;                      // D1 database
+  KV?: KVNamespace;                     // KV storage
+  R2?: R2Bucket;                        // R2 bucket
+  OPENAI_API_KEY?: string;              // Secrets
+  GITHUB_CLIENT_ID?: string;            // MCP OAuth credentials
+  GITHUB_CLIENT_SECRET?: string;
+  QUEUE?: Queue;                        // Queues
+}
+```
+
+**Best practice:** Define all DO bindings in Env interface for type safety.
+
+## Deployment
+
+```bash
+# Local dev
+npx wrangler dev
+
+# Deploy production
+npx wrangler deploy
+
+# Set secrets
+npx wrangler secret put OPENAI_API_KEY
+```
+
+## Agent Routing
+
+**Recommended: Use route helpers**
+
+```typescript
+import { routeAgentRequest } from "agents";
+
+export default {
+  fetch(request: Request, env: Env) {
+    return routeAgentRequest(request, env);
+  }
+}
+```
+
+Helper routes requests to agents automatically based on URL patterns.
+
+**Manual routing (advanced):**
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env) {
+    const url = new URL(request.url);
+    
+    // Named ID (deterministic)
+    const id = env.MyAgent.idFromName("user-123");
+    
+    // Random ID (from URL param)
+    // const id = env.MyAgent.idFromString(url.searchParams.get("id"));
+    
+    const stub = env.MyAgent.get(id);
+    return stub.fetch(request);
+  }
+}
+```
+
+**Multi-agent setup:**
+
+```typescript
+import { routeAgentRequest } from "agents";
+
+export default {
+  fetch(request: Request, env: Env) {
+    const url = new URL(request.url);
+    
+    // Route by path
+    if (url.pathname.startsWith("/chat")) {
+      return routeAgentRequest(request, env, "ChatAgent");
+    }
+    if (url.pathname.startsWith("/task")) {
+      return routeAgentRequest(request, env, "TaskAgent");
+    }
+    
+    return new Response("Not found", { status: 404 });
+  }
+}
+```
+
+## Email Routing
+
+**Code setup:**
+
+```typescript
+import { routeAgentEmail } from "agents";
+
+export default {
+  fetch: (req: Request, env: Env) => routeAgentRequest(req, env),
+  email: (message: ForwardableEmailMessage, env: Env) => {
+    return routeAgentEmail(message, env);
+  }
+}
+```
+
+**Dashboard setup:**
+
+Configure email routing in Cloudflare dashboard:
+
+```
+Destination: Workers with Durable Objects
+Worker: my-agents-app
+```
+
+Then handle in agent:
+
+```typescript
+export class EmailAgent extends Agent<Env> {
+  async onEmail(email: AgentEmail) {
+    const text = await email.text();
+    // Process email
+  }
+}
+```
+
+## AI Gateway (Optional)
+
+```typescript
+// Enable caching/routing through AI Gateway
+const response = await this.env.AI.run(
+  "@cf/meta/llama-3.1-8b-instruct",
+  { prompt },
+  {
+    gateway: {
+      id: "my-gateway-id",
+      skipCache: false,
+      cacheTtl: 3600
+    }
+  }
+);
+```
+
+## MCP Configuration (Optional)
+
+For exposing tools via Model Context Protocol:
+
+```typescript
+// wrangler.jsonc - Add MCP OAuth secrets
+{
+  "vars": {
+    "MCP_SERVER_URL": "https://mcp.example.com"
+  }
+}
+
+// Set secrets via CLI
+// npx wrangler secret put GITHUB_CLIENT_ID
+// npx wrangler secret put GITHUB_CLIENT_SECRET
+```
+
+Then register in agent code (see api.md MCP section).

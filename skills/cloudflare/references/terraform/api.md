@@ -1,1 +1,178 @@
-IyBUZXJyYWZvcm0gRGF0YSBTb3VyY2VzIFJlZmVyZW5jZQoKUXVlcnkgZXhpc3RpbmcgQ2xvdWRmbGFyZSByZXNvdXJjZXMgdG8gcmVmZXJlbmNlIGluIHlvdXIgY29uZmlndXJhdGlvbnMuCgojIyB2NSBEYXRhIFNvdXJjZSBOYW1lcwoKfCB2NCBOYW1lIHwgdjUgTmFtZSB8IE5vdGVzIHwKfC0tLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLXwKfCBgY2xvdWRmbGFyZV9yZWNvcmRgIHwgYGNsb3VkZmxhcmVfZG5zX3JlY29yZGAgfCB8CnwgYGNsb3VkZmxhcmVfd29ya2VyX3NjcmlwdGAgfCBgY2xvdWRmbGFyZV93b3JrZXJzX3NjcmlwdGAgfCBOb3RlOiBwbHVyYWwgfAp8IGBjbG91ZGZsYXJlX2FjY2Vzc18qYCB8IGBjbG91ZGZsYXJlX3plcm9fdHJ1c3RfKmAgfCBBY2Nlc3Mg4oaSIFplcm8gVHJ1c3QgfAoKIyMgWm9uZSBEYXRhIFNvdXJjZXMKCmBgYGhjbAojIEdldCB6b25lIGJ5IG5hbWUKZGF0YSAiY2xvdWRmbGFyZV96b25lIiAiZXhhbXBsZSIgewogIG5hbWUgPSAiZXhhbXBsZS5jb20iCn0KCiMgVXNlIGluIHJlc291cmNlcwpyZXNvdXJjZSAiY2xvdWRmbGFyZV9kbnNfcmVjb3JkIiAid3d3IiB7CiAgem9uZV9pZCA9IGRhdGEuY2xvdWRmbGFyZV96b25lLmV4YW1wbGUuaWQKICBuYW1lID0gInd3dyIKICAjIC4uLgp9CmBgYAoKIyMgQWNjb3VudCBEYXRhIFNvdXJjZXMKCmBgYGhjbAojIExpc3QgYWxsIGFjY291bnRzCmRhdGEgImNsb3VkZmxhcmVfYWNjb3VudHMiICJtYWluIiB7CiAgbmFtZSA9ICJNeSBBY2NvdW50Igp9CgojIFVzZSBhY2NvdW50IElECnJlc291cmNlICJjbG91ZGZsYXJlX3dvcmtlcl9zY3JpcHQiICJhcGkiIHsKICBhY2NvdW50X2lkID0gZGF0YS5jbG91ZGZsYXJlX2FjY291bnRzLm1haW4uYWNjb3VudHNbMF0uaWQKICAjIC4uLgp9CmBgYAoKIyMgV29ya2VyIERhdGEgU291cmNlcwoKYGBgaGNsCiMgR2V0IGV4aXN0aW5nIHdvcmtlciBzY3JpcHQgKHY1OiBjbG91ZGZsYXJlX3dvcmtlcnNfc2NyaXB0KQpkYXRhICJjbG91ZGZsYXJlX3dvcmtlcnNfc2NyaXB0IiAiZXhpc3RpbmciIHsKICBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQKICBuYW1lID0gImV4aXN0aW5nLXdvcmtlciIKfQoKIyBSZWZlcmVuY2UgaW4gc2VydmljZSBiaW5kaW5ncwpyZXNvdXJjZSAiY2xvdWRmbGFyZV93b3JrZXJzX3NjcmlwdCIgImNvbnN1bWVyIiB7CiAgc2VydmljZV9iaW5kaW5nIHsKICAgIG5hbWUgPSAiVVBTVFJFQU0iCiAgICBzZXJ2aWNlID0gZGF0YS5jbG91ZGZsYXJlX3dvcmtlcnNfc2NyaXB0LmV4aXN0aW5nLm5hbWUKICB9Cn0KYGBgCgojIyBLViBEYXRhIFNvdXJjZXMKCmBgYGhjbAojIEdldCBLViBuYW1lc3BhY2UKZGF0YSAiY2xvdWRmbGFyZV93b3JrZXJzX2t2X25hbWVzcGFjZSIgImV4aXN0aW5nIiB7CiAgYWNjb3VudF9pZCA9IHZhci5hY2NvdW50X2lkCiAgbmFtZXNwYWNlX2lkID0gImFiYzEyMyIKfQoKIyBVc2UgaW4gd29ya2VyIGJpbmRpbmcKcmVzb3VyY2UgImNsb3VkZmxhcmVfd29ya2Vyc19zY3JpcHQiICJhcGkiIHsKICBrdl9uYW1lc3BhY2VfYmluZGluZyB7CiAgICBuYW1lID0gIktWIgogICAgbmFtZXNwYWNlX2lkID0gZGF0YS5jbG91ZGZsYXJlX3dvcmtlcnNfa3ZfbmFtZXNwYWNlLmV4aXN0aW5nLmlkCiAgfQp9CmBgYAoKIyMgTGlzdHMgRGF0YSBTb3VyY2UKCmBgYGhjbAojIEdldCBJUCBsaXN0cyBmb3IgV0FGIHJ1bGVzCmRhdGEgImNsb3VkZmxhcmVfbGlzdCIgImJsb2NrZWRfaXBzIiB7CiAgYWNjb3VudF9pZCA9IHZhci5hY2NvdW50X2lkCiAgbmFtZSA9ICJibG9ja2VkX2lwcyIKfQpgYGAKCiMjIElQIFJhbmdlcyBEYXRhIFNvdXJjZQoKYGBgaGNsCiMgR2V0IENsb3VkZmxhcmUgSVAgcmFuZ2VzIChmb3IgZmlyZXdhbGwgcnVsZXMpCmRhdGEgImNsb3VkZmxhcmVfaXBfcmFuZ2VzIiAiY2xvdWRmbGFyZSIge30KCm91dHB1dCAiaXB2NF9jaWRycyIgewogIHZhbHVlID0gZGF0YS5jbG91ZGZsYXJlX2lwX3Jhbmdlcy5jbG91ZGZsYXJlLmlwdjRfY2lkcl9ibG9ja3MKfQoKb3V0cHV0ICJpcHY2X2NpZHJzIiB7CiAgdmFsdWUgPSBkYXRhLmNsb3VkZmxhcmVfaXBfcmFuZ2VzLmNsb3VkZmxhcmUuaXB2Nl9jaWRyX2Jsb2Nrcwp9CgojIFVzZSBpbiBzZWN1cml0eSBncm91cCBydWxlcyAoQVdTIGV4YW1wbGUpCnJlc291cmNlICJhd3Nfc2VjdXJpdHlfZ3JvdXBfcnVsZSIgImFsbG93X2Nsb3VkZmxhcmUiIHsKICB0eXBlID0gImluZ3Jlc3MiCiAgZnJvbV9wb3J0ID0gNDQzCiAgdG9fcG9ydCA9IDQ0MwogIHByb3RvY29sID0gInRjcCIKICBjaWRyX2Jsb2NrcyA9IGRhdGEuY2xvdWRmbGFyZV9pcF9yYW5nZXMuY2xvdWRmbGFyZS5pcHY0X2NpZHJfYmxvY2tzCiAgc2VjdXJpdHlfZ3JvdXBfaWQgPSBhd3Nfc2VjdXJpdHlfZ3JvdXAud2ViLmlkCn0KYGBgCgojIyBDb21tb24gUGF0dGVybnMKCiMjIyBJbXBvcnQgSUQgRm9ybWF0cwoKfCBSZXNvdXJjZSB8IEltcG9ydCBJRCBGb3JtYXQgfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS18CnwgYGNsb3VkZmxhcmVfem9uZWAgfCBgPHpvbmUtaWQ+YCB8CnwgYGNsb3VkZmxhcmVfZG5zX3JlY29yZGAgfCBgPHpvbmUtaWQ+LzxyZWNvcmQtaWQ+YCB8CnwgYGNsb3VkZmxhcmVfd29ya2Vyc19zY3JpcHRgIHwgYDxhY2NvdW50LWlkPi88c2NyaXB0LW5hbWU+YCB8CnwgYGNsb3VkZmxhcmVfd29ya2Vyc19rdl9uYW1lc3BhY2VgIHwgYDxhY2NvdW50LWlkPi88bmFtZXNwYWNlLWlkPmAgfAp8IGBjbG91ZGZsYXJlX3IyX2J1Y2tldGAgfCBgPGFjY291bnQtaWQ+LzxidWNrZXQtbmFtZT5gIHwKfCBgY2xvdWRmbGFyZV9kMV9kYXRhYmFzZWAgfCBgPGFjY291bnQtaWQ+LzxkYXRhYmFzZS1pZD5gIHwKfCBgY2xvdWRmbGFyZV9wYWdlc19wcm9qZWN0YCB8IGA8YWNjb3VudC1pZD4vPHByb2plY3QtbmFtZT5gIHwKCmBgYGJhc2gKIyBFeGFtcGxlOiBJbXBvcnQgRE5TIHJlY29yZAp0ZXJyYWZvcm0gaW1wb3J0IGNsb3VkZmxhcmVfZG5zX3JlY29yZC5leGFtcGxlIDx6b25lLWlkPi88cmVjb3JkLWlkPgpgYGAKCiMjIyBSZWZlcmVuY2UgQWNyb3NzIE1vZHVsZXMKCmBgYGhjbAojIG1vZHVsZXMvd29ya2VyL21haW4udGYKZGF0YSAiY2xvdWRmbGFyZV96b25lIiAibWFpbiIgewogIG5hbWUgPSB2YXIuZG9tYWluCn0KCnJlc291cmNlICJjbG91ZGZsYXJlX3dvcmtlcl9yb3V0ZSIgImFwaSIgewogIHpvbmVfaWQgPSBkYXRhLmNsb3VkZmxhcmVfem9uZS5tYWluLmlkCiAgcGF0dGVybiA9ICJhcGkuJHt2YXIuZG9tYWlufS8qIgogIHNjcmlwdF9uYW1lID0gY2xvdWRmbGFyZV93b3JrZXJfc2NyaXB0LmFwaS5uYW1lCn0KYGBgCgojIyMgT3V0cHV0IEltcG9ydGFudCBWYWx1ZXMKCmBgYGhjbApvdXRwdXQgInpvbmVfaWQiIHsKICB2YWx1ZSA9IGNsb3VkZmxhcmVfem9uZS5tYWluLmlkCiAgZGVzY3JpcHRpb24gPSAiWm9uZSBJRCBmb3IgRE5TIG1hbmFnZW1lbnQiCn0KCm91dHB1dCAid29ya2VyX3VybCIgewogIHZhbHVlID0gImh0dHBzOi8vJHtjbG91ZGZsYXJlX3dvcmtlcl9kb21haW4uYXBpLmhvc3RuYW1lfSIKICBkZXNjcmlwdGlvbiA9ICJXb3JrZXIgQVBJIGVuZHBvaW50Igp9CgpvdXRwdXQgImt2X25hbWVzcGFjZV9pZCIgewogIHZhbHVlID0gY2xvdWRmbGFyZV93b3JrZXJzX2t2X25hbWVzcGFjZS5hcHAuaWQKICBzZW5zaXRpdmUgPSBmYWxzZQp9CgpvdXRwdXQgIm5hbWVfc2VydmVycyIgewogIHZhbHVlID0gY2xvdWRmbGFyZV96b25lLm1haW4ubmFtZV9zZXJ2ZXJzCiAgZGVzY3JpcHRpb24gPSAiTmFtZSBzZXJ2ZXJzIGZvciBkb21haW4gcmVnaXN0cmF0aW9uIgp9CmBgYAoKIyMgU2VlIEFsc28KCi0gW1JFQURNRV0oLi9SRUFETUUubWQpIC0gUHJvdmlkZXIgc2V0dXAKLSBbQ29uZmlndXJhdGlvbiBSZWZlcmVuY2VdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBBbGwgcmVzb3VyY2UgdHlwZXMKLSBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpIC0gQXJjaGl0ZWN0dXJlIHBhdHRlcm5zCi0gW1Ryb3VibGVzaG9vdGluZ10oLi9nb3RjaGFzLm1kKSAtIENvbW1vbiBpc3N1ZXMK
+# Terraform Data Sources Reference
+
+Query existing Cloudflare resources to reference in your configurations.
+
+## v5 Data Source Names
+
+| v4 Name | v5 Name | Notes |
+|---------|---------|-------|
+| `cloudflare_record` | `cloudflare_dns_record` | |
+| `cloudflare_worker_script` | `cloudflare_workers_script` | Note: plural |
+| `cloudflare_access_*` | `cloudflare_zero_trust_*` | Access → Zero Trust |
+
+## Zone Data Sources
+
+```hcl
+# Get zone by name
+data "cloudflare_zone" "example" {
+  name = "example.com"
+}
+
+# Use in resources
+resource "cloudflare_dns_record" "www" {
+  zone_id = data.cloudflare_zone.example.id
+  name = "www"
+  # ...
+}
+```
+
+## Account Data Sources
+
+```hcl
+# List all accounts
+data "cloudflare_accounts" "main" {
+  name = "My Account"
+}
+
+# Use account ID
+resource "cloudflare_worker_script" "api" {
+  account_id = data.cloudflare_accounts.main.accounts[0].id
+  # ...
+}
+```
+
+## Worker Data Sources
+
+```hcl
+# Get existing worker script (v5: cloudflare_workers_script)
+data "cloudflare_workers_script" "existing" {
+  account_id = var.account_id
+  name = "existing-worker"
+}
+
+# Reference in service bindings
+resource "cloudflare_workers_script" "consumer" {
+  service_binding {
+    name = "UPSTREAM"
+    service = data.cloudflare_workers_script.existing.name
+  }
+}
+```
+
+## KV Data Sources
+
+```hcl
+# Get KV namespace
+data "cloudflare_workers_kv_namespace" "existing" {
+  account_id = var.account_id
+  namespace_id = "abc123"
+}
+
+# Use in worker binding
+resource "cloudflare_workers_script" "api" {
+  kv_namespace_binding {
+    name = "KV"
+    namespace_id = data.cloudflare_workers_kv_namespace.existing.id
+  }
+}
+```
+
+## Lists Data Source
+
+```hcl
+# Get IP lists for WAF rules
+data "cloudflare_list" "blocked_ips" {
+  account_id = var.account_id
+  name = "blocked_ips"
+}
+```
+
+## IP Ranges Data Source
+
+```hcl
+# Get Cloudflare IP ranges (for firewall rules)
+data "cloudflare_ip_ranges" "cloudflare" {}
+
+output "ipv4_cidrs" {
+  value = data.cloudflare_ip_ranges.cloudflare.ipv4_cidr_blocks
+}
+
+output "ipv6_cidrs" {
+  value = data.cloudflare_ip_ranges.cloudflare.ipv6_cidr_blocks
+}
+
+# Use in security group rules (AWS example)
+resource "aws_security_group_rule" "allow_cloudflare" {
+  type = "ingress"
+  from_port = 443
+  to_port = 443
+  protocol = "tcp"
+  cidr_blocks = data.cloudflare_ip_ranges.cloudflare.ipv4_cidr_blocks
+  security_group_id = aws_security_group.web.id
+}
+```
+
+## Common Patterns
+
+### Import ID Formats
+
+| Resource | Import ID Format |
+|----------|------------------|
+| `cloudflare_zone` | `<zone-id>` |
+| `cloudflare_dns_record` | `<zone-id>/<record-id>` |
+| `cloudflare_workers_script` | `<account-id>/<script-name>` |
+| `cloudflare_workers_kv_namespace` | `<account-id>/<namespace-id>` |
+| `cloudflare_r2_bucket` | `<account-id>/<bucket-name>` |
+| `cloudflare_d1_database` | `<account-id>/<database-id>` |
+| `cloudflare_pages_project` | `<account-id>/<project-name>` |
+
+```bash
+# Example: Import DNS record
+terraform import cloudflare_dns_record.example <zone-id>/<record-id>
+```
+
+### Reference Across Modules
+
+```hcl
+# modules/worker/main.tf
+data "cloudflare_zone" "main" {
+  name = var.domain
+}
+
+resource "cloudflare_worker_route" "api" {
+  zone_id = data.cloudflare_zone.main.id
+  pattern = "api.${var.domain}/*"
+  script_name = cloudflare_worker_script.api.name
+}
+```
+
+### Output Important Values
+
+```hcl
+output "zone_id" {
+  value = cloudflare_zone.main.id
+  description = "Zone ID for DNS management"
+}
+
+output "worker_url" {
+  value = "https://${cloudflare_worker_domain.api.hostname}"
+  description = "Worker API endpoint"
+}
+
+output "kv_namespace_id" {
+  value = cloudflare_workers_kv_namespace.app.id
+  sensitive = false
+}
+
+output "name_servers" {
+  value = cloudflare_zone.main.name_servers
+  description = "Name servers for domain registration"
+}
+```
+
+## See Also
+
+- [README](./README.md) - Provider setup
+- [Configuration Reference](./configuration.md) - All resource types
+- [Patterns](./patterns.md) - Architecture patterns
+- [Troubleshooting](./gotchas.md) - Common issues

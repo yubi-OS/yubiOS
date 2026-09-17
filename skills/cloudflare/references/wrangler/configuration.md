@@ -1,1 +1,197 @@
-IyBXcmFuZ2xlciBDb25maWd1cmF0aW9uCgpDb25maWd1cmF0aW9uIHJlZmVyZW5jZSBmb3Igd3JhbmdsZXIuanNvbmMgKHJlY29tbWVuZGVkKS4KCiMjIENvbmZpZyBGb3JtYXQKCioqd3JhbmdsZXIuanNvbmMgcmVjb21tZW5kZWQqKiAoV3JhbmdsZXIgdjQrKSAtIHByb3ZpZGVzIHNjaGVtYSB2YWxpZGF0aW9uLgoKYGBganNvbmMKewogICIkc2NoZW1hIjogIi4vbm9kZV9tb2R1bGVzL3dyYW5nbGVyL2NvbmZpZy1zY2hlbWEuanNvbiIsCiAgIm5hbWUiOiAibXktd29ya2VyIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wMS0wMSIsICAvLyBVc2UgY3VycmVudCBkYXRlCiAgInZhcnMiOiB7ICJBUElfS0VZIjogImRldi1rZXkiIH0sCiAgImt2X25hbWVzcGFjZXMiOiBbeyAiYmluZGluZyI6ICJNWV9LViIsICJpZCI6ICJhYmMxMjMiIH1dCn0KYGBgCgojIyBGaWVsZCBJbmhlcml0YW5jZQoKSW5oZXJpdGFibGU6IGBuYW1lYCwgYG1haW5gLCBgY29tcGF0aWJpbGl0eV9kYXRlYCwgYHJvdXRlc2AsIGB0cmlnZ2Vyc2AKTm9uLWluaGVyaXRhYmxlIChkZWZpbmUgcGVyIGVudik6IGB2YXJzYCwgYmluZGluZ3MgKEtWLCBEMSwgUjIsIGV0Yy4pCgojIyBFbnZpcm9ubWVudHMKCmBgYGpzb25jCnsKICAibmFtZSI6ICJteS13b3JrZXIiLAogICJ2YXJzIjogeyAiRU5WIjogImRldiIgfSwKICAiZW52IjogewogICAgInByb2R1Y3Rpb24iOiB7CiAgICAgICJuYW1lIjogIm15LXdvcmtlci1wcm9kIiwKICAgICAgInZhcnMiOiB7ICJFTlYiOiAicHJvZCIgfSwKICAgICAgInJvdXRlIjogeyAicGF0dGVybiI6ICJleGFtcGxlLmNvbS8qIiwgInpvbmVfbmFtZSI6ICJleGFtcGxlLmNvbSIgfQogICAgfQogIH0KfQpgYGAKCkRlcGxveTogYHdyYW5nbGVyIGRlcGxveSAtLWVudiBwcm9kdWN0aW9uYAoKIyMgUm91dGluZwoKYGBganNvbmMKLy8gQ3VzdG9tIGRvbWFpbiAocmVjb21tZW5kZWQpCnsgInJvdXRlcyI6IFt7ICJwYXR0ZXJuIjogImFwaS5leGFtcGxlLmNvbSIsICJjdXN0b21fZG9tYWluIjogdHJ1ZSB9XSB9CgovLyBab25lLWJhc2VkCnsgInJvdXRlcyI6IFt7ICJwYXR0ZXJuIjogImFwaS5leGFtcGxlLmNvbS8qIiwgInpvbmVfbmFtZSI6ICJleGFtcGxlLmNvbSIgfV0gfQoKLy8gd29ya2Vycy5kZXYKeyAid29ya2Vyc19kZXYiOiB0cnVlIH0KYGBgCgojIyBCaW5kaW5ncwoKYGBganNvbmMKLy8gVmFyaWFibGVzCnsgInZhcnMiOiB7ICJBUElfVVJMIjogImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiB9IH0KCi8vIEtWCnsgImt2X25hbWVzcGFjZXMiOiBbeyAiYmluZGluZyI6ICJDQUNIRSIsICJpZCI6ICJhYmMxMjMiIH1dIH0KCi8vIEQxCnsgImQxX2RhdGFiYXNlcyI6IFt7ICJiaW5kaW5nIjogIkRCIiwgImRhdGFiYXNlX2lkIjogImFiYy0xMjMiIH1dIH0KCi8vIFIyCnsgInIyX2J1Y2tldHMiOiBbeyAiYmluZGluZyI6ICJBU1NFVFMiLCAiYnVja2V0X25hbWUiOiAibXktYXNzZXRzIiB9XSB9CgovLyBEdXJhYmxlIE9iamVjdHMKeyAiZHVyYWJsZV9vYmplY3RzIjogeyAKICAiYmluZGluZ3MiOiBbeyAKICAgICJuYW1lIjogIkNPVU5URVIiLCAKICAgICJjbGFzc19uYW1lIjogIkNvdW50ZXIiLAogICAgInNjcmlwdF9uYW1lIjogIm15LXdvcmtlciIgIC8vIFJlcXVpcmVkIGZvciBleHRlcm5hbCBET3MKICB9XSAKfSB9CnsgIm1pZ3JhdGlvbnMiOiBbeyAidGFnIjogInYxIiwgIm5ld19zcWxpdGVfY2xhc3NlcyI6IFsiQ291bnRlciJdIH1dIH0KCi8vIFNlcnZpY2UgQmluZGluZ3MKeyAic2VydmljZXMiOiBbeyAiYmluZGluZyI6ICJBVVRIIiwgInNlcnZpY2UiOiAiYXV0aC13b3JrZXIiIH1dIH0KCi8vIFF1ZXVlcwp7ICJxdWV1ZXMiOiB7CiAgInByb2R1Y2VycyI6IFt7ICJiaW5kaW5nIjogIlRBU0tTIiwgInF1ZXVlIjogInRhc2stcXVldWUiIH1dLAogICJjb25zdW1lcnMiOiBbeyAicXVldWUiOiAidGFzay1xdWV1ZSIsICJtYXhfYmF0Y2hfc2l6ZSI6IDEwIH1dCn0gfQoKLy8gVmVjdG9yaXplCnsgInZlY3Rvcml6ZSI6IFt7ICJiaW5kaW5nIjogIlZFQ1RPUlMiLCAiaW5kZXhfbmFtZSI6ICJlbWJlZGRpbmdzIiB9XSB9CgovLyBIeXBlcmRyaXZlIChyZXF1aXJlcyBub2RlanNfY29tcGF0IGZvciBwZy9wb3N0Z3JlcykKeyAiaHlwZXJkcml2ZSI6IFt7ICJiaW5kaW5nIjogIkhZUEVSRFJJVkUiLCAiaWQiOiAiaHlwZXItaWQiIH1dIH0KeyAiY29tcGF0aWJpbGl0eV9mbGFncyI6IFsibm9kZWpzX2NvbXBhdCJdIH0gIC8vIEZvciBwZy9wb3N0Z3JlcwoKLy8gV29ya2VycyBBSQp7ICJhaSI6IHsgImJpbmRpbmciOiAiQUkiIH0gfQoKLy8gV29ya2Zsb3dzCnsgIndvcmtmbG93cyI6IFt7ICJiaW5kaW5nIjogIldPUktGTE9XIiwgIm5hbWUiOiAibXktd29ya2Zsb3ciLCAiY2xhc3NfbmFtZSI6ICJNeVdvcmtmbG93IiB9XSB9CgovLyBTZWNyZXRzIFN0b3JlIChjZW50cmFsaXplZCBzZWNyZXRzKQp7ICJzZWNyZXRzX3N0b3JlIjogW3sgImJpbmRpbmciOiAiU0VDUkVUUyIsICJpZCI6ICJzdG9yZS1pZCIgfV0gfQoKLy8gQ29uc3RlbGxhdGlvbiAoQUkgaW5mZXJlbmNlKQp7ICJjb25zdGVsbGF0aW9uIjogW3sgImJpbmRpbmciOiAiTU9ERUwiLCAicHJvamVjdF9pZCI6ICJwcm9qLWlkIiB9XSB9CmBgYAoKIyMgV29ya2VycyBBc3NldHMgKFN0YXRpYyBGaWxlcykKClJlY29tbWVuZGVkIGZvciBzZXJ2aW5nIHN0YXRpYyBmaWxlcyAocmVwbGFjZXMgb2xkIGBzaXRlYCBjb25maWcpLgoKYGBganNvbmMKewogICJhc3NldHMiOiB7CiAgICAiZGlyZWN0b3J5IjogIi4vcHVibGljIiwKICAgICJiaW5kaW5nIjogIkFTU0VUUyIsCiAgICAiaHRtbF9oYW5kbGluZyI6ICJhdXRvLXRyYWlsaW5nLXNsYXNoIiwgIC8vIG9yICJub25lIiwgImZvcmNlLXRyYWlsaW5nLXNsYXNoIgogICAgIm5vdF9mb3VuZF9oYW5kbGluZyI6ICJzaW5nbGUtcGFnZS1hcHBsaWNhdGlvbiIgIC8vIG9yICI0MDQtcGFnZSIsICJub25lIgogIH0KfQpgYGAKCkFjY2VzcyBpbiBXb3JrZXI6CmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3QsIGVudikgewogICAgLy8gVHJ5IHNlcnZpbmcgc3RhdGljIGFzc2V0IGZpcnN0CiAgICBjb25zdCBhc3NldCA9IGF3YWl0IGVudi5BU1NFVFMuZmV0Y2gocmVxdWVzdCk7CiAgICBpZiAoYXNzZXQuc3RhdHVzICE9PSA0MDQpIHJldHVybiBhc3NldDsKICAgIAogICAgLy8gQ3VzdG9tIGxvZ2ljIGZvciBub24tYXNzZXRzCiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJBUEkgcmVzcG9uc2UiKTsKICB9Cn0KYGBgCgojIyBQbGFjZW1lbnQKCkNvbnRyb2wgd2hlcmUgV29ya2VycyBydW4gZ2VvZ3JhcGhpY2FsbHkuCgpgYGBqc29uYwp7CiAgInBsYWNlbWVudCI6IHsKICAgICJtb2RlIjogInNtYXJ0IiAgLy8gb3IgIm9mZiIKICB9Cn0KYGBgCgotIGAic21hcnQiYDogUnVuIFdvcmtlciBuZWFyIGRhdGEgc291cmNlcyAoRDEsIER1cmFibGUgT2JqZWN0cykgdG8gcmVkdWNlIGxhdGVuY3kKLSBgIm9mZiJgOiBEZWZhdWx0IGRpc3RyaWJ1dGlvbiAocnVuIGV2ZXJ5d2hlcmUpCgojIyBBdXRvLVByb3Zpc2lvbmluZyAoQmV0YSkKCk9taXQgcmVzb3VyY2UgSURzIC0gV3JhbmdsZXIgY3JlYXRlcyB0aGVtIGFuZCB3cml0ZXMgYmFjayB0byBjb25maWcgb24gZGVwbG95LgoKYGBganNvbmMKeyAia3ZfbmFtZXNwYWNlcyI6IFt7ICJiaW5kaW5nIjogIk1ZX0tWIiB9XSB9ICAvLyBObyBpZCAtIGF1dG8tcHJvdmlzaW9uZWQKYGBgCgpBZnRlciBkZXBsb3ksIElEIGlzIGFkZGVkIHRvIGNvbmZpZyBhdXRvbWF0aWNhbGx5LgoKIyMgQWR2YW5jZWQKCmBgYGpzb25jCi8vIENyb24gVHJpZ2dlcnMKeyAidHJpZ2dlcnMiOiB7ICJjcm9ucyI6IFsiMCAwICogKiAqIl0gfSB9CgovLyBPYnNlcnZhYmlsaXR5ICh0cmFjaW5nKQp7ICJvYnNlcnZhYmlsaXR5IjogeyAiZW5hYmxlZCI6IHRydWUsICJoZWFkX3NhbXBsaW5nX3JhdGUiOiAwLjEgfSB9CgovLyBSdW50aW1lIExpbWl0cwp7ICJsaW1pdHMiOiB7ICJjcHVfbXMiOiAxMDAgfSB9CgovLyBCcm93c2VyIFJlbmRlcmluZwp7ICJicm93c2VyIjogeyAiYmluZGluZyI6ICJCUk9XU0VSIiB9IH0KCi8vIG1UTFMgQ2VydGlmaWNhdGVzCnsgIm10bHNfY2VydGlmaWNhdGVzIjogW3sgImJpbmRpbmciOiAiQ0VSVCIsICJjZXJ0aWZpY2F0ZV9pZCI6ICJjZXJ0LXV1aWQiIH1dIH0KCi8vIExvZ3B1c2ggKHN0cmVhbSBsb2dzIHRvIFIyL1MzKQp7ICJsb2dwdXNoIjogdHJ1ZSB9CgovLyBUYWlsIENvbnN1bWVycyAocHJvY2VzcyBsb2dzIHdpdGggYW5vdGhlciBXb3JrZXIpCnsgInRhaWxfY29uc3VtZXJzIjogW3sgInNlcnZpY2UiOiAibG9nLXdvcmtlciIgfV0gfQoKLy8gVW5zYWZlIGJpbmRpbmdzIChhY2Nlc3MgdG8gYXJiaXRyYXJ5IGJpbmRpbmdzKQp7ICJ1bnNhZmUiOiB7ICJiaW5kaW5ncyI6IFt7ICJuYW1lIjogIk1ZX0JJTkRJTkciLCAidHlwZSI6ICJwbGFpbl90ZXh0IiwgInRleHQiOiAidmFsdWUiIH1dIH0gfQpgYGAKCiMjIFNlZSBBbHNvCgotIFtSRUFETUUubWRdKC4vUkVBRE1FLm1kKSAtIE92ZXJ2aWV3IGFuZCBjb21tYW5kcwotIFthcGkubWRdKC4vYXBpLm1kKSAtIFByb2dyYW1tYXRpYyBBUEkKLSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gV29ya2Zsb3dzCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBDb21tb24gaXNzdWVzCg==
+# Wrangler Configuration
+
+Configuration reference for wrangler.jsonc (recommended).
+
+## Config Format
+
+**wrangler.jsonc recommended** (Wrangler v4+) - provides schema validation.
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",  // Use current date
+  "vars": { "API_KEY": "dev-key" },
+  "kv_namespaces": [{ "binding": "MY_KV", "id": "abc123" }]
+}
+```
+
+## Field Inheritance
+
+Inheritable: `name`, `main`, `compatibility_date`, `routes`, `triggers`
+Non-inheritable (define per env): `vars`, bindings (KV, D1, R2, etc.)
+
+## Environments
+
+```jsonc
+{
+  "name": "my-worker",
+  "vars": { "ENV": "dev" },
+  "env": {
+    "production": {
+      "name": "my-worker-prod",
+      "vars": { "ENV": "prod" },
+      "route": { "pattern": "example.com/*", "zone_name": "example.com" }
+    }
+  }
+}
+```
+
+Deploy: `wrangler deploy --env production`
+
+## Routing
+
+```jsonc
+// Custom domain (recommended)
+{ "routes": [{ "pattern": "api.example.com", "custom_domain": true }] }
+
+// Zone-based
+{ "routes": [{ "pattern": "api.example.com/*", "zone_name": "example.com" }] }
+
+// workers.dev
+{ "workers_dev": true }
+```
+
+## Bindings
+
+```jsonc
+// Variables
+{ "vars": { "API_URL": "https://api.example.com" } }
+
+// KV
+{ "kv_namespaces": [{ "binding": "CACHE", "id": "abc123" }] }
+
+// D1
+{ "d1_databases": [{ "binding": "DB", "database_id": "abc-123" }] }
+
+// R2
+{ "r2_buckets": [{ "binding": "ASSETS", "bucket_name": "my-assets" }] }
+
+// Durable Objects
+{ "durable_objects": { 
+  "bindings": [{ 
+    "name": "COUNTER", 
+    "class_name": "Counter",
+    "script_name": "my-worker"  // Required for external DOs
+  }] 
+} }
+{ "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Counter"] }] }
+
+// Service Bindings
+{ "services": [{ "binding": "AUTH", "service": "auth-worker" }] }
+
+// Queues
+{ "queues": {
+  "producers": [{ "binding": "TASKS", "queue": "task-queue" }],
+  "consumers": [{ "queue": "task-queue", "max_batch_size": 10 }]
+} }
+
+// Vectorize
+{ "vectorize": [{ "binding": "VECTORS", "index_name": "embeddings" }] }
+
+// Hyperdrive (requires nodejs_compat for pg/postgres)
+{ "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "hyper-id" }] }
+{ "compatibility_flags": ["nodejs_compat"] }  // For pg/postgres
+
+// Workers AI
+{ "ai": { "binding": "AI" } }
+
+// Workflows
+{ "workflows": [{ "binding": "WORKFLOW", "name": "my-workflow", "class_name": "MyWorkflow" }] }
+
+// Secrets Store (centralized secrets)
+{ "secrets_store": [{ "binding": "SECRETS", "id": "store-id" }] }
+
+// Constellation (AI inference)
+{ "constellation": [{ "binding": "MODEL", "project_id": "proj-id" }] }
+```
+
+## Workers Assets (Static Files)
+
+Recommended for serving static files (replaces old `site` config).
+
+```jsonc
+{
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",  // or "none", "force-trailing-slash"
+    "not_found_handling": "single-page-application"  // or "404-page", "none"
+  }
+}
+```
+
+Access in Worker:
+```typescript
+export default {
+  async fetch(request, env) {
+    // Try serving static asset first
+    const asset = await env.ASSETS.fetch(request);
+    if (asset.status !== 404) return asset;
+    
+    // Custom logic for non-assets
+    return new Response("API response");
+  }
+}
+```
+
+## Placement
+
+Control where Workers run geographically.
+
+```jsonc
+{
+  "placement": {
+    "mode": "smart"  // or "off"
+  }
+}
+```
+
+- `"smart"`: Run Worker near data sources (D1, Durable Objects) to reduce latency
+- `"off"`: Default distribution (run everywhere)
+
+## Auto-Provisioning (Beta)
+
+Omit resource IDs - Wrangler creates them and writes back to config on deploy.
+
+```jsonc
+{ "kv_namespaces": [{ "binding": "MY_KV" }] }  // No id - auto-provisioned
+```
+
+After deploy, ID is added to config automatically.
+
+## Advanced
+
+```jsonc
+// Cron Triggers
+{ "triggers": { "crons": ["0 0 * * *"] } }
+
+// Observability (tracing)
+{ "observability": { "enabled": true, "head_sampling_rate": 0.1 } }
+
+// Runtime Limits
+{ "limits": { "cpu_ms": 100 } }
+
+// Browser Rendering
+{ "browser": { "binding": "BROWSER" } }
+
+// mTLS Certificates
+{ "mtls_certificates": [{ "binding": "CERT", "certificate_id": "cert-uuid" }] }
+
+// Logpush (stream logs to R2/S3)
+{ "logpush": true }
+
+// Tail Consumers (process logs with another Worker)
+{ "tail_consumers": [{ "service": "log-worker" }] }
+
+// Unsafe bindings (access to arbitrary bindings)
+{ "unsafe": { "bindings": [{ "name": "MY_BINDING", "type": "plain_text", "text": "value" }] } }
+```
+
+## See Also
+
+- [README.md](./README.md) - Overview and commands
+- [api.md](./api.md) - Programmatic API
+- [patterns.md](./patterns.md) - Workflows
+- [gotchas.md](./gotchas.md) - Common issues

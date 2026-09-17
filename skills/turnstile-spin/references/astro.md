@@ -1,1 +1,199 @@
-IyBBc3RybwoKRm9yIEFzdHJvIHByb2plY3RzLiBUaGUgd2lkZ2V0IHJlbmRlcnMgaW4gYSBwYWdlOyBzaXRldmVyaWZ5IGxpdmVzIGluIGFuIEFzdHJvIEFjdGlvbiwgYW4gQVBJIHJvdXRlLCBvciBhIFBhZ2VzIEZ1bmN0aW9uLiBBc3RybyBmcm9udG1hdHRlciByZWFkcyB0aGUgc2l0ZWtleSBmcm9tIGVudiBhdCBidWlsZCB0aW1lOyB0aGUgc2VjcmV0IHN0YXlzIHNlcnZlci1vbmx5LgoKYGBgYXN0cm8gdGl0bGU9InNyYy9wYWdlcy9zaWdudXAuYXN0cm8iCi0tLQpjb25zdCBTSVRFS0VZID0gaW1wb3J0Lm1ldGEuZW52LlBVQkxJQ19UVVJOU1RJTEVfU0lURUtFWTsKLS0tCgo8aHRtbD4KCTxoZWFkPgoJCTxzY3JpcHQKCQkJc3JjPSJodHRwczovL2NoYWxsZW5nZXMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3YwL2FwaS5qcyIKCQkJYXN5bmMKCQkJZGVmZXIKCQk+PC9zY3JpcHQ+Cgk8L2hlYWQ+Cgk8Ym9keT4KCQk8Zm9ybSBhY3Rpb249Ii9hcGkvc2lnbnVwIiBtZXRob2Q9IlBPU1QiPgoJCQk8aW5wdXQgbmFtZT0iZW1haWwiIHR5cGU9ImVtYWlsIiByZXF1aXJlZCAvPgoJCQk8ZGl2CgkJCQljbGFzcz0iY2YtdHVybnN0aWxlIgoJCQkJZGF0YS1zaXRla2V5PXtTSVRFS0VZfQoJCQkJZGF0YS1hY3Rpb249InNpZ251cCIKCQkJLz4KCQkJPGJ1dHRvbiB0eXBlPSJzdWJtaXQiPlNpZ24gdXA8L2J1dHRvbj4KCQk8L2Zvcm0+Cgk8L2JvZHk+CjwvaHRtbD4KYGBgCgpJbiB5b3VyIGAuZW52YDoKCmBgYHRleHQKUFVCTElDX1RVUk5TVElMRV9TSVRFS0VZPVlPVVJfU0lURUtFWQpUVVJOU1RJTEVfU0VDUkVUPVlPVVJfU0VDUkVUCmBgYAoKVGhlIGBQVUJMSUNfYCBwcmVmaXggaXMgbWFuZGF0b3J5IGZvciBjbGllbnQtZXhwb3NlZCB2YXJpYWJsZXMgaW4gQXN0cm8uIFRoZSBzZWNyZXQgaGFzICoqbm8qKiBwcmVmaXg7IGl0IHN0YXlzIHNlcnZlci1vbmx5LgoKIyMgQVBJIHJvdXRlIChjYW5vbmljYWwgc2l0ZXZlcmlmeSkKCmBgYHRzIHRpdGxlPSJzcmMvcGFnZXMvYXBpL3NpZ251cC50cyIKaW1wb3J0IHR5cGUgeyBBUElSb3V0ZSB9IGZyb20gImFzdHJvIjsKCmNvbnN0IGV4cGVjdGVkSG9zdG5hbWVzID0gbmV3IFNldCgKCShpbXBvcnQubWV0YS5lbnYuVFVSTlNUSUxFX0hPU1ROQU1FUyA/PyAiIikKCQkuc3BsaXQoIiwiKQoJCS5tYXAoKGgpID0+IGgudHJpbSgpKQoJCS5maWx0ZXIoQm9vbGVhbiksCik7CgpleHBvcnQgY29uc3QgUE9TVDogQVBJUm91dGUgPSBhc3luYyAoeyByZXF1ZXN0LCBjbGllbnRBZGRyZXNzIH0pID0+IHsKCWNvbnN0IGZvcm0gPSBhd2FpdCByZXF1ZXN0LmZvcm1EYXRhKCk7Cgljb25zdCB0b2tlbiA9IGZvcm0uZ2V0KCJjZi10dXJuc3RpbGUtcmVzcG9uc2UiKTsKCWlmICh0eXBlb2YgdG9rZW4gIT09ICJzdHJpbmciIHx8IGV4cGVjdGVkSG9zdG5hbWVzLnNpemUgPT09IDApIHsKCQlyZXR1cm4gbmV3IFJlc3BvbnNlKCJmb3JiaWRkZW4iLCB7IHN0YXR1czogNDAzIH0pOwoJfQoKCWNvbnN0IHZlcmlmeSA9IGF3YWl0IGZldGNoKCJodHRwczovL2NoYWxsZW5nZXMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3YwL3NpdGV2ZXJpZnkiLCB7CgkJbWV0aG9kOiAiUE9TVCIsCgkJaGVhZGVyczogeyAiQ29udGVudC1UeXBlIjogImFwcGxpY2F0aW9uL3gtd3d3LWZvcm0tdXJsZW5jb2RlZCIgfSwKCQlib2R5OiBuZXcgVVJMU2VhcmNoUGFyYW1zKHsKCQkJc2VjcmV0OiBpbXBvcnQubWV0YS5lbnYuVFVSTlNUSUxFX1NFQ1JFVCwKCQkJcmVzcG9uc2U6IHRva2VuLAoJCQlyZW1vdGVpcDogY2xpZW50QWRkcmVzcywKCQl9KSwKCX0pOwoJY29uc3QgcmVzdWx0ID0gYXdhaXQgdmVyaWZ5Lmpzb24oKTsKCWlmICgKCQl2ZXJpZnkub2sgIT09IHRydWUgfHwKCQlyZXN1bHQuc3VjY2VzcyAhPT0gdHJ1ZSB8fAoJCXJlc3VsdC5hY3Rpb24gIT09ICJzaWdudXAiIHx8CgkJIWV4cGVjdGVkSG9zdG5hbWVzLmhhcyhyZXN1bHQuaG9zdG5hbWUpCgkpIHsKCQlyZXR1cm4gbmV3IFJlc3BvbnNlKCJmb3JiaWRkZW4iLCB7IHN0YXR1czogNDAzIH0pOwoJfQoKCS8vIHByb2Nlc3Mgc2lnbnVwCglyZXR1cm4gUmVzcG9uc2UuanNvbih7IG9rOiB0cnVlIH0pOwp9OwpgYGAKCiMjIFZhcmlhbnQ6IEFzdHJvIEFjdGlvbnMKCklmIHRoZSBwcm9qZWN0IHVzZXMgQXN0cm8gQWN0aW9ucywgY2FsbCBzaXRldmVyaWZ5IGZyb20gdGhlIGFjdGlvbjoKCmBgYHRzIHRpdGxlPSJzcmMvYWN0aW9ucy9pbmRleC50cyIKaW1wb3J0IHsgZGVmaW5lQWN0aW9uIH0gZnJvbSAiYXN0cm86YWN0aW9ucyI7CmltcG9ydCB7IHogfSBmcm9tICJhc3RybzpzY2hlbWEiOwoKY29uc3QgZXhwZWN0ZWRIb3N0bmFtZXMgPSBuZXcgU2V0KAoJKGltcG9ydC5tZXRhLmVudi5UVVJOU1RJTEVfSE9TVE5BTUVTID8/ICIiKQoJCS5zcGxpdCgiLCIpCgkJLm1hcCgoaCkgPT4gaC50cmltKCkpCgkJLmZpbHRlcihCb29sZWFuKSwKKTsKCmV4cG9ydCBjb25zdCBzZXJ2ZXIgPSB7CglzaWdudXA6IGRlZmluZUFjdGlvbih7CgkJYWNjZXB0OiAiZm9ybSIsCgkJaW5wdXQ6IHoub2JqZWN0KHsKCQkJZW1haWw6IHouc3RyaW5nKCkuZW1haWwoKSwKCQkJImNmLXR1cm5zdGlsZS1yZXNwb25zZSI6IHouc3RyaW5nKCksCgkJfSksCgkJaGFuZGxlcjogYXN5bmMgKGlucHV0LCBjdHgpID0+IHsKCQkJaWYgKGV4cGVjdGVkSG9zdG5hbWVzLnNpemUgPT09IDApIHRocm93IG5ldyBFcnJvcigiVmVyaWZpY2F0aW9uIGZhaWxlZCIpOwoJCQljb25zdCB2ZXJpZnkgPSBhd2FpdCBmZXRjaCgiaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5IiwgewoJCQkJbWV0aG9kOiAiUE9TVCIsCgkJCQloZWFkZXJzOiB7ICJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkIiB9LAoJCQkJYm9keTogbmV3IFVSTFNlYXJjaFBhcmFtcyh7CgkJCQkJc2VjcmV0OiBpbXBvcnQubWV0YS5lbnYuVFVSTlNUSUxFX1NFQ1JFVCwKCQkJCQlyZXNwb25zZTogaW5wdXRbImNmLXR1cm5zdGlsZS1yZXNwb25zZSJdLAoJCQkJCXJlbW90ZWlwOiBjdHguY2xpZW50QWRkcmVzcywKCQkJCX0pLAoJCQl9KTsKCQkJY29uc3QgcmVzdWx0ID0gYXdhaXQgdmVyaWZ5Lmpzb24oKTsKCQkJaWYgKAoJCQkJdmVyaWZ5Lm9rICE9PSB0cnVlIHx8CgkJCQlyZXN1bHQuc3VjY2VzcyAhPT0gdHJ1ZSB8fAoJCQkJcmVzdWx0LmFjdGlvbiAhPT0gInNpZ251cCIgfHwKCQkJCSFleHBlY3RlZEhvc3RuYW1lcy5oYXMocmVzdWx0Lmhvc3RuYW1lKQoJCQkpIHsKCQkJCXRocm93IG5ldyBFcnJvcigiVmVyaWZpY2F0aW9uIGZhaWxlZCIpOwoJCQl9CgkJCS8vIHByb2Nlc3Mgc2lnbnVwCgkJfSwKCX0pLAp9OwpgYGAKCmBzaWdudXBgIGlzIHRoZSBzdGFibGUgYWN0aW9uIGZvciB0aGlzIHN1cmZhY2UuIFByZXNlcnZlIGFuIGV4aXN0aW5nIGN1c3RvbSBtaWdyYXRpb24gYWN0aW9uIGFuZCBjb21wYXJlIHRoZSByZXR1cm5lZCBhY3Rpb24gdG8gdGhlIHNhbWUgdmFsdWUuIFNpdGV2ZXJpZnkgaXMgbWFuZGF0b3J5IGZvciBldmVyeSB3aWRnZXQgbW9kZSwgaW5jbHVkaW5nIHByZS1jbGVhcmFuY2UuIFNldCBgVFVSTlNUSUxFX0hPU1ROQU1FU2AgdG8gdGhlIGRlcGxveW1lbnQtc3BlY2lmaWMgZnJvbnRlbmQgaG9zdG5hbWVzOyBhIHByb2R1Y3Rpb24gdmFsdWUgbXVzdCBub3QgaW5jbHVkZSBgbG9jYWxob3N0YCBvciBgMTI3LjAuMC4xYC4KCkZvciBhIGNsaWVudC1zaWRlIEFzdHJvIEFjdGlvbiwgcmVwbGFjZSB0aGUgbmF0aXZlIGZvcm0gYW5kIHNjcmlwdCB3aXRoIGFuIGV4cGxpY2l0IHdpZGdldC4gUmV0YWluIHRoaXMgc3VyZmFjZSdzIHdpZGdldCBJRCBhbmQgcmVzZXQgaXQgaW4gYGZpbmFsbHlgIGFmdGVyIGV2ZXJ5IHNhbWUtcGFnZSByZXF1ZXN0IGNvbXBsZXRpb246CgpgYGBhc3Rybwo8Zm9ybSBpZD0ic2lnbnVwLWFjdGlvbi1mb3JtIj4KCTxpbnB1dCBuYW1lPSJlbWFpbCIgdHlwZT0iZW1haWwiIHJlcXVpcmVkIC8+Cgk8ZGl2IGlkPSJzaWdudXAtYWN0aW9uLXR1cm5zdGlsZSIgZGF0YS1zaXRla2V5PXtTSVRFS0VZfT48L2Rpdj4KCTxidXR0b24gdHlwZT0ic3VibWl0Ij5TaWduIHVwPC9idXR0b24+CjwvZm9ybT4KPHNjcmlwdD4KCWltcG9ydCB7IGFjdGlvbnMgfSBmcm9tICJhc3RybzphY3Rpb25zIjsKCgl0eXBlIFR1cm5zdGlsZUFwaSA9IHsKCQlyZW5kZXI6ICgKCQkJY29udGFpbmVyOiBIVE1MRWxlbWVudCwKCQkJb3B0aW9uczogeyBzaXRla2V5OiBzdHJpbmc7IGFjdGlvbjogc3RyaW5nIH0sCgkJKSA9PiBzdHJpbmc7CgkJcmVzZXQ6ICh3aWRnZXRJZDogc3RyaW5nKSA9PiB2b2lkOwoJfTsKCgljb25zdCB0dXJuc3RpbGVXaW5kb3cgPSB3aW5kb3cgYXMgV2luZG93ICYgeyB0dXJuc3RpbGU/OiBUdXJuc3RpbGVBcGkgfTsKCWNvbnN0IGZvcm0gPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgic2lnbnVwLWFjdGlvbi1mb3JtIikgYXMgSFRNTEZvcm1FbGVtZW50OwoJY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInNpZ251cC1hY3Rpb24tdHVybnN0aWxlIikgYXMgSFRNTEVsZW1lbnQ7CglsZXQgc2lnbnVwQWN0aW9uV2lkZ2V0SWQ6IHN0cmluZyB8IHVuZGVmaW5lZDsKCgljb25zdCByZW5kZXJXaWRnZXQgPSAoKSA9PiB7CgkJaWYgKCF0dXJuc3RpbGVXaW5kb3cudHVybnN0aWxlKSByZXR1cm47CgkJc2lnbnVwQWN0aW9uV2lkZ2V0SWQgPSB0dXJuc3RpbGVXaW5kb3cudHVybnN0aWxlLnJlbmRlcihjb250YWluZXIsIHsKCQkJc2l0ZWtleTogY29udGFpbmVyLmRhdGFzZXQuc2l0ZWtleSEsCgkJCWFjdGlvbjogInNpZ251cCIsCgkJfSk7Cgl9OwoKCWlmICh0dXJuc3RpbGVXaW5kb3cudHVybnN0aWxlKSB7CgkJcmVuZGVyV2lkZ2V0KCk7Cgl9IGVsc2UgewoJCWNvbnN0IHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpOwoJCXNjcmlwdC5zcmMgPQoJCQkiaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9hcGkuanM/cmVuZGVyPWV4cGxpY2l0IjsKCQlzY3JpcHQuYXN5bmMgPSB0cnVlOwoJCXNjcmlwdC5hZGRFdmVudExpc3RlbmVyKCJsb2FkIiwgcmVuZGVyV2lkZ2V0LCB7IG9uY2U6IHRydWUgfSk7CgkJZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOwoJfQoKCWZvcm0uYWRkRXZlbnRMaXN0ZW5lcigic3VibWl0IiwgYXN5bmMgKGV2ZW50KSA9PiB7CgkJZXZlbnQucHJldmVudERlZmF1bHQoKTsKCQl0cnkgewoJCQljb25zdCB7IGVycm9yIH0gPSBhd2FpdCBhY3Rpb25zLnNpZ251cChuZXcgRm9ybURhdGEoZm9ybSkpOwoJCQlpZiAoZXJyb3IpIHRocm93IGVycm9yOwoJCQkvLyBwcm9jZWVkCgkJfSBjYXRjaCB7CgkJCS8vIHN1cmZhY2UgdGhlIGVycm9yCgkJfSBmaW5hbGx5IHsKCQkJaWYgKHNpZ251cEFjdGlvbldpZGdldElkICE9PSB1bmRlZmluZWQpIHsKCQkJCXR1cm5zdGlsZVdpbmRvdy50dXJuc3RpbGU/LnJlc2V0KHNpZ251cEFjdGlvbldpZGdldElkKTsKCQkJfQoJCX0KCX0pOwo8L3NjcmlwdD4KYGBgCgojIyBTdWJzdGl0dXRpb25zCgp8IFBsYWNlaG9sZGVyICAgICAgICAgfCBSZXBsYWNlIHdpdGggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8CnwgLS0tLS0tLS0tLS0tLS0tLS0tLSB8IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHwKfCBgWU9VUl9TSVRFS0VZYCAgICAgIHwgVGhlIHdpZGdldCBzaXRlIGtleSBmcm9tIFN0ZXAgOCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGBZT1VSX1NFQ1JFVGAgICAgICAgfCBUaGUgc2VjcmV0IGNhcHR1cmVkIGluIFN0ZXAgOC4gU3RheXMgaW4gZW52LCBuZXZlciBpbmxpbmVkLiAgICAgICAgICB8Cg==
+# Astro
+
+For Astro projects. The widget renders in a page; siteverify lives in an Astro Action, an API route, or a Pages Function. Astro frontmatter reads the sitekey from env at build time; the secret stays server-only.
+
+```astro title="src/pages/signup.astro"
+---
+const SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY;
+---
+
+<html>
+	<head>
+		<script
+			src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+			async
+			defer
+		></script>
+	</head>
+	<body>
+		<form action="/api/signup" method="POST">
+			<input name="email" type="email" required />
+			<div
+				class="cf-turnstile"
+				data-sitekey={SITEKEY}
+				data-action="signup"
+			/>
+			<button type="submit">Sign up</button>
+		</form>
+	</body>
+</html>
+```
+
+In your `.env`:
+
+```text
+PUBLIC_TURNSTILE_SITEKEY=YOUR_SITEKEY
+TURNSTILE_SECRET=YOUR_SECRET
+```
+
+The `PUBLIC_` prefix is mandatory for client-exposed variables in Astro. The secret has **no** prefix; it stays server-only.
+
+## API route (canonical siteverify)
+
+```ts title="src/pages/api/signup.ts"
+import type { APIRoute } from "astro";
+
+const expectedHostnames = new Set(
+	(import.meta.env.TURNSTILE_HOSTNAMES ?? "")
+		.split(",")
+		.map((h) => h.trim())
+		.filter(Boolean),
+);
+
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+	const form = await request.formData();
+	const token = form.get("cf-turnstile-response");
+	if (typeof token !== "string" || expectedHostnames.size === 0) {
+		return new Response("forbidden", { status: 403 });
+	}
+
+	const verify = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+		method: "POST",
+		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		body: new URLSearchParams({
+			secret: import.meta.env.TURNSTILE_SECRET,
+			response: token,
+			remoteip: clientAddress,
+		}),
+	});
+	const result = await verify.json();
+	if (
+		verify.ok !== true ||
+		result.success !== true ||
+		result.action !== "signup" ||
+		!expectedHostnames.has(result.hostname)
+	) {
+		return new Response("forbidden", { status: 403 });
+	}
+
+	// process signup
+	return Response.json({ ok: true });
+};
+```
+
+## Variant: Astro Actions
+
+If the project uses Astro Actions, call siteverify from the action:
+
+```ts title="src/actions/index.ts"
+import { defineAction } from "astro:actions";
+import { z } from "astro:schema";
+
+const expectedHostnames = new Set(
+	(import.meta.env.TURNSTILE_HOSTNAMES ?? "")
+		.split(",")
+		.map((h) => h.trim())
+		.filter(Boolean),
+);
+
+export const server = {
+	signup: defineAction({
+		accept: "form",
+		input: z.object({
+			email: z.string().email(),
+			"cf-turnstile-response": z.string(),
+		}),
+		handler: async (input, ctx) => {
+			if (expectedHostnames.size === 0) throw new Error("Verification failed");
+			const verify = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+				method: "POST",
+				headers: { "Content-Type": "application/x-www-form-urlencoded" },
+				body: new URLSearchParams({
+					secret: import.meta.env.TURNSTILE_SECRET,
+					response: input["cf-turnstile-response"],
+					remoteip: ctx.clientAddress,
+				}),
+			});
+			const result = await verify.json();
+			if (
+				verify.ok !== true ||
+				result.success !== true ||
+				result.action !== "signup" ||
+				!expectedHostnames.has(result.hostname)
+			) {
+				throw new Error("Verification failed");
+			}
+			// process signup
+		},
+	}),
+};
+```
+
+`signup` is the stable action for this surface. Preserve an existing custom migration action and compare the returned action to the same value. Siteverify is mandatory for every widget mode, including pre-clearance. Set `TURNSTILE_HOSTNAMES` to the deployment-specific frontend hostnames; a production value must not include `localhost` or `127.0.0.1`.
+
+For a client-side Astro Action, replace the native form and script with an explicit widget. Retain this surface's widget ID and reset it in `finally` after every same-page request completion:
+
+```astro
+<form id="signup-action-form">
+	<input name="email" type="email" required />
+	<div id="signup-action-turnstile" data-sitekey={SITEKEY}></div>
+	<button type="submit">Sign up</button>
+</form>
+<script>
+	import { actions } from "astro:actions";
+
+	type TurnstileApi = {
+		render: (
+			container: HTMLElement,
+			options: { sitekey: string; action: string },
+		) => string;
+		reset: (widgetId: string) => void;
+	};
+
+	const turnstileWindow = window as Window & { turnstile?: TurnstileApi };
+	const form = document.getElementById("signup-action-form") as HTMLFormElement;
+	const container = document.getElementById("signup-action-turnstile") as HTMLElement;
+	let signupActionWidgetId: string | undefined;
+
+	const renderWidget = () => {
+		if (!turnstileWindow.turnstile) return;
+		signupActionWidgetId = turnstileWindow.turnstile.render(container, {
+			sitekey: container.dataset.sitekey!,
+			action: "signup",
+		});
+	};
+
+	if (turnstileWindow.turnstile) {
+		renderWidget();
+	} else {
+		const script = document.createElement("script");
+		script.src =
+			"https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+		script.async = true;
+		script.addEventListener("load", renderWidget, { once: true });
+		document.head.appendChild(script);
+	}
+
+	form.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		try {
+			const { error } = await actions.signup(new FormData(form));
+			if (error) throw error;
+			// proceed
+		} catch {
+			// surface the error
+		} finally {
+			if (signupActionWidgetId !== undefined) {
+				turnstileWindow.turnstile?.reset(signupActionWidgetId);
+			}
+		}
+	});
+</script>
+```
+
+## Substitutions
+
+| Placeholder         | Replace with                                                         |
+| ------------------- | -------------------------------------------------------------------- |
+| `YOUR_SITEKEY`      | The widget site key from Step 8                                      |
+| `YOUR_SECRET`       | The secret captured in Step 8. Stays in env, never inlined.          |

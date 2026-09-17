@@ -1,1 +1,199 @@
-IyBDcm9uIFRyaWdnZXJzIEdvdGNoYXMKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAiVGltZXpvbmUgSXNzdWVzIgoKKipQcm9ibGVtOioqIENyb24gcnVucyBhdCB3cm9uZyB0aW1lIHJlbGF0aXZlIHRvIGxvY2FsIHRpbWV6b25lICAKKipDYXVzZToqKiBBbGwgY3JvbnMgZXhlY3V0ZSBpbiBVVEMsIG5vIGxvY2FsIHRpbWV6b25lIHN1cHBvcnQgIAoqKlNvbHV0aW9uOioqIENvbnZlcnQgbG9jYWwgdGltZSB0byBVVEMgbWFudWFsbHkKCioqQ29udmVyc2lvbiBmb3JtdWxhOioqIGB1dGNIb3VyID0gKGxvY2FsSG91ciAtIHV0Y09mZnNldCArIDI0KSAlIDI0YAoKKipFeGFtcGxlczoqKgotIDlhbSBQU1QgKFVUQy04KSDihpIgYCg5IC0gKC04KSArIDI0KSAlIDI0ID0gMTdgIOKGkiBgMCAxNyAqICogKmAKLSAyYW0gRVNUIChVVEMtNSkg4oaSIGAoMiAtICgtNSkgKyAyNCkgJSAyNCA9IDdgIOKGkiBgMCA3ICogKiAqYAotIDZwbSBKU1QgKFVUQys5KSDihpIgYCgxOCAtIDkgKyAyNCkgJSAyNCA9IDMzICUgMjQgPSA5YCDihpIgYDAgOSAqICogKmAKCioqRGF5bGlnaHQgU2F2aW5nIFRpbWU6KiogQWRqdXN0IG1hbnVhbGx5IHdoZW4gRFNUIGNoYW5nZXMsIG9yIHNjaGVkdWxlIGF0IHRpbWVzIHVuYWZmZWN0ZWQgYnkgRFNUIChlLmcuLCAyYW0tNGFtIGxvY2FsIHRpbWUgdXN1YWxseSBzYWZlKQoKIyMjICJDcm9uIE5vdCBFeGVjdXRpbmciCgoqKkNhdXNlOioqIE1pc3NpbmcgYHNjaGVkdWxlZCgpYCBleHBvcnQsIGludmFsaWQgc3ludGF4LCBwcm9wYWdhdGlvbiBkZWxheSAoPDE1bWluKSwgb3IgcGxhbiBsaW1pdHMgIAoqKlNvbHV0aW9uOioqIFZlcmlmeSBleHBvcnQgZXhpc3RzLCB2YWxpZGF0ZSBhdCBjcm9udGFiLmd1cnUsIHdhaXQgMTUrIG1pbiBhZnRlciBkZXBsb3ksIGNoZWNrIHBsYW4gbGltaXRzCgojIyMgIkR1cGxpY2F0ZSBFeGVjdXRpb25zIgoKKipDYXVzZToqKiBBdC1sZWFzdC1vbmNlIGRlbGl2ZXJ5ICAKKipTb2x1dGlvbjoqKiBUcmFjayBleGVjdXRpb24gSURzIGluIEtWIC0gc2VlIGlkZW1wb3RlbmN5IHBhdHRlcm4gYmVsb3cKCiMjIyAiRXhlY3V0aW9uIEZhaWx1cmVzIgoKKipDYXVzZToqKiBDUFUgZXhjZWVkZWQsIHVuaGFuZGxlZCBleGNlcHRpb25zLCBuZXR3b3JrIHRpbWVvdXRzLCBiaW5kaW5nIGVycm9ycyAgCioqU29sdXRpb246KiogVXNlIHRyeS1jYXRjaCwgQWJvcnRDb250cm9sbGVyIHRpbWVvdXRzLCBgY3R4LndhaXRVbnRpbCgpYCBmb3IgbG9uZyBvcHMsIG9yIFdvcmtmbG93cyBmb3IgaGVhdnkgdGFza3MKCiMjIyAiTG9jYWwgVGVzdGluZyBOb3QgV29ya2luZyIKCioqUHJvYmxlbToqKiBgL19fc2NoZWR1bGVkYCBlbmRwb2ludCByZXR1cm5zIDQwNCBvciBkb2Vzbid0IHRyaWdnZXIgaGFuZGxlciAgCioqQ2F1c2U6KiogTWlzc2luZyBgc2NoZWR1bGVkKClgIGV4cG9ydCwgd3JhbmdsZXIgbm90IHJ1bm5pbmcsIG9yIGluY29ycmVjdCBlbmRwb2ludCBmb3JtYXQgIAoqKlNvbHV0aW9uOioqCgoxLiBWZXJpZnkgYHNjaGVkdWxlZCgpYCBpcyBleHBvcnRlZDoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgc2NoZWR1bGVkKGNvbnRyb2xsZXIsIGVudiwgY3R4KSB7CiAgICBjb25zb2xlLmxvZygiQ3JvbiB0cmlnZ2VyZWQiKTsKICB9LAp9OwpgYGAKCjIuIFN0YXJ0IGRldiBzZXJ2ZXI6CmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRldgpgYGAKCjMuIFVzZSBjb3JyZWN0IGVuZHBvaW50IGZvcm1hdCAoVVJMLWVuY29kZSBzcGFjZXMgYXMgYCtgKToKYGBgYmFzaAojIENvcnJlY3QKY3VybCAiaHR0cDovL2xvY2FsaG9zdDo4Nzg3L19fc2NoZWR1bGVkP2Nyb249Ki81KyorKisqKyoiCgojIFdyb25nICh3aWxsIGZhaWwpCmN1cmwgImh0dHA6Ly9sb2NhbGhvc3Q6ODc4Ny9fX3NjaGVkdWxlZD9jcm9uPSovNSAqICogKiAqIgpgYGAKCjQuIFVwZGF0ZSBXcmFuZ2xlciBpZiBvdXRkYXRlZDoKYGBgYmFzaApucG0gaW5zdGFsbCAtZyB3cmFuZ2xlckBsYXRlc3QKYGBgCgojIyMgIndhaXRVbnRpbCgpIFRhc2tzIE5vdCBDb21wbGV0aW5nIgoKKipQcm9ibGVtOioqIEJhY2tncm91bmQgdGFza3MgaW4gYGN0eC53YWl0VW50aWwoKWAgZmFpbCBzaWxlbnRseSBvciBkb24ndCBleGVjdXRlICAKKipDYXVzZToqKiBQcm9taXNlcyByZWplY3RlZCB3aXRob3V0IGVycm9yIGhhbmRsaW5nLCBvciBoYW5kbGVyIHJldHVybnMgYmVmb3JlIHByb21pc2Ugc2V0dGxlcyAgCioqU29sdXRpb246KiogQWx3YXlzIGF3YWl0IG9yIGhhbmRsZSBlcnJvcnMgaW4gd2FpdFVudGlsIHByb21pc2VzOgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgc2NoZWR1bGVkKGNvbnRyb2xsZXIsIGVudiwgY3R4KSB7CiAgICAvLyBCQUQ6IFNpbGVudCBmYWlsdXJlcwogICAgY3R4LndhaXRVbnRpbChyaXNreU9wZXJhdGlvbigpKTsKICAgIAogICAgLy8gR09PRDogRXhwbGljaXQgZXJyb3IgaGFuZGxpbmcKICAgIGN0eC53YWl0VW50aWwoCiAgICAgIHJpc2t5T3BlcmF0aW9uKCkuY2F0Y2goZXJyID0+IHsKICAgICAgICBjb25zb2xlLmVycm9yKCJCYWNrZ3JvdW5kIHRhc2sgZmFpbGVkOiIsIGVycik7CiAgICAgICAgcmV0dXJuIGxvZ0Vycm9yKGVyciwgZW52KTsKICAgICAgfSkKICAgICk7CiAgfSwKfTsKYGBgCgojIyMgIklkZW1wb3RlbmN5IElzc3VlcyIKCioqUHJvYmxlbToqKiBBdC1sZWFzdC1vbmNlIGRlbGl2ZXJ5IGNhdXNlcyBkdXBsaWNhdGUgc2lkZSBlZmZlY3RzIChkb3VibGUgY2hhcmdlcywgZHVwbGljYXRlIGVtYWlscykgIAoqKkNhdXNlOioqIE5vIGRlZHVwbGljYXRpb24gbWVjaGFuaXNtICAKKipTb2x1dGlvbjoqKiBVc2UgS1YgdG8gdHJhY2sgZXhlY3V0aW9uIElEczoKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHNjaGVkdWxlZChjb250cm9sbGVyLCBlbnYsIGN0eCkgewogICAgY29uc3QgZXhlY3V0aW9uSWQgPSBgJHtjb250cm9sbGVyLmNyb259LSR7Y29udHJvbGxlci5zY2hlZHVsZWRUaW1lfWA7CiAgICBjb25zdCBleGlzdGluZyA9IGF3YWl0IGVudi5FWEVDVVRJT05TLmdldChleGVjdXRpb25JZCk7CiAgICAKICAgIGlmIChleGlzdGluZykgewogICAgICBjb25zb2xlLmxvZygiQWxyZWFkeSBleGVjdXRlZCwgc2tpcHBpbmciKTsKICAgICAgY29udHJvbGxlci5ub1JldHJ5KCk7CiAgICAgIHJldHVybjsKICAgIH0KICAgIAogICAgYXdhaXQgZW52LkVYRUNVVElPTlMucHV0KGV4ZWN1dGlvbklkLCAiMSIsIHsgZXhwaXJhdGlvblR0bDogODY0MDAgfSk7IC8vIDI0aCBUVEwKICAgIGF3YWl0IHBlcmZvcm1JZGVtcG90ZW50T3BlcmF0aW9uKGVudik7CiAgfSwKfTsKYGBgCgojIyMgIlNlY3VyaXR5IENvbmNlcm5zIgoKKipQcm9ibGVtOioqIGBfX3NjaGVkdWxlZGAgZW5kcG9pbnQgZXhwb3NlZCBpbiBwcm9kdWN0aW9uIGFsbG93cyB1bmF1dGhvcml6ZWQgY3JvbiB0cmlnZ2VyaW5nICAKKipDYXVzZToqKiBUZXN0aW5nIGVuZHBvaW50IGF2YWlsYWJsZSBpbiBkZXBsb3llZCBXb3JrZXJzICAKKipTb2x1dGlvbjoqKiBCbG9jayBgX19zY2hlZHVsZWRgIGluIHByb2R1Y3Rpb246CgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYsIGN0eCkgewogICAgY29uc3QgdXJsID0gbmV3IFVSTChyZXF1ZXN0LnVybCk7CiAgICAKICAgIC8vIEJsb2NrIF9fc2NoZWR1bGVkIGluIHByb2R1Y3Rpb24KICAgIGlmICh1cmwucGF0aG5hbWUgPT09ICIvX19zY2hlZHVsZWQiICYmIGVudi5FTlZJUk9OTUVOVCA9PT0gInByb2R1Y3Rpb24iKSB7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIk5vdCBGb3VuZCIsIHsgc3RhdHVzOiA0MDQgfSk7CiAgICB9CiAgICAKICAgIHJldHVybiBoYW5kbGVSZXF1ZXN0KHJlcXVlc3QsIGVudiwgY3R4KTsKICB9LAogIAogIGFzeW5jIHNjaGVkdWxlZChjb250cm9sbGVyLCBlbnYsIGN0eCkgewogICAgLy8gWW91ciBjcm9uIGxvZ2ljCiAgfSwKfTsKYGBgCgoqKkFsc286KiogVXNlIGBlbnYuQVBJX0tFWWAgZm9yIHNlY3JldHMgKG5ldmVyIGhhcmRjb2RlKQoKKipBbHRlcm5hdGl2ZToqKiBBZGQgbWlkZGxld2FyZSB0byB2ZXJpZnkgcmVxdWVzdCBvcmlnaW46CmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3QsIGVudiwgY3R4KSB7CiAgICBjb25zdCB1cmwgPSBuZXcgVVJMKHJlcXVlc3QudXJsKTsKICAgIAogICAgaWYgKHVybC5wYXRobmFtZSA9PT0gIi9fX3NjaGVkdWxlZCIpIHsKICAgICAgLy8gQ2hlY2sgQ2xvdWRmbGFyZSBoZWFkZXJzIHRvIHZlcmlmeSBpbnRlcm5hbCByZXF1ZXN0CiAgICAgIGNvbnN0IGNmUmF5ID0gcmVxdWVzdC5oZWFkZXJzLmdldCgiY2YtcmF5Iik7CiAgICAgIGlmICghY2ZSYXkgJiYgZW52LkVOVklST05NRU5UID09PSAicHJvZHVjdGlvbiIpIHsKICAgICAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJOb3QgRm91bmQiLCB7IHN0YXR1czogNDA0IH0pOwogICAgICB9CiAgICB9CiAgICAKICAgIHJldHVybiBoYW5kbGVSZXF1ZXN0KHJlcXVlc3QsIGVudiwgY3R4KTsKICB9LAogIAogIGFzeW5jIHNjaGVkdWxlZChjb250cm9sbGVyLCBlbnYsIGN0eCkgewogICAgLy8gWW91ciBjcm9uIGxvZ2ljCiAgfSwKfTsKYGBgCgojIyBMaW1pdHMgJiBRdW90YXMKCnwgTGltaXQgfCBGcmVlIHwgUGFpZCB8IE5vdGVzIHwKfC0tLS0tLS18LS0tLS0tfC0tLS0tLXwtLS0tLS0tfAp8IFRyaWdnZXJzIHBlciBXb3JrZXIgfCAzIHwgVW5saW1pdGVkIHwgTWF4aW11bSBjcm9uIHNjaGVkdWxlcyBwZXIgV29ya2VyIHwKfCBDUFUgdGltZSB8IDEwbXMgfCAzMHMgKDwxaHIgaW50ZXJ2YWwpLCAxNW1pbiAo4omlMWhyIGludGVydmFsKSB8IE1heSBuZWVkIGBjdHgud2FpdFVudGlsKClgIG9yIFdvcmtmbG93cyB8CnwgRXhlY3V0aW9uIGd1YXJhbnRlZSB8IEF0LWxlYXN0LW9uY2UgfCBBdC1sZWFzdC1vbmNlIHwgRHVwbGljYXRlcyBwb3NzaWJsZSAtIHVzZSBpZGVtcG90ZW5jeSB8CnwgUHJvcGFnYXRpb24gZGVsYXkgfCBVcCB0byAxNSBtaW51dGVzIHwgVXAgdG8gMTUgbWludXRlcyB8IFRpbWUgZm9yIGNoYW5nZXMgdG8gdGFrZSBlZmZlY3QgZ2xvYmFsbHkgfAp8IE1pbiBpbnRlcnZhbCB8IDEgbWludXRlIHwgMSBtaW51dGUgfCBDYW5ub3Qgc2NoZWR1bGUgbW9yZSBmcmVxdWVudGx5IHwKfCBDcm9uIGFjY3VyYWN5IHwgwrExIG1pbnV0ZSB8IMKxMSBtaW51dGUgfCBFeGVjdXRpb24gbWF5IGRyaWZ0IHNsaWdodGx5IHwKCiMjIFRlc3RpbmcgQmVzdCBQcmFjdGljZXMKCioqVW5pdCB0ZXN0czoqKgotIE1vY2sgYFNjaGVkdWxlZENvbnRyb2xsZXJgLCBgRXhlY3V0aW9uQ29udGV4dGAsIGFuZCBiaW5kaW5ncwotIFRlc3QgZWFjaCBjcm9uIGV4cHJlc3Npb24gc2VwYXJhdGVseQotIFZlcmlmeSBgbm9SZXRyeSgpYCBpcyBjYWxsZWQgd2hlbiBleHBlY3RlZAotIFVzZSBWaXRlc3Qgd2l0aCBgQGNsb3VkZmxhcmUvdml0ZXN0LXBvb2wtd29ya2Vyc2AgZm9yIHJlYWxpc3RpYyBlbnYKCioqSW50ZWdyYXRpb24gdGVzdHM6KioKLSBUZXN0IHZpYSBgL19fc2NoZWR1bGVkYCBlbmRwb2ludCBpbiBkZXYgZW52aXJvbm1lbnQKLSBWZXJpZnkgaWRlbXBvdGVuY3kgbG9naWMgd2l0aCBkdXBsaWNhdGUgYHNjaGVkdWxlZFRpbWVgIHZhbHVlcwotIFRlc3QgZXJyb3IgaGFuZGxpbmcgYW5kIHJldHJ5IGJlaGF2aW9yCgoqKlByb2R1Y3Rpb246KiogU3RhcnQgd2l0aCBsb25nIGludGVydmFscyAoYCovMzAgKiAqICogKmApLCBtb25pdG9yIENyb24gRXZlbnRzIGZvciAyNGgsIHNldCB1cCBhbGVydHMgYmVmb3JlIHJlZHVjaW5nIGludGVydmFsCgojIyBSZXNvdXJjZXMKCi0gW0Nyb24gVHJpZ2dlcnMgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvY29uZmlndXJhdGlvbi9jcm9uLXRyaWdnZXJzLykKLSBbU2NoZWR1bGVkIEhhbmRsZXIgQVBJXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy9ydW50aW1lLWFwaXMvaGFuZGxlcnMvc2NoZWR1bGVkLykKLSBbQ2xvdWRmbGFyZSBXb3JrZmxvd3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZmxvd3MvKQotIFtXb3JrZXJzIExpbWl0c10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvcGxhdGZvcm0vbGltaXRzLykKLSBbQ3JvbnRhYiBHdXJ1XShodHRwczovL2Nyb250YWIuZ3VydS8pIC0gVmFsaWRhdG9yCi0gW1ZpdGVzdCBQb29sIFdvcmtlcnNdKGh0dHBzOi8vZ2l0aHViLmNvbS9jbG91ZGZsYXJlL3dvcmtlcnMtc2RrL3RyZWUvbWFpbi9maXh0dXJlcy92aXRlc3QtcG9vbC13b3JrZXJzLWV4YW1wbGVzKQo=
+# Cron Triggers Gotchas
+
+## Common Errors
+
+### "Timezone Issues"
+
+**Problem:** Cron runs at wrong time relative to local timezone  
+**Cause:** All crons execute in UTC, no local timezone support  
+**Solution:** Convert local time to UTC manually
+
+**Conversion formula:** `utcHour = (localHour - utcOffset + 24) % 24`
+
+**Examples:**
+- 9am PST (UTC-8) → `(9 - (-8) + 24) % 24 = 17` → `0 17 * * *`
+- 2am EST (UTC-5) → `(2 - (-5) + 24) % 24 = 7` → `0 7 * * *`
+- 6pm JST (UTC+9) → `(18 - 9 + 24) % 24 = 33 % 24 = 9` → `0 9 * * *`
+
+**Daylight Saving Time:** Adjust manually when DST changes, or schedule at times unaffected by DST (e.g., 2am-4am local time usually safe)
+
+### "Cron Not Executing"
+
+**Cause:** Missing `scheduled()` export, invalid syntax, propagation delay (<15min), or plan limits  
+**Solution:** Verify export exists, validate at crontab.guru, wait 15+ min after deploy, check plan limits
+
+### "Duplicate Executions"
+
+**Cause:** At-least-once delivery  
+**Solution:** Track execution IDs in KV - see idempotency pattern below
+
+### "Execution Failures"
+
+**Cause:** CPU exceeded, unhandled exceptions, network timeouts, binding errors  
+**Solution:** Use try-catch, AbortController timeouts, `ctx.waitUntil()` for long ops, or Workflows for heavy tasks
+
+### "Local Testing Not Working"
+
+**Problem:** `/__scheduled` endpoint returns 404 or doesn't trigger handler  
+**Cause:** Missing `scheduled()` export, wrangler not running, or incorrect endpoint format  
+**Solution:**
+
+1. Verify `scheduled()` is exported:
+```typescript
+export default {
+  async scheduled(controller, env, ctx) {
+    console.log("Cron triggered");
+  },
+};
+```
+
+2. Start dev server:
+```bash
+npx wrangler dev
+```
+
+3. Use correct endpoint format (URL-encode spaces as `+`):
+```bash
+# Correct
+curl "http://localhost:8787/__scheduled?cron=*/5+*+*+*+*"
+
+# Wrong (will fail)
+curl "http://localhost:8787/__scheduled?cron=*/5 * * * *"
+```
+
+4. Update Wrangler if outdated:
+```bash
+npm install -g wrangler@latest
+```
+
+### "waitUntil() Tasks Not Completing"
+
+**Problem:** Background tasks in `ctx.waitUntil()` fail silently or don't execute  
+**Cause:** Promises rejected without error handling, or handler returns before promise settles  
+**Solution:** Always await or handle errors in waitUntil promises:
+
+```typescript
+export default {
+  async scheduled(controller, env, ctx) {
+    // BAD: Silent failures
+    ctx.waitUntil(riskyOperation());
+    
+    // GOOD: Explicit error handling
+    ctx.waitUntil(
+      riskyOperation().catch(err => {
+        console.error("Background task failed:", err);
+        return logError(err, env);
+      })
+    );
+  },
+};
+```
+
+### "Idempotency Issues"
+
+**Problem:** At-least-once delivery causes duplicate side effects (double charges, duplicate emails)  
+**Cause:** No deduplication mechanism  
+**Solution:** Use KV to track execution IDs:
+
+```typescript
+export default {
+  async scheduled(controller, env, ctx) {
+    const executionId = `${controller.cron}-${controller.scheduledTime}`;
+    const existing = await env.EXECUTIONS.get(executionId);
+    
+    if (existing) {
+      console.log("Already executed, skipping");
+      controller.noRetry();
+      return;
+    }
+    
+    await env.EXECUTIONS.put(executionId, "1", { expirationTtl: 86400 }); // 24h TTL
+    await performIdempotentOperation(env);
+  },
+};
+```
+
+### "Security Concerns"
+
+**Problem:** `__scheduled` endpoint exposed in production allows unauthorized cron triggering  
+**Cause:** Testing endpoint available in deployed Workers  
+**Solution:** Block `__scheduled` in production:
+
+```typescript
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    
+    // Block __scheduled in production
+    if (url.pathname === "/__scheduled" && env.ENVIRONMENT === "production") {
+      return new Response("Not Found", { status: 404 });
+    }
+    
+    return handleRequest(request, env, ctx);
+  },
+  
+  async scheduled(controller, env, ctx) {
+    // Your cron logic
+  },
+};
+```
+
+**Also:** Use `env.API_KEY` for secrets (never hardcode)
+
+**Alternative:** Add middleware to verify request origin:
+```typescript
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    
+    if (url.pathname === "/__scheduled") {
+      // Check Cloudflare headers to verify internal request
+      const cfRay = request.headers.get("cf-ray");
+      if (!cfRay && env.ENVIRONMENT === "production") {
+        return new Response("Not Found", { status: 404 });
+      }
+    }
+    
+    return handleRequest(request, env, ctx);
+  },
+  
+  async scheduled(controller, env, ctx) {
+    // Your cron logic
+  },
+};
+```
+
+## Limits & Quotas
+
+| Limit | Free | Paid | Notes |
+|-------|------|------|-------|
+| Triggers per Worker | 3 | Unlimited | Maximum cron schedules per Worker |
+| CPU time | 10ms | 30s (<1hr interval), 15min (≥1hr interval) | May need `ctx.waitUntil()` or Workflows |
+| Execution guarantee | At-least-once | At-least-once | Duplicates possible - use idempotency |
+| Propagation delay | Up to 15 minutes | Up to 15 minutes | Time for changes to take effect globally |
+| Min interval | 1 minute | 1 minute | Cannot schedule more frequently |
+| Cron accuracy | ±1 minute | ±1 minute | Execution may drift slightly |
+
+## Testing Best Practices
+
+**Unit tests:**
+- Mock `ScheduledController`, `ExecutionContext`, and bindings
+- Test each cron expression separately
+- Verify `noRetry()` is called when expected
+- Use Vitest with `@cloudflare/vitest-pool-workers` for realistic env
+
+**Integration tests:**
+- Test via `/__scheduled` endpoint in dev environment
+- Verify idempotency logic with duplicate `scheduledTime` values
+- Test error handling and retry behavior
+
+**Production:** Start with long intervals (`*/30 * * * *`), monitor Cron Events for 24h, set up alerts before reducing interval
+
+## Resources
+
+- [Cron Triggers Docs](https://developers.cloudflare.com/workers/configuration/cron-triggers/)
+- [Scheduled Handler API](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/)
+- [Cloudflare Workflows](https://developers.cloudflare.com/workflows/)
+- [Workers Limits](https://developers.cloudflare.com/workers/platform/limits/)
+- [Crontab Guru](https://crontab.guru/) - Validator
+- [Vitest Pool Workers](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-pool-workers-examples)

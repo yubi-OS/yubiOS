@@ -1,1 +1,200 @@
-IyBCaW5kaW5nIFBhdHRlcm5zIGFuZCBCZXN0IFByYWN0aWNlcwoKIyMgU2VydmljZSBCaW5kaW5nIFBhdHRlcm5zCgojIyMgUlBDIHZpYSBTZXJ2aWNlIEJpbmRpbmdzCgpgYGB0eXBlc2NyaXB0Ci8vIGF1dGgtd29ya2VyCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudikgewogICAgY29uc3QgdG9rZW4gPSByZXF1ZXN0LmhlYWRlcnMuZ2V0KCdBdXRob3JpemF0aW9uJyk7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKEpTT04uc3RyaW5naWZ5KHsgdmFsaWQ6IGF3YWl0IHZhbGlkYXRlVG9rZW4odG9rZW4pIH0pKTsKICB9Cn0KCi8vIGFwaS13b3JrZXIKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuQVVUSF9TRVJWSUNFLmZldGNoKAogIG5ldyBSZXF1ZXN0KCdodHRwczovL2Zha2UtaG9zdC92YWxpZGF0ZScsIHsKICAgIGhlYWRlcnM6IHsgJ0F1dGhvcml6YXRpb24nOiB0b2tlbiB9CiAgfSkKKTsKYGBgCgoqKldoeSBSUEM/KiogWmVybyBsYXRlbmN5IChzYW1lIGRhdGFjZW50ZXIpLCBubyBETlMsIGZyZWUsIHR5cGUtc2FmZS4KCioqSFRUUCB2cyBTZXJ2aWNlOioqCmBgYHR5cGVzY3JpcHQKLy8g4p2MIEhUVFAgKHNsb3csIHBhaWQsIGNyb3NzLXJlZ2lvbiBsYXRlbmN5KQphd2FpdCBmZXRjaCgnaHR0cHM6Ly9hdXRoLXdvcmtlci5leGFtcGxlLmNvbS92YWxpZGF0ZScpOwoKLy8g4pyFIFNlcnZpY2UgYmluZGluZyAoZmFzdCwgZnJlZSwgc2FtZSBpc29sYXRlKQphd2FpdCBlbnYuQVVUSF9TRVJWSUNFLmZldGNoKG5ldyBSZXF1ZXN0KCdodHRwczovL2Zha2UtaG9zdC92YWxpZGF0ZScpKTsKYGBgCgoqKlVSTCBkb2Vzbid0IG1hdHRlcjoqKiBTZXJ2aWNlIGJpbmRpbmdzIGlnbm9yZSBob3N0bmFtZS9wcm90b2NvbCwgcm91dGluZyBoYXBwZW5zIHZpYSBiaW5kaW5nIG5hbWUuCgojIyMgVHlwZWQgU2VydmljZSBSUEMKCmBgYHR5cGVzY3JpcHQKLy8gc2hhcmVkLXR5cGVzLnRzCmV4cG9ydCBpbnRlcmZhY2UgQXV0aFJlcXVlc3QgeyB0b2tlbjogc3RyaW5nOyB9CmV4cG9ydCBpbnRlcmZhY2UgQXV0aFJlc3BvbnNlIHsgdmFsaWQ6IGJvb2xlYW47IHVzZXJJZD86IHN0cmluZzsgfQoKLy8gYXV0aC13b3JrZXIKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCBib2R5OiBBdXRoUmVxdWVzdCA9IGF3YWl0IHJlcXVlc3QuanNvbigpOwogICAgY29uc3QgcmVzcG9uc2U6IEF1dGhSZXNwb25zZSA9IHsgdmFsaWQ6IHRydWUsIHVzZXJJZDogJzEyMycgfTsKICAgIHJldHVybiBSZXNwb25zZS5qc29uKHJlc3BvbnNlKTsKICB9Cn0KCi8vIGFwaS13b3JrZXIKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBlbnYuQVVUSF9TRVJWSUNFLmZldGNoKAogIG5ldyBSZXF1ZXN0KCdodHRwczovL2Zha2UvdmFsaWRhdGUnLCB7CiAgICBtZXRob2Q6ICdQT1NUJywKICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsgdG9rZW4gfSBzYXRpc2ZpZXMgQXV0aFJlcXVlc3QpCiAgfSkKKTsKY29uc3QgZGF0YTogQXV0aFJlc3BvbnNlID0gYXdhaXQgcmVzcG9uc2UuanNvbigpOwpgYGAKCiMjIFNlY3JldHMgTWFuYWdlbWVudAoKYGBgYmFzaAojIFNldCBzZWNyZXQKbnB4IHdyYW5nbGVyIHNlY3JldCBwdXQgQVBJX0tFWQpjYXQgYXBpLWtleS50eHQgfCBucHggd3JhbmdsZXIgc2VjcmV0IHB1dCBBUElfS0VZCm5weCB3cmFuZ2xlciBzZWNyZXQgcHV0IEFQSV9LRVkgLS1lbnYgc3RhZ2luZwpgYGAKCmBgYHR5cGVzY3JpcHQKLy8gVXNlIHNlY3JldApjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKCdodHRwczovL2FwaS5leGFtcGxlLmNvbScsIHsKICBoZWFkZXJzOiB7ICdBdXRob3JpemF0aW9uJzogYEJlYXJlciAke2Vudi5BUElfS0VZfWAgfQp9KTsKYGBgCgoqKk5ldmVyIGNvbW1pdCBzZWNyZXRzOioqCmBgYGpzb25jCi8vIOKdjCBORVZFUgp7ICJ2YXJzIjogeyAiQVBJX0tFWSI6ICJza19saXZlX2FiYzEyMyIgfSB9CmBgYAoKIyMgVGVzdGluZyB3aXRoIE1vY2sgQmluZGluZ3MKCiMjIyBWaXRlc3QgTW9jawoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyB2aSB9IGZyb20gJ3ZpdGVzdCc7Cgpjb25zdCBtb2NrS1Y6IEtWTmFtZXNwYWNlID0gewogIGdldDogdmkuZm4oYXN5bmMgKGtleSkgPT4ga2V5ID09PSAndGVzdCcgPyAndmFsdWUnIDogbnVsbCksCiAgcHV0OiB2aS5mbihhc3luYyAoKSA9PiB7fSksCiAgZGVsZXRlOiB2aS5mbihhc3luYyAoKSA9PiB7fSksCiAgbGlzdDogdmkuZm4oYXN5bmMgKCkgPT4gKHsga2V5czogW10sIGxpc3RfY29tcGxldGU6IHRydWUsIGN1cnNvcjogJycgfSkpLAogIGdldFdpdGhNZXRhZGF0YTogdmkuZm4oKSwKfSBhcyB1bmtub3duIGFzIEtWTmFtZXNwYWNlOwoKY29uc3QgbW9ja0VudjogRW52ID0geyBNWV9LVjogbW9ja0tWIH07CmNvbnN0IG1vY2tDdHg6IEV4ZWN1dGlvbkNvbnRleHQgPSB7CiAgd2FpdFVudGlsOiB2aS5mbigpLAogIHBhc3NUaHJvdWdoT25FeGNlcHRpb246IHZpLmZuKCksCn07Cgpjb25zdCByZXNwb25zZSA9IGF3YWl0IHdvcmtlci5mZXRjaCgKICBuZXcgUmVxdWVzdCgnaHR0cDovL2xvY2FsaG9zdC90ZXN0JyksCiAgbW9ja0VudiwKICBtb2NrQ3R4Cik7CmBgYAoKIyMgQmluZGluZyBBY2Nlc3MgUGF0dGVybnMKCiMjIyBMYXp5IEFjY2VzcwoKYGBgdHlwZXNjcmlwdAovLyDinIUgQWNjZXNzIG9ubHkgd2hlbiBuZWVkZWQKaWYgKHVybC5wYXRobmFtZSA9PT0gJy9jYWNoZWQnKSB7CiAgY29uc3QgY2FjaGVkID0gYXdhaXQgZW52Lk1ZX0tWLmdldCgnZGF0YScpOwogIGlmIChjYWNoZWQpIHJldHVybiBuZXcgUmVzcG9uc2UoY2FjaGVkKTsKfQpgYGAKCiMjIyBQYXJhbGxlbCBBY2Nlc3MKCmBgYHR5cGVzY3JpcHQKLy8g4pyFIFBhcmFsbGVsaXplIGluZGVwZW5kZW50IGNhbGxzCmNvbnN0IFt1c2VyLCBjb25maWcsIGNhY2hlXSA9IGF3YWl0IFByb21pc2UuYWxsKFsKICBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuZmlyc3QoKSwKICBlbnYuTVlfS1YuZ2V0KCdjb25maWcnKSwKICBlbnYuQ0FDSEUuZ2V0KCdkYXRhJykKXSk7CmBgYAoKIyMgU3RvcmFnZSBTZWxlY3Rpb24KCiMjIyBLVjogQ0ROLUJhY2tlZCBSZWFkcwoKYGBgdHlwZXNjcmlwdApjb25zdCBjb25maWcgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0KCdhcHAtY29uZmlnJywgeyB0eXBlOiAnanNvbicgfSk7CmBgYAoKKipVc2Ugd2hlbjoqKiBSZWFkLWhlYXZ5LCA8MjVNQiwgZ2xvYmFsIGRpc3RyaWJ1dGlvbiwgZXZlbnR1YWwgY29uc2lzdGVuY3kgT0sgIAoqKkxhdGVuY3k6KiogPDEwbXMgcmVhZHMgKGNhY2hlZCksIHdyaXRlcyBldmVudHVhbGx5IGNvbnNpc3RlbnQgKDYwcykKCiMjIyBEMTogUmVsYXRpb25hbCBRdWVyaWVzCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHJlc3VsdHMgPSBhd2FpdCBlbnYuREIucHJlcGFyZShgCiAgU0VMRUNUIHUubmFtZSwgQ09VTlQoby5pZCkgRlJPTSB1c2VycyB1CiAgTEVGVCBKT0lOIG9yZGVycyBvIE9OIHUuaWQgPSBvLnVzZXJfaWQgR1JPVVAgQlkgdS5pZApgKS5hbGwoKTsKYGBgCgoqKlVzZSB3aGVuOioqIFJlbGF0aW9uYWwgZGF0YSwgSk9JTnMsIEFDSUQgdHJhbnNhY3Rpb25zICAKKipMaW1pdHM6KiogMTBHQiBkYXRhYmFzZSBzaXplLCAxMDBrIHJvd3MgcGVyIHF1ZXJ5CgojIyMgUjI6IExhcmdlIE9iamVjdHMKCmBgYHR5cGVzY3JpcHQKY29uc3Qgb2JqZWN0ID0gYXdhaXQgZW52Lk1ZX0JVQ0tFVC5nZXQoJ2xhcmdlLWZpbGUuemlwJyk7CnJldHVybiBuZXcgUmVzcG9uc2Uob2JqZWN0LmJvZHkpOwpgYGAKCioqVXNlIHdoZW46KiogRmlsZXMgPjI1TUIsIFMzLWNvbXBhdGlibGUgQVBJIG5lZWRlZCAgCioqTGltaXRzOioqIDVUQiBwZXIgb2JqZWN0LCB1bmxpbWl0ZWQgc3RvcmFnZQoKIyMjIER1cmFibGUgT2JqZWN0czogQ29vcmRpbmF0aW9uCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGlkID0gZW52LkNPVU5URVIuaWRGcm9tTmFtZSgnZ2xvYmFsJyk7CmNvbnN0IHN0dWIgPSBlbnYuQ09VTlRFUi5nZXQoaWQpOwphd2FpdCBzdHViLmZldGNoKG5ldyBSZXF1ZXN0KCdodHRwczovL2Zha2UvaW5jcmVtZW50JykpOwpgYGAKCioqVXNlIHdoZW46KiogU3Ryb25nIGNvbnNpc3RlbmN5LCByZWFsLXRpbWUgY29vcmRpbmF0aW9uLCBXZWJTb2NrZXQgc3RhdGUgIAoqKkd1YXJhbnRlZXM6KiogU2luZ2xlLXRocmVhZGVkIGV4ZWN1dGlvbiwgdHJhbnNhY3Rpb25hbCBzdG9yYWdlCgojIyBBbnRpLVBhdHRlcm5zCgoqKuKdjCBIYXJkY29kaW5nIGNyZWRlbnRpYWxzOioqIGBjb25zdCBhcGlLZXkgPSAnc2tfbGl2ZV9hYmMxMjMnYCAgCioq4pyFKiogYG5weCB3cmFuZ2xlciBzZWNyZXQgcHV0IEFQSV9LRVlgCgoqKuKdjCBVc2luZyBSRVNUIEFQSToqKiBgZmV0Y2goJ2h0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tLy4uLi9rdi8uLi4nKWAgIAoqKuKchSoqIGBlbnYuTVlfS1YuZ2V0KCdrZXknKWAKCioq4p2MIFBvbGxpbmcgc3RvcmFnZToqKiBgc2V0SW50ZXJ2YWwoKCkgPT4gZW52LktWLmdldCgnY29uZmlnJyksIDEwMDApYCAgCioq4pyFKiogVXNlIER1cmFibGUgT2JqZWN0cyBmb3IgcmVhbC10aW1lIHN0YXRlCgoqKuKdjCBMYXJnZSBkYXRhIGluIHZhcnM6KiogYHsgInZhcnMiOiB7ICJIVUdFX0NPTkZJRyI6ICIuLi4iIH0gfWAgKDVLQiBtYXgpICAKKirinIUqKiBgZW52Lk1ZX0tWLnB1dCgnY29uZmlnJywgZGF0YSlgCgoqKuKdjCBDYWNoaW5nIGVudiBnbG9iYWxseToqKiBgY29uc3QgYXBpS2V5ID0gZW52LkFQSV9LRVlgIG91dHNpZGUgZmV0Y2goKSAgCioq4pyFKiogQWNjZXNzIGBlbnYuQVBJX0tFWWAgcGVyLXJlcXVlc3QgaW5zaWRlIGZldGNoKCkKCiMjIFNlZSBBbHNvCgotIFtTZXJ2aWNlIEJpbmRpbmdzIERvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzL3J1bnRpbWUtYXBpcy9iaW5kaW5ncy9zZXJ2aWNlLWJpbmRpbmdzLykKLSBbTWluaWZsYXJlIFRlc3RpbmddKGh0dHBzOi8vbWluaWZsYXJlLmRldi8p
+# Binding Patterns and Best Practices
+
+## Service Binding Patterns
+
+### RPC via Service Bindings
+
+```typescript
+// auth-worker
+export default {
+  async fetch(request: Request, env: Env) {
+    const token = request.headers.get('Authorization');
+    return new Response(JSON.stringify({ valid: await validateToken(token) }));
+  }
+}
+
+// api-worker
+const response = await env.AUTH_SERVICE.fetch(
+  new Request('https://fake-host/validate', {
+    headers: { 'Authorization': token }
+  })
+);
+```
+
+**Why RPC?** Zero latency (same datacenter), no DNS, free, type-safe.
+
+**HTTP vs Service:**
+```typescript
+// ❌ HTTP (slow, paid, cross-region latency)
+await fetch('https://auth-worker.example.com/validate');
+
+// ✅ Service binding (fast, free, same isolate)
+await env.AUTH_SERVICE.fetch(new Request('https://fake-host/validate'));
+```
+
+**URL doesn't matter:** Service bindings ignore hostname/protocol, routing happens via binding name.
+
+### Typed Service RPC
+
+```typescript
+// shared-types.ts
+export interface AuthRequest { token: string; }
+export interface AuthResponse { valid: boolean; userId?: string; }
+
+// auth-worker
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const body: AuthRequest = await request.json();
+    const response: AuthResponse = { valid: true, userId: '123' };
+    return Response.json(response);
+  }
+}
+
+// api-worker
+const response = await env.AUTH_SERVICE.fetch(
+  new Request('https://fake/validate', {
+    method: 'POST',
+    body: JSON.stringify({ token } satisfies AuthRequest)
+  })
+);
+const data: AuthResponse = await response.json();
+```
+
+## Secrets Management
+
+```bash
+# Set secret
+npx wrangler secret put API_KEY
+cat api-key.txt | npx wrangler secret put API_KEY
+npx wrangler secret put API_KEY --env staging
+```
+
+```typescript
+// Use secret
+const response = await fetch('https://api.example.com', {
+  headers: { 'Authorization': `Bearer ${env.API_KEY}` }
+});
+```
+
+**Never commit secrets:**
+```jsonc
+// ❌ NEVER
+{ "vars": { "API_KEY": "sk_live_abc123" } }
+```
+
+## Testing with Mock Bindings
+
+### Vitest Mock
+
+```typescript
+import { vi } from 'vitest';
+
+const mockKV: KVNamespace = {
+  get: vi.fn(async (key) => key === 'test' ? 'value' : null),
+  put: vi.fn(async () => {}),
+  delete: vi.fn(async () => {}),
+  list: vi.fn(async () => ({ keys: [], list_complete: true, cursor: '' })),
+  getWithMetadata: vi.fn(),
+} as unknown as KVNamespace;
+
+const mockEnv: Env = { MY_KV: mockKV };
+const mockCtx: ExecutionContext = {
+  waitUntil: vi.fn(),
+  passThroughOnException: vi.fn(),
+};
+
+const response = await worker.fetch(
+  new Request('http://localhost/test'),
+  mockEnv,
+  mockCtx
+);
+```
+
+## Binding Access Patterns
+
+### Lazy Access
+
+```typescript
+// ✅ Access only when needed
+if (url.pathname === '/cached') {
+  const cached = await env.MY_KV.get('data');
+  if (cached) return new Response(cached);
+}
+```
+
+### Parallel Access
+
+```typescript
+// ✅ Parallelize independent calls
+const [user, config, cache] = await Promise.all([
+  env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first(),
+  env.MY_KV.get('config'),
+  env.CACHE.get('data')
+]);
+```
+
+## Storage Selection
+
+### KV: CDN-Backed Reads
+
+```typescript
+const config = await env.MY_KV.get('app-config', { type: 'json' });
+```
+
+**Use when:** Read-heavy, <25MB, global distribution, eventual consistency OK  
+**Latency:** <10ms reads (cached), writes eventually consistent (60s)
+
+### D1: Relational Queries
+
+```typescript
+const results = await env.DB.prepare(`
+  SELECT u.name, COUNT(o.id) FROM users u
+  LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id
+`).all();
+```
+
+**Use when:** Relational data, JOINs, ACID transactions  
+**Limits:** 10GB database size, 100k rows per query
+
+### R2: Large Objects
+
+```typescript
+const object = await env.MY_BUCKET.get('large-file.zip');
+return new Response(object.body);
+```
+
+**Use when:** Files >25MB, S3-compatible API needed  
+**Limits:** 5TB per object, unlimited storage
+
+### Durable Objects: Coordination
+
+```typescript
+const id = env.COUNTER.idFromName('global');
+const stub = env.COUNTER.get(id);
+await stub.fetch(new Request('https://fake/increment'));
+```
+
+**Use when:** Strong consistency, real-time coordination, WebSocket state  
+**Guarantees:** Single-threaded execution, transactional storage
+
+## Anti-Patterns
+
+**❌ Hardcoding credentials:** `const apiKey = 'sk_live_abc123'`  
+**✅** `npx wrangler secret put API_KEY`
+
+**❌ Using REST API:** `fetch('https://api.cloudflare.com/.../kv/...')`  
+**✅** `env.MY_KV.get('key')`
+
+**❌ Polling storage:** `setInterval(() => env.KV.get('config'), 1000)`  
+**✅** Use Durable Objects for real-time state
+
+**❌ Large data in vars:** `{ "vars": { "HUGE_CONFIG": "..." } }` (5KB max)  
+**✅** `env.MY_KV.put('config', data)`
+
+**❌ Caching env globally:** `const apiKey = env.API_KEY` outside fetch()  
+**✅** Access `env.API_KEY` per-request inside fetch()
+
+## See Also
+
+- [Service Bindings Docs](https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/)
+- [Miniflare Testing](https://miniflare.dev/)

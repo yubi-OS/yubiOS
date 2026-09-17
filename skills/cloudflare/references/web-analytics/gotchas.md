@@ -1,1 +1,82 @@
-IyBXZWIgQW5hbHl0aWNzIEdvdGNoYXMKCiMjIENyaXRpY2FsIElzc3VlcwoKIyMjIFNQQSBOYXZpZ2F0aW9uIE5vdCBUcmFja2VkCgoqKlN5bXB0b206KiogT25seSBpbml0aWFsIHBhZ2Vsb2FkIGNvdW50ZWQgIAoqKkZpeDoqKiBBZGQgYHNwYTogdHJ1ZWA6CmBgYGh0bWwKPHNjcmlwdCBkYXRhLWNmLWJlYWNvbj0neyJ0b2tlbiI6ICJUT0tFTiIsICJzcGEiOiB0cnVlfScgLi4uPjwvc2NyaXB0PgpgYGAKCiMjIyBDU1AgQmxvY2tpbmcgQmVhY29uCgoqKlN5bXB0b206KiogQ29uc29sZSBlcnJvciAiUmVmdXNlZCB0byBsb2FkIHNjcmlwdCIgIAoqKkZpeDoqKiBBbGxvdyBib3RoIGRvbWFpbnM6CmBgYApzY3JpcHQtc3JjICdzZWxmJyBodHRwczovL3N0YXRpYy5jbG91ZGZsYXJlaW5zaWdodHMuY29tIGh0dHBzOi8vY2xvdWRmbGFyZWluc2lnaHRzLmNvbTsKYGBgCgojIyMgSGFzaC1CYXNlZCBSb3V0aW5nIFVuc3VwcG9ydGVkCgoqKlN5bXB0b206KiogYCMvcGF0aGAgVVJMcyBub3QgdHJhY2tlZCAgCioqRml4OioqIE1pZ3JhdGUgdG8gSGlzdG9yeSBBUEkgKGBCcm93c2VyUm91dGVyYCwgbm90IGBIYXNoUm91dGVyYCkuIE5vIHdvcmthcm91bmQgZm9yIGhhc2ggcm91dGluZy4KCiMjIyBObyBEYXRhIEFwcGVhcmluZwoKKipDYXVzZXMgJiBGaXhlczoqKgoxLiAqKkRlbGF5KiogLSBXYWl0IDUtMTUgbWludXRlcwoyLiAqKldyb25nIHRva2VuKiogLSBWZXJpZnkgbWF0Y2hlcyBkYXNoYm9hcmQgZXhhY3RseQozLiAqKlNjcmlwdCBibG9ja2VkKiogLSBDaGVjayBEZXZUb29scyBOZXR3b3JrIHRhYiBmb3IgYmVhY29uLm1pbi5qcwo0LiAqKkRvbWFpbiBtaXNtYXRjaCoqIC0gRGFzaGJvYXJkIHNpdGUgbXVzdCBtYXRjaCBhY3R1YWwgVVJMCgojIyMgQXV0by1JbmplY3Rpb24gRmFpbHMKCioqQ2F1c2U6KiogYENhY2hlLUNvbnRyb2w6IG5vLXRyYW5zZm9ybWAgaGVhZGVyICAKKipGaXg6KiogUmVtb3ZlIGBuby10cmFuc2Zvcm1gIG9yIGluc3RhbGwgYmVhY29uIG1hbnVhbGx5CgojIyMgRHVwbGljYXRlIFBhZ2V2aWV3cwoKKipDYXVzZToqKiBNdWx0aXBsZSBiZWFjb24gc2NyaXB0cyAgCioqRml4OioqIEtlZXAgb25seSBvbmUgYmVhY29uIHBlciBwYWdlCgojIyBDb25maWd1cmF0aW9uIElzc3VlcwoKfCBJc3N1ZSB8IEZpeCB8CnwtLS0tLS0tfC0tLS0tfAp8IDEwLXNpdGUgbGltaXQgcmVhY2hlZCB8IERlbGV0ZSBvbGQgc2l0ZXMgb3IgcHJveHkgdGhyb3VnaCBDRiAodW5saW1pdGVkKSB8CnwgVG9rZW4gbm90IHJlY29nbml6ZWQgfCBVc2UgZXhhY3QgYWxwaGFudW1lcmljIHRva2VuIGZyb20gZGFzaGJvYXJkIHwKCiMjIEZyYW1ld29yay1TcGVjaWZpYwoKIyMjIE5leHQuanMgSHlkcmF0aW9uIFdhcm5pbmcKCmBgYHRzeAo8c2NyaXB0IHN1cHByZXNzSHlkcmF0aW9uV2FybmluZyAuLi4gLz4KYGBgCgojIyMgR2F0c2J5IFdpbmRvdyBVbmRlZmluZWQKClVzZSBgZ2F0c2J5LWJyb3dzZXIuanNgIHRvIGxvYWQgY2xpZW50LXNpZGUgb25seS4KCiMjIExpbWl0cwoKfCBSZXNvdXJjZSB8IExpbWl0IHwKfC0tLS0tLS0tLS18LS0tLS0tLXwKfCBOb24tcHJveGllZCBzaXRlcyB8IDEwIHwKfCBQcm94aWVkIHNpdGVzIHwgVW5saW1pdGVkIHwKfCBEYXRhIHJldGVudGlvbiB8IDYgbW9udGhzIHwKfCBJbmdlc3Rpb24gZGVsYXkgfCA1LTEwIG1pbiB8CnwgQVBJIGFjY2VzcyB8IE5vbmUgKGRhc2hib2FyZCBvbmx5KSB8CgojIyBXaGVuIE5PVCB0byBVc2UgV2ViIEFuYWx5dGljcwoKVXNlIGFsdGVybmF0aXZlcyBpZiB5b3UgbmVlZDoKLSBDdXN0b20gZXZlbnQgdHJhY2tpbmcKLSBSZWFsLXRpbWUgZGF0YQotIFVzZXItbGV2ZWwgdHJhY2tpbmcKLSBDb252ZXJzaW9uIGZ1bm5lbHMKLSBEYXRhIGV4cG9ydC9BUEkgYWNjZXNzCgoqKldlYiBBbmFseXRpY3MgZXhjZWxzIGF0OioqIENvcmUgV2ViIFZpdGFscywgYmFzaWMgdHJhZmZpYywgcHJpdmFjeSBjb21wbGlhbmNlLCBmcmVlIHVubGltaXRlZCBwYWdldmlld3MuCg==
+# Web Analytics Gotchas
+
+## Critical Issues
+
+### SPA Navigation Not Tracked
+
+**Symptom:** Only initial pageload counted  
+**Fix:** Add `spa: true`:
+```html
+<script data-cf-beacon='{"token": "TOKEN", "spa": true}' ...></script>
+```
+
+### CSP Blocking Beacon
+
+**Symptom:** Console error "Refused to load script"  
+**Fix:** Allow both domains:
+```
+script-src 'self' https://static.cloudflareinsights.com https://cloudflareinsights.com;
+```
+
+### Hash-Based Routing Unsupported
+
+**Symptom:** `#/path` URLs not tracked  
+**Fix:** Migrate to History API (`BrowserRouter`, not `HashRouter`). No workaround for hash routing.
+
+### No Data Appearing
+
+**Causes & Fixes:**
+1. **Delay** - Wait 5-15 minutes
+2. **Wrong token** - Verify matches dashboard exactly
+3. **Script blocked** - Check DevTools Network tab for beacon.min.js
+4. **Domain mismatch** - Dashboard site must match actual URL
+
+### Auto-Injection Fails
+
+**Cause:** `Cache-Control: no-transform` header  
+**Fix:** Remove `no-transform` or install beacon manually
+
+### Duplicate Pageviews
+
+**Cause:** Multiple beacon scripts  
+**Fix:** Keep only one beacon per page
+
+## Configuration Issues
+
+| Issue | Fix |
+|-------|-----|
+| 10-site limit reached | Delete old sites or proxy through CF (unlimited) |
+| Token not recognized | Use exact alphanumeric token from dashboard |
+
+## Framework-Specific
+
+### Next.js Hydration Warning
+
+```tsx
+<script suppressHydrationWarning ... />
+```
+
+### Gatsby Window Undefined
+
+Use `gatsby-browser.js` to load client-side only.
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Non-proxied sites | 10 |
+| Proxied sites | Unlimited |
+| Data retention | 6 months |
+| Ingestion delay | 5-10 min |
+| API access | None (dashboard only) |
+
+## When NOT to Use Web Analytics
+
+Use alternatives if you need:
+- Custom event tracking
+- Real-time data
+- User-level tracking
+- Conversion funnels
+- Data export/API access
+
+**Web Analytics excels at:** Core Web Vitals, basic traffic, privacy compliance, free unlimited pageviews.

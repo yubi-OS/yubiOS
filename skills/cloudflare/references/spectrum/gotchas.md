@@ -1,1 +1,145 @@
-IyMgQ29tbW9uIElzc3VlcwoKIyMjIENvbm5lY3Rpb24gVGltZW91dHMKCioqUHJvYmxlbToqKiBDb25uZWN0aW9ucyBmYWlsIG9yIHRpbWVvdXQgIAoqKkNhdXNlOioqIE9yaWdpbiBmaXJld2FsbCBibG9ja2luZyBDbG91ZGZsYXJlIElQcywgb3JpZ2luIHNlcnZpY2Ugbm90IHJ1bm5pbmcsIGluY29ycmVjdCBETlMgIAoqKlNvbHV0aW9uOioqCjEuIFZlcmlmeSBvcmlnaW4gZmlyZXdhbGwgYWxsb3dzIENsb3VkZmxhcmUgSVAgcmFuZ2VzCjIuIENoZWNrIG9yaWdpbiBzZXJ2aWNlIHJ1bm5pbmcgb24gY29ycmVjdCBwb3J0CjMuIEVuc3VyZSBETlMgcmVjb3JkIGlzIENOQU1FIChub3QgQS9BQUFBKQo0LiBWZXJpZnkgb3JpZ2luIElQL2hvc3RuYW1lIGlzIGNvcnJlY3QKCmBgYGJhc2gKIyBUZXN0IGNvbm5lY3Rpdml0eQpuYyAtenYgYXBwLmV4YW1wbGUuY29tIDIyCmRpZyBhcHAuZXhhbXBsZS5jb20KYGBgCgojIyMgQ2xpZW50IElQIFNob3dpbmcgQ2xvdWRmbGFyZSBJUAoKKipQcm9ibGVtOioqIE9yaWdpbiBsb2dzIHNob3cgQ2xvdWRmbGFyZSBJUHMgbm90IHJlYWwgY2xpZW50IElQcyAgCioqQ2F1c2U6KiogUHJveHkgUHJvdG9jb2wgbm90IGVuYWJsZWQgb3Igb3JpZ2luIG5vdCBjb25maWd1cmVkICAKKipTb2x1dGlvbjoqKgpgYGB0eXBlc2NyaXB0Ci8vIEVuYWJsZSBpbiBTcGVjdHJ1bSBhcHAKY29uc3QgYXBwID0gYXdhaXQgY2xpZW50LnNwZWN0cnVtLmFwcHMuY3JlYXRlKHsKICAvLyAuLi4KICBwcm94eV9wcm90b2NvbDogJ3YxJywgIC8vIFRDUDogdjEvdjI7IFVEUDogc2ltcGxlCn0pOwpgYGAKCioqT3JpZ2luIGNvbmZpZzoqKgotICoqbmdpbngqKjogYGxpc3RlbiAyMiBwcm94eV9wcm90b2NvbDtgCi0gKipIQVByb3h5Kio6IGBiaW5kIDoyMiBhY2NlcHQtcHJveHlgCgojIyMgVExTIEVycm9ycwoKKipQcm9ibGVtOioqIFRMUyBoYW5kc2hha2UgZmFpbHVyZXMsIDUyNSBlcnJvcnMgIAoqKkNhdXNlOioqIFRMUyBtb2RlIG1pc21hdGNoCgp8IEVycm9yIHwgVExTIE1vZGUgfCBQcm9ibGVtIHwgU29sdXRpb24gfAp8LS0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IENvbm5lY3Rpb24gcmVmdXNlZCB8IGBmdWxsYC9gc3RyaWN0YCB8IE9yaWdpbiBub3QgVExTIHwgVXNlIGB0bHM6ICJvZmYiYCBvciBlbmFibGUgVExTIHwKfCA1MjUgY2VydCBpbnZhbGlkIHwgYHN0cmljdGAgfCBTZWxmLXNpZ25lZCBjZXJ0IHwgVXNlIGB0bHM6ICJmdWxsImAgb3IgdmFsaWQgY2VydCB8CnwgSGFuZHNoYWtlIHRpbWVvdXQgfCBgZmxleGlibGVgIHwgT3JpZ2luIGV4cGVjdHMgVExTIHwgVXNlIGB0bHM6ICJmdWxsImAgfAoKKipEZWJ1ZzoqKgpgYGBiYXNoCm9wZW5zc2wgc19jbGllbnQgLWNvbm5lY3QgYXBwLmV4YW1wbGUuY29tOjQ0MyAtc2hvd2NlcnRzCmBgYAoKIyMjIFNNVFAgUmV2ZXJzZSBETlMKCioqUHJvYmxlbToqKiBFbWFpbCBzZXJ2ZXJzIHJlamVjdCBTTVRQIHZpYSBTcGVjdHJ1bSAgCioqQ2F1c2U6KiogU3BlY3RydW0gSVBzIGxhY2sgUFRSIChyZXZlcnNlIEROUykgcmVjb3JkcyAgCioqSW1wYWN0OioqIE1hbnkgbWFpbCBzZXJ2ZXJzIHJlcXVpcmUgdmFsaWQgckROUyBmb3IgYW50aS1zcGFtCgoqKlNvbHV0aW9uOioqCi0gT3V0Ym91bmQgU01UUDogTk9UIHJlY29tbWVuZGVkIHRocm91Z2ggU3BlY3RydW0KLSBJbmJvdW5kIFNNVFA6IFVzZSBDbG91ZGZsYXJlIEVtYWlsIFJvdXRpbmcKLSBJbnRlcm5hbCByZWxheTogV2hpdGVsaXN0IFNwZWN0cnVtIElQcyBvbiBkZXN0aW5hdGlvbgoKIyMjIFByb3h5IFByb3RvY29sIENvbXBhdGliaWxpdHkKCioqUHJvYmxlbToqKiBDb25uZWN0aW9uIHdvcmtzIGJ1dCBhcHAgYmVoYXZlcyBpbmNvcnJlY3RseSAgCioqQ2F1c2U6KiogT3JpZ2luIGRvZXNuJ3Qgc3VwcG9ydCBQcm94eSBQcm90b2NvbAoKKipTb2x1dGlvbjoqKgoxLiBWZXJpZnkgb3JpZ2luIHN1cHBvcnRzIHZlcnNpb24gKHYxOiB3aWRlbHkgc3VwcG9ydGVkLCB2MjogSEFQcm94eSAxLjUrL25naW54IDEuMTErKQoyLiBUZXN0IHdpdGggYHByb3h5X3Byb3RvY29sOiAnb2ZmJ2AgZmlyc3QKMy4gQ29uZmlndXJlIG9yaWdpbiB0byBwYXJzZSBoZWFkZXJzCgoqKm5naW54IFRDUDoqKgpgYGBuZ2lueApzdHJlYW0gewogICAgc2VydmVyIHsKICAgICAgICBsaXN0ZW4gMjIgcHJveHlfcHJvdG9jb2w7CiAgICAgICAgcHJveHlfcGFzcyBiYWNrZW5kOjIyOwogICAgfQp9CmBgYAoKKipIQVByb3h5OioqCmBgYApmcm9udGVuZCBmdF9zc2gKICAgIGJpbmQgOjIyIGFjY2VwdC1wcm94eQpgYGAKCiMjIyBBbmFseXRpY3MgRGF0YSBSZXRlbnRpb24KCioqUHJvYmxlbToqKiBIaXN0b3JpY2FsIGRhdGEgbm90IGF2YWlsYWJsZSAgCioqQ2F1c2U6KiogUmV0ZW50aW9uIHZhcmllcyBieSBwbGFuCgp8IFBsYW4gfCBSZWFsLXRpbWUgfCBIaXN0b3JpY2FsIHwKfC0tLS0tLXwtLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgUHJvIHwgTGFzdCBob3VyIHwg4p2MIHwKfCBCdXNpbmVzcyB8IExhc3QgaG91ciB8IExpbWl0ZWQgfAp8IEVudGVycHJpc2UgfCBMYXN0IGhvdXIgfCA5MCsgZGF5cyB8CgoqKlNvbHV0aW9uOioqIFF1ZXJ5IHdpdGhpbiByZXRlbnRpb24gd2luZG93IG9yIGV4cG9ydCB0byBleHRlcm5hbCBzeXN0ZW0KCiMjIyBFbnRlcnByaXNlLU9ubHkgRmVhdHVyZXMKCioqUHJvYmxlbToqKiBGZWF0dXJlIHVuYXZhaWxhYmxlL2Vycm9ycyAgCioqQ2F1c2U6KiogUmVxdWlyZXMgRW50ZXJwcmlzZSBwbGFuCgoqKkVudGVycHJpc2Utb25seToqKgotIFBvcnQgcmFuZ2VzIChgdGNwLzI1NTY1LTI1NTc1YCkKLSBBbGwgVENQL1VEUCBwb3J0cyAoUHJvL0J1c2luZXNzOiBzZWxlY3RlZCBvbmx5KQotIEV4dGVuZGVkIGFuYWx5dGljcyByZXRlbnRpb24KLSBBZHZhbmNlZCBsb2FkIGJhbGFuY2luZwoKIyMjIElQdjYgQ29uc2lkZXJhdGlvbnMKCioqUHJvYmxlbToqKiBJUHY2IGNsaWVudHMgY2FuJ3QgY29ubmVjdCBvciBvcmlnaW4gZG9lc24ndCBzdXBwb3J0IElQdjYgIAoqKlNvbHV0aW9uOioqIENvbmZpZ3VyZSBgZWRnZV9pcHMuY29ubmVjdGl2aXR5YAoKYGBgdHlwZXNjcmlwdApjb25zdCBhcHAgPSBhd2FpdCBjbGllbnQuc3BlY3RydW0uYXBwcy5jcmVhdGUoewogIC8vIC4uLgogIGVkZ2VfaXBzOiB7CiAgICB0eXBlOiAnZHluYW1pYycsCiAgICBjb25uZWN0aXZpdHk6ICdpcHY0JywgIC8vIE9wdGlvbnM6ICdhbGwnLCAnaXB2NCcsICdpcHY2JwogIH0sCn0pOwpgYGAKCioqT3B0aW9uczoqKgotIGBhbGxgOiBEdWFsLXN0YWNrIChkZWZhdWx0LCByZXF1aXJlcyBvcmlnaW4gc3VwcG9ydCBib3RoKQotIGBpcHY0YDogSVB2NCBvbmx5ICh1c2UgaWYgb3JpZ2luIGxhY2tzIElQdjYpCi0gYGlwdjZgOiBJUHY2IG9ubHkgKHJhcmUpCgojIyBMaW1pdHMKCnwgUmVzb3VyY2UgfCBQcm8vQnVzaW5lc3MgfCBFbnRlcnByaXNlIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tfAp8IE1heCBhcHBzIHwgfjEwLTE1IHwgMTAwKyB8CnwgUHJvdG9jb2xzIHwgU2VsZWN0ZWQgfCBBbGwgVENQL1VEUCB8CnwgUG9ydCByYW5nZXMgfCDinYwgfCDinIUgfAp8IEFuYWx5dGljcyB8IH4xIGhvdXIgfCA5MCsgZGF5cyB8CgojIyBTZWUgQWxzbwoKLSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSAtIFByb3RvY29sIGV4YW1wbGVzCi0gW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIC0gVExTL1Byb3h5IHNldHVwCg==
+## Common Issues
+
+### Connection Timeouts
+
+**Problem:** Connections fail or timeout  
+**Cause:** Origin firewall blocking Cloudflare IPs, origin service not running, incorrect DNS  
+**Solution:**
+1. Verify origin firewall allows Cloudflare IP ranges
+2. Check origin service running on correct port
+3. Ensure DNS record is CNAME (not A/AAAA)
+4. Verify origin IP/hostname is correct
+
+```bash
+# Test connectivity
+nc -zv app.example.com 22
+dig app.example.com
+```
+
+### Client IP Showing Cloudflare IP
+
+**Problem:** Origin logs show Cloudflare IPs not real client IPs  
+**Cause:** Proxy Protocol not enabled or origin not configured  
+**Solution:**
+```typescript
+// Enable in Spectrum app
+const app = await client.spectrum.apps.create({
+  // ...
+  proxy_protocol: 'v1',  // TCP: v1/v2; UDP: simple
+});
+```
+
+**Origin config:**
+- **nginx**: `listen 22 proxy_protocol;`
+- **HAProxy**: `bind :22 accept-proxy`
+
+### TLS Errors
+
+**Problem:** TLS handshake failures, 525 errors  
+**Cause:** TLS mode mismatch
+
+| Error | TLS Mode | Problem | Solution |
+|-------|----------|---------|----------|
+| Connection refused | `full`/`strict` | Origin not TLS | Use `tls: "off"` or enable TLS |
+| 525 cert invalid | `strict` | Self-signed cert | Use `tls: "full"` or valid cert |
+| Handshake timeout | `flexible` | Origin expects TLS | Use `tls: "full"` |
+
+**Debug:**
+```bash
+openssl s_client -connect app.example.com:443 -showcerts
+```
+
+### SMTP Reverse DNS
+
+**Problem:** Email servers reject SMTP via Spectrum  
+**Cause:** Spectrum IPs lack PTR (reverse DNS) records  
+**Impact:** Many mail servers require valid rDNS for anti-spam
+
+**Solution:**
+- Outbound SMTP: NOT recommended through Spectrum
+- Inbound SMTP: Use Cloudflare Email Routing
+- Internal relay: Whitelist Spectrum IPs on destination
+
+### Proxy Protocol Compatibility
+
+**Problem:** Connection works but app behaves incorrectly  
+**Cause:** Origin doesn't support Proxy Protocol
+
+**Solution:**
+1. Verify origin supports version (v1: widely supported, v2: HAProxy 1.5+/nginx 1.11+)
+2. Test with `proxy_protocol: 'off'` first
+3. Configure origin to parse headers
+
+**nginx TCP:**
+```nginx
+stream {
+    server {
+        listen 22 proxy_protocol;
+        proxy_pass backend:22;
+    }
+}
+```
+
+**HAProxy:**
+```
+frontend ft_ssh
+    bind :22 accept-proxy
+```
+
+### Analytics Data Retention
+
+**Problem:** Historical data not available  
+**Cause:** Retention varies by plan
+
+| Plan | Real-time | Historical |
+|------|-----------|------------|
+| Pro | Last hour | ❌ |
+| Business | Last hour | Limited |
+| Enterprise | Last hour | 90+ days |
+
+**Solution:** Query within retention window or export to external system
+
+### Enterprise-Only Features
+
+**Problem:** Feature unavailable/errors  
+**Cause:** Requires Enterprise plan
+
+**Enterprise-only:**
+- Port ranges (`tcp/25565-25575`)
+- All TCP/UDP ports (Pro/Business: selected only)
+- Extended analytics retention
+- Advanced load balancing
+
+### IPv6 Considerations
+
+**Problem:** IPv6 clients can't connect or origin doesn't support IPv6  
+**Solution:** Configure `edge_ips.connectivity`
+
+```typescript
+const app = await client.spectrum.apps.create({
+  // ...
+  edge_ips: {
+    type: 'dynamic',
+    connectivity: 'ipv4',  // Options: 'all', 'ipv4', 'ipv6'
+  },
+});
+```
+
+**Options:**
+- `all`: Dual-stack (default, requires origin support both)
+- `ipv4`: IPv4 only (use if origin lacks IPv6)
+- `ipv6`: IPv6 only (rare)
+
+## Limits
+
+| Resource | Pro/Business | Enterprise |
+|----------|--------------|------------|
+| Max apps | ~10-15 | 100+ |
+| Protocols | Selected | All TCP/UDP |
+| Port ranges | ❌ | ✅ |
+| Analytics | ~1 hour | 90+ days |
+
+## See Also
+
+- [patterns.md](patterns.md) - Protocol examples
+- [configuration.md](configuration.md) - TLS/Proxy setup

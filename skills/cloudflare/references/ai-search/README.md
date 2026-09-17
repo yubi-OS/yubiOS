@@ -1,1 +1,138 @@
-IyBDbG91ZGZsYXJlIEFJIFNlYXJjaCBSZWZlcmVuY2UKCkV4cGVydCBndWlkYW5jZSBmb3IgaW1wbGVtZW50aW5nIENsb3VkZmxhcmUgQUkgU2VhcmNoIChmb3JtZXJseSBBdXRvUkFHKSwgQ2xvdWRmbGFyZSdzIG1hbmFnZWQgc2VtYW50aWMgc2VhcmNoIGFuZCBSQUcgc2VydmljZS4KCiMjIE92ZXJ2aWV3CgoqKkFJIFNlYXJjaCoqIGlzIGEgbWFuYWdlZCBSQUcgKFJldHJpZXZhbC1BdWdtZW50ZWQgR2VuZXJhdGlvbikgcGlwZWxpbmUgdGhhdCBjb21iaW5lczoKLSBBdXRvbWF0aWMgc2VtYW50aWMgaW5kZXhpbmcgb2YgeW91ciBjb250ZW50Ci0gVmVjdG9yIHNpbWlsYXJpdHkgc2VhcmNoCi0gQnVpbHQtaW4gTExNIGdlbmVyYXRpb24KCioqS2V5IHZhbHVlIHByb3Bvc2l0aW9uczoqKgotICoqWmVybyB2ZWN0b3IgbWFuYWdlbWVudCoqIC0gTm8gbWFudWFsIGVtYmVkZGluZywgaW5kZXhpbmcsIG9yIHN0b3JhZ2UKLSAqKkF1dG8taW5kZXhpbmcqKiAtIENvbnRlbnQgYXV0b21hdGljYWxseSByZS1pbmRleGVkIGV2ZXJ5IDYgaG91cnMKLSAqKkJ1aWx0LWluIGdlbmVyYXRpb24qKiAtIE9wdGlvbmFsIEFJIHJlc3BvbnNlIGdlbmVyYXRpb24gZnJvbSByZXRyaWV2ZWQgY29udGV4dAotICoqTXVsdGktc291cmNlKiogLSBJbmRleCBmcm9tIFIyIGJ1Y2tldHMgb3Igd2Vic2l0ZSBjcmF3bHMKCioqRGF0YSBzb3VyY2Ugb3B0aW9uczoqKgotICoqUjIgYnVja2V0KiogLSBJbmRleCBmaWxlcyBmcm9tIENsb3VkZmxhcmUgUjIgKHN1cHBvcnRzIE1ELCBUWFQsIEhUTUwsIFBERiwgRE9DLCBDU1YsIEpTT04pCi0gKipXZWJzaXRlKiogLSBDcmF3bCBhbmQgaW5kZXggd2Vic2l0ZSBjb250ZW50IChyZXF1aXJlcyBDbG91ZGZsYXJlLWhvc3RlZCBkb21haW4pCgoqKkluZGV4aW5nIGxpZmVjeWNsZToqKgotIEF1dG9tYXRpYyA2LWhvdXIgcmVmcmVzaCBjeWNsZQotIE1hbnVhbCAiRm9yY2UgU3luYyIgYXZhaWxhYmxlICgzMHMgcmF0ZSBsaW1pdCkKLSBOb3QgZGVzaWduZWQgZm9yIHJlYWwtdGltZSB1cGRhdGVzCgojIyBRdWljayBTdGFydAoKKioxLiBDcmVhdGUgQUkgU2VhcmNoIGluc3RhbmNlIGluIGRhc2hib2FyZDoqKgotIEdvIHRvIENsb3VkZmxhcmUgRGFzaGJvYXJkIOKGkiBBSSBTZWFyY2gg4oaSIENyZWF0ZQotIENob29zZSBkYXRhIHNvdXJjZSAoUjIgb3Igd2Vic2l0ZSkKLSBDb25maWd1cmUgaW5zdGFuY2UgbmFtZSBhbmQgc2V0dGluZ3MKCioqMi4gQ29uZmlndXJlIFdvcmtlcjoqKgoKYGBganNvbmMKLy8gd3JhbmdsZXIuanNvbmMKewogICJhaSI6IHsKICAgICJiaW5kaW5nIjogIkFJIgogIH0KfQpgYGAKCioqMy4gVXNlIGluIFdvcmtlcjoqKgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52KSB7CiAgICBjb25zdCBhbnN3ZXIgPSBhd2FpdCBlbnYuQUkuYXV0b3JhZygibXktc2VhcmNoLWluc3RhbmNlIikuYWlTZWFyY2goewogICAgICBxdWVyeTogIkhvdyBkbyBJIGNvbmZpZ3VyZSBjYWNoaW5nPyIsCiAgICAgIG1vZGVsOiAiQGNmL21ldGEvbGxhbWEtMy4zLTcwYi1pbnN0cnVjdC1mcDgtZmFzdCIKICAgIH0pOwogICAgCiAgICByZXR1cm4gUmVzcG9uc2UuanNvbih7IGFuc3dlcjogYW5zd2VyLnJlc3BvbnNlIH0pOwogIH0KfTsKYGBgCgojIyBXaGVuIHRvIFVzZSBBSSBTZWFyY2gKCiMjIyBBSSBTZWFyY2ggdnMgVmVjdG9yaXplCgp8IEZhY3RvciB8IEFJIFNlYXJjaCB8IFZlY3Rvcml6ZSB8CnwtLS0tLS0tLXwtLS0tLS0tLS0tLXwtLS0tLS0tLS0tLXwKfCAqKk1hbmFnZW1lbnQqKiB8IEZ1bGx5IG1hbmFnZWQgfCBNYW51YWwgZW1iZWRkaW5nICsgaW5kZXhpbmcgfAp8ICoqVXNlIHdoZW4qKiB8IFdhbnQgemVyby1vcHMgUkFHIHBpcGVsaW5lIHwgTmVlZCBjdXN0b20gZW1iZWRkaW5ncy9jb250cm9sIHwKfCAqKkluZGV4aW5nKiogfCBBdXRvbWF0aWMgKDZociBjeWNsZSkgfCBNYW51YWwgdmlhIEFQSSB8CnwgKipHZW5lcmF0aW9uKiogfCBCdWlsdC1pbiBvcHRpb25hbCB8IEJyaW5nIHlvdXIgb3duIExMTSB8CnwgKipEYXRhIHNvdXJjZXMqKiB8IFIyIG9yIHdlYnNpdGUgfCBNYW51YWwgaW5zZXJ0IHwKfCAqKkJlc3QgZm9yKiogfCBEb2NzLCBzdXBwb3J0LCBlbnRlcnByaXNlIHNlYXJjaCB8IEN1c3RvbSBNTCBwaXBlbGluZXMsIHJlYWwtdGltZSB8CgojIyMgQUkgU2VhcmNoIHZzIERpcmVjdCBXb3JrZXJzIEFJCgp8IEZhY3RvciB8IEFJIFNlYXJjaCB8IFdvcmtlcnMgQUkgKGRpcmVjdCkgfAp8LS0tLS0tLS18LS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tLS0tfAp8ICoqQ29udGV4dCoqIHwgQXV0b21hdGljIHJldHJpZXZhbCB8IE1hbnVhbCBjb250ZXh0IGJ1aWxkaW5nIHwKfCAqKlVzZSB3aGVuKiogfCBOZWVkIFJBRyAoc2VhcmNoICsgZ2VuZXJhdGUpIHwgU2ltcGxlIGdlbmVyYXRpb24gdGFza3MgfAp8ICoqSW5kZXhpbmcqKiB8IEJ1aWx0LWluIHwgTm90IGFwcGxpY2FibGUgfAp8ICoqQmVzdCBmb3IqKiB8IEtub3dsZWRnZSBiYXNlcywgZG9jcyB8IFNpbXBsZSBjaGF0LCB0cmFuc2Zvcm1hdGlvbnMgfAoKIyMjIHNlYXJjaCgpIHZzIGFpU2VhcmNoKCkKCnwgTWV0aG9kIHwgUmV0dXJucyB8IFVzZSBXaGVuIHwKfC0tLS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IGBzZWFyY2goKWAgfCBTZWFyY2ggcmVzdWx0cyBvbmx5IHwgQnVpbGRpbmcgY3VzdG9tIFVJLCBuZWVkIHJhdyBjaHVua3MgfAp8IGBhaVNlYXJjaCgpYCB8IEFJIHJlc3BvbnNlICsgcmVzdWx0cyB8IE5lZWQgcmVhZHktdG8tdXNlIGFuc3dlciAoY2hhdGJvdCwgUSZBKSB8CgojIyMgUmVhbC10aW1lIFVwZGF0ZXMgQ29uc2lkZXJhdGlvbgoKKipBSSBTZWFyY2ggaXMgTk9UIGlkZWFsIGlmOioqCi0gTmVlZCByZWFsLXRpbWUgY29udGVudCB1cGRhdGVzICg8NiBob3VycykKLSBDb250ZW50IGNoYW5nZXMgbXVsdGlwbGUgdGltZXMgcGVyIGhvdXIKLSBTdHJpY3QgZnJlc2huZXNzIHJlcXVpcmVtZW50cwoKKipBSSBTZWFyY2ggSVMgaWRlYWwgaWY6KioKLSBDb250ZW50IHJlbGF0aXZlbHkgc3RhYmxlIChkb2NzLCBwb2xpY2llcywga25vd2xlZGdlIGJhc2VzKQotIDYtaG91ciByZWZyZXNoIGFjY2VwdGFibGUKLSBQcmVmZXIgemVyby1vcHMgb3ZlciByZWFsLXRpbWUKCiMjIFBsYXRmb3JtIExpbWl0cwoKfCBMaW1pdCB8IFZhbHVlIHwKfC0tLS0tLS18LS0tLS0tLXwKfCBNYXggaW5zdGFuY2VzIHBlciBhY2NvdW50IHwgMTAgfAp8IE1heCBmaWxlcyBwZXIgaW5zdGFuY2UgfCAxMDAsMDAwIHwKfCBNYXggZmlsZSBzaXplIHwgNCBNQiB8CnwgSW5kZXggZnJlcXVlbmN5IHwgRXZlcnkgNiBob3VycyB8CnwgRm9yY2UgU3luYyByYXRlIGxpbWl0IHwgT25jZSBwZXIgMzAgc2Vjb25kcyB8CnwgRmlsdGVyIG5lc3RpbmcgZGVwdGggfCAyIGxldmVscyB8CnwgRmlsdGVycyBwZXIgY29tcG91bmQgfCAxMCB8CnwgU2NvcmUgdGhyZXNob2xkIHJhbmdlIHwgMC4wIC0gMS4wIHwKCiMjIFJlYWRpbmcgT3JkZXIKCk5hdmlnYXRlIHRoZXNlIHJlZmVyZW5jZXMgYmFzZWQgb24geW91ciB0YXNrOgoKfCBUYXNrIHwgUmVhZCB8IEVzdC4gVGltZSB8CnwtLS0tLS18LS0tLS0tfC0tLS0tLS0tLS0tfAp8ICoqVW5kZXJzdGFuZCBBSSBTZWFyY2gqKiB8IFJFQURNRSBvbmx5IHwgNSBtaW4gfAp8ICoqSW1wbGVtZW50IGJhc2ljIHNlYXJjaCoqIHwgUkVBRE1FIOKGkiBhcGkubWQgfCAxMCBtaW4gfAp8ICoqQ29uZmlndXJlIGRhdGEgc291cmNlKiogfCBSRUFETUUg4oaSIGNvbmZpZ3VyYXRpb24ubWQgfCAxMCBtaW4gfAp8ICoqUHJvZHVjdGlvbiBwYXR0ZXJucyoqIHwgcGF0dGVybnMubWQgfCAxNSBtaW4gfAp8ICoqRGVidWcgaXNzdWVzKiogfCBnb3RjaGFzLm1kIHwgMTAgbWluIHwKfCAqKkZ1bGwgaW1wbGVtZW50YXRpb24qKiB8IFJFQURNRSDihpIgYXBpLm1kIOKGkiBwYXR0ZXJucy5tZCB8IDMwIG1pbiB8CgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSAqKlthcGkubWRdKGFwaS5tZCkqKiAtIEFQSSBlbmRwb2ludHMsIG1ldGhvZHMsIFR5cGVTY3JpcHQgaW50ZXJmYWNlcwotICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBTZXR1cCwgZGF0YSBzb3VyY2VzLCB3cmFuZ2xlciBjb25maWcKLSAqKltwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpKiogLSBDb21tb24gcGF0dGVybnMsIGRlY2lzaW9uIGd1aWRhbmNlLCBjb2RlIGV4YW1wbGVzCi0gKipbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkqKiAtIFRyb3VibGVzaG9vdGluZywgY29kZS1sZXZlbCBnb3RjaGFzLCBsaW1pdHMKCiMjIFNlZSBBbHNvCgotIFtDbG91ZGZsYXJlIEFJIFNlYXJjaCBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWktc2VhcmNoLykKLSBbV29ya2VycyBBSSBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy1haS8pCi0gW1ZlY3Rvcml6ZSBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vdmVjdG9yaXplLykK
+# Cloudflare AI Search Reference
+
+Expert guidance for implementing Cloudflare AI Search (formerly AutoRAG), Cloudflare's managed semantic search and RAG service.
+
+## Overview
+
+**AI Search** is a managed RAG (Retrieval-Augmented Generation) pipeline that combines:
+- Automatic semantic indexing of your content
+- Vector similarity search
+- Built-in LLM generation
+
+**Key value propositions:**
+- **Zero vector management** - No manual embedding, indexing, or storage
+- **Auto-indexing** - Content automatically re-indexed every 6 hours
+- **Built-in generation** - Optional AI response generation from retrieved context
+- **Multi-source** - Index from R2 buckets or website crawls
+
+**Data source options:**
+- **R2 bucket** - Index files from Cloudflare R2 (supports MD, TXT, HTML, PDF, DOC, CSV, JSON)
+- **Website** - Crawl and index website content (requires Cloudflare-hosted domain)
+
+**Indexing lifecycle:**
+- Automatic 6-hour refresh cycle
+- Manual "Force Sync" available (30s rate limit)
+- Not designed for real-time updates
+
+## Quick Start
+
+**1. Create AI Search instance in dashboard:**
+- Go to Cloudflare Dashboard → AI Search → Create
+- Choose data source (R2 or website)
+- Configure instance name and settings
+
+**2. Configure Worker:**
+
+```jsonc
+// wrangler.jsonc
+{
+  "ai": {
+    "binding": "AI"
+  }
+}
+```
+
+**3. Use in Worker:**
+
+```typescript
+export default {
+  async fetch(request, env) {
+    const answer = await env.AI.autorag("my-search-instance").aiSearch({
+      query: "How do I configure caching?",
+      model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+    });
+    
+    return Response.json({ answer: answer.response });
+  }
+};
+```
+
+## When to Use AI Search
+
+### AI Search vs Vectorize
+
+| Factor | AI Search | Vectorize |
+|--------|-----------|-----------|
+| **Management** | Fully managed | Manual embedding + indexing |
+| **Use when** | Want zero-ops RAG pipeline | Need custom embeddings/control |
+| **Indexing** | Automatic (6hr cycle) | Manual via API |
+| **Generation** | Built-in optional | Bring your own LLM |
+| **Data sources** | R2 or website | Manual insert |
+| **Best for** | Docs, support, enterprise search | Custom ML pipelines, real-time |
+
+### AI Search vs Direct Workers AI
+
+| Factor | AI Search | Workers AI (direct) |
+|--------|-----------|---------------------|
+| **Context** | Automatic retrieval | Manual context building |
+| **Use when** | Need RAG (search + generate) | Simple generation tasks |
+| **Indexing** | Built-in | Not applicable |
+| **Best for** | Knowledge bases, docs | Simple chat, transformations |
+
+### search() vs aiSearch()
+
+| Method | Returns | Use When |
+|--------|---------|----------|
+| `search()` | Search results only | Building custom UI, need raw chunks |
+| `aiSearch()` | AI response + results | Need ready-to-use answer (chatbot, Q&A) |
+
+### Real-time Updates Consideration
+
+**AI Search is NOT ideal if:**
+- Need real-time content updates (<6 hours)
+- Content changes multiple times per hour
+- Strict freshness requirements
+
+**AI Search IS ideal if:**
+- Content relatively stable (docs, policies, knowledge bases)
+- 6-hour refresh acceptable
+- Prefer zero-ops over real-time
+
+## Platform Limits
+
+| Limit | Value |
+|-------|-------|
+| Max instances per account | 10 |
+| Max files per instance | 100,000 |
+| Max file size | 4 MB |
+| Index frequency | Every 6 hours |
+| Force Sync rate limit | Once per 30 seconds |
+| Filter nesting depth | 2 levels |
+| Filters per compound | 10 |
+| Score threshold range | 0.0 - 1.0 |
+
+## Reading Order
+
+Navigate these references based on your task:
+
+| Task | Read | Est. Time |
+|------|------|-----------|
+| **Understand AI Search** | README only | 5 min |
+| **Implement basic search** | README → api.md | 10 min |
+| **Configure data source** | README → configuration.md | 10 min |
+| **Production patterns** | patterns.md | 15 min |
+| **Debug issues** | gotchas.md | 10 min |
+| **Full implementation** | README → api.md → patterns.md | 30 min |
+
+## In This Reference
+
+- **[api.md](api.md)** - API endpoints, methods, TypeScript interfaces
+- **[configuration.md](configuration.md)** - Setup, data sources, wrangler config
+- **[patterns.md](patterns.md)** - Common patterns, decision guidance, code examples
+- **[gotchas.md](gotchas.md)** - Troubleshooting, code-level gotchas, limits
+
+## See Also
+
+- [Cloudflare AI Search Docs](https://developers.cloudflare.com/ai-search/)
+- [Workers AI Docs](https://developers.cloudflare.com/workers-ai/)
+- [Vectorize Docs](https://developers.cloudflare.com/vectorize/)

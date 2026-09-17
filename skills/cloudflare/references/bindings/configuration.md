@@ -1,1 +1,188 @@
-IyBCaW5kaW5nIENvbmZpZ3VyYXRpb24gUmVmZXJlbmNlCgojIyBTdG9yYWdlIEJpbmRpbmdzCgpgYGBqc29uYwp7CiAgImt2X25hbWVzcGFjZXMiOiBbeyAiYmluZGluZyI6ICJNWV9LViIsICJpZCI6ICIuLi4iIH1dLAogICJyMl9idWNrZXRzIjogW3sgImJpbmRpbmciOiAiTVlfQlVDS0VUIiwgImJ1Y2tldF9uYW1lIjogIm15LWJ1Y2tldCIgfV0sCiAgImQxX2RhdGFiYXNlcyI6IFt7ICJiaW5kaW5nIjogIkRCIiwgImRhdGFiYXNlX25hbWUiOiAibXktZGIiLCAiZGF0YWJhc2VfaWQiOiAiLi4uIiB9XSwKICAiZHVyYWJsZV9vYmplY3RzIjogeyAiYmluZGluZ3MiOiBbeyAibmFtZSI6ICJNWV9ETyIsICJjbGFzc19uYW1lIjogIk15RE8iIH1dIH0sCiAgInZlY3Rvcml6ZSI6IFt7ICJiaW5kaW5nIjogIlZFQ1RPUklaRSIsICJpbmRleF9uYW1lIjogIm15LWluZGV4IiB9XSwKICAicXVldWVzIjogeyAicHJvZHVjZXJzIjogW3sgImJpbmRpbmciOiAiTVlfUVVFVUUiLCAicXVldWUiOiAibXktcXVldWUiIH1dIH0KfQpgYGAKCioqQ3JlYXRlIGNvbW1hbmRzOioqCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGt2IG5hbWVzcGFjZSBjcmVhdGUgTVlfS1YKbnB4IHdyYW5nbGVyIHIyIGJ1Y2tldCBjcmVhdGUgbXktYnVja2V0Cm5weCB3cmFuZ2xlciBkMSBjcmVhdGUgbXktZGIKbnB4IHdyYW5nbGVyIHZlY3Rvcml6ZSBjcmVhdGUgbXktaW5kZXggLS1kaW1lbnNpb25zPTc2OCAtLW1ldHJpYz1jb3NpbmUKbnB4IHdyYW5nbGVyIHF1ZXVlcyBjcmVhdGUgbXktcXVldWUKCiMgTGlzdCBleGlzdGluZyByZXNvdXJjZXMKbnB4IHdyYW5nbGVyIGt2IG5hbWVzcGFjZSBsaXN0Cm5weCB3cmFuZ2xlciByMiBidWNrZXQgbGlzdApucHggd3JhbmdsZXIgZDEgbGlzdApucHggd3JhbmdsZXIgdmVjdG9yaXplIGxpc3QKbnB4IHdyYW5nbGVyIHF1ZXVlcyBsaXN0CmBgYAoKIyMgQ29tcHV0ZSBCaW5kaW5ncwoKYGBganNvbmMKewogICJzZXJ2aWNlcyI6IFt7IAogICAgImJpbmRpbmciOiAiTVlfU0VSVklDRSIsIAogICAgInNlcnZpY2UiOiAib3RoZXItd29ya2VyIiwKICAgICJlbnZpcm9ubWVudCI6ICJwcm9kdWN0aW9uIiAgLy8gT3B0aW9uYWw6IHRhcmdldCBzcGVjaWZpYyBlbnYKICB9XSwKICAiYWkiOiB7ICJiaW5kaW5nIjogIkFJIiB9LAogICJicm93c2VyIjogeyAiYmluZGluZyI6ICJCUk9XU0VSIiB9LAogICJ3b3JrZmxvd3MiOiBbeyAiYmluZGluZyI6ICJNWV9XT1JLRkxPVyIsICJuYW1lIjogIm15LXdvcmtmbG93IiB9XQp9CmBgYAoKKipDcmVhdGUgd29ya2Zsb3dzOioqCmBgYGJhc2gKbnB4IHdyYW5nbGVyIHdvcmtmbG93cyBjcmVhdGUgbXktd29ya2Zsb3cKYGBgCgojIyBQbGF0Zm9ybSBCaW5kaW5ncwoKYGBganNvbmMKewogICJhbmFseXRpY3NfZW5naW5lX2RhdGFzZXRzIjogW3sgImJpbmRpbmciOiAiQU5BTFlUSUNTIiB9XSwKICAibXRsc19jZXJ0aWZpY2F0ZXMiOiBbeyAiYmluZGluZyI6ICJNWV9DRVJUIiwgImNlcnRpZmljYXRlX2lkIjogIi4uLiIgfV0sCiAgImh5cGVyZHJpdmUiOiBbeyAiYmluZGluZyI6ICJIWVBFUkRSSVZFIiwgImlkIjogIi4uLiIgfV0sCiAgInVuc2FmZSI6IHsKICAgICJiaW5kaW5ncyI6IFt7ICJuYW1lIjogIlJBVEVfTElNSVRFUiIsICJ0eXBlIjogInJhdGVsaW1pdCIsICJuYW1lc3BhY2VfaWQiOiAiLi4uIiB9XQogIH0KfQpgYGAKCiMjIENvbmZpZ3VyYXRpb24gQmluZGluZ3MKCmBgYGpzb25jCnsKICAidmFycyI6IHsKICAgICJBUElfVVJMIjogImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiwKICAgICJNQVhfUkVUUklFUyI6ICIzIgogIH0sCiAgInRleHRfYmxvYnMiOiB7ICJNWV9URVhUIjogIi4vZGF0YS90ZW1wbGF0ZS5odG1sIiB9LAogICJkYXRhX2Jsb2JzIjogeyAiTVlfREFUQSI6ICIuL2RhdGEvY29uZmlnLmJpbiIgfSwKICAid2FzbV9tb2R1bGVzIjogeyAiTVlfV0FTTSI6ICIuL2J1aWxkL21vZHVsZS53YXNtIiB9Cn0KYGBgCgoqKlNlY3JldHMgKG5ldmVyIGluIGNvbmZpZyk6KioKYGBgYmFzaApucHggd3JhbmdsZXIgc2VjcmV0IHB1dCBBUElfS0VZCmBgYAoKIyMgRW52aXJvbm1lbnQtU3BlY2lmaWMgQ29uZmlndXJhdGlvbgoKYGBganNvbmMKewogICJuYW1lIjogIm15LXdvcmtlciIsCiAgInZhcnMiOiB7ICJFTlYiOiAicHJvZHVjdGlvbiIgfSwKICAia3ZfbmFtZXNwYWNlcyI6IFt7ICJiaW5kaW5nIjogIkNBQ0hFIiwgImlkIjogInByb2Qta3YtaWQiIH1dLAogIAogICJlbnYiOiB7CiAgICAic3RhZ2luZyI6IHsKICAgICAgInZhcnMiOiB7ICJFTlYiOiAic3RhZ2luZyIgfSwKICAgICAgImt2X25hbWVzcGFjZXMiOiBbeyAiYmluZGluZyI6ICJDQUNIRSIsICJpZCI6ICJzdGFnaW5nLWt2LWlkIiB9XQogICAgfQogIH0KfQpgYGAKCioqRGVwbG95OioqCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRlcGxveSAgICAgICAgICAgICAgIyBQcm9kdWN0aW9uCm5weCB3cmFuZ2xlciBkZXBsb3kgLS1lbnYgc3RhZ2luZwpgYGAKCiMjIExvY2FsIERldmVsb3BtZW50CgpgYGBqc29uYwp7CiAgImt2X25hbWVzcGFjZXMiOiBbewogICAgImJpbmRpbmciOiAiTVlfS1YiLAogICAgImlkIjogInByb2QtaWQiLAogICAgInByZXZpZXdfaWQiOiAiZGV2LWlkIiAgLy8gVXNlZCBpbiB3cmFuZ2xlciBkZXYKICB9XQp9CmBgYAoKKipPciB1c2UgcmVtb3RlOioqCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRldiAtLXJlbW90ZSAgIyBVc2VzIHByb2R1Y3Rpb24gYmluZGluZ3MKYGBgCgojIyBDb21wbGV0ZSBFeGFtcGxlCgpgYGBqc29uYwp7CiAgIiRzY2hlbWEiOiAiLi9ub2RlX21vZHVsZXMvd3JhbmdsZXIvY29uZmlnLXNjaGVtYS5qc29uIiwKICAibmFtZSI6ICJteS1hcHAiLAogICJtYWluIjogInNyYy9pbmRleC50cyIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI1LTAxLTAxIiwKICAKICAidmFycyI6IHsgIkFQSV9VUkwiOiAiaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20iIH0sCiAgImt2X25hbWVzcGFjZXMiOiBbeyAiYmluZGluZyI6ICJDQUNIRSIsICJpZCI6ICJhYmMxMjMiIH1dLAogICJyMl9idWNrZXRzIjogW3sgImJpbmRpbmciOiAiQVNTRVRTIiwgImJ1Y2tldF9uYW1lIjogIm15LWFzc2V0cyIgfV0sCiAgImQxX2RhdGFiYXNlcyI6IFt7ICJiaW5kaW5nIjogIkRCIiwgImRhdGFiYXNlX25hbWUiOiAibXktZGIiLCAiZGF0YWJhc2VfaWQiOiAieHl6Nzg5IiB9XSwKICAic2VydmljZXMiOiBbeyAiYmluZGluZyI6ICJBVVRIIiwgInNlcnZpY2UiOiAiYXV0aC13b3JrZXIiIH1dLAogICJhaSI6IHsgImJpbmRpbmciOiAiQUkiIH0KfQpgYGAKCiMjIEJpbmRpbmctU3BlY2lmaWMgQ29uZmlndXJhdGlvbgoKIyMjIER1cmFibGUgT2JqZWN0cyB3aXRoIENsYXNzIEV4cG9ydAoKYGBganNvbmMKewogICJkdXJhYmxlX29iamVjdHMiOiB7CiAgICAiYmluZGluZ3MiOiBbCiAgICAgIHsgIm5hbWUiOiAiQ09VTlRFUiIsICJjbGFzc19uYW1lIjogIkNvdW50ZXIiLCAic2NyaXB0X25hbWUiOiAibXktd29ya2VyIiB9CiAgICBdCiAgfQp9CmBgYAoKYGBgdHlwZXNjcmlwdAovLyBJbiBzYW1lIFdvcmtlciBvciBzY3JpcHRfbmFtZSBXb3JrZXIKZXhwb3J0IGNsYXNzIENvdW50ZXIgewogIGNvbnN0cnVjdG9yKHByaXZhdGUgc3RhdGU6IER1cmFibGVPYmplY3RTdGF0ZSwgcHJpdmF0ZSBlbnY6IEVudikge30KICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0KSB7IC8qIC4uLiAqLyB9Cn0KYGBgCgojIyMgUXVldWUgQ29uc3VtZXJzCgpgYGBqc29uYwp7CiAgInF1ZXVlcyI6IHsKICAgICJwcm9kdWNlcnMiOiBbeyAiYmluZGluZyI6ICJNWV9RVUVVRSIsICJxdWV1ZSI6ICJteS1xdWV1ZSIgfV0sCiAgICAiY29uc3VtZXJzIjogW3sgInF1ZXVlIjogIm15LXF1ZXVlIiwgIm1heF9iYXRjaF9zaXplIjogMTAgfV0KICB9Cn0KYGBgCgpRdWV1ZSBjb25zdW1lciBoYW5kbGVyOiBgZXhwb3J0IGRlZmF1bHQgeyBhc3luYyBxdWV1ZShiYXRjaCwgZW52KSB7IC8qIHByb2Nlc3MgYmF0Y2gubWVzc2FnZXMgKi8gfSB9YAoKIyMgS2V5IFBvaW50cwoKLSAqKjY0IGJpbmRpbmcgbGltaXQqKiAoYWxsIHR5cGVzIGNvbWJpbmVkKQotICoqU2VjcmV0cyoqOiBBbHdheXMgdXNlIGB3cmFuZ2xlciBzZWNyZXQgcHV0YCwgbmV2ZXIgY29tbWl0Ci0gKipUeXBlcyoqOiBSdW4gYG5weCB3cmFuZ2xlciB0eXBlc2AgYWZ0ZXIgY29uZmlnIGNoYW5nZXMKLSAqKkVudmlyb25tZW50cyoqOiBVc2UgYGVudmAgZmllbGQgZm9yIHN0YWdpbmcvcHJvZHVjdGlvbiB2YXJpYW50cwotICoqRGV2ZWxvcG1lbnQqKjogVXNlIGBwcmV2aWV3X2lkYCBvciBgLS1yZW1vdGVgIGZsYWcKLSAqKklEcyB2cyBOYW1lcyoqOiBTb21lIGJpbmRpbmdzIHVzZSBgaWRgIChLViwgRDEpLCBvdGhlcnMgdXNlIGBuYW1lYCAoUjIsIFF1ZXVlcykKCiMjIFNlZSBBbHNvCgotIFtXcmFuZ2xlciBDb25maWd1cmF0aW9uXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy93cmFuZ2xlci9jb25maWd1cmF0aW9uLyk=
+# Binding Configuration Reference
+
+## Storage Bindings
+
+```jsonc
+{
+  "kv_namespaces": [{ "binding": "MY_KV", "id": "..." }],
+  "r2_buckets": [{ "binding": "MY_BUCKET", "bucket_name": "my-bucket" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "my-db", "database_id": "..." }],
+  "durable_objects": { "bindings": [{ "name": "MY_DO", "class_name": "MyDO" }] },
+  "vectorize": [{ "binding": "VECTORIZE", "index_name": "my-index" }],
+  "queues": { "producers": [{ "binding": "MY_QUEUE", "queue": "my-queue" }] }
+}
+```
+
+**Create commands:**
+```bash
+npx wrangler kv namespace create MY_KV
+npx wrangler r2 bucket create my-bucket
+npx wrangler d1 create my-db
+npx wrangler vectorize create my-index --dimensions=768 --metric=cosine
+npx wrangler queues create my-queue
+
+# List existing resources
+npx wrangler kv namespace list
+npx wrangler r2 bucket list
+npx wrangler d1 list
+npx wrangler vectorize list
+npx wrangler queues list
+```
+
+## Compute Bindings
+
+```jsonc
+{
+  "services": [{ 
+    "binding": "MY_SERVICE", 
+    "service": "other-worker",
+    "environment": "production"  // Optional: target specific env
+  }],
+  "ai": { "binding": "AI" },
+  "browser": { "binding": "BROWSER" },
+  "workflows": [{ "binding": "MY_WORKFLOW", "name": "my-workflow" }]
+}
+```
+
+**Create workflows:**
+```bash
+npx wrangler workflows create my-workflow
+```
+
+## Platform Bindings
+
+```jsonc
+{
+  "analytics_engine_datasets": [{ "binding": "ANALYTICS" }],
+  "mtls_certificates": [{ "binding": "MY_CERT", "certificate_id": "..." }],
+  "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "..." }],
+  "unsafe": {
+    "bindings": [{ "name": "RATE_LIMITER", "type": "ratelimit", "namespace_id": "..." }]
+  }
+}
+```
+
+## Configuration Bindings
+
+```jsonc
+{
+  "vars": {
+    "API_URL": "https://api.example.com",
+    "MAX_RETRIES": "3"
+  },
+  "text_blobs": { "MY_TEXT": "./data/template.html" },
+  "data_blobs": { "MY_DATA": "./data/config.bin" },
+  "wasm_modules": { "MY_WASM": "./build/module.wasm" }
+}
+```
+
+**Secrets (never in config):**
+```bash
+npx wrangler secret put API_KEY
+```
+
+## Environment-Specific Configuration
+
+```jsonc
+{
+  "name": "my-worker",
+  "vars": { "ENV": "production" },
+  "kv_namespaces": [{ "binding": "CACHE", "id": "prod-kv-id" }],
+  
+  "env": {
+    "staging": {
+      "vars": { "ENV": "staging" },
+      "kv_namespaces": [{ "binding": "CACHE", "id": "staging-kv-id" }]
+    }
+  }
+}
+```
+
+**Deploy:**
+```bash
+npx wrangler deploy              # Production
+npx wrangler deploy --env staging
+```
+
+## Local Development
+
+```jsonc
+{
+  "kv_namespaces": [{
+    "binding": "MY_KV",
+    "id": "prod-id",
+    "preview_id": "dev-id"  // Used in wrangler dev
+  }]
+}
+```
+
+**Or use remote:**
+```bash
+npx wrangler dev --remote  # Uses production bindings
+```
+
+## Complete Example
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-app",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  
+  "vars": { "API_URL": "https://api.example.com" },
+  "kv_namespaces": [{ "binding": "CACHE", "id": "abc123" }],
+  "r2_buckets": [{ "binding": "ASSETS", "bucket_name": "my-assets" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "my-db", "database_id": "xyz789" }],
+  "services": [{ "binding": "AUTH", "service": "auth-worker" }],
+  "ai": { "binding": "AI" }
+}
+```
+
+## Binding-Specific Configuration
+
+### Durable Objects with Class Export
+
+```jsonc
+{
+  "durable_objects": {
+    "bindings": [
+      { "name": "COUNTER", "class_name": "Counter", "script_name": "my-worker" }
+    ]
+  }
+}
+```
+
+```typescript
+// In same Worker or script_name Worker
+export class Counter {
+  constructor(private state: DurableObjectState, private env: Env) {}
+  async fetch(request: Request) { /* ... */ }
+}
+```
+
+### Queue Consumers
+
+```jsonc
+{
+  "queues": {
+    "producers": [{ "binding": "MY_QUEUE", "queue": "my-queue" }],
+    "consumers": [{ "queue": "my-queue", "max_batch_size": 10 }]
+  }
+}
+```
+
+Queue consumer handler: `export default { async queue(batch, env) { /* process batch.messages */ } }`
+
+## Key Points
+
+- **64 binding limit** (all types combined)
+- **Secrets**: Always use `wrangler secret put`, never commit
+- **Types**: Run `npx wrangler types` after config changes
+- **Environments**: Use `env` field for staging/production variants
+- **Development**: Use `preview_id` or `--remote` flag
+- **IDs vs Names**: Some bindings use `id` (KV, D1), others use `name` (R2, Queues)
+
+## See Also
+
+- [Wrangler Configuration](https://developers.cloudflare.com/workers/wrangler/configuration/)

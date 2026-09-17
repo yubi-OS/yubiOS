@@ -1,1 +1,143 @@
-IyBGdW5jdGlvbiBBUEkKCiMjIEV2ZW50Q29udGV4dAoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRXZlbnRDb250ZXh0PEVudiA9IGFueT4gewogIHJlcXVlc3Q6IFJlcXVlc3Q7ICAgICAgICAgICAgICAvLyBJbmNvbWluZyByZXF1ZXN0CiAgZnVuY3Rpb25QYXRoOiBzdHJpbmc7ICAgICAgICAgIC8vIFJlcXVlc3QgcGF0aAogIHdhaXRVbnRpbChwcm9taXNlOiBQcm9taXNlPGFueT4pOiB2b2lkOyAgLy8gQmFja2dyb3VuZCB0YXNrcyAobm9uLWJsb2NraW5nKQogIHBhc3NUaHJvdWdoT25FeGNlcHRpb24oKTogdm9pZDsgICAgICAgICAgLy8gRmFsbGJhY2sgdG8gc3RhdGljIG9uIGVycm9yCiAgbmV4dChpbnB1dD86IFJlcXVlc3QgfCBzdHJpbmcsIGluaXQ/OiBSZXF1ZXN0SW5pdCk6IFByb21pc2U8UmVzcG9uc2U+OwogIGVudjogRW52OyAgICAgICAgICAgICAgICAgICAgICAvLyBCaW5kaW5ncywgdmFycywgc2VjcmV0cwogIHBhcmFtczogUmVjb3JkPHN0cmluZywgc3RyaW5nIHwgc3RyaW5nW10+OyAgLy8gUm91dGUgcGFyYW1zIChbdXNlcl0gb3IgW1tjYXRjaGFsbF1dKQogIGRhdGE6IGFueTsgICAgICAgICAgICAgICAgICAgICAvLyBNaWRkbGV3YXJlIHNoYXJlZCBzdGF0ZQp9CmBgYAoKKipUeXBlU2NyaXB0OioqIFNlZSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSBmb3IgYHdyYW5nbGVyIHR5cGVzYCBzZXR1cAoKIyMgSGFuZGxlcnMKCmBgYHR5cGVzY3JpcHQKLy8gR2VuZXJpYyAoZmFsbGJhY2sgZm9yIGFueSBtZXRob2QpCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBvblJlcXVlc3QoY3R4OiBFdmVudENvbnRleHQpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgcmV0dXJuIG5ldyBSZXNwb25zZSgnQW55IG1ldGhvZCcpOwp9CgovLyBNZXRob2Qtc3BlY2lmaWMgKHRha2VzIHByZWNlZGVuY2Ugb3ZlciBnZW5lcmljKQpleHBvcnQgYXN5bmMgZnVuY3Rpb24gb25SZXF1ZXN0R2V0KGN0eDogRXZlbnRDb250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogIHJldHVybiBSZXNwb25zZS5qc29uKHsgbWVzc2FnZTogJ0dFVCcgfSk7Cn0KCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBvblJlcXVlc3RQb3N0KGN0eDogRXZlbnRDb250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IGJvZHkgPSBhd2FpdCBjdHgucmVxdWVzdC5qc29uKCk7CiAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyByZWNlaXZlZDogYm9keSB9KTsKfQovLyBBbHNvOiBvblJlcXVlc3RQdXQsIG9uUmVxdWVzdFBhdGNoLCBvblJlcXVlc3REZWxldGUsIG9uUmVxdWVzdEhlYWQsIG9uUmVxdWVzdE9wdGlvbnMKYGBgCgojIyBCaW5kaW5ncyBSZWZlcmVuY2UKCnwgQmluZGluZyBUeXBlIHwgSW50ZXJmYWNlIHwgQ29uZmlnIEtleSB8IFVzZSBDYXNlIHwKfC0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IEtWIHwgYEtWTmFtZXNwYWNlYCB8IGBrdl9uYW1lc3BhY2VzYCB8IEtleS12YWx1ZSBjYWNoZSwgc2Vzc2lvbnMsIGNvbmZpZyB8CnwgRDEgfCBgRDFEYXRhYmFzZWAgfCBgZDFfZGF0YWJhc2VzYCB8IFJlbGF0aW9uYWwgZGF0YSwgU1FMIHF1ZXJpZXMgfAp8IFIyIHwgYFIyQnVja2V0YCB8IGByMl9idWNrZXRzYCB8IExhcmdlIGZpbGVzLCB1c2VyIHVwbG9hZHMsIGFzc2V0cyB8CnwgRHVyYWJsZSBPYmplY3RzIHwgYER1cmFibGVPYmplY3ROYW1lc3BhY2VgIHwgYGR1cmFibGVfb2JqZWN0cy5iaW5kaW5nc2AgfCBTdGF0ZWZ1bCBjb29yZGluYXRpb24sIHdlYnNvY2tldHMgfAp8IFdvcmtlcnMgQUkgfCBgQWlgIHwgYGFpLmJpbmRpbmdgIHwgTExNIGluZmVyZW5jZSwgZW1iZWRkaW5ncyB8CnwgVmVjdG9yaXplIHwgYFZlY3Rvcml6ZUluZGV4YCB8IGB2ZWN0b3JpemVgIHwgVmVjdG9yIHNlYXJjaCwgZW1iZWRkaW5ncyB8CnwgU2VydmljZSBCaW5kaW5nIHwgYEZldGNoZXJgIHwgYHNlcnZpY2VzYCB8IFdvcmtlci10by13b3JrZXIgUlBDIHwKfCBBbmFseXRpY3MgRW5naW5lIHwgYEFuYWx5dGljc0VuZ2luZURhdGFzZXRgIHwgYGFuYWx5dGljc19lbmdpbmVfZGF0YXNldHNgIHwgRXZlbnQgbG9nZ2luZywgbWV0cmljcyB8CnwgRW52aXJvbm1lbnQgVmFycyB8IGBzdHJpbmdgIHwgYHZhcnNgIHwgTm9uLXNlbnNpdGl2ZSBjb25maWcgfAoKU2VlIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIGZvciB3cmFuZ2xlci5qc29uYyBleGFtcGxlcy4KCiMjIEJpbmRpbmdzCgojIyMgS1YKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7IEtWOiBLVk5hbWVzcGFjZTsgfQpleHBvcnQgY29uc3Qgb25SZXF1ZXN0OiBQYWdlc0Z1bmN0aW9uPEVudj4gPSBhc3luYyAoY3R4KSA9PiB7CiAgYXdhaXQgY3R4LmVudi5LVi5wdXQoJ2tleScsICd2YWx1ZScsIHsgZXhwaXJhdGlvblR0bDogMzYwMCB9KTsKICBjb25zdCB2YWwgPSBhd2FpdCBjdHguZW52LktWLmdldCgna2V5JywgeyB0eXBlOiAnanNvbicgfSk7CiAgY29uc3Qga2V5cyA9IGF3YWl0IGN0eC5lbnYuS1YubGlzdCh7IHByZWZpeDogJ3VzZXI6JyB9KTsKICByZXR1cm4gUmVzcG9uc2UuanNvbih7IHZhbCB9KTsKfTsKYGBgCgojIyMgRDEKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7IERCOiBEMURhdGFiYXNlOyB9CmV4cG9ydCBjb25zdCBvblJlcXVlc3Q6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jIChjdHgpID0+IHsKICBjb25zdCB1c2VyID0gYXdhaXQgY3R4LmVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gPycpLmJpbmQoMTIzKS5maXJzdCgpOwogIHJldHVybiBSZXNwb25zZS5qc29uKHVzZXIpOwp9OwpgYGAKCiMjIyBSMgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsgQlVDS0VUOiBSMkJ1Y2tldDsgfQpleHBvcnQgY29uc3Qgb25SZXF1ZXN0OiBQYWdlc0Z1bmN0aW9uPEVudj4gPSBhc3luYyAoY3R4KSA9PiB7CiAgY29uc3Qgb2JqID0gYXdhaXQgY3R4LmVudi5CVUNLRVQuZ2V0KCdmaWxlLnR4dCcpOwogIGlmICghb2JqKSByZXR1cm4gbmV3IFJlc3BvbnNlKCdOb3QgZm91bmQnLCB7IHN0YXR1czogNDA0IH0pOwogIGF3YWl0IGN0eC5lbnYuQlVDS0VULnB1dCgnZmlsZS50eHQnLCBjdHgucmVxdWVzdC5ib2R5KTsKICByZXR1cm4gbmV3IFJlc3BvbnNlKG9iai5ib2R5KTsKfTsKYGBgCgojIyMgRHVyYWJsZSBPYmplY3RzCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgeyBDT1VOVEVSOiBEdXJhYmxlT2JqZWN0TmFtZXNwYWNlOyB9CmV4cG9ydCBjb25zdCBvblJlcXVlc3Q6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jIChjdHgpID0+IHsKICBjb25zdCBzdHViID0gY3R4LmVudi5DT1VOVEVSLmdldChjdHguZW52LkNPVU5URVIuaWRGcm9tTmFtZSgnZ2xvYmFsJykpOwogIHJldHVybiBzdHViLmZldGNoKGN0eC5yZXF1ZXN0KTsKfTsKYGBgCgojIyMgV29ya2VycyBBSQoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsgQUk6IEFpOyB9CmV4cG9ydCBjb25zdCBvblJlcXVlc3Q6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jIChjdHgpID0+IHsKICBjb25zdCByZXNwID0gYXdhaXQgY3R4LmVudi5BSS5ydW4oJ0BjZi9tZXRhL2xsYW1hLTMuMS04Yi1pbnN0cnVjdCcsIHsgcHJvbXB0OiAnSGVsbG8nIH0pOwogIHJldHVybiBSZXNwb25zZS5qc29uKHJlc3ApOwp9OwpgYGAKCiMjIyBTZXJ2aWNlIEJpbmRpbmdzICYgRW52IFZhcnMKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7IEFVVEg6IEZldGNoZXI7IEFQSV9LRVk6IHN0cmluZzsgfQpleHBvcnQgY29uc3Qgb25SZXF1ZXN0OiBQYWdlc0Z1bmN0aW9uPEVudj4gPSBhc3luYyAoY3R4KSA9PiB7CiAgLy8gU2VydmljZSBiaW5kaW5nOiBmb3J3YXJkIHRvIGFub3RoZXIgV29ya2VyCiAgcmV0dXJuIGN0eC5lbnYuQVVUSC5mZXRjaChjdHgucmVxdWVzdCk7CiAgCiAgLy8gRW52aXJvbm1lbnQgdmFyaWFibGUKICByZXR1cm4gUmVzcG9uc2UuanNvbih7IGtleTogY3R4LmVudi5BUElfS0VZIH0pOwp9OwpgYGAKCiMjIEFkdmFuY2VkIE1vZGUgKGVudi5BU1NFVFMpCgpXaGVuIHVzaW5nIGBfd29ya2VyLmpzYCwgYWNjZXNzIHN0YXRpYyBhc3NldHMgdmlhIGBlbnYuQVNTRVRTLmZldGNoKClgOgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsgQVNTRVRTOiBGZXRjaGVyOyBLVjogS1ZOYW1lc3BhY2U7IH0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IHVybCA9IG5ldyBVUkwocmVxdWVzdC51cmwpOwogICAgaWYgKHVybC5wYXRobmFtZS5zdGFydHNXaXRoKCcvYXBpLycpKSB7CiAgICAgIHJldHVybiBSZXNwb25zZS5qc29uKHsgZGF0YTogYXdhaXQgZW52LktWLmdldCgna2V5JykgfSk7CiAgICB9CiAgICByZXR1cm4gZW52LkFTU0VUUy5mZXRjaChyZXF1ZXN0KTsgLy8gRmFsbGJhY2sgdG8gc3RhdGljCiAgfQp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgoqKlNlZSBhbHNvOioqIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIGZvciBUeXBlU2NyaXB0IHNldHVwIGFuZCB3cmFuZ2xlci5qc29uYyB8IFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgZm9yIG1pZGRsZXdhcmUgYW5kIGF1dGggcGF0dGVybnMK
+# Function API
+
+## EventContext
+
+```typescript
+interface EventContext<Env = any> {
+  request: Request;              // Incoming request
+  functionPath: string;          // Request path
+  waitUntil(promise: Promise<any>): void;  // Background tasks (non-blocking)
+  passThroughOnException(): void;          // Fallback to static on error
+  next(input?: Request | string, init?: RequestInit): Promise<Response>;
+  env: Env;                      // Bindings, vars, secrets
+  params: Record<string, string | string[]>;  // Route params ([user] or [[catchall]])
+  data: any;                     // Middleware shared state
+}
+```
+
+**TypeScript:** See [configuration.md](./configuration.md) for `wrangler types` setup
+
+## Handlers
+
+```typescript
+// Generic (fallback for any method)
+export async function onRequest(ctx: EventContext): Promise<Response> {
+  return new Response('Any method');
+}
+
+// Method-specific (takes precedence over generic)
+export async function onRequestGet(ctx: EventContext): Promise<Response> {
+  return Response.json({ message: 'GET' });
+}
+
+export async function onRequestPost(ctx: EventContext): Promise<Response> {
+  const body = await ctx.request.json();
+  return Response.json({ received: body });
+}
+// Also: onRequestPut, onRequestPatch, onRequestDelete, onRequestHead, onRequestOptions
+```
+
+## Bindings Reference
+
+| Binding Type | Interface | Config Key | Use Case |
+|--------------|-----------|------------|----------|
+| KV | `KVNamespace` | `kv_namespaces` | Key-value cache, sessions, config |
+| D1 | `D1Database` | `d1_databases` | Relational data, SQL queries |
+| R2 | `R2Bucket` | `r2_buckets` | Large files, user uploads, assets |
+| Durable Objects | `DurableObjectNamespace` | `durable_objects.bindings` | Stateful coordination, websockets |
+| Workers AI | `Ai` | `ai.binding` | LLM inference, embeddings |
+| Vectorize | `VectorizeIndex` | `vectorize` | Vector search, embeddings |
+| Service Binding | `Fetcher` | `services` | Worker-to-worker RPC |
+| Analytics Engine | `AnalyticsEngineDataset` | `analytics_engine_datasets` | Event logging, metrics |
+| Environment Vars | `string` | `vars` | Non-sensitive config |
+
+See [configuration.md](./configuration.md) for wrangler.jsonc examples.
+
+## Bindings
+
+### KV
+
+```typescript
+interface Env { KV: KVNamespace; }
+export const onRequest: PagesFunction<Env> = async (ctx) => {
+  await ctx.env.KV.put('key', 'value', { expirationTtl: 3600 });
+  const val = await ctx.env.KV.get('key', { type: 'json' });
+  const keys = await ctx.env.KV.list({ prefix: 'user:' });
+  return Response.json({ val });
+};
+```
+
+### D1
+
+```typescript
+interface Env { DB: D1Database; }
+export const onRequest: PagesFunction<Env> = async (ctx) => {
+  const user = await ctx.env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(123).first();
+  return Response.json(user);
+};
+```
+
+### R2
+
+```typescript
+interface Env { BUCKET: R2Bucket; }
+export const onRequest: PagesFunction<Env> = async (ctx) => {
+  const obj = await ctx.env.BUCKET.get('file.txt');
+  if (!obj) return new Response('Not found', { status: 404 });
+  await ctx.env.BUCKET.put('file.txt', ctx.request.body);
+  return new Response(obj.body);
+};
+```
+
+### Durable Objects
+
+```typescript
+interface Env { COUNTER: DurableObjectNamespace; }
+export const onRequest: PagesFunction<Env> = async (ctx) => {
+  const stub = ctx.env.COUNTER.get(ctx.env.COUNTER.idFromName('global'));
+  return stub.fetch(ctx.request);
+};
+```
+
+### Workers AI
+
+```typescript
+interface Env { AI: Ai; }
+export const onRequest: PagesFunction<Env> = async (ctx) => {
+  const resp = await ctx.env.AI.run('@cf/meta/llama-3.1-8b-instruct', { prompt: 'Hello' });
+  return Response.json(resp);
+};
+```
+
+### Service Bindings & Env Vars
+
+```typescript
+interface Env { AUTH: Fetcher; API_KEY: string; }
+export const onRequest: PagesFunction<Env> = async (ctx) => {
+  // Service binding: forward to another Worker
+  return ctx.env.AUTH.fetch(ctx.request);
+  
+  // Environment variable
+  return Response.json({ key: ctx.env.API_KEY });
+};
+```
+
+## Advanced Mode (env.ASSETS)
+
+When using `_worker.js`, access static assets via `env.ASSETS.fetch()`:
+
+```typescript
+interface Env { ASSETS: Fetcher; KV: KVNamespace; }
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    if (url.pathname.startsWith('/api/')) {
+      return Response.json({ data: await env.KV.get('key') });
+    }
+    return env.ASSETS.fetch(request); // Fallback to static
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+**See also:** [configuration.md](./configuration.md) for TypeScript setup and wrangler.jsonc | [patterns.md](./patterns.md) for middleware and auth patterns

@@ -1,1 +1,96 @@
-IyBBUEkgUmVmZXJlbmNlCgojIyBXb3JrZXJzIEJpbmRpbmcgQVBJCgpgYGB0b21sCiMgd3JhbmdsZXIudG9tbApbaW1hZ2VzXQpiaW5kaW5nID0gIklNQUdFUyIKYGBgCgojIyMgVHJhbnNmb3JtIEltYWdlcwoKYGBgdHlwZXNjcmlwdApjb25zdCBpbWFnZVJlc3BvbnNlID0gYXdhaXQgZW52LklNQUdFUwogIC5pbnB1dChmaWxlQnVmZmVyKQogIC50cmFuc2Zvcm0oeyB3aWR0aDogODAwLCBoZWlnaHQ6IDYwMCwgZml0OiAiY292ZXIiLCBxdWFsaXR5OiA4NSwgZm9ybWF0OiAiYXZpZiIgfSkKICAub3V0cHV0KCk7CnJldHVybiBpbWFnZVJlc3BvbnNlLnJlc3BvbnNlKCk7CmBgYAoKIyMjIFRyYW5zZm9ybSBPcHRpb25zCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBUcmFuc2Zvcm1PcHRpb25zIHsKICB3aWR0aD86IG51bWJlcjsgICAgICAgIGhlaWdodD86IG51bWJlcjsKICBmaXQ/OiAic2NhbGUtZG93biIgfCAiY29udGFpbiIgfCAiY292ZXIiIHwgImNyb3AiIHwgInBhZCI7CiAgcXVhbGl0eT86IG51bWJlcjsgICAgICAvLyAxLTEwMAogIGZvcm1hdD86ICJhdmlmIiB8ICJ3ZWJwIiB8ICJqcGVnIiB8ICJwbmciOwogIGRwcj86IG51bWJlcjsgICAgICAgICAgLy8gMS0zCiAgZ3Jhdml0eT86ICJhdXRvIiB8ICJsZWZ0IiB8ICJyaWdodCIgfCAidG9wIiB8ICJib3R0b20iIHwgImZhY2UiIHwgc3RyaW5nOwogIHNoYXJwZW4/OiBudW1iZXI7ICAgICAgLy8gMC0xMAogIGJsdXI/OiBudW1iZXI7ICAgICAgICAgLy8gMS0yNTAKICByb3RhdGU/OiA5MCB8IDE4MCB8IDI3MDsKICBiYWNrZ3JvdW5kPzogc3RyaW5nOyAgIC8vIENTUyBjb2xvciBmb3IgcGFkCiAgbWV0YWRhdGE/OiAibm9uZSIgfCAiY29weXJpZ2h0IiB8ICJrZWVwIjsKICBicmlnaHRuZXNzPzogbnVtYmVyOyAgIGNvbnRyYXN0PzogbnVtYmVyOyAgIGdhbW1hPzogbnVtYmVyOyAgLy8gMC0yCn0KYGBgCgojIyMgRHJhdy9XYXRlcm1hcmsKCmBgYHR5cGVzY3JpcHQKYXdhaXQgZW52LklNQUdFUy5pbnB1dChiYXNlSW1hZ2UpCiAgLmRyYXcoZW52LklNQUdFUy5pbnB1dCh3YXRlcm1hcmspLnRyYW5zZm9ybSh7IHdpZHRoOiAxMDAgfSksIHsgdG9wOiAxMCwgbGVmdDogMTAsIG9wYWNpdHk6IDAuOCB9KQogIC5vdXRwdXQoKTsKYGBgCgojIyBSRVNUIEFQSQoKIyMjIFVwbG9hZCBJbWFnZQoKYGBgYmFzaApjdXJsIC1YIFBPU1QgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS9pbWFnZXMvdjEgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIge3Rva2VufSIgLUYgZmlsZT1AaW1hZ2UuanBnIC1GIG1ldGFkYXRhPSd7ImtleSI6InZhbHVlIn0nCmBgYAoKIyMjIE90aGVyIE9wZXJhdGlvbnMKCmBgYGJhc2gKR0VUICAvYWNjb3VudHMve2FjY291bnRfaWR9L2ltYWdlcy92MS97aW1hZ2VfaWR9ICAgICAgIyBHZXQgZGV0YWlscwpERUxFVEUgL2FjY291bnRzL3thY2NvdW50X2lkfS9pbWFnZXMvdjEve2ltYWdlX2lkfSAgICMgRGVsZXRlCkdFVCAgL2FjY291bnRzL3thY2NvdW50X2lkfS9pbWFnZXMvdjE/cGFnZT0xICAgICAgICAgIyBMaXN0CmBgYAoKIyMgVVJMIFRyYW5zZm9ybSBBUEkKCmBgYApodHRwczovL2ltYWdlZGVsaXZlcnkubmV0L3toYXNofS97aWR9L3dpZHRoPTgwMCxoZWlnaHQ9NjAwLGZpdD1jb3Zlcixmb3JtYXQ9YXZpZgpgYGAKCioqUGFyYW1zOioqIGB3PWAsIGBoPWAsIGBmaXQ9YCwgYHE9YCwgYGY9YCwgYGRwcj1gLCBgZ3Jhdml0eT1gLCBgc2hhcnBlbj1gLCBgYmx1cj1gLCBgcm90YXRlPWAsIGBiYWNrZ3JvdW5kPWAsIGBtZXRhZGF0YT1gCgojIyBEaXJlY3QgQ3JlYXRvciBVcGxvYWQKCmBgYHR5cGVzY3JpcHQKLy8gMS4gR2V0IHVwbG9hZCBVUkwgKGJhY2tlbmQpCmNvbnN0IHsgcmVzdWx0IH0gPSBhd2FpdCBmZXRjaCgKICBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyR7YWNjb3VudElkfS9pbWFnZXMvdjIvZGlyZWN0X3VwbG9hZGAsCiAgeyBtZXRob2Q6ICdQT1NUJywgaGVhZGVyczogeyAnQXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHt0b2tlbn1gIH0sCiAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IHJlcXVpcmVTaWduZWRVUkxzOiBmYWxzZSB9KSB9CikudGhlbihyID0+IHIuanNvbigpKTsKCi8vIDIuIENsaWVudCB1cGxvYWRzIHRvIHJlc3VsdC51cGxvYWRVUkwKY29uc3QgZm9ybURhdGEgPSBuZXcgRm9ybURhdGEoKTsKZm9ybURhdGEuYXBwZW5kKCdmaWxlJywgZmlsZSk7CmF3YWl0IGZldGNoKHJlc3VsdC51cGxvYWRVUkwsIHsgbWV0aG9kOiAnUE9TVCcsIGJvZHk6IGZvcm1EYXRhIH0pOwpgYGAKCiMjIEVycm9yIENvZGVzCgp8IENvZGUgfCBNZXNzYWdlIHwgU29sdXRpb24gfAp8LS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IDU0MDAgfCBJbnZhbGlkIGZvcm1hdCB8IFVzZSBKUEVHLCBQTkcsIEdJRiwgV2ViUCB8CnwgNTQwMSB8IFRvbyBsYXJnZSB8IE1heCAxMDBNQiB8CnwgNTQwMyB8IEludmFsaWQgdHJhbnNmb3JtIHwgQ2hlY2sgcGFyYW1zIHwKfCA5NDEzIHwgUmF0ZSBsaW1pdCB8IEltcGxlbWVudCBiYWNrb2ZmIHwK
+# API Reference
+
+## Workers Binding API
+
+```toml
+# wrangler.toml
+[images]
+binding = "IMAGES"
+```
+
+### Transform Images
+
+```typescript
+const imageResponse = await env.IMAGES
+  .input(fileBuffer)
+  .transform({ width: 800, height: 600, fit: "cover", quality: 85, format: "avif" })
+  .output();
+return imageResponse.response();
+```
+
+### Transform Options
+
+```typescript
+interface TransformOptions {
+  width?: number;        height?: number;
+  fit?: "scale-down" | "contain" | "cover" | "crop" | "pad";
+  quality?: number;      // 1-100
+  format?: "avif" | "webp" | "jpeg" | "png";
+  dpr?: number;          // 1-3
+  gravity?: "auto" | "left" | "right" | "top" | "bottom" | "face" | string;
+  sharpen?: number;      // 0-10
+  blur?: number;         // 1-250
+  rotate?: 90 | 180 | 270;
+  background?: string;   // CSS color for pad
+  metadata?: "none" | "copyright" | "keep";
+  brightness?: number;   contrast?: number;   gamma?: number;  // 0-2
+}
+```
+
+### Draw/Watermark
+
+```typescript
+await env.IMAGES.input(baseImage)
+  .draw(env.IMAGES.input(watermark).transform({ width: 100 }), { top: 10, left: 10, opacity: 0.8 })
+  .output();
+```
+
+## REST API
+
+### Upload Image
+
+```bash
+curl -X POST https://api.cloudflare.com/client/v4/accounts/{account_id}/images/v1 \
+  -H "Authorization: Bearer {token}" -F file=@image.jpg -F metadata='{"key":"value"}'
+```
+
+### Other Operations
+
+```bash
+GET  /accounts/{account_id}/images/v1/{image_id}      # Get details
+DELETE /accounts/{account_id}/images/v1/{image_id}   # Delete
+GET  /accounts/{account_id}/images/v1?page=1         # List
+```
+
+## URL Transform API
+
+```
+https://imagedelivery.net/{hash}/{id}/width=800,height=600,fit=cover,format=avif
+```
+
+**Params:** `w=`, `h=`, `fit=`, `q=`, `f=`, `dpr=`, `gravity=`, `sharpen=`, `blur=`, `rotate=`, `background=`, `metadata=`
+
+## Direct Creator Upload
+
+```typescript
+// 1. Get upload URL (backend)
+const { result } = await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${accountId}/images/v2/direct_upload`,
+  { method: 'POST', headers: { 'Authorization': `Bearer ${token}` },
+    body: JSON.stringify({ requireSignedURLs: false }) }
+).then(r => r.json());
+
+// 2. Client uploads to result.uploadURL
+const formData = new FormData();
+formData.append('file', file);
+await fetch(result.uploadURL, { method: 'POST', body: formData });
+```
+
+## Error Codes
+
+| Code | Message | Solution |
+|------|---------|----------|
+| 5400 | Invalid format | Use JPEG, PNG, GIF, WebP |
+| 5401 | Too large | Max 100MB |
+| 5403 | Invalid transform | Check params |
+| 9413 | Rate limit | Implement backoff |

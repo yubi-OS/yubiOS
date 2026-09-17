@@ -1,1 +1,202 @@
-IyBGbGFnc2hpcCBDb25maWd1cmF0aW9uCgojIyBXcmFuZ2xlciBCaW5kaW5nIFNldHVwCgpBZGQgYSBGbGFnc2hpcCBiaW5kaW5nIHRvIHlvdXIgV3JhbmdsZXIgY29uZmlnIHRvIGFjY2VzcyBmbGFncyB2aWEgYGVudi5GTEFHU2AuCgojIyMgU2luZ2xlIEFwcAoKYGBganNvbmMKLy8gd3JhbmdsZXIuanNvbmMKewogICJmbGFnc2hpcCI6IHsKICAgICJiaW5kaW5nIjogIkZMQUdTIiwKICAgICJhcHBfaWQiOiAiPEFQUF9JRD4iCiAgfQp9CmBgYAoKYGBgdG9tbAojIHdyYW5nbGVyLnRvbWwKW2ZsYWdzaGlwXQpiaW5kaW5nID0gIkZMQUdTIgphcHBfaWQgPSAiPEFQUF9JRD4iCmBgYAoKIyMjIE11bHRpcGxlIEFwcHMKCmBgYGpzb25jCi8vIHdyYW5nbGVyLmpzb25jCnsKICAiZmxhZ3NoaXAiOiBbCiAgICB7CiAgICAgICJiaW5kaW5nIjogIkZMQUdTIiwKICAgICAgImFwcF9pZCI6ICI8QVBQX0lEXzE+IgogICAgfSwKICAgIHsKICAgICAgImJpbmRpbmciOiAiRVhQRVJJTUVOVF9GTEFHUyIsCiAgICAgICJhcHBfaWQiOiAiPEFQUF9JRF8yPiIKICAgIH0KICBdCn0KYGBgCgpgYGB0b21sCiMgd3JhbmdsZXIudG9tbApbW2ZsYWdzaGlwXV0KYmluZGluZyA9ICJGTEFHUyIKYXBwX2lkID0gIjxBUFBfSURfMT4iCgpbW2ZsYWdzaGlwXV0KYmluZGluZyA9ICJFWFBFUklNRU5UX0ZMQUdTIgphcHBfaWQgPSAiPEFQUF9JRF8yPiIKYGBgCgojIyMgR2VuZXJhdGUgVHlwZXMKCkFmdGVyIGFkZGluZyB0aGUgYmluZGluZywgZ2VuZXJhdGUgVHlwZVNjcmlwdCB0eXBlczoKCmBgYGJhc2gKbnB4IHdyYW5nbGVyIHR5cGVzCmBgYAoKVGhpcyBjcmVhdGVzIHRoZSBgRW52YCBpbnRlcmZhY2Ugd2l0aCBlYWNoIGJpbmRpbmcgdHlwZWQgYXMgYEZsYWdzaGlwYDoKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgRkxBR1M6IEZsYWdzaGlwOwogIEVYUEVSSU1FTlRfRkxBR1M6IEZsYWdzaGlwOyAvLyBpZiBtdWx0aXBsZQp9CmBgYAoKVGhlIGBGbGFnc2hpcGAgdHlwZSBjb21lcyBmcm9tIGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYC4KCi0tLQoKIyMgT3BlbkZlYXR1cmUgU0RLIEluc3RhbGxhdGlvbgoKIyMjIFNlcnZlci1TaWRlIChXb3JrZXJzLCBOb2RlLmpzKQoKYGBgYmFzaApucG0gaSBAY2xvdWRmbGFyZS9mbGFnc2hpcCBAb3BlbmZlYXR1cmUvc2VydmVyLXNkawpgYGAKCiMjIyBCcm93c2VyCgpgYGBiYXNoCm5wbSBpIEBjbG91ZGZsYXJlL2ZsYWdzaGlwIEBvcGVuZmVhdHVyZS93ZWItc2RrCmBgYAoKLS0tCgojIyBTREsgUHJvdmlkZXIgU2V0dXAKCiMjIyBTZXJ2ZXIgUHJvdmlkZXIg4oCUIFdpdGggQmluZGluZyAoV29ya2VycykKClJlY29tbWVuZGVkIGFwcHJvYWNoIGluc2lkZSBXb3JrZXJzLiBObyBIVFRQIG92ZXJoZWFkLCBhdXRoIGhhbmRsZWQgYXV0b21hdGljYWxseS4KCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgT3BlbkZlYXR1cmUgfSBmcm9tICJAb3BlbmZlYXR1cmUvc2VydmVyLXNkayI7CmltcG9ydCB7IEZsYWdzaGlwU2VydmVyUHJvdmlkZXIgfSBmcm9tICJAY2xvdWRmbGFyZS9mbGFnc2hpcCI7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBhd2FpdCBPcGVuRmVhdHVyZS5zZXRQcm92aWRlckFuZFdhaXQoCiAgICAgIG5ldyBGbGFnc2hpcFNlcnZlclByb3ZpZGVyKHsgYmluZGluZzogZW52LkZMQUdTIH0pLAogICAgKTsKICAgIGNvbnN0IGNsaWVudCA9IE9wZW5GZWF0dXJlLmdldENsaWVudCgpOwogICAgLy8gLi4uIGV2YWx1YXRlIGZsYWdzCiAgfSwKfTsKYGBgCgojIyMgU2VydmVyIFByb3ZpZGVyIOKAlCBXaXRoIEFwcCBJRCAoTm9kZS5qcykKCkZvciBub24tV29ya2VyIHJ1bnRpbWVzLiBSZXF1aXJlcyBhbiBBUEkgdG9rZW4gd2l0aCBGbGFnc2hpcCByZWFkIHBlcm1pc3Npb25zLgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBPcGVuRmVhdHVyZSB9IGZyb20gIkBvcGVuZmVhdHVyZS9zZXJ2ZXItc2RrIjsKaW1wb3J0IHsgRmxhZ3NoaXBTZXJ2ZXJQcm92aWRlciB9IGZyb20gIkBjbG91ZGZsYXJlL2ZsYWdzaGlwIjsKCmF3YWl0IE9wZW5GZWF0dXJlLnNldFByb3ZpZGVyQW5kV2FpdCgKICBuZXcgRmxhZ3NoaXBTZXJ2ZXJQcm92aWRlcih7CiAgICBhcHBJZDogIjxBUFBfSUQ+IiwKICAgIGFjY291bnRJZDogIjxBQ0NPVU5UX0lEPiIsCiAgICBhdXRoVG9rZW46ICI8QVBJX1RPS0VOPiIsCiAgfSksCik7CmNvbnN0IGNsaWVudCA9IE9wZW5GZWF0dXJlLmdldENsaWVudCgpOwpgYGAKCiMjIyBDbGllbnQgUHJvdmlkZXIgKEJyb3dzZXIpCgpQcmUtZmV0Y2hlcyBmbGFncyBvbiBpbml0LCB0aGVuIGV2YWx1YXRlcyBzeW5jaHJvbm91c2x5LiBPbmx5IGBwcmVmZXRjaEZsYWdzYCBhcmUgYXZhaWxhYmxlLgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBPcGVuRmVhdHVyZSB9IGZyb20gIkBvcGVuZmVhdHVyZS93ZWItc2RrIjsKaW1wb3J0IHsgRmxhZ3NoaXBDbGllbnRQcm92aWRlciB9IGZyb20gIkBjbG91ZGZsYXJlL2ZsYWdzaGlwIjsKCmF3YWl0IE9wZW5GZWF0dXJlLnNldFByb3ZpZGVyQW5kV2FpdCgKICBuZXcgRmxhZ3NoaXBDbGllbnRQcm92aWRlcih7CiAgICBhcHBJZDogIjxBUFBfSUQ+IiwKICAgIGFjY291bnRJZDogIjxBQ0NPVU5UX0lEPiIsCiAgICBhdXRoVG9rZW46ICI8QVBJX1RPS0VOPiIsCiAgICBwcmVmZXRjaEZsYWdzOiBbInByb21vLWJhbm5lciIsICJkYXJrLW1vZGUiLCAibWF4LXVwbG9hZHMiXSwKICB9KSwKKTsKYXdhaXQgT3BlbkZlYXR1cmUuc2V0Q29udGV4dCh7IHRhcmdldGluZ0tleTogInVzZXItNDIiLCBwbGFuOiAiZW50ZXJwcmlzZSIgfSk7CmNvbnN0IGNsaWVudCA9IE9wZW5GZWF0dXJlLmdldENsaWVudCgpOwpgYGAKCiMjIyBQcm92aWRlciBPcHRpb25zIFJlZmVyZW5jZQoKKipGbGFnc2hpcFNlcnZlclByb3ZpZGVyOioqCgp8IE9wdGlvbiB8IFR5cGUgfCBSZXF1aXJlZCB8IERlc2NyaXB0aW9uIHwKfC0tLS0tLS0tfC0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYGJpbmRpbmdgIHwgYEZsYWdzaGlwYCB8IE5vIHwgQmluZGluZyBmcm9tIGBlbnYuRkxBR1NgLiBVc2UgaW5zaWRlIFdvcmtlcnMuIHwKfCBgYXBwSWRgIHwgc3RyaW5nIHwgTm8gfCBBcHAgSUQgZnJvbSBkYXNoYm9hcmQuIFJlcXVpcmVkIHdpdGhvdXQgYmluZGluZy4gfAp8IGBhY2NvdW50SWRgIHwgc3RyaW5nIHwgTm8gfCBDbG91ZGZsYXJlIGFjY291bnQgSUQuIFJlcXVpcmVkIHdpdGhvdXQgYmluZGluZy4gfAp8IGBhdXRoVG9rZW5gIHwgc3RyaW5nIHwgTm8gfCBBUEkgdG9rZW4gd2l0aCBGbGFnc2hpcCByZWFkIHBlcm1pc3Npb25zLiBSZXF1aXJlZCB3aXRob3V0IGJpbmRpbmcuIHwKClByb3ZpZGUgZWl0aGVyIGBiaW5kaW5nYCBvciBhbGwgdGhyZWUgb2YgYGFwcElkYCArIGBhY2NvdW50SWRgICsgYGF1dGhUb2tlbmAuCgoqKkZsYWdzaGlwQ2xpZW50UHJvdmlkZXI6KioKCnwgT3B0aW9uIHwgVHlwZSB8IFJlcXVpcmVkIHwgRGVzY3JpcHRpb24gfAp8LS0tLS0tLS18LS0tLS0tfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwKfCBgYXBwSWRgIHwgc3RyaW5nIHwgWWVzIHwgQXBwIElEIGZyb20gZGFzaGJvYXJkIHwKfCBgYWNjb3VudElkYCB8IHN0cmluZyB8IFllcyB8IENsb3VkZmxhcmUgYWNjb3VudCBJRCB8CnwgYGF1dGhUb2tlbmAgfCBzdHJpbmcgfCBZZXMgfCBBUEkgdG9rZW4gd2l0aCBGbGFnc2hpcCByZWFkIHBlcm1pc3Npb25zIHwKfCBgcHJlZmV0Y2hGbGFnc2AgfCBzdHJpbmdbXSB8IFllcyB8IEZsYWcga2V5cyB0byBwcmVmZXRjaC4gVW5saXN0ZWQgZmxhZ3MgcmV0dXJuIGBGTEFHX05PVF9GT1VORGAuIHwKCi0tLQoKIyMgUkVTVCBBUEkgQXV0aGVudGljYXRpb24KCkZvciBtYW5hZ2luZyBmbGFncyB2aWEgdGhlIFJFU1QgQVBJIChjcmVhdGUsIHVwZGF0ZSwgZGVsZXRlKSwgc2V0IHRoZXNlIGVudmlyb25tZW50IHZhcmlhYmxlczoKCnwgVmFyaWFibGUgfCBEZXNjcmlwdGlvbiB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYENMT1VERkxBUkVfQUNDT1VOVF9JRGAgfCBZb3VyIENsb3VkZmxhcmUgYWNjb3VudCBJRCB8CnwgYENMT1VERkxBUkVfQVBJX1RPS0VOYCB8IEFQSSB0b2tlbiB3aXRoIEZsYWdzaGlwIHBlcm1pc3Npb25zIHwKfCBgRkxBR1NISVBfQVBQX0lEYCB8IFRhcmdldCBhcHAgVVVJRCAoZnJvbSBkYXNoYm9hcmQgdW5kZXIgKipDb21wdXRlID4gRmxhZ3NoaXAqKiwgb3IgYEdFVCAvYXBwc2ApIHwKCkJhc2UgVVJMOiBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRDTE9VREZMQVJFX0FDQ09VTlRfSUQvZmxhZ3NoaXBgCgpgYGBiYXNoCmN1cmwgLXMgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyRDTE9VREZMQVJFX0FDQ09VTlRfSUQvZmxhZ3NoaXAvYXBwcyIgfCBqcSAuCmBgYAoKQXBwIElEcyBhcmUgc2hvd24gaW4gdGhlIENsb3VkZmxhcmUgZGFzaGJvYXJkIHVuZGVyICoqQ29tcHV0ZSA+IEZsYWdzaGlwKiouCgotLS0KCiMjIExvY2FsIERldmVsb3BtZW50CgpGbGFnc2hpcCBiaW5kaW5ncyB3b3JrIGluIGxvY2FsIGRldiB3aXRoIGB3cmFuZ2xlciBkZXZgLiBGbGFnIGV2YWx1YXRpb24gdXNlcyB0aGUgbGl2ZSBGbGFnc2hpcCBjb25maWd1cmF0aW9uIOKAlCB0aGVyZSBpcyBubyBsb2NhbCBmbGFnIHN0b3JlLiBFbnN1cmUgdGhlIGBhcHBfaWRgIGluIHlvdXIgV3JhbmdsZXIgY29uZmlnIHBvaW50cyB0byBhIHZhbGlkIGFwcC4KCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRldgpgYGAK
+# Flagship Configuration
+
+## Wrangler Binding Setup
+
+Add a Flagship binding to your Wrangler config to access flags via `env.FLAGS`.
+
+### Single App
+
+```jsonc
+// wrangler.jsonc
+{
+  "flagship": {
+    "binding": "FLAGS",
+    "app_id": "<APP_ID>"
+  }
+}
+```
+
+```toml
+# wrangler.toml
+[flagship]
+binding = "FLAGS"
+app_id = "<APP_ID>"
+```
+
+### Multiple Apps
+
+```jsonc
+// wrangler.jsonc
+{
+  "flagship": [
+    {
+      "binding": "FLAGS",
+      "app_id": "<APP_ID_1>"
+    },
+    {
+      "binding": "EXPERIMENT_FLAGS",
+      "app_id": "<APP_ID_2>"
+    }
+  ]
+}
+```
+
+```toml
+# wrangler.toml
+[[flagship]]
+binding = "FLAGS"
+app_id = "<APP_ID_1>"
+
+[[flagship]]
+binding = "EXPERIMENT_FLAGS"
+app_id = "<APP_ID_2>"
+```
+
+### Generate Types
+
+After adding the binding, generate TypeScript types:
+
+```bash
+npx wrangler types
+```
+
+This creates the `Env` interface with each binding typed as `Flagship`:
+
+```typescript
+interface Env {
+  FLAGS: Flagship;
+  EXPERIMENT_FLAGS: Flagship; // if multiple
+}
+```
+
+The `Flagship` type comes from `@cloudflare/workers-types`.
+
+---
+
+## OpenFeature SDK Installation
+
+### Server-Side (Workers, Node.js)
+
+```bash
+npm i @cloudflare/flagship @openfeature/server-sdk
+```
+
+### Browser
+
+```bash
+npm i @cloudflare/flagship @openfeature/web-sdk
+```
+
+---
+
+## SDK Provider Setup
+
+### Server Provider — With Binding (Workers)
+
+Recommended approach inside Workers. No HTTP overhead, auth handled automatically.
+
+```typescript
+import { OpenFeature } from "@openfeature/server-sdk";
+import { FlagshipServerProvider } from "@cloudflare/flagship";
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    await OpenFeature.setProviderAndWait(
+      new FlagshipServerProvider({ binding: env.FLAGS }),
+    );
+    const client = OpenFeature.getClient();
+    // ... evaluate flags
+  },
+};
+```
+
+### Server Provider — With App ID (Node.js)
+
+For non-Worker runtimes. Requires an API token with Flagship read permissions.
+
+```typescript
+import { OpenFeature } from "@openfeature/server-sdk";
+import { FlagshipServerProvider } from "@cloudflare/flagship";
+
+await OpenFeature.setProviderAndWait(
+  new FlagshipServerProvider({
+    appId: "<APP_ID>",
+    accountId: "<ACCOUNT_ID>",
+    authToken: "<API_TOKEN>",
+  }),
+);
+const client = OpenFeature.getClient();
+```
+
+### Client Provider (Browser)
+
+Pre-fetches flags on init, then evaluates synchronously. Only `prefetchFlags` are available.
+
+```typescript
+import { OpenFeature } from "@openfeature/web-sdk";
+import { FlagshipClientProvider } from "@cloudflare/flagship";
+
+await OpenFeature.setProviderAndWait(
+  new FlagshipClientProvider({
+    appId: "<APP_ID>",
+    accountId: "<ACCOUNT_ID>",
+    authToken: "<API_TOKEN>",
+    prefetchFlags: ["promo-banner", "dark-mode", "max-uploads"],
+  }),
+);
+await OpenFeature.setContext({ targetingKey: "user-42", plan: "enterprise" });
+const client = OpenFeature.getClient();
+```
+
+### Provider Options Reference
+
+**FlagshipServerProvider:**
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `binding` | `Flagship` | No | Binding from `env.FLAGS`. Use inside Workers. |
+| `appId` | string | No | App ID from dashboard. Required without binding. |
+| `accountId` | string | No | Cloudflare account ID. Required without binding. |
+| `authToken` | string | No | API token with Flagship read permissions. Required without binding. |
+
+Provide either `binding` or all three of `appId` + `accountId` + `authToken`.
+
+**FlagshipClientProvider:**
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `appId` | string | Yes | App ID from dashboard |
+| `accountId` | string | Yes | Cloudflare account ID |
+| `authToken` | string | Yes | API token with Flagship read permissions |
+| `prefetchFlags` | string[] | Yes | Flag keys to prefetch. Unlisted flags return `FLAG_NOT_FOUND`. |
+
+---
+
+## REST API Authentication
+
+For managing flags via the REST API (create, update, delete), set these environment variables:
+
+| Variable | Description |
+|----------|-------------|
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID |
+| `CLOUDFLARE_API_TOKEN` | API token with Flagship permissions |
+| `FLAGSHIP_APP_ID` | Target app UUID (from dashboard under **Compute > Flagship**, or `GET /apps`) |
+
+Base URL: `https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship`
+
+```bash
+curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/flagship/apps" | jq .
+```
+
+App IDs are shown in the Cloudflare dashboard under **Compute > Flagship**.
+
+---
+
+## Local Development
+
+Flagship bindings work in local dev with `wrangler dev`. Flag evaluation uses the live Flagship configuration — there is no local flag store. Ensure the `app_id` in your Wrangler config points to a valid app.
+
+```bash
+npx wrangler dev
+```

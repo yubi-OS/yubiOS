@@ -96,3 +96,10 @@ Verification recipe: `for f in skills/*/SKILL.md; do skillcheck.sh $f; done` →
 | `workers-best-practices/SKILL.md` | C4 decoded base64-encoded file body (9456 -> 7044 chars) | 9456 → 7092 |
 | `wrangler/SKILL.md` | C4 decoded base64-encoded file body (24480 -> 18357 chars) | 24480 → 18359 |
 | `yubikey-operations/SKILL.md` | C5 replaced 2 template capability paragraph(s); C2 merged 1 duplicate H2 section(s) into their first occurrence | 14909 → 14808 |
+
+## Second pass: base64-encoded bodies outside SKILL.md (362 files)
+
+The first sweep decoded the 13 base64-committed `SKILL.md` bodies; the frontmatter check (C4) only applies to `SKILL.md`, so reference pages, scripts and tests committed the same way were invisible to it. A dedicated scan of all 504 blobs under `skills/` (whole file matches `^[A-Za-z0-9+/=\s]+$`, decodes to UTF-8, printable) found **362** more: every `references/*.md`, `scripts/*.sh`, `tests/*.md` and `README.md` under the personal-Cloudflare skill family. All decode to plain markdown/shell (no nested encoding); 2,135,020 → 1,600,905 bytes. One decoded file (`cloudflare/references/cache-reserve/README.md`) then failed C1 with mojibake and was fixed with the same fixer. `skillcheck.sh` gains **C7 base64-encoded body** so this class is caught on any file from now on. After this commit: 0 base64-looking files remain under `skills/`, and every non-empty file under `skills/` passes C1–C7.
+
+By skill: cloudflare 319, agents-sdk 19, turnstile-spin 12, cloudflare-email-service 5, durable-objects 3, sandbox-next 2, workers-best-practices 2.
+

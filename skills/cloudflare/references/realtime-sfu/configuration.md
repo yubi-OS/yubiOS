@@ -1,1 +1,137 @@
-IyBDb25maWd1cmF0aW9uICYgRGVwbG95bWVudAoKIyMgRGFzaGJvYXJkIFNldHVwCgoxLiBOYXZpZ2F0ZSB0byBodHRwczovL2Rhc2guY2xvdWRmbGFyZS5jb20vP3RvPS86YWNjb3VudC9jYWxscwoyLiBDbGljayAiQ3JlYXRlIEFwcGxpY2F0aW9uIiAob3IgdXNlIGV4aXN0aW5nIGFwcCkKMy4gQ29weSBgQ0FMTFNfQVBQX0lEYCBmcm9tIGRhc2hib2FyZAo0LiBHZW5lcmF0ZSBhbmQgY29weSBgQ0FMTFNfQVBQX1NFQ1JFVGAgKHRyZWF0IGFzIHNlbnNpdGl2ZSBjcmVkZW50aWFsKQo1LiBVc2UgY3JlZGVudGlhbHMgaW4gV3JhbmdsZXIgY29uZmlnIG9yIGVudmlyb25tZW50IHZhcmlhYmxlcyBiZWxvdwoKIyMgRGVwZW5kZW5jaWVzCgoqKkJhY2tlbmQgKFdvcmtlcnMpOioqIEJ1aWx0LWluIGZldGNoIEFQSSwgbm8gYWRkaXRpb25hbCBwYWNrYWdlcyByZXF1aXJlZAoKKipDbGllbnQgKFBhcnR5VHJhY2tzKToqKgpgYGBiYXNoCm5wbSBpbnN0YWxsIHBhcnR5dHJhY2tzIEBjbG91ZGZsYXJlL2NhbGxzCmBgYAoKKipDbGllbnQgKFJlYWN0ICsgUGFydHlUcmFja3MpOioqCmBgYGJhc2gKbnBtIGluc3RhbGwgcGFydHl0cmFja3MgQGNsb3VkZmxhcmUvY2FsbHMgb2JzZXJ2YWJsZS1ob29rcwojIE9ic2VydmFibGUgaG9va3M6IHVzZU9ic2VydmFibGVBc1ZhbHVlLCB1c2VWYWx1ZUFzT2JzZXJ2YWJsZQpgYGAKCioqQ2xpZW50IChSYXcgQVBJKToqKiBOYXRpdmUgYnJvd3NlciBXZWJSVEMgQVBJIG9ubHkKCiMjIFdyYW5nbGVyIFNldHVwCgpgYGBqc29uYwp7CiAgIm5hbWUiOiAibXktY2FsbHMtYXBwIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wMS0wMSIsIC8vIFVzZSBjdXJyZW50IGRhdGUgZm9yIG5ldyBwcm9qZWN0cwogICJ2YXJzIjogewogICAgIkNBTExTX0FQUF9JRCI6ICJ5b3VyLWFwcC1pZCIsCiAgICAiTUFYX1dFQkNBTV9CSVRSQVRFIjogIjEyMDAwMDAiLAogICAgIk1BWF9XRUJDQU1fRlJBTUVSQVRFIjogIjI0IiwKICAgICJNQVhfV0VCQ0FNX1FVQUxJVFlfTEVWRUwiOiAiMTA4MCIKICB9LAogIC8vIFNldCBzZWNyZXQ6IHdyYW5nbGVyIHNlY3JldCBwdXQgQ0FMTFNfQVBQX1NFQ1JFVAogICJkdXJhYmxlX29iamVjdHMiOiB7CiAgICAiYmluZGluZ3MiOiBbCiAgICAgIHsKICAgICAgICAibmFtZSI6ICJST09NIiwKICAgICAgICAiY2xhc3NfbmFtZSI6ICJSb29tIgogICAgICB9CiAgICBdCiAgfQp9CmBgYAoKIyMgRGVwbG95CgpgYGBiYXNoCndyYW5nbGVyIGxvZ2luCndyYW5nbGVyIHNlY3JldCBwdXQgQ0FMTFNfQVBQX1NFQ1JFVAp3cmFuZ2xlciBkZXBsb3kKYGBgCgojIyBFbnZpcm9ubWVudCBWYXJpYWJsZXMKCioqUmVxdWlyZWQ6KioKLSBgQ0FMTFNfQVBQX0lEYDogRnJvbSBkYXNoYm9hcmQKLSBgQ0FMTFNfQVBQX1NFQ1JFVGA6IEZyb20gZGFzaGJvYXJkIChzZWNyZXQpCgoqKk9wdGlvbmFsOioqCi0gYE1BWF9XRUJDQU1fQklUUkFURWAgKGRlZmF1bHQ6IDEyMDAwMDApCi0gYE1BWF9XRUJDQU1fRlJBTUVSQVRFYCAoZGVmYXVsdDogMjQpCi0gYE1BWF9XRUJDQU1fUVVBTElUWV9MRVZFTGAgKGRlZmF1bHQ6IDEwODApCi0gYFRVUk5fU0VSVklDRV9JRGA6IFRVUk4gc2VydmljZQotIGBUVVJOX1NFUlZJQ0VfVE9LRU5gOiBUVVJOIGF1dGggKHNlY3JldCkKCiMjIFRVUk4gQ29uZmlndXJhdGlvbgoKYGBgamF2YXNjcmlwdApjb25zdCBwYyA9IG5ldyBSVENQZWVyQ29ubmVjdGlvbih7CiAgaWNlU2VydmVyczogWwogICAgeyB1cmxzOiAnc3R1bjpzdHVuLmNsb3VkZmxhcmUuY29tOjM0NzgnIH0sCiAgICB7CiAgICAgIHVybHM6IFsKICAgICAgICAndHVybjp0dXJuLmNsb3VkZmxhcmUuY29tOjM0Nzg/dHJhbnNwb3J0PXVkcCcsCiAgICAgICAgJ3R1cm46dHVybi5jbG91ZGZsYXJlLmNvbTozNDc4P3RyYW5zcG9ydD10Y3AnLAogICAgICAgICd0dXJuczp0dXJuLmNsb3VkZmxhcmUuY29tOjUzNDk/dHJhbnNwb3J0PXRjcCcKICAgICAgXSwKICAgICAgdXNlcm5hbWU6IHR1cm5Vc2VybmFtZSwKICAgICAgY3JlZGVudGlhbDogdHVybkNyZWRlbnRpYWwKICAgIH0KICBdLAogIGJ1bmRsZVBvbGljeTogJ21heC1idW5kbGUnLCAvLyBSZWNvbW1lbmRlZDogcmVkdWNlcyBvdmVyaGVhZAogIGljZVRyYW5zcG9ydFBvbGljeTogJ2FsbCcgICAgLy8gVXNlICdyZWxheScgdG8gZm9yY2UgVFVSTiAodGVzdGluZyBvbmx5KQp9KTsKYGBgCgoqKlBvcnRzOioqIDM0NzggKFVEUC9UQ1ApLCA1MyAoVURQKSwgODAgKFRDUCksIDQ0MyAoVExTKSwgNTM0OSAoVExTKQoKKipXaGVuIHRvIHVzZSBUVVJOOioqIFJlcXVpcmVkIGZvciByZXN0cmljdGl2ZSBjb3Jwb3JhdGUgZmlyZXdhbGxzL25ldHdvcmtzIHRoYXQgYmxvY2sgVURQLiB+NS0xMCUgb2YgY29ubmVjdGlvbnMgZmFsbGJhY2sgdG8gVFVSTi4gU1RVTiB3b3JrcyBmb3IgbW9zdCB1c2Vycy4KCioqSUNFIGNhbmRpZGF0ZSBmaWx0ZXJpbmc6KiogQ2xvdWRmbGFyZSBoYW5kbGVzIGNhbmRpZGF0ZSBmaWx0ZXJpbmcgYXV0b21hdGljYWxseS4gTm8gbmVlZCB0byBtYW51YWxseSBmaWx0ZXIgY2FuZGlkYXRlcy4KCiMjIER1cmFibGUgT2JqZWN0IEJvaWxlcnBsYXRlCgpNaW5pbWFsIHByZXNlbmNlIHN5c3RlbToKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGNsYXNzIFJvb20gewogIHByaXZhdGUgc2Vzc2lvbnMgPSBuZXcgTWFwPHN0cmluZywge3VzZXJJZDogc3RyaW5nLCB0cmFja3M6IHN0cmluZ1tdfT4oKTsKCiAgYXN5bmMgZmV0Y2gocmVxOiBSZXF1ZXN0KSB7CiAgICBjb25zdCB7cGF0aG5hbWV9ID0gbmV3IFVSTChyZXEudXJsKTsKICAgIGNvbnN0IGJvZHkgPSBhd2FpdCByZXEuanNvbigpOwogICAgCiAgICBpZiAocGF0aG5hbWUgPT09ICcvam9pbicpIHsKICAgICAgdGhpcy5zZXNzaW9ucy5zZXQoYm9keS5zZXNzaW9uSWQsIHt1c2VySWQ6IGJvZHkudXNlcklkLCB0cmFja3M6IFtdfSk7CiAgICAgIHJldHVybiBSZXNwb25zZS5qc29uKHtwYXJ0aWNpcGFudHM6IHRoaXMuc2Vzc2lvbnMuc2l6ZX0pOwogICAgfQogICAgCiAgICBpZiAocGF0aG5hbWUgPT09ICcvcHVibGlzaCcpIHsKICAgICAgdGhpcy5zZXNzaW9ucy5nZXQoYm9keS5zZXNzaW9uSWQpPy50cmFja3MucHVzaCguLi5ib2R5LnRyYWNrcyk7CiAgICAgIC8vIEJyb2FkY2FzdCB0byBvdGhlcnMgdmlhIFdlYlNvY2tldCAobm90IHNob3duKQogICAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCdPSycpOwogICAgfQogICAgCiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCdOb3QgZm91bmQnLCB7c3RhdHVzOiA0MDR9KTsKICB9Cn0KYGBgCgojIyBFbnZpcm9ubWVudCBWYWxpZGF0aW9uCgpDaGVjayBjcmVkZW50aWFscyBiZWZvcmUgZmlyc3QgQVBJIGNhbGw6CgpgYGB0eXBlc2NyaXB0CmlmICghZW52LkNBTExTX0FQUF9JRCB8fCAhZW52LkNBTExTX0FQUF9TRUNSRVQpIHsKICB0aHJvdyBuZXcgRXJyb3IoJ0NBTExTX0FQUF9JRCBhbmQgQ0FMTFNfQVBQX1NFQ1JFVCByZXF1aXJlZCcpOwp9CmBgYAo=
+# Configuration & Deployment
+
+## Dashboard Setup
+
+1. Navigate to https://dash.cloudflare.com/?to=/:account/calls
+2. Click "Create Application" (or use existing app)
+3. Copy `CALLS_APP_ID` from dashboard
+4. Generate and copy `CALLS_APP_SECRET` (treat as sensitive credential)
+5. Use credentials in Wrangler config or environment variables below
+
+## Dependencies
+
+**Backend (Workers):** Built-in fetch API, no additional packages required
+
+**Client (PartyTracks):**
+```bash
+npm install partytracks @cloudflare/calls
+```
+
+**Client (React + PartyTracks):**
+```bash
+npm install partytracks @cloudflare/calls observable-hooks
+# Observable hooks: useObservableAsValue, useValueAsObservable
+```
+
+**Client (Raw API):** Native browser WebRTC API only
+
+## Wrangler Setup
+
+```jsonc
+{
+  "name": "my-calls-app",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01", // Use current date for new projects
+  "vars": {
+    "CALLS_APP_ID": "your-app-id",
+    "MAX_WEBCAM_BITRATE": "1200000",
+    "MAX_WEBCAM_FRAMERATE": "24",
+    "MAX_WEBCAM_QUALITY_LEVEL": "1080"
+  },
+  // Set secret: wrangler secret put CALLS_APP_SECRET
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "ROOM",
+        "class_name": "Room"
+      }
+    ]
+  }
+}
+```
+
+## Deploy
+
+```bash
+wrangler login
+wrangler secret put CALLS_APP_SECRET
+wrangler deploy
+```
+
+## Environment Variables
+
+**Required:**
+- `CALLS_APP_ID`: From dashboard
+- `CALLS_APP_SECRET`: From dashboard (secret)
+
+**Optional:**
+- `MAX_WEBCAM_BITRATE` (default: 1200000)
+- `MAX_WEBCAM_FRAMERATE` (default: 24)
+- `MAX_WEBCAM_QUALITY_LEVEL` (default: 1080)
+- `TURN_SERVICE_ID`: TURN service
+- `TURN_SERVICE_TOKEN`: TURN auth (secret)
+
+## TURN Configuration
+
+```javascript
+const pc = new RTCPeerConnection({
+  iceServers: [
+    { urls: 'stun:stun.cloudflare.com:3478' },
+    {
+      urls: [
+        'turn:turn.cloudflare.com:3478?transport=udp',
+        'turn:turn.cloudflare.com:3478?transport=tcp',
+        'turns:turn.cloudflare.com:5349?transport=tcp'
+      ],
+      username: turnUsername,
+      credential: turnCredential
+    }
+  ],
+  bundlePolicy: 'max-bundle', // Recommended: reduces overhead
+  iceTransportPolicy: 'all'    // Use 'relay' to force TURN (testing only)
+});
+```
+
+**Ports:** 3478 (UDP/TCP), 53 (UDP), 80 (TCP), 443 (TLS), 5349 (TLS)
+
+**When to use TURN:** Required for restrictive corporate firewalls/networks that block UDP. ~5-10% of connections fallback to TURN. STUN works for most users.
+
+**ICE candidate filtering:** Cloudflare handles candidate filtering automatically. No need to manually filter candidates.
+
+## Durable Object Boilerplate
+
+Minimal presence system:
+
+```typescript
+export class Room {
+  private sessions = new Map<string, {userId: string, tracks: string[]}>();
+
+  async fetch(req: Request) {
+    const {pathname} = new URL(req.url);
+    const body = await req.json();
+    
+    if (pathname === '/join') {
+      this.sessions.set(body.sessionId, {userId: body.userId, tracks: []});
+      return Response.json({participants: this.sessions.size});
+    }
+    
+    if (pathname === '/publish') {
+      this.sessions.get(body.sessionId)?.tracks.push(...body.tracks);
+      // Broadcast to others via WebSocket (not shown)
+      return new Response('OK');
+    }
+    
+    return new Response('Not found', {status: 404});
+  }
+}
+```
+
+## Environment Validation
+
+Check credentials before first API call:
+
+```typescript
+if (!env.CALLS_APP_ID || !env.CALLS_APP_SECRET) {
+  throw new Error('CALLS_APP_ID and CALLS_APP_SECRET required');
+}
+```

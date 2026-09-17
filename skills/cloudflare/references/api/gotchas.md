@@ -1,1 +1,225 @@
-IyBHb3RjaGFzICYgVHJvdWJsZXNob290aW5nCgojIyBSYXRlIExpbWl0cyAmIDQyOSBFcnJvcnMKCioqQWN0dWFsIExpbWl0czoqKgotICoqMTIwMCByZXF1ZXN0cyAvIDUgbWludXRlcyoqIHBlciB1c2VyL3Rva2VuIChnbG9iYWwpCi0gKioyMDAgcmVxdWVzdHMgLyBzZWNvbmQqKiBwZXIgSVAgYWRkcmVzcwotICoqR3JhcGhRTDogMzIwIC8gNSBtaW51dGVzKiogKGNvc3QtYmFzZWQpCgoqKlNESyBCZWhhdmlvcjoqKgotIEF1dG8tcmV0cnkgd2l0aCBleHBvbmVudGlhbCBiYWNrb2ZmIChkZWZhdWx0IDIgcmV0cmllcywgR286IDEwKQotIFJlc3BlY3RzIGBSZXRyeS1BZnRlcmAgaGVhZGVyCi0gVGhyb3dzIGBSYXRlTGltaXRFcnJvcmAgYWZ0ZXIgZXhoYXVzdGluZyByZXRyaWVzCgoqKlNvbHV0aW9uOioqCgpgYGB0eXBlc2NyaXB0Ci8vIEluY3JlYXNlIHJldHJpZXMgZm9yIHJhdGUtbGltaXQtaGVhdnkgd29ya2Zsb3dzCmNvbnN0IGNsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsgbWF4UmV0cmllczogNSB9KTsKCi8vIEFkZCBhcHBsaWNhdGlvbi1sZXZlbCB0aHJvdHRsaW5nCmltcG9ydCBwTGltaXQgZnJvbSAncC1saW1pdCc7CmNvbnN0IGxpbWl0ID0gcExpbWl0KDEwKTsgLy8gTWF4IDEwIGNvbmN1cnJlbnQgcmVxdWVzdHMKYGBgCgojIyBTREstU3BlY2lmaWMgSXNzdWVzCgojIyMgR286IFJlcXVpcmVkIEZpZWxkIFdyYXBwZXIKCioqUHJvYmxlbToqKiBHbyBTREsgcmVxdWlyZXMgYGNsb3VkZmxhcmUuRigpYCB3cmFwcGVyIGZvciBvcHRpb25hbCBmaWVsZHMuCgpgYGBnbwovLyDinYwgV1JPTkcgLSBXb24ndCBjb21waWxlIG9yIHNlbmQgZmllbGQKY2xpZW50LlpvbmVzLk5ldyhjdHgsIGNsb3VkZmxhcmUuWm9uZU5ld1BhcmFtc3sKICAgIE5hbWU6ICJleGFtcGxlLmNvbSIsCn0pCgovLyDinIUgQ09SUkVDVApjbGllbnQuWm9uZXMuTmV3KGN0eCwgY2xvdWRmbGFyZS5ab25lTmV3UGFyYW1zewogICAgTmFtZTogY2xvdWRmbGFyZS5GKCJleGFtcGxlLmNvbSIpLAogICAgQWNjb3VudDogY2xvdWRmbGFyZS5GKGNsb3VkZmxhcmUuWm9uZU5ld1BhcmFtc0FjY291bnR7CiAgICAgICAgSUQ6IGNsb3VkZmxhcmUuRigiYWNjb3VudC1pZCIpLAogICAgfSksCn0pCmBgYAoKKipXaHk6KiogRGlzdGluZ3Vpc2hlcyBiZXR3ZWVuIHplcm8gdmFsdWUsIG51bGwsIGFuZCBvbWl0dGVkIGZpZWxkcy4KCiMjIyBQeXRob246IEFzeW5jIHZzIFN5bmMgQ2xpZW50cwoKKipQcm9ibGVtOioqIFVzaW5nIHN5bmMgY2xpZW50IGluIGFzeW5jIGNvbnRleHQgb3IgdmljZSB2ZXJzYS4KCmBgYHB5dGhvbgojIOKdjCBXUk9ORyAtIENhbid0IGF3YWl0IHN5bmMgY2xpZW50CmZyb20gY2xvdWRmbGFyZSBpbXBvcnQgQ2xvdWRmbGFyZQpjbGllbnQgPSBDbG91ZGZsYXJlKCkKYXdhaXQgY2xpZW50LnpvbmVzLmxpc3QoKSAgIyBUeXBlRXJyb3IKCiMg4pyFIENPUlJFQ1QgLSBVc2UgQXN5bmNDbG91ZGZsYXJlCmZyb20gY2xvdWRmbGFyZSBpbXBvcnQgQXN5bmNDbG91ZGZsYXJlCmNsaWVudCA9IEFzeW5jQ2xvdWRmbGFyZSgpCmF3YWl0IGNsaWVudC56b25lcy5saXN0KCkKYGBgCgojIyBUb2tlbiBQZXJtaXNzaW9uIEVycm9ycyAoNDAzKQoKKipQcm9ibGVtOioqIEFQSSByZXR1cm5zIDQwMyBGb3JiaWRkZW4gZGVzcGl0ZSB2YWxpZCB0b2tlbi4KCioqQ2F1c2U6KiogVG9rZW4gbGFja3MgcmVxdWlyZWQgcGVybWlzc2lvbnMgKHNjb3BlKS4KCioqU2NvcGVzIFJlcXVpcmVkOioqCgp8IE9wZXJhdGlvbiB8IFJlcXVpcmVkIFNjb3BlIHwKfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS18CnwgTGlzdCB6b25lcyB8IFpvbmU6UmVhZCAoem9uZS1sZXZlbCBvciBhY2NvdW50LWxldmVsKSB8CnwgQ3JlYXRlIHpvbmUgfCBab25lOkVkaXQgKGFjY291bnQtbGV2ZWwpIHwKfCBFZGl0IEROUyB8IEROUzpFZGl0ICh6b25lLWxldmVsKSB8CnwgRGVwbG95IFdvcmtlciB8IFdvcmtlcnMgU2NyaXB0OkVkaXQgKGFjY291bnQtbGV2ZWwpIHwKfCBSZWFkIEtWIHwgV29ya2VycyBLViBTdG9yYWdlOlJlYWQgfAp8IFdyaXRlIEtWIHwgV29ya2VycyBLViBTdG9yYWdlOkVkaXQgfAoKKipTb2x1dGlvbjoqKiBSZS1jcmVhdGUgdG9rZW4gd2l0aCBjb3JyZWN0IHBlcm1pc3Npb25zIGluIERhc2hib2FyZCDihpIgTXkgUHJvZmlsZSDihpIgQVBJIFRva2Vucy4KCiMjIFBhZ2luYXRpb24gVHJ1bmNhdGlvbgoKKipQcm9ibGVtOioqIE9ubHkgZ2V0dGluZyBmaXJzdCAyMCByZXN1bHRzIChkZWZhdWx0IHBhZ2Ugc2l6ZSkuCgoqKlNvbHV0aW9uOioqIFVzZSBhdXRvLXBhZ2luYXRpb24gaXRlcmF0b3JzLgoKYGBgdHlwZXNjcmlwdAovLyDinYwgV1JPTkcgLSBPbmx5IGZpcnN0IHBhZ2UgKDIwIGl0ZW1zKQpjb25zdCBwYWdlID0gYXdhaXQgY2xpZW50LnpvbmVzLmxpc3QoKTsKCi8vIOKchSBDT1JSRUNUIC0gQWxsIHJlc3VsdHMKY29uc3Qgem9uZXMgPSBbXTsKZm9yIGF3YWl0IChjb25zdCB6b25lIG9mIGNsaWVudC56b25lcy5saXN0KCkpIHsKICB6b25lcy5wdXNoKHpvbmUpOwp9CmBgYAoKIyMgV29ya2VycyBTdWJyZXF1ZXN0cwoKKipQcm9ibGVtOioqIFJhdGUgbGltaXQgaGl0IGZhc3RlciB0aGFuIGV4cGVjdGVkIGluIFdvcmtlcnMuCgoqKkNhdXNlOioqIFdvcmtlcnMgc3VicmVxdWVzdHMgY291bnQgYXMgc2VwYXJhdGUgQVBJIGNhbGxzLgoKKipTb2x1dGlvbjoqKiBVc2UgYmluZGluZ3MgaW5zdGVhZCBvZiBSRVNUIEFQSSBpbiBXb3JrZXJzIChzZWUgLi4vYmluZGluZ3MvKS4KCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HIC0gUkVTVCBBUEkgaW4gV29ya2VycyAoY291bnRzIGFnYWluc3QgcmF0ZSBsaW1pdCkKY29uc3QgY2xpZW50ID0gbmV3IENsb3VkZmxhcmUoeyBhcGlUb2tlbjogZW52LkNMT1VERkxBUkVfQVBJX1RPS0VOIH0pOwpjb25zdCB6b25lcyA9IGF3YWl0IGNsaWVudC56b25lcy5saXN0KCk7CgovLyDinIUgQ09SUkVDVCAtIFVzZSBiaW5kaW5ncyAobm8gcmF0ZSBsaW1pdCkKLy8gQWNjZXNzIHZpYSBlbnYuTVlfQklORElORwpgYGAKCiMjIEF1dGhlbnRpY2F0aW9uIEVycm9ycyAoNDAxKQoKKipQcm9ibGVtOioqICJBdXRoZW50aWNhdGlvbiBmYWlsZWQiIG9yICJJbnZhbGlkIHRva2VuIgoKKipDYXVzZXM6KioKLSBUb2tlbiBleHBpcmVkCi0gVG9rZW4gZGVsZXRlZC9yZXZva2VkCi0gVG9rZW4gbm90IHNldCBpbiBlbnZpcm9ubWVudAotIFdyb25nIHRva2VuIGZvcm1hdAoKKipTb2x1dGlvbjoqKgoKYGBgdHlwZXNjcmlwdAovLyBWZXJpZnkgdG9rZW4gaXMgc2V0CmlmICghcHJvY2Vzcy5lbnYuQ0xPVURGTEFSRV9BUElfVE9LRU4pIHsKICB0aHJvdyBuZXcgRXJyb3IoJ0NMT1VERkxBUkVfQVBJX1RPS0VOIG5vdCBzZXQnKTsKfQoKLy8gVGVzdCB0b2tlbgpjb25zdCB1c2VyID0gYXdhaXQgY2xpZW50LnVzZXIudG9rZW5zLnZlcmlmeSgpOwpjb25zb2xlLmxvZygnVG9rZW4gdmFsaWQ6JywgdXNlci5zdGF0dXMpOwpgYGAKCiMjIFRpbWVvdXQgRXJyb3JzCgoqKlByb2JsZW06KiogUmVxdWVzdCB0aW1lcyBvdXQgKGRlZmF1bHQgNjBzKS4KCioqQ2F1c2U6KiogTGFyZ2Ugb3BlcmF0aW9ucyAoYnVsayBETlMsIHpvbmUgdHJhbnNmZXJzKS4KCioqU29sdXRpb246KiogSW5jcmVhc2UgdGltZW91dCBvciBzcGxpdCBvcGVyYXRpb25zLgoKYGBgdHlwZXNjcmlwdAovLyBJbmNyZWFzZSB0aW1lb3V0CmNvbnN0IGNsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsKICB0aW1lb3V0OiAzMDAwMDAsIC8vIDUgbWludXRlcwp9KTsKCi8vIE9yIHNwbGl0IG9wZXJhdGlvbnMKY29uc3QgYmF0Y2hTaXplID0gMTAwOwpmb3IgKGxldCBpID0gMDsgaSA8IHJlY29yZHMubGVuZ3RoOyBpICs9IGJhdGNoU2l6ZSkgewogIGNvbnN0IGJhdGNoID0gcmVjb3Jkcy5zbGljZShpLCBpICsgYmF0Y2hTaXplKTsKICBhd2FpdCBwcm9jZXNzQmF0Y2goYmF0Y2gpOwp9CmBgYAoKIyMgWm9uZSBOb3QgRm91bmQgKDQwNCkKCioqUHJvYmxlbToqKiBab25lIElEIHZhbGlkIGJ1dCByZXR1cm5zIDQwNC4KCioqQ2F1c2VzOioqCi0gWm9uZSBub3QgaW4gYWNjb3VudCBhc3NvY2lhdGVkIHdpdGggdG9rZW4KLSBab25lIGRlbGV0ZWQKLSBXcm9uZyB6b25lIElEIGZvcm1hdAoKKipTb2x1dGlvbjoqKgoKYGBgdHlwZXNjcmlwdAovLyBMaXN0IGFsbCB6b25lcyB0byBmaW5kIGNvcnJlY3QgSUQKZm9yIGF3YWl0IChjb25zdCB6b25lIG9mIGNsaWVudC56b25lcy5saXN0KCkpIHsKICBjb25zb2xlLmxvZyh6b25lLmlkLCB6b25lLm5hbWUpOwp9CmBgYAoKIyMgTGltaXRzIFJlZmVyZW5jZQoKfCBSZXNvdXJjZS9MaW1pdCB8IFZhbHVlIHwgTm90ZXMgfAp8LS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tfC0tLS0tLS18CnwgQVBJIHJhdGUgbGltaXQgfCAxMjAwLzVtaW4gfCBQZXIgdXNlci90b2tlbiB8CnwgSVAgcmF0ZSBsaW1pdCB8IDIwMC9zZWMgfCBQZXIgSVAgfAp8IEdyYXBoUUwgcmF0ZSBsaW1pdCB8IDMyMC81bWluIHwgQ29zdC1iYXNlZCB8CnwgUGFyYWxsZWwgcmVxdWVzdHMgKHJlY29tbWVuZGVkKSB8IDwgMTAgfCBBdm9pZCBvdmVyd2hlbG1pbmcgQVBJIHwKfCBEZWZhdWx0IHBhZ2Ugc2l6ZSB8IDIwIHwgVXNlIGF1dG8tcGFnaW5hdGlvbiB8CnwgTWF4IHBhZ2Ugc2l6ZSB8IDUwIHwgU29tZSBlbmRwb2ludHMgfAoKIyMgQmVzdCBQcmFjdGljZXMKCioqU2VjdXJpdHk6KioKLSBOZXZlciBjb21taXQgdG9rZW5zCi0gVXNlIG1pbmltYWwgcGVybWlzc2lvbnMKLSBSb3RhdGUgdG9rZW5zIHJlZ3VsYXJseQotIFNldCB0b2tlbiBleHBpcmF0aW9uCgoqKlBlcmZvcm1hbmNlOioqCi0gQmF0Y2ggb3BlcmF0aW9ucwotIFVzZSBwYWdpbmF0aW9uIHdpc2VseQotIENhY2hlIHJlc3BvbnNlcwotIEhhbmRsZSByYXRlIGxpbWl0cwoKKipDb2RlIE9yZ2FuaXphdGlvbjoqKgoKYGBgdHlwZXNjcmlwdAovLyBDcmVhdGUgcmV1c2FibGUgY2xpZW50IGluc3RhbmNlCmV4cG9ydCBjb25zdCBjZkNsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsKICBhcGlUb2tlbjogcHJvY2Vzcy5lbnYuQ0xPVURGTEFSRV9BUElfVE9LRU4sCiAgbWF4UmV0cmllczogNSwKfSk7CgovLyBXcmFwIGNvbW1vbiBvcGVyYXRpb25zCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRab25lRGV0YWlscyh6b25lSWQ6IHN0cmluZykgewogIHJldHVybiBhd2FpdCBjZkNsaWVudC56b25lcy5nZXQoeyB6b25lX2lkOiB6b25lSWQgfSk7Cn0KYGBgCgojIyBTZWUgQWxzbwoKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBFcnJvciB0eXBlcywgYXV0aGVudGljYXRpb24KLSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIFRpbWVvdXQvcmV0cnkgY29uZmlndXJhdGlvbgotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBFcnJvciBoYW5kbGluZyBwYXR0ZXJucwo=
+# Gotchas & Troubleshooting
+
+## Rate Limits & 429 Errors
+
+**Actual Limits:**
+- **1200 requests / 5 minutes** per user/token (global)
+- **200 requests / second** per IP address
+- **GraphQL: 320 / 5 minutes** (cost-based)
+
+**SDK Behavior:**
+- Auto-retry with exponential backoff (default 2 retries, Go: 10)
+- Respects `Retry-After` header
+- Throws `RateLimitError` after exhausting retries
+
+**Solution:**
+
+```typescript
+// Increase retries for rate-limit-heavy workflows
+const client = new Cloudflare({ maxRetries: 5 });
+
+// Add application-level throttling
+import pLimit from 'p-limit';
+const limit = pLimit(10); // Max 10 concurrent requests
+```
+
+## SDK-Specific Issues
+
+### Go: Required Field Wrapper
+
+**Problem:** Go SDK requires `cloudflare.F()` wrapper for optional fields.
+
+```go
+// ❌ WRONG - Won't compile or send field
+client.Zones.New(ctx, cloudflare.ZoneNewParams{
+    Name: "example.com",
+})
+
+// ✅ CORRECT
+client.Zones.New(ctx, cloudflare.ZoneNewParams{
+    Name: cloudflare.F("example.com"),
+    Account: cloudflare.F(cloudflare.ZoneNewParamsAccount{
+        ID: cloudflare.F("account-id"),
+    }),
+})
+```
+
+**Why:** Distinguishes between zero value, null, and omitted fields.
+
+### Python: Async vs Sync Clients
+
+**Problem:** Using sync client in async context or vice versa.
+
+```python
+# ❌ WRONG - Can't await sync client
+from cloudflare import Cloudflare
+client = Cloudflare()
+await client.zones.list()  # TypeError
+
+# ✅ CORRECT - Use AsyncCloudflare
+from cloudflare import AsyncCloudflare
+client = AsyncCloudflare()
+await client.zones.list()
+```
+
+## Token Permission Errors (403)
+
+**Problem:** API returns 403 Forbidden despite valid token.
+
+**Cause:** Token lacks required permissions (scope).
+
+**Scopes Required:**
+
+| Operation | Required Scope |
+|-----------|----------------|
+| List zones | Zone:Read (zone-level or account-level) |
+| Create zone | Zone:Edit (account-level) |
+| Edit DNS | DNS:Edit (zone-level) |
+| Deploy Worker | Workers Script:Edit (account-level) |
+| Read KV | Workers KV Storage:Read |
+| Write KV | Workers KV Storage:Edit |
+
+**Solution:** Re-create token with correct permissions in Dashboard → My Profile → API Tokens.
+
+## Pagination Truncation
+
+**Problem:** Only getting first 20 results (default page size).
+
+**Solution:** Use auto-pagination iterators.
+
+```typescript
+// ❌ WRONG - Only first page (20 items)
+const page = await client.zones.list();
+
+// ✅ CORRECT - All results
+const zones = [];
+for await (const zone of client.zones.list()) {
+  zones.push(zone);
+}
+```
+
+## Workers Subrequests
+
+**Problem:** Rate limit hit faster than expected in Workers.
+
+**Cause:** Workers subrequests count as separate API calls.
+
+**Solution:** Use bindings instead of REST API in Workers (see ../bindings/).
+
+```typescript
+// ❌ WRONG - REST API in Workers (counts against rate limit)
+const client = new Cloudflare({ apiToken: env.CLOUDFLARE_API_TOKEN });
+const zones = await client.zones.list();
+
+// ✅ CORRECT - Use bindings (no rate limit)
+// Access via env.MY_BINDING
+```
+
+## Authentication Errors (401)
+
+**Problem:** "Authentication failed" or "Invalid token"
+
+**Causes:**
+- Token expired
+- Token deleted/revoked
+- Token not set in environment
+- Wrong token format
+
+**Solution:**
+
+```typescript
+// Verify token is set
+if (!process.env.CLOUDFLARE_API_TOKEN) {
+  throw new Error('CLOUDFLARE_API_TOKEN not set');
+}
+
+// Test token
+const user = await client.user.tokens.verify();
+console.log('Token valid:', user.status);
+```
+
+## Timeout Errors
+
+**Problem:** Request times out (default 60s).
+
+**Cause:** Large operations (bulk DNS, zone transfers).
+
+**Solution:** Increase timeout or split operations.
+
+```typescript
+// Increase timeout
+const client = new Cloudflare({
+  timeout: 300000, // 5 minutes
+});
+
+// Or split operations
+const batchSize = 100;
+for (let i = 0; i < records.length; i += batchSize) {
+  const batch = records.slice(i, i + batchSize);
+  await processBatch(batch);
+}
+```
+
+## Zone Not Found (404)
+
+**Problem:** Zone ID valid but returns 404.
+
+**Causes:**
+- Zone not in account associated with token
+- Zone deleted
+- Wrong zone ID format
+
+**Solution:**
+
+```typescript
+// List all zones to find correct ID
+for await (const zone of client.zones.list()) {
+  console.log(zone.id, zone.name);
+}
+```
+
+## Limits Reference
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| API rate limit | 1200/5min | Per user/token |
+| IP rate limit | 200/sec | Per IP |
+| GraphQL rate limit | 320/5min | Cost-based |
+| Parallel requests (recommended) | < 10 | Avoid overwhelming API |
+| Default page size | 20 | Use auto-pagination |
+| Max page size | 50 | Some endpoints |
+
+## Best Practices
+
+**Security:**
+- Never commit tokens
+- Use minimal permissions
+- Rotate tokens regularly
+- Set token expiration
+
+**Performance:**
+- Batch operations
+- Use pagination wisely
+- Cache responses
+- Handle rate limits
+
+**Code Organization:**
+
+```typescript
+// Create reusable client instance
+export const cfClient = new Cloudflare({
+  apiToken: process.env.CLOUDFLARE_API_TOKEN,
+  maxRetries: 5,
+});
+
+// Wrap common operations
+export async function getZoneDetails(zoneId: string) {
+  return await cfClient.zones.get({ zone_id: zoneId });
+}
+```
+
+## See Also
+
+- [api.md](./api.md) - Error types, authentication
+- [configuration.md](./configuration.md) - Timeout/retry configuration
+- [patterns.md](./patterns.md) - Error handling patterns

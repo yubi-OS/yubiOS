@@ -1,1 +1,88 @@
-IyBBSSBTZWFyY2ggQ29uZmlndXJhdGlvbgoKIyMgV29ya2VyIFNldHVwCgpgYGBqc29uYwovLyB3cmFuZ2xlci5qc29uYwp7CiAgImFpIjogeyAiYmluZGluZyI6ICJBSSIgfQp9CmBgYAoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBBSTogQWk7Cn0KCmNvbnN0IGFuc3dlciA9IGF3YWl0IGVudi5BSS5hdXRvcmFnKCJteS1pbnN0YW5jZSIpLmFpU2VhcmNoKHsKICBxdWVyeTogIkhvdyBkbyBJIGNvbmZpZ3VyZSBjYWNoaW5nPyIsCiAgbW9kZWw6ICJAY2YvbWV0YS9sbGFtYS0zLjMtNzBiLWluc3RydWN0LWZwOC1mYXN0Igp9KTsKYGBgCgojIyBEYXRhIFNvdXJjZXMKCiMjIyBSMiBCdWNrZXQKCkRhc2hib2FyZDogQUkgU2VhcmNoIOKGkiBDcmVhdGUgSW5zdGFuY2Ug4oaSIFNlbGVjdCBSMiBidWNrZXQKCioqU3VwcG9ydGVkIGZvcm1hdHM6KiogYC5tZGAsIGAudHh0YCwgYC5odG1sYCwgYC5wZGZgLCBgLmRvY2AsIGAuZG9jeGAsIGAuY3N2YCwgYC5qc29uYAoKKipBdXRvLWluZGV4ZWQgbWV0YWRhdGE6KiogYGZpbGVuYW1lYCwgYGZvbGRlcmAsIGB0aW1lc3RhbXBgCgojIyMgV2Vic2l0ZSBDcmF3bGVyCgpSZXF1aXJlbWVudHM6Ci0gRG9tYWluIG9uIENsb3VkZmxhcmUKLSBgc2l0ZW1hcC54bWxgIGF0IHJvb3QKLSBCb3QgcHJvdGVjdGlvbiBtdXN0IGFsbG93IGBDbG91ZGZsYXJlQUlTZWFyY2hgIHVzZXIgYWdlbnQKCiMjIFBhdGggRmlsdGVyaW5nIChSMikKCmBgYApkb2NzLyoqLyoubWQgICAgICAgICAgIyBBbGwgLm1kIGluIGRvY3MvIHJlY3Vyc2l2ZWx5CioqLyouZHJhZnQubWQgICAgICAgICAjIEV4Y2x1ZGUgKHVzZSBpbiBleGNsdWRlIHBhdHRlcm5zKQpgYGAKCiMjIEluZGV4aW5nCgotICoqQXV0b21hdGljOioqIEV2ZXJ5IDYgaG91cnMKLSAqKkZvcmNlIFN5bmM6KiogRGFzaGJvYXJkIGJ1dHRvbiAoMzBzIHJhdGUgbGltaXQgYmV0d2VlbiBzeW5jcykKLSAqKlBhdXNlOioqIFNldHRpbmdzIOKGkiBQYXVzZSBJbmRleGluZyAoZXhpc3RpbmcgaW5kZXggcmVtYWlucyBzZWFyY2hhYmxlKQoKIyMgU2VydmljZSBBUEkgVG9rZW4KCkRhc2hib2FyZDogQUkgU2VhcmNoIOKGkiBJbnN0YW5jZSDihpIgVXNlIEFJIFNlYXJjaCDihpIgQVBJIOKGkiBDcmVhdGUgVG9rZW4KClBlcm1pc3Npb25zOgotICoqUmVhZCoqIC0gc2VhcmNoIG9wZXJhdGlvbnMKLSAqKkVkaXQqKiAtIGluc3RhbmNlIG1hbmFnZW1lbnQKClN0b3JlIHNlY3VyZWx5OgpgYGBiYXNoCndyYW5nbGVyIHNlY3JldCBwdXQgQUlfU0VBUkNIX1RPS0VOCmBgYAoKIyMgTXVsdGktRW52aXJvbm1lbnQKCmBgYHRvbWwKIyB3cmFuZ2xlci50b21sCltlbnYucHJvZHVjdGlvbi52YXJzXQpBSV9TRUFSQ0hfSU5TVEFOQ0UgPSAicHJvZC1kb2NzIgoKW2Vudi5zdGFnaW5nLnZhcnNdCkFJX1NFQVJDSF9JTlNUQU5DRSA9ICJzdGFnaW5nLWRvY3MiCmBgYAoKYGBgdHlwZXNjcmlwdApjb25zdCBhbnN3ZXIgPSBhd2FpdCBlbnYuQUkuYXV0b3JhZyhlbnYuQUlfU0VBUkNIX0lOU1RBTkNFKS5haVNlYXJjaCh7IHF1ZXJ5IH0pOwpgYGAKCiMjIE1vbml0b3JpbmcKCmBgYHR5cGVzY3JpcHQKY29uc3QgaW5zdGFuY2VzID0gYXdhaXQgZW52LkFJLmF1dG9yYWcoIl8iKS5saXN0SW5zdGFuY2VzKCk7CmNvbnNvbGUubG9nKGluc3RhbmNlcy5maW5kKGkgPT4gaS5uYW1lID09PSAiZG9jcyIpKTsKYGBgCgpEYXNoYm9hcmQgc2hvd3M6IGZpbGVzIGluZGV4ZWQsIHN0YXR1cywgbGFzdCBpbmRleCB0aW1lLCBzdG9yYWdlIHVzYWdlLgo=
+# AI Search Configuration
+
+## Worker Setup
+
+```jsonc
+// wrangler.jsonc
+{
+  "ai": { "binding": "AI" }
+}
+```
+
+```typescript
+interface Env {
+  AI: Ai;
+}
+
+const answer = await env.AI.autorag("my-instance").aiSearch({
+  query: "How do I configure caching?",
+  model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+});
+```
+
+## Data Sources
+
+### R2 Bucket
+
+Dashboard: AI Search → Create Instance → Select R2 bucket
+
+**Supported formats:** `.md`, `.txt`, `.html`, `.pdf`, `.doc`, `.docx`, `.csv`, `.json`
+
+**Auto-indexed metadata:** `filename`, `folder`, `timestamp`
+
+### Website Crawler
+
+Requirements:
+- Domain on Cloudflare
+- `sitemap.xml` at root
+- Bot protection must allow `CloudflareAISearch` user agent
+
+## Path Filtering (R2)
+
+```
+docs/**/*.md          # All .md in docs/ recursively
+**/*.draft.md         # Exclude (use in exclude patterns)
+```
+
+## Indexing
+
+- **Automatic:** Every 6 hours
+- **Force Sync:** Dashboard button (30s rate limit between syncs)
+- **Pause:** Settings → Pause Indexing (existing index remains searchable)
+
+## Service API Token
+
+Dashboard: AI Search → Instance → Use AI Search → API → Create Token
+
+Permissions:
+- **Read** - search operations
+- **Edit** - instance management
+
+Store securely:
+```bash
+wrangler secret put AI_SEARCH_TOKEN
+```
+
+## Multi-Environment
+
+```toml
+# wrangler.toml
+[env.production.vars]
+AI_SEARCH_INSTANCE = "prod-docs"
+
+[env.staging.vars]
+AI_SEARCH_INSTANCE = "staging-docs"
+```
+
+```typescript
+const answer = await env.AI.autorag(env.AI_SEARCH_INSTANCE).aiSearch({ query });
+```
+
+## Monitoring
+
+```typescript
+const instances = await env.AI.autorag("_").listInstances();
+console.log(instances.find(i => i.name === "docs"));
+```
+
+Dashboard shows: files indexed, status, last index time, storage usage.

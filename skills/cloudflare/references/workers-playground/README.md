@@ -1,1 +1,127 @@
-IyBDbG91ZGZsYXJlIFdvcmtlcnMgUGxheWdyb3VuZCBTa2lsbCBSZWZlcmVuY2UKCiMjIE92ZXJ2aWV3CgpDbG91ZGZsYXJlIFdvcmtlcnMgUGxheWdyb3VuZCBpcyBhIGJyb3dzZXItYmFzZWQgc2FuZGJveCBmb3IgaW5zdGFudGx5IGV4cGVyaW1lbnRpbmcgd2l0aCwgdGVzdGluZywgYW5kIGRlcGxveWluZyBDbG91ZGZsYXJlIFdvcmtlcnMgd2l0aG91dCBhdXRoZW50aWNhdGlvbiBvciBzZXR1cC4gVGhpcyBza2lsbCBwcm92aWRlcyBwYXR0ZXJucywgQVBJcywgYW5kIGJlc3QgcHJhY3RpY2VzIHNwZWNpZmljYWxseSBmb3IgV29ya2VycyBQbGF5Z3JvdW5kIGRldmVsb3BtZW50LgoKKipVUkw6KiogW3dvcmtlcnMuY2xvdWRmbGFyZS5jb20vcGxheWdyb3VuZF0oaHR0cHM6Ly93b3JrZXJzLmNsb3VkZmxhcmUuY29tL3BsYXlncm91bmQpCgojIyDimqDvuI8gUGxheWdyb3VuZCBDb25zdHJhaW50cwoKKipQbGF5Z3JvdW5kIGlzIE5PVCBwcm9kdWN0aW9uLWVxdWl2YWxlbnQ6KioKLSDinIUgUmVhbCBXb3JrZXJzIHJ1bnRpbWUsIGluc3RhbnQgdGVzdGluZywgc2hhcmVhYmxlIFVSTHMKLSDinYwgTm8gVHlwZVNjcmlwdCAoSmF2YVNjcmlwdCBvbmx5KQotIOKdjCBObyBiaW5kaW5ncyAoS1YsIEQxLCBSMiwgRHVyYWJsZSBPYmplY3RzKQotIOKdjCBObyBlbnZpcm9ubWVudCB2YXJpYWJsZXMgb3Igc2VjcmV0cwotIOKdjCBFUyBtb2R1bGVzIG9ubHkgKG5vIFNlcnZpY2UgV29ya2VyIGZvcm1hdCkKLSDimqDvuI8gU2FmYXJpIGJyb2tlbiAodXNlIENocm9tZS9GaXJlZm94KQoKKipGb3IgcHJvZHVjdGlvbjoqKiBVc2UgYHdyYW5nbGVyYCBDTEkuIFBsYXlncm91bmQgaXMgZm9yIHJhcGlkIHByb3RvdHlwaW5nLgoKIyMgUXVpY2sgU3RhcnQKCk1pbmltYWwgV29ya2VyOgoKYGBgamF2YXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52LCBjdHgpIHsKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ0hlbGxvIFdvcmxkJyk7CiAgfQp9OwpgYGAKCkpTT04gQVBJOgoKYGBgamF2YXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52LCBjdHgpIHsKICAgIGNvbnN0IGRhdGEgPSB7IG1lc3NhZ2U6ICdIZWxsbycsIHRpbWVzdGFtcDogRGF0ZS5ub3coKSB9OwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oZGF0YSk7CiAgfQp9OwpgYGAKClByb3h5IHdpdGggbW9kaWZpY2F0aW9uOgoKYGBgamF2YXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52LCBjdHgpIHsKICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goJ2h0dHBzOi8vZXhhbXBsZS5jb20nKTsKICAgIGNvbnN0IG1vZGlmaWVkID0gbmV3IFJlc3BvbnNlKHJlc3BvbnNlLmJvZHksIHJlc3BvbnNlKTsKICAgIG1vZGlmaWVkLmhlYWRlcnMuc2V0KCdYLUN1c3RvbS1IZWFkZXInLCAnYWRkZWQtYnktd29ya2VyJyk7CiAgICByZXR1cm4gbW9kaWZpZWQ7CiAgfQp9OwpgYGAKCkltcG9ydCBmcm9tIENETjoKCmBgYGphdmFzY3JpcHQKaW1wb3J0IHsgSG9ubyB9IGZyb20gJ2h0dHBzOi8vZXNtLnNoL2hvbm9AMyc7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCkgewogICAgY29uc3QgYXBwID0gbmV3IEhvbm8oKTsKICAgIGFwcC5nZXQoJy8nLCAoYykgPT4gYy50ZXh0KCdIZWxsbyBIb25vIScpKTsKICAgIHJldHVybiBhcHAuZmV0Y2gocmVxdWVzdCk7CiAgfQp9OwpgYGAKCiMjIFJlYWRpbmcgT3JkZXIKCjEuICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBTdGFydCBoZXJlOiBwbGF5Z3JvdW5kIHNldHVwLCBjb25zdHJhaW50cywgZGVwbG95bWVudAoyLiAqKlthcGkubWRdKGFwaS5tZCkqKiAtIENvcmUgQVBJczogUmVxdWVzdCwgUmVzcG9uc2UsIEV4ZWN1dGlvbkNvbnRleHQsIGZldGNoLCBDYWNoZQozLiAqKltwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpKiogLSBDb21tb24gdXNlIGNhc2VzOiByb3V0aW5nLCBwcm94eWluZywgQS9CIHRlc3RpbmcsIG11bHRpLW1vZHVsZSBjb2RlCjQuICoqW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpKiogLSBUcm91Ymxlc2hvb3Rpbmc6IGVycm9ycywgYnJvd3NlciBpc3N1ZXMsIGxpbWl0cywgYmVzdCBwcmFjdGljZXMKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBTZXR1cCwgZGVwbG95bWVudCwgY29uZmlndXJhdGlvbgotICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gQVBJIGVuZHBvaW50cywgbWV0aG9kcywgaW50ZXJmYWNlcwotICoqW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkqKiAtIENvbW1vbiBwYXR0ZXJucywgdXNlIGNhc2VzLCBleGFtcGxlcwotICoqW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpKiogLSBUcm91Ymxlc2hvb3RpbmcsIGJlc3QgcHJhY3RpY2VzLCBsaW1pdGF0aW9ucwoKIyMgS2V5IEZlYXR1cmVzCgoqKk5vIFNldHVwIFJlcXVpcmVkOioqCi0gT3BlbiBVUkwgYW5kIHN0YXJ0IGNvZGluZwotIE5vIENMSSwgbm8gYWNjb3VudCwgbm8gY29uZmlnIGZpbGVzCi0gQ29kZSBleGVjdXRlcyBpbiByZWFsIENsb3VkZmxhcmUgV29ya2VycyBydW50aW1lCgoqKkluc3RhbnQgUHJldmlldzoqKgotIExpdmUgcHJldmlldyBwYW5lIHdpdGggYnJvd3NlciB0YWIgb3IgSFRUUCB0ZXN0ZXIKLSBBdXRvLXJlbG9hZCBvbiBjb2RlIGNoYW5nZXMKLSBEZXZUb29scyBpbnRlZ3JhdGlvbiAocmlnaHQtY2xpY2sg4oaSIEluc3BlY3QpCgoqKlNoYXJlICYgRGVwbG95OioqCi0gQ29weSBMaW5rIGdlbmVyYXRlcyBwZXJtYW5lbnQgc2hhcmVhYmxlIFVSTAotIERlcGxveSBidXR0b24gcHVibGlzaGVzIHRvIHByb2R1Y3Rpb24gaW4gfjMwIHNlY29uZHMKLSBHZXQgYCoud29ya2Vycy5kZXZgIHN1YmRvbWFpbiBpbW1lZGlhdGVseQoKIyMgQ29tbW9uIFVzZSBDYXNlcwoKLSAqKkFQSSBkZXZlbG9wbWVudDoqKiBUZXN0IGVuZHBvaW50cyBiZWZvcmUgd3JhbmdsZXIgc2V0dXAKLSAqKkxlYXJuaW5nIFdvcmtlcnM6KiogRXhwZXJpbWVudCB3aXRoIEFQSXMgd2l0aG91dCBsb2NhbCBlbnZpcm9ubWVudAotICoqUHJvdG90eXBpbmc6KiogUXVpY2sgUE9DcyBmb3IgZWRnZSBsb2dpYwotICoqU2hhcmluZyBleGFtcGxlczoqKiBHZW5lcmF0ZSBzaGFyZWFibGUgbGlua3MgZm9yIGJ1ZyByZXBvcnRzIG9yIGRlbW9zCi0gKipGcmFtZXdvcmsgdGVzdGluZzoqKiBJbXBvcnQgZnJvbSBDRE4gKEhvbm8sIGl0dHktcm91dGVyLCBldGMuKQoKIyMgTGltaXRhdGlvbnMgdnMgUHJvZHVjdGlvbgoKfCBGZWF0dXJlIHwgUGxheWdyb3VuZCB8IFByb2R1Y3Rpb24gKHdyYW5nbGVyKSB8CnwtLS0tLS0tLS18LS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS18CnwgTGFuZ3VhZ2UgfCBKYXZhU2NyaXB0IG9ubHkgfCBKUyArIFR5cGVTY3JpcHQgfAp8IEJpbmRpbmdzIHwgTm9uZSB8IEtWLCBEMSwgUjIsIERPLCBBSSwgZXRjLiB8CnwgRW52aXJvbm1lbnQgdmFycyB8IE5vbmUgfCBGdWxsIHN1cHBvcnQgfAp8IE1vZHVsZSBmb3JtYXQgfCBFUyBvbmx5IHwgRVMgKyBTZXJ2aWNlIFdvcmtlciB8CnwgQ1BVIHRpbWUgfCAxMG1zIChGcmVlIHBsYW4pIHwgMTBtcyBGcmVlIC8gMzBzIGRlZmF1bHQsIDVtaW4gbWF4IFBhaWQgfAp8IEN1c3RvbSBkb21haW5zIHwgTm8gfCBZZXMgfAp8IEFuYWx5dGljcyB8IE5vIHwgWWVzIHwKCiMjIFNlZSBBbHNvCgotIFtDbG91ZGZsYXJlIFdvcmtlcnMgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvKQotIFtXb3JrZXJzIEV4YW1wbGVzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy9leGFtcGxlcy8pCi0gW1dyYW5nbGVyIENMSV0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvd3JhbmdsZXIvKQotIFtXb3JrZXJzIEFQSSBSZWZlcmVuY2VdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzL3J1bnRpbWUtYXBpcy8pCg==
+# Cloudflare Workers Playground Skill Reference
+
+## Overview
+
+Cloudflare Workers Playground is a browser-based sandbox for instantly experimenting with, testing, and deploying Cloudflare Workers without authentication or setup. This skill provides patterns, APIs, and best practices specifically for Workers Playground development.
+
+**URL:** [workers.cloudflare.com/playground](https://workers.cloudflare.com/playground)
+
+## ⚠️ Playground Constraints
+
+**Playground is NOT production-equivalent:**
+- ✅ Real Workers runtime, instant testing, shareable URLs
+- ❌ No TypeScript (JavaScript only)
+- ❌ No bindings (KV, D1, R2, Durable Objects)
+- ❌ No environment variables or secrets
+- ❌ ES modules only (no Service Worker format)
+- ⚠️ Safari broken (use Chrome/Firefox)
+
+**For production:** Use `wrangler` CLI. Playground is for rapid prototyping.
+
+## Quick Start
+
+Minimal Worker:
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    return new Response('Hello World');
+  }
+};
+```
+
+JSON API:
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    const data = { message: 'Hello', timestamp: Date.now() };
+    return Response.json(data);
+  }
+};
+```
+
+Proxy with modification:
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    const response = await fetch('https://example.com');
+    const modified = new Response(response.body, response);
+    modified.headers.set('X-Custom-Header', 'added-by-worker');
+    return modified;
+  }
+};
+```
+
+Import from CDN:
+
+```javascript
+import { Hono } from 'https://esm.sh/hono@3';
+
+export default {
+  async fetch(request) {
+    const app = new Hono();
+    app.get('/', (c) => c.text('Hello Hono!'));
+    return app.fetch(request);
+  }
+};
+```
+
+## Reading Order
+
+1. **[configuration.md](configuration.md)** - Start here: playground setup, constraints, deployment
+2. **[api.md](api.md)** - Core APIs: Request, Response, ExecutionContext, fetch, Cache
+3. **[patterns.md](patterns.md)** - Common use cases: routing, proxying, A/B testing, multi-module code
+4. **[gotchas.md](gotchas.md)** - Troubleshooting: errors, browser issues, limits, best practices
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Setup, deployment, configuration
+- **[api.md](api.md)** - API endpoints, methods, interfaces
+- **[patterns.md](patterns.md)** - Common patterns, use cases, examples
+- **[gotchas.md](gotchas.md)** - Troubleshooting, best practices, limitations
+
+## Key Features
+
+**No Setup Required:**
+- Open URL and start coding
+- No CLI, no account, no config files
+- Code executes in real Cloudflare Workers runtime
+
+**Instant Preview:**
+- Live preview pane with browser tab or HTTP tester
+- Auto-reload on code changes
+- DevTools integration (right-click → Inspect)
+
+**Share & Deploy:**
+- Copy Link generates permanent shareable URL
+- Deploy button publishes to production in ~30 seconds
+- Get `*.workers.dev` subdomain immediately
+
+## Common Use Cases
+
+- **API development:** Test endpoints before wrangler setup
+- **Learning Workers:** Experiment with APIs without local environment
+- **Prototyping:** Quick POCs for edge logic
+- **Sharing examples:** Generate shareable links for bug reports or demos
+- **Framework testing:** Import from CDN (Hono, itty-router, etc.)
+
+## Limitations vs Production
+
+| Feature | Playground | Production (wrangler) |
+|---------|------------|----------------------|
+| Language | JavaScript only | JS + TypeScript |
+| Bindings | None | KV, D1, R2, DO, AI, etc. |
+| Environment vars | None | Full support |
+| Module format | ES only | ES + Service Worker |
+| CPU time | 10ms (Free plan) | 10ms Free / 30s default, 5min max Paid |
+| Custom domains | No | Yes |
+| Analytics | No | Yes |
+
+## See Also
+
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
+- [Workers Examples](https://developers.cloudflare.com/workers/examples/)
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
+- [Workers API Reference](https://developers.cloudflare.com/workers/runtime-apis/)

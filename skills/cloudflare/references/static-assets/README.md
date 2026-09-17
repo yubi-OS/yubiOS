@@ -1,1 +1,65 @@
-IyBDbG91ZGZsYXJlIFN0YXRpYyBBc3NldHMgU2tpbGwgUmVmZXJlbmNlCgpFeHBlcnQgZ3VpZGFuY2UgZm9yIGRlcGxveWluZyBhbmQgY29uZmlndXJpbmcgc3RhdGljIGFzc2V0cyB3aXRoIENsb3VkZmxhcmUgV29ya2Vycy4gVGhpcyBza2lsbCBjb3ZlcnMgY29uZmlndXJhdGlvbiBwYXR0ZXJucywgcm91dGluZyBhcmNoaXRlY3R1cmVzLCBhc3NldCBiaW5kaW5nIHVzYWdlLCBhbmQgYmVzdCBwcmFjdGljZXMgZm9yIFNQQXMsIFNTRyBzaXRlcywgYW5kIGZ1bGwtc3RhY2sgYXBwbGljYXRpb25zLgoKIyMgUXVpY2sgU3RhcnQKCmBgYGpzb25jCi8vIHdyYW5nbGVyLmpzb25jCnsKICAibmFtZSI6ICJteS1hcHAiLAogICJtYWluIjogInNyYy9pbmRleC50cyIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI1LTAxLTAxIiwKICAiYXNzZXRzIjogewogICAgImRpcmVjdG9yeSI6ICIuL2Rpc3QiCiAgfQp9CmBgYAoKYGBgdHlwZXNjcmlwdAovLyBzcmMvaW5kZXgudHMKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgcmV0dXJuIGVudi5BU1NFVFMuZmV0Y2gocmVxdWVzdCk7CiAgfQp9OwpgYGAKCkRlcGxveTogYHdyYW5nbGVyIGRlcGxveWAKCiMjIFdoZW4gdG8gVXNlIFdvcmtlcnMgU3RhdGljIEFzc2V0cyB2cyBQYWdlcwoKfCBGYWN0b3IgfCBXb3JrZXJzIFN0YXRpYyBBc3NldHMgfCBDbG91ZGZsYXJlIFBhZ2VzIHwKfC0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tfAp8ICoqVXNlIGNhc2UqKiB8IEh5YnJpZCBhcHBzIChzdGF0aWMgKyBkeW5hbWljIEFQSSkgfCBTdGF0aWMgc2l0ZXMsIFNTRyB8CnwgKipXb3JrZXIgY29udHJvbCoqIHwgRnVsbCBjb250cm9sIG92ZXIgcm91dGluZyB8IExpbWl0ZWQgKEZ1bmN0aW9ucykgfAp8ICoqQ29uZmlndXJhdGlvbioqIHwgQ29kZS1maXJzdCwgZmxleGlibGUgfCBHaXQtYmFzZWQsIG9waW5pb25hdGVkIHwKfCAqKkR5bmFtaWMgcm91dGluZyoqIHwgV29ya2VyLWZpcnN0IHBhdHRlcm5zIHwgRnVuY3Rpb25zIChfZnVuY3Rpb25zLykgfAp8ICoqQmVzdCBmb3IqKiB8IEZ1bGwtc3RhY2sgYXBwcywgU1BBcyB3aXRoIEFQSXMgfCBKYW1zdGFjaywgc3RhdGljIGRvY3MgfAoKKipEZWNpc2lvbiB0cmVlOioqCgotIE5lZWQgY3VzdG9tIHJvdXRpbmcgbG9naWM/IOKGkiBXb3JrZXJzIFN0YXRpYyBBc3NldHMKLSBQdXJlIHN0YXRpYyBzaXRlIG9yIFNTRz8g4oaSIFBhZ2VzCi0gQVBJIHJvdXRlcyArIFNQQT8g4oaSIFdvcmtlcnMgU3RhdGljIEFzc2V0cwotIEZyYW1ld29yayAoTmV4dCwgTnV4dCwgUmVtaXgpPyDihpIgUGFnZXMKCiMjIFJlYWRpbmcgT3JkZXIKCjEuICoqY29uZmlndXJhdGlvbi5tZCoqIC0gU2V0dXAsIHdyYW5nbGVyLmpzb25jIG9wdGlvbnMsIHJvdXRpbmcgcGF0dGVybnMKMi4gKiphcGkubWQqKiAtIEFTU0VUUyBiaW5kaW5nIEFQSSwgcmVxdWVzdC9yZXNwb25zZSBoYW5kbGluZwozLiAqKnBhdHRlcm5zLm1kKiogLSBDb21tb24gcGF0dGVybnMgKFNQQSwgQVBJIHJvdXRlcywgYXV0aCwgQS9CIHRlc3RpbmcpCjQuICoqZ290Y2hhcy5tZCoqIC0gTGltaXRzLCBlcnJvcnMsIHBlcmZvcm1hbmNlIHRpcHMKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBTZXR1cCwgZGVwbG95bWVudCwgY29uZmlndXJhdGlvbgotICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gQVBJIGVuZHBvaW50cywgbWV0aG9kcywgaW50ZXJmYWNlcwotICoqW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkqKiAtIENvbW1vbiBwYXR0ZXJucywgdXNlIGNhc2VzLCBleGFtcGxlcwotICoqW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpKiogLSBUcm91Ymxlc2hvb3RpbmcsIGJlc3QgcHJhY3RpY2VzLCBsaW1pdGF0aW9ucwoKIyMgU2VlIEFsc28KCi0gW0Nsb3VkZmxhcmUgV29ya2VycyBEb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy8pCi0gW1N0YXRpYyBBc3NldHMgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvc3RhdGljLWFzc2V0cy8pCi0gW0Nsb3VkZmxhcmUgUGFnZXNdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9wYWdlcy8pCg==
+# Cloudflare Static Assets Skill Reference
+
+Expert guidance for deploying and configuring static assets with Cloudflare Workers. This skill covers configuration patterns, routing architectures, asset binding usage, and best practices for SPAs, SSG sites, and full-stack applications.
+
+## Quick Start
+
+```jsonc
+// wrangler.jsonc
+{
+  "name": "my-app",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
+```
+
+```typescript
+// src/index.ts
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    return env.ASSETS.fetch(request);
+  }
+};
+```
+
+Deploy: `wrangler deploy`
+
+## When to Use Workers Static Assets vs Pages
+
+| Factor | Workers Static Assets | Cloudflare Pages |
+|--------|----------------------|------------------|
+| **Use case** | Hybrid apps (static + dynamic API) | Static sites, SSG |
+| **Worker control** | Full control over routing | Limited (Functions) |
+| **Configuration** | Code-first, flexible | Git-based, opinionated |
+| **Dynamic routing** | Worker-first patterns | Functions (_functions/) |
+| **Best for** | Full-stack apps, SPAs with APIs | Jamstack, static docs |
+
+**Decision tree:**
+
+- Need custom routing logic? → Workers Static Assets
+- Pure static site or SSG? → Pages
+- API routes + SPA? → Workers Static Assets
+- Framework (Next, Nuxt, Remix)? → Pages
+
+## Reading Order
+
+1. **configuration.md** - Setup, wrangler.jsonc options, routing patterns
+2. **api.md** - ASSETS binding API, request/response handling
+3. **patterns.md** - Common patterns (SPA, API routes, auth, A/B testing)
+4. **gotchas.md** - Limits, errors, performance tips
+
+## In This Reference
+
+- **[configuration.md](configuration.md)** - Setup, deployment, configuration
+- **[api.md](api.md)** - API endpoints, methods, interfaces
+- **[patterns.md](patterns.md)** - Common patterns, use cases, examples
+- **[gotchas.md](gotchas.md)** - Troubleshooting, best practices, limitations
+
+## See Also
+
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
+- [Static Assets Docs](https://developers.cloudflare.com/workers/static-assets/)
+- [Cloudflare Pages](https://developers.cloudflare.com/pages/)

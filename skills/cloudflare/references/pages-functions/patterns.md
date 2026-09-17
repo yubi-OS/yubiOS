@@ -1,1 +1,137 @@
-IyBDb21tb24gUGF0dGVybnMKCiMjIEJhY2tncm91bmQgVGFza3MgKHdhaXRVbnRpbCkKCk5vbi1ibG9ja2luZyB0YXNrcyBhZnRlciByZXNwb25zZSBzZW50IChhbmFseXRpY3MsIGNsZWFudXAsIHdlYmhvb2tzKToKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIG9uUmVxdWVzdChjdHg6IEV2ZW50Q29udGV4dDxFbnY+KSB7CiAgY29uc3QgcmVzID0gUmVzcG9uc2UuanNvbih7IHN1Y2Nlc3M6IHRydWUgfSk7CiAgCiAgY3R4LndhaXRVbnRpbChjdHguZW52LktWLnB1dCgnbGFzdC12aXNpdCcsIG5ldyBEYXRlKCkudG9JU09TdHJpbmcoKSkpOwogIGN0eC53YWl0VW50aWwoUHJvbWlzZS5hbGwoWwogICAgY3R4LmVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoeyBldmVudDogJ3ZpZXcnIH0pLAogICAgZmV0Y2goJ2h0dHBzOi8vd2ViaG9vay5zaXRlLy4uLicsIHsgbWV0aG9kOiAnUE9TVCcgfSkKICBdKSk7CiAgCiAgcmV0dXJuIHJlczsgLy8gUmV0dXJuZWQgaW1tZWRpYXRlbHkKfQpgYGAKCiMjIE1pZGRsZXdhcmUgJiBBdXRoCgpgYGB0eXBlc2NyaXB0Ci8vIGZ1bmN0aW9ucy9fbWlkZGxld2FyZS5qcyAoZ2xvYmFsKSBvciBmdW5jdGlvbnMvdXNlcnMvX21pZGRsZXdhcmUuanMgKHNjb3BlZCkKZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIG9uUmVxdWVzdChjdHgpIHsKICB0cnkgeyByZXR1cm4gYXdhaXQgY3R4Lm5leHQoKTsgfSAKICBjYXRjaCAoZXJyKSB7IHJldHVybiBuZXcgUmVzcG9uc2UoZXJyLm1lc3NhZ2UsIHsgc3RhdHVzOiA1MDAgfSk7IH0KfQoKLy8gQ2hhaW5lZDogZXhwb3J0IGNvbnN0IG9uUmVxdWVzdCA9IFtlcnJvckhhbmRsZXIsIGF1dGgsIGxvZ2dlcl07CgovLyBBdXRoCmFzeW5jIGZ1bmN0aW9uIGF1dGgoY3R4OiBFdmVudENvbnRleHQ8RW52PikgewogIGNvbnN0IHRva2VuID0gY3R4LnJlcXVlc3QuaGVhZGVycy5nZXQoJ2F1dGhvcml6YXRpb24nKT8ucmVwbGFjZSgnQmVhcmVyICcsICcnKTsKICBpZiAoIXRva2VuKSByZXR1cm4gbmV3IFJlc3BvbnNlKCdVbmF1dGhvcml6ZWQnLCB7IHN0YXR1czogNDAxIH0pOwogIGNvbnN0IHNlc3Npb24gPSBhd2FpdCBjdHguZW52LktWLmdldChgc2Vzc2lvbjoke3Rva2VufWApOwogIGlmICghc2Vzc2lvbikgcmV0dXJuIG5ldyBSZXNwb25zZSgnSW52YWxpZCcsIHsgc3RhdHVzOiA0MDEgfSk7CiAgY3R4LmRhdGEudXNlciA9IEpTT04ucGFyc2Uoc2Vzc2lvbik7CiAgcmV0dXJuIGN0eC5uZXh0KCk7Cn0KYGBgCgojIyBDT1JTICYgUmF0ZSBMaW1pdGluZwoKYGBgdHlwZXNjcmlwdAovLyBDT1JTIG1pZGRsZXdhcmUKY29uc3QgY29ycyA9IHsgJ0FjY2Vzcy1Db250cm9sLUFsbG93LU9yaWdpbic6ICcqJywgJ0FjY2Vzcy1Db250cm9sLUFsbG93LU1ldGhvZHMnOiAnR0VULCBQT1NUJyB9OwpleHBvcnQgYXN5bmMgZnVuY3Rpb24gb25SZXF1ZXN0T3B0aW9ucygpIHsgcmV0dXJuIG5ldyBSZXNwb25zZShudWxsLCB7IGhlYWRlcnM6IGNvcnMgfSk7IH0KZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIG9uUmVxdWVzdChjdHgpIHsKICBjb25zdCByZXMgPSBhd2FpdCBjdHgubmV4dCgpOwogIE9iamVjdC5lbnRyaWVzKGNvcnMpLmZvckVhY2goKFtrLCB2XSkgPT4gcmVzLmhlYWRlcnMuc2V0KGssIHYpKTsKICByZXR1cm4gcmVzOwp9CgovLyBSYXRlIGxpbWl0aW5nIChLVi1iYXNlZCkKYXN5bmMgZnVuY3Rpb24gcmF0ZUxpbWl0KGN0eDogRXZlbnRDb250ZXh0PEVudj4pIHsKICBjb25zdCBpcCA9IGN0eC5yZXF1ZXN0LmhlYWRlcnMuZ2V0KCdDRi1Db25uZWN0aW5nLUlQJykgfHwgJ3Vua25vd24nOwogIGNvbnN0IGNvdW50ID0gcGFyc2VJbnQoYXdhaXQgY3R4LmVudi5LVi5nZXQoYHJhdGU6JHtpcH1gKSB8fCAnMCcpOwogIGlmIChjb3VudCA+PSAxMDApIHJldHVybiBuZXcgUmVzcG9uc2UoJ1JhdGUgbGltaXRlZCcsIHsgc3RhdHVzOiA0MjkgfSk7CiAgYXdhaXQgY3R4LmVudi5LVi5wdXQoYHJhdGU6JHtpcH1gLCAoY291bnQgKyAxKS50b1N0cmluZygpLCB7IGV4cGlyYXRpb25UdGw6IDM2MDAgfSk7CiAgcmV0dXJuIGN0eC5uZXh0KCk7Cn0KYGBgCgojIyBGb3JtcywgQ2FjaGluZywgUmVkaXJlY3RzCgpgYGB0eXBlc2NyaXB0Ci8vIEpTT04gJiBmaWxlIHVwbG9hZApleHBvcnQgYXN5bmMgZnVuY3Rpb24gb25SZXF1ZXN0UG9zdChjdHgpIHsKICBjb25zdCBjdCA9IGN0eC5yZXF1ZXN0LmhlYWRlcnMuZ2V0KCdjb250ZW50LXR5cGUnKSB8fCAnJzsKICBpZiAoY3QuaW5jbHVkZXMoJ2FwcGxpY2F0aW9uL2pzb24nKSkgcmV0dXJuIFJlc3BvbnNlLmpzb24oYXdhaXQgY3R4LnJlcXVlc3QuanNvbigpKTsKICBpZiAoY3QuaW5jbHVkZXMoJ211bHRpcGFydC9mb3JtLWRhdGEnKSkgewogICAgY29uc3QgZmlsZSA9IChhd2FpdCBjdHgucmVxdWVzdC5mb3JtRGF0YSgpKS5nZXQoJ2ZpbGUnKSBhcyBGaWxlOwogICAgYXdhaXQgY3R4LmVudi5CVUNLRVQucHV0KGZpbGUubmFtZSwgZmlsZS5zdHJlYW0oKSk7CiAgICByZXR1cm4gUmVzcG9uc2UuanNvbih7IHVwbG9hZGVkOiBmaWxlLm5hbWUgfSk7CiAgfQp9CgovLyBDYWNoZSBBUEkKZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIG9uUmVxdWVzdChjdHgpIHsKICBsZXQgcmVzID0gYXdhaXQgY2FjaGVzLmRlZmF1bHQubWF0Y2goY3R4LnJlcXVlc3QpOwogIGlmICghcmVzKSB7CiAgICByZXMgPSBuZXcgUmVzcG9uc2UoJ0RhdGEnKTsKICAgIHJlcy5oZWFkZXJzLnNldCgnQ2FjaGUtQ29udHJvbCcsICdwdWJsaWMsIG1heC1hZ2U9MzYwMCcpOwogICAgY3R4LndhaXRVbnRpbChjYWNoZXMuZGVmYXVsdC5wdXQoY3R4LnJlcXVlc3QsIHJlcy5jbG9uZSgpKSk7CiAgfQogIHJldHVybiByZXM7Cn0KCi8vIFJlZGlyZWN0cwpleHBvcnQgYXN5bmMgZnVuY3Rpb24gb25SZXF1ZXN0KGN0eCkgewogIGlmIChuZXcgVVJMKGN0eC5yZXF1ZXN0LnVybCkucGF0aG5hbWUgPT09ICcvb2xkJykgewogICAgcmV0dXJuIFJlc3BvbnNlLnJlZGlyZWN0KG5ldyBVUkwoJy9uZXcnLCBjdHgucmVxdWVzdC51cmwpLCAzMDEpOwogIH0KICByZXR1cm4gY3R4Lm5leHQoKTsKfQpgYGAKCiMjIFRlc3RpbmcKCioqVW5pdCB0ZXN0cyoqIChWaXRlc3QgKyBjbG91ZGZsYXJlOnRlc3QpOgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGVudiB9IGZyb20gJ2Nsb3VkZmxhcmU6dGVzdCc7CmltcG9ydCB7IGl0LCBleHBlY3QgfSBmcm9tICd2aXRlc3QnOwppbXBvcnQgeyBvblJlcXVlc3QgfSBmcm9tICcuLi9mdW5jdGlvbnMvYXBpJzsKCml0KCdyZXR1cm5zIEpTT04nLCBhc3luYyAoKSA9PiB7CiAgY29uc3QgcmVxID0gbmV3IFJlcXVlc3QoJ2h0dHA6Ly9sb2NhbGhvc3QvYXBpJyk7CiAgY29uc3QgY3R4ID0geyByZXF1ZXN0OiByZXEsIGVudiwgcGFyYW1zOiB7fSwgZGF0YToge30gfSBhcyBFdmVudENvbnRleHQ7CiAgY29uc3QgcmVzID0gYXdhaXQgb25SZXF1ZXN0KGN0eCk7CiAgZXhwZWN0KHJlcy5zdGF0dXMpLnRvQmUoMjAwKTsKfSk7CmBgYAoKKipJbnRlZ3JhdGlvbjoqKiBgd3JhbmdsZXIgcGFnZXMgZGV2YCArIFBsYXl3cmlnaHQvQ3lwcmVzcwoKIyMgQWR2YW5jZWQgTW9kZSAoX3dvcmtlci5qcykKClVzZSBgX3dvcmtlci5qc2AgZm9yIGNvbXBsZXggcm91dGluZyAocmVwbGFjZXMgYC9mdW5jdGlvbnNgKToKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7IEFTU0VUUzogRmV0Y2hlcjsgS1Y6IEtWTmFtZXNwYWNlOyB9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCB1cmwgPSBuZXcgVVJMKHJlcXVlc3QudXJsKTsKICAgIGlmICh1cmwucGF0aG5hbWUuc3RhcnRzV2l0aCgnL2FwaS8nKSkgewogICAgICByZXR1cm4gUmVzcG9uc2UuanNvbih7IGRhdGE6IGF3YWl0IGVudi5LVi5nZXQoJ2tleScpIH0pOwogICAgfQogICAgcmV0dXJuIGVudi5BU1NFVFMuZmV0Y2gocmVxdWVzdCk7IC8vIFN0YXRpYyBmaWxlcwogIH0KfSBzYXRpc2ZpZXMgRXhwb3J0ZWRIYW5kbGVyPEVudj47CmBgYAoKKipXaGVuOioqIEV4aXN0aW5nIFdvcmtlciwgZnJhbWV3b3JrLWdlbmVyYXRlZCAoTmV4dC5qcy9TdmVsdGVLaXQpLCBjdXN0b20gcm91dGluZyBsb2dpYwoKKipTZWUgYWxzbzoqKiBbYXBpLm1kXSguL2FwaS5tZCkgZm9yIGBlbnYuQVNTRVRTLmZldGNoKClgIHwgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgZm9yIGRlYnVnZ2luZwo=
+# Common Patterns
+
+## Background Tasks (waitUntil)
+
+Non-blocking tasks after response sent (analytics, cleanup, webhooks):
+
+```typescript
+export async function onRequest(ctx: EventContext<Env>) {
+  const res = Response.json({ success: true });
+  
+  ctx.waitUntil(ctx.env.KV.put('last-visit', new Date().toISOString()));
+  ctx.waitUntil(Promise.all([
+    ctx.env.ANALYTICS.writeDataPoint({ event: 'view' }),
+    fetch('https://webhook.site/...', { method: 'POST' })
+  ]));
+  
+  return res; // Returned immediately
+}
+```
+
+## Middleware & Auth
+
+```typescript
+// functions/_middleware.js (global) or functions/users/_middleware.js (scoped)
+export async function onRequest(ctx) {
+  try { return await ctx.next(); } 
+  catch (err) { return new Response(err.message, { status: 500 }); }
+}
+
+// Chained: export const onRequest = [errorHandler, auth, logger];
+
+// Auth
+async function auth(ctx: EventContext<Env>) {
+  const token = ctx.request.headers.get('authorization')?.replace('Bearer ', '');
+  if (!token) return new Response('Unauthorized', { status: 401 });
+  const session = await ctx.env.KV.get(`session:${token}`);
+  if (!session) return new Response('Invalid', { status: 401 });
+  ctx.data.user = JSON.parse(session);
+  return ctx.next();
+}
+```
+
+## CORS & Rate Limiting
+
+```typescript
+// CORS middleware
+const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST' };
+export async function onRequestOptions() { return new Response(null, { headers: cors }); }
+export async function onRequest(ctx) {
+  const res = await ctx.next();
+  Object.entries(cors).forEach(([k, v]) => res.headers.set(k, v));
+  return res;
+}
+
+// Rate limiting (KV-based)
+async function rateLimit(ctx: EventContext<Env>) {
+  const ip = ctx.request.headers.get('CF-Connecting-IP') || 'unknown';
+  const count = parseInt(await ctx.env.KV.get(`rate:${ip}`) || '0');
+  if (count >= 100) return new Response('Rate limited', { status: 429 });
+  await ctx.env.KV.put(`rate:${ip}`, (count + 1).toString(), { expirationTtl: 3600 });
+  return ctx.next();
+}
+```
+
+## Forms, Caching, Redirects
+
+```typescript
+// JSON & file upload
+export async function onRequestPost(ctx) {
+  const ct = ctx.request.headers.get('content-type') || '';
+  if (ct.includes('application/json')) return Response.json(await ctx.request.json());
+  if (ct.includes('multipart/form-data')) {
+    const file = (await ctx.request.formData()).get('file') as File;
+    await ctx.env.BUCKET.put(file.name, file.stream());
+    return Response.json({ uploaded: file.name });
+  }
+}
+
+// Cache API
+export async function onRequest(ctx) {
+  let res = await caches.default.match(ctx.request);
+  if (!res) {
+    res = new Response('Data');
+    res.headers.set('Cache-Control', 'public, max-age=3600');
+    ctx.waitUntil(caches.default.put(ctx.request, res.clone()));
+  }
+  return res;
+}
+
+// Redirects
+export async function onRequest(ctx) {
+  if (new URL(ctx.request.url).pathname === '/old') {
+    return Response.redirect(new URL('/new', ctx.request.url), 301);
+  }
+  return ctx.next();
+}
+```
+
+## Testing
+
+**Unit tests** (Vitest + cloudflare:test):
+```typescript
+import { env } from 'cloudflare:test';
+import { it, expect } from 'vitest';
+import { onRequest } from '../functions/api';
+
+it('returns JSON', async () => {
+  const req = new Request('http://localhost/api');
+  const ctx = { request: req, env, params: {}, data: {} } as EventContext;
+  const res = await onRequest(ctx);
+  expect(res.status).toBe(200);
+});
+```
+
+**Integration:** `wrangler pages dev` + Playwright/Cypress
+
+## Advanced Mode (_worker.js)
+
+Use `_worker.js` for complex routing (replaces `/functions`):
+
+```typescript
+interface Env { ASSETS: Fetcher; KV: KVNamespace; }
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    if (url.pathname.startsWith('/api/')) {
+      return Response.json({ data: await env.KV.get('key') });
+    }
+    return env.ASSETS.fetch(request); // Static files
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+**When:** Existing Worker, framework-generated (Next.js/SvelteKit), custom routing logic
+
+**See also:** [api.md](./api.md) for `env.ASSETS.fetch()` | [gotchas.md](./gotchas.md) for debugging

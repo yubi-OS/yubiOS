@@ -1,1 +1,390 @@
-IyBGbGFnc2hpcCBBUEkgUmVmZXJlbmNlCgojIyBCaW5kaW5nIEFQSSAoV29ya2VycykKClRoZSBiaW5kaW5nIGlzIGF2YWlsYWJsZSBhcyBgZW52LkZMQUdTYCAodHlwZSBgRmxhZ3NoaXBgIGZyb20gYEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXNgKS4KCiMjIyBFdmFsdWF0aW9uIE1ldGhvZHMKCkFsbCBtZXRob2RzIGFyZSBhc3luYywgbmV2ZXIgdGhyb3csIGFuZCByZXR1cm4gdGhlIGBkZWZhdWx0VmFsdWVgIG9uIGVycm9ycy4KCnwgTWV0aG9kIHwgU2lnbmF0dXJlIHwgUmV0dXJucyB8CnwtLS0tLS0tLXwtLS0tLS0tLS0tLXwtLS0tLS0tLS18CnwgYGdldGAgfCBgZ2V0KGZsYWdLZXksIGRlZmF1bHRWYWx1ZT8sIGNvbnRleHQ/KWAgfCBgUHJvbWlzZTx1bmtub3duPmAgfAp8IGBnZXRCb29sZWFuVmFsdWVgIHwgYGdldEJvb2xlYW5WYWx1ZShmbGFnS2V5LCBkZWZhdWx0VmFsdWUsIGNvbnRleHQ/KWAgfCBgUHJvbWlzZTxib29sZWFuPmAgfAp8IGBnZXRTdHJpbmdWYWx1ZWAgfCBgZ2V0U3RyaW5nVmFsdWUoZmxhZ0tleSwgZGVmYXVsdFZhbHVlLCBjb250ZXh0PylgIHwgYFByb21pc2U8c3RyaW5nPmAgfAp8IGBnZXROdW1iZXJWYWx1ZWAgfCBgZ2V0TnVtYmVyVmFsdWUoZmxhZ0tleSwgZGVmYXVsdFZhbHVlLCBjb250ZXh0PylgIHwgYFByb21pc2U8bnVtYmVyPmAgfAp8IGBnZXRPYmplY3RWYWx1ZWAgfCBgZ2V0T2JqZWN0VmFsdWU8VD4oZmxhZ0tleSwgZGVmYXVsdFZhbHVlLCBjb250ZXh0PylgIHwgYFByb21pc2U8VD5gIHwKfCBgZ2V0Qm9vbGVhbkRldGFpbHNgIHwgYGdldEJvb2xlYW5EZXRhaWxzKGZsYWdLZXksIGRlZmF1bHRWYWx1ZSwgY29udGV4dD8pYCB8IGBQcm9taXNlPEZsYWdzaGlwRXZhbHVhdGlvbkRldGFpbHM8Ym9vbGVhbj4+YCB8CnwgYGdldFN0cmluZ0RldGFpbHNgIHwgYGdldFN0cmluZ0RldGFpbHMoZmxhZ0tleSwgZGVmYXVsdFZhbHVlLCBjb250ZXh0PylgIHwgYFByb21pc2U8RmxhZ3NoaXBFdmFsdWF0aW9uRGV0YWlsczxzdHJpbmc+PmAgfAp8IGBnZXROdW1iZXJEZXRhaWxzYCB8IGBnZXROdW1iZXJEZXRhaWxzKGZsYWdLZXksIGRlZmF1bHRWYWx1ZSwgY29udGV4dD8pYCB8IGBQcm9taXNlPEZsYWdzaGlwRXZhbHVhdGlvbkRldGFpbHM8bnVtYmVyPj5gIHwKfCBgZ2V0T2JqZWN0RGV0YWlsc2AgfCBgZ2V0T2JqZWN0RGV0YWlsczxUPihmbGFnS2V5LCBkZWZhdWx0VmFsdWUsIGNvbnRleHQ/KWAgfCBgUHJvbWlzZTxGbGFnc2hpcEV2YWx1YXRpb25EZXRhaWxzPFQ+PmAgfAoKIyMjIFBhcmFtZXRlcnMgKHNoYXJlZCBhY3Jvc3MgYWxsIG1ldGhvZHMpCgp8IFBhcmFtZXRlciB8IFR5cGUgfCBSZXF1aXJlZCB8IERlc2NyaXB0aW9uIHwKfC0tLS0tLS0tLS0tfC0tLS0tLXwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYGZsYWdLZXlgIHwgYHN0cmluZ2AgfCBZZXMgfCBGbGFnIGtleSB0byBldmFsdWF0ZSB8CnwgYGRlZmF1bHRWYWx1ZWAgfCB2YXJpZXMgfCBZZXMgKGV4Y2VwdCBgZ2V0YCkgfCBGYWxsYmFjayBpZiBldmFsdWF0aW9uIGZhaWxzIG9yIGZsYWcgbm90IGZvdW5kIHwKfCBgY29udGV4dGAgfCBgRmxhZ3NoaXBFdmFsdWF0aW9uQ29udGV4dGAgfCBObyB8IEF0dHJpYnV0ZXMgZm9yIHRhcmdldGluZyBydWxlcyAoYHsgdXNlcklkOiAidXNlci00MiIsIGNvdW50cnk6ICJVUyIgfWApIHwKCiMjIyBUeXBlcwoKYGBgdHlwZXNjcmlwdAp0eXBlIEZsYWdzaGlwRXZhbHVhdGlvbkNvbnRleHQgPSBSZWNvcmQ8c3RyaW5nLCBzdHJpbmcgfCBudW1iZXIgfCBib29sZWFuPjsKCmludGVyZmFjZSBGbGFnc2hpcEV2YWx1YXRpb25EZXRhaWxzPFQ+IHsKICBmbGFnS2V5OiBzdHJpbmc7CiAgdmFsdWU6IFQ7CiAgdmFyaWFudD86IHN0cmluZzsgICAgIC8vIG5hbWUgb2YgdGhlIG1hdGNoZWQgdmFyaWF0aW9uCiAgcmVhc29uPzogc3RyaW5nOyAgICAgIC8vICJUQVJHRVRJTkdfTUFUQ0giIHwgIkRFRkFVTFQiIHwgIkRJU0FCTEVEIiB8ICJTUExJVCIKICBlcnJvckNvZGU/OiBzdHJpbmc7ICAgLy8gIlRZUEVfTUlTTUFUQ0giIHwgIkdFTkVSQUwiCiAgZXJyb3JNZXNzYWdlPzogc3RyaW5nOwp9CmBgYAoKIyMjIEV4YW1wbGUKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgZW5hYmxlZCA9IGF3YWl0IGVudi5GTEFHUy5nZXRCb29sZWFuVmFsdWUoIm5ldy1mZWF0dXJlIiwgZmFsc2UsIHsKICAgICAgdXNlcklkOiAidXNlci00MiIsCiAgICB9KTsKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoZW5hYmxlZCA/ICJGZWF0dXJlIG9uIiA6ICJGZWF0dXJlIG9mZiIpOwogIH0sCn07CmBgYAoKLS0tCgojIyBPcGVuRmVhdHVyZSBTREsKClBhY2thZ2U6IGBAY2xvdWRmbGFyZS9mbGFnc2hpcGAKCiMjIyBTZXJ2ZXIgUHJvdmlkZXIgKGBGbGFnc2hpcFNlcnZlclByb3ZpZGVyYCkKCkZvciBXb3JrZXJzLCBOb2RlLmpzLCBhbmQgc2VydmVyLXNpZGUgSmF2YVNjcmlwdC4KCioqV2l0aCBiaW5kaW5nIChyZWNvbW1lbmRlZCBpbnNpZGUgV29ya2Vycyk6KioKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgT3BlbkZlYXR1cmUgfSBmcm9tICJAb3BlbmZlYXR1cmUvc2VydmVyLXNkayI7CmltcG9ydCB7IEZsYWdzaGlwU2VydmVyUHJvdmlkZXIgfSBmcm9tICJAY2xvdWRmbGFyZS9mbGFnc2hpcCI7Cgphd2FpdCBPcGVuRmVhdHVyZS5zZXRQcm92aWRlckFuZFdhaXQoCiAgbmV3IEZsYWdzaGlwU2VydmVyUHJvdmlkZXIoeyBiaW5kaW5nOiBlbnYuRkxBR1MgfSksCik7CmNvbnN0IGNsaWVudCA9IE9wZW5GZWF0dXJlLmdldENsaWVudCgpOwpjb25zdCBlbmFibGVkID0gYXdhaXQgY2xpZW50LmdldEJvb2xlYW5WYWx1ZSgibmV3LWNoZWNrb3V0IiwgZmFsc2UsIHsKICB0YXJnZXRpbmdLZXk6ICJ1c2VyLTQyIiwKfSk7CmBgYAoKKipXaXRoIGFwcCBJRCAoTm9kZS5qcyAvIG5vbi1Xb3JrZXIgcnVudGltZXMpOioqCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IE9wZW5GZWF0dXJlIH0gZnJvbSAiQG9wZW5mZWF0dXJlL3NlcnZlci1zZGsiOwppbXBvcnQgeyBGbGFnc2hpcFNlcnZlclByb3ZpZGVyIH0gZnJvbSAiQGNsb3VkZmxhcmUvZmxhZ3NoaXAiOwoKYXdhaXQgT3BlbkZlYXR1cmUuc2V0UHJvdmlkZXJBbmRXYWl0KAogIG5ldyBGbGFnc2hpcFNlcnZlclByb3ZpZGVyKHsKICAgIGFwcElkOiAiPEFQUF9JRD4iLAogICAgYWNjb3VudElkOiAiPEFDQ09VTlRfSUQ+IiwKICAgIGF1dGhUb2tlbjogIjxBUElfVE9LRU4+IiwKICB9KSwKKTsKY29uc3QgY2xpZW50ID0gT3BlbkZlYXR1cmUuZ2V0Q2xpZW50KCk7CmNvbnN0IGVuYWJsZWQgPSBhd2FpdCBjbGllbnQuZ2V0Qm9vbGVhblZhbHVlKCJuZXctY2hlY2tvdXQiLCBmYWxzZSwgewogIHRhcmdldGluZ0tleTogInVzZXItNDIiLAp9KTsKYGBgCgojIyMgQ2xpZW50IFByb3ZpZGVyIChgRmxhZ3NoaXBDbGllbnRQcm92aWRlcmApCgpGb3IgYnJvd3NlciBhcHBsaWNhdGlvbnMuIFByZS1mZXRjaGVzIGZsYWdzIG9uIGluaXQsIGV2YWx1YXRlcyBzeW5jaHJvbm91c2x5LgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBPcGVuRmVhdHVyZSB9IGZyb20gIkBvcGVuZmVhdHVyZS93ZWItc2RrIjsKaW1wb3J0IHsgRmxhZ3NoaXBDbGllbnRQcm92aWRlciB9IGZyb20gIkBjbG91ZGZsYXJlL2ZsYWdzaGlwIjsKCmF3YWl0IE9wZW5GZWF0dXJlLnNldFByb3ZpZGVyQW5kV2FpdCgKICBuZXcgRmxhZ3NoaXBDbGllbnRQcm92aWRlcih7CiAgICBhcHBJZDogIjxBUFBfSUQ+IiwKICAgIGFjY291bnRJZDogIjxBQ0NPVU5UX0lEPiIsCiAgICBhdXRoVG9rZW46ICI8QVBJX1RPS0VOPiIsCiAgICBwcmVmZXRjaEZsYWdzOiBbInByb21vLWJhbm5lciIsICJkYXJrLW1vZGUiXSwKICB9KSwKKTsKYXdhaXQgT3BlbkZlYXR1cmUuc2V0Q29udGV4dCh7IHRhcmdldGluZ0tleTogInVzZXItNDIiLCBwbGFuOiAiZW50ZXJwcmlzZSIgfSk7CmNvbnN0IGNsaWVudCA9IE9wZW5GZWF0dXJlLmdldENsaWVudCgpOwoKLy8gU3luY2hyb25vdXMg4oCUIG5vIGF3YWl0IG5lZWRlZApjb25zdCBzaG93QmFubmVyID0gY2xpZW50LmdldEJvb2xlYW5WYWx1ZSgicHJvbW8tYmFubmVyIiwgZmFsc2UpOwpgYGAKCioqSW1wb3J0YW50OioqIE9ubHkgZmxhZ3MgbGlzdGVkIGluIGBwcmVmZXRjaEZsYWdzYCBhcmUgYXZhaWxhYmxlLiBVbmxpc3RlZCBmbGFncyByZXR1cm4gYEZMQUdfTk9UX0ZPVU5EYC4KCiMjIyBTREsgSG9va3MKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgTG9nZ2luZ0hvb2ssIFRlbGVtZXRyeUhvb2sgfSBmcm9tICJAY2xvdWRmbGFyZS9mbGFnc2hpcCI7Ck9wZW5GZWF0dXJlLmFkZEhvb2tzKG5ldyBMb2dnaW5nSG9vaygpLCBuZXcgVGVsZW1ldHJ5SG9vaygpKTsKYGBgCgotLS0KCiMjIFJFU1QgQVBJIChGbGFnIE1hbmFnZW1lbnQpCgpTb3VyY2Ugb2YgdHJ1dGg6IFtDbG91ZGZsYXJlIEZsYWdzaGlwIEFQSSByZWZlcmVuY2VdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hcGkvcmVzb3VyY2VzL2ZsYWdzaGlwLykuIFVzZSBpdCB0byB2ZXJpZnkgUkVTVCBwYXRocywgZW52ZWxvcGVzLCByZXNwb25zZSBmaWVsZHMsIGFuZCBwZXJtaXNzaW9uIHdvcmRpbmcgYmVmb3JlIHJlbHlpbmcgb24gZXhhbXBsZXMgaGVyZS4KCiMjIyBGSVJTVDogQ2hlY2sgUHJlcmVxdWlzaXRlcwoKQmVmb3JlIG1ha2luZyBhbnkgUkVTVCBBUEkgY2FsbHMgKGNyZWF0ZSwgcmVhZCwgdXBkYXRlLCBkZWxldGUsIHRvZ2dsZSBmbGFncyksIHZlcmlmeSB0aGVzZSBlbnZpcm9ubWVudCB2YXJpYWJsZXMgYXJlIHNldDoKCnwgVmFyaWFibGUgfCBQdXJwb3NlIHwgSG93IHRvIGdldCB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgYENMT1VERkxBUkVfQUNDT1VOVF9JRGAgfCBBY2NvdW50IGlkZW50aWZpZXIgfCBEYXNoYm9hcmQgVVJMIG9yIGB3cmFuZ2xlciB3aG9hbWlgIHwKfCBgQ0xPVURGTEFSRV9BUElfVE9LRU5gIHwgQmVhcmVyIHRva2VuIGZvciBBUEkgYXV0aCB8IFtDcmVhdGUgQVBJIHRva2VuXShodHRwczovL2Rhc2guY2xvdWRmbGFyZS5jb20vcHJvZmlsZS9hcGktdG9rZW5zKSB3aXRoIEZsYWdzaGlwIHBlcm1pc3Npb25zIHwKfCBgRkxBR1NISVBfQVBQX0lEYCB8IFRhcmdldCBhcHAgVVVJRCB8IERhc2hib2FyZCB1bmRlciAqKkNvbXB1dGUgPiBGbGFnc2hpcCoqLCBvciBgR0VUIC9hcHBzYCBlbmRwb2ludCB8CgpDaGVjayB3aXRoOgoKYGBgYmFzaAplY2hvICJDTE9VREZMQVJFX0FDQ09VTlRfSUQ9JHtDTE9VREZMQVJFX0FDQ09VTlRfSUQ6LShub3Qgc2V0KX0iCmVjaG8gIkNMT1VERkxBUkVfQVBJX1RPS0VOPSR7Q0xPVURGTEFSRV9BUElfVE9LRU46LShub3Qgc2V0KX0iCmVjaG8gIkZMQUdTSElQX0FQUF9JRD0ke0ZMQUdTSElQX0FQUF9JRDotKG5vdCBzZXQpfSIKYGBgCgoqKklmIGFueSBhcmUgbWlzc2luZywgYXNrIHRoZSB1c2VyIHRvIHByb3ZpZGUgdGhlbSBiZWZvcmUgcHJvY2VlZGluZy4qKgoKIyMjIEJhc2UgVVJMIGFuZCBBdXRoCgpCYXNlIFVSTDogYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vZmxhZ3NoaXBgCgpBdXRoZW50aWNhdGlvbjogYEF1dGhvcml6YXRpb246IEJlYXJlciA8QVBJX1RPS0VOPmAKCk1hbmFnZW1lbnQgZW5kcG9pbnRzIHVzZSB0aGUgQ2xvdWRmbGFyZSB2NCBlbnZlbG9wZS4gT24gc3VjY2VzcywgdGhlIHBheWxvYWQgaXMgdW5kZXIgYHJlc3VsdGA7IGVycm9ycyBhcmUgYW4gYXJyYXkgdW5kZXIgYGVycm9yc2AuCgpgYGBqc29uYwovLyBTdWNjZXNzCnsgInN1Y2Nlc3MiOiB0cnVlLCAicmVzdWx0IjogPFQ+LCAiZXJyb3JzIjogW10sICJtZXNzYWdlcyI6IFtdIH0KCi8vIFBhZ2luYXRlZCBzdWNjZXNzCnsKICAic3VjY2VzcyI6IHRydWUsCiAgInJlc3VsdCI6IFs8VD5dLAogICJyZXN1bHRfaW5mbyI6IHsgImNvdW50IjogNTAsICJjdXJzb3IiOiAibmV4dC1jdXJzb3Itb3ItbnVsbCIgfSwKICAiZXJyb3JzIjogW10sCiAgIm1lc3NhZ2VzIjogW10KfQoKLy8gRXJyb3IKeyAic3VjY2VzcyI6IGZhbHNlLCAicmVzdWx0IjogbnVsbCwgImVycm9ycyI6IFt7ICJtZXNzYWdlIjogIm1lc3NhZ2UiIH1dLCAibWVzc2FnZXMiOiBbXSB9CmBgYAoKIyMjIEFwcCBFbmRwb2ludHMKCnwgTWV0aG9kIHwgUGF0aCB8IERlc2NyaXB0aW9uIHwKfC0tLS0tLS0tfC0tLS0tLXwtLS0tLS0tLS0tLS0tfAp8IGBHRVRgIHwgYC9hcHBzYCB8IExpc3QgYWxsIGFwcHMgfAp8IGBHRVRgIHwgYC9hcHBzL3thcHBfaWR9YCB8IEdldCBhcHAgfAp8IGBQT1NUYCB8IGAvYXBwc2AgfCBDcmVhdGUgYXBwIChgeyAibmFtZSI6ICJteS1hcHAiIH1gKSB8CnwgYFBVVGAgfCBgL2FwcHMve2FwcF9pZH1gIHwgVXBkYXRlIGFwcCAoYHsgIm5hbWUiOiAibmV3LW5hbWUiIH1gKSB8CnwgYERFTEVURWAgfCBgL2FwcHMve2FwcF9pZH1gIHwgRGVsZXRlIGFwcCB8CgpBcHAgbmFtZSBjb25zdHJhaW50czogYWxwaGFudW1lcmljICsgaHlwaGVucyArIHVuZGVyc2NvcmVzLCAxLTY0IGNoYXJzLgoKIyMjIEZsYWcgRW5kcG9pbnRzCgp8IE1ldGhvZCB8IFBhdGggfCBEZXNjcmlwdGlvbiB8CnwtLS0tLS0tLXwtLS0tLS18LS0tLS0tLS0tLS0tLXwKfCBgR0VUYCB8IGAvYXBwcy97YXBwX2lkfS9mbGFncz9saW1pdD01MCZjdXJzb3I9PGN1cnNvcj5gIHwgTGlzdCBmbGFncyAocGFnaW5hdGVkKSB8CnwgYEdFVGAgfCBgL2FwcHMve2FwcF9pZH0vZmxhZ3Mve2ZsYWdfa2V5fWAgfCBHZXQgZmxhZyB8CnwgYFBPU1RgIHwgYC9hcHBzL3thcHBfaWR9L2ZsYWdzYCB8IENyZWF0ZSBmbGFnIHwKfCBgUFVUYCB8IGAvYXBwcy97YXBwX2lkfS9mbGFncy97ZmxhZ19rZXl9YCB8IFVwZGF0ZSBmbGFnIChmdWxsIHJlcGxhY2UpIHwKfCBgREVMRVRFYCB8IGAvYXBwcy97YXBwX2lkfS9mbGFncy97ZmxhZ19rZXl9YCB8IERlbGV0ZSBmbGFnIHwKfCBgR0VUYCB8IGAvYXBwcy97YXBwX2lkfS9mbGFncy97ZmxhZ19rZXl9L2NoYW5nZWxvZz9saW1pdD0yMCZjdXJzb3I9PGN1cnNvcj5gIHwgRmxhZyBjaGFuZ2Vsb2cgfAoKIyMjIEV2YWx1YXRlIEVuZHBvaW50CgpgYGAKR0VUIC9hcHBzL3thcHBfaWR9L2V2YWx1YXRlP2ZsYWdLZXk9PGtleT4mPGNvbnRleHQtYXR0cnM+CmBgYAoKUmVxdWlyZXMgYW4gQVBJIHRva2VuIHdpdGggdGhlIGBjb20uY2xvdWRmbGFyZS5hY2NvdW50LmZsYWdzaGlwLmV2YWx1YXRlYCBwZXJtaXNzaW9uLiBDb250ZXh0IGF0dHJpYnV0ZXMgcGFzc2VkIGFzIHF1ZXJ5IHBhcmFtcy4gVGhpcyBlbmRwb2ludCBpcyBub3Qgd3JhcHBlZCBpbiB0aGUgbWFuYWdlbWVudCBlbnZlbG9wZTsgdGhlIFNESyBjb250cmFjdCByZXR1cm5zIE9wZW5GZWF0dXJlLXN0eWxlIGNhbWVsQ2FzZToKCmBgYGpzb24KewogICJmbGFnS2V5IjogIm15LWZsYWciLAogICJ2YWx1ZSI6IHRydWUsCiAgInZhcmlhbnQiOiAib24iLAogICJyZWFzb24iOiAiU1BMSVQiCn0KYGBgCgpSZWFzb25zOiBgVEFSR0VUSU5HX01BVENIYCwgYFNQTElUYCwgYERFRkFVTFRgLCBgRElTQUJMRURgLgoKIyMjIE1hbmFnZW1lbnQgUmVzcG9uc2UgUGF5bG9hZHMKCk1hbmFnZW1lbnQgZW5kcG9pbnRzIGFyZSB3cmFwcGVkIGluIHRoZSBDbG91ZGZsYXJlIHY0IGVudmVsb3BlIHNob3duIGFib3ZlLiBDb21tb24gYC5yZXN1bHRgIHBheWxvYWRzOgoKKipBcHAgcmVzdWx0KioKCmBgYGpzb24KewogICJpZCI6ICJhcHAtdXVpZCIsCiAgIm5hbWUiOiAibXktYXBwIiwKICAiY3JlYXRlZF9hdCI6ICIyMDI2LTA2LTA5VDEyOjAwOjAwLjAwMFoiLAogICJ1cGRhdGVkX2F0IjogIjIwMjYtMDYtMDlUMTI6MDA6MDAuMDAwWiIsCiAgInVwZGF0ZWRfYnkiOiAidXNlckBleGFtcGxlLmNvbSIKfQpgYGAKCioqRmxhZyByZXN1bHQqKgoKYGBganNvbgp7CiAgImtleSI6ICJteS1mbGFnIiwKICAidHlwZSI6ICJib29sZWFuIiwKICAiZGVmYXVsdF92YXJpYXRpb24iOiAib2ZmIiwKICAidmFyaWF0aW9ucyI6IHsgIm9uIjogdHJ1ZSwgIm9mZiI6IGZhbHNlIH0sCiAgInJ1bGVzIjogW10sCiAgImRlc2NyaXB0aW9uIjogIkVuYWJsZXMgdGhlIG5ldyBmZWF0dXJlIiwKICAiZW5hYmxlZCI6IHRydWUsCiAgInVwZGF0ZWRfYXQiOiAiMjAyNi0wNi0wOVQxMjowMDowMC4wMDBaIiwKICAidXBkYXRlZF9ieSI6ICJ1c2VyQGV4YW1wbGUuY29tIgp9CmBgYAoKKipDaGFuZ2Vsb2cgZW50cnkqKgoKYGBganNvbgp7CiAgImZsYWdfa2V5IjogIm15LWZsYWciLAogICJldmVudCI6ICJ1cGRhdGUiLAogICJhZnRlciI6IHsgImtleSI6ICJteS1mbGFnIiwgImRlZmF1bHRfdmFyaWF0aW9uIjogIm9mZiIsICJ2YXJpYXRpb25zIjogeyAib24iOiB0cnVlLCAib2ZmIjogZmFsc2UgfSwgInJ1bGVzIjogW10sICJlbmFibGVkIjogdHJ1ZSB9LAogICJkaWZmIjogeyAiZW5hYmxlZCI6IHsgImZyb20iOiBmYWxzZSwgInRvIjogdHJ1ZSB9IH0KfQpgYGAKCkNoYW5nZWxvZyBlbnRyaWVzIGluY2x1ZGUgdGhlIGZ1bGwgZmxhZyBzdGF0ZSBhZnRlciB0aGUgY2hhbmdlLiBgdXBkYXRlYCBlbnRyaWVzIGFsc28gaW5jbHVkZSBgZGlmZmAuCgotLS0KCiMjIEZsYWdEZWZpbml0aW9uIFNjaGVtYQoKYGBganNvbgp7CiAgImtleSI6ICJteS1mbGFnIiwKICAidHlwZSI6ICJib29sZWFuIiwKICAiZGVmYXVsdF92YXJpYXRpb24iOiAib2ZmIiwKICAidmFyaWF0aW9ucyI6IHsKICAgICJvbiI6IHRydWUsCiAgICAib2ZmIjogZmFsc2UKICB9LAogICJydWxlcyI6IFsKICAgIHsKICAgICAgInByaW9yaXR5IjogMSwKICAgICAgImNvbmRpdGlvbnMiOiBbCiAgICAgICAgewogICAgICAgICAgImF0dHJpYnV0ZSI6ICJlbWFpbCIsCiAgICAgICAgICAib3BlcmF0b3IiOiAiZW5kc193aXRoIiwKICAgICAgICAgICJ2YWx1ZSI6ICJAY2xvdWRmbGFyZS5jb20iCiAgICAgICAgfQogICAgICBdLAogICAgICAic2VydmVfdmFyaWF0aW9uIjogIm9uIiwKICAgICAgInJvbGxvdXQiOiB7ICJwZXJjZW50YWdlIjogMTAwIH0KICAgIH0KICBdLAogICJkZXNjcmlwdGlvbiI6ICJFbmFibGVzIHRoZSBuZXcgZmVhdHVyZSIsCiAgImVuYWJsZWQiOiB0cnVlCn0KYGBgCgojIyMgRmllbGQgQ29uc3RyYWludHMKCnwgRmllbGQgfCBUeXBlIHwgQ29uc3RyYWludHMgfAp8LS0tLS0tLXwtLS0tLS18LS0tLS0tLS0tLS0tLXwKfCBga2V5YCB8IHN0cmluZyB8IDEtNjQgY2hhcnMsIGAvXlthLXpBLVowLTlfLV0rJC9gIHwKfCBgdHlwZWAgfCBlbnVtIHwgT3B0aW9uYWwuIGBib29sZWFuYCwgYHN0cmluZ2AsIGBudW1iZXJgLCBganNvbmAgKGF1dG8taW5mZXJyZWQgZnJvbSB2YXJpYXRpb25zKSB8CnwgYGRlZmF1bHRfdmFyaWF0aW9uYCB8IHN0cmluZyB8IE11c3QgYmUgYSBrZXkgaW4gYHZhcmlhdGlvbnNgIHwKfCBgdmFyaWF0aW9uc2AgfCBgUmVjb3JkPHN0cmluZywgVD5gIHwgQXQgbGVhc3Qgb25lLiBBbGwgdmFsdWVzIHNhbWUgdHlwZS4gS2V5czogYWxwaGFudW1lcmljL2h5cGhlbnMvdW5kZXJzY29yZXMsIG1heCA2NCBjaGFycy4gVmFsdWVzIG1heCAxMEtCLiB8CnwgYHJ1bGVzYCB8IGBSdWxlW11gIHwgQ2FuIGJlIGVtcHR5LiBObyBkdXBsaWNhdGUgcHJpb3JpdGllcy4gfAp8IGBkZXNjcmlwdGlvbmAgfCBzdHJpbmc/IHwgTWF4IDUxMiBjaGFycywgbnVsbGFibGUgfAp8IGBlbmFibGVkYCB8IGJvb2xlYW4gfCBSZXF1aXJlZC4gYGZhbHNlYCA9IGFsd2F5cyByZXR1cm5zIGRlZmF1bHQgdmFyaWF0aW9uLiB8CgojIyMgUnVsZSBTY2hlbWEKCmBgYGpzb24KewogICJwcmlvcml0eSI6IDEsCiAgImNvbmRpdGlvbnMiOiBbIC8qIENvbmRpdGlvbltdICovIF0sCiAgInNlcnZlX3ZhcmlhdGlvbiI6ICJvbiIsCiAgInJvbGxvdXQiOiB7ICJwZXJjZW50YWdlIjogNTAsICJhdHRyaWJ1dGUiOiAidGFyZ2V0aW5nS2V5IiB9Cn0KYGBgCgotIGBwcmlvcml0eWA6IGludGVnZXIgPj0gMSwgdW5pcXVlIGFjcm9zcyBydWxlcyBpbiB0aGUgZmxhZyAobG93ZXIgPSBldmFsdWF0ZWQgZmlyc3QpCi0gYGNvbmRpdGlvbnNgOiBhcnJheSBvZiBiYXNlIG9yIGxvZ2ljYWwgY29uZGl0aW9ucwotIGBzZXJ2ZV92YXJpYXRpb25gOiBtdXN0IGJlIGEga2V5IGluIGB2YXJpYXRpb25zYAotIGByb2xsb3V0YDogb3B0aW9uYWwuIGBwZXJjZW50YWdlYCAwLTEwMC4gYGF0dHJpYnV0ZWAgZGVmYXVsdHMgdG8gYHRhcmdldGluZ0tleWAuCgojIyMgQ29uZGl0aW9uIFNjaGVtYQoKKipCYXNlIGNvbmRpdGlvbjoqKgoKYGBganNvbgp7ICJhdHRyaWJ1dGUiOiAiZW1haWwiLCAib3BlcmF0b3IiOiAiZW5kc193aXRoIiwgInZhbHVlIjogIkBjbG91ZGZsYXJlLmNvbSIgfQpgYGAKCioqTG9naWNhbCBjb25kaXRpb24gKEFORC9PUik6KioKCmBgYGpzb24KewogICJsb2dpY2FsX29wZXJhdG9yIjogIkFORCIsCiAgImNsYXVzZXMiOiBbCiAgICB7ICJhdHRyaWJ1dGUiOiAiY291bnRyeSIsICJvcGVyYXRvciI6ICJlcXVhbHMiLCAidmFsdWUiOiAiVVMiIH0sCiAgICB7ICJhdHRyaWJ1dGUiOiAicGxhbiIsICJvcGVyYXRvciI6ICJpbiIsICJ2YWx1ZSI6IFsiZW50ZXJwcmlzZSIsICJidXNpbmVzcyJdIH0KICBdCn0KYGBgCgpOZXN0aW5nIHN1cHBvcnRlZCB1cCB0byA2IGxldmVscyBkZWVwLgoKIyMjIE9wZXJhdG9ycwoKfCBPcGVyYXRvciB8IERlc2NyaXB0aW9uIHwgVmFsdWUgVHlwZSB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tfAp8IGBlcXVhbHNgIHwgRXhhY3QgbWF0Y2ggKGNhc2Utc2Vuc2l0aXZlKSB8IFN0cmluZyB8CnwgYG5vdF9lcXVhbHNgIHwgTm90IGV4YWN0IG1hdGNoIHwgU3RyaW5nIHwKfCBgZ3JlYXRlcl90aGFuYCB8IE51bWVyaWMgLyBkYXRldGltZSA+IHwgTnVtYmVyLCBJU08gODYwMSB8CnwgYGxlc3NfdGhhbmAgfCBOdW1lcmljIC8gZGF0ZXRpbWUgPCB8IE51bWJlciwgSVNPIDg2MDEgfAp8IGBncmVhdGVyX3RoYW5fb3JfZXF1YWxzYCB8ID49IHwgTnVtYmVyLCBJU08gODYwMSB8CnwgYGxlc3NfdGhhbl9vcl9lcXVhbHNgIHwgPD0gfCBOdW1iZXIsIElTTyA4NjAxIHwKfCBgY29udGFpbnNgIHwgU3Vic3RyaW5nIG1hdGNoIChjYXNlLXNlbnNpdGl2ZSkgfCBTdHJpbmcgfAp8IGBzdGFydHNfd2l0aGAgfCBQcmVmaXggbWF0Y2ggfCBTdHJpbmcgfAp8IGBlbmRzX3dpdGhgIHwgU3VmZml4IG1hdGNoIHwgU3RyaW5nIHwKfCBgaW5gIHwgVmFsdWUgaW4gYXJyYXkgfCBBcnJheSB8CnwgYG5vdF9pbmAgfCBWYWx1ZSBub3QgaW4gYXJyYXkgfCBBcnJheSB8CgotLS0KCiMjIFJhdGUgTGltaXRzCgp8IE9wZXJhdGlvbiB8IExpbWl0IHwKfC0tLS0tLS0tLS0tfC0tLS0tLS18CnwgTXV0YXRpb25zIChQT1NUL1BVVC9ERUxFVEUpIHwgNjAgcGVyIDYwcyBwZXIgYWNjb3VudDphcHAgfAp8IFJlYWRzIChHRVQpIHwgNjAwIHBlciA2MHMgcGVyIGFjY291bnQ6YXBwIHwKCiMjIEVycm9yIENvZGVzCgp8IEhUVFAgU3RhdHVzIHwgTWVhbmluZyB8CnwtLS0tLS0tLS0tLS0tfC0tLS0tLS0tLXwKfCAyMDAgfCBTdWNjZXNzIChyZWFkL3VwZGF0ZS9kZWxldGUpIHwKfCAyMDEgfCBDcmVhdGVkIChjcmVhdGUpIHwKfCA0MDAgfCBWYWxpZGF0aW9uIGVycm9yIChjaGVjayBgZXJyb3JzW10ubWVzc2FnZWApIHwKfCA0MDEgfCBJbnZhbGlkIG9yIG1pc3NpbmcgdG9rZW4gfAp8IDQwNCB8IEZsYWcgb3IgYXBwIG5vdCBmb3VuZCB8CnwgNDA5IHwgRmxhZyBrZXkgYWxyZWFkeSBleGlzdHMgKGNyZWF0ZSkgfAp8IDQyOSB8IFJhdGUgbGltaXRlZCB8Cg==
+# Flagship API Reference
+
+## Binding API (Workers)
+
+The binding is available as `env.FLAGS` (type `Flagship` from `@cloudflare/workers-types`).
+
+### Evaluation Methods
+
+All methods are async, never throw, and return the `defaultValue` on errors.
+
+| Method | Signature | Returns |
+|--------|-----------|---------|
+| `get` | `get(flagKey, defaultValue?, context?)` | `Promise<unknown>` |
+| `getBooleanValue` | `getBooleanValue(flagKey, defaultValue, context?)` | `Promise<boolean>` |
+| `getStringValue` | `getStringValue(flagKey, defaultValue, context?)` | `Promise<string>` |
+| `getNumberValue` | `getNumberValue(flagKey, defaultValue, context?)` | `Promise<number>` |
+| `getObjectValue` | `getObjectValue<T>(flagKey, defaultValue, context?)` | `Promise<T>` |
+| `getBooleanDetails` | `getBooleanDetails(flagKey, defaultValue, context?)` | `Promise<FlagshipEvaluationDetails<boolean>>` |
+| `getStringDetails` | `getStringDetails(flagKey, defaultValue, context?)` | `Promise<FlagshipEvaluationDetails<string>>` |
+| `getNumberDetails` | `getNumberDetails(flagKey, defaultValue, context?)` | `Promise<FlagshipEvaluationDetails<number>>` |
+| `getObjectDetails` | `getObjectDetails<T>(flagKey, defaultValue, context?)` | `Promise<FlagshipEvaluationDetails<T>>` |
+
+### Parameters (shared across all methods)
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `flagKey` | `string` | Yes | Flag key to evaluate |
+| `defaultValue` | varies | Yes (except `get`) | Fallback if evaluation fails or flag not found |
+| `context` | `FlagshipEvaluationContext` | No | Attributes for targeting rules (`{ userId: "user-42", country: "US" }`) |
+
+### Types
+
+```typescript
+type FlagshipEvaluationContext = Record<string, string | number | boolean>;
+
+interface FlagshipEvaluationDetails<T> {
+  flagKey: string;
+  value: T;
+  variant?: string;     // name of the matched variation
+  reason?: string;      // "TARGETING_MATCH" | "DEFAULT" | "DISABLED" | "SPLIT"
+  errorCode?: string;   // "TYPE_MISMATCH" | "GENERAL"
+  errorMessage?: string;
+}
+```
+
+### Example
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const enabled = await env.FLAGS.getBooleanValue("new-feature", false, {
+      userId: "user-42",
+    });
+    return new Response(enabled ? "Feature on" : "Feature off");
+  },
+};
+```
+
+---
+
+## OpenFeature SDK
+
+Package: `@cloudflare/flagship`
+
+### Server Provider (`FlagshipServerProvider`)
+
+For Workers, Node.js, and server-side JavaScript.
+
+**With binding (recommended inside Workers):**
+
+```typescript
+import { OpenFeature } from "@openfeature/server-sdk";
+import { FlagshipServerProvider } from "@cloudflare/flagship";
+
+await OpenFeature.setProviderAndWait(
+  new FlagshipServerProvider({ binding: env.FLAGS }),
+);
+const client = OpenFeature.getClient();
+const enabled = await client.getBooleanValue("new-checkout", false, {
+  targetingKey: "user-42",
+});
+```
+
+**With app ID (Node.js / non-Worker runtimes):**
+
+```typescript
+import { OpenFeature } from "@openfeature/server-sdk";
+import { FlagshipServerProvider } from "@cloudflare/flagship";
+
+await OpenFeature.setProviderAndWait(
+  new FlagshipServerProvider({
+    appId: "<APP_ID>",
+    accountId: "<ACCOUNT_ID>",
+    authToken: "<API_TOKEN>",
+  }),
+);
+const client = OpenFeature.getClient();
+const enabled = await client.getBooleanValue("new-checkout", false, {
+  targetingKey: "user-42",
+});
+```
+
+### Client Provider (`FlagshipClientProvider`)
+
+For browser applications. Pre-fetches flags on init, evaluates synchronously.
+
+```typescript
+import { OpenFeature } from "@openfeature/web-sdk";
+import { FlagshipClientProvider } from "@cloudflare/flagship";
+
+await OpenFeature.setProviderAndWait(
+  new FlagshipClientProvider({
+    appId: "<APP_ID>",
+    accountId: "<ACCOUNT_ID>",
+    authToken: "<API_TOKEN>",
+    prefetchFlags: ["promo-banner", "dark-mode"],
+  }),
+);
+await OpenFeature.setContext({ targetingKey: "user-42", plan: "enterprise" });
+const client = OpenFeature.getClient();
+
+// Synchronous — no await needed
+const showBanner = client.getBooleanValue("promo-banner", false);
+```
+
+**Important:** Only flags listed in `prefetchFlags` are available. Unlisted flags return `FLAG_NOT_FOUND`.
+
+### SDK Hooks
+
+```typescript
+import { LoggingHook, TelemetryHook } from "@cloudflare/flagship";
+OpenFeature.addHooks(new LoggingHook(), new TelemetryHook());
+```
+
+---
+
+## REST API (Flag Management)
+
+Source of truth: [Cloudflare Flagship API reference](https://developers.cloudflare.com/api/resources/flagship/). Use it to verify REST paths, envelopes, response fields, and permission wording before relying on examples here.
+
+### FIRST: Check Prerequisites
+
+Before making any REST API calls (create, read, update, delete, toggle flags), verify these environment variables are set:
+
+| Variable | Purpose | How to get |
+|----------|---------|------------|
+| `CLOUDFLARE_ACCOUNT_ID` | Account identifier | Dashboard URL or `wrangler whoami` |
+| `CLOUDFLARE_API_TOKEN` | Bearer token for API auth | [Create API token](https://dash.cloudflare.com/profile/api-tokens) with Flagship permissions |
+| `FLAGSHIP_APP_ID` | Target app UUID | Dashboard under **Compute > Flagship**, or `GET /apps` endpoint |
+
+Check with:
+
+```bash
+echo "CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID:-(not set)}"
+echo "CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:-(not set)}"
+echo "FLAGSHIP_APP_ID=${FLAGSHIP_APP_ID:-(not set)}"
+```
+
+**If any are missing, ask the user to provide them before proceeding.**
+
+### Base URL and Auth
+
+Base URL: `https://api.cloudflare.com/client/v4/accounts/{account_id}/flagship`
+
+Authentication: `Authorization: Bearer <API_TOKEN>`
+
+Management endpoints use the Cloudflare v4 envelope. On success, the payload is under `result`; errors are an array under `errors`.
+
+```jsonc
+// Success
+{ "success": true, "result": <T>, "errors": [], "messages": [] }
+
+// Paginated success
+{
+  "success": true,
+  "result": [<T>],
+  "result_info": { "count": 50, "cursor": "next-cursor-or-null" },
+  "errors": [],
+  "messages": []
+}
+
+// Error
+{ "success": false, "result": null, "errors": [{ "message": "message" }], "messages": [] }
+```
+
+### App Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/apps` | List all apps |
+| `GET` | `/apps/{app_id}` | Get app |
+| `POST` | `/apps` | Create app (`{ "name": "my-app" }`) |
+| `PUT` | `/apps/{app_id}` | Update app (`{ "name": "new-name" }`) |
+| `DELETE` | `/apps/{app_id}` | Delete app |
+
+App name constraints: alphanumeric + hyphens + underscores, 1-64 chars.
+
+### Flag Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/apps/{app_id}/flags?limit=50&cursor=<cursor>` | List flags (paginated) |
+| `GET` | `/apps/{app_id}/flags/{flag_key}` | Get flag |
+| `POST` | `/apps/{app_id}/flags` | Create flag |
+| `PUT` | `/apps/{app_id}/flags/{flag_key}` | Update flag (full replace) |
+| `DELETE` | `/apps/{app_id}/flags/{flag_key}` | Delete flag |
+| `GET` | `/apps/{app_id}/flags/{flag_key}/changelog?limit=20&cursor=<cursor>` | Flag changelog |
+
+### Evaluate Endpoint
+
+```
+GET /apps/{app_id}/evaluate?flagKey=<key>&<context-attrs>
+```
+
+Requires an API token with the `com.cloudflare.account.flagship.evaluate` permission. Context attributes passed as query params. This endpoint is not wrapped in the management envelope; the SDK contract returns OpenFeature-style camelCase:
+
+```json
+{
+  "flagKey": "my-flag",
+  "value": true,
+  "variant": "on",
+  "reason": "SPLIT"
+}
+```
+
+Reasons: `TARGETING_MATCH`, `SPLIT`, `DEFAULT`, `DISABLED`.
+
+### Management Response Payloads
+
+Management endpoints are wrapped in the Cloudflare v4 envelope shown above. Common `.result` payloads:
+
+**App result**
+
+```json
+{
+  "id": "app-uuid",
+  "name": "my-app",
+  "created_at": "2026-06-09T12:00:00.000Z",
+  "updated_at": "2026-06-09T12:00:00.000Z",
+  "updated_by": "user@example.com"
+}
+```
+
+**Flag result**
+
+```json
+{
+  "key": "my-flag",
+  "type": "boolean",
+  "default_variation": "off",
+  "variations": { "on": true, "off": false },
+  "rules": [],
+  "description": "Enables the new feature",
+  "enabled": true,
+  "updated_at": "2026-06-09T12:00:00.000Z",
+  "updated_by": "user@example.com"
+}
+```
+
+**Changelog entry**
+
+```json
+{
+  "flag_key": "my-flag",
+  "event": "update",
+  "after": { "key": "my-flag", "default_variation": "off", "variations": { "on": true, "off": false }, "rules": [], "enabled": true },
+  "diff": { "enabled": { "from": false, "to": true } }
+}
+```
+
+Changelog entries include the full flag state after the change. `update` entries also include `diff`.
+
+---
+
+## FlagDefinition Schema
+
+```json
+{
+  "key": "my-flag",
+  "type": "boolean",
+  "default_variation": "off",
+  "variations": {
+    "on": true,
+    "off": false
+  },
+  "rules": [
+    {
+      "priority": 1,
+      "conditions": [
+        {
+          "attribute": "email",
+          "operator": "ends_with",
+          "value": "@cloudflare.com"
+        }
+      ],
+      "serve_variation": "on",
+      "rollout": { "percentage": 100 }
+    }
+  ],
+  "description": "Enables the new feature",
+  "enabled": true
+}
+```
+
+### Field Constraints
+
+| Field | Type | Constraints |
+|-------|------|-------------|
+| `key` | string | 1-64 chars, `/^[a-zA-Z0-9_-]+$/` |
+| `type` | enum | Optional. `boolean`, `string`, `number`, `json` (auto-inferred from variations) |
+| `default_variation` | string | Must be a key in `variations` |
+| `variations` | `Record<string, T>` | At least one. All values same type. Keys: alphanumeric/hyphens/underscores, max 64 chars. Values max 10KB. |
+| `rules` | `Rule[]` | Can be empty. No duplicate priorities. |
+| `description` | string? | Max 512 chars, nullable |
+| `enabled` | boolean | Required. `false` = always returns default variation. |
+
+### Rule Schema
+
+```json
+{
+  "priority": 1,
+  "conditions": [ /* Condition[] */ ],
+  "serve_variation": "on",
+  "rollout": { "percentage": 50, "attribute": "targetingKey" }
+}
+```
+
+- `priority`: integer >= 1, unique across rules in the flag (lower = evaluated first)
+- `conditions`: array of base or logical conditions
+- `serve_variation`: must be a key in `variations`
+- `rollout`: optional. `percentage` 0-100. `attribute` defaults to `targetingKey`.
+
+### Condition Schema
+
+**Base condition:**
+
+```json
+{ "attribute": "email", "operator": "ends_with", "value": "@cloudflare.com" }
+```
+
+**Logical condition (AND/OR):**
+
+```json
+{
+  "logical_operator": "AND",
+  "clauses": [
+    { "attribute": "country", "operator": "equals", "value": "US" },
+    { "attribute": "plan", "operator": "in", "value": ["enterprise", "business"] }
+  ]
+}
+```
+
+Nesting supported up to 6 levels deep.
+
+### Operators
+
+| Operator | Description | Value Type |
+|----------|-------------|------------|
+| `equals` | Exact match (case-sensitive) | String |
+| `not_equals` | Not exact match | String |
+| `greater_than` | Numeric / datetime > | Number, ISO 8601 |
+| `less_than` | Numeric / datetime < | Number, ISO 8601 |
+| `greater_than_or_equals` | >= | Number, ISO 8601 |
+| `less_than_or_equals` | <= | Number, ISO 8601 |
+| `contains` | Substring match (case-sensitive) | String |
+| `starts_with` | Prefix match | String |
+| `ends_with` | Suffix match | String |
+| `in` | Value in array | Array |
+| `not_in` | Value not in array | Array |
+
+---
+
+## Rate Limits
+
+| Operation | Limit |
+|-----------|-------|
+| Mutations (POST/PUT/DELETE) | 60 per 60s per account:app |
+| Reads (GET) | 600 per 60s per account:app |
+
+## Error Codes
+
+| HTTP Status | Meaning |
+|-------------|---------|
+| 200 | Success (read/update/delete) |
+| 201 | Created (create) |
+| 400 | Validation error (check `errors[].message`) |
+| 401 | Invalid or missing token |
+| 404 | Flag or app not found |
+| 409 | Flag key already exists (create) |
+| 429 | Rate limited |

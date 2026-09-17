@@ -1,1 +1,90 @@
-IyBaYXJheiBDb25maWd1cmF0aW9uCgojIyBEYXNoYm9hcmQgU2V0dXAKCjEuIERvbWFpbiDihpIgWmFyYXog4oaSIFN0YXJ0IHNldHVwCjIuIEFkZCB0b29sIChlLmcuLCBHb29nbGUgQW5hbHl0aWNzIDQpCjMuIEVudGVyIGNyZWRlbnRpYWxzIChHQTQ6IGBHLVhYWFhYWFhYWFhgKQo0LiBDb25maWd1cmUgdHJpZ2dlcnMKNS4gU2F2ZSBhbmQgUHVibGlzaAoKIyMgVHJpZ2dlcnMKCnwgVHlwZSB8IFdoZW4gfCBVc2UgQ2FzZSB8CnwtLS0tLS18LS0tLS0tfC0tLS0tLS0tLS18CnwgUGFnZXZpZXcgfCBQYWdlIGxvYWQgfCBUcmFjayBwYWdlIHZpZXdzIHwKfCBDbGljayB8IEVsZW1lbnQgY2xpY2tlZCB8IEJ1dHRvbiB0cmFja2luZyB8CnwgRm9ybSBTdWJtaXNzaW9uIHwgRm9ybSBzdWJtaXR0ZWQgfCBMZWFkIGNhcHR1cmUgfAp8IEhpc3RvcnkgQ2hhbmdlIHwgVVJMIGNoYW5nZXMgKFNQQSkgfCBSZWFjdC9WdWUgcm91dGluZyB8CnwgVmFyaWFibGUgTWF0Y2ggfCBDdXN0b20gY29uZGl0aW9uIHwgQ29uZGl0aW9uYWwgZmlyaW5nIHwKCiMjIyBIaXN0b3J5IENoYW5nZSAoU1BBKQoKYGBgClR5cGU6IEhpc3RvcnkgQ2hhbmdlCkV2ZW50OiBwYWdldmlldwpgYGAKCkZpcmVzIG9uIGBwdXNoU3RhdGVgLCBgcmVwbGFjZVN0YXRlYCwgaGFzaCBjaGFuZ2VzLiAqKk5vIG1hbnVhbCB0cmFja2luZyBuZWVkZWQuKioKCiMjIyBDbGljayBUcmlnZ2VyCgpgYGAKVHlwZTogQ2xpY2sKQ1NTIFNlbGVjdG9yOiAuYnV5LWJ1dHRvbgpFdmVudDogcHVyY2hhc2VfaW50ZW50ClByb3BlcnRpZXM6CiAgYnV0dG9uX3RleHQ6IHt7c3lzdGVtLmNsaWNrRWxlbWVudC50ZXh0fX0KYGBgCgojIyBUb29sIENvbmZpZ3VyYXRpb24KCioqR0E0OioqCmBgYApNZWFzdXJlbWVudCBJRDogRy1YWFhYWFhYWFhYCkV2ZW50czogcGFnZV92aWV3LCBwdXJjaGFzZSwgdXNlcl9lbmdhZ2VtZW50CmBgYAoKKipGYWNlYm9vayBQaXhlbDoqKgpgYGAKUGl4ZWwgSUQ6IDEyMzQ1Njc4OTAxMjM0NTYKRXZlbnRzOiBQYWdlVmlldywgUHVyY2hhc2UsIEFkZFRvQ2FydApgYGAKCioqR29vZ2xlIEFkczoqKgpgYGAKQ29udmVyc2lvbiBJRDogQVctWFhYWFhYWFhYCkNvbnZlcnNpb24gTGFiZWw6IFlZWVlZWVlZWVkKYGBgCgojIyBDb25zZW50IE1hbmFnZW1lbnQKCjEuIFNldHRpbmdzIOKGkiBDb25zZW50IOKGkiBDcmVhdGUgcHVycG9zZXMgKGFuYWx5dGljcywgbWFya2V0aW5nKQoyLiBNYXAgdG9vbHMgdG8gcHVycG9zZXMKMy4gU2V0IGJlaGF2aW9yOiAiRG8gbm90IGxvYWQgdW50aWwgY29uc2VudCBncmFudGVkIgoKKipQcm9ncmFtbWF0aWMgY29uc2VudDoqKgpgYGBqYXZhc2NyaXB0CnphcmF6LmNvbnNlbnQuc2V0QWxsKHsgYW5hbHl0aWNzOiB0cnVlLCBtYXJrZXRpbmc6IHRydWUgfSk7CmBgYAoKIyMgUHJpdmFjeSBGZWF0dXJlcwoKfCBGZWF0dXJlIHwgRGVmYXVsdCB8CnwtLS0tLS0tLS18LS0tLS0tLS0tfAp8IElQIEFub255bWl6YXRpb24gfCBFbmFibGVkIHwKfCBDb29raWUgQ29udHJvbCB8IFZpYSBjb25zZW50IHB1cnBvc2VzIHwKfCBHRFBSL0NDUEEgfCBDb25zZW50IG1vZGFsIHwKCiMjIFRlc3RpbmcKCjEuICoqUHJldmlldyBNb2RlKiogLSB0ZXN0IHdpdGhvdXQgcHVibGlzaGluZwoyLiAqKkRlYnVnIE1vZGUqKiAtIGB6YXJhei5kZWJ1ZyA9IHRydWVgCjMuICoqTmV0d29yayB0YWIqKiAtIGZpbHRlciAiemFyYXoiCgojIyBMaW1pdHMKCnwgUmVzb3VyY2UgfCBMaW1pdCB8CnwtLS0tLS0tLS0tfC0tLS0tLS18CnwgRXZlbnQgcHJvcGVydGllcyB8IDEwMEtCIHwKfCBDb25zZW50IHB1cnBvc2VzIHwgMjAgfAo=
+# Zaraz Configuration
+
+## Dashboard Setup
+
+1. Domain → Zaraz → Start setup
+2. Add tool (e.g., Google Analytics 4)
+3. Enter credentials (GA4: `G-XXXXXXXXXX`)
+4. Configure triggers
+5. Save and Publish
+
+## Triggers
+
+| Type | When | Use Case |
+|------|------|----------|
+| Pageview | Page load | Track page views |
+| Click | Element clicked | Button tracking |
+| Form Submission | Form submitted | Lead capture |
+| History Change | URL changes (SPA) | React/Vue routing |
+| Variable Match | Custom condition | Conditional firing |
+
+### History Change (SPA)
+
+```
+Type: History Change
+Event: pageview
+```
+
+Fires on `pushState`, `replaceState`, hash changes. **No manual tracking needed.**
+
+### Click Trigger
+
+```
+Type: Click
+CSS Selector: .buy-button
+Event: purchase_intent
+Properties:
+  button_text: {{system.clickElement.text}}
+```
+
+## Tool Configuration
+
+**GA4:**
+```
+Measurement ID: G-XXXXXXXXXX
+Events: page_view, purchase, user_engagement
+```
+
+**Facebook Pixel:**
+```
+Pixel ID: 1234567890123456
+Events: PageView, Purchase, AddToCart
+```
+
+**Google Ads:**
+```
+Conversion ID: AW-XXXXXXXXX
+Conversion Label: YYYYYYYYYY
+```
+
+## Consent Management
+
+1. Settings → Consent → Create purposes (analytics, marketing)
+2. Map tools to purposes
+3. Set behavior: "Do not load until consent granted"
+
+**Programmatic consent:**
+```javascript
+zaraz.consent.setAll({ analytics: true, marketing: true });
+```
+
+## Privacy Features
+
+| Feature | Default |
+|---------|---------|
+| IP Anonymization | Enabled |
+| Cookie Control | Via consent purposes |
+| GDPR/CCPA | Consent modal |
+
+## Testing
+
+1. **Preview Mode** - test without publishing
+2. **Debug Mode** - `zaraz.debug = true`
+3. **Network tab** - filter "zaraz"
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Event properties | 100KB |
+| Consent purposes | 20 |

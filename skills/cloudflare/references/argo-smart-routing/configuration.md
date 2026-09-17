@@ -1,1 +1,197 @@
-IyMgQ29uZmlndXJhdGlvbiBNYW5hZ2VtZW50CgoqKk5vdGUgb24gU21hcnQgU2hpZWxkIEV2b2x1dGlvbjoqKiBBcmdvIFNtYXJ0IFJvdXRpbmcgaXMgYmVpbmcgaW50ZWdyYXRlZCBpbnRvIFNtYXJ0IFNoaWVsZC4gQ29uZmlndXJhdGlvbiBtZXRob2RzIGJlbG93IHJlbWFpbiB2YWxpZDsgVGVycmFmb3JtIGFuZCBJYUMgcGF0dGVybnMgdW5jaGFuZ2VkLgoKIyMjIEluZnJhc3RydWN0dXJlIGFzIENvZGUgKFRlcnJhZm9ybSkKCmBgYGhjbAojIHRlcnJhZm9ybS9hcmdvLnRmCiMgTm90ZTogVXNlIENsb3VkZmxhcmUgVGVycmFmb3JtIHByb3ZpZGVyCgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9hcmdvIiAiZXhhbXBsZSIgewogIHpvbmVfaWQgICAgICAgID0gdmFyLnpvbmVfaWQKICBzbWFydF9yb3V0aW5nICA9ICJvbiIKICB0aWVyZWRfY2FjaGluZyA9ICJvbiIKfQoKdmFyaWFibGUgInpvbmVfaWQiIHsKICBkZXNjcmlwdGlvbiA9ICJDbG91ZGZsYXJlIFpvbmUgSUQiCiAgdHlwZSAgICAgICAgPSBzdHJpbmcKfQoKb3V0cHV0ICJhcmdvX2VuYWJsZWQiIHsKICB2YWx1ZSAgICAgICA9IGNsb3VkZmxhcmVfYXJnby5leGFtcGxlLnNtYXJ0X3JvdXRpbmcKICBkZXNjcmlwdGlvbiA9ICJBcmdvIFNtYXJ0IFJvdXRpbmcgc3RhdHVzIgp9CmBgYAoKIyMjIEVudmlyb25tZW50LUJhc2VkIENvbmZpZ3VyYXRpb24KCmBgYHR5cGVzY3JpcHQKLy8gY29uZmlnL2FyZ28udHMKaW50ZXJmYWNlIEFyZ29FbnZpcm9ubWVudENvbmZpZyB7CiAgZW5hYmxlZDogYm9vbGVhbjsKICB0aWVyZWRDYWNoZTogYm9vbGVhbjsKICBtb25pdG9yaW5nOiB7CiAgICB1c2FnZUFsZXJ0czogYm9vbGVhbjsKICAgIHRocmVzaG9sZDogbnVtYmVyOwogIH07Cn0KCmNvbnN0IGNvbmZpZ3M6IFJlY29yZDxzdHJpbmcsIEFyZ29FbnZpcm9ubWVudENvbmZpZz4gPSB7CiAgcHJvZHVjdGlvbjogewogICAgZW5hYmxlZDogdHJ1ZSwKICAgIHRpZXJlZENhY2hlOiB0cnVlLAogICAgbW9uaXRvcmluZzogewogICAgICB1c2FnZUFsZXJ0czogdHJ1ZSwKICAgICAgdGhyZXNob2xkOiAxMDAwLCAvLyBHQgogICAgfSwKICB9LAogIHN0YWdpbmc6IHsKICAgIGVuYWJsZWQ6IHRydWUsCiAgICB0aWVyZWRDYWNoZTogZmFsc2UsCiAgICBtb25pdG9yaW5nOiB7CiAgICAgIHVzYWdlQWxlcnRzOiBmYWxzZSwKICAgICAgdGhyZXNob2xkOiAxMDAsIC8vIEdCCiAgICB9LAogIH0sCiAgZGV2ZWxvcG1lbnQ6IHsKICAgIGVuYWJsZWQ6IGZhbHNlLAogICAgdGllcmVkQ2FjaGU6IGZhbHNlLAogICAgbW9uaXRvcmluZzogewogICAgICB1c2FnZUFsZXJ0czogZmFsc2UsCiAgICAgIHRocmVzaG9sZDogMCwKICAgIH0sCiAgfSwKfTsKCmV4cG9ydCBmdW5jdGlvbiBnZXRBcmdvQ29uZmlnKGVudjogc3RyaW5nKTogQXJnb0Vudmlyb25tZW50Q29uZmlnIHsKICByZXR1cm4gY29uZmlnc1tlbnZdIHx8IGNvbmZpZ3MuZGV2ZWxvcG1lbnQ7Cn0KYGBgCgojIyMgUHVsdW1pIENvbmZpZ3VyYXRpb24KCmBgYHR5cGVzY3JpcHQKLy8gcHVsdW1pL2FyZ28udHMKaW1wb3J0ICogYXMgY2xvdWRmbGFyZSBmcm9tICdAcHVsdW1pL2Nsb3VkZmxhcmUnOwoKY29uc3Qgem9uZSA9IG5ldyBjbG91ZGZsYXJlLlpvbmUoJ2V4YW1wbGUtem9uZScsIHsKICB6b25lOiAnZXhhbXBsZS5jb20nLAogIHBsYW46ICdlbnRlcnByaXNlJywKfSk7Cgpjb25zdCBhcmdvU2V0dGluZ3MgPSBuZXcgY2xvdWRmbGFyZS5BcmdvKCdhcmdvLWNvbmZpZycsIHsKICB6b25lSWQ6IHpvbmUuaWQsCiAgc21hcnRSb3V0aW5nOiAnb24nLAogIHRpZXJlZENhY2hpbmc6ICdvbicsCn0pOwoKZXhwb3J0IGNvbnN0IGFyZ29FbmFibGVkID0gYXJnb1NldHRpbmdzLnNtYXJ0Um91dGluZzsKZXhwb3J0IGNvbnN0IHpvbmVJZCA9IHpvbmUuaWQ7CmBgYAoKIyMgQmlsbGluZyBDb25maWd1cmF0aW9uCgpCZWZvcmUgZW5hYmxpbmcgQXJnbyBTbWFydCBSb3V0aW5nLCBlbnN1cmUgYmlsbGluZyBpcyBjb25maWd1cmVkIGZvciB0aGUgYWNjb3VudDoKCioqUHJlcmVxdWlzaXRlczoqKgoxLiBWYWxpZCBwYXltZW50IG1ldGhvZCBvbiBmaWxlCjIuIEVudGVycHJpc2Ugb3IgaGlnaGVyIHBsYW4KMy4gWm9uZSBtdXN0IGhhdmUgYmlsbGluZyBlbmFibGVkCgoqKkNoZWNrIEJpbGxpbmcgU3RhdHVzIHZpYSBEYXNoYm9hcmQ6KioKMS4gTmF2aWdhdGUgdG8gQWNjb3VudCDihpIgQmlsbGluZwoyLiBWZXJpZnkgcGF5bWVudCBtZXRob2QgY29uZmlndXJlZAozLiBDaGVjayB6b25lIHN1YnNjcmlwdGlvbiBzdGF0dXMKCioqTm90ZToqKiBBdHRlbXB0aW5nIHRvIGVuYWJsZSBBcmdvIHdpdGhvdXQgYmlsbGluZyBjb25maWd1cmVkIHdpbGwgcmVzdWx0IGluIGBlZGl0YWJsZTogZmFsc2VgIGluIEFQSSByZXNwb25zZXMuCgojIyBFbnZpcm9ubWVudCBWYXJpYWJsZSBTZXR1cAoKKipSZXF1aXJlZCBFbnZpcm9ubWVudCBWYXJpYWJsZXM6KioKYGBgYmFzaAojIC5lbnYKQ0xPVURGTEFSRV9BUElfVE9LRU49eW91cl9hcGlfdG9rZW5faGVyZQpDTE9VREZMQVJFX1pPTkVfSUQ9eW91cl96b25lX2lkX2hlcmUKQ0xPVURGTEFSRV9BQ0NPVU5UX0lEPXlvdXJfYWNjb3VudF9pZF9oZXJlCgojIE9wdGlvbmFsCkFSR09fRU5BQkxFRD10cnVlCkFSR09fVElFUkVEX0NBQ0hFPXRydWUKYGBgCgoqKlR5cGVTY3JpcHQgQ29uZmlndXJhdGlvbiBMb2FkZXI6KioKYGBgdHlwZXNjcmlwdAovLyBjb25maWcvZW52LnRzCmltcG9ydCB7IHogfSBmcm9tICd6b2QnOwoKY29uc3QgZW52U2NoZW1hID0gei5vYmplY3QoewogIENMT1VERkxBUkVfQVBJX1RPS0VOOiB6LnN0cmluZygpLm1pbigxKSwKICBDTE9VREZMQVJFX1pPTkVfSUQ6IHouc3RyaW5nKCkubWluKDEpLAogIENMT1VERkxBUkVfQUNDT1VOVF9JRDogei5zdHJpbmcoKS5taW4oMSksCiAgQVJHT19FTkFCTEVEOiB6LnN0cmluZygpLm9wdGlvbmFsKCkuZGVmYXVsdCgnZmFsc2UnKSwKICBBUkdPX1RJRVJFRF9DQUNIRTogei5zdHJpbmcoKS5vcHRpb25hbCgpLmRlZmF1bHQoJ2ZhbHNlJyksCn0pOwoKZXhwb3J0IGNvbnN0IGVudiA9IGVudlNjaGVtYS5wYXJzZShwcm9jZXNzLmVudik7CgpleHBvcnQgY29uc3QgYXJnb0NvbmZpZyA9IHsKICBlbmFibGVkOiBlbnYuQVJHT19FTkFCTEVEID09PSAndHJ1ZScsCiAgdGllcmVkQ2FjaGU6IGVudi5BUkdPX1RJRVJFRF9DQUNIRSA9PT0gJ3RydWUnLAp9OwpgYGAKCiMjIENJL0NEIEludGVncmF0aW9uCgoqKkdpdEh1YiBBY3Rpb25zIEV4YW1wbGU6KioKYGBgeWFtbAojIC5naXRodWIvd29ya2Zsb3dzL2RlcGxveS1hcmdvLnltbApuYW1lOiBEZXBsb3kgQXJnbyBDb25maWd1cmF0aW9uCgpvbjoKICBwdXNoOgogICAgYnJhbmNoZXM6IFttYWluXQogICAgcGF0aHM6CiAgICAgIC0gJ3RlcnJhZm9ybS9hcmdvLnRmJwoKam9iczoKICBkZXBsb3k6CiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0CiAgICBzdGVwczoKICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHYzCiAgICAgIAogICAgICAtIG5hbWU6IFNldHVwIFRlcnJhZm9ybQogICAgICAgIHVzZXM6IGhhc2hpY29ycC9zZXR1cC10ZXJyYWZvcm1AdjIKICAgICAgICAKICAgICAgLSBuYW1lOiBUZXJyYWZvcm0gSW5pdAogICAgICAgIHJ1bjogdGVycmFmb3JtIGluaXQKICAgICAgICB3b3JraW5nLWRpcmVjdG9yeTogLi90ZXJyYWZvcm0KICAgICAgICAKICAgICAgLSBuYW1lOiBUZXJyYWZvcm0gQXBwbHkKICAgICAgICBydW46IHRlcnJhZm9ybSBhcHBseSAtYXV0by1hcHByb3ZlCiAgICAgICAgd29ya2luZy1kaXJlY3Rvcnk6IC4vdGVycmFmb3JtCiAgICAgICAgZW52OgogICAgICAgICAgQ0xPVURGTEFSRV9BUElfVE9LRU46ICR7eyBzZWNyZXRzLkNMT1VERkxBUkVfQVBJX1RPS0VOIH19CiAgICAgICAgICBURl9WQVJfem9uZV9pZDogJHt7IHNlY3JldHMuQ0xPVURGTEFSRV9aT05FX0lEIH19CmBgYAoKIyMgRW50ZXJwcmlzZSBQcmV2aWV3IFByb2dyYW0KCkZvciBlYXJseSBhY2Nlc3MgdG8gQXJnbyBTbWFydCBSb3V0aW5nIGZlYXR1cmVzIGFuZCBTbWFydCBTaGllbGQgaW50ZWdyYXRpb246CgoqKkVsaWdpYmlsaXR5OioqCi0gRW50ZXJwcmlzZSBwbGFuIGN1c3RvbWVycwotIEFjdGl2ZSBDbG91ZGZsYXJlIHN1cHBvcnQgY29udHJhY3QKLSBQcm9kdWN0aW9uIHRyYWZmaWMgPjEwMEdCL21vbnRoCgoqKkhvdyB0byBKb2luOioqCjEuIENvbnRhY3QgQ2xvdWRmbGFyZSBhY2NvdW50IHRlYW0gb3Igc3VwcG9ydAoyLiBSZXF1ZXN0IEFyZ28vU21hcnQgU2hpZWxkIHByZXZpZXcgYWNjZXNzCjMuIFJlY2VpdmUgcHJldmlldyB6b25lIGNvbmZpZ3VyYXRpb24KCioqUHJldmlldyBGZWF0dXJlczoqKgotIEVuaGFuY2VkIGFuYWx5dGljcyBhbmQgcmVwb3J0aW5nCi0gU21hcnQgU2hpZWxkIEREb1MgaW50ZWdyYXRpb24KLSBBZHZhbmNlZCByb3V0aW5nIHBvbGljaWVzCi0gUHJpb3JpdHkgc3VwcG9ydCBmb3Igcm91dGluZyBpc3N1ZXM=
+## Configuration Management
+
+**Note on Smart Shield Evolution:** Argo Smart Routing is being integrated into Smart Shield. Configuration methods below remain valid; Terraform and IaC patterns unchanged.
+
+### Infrastructure as Code (Terraform)
+
+```hcl
+# terraform/argo.tf
+# Note: Use Cloudflare Terraform provider
+
+resource "cloudflare_argo" "example" {
+  zone_id        = var.zone_id
+  smart_routing  = "on"
+  tiered_caching = "on"
+}
+
+variable "zone_id" {
+  description = "Cloudflare Zone ID"
+  type        = string
+}
+
+output "argo_enabled" {
+  value       = cloudflare_argo.example.smart_routing
+  description = "Argo Smart Routing status"
+}
+```
+
+### Environment-Based Configuration
+
+```typescript
+// config/argo.ts
+interface ArgoEnvironmentConfig {
+  enabled: boolean;
+  tieredCache: boolean;
+  monitoring: {
+    usageAlerts: boolean;
+    threshold: number;
+  };
+}
+
+const configs: Record<string, ArgoEnvironmentConfig> = {
+  production: {
+    enabled: true,
+    tieredCache: true,
+    monitoring: {
+      usageAlerts: true,
+      threshold: 1000, // GB
+    },
+  },
+  staging: {
+    enabled: true,
+    tieredCache: false,
+    monitoring: {
+      usageAlerts: false,
+      threshold: 100, // GB
+    },
+  },
+  development: {
+    enabled: false,
+    tieredCache: false,
+    monitoring: {
+      usageAlerts: false,
+      threshold: 0,
+    },
+  },
+};
+
+export function getArgoConfig(env: string): ArgoEnvironmentConfig {
+  return configs[env] || configs.development;
+}
+```
+
+### Pulumi Configuration
+
+```typescript
+// pulumi/argo.ts
+import * as cloudflare from '@pulumi/cloudflare';
+
+const zone = new cloudflare.Zone('example-zone', {
+  zone: 'example.com',
+  plan: 'enterprise',
+});
+
+const argoSettings = new cloudflare.Argo('argo-config', {
+  zoneId: zone.id,
+  smartRouting: 'on',
+  tieredCaching: 'on',
+});
+
+export const argoEnabled = argoSettings.smartRouting;
+export const zoneId = zone.id;
+```
+
+## Billing Configuration
+
+Before enabling Argo Smart Routing, ensure billing is configured for the account:
+
+**Prerequisites:**
+1. Valid payment method on file
+2. Enterprise or higher plan
+3. Zone must have billing enabled
+
+**Check Billing Status via Dashboard:**
+1. Navigate to Account → Billing
+2. Verify payment method configured
+3. Check zone subscription status
+
+**Note:** Attempting to enable Argo without billing configured will result in `editable: false` in API responses.
+
+## Environment Variable Setup
+
+**Required Environment Variables:**
+```bash
+# .env
+CLOUDFLARE_API_TOKEN=your_api_token_here
+CLOUDFLARE_ZONE_ID=your_zone_id_here
+CLOUDFLARE_ACCOUNT_ID=your_account_id_here
+
+# Optional
+ARGO_ENABLED=true
+ARGO_TIERED_CACHE=true
+```
+
+**TypeScript Configuration Loader:**
+```typescript
+// config/env.ts
+import { z } from 'zod';
+
+const envSchema = z.object({
+  CLOUDFLARE_API_TOKEN: z.string().min(1),
+  CLOUDFLARE_ZONE_ID: z.string().min(1),
+  CLOUDFLARE_ACCOUNT_ID: z.string().min(1),
+  ARGO_ENABLED: z.string().optional().default('false'),
+  ARGO_TIERED_CACHE: z.string().optional().default('false'),
+});
+
+export const env = envSchema.parse(process.env);
+
+export const argoConfig = {
+  enabled: env.ARGO_ENABLED === 'true',
+  tieredCache: env.ARGO_TIERED_CACHE === 'true',
+};
+```
+
+## CI/CD Integration
+
+**GitHub Actions Example:**
+```yaml
+# .github/workflows/deploy-argo.yml
+name: Deploy Argo Configuration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'terraform/argo.tf'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform
+        
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: ./terraform
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TF_VAR_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+```
+
+## Enterprise Preview Program
+
+For early access to Argo Smart Routing features and Smart Shield integration:
+
+**Eligibility:**
+- Enterprise plan customers
+- Active Cloudflare support contract
+- Production traffic >100GB/month
+
+**How to Join:**
+1. Contact Cloudflare account team or support
+2. Request Argo/Smart Shield preview access
+3. Receive preview zone configuration
+
+**Preview Features:**
+- Enhanced analytics and reporting
+- Smart Shield DDoS integration
+- Advanced routing policies
+- Priority support for routing issues

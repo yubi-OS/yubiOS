@@ -1,1 +1,188 @@
-IyBNQ1AgSW50ZWdyYXRpb24KCkZldGNoIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9tY3AtY2xpZW50LWFwaS8gYW5kIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9tY3AtYWdlbnQtYXBpLyBmb3IgY29tcGxldGUgZG9jdW1lbnRhdGlvbi4KCkFnZW50cyBpbmNsdWRlIGEgbXVsdGktc2VydmVyIE1DUCBjbGllbnQgZm9yIGNvbm5lY3RpbmcgdG8gZXh0ZXJuYWwgTUNQIHNlcnZlcnMsIGFuZCBgTWNwQWdlbnRgIGZvciBidWlsZGluZyBNQ1Agc2VydmVycy4KCiMjIEFkZCBhbiBNQ1AgU2VydmVyCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IEFnZW50LCBjYWxsYWJsZSB9IGZyb20gImFnZW50cyI7CgpleHBvcnQgY2xhc3MgTXlBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBAY2FsbGFibGUoKQogIGFzeW5jIGFkZFNlcnZlcihuYW1lOiBzdHJpbmcsIHVybDogc3RyaW5nKSB7CiAgICAvLyBPcHRpb25zLWJhc2VkIEFQSSAocmVjb21tZW5kZWQpCiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCB0aGlzLmFkZE1jcFNlcnZlcihuYW1lLCB1cmwsIHsKICAgICAgY2FsbGJhY2tIb3N0OiAiaHR0cHM6Ly9teS13b3JrZXIud29ya2Vycy5kZXYiLAogICAgICB0cmFuc3BvcnQ6IHsgaGVhZGVyczogeyBBdXRob3JpemF0aW9uOiAiQmVhcmVyIC4uLiIgfSB9CiAgICB9KTsKCiAgICBpZiAocmVzdWx0LnN0YXRlID09PSAiYXV0aGVudGljYXRpbmciKSB7CiAgICAgIC8vIE9BdXRoIHJlcXVpcmVkIC0gcmVkaXJlY3QgdXNlciB0byByZXN1bHQuYXV0aFVybAogICAgICByZXR1cm4geyBuZWVkc0F1dGg6IHRydWUsIGF1dGhVcmw6IHJlc3VsdC5hdXRoVXJsIH07CiAgICB9CgogICAgcmV0dXJuIHsgcmVhZHk6IHRydWUsIGlkOiByZXN1bHQuaWQgfTsKICB9Cn0KYGBgCgojIyBVc2UgTUNQIFRvb2xzCgpgYGB0eXBlc2NyaXB0CmFzeW5jIG9uQ2hhdE1lc3NhZ2UoKSB7CiAgLy8gR2V0IEFJLWNvbXBhdGlibGUgdG9vbHMgZnJvbSBhbGwgY29ubmVjdGVkIE1DUCBzZXJ2ZXJzCiAgY29uc3QgbWNwVG9vbHMgPSB0aGlzLm1jcC5nZXRBSVRvb2xzKCk7CiAgCiAgY29uc3QgYWxsVG9vbHMgPSB7CiAgICAuLi5sb2NhbFRvb2xzLAogICAgLi4ubWNwVG9vbHMKICB9OwoKICBjb25zdCByZXN1bHQgPSBzdHJlYW1UZXh0KHsKICAgIG1vZGVsOiBvcGVuYWkoImdwdC00byIpLAogICAgbWVzc2FnZXM6IGF3YWl0IGNvbnZlcnRUb01vZGVsTWVzc2FnZXModGhpcy5tZXNzYWdlcyksCiAgICB0b29sczogYWxsVG9vbHMKICB9KTsKICAKICByZXR1cm4gcmVzdWx0LnRvVUlNZXNzYWdlU3RyZWFtUmVzcG9uc2UoKTsKfQpgYGAKCiMjIExpc3QgTUNQIFJlc291cmNlcwoKYGBgdHlwZXNjcmlwdAovLyBMaXN0IGFsbCByZWdpc3RlcmVkIHNlcnZlcnMKY29uc3Qgc2VydmVycyA9IHRoaXMubWNwLmxpc3RTZXJ2ZXJzKCk7CgovLyBMaXN0IHRvb2xzIGZyb20gYWxsIHNlcnZlcnMKY29uc3QgdG9vbHMgPSB0aGlzLm1jcC5saXN0VG9vbHMoKTsKCi8vIExpc3QgcmVzb3VyY2VzCmNvbnN0IHJlc291cmNlcyA9IHRoaXMubWNwLmxpc3RSZXNvdXJjZXMoKTsKCi8vIExpc3QgcHJvbXB0cwpjb25zdCBwcm9tcHRzID0gdGhpcy5tY3AubGlzdFByb21wdHMoKTsKYGBgCgojIyBSZW1vdmUgU2VydmVyCgpgYGB0eXBlc2NyaXB0CmF3YWl0IHRoaXMucmVtb3ZlTWNwU2VydmVyKHNlcnZlcklkKTsKYGBgCgojIyBCdWlsZGluZyBhbiBNQ1AgU2VydmVyCgpVc2UgYE1jcEFnZW50YCBmcm9tIHRoZSBTREsgdG8gY3JlYXRlIGFuIE1DUCBzZXJ2ZXIuCgoqKkluc3RhbGwgZGVwZW5kZW5jaWVzOioqCmBgYGJhc2gKbnBtIGluc3RhbGwgQG1vZGVsY29udGV4dHByb3RvY29sL3NkayB6b2QKYGBgCgoqKldyYW5nbGVyIGNvbmZpZzoqKgpgYGBqc29uYwp7CiAgImR1cmFibGVfb2JqZWN0cyI6IHsKICAgICJiaW5kaW5ncyI6IFt7ICJuYW1lIjogIk15TUNQIiwgImNsYXNzX25hbWUiOiAiTXlNQ1AiIH1dCiAgfSwKICAibWlncmF0aW9ucyI6IFt7ICJ0YWciOiAidjEiLCAibmV3X3NxbGl0ZV9jbGFzc2VzIjogWyJNeU1DUCJdIH1dCn0KYGBgCgoqKlNlcnZlciBpbXBsZW1lbnRhdGlvbjoqKgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IE1jcFNlcnZlciB9IGZyb20gIkBtb2RlbGNvbnRleHRwcm90b2NvbC9zZGsvc2VydmVyL21jcC5qcyI7CmltcG9ydCB7IE1jcEFnZW50IH0gZnJvbSAiYWdlbnRzL21jcCI7CmltcG9ydCB7IHogfSBmcm9tICJ6b2QiOwoKdHlwZSBTdGF0ZSA9IHsgY291bnRlcjogbnVtYmVyIH07CgpleHBvcnQgY2xhc3MgTXlNQ1AgZXh0ZW5kcyBNY3BBZ2VudDxFbnYsIFN0YXRlLCB7fT4gewogIHNlcnZlciA9IG5ldyBNY3BTZXJ2ZXIoewogICAgbmFtZTogIk15TUNQU2VydmVyIiwKICAgIHZlcnNpb246ICIxLjAuMCIKICB9KTsKCiAgaW5pdGlhbFN0YXRlID0geyBjb3VudGVyOiAwIH07CgogIGFzeW5jIGluaXQoKSB7CiAgICAvLyBSZWdpc3RlciBhIHJlc291cmNlCiAgICB0aGlzLnNlcnZlci5yZXNvdXJjZSgiY291bnRlciIsICJtY3A6Ly9yZXNvdXJjZS9jb3VudGVyIiwgKHVyaSkgPT4gKHsKICAgICAgY29udGVudHM6IFt7IHRleHQ6IFN0cmluZyh0aGlzLnN0YXRlLmNvdW50ZXIpLCB1cmk6IHVyaS5ocmVmIH1dCiAgICB9KSk7CgogICAgLy8gUmVnaXN0ZXIgYSB0b29sCiAgICB0aGlzLnNlcnZlci5yZWdpc3RlclRvb2woCiAgICAgICJpbmNyZW1lbnQiLAogICAgICB7CiAgICAgICAgZGVzY3JpcHRpb246ICJJbmNyZW1lbnQgdGhlIGNvdW50ZXIiLAogICAgICAgIGlucHV0U2NoZW1hOiB7IGFtb3VudDogei5udW1iZXIoKS5kZWZhdWx0KDEpIH0KICAgICAgfSwKICAgICAgYXN5bmMgKHsgYW1vdW50IH0pID0+IHsKICAgICAgICB0aGlzLnNldFN0YXRlKHsgY291bnRlcjogdGhpcy5zdGF0ZS5jb3VudGVyICsgYW1vdW50IH0pOwogICAgICAgIHJldHVybiB7CiAgICAgICAgICBjb250ZW50OiBbeyB0ZXh0OiBgQ291bnRlcjogJHt0aGlzLnN0YXRlLmNvdW50ZXJ9YCwgdHlwZTogInRleHQiIH1dCiAgICAgICAgfTsKICAgICAgfQogICAgKTsKICB9Cn0KYGBgCgojIyBTZXJ2ZSBNQ1AgU2VydmVyCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KSB7CiAgICBjb25zdCB1cmwgPSBuZXcgVVJMKHJlcXVlc3QudXJsKTsKCiAgICAvLyBTdHJlYW1hYmxlIEhUVFAgdHJhbnNwb3J0IChyZWNvbW1lbmRlZCkKICAgIGlmICh1cmwucGF0aG5hbWUuc3RhcnRzV2l0aCgiL21jcCIpKSB7CiAgICAgIHJldHVybiBNeU1DUC5zZXJ2ZSgiL21jcCIsIHsgYmluZGluZzogIk15TUNQIiB9KS5mZXRjaChyZXF1ZXN0LCBlbnYsIGN0eCk7CiAgICB9CgogICAgLy8gU1NFIHRyYW5zcG9ydCAobGVnYWN5LCBkZXByZWNhdGVkKQogICAgaWYgKHVybC5wYXRobmFtZS5zdGFydHNXaXRoKCIvc3NlIikpIHsKICAgICAgcmV0dXJuIE15TUNQLnNlcnZlU1NFKCIvc3NlIiwgeyBiaW5kaW5nOiAiTXlNQ1AiIH0pLmZldGNoKHJlcXVlc3QsIGVudiwgY3R4KTsKICAgIH0KCiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJOb3QgZm91bmQiLCB7IHN0YXR1czogNDA0IH0pOwogIH0KfTsKYGBgCgojIyBUcmFuc3BvcnRzCgpGZXRjaCBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWdlbnRzL2FwaS1yZWZlcmVuY2UvbWNwLXRyYW5zcG9ydHMvIGZvciBjb21wbGV0ZSBkb2N1bWVudGF0aW9uLgoKfCBUcmFuc3BvcnQgfCBVc2UgZm9yIHwKfC0tLS0tLS0tLS0tfC0tLS0tLS0tLXwKfCBTdHJlYW1hYmxlIEhUVFAgKGBzZXJ2ZWApIHwgRXh0ZXJuYWwvcHVibGljIGNsaWVudHMgKHJlY29tbWVuZGVkKSB8CnwgU1NFIChgc2VydmVTU0VgKSB8IExlZ2FjeSBjbGllbnRzIG9ubHkgKGRlcHJlY2F0ZWQpIHwKfCBSUEMgKGBhZGRNY3BTZXJ2ZXIobmFtZSwgZW52LkJpbmRpbmcpYCkgfCBTYW1lLVdvcmtlciBpbnRlcm5hbCBjYWxscyAoZmFzdGVzdCkgfAoKIyMjIFJQQyBUcmFuc3BvcnQgKFNhbWUgV29ya2VyKQoKYGBgdHlwZXNjcmlwdAphc3luYyBvblN0YXJ0KCkgewogIGF3YWl0IHRoaXMuYWRkTWNwU2VydmVyKCJpbnRlcm5hbC10b29scyIsIHRoaXMuZW52Lk15TUNQQmluZGluZywgewogICAgcHJvcHM6IHsgdXNlcklkOiB0aGlzLm5hbWUgfQogIH0pOwp9CmBgYAoKIyMgUmV0cnkgb24gTUNQIENvbm5lY3Rpb25zCgpgYGB0eXBlc2NyaXB0CmF3YWl0IHRoaXMuYWRkTWNwU2VydmVyKCJ0b29scyIsIHVybCwgewogIHJldHJ5OiB7IG1heEF0dGVtcHRzOiAzLCBiYXNlRGVsYXlNczogNTAwIH0KfSk7CmBgYAoKIyMgU2VjdXJpbmcgTUNQIFNlcnZlcnMKCkZldGNoIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9zZWN1cmluZy1tY3Atc2VydmVycy8gZm9yIGNvbXBsZXRlIGRvY3VtZW50YXRpb24uCgpVc2UgYEBjbG91ZGZsYXJlL3dvcmtlcnMtb2F1dGgtcHJvdmlkZXJgIHRvIGFkZCBPQXV0aCBpbiBmcm9udCBvZiB5b3VyIE1DUCBzZXJ2ZXIuIFNlZSB0aGUgc2VjdXJpbmcgZG9jcyBmb3IgcHJveHkgcGF0dGVybnMgYW5kIGByZWRpcmVjdF91cmlgIHZhbGlkYXRpb24uCg==
+# MCP Integration
+
+Fetch https://developers.cloudflare.com/agents/api-reference/mcp-client-api/ and https://developers.cloudflare.com/agents/api-reference/mcp-agent-api/ for complete documentation.
+
+Agents include a multi-server MCP client for connecting to external MCP servers, and `McpAgent` for building MCP servers.
+
+## Add an MCP Server
+
+```typescript
+import { Agent, callable } from "agents";
+
+export class MyAgent extends Agent<Env, State> {
+  @callable()
+  async addServer(name: string, url: string) {
+    // Options-based API (recommended)
+    const result = await this.addMcpServer(name, url, {
+      callbackHost: "https://my-worker.workers.dev",
+      transport: { headers: { Authorization: "Bearer ..." } }
+    });
+
+    if (result.state === "authenticating") {
+      // OAuth required - redirect user to result.authUrl
+      return { needsAuth: true, authUrl: result.authUrl };
+    }
+
+    return { ready: true, id: result.id };
+  }
+}
+```
+
+## Use MCP Tools
+
+```typescript
+async onChatMessage() {
+  // Get AI-compatible tools from all connected MCP servers
+  const mcpTools = this.mcp.getAITools();
+  
+  const allTools = {
+    ...localTools,
+    ...mcpTools
+  };
+
+  const result = streamText({
+    model: openai("gpt-4o"),
+    messages: await convertToModelMessages(this.messages),
+    tools: allTools
+  });
+  
+  return result.toUIMessageStreamResponse();
+}
+```
+
+## List MCP Resources
+
+```typescript
+// List all registered servers
+const servers = this.mcp.listServers();
+
+// List tools from all servers
+const tools = this.mcp.listTools();
+
+// List resources
+const resources = this.mcp.listResources();
+
+// List prompts
+const prompts = this.mcp.listPrompts();
+```
+
+## Remove Server
+
+```typescript
+await this.removeMcpServer(serverId);
+```
+
+## Building an MCP Server
+
+Use `McpAgent` from the SDK to create an MCP server.
+
+**Install dependencies:**
+```bash
+npm install @modelcontextprotocol/sdk zod
+```
+
+**Wrangler config:**
+```jsonc
+{
+  "durable_objects": {
+    "bindings": [{ "name": "MyMCP", "class_name": "MyMCP" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["MyMCP"] }]
+}
+```
+
+**Server implementation:**
+```typescript
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpAgent } from "agents/mcp";
+import { z } from "zod";
+
+type State = { counter: number };
+
+export class MyMCP extends McpAgent<Env, State, {}> {
+  server = new McpServer({
+    name: "MyMCPServer",
+    version: "1.0.0"
+  });
+
+  initialState = { counter: 0 };
+
+  async init() {
+    // Register a resource
+    this.server.resource("counter", "mcp://resource/counter", (uri) => ({
+      contents: [{ text: String(this.state.counter), uri: uri.href }]
+    }));
+
+    // Register a tool
+    this.server.registerTool(
+      "increment",
+      {
+        description: "Increment the counter",
+        inputSchema: { amount: z.number().default(1) }
+      },
+      async ({ amount }) => {
+        this.setState({ counter: this.state.counter + amount });
+        return {
+          content: [{ text: `Counter: ${this.state.counter}`, type: "text" }]
+        };
+      }
+    );
+  }
+}
+```
+
+## Serve MCP Server
+
+```typescript
+export default {
+  fetch(request: Request, env: Env, ctx: ExecutionContext) {
+    const url = new URL(request.url);
+
+    // Streamable HTTP transport (recommended)
+    if (url.pathname.startsWith("/mcp")) {
+      return MyMCP.serve("/mcp", { binding: "MyMCP" }).fetch(request, env, ctx);
+    }
+
+    // SSE transport (legacy, deprecated)
+    if (url.pathname.startsWith("/sse")) {
+      return MyMCP.serveSSE("/sse", { binding: "MyMCP" }).fetch(request, env, ctx);
+    }
+
+    return new Response("Not found", { status: 404 });
+  }
+};
+```
+
+## Transports
+
+Fetch https://developers.cloudflare.com/agents/api-reference/mcp-transports/ for complete documentation.
+
+| Transport | Use for |
+|-----------|---------|
+| Streamable HTTP (`serve`) | External/public clients (recommended) |
+| SSE (`serveSSE`) | Legacy clients only (deprecated) |
+| RPC (`addMcpServer(name, env.Binding)`) | Same-Worker internal calls (fastest) |
+
+### RPC Transport (Same Worker)
+
+```typescript
+async onStart() {
+  await this.addMcpServer("internal-tools", this.env.MyMCPBinding, {
+    props: { userId: this.name }
+  });
+}
+```
+
+## Retry on MCP Connections
+
+```typescript
+await this.addMcpServer("tools", url, {
+  retry: { maxAttempts: 3, baseDelayMs: 500 }
+});
+```
+
+## Securing MCP Servers
+
+Fetch https://developers.cloudflare.com/agents/api-reference/securing-mcp-servers/ for complete documentation.
+
+Use `@cloudflare/workers-oauth-provider` to add OAuth in front of your MCP server. See the securing docs for proxy patterns and `redirect_uri` validation.

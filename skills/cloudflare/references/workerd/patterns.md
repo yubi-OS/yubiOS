@@ -1,1 +1,192 @@
-IyBXb3JrZXJkIFBhdHRlcm5zCgojIyBNdWx0aS1TZXJ2aWNlIEFyY2hpdGVjdHVyZQpgYGBjYXBucApjb25zdCBjb25maWcgOldvcmtlcmQuQ29uZmlnID0gKAogIHNlcnZpY2VzID0gWwogICAgKG5hbWUgPSAiZnJvbnRlbmQiLCB3b3JrZXIgPSAoCiAgICAgIG1vZHVsZXMgPSBbKG5hbWUgPSAiaW5kZXguanMiLCBlc01vZHVsZSA9IGVtYmVkICJmcm9udGVuZC9pbmRleC5qcyIpXSwKICAgICAgY29tcGF0aWJpbGl0eURhdGUgPSAiMjAyNC0wMS0xNSIsCiAgICAgIGJpbmRpbmdzID0gWyhuYW1lID0gIkFQSSIsIHNlcnZpY2UgPSAiYXBpIildCiAgICApKSwKICAgIChuYW1lID0gImFwaSIsIHdvcmtlciA9ICgKICAgICAgbW9kdWxlcyA9IFsobmFtZSA9ICJpbmRleC5qcyIsIGVzTW9kdWxlID0gZW1iZWQgImFwaS9pbmRleC5qcyIpXSwKICAgICAgY29tcGF0aWJpbGl0eURhdGUgPSAiMjAyNC0wMS0xNSIsCiAgICAgIGJpbmRpbmdzID0gWyhuYW1lID0gIkRCIiwgc2VydmljZSA9ICJwb3N0Z3JlcyIpLCAobmFtZSA9ICJDQUNIRSIsIGt2TmFtZXNwYWNlID0gImt2IildCiAgICApKSwKICAgIChuYW1lID0gInBvc3RncmVzIiwgZXh0ZXJuYWwgPSAoYWRkcmVzcyA9ICJkYi5pbnRlcm5hbDo1NDMyIiwgaHR0cCA9ICgpKSksCiAgICAobmFtZSA9ICJrdiIsIGRpc2sgPSAocGF0aCA9ICIvdmFyL2t2Iiwgd3JpdGFibGUgPSB0cnVlKSkKICBdLAogIHNvY2tldHMgPSBbKG5hbWUgPSAiaHR0cCIsIGFkZHJlc3MgPSAiKjo4MDgwIiwgaHR0cCA9ICgpLCBzZXJ2aWNlID0gImZyb250ZW5kIildCik7CmBgYAoKIyMgRHVyYWJsZSBPYmplY3RzCmBgYGNhcG5wCmNvbnN0IHdvcmtlciA6V29ya2VyZC5Xb3JrZXIgPSAoCiAgbW9kdWxlcyA9IFsobmFtZSA9ICJpbmRleC5qcyIsIGVzTW9kdWxlID0gZW1iZWQgImluZGV4LmpzIiksIChuYW1lID0gInJvb20uanMiLCBlc01vZHVsZSA9IGVtYmVkICJyb29tLmpzIildLAogIGNvbXBhdGliaWxpdHlEYXRlID0gIjIwMjQtMDEtMTUiLAogIGJpbmRpbmdzID0gWyhuYW1lID0gIlJPT01TIiwgZHVyYWJsZU9iamVjdE5hbWVzcGFjZSA9ICJSb29tIildLAogIGR1cmFibGVPYmplY3ROYW1lc3BhY2VzID0gWyhjbGFzc05hbWUgPSAiUm9vbSIsIHVuaXF1ZUtleSA9ICJ2MSIpXSwKICBkdXJhYmxlT2JqZWN0U3RvcmFnZSA9IChsb2NhbERpc2sgPSAiL3Zhci9kbyIpCik7CmBgYAoKIyMgRGV2IHZzIFByb2QgQ29uZmlncwpgYGBjYXBucAojIFVzZSBwYXJhbWV0ZXIgYmluZGluZ3MgZm9yIGVudi1zcGVjaWZpYyBjb25maWcKY29uc3QgYmFzZVdvcmtlciA6V29ya2VyZC5Xb3JrZXIgPSAoCiAgbW9kdWxlcyA9IFsobmFtZSA9ICJpbmRleC5qcyIsIGVzTW9kdWxlID0gZW1iZWQgInNyYy9pbmRleC5qcyIpXSwKICBjb21wYXRpYmlsaXR5RGF0ZSA9ICIyMDI0LTAxLTE1IiwKICBiaW5kaW5ncyA9IFsobmFtZSA9ICJBUElfVVJMIiwgcGFyYW1ldGVyID0gKHR5cGUgPSB0ZXh0KSldCik7Cgpjb25zdCBwcm9kV29ya2VyIDpXb3JrZXJkLldvcmtlciA9ICgKICBpbmhlcml0ID0gImJhc2Utc2VydmljZSIsCiAgYmluZGluZ3MgPSBbKG5hbWUgPSAiQVBJX1VSTCIsIHRleHQgPSAiaHR0cHM6Ly9hcGkucHJvZC5jb20iKV0KKTsKYGBgCgojIyBIVFRQIFJldmVyc2UgUHJveHkKYGBgY2FwbnAKc2VydmljZXMgPSBbCiAgKG5hbWUgPSAicHJveHkiLCB3b3JrZXIgPSAoc2VydmljZVdvcmtlclNjcmlwdCA9IGVtYmVkICJwcm94eS5qcyIsIGNvbXBhdGliaWxpdHlEYXRlID0gIjIwMjQtMDEtMTUiLCBiaW5kaW5ncyA9IFsobmFtZSA9ICJCQUNLRU5EIiwgc2VydmljZSA9ICJiYWNrZW5kIildKSksCiAgKG5hbWUgPSAiYmFja2VuZCIsIGV4dGVybmFsID0gKGFkZHJlc3MgPSAiaW50ZXJuYWw6ODA4MCIsIGh0dHAgPSAoKSkpCl0KYGBgCgojIyBMb2NhbCBEZXZlbG9wbWVudAoKKipSZWNvbW1lbmRlZDoqKiBVc2UgV3JhbmdsZXIKYGBgYmFzaAp3cmFuZ2xlciBkZXYgICMgVXNlcyB3b3JrZXJkIGludGVybmFsbHkKYGBgCgoqKkRpcmVjdCB3b3JrZXJkOioqCmBgYGJhc2gKd29ya2VyZCBzZXJ2ZSBjb25maWcuY2FwbnAgLS1zb2NrZXQtYWRkciBodHRwPSo6MzAwMCAtLXZlcmJvc2UKYGBgCgoqKkVudmlyb25tZW50IHZhcmlhYmxlczoqKgpgYGBjYXBucApiaW5kaW5ncyA9IFsobmFtZSA9ICJEQVRBQkFTRV9VUkwiLCBmcm9tRW52aXJvbm1lbnQgPSAiREFUQUJBU0VfVVJMIildCmBgYAoKIyMgVGVzdGluZwpgYGBiYXNoCndvcmtlcmQgdGVzdCBjb25maWcuY2FwbnAKd29ya2VyZCB0ZXN0IGNvbmZpZy5jYXBucCAtLXRlc3Qtb25seT10ZXN0LmpzCmBgYAoKVGVzdCBmaWxlcyBtdXN0IGJlIGluY2x1ZGVkIGluIGBtb2R1bGVzID0gWy4uLl1gIGNvbmZpZy4KCiMjIFByb2R1Y3Rpb24gRGVwbG95bWVudAoKIyMjIENvbXBpbGVkIEJpbmFyeSAoUmVjb21tZW5kZWQpCmBgYGJhc2gKd29ya2VyZCBjb21waWxlIGNvbmZpZy5jYXBucCBteUNvbmZpZyAtbyBwcm9kdWN0aW9uLXNlcnZlcgouL3Byb2R1Y3Rpb24tc2VydmVyCmBgYAoKIyMjIERvY2tlcgpgYGBkb2NrZXJmaWxlCkZST00gZGViaWFuOmJvb2t3b3JtLXNsaW0KUlVOIGFwdC1nZXQgdXBkYXRlICYmIGFwdC1nZXQgaW5zdGFsbCAteSBjYS1jZXJ0aWZpY2F0ZXMKQ09QWSB3b3JrZXJkIC91c3IvbG9jYWwvYmluLwpDT1BZIGNvbmZpZy5jYXBucCAvZXRjL3dvcmtlcmQvCkNPUFkgc3JjLyAvZXRjL3dvcmtlcmQvc3JjLwpFWFBPU0UgODA4MApDTUQgWyJ3b3JrZXJkIiwgInNlcnZlIiwgIi9ldGMvd29ya2VyZC9jb25maWcuY2FwbnAiXQpgYGAKCiMjIyBTeXN0ZW1kCmBgYGluaQojIC9ldGMvc3lzdGVtZC9zeXN0ZW0vd29ya2VyZC5zZXJ2aWNlCltTZXJ2aWNlXQpFeGVjU3RhcnQ9L3Vzci9iaW4vd29ya2VyZCBzZXJ2ZSAvZXRjL3dvcmtlcmQvY29uZmlnLmNhcG5wIC0tc29ja2V0LWZkIGh0dHA9MwpSZXN0YXJ0PWFsd2F5cwpVc2VyPW5vYm9keQpgYGAKClNlZSBzeXN0ZW1kIHNvY2tldCBhY3RpdmF0aW9uIGRvY3MgZm9yIGNvbXBsZXRlIHNldHVwLgoKIyMgRnJhbWV3b3JrIEludGVncmF0aW9uCgojIyMgSG9ubwpgYGBqYXZhc2NyaXB0CmltcG9ydCB7IEhvbm8gfSBmcm9tICdob25vJzsKCmNvbnN0IGFwcCA9IG5ldyBIb25vKCk7CgphcHAuZ2V0KCcvJywgKGMpID0+IGMudGV4dCgnSGVsbG8gSG9ubyEnKSk7CmFwcC5nZXQoJy9hcGkvOmlkJywgYXN5bmMgKGMpID0+IHsKICBjb25zdCBpZCA9IGMucmVxLnBhcmFtKCdpZCcpOwogIGNvbnN0IGRhdGEgPSBhd2FpdCBjLmVudi5LVi5nZXQoaWQpOwogIHJldHVybiBjLmpzb24oeyBpZCwgZGF0YSB9KTsKfSk7CgpleHBvcnQgZGVmYXVsdCBhcHA7CmBgYAoKIyMjIGl0dHktcm91dGVyCmBgYGphdmFzY3JpcHQKaW1wb3J0IHsgUm91dGVyIH0gZnJvbSAnaXR0eS1yb3V0ZXInOwoKY29uc3Qgcm91dGVyID0gUm91dGVyKCk7Cgpyb3V0ZXIuZ2V0KCcvJywgKCkgPT4gbmV3IFJlc3BvbnNlKCdIZWxsbyBpdHR5IScpKTsKcm91dGVyLmdldCgnL2FwaS86aWQnLCBhc3luYyAocmVxdWVzdCwgZW52KSA9PiB7CiAgY29uc3QgeyBpZCB9ID0gcmVxdWVzdC5wYXJhbXM7CiAgY29uc3QgZGF0YSA9IGF3YWl0IGVudi5LVi5nZXQoaWQpOwogIHJldHVybiBSZXNwb25zZS5qc29uKHsgaWQsIGRhdGEgfSk7Cn0pOwoKZXhwb3J0IGRlZmF1bHQgewogIGZldGNoOiAocmVxdWVzdCwgZW52LCBjdHgpID0+IHJvdXRlci5oYW5kbGUocmVxdWVzdCwgZW52LCBjdHgpCn07CmBgYAoKIyMgQmVzdCBQcmFjdGljZXMKCjEuICoqVXNlIEVTIG1vZHVsZXMqKiBvdmVyIHNlcnZpY2Ugd29ya2VyIHN5bnRheAoyLiAqKkV4cGxpY2l0IGJpbmRpbmdzKiogLSBubyBnbG9iYWwgbmFtZXNwYWNlIGFzc3VtcHRpb25zCjMuICoqVHlwZSBzYWZldHkqKiAtIGRlZmluZSBgRW52YCBpbnRlcmZhY2VzICh1c2UgYHdyYW5nbGVyIHR5cGVzYCkKNC4gKipTZXJ2aWNlIGlzb2xhdGlvbioqIC0gc3BsaXQgY29uY2VybnMgaW50byBtdWx0aXBsZSBzZXJ2aWNlcwo1LiAqKlBpbiBjb21wYXQgZGF0ZSoqIGluIHByb2R1Y3Rpb24gYWZ0ZXIgdGVzdGluZwo2LiAqKlVzZSBjdHgud2FpdFVudGlsKCkqKiBmb3IgYmFja2dyb3VuZCB0YXNrcwo3LiAqKkhhbmRsZSBlcnJvcnMgZ3JhY2VmdWxseSoqIHdpdGggdHJ5L2NhdGNoCjguICoqQ29uZmlndXJlIHJlc291cmNlIGxpbWl0cyoqIG9uIGNhY2hlcy9zdG9yYWdlCgojIyBDb21tb24gUGF0dGVybnMKCiMjIyBFcnJvciBIYW5kbGluZwpgYGBqYXZhc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYsIGN0eCkgewogICAgdHJ5IHsKICAgICAgcmV0dXJuIGF3YWl0IGhhbmRsZVJlcXVlc3QocmVxdWVzdCwgZW52KTsKICAgIH0gY2F0Y2ggKGVycm9yKSB7CiAgICAgIGNvbnNvbGUuZXJyb3IoIlJlcXVlc3QgZmFpbGVkIiwgZXJyb3IpOwogICAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJJbnRlcm5hbCBFcnJvciIsIHtzdGF0dXM6IDUwMH0pOwogICAgfQogIH0KfTsKYGBgCgojIyMgQmFja2dyb3VuZCBUYXNrcwpgYGBqYXZhc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYsIGN0eCkgewogICAgY29uc3QgcmVzcG9uc2UgPSBuZXcgUmVzcG9uc2UoIk9LIik7CiAgICAKICAgIC8vIEZpcmUtYW5kLWZvcmdldCBiYWNrZ3JvdW5kIHdvcmsKICAgIGN0eC53YWl0VW50aWwoCiAgICAgIGVudi5BTkFMWVRJQ1MucHV0KHJlcXVlc3QudXJsLCBEYXRlLm5vdygpKQogICAgKTsKICAgIAogICAgcmV0dXJuIHJlc3BvbnNlOwogIH0KfTsKYGBgCgpTZWUgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgZm9yIGNvbmZpZyBzeW50YXgsIFthcGkubWRdKC4vYXBpLm1kKSBmb3IgcnVudGltZSBBUElzLCBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSBmb3IgY29tbW9uIGVycm9ycy4K
+# Workerd Patterns
+
+## Multi-Service Architecture
+```capnp
+const config :Workerd.Config = (
+  services = [
+    (name = "frontend", worker = (
+      modules = [(name = "index.js", esModule = embed "frontend/index.js")],
+      compatibilityDate = "2024-01-15",
+      bindings = [(name = "API", service = "api")]
+    )),
+    (name = "api", worker = (
+      modules = [(name = "index.js", esModule = embed "api/index.js")],
+      compatibilityDate = "2024-01-15",
+      bindings = [(name = "DB", service = "postgres"), (name = "CACHE", kvNamespace = "kv")]
+    )),
+    (name = "postgres", external = (address = "db.internal:5432", http = ())),
+    (name = "kv", disk = (path = "/var/kv", writable = true))
+  ],
+  sockets = [(name = "http", address = "*:8080", http = (), service = "frontend")]
+);
+```
+
+## Durable Objects
+```capnp
+const worker :Workerd.Worker = (
+  modules = [(name = "index.js", esModule = embed "index.js"), (name = "room.js", esModule = embed "room.js")],
+  compatibilityDate = "2024-01-15",
+  bindings = [(name = "ROOMS", durableObjectNamespace = "Room")],
+  durableObjectNamespaces = [(className = "Room", uniqueKey = "v1")],
+  durableObjectStorage = (localDisk = "/var/do")
+);
+```
+
+## Dev vs Prod Configs
+```capnp
+# Use parameter bindings for env-specific config
+const baseWorker :Workerd.Worker = (
+  modules = [(name = "index.js", esModule = embed "src/index.js")],
+  compatibilityDate = "2024-01-15",
+  bindings = [(name = "API_URL", parameter = (type = text))]
+);
+
+const prodWorker :Workerd.Worker = (
+  inherit = "base-service",
+  bindings = [(name = "API_URL", text = "https://api.prod.com")]
+);
+```
+
+## HTTP Reverse Proxy
+```capnp
+services = [
+  (name = "proxy", worker = (serviceWorkerScript = embed "proxy.js", compatibilityDate = "2024-01-15", bindings = [(name = "BACKEND", service = "backend")])),
+  (name = "backend", external = (address = "internal:8080", http = ()))
+]
+```
+
+## Local Development
+
+**Recommended:** Use Wrangler
+```bash
+wrangler dev  # Uses workerd internally
+```
+
+**Direct workerd:**
+```bash
+workerd serve config.capnp --socket-addr http=*:3000 --verbose
+```
+
+**Environment variables:**
+```capnp
+bindings = [(name = "DATABASE_URL", fromEnvironment = "DATABASE_URL")]
+```
+
+## Testing
+```bash
+workerd test config.capnp
+workerd test config.capnp --test-only=test.js
+```
+
+Test files must be included in `modules = [...]` config.
+
+## Production Deployment
+
+### Compiled Binary (Recommended)
+```bash
+workerd compile config.capnp myConfig -o production-server
+./production-server
+```
+
+### Docker
+```dockerfile
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y ca-certificates
+COPY workerd /usr/local/bin/
+COPY config.capnp /etc/workerd/
+COPY src/ /etc/workerd/src/
+EXPOSE 8080
+CMD ["workerd", "serve", "/etc/workerd/config.capnp"]
+```
+
+### Systemd
+```ini
+# /etc/systemd/system/workerd.service
+[Service]
+ExecStart=/usr/bin/workerd serve /etc/workerd/config.capnp --socket-fd http=3
+Restart=always
+User=nobody
+```
+
+See systemd socket activation docs for complete setup.
+
+## Framework Integration
+
+### Hono
+```javascript
+import { Hono } from 'hono';
+
+const app = new Hono();
+
+app.get('/', (c) => c.text('Hello Hono!'));
+app.get('/api/:id', async (c) => {
+  const id = c.req.param('id');
+  const data = await c.env.KV.get(id);
+  return c.json({ id, data });
+});
+
+export default app;
+```
+
+### itty-router
+```javascript
+import { Router } from 'itty-router';
+
+const router = Router();
+
+router.get('/', () => new Response('Hello itty!'));
+router.get('/api/:id', async (request, env) => {
+  const { id } = request.params;
+  const data = await env.KV.get(id);
+  return Response.json({ id, data });
+});
+
+export default {
+  fetch: (request, env, ctx) => router.handle(request, env, ctx)
+};
+```
+
+## Best Practices
+
+1. **Use ES modules** over service worker syntax
+2. **Explicit bindings** - no global namespace assumptions
+3. **Type safety** - define `Env` interfaces (use `wrangler types`)
+4. **Service isolation** - split concerns into multiple services
+5. **Pin compat date** in production after testing
+6. **Use ctx.waitUntil()** for background tasks
+7. **Handle errors gracefully** with try/catch
+8. **Configure resource limits** on caches/storage
+
+## Common Patterns
+
+### Error Handling
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    try {
+      return await handleRequest(request, env);
+    } catch (error) {
+      console.error("Request failed", error);
+      return new Response("Internal Error", {status: 500});
+    }
+  }
+};
+```
+
+### Background Tasks
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    const response = new Response("OK");
+    
+    // Fire-and-forget background work
+    ctx.waitUntil(
+      env.ANALYTICS.put(request.url, Date.now())
+    );
+    
+    return response;
+  }
+};
+```
+
+See [configuration.md](./configuration.md) for config syntax, [api.md](./api.md) for runtime APIs, [gotchas.md](./gotchas.md) for common errors.

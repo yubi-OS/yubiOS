@@ -1,1 +1,181 @@
-IyBUZXN0aW5nIFBhdHRlcm5zCgojIyBDaG9vc2luZyBhIFRlc3RpbmcgQXBwcm9hY2gKCnwgQXBwcm9hY2ggfCBVc2UgQ2FzZSB8IFNwZWVkIHwgU2V0dXAgfCBSdW50aW1lIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tfC0tLS0tLS18LS0tLS0tLS0tfAp8ICoqZ2V0UGxhdGZvcm1Qcm94eSoqIHwgVW5pdCB0ZXN0cywgbG9naWMgdGVzdGluZyB8IEZhc3QgfCBMb3cgfCBNaW5pZmxhcmUgfAp8ICoqTWluaWZsYXJlIEFQSSoqIHwgSW50ZWdyYXRpb24gdGVzdHMsIGZ1bGwgY29udHJvbCB8IE1lZGl1bSB8IE1lZGl1bSB8IE1pbmlmbGFyZSB8CnwgKip2aXRlc3QtcG9vbC13b3JrZXJzKiogfCBWaXRlc3QgcnVubmVyIGludGVncmF0aW9uIHwgTWVkaXVtIHwgTWVkaXVtIHwgd29ya2VyZCB8CgoqKlF1aWNrIGd1aWRlOioqCi0gVW5pdCB0ZXN0cyDihpIgZ2V0UGxhdGZvcm1Qcm94eQotIEludGVncmF0aW9uIHRlc3RzIOKGkiBNaW5pZmxhcmUgQVBJCi0gVml0ZXN0IHdvcmtmbG93cyDihpIgdml0ZXN0LXBvb2wtd29ya2VycwoKIyMgZ2V0UGxhdGZvcm1Qcm94eQoKTGlnaHR3ZWlnaHQgdW5pdCB0ZXN0aW5nIC0gcHJvdmlkZXMgYmluZGluZ3Mgd2l0aG91dCBmdWxsIFdvcmtlciBydW50aW1lLgoKYGBganMKLy8gdml0ZXN0LmNvbmZpZy5qcwpleHBvcnQgZGVmYXVsdCB7IHRlc3Q6IHsgZW52aXJvbm1lbnQ6ICJub2RlIiB9IH07CmBgYAoKYGBganMKaW1wb3J0IHsgZW52IH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKaW1wb3J0IHsgZGVzY3JpYmUsIGl0LCBleHBlY3QgfSBmcm9tICJ2aXRlc3QiOwoKZGVzY3JpYmUoIkJ1c2luZXNzIGxvZ2ljIiwgKCkgPT4gewogIGl0KCJwcm9jZXNzZXMgZGF0YSB3aXRoIEtWIiwgYXN5bmMgKCkgPT4gewogICAgYXdhaXQgZW52LktWLnB1dCgidGVzdCIsICJ2YWx1ZSIpOwogICAgZXhwZWN0KGF3YWl0IGVudi5LVi5nZXQoInRlc3QiKSkudG9CZSgidmFsdWUiKTsKICB9KTsKfSk7CmBgYAoKKipQcm9zOioqIEZhc3QsIHNpbXBsZSAgCioqQ29uczoqKiBObyBmdWxsIHJ1bnRpbWUsIGNhbid0IHRlc3QgZmV0Y2ggaGFuZGxlcgoKIyMgdml0ZXN0LXBvb2wtd29ya2VycwoKRnVsbCBXb3JrZXJzIHJ1bnRpbWUgaW4gVml0ZXN0LiBSZWFkcyBgd3JhbmdsZXIudG9tbGAuCgpgYGBiYXNoCm5wbSBpIC1EIEBjbG91ZGZsYXJlL3ZpdGVzdC1wb29sLXdvcmtlcnMKYGBgCgpgYGBqcwovLyB2aXRlc3QuY29uZmlnLmpzCmltcG9ydCB7IGRlZmluZVdvcmtlcnNDb25maWcgfSBmcm9tICJAY2xvdWRmbGFyZS92aXRlc3QtcG9vbC13b3JrZXJzL2NvbmZpZyI7CgpleHBvcnQgZGVmYXVsdCBkZWZpbmVXb3JrZXJzQ29uZmlnKHsKICB0ZXN0OiB7CiAgICBwb29sT3B0aW9uczogeyB3b3JrZXJzOiB7IHdyYW5nbGVyOiB7IGNvbmZpZ1BhdGg6ICIuL3dyYW5nbGVyLnRvbWwiIH0gfSB9LAogIH0sCn0pOwpgYGAKCmBgYGpzCmltcG9ydCB7IGVudiwgU0VMRiB9IGZyb20gImNsb3VkZmxhcmU6dGVzdCI7CmltcG9ydCB7IGl0LCBleHBlY3QgfSBmcm9tICJ2aXRlc3QiOwoKaXQoImhhbmRsZXMgZmV0Y2giLCBhc3luYyAoKSA9PiB7CiAgY29uc3QgcmVzID0gYXdhaXQgU0VMRi5mZXRjaCgiaHR0cDovL2V4YW1wbGUuY29tLyIpOwogIGV4cGVjdChyZXMuc3RhdHVzKS50b0JlKDIwMCk7Cn0pOwpgYGAKCioqUHJvczoqKiBGdWxsIHJ1bnRpbWUsIHVzZXMgd3JhbmdsZXIudG9tbCAgCioqQ29uczoqKiBSZXF1aXJlcyBXcmFuZ2xlciBjb25maWcKCiMjIE1pbmlmbGFyZSBBUEkgKG5vZGU6dGVzdCkKCmBgYGpzCmltcG9ydCBhc3NlcnQgZnJvbSAibm9kZTphc3NlcnQiOwppbXBvcnQgdGVzdCwgeyBhZnRlciwgYmVmb3JlIH0gZnJvbSAibm9kZTp0ZXN0IjsKaW1wb3J0IHsgTWluaWZsYXJlIH0gZnJvbSAibWluaWZsYXJlIjsKCmxldCBtZjsKYmVmb3JlKCgpID0+IHsKICBtZiA9IG5ldyBNaW5pZmxhcmUoeyBzY3JpcHRQYXRoOiAic3JjL2luZGV4LmpzIiwga3ZOYW1lc3BhY2VzOiBbIlRFU1RfS1YiXSB9KTsKfSk7Cgp0ZXN0KCJmZXRjaCIsIGFzeW5jICgpID0+IHsKICBjb25zdCByZXMgPSBhd2FpdCBtZi5kaXNwYXRjaEZldGNoKCJodHRwOi8vbG9jYWxob3N0LyIpOwogIGFzc2VydC5zdHJpY3RFcXVhbChhd2FpdCByZXMudGV4dCgpLCAiSGVsbG8iKTsKfSk7CgphZnRlcigoKSA9PiBtZi5kaXNwb3NlKCkpOwpgYGAKCiMjIFRlc3RpbmcgRHVyYWJsZSBPYmplY3RzICYgRXZlbnRzCgpgYGBqcwovLyBEdXJhYmxlIE9iamVjdHMKY29uc3QgbnMgPSBhd2FpdCBtZi5nZXREdXJhYmxlT2JqZWN0TmFtZXNwYWNlKCJDT1VOVEVSIik7CmNvbnN0IHN0dWIgPSBucy5nZXQobnMuaWRGcm9tTmFtZSgidGVzdC1jb3VudGVyIikpOwphd2FpdCBzdHViLmZldGNoKCJodHRwOi8vbG9jYWxob3N0L2luY3JlbWVudCIpOwoKLy8gRGlyZWN0IHN0b3JhZ2UKY29uc3Qgc3RvcmFnZSA9IGF3YWl0IG1mLmdldER1cmFibGVPYmplY3RTdG9yYWdlKG5zLmlkRnJvbU5hbWUoInRlc3QtY291bnRlciIpKTsKY29uc3QgY291bnQgPSBhd2FpdCBzdG9yYWdlLmdldCgiY291bnQiKTsKCi8vIFF1ZXVlCmNvbnN0IHdvcmtlciA9IGF3YWl0IG1mLmdldFdvcmtlcigpOwphd2FpdCB3b3JrZXIucXVldWUoIm15LXF1ZXVlIiwgWwogIHsgaWQ6ICJtc2cxIiwgdGltZXN0YW1wOiBuZXcgRGF0ZSgpLCBib2R5OiB7IHVzZXJJZDogMTIzIH0sIGF0dGVtcHRzOiAxIH0sCl0pOwoKLy8gU2NoZWR1bGVkCmF3YWl0IHdvcmtlci5zY2hlZHVsZWQoeyBjcm9uOiAiMCAwICogKiAqIiB9KTsKYGBgCgojIyBUZXN0IElzb2xhdGlvbiAmIE1vY2tpbmcKCmBgYGpzCi8vIFBlci10ZXN0IGlzb2xhdGlvbgpiZWZvcmVFYWNoKCgpID0+IHsgbWYgPSBuZXcgTWluaWZsYXJlKHsga3ZOYW1lc3BhY2VzOiBbIlRFU1QiXSB9KTsgfSk7CmFmdGVyRWFjaCgoKSA9PiBtZi5kaXNwb3NlKCkpOwoKLy8gTW9jayBleHRlcm5hbCBBUElzCm5ldyBNaW5pZmxhcmUoewogIHdvcmtlcnM6IFsKICAgIHsgbmFtZTogIm1haW4iLCBzZXJ2aWNlQmluZGluZ3M6IHsgQVBJOiAibW9jay1hcGkiIH0sIHNjcmlwdDogYC4uLmAgfSwKICAgIHsgbmFtZTogIm1vY2stYXBpIiwgc2NyaXB0OiBgZXhwb3J0IGRlZmF1bHQgeyBhc3luYyBmZXRjaCgpIHsgcmV0dXJuIFJlc3BvbnNlLmpzb24oe21vY2s6IHRydWV9KTsgfSB9YCB9LAogIF0sCn0pOwpgYGAKCiMjIFR5cGUgU2FmZXR5CgpgYGB0cwppbXBvcnQgdHlwZSB7IEtWTmFtZXNwYWNlIH0gZnJvbSAiQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcyI7CgppbnRlcmZhY2UgRW52IHsKICBLVjogS1ZOYW1lc3BhY2U7CiAgQVBJX0tFWTogc3RyaW5nOwp9Cgpjb25zdCBlbnYgPSBhd2FpdCBtZi5nZXRCaW5kaW5nczxFbnY+KCk7CmF3YWl0IGVudi5LVi5wdXQoImtleSIsICJ2YWx1ZSIpOyAvLyBUeXBlZCEKCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXE6IFJlcXVlc3QsIGVudjogRW52KSB7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKGF3YWl0IGVudi5LVi5nZXQoImtleSIpKTsKICB9Cn0gc2F0aXNmaWVzIEV4cG9ydGVkSGFuZGxlcjxFbnY+OwpgYGAKCiMjIFdlYlNvY2tldCBUZXN0aW5nCgpgYGBqcwpjb25zdCByZXMgPSBhd2FpdCBtZi5kaXNwYXRjaEZldGNoKCJodHRwOi8vbG9jYWxob3N0L3dzIiwgewogIGhlYWRlcnM6IHsgVXBncmFkZTogIndlYnNvY2tldCIgfSwKfSk7CmFzc2VydC5zdHJpY3RFcXVhbChyZXMuc3RhdHVzLCAxMDEpOwpgYGAKCiMjIE1pZ3JhdGlvbiBmcm9tIHVuc3RhYmxlX2RldgoKYGBganMKLy8gT2xkIChkZXByZWNhdGVkKQppbXBvcnQgeyB1bnN0YWJsZV9kZXYgfSBmcm9tICJ3cmFuZ2xlciI7CmNvbnN0IHdvcmtlciA9IGF3YWl0IHVuc3RhYmxlX2Rldigic3JjL2luZGV4LnRzIik7CgovLyBOZXcKaW1wb3J0IHsgTWluaWZsYXJlIH0gZnJvbSAibWluaWZsYXJlIjsKY29uc3QgbWYgPSBuZXcgTWluaWZsYXJlKHsgc2NyaXB0UGF0aDogInNyYy9pbmRleC50cyIgfSk7CmBgYAoKIyMgQ0kvQ0QgVGlwcwoKYGBganMKLy8gSW4tbWVtb3J5IHN0b3JhZ2UgKGZhc3RlcikKbmV3IE1pbmlmbGFyZSh7IGt2TmFtZXNwYWNlczogWyJURVNUIl0gfSk7IC8vIE5vIHBlcnNpc3QgPSBpbi1tZW1vcnkKCi8vIFVzZSBkaXNwYXRjaEZldGNoIChubyBwb3J0IGNvbmZsaWN0cykKYXdhaXQgbWYuZGlzcGF0Y2hGZXRjaCgiaHR0cDovL2xvY2FsaG9zdC8iKTsKYGBgCgpTZWUgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgZm9yIHRyb3VibGVzaG9vdGluZy4K
+# Testing Patterns
+
+## Choosing a Testing Approach
+
+| Approach | Use Case | Speed | Setup | Runtime |
+|----------|----------|-------|-------|---------|
+| **getPlatformProxy** | Unit tests, logic testing | Fast | Low | Miniflare |
+| **Miniflare API** | Integration tests, full control | Medium | Medium | Miniflare |
+| **vitest-pool-workers** | Vitest runner integration | Medium | Medium | workerd |
+
+**Quick guide:**
+- Unit tests → getPlatformProxy
+- Integration tests → Miniflare API
+- Vitest workflows → vitest-pool-workers
+
+## getPlatformProxy
+
+Lightweight unit testing - provides bindings without full Worker runtime.
+
+```js
+// vitest.config.js
+export default { test: { environment: "node" } };
+```
+
+```js
+import { env } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+
+describe("Business logic", () => {
+  it("processes data with KV", async () => {
+    await env.KV.put("test", "value");
+    expect(await env.KV.get("test")).toBe("value");
+  });
+});
+```
+
+**Pros:** Fast, simple  
+**Cons:** No full runtime, can't test fetch handler
+
+## vitest-pool-workers
+
+Full Workers runtime in Vitest. Reads `wrangler.toml`.
+
+```bash
+npm i -D @cloudflare/vitest-pool-workers
+```
+
+```js
+// vitest.config.js
+import { defineWorkersConfig } from "@cloudflare/vitest-pool-workers/config";
+
+export default defineWorkersConfig({
+  test: {
+    poolOptions: { workers: { wrangler: { configPath: "./wrangler.toml" } } },
+  },
+});
+```
+
+```js
+import { env, SELF } from "cloudflare:test";
+import { it, expect } from "vitest";
+
+it("handles fetch", async () => {
+  const res = await SELF.fetch("http://example.com/");
+  expect(res.status).toBe(200);
+});
+```
+
+**Pros:** Full runtime, uses wrangler.toml  
+**Cons:** Requires Wrangler config
+
+## Miniflare API (node:test)
+
+```js
+import assert from "node:assert";
+import test, { after, before } from "node:test";
+import { Miniflare } from "miniflare";
+
+let mf;
+before(() => {
+  mf = new Miniflare({ scriptPath: "src/index.js", kvNamespaces: ["TEST_KV"] });
+});
+
+test("fetch", async () => {
+  const res = await mf.dispatchFetch("http://localhost/");
+  assert.strictEqual(await res.text(), "Hello");
+});
+
+after(() => mf.dispose());
+```
+
+## Testing Durable Objects & Events
+
+```js
+// Durable Objects
+const ns = await mf.getDurableObjectNamespace("COUNTER");
+const stub = ns.get(ns.idFromName("test-counter"));
+await stub.fetch("http://localhost/increment");
+
+// Direct storage
+const storage = await mf.getDurableObjectStorage(ns.idFromName("test-counter"));
+const count = await storage.get("count");
+
+// Queue
+const worker = await mf.getWorker();
+await worker.queue("my-queue", [
+  { id: "msg1", timestamp: new Date(), body: { userId: 123 }, attempts: 1 },
+]);
+
+// Scheduled
+await worker.scheduled({ cron: "0 0 * * *" });
+```
+
+## Test Isolation & Mocking
+
+```js
+// Per-test isolation
+beforeEach(() => { mf = new Miniflare({ kvNamespaces: ["TEST"] }); });
+afterEach(() => mf.dispose());
+
+// Mock external APIs
+new Miniflare({
+  workers: [
+    { name: "main", serviceBindings: { API: "mock-api" }, script: `...` },
+    { name: "mock-api", script: `export default { async fetch() { return Response.json({mock: true}); } }` },
+  ],
+});
+```
+
+## Type Safety
+
+```ts
+import type { KVNamespace } from "@cloudflare/workers-types";
+
+interface Env {
+  KV: KVNamespace;
+  API_KEY: string;
+}
+
+const env = await mf.getBindings<Env>();
+await env.KV.put("key", "value"); // Typed!
+
+export default {
+  async fetch(req: Request, env: Env) {
+    return new Response(await env.KV.get("key"));
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## WebSocket Testing
+
+```js
+const res = await mf.dispatchFetch("http://localhost/ws", {
+  headers: { Upgrade: "websocket" },
+});
+assert.strictEqual(res.status, 101);
+```
+
+## Migration from unstable_dev
+
+```js
+// Old (deprecated)
+import { unstable_dev } from "wrangler";
+const worker = await unstable_dev("src/index.ts");
+
+// New
+import { Miniflare } from "miniflare";
+const mf = new Miniflare({ scriptPath: "src/index.ts" });
+```
+
+## CI/CD Tips
+
+```js
+// In-memory storage (faster)
+new Miniflare({ kvNamespaces: ["TEST"] }); // No persist = in-memory
+
+// Use dispatchFetch (no port conflicts)
+await mf.dispatchFetch("http://localhost/");
+```
+
+See [gotchas.md](./gotchas.md) for troubleshooting.

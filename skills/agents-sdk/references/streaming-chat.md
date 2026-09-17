@@ -1,1 +1,198 @@
-IyBTdHJlYW1pbmcgQ2hhdCB3aXRoIEFJQ2hhdEFnZW50CgpGZXRjaCBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWdlbnRzL2FwaS1yZWZlcmVuY2UvY2hhdC1hZ2VudHMvIGZvciBjb21wbGV0ZSBkb2N1bWVudGF0aW9uLgoKYEFJQ2hhdEFnZW50YCBmcm9tIGBAY2xvdWRmbGFyZS9haS1jaGF0YCBwcm92aWRlcyBzdHJlYW1pbmcgY2hhdCB3aXRoIGF1dG9tYXRpYyBtZXNzYWdlIHBlcnNpc3RlbmNlIGFuZCByZXN1bWFibGUgc3RyZWFtcy4KCiMjIEJhc2ljIENoYXQgQWdlbnQKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgQUlDaGF0QWdlbnQgfSBmcm9tICJAY2xvdWRmbGFyZS9haS1jaGF0IjsKaW1wb3J0IHsgc3RyZWFtVGV4dCwgY29udmVydFRvTW9kZWxNZXNzYWdlcyB9IGZyb20gImFpIjsKaW1wb3J0IHsgb3BlbmFpIH0gZnJvbSAiQGFpLXNkay9vcGVuYWkiOwoKZXhwb3J0IGNsYXNzIENoYXQgZXh0ZW5kcyBBSUNoYXRBZ2VudDxFbnY+IHsKICBhc3luYyBvbkNoYXRNZXNzYWdlKG9uRmluaXNoLCBvcHRpb25zKSB7CiAgICBjb25zdCByZXN1bHQgPSBzdHJlYW1UZXh0KHsKICAgICAgbW9kZWw6IG9wZW5haSgiZ3B0LTRvIiksCiAgICAgIHN5c3RlbTogIllvdSBhcmUgYSBoZWxwZnVsIGFzc2lzdGFudC4iLAogICAgICBtZXNzYWdlczogYXdhaXQgY29udmVydFRvTW9kZWxNZXNzYWdlcyh0aGlzLm1lc3NhZ2VzKSwKICAgICAgYWJvcnRTaWduYWw6IG9wdGlvbnM/LmFib3J0U2lnbmFsLAogICAgICBvbkZpbmlzaAogICAgfSk7CiAgICByZXR1cm4gcmVzdWx0LnRvVUlNZXNzYWdlU3RyZWFtUmVzcG9uc2UoKTsKICB9Cn0KYGBgCgoqKkltcG9ydGFudDoqKiBBbHdheXMgcGFzcyBgYWJvcnRTaWduYWxgIGFuZCBgb25GaW5pc2hgIOKAlCB0aGV5IGVuYWJsZSBwcm9wZXIgY2xlYW51cCBhbmQgbWVzc2FnZSBwZXJzaXN0ZW5jZS4KCiMjIFdpdGggVG9vbHMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgdG9vbCB9IGZyb20gImFpIjsKaW1wb3J0IHsgeiB9IGZyb20gInpvZCI7Cgpjb25zdCB0b29scyA9IHsKICBnZXRXZWF0aGVyOiB0b29sKHsKICAgIGRlc2NyaXB0aW9uOiAiR2V0IHdlYXRoZXIgZm9yIGEgbG9jYXRpb24iLAogICAgcGFyYW1ldGVyczogei5vYmplY3QoeyBsb2NhdGlvbjogei5zdHJpbmcoKSB9KSwKICAgIGV4ZWN1dGU6IGFzeW5jICh7IGxvY2F0aW9uIH0pID0+IGBXZWF0aGVyIGluICR7bG9jYXRpb259OiA3MsKwRiwgc3VubnlgCiAgfSkKfTsKCmV4cG9ydCBjbGFzcyBDaGF0IGV4dGVuZHMgQUlDaGF0QWdlbnQ8RW52PiB7CiAgYXN5bmMgb25DaGF0TWVzc2FnZShvbkZpbmlzaCwgb3B0aW9ucykgewogICAgY29uc3QgcmVzdWx0ID0gc3RyZWFtVGV4dCh7CiAgICAgIG1vZGVsOiBvcGVuYWkoImdwdC00byIpLAogICAgICBtZXNzYWdlczogYXdhaXQgY29udmVydFRvTW9kZWxNZXNzYWdlcyh0aGlzLm1lc3NhZ2VzKSwKICAgICAgdG9vbHMsCiAgICAgIGFib3J0U2lnbmFsOiBvcHRpb25zPy5hYm9ydFNpZ25hbCwKICAgICAgb25GaW5pc2gKICAgIH0pOwogICAgcmV0dXJuIHJlc3VsdC50b1VJTWVzc2FnZVN0cmVhbVJlc3BvbnNlKCk7CiAgfQp9CmBgYAoKIyMgV2l0aCBXb3JrZXJzIEFJIChubyBBUEkga2V5cykKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgY3JlYXRlV29ya2Vyc0FJIH0gZnJvbSAid29ya2Vycy1haS1wcm92aWRlciI7CgpleHBvcnQgY2xhc3MgQ2hhdCBleHRlbmRzIEFJQ2hhdEFnZW50PEVudj4gewogIGFzeW5jIG9uQ2hhdE1lc3NhZ2Uob25GaW5pc2gsIG9wdGlvbnMpIHsKICAgIGNvbnN0IHdvcmtlcnNhaSA9IGNyZWF0ZVdvcmtlcnNBSSh7IGJpbmRpbmc6IHRoaXMuZW52LkFJIH0pOwogICAgY29uc3QgcmVzdWx0ID0gc3RyZWFtVGV4dCh7CiAgICAgIG1vZGVsOiB3b3JrZXJzYWkoIkBjZi9tZXRhL2xsYW1hLTQtc2NvdXQtMTdiLTE2ZS1pbnN0cnVjdCIpLAogICAgICBtZXNzYWdlczogYXdhaXQgY29udmVydFRvTW9kZWxNZXNzYWdlcyh0aGlzLm1lc3NhZ2VzKSwKICAgICAgYWJvcnRTaWduYWw6IG9wdGlvbnM/LmFib3J0U2lnbmFsLAogICAgICBvbkZpbmlzaAogICAgfSk7CiAgICByZXR1cm4gcmVzdWx0LnRvVUlNZXNzYWdlU3RyZWFtUmVzcG9uc2UoKTsKICB9Cn0KYGBgCgojIyBDdXN0b20gVUkgTWVzc2FnZSBTdHJlYW0KCkZvciBtb3JlIGNvbnRyb2wsIHVzZSBgY3JlYXRlVUlNZXNzYWdlU3RyZWFtYDoKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgY3JlYXRlVUlNZXNzYWdlU3RyZWFtLCBjcmVhdGVVSU1lc3NhZ2VTdHJlYW1SZXNwb25zZSB9IGZyb20gImFpIjsKCmV4cG9ydCBjbGFzcyBDaGF0IGV4dGVuZHMgQUlDaGF0QWdlbnQ8RW52PiB7CiAgYXN5bmMgb25DaGF0TWVzc2FnZShvbkZpbmlzaCkgewogICAgY29uc3Qgc3RyZWFtID0gY3JlYXRlVUlNZXNzYWdlU3RyZWFtKHsKICAgICAgZXhlY3V0ZTogYXN5bmMgKHsgd3JpdGVyIH0pID0+IHsKICAgICAgICBjb25zdCByZXN1bHQgPSBzdHJlYW1UZXh0KHsKICAgICAgICAgIG1vZGVsOiBvcGVuYWkoImdwdC00byIpLAogICAgICAgICAgbWVzc2FnZXM6IGF3YWl0IGNvbnZlcnRUb01vZGVsTWVzc2FnZXModGhpcy5tZXNzYWdlcyksCiAgICAgICAgICBvbkZpbmlzaAogICAgICAgIH0pOwogICAgICAgIHdyaXRlci5tZXJnZShyZXN1bHQudG9VSU1lc3NhZ2VTdHJlYW0oKSk7CiAgICAgIH0KICAgIH0pOwogICAgcmV0dXJuIGNyZWF0ZVVJTWVzc2FnZVN0cmVhbVJlc3BvbnNlKHsgc3RyZWFtIH0pOwogIH0KfQpgYGAKCiMjIFJlc3VtYWJsZSBTdHJlYW1pbmcKClN0cmVhbXMgYXV0b21hdGljYWxseSByZXN1bWUgaWYgY2xpZW50IGRpc2Nvbm5lY3RzIGFuZCByZWNvbm5lY3RzOgoKMS4gQ2h1bmtzIGJ1ZmZlcmVkIHRvIFNRTGl0ZSBkdXJpbmcgc3RyZWFtaW5nCjIuIE9uIHJlY29ubmVjdCwgYnVmZmVyZWQgY2h1bmtzIHNlbnQgaW1tZWRpYXRlbHkKMy4gTGl2ZSBzdHJlYW1pbmcgY29udGludWVzIGZyb20gd2hlcmUgaXQgbGVmdCBvZmYKCioqRW5hYmxlZCBieSBkZWZhdWx0LioqIFRvIGRpc2FibGU6CgpgYGB0c3gKY29uc3QgeyBtZXNzYWdlcyB9ID0gdXNlQWdlbnRDaGF0KHsgYWdlbnQsIHJlc3VtZTogZmFsc2UgfSk7CmBgYAoKIyMgUmVhY3QgQ2xpZW50CgpgYGB0c3gKaW1wb3J0IHsgdXNlQWdlbnQgfSBmcm9tICJhZ2VudHMvcmVhY3QiOwppbXBvcnQgeyB1c2VBZ2VudENoYXQgfSBmcm9tICJAY2xvdWRmbGFyZS9haS1jaGF0L3JlYWN0IjsKCmZ1bmN0aW9uIENoYXRVSSgpIHsKICBjb25zdCBhZ2VudCA9IHVzZUFnZW50KHsKICAgIGFnZW50OiAiQ2hhdCIsCiAgICBuYW1lOiAibXktY2hhdC1zZXNzaW9uIgogIH0pOwoKICBjb25zdCB7IAogICAgbWVzc2FnZXMsIAogICAgaW5wdXQsIAogICAgaGFuZGxlSW5wdXRDaGFuZ2UsIAogICAgaGFuZGxlU3VibWl0LCAKICAgIHN0YXR1cyAKICB9ID0gdXNlQWdlbnRDaGF0KHsgYWdlbnQgfSk7CgogIHJldHVybiAoCiAgICA8ZGl2PgogICAgICB7bWVzc2FnZXMubWFwKChtKSA9PiAoCiAgICAgICAgPGRpdiBrZXk9e20uaWR9PgogICAgICAgICAgPHN0cm9uZz57bS5yb2xlfTo8L3N0cm9uZz4ge20uY29udGVudH0KICAgICAgICA8L2Rpdj4KICAgICAgKSl9CiAgICAgIAogICAgICA8Zm9ybSBvblN1Ym1pdD17aGFuZGxlU3VibWl0fT4KICAgICAgICA8aW5wdXQgCiAgICAgICAgICB2YWx1ZT17aW5wdXR9IAogICAgICAgICAgb25DaGFuZ2U9e2hhbmRsZUlucHV0Q2hhbmdlfQogICAgICAgICAgZGlzYWJsZWQ9e3N0YXR1cyA9PT0gInN0cmVhbWluZyJ9CiAgICAgICAgLz4KICAgICAgICA8YnV0dG9uIHR5cGU9InN1Ym1pdCI+U2VuZDwvYnV0dG9uPgogICAgICA8L2Zvcm0+CiAgICA8L2Rpdj4KICApOwp9CmBgYAoKIyMgU3RyZWFtaW5nIFJQQyBNZXRob2RzCgpGb3Igbm9uLWNoYXQgc3RyZWFtaW5nLCB1c2UgYEBjYWxsYWJsZSh7IHN0cmVhbWluZzogdHJ1ZSB9KWA6CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IEFnZW50LCBjYWxsYWJsZSwgU3RyZWFtaW5nUmVzcG9uc2UgfSBmcm9tICJhZ2VudHMiOwoKZXhwb3J0IGNsYXNzIE15QWdlbnQgZXh0ZW5kcyBBZ2VudDxFbnY+IHsKICBAY2FsbGFibGUoeyBzdHJlYW1pbmc6IHRydWUgfSkKICBhc3luYyBzdHJlYW1EYXRhKHN0cmVhbTogU3RyZWFtaW5nUmVzcG9uc2UsIHF1ZXJ5OiBzdHJpbmcpIHsKICAgIGZvciAobGV0IGkgPSAwOyBpIDwgMTA7IGkrKykgewogICAgICBzdHJlYW0uc2VuZChgUmVzdWx0ICR7aX06ICR7cXVlcnl9YCk7CiAgICAgIGF3YWl0IHNsZWVwKDEwMCk7CiAgICB9CiAgICBzdHJlYW0uY2xvc2UoKTsKICB9Cn0KYGBgCgpDbGllbnQgcmVjZWl2ZXMgc3RyZWFtZWQgbWVzc2FnZXMgdmlhIFdlYlNvY2tldCBSUEMuCgojIyBLZXkgUHJvcGVydGllcwoKfCBQcm9wZXJ0eSB8IFB1cnBvc2UgfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS18CnwgYHRoaXMubWVzc2FnZXNgIHwgQWxsIHBlcnNpc3RlZCBtZXNzYWdlcyB8CnwgYG1heFBlcnNpc3RlZE1lc3NhZ2VzYCB8IExpbWl0IHN0b3JlZCBtZXNzYWdlcyAocHJ1bmUgb2xkZXN0KSB8CnwgYG1lc3NhZ2VDb25jdXJyZW5jeWAgfCBgInF1ZXVlImAgKGRlZmF1bHQpLCBgImxhdGVzdCJgLCBgIm1lcmdlImAsIGAiZHJvcCJgIHwKfCBgY2hhdFJlY292ZXJ5YCB8IGAicGVyc2lzdCJgIChkZWZhdWx0KSBvciBgImNvbnRpbnVlImAgb24gcmVjb25uZWN0IHwKfCBgd2FpdEZvck1jcENvbm5lY3Rpb25zYCB8IFdhaXQgZm9yIE1DUCBzZXJ2ZXJzIGJlZm9yZSBmaXJzdCB0dXJuIHwKCiMjIFN0YXR1cyBWYWx1ZXMKCmB1c2VBZ2VudENoYXRgIHN0YXR1czoKCnwgU3RhdHVzIHwgTWVhbmluZyB8CnwtLS0tLS0tLXwtLS0tLS0tLS18CnwgYHJlYWR5YCB8IElkbGUsIHJlYWR5IGZvciBpbnB1dCB8CnwgYHN0cmVhbWluZ2AgfCBSZXNwb25zZSBzdHJlYW1pbmcgfAp8IGBzdWJtaXR0ZWRgIHwgUmVxdWVzdCBzZW50LCB3YWl0aW5nIHwKfCBgZXJyb3JgIHwgRXJyb3Igb2NjdXJyZWQgfAoKQWxzbzogYGlzU3RyZWFtaW5nYCwgYGlzU2VydmVyU3RyZWFtaW5nYCBmb3IgZGlzdGluZ3Vpc2hpbmcgdXNlciB2cyBzZXJ2ZXItaW5pdGlhdGVkIHN0cmVhbXMuCg==
+# Streaming Chat with AIChatAgent
+
+Fetch https://developers.cloudflare.com/agents/api-reference/chat-agents/ for complete documentation.
+
+`AIChatAgent` from `@cloudflare/ai-chat` provides streaming chat with automatic message persistence and resumable streams.
+
+## Basic Chat Agent
+
+```typescript
+import { AIChatAgent } from "@cloudflare/ai-chat";
+import { streamText, convertToModelMessages } from "ai";
+import { openai } from "@ai-sdk/openai";
+
+export class Chat extends AIChatAgent<Env> {
+  async onChatMessage(onFinish, options) {
+    const result = streamText({
+      model: openai("gpt-4o"),
+      system: "You are a helpful assistant.",
+      messages: await convertToModelMessages(this.messages),
+      abortSignal: options?.abortSignal,
+      onFinish
+    });
+    return result.toUIMessageStreamResponse();
+  }
+}
+```
+
+**Important:** Always pass `abortSignal` and `onFinish` — they enable proper cleanup and message persistence.
+
+## With Tools
+
+```typescript
+import { tool } from "ai";
+import { z } from "zod";
+
+const tools = {
+  getWeather: tool({
+    description: "Get weather for a location",
+    parameters: z.object({ location: z.string() }),
+    execute: async ({ location }) => `Weather in ${location}: 72°F, sunny`
+  })
+};
+
+export class Chat extends AIChatAgent<Env> {
+  async onChatMessage(onFinish, options) {
+    const result = streamText({
+      model: openai("gpt-4o"),
+      messages: await convertToModelMessages(this.messages),
+      tools,
+      abortSignal: options?.abortSignal,
+      onFinish
+    });
+    return result.toUIMessageStreamResponse();
+  }
+}
+```
+
+## With Workers AI (no API keys)
+
+```typescript
+import { createWorkersAI } from "workers-ai-provider";
+
+export class Chat extends AIChatAgent<Env> {
+  async onChatMessage(onFinish, options) {
+    const workersai = createWorkersAI({ binding: this.env.AI });
+    const result = streamText({
+      model: workersai("@cf/meta/llama-4-scout-17b-16e-instruct"),
+      messages: await convertToModelMessages(this.messages),
+      abortSignal: options?.abortSignal,
+      onFinish
+    });
+    return result.toUIMessageStreamResponse();
+  }
+}
+```
+
+## Custom UI Message Stream
+
+For more control, use `createUIMessageStream`:
+
+```typescript
+import { createUIMessageStream, createUIMessageStreamResponse } from "ai";
+
+export class Chat extends AIChatAgent<Env> {
+  async onChatMessage(onFinish) {
+    const stream = createUIMessageStream({
+      execute: async ({ writer }) => {
+        const result = streamText({
+          model: openai("gpt-4o"),
+          messages: await convertToModelMessages(this.messages),
+          onFinish
+        });
+        writer.merge(result.toUIMessageStream());
+      }
+    });
+    return createUIMessageStreamResponse({ stream });
+  }
+}
+```
+
+## Resumable Streaming
+
+Streams automatically resume if client disconnects and reconnects:
+
+1. Chunks buffered to SQLite during streaming
+2. On reconnect, buffered chunks sent immediately
+3. Live streaming continues from where it left off
+
+**Enabled by default.** To disable:
+
+```tsx
+const { messages } = useAgentChat({ agent, resume: false });
+```
+
+## React Client
+
+```tsx
+import { useAgent } from "agents/react";
+import { useAgentChat } from "@cloudflare/ai-chat/react";
+
+function ChatUI() {
+  const agent = useAgent({
+    agent: "Chat",
+    name: "my-chat-session"
+  });
+
+  const { 
+    messages, 
+    input, 
+    handleInputChange, 
+    handleSubmit, 
+    status 
+  } = useAgentChat({ agent });
+
+  return (
+    <div>
+      {messages.map((m) => (
+        <div key={m.id}>
+          <strong>{m.role}:</strong> {m.content}
+        </div>
+      ))}
+      
+      <form onSubmit={handleSubmit}>
+        <input 
+          value={input} 
+          onChange={handleInputChange}
+          disabled={status === "streaming"}
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  );
+}
+```
+
+## Streaming RPC Methods
+
+For non-chat streaming, use `@callable({ streaming: true })`:
+
+```typescript
+import { Agent, callable, StreamingResponse } from "agents";
+
+export class MyAgent extends Agent<Env> {
+  @callable({ streaming: true })
+  async streamData(stream: StreamingResponse, query: string) {
+    for (let i = 0; i < 10; i++) {
+      stream.send(`Result ${i}: ${query}`);
+      await sleep(100);
+    }
+    stream.close();
+  }
+}
+```
+
+Client receives streamed messages via WebSocket RPC.
+
+## Key Properties
+
+| Property | Purpose |
+|----------|---------|
+| `this.messages` | All persisted messages |
+| `maxPersistedMessages` | Limit stored messages (prune oldest) |
+| `messageConcurrency` | `"queue"` (default), `"latest"`, `"merge"`, `"drop"` |
+| `chatRecovery` | `"persist"` (default) or `"continue"` on reconnect |
+| `waitForMcpConnections` | Wait for MCP servers before first turn |
+
+## Status Values
+
+`useAgentChat` status:
+
+| Status | Meaning |
+|--------|---------|
+| `ready` | Idle, ready for input |
+| `streaming` | Response streaming |
+| `submitted` | Request sent, waiting |
+| `error` | Error occurred |
+
+Also: `isStreaming`, `isServerStreaming` for distinguishing user vs server-initiated streams.

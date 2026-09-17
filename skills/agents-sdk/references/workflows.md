@@ -1,1 +1,132 @@
-IyBXb3JrZmxvd3MgSW50ZWdyYXRpb24KCkZldGNoIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS9ydW4td29ya2Zsb3dzLyBmb3IgY29tcGxldGUgZG9jdW1lbnRhdGlvbi4KCiMjIE92ZXJ2aWV3CgpBZ2VudHMgaGFuZGxlIHJlYWwtdGltZSBjb21tdW5pY2F0aW9uOyBXb3JrZmxvd3MgaGFuZGxlIGR1cmFibGUgZXhlY3V0aW9uLiBUb2dldGhlciB0aGV5IGVuYWJsZToKCi0gTG9uZy1ydW5uaW5nIGJhY2tncm91bmQgdGFza3Mgd2l0aCBhdXRvbWF0aWMgcmV0cmllcwotIEh1bWFuLWluLXRoZS1sb29wIGFwcHJvdmFsIGZsb3dzCi0gTXVsdGktc3RlcCBwaXBlbGluZXMgdGhhdCBzdXJ2aXZlIGZhaWx1cmVzCgp8IFVzZSBDYXNlIHwgUmVjb21tZW5kYXRpb24gfAp8LS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tfAp8IENoYXQvbWVzc2FnaW5nIHwgQWdlbnQgb25seSB8CnwgUXVpY2sgQVBJIGNhbGxzICg8MzBzKSB8IEFnZW50IG9ubHkgfAp8IEJhY2tncm91bmQgcHJvY2Vzc2luZyAoPDMwcykgfCBBZ2VudCBgcXVldWUoKWAgfAp8IExvbmctcnVubmluZyB0YXNrcyAoPjMwcykgfCBBZ2VudCArIFdvcmtmbG93IHwKfCBIdW1hbiBhcHByb3ZhbCBmbG93cyB8IEFnZW50ICsgV29ya2Zsb3cgfAoKIyMgQWdlbnRXb3JrZmxvdyBCYXNlIENsYXNzCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IEFnZW50V29ya2Zsb3cgfSBmcm9tICJhZ2VudHMvd29ya2Zsb3dzIjsKaW1wb3J0IHR5cGUgeyBBZ2VudFdvcmtmbG93RXZlbnQsIEFnZW50V29ya2Zsb3dTdGVwIH0gZnJvbSAiYWdlbnRzL3dvcmtmbG93cyI7Cgp0eXBlIFRhc2tQYXJhbXMgPSB7IHRhc2tJZDogc3RyaW5nOyBkYXRhOiBzdHJpbmcgfTsKCmV4cG9ydCBjbGFzcyBQcm9jZXNzaW5nV29ya2Zsb3cgZXh0ZW5kcyBBZ2VudFdvcmtmbG93PE15QWdlbnQsIFRhc2tQYXJhbXM+IHsKICBhc3luYyBydW4oZXZlbnQ6IEFnZW50V29ya2Zsb3dFdmVudDxUYXNrUGFyYW1zPiwgc3RlcDogQWdlbnRXb3JrZmxvd1N0ZXApIHsKICAgIGNvbnN0IHBhcmFtcyA9IGV2ZW50LnBheWxvYWQ7CgogICAgLy8gRHVyYWJsZSBzdGVwIC0gcmV0cmllcyBvbiBmYWlsdXJlCiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBzdGVwLmRvKCJwcm9jZXNzIiwgYXN5bmMgKCkgPT4gewogICAgICByZXR1cm4gcHJvY2Vzc0RhdGEocGFyYW1zLmRhdGEpOwogICAgfSk7CgogICAgLy8gTm9uLWR1cmFibGU6IHByb2dyZXNzIHJlcG9ydGluZwogICAgYXdhaXQgdGhpcy5yZXBvcnRQcm9ncmVzcyh7IHN0ZXA6ICJwcm9jZXNzIiwgcGVyY2VudDogMC41IH0pOwoKICAgIC8vIE5vbi1kdXJhYmxlOiBicm9hZGNhc3QgdG8gY29ubmVjdGVkIGNsaWVudHMKICAgIHRoaXMuYnJvYWRjYXN0VG9DbGllbnRzKHsgdHlwZTogInVwZGF0ZSIsIHRhc2tJZDogcGFyYW1zLnRhc2tJZCB9KTsKCiAgICAvLyBEdXJhYmxlOiBtZXJnZSBzdGF0ZSB2aWEgc3RlcAogICAgYXdhaXQgc3RlcC5tZXJnZUFnZW50U3RhdGUoeyBsYXN0UHJvY2Vzc2VkOiBwYXJhbXMudGFza0lkIH0pOwoKICAgIC8vIER1cmFibGU6IHJlcG9ydCBjb21wbGV0aW9uCiAgICBhd2FpdCBzdGVwLnJlcG9ydENvbXBsZXRlKHJlc3VsdCk7CgogICAgcmV0dXJuIHJlc3VsdDsKICB9Cn0KYGBgCgojIyBXcmFuZ2xlciBDb25maWd1cmF0aW9uCgpgYGBqc29uYwp7CiAgIndvcmtmbG93cyI6IFsKICAgIHsgIm5hbWUiOiAicHJvY2Vzc2luZy13b3JrZmxvdyIsICJiaW5kaW5nIjogIlBST0NFU1NJTkdfV09SS0ZMT1ciLCAiY2xhc3NfbmFtZSI6ICJQcm9jZXNzaW5nV29ya2Zsb3ciIH0KICBdLAogICJkdXJhYmxlX29iamVjdHMiOiB7CiAgICAiYmluZGluZ3MiOiBbeyAibmFtZSI6ICJNeUFnZW50IiwgImNsYXNzX25hbWUiOiAiTXlBZ2VudCIgfV0KICB9LAogICJtaWdyYXRpb25zIjogW3sgInRhZyI6ICJ2MSIsICJuZXdfc3FsaXRlX2NsYXNzZXMiOiBbIk15QWdlbnQiXSB9XQp9CmBgYAoKIyMgQWdlbnQgTWV0aG9kcyBmb3IgV29ya2Zsb3dzCgpgYGB0eXBlc2NyaXB0Ci8vIFN0YXJ0IGEgd29ya2Zsb3cKY29uc3QgaW5zdGFuY2UgPSBhd2FpdCB0aGlzLnJ1bldvcmtmbG93KCJQcm9jZXNzaW5nV29ya2Zsb3ciLCB7IHRhc2tJZDogIjEyMyIsIGRhdGE6ICIuLi4iIH0pOwoKLy8gU2VuZCBldmVudCB0byB3YWl0aW5nIHdvcmtmbG93CmF3YWl0IHRoaXMuc2VuZFdvcmtmbG93RXZlbnQoIlByb2Nlc3NpbmdXb3JrZmxvdyIsIHdvcmtmbG93SWQsIHsgdHlwZTogImFwcHJvdmUiIH0pOwoKLy8gUXVlcnkgd29ya2Zsb3dzCmNvbnN0IHdvcmtmbG93ID0gYXdhaXQgdGhpcy5nZXRXb3JrZmxvdyh3b3JrZmxvd0lkKTsKY29uc3Qgd29ya2Zsb3dzID0gYXdhaXQgdGhpcy5nZXRXb3JrZmxvd3MoeyBzdGF0dXM6ICJydW5uaW5nIiB9KTsKCi8vIENvbnRyb2wgd29ya2Zsb3dzCmF3YWl0IHRoaXMuYXBwcm92ZVdvcmtmbG93KHdvcmtmbG93SWQpOwphd2FpdCB0aGlzLnJlamVjdFdvcmtmbG93KHdvcmtmbG93SWQpOwphd2FpdCB0aGlzLnRlcm1pbmF0ZVdvcmtmbG93KHdvcmtmbG93SWQpOwphd2FpdCB0aGlzLnBhdXNlV29ya2Zsb3cod29ya2Zsb3dJZCk7CmF3YWl0IHRoaXMucmVzdW1lV29ya2Zsb3cod29ya2Zsb3dJZCk7CgovLyBEZWxldGUgd29ya2Zsb3dzCmF3YWl0IHRoaXMuZGVsZXRlV29ya2Zsb3cod29ya2Zsb3dJZCk7CmF3YWl0IHRoaXMuZGVsZXRlV29ya2Zsb3dzKHsgc3RhdHVzOiAiY29tcGxldGUiLCBiZWZvcmU6IG5ldyBEYXRlKC4uLikgfSk7CmBgYAoKIyMgTGlmZWN5Y2xlIENhbGxiYWNrcwoKYGBgdHlwZXNjcmlwdApleHBvcnQgY2xhc3MgTXlBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBhc3luYyBvbldvcmtmbG93UHJvZ3Jlc3Mod29ya2Zsb3dOYW1lOiBzdHJpbmcsIHdvcmtmbG93SWQ6IHN0cmluZywgcHJvZ3Jlc3M6IHVua25vd24pIHsKICAgIC8vIFdvcmtmbG93IHJlcG9ydGVkIHByb2dyZXNzIHZpYSB0aGlzLnJlcG9ydFByb2dyZXNzKCkKICAgIHRoaXMuYnJvYWRjYXN0KHsgdHlwZTogInByb2dyZXNzIiwgd29ya2Zsb3dJZCwgcHJvZ3Jlc3MgfSk7CiAgfQoKICBhc3luYyBvbldvcmtmbG93Q29tcGxldGUod29ya2Zsb3dOYW1lOiBzdHJpbmcsIHdvcmtmbG93SWQ6IHN0cmluZywgcmVzdWx0PzogdW5rbm93bikgewogICAgLy8gV29ya2Zsb3cgZmluaXNoZWQgc3VjY2Vzc2Z1bGx5CiAgfQoKICBhc3luYyBvbldvcmtmbG93RXJyb3Iod29ya2Zsb3dOYW1lOiBzdHJpbmcsIHdvcmtmbG93SWQ6IHN0cmluZywgZXJyb3I6IEVycm9yKSB7CiAgICAvLyBXb3JrZmxvdyBmYWlsZWQKICB9CgogIGFzeW5jIG9uV29ya2Zsb3dFdmVudCh3b3JrZmxvd05hbWU6IHN0cmluZywgd29ya2Zsb3dJZDogc3RyaW5nLCBldmVudDogdW5rbm93bikgewogICAgLy8gV29ya2Zsb3cgcmVjZWl2ZWQgYW4gZXZlbnQgdmlhIHNlbmRXb3JrZmxvd0V2ZW50KCkKICB9Cn0KYGBgCgojIyBIdW1hbi1pbi10aGUtTG9vcAoKYGBgdHlwZXNjcmlwdAovLyBJbiB3b3JrZmxvdzogd2FpdCBmb3IgYXBwcm92YWwKY29uc3QgYXBwcm92ZWQgPSBhd2FpdCBzdGVwLndhaXRGb3JFdmVudDx7IGFwcHJvdmVkOiBib29sZWFuIH0+KCJhcHByb3ZhbCIsIHsKICB0aW1lb3V0OiAiN2QiCn0pOwoKaWYgKCFhcHByb3ZlZC5hcHByb3ZlZCkgewogIHRocm93IG5ldyBFcnJvcigiUmVqZWN0ZWQiKTsKfQoKLy8gRnJvbSBhZ2VudDogYXBwcm92ZSBvciByZWplY3QKYXdhaXQgdGhpcy5hcHByb3ZlV29ya2Zsb3cod29ya2Zsb3dJZCk7ICAvLyBTZW5kcyB7IGFwcHJvdmVkOiB0cnVlIH0KYXdhaXQgdGhpcy5yZWplY3RXb3JrZmxvdyh3b3JrZmxvd0lkKTsgICAvLyBTZW5kcyB7IGFwcHJvdmVkOiBmYWxzZSB9CmBgYAo=
+# Workflows Integration
+
+Fetch https://developers.cloudflare.com/agents/api-reference/run-workflows/ for complete documentation.
+
+## Overview
+
+Agents handle real-time communication; Workflows handle durable execution. Together they enable:
+
+- Long-running background tasks with automatic retries
+- Human-in-the-loop approval flows
+- Multi-step pipelines that survive failures
+
+| Use Case | Recommendation |
+|----------|----------------|
+| Chat/messaging | Agent only |
+| Quick API calls (<30s) | Agent only |
+| Background processing (<30s) | Agent `queue()` |
+| Long-running tasks (>30s) | Agent + Workflow |
+| Human approval flows | Agent + Workflow |
+
+## AgentWorkflow Base Class
+
+```typescript
+import { AgentWorkflow } from "agents/workflows";
+import type { AgentWorkflowEvent, AgentWorkflowStep } from "agents/workflows";
+
+type TaskParams = { taskId: string; data: string };
+
+export class ProcessingWorkflow extends AgentWorkflow<MyAgent, TaskParams> {
+  async run(event: AgentWorkflowEvent<TaskParams>, step: AgentWorkflowStep) {
+    const params = event.payload;
+
+    // Durable step - retries on failure
+    const result = await step.do("process", async () => {
+      return processData(params.data);
+    });
+
+    // Non-durable: progress reporting
+    await this.reportProgress({ step: "process", percent: 0.5 });
+
+    // Non-durable: broadcast to connected clients
+    this.broadcastToClients({ type: "update", taskId: params.taskId });
+
+    // Durable: merge state via step
+    await step.mergeAgentState({ lastProcessed: params.taskId });
+
+    // Durable: report completion
+    await step.reportComplete(result);
+
+    return result;
+  }
+}
+```
+
+## Wrangler Configuration
+
+```jsonc
+{
+  "workflows": [
+    { "name": "processing-workflow", "binding": "PROCESSING_WORKFLOW", "class_name": "ProcessingWorkflow" }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "MyAgent", "class_name": "MyAgent" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["MyAgent"] }]
+}
+```
+
+## Agent Methods for Workflows
+
+```typescript
+// Start a workflow
+const instance = await this.runWorkflow("ProcessingWorkflow", { taskId: "123", data: "..." });
+
+// Send event to waiting workflow
+await this.sendWorkflowEvent("ProcessingWorkflow", workflowId, { type: "approve" });
+
+// Query workflows
+const workflow = await this.getWorkflow(workflowId);
+const workflows = await this.getWorkflows({ status: "running" });
+
+// Control workflows
+await this.approveWorkflow(workflowId);
+await this.rejectWorkflow(workflowId);
+await this.terminateWorkflow(workflowId);
+await this.pauseWorkflow(workflowId);
+await this.resumeWorkflow(workflowId);
+
+// Delete workflows
+await this.deleteWorkflow(workflowId);
+await this.deleteWorkflows({ status: "complete", before: new Date(...) });
+```
+
+## Lifecycle Callbacks
+
+```typescript
+export class MyAgent extends Agent<Env, State> {
+  async onWorkflowProgress(workflowName: string, workflowId: string, progress: unknown) {
+    // Workflow reported progress via this.reportProgress()
+    this.broadcast({ type: "progress", workflowId, progress });
+  }
+
+  async onWorkflowComplete(workflowName: string, workflowId: string, result?: unknown) {
+    // Workflow finished successfully
+  }
+
+  async onWorkflowError(workflowName: string, workflowId: string, error: Error) {
+    // Workflow failed
+  }
+
+  async onWorkflowEvent(workflowName: string, workflowId: string, event: unknown) {
+    // Workflow received an event via sendWorkflowEvent()
+  }
+}
+```
+
+## Human-in-the-Loop
+
+```typescript
+// In workflow: wait for approval
+const approved = await step.waitForEvent<{ approved: boolean }>("approval", {
+  timeout: "7d"
+});
+
+if (!approved.approved) {
+  throw new Error("Rejected");
+}
+
+// From agent: approve or reject
+await this.approveWorkflow(workflowId);  // Sends { approved: true }
+await this.rejectWorkflow(workflowId);   // Sends { approved: false }
+```

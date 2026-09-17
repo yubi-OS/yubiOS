@@ -1,1 +1,118 @@
-IyBSMiBTUUwgUGF0dGVybnMKCkNvZGUgdGVtcGxhdGVzIGZvciBDTEksIFJFU1QsIGFuZCBXb3JrZXIgYWNjZXNzLiBGb3IgcGVyZm9ybWFuY2UvcGFydGl0aW9uaW5nIGJlc3QgcHJhY3RpY2VzLCBwdWxsIGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjItc3FsL3JlZmVyZW5jZS9saW1pdGF0aW9ucy1iZXN0LXByYWN0aWNlcy9gLgoKIyMgV3JhbmdsZXIgQ0xJCgpgYGBiYXNoCmV4cG9ydCBXUkFOR0xFUl9SMl9TUUxfQVVUSF9UT0tFTj0kQVBJX1RPS0VOCgpucHggd3JhbmdsZXIgcjIgc3FsIHF1ZXJ5ICIke0FDQ09VTlRfSUR9X215LWJ1Y2tldCIgIgogIFNFTEVDVCBjYXRlZ29yeSwgQ09VTlQoKikgQVMgY250LCByb3VuZChBVkcoYW1vdW50KSwgMikgQVMgYXZnX2Ftb3VudAogIEZST00gYW5hbHl0aWNzLmV2ZW50cwogIFdIRVJFIF9faW5nZXN0X3RzID49ICcyMDI2LTAxLTAxVDAwOjAwOjAwWicKICBHUk9VUCBCWSBjYXRlZ29yeSBPUkRFUiBCWSBjbnQgREVTQyBMSU1JVCAxMDAiCmBgYAoKIyMgUkVTVCBBUEkgKFB5dGhvbikKCmBgYHB5dGhvbgppbXBvcnQgcmVxdWVzdHMKCkFQSSA9IGYiaHR0cHM6Ly9hcGkuc3FsLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS9hcGkvdjEvYWNjb3VudHMve0FDQ09VTlRfSUR9L3IyLXNxbC9xdWVyeS97QlVDS0VUfSIKSEVBREVSUyA9IHsiQXV0aG9yaXphdGlvbiI6IGYiQmVhcmVyIHtUT0tFTn0iLCAiQ29udGVudC1UeXBlIjogImFwcGxpY2F0aW9uL2pzb24ifQoKZGVmIHIyc3FsKHF1ZXJ5KToKICAgIGJvZHkgPSByZXF1ZXN0cy5wb3N0KEFQSSwgaGVhZGVycz1IRUFERVJTLCBqc29uPXsicXVlcnkiOiBxdWVyeX0sIHRpbWVvdXQ9MTgwKS5qc29uKCkKICAgIGlmIGJvZHlbInN1Y2Nlc3MiXToKICAgICAgICByZXR1cm4gYm9keVsicmVzdWx0Il1bInJvd3MiXSwgYm9keVsicmVzdWx0Il1bIm1ldHJpY3MiXQogICAgcmFpc2UgUnVudGltZUVycm9yKGJvZHlbImVycm9ycyJdKQoKcm93cywgbWV0cmljcyA9IHIyc3FsKCJTRUxFQ1QgY2F0ZWdvcnksIENPVU5UKCopIEFTIGNudCBGUk9NIGFuYWx5dGljcy5ldmVudHMgR1JPVVAgQlkgY2F0ZWdvcnkgTElNSVQgMTAiKQpgYGAKCiMjIFJFU1QgQVBJIChjdXJsKQoKYGBgYmFzaApjdXJsIC1YIFBPU1QgXAogICJodHRwczovL2FwaS5zcWwuY2xvdWRmbGFyZXN0b3JhZ2UuY29tL2FwaS92MS9hY2NvdW50cy8kQUNDT1VOVF9JRC9yMi1zcWwvcXVlcnkvJEJVQ0tFVCIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJFRPS0VOIiAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3sicXVlcnkiOiAiU0VMRUNUIENPVU5UKCopIEFTIHRvdGFsIEZST00gYW5hbHl0aWNzLmV2ZW50cyJ9JwpgYGAKCiMjIERhc2hib2FyZCBXb3JrZXIKCk5vIFIyIFNRTCBiaW5kaW5nIGV4aXN0cyDigJQgcXVlcnkgdGhlIFJFU1QgZW5kcG9pbnQgdmlhIGBmZXRjaCgpYC4KCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7IEFDQ09VTlRfSUQ6IHN0cmluZzsgQlVDS0VUOiBzdHJpbmc7IFIyX1NRTF9UT0tFTjogc3RyaW5nOyB9Cgphc3luYyBmdW5jdGlvbiBxdWVyeVIyU1FMKGVudjogRW52LCBxdWVyeTogc3RyaW5nKSB7CiAgY29uc3QgdXJsID0gYGh0dHBzOi8vYXBpLnNxbC5jbG91ZGZsYXJlc3RvcmFnZS5jb20vYXBpL3YxL2FjY291bnRzLyR7ZW52LkFDQ09VTlRfSUR9L3IyLXNxbC9xdWVyeS8ke2Vudi5CVUNLRVR9YDsKICBjb25zdCByZXNwID0gYXdhaXQgZmV0Y2godXJsLCB7CiAgICBtZXRob2Q6ICJQT1NUIiwKICAgIGhlYWRlcnM6IHsgQXV0aG9yaXphdGlvbjogYEJlYXJlciAke2Vudi5SMl9TUUxfVE9LRU59YCwgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIiB9LAogICAgYm9keTogSlNPTi5zdHJpbmdpZnkoeyBxdWVyeSB9KSwKICB9KTsKICBpZiAoIXJlc3Aub2spIHRocm93IG5ldyBFcnJvcihgUjIgU1FMICR7cmVzcC5zdGF0dXN9OiAke2F3YWl0IHJlc3AudGV4dCgpfWApOwogIHJldHVybiAoYXdhaXQgcmVzcC5qc29uKCkgYXMgYW55KS5yZXN1bHQ7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXE6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgaWYgKG5ldyBVUkwocmVxLnVybCkucGF0aG5hbWUgPT09ICIvYXBpL2FuYWx5dGljcyIpIHsKICAgICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgcXVlcnlSMlNRTChlbnYsIGAKICAgICAgICBTRUxFQ1QgY2F0ZWdvcnksIENPVU5UKCopIEFTIGNudCBGUk9NIGFuYWx5dGljcy5ldmVudHMKICAgICAgICBHUk9VUCBCWSBjYXRlZ29yeSBPUkRFUiBCWSBjbnQgREVTQyBMSU1JVCAxMGApOwogICAgICByZXR1cm4gUmVzcG9uc2UuanNvbihyZXN1bHQucm93cyk7CiAgICB9CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJOb3QgZm91bmQiLCB7IHN0YXR1czogNDA0IH0pOwogIH0sCn07CmBgYAoKYGBgYmFzaApucHggd3JhbmdsZXIgc2VjcmV0IHB1dCBSMl9TUUxfVE9LRU4KYGBgCgojIyBFeGFtcGxlIFF1ZXJpZXMKCmBgYHNxbAotLSBFcnJvciByYXRlIGJ5IGVuZHBvaW50ClNFTEVDVCBwYXRoLCBDT1VOVCgqKSBBUyB0b3RhbCwgU1VNKENBU0UgV0hFTiBzdGF0dXMgPj0gNDAwIFRIRU4gMSBFTFNFIDAgRU5EKSBBUyBlcnJvcnMKRlJPTSBsb2dzLmh0dHBfcmVxdWVzdHMgV0hFUkUgX19pbmdlc3RfdHMgPj0gJzIwMjYtMDEtMDFUMDA6MDA6MDBaJwpHUk9VUCBCWSBwYXRoIE9SREVSIEJZIGVycm9ycyBERVNDIExJTUlUIDIwOwoKLS0gVG9wLTMgc2xvd2VzdCByZXF1ZXN0cyBwZXIgbWV0aG9kICh3aW5kb3cgKyBRVUFMSUZZKQpTRUxFQ1QgbWV0aG9kLCBwYXRoLCByZXNwb25zZV90aW1lX21zIEZST00gbG9ncy5odHRwX3JlcXVlc3RzClFVQUxJRlkgUk9XX05VTUJFUigpIE9WRVIgKFBBUlRJVElPTiBCWSBtZXRob2QgT1JERVIgQlkgcmVzcG9uc2VfdGltZV9tcyBERVNDKSA8PSAzOwoKLS0gQ3Jvc3MtdGFibGUgYW5hbHl0aWNzIHdpdGggYXBwcm94IGRpc3RpbmN0ClNFTEVDVCB6LmRvbWFpbiwgQ09VTlQoKikgQVMgcmVxdWVzdHMsIGFwcHJveF9kaXN0aW5jdChoLmNsaWVudF9pcCkgQVMgdW5pcXVlcwpGUk9NIG5zLnpvbmVzIHogSU5ORVIgSk9JTiBucy5odHRwX3JlcXVlc3RzIGggT04gei56b25lX2lkID0gaC56b25lX2lkCldIRVJFIGguX19pbmdlc3RfdHMgPj0gJzIwMjYtMDYtMDFUMDA6MDA6MDBaJwpHUk9VUCBCWSB6LmRvbWFpbiBPUkRFUiBCWSByZXF1ZXN0cyBERVNDIExJTUlUIDI1OwpgYGAKCiMjIEN1cnNvci1CYXNlZCBQYWdpbmF0aW9uCgpQYWdpbmF0ZSBvbiBhIHNvcnRhYmxlIChpZGVhbGx5IHBhcnRpdGlvbikgY29sdW1uIHJhdGhlciB0aGFuIGBPRkZTRVRgOgoKYGBgc3FsClNFTEVDVCAqIEZST00gbG9ncy5yZXF1ZXN0cyBPUkRFUiBCWSBfX2luZ2VzdF90cyBERVNDIExJTUlUIDUwMDsgICAgICAgICAgICAgICAgICAgICAgIC0tIHBhZ2UgMQpTRUxFQ1QgKiBGUk9NIGxvZ3MucmVxdWVzdHMgV0hFUkUgX19pbmdlc3RfdHMgPCAnPGxhc3RfdHM+JyBPUkRFUiBCWSBfX2luZ2VzdF90cyBERVNDIExJTUlUIDUwMDsgIC0tIHBhZ2UgMgpgYGAKCiMjIFBlcmZvcm1hbmNlIChlc3NlbnRpYWxzKQoKLSAqKkFsd2F5cyBgTElNSVRgKiogKGVhcmx5IHRlcm1pbmF0aW9uKTsgKipmaWx0ZXIgb24gcGFydGl0aW9uIGtleXMgZmlyc3QqKiAoYF9faW5nZXN0X3RzYCByYW5nZSksIHRoZW4gYWRkIHByZWRpY2F0ZXMuCi0gKipOYXJyb3cgdGltZSByYW5nZXMqKjsgKipjb21wYWN0IHRhYmxlcyoqIChmaWxlIGNvdW50IGRvbWluYXRlcyBsYXRlbmN5IOKAlCBlbmFibGUgYXV0b21hdGljIGNvbXBhY3Rpb24gaW4gW3IyLWRhdGEtY2F0YWxvZ10oLi4vcjItZGF0YS1jYXRhbG9nL2NvbmZpZ3VyYXRpb24ubWQpKS4KLSBSZWFkIHJlc3BvbnNlIGBtZXRyaWNzYCAoYGZpbGVzX3NjYW5uZWRgLCBgYnl0ZXNfc2Nhbm5lZGApIHRvIHR1bmUuIEZ1bGwgZ3VpZGFuY2U6IGxpbWl0YXRpb25zLWJlc3QtcHJhY3RpY2VzIGRvYy4KCiMjIFBpcGVsaW5lcyDihpIgUjIgU1FMCgpBZnRlciBgbnB4IHdyYW5nbGVyIHBpcGVsaW5lcyBzZXR1cGAgKERhdGEgQ2F0YWxvZyBkZXN0aW5hdGlvbiksIHdhaXQgZm9yIGZpcnN0IGZsdXNoICgz4oCTNyBtaW4pLCB0aGVuIHF1ZXJ5IHRoZSB0YWJsZS4gU2VlIFtwaXBlbGluZXMvcGF0dGVybnMubWRdKC4uL3BpcGVsaW5lcy9wYXR0ZXJucy5tZCkuCgojIyBTZWUgQWxzbwoKLSBbYXBpLm1kXShhcGkubWQpIMK3IFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSDCtyBbcjItZGF0YS1jYXRhbG9nL3BhdHRlcm5zLm1kXSguLi9yMi1kYXRhLWNhdGFsb2cvcGF0dGVybnMubWQpCg==
+# R2 SQL Patterns
+
+Code templates for CLI, REST, and Worker access. For performance/partitioning best practices, pull `https://developers.cloudflare.com/r2-sql/reference/limitations-best-practices/`.
+
+## Wrangler CLI
+
+```bash
+export WRANGLER_R2_SQL_AUTH_TOKEN=$API_TOKEN
+
+npx wrangler r2 sql query "${ACCOUNT_ID}_my-bucket" "
+  SELECT category, COUNT(*) AS cnt, round(AVG(amount), 2) AS avg_amount
+  FROM analytics.events
+  WHERE __ingest_ts >= '2026-01-01T00:00:00Z'
+  GROUP BY category ORDER BY cnt DESC LIMIT 100"
+```
+
+## REST API (Python)
+
+```python
+import requests
+
+API = f"https://api.sql.cloudflarestorage.com/api/v1/accounts/{ACCOUNT_ID}/r2-sql/query/{BUCKET}"
+HEADERS = {"Authorization": f"Bearer {TOKEN}", "Content-Type": "application/json"}
+
+def r2sql(query):
+    body = requests.post(API, headers=HEADERS, json={"query": query}, timeout=180).json()
+    if body["success"]:
+        return body["result"]["rows"], body["result"]["metrics"]
+    raise RuntimeError(body["errors"])
+
+rows, metrics = r2sql("SELECT category, COUNT(*) AS cnt FROM analytics.events GROUP BY category LIMIT 10")
+```
+
+## REST API (curl)
+
+```bash
+curl -X POST \
+  "https://api.sql.cloudflarestorage.com/api/v1/accounts/$ACCOUNT_ID/r2-sql/query/$BUCKET" \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"query": "SELECT COUNT(*) AS total FROM analytics.events"}'
+```
+
+## Dashboard Worker
+
+No R2 SQL binding exists — query the REST endpoint via `fetch()`.
+
+```typescript
+interface Env { ACCOUNT_ID: string; BUCKET: string; R2_SQL_TOKEN: string; }
+
+async function queryR2SQL(env: Env, query: string) {
+  const url = `https://api.sql.cloudflarestorage.com/api/v1/accounts/${env.ACCOUNT_ID}/r2-sql/query/${env.BUCKET}`;
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${env.R2_SQL_TOKEN}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ query }),
+  });
+  if (!resp.ok) throw new Error(`R2 SQL ${resp.status}: ${await resp.text()}`);
+  return (await resp.json() as any).result;
+}
+
+export default {
+  async fetch(req: Request, env: Env): Promise<Response> {
+    if (new URL(req.url).pathname === "/api/analytics") {
+      const result = await queryR2SQL(env, `
+        SELECT category, COUNT(*) AS cnt FROM analytics.events
+        GROUP BY category ORDER BY cnt DESC LIMIT 10`);
+      return Response.json(result.rows);
+    }
+    return new Response("Not found", { status: 404 });
+  },
+};
+```
+
+```bash
+npx wrangler secret put R2_SQL_TOKEN
+```
+
+## Example Queries
+
+```sql
+-- Error rate by endpoint
+SELECT path, COUNT(*) AS total, SUM(CASE WHEN status >= 400 THEN 1 ELSE 0 END) AS errors
+FROM logs.http_requests WHERE __ingest_ts >= '2026-01-01T00:00:00Z'
+GROUP BY path ORDER BY errors DESC LIMIT 20;
+
+-- Top-3 slowest requests per method (window + QUALIFY)
+SELECT method, path, response_time_ms FROM logs.http_requests
+QUALIFY ROW_NUMBER() OVER (PARTITION BY method ORDER BY response_time_ms DESC) <= 3;
+
+-- Cross-table analytics with approx distinct
+SELECT z.domain, COUNT(*) AS requests, approx_distinct(h.client_ip) AS uniques
+FROM ns.zones z INNER JOIN ns.http_requests h ON z.zone_id = h.zone_id
+WHERE h.__ingest_ts >= '2026-06-01T00:00:00Z'
+GROUP BY z.domain ORDER BY requests DESC LIMIT 25;
+```
+
+## Cursor-Based Pagination
+
+Paginate on a sortable (ideally partition) column rather than `OFFSET`:
+
+```sql
+SELECT * FROM logs.requests ORDER BY __ingest_ts DESC LIMIT 500;                       -- page 1
+SELECT * FROM logs.requests WHERE __ingest_ts < '<last_ts>' ORDER BY __ingest_ts DESC LIMIT 500;  -- page 2
+```
+
+## Performance (essentials)
+
+- **Always `LIMIT`** (early termination); **filter on partition keys first** (`__ingest_ts` range), then add predicates.
+- **Narrow time ranges**; **compact tables** (file count dominates latency — enable automatic compaction in [r2-data-catalog](../r2-data-catalog/configuration.md)).
+- Read response `metrics` (`files_scanned`, `bytes_scanned`) to tune. Full guidance: limitations-best-practices doc.
+
+## Pipelines → R2 SQL
+
+After `npx wrangler pipelines setup` (Data Catalog destination), wait for first flush (3–7 min), then query the table. See [pipelines/patterns.md](../pipelines/patterns.md).
+
+## See Also
+
+- [api.md](api.md) · [gotchas.md](gotchas.md) · [r2-data-catalog/patterns.md](../r2-data-catalog/patterns.md)

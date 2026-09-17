@@ -1,1 +1,143 @@
-IyBBUEkgUmVmZXJlbmNlCgpTZWUgW1JFQURNRS5tZF0oLi9SRUFETUUubWQpIGZvciBvdmVydmlldywgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgZm9yIHNldHVwLgoKIyMgQmluZGluZyBJbnRlcmZhY2UKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEh5cGVyZHJpdmUgewogIGNvbm5lY3Rpb25TdHJpbmc6IHN0cmluZzsgIC8vIFBvc3RncmVTUUwKICAvLyBNeVNRTCBwcm9wZXJ0aWVzOgogIGhvc3Q6IHN0cmluZzsKICBwb3J0OiBudW1iZXI7CiAgdXNlcjogc3RyaW5nOwogIHBhc3N3b3JkOiBzdHJpbmc7CiAgZGF0YWJhc2U6IHN0cmluZzsKfQoKaW50ZXJmYWNlIEVudiB7CiAgSFlQRVJEUklWRTogSHlwZXJkcml2ZTsKfQpgYGAKCioqR2VuZXJhdGUgdHlwZXM6KiogYG5weCB3cmFuZ2xlciB0eXBlc2AgKGF1dG8tY3JlYXRlcyB3b3JrZXItY29uZmlndXJhdGlvbi5kLnRzIGZyb20gd3JhbmdsZXIuanNvbmMpCgojIyBQb3N0Z3JlU1FMIChub2RlLXBvc3RncmVzKSAtIFJFQ09NTUVOREVECgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IENsaWVudCB9IGZyb20gInBnIjsgIC8vIHBnQF44LjE3LjIKCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXE6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgY2xpZW50ID0gbmV3IENsaWVudCh7Y29ubmVjdGlvblN0cmluZzogZW52LkhZUEVSRFJJVkUuY29ubmVjdGlvblN0cmluZ30pOwogICAgdHJ5IHsKICAgICAgYXdhaXQgY2xpZW50LmNvbm5lY3QoKTsKICAgICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgY2xpZW50LnF1ZXJ5KCJTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gJDEiLCBbMTIzXSk7CiAgICAgIHJldHVybiBSZXNwb25zZS5qc29uKHJlc3VsdC5yb3dzKTsKICAgIH0gZmluYWxseSB7CiAgICAgIGF3YWl0IGNsaWVudC5lbmQoKTsKICAgIH0KICB9LAp9OwpgYGAKCioq4pqg77iPIFdvcmtlcnMgY29ubmVjdGlvbiBsaW1pdDogNiBwZXIgV29ya2VyIGludm9jYXRpb24qKiAtIHVzZSBjb25uZWN0aW9uIHBvb2xpbmcgd2lzZWx5LgoKIyMgUG9zdGdyZVNRTCAocG9zdGdyZXMuanMpCgpgYGB0eXBlc2NyaXB0CmltcG9ydCBwb3N0Z3JlcyBmcm9tICJwb3N0Z3JlcyI7ICAvLyBwb3N0Z3Jlc0BeMy40LjgKCmNvbnN0IHNxbCA9IHBvc3RncmVzKGVudi5IWVBFUkRSSVZFLmNvbm5lY3Rpb25TdHJpbmcsIHsKICBtYXg6IDUsICAgICAgICAgICAgIC8vIExpbWl0IHBlciBXb3JrZXIgKFdvcmtlcnMgbWF4OiA2KQogIHByZXBhcmU6IHRydWUsICAgICAgLy8gRW5hYmxlZCBieSBkZWZhdWx0LCByZXF1aXJlZCBmb3IgY2FjaGluZwogIGZldGNoX3R5cGVzOiBmYWxzZSwgLy8gUmVkdWNlIGxhdGVuY3kgaWYgbm90IHVzaW5nIGFycmF5cwp9KTsKCmNvbnN0IHVzZXJzID0gYXdhaXQgc3FsYFNFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgYWN0aXZlID0gJHt0cnVlfSBMSU1JVCAxMGA7CmBgYAoKKirimqDvuI8gYHByZXBhcmU6IHRydWVgIGlzIGVuYWJsZWQgYnkgZGVmYXVsdCBhbmQgcmVxdWlyZWQgZm9yIEh5cGVyZHJpdmUgY2FjaGluZy4qKiBTZXR0aW5nIHRvIGBmYWxzZWAgZGlzYWJsZXMgcHJlcGFyZWQgc3RhdGVtZW50cyArIGNhY2hlLgoKIyMgTXlTUUwgKG15c3FsMikKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgY3JlYXRlQ29ubmVjdGlvbiB9IGZyb20gIm15c3FsMi9wcm9taXNlIjsgIC8vIG15c3FsMkBeMy4xNi4yCgpjb25zdCBjb25uID0gYXdhaXQgY3JlYXRlQ29ubmVjdGlvbih7CiAgaG9zdDogZW52LkhZUEVSRFJJVkUuaG9zdCwKICB1c2VyOiBlbnYuSFlQRVJEUklWRS51c2VyLAogIHBhc3N3b3JkOiBlbnYuSFlQRVJEUklWRS5wYXNzd29yZCwKICBkYXRhYmFzZTogZW52LkhZUEVSRFJJVkUuZGF0YWJhc2UsCiAgcG9ydDogZW52LkhZUEVSRFJJVkUucG9ydCwKICBkaXNhYmxlRXZhbDogdHJ1ZSwgIC8vIOKaoO+4jyBSRVFVSVJFRCBmb3IgV29ya2Vycwp9KTsKCmNvbnN0IFtyZXN1bHRzXSA9IGF3YWl0IGNvbm4ucXVlcnkoIlNFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgYWN0aXZlID0gPyBMSU1JVCA/IiwgW3RydWUsIDEwXSk7CmN0eC53YWl0VW50aWwoY29ubi5lbmQoKSk7CmBgYAoKKirimqDvuI8gTXlTUUwgc3VwcG9ydCBpcyBsZXNzIG1hdHVyZSB0aGFuIFBvc3RncmVTUUwqKiAtIGV4cGVjdCBmZXdlciBvcHRpbWl6YXRpb25zIGFuZCBwb3RlbnRpYWwgZWRnZSBjYXNlcy4KCiMjIFF1ZXJ5IENhY2hpbmcKCioqQ2FjaGVhYmxlOioqCmBgYHNxbApTRUxFQ1QgKiBGUk9NIHBvc3RzIFdIRVJFIHB1Ymxpc2hlZCA9IHRydWU7ClNFTEVDVCBDT1VOVCgqKSBGUk9NIHVzZXJzOwpgYGAKCioqTk9UIGNhY2hlYWJsZToqKgpgYGBzcWwKLS0gV3JpdGVzCklOU0VSVC9VUERBVEUvREVMRVRFCgotLSBWb2xhdGlsZSBmdW5jdGlvbnMKU0VMRUNUIE5PVygpOwpTRUxFQ1QgcmFuZG9tKCk7ClNFTEVDVCBMQVNUVkFMKCk7ICAtLSBQb3N0Z3JlU1FMClNFTEVDVCBVVUlEKCk7ICAgICAtLSBNeVNRTApgYGAKCioqQ2FjaGUgY29uZmlnOioqCi0gRGVmYXVsdDogYG1heF9hZ2U9NjBzYCwgYHN3cj0xNXNgCi0gTWF4IGBtYXhfYWdlYDogMzYwMHMKLSBEaXNhYmxlOiBgLS1jYWNoaW5nLWRpc2FibGVkPXRydWVgCgoqKk11bHRpcGxlIGNvbmZpZ3MgcGF0dGVybjoqKgpgYGB0eXBlc2NyaXB0Ci8vIFJlYWRzOiBjYWNoZWQKY29uc3Qgc3FsQ2FjaGVkID0gcG9zdGdyZXMoZW52LkhZUEVSRFJJVkVfQ0FDSEVELmNvbm5lY3Rpb25TdHJpbmcpOwpjb25zdCBwb3N0cyA9IGF3YWl0IHNxbENhY2hlZGBTRUxFQ1QgKiBGUk9NIHBvc3RzIE9SREVSIEJZIHZpZXdzIERFU0MgTElNSVQgMTBgOwoKLy8gV3JpdGVzL3RpbWUtc2Vuc2l0aXZlOiBubyBjYWNoZQpjb25zdCBzcWxOb0NhY2hlID0gcG9zdGdyZXMoZW52LkhZUEVSRFJJVkVfTk9fQ0FDSEUuY29ubmVjdGlvblN0cmluZyk7CmNvbnN0IG9yZGVycyA9IGF3YWl0IHNxbE5vQ2FjaGVgU0VMRUNUICogRlJPTSBvcmRlcnMgV0hFUkUgY3JlYXRlZF9hdCA+IE5PVygpIC0gSU5URVJWQUwgNSBNSU5VVEVgOwpgYGAKCiMjIE9STXMKCioqRHJpenpsZToqKgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGRyaXp6bGUgfSBmcm9tICJkcml6emxlLW9ybS9wb3N0Z3Jlcy1qcyI7ICAvLyBkcml6emxlLW9ybUBeMC40NS4xCmltcG9ydCBwb3N0Z3JlcyBmcm9tICJwb3N0Z3JlcyI7Cgpjb25zdCBjbGllbnQgPSBwb3N0Z3JlcyhlbnYuSFlQRVJEUklWRS5jb25uZWN0aW9uU3RyaW5nLCB7bWF4OiA1LCBwcmVwYXJlOiB0cnVlfSk7CmNvbnN0IGRiID0gZHJpenpsZShjbGllbnQpOwpjb25zdCB1c2VycyA9IGF3YWl0IGRiLnNlbGVjdCgpLmZyb20odXNlcnMpLndoZXJlKGVxKHVzZXJzLmFjdGl2ZSwgdHJ1ZSkpLmxpbWl0KDEwKTsKYGBgCgoqKkt5c2VseToqKgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IEt5c2VseSwgUG9zdGdyZXNEaWFsZWN0IH0gZnJvbSAia3lzZWx5IjsgIC8vIGt5c2VseUBeMC4yNysKaW1wb3J0IHBvc3RncmVzIGZyb20gInBvc3RncmVzIjsKCmNvbnN0IGRiID0gbmV3IEt5c2VseSh7CiAgZGlhbGVjdDogbmV3IFBvc3RncmVzRGlhbGVjdCh7CiAgICBwb3N0Z3JlczogcG9zdGdyZXMoZW52LkhZUEVSRFJJVkUuY29ubmVjdGlvblN0cmluZywge21heDogNSwgcHJlcGFyZTogdHJ1ZX0pLAogIH0pLAp9KTsKY29uc3QgdXNlcnMgPSBhd2FpdCBkYi5zZWxlY3RGcm9tKCJ1c2VycyIpLnNlbGVjdEFsbCgpLndoZXJlKCJhY3RpdmUiLCAiPSIsIHRydWUpLmV4ZWN1dGUoKTsKYGBgCgpTZWUgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSBmb3IgdXNlIGNhc2VzLCBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSBmb3IgbGltaXRzLgo=
+# API Reference
+
+See [README.md](./README.md) for overview, [configuration.md](./configuration.md) for setup.
+
+## Binding Interface
+
+```typescript
+interface Hyperdrive {
+  connectionString: string;  // PostgreSQL
+  // MySQL properties:
+  host: string;
+  port: number;
+  user: string;
+  password: string;
+  database: string;
+}
+
+interface Env {
+  HYPERDRIVE: Hyperdrive;
+}
+```
+
+**Generate types:** `npx wrangler types` (auto-creates worker-configuration.d.ts from wrangler.jsonc)
+
+## PostgreSQL (node-postgres) - RECOMMENDED
+
+```typescript
+import { Client } from "pg";  // pg@^8.17.2
+
+export default {
+  async fetch(req: Request, env: Env): Promise<Response> {
+    const client = new Client({connectionString: env.HYPERDRIVE.connectionString});
+    try {
+      await client.connect();
+      const result = await client.query("SELECT * FROM users WHERE id = $1", [123]);
+      return Response.json(result.rows);
+    } finally {
+      await client.end();
+    }
+  },
+};
+```
+
+**⚠️ Workers connection limit: 6 per Worker invocation** - use connection pooling wisely.
+
+## PostgreSQL (postgres.js)
+
+```typescript
+import postgres from "postgres";  // postgres@^3.4.8
+
+const sql = postgres(env.HYPERDRIVE.connectionString, {
+  max: 5,             // Limit per Worker (Workers max: 6)
+  prepare: true,      // Enabled by default, required for caching
+  fetch_types: false, // Reduce latency if not using arrays
+});
+
+const users = await sql`SELECT * FROM users WHERE active = ${true} LIMIT 10`;
+```
+
+**⚠️ `prepare: true` is enabled by default and required for Hyperdrive caching.** Setting to `false` disables prepared statements + cache.
+
+## MySQL (mysql2)
+
+```typescript
+import { createConnection } from "mysql2/promise";  // mysql2@^3.16.2
+
+const conn = await createConnection({
+  host: env.HYPERDRIVE.host,
+  user: env.HYPERDRIVE.user,
+  password: env.HYPERDRIVE.password,
+  database: env.HYPERDRIVE.database,
+  port: env.HYPERDRIVE.port,
+  disableEval: true,  // ⚠️ REQUIRED for Workers
+});
+
+const [results] = await conn.query("SELECT * FROM users WHERE active = ? LIMIT ?", [true, 10]);
+ctx.waitUntil(conn.end());
+```
+
+**⚠️ MySQL support is less mature than PostgreSQL** - expect fewer optimizations and potential edge cases.
+
+## Query Caching
+
+**Cacheable:**
+```sql
+SELECT * FROM posts WHERE published = true;
+SELECT COUNT(*) FROM users;
+```
+
+**NOT cacheable:**
+```sql
+-- Writes
+INSERT/UPDATE/DELETE
+
+-- Volatile functions
+SELECT NOW();
+SELECT random();
+SELECT LASTVAL();  -- PostgreSQL
+SELECT UUID();     -- MySQL
+```
+
+**Cache config:**
+- Default: `max_age=60s`, `swr=15s`
+- Max `max_age`: 3600s
+- Disable: `--caching-disabled=true`
+
+**Multiple configs pattern:**
+```typescript
+// Reads: cached
+const sqlCached = postgres(env.HYPERDRIVE_CACHED.connectionString);
+const posts = await sqlCached`SELECT * FROM posts ORDER BY views DESC LIMIT 10`;
+
+// Writes/time-sensitive: no cache
+const sqlNoCache = postgres(env.HYPERDRIVE_NO_CACHE.connectionString);
+const orders = await sqlNoCache`SELECT * FROM orders WHERE created_at > NOW() - INTERVAL 5 MINUTE`;
+```
+
+## ORMs
+
+**Drizzle:**
+```typescript
+import { drizzle } from "drizzle-orm/postgres-js";  // drizzle-orm@^0.45.1
+import postgres from "postgres";
+
+const client = postgres(env.HYPERDRIVE.connectionString, {max: 5, prepare: true});
+const db = drizzle(client);
+const users = await db.select().from(users).where(eq(users.active, true)).limit(10);
+```
+
+**Kysely:**
+```typescript
+import { Kysely, PostgresDialect } from "kysely";  // kysely@^0.27+
+import postgres from "postgres";
+
+const db = new Kysely({
+  dialect: new PostgresDialect({
+    postgres: postgres(env.HYPERDRIVE.connectionString, {max: 5, prepare: true}),
+  }),
+});
+const users = await db.selectFrom("users").selectAll().where("active", "=", true).execute();
+```
+
+See [patterns.md](./patterns.md) for use cases, [gotchas.md](./gotchas.md) for limits.

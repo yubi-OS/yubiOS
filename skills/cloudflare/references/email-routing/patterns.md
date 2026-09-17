@@ -1,1 +1,229 @@
-IyBDb21tb24gUGF0dGVybnMKCiMjIDEuIEFsbG93bGlzdC9CbG9ja2xpc3QKCmBgYHR5cGVzY3JpcHQKLy8gQWxsb3dsaXN0CmNvbnN0IGFsbG93ZWQgPSBbInVzZXJAZXhhbXBsZS5jb20iLCAidHJ1c3RlZEBjb3JwLmNvbSJdOwppZiAoIWFsbG93ZWQuaW5jbHVkZXMobWVzc2FnZS5mcm9tKSkgewogIG1lc3NhZ2Uuc2V0UmVqZWN0KCJOb3QgYWxsb3dlZCIpOwogIHJldHVybjsKfQphd2FpdCBtZXNzYWdlLmZvcndhcmQoImluYm94QGNvcnAuY29tIik7CmBgYAoKIyMgMi4gUGFyc2UgRW1haWwgQm9keQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgUG9zdGFsTWltZSBmcm9tICdwb3N0YWwtbWltZSc7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZW1haWwobWVzc2FnZSwgZW52LCBjdHgpIHsKICAgIC8vIENSSVRJQ0FMOiBDb25zdW1lIHN0cmVhbSBpbW1lZGlhdGVseQogICAgY29uc3QgcmF3ID0gYXdhaXQgbWVzc2FnZS5yYXcuYXJyYXlCdWZmZXIoKTsKICAgIAogICAgY29uc3QgcGFyc2VyID0gbmV3IFBvc3RhbE1pbWUoKTsKICAgIGNvbnN0IGVtYWlsID0gYXdhaXQgcGFyc2VyLnBhcnNlKHJhdyk7CiAgICAKICAgIGNvbnNvbGUubG9nKHsKICAgICAgc3ViamVjdDogZW1haWwuc3ViamVjdCwKICAgICAgdGV4dDogZW1haWwudGV4dCwKICAgICAgaHRtbDogZW1haWwuaHRtbCwKICAgICAgZnJvbTogZW1haWwuZnJvbS5hZGRyZXNzLAogICAgICBhdHRhY2htZW50czogZW1haWwuYXR0YWNobWVudHMubGVuZ3RoCiAgICB9KTsKICAgIAogICAgYXdhaXQgbWVzc2FnZS5mb3J3YXJkKCJpbmJveEBjb3JwLmNvbSIpOwogIH0KfSBzYXRpc2ZpZXMgRXhwb3J0ZWRIYW5kbGVyOwpgYGAKCiMjIDMuIFNwYW0gRmlsdGVyCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHNjb3JlID0gcGFyc2VGbG9hdChtZXNzYWdlLmhlYWRlcnMuZ2V0KCJ4LWNmLXNwYW1oLXNjb3JlIikgfHwgIjAiKTsKaWYgKHNjb3JlID4gNSkgewogIG1lc3NhZ2Uuc2V0UmVqZWN0KCJTcGFtIGRldGVjdGVkIik7CiAgcmV0dXJuOwp9CmF3YWl0IG1lc3NhZ2UuZm9yd2FyZCgiaW5ib3hAY29ycC5jb20iKTsKYGBgCgojIyA0LiBBcmNoaXZlIHRvIFIyCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgeyBSMjogUjJCdWNrZXQ7IH0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBlbWFpbChtZXNzYWdlLCBlbnYsIGN0eCkgewogICAgY29uc3QgcmF3ID0gYXdhaXQgbWVzc2FnZS5yYXcuYXJyYXlCdWZmZXIoKTsKICAgIAogICAgY29uc3Qga2V5ID0gYCR7bmV3IERhdGUoKS50b0lTT1N0cmluZygpfS0ke21lc3NhZ2UuZnJvbX0uZW1sYDsKICAgIGF3YWl0IGVudi5SMi5wdXQoa2V5LCByYXcsIHsgCiAgICAgIGh0dHBNZXRhZGF0YTogeyBjb250ZW50VHlwZTogIm1lc3NhZ2UvcmZjODIyIiB9CiAgICB9KTsKICAgIAogICAgYXdhaXQgbWVzc2FnZS5mb3J3YXJkKCJpbmJveEBjb3JwLmNvbSIpOwogIH0KfSBzYXRpc2ZpZXMgRXhwb3J0ZWRIYW5kbGVyPEVudj47CmBgYAoKIyMgNS4gU3RvcmUgTWV0YWRhdGEgaW4gS1YKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IFBvc3RhbE1pbWUgZnJvbSAncG9zdGFsLW1pbWUnOwoKaW50ZXJmYWNlIEVudiB7IEtWOiBLVk5hbWVzcGFjZTsgfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGVtYWlsKG1lc3NhZ2UsIGVudiwgY3R4KSB7CiAgICBjb25zdCByYXcgPSBhd2FpdCBtZXNzYWdlLnJhdy5hcnJheUJ1ZmZlcigpOwogICAgY29uc3QgcGFyc2VyID0gbmV3IFBvc3RhbE1pbWUoKTsKICAgIGNvbnN0IGVtYWlsID0gYXdhaXQgcGFyc2VyLnBhcnNlKHJhdyk7CiAgICAKICAgIGNvbnN0IG1ldGFkYXRhID0gewogICAgICBmcm9tOiBlbWFpbC5mcm9tLmFkZHJlc3MsCiAgICAgIHN1YmplY3Q6IGVtYWlsLnN1YmplY3QsCiAgICAgIHRpbWVzdGFtcDogbmV3IERhdGUoKS50b0lTT1N0cmluZygpLAogICAgICBzaXplOiByYXcuYnl0ZUxlbmd0aAogICAgfTsKICAgIAogICAgYXdhaXQgZW52LktWLnB1dChgZW1haWw6JHtEYXRlLm5vdygpfWAsIEpTT04uc3RyaW5naWZ5KG1ldGFkYXRhKSk7CiAgICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoImluYm94QGNvcnAuY29tIik7CiAgfQp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgojIyA2LiBTdWJqZWN0LUJhc2VkIFJvdXRpbmcKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGVtYWlsKG1lc3NhZ2UsIGVudiwgY3R4KSB7CiAgICBjb25zdCBzdWJqZWN0ID0gbWVzc2FnZS5oZWFkZXJzLmdldCgic3ViamVjdCIpPy50b0xvd2VyQ2FzZSgpIHx8ICIiOwogICAgCiAgICBpZiAoc3ViamVjdC5pbmNsdWRlcygiW3VyZ2VudF0iKSkgewogICAgICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoIm9uY2FsbEBjb3JwLmNvbSIpOwogICAgfSBlbHNlIGlmIChzdWJqZWN0LmluY2x1ZGVzKCJbYmlsbGluZ10iKSkgewogICAgICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoImJpbGxpbmdAY29ycC5jb20iKTsKICAgIH0gZWxzZSBpZiAoc3ViamVjdC5pbmNsdWRlcygiW3N1cHBvcnRdIikpIHsKICAgICAgYXdhaXQgbWVzc2FnZS5mb3J3YXJkKCJzdXBwb3J0QGNvcnAuY29tIik7CiAgICB9IGVsc2UgewogICAgICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoImdlbmVyYWxAY29ycC5jb20iKTsKICAgIH0KICB9Cn0gc2F0aXNmaWVzIEV4cG9ydGVkSGFuZGxlcjsKYGBgCgojIyA3LiBBdXRvLVJlcGx5CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIEVNQUlMOiBTZW5kRW1haWw7CiAgUkVQTElFRDogS1ZOYW1lc3BhY2U7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBlbWFpbChtZXNzYWdlLCBlbnYsIGN0eCkgewogICAgY29uc3QgbXNnSWQgPSBtZXNzYWdlLmhlYWRlcnMuZ2V0KCJtZXNzYWdlLWlkIik7CiAgICAKICAgIGlmIChtc2dJZCAmJiBhd2FpdCBlbnYuUkVQTElFRC5nZXQobXNnSWQpKSB7CiAgICAgIGF3YWl0IG1lc3NhZ2UuZm9yd2FyZCgiYXJjaGl2ZUBjb3JwLmNvbSIpOwogICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIGN0eC53YWl0VW50aWwoKGFzeW5jICgpID0+IHsKICAgICAgYXdhaXQgZW52LkVNQUlMLnNlbmQoewogICAgICAgIGZyb206ICJub3JlcGx5QHlvdXJkb21haW4uY29tIiwKICAgICAgICB0bzogbWVzc2FnZS5mcm9tLAogICAgICAgIHN1YmplY3Q6ICJSZTogIiArIChtZXNzYWdlLmhlYWRlcnMuZ2V0KCJzdWJqZWN0IikgfHwgIiIpLAogICAgICAgIHRleHQ6ICJUaGFuayB5b3UuIFdlJ2xsIHJlc3BvbmQgd2l0aGluIDI0aC4iCiAgICAgIH0pOwogICAgICBpZiAobXNnSWQpIGF3YWl0IGVudi5SRVBMSUVELnB1dChtc2dJZCwgIjEiLCB7IGV4cGlyYXRpb25UdGw6IDYwNDgwMCB9KTsKICAgIH0pKCkpOwogICAgCiAgICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoInN1cHBvcnRAY29ycC5jb20iKTsKICB9Cn0gc2F0aXNmaWVzIEV4cG9ydGVkSGFuZGxlcjxFbnY+OwpgYGAKCiMjIDguIEV4dHJhY3QgQXR0YWNobWVudHMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IFBvc3RhbE1pbWUgZnJvbSAncG9zdGFsLW1pbWUnOwoKaW50ZXJmYWNlIEVudiB7IEFUVEFDSE1FTlRTOiBSMkJ1Y2tldDsgfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGVtYWlsKG1lc3NhZ2UsIGVudiwgY3R4KSB7CiAgICBjb25zdCBwYXJzZXIgPSBuZXcgUG9zdGFsTWltZSgpOwogICAgY29uc3QgZW1haWwgPSBhd2FpdCBwYXJzZXIucGFyc2UoYXdhaXQgbWVzc2FnZS5yYXcuYXJyYXlCdWZmZXIoKSk7CiAgICAKICAgIGZvciAoY29uc3QgYXR0IG9mIGVtYWlsLmF0dGFjaG1lbnRzKSB7CiAgICAgIGNvbnN0IGtleSA9IGAke0RhdGUubm93KCl9LSR7YXR0LmZpbGVuYW1lfWA7CiAgICAgIGF3YWl0IGVudi5BVFRBQ0hNRU5UUy5wdXQoa2V5LCBhdHQuY29udGVudCwgewogICAgICAgIGh0dHBNZXRhZGF0YTogeyBjb250ZW50VHlwZTogYXR0Lm1pbWVUeXBlIH0KICAgICAgfSk7CiAgICB9CiAgICAKICAgIGF3YWl0IG1lc3NhZ2UuZm9yd2FyZCgiaW5ib3hAY29ycC5jb20iKTsKICB9Cn0gc2F0aXNmaWVzIEV4cG9ydGVkSGFuZGxlcjxFbnY+OwpgYGAKCiMjIDkuIExvZyB0byBEMQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgUG9zdGFsTWltZSBmcm9tICdwb3N0YWwtbWltZSc7CgppbnRlcmZhY2UgRW52IHsgREI6IEQxRGF0YWJhc2U7IH0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBlbWFpbChtZXNzYWdlLCBlbnYsIGN0eCkgewogICAgY29uc3QgcGFyc2VyID0gbmV3IFBvc3RhbE1pbWUoKTsKICAgIGNvbnN0IGVtYWlsID0gYXdhaXQgcGFyc2VyLnBhcnNlKGF3YWl0IG1lc3NhZ2UucmF3LmFycmF5QnVmZmVyKCkpOwogICAgCiAgICBjdHgud2FpdFVudGlsKAogICAgICBlbnYuREIucHJlcGFyZSgiSU5TRVJUIElOVE8gbG9nICh0cywgZnJvbV9hZGRyLCBzdWJqKSBWQUxVRVMgKD8sID8sID8pIikKICAgICAgICAuYmluZChuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKCksIGVtYWlsLmZyb20uYWRkcmVzcywgZW1haWwuc3ViamVjdCB8fCAiIikKICAgICAgICAucnVuKCkKICAgICk7CiAgICAKICAgIGF3YWl0IG1lc3NhZ2UuZm9yd2FyZCgiaW5ib3hAY29ycC5jb20iKTsKICB9Cn0gc2F0aXNmaWVzIEV4cG9ydGVkSGFuZGxlcjxFbnY+OwpgYGAKCiMjIDEwLiBNdWx0aS1UZW5hbnQKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7IFRFTkFOVFM6IEtWTmFtZXNwYWNlOyB9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZW1haWwobWVzc2FnZSwgZW52LCBjdHgpIHsKICAgIGNvbnN0IHN1YmRvbWFpbiA9IG1lc3NhZ2UudG8uc3BsaXQoIkAiKVsxXS5zcGxpdCgiLiIpWzBdOwogICAgY29uc3QgY29uZmlnID0gYXdhaXQgZW52LlRFTkFOVFMuZ2V0KHN1YmRvbWFpbiwgImpzb24iKSBhcyB7IGZvcndhcmQ6IHN0cmluZyB9IHwgbnVsbDsKICAgIAogICAgaWYgKCFjb25maWcpIHsKICAgICAgbWVzc2FnZS5zZXRSZWplY3QoIlVua25vd24gdGVuYW50Iik7CiAgICAgIHJldHVybjsKICAgIH0KICAgIAogICAgYXdhaXQgbWVzc2FnZS5mb3J3YXJkKGNvbmZpZy5mb3J3YXJkKTsKICB9Cn0gc2F0aXNmaWVzIEV4cG9ydGVkSGFuZGxlcjxFbnY+OwpgYGAKCiMjIFN1bW1hcnkKCnwgUGF0dGVybiB8IFVzZSBDYXNlIHwgU3RvcmFnZSB8CnwtLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS18CnwgQWxsb3dsaXN0IHwgU2VjdXJpdHkgfCBOb25lIHwKfCBQYXJzZSB8IEJvZHkvYXR0YWNobWVudHMgfCBOb25lIHwKfCBTcGFtIEZpbHRlciB8IFJlZHVjZSBzcGFtIHwgTm9uZSB8CnwgUjIgQXJjaGl2ZSB8IEVtYWlsIHN0b3JhZ2UgfCBSMiB8CnwgS1YgTWV0YSB8IEFuYWx5dGljcyB8IEtWIHwKfCBTdWJqZWN0IFJvdXRlIHwgRGVwdCByb3V0aW5nIHwgTm9uZSB8CnwgQXV0by1SZXBseSB8IFN1cHBvcnQgfCBLViB8CnwgQXR0YWNobWVudHMgfCBEb2MgbWdtdCB8IFIyIHwKfCBEMSBMb2cgfCBBdWRpdCB0cmFpbCB8IEQxIHwKfCBNdWx0aS1UZW5hbnQgfCBTYWFTIHwgS1YgfAo=
+# Common Patterns
+
+## 1. Allowlist/Blocklist
+
+```typescript
+// Allowlist
+const allowed = ["user@example.com", "trusted@corp.com"];
+if (!allowed.includes(message.from)) {
+  message.setReject("Not allowed");
+  return;
+}
+await message.forward("inbox@corp.com");
+```
+
+## 2. Parse Email Body
+
+```typescript
+import PostalMime from 'postal-mime';
+
+export default {
+  async email(message, env, ctx) {
+    // CRITICAL: Consume stream immediately
+    const raw = await message.raw.arrayBuffer();
+    
+    const parser = new PostalMime();
+    const email = await parser.parse(raw);
+    
+    console.log({
+      subject: email.subject,
+      text: email.text,
+      html: email.html,
+      from: email.from.address,
+      attachments: email.attachments.length
+    });
+    
+    await message.forward("inbox@corp.com");
+  }
+} satisfies ExportedHandler;
+```
+
+## 3. Spam Filter
+
+```typescript
+const score = parseFloat(message.headers.get("x-cf-spamh-score") || "0");
+if (score > 5) {
+  message.setReject("Spam detected");
+  return;
+}
+await message.forward("inbox@corp.com");
+```
+
+## 4. Archive to R2
+
+```typescript
+interface Env { R2: R2Bucket; }
+
+export default {
+  async email(message, env, ctx) {
+    const raw = await message.raw.arrayBuffer();
+    
+    const key = `${new Date().toISOString()}-${message.from}.eml`;
+    await env.R2.put(key, raw, { 
+      httpMetadata: { contentType: "message/rfc822" }
+    });
+    
+    await message.forward("inbox@corp.com");
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## 5. Store Metadata in KV
+
+```typescript
+import PostalMime from 'postal-mime';
+
+interface Env { KV: KVNamespace; }
+
+export default {
+  async email(message, env, ctx) {
+    const raw = await message.raw.arrayBuffer();
+    const parser = new PostalMime();
+    const email = await parser.parse(raw);
+    
+    const metadata = {
+      from: email.from.address,
+      subject: email.subject,
+      timestamp: new Date().toISOString(),
+      size: raw.byteLength
+    };
+    
+    await env.KV.put(`email:${Date.now()}`, JSON.stringify(metadata));
+    await message.forward("inbox@corp.com");
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## 6. Subject-Based Routing
+
+```typescript
+export default {
+  async email(message, env, ctx) {
+    const subject = message.headers.get("subject")?.toLowerCase() || "";
+    
+    if (subject.includes("[urgent]")) {
+      await message.forward("oncall@corp.com");
+    } else if (subject.includes("[billing]")) {
+      await message.forward("billing@corp.com");
+    } else if (subject.includes("[support]")) {
+      await message.forward("support@corp.com");
+    } else {
+      await message.forward("general@corp.com");
+    }
+  }
+} satisfies ExportedHandler;
+```
+
+## 7. Auto-Reply
+
+```typescript
+interface Env {
+  EMAIL: SendEmail;
+  REPLIED: KVNamespace;
+}
+
+export default {
+  async email(message, env, ctx) {
+    const msgId = message.headers.get("message-id");
+    
+    if (msgId && await env.REPLIED.get(msgId)) {
+      await message.forward("archive@corp.com");
+      return;
+    }
+    
+    ctx.waitUntil((async () => {
+      await env.EMAIL.send({
+        from: "noreply@yourdomain.com",
+        to: message.from,
+        subject: "Re: " + (message.headers.get("subject") || ""),
+        text: "Thank you. We'll respond within 24h."
+      });
+      if (msgId) await env.REPLIED.put(msgId, "1", { expirationTtl: 604800 });
+    })());
+    
+    await message.forward("support@corp.com");
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## 8. Extract Attachments
+
+```typescript
+import PostalMime from 'postal-mime';
+
+interface Env { ATTACHMENTS: R2Bucket; }
+
+export default {
+  async email(message, env, ctx) {
+    const parser = new PostalMime();
+    const email = await parser.parse(await message.raw.arrayBuffer());
+    
+    for (const att of email.attachments) {
+      const key = `${Date.now()}-${att.filename}`;
+      await env.ATTACHMENTS.put(key, att.content, {
+        httpMetadata: { contentType: att.mimeType }
+      });
+    }
+    
+    await message.forward("inbox@corp.com");
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## 9. Log to D1
+
+```typescript
+import PostalMime from 'postal-mime';
+
+interface Env { DB: D1Database; }
+
+export default {
+  async email(message, env, ctx) {
+    const parser = new PostalMime();
+    const email = await parser.parse(await message.raw.arrayBuffer());
+    
+    ctx.waitUntil(
+      env.DB.prepare("INSERT INTO log (ts, from_addr, subj) VALUES (?, ?, ?)")
+        .bind(new Date().toISOString(), email.from.address, email.subject || "")
+        .run()
+    );
+    
+    await message.forward("inbox@corp.com");
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## 10. Multi-Tenant
+
+```typescript
+interface Env { TENANTS: KVNamespace; }
+
+export default {
+  async email(message, env, ctx) {
+    const subdomain = message.to.split("@")[1].split(".")[0];
+    const config = await env.TENANTS.get(subdomain, "json") as { forward: string } | null;
+    
+    if (!config) {
+      message.setReject("Unknown tenant");
+      return;
+    }
+    
+    await message.forward(config.forward);
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## Summary
+
+| Pattern | Use Case | Storage |
+|---------|----------|---------|
+| Allowlist | Security | None |
+| Parse | Body/attachments | None |
+| Spam Filter | Reduce spam | None |
+| R2 Archive | Email storage | R2 |
+| KV Meta | Analytics | KV |
+| Subject Route | Dept routing | None |
+| Auto-Reply | Support | KV |
+| Attachments | Doc mgmt | R2 |
+| D1 Log | Audit trail | D1 |
+| Multi-Tenant | SaaS | KV |

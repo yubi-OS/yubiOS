@@ -1,1 +1,115 @@
-IyMgQ29tbW9uIEVycm9ycwoKIyMjICJMb2dzIG5vdCBhcHBlYXJpbmciCgoqKkNhdXNlOioqIE9ic2VydmFiaWxpdHkgZGlzYWJsZWQsIFdvcmtlciBub3QgcmVkZXBsb3llZCwgbm8gdHJhZmZpYywgbG93IHNhbXBsaW5nIHJhdGUsIG9yIGxvZyBzaXplIGV4Y2VlZHMgMjU2IEtCCioqU29sdXRpb246KiogCmBgYGJhc2gKIyBWZXJpZnkgY29uZmlnCmNhdCB3cmFuZ2xlci5qc29uYyB8IGpxICcub2JzZXJ2YWJpbGl0eScKCiMgQ2hlY2sgZGVwbG95bWVudAp3cmFuZ2xlciBkZXBsb3ltZW50cyBsaXN0IDxXT1JLRVJfTkFNRT4KCiMgVGVzdCB3aXRoIGN1cmwKY3VybCBodHRwczovL3lvdXItd29ya2VyLndvcmtlcnMuZGV2CmBgYApFbnN1cmUgYG9ic2VydmFiaWxpdHkuZW5hYmxlZCA9IHRydWVgLCByZWRlcGxveSBXb3JrZXIsIGNoZWNrIGBoZWFkX3NhbXBsaW5nX3JhdGVgLCB2ZXJpZnkgdHJhZmZpYwoKIyMjICJUcmFjZXMgbm90IGJlaW5nIGNhcHR1cmVkIgoKKipDYXVzZToqKiBUcmFjZXMgbm90IGVuYWJsZWQsIGluY29ycmVjdCBzYW1wbGluZyByYXRlLCBXb3JrZXIgbm90IHJlZGVwbG95ZWQsIG9yIGRlc3RpbmF0aW9uIHVuYXZhaWxhYmxlCioqU29sdXRpb246KioKYGBganNvbmMKLy8gVGVtcG9yYXJpbHkgc2V0IHRvIDEwMCUgc2FtcGxpbmcgZm9yIGRlYnVnZ2luZwp7CiAgIm9ic2VydmFiaWxpdHkiOiB7CiAgICAiZW5hYmxlZCI6IHRydWUsCiAgICAiaGVhZF9zYW1wbGluZ19yYXRlIjogMS4wLAogICAgInRyYWNlcyI6IHsKICAgICAgImVuYWJsZWQiOiB0cnVlCiAgICB9CiAgfQp9CmBgYApFbnN1cmUgYG9ic2VydmFiaWxpdHkudHJhY2VzLmVuYWJsZWQgPSB0cnVlYCwgc2V0IGBoZWFkX3NhbXBsaW5nX3JhdGVgIHRvIDEuMCBmb3IgdGVzdGluZywgcmVkZXBsb3ksIGNoZWNrIGRlc3RpbmF0aW9uIHN0YXR1cwoKIyMgTGltaXRzCgp8IFJlc291cmNlL0xpbWl0IHwgVmFsdWUgfCBOb3RlcyB8CnwtLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBNYXggbG9nIHNpemUgfCAyNTYgS0IgfCBMb2dzIGV4Y2VlZGluZyB0aGlzIGFyZSB0cnVuY2F0ZWQgfAp8IERlZmF1bHQgc2FtcGxpbmcgcmF0ZSB8IDEuMCAoMTAwJSkgfCBSZWR1Y2UgZm9yIGhpZ2gtdHJhZmZpYyBXb3JrZXJzIHwKfCBNYXggZGVzdGluYXRpb25zIHwgVmFyaWVzIGJ5IHBsYW4gfCBDaGVjayBkYXNoYm9hcmQgfAp8IFRyYWNlIGNvbnRleHQgcHJvcGFnYXRpb24gfCAxMDAgc3BhbnMgbWF4IHwgRGVlcCBjYWxsIGNoYWlucyBtYXkgbG9zZSBzcGFucyB8CnwgQW5hbHl0aWNzIEVuZ2luZSB3cml0ZSByYXRlIHwgMjUgd3JpdGVzL3JlcXVlc3QgfCBFeGNlc3Mgd3JpdGVzIGRyb3BwZWQgc2lsZW50bHkgfAoKIyMgUGVyZm9ybWFuY2UgR290Y2hhcwoKIyMjIFNwZWN0cmUgTWl0aWdhdGlvbiBUaW1pbmcKCioqUHJvYmxlbToqKiBgRGF0ZS5ub3coKWAgYW5kIGBwZXJmb3JtYW5jZS5ub3coKWAgaGF2ZSByZWR1Y2VkIHByZWNpc2lvbiAoY29hcnNlbmVkIHRvIDEwMM68cykKKipDYXVzZToqKiBTcGVjdHJlIHZ1bG5lcmFiaWxpdHkgbWl0aWdhdGlvbiBpbiBWOAoqKlNvbHV0aW9uOioqIEFjY2VwdCByZWR1Y2VkIHByZWNpc2lvbiBvciB1c2UgV29ya2VycyBUcmFjZXMgZm9yIGFjY3VyYXRlIHRpbWluZwpgYGB0eXBlc2NyaXB0Ci8vIERhdGUubm93KCkgaXMgY29hcnNlbmVkIC0gdHJhY2Ugc3BhbnMgYXJlIGFjY3VyYXRlCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgLy8gRm9yIHVzZXItZmFjaW5nIHRpbWluZywgRGF0ZS5ub3coKSBpcyBmaW5lCiAgICBjb25zdCBzdGFydCA9IERhdGUubm93KCk7CiAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IHByb2Nlc3NSZXF1ZXN0KHJlcXVlc3QpOwogICAgY29uc3QgZHVyYXRpb24gPSBEYXRlLm5vdygpIC0gc3RhcnQ7CiAgICAKICAgIC8vIEZvciBkZXRhaWxlZCBwZXJmb3JtYW5jZSBhbmFseXNpcywgdXNlIFdvcmtlcnMgVHJhY2VzIGluc3RlYWQKICAgIHJldHVybiByZXNwb25zZTsKICB9Cn0KYGBgCgojIyMgQW5hbHl0aWNzIEVuZ2luZSBfc2FtcGxlX2ludGVydmFsIEFnZ3JlZ2F0aW9uCgoqKlByb2JsZW06KiogUXVlcmllcyByZXR1cm4gaW5jb3JyZWN0IHRvdGFscyB3aGVuIG5vdCBtdWx0aXBseWluZyBieSBgX3NhbXBsZV9pbnRlcnZhbGAKKipDYXVzZToqKiBBbmFseXRpY3MgRW5naW5lIHN0b3JlcyBzYW1wbGVkIGRhdGEgcG9pbnRzLCBlYWNoIHJlcHJlc2VudGluZyBtdWx0aXBsZSBldmVudHMKKipTb2x1dGlvbjoqKiBBbHdheXMgbXVsdGlwbHkgY291bnRzL3N1bXMgYnkgYF9zYW1wbGVfaW50ZXJ2YWxgIGluIGFnZ3JlZ2F0aW9ucwpgYGBzcWwKLS0gV1JPTkc6IFVuZGVyY291bnRzIGFjdHVhbCBldmVudHMKU0VMRUNUIGJsb2IxIEFTIGN1c3RvbWVyX2lkLCBDT1VOVCgqKSBBUyB0b3RhbF9jYWxscwpGUk9NIGFwaV91c2FnZSBHUk9VUCBCWSBjdXN0b21lcl9pZDsKCi0tIENPUlJFQ1Q6IEFjY291bnRzIGZvciBzYW1wbGluZwpTRUxFQ1QgYmxvYjEgQVMgY3VzdG9tZXJfaWQsIFNVTShfc2FtcGxlX2ludGVydmFsKSBBUyB0b3RhbF9jYWxscwpGUk9NIGFwaV91c2FnZSBHUk9VUCBCWSBjdXN0b21lcl9pZDsKYGBgCgojIyMgVHJhY2UgQ29udGV4dCBQcm9wYWdhdGlvbiBMaW1pdHMKCioqUHJvYmxlbToqKiBEZWVwIGNhbGwgY2hhaW5zIGxvc2UgdHJhY2UgY29udGV4dCBhZnRlciAxMDAgc3BhbnMKKipDYXVzZToqKiBDbG91ZGZsYXJlIGxpbWl0cyB0cmFjZSBkZXB0aCB0byBwcmV2ZW50IHBlcmZvcm1hbmNlIGltcGFjdAoqKlNvbHV0aW9uOioqIERlc2lnbiBmb3IgZmxhdHRlciBhcmNoaXRlY3R1cmVzIG9yIHVzZSBjdXN0b20gY29ycmVsYXRpb24gSURzIGZvciBkZWVwIGNoYWlucwpgYGB0eXBlc2NyaXB0Ci8vIEZvciBkZWVwIGNhbGwgY2hhaW5zLCBhZGQgY3VzdG9tIGNvcnJlbGF0aW9uIElECmNvbnN0IGNvcnJlbGF0aW9uSWQgPSBjcnlwdG8ucmFuZG9tVVVJRCgpOwpjb25zb2xlLmxvZyh7IGNvcnJlbGF0aW9uSWQsIGV2ZW50OiAncmVxdWVzdF9zdGFydCcgfSk7CgovLyBQYXNzIGNvcnJlbGF0aW9uSWQgdGhyb3VnaCBoZWFkZXJzIHRvIGRvd25zdHJlYW0gc2VydmljZXMKYXdhaXQgZmV0Y2goJ2h0dHBzOi8vYXBpLmV4YW1wbGUuY29tJywgewogIGhlYWRlcnM6IHsgJ1gtQ29ycmVsYXRpb24tSUQnOiBjb3JyZWxhdGlvbklkIH0KfSk7CmBgYAoKIyMgUHJpY2luZyAoMjAyNikKCiMjIyBXb3JrZXJzIFRyYWNlcwotICoqR0EgUHJpY2luZyAoc3RhcnRzIE1hcmNoIDEsIDIwMjYpOioqCiAgLSAkMC4xMCBwZXIgMU0gdHJhY2Ugc3BhbnMgY2FwdHVyZWQKICAtIFJldGVudGlvbjogMTQgZGF5cyBpbmNsdWRlZAotICoqRnJlZSB0aWVyOioqIDEwTSB0cmFjZSBzcGFucy9tb250aAotICoqTm90ZToqKiBCZXRhIHVzYWdlIChiZWZvcmUgTWFyY2ggMSwgMjAyNikgaXMgZnJlZQoKIyMjIFdvcmtlcnMgTG9ncwotICoqSW5jbHVkZWQ6KiogRnJlZSBmb3IgYWxsIFdvcmtlcnMKLSAqKkxvZ3B1c2g6KiogUmVxdWlyZXMgQnVzaW5lc3MvRW50ZXJwcmlzZSBwbGFuCgojIyMgQW5hbHl0aWNzIEVuZ2luZQotICoqSW5jbHVkZWQ6KiogMTBNIHdyaXRlcy9tb250aCBvbiBQYWlkIFdvcmtlcnMgcGxhbgotICoqQWRkaXRpb25hbDoqKiAkMC4yNSBwZXIgMU0gd3JpdGVzIGJleW9uZCBpbmNsdWRlZCBxdW90YQo=
+## Common Errors
+
+### "Logs not appearing"
+
+**Cause:** Observability disabled, Worker not redeployed, no traffic, low sampling rate, or log size exceeds 256 KB
+**Solution:** 
+```bash
+# Verify config
+cat wrangler.jsonc | jq '.observability'
+
+# Check deployment
+wrangler deployments list <WORKER_NAME>
+
+# Test with curl
+curl https://your-worker.workers.dev
+```
+Ensure `observability.enabled = true`, redeploy Worker, check `head_sampling_rate`, verify traffic
+
+### "Traces not being captured"
+
+**Cause:** Traces not enabled, incorrect sampling rate, Worker not redeployed, or destination unavailable
+**Solution:**
+```jsonc
+// Temporarily set to 100% sampling for debugging
+{
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1.0,
+    "traces": {
+      "enabled": true
+    }
+  }
+}
+```
+Ensure `observability.traces.enabled = true`, set `head_sampling_rate` to 1.0 for testing, redeploy, check destination status
+
+## Limits
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| Max log size | 256 KB | Logs exceeding this are truncated |
+| Default sampling rate | 1.0 (100%) | Reduce for high-traffic Workers |
+| Max destinations | Varies by plan | Check dashboard |
+| Trace context propagation | 100 spans max | Deep call chains may lose spans |
+| Analytics Engine write rate | 25 writes/request | Excess writes dropped silently |
+
+## Performance Gotchas
+
+### Spectre Mitigation Timing
+
+**Problem:** `Date.now()` and `performance.now()` have reduced precision (coarsened to 100μs)
+**Cause:** Spectre vulnerability mitigation in V8
+**Solution:** Accept reduced precision or use Workers Traces for accurate timing
+```typescript
+// Date.now() is coarsened - trace spans are accurate
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // For user-facing timing, Date.now() is fine
+    const start = Date.now();
+    const response = await processRequest(request);
+    const duration = Date.now() - start;
+    
+    // For detailed performance analysis, use Workers Traces instead
+    return response;
+  }
+}
+```
+
+### Analytics Engine _sample_interval Aggregation
+
+**Problem:** Queries return incorrect totals when not multiplying by `_sample_interval`
+**Cause:** Analytics Engine stores sampled data points, each representing multiple events
+**Solution:** Always multiply counts/sums by `_sample_interval` in aggregations
+```sql
+-- WRONG: Undercounts actual events
+SELECT blob1 AS customer_id, COUNT(*) AS total_calls
+FROM api_usage GROUP BY customer_id;
+
+-- CORRECT: Accounts for sampling
+SELECT blob1 AS customer_id, SUM(_sample_interval) AS total_calls
+FROM api_usage GROUP BY customer_id;
+```
+
+### Trace Context Propagation Limits
+
+**Problem:** Deep call chains lose trace context after 100 spans
+**Cause:** Cloudflare limits trace depth to prevent performance impact
+**Solution:** Design for flatter architectures or use custom correlation IDs for deep chains
+```typescript
+// For deep call chains, add custom correlation ID
+const correlationId = crypto.randomUUID();
+console.log({ correlationId, event: 'request_start' });
+
+// Pass correlationId through headers to downstream services
+await fetch('https://api.example.com', {
+  headers: { 'X-Correlation-ID': correlationId }
+});
+```
+
+## Pricing (2026)
+
+### Workers Traces
+- **GA Pricing (starts March 1, 2026):**
+  - $0.10 per 1M trace spans captured
+  - Retention: 14 days included
+- **Free tier:** 10M trace spans/month
+- **Note:** Beta usage (before March 1, 2026) is free
+
+### Workers Logs
+- **Included:** Free for all Workers
+- **Logpush:** Requires Business/Enterprise plan
+
+### Analytics Engine
+- **Included:** 10M writes/month on Paid Workers plan
+- **Additional:** $0.25 per 1M writes beyond included quota

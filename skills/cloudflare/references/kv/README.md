@@ -1,1 +1,89 @@
-IyBDbG91ZGZsYXJlIFdvcmtlcnMgS1YKCkdsb2JhbGx5LWRpc3RyaWJ1dGVkLCBldmVudHVhbGx5LWNvbnNpc3RlbnQga2V5LXZhbHVlIHN0b3JlIG9wdGltaXplZCBmb3IgaGlnaCByZWFkIHZvbHVtZSBhbmQgbG93IGxhdGVuY3kuCgojIyBPdmVydmlldwoKS1YgcHJvdmlkZXM6Ci0gRXZlbnR1YWwgY29uc2lzdGVuY3kgKDYwcyBnbG9iYWwgcHJvcGFnYXRpb24pCi0gUmVhZC1vcHRpbWl6ZWQgcGVyZm9ybWFuY2UKLSAyNSBNaUIgdmFsdWUgbGltaXQgcGVyIGtleQotIEF1dG8tcmVwbGljYXRpb24gdG8gQ2xvdWRmbGFyZSBlZGdlCi0gTWV0YWRhdGEgc3VwcG9ydCAoMTAyNCBieXRlcykKCioqVXNlIGNhc2VzOioqIENvbmZpZyBzdG9yYWdlLCB1c2VyIHNlc3Npb25zLCBmZWF0dXJlIGZsYWdzLCBjYWNoaW5nLCBBL0IgdGVzdGluZwoKIyMgV2hlbiB0byBVc2UgS1YKCnwgTmVlZCB8IFJlY29tbWVuZGF0aW9uIHwKfC0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tfAp8IFN0cm9uZyBjb25zaXN0ZW5jeSB8IOKGkiBbRHVyYWJsZSBPYmplY3RzXSguLi9kdXJhYmxlLW9iamVjdHMvKSB8CnwgU1FMIHF1ZXJpZXMgfCDihpIgW0QxXSguLi9kMS8pIHwKfCBPYmplY3Qgc3RvcmFnZSAoZmlsZXMpIHwg4oaSIFtSMl0oLi4vcjIvKSB8CnwgSGlnaCByZWFkLCBsb3cgd3JpdGUgdm9sdW1lIHwg4oaSIEtWIOKchSB8CnwgU3ViLTEwbXMgZ2xvYmFsIHJlYWRzIHwg4oaSIEtWIOKchSB8CgoqKlF1aWNrIGNvbXBhcmlzb246KioKCnwgRmVhdHVyZSB8IEtWIHwgRDEgfCBEdXJhYmxlIE9iamVjdHMgfAp8LS0tLS0tLS0tfC0tLS18LS0tLXwtLS0tLS0tLS0tLS0tLS0tLXwKfCBDb25zaXN0ZW5jeSB8IEV2ZW50dWFsIHwgU3Ryb25nIHwgU3Ryb25nIHwKfCBSZWFkIGxhdGVuY3kgfCA8MTBtcyB8IH41MG1zIHwgPDFtcyB8CnwgV3JpdGUgbGltaXQgfCAxL3MgcGVyIGtleSB8IFVubGltaXRlZCB8IFVubGltaXRlZCB8CnwgVXNlIGNhc2UgfCBDb25maWcsIGNhY2hlIHwgUmVsYXRpb25hbCBkYXRhIHwgQ29vcmRpbmF0aW9uIHwKCiMjIFF1aWNrIFN0YXJ0CgpgYGBiYXNoCndyYW5nbGVyIGt2IG5hbWVzcGFjZSBjcmVhdGUgTVlfTkFNRVNQQUNFCiMgQWRkIGJpbmRpbmcgdG8gd3JhbmdsZXIuanNvbmMKYGBgCgpgYGB0eXBlc2NyaXB0Ci8vIFdyaXRlCmF3YWl0IGVudi5NWV9LVi5wdXQoImtleSIsICJ2YWx1ZSIsIHsgZXhwaXJhdGlvblR0bDogMzAwIH0pOwoKLy8gUmVhZApjb25zdCB2YWx1ZSA9IGF3YWl0IGVudi5NWV9LVi5nZXQoImtleSIpOwpjb25zdCBqc29uID0gYXdhaXQgZW52Lk1ZX0tWLmdldDxDb25maWc+KCJjb25maWciLCAianNvbiIpOwpgYGAKCiMjIENvcmUgT3BlcmF0aW9ucwoKfCBNZXRob2QgfCBQdXJwb3NlIHwgUmV0dXJucyB8CnwtLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS0tfAp8IGBnZXQoa2V5LCB0eXBlPylgIHwgU2luZ2xlIHJlYWQgfCBgc3RyaW5nIFx8IG51bGxgIHwKfCBgZ2V0KGtleXMsIHR5cGU/KWAgfCBCdWxrIHJlYWQgKOKJpDEwMCkgfCBgTWFwPHN0cmluZywgVCBcfCBudWxsPmAgfAp8IGBwdXQoa2V5LCB2YWx1ZSwgb3B0aW9ucz8pYCB8IFdyaXRlIHwgYFByb21pc2U8dm9pZD5gIHwKfCBgZGVsZXRlKGtleSlgIHwgRGVsZXRlIHwgYFByb21pc2U8dm9pZD5gIHwKfCBgbGlzdChvcHRpb25zPylgIHwgTGlzdCBrZXlzIHwgYHsga2V5cywgbGlzdF9jb21wbGV0ZSwgY3Vyc29yPyB9YCB8CnwgYGdldFdpdGhNZXRhZGF0YShrZXkpYCB8IEdldCArIG1ldGFkYXRhIHwgYHsgdmFsdWUsIG1ldGFkYXRhIH1gIHwKCiMjIENvbnNpc3RlbmN5IE1vZGVsCgotICoqV3JpdGUgdmlzaWJpbGl0eToqKiBJbW1lZGlhdGUgaW4gc2FtZSBsb2NhdGlvbiwg4omkNjBzIGdsb2JhbGx5Ci0gKipSZWFkIHBhdGg6KiogRXZlbnR1YWxseSBjb25zaXN0ZW50Ci0gKipXcml0ZSByYXRlOioqIDEgd3JpdGUvc2Vjb25kIHBlciBrZXkgKDQyOSBvbiBleGNlZWQpCgojIyBSZWFkaW5nIE9yZGVyCgp8IFRhc2sgfCBGaWxlcyB0byBSZWFkIHwKfC0tLS0tLXwtLS0tLS0tLS0tLS0tLS18CnwgUXVpY2sgc3RhcnQgfCBSRUFETUUg4oaSIGNvbmZpZ3VyYXRpb24ubWQgfAp8IEltcGxlbWVudCBmZWF0dXJlIHwgUkVBRE1FIOKGkiBhcGkubWQg4oaSIHBhdHRlcm5zLm1kIHwKfCBEZWJ1ZyBpc3N1ZXMgfCBnb3RjaGFzLm1kIOKGkiBhcGkubWQgfAp8IEJhdGNoIG9wZXJhdGlvbnMgfCBhcGkubWQgKGJ1bGsgc2VjdGlvbikg4oaSIHBhdHRlcm5zLm1kIHwKfCBQZXJmb3JtYW5jZSB0dW5pbmcgfCBnb3RjaGFzLm1kIChwZXJmb3JtYW5jZSkg4oaSIHBhdHRlcm5zLm1kIChjYWNoaW5nKSB8CgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIHdyYW5nbGVyLmpzb25jIHNldHVwLCBuYW1lc3BhY2UgY3JlYXRpb24sIFR5cGVTY3JpcHQgdHlwZXMKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBLViBtZXRob2RzLCBidWxrIG9wZXJhdGlvbnMsIGNhY2hlVHRsLCBjb250ZW50IHR5cGVzCi0gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIENhY2hpbmcsIHNlc3Npb25zLCByYXRlIGxpbWl0aW5nLCBBL0IgdGVzdGluZwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gRXZlbnR1YWwgY29uc2lzdGVuY3ksIGNvbmN1cnJlbnQgd3JpdGVzLCB2YWx1ZSBsaW1pdHMKCiMjIFNlZSBBbHNvCgotIFt3b3JrZXJzXSguLi93b3JrZXJzLykgLSBXb3JrZXIgcnVudGltZSBmb3IgS1YgYWNjZXNzCi0gW2QxXSguLi9kMS8pIC0gVXNlIEQxIGZvciBzdHJvbmcgY29uc2lzdGVuY3kgbmVlZHMKLSBbZHVyYWJsZS1vYmplY3RzXSguLi9kdXJhYmxlLW9iamVjdHMvKSAtIFN0cm9uZ2x5IGNvbnNpc3RlbnQgYWx0ZXJuYXRpdmUK
+# Cloudflare Workers KV
+
+Globally-distributed, eventually-consistent key-value store optimized for high read volume and low latency.
+
+## Overview
+
+KV provides:
+- Eventual consistency (60s global propagation)
+- Read-optimized performance
+- 25 MiB value limit per key
+- Auto-replication to Cloudflare edge
+- Metadata support (1024 bytes)
+
+**Use cases:** Config storage, user sessions, feature flags, caching, A/B testing
+
+## When to Use KV
+
+| Need | Recommendation |
+|------|----------------|
+| Strong consistency | → [Durable Objects](../durable-objects/) |
+| SQL queries | → [D1](../d1/) |
+| Object storage (files) | → [R2](../r2/) |
+| High read, low write volume | → KV ✅ |
+| Sub-10ms global reads | → KV ✅ |
+
+**Quick comparison:**
+
+| Feature | KV | D1 | Durable Objects |
+|---------|----|----|-----------------|
+| Consistency | Eventual | Strong | Strong |
+| Read latency | <10ms | ~50ms | <1ms |
+| Write limit | 1/s per key | Unlimited | Unlimited |
+| Use case | Config, cache | Relational data | Coordination |
+
+## Quick Start
+
+```bash
+wrangler kv namespace create MY_NAMESPACE
+# Add binding to wrangler.jsonc
+```
+
+```typescript
+// Write
+await env.MY_KV.put("key", "value", { expirationTtl: 300 });
+
+// Read
+const value = await env.MY_KV.get("key");
+const json = await env.MY_KV.get<Config>("config", "json");
+```
+
+## Core Operations
+
+| Method | Purpose | Returns |
+|--------|---------|---------|
+| `get(key, type?)` | Single read | `string \| null` |
+| `get(keys, type?)` | Bulk read (≤100) | `Map<string, T \| null>` |
+| `put(key, value, options?)` | Write | `Promise<void>` |
+| `delete(key)` | Delete | `Promise<void>` |
+| `list(options?)` | List keys | `{ keys, list_complete, cursor? }` |
+| `getWithMetadata(key)` | Get + metadata | `{ value, metadata }` |
+
+## Consistency Model
+
+- **Write visibility:** Immediate in same location, ≤60s globally
+- **Read path:** Eventually consistent
+- **Write rate:** 1 write/second per key (429 on exceed)
+
+## Reading Order
+
+| Task | Files to Read |
+|------|---------------|
+| Quick start | README → configuration.md |
+| Implement feature | README → api.md → patterns.md |
+| Debug issues | gotchas.md → api.md |
+| Batch operations | api.md (bulk section) → patterns.md |
+| Performance tuning | gotchas.md (performance) → patterns.md (caching) |
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - wrangler.jsonc setup, namespace creation, TypeScript types
+- [api.md](./api.md) - KV methods, bulk operations, cacheTtl, content types
+- [patterns.md](./patterns.md) - Caching, sessions, rate limiting, A/B testing
+- [gotchas.md](./gotchas.md) - Eventual consistency, concurrent writes, value limits
+
+## See Also
+
+- [workers](../workers/) - Worker runtime for KV access
+- [d1](../d1/) - Use D1 for strong consistency needs
+- [durable-objects](../durable-objects/) - Strongly consistent alternative

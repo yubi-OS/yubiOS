@@ -1,1 +1,135 @@
-IyBDbG91ZGZsYXJlIFdyYW5nbGVyCgpPZmZpY2lhbCBDTEkgZm9yIENsb3VkZmxhcmUgV29ya2VycyAtIGRldmVsb3AsIG1hbmFnZSwgYW5kIGRlcGxveSBXb3JrZXJzIGZyb20gdGhlIGNvbW1hbmQgbGluZS4KCiMjIFdoYXQgaXMgV3JhbmdsZXI/CgpXcmFuZ2xlciBpcyB0aGUgQ2xvdWRmbGFyZSBEZXZlbG9wZXIgUGxhdGZvcm0gQ0xJIHRoYXQgYWxsb3dzIHlvdSB0bzoKLSBDcmVhdGUsIGRldmVsb3AsIGFuZCBkZXBsb3kgV29ya2VycwotIE1hbmFnZSBiaW5kaW5ncyAoS1YsIEQxLCBSMiwgRHVyYWJsZSBPYmplY3RzLCBldGMuKQotIENvbmZpZ3VyZSByb3V0aW5nIGFuZCBlbnZpcm9ubWVudHMKLSBSdW4gbG9jYWwgZGV2ZWxvcG1lbnQgc2VydmVycwotIEV4ZWN1dGUgbWlncmF0aW9ucyBhbmQgbWFuYWdlIHJlc291cmNlcwotIFBlcmZvcm0gaW50ZWdyYXRpb24gdGVzdGluZwoKIyMgSW5zdGFsbGF0aW9uCgpgYGBiYXNoCm5wbSBpbnN0YWxsIHdyYW5nbGVyIC0tc2F2ZS1kZXYKIyBvciBnbG9iYWxseQpucG0gaW5zdGFsbCAtZyB3cmFuZ2xlcgpgYGAKClJ1biBjb21tYW5kczogYG5weCB3cmFuZ2xlciA8Y29tbWFuZD5gIChvciBgcG5wbWAvYHlhcm4gd3JhbmdsZXJgKQoKIyMgUmVhZGluZyBPcmRlcgoKfCBJZiB5b3Ugd2FudCB0by4uLiB8IFN0YXJ0IGhlcmUgfAp8LS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgQ3JlYXRlL2RlcGxveSBXb3JrZXIgcXVpY2tseSB8IEVzc2VudGlhbCBDb21tYW5kcyBiZWxvdyDihpIgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSDCp05ldyBXb3JrZXIgfAp8IENvbmZpZ3VyZSBiaW5kaW5ncyAoS1YsIEQxLCBSMikgfCBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSDCp0JpbmRpbmdzIHwKfCBXcml0ZSBpbnRlZ3JhdGlvbiB0ZXN0cyB8IFthcGkubWRdKC4vYXBpLm1kKSDCp3N0YXJ0V29ya2VyIHwKfCBEZWJ1ZyBwcm9kdWN0aW9uIGlzc3VlcyB8IFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpICsgRXNzZW50aWFsIENvbW1hbmRzIMKnTW9uaXRvcmluZyB8CnwgU2V0IHVwIG11bHRpLWVudmlyb25tZW50IHdvcmtmbG93IHwgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgwqdFbnZpcm9ubWVudHMgfAoKIyMgRXNzZW50aWFsIENvbW1hbmRzCgojIyMgUHJvamVjdCAmIERldmVsb3BtZW50CmBgYGJhc2gKd3JhbmdsZXIgaW5pdCBbbmFtZV0gICAgICAgICAgICAgICMgQ3JlYXRlIG5ldyBwcm9qZWN0CndyYW5nbGVyIGRldiAgICAgICAgICAgICAgICAgICAgICAjIExvY2FsIGRldiBzZXJ2ZXIgKGZhc3QsIHNpbXVsYXRlZCkKd3JhbmdsZXIgZGV2IC0tcmVtb3RlICAgICAgICAgICAgICMgRGV2IHdpdGggcmVtb3RlIHJlc291cmNlcyAocHJvZHVjdGlvbi1saWtlKQp3cmFuZ2xlciBkZXBsb3kgICAgICAgICAgICAgICAgICAgIyBEZXBsb3kgdG8gcHJvZHVjdGlvbgp3cmFuZ2xlciBkZXBsb3kgLS1lbnYgc3RhZ2luZyAgICAgIyBEZXBsb3kgdG8gZW52aXJvbm1lbnQKd3JhbmdsZXIgdmVyc2lvbnMgbGlzdCAgICAgICAgICAgICMgTGlzdCB2ZXJzaW9ucwp3cmFuZ2xlciByb2xsYmFjayBbaWRdICAgICAgICAgICAgIyBSb2xsYmFjayBkZXBsb3ltZW50CndyYW5nbGVyIGxvZ2luICAgICAgICAgICAgICAgICAgICAjIE9BdXRoIGxvZ2luCndyYW5nbGVyIHdob2FtaSAgICAgICAgICAgICAgICAgICAjIENoZWNrIGF1dGggc3RhdHVzCmBgYAoKIyMgUmVzb3VyY2UgTWFuYWdlbWVudAoKIyMjIEtWCmBgYGJhc2gKd3JhbmdsZXIga3YgbmFtZXNwYWNlIGNyZWF0ZSBOQU1FCndyYW5nbGVyIGt2IGtleSBwdXQgImtleSIgInZhbHVlIiAtLW5hbWVzcGFjZS1pZD08aWQ+CndyYW5nbGVyIGt2IGtleSBnZXQgImtleSIgLS1uYW1lc3BhY2UtaWQ9PGlkPgpgYGAKCiMjIyBEMQpgYGBiYXNoCndyYW5nbGVyIGQxIGNyZWF0ZSBOQU1FCndyYW5nbGVyIGQxIGV4ZWN1dGUgTkFNRSAtLWNvbW1hbmQgIlNRTCIKd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBjcmVhdGUgTkFNRSAiZGVzY3JpcHRpb24iCndyYW5nbGVyIGQxIG1pZ3JhdGlvbnMgYXBwbHkgTkFNRQpgYGAKCiMjIyBSMgpgYGBiYXNoCndyYW5nbGVyIHIyIGJ1Y2tldCBjcmVhdGUgTkFNRQp3cmFuZ2xlciByMiBvYmplY3QgcHV0IEJVQ0tFVC9rZXkgLS1maWxlIHBhdGgKd3JhbmdsZXIgcjIgb2JqZWN0IGdldCBCVUNLRVQva2V5CmBgYAoKIyMjIE90aGVyIFJlc291cmNlcwpgYGBiYXNoCndyYW5nbGVyIHF1ZXVlcyBjcmVhdGUgTkFNRQp3cmFuZ2xlciB2ZWN0b3JpemUgY3JlYXRlIE5BTUUgLS1kaW1lbnNpb25zIE4gLS1tZXRyaWMgY29zaW5lCndyYW5nbGVyIGh5cGVyZHJpdmUgY3JlYXRlIE5BTUUgLS1jb25uZWN0aW9uLXN0cmluZyAiLi4uIgp3cmFuZ2xlciB3b3JrZmxvd3MgY3JlYXRlIE5BTUUKd3JhbmdsZXIgY29uc3RlbGxhdGlvbiBjcmVhdGUgTkFNRQp3cmFuZ2xlciBwYWdlcyBwcm9qZWN0IGNyZWF0ZSBOQU1FCndyYW5nbGVyIHBhZ2VzIGRlcGxveW1lbnQgY3JlYXRlIC0tcHJvamVjdCBOQU1FIC0tYnJhbmNoIG1haW4KYGBgCgojIyMgU2VjcmV0cwpgYGBiYXNoCndyYW5nbGVyIHNlY3JldCBwdXQgTkFNRSAgICAgICAgICAjIFNldCBXb3JrZXIgc2VjcmV0CndyYW5nbGVyIHNlY3JldCBsaXN0ICAgICAgICAgICAgICAjIExpc3QgV29ya2VyIHNlY3JldHMKd3JhbmdsZXIgc2VjcmV0IGRlbGV0ZSBOQU1FICAgICAgICMgRGVsZXRlIFdvcmtlciBzZWNyZXQKd3JhbmdsZXIgc2VjcmV0IGJ1bGsgRklMRS5qc29uICAgICMgQnVsayB1cGxvYWQgZnJvbSBKU09OCgojIFNlY3JldHMgU3RvcmUgKGNlbnRyYWxpemVkLCByZXVzYWJsZSBhY3Jvc3MgV29ya2VycykKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgY3JlYXRlIDxzdG9yZS1pZD4gLS1uYW1lIFNFQ1JFVF9OQU1FIC0tc2NvcGVzIHdvcmtlcnMgLS1yZW1vdGUKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgbGlzdCA8c3RvcmUtaWQ+IC0tcmVtb3RlCmBgYAoKIyMjIE1vbml0b3JpbmcKYGBgYmFzaAp3cmFuZ2xlciB0YWlsICAgICAgICAgICAgICAgICAgICAgIyBSZWFsLXRpbWUgbG9ncwp3cmFuZ2xlciB0YWlsIC0tZW52IHByb2R1Y3Rpb24gICAgIyBUYWlsIHNwZWNpZmljIGVudgp3cmFuZ2xlciB0YWlsIC0tc3RhdHVzIGVycm9yICAgICAgIyBGaWx0ZXIgYnkgc3RhdHVzCmBgYAoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKCi0gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSB3cmFuZ2xlci5qc29uYyBzZXR1cCwgZW52aXJvbm1lbnRzLCBiaW5kaW5ncwotIFthcGkubWRdKC4vYXBpLm1kKSAtIFByb2dyYW1tYXRpYyBBUEkgKGBzdGFydFdvcmtlcmAsIGBnZXRQbGF0Zm9ybVByb3h5YCwgZXZlbnRzKQotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBDb21tb24gd29ya2Zsb3dzIGFuZCBkZXZlbG9wbWVudCBwYXR0ZXJucwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gQ29tbW9uIHBpdGZhbGxzLCBsaW1pdHMsIGFuZCB0cm91Ymxlc2hvb3RpbmcKCiMjIFF1aWNrIERlY2lzaW9uIFRyZWUKCmBgYApOZWVkIHRvIHRlc3QgeW91ciBXb3JrZXI/CuKUnOKUgCBUZXN0aW5nIGZ1bGwgV29ya2VyIHdpdGggYmluZGluZ3Mg4oaSIGFwaS5tZCDCp3N0YXJ0V29ya2VyCuKUnOKUgCBUZXN0aW5nIGluZGl2aWR1YWwgZnVuY3Rpb25zIOKGkiBhcGkubWQgwqdnZXRQbGF0Zm9ybVByb3h5CuKUlOKUgCBUZXN0aW5nIHdpdGggVml0ZXN0IOKGkiBwYXR0ZXJucy5tZCDCp1Rlc3Rpbmcgd2l0aCBWaXRlc3QKCk5lZWQgdG8gY29uZmlndXJlIHNvbWV0aGluZz8K4pSc4pSAIEJpbmRpbmdzIChLViwgRDEsIFIyLCBldGMuKSDihpIgY29uZmlndXJhdGlvbi5tZCDCp0JpbmRpbmdzCuKUnOKUgCBNdWx0aXBsZSBlbnZpcm9ubWVudHMg4oaSIGNvbmZpZ3VyYXRpb24ubWQgwqdFbnZpcm9ubWVudHMK4pSc4pSAIFN0YXRpYyBmaWxlcyDihpIgY29uZmlndXJhdGlvbi5tZCDCp1dvcmtlcnMgQXNzZXRzCuKUlOKUgCBSb3V0aW5nIOKGkiBjb25maWd1cmF0aW9uLm1kIMKnUm91dGluZwoKRGV2ZWxvcG1lbnQgbm90IHdvcmtpbmc/CuKUnOKUgCBMb2NhbCBkaWZmZXJzIGZyb20gcHJvZHVjdGlvbiDihpIgVXNlIGB3cmFuZ2xlciBkZXYgLS1yZW1vdGVgCuKUnOKUgCBCaW5kaW5ncyBub3QgYXZhaWxhYmxlIOKGkiBnb3RjaGFzLm1kIMKnQmluZGluZyBOb3QgQXZhaWxhYmxlCuKUlOKUgCBBdXRoIGlzc3VlcyDihpIgd3JhbmdsZXIgbG9naW4KYGBgCgojIyBTZWUgQWxzbwoKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VycyBydW50aW1lIEFQSSByZWZlcmVuY2UKLSBbbWluaWZsYXJlXSguLi9taW5pZmxhcmUvKSAtIExvY2FsIHRlc3Rpbmcgd2l0aCBNaW5pZmxhcmUKLSBbd29ya2VyZF0oLi4vd29ya2VyZC8pIC0gUnVudGltZSB0aGF0IHBvd2VycyBgd3JhbmdsZXIgZGV2YAo=
+# Cloudflare Wrangler
+
+Official CLI for Cloudflare Workers - develop, manage, and deploy Workers from the command line.
+
+## What is Wrangler?
+
+Wrangler is the Cloudflare Developer Platform CLI that allows you to:
+- Create, develop, and deploy Workers
+- Manage bindings (KV, D1, R2, Durable Objects, etc.)
+- Configure routing and environments
+- Run local development servers
+- Execute migrations and manage resources
+- Perform integration testing
+
+## Installation
+
+```bash
+npm install wrangler --save-dev
+# or globally
+npm install -g wrangler
+```
+
+Run commands: `npx wrangler <command>` (or `pnpm`/`yarn wrangler`)
+
+## Reading Order
+
+| If you want to... | Start here |
+|-------------------|------------|
+| Create/deploy Worker quickly | Essential Commands below → [patterns.md](./patterns.md) §New Worker |
+| Configure bindings (KV, D1, R2) | [configuration.md](./configuration.md) §Bindings |
+| Write integration tests | [api.md](./api.md) §startWorker |
+| Debug production issues | [gotchas.md](./gotchas.md) + Essential Commands §Monitoring |
+| Set up multi-environment workflow | [configuration.md](./configuration.md) §Environments |
+
+## Essential Commands
+
+### Project & Development
+```bash
+wrangler init [name]              # Create new project
+wrangler dev                      # Local dev server (fast, simulated)
+wrangler dev --remote             # Dev with remote resources (production-like)
+wrangler deploy                   # Deploy to production
+wrangler deploy --env staging     # Deploy to environment
+wrangler versions list            # List versions
+wrangler rollback [id]            # Rollback deployment
+wrangler login                    # OAuth login
+wrangler whoami                   # Check auth status
+```
+
+## Resource Management
+
+### KV
+```bash
+wrangler kv namespace create NAME
+wrangler kv key put "key" "value" --namespace-id=<id>
+wrangler kv key get "key" --namespace-id=<id>
+```
+
+### D1
+```bash
+wrangler d1 create NAME
+wrangler d1 execute NAME --command "SQL"
+wrangler d1 migrations create NAME "description"
+wrangler d1 migrations apply NAME
+```
+
+### R2
+```bash
+wrangler r2 bucket create NAME
+wrangler r2 object put BUCKET/key --file path
+wrangler r2 object get BUCKET/key
+```
+
+### Other Resources
+```bash
+wrangler queues create NAME
+wrangler vectorize create NAME --dimensions N --metric cosine
+wrangler hyperdrive create NAME --connection-string "..."
+wrangler workflows create NAME
+wrangler constellation create NAME
+wrangler pages project create NAME
+wrangler pages deployment create --project NAME --branch main
+```
+
+### Secrets
+```bash
+wrangler secret put NAME          # Set Worker secret
+wrangler secret list              # List Worker secrets
+wrangler secret delete NAME       # Delete Worker secret
+wrangler secret bulk FILE.json    # Bulk upload from JSON
+
+# Secrets Store (centralized, reusable across Workers)
+wrangler secrets-store secret create <store-id> --name SECRET_NAME --scopes workers --remote
+wrangler secrets-store secret list <store-id> --remote
+```
+
+### Monitoring
+```bash
+wrangler tail                     # Real-time logs
+wrangler tail --env production    # Tail specific env
+wrangler tail --status error      # Filter by status
+```
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - wrangler.jsonc setup, environments, bindings
+- [api.md](./api.md) - Programmatic API (`startWorker`, `getPlatformProxy`, events)
+- [patterns.md](./patterns.md) - Common workflows and development patterns
+- [gotchas.md](./gotchas.md) - Common pitfalls, limits, and troubleshooting
+
+## Quick Decision Tree
+
+```
+Need to test your Worker?
+├─ Testing full Worker with bindings → api.md §startWorker
+├─ Testing individual functions → api.md §getPlatformProxy
+└─ Testing with Vitest → patterns.md §Testing with Vitest
+
+Need to configure something?
+├─ Bindings (KV, D1, R2, etc.) → configuration.md §Bindings
+├─ Multiple environments → configuration.md §Environments
+├─ Static files → configuration.md §Workers Assets
+└─ Routing → configuration.md §Routing
+
+Development not working?
+├─ Local differs from production → Use `wrangler dev --remote`
+├─ Bindings not available → gotchas.md §Binding Not Available
+└─ Auth issues → wrangler login
+```
+
+## See Also
+
+- [workers](../workers/) - Workers runtime API reference
+- [miniflare](../miniflare/) - Local testing with Miniflare
+- [workerd](../workerd/) - Runtime that powers `wrangler dev`

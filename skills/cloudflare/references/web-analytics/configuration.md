@@ -1,1 +1,76 @@
-IyBDb25maWd1cmF0aW9uCgojIyBTZXR1cCBNZXRob2RzCgojIyMgUHJveGllZCBTaXRlcyAoQXV0b21hdGljKQoKRGFzaGJvYXJkIOKGkiBXZWIgQW5hbHl0aWNzIOKGkiBBZGQgc2l0ZSDihpIgU2VsZWN0IGhvc3RuYW1lIOKGkiBEb25lCgp8IEluamVjdGlvbiBPcHRpb24gfCBEZXNjcmlwdGlvbiB8CnwtLS0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwKfCBFbmFibGUgfCBBdXRvLWluamVjdCBmb3IgYWxsIHZpc2l0b3JzIChkZWZhdWx0KSB8CnwgRW5hYmxlLCBleGNsdWRpbmcgRVUgfCBObyBpbmplY3Rpb24gZm9yIEVVIChHRFBSKSB8CnwgRW5hYmxlIHdpdGggbWFudWFsIHNuaXBwZXQgfCBZb3UgYWRkIGJlYWNvbiBtYW51YWxseSB8CnwgRGlzYWJsZSB8IFBhdXNlIHRyYWNraW5nIHwKCioqRmFpbHMgaWYgcmVzcG9uc2UgaGFzOioqIGBDYWNoZS1Db250cm9sOiBwdWJsaWMsIG5vLXRyYW5zZm9ybWAKCioqQ1NQIHJlcXVpcmVkOioqCmBgYApzY3JpcHQtc3JjIGh0dHBzOi8vc3RhdGljLmNsb3VkZmxhcmVpbnNpZ2h0cy5jb20gaHR0cHM6Ly9jbG91ZGZsYXJlaW5zaWdodHMuY29tOwpgYGAKCiMjIyBOb24tUHJveGllZCBTaXRlcyAoTWFudWFsKQoKRGFzaGJvYXJkIOKGkiBXZWIgQW5hbHl0aWNzIOKGkiBBZGQgc2l0ZSDihpIgRW50ZXIgaG9zdG5hbWUg4oaSIENvcHkgc25pcHBldAoKYGBgaHRtbAo8c2NyaXB0IGRlZmVyIHNyYz0naHR0cHM6Ly9zdGF0aWMuY2xvdWRmbGFyZWluc2lnaHRzLmNvbS9iZWFjb24ubWluLmpzJyAKICAgICAgICBkYXRhLWNmLWJlYWNvbj0neyJ0b2tlbiI6ICJZT1VSX1RPS0VOIiwgInNwYSI6IHRydWV9Jz48L3NjcmlwdD4KYGBgCgoqKkxpbWl0czoqKiAxMCBub24tcHJveGllZCBzaXRlcyBwZXIgYWNjb3VudAoKIyMgU1BBIE1vZGUKCioqRW5hYmxlIGBzcGE6IHRydWVgIGZvcjoqKiBSZWFjdCBSb3V0ZXIsIE5leHQuanMsIFZ1ZSBSb3V0ZXIsIE51eHQsIFN2ZWx0ZUtpdCwgQW5ndWxhcgoKKipLZWVwIGBzcGE6IGZhbHNlYCBmb3I6KiogVHJhZGl0aW9uYWwgbXVsdGktcGFnZSBhcHBzLCBzdGF0aWMgc2l0ZXMsIFdvcmRQcmVzcwoKKipIYXNoIHJvdXRpbmcgKGAjL3BhdGhgKSBOT1Qgc3VwcG9ydGVkKiogLSB1c2UgSGlzdG9yeSBBUEkgcm91dGluZy4KCiMjIFRva2VuIE1hbmFnZW1lbnQKCi0gRm91bmQgaW46IERhc2hib2FyZCDihpIgV2ViIEFuYWx5dGljcyDihpIgTWFuYWdlIHNpdGUKLSAqKk5vdCBzZWNyZXRzKiogLSBkb21haW4tbG9ja2VkLCBzYWZlIHRvIGV4cG9zZSBpbiBIVE1MCi0gRWFjaCBzaXRlIGdldHMgdW5pcXVlIHRva2VuCgojIyBFbnZpcm9ubWVudCBDb25maWcKCmBgYHR5cGVzY3JpcHQKLy8gT25seSBsb2FkIGluIHByb2R1Y3Rpb24KaWYgKHByb2Nlc3MuZW52Lk5PREVfRU5WID09PSAncHJvZHVjdGlvbicpIHsKICAvLyBMb2FkIGJlYWNvbgp9CmBgYAoKT3IgdXNlIGVudmlyb25tZW50LXNwZWNpZmljIHRva2VucyB2aWEgZW52IHZhcnMuCgojIyBWZXJpZnkgSW5zdGFsbGF0aW9uCgoxLiBEZXZUb29scyBOZXR3b3JrIOKGkiBmaWx0ZXIgYGNsb3VkZmxhcmVpbnNpZ2h0c2Ag4oaSIHNlZSBgYmVhY29uLm1pbi5qc2AgKyBkYXRhIHJlcXVlc3QKMi4gTm8gQ1NQL0NPUlMgZXJyb3JzIGluIGNvbnNvbGUKMy4gRGFzaGJvYXJkIHNob3dzIHBhZ2V2aWV3cyBhZnRlciA1LTEwIG1pbiBkZWxheQoKIyMgUnVsZXMgKFBsYW4tZGVwZW5kZW50KQoKQ29uZmlndXJlIGluIGRhc2hib2FyZCBmb3I6Ci0gKipTYW1wbGUgcmF0ZSoqIC0gcmVkdWNlIGNvbGxlY3Rpb24gJSBmb3IgaGlnaC10cmFmZmljCi0gKipQYXRoLWJhc2VkKiogLSBkaWZmZXJlbnQgYmVoYXZpb3IgcGVyIHJvdXRlCi0gKipIb3N0LWJhc2VkKiogLSBzZXBhcmF0ZSB0cmFja2luZyBwZXIgZG9tYWluCgojIyBEYXRhIFJldGVudGlvbgoKLSA2IG1vbnRocyByb2xsaW5nIHdpbmRvdwotIDEtaG91ciBidWNrZXQgZ3JhbnVsYXJpdHkKLSBObyByYXcgZXhwb3J0LCBkYXNoYm9hcmQgb25seQo=
+# Configuration
+
+## Setup Methods
+
+### Proxied Sites (Automatic)
+
+Dashboard → Web Analytics → Add site → Select hostname → Done
+
+| Injection Option | Description |
+|------------------|-------------|
+| Enable | Auto-inject for all visitors (default) |
+| Enable, excluding EU | No injection for EU (GDPR) |
+| Enable with manual snippet | You add beacon manually |
+| Disable | Pause tracking |
+
+**Fails if response has:** `Cache-Control: public, no-transform`
+
+**CSP required:**
+```
+script-src https://static.cloudflareinsights.com https://cloudflareinsights.com;
+```
+
+### Non-Proxied Sites (Manual)
+
+Dashboard → Web Analytics → Add site → Enter hostname → Copy snippet
+
+```html
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
+        data-cf-beacon='{"token": "YOUR_TOKEN", "spa": true}'></script>
+```
+
+**Limits:** 10 non-proxied sites per account
+
+## SPA Mode
+
+**Enable `spa: true` for:** React Router, Next.js, Vue Router, Nuxt, SvelteKit, Angular
+
+**Keep `spa: false` for:** Traditional multi-page apps, static sites, WordPress
+
+**Hash routing (`#/path`) NOT supported** - use History API routing.
+
+## Token Management
+
+- Found in: Dashboard → Web Analytics → Manage site
+- **Not secrets** - domain-locked, safe to expose in HTML
+- Each site gets unique token
+
+## Environment Config
+
+```typescript
+// Only load in production
+if (process.env.NODE_ENV === 'production') {
+  // Load beacon
+}
+```
+
+Or use environment-specific tokens via env vars.
+
+## Verify Installation
+
+1. DevTools Network → filter `cloudflareinsights` → see `beacon.min.js` + data request
+2. No CSP/CORS errors in console
+3. Dashboard shows pageviews after 5-10 min delay
+
+## Rules (Plan-dependent)
+
+Configure in dashboard for:
+- **Sample rate** - reduce collection % for high-traffic
+- **Path-based** - different behavior per route
+- **Host-based** - separate tracking per domain
+
+## Data Retention
+
+- 6 months rolling window
+- 1-hour bucket granularity
+- No raw export, dashboard only

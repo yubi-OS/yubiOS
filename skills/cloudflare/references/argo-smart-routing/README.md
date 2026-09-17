@@ -1,1 +1,90 @@
-IyBDbG91ZGZsYXJlIEFyZ28gU21hcnQgUm91dGluZyBTa2lsbCBSZWZlcmVuY2UKCiMjIE92ZXJ2aWV3CgpDbG91ZGZsYXJlIEFyZ28gU21hcnQgUm91dGluZyBpcyBhIHBlcmZvcm1hbmNlIG9wdGltaXphdGlvbiBzZXJ2aWNlIHRoYXQgZGV0ZWN0cyByZWFsLXRpbWUgbmV0d29yayBpc3N1ZXMgYW5kIHJvdXRlcyB3ZWIgdHJhZmZpYyBhY3Jvc3MgdGhlIG1vc3QgZWZmaWNpZW50IG5ldHdvcmsgcGF0aC4gSXQgY29udGludW91c2x5IG1vbml0b3JzIG5ldHdvcmsgY29uZGl0aW9ucyBhbmQgaW50ZWxsaWdlbnRseSByb3V0ZXMgdHJhZmZpYyB0aHJvdWdoIHRoZSBmYXN0ZXN0LCBtb3N0IHJlbGlhYmxlIHJvdXRlcyBpbiBDbG91ZGZsYXJlJ3MgbmV0d29yay4KCioqTm90ZSBvbiBTbWFydCBTaGllbGQ6KiogQXJnbyBTbWFydCBSb3V0aW5nIGlzIGJlaW5nIGludGVncmF0ZWQgaW50byBDbG91ZGZsYXJlJ3MgU21hcnQgU2hpZWxkIHByb2R1Y3QgZm9yIGVuaGFuY2VkIEREb1MgcHJvdGVjdGlvbiBhbmQgcGVyZm9ybWFuY2UuIEV4aXN0aW5nIEFyZ28gY3VzdG9tZXJzIG1haW50YWluIGZ1bGwgZnVuY3Rpb25hbGl0eSB3aXRoIGdyYWR1YWwgbWlncmF0aW9uIHRvIFNtYXJ0IFNoaWVsZCBmZWF0dXJlcy4KCiMjIFF1aWNrIFN0YXJ0CgojIyMgRW5hYmxlIHZpYSBjVVJMCmBgYGJhc2gKY3VybCAtWCBQQVRDSCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzL3t6b25lX2lkfS9hcmdvL3NtYXJ0X3JvdXRpbmciIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIFlPVVJfQVBJX1RPS0VOIiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC1kICd7InZhbHVlIjogIm9uIn0nCmBgYAoKIyMjIEVuYWJsZSB2aWEgVHlwZVNjcmlwdCBTREsKYGBgdHlwZXNjcmlwdAppbXBvcnQgQ2xvdWRmbGFyZSBmcm9tICdjbG91ZGZsYXJlJzsKCmNvbnN0IGNsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsgYXBpVG9rZW46IHByb2Nlc3MuZW52LkNMT1VERkxBUkVfQVBJX1RPS0VOIH0pOwoKY29uc3QgcmVzdWx0ID0gYXdhaXQgY2xpZW50LmFyZ28uc21hcnRSb3V0aW5nLmVkaXQoewogIHpvbmVfaWQ6ICd5b3VyLXpvbmUtaWQnLAogIHZhbHVlOiAnb24nLAp9KTsKCmNvbnNvbGUubG9nKGBBcmdvIGVuYWJsZWQ6ICR7cmVzdWx0LnZhbHVlfWApOwpgYGAKCiMjIENvcmUgQ29uY2VwdHMKCiMjIyBXaGF0IEl0IERvZXMKLSAqKkludGVsbGlnZW50IHJvdXRpbmcqKjogRGV0ZWN0cyBjb25nZXN0aW9uLCBvdXRhZ2VzLCBwYWNrZXQgbG9zcyBpbiByZWFsLXRpbWUKLSAqKkdsb2JhbCBvcHRpbWl6YXRpb24qKjogUm91dGVzIGFjcm9zcyAzMDArIENsb3VkZmxhcmUgZGF0YSBjZW50ZXJzCi0gKipBdXRvbWF0aWMgZmFpbG92ZXIqKjogU3dpdGNoZXMgcGF0aHMgd2hlbiBpc3N1ZXMgZGV0ZWN0ZWQgKHR5cGljYWxseSA8MXMpCi0gKipXb3JrcyB3aXRoIGV4aXN0aW5nIHNldHVwKio6IE5vIG9yaWdpbiBjaGFuZ2VzIHJlcXVpcmVkCgojIyMgQmlsbGluZyBNb2RlbAotIFVzYWdlLWJhc2VkOiBDaGFyZ2VkIHBlciBHQiBvZiB0cmFmZmljIChleGNsdWRpbmcgRERvUy9XQUYgbWl0aWdhdGVkIHRyYWZmaWMpCi0gUmVxdWlyZXMgYmlsbGluZyBjb25maWd1cmF0aW9uIGJlZm9yZSBlbmFibGluZwotIEF2YWlsYWJsZSBvbiBFbnRlcnByaXNlKyBwbGFucyAoY2hlY2sgem9uZSBlbGlnaWJpbGl0eSkKCiMjIyBXaGVuIHRvIFVzZQotICoqSGlnaC10cmFmZmljIHByb2R1Y3Rpb24gc2l0ZXMqKiB3aXRoIGdsb2JhbCB1c2VyIGJhc2UKLSAqKkxhdGVuY3ktc2Vuc2l0aXZlIGFwcGxpY2F0aW9ucyoqIChBUElzLCByZWFsLXRpbWUgc2VydmljZXMpCi0gKipTaXRlcyBiZWhpbmQgQ2xvdWRmbGFyZSBwcm94eSoqIChvcmFuZ2UtY2xvdWRlZCBETlMgcmVjb3JkcykKLSAqKkNvbWJpbmVkIHdpdGggVGllcmVkIENhY2hlKiogZm9yIG1heGltdW0gcGVyZm9ybWFuY2UgZ2FpbnMKCiMjIyBXaGVuIE5PVCB0byBVc2UKLSBEZXZlbG9wbWVudC9zdGFnaW5nIGVudmlyb25tZW50cyAoY29zdCBjb250cm9sKQotIExvdy10cmFmZmljIHNpdGVzICg8MVRCL21vbnRoKSB3aGVyZSBjb3N0IG1heSBleGNlZWQgYmVuZWZpdAotIFNpdGVzIHdpdGggcHJpbWFyaWx5IHNpbmdsZS1yZWdpb24gdHJhZmZpYwoKIyMgU2hvdWxkIEkgRW5hYmxlIEFyZ28/Cgp8IFlvdXIgU2l0dWF0aW9uIHwgUmVjb21tZW5kYXRpb24gfAp8LS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tfAp8IEdsb2JhbCBwcm9kdWN0aW9uIGFwcCwgPjFUQi9tb250aCB0cmFmZmljIHwg4pyFIEVuYWJsZSAtIGxpa2VseSBST0kgcG9zaXRpdmUgfAp8IEVudGVycHJpc2UgcGxhbiwgbGF0ZW5jeS1jcml0aWNhbCBBUElzIHwg4pyFIEVuYWJsZSAtIHBlcmZvcm1hbmNlIG1hdHRlcnMgfAp8IFJlZ2lvbmFsIHNpdGUsIDwxMDBHQi9tb250aCB0cmFmZmljIHwg4pqg77iPIEV2YWx1YXRlIC0gY29zdCBtYXkgbm90IGp1c3RpZnkgfAp8IERldmVsb3BtZW50L3N0YWdpbmcgZW52aXJvbm1lbnQgfCDinYwgRGlzYWJsZSAtIHVzZSBpbiBwcm9kdWN0aW9uIG9ubHkgfAp8IE5vdCB5ZXQgY29uZmlndXJlZCBiaWxsaW5nIHwg4p2MIENvbmZpZ3VyZSBiaWxsaW5nIGZpcnN0IHwKCiMjIFJlYWRpbmcgT3JkZXIgYnkgVGFzawoKfCBZb3VyIEdvYWwgfCBTdGFydCBXaXRoIHwgVGhlbiBSZWFkIHwKfC0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLXwKfCBFbmFibGUgQXJnbyBmb3IgZmlyc3QgdGltZSB8IFF1aWNrIFN0YXJ0IGFib3ZlIOKGkiBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkgfCBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkgfAp8IFVzZSBUeXBlU2NyaXB0L1B5dGhvbiBTREsgfCBbYXBpLm1kXShhcGkubWQpIHwgW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkgfAp8IFRlcnJhZm9ybS9JYUMgc2V0dXAgfCBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkgfCAtIHwKfCBFbmFibGUgZm9yIFNwZWN0cnVtIFRDUCBhcHAgfCBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSDihpIgU3BlY3RydW0gc2VjdGlvbiB8IFthcGkubWRdKGFwaS5tZCkgfAp8IFRyb3VibGVzaG9vdCBlbmFibGVtZW50IGlzc3VlIHwgW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpIHwgW2FwaS5tZF0oYXBpLm1kKSB8CnwgTWFuYWdlIGJpbGxpbmcvdXNhZ2UgfCBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSDihpIgQmlsbGluZyBzZWN0aW9uIHwgW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpIHwKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotICoqW2FwaS5tZF0oYXBpLm1kKSoqIC0gQVBJIGVuZHBvaW50cywgU0RLIG1ldGhvZHMsIGVycm9yIGhhbmRsaW5nLCBQeXRob24vVHlwZVNjcmlwdCBleGFtcGxlcwotICoqW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpKiogLSBUZXJyYWZvcm0gc2V0dXAsIGVudmlyb25tZW50IGNvbmZpZywgYmlsbGluZyBjb25maWd1cmF0aW9uCi0gKipbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSoqIC0gVGllcmVkIENhY2hlIGludGVncmF0aW9uLCBTcGVjdHJ1bSBUQ1AgYXBwcywgYmlsbGluZyBtYW5hZ2VtZW50LCB2YWxpZGF0aW9uIHBhdHRlcm5zCi0gKipbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkqKiAtIENvbW1vbiBlcnJvcnMsIHBlcm1pc3Npb24gaXNzdWVzLCBsaW1pdHMsIGJlc3QgcHJhY3RpY2VzCgojIyBTZWUgQWxzbwoKLSBbQ2xvdWRmbGFyZSBBcmdvIFNtYXJ0IFJvdXRpbmcgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FyZ28tc21hcnQtcm91dGluZy8pCi0gW0Nsb3VkZmxhcmUgU21hcnQgU2hpZWxkXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vc21hcnQtc2hpZWxkLykKLSBbU3BlY3RydW0gRG9jdW1lbnRhdGlvbl0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NwZWN0cnVtLykKLSBbVGllcmVkIENhY2hlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vY2FjaGUvaG93LXRvL3RpZXJlZC1jYWNoZS8pCg==
+# Cloudflare Argo Smart Routing Skill Reference
+
+## Overview
+
+Cloudflare Argo Smart Routing is a performance optimization service that detects real-time network issues and routes web traffic across the most efficient network path. It continuously monitors network conditions and intelligently routes traffic through the fastest, most reliable routes in Cloudflare's network.
+
+**Note on Smart Shield:** Argo Smart Routing is being integrated into Cloudflare's Smart Shield product for enhanced DDoS protection and performance. Existing Argo customers maintain full functionality with gradual migration to Smart Shield features.
+
+## Quick Start
+
+### Enable via cURL
+```bash
+curl -X PATCH "https://api.cloudflare.com/client/v4/zones/{zone_id}/argo/smart_routing" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"value": "on"}'
+```
+
+### Enable via TypeScript SDK
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({ apiToken: process.env.CLOUDFLARE_API_TOKEN });
+
+const result = await client.argo.smartRouting.edit({
+  zone_id: 'your-zone-id',
+  value: 'on',
+});
+
+console.log(`Argo enabled: ${result.value}`);
+```
+
+## Core Concepts
+
+### What It Does
+- **Intelligent routing**: Detects congestion, outages, packet loss in real-time
+- **Global optimization**: Routes across 300+ Cloudflare data centers
+- **Automatic failover**: Switches paths when issues detected (typically <1s)
+- **Works with existing setup**: No origin changes required
+
+### Billing Model
+- Usage-based: Charged per GB of traffic (excluding DDoS/WAF mitigated traffic)
+- Requires billing configuration before enabling
+- Available on Enterprise+ plans (check zone eligibility)
+
+### When to Use
+- **High-traffic production sites** with global user base
+- **Latency-sensitive applications** (APIs, real-time services)
+- **Sites behind Cloudflare proxy** (orange-clouded DNS records)
+- **Combined with Tiered Cache** for maximum performance gains
+
+### When NOT to Use
+- Development/staging environments (cost control)
+- Low-traffic sites (<1TB/month) where cost may exceed benefit
+- Sites with primarily single-region traffic
+
+## Should I Enable Argo?
+
+| Your Situation | Recommendation |
+|----------------|----------------|
+| Global production app, >1TB/month traffic | ✅ Enable - likely ROI positive |
+| Enterprise plan, latency-critical APIs | ✅ Enable - performance matters |
+| Regional site, <100GB/month traffic | ⚠️ Evaluate - cost may not justify |
+| Development/staging environment | ❌ Disable - use in production only |
+| Not yet configured billing | ❌ Configure billing first |
+
+## Reading Order by Task
+
+| Your Goal | Start With | Then Read |
+|-----------|------------|-----------|
+| Enable Argo for first time | Quick Start above → [configuration.md](configuration.md) | [gotchas.md](gotchas.md) |
+| Use TypeScript/Python SDK | [api.md](api.md) | [patterns.md](patterns.md) |
+| Terraform/IaC setup | [configuration.md](configuration.md) | - |
+| Enable for Spectrum TCP app | [patterns.md](patterns.md) → Spectrum section | [api.md](api.md) |
+| Troubleshoot enablement issue | [gotchas.md](gotchas.md) | [api.md](api.md) |
+| Manage billing/usage | [patterns.md](patterns.md) → Billing section | [gotchas.md](gotchas.md) |
+
+## In This Reference
+
+- **[api.md](api.md)** - API endpoints, SDK methods, error handling, Python/TypeScript examples
+- **[configuration.md](configuration.md)** - Terraform setup, environment config, billing configuration
+- **[patterns.md](patterns.md)** - Tiered Cache integration, Spectrum TCP apps, billing management, validation patterns
+- **[gotchas.md](gotchas.md)** - Common errors, permission issues, limits, best practices
+
+## See Also
+
+- [Cloudflare Argo Smart Routing Docs](https://developers.cloudflare.com/argo-smart-routing/)
+- [Cloudflare Smart Shield](https://developers.cloudflare.com/smart-shield/)
+- [Spectrum Documentation](https://developers.cloudflare.com/spectrum/)
+- [Tiered Cache](https://developers.cloudflare.com/cache/how-to/tiered-cache/)

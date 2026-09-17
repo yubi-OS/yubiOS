@@ -1,1 +1,133 @@
-IyBDbG91ZGZsYXJlIEQxIERhdGFiYXNlCgpFeHBlcnQgZ3VpZGFuY2UgZm9yIENsb3VkZmxhcmUgRDEsIGEgc2VydmVybGVzcyBTUUxpdGUgZGF0YWJhc2UgZGVzaWduZWQgZm9yIGhvcml6b250YWwgc2NhbGUtb3V0IGFjcm9zcyBtdWx0aXBsZSBkYXRhYmFzZXMuCgojIyBPdmVydmlldwoKRDEgaXMgQ2xvdWRmbGFyZSdzIG1hbmFnZWQsIHNlcnZlcmxlc3MgZGF0YWJhc2Ugd2l0aDoKLSBTUUxpdGUgU1FMIHNlbWFudGljcyBhbmQgY29tcGF0aWJpbGl0eQotIEJ1aWx0LWluIGRpc2FzdGVyIHJlY292ZXJ5IHZpYSBUaW1lIFRyYXZlbCAoMzAtZGF5IHBvaW50LWluLXRpbWUgcmVjb3ZlcnkpCi0gSG9yaXpvbnRhbCBzY2FsZS1vdXQgYXJjaGl0ZWN0dXJlICgxMCBHQiBwZXIgZGF0YWJhc2UpCi0gV29ya2VyIGFuZCBIVFRQIEFQSSBhY2Nlc3MKLSBQcmljaW5nIGJhc2VkIG9uIHF1ZXJ5IGFuZCBzdG9yYWdlIGNvc3RzIG9ubHkKCioqQXJjaGl0ZWN0dXJlIFBoaWxvc29waHkqKjogRDEgaXMgb3B0aW1pemVkIGZvciBwZXItdXNlciwgcGVyLXRlbmFudCwgb3IgcGVyLWVudGl0eSBkYXRhYmFzZSBwYXR0ZXJucyByYXRoZXIgdGhhbiBzaW5nbGUgbGFyZ2UgZGF0YWJhc2VzLgoKIyMgUXVpY2sgU3RhcnQKCmBgYGJhc2gKIyBDcmVhdGUgZGF0YWJhc2UKd3JhbmdsZXIgZDEgY3JlYXRlIDxkYXRhYmFzZS1uYW1lPgoKIyBFeGVjdXRlIG1pZ3JhdGlvbgp3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGFwcGx5IDxkYi1uYW1lPiAtLXJlbW90ZQoKIyBMb2NhbCBkZXZlbG9wbWVudAp3cmFuZ2xlciBkZXYKYGBgCgojIyBDb3JlIFF1ZXJ5IE1ldGhvZHMKCmBgYHR5cGVzY3JpcHQKLy8gLmFsbCgpIC0gUmV0dXJucyBhbGwgcm93czsgLmZpcnN0KCkgLSBGaXJzdCByb3cgb3IgbnVsbDsgLmZpcnN0KGNvbCkgLSBTaW5nbGUgY29sdW1uIHZhbHVlCi8vIC5ydW4oKSAtIElOU0VSVC9VUERBVEUvREVMRVRFOyAucmF3KCkgLSBBcnJheSBvZiBhcnJheXMgKGVmZmljaWVudCkKY29uc3QgeyByZXN1bHRzLCBzdWNjZXNzLCBtZXRhIH0gPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBhY3RpdmUgPSA/JykuYmluZCh0cnVlKS5hbGwoKTsKY29uc3QgdXNlciA9IGF3YWl0IGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gPycpLmJpbmQodXNlcklkKS5maXJzdCgpOwpgYGAKCiMjIEJhdGNoIE9wZXJhdGlvbnMKCmBgYHR5cGVzY3JpcHQKLy8gTXVsdGlwbGUgcXVlcmllcyBpbiBzaW5nbGUgcm91bmQgdHJpcCAoYXRvbWljIHRyYW5zYWN0aW9uKQpjb25zdCByZXN1bHRzID0gYXdhaXQgZW52LkRCLmJhdGNoKFsKICBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKDEpLAogIGVudi5EQi5wcmVwYXJlKCdTRUxFQ1QgKiBGUk9NIHBvc3RzIFdIRVJFIGF1dGhvcl9pZCA9ID8nKS5iaW5kKDEpLAogIGVudi5EQi5wcmVwYXJlKCdVUERBVEUgdXNlcnMgU0VUIGxhc3RfYWNjZXNzID0gPyBXSEVSRSBpZCA9ID8nKS5iaW5kKERhdGUubm93KCksIDEpCl0pOwpgYGAKCiMjIFNlc3Npb25zIEFQSSAoUGFpZCBQbGFucykKCmBgYHR5cGVzY3JpcHQKLy8gQ3JlYXRlIGxvbmctcnVubmluZyBzZXNzaW9uIGZvciBhbmFseXRpY3MvbWlncmF0aW9ucyAodXAgdG8gMTUgbWludXRlcykKY29uc3Qgc2Vzc2lvbiA9IGVudi5EQi53aXRoU2Vzc2lvbigpOwp0cnkgewogIGF3YWl0IHNlc3Npb24ucHJlcGFyZSgnQ1JFQVRFIElOREVYIGlkeF9oZWF2eSBPTiBsYXJnZV90YWJsZShjb2x1bW4pJykucnVuKCk7CiAgYXdhaXQgc2Vzc2lvbi5wcmVwYXJlKCdBTkFMWVpFJykucnVuKCk7Cn0gZmluYWxseSB7CiAgc2Vzc2lvbi5jbG9zZSgpOyAvLyBBbHdheXMgY2xvc2UgdG8gcmVsZWFzZSByZXNvdXJjZXMKfQpgYGAKCiMjIFJlYWQgUmVwbGljYXRpb24gKFBhaWQgUGxhbnMpCgpgYGB0eXBlc2NyaXB0Ci8vIFJlYWQgZnJvbSBuZWFyZXN0IHJlcGxpY2EgZm9yIGxvd2VyIGxhdGVuY3kgKGF1dG9tYXRpYyBmYWlsb3ZlcikKY29uc3QgdXNlciA9IGF3YWl0IGVudi5EQl9SRVBMSUNBLnByZXBhcmUoJ1NFTEVDVCAqIEZST00gdXNlcnMgV0hFUkUgaWQgPSA/JykuYmluZCh1c2VySWQpLmZpcnN0KCk7CgovLyBXcml0ZXMgYWx3YXlzIGdvIHRvIHByaW1hcnkKYXdhaXQgZW52LkRCLnByZXBhcmUoJ1VQREFURSB1c2VycyBTRVQgbGFzdF9sb2dpbiA9ID8gV0hFUkUgaWQgPSA/JykuYmluZChEYXRlLm5vdygpLCB1c2VySWQpLnJ1bigpOwpgYGAKCiMjIFBsYXRmb3JtIExpbWl0cwoKfCBMaW1pdCB8IEZyZWUgVGllciB8IFBhaWQgUGxhbnMgfAp8LS0tLS0tLXwtLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgRGF0YWJhc2Ugc2l6ZSB8IDUwMCBNQiB8IDEwIEdCIHBlciBkYXRhYmFzZSB8CnwgUm93IHNpemUgfCAxIE1CIG1heCB8IDEgTUIgbWF4IHwKfCBRdWVyeSB0aW1lb3V0IHwgMzAgc2Vjb25kcyB8IDMwIHNlY29uZHMgfAp8IEJhdGNoIHNpemUgfCAxLDAwMCBzdGF0ZW1lbnRzIHwgMTAsMDAwIHN0YXRlbWVudHMgfAp8IFRpbWUgVHJhdmVsIHJldGVudGlvbiB8IDcgZGF5cyB8IDMwIGRheXMgfAp8IFJlYWQgcmVwbGljYXMgfCBOb3QgYXZhaWxhYmxlIHwgWWVzIChwYWlkIGFkZC1vbikgfAoKKipQcmljaW5nKio6ICQwLjAwMSBwZXIgbWlsbGlvbiByb3dzIHJlYWQgKyAkMS4wMCBwZXIgbWlsbGlvbiByb3dzIHdyaXR0ZW4gKyAkMC43NS9HQiBzdG9yYWdlL21vbnRoIChpbmNsdWRlcyBmcmVlIG1vbnRobHkgYWxsb3dhbmNlOyBubyBwZXItZGF0YWJhc2UgZmVlKQoKIyMgQ0xJIENvbW1hbmRzCgpgYGBiYXNoCiMgRGF0YWJhc2UgbWFuYWdlbWVudAp3cmFuZ2xlciBkMSBjcmVhdGUgPGRiLW5hbWU+CndyYW5nbGVyIGQxIGxpc3QKd3JhbmdsZXIgZDEgZGVsZXRlIDxkYi1uYW1lPgoKIyBNaWdyYXRpb25zCndyYW5nbGVyIGQxIG1pZ3JhdGlvbnMgY3JlYXRlIDxkYi1uYW1lPiA8bWlncmF0aW9uLW5hbWU+ICAgICMgQ3JlYXRlIG5ldyBtaWdyYXRpb24gZmlsZQp3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGFwcGx5IDxkYi1uYW1lPiAtLXJlbW90ZSAgICAgICAgICAgICAjIEFwcGx5IHBlbmRpbmcgbWlncmF0aW9ucwp3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGFwcGx5IDxkYi1uYW1lPiAtLWxvY2FsICAgICAgICAgICAgICAjIEFwcGx5IGxvY2FsbHkKd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBsaXN0IDxkYi1uYW1lPiAtLXJlbW90ZSAgICAgICAgICAgICAgIyBTaG93IGFwcGxpZWQgbWlncmF0aW9ucwoKIyBEaXJlY3QgU1FMIGV4ZWN1dGlvbgp3cmFuZ2xlciBkMSBleGVjdXRlIDxkYi1uYW1lPiAtLXJlbW90ZSAtLWNvbW1hbmQ9IlNFTEVDVCAqIEZST00gdXNlcnMiCndyYW5nbGVyIGQxIGV4ZWN1dGUgPGRiLW5hbWU+IC0tbG9jYWwgLS1maWxlPS4vc2NoZW1hLnNxbAoKIyBCYWNrdXBzICYgSW1wb3J0L0V4cG9ydAp3cmFuZ2xlciBkMSBleHBvcnQgPGRiLW5hbWU+IC0tcmVtb3RlIC0tb3V0cHV0PS4vYmFja3VwLnNxbCAgIyBGdWxsIGV4cG9ydCB3aXRoIHNjaGVtYQp3cmFuZ2xlciBkMSBleHBvcnQgPGRiLW5hbWU+IC0tcmVtb3RlIC0tbm8tc2NoZW1hIC0tb3V0cHV0PS4vZGF0YS5zcWwgICMgRGF0YSBvbmx5CndyYW5nbGVyIGQxIHRpbWUtdHJhdmVsIHJlc3RvcmUgPGRiLW5hbWU+IC0tdGltZXN0YW1wPSIyMDI0LTAxLTE1VDE0OjMwOjAwWiIgICMgUG9pbnQtaW4tdGltZSByZWNvdmVyeQoKIyBEZXZlbG9wbWVudAp3cmFuZ2xlciBkZXYgLS1wZXJzaXN0LXRvPS4vLndyYW5nbGVyL3N0YXRlCmBgYAoKIyMgUmVhZGluZyBPcmRlcgoKKipTdGFydCBoZXJlKio6IFF1aWNrIFN0YXJ0IGFib3ZlIOKGkiBjb25maWd1cmF0aW9uLm1kIChzZXR1cCkg4oaSIGFwaS5tZCAocXVlcmllcykKCioqQ29tbW9uIHRhc2tzKio6Ci0gRmlyc3QgdGltZSBzZXR1cDogY29uZmlndXJhdGlvbi5tZCDihpIgUnVuIG1pZ3JhdGlvbnMKLSBBZGRpbmcgcXVlcmllczogYXBpLm1kIOKGkiBQcmVwYXJlZCBzdGF0ZW1lbnRzCi0gUGFnaW5hdGlvbi9jYWNoaW5nOiBwYXR0ZXJucy5tZAotIFByb2R1Y3Rpb24gb3B0aW1pemF0aW9uOiBSZWFkIFJlcGxpY2F0aW9uICsgU2Vzc2lvbnMgQVBJICh0aGlzIGZpbGUpCi0gRGVidWdnaW5nOiBnb3RjaGFzLm1kCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIHdyYW5nbGVyLmpzb25jIHNldHVwLCBtaWdyYXRpb25zLCBUeXBlU2NyaXB0IHR5cGVzLCBPUk1zLCBsb2NhbCBkZXYKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBRdWVyeSBtZXRob2RzICguYWxsLy5maXJzdC8ucnVuLy5yYXcpLCBiYXRjaCwgc2Vzc2lvbnMsIHJlYWQgcmVwbGljYXMsIGVycm9yIGhhbmRsaW5nCi0gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIFBhZ2luYXRpb24sIGJ1bGsgb3BlcmF0aW9ucywgY2FjaGluZywgbXVsdGktdGVuYW50LCBzZXNzaW9ucywgYW5hbHl0aWNzCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBTUUwgaW5qZWN0aW9uLCBsaW1pdHMgYnkgcGxhbiB0aWVyLCBwZXJmb3JtYW5jZSwgY29tbW9uIGVycm9ycwoKIyMgU2VlIEFsc28KCi0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIFdvcmtlciBydW50aW1lIGFuZCBmZXRjaCBoYW5kbGVyIHBhdHRlcm5zCi0gW2h5cGVyZHJpdmVdKC4uL2h5cGVyZHJpdmUvKSAtIENvbm5lY3Rpb24gcG9vbGluZyBmb3IgZXh0ZXJuYWwgZGF0YWJhc2VzCg==
+# Cloudflare D1 Database
+
+Expert guidance for Cloudflare D1, a serverless SQLite database designed for horizontal scale-out across multiple databases.
+
+## Overview
+
+D1 is Cloudflare's managed, serverless database with:
+- SQLite SQL semantics and compatibility
+- Built-in disaster recovery via Time Travel (30-day point-in-time recovery)
+- Horizontal scale-out architecture (10 GB per database)
+- Worker and HTTP API access
+- Pricing based on query and storage costs only
+
+**Architecture Philosophy**: D1 is optimized for per-user, per-tenant, or per-entity database patterns rather than single large databases.
+
+## Quick Start
+
+```bash
+# Create database
+wrangler d1 create <database-name>
+
+# Execute migration
+wrangler d1 migrations apply <db-name> --remote
+
+# Local development
+wrangler dev
+```
+
+## Core Query Methods
+
+```typescript
+// .all() - Returns all rows; .first() - First row or null; .first(col) - Single column value
+// .run() - INSERT/UPDATE/DELETE; .raw() - Array of arrays (efficient)
+const { results, success, meta } = await env.DB.prepare('SELECT * FROM users WHERE active = ?').bind(true).all();
+const user = await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first();
+```
+
+## Batch Operations
+
+```typescript
+// Multiple queries in single round trip (atomic transaction)
+const results = await env.DB.batch([
+  env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(1),
+  env.DB.prepare('SELECT * FROM posts WHERE author_id = ?').bind(1),
+  env.DB.prepare('UPDATE users SET last_access = ? WHERE id = ?').bind(Date.now(), 1)
+]);
+```
+
+## Sessions API (Paid Plans)
+
+```typescript
+// Create long-running session for analytics/migrations (up to 15 minutes)
+const session = env.DB.withSession();
+try {
+  await session.prepare('CREATE INDEX idx_heavy ON large_table(column)').run();
+  await session.prepare('ANALYZE').run();
+} finally {
+  session.close(); // Always close to release resources
+}
+```
+
+## Read Replication (Paid Plans)
+
+```typescript
+// Read from nearest replica for lower latency (automatic failover)
+const user = await env.DB_REPLICA.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first();
+
+// Writes always go to primary
+await env.DB.prepare('UPDATE users SET last_login = ? WHERE id = ?').bind(Date.now(), userId).run();
+```
+
+## Platform Limits
+
+| Limit | Free Tier | Paid Plans |
+|-------|-----------|------------|
+| Database size | 500 MB | 10 GB per database |
+| Row size | 1 MB max | 1 MB max |
+| Query timeout | 30 seconds | 30 seconds |
+| Batch size | 1,000 statements | 10,000 statements |
+| Time Travel retention | 7 days | 30 days |
+| Read replicas | Not available | Yes (paid add-on) |
+
+**Pricing**: $0.001 per million rows read + $1.00 per million rows written + $0.75/GB storage/month (includes free monthly allowance; no per-database fee)
+
+## CLI Commands
+
+```bash
+# Database management
+wrangler d1 create <db-name>
+wrangler d1 list
+wrangler d1 delete <db-name>
+
+# Migrations
+wrangler d1 migrations create <db-name> <migration-name>    # Create new migration file
+wrangler d1 migrations apply <db-name> --remote             # Apply pending migrations
+wrangler d1 migrations apply <db-name> --local              # Apply locally
+wrangler d1 migrations list <db-name> --remote              # Show applied migrations
+
+# Direct SQL execution
+wrangler d1 execute <db-name> --remote --command="SELECT * FROM users"
+wrangler d1 execute <db-name> --local --file=./schema.sql
+
+# Backups & Import/Export
+wrangler d1 export <db-name> --remote --output=./backup.sql  # Full export with schema
+wrangler d1 export <db-name> --remote --no-schema --output=./data.sql  # Data only
+wrangler d1 time-travel restore <db-name> --timestamp="2024-01-15T14:30:00Z"  # Point-in-time recovery
+
+# Development
+wrangler dev --persist-to=./.wrangler/state
+```
+
+## Reading Order
+
+**Start here**: Quick Start above → configuration.md (setup) → api.md (queries)
+
+**Common tasks**:
+- First time setup: configuration.md → Run migrations
+- Adding queries: api.md → Prepared statements
+- Pagination/caching: patterns.md
+- Production optimization: Read Replication + Sessions API (this file)
+- Debugging: gotchas.md
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - wrangler.jsonc setup, migrations, TypeScript types, ORMs, local dev
+- [api.md](./api.md) - Query methods (.all/.first/.run/.raw), batch, sessions, read replicas, error handling
+- [patterns.md](./patterns.md) - Pagination, bulk operations, caching, multi-tenant, sessions, analytics
+- [gotchas.md](./gotchas.md) - SQL injection, limits by plan tier, performance, common errors
+
+## See Also
+
+- [workers](../workers/) - Worker runtime and fetch handler patterns
+- [hyperdrive](../hyperdrive/) - Connection pooling for external databases

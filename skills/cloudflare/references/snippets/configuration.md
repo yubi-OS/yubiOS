@@ -1,1 +1,227 @@
-IyBTbmlwcGV0cyBDb25maWd1cmF0aW9uIEd1aWRlCgojIyBDb25maWd1cmF0aW9uIE1ldGhvZHMKCiMjIyAxLiBEYXNoYm9hcmQgKEdVSSkKKipCZXN0IGZvcioqOiBRdWljayB0ZXN0cywgc2luZ2xlIHNuaXBwZXRzLCB2aXN1YWwgcnVsZSBidWlsZGluZwoKYGBgCjEuIEdvIHRvIHpvbmUg4oaSIFJ1bGVzIOKGkiBTbmlwcGV0cwoyLiBDbGljayAiQ3JlYXRlIFNuaXBwZXQiIG9yIHNlbGVjdCB0ZW1wbGF0ZQozLiBFbnRlciBzbmlwcGV0IG5hbWUgKGEteiwgMC05LCBfIG9ubHksIGNhbm5vdCBjaGFuZ2UgbGF0ZXIpCjQuIFdyaXRlIEphdmFTY3JpcHQgY29kZSAoMzJLQiBtYXgpCjUuIENvbmZpZ3VyZSBzbmlwcGV0IHJ1bGU6CiAgIC0gRXhwcmVzc2lvbiBCdWlsZGVyICh2aXN1YWwpIG9yIEV4cHJlc3Npb24gRWRpdG9yICh0ZXh0KQogICAtIFVzZSBSdWxlc2V0IEVuZ2luZSBmaWx0ZXIgZXhwcmVzc2lvbnMKNi4gVGVzdCB3aXRoIFByZXZpZXcvSFRUUCB0YWJzCjcuIERlcGxveSBvciBTYXZlIGFzIERyYWZ0CmBgYAoKIyMjIDIuIFJFU1QgQVBJCioqQmVzdCBmb3IqKjogQ0kvQ0QsIGF1dG9tYXRpb24sIHByb2dyYW1tYXRpYyBtYW5hZ2VtZW50CgpgYGBiYXNoCiMgQ3JlYXRlL3VwZGF0ZSBzbmlwcGV0CmN1cmwgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC96b25lcy8kWk9ORV9JRC9zbmlwcGV0cy8kU05JUFBFVF9OQU1FIiBcCiAgLS1yZXF1ZXN0IFBVVCBcCiAgLS1oZWFkZXIgIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iIFwKICAtLWZvcm0gImZpbGVzPUBleGFtcGxlLmpzIiBcCiAgLS1mb3JtICJtZXRhZGF0YT17XCJtYWluX21vZHVsZVwiOiBcImV4YW1wbGUuanNcIn0iCgojIENyZWF0ZSBzbmlwcGV0IHJ1bGUKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzLyRaT05FX0lEL3NuaXBwZXRzL3NuaXBwZXRfcnVsZXMiIFwKICAtLXJlcXVlc3QgUFVUIFwKICAtLWhlYWRlciAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRDTE9VREZMQVJFX0FQSV9UT0tFTiIgXAogIC0taGVhZGVyICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtLWRhdGEgJ3sKICAgICJydWxlcyI6IFsKICAgICAgewogICAgICAgICJkZXNjcmlwdGlvbiI6ICJUcmlnZ2VyIHNuaXBwZXQgb24gL2FwaSBwYXRocyIsCiAgICAgICAgImVuYWJsZWQiOiB0cnVlLAogICAgICAgICJleHByZXNzaW9uIjogInN0YXJ0c193aXRoKGh0dHAucmVxdWVzdC51cmkucGF0aCwgXCIvYXBpL1wiKSIsCiAgICAgICAgInNuaXBwZXRfbmFtZSI6ICJhcGlfc25pcHBldCIKICAgICAgfQogICAgXQogIH0nCgojIExpc3Qgc25pcHBldHMKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzLyRaT05FX0lEL3NuaXBwZXRzIiBcCiAgLS1oZWFkZXIgIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iCgojIERlbGV0ZSBzbmlwcGV0CmN1cmwgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC96b25lcy8kWk9ORV9JRC9zbmlwcGV0cy8kU05JUFBFVF9OQU1FIiBcCiAgLS1yZXF1ZXN0IERFTEVURSBcCiAgLS1oZWFkZXIgIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iCmBgYAoKIyMjIDMuIFRlcnJhZm9ybQoqKkJlc3QgZm9yKio6IEluZnJhc3RydWN0dXJlLWFzLWNvZGUsIG11bHRpLXpvbmUgZGVwbG95bWVudHMKCmBgYGhjbAojIENvbmZpZ3VyZSBUZXJyYWZvcm0gcHJvdmlkZXIKdGVycmFmb3JtIHsKICByZXF1aXJlZF9wcm92aWRlcnMgewogICAgY2xvdWRmbGFyZSA9IHsKICAgICAgc291cmNlICA9ICJjbG91ZGZsYXJlL2Nsb3VkZmxhcmUiCiAgICAgIHZlcnNpb24gPSAifj4gNC4wIgogICAgfQogIH0KfQoKcHJvdmlkZXIgImNsb3VkZmxhcmUiIHsKICBhcGlfdG9rZW4gPSB2YXIuY2xvdWRmbGFyZV9hcGlfdG9rZW4KfQoKIyBDcmVhdGUgc25pcHBldApyZXNvdXJjZSAiY2xvdWRmbGFyZV9zbmlwcGV0IiAic2VjdXJpdHlfaGVhZGVycyIgewogIHpvbmVfaWQgPSB2YXIuem9uZV9pZAogIG5hbWUgICAgPSAic2VjdXJpdHlfaGVhZGVycyIKICAKICBtYWluX21vZHVsZSA9ICJzZWN1cml0eV9oZWFkZXJzLmpzIgogIGZpbGVzIHsKICAgIG5hbWUgICAgPSAic2VjdXJpdHlfaGVhZGVycy5qcyIKICAgIGNvbnRlbnQgPSBmaWxlKCIke3BhdGgubW9kdWxlfS9zbmlwcGV0cy9zZWN1cml0eV9oZWFkZXJzLmpzIikKICB9Cn0KCiMgQ3JlYXRlIHNuaXBwZXQgcnVsZQpyZXNvdXJjZSAiY2xvdWRmbGFyZV9zbmlwcGV0X3J1bGVzIiAic2VjdXJpdHlfcnVsZXMiIHsKICB6b25lX2lkID0gdmFyLnpvbmVfaWQKICAKICBydWxlcyB7CiAgICBkZXNjcmlwdGlvbiAgPSAiQXBwbHkgc2VjdXJpdHkgaGVhZGVycyB0byBhbGwgcmVxdWVzdHMiCiAgICBlbmFibGVkICAgICAgPSB0cnVlCiAgICBleHByZXNzaW9uICAgPSAidHJ1ZSIKICAgIHNuaXBwZXRfbmFtZSA9IGNsb3VkZmxhcmVfc25pcHBldC5zZWN1cml0eV9oZWFkZXJzLm5hbWUKICB9Cn0KYGBgCgojIyMgNC4gUHVsdW1pCioqQmVzdCBmb3IqKjogTXVsdGktY2xvdWQgSWFDLCBUeXBlU2NyaXB0L1B5dGhvbi9HbyB3b3JrZmxvd3MKCmBgYHR5cGVzY3JpcHQKaW1wb3J0ICogYXMgY2xvdWRmbGFyZSBmcm9tICJAcHVsdW1pL2Nsb3VkZmxhcmUiOwppbXBvcnQgKiBhcyBmcyBmcm9tICJmcyI7CgovLyBDcmVhdGUgc25pcHBldApjb25zdCBzZWN1cml0eVNuaXBwZXQgPSBuZXcgY2xvdWRmbGFyZS5TbmlwcGV0KCJzZWN1cml0eS1oZWFkZXJzIiwgewogIHpvbmVJZDogem9uZUlkLAogIG5hbWU6ICJzZWN1cml0eV9oZWFkZXJzIiwKICBtYWluTW9kdWxlOiAic2VjdXJpdHlfaGVhZGVycy5qcyIsCiAgZmlsZXM6IFt7CiAgICBuYW1lOiAic2VjdXJpdHlfaGVhZGVycy5qcyIsCiAgICBjb250ZW50OiBmcy5yZWFkRmlsZVN5bmMoIi4vc25pcHBldHMvc2VjdXJpdHlfaGVhZGVycy5qcyIsICJ1dGY4IiksCiAgfV0sCn0pOwoKLy8gQ3JlYXRlIHNuaXBwZXQgcnVsZQpjb25zdCBzbmlwcGV0UnVsZSA9IG5ldyBjbG91ZGZsYXJlLlNuaXBwZXRSdWxlcygic2VjdXJpdHktcnVsZXMiLCB7CiAgem9uZUlkOiB6b25lSWQsCiAgcnVsZXM6IFt7CiAgICBkZXNjcmlwdGlvbjogIkFwcGx5IHNlY3VyaXR5IGhlYWRlcnMiLAogICAgZW5hYmxlZDogdHJ1ZSwKICAgIGV4cHJlc3Npb246ICJ0cnVlIiwKICAgIHNuaXBwZXROYW1lOiBzZWN1cml0eVNuaXBwZXQubmFtZSwKICB9XSwKfSk7CmBgYAoKIyMgRmlsdGVyIEV4cHJlc3Npb25zCgpTbmlwcGV0cyB1c2UgQ2xvdWRmbGFyZSdzIFJ1bGVzZXQgRW5naW5lIGV4cHJlc3Npb24gbGFuZ3VhZ2UgdG8gZGV0ZXJtaW5lIHdoZW4gdG8gZXhlY3V0ZS4KCiMjIyBDb21tb24gRXhwcmVzc2lvbiBQYXR0ZXJucwoKYGBgamF2YXNjcmlwdAovLyBIb3N0IG1hdGNoaW5nCmh0dHAuaG9zdCBlcSAiZXhhbXBsZS5jb20iCmh0dHAuaG9zdCBpbiB7ImV4YW1wbGUuY29tIiAid3d3LmV4YW1wbGUuY29tIn0KaHR0cC5ob3N0IGNvbnRhaW5zICJleGFtcGxlIgoKLy8gUGF0aCBtYXRjaGluZwpodHRwLnJlcXVlc3QudXJpLnBhdGggZXEgIi9hcGkvdXNlcnMiCnN0YXJ0c193aXRoKGh0dHAucmVxdWVzdC51cmkucGF0aCwgIi9hcGkvIikKZW5kc193aXRoKGh0dHAucmVxdWVzdC51cmkucGF0aCwgIi5qc29uIikKbWF0Y2hlcyhodHRwLnJlcXVlc3QudXJpLnBhdGgsICJeL2FwaS92WzAtOV0rLyIpCgovLyBRdWVyeSBwYXJhbWV0ZXJzCmh0dHAucmVxdWVzdC51cmkucXVlcnkgY29udGFpbnMgImRlYnVnPXRydWUiCgovLyBIZWFkZXJzCmh0dHAuaGVhZGVyc1sidXNlci1hZ2VudCJdIGNvbnRhaW5zICJNb2JpbGUiCmh0dHAuaGVhZGVyc1siYWNjZXB0LWxhbmd1YWdlIl0gZXEgImVuLVVTIgoKLy8gQ29va2llcwpodHRwLmNvb2tpZSBjb250YWlucyAic2Vzc2lvbj0iCgovLyBHZW9sb2NhdGlvbgppcC5nZW9pcC5jb3VudHJ5IGVxICJVUyIKaXAuZ2VvaXAuY29udGluZW50IGVxICJFVSIKCi8vIEJvdCBkZXRlY3Rpb24gKHJlcXVpcmVzIEJvdCBNYW5hZ2VtZW50KQpjZi5ib3RfbWFuYWdlbWVudC5zY29yZSBsdCAzMAoKLy8gTWV0aG9kCmh0dHAucmVxdWVzdC5tZXRob2QgZXEgIlBPU1QiCmh0dHAucmVxdWVzdC5tZXRob2QgaW4geyJQT1NUIiAiUFVUIiAiUEFUQ0gifQoKLy8gQ29tYmluZSB3aXRoIGxvZ2ljYWwgb3BlcmF0b3JzCmh0dHAuaG9zdCBlcSAiZXhhbXBsZS5jb20iIGFuZCBzdGFydHNfd2l0aChodHRwLnJlcXVlc3QudXJpLnBhdGgsICIvYXBpLyIpCmlwLmdlb2lwLmNvdW50cnkgZXEgIlVTIiBvciBpcC5nZW9pcC5jb3VudHJ5IGVxICJDQSIKbm90IGh0dHAuaGVhZGVyc1sidXNlci1hZ2VudCJdIGNvbnRhaW5zICJib3QiCmBgYAoKIyMjIEV4cHJlc3Npb24gRnVuY3Rpb25zCgp8IEZ1bmN0aW9uIHwgRXhhbXBsZSB8IERlc2NyaXB0aW9uIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tfC0tLS0tLS0tLS0tLS18CnwgYHN0YXJ0c193aXRoKClgIHwgYHN0YXJ0c193aXRoKGh0dHAucmVxdWVzdC51cmkucGF0aCwgIi9hcGkvIilgIHwgQ2hlY2sgcHJlZml4IHwKfCBgZW5kc193aXRoKClgIHwgYGVuZHNfd2l0aChodHRwLnJlcXVlc3QudXJpLnBhdGgsICIuanNvbiIpYCB8IENoZWNrIHN1ZmZpeCB8CnwgYGNvbnRhaW5zKClgIHwgYGNvbnRhaW5zKGh0dHAuaGVhZGVyc1sidXNlci1hZ2VudCJdLCAiTW9iaWxlIilgIHwgQ2hlY2sgc3Vic3RyaW5nIHwKfCBgbWF0Y2hlcygpYCB8IGBtYXRjaGVzKGh0dHAucmVxdWVzdC51cmkucGF0aCwgIl4vYXBpLyIpYCB8IFJlZ2V4IG1hdGNoIHwKfCBgbG93ZXIoKWAgfCBgbG93ZXIoaHR0cC5ob3N0KSBlcSAiZXhhbXBsZS5jb20iYCB8IENvbnZlcnQgdG8gbG93ZXJjYXNlIHwKfCBgdXBwZXIoKWAgfCBgdXBwZXIoaHR0cC5oZWFkZXJzWyJ4LWFwaS1rZXkiXSlgIHwgQ29udmVydCB0byB1cHBlcmNhc2UgfAp8IGBsZW4oKWAgfCBgbGVuKGh0dHAucmVxdWVzdC51cmkucGF0aCkgZ3QgMTAwYCB8IFN0cmluZyBsZW5ndGggfAoKIyMgRGVwbG95bWVudCBXb3JrZmxvdwoKIyMjIERldmVsb3BtZW50CjEuIFdyaXRlIHNuaXBwZXQgY29kZSBsb2NhbGx5CjIuIFRlc3Qgc3ludGF4IHdpdGggYG5vZGUgc25pcHBldC5qc2Agb3IgVHlwZVNjcmlwdCBjb21waWxlcgozLiBEZXBsb3kgdG8gRGFzaGJvYXJkIG9yIHVzZSBBUEkgd2l0aCBgU2F2ZSBhcyBEcmFmdGAKNC4gVGVzdCB3aXRoIFByZXZpZXcvSFRUUCB0YWJzIGluIERhc2hib2FyZAo1LiBFbmFibGUgcnVsZSB3aGVuIHJlYWR5CgojIyMgUHJvZHVjdGlvbgoxLiBTdG9yZSBzbmlwcGV0IGNvZGUgaW4gdmVyc2lvbiBjb250cm9sCjIuIFVzZSBUZXJyYWZvcm0vUHVsdW1pIGZvciByZXByb2R1Y2libGUgZGVwbG95bWVudHMKMy4gRGVwbG95IHRvIHN0YWdpbmcgem9uZSBmaXJzdAo0LiBUZXN0IHdpdGggcmVhbCB0cmFmZmljICh1c2UgbG93LXRyYWZmaWMgc3ViZG9tYWluKQo1LiBBcHBseSB0byBwcm9kdWN0aW9uIHpvbmUKNi4gTW9uaXRvciB3aXRoIEFuYWx5dGljcy9Mb2dwdXNoCgojIyBMaW1pdHMgJiBSZXF1aXJlbWVudHMKCnwgUmVzb3VyY2UgfCBMaW1pdCB8IE5vdGVzIHwKfC0tLS0tLS0tLS18LS0tLS0tLXwtLS0tLS0tfAp8IFNuaXBwZXQgc2l6ZSB8IDMyIEtCIHwgUGVyIHNuaXBwZXQsIGNvbXByZXNzZWQgfAp8IFNuaXBwZXQgbmFtZSB8IDY0IGNoYXJzIHwgYGEtemAsIGAwLTlgLCBgX2Agb25seSwgaW1tdXRhYmxlIHwKfCBTbmlwcGV0cyBwZXIgem9uZSB8IDIwIHwgU29mdCBsaW1pdCwgY29udGFjdCBzdXBwb3J0IGZvciBtb3JlIHwKfCBSdWxlcyBwZXIgem9uZSB8IDIwIHwgT25lIHJ1bGUgcGVyIHNuaXBwZXQgdHlwaWNhbCB8CnwgRXhwcmVzc2lvbiBsZW5ndGggfCA0MDk2IGNoYXJzIHwgUGVyIHJ1bGUgZXhwcmVzc2lvbiB8CgojIyBBdXRoZW50aWNhdGlvbgoKIyMjIEFQSSBUb2tlbiAoUmVjb21tZW5kZWQpCmBgYGJhc2gKIyBDcmVhdGUgdG9rZW4gYXQ6IGh0dHBzOi8vZGFzaC5jbG91ZGZsYXJlLmNvbS9wcm9maWxlL2FwaS10b2tlbnMKIyBSZXF1aXJlZCBwZXJtaXNzaW9uczogWm9uZS5TbmlwcGV0czpFZGl0LCBab25lLlJ1bGVzOkVkaXQKZXhwb3J0IENMT1VERkxBUkVfQVBJX1RPS0VOPSJ5b3VyX3Rva2VuX2hlcmUiCmBgYAoKIyMjIEFQSSBLZXkgKExlZ2FjeSkKYGBgYmFzaApleHBvcnQgQ0xPVURGTEFSRV9FTUFJTD0ieW91ckBlbWFpbC5jb20iCmV4cG9ydCBDTE9VREZMQVJFX0FQSV9LRVk9InlvdXJfZ2xvYmFsX2FwaV9rZXkiCmBgYCA=
+# Snippets Configuration Guide
+
+## Configuration Methods
+
+### 1. Dashboard (GUI)
+**Best for**: Quick tests, single snippets, visual rule building
+
+```
+1. Go to zone → Rules → Snippets
+2. Click "Create Snippet" or select template
+3. Enter snippet name (a-z, 0-9, _ only, cannot change later)
+4. Write JavaScript code (32KB max)
+5. Configure snippet rule:
+   - Expression Builder (visual) or Expression Editor (text)
+   - Use Ruleset Engine filter expressions
+6. Test with Preview/HTTP tabs
+7. Deploy or Save as Draft
+```
+
+### 2. REST API
+**Best for**: CI/CD, automation, programmatic management
+
+```bash
+# Create/update snippet
+curl "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/snippets/$SNIPPET_NAME" \
+  --request PUT \
+  --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  --form "files=@example.js" \
+  --form "metadata={\"main_module\": \"example.js\"}"
+
+# Create snippet rule
+curl "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/snippets/snippet_rules" \
+  --request PUT \
+  --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "rules": [
+      {
+        "description": "Trigger snippet on /api paths",
+        "enabled": true,
+        "expression": "starts_with(http.request.uri.path, \"/api/\")",
+        "snippet_name": "api_snippet"
+      }
+    ]
+  }'
+
+# List snippets
+curl "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/snippets" \
+  --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+
+# Delete snippet
+curl "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/snippets/$SNIPPET_NAME" \
+  --request DELETE \
+  --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+```
+
+### 3. Terraform
+**Best for**: Infrastructure-as-code, multi-zone deployments
+
+```hcl
+# Configure Terraform provider
+terraform {
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
+
+# Create snippet
+resource "cloudflare_snippet" "security_headers" {
+  zone_id = var.zone_id
+  name    = "security_headers"
+  
+  main_module = "security_headers.js"
+  files {
+    name    = "security_headers.js"
+    content = file("${path.module}/snippets/security_headers.js")
+  }
+}
+
+# Create snippet rule
+resource "cloudflare_snippet_rules" "security_rules" {
+  zone_id = var.zone_id
+  
+  rules {
+    description  = "Apply security headers to all requests"
+    enabled      = true
+    expression   = "true"
+    snippet_name = cloudflare_snippet.security_headers.name
+  }
+}
+```
+
+### 4. Pulumi
+**Best for**: Multi-cloud IaC, TypeScript/Python/Go workflows
+
+```typescript
+import * as cloudflare from "@pulumi/cloudflare";
+import * as fs from "fs";
+
+// Create snippet
+const securitySnippet = new cloudflare.Snippet("security-headers", {
+  zoneId: zoneId,
+  name: "security_headers",
+  mainModule: "security_headers.js",
+  files: [{
+    name: "security_headers.js",
+    content: fs.readFileSync("./snippets/security_headers.js", "utf8"),
+  }],
+});
+
+// Create snippet rule
+const snippetRule = new cloudflare.SnippetRules("security-rules", {
+  zoneId: zoneId,
+  rules: [{
+    description: "Apply security headers",
+    enabled: true,
+    expression: "true",
+    snippetName: securitySnippet.name,
+  }],
+});
+```
+
+## Filter Expressions
+
+Snippets use Cloudflare's Ruleset Engine expression language to determine when to execute.
+
+### Common Expression Patterns
+
+```javascript
+// Host matching
+http.host eq "example.com"
+http.host in {"example.com" "www.example.com"}
+http.host contains "example"
+
+// Path matching
+http.request.uri.path eq "/api/users"
+starts_with(http.request.uri.path, "/api/")
+ends_with(http.request.uri.path, ".json")
+matches(http.request.uri.path, "^/api/v[0-9]+/")
+
+// Query parameters
+http.request.uri.query contains "debug=true"
+
+// Headers
+http.headers["user-agent"] contains "Mobile"
+http.headers["accept-language"] eq "en-US"
+
+// Cookies
+http.cookie contains "session="
+
+// Geolocation
+ip.geoip.country eq "US"
+ip.geoip.continent eq "EU"
+
+// Bot detection (requires Bot Management)
+cf.bot_management.score lt 30
+
+// Method
+http.request.method eq "POST"
+http.request.method in {"POST" "PUT" "PATCH"}
+
+// Combine with logical operators
+http.host eq "example.com" and starts_with(http.request.uri.path, "/api/")
+ip.geoip.country eq "US" or ip.geoip.country eq "CA"
+not http.headers["user-agent"] contains "bot"
+```
+
+### Expression Functions
+
+| Function | Example | Description |
+|----------|---------|-------------|
+| `starts_with()` | `starts_with(http.request.uri.path, "/api/")` | Check prefix |
+| `ends_with()` | `ends_with(http.request.uri.path, ".json")` | Check suffix |
+| `contains()` | `contains(http.headers["user-agent"], "Mobile")` | Check substring |
+| `matches()` | `matches(http.request.uri.path, "^/api/")` | Regex match |
+| `lower()` | `lower(http.host) eq "example.com"` | Convert to lowercase |
+| `upper()` | `upper(http.headers["x-api-key"])` | Convert to uppercase |
+| `len()` | `len(http.request.uri.path) gt 100` | String length |
+
+## Deployment Workflow
+
+### Development
+1. Write snippet code locally
+2. Test syntax with `node snippet.js` or TypeScript compiler
+3. Deploy to Dashboard or use API with `Save as Draft`
+4. Test with Preview/HTTP tabs in Dashboard
+5. Enable rule when ready
+
+### Production
+1. Store snippet code in version control
+2. Use Terraform/Pulumi for reproducible deployments
+3. Deploy to staging zone first
+4. Test with real traffic (use low-traffic subdomain)
+5. Apply to production zone
+6. Monitor with Analytics/Logpush
+
+## Limits & Requirements
+
+| Resource | Limit | Notes |
+|----------|-------|-------|
+| Snippet size | 32 KB | Per snippet, compressed |
+| Snippet name | 64 chars | `a-z`, `0-9`, `_` only, immutable |
+| Snippets per zone | 20 | Soft limit, contact support for more |
+| Rules per zone | 20 | One rule per snippet typical |
+| Expression length | 4096 chars | Per rule expression |
+
+## Authentication
+
+### API Token (Recommended)
+```bash
+# Create token at: https://dash.cloudflare.com/profile/api-tokens
+# Required permissions: Zone.Snippets:Edit, Zone.Rules:Edit
+export CLOUDFLARE_API_TOKEN="your_token_here"
+```
+
+### API Key (Legacy)
+```bash
+export CLOUDFLARE_EMAIL="your@email.com"
+export CLOUDFLARE_API_KEY="your_global_api_key"
+``` 

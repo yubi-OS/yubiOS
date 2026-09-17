@@ -1,1 +1,199 @@
-IyBSZWNlaXZpbmcgJiBSb3V0aW5nIEluYm91bmQgRW1haWwKCkhhbmRsZSBpbmNvbWluZyBlbWFpbHMgc2VudCB0byB5b3VyIGRvbWFpbiB2aWEgYSBXb3JrZXIncyBgZW1haWwoKWAgaGFuZGxlci4gRm9yd2FyZCwgcmVwbHksIHJlamVjdCwgb3IgcGFyc2UgZW1haWxzIHByb2dyYW1tYXRpY2FsbHkuCgpGb3IgZnVsbCBBUEkgZGV0YWlscywgc2VlIHRoZSBbRW1haWwgUm91dGluZyBkb2NzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vZW1haWwtc2VydmljZS9hcGkvcm91dGUtZW1haWxzL2VtYWlsLWhhbmRsZXIvKS4KCiMjIEVtYWlsIEhhbmRsZXIKCkV4cG9ydCBhbiBgZW1haWwoKWAgZnVuY3Rpb24gZnJvbSB5b3VyIFdvcmtlci4gTm8gc3BlY2lhbCB3cmFuZ2xlciBiaW5kaW5nIG5lZWRlZCDigJQgYSByb3V0aW5nIHJ1bGUgY29ubmVjdHMgaW5jb21pbmcgYWRkcmVzc2VzIHRvIHlvdXIgV29ya2VyLgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZW1haWwobWVzc2FnZSwgZW52LCBjdHgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGNvbnNvbGUubG9nKGBFbWFpbCBmcm9tICR7bWVzc2FnZS5mcm9tfSB0byAke21lc3NhZ2UudG99YCk7CiAgICBhd2FpdCBtZXNzYWdlLmZvcndhcmQoInRlYW1AY29tcGFueS5jb20iKTsKICB9LAp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgpTZXQgdXAgcm91dGluZyBydWxlcyBpbiAqKkRhc2hib2FyZCoqID4gKipDb21wdXRlICYgQUkqKiA+ICoqRW1haWwgU2VydmljZSoqID4gKipFbWFpbCBSb3V0aW5nKiogPiAqKlJvdXRpbmcgUnVsZXMqKiwgb3IgdmlhIGB3cmFuZ2xlciBlbWFpbCByb3V0aW5nIHJ1bGVzIGNyZWF0ZWAuCgojIyBGb3J3YXJkYWJsZUVtYWlsTWVzc2FnZQoKVGhlIGBtZXNzYWdlYCBwYXJhbWV0ZXIgaXMgYSBgRm9yd2FyZGFibGVFbWFpbE1lc3NhZ2VgLiBSdW4gYG5weCB3cmFuZ2xlciB0eXBlc2AgdG8gZ2V0IHRoZSBmdWxsIHR5cGUgZGVmaW5pdGlvbi4gS2V5IHByb3BlcnRpZXMgYW5kIG1ldGhvZHM6CgotIGBtZXNzYWdlLmZyb21gIC8gYG1lc3NhZ2UudG9gIOKAlCBlbnZlbG9wZSBhZGRyZXNzZXMgKFNNVFAgTUFJTCBGUk9NIC8gUkNQVCBUTykuIGBtZXNzYWdlLmZyb21gIGlzIHRydXN0d29ydGh5OyBoZWFkZXIgYWRkcmVzc2VzIGNhbiBiZSBzcG9vZmVkLgotIGBtZXNzYWdlLmhlYWRlcnNgIOKAlCBgSGVhZGVyc2Agb2JqZWN0ICh1c2UgYC5nZXQoInN1YmplY3QiKWAsIGAuZ2V0KCJtZXNzYWdlLWlkIilgLCBldGMuKQotIGBtZXNzYWdlLnJhd2Ag4oCUIGBSZWFkYWJsZVN0cmVhbTxVaW50OEFycmF5PmAgb2YgcmF3IE1JTUUgY29udGVudC4gKipTaW5nbGUgdXNlKiog4oCUIGJ1ZmZlciBiZWZvcmUgYWNjZXNzaW5nLgotIGBtZXNzYWdlLnJhd1NpemVgIOKAlCBzaXplIGluIGJ5dGVzCi0gYG1lc3NhZ2Uuc2V0UmVqZWN0KHJlYXNvbilgIOKAlCByZWplY3Qgd2l0aCBhIHBlcm1hbmVudCBTTVRQIGVycm9yCi0gYG1lc3NhZ2UuZm9yd2FyZChyY3B0VG8sIGhlYWRlcnM/KWAg4oCUIGZvcndhcmQgdG8gYSB2ZXJpZmllZCBkZXN0aW5hdGlvbgotIGBtZXNzYWdlLnJlcGx5KGVtYWlsTWVzc2FnZSlgIOKAlCByZXBseSB3aXRoIGFuIGBFbWFpbE1lc3NhZ2VgIG9iamVjdAoKIyMgQ29yZSBPcGVyYXRpb25zCgojIyMgRm9yd2FyZAoKYGBgdHlwZXNjcmlwdAphd2FpdCBtZXNzYWdlLmZvcndhcmQoInRlYW1AY29tcGFueS5jb20iKTsKCi8vIFdpdGggY3VzdG9tIGhlYWRlcnMKYXdhaXQgbWVzc2FnZS5mb3J3YXJkKCJ0ZWFtQGNvbXBhbnkuY29tIiwgbmV3IEhlYWRlcnMoewogICJYLU9yaWdpbmFsLVJlY2lwaWVudCI6IG1lc3NhZ2UudG8sCn0pKTsKYGBgCgpEZXN0aW5hdGlvbiBtdXN0IGJlIHZlcmlmaWVkIGZpcnN0IChEYXNoYm9hcmQgb3IgYHdyYW5nbGVyIGVtYWlsIHJvdXRpbmcgYWRkcmVzc2VzIGNyZWF0ZWApLgoKIyMjIFJlamVjdAoKYGBgdHlwZXNjcmlwdAptZXNzYWdlLnNldFJlamVjdCgiWW91ciBtZXNzYWdlIHdhcyBibG9ja2VkIik7CmBgYAoKIyMjIFJlcGx5CgpVc2luZyBgZW52LkVNQUlMLnNlbmQoKWAgKHJlY29tbWVuZGVkIOKAlCBubyBleHRyYSBkZXBlbmRlbmNpZXMpOgoKYGBgdHlwZXNjcmlwdAphc3luYyBlbWFpbChtZXNzYWdlLCBlbnYsIGN0eCkgewogIGNvbnN0IHN1YmplY3QgPSBtZXNzYWdlLmhlYWRlcnMuZ2V0KCJzdWJqZWN0IikgfHwgIiI7CiAgYXdhaXQgZW52LkVNQUlMLnNlbmQoewogICAgdG86IG1lc3NhZ2UuZnJvbSwKICAgIGZyb206IG1lc3NhZ2UudG8sCiAgICBzdWJqZWN0OiBgUmU6ICR7c3ViamVjdH1gLAogICAgaHRtbDogIjxwPlRoYW5rcyEgV2UnbGwgcmVzcG9uZCBzaG9ydGx5LjwvcD4iLAogICAgdGV4dDogIlRoYW5rcyEgV2UnbGwgcmVzcG9uZCBzaG9ydGx5LiIsCiAgfSk7CiAgYXdhaXQgbWVzc2FnZS5mb3J3YXJkKCJ0ZWFtQGNvbXBhbnkuY29tIik7Cn0KYGBgCgpVc2luZyBgbWVzc2FnZS5yZXBseSgpYCB3aXRoIE1JTUUgKG1vcmUgY29udHJvbCwgcmVxdWlyZXMgYG1pbWV0ZXh0YCArIGBub2RlanNfY29tcGF0YCk6CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IEVtYWlsTWVzc2FnZSB9IGZyb20gImNsb3VkZmxhcmU6ZW1haWwiOwppbXBvcnQgeyBjcmVhdGVNaW1lTWVzc2FnZSB9IGZyb20gIm1pbWV0ZXh0IjsKCmFzeW5jIGVtYWlsKG1lc3NhZ2UsIGVudiwgY3R4KSB7CiAgY29uc3QgbXNnID0gY3JlYXRlTWltZU1lc3NhZ2UoKTsKICBjb25zdCBtZXNzYWdlSWQgPSBtZXNzYWdlLmhlYWRlcnMuZ2V0KCJNZXNzYWdlLUlEIik7CiAgaWYgKG1lc3NhZ2VJZCkgbXNnLnNldEhlYWRlcigiSW4tUmVwbHktVG8iLCBtZXNzYWdlSWQpOwogIG1zZy5zZXRTZW5kZXIoeyBuYW1lOiAiU3VwcG9ydCIsIGFkZHI6ICJzdXBwb3J0QHlvdXJkb21haW4uY29tIiB9KTsKICBtc2cuc2V0UmVjaXBpZW50KG1lc3NhZ2UuZnJvbSk7CiAgbXNnLnNldFN1YmplY3QoIlJlOiAiICsgKG1lc3NhZ2UuaGVhZGVycy5nZXQoInN1YmplY3QiKSB8fCAiIikpOwogIG1zZy5hZGRNZXNzYWdlKHsgY29udGVudFR5cGU6ICJ0ZXh0L3BsYWluIiwgZGF0YTogIlRoYW5rcyBmb3IgcmVhY2hpbmcgb3V0ISIgfSk7CgogIGF3YWl0IG1lc3NhZ2UucmVwbHkobmV3IEVtYWlsTWVzc2FnZSgic3VwcG9ydEB5b3VyZG9tYWluLmNvbSIsIG1lc3NhZ2UuZnJvbSwgbXNnLmFzUmF3KCkpKTsKfQpgYGAKCiMjIFBhcnNpbmcgRW1haWxzCgpVc2UgW3Bvc3RhbC1taW1lXShodHRwczovL3d3dy5ucG1qcy5jb20vcGFja2FnZS9wb3N0YWwtbWltZSkgdG8gcGFyc2UgcmF3IE1JTUUgY29udGVudDoKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IFBvc3RhbE1pbWUgZnJvbSAicG9zdGFsLW1pbWUiOwoKYXN5bmMgZW1haWwobWVzc2FnZSwgZW52LCBjdHgpIHsKICBjb25zdCByYXdCdWZmZXIgPSBhd2FpdCBuZXcgUmVzcG9uc2UobWVzc2FnZS5yYXcpLmFycmF5QnVmZmVyKCk7CiAgY29uc3QgcGFyc2VkID0gYXdhaXQgUG9zdGFsTWltZS5wYXJzZShyYXdCdWZmZXIpOwoKICBjb25zb2xlLmxvZygiU3ViamVjdDoiLCBwYXJzZWQuc3ViamVjdCk7CiAgY29uc29sZS5sb2coIlRleHQ6IiwgcGFyc2VkLnRleHQpOwogIGNvbnNvbGUubG9nKCJBdHRhY2htZW50czoiLCBwYXJzZWQuYXR0YWNobWVudHMubGVuZ3RoKTsKfQpgYGAKCiMjIFN0b3JlIGFuZCBSZXBseSBMYXRlciAoSHVtYW4taW4tdGhlLUxvb3ApCgpBIGNvbW1vbiBwYXR0ZXJuIGlzIHRvIHN0b3JlIGluY29taW5nIGVtYWlscyBpbiBhIER1cmFibGUgT2JqZWN0IChTUUxpdGUpIHNvIGEgaHVtYW4gb3IgQUkgYWdlbnQgY2FuIHJldmlldyBhbmQgcmVwbHkgbGF0ZXIg4oCUIHJhdGhlciB0aGFuIHJlcGx5aW5nIGltbWVkaWF0ZWx5IGluIHRoZSBgZW1haWwoKWAgaGFuZGxlci4gVGhpcyBlbmFibGVzIHN1cHBvcnQgaW5ib3hlcywgYXBwcm92YWwgd29ya2Zsb3dzLCBhbmQgQUktZHJhZnRlZCByZXBsaWVzLgoKIyMjIEFyY2hpdGVjdHVyZQoKYGBgCkVtYWlsIFJvdXRpbmcg4oaSIGVtYWlsKCkgaGFuZGxlciDihpIgcGFyc2UgKyBzdG9yZSBpbiBETyDihpIgdXNlciByZXZpZXdzIGxhdGVyIOKGkiByZXBseSB2aWEgc2VuZF9lbWFpbCBiaW5kaW5nCmBgYAoKVGhlIGBlbWFpbCgpYCBoYW5kbGVyIHN0b3JlcyB0aGUgZW1haWwgYW5kIHJldHVybnMgaW1tZWRpYXRlbHkuIFJlcGxpZXMgaGFwcGVuIGxhdGVyIHZpYSBhIHNlcGFyYXRlIEhUVFAgcmVxdWVzdCBvciBhZ2VudCBhY3Rpb24uCgojIyMgUmVjZWl2ZSBhbmQgU3RvcmUKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IFBvc3RhbE1pbWUgZnJvbSAicG9zdGFsLW1pbWUiOwoKZXhwb3J0IGNsYXNzIE1haWxib3hETyBleHRlbmRzIER1cmFibGVPYmplY3QgewogIGFzeW5jIHN0b3JlRW1haWwoZnJvbTogc3RyaW5nLCB0bzogc3RyaW5nLCBzdWJqZWN0OiBzdHJpbmcsIGJvZHk6IHN0cmluZywKICAgICAgICAgICAgICAgICAgIG1lc3NhZ2VJZDogc3RyaW5nLCBpblJlcGx5VG86IHN0cmluZyB8IG51bGwpIHsKICAgIHRoaXMuY3R4LnN0b3JhZ2Uuc3FsLmV4ZWMoCiAgICAgIGBJTlNFUlQgSU5UTyBlbWFpbHMgKHNlbmRlciwgcmVjaXBpZW50LCBzdWJqZWN0LCBib2R5LCBtZXNzYWdlX2lkLCBpbl9yZXBseV90bywgZGF0ZSwgcmVhZCkKICAgICAgIFZBTFVFUyAoPywgPywgPywgPywgPywgPywgZGF0ZXRpbWUoJ25vdycpLCAwKWAsCiAgICAgIGZyb20sIHRvLCBzdWJqZWN0LCBib2R5LCBtZXNzYWdlSWQsIGluUmVwbHlUbwogICAgKTsKICB9Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBlbWFpbChtZXNzYWdlLCBlbnYsIGN0eCkgewogICAgY29uc3QgcmF3ID0gYXdhaXQgbmV3IFJlc3BvbnNlKG1lc3NhZ2UucmF3KS5hcnJheUJ1ZmZlcigpOwogICAgY29uc3QgcGFyc2VkID0gYXdhaXQgUG9zdGFsTWltZS5wYXJzZShyYXcpOwoKICAgIGNvbnN0IGlkID0gZW52Lk1BSUxCT1guaWRGcm9tTmFtZShtZXNzYWdlLnRvKTsKICAgIGNvbnN0IHN0dWIgPSBlbnYuTUFJTEJPWC5nZXQoaWQpOwoKICAgIGF3YWl0IHN0dWIuc3RvcmVFbWFpbCgKICAgICAgbWVzc2FnZS5mcm9tLAogICAgICBtZXNzYWdlLnRvLAogICAgICBwYXJzZWQuc3ViamVjdCB8fCAiKG5vIHN1YmplY3QpIiwKICAgICAgcGFyc2VkLnRleHQgfHwgcGFyc2VkLmh0bWwgfHwgIiIsCiAgICAgIG1lc3NhZ2UuaGVhZGVycy5nZXQoIm1lc3NhZ2UtaWQiKSB8fCAiIiwKICAgICAgbWVzc2FnZS5oZWFkZXJzLmdldCgiaW4tcmVwbHktdG8iKSB8fCBudWxsLAogICAgKTsKCiAgICAvLyBPcHRpb25hbGx5IHRyaWdnZXIgYW4gQUkgYWdlbnQgdG8gZHJhZnQgYSByZXBseSAobm9uLWJsb2NraW5nKQogICAgLy8gY3R4LndhaXRVbnRpbChub3RpZnlBZ2VudChlbnYsIG1lc3NhZ2UudG8sIGVtYWlsSWQpKTsKICB9LAp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgojIyMgUmVwbHkgTGF0ZXIKCldoZW4gYSB1c2VyIChvciBhZ2VudCkgZGVjaWRlcyB0byByZXBseSwgYnVpbGQgcHJvcGVyIHRocmVhZGluZyBoZWFkZXJzIGFuZCBzZW5kIHZpYSB0aGUgYHNlbmRfZW1haWxgIGJpbmRpbmc6CgpgYGB0eXBlc2NyaXB0Ci8vIEluIGFuIEhUVFAgaGFuZGxlciBvciBhZ2VudCB0b29sIOKAlCBub3QgaW4gdGhlIGVtYWlsKCkgaGFuZGxlcgphc3luYyBmdW5jdGlvbiByZXBseVRvU3RvcmVkRW1haWwoZW52OiBFbnYsIG9yaWdpbmFsOiBTdG9yZWRFbWFpbCwgcmVwbHlCb2R5OiBzdHJpbmcpIHsKICAvLyBCdWlsZCB0aHJlYWRpbmcgaGVhZGVycyAoSW4tUmVwbHktVG8gKyBSZWZlcmVuY2VzIHBlciBSRkMgMjgyMikKICBjb25zdCBoZWFkZXJzOiBSZWNvcmQ8c3RyaW5nLCBzdHJpbmc+ID0ge307CiAgaWYgKG9yaWdpbmFsLm1lc3NhZ2VJZCkgewogICAgaGVhZGVyc1siSW4tUmVwbHktVG8iXSA9IG9yaWdpbmFsLm1lc3NhZ2VJZDsKICAgIGhlYWRlcnNbIlJlZmVyZW5jZXMiXSA9IG9yaWdpbmFsLm1lc3NhZ2VJZDsKICB9CgogIGF3YWl0IGVudi5FTUFJTC5zZW5kKHsKICAgIHRvOiBvcmlnaW5hbC5zZW5kZXIsCiAgICBmcm9tOiBvcmlnaW5hbC5yZWNpcGllbnQsCiAgICBzdWJqZWN0OiBgUmU6ICR7b3JpZ2luYWwuc3ViamVjdH1gLAogICAgdGV4dDogcmVwbHlCb2R5LAogICAgaHRtbDogYDxwPiR7cmVwbHlCb2R5fTwvcD5gLAogICAgaGVhZGVycywKICB9KTsKfQpgYGAKCiMjIyBLZXkgRGVzaWduIFBvaW50cwoKLSAqKkJ1ZmZlciBgbWVzc2FnZS5yYXdgIG9uY2UqKiwgcGFyc2Ugd2l0aCBgcG9zdGFsLW1pbWVgLCB0aGVuIHN0b3JlIHN0cnVjdHVyZWQgZmllbGRzLiBEb24ndCBzdG9yZSB0aGUgcmF3IHN0cmVhbS4KLSAqKkV4dHJhY3QgYE1lc3NhZ2UtSURgLCBgSW4tUmVwbHktVG9gLCBhbmQgYFJlZmVyZW5jZXNgKiogaGVhZGVycyBkdXJpbmcgaW5nZXN0IGZvciB0aHJlYWRpbmcuIEZhbGwgYmFjayB0byBzdWJqZWN0LWJhc2VkIG1hdGNoaW5nIGZvciBlbWFpbHMgd2l0aG91dCB0aHJlYWRpbmcgaGVhZGVycy4KLSAqKlVzZSBEdXJhYmxlIE9iamVjdCBTUUxpdGUqKiBmb3IgcGVyLW1haWxib3ggc3RvcmFnZSDigJQgZWFjaCBtYWlsYm94IGdldHMgaXRzIG93biBETyBpbnN0YW5jZSBrZXllZCBieSBlbWFpbCBhZGRyZXNzLCBwcm92aWRpbmcgbmF0dXJhbCBpc29sYXRpb24uCi0gKipTdG9yZSBhdHRhY2htZW50cyBzZXBhcmF0ZWx5KiogaW4gUjIgKGJpbmFyeSBibG9icyksIHdpdGggbWV0YWRhdGEgaW4gU1FMaXRlLgotICoqRGVmZXIgaGVhdnkgd29yayoqIChBSSBkcmFmdGluZywgbm90aWZpY2F0aW9ucykgdmlhIGBjdHgud2FpdFVudGlsKClgIHNvIHRoZSBgZW1haWwoKWAgaGFuZGxlciByZXR1cm5zIHF1aWNrbHkuCi0gKipOZXZlciBhdXRvLXNlbmQgZnJvbSB0aGUgYGVtYWlsKClgIGhhbmRsZXIqKiBpbiBhIGh1bWFuLWluLXRoZS1sb29wIGZsb3cuIFN0b3JlIGEgZHJhZnQsIGxldCB0aGUgdXNlciByZXZpZXcsIHRoZW4gc2VuZCB2aWEgYSBzZXBhcmF0ZSBhY3Rpb24uCgojIyBHb3RjaGFzCgotICoqYG1lc3NhZ2UucmF3YCBpcyBzaW5nbGUtdXNlLioqIEJ1ZmZlciBmaXJzdDogYGNvbnN0IHJhdyA9IGF3YWl0IG5ldyBSZXNwb25zZShtZXNzYWdlLnJhdykuYXJyYXlCdWZmZXIoKWAKLSAqKkRlc3RpbmF0aW9ucyBtdXN0IGJlIHZlcmlmaWVkLioqIEZvcndhcmRpbmcgdG8gdW52ZXJpZmllZCBhZGRyZXNzZXMgZmFpbHMgc2lsZW50bHkuCi0gKipIYW5kbGVyIG11c3QgYWN0LioqIElmIHlvdXIgaGFuZGxlciByZXR1cm5zIHdpdGhvdXQgY29uc3VtaW5nIHJhdywgZm9yd2FyZGluZywgb3IgcmVqZWN0aW5nLCB0aGUgZW1haWwgaXMgZHJvcHBlZC4KLSAqKkRNQVJDL1NQRiBmb3IgcmVwbGllcy4qKiBJZiBzZW5kaW5nIHJlcGxpZXMsIGVuc3VyZSB5b3VyIGRvbWFpbiBoYXMgcHJvcGVyIFNQRi9ES0lNIHJlY29yZHMgKGF1dG8tY29uZmlndXJlZCBvbiBkb21haW4gb25ib2FyZGluZykuCg==
+# Receiving & Routing Inbound Email
+
+Handle incoming emails sent to your domain via a Worker's `email()` handler. Forward, reply, reject, or parse emails programmatically.
+
+For full API details, see the [Email Routing docs](https://developers.cloudflare.com/email-service/api/route-emails/email-handler/).
+
+## Email Handler
+
+Export an `email()` function from your Worker. No special wrangler binding needed — a routing rule connects incoming addresses to your Worker.
+
+```typescript
+export default {
+  async email(message, env, ctx): Promise<void> {
+    console.log(`Email from ${message.from} to ${message.to}`);
+    await message.forward("team@company.com");
+  },
+} satisfies ExportedHandler<Env>;
+```
+
+Set up routing rules in **Dashboard** > **Compute & AI** > **Email Service** > **Email Routing** > **Routing Rules**, or via `wrangler email routing rules create`.
+
+## ForwardableEmailMessage
+
+The `message` parameter is a `ForwardableEmailMessage`. Run `npx wrangler types` to get the full type definition. Key properties and methods:
+
+- `message.from` / `message.to` — envelope addresses (SMTP MAIL FROM / RCPT TO). `message.from` is trustworthy; header addresses can be spoofed.
+- `message.headers` — `Headers` object (use `.get("subject")`, `.get("message-id")`, etc.)
+- `message.raw` — `ReadableStream<Uint8Array>` of raw MIME content. **Single use** — buffer before accessing.
+- `message.rawSize` — size in bytes
+- `message.setReject(reason)` — reject with a permanent SMTP error
+- `message.forward(rcptTo, headers?)` — forward to a verified destination
+- `message.reply(emailMessage)` — reply with an `EmailMessage` object
+
+## Core Operations
+
+### Forward
+
+```typescript
+await message.forward("team@company.com");
+
+// With custom headers
+await message.forward("team@company.com", new Headers({
+  "X-Original-Recipient": message.to,
+}));
+```
+
+Destination must be verified first (Dashboard or `wrangler email routing addresses create`).
+
+### Reject
+
+```typescript
+message.setReject("Your message was blocked");
+```
+
+### Reply
+
+Using `env.EMAIL.send()` (recommended — no extra dependencies):
+
+```typescript
+async email(message, env, ctx) {
+  const subject = message.headers.get("subject") || "";
+  await env.EMAIL.send({
+    to: message.from,
+    from: message.to,
+    subject: `Re: ${subject}`,
+    html: "<p>Thanks! We'll respond shortly.</p>",
+    text: "Thanks! We'll respond shortly.",
+  });
+  await message.forward("team@company.com");
+}
+```
+
+Using `message.reply()` with MIME (more control, requires `mimetext` + `nodejs_compat`):
+
+```typescript
+import { EmailMessage } from "cloudflare:email";
+import { createMimeMessage } from "mimetext";
+
+async email(message, env, ctx) {
+  const msg = createMimeMessage();
+  const messageId = message.headers.get("Message-ID");
+  if (messageId) msg.setHeader("In-Reply-To", messageId);
+  msg.setSender({ name: "Support", addr: "support@yourdomain.com" });
+  msg.setRecipient(message.from);
+  msg.setSubject("Re: " + (message.headers.get("subject") || ""));
+  msg.addMessage({ contentType: "text/plain", data: "Thanks for reaching out!" });
+
+  await message.reply(new EmailMessage("support@yourdomain.com", message.from, msg.asRaw()));
+}
+```
+
+## Parsing Emails
+
+Use [postal-mime](https://www.npmjs.com/package/postal-mime) to parse raw MIME content:
+
+```typescript
+import PostalMime from "postal-mime";
+
+async email(message, env, ctx) {
+  const rawBuffer = await new Response(message.raw).arrayBuffer();
+  const parsed = await PostalMime.parse(rawBuffer);
+
+  console.log("Subject:", parsed.subject);
+  console.log("Text:", parsed.text);
+  console.log("Attachments:", parsed.attachments.length);
+}
+```
+
+## Store and Reply Later (Human-in-the-Loop)
+
+A common pattern is to store incoming emails in a Durable Object (SQLite) so a human or AI agent can review and reply later — rather than replying immediately in the `email()` handler. This enables support inboxes, approval workflows, and AI-drafted replies.
+
+### Architecture
+
+```
+Email Routing → email() handler → parse + store in DO → user reviews later → reply via send_email binding
+```
+
+The `email()` handler stores the email and returns immediately. Replies happen later via a separate HTTP request or agent action.
+
+### Receive and Store
+
+```typescript
+import PostalMime from "postal-mime";
+
+export class MailboxDO extends DurableObject {
+  async storeEmail(from: string, to: string, subject: string, body: string,
+                   messageId: string, inReplyTo: string | null) {
+    this.ctx.storage.sql.exec(
+      `INSERT INTO emails (sender, recipient, subject, body, message_id, in_reply_to, date, read)
+       VALUES (?, ?, ?, ?, ?, ?, datetime('now'), 0)`,
+      from, to, subject, body, messageId, inReplyTo
+    );
+  }
+}
+
+export default {
+  async email(message, env, ctx) {
+    const raw = await new Response(message.raw).arrayBuffer();
+    const parsed = await PostalMime.parse(raw);
+
+    const id = env.MAILBOX.idFromName(message.to);
+    const stub = env.MAILBOX.get(id);
+
+    await stub.storeEmail(
+      message.from,
+      message.to,
+      parsed.subject || "(no subject)",
+      parsed.text || parsed.html || "",
+      message.headers.get("message-id") || "",
+      message.headers.get("in-reply-to") || null,
+    );
+
+    // Optionally trigger an AI agent to draft a reply (non-blocking)
+    // ctx.waitUntil(notifyAgent(env, message.to, emailId));
+  },
+} satisfies ExportedHandler<Env>;
+```
+
+### Reply Later
+
+When a user (or agent) decides to reply, build proper threading headers and send via the `send_email` binding:
+
+```typescript
+// In an HTTP handler or agent tool — not in the email() handler
+async function replyToStoredEmail(env: Env, original: StoredEmail, replyBody: string) {
+  // Build threading headers (In-Reply-To + References per RFC 2822)
+  const headers: Record<string, string> = {};
+  if (original.messageId) {
+    headers["In-Reply-To"] = original.messageId;
+    headers["References"] = original.messageId;
+  }
+
+  await env.EMAIL.send({
+    to: original.sender,
+    from: original.recipient,
+    subject: `Re: ${original.subject}`,
+    text: replyBody,
+    html: `<p>${replyBody}</p>`,
+    headers,
+  });
+}
+```
+
+### Key Design Points
+
+- **Buffer `message.raw` once**, parse with `postal-mime`, then store structured fields. Don't store the raw stream.
+- **Extract `Message-ID`, `In-Reply-To`, and `References`** headers during ingest for threading. Fall back to subject-based matching for emails without threading headers.
+- **Use Durable Object SQLite** for per-mailbox storage — each mailbox gets its own DO instance keyed by email address, providing natural isolation.
+- **Store attachments separately** in R2 (binary blobs), with metadata in SQLite.
+- **Defer heavy work** (AI drafting, notifications) via `ctx.waitUntil()` so the `email()` handler returns quickly.
+- **Never auto-send from the `email()` handler** in a human-in-the-loop flow. Store a draft, let the user review, then send via a separate action.
+
+## Gotchas
+
+- **`message.raw` is single-use.** Buffer first: `const raw = await new Response(message.raw).arrayBuffer()`
+- **Destinations must be verified.** Forwarding to unverified addresses fails silently.
+- **Handler must act.** If your handler returns without consuming raw, forwarding, or rejecting, the email is dropped.
+- **DMARC/SPF for replies.** If sending replies, ensure your domain has proper SPF/DKIM records (auto-configured on domain onboarding).

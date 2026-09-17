@@ -1,1 +1,165 @@
-IyBDTkkgR290Y2hhcyAmIFRyb3VibGVzaG9vdGluZwoKIyMgQ29tbW9uIEVycm9ycwoKIyMjICJTdGF0dXM6IFBlbmRpbmciCgoqKkNhdXNlOioqIENyb3NzLWNvbm5lY3Qgbm90IGluc3RhbGxlZCwgUlgvVFggZmliZXJzIHJldmVyc2VkLCB3cm9uZyBmaWJlciB0eXBlLCBvciBsb3cgbGlnaHQgbGV2ZWxzCioqU29sdXRpb246KioKMS4gVmVyaWZ5IGNyb3NzLWNvbm5lY3QgaW5zdGFsbGVkCjIuIENoZWNrIGZpYmVyIGF0IHBhdGNoIHBhbmVsCjMuIFN3YXAgUlgvVFggZmliZXJzCjQuIENoZWNrIGxpZ2h0IHdpdGggb3B0aWNhbCBwb3dlciBtZXRlciAodGFyZ2V0ID4gLTIwIGRCbSkKNS4gQ29udGFjdCBhY2NvdW50IHRlYW0KCiMjIyAiU3RhdHVzOiBVbmhlYWx0aHkiCgoqKkNhdXNlOioqIFBoeXNpY2FsIGlzc3VlLCBsb3cgbGlnaHQgKDwtMjAgZEJtKSwgb3B0aWMgbWlzbWF0Y2gsIG9yIGRpcnR5IGNvbm5lY3RvcnMKKipTb2x1dGlvbjoqKgoxLiBDaGVjayBwaHlzaWNhbCBjb25uZWN0aW9ucwoyLiBDbGVhbiBmaWJlciBjb25uZWN0b3JzCjMuIFZlcmlmeSBvcHRpYyB0eXBlcyAoMTBHQkFTRS1MUi8xMDBHQkFTRS1MUjQpCjQuIFRlc3Qgd2l0aCBrbm93bi1nb29kIG9wdGljcwo1LiBDaGVjayBwYXRjaCBwYW5lbAo2LiBDb250YWN0IGFjY291bnQgdGVhbQoKIyMjICJCR1AgU2Vzc2lvbiBEb3duIgoKKipDYXVzZToqKiBXcm9uZyBJUCBhZGRyZXNzaW5nLCB3cm9uZyBBU04sIHBhc3N3b3JkIG1pc21hdGNoLCBvciBmaXJld2FsbCBibG9ja2luZyBUQ1AvMTc5CioqU29sdXRpb246KioKMS4gVmVyaWZ5IElQcyBtYXRjaCBDTkkgb2JqZWN0CjIuIENvbmZpcm0gQVNOIGNvcnJlY3QKMy4gQ2hlY2sgQkdQIHBhc3N3b3JkCjQuIFZlcmlmeSBubyBmaXJld2FsbCBvbiBUQ1AvMTc5CjUuIENoZWNrIEJHUCBsb2dzCjYuIFJldmlldyBCR1AgdGltZXJzCgojIyMgIkxvdyBUaHJvdWdocHV0IgoKKipDYXVzZToqKiBNVFUgbWlzbWF0Y2gsIGZyYWdtZW50YXRpb24sIHNpbmdsZSBHUkUgdHVubmVsICh2MSksIG9yIHJvdXRpbmcgaW5lZmZpY2llbmN5CioqU29sdXRpb246KioKMS4gQ2hlY2sgTVRVICgxNTAw4oaTLzE0NzbihpEgZm9yIHYxLCAxNTAwIGJvdGggZm9yIHYyKQoyLiBUZXN0IHZhcmlvdXMgcGFja2V0IHNpemVzCjMuIEFkZCBtb3JlIEdSRSB0dW5uZWxzICh2MSkKNC4gQ29uc2lkZXIgdXBncmFkaW5nIHRvIHYyCjUuIFJldmlldyByb3V0aW5nIHRhYmxlcwo2LiBVc2UgTEFDUCBmb3IgYnVuZGxpbmcgKHYxKQoKIyMgQVBJIEVycm9ycwoKIyMjIDQwMCBCYWQgUmVxdWVzdDogInNsb3RfaWQgYWxyZWFkeSBvY2N1cGllZCIKCioqQ2F1c2U6KiogQW5vdGhlciBpbnRlcmNvbm5lY3QgYWxyZWFkeSB1c2VzIHRoaXMgc2xvdCAgCioqU29sdXRpb246KiogVXNlIGBvY2N1cGllZD1mYWxzZWAgZmlsdGVyIHdoZW4gbGlzdGluZyBzbG90czoKYGBgdHlwZXNjcmlwdAphd2FpdCBjbGllbnQubmV0d29ya0ludGVyY29ubmVjdHMuc2xvdHMubGlzdCh7CiAgYWNjb3VudF9pZDogaWQsCiAgb2NjdXBpZWQ6IGZhbHNlLAogIGZhY2lsaXR5OiAnRVdSMScsCn0pOwpgYGAKCiMjIyA0MDAgQmFkIFJlcXVlc3Q6ICJpbnZhbGlkIGZhY2lsaXR5IGNvZGUiCgoqKkNhdXNlOioqIFR5cG8gb3IgdW5zdXBwb3J0ZWQgZmFjaWxpdHkgIAoqKlNvbHV0aW9uOioqIENoZWNrIFtsb2NhdGlvbnMgUERGXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vbmV0d29yay1pbnRlcmNvbm5lY3Qvc3RhdGljL2NuaS1sb2NhdGlvbnMtMjAyNi0wMS5wZGYpIGZvciB2YWxpZCBjb2RlcwoKIyMjIDQwMyBGb3JiaWRkZW46ICJFbnRlcnByaXNlIHBsYW4gcmVxdWlyZWQiCgoqKkNhdXNlOioqIEFjY291bnQgbm90IGVudGVycHJpc2UtbGV2ZWwgIAoqKlNvbHV0aW9uOioqIENvbnRhY3QgYWNjb3VudCB0ZWFtIHRvIHVwZ3JhZGUKCiMjIyA0MjIgVW5wcm9jZXNzYWJsZTogInZhbGlkYXRlX29ubHkgcmVxdWVzdCBmYWlsZWQiCgoqKkNhdXNlOioqIERyeS1ydW4gdmFsaWRhdGlvbiBmb3VuZCBpc3N1ZXMgKHdyb25nIHNsb3QsIGludmFsaWQgY29uZmlnKSAgCioqU29sdXRpb246KiogUmV2aWV3IGVycm9yIG1lc3NhZ2UgZGV0YWlscywgZml4IGNvbmZpZyBiZWZvcmUgcmVhbCBjcmVhdGlvbgoKIyMjIFJhdGUgTGltaXRpbmcKCioqTGltaXQ6KiogMTIwMCByZXF1ZXN0cy81bWluIHBlciB0b2tlbiAgCioqU29sdXRpb246KiogSW1wbGVtZW50IGV4cG9uZW50aWFsIGJhY2tvZmYsIGNhY2hlIHNsb3QgbGlzdGluZ3MKCiMjIENsb3VkLVNwZWNpZmljIElzc3VlcwoKIyMjIEFXUyBEaXJlY3QgQ29ubmVjdDogIlZMQU4gbm90IG1hdGNoaW5nIgoKKipDYXVzZToqKiBWTEFOIElEIGZyb20gQVdTIExPQSBkb2Vzbid0IG1hdGNoIENOSSBjb25maWcgIAoqKlNvbHV0aW9uOioqCjEuIEdldCBWTEFOIGZyb20gQVdTIENvbnNvbGUgYWZ0ZXIgb3JkZXJpbmcKMi4gU2VuZCBleGFjdCBWTEFOIHRvIENGIGFjY291bnQgdGVhbQozLiBWZXJpZnkgbWF0Y2ggaW4gQ05JIG9iamVjdCBjb25maWcKCiMjIyBBV1M6ICJDb25uZWN0aW9uIHN0dWNrIGluIFBlbmRpbmciCgoqKkNhdXNlOioqIExPQSBub3QgcHJvdmlkZWQgdG8gQ0Ygb3IgQVdTIGNvbm5lY3Rpb24gbm90IGFjY2VwdGVkICAKKipTb2x1dGlvbjoqKgoxLiBWZXJpZnkgQVdTIGNvbm5lY3Rpb24gc3RhdHVzIGlzICJBdmFpbGFibGUiCjIuIENvbmZpcm0gTE9BIHNlbnQgdG8gQ0YgYWNjb3VudCB0ZWFtCjMuIFdhaXQgZm9yIENGIHRlYW0gYWNjZXB0YW5jZSAoY2FuIHRha2UgZGF5cykKCiMjIyBHQ1A6ICJCR1Agcm91dGVzIG5vdCBwcm9wYWdhdGluZyIKCioqQ2F1c2U6KiogQkdQIHJvdXRlcyBmcm9tIEdDUCBDbG91ZCBSb3V0ZXIgKippZ25vcmVkIGJ5IGRlc2lnbioqICAKKipTb2x1dGlvbjoqKiBVc2UgW3N0YXRpYyByb3V0ZXNdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9tYWdpYy13YW4vY29uZmlndXJhdGlvbi9tYW51YWxseS9ob3ctdG8vY29uZmlndXJlLXJvdXRlcy8jY29uZmlndXJlLXN0YXRpYy1yb3V0ZXMpIGluIE1hZ2ljIFdBTiBpbnN0ZWFkCgojIyMgR0NQOiAiQ2Fubm90IHF1ZXJ5IFZMQU4gYXR0YWNobWVudCBzdGF0dXMgdmlhIEFQSSIKCioqQ2F1c2U6KiogR0NQIENsb3VkIEludGVyY29ubmVjdCBEYXNoYm9hcmQtb25seSAobm8gQVBJIHlldCkgIAoqKlNvbHV0aW9uOioqIENoZWNrIHN0YXR1cyBpbiBDRiBEYXNoYm9hcmQgb3IgR0NQIENvbnNvbGUKCiMjIFBhcnRuZXIgSW50ZXJjb25uZWN0IElzc3VlcwoKIyMjIEVxdWluaXg6ICJWaXJ0dWFsIGNpcmN1aXQgbm90IGFwcGVhcmluZyIKCioqQ2F1c2U6KiogQ0YgaGFzbid0IGFjY2VwdGVkIEVxdWluaXggY29ubmVjdGlvbiByZXF1ZXN0ICAKKipTb2x1dGlvbjoqKgoxLiBWZXJpZnkgVkMgY3JlYXRlZCBpbiBFcXVpbml4IEZhYnJpYyBQb3J0YWwKMi4gQ29udGFjdCBDRiBhY2NvdW50IHRlYW0gdG8gYWNjZXB0CjMuIEFsbG93IDItMyBidXNpbmVzcyBkYXlzCgojIyMgQ29uc29sZSBDb25uZWN0L01lZ2Fwb3J0OiAiQVBJIGNyZWF0aW9uIGZhaWxzIgoKKipDYXVzZToqKiBQYXJ0bmVyIGludGVyY29ubmVjdHMgcmVxdWlyZSBwYXJ0bmVyIHBvcnRhbCArIENGIGFwcHJvdmFsICAKKipTb2x1dGlvbjoqKiBDYW5ub3QgZnVsbHkgYXV0b21hdGUuIE9yZGVyIGluIHBhcnRuZXIgcG9ydGFsLCBub3RpZnkgQ0YgYWNjb3VudCB0ZWFtLgoKIyMgQW50aS1QYXR0ZXJucwoKfCBBbnRpLVBhdHRlcm4gfCBXaHkgQmFkIHwgU29sdXRpb24gfAp8LS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tfC0tLS0tLS0tLS18CnwgU2luZ2xlIGludGVyY29ubmVjdCBmb3IgcHJvZHVjdGlvbiB8IE5vIFNMQSwgc2luZ2xlIHBvaW50IG9mIGZhaWx1cmUgfCBVc2Ug4omlMiB3aXRoIGRldmljZSBkaXZlcnNpdHkgfAp8IE5vIGJhY2t1cCBJbnRlcm5ldCB8IENOSSBmYWlscyA9IHRvdGFsIG91dGFnZSB8IEFsd2F5cyBtYWludGFpbiBhbHRlcm5hdGUgcGF0aCB8CnwgUG9sbGluZyBzdGF0dXMgZXZlcnkgc2Vjb25kIHwgUmF0ZSBsaW1pdHMsIHdhc3RlcyBBUEkgY2FsbHMgfCBQb2xsIGV2ZXJ5IDMwLTYwcyBtYXggfAp8IFVzaW5nIHYxIGZvciBNYWdpYyBXQU4gdjIgd29ya2xvYWRzIHwgR1JFIG92ZXJoZWFkLCBjb21wbGV4aXR5IHwgVXNlIHYyIGZvciBzaW1wbGlmaWVkIHJvdXRpbmcgfAp8IEFzc3VtaW5nIEJHUCBzZXNzaW9uID0gdHJhZmZpYyBmbG93aW5nIHwgQkdQIHVwIOKJoCByb3V0ZXMgaW5zdGFsbGVkIHwgVmVyaWZ5IHJvdXRpbmcgdGFibGVzICsgdGVzdCB0cmFmZmljIHwKfCBOb3QgZW5hYmxpbmcgbWFpbnRlbmFuY2UgYWxlcnRzIHwgU3VycHJpc2UgZG93bnRpbWUgZHVyaW5nIG1haW50ZW5hbmNlIHwgRW5hYmxlIG5vdGlmaWNhdGlvbnMgaW1tZWRpYXRlbHkgfAp8IEhhcmRjb2RpbmcgVkxBTiBpbiBhdXRvbWF0aW9uIHwgVkxBTiBhc3NpZ25lZCBieSBDRiAodjEpIHwgR2V0IFZMQU4gZnJvbSBDTkkgb2JqZWN0IHJlc3BvbnNlIHwKfCBVc2luZyBEaXJlY3Qgd2l0aG91dCBjb2xvY2F0aW9uIHwgQ2FuJ3QgYWNjZXNzIGNyb3NzLWNvbm5lY3QgfCBVc2UgUGFydG5lciBvciBDbG91ZCBpbnRlcmNvbm5lY3QgfAoKIyMgV2hhdCdzIE5vdCBRdWVyeWFibGUgdmlhIEFQSQoKKipDYW5ub3QgcmV0cmlldmU6KioKLSBCR1Agc2Vzc2lvbiBzdGF0ZSAodXNlIERhc2hib2FyZCBvciBCR1AgbG9ncykKLSBMaWdodCBsZXZlbHMgKGNvbnRhY3QgYWNjb3VudCB0ZWFtKQotIEhpc3RvcmljYWwgbWV0cmljcyAodXB0aW1lLCB0cmFmZmljKQotIEJhbmR3aWR0aCB1dGlsaXphdGlvbiBwZXIgaW50ZXJjb25uZWN0Ci0gTWFpbnRlbmFuY2Ugd2luZG93IHNjaGVkdWxlcyAobm90aWZpY2F0aW9ucyBvbmx5KQotIEZpYmVyIHBhdGggZGV0YWlscwotIENyb3NzLWNvbm5lY3QgaW5zdGFsbGF0aW9uIHN0YXR1cwoKKipXb3JrYXJvdW5kczoqKgotIEV4dGVybmFsIG1vbml0b3JpbmcgZm9yIEJHUCBzdGF0ZQotIExvZyBhZ2dyZWdhdGlvbiBmb3IgaGlzdG9yaWNhbCBkYXRhCi0gTm90aWZpY2F0aW9ucyBmb3IgbWFpbnRlbmFuY2Ugd2luZG93cwoKIyMgTGltaXRzCgp8IFJlc291cmNlL0xpbWl0IHwgVmFsdWUgfCBOb3RlcyB8CnwtLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBNYXggb3B0aWNhbCBkaXN0YW5jZSB8IDEwa20gfCBQaHlzaWNhbCBsaW1pdCB8CnwgTVRVICh2MSkgfCAxNTAw4oaTIC8gMTQ3NuKGkSB8IEFzeW1tZXRyaWMgfAp8IE1UVSAodjIpIHwgMTUwMCBib3RoIHwgU3ltbWV0cmljIHwKfCBHUkUgdHVubmVsIHRocm91Z2hwdXQgfCAxIEdicHMgfCBQZXIgdHVubmVsICh2MSkgfAp8IFJlY292ZXJ5IHRpbWUgfCBEYXlzIHwgTm8gZm9ybWFsIFNMQSB8CnwgTGlnaHQgbGV2ZWwgbWluaW11bSB8IC0yMCBkQm0gfCBUYXJnZXQgdGhyZXNob2xkIHwKfCBBUEkgcmF0ZSBsaW1pdCB8IDEyMDAgcmVxLzVtaW4gfCBQZXIgdG9rZW4gfAp8IEhlYWx0aCBjaGVjayBkZWxheSB8IDYgaG91cnMgfCBOZXcgbWFpbnRlbmFuY2UgYWxlcnQgc3Vic2NyaXB0aW9ucyB8Cg==
+# CNI Gotchas & Troubleshooting
+
+## Common Errors
+
+### "Status: Pending"
+
+**Cause:** Cross-connect not installed, RX/TX fibers reversed, wrong fiber type, or low light levels
+**Solution:**
+1. Verify cross-connect installed
+2. Check fiber at patch panel
+3. Swap RX/TX fibers
+4. Check light with optical power meter (target > -20 dBm)
+5. Contact account team
+
+### "Status: Unhealthy"
+
+**Cause:** Physical issue, low light (<-20 dBm), optic mismatch, or dirty connectors
+**Solution:**
+1. Check physical connections
+2. Clean fiber connectors
+3. Verify optic types (10GBASE-LR/100GBASE-LR4)
+4. Test with known-good optics
+5. Check patch panel
+6. Contact account team
+
+### "BGP Session Down"
+
+**Cause:** Wrong IP addressing, wrong ASN, password mismatch, or firewall blocking TCP/179
+**Solution:**
+1. Verify IPs match CNI object
+2. Confirm ASN correct
+3. Check BGP password
+4. Verify no firewall on TCP/179
+5. Check BGP logs
+6. Review BGP timers
+
+### "Low Throughput"
+
+**Cause:** MTU mismatch, fragmentation, single GRE tunnel (v1), or routing inefficiency
+**Solution:**
+1. Check MTU (1500↓/1476↑ for v1, 1500 both for v2)
+2. Test various packet sizes
+3. Add more GRE tunnels (v1)
+4. Consider upgrading to v2
+5. Review routing tables
+6. Use LACP for bundling (v1)
+
+## API Errors
+
+### 400 Bad Request: "slot_id already occupied"
+
+**Cause:** Another interconnect already uses this slot  
+**Solution:** Use `occupied=false` filter when listing slots:
+```typescript
+await client.networkInterconnects.slots.list({
+  account_id: id,
+  occupied: false,
+  facility: 'EWR1',
+});
+```
+
+### 400 Bad Request: "invalid facility code"
+
+**Cause:** Typo or unsupported facility  
+**Solution:** Check [locations PDF](https://developers.cloudflare.com/network-interconnect/static/cni-locations-2026-01.pdf) for valid codes
+
+### 403 Forbidden: "Enterprise plan required"
+
+**Cause:** Account not enterprise-level  
+**Solution:** Contact account team to upgrade
+
+### 422 Unprocessable: "validate_only request failed"
+
+**Cause:** Dry-run validation found issues (wrong slot, invalid config)  
+**Solution:** Review error message details, fix config before real creation
+
+### Rate Limiting
+
+**Limit:** 1200 requests/5min per token  
+**Solution:** Implement exponential backoff, cache slot listings
+
+## Cloud-Specific Issues
+
+### AWS Direct Connect: "VLAN not matching"
+
+**Cause:** VLAN ID from AWS LOA doesn't match CNI config  
+**Solution:**
+1. Get VLAN from AWS Console after ordering
+2. Send exact VLAN to CF account team
+3. Verify match in CNI object config
+
+### AWS: "Connection stuck in Pending"
+
+**Cause:** LOA not provided to CF or AWS connection not accepted  
+**Solution:**
+1. Verify AWS connection status is "Available"
+2. Confirm LOA sent to CF account team
+3. Wait for CF team acceptance (can take days)
+
+### GCP: "BGP routes not propagating"
+
+**Cause:** BGP routes from GCP Cloud Router **ignored by design**  
+**Solution:** Use [static routes](https://developers.cloudflare.com/magic-wan/configuration/manually/how-to/configure-routes/#configure-static-routes) in Magic WAN instead
+
+### GCP: "Cannot query VLAN attachment status via API"
+
+**Cause:** GCP Cloud Interconnect Dashboard-only (no API yet)  
+**Solution:** Check status in CF Dashboard or GCP Console
+
+## Partner Interconnect Issues
+
+### Equinix: "Virtual circuit not appearing"
+
+**Cause:** CF hasn't accepted Equinix connection request  
+**Solution:**
+1. Verify VC created in Equinix Fabric Portal
+2. Contact CF account team to accept
+3. Allow 2-3 business days
+
+### Console Connect/Megaport: "API creation fails"
+
+**Cause:** Partner interconnects require partner portal + CF approval  
+**Solution:** Cannot fully automate. Order in partner portal, notify CF account team.
+
+## Anti-Patterns
+
+| Anti-Pattern | Why Bad | Solution |
+|--------------|---------|----------|
+| Single interconnect for production | No SLA, single point of failure | Use ≥2 with device diversity |
+| No backup Internet | CNI fails = total outage | Always maintain alternate path |
+| Polling status every second | Rate limits, wastes API calls | Poll every 30-60s max |
+| Using v1 for Magic WAN v2 workloads | GRE overhead, complexity | Use v2 for simplified routing |
+| Assuming BGP session = traffic flowing | BGP up ≠ routes installed | Verify routing tables + test traffic |
+| Not enabling maintenance alerts | Surprise downtime during maintenance | Enable notifications immediately |
+| Hardcoding VLAN in automation | VLAN assigned by CF (v1) | Get VLAN from CNI object response |
+| Using Direct without colocation | Can't access cross-connect | Use Partner or Cloud interconnect |
+
+## What's Not Queryable via API
+
+**Cannot retrieve:**
+- BGP session state (use Dashboard or BGP logs)
+- Light levels (contact account team)
+- Historical metrics (uptime, traffic)
+- Bandwidth utilization per interconnect
+- Maintenance window schedules (notifications only)
+- Fiber path details
+- Cross-connect installation status
+
+**Workarounds:**
+- External monitoring for BGP state
+- Log aggregation for historical data
+- Notifications for maintenance windows
+
+## Limits
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| Max optical distance | 10km | Physical limit |
+| MTU (v1) | 1500↓ / 1476↑ | Asymmetric |
+| MTU (v2) | 1500 both | Symmetric |
+| GRE tunnel throughput | 1 Gbps | Per tunnel (v1) |
+| Recovery time | Days | No formal SLA |
+| Light level minimum | -20 dBm | Target threshold |
+| API rate limit | 1200 req/5min | Per token |
+| Health check delay | 6 hours | New maintenance alert subscriptions |

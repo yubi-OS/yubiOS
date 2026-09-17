@@ -1,1 +1,175 @@
-IyBDbG91ZGZsYXJlIEFJIEdhdGV3YXkKCkV4cGVydCBndWlkYW5jZSBmb3IgaW1wbGVtZW50aW5nIENsb3VkZmxhcmUgQUkgR2F0ZXdheSAtIGEgdW5pdmVyc2FsIGdhdGV3YXkgZm9yIEFJIG1vZGVsIHByb3ZpZGVycyB3aXRoIGFuYWx5dGljcywgY2FjaGluZywgcmF0ZSBsaW1pdGluZywgYW5kIHJvdXRpbmcgY2FwYWJpbGl0aWVzLgoKIyMgV2hlbiB0byBVc2UgVGhpcyBSZWZlcmVuY2UKCi0gU2V0dGluZyB1cCBBSSBHYXRld2F5IGZvciBhbnkgQUkgcHJvdmlkZXIgKE9wZW5BSSwgQW50aHJvcGljLCBXb3JrZXJzIEFJLCBldGMuKQotIEltcGxlbWVudGluZyBjYWNoaW5nLCByYXRlIGxpbWl0aW5nLCBvciByZXF1ZXN0IHJldHJ5L2ZhbGxiYWNrCi0gQ29uZmlndXJpbmcgZHluYW1pYyByb3V0aW5nIHdpdGggQS9CIHRlc3Rpbmcgb3IgbW9kZWwgZmFsbGJhY2tzCi0gTWFuYWdpbmcgcHJvdmlkZXIgQVBJIGtleXMgc2VjdXJlbHkgd2l0aCBCWU9LCi0gQWRkaW5nIHNlY3VyaXR5IGZlYXR1cmVzIChndWFyZHJhaWxzLCBETFApCi0gU2V0dGluZyB1cCBvYnNlcnZhYmlsaXR5IHdpdGggbG9nZ2luZyBhbmQgY3VzdG9tIG1ldGFkYXRhCi0gRGVidWdnaW5nIEFJIEdhdGV3YXkgcmVxdWVzdHMgb3Igb3B0aW1pemluZyBjb25maWd1cmF0aW9ucwoKIyMgUXVpY2sgU3RhcnQKCioqV2hhdCdzIHlvdXIgc2V0dXA/KioKCi0gKipVc2luZyBWZXJjZWwgQUkgU0RLKiog4oaSIFBhdHRlcm4gMSAocmVjb21tZW5kZWQpIC0gc2VlIFtzZGstaW50ZWdyYXRpb24ubWRdKC4vc2RrLWludGVncmF0aW9uLm1kKQotICoqVXNpbmcgT3BlbkFJIFNESyoqIOKGkiBQYXR0ZXJuIDIgLSBzZWUgW3Nkay1pbnRlZ3JhdGlvbi5tZF0oLi9zZGstaW50ZWdyYXRpb24ubWQpCi0gKipDbG91ZGZsYXJlIFdvcmtlciArIFdvcmtlcnMgQUkqKiDihpIgUGF0dGVybiAzIC0gc2VlIFtzZGstaW50ZWdyYXRpb24ubWRdKC4vc2RrLWludGVncmF0aW9uLm1kKQotICoqRGlyZWN0IEhUVFAgKGFueSBsYW5ndWFnZSkqKiDihpIgUGF0dGVybiA0IC0gc2VlIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpCi0gKipGcmFtZXdvcmsgKExhbmdDaGFpbiwgZXRjLikqKiDihpIgU2VlIFtzZGstaW50ZWdyYXRpb24ubWRdKC4vc2RrLWludGVncmF0aW9uLm1kKQoKIyMgUGF0dGVybiAxOiBWZXJjZWwgQUkgU0RLIChSZWNvbW1lbmRlZCkKCk1vc3QgbW9kZXJuIHBhdHRlcm4gdXNpbmcgb2ZmaWNpYWwgYGFpLWdhdGV3YXktcHJvdmlkZXJgIHBhY2thZ2Ugd2l0aCBhdXRvbWF0aWMgZmFsbGJhY2tzLgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBjcmVhdGVBaUdhdGV3YXkgfSBmcm9tICdhaS1nYXRld2F5LXByb3ZpZGVyJzsKaW1wb3J0IHsgY3JlYXRlT3BlbkFJIH0gZnJvbSAnQGFpLXNkay9vcGVuYWknOwppbXBvcnQgeyBnZW5lcmF0ZVRleHQgfSBmcm9tICdhaSc7Cgpjb25zdCBnYXRld2F5ID0gY3JlYXRlQWlHYXRld2F5KHsKICBhY2NvdW50SWQ6IHByb2Nlc3MuZW52LkNGX0FDQ09VTlRfSUQsCiAgZ2F0ZXdheTogcHJvY2Vzcy5lbnYuQ0ZfR0FURVdBWV9JRCwKfSk7Cgpjb25zdCBvcGVuYWkgPSBjcmVhdGVPcGVuQUkoeyAKICBhcGlLZXk6IHByb2Nlc3MuZW52Lk9QRU5BSV9BUElfS0VZIAp9KTsKCi8vIFNpbmdsZSBtb2RlbApjb25zdCB7IHRleHQgfSA9IGF3YWl0IGdlbmVyYXRlVGV4dCh7CiAgbW9kZWw6IGdhdGV3YXkob3BlbmFpKCdncHQtNG8nKSksCiAgcHJvbXB0OiAnSGVsbG8nCn0pOwoKLy8gQXV0b21hdGljIGZhbGxiYWNrIGFycmF5CmNvbnN0IHsgdGV4dCB9ID0gYXdhaXQgZ2VuZXJhdGVUZXh0KHsKICBtb2RlbDogZ2F0ZXdheShbCiAgICBvcGVuYWkoJ2dwdC00bycpLCAgICAgICAgICAgICAgLy8gVHJ5IGZpcnN0CiAgICBhbnRocm9waWMoJ2NsYXVkZS1zb25uZXQtNC01JyksIC8vIEZhbGxiYWNrCiAgXSksCiAgcHJvbXB0OiAnSGVsbG8nCn0pOwpgYGAKCioqSW5zdGFsbDoqKiBgbnBtIGluc3RhbGwgYWktZ2F0ZXdheS1wcm92aWRlciBhaSBAYWktc2RrL29wZW5haSBAYWktc2RrL2FudGhyb3BpY2AKCiMjIFBhdHRlcm4gMjogT3BlbkFJIFNESwoKRHJvcC1pbiByZXBsYWNlbWVudCBmb3IgT3BlbkFJIEFQSSB3aXRoIG11bHRpLXByb3ZpZGVyIHN1cHBvcnQuCgpgYGB0eXBlc2NyaXB0CmltcG9ydCBPcGVuQUkgZnJvbSAnb3BlbmFpJzsKCmNvbnN0IGNsaWVudCA9IG5ldyBPcGVuQUkoewogIGFwaUtleTogcHJvY2Vzcy5lbnYuT1BFTkFJX0FQSV9LRVksCiAgYmFzZVVSTDogYGh0dHBzOi8vZ2F0ZXdheS5haS5jbG91ZGZsYXJlLmNvbS92MS8ke2FjY291bnRJZH0vJHtnYXRld2F5SWR9L2NvbXBhdGAsCiAgZGVmYXVsdEhlYWRlcnM6IHsKICAgICdjZi1haWctYXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHtjZlRva2VufWAgLy8gRm9yIGF1dGhlbnRpY2F0ZWQgZ2F0ZXdheXMKICB9Cn0pOwoKLy8gU3dpdGNoIHByb3ZpZGVycyBieSBjaGFuZ2luZyBtb2RlbCBmb3JtYXQ6IHtwcm92aWRlcn0ve21vZGVsfQpjb25zdCByZXNwb25zZSA9IGF3YWl0IGNsaWVudC5jaGF0LmNvbXBsZXRpb25zLmNyZWF0ZSh7CiAgbW9kZWw6ICdvcGVuYWkvZ3B0LTRvJywgLy8gb3IgJ2FudGhyb3BpYy9jbGF1ZGUtc29ubmV0LTQtNScKICBtZXNzYWdlczogW3sgcm9sZTogJ3VzZXInLCBjb250ZW50OiAnSGVsbG8hJyB9XQp9KTsKYGBgCgojIyBQYXR0ZXJuIDM6IFdvcmtlcnMgQUkgQmluZGluZwoKRm9yIENsb3VkZmxhcmUgV29ya2VycyB1c2luZyBXb3JrZXJzIEFJLgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52LCBjdHgpIHsKICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZW52LkFJLnJ1bigKICAgICAgJ0BjZi9tZXRhL2xsYW1hLTMtOGItaW5zdHJ1Y3QnLAogICAgICB7IG1lc3NhZ2VzOiBbeyByb2xlOiAndXNlcicsIGNvbnRlbnQ6ICdIZWxsbyEnIH1dIH0sCiAgICAgIHsgCiAgICAgICAgZ2F0ZXdheTogeyAKICAgICAgICAgIGlkOiAnbXktZ2F0ZXdheScsCiAgICAgICAgICBtZXRhZGF0YTogeyB1c2VySWQ6ICcxMjMnLCB0ZWFtOiAnZW5naW5lZXJpbmcnIH0KICAgICAgICB9IAogICAgICB9CiAgICApOwogICAgCiAgICByZXR1cm4gUmVzcG9uc2UuanNvbihyZXNwb25zZSk7CiAgfQp9OwpgYGAKCiMjIEhlYWRlcnMgUXVpY2sgUmVmZXJlbmNlCgp8IEhlYWRlciB8IFB1cnBvc2UgfCBFeGFtcGxlIHwgTm90ZXMgfAp8LS0tLS0tLS18LS0tLS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tfAp8IGBjZi1haWctYXV0aG9yaXphdGlvbmAgfCBHYXRld2F5IGF1dGggfCBgQmVhcmVyIHt0b2tlbn1gIHwgUmVxdWlyZWQgZm9yIGF1dGhlbnRpY2F0ZWQgZ2F0ZXdheXMgfAp8IGBjZi1haWctbWV0YWRhdGFgIHwgVHJhY2tpbmcgfCBgeyJ1c2VySWQiOiJ4In1gIHwgTWF4IDUgZW50cmllcywgZmxhdCBzdHJ1Y3R1cmUgfAp8IGBjZi1haWctY2FjaGUtdHRsYCB8IENhY2hlIGR1cmF0aW9uIHwgYDM2MDBgIHwgU2Vjb25kcywgbWluIDYwLCBtYXggMjU5MjAwMCAoMzAgZGF5cykgfAp8IGBjZi1haWctc2tpcC1jYWNoZWAgfCBCeXBhc3MgY2FjaGUgfCBgdHJ1ZWAgfCAtIHwKfCBgY2YtYWlnLWNhY2hlLWtleWAgfCBDdXN0b20gY2FjaGUga2V5IHwgYG15LWtleWAgfCBNdXN0IGJlIHVuaXF1ZSBwZXIgcmVzcG9uc2UgfAp8IGBjZi1haWctY29sbGVjdC1sb2dgIHwgU2tpcCBsb2dnaW5nIHwgYGZhbHNlYCB8IERlZmF1bHQ6IHRydWUgfAp8IGBjZi1haWctY2FjaGUtc3RhdHVzYCB8IENhY2hlIGhpdC9taXNzIHwgUmVzcG9uc2Ugb25seSB8IGBISVRgIG9yIGBNSVNTYCB8CgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKfCBGaWxlIHwgUHVycG9zZSB8CnwtLS0tLS18LS0tLS0tLS0tfAp8IFtzZGstaW50ZWdyYXRpb24ubWRdKC4vc2RrLWludGVncmF0aW9uLm1kKSB8IFZlcmNlbCBBSSBTREssIE9wZW5BSSBTREssIFdvcmtlcnMgYmluZGluZyBwYXR0ZXJucyB8CnwgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgfCBEYXNoYm9hcmQgc2V0dXAsIHdyYW5nbGVyLCBBUEkgdG9rZW5zIHwKfCBbZmVhdHVyZXMubWRdKC4vZmVhdHVyZXMubWQpIHwgQ2FjaGluZywgcmF0ZSBsaW1pdHMsIGd1YXJkcmFpbHMsIERMUCwgQllPSywgdW5pZmllZCBiaWxsaW5nIHwKfCBbZHluYW1pYy1yb3V0aW5nLm1kXSguL2R5bmFtaWMtcm91dGluZy5tZCkgfCBGYWxsYmFja3MsIEEvQiB0ZXN0aW5nLCBjb25kaXRpb25hbCByb3V0aW5nIHwKfCBbdHJvdWJsZXNob290aW5nLm1kXSguL3Ryb3VibGVzaG9vdGluZy5tZCkgfCBEZWJ1Z2dpbmcsIGVycm9ycywgb2JzZXJ2YWJpbGl0eSwgZ290Y2hhcyB8CgojIyBSZWFkaW5nIE9yZGVyCgp8IFRhc2sgfCBGaWxlcyB8CnwtLS0tLS18LS0tLS0tLXwKfCBGaXJzdC10aW1lIHNldHVwIHwgUkVBRE1FICsgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgfAp8IFNESyBpbnRlZ3JhdGlvbiB8IFJFQURNRSArIFtzZGstaW50ZWdyYXRpb24ubWRdKC4vc2RrLWludGVncmF0aW9uLm1kKSB8CnwgRW5hYmxlIGNhY2hpbmcgfCBSRUFETUUgKyBbZmVhdHVyZXMubWRdKC4vZmVhdHVyZXMubWQpIHwKfCBTZXR1cCBmYWxsYmFja3MgfCBSRUFETUUgKyBbZHluYW1pYy1yb3V0aW5nLm1kXSguL2R5bmFtaWMtcm91dGluZy5tZCkgfAp8IERlYnVnIGVycm9ycyB8IFJFQURNRSArIFt0cm91Ymxlc2hvb3RpbmcubWRdKC4vdHJvdWJsZXNob290aW5nLm1kKSB8CgojIyBBcmNoaXRlY3R1cmUKCkFJIEdhdGV3YXkgYWN0cyBhcyBhIHByb3h5IGJldHdlZW4geW91ciBhcHBsaWNhdGlvbiBhbmQgQUkgcHJvdmlkZXJzOgoKYGBgCllvdXIgQXBwIOKGkiBBSSBHYXRld2F5IOKGkiBBSSBQcm92aWRlciAoT3BlbkFJLCBBbnRocm9waWMsIGV0Yy4pCiAgICAgICAgIOKGkwogICAgQW5hbHl0aWNzLCBDYWNoaW5nLCBSYXRlIExpbWl0aW5nLCBMb2dnaW5nCmBgYAoKKipLZXkgVVJMIHBhdHRlcm5zOioqCi0gVW5pZmllZCBBUEkgKE9wZW5BSS1jb21wYXRpYmxlKTogYGh0dHBzOi8vZ2F0ZXdheS5haS5jbG91ZGZsYXJlLmNvbS92MS97YWNjb3VudF9pZH0ve2dhdGV3YXlfaWR9L2NvbXBhdC9jaGF0L2NvbXBsZXRpb25zYAotIFByb3ZpZGVyLXNwZWNpZmljOiBgaHR0cHM6Ly9nYXRld2F5LmFpLmNsb3VkZmxhcmUuY29tL3YxL3thY2NvdW50X2lkfS97Z2F0ZXdheV9pZH0ve3Byb3ZpZGVyfS97ZW5kcG9pbnR9YAotIER5bmFtaWMgcm91dGVzOiBVc2Ugcm91dGUgbmFtZSBpbnN0ZWFkIG9mIG1vZGVsOiBgZHluYW1pYy97cm91dGUtbmFtZX1gCgojIyBHYXRld2F5IFR5cGVzCgoxLiAqKlVuYXV0aGVudGljYXRlZCBHYXRld2F5Kio6IE9wZW4gYWNjZXNzIChub3QgcmVjb21tZW5kZWQgZm9yIHByb2R1Y3Rpb24pCjIuICoqQXV0aGVudGljYXRlZCBHYXRld2F5Kio6IFJlcXVpcmVzIGBjZi1haWctYXV0aG9yaXphdGlvbmAgaGVhZGVyIHdpdGggQ2xvdWRmbGFyZSBBUEkgdG9rZW4gKHJlY29tbWVuZGVkKQoKIyMgUHJvdmlkZXIgQXV0aGVudGljYXRpb24gT3B0aW9ucwoKMS4gKipVbmlmaWVkIEJpbGxpbmcqKjogVXNlIEFJIEdhdGV3YXkgYmlsbGluZyB0byBwYXkgZm9yIGluZmVyZW5jZSAoa2V5bGVzcyBtb2RlIC0gbm8gcHJvdmlkZXIgQVBJIGtleSBuZWVkZWQpCjIuICoqQllPSyAoU3RvcmUgS2V5cykqKjogU3RvcmUgcHJvdmlkZXIgQVBJIGtleXMgaW4gQ2xvdWRmbGFyZSBkYXNoYm9hcmQKMy4gKipSZXF1ZXN0IEhlYWRlcnMqKjogSW5jbHVkZSBwcm92aWRlciBBUEkga2V5IGluIGVhY2ggcmVxdWVzdAoKIyMgUmVsYXRlZCBTa2lsbHMKCi0gW1dvcmtlcnMgQUldKC4uL3dvcmtlcnMtYWkvUkVBRE1FLm1kKSAtIEZvciBgZW52LkFJLnJ1bigpYCBkZXRhaWxzCi0gW0FnZW50cyBTREtdKC4uL2FnZW50cy1zZGsvUkVBRE1FLm1kKSAtIEZvciBzdGF0ZWZ1bCBBSSBwYXR0ZXJucwotIFtWZWN0b3JpemVdKC4uL3ZlY3Rvcml6ZS9SRUFETUUubWQpIC0gRm9yIFJBRyBwYXR0ZXJucyB3aXRoIGVtYmVkZGluZ3MKCiMjIFJlc291cmNlcwoKLSBbT2ZmaWNpYWwgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FpLWdhdGV3YXkvKQotIFtBUEkgUmVmZXJlbmNlXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYXBpL3Jlc291cmNlcy9haV9nYXRld2F5LykKLSBbUHJvdmlkZXIgR3VpZGVzXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWktZ2F0ZXdheS91c2FnZS9wcm92aWRlcnMvKQotIFtEaXNjb3JkIENvbW11bml0eV0oaHR0cHM6Ly9kaXNjb3JkLmNsb3VkZmxhcmUuY29tKQo=
+# Cloudflare AI Gateway
+
+Expert guidance for implementing Cloudflare AI Gateway - a universal gateway for AI model providers with analytics, caching, rate limiting, and routing capabilities.
+
+## When to Use This Reference
+
+- Setting up AI Gateway for any AI provider (OpenAI, Anthropic, Workers AI, etc.)
+- Implementing caching, rate limiting, or request retry/fallback
+- Configuring dynamic routing with A/B testing or model fallbacks
+- Managing provider API keys securely with BYOK
+- Adding security features (guardrails, DLP)
+- Setting up observability with logging and custom metadata
+- Debugging AI Gateway requests or optimizing configurations
+
+## Quick Start
+
+**What's your setup?**
+
+- **Using Vercel AI SDK** → Pattern 1 (recommended) - see [sdk-integration.md](./sdk-integration.md)
+- **Using OpenAI SDK** → Pattern 2 - see [sdk-integration.md](./sdk-integration.md)
+- **Cloudflare Worker + Workers AI** → Pattern 3 - see [sdk-integration.md](./sdk-integration.md)
+- **Direct HTTP (any language)** → Pattern 4 - see [configuration.md](./configuration.md)
+- **Framework (LangChain, etc.)** → See [sdk-integration.md](./sdk-integration.md)
+
+## Pattern 1: Vercel AI SDK (Recommended)
+
+Most modern pattern using official `ai-gateway-provider` package with automatic fallbacks.
+
+```typescript
+import { createAiGateway } from 'ai-gateway-provider';
+import { createOpenAI } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const gateway = createAiGateway({
+  accountId: process.env.CF_ACCOUNT_ID,
+  gateway: process.env.CF_GATEWAY_ID,
+});
+
+const openai = createOpenAI({ 
+  apiKey: process.env.OPENAI_API_KEY 
+});
+
+// Single model
+const { text } = await generateText({
+  model: gateway(openai('gpt-4o')),
+  prompt: 'Hello'
+});
+
+// Automatic fallback array
+const { text } = await generateText({
+  model: gateway([
+    openai('gpt-4o'),              // Try first
+    anthropic('claude-sonnet-4-5'), // Fallback
+  ]),
+  prompt: 'Hello'
+});
+```
+
+**Install:** `npm install ai-gateway-provider ai @ai-sdk/openai @ai-sdk/anthropic`
+
+## Pattern 2: OpenAI SDK
+
+Drop-in replacement for OpenAI API with multi-provider support.
+
+```typescript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/compat`,
+  defaultHeaders: {
+    'cf-aig-authorization': `Bearer ${cfToken}` // For authenticated gateways
+  }
+});
+
+// Switch providers by changing model format: {provider}/{model}
+const response = await client.chat.completions.create({
+  model: 'openai/gpt-4o', // or 'anthropic/claude-sonnet-4-5'
+  messages: [{ role: 'user', content: 'Hello!' }]
+});
+```
+
+## Pattern 3: Workers AI Binding
+
+For Cloudflare Workers using Workers AI.
+
+```typescript
+export default {
+  async fetch(request, env, ctx) {
+    const response = await env.AI.run(
+      '@cf/meta/llama-3-8b-instruct',
+      { messages: [{ role: 'user', content: 'Hello!' }] },
+      { 
+        gateway: { 
+          id: 'my-gateway',
+          metadata: { userId: '123', team: 'engineering' }
+        } 
+      }
+    );
+    
+    return Response.json(response);
+  }
+};
+```
+
+## Headers Quick Reference
+
+| Header | Purpose | Example | Notes |
+|--------|---------|---------|-------|
+| `cf-aig-authorization` | Gateway auth | `Bearer {token}` | Required for authenticated gateways |
+| `cf-aig-metadata` | Tracking | `{"userId":"x"}` | Max 5 entries, flat structure |
+| `cf-aig-cache-ttl` | Cache duration | `3600` | Seconds, min 60, max 2592000 (30 days) |
+| `cf-aig-skip-cache` | Bypass cache | `true` | - |
+| `cf-aig-cache-key` | Custom cache key | `my-key` | Must be unique per response |
+| `cf-aig-collect-log` | Skip logging | `false` | Default: true |
+| `cf-aig-cache-status` | Cache hit/miss | Response only | `HIT` or `MISS` |
+
+## In This Reference
+
+| File | Purpose |
+|------|---------|
+| [sdk-integration.md](./sdk-integration.md) | Vercel AI SDK, OpenAI SDK, Workers binding patterns |
+| [configuration.md](./configuration.md) | Dashboard setup, wrangler, API tokens |
+| [features.md](./features.md) | Caching, rate limits, guardrails, DLP, BYOK, unified billing |
+| [dynamic-routing.md](./dynamic-routing.md) | Fallbacks, A/B testing, conditional routing |
+| [troubleshooting.md](./troubleshooting.md) | Debugging, errors, observability, gotchas |
+
+## Reading Order
+
+| Task | Files |
+|------|-------|
+| First-time setup | README + [configuration.md](./configuration.md) |
+| SDK integration | README + [sdk-integration.md](./sdk-integration.md) |
+| Enable caching | README + [features.md](./features.md) |
+| Setup fallbacks | README + [dynamic-routing.md](./dynamic-routing.md) |
+| Debug errors | README + [troubleshooting.md](./troubleshooting.md) |
+
+## Architecture
+
+AI Gateway acts as a proxy between your application and AI providers:
+
+```
+Your App → AI Gateway → AI Provider (OpenAI, Anthropic, etc.)
+         ↓
+    Analytics, Caching, Rate Limiting, Logging
+```
+
+**Key URL patterns:**
+- Unified API (OpenAI-compatible): `https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/compat/chat/completions`
+- Provider-specific: `https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/{provider}/{endpoint}`
+- Dynamic routes: Use route name instead of model: `dynamic/{route-name}`
+
+## Gateway Types
+
+1. **Unauthenticated Gateway**: Open access (not recommended for production)
+2. **Authenticated Gateway**: Requires `cf-aig-authorization` header with Cloudflare API token (recommended)
+
+## Provider Authentication Options
+
+1. **Unified Billing**: Use AI Gateway billing to pay for inference (keyless mode - no provider API key needed)
+2. **BYOK (Store Keys)**: Store provider API keys in Cloudflare dashboard
+3. **Request Headers**: Include provider API key in each request
+
+## Related Skills
+
+- [Workers AI](../workers-ai/README.md) - For `env.AI.run()` details
+- [Agents SDK](../agents-sdk/README.md) - For stateful AI patterns
+- [Vectorize](../vectorize/README.md) - For RAG patterns with embeddings
+
+## Resources
+
+- [Official Docs](https://developers.cloudflare.com/ai-gateway/)
+- [API Reference](https://developers.cloudflare.com/api/resources/ai_gateway/)
+- [Provider Guides](https://developers.cloudflare.com/ai-gateway/usage/providers/)
+- [Discord Community](https://discord.cloudflare.com)

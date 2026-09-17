@@ -1,1 +1,240 @@
-IyBBUEkgUmVmZXJlbmNlCgojIyBDbGllbnQtU2lkZSBKYXZhU2NyaXB0IEFQSQoKVGhlIFR1cm5zdGlsZSBKYXZhU2NyaXB0IEFQSSBpcyBhdmFpbGFibGUgYXQgYHdpbmRvdy50dXJuc3RpbGVgIGFmdGVyIGxvYWRpbmcgdGhlIHNjcmlwdC4KCiMjIyBgdHVybnN0aWxlLnJlbmRlcihjb250YWluZXIsIG9wdGlvbnMpYAoKUmVuZGVycyBhIFR1cm5zdGlsZSB3aWRnZXQgaW50byBhIGNvbnRhaW5lciBlbGVtZW50LgoKKipQYXJhbWV0ZXJzOioqCi0gYGNvbnRhaW5lcmAgKHN0cmluZyB8IEhUTUxFbGVtZW50KTogQ1NTIHNlbGVjdG9yIG9yIERPTSBlbGVtZW50Ci0gYG9wdGlvbnNgIChUdXJuc3RpbGVPcHRpb25zKTogQ29uZmlndXJhdGlvbiBvYmplY3QgKHNlZSBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkpCgoqKlJldHVybnM6KiogYHN0cmluZ2AgLSBXaWRnZXQgSUQgZm9yIHVzZSB3aXRoIG90aGVyIEFQSSBtZXRob2RzCgoqKkV4YW1wbGU6KioKYGBgamF2YXNjcmlwdApjb25zdCB3aWRnZXRJZCA9IHdpbmRvdy50dXJuc3RpbGUucmVuZGVyKCcjbXktY29udGFpbmVyJywgewogIHNpdGVrZXk6ICdZT1VSX1NJVEVfS0VZJywKICBjYWxsYmFjazogKHRva2VuKSA9PiBjb25zb2xlLmxvZygnU3VjY2VzczonLCB0b2tlbiksCiAgJ2Vycm9yLWNhbGxiYWNrJzogKGNvZGUpID0+IGNvbnNvbGUuZXJyb3IoJ0Vycm9yOicsIGNvZGUpCn0pOwpgYGAKCiMjIyBgdHVybnN0aWxlLnJlc2V0KHdpZGdldElkKWAKClJlc2V0cyBhIHdpZGdldCAoY2xlYXJzIHRva2VuLCByZXNldHMgY2hhbGxlbmdlIHN0YXRlKS4gVXNlZnVsIHdoZW4gZm9ybSB2YWxpZGF0aW9uIGZhaWxzLgoKKipQYXJhbWV0ZXJzOioqCi0gYHdpZGdldElkYCAoc3RyaW5nKTogV2lkZ2V0IElEIGZyb20gYHJlbmRlcigpYCwgb3IgY29udGFpbmVyIGVsZW1lbnQKCioqUmV0dXJuczoqKiBgdm9pZGAKCioqRXhhbXBsZToqKgpgYGBqYXZhc2NyaXB0Ci8vIFJlc2V0IG9uIGZvcm0gZXJyb3IKaWYgKCF2YWxpZGF0ZUZvcm0oKSkgewogIHdpbmRvdy50dXJuc3RpbGUucmVzZXQod2lkZ2V0SWQpOwp9CmBgYAoKIyMjIGB0dXJuc3RpbGUucmVtb3ZlKHdpZGdldElkKWAKClJlbW92ZXMgYSB3aWRnZXQgZnJvbSB0aGUgRE9NIGNvbXBsZXRlbHkuCgoqKlBhcmFtZXRlcnM6KioKLSBgd2lkZ2V0SWRgIChzdHJpbmcpOiBXaWRnZXQgSUQgZnJvbSBgcmVuZGVyKClgCgoqKlJldHVybnM6KiogYHZvaWRgCgoqKkV4YW1wbGU6KioKYGBgamF2YXNjcmlwdAovLyBDbGVhbnVwIG9uIG5hdmlnYXRpb24Kd2luZG93LnR1cm5zdGlsZS5yZW1vdmUod2lkZ2V0SWQpOwpgYGAKCiMjIyBgdHVybnN0aWxlLmdldFJlc3BvbnNlKHdpZGdldElkKWAKCkdldHMgdGhlIGN1cnJlbnQgdG9rZW4gZnJvbSBhIHdpZGdldCAoaWYgY2hhbGxlbmdlIGNvbXBsZXRlZCkuCgoqKlBhcmFtZXRlcnM6KioKLSBgd2lkZ2V0SWRgIChzdHJpbmcpOiBXaWRnZXQgSUQgZnJvbSBgcmVuZGVyKClgLCBvciBjb250YWluZXIgZWxlbWVudAoKKipSZXR1cm5zOioqIGBzdHJpbmcgfCB1bmRlZmluZWRgIC0gVG9rZW4gc3RyaW5nLCBvciB1bmRlZmluZWQgaWYgbm90IHJlYWR5CgoqKkV4YW1wbGU6KioKYGBgamF2YXNjcmlwdApjb25zdCB0b2tlbiA9IHdpbmRvdy50dXJuc3RpbGUuZ2V0UmVzcG9uc2Uod2lkZ2V0SWQpOwppZiAodG9rZW4pIHsKICBzdWJtaXRGb3JtKHRva2VuKTsKfQpgYGAKCiMjIyBgdHVybnN0aWxlLmlzRXhwaXJlZCh3aWRnZXRJZClgCgpDaGVja3MgaWYgYSB3aWRnZXQncyB0b2tlbiBoYXMgZXhwaXJlZCAoPjUgbWludXRlcyBvbGQpLgoKKipQYXJhbWV0ZXJzOioqCi0gYHdpZGdldElkYCAoc3RyaW5nKTogV2lkZ2V0IElEIGZyb20gYHJlbmRlcigpYAoKKipSZXR1cm5zOioqIGBib29sZWFuYCAtIFRydWUgaWYgZXhwaXJlZAoKKipFeGFtcGxlOioqCmBgYGphdmFzY3JpcHQKaWYgKHdpbmRvdy50dXJuc3RpbGUuaXNFeHBpcmVkKHdpZGdldElkKSkgewogIHdpbmRvdy50dXJuc3RpbGUucmVzZXQod2lkZ2V0SWQpOwp9CmBgYAoKIyMgQ2FsbGJhY2sgU2lnbmF0dXJlcwoKYGBgdHlwZXNjcmlwdAp0eXBlIFR1cm5zdGlsZUNhbGxiYWNrID0gKHRva2VuOiBzdHJpbmcpID0+IHZvaWQ7CnR5cGUgRXJyb3JDYWxsYmFjayA9IChlcnJvckNvZGU6IHN0cmluZykgPT4gdm9pZDsKdHlwZSBUaW1lb3V0Q2FsbGJhY2sgPSAoKSA9PiB2b2lkOwp0eXBlIEV4cGlyZWRDYWxsYmFjayA9ICgpID0+IHZvaWQ7CnR5cGUgQmVmb3JlSW50ZXJhY3RpdmVDYWxsYmFjayA9ICgpID0+IHZvaWQ7CnR5cGUgQWZ0ZXJJbnRlcmFjdGl2ZUNhbGxiYWNrID0gKCkgPT4gdm9pZDsKdHlwZSBVbnN1cHBvcnRlZENhbGxiYWNrID0gKCkgPT4gdm9pZDsKYGBgCgojIyBTaXRldmVyaWZ5IEFQSSAoU2VydmVyLVNpZGUpCgoqKkVuZHBvaW50OioqIGBodHRwczovL2NoYWxsZW5nZXMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3YwL3NpdGV2ZXJpZnlgCgojIyMgUmVxdWVzdAoKKipNZXRob2Q6KiogUE9TVCAgCioqQ29udGVudC1UeXBlOioqIGBhcHBsaWNhdGlvbi9qc29uYCBvciBgYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkYAoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgU2l0ZXZlcmlmeVJlcXVlc3QgewogIHNlY3JldDogc3RyaW5nOyAgICAvLyBZb3VyIHNlY3JldCBrZXkgKG5ldmVyIGV4cG9zZSBjbGllbnQtc2lkZSkKICByZXNwb25zZTogc3RyaW5nOyAgLy8gVG9rZW4gZnJvbSBjZi10dXJuc3RpbGUtcmVzcG9uc2UKICByZW1vdGVpcD86IHN0cmluZzsgLy8gVXNlcidzIElQIChvcHRpb25hbCBidXQgcmVjb21tZW5kZWQpCiAgaWRlbXBvdGVuY3lfa2V5Pzogc3RyaW5nOyAvLyBVbmlxdWUga2V5IGZvciBpZGVtcG90ZW50IHZhbGlkYXRpb24KfQpgYGAKCioqRXhhbXBsZToqKgpgYGBqYXZhc2NyaXB0Ci8vIENsb3VkZmxhcmUgV29ya2Vycwpjb25zdCByZXN1bHQgPSBhd2FpdCBmZXRjaCgnaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5JywgewogIG1ldGhvZDogJ1BPU1QnLAogIGhlYWRlcnM6IHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9LAogIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsKICAgIHNlY3JldDogZW52LlRVUk5TVElMRV9TRUNSRVQsCiAgICByZXNwb25zZTogdG9rZW4sCiAgICByZW1vdGVpcDogcmVxdWVzdC5oZWFkZXJzLmdldCgnQ0YtQ29ubmVjdGluZy1JUCcpCiAgfSkKfSk7CmNvbnN0IGRhdGEgPSBhd2FpdCByZXN1bHQuanNvbigpOwpgYGAKCiMjIyBSZXNwb25zZQoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgU2l0ZXZlcmlmeVJlc3BvbnNlIHsKICBzdWNjZXNzOiBib29sZWFuOyAgICAgICAgICAgLy8gVmFsaWRhdGlvbiByZXN1bHQKICBjaGFsbGVuZ2VfdHM/OiBzdHJpbmc7ICAgICAgLy8gSVNPIHRpbWVzdGFtcCBvZiBjaGFsbGVuZ2UKICBob3N0bmFtZT86IHN0cmluZzsgICAgICAgICAgLy8gSG9zdG5hbWUgd2hlcmUgd2lkZ2V0IHdhcyBzb2x2ZWQKICAnZXJyb3ItY29kZXMnPzogc3RyaW5nW107ICAgLy8gRXJyb3IgY29kZXMgaWYgc3VjY2Vzcz1mYWxzZQogIGFjdGlvbj86IHN0cmluZzsgICAgICAgICAgICAvLyBBY3Rpb24gbmFtZSBmcm9tIHdpZGdldCBjb25maWcKICBjZGF0YT86IHN0cmluZzsgICAgICAgICAgICAgLy8gQ3VzdG9tIGRhdGEgZnJvbSB3aWRnZXQgY29uZmlnCn0KYGBgCgoqKkV4YW1wbGUgU3VjY2VzczoqKgpgYGBqc29uCnsKICAic3VjY2VzcyI6IHRydWUsCiAgImNoYWxsZW5nZV90cyI6ICIyMDI0LTAxLTE1VDEwOjMwOjAwWiIsCiAgImhvc3RuYW1lIjogImV4YW1wbGUuY29tIiwKICAiYWN0aW9uIjogImxvZ2luIiwKICAiY2RhdGEiOiAidXNlcjEyMyIKfQpgYGAKCioqRXhhbXBsZSBGYWlsdXJlOioqCmBgYGpzb24KewogICJzdWNjZXNzIjogZmFsc2UsCiAgImVycm9yLWNvZGVzIjogWyJ0aW1lb3V0LW9yLWR1cGxpY2F0ZSJdCn0KYGBgCgojIyBFcnJvciBDb2RlcwoKfCBDb2RlIHwgQ2F1c2UgfCBTb2x1dGlvbiB8CnwtLS0tLS18LS0tLS0tLXwtLS0tLS0tLS0tfAp8IGBtaXNzaW5nLWlucHV0LXNlY3JldGAgfCBTZWNyZXQga2V5IG5vdCBwcm92aWRlZCB8IEluY2x1ZGUgYHNlY3JldGAgaW4gcmVxdWVzdCB8CnwgYGludmFsaWQtaW5wdXQtc2VjcmV0YCB8IFNlY3JldCBrZXkgaXMgd3JvbmcgfCBDaGVjayBzZWNyZXQga2V5IGluIGRhc2hib2FyZCB8CnwgYG1pc3NpbmctaW5wdXQtcmVzcG9uc2VgIHwgVG9rZW4gbm90IHByb3ZpZGVkIHwgSW5jbHVkZSBgcmVzcG9uc2VgIHRva2VuIHwKfCBgaW52YWxpZC1pbnB1dC1yZXNwb25zZWAgfCBUb2tlbiBpcyBpbnZhbGlkL21hbGZvcm1lZCB8IFZlcmlmeSB0b2tlbiBmcm9tIHdpZGdldCB8CnwgYHRpbWVvdXQtb3ItZHVwbGljYXRlYCB8IFRva2VuIGV4cGlyZWQgKD41bWluKSBvciByZXVzZWQgfCBHZW5lcmF0ZSBuZXcgdG9rZW4sIHZhbGlkYXRlIG9uY2UgfAp8IGBpbnRlcm5hbC1lcnJvcmAgfCBDbG91ZGZsYXJlIHNlcnZlciBlcnJvciB8IFJldHJ5IHdpdGggZXhwb25lbnRpYWwgYmFja29mZiB8CnwgYGJhZC1yZXF1ZXN0YCB8IE1hbGZvcm1lZCByZXF1ZXN0IHwgQ2hlY2sgSlNPTi9mb3JtIGVuY29kaW5nIHwKCiMjIFR5cGVTY3JpcHQgVHlwZXMKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIFR1cm5zdGlsZU9wdGlvbnMgewogIHNpdGVrZXk6IHN0cmluZzsKICBhY3Rpb24/OiBzdHJpbmc7CiAgY0RhdGE/OiBzdHJpbmc7CiAgY2FsbGJhY2s/OiAodG9rZW46IHN0cmluZykgPT4gdm9pZDsKICAnZXJyb3ItY2FsbGJhY2snPzogKGVycm9yQ29kZTogc3RyaW5nKSA9PiB2b2lkOwogICdleHBpcmVkLWNhbGxiYWNrJz86ICgpID0+IHZvaWQ7CiAgJ3RpbWVvdXQtY2FsbGJhY2snPzogKCkgPT4gdm9pZDsKICAnYmVmb3JlLWludGVyYWN0aXZlLWNhbGxiYWNrJz86ICgpID0+IHZvaWQ7CiAgJ2FmdGVyLWludGVyYWN0aXZlLWNhbGxiYWNrJz86ICgpID0+IHZvaWQ7CiAgJ3Vuc3VwcG9ydGVkLWNhbGxiYWNrJz86ICgpID0+IHZvaWQ7CiAgdGhlbWU/OiAnbGlnaHQnIHwgJ2RhcmsnIHwgJ2F1dG8nOwogIHNpemU/OiAnbm9ybWFsJyB8ICdjb21wYWN0JyB8ICdmbGV4aWJsZSc7CiAgdGFiaW5kZXg/OiBudW1iZXI7CiAgJ3Jlc3BvbnNlLWZpZWxkJz86IGJvb2xlYW47CiAgJ3Jlc3BvbnNlLWZpZWxkLW5hbWUnPzogc3RyaW5nOwogIHJldHJ5PzogJ2F1dG8nIHwgJ25ldmVyJzsKICAncmV0cnktaW50ZXJ2YWwnPzogbnVtYmVyOwogIGxhbmd1YWdlPzogc3RyaW5nOwogIGV4ZWN1dGlvbj86ICdyZW5kZXInIHwgJ2V4ZWN1dGUnOwogIGFwcGVhcmFuY2U/OiAnYWx3YXlzJyB8ICdleGVjdXRlJyB8ICdpbnRlcmFjdGlvbi1vbmx5JzsKICAncmVmcmVzaC1leHBpcmVkJz86ICdhdXRvJyB8ICdtYW51YWwnIHwgJ25ldmVyJzsKfQoKaW50ZXJmYWNlIFR1cm5zdGlsZSB7CiAgcmVuZGVyKGNvbnRhaW5lcjogc3RyaW5nIHwgSFRNTEVsZW1lbnQsIG9wdGlvbnM6IFR1cm5zdGlsZU9wdGlvbnMpOiBzdHJpbmc7CiAgcmVzZXQod2lkZ2V0SWQ6IHN0cmluZyk6IHZvaWQ7CiAgcmVtb3ZlKHdpZGdldElkOiBzdHJpbmcpOiB2b2lkOwogIGdldFJlc3BvbnNlKHdpZGdldElkOiBzdHJpbmcpOiBzdHJpbmcgfCB1bmRlZmluZWQ7CiAgaXNFeHBpcmVkKHdpZGdldElkOiBzdHJpbmcpOiBib29sZWFuOwogIGV4ZWN1dGUoY29udGFpbmVyPzogc3RyaW5nIHwgSFRNTEVsZW1lbnQsIG9wdGlvbnM/OiBUdXJuc3RpbGVPcHRpb25zKTogdm9pZDsKfQoKZGVjbGFyZSBnbG9iYWwgewogIGludGVyZmFjZSBXaW5kb3cgewogICAgdHVybnN0aWxlOiBUdXJuc3RpbGU7CiAgICBvbmxvYWRUdXJuc3RpbGVDYWxsYmFjaz86ICgpID0+IHZvaWQ7CiAgfQp9CmBgYAoKIyMgU2NyaXB0IExvYWRpbmcKCmBgYGh0bWwKPCEtLSBTdGFuZGFyZCAtLT4KPHNjcmlwdCBzcmM9Imh0dHBzOi8vY2hhbGxlbmdlcy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvdjAvYXBpLmpzIiBhc3luYyBkZWZlcj48L3NjcmlwdD4KCjwhLS0gRXhwbGljaXQgcmVuZGVyIG1vZGUgLS0+CjxzY3JpcHQgc3JjPSJodHRwczovL2NoYWxsZW5nZXMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3YwL2FwaS5qcz9yZW5kZXI9ZXhwbGljaXQiPjwvc2NyaXB0PgoKPCEtLSBXaXRoIGxvYWQgY2FsbGJhY2sgLS0+CjxzY3JpcHQgc3JjPSJodHRwczovL2NoYWxsZW5nZXMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3YwL2FwaS5qcz9vbmxvYWQ9b25sb2FkVHVybnN0aWxlQ2FsbGJhY2siPjwvc2NyaXB0Pgo8c2NyaXB0Pgp3aW5kb3cub25sb2FkVHVybnN0aWxlQ2FsbGJhY2sgPSAoKSA9PiB7CiAgd2luZG93LnR1cm5zdGlsZS5yZW5kZXIoJyNjb250YWluZXInLCB7IHNpdGVrZXk6ICdZT1VSX1NJVEVfS0VZJyB9KTsKfTsKPC9zY3JpcHQ+CmBgYA==
+# API Reference
+
+## Client-Side JavaScript API
+
+The Turnstile JavaScript API is available at `window.turnstile` after loading the script.
+
+### `turnstile.render(container, options)`
+
+Renders a Turnstile widget into a container element.
+
+**Parameters:**
+- `container` (string | HTMLElement): CSS selector or DOM element
+- `options` (TurnstileOptions): Configuration object (see [configuration.md](configuration.md))
+
+**Returns:** `string` - Widget ID for use with other API methods
+
+**Example:**
+```javascript
+const widgetId = window.turnstile.render('#my-container', {
+  sitekey: 'YOUR_SITE_KEY',
+  callback: (token) => console.log('Success:', token),
+  'error-callback': (code) => console.error('Error:', code)
+});
+```
+
+### `turnstile.reset(widgetId)`
+
+Resets a widget (clears token, resets challenge state). Useful when form validation fails.
+
+**Parameters:**
+- `widgetId` (string): Widget ID from `render()`, or container element
+
+**Returns:** `void`
+
+**Example:**
+```javascript
+// Reset on form error
+if (!validateForm()) {
+  window.turnstile.reset(widgetId);
+}
+```
+
+### `turnstile.remove(widgetId)`
+
+Removes a widget from the DOM completely.
+
+**Parameters:**
+- `widgetId` (string): Widget ID from `render()`
+
+**Returns:** `void`
+
+**Example:**
+```javascript
+// Cleanup on navigation
+window.turnstile.remove(widgetId);
+```
+
+### `turnstile.getResponse(widgetId)`
+
+Gets the current token from a widget (if challenge completed).
+
+**Parameters:**
+- `widgetId` (string): Widget ID from `render()`, or container element
+
+**Returns:** `string | undefined` - Token string, or undefined if not ready
+
+**Example:**
+```javascript
+const token = window.turnstile.getResponse(widgetId);
+if (token) {
+  submitForm(token);
+}
+```
+
+### `turnstile.isExpired(widgetId)`
+
+Checks if a widget's token has expired (>5 minutes old).
+
+**Parameters:**
+- `widgetId` (string): Widget ID from `render()`
+
+**Returns:** `boolean` - True if expired
+
+**Example:**
+```javascript
+if (window.turnstile.isExpired(widgetId)) {
+  window.turnstile.reset(widgetId);
+}
+```
+
+## Callback Signatures
+
+```typescript
+type TurnstileCallback = (token: string) => void;
+type ErrorCallback = (errorCode: string) => void;
+type TimeoutCallback = () => void;
+type ExpiredCallback = () => void;
+type BeforeInteractiveCallback = () => void;
+type AfterInteractiveCallback = () => void;
+type UnsupportedCallback = () => void;
+```
+
+## Siteverify API (Server-Side)
+
+**Endpoint:** `https://challenges.cloudflare.com/turnstile/v0/siteverify`
+
+### Request
+
+**Method:** POST  
+**Content-Type:** `application/json` or `application/x-www-form-urlencoded`
+
+```typescript
+interface SiteverifyRequest {
+  secret: string;    // Your secret key (never expose client-side)
+  response: string;  // Token from cf-turnstile-response
+  remoteip?: string; // User's IP (optional but recommended)
+  idempotency_key?: string; // Unique key for idempotent validation
+}
+```
+
+**Example:**
+```javascript
+// Cloudflare Workers
+const result = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    secret: env.TURNSTILE_SECRET,
+    response: token,
+    remoteip: request.headers.get('CF-Connecting-IP')
+  })
+});
+const data = await result.json();
+```
+
+### Response
+
+```typescript
+interface SiteverifyResponse {
+  success: boolean;           // Validation result
+  challenge_ts?: string;      // ISO timestamp of challenge
+  hostname?: string;          // Hostname where widget was solved
+  'error-codes'?: string[];   // Error codes if success=false
+  action?: string;            // Action name from widget config
+  cdata?: string;             // Custom data from widget config
+}
+```
+
+**Example Success:**
+```json
+{
+  "success": true,
+  "challenge_ts": "2024-01-15T10:30:00Z",
+  "hostname": "example.com",
+  "action": "login",
+  "cdata": "user123"
+}
+```
+
+**Example Failure:**
+```json
+{
+  "success": false,
+  "error-codes": ["timeout-or-duplicate"]
+}
+```
+
+## Error Codes
+
+| Code | Cause | Solution |
+|------|-------|----------|
+| `missing-input-secret` | Secret key not provided | Include `secret` in request |
+| `invalid-input-secret` | Secret key is wrong | Check secret key in dashboard |
+| `missing-input-response` | Token not provided | Include `response` token |
+| `invalid-input-response` | Token is invalid/malformed | Verify token from widget |
+| `timeout-or-duplicate` | Token expired (>5min) or reused | Generate new token, validate once |
+| `internal-error` | Cloudflare server error | Retry with exponential backoff |
+| `bad-request` | Malformed request | Check JSON/form encoding |
+
+## TypeScript Types
+
+```typescript
+interface TurnstileOptions {
+  sitekey: string;
+  action?: string;
+  cData?: string;
+  callback?: (token: string) => void;
+  'error-callback'?: (errorCode: string) => void;
+  'expired-callback'?: () => void;
+  'timeout-callback'?: () => void;
+  'before-interactive-callback'?: () => void;
+  'after-interactive-callback'?: () => void;
+  'unsupported-callback'?: () => void;
+  theme?: 'light' | 'dark' | 'auto';
+  size?: 'normal' | 'compact' | 'flexible';
+  tabindex?: number;
+  'response-field'?: boolean;
+  'response-field-name'?: string;
+  retry?: 'auto' | 'never';
+  'retry-interval'?: number;
+  language?: string;
+  execution?: 'render' | 'execute';
+  appearance?: 'always' | 'execute' | 'interaction-only';
+  'refresh-expired'?: 'auto' | 'manual' | 'never';
+}
+
+interface Turnstile {
+  render(container: string | HTMLElement, options: TurnstileOptions): string;
+  reset(widgetId: string): void;
+  remove(widgetId: string): void;
+  getResponse(widgetId: string): string | undefined;
+  isExpired(widgetId: string): boolean;
+  execute(container?: string | HTMLElement, options?: TurnstileOptions): void;
+}
+
+declare global {
+  interface Window {
+    turnstile: Turnstile;
+    onloadTurnstileCallback?: () => void;
+  }
+}
+```
+
+## Script Loading
+
+```html
+<!-- Standard -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<!-- Explicit render mode -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+
+<!-- With load callback -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"></script>
+<script>
+window.onloadTurnstileCallback = () => {
+  window.turnstile.render('#container', { sitekey: 'YOUR_SITE_KEY' });
+};
+</script>
+```

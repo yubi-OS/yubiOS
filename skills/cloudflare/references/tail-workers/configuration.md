@@ -1,1 +1,176 @@
-IyBUYWlsIFdvcmtlcnMgQ29uZmlndXJhdGlvbgoKIyMgU2V0dXAgU3RlcHMKCiMjIyAxLiBDcmVhdGUgVGFpbCBXb3JrZXIKCkNyZWF0ZSBhIFdvcmtlciB3aXRoIGEgYHRhaWwoKWAgaGFuZGxlcjoKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgewogICAgLy8gUHJvY2VzcyBldmVudHMgZnJvbSBwcm9kdWNlciBXb3JrZXIKICAgIGN0eC53YWl0VW50aWwoCiAgICAgIGZldGNoKGVudi5MT0dfRU5EUE9JTlQsIHsKICAgICAgICBtZXRob2Q6ICJQT1NUIiwKICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeShldmVudHMpLAogICAgICB9KQogICAgKTsKICB9Cn07CmBgYAoKIyMjIDIuIENvbmZpZ3VyZSBQcm9kdWNlciBXb3JrZXIKCkluIHByb2R1Y2VyJ3MgYHdyYW5nbGVyLmpzb25jYDoKCmBgYGpzb25jCnsKICAibmFtZSI6ICJteS1wcm9kdWNlci13b3JrZXIiLAogICJ0YWlsX2NvbnN1bWVycyI6IFsKICAgIHsKICAgICAgInNlcnZpY2UiOiAibXktdGFpbC13b3JrZXIiCiAgICB9CiAgXQp9CmBgYAoKIyMjIDMuIERlcGxveSBCb3RoIFdvcmtlcnMKCmBgYGJhc2gKIyBEZXBsb3kgVGFpbCBXb3JrZXIgZmlyc3QKY2QgdGFpbC13b3JrZXIKd3JhbmdsZXIgZGVwbG95CgojIFRoZW4gZGVwbG95IHByb2R1Y2VyIFdvcmtlcgpjZCAuLi9wcm9kdWNlci13b3JrZXIKd3JhbmdsZXIgZGVwbG95CmBgYAoKIyMgV3JhbmdsZXIgQ29uZmlndXJhdGlvbgoKIyMjIFNpbmdsZSBUYWlsIENvbnN1bWVyCgpgYGBqc29uYwp7CiAgIm5hbWUiOiAicHJvZHVjZXItd29ya2VyIiwKICAidGFpbF9jb25zdW1lcnMiOiBbCiAgICB7CiAgICAgICJzZXJ2aWNlIjogImxvZ2dpbmctdGFpbC13b3JrZXIiCiAgICB9CiAgXQp9CmBgYAoKIyMjIE11bHRpcGxlIFRhaWwgQ29uc3VtZXJzCgpgYGBqc29uYwp7CiAgIm5hbWUiOiAicHJvZHVjZXItd29ya2VyIiwKICAidGFpbF9jb25zdW1lcnMiOiBbCiAgICB7CiAgICAgICJzZXJ2aWNlIjogImxvZ2dpbmctdGFpbC13b3JrZXIiCiAgICB9LAogICAgewogICAgICAic2VydmljZSI6ICJtZXRyaWNzLXRhaWwtd29ya2VyIgogICAgfQogIF0KfQpgYGAKCioqTm90ZToqKiBFYWNoIGNvbnN1bWVyIHJlY2VpdmVzIEFMTCBldmVudHMgaW5kZXBlbmRlbnRseS4KCiMjIyBSZW1vdmUgVGFpbCBDb25zdW1lcgoKYGBganNvbmMKewogICJ0YWlsX2NvbnN1bWVycyI6IFtdCn0KYGBgCgpUaGVuIHJlZGVwbG95IHByb2R1Y2VyIFdvcmtlci4KCiMjIEVudmlyb25tZW50IFZhcmlhYmxlcwoKVGFpbCBXb3JrZXJzIHVzZSBzYW1lIGJpbmRpbmcgc3ludGF4IGFzIHJlZ3VsYXIgV29ya2VyczoKCmBgYGpzb25jCnsKICAibmFtZSI6ICJteS10YWlsLXdvcmtlciIsCiAgInZhcnMiOiB7CiAgICAiTE9HX0VORFBPSU5UIjogImh0dHBzOi8vbG9ncy5leGFtcGxlLmNvbS9pbmdlc3QiCiAgfSwKICAia3ZfbmFtZXNwYWNlcyI6IFsKICAgIHsKICAgICAgImJpbmRpbmciOiAiTE9HU19LViIsCiAgICAgICJpZCI6ICJhYmMxMjMuLi4iCiAgICB9CiAgXQp9CmBgYAoKIyMgVGVzdGluZyAmIERldmVsb3BtZW50CgojIyMgTG9jYWwgVGVzdGluZwoKKipUYWlsIFdvcmtlcnMgY2Fubm90IGJlIGZ1bGx5IHRlc3RlZCB3aXRoIGB3cmFuZ2xlciBkZXZgLioqIERlcGxveSB0byBzdGFnaW5nIGVudmlyb25tZW50IGZvciB0ZXN0aW5nLgoKIyMjIFRlc3RpbmcgU3RyYXRlZ3kKCjEuIERlcGxveSBwcm9kdWNlciBXb3JrZXIgdG8gc3RhZ2luZwoyLiBEZXBsb3kgVGFpbCBXb3JrZXIgdG8gc3RhZ2luZwozLiBDb25maWd1cmUgYHRhaWxfY29uc3VtZXJzYCBpbiBwcm9kdWNlcgo0LiBUcmlnZ2VyIHByb2R1Y2VyIFdvcmtlciByZXF1ZXN0cwo1LiBWZXJpZnkgVGFpbCBXb3JrZXIgcmVjZWl2ZXMgZXZlbnRzIChjaGVjayBkZXN0aW5hdGlvbiBsb2dzL3N0b3JhZ2UpCgojIyMgV3JhbmdsZXIgVGFpbCBDb21tYW5kCgpgYGBiYXNoCiMgU3RyZWFtIGxvZ3MgdG8gdGVybWluYWwgKE5PVCBUYWlsIFdvcmtlcnMpCndyYW5nbGVyIHRhaWwgbXktcHJvZHVjZXItd29ya2VyCmBgYAoKKipUaGlzIGlzIGRpZmZlcmVudCBmcm9tIFRhaWwgV29ya2VyczoqKgotIGB3cmFuZ2xlciB0YWlsYCBzdHJlYW1zIGxvZ3MgdG8geW91ciB0ZXJtaW5hbAotIFRhaWwgV29ya2VycyBhcmUgV29ya2VycyB0aGF0IHByb2Nlc3MgZXZlbnRzIHByb2dyYW1tYXRpY2FsbHkKCiMjIERlcGxveW1lbnQgQ2hlY2tsaXN0CgotIFsgXSBUYWlsIFdvcmtlciBoYXMgYHRhaWwoKWAgaGFuZGxlcgotIFsgXSBUYWlsIFdvcmtlciBkZXBsb3llZCBiZWZvcmUgcHJvZHVjZXIKLSBbIF0gUHJvZHVjZXIncyBgd3JhbmdsZXIuanNvbmNgIGhhcyBjb3JyZWN0IGB0YWlsX2NvbnN1bWVyc2AKLSBbIF0gRW52aXJvbm1lbnQgdmFyaWFibGVzIGNvbmZpZ3VyZWQKLSBbIF0gVGVzdGVkIHdpdGggc3RhZ2luZyBlbnZpcm9ubWVudAotIFsgXSBNb25pdG9yaW5nIGNvbmZpZ3VyZWQgZm9yIFRhaWwgV29ya2VyIGl0c2VsZgoKIyMgTGltaXRzCgp8IExpbWl0IHwgVmFsdWUgfCBOb3RlcyB8CnwtLS0tLS0tfC0tLS0tLS18LS0tLS0tLXwKfCBNYXggdGFpbCBjb25zdW1lcnMgcGVyIHByb2R1Y2VyIHwgMTAgfCBFYWNoIHJlY2VpdmVzIGFsbCBldmVudHMgaW5kZXBlbmRlbnRseSB8CnwgRXZlbnRzIGJhdGNoIHNpemUgfCBVcCB0byAxMDAgZXZlbnRzIHBlciBpbnZvY2F0aW9uIHwgTGFyZ2VyIGJhdGNoZXMgc3BsaXQgYWNyb3NzIGludm9jYXRpb25zIHwKfCBUYWlsIFdvcmtlciBDUFUgdGltZSB8IFNhbWUgYXMgcmVndWxhciBXb3JrZXJzIHwgMTBtcyAoZnJlZSksIDMwcyBkZWZhdWx0IC8gNW1pbiBtYXggKHBhaWQpIHwKfCBQcmljaW5nIHRpZXIgfCBXb3JrZXJzIFBhaWQgb3IgRW50ZXJwcmlzZSB8IE5vdCBhdmFpbGFibGUgb24gZnJlZSBwbGFuIHwKfCBSZXF1ZXN0IGJvZHkgc2l6ZSB8IDEwMCBNQiBtYXggfCBXaGVuIHNlbmRpbmcgdG8gZXh0ZXJuYWwgZW5kcG9pbnRzIHwKfCBFdmVudCByZXRlbnRpb24gfCBOb25lIHwgRXZlbnRzIG5vdCByZXRyaWVkIGlmIHRhaWwgaGFuZGxlciBmYWlscyB8CgojIyBXb3JrZXJzIGZvciBQbGF0Zm9ybXMKCkZvciBkeW5hbWljIGRpc3BhdGNoIFdvcmtlcnMsIGJvdGggZGlzcGF0Y2ggYW5kIHVzZXIgV29ya2VyIGV2ZW50cyBzZW50IHRvIHRhaWwgY29uc3VtZXI6CgpgYGBqc29uYwp7CiAgIm5hbWUiOiAiZGlzcGF0Y2gtd29ya2VyIiwKICAidGFpbF9jb25zdW1lcnMiOiBbCiAgICB7CiAgICAgICJzZXJ2aWNlIjogInBsYXRmb3JtLXRhaWwtd29ya2VyIgogICAgfQogIF0KfQpgYGAKClRhaWwgV29ya2VyIHJlY2VpdmVzIFRXTyBgVHJhY2VJdGVtYCBlbGVtZW50cyBwZXIgcmVxdWVzdDoKMS4gRHluYW1pYyBkaXNwYXRjaCBXb3JrZXIgZXZlbnQKMi4gVXNlciBXb3JrZXIgZXZlbnQKClNlZSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSBmb3IgaGFuZGxpbmcuCg==
+# Tail Workers Configuration
+
+## Setup Steps
+
+### 1. Create Tail Worker
+
+Create a Worker with a `tail()` handler:
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    // Process events from producer Worker
+    ctx.waitUntil(
+      fetch(env.LOG_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(events),
+      })
+    );
+  }
+};
+```
+
+### 2. Configure Producer Worker
+
+In producer's `wrangler.jsonc`:
+
+```jsonc
+{
+  "name": "my-producer-worker",
+  "tail_consumers": [
+    {
+      "service": "my-tail-worker"
+    }
+  ]
+}
+```
+
+### 3. Deploy Both Workers
+
+```bash
+# Deploy Tail Worker first
+cd tail-worker
+wrangler deploy
+
+# Then deploy producer Worker
+cd ../producer-worker
+wrangler deploy
+```
+
+## Wrangler Configuration
+
+### Single Tail Consumer
+
+```jsonc
+{
+  "name": "producer-worker",
+  "tail_consumers": [
+    {
+      "service": "logging-tail-worker"
+    }
+  ]
+}
+```
+
+### Multiple Tail Consumers
+
+```jsonc
+{
+  "name": "producer-worker",
+  "tail_consumers": [
+    {
+      "service": "logging-tail-worker"
+    },
+    {
+      "service": "metrics-tail-worker"
+    }
+  ]
+}
+```
+
+**Note:** Each consumer receives ALL events independently.
+
+### Remove Tail Consumer
+
+```jsonc
+{
+  "tail_consumers": []
+}
+```
+
+Then redeploy producer Worker.
+
+## Environment Variables
+
+Tail Workers use same binding syntax as regular Workers:
+
+```jsonc
+{
+  "name": "my-tail-worker",
+  "vars": {
+    "LOG_ENDPOINT": "https://logs.example.com/ingest"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "LOGS_KV",
+      "id": "abc123..."
+    }
+  ]
+}
+```
+
+## Testing & Development
+
+### Local Testing
+
+**Tail Workers cannot be fully tested with `wrangler dev`.** Deploy to staging environment for testing.
+
+### Testing Strategy
+
+1. Deploy producer Worker to staging
+2. Deploy Tail Worker to staging
+3. Configure `tail_consumers` in producer
+4. Trigger producer Worker requests
+5. Verify Tail Worker receives events (check destination logs/storage)
+
+### Wrangler Tail Command
+
+```bash
+# Stream logs to terminal (NOT Tail Workers)
+wrangler tail my-producer-worker
+```
+
+**This is different from Tail Workers:**
+- `wrangler tail` streams logs to your terminal
+- Tail Workers are Workers that process events programmatically
+
+## Deployment Checklist
+
+- [ ] Tail Worker has `tail()` handler
+- [ ] Tail Worker deployed before producer
+- [ ] Producer's `wrangler.jsonc` has correct `tail_consumers`
+- [ ] Environment variables configured
+- [ ] Tested with staging environment
+- [ ] Monitoring configured for Tail Worker itself
+
+## Limits
+
+| Limit | Value | Notes |
+|-------|-------|-------|
+| Max tail consumers per producer | 10 | Each receives all events independently |
+| Events batch size | Up to 100 events per invocation | Larger batches split across invocations |
+| Tail Worker CPU time | Same as regular Workers | 10ms (free), 30s default / 5min max (paid) |
+| Pricing tier | Workers Paid or Enterprise | Not available on free plan |
+| Request body size | 100 MB max | When sending to external endpoints |
+| Event retention | None | Events not retried if tail handler fails |
+
+## Workers for Platforms
+
+For dynamic dispatch Workers, both dispatch and user Worker events sent to tail consumer:
+
+```jsonc
+{
+  "name": "dispatch-worker",
+  "tail_consumers": [
+    {
+      "service": "platform-tail-worker"
+    }
+  ]
+}
+```
+
+Tail Worker receives TWO `TraceItem` elements per request:
+1. Dynamic dispatch Worker event
+2. User Worker event
+
+See [patterns.md](patterns.md) for handling.

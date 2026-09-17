@@ -1,1 +1,167 @@
-IyBHb3RjaGFzIGFuZCBUcm91Ymxlc2hvb3RpbmcKCkNvbW1vbiBwaXRmYWxscywgbGltaXRhdGlvbnMsIGFuZCBzb2x1dGlvbnMgZm9yIFRDUCBTb2NrZXRzIGluIENsb3VkZmxhcmUgV29ya2Vycy4KCiMjIFBsYXRmb3JtIExpbWl0cwoKIyMjIENvbm5lY3Rpb24gTGltaXRzCgp8IExpbWl0IHwgVmFsdWUgfAp8LS0tLS0tLXwtLS0tLS0tfAp8IE1heCBjb25jdXJyZW50IHNvY2tldHMgcGVyIHJlcXVlc3QgfCA2IChoYXJkIGxpbWl0KSB8CnwgU29ja2V0IGxpZmV0aW1lIHwgUmVxdWVzdCBkdXJhdGlvbiB8CnwgQ29ubmVjdGlvbiB0aW1lb3V0IHwgUGxhdGZvcm0tZGVwZW5kZW50LCBubyBzZXR0aW5nIHwKCioqUHJvYmxlbToqKiBFeGNlZWRpbmcgNiBjb25uZWN0aW9ucyB0aHJvd3MgZXJyb3IKCioqU29sdXRpb246KiogUHJvY2VzcyBpbiBiYXRjaGVzIG9mIDYKCmBgYHR5cGVzY3JpcHQKZm9yIChsZXQgaSA9IDA7IGkgPCBob3N0cy5sZW5ndGg7IGkgKz0gNikgewogIGNvbnN0IGJhdGNoID0gaG9zdHMuc2xpY2UoaSwgaSArIDYpLm1hcChoID0+IGNvbm5lY3QoeyBob3N0bmFtZTogaCwgcG9ydDogNDQzIH0pKTsKICBhd2FpdCBQcm9taXNlLmFsbChiYXRjaC5tYXAoYXN5bmMgcyA9PiB7IC8qIHVzZSAqLyBhd2FpdCBzLmNsb3NlKCk7IH0pKTsKfQpgYGAKCiMjIyBCbG9ja2VkIERlc3RpbmF0aW9ucwoKQ2xvdWRmbGFyZSBJUHMgKDEuMS4xLjEpLCBsb2NhbGhvc3QgKDEyNy4wLjAuMSksIHBvcnQgMjUgKFNNVFApLCBXb3JrZXIncyBvd24gVVJMIGJsb2NrZWQgZm9yIHNlY3VyaXR5LgoKKipTb2x1dGlvbjoqKiBVc2UgcHVibGljIElQcyBvciBUdW5uZWwgaG9zdG5hbWVzOiBgY29ubmVjdCh7IGhvc3RuYW1lOiAiZGIuaW50ZXJuYWwuY29tcGFueS5uZXQiLCBwb3J0OiA1NDMyIH0pYAoKIyMjIFNjb3BlIFJlcXVpcmVtZW50cwoKKipQcm9ibGVtOioqIFNvY2tldHMgY3JlYXRlZCBpbiBnbG9iYWwgc2NvcGUgZmFpbAoKKipDYXVzZToqKiBTb2NrZXRzIHRpZWQgdG8gcmVxdWVzdCBsaWZlY3ljbGUKCioqU29sdXRpb246KiogQ3JlYXRlIGluc2lkZSBoYW5kbGVyOiBgZXhwb3J0IGRlZmF1bHQgeyBhc3luYyBmZXRjaCgpIHsgY29uc3Qgc29ja2V0ID0gY29ubmVjdCguLi4pOyB9IH1gCgojIyBDb21tb24gRXJyb3JzCgojIyMgRXJyb3I6ICJwcm94eSByZXF1ZXN0IGZhaWxlZCIKCioqQ2F1c2VzOioqIEJsb2NrZWQgZGVzdGluYXRpb24gKENsb3VkZmxhcmUgSVAsIGxvY2FsaG9zdCwgcG9ydCAyNSksIEROUyBmYWlsdXJlLCBuZXR3b3JrIHVucmVhY2hhYmxlCgoqKlNvbHV0aW9uOioqIFZhbGlkYXRlIGRlc3RpbmF0aW9ucywgdXNlIFR1bm5lbCBob3N0bmFtZXMsIGNhdGNoIGVycm9ycyB3aXRoIHRyeS9jYXRjaAoKIyMjIEVycm9yOiAiVENQIExvb3AgZGV0ZWN0ZWQiCgoqKkNhdXNlOioqIFdvcmtlciBjb25uZWN0aW5nIHRvIGl0c2VsZgoKKipTb2x1dGlvbjoqKiBDb25uZWN0IHRvIGV4dGVybmFsIHNlcnZpY2UsIG5vdCBXb3JrZXIncyBvd24gaG9zdG5hbWUKCiMjIyBFcnJvcjogIlBvcnQgMjUgcHJvaGliaXRlZCIKCioqQ2F1c2U6KiogU01UUCBwb3J0IGJsb2NrZWQKCioqU29sdXRpb246KiogVXNlIEVtYWlsIFdvcmtlcnMgQVBJIGZvciBlbWFpbAoKIyMjIEVycm9yOiAic29ja2V0IGlzIG5vdCBvcGVuIgoKKipDYXVzZToqKiBSZWFkL3dyaXRlIGFmdGVyIGNsb3NlCgoqKlNvbHV0aW9uOioqIEFsd2F5cyB1c2UgdHJ5L2ZpbmFsbHkgdG8gZW5zdXJlIHByb3BlciBjbG9zdXJlIG9yZGVyCgojIyMgRXJyb3I6IENvbm5lY3Rpb24gdGltZW91dAoKKipDYXVzZToqKiBObyBidWlsdC1pbiB0aW1lb3V0CgoqKlNvbHV0aW9uOioqIFVzZSBgUHJvbWlzZS5yYWNlKClgOgoKYGBgdHlwZXNjcmlwdApjb25zdCBzb2NrZXQgPSBjb25uZWN0KGFkZHIsIG9wdHMpOwpjb25zdCB0aW1lb3V0ID0gbmV3IFByb21pc2UoKF8sIHJlamVjdCkgPT4gc2V0VGltZW91dCgoKSA9PiByZWplY3QobmV3IEVycm9yKCdUaW1lb3V0JykpLCA1MDAwKSk7CmF3YWl0IFByb21pc2UucmFjZShbc29ja2V0Lm9wZW5lZCwgdGltZW91dF0pOwpgYGAKCiMjIFRMUy9TU0wgSXNzdWVzCgojIyMgU3RhcnRUTFMgVGltaW5nCgoqKlByb2JsZW06KiogQ2FsbGluZyBgc3RhcnRUbHMoKWAgdG9vIGVhcmx5CgoqKlNvbHV0aW9uOioqIFNlbmQgcHJvdG9jb2wtc3BlY2lmaWMgU1RBUlRUTFMgY29tbWFuZCwgd2FpdCBmb3Igc2VydmVyIE9LLCB0aGVuIGNhbGwgYHNvY2tldC5zdGFydFRscygpYAoKIyMjIENlcnRpZmljYXRlIFZhbGlkYXRpb24KCioqUHJvYmxlbToqKiBTZWxmLXNpZ25lZCBjZXJ0cyBmYWlsCgoqKlNvbHV0aW9uOioqIFVzZSBwcm9wZXIgY2VydHMgb3IgVHVubmVsIChoYW5kbGVzIFRMUyB0ZXJtaW5hdGlvbikKCiMjIFBlcmZvcm1hbmNlIElzc3VlcwoKIyMjIE5vdCBVc2luZyBDb25uZWN0aW9uIFBvb2xpbmcKCioqUHJvYmxlbToqKiBOZXcgY29ubmVjdGlvbiBvdmVyaGVhZCBwZXIgcmVxdWVzdAoKKipTb2x1dGlvbjoqKiBVc2UgW0h5cGVyZHJpdmVdKC4uL2h5cGVyZHJpdmUvKSBmb3IgZGF0YWJhc2VzIChidWlsdC1pbiBwb29saW5nKQoKIyMjIE5vdCBVc2luZyBTbWFydCBQbGFjZW1lbnQKCioqUHJvYmxlbToqKiBIaWdoIGxhdGVuY3kgdG8gYmFja2VuZAoKKipTb2x1dGlvbjoqKiBFbmFibGU6IGB7ICJwbGFjZW1lbnQiOiB7ICJtb2RlIjogInNtYXJ0IiB9IH1gIGluIHdyYW5nbGVyLmpzb25jCgojIyMgRm9yZ2V0dGluZyB0byBDbG9zZSBTb2NrZXRzCgoqKlByb2JsZW06KiogUmVzb3VyY2UgbGVha3MKCioqU29sdXRpb246KiogQWx3YXlzIHVzZSB0cnkvZmluYWxseToKCmBgYHR5cGVzY3JpcHQKY29uc3Qgc29ja2V0ID0gY29ubmVjdCh7IGhvc3RuYW1lOiAiYXBpLmludGVybmFsIiwgcG9ydDogNDQzIH0pOwp0cnkgewogIC8vIFVzZSBzb2NrZXQKfSBmaW5hbGx5IHsKICBhd2FpdCBzb2NrZXQuY2xvc2UoKTsKfQpgYGAKCiMjIERhdGEgSGFuZGxpbmcgSXNzdWVzCgojIyMgQXNzdW1pbmcgU2luZ2xlIFJlYWQgR2V0cyBBbGwgRGF0YQoKKipQcm9ibGVtOioqIE9ubHkgcmVhZGluZyBvbmNlIG1heSBtaXNzIGNodW5rZWQgZGF0YQoKKipTb2x1dGlvbjoqKiBMb29wIGByZWFkZXIucmVhZCgpYCB1bnRpbCBgZG9uZSA9PT0gdHJ1ZWAgKHNlZSBwYXR0ZXJucy5tZCkKCiMjIyBUZXh0IEVuY29kaW5nIElzc3VlcwoKKipQcm9ibGVtOioqIFVzaW5nIHdyb25nIGVuY29kaW5nCgoqKlNvbHV0aW9uOioqIFNwZWNpZnkgZW5jb2Rpbmc6IGBuZXcgVGV4dERlY29kZXIoJ2lzby04ODU5LTEnKS5kZWNvZGUoZGF0YSlgCgojIyBTZWN1cml0eSBJc3N1ZXMKCiMjIyBTU1JGIFZ1bG5lcmFiaWxpdHkKCioqUHJvYmxlbToqKiBVc2VyLWNvbnRyb2xsZWQgZGVzdGluYXRpb25zIGFsbG93IGFjY2VzcyB0byBpbnRlcm5hbCBzZXJ2aWNlcwoKKipTb2x1dGlvbjoqKiBWYWxpZGF0ZSBhZ2FpbnN0IHN0cmljdCBhbGxvd2xpc3Q6CgpgYGB0eXBlc2NyaXB0CmNvbnN0IEFMTE9XRUQgPSBbJ2FwaTEuaW50ZXJuYWwubmV0JywgJ2FwaTIuaW50ZXJuYWwubmV0J107CmNvbnN0IGhvc3QgPSBuZXcgVVJMKHJlcS51cmwpLnNlYXJjaFBhcmFtcy5nZXQoJ2hvc3QnKTsKaWYgKCFob3N0IHx8ICFBTExPV0VELmluY2x1ZGVzKGhvc3QpKSByZXR1cm4gbmV3IFJlc3BvbnNlKCdGb3JiaWRkZW4nLCB7IHN0YXR1czogNDAzIH0pOwpgYGAKCiMjIFdoZW4gdG8gVXNlIEFsdGVybmF0aXZlcwoKfCBVc2UgQ2FzZSB8IEFsdGVybmF0aXZlIHwgUmVhc29uIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwtLS0tLS0tLXwKfCBQb3N0Z3JlU1FML015U1FMIHwgW0h5cGVyZHJpdmVdKC4uL2h5cGVyZHJpdmUvKSB8IENvbm5lY3Rpb24gcG9vbGluZywgY2FjaGluZyB8CnwgSFRUUC9IVFRQUyB8IGBmZXRjaCgpYCB8IFNpbXBsZXIsIGJ1aWx0LWluIHwKfCBIVFRQIHdpdGggU1NSRiBwcm90ZWN0aW9uIHwgVlBDIFNlcnZpY2VzIChiZXRhIDIwMjUrKSB8IERlY2xhcmF0aXZlIGJpbmRpbmdzIHwKCiMjIERlYnVnZ2luZyBUaXBzCgoxLiAqKkxvZyBjb25uZWN0aW9uIGRldGFpbHM6KiogYGNvbnN0IGluZm8gPSBhd2FpdCBzb2NrZXQub3BlbmVkOyBjb25zb2xlLmxvZyhpbmZvLnJlbW90ZUFkZHJlc3MpO2AKMi4gKipUZXN0IHdpdGggcHVibGljIHNlcnZpY2VzIGZpcnN0OioqIFVzZSB0Y3BiaW4uY29tOjQyNDIgZWNobyBzZXJ2ZXIKMy4gKipWZXJpZnkgVHVubmVsOioqIGBjbG91ZGZsYXJlZCB0dW5uZWwgaW5mbyA8bmFtZT5gIGFuZCBgY2xvdWRmbGFyZWQgdHVubmVsIHJvdXRlIGlwIGxpc3RgCgojIyBSZWxhdGVkCgotIFtIeXBlcmRyaXZlXSguLi9oeXBlcmRyaXZlLykgLSBEYXRhYmFzZSBjb25uZWN0aW9ucwotIFtTbWFydCBQbGFjZW1lbnRdKC4uL3NtYXJ0LXBsYWNlbWVudC8pIC0gTGF0ZW5jeSBvcHRpbWl6YXRpb24KLSBbVHVubmVsIFRyb3VibGVzaG9vdGluZ10oLi4vdHVubmVsL2dvdGNoYXMubWQpCg==
+# Gotchas and Troubleshooting
+
+Common pitfalls, limitations, and solutions for TCP Sockets in Cloudflare Workers.
+
+## Platform Limits
+
+### Connection Limits
+
+| Limit | Value |
+|-------|-------|
+| Max concurrent sockets per request | 6 (hard limit) |
+| Socket lifetime | Request duration |
+| Connection timeout | Platform-dependent, no setting |
+
+**Problem:** Exceeding 6 connections throws error
+
+**Solution:** Process in batches of 6
+
+```typescript
+for (let i = 0; i < hosts.length; i += 6) {
+  const batch = hosts.slice(i, i + 6).map(h => connect({ hostname: h, port: 443 }));
+  await Promise.all(batch.map(async s => { /* use */ await s.close(); }));
+}
+```
+
+### Blocked Destinations
+
+Cloudflare IPs (1.1.1.1), localhost (127.0.0.1), port 25 (SMTP), Worker's own URL blocked for security.
+
+**Solution:** Use public IPs or Tunnel hostnames: `connect({ hostname: "db.internal.company.net", port: 5432 })`
+
+### Scope Requirements
+
+**Problem:** Sockets created in global scope fail
+
+**Cause:** Sockets tied to request lifecycle
+
+**Solution:** Create inside handler: `export default { async fetch() { const socket = connect(...); } }`
+
+## Common Errors
+
+### Error: "proxy request failed"
+
+**Causes:** Blocked destination (Cloudflare IP, localhost, port 25), DNS failure, network unreachable
+
+**Solution:** Validate destinations, use Tunnel hostnames, catch errors with try/catch
+
+### Error: "TCP Loop detected"
+
+**Cause:** Worker connecting to itself
+
+**Solution:** Connect to external service, not Worker's own hostname
+
+### Error: "Port 25 prohibited"
+
+**Cause:** SMTP port blocked
+
+**Solution:** Use Email Workers API for email
+
+### Error: "socket is not open"
+
+**Cause:** Read/write after close
+
+**Solution:** Always use try/finally to ensure proper closure order
+
+### Error: Connection timeout
+
+**Cause:** No built-in timeout
+
+**Solution:** Use `Promise.race()`:
+
+```typescript
+const socket = connect(addr, opts);
+const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000));
+await Promise.race([socket.opened, timeout]);
+```
+
+## TLS/SSL Issues
+
+### StartTLS Timing
+
+**Problem:** Calling `startTls()` too early
+
+**Solution:** Send protocol-specific STARTTLS command, wait for server OK, then call `socket.startTls()`
+
+### Certificate Validation
+
+**Problem:** Self-signed certs fail
+
+**Solution:** Use proper certs or Tunnel (handles TLS termination)
+
+## Performance Issues
+
+### Not Using Connection Pooling
+
+**Problem:** New connection overhead per request
+
+**Solution:** Use [Hyperdrive](../hyperdrive/) for databases (built-in pooling)
+
+### Not Using Smart Placement
+
+**Problem:** High latency to backend
+
+**Solution:** Enable: `{ "placement": { "mode": "smart" } }` in wrangler.jsonc
+
+### Forgetting to Close Sockets
+
+**Problem:** Resource leaks
+
+**Solution:** Always use try/finally:
+
+```typescript
+const socket = connect({ hostname: "api.internal", port: 443 });
+try {
+  // Use socket
+} finally {
+  await socket.close();
+}
+```
+
+## Data Handling Issues
+
+### Assuming Single Read Gets All Data
+
+**Problem:** Only reading once may miss chunked data
+
+**Solution:** Loop `reader.read()` until `done === true` (see patterns.md)
+
+### Text Encoding Issues
+
+**Problem:** Using wrong encoding
+
+**Solution:** Specify encoding: `new TextDecoder('iso-8859-1').decode(data)`
+
+## Security Issues
+
+### SSRF Vulnerability
+
+**Problem:** User-controlled destinations allow access to internal services
+
+**Solution:** Validate against strict allowlist:
+
+```typescript
+const ALLOWED = ['api1.internal.net', 'api2.internal.net'];
+const host = new URL(req.url).searchParams.get('host');
+if (!host || !ALLOWED.includes(host)) return new Response('Forbidden', { status: 403 });
+```
+
+## When to Use Alternatives
+
+| Use Case | Alternative | Reason |
+|----------|-------------|--------|
+| PostgreSQL/MySQL | [Hyperdrive](../hyperdrive/) | Connection pooling, caching |
+| HTTP/HTTPS | `fetch()` | Simpler, built-in |
+| HTTP with SSRF protection | VPC Services (beta 2025+) | Declarative bindings |
+
+## Debugging Tips
+
+1. **Log connection details:** `const info = await socket.opened; console.log(info.remoteAddress);`
+2. **Test with public services first:** Use tcpbin.com:4242 echo server
+3. **Verify Tunnel:** `cloudflared tunnel info <name>` and `cloudflared tunnel route ip list`
+
+## Related
+
+- [Hyperdrive](../hyperdrive/) - Database connections
+- [Smart Placement](../smart-placement/) - Latency optimization
+- [Tunnel Troubleshooting](../tunnel/gotchas.md)

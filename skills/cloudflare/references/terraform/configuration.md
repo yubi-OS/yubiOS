@@ -1,1 +1,197 @@
-IyBUZXJyYWZvcm0gQ29uZmlndXJhdGlvbiBSZWZlcmVuY2UKCkNvbXBsZXRlIHJlc291cmNlIGNvbmZpZ3VyYXRpb25zIGZvciBDbG91ZGZsYXJlIGluZnJhc3RydWN0dXJlLgoKIyMgWm9uZSAmIEROUwoKYGBgaGNsCiMgWm9uZSArIHNldHRpbmdzCnJlc291cmNlICJjbG91ZGZsYXJlX3pvbmUiICJleGFtcGxlIiB7IGFjY291bnQgPSB7IGlkID0gdmFyLmFjY291bnRfaWQgfTsgbmFtZSA9ICJleGFtcGxlLmNvbSI7IHR5cGUgPSAiZnVsbCIgfQpyZXNvdXJjZSAiY2xvdWRmbGFyZV96b25lX3NldHRpbmdzX292ZXJyaWRlIiAiZXhhbXBsZSIgewogIHpvbmVfaWQgPSBjbG91ZGZsYXJlX3pvbmUuZXhhbXBsZS5pZAogIHNldHRpbmdzIHsgc3NsID0gInN0cmljdCI7IGFsd2F5c191c2VfaHR0cHMgPSAib24iOyBtaW5fdGxzX3ZlcnNpb24gPSAiMS4yIjsgdGxzXzFfMyA9ICJvbiI7IGh0dHAzID0gIm9uIiB9Cn0KCiMgRE5TIHJlY29yZHMgKEEsIENOQU1FLCBNWCwgVFhUKQpyZXNvdXJjZSAiY2xvdWRmbGFyZV9kbnNfcmVjb3JkIiAid3d3IiB7CiAgem9uZV9pZCA9IGNsb3VkZmxhcmVfem9uZS5leGFtcGxlLmlkOyBuYW1lID0gInd3dyI7IGNvbnRlbnQgPSAiMTkyLjAuMi4xIjsgdHlwZSA9ICJBIjsgcHJveGllZCA9IHRydWUKfQpyZXNvdXJjZSAiY2xvdWRmbGFyZV9kbnNfcmVjb3JkIiAibXgiIHsKICBmb3JfZWFjaCA9IHsgIjEwIiA9ICJtYWlsMS5leGFtcGxlLmNvbSIsICIyMCIgPSAibWFpbDIuZXhhbXBsZS5jb20iIH0KICB6b25lX2lkID0gY2xvdWRmbGFyZV96b25lLmV4YW1wbGUuaWQ7IG5hbWUgPSAiQCI7IGNvbnRlbnQgPSBlYWNoLnZhbHVlOyB0eXBlID0gIk1YIjsgcHJpb3JpdHkgPSBlYWNoLmtleQp9CmBgYAoKIyMgV29ya2VycwoKIyMjIFNpbXBsZSBQYXR0ZXJuIChMZWdhY3kgLSBTdGlsbCBXb3JrcykKCmBgYGhjbApyZXNvdXJjZSAiY2xvdWRmbGFyZV93b3JrZXJzX3NjcmlwdCIgImFwaSIgewogIGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZDsgbmFtZSA9ICJhcGktd29ya2VyIjsgY29udGVudCA9IGZpbGUoIndvcmtlci5qcyIpCiAgbW9kdWxlID0gdHJ1ZTsgY29tcGF0aWJpbGl0eV9kYXRlID0gIjIwMjUtMDEtMDEiCiAga3ZfbmFtZXNwYWNlX2JpbmRpbmcgeyBuYW1lID0gIktWIjsgbmFtZXNwYWNlX2lkID0gY2xvdWRmbGFyZV93b3JrZXJzX2t2X25hbWVzcGFjZS5jYWNoZS5pZCB9CiAgcjJfYnVja2V0X2JpbmRpbmcgeyBuYW1lID0gIkJVQ0tFVCI7IGJ1Y2tldF9uYW1lID0gY2xvdWRmbGFyZV9yMl9idWNrZXQuYXNzZXRzLm5hbWUgfQogIGQxX2RhdGFiYXNlX2JpbmRpbmcgeyBuYW1lID0gIkRCIjsgZGF0YWJhc2VfaWQgPSBjbG91ZGZsYXJlX2QxX2RhdGFiYXNlLmFwcC5pZCB9CiAgc2VjcmV0X3RleHRfYmluZGluZyB7IG5hbWUgPSAiU0VDUkVUIjsgdGV4dCA9IHZhci5zZWNyZXQgfQp9CmBgYAoKIyMjIEdyYWR1YWwgUm9sbG91dHMgKFJlY29tbWVuZGVkIGZvciBQcm9kdWN0aW9uKQoKYGBgaGNsCnJlc291cmNlICJjbG91ZGZsYXJlX3dvcmtlciIgImFwaSIgeyBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQ7IG5hbWUgPSAiYXBpLXdvcmtlciIgfQpyZXNvdXJjZSAiY2xvdWRmbGFyZV93b3JrZXJfdmVyc2lvbiIgImFwaV92MSIgewogIGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZDsgd29ya2VyX25hbWUgPSBjbG91ZGZsYXJlX3dvcmtlci5hcGkubmFtZQogIGNvbnRlbnQgPSBmaWxlKCJ3b3JrZXIuanMiKTsgY29udGVudF9zaGEyNTYgPSBmaWxlc2hhMjU2KCJ3b3JrZXIuanMiKQogIGNvbXBhdGliaWxpdHlfZGF0ZSA9ICIyMDI1LTAxLTAxIgogIGJpbmRpbmdzIHsKICAgIGt2X25hbWVzcGFjZSB7IG5hbWUgPSAiS1YiOyBuYW1lc3BhY2VfaWQgPSBjbG91ZGZsYXJlX3dvcmtlcnNfa3ZfbmFtZXNwYWNlLmNhY2hlLmlkIH0KICAgIHIyX2J1Y2tldCB7IG5hbWUgPSAiQlVDS0VUIjsgYnVja2V0X25hbWUgPSBjbG91ZGZsYXJlX3IyX2J1Y2tldC5hc3NldHMubmFtZSB9CiAgfQp9CnJlc291cmNlICJjbG91ZGZsYXJlX3dvcmtlcnNfZGVwbG95bWVudCIgImFwaSIgewogIGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZDsgd29ya2VyX25hbWUgPSBjbG91ZGZsYXJlX3dvcmtlci5hcGkubmFtZQogIHZlcnNpb25zIHsgdmVyc2lvbl9pZCA9IGNsb3VkZmxhcmVfd29ya2VyX3ZlcnNpb24uYXBpX3YxLmlkOyBwZXJjZW50YWdlID0gMTAwIH0KfQpgYGAKCiMjIyBXb3JrZXIgQmluZGluZyBUeXBlcyAodjUpCgp8IEJpbmRpbmcgfCBBdHRyaWJ1dGUgfCBFeGFtcGxlIHwKfC0tLS0tLS0tLXwtLS0tLS0tLS0tLXwtLS0tLS0tLS18CnwgS1YgfCBga3ZfbmFtZXNwYWNlX2JpbmRpbmdgIHwgYHsgbmFtZSA9ICJLViIsIG5hbWVzcGFjZV9pZCA9ICIuLi4iIH1gIHwKfCBSMiB8IGByMl9idWNrZXRfYmluZGluZ2AgfCBgeyBuYW1lID0gIkJVQ0tFVCIsIGJ1Y2tldF9uYW1lID0gIi4uLiIgfWAgfAp8IEQxIHwgYGQxX2RhdGFiYXNlX2JpbmRpbmdgIHwgYHsgbmFtZSA9ICJEQiIsIGRhdGFiYXNlX2lkID0gIi4uLiIgfWAgfAp8IFNlcnZpY2UgfCBgc2VydmljZV9iaW5kaW5nYCB8IGB7IG5hbWUgPSAiQVVUSCIsIHNlcnZpY2UgPSAiYXV0aC13b3JrZXIiIH1gIHwKfCBTZWNyZXQgfCBgc2VjcmV0X3RleHRfYmluZGluZ2AgfCBgeyBuYW1lID0gIkFQSV9LRVkiLCB0ZXh0ID0gIi4uLiIgfWAgfAp8IFF1ZXVlIHwgYHF1ZXVlX2JpbmRpbmdgIHwgYHsgbmFtZSA9ICJRVUVVRSIsIHF1ZXVlX25hbWUgPSAiLi4uIiB9YCB8CnwgVmVjdG9yaXplIHwgYHZlY3Rvcml6ZV9iaW5kaW5nYCB8IGB7IG5hbWUgPSAiSU5ERVgiLCBpbmRleF9uYW1lID0gIi4uLiIgfWAgfAp8IEh5cGVyZHJpdmUgfCBgaHlwZXJkcml2ZV9iaW5kaW5nYCB8IGB7IG5hbWUgPSAiREIiLCBpZCA9ICIuLi4iIH1gIHwKfCBBSSB8IGBhaV9iaW5kaW5nYCB8IGB7IG5hbWUgPSAiQUkiIH1gIHwKfCBCcm93c2VyIHwgYGJyb3dzZXJfYmluZGluZ2AgfCBgeyBuYW1lID0gIkJST1dTRVIiIH1gIHwKfCBBbmFseXRpY3MgfCBgYW5hbHl0aWNzX2VuZ2luZV9iaW5kaW5nYCB8IGB7IG5hbWUgPSAiQU5BTFlUSUNTIiwgZGF0YXNldCA9ICIuLi4iIH1gIHwKfCBtVExTIHwgYG10bHNfY2VydGlmaWNhdGVfYmluZGluZ2AgfCBgeyBuYW1lID0gIkNFUlQiLCBjZXJ0aWZpY2F0ZV9pZCA9ICIuLi4iIH1gIHwKCiMjIyBSb3V0ZXMgJiBUcmlnZ2VycwoKYGBgaGNsCnJlc291cmNlICJjbG91ZGZsYXJlX3dvcmtlcl9yb3V0ZSIgImFwaSIgewogIHpvbmVfaWQgPSBjbG91ZGZsYXJlX3pvbmUuZXhhbXBsZS5pZDsgcGF0dGVybiA9ICJhcGkuZXhhbXBsZS5jb20vKiIKICBzY3JpcHRfbmFtZSA9IGNsb3VkZmxhcmVfd29ya2Vyc19zY3JpcHQuYXBpLm5hbWUKfQpyZXNvdXJjZSAiY2xvdWRmbGFyZV93b3JrZXJfY3Jvbl90cmlnZ2VyIiAidGFzayIgewogIGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZDsgc2NyaXB0X25hbWUgPSBjbG91ZGZsYXJlX3dvcmtlcnNfc2NyaXB0LmFwaS5uYW1lCiAgc2NoZWR1bGVzID0gWyIqLzUgKiAqICogKiJdCn0KYGBgCgojIyBTdG9yYWdlIChLViwgUjIsIEQxKQoKYGBgaGNsCiMgS1YKcmVzb3VyY2UgImNsb3VkZmxhcmVfd29ya2Vyc19rdl9uYW1lc3BhY2UiICJjYWNoZSIgeyBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQ7IHRpdGxlID0gImNhY2hlIiB9CnJlc291cmNlICJjbG91ZGZsYXJlX3dvcmtlcnNfa3YiICJjb25maWciIHsKICBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQ7IG5hbWVzcGFjZV9pZCA9IGNsb3VkZmxhcmVfd29ya2Vyc19rdl9uYW1lc3BhY2UuY2FjaGUuaWQKICBrZXlfbmFtZSA9ICJjb25maWciOyB2YWx1ZSA9IGpzb25lbmNvZGUoeyB2ZXJzaW9uID0gIjEuMCIgfSkKfQoKIyBSMgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9yMl9idWNrZXQiICJhc3NldHMiIHsgYWNjb3VudF9pZCA9IHZhci5hY2NvdW50X2lkOyBuYW1lID0gImFzc2V0cyI7IGxvY2F0aW9uID0gIldOQU0iIH0KCiMgRDEgKG1pZ3JhdGlvbnMgdmlhIHdyYW5nbGVyKSAmIFF1ZXVlcwpyZXNvdXJjZSAiY2xvdWRmbGFyZV9kMV9kYXRhYmFzZSIgImFwcCIgeyBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQ7IG5hbWUgPSAiYXBwLWRiIiB9CnJlc291cmNlICJjbG91ZGZsYXJlX3F1ZXVlIiAiZXZlbnRzIiB7IGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZDsgbmFtZSA9ICJldmVudHMtcXVldWUiIH0KYGBgCgojIyBQYWdlcwoKYGBgaGNsCnJlc291cmNlICJjbG91ZGZsYXJlX3BhZ2VzX3Byb2plY3QiICJzaXRlIiB7CiAgYWNjb3VudF9pZCA9IHZhci5hY2NvdW50X2lkOyBuYW1lID0gInNpdGUiOyBwcm9kdWN0aW9uX2JyYW5jaCA9ICJtYWluIgogIGRlcGxveW1lbnRfY29uZmlncyB7CiAgICBwcm9kdWN0aW9uIHsKICAgICAgY29tcGF0aWJpbGl0eV9kYXRlID0gIjIwMjUtMDEtMDEiCiAgICAgIGVudmlyb25tZW50X3ZhcmlhYmxlcyA9IHsgTk9ERV9FTlYgPSAicHJvZHVjdGlvbiIgfQogICAgICBrdl9uYW1lc3BhY2VzID0geyBLViA9IGNsb3VkZmxhcmVfd29ya2Vyc19rdl9uYW1lc3BhY2UuY2FjaGUuaWQgfQogICAgICBkMV9kYXRhYmFzZXMgPSB7IERCID0gY2xvdWRmbGFyZV9kMV9kYXRhYmFzZS5hcHAuaWQgfQogICAgfQogIH0KICBidWlsZF9jb25maWcgeyBidWlsZF9jb21tYW5kID0gIm5wbSBydW4gYnVpbGQiOyBkZXN0aW5hdGlvbl9kaXIgPSAiZGlzdCIgfQogIHNvdXJjZSB7IHR5cGUgPSAiZ2l0aHViIjsgY29uZmlnIHsgb3duZXIgPSAib3JnIjsgcmVwb19uYW1lID0gInNpdGUiOyBwcm9kdWN0aW9uX2JyYW5jaCA9ICJtYWluIiB9fQp9CgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9wYWdlc19kb21haW4iICJjdXN0b20iIHsKICBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQ7IHByb2plY3RfbmFtZSA9IGNsb3VkZmxhcmVfcGFnZXNfcHJvamVjdC5zaXRlLm5hbWU7IGRvbWFpbiA9ICJzaXRlLmV4YW1wbGUuY29tIgp9CmBgYAoKIyMgUnVsZXNldHMgKFdBRiwgUmVkaXJlY3RzLCBDYWNoZSkKCmBgYGhjbAojIFdBRgpyZXNvdXJjZSAiY2xvdWRmbGFyZV9ydWxlc2V0IiAid2FmIiB7CiAgem9uZV9pZCA9IGNsb3VkZmxhcmVfem9uZS5leGFtcGxlLmlkOyBuYW1lID0gIldBRiI7IGtpbmQgPSAiem9uZSI7IHBoYXNlID0gImh0dHBfcmVxdWVzdF9maXJld2FsbF9jdXN0b20iCiAgcnVsZXMgeyBhY3Rpb24gPSAiYmxvY2siOyBlbmFibGVkID0gdHJ1ZTsgZXhwcmVzc2lvbiA9ICIoY2YuY2xpZW50LmJvdCkgYW5kIG5vdCAoY2YudmVyaWZpZWRfYm90KSIgfQp9CgojIFJlZGlyZWN0cwpyZXNvdXJjZSAiY2xvdWRmbGFyZV9ydWxlc2V0IiAicmVkaXJlY3RzIiB7CiAgem9uZV9pZCA9IGNsb3VkZmxhcmVfem9uZS5leGFtcGxlLmlkOyBuYW1lID0gIlJlZGlyZWN0cyI7IGtpbmQgPSAiem9uZSI7IHBoYXNlID0gImh0dHBfcmVxdWVzdF9keW5hbWljX3JlZGlyZWN0IgogIHJ1bGVzIHsKICAgIGFjdGlvbiA9ICJyZWRpcmVjdCI7IGVuYWJsZWQgPSB0cnVlOyBleHByZXNzaW9uID0gIihodHRwLnJlcXVlc3QudXJpLnBhdGggZXEgXCIvb2xkXCIpIgogICAgYWN0aW9uX3BhcmFtZXRlcnMgeyBmcm9tX3ZhbHVlIHsgc3RhdHVzX2NvZGUgPSAzMDE7IHRhcmdldF91cmwgeyB2YWx1ZSA9ICJodHRwczovL2V4YW1wbGUuY29tL25ldyIgfX19CiAgfQp9CgojIENhY2hlIHJ1bGVzCnJlc291cmNlICJjbG91ZGZsYXJlX3J1bGVzZXQiICJjYWNoZSIgewogIHpvbmVfaWQgPSBjbG91ZGZsYXJlX3pvbmUuZXhhbXBsZS5pZDsgbmFtZSA9ICJDYWNoZSI7IGtpbmQgPSAiem9uZSI7IHBoYXNlID0gImh0dHBfcmVxdWVzdF9jYWNoZV9zZXR0aW5ncyIKICBydWxlcyB7CiAgICBhY3Rpb24gPSAic2V0X2NhY2hlX3NldHRpbmdzIjsgZW5hYmxlZCA9IHRydWU7IGV4cHJlc3Npb24gPSAiKGh0dHAucmVxdWVzdC51cmkucGF0aCBtYXRjaGVzIFwiXFwuKGpwZ3xwbmd8Y3NzfGpzKSRcIikiCiAgICBhY3Rpb25fcGFyYW1ldGVycyB7IGNhY2hlID0gdHJ1ZTsgZWRnZV90dGwgeyBtb2RlID0gIm92ZXJyaWRlX29yaWdpbiI7IGRlZmF1bHQgPSA4NjQwMCB9fQogIH0KfQpgYGAKCiMjIExvYWQgQmFsYW5jZXJzCgpgYGBoY2wKcmVzb3VyY2UgImNsb3VkZmxhcmVfbG9hZF9iYWxhbmNlcl9tb25pdG9yIiAiaHR0cCIgewogIGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZDsgdHlwZSA9ICJodHRwIjsgcGF0aCA9ICIvaGVhbHRoIjsgaW50ZXJ2YWwgPSA2MDsgdGltZW91dCA9IDUKfQpyZXNvdXJjZSAiY2xvdWRmbGFyZV9sb2FkX2JhbGFuY2VyX3Bvb2wiICJhcGkiIHsKICBhY2NvdW50X2lkID0gdmFyLmFjY291bnRfaWQ7IG5hbWUgPSAiYXBpLXBvb2wiOyBtb25pdG9yID0gY2xvdWRmbGFyZV9sb2FkX2JhbGFuY2VyX21vbml0b3IuaHR0cC5pZAogIG9yaWdpbnMgeyBuYW1lID0gImFwaS0xIjsgYWRkcmVzcyA9ICIxOTIuMC4yLjEiIH0KICBvcmlnaW5zIHsgbmFtZSA9ICJhcGktMiI7IGFkZHJlc3MgPSAiMTkyLjAuMi4yIiB9Cn0KcmVzb3VyY2UgImNsb3VkZmxhcmVfbG9hZF9iYWxhbmNlciIgImFwaSIgewogIHpvbmVfaWQgPSBjbG91ZGZsYXJlX3pvbmUuZXhhbXBsZS5pZDsgbmFtZSA9ICJhcGkuZXhhbXBsZS5jb20iCiAgZGVmYXVsdF9wb29sX2lkcyA9IFtjbG91ZGZsYXJlX2xvYWRfYmFsYW5jZXJfcG9vbC5hcGkuaWRdOyBzdGVlcmluZ19wb2xpY3kgPSAiZ2VvIgp9CmBgYAoKIyMgQWNjZXNzIChaZXJvIFRydXN0KQoKYGBgaGNsCnJlc291cmNlICJjbG91ZGZsYXJlX2FjY2Vzc19hcHBsaWNhdGlvbiIgImFkbWluIiB7CiAgYWNjb3VudF9pZCA9IHZhci5hY2NvdW50X2lkOyBuYW1lID0gIkFkbWluIjsgZG9tYWluID0gImFkbWluLmV4YW1wbGUuY29tIjsgdHlwZSA9ICJzZWxmX2hvc3RlZCIKICBzZXNzaW9uX2R1cmF0aW9uID0gIjI0aCI7IGFsbG93ZWRfaWRwcyA9IFtjbG91ZGZsYXJlX2FjY2Vzc19pZGVudGl0eV9wcm92aWRlci5naXRodWIuaWRdCn0KcmVzb3VyY2UgImNsb3VkZmxhcmVfYWNjZXNzX3BvbGljeSIgImFsbG93IiB7CiAgYWNjb3VudF9pZCA9IHZhci5hY2NvdW50X2lkOyBhcHBsaWNhdGlvbl9pZCA9IGNsb3VkZmxhcmVfYWNjZXNzX2FwcGxpY2F0aW9uLmFkbWluLmlkCiAgbmFtZSA9ICJBbGxvdyI7IGRlY2lzaW9uID0gImFsbG93IjsgcHJlY2VkZW5jZSA9IDEKICBpbmNsdWRlIHsgZW1haWwgPSBbImFkbWluQGV4YW1wbGUuY29tIl0gfQp9CnJlc291cmNlICJjbG91ZGZsYXJlX2FjY2Vzc19pZGVudGl0eV9wcm92aWRlciIgImdpdGh1YiIgewogIGFjY291bnRfaWQgPSB2YXIuYWNjb3VudF9pZDsgbmFtZSA9ICJHaXRIdWIiOyB0eXBlID0gImdpdGh1YiIKICBjb25maWcgeyBjbGllbnRfaWQgPSB2YXIuZ2l0aHViX2lkOyBjbGllbnRfc2VjcmV0ID0gdmFyLmdpdGh1Yl9zZWNyZXQgfQp9CmBgYAoKIyMgU2VlIEFsc28KCi0gW1JFQURNRV0oLi9SRUFETUUubWQpIC0gUHJvdmlkZXIgc2V0dXAKLSBbQVBJXSguL2FwaS5tZCkgLSBEYXRhIHNvdXJjZXMKLSBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpIC0gVXNlIGNhc2VzCi0gW1Ryb3VibGVzaG9vdGluZ10oLi9nb3RjaGFzLm1kKSAtIElzc3Vlcwo=
+# Terraform Configuration Reference
+
+Complete resource configurations for Cloudflare infrastructure.
+
+## Zone & DNS
+
+```hcl
+# Zone + settings
+resource "cloudflare_zone" "example" { account = { id = var.account_id }; name = "example.com"; type = "full" }
+resource "cloudflare_zone_settings_override" "example" {
+  zone_id = cloudflare_zone.example.id
+  settings { ssl = "strict"; always_use_https = "on"; min_tls_version = "1.2"; tls_1_3 = "on"; http3 = "on" }
+}
+
+# DNS records (A, CNAME, MX, TXT)
+resource "cloudflare_dns_record" "www" {
+  zone_id = cloudflare_zone.example.id; name = "www"; content = "192.0.2.1"; type = "A"; proxied = true
+}
+resource "cloudflare_dns_record" "mx" {
+  for_each = { "10" = "mail1.example.com", "20" = "mail2.example.com" }
+  zone_id = cloudflare_zone.example.id; name = "@"; content = each.value; type = "MX"; priority = each.key
+}
+```
+
+## Workers
+
+### Simple Pattern (Legacy - Still Works)
+
+```hcl
+resource "cloudflare_workers_script" "api" {
+  account_id = var.account_id; name = "api-worker"; content = file("worker.js")
+  module = true; compatibility_date = "2025-01-01"
+  kv_namespace_binding { name = "KV"; namespace_id = cloudflare_workers_kv_namespace.cache.id }
+  r2_bucket_binding { name = "BUCKET"; bucket_name = cloudflare_r2_bucket.assets.name }
+  d1_database_binding { name = "DB"; database_id = cloudflare_d1_database.app.id }
+  secret_text_binding { name = "SECRET"; text = var.secret }
+}
+```
+
+### Gradual Rollouts (Recommended for Production)
+
+```hcl
+resource "cloudflare_worker" "api" { account_id = var.account_id; name = "api-worker" }
+resource "cloudflare_worker_version" "api_v1" {
+  account_id = var.account_id; worker_name = cloudflare_worker.api.name
+  content = file("worker.js"); content_sha256 = filesha256("worker.js")
+  compatibility_date = "2025-01-01"
+  bindings {
+    kv_namespace { name = "KV"; namespace_id = cloudflare_workers_kv_namespace.cache.id }
+    r2_bucket { name = "BUCKET"; bucket_name = cloudflare_r2_bucket.assets.name }
+  }
+}
+resource "cloudflare_workers_deployment" "api" {
+  account_id = var.account_id; worker_name = cloudflare_worker.api.name
+  versions { version_id = cloudflare_worker_version.api_v1.id; percentage = 100 }
+}
+```
+
+### Worker Binding Types (v5)
+
+| Binding | Attribute | Example |
+|---------|-----------|---------|
+| KV | `kv_namespace_binding` | `{ name = "KV", namespace_id = "..." }` |
+| R2 | `r2_bucket_binding` | `{ name = "BUCKET", bucket_name = "..." }` |
+| D1 | `d1_database_binding` | `{ name = "DB", database_id = "..." }` |
+| Service | `service_binding` | `{ name = "AUTH", service = "auth-worker" }` |
+| Secret | `secret_text_binding` | `{ name = "API_KEY", text = "..." }` |
+| Queue | `queue_binding` | `{ name = "QUEUE", queue_name = "..." }` |
+| Vectorize | `vectorize_binding` | `{ name = "INDEX", index_name = "..." }` |
+| Hyperdrive | `hyperdrive_binding` | `{ name = "DB", id = "..." }` |
+| AI | `ai_binding` | `{ name = "AI" }` |
+| Browser | `browser_binding` | `{ name = "BROWSER" }` |
+| Analytics | `analytics_engine_binding` | `{ name = "ANALYTICS", dataset = "..." }` |
+| mTLS | `mtls_certificate_binding` | `{ name = "CERT", certificate_id = "..." }` |
+
+### Routes & Triggers
+
+```hcl
+resource "cloudflare_worker_route" "api" {
+  zone_id = cloudflare_zone.example.id; pattern = "api.example.com/*"
+  script_name = cloudflare_workers_script.api.name
+}
+resource "cloudflare_worker_cron_trigger" "task" {
+  account_id = var.account_id; script_name = cloudflare_workers_script.api.name
+  schedules = ["*/5 * * * *"]
+}
+```
+
+## Storage (KV, R2, D1)
+
+```hcl
+# KV
+resource "cloudflare_workers_kv_namespace" "cache" { account_id = var.account_id; title = "cache" }
+resource "cloudflare_workers_kv" "config" {
+  account_id = var.account_id; namespace_id = cloudflare_workers_kv_namespace.cache.id
+  key_name = "config"; value = jsonencode({ version = "1.0" })
+}
+
+# R2
+resource "cloudflare_r2_bucket" "assets" { account_id = var.account_id; name = "assets"; location = "WNAM" }
+
+# D1 (migrations via wrangler) & Queues
+resource "cloudflare_d1_database" "app" { account_id = var.account_id; name = "app-db" }
+resource "cloudflare_queue" "events" { account_id = var.account_id; name = "events-queue" }
+```
+
+## Pages
+
+```hcl
+resource "cloudflare_pages_project" "site" {
+  account_id = var.account_id; name = "site"; production_branch = "main"
+  deployment_configs {
+    production {
+      compatibility_date = "2025-01-01"
+      environment_variables = { NODE_ENV = "production" }
+      kv_namespaces = { KV = cloudflare_workers_kv_namespace.cache.id }
+      d1_databases = { DB = cloudflare_d1_database.app.id }
+    }
+  }
+  build_config { build_command = "npm run build"; destination_dir = "dist" }
+  source { type = "github"; config { owner = "org"; repo_name = "site"; production_branch = "main" }}
+}
+
+resource "cloudflare_pages_domain" "custom" {
+  account_id = var.account_id; project_name = cloudflare_pages_project.site.name; domain = "site.example.com"
+}
+```
+
+## Rulesets (WAF, Redirects, Cache)
+
+```hcl
+# WAF
+resource "cloudflare_ruleset" "waf" {
+  zone_id = cloudflare_zone.example.id; name = "WAF"; kind = "zone"; phase = "http_request_firewall_custom"
+  rules { action = "block"; enabled = true; expression = "(cf.client.bot) and not (cf.verified_bot)" }
+}
+
+# Redirects
+resource "cloudflare_ruleset" "redirects" {
+  zone_id = cloudflare_zone.example.id; name = "Redirects"; kind = "zone"; phase = "http_request_dynamic_redirect"
+  rules {
+    action = "redirect"; enabled = true; expression = "(http.request.uri.path eq \"/old\")"
+    action_parameters { from_value { status_code = 301; target_url { value = "https://example.com/new" }}}
+  }
+}
+
+# Cache rules
+resource "cloudflare_ruleset" "cache" {
+  zone_id = cloudflare_zone.example.id; name = "Cache"; kind = "zone"; phase = "http_request_cache_settings"
+  rules {
+    action = "set_cache_settings"; enabled = true; expression = "(http.request.uri.path matches \"\\.(jpg|png|css|js)$\")"
+    action_parameters { cache = true; edge_ttl { mode = "override_origin"; default = 86400 }}
+  }
+}
+```
+
+## Load Balancers
+
+```hcl
+resource "cloudflare_load_balancer_monitor" "http" {
+  account_id = var.account_id; type = "http"; path = "/health"; interval = 60; timeout = 5
+}
+resource "cloudflare_load_balancer_pool" "api" {
+  account_id = var.account_id; name = "api-pool"; monitor = cloudflare_load_balancer_monitor.http.id
+  origins { name = "api-1"; address = "192.0.2.1" }
+  origins { name = "api-2"; address = "192.0.2.2" }
+}
+resource "cloudflare_load_balancer" "api" {
+  zone_id = cloudflare_zone.example.id; name = "api.example.com"
+  default_pool_ids = [cloudflare_load_balancer_pool.api.id]; steering_policy = "geo"
+}
+```
+
+## Access (Zero Trust)
+
+```hcl
+resource "cloudflare_access_application" "admin" {
+  account_id = var.account_id; name = "Admin"; domain = "admin.example.com"; type = "self_hosted"
+  session_duration = "24h"; allowed_idps = [cloudflare_access_identity_provider.github.id]
+}
+resource "cloudflare_access_policy" "allow" {
+  account_id = var.account_id; application_id = cloudflare_access_application.admin.id
+  name = "Allow"; decision = "allow"; precedence = 1
+  include { email = ["admin@example.com"] }
+}
+resource "cloudflare_access_identity_provider" "github" {
+  account_id = var.account_id; name = "GitHub"; type = "github"
+  config { client_id = var.github_id; client_secret = var.github_secret }
+}
+```
+
+## See Also
+
+- [README](./README.md) - Provider setup
+- [API](./api.md) - Data sources
+- [Patterns](./patterns.md) - Use cases
+- [Troubleshooting](./gotchas.md) - Issues

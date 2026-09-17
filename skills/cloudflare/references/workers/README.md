@@ -1,1 +1,108 @@
-IyBDbG91ZGZsYXJlIFdvcmtlcnMKCkV4cGVydCBndWlkYW5jZSBmb3IgYnVpbGRpbmcsIGRlcGxveWluZywgYW5kIG9wdGltaXppbmcgQ2xvdWRmbGFyZSBXb3JrZXJzIGFwcGxpY2F0aW9ucy4KCiMjIE92ZXJ2aWV3CgpDbG91ZGZsYXJlIFdvcmtlcnMgcnVuIG9uIFY4IGlzb2xhdGVzIChOT1QgY29udGFpbmVycy9WTXMpOgotIEV4dHJlbWVseSBmYXN0IGNvbGQgc3RhcnRzICg8IDFtcykKLSBHbG9iYWwgZGVwbG95bWVudCBhY3Jvc3MgMzAwKyBsb2NhdGlvbnMKLSBXZWIgc3RhbmRhcmRzIGNvbXBsaWFudCAoZmV0Y2gsIFVSTCwgSGVhZGVycywgUmVxdWVzdCwgUmVzcG9uc2UpCi0gU3VwcG9ydCBKUy9UUywgUHl0aG9uLCBSdXN0LCBhbmQgV2ViQXNzZW1ibHkKCioqS2V5IHByaW5jaXBsZSoqOiBXb3JrZXJzIHVzZSB3ZWIgcGxhdGZvcm0gQVBJcyB3aGVyZXZlciBwb3NzaWJsZSBmb3IgcG9ydGFiaWxpdHkuCgojIyBNb2R1bGUgV29ya2VyIFBhdHRlcm4gKFJlY29tbWVuZGVkKQoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCk6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoJ0hlbGxvIFdvcmxkIScpOwogIH0sCn07CmBgYAoKKipIYW5kbGVyIHBhcmFtZXRlcnMqKjoKLSBgcmVxdWVzdGA6IEluY29taW5nIEhUVFAgcmVxdWVzdCAoc3RhbmRhcmQgUmVxdWVzdCBvYmplY3QpCi0gYGVudmA6IEVudmlyb25tZW50IGJpbmRpbmdzIChLViwgRDEsIFIyLCBzZWNyZXRzLCB2YXJzKQotIGBjdHhgOiBFeGVjdXRpb24gY29udGV4dCAoYHdhaXRVbnRpbGAsIGBwYXNzVGhyb3VnaE9uRXhjZXB0aW9uYCkKCiMjIEVzc2VudGlhbCBDb21tYW5kcwoKYGBgYmFzaApucHggd3JhbmdsZXIgZGV2ICAgICAgICAgICAgICAgICAgICAjIExvY2FsIGRldgpucHggd3JhbmdsZXIgZGV2IC0tcmVtb3RlICAgICAgICAgICAjIFJlbW90ZSBkZXYgKGFjdHVhbCByZXNvdXJjZXMpCm5weCB3cmFuZ2xlciBkZXBsb3kgICAgICAgICAgICAgICAgICMgUHJvZHVjdGlvbgpucHggd3JhbmdsZXIgZGVwbG95IC0tZW52IHN0YWdpbmcgICAjIFNwZWNpZmljIGVudmlyb25tZW50Cm5weCB3cmFuZ2xlciB0YWlsICAgICAgICAgICAgICAgICAgICMgU3RyZWFtIGxvZ3MKbnB4IHdyYW5nbGVyIHNlY3JldCBwdXQgQVBJX0tFWSAgICAgIyBTZXQgc2VjcmV0CmBgYAoKIyMgV2hlbiB0byBVc2UgV29ya2VycwoKLSBBUEkgZW5kcG9pbnRzIGF0IHRoZSBlZGdlCi0gUmVxdWVzdC9yZXNwb25zZSB0cmFuc2Zvcm1hdGlvbgotIEF1dGhlbnRpY2F0aW9uL2F1dGhvcml6YXRpb24gbGF5ZXJzCi0gU3RhdGljIGFzc2V0IG9wdGltaXphdGlvbgotIEEvQiB0ZXN0aW5nIGFuZCBmZWF0dXJlIGZsYWdzCi0gUmF0ZSBsaW1pdGluZyBhbmQgc2VjdXJpdHkKLSBQcm94eS9yb3V0aW5nIGxvZ2ljCi0gV2ViU29ja2V0IGFwcGxpY2F0aW9ucwoKIyMgUXVpY2sgU3RhcnQKCmBgYGJhc2gKbnBtIGNyZWF0ZSBjbG91ZGZsYXJlQGxhdGVzdCBteS13b3JrZXIgLS0gLS10eXBlIGhlbGxvLXdvcmxkCmNkIG15LXdvcmtlcgpucHggd3JhbmdsZXIgZGV2CmBgYAoKIyMgSGFuZGxlciBTaWduYXR1cmVzCgpgYGB0eXBlc2NyaXB0Ci8vIEhUVFAgcmVxdWVzdHMKYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCk6IFByb21pc2U8UmVzcG9uc2U+CgovLyBDcm9uIHRyaWdnZXJzCmFzeW5jIHNjaGVkdWxlZChldmVudDogU2NoZWR1bGVkRXZlbnQsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPHZvaWQ+CgovLyBRdWV1ZSBjb25zdW1lcgphc3luYyBxdWV1ZShiYXRjaDogTWVzc2FnZUJhdGNoLCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTx2b2lkPgoKLy8gVGFpbCBjb25zdW1lcgphc3luYyB0YWlsKGV2ZW50czogVHJhY2VJdGVtW10sIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPHZvaWQ+CmBgYAoKIyMgUmVzb3VyY2VzCgoqKkRvY3MqKjogaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3dvcmtlcnMvICAKKipFeGFtcGxlcyoqOiBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy9leGFtcGxlcy8gIAoqKlJ1bnRpbWUgQVBJcyoqOiBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy9ydW50aW1lLWFwaXMvCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSBbQ29uZmlndXJhdGlvbl0oLi9jb25maWd1cmF0aW9uLm1kKSAtIHdyYW5nbGVyLmpzb25jIHNldHVwLCBiaW5kaW5ncywgZW52aXJvbm1lbnRzCi0gW0FQSV0oLi9hcGkubWQpIC0gUnVudGltZSBBUElzLCBiaW5kaW5ncywgZXhlY3V0aW9uIGNvbnRleHQKLSBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpIC0gQ29tbW9uIHdvcmtmbG93cywgdGVzdGluZywgb3B0aW1pemF0aW9uCi0gW0ZyYW1ld29ya3NdKC4vZnJhbWV3b3Jrcy5tZCkgLSBIb25vLCByb3V0aW5nLCB2YWxpZGF0aW9uCi0gW0dvdGNoYXNdKC4vZ290Y2hhcy5tZCkgLSBDb21tb24gaXNzdWVzLCBsaW1pdHMsIHRyb3VibGVzaG9vdGluZwoKIyMgUmVhZGluZyBPcmRlcgoKfCBUYXNrIHwgU3RhcnQgV2l0aCB8IFRoZW4gUmVhZCB8CnwtLS0tLS18LS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tfAp8IEZpcnN0IFdvcmtlciB8IFJFQURNRSDihpIgQ29uZmlndXJhdGlvbiDihpIgQVBJIHwgUGF0dGVybnMgfAp8IEFkZCBmcmFtZXdvcmsgfCBGcmFtZXdvcmtzIHwgQ29uZmlndXJhdGlvbiAoYmluZGluZ3MpIHwKfCBBZGQgc3RvcmFnZS9iaW5kaW5ncyB8IENvbmZpZ3VyYXRpb24g4oaSIEFQSSAoYmluZGluZyB1c2FnZSkgfCBTZWUgQWxzbyBsaW5rcyB8CnwgRGVidWcgaXNzdWVzIHwgR290Y2hhcyB8IEFQSSAoc3BlY2lmaWMgYmluZGluZyBkb2NzKSB8CnwgUHJvZHVjdGlvbiBvcHRpbWl6YXRpb24gfCBQYXR0ZXJucyB8IEFQSSAoY2FjaGluZywgc3RyZWFtaW5nKSB8CnwgVHlwZSBzYWZldHkgfCBDb25maWd1cmF0aW9uIChUeXBlU2NyaXB0KSB8IEZyYW1ld29ya3MgKEhvbm8gdHlwaW5nKSB8CgojIyBTZWUgQWxzbwoKLSBbS1ZdKC4uL2t2L1JFQURNRS5tZCkgLSBLZXktdmFsdWUgc3RvcmFnZQotIFtEMV0oLi4vZDEvUkVBRE1FLm1kKSAtIFNRTCBkYXRhYmFzZQotIFtSMl0oLi4vcjIvUkVBRE1FLm1kKSAtIE9iamVjdCBzdG9yYWdlCi0gW0R1cmFibGUgT2JqZWN0c10oLi4vZHVyYWJsZS1vYmplY3RzL1JFQURNRS5tZCkgLSBTdGF0ZWZ1bCBjb29yZGluYXRpb24KLSBbUXVldWVzXSguLi9xdWV1ZXMvUkVBRE1FLm1kKSAtIE1lc3NhZ2UgcXVldWVzCi0gW1dyYW5nbGVyXSguLi93cmFuZ2xlci9SRUFETUUubWQpIC0gQ0xJIHRvb2wgcmVmZXJlbmNlCg==
+# Cloudflare Workers
+
+Expert guidance for building, deploying, and optimizing Cloudflare Workers applications.
+
+## Overview
+
+Cloudflare Workers run on V8 isolates (NOT containers/VMs):
+- Extremely fast cold starts (< 1ms)
+- Global deployment across 300+ locations
+- Web standards compliant (fetch, URL, Headers, Request, Response)
+- Support JS/TS, Python, Rust, and WebAssembly
+
+**Key principle**: Workers use web platform APIs wherever possible for portability.
+
+## Module Worker Pattern (Recommended)
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    return new Response('Hello World!');
+  },
+};
+```
+
+**Handler parameters**:
+- `request`: Incoming HTTP request (standard Request object)
+- `env`: Environment bindings (KV, D1, R2, secrets, vars)
+- `ctx`: Execution context (`waitUntil`, `passThroughOnException`)
+
+## Essential Commands
+
+```bash
+npx wrangler dev                    # Local dev
+npx wrangler dev --remote           # Remote dev (actual resources)
+npx wrangler deploy                 # Production
+npx wrangler deploy --env staging   # Specific environment
+npx wrangler tail                   # Stream logs
+npx wrangler secret put API_KEY     # Set secret
+```
+
+## When to Use Workers
+
+- API endpoints at the edge
+- Request/response transformation
+- Authentication/authorization layers
+- Static asset optimization
+- A/B testing and feature flags
+- Rate limiting and security
+- Proxy/routing logic
+- WebSocket applications
+
+## Quick Start
+
+```bash
+npm create cloudflare@latest my-worker -- --type hello-world
+cd my-worker
+npx wrangler dev
+```
+
+## Handler Signatures
+
+```typescript
+// HTTP requests
+async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response>
+
+// Cron triggers
+async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void>
+
+// Queue consumer
+async queue(batch: MessageBatch, env: Env, ctx: ExecutionContext): Promise<void>
+
+// Tail consumer
+async tail(events: TraceItem[], env: Env, ctx: ExecutionContext): Promise<void>
+```
+
+## Resources
+
+**Docs**: https://developers.cloudflare.com/workers/  
+**Examples**: https://developers.cloudflare.com/workers/examples/  
+**Runtime APIs**: https://developers.cloudflare.com/workers/runtime-apis/
+
+## In This Reference
+
+- [Configuration](./configuration.md) - wrangler.jsonc setup, bindings, environments
+- [API](./api.md) - Runtime APIs, bindings, execution context
+- [Patterns](./patterns.md) - Common workflows, testing, optimization
+- [Frameworks](./frameworks.md) - Hono, routing, validation
+- [Gotchas](./gotchas.md) - Common issues, limits, troubleshooting
+
+## Reading Order
+
+| Task | Start With | Then Read |
+|------|------------|-----------|
+| First Worker | README → Configuration → API | Patterns |
+| Add framework | Frameworks | Configuration (bindings) |
+| Add storage/bindings | Configuration → API (binding usage) | See Also links |
+| Debug issues | Gotchas | API (specific binding docs) |
+| Production optimization | Patterns | API (caching, streaming) |
+| Type safety | Configuration (TypeScript) | Frameworks (Hono typing) |
+
+## See Also
+
+- [KV](../kv/README.md) - Key-value storage
+- [D1](../d1/README.md) - SQL database
+- [R2](../r2/README.md) - Object storage
+- [Durable Objects](../durable-objects/README.md) - Stateful coordination
+- [Queues](../queues/README.md) - Message queues
+- [Wrangler](../wrangler/README.md) - CLI tool reference

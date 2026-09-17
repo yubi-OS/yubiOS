@@ -1,1 +1,97 @@
-IyBXb3JrZXJzIEFJIENvbmZpZ3VyYXRpb24KCiMjIHdyYW5nbGVyLmpzb25jCgpgYGBqc29uYwp7CiAgIm5hbWUiOiAibXktYWktd29ya2VyIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNC0wMS0wMSIsCiAgImFpIjogewogICAgImJpbmRpbmciOiAiQUkiCiAgfQp9CmBgYAoKIyMgVHlwZVNjcmlwdAoKYGBgYmFzaApucG0gaW5zdGFsbCAtLXNhdmUtZGV2IEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXMKYGBgCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIEFJOiBBaTsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KSB7CiAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGVudi5BSS5ydW4oJ0BjZi9tZXRhL2xsYW1hLTMuMS04Yi1pbnN0cnVjdCcsIHsKICAgICAgbWVzc2FnZXM6IFt7IHJvbGU6ICd1c2VyJywgY29udGVudDogJ0hlbGxvJyB9XQogICAgfSk7CiAgICByZXR1cm4gUmVzcG9uc2UuanNvbihyZXNwb25zZSk7CiAgfQp9OwpgYGAKCiMjIExvY2FsIERldmVsb3BtZW50CgpgYGBiYXNoCndyYW5nbGVyIGRldiAtLXJlbW90ZSAgIyBSZXF1aXJlZCBmb3IgQUkgLSBubyBsb2NhbCBpbmZlcmVuY2UKYGBgCgojIyBSRVNUIEFQSQoKYGBgdHlwZXNjcmlwdApjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKAogIGBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJHtBQ0NPVU5UX0lEfS9haS9ydW4vQGNmL21ldGEvbGxhbWEtMy4xLThiLWluc3RydWN0YCwKICB7CiAgICBtZXRob2Q6ICdQT1NUJywKICAgIGhlYWRlcnM6IHsgJ0F1dGhvcml6YXRpb24nOiBgQmVhcmVyICR7QVBJX1RPS0VOfWAgfSwKICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsgbWVzc2FnZXM6IFt7IHJvbGU6ICd1c2VyJywgY29udGVudDogJ0hlbGxvJyB9XSB9KQogIH0KKTsKYGBgCgpDcmVhdGUgQVBJIHRva2VuIGF0OiBkYXNoLmNsb3VkZmxhcmUuY29tL3Byb2ZpbGUvYXBpLXRva2VucyAoV29ya2VycyBBSSAtIFJlYWQgcGVybWlzc2lvbikKCiMjIFNESyBDb21wYXRpYmlsaXR5CgoqKk9wZW5BSSBTREs6KioKYGBgdHlwZXNjcmlwdAppbXBvcnQgT3BlbkFJIGZyb20gJ29wZW5haSc7CmNvbnN0IGNsaWVudCA9IG5ldyBPcGVuQUkoewogIGFwaUtleTogZW52LkNMT1VERkxBUkVfQVBJX1RPS0VOLAogIGJhc2VVUkw6IGBodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJHtlbnYuQUNDT1VOVF9JRH0vYWkvdjFgCn0pOwpgYGAKCiMjIE11bHRpLU1vZGVsIFNldHVwCgpgYGB0eXBlc2NyaXB0CmNvbnN0IE1PREVMUyA9IHsKICBjaGF0OiAnQGNmL21ldGEvbGxhbWEtMy4xLThiLWluc3RydWN0JywKICBlbWJlZDogJ0BjZi9iYWFpL2JnZS1iYXNlLWVuLXYxLjUnLAogIGltYWdlOiAnQGNmL3N0YWJpbGl0eWFpL3N0YWJsZS1kaWZmdXNpb24teGwtYmFzZS0xLjAnCn07CmBgYAoKIyMgUkFHIFNldHVwICh3aXRoIFZlY3Rvcml6ZSkKCmBgYGpzb25jCnsKICAiYWkiOiB7ICJiaW5kaW5nIjogIkFJIiB9LAogICJ2ZWN0b3JpemUiOiB7CiAgICAiYmluZGluZ3MiOiBbeyAiYmluZGluZyI6ICJWRUNUT1JJWkUiLCAiaW5kZXhfbmFtZSI6ICJlbWJlZGRpbmdzLWluZGV4IiB9XQogIH0KfQpgYGAKCiMjIFRyb3VibGVzaG9vdGluZwoKfCBFcnJvciB8IEZpeCB8CnwtLS0tLS0tfC0tLS0tfAp8IGBlbnYuQUkgaXMgdW5kZWZpbmVkYCB8IENoZWNrIGBhaWAgYmluZGluZyBpbiB3cmFuZ2xlci5qc29uYyB8CnwgTG9jYWwgQUkgZG9lc24ndCB3b3JrIHwgVXNlIGB3cmFuZ2xlciBkZXYgLS1yZW1vdGVgIHwKfCBUeXBlICdBaScgbm90IGZvdW5kIHwgSW5zdGFsbCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AgfAp8IEBjbG91ZGZsYXJlL2FpIHBhY2thZ2UgZXJyb3IgfCBEb24ndCBpbnN0YWxsIC0gdXNlIG5hdGl2ZSBiaW5kaW5nIHwK
+# Workers AI Configuration
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "name": "my-ai-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-01-01",
+  "ai": {
+    "binding": "AI"
+  }
+}
+```
+
+## TypeScript
+
+```bash
+npm install --save-dev @cloudflare/workers-types
+```
+
+```typescript
+interface Env {
+  AI: Ai;
+}
+
+export default {
+  async fetch(request: Request, env: Env) {
+    const response = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+      messages: [{ role: 'user', content: 'Hello' }]
+    });
+    return Response.json(response);
+  }
+};
+```
+
+## Local Development
+
+```bash
+wrangler dev --remote  # Required for AI - no local inference
+```
+
+## REST API
+
+```typescript
+const response = await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct`,
+  {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${API_TOKEN}` },
+    body: JSON.stringify({ messages: [{ role: 'user', content: 'Hello' }] })
+  }
+);
+```
+
+Create API token at: dash.cloudflare.com/profile/api-tokens (Workers AI - Read permission)
+
+## SDK Compatibility
+
+**OpenAI SDK:**
+```typescript
+import OpenAI from 'openai';
+const client = new OpenAI({
+  apiKey: env.CLOUDFLARE_API_TOKEN,
+  baseURL: `https://api.cloudflare.com/client/v4/accounts/${env.ACCOUNT_ID}/ai/v1`
+});
+```
+
+## Multi-Model Setup
+
+```typescript
+const MODELS = {
+  chat: '@cf/meta/llama-3.1-8b-instruct',
+  embed: '@cf/baai/bge-base-en-v1.5',
+  image: '@cf/stabilityai/stable-diffusion-xl-base-1.0'
+};
+```
+
+## RAG Setup (with Vectorize)
+
+```jsonc
+{
+  "ai": { "binding": "AI" },
+  "vectorize": {
+    "bindings": [{ "binding": "VECTORIZE", "index_name": "embeddings-index" }]
+  }
+}
+```
+
+## Troubleshooting
+
+| Error | Fix |
+|-------|-----|
+| `env.AI is undefined` | Check `ai` binding in wrangler.jsonc |
+| Local AI doesn't work | Use `wrangler dev --remote` |
+| Type 'Ai' not found | Install `@cloudflare/workers-types` |
+| @cloudflare/ai package error | Don't install - use native binding |

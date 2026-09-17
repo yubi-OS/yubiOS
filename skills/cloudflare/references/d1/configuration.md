@@ -1,1 +1,191 @@
-IyBEMSBDb25maWd1cmF0aW9uCgojIyB3cmFuZ2xlci5qc29uYyBTZXR1cAoKYGBganNvbmMKewogICJuYW1lIjogInlvdXItd29ya2VyLW5hbWUiLAogICJtYWluIjogInNyYy9pbmRleC50cyIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI1LTAxLTAxIiwgLy8gVXNlIGN1cnJlbnQgZGF0ZSBmb3IgbmV3IHByb2plY3RzCiAgImQxX2RhdGFiYXNlcyI6IFsKICAgIHsKICAgICAgImJpbmRpbmciOiAiREIiLCAgICAgICAgICAgICAgICAgICAgLy8gRW52IHZhcmlhYmxlIG5hbWUKICAgICAgImRhdGFiYXNlX25hbWUiOiAieW91ci1kYi1uYW1lIiwgICAgLy8gSHVtYW4tcmVhZGFibGUgbmFtZQogICAgICAiZGF0YWJhc2VfaWQiOiAieW91ci1kYXRhYmFzZS1pZCIsICAvLyBVVUlEIGZyb20gZGFzaGJvYXJkL0NMSQogICAgICAibWlncmF0aW9uc19kaXIiOiAibWlncmF0aW9ucyIgICAgICAvLyBPcHRpb25hbDogZGVmYXVsdCBpcyAibWlncmF0aW9ucyIKICAgIH0sCiAgICAvLyBSZWFkIHJlcGxpY2EgKHBhaWQgcGxhbnMgb25seSkKICAgIHsKICAgICAgImJpbmRpbmciOiAiREJfUkVQTElDQSIsCiAgICAgICJkYXRhYmFzZV9uYW1lIjogInlvdXItZGItbmFtZSIsCiAgICAgICJkYXRhYmFzZV9pZCI6ICJ5b3VyLWRhdGFiYXNlLWlkIiAgIC8vIFNhbWUgSUQsIGRpZmZlcmVudCBiaW5kaW5nCiAgICB9LAogICAgLy8gTXVsdGlwbGUgZGF0YWJhc2VzCiAgICB7CiAgICAgICJiaW5kaW5nIjogIkFOQUxZVElDU19EQiIsCiAgICAgICJkYXRhYmFzZV9uYW1lIjogImFuYWx5dGljcy1kYiIsCiAgICAgICJkYXRhYmFzZV9pZCI6ICJ5eXkteXl5LXl5eSIKICAgIH0KICBdCn0KYGBgCgojIyBUeXBlU2NyaXB0IFR5cGVzCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgeyBEQjogRDFEYXRhYmFzZTsgQU5BTFlUSUNTX0RCPzogRDFEYXRhYmFzZTsgfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycycpLmFsbCgpOwogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24ocmVzdWx0LnJlc3VsdHMpOwogIH0KfQpgYGAKCiMjIE1pZ3JhdGlvbnMKCkZpbGUgc3RydWN0dXJlOiBgbWlncmF0aW9ucy8wMDAxX2luaXRpYWxfc2NoZW1hLnNxbGAsIGAwMDAyX2FkZF9wb3N0cy5zcWxgLCBldGMuCgojIyMgRXhhbXBsZSBNaWdyYXRpb24KCmBgYHNxbAotLSBtaWdyYXRpb25zLzAwMDFfaW5pdGlhbF9zY2hlbWEuc3FsCkNSRUFURSBUQUJMRSBJRiBOT1QgRVhJU1RTIHVzZXJzICgKICBpZCBJTlRFR0VSIFBSSU1BUlkgS0VZIEFVVE9JTkNSRU1FTlQsCiAgZW1haWwgVEVYVCBVTklRVUUgTk9UIE5VTEwsCiAgbmFtZSBURVhUIE5PVCBOVUxMLAogIGNyZWF0ZWRfYXQgVEVYVCBERUZBVUxUIENVUlJFTlRfVElNRVNUQU1QLAogIHVwZGF0ZWRfYXQgVEVYVCBERUZBVUxUIENVUlJFTlRfVElNRVNUQU1QCik7CgpDUkVBVEUgSU5ERVggaWR4X3VzZXJzX2VtYWlsIE9OIHVzZXJzKGVtYWlsKTsKCkNSRUFURSBUQUJMRSBJRiBOT1QgRVhJU1RTIHBvc3RzICgKICBpZCBJTlRFR0VSIFBSSU1BUlkgS0VZIEFVVE9JTkNSRU1FTlQsCiAgdXNlcl9pZCBJTlRFR0VSIE5PVCBOVUxMLAogIHRpdGxlIFRFWFQgTk9UIE5VTEwsCiAgY29udGVudCBURVhULAogIHB1Ymxpc2hlZCBCT09MRUFOIERFRkFVTFQgMCwKICBjcmVhdGVkX2F0IFRFWFQgREVGQVVMVCBDVVJSRU5UX1RJTUVTVEFNUCwKICBGT1JFSUdOIEtFWSAodXNlcl9pZCkgUkVGRVJFTkNFUyB1c2VycyhpZCkgT04gREVMRVRFIENBU0NBREUKKTsKCkNSRUFURSBJTkRFWCBpZHhfcG9zdHNfdXNlcl9pZCBPTiBwb3N0cyh1c2VyX2lkKTsKQ1JFQVRFIElOREVYIGlkeF9wb3N0c19wdWJsaXNoZWQgT04gcG9zdHMocHVibGlzaGVkKTsKYGBgCgojIyMgUnVubmluZyBNaWdyYXRpb25zCgpgYGBiYXNoCiMgQ3JlYXRlIG5ldyBtaWdyYXRpb24gZmlsZQp3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGNyZWF0ZSA8ZGItbmFtZT4gYWRkX3VzZXJzX3RhYmxlCiMgQ3JlYXRlczogbWlncmF0aW9ucy8wMDAxX2FkZF91c2Vyc190YWJsZS5zcWwKCiMgQXBwbHkgbWlncmF0aW9ucwp3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGFwcGx5IDxkYi1uYW1lPiAtLWxvY2FsICAgICAjIEFwcGx5IHRvIGxvY2FsIERCCndyYW5nbGVyIGQxIG1pZ3JhdGlvbnMgYXBwbHkgPGRiLW5hbWU+IC0tcmVtb3RlICAgICMgQXBwbHkgdG8gcHJvZHVjdGlvbiBEQgoKIyBMaXN0IGFwcGxpZWQgbWlncmF0aW9ucwp3cmFuZ2xlciBkMSBtaWdyYXRpb25zIGxpc3QgPGRiLW5hbWU+IC0tcmVtb3RlCgojIERpcmVjdCBTUUwgZXhlY3V0aW9uIChieXBhc3NlcyBtaWdyYXRpb24gdHJhY2tpbmcpCndyYW5nbGVyIGQxIGV4ZWN1dGUgPGRiLW5hbWU+IC0tcmVtb3RlIC0tY29tbWFuZD0iU0VMRUNUICogRlJPTSB1c2VycyIKd3JhbmdsZXIgZDEgZXhlY3V0ZSA8ZGItbmFtZT4gLS1sb2NhbCAtLWZpbGU9Li9zY2hlbWEuc3FsCmBgYAoKKipNaWdyYXRpb24gdHJhY2tpbmcqKjogV3JhbmdsZXIgY3JlYXRlcyBgZDFfbWlncmF0aW9uc2AgdGFibGUgYXV0b21hdGljYWxseSB0byB0cmFjayBhcHBsaWVkIG1pZ3JhdGlvbnMKCiMjIEluZGV4aW5nIFN0cmF0ZWd5CgpgYGBzcWwKLS0gSW5kZXggZnJlcXVlbnRseSBxdWVyaWVkIGNvbHVtbnMKQ1JFQVRFIElOREVYIGlkeF91c2Vyc19lbWFpbCBPTiB1c2VycyhlbWFpbCk7CgotLSBDb21wb3NpdGUgaW5kZXhlcyBmb3IgbXVsdGktY29sdW1uIHF1ZXJpZXMKQ1JFQVRFIElOREVYIGlkeF9wb3N0c191c2VyX3B1Ymxpc2hlZCBPTiBwb3N0cyh1c2VyX2lkLCBwdWJsaXNoZWQpOwoKLS0gQ292ZXJpbmcgaW5kZXhlcyAoaW5jbHVkZSBxdWVyaWVkIGNvbHVtbnMpCkNSRUFURSBJTkRFWCBpZHhfdXNlcnNfZW1haWxfbmFtZSBPTiB1c2VycyhlbWFpbCwgbmFtZSk7CgotLSBQYXJ0aWFsIGluZGV4ZXMgZm9yIGZpbHRlcmVkIHF1ZXJpZXMKQ1JFQVRFIElOREVYIGlkeF9hY3RpdmVfdXNlcnMgT04gdXNlcnMoZW1haWwpIFdIRVJFIGFjdGl2ZSA9IDE7CgotLSBDaGVjayBpZiBxdWVyeSB1c2VzIGluZGV4CkVYUExBSU4gUVVFUlkgUExBTiBTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGVtYWlsID0gPzsKYGBgCgojIyBEcml6emxlIE9STQoKYGBgdHlwZXNjcmlwdAovLyBkcml6emxlLmNvbmZpZy50cwpleHBvcnQgZGVmYXVsdCB7CiAgc2NoZW1hOiAnLi9zcmMvc2NoZW1hLnRzJywgb3V0OiAnLi9taWdyYXRpb25zJywgZGlhbGVjdDogJ3NxbGl0ZScsIGRyaXZlcjogJ2QxLWh0dHAnLAogIGRiQ3JlZGVudGlhbHM6IHsgYWNjb3VudElkOiBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0FDQ09VTlRfSUQhLCBkYXRhYmFzZUlkOiBwcm9jZXNzLmVudi5EMV9EQVRBQkFTRV9JRCEsIHRva2VuOiBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0FQSV9UT0tFTiEgfQp9IHNhdGlzZmllcyBDb25maWc7CgovLyBzY2hlbWEudHMKaW1wb3J0IHsgc3FsaXRlVGFibGUsIHRleHQsIGludGVnZXIgfSBmcm9tICdkcml6emxlLW9ybS9zcWxpdGUtY29yZSc7CmV4cG9ydCBjb25zdCB1c2VycyA9IHNxbGl0ZVRhYmxlKCd1c2VycycsIHsKICBpZDogaW50ZWdlcignaWQnKS5wcmltYXJ5S2V5KHsgYXV0b0luY3JlbWVudDogdHJ1ZSB9KSwKICBlbWFpbDogdGV4dCgnZW1haWwnKS5ub3ROdWxsKCkudW5pcXVlKCksCiAgbmFtZTogdGV4dCgnbmFtZScpLm5vdE51bGwoKQp9KTsKCi8vIHdvcmtlci50cwppbXBvcnQgeyBkcml6emxlIH0gZnJvbSAnZHJpenpsZS1vcm0vZDEnOwppbXBvcnQgeyB1c2VycyB9IGZyb20gJy4vc2NoZW1hJzsKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KSB7CiAgICBjb25zdCBkYiA9IGRyaXp6bGUoZW52LkRCKTsKICAgIHJldHVybiBSZXNwb25zZS5qc29uKGF3YWl0IGRiLnNlbGVjdCgpLmZyb20odXNlcnMpKTsKICB9Cn0KYGBgCgojIyBJbXBvcnQgJiBFeHBvcnQKCmBgYGJhc2gKIyBFeHBvcnQgZnVsbCBkYXRhYmFzZSAoc2NoZW1hICsgZGF0YSkKd3JhbmdsZXIgZDEgZXhwb3J0IDxkYi1uYW1lPiAtLXJlbW90ZSAtLW91dHB1dD0uL2JhY2t1cC5zcWwKCiMgRXhwb3J0IGRhdGEgb25seSAobm8gc2NoZW1hKQp3cmFuZ2xlciBkMSBleHBvcnQgPGRiLW5hbWU+IC0tcmVtb3RlIC0tbm8tc2NoZW1hIC0tb3V0cHV0PS4vZGF0YS1vbmx5LnNxbAoKIyBFeHBvcnQgd2l0aCBmb3JlaWduIGtleSBjb25zdHJhaW50cyBwcmVzZXJ2ZWQKIyAoRGVmYXVsdDogZm9yZWlnbiBrZXlzIGFyZSBkaXNhYmxlZCBkdXJpbmcgZXhwb3J0IGZvciBpbXBvcnQgY29tcGF0aWJpbGl0eSkKCiMgSW1wb3J0IFNRTCBmaWxlCndyYW5nbGVyIGQxIGV4ZWN1dGUgPGRiLW5hbWU+IC0tcmVtb3RlIC0tZmlsZT0uL2JhY2t1cC5zcWwKCiMgTGltaXRhdGlvbnMKIyAtIEJMT0IgZGF0YSBtYXkgbm90IGV4cG9ydCBjb3JyZWN0bHkgKHVzZSBSMiBmb3IgYmluYXJ5IGZpbGVzKQojIC0gVmVyeSBsYXJnZSBleHBvcnRzICg+MUdCKSBtYXkgdGltZW91dCAoc3BsaXQgaW50byBjaHVua3MpCiMgLSBJbXBvcnQgaXMgTk9UIGF0b21pYyAodXNlIGJhdGNoKCkgZm9yIHRyYW5zYWN0aW9uYWwgaW1wb3J0cyBpbiBXb3JrZXJzKQpgYGAKCiMjIFBsYW4gVGllcnMKCnwgRmVhdHVyZSB8IEZyZWUgKFdvcmtlcnMgRnJlZSkgfCBQYWlkIChXb3JrZXJzIFBhaWQpIHwKfC0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tLS0tfAp8IFJvd3MgcmVhZCB8IDUgbWlsbGlvbiAvIGRheSB8IEZpcnN0IDI1IGJpbGxpb24gLyBtb250aCBpbmNsdWRlZCB8CnwgUm93cyB3cml0dGVuIHwgMTAwLDAwMCAvIGRheSB8IEZpcnN0IDUwIG1pbGxpb24gLyBtb250aCBpbmNsdWRlZCB8CnwgU3RvcmFnZSB8IDUgR0IgKHRvdGFsKSB8IEZpcnN0IDUgR0IgaW5jbHVkZWQgfAp8IERhdGFiYXNlIHNpemUgfCA1MDAgTUIgfCAxMCBHQiB8CnwgQmF0Y2ggc2l6ZSB8IDEsMDAwIHN0YXRlbWVudHMgfCAxMCwwMDAgc3RhdGVtZW50cyB8CnwgVGltZSBUcmF2ZWwgfCA3IGRheXMgfCAzMCBkYXlzIHwKfCBSZWFkIHJlcGxpY2FzIHwg4p2MIHwg4pyFIHwKfCBTZXNzaW9ucyBBUEkgfCDinYwgfCDinIUgKHVwIHRvIDE1IG1pbikgfAp8IFByaWNpbmcgfCBGcmVlIHwgJDUvbW8gKyB1c2FnZSB8CgoqKlVzYWdlIHByaWNpbmcqKiAocGFpZCBwbGFucywgYmV5b25kIGluY2x1ZGVkIGFsbG93YW5jZXMpOiAkMC4wMDEgcGVyIG1pbGxpb24gcm93cyByZWFkICsgJDEuMDAgcGVyIG1pbGxpb24gcm93cyB3cml0dGVuICsgJDAuNzUvR0ItbW8gc3RvcmFnZQoKIyMgTG9jYWwgRGV2ZWxvcG1lbnQKCmBgYGJhc2gKd3JhbmdsZXIgZGV2IC0tcGVyc2lzdC10bz0uLy53cmFuZ2xlci9zdGF0ZSAgIyBQZXJzaXN0IGFjcm9zcyByZXN0YXJ0cwojIExvY2FsIERCOiAud3JhbmdsZXIvc3RhdGUvdjMvZDEvPGRhdGFiYXNlLWlkPi5zcWxpdGUKc3FsaXRlMyAud3JhbmdsZXIvc3RhdGUvdjMvZDEvPGRhdGFiYXNlLWlkPi5zcWxpdGUgICMgSW5zcGVjdAoKIyBMb2NhbCBkZXYgdXNlcyBmcmVlIHRpZXIgbGltaXRzIGJ5IGRlZmF1bHQKYGBgCg==
+# D1 Configuration
+
+## wrangler.jsonc Setup
+
+```jsonc
+{
+  "name": "your-worker-name",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01", // Use current date for new projects
+  "d1_databases": [
+    {
+      "binding": "DB",                    // Env variable name
+      "database_name": "your-db-name",    // Human-readable name
+      "database_id": "your-database-id",  // UUID from dashboard/CLI
+      "migrations_dir": "migrations"      // Optional: default is "migrations"
+    },
+    // Read replica (paid plans only)
+    {
+      "binding": "DB_REPLICA",
+      "database_name": "your-db-name",
+      "database_id": "your-database-id"   // Same ID, different binding
+    },
+    // Multiple databases
+    {
+      "binding": "ANALYTICS_DB",
+      "database_name": "analytics-db",
+      "database_id": "yyy-yyy-yyy"
+    }
+  ]
+}
+```
+
+## TypeScript Types
+
+```typescript
+interface Env { DB: D1Database; ANALYTICS_DB?: D1Database; }
+
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const result = await env.DB.prepare('SELECT * FROM users').all();
+    return Response.json(result.results);
+  }
+}
+```
+
+## Migrations
+
+File structure: `migrations/0001_initial_schema.sql`, `0002_add_posts.sql`, etc.
+
+### Example Migration
+
+```sql
+-- migrations/0001_initial_schema.sql
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_users_email ON users(email);
+
+CREATE TABLE IF NOT EXISTS posts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  title TEXT NOT NULL,
+  content TEXT,
+  published BOOLEAN DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_posts_user_id ON posts(user_id);
+CREATE INDEX idx_posts_published ON posts(published);
+```
+
+### Running Migrations
+
+```bash
+# Create new migration file
+wrangler d1 migrations create <db-name> add_users_table
+# Creates: migrations/0001_add_users_table.sql
+
+# Apply migrations
+wrangler d1 migrations apply <db-name> --local     # Apply to local DB
+wrangler d1 migrations apply <db-name> --remote    # Apply to production DB
+
+# List applied migrations
+wrangler d1 migrations list <db-name> --remote
+
+# Direct SQL execution (bypasses migration tracking)
+wrangler d1 execute <db-name> --remote --command="SELECT * FROM users"
+wrangler d1 execute <db-name> --local --file=./schema.sql
+```
+
+**Migration tracking**: Wrangler creates `d1_migrations` table automatically to track applied migrations
+
+## Indexing Strategy
+
+```sql
+-- Index frequently queried columns
+CREATE INDEX idx_users_email ON users(email);
+
+-- Composite indexes for multi-column queries
+CREATE INDEX idx_posts_user_published ON posts(user_id, published);
+
+-- Covering indexes (include queried columns)
+CREATE INDEX idx_users_email_name ON users(email, name);
+
+-- Partial indexes for filtered queries
+CREATE INDEX idx_active_users ON users(email) WHERE active = 1;
+
+-- Check if query uses index
+EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = ?;
+```
+
+## Drizzle ORM
+
+```typescript
+// drizzle.config.ts
+export default {
+  schema: './src/schema.ts', out: './migrations', dialect: 'sqlite', driver: 'd1-http',
+  dbCredentials: { accountId: process.env.CLOUDFLARE_ACCOUNT_ID!, databaseId: process.env.D1_DATABASE_ID!, token: process.env.CLOUDFLARE_API_TOKEN! }
+} satisfies Config;
+
+// schema.ts
+import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+export const users = sqliteTable('users', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  email: text('email').notNull().unique(),
+  name: text('name').notNull()
+});
+
+// worker.ts
+import { drizzle } from 'drizzle-orm/d1';
+import { users } from './schema';
+export default {
+  async fetch(request: Request, env: Env) {
+    const db = drizzle(env.DB);
+    return Response.json(await db.select().from(users));
+  }
+}
+```
+
+## Import & Export
+
+```bash
+# Export full database (schema + data)
+wrangler d1 export <db-name> --remote --output=./backup.sql
+
+# Export data only (no schema)
+wrangler d1 export <db-name> --remote --no-schema --output=./data-only.sql
+
+# Export with foreign key constraints preserved
+# (Default: foreign keys are disabled during export for import compatibility)
+
+# Import SQL file
+wrangler d1 execute <db-name> --remote --file=./backup.sql
+
+# Limitations
+# - BLOB data may not export correctly (use R2 for binary files)
+# - Very large exports (>1GB) may timeout (split into chunks)
+# - Import is NOT atomic (use batch() for transactional imports in Workers)
+```
+
+## Plan Tiers
+
+| Feature | Free (Workers Free) | Paid (Workers Paid) |
+|---------|---------------------|---------------------|
+| Rows read | 5 million / day | First 25 billion / month included |
+| Rows written | 100,000 / day | First 50 million / month included |
+| Storage | 5 GB (total) | First 5 GB included |
+| Database size | 500 MB | 10 GB |
+| Batch size | 1,000 statements | 10,000 statements |
+| Time Travel | 7 days | 30 days |
+| Read replicas | ❌ | ✅ |
+| Sessions API | ❌ | ✅ (up to 15 min) |
+| Pricing | Free | $5/mo + usage |
+
+**Usage pricing** (paid plans, beyond included allowances): $0.001 per million rows read + $1.00 per million rows written + $0.75/GB-mo storage
+
+## Local Development
+
+```bash
+wrangler dev --persist-to=./.wrangler/state  # Persist across restarts
+# Local DB: .wrangler/state/v3/d1/<database-id>.sqlite
+sqlite3 .wrangler/state/v3/d1/<database-id>.sqlite  # Inspect
+
+# Local dev uses free tier limits by default
+```

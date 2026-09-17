@@ -1,1 +1,88 @@
-IyBWZWN0b3JpemUgQ29uZmlndXJhdGlvbgoKIyMgQ3JlYXRlIEluZGV4CgpgYGBiYXNoCm5weCB3cmFuZ2xlciB2ZWN0b3JpemUgY3JlYXRlIG15LWluZGV4IC0tZGltZW5zaW9ucz03NjggLS1tZXRyaWM9Y29zaW5lCmBgYAoKKirimqDvuI8gRGltZW5zaW9ucyBhbmQgbWV0cmljIGFyZSBpbW11dGFibGUqKiAtIGNhbm5vdCBjaGFuZ2UgYWZ0ZXIgY3JlYXRpb24uCgojIyBXb3JrZXIgQmluZGluZwoKYGBganNvbmMKLy8gd3JhbmdsZXIuanNvbmMKewogICJ2ZWN0b3JpemUiOiBbCiAgICB7ICJiaW5kaW5nIjogIlZFQ1RPUklaRSIsICJpbmRleF9uYW1lIjogIm15LWluZGV4IiB9CiAgXQp9CmBgYAoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBWRUNUT1JJWkU6IFZlY3Rvcml6ZTsKfQpgYGAKCiMjIE1ldGFkYXRhIEluZGV4ZXMKCioqTXVzdCBjcmVhdGUgQkVGT1JFIGluc2VydGluZyB2ZWN0b3JzKiogLSBleGlzdGluZyB2ZWN0b3JzIG5vdCByZXRyb2FjdGl2ZWx5IGluZGV4ZWQuCgpgYGBiYXNoCndyYW5nbGVyIHZlY3Rvcml6ZSBjcmVhdGUtbWV0YWRhdGEtaW5kZXggbXktaW5kZXggLS1wcm9wZXJ0eS1uYW1lPWNhdGVnb3J5IC0tdHlwZT1zdHJpbmcKd3JhbmdsZXIgdmVjdG9yaXplIGNyZWF0ZS1tZXRhZGF0YS1pbmRleCBteS1pbmRleCAtLXByb3BlcnR5LW5hbWU9cHJpY2UgLS10eXBlPW51bWJlcgpgYGAKCnwgVHlwZSB8IFVzZSBGb3IgfAp8LS0tLS0tfC0tLS0tLS0tLXwKfCBgc3RyaW5nYCB8IENhdGVnb3JpZXMsIHRhZ3MgKGZpcnN0IDY0IGJ5dGVzIGluZGV4ZWQpIHwKfCBgbnVtYmVyYCB8IFByaWNlcywgdGltZXN0YW1wcyB8CnwgYGJvb2xlYW5gIHwgRmxhZ3MgfAoKIyMgQ0xJIENvbW1hbmRzCgpgYGBiYXNoCiMgSW5kZXggbWFuYWdlbWVudAp3cmFuZ2xlciB2ZWN0b3JpemUgbGlzdAp3cmFuZ2xlciB2ZWN0b3JpemUgaW5mbyA8aW5kZXgtbmFtZT4Kd3JhbmdsZXIgdmVjdG9yaXplIGRlbGV0ZSA8aW5kZXgtbmFtZT4KCiMgVmVjdG9yIG9wZXJhdGlvbnMKd3JhbmdsZXIgdmVjdG9yaXplIGluc2VydCA8aW5kZXgtbmFtZT4gLS1maWxlPWVtYmVkZGluZ3MubmRqc29uCndyYW5nbGVyIHZlY3Rvcml6ZSBnZXQgPGluZGV4LW5hbWU+IC0taWRzPWlkMSxpZDIKd3JhbmdsZXIgdmVjdG9yaXplIGRlbGV0ZS1ieS1pZHMgPGluZGV4LW5hbWU+IC0taWRzPWlkMSxpZDIKCiMgTWV0YWRhdGEgaW5kZXhlcwp3cmFuZ2xlciB2ZWN0b3JpemUgbGlzdC1tZXRhZGF0YS1pbmRleCA8aW5kZXgtbmFtZT4Kd3JhbmdsZXIgdmVjdG9yaXplIGRlbGV0ZS1tZXRhZGF0YS1pbmRleCA8aW5kZXgtbmFtZT4gLS1wcm9wZXJ0eS1uYW1lPWZpZWxkCmBgYAoKIyMgQnVsayBVcGxvYWQgKE5ESlNPTikKCmBgYGpzb24KeyJpZCI6ICIxIiwgInZhbHVlcyI6IFswLjEsIDAuMiwgLi4uXSwgIm1ldGFkYXRhIjogeyJjYXRlZ29yeSI6ICJkb2NzIn19CnsiaWQiOiAiMiIsICJ2YWx1ZXMiOiBbMC40LCAwLjUsIC4uLl0sICJuYW1lc3BhY2UiOiAidGVuYW50LWFiYyJ9CmBgYAoKKipMaW1pdHM6KiogNTAwMCB2ZWN0b3JzIHBlciBmaWxlLCAxMDAgTUIgbWF4CgojIyBDYXJkaW5hbGl0eSBCZXN0IFByYWN0aWNlCgpCdWNrZXQgaGlnaC1jYXJkaW5hbGl0eSBkYXRhOgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBNaWxsaXNlY29uZCB0aW1lc3RhbXBzCm1ldGFkYXRhOiB7IHRpbWVzdGFtcDogRGF0ZS5ub3coKSB9CgovLyDinIUgNS1taW51dGUgYnVja2V0cwptZXRhZGF0YTogeyB0aW1lc3RhbXBfYnVja2V0OiBNYXRoLmZsb29yKERhdGUubm93KCkgLyAzMDAwMDApICogMzAwMDAwIH0KYGBgCgojIyBQcm9kdWN0aW9uIENoZWNrbGlzdAoKMS4gQ3JlYXRlIGluZGV4IHdpdGggY29ycmVjdCBkaW1lbnNpb25zCjIuIENyZWF0ZSBtZXRhZGF0YSBpbmRleGVzIEZJUlNUCjMuIFRlc3QgYnVsayB1cGxvYWQKNC4gQ29uZmlndXJlIGJpbmRpbmdzCjUuIERlcGxveSBXb3JrZXIKNi4gVmVyaWZ5IHF1ZXJpZXMK
+# Vectorize Configuration
+
+## Create Index
+
+```bash
+npx wrangler vectorize create my-index --dimensions=768 --metric=cosine
+```
+
+**⚠️ Dimensions and metric are immutable** - cannot change after creation.
+
+## Worker Binding
+
+```jsonc
+// wrangler.jsonc
+{
+  "vectorize": [
+    { "binding": "VECTORIZE", "index_name": "my-index" }
+  ]
+}
+```
+
+```typescript
+interface Env {
+  VECTORIZE: Vectorize;
+}
+```
+
+## Metadata Indexes
+
+**Must create BEFORE inserting vectors** - existing vectors not retroactively indexed.
+
+```bash
+wrangler vectorize create-metadata-index my-index --property-name=category --type=string
+wrangler vectorize create-metadata-index my-index --property-name=price --type=number
+```
+
+| Type | Use For |
+|------|---------|
+| `string` | Categories, tags (first 64 bytes indexed) |
+| `number` | Prices, timestamps |
+| `boolean` | Flags |
+
+## CLI Commands
+
+```bash
+# Index management
+wrangler vectorize list
+wrangler vectorize info <index-name>
+wrangler vectorize delete <index-name>
+
+# Vector operations
+wrangler vectorize insert <index-name> --file=embeddings.ndjson
+wrangler vectorize get <index-name> --ids=id1,id2
+wrangler vectorize delete-by-ids <index-name> --ids=id1,id2
+
+# Metadata indexes
+wrangler vectorize list-metadata-index <index-name>
+wrangler vectorize delete-metadata-index <index-name> --property-name=field
+```
+
+## Bulk Upload (NDJSON)
+
+```json
+{"id": "1", "values": [0.1, 0.2, ...], "metadata": {"category": "docs"}}
+{"id": "2", "values": [0.4, 0.5, ...], "namespace": "tenant-abc"}
+```
+
+**Limits:** 5000 vectors per file, 100 MB max
+
+## Cardinality Best Practice
+
+Bucket high-cardinality data:
+```typescript
+// ❌ Millisecond timestamps
+metadata: { timestamp: Date.now() }
+
+// ✅ 5-minute buckets
+metadata: { timestamp_bucket: Math.floor(Date.now() / 300000) * 300000 }
+```
+
+## Production Checklist
+
+1. Create index with correct dimensions
+2. Create metadata indexes FIRST
+3. Test bulk upload
+4. Configure bindings
+5. Deploy Worker
+6. Verify queries

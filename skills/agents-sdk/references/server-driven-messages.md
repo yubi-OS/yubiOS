@@ -1,1 +1,63 @@
-IyBTZXJ2ZXItRHJpdmVuIE1lc3NhZ2VzIChUcmlnZ2VyIFBhdHRlcm5zKQoKRmV0Y2ggaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FnZW50cy9hcGktcmVmZXJlbmNlL3RyaWdnZXItcGF0dGVybnMvIGZvciBjb21wbGV0ZSBkb2N1bWVudGF0aW9uLgoKUGF0dGVybnMgZm9yIHNlcnZlci1pbml0aWF0ZWQgTExNIHR1cm5zIGluIGBBSUNoYXRBZ2VudGAg4oCUIGZyb20gc2NoZWR1bGVzLCB3ZWJob29rcywgZW1haWwsIG9yIG90aGVyIGFnZW50cy4KCiMjIGBzYXZlTWVzc2FnZXNgIOKAlCBUcmlnZ2VyIGFuIExMTSBUdXJuCgpgYGB0eXBlc2NyaXB0CmF3YWl0IHRoaXMuc2F2ZU1lc3NhZ2VzKChleGlzdGluZ01lc3NhZ2VzKSA9PiBbCiAgLi4uZXhpc3RpbmdNZXNzYWdlcywKICB7IHJvbGU6ICJ1c2VyIiwgY29udGVudDogIkNoZWNrIGZvciBuZXcgbm90aWZpY2F0aW9ucyIgfQpdKTsKYGBgCgpgc2F2ZU1lc3NhZ2VzYCBwZXJzaXN0cyB0aGUgbWVzc2FnZXMgQU5EIHRyaWdnZXJzIGBvbkNoYXRNZXNzYWdlYC4KCiMjIGBwZXJzaXN0TWVzc2FnZXNgIOKAlCBTYXZlIFdpdGhvdXQgVHJpZ2dlcmluZwoKYGBgdHlwZXNjcmlwdAphd2FpdCB0aGlzLnBlcnNpc3RNZXNzYWdlcyhbCiAgLi4udGhpcy5tZXNzYWdlcywKICB7IHJvbGU6ICJhc3Npc3RhbnQiLCBjb250ZW50OiAiU3lzdGVtIG5vdGU6IGNoZWNrZWQgYXQgIiArIG5ldyBEYXRlKCkgfQpdKTsKYGBgCgojIyBgd2FpdFVudGlsU3RhYmxlYAoKKipBbHdheXMgY2FsbCBiZWZvcmUgYHNhdmVNZXNzYWdlc2AgZnJvbSBub24tY2hhdCBjb250ZXh0cyoqIChzY2hlZHVsZXMsIHdlYmhvb2tzLCBlbWFpbCk6CgpgYGB0eXBlc2NyaXB0CmFzeW5jIGNoZWNrTm90aWZpY2F0aW9ucyhwYXlsb2FkOiB1bmtub3duLCBzY2hlZHVsZTogU2NoZWR1bGUpIHsKICBhd2FpdCB0aGlzLndhaXRVbnRpbFN0YWJsZSh7IHRpbWVvdXQ6IDMwXzAwMCB9KTsKICBhd2FpdCB0aGlzLnNhdmVNZXNzYWdlcygobXNncykgPT4gWwogICAgLi4ubXNncywKICAgIHsgcm9sZTogInVzZXIiLCBjb250ZW50OiAiUnVuIHNjaGVkdWxlZCBub3RpZmljYXRpb24gY2hlY2siIH0KICBdKTsKfQpgYGAKCiMjIGBvbkNoYXRSZXNwb25zZWAKClJ1bnMgYWZ0ZXIgZWFjaCBMTE0gdHVybiBjb21wbGV0ZXMuIFVzZSBmb3IgY2hhaW5pbmc6CgpgYGB0eXBlc2NyaXB0CmFzeW5jIG9uQ2hhdFJlc3BvbnNlKHJlc3VsdDogQ2hhdFJlc3BvbnNlUmVzdWx0KSB7CiAgaWYgKHJlc3VsdC50eXBlID09PSAiZmluaXNoIiAmJiBuZWVkc0ZvbGxvd1VwKHJlc3VsdCkpIHsKICAgIGF3YWl0IHRoaXMuc2F2ZU1lc3NhZ2VzKChtc2dzKSA9PiBbCiAgICAgIC4uLm1zZ3MsCiAgICAgIHsgcm9sZTogInVzZXIiLCBjb250ZW50OiAiQ29udGludWUgd2l0aCBuZXh0IHN0ZXAiIH0KICAgIF0pOwogIH0KfQpgYGAKCiMjIENsaWVudCBTdGF0dXMKCmBgYHRzeApjb25zdCB7IGlzU3RyZWFtaW5nLCBpc1NlcnZlclN0cmVhbWluZyB9ID0gdXNlQWdlbnRDaGF0KHsgYWdlbnQgfSk7CmBgYAoKLSBgaXNTdHJlYW1pbmdgIOKAlCB0cnVlIGR1cmluZyBhbnkgc3RyZWFtaW5nICh1c2VyLWluaXRpYXRlZCBvciBzZXJ2ZXItaW5pdGlhdGVkKQotIGBpc1NlcnZlclN0cmVhbWluZ2Ag4oCUIHRydWUgb25seSBkdXJpbmcgc2VydmVyLWluaXRpYXRlZCBzdHJlYW1zCg==
+# Server-Driven Messages (Trigger Patterns)
+
+Fetch https://developers.cloudflare.com/agents/api-reference/trigger-patterns/ for complete documentation.
+
+Patterns for server-initiated LLM turns in `AIChatAgent` — from schedules, webhooks, email, or other agents.
+
+## `saveMessages` — Trigger an LLM Turn
+
+```typescript
+await this.saveMessages((existingMessages) => [
+  ...existingMessages,
+  { role: "user", content: "Check for new notifications" }
+]);
+```
+
+`saveMessages` persists the messages AND triggers `onChatMessage`.
+
+## `persistMessages` — Save Without Triggering
+
+```typescript
+await this.persistMessages([
+  ...this.messages,
+  { role: "assistant", content: "System note: checked at " + new Date() }
+]);
+```
+
+## `waitUntilStable`
+
+**Always call before `saveMessages` from non-chat contexts** (schedules, webhooks, email):
+
+```typescript
+async checkNotifications(payload: unknown, schedule: Schedule) {
+  await this.waitUntilStable({ timeout: 30_000 });
+  await this.saveMessages((msgs) => [
+    ...msgs,
+    { role: "user", content: "Run scheduled notification check" }
+  ]);
+}
+```
+
+## `onChatResponse`
+
+Runs after each LLM turn completes. Use for chaining:
+
+```typescript
+async onChatResponse(result: ChatResponseResult) {
+  if (result.type === "finish" && needsFollowUp(result)) {
+    await this.saveMessages((msgs) => [
+      ...msgs,
+      { role: "user", content: "Continue with next step" }
+    ]);
+  }
+}
+```
+
+## Client Status
+
+```tsx
+const { isStreaming, isServerStreaming } = useAgentChat({ agent });
+```
+
+- `isStreaming` — true during any streaming (user-initiated or server-initiated)
+- `isServerStreaming` — true only during server-initiated streams

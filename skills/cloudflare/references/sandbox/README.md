@@ -1,1 +1,96 @@
-IyBDbG91ZGZsYXJlIFNhbmRib3ggU0RLCgpTZWN1cmUgaXNvbGF0ZWQgY29kZSBleGVjdXRpb24gaW4gY29udGFpbmVycyBvbiBDbG91ZGZsYXJlJ3MgZWRnZS4gUnVuIHVudHJ1c3RlZCBjb2RlLCBtYW5hZ2UgZmlsZXMsIGV4cG9zZSBzZXJ2aWNlcywgaW50ZWdyYXRlIHdpdGggQUkgYWdlbnRzLgoKKipVc2UgY2FzZXMqKjogQUkgY29kZSBleGVjdXRpb24sIGludGVyYWN0aXZlIGRldiBlbnZpcm9ubWVudHMsIGRhdGEgYW5hbHlzaXMsIENJL0NELCBjb2RlIGludGVycHJldGVycywgbXVsdGktdGVuYW50IGV4ZWN1dGlvbi4KCiMjIEFyY2hpdGVjdHVyZQoKLSBFYWNoIHNhbmRib3ggPSBEdXJhYmxlIE9iamVjdCArIENvbnRhaW5lcgotIFBlcnNpc3RlbnQgYWNyb3NzIHJlcXVlc3RzIChzYW1lIElEID0gc2FtZSBzYW5kYm94KQotIElzb2xhdGVkIGZpbGVzeXN0ZW0vcHJvY2Vzc2VzL25ldHdvcmsKLSBDb25maWd1cmFibGUgc2xlZXAvd2FrZSBmb3IgY29zdCBvcHRpbWl6YXRpb24KCiMjIFF1aWNrIFN0YXJ0CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGdldFNhbmRib3gsIHByb3h5VG9TYW5kYm94LCB0eXBlIFNhbmRib3ggfSBmcm9tICdAY2xvdWRmbGFyZS9zYW5kYm94JzsKZXhwb3J0IHsgU2FuZGJveCB9IGZyb20gJ0BjbG91ZGZsYXJlL3NhbmRib3gnOwoKdHlwZSBFbnYgPSB7IFNhbmRib3g6IER1cmFibGVPYmplY3ROYW1lc3BhY2U8U2FuZGJveD47IH07CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICAvLyBDUklUSUNBTDogcHJveHlUb1NhbmRib3ggTVVTVCBiZSBjYWxsZWQgZmlyc3QgZm9yIHByZXZpZXcgVVJMcwogICAgY29uc3QgcHJveHlSZXNwb25zZSA9IGF3YWl0IHByb3h5VG9TYW5kYm94KHJlcXVlc3QsIGVudik7CiAgICBpZiAocHJveHlSZXNwb25zZSkgcmV0dXJuIHByb3h5UmVzcG9uc2U7CgogICAgY29uc3Qgc2FuZGJveCA9IGdldFNhbmRib3goZW52LlNhbmRib3gsICdteS1zYW5kYm94Jyk7CiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBzYW5kYm94LmV4ZWMoJ3B5dGhvbjMgLWMgInByaW50KDIgKyAyKSInKTsKICAgIHJldHVybiBSZXNwb25zZS5qc29uKHsgb3V0cHV0OiByZXN1bHQuc3Rkb3V0IH0pOwogIH0KfTsKYGBgCgoqKndyYW5nbGVyLmpzb25jKio6CmBgYGpzb25jCnsKICAibmFtZSI6ICJteS1zYW5kYm94LXdvcmtlciIsCiAgIm1haW4iOiAic3JjL2luZGV4LnRzIiwKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLCAvLyBVc2UgY3VycmVudCBkYXRlIGZvciBuZXcgcHJvamVjdHMKICAKICAiY29udGFpbmVycyI6IFt7CiAgICAiY2xhc3NfbmFtZSI6ICJTYW5kYm94IiwKICAgICJpbWFnZSI6ICIuL0RvY2tlcmZpbGUiLAogICAgImluc3RhbmNlX3R5cGUiOiAibGl0ZSIsICAgICAgICAvLyBsaXRlIHwgc3RhbmRhcmQgfCBoZWF2eQogICAgIm1heF9pbnN0YW5jZXMiOiA1CiAgfV0sCiAgCiAgImR1cmFibGVfb2JqZWN0cyI6IHsKICAgICJiaW5kaW5ncyI6IFt7ICJjbGFzc19uYW1lIjogIlNhbmRib3giLCAibmFtZSI6ICJTYW5kYm94IiB9XQogIH0sCiAgCiAgIm1pZ3JhdGlvbnMiOiBbewogICAgInRhZyI6ICJ2MSIsCiAgICAibmV3X3NxbGl0ZV9jbGFzc2VzIjogWyJTYW5kYm94Il0KICB9XQp9CmBgYAoKKipEb2NrZXJmaWxlKio6CmBgYGRvY2tlcmZpbGUKRlJPTSBkb2NrZXIuaW8vY2xvdWRmbGFyZS9zYW5kYm94OjAuNy4wClJVTiBwaXAzIGluc3RhbGwgLS1uby1jYWNoZS1kaXIgcGFuZGFzIG51bXB5IG1hdHBsb3RsaWIKRVhQT1NFIDgwODAgMzAwMCAgIyBSZXF1aXJlZCBmb3Igd3JhbmdsZXIgZGV2CmBgYAoKIyMgQ29yZSBBUElzCgotIGBnZXRTYW5kYm94KG5hbWVzcGFjZSwgaWQsIG9wdGlvbnM/KWAg4oaSIEdldC9jcmVhdGUgc2FuZGJveAotIGBzYW5kYm94LmV4ZWMoY29tbWFuZCwgb3B0aW9ucz8pYCDihpIgRXhlY3V0ZSBjb21tYW5kCi0gYHNhbmRib3gucmVhZEZpbGUocGF0aClgIC8gYHdyaXRlRmlsZShwYXRoLCBjb250ZW50KWAg4oaSIEZpbGUgb3BzCi0gYHNhbmRib3guc3RhcnRQcm9jZXNzKGNvbW1hbmQsIG9wdGlvbnMpYCDihpIgQmFja2dyb3VuZCBwcm9jZXNzCi0gYHNhbmRib3guZXhwb3NlUG9ydChwb3J0LCBvcHRpb25zKWAg4oaSIEdldCBwcmV2aWV3IFVSTAotIGBzYW5kYm94LmNyZWF0ZVNlc3Npb24ob3B0aW9ucylgIOKGkiBJc29sYXRlZCBzZXNzaW9uCi0gYHNhbmRib3gud3NDb25uZWN0KHJlcXVlc3QsIHBvcnQpYCDihpIgV2ViU29ja2V0IHByb3h5Ci0gYHNhbmRib3guZGVzdHJveSgpYCDihpIgVGVybWluYXRlIGNvbnRhaW5lcgotIGBzYW5kYm94Lm1vdW50QnVja2V0KGJ1Y2tldCwgcGF0aCwgb3B0aW9ucylgIOKGkiBNb3VudCBTMyBzdG9yYWdlCgojIyBDcml0aWNhbCBSdWxlcwoKLSBBTFdBWVMgY2FsbCBgcHJveHlUb1NhbmRib3goKWAgZmlyc3QKLSBTYW1lIElEID0gcmV1c2Ugc2FuZGJveAotIFVzZSBgL3dvcmtzcGFjZWAgZm9yIHBlcnNpc3RlbnQgZmlsZXMKLSBgbm9ybWFsaXplSWQ6IHRydWVgIGZvciBwcmV2aWV3IFVSTHMKLSBSZXRyeSBvbiBgQ09OVEFJTkVSX05PVF9SRUFEWWAKCiMjIEluIFRoaXMgUmVmZXJlbmNlCi0gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBDb25maWcsIENMSSwgZW52aXJvbm1lbnQgc2V0dXAKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBQcm9ncmFtbWF0aWMgQVBJLCB0ZXN0aW5nIHBhdHRlcm5zCi0gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIENvbW1vbiB3b3JrZmxvd3MsIENJL0NEIGludGVncmF0aW9uCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBJc3N1ZXMsIGxpbWl0cywgYmVzdCBwcmFjdGljZXMKCiMjIFNlZSBBbHNvCi0gW2R1cmFibGUtb2JqZWN0c10oLi4vZHVyYWJsZS1vYmplY3RzLykgLSBTYW5kYm94IHJ1bnMgb24gRE8gaW5mcmFzdHJ1Y3R1cmUKLSBbY29udGFpbmVyc10oLi4vY29udGFpbmVycy8pIC0gQ29udGFpbmVyIHJ1bnRpbWUgZnVuZGFtZW50YWxzCi0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIEVudHJ5IHBvaW50IGZvciBzYW5kYm94IHJlcXVlc3RzCg==
+# Cloudflare Sandbox SDK
+
+Secure isolated code execution in containers on Cloudflare's edge. Run untrusted code, manage files, expose services, integrate with AI agents.
+
+**Use cases**: AI code execution, interactive dev environments, data analysis, CI/CD, code interpreters, multi-tenant execution.
+
+## Architecture
+
+- Each sandbox = Durable Object + Container
+- Persistent across requests (same ID = same sandbox)
+- Isolated filesystem/processes/network
+- Configurable sleep/wake for cost optimization
+
+## Quick Start
+
+```typescript
+import { getSandbox, proxyToSandbox, type Sandbox } from '@cloudflare/sandbox';
+export { Sandbox } from '@cloudflare/sandbox';
+
+type Env = { Sandbox: DurableObjectNamespace<Sandbox>; };
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    // CRITICAL: proxyToSandbox MUST be called first for preview URLs
+    const proxyResponse = await proxyToSandbox(request, env);
+    if (proxyResponse) return proxyResponse;
+
+    const sandbox = getSandbox(env.Sandbox, 'my-sandbox');
+    const result = await sandbox.exec('python3 -c "print(2 + 2)"');
+    return Response.json({ output: result.stdout });
+  }
+};
+```
+
+**wrangler.jsonc**:
+```jsonc
+{
+  "name": "my-sandbox-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01", // Use current date for new projects
+  
+  "containers": [{
+    "class_name": "Sandbox",
+    "image": "./Dockerfile",
+    "instance_type": "lite",        // lite | standard | heavy
+    "max_instances": 5
+  }],
+  
+  "durable_objects": {
+    "bindings": [{ "class_name": "Sandbox", "name": "Sandbox" }]
+  },
+  
+  "migrations": [{
+    "tag": "v1",
+    "new_sqlite_classes": ["Sandbox"]
+  }]
+}
+```
+
+**Dockerfile**:
+```dockerfile
+FROM docker.io/cloudflare/sandbox:0.7.0
+RUN pip3 install --no-cache-dir pandas numpy matplotlib
+EXPOSE 8080 3000  # Required for wrangler dev
+```
+
+## Core APIs
+
+- `getSandbox(namespace, id, options?)` → Get/create sandbox
+- `sandbox.exec(command, options?)` → Execute command
+- `sandbox.readFile(path)` / `writeFile(path, content)` → File ops
+- `sandbox.startProcess(command, options)` → Background process
+- `sandbox.exposePort(port, options)` → Get preview URL
+- `sandbox.createSession(options)` → Isolated session
+- `sandbox.wsConnect(request, port)` → WebSocket proxy
+- `sandbox.destroy()` → Terminate container
+- `sandbox.mountBucket(bucket, path, options)` → Mount S3 storage
+
+## Critical Rules
+
+- ALWAYS call `proxyToSandbox()` first
+- Same ID = reuse sandbox
+- Use `/workspace` for persistent files
+- `normalizeId: true` for preview URLs
+- Retry on `CONTAINER_NOT_READY`
+
+## In This Reference
+- [configuration.md](./configuration.md) - Config, CLI, environment setup
+- [api.md](./api.md) - Programmatic API, testing patterns
+- [patterns.md](./patterns.md) - Common workflows, CI/CD integration
+- [gotchas.md](./gotchas.md) - Issues, limits, best practices
+
+## See Also
+- [durable-objects](../durable-objects/) - Sandbox runs on DO infrastructure
+- [containers](../containers/) - Container runtime fundamentals
+- [workers](../workers/) - Entry point for sandbox requests

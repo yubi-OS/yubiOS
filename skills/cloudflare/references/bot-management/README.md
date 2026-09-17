@@ -1,1 +1,94 @@
-IyBDbG91ZGZsYXJlIEJvdCBNYW5hZ2VtZW50CgpFbnRlcnByaXNlLWdyYWRlIGJvdCBkZXRlY3Rpb24sIHByb3RlY3Rpb24sIGFuZCBtaXRpZ2F0aW9uIHVzaW5nIE1ML2hldXJpc3RpY3MsIGJvdCBzY29yZXMsIEphdmFTY3JpcHQgZGV0ZWN0aW9ucywgYW5kIHZlcmlmaWVkIGJvdCBoYW5kbGluZy4KCiMjIE92ZXJ2aWV3CgpCb3QgTWFuYWdlbWVudCBwcm92aWRlcyBtdWx0aS10aWVyIHByb3RlY3Rpb246Ci0gKipGcmVlIChCb3QgRmlnaHQgTW9kZSkqKjogQXV0by1ibG9ja3MgZGVmaW5pdGUgYm90cywgbm8gY29uZmlnCi0gKipQcm8vQnVzaW5lc3MgKFN1cGVyIEJvdCBGaWdodCBNb2RlKSoqOiBDb25maWd1cmFibGUgYWN0aW9ucywgc3RhdGljIHJlc291cmNlIHByb3RlY3Rpb24sIGFuYWx5dGljcyBncm91cGluZ3MKLSAqKkVudGVycHJpc2UgKEJvdCBNYW5hZ2VtZW50KSoqOiBHcmFudWxhciAxLTk5IHNjb3JlcywgV0FGIGludGVncmF0aW9uLCBKQTMvSkE0IGZpbmdlcnByaW50aW5nLCBXb3JrZXJzIEFQSSwgQWR2YW5jZWQgQW5hbHl0aWNzCgojIyBRdWljayBTdGFydAoKYGBgdHh0CiMgRGFzaGJvYXJkOiBTZWN1cml0eSA+IEJvdHMKIyBFbnRlcnByaXNlOiBEZXBsb3kgcnVsZSB0ZW1wbGF0ZQooY2YuYm90X21hbmFnZW1lbnQuc2NvcmUgZXEgMSBhbmQgbm90IGNmLmJvdF9tYW5hZ2VtZW50LnZlcmlmaWVkX2JvdCkg4oaSIEJsb2NrCihjZi5ib3RfbWFuYWdlbWVudC5zY29yZSBsZSAyOSBhbmQgbm90IGNmLmJvdF9tYW5hZ2VtZW50LnZlcmlmaWVkX2JvdCkg4oaSIE1hbmFnZWQgQ2hhbGxlbmdlCmBgYAoKIyMgV2hhdCBEbyBZb3UgTmVlZD8KCmBgYHR4dArilJzilIAgSW5pdGlhbCBzZXR1cCDihpIgY29uZmlndXJhdGlvbi5tZArilIIgICDilJzilIAgRnJlZSB0aWVyIOKGkiAiQm90IEZpZ2h0IE1vZGUiCuKUgiAgIOKUnOKUgCBQcm8vQnVzaW5lc3Mg4oaSICJTdXBlciBCb3QgRmlnaHQgTW9kZSIK4pSCICAg4pSU4pSAIEVudGVycHJpc2Ug4oaSICJCb3QgTWFuYWdlbWVudCBmb3IgRW50ZXJwcmlzZSIK4pSc4pSAIFdvcmtlcnMgQVBJIGludGVncmF0aW9uIOKGkiBhcGkubWQK4pSc4pSAIFdBRiBydWxlcyDihpIgcGF0dGVybnMubWQK4pSc4pSAIERlYnVnZ2luZyDihpIgZ290Y2hhcy5tZArilJTilIAgQW5hbHl0aWNzIOKGkiBhcGkubWQjYm90LWFuYWx5dGljcwpgYGAKCiMjIFJlYWRpbmcgT3JkZXIKCnwgVGFzayB8IEZpbGVzIHRvIFJlYWQgfAp8LS0tLS0tfC0tLS0tLS0tLS0tLS0tLXwKfCBFbmFibGUgYm90IHByb3RlY3Rpb24gfCBSRUFETUUg4oaSIGNvbmZpZ3VyYXRpb24ubWQgfAp8IFdvcmtlcnMgYm90IGRldGVjdGlvbiB8IFJFQURNRSDihpIgYXBpLm1kIHwKfCBXQUYgcnVsZSB0ZW1wbGF0ZXMgfCBSRUFETUUg4oaSIHBhdHRlcm5zLm1kIHwKfCBEZWJ1ZyBib3QgaXNzdWVzIHwgZ290Y2hhcy5tZCB8CnwgQWR2YW5jZWQgYW5hbHl0aWNzIHwgYXBpLm1kI2JvdC1hbmFseXRpY3MgfAoKIyMgQ29yZSBDb25jZXB0cwoKKipCb3QgU2NvcmVzKio6IDEtOTkgKDEgPSBkZWZpbml0ZWx5IGF1dG9tYXRlZCwgOTkgPSBkZWZpbml0ZWx5IGh1bWFuKS4gVGhyZXNob2xkOiA8MzAgaW5kaWNhdGVzIGJvdCB0cmFmZmljLiBFbnRlcnByaXNlIGdldHMgZ3JhbnVsYXIgMS05OTsgUHJvL0J1c2luZXNzIGdldCBncm91cGluZ3Mgb25seS4KCioqRGV0ZWN0aW9uIEVuZ2luZXMqKjogSGV1cmlzdGljcyAoa25vd24gZmluZ2VycHJpbnRzLCBhc3NpZ25zIHNjb3JlPTEpLCBNTCAobWFqb3JpdHkgb2YgZGV0ZWN0aW9ucywgc3VwZXJ2aXNlZCBsZWFybmluZyBvbiBiaWxsaW9ucyBvZiByZXF1ZXN0cyksIEFub21hbHkgRGV0ZWN0aW9uIChvcHRpb25hbCwgYmFzZWxpbmUgdHJhZmZpYyBhbmFseXNpcyksIEphdmFTY3JpcHQgRGV0ZWN0aW9ucyAoaGVhZGxlc3MgYnJvd3NlciBkZXRlY3Rpb24pLgoKKipWZXJpZmllZCBCb3RzKio6IEFsbG93bGlzdGVkIGdvb2QgYm90cyAoc2VhcmNoIGVuZ2luZXMsIEFJIGNyYXdsZXJzKSB2ZXJpZmllZCB2aWEgcmV2ZXJzZSBETlMgb3IgV2ViIEJvdCBBdXRoLiBBY2Nlc3MgdmlhIGBjZi5ib3RfbWFuYWdlbWVudC52ZXJpZmllZF9ib3RgIG9yIGBjZi52ZXJpZmllZF9ib3RfY2F0ZWdvcnlgLgoKIyMgUGxhdGZvcm0gTGltaXRzCgp8IFBsYW4gfCBCb3QgU2NvcmVzIHwgSkEzL0pBNCB8IEN1c3RvbSBSdWxlcyB8IEFuYWx5dGljcyBSZXRlbnRpb24gfAp8LS0tLS0tfC0tLS0tLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tLS0tfAp8IEZyZWUgfCBObyAoYXV0by1ibG9jayBvbmx5KSB8IE5vIHwgNSB8IE4vQSAobm8gYW5hbHl0aWNzKSB8CnwgUHJvL0J1c2luZXNzIHwgR3JvdXBpbmdzIG9ubHkgfCBObyB8IDIwLzEwMCB8IDMwIGRheXMgKDcyaCBhdCBhIHRpbWUpIHwKfCBFbnRlcnByaXNlIHwgMS05OSBncmFudWxhciB8IFllcyB8IDEsMDAwKyB8IDMwIGRheXMgKDEgd2VlayBhdCBhIHRpbWUpIHwKCiMjIEJhc2ljIFBhdHRlcm5zCgpgYGB0eXBlc2NyaXB0Ci8vIFdvcmtlcnM6IENoZWNrIGJvdCBzY29yZQpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCk6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IGJvdFNjb3JlID0gcmVxdWVzdC5jZj8uYm90TWFuYWdlbWVudD8uc2NvcmU7CiAgICBpZiAoYm90U2NvcmUgJiYgYm90U2NvcmUgPCAzMCAmJiAhcmVxdWVzdC5jZj8uYm90TWFuYWdlbWVudD8udmVyaWZpZWRCb3QpIHsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnQm90IGRldGVjdGVkJywgeyBzdGF0dXM6IDQwMyB9KTsKICAgIH0KICAgIHJldHVybiBmZXRjaChyZXF1ZXN0KTsKICB9Cn07CmBgYAoKYGBgdHh0CiMgV0FGOiBCbG9jayBkZWZpbml0ZSBib3RzCihjZi5ib3RfbWFuYWdlbWVudC5zY29yZSBlcSAxIGFuZCBub3QgY2YuYm90X21hbmFnZW1lbnQudmVyaWZpZWRfYm90KQoKIyBXQUY6IFByb3RlY3Qgc2Vuc2l0aXZlIGVuZHBvaW50cwooY2YuYm90X21hbmFnZW1lbnQuc2NvcmUgbHQgNTAgYW5kIGh0dHAucmVxdWVzdC51cmkucGF0aCBpbiB7Ii9sb2dpbiIgIi9jaGVja291dCJ9IGFuZCBub3QgY2YuYm90X21hbmFnZW1lbnQudmVyaWZpZWRfYm90KQpgYGAKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gUHJvZHVjdCB0aWVycywgV0FGIHJ1bGUgc2V0dXAsIEphdmFTY3JpcHQgRGV0ZWN0aW9ucywgTUwgYXV0by11cGRhdGVzCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gV29ya2VycyBCb3RNYW5hZ2VtZW50IGludGVyZmFjZSwgV0FGIGZpZWxkcywgSkE0IFNpZ25hbHMKLSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gRS1jb21tZXJjZSwgQVBJIHByb3RlY3Rpb24sIG1vYmlsZSBhcHAgYWxsb3dsaXN0aW5nLCBTRU8tZnJpZW5kbHkgaGFuZGxpbmcKLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIEZhbHNlIHBvc2l0aXZlcy9uZWdhdGl2ZXMsIHNjb3JlPTAgaXNzdWVzLCBKU0QgbGltaXRhdGlvbnMsIENTUCByZXF1aXJlbWVudHMKCiMjIFNlZSBBbHNvCgotIFt3YWZdKC4uL3dhZi8pIC0gV0FGIGN1c3RvbSBydWxlcyBmb3IgYm90IGVuZm9yY2VtZW50Ci0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIFdvcmtlcnMgcmVxdWVzdC5jZi5ib3RNYW5hZ2VtZW50IEFQSQotIFthcGktc2hpZWxkXSguLi9hcGktc2hpZWxkLykgLSBBUEktc3BlY2lmaWMgYm90IHByb3RlY3Rpb24K
+# Cloudflare Bot Management
+
+Enterprise-grade bot detection, protection, and mitigation using ML/heuristics, bot scores, JavaScript detections, and verified bot handling.
+
+## Overview
+
+Bot Management provides multi-tier protection:
+- **Free (Bot Fight Mode)**: Auto-blocks definite bots, no config
+- **Pro/Business (Super Bot Fight Mode)**: Configurable actions, static resource protection, analytics groupings
+- **Enterprise (Bot Management)**: Granular 1-99 scores, WAF integration, JA3/JA4 fingerprinting, Workers API, Advanced Analytics
+
+## Quick Start
+
+```txt
+# Dashboard: Security > Bots
+# Enterprise: Deploy rule template
+(cf.bot_management.score eq 1 and not cf.bot_management.verified_bot) → Block
+(cf.bot_management.score le 29 and not cf.bot_management.verified_bot) → Managed Challenge
+```
+
+## What Do You Need?
+
+```txt
+├─ Initial setup → configuration.md
+│   ├─ Free tier → "Bot Fight Mode"
+│   ├─ Pro/Business → "Super Bot Fight Mode"
+│   └─ Enterprise → "Bot Management for Enterprise"
+├─ Workers API integration → api.md
+├─ WAF rules → patterns.md
+├─ Debugging → gotchas.md
+└─ Analytics → api.md#bot-analytics
+```
+
+## Reading Order
+
+| Task | Files to Read |
+|------|---------------|
+| Enable bot protection | README → configuration.md |
+| Workers bot detection | README → api.md |
+| WAF rule templates | README → patterns.md |
+| Debug bot issues | gotchas.md |
+| Advanced analytics | api.md#bot-analytics |
+
+## Core Concepts
+
+**Bot Scores**: 1-99 (1 = definitely automated, 99 = definitely human). Threshold: <30 indicates bot traffic. Enterprise gets granular 1-99; Pro/Business get groupings only.
+
+**Detection Engines**: Heuristics (known fingerprints, assigns score=1), ML (majority of detections, supervised learning on billions of requests), Anomaly Detection (optional, baseline traffic analysis), JavaScript Detections (headless browser detection).
+
+**Verified Bots**: Allowlisted good bots (search engines, AI crawlers) verified via reverse DNS or Web Bot Auth. Access via `cf.bot_management.verified_bot` or `cf.verified_bot_category`.
+
+## Platform Limits
+
+| Plan | Bot Scores | JA3/JA4 | Custom Rules | Analytics Retention |
+|------|------------|---------|--------------|---------------------|
+| Free | No (auto-block only) | No | 5 | N/A (no analytics) |
+| Pro/Business | Groupings only | No | 20/100 | 30 days (72h at a time) |
+| Enterprise | 1-99 granular | Yes | 1,000+ | 30 days (1 week at a time) |
+
+## Basic Patterns
+
+```typescript
+// Workers: Check bot score
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const botScore = request.cf?.botManagement?.score;
+    if (botScore && botScore < 30 && !request.cf?.botManagement?.verifiedBot) {
+      return new Response('Bot detected', { status: 403 });
+    }
+    return fetch(request);
+  }
+};
+```
+
+```txt
+# WAF: Block definite bots
+(cf.bot_management.score eq 1 and not cf.bot_management.verified_bot)
+
+# WAF: Protect sensitive endpoints
+(cf.bot_management.score lt 50 and http.request.uri.path in {"/login" "/checkout"} and not cf.bot_management.verified_bot)
+```
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - Product tiers, WAF rule setup, JavaScript Detections, ML auto-updates
+- [api.md](./api.md) - Workers BotManagement interface, WAF fields, JA4 Signals
+- [patterns.md](./patterns.md) - E-commerce, API protection, mobile app allowlisting, SEO-friendly handling
+- [gotchas.md](./gotchas.md) - False positives/negatives, score=0 issues, JSD limitations, CSP requirements
+
+## See Also
+
+- [waf](../waf/) - WAF custom rules for bot enforcement
+- [workers](../workers/) - Workers request.cf.botManagement API
+- [api-shield](../api-shield/) - API-specific bot protection

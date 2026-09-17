@@ -1,1 +1,99 @@
-IyBDbG91ZGZsYXJlIE5ldHdvcmsgSW50ZXJjb25uZWN0IChDTkkpCgpQcml2YXRlLCBoaWdoLXBlcmZvcm1hbmNlIGNvbm5lY3Rpdml0eSB0byBDbG91ZGZsYXJlJ3MgbmV0d29yay4gKipFbnRlcnByaXNlLW9ubHkqKi4KCiMjIENvbm5lY3Rpb24gVHlwZXMKCioqRGlyZWN0Kio6IFBoeXNpY2FsIGZpYmVyIGluIHNoYXJlZCBkYXRhY2VudGVyLiAxMC8xMDAgR2Jwcy4gWW91IG9yZGVyIGNyb3NzLWNvbm5lY3QuCgoqKlBhcnRuZXIqKjogVmlydHVhbCB2aWEgQ29uc29sZSBDb25uZWN0LCBFcXVpbml4LCBNZWdhcG9ydCwgZXRjLiBNYW5hZ2VkIHZpYSBwYXJ0bmVyIFNETi4KCioqQ2xvdWQqKjogQVdTIERpcmVjdCBDb25uZWN0IG9yIEdDUCBDbG91ZCBJbnRlcmNvbm5lY3QuIE1hZ2ljIFdBTiBvbmx5LgoKIyMgRGF0YXBsYW5lIFZlcnNpb25zCgoqKnYxIChDbGFzc2ljKSoqOiBHUkUgdHVubmVsIHN1cHBvcnQsIFZMQU4vQkZEL0xBQ1AsIGFzeW1tZXRyaWMgTVRVICgxNTAw4oaTLzE0NzbihpEpLCBwZWVyaW5nIHN1cHBvcnQuCgoqKnYyIChCZXRhKSoqOiBObyBHUkUsIDE1MDAgTVRVIGJvdGggd2F5cywgbm8gVkxBTi9CRkQvTEFDUCB5ZXQsIEVDTVAgaW5zdGVhZC4KCiMjIFVzZSBDYXNlcwoKLSAqKk1hZ2ljIFRyYW5zaXQgRFNSKio6IEREb1MgcHJvdGVjdGlvbiwgZWdyZXNzIHZpYSBJU1AgKHYxL3YyKQotICoqTWFnaWMgVHJhbnNpdCArIEVncmVzcyoqOiBERG9TICsgZWdyZXNzIHZpYSBDRiAodjEvdjIpCi0gKipNYWdpYyBXQU4gKyBaZXJvIFRydXN0Kio6IFByaXZhdGUgYmFja2JvbmUgKHYxIG5lZWRzIEdSRSwgdjIgbmF0aXZlKQotICoqUGVlcmluZyoqOiBQdWJsaWMgcm91dGVzIGF0IFBvUCAodjEgb25seSkKLSAqKkFwcCBTZWN1cml0eSoqOiBXQUYvQ2FjaGUvTEIgKHYxL3YyIG92ZXIgTWFnaWMgVHJhbnNpdCkKCiMjIFByZXJlcXVpc2l0ZXMKCi0gRW50ZXJwcmlzZSBwbGFuCi0gSVB2NCAvMjQrIG9yIElQdjYgLzQ4KyBwcmVmaXhlcwotIEJHUCBBU04gZm9yIHYxCi0gU2VlIFtsb2NhdGlvbnMgUERGXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vbmV0d29yay1pbnRlcmNvbm5lY3Qvc3RhdGljL2NuaS1sb2NhdGlvbnMtMjAyNi0wMS5wZGYpCgojIyBTcGVjcwoKLSAvMzEgcG9pbnQtdG8tcG9pbnQgc3VibmV0cwotIDEwa20gbWF4IG9wdGljYWwgZGlzdGFuY2UKLSAxMEc6IDEwR0JBU0UtTFIgc2luZ2xlLW1vZGUKLSAxMDBHOiAxMDBHQkFTRS1MUjQgc2luZ2xlLW1vZGUKLSAqKk5vIFNMQSoqIChmcmVlIHNlcnZpY2UpCi0gQmFja3VwIEludGVybmV0IHJlcXVpcmVkCgojIyBUaHJvdWdocHV0Cgp8IERpcmVjdGlvbiB8IDEwRyB8IDEwMEcgfAp8LS0tLS0tLS0tLS18LS0tLS18LS0tLS0tfAp8IENGIOKGkiBDdXN0b21lciB8IDEwIEdicHMgfCAxMDAgR2JwcyB8CnwgQ3VzdG9tZXIg4oaSIENGIChwZWVyaW5nKSB8IDEwIEdicHMgfCAxMDAgR2JwcyB8CnwgQ3VzdG9tZXIg4oaSIENGIChNYWdpYykgfCAxIEdicHMvdHVubmVsIG9yIENOSSB8IDEgR2Jwcy90dW5uZWwgb3IgQ05JIHwKCiMjIFRpbWVsaW5lCgoyLTQgd2Vla3MgdHlwaWNhbC4gU3RlcHM6IHJlcXVlc3Qg4oaSIGNvbmZpZyByZXZpZXcg4oaSIG9yZGVyIGNvbm5lY3Rpb24g4oaSIGNvbmZpZ3VyZSDihpIgdGVzdCDihpIgZW5hYmxlIGhlYWx0aCBjaGVja3Mg4oaSIGFjdGl2YXRlIOKGkiBtb25pdG9yLgoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKLSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIEJHUCwgcm91dGluZywgc2V0dXAKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBBUEkgZW5kcG9pbnRzLCBTREtzCi0gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIEhBLCBoeWJyaWQgY2xvdWQsIGZhaWxvdmVyCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBUcm91Ymxlc2hvb3RpbmcsIGxpbWl0cwoKIyMgUmVhZGluZyBPcmRlciBieSBUYXNrCgp8IFRhc2sgfCBGaWxlcyB0byBMb2FkIHwKfC0tLS0tLXwtLS0tLS0tLS0tLS0tLS18CnwgSW5pdGlhbCBzZXR1cCB8IFJFQURNRSDihpIgY29uZmlndXJhdGlvbi5tZCDihpIgYXBpLm1kIHwKfCBDcmVhdGUgaW50ZXJjb25uZWN0IHZpYSBBUEkgfCBhcGkubWQg4oaSIGdvdGNoYXMubWQgfAp8IERlc2lnbiBIQSBhcmNoaXRlY3R1cmUgfCBwYXR0ZXJucy5tZCDihpIgUkVBRE1FIHwKfCBUcm91Ymxlc2hvb3QgY29ubmVjdGlvbiB8IGdvdGNoYXMubWQg4oaSIGNvbmZpZ3VyYXRpb24ubWQgfAp8IENsb3VkIGludGVncmF0aW9uIChBV1MvR0NQKSB8IGNvbmZpZ3VyYXRpb24ubWQg4oaSIHBhdHRlcm5zLm1kIHwKfCBNb25pdG9yICsgYWxlcnRzIHwgY29uZmlndXJhdGlvbi5tZCB8CgojIyBBdXRvbWF0aW9uIEJvdW5kYXJ5CgoqKkFQSS1BdXRvbWF0YWJsZToqKgotIExpc3QvY3JlYXRlL2RlbGV0ZSBpbnRlcmNvbm5lY3RzIChEaXJlY3QsIFBhcnRuZXIpCi0gTGlzdCBhdmFpbGFibGUgc2xvdHMKLSBHZXQgaW50ZXJjb25uZWN0IHN0YXR1cwotIERvd25sb2FkIExPQSBQREYKLSBDcmVhdGUvdXBkYXRlIENOSSBvYmplY3RzIChCR1AgY29uZmlnKQotIFF1ZXJ5IHNldHRpbmdzCgoqKlJlcXVpcmVzIEFjY291bnQgVGVhbToqKgotIEluaXRpYWwgcmVxdWVzdCBhcHByb3ZhbAotIEFXUyBEaXJlY3QgQ29ubmVjdCBzZXR1cCAoc2VuZCBMT0ErVkxBTiB0byBDRikKLSBHQ1AgQ2xvdWQgSW50ZXJjb25uZWN0IGZpbmFsIGFjdGl2YXRpb24KLSBQYXJ0bmVyIGludGVyY29ubmVjdCBhY2NlcHRhbmNlIChFcXVpbml4LCBNZWdhcG9ydCkKLSBWTEFOIGFzc2lnbm1lbnQgKHYxKQotIENvbmZpZ3VyYXRpb24gZG9jdW1lbnQgZ2VuZXJhdGlvbiAodjEpCi0gRXNjYWxhdGlvbnMgKyB0cm91Ymxlc2hvb3Rpbmcgc3VwcG9ydAoKKipDYW5ub3QgQmUgQXV0b21hdGVkOioqCi0gUGh5c2ljYWwgY3Jvc3MtY29ubmVjdCBpbnN0YWxsYXRpb24gKERpcmVjdCkKLSBQYXJ0bmVyIHBvcnRhbCBvcGVyYXRpb25zICh2aXJ0dWFsIGNpcmN1aXQgb3JkZXJpbmcpCi0gQVdTL0dDUCBwb3J0YWwgb3BlcmF0aW9ucwotIE1haW50ZW5hbmNlIHdpbmRvdyBjb29yZGluYXRpb24KCiMjIFNlZSBBbHNvCi0gW3R1bm5lbF0oLi4vdHVubmVsLykgLSBBbHRlcm5hdGl2ZSBmb3IgcHJpdmF0ZSBuZXR3b3JrIGNvbm5lY3Rpdml0eQotIFtzcGVjdHJ1bV0oLi4vc3BlY3RydW0vKSAtIExheWVyIDQgcHJveHkgZm9yIFRDUC9VRFAgdHJhZmZpYwo=
+# Cloudflare Network Interconnect (CNI)
+
+Private, high-performance connectivity to Cloudflare's network. **Enterprise-only**.
+
+## Connection Types
+
+**Direct**: Physical fiber in shared datacenter. 10/100 Gbps. You order cross-connect.
+
+**Partner**: Virtual via Console Connect, Equinix, Megaport, etc. Managed via partner SDN.
+
+**Cloud**: AWS Direct Connect or GCP Cloud Interconnect. Magic WAN only.
+
+## Dataplane Versions
+
+**v1 (Classic)**: GRE tunnel support, VLAN/BFD/LACP, asymmetric MTU (1500↓/1476↑), peering support.
+
+**v2 (Beta)**: No GRE, 1500 MTU both ways, no VLAN/BFD/LACP yet, ECMP instead.
+
+## Use Cases
+
+- **Magic Transit DSR**: DDoS protection, egress via ISP (v1/v2)
+- **Magic Transit + Egress**: DDoS + egress via CF (v1/v2)
+- **Magic WAN + Zero Trust**: Private backbone (v1 needs GRE, v2 native)
+- **Peering**: Public routes at PoP (v1 only)
+- **App Security**: WAF/Cache/LB (v1/v2 over Magic Transit)
+
+## Prerequisites
+
+- Enterprise plan
+- IPv4 /24+ or IPv6 /48+ prefixes
+- BGP ASN for v1
+- See [locations PDF](https://developers.cloudflare.com/network-interconnect/static/cni-locations-2026-01.pdf)
+
+## Specs
+
+- /31 point-to-point subnets
+- 10km max optical distance
+- 10G: 10GBASE-LR single-mode
+- 100G: 100GBASE-LR4 single-mode
+- **No SLA** (free service)
+- Backup Internet required
+
+## Throughput
+
+| Direction | 10G | 100G |
+|-----------|-----|------|
+| CF → Customer | 10 Gbps | 100 Gbps |
+| Customer → CF (peering) | 10 Gbps | 100 Gbps |
+| Customer → CF (Magic) | 1 Gbps/tunnel or CNI | 1 Gbps/tunnel or CNI |
+
+## Timeline
+
+2-4 weeks typical. Steps: request → config review → order connection → configure → test → enable health checks → activate → monitor.
+
+## In This Reference
+- [configuration.md](./configuration.md) - BGP, routing, setup
+- [api.md](./api.md) - API endpoints, SDKs
+- [patterns.md](./patterns.md) - HA, hybrid cloud, failover
+- [gotchas.md](./gotchas.md) - Troubleshooting, limits
+
+## Reading Order by Task
+
+| Task | Files to Load |
+|------|---------------|
+| Initial setup | README → configuration.md → api.md |
+| Create interconnect via API | api.md → gotchas.md |
+| Design HA architecture | patterns.md → README |
+| Troubleshoot connection | gotchas.md → configuration.md |
+| Cloud integration (AWS/GCP) | configuration.md → patterns.md |
+| Monitor + alerts | configuration.md |
+
+## Automation Boundary
+
+**API-Automatable:**
+- List/create/delete interconnects (Direct, Partner)
+- List available slots
+- Get interconnect status
+- Download LOA PDF
+- Create/update CNI objects (BGP config)
+- Query settings
+
+**Requires Account Team:**
+- Initial request approval
+- AWS Direct Connect setup (send LOA+VLAN to CF)
+- GCP Cloud Interconnect final activation
+- Partner interconnect acceptance (Equinix, Megaport)
+- VLAN assignment (v1)
+- Configuration document generation (v1)
+- Escalations + troubleshooting support
+
+**Cannot Be Automated:**
+- Physical cross-connect installation (Direct)
+- Partner portal operations (virtual circuit ordering)
+- AWS/GCP portal operations
+- Maintenance window coordination
+
+## See Also
+- [tunnel](../tunnel/) - Alternative for private network connectivity
+- [spectrum](../spectrum/) - Layer 4 proxy for TCP/UDP traffic

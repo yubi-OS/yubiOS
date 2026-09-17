@@ -1,1 +1,89 @@
-IyBDbG91ZGZsYXJlIFRhaWwgV29ya2VycwoKU3BlY2lhbGl6ZWQgV29ya2VycyB0aGF0IGNvbnN1bWUgZXhlY3V0aW9uIGV2ZW50cyBmcm9tIHByb2R1Y2VyIFdvcmtlcnMgZm9yIGxvZ2dpbmcsIGRlYnVnZ2luZywgYW5hbHl0aWNzLCBhbmQgb2JzZXJ2YWJpbGl0eS4KCiMjIFdoZW4gdG8gVXNlIFRoaXMgUmVmZXJlbmNlCgotIEltcGxlbWVudGluZyBvYnNlcnZhYmlsaXR5L2xvZ2dpbmcgZm9yIENsb3VkZmxhcmUgV29ya2VycwotIFByb2Nlc3NpbmcgV29ya2VyIGV4ZWN1dGlvbiBldmVudHMsIGxvZ3MsIGV4Y2VwdGlvbnMKLSBCdWlsZGluZyBjdXN0b20gYW5hbHl0aWNzIG9yIGVycm9yIHRyYWNraW5nCi0gQ29uZmlndXJpbmcgcmVhbC10aW1lIGV2ZW50IHN0cmVhbWluZwotIFdvcmtpbmcgd2l0aCB0YWlsIGhhbmRsZXJzIG9yIHRhaWwgY29uc3VtZXJzCgojIyBDb3JlIENvbmNlcHRzCgojIyMgV2hhdCBBcmUgVGFpbCBXb3JrZXJzPwoKVGFpbCBXb3JrZXJzIGF1dG9tYXRpY2FsbHkgcHJvY2VzcyBldmVudHMgZnJvbSBwcm9kdWNlciBXb3JrZXJzICh0aGUgV29ya2VycyBiZWluZyBtb25pdG9yZWQpLiBUaGV5IHJlY2VpdmU6Ci0gSFRUUCByZXF1ZXN0L3Jlc3BvbnNlIGluZm8KLSBDb25zb2xlIGxvZ3MgKGBjb25zb2xlLmxvZy9lcnJvci93YXJuL2RlYnVnYCkKLSBVbmNhdWdodCBleGNlcHRpb25zCi0gRXhlY3V0aW9uIG91dGNvbWVzIChgb2tgLCBgZXhjZXB0aW9uYCwgYGV4Y2VlZGVkQ3B1YCwgZXRjLikKLSBEaWFnbm9zdGljIGNoYW5uZWwgZXZlbnRzCgoqKktleSBjaGFyYWN0ZXJpc3RpY3M6KioKLSBJbnZva2VkIEFGVEVSIHByb2R1Y2VyIGZpbmlzaGVzIGV4ZWN1dGluZwotIENhcHR1cmUgZW50aXJlIHJlcXVlc3QgbGlmZWN5Y2xlIGluY2x1ZGluZyBTZXJ2aWNlIEJpbmRpbmdzIGFuZCBEeW5hbWljIERpc3BhdGNoIHN1Yi1yZXF1ZXN0cwotIEJpbGxlZCBieSBDUFUgdGltZSwgbm90IHJlcXVlc3QgY291bnQKLSBBdmFpbGFibGUgb24gV29ya2VycyBQYWlkIGFuZCBFbnRlcnByaXNlIHRpZXJzCgojIyMgQWx0ZXJuYXRpdmU6IE9wZW5UZWxlbWV0cnkgRXhwb3J0CgoqKkJlZm9yZSB1c2luZyBUYWlsIFdvcmtlcnMsIGNvbnNpZGVyIE9wZW5UZWxlbWV0cnk6KioKCkZvciBiYXRjaCBleHBvcnRzIHRvIG9ic2VydmFiaWxpdHkgdG9vbHMgKFNlbnRyeSwgR3JhZmFuYSwgSG9uZXljb21iKToKLSBPVEVMIGV4cG9ydCBzZW5kcyBsb2dzL3RyYWNlcyBpbiBiYXRjaGVzIChtb3JlIGVmZmljaWVudCkKLSBCdWlsdC1pbiBpbnRlZ3JhdGlvbnMgd2l0aCBwb3B1bGFyIHBsYXRmb3JtcwotIExvd2VyIG92ZXJoZWFkIHRoYW4gVGFpbCBXb3JrZXJzCi0gKipVc2UgVGFpbCBXb3JrZXJzIG9ubHkgZm9yIGN1c3RvbSByZWFsLXRpbWUgcHJvY2Vzc2luZyoqCgojIyBEZWNpc2lvbiBUcmVlCgpgYGAKTmVlZCBvYnNlcnZhYmlsaXR5IGZvciBXb3JrZXJzPwrilJzilIAgQmF0Y2ggZXhwb3J0IHRvIGtub3duIHRvb2xzIChTZW50cnkvR3JhZmFuYS9Ib25leWNvbWIpPwrilIIgIOKUlOKUgCBVc2UgT3BlblRlbGVtZXRyeSBleHBvcnQgKG5vdCBUYWlsIFdvcmtlcnMpCuKUnOKUgCBDdXN0b20gcmVhbC10aW1lIHByb2Nlc3NpbmcgbmVlZGVkPwrilIIgIOKUnOKUgCBBZ2dyZWdhdGVkIG1ldHJpY3M/CuKUgiAg4pSCICDilJTilIAgVXNlIFRhaWwgV29ya2VyICsgQW5hbHl0aWNzIEVuZ2luZQrilIIgIOKUnOKUgCBFcnJvciB0cmFja2luZz8K4pSCICDilIIgIOKUlOKUgCBVc2UgVGFpbCBXb3JrZXIgKyBleHRlcm5hbCBzZXJ2aWNlCuKUgiAg4pSc4pSAIEN1c3RvbSBsb2dnaW5nL2RlYnVnZ2luZz8K4pSCICDilIIgIOKUlOKUgCBVc2UgVGFpbCBXb3JrZXIgKyBLVi9IVFRQIGVuZHBvaW50CuKUgiAg4pSU4pSAIENvbXBsZXggZXZlbnQgcHJvY2Vzc2luZz8K4pSCICAgICDilJTilIAgVXNlIFRhaWwgV29ya2VyICsgRHVyYWJsZSBPYmplY3RzCuKUlOKUgCBRdWljayBkZWJ1Z2dpbmc/CiAgIOKUlOKUgCBVc2UgYHdyYW5nbGVyIHRhaWxgIChkaWZmZXJlbnQgZnJvbSBUYWlsIFdvcmtlcnMpCmBgYAoKIyMgUmVhZGluZyBPcmRlcgoKMS4gKipbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkqKiAtIFNldCB1cCBUYWlsIFdvcmtlcnMKMi4gKipbYXBpLm1kXShhcGkubWQpKiogLSBIYW5kbGVyIHNpZ25hdHVyZSwgdHlwZXMsIHJlZGFjdGlvbgozLiAqKltwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpKiogLSBDb21tb24gdXNlIGNhc2VzIGFuZCBpbnRlZ3JhdGlvbnMKNC4gKipbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkqKiAtIFBpdGZhbGxzIGFuZCBkZWJ1Z2dpbmcgdGlwcwoKIyMgUXVpY2sgRXhhbXBsZQoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgdGFpbChldmVudHMsIGVudiwgY3R4KSB7CiAgICAvLyBQcm9jZXNzIGV2ZW50cyBmcm9tIHByb2R1Y2VyIFdvcmtlcgogICAgY3R4LndhaXRVbnRpbCgKICAgICAgZmV0Y2goZW52LkxPR19FTkRQT0lOVCwgewogICAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICAgIGhlYWRlcnM6IHsgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIiB9LAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGV2ZW50cyksCiAgICAgIH0pCiAgICApOwogIH0KfTsKYGBgCgojIyBSZWxhdGVkIFNraWxscwoKLSAqKm9ic2VydmFiaWxpdHkqKiAtIEdlbmVyYWwgV29ya2VycyBvYnNlcnZhYmlsaXR5IHBhdHRlcm5zLCBPVEVMIGV4cG9ydAotICoqYW5hbHl0aWNzLWVuZ2luZSoqIC0gQWdncmVnYXRlZCBtZXRyaWNzIHN0b3JhZ2UgZm9yIHRhaWwgZXZlbnQgZGF0YQotICoqZHVyYWJsZS1vYmplY3RzKiogLSBTdGF0ZWZ1bCBldmVudCBwcm9jZXNzaW5nLCBiYXRjaGluZyB0YWlsIGV2ZW50cwotICoqbG9ncHVzaCoqIC0gQWx0ZXJuYXRpdmUgZm9yIGJhdGNoIGxvZyBleHBvcnQgKG5vbi1yZWFsLXRpbWUpCi0gKip3b3JrZXJzLWZvci1wbGF0Zm9ybXMqKiAtIER5bmFtaWMgZGlzcGF0Y2ggd2l0aCB0YWlsIGNvbnN1bWVycwo=
+# Cloudflare Tail Workers
+
+Specialized Workers that consume execution events from producer Workers for logging, debugging, analytics, and observability.
+
+## When to Use This Reference
+
+- Implementing observability/logging for Cloudflare Workers
+- Processing Worker execution events, logs, exceptions
+- Building custom analytics or error tracking
+- Configuring real-time event streaming
+- Working with tail handlers or tail consumers
+
+## Core Concepts
+
+### What Are Tail Workers?
+
+Tail Workers automatically process events from producer Workers (the Workers being monitored). They receive:
+- HTTP request/response info
+- Console logs (`console.log/error/warn/debug`)
+- Uncaught exceptions
+- Execution outcomes (`ok`, `exception`, `exceededCpu`, etc.)
+- Diagnostic channel events
+
+**Key characteristics:**
+- Invoked AFTER producer finishes executing
+- Capture entire request lifecycle including Service Bindings and Dynamic Dispatch sub-requests
+- Billed by CPU time, not request count
+- Available on Workers Paid and Enterprise tiers
+
+### Alternative: OpenTelemetry Export
+
+**Before using Tail Workers, consider OpenTelemetry:**
+
+For batch exports to observability tools (Sentry, Grafana, Honeycomb):
+- OTEL export sends logs/traces in batches (more efficient)
+- Built-in integrations with popular platforms
+- Lower overhead than Tail Workers
+- **Use Tail Workers only for custom real-time processing**
+
+## Decision Tree
+
+```
+Need observability for Workers?
+├─ Batch export to known tools (Sentry/Grafana/Honeycomb)?
+│  └─ Use OpenTelemetry export (not Tail Workers)
+├─ Custom real-time processing needed?
+│  ├─ Aggregated metrics?
+│  │  └─ Use Tail Worker + Analytics Engine
+│  ├─ Error tracking?
+│  │  └─ Use Tail Worker + external service
+│  ├─ Custom logging/debugging?
+│  │  └─ Use Tail Worker + KV/HTTP endpoint
+│  └─ Complex event processing?
+│     └─ Use Tail Worker + Durable Objects
+└─ Quick debugging?
+   └─ Use `wrangler tail` (different from Tail Workers)
+```
+
+## Reading Order
+
+1. **[configuration.md](configuration.md)** - Set up Tail Workers
+2. **[api.md](api.md)** - Handler signature, types, redaction
+3. **[patterns.md](patterns.md)** - Common use cases and integrations
+4. **[gotchas.md](gotchas.md)** - Pitfalls and debugging tips
+
+## Quick Example
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    // Process events from producer Worker
+    ctx.waitUntil(
+      fetch(env.LOG_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(events),
+      })
+    );
+  }
+};
+```
+
+## Related Skills
+
+- **observability** - General Workers observability patterns, OTEL export
+- **analytics-engine** - Aggregated metrics storage for tail event data
+- **durable-objects** - Stateful event processing, batching tail events
+- **logpush** - Alternative for batch log export (non-real-time)
+- **workers-for-platforms** - Dynamic dispatch with tail consumers

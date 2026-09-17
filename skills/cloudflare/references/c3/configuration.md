@@ -1,1 +1,81 @@
-IyBDMyBHZW5lcmF0ZWQgQ29uZmlndXJhdGlvbgoKIyMgT3V0cHV0IFN0cnVjdHVyZQoKYGBgCm15LWFwcC8K4pSc4pSA4pSAIHNyYy9pbmRleC50cyAgICAgICAgICAjIFdvcmtlciBlbnRyeSBwb2ludArilJzilIDilIAgd3JhbmdsZXIuanNvbmMgICAgICAgICMgQ2xvdWRmbGFyZSBjb25maWcK4pSc4pSA4pSAIHBhY2thZ2UuanNvbiAgICAgICAgICAjIFNjcmlwdHMK4pSc4pSA4pSAIHRzY29uZmlnLmpzb24K4pSU4pSA4pSAIC5naXRpZ25vcmUKYGBgCgojIyB3cmFuZ2xlci5qc29uYwoKYGBganNvbmMKewogICIkc2NoZW1hIjogImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9jbG91ZGZsYXJlL3dvcmtlcnMtc2RrL21haW4vcGFja2FnZXMvd3JhbmdsZXIvY29uZmlnLXNjaGVtYS5qc29uIiwKICAibmFtZSI6ICJteS1hcHAiLAogICJtYWluIjogInNyYy9pbmRleC50cyIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI2LTAxLTI3Igp9CmBgYAoKIyMgQmluZGluZyBQbGFjZWhvbGRlcnMKCkMzIGdlbmVyYXRlcyAqKnBsYWNlaG9sZGVyIElEcyoqIHRoYXQgbXVzdCBiZSByZXBsYWNlZCBiZWZvcmUgZGVwbG95OgoKYGBganNvbmMKewogICJrdl9uYW1lc3BhY2VzIjogW3sgImJpbmRpbmciOiAiTVlfS1YiLCAiaWQiOiAicGxhY2Vob2xkZXJfa3ZfaWQiIH1dLAogICJkMV9kYXRhYmFzZXMiOiBbeyAiYmluZGluZyI6ICJEQiIsICJkYXRhYmFzZV9pZCI6ICIwMDAwMDAwMC0uLi4iIH1dCn0KYGBgCgoqKlJlcGxhY2Ugd2l0aCByZWFsIElEczoqKgpgYGBiYXNoCm5weCB3cmFuZ2xlciBrdiBuYW1lc3BhY2UgY3JlYXRlIE1ZX0tWICAgIyBSZXR1cm5zIHJlYWwgSUQKbnB4IHdyYW5nbGVyIGQxIGNyZWF0ZSBteS1kYXRhYmFzZSAgICAgICAjIFJldHVybnMgcmVhbCBkYXRhYmFzZV9pZApgYGAKCioqRGVwbG95bWVudCBlcnJvciBpZiBub3QgcmVwbGFjZWQ6KioKYGBgCkVycm9yOiBJbnZhbGlkIEtWIG5hbWVzcGFjZSBJRCAicGxhY2Vob2xkZXJfa3ZfaWQiCmBgYAoKIyMgU2NyaXB0cwoKYGBganNvbgp7CiAgInNjcmlwdHMiOiB7CiAgICAiZGV2IjogIndyYW5nbGVyIGRldiIsCiAgICAiZGVwbG95IjogIndyYW5nbGVyIGRlcGxveSIsCiAgICAiY2YtdHlwZWdlbiI6ICJ3cmFuZ2xlciB0eXBlcyIKICB9Cn0KYGBgCgojIyBUeXBlIEdlbmVyYXRpb24KClJ1biBhZnRlciBhZGRpbmcgYmluZGluZ3M6CmBgYGJhc2gKbnBtIHJ1biBjZi10eXBlZ2VuCmBgYAoKR2VuZXJhdGVzIGAud3JhbmdsZXIvdHlwZXMvcnVudGltZS5kLnRzYDoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBNWV9LVjogS1ZOYW1lc3BhY2U7CiAgREI6IEQxRGF0YWJhc2U7Cn0KYGBgCgojIyBQb3N0LUNyZWF0aW9uIENoZWNrbGlzdAoKMS4gUmV2aWV3IGB3cmFuZ2xlci5qc29uY2AgLSBjaGVjayBuYW1lLCBjb21wYXRpYmlsaXR5X2RhdGUKMi4gUmVwbGFjZSBwbGFjZWhvbGRlciBiaW5kaW5nIElEcyB3aXRoIHJlYWwgcmVzb3VyY2UgSURzCjMuIFJ1biBgbnBtIHJ1biBjZi10eXBlZ2VuYAo0LiBUZXN0OiBgbnBtIHJ1biBkZXZgCjUuIERlcGxveTogYG5wbSBydW4gZGVwbG95YAo2LiBBZGQgc2VjcmV0czogYG5weCB3cmFuZ2xlciBzZWNyZXQgcHV0IFNFQ1JFVF9OQU1FYAo=
+# C3 Generated Configuration
+
+## Output Structure
+
+```
+my-app/
+├── src/index.ts          # Worker entry point
+├── wrangler.jsonc        # Cloudflare config
+├── package.json          # Scripts
+├── tsconfig.json
+└── .gitignore
+```
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "my-app",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-01-27"
+}
+```
+
+## Binding Placeholders
+
+C3 generates **placeholder IDs** that must be replaced before deploy:
+
+```jsonc
+{
+  "kv_namespaces": [{ "binding": "MY_KV", "id": "placeholder_kv_id" }],
+  "d1_databases": [{ "binding": "DB", "database_id": "00000000-..." }]
+}
+```
+
+**Replace with real IDs:**
+```bash
+npx wrangler kv namespace create MY_KV   # Returns real ID
+npx wrangler d1 create my-database       # Returns real database_id
+```
+
+**Deployment error if not replaced:**
+```
+Error: Invalid KV namespace ID "placeholder_kv_id"
+```
+
+## Scripts
+
+```json
+{
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "cf-typegen": "wrangler types"
+  }
+}
+```
+
+## Type Generation
+
+Run after adding bindings:
+```bash
+npm run cf-typegen
+```
+
+Generates `.wrangler/types/runtime.d.ts`:
+```typescript
+interface Env {
+  MY_KV: KVNamespace;
+  DB: D1Database;
+}
+```
+
+## Post-Creation Checklist
+
+1. Review `wrangler.jsonc` - check name, compatibility_date
+2. Replace placeholder binding IDs with real resource IDs
+3. Run `npm run cf-typegen`
+4. Test: `npm run dev`
+5. Deploy: `npm run deploy`
+6. Add secrets: `npx wrangler secret put SECRET_NAME`

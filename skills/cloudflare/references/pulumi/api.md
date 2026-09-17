@@ -1,1 +1,200 @@
-IyBBUEkgJiBEYXRhIFNvdXJjZXMKCiMjIE91dHB1dHMgYW5kIEV4cG9ydHMKCkV4cG9ydCByZXNvdXJjZSBpZGVudGlmaWVyczoKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGNvbnN0IGt2SWQgPSBrdi5pZDsKZXhwb3J0IGNvbnN0IGJ1Y2tldE5hbWUgPSBidWNrZXQubmFtZTsKZXhwb3J0IGNvbnN0IHdvcmtlclVybCA9IHdvcmtlci5zdWJkb21haW47CmV4cG9ydCBjb25zdCBkYklkID0gZGIuaWQ7CmBgYAoKIyMgUmVzb3VyY2UgRGVwZW5kZW5jaWVzCgpJbXBsaWNpdCBkZXBlbmRlbmNpZXMgdmlhIG91dHB1dHM6CgpgYGB0eXBlc2NyaXB0CmNvbnN0IGt2ID0gbmV3IGNsb3VkZmxhcmUuV29ya2Vyc0t2TmFtZXNwYWNlKCJrdiIsIHsKICAgIGFjY291bnRJZDogYWNjb3VudElkLAogICAgdGl0bGU6ICJteS1rdiIsCn0pOwoKLy8gV29ya2VyIGRlcGVuZHMgb24gS1YgKGltcGxpY2l0IHZpYSBrdi5pZCkKY29uc3Qgd29ya2VyID0gbmV3IGNsb3VkZmxhcmUuV29ya2VyU2NyaXB0KCJ3b3JrZXIiLCB7CiAgICBhY2NvdW50SWQ6IGFjY291bnRJZCwKICAgIG5hbWU6ICJteS13b3JrZXIiLAogICAgY29udGVudDogY29kZSwKICAgIGt2TmFtZXNwYWNlQmluZGluZ3M6IFt7bmFtZTogIk1ZX0tWIiwgbmFtZXNwYWNlSWQ6IGt2LmlkfV0sIC8vIENyZWF0ZXMgZGVwZW5kZW5jeQp9KTsKYGBgCgpFeHBsaWNpdCBkZXBlbmRlbmNpZXM6CgpgYGB0eXBlc2NyaXB0CmNvbnN0IG1pZ3JhdGlvbiA9IG5ldyBjb21tYW5kLmxvY2FsLkNvbW1hbmQoIm1pZ3JhdGlvbiIsIHsKICAgIGNyZWF0ZTogcHVsdW1pLmludGVycG9sYXRlYHdyYW5nbGVyIGQxIGV4ZWN1dGUgJHtkYi5uYW1lfSAtLWZpbGUgLi9zY2hlbWEuc3FsYCwKfSwge2RlcGVuZHNPbjogW2RiXX0pOwoKY29uc3Qgd29ya2VyID0gbmV3IGNsb3VkZmxhcmUuV29ya2VyU2NyaXB0KCJ3b3JrZXIiLCB7CiAgICBhY2NvdW50SWQ6IGFjY291bnRJZCwKICAgIG5hbWU6ICJ3b3JrZXIiLAogICAgY29udGVudDogY29kZSwKICAgIGQxRGF0YWJhc2VCaW5kaW5nczogW3tuYW1lOiAiREIiLCBkYXRhYmFzZUlkOiBkYi5pZH1dLAp9LCB7ZGVwZW5kc09uOiBbbWlncmF0aW9uXX0pOyAvLyBFbnN1cmUgbWlncmF0aW9ucyBydW4gZmlyc3QKYGBgCgojIyBVc2luZyBPdXRwdXRzIHdpdGggQVBJIENhbGxzCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGRiID0gbmV3IGNsb3VkZmxhcmUuRDFEYXRhYmFzZSgiZGIiLCB7YWNjb3VudElkLCBuYW1lOiAibXktZGIifSk7CgpkYi5pZC5hcHBseShhc3luYyAoZGJJZCkgPT4gewogICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaCgKICAgICAgICBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyR7YWNjb3VudElkfS9kMS9kYXRhYmFzZS8ke2RiSWR9L3F1ZXJ5YCwKICAgICAgICB7bWV0aG9kOiAiUE9TVCIsIGhlYWRlcnM6IHsiQXV0aG9yaXphdGlvbiI6IGBCZWFyZXIgJHthcGlUb2tlbn1gLCAiQ29udGVudC1UeXBlIjogImFwcGxpY2F0aW9uL2pzb24ifSwKICAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoe3NxbDogIkNSRUFURSBUQUJMRSB1c2VycyAoaWQgSU5UKSJ9KX0KICAgICk7CiAgICByZXR1cm4gcmVzcG9uc2UuanNvbigpOwp9KTsKYGBgCgojIyBDdXN0b20gRHluYW1pYyBQcm92aWRlcnMKCkZvciByZXNvdXJjZXMgbm90IGluIHByb3ZpZGVyOgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgKiBhcyBwdWx1bWkgZnJvbSAiQHB1bHVtaS9wdWx1bWkiOwoKY2xhc3MgRDFNaWdyYXRpb25Qcm92aWRlciBpbXBsZW1lbnRzIHB1bHVtaS5keW5hbWljLlJlc291cmNlUHJvdmlkZXIgewogICAgYXN5bmMgY3JlYXRlKGlucHV0czogYW55KTogUHJvbWlzZTxwdWx1bWkuZHluYW1pYy5DcmVhdGVSZXN1bHQ+IHsKICAgICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKAogICAgICAgICAgICBgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyR7aW5wdXRzLmFjY291bnRJZH0vZDEvZGF0YWJhc2UvJHtpbnB1dHMuZGF0YWJhc2VJZH0vcXVlcnlgLAogICAgICAgICAgICB7bWV0aG9kOiAiUE9TVCIsIGhlYWRlcnM6IHsiQXV0aG9yaXphdGlvbiI6IGBCZWFyZXIgJHtpbnB1dHMuYXBpVG9rZW59YCwgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIn0sCiAgICAgICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7c3FsOiBpbnB1dHMuc3FsfSl9CiAgICAgICAgKTsKICAgICAgICByZXR1cm4ge2lkOiBgJHtpbnB1dHMuZGF0YWJhc2VJZH0tJHtEYXRlLm5vdygpfWAsIG91dHM6IGF3YWl0IHJlc3BvbnNlLmpzb24oKX07CiAgICB9CiAgICBhc3luYyB1cGRhdGUoaWQ6IHN0cmluZywgb2xkczogYW55LCBuZXdzOiBhbnkpOiBQcm9taXNlPHB1bHVtaS5keW5hbWljLlVwZGF0ZVJlc3VsdD4gewogICAgICAgIGlmIChvbGRzLnNxbCAhPT0gbmV3cy5zcWwpIGF3YWl0IHRoaXMuY3JlYXRlKG5ld3MpOwogICAgICAgIHJldHVybiB7fTsKICAgIH0KICAgIGFzeW5jIGRlbGV0ZShpZDogc3RyaW5nLCBwcm9wczogYW55KTogUHJvbWlzZTx2b2lkPiB7fQp9CgpjbGFzcyBEMU1pZ3JhdGlvbiBleHRlbmRzIHB1bHVtaS5keW5hbWljLlJlc291cmNlIHsKICAgIGNvbnN0cnVjdG9yKG5hbWU6IHN0cmluZywgYXJnczogYW55LCBvcHRzPzogcHVsdW1pLkN1c3RvbVJlc291cmNlT3B0aW9ucykgewogICAgICAgIHN1cGVyKG5ldyBEMU1pZ3JhdGlvblByb3ZpZGVyKCksIG5hbWUsIGFyZ3MsIG9wdHMpOwogICAgfQp9Cgpjb25zdCBtaWdyYXRpb24gPSBuZXcgRDFNaWdyYXRpb24oIm1pZ3JhdGlvbiIsIHsKICAgIGFjY291bnRJZCwgZGF0YWJhc2VJZDogZGIuaWQsIGFwaVRva2VuLCBzcWw6ICJDUkVBVEUgVEFCTEUgdXNlcnMgKGlkIElOVCkiLAp9LCB7ZGVwZW5kc09uOiBbZGJdfSk7CmBgYAoKIyMgRGF0YSBTb3VyY2VzCgoqKkdldCBab25lOioqCmBgYHR5cGVzY3JpcHQKY29uc3Qgem9uZSA9IGNsb3VkZmxhcmUuZ2V0Wm9uZSh7bmFtZTogImV4YW1wbGUuY29tIn0pOwpjb25zdCB6b25lSWQgPSB6b25lLnRoZW4oeiA9PiB6LmlkKTsKYGBgCgoqKkdldCBBY2NvdW50cyAodmlhIEFQSSk6KioKVXNlIENsb3VkZmxhcmUgQVBJIGRpcmVjdGx5IG9yIGN1c3RvbSBkeW5hbWljIHJlc291cmNlcy4KCiMjIEltcG9ydCBFeGlzdGluZyBSZXNvdXJjZXMKCmBgYGJhc2gKIyBJbXBvcnQgd29ya2VyCnB1bHVtaSBpbXBvcnQgY2xvdWRmbGFyZTppbmRleC93b3JrZXJTY3JpcHQ6V29ya2VyU2NyaXB0IG15LXdvcmtlciA8YWNjb3VudF9pZD4vPHdvcmtlcl9uYW1lPgoKIyBJbXBvcnQgS1YgbmFtZXNwYWNlCnB1bHVtaSBpbXBvcnQgY2xvdWRmbGFyZTppbmRleC93b3JrZXJzS3ZOYW1lc3BhY2U6V29ya2Vyc0t2TmFtZXNwYWNlIG15LWt2IDxuYW1lc3BhY2VfaWQ+CgojIEltcG9ydCBSMiBidWNrZXQKcHVsdW1pIGltcG9ydCBjbG91ZGZsYXJlOmluZGV4L3IyQnVja2V0OlIyQnVja2V0IG15LWJ1Y2tldCA8YWNjb3VudF9pZD4vPGJ1Y2tldF9uYW1lPgoKIyBJbXBvcnQgRDEgZGF0YWJhc2UKcHVsdW1pIGltcG9ydCBjbG91ZGZsYXJlOmluZGV4L2QxRGF0YWJhc2U6RDFEYXRhYmFzZSBteS1kYiA8YWNjb3VudF9pZD4vPGRhdGFiYXNlX2lkPgoKIyBJbXBvcnQgRE5TIHJlY29yZApwdWx1bWkgaW1wb3J0IGNsb3VkZmxhcmU6aW5kZXgvZG5zUmVjb3JkOkRuc1JlY29yZCBteS1yZWNvcmQgPHpvbmVfaWQ+LzxyZWNvcmRfaWQ+CmBgYAoKIyMgU2VjcmV0cyBNYW5hZ2VtZW50CgpgYGB0eXBlc2NyaXB0CmltcG9ydCAqIGFzIHB1bHVtaSBmcm9tICJAcHVsdW1pL3B1bHVtaSI7Cgpjb25zdCBjb25maWcgPSBuZXcgcHVsdW1pLkNvbmZpZygpOwpjb25zdCBhcGlLZXkgPSBjb25maWcucmVxdWlyZVNlY3JldCgiYXBpS2V5Iik7IC8vIEVuY3J5cHRlZCBpbiBzdGF0ZQoKY29uc3Qgd29ya2VyID0gbmV3IGNsb3VkZmxhcmUuV29ya2VyU2NyaXB0KCJ3b3JrZXIiLCB7CiAgICBhY2NvdW50SWQ6IGFjY291bnRJZCwKICAgIG5hbWU6ICJteS13b3JrZXIiLAogICAgY29udGVudDogY29kZSwKICAgIHNlY3JldFRleHRCaW5kaW5nczogW3tuYW1lOiAiQVBJX0tFWSIsIHRleHQ6IGFwaUtleX1dLAp9KTsKYGBgCgpTdG9yZSBzZWNyZXRzOgpgYGBiYXNoCnB1bHVtaSBjb25maWcgc2V0IC0tc2VjcmV0IGFwaUtleSAic2VjcmV0LXZhbHVlIgpgYGAKCiMjIFRyYW5zZm9ybSBQYXR0ZXJuCgpNb2RpZnkgcmVzb3VyY2UgYXJncyBiZWZvcmUgY3JlYXRpb246CgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7VHJhbnNmb3JtfSBmcm9tICJAcHVsdW1pL3B1bHVtaSI7CgppbnRlcmZhY2UgQnVja2V0QXJncyB7CiAgICBhY2NvdW50SWQ6IHB1bHVtaS5JbnB1dDxzdHJpbmc+OwogICAgdHJhbnNmb3JtPzoge2J1Y2tldD86IFRyYW5zZm9ybTxjbG91ZGZsYXJlLlIyQnVja2V0QXJncz59Owp9CgpmdW5jdGlvbiBjcmVhdGVCdWNrZXQobmFtZTogc3RyaW5nLCBhcmdzOiBCdWNrZXRBcmdzKSB7CiAgICBjb25zdCBidWNrZXRBcmdzOiBjbG91ZGZsYXJlLlIyQnVja2V0QXJncyA9IHsKICAgICAgICBhY2NvdW50SWQ6IGFyZ3MuYWNjb3VudElkLAogICAgICAgIG5hbWU6IG5hbWUsCiAgICAgICAgbG9jYXRpb246ICJhdXRvIiwKICAgIH07CiAgICBjb25zdCBmaW5hbEFyZ3MgPSBhcmdzLnRyYW5zZm9ybT8uYnVja2V0Py4oYnVja2V0QXJncykgPz8gYnVja2V0QXJnczsKICAgIHJldHVybiBuZXcgY2xvdWRmbGFyZS5SMkJ1Y2tldChuYW1lLCBmaW5hbEFyZ3MpOwp9CmBgYAoKIyMgdjYueCBXb3JrZXIgVmVyc2lvbmluZyBSZXNvdXJjZXMKCioqV29ya2VyKiogLSBDb250YWluZXIgZm9yIHZlcnNpb25zOgpgYGB0eXBlc2NyaXB0CmNvbnN0IHdvcmtlciA9IG5ldyBjbG91ZGZsYXJlLldvcmtlcigiYXBpIiwge2FjY291bnRJZCwgbmFtZTogImFwaS13b3JrZXIifSk7CmV4cG9ydCBjb25zdCB3b3JrZXJJZCA9IHdvcmtlci5pZDsKYGBgCgoqKldvcmtlclZlcnNpb24qKiAtIEltbXV0YWJsZSBjb2RlICsgY29uZmlnOgpgYGB0eXBlc2NyaXB0CmNvbnN0IHZlcnNpb24gPSBuZXcgY2xvdWRmbGFyZS5Xb3JrZXJWZXJzaW9uKCJ2MSIsIHsKICAgIGFjY291bnRJZCwgd29ya2VySWQ6IHdvcmtlci5pZCwKICAgIGNvbnRlbnQ6IGZzLnJlYWRGaWxlU3luYygiLi9kaXN0L3dvcmtlci5qcyIsICJ1dGY4IiksCiAgICBjb21wYXRpYmlsaXR5RGF0ZTogIjIwMjUtMDEtMDEiLAp9KTsKZXhwb3J0IGNvbnN0IHZlcnNpb25JZCA9IHZlcnNpb24uaWQ7CmBgYAoKKipXb3JrZXJzRGVwbG95bWVudCoqIC0gQWN0aXZlIGRlcGxveW1lbnQgd2l0aCBiaW5kaW5nczoKYGBgdHlwZXNjcmlwdApjb25zdCBkZXBsb3ltZW50ID0gbmV3IGNsb3VkZmxhcmUuV29ya2Vyc0RlcGxveW1lbnQoInByb2QiLCB7CiAgICBhY2NvdW50SWQsIHdvcmtlcklkOiB3b3JrZXIuaWQsIHZlcnNpb25JZDogdmVyc2lvbi5pZCwKICAgIGt2TmFtZXNwYWNlQmluZGluZ3M6IFt7bmFtZTogIk1ZX0tWIiwgbmFtZXNwYWNlSWQ6IGt2LmlkfV0sCn0pOwpgYGAKCioqVXNlOioqIEFkdmFuY2VkIGRlcGxveW1lbnRzIChjYW5hcnksIGJsdWUtZ3JlZW4pLiBNb3N0IGFwcHMgc2hvdWxkIHVzZSBgV29ya2VyU2NyaXB0YCAoYXV0by12ZXJzaW9uaW5nKS4KCi0tLQpTZWU6IFtSRUFETUUubWRdKC4vUkVBRE1FLm1kKSwgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCksIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCksIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpCg==
+# API & Data Sources
+
+## Outputs and Exports
+
+Export resource identifiers:
+
+```typescript
+export const kvId = kv.id;
+export const bucketName = bucket.name;
+export const workerUrl = worker.subdomain;
+export const dbId = db.id;
+```
+
+## Resource Dependencies
+
+Implicit dependencies via outputs:
+
+```typescript
+const kv = new cloudflare.WorkersKvNamespace("kv", {
+    accountId: accountId,
+    title: "my-kv",
+});
+
+// Worker depends on KV (implicit via kv.id)
+const worker = new cloudflare.WorkerScript("worker", {
+    accountId: accountId,
+    name: "my-worker",
+    content: code,
+    kvNamespaceBindings: [{name: "MY_KV", namespaceId: kv.id}], // Creates dependency
+});
+```
+
+Explicit dependencies:
+
+```typescript
+const migration = new command.local.Command("migration", {
+    create: pulumi.interpolate`wrangler d1 execute ${db.name} --file ./schema.sql`,
+}, {dependsOn: [db]});
+
+const worker = new cloudflare.WorkerScript("worker", {
+    accountId: accountId,
+    name: "worker",
+    content: code,
+    d1DatabaseBindings: [{name: "DB", databaseId: db.id}],
+}, {dependsOn: [migration]}); // Ensure migrations run first
+```
+
+## Using Outputs with API Calls
+
+```typescript
+const db = new cloudflare.D1Database("db", {accountId, name: "my-db"});
+
+db.id.apply(async (dbId) => {
+    const response = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${dbId}/query`,
+        {method: "POST", headers: {"Authorization": `Bearer ${apiToken}`, "Content-Type": "application/json"},
+         body: JSON.stringify({sql: "CREATE TABLE users (id INT)"})}
+    );
+    return response.json();
+});
+```
+
+## Custom Dynamic Providers
+
+For resources not in provider:
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+
+class D1MigrationProvider implements pulumi.dynamic.ResourceProvider {
+    async create(inputs: any): Promise<pulumi.dynamic.CreateResult> {
+        const response = await fetch(
+            `https://api.cloudflare.com/client/v4/accounts/${inputs.accountId}/d1/database/${inputs.databaseId}/query`,
+            {method: "POST", headers: {"Authorization": `Bearer ${inputs.apiToken}`, "Content-Type": "application/json"},
+             body: JSON.stringify({sql: inputs.sql})}
+        );
+        return {id: `${inputs.databaseId}-${Date.now()}`, outs: await response.json()};
+    }
+    async update(id: string, olds: any, news: any): Promise<pulumi.dynamic.UpdateResult> {
+        if (olds.sql !== news.sql) await this.create(news);
+        return {};
+    }
+    async delete(id: string, props: any): Promise<void> {}
+}
+
+class D1Migration extends pulumi.dynamic.Resource {
+    constructor(name: string, args: any, opts?: pulumi.CustomResourceOptions) {
+        super(new D1MigrationProvider(), name, args, opts);
+    }
+}
+
+const migration = new D1Migration("migration", {
+    accountId, databaseId: db.id, apiToken, sql: "CREATE TABLE users (id INT)",
+}, {dependsOn: [db]});
+```
+
+## Data Sources
+
+**Get Zone:**
+```typescript
+const zone = cloudflare.getZone({name: "example.com"});
+const zoneId = zone.then(z => z.id);
+```
+
+**Get Accounts (via API):**
+Use Cloudflare API directly or custom dynamic resources.
+
+## Import Existing Resources
+
+```bash
+# Import worker
+pulumi import cloudflare:index/workerScript:WorkerScript my-worker <account_id>/<worker_name>
+
+# Import KV namespace
+pulumi import cloudflare:index/workersKvNamespace:WorkersKvNamespace my-kv <namespace_id>
+
+# Import R2 bucket
+pulumi import cloudflare:index/r2Bucket:R2Bucket my-bucket <account_id>/<bucket_name>
+
+# Import D1 database
+pulumi import cloudflare:index/d1Database:D1Database my-db <account_id>/<database_id>
+
+# Import DNS record
+pulumi import cloudflare:index/dnsRecord:DnsRecord my-record <zone_id>/<record_id>
+```
+
+## Secrets Management
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+
+const config = new pulumi.Config();
+const apiKey = config.requireSecret("apiKey"); // Encrypted in state
+
+const worker = new cloudflare.WorkerScript("worker", {
+    accountId: accountId,
+    name: "my-worker",
+    content: code,
+    secretTextBindings: [{name: "API_KEY", text: apiKey}],
+});
+```
+
+Store secrets:
+```bash
+pulumi config set --secret apiKey "secret-value"
+```
+
+## Transform Pattern
+
+Modify resource args before creation:
+
+```typescript
+import {Transform} from "@pulumi/pulumi";
+
+interface BucketArgs {
+    accountId: pulumi.Input<string>;
+    transform?: {bucket?: Transform<cloudflare.R2BucketArgs>};
+}
+
+function createBucket(name: string, args: BucketArgs) {
+    const bucketArgs: cloudflare.R2BucketArgs = {
+        accountId: args.accountId,
+        name: name,
+        location: "auto",
+    };
+    const finalArgs = args.transform?.bucket?.(bucketArgs) ?? bucketArgs;
+    return new cloudflare.R2Bucket(name, finalArgs);
+}
+```
+
+## v6.x Worker Versioning Resources
+
+**Worker** - Container for versions:
+```typescript
+const worker = new cloudflare.Worker("api", {accountId, name: "api-worker"});
+export const workerId = worker.id;
+```
+
+**WorkerVersion** - Immutable code + config:
+```typescript
+const version = new cloudflare.WorkerVersion("v1", {
+    accountId, workerId: worker.id,
+    content: fs.readFileSync("./dist/worker.js", "utf8"),
+    compatibilityDate: "2025-01-01",
+});
+export const versionId = version.id;
+```
+
+**WorkersDeployment** - Active deployment with bindings:
+```typescript
+const deployment = new cloudflare.WorkersDeployment("prod", {
+    accountId, workerId: worker.id, versionId: version.id,
+    kvNamespaceBindings: [{name: "MY_KV", namespaceId: kv.id}],
+});
+```
+
+**Use:** Advanced deployments (canary, blue-green). Most apps should use `WorkerScript` (auto-versioning).
+
+---
+See: [README.md](./README.md), [configuration.md](./configuration.md), [patterns.md](./patterns.md), [gotchas.md](./gotchas.md)

@@ -1,1 +1,200 @@
-IyBSMiBBUEkgUmVmZXJlbmNlCgojIyBQVVQgKFVwbG9hZCkKCmBgYHR5cGVzY3JpcHQKLy8gQmFzaWMKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5wdXQoa2V5LCB2YWx1ZSk7CgovLyBXaXRoIG1ldGFkYXRhCmF3YWl0IGVudi5NWV9CVUNLRVQucHV0KGtleSwgdmFsdWUsIHsKICBodHRwTWV0YWRhdGE6IHsKICAgIGNvbnRlbnRUeXBlOiAnaW1hZ2UvanBlZycsCiAgICBjb250ZW50RGlzcG9zaXRpb246ICdhdHRhY2htZW50OyBmaWxlbmFtZT0icGhvdG8uanBnIicsCiAgICBjYWNoZUNvbnRyb2w6ICdtYXgtYWdlPTM2MDAnCiAgfSwKICBjdXN0b21NZXRhZGF0YTogeyB1c2VySWQ6ICcxMjMnLCB2ZXJzaW9uOiAnMicgfSwKICBzdG9yYWdlQ2xhc3M6ICdTdGFuZGFyZCcsIC8vIG9yICdJbmZyZXF1ZW50QWNjZXNzJwogIHNoYTI1NjogYXJyYXlCdWZmZXJPckhleCwgLy8gSW50ZWdyaXR5IGNoZWNrCiAgc3NlY0tleTogYXJyYXlCdWZmZXIzMmJ5dGVzIC8vIFNTRS1DIGVuY3J5cHRpb24KfSk7CgovLyBWYWx1ZSB0eXBlczogUmVhZGFibGVTdHJlYW0gfCBBcnJheUJ1ZmZlciB8IHN0cmluZyB8IEJsb2IKYGBgCgojIyBHRVQgKERvd25sb2FkKQoKYGBgdHlwZXNjcmlwdApjb25zdCBvYmplY3QgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmdldChrZXkpOwppZiAoIW9iamVjdCkgcmV0dXJuIG5ldyBSZXNwb25zZSgnTm90IGZvdW5kJywgeyBzdGF0dXM6IDQwNCB9KTsKCi8vIEJvZHk6IGFycmF5QnVmZmVyKCksIHRleHQoKSwganNvbigpLCBibG9iKCksIGJvZHkgKFJlYWRhYmxlU3RyZWFtKQoKLy8gUmFuZ2VkIHJlYWRzCmNvbnN0IG9iamVjdCA9IGF3YWl0IGVudi5NWV9CVUNLRVQuZ2V0KGtleSwgeyByYW5nZTogeyBvZmZzZXQ6IDAsIGxlbmd0aDogMTAyNCB9IH0pOwoKLy8gQ29uZGl0aW9uYWwgR0VUCmNvbnN0IG9iamVjdCA9IGF3YWl0IGVudi5NWV9CVUNLRVQuZ2V0KGtleSwgeyBvbmx5SWY6IHsgZXRhZ01hdGNoZXM6ICciYWJjMTIzIicgfSB9KTsKYGBgCgojIyBIRUFEIChNZXRhZGF0YSBPbmx5KQoKYGBgdHlwZXNjcmlwdApjb25zdCBvYmplY3QgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmhlYWQoa2V5KTsgLy8gUmV0dXJucyBSMk9iamVjdCB3aXRob3V0IGJvZHkKYGBgCgojIyBERUxFVEUKCmBgYHR5cGVzY3JpcHQKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5kZWxldGUoa2V5KTsKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5kZWxldGUoW2tleTEsIGtleTIsIGtleTNdKTsgLy8gQmF0Y2ggKG1heCAxMDAwKQpgYGAKIyMgTElTVAoKYGBgdHlwZXNjcmlwdApjb25zdCBsaXN0ZWQgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmxpc3QoewogIGxpbWl0OiAxMDAwLAogIHByZWZpeDogJ3Bob3Rvcy8nLAogIGN1cnNvcjogY3Vyc29yRnJvbVByZXZpb3VzLAogIGRlbGltaXRlcjogJy8nLAogIGluY2x1ZGU6IFsnaHR0cE1ldGFkYXRhJywgJ2N1c3RvbU1ldGFkYXRhJ10KfSk7CgovLyBQYWdpbmF0aW9uIChhbHdheXMgdXNlIHRydW5jYXRlZCBmbGFnKQp3aGlsZSAobGlzdGVkLnRydW5jYXRlZCkgewogIGNvbnN0IG5leHQgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmxpc3QoeyBjdXJzb3I6IGxpc3RlZC5jdXJzb3IgfSk7CiAgbGlzdGVkLm9iamVjdHMucHVzaCguLi5uZXh0Lm9iamVjdHMpOwogIGxpc3RlZC50cnVuY2F0ZWQgPSBuZXh0LnRydW5jYXRlZDsKICBsaXN0ZWQuY3Vyc29yID0gbmV4dC5jdXJzb3I7Cn0KYGBgCgojIyBNdWx0aXBhcnQgVXBsb2FkcwoKYGBgdHlwZXNjcmlwdApjb25zdCBtdWx0aXBhcnQgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmNyZWF0ZU11bHRpcGFydFVwbG9hZChrZXksIHsKICBodHRwTWV0YWRhdGE6IHsgY29udGVudFR5cGU6ICd2aWRlby9tcDQnIH0KfSk7Cgpjb25zdCB1cGxvYWRlZFBhcnRzOiBSMlVwbG9hZGVkUGFydFtdID0gW107CmZvciAobGV0IGkgPSAwOyBpIDwgcGFydENvdW50OyBpKyspIHsKICBjb25zdCBwYXJ0ID0gYXdhaXQgbXVsdGlwYXJ0LnVwbG9hZFBhcnQoaSArIDEsIHBhcnREYXRhKTsKICB1cGxvYWRlZFBhcnRzLnB1c2gocGFydCk7Cn0KCmNvbnN0IG9iamVjdCA9IGF3YWl0IG11bHRpcGFydC5jb21wbGV0ZSh1cGxvYWRlZFBhcnRzKTsKLy8gT1I6IGF3YWl0IG11bHRpcGFydC5hYm9ydCgpOwoKLy8gUmVzdW1lCmNvbnN0IG11bHRpcGFydCA9IGVudi5NWV9CVUNLRVQucmVzdW1lTXVsdGlwYXJ0VXBsb2FkKGtleSwgdXBsb2FkSWQpOwpgYGAKCiMjIFByZXNpZ25lZCBVUkxzIChTMyBTREspCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IFMzQ2xpZW50LCBQdXRPYmplY3RDb21tYW5kIH0gZnJvbSAnQGF3cy1zZGsvY2xpZW50LXMzJzsKaW1wb3J0IHsgZ2V0U2lnbmVkVXJsIH0gZnJvbSAnQGF3cy1zZGsvczMtcmVxdWVzdC1wcmVzaWduZXInOwoKY29uc3QgczMgPSBuZXcgUzNDbGllbnQoewogIHJlZ2lvbjogJ2F1dG8nLAogIGVuZHBvaW50OiBgaHR0cHM6Ly8ke2FjY291bnRJZH0ucjIuY2xvdWRmbGFyZXN0b3JhZ2UuY29tYCwKICBjcmVkZW50aWFsczogeyBhY2Nlc3NLZXlJZDogZW52LlIyX0FDQ0VTU19LRVlfSUQsIHNlY3JldEFjY2Vzc0tleTogZW52LlIyX1NFQ1JFVF9BQ0NFU1NfS0VZIH0KfSk7Cgpjb25zdCB1cGxvYWRVcmwgPSBhd2FpdCBnZXRTaWduZWRVcmwoczMsIG5ldyBQdXRPYmplY3RDb21tYW5kKHsgQnVja2V0OiAnbXktYnVja2V0JywgS2V5OiBrZXkgfSksIHsgZXhwaXJlc0luOiAzNjAwIH0pOwpyZXR1cm4gUmVzcG9uc2UuanNvbih7IHVwbG9hZFVybCB9KTsKYGBgCgojIyBUeXBlU2NyaXB0IEludGVyZmFjZXMKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIFIyQnVja2V0IHsKICBoZWFkKGtleTogc3RyaW5nKTogUHJvbWlzZTxSMk9iamVjdCB8IG51bGw+OwogIGdldChrZXk6IHN0cmluZywgb3B0aW9ucz86IFIyR2V0T3B0aW9ucyk6IFByb21pc2U8UjJPYmplY3RCb2R5IHwgbnVsbD47CiAgcHV0KGtleTogc3RyaW5nLCB2YWx1ZTogUmVhZGFibGVTdHJlYW0gfCBBcnJheUJ1ZmZlciB8IHN0cmluZyB8IEJsb2IsIG9wdGlvbnM/OiBSMlB1dE9wdGlvbnMpOiBQcm9taXNlPFIyT2JqZWN0IHwgbnVsbD47CiAgZGVsZXRlKGtleXM6IHN0cmluZyB8IHN0cmluZ1tdKTogUHJvbWlzZTx2b2lkPjsKICBsaXN0KG9wdGlvbnM/OiBSMkxpc3RPcHRpb25zKTogUHJvbWlzZTxSMk9iamVjdHM+OwogIGNyZWF0ZU11bHRpcGFydFVwbG9hZChrZXk6IHN0cmluZywgb3B0aW9ucz86IFIyTXVsdGlwYXJ0T3B0aW9ucyk6IFByb21pc2U8UjJNdWx0aXBhcnRVcGxvYWQ+OwogIHJlc3VtZU11bHRpcGFydFVwbG9hZChrZXk6IHN0cmluZywgdXBsb2FkSWQ6IHN0cmluZyk6IFIyTXVsdGlwYXJ0VXBsb2FkOwp9CgppbnRlcmZhY2UgUjJPYmplY3QgewogIGtleTogc3RyaW5nOyB2ZXJzaW9uOiBzdHJpbmc7IHNpemU6IG51bWJlcjsKICBldGFnOiBzdHJpbmc7IGh0dHBFdGFnOiBzdHJpbmc7IC8vIGh0dHBFdGFnIGlzIHF1b3RlZCwgdXNlIGZvciBoZWFkZXJzCiAgdXBsb2FkZWQ6IERhdGU7IGh0dHBNZXRhZGF0YT86IFIySFRUUE1ldGFkYXRhOwogIGN1c3RvbU1ldGFkYXRhPzogUmVjb3JkPHN0cmluZywgc3RyaW5nPjsKICBzdG9yYWdlQ2xhc3M6ICdTdGFuZGFyZCcgfCAnSW5mcmVxdWVudEFjY2Vzcyc7CiAgY2hlY2tzdW1zOiBSMkNoZWNrc3VtczsKICB3cml0ZUh0dHBNZXRhZGF0YShoZWFkZXJzOiBIZWFkZXJzKTogdm9pZDsKfQoKaW50ZXJmYWNlIFIyT2JqZWN0Qm9keSBleHRlbmRzIFIyT2JqZWN0IHsKICBib2R5OiBSZWFkYWJsZVN0cmVhbTsgYm9keVVzZWQ6IGJvb2xlYW47CiAgYXJyYXlCdWZmZXIoKTogUHJvbWlzZTxBcnJheUJ1ZmZlcj47IHRleHQoKTogUHJvbWlzZTxzdHJpbmc+OwogIGpzb248VD4oKTogUHJvbWlzZTxUPjsgYmxvYigpOiBQcm9taXNlPEJsb2I+Owp9CgppbnRlcmZhY2UgUjJIVFRQTWV0YWRhdGEgewogIGNvbnRlbnRUeXBlPzogc3RyaW5nOyBjb250ZW50RGlzcG9zaXRpb24/OiBzdHJpbmc7CiAgY29udGVudEVuY29kaW5nPzogc3RyaW5nOyBjb250ZW50TGFuZ3VhZ2U/OiBzdHJpbmc7CiAgY2FjaGVDb250cm9sPzogc3RyaW5nOyBjYWNoZUV4cGlyeT86IERhdGU7Cn0KCmludGVyZmFjZSBSMlB1dE9wdGlvbnMgewogIGh0dHBNZXRhZGF0YT86IFIySFRUUE1ldGFkYXRhIHwgSGVhZGVyczsKICBjdXN0b21NZXRhZGF0YT86IFJlY29yZDxzdHJpbmcsIHN0cmluZz47CiAgc2hhMjU2PzogQXJyYXlCdWZmZXIgfCBzdHJpbmc7IC8vIE9ubHkgT05FIGNoZWNrc3VtIGFsbG93ZWQKICBzdG9yYWdlQ2xhc3M/OiAnU3RhbmRhcmQnIHwgJ0luZnJlcXVlbnRBY2Nlc3MnOwogIHNzZWNLZXk/OiBBcnJheUJ1ZmZlcjsKfQoKaW50ZXJmYWNlIFIyR2V0T3B0aW9ucyB7CiAgb25seUlmPzogUjJDb25kaXRpb25hbCB8IEhlYWRlcnM7CiAgcmFuZ2U/OiBSMlJhbmdlIHwgSGVhZGVyczsKICBzc2VjS2V5PzogQXJyYXlCdWZmZXI7Cn0KCmludGVyZmFjZSBSMkxpc3RPcHRpb25zIHsKICBsaW1pdD86IG51bWJlcjsgcHJlZml4Pzogc3RyaW5nOyBjdXJzb3I/OiBzdHJpbmc7IGRlbGltaXRlcj86IHN0cmluZzsKICBzdGFydEFmdGVyPzogc3RyaW5nOyBpbmNsdWRlPzogKCdodHRwTWV0YWRhdGEnIHwgJ2N1c3RvbU1ldGFkYXRhJylbXTsKfQoKaW50ZXJmYWNlIFIyT2JqZWN0cyB7CiAgb2JqZWN0czogUjJPYmplY3RbXTsgdHJ1bmNhdGVkOiBib29sZWFuOwogIGN1cnNvcj86IHN0cmluZzsgZGVsaW1pdGVkUHJlZml4ZXM6IHN0cmluZ1tdOwp9CgppbnRlcmZhY2UgUjJDb25kaXRpb25hbCB7CiAgZXRhZ01hdGNoZXM/OiBzdHJpbmc7IGV0YWdEb2VzTm90TWF0Y2g/OiBzdHJpbmc7CiAgdXBsb2FkZWRCZWZvcmU/OiBEYXRlOyB1cGxvYWRlZEFmdGVyPzogRGF0ZTsKfQoKaW50ZXJmYWNlIFIyUmFuZ2UgeyBvZmZzZXQ/OiBudW1iZXI7IGxlbmd0aD86IG51bWJlcjsgc3VmZml4PzogbnVtYmVyOyB9CgppbnRlcmZhY2UgUjJDaGVja3N1bXMgewogIG1kNT86IEFycmF5QnVmZmVyOyBzaGExPzogQXJyYXlCdWZmZXI7IHNoYTI1Nj86IEFycmF5QnVmZmVyOwogIHNoYTM4ND86IEFycmF5QnVmZmVyOyBzaGE1MTI/OiBBcnJheUJ1ZmZlcjsKfQoKaW50ZXJmYWNlIFIyTXVsdGlwYXJ0VXBsb2FkIHsKICBrZXk6IHN0cmluZzsKICB1cGxvYWRJZDogc3RyaW5nOwogIHVwbG9hZFBhcnQocGFydE51bWJlcjogbnVtYmVyLCB2YWx1ZTogUmVhZGFibGVTdHJlYW0gfCBBcnJheUJ1ZmZlciB8IHN0cmluZyB8IEJsb2IpOiBQcm9taXNlPFIyVXBsb2FkZWRQYXJ0PjsKICBhYm9ydCgpOiBQcm9taXNlPHZvaWQ+OwogIGNvbXBsZXRlKHVwbG9hZGVkUGFydHM6IFIyVXBsb2FkZWRQYXJ0W10pOiBQcm9taXNlPFIyT2JqZWN0PjsKfQoKaW50ZXJmYWNlIFIyVXBsb2FkZWRQYXJ0IHsKICBwYXJ0TnVtYmVyOiBudW1iZXI7CiAgZXRhZzogc3RyaW5nOwp9CmBgYAoKIyMgQ0xJIE9wZXJhdGlvbnMKCmBgYGJhc2gKd3JhbmdsZXIgcjIgb2JqZWN0IHB1dCBteS1idWNrZXQvZmlsZS50eHQgLS1maWxlPS4vbG9jYWwudHh0CndyYW5nbGVyIHIyIG9iamVjdCBnZXQgbXktYnVja2V0L2ZpbGUudHh0IC0tZmlsZT0uL2Rvd25sb2FkLnR4dAp3cmFuZ2xlciByMiBvYmplY3QgZGVsZXRlIG15LWJ1Y2tldC9maWxlLnR4dAp3cmFuZ2xlciByMiBvYmplY3QgbGlzdCBteS1idWNrZXQgLS1wcmVmaXg9cGhvdG9zLwpgYGAK
+# R2 API Reference
+
+## PUT (Upload)
+
+```typescript
+// Basic
+await env.MY_BUCKET.put(key, value);
+
+// With metadata
+await env.MY_BUCKET.put(key, value, {
+  httpMetadata: {
+    contentType: 'image/jpeg',
+    contentDisposition: 'attachment; filename="photo.jpg"',
+    cacheControl: 'max-age=3600'
+  },
+  customMetadata: { userId: '123', version: '2' },
+  storageClass: 'Standard', // or 'InfrequentAccess'
+  sha256: arrayBufferOrHex, // Integrity check
+  ssecKey: arrayBuffer32bytes // SSE-C encryption
+});
+
+// Value types: ReadableStream | ArrayBuffer | string | Blob
+```
+
+## GET (Download)
+
+```typescript
+const object = await env.MY_BUCKET.get(key);
+if (!object) return new Response('Not found', { status: 404 });
+
+// Body: arrayBuffer(), text(), json(), blob(), body (ReadableStream)
+
+// Ranged reads
+const object = await env.MY_BUCKET.get(key, { range: { offset: 0, length: 1024 } });
+
+// Conditional GET
+const object = await env.MY_BUCKET.get(key, { onlyIf: { etagMatches: '"abc123"' } });
+```
+
+## HEAD (Metadata Only)
+
+```typescript
+const object = await env.MY_BUCKET.head(key); // Returns R2Object without body
+```
+
+## DELETE
+
+```typescript
+await env.MY_BUCKET.delete(key);
+await env.MY_BUCKET.delete([key1, key2, key3]); // Batch (max 1000)
+```
+## LIST
+
+```typescript
+const listed = await env.MY_BUCKET.list({
+  limit: 1000,
+  prefix: 'photos/',
+  cursor: cursorFromPrevious,
+  delimiter: '/',
+  include: ['httpMetadata', 'customMetadata']
+});
+
+// Pagination (always use truncated flag)
+while (listed.truncated) {
+  const next = await env.MY_BUCKET.list({ cursor: listed.cursor });
+  listed.objects.push(...next.objects);
+  listed.truncated = next.truncated;
+  listed.cursor = next.cursor;
+}
+```
+
+## Multipart Uploads
+
+```typescript
+const multipart = await env.MY_BUCKET.createMultipartUpload(key, {
+  httpMetadata: { contentType: 'video/mp4' }
+});
+
+const uploadedParts: R2UploadedPart[] = [];
+for (let i = 0; i < partCount; i++) {
+  const part = await multipart.uploadPart(i + 1, partData);
+  uploadedParts.push(part);
+}
+
+const object = await multipart.complete(uploadedParts);
+// OR: await multipart.abort();
+
+// Resume
+const multipart = env.MY_BUCKET.resumeMultipartUpload(key, uploadId);
+```
+
+## Presigned URLs (S3 SDK)
+
+```typescript
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
+const s3 = new S3Client({
+  region: 'auto',
+  endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+  credentials: { accessKeyId: env.R2_ACCESS_KEY_ID, secretAccessKey: env.R2_SECRET_ACCESS_KEY }
+});
+
+const uploadUrl = await getSignedUrl(s3, new PutObjectCommand({ Bucket: 'my-bucket', Key: key }), { expiresIn: 3600 });
+return Response.json({ uploadUrl });
+```
+
+## TypeScript Interfaces
+
+```typescript
+interface R2Bucket {
+  head(key: string): Promise<R2Object | null>;
+  get(key: string, options?: R2GetOptions): Promise<R2ObjectBody | null>;
+  put(key: string, value: ReadableStream | ArrayBuffer | string | Blob, options?: R2PutOptions): Promise<R2Object | null>;
+  delete(keys: string | string[]): Promise<void>;
+  list(options?: R2ListOptions): Promise<R2Objects>;
+  createMultipartUpload(key: string, options?: R2MultipartOptions): Promise<R2MultipartUpload>;
+  resumeMultipartUpload(key: string, uploadId: string): R2MultipartUpload;
+}
+
+interface R2Object {
+  key: string; version: string; size: number;
+  etag: string; httpEtag: string; // httpEtag is quoted, use for headers
+  uploaded: Date; httpMetadata?: R2HTTPMetadata;
+  customMetadata?: Record<string, string>;
+  storageClass: 'Standard' | 'InfrequentAccess';
+  checksums: R2Checksums;
+  writeHttpMetadata(headers: Headers): void;
+}
+
+interface R2ObjectBody extends R2Object {
+  body: ReadableStream; bodyUsed: boolean;
+  arrayBuffer(): Promise<ArrayBuffer>; text(): Promise<string>;
+  json<T>(): Promise<T>; blob(): Promise<Blob>;
+}
+
+interface R2HTTPMetadata {
+  contentType?: string; contentDisposition?: string;
+  contentEncoding?: string; contentLanguage?: string;
+  cacheControl?: string; cacheExpiry?: Date;
+}
+
+interface R2PutOptions {
+  httpMetadata?: R2HTTPMetadata | Headers;
+  customMetadata?: Record<string, string>;
+  sha256?: ArrayBuffer | string; // Only ONE checksum allowed
+  storageClass?: 'Standard' | 'InfrequentAccess';
+  ssecKey?: ArrayBuffer;
+}
+
+interface R2GetOptions {
+  onlyIf?: R2Conditional | Headers;
+  range?: R2Range | Headers;
+  ssecKey?: ArrayBuffer;
+}
+
+interface R2ListOptions {
+  limit?: number; prefix?: string; cursor?: string; delimiter?: string;
+  startAfter?: string; include?: ('httpMetadata' | 'customMetadata')[];
+}
+
+interface R2Objects {
+  objects: R2Object[]; truncated: boolean;
+  cursor?: string; delimitedPrefixes: string[];
+}
+
+interface R2Conditional {
+  etagMatches?: string; etagDoesNotMatch?: string;
+  uploadedBefore?: Date; uploadedAfter?: Date;
+}
+
+interface R2Range { offset?: number; length?: number; suffix?: number; }
+
+interface R2Checksums {
+  md5?: ArrayBuffer; sha1?: ArrayBuffer; sha256?: ArrayBuffer;
+  sha384?: ArrayBuffer; sha512?: ArrayBuffer;
+}
+
+interface R2MultipartUpload {
+  key: string;
+  uploadId: string;
+  uploadPart(partNumber: number, value: ReadableStream | ArrayBuffer | string | Blob): Promise<R2UploadedPart>;
+  abort(): Promise<void>;
+  complete(uploadedParts: R2UploadedPart[]): Promise<R2Object>;
+}
+
+interface R2UploadedPart {
+  partNumber: number;
+  etag: string;
+}
+```
+
+## CLI Operations
+
+```bash
+wrangler r2 object put my-bucket/file.txt --file=./local.txt
+wrangler r2 object get my-bucket/file.txt --file=./download.txt
+wrangler r2 object delete my-bucket/file.txt
+wrangler r2 object list my-bucket --prefix=photos/
+```

@@ -1,1 +1,115 @@
-IyBDb21tb24gUGF0dGVybnMKCiMjIFVSTCBUcmFuc2Zvcm0gT3B0aW9ucwoKYGBgCndpZHRoPTxQWD4gICBoZWlnaHQ9PFBYPiAgIGZpdD1zY2FsZS1kb3dufGNvbnRhaW58Y292ZXJ8Y3JvcHxwYWQKcXVhbGl0eT04NSAgIGZvcm1hdD1hdXRvfHdlYnB8YXZpZnxqcGVnfHBuZyAgIGRwcj0yCmdyYXZpdHk9YXV0b3xmYWNlfGxlZnR8cmlnaHR8dG9wfGJvdHRvbSAgIHNoYXJwZW49MiAgIGJsdXI9MTAKcm90YXRlPTkwfDE4MHwyNzAgICBiYWNrZ3JvdW5kPXdoaXRlICAgbWV0YWRhdGE9bm9uZXxjb3B5cmlnaHR8a2VlcApgYGAKCiMjIFJlc3BvbnNpdmUgSW1hZ2VzIChzcmNzZXQpCgpgYGBodG1sCjxpbWcgc3JjPSJodHRwczovL2ltYWdlZGVsaXZlcnkubmV0L3toYXNofS97aWR9L3dpZHRoPTgwMCIKICBzcmNzZXQ9Ii4uLi97aWR9L3dpZHRoPTQwMCA0MDB3LCAuLi4ve2lkfS93aWR0aD04MDAgODAwdywgLi4uL3tpZH0vd2lkdGg9MTIwMCAxMjAwdyIKICBzaXplcz0iKG1heC13aWR0aDogNjAwcHgpIDQwMHB4LCA4MDBweCIgLz4KYGBgCgojIyBGb3JtYXQgTmVnb3RpYXRpb24KCmBgYHR5cGVzY3JpcHQKYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgY29uc3QgYWNjZXB0ID0gcmVxdWVzdC5oZWFkZXJzLmdldCgnQWNjZXB0JykgfHwgJyc7CiAgY29uc3QgZm9ybWF0ID0gL2ltYWdlXC9hdmlmLy50ZXN0KGFjY2VwdCkgPyAnYXZpZicgOiAvaW1hZ2VcL3dlYnAvLnRlc3QoYWNjZXB0KSA/ICd3ZWJwJyA6ICdqcGVnJzsKICByZXR1cm4gZW52LklNQUdFUy5pbnB1dChidWZmZXIpLnRyYW5zZm9ybSh7IGZvcm1hdCwgcXVhbGl0eTogODUgfSkub3V0cHV0KCkucmVzcG9uc2UoKTsKfQpgYGAKCiMjIERpcmVjdCBDcmVhdG9yIFVwbG9hZAoKYGBgdHlwZXNjcmlwdAovLyBCYWNrZW5kOiBHZW5lcmF0ZSB1cGxvYWQgVVJMCmNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goCiAgYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8ke2Vudi5BQ0NPVU5UX0lEfS9pbWFnZXMvdjIvZGlyZWN0X3VwbG9hZGAsCiAgeyBtZXRob2Q6ICdQT1NUJywgaGVhZGVyczogeyAnQXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHtlbnYuQVBJX1RPS0VOfWAgfSwKICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsgcmVxdWlyZVNpZ25lZFVSTHM6IGZhbHNlLCBtZXRhZGF0YTogeyB1c2VySWQgfSB9KSB9Cik7CgovLyBGcm9udGVuZDogVXBsb2FkIHRvIHJldHVybmVkIHVwbG9hZFVSTApjb25zdCBmb3JtRGF0YSA9IG5ldyBGb3JtRGF0YSgpOwpmb3JtRGF0YS5hcHBlbmQoJ2ZpbGUnLCBmaWxlKTsKYXdhaXQgZmV0Y2gocmVzdWx0LnVwbG9hZFVSTCwgeyBtZXRob2Q6ICdQT1NUJywgYm9keTogZm9ybURhdGEgfSk7Ci8vIFVzZTogaHR0cHM6Ly9pbWFnZWRlbGl2ZXJ5Lm5ldC97aGFzaH0vJHtyZXN1bHQuaWR9L3B1YmxpYwpgYGAKCiMjIFRyYW5zZm9ybSAmIFN0b3JlIHRvIFIyCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IGZpbGUgPSAoYXdhaXQgcmVxdWVzdC5mb3JtRGF0YSgpKS5nZXQoJ2ltYWdlJykgYXMgRmlsZTsKICBjb25zdCB0cmFuc2Zvcm1lZCA9IGF3YWl0IGVudi5JTUFHRVMKICAgIC5pbnB1dChhd2FpdCBmaWxlLmFycmF5QnVmZmVyKCkpCiAgICAudHJhbnNmb3JtKHsgd2lkdGg6IDgwMCwgZm9ybWF0OiAnYXZpZicsIHF1YWxpdHk6IDgwIH0pCiAgICAub3V0cHV0KCk7CiAgYXdhaXQgZW52LlIyLnB1dChgaW1hZ2VzLyR7RGF0ZS5ub3coKX0uYXZpZmAsIHRyYW5zZm9ybWVkLnJlc3BvbnNlKCkuYm9keSk7CiAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyBzdWNjZXNzOiB0cnVlIH0pOwp9CmBgYAoKIyMgV2F0ZXJtYXJraW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHdhdGVybWFyayA9IGF3YWl0IGVudi5BU1NFVFMuZmV0Y2gobmV3IFVSTCgnL3dhdGVybWFyay5wbmcnLCByZXF1ZXN0LnVybCkpOwpjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuSU1BR0VTCiAgLmlucHV0KGF3YWl0IGltYWdlLmFycmF5QnVmZmVyKCkpCiAgLmRyYXcoZW52LklNQUdFUy5pbnB1dCh3YXRlcm1hcmsuYm9keSkudHJhbnNmb3JtKHsgd2lkdGg6IDEwMCB9KSwgeyBib3R0b206IDIwLCByaWdodDogMjAsIG9wYWNpdHk6IDAuNyB9KQogIC50cmFuc2Zvcm0oeyBmb3JtYXQ6ICdhdmlmJyB9KQogIC5vdXRwdXQoKTsKcmV0dXJuIHJlc3VsdC5yZXNwb25zZSgpOwpgYGAKCiMjIERldmljZS1CYXNlZCBUcmFuc2Zvcm1zCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHVhID0gcmVxdWVzdC5oZWFkZXJzLmdldCgnVXNlci1BZ2VudCcpIHx8ICcnOwpjb25zdCBpc01vYmlsZSA9IC9Nb2JpbGV8QW5kcm9pZHxpUGhvbmUvaS50ZXN0KHVhKTsKcmV0dXJuIGVudi5JTUFHRVMuaW5wdXQoYnVmZmVyKQogIC50cmFuc2Zvcm0oeyB3aWR0aDogaXNNb2JpbGUgPyA0MDAgOiAxMjAwLCBxdWFsaXR5OiBpc01vYmlsZSA/IDc1IDogODUsIGZvcm1hdDogJ2F2aWYnIH0pCiAgLm91dHB1dCgpLnJlc3BvbnNlKCk7CmBgYAoKIyMgQ2FjaGluZyBTdHJhdGVneQoKYGBgdHlwZXNjcmlwdAphc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IGNhY2hlID0gY2FjaGVzLmRlZmF1bHQ7CiAgbGV0IHJlc3BvbnNlID0gYXdhaXQgY2FjaGUubWF0Y2gocmVxdWVzdCk7CiAgaWYgKCFyZXNwb25zZSkgewogICAgcmVzcG9uc2UgPSBhd2FpdCBlbnYuSU1BR0VTLmlucHV0KGJ1ZmZlcikudHJhbnNmb3JtKHsgd2lkdGg6IDgwMCwgZm9ybWF0OiAnYXZpZicgfSkub3V0cHV0KCkucmVzcG9uc2UoKTsKICAgIHJlc3BvbnNlID0gbmV3IFJlc3BvbnNlKHJlc3BvbnNlLmJvZHksIHsgaGVhZGVyczogeyAuLi5yZXNwb25zZS5oZWFkZXJzLCAnQ2FjaGUtQ29udHJvbCc6ICdwdWJsaWMsIG1heC1hZ2U9ODY0MDAnIH0gfSk7CiAgICBjdHgud2FpdFVudGlsKGNhY2hlLnB1dChyZXF1ZXN0LCByZXNwb25zZS5jbG9uZSgpKSk7CiAgfQogIHJldHVybiByZXNwb25zZTsKfQpgYGAKCiMjIEJhdGNoIFByb2Nlc3NpbmcKCmBgYHR5cGVzY3JpcHQKY29uc3QgcmVzdWx0cyA9IGF3YWl0IFByb21pc2UuYWxsKGltYWdlcy5tYXAoYnVmZmVyID0+CiAgZW52LklNQUdFUy5pbnB1dChidWZmZXIpLnRyYW5zZm9ybSh7IHdpZHRoOiA4MDAsIGZpdDogJ2NvdmVyJywgZm9ybWF0OiAnYXZpZicgfSkub3V0cHV0KCkKKSk7CmBgYAoKIyMgRXJyb3IgSGFuZGxpbmcKCmBgYHR5cGVzY3JpcHQKdHJ5IHsKICByZXR1cm4gKGF3YWl0IGVudi5JTUFHRVMuaW5wdXQoYnVmZmVyKS50cmFuc2Zvcm0oeyB3aWR0aDogODAwIH0pLm91dHB1dCgpKS5yZXNwb25zZSgpOwp9IGNhdGNoIChlcnJvcikgewogIGNvbnNvbGUuZXJyb3IoJ1RyYW5zZm9ybSBmYWlsZWQ6JywgZXJyb3IpOwogIHJldHVybiBuZXcgUmVzcG9uc2UoJ0ltYWdlIHByb2Nlc3NpbmcgZmFpbGVkJywgeyBzdGF0dXM6IDUwMCB9KTsKfQpgYGAK
+# Common Patterns
+
+## URL Transform Options
+
+```
+width=<PX>   height=<PX>   fit=scale-down|contain|cover|crop|pad
+quality=85   format=auto|webp|avif|jpeg|png   dpr=2
+gravity=auto|face|left|right|top|bottom   sharpen=2   blur=10
+rotate=90|180|270   background=white   metadata=none|copyright|keep
+```
+
+## Responsive Images (srcset)
+
+```html
+<img src="https://imagedelivery.net/{hash}/{id}/width=800"
+  srcset=".../{id}/width=400 400w, .../{id}/width=800 800w, .../{id}/width=1200 1200w"
+  sizes="(max-width: 600px) 400px, 800px" />
+```
+
+## Format Negotiation
+
+```typescript
+async fetch(request: Request, env: Env): Promise<Response> {
+  const accept = request.headers.get('Accept') || '';
+  const format = /image\/avif/.test(accept) ? 'avif' : /image\/webp/.test(accept) ? 'webp' : 'jpeg';
+  return env.IMAGES.input(buffer).transform({ format, quality: 85 }).output().response();
+}
+```
+
+## Direct Creator Upload
+
+```typescript
+// Backend: Generate upload URL
+const response = await fetch(
+  `https://api.cloudflare.com/client/v4/accounts/${env.ACCOUNT_ID}/images/v2/direct_upload`,
+  { method: 'POST', headers: { 'Authorization': `Bearer ${env.API_TOKEN}` },
+    body: JSON.stringify({ requireSignedURLs: false, metadata: { userId } }) }
+);
+
+// Frontend: Upload to returned uploadURL
+const formData = new FormData();
+formData.append('file', file);
+await fetch(result.uploadURL, { method: 'POST', body: formData });
+// Use: https://imagedelivery.net/{hash}/${result.id}/public
+```
+
+## Transform & Store to R2
+
+```typescript
+async fetch(request: Request, env: Env): Promise<Response> {
+  const file = (await request.formData()).get('image') as File;
+  const transformed = await env.IMAGES
+    .input(await file.arrayBuffer())
+    .transform({ width: 800, format: 'avif', quality: 80 })
+    .output();
+  await env.R2.put(`images/${Date.now()}.avif`, transformed.response().body);
+  return Response.json({ success: true });
+}
+```
+
+## Watermarking
+
+```typescript
+const watermark = await env.ASSETS.fetch(new URL('/watermark.png', request.url));
+const result = await env.IMAGES
+  .input(await image.arrayBuffer())
+  .draw(env.IMAGES.input(watermark.body).transform({ width: 100 }), { bottom: 20, right: 20, opacity: 0.7 })
+  .transform({ format: 'avif' })
+  .output();
+return result.response();
+```
+
+## Device-Based Transforms
+
+```typescript
+const ua = request.headers.get('User-Agent') || '';
+const isMobile = /Mobile|Android|iPhone/i.test(ua);
+return env.IMAGES.input(buffer)
+  .transform({ width: isMobile ? 400 : 1200, quality: isMobile ? 75 : 85, format: 'avif' })
+  .output().response();
+```
+
+## Caching Strategy
+
+```typescript
+async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  const cache = caches.default;
+  let response = await cache.match(request);
+  if (!response) {
+    response = await env.IMAGES.input(buffer).transform({ width: 800, format: 'avif' }).output().response();
+    response = new Response(response.body, { headers: { ...response.headers, 'Cache-Control': 'public, max-age=86400' } });
+    ctx.waitUntil(cache.put(request, response.clone()));
+  }
+  return response;
+}
+```
+
+## Batch Processing
+
+```typescript
+const results = await Promise.all(images.map(buffer =>
+  env.IMAGES.input(buffer).transform({ width: 800, fit: 'cover', format: 'avif' }).output()
+));
+```
+
+## Error Handling
+
+```typescript
+try {
+  return (await env.IMAGES.input(buffer).transform({ width: 800 }).output()).response();
+} catch (error) {
+  console.error('Transform failed:', error);
+  return new Response('Image processing failed', { status: 500 });
+}
+```

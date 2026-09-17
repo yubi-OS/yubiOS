@@ -1,1 +1,173 @@
-IyBDb25maWd1cmF0aW9uCgojIyBTY3JpcHQgTG9hZGluZwoKYGBganMKLy8gSW5saW5lCm5ldyBNaW5pZmxhcmUoeyBtb2R1bGVzOiB0cnVlLCBzY3JpcHQ6IGBleHBvcnQgZGVmYXVsdCB7IC4uLiB9YCB9KTsKCi8vIEZpbGUtYmFzZWQKbmV3IE1pbmlmbGFyZSh7IHNjcmlwdFBhdGg6ICJ3b3JrZXIuanMiIH0pOwoKLy8gTXVsdGktbW9kdWxlCm5ldyBNaW5pZmxhcmUoewogIHNjcmlwdFBhdGg6ICJzcmMvaW5kZXguanMiLAogIG1vZHVsZXM6IHRydWUsCiAgbW9kdWxlc1J1bGVzOiBbCiAgICB7IHR5cGU6ICJFU01vZHVsZSIsIGluY2x1ZGU6IFsiKiovKi5qcyJdIH0sCiAgICB7IHR5cGU6ICJUZXh0IiwgaW5jbHVkZTogWyIqKi8qLnR4dCJdIH0sCiAgXSwKfSk7CmBgYAoKIyMgQ29tcGF0aWJpbGl0eQoKYGBganMKbmV3IE1pbmlmbGFyZSh7CiAgY29tcGF0aWJpbGl0eURhdGU6ICIyMDI2LTAxLTAxIiwgLy8gVXNlIHJlY2VudCBkYXRlIGZvciBsYXRlc3QgZmVhdHVyZXMKICBjb21wYXRpYmlsaXR5RmxhZ3M6IFsKICAgICJub2RlanNfY29tcGF0IiwgICAgICAgIC8vIE5vZGUuanMgQVBJcyAocHJvY2VzcywgQnVmZmVyLCBldGMpCiAgICAic3RyZWFtc19lbmFibGVfY29uc3RydWN0b3JzIiwgLy8gU3RyZWFtIGNvbnN0cnVjdG9ycwogIF0sCiAgdXBzdHJlYW06ICJodHRwczovL2V4YW1wbGUuY29tIiwgLy8gRmFsbGJhY2sgZm9yIHVuaGFuZGxlZCByZXF1ZXN0cwp9KTsKYGBgCgoqKkNyaXRpY2FsOioqIFVzZSBgY29tcGF0aWJpbGl0eURhdGU6ICIyMDI2LTAxLTAxImAgb3IgbGF0ZXN0IHRvIG1hdGNoIHByb2R1Y3Rpb24gcnVudGltZS4gT2xkIGRhdGVzIGxpbWl0IGF2YWlsYWJsZSBBUElzLgoKIyMgSFRUUCBTZXJ2ZXIgJiBSZXF1ZXN0LmNmCgpgYGBqcwpuZXcgTWluaWZsYXJlKHsKICBwb3J0OiA4Nzg3LCAgICAgICAgICAgICAgLy8gRGVmYXVsdDogODc4NwogIGhvc3Q6ICIxMjcuMC4wLjEiLAogIGh0dHBzOiB0cnVlLCAgICAgICAgICAgICAvLyBTZWxmLXNpZ25lZCBjZXJ0CiAgbGl2ZVJlbG9hZDogdHJ1ZSwgICAgICAgIC8vIEF1dG8tcmVsb2FkIEhUTUwKICAKICBjZjogdHJ1ZSwgICAgICAgICAgICAgICAgLy8gRmV0Y2ggbGl2ZSBSZXF1ZXN0LmNmIGRhdGEgKGNhY2hlZCkKICAvLyBjZjogIi4vY2YuanNvbiIsICAgICAgLy8gT3IgbG9hZCBmcm9tIGZpbGUKICAvLyBjZjogeyBjb2xvOiAiREZXIiB9LCAgLy8gT3IgaW5saW5lIG1vY2sKfSk7CmBgYAoKKipOb3RlOioqIEZvciB0ZXN0cywgdXNlIGBkaXNwYXRjaEZldGNoKClgIChubyBwb3J0IGNvbmZsaWN0cykuCgojIyBTdG9yYWdlIEJpbmRpbmdzCgpgYGBqcwpuZXcgTWluaWZsYXJlKHsKICAvLyBLVgogIGt2TmFtZXNwYWNlczogWyJURVNUX05BTUVTUEFDRSIsICJDQUNIRSJdLAogIGt2UGVyc2lzdDogIi4va3YtZGF0YSIsIC8vIE9wdGlvbmFsOiBwZXJzaXN0IHRvIGRpc2sKICAKICAvLyBSMgogIHIyQnVja2V0czogWyJCVUNLRVQiLCAiSU1BR0VTIl0sCiAgcjJQZXJzaXN0OiAiLi9yMi1kYXRhIiwKICAKICAvLyBEdXJhYmxlIE9iamVjdHMKICBtb2R1bGVzOiB0cnVlLAogIGR1cmFibGVPYmplY3RzOiB7CiAgICBDT1VOVEVSOiAiQ291bnRlciIsIC8vIGNsYXNzTmFtZQogICAgQVBJX09CSkVDVDogeyBjbGFzc05hbWU6ICJBcGlPYmplY3QiLCBzY3JpcHROYW1lOiAiYXBpLXdvcmtlciIgfSwKICB9LAogIGR1cmFibGVPYmplY3RzUGVyc2lzdDogIi4vZG8tZGF0YSIsCiAgCiAgLy8gRDEKICBkMURhdGFiYXNlczogWyJEQiJdLAogIGQxUGVyc2lzdDogIi4vZDEtZGF0YSIsCiAgCiAgLy8gQ2FjaGUKICBjYWNoZTogdHJ1ZSwgLy8gRGVmYXVsdAogIGNhY2hlUGVyc2lzdDogIi4vY2FjaGUtZGF0YSIsCn0pOwpgYGAKCiMjIEJpbmRpbmdzCgpgYGBqcwpuZXcgTWluaWZsYXJlKHsKICAvLyBFbnZpcm9ubWVudCB2YXJpYWJsZXMKICBiaW5kaW5nczogewogICAgU0VDUkVUX0tFWTogIm15LXNlY3JldC12YWx1ZSIsCiAgICBBUElfVVJMOiAiaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20iLAogICAgREVCVUc6IHRydWUsCiAgfSwKICAKICAvLyBPdGhlciBiaW5kaW5ncwogIHdhc21CaW5kaW5nczogeyBBRERfTU9EVUxFOiAiLi9hZGQud2FzbSIgfSwKICB0ZXh0QmxvYkJpbmRpbmdzOiB7IFRFWFQ6ICIuL2RhdGEudHh0IiB9LAogIHF1ZXVlUHJvZHVjZXJzOiBbIlFVRVVFIl0sCn0pOwpgYGAKCiMjIE11bHRpcGxlIFdvcmtlcnMKCmBgYGpzCm5ldyBNaW5pZmxhcmUoewogIHdvcmtlcnM6IFsKICAgIHsKICAgICAgbmFtZTogIm1haW4iLAogICAgICBrdk5hbWVzcGFjZXM6IHsgREFUQTogInNoYXJlZCIgfSwKICAgICAgc2VydmljZUJpbmRpbmdzOiB7IEFQSTogImFwaS13b3JrZXIiIH0sCiAgICAgIHNjcmlwdDogYGV4cG9ydCBkZWZhdWx0IHsgLi4uIH1gLAogICAgfSwKICAgIHsKICAgICAgbmFtZTogImFwaS13b3JrZXIiLAogICAgICBrdk5hbWVzcGFjZXM6IHsgREFUQTogInNoYXJlZCIgfSwgLy8gU2hhcmVkIHN0b3JhZ2UKICAgICAgc2NyaXB0OiBgZXhwb3J0IGRlZmF1bHQgeyAuLi4gfWAsCiAgICB9LAogIF0sCn0pOwpgYGAKCioqV2l0aCByb3V0aW5nOioqCmBgYGpzCndvcmtlcnM6IFsKICB7IG5hbWU6ICJhcGkiLCBzY3JpcHRQYXRoOiAiLi9hcGkuanMiLCByb3V0ZXM6IFsiYXBpLmV4YW1wbGUuY29tLyoiXSB9LAogIHsgbmFtZTogIndlYiIsIHNjcmlwdFBhdGg6ICIuL3dlYi5qcyIsIHJvdXRlczogWyJleGFtcGxlLmNvbS8qIl0gfSwKXSwKYGBgCgojIyBMb2dnaW5nICYgUGVyZm9ybWFuY2UKCmBgYGpzCmltcG9ydCB7IExvZywgTG9nTGV2ZWwgfSBmcm9tICJtaW5pZmxhcmUiOwoKbmV3IE1pbmlmbGFyZSh7CiAgbG9nOiBuZXcgTG9nKExvZ0xldmVsLkRFQlVHKSwgLy8gREVCVUcgfCBJTkZPIHwgV0FSTiB8IEVSUk9SIHwgTk9ORQogIHNjcmlwdFRpbWVvdXQ6IDMwMDAwLCAgICAgICAgIC8vIENQVSBsaW1pdCAobXMpCiAgd29ya2Vyc0NvbmN1cnJlbmN5TGltaXQ6IDEwLCAgLy8gTWF4IGNvbmN1cnJlbnQgd29ya2Vycwp9KTsKYGBgCgojIyBXb3JrZXJzIFNpdGVzCgpgYGBqcwpuZXcgTWluaWZsYXJlKHsKICBzaXRlUGF0aDogIi4vcHVibGljIiwKICBzaXRlSW5jbHVkZTogWyIqKi8qLmh0bWwiLCAiKiovKi5jc3MiXSwKICBzaXRlRXhjbHVkZTogWyIqKi8qLm1hcCJdLAp9KTsKYGBgCgojIyBGcm9tIHdyYW5nbGVyLnRvbWwKCk1pbmlmbGFyZSBkb2Vzbid0IGF1dG8tcmVhZCBgd3JhbmdsZXIudG9tbGA6CgpgYGB0b21sCiMgd3JhbmdsZXIudG9tbApuYW1lID0gIm15LXdvcmtlciIKbWFpbiA9ICJzcmMvaW5kZXgudHMiCmNvbXBhdGliaWxpdHlfZGF0ZSA9ICIyMDI2LTAxLTAxIgpbW2t2X25hbWVzcGFjZXNdXQpiaW5kaW5nID0gIktWIgpgYGAKCmBgYGpzCi8vIE1pbmlmbGFyZSBlcXVpdmFsZW50Cm5ldyBNaW5pZmxhcmUoewogIHNjcmlwdFBhdGg6ICJzcmMvaW5kZXgudHMiLAogIGNvbXBhdGliaWxpdHlEYXRlOiAiMjAyNi0wMS0wMSIsCiAga3ZOYW1lc3BhY2VzOiBbIktWIl0sCn0pOwpgYGAK
+# Configuration
+
+## Script Loading
+
+```js
+// Inline
+new Miniflare({ modules: true, script: `export default { ... }` });
+
+// File-based
+new Miniflare({ scriptPath: "worker.js" });
+
+// Multi-module
+new Miniflare({
+  scriptPath: "src/index.js",
+  modules: true,
+  modulesRules: [
+    { type: "ESModule", include: ["**/*.js"] },
+    { type: "Text", include: ["**/*.txt"] },
+  ],
+});
+```
+
+## Compatibility
+
+```js
+new Miniflare({
+  compatibilityDate: "2026-01-01", // Use recent date for latest features
+  compatibilityFlags: [
+    "nodejs_compat",        // Node.js APIs (process, Buffer, etc)
+    "streams_enable_constructors", // Stream constructors
+  ],
+  upstream: "https://example.com", // Fallback for unhandled requests
+});
+```
+
+**Critical:** Use `compatibilityDate: "2026-01-01"` or latest to match production runtime. Old dates limit available APIs.
+
+## HTTP Server & Request.cf
+
+```js
+new Miniflare({
+  port: 8787,              // Default: 8787
+  host: "127.0.0.1",
+  https: true,             // Self-signed cert
+  liveReload: true,        // Auto-reload HTML
+  
+  cf: true,                // Fetch live Request.cf data (cached)
+  // cf: "./cf.json",      // Or load from file
+  // cf: { colo: "DFW" },  // Or inline mock
+});
+```
+
+**Note:** For tests, use `dispatchFetch()` (no port conflicts).
+
+## Storage Bindings
+
+```js
+new Miniflare({
+  // KV
+  kvNamespaces: ["TEST_NAMESPACE", "CACHE"],
+  kvPersist: "./kv-data", // Optional: persist to disk
+  
+  // R2
+  r2Buckets: ["BUCKET", "IMAGES"],
+  r2Persist: "./r2-data",
+  
+  // Durable Objects
+  modules: true,
+  durableObjects: {
+    COUNTER: "Counter", // className
+    API_OBJECT: { className: "ApiObject", scriptName: "api-worker" },
+  },
+  durableObjectsPersist: "./do-data",
+  
+  // D1
+  d1Databases: ["DB"],
+  d1Persist: "./d1-data",
+  
+  // Cache
+  cache: true, // Default
+  cachePersist: "./cache-data",
+});
+```
+
+## Bindings
+
+```js
+new Miniflare({
+  // Environment variables
+  bindings: {
+    SECRET_KEY: "my-secret-value",
+    API_URL: "https://api.example.com",
+    DEBUG: true,
+  },
+  
+  // Other bindings
+  wasmBindings: { ADD_MODULE: "./add.wasm" },
+  textBlobBindings: { TEXT: "./data.txt" },
+  queueProducers: ["QUEUE"],
+});
+```
+
+## Multiple Workers
+
+```js
+new Miniflare({
+  workers: [
+    {
+      name: "main",
+      kvNamespaces: { DATA: "shared" },
+      serviceBindings: { API: "api-worker" },
+      script: `export default { ... }`,
+    },
+    {
+      name: "api-worker",
+      kvNamespaces: { DATA: "shared" }, // Shared storage
+      script: `export default { ... }`,
+    },
+  ],
+});
+```
+
+**With routing:**
+```js
+workers: [
+  { name: "api", scriptPath: "./api.js", routes: ["api.example.com/*"] },
+  { name: "web", scriptPath: "./web.js", routes: ["example.com/*"] },
+],
+```
+
+## Logging & Performance
+
+```js
+import { Log, LogLevel } from "miniflare";
+
+new Miniflare({
+  log: new Log(LogLevel.DEBUG), // DEBUG | INFO | WARN | ERROR | NONE
+  scriptTimeout: 30000,         // CPU limit (ms)
+  workersConcurrencyLimit: 10,  // Max concurrent workers
+});
+```
+
+## Workers Sites
+
+```js
+new Miniflare({
+  sitePath: "./public",
+  siteInclude: ["**/*.html", "**/*.css"],
+  siteExclude: ["**/*.map"],
+});
+```
+
+## From wrangler.toml
+
+Miniflare doesn't auto-read `wrangler.toml`:
+
+```toml
+# wrangler.toml
+name = "my-worker"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+[[kv_namespaces]]
+binding = "KV"
+```
+
+```js
+// Miniflare equivalent
+new Miniflare({
+  scriptPath: "src/index.ts",
+  compatibilityDate: "2026-01-01",
+  kvNamespaces: ["KV"],
+});
+```

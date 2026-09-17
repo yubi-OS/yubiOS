@@ -1,1 +1,67 @@
-IyBIdW1hbi1pbi10aGUtTG9vcAoKRmV0Y2ggaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FnZW50cy9jb25jZXB0cy9odW1hbi1pbi10aGUtbG9vcC8gZm9yIGNvbXBsZXRlIGRvY3VtZW50YXRpb24uCgpNdWx0aXBsZSBwYXR0ZXJucyBmb3IgYWRkaW5nIGh1bWFuIGFwcHJvdmFsIHRvIGFnZW50IGFjdGlvbnMuCgojIyBEZWNpc2lvbiBHdWlkZQoKfCBQYXR0ZXJuIHwgQmVzdCBmb3IgfAp8LS0tLS0tLS0tfC0tLS0tLS0tLS18CnwgV29ya2Zsb3dzIGB3YWl0Rm9yQXBwcm92YWxgIHwgTG9uZy1ydW5uaW5nIGJhY2tncm91bmQgdGFza3MgfAp8IEFJIFNESyBgbmVlZHNBcHByb3ZhbGAgb24gdG9vbHMgfCBDaGF0IHRvb2wgY2FsbHMgcmVxdWlyaW5nIGFwcHJvdmFsIHwKfCBDbGllbnQgdG9vbHMgKGBvblRvb2xDYWxsYCkgfCBUb29scyB0aGF0IGV4ZWN1dGUgaW4gdGhlIGJyb3dzZXIgfAp8IE1DUCBgZWxpY2l0SW5wdXRgIHwgR2F0aGVyaW5nIHN0cnVjdHVyZWQgaW5wdXQgZnJvbSBNQ1AgY2xpZW50cyB8CgojIyBXb3JrZmxvdyBBcHByb3ZhbHMKCmBgYHR5cGVzY3JpcHQKLy8gSW4gQWdlbnRXb3JrZmxvdzoKY29uc3QgYXBwcm92ZWQgPSBhd2FpdCBzdGVwLndhaXRGb3JFdmVudDx7IGFwcHJvdmVkOiBib29sZWFuIH0+KCJhcHByb3ZhbCIsIHsKICB0aW1lb3V0OiAiN2QiCn0pOwppZiAoIWFwcHJvdmVkLmFwcHJvdmVkKSB0aHJvdyBuZXcgRXJyb3IoIlJlamVjdGVkIik7CgovLyBGcm9tIGFnZW50Ogphd2FpdCB0aGlzLmFwcHJvdmVXb3JrZmxvdyh3b3JrZmxvd0lkKTsKYXdhaXQgdGhpcy5yZWplY3RXb3JrZmxvdyh3b3JrZmxvd0lkKTsKYGBgCgojIyBDaGF0IFRvb2wgQXBwcm92YWxzIChgbmVlZHNBcHByb3ZhbGApCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHRvb2xzID0gewogIGRlbGV0ZUl0ZW06IHRvb2woewogICAgZGVzY3JpcHRpb246ICJEZWxldGUgYW4gaXRlbSIsCiAgICBwYXJhbWV0ZXJzOiB6Lm9iamVjdCh7IGlkOiB6LnN0cmluZygpIH0pLAogICAgZXhlY3V0ZTogYXN5bmMgKHsgaWQgfSkgPT4geyAvKiBkZWxldGUgKi8gfSwKICAgIG5lZWRzQXBwcm92YWw6IHRydWUgIC8vIG9yIGEgZnVuY3Rpb246ICh0b29sQ2FsbCkgPT4gYm9vbGVhbgogIH0pCn07CmBgYAoKQ2xpZW50IGhhbmRsZXMgYXBwcm92YWw6CgpgYGB0c3gKY29uc3QgeyBhZGRUb29sQXBwcm92YWxSZXNwb25zZSwgYWRkVG9vbE91dHB1dCB9ID0gdXNlQWdlbnRDaGF0KHsKICBhZ2VudCwKICBvblRvb2xDYWxsOiBhc3luYyAoeyB0b29sQ2FsbCB9KSA9PiB7CiAgICBpZiAoY29uZmlybShgQWxsb3cgJHt0b29sQ2FsbC50b29sTmFtZX0/YCkpIHsKICAgICAgcmV0dXJuIHsgYXBwcm92ZTogdHJ1ZSB9OwogICAgfQogICAgcmV0dXJuIHsgYXBwcm92ZTogZmFsc2UgfTsKICB9Cn0pOwpgYGAKClRvIGRlbnkgd2l0aCBhIGN1c3RvbSBtZXNzYWdlOgoKYGBgdHN4CmFkZFRvb2xPdXRwdXQodG9vbENhbGxJZCwgIm91dHB1dC1lcnJvciIsICJVc2VyIHJlamVjdGVkIHRoaXMgYWN0aW9uIik7CmBgYAoKIyMgSW1wb3J0YW50CgotIGB3YWl0Rm9yQXBwcm92YWxgIG1heSByZXR1cm4gYHVuZGVmaW5lZGAgb24gdGltZW91dCDigJQgaGFuZGxlIGl0Ci0gYGFkZFRvb2xPdXRwdXRgIHdpdGggYG91dHB1dC1lcnJvcmAgZG9lcyBOT1QgYXV0by1jb250aW51ZSB0aGUgTExNIOKAlCB5b3UgbWF5IG5lZWQgYHNlbmRNZXNzYWdlYCBhZnRlcgotIEZvciBPcGVuQUkgQWdlbnRzIFNESywgdXNlIGBuZWVkc0FwcHJvdmFsYCBvbiB0aGUgdG9vbCBkZWZpbml0aW9uIChzYW1lIHBhdHRlcm4pCg==
+# Human-in-the-Loop
+
+Fetch https://developers.cloudflare.com/agents/concepts/human-in-the-loop/ for complete documentation.
+
+Multiple patterns for adding human approval to agent actions.
+
+## Decision Guide
+
+| Pattern | Best for |
+|---------|----------|
+| Workflows `waitForApproval` | Long-running background tasks |
+| AI SDK `needsApproval` on tools | Chat tool calls requiring approval |
+| Client tools (`onToolCall`) | Tools that execute in the browser |
+| MCP `elicitInput` | Gathering structured input from MCP clients |
+
+## Workflow Approvals
+
+```typescript
+// In AgentWorkflow:
+const approved = await step.waitForEvent<{ approved: boolean }>("approval", {
+  timeout: "7d"
+});
+if (!approved.approved) throw new Error("Rejected");
+
+// From agent:
+await this.approveWorkflow(workflowId);
+await this.rejectWorkflow(workflowId);
+```
+
+## Chat Tool Approvals (`needsApproval`)
+
+```typescript
+const tools = {
+  deleteItem: tool({
+    description: "Delete an item",
+    parameters: z.object({ id: z.string() }),
+    execute: async ({ id }) => { /* delete */ },
+    needsApproval: true  // or a function: (toolCall) => boolean
+  })
+};
+```
+
+Client handles approval:
+
+```tsx
+const { addToolApprovalResponse, addToolOutput } = useAgentChat({
+  agent,
+  onToolCall: async ({ toolCall }) => {
+    if (confirm(`Allow ${toolCall.toolName}?`)) {
+      return { approve: true };
+    }
+    return { approve: false };
+  }
+});
+```
+
+To deny with a custom message:
+
+```tsx
+addToolOutput(toolCallId, "output-error", "User rejected this action");
+```
+
+## Important
+
+- `waitForApproval` may return `undefined` on timeout — handle it
+- `addToolOutput` with `output-error` does NOT auto-continue the LLM — you may need `sendMessage` after
+- For OpenAI Agents SDK, use `needsApproval` on the tool definition (same pattern)

@@ -1,1 +1,192 @@
-IyBUYWlsIFdvcmtlcnMgR290Y2hhcyAmIERlYnVnZ2luZwoKIyMgQ3JpdGljYWwgUGl0ZmFsbHMKCiMjIyAxLiBOb3QgVXNpbmcgYGN0eC53YWl0VW50aWwoKWAKCioqUHJvYmxlbToqKiBBc3luYyB3b3JrIGRvZXNuJ3QgY29tcGxldGUgb3IgdGFpbCBXb3JrZXIgdGltZXMgb3V0ICAKKipDYXVzZToqKiBIYW5kbGVycyBleGl0IGltbWVkaWF0ZWx5OyBhd2FpdGluZyBibG9ja3MgcHJvY2Vzc2luZyAgCioqU29sdXRpb246KioKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HIC0gZmlyZSBhbmQgZm9yZ2V0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyB0YWlsKGV2ZW50cykgewogICAgZmV0Y2goZW5kcG9pbnQsIHsgYm9keTogSlNPTi5zdHJpbmdpZnkoZXZlbnRzKSB9KTsKICB9Cn07CgovLyDinYwgV1JPTkcgLSBibG9ja2luZyBhd2FpdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgdGFpbChldmVudHMsIGVudiwgY3R4KSB7CiAgICBhd2FpdCBmZXRjaChlbmRwb2ludCwgeyBib2R5OiBKU09OLnN0cmluZ2lmeShldmVudHMpIH0pOwogIH0KfTsKCi8vIOKchSBDT1JSRUNUCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyB0YWlsKGV2ZW50cywgZW52LCBjdHgpIHsKICAgIGN0eC53YWl0VW50aWwoCiAgICAgIChhc3luYyAoKSA9PiB7CiAgICAgICAgYXdhaXQgZmV0Y2goZW5kcG9pbnQsIHsgYm9keTogSlNPTi5zdHJpbmdpZnkoZXZlbnRzKSB9KTsKICAgICAgICBhd2FpdCBwcm9jZXNzTW9yZSgpOwogICAgICB9KSgpCiAgICApOwogIH0KfTsKYGBgCgojIyMgMi4gTWlzc2luZyBgdGFpbCgpYCBIYW5kbGVyCgoqKlByb2JsZW06KiogUHJvZHVjZXIgZGVwbG95bWVudCBmYWlscyAgCioqQ2F1c2U6KiogV29ya2VyIGluIGB0YWlsX2NvbnN1bWVyc2AgZG9lc24ndCBleHBvcnQgYHRhaWwoKWAgaGFuZGxlciAgCioqU29sdXRpb246KiogRW5zdXJlIGBleHBvcnQgZGVmYXVsdCB7IGFzeW5jIHRhaWwoZXZlbnRzLCBlbnYsIGN0eCkgeyAuLi4gfSB9YAoKIyMjIDMuIE91dGNvbWUgdnMgSFRUUCBTdGF0dXMKCioqUHJvYmxlbToqKiBGaWx0ZXJpbmcgYnkgd3Jvbmcgc3RhdHVzICAKKipDYXVzZToqKiBgb3V0Y29tZWAgaXMgc2NyaXB0IGV4ZWN1dGlvbiBzdGF0dXMsIG5vdCBIVFRQIHN0YXR1cwoKYGBgdHlwZXNjcmlwdAovLyDinYwgV1JPTkcKaWYgKGV2ZW50Lm91dGNvbWUgPT09IDUwMCkgeyAvKiBuZXZlciBtYXRjaGVzICovIH0KCi8vIOKchSBDT1JSRUNUCmlmIChldmVudC5vdXRjb21lID09PSAnZXhjZXB0aW9uJykgeyAvKiBzY3JpcHQgdGhyZXcgKi8gfQppZiAoZXZlbnQuZXZlbnQ/LnJlc3BvbnNlPy5zdGF0dXMgPT09IDUwMCkgeyAvKiBIVFRQIDUwMCAqLyB9CmBgYAoKIyMjIDQuIFRpbWVzdGFtcCBVbml0cwoKKipQcm9ibGVtOioqIERhdGVzIG9mZiBieSAxMDAweCAgCioqQ2F1c2U6KiogVGltZXN0YW1wcyBhcmUgZXBvY2ggbWlsbGlzZWNvbmRzLCBub3Qgc2Vjb25kcwoKYGBgdHlwZXNjcmlwdAovLyDinYwgV1JPTkc6IGNvbnN0IGRhdGUgPSBuZXcgRGF0ZShldmVudC5ldmVudFRpbWVzdGFtcCAqIDEwMDApOwovLyDinIUgQ09SUkVDVDogY29uc3QgZGF0ZSA9IG5ldyBEYXRlKGV2ZW50LmV2ZW50VGltZXN0YW1wKTsKYGBgCgojIyMgNS4gVHlwZSBOYW1lIE1pc21hdGNoCgoqKlByb2JsZW06KiogVXNpbmcgYFRhaWxJdGVtYCB0eXBlICAKKipDYXVzZToqKiBPbGQgZG9jcyB1c2VkIGBUYWlsSXRlbWAsIFNESyB1c2VzIGBUcmFjZUl0ZW1gCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB0eXBlIHsgVHJhY2VJdGVtIH0gZnJvbSAnQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlcyc7CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyB0YWlsKGV2ZW50czogVHJhY2VJdGVtW10sIGVudiwgY3R4KSB7IC8qIC4uLiAqLyB9Cn07CmBgYAoKIyMjIDYuIEV4Y2Vzc2l2ZSBMb2dnaW5nIFZvbHVtZQoKKipQcm9ibGVtOioqIFVuZXhwZWN0ZWQgaGlnaCBjb3N0cyAgCioqQ2F1c2U6KiogSW52b2tlZCBvbiBFVkVSWSBwcm9kdWNlciByZXF1ZXN0ICAKKipTb2x1dGlvbjoqKiBTYW1wbGUgZXZlbnRzCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyB0YWlsKGV2ZW50cywgZW52LCBjdHgpIHsKICAgIGlmIChNYXRoLnJhbmRvbSgpID4gMC4xKSByZXR1cm47ICAvLyAxMCUgc2FtcGxlCiAgICBjdHgud2FpdFVudGlsKHNlbmRUb0VuZHBvaW50KGV2ZW50cykpOwogIH0KfTsKYGBgCgojIyMgNy4gU2VyaWFsaXphdGlvbiBJc3N1ZXMKCioqUHJvYmxlbToqKiBgSlNPTi5zdHJpbmdpZnkoKWAgZmFpbHMgIAoqKkNhdXNlOioqIGBsb2cubWVzc2FnZWAgaXMgYHVua25vd25bXWAgd2l0aCBub24tc2VyaWFsaXphYmxlIHZhbHVlcyAgCioqU29sdXRpb246KioKCmBgYHR5cGVzY3JpcHQKY29uc3Qgc2FmZVBheWxvYWQgPSBldmVudHMubWFwKGUgPT4gKHsKICAuLi5lLAogIGxvZ3M6IGUubG9ncy5tYXAobG9nID0+ICh7CiAgICAuLi5sb2csCiAgICBtZXNzYWdlOiBsb2cubWVzc2FnZS5tYXAobSA9PiB7CiAgICAgIHRyeSB7IHJldHVybiBKU09OLnBhcnNlKEpTT04uc3RyaW5naWZ5KG0pKTsgfQogICAgICBjYXRjaCB7IHJldHVybiBTdHJpbmcobSk7IH0KICAgIH0pCiAgfSkpCn0pKTsKYGBgCgojIyMgOC4gTWlzc2luZyBFcnJvciBIYW5kbGluZwoKKipQcm9ibGVtOioqIFRhaWwgV29ya2VyIHNpbGVudGx5IGZhaWxzICAKKipDYXVzZToqKiBObyB0cnkvY2F0Y2ggIAoqKlNvbHV0aW9uOioqCgpgYGB0eXBlc2NyaXB0CmN0eC53YWl0VW50aWwoKGFzeW5jICgpID0+IHsKICB0cnkgewogICAgYXdhaXQgZmV0Y2goZW52LkVORFBPSU5ULCB7IGJvZHk6IEpTT04uc3RyaW5naWZ5KGV2ZW50cykgfSk7CiAgfSBjYXRjaCAoZXJyb3IpIHsKICAgIGNvbnNvbGUuZXJyb3IoIlRhaWwgZXJyb3I6IiwgZXJyb3IpOwogICAgYXdhaXQgZW52LkZBTExCQUNLX0tWLnB1dChgZmFpbGVkOiR7RGF0ZS5ub3coKX1gLCBKU09OLnN0cmluZ2lmeShldmVudHMpKTsKICB9Cn0pKCkpOwpgYGAKCiMjIyA5LiBEZXBsb3ltZW50IE9yZGVyCgoqKlByb2JsZW06KiogUHJvZHVjZXIgZGVwbG95bWVudCBmYWlscyAgCioqQ2F1c2U6KiogVGFpbCBjb25zdW1lciBub3QgZGVwbG95ZWQgeWV0ICAKKipTb2x1dGlvbjoqKiBEZXBsb3kgdGFpbCBjb25zdW1lciBGSVJTVAoKYGBgYmFzaApjZCB0YWlsLXdvcmtlciAmJiB3cmFuZ2xlciBkZXBsb3kKY2QgLi4vcHJvZHVjZXIgJiYgd3JhbmdsZXIgZGVwbG95CmBgYAoKIyMjIDEwLiBObyBFdmVudCBSZXRyeQoKKipQcm9ibGVtOioqIEV2ZW50cyBsb3N0IHdoZW4gaGFuZGxlciBmYWlscyAgCioqQ2F1c2U6KiogRmFpbGVkIGludm9jYXRpb25zIE5PVCByZXRyaWVkICAKKipTb2x1dGlvbjoqKiBJbXBsZW1lbnQgZmFsbGJhY2sgc3RvcmFnZSAoc2VlICM4KQoKIyMgRGVidWdnaW5nCgoqKlZpZXcgbG9nczoqKiBgd3JhbmdsZXIgdGFpbCBteS10YWlsLXdvcmtlcmAKCioqSW5jcmVtZW50YWwgdGVzdGluZzoqKgoxLiBWZXJpZnkgcmVjZWlwdDogYGNvbnNvbGUubG9nKCdFdmVudHM6JywgZXZlbnRzLmxlbmd0aClgCjIuIEluc3BlY3Qgc3RydWN0dXJlOiBgY29uc29sZS5sb2coSlNPTi5zdHJpbmdpZnkoZXZlbnRzWzBdLCBudWxsLCAyKSlgCjMuIEFkZCBleHRlcm5hbCBjYWxsIHdpdGggYGN0eC53YWl0VW50aWwoKWAKCioqTW9uaXRvciBkYXNoYm9hcmQ6KiogQ2hlY2sgaW52b2NhdGlvbiBjb3VudCAobWF0Y2hlcyBwcm9kdWNlcj8pLCBlcnJvciByYXRlLCBDUFUgdGltZQoKIyMgVGVzdGluZwoKQWRkIHRlc3QgZW5kcG9pbnQgdG8gcHJvZHVjZXI6CgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0KSB7CiAgICBpZiAocmVxdWVzdC51cmwuaW5jbHVkZXMoJy90ZXN0JykpIHsKICAgICAgY29uc29sZS5sb2coJ1Rlc3QgbG9nJyk7CiAgICAgIHRocm93IG5ldyBFcnJvcignVGVzdCBlcnJvcicpOwogICAgfQogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnT0snKTsKICB9Cn07CmBgYAoKVHJpZ2dlcjogYGN1cmwgaHR0cHM6Ly9wcm9kdWNlci5leGFtcGxlLndvcmtlcnMuZGV2L3Rlc3RgCgojIyBDb21tb24gRXJyb3JzCgp8IEVycm9yIHwgQ2F1c2UgfCBTb2x1dGlvbiB8CnwtLS0tLS0tfC0tLS0tLS18LS0tLS0tLS0tLXwKfCAiVGFpbCBjb25zdW1lciBub3QgZm91bmQiIHwgTm90IGRlcGxveWVkIHwgRGVwbG95IHRhaWwgV29ya2VyIGZpcnN0IHwKfCAiTm8gdGFpbCBoYW5kbGVyIiB8IE1pc3NpbmcgYHRhaWwoKWAgfCBBZGQgdG8gZGVmYXVsdCBleHBvcnQgfAp8ICJ3YWl0VW50aWwgaXMgbm90IGEgZnVuY3Rpb24iIHwgTWlzc2luZyBgY3R4YCB8IEFkZCBgY3R4YCBwYXJhbWV0ZXIgfAp8IFRpbWVvdXQgfCBCbG9ja2luZyBhd2FpdCB8IFVzZSBgY3R4LndhaXRVbnRpbCgpYCB8CgojIyBQZXJmb3JtYW5jZSBOb3RlcwoKLSBNYXggMTAwIGV2ZW50cyBwZXIgaW52b2NhdGlvbgotIEVhY2ggY29uc3VtZXIgcmVjZWl2ZXMgYWxsIGV2ZW50cyBpbmRlcGVuZGVudGx5Ci0gQ1BVIGxpbWl0cyBzYW1lIGFzIHJlZ3VsYXIgV29ya2VycwotIEZvciBoaWdoIHZvbHVtZSwgdXNlIER1cmFibGUgT2JqZWN0cyBiYXRjaGluZwo=
+# Tail Workers Gotchas & Debugging
+
+## Critical Pitfalls
+
+### 1. Not Using `ctx.waitUntil()`
+
+**Problem:** Async work doesn't complete or tail Worker times out  
+**Cause:** Handlers exit immediately; awaiting blocks processing  
+**Solution:**
+
+```typescript
+// ❌ WRONG - fire and forget
+export default {
+  async tail(events) {
+    fetch(endpoint, { body: JSON.stringify(events) });
+  }
+};
+
+// ❌ WRONG - blocking await
+export default {
+  async tail(events, env, ctx) {
+    await fetch(endpoint, { body: JSON.stringify(events) });
+  }
+};
+
+// ✅ CORRECT
+export default {
+  async tail(events, env, ctx) {
+    ctx.waitUntil(
+      (async () => {
+        await fetch(endpoint, { body: JSON.stringify(events) });
+        await processMore();
+      })()
+    );
+  }
+};
+```
+
+### 2. Missing `tail()` Handler
+
+**Problem:** Producer deployment fails  
+**Cause:** Worker in `tail_consumers` doesn't export `tail()` handler  
+**Solution:** Ensure `export default { async tail(events, env, ctx) { ... } }`
+
+### 3. Outcome vs HTTP Status
+
+**Problem:** Filtering by wrong status  
+**Cause:** `outcome` is script execution status, not HTTP status
+
+```typescript
+// ❌ WRONG
+if (event.outcome === 500) { /* never matches */ }
+
+// ✅ CORRECT
+if (event.outcome === 'exception') { /* script threw */ }
+if (event.event?.response?.status === 500) { /* HTTP 500 */ }
+```
+
+### 4. Timestamp Units
+
+**Problem:** Dates off by 1000x  
+**Cause:** Timestamps are epoch milliseconds, not seconds
+
+```typescript
+// ❌ WRONG: const date = new Date(event.eventTimestamp * 1000);
+// ✅ CORRECT: const date = new Date(event.eventTimestamp);
+```
+
+### 5. Type Name Mismatch
+
+**Problem:** Using `TailItem` type  
+**Cause:** Old docs used `TailItem`, SDK uses `TraceItem`
+
+```typescript
+import type { TraceItem } from '@cloudflare/workers-types';
+export default {
+  async tail(events: TraceItem[], env, ctx) { /* ... */ }
+};
+```
+
+### 6. Excessive Logging Volume
+
+**Problem:** Unexpected high costs  
+**Cause:** Invoked on EVERY producer request  
+**Solution:** Sample events
+
+```typescript
+export default {
+  async tail(events, env, ctx) {
+    if (Math.random() > 0.1) return;  // 10% sample
+    ctx.waitUntil(sendToEndpoint(events));
+  }
+};
+```
+
+### 7. Serialization Issues
+
+**Problem:** `JSON.stringify()` fails  
+**Cause:** `log.message` is `unknown[]` with non-serializable values  
+**Solution:**
+
+```typescript
+const safePayload = events.map(e => ({
+  ...e,
+  logs: e.logs.map(log => ({
+    ...log,
+    message: log.message.map(m => {
+      try { return JSON.parse(JSON.stringify(m)); }
+      catch { return String(m); }
+    })
+  }))
+}));
+```
+
+### 8. Missing Error Handling
+
+**Problem:** Tail Worker silently fails  
+**Cause:** No try/catch  
+**Solution:**
+
+```typescript
+ctx.waitUntil((async () => {
+  try {
+    await fetch(env.ENDPOINT, { body: JSON.stringify(events) });
+  } catch (error) {
+    console.error("Tail error:", error);
+    await env.FALLBACK_KV.put(`failed:${Date.now()}`, JSON.stringify(events));
+  }
+})());
+```
+
+### 9. Deployment Order
+
+**Problem:** Producer deployment fails  
+**Cause:** Tail consumer not deployed yet  
+**Solution:** Deploy tail consumer FIRST
+
+```bash
+cd tail-worker && wrangler deploy
+cd ../producer && wrangler deploy
+```
+
+### 10. No Event Retry
+
+**Problem:** Events lost when handler fails  
+**Cause:** Failed invocations NOT retried  
+**Solution:** Implement fallback storage (see #8)
+
+## Debugging
+
+**View logs:** `wrangler tail my-tail-worker`
+
+**Incremental testing:**
+1. Verify receipt: `console.log('Events:', events.length)`
+2. Inspect structure: `console.log(JSON.stringify(events[0], null, 2))`
+3. Add external call with `ctx.waitUntil()`
+
+**Monitor dashboard:** Check invocation count (matches producer?), error rate, CPU time
+
+## Testing
+
+Add test endpoint to producer:
+
+```typescript
+export default {
+  async fetch(request) {
+    if (request.url.includes('/test')) {
+      console.log('Test log');
+      throw new Error('Test error');
+    }
+    return new Response('OK');
+  }
+};
+```
+
+Trigger: `curl https://producer.example.workers.dev/test`
+
+## Common Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| "Tail consumer not found" | Not deployed | Deploy tail Worker first |
+| "No tail handler" | Missing `tail()` | Add to default export |
+| "waitUntil is not a function" | Missing `ctx` | Add `ctx` parameter |
+| Timeout | Blocking await | Use `ctx.waitUntil()` |
+
+## Performance Notes
+
+- Max 100 events per invocation
+- Each consumer receives all events independently
+- CPU limits same as regular Workers
+- For high volume, use Durable Objects batching

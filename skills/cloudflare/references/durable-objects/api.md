@@ -1,1 +1,187 @@
-IyBEdXJhYmxlIE9iamVjdHMgQVBJCgojIyBDbGFzcyBTdHJ1Y3R1cmUKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgRHVyYWJsZU9iamVjdCB9IGZyb20gImNsb3VkZmxhcmU6d29ya2VycyI7CgpleHBvcnQgY2xhc3MgTXlETyBleHRlbmRzIER1cmFibGVPYmplY3Q8RW52PiB7CiAgY29uc3RydWN0b3IoY3R4OiBEdXJhYmxlT2JqZWN0U3RhdGUsIGVudjogRW52KSB7CiAgICBzdXBlcihjdHgsIGVudik7CiAgICAvLyBSdW5zIG9uIEVWRVJZIHdha2UgLSBrZWVwIGxpZ2h0IQogIH0KICAKICAvLyBSUEMgbWV0aG9kcyAoY2FsbGVkIGRpcmVjdGx5IGZyb20gd29ya2VyKQogIGFzeW5jIG15TWV0aG9kKGFyZzogc3RyaW5nKTogUHJvbWlzZTxzdHJpbmc+IHsgcmV0dXJuIGFyZzsgfQogIAogIC8vIGZldGNoIGhhbmRsZXIgKGxlZ2FjeS9IVFRQIHNlbWFudGljcykKICBhc3luYyBmZXRjaChyZXE6IFJlcXVlc3QpOiBQcm9taXNlPFJlc3BvbnNlPiB7IC8qIC4uLiAqLyB9CiAgCiAgLy8gTGlmZWN5Y2xlIGhhbmRsZXJzCiAgYXN5bmMgYWxhcm0oKSB7IC8qIGFsYXJtIGZpcmVkICovIH0KICBhc3luYyB3ZWJTb2NrZXRNZXNzYWdlKHdzOiBXZWJTb2NrZXQsIG1zZzogc3RyaW5nIHwgQXJyYXlCdWZmZXIpIHsgLyogLi4uICovIH0KICBhc3luYyB3ZWJTb2NrZXRDbG9zZSh3czogV2ViU29ja2V0LCBjb2RlOiBudW1iZXIsIHJlYXNvbjogc3RyaW5nLCB3YXNDbGVhbjogYm9vbGVhbikgeyAvKiAuLi4gKi8gfQogIGFzeW5jIHdlYlNvY2tldEVycm9yKHdzOiBXZWJTb2NrZXQsIGVycm9yOiB1bmtub3duKSB7IC8qIC4uLiAqLyB9Cn0KYGBgCgojIyBEdXJhYmxlT2JqZWN0U3RhdGUgQ29udGV4dCBNZXRob2RzCgojIyMgQ29uY3VycmVuY3kgQ29udHJvbAoKYGBgdHlwZXNjcmlwdAovLyBDb21wbGV0ZSB3b3JrIGFmdGVyIHJlc3BvbnNlIHNlbnQgKGUuZy4sIGNsZWFudXAsIGxvZ2dpbmcpCnRoaXMuY3R4LndhaXRVbnRpbChwcm9taXNlOiBQcm9taXNlPGFueT4pOiB2b2lkCgovLyBDcml0aWNhbCBzZWN0aW9uIC0gYmxvY2tzIGFsbCBvdGhlciByZXF1ZXN0cyB1bnRpbCBjb21wbGV0ZQphd2FpdCB0aGlzLmN0eC5ibG9ja0NvbmN1cnJlbmN5V2hpbGUoYXN5bmMgKCkgPT4gewogIC8vIE5vIG90aGVyIHJlcXVlc3RzIHByb2Nlc3NlZCBkdXJpbmcgdGhpcyBibG9jawogIC8vIFVzZSBmb3IgaW5pdGlhbGl6YXRpb24gb3IgY3JpdGljYWwgb3BlcmF0aW9ucwp9KQpgYGAKCioqV2hlbiB0byB1c2U6KioKLSBgd2FpdFVudGlsKClgOiBCYWNrZ3JvdW5kIGNsZWFudXAsIGxvZ2dpbmcsIG5vbi1jcml0aWNhbCB3b3JrIGFmdGVyIHJlc3BvbnNlCi0gYGJsb2NrQ29uY3VycmVuY3lXaGlsZSgpYDogRmlyc3QtdGltZSBpbml0LCBzY2hlbWEgbWlncmF0aW9uLCBjcml0aWNhbCBzdGF0ZSBzZXR1cAoKIyMjIExpZmVjeWNsZQoKYGBgdHlwZXNjcmlwdAp0aGlzLmN0eC5pZCAgICAgICAgICAgICAgLy8gRHVyYWJsZU9iamVjdElkIG9mIHRoaXMgaW5zdGFuY2UKdGhpcy5jdHguYWJvcnQoKSAgICAgICAgIC8vIEZvcmNlIGV2aWN0aW9uICh1c2UgYWZ0ZXIgUElUUiByZXN0b3JlIHRvIHJlbG9hZCBzdGF0ZSkKYGBgCgojIyMgU3RvcmFnZSBBY2Nlc3MKCmBgYHR5cGVzY3JpcHQKdGhpcy5jdHguc3RvcmFnZS5zcWwgICAgIC8vIFNRTGl0ZSBBUEkgKHJlY29tbWVuZGVkKQp0aGlzLmN0eC5zdG9yYWdlLmt2ICAgICAgLy8gU3luYyBLViBBUEkgKFNRTGl0ZSBET3Mgb25seSkKdGhpcy5jdHguc3RvcmFnZSAgICAgICAgIC8vIEFzeW5jIEtWIEFQSSAobGVnYWN5L0tWLW9ubHkgRE9zKQpgYGAKClNlZSAqKltETyBTdG9yYWdlXSguLi9kby1zdG9yYWdlL1JFQURNRS5tZCkqKiBmb3IgY29tcGxldGUgc3RvcmFnZSBBUEkgcmVmZXJlbmNlLgoKIyMjIFdlYlNvY2tldCBNYW5hZ2VtZW50CgpgYGB0eXBlc2NyaXB0CnRoaXMuY3R4LmFjY2VwdFdlYlNvY2tldCh3czogV2ViU29ja2V0LCB0YWdzPzogc3RyaW5nW10pICAvLyBFbmFibGUgaGliZXJuYXRpb24KdGhpcy5jdHguZ2V0V2ViU29ja2V0cyh0YWc/OiBzdHJpbmcpOiBXZWJTb2NrZXRbXSAgICAgICAgIC8vIEdldCBieSB0YWcgb3IgYWxsCnRoaXMuY3R4LmdldFRhZ3Mod3M6IFdlYlNvY2tldCk6IHN0cmluZ1tdICAgICAgICAgICAgICAgICAvLyBHZXQgdGFncyBmb3IgY29ubmVjdGlvbgpgYGAKCiMjIyBBbGFybXMKCmBgYHR5cGVzY3JpcHQKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5zZXRBbGFybSh0aW1lc3RhbXA6IG51bWJlciB8IERhdGUpICAvLyBTY2hlZHVsZSAob3ZlcndyaXRlcyBleGlzdGluZykKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5nZXRBbGFybSgpOiBudW1iZXIgfCBudWxsICAgICAgICAgICAvLyBHZXQgbmV4dCBhbGFybSB0aW1lCmF3YWl0IHRoaXMuY3R4LnN0b3JhZ2UuZGVsZXRlQWxhcm0oKTogdm9pZCAgICAgICAgICAgICAgICAgLy8gQ2FuY2VsIGFsYXJtCmBgYAoKKipMaW1pdDoqKiAxIGFsYXJtIHBlciBETy4gVXNlIHF1ZXVlIHBhdHRlcm4gZm9yIG11bHRpcGxlIGV2ZW50cyAoc2VlIFtQYXR0ZXJuc10oLi9wYXR0ZXJucy5tZCkpLgoKIyMgU3RvcmFnZSBBUElzCgpGb3IgZGV0YWlsZWQgc3RvcmFnZSBkb2N1bWVudGF0aW9uIGluY2x1ZGluZyBTUUxpdGUgcXVlcmllcywgS1Ygb3BlcmF0aW9ucywgdHJhbnNhY3Rpb25zLCBhbmQgUG9pbnQtaW4tVGltZSBSZWNvdmVyeSwgc2VlICoqW0RPIFN0b3JhZ2VdKC4uL2RvLXN0b3JhZ2UvUkVBRE1FLm1kKSoqLgoKUXVpY2sgcmVmZXJlbmNlOgoKYGBgdHlwZXNjcmlwdAovLyBTUUxpdGUgKHJlY29tbWVuZGVkKQp0aGlzLmN0eC5zdG9yYWdlLnNxbC5leGVjKCJTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gPyIsIHVzZXJJZCkub25lKCkKCi8vIFN5bmMgS1YgKFNRTGl0ZSBET3Mgb25seSkKdGhpcy5jdHguc3RvcmFnZS5rdi5nZXQoImtleSIpCgovLyBBc3luYyBLViAobGVnYWN5KQphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmdldCgia2V5IikKYGBgCgojIyBBbGFybXMKClNjaGVkdWxlIGZ1dHVyZSB3b3JrIHRoYXQgc3Vydml2ZXMgZXZpY3Rpb246CgpgYGB0eXBlc2NyaXB0Ci8vIFNldCBhbGFybSAob3ZlcndyaXRlcyBhbnkgZXhpc3RpbmcgYWxhcm0pCmF3YWl0IHRoaXMuY3R4LnN0b3JhZ2Uuc2V0QWxhcm0oRGF0ZS5ub3coKSArIDM2MDAwMDApICAvLyAxIGhvdXIgZnJvbSBub3cKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5zZXRBbGFybShuZXcgRGF0ZSgiMjAyNi0wMi0wMSIpKSAgLy8gQWJzb2x1dGUgdGltZQoKLy8gQ2hlY2sgbmV4dCBhbGFybQpjb25zdCBuZXh0UnVuID0gYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5nZXRBbGFybSgpICAvLyBudWxsIGlmIG5vbmUKCi8vIENhbmNlbCBhbGFybQphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmRlbGV0ZUFsYXJtKCkKCi8vIEhhbmRsZXIgY2FsbGVkIHdoZW4gYWxhcm0gZmlyZXMKYXN5bmMgYWxhcm0oKSB7CiAgLy8gUnVucyBvbmNlIGFsYXJtIHRyaWdnZXJzCiAgLy8gRE8gd2FrZXMgZnJvbSBoaWJlcm5hdGlvbiBpZiBuZWVkZWQKICAvLyBVc2UgZm9yIGNsZWFudXAsIG5vdGlmaWNhdGlvbnMsIHNjaGVkdWxlZCB0YXNrcwp9CmBgYAoKKipMaW1pdGF0aW9uczoqKgotIDEgYWxhcm0gcGVyIERPIG1heGltdW0KLSBPdmVyd3JpdGVzIHByZXZpb3VzIGFsYXJtIHdoZW4gc2V0Ci0gVXNlIHF1ZXVlIHBhdHRlcm4gZm9yIG11bHRpcGxlIHNjaGVkdWxlZCBldmVudHMgKHNlZSBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpKQoKKipSZWxpYWJpbGl0eToqKgotIEFsYXJtcyBzdXJ2aXZlIERPIGV2aWN0aW9uL3Jlc3RhcnQKLSBDbG91ZGZsYXJlIHJldHJpZXMgZmFpbGVkIGFsYXJtcyBhdXRvbWF0aWNhbGx5Ci0gTm90IGd1YXJhbnRlZWQgZXhhY3RseS1vbmNlIChoYW5kbGUgaWRlbXBvdGVudGx5KQoKIyMgV2ViU29ja2V0IEhpYmVybmF0aW9uCgpIaWJlcm5hdGlvbiBhbGxvd3MgRE9zIHdpdGggb3BlbiBXZWJTb2NrZXQgY29ubmVjdGlvbnMgdG8gY29uc3VtZSB6ZXJvIGNvbXB1dGUvbWVtb3J5IHVudGlsIG1lc3NhZ2UgYXJyaXZlcy4KCmBgYHR5cGVzY3JpcHQKYXN5bmMgZmV0Y2gocmVxOiBSZXF1ZXN0KTogUHJvbWlzZTxSZXNwb25zZT4gewogIGNvbnN0IFtjbGllbnQsIHNlcnZlcl0gPSBPYmplY3QudmFsdWVzKG5ldyBXZWJTb2NrZXRQYWlyKCkpOwogIHRoaXMuY3R4LmFjY2VwdFdlYlNvY2tldChzZXJ2ZXIsIFsicm9vbToxMjMiXSk7ICAvLyBUYWdzIGZvciBmaWx0ZXJpbmcKICBzZXJ2ZXIuc2VyaWFsaXplQXR0YWNobWVudCh7IHVzZXJJZDogImFiYyIgfSk7ICAgIC8vIFBlcnNpc3RlZCBtZXRhZGF0YQogIHJldHVybiBuZXcgUmVzcG9uc2UobnVsbCwgeyBzdGF0dXM6IDEwMSwgd2ViU29ja2V0OiBjbGllbnQgfSk7Cn0KCi8vIENhbGxlZCB3aGVuIG1lc3NhZ2UgYXJyaXZlcyAoRE8gd2FrZXMgZnJvbSBoaWJlcm5hdGlvbikKYXN5bmMgd2ViU29ja2V0TWVzc2FnZSh3czogV2ViU29ja2V0LCBtc2c6IHN0cmluZyB8IEFycmF5QnVmZmVyKSB7CiAgY29uc3QgZGF0YSA9IHdzLmRlc2VyaWFsaXplQXR0YWNobWVudCgpOyAgICAgICAgICAvLyBSZXRyaWV2ZSBtZXRhZGF0YQogIGZvciAoY29uc3QgYyBvZiB0aGlzLmN0eC5nZXRXZWJTb2NrZXRzKCJyb29tOjEyMyIpKSBjLnNlbmQobXNnKTsKfQoKLy8gQ2FsbGVkIG9uIGNsb3NlIChvcHRpb25hbCBoYW5kbGVyKQphc3luYyB3ZWJTb2NrZXRDbG9zZSh3czogV2ViU29ja2V0LCBjb2RlOiBudW1iZXIsIHJlYXNvbjogc3RyaW5nLCB3YXNDbGVhbjogYm9vbGVhbikgewogIC8vIENsZWFudXAgbG9naWMsIHJlbW92ZSBmcm9tIGxpc3RzLCBldGMuCn0KCi8vIENhbGxlZCBvbiBlcnJvciAob3B0aW9uYWwgaGFuZGxlcikKYXN5bmMgd2ViU29ja2V0RXJyb3Iod3M6IFdlYlNvY2tldCwgZXJyb3I6IHVua25vd24pIHsKICBjb25zb2xlLmVycm9yKCJXZWJTb2NrZXQgZXJyb3I6IiwgZXJyb3IpOwogIC8vIEhhbmRsZSBlcnJvciwgY2xvc2UgY29ubmVjdGlvbiwgZXRjLgp9CmBgYAoKKipLZXkgY29uY2VwdHM6KioKLSAqKkF1dG8taGliZXJuYXRpb246KiogRE8gaGliZXJuYXRlcyB3aGVuIG5vIGFjdGl2ZSByZXF1ZXN0cy9hbGFybXMKLSAqKlplcm8gY29zdDoqKiBIaWJlcm5hdGVkIERPcyBpbmN1ciBubyBjaGFyZ2VzIHdoaWxlIHByZXNlcnZpbmcgY29ubmVjdGlvbnMKLSAqKk1lbW9yeSBjbGVhcmVkOioqIEFsbCBpbi1tZW1vcnkgc3RhdGUgbG9zdCBvbiBoaWJlcm5hdGlvbgotICoqQXR0YWNobWVudCBwZXJzaXN0ZW5jZToqKiBVc2UgYHNlcmlhbGl6ZUF0dGFjaG1lbnQoKWAgZm9yIHBlci1jb25uZWN0aW9uIG1ldGFkYXRhIHRoYXQgc3Vydml2ZXMgaGliZXJuYXRpb24KLSAqKlRhZ3MgZm9yIGZpbHRlcmluZzoqKiBHcm91cCBjb25uZWN0aW9ucyBieSByb29tL2NoYW5uZWwvdXNlciBmb3IgdGFyZ2V0ZWQgYnJvYWRjYXN0cwoKKipIYW5kbGVyIGxpZmVjeWNsZToqKgotIGB3ZWJTb2NrZXRNZXNzYWdlYDogRE8gd2FrZXMsIHByb2Nlc3NlcyBtZXNzYWdlLCBtYXkgaGliZXJuYXRlIGFmdGVyCi0gYHdlYlNvY2tldENsb3NlYDogQ2FsbGVkIHdoZW4gY2xpZW50IGNsb3NlcyAob3B0aW9uYWwgLSBpbXBsZW1lbnQgZm9yIGNsZWFudXApCi0gYHdlYlNvY2tldEVycm9yYDogQ2FsbGVkIG9uIGNvbm5lY3Rpb24gZXJyb3IgKG9wdGlvbmFsIC0gaW1wbGVtZW50IGZvciBlcnJvciBoYW5kbGluZykKCioqTWV0YWRhdGEgcGVyc2lzdGVuY2U6KioKYGBgdHlwZXNjcmlwdAovLyBTdG9yZSBjb25uZWN0aW9uIG1ldGFkYXRhIChzdXJ2aXZlcyBoaWJlcm5hdGlvbikKd3Muc2VyaWFsaXplQXR0YWNobWVudCh7IHVzZXJJZDogImFiYyIsIHJvb206ICJsb2JieSIgfSkKCi8vIFJldHJpZXZlIGFmdGVyIGhpYmVybmF0aW9uCmNvbnN0IHsgdXNlcklkLCByb29tIH0gPSB3cy5kZXNlcmlhbGl6ZUF0dGFjaG1lbnQoKQpgYGAKCiMjIFNlZSBBbHNvCgotICoqW0RPIFN0b3JhZ2VdKC4uL2RvLXN0b3JhZ2UvUkVBRE1FLm1kKSoqIC0gQ29tcGxldGUgc3RvcmFnZSBBUEkgcmVmZXJlbmNlCi0gKipbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpKiogLSBSZWFsLXdvcmxkIHVzYWdlIHBhdHRlcm5zCi0gKipbR290Y2hhc10oLi9nb3RjaGFzLm1kKSoqIC0gSGliZXJuYXRpb24gY2F2ZWF0cyBhbmQgbGltaXRzCg==
+# Durable Objects API
+
+## Class Structure
+
+```typescript
+import { DurableObject } from "cloudflare:workers";
+
+export class MyDO extends DurableObject<Env> {
+  constructor(ctx: DurableObjectState, env: Env) {
+    super(ctx, env);
+    // Runs on EVERY wake - keep light!
+  }
+  
+  // RPC methods (called directly from worker)
+  async myMethod(arg: string): Promise<string> { return arg; }
+  
+  // fetch handler (legacy/HTTP semantics)
+  async fetch(req: Request): Promise<Response> { /* ... */ }
+  
+  // Lifecycle handlers
+  async alarm() { /* alarm fired */ }
+  async webSocketMessage(ws: WebSocket, msg: string | ArrayBuffer) { /* ... */ }
+  async webSocketClose(ws: WebSocket, code: number, reason: string, wasClean: boolean) { /* ... */ }
+  async webSocketError(ws: WebSocket, error: unknown) { /* ... */ }
+}
+```
+
+## DurableObjectState Context Methods
+
+### Concurrency Control
+
+```typescript
+// Complete work after response sent (e.g., cleanup, logging)
+this.ctx.waitUntil(promise: Promise<any>): void
+
+// Critical section - blocks all other requests until complete
+await this.ctx.blockConcurrencyWhile(async () => {
+  // No other requests processed during this block
+  // Use for initialization or critical operations
+})
+```
+
+**When to use:**
+- `waitUntil()`: Background cleanup, logging, non-critical work after response
+- `blockConcurrencyWhile()`: First-time init, schema migration, critical state setup
+
+### Lifecycle
+
+```typescript
+this.ctx.id              // DurableObjectId of this instance
+this.ctx.abort()         // Force eviction (use after PITR restore to reload state)
+```
+
+### Storage Access
+
+```typescript
+this.ctx.storage.sql     // SQLite API (recommended)
+this.ctx.storage.kv      // Sync KV API (SQLite DOs only)
+this.ctx.storage         // Async KV API (legacy/KV-only DOs)
+```
+
+See **[DO Storage](../do-storage/README.md)** for complete storage API reference.
+
+### WebSocket Management
+
+```typescript
+this.ctx.acceptWebSocket(ws: WebSocket, tags?: string[])  // Enable hibernation
+this.ctx.getWebSockets(tag?: string): WebSocket[]         // Get by tag or all
+this.ctx.getTags(ws: WebSocket): string[]                 // Get tags for connection
+```
+
+### Alarms
+
+```typescript
+await this.ctx.storage.setAlarm(timestamp: number | Date)  // Schedule (overwrites existing)
+await this.ctx.storage.getAlarm(): number | null           // Get next alarm time
+await this.ctx.storage.deleteAlarm(): void                 // Cancel alarm
+```
+
+**Limit:** 1 alarm per DO. Use queue pattern for multiple events (see [Patterns](./patterns.md)).
+
+## Storage APIs
+
+For detailed storage documentation including SQLite queries, KV operations, transactions, and Point-in-Time Recovery, see **[DO Storage](../do-storage/README.md)**.
+
+Quick reference:
+
+```typescript
+// SQLite (recommended)
+this.ctx.storage.sql.exec("SELECT * FROM users WHERE id = ?", userId).one()
+
+// Sync KV (SQLite DOs only)
+this.ctx.storage.kv.get("key")
+
+// Async KV (legacy)
+await this.ctx.storage.get("key")
+```
+
+## Alarms
+
+Schedule future work that survives eviction:
+
+```typescript
+// Set alarm (overwrites any existing alarm)
+await this.ctx.storage.setAlarm(Date.now() + 3600000)  // 1 hour from now
+await this.ctx.storage.setAlarm(new Date("2026-02-01"))  // Absolute time
+
+// Check next alarm
+const nextRun = await this.ctx.storage.getAlarm()  // null if none
+
+// Cancel alarm
+await this.ctx.storage.deleteAlarm()
+
+// Handler called when alarm fires
+async alarm() {
+  // Runs once alarm triggers
+  // DO wakes from hibernation if needed
+  // Use for cleanup, notifications, scheduled tasks
+}
+```
+
+**Limitations:**
+- 1 alarm per DO maximum
+- Overwrites previous alarm when set
+- Use queue pattern for multiple scheduled events (see [Patterns](./patterns.md))
+
+**Reliability:**
+- Alarms survive DO eviction/restart
+- Cloudflare retries failed alarms automatically
+- Not guaranteed exactly-once (handle idempotently)
+
+## WebSocket Hibernation
+
+Hibernation allows DOs with open WebSocket connections to consume zero compute/memory until message arrives.
+
+```typescript
+async fetch(req: Request): Promise<Response> {
+  const [client, server] = Object.values(new WebSocketPair());
+  this.ctx.acceptWebSocket(server, ["room:123"]);  // Tags for filtering
+  server.serializeAttachment({ userId: "abc" });    // Persisted metadata
+  return new Response(null, { status: 101, webSocket: client });
+}
+
+// Called when message arrives (DO wakes from hibernation)
+async webSocketMessage(ws: WebSocket, msg: string | ArrayBuffer) {
+  const data = ws.deserializeAttachment();          // Retrieve metadata
+  for (const c of this.ctx.getWebSockets("room:123")) c.send(msg);
+}
+
+// Called on close (optional handler)
+async webSocketClose(ws: WebSocket, code: number, reason: string, wasClean: boolean) {
+  // Cleanup logic, remove from lists, etc.
+}
+
+// Called on error (optional handler)
+async webSocketError(ws: WebSocket, error: unknown) {
+  console.error("WebSocket error:", error);
+  // Handle error, close connection, etc.
+}
+```
+
+**Key concepts:**
+- **Auto-hibernation:** DO hibernates when no active requests/alarms
+- **Zero cost:** Hibernated DOs incur no charges while preserving connections
+- **Memory cleared:** All in-memory state lost on hibernation
+- **Attachment persistence:** Use `serializeAttachment()` for per-connection metadata that survives hibernation
+- **Tags for filtering:** Group connections by room/channel/user for targeted broadcasts
+
+**Handler lifecycle:**
+- `webSocketMessage`: DO wakes, processes message, may hibernate after
+- `webSocketClose`: Called when client closes (optional - implement for cleanup)
+- `webSocketError`: Called on connection error (optional - implement for error handling)
+
+**Metadata persistence:**
+```typescript
+// Store connection metadata (survives hibernation)
+ws.serializeAttachment({ userId: "abc", room: "lobby" })
+
+// Retrieve after hibernation
+const { userId, room } = ws.deserializeAttachment()
+```
+
+## See Also
+
+- **[DO Storage](../do-storage/README.md)** - Complete storage API reference
+- **[Patterns](./patterns.md)** - Real-world usage patterns
+- **[Gotchas](./gotchas.md)** - Hibernation caveats and limits

@@ -1,1 +1,82 @@
-IyBIeXBlcmRyaXZlCgpBY2NlbGVyYXRlcyBkYXRhYmFzZSBxdWVyaWVzIGZyb20gV29ya2VycyB2aWEgY29ubmVjdGlvbiBwb29saW5nLCBlZGdlIHNldHVwLCBxdWVyeSBjYWNoaW5nLgoKIyMgS2V5IEZlYXR1cmVzCgotICoqQ29ubmVjdGlvbiBQb29saW5nKio6IFBlcnNpc3RlbnQgY29ubmVjdGlvbnMgZWxpbWluYXRlIFRDUC9UTFMvYXV0aCBoYW5kc2hha2VzICh+NyByb3VuZC10cmlwcykKLSAqKkVkZ2UgU2V0dXAqKjogQ29ubmVjdGlvbiBuZWdvdGlhdGlvbiBhdCBlZGdlLCBwb29saW5nIG5lYXIgb3JpZ2luCi0gKipRdWVyeSBDYWNoaW5nKio6IEF1dG8tY2FjaGUgbm9uLW11dGF0aW5nIHF1ZXJpZXMgKGRlZmF1bHQgNjBzIFRUTCkKLSAqKlN1cHBvcnQqKjogUG9zdGdyZVNRTCwgTXlTUUwgKyBjb21wYXRpYmxlcyAoQ29ja3JvYWNoREIsIFRpbWVzY2FsZSwgUGxhbmV0U2NhbGUsIE5lb24sIFN1cGFiYXNlKQoKIyMgQXJjaGl0ZWN0dXJlCgpgYGAKV29ya2VyIOKGkiBFZGdlIChzZXR1cCkg4oaSIFBvb2wgKG5lYXIgREIpIOKGkiBPcmlnaW4KICAgICAgICAg4oaTIGNhY2hlZCByZWFkcwogICAgICAgICBDYWNoZQpgYGAKCiMjIFF1aWNrIFN0YXJ0CgpgYGBiYXNoCiMgQ3JlYXRlIGNvbmZpZwpucHggd3JhbmdsZXIgaHlwZXJkcml2ZSBjcmVhdGUgbXktZGIgXAogIC0tY29ubmVjdGlvbi1zdHJpbmc9InBvc3RncmVzOi8vdXNlcjpwYXNzQGhvc3Q6NTQzMi9kYiIKCiMgd3JhbmdsZXIuanNvbmMKewogICJjb21wYXRpYmlsaXR5X2ZsYWdzIjogWyJub2RlanNfY29tcGF0Il0sCiAgImh5cGVyZHJpdmUiOiBbeyJiaW5kaW5nIjogIkhZUEVSRFJJVkUiLCAiaWQiOiAiPElEPiJ9XQp9CmBgYAoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBDbGllbnQgfSBmcm9tICJwZyI7CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxOiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IGNsaWVudCA9IG5ldyBDbGllbnQoewogICAgICBjb25uZWN0aW9uU3RyaW5nOiBlbnYuSFlQRVJEUklWRS5jb25uZWN0aW9uU3RyaW5nLAogICAgfSk7CiAgICBhd2FpdCBjbGllbnQuY29ubmVjdCgpOwogICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgY2xpZW50LnF1ZXJ5KCJTRUxFQ1QgKiBGUk9NIHVzZXJzIFdIRVJFIGlkID0gJDEiLCBbMTIzXSk7CiAgICBhd2FpdCBjbGllbnQuZW5kKCk7CiAgICByZXR1cm4gUmVzcG9uc2UuanNvbihyZXN1bHQucm93cyk7CiAgfSwKfTsKYGBgCgojIyBXaGVuIHRvIFVzZQoK4pyFIEdsb2JhbCBhY2Nlc3MgdG8gc2luZ2xlLXJlZ2lvbiBEQnMsIGhpZ2ggcmVhZCByYXRpb3MsIHBvcHVsYXIgcXVlcmllcywgY29ubmVjdGlvbi1oZWF2eSBsb2FkcwrinYwgV3JpdGUtaGVhdnksIHJlYWwtdGltZSBkYXRhICg8MXMpLCBzaW5nbGUtcmVnaW9uIGFwcHMgY2xvc2UgdG8gREIKCioq8J+SoSBQYWlyIHdpdGggU21hcnQgUGxhY2VtZW50KiogZm9yIFdvcmtlcnMgbWFraW5nIG11bHRpcGxlIHF1ZXJpZXMgLSBleGVjdXRlcyBuZWFyIERCIHRvIG1pbmltaXplIGxhdGVuY3kuCgojIyBEcml2ZXIgQ2hvaWNlCgp8IERyaXZlciB8IFVzZSBXaGVuIHwgTm90ZXMgfAp8LS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tfAp8ICoqcGcqKiAocmVjb21tZW5kZWQpIHwgR2VuZXJhbCB1c2UsIFR5cGVTY3JpcHQsIGVjb3N5c3RlbSBjb21wYXRpYmlsaXR5IHwgU3RhYmxlLCB3aWRlbHkgdXNlZCwgd29ya3Mgd2l0aCBtb3N0IE9STXMgfAp8ICoqcG9zdGdyZXMuanMqKiB8IEFkdmFuY2VkIGZlYXR1cmVzLCB0ZW1wbGF0ZSBsaXRlcmFscywgc3RyZWFtaW5nIHwgTGlnaHRlciB0aGFuIHBnLCBgcHJlcGFyZTogdHJ1ZWAgaXMgZGVmYXVsdCB8CnwgKipteXNxbDIqKiB8IE15U1FML01hcmlhREIvUGxhbmV0U2NhbGUgfCBNeVNRTCBvbmx5LCBsZXNzIG1hdHVyZSBzdXBwb3J0IHwKCiMjIFJlYWRpbmcgT3JkZXIKCnwgTmV3IHRvIEh5cGVyZHJpdmUgfCBJbXBsZW1lbnRpbmcgfCBUcm91Ymxlc2hvb3RpbmcgfAp8LS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLXwKfCAxLiBSRUFETUUgKHRoaXMpIHwgMS4gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgfCAxLiBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSB8CnwgMi4gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgfCAyLiBbYXBpLm1kXSguL2FwaS5tZCkgfCAyLiBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIHwKfCAzLiBbYXBpLm1kXSguL2FwaS5tZCkgfCAzLiBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIHwgMy4gW2FwaS5tZF0oLi9hcGkubWQpIHwKCiMjIEluIFRoaXMgUmVmZXJlbmNlCi0gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBTZXR1cCwgd3JhbmdsZXIgY29uZmlnLCBTbWFydCBQbGFjZW1lbnQKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBCaW5kaW5nIEFQSXMsIHF1ZXJ5IHBhdHRlcm5zLCBkcml2ZXIgdXNhZ2UKLSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gVXNlIGNhc2VzLCBPUk1zLCBtdWx0aS1xdWVyeSBvcHRpbWl6YXRpb24KLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIExpbWl0cywgdHJvdWJsZXNob290aW5nLCBjb25uZWN0aW9uIG1hbmFnZW1lbnQKCiMjIFNlZSBBbHNvCi0gW3NtYXJ0LXBsYWNlbWVudF0oLi4vc21hcnQtcGxhY2VtZW50LykgLSBPcHRpbWl6ZSBtdWx0aS1xdWVyeSBXb3JrZXJzIG5lYXIgZGF0YWJhc2VzCi0gW2QxXSguLi9kMS8pIC0gU2VydmVybGVzcyBTUUxpdGUgYWx0ZXJuYXRpdmUgZm9yIGVkZ2UtbmF0aXZlIGFwcHMKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VyIHJ1bnRpbWUgd2l0aCBkYXRhYmFzZSBiaW5kaW5ncwo=
+# Hyperdrive
+
+Accelerates database queries from Workers via connection pooling, edge setup, query caching.
+
+## Key Features
+
+- **Connection Pooling**: Persistent connections eliminate TCP/TLS/auth handshakes (~7 round-trips)
+- **Edge Setup**: Connection negotiation at edge, pooling near origin
+- **Query Caching**: Auto-cache non-mutating queries (default 60s TTL)
+- **Support**: PostgreSQL, MySQL + compatibles (CockroachDB, Timescale, PlanetScale, Neon, Supabase)
+
+## Architecture
+
+```
+Worker → Edge (setup) → Pool (near DB) → Origin
+         ↓ cached reads
+         Cache
+```
+
+## Quick Start
+
+```bash
+# Create config
+npx wrangler hyperdrive create my-db \
+  --connection-string="postgres://user:pass@host:5432/db"
+
+# wrangler.jsonc
+{
+  "compatibility_flags": ["nodejs_compat"],
+  "hyperdrive": [{"binding": "HYPERDRIVE", "id": "<ID>"}]
+}
+```
+
+```typescript
+import { Client } from "pg";
+
+export default {
+  async fetch(req: Request, env: Env): Promise<Response> {
+    const client = new Client({
+      connectionString: env.HYPERDRIVE.connectionString,
+    });
+    await client.connect();
+    const result = await client.query("SELECT * FROM users WHERE id = $1", [123]);
+    await client.end();
+    return Response.json(result.rows);
+  },
+};
+```
+
+## When to Use
+
+✅ Global access to single-region DBs, high read ratios, popular queries, connection-heavy loads
+❌ Write-heavy, real-time data (<1s), single-region apps close to DB
+
+**💡 Pair with Smart Placement** for Workers making multiple queries - executes near DB to minimize latency.
+
+## Driver Choice
+
+| Driver | Use When | Notes |
+|--------|----------|-------|
+| **pg** (recommended) | General use, TypeScript, ecosystem compatibility | Stable, widely used, works with most ORMs |
+| **postgres.js** | Advanced features, template literals, streaming | Lighter than pg, `prepare: true` is default |
+| **mysql2** | MySQL/MariaDB/PlanetScale | MySQL only, less mature support |
+
+## Reading Order
+
+| New to Hyperdrive | Implementing | Troubleshooting |
+|-------------------|--------------|-----------------|
+| 1. README (this) | 1. [configuration.md](./configuration.md) | 1. [gotchas.md](./gotchas.md) |
+| 2. [configuration.md](./configuration.md) | 2. [api.md](./api.md) | 2. [patterns.md](./patterns.md) |
+| 3. [api.md](./api.md) | 3. [patterns.md](./patterns.md) | 3. [api.md](./api.md) |
+
+## In This Reference
+- [configuration.md](./configuration.md) - Setup, wrangler config, Smart Placement
+- [api.md](./api.md) - Binding APIs, query patterns, driver usage
+- [patterns.md](./patterns.md) - Use cases, ORMs, multi-query optimization
+- [gotchas.md](./gotchas.md) - Limits, troubleshooting, connection management
+
+## See Also
+- [smart-placement](../smart-placement/) - Optimize multi-query Workers near databases
+- [d1](../d1/) - Serverless SQLite alternative for edge-native apps
+- [workers](../workers/) - Worker runtime with database bindings

@@ -1,1 +1,96 @@
-IyBDbG91ZGZsYXJlIFF1ZXVlcwoKRmxleGlibGUgbWVzc2FnZSBxdWV1aW5nIGZvciBhc3luYyB0YXNrIHByb2Nlc3Npbmcgd2l0aCBndWFyYW50ZWVkIGF0LWxlYXN0LW9uY2UgZGVsaXZlcnkgYW5kIGNvbmZpZ3VyYWJsZSBiYXRjaGluZy4KCiMjIE92ZXJ2aWV3CgpRdWV1ZXMgcHJvdmlkZToKLSBBdC1sZWFzdC1vbmNlIGRlbGl2ZXJ5IGd1YXJhbnRlZQotIFB1c2gtYmFzZWQgKFdvcmtlcikgYW5kIHB1bGwtYmFzZWQgKEhUVFApIGNvbnN1bWVycwotIENvbmZpZ3VyYWJsZSBiYXRjaGluZyBhbmQgcmV0cmllcwotIERlYWQgTGV0dGVyIFF1ZXVlcyAoRExRKQotIERlbGF5cyB1cCB0byAxMiBob3VycwoKKipVc2UgY2FzZXM6KiogQXN5bmMgcHJvY2Vzc2luZywgQVBJIGJ1ZmZlcmluZywgcmF0ZSBsaW1pdGluZywgZXZlbnQgd29ya2Zsb3dzLCBkZWZlcnJlZCBqb2JzCgojIyBRdWljayBTdGFydAoKYGBgYmFzaAp3cmFuZ2xlciBxdWV1ZXMgY3JlYXRlIG15LXF1ZXVlCndyYW5nbGVyIHF1ZXVlcyBjb25zdW1lciBhZGQgbXktcXVldWUgbXktd29ya2VyCmBgYAoKYGBgdHlwZXNjcmlwdAovLyBQcm9kdWNlcgphd2FpdCBlbnYuTVlfUVVFVUUuc2VuZCh7IHVzZXJJZDogMTIzLCBhY3Rpb246ICdub3RpZnknIH0pOwoKLy8gQ29uc3VtZXIgKHdpdGggcHJvcGVyIGVycm9yIGhhbmRsaW5nKQpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgcXVldWUoYmF0Y2g6IE1lc3NhZ2VCYXRjaCwgZW52OiBFbnYpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGZvciAoY29uc3QgbXNnIG9mIGJhdGNoLm1lc3NhZ2VzKSB7CiAgICAgIHRyeSB7CiAgICAgICAgYXdhaXQgcHJvY2Vzcyhtc2cuYm9keSk7CiAgICAgICAgbXNnLmFjaygpOwogICAgICB9IGNhdGNoIChlcnJvcikgewogICAgICAgIG1zZy5yZXRyeSh7IGRlbGF5U2Vjb25kczogNjAgfSk7CiAgICAgIH0KICAgIH0KICB9Cn07CmBgYAoKIyMgQ3JpdGljYWwgV2FybmluZ3MKCioqQmVmb3JlIHVzaW5nIFF1ZXVlcywgdW5kZXJzdGFuZCB0aGVzZSBwcm9kdWN0aW9uIG1pc3Rha2VzOioqCgoxLiAqKlVuY2F1Z2h0IGVycm9ycyByZXRyeSBFTlRJUkUgYmF0Y2gqKiAobm90IGp1c3QgZmFpbGVkIG1lc3NhZ2UpLiBBbHdheXMgdXNlIHBlci1tZXNzYWdlIHRyeS9jYXRjaC4KMi4gKipNZXNzYWdlcyBub3QgYWNrJ2QvcmV0cnknZCB3aWxsIGF1dG8tcmV0cnkgZm9yZXZlcioqIHVudGlsIG1heF9yZXRyaWVzLiBBbHdheXMgZXhwbGljaXRseSBoYW5kbGUgZWFjaCBtZXNzYWdlLgoKU2VlIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIGZvciBkZXRhaWxlZCBzb2x1dGlvbnMuCgojIyBDb3JlIE9wZXJhdGlvbnMKCnwgT3BlcmF0aW9uIHwgUHVycG9zZSB8IExpbWl0IHwKfC0tLS0tLS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tfAp8IGBzZW5kKGJvZHksIG9wdGlvbnM/KWAgfCBQdWJsaXNoIG1lc3NhZ2UgfCAxMjggS0IgfAp8IGBzZW5kQmF0Y2gobWVzc2FnZXMpYCB8IEJ1bGsgcHVibGlzaCB8IDEwMCBtc2dzLzI1NiBLQiB8CnwgYG1lc3NhZ2UuYWNrKClgIHwgQWNrbm93bGVkZ2Ugc3VjY2VzcyB8IC0gfAp8IGBtZXNzYWdlLnJldHJ5KG9wdGlvbnM/KWAgfCBSZXRyeSB3aXRoIGRlbGF5IHwgLSB8CnwgYGJhdGNoLmFja0FsbCgpYCB8IEFjayBlbnRpcmUgYmF0Y2ggfCAtIHwKCiMjIEFyY2hpdGVjdHVyZQoKYGBgCltQcm9kdWNlciBXb3JrZXJdIOKGkiBbUXVldWVdIOKGkiBbQ29uc3VtZXIgV29ya2VyL0hUVFBdIOKGkiBbUHJvY2Vzc2luZ10KYGBgCgotIE1heCAxMCwwMDAgcXVldWVzIHBlciBhY2NvdW50Ci0gNSwwMDAgbXNncy9zZWNvbmQgcGVyIHF1ZXVlCi0gNC0xNCBkYXkgcmV0ZW50aW9uIChjb25maWd1cmFibGUpCgojIyBSZWFkaW5nIE9yZGVyCgoqKk5ldyB0byBRdWV1ZXM/KiogU3RhcnQgaGVyZToKMS4gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBTZXQgdXAgcXVldWVzLCBiaW5kaW5ncywgY29uc3VtZXJzCjIuIFthcGkubWRdKC4vYXBpLm1kKSAtIFNlbmQgbWVzc2FnZXMsIGhhbmRsZSBiYXRjaGVzLCBhY2svcmV0cnkgcGF0dGVybnMKMy4gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIFJlYWwtd29ybGQgZXhhbXBsZXMgYW5kIGludGVncmF0aW9ucwo0LiBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIENyaXRpY2FsIHdhcm5pbmdzIGFuZCB0cm91Ymxlc2hvb3RpbmcKCioqVGFzay1iYXNlZCByb3V0aW5nOioqCi0gU2V0dXAgcXVldWUg4oaSIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpCi0gU2VuZC9yZWNlaXZlIG1lc3NhZ2VzIOKGkiBbYXBpLm1kXSguL2FwaS5tZCkKLSBJbXBsZW1lbnQgc3BlY2lmaWMgcGF0dGVybiDihpIgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKQotIERlYnVnL3Ryb3VibGVzaG9vdCDihpIgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gd3JhbmdsZXIuanNvbmMgc2V0dXAsIHByb2R1Y2VyL2NvbnN1bWVyIGNvbmZpZywgRExRLCBjb250ZW50IHR5cGVzCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gU2VuZC9iYXRjaCBtZXRob2RzLCBxdWV1ZSBoYW5kbGVyLCBhY2svcmV0cnkgcnVsZXMsIHR5cGUtc2FmZSBwYXR0ZXJucwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBBc3luYyB0YXNrcywgYnVmZmVyaW5nLCByYXRlIGxpbWl0aW5nLCBEMS9Xb3JrZmxvd3MvRE8gaW50ZWdyYXRpb25zCi0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBDcml0aWNhbCBiYXRjaCBlcnJvciBoYW5kbGluZywgaWRlbXBvdGVuY3ksIGVycm9yIGNsYXNzaWZpY2F0aW9uCgojIyBTZWUgQWxzbwoKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VyIHJ1bnRpbWUgZm9yIHByb2R1Y2Vycy9jb25zdW1lcnMKLSBbcjJdKC4uL3IyLykgLSBQcm9jZXNzIFIyIGV2ZW50IG5vdGlmaWNhdGlvbnMgdmlhIHF1ZXVlcwotIFtkMV0oLi4vZDEvKSAtIEJhdGNoIHdyaXRlIHRvIEQxIGZyb20gcXVldWUgY29uc3VtZXJzCg==
+# Cloudflare Queues
+
+Flexible message queuing for async task processing with guaranteed at-least-once delivery and configurable batching.
+
+## Overview
+
+Queues provide:
+- At-least-once delivery guarantee
+- Push-based (Worker) and pull-based (HTTP) consumers
+- Configurable batching and retries
+- Dead Letter Queues (DLQ)
+- Delays up to 12 hours
+
+**Use cases:** Async processing, API buffering, rate limiting, event workflows, deferred jobs
+
+## Quick Start
+
+```bash
+wrangler queues create my-queue
+wrangler queues consumer add my-queue my-worker
+```
+
+```typescript
+// Producer
+await env.MY_QUEUE.send({ userId: 123, action: 'notify' });
+
+// Consumer (with proper error handling)
+export default {
+  async queue(batch: MessageBatch, env: Env): Promise<void> {
+    for (const msg of batch.messages) {
+      try {
+        await process(msg.body);
+        msg.ack();
+      } catch (error) {
+        msg.retry({ delaySeconds: 60 });
+      }
+    }
+  }
+};
+```
+
+## Critical Warnings
+
+**Before using Queues, understand these production mistakes:**
+
+1. **Uncaught errors retry ENTIRE batch** (not just failed message). Always use per-message try/catch.
+2. **Messages not ack'd/retry'd will auto-retry forever** until max_retries. Always explicitly handle each message.
+
+See [gotchas.md](./gotchas.md) for detailed solutions.
+
+## Core Operations
+
+| Operation | Purpose | Limit |
+|-----------|---------|-------|
+| `send(body, options?)` | Publish message | 128 KB |
+| `sendBatch(messages)` | Bulk publish | 100 msgs/256 KB |
+| `message.ack()` | Acknowledge success | - |
+| `message.retry(options?)` | Retry with delay | - |
+| `batch.ackAll()` | Ack entire batch | - |
+
+## Architecture
+
+```
+[Producer Worker] → [Queue] → [Consumer Worker/HTTP] → [Processing]
+```
+
+- Max 10,000 queues per account
+- 5,000 msgs/second per queue
+- 4-14 day retention (configurable)
+
+## Reading Order
+
+**New to Queues?** Start here:
+1. [configuration.md](./configuration.md) - Set up queues, bindings, consumers
+2. [api.md](./api.md) - Send messages, handle batches, ack/retry patterns
+3. [patterns.md](./patterns.md) - Real-world examples and integrations
+4. [gotchas.md](./gotchas.md) - Critical warnings and troubleshooting
+
+**Task-based routing:**
+- Setup queue → [configuration.md](./configuration.md)
+- Send/receive messages → [api.md](./api.md)
+- Implement specific pattern → [patterns.md](./patterns.md)
+- Debug/troubleshoot → [gotchas.md](./gotchas.md)
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - wrangler.jsonc setup, producer/consumer config, DLQ, content types
+- [api.md](./api.md) - Send/batch methods, queue handler, ack/retry rules, type-safe patterns
+- [patterns.md](./patterns.md) - Async tasks, buffering, rate limiting, D1/Workflows/DO integrations
+- [gotchas.md](./gotchas.md) - Critical batch error handling, idempotency, error classification
+
+## See Also
+
+- [workers](../workers/) - Worker runtime for producers/consumers
+- [r2](../r2/) - Process R2 event notifications via queues
+- [d1](../d1/) - Batch write to D1 from queue consumers

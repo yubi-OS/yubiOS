@@ -1,1 +1,129 @@
-IyBDbG91ZGZsYXJlIFR1bm5lbAoKU2VjdXJlIG91dGJvdW5kLW9ubHkgY29ubmVjdGlvbnMgYmV0d2VlbiBpbmZyYXN0cnVjdHVyZSBhbmQgQ2xvdWRmbGFyZSdzIGdsb2JhbCBuZXR3b3JrLgoKIyMgT3ZlcnZpZXcKCkNsb3VkZmxhcmUgVHVubmVsIChmb3JtZXJseSBBcmdvIFR1bm5lbCkgZW5hYmxlczoKLSAqKk91dGJvdW5kLW9ubHkgY29ubmVjdGlvbnMqKiAtIE5vIGluYm91bmQgcG9ydHMgb3IgZmlyZXdhbGwgY2hhbmdlcwotICoqUHVibGljIGhvc3RuYW1lIHJvdXRpbmcqKiAtIEV4cG9zZSBsb2NhbCBzZXJ2aWNlcyB0byBpbnRlcm5ldAotICoqUHJpdmF0ZSBuZXR3b3JrIGFjY2VzcyoqIC0gQ29ubmVjdCBpbnRlcm5hbCBuZXR3b3JrcyB2aWEgV0FSUAotICoqWmVybyBUcnVzdCBpbnRlZ3JhdGlvbioqIC0gQnVpbHQtaW4gYWNjZXNzIHBvbGljaWVzCgoqKkFyY2hpdGVjdHVyZSoqOiBUdW5uZWwgKHBlcnNpc3RlbnQgb2JqZWN0KSDihpIgUmVwbGljYSAoYGNsb3VkZmxhcmVkYCBwcm9jZXNzKSDihpIgT3JpZ2luIHNlcnZpY2VzCgoqKlRlcm1pbm9sb2d5OioqCi0gKipUdW5uZWwqKjogTmFtZWQgcGVyc2lzdGVudCBvYmplY3Qgd2l0aCBVVUlECi0gKipSZXBsaWNhKio6IEluZGl2aWR1YWwgYGNsb3VkZmxhcmVkYCBwcm9jZXNzIGNvbm5lY3RlZCB0byB0dW5uZWwKLSAqKkNvbmZpZyBTb3VyY2UqKjogV2hlcmUgaW5ncmVzcyBydWxlcyBzdG9yZWQgKGxvY2FsIGZpbGUgdnMgQ2xvdWRmbGFyZSBkYXNoYm9hcmQpCi0gKipDb25uZWN0b3IqKjogTGVnYWN5IHRlcm0gZm9yIHJlcGxpY2EKCiMjIFF1aWNrIFN0YXJ0CgojIyMgTG9jYWwgQ29uZmlnCmBgYGJhc2gKIyBJbnN0YWxsIGNsb3VkZmxhcmVkCmJyZXcgaW5zdGFsbCBjbG91ZGZsYXJlZCAgIyBtYWNPUwoKIyBBdXRoZW50aWNhdGUKY2xvdWRmbGFyZWQgdHVubmVsIGxvZ2luCgojIENyZWF0ZSB0dW5uZWwKY2xvdWRmbGFyZWQgdHVubmVsIGNyZWF0ZSBteS10dW5uZWwKCiMgUm91dGUgRE5TCmNsb3VkZmxhcmVkIHR1bm5lbCByb3V0ZSBkbnMgbXktdHVubmVsIGFwcC5leGFtcGxlLmNvbQoKIyBSdW4gdHVubmVsCmNsb3VkZmxhcmVkIHR1bm5lbCBydW4gbXktdHVubmVsCmBgYAoKIyMjIERhc2hib2FyZCBDb25maWcgKFJlY29tbWVuZGVkKQoxLiAqKlplcm8gVHJ1c3QqKiA+ICoqTmV0d29ya3MqKiA+ICoqVHVubmVscyoqID4gKipDcmVhdGUqKgoyLiBOYW1lIHR1bm5lbCwgY29weSB0b2tlbgozLiBDb25maWd1cmUgcm91dGVzIGluIGRhc2hib2FyZAo0LiBSdW46IGBjbG91ZGZsYXJlZCB0dW5uZWwgLS1uby1hdXRvdXBkYXRlIHJ1biAtLXRva2VuIDxUT0tFTj5gCgojIyBEZWNpc2lvbiBUcmVlCgoqKkNob29zZSBjb25maWcgc291cmNlOioqCmBgYApOZWVkIGNlbnRyYWxpemVkIGNvbmZpZyB1cGRhdGVzPwrilJzilIAgWWVzIOKGkiBUb2tlbi1iYXNlZCAoZGFzaGJvYXJkIGNvbmZpZykK4pSU4pSAIE5vIOKGkiBMb2NhbCBjb25maWcgZmlsZQoKTXVsdGlwbGUgZW52aXJvbm1lbnRzIChkZXYvc3RhZ2luZy9wcm9kKT8K4pSc4pSAIFllcyDihpIgTG9jYWwgY29uZmlnICh2ZXJzaW9uIGNvbnRyb2xsZWQpCuKUlOKUgCBObyDihpIgRWl0aGVyIHdvcmtzCgpOZWVkIGZpcmV3YWxsIGFwcHJvdmFsPwrilJTilIAgU2VlIG5ldHdvcmtpbmcubWQgZmlyc3QKYGBgCgojIyBDb3JlIENvbW1hbmRzCgpgYGBiYXNoCiMgVHVubmVsIGxpZmVjeWNsZQpjbG91ZGZsYXJlZCB0dW5uZWwgY3JlYXRlIDxuYW1lPgpjbG91ZGZsYXJlZCB0dW5uZWwgbGlzdApjbG91ZGZsYXJlZCB0dW5uZWwgaW5mbyA8bmFtZT4KY2xvdWRmbGFyZWQgdHVubmVsIGRlbGV0ZSA8bmFtZT4KCiMgRE5TIHJvdXRpbmcKY2xvdWRmbGFyZWQgdHVubmVsIHJvdXRlIGRucyA8dHVubmVsPiA8aG9zdG5hbWU+CmNsb3VkZmxhcmVkIHR1bm5lbCByb3V0ZSBsaXN0CgojIFByaXZhdGUgbmV0d29yawpjbG91ZGZsYXJlZCB0dW5uZWwgcm91dGUgaXAgYWRkIDEwLjAuMC4wLzggPHR1bm5lbD4KCiMgUnVuIHR1bm5lbApjbG91ZGZsYXJlZCB0dW5uZWwgcnVuIDxuYW1lPgpgYGAKCiMjIENvbmZpZ3VyYXRpb24gRXhhbXBsZQoKYGBgeWFtbAojIH4vLmNsb3VkZmxhcmVkL2NvbmZpZy55bWwKdHVubmVsOiA2ZmY0MmFlMi03NjVkLTRhZGYtODExMi0zMWM1NWMxNTUxZWYKY3JlZGVudGlhbHMtZmlsZTogL3Jvb3QvLmNsb3VkZmxhcmVkLzZmZjQyYWUyLTc2NWQtNGFkZi04MTEyLTMxYzU1YzE1NTFlZi5qc29uCgppbmdyZXNzOgogIC0gaG9zdG5hbWU6IGFwcC5leGFtcGxlLmNvbQogICAgc2VydmljZTogaHR0cDovL2xvY2FsaG9zdDo4MDAwCiAgLSBob3N0bmFtZTogYXBpLmV4YW1wbGUuY29tCiAgICBzZXJ2aWNlOiBodHRwczovL2xvY2FsaG9zdDo4NDQzCiAgICBvcmlnaW5SZXF1ZXN0OgogICAgICBub1RMU1ZlcmlmeTogdHJ1ZQogIC0gc2VydmljZTogaHR0cF9zdGF0dXM6NDA0CmBgYAoKIyMgUmVhZGluZyBPcmRlcgoKKipOZXcgdG8gQ2xvdWRmbGFyZSBUdW5uZWw6KioKMS4gVGhpcyBSRUFETUUgKG92ZXJ2aWV3LCBxdWljayBzdGFydCkKMi4gW25ldHdvcmtpbmcubWRdKC4vbmV0d29ya2luZy5tZCkgLSBGaXJld2FsbCBydWxlcywgY29ubmVjdGl2aXR5IHByZS1jaGVja3MKMy4gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBDb25maWcgZmlsZSBvcHRpb25zLCBpbmdyZXNzIHJ1bGVzCjQuIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBEb2NrZXIsIEt1YmVybmV0ZXMsIHByb2R1Y3Rpb24gZGVwbG95bWVudAo1LiBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIFRyb3VibGVzaG9vdGluZywgYmVzdCBwcmFjdGljZXMKCioqRW50ZXJwcmlzZSBkZXBsb3ltZW50OioqCjEuIFtuZXR3b3JraW5nLm1kXSguL25ldHdvcmtpbmcubWQpIC0gQ29ycG9yYXRlIGZpcmV3YWxsIHJlcXVpcmVtZW50cwoyLiBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIEhBIHNldHVwLCBzZWN1cml0eSBiZXN0IHByYWN0aWNlcwozLiBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gS3ViZXJuZXRlcywgcm9sbGluZyB1cGRhdGVzCgoqKlByb2dyYW1tYXRpYyBjb250cm9sOioqCjEuIFthcGkubWRdKC4vYXBpLm1kKSAtIFJFU1QgQVBJLCBUeXBlU2NyaXB0IFNESwoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKCi0gW25ldHdvcmtpbmcubWRdKC4vbmV0d29ya2luZy5tZCkgLSBGaXJld2FsbCBydWxlcywgcG9ydHMsIGNvbm5lY3Rpdml0eSBwcmUtY2hlY2tzCi0gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBDb25maWcgZmlsZSBvcHRpb25zLCBpbmdyZXNzIHJ1bGVzLCBUTFMgc2V0dGluZ3MKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBSRVNUIEFQSSwgVHlwZVNjcmlwdCBTREssIHRva2VuLWJhc2VkIHR1bm5lbHMKLSBbcGF0dGVybnMubWRdKC4vcGF0dGVybnMubWQpIC0gRG9ja2VyLCBLdWJlcm5ldGVzLCBUZXJyYWZvcm0sIEhBLCB1c2UgY2FzZXMKLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIFRyb3VibGVzaG9vdGluZywgbGltaXRhdGlvbnMsIGJlc3QgcHJhY3RpY2VzCgojIyBTZWUgQWxzbwoKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VycyB3aXRoIFR1bm5lbCBpbnRlZ3JhdGlvbgotIFthY2Nlc3NdKC4uL2FjY2Vzcy8pIC0gWmVybyBUcnVzdCBhY2Nlc3MgcG9saWNpZXMKLSBbd2FycF0oLi4vd2FycC8pIC0gV0FSUCBjbGllbnQgZm9yIHByaXZhdGUgbmV0d29ya3MK
+# Cloudflare Tunnel
+
+Secure outbound-only connections between infrastructure and Cloudflare's global network.
+
+## Overview
+
+Cloudflare Tunnel (formerly Argo Tunnel) enables:
+- **Outbound-only connections** - No inbound ports or firewall changes
+- **Public hostname routing** - Expose local services to internet
+- **Private network access** - Connect internal networks via WARP
+- **Zero Trust integration** - Built-in access policies
+
+**Architecture**: Tunnel (persistent object) → Replica (`cloudflared` process) → Origin services
+
+**Terminology:**
+- **Tunnel**: Named persistent object with UUID
+- **Replica**: Individual `cloudflared` process connected to tunnel
+- **Config Source**: Where ingress rules stored (local file vs Cloudflare dashboard)
+- **Connector**: Legacy term for replica
+
+## Quick Start
+
+### Local Config
+```bash
+# Install cloudflared
+brew install cloudflared  # macOS
+
+# Authenticate
+cloudflared tunnel login
+
+# Create tunnel
+cloudflared tunnel create my-tunnel
+
+# Route DNS
+cloudflared tunnel route dns my-tunnel app.example.com
+
+# Run tunnel
+cloudflared tunnel run my-tunnel
+```
+
+### Dashboard Config (Recommended)
+1. **Zero Trust** > **Networks** > **Tunnels** > **Create**
+2. Name tunnel, copy token
+3. Configure routes in dashboard
+4. Run: `cloudflared tunnel --no-autoupdate run --token <TOKEN>`
+
+## Decision Tree
+
+**Choose config source:**
+```
+Need centralized config updates?
+├─ Yes → Token-based (dashboard config)
+└─ No → Local config file
+
+Multiple environments (dev/staging/prod)?
+├─ Yes → Local config (version controlled)
+└─ No → Either works
+
+Need firewall approval?
+└─ See networking.md first
+```
+
+## Core Commands
+
+```bash
+# Tunnel lifecycle
+cloudflared tunnel create <name>
+cloudflared tunnel list
+cloudflared tunnel info <name>
+cloudflared tunnel delete <name>
+
+# DNS routing
+cloudflared tunnel route dns <tunnel> <hostname>
+cloudflared tunnel route list
+
+# Private network
+cloudflared tunnel route ip add 10.0.0.0/8 <tunnel>
+
+# Run tunnel
+cloudflared tunnel run <name>
+```
+
+## Configuration Example
+
+```yaml
+# ~/.cloudflared/config.yml
+tunnel: 6ff42ae2-765d-4adf-8112-31c55c1551ef
+credentials-file: /root/.cloudflared/6ff42ae2-765d-4adf-8112-31c55c1551ef.json
+
+ingress:
+  - hostname: app.example.com
+    service: http://localhost:8000
+  - hostname: api.example.com
+    service: https://localhost:8443
+    originRequest:
+      noTLSVerify: true
+  - service: http_status:404
+```
+
+## Reading Order
+
+**New to Cloudflare Tunnel:**
+1. This README (overview, quick start)
+2. [networking.md](./networking.md) - Firewall rules, connectivity pre-checks
+3. [configuration.md](./configuration.md) - Config file options, ingress rules
+4. [patterns.md](./patterns.md) - Docker, Kubernetes, production deployment
+5. [gotchas.md](./gotchas.md) - Troubleshooting, best practices
+
+**Enterprise deployment:**
+1. [networking.md](./networking.md) - Corporate firewall requirements
+2. [gotchas.md](./gotchas.md) - HA setup, security best practices
+3. [patterns.md](./patterns.md) - Kubernetes, rolling updates
+
+**Programmatic control:**
+1. [api.md](./api.md) - REST API, TypeScript SDK
+
+## In This Reference
+
+- [networking.md](./networking.md) - Firewall rules, ports, connectivity pre-checks
+- [configuration.md](./configuration.md) - Config file options, ingress rules, TLS settings
+- [api.md](./api.md) - REST API, TypeScript SDK, token-based tunnels
+- [patterns.md](./patterns.md) - Docker, Kubernetes, Terraform, HA, use cases
+- [gotchas.md](./gotchas.md) - Troubleshooting, limitations, best practices
+
+## See Also
+
+- [workers](../workers/) - Workers with Tunnel integration
+- [access](../access/) - Zero Trust access policies
+- [warp](../warp/) - WARP client for private networks

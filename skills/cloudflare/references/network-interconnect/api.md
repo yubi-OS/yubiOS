@@ -1,1 +1,199 @@
-IyBDTkkgQVBJIFJlZmVyZW5jZQoKU2VlIFtSRUFETUUubWRdKFJFQURNRS5tZCkgZm9yIG92ZXJ2aWV3LgoKIyMgQmFzZQoKYGBgCmh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NApBdXRoOiBBdXRob3JpemF0aW9uOiBCZWFyZXIgPHRva2VuPgpgYGAKCiMjIFNESyBOYW1lc3BhY2VzCgoqKlByaW1hcnkgKHJlY29tbWVuZGVkKToqKgpgYGB0eXBlc2NyaXB0CmNsaWVudC5uZXR3b3JrSW50ZXJjb25uZWN0cy5pbnRlcmNvbm5lY3RzLioKY2xpZW50Lm5ldHdvcmtJbnRlcmNvbm5lY3RzLmNuaXMuKgpjbGllbnQubmV0d29ya0ludGVyY29ubmVjdHMuc2xvdHMuKgpgYGAKCioqQWx0ZXJuYXRlIChkZXByZWNhdGVkKToqKgpgYGB0eXBlc2NyaXB0CmNsaWVudC5tYWdpY1RyYW5zaXQuY2ZJbnRlcmNvbm5lY3RzLioKYGBgCgpVc2UgYG5ldHdvcmtJbnRlcmNvbm5lY3RzYCBuYW1lc3BhY2UgZm9yIGFsbCBuZXcgY29kZS4KCiMjIEludGVyY29ubmVjdHMKCmBgYGh0dHAKR0VUICAgIC9hY2NvdW50cy97YWNjb3VudF9pZH0vY25pL2ludGVyY29ubmVjdHMgICAgICAgICAgICAgICMgUXVlcnk6IHBhZ2UsIHBlcl9wYWdlClBPU1QgICAvYWNjb3VudHMve2FjY291bnRfaWR9L2NuaS9pbnRlcmNvbm5lY3RzICAgICAgICAgICAgICAjIFF1ZXJ5OiB2YWxpZGF0ZV9vbmx5PXRydWUgKG9wdGlvbmFsKQpHRVQgICAgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvaW50ZXJjb25uZWN0cy97aWNvbn0KR0VUICAgIC9hY2NvdW50cy97YWNjb3VudF9pZH0vY25pL2ludGVyY29ubmVjdHMve2ljb259L3N0YXR1cwpHRVQgICAgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvaW50ZXJjb25uZWN0cy97aWNvbn0vbG9hICAgIyBSZXR1cm5zIFBERgpERUxFVEUgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvaW50ZXJjb25uZWN0cy97aWNvbn0KYGBgCgoqKkNyZWF0ZSBCb2R5OioqIGBhY2NvdW50YCwgYHNsb3RfaWRgLCBgdHlwZWAsIGBmYWNpbGl0eWAsIGBzcGVlZGAsIGBuYW1lYCwgYGRlc2NyaXB0aW9uYCAgCioqU3RhdHVzIFZhbHVlczoqKiBgYWN0aXZlYCB8IGBoZWFsdGh5YCB8IGB1bmhlYWx0aHlgIHwgYHBlbmRpbmdgIHwgYGRvd25gCgoqKlJlc3BvbnNlIEV4YW1wbGU6KioKYGBganNvbgp7InJlc3VsdCI6IFt7ImlkIjogImljb25fYWJjIiwgIm5hbWUiOiAicHJvZCIsICJ0eXBlIjogImRpcmVjdCIsICJmYWNpbGl0eSI6ICJFV1IxIiwgInNwZWVkIjogIjEwRyIsICJzdGF0dXMiOiAiYWN0aXZlIn1dfQpgYGAKCiMjIENOSSBPYmplY3RzIChCR1AgY29uZmlnKQoKYGBgaHR0cApHRVQgICAgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvY25pcwpQT1NUICAgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvY25pcwpHRVQgICAgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvY25pcy97Y25pfQpQVVQgICAgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvY25pcy97Y25pfQpERUxFVEUgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvY25pcy97Y25pfQpgYGAKCkJvZHk6IGBhY2NvdW50YCwgYGN1c3RfaXBgLCBgY2ZfaXBgLCBgYmdwX2FzbmAsIGBiZ3BfcGFzc3dvcmRgLCBgdmxhbmAKCiMjIFNsb3RzCgpgYGBodHRwCkdFVCAvYWNjb3VudHMve2FjY291bnRfaWR9L2NuaS9zbG90cwpHRVQgL2FjY291bnRzL3thY2NvdW50X2lkfS9jbmkvc2xvdHMve3Nsb3R9CmBgYAoKUXVlcnk6IGBmYWNpbGl0eWAsIGBvY2N1cGllZGAsIGBzcGVlZGAKCiMjIEhlYWx0aCBDaGVja3MKCkNvbmZpZ3VyZSB2aWEgTWFnaWMgVHJhbnNpdC9XQU4gdHVubmVsIGVuZHBvaW50cyAoQ05JIHYyKS4KCmBgYHR5cGVzY3JpcHQKYXdhaXQgY2xpZW50Lm1hZ2ljVHJhbnNpdC50dW5uZWxzLnVwZGF0ZShhY2NvdW50SWQsIHR1bm5lbElkLCB7CiAgaGVhbHRoX2NoZWNrOiB7IGVuYWJsZWQ6IHRydWUsIHRhcmdldDogJzE5Mi4wLjIuMScsIHJhdGU6ICdoaWdoJywgdHlwZTogJ3JlcXVlc3QnIH0sCn0pOwpgYGAKClJhdGVzOiBgaGlnaGAgfCBgbWVkaXVtYCB8IGBsb3dgLiBUeXBlczogYHJlcXVlc3RgIHwgYHJlcGx5YC4gU2VlIFtNYWdpYyBUcmFuc2l0IGRvY3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9tYWdpYy10cmFuc2l0L2hvdy10by9jb25maWd1cmUtdHVubmVsLWVuZHBvaW50cy8jYWRkLXR1bm5lbHMpLgoKIyMgU2V0dGluZ3MKCmBgYGh0dHAKR0VUIC9hY2NvdW50cy97YWNjb3VudF9pZH0vY25pL3NldHRpbmdzClBVVCAvYWNjb3VudHMve2FjY291bnRfaWR9L2NuaS9zZXR0aW5ncwpgYGAKCkJvZHk6IGBkZWZhdWx0X2FzbmAKCiMjIFR5cGVTY3JpcHQgU0RLCgpgYGB0eXBlc2NyaXB0CmltcG9ydCBDbG91ZGZsYXJlIGZyb20gJ2Nsb3VkZmxhcmUnOwoKY29uc3QgY2xpZW50ID0gbmV3IENsb3VkZmxhcmUoeyBhcGlUb2tlbjogcHJvY2Vzcy5lbnYuQ0ZfVE9LRU4gfSk7CgovLyBMaXN0CmF3YWl0IGNsaWVudC5uZXR3b3JrSW50ZXJjb25uZWN0cy5pbnRlcmNvbm5lY3RzLmxpc3QoeyBhY2NvdW50X2lkOiBpZCB9KTsKCi8vIENyZWF0ZSB3aXRoIHZhbGlkYXRpb24KYXdhaXQgY2xpZW50Lm5ldHdvcmtJbnRlcmNvbm5lY3RzLmludGVyY29ubmVjdHMuY3JlYXRlKHsKICBhY2NvdW50X2lkOiBpZCwKICBhY2NvdW50OiBpZCwKICBzbG90X2lkOiAnc2xvdF9hYmMnLAogIHR5cGU6ICdkaXJlY3QnLAogIGZhY2lsaXR5OiAnRVdSMScsCiAgc3BlZWQ6ICcxMEcnLAogIG5hbWU6ICdwcm9kLWludGVyY29ubmVjdCcsCn0sIHsKICBxdWVyeTogeyB2YWxpZGF0ZV9vbmx5OiB0cnVlIH0sIC8vIERyeS1ydW4gdmFsaWRhdGlvbgp9KTsKCi8vIENyZWF0ZSB3aXRob3V0IHZhbGlkYXRpb24KYXdhaXQgY2xpZW50Lm5ldHdvcmtJbnRlcmNvbm5lY3RzLmludGVyY29ubmVjdHMuY3JlYXRlKHsKICBhY2NvdW50X2lkOiBpZCwKICBhY2NvdW50OiBpZCwKICBzbG90X2lkOiAnc2xvdF9hYmMnLAogIHR5cGU6ICdkaXJlY3QnLAogIGZhY2lsaXR5OiAnRVdSMScsCiAgc3BlZWQ6ICcxMEcnLAogIG5hbWU6ICdwcm9kLWludGVyY29ubmVjdCcsCn0pOwoKLy8gU3RhdHVzCmF3YWl0IGNsaWVudC5uZXR3b3JrSW50ZXJjb25uZWN0cy5pbnRlcmNvbm5lY3RzLmdldChhY2NvdW50SWQsIGljb25JZCk7CgovLyBMT0EgKHVzZSBmZXRjaCkKY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy8ke2lkfS9jbmkvaW50ZXJjb25uZWN0cy8ke2ljb25JZH0vbG9hYCwgewogIGhlYWRlcnM6IHsgQXV0aG9yaXphdGlvbjogYEJlYXJlciAke3Rva2VufWAgfSwKfSk7CmF3YWl0IGZzLndyaXRlRmlsZSgnbG9hLnBkZicsIEJ1ZmZlci5mcm9tKGF3YWl0IHJlcy5hcnJheUJ1ZmZlcigpKSk7CgovLyBDTkkgb2JqZWN0CmF3YWl0IGNsaWVudC5uZXR3b3JrSW50ZXJjb25uZWN0cy5jbmlzLmNyZWF0ZSh7CiAgYWNjb3VudF9pZDogaWQsCiAgYWNjb3VudDogaWQsCiAgY3VzdF9pcDogJzE5Mi4wLjIuMS8zMScsCiAgY2ZfaXA6ICcxOTIuMC4yLjAvMzEnLAogIGJncF9hc246IDY1MDAwLAogIHZsYW46IDEwMCwKfSk7CgovLyBTbG90cyAoZmlsdGVyIGJ5IGZhY2lsaXR5IGFuZCBzcGVlZCkKYXdhaXQgY2xpZW50Lm5ldHdvcmtJbnRlcmNvbm5lY3RzLnNsb3RzLmxpc3QoewogIGFjY291bnRfaWQ6IGlkLAogIG9jY3VwaWVkOiBmYWxzZSwKICBmYWNpbGl0eTogJ0VXUjEnLAogIHNwZWVkOiAnMTBHJywKfSk7CmBgYAoKIyMgUHl0aG9uIFNESwoKYGBgcHl0aG9uCmZyb20gY2xvdWRmbGFyZSBpbXBvcnQgQ2xvdWRmbGFyZQoKY2xpZW50ID0gQ2xvdWRmbGFyZShhcGlfdG9rZW49b3MuZW52aXJvblsiQ0ZfVE9LRU4iXSkKCiMgTGlzdCwgY3JlYXRlLCBzdGF0dXMgKHNhbWUgcGF0dGVybiBhcyBUeXBlU2NyaXB0KQpjbGllbnQubmV0d29ya19pbnRlcmNvbm5lY3RzLmludGVyY29ubmVjdHMubGlzdChhY2NvdW50X2lkPWlkKQpjbGllbnQubmV0d29ya19pbnRlcmNvbm5lY3RzLmludGVyY29ubmVjdHMuY3JlYXRlKGFjY291bnRfaWQ9aWQsIGFjY291bnQ9aWQsIHNsb3RfaWQ9InNsb3RfYWJjIiwgdHlwZT0iZGlyZWN0IiwgZmFjaWxpdHk9IkVXUjEiLCBzcGVlZD0iMTBHIikKY2xpZW50Lm5ldHdvcmtfaW50ZXJjb25uZWN0cy5pbnRlcmNvbm5lY3RzLmdldChhY2NvdW50X2lkPWlkLCBpY29uPWljb25faWQpCgojIENOSSBvYmplY3RzIGFuZCBzbG90cwpjbGllbnQubmV0d29ya19pbnRlcmNvbm5lY3RzLmNuaXMuY3JlYXRlKGFjY291bnRfaWQ9aWQsIGN1c3RfaXA9IjE5Mi4wLjIuMS8zMSIsIGNmX2lwPSIxOTIuMC4yLjAvMzEiLCBiZ3BfYXNuPTY1MDAwKQpjbGllbnQubmV0d29ya19pbnRlcmNvbm5lY3RzLnNsb3RzLmxpc3QoYWNjb3VudF9pZD1pZCwgb2NjdXBpZWQ9RmFsc2UpCmBgYAoKIyMgY1VSTAoKYGBgYmFzaAojIExpc3QgaW50ZXJjb25uZWN0cwpjdXJsICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJHtBQ0NPVU5UX0lEfS9jbmkvaW50ZXJjb25uZWN0cyIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJHtDRl9UT0tFTn0iCgojIENyZWF0ZSBpbnRlcmNvbm5lY3QKY3VybCAtWCBQT1NUICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvJHtBQ0NPVU5UX0lEfS9jbmkvaW50ZXJjb25uZWN0cz92YWxpZGF0ZV9vbmx5PXRydWUiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfVE9LRU59IiAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uIiBcCiAgLWQgJ3siYWNjb3VudCI6ICJpZCIsICJzbG90X2lkIjogInNsb3RfYWJjIiwgInR5cGUiOiAiZGlyZWN0IiwgImZhY2lsaXR5IjogIkVXUjEiLCAic3BlZWQiOiAiMTBHIn0nCgojIExPQSBQREYKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLyR7QUNDT1VOVF9JRH0vY25pL2ludGVyY29ubmVjdHMvJHtJQ09OX0lEfS9sb2EiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7Q0ZfVE9LRU59IiAtLW91dHB1dCBsb2EucGRmCmBgYAoKIyMgTm90IEF2YWlsYWJsZSB2aWEgQVBJCgoqKk1pc3NpbmcgQ2FwYWJpbGl0aWVzOioqCi0gQkdQIHNlc3Npb24gc3RhdGUgcXVlcnkgKHVzZSBEYXNoYm9hcmQgb3IgQkdQIGxvZ3MpCi0gQmFuZHdpZHRoIHV0aWxpemF0aW9uIG1ldHJpY3MgKHVzZSBleHRlcm5hbCBtb25pdG9yaW5nKQotIFRyYWZmaWMgc3RhdGlzdGljcyBwZXIgaW50ZXJjb25uZWN0Ci0gSGlzdG9yaWNhbCB1cHRpbWUvZG93bnRpbWUgZGF0YQotIExpZ2h0IGxldmVsIHJlYWRpbmdzIChjb250YWN0IGFjY291bnQgdGVhbSkKLSBNYWludGVuYW5jZSB3aW5kb3cgc2NoZWR1bGluZyAobm90aWZpY2F0aW9ucyBvbmx5KQoKIyMgUmVzb3VyY2VzCgotIFtBUEkgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FwaS9yZXNvdXJjZXMvbmV0d29ya19pbnRlcmNvbm5lY3RzLykKLSBbVHlwZVNjcmlwdCBTREtdKGh0dHBzOi8vZ2l0aHViLmNvbS9jbG91ZGZsYXJlL2Nsb3VkZmxhcmUtdHlwZXNjcmlwdCkKLSBbUHl0aG9uIFNES10oaHR0cHM6Ly9naXRodWIuY29tL2Nsb3VkZmxhcmUvY2xvdWRmbGFyZS1weXRob24pCg==
+# CNI API Reference
+
+See [README.md](README.md) for overview.
+
+## Base
+
+```
+https://api.cloudflare.com/client/v4
+Auth: Authorization: Bearer <token>
+```
+
+## SDK Namespaces
+
+**Primary (recommended):**
+```typescript
+client.networkInterconnects.interconnects.*
+client.networkInterconnects.cnis.*
+client.networkInterconnects.slots.*
+```
+
+**Alternate (deprecated):**
+```typescript
+client.magicTransit.cfInterconnects.*
+```
+
+Use `networkInterconnects` namespace for all new code.
+
+## Interconnects
+
+```http
+GET    /accounts/{account_id}/cni/interconnects              # Query: page, per_page
+POST   /accounts/{account_id}/cni/interconnects              # Query: validate_only=true (optional)
+GET    /accounts/{account_id}/cni/interconnects/{icon}
+GET    /accounts/{account_id}/cni/interconnects/{icon}/status
+GET    /accounts/{account_id}/cni/interconnects/{icon}/loa   # Returns PDF
+DELETE /accounts/{account_id}/cni/interconnects/{icon}
+```
+
+**Create Body:** `account`, `slot_id`, `type`, `facility`, `speed`, `name`, `description`  
+**Status Values:** `active` | `healthy` | `unhealthy` | `pending` | `down`
+
+**Response Example:**
+```json
+{"result": [{"id": "icon_abc", "name": "prod", "type": "direct", "facility": "EWR1", "speed": "10G", "status": "active"}]}
+```
+
+## CNI Objects (BGP config)
+
+```http
+GET    /accounts/{account_id}/cni/cnis
+POST   /accounts/{account_id}/cni/cnis
+GET    /accounts/{account_id}/cni/cnis/{cni}
+PUT    /accounts/{account_id}/cni/cnis/{cni}
+DELETE /accounts/{account_id}/cni/cnis/{cni}
+```
+
+Body: `account`, `cust_ip`, `cf_ip`, `bgp_asn`, `bgp_password`, `vlan`
+
+## Slots
+
+```http
+GET /accounts/{account_id}/cni/slots
+GET /accounts/{account_id}/cni/slots/{slot}
+```
+
+Query: `facility`, `occupied`, `speed`
+
+## Health Checks
+
+Configure via Magic Transit/WAN tunnel endpoints (CNI v2).
+
+```typescript
+await client.magicTransit.tunnels.update(accountId, tunnelId, {
+  health_check: { enabled: true, target: '192.0.2.1', rate: 'high', type: 'request' },
+});
+```
+
+Rates: `high` | `medium` | `low`. Types: `request` | `reply`. See [Magic Transit docs](https://developers.cloudflare.com/magic-transit/how-to/configure-tunnel-endpoints/#add-tunnels).
+
+## Settings
+
+```http
+GET /accounts/{account_id}/cni/settings
+PUT /accounts/{account_id}/cni/settings
+```
+
+Body: `default_asn`
+
+## TypeScript SDK
+
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({ apiToken: process.env.CF_TOKEN });
+
+// List
+await client.networkInterconnects.interconnects.list({ account_id: id });
+
+// Create with validation
+await client.networkInterconnects.interconnects.create({
+  account_id: id,
+  account: id,
+  slot_id: 'slot_abc',
+  type: 'direct',
+  facility: 'EWR1',
+  speed: '10G',
+  name: 'prod-interconnect',
+}, {
+  query: { validate_only: true }, // Dry-run validation
+});
+
+// Create without validation
+await client.networkInterconnects.interconnects.create({
+  account_id: id,
+  account: id,
+  slot_id: 'slot_abc',
+  type: 'direct',
+  facility: 'EWR1',
+  speed: '10G',
+  name: 'prod-interconnect',
+});
+
+// Status
+await client.networkInterconnects.interconnects.get(accountId, iconId);
+
+// LOA (use fetch)
+const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${id}/cni/interconnects/${iconId}/loa`, {
+  headers: { Authorization: `Bearer ${token}` },
+});
+await fs.writeFile('loa.pdf', Buffer.from(await res.arrayBuffer()));
+
+// CNI object
+await client.networkInterconnects.cnis.create({
+  account_id: id,
+  account: id,
+  cust_ip: '192.0.2.1/31',
+  cf_ip: '192.0.2.0/31',
+  bgp_asn: 65000,
+  vlan: 100,
+});
+
+// Slots (filter by facility and speed)
+await client.networkInterconnects.slots.list({
+  account_id: id,
+  occupied: false,
+  facility: 'EWR1',
+  speed: '10G',
+});
+```
+
+## Python SDK
+
+```python
+from cloudflare import Cloudflare
+
+client = Cloudflare(api_token=os.environ["CF_TOKEN"])
+
+# List, create, status (same pattern as TypeScript)
+client.network_interconnects.interconnects.list(account_id=id)
+client.network_interconnects.interconnects.create(account_id=id, account=id, slot_id="slot_abc", type="direct", facility="EWR1", speed="10G")
+client.network_interconnects.interconnects.get(account_id=id, icon=icon_id)
+
+# CNI objects and slots
+client.network_interconnects.cnis.create(account_id=id, cust_ip="192.0.2.1/31", cf_ip="192.0.2.0/31", bgp_asn=65000)
+client.network_interconnects.slots.list(account_id=id, occupied=False)
+```
+
+## cURL
+
+```bash
+# List interconnects
+curl "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/cni/interconnects" \
+  -H "Authorization: Bearer ${CF_TOKEN}"
+
+# Create interconnect
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/cni/interconnects?validate_only=true" \
+  -H "Authorization: Bearer ${CF_TOKEN}" -H "Content-Type: application/json" \
+  -d '{"account": "id", "slot_id": "slot_abc", "type": "direct", "facility": "EWR1", "speed": "10G"}'
+
+# LOA PDF
+curl "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/cni/interconnects/${ICON_ID}/loa" \
+  -H "Authorization: Bearer ${CF_TOKEN}" --output loa.pdf
+```
+
+## Not Available via API
+
+**Missing Capabilities:**
+- BGP session state query (use Dashboard or BGP logs)
+- Bandwidth utilization metrics (use external monitoring)
+- Traffic statistics per interconnect
+- Historical uptime/downtime data
+- Light level readings (contact account team)
+- Maintenance window scheduling (notifications only)
+
+## Resources
+
+- [API Docs](https://developers.cloudflare.com/api/resources/network_interconnects/)
+- [TypeScript SDK](https://github.com/cloudflare/cloudflare-typescript)
+- [Python SDK](https://github.com/cloudflare/cloudflare-python)

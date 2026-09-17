@@ -1,1 +1,112 @@
-IyBXb3JrZXJzIEFJIEFQSSBSZWZlcmVuY2UKCiMjIENvcmUgTWV0aG9kCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZW52LkFJLnJ1bihtb2RlbCwgaW5wdXQpOwpgYGAKCiMjIFRleHQgR2VuZXJhdGlvbgoKYGBgdHlwZXNjcmlwdApjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuQUkucnVuKCdAY2YvbWV0YS9sbGFtYS0zLjEtOGItaW5zdHJ1Y3QnLCB7CiAgbWVzc2FnZXM6IFsKICAgIHsgcm9sZTogJ3N5c3RlbScsIGNvbnRlbnQ6ICdZb3UgYXJlIGhlbHBmdWwnIH0sCiAgICB7IHJvbGU6ICd1c2VyJywgY29udGVudDogJ0hlbGxvJyB9CiAgXSwKICB0ZW1wZXJhdHVyZTogMC43LCAgLy8gMC0xCiAgbWF4X3Rva2VuczogMTAwCn0pOwpjb25zb2xlLmxvZyhyZXN1bHQucmVzcG9uc2UpOwpgYGAKCioqU3RyZWFtaW5nOioqCmBgYHR5cGVzY3JpcHQKY29uc3Qgc3RyZWFtID0gYXdhaXQgZW52LkFJLnJ1bihtb2RlbCwgeyBtZXNzYWdlcywgc3RyZWFtOiB0cnVlIH0pOwpyZXR1cm4gbmV3IFJlc3BvbnNlKHN0cmVhbSwgeyBoZWFkZXJzOiB7ICdDb250ZW50LVR5cGUnOiAndGV4dC9ldmVudC1zdHJlYW0nIH0gfSk7CmBgYAoKIyMgRW1iZWRkaW5ncwoKYGBgdHlwZXNjcmlwdApjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuQUkucnVuKCdAY2YvYmFhaS9iZ2UtYmFzZS1lbi12MS41JywgewogIHRleHQ6IFsnUXVlcnknLCAnRG9jIDEnLCAnRG9jIDInXSAvLyBCYXRjaCBmb3IgZWZmaWNpZW5jeQp9KTsKY29uc3QgW3F1ZXJ5RW1iZWQsIGRvYzFFbWJlZCwgZG9jMkVtYmVkXSA9IHJlc3VsdC5kYXRhOyAvLyA3NjgtZGltIHZlY3RvcnMKYGBgCgojIyBGdW5jdGlvbiBDYWxsaW5nCgpgYGB0eXBlc2NyaXB0CmNvbnN0IHRvb2xzID0gW3sKICB0eXBlOiAnZnVuY3Rpb24nLAogIGZ1bmN0aW9uOiB7CiAgICBuYW1lOiAnZ2V0V2VhdGhlcicsCiAgICBkZXNjcmlwdGlvbjogJ0dldCB3ZWF0aGVyIGZvciBsb2NhdGlvbicsCiAgICBwYXJhbWV0ZXJzOiB7CiAgICAgIHR5cGU6ICdvYmplY3QnLAogICAgICBwcm9wZXJ0aWVzOiB7IGxvY2F0aW9uOiB7IHR5cGU6ICdzdHJpbmcnIH0gfSwKICAgICAgcmVxdWlyZWQ6IFsnbG9jYXRpb24nXQogICAgfQogIH0KfV07Cgpjb25zdCByZXNwb25zZSA9IGF3YWl0IGVudi5BSS5ydW4obW9kZWwsIHsgbWVzc2FnZXMsIHRvb2xzIH0pOwppZiAocmVzcG9uc2UudG9vbF9jYWxscykgewogIGNvbnN0IGFyZ3MgPSBKU09OLnBhcnNlKHJlc3BvbnNlLnRvb2xfY2FsbHNbMF0uZnVuY3Rpb24uYXJndW1lbnRzKTsKICAvLyBFeGVjdXRlIGZ1bmN0aW9uLCBzZW5kIHJlc3VsdCBiYWNrCn0KYGBgCgojIyBJbWFnZSBHZW5lcmF0aW9uCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGltYWdlID0gYXdhaXQgZW52LkFJLnJ1bignQGNmL3N0YWJpbGl0eWFpL3N0YWJsZS1kaWZmdXNpb24teGwtYmFzZS0xLjAnLCB7CiAgcHJvbXB0OiAnTW91bnRhaW4gc3Vuc2V0JywKICBudW1fc3RlcHM6IDIwLCAgIC8vIDEtMjAKICBndWlkYW5jZTogNy41ICAgIC8vIDEtMjAKfSk7CnJldHVybiBuZXcgUmVzcG9uc2UoaW1hZ2UsIHsgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ2ltYWdlL3BuZycgfSB9KTsKYGBgCgojIyBTcGVlY2ggUmVjb2duaXRpb24KCmBgYHR5cGVzY3JpcHQKY29uc3QgYXVkaW9BcnJheSA9IEFycmF5LmZyb20obmV3IFVpbnQ4QXJyYXkoYXdhaXQgcmVxdWVzdC5hcnJheUJ1ZmZlcigpKSk7CmNvbnN0IHJlc3VsdCA9IGF3YWl0IGVudi5BSS5ydW4oJ0BjZi9vcGVuYWkvd2hpc3BlcicsIHsgYXVkaW86IGF1ZGlvQXJyYXkgfSk7CmNvbnNvbGUubG9nKHJlc3VsdC50ZXh0KTsKYGBgCgojIyBUcmFuc2xhdGlvbgoKYGBgdHlwZXNjcmlwdApjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuQUkucnVuKCdAY2YvbWV0YS9tMm0xMDAtMS4yYicsIHsKICB0ZXh0OiAnSGVsbG8nLAogIHNvdXJjZV9sYW5nOiAnZW4nLAogIHRhcmdldF9sYW5nOiAnZXMnCn0pOwpjb25zb2xlLmxvZyhyZXN1bHQudHJhbnNsYXRlZF90ZXh0KTsKYGBgCgojIyBSRVNUIEFQSQoKYGBgYmFzaApjdXJsIGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vYWkvcnVuL0BjZi9tZXRhL2xsYW1hLTMuMS04Yi1pbnN0cnVjdCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkVE9LRU4iIFwKICAtZCAneyJtZXNzYWdlcyI6W3sicm9sZSI6InVzZXIiLCJjb250ZW50IjoiSGVsbG8ifV19JwpgYGAKCiMjIEVycm9yIENvZGVzCgp8IENvZGUgfCBNZWFuaW5nIHwgRml4IHwKfC0tLS0tLXwtLS0tLS0tLS18LS0tLS18CnwgNzUwMiB8IE1vZGVsIG5vdCBmb3VuZCB8IENoZWNrIHNwZWxsaW5nIHwKfCA3NTA0IHwgVmFsaWRhdGlvbiBmYWlsZWQgfCBWZXJpZnkgaW5wdXQgc2NoZW1hIHwKfCA3NTA1IHwgUmF0ZSBsaW1pdGVkIHwgUmVkdWNlIHJhdGUgb3IgdXBncmFkZSB8CnwgNzUwNiB8IENvbnRleHQgZXhjZWVkZWQgfCBSZWR1Y2UgaW5wdXQgc2l6ZSB8CgojIyBQZXJmb3JtYW5jZSBUaXBzCgoxLiAqKkJhdGNoIGVtYmVkZGluZ3MqKiAtIHNpbmdsZSByZXF1ZXN0IGZvciBtdWx0aXBsZSB0ZXh0cwoyLiAqKlN0cmVhbSBsb25nIHJlc3BvbnNlcyoqIC0gcmVkdWNlIHBlcmNlaXZlZCBsYXRlbmN5CjMuICoqQWNjZXB0IGNvbGQgc3RhcnRzKiogLSBmaXJzdCByZXF1ZXN0IH4xLTNzLCBzdWJzZXF1ZW50IH4xMDAtNTAwbXMK
+# Workers AI API Reference
+
+## Core Method
+
+```typescript
+const response = await env.AI.run(model, input);
+```
+
+## Text Generation
+
+```typescript
+const result = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+  messages: [
+    { role: 'system', content: 'You are helpful' },
+    { role: 'user', content: 'Hello' }
+  ],
+  temperature: 0.7,  // 0-1
+  max_tokens: 100
+});
+console.log(result.response);
+```
+
+**Streaming:**
+```typescript
+const stream = await env.AI.run(model, { messages, stream: true });
+return new Response(stream, { headers: { 'Content-Type': 'text/event-stream' } });
+```
+
+## Embeddings
+
+```typescript
+const result = await env.AI.run('@cf/baai/bge-base-en-v1.5', {
+  text: ['Query', 'Doc 1', 'Doc 2'] // Batch for efficiency
+});
+const [queryEmbed, doc1Embed, doc2Embed] = result.data; // 768-dim vectors
+```
+
+## Function Calling
+
+```typescript
+const tools = [{
+  type: 'function',
+  function: {
+    name: 'getWeather',
+    description: 'Get weather for location',
+    parameters: {
+      type: 'object',
+      properties: { location: { type: 'string' } },
+      required: ['location']
+    }
+  }
+}];
+
+const response = await env.AI.run(model, { messages, tools });
+if (response.tool_calls) {
+  const args = JSON.parse(response.tool_calls[0].function.arguments);
+  // Execute function, send result back
+}
+```
+
+## Image Generation
+
+```typescript
+const image = await env.AI.run('@cf/stabilityai/stable-diffusion-xl-base-1.0', {
+  prompt: 'Mountain sunset',
+  num_steps: 20,   // 1-20
+  guidance: 7.5    // 1-20
+});
+return new Response(image, { headers: { 'Content-Type': 'image/png' } });
+```
+
+## Speech Recognition
+
+```typescript
+const audioArray = Array.from(new Uint8Array(await request.arrayBuffer()));
+const result = await env.AI.run('@cf/openai/whisper', { audio: audioArray });
+console.log(result.text);
+```
+
+## Translation
+
+```typescript
+const result = await env.AI.run('@cf/meta/m2m100-1.2b', {
+  text: 'Hello',
+  source_lang: 'en',
+  target_lang: 'es'
+});
+console.log(result.translated_text);
+```
+
+## REST API
+
+```bash
+curl https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{"messages":[{"role":"user","content":"Hello"}]}'
+```
+
+## Error Codes
+
+| Code | Meaning | Fix |
+|------|---------|-----|
+| 7502 | Model not found | Check spelling |
+| 7504 | Validation failed | Verify input schema |
+| 7505 | Rate limited | Reduce rate or upgrade |
+| 7506 | Context exceeded | Reduce input size |
+
+## Performance Tips
+
+1. **Batch embeddings** - single request for multiple texts
+2. **Stream long responses** - reduce perceived latency
+3. **Accept cold starts** - first request ~1-3s, subsequent ~100-500ms

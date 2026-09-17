@@ -1,1 +1,185 @@
-IyBDb25maWd1cmF0aW9uCgojIyBXcmFuZ2xlciBDb25maWcKCiMjIyBCYXNpYyBCaW5kaW5nCgoqKndyYW5nbGVyLmpzb25jKio6CgpgYGBqc29uYwp7CiAgInNlY3JldHNfc3RvcmVfc2VjcmV0cyI6IFsKICAgIHsKICAgICAgImJpbmRpbmciOiAiQVBJX0tFWSIsCiAgICAgICJzdG9yZV9pZCI6ICJhYmMxMjMiLAogICAgICAic2VjcmV0X25hbWUiOiAic3RyaXBlX2FwaV9rZXkiCiAgICB9CiAgXQp9CmBgYAoKKip3cmFuZ2xlci50b21sKiogKGFsdGVybmF0aXZlKToKCmBgYHRvbWwKW1tzZWNyZXRzX3N0b3JlX3NlY3JldHNdXQpiaW5kaW5nID0gIkFQSV9LRVkiCnN0b3JlX2lkID0gImFiYzEyMyIKc2VjcmV0X25hbWUgPSAic3RyaXBlX2FwaV9rZXkiCmBgYAoKRmllbGRzOgotIGBiaW5kaW5nYDogVmFyaWFibGUgbmFtZSBmb3IgYGVudmAgYWNjZXNzCi0gYHN0b3JlX2lkYDogRnJvbSBgd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzdG9yZSBsaXN0YAotIGBzZWNyZXRfbmFtZWA6IElkZW50aWZpZXIgKG5vIHNwYWNlcykKCiMjIyBFbnZpcm9ubWVudC1TcGVjaWZpYwoKKip3cmFuZ2xlci5qc29uYyoqOgoKYGBganNvbmMKewogICJlbnYiOiB7CiAgICAicHJvZHVjdGlvbiI6IHsKICAgICAgInNlY3JldHNfc3RvcmVfc2VjcmV0cyI6IFsKICAgICAgICB7CiAgICAgICAgICAiYmluZGluZyI6ICJBUElfS0VZIiwKICAgICAgICAgICJzdG9yZV9pZCI6ICJwcm9kLXN0b3JlIiwKICAgICAgICAgICJzZWNyZXRfbmFtZSI6ICJwcm9kX2FwaV9rZXkiCiAgICAgICAgfQogICAgICBdCiAgICB9LAogICAgInN0YWdpbmciOiB7CiAgICAgICJzZWNyZXRzX3N0b3JlX3NlY3JldHMiOiBbCiAgICAgICAgewogICAgICAgICAgImJpbmRpbmciOiAiQVBJX0tFWSIsCiAgICAgICAgICAic3RvcmVfaWQiOiAic3RhZ2luZy1zdG9yZSIsCiAgICAgICAgICAic2VjcmV0X25hbWUiOiAic3RhZ2luZ19hcGlfa2V5IgogICAgICAgIH0KICAgICAgXQogICAgfQogIH0KfQpgYGAKCioqd3JhbmdsZXIudG9tbCoqIChhbHRlcm5hdGl2ZSk6CgpgYGB0b21sCltlbnYucHJvZHVjdGlvbl0KW1tlbnYucHJvZHVjdGlvbi5zZWNyZXRzX3N0b3JlX3NlY3JldHNdXQpiaW5kaW5nID0gIkFQSV9LRVkiCnN0b3JlX2lkID0gInByb2Qtc3RvcmUiCnNlY3JldF9uYW1lID0gInByb2RfYXBpX2tleSIKCltlbnYuc3RhZ2luZ10KW1tlbnYuc3RhZ2luZy5zZWNyZXRzX3N0b3JlX3NlY3JldHNdXQpiaW5kaW5nID0gIkFQSV9LRVkiCnN0b3JlX2lkID0gInN0YWdpbmctc3RvcmUiCnNlY3JldF9uYW1lID0gInN0YWdpbmdfYXBpX2tleSIKYGBgCgojIyBXcmFuZ2xlciBDb21tYW5kcwoKIyMjIFN0b3JlIE1hbmFnZW1lbnQKCmBgYGJhc2gKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzdG9yZSBsaXN0CndyYW5nbGVyIHNlY3JldHMtc3RvcmUgc3RvcmUgY3JlYXRlIG15LXN0b3JlIC0tcmVtb3RlCndyYW5nbGVyIHNlY3JldHMtc3RvcmUgc3RvcmUgZGVsZXRlIDxzdG9yZS1pZD4gLS1yZW1vdGUKYGBgCgojIyMgU2VjcmV0IE1hbmFnZW1lbnQgKFByb2R1Y3Rpb24pCgpgYGBiYXNoCiMgQ3JlYXRlIChpbnRlcmFjdGl2ZSkKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgY3JlYXRlIDxzdG9yZS1pZD4gXAogIC0tbmFtZSBNWV9TRUNSRVQgLS1zY29wZXMgd29ya2VycyAtLXJlbW90ZQoKIyBDcmVhdGUgKHBpcGVkKQpjYXQgc2VjcmV0LnR4dCB8IHdyYW5nbGVyIHNlY3JldHMtc3RvcmUgc2VjcmV0IGNyZWF0ZSA8c3RvcmUtaWQ+IFwKICAtLW5hbWUgTVlfU0VDUkVUIC0tc2NvcGVzIHdvcmtlcnMgLS1yZW1vdGUKCiMgTGlzdC9nZXQvdXBkYXRlL2RlbGV0ZQp3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHNlY3JldCBsaXN0IDxzdG9yZS1pZD4gLS1yZW1vdGUKd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgZ2V0IDxzdG9yZS1pZD4gLS1uYW1lIE1ZX1NFQ1JFVCAtLXJlbW90ZQp3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHNlY3JldCB1cGRhdGUgPHN0b3JlLWlkPiAtLW5hbWUgTVlfU0VDUkVUIC0tbmV3LXZhbHVlICJ2YWwiIC0tcmVtb3RlCndyYW5nbGVyIHNlY3JldHMtc3RvcmUgc2VjcmV0IGRlbGV0ZSA8c3RvcmUtaWQ+IC0tbmFtZSBNWV9TRUNSRVQgLS1yZW1vdGUKCiMgRHVwbGljYXRlCndyYW5nbGVyIHNlY3JldHMtc3RvcmUgc2VjcmV0IGR1cGxpY2F0ZSA8c3RvcmUtaWQ+IFwKICAtLW5hbWUgT1JJRyAtLW5ldy1uYW1lIENPUFkgLS1yZW1vdGUKYGBgCgojIyMgTG9jYWwgRGV2ZWxvcG1lbnQKCioqQ1JJVElDQUwqKjogUHJvZHVjdGlvbiBzZWNyZXRzIChgLS1yZW1vdGVgKSBOT1QgYWNjZXNzaWJsZSBpbiBsb2NhbCBkZXYuCgpgYGBiYXNoCiMgQ3JlYXRlIGxvY2FsLW9ubHkgKG5vIC0tcmVtb3RlKQp3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHNlY3JldCBjcmVhdGUgPHN0b3JlLWlkPiAtLW5hbWUgREVWX0tFWSAtLXNjb3BlcyB3b3JrZXJzCgp3cmFuZ2xlciBkZXYgICAgIyBVc2VzIGxvY2FsIHNlY3JldHMKd3JhbmdsZXIgZGVwbG95ICMgVXNlcyBwcm9kdWN0aW9uIHNlY3JldHMKYGBgCgpCZXN0IHByYWN0aWNlOiBTZXBhcmF0ZSBuYW1lcyBmb3IgbG9jYWwvcHJvZDoKCmBgYGpzb25jCnsKICAiZW52IjogewogICAgImRldmVsb3BtZW50IjogewogICAgICAic2VjcmV0c19zdG9yZV9zZWNyZXRzIjogWwogICAgICAgIHsgImJpbmRpbmciOiAiQVBJX0tFWSIsICJzdG9yZV9pZCI6ICJzdG9yZSIsICJzZWNyZXRfbmFtZSI6ICJkZXZfYXBpX2tleSIgfQogICAgICBdCiAgICB9LAogICAgInByb2R1Y3Rpb24iOiB7CiAgICAgICJzZWNyZXRzX3N0b3JlX3NlY3JldHMiOiBbCiAgICAgICAgeyAiYmluZGluZyI6ICJBUElfS0VZIiwgInN0b3JlX2lkIjogInN0b3JlIiwgInNlY3JldF9uYW1lIjogInByb2RfYXBpX2tleSIgfQogICAgICBdCiAgICB9CiAgfQp9CmBgYAoKIyMgRGFzaGJvYXJkCgojIyMgQ3JlYXRpbmcgU2VjcmV0cwoKMS4gKipTZWNyZXRzIFN0b3JlKiog4oaSICoqQ3JlYXRlIHNlY3JldCoqCjIuIEZpbGw6IE5hbWUgKG5vIHNwYWNlcyksIFZhbHVlLCBTY29wZSAoYFdvcmtlcnNgKSwgQ29tbWVudAozLiAqKlNhdmUqKiAodmFsdWUgaGlkZGVuIGFmdGVyKQoKIyMjIEFkZGluZyBCaW5kaW5ncwoKKipNZXRob2QgMSoqOiBXb3JrZXIg4oaSIFNldHRpbmdzIOKGkiBCaW5kaW5ncyDihpIgQWRkIOKGkiBTZWNyZXRzIFN0b3JlCioqTWV0aG9kIDIqKjogQ3JlYXRlIHNlY3JldCBkaXJlY3RseSBmcm9tIFdvcmtlciBzZXR0aW5ncyBkcm9wZG93bgoKRGVwbG95IG9wdGlvbnM6Ci0gKipEZXBsb3kqKjogSW1tZWRpYXRlIDEwMCUKLSAqKlNhdmUgdmVyc2lvbioqOiBHcmFkdWFsIHJvbGxvdXQKCiMjIENJL0NECgojIyMgR2l0SHViIEFjdGlvbnMKCmBgYHlhbWwKLSBuYW1lOiBDcmVhdGUgc2VjcmV0CiAgZW52OgogICAgQ0xPVURGTEFSRV9BUElfVE9LRU46ICR7eyBzZWNyZXRzLkNGX1RPS0VOIH19CiAgcnVuOiB8CiAgICBlY2hvICIke3sgc2VjcmV0cy5BUElfS0VZIH19IiB8IFwKICAgIG5weCB3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHNlY3JldCBjcmVhdGUgJFNUT1JFX0lEIFwKICAgICAgLS1uYW1lIEFQSV9LRVkgLS1zY29wZXMgd29ya2VycyAtLXJlbW90ZQoKLSBuYW1lOiBEZXBsb3kKICBydW46IG5weCB3cmFuZ2xlciBkZXBsb3kKYGBgCgojIyMgR2l0TGFiIENJCgpgYGB5YW1sCnNjcmlwdDoKICAtIGVjaG8gIiRBUElfS0VZX1ZBTFVFIiB8IG5weCB3cmFuZ2xlciBzZWNyZXRzLXN0b3JlIHNlY3JldCBjcmVhdGUgJFNUT1JFX0lEIC0tbmFtZSBBUElfS0VZIC0tc2NvcGVzIHdvcmtlcnMgLS1yZW1vdGUKICAtIG5weCB3cmFuZ2xlciBkZXBsb3kKYGBgCgpTZWU6IFthcGkubWRdKC4vYXBpLm1kKSwgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKQo=
+# Configuration
+
+## Wrangler Config
+
+### Basic Binding
+
+**wrangler.jsonc**:
+
+```jsonc
+{
+  "secrets_store_secrets": [
+    {
+      "binding": "API_KEY",
+      "store_id": "abc123",
+      "secret_name": "stripe_api_key"
+    }
+  ]
+}
+```
+
+**wrangler.toml** (alternative):
+
+```toml
+[[secrets_store_secrets]]
+binding = "API_KEY"
+store_id = "abc123"
+secret_name = "stripe_api_key"
+```
+
+Fields:
+- `binding`: Variable name for `env` access
+- `store_id`: From `wrangler secrets-store store list`
+- `secret_name`: Identifier (no spaces)
+
+### Environment-Specific
+
+**wrangler.jsonc**:
+
+```jsonc
+{
+  "env": {
+    "production": {
+      "secrets_store_secrets": [
+        {
+          "binding": "API_KEY",
+          "store_id": "prod-store",
+          "secret_name": "prod_api_key"
+        }
+      ]
+    },
+    "staging": {
+      "secrets_store_secrets": [
+        {
+          "binding": "API_KEY",
+          "store_id": "staging-store",
+          "secret_name": "staging_api_key"
+        }
+      ]
+    }
+  }
+}
+```
+
+**wrangler.toml** (alternative):
+
+```toml
+[env.production]
+[[env.production.secrets_store_secrets]]
+binding = "API_KEY"
+store_id = "prod-store"
+secret_name = "prod_api_key"
+
+[env.staging]
+[[env.staging.secrets_store_secrets]]
+binding = "API_KEY"
+store_id = "staging-store"
+secret_name = "staging_api_key"
+```
+
+## Wrangler Commands
+
+### Store Management
+
+```bash
+wrangler secrets-store store list
+wrangler secrets-store store create my-store --remote
+wrangler secrets-store store delete <store-id> --remote
+```
+
+### Secret Management (Production)
+
+```bash
+# Create (interactive)
+wrangler secrets-store secret create <store-id> \
+  --name MY_SECRET --scopes workers --remote
+
+# Create (piped)
+cat secret.txt | wrangler secrets-store secret create <store-id> \
+  --name MY_SECRET --scopes workers --remote
+
+# List/get/update/delete
+wrangler secrets-store secret list <store-id> --remote
+wrangler secrets-store secret get <store-id> --name MY_SECRET --remote
+wrangler secrets-store secret update <store-id> --name MY_SECRET --new-value "val" --remote
+wrangler secrets-store secret delete <store-id> --name MY_SECRET --remote
+
+# Duplicate
+wrangler secrets-store secret duplicate <store-id> \
+  --name ORIG --new-name COPY --remote
+```
+
+### Local Development
+
+**CRITICAL**: Production secrets (`--remote`) NOT accessible in local dev.
+
+```bash
+# Create local-only (no --remote)
+wrangler secrets-store secret create <store-id> --name DEV_KEY --scopes workers
+
+wrangler dev    # Uses local secrets
+wrangler deploy # Uses production secrets
+```
+
+Best practice: Separate names for local/prod:
+
+```jsonc
+{
+  "env": {
+    "development": {
+      "secrets_store_secrets": [
+        { "binding": "API_KEY", "store_id": "store", "secret_name": "dev_api_key" }
+      ]
+    },
+    "production": {
+      "secrets_store_secrets": [
+        { "binding": "API_KEY", "store_id": "store", "secret_name": "prod_api_key" }
+      ]
+    }
+  }
+}
+```
+
+## Dashboard
+
+### Creating Secrets
+
+1. **Secrets Store** → **Create secret**
+2. Fill: Name (no spaces), Value, Scope (`Workers`), Comment
+3. **Save** (value hidden after)
+
+### Adding Bindings
+
+**Method 1**: Worker → Settings → Bindings → Add → Secrets Store
+**Method 2**: Create secret directly from Worker settings dropdown
+
+Deploy options:
+- **Deploy**: Immediate 100%
+- **Save version**: Gradual rollout
+
+## CI/CD
+
+### GitHub Actions
+
+```yaml
+- name: Create secret
+  env:
+    CLOUDFLARE_API_TOKEN: ${{ secrets.CF_TOKEN }}
+  run: |
+    echo "${{ secrets.API_KEY }}" | \
+    npx wrangler secrets-store secret create $STORE_ID \
+      --name API_KEY --scopes workers --remote
+
+- name: Deploy
+  run: npx wrangler deploy
+```
+
+### GitLab CI
+
+```yaml
+script:
+  - echo "$API_KEY_VALUE" | npx wrangler secrets-store secret create $STORE_ID --name API_KEY --scopes workers --remote
+  - npx wrangler deploy
+```
+
+See: [api.md](./api.md), [patterns.md](./patterns.md)

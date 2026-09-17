@@ -1,1 +1,178 @@
-IyMgQ3JpdGljYWwgR290Y2hhcwoKIyMjIOKaoO+4jyBXZWJTb2NrZXQ6IGZldGNoKCkgdnMgY29udGFpbmVyRmV0Y2goKQoKKipQcm9ibGVtOioqIFdlYlNvY2tldCBjb25uZWN0aW9ucyBmYWlsIHNpbGVudGx5CgoqKkNhdXNlOioqIGBjb250YWluZXJGZXRjaCgpYCBkb2Vzbid0IHN1cHBvcnQgV2ViU29ja2V0IHVwZ3JhZGVzCgoqKkZpeDoqKiBBbHdheXMgdXNlIGBmZXRjaCgpYCBmb3IgV2ViU29ja2V0CgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBXUk9ORwpyZXR1cm4gY29udGFpbmVyLmNvbnRhaW5lckZldGNoKHJlcXVlc3QpOwoKLy8g4pyFIENPUlJFQ1QKcmV0dXJuIGNvbnRhaW5lci5mZXRjaChyZXF1ZXN0KTsKYGBgCgojIyMg4pqg77iPIHN0YXJ0QW5kV2FpdEZvclBvcnRzKCkgdnMgc3RhcnQoKQoKKipQcm9ibGVtOioqICJjb25uZWN0aW9uIHJlZnVzZWQiIGFmdGVyIGBzdGFydCgpYAoKKipDYXVzZToqKiBgc3RhcnQoKWAgcmV0dXJucyB3aGVuIHByb2Nlc3Mgc3RhcnRzLCBOT1Qgd2hlbiBwb3J0cyByZWFkeQoKKipGaXg6KiogVXNlIGBzdGFydEFuZFdhaXRGb3JQb3J0cygpYCBiZWZvcmUgcmVxdWVzdHMKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HCmF3YWl0IGNvbnRhaW5lci5zdGFydCgpOwpyZXR1cm4gY29udGFpbmVyLmZldGNoKHJlcXVlc3QpOwoKLy8g4pyFIENPUlJFQ1QKYXdhaXQgY29udGFpbmVyLnN0YXJ0QW5kV2FpdEZvclBvcnRzKCk7CnJldHVybiBjb250YWluZXIuZmV0Y2gocmVxdWVzdCk7CmBgYAoKIyMjIOKaoO+4jyBBY3Rpdml0eSBUaW1lb3V0IG9uIExvbmcgT3BlcmF0aW9ucwoKKipQcm9ibGVtOioqIENvbnRhaW5lciBzdG9wcyBkdXJpbmcgbG9uZyB3b3JrCgoqKkNhdXNlOioqIGBzbGVlcEFmdGVyYCBiYXNlZCBvbiByZXF1ZXN0IGFjdGl2aXR5LCBub3QgaW50ZXJuYWwgd29yawoKKipGaXg6KiogUmVuZXcgdGltZW91dCBieSB0b3VjaGluZyBzdG9yYWdlCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGludGVydmFsID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogIHRoaXMuY3R4LnN0b3JhZ2UucHV0KCJrZWVwYWxpdmUiLCBEYXRlLm5vdygpKTsKfSwgNjAwMDApOwoKdHJ5IHsKICBhd2FpdCB0aGlzLmRvTG9uZ1dvcmsoZGF0YSk7Cn0gZmluYWxseSB7CiAgY2xlYXJJbnRlcnZhbChpbnRlcnZhbCk7Cn0KYGBgCgojIyMg4pqg77iPIGJsb2NrQ29uY3VycmVuY3lXaGlsZSBmb3IgU3RhcnR1cAoKKipQcm9ibGVtOioqIFJhY2UgY29uZGl0aW9ucyBkdXJpbmcgaW5pdGlhbGl6YXRpb24KCioqRml4OioqIFVzZSBgYmxvY2tDb25jdXJyZW5jeVdoaWxlYCBmb3IgYXRvbWljIGluaXRpYWxpemF0aW9uCgpgYGB0eXBlc2NyaXB0CmF3YWl0IHRoaXMuY3R4LmJsb2NrQ29uY3VycmVuY3lXaGlsZShhc3luYyAoKSA9PiB7CiAgaWYgKCF0aGlzLmluaXRpYWxpemVkKSB7CiAgICBhd2FpdCB0aGlzLnN0YXJ0QW5kV2FpdEZvclBvcnRzKCk7CiAgICB0aGlzLmluaXRpYWxpemVkID0gdHJ1ZTsKICB9Cn0pOwpgYGAKCiMjIyDimqDvuI8gTGlmZWN5Y2xlIEhvb2tzIEJsb2NrIFJlcXVlc3RzCgoqKlByb2JsZW06KiogQ29udGFpbmVyIHVucmVzcG9uc2l2ZSBkdXJpbmcgYG9uU3RhcnQoKWAKCioqQ2F1c2U6KiogSG9va3MgcnVuIGluIGBibG9ja0NvbmN1cnJlbmN5V2hpbGVgIC0gbm8gY29uY3VycmVudCByZXF1ZXN0cwoKKipGaXg6KiogS2VlcCBob29rcyBmYXN0LCBhdm9pZCBsb25nIG9wZXJhdGlvbnMKCiMjIyDimqDvuI8gRG9uJ3QgT3ZlcnJpZGUgYWxhcm0oKSBXaGVuIFVzaW5nIHNjaGVkdWxlKCkKCioqUHJvYmxlbToqKiBTY2hlZHVsZWQgdGFza3MgZG9uJ3QgZXhlY3V0ZQoKKipDYXVzZToqKiBgc2NoZWR1bGUoKWAgdXNlcyBgYWxhcm0oKWAgaW50ZXJuYWxseQoKKipGaXg6KiogSW1wbGVtZW50IGBhbGFybSgpYCB0byBoYW5kbGUgc2NoZWR1bGVkIHRhc2tzCgojIyBDb21tb24gRXJyb3JzCgojIyMgIkNvbnRhaW5lciBzdGFydCB0aW1lb3V0IgoKKipDYXVzZToqKiBDb250YWluZXIgdG9vayA+OHMgKGBzdGFydCgpYCkgb3IgPjIwcyAoYHN0YXJ0QW5kV2FpdEZvclBvcnRzKClgKQoKKipTb2x1dGlvbnM6KioKLSBPcHRpbWl6ZSBpbWFnZSAoc21hbGxlciBiYXNlLCBmZXdlciBsYXllcnMpCi0gQ2hlY2sgYGVudHJ5cG9pbnRgIGNvcnJlY3QKLSBWZXJpZnkgYXBwIGxpc3RlbnMgb24gY29ycmVjdCBwb3J0cwotIEluY3JlYXNlIHRpbWVvdXQgaWYgbmVlZGVkCgojIyMgIlBvcnQgbm90IGF2YWlsYWJsZSIKCioqQ2F1c2U6KiogQ2FsbGluZyBgZmV0Y2goKWAgYmVmb3JlIHBvcnQgcmVhZHkKCioqU29sdXRpb246KiogVXNlIGBzdGFydEFuZFdhaXRGb3JQb3J0cygpYAoKIyMjICJDb250YWluZXIgbWVtb3J5IGV4Y2VlZGVkIgoKKipDYXVzZToqKiBVc2luZyBtb3JlIG1lbW9yeSB0aGFuIGluc3RhbmNlIHR5cGUgYWxsb3dzCgoqKlNvbHV0aW9uczoqKgotIFVzZSBsYXJnZXIgaW5zdGFuY2UgdHlwZSAoc3RhbmRhcmQtMiwgc3RhbmRhcmQtMywgc3RhbmRhcmQtNCkKLSBPcHRpbWl6ZSBhcHAgbWVtb3J5IHVzYWdlCi0gVXNlIGN1c3RvbSBpbnN0YW5jZSB0eXBlCgpgYGBqc29uYwoiaW5zdGFuY2VfdHlwZV9jdXN0b20iOiB7CiAgInZjcHUiOiAyLAogICJtZW1vcnlfbWliIjogODE5Mgp9CmBgYAoKIyMjICJNYXggaW5zdGFuY2VzIHJlYWNoZWQiCgoqKkNhdXNlOioqIEFsbCBgbWF4X2luc3RhbmNlc2Agc2xvdHMgaW4gdXNlCgoqKlNvbHV0aW9uczoqKgotIEluY3JlYXNlIGBtYXhfaW5zdGFuY2VzYAotIEltcGxlbWVudCBwcm9wZXIgYHNsZWVwQWZ0ZXJgCi0gVXNlIGBnZXRSYW5kb20oKWAgZm9yIGRpc3RyaWJ1dGlvbgotIENoZWNrIGZvciBpbnN0YW5jZSBsZWFrcwoKIyMjICJObyBjb250YWluZXIgaW5zdGFuY2UgYXZhaWxhYmxlIgoKKipDYXVzZToqKiBBY2NvdW50IGNhcGFjaXR5IGxpbWl0cyByZWFjaGVkCgoqKlNvbHV0aW9uczoqKgotIENoZWNrIGFjY291bnQgbGltaXRzCi0gUmV2aWV3IGluc3RhbmNlIHR5cGVzIGFjcm9zcyBjb250YWluZXJzCi0gQ29udGFjdCBDbG91ZGZsYXJlIHN1cHBvcnQKCiMjIExpbWl0cwoKfCBSZXNvdXJjZSB8IExpbWl0IHwgTm90ZXMgfAp8LS0tLS0tLS0tLXwtLS0tLS0tfC0tLS0tLS18CnwgQ29sZCBzdGFydCB8IDItM3MgfCBJbWFnZSBwcmUtZmV0Y2hlZCBnbG9iYWxseSB8CnwgR3JhY2VmdWwgc2h1dGRvd24gfCAxNSBtaW4gfCBTSUdURVJNIOKGkiBTSUdLSUxMIHwKfCBgc3RhcnQoKWAgdGltZW91dCB8IDhzIHwgUHJvY2VzcyBzdGFydCB8CnwgYHN0YXJ0QW5kV2FpdEZvclBvcnRzKClgIHRpbWVvdXQgfCAyMHMgfCBQb3J0IHJlYWR5IHwKfCBNYXggdkNQVSBwZXIgY29udGFpbmVyIHwgNCB8IHN0YW5kYXJkLTQgb3IgY3VzdG9tIHwKfCBNYXggbWVtb3J5IHBlciBjb250YWluZXIgfCAxMiBHaUIgfCBzdGFuZGFyZC00IG9yIGN1c3RvbSB8CnwgTWF4IGRpc2sgcGVyIGNvbnRhaW5lciB8IDIwIEdCIHwgRXBoZW1lcmFsLCByZXNldHMgfAp8IEFjY291bnQgdG90YWwgbWVtb3J5IHwgNDAwIEdpQiB8IEFsbCBjb250YWluZXJzIHwKfCBBY2NvdW50IHRvdGFsIHZDUFUgfCAxMDAgfCBBbGwgY29udGFpbmVycyB8CnwgQWNjb3VudCB0b3RhbCBkaXNrIHwgMiBUQiB8IEFsbCBjb250YWluZXJzIHwKfCBJbWFnZSBzdG9yYWdlIHwgNTAgR0IgfCBQZXIgYWNjb3VudCB8CnwgRGlzayBwZXJzaXN0ZW5jZSB8IE5vbmUgfCBVc2UgRE8gc3RvcmFnZSB8CgojIyBCZXN0IFByYWN0aWNlcwoKMS4gKipVc2UgYHN0YXJ0QW5kV2FpdEZvclBvcnRzKClgIGJ5IGRlZmF1bHQqKiAtIFByZXZlbnRzIHBvcnQgZXJyb3JzCjIuICoqU2V0IGFwcHJvcHJpYXRlIGBzbGVlcEFmdGVyYCoqIC0gQmFsYW5jZSByZXNvdXJjZXMgdnMgY29sZCBzdGFydHMKMy4gKipVc2UgYGZldGNoKClgIGZvciBXZWJTb2NrZXQqKiAtIE5vdCBgY29udGFpbmVyRmV0Y2goKWAKNC4gKipEZXNpZ24gZm9yIHJlc3RhcnRzKiogLSBFcGhlbWVyYWwgZGlzaywgaW1wbGVtZW50IGdyYWNlZnVsIHNodXRkb3duCjUuICoqTW9uaXRvciByZXNvdXJjZXMqKiAtIFN0YXkgd2l0aGluIGFjY291bnQgbGltaXRzCjYuICoqS2VlcCBob29rcyBmYXN0KiogLSBSdW4gaW4gYGJsb2NrQ29uY3VycmVuY3lXaGlsZWAKNy4gKipSZW5ldyBhY3Rpdml0eSBmb3IgbG9uZyBvcHMqKiAtIFRvdWNoIHN0b3JhZ2UgdG8gcHJldmVudCB0aW1lb3V0CgojIyBCZXRhIENhdmVhdHMKCuKaoO+4jyBDb250YWluZXJzIGluICoqYmV0YSoqOgoKLSAqKkFQSSBtYXkgY2hhbmdlKiogd2l0aG91dCBub3RpY2UKLSAqKk5vIFNMQSoqIGd1YXJhbnRlZXMKLSAqKkxpbWl0ZWQgcmVnaW9ucyoqIGluaXRpYWxseQotICoqTm8gYXV0b3NjYWxpbmcqKiAtIG1hbnVhbCB2aWEgYGdldFJhbmRvbSgpYAotICoqUm9sbGluZyBkZXBsb3lzKiogb25seSAobm90IGluc3RhbnQgbGlrZSBXb3JrZXJzKQoKUGxhbiBmb3IgQVBJIGNoYW5nZXMsIHRlc3QgdGhvcm91Z2hseSBiZWZvcmUgcHJvZHVjdGlvbi4K
+## Critical Gotchas
+
+### ⚠️ WebSocket: fetch() vs containerFetch()
+
+**Problem:** WebSocket connections fail silently
+
+**Cause:** `containerFetch()` doesn't support WebSocket upgrades
+
+**Fix:** Always use `fetch()` for WebSocket
+
+```typescript
+// ❌ WRONG
+return container.containerFetch(request);
+
+// ✅ CORRECT
+return container.fetch(request);
+```
+
+### ⚠️ startAndWaitForPorts() vs start()
+
+**Problem:** "connection refused" after `start()`
+
+**Cause:** `start()` returns when process starts, NOT when ports ready
+
+**Fix:** Use `startAndWaitForPorts()` before requests
+
+```typescript
+// ❌ WRONG
+await container.start();
+return container.fetch(request);
+
+// ✅ CORRECT
+await container.startAndWaitForPorts();
+return container.fetch(request);
+```
+
+### ⚠️ Activity Timeout on Long Operations
+
+**Problem:** Container stops during long work
+
+**Cause:** `sleepAfter` based on request activity, not internal work
+
+**Fix:** Renew timeout by touching storage
+
+```typescript
+const interval = setInterval(() => {
+  this.ctx.storage.put("keepalive", Date.now());
+}, 60000);
+
+try {
+  await this.doLongWork(data);
+} finally {
+  clearInterval(interval);
+}
+```
+
+### ⚠️ blockConcurrencyWhile for Startup
+
+**Problem:** Race conditions during initialization
+
+**Fix:** Use `blockConcurrencyWhile` for atomic initialization
+
+```typescript
+await this.ctx.blockConcurrencyWhile(async () => {
+  if (!this.initialized) {
+    await this.startAndWaitForPorts();
+    this.initialized = true;
+  }
+});
+```
+
+### ⚠️ Lifecycle Hooks Block Requests
+
+**Problem:** Container unresponsive during `onStart()`
+
+**Cause:** Hooks run in `blockConcurrencyWhile` - no concurrent requests
+
+**Fix:** Keep hooks fast, avoid long operations
+
+### ⚠️ Don't Override alarm() When Using schedule()
+
+**Problem:** Scheduled tasks don't execute
+
+**Cause:** `schedule()` uses `alarm()` internally
+
+**Fix:** Implement `alarm()` to handle scheduled tasks
+
+## Common Errors
+
+### "Container start timeout"
+
+**Cause:** Container took >8s (`start()`) or >20s (`startAndWaitForPorts()`)
+
+**Solutions:**
+- Optimize image (smaller base, fewer layers)
+- Check `entrypoint` correct
+- Verify app listens on correct ports
+- Increase timeout if needed
+
+### "Port not available"
+
+**Cause:** Calling `fetch()` before port ready
+
+**Solution:** Use `startAndWaitForPorts()`
+
+### "Container memory exceeded"
+
+**Cause:** Using more memory than instance type allows
+
+**Solutions:**
+- Use larger instance type (standard-2, standard-3, standard-4)
+- Optimize app memory usage
+- Use custom instance type
+
+```jsonc
+"instance_type_custom": {
+  "vcpu": 2,
+  "memory_mib": 8192
+}
+```
+
+### "Max instances reached"
+
+**Cause:** All `max_instances` slots in use
+
+**Solutions:**
+- Increase `max_instances`
+- Implement proper `sleepAfter`
+- Use `getRandom()` for distribution
+- Check for instance leaks
+
+### "No container instance available"
+
+**Cause:** Account capacity limits reached
+
+**Solutions:**
+- Check account limits
+- Review instance types across containers
+- Contact Cloudflare support
+
+## Limits
+
+| Resource | Limit | Notes |
+|----------|-------|-------|
+| Cold start | 2-3s | Image pre-fetched globally |
+| Graceful shutdown | 15 min | SIGTERM → SIGKILL |
+| `start()` timeout | 8s | Process start |
+| `startAndWaitForPorts()` timeout | 20s | Port ready |
+| Max vCPU per container | 4 | standard-4 or custom |
+| Max memory per container | 12 GiB | standard-4 or custom |
+| Max disk per container | 20 GB | Ephemeral, resets |
+| Account total memory | 400 GiB | All containers |
+| Account total vCPU | 100 | All containers |
+| Account total disk | 2 TB | All containers |
+| Image storage | 50 GB | Per account |
+| Disk persistence | None | Use DO storage |
+
+## Best Practices
+
+1. **Use `startAndWaitForPorts()` by default** - Prevents port errors
+2. **Set appropriate `sleepAfter`** - Balance resources vs cold starts
+3. **Use `fetch()` for WebSocket** - Not `containerFetch()`
+4. **Design for restarts** - Ephemeral disk, implement graceful shutdown
+5. **Monitor resources** - Stay within account limits
+6. **Keep hooks fast** - Run in `blockConcurrencyWhile`
+7. **Renew activity for long ops** - Touch storage to prevent timeout
+
+## Beta Caveats
+
+⚠️ Containers in **beta**:
+
+- **API may change** without notice
+- **No SLA** guarantees
+- **Limited regions** initially
+- **No autoscaling** - manual via `getRandom()`
+- **Rolling deploys** only (not instant like Workers)
+
+Plan for API changes, test thoroughly before production.

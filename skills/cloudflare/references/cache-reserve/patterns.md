@@ -1,1 +1,197 @@
-IyBDYWNoZSBSZXNlcnZlIFBhdHRlcm5zCgojIyBCZXN0IFByYWN0aWNlcwoKIyMjIDEuIEFsd2F5cyBFbmFibGUgVGllcmVkIENhY2hlCgpgYGB0eXBlc2NyaXB0Ci8vIENhY2hlIFJlc2VydmUgaXMgZGVzaWduZWQgZm9yIHVzZSBXSVRIIFRpZXJlZCBDYWNoZQpjb25zdCBjb25maWd1cmF0aW9uID0gewogIHRpZXJlZENhY2hlOiAnZW5hYmxlZCcsICAgIC8vIFJlcXVpcmVkIGZvciBvcHRpbWFsIHBlcmZvcm1hbmNlCiAgY2FjaGVSZXNlcnZlOiAnZW5hYmxlZCcsICAgLy8gV29ya3MgYmVzdCB3aXRoIFRpZXJlZCBDYWNoZQogIAogIGhpZXJhcmNoeTogWwogICAgJ0xvd2VyLVRpZXIgQ2FjaGUgKHZpc2l0b3IpJywKICAgICdVcHBlci1UaWVyIENhY2hlIChvcmlnaW4gcmVnaW9uKScsCiAgICAnQ2FjaGUgUmVzZXJ2ZSAocGVyc2lzdGVudCknLAogICAgJ09yaWdpbicKICBdCn07CmBgYAoKIyMjIDIuIFNldCBBcHByb3ByaWF0ZSBDYWNoZS1Db250cm9sIEhlYWRlcnMKCmBgYHR5cGVzY3JpcHQKLy8gT3JpZ2luIHJlc3BvbnNlIGhlYWRlcnMgZm9yIENhY2hlIFJlc2VydmUgZWxpZ2liaWxpdHkKY29uc3Qgb3JpZ2luSGVhZGVycyA9IHsKICAnQ2FjaGUtQ29udHJvbCc6ICdwdWJsaWMsIG1heC1hZ2U9ODY0MDAnLCAvLyAyNGhyIChtaW5pbXVtIDEwaHIpCiAgJ0NvbnRlbnQtTGVuZ3RoJzogJzEwMjQwMDAnLCAvLyBSZXF1aXJlZAogICdDYWNoZS1UYWcnOiAnaW1hZ2VzLHByb2R1Y3QtMTIzJywgLy8gT3B0aW9uYWw6IHB1cmdpbmcKICAnRVRhZyc6ICciYWJjMTIzIicsIC8vIE9wdGlvbmFsOiByZXZhbGlkYXRpb24KICAvLyBBdm9pZDogJ1NldC1Db29raWUnIGFuZCAnVmFyeTogKicgcHJldmVudCBjYWNoaW5nCn07CmBgYAoKIyMjIDMuIFVzZSBDYWNoZSBSdWxlcyBmb3IgRmluZS1HcmFpbmVkIENvbnRyb2wKCmBgYHR5cGVzY3JpcHQKLy8gRGlmZmVyZW50IFRUTHMgZm9yIGRpZmZlcmVudCBjb250ZW50IHR5cGVzCmNvbnN0IGNhY2hlUnVsZXMgPSBbCiAgewogICAgZGVzY3JpcHRpb246ICdMb25nLXRlcm0gY2FjaGUgZm9yIGltbXV0YWJsZSBhc3NldHMnLAogICAgZXhwcmVzc2lvbjogJyhodHRwLnJlcXVlc3QudXJpLnBhdGggbWF0Y2hlcyAiXi9zdGF0aWMvLipcXC5bYS1mMC05XXs4fVxcLiIpJywKICAgIGFjdGlvbl9wYXJhbWV0ZXJzOiB7CiAgICAgIGNhY2hlX3Jlc2VydmU6IHsgZWxpZ2libGU6IHRydWUgfSwKICAgICAgZWRnZV90dGw6IHsgbW9kZTogJ292ZXJyaWRlX29yaWdpbicsIGRlZmF1bHQ6IDI1OTIwMDAgfSwgLy8gMzAgZGF5cwogICAgICBjYWNoZTogdHJ1ZQogICAgfQogIH0sCiAgewogICAgZGVzY3JpcHRpb246ICdNb2RlcmF0ZSBjYWNoZSBmb3IgcmVndWxhciBpbWFnZXMnLAogICAgZXhwcmVzc2lvbjogJyhodHRwLnJlcXVlc3QudXJpLnBhdGggbWF0Y2hlcyAiXFwuKGpwZ3xwbmd8d2VicCkkIiknLAogICAgYWN0aW9uX3BhcmFtZXRlcnM6IHsKICAgICAgY2FjaGVfcmVzZXJ2ZTogeyBlbGlnaWJsZTogdHJ1ZSB9LAogICAgICBlZGdlX3R0bDogeyBtb2RlOiAnb3ZlcnJpZGVfb3JpZ2luJywgZGVmYXVsdDogODY0MDAgfSwgLy8gMjQgaG91cnMKICAgICAgY2FjaGU6IHRydWUKICAgIH0KICB9LAogIHsKICAgIGRlc2NyaXB0aW9uOiAnRXhjbHVkZSBBUEkgZnJvbSBDYWNoZSBSZXNlcnZlJywKICAgIGV4cHJlc3Npb246ICcoaHR0cC5yZXF1ZXN0LnVyaS5wYXRoIG1hdGNoZXMgIl4vYXBpLyIpJywKICAgIGFjdGlvbl9wYXJhbWV0ZXJzOiB7IGNhY2hlX3Jlc2VydmU6IHsgZWxpZ2libGU6IGZhbHNlIH0sIGNhY2hlOiBmYWxzZSB9CiAgfQpdOwpgYGAKCiMjIyA0LiBNYWtpbmcgQXNzZXRzIENhY2hlIFJlc2VydmUgRWxpZ2libGUgZnJvbSBXb3JrZXJzCgoqKk5vdGUqKjogVGhpcyBtb2RpZmllcyByZXNwb25zZSBoZWFkZXJzIHRvIG1lZXQgZWxpZ2liaWxpdHkgY3JpdGVyaWEgYnV0IGRvZXMgTk9UIGRpcmVjdGx5IGNvbnRyb2wgQ2FjaGUgUmVzZXJ2ZSBzdG9yYWdlICh3aGljaCBpcyB6b25lLWxldmVsIGF1dG9tYXRpYykuCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2gocmVxdWVzdCk7CiAgICBpZiAoIXJlc3BvbnNlLm9rKSByZXR1cm4gcmVzcG9uc2U7CiAgICAKICAgIGNvbnN0IGhlYWRlcnMgPSBuZXcgSGVhZGVycyhyZXNwb25zZS5oZWFkZXJzKTsKICAgIGhlYWRlcnMuc2V0KCdDYWNoZS1Db250cm9sJywgJ3B1YmxpYywgbWF4LWFnZT0zNjAwMCcpOyAvLyAxMGhyIG1pbmltdW0KICAgIGhlYWRlcnMuZGVsZXRlKCdTZXQtQ29va2llJyk7IC8vIEJsb2NrcyBjYWNoaW5nCiAgICAKICAgIC8vIEVuc3VyZSBDb250ZW50LUxlbmd0aCBwcmVzZW50CiAgICBpZiAoIWhlYWRlcnMuaGFzKCdDb250ZW50LUxlbmd0aCcpKSB7CiAgICAgIGNvbnN0IGJsb2IgPSBhd2FpdCByZXNwb25zZS5ibG9iKCk7CiAgICAgIGhlYWRlcnMuc2V0KCdDb250ZW50LUxlbmd0aCcsIGJsb2Iuc2l6ZS50b1N0cmluZygpKTsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZShibG9iLCB7IHN0YXR1czogcmVzcG9uc2Uuc3RhdHVzLCBoZWFkZXJzIH0pOwogICAgfQogICAgCiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKHJlc3BvbnNlLmJvZHksIHsgc3RhdHVzOiByZXNwb25zZS5zdGF0dXMsIGhlYWRlcnMgfSk7CiAgfQp9OwpgYGAKCiMjIyA1LiBIb3N0bmFtZSBCZXN0IFByYWN0aWNlcwoKVXNlIFdvcmtlcidzIGhvc3RuYW1lIGZvciBlZmZpY2llbnQgY2FjaGluZyAtIGF2b2lkIG92ZXJyaWRpbmcgaG9zdG5hbWUgdW5uZWNlc3NhcmlseS4KCiMjIEFyY2hpdGVjdHVyZSBQYXR0ZXJucwoKIyMjIE11bHRpLVRpZXIgQ2FjaGluZyArIEltbXV0YWJsZSBBc3NldHMKCmBgYHR5cGVzY3JpcHQKLy8gT3B0aW1hbDogTDEgKHZpc2l0b3IpIOKGkiBMMiAocmVnaW9uKSDihpIgTDMgKENhY2hlIFJlc2VydmUpIOKGkiBPcmlnaW4KZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgdXJsID0gbmV3IFVSTChyZXF1ZXN0LnVybCk7CiAgICBjb25zdCBpc0ltbXV0YWJsZSA9IC9cLlthLWYwLTldezgsfVwuKGpzfGNzc3xqcGd8cG5nfHdvZmYyKSQvLnRlc3QodXJsLnBhdGhuYW1lKTsKICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2gocmVxdWVzdCk7CiAgICAKICAgIGlmIChpc0ltbXV0YWJsZSkgewogICAgICBjb25zdCBoZWFkZXJzID0gbmV3IEhlYWRlcnMocmVzcG9uc2UuaGVhZGVycyk7CiAgICAgIGhlYWRlcnMuc2V0KCdDYWNoZS1Db250cm9sJywgJ3B1YmxpYywgbWF4LWFnZT0zMTUzNjAwMCwgaW1tdXRhYmxlJyk7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UocmVzcG9uc2UuYm9keSwgeyBzdGF0dXM6IHJlc3BvbnNlLnN0YXR1cywgaGVhZGVycyB9KTsKICAgIH0KICAgIHJldHVybiByZXNwb25zZTsKICB9Cn07CmBgYAoKIyMgQ29zdCBPcHRpbWl6YXRpb24KCiMjIyBDb3N0IENhbGN1bGF0b3IKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIENhY2hlUmVzZXJ2ZUVzdGltYXRlIHsKICBhdmdBc3NldFNpemVHQjogbnVtYmVyOwogIHVuaXF1ZUFzc2V0czogbnVtYmVyOwogIG1vbnRobHlSZWFkczogbnVtYmVyOwogIG1vbnRobHlXcml0ZXM6IG51bWJlcjsKICBvcmlnaW5FZ3Jlc3NDb3N0UGVyR0I6IG51bWJlcjsgLy8gZS5nLiwgQVdTOiAkMC4wOS9HQgp9CgpmdW5jdGlvbiBlc3RpbWF0ZU1vbnRobHlDb3N0KGlucHV0OiBDYWNoZVJlc2VydmVFc3RpbWF0ZSkgewogIC8vIENhY2hlIFJlc2VydmUgcHJpY2luZwogIGNvbnN0IHN0b3JhZ2VDb3N0UGVyR0JNb250aCA9IDAuMDE1OwogIGNvbnN0IGNsYXNzQVBlck1pbGxpb24gPSA0LjUwOyAvLyB3cml0ZXMKICBjb25zdCBjbGFzc0JQZXJNaWxsaW9uID0gMC4zNjsgLy8gcmVhZHMKICAKICAvLyBDYWxjdWxhdGUgQ2FjaGUgUmVzZXJ2ZSBjb3N0cwogIGNvbnN0IHRvdGFsU3RvcmFnZUdCID0gaW5wdXQuYXZnQXNzZXRTaXplR0IgKiBpbnB1dC51bmlxdWVBc3NldHM7CiAgY29uc3Qgc3RvcmFnZUNvc3QgPSB0b3RhbFN0b3JhZ2VHQiAqIHN0b3JhZ2VDb3N0UGVyR0JNb250aDsKICBjb25zdCB3cml0ZUNvc3QgPSAoaW5wdXQubW9udGhseVdyaXRlcyAvIDFfMDAwXzAwMCkgKiBjbGFzc0FQZXJNaWxsaW9uOwogIGNvbnN0IHJlYWRDb3N0ID0gKGlucHV0Lm1vbnRobHlSZWFkcyAvIDFfMDAwXzAwMCkgKiBjbGFzc0JQZXJNaWxsaW9uOwogIAogIGNvbnN0IGNhY2hlUmVzZXJ2ZUNvc3QgPSBzdG9yYWdlQ29zdCArIHdyaXRlQ29zdCArIHJlYWRDb3N0OwogIAogIC8vIENhbGN1bGF0ZSBvcmlnaW4gZWdyZXNzIGNvc3QgKHdoYXQgeW91J2QgcGF5IHdpdGhvdXQgQ2FjaGUgUmVzZXJ2ZSkKICBjb25zdCB0b3RhbFRyYWZmaWNHQiA9IChpbnB1dC5tb250aGx5UmVhZHMgKiBpbnB1dC5hdmdBc3NldFNpemVHQik7CiAgY29uc3Qgb3JpZ2luRWdyZXNzQ29zdCA9IHRvdGFsVHJhZmZpY0dCICogaW5wdXQub3JpZ2luRWdyZXNzQ29zdFBlckdCOwogIAogIC8vIFNhdmluZ3MgY2FsY3VsYXRpb24KICBjb25zdCBzYXZpbmdzID0gb3JpZ2luRWdyZXNzQ29zdCAtIGNhY2hlUmVzZXJ2ZUNvc3Q7CiAgY29uc3Qgc2F2aW5nc1BlcmNlbnQgPSAoKHNhdmluZ3MgLyBvcmlnaW5FZ3Jlc3NDb3N0KSAqIDEwMCkudG9GaXhlZCgxKTsKICAKICByZXR1cm4gewogICAgY2FjaGVSZXNlcnZlQ29zdDogYCQke2NhY2hlUmVzZXJ2ZUNvc3QudG9GaXhlZCgyKX1gLAogICAgb3JpZ2luRWdyZXNzQ29zdDogYCQke29yaWdpbkVncmVzc0Nvc3QudG9GaXhlZCgyKX1gLAogICAgbW9udGhseVNhdmluZ3M6IGAkJHtzYXZpbmdzLnRvRml4ZWQoMil9YCwKICAgIHNhdmluZ3NQZXJjZW50OiBgJHtzYXZpbmdzUGVyY2VudH0lYCwKICAgIGJyZWFrZG93bjogewogICAgICBzdG9yYWdlOiBgJCR7c3RvcmFnZUNvc3QudG9GaXhlZCgyKX1gLAogICAgICB3cml0ZXM6IGAkJHt3cml0ZUNvc3QudG9GaXhlZCgyKX1gLAogICAgICByZWFkczogYCQke3JlYWRDb3N0LnRvRml4ZWQoMil9YCwKICAgIH0KICB9Owp9CgovLyBFeGFtcGxlOiBNZWRpYSBsaWJyYXJ5CmNvbnN0IG1lZGlhTGlicmFyeSA9IGVzdGltYXRlTW9udGhseUNvc3QoewogIGF2Z0Fzc2V0U2l6ZUdCOiAwLjAwNSwgLy8gNU1CIGltYWdlcwogIHVuaXF1ZUFzc2V0czogMTBfMDAwLAogIG1vbnRobHlSZWFkczogNV8wMDBfMDAwLAogIG1vbnRobHlXcml0ZXM6IDUwXzAwMCwKICBvcmlnaW5FZ3Jlc3NDb3N0UGVyR0I6IDAuMDksIC8vIEFXUyBTMwp9KTsKCmNvbnNvbGUubG9nKG1lZGlhTGlicmFyeSk7Ci8vIHsKLy8gICBjYWNoZVJlc2VydmVDb3N0OiAiJDkuOTgiLAovLyAgIG9yaWdpbkVncmVzc0Nvc3Q6ICIkMjUuMDAiLAovLyAgIG1vbnRobHlTYXZpbmdzOiAiJDE1LjAyIiwKLy8gICBzYXZpbmdzUGVyY2VudDogIjYwLjElIiwKLy8gICBicmVha2Rvd246IHsgc3RvcmFnZTogIiQwLjc1Iiwgd3JpdGVzOiAiJDAuMjMiLCByZWFkczogIiQ5LjAwIiB9Ci8vIH0KYGBgCgojIyMgT3B0aW1pemF0aW9uIEd1aWRlbGluZXMKCi0gKipTZXQgYXBwcm9wcmlhdGUgVFRMcyoqOiAxMGhyIG1pbmltdW0sIDI0aHIrIG9wdGltYWwgZm9yIHN0YWJsZSBjb250ZW50LCAzMGQgbWF4IGNhdXRpb3VzbHkKLSAqKkNhY2hlIGhpZ2gtdmFsdWUgc3RhYmxlIGFzc2V0cyoqOiBJbWFnZXMsIG1lZGlhLCBmb250cywgYXJjaGl2ZXMsIGRvY3VtZW50YXRpb24KLSAqKkV4Y2x1ZGUgZnJlcXVlbnRseSBjaGFuZ2luZyoqOiBBUElzLCB1c2VyLXNwZWNpZmljIGNvbnRlbnQsIHJlYWwtdGltZSBkYXRhCi0gKipDb21wcmVzc2lvbiBub3RlKio6IENhY2hlIFJlc2VydmUgZmV0Y2hlcyB1bmNvbXByZXNzZWQgZnJvbSBvcmlnaW4sIHNlcnZlcyBjb21wcmVzc2VkIHRvIHZpc2l0b3JzIC0gZmFjdG9yIGluIG9yaWdpbiBlZ3Jlc3MgY29zdHMKCiMjIFNlZSBBbHNvCgotIFtSRUFETUVdKC4vUkVBRE1FLm1kKSAtIE92ZXJ2aWV3IGFuZCBjb3JlIGNvbmNlcHRzCi0gW0NvbmZpZ3VyYXRpb25dKC4vY29uZmlndXJhdGlvbi5tZCkgLSBTZXR1cCBhbmQgQ2FjaGUgUnVsZXMKLSBbQVBJIFJlZmVyZW5jZV0oLi9hcGkubWQpIC0gUHVyZ2luZyBhbmQgbW9uaXRvcmluZwotIFtHb3RjaGFzXSguL2dvdGNoYXMubWQpIC0gQ29tbW9uIGlzc3VlcyBhbmQgdHJvdWJsZXNob290aW5nCg==
+# Cache Reserve Patterns
+
+## Best Practices
+
+### 1. Always Enable Tiered Cache
+
+```typescript
+// Cache Reserve is designed for use WITH Tiered Cache
+const configuration = {
+  tieredCache: 'enabled',    // Required for optimal performance
+  cacheReserve: 'enabled',   // Works best with Tiered Cache
+  
+  hierarchy: [
+    'Lower-Tier Cache (visitor)',
+    'Upper-Tier Cache (origin region)',
+    'Cache Reserve (persistent)',
+    'Origin'
+  ]
+};
+```
+
+### 2. Set Appropriate Cache-Control Headers
+
+```typescript
+// Origin response headers for Cache Reserve eligibility
+const originHeaders = {
+  'Cache-Control': 'public, max-age=86400', // 24hr (minimum 10hr)
+  'Content-Length': '1024000', // Required
+  'Cache-Tag': 'images,product-123', // Optional: purging
+  'ETag': '"abc123"', // Optional: revalidation
+  // Avoid: 'Set-Cookie' and 'Vary: *' prevent caching
+};
+```
+
+### 3. Use Cache Rules for Fine-Grained Control
+
+```typescript
+// Different TTLs for different content types
+const cacheRules = [
+  {
+    description: 'Long-term cache for immutable assets',
+    expression: '(http.request.uri.path matches "^/static/.*\\.[a-f0-9]{8}\\.")',
+    action_parameters: {
+      cache_reserve: { eligible: true },
+      edge_ttl: { mode: 'override_origin', default: 2592000 }, // 30 days
+      cache: true
+    }
+  },
+  {
+    description: 'Moderate cache for regular images',
+    expression: '(http.request.uri.path matches "\\.(jpg|png|webp)$")',
+    action_parameters: {
+      cache_reserve: { eligible: true },
+      edge_ttl: { mode: 'override_origin', default: 86400 }, // 24 hours
+      cache: true
+    }
+  },
+  {
+    description: 'Exclude API from Cache Reserve',
+    expression: '(http.request.uri.path matches "^/api/")',
+    action_parameters: { cache_reserve: { eligible: false }, cache: false }
+  }
+];
+```
+
+### 4. Making Assets Cache Reserve Eligible from Workers
+
+**Note**: This modifies response headers to meet eligibility criteria but does NOT directly control Cache Reserve storage (which is zone-level automatic).
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const response = await fetch(request);
+    if (!response.ok) return response;
+    
+    const headers = new Headers(response.headers);
+    headers.set('Cache-Control', 'public, max-age=36000'); // 10hr minimum
+    headers.delete('Set-Cookie'); // Blocks caching
+    
+    // Ensure Content-Length present
+    if (!headers.has('Content-Length')) {
+      const blob = await response.blob();
+      headers.set('Content-Length', blob.size.toString());
+      return new Response(blob, { status: response.status, headers });
+    }
+    
+    return new Response(response.body, { status: response.status, headers });
+  }
+};
+```
+
+### 5. Hostname Best Practices
+
+Use Worker's hostname for efficient caching - avoid overriding hostname unnecessarily.
+
+## Architecture Patterns
+
+### Multi-Tier Caching + Immutable Assets
+
+```typescript
+// Optimal: L1 (visitor) → L2 (region) → L3 (Cache Reserve) → Origin
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    const isImmutable = /\.[a-f0-9]{8,}\.(js|css|jpg|png|woff2)$/.test(url.pathname);
+    const response = await fetch(request);
+    
+    if (isImmutable) {
+      const headers = new Headers(response.headers);
+      headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+      return new Response(response.body, { status: response.status, headers });
+    }
+    return response;
+  }
+};
+```
+
+## Cost Optimization
+
+### Cost Calculator
+
+```typescript
+interface CacheReserveEstimate {
+  avgAssetSizeGB: number;
+  uniqueAssets: number;
+  monthlyReads: number;
+  monthlyWrites: number;
+  originEgressCostPerGB: number; // e.g., AWS: $0.09/GB
+}
+
+function estimateMonthlyCost(input: CacheReserveEstimate) {
+  // Cache Reserve pricing
+  const storageCostPerGBMonth = 0.015;
+  const classAPerMillion = 4.50; // writes
+  const classBPerMillion = 0.36; // reads
+  
+  // Calculate Cache Reserve costs
+  const totalStorageGB = input.avgAssetSizeGB * input.uniqueAssets;
+  const storageCost = totalStorageGB * storageCostPerGBMonth;
+  const writeCost = (input.monthlyWrites / 1_000_000) * classAPerMillion;
+  const readCost = (input.monthlyReads / 1_000_000) * classBPerMillion;
+  
+  const cacheReserveCost = storageCost + writeCost + readCost;
+  
+  // Calculate origin egress cost (what you'd pay without Cache Reserve)
+  const totalTrafficGB = (input.monthlyReads * input.avgAssetSizeGB);
+  const originEgressCost = totalTrafficGB * input.originEgressCostPerGB;
+  
+  // Savings calculation
+  const savings = originEgressCost - cacheReserveCost;
+  const savingsPercent = ((savings / originEgressCost) * 100).toFixed(1);
+  
+  return {
+    cacheReserveCost: `$${cacheReserveCost.toFixed(2)}`,
+    originEgressCost: `$${originEgressCost.toFixed(2)}`,
+    monthlySavings: `$${savings.toFixed(2)}`,
+    savingsPercent: `${savingsPercent}%`,
+    breakdown: {
+      storage: `$${storageCost.toFixed(2)}`,
+      writes: `$${writeCost.toFixed(2)}`,
+      reads: `$${readCost.toFixed(2)}`,
+    }
+  };
+}
+
+// Example: Media library
+const mediaLibrary = estimateMonthlyCost({
+  avgAssetSizeGB: 0.005, // 5MB images
+  uniqueAssets: 10_000,
+  monthlyReads: 5_000_000,
+  monthlyWrites: 50_000,
+  originEgressCostPerGB: 0.09, // AWS S3
+});
+
+console.log(mediaLibrary);
+// {
+//   cacheReserveCost: "$9.98",
+//   originEgressCost: "$25.00",
+//   monthlySavings: "$15.02",
+//   savingsPercent: "60.1%",
+//   breakdown: { storage: "$0.75", writes: "$0.23", reads: "$9.00" }
+// }
+```
+
+### Optimization Guidelines
+
+- **Set appropriate TTLs**: 10hr minimum, 24hr+ optimal for stable content, 30d max cautiously
+- **Cache high-value stable assets**: Images, media, fonts, archives, documentation
+- **Exclude frequently changing**: APIs, user-specific content, real-time data
+- **Compression note**: Cache Reserve fetches uncompressed from origin, serves compressed to visitors - factor in origin egress costs
+
+## See Also
+
+- [README](./README.md) - Overview and core concepts
+- [Configuration](./configuration.md) - Setup and Cache Rules
+- [API Reference](./api.md) - Purging and monitoring
+- [Gotchas](./gotchas.md) - Common issues and troubleshooting

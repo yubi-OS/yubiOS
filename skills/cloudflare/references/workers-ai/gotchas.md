@@ -1,1 +1,114 @@
-IyBXb3JrZXJzIEFJIEdvdGNoYXMKCiMjIENyaXRpY2FsOiBAY2xvdWRmbGFyZS9haSBpcyBERVBSRUNBVEVECgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBXUk9ORyAtIERvbid0IGluc3RhbGwgQGNsb3VkZmxhcmUvYWkKaW1wb3J0IEFpIGZyb20gJ0BjbG91ZGZsYXJlL2FpJzsKCi8vIOKchSBDT1JSRUNUIC0gVXNlIG5hdGl2ZSBiaW5kaW5nCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudikgewogICAgYXdhaXQgZW52LkFJLnJ1bignQGNmL21ldGEvbGxhbWEtMy4xLThiLWluc3RydWN0JywgeyBtZXNzYWdlczogWy4uLl0gfSk7CiAgfQp9CmBgYAoKIyMgRGV2ZWxvcG1lbnQKCiMjIyAiQUkgaW5mZXJlbmNlIGRvZXNuJ3Qgd29yayBsb2NhbGx5IgpgYGBiYXNoCiMg4p2MIExvY2FsIEFJIGRvZXNuJ3Qgd29yawp3cmFuZ2xlciBkZXYKIyDinIUgVXNlIHJlbW90ZQp3cmFuZ2xlciBkZXYgLS1yZW1vdGUKYGBgCgojIyMgImVudi5BSSBpcyB1bmRlZmluZWQiCkFkZCBiaW5kaW5nIHRvIHdyYW5nbGVyLmpzb25jOgpgYGBqc29uYwp7ICJhaSI6IHsgImJpbmRpbmciOiAiQUkiIH0gfQpgYGAKCiMjIEFQSSBSZXNwb25zZXMKCiMjIyBFbWJlZGRpbmcgcmVzcG9uc2Ugc2hhcGUgdmFyaWVzCmBgYHR5cGVzY3JpcHQKLy8gQGNmL2JhYWkvYmdlLWJhc2UtZW4tdjEuNSByZXR1cm5zOiB7IGRhdGE6IFtbMC4xLCAwLjIsIC4uLl1dIH0KY29uc3QgZW1iZWRkaW5nID0gcmVzcG9uc2UuZGF0YVswXTsgLy8gR2V0IGZpcnN0IGVsZW1lbnQKYGBgCgojIyMgU3RyZWFtIHJldHVybnMgUmVhZGFibGVTdHJlYW0KYGBgdHlwZXNjcmlwdApjb25zdCBzdHJlYW0gPSBhd2FpdCBlbnYuQUkucnVuKG1vZGVsLCB7IG1lc3NhZ2VzOiBbLi4uXSwgc3RyZWFtOiB0cnVlIH0pOwpmb3IgYXdhaXQgKGNvbnN0IGNodW5rIG9mIHN0cmVhbSkgeyBjb25zb2xlLmxvZyhjaHVuay5yZXNwb25zZSk7IH0KYGBgCgojIyBSYXRlIExpbWl0cyAmIFByaWNpbmcKCnwgTW9kZWwgVHlwZSB8IE5ldXJvbnMvUmVxdWVzdCB8CnwtLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS18CnwgU21hbGwgdGV4dCAoN0IpIHwgfjUwLTIwMCB8CnwgTGFyZ2UgdGV4dCAoNzBCKSB8IH41MDAtMjAwMCB8CnwgRW1iZWRkaW5ncyB8IH41LTIwIHwKfCBJbWFnZSBnZW4gfCB+MTAsMDAwKyB8CgoqKkZyZWUgdGllcioqOiAxMCwwMDAgbmV1cm9ucy9kYXkKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIEVYUEVOU0lWRSAtIDcwQiBtb2RlbAphd2FpdCBlbnYuQUkucnVuKCdAY2YvbWV0YS9sbGFtYS0zLjEtNzBiLWluc3RydWN0JywgLi4uKTsKLy8g4pyFIENIRUFQRVIgLSBVc2Ugc21hbGxlc3QgdGhhdCB3b3Jrcwphd2FpdCBlbnYuQUkucnVuKCdAY2YvbWV0YS9sbGFtYS0zLjEtOGItaW5zdHJ1Y3QnLCAuLi4pOwpgYGAKCiMjIE1vZGVsLVNwZWNpZmljCgojIyMgRnVuY3Rpb24gY2FsbGluZwpPbmx5IGBAY2YvbWV0YS9sbGFtYS0zLjEtKmAgYW5kIGBtaXN0cmFsLTdiLWluc3RydWN0LXYwLjJgIHN1cHBvcnQgdG9vbHMuCgojIyMgRW1wdHkgcmVzcG9uc2UKQ2hlY2sgY29udGV4dCBsaW1pdHMgKDJLLThLIHRva2VucykuIFZhbGlkYXRlIGlucHV0IHN0cnVjdHVyZS4KCiMjIyBJbmNvbnNpc3RlbnQgcmVzcG9uc2VzClNldCBgdGVtcGVyYXR1cmU6IDBgIGZvciBkZXRlcm1pbmlzdGljIG91dHB1dHMuCgojIyMgQ29sZCBzdGFydCBsYXRlbmN5CkZpcnN0IHJlcXVlc3Q6IDEtM3MuIFVzZSBBSSBHYXRld2F5IGNhY2hpbmcgZm9yIGZyZXF1ZW50IHByb21wdHMuCgojIyBUeXBlU2NyaXB0CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIEFJOiBBaTsgLy8gRnJvbSBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzCn0KCmludGVyZmFjZSBUZXh0R2VuZXJhdGlvblJlc3BvbnNlIHsgcmVzcG9uc2U6IHN0cmluZzsgfQppbnRlcmZhY2UgRW1iZWRkaW5nUmVzcG9uc2UgeyBkYXRhOiBudW1iZXJbXVtdOyBzaGFwZTogbnVtYmVyW107IH0KYGBgCgojIyBDb21tb24gRXJyb3JzCgojIyMgNzUwMjogTW9kZWwgbm90IGZvdW5kCkNoZWNrIGV4YWN0IG1vZGVsIG5hbWUgYXQgZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS93b3JrZXJzLWFpL21vZGVscy8KCiMjIyA3NTA0OiBJbnB1dCB2YWxpZGF0aW9uIGZhaWxlZApgYGB0eXBlc2NyaXB0Ci8vIFRleHQgZ2VuIHJlcXVpcmVzIG1lc3NhZ2VzIGFycmF5CmF3YWl0IGVudi5BSS5ydW4oJ0BjZi9tZXRhL2xsYW1hLTMuMS04Yi1pbnN0cnVjdCcsIHsKICBtZXNzYWdlczogW3sgcm9sZTogJ3VzZXInLCBjb250ZW50OiAnSGVsbG8nIH1dICAvLyDinIUKfSk7CgovLyBFbWJlZGRpbmdzIHJlcXVpcmUgdGV4dAphd2FpdCBlbnYuQUkucnVuKCdAY2YvYmFhaS9iZ2UtYmFzZS1lbi12MS41JywgeyB0ZXh0OiAnSGVsbG8nIH0pOyAgLy8g4pyFCmBgYAoKIyMgVmVyY2VsIEFJIFNESyBJbnRlZ3JhdGlvbgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBvcGVuYWkgfSBmcm9tICdAYWktc2RrL29wZW5haSc7CmNvbnN0IG1vZGVsID0gb3BlbmFpKCdncHQtMy41LXR1cmJvJywgewogIGJhc2VVUkw6ICdodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvPEFDQ09VTlRfSUQ+L2FpL3YxJywKICBoZWFkZXJzOiB7IEF1dGhvcml6YXRpb246ICdCZWFyZXIgPEFQSV9UT0tFTj4nIH0KfSk7CmBgYAo=
+# Workers AI Gotchas
+
+## Critical: @cloudflare/ai is DEPRECATED
+
+```typescript
+// ❌ WRONG - Don't install @cloudflare/ai
+import Ai from '@cloudflare/ai';
+
+// ✅ CORRECT - Use native binding
+export default {
+  async fetch(request: Request, env: Env) {
+    await env.AI.run('@cf/meta/llama-3.1-8b-instruct', { messages: [...] });
+  }
+}
+```
+
+## Development
+
+### "AI inference doesn't work locally"
+```bash
+# ❌ Local AI doesn't work
+wrangler dev
+# ✅ Use remote
+wrangler dev --remote
+```
+
+### "env.AI is undefined"
+Add binding to wrangler.jsonc:
+```jsonc
+{ "ai": { "binding": "AI" } }
+```
+
+## API Responses
+
+### Embedding response shape varies
+```typescript
+// @cf/baai/bge-base-en-v1.5 returns: { data: [[0.1, 0.2, ...]] }
+const embedding = response.data[0]; // Get first element
+```
+
+### Stream returns ReadableStream
+```typescript
+const stream = await env.AI.run(model, { messages: [...], stream: true });
+for await (const chunk of stream) { console.log(chunk.response); }
+```
+
+## Rate Limits & Pricing
+
+| Model Type | Neurons/Request |
+|------------|-----------------|
+| Small text (7B) | ~50-200 |
+| Large text (70B) | ~500-2000 |
+| Embeddings | ~5-20 |
+| Image gen | ~10,000+ |
+
+**Free tier**: 10,000 neurons/day
+
+```typescript
+// ❌ EXPENSIVE - 70B model
+await env.AI.run('@cf/meta/llama-3.1-70b-instruct', ...);
+// ✅ CHEAPER - Use smallest that works
+await env.AI.run('@cf/meta/llama-3.1-8b-instruct', ...);
+```
+
+## Model-Specific
+
+### Function calling
+Only `@cf/meta/llama-3.1-*` and `mistral-7b-instruct-v0.2` support tools.
+
+### Empty response
+Check context limits (2K-8K tokens). Validate input structure.
+
+### Inconsistent responses
+Set `temperature: 0` for deterministic outputs.
+
+### Cold start latency
+First request: 1-3s. Use AI Gateway caching for frequent prompts.
+
+## TypeScript
+
+```typescript
+interface Env {
+  AI: Ai; // From @cloudflare/workers-types
+}
+
+interface TextGenerationResponse { response: string; }
+interface EmbeddingResponse { data: number[][]; shape: number[]; }
+```
+
+## Common Errors
+
+### 7502: Model not found
+Check exact model name at developers.cloudflare.com/workers-ai/models/
+
+### 7504: Input validation failed
+```typescript
+// Text gen requires messages array
+await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+  messages: [{ role: 'user', content: 'Hello' }]  // ✅
+});
+
+// Embeddings require text
+await env.AI.run('@cf/baai/bge-base-en-v1.5', { text: 'Hello' });  // ✅
+```
+
+## Vercel AI SDK Integration
+
+```typescript
+import { openai } from '@ai-sdk/openai';
+const model = openai('gpt-3.5-turbo', {
+  baseURL: 'https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/ai/v1',
+  headers: { Authorization: 'Bearer <API_TOKEN>' }
+});
+```

@@ -1,1 +1,203 @@
-IyBSZWFsdGltZUtpdCBDb25maWd1cmF0aW9uCgpDb25maWd1cmF0aW9uIGd1aWRlIGZvciBSZWFsdGltZUtpdCBzZXR1cCwgY2xpZW50IFNES3MsIGFuZCB3cmFuZ2xlciBpbnRlZ3JhdGlvbi4KCiMjIEluc3RhbGxhdGlvbgoKIyMjIFJlYWN0CmBgYGJhc2gKbnBtIGluc3RhbGwgQGNsb3VkZmxhcmUvcmVhbHRpbWVraXQgQGNsb3VkZmxhcmUvcmVhbHRpbWVraXQtcmVhY3QtdWkKYGBgCgojIyMgQW5ndWxhcgpgYGBiYXNoCm5wbSBpbnN0YWxsIEBjbG91ZGZsYXJlL3JlYWx0aW1la2l0IEBjbG91ZGZsYXJlL3JlYWx0aW1la2l0LWFuZ3VsYXItdWkKYGBgCgojIyMgV2ViIENvbXBvbmVudHMvSFRNTApgYGBiYXNoCm5wbSBpbnN0YWxsIEBjbG91ZGZsYXJlL3JlYWx0aW1la2l0IEBjbG91ZGZsYXJlL3JlYWx0aW1la2l0LXVpCmBgYAoKIyMgQ2xpZW50IFNESyBDb25maWd1cmF0aW9uCgojIyMgUmVhY3QgVUkgS2l0CmBgYHRzeAppbXBvcnQgeyBSdGtNZWV0aW5nIH0gZnJvbSAnQGNsb3VkZmxhcmUvcmVhbHRpbWVraXQtcmVhY3QtdWknOwo8UnRrTWVldGluZyBhdXRoVG9rZW49Ijx0b2tlbj4iIG9uTGVhdmU9eygpID0+IHt9fSAvPgpgYGAKCiMjIyBBbmd1bGFyIFVJIEtpdApgYGB0eXBlc2NyaXB0CkBDb21wb25lbnQoeyB0ZW1wbGF0ZTogYDxydGstbWVldGluZyBbYXV0aFRva2VuXT0iYXV0aFRva2VuIiAocnRrTGVhdmUpPSJvbkxlYXZlKCRldmVudCkiPjwvcnRrLW1lZXRpbmc+YCB9KQpleHBvcnQgY2xhc3MgQXBwQ29tcG9uZW50IHsgYXV0aFRva2VuID0gJzx0b2tlbj4nOyBvbkxlYXZlKCkge30gfQpgYGAKCiMjIyBXZWIgQ29tcG9uZW50cwpgYGBodG1sCjxzY3JpcHQgdHlwZT0ibW9kdWxlIiBzcmM9Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vQGNsb3VkZmxhcmUvcmVhbHRpbWVraXQtdWkvZGlzdC9yZWFsdGltZWtpdC11aS9yZWFsdGltZWtpdC11aS5lc20uanMiPjwvc2NyaXB0Pgo8cnRrLW1lZXRpbmcgaWQ9Im1lZXRpbmciPjwvcnRrLW1lZXRpbmc+CjxzY3JpcHQ+CiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ21lZXRpbmcnKS5hdXRoVG9rZW4gPSAnPHRva2VuPic7Cjwvc2NyaXB0PgpgYGAKCiMjIyBDb3JlIFNESyBDb25maWd1cmF0aW9uCmBgYHR5cGVzY3JpcHQKaW1wb3J0IFJlYWx0aW1lS2l0Q2xpZW50IGZyb20gJ0BjbG91ZGZsYXJlL3JlYWx0aW1la2l0JzsKCmNvbnN0IG1lZXRpbmcgPSBuZXcgUmVhbHRpbWVLaXRDbGllbnQoewogIGF1dGhUb2tlbjogJzx0b2tlbj4nLAogIHZpZGVvOiB0cnVlLCBhdWRpbzogdHJ1ZSwgYXV0b1N3aXRjaEF1ZGlvRGV2aWNlOiB0cnVlLAogIG1lZGlhQ29uZmlndXJhdGlvbjogewogICAgdmlkZW86IHsgd2lkdGg6IHsgaWRlYWw6IDEyODAgfSwgaGVpZ2h0OiB7IGlkZWFsOiA3MjAgfSwgZnJhbWVSYXRlOiB7IGlkZWFsOiAzMCB9IH0sCiAgICBhdWRpbzogeyBlY2hvQ2FuY2VsbGF0aW9uOiB0cnVlLCBub2lzZVN1cHByZXNzaW9uOiB0cnVlLCBhdXRvR2FpbkNvbnRyb2w6IHRydWUgfSwKICAgIHNjcmVlbnNoYXJlOiB7IHdpZHRoOiB7IG1heDogMTkyMCB9LCBoZWlnaHQ6IHsgbWF4OiAxMDgwIH0sIGZyYW1lUmF0ZTogeyBpZGVhbDogMTUgfSB9CiAgfQp9KTsKYXdhaXQgbWVldGluZy5qb2luKCk7CmBgYAoKIyMgQmFja2VuZCBTZXR1cAoKIyMjIENyZWF0ZSBBcHAgJiBDcmVkZW50aWFscwoKKipEYXNoYm9hcmQqKjogaHR0cHM6Ly9kYXNoLmNsb3VkZmxhcmUuY29tLz90bz0vOmFjY291bnQvcmVhbHRpbWUva2l0CgoqKkFQSSoqOgpgYGBiYXNoCmN1cmwgLVggUE9TVCAnaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzLzxhY2NvdW50X2lkPi9yZWFsdGltZS9raXQvYXBwcycgXAogIC1IICdDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24nIFwKICAtSCAnQXV0aG9yaXphdGlvbjogQmVhcmVyIDxhcGlfdG9rZW4+JyBcCiAgLWQgJ3sibmFtZSI6ICJNeSBSZWFsdGltZUtpdCBBcHAifScKYGBgCgoqKlJlcXVpcmVkIFBlcm1pc3Npb25zKio6IEFQSSB0b2tlbiB3aXRoICoqUmVhbHRpbWUgLyBSZWFsdGltZSBBZG1pbioqIHBlcm1pc3Npb25zCgojIyMgQ3JlYXRlIFByZXNldHMKCmBgYGJhc2gKY3VybCAtWCBQT1NUICdodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMvPGFjY291bnRfaWQ+L3JlYWx0aW1lL2tpdC88YXBwX2lkPi9wcmVzZXRzJyBcCiAgLUggJ0F1dGhvcml6YXRpb246IEJlYXJlciA8YXBpX3Rva2VuPicgXAogIC1kICd7CiAgICAibmFtZSI6ICJob3N0IiwKICAgICJwZXJtaXNzaW9ucyI6IHsKICAgICAgImNhblNoYXJlQXVkaW8iOiB0cnVlLAogICAgICAiY2FuU2hhcmVWaWRlbyI6IHRydWUsCiAgICAgICJjYW5SZWNvcmQiOiB0cnVlLAogICAgICAiY2FuTGl2ZXN0cmVhbSI6IHRydWUsCiAgICAgICJjYW5TdGFydFN0b3BSZWNvcmRpbmciOiB0cnVlCiAgICB9CiAgfScKYGBgCgojIyBXcmFuZ2xlciBDb25maWd1cmF0aW9uCgojIyMgQmFzaWMgQ29uZmlndXJhdGlvbgpgYGBqc29uYwovLyB3cmFuZ2xlci5qc29uYwp7CiAgIm5hbWUiOiAicmVhbHRpbWVraXQtYXBwIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wMS0wMSIsICAvLyBVc2UgY3VycmVudCBkYXRlCiAgInZhcnMiOiB7CiAgICAiQ0xPVURGTEFSRV9BQ0NPVU5UX0lEIjogImFiYzEyMyIsCiAgICAiUkVBTFRJTUVLSVRfQVBQX0lEIjogInh5ejc4OSIKICB9CiAgLy8gU2VjcmV0czogd3JhbmdsZXIgc2VjcmV0IHB1dCBDTE9VREZMQVJFX0FQSV9UT0tFTgp9CmBgYAoKIyMjIFdpdGggRGF0YWJhc2UgJiBTdG9yYWdlCmBgYGpzb25jCnsKICAiZDFfZGF0YWJhc2VzIjogW3sgImJpbmRpbmciOiAiREIiLCAiZGF0YWJhc2VfbmFtZSI6ICJtZWV0aW5ncyIsICJkYXRhYmFzZV9pZCI6ICJkMS1pZCIgfV0sCiAgInIyX2J1Y2tldHMiOiBbeyAiYmluZGluZyI6ICJSRUNPUkRJTkdTIiwgImJ1Y2tldF9uYW1lIjogInJlY29yZGluZ3MiIH1dLAogICJrdl9uYW1lc3BhY2VzIjogW3sgImJpbmRpbmciOiAiU0VTU0lPTlMiLCAiaWQiOiAia3YtaWQiIH1dCn0KYGBgCgojIyMgTXVsdGktRW52aXJvbm1lbnQKYGBgYmFzaAojIERlcGxveSB0byBlbnZpcm9ubWVudHMKd3JhbmdsZXIgZGVwbG95IC0tZW52IHN0YWdpbmcKd3JhbmdsZXIgZGVwbG95IC0tZW52IHByb2R1Y3Rpb24KYGBgCgojIyBUVVJOIFNlcnZpY2UgQ29uZmlndXJhdGlvbgoKUmVhbHRpbWVLaXQgY2FuIHVzZSBDbG91ZGZsYXJlJ3MgVFVSTiBzZXJ2aWNlIGZvciBjb25uZWN0aXZpdHkgdGhyb3VnaCByZXN0cmljdGl2ZSBuZXR3b3JrczoKCmBgYGpzb25jCi8vIHdyYW5nbGVyLmpzb25jCnsKICAidmFycyI6IHsKICAgICJUVVJOX1NFUlZJQ0VfSUQiOiAieW91cl90dXJuX3NlcnZpY2VfaWQiCiAgfQogIC8vIFNldCBzZWNyZXQ6IHdyYW5nbGVyIHNlY3JldCBwdXQgVFVSTl9TRVJWSUNFX1RPS0VOCn0KYGBgCgpUVVJOIGF1dG9tYXRpY2FsbHkgY29uZmlndXJlZCB3aGVuIGVuYWJsZWQgaW4gYWNjb3VudCAtIG5vIGNsaWVudC1zaWRlIGNoYW5nZXMgbmVlZGVkLgoKIyMgVGhlbWluZyAmIERlc2lnbiBUb2tlbnMKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHR5cGUgeyBVSUNvbmZpZyB9IGZyb20gJ0BjbG91ZGZsYXJlL3JlYWx0aW1la2l0JzsKCmNvbnN0IHVpQ29uZmlnOiBVSUNvbmZpZyA9IHsKICBkZXNpZ25Ub2tlbnM6IHsKICAgIGNvbG9yczogewogICAgICBicmFuZDogeyA1MDA6ICcjMDA2NmZmJywgNjAwOiAnIzAwNTJjYycgfSwKICAgICAgYmFja2dyb3VuZDogeyAxMDAwOiAnIzFBMUExQScsIDkwMDogJyMyRDJEMkQnIH0sCiAgICAgIHRleHQ6IHsgMTAwMDogJyNGRkZGRkYnLCA5MDA6ICcjRTBFMEUwJyB9CiAgICB9LAogICAgYm9yZGVyUmFkaXVzOiAnZXh0cmEtcm91bmRlZCcsICAvLyAncm91bmRlZCcgfCAnZXh0cmEtcm91bmRlZCcgfCAnc2hhcnAnCiAgICB0aGVtZTogJ2RhcmsnICAvLyAnbGlnaHQnIHwgJ2RhcmsnCiAgfSwKICBsb2dvOiB7IHVybDogJ2h0dHBzOi8vZXhhbXBsZS5jb20vbG9nby5wbmcnLCBhbHRUZXh0OiAnQ29tcGFueScgfQp9OwoKLy8gQXBwbHkgdG8gUmVhY3QKPFJ0a01lZXRpbmcgYXV0aFRva2VuPXt0b2tlbn0gY29uZmlnPXt1aUNvbmZpZ30gb25MZWF2ZT17KCkgPT4ge319IC8+CgovLyBPciB1c2UgQ1NTIHZhcmlhYmxlcwovLyA6cm9vdCB7IC0tcnRrLWNvbG9yLWJyYW5kLTUwMDogIzAwNjZmZjsgLS1ydGstYm9yZGVyLXJhZGl1czogMTJweDsgfQpgYGAKCiMjIEludGVybmF0aW9uYWxpemF0aW9uIChpMThuKQoKIyMjIEN1c3RvbSBMYW5ndWFnZSBTdHJpbmdzCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgdXNlTGFuZ3VhZ2UgfSBmcm9tICdAY2xvdWRmbGFyZS9yZWFsdGltZWtpdC11aSc7Cgpjb25zdCBjdXN0b21MYW5ndWFnZSA9IHsKICAnam9pbic6ICdFbnRyYXInLAogICdsZWF2ZSc6ICdTYWxpcicsCiAgJ211dGUnOiAnU2lsZW5jaWFyJywKICAndW5tdXRlJzogJ0FjdGl2YXIgYXVkaW8nLAogICd0dXJuX29uX2NhbWVyYSc6ICdFbmNlbmRlciBjw6FtYXJhJywKICAndHVybl9vZmZfY2FtZXJhJzogJ0FwYWdhciBjw6FtYXJhJywKICAnc2hhcmVfc2NyZWVuJzogJ0NvbXBhcnRpciBwYW50YWxsYScsCiAgJ3N0b3Bfc2hhcmluZyc6ICdEZWphciBkZSBjb21wYXJ0aXInCn07Cgpjb25zdCB0ID0gdXNlTGFuZ3VhZ2UoY3VzdG9tTGFuZ3VhZ2UpOwoKLy8gUmVhY3QgdXNhZ2UKPFJ0a01lZXRpbmcgYXV0aFRva2VuPXt0b2tlbn0gdD17dH0gb25MZWF2ZT17KCkgPT4ge319IC8+CmBgYAoKIyMjIFN1cHBvcnRlZCBMb2NhbGVzCkRlZmF1bHQgbG9jYWxlcyBhdmFpbGFibGU6IGBlbmAsIGBlc2AsIGBmcmAsIGBkZWAsIGBwdGAsIGBqYWAsIGB6aGAKCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgc2V0TG9jYWxlIH0gZnJvbSAnQGNsb3VkZmxhcmUvcmVhbHRpbWVraXQtdWknOwpzZXRMb2NhbGUoJ2VzJyk7ICAvLyBTd2l0Y2ggdG8gU3BhbmlzaApgYGAKCiMjIFNlZSBBbHNvCgotIFtBUEldKC4vYXBpLm1kKSAtIE1lZXRpbmcgQVBJcywgUkVTVCBlbmRwb2ludHMKLSBbUGF0dGVybnNdKC4vcGF0dGVybnMubWQpIC0gQmFja2VuZCBpbnRlZ3JhdGlvbiBleGFtcGxlcwotIFtSRUFETUVdKC4vUkVBRE1FLm1kKSAtIE92ZXJ2aWV3IGFuZCBxdWljayBzdGFydAo=
+# RealtimeKit Configuration
+
+Configuration guide for RealtimeKit setup, client SDKs, and wrangler integration.
+
+## Installation
+
+### React
+```bash
+npm install @cloudflare/realtimekit @cloudflare/realtimekit-react-ui
+```
+
+### Angular
+```bash
+npm install @cloudflare/realtimekit @cloudflare/realtimekit-angular-ui
+```
+
+### Web Components/HTML
+```bash
+npm install @cloudflare/realtimekit @cloudflare/realtimekit-ui
+```
+
+## Client SDK Configuration
+
+### React UI Kit
+```tsx
+import { RtkMeeting } from '@cloudflare/realtimekit-react-ui';
+<RtkMeeting authToken="<token>" onLeave={() => {}} />
+```
+
+### Angular UI Kit
+```typescript
+@Component({ template: `<rtk-meeting [authToken]="authToken" (rtkLeave)="onLeave($event)"></rtk-meeting>` })
+export class AppComponent { authToken = '<token>'; onLeave() {} }
+```
+
+### Web Components
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui/dist/realtimekit-ui/realtimekit-ui.esm.js"></script>
+<rtk-meeting id="meeting"></rtk-meeting>
+<script>
+  document.getElementById('meeting').authToken = '<token>';
+</script>
+```
+
+### Core SDK Configuration
+```typescript
+import RealtimeKitClient from '@cloudflare/realtimekit';
+
+const meeting = new RealtimeKitClient({
+  authToken: '<token>',
+  video: true, audio: true, autoSwitchAudioDevice: true,
+  mediaConfiguration: {
+    video: { width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30 } },
+    audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+    screenshare: { width: { max: 1920 }, height: { max: 1080 }, frameRate: { ideal: 15 } }
+  }
+});
+await meeting.join();
+```
+
+## Backend Setup
+
+### Create App & Credentials
+
+**Dashboard**: https://dash.cloudflare.com/?to=/:account/realtime/kit
+
+**API**:
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<account_id>/realtime/kit/apps' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <api_token>' \
+  -d '{"name": "My RealtimeKit App"}'
+```
+
+**Required Permissions**: API token with **Realtime / Realtime Admin** permissions
+
+### Create Presets
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<account_id>/realtime/kit/<app_id>/presets' \
+  -H 'Authorization: Bearer <api_token>' \
+  -d '{
+    "name": "host",
+    "permissions": {
+      "canShareAudio": true,
+      "canShareVideo": true,
+      "canRecord": true,
+      "canLivestream": true,
+      "canStartStopRecording": true
+    }
+  }'
+```
+
+## Wrangler Configuration
+
+### Basic Configuration
+```jsonc
+// wrangler.jsonc
+{
+  "name": "realtimekit-app",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",  // Use current date
+  "vars": {
+    "CLOUDFLARE_ACCOUNT_ID": "abc123",
+    "REALTIMEKIT_APP_ID": "xyz789"
+  }
+  // Secrets: wrangler secret put CLOUDFLARE_API_TOKEN
+}
+```
+
+### With Database & Storage
+```jsonc
+{
+  "d1_databases": [{ "binding": "DB", "database_name": "meetings", "database_id": "d1-id" }],
+  "r2_buckets": [{ "binding": "RECORDINGS", "bucket_name": "recordings" }],
+  "kv_namespaces": [{ "binding": "SESSIONS", "id": "kv-id" }]
+}
+```
+
+### Multi-Environment
+```bash
+# Deploy to environments
+wrangler deploy --env staging
+wrangler deploy --env production
+```
+
+## TURN Service Configuration
+
+RealtimeKit can use Cloudflare's TURN service for connectivity through restrictive networks:
+
+```jsonc
+// wrangler.jsonc
+{
+  "vars": {
+    "TURN_SERVICE_ID": "your_turn_service_id"
+  }
+  // Set secret: wrangler secret put TURN_SERVICE_TOKEN
+}
+```
+
+TURN automatically configured when enabled in account - no client-side changes needed.
+
+## Theming & Design Tokens
+
+```typescript
+import type { UIConfig } from '@cloudflare/realtimekit';
+
+const uiConfig: UIConfig = {
+  designTokens: {
+    colors: {
+      brand: { 500: '#0066ff', 600: '#0052cc' },
+      background: { 1000: '#1A1A1A', 900: '#2D2D2D' },
+      text: { 1000: '#FFFFFF', 900: '#E0E0E0' }
+    },
+    borderRadius: 'extra-rounded',  // 'rounded' | 'extra-rounded' | 'sharp'
+    theme: 'dark'  // 'light' | 'dark'
+  },
+  logo: { url: 'https://example.com/logo.png', altText: 'Company' }
+};
+
+// Apply to React
+<RtkMeeting authToken={token} config={uiConfig} onLeave={() => {}} />
+
+// Or use CSS variables
+// :root { --rtk-color-brand-500: #0066ff; --rtk-border-radius: 12px; }
+```
+
+## Internationalization (i18n)
+
+### Custom Language Strings
+```typescript
+import { useLanguage } from '@cloudflare/realtimekit-ui';
+
+const customLanguage = {
+  'join': 'Entrar',
+  'leave': 'Salir',
+  'mute': 'Silenciar',
+  'unmute': 'Activar audio',
+  'turn_on_camera': 'Encender cámara',
+  'turn_off_camera': 'Apagar cámara',
+  'share_screen': 'Compartir pantalla',
+  'stop_sharing': 'Dejar de compartir'
+};
+
+const t = useLanguage(customLanguage);
+
+// React usage
+<RtkMeeting authToken={token} t={t} onLeave={() => {}} />
+```
+
+### Supported Locales
+Default locales available: `en`, `es`, `fr`, `de`, `pt`, `ja`, `zh`
+
+```typescript
+import { setLocale } from '@cloudflare/realtimekit-ui';
+setLocale('es');  // Switch to Spanish
+```
+
+## See Also
+
+- [API](./api.md) - Meeting APIs, REST endpoints
+- [Patterns](./patterns.md) - Backend integration examples
+- [README](./README.md) - Overview and quick start

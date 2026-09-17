@@ -1,1 +1,102 @@
-IyBETyBTdG9yYWdlIEFQSSBSZWZlcmVuY2UKCiMjIFNRTCBBUEkKCmBgYHR5cGVzY3JpcHQKY29uc3QgY3Vyc29yID0gdGhpcy5zcWwuZXhlYygnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBlbWFpbCA9ID8nLCBlbWFpbCk7CmZvciAobGV0IHJvdyBvZiBjdXJzb3IpIHt9IC8vIE9iamVjdHM6IHsgaWQsIG5hbWUsIGVtYWlsIH0KY3Vyc29yLnRvQXJyYXkoKTsgY3Vyc29yLm9uZSgpOyAvLyBTaW5nbGUgcm93ICh0aHJvd3MgaWYgIT0gMSkKZm9yIChsZXQgcm93IG9mIGN1cnNvci5yYXcoKSkge30gLy8gQXJyYXlzOiBbMSwgIkFsaWNlIiwgIi4uLiJdCgovLyBNYW51YWwgaXRlcmF0aW9uCmNvbnN0IGl0ZXIgPSBjdXJzb3JbU3ltYm9sLml0ZXJhdG9yXSgpOwpjb25zdCBmaXJzdCA9IGl0ZXIubmV4dCgpOyAvLyB7IHZhbHVlOiB7Li4ufSwgZG9uZTogZmFsc2UgfQoKY3Vyc29yLmNvbHVtbk5hbWVzOyAvLyBbImlkIiwgIm5hbWUiLCAiZW1haWwiXQpjdXJzb3Iucm93c1JlYWQ7IGN1cnNvci5yb3dzV3JpdHRlbjsgLy8gQmlsbGluZwoKdHlwZSBVc2VyID0geyBpZDogbnVtYmVyOyBuYW1lOiBzdHJpbmc7IGVtYWlsOiBzdHJpbmcgfTsKY29uc3QgdXNlciA9IHRoaXMuc3FsLmV4ZWM8VXNlcj4oJy4uLicsIHVzZXJJZCkub25lKCk7CmBgYAoKIyMgU3luYyBLViBBUEkgKFNRTGl0ZSBvbmx5KQoKYGBgdHlwZXNjcmlwdAp0aGlzLmN0eC5zdG9yYWdlLmt2LmdldCgiY291bnRlciIpOyAvLyB1bmRlZmluZWQgaWYgbWlzc2luZwp0aGlzLmN0eC5zdG9yYWdlLmt2LnB1dCgiY291bnRlciIsIDQyKTsKdGhpcy5jdHguc3RvcmFnZS5rdi5wdXQoInVzZXIiLCB7IG5hbWU6ICJBbGljZSIsIGFnZTogMzAgfSk7CnRoaXMuY3R4LnN0b3JhZ2Uua3YuZGVsZXRlKCJjb3VudGVyIik7IC8vIHRydWUgaWYgZXhpc3RlZAoKZm9yIChsZXQgW2tleSwgdmFsdWVdIG9mIHRoaXMuY3R4LnN0b3JhZ2Uua3YubGlzdCgpKSB7fQoKLy8gTGlzdCBvcHRpb25zOiBzdGFydCwgcHJlZml4LCByZXZlcnNlLCBsaW1pdAp0aGlzLmN0eC5zdG9yYWdlLmt2Lmxpc3QoeyBzdGFydDogInVzZXI6IiwgcHJlZml4OiAidXNlcjoiLCByZXZlcnNlOiB0cnVlLCBsaW1pdDogMTAwIH0pOwpgYGAKCiMjIEFzeW5jIEtWIEFQSSAoQm90aCBiYWNrZW5kcykKCmBgYHR5cGVzY3JpcHQKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5nZXQoImtleSIpOyAvLyBTaW5nbGUKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5nZXQoWyJrZXkxIiwgImtleTIiXSk7IC8vIE11bHRpcGxlIChtYXggMTI4KQphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLnB1dCgia2V5IiwgdmFsdWUpOyAvLyBTaW5nbGUKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5wdXQoeyAia2V5MSI6ICJ2MSIsICJrZXkyIjogeyBuZXN0ZWQ6IHRydWUgfSB9KTsgLy8gTXVsdGlwbGUgKG1heCAxMjgpCmF3YWl0IHRoaXMuY3R4LnN0b3JhZ2UuZGVsZXRlKCJrZXkiKTsKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5kZWxldGUoWyJrZXkxIiwgImtleTIiXSk7CmF3YWl0IHRoaXMuY3R4LnN0b3JhZ2UubGlzdCh7IHByZWZpeDogInVzZXI6IiwgbGltaXQ6IDEwMCB9KTsKCi8vIE9wdGlvbnM6IGFsbG93Q29uY3VycmVuY3ksIG5vQ2FjaGUsIGFsbG93VW5jb25maXJtZWQKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5nZXQoImtleSIsIHsgYWxsb3dDb25jdXJyZW5jeTogdHJ1ZSwgbm9DYWNoZTogdHJ1ZSB9KTsKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5wdXQoImtleSIsIHZhbHVlLCB7IGFsbG93VW5jb25maXJtZWQ6IHRydWUsIG5vQ2FjaGU6IHRydWUgfSk7CmBgYAoKIyMjIFN0b3JhZ2UgT3B0aW9ucwoKfCBPcHRpb24gfCBNZXRob2RzIHwgRWZmZWN0IHwgVXNlIENhc2UgfAp8LS0tLS0tLS18LS0tLS0tLS0tfC0tLS0tLS0tfC0tLS0tLS0tLS18CnwgYGFsbG93Q29uY3VycmVuY3lgIHwgZ2V0LCBsaXN0IHwgU2tpcCBpbnB1dCBnYXRlOyBhbGxvdyBjb25jdXJyZW50IHJlcXVlc3RzIGR1cmluZyByZWFkIHwgUmVhZC1oZWF2eSBtZXRyaWNzIHRoYXQgZG9uJ3QgbmVlZCBzdHJpY3QgY29uc2lzdGVuY3kgfAp8IGBub0NhY2hlYCB8IGdldCwgcHV0LCBsaXN0IHwgU2tpcCBpbi1tZW1vcnkgY2FjaGU7IGFsd2F5cyByZWFkIGZyb20gZGlzayB8IFJhcmVseS1hY2Nlc3NlZCBkYXRhIG9yIHRlc3Rpbmcgc3RvcmFnZSBkaXJlY3RseSB8CnwgYGFsbG93VW5jb25maXJtZWRgIHwgcHV0LCBkZWxldGUgfCBSZXR1cm4gYmVmb3JlIHdyaXRlIGNvbmZpcm1zIChzdGlsbCBwcm90ZWN0ZWQgYnkgb3V0cHV0IGdhdGUpIHwgTm9uLWNyaXRpY2FsIHdyaXRlcyB3aGVyZSBsYXRlbmN5IG1hdHRlcnMgbW9yZSB0aGFuIGNvbmZpcm1hdGlvbiB8CgojIyBUcmFuc2FjdGlvbnMKCmBgYHR5cGVzY3JpcHQKLy8gU3luYyAoU1FML3N5bmMgS1Ygb25seSkKdGhpcy5jdHguc3RvcmFnZS50cmFuc2FjdGlvblN5bmMoKCkgPT4gewogIHRoaXMuc3FsLmV4ZWMoJ1VQREFURSBhY2NvdW50cyBTRVQgYmFsYW5jZSA9IGJhbGFuY2UgLSA/IFdIRVJFIGlkID0gPycsIDEwMCwgMSk7CiAgdGhpcy5zcWwuZXhlYygnVVBEQVRFIGFjY291bnRzIFNFVCBiYWxhbmNlID0gYmFsYW5jZSArID8gV0hFUkUgaWQgPSA/JywgMTAwLCAyKTsKICByZXR1cm4gInJlc3VsdCI7Cn0pOwoKLy8gQXN5bmMKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS50cmFuc2FjdGlvbihhc3luYyAoKSA9PiB7CiAgY29uc3QgdmFsdWUgPSBhd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmdldCgiY291bnRlciIpOwogIGF3YWl0IHRoaXMuY3R4LnN0b3JhZ2UucHV0KCJjb3VudGVyIiwgdmFsdWUgKyAxKTsKICBpZiAodmFsdWUgPiAxMDApIHRoaXMuY3R4LnN0b3JhZ2Uucm9sbGJhY2soKTsgLy8gRXhwbGljaXQgcm9sbGJhY2sKfSk7CmBgYAoKIyMgUG9pbnQtaW4tVGltZSBSZWNvdmVyeQoKYGBgdHlwZXNjcmlwdAphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmdldEN1cnJlbnRCb29rbWFyaygpOwphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmdldEJvb2ttYXJrRm9yVGltZShEYXRlLm5vdygpIC0gMiAqIDI0ICogNjAgKiA2MCAqIDEwMDApOwphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLm9uTmV4dFNlc3Npb25SZXN0b3JlQm9va21hcmsoYm9va21hcmspOwp0aGlzLmN0eC5hYm9ydCgpOyAvLyBSZXN0YXJ0IHRvIGFwcGx5OyBib29rbWFya3MgbGV4aWNhbGx5IGNvbXBhcmFibGUgKGVhcmxpZXIgPCBsYXRlcikKYGBgCgojIyBBbGFybXMKCmBgYHR5cGVzY3JpcHQKYXdhaXQgdGhpcy5jdHguc3RvcmFnZS5zZXRBbGFybShEYXRlLm5vdygpICsgNjAwMDApOyAvLyBUaW1lc3RhbXAgb3IgRGF0ZQphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmdldEFsYXJtKCk7CmF3YWl0IHRoaXMuY3R4LnN0b3JhZ2UuZGVsZXRlQWxhcm0oKTsKCmFzeW5jIGFsYXJtKCkgeyBhd2FpdCB0aGlzLmRvU2NoZWR1bGVkV29yaygpOyB9CmBgYAoKIyMgTWlzYwoKYGBgdHlwZXNjcmlwdAphd2FpdCB0aGlzLmN0eC5zdG9yYWdlLmRlbGV0ZUFsbCgpOyAvLyBBdG9taWMgZm9yIFNRTGl0ZTsgYWxhcm0gTk9UIGluY2x1ZGVkCnRoaXMuY3R4LnN0b3JhZ2Uuc3FsLmRhdGFiYXNlU2l6ZTsgLy8gQnl0ZXMKYGBgCg==
+# DO Storage API Reference
+
+## SQL API
+
+```typescript
+const cursor = this.sql.exec('SELECT * FROM users WHERE email = ?', email);
+for (let row of cursor) {} // Objects: { id, name, email }
+cursor.toArray(); cursor.one(); // Single row (throws if != 1)
+for (let row of cursor.raw()) {} // Arrays: [1, "Alice", "..."]
+
+// Manual iteration
+const iter = cursor[Symbol.iterator]();
+const first = iter.next(); // { value: {...}, done: false }
+
+cursor.columnNames; // ["id", "name", "email"]
+cursor.rowsRead; cursor.rowsWritten; // Billing
+
+type User = { id: number; name: string; email: string };
+const user = this.sql.exec<User>('...', userId).one();
+```
+
+## Sync KV API (SQLite only)
+
+```typescript
+this.ctx.storage.kv.get("counter"); // undefined if missing
+this.ctx.storage.kv.put("counter", 42);
+this.ctx.storage.kv.put("user", { name: "Alice", age: 30 });
+this.ctx.storage.kv.delete("counter"); // true if existed
+
+for (let [key, value] of this.ctx.storage.kv.list()) {}
+
+// List options: start, prefix, reverse, limit
+this.ctx.storage.kv.list({ start: "user:", prefix: "user:", reverse: true, limit: 100 });
+```
+
+## Async KV API (Both backends)
+
+```typescript
+await this.ctx.storage.get("key"); // Single
+await this.ctx.storage.get(["key1", "key2"]); // Multiple (max 128)
+await this.ctx.storage.put("key", value); // Single
+await this.ctx.storage.put({ "key1": "v1", "key2": { nested: true } }); // Multiple (max 128)
+await this.ctx.storage.delete("key");
+await this.ctx.storage.delete(["key1", "key2"]);
+await this.ctx.storage.list({ prefix: "user:", limit: 100 });
+
+// Options: allowConcurrency, noCache, allowUnconfirmed
+await this.ctx.storage.get("key", { allowConcurrency: true, noCache: true });
+await this.ctx.storage.put("key", value, { allowUnconfirmed: true, noCache: true });
+```
+
+### Storage Options
+
+| Option | Methods | Effect | Use Case |
+|--------|---------|--------|----------|
+| `allowConcurrency` | get, list | Skip input gate; allow concurrent requests during read | Read-heavy metrics that don't need strict consistency |
+| `noCache` | get, put, list | Skip in-memory cache; always read from disk | Rarely-accessed data or testing storage directly |
+| `allowUnconfirmed` | put, delete | Return before write confirms (still protected by output gate) | Non-critical writes where latency matters more than confirmation |
+
+## Transactions
+
+```typescript
+// Sync (SQL/sync KV only)
+this.ctx.storage.transactionSync(() => {
+  this.sql.exec('UPDATE accounts SET balance = balance - ? WHERE id = ?', 100, 1);
+  this.sql.exec('UPDATE accounts SET balance = balance + ? WHERE id = ?', 100, 2);
+  return "result";
+});
+
+// Async
+await this.ctx.storage.transaction(async () => {
+  const value = await this.ctx.storage.get("counter");
+  await this.ctx.storage.put("counter", value + 1);
+  if (value > 100) this.ctx.storage.rollback(); // Explicit rollback
+});
+```
+
+## Point-in-Time Recovery
+
+```typescript
+await this.ctx.storage.getCurrentBookmark();
+await this.ctx.storage.getBookmarkForTime(Date.now() - 2 * 24 * 60 * 60 * 1000);
+await this.ctx.storage.onNextSessionRestoreBookmark(bookmark);
+this.ctx.abort(); // Restart to apply; bookmarks lexically comparable (earlier < later)
+```
+
+## Alarms
+
+```typescript
+await this.ctx.storage.setAlarm(Date.now() + 60000); // Timestamp or Date
+await this.ctx.storage.getAlarm();
+await this.ctx.storage.deleteAlarm();
+
+async alarm() { await this.doScheduledWork(); }
+```
+
+## Misc
+
+```typescript
+await this.ctx.storage.deleteAll(); // Atomic for SQLite; alarm NOT included
+this.ctx.storage.sql.databaseSize; // Bytes
+```

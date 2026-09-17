@@ -1,1 +1,82 @@
-IyBOZXh0LmpzIChQYWdlcyBSb3V0ZXIpCgpGb3Igb2xkZXIgTmV4dC5qcyBwcm9qZWN0cyB1c2luZyBgcGFnZXMvYCByYXRoZXIgdGhhbiBgYXBwL2AuIFRoZSB3aWRnZXQgcmVuZGVycyBjbGllbnQtc2lkZTsgc2l0ZXZlcmlmeSBsaXZlcyBpbiB0aGUgQVBJIHJvdXRlLgoKYGBgdHN4IHRpdGxlPSJwYWdlcy9zaWdudXAudHN4IgppbXBvcnQgU2NyaXB0IGZyb20gIm5leHQvc2NyaXB0IjsKCmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFNpZ251cFBhZ2UoKSB7CglyZXR1cm4gKAoJCTw+CgkJCTxTY3JpcHQgc3JjPSJodHRwczovL2NoYWxsZW5nZXMuY2xvdWRmbGFyZS5jb20vdHVybnN0aWxlL3YwL2FwaS5qcyIgLz4KCQkJPGZvcm0gYWN0aW9uPSIvYXBpL3NpZ251cCIgbWV0aG9kPSJQT1NUIj4KCQkJCTxpbnB1dCBuYW1lPSJlbWFpbCIgdHlwZT0iZW1haWwiIHJlcXVpcmVkIC8+CgkJCQk8ZGl2CgkJCQkJY2xhc3NOYW1lPSJjZi10dXJuc3RpbGUiCgkJCQkJZGF0YS1zaXRla2V5PSJZT1VSX1NJVEVLRVkiCgkJCQkJZGF0YS1hY3Rpb249InNpZ251cCIKCQkJCS8+CgkJCQk8YnV0dG9uIHR5cGU9InN1Ym1pdCI+U2lnbiB1cDwvYnV0dG9uPgoJCQk8L2Zvcm0+CgkJPC8+CgkpOwp9CmBgYAoKVGhpcyBuYXRpdmUgZm9ybSBuYXZpZ2F0ZXMgdG8gdGhlIEFQSSByZXNwb25zZSwgc28gaXQgZG9lcyBub3QgbmVlZCBjbGllbnQtc2lkZSByZXNldCBjb2RlLgoKQVBJIHJvdXRlIChjYW5vbmljYWwgc2l0ZXZlcmlmeSk6CgpgYGB0cyB0aXRsZT0icGFnZXMvYXBpL3NpZ251cC50cyIKaW1wb3J0IHR5cGUgeyBOZXh0QXBpUmVxdWVzdCwgTmV4dEFwaVJlc3BvbnNlIH0gZnJvbSAibmV4dCI7Cgpjb25zdCBleHBlY3RlZEhvc3RuYW1lcyA9IG5ldyBTZXQoCgkocHJvY2Vzcy5lbnYuVFVSTlNUSUxFX0hPU1ROQU1FUyA/PyAiIikKCQkuc3BsaXQoIiwiKQoJCS5tYXAoKGgpID0+IGgudHJpbSgpKQoJCS5maWx0ZXIoQm9vbGVhbiksCik7CgpleHBvcnQgZGVmYXVsdCBhc3luYyBmdW5jdGlvbiBoYW5kbGVyKAoJcmVxOiBOZXh0QXBpUmVxdWVzdCwKCXJlczogTmV4dEFwaVJlc3BvbnNlLAopIHsKCWNvbnN0IHRva2VuID0gcmVxLmJvZHlbImNmLXR1cm5zdGlsZS1yZXNwb25zZSJdID8/IHJlcS5ib2R5LnRva2VuOwoJaWYgKGV4cGVjdGVkSG9zdG5hbWVzLnNpemUgPT09IDApIHsKCQlyZXR1cm4gcmVzLnN0YXR1cyg0MDMpLmpzb24oeyBlcnJvcjogIlZlcmlmaWNhdGlvbiBmYWlsZWQiIH0pOwoJfQoJY29uc3QgcmVtb3RlaXAgPQoJCShyZXEuaGVhZGVyc1sieC1mb3J3YXJkZWQtZm9yIl0gYXMgc3RyaW5nIHwgdW5kZWZpbmVkKT8uc3BsaXQoIiwiKVswXSA/PwoJCXJlcS5zb2NrZXQucmVtb3RlQWRkcmVzczsKCgljb25zdCB2ZXJpZnkgPSBhd2FpdCBmZXRjaCgiaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5IiwgewoJCW1ldGhvZDogIlBPU1QiLAoJCWhlYWRlcnM6IHsgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQiIH0sCgkJYm9keTogbmV3IFVSTFNlYXJjaFBhcmFtcyh7CgkJCXNlY3JldDogcHJvY2Vzcy5lbnYuVFVSTlNUSUxFX1NFQ1JFVCEsCgkJCXJlc3BvbnNlOiB0b2tlbiwKCQkJLi4uKHJlbW90ZWlwID8geyByZW1vdGVpcCB9IDoge30pLAoJCX0pLAoJfSk7Cgljb25zdCByZXN1bHQgPSBhd2FpdCB2ZXJpZnkuanNvbigpOwoJaWYgKAoJCXZlcmlmeS5vayAhPT0gdHJ1ZSB8fAoJCXJlc3VsdC5zdWNjZXNzICE9PSB0cnVlIHx8CgkJcmVzdWx0LmFjdGlvbiAhPT0gInNpZ251cCIgfHwKCQkhZXhwZWN0ZWRIb3N0bmFtZXMuaGFzKHJlc3VsdC5ob3N0bmFtZSkKCSkgewoJCXJldHVybiByZXMuc3RhdHVzKDQwMykuanNvbih7IGVycm9yOiAiVmVyaWZpY2F0aW9uIGZhaWxlZCIgfSk7Cgl9CgkvLyBwcm9jZXNzIHNpZ251cAoJcmV0dXJuIHJlcy5qc29uKHsgb2s6IHRydWUgfSk7Cn0KYGBgCgpgc2lnbnVwYCBpcyB0aGUgc3RhYmxlIGFjdGlvbiBmb3IgdGhpcyBzdXJmYWNlLiBQcmVzZXJ2ZSBhbiBleGlzdGluZyBjdXN0b20gbWlncmF0aW9uIGFjdGlvbiBhbmQgY29tcGFyZSB0aGUgcmV0dXJuZWQgYWN0aW9uIHRvIHRoZSBzYW1lIHZhbHVlLiBTaXRldmVyaWZ5IGlzIG1hbmRhdG9yeSBmb3IgZXZlcnkgd2lkZ2V0IG1vZGUsIGluY2x1ZGluZyBwcmUtY2xlYXJhbmNlLiBTZXQgYFRVUk5TVElMRV9IT1NUTkFNRVNgIHRvIHRoZSBkZXBsb3ltZW50LXNwZWNpZmljIGZyb250ZW5kIGhvc3RuYW1lczsgYSBwcm9kdWN0aW9uIHZhbHVlIG11c3Qgbm90IGluY2x1ZGUgYGxvY2FsaG9zdGAgb3IgYDEyNy4wLjAuMWAuCgojIyBTdWJzdGl0dXRpb25zCgp8IFBsYWNlaG9sZGVyICAgICAgICAgfCBSZXBsYWNlIHdpdGggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8CnwgLS0tLS0tLS0tLS0tLS0tLS0tLSB8IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHwKfCBgWU9VUl9TSVRFS0VZYCAgICAgIHwgVGhlIHdpZGdldCBzaXRlIGtleSBmcm9tIFN0ZXAgOCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfAp8IGBUVVJOU1RJTEVfU0VDUkVUYCAgfCBFbnYtdmFyIG5hbWUuIFZhbHVlIGlzIHRoZSBzZWNyZXQgY2FwdHVyZWQgaW4gU3RlcCA4LCBrZXB0IG9mZiBkaXNrLiB8Cg==
+# Next.js (Pages Router)
+
+For older Next.js projects using `pages/` rather than `app/`. The widget renders client-side; siteverify lives in the API route.
+
+```tsx title="pages/signup.tsx"
+import Script from "next/script";
+
+export default function SignupPage() {
+	return (
+		<>
+			<Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" />
+			<form action="/api/signup" method="POST">
+				<input name="email" type="email" required />
+				<div
+					className="cf-turnstile"
+					data-sitekey="YOUR_SITEKEY"
+					data-action="signup"
+				/>
+				<button type="submit">Sign up</button>
+			</form>
+		</>
+	);
+}
+```
+
+This native form navigates to the API response, so it does not need client-side reset code.
+
+API route (canonical siteverify):
+
+```ts title="pages/api/signup.ts"
+import type { NextApiRequest, NextApiResponse } from "next";
+
+const expectedHostnames = new Set(
+	(process.env.TURNSTILE_HOSTNAMES ?? "")
+		.split(",")
+		.map((h) => h.trim())
+		.filter(Boolean),
+);
+
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse,
+) {
+	const token = req.body["cf-turnstile-response"] ?? req.body.token;
+	if (expectedHostnames.size === 0) {
+		return res.status(403).json({ error: "Verification failed" });
+	}
+	const remoteip =
+		(req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0] ??
+		req.socket.remoteAddress;
+
+	const verify = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+		method: "POST",
+		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		body: new URLSearchParams({
+			secret: process.env.TURNSTILE_SECRET!,
+			response: token,
+			...(remoteip ? { remoteip } : {}),
+		}),
+	});
+	const result = await verify.json();
+	if (
+		verify.ok !== true ||
+		result.success !== true ||
+		result.action !== "signup" ||
+		!expectedHostnames.has(result.hostname)
+	) {
+		return res.status(403).json({ error: "Verification failed" });
+	}
+	// process signup
+	return res.json({ ok: true });
+}
+```
+
+`signup` is the stable action for this surface. Preserve an existing custom migration action and compare the returned action to the same value. Siteverify is mandatory for every widget mode, including pre-clearance. Set `TURNSTILE_HOSTNAMES` to the deployment-specific frontend hostnames; a production value must not include `localhost` or `127.0.0.1`.
+
+## Substitutions
+
+| Placeholder         | Replace with                                                         |
+| ------------------- | -------------------------------------------------------------------- |
+| `YOUR_SITEKEY`      | The widget site key from Step 8                                      |
+| `TURNSTILE_SECRET`  | Env-var name. Value is the secret captured in Step 8, kept off disk. |

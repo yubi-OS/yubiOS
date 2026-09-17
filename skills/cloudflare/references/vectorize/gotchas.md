@@ -1,1 +1,76 @@
-IyBWZWN0b3JpemUgR290Y2hhcwoKIyMgQ3JpdGljYWwgV2FybmluZ3MKCiMjIyBBc3luYyBNdXRhdGlvbnMKSW5zZXJ0L3Vwc2VydC9kZWxldGUgcmV0dXJuIGltbWVkaWF0ZWx5IGJ1dCB2ZWN0b3JzIGFyZW4ndCBxdWVyeWFibGUgZm9yIDUtMTAgc2Vjb25kcy4KCiMjIyBCYXRjaCBTaXplIExpbWl0CioqV29ya2VycyBBUEk6IDEsMDAwIHZlY3RvcnMgbWF4IHBlciBjYWxsIChIVFRQIEFQSTogNSwwMDApLioqIFNpbGVudGx5IHRydW5jYXRlcyBpZiBleGNlZWRlZC4KCmBgYHR5cGVzY3JpcHQKLy8g4pyFIENodW5rIGludG8gMTAwMCAoV29ya2VycyBBUEkgbGltaXQ7IEhUVFAgQVBJIGFsbG93cyA1MDAwKQpmb3IgKGxldCBpID0gMDsgaSA8IHZlY3RvcnMubGVuZ3RoOyBpICs9IDEwMDApIHsKICBhd2FpdCBlbnYuVkVDVE9SSVpFLnVwc2VydCh2ZWN0b3JzLnNsaWNlKGksIGkgKyAxMDAwKSk7Cn0KYGBgCgojIyMgTWV0YWRhdGEgVHJ1bmNhdGlvbgpgcmV0dXJuTWV0YWRhdGE6ICJpbmRleGVkImAgcmV0dXJucyBvbmx5IGZpcnN0IDY0IGJ5dGVzIG9mIHN0cmluZ3MuIFVzZSBgImFsbCJgIGZvciBjb21wbGV0ZSBtZXRhZGF0YSAoYnV0IG1heCB0b3BLIGRyb3BzIHRvIDIwKS4KCiMjIyB0b3BLIExpbWl0cwoKfCByZXR1cm5NZXRhZGF0YSB8IHJldHVyblZhbHVlcyB8IE1heCB0b3BLIHwKfC0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLXwKfCBgIm5vbmUiYCAvIGAiaW5kZXhlZCJgIHwgYGZhbHNlYCB8IDEwMCB8CnwgYCJhbGwiYCB8IGFueSB8ICoqMjAqKiB8CnwgYW55IHwgYHRydWVgIHwgKioyMCoqIHwKCiMjIyBNZXRhZGF0YSBJbmRleGVzIEZpcnN0CkNyZWF0ZSBCRUZPUkUgaW5zZXJ0aW5nIC0gZXhpc3RpbmcgdmVjdG9ycyBub3QgcmV0cm9hY3RpdmVseSBpbmRleGVkLgoKYGBgYmFzaAojIOKchSBDcmVhdGUgaW5kZXggRklSU1QKd3JhbmdsZXIgdmVjdG9yaXplIGNyZWF0ZS1tZXRhZGF0YS1pbmRleCBteS1pbmRleCAtLXByb3BlcnR5LW5hbWU9Y2F0ZWdvcnkgLS10eXBlPXN0cmluZwp3cmFuZ2xlciB2ZWN0b3JpemUgaW5zZXJ0IG15LWluZGV4IC0tZmlsZT1kYXRhLm5kanNvbgpgYGAKCiMjIyBJbmRleCBDb25maWcgSW1tdXRhYmxlCkNhbm5vdCBjaGFuZ2UgZGltZW5zaW9ucy9tZXRyaWMgYWZ0ZXIgY3JlYXRpb24uIE11c3QgY3JlYXRlIG5ldyBpbmRleCBhbmQgbWlncmF0ZS4KCiMjIExpbWl0cyAoVjIpCgp8IFJlc291cmNlIHwgTGltaXQgfAp8LS0tLS0tLS0tLXwtLS0tLS0tfAp8IFZlY3RvcnMgcGVyIGluZGV4IHwgMTAsMDAwLDAwMCB8CnwgTWF4IGRpbWVuc2lvbnMgfCAxNTM2IHwKfCBCYXRjaCB1cHNlcnQgKFdvcmtlcnMgLyBIVFRQIEFQSSkgfCAqKjEsMDAwIC8gNSwwMDAqKiB8CnwgSW5kZXhlZCBzdHJpbmcgbWV0YWRhdGEgfCAqKjY0IGJ5dGVzKiogfAp8IE1ldGFkYXRhIGluZGV4ZXMgfCAxMCB8CnwgTmFtZXNwYWNlcyB8IDUwLDAwMCAocGFpZCkgLyAxLDAwMCAoZnJlZSkgfAoKIyMgQ29tbW9uIE1pc3Rha2VzCgoxLiAqKldyb25nIGVtYmVkZGluZyBzaGFwZToqKiBFeHRyYWN0IGByZXN1bHQuZGF0YVswXWAgZnJvbSBXb3JrZXJzIEFJCjIuICoqTWV0YWRhdGEgaW5kZXggYWZ0ZXIgZGF0YToqKiBSZS11cHNlcnQgYWxsIHZlY3RvcnMKMy4gKipJbnNlcnQgdnMgdXBzZXJ0OioqIGBpbnNlcnRgIGlnbm9yZXMgZHVwbGljYXRlcywgYHVwc2VydGAgb3ZlcndyaXRlcwo0LiAqKk5vdCBiYXRjaGluZzoqKiBJbmRpdmlkdWFsIGluc2VydHMgfjFLL21pbiwgYmF0Y2hlZCB+MjAwSysvbWluCgojIyBUcm91Ymxlc2hvb3RpbmcKCioqTm8gcmVzdWx0cz8qKgotIFdhaXQgNS0xMHMgYWZ0ZXIgaW5zZXJ0Ci0gQ2hlY2sgbmFtZXNwYWNlIHNwZWxsaW5nIChjYXNlLXNlbnNpdGl2ZSkKLSBWZXJpZnkgbWV0YWRhdGEgaW5kZXggZXhpc3RzCi0gQ2hlY2sgZGltZW5zaW9uIG1pc21hdGNoCgoqKk1ldGFkYXRhIGZpbHRlciBub3Qgd29ya2luZz8qKgotIEluZGV4IG11c3QgZXhpc3QgYmVmb3JlIGRhdGEgaW5zZXJ0Ci0gU3RyaW5ncyA+NjQgYnl0ZXMgdHJ1bmNhdGVkCi0gVXNlIGRvdCBub3RhdGlvbiBmb3IgbmVzdGVkOiBgInByb2R1Y3QuY2F0ZWdvcnkiYAoKIyMgTW9kZWwgRGltZW5zaW9ucwoKLSBgQGNmL2JhYWkvYmdlLXNtYWxsLWVuLXYxLjVgOiAzODQKLSBgQGNmL2JhYWkvYmdlLWJhc2UtZW4tdjEuNWA6IDc2OAotIGBAY2YvYmFhaS9iZ2UtbGFyZ2UtZW4tdjEuNWA6IDEwMjQK
+# Vectorize Gotchas
+
+## Critical Warnings
+
+### Async Mutations
+Insert/upsert/delete return immediately but vectors aren't queryable for 5-10 seconds.
+
+### Batch Size Limit
+**Workers API: 1,000 vectors max per call (HTTP API: 5,000).** Silently truncates if exceeded.
+
+```typescript
+// ✅ Chunk into 1000 (Workers API limit; HTTP API allows 5000)
+for (let i = 0; i < vectors.length; i += 1000) {
+  await env.VECTORIZE.upsert(vectors.slice(i, i + 1000));
+}
+```
+
+### Metadata Truncation
+`returnMetadata: "indexed"` returns only first 64 bytes of strings. Use `"all"` for complete metadata (but max topK drops to 20).
+
+### topK Limits
+
+| returnMetadata | returnValues | Max topK |
+|----------------|--------------|----------|
+| `"none"` / `"indexed"` | `false` | 100 |
+| `"all"` | any | **20** |
+| any | `true` | **20** |
+
+### Metadata Indexes First
+Create BEFORE inserting - existing vectors not retroactively indexed.
+
+```bash
+# ✅ Create index FIRST
+wrangler vectorize create-metadata-index my-index --property-name=category --type=string
+wrangler vectorize insert my-index --file=data.ndjson
+```
+
+### Index Config Immutable
+Cannot change dimensions/metric after creation. Must create new index and migrate.
+
+## Limits (V2)
+
+| Resource | Limit |
+|----------|-------|
+| Vectors per index | 10,000,000 |
+| Max dimensions | 1536 |
+| Batch upsert (Workers / HTTP API) | **1,000 / 5,000** |
+| Indexed string metadata | **64 bytes** |
+| Metadata indexes | 10 |
+| Namespaces | 50,000 (paid) / 1,000 (free) |
+
+## Common Mistakes
+
+1. **Wrong embedding shape:** Extract `result.data[0]` from Workers AI
+2. **Metadata index after data:** Re-upsert all vectors
+3. **Insert vs upsert:** `insert` ignores duplicates, `upsert` overwrites
+4. **Not batching:** Individual inserts ~1K/min, batched ~200K+/min
+
+## Troubleshooting
+
+**No results?**
+- Wait 5-10s after insert
+- Check namespace spelling (case-sensitive)
+- Verify metadata index exists
+- Check dimension mismatch
+
+**Metadata filter not working?**
+- Index must exist before data insert
+- Strings >64 bytes truncated
+- Use dot notation for nested: `"product.category"`
+
+## Model Dimensions
+
+- `@cf/baai/bge-small-en-v1.5`: 384
+- `@cf/baai/bge-base-en-v1.5`: 768
+- `@cf/baai/bge-large-en-v1.5`: 1024

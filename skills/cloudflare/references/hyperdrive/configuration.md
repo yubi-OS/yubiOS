@@ -1,1 +1,159 @@
-IyBDb25maWd1cmF0aW9uCgpTZWUgW1JFQURNRS5tZF0oLi9SRUFETUUubWQpIGZvciBvdmVydmlldy4KCiMjIENyZWF0ZSBDb25maWcKCioqUG9zdGdyZVNRTDoqKgpgYGBiYXNoCiMgQmFzaWMKbnB4IHdyYW5nbGVyIGh5cGVyZHJpdmUgY3JlYXRlIG15LWRiIFwKICAtLWNvbm5lY3Rpb24tc3RyaW5nPSJwb3N0Z3JlczovL3VzZXI6cGFzc0Bob3N0OjU0MzIvZGIiCgojIEN1c3RvbSBjYWNoZQpucHggd3JhbmdsZXIgaHlwZXJkcml2ZSBjcmVhdGUgbXktZGIgXAogIC0tY29ubmVjdGlvbi1zdHJpbmc9InBvc3RncmVzOi8vLi4uIiBcCiAgLS1tYXgtYWdlPTEyMCAtLXN3cj0zMAoKIyBObyBjYWNoZQpucHggd3JhbmdsZXIgaHlwZXJkcml2ZSBjcmVhdGUgbXktZGIgXAogIC0tY29ubmVjdGlvbi1zdHJpbmc9InBvc3RncmVzOi8vLi4uIiBcCiAgLS1jYWNoaW5nLWRpc2FibGVkPXRydWUKYGBgCgoqKk15U1FMOioqCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGh5cGVyZHJpdmUgY3JlYXRlIG15LWRiIFwKICAtLWNvbm5lY3Rpb24tc3RyaW5nPSJteXNxbDovL3VzZXI6cGFzc0Bob3N0OjMzMDYvZGIiCmBgYAoKIyMgd3JhbmdsZXIuanNvbmMKCmBgYGpzb25jCnsKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLCAvLyBVc2UgbGF0ZXN0IGZvciBuZXcgcHJvamVjdHMKICAiY29tcGF0aWJpbGl0eV9mbGFncyI6IFsibm9kZWpzX2NvbXBhdCJdLAogICJoeXBlcmRyaXZlIjogWwogICAgewogICAgICAiYmluZGluZyI6ICJIWVBFUkRSSVZFIiwKICAgICAgImlkIjogIjxIWVBFUkRSSVZFX0lEPiIsCiAgICAgICJsb2NhbENvbm5lY3Rpb25TdHJpbmciOiAicG9zdGdyZXM6Ly91c2VyOnBhc3NAbG9jYWxob3N0OjU0MzIvZGV2IgogICAgfQogIF0KfQpgYGAKCioqR2VuZXJhdGUgVHlwZVNjcmlwdCB0eXBlczoqKiBSdW4gYG5weCB3cmFuZ2xlciB0eXBlc2AgdG8gYXV0by1nZW5lcmF0ZSBgd29ya2VyLWNvbmZpZ3VyYXRpb24uZC50c2AgZnJvbSB5b3VyIHdyYW5nbGVyLmpzb25jLgoKKipNdWx0aXBsZSBjb25maWdzOioqCmBgYGpzb25jCnsKICAiaHlwZXJkcml2ZSI6IFsKICAgIHsiYmluZGluZyI6ICJIWVBFUkRSSVZFX0NBQ0hFRCIsICJpZCI6ICI8SUQxPiJ9LAogICAgeyJiaW5kaW5nIjogIkhZUEVSRFJJVkVfTk9fQ0FDSEUiLCAiaWQiOiAiPElEMj4ifQogIF0KfQpgYGAKCiMjIE1hbmFnZW1lbnQKCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGh5cGVyZHJpdmUgbGlzdApucHggd3JhbmdsZXIgaHlwZXJkcml2ZSBnZXQgPElEPgpucHggd3JhbmdsZXIgaHlwZXJkcml2ZSB1cGRhdGUgPElEPiAtLW1heC1hZ2U9MTgwCm5weCB3cmFuZ2xlciBoeXBlcmRyaXZlIGRlbGV0ZSA8SUQ+CmBgYAoKIyMgQ29uZmlnIE9wdGlvbnMKCkh5cGVyZHJpdmUgY3JlYXRlL3VwZGF0ZSBDTEkgZmxhZ3M6Cgp8IE9wdGlvbiB8IERlZmF1bHQgfCBOb3RlcyB8CnwtLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLXwKfCBgLS1jYWNoaW5nLWRpc2FibGVkYCB8IGBmYWxzZWAgfCBEaXNhYmxlIGNhY2hpbmcgfAp8IGAtLW1heC1hZ2VgIHwgYDYwYCB8IENhY2hlIFRUTCAobWF4IDM2MDBzKSB8CnwgYC0tc3dyYCB8IGAxNWAgfCBTdGFsZS13aGlsZS1yZXZhbGlkYXRlIHwKfCBgLS1vcmlnaW4tY29ubmVjdGlvbi1saW1pdGAgfCAyMC8xMDAgfCBGcmVlL3BhaWQgfAp8IGAtLWFjY2Vzcy1jbGllbnQtaWRgIHwgLSB8IFR1bm5lbCBhdXRoIHwKfCBgLS1hY2Nlc3MtY2xpZW50LXNlY3JldGAgfCAtIHwgVHVubmVsIGF1dGggfAp8IGAtLXNzbG1vZGVgIHwgYHJlcXVpcmVgIHwgUG9zdGdyZVNRTCBvbmx5IHwKCiMjIFNtYXJ0IFBsYWNlbWVudCBJbnRlZ3JhdGlvbgoKRm9yIFdvcmtlcnMgbWFraW5nICoqbXVsdGlwbGUgcXVlcmllcyoqIHBlciByZXF1ZXN0LCBlbmFibGUgU21hcnQgUGxhY2VtZW50IHRvIGV4ZWN1dGUgbmVhciB5b3VyIGRhdGFiYXNlOgoKYGBganNvbmMKewogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wMS0wMSIsCiAgImNvbXBhdGliaWxpdHlfZmxhZ3MiOiBbIm5vZGVqc19jb21wYXQiXSwKICAicGxhY2VtZW50IjogewogICAgIm1vZGUiOiAic21hcnQiCiAgfSwKICAiaHlwZXJkcml2ZSI6IFsKICAgIHsKICAgICAgImJpbmRpbmciOiAiSFlQRVJEUklWRSIsCiAgICAgICJpZCI6ICI8SFlQRVJEUklWRV9JRD4iCiAgICB9CiAgXQp9CmBgYAoKKipCZW5lZml0czoqKiBNdWx0aS1xdWVyeSBXb3JrZXJzIHJ1biBjbG9zZXIgdG8gREIsIHJlZHVjaW5nIHJvdW5kLXRyaXAgbGF0ZW5jeS4gU2VlIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgZm9yIGV4YW1wbGVzLgoKIyMgUHJpdmF0ZSBEQiB2aWEgVHVubmVsCgpgYGAKV29ya2VyIOKGkiBIeXBlcmRyaXZlIOKGkiBBY2Nlc3Mg4oaSIFR1bm5lbCDihpIgUHJpdmF0ZSBOZXR3b3JrIOKGkiBEQgpgYGAKCioqU2V0dXA6KioKYGBgYmFzaAojIDEuIENyZWF0ZSB0dW5uZWwKY2xvdWRmbGFyZWQgdHVubmVsIGNyZWF0ZSBteS1kYi10dW5uZWwKCiMgMi4gQ29uZmlndXJlIGhvc3RuYW1lIGluIFplcm8gVHJ1c3QgZGFzaGJvYXJkCiMgICAgRG9tYWluOiBkYi10dW5uZWwuZXhhbXBsZS5jb20KIyAgICBTZXJ2aWNlOiBUQ1AgLT4gbG9jYWxob3N0OjU0MzIKCiMgMy4gQ3JlYXRlIHNlcnZpY2UgdG9rZW4gKFplcm8gVHJ1c3QgPiBTZXJ2aWNlIEF1dGgpCiMgICAgU2F2ZSBDbGllbnQgSUQvU2VjcmV0CgojIDQuIENyZWF0ZSBBY2Nlc3MgYXBwIChkYi10dW5uZWwuZXhhbXBsZS5jb20pCiMgICAgUG9saWN5OiBTZXJ2aWNlIEF1dGggdG9rZW4gZnJvbSBzdGVwIDMKCiMgNS4gQ3JlYXRlIEh5cGVyZHJpdmUKbnB4IHdyYW5nbGVyIGh5cGVyZHJpdmUgY3JlYXRlIG15LXByaXZhdGUtZGIgXAogIC0taG9zdD1kYi10dW5uZWwuZXhhbXBsZS5jb20gXAogIC0tdXNlcj1kYnVzZXIgLS1wYXNzd29yZD1kYnBhc3MgLS1kYXRhYmFzZT1wcm9kIFwKICAtLWFjY2Vzcy1jbGllbnQtaWQ9PElEPiAtLWFjY2Vzcy1jbGllbnQtc2VjcmV0PTxTRUNSRVQ+CmBgYAoKKirimqDvuI8gRG9uJ3Qgc3BlY2lmeSBgLS1wb3J0YCB3aXRoIFR1bm5lbCoqIC0gcG9ydCBjb25maWd1cmVkIGluIHR1bm5lbCBzZXJ2aWNlIHNldHRpbmdzLgoKIyMgTG9jYWwgRGV2CgoqKk9wdGlvbiAxOiBMb2NhbCAoUkVDT01NRU5ERUQpOioqCmBgYGJhc2gKIyBFbnYgdmFyICh0YWtlcyBwcmVjZWRlbmNlKQpleHBvcnQgQ0xPVURGTEFSRV9IWVBFUkRSSVZFX0xPQ0FMX0NPTk5FQ1RJT05fU1RSSU5HX0hZUEVSRFJJVkU9InBvc3RncmVzOi8vdXNlcjpwYXNzQGxvY2FsaG9zdDo1NDMyL2RldiIKbnB4IHdyYW5nbGVyIGRldgoKIyB3cmFuZ2xlci5qc29uYwp7Imh5cGVyZHJpdmUiOiBbeyJiaW5kaW5nIjogIkhZUEVSRFJJVkUiLCAibG9jYWxDb25uZWN0aW9uU3RyaW5nIjogInBvc3RncmVzOi8vLi4uIn1dfQpgYGAKCioqUmVtb3RlIERCIGxvY2FsbHk6KioKYGBgYmFzaAojIFBvc3RncmVTUUwKZXhwb3J0IENMT1VERkxBUkVfSFlQRVJEUklWRV9MT0NBTF9DT05ORUNUSU9OX1NUUklOR19IWVBFUkRSSVZFPSJwb3N0Z3JlczovL3VzZXI6cGFzc0ByZW1vdGU6NTQzMi9kYj9zc2xtb2RlPXJlcXVpcmUiCgojIE15U1FMCmV4cG9ydCBDTE9VREZMQVJFX0hZUEVSRFJJVkVfTE9DQUxfQ09OTkVDVElPTl9TVFJJTkdfSFlQRVJEUklWRT0ibXlzcWw6Ly91c2VyOnBhc3NAcmVtb3RlOjMzMDYvZGI/c3NsTW9kZT1SRVFVSVJFRCIKYGBgCgoqKk9wdGlvbiAyOiBSZW1vdGUgZXhlY3V0aW9uOioqCmBgYGJhc2gKbnB4IHdyYW5nbGVyIGRldiAtLXJlbW90ZSAgIyBVc2VzIGRlcGxveWVkIGNvbmZpZywgYWZmZWN0cyBwcm9kdWN0aW9uCmBgYAoKU2VlIFthcGkubWRdKC4vYXBpLm1kKSwgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSwgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkuCg==
+# Configuration
+
+See [README.md](./README.md) for overview.
+
+## Create Config
+
+**PostgreSQL:**
+```bash
+# Basic
+npx wrangler hyperdrive create my-db \
+  --connection-string="postgres://user:pass@host:5432/db"
+
+# Custom cache
+npx wrangler hyperdrive create my-db \
+  --connection-string="postgres://..." \
+  --max-age=120 --swr=30
+
+# No cache
+npx wrangler hyperdrive create my-db \
+  --connection-string="postgres://..." \
+  --caching-disabled=true
+```
+
+**MySQL:**
+```bash
+npx wrangler hyperdrive create my-db \
+  --connection-string="mysql://user:pass@host:3306/db"
+```
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "compatibility_date": "2025-01-01", // Use latest for new projects
+  "compatibility_flags": ["nodejs_compat"],
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "<HYPERDRIVE_ID>",
+      "localConnectionString": "postgres://user:pass@localhost:5432/dev"
+    }
+  ]
+}
+```
+
+**Generate TypeScript types:** Run `npx wrangler types` to auto-generate `worker-configuration.d.ts` from your wrangler.jsonc.
+
+**Multiple configs:**
+```jsonc
+{
+  "hyperdrive": [
+    {"binding": "HYPERDRIVE_CACHED", "id": "<ID1>"},
+    {"binding": "HYPERDRIVE_NO_CACHE", "id": "<ID2>"}
+  ]
+}
+```
+
+## Management
+
+```bash
+npx wrangler hyperdrive list
+npx wrangler hyperdrive get <ID>
+npx wrangler hyperdrive update <ID> --max-age=180
+npx wrangler hyperdrive delete <ID>
+```
+
+## Config Options
+
+Hyperdrive create/update CLI flags:
+
+| Option | Default | Notes |
+|--------|---------|-------|
+| `--caching-disabled` | `false` | Disable caching |
+| `--max-age` | `60` | Cache TTL (max 3600s) |
+| `--swr` | `15` | Stale-while-revalidate |
+| `--origin-connection-limit` | 20/100 | Free/paid |
+| `--access-client-id` | - | Tunnel auth |
+| `--access-client-secret` | - | Tunnel auth |
+| `--sslmode` | `require` | PostgreSQL only |
+
+## Smart Placement Integration
+
+For Workers making **multiple queries** per request, enable Smart Placement to execute near your database:
+
+```jsonc
+{
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "placement": {
+    "mode": "smart"
+  },
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "<HYPERDRIVE_ID>"
+    }
+  ]
+}
+```
+
+**Benefits:** Multi-query Workers run closer to DB, reducing round-trip latency. See [patterns.md](./patterns.md) for examples.
+
+## Private DB via Tunnel
+
+```
+Worker → Hyperdrive → Access → Tunnel → Private Network → DB
+```
+
+**Setup:**
+```bash
+# 1. Create tunnel
+cloudflared tunnel create my-db-tunnel
+
+# 2. Configure hostname in Zero Trust dashboard
+#    Domain: db-tunnel.example.com
+#    Service: TCP -> localhost:5432
+
+# 3. Create service token (Zero Trust > Service Auth)
+#    Save Client ID/Secret
+
+# 4. Create Access app (db-tunnel.example.com)
+#    Policy: Service Auth token from step 3
+
+# 5. Create Hyperdrive
+npx wrangler hyperdrive create my-private-db \
+  --host=db-tunnel.example.com \
+  --user=dbuser --password=dbpass --database=prod \
+  --access-client-id=<ID> --access-client-secret=<SECRET>
+```
+
+**⚠️ Don't specify `--port` with Tunnel** - port configured in tunnel service settings.
+
+## Local Dev
+
+**Option 1: Local (RECOMMENDED):**
+```bash
+# Env var (takes precedence)
+export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE="postgres://user:pass@localhost:5432/dev"
+npx wrangler dev
+
+# wrangler.jsonc
+{"hyperdrive": [{"binding": "HYPERDRIVE", "localConnectionString": "postgres://..."}]}
+```
+
+**Remote DB locally:**
+```bash
+# PostgreSQL
+export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE="postgres://user:pass@remote:5432/db?sslmode=require"
+
+# MySQL
+export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE="mysql://user:pass@remote:3306/db?sslMode=REQUIRED"
+```
+
+**Option 2: Remote execution:**
+```bash
+npx wrangler dev --remote  # Uses deployed config, affects production
+```
+
+See [api.md](./api.md), [patterns.md](./patterns.md), [gotchas.md](./gotchas.md).

@@ -1,1 +1,114 @@
-IyBDTkkgQ29uZmlndXJhdGlvbgoKU2VlIFtSRUFETUUubWRdKFJFQURNRS5tZCkgZm9yIG92ZXJ2aWV3LgoKIyMgV29ya2Zsb3cgKDItNCB3ZWVrcykKCjEuICoqU3VibWl0IHJlcXVlc3QqKiAoV2VlayAxKTogQ29udGFjdCBhY2NvdW50IHRlYW0sIHByb3ZpZGUgdHlwZS9sb2NhdGlvbi91c2UgY2FzZQoyLiAqKlJldmlldyBjb25maWcqKiAoV2VlayAxLTIsIHYxIG9ubHkpOiBBcHByb3ZlIElQL1ZMQU4vc3BlYyBkb2MKMy4gKipPcmRlciBjb25uZWN0aW9uKiogKFdlZWsgMi0zKToKICAgLSAqKkRpcmVjdCoqOiBHZXQgTE9BLCBvcmRlciBjcm9zcy1jb25uZWN0IGZyb20gZmFjaWxpdHkKICAgLSAqKlBhcnRuZXIqKjogT3JkZXIgdmlydHVhbCBjaXJjdWl0IGluIHBhcnRuZXIgcG9ydGFsCiAgIC0gKipDbG91ZCoqOiBPcmRlciBEaXJlY3QgQ29ubmVjdC9DbG91ZCBJbnRlcmNvbm5lY3QsIHNlbmQgTE9BK1ZMQU4gdG8gQ0YKNC4gKipDb25maWd1cmUqKiAoV2VlayAzKTogQm90aCBzaWRlcyBjb25maWd1cmUgcGVyIGRvYwo1LiAqKlRlc3QqKiAoV2VlayAzLTQpOiBQaW5nLCB2ZXJpZnkgQkdQLCBjaGVjayByb3V0ZXMKNi4gKipIZWFsdGggY2hlY2tzKiogKFdlZWsgNCk6IENvbmZpZ3VyZSBbTWFnaWMgVHJhbnNpdF0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL21hZ2ljLXRyYW5zaXQvaG93LXRvL2NvbmZpZ3VyZS10dW5uZWwtZW5kcG9pbnRzLyNhZGQtdHVubmVscykgb3IgW01hZ2ljIFdBTl0oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL21hZ2ljLXdhbi9jb25maWd1cmF0aW9uL21hbnVhbGx5L2hvdy10by9jb25maWd1cmUtdHVubmVsLWVuZHBvaW50cy8jYWRkLXR1bm5lbHMpIGhlYWx0aCBjaGVja3MKNy4gKipBY3RpdmF0ZSoqIChXZWVrIDQpOiBSb3V0ZSB0cmFmZmljLCB2ZXJpZnkgZmxvdwo4LiAqKk1vbml0b3IqKjogRW5hYmxlIFttYWludGVuYW5jZSBub3RpZmljYXRpb25zXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vbmV0d29yay1pbnRlcmNvbm5lY3QvbW9uaXRvcmluZy1hbmQtYWxlcnRzLyNlbmFibGUtY2xvdWRmbGFyZS1zdGF0dXMtbWFpbnRlbmFuY2Utbm90aWZpY2F0aW9uKQoKIyMgQkdQIENvbmZpZ3VyYXRpb24KCioqdjEgUmVxdWlyZW1lbnRzOioqCi0gQkdQIEFTTiAocHJvdmlkZSBkdXJpbmcgc2V0dXApCi0gLzMxIHN1Ym5ldCBmb3IgcGVlcmluZwotIE9wdGlvbmFsOiBCR1AgcGFzc3dvcmQKCioqdjI6KiogU2ltcGxpZmllZCwgbGVzcyBCR1AgY29uZmlnIG5lZWRlZC4KCioqQkdQIG92ZXIgQ05JIChEZWMgMjAyNCk6KiogTWFnaWMgV0FOL1RyYW5zaXQgY2FuIG5vdyBwZWVyIEJHUCBkaXJlY3RseSBvdmVyIENOSSB2MiAobm8gR1JFIHR1bm5lbCByZXF1aXJlZCkuCgoqKkV4YW1wbGUgdjEgQkdQOioqCmBgYApSb3V0ZXIgSUQ6IDE5Mi4wLjIuMQpQZWVyIElQOiAxOTIuMC4yLjAKUmVtb3RlIEFTTjogMTMzMzUKTG9jYWwgQVNOOiA2NTAwMApQYXNzd29yZDogW29wdGlvbmFsXQpWTEFOOiAxMDAKYGBgCgojIyBDbG91ZCBJbnRlcmNvbm5lY3QgU2V0dXAKCiMjIyBBV1MgRGlyZWN0IENvbm5lY3QgKEJldGEpCgoqKlJlcXVpcmVtZW50czoqKiBNYWdpYyBXQU4sIEFXUyBEZWRpY2F0ZWQgRGlyZWN0IENvbm5lY3QgMS8xMCBHYnBzLgoKKipQcm9jZXNzOioqCjEuIENvbnRhY3QgQ0YgYWNjb3VudCB0ZWFtCjIuIENob29zZSBsb2NhdGlvbgozLiBPcmRlciBpbiBBV1MgcG9ydGFsCjQuIEFXUyBwcm92aWRlcyBMT0EgKyBWTEFOIElECjUuIFNlbmQgdG8gQ0YgYWNjb3VudCB0ZWFtCjYuIFdhaXQgfjQgd2Vla3MKCioqUG9zdC1zZXR1cDoqKiBBZGQgW3N0YXRpYyByb3V0ZXNdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9tYWdpYy13YW4vY29uZmlndXJhdGlvbi9tYW51YWxseS9ob3ctdG8vY29uZmlndXJlLXJvdXRlcy8jY29uZmlndXJlLXN0YXRpYy1yb3V0ZXMpIHRvIE1hZ2ljIFdBTi4gRW5hYmxlIFtiaWRpcmVjdGlvbmFsIGhlYWx0aCBjaGVja3NdKGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9tYWdpYy13YW4vY29uZmlndXJhdGlvbi9tYW51YWxseS9ob3ctdG8vY29uZmlndXJlLXR1bm5lbC1lbmRwb2ludHMvI2xlZ2FjeS1iaWRpcmVjdGlvbmFsLWhlYWx0aC1jaGVja3MpLgoKIyMjIEdDUCBDbG91ZCBJbnRlcmNvbm5lY3QgKEJldGEpCgoqKlNldHVwIHZpYSBEYXNoYm9hcmQ6KioKMS4gSW50ZXJjb25uZWN0cyDihpIgQ3JlYXRlIOKGkiBDbG91ZCBJbnRlcmNvbm5lY3Qg4oaSIEdvb2dsZQoyLiBQcm92aWRlIG5hbWUsIE1UVSAobWF0Y2ggR0NQIFZMQU4gYXR0YWNobWVudCksIHNwZWVkICg1ME0tNTBHIGdyYW51bGFyIG9wdGlvbnMgYXZhaWxhYmxlIGZvciBwYXJ0bmVyIGludGVyY29ubmVjdHMpCjMuIEVudGVyIFZMQU4gYXR0YWNobWVudCBwYWlyaW5nIGtleQo0LiBDb25maXJtIG9yZGVyCgoqKlJvdXRpbmcgdG8gR0NQOioqIEFkZCBbc3RhdGljIHJvdXRlc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL21hZ2ljLXdhbi9jb25maWd1cmF0aW9uL21hbnVhbGx5L2hvdy10by9jb25maWd1cmUtcm91dGVzLyNjb25maWd1cmUtc3RhdGljLXJvdXRlcykuIEJHUCByb3V0ZXMgZnJvbSBHQ1AgQ2xvdWQgUm91dGVyICoqaWdub3JlZCoqLgoKKipSb3V0aW5nIHRvIENGOioqIENvbmZpZ3VyZSBbY3VzdG9tIGxlYXJuZWQgcm91dGVzXShodHRwczovL2Nsb3VkLmdvb2dsZS5jb20vbmV0d29yay1jb25uZWN0aXZpdHkvZG9jcy9yb3V0ZXIvaG93LXRvL2NvbmZpZ3VyZS1jdXN0b20tbGVhcm5lZC1yb3V0ZXMpIGluIENsb3VkIFJvdXRlci4gUmVxdWVzdCBwcmVmaXhlcyBmcm9tIENGIGFjY291bnQgdGVhbS4KCiMjIE1vbml0b3JpbmcKCioqRGFzaGJvYXJkIFN0YXR1czoqKgoKfCBTdGF0dXMgfCBNZWFuaW5nIHwKfC0tLS0tLS0tfC0tLS0tLS0tLXwKfCAqKkhlYWx0aHkqKiB8IExpbmsgb3BlcmF0aW9uYWwsIHRyYWZmaWMgZmxvd2luZywgaGVhbHRoIGNoZWNrcyBwYXNzaW5nIHwKfCAqKkFjdGl2ZSoqIHwgTGluayB1cCwgc3VmZmljaWVudCBsaWdodCwgRXRoZXJuZXQgbmVnb3RpYXRlZCB8CnwgKipVbmhlYWx0aHkqKiB8IExpbmsgZG93biwgbm8vbG93IGxpZ2h0ICg8LTIwIGRCbSksIGNhbid0IG5lZ290aWF0ZSB8CnwgKipQZW5kaW5nKiogfCBDcm9zcy1jb25uZWN0IGluY29tcGxldGUsIGRldmljZSB1bnJlc3BvbnNpdmUsIFJYL1RYIHN3YXBwZWQgfAp8ICoqRG93bioqIHwgUGh5c2ljYWwgbGluayBkb3duLCBubyBjb25uZWN0aXZpdHkgfAoKKipBbGVydHM6KioKCioqQ05JIENvbm5lY3Rpb24gTWFpbnRlbmFuY2UqKiAoTWFnaWMgTmV0d29ya2luZyBvbmx5KToKYGBgCkRhc2hib2FyZCDihpIgTm90aWZpY2F0aW9ucyDihpIgQWRkClByb2R1Y3Q6IENsb3VkZmxhcmUgTmV0d29yayBJbnRlcmNvbm5lY3QKVHlwZTogQ29ubmVjdGlvbiBNYWludGVuYW5jZSBBbGVydApgYGAKV2FybmluZ3MgdXAgdG8gMiB3ZWVrcyBhZHZhbmNlLiA2aHIgZGVsYXkgZm9yIG5ldyBhZGRpdGlvbnMuCgoqKkNsb3VkZmxhcmUgU3RhdHVzIE1haW50ZW5hbmNlKiogKGVudGlyZSBQb1ApOgpgYGAKRGFzaGJvYXJkIOKGkiBOb3RpZmljYXRpb25zIOKGkiBBZGQKUHJvZHVjdDogQ2xvdWRmbGFyZSBTdGF0dXMKRmlsdGVyIFBvUHM6IGdydSxmcmEsbGhyCmBgYAoKKipGaW5kIFBvUCBjb2RlOioqCmBgYApEYXNoYm9hcmQg4oaSIE1hZ2ljIFRyYW5zaXQvV0FOIOKGkiBDb25maWd1cmF0aW9uIOKGkiBJbnRlcmNvbm5lY3RzClNlbGVjdCBDTkkg4oaSIE5vdGUgRGF0YSBDZW50ZXIgKGUuZy4sICJncnUtYiIpClVzZSBmaXJzdCAzIGxldHRlcnM6ICJncnUiCmBgYAoKIyMgQmVzdCBQcmFjdGljZXMKCioqQ3JpdGljYWwgY29uZmlnLXNwZWNpZmljIHByYWN0aWNlczoqKgotIC8zMSBzdWJuZXRzIHJlcXVpcmVkIGZvciBCR1AKLSBCR1AgcGFzc3dvcmRzIHJlY29tbWVuZGVkCi0gQkZEIGZvciBmYXN0IGZhaWxvdmVyICh2MSBvbmx5KQotIFRlc3QgcGluZyBjb25uZWN0aXZpdHkgYmVmb3JlIEJHUAotIEVuYWJsZSBtYWludGVuYW5jZSBub3RpZmljYXRpb25zIGltbWVkaWF0ZWx5IGFmdGVyIGFjdGl2YXRpb24KLSBNb25pdG9yIHN0YXR1cyBwcm9ncmFtbWF0aWNhbGx5IHZpYSBBUEkKCkZvciBkZXNpZ24gcGF0dGVybnMsIEhBIGFyY2hpdGVjdHVyZSwgYW5kIHNlY3VyaXR5IGJlc3QgcHJhY3RpY2VzLCBzZWUgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKS4K
+# CNI Configuration
+
+See [README.md](README.md) for overview.
+
+## Workflow (2-4 weeks)
+
+1. **Submit request** (Week 1): Contact account team, provide type/location/use case
+2. **Review config** (Week 1-2, v1 only): Approve IP/VLAN/spec doc
+3. **Order connection** (Week 2-3):
+   - **Direct**: Get LOA, order cross-connect from facility
+   - **Partner**: Order virtual circuit in partner portal
+   - **Cloud**: Order Direct Connect/Cloud Interconnect, send LOA+VLAN to CF
+4. **Configure** (Week 3): Both sides configure per doc
+5. **Test** (Week 3-4): Ping, verify BGP, check routes
+6. **Health checks** (Week 4): Configure [Magic Transit](https://developers.cloudflare.com/magic-transit/how-to/configure-tunnel-endpoints/#add-tunnels) or [Magic WAN](https://developers.cloudflare.com/magic-wan/configuration/manually/how-to/configure-tunnel-endpoints/#add-tunnels) health checks
+7. **Activate** (Week 4): Route traffic, verify flow
+8. **Monitor**: Enable [maintenance notifications](https://developers.cloudflare.com/network-interconnect/monitoring-and-alerts/#enable-cloudflare-status-maintenance-notification)
+
+## BGP Configuration
+
+**v1 Requirements:**
+- BGP ASN (provide during setup)
+- /31 subnet for peering
+- Optional: BGP password
+
+**v2:** Simplified, less BGP config needed.
+
+**BGP over CNI (Dec 2024):** Magic WAN/Transit can now peer BGP directly over CNI v2 (no GRE tunnel required).
+
+**Example v1 BGP:**
+```
+Router ID: 192.0.2.1
+Peer IP: 192.0.2.0
+Remote ASN: 13335
+Local ASN: 65000
+Password: [optional]
+VLAN: 100
+```
+
+## Cloud Interconnect Setup
+
+### AWS Direct Connect (Beta)
+
+**Requirements:** Magic WAN, AWS Dedicated Direct Connect 1/10 Gbps.
+
+**Process:**
+1. Contact CF account team
+2. Choose location
+3. Order in AWS portal
+4. AWS provides LOA + VLAN ID
+5. Send to CF account team
+6. Wait ~4 weeks
+
+**Post-setup:** Add [static routes](https://developers.cloudflare.com/magic-wan/configuration/manually/how-to/configure-routes/#configure-static-routes) to Magic WAN. Enable [bidirectional health checks](https://developers.cloudflare.com/magic-wan/configuration/manually/how-to/configure-tunnel-endpoints/#legacy-bidirectional-health-checks).
+
+### GCP Cloud Interconnect (Beta)
+
+**Setup via Dashboard:**
+1. Interconnects → Create → Cloud Interconnect → Google
+2. Provide name, MTU (match GCP VLAN attachment), speed (50M-50G granular options available for partner interconnects)
+3. Enter VLAN attachment pairing key
+4. Confirm order
+
+**Routing to GCP:** Add [static routes](https://developers.cloudflare.com/magic-wan/configuration/manually/how-to/configure-routes/#configure-static-routes). BGP routes from GCP Cloud Router **ignored**.
+
+**Routing to CF:** Configure [custom learned routes](https://cloud.google.com/network-connectivity/docs/router/how-to/configure-custom-learned-routes) in Cloud Router. Request prefixes from CF account team.
+
+## Monitoring
+
+**Dashboard Status:**
+
+| Status | Meaning |
+|--------|---------|
+| **Healthy** | Link operational, traffic flowing, health checks passing |
+| **Active** | Link up, sufficient light, Ethernet negotiated |
+| **Unhealthy** | Link down, no/low light (<-20 dBm), can't negotiate |
+| **Pending** | Cross-connect incomplete, device unresponsive, RX/TX swapped |
+| **Down** | Physical link down, no connectivity |
+
+**Alerts:**
+
+**CNI Connection Maintenance** (Magic Networking only):
+```
+Dashboard → Notifications → Add
+Product: Cloudflare Network Interconnect
+Type: Connection Maintenance Alert
+```
+Warnings up to 2 weeks advance. 6hr delay for new additions.
+
+**Cloudflare Status Maintenance** (entire PoP):
+```
+Dashboard → Notifications → Add
+Product: Cloudflare Status
+Filter PoPs: gru,fra,lhr
+```
+
+**Find PoP code:**
+```
+Dashboard → Magic Transit/WAN → Configuration → Interconnects
+Select CNI → Note Data Center (e.g., "gru-b")
+Use first 3 letters: "gru"
+```
+
+## Best Practices
+
+**Critical config-specific practices:**
+- /31 subnets required for BGP
+- BGP passwords recommended
+- BFD for fast failover (v1 only)
+- Test ping connectivity before BGP
+- Enable maintenance notifications immediately after activation
+- Monitor status programmatically via API
+
+For design patterns, HA architecture, and security best practices, see [patterns.md](./patterns.md).

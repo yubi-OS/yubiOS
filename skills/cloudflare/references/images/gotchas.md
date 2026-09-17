@@ -1,1 +1,99 @@
-IyBHb3RjaGFzICYgQmVzdCBQcmFjdGljZXMKCiMjIEZpdCBNb2RlcwoKfCBNb2RlIHwgQmVzdCBGb3IgfCBCZWhhdmlvciB8CnwtLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IGBjb3ZlcmAgfCBIZXJvIGltYWdlcywgdGh1bWJuYWlscyB8IEZpbGxzIHNwYWNlLCBjcm9wcyBleGNlc3MgfAp8IGBjb250YWluYCB8IFByb2R1Y3QgaW1hZ2VzLCBhcnR3b3JrIHwgUHJlc2VydmVzIGZ1bGwgaW1hZ2UsIG1heSBhZGQgcGFkZGluZyB8CnwgYHNjYWxlLWRvd25gIHwgVXNlciB1cGxvYWRzIHwgTmV2ZXIgZW5sYXJnZXMgfAp8IGBjcm9wYCB8IFByZWNpc2UgY3JvcHMgfCBVc2VzIGdyYXZpdHkgfAp8IGBwYWRgIHwgRml4ZWQgYXNwZWN0IHJhdGlvIHwgQWRkcyBiYWNrZ3JvdW5kIHwKCiMjIEZvcm1hdCBTZWxlY3Rpb24KCmBgYHR5cGVzY3JpcHQKZm9ybWF0OiAnYXV0bycgLy8gUmVjb21tZW5kZWQgLSBuZWdvdGlhdGVzIGJlc3QgZm9ybWF0CmBgYAoKKipTdXBwb3J0OioqIEFWSUYgKENocm9tZSA4NSssIEZpcmVmb3ggOTMrLCBTYWZhcmkgMTYuNCspLCBXZWJQIChDaHJvbWUgMjMrLCBGaXJlZm94IDY1KywgU2FmYXJpIDE0KykKCiMjIFF1YWxpdHkgU2V0dGluZ3MKCnwgVXNlIENhc2UgfCBRdWFsaXR5IHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tfAp8IFRodW1ibmFpbHMgfCA3NS04MCB8CnwgU3RhbmRhcmQgfCA4NSAoZGVmYXVsdCkgfAp8IEhpZ2gtcXVhbGl0eSB8IDkwLTk1IHwKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyA1NDAzOiAiSW1hZ2UgdHJhbnNmb3JtYXRpb24gZmFpbGVkIgotIFZlcmlmeSBgd2lkdGhgL2BoZWlnaHRgIOKJpCAxMjAwMAotIENoZWNrIGBxdWFsaXR5YCAxLTEwMCwgYGRwcmAgMS0zCi0gRG9uJ3QgY29tYmluZSBpbmNvbXBhdGlibGUgb3B0aW9ucwoKIyMjIDk0MTM6ICJSYXRlIGxpbWl0IGV4Y2VlZGVkIgpJbXBsZW1lbnQgY2FjaGluZyBhbmQgZXhwb25lbnRpYWwgYmFja29mZjoKYGBgdHlwZXNjcmlwdApmb3IgKGxldCBpID0gMDsgaSA8IDM7IGkrKykgewogIHRyeSB7IHJldHVybiBhd2FpdCBlbnYuSU1BR0VTLmlucHV0KGJ1ZmZlcikudHJhbnNmb3JtKHsuLi59KS5vdXRwdXQoKTsgfQogIGNhdGNoIHsgYXdhaXQgbmV3IFByb21pc2UociA9PiBzZXRUaW1lb3V0KHIsIDIgKiogaSAqIDEwMDApKTsgfQp9CmBgYAoKIyMjIDU0MDE6ICJJbWFnZSB0b28gbGFyZ2UiClByZS1wcm9jZXNzIGltYWdlcyBiZWZvcmUgdXBsb2FkIChtYXggMTAwTUIsIDEyMDAww5cxMjAwMHB4KQoKIyMjIDU0MDA6ICJJbnZhbGlkIGltYWdlIGZvcm1hdCIKU3VwcG9ydGVkOiBKUEVHLCBQTkcsIEdJRiwgV2ViUCwgQVZJRiwgU1ZHCgojIyMgNDAxLzQwMzogIlVuYXV0aG9yaXplZCIKVmVyaWZ5IEFQSSB0b2tlbiBoYXMgYENsb3VkZmxhcmUgSW1hZ2VzIOKGkiBFZGl0YCBwZXJtaXNzaW9uCgojIyBMaW1pdHMKCnwgUmVzb3VyY2UgfCBMaW1pdCB8CnwtLS0tLS0tLS0tfC0tLS0tLS18CnwgTWF4IGlucHV0IHNpemUgfCAxMDBNQiB8CnwgTWF4IGRpbWVuc2lvbnMgfCAxMjAwMMOXMTIwMDBweCB8CnwgUXVhbGl0eSByYW5nZSB8IDEtMTAwIHwKfCBEUFIgcmFuZ2UgfCAxLTMgfAp8IEFQSSByYXRlIGxpbWl0IHwgfjEyMDAgcmVxL21pbiB8CgojIyBBVklGIEdvdGNoYXMKCi0gKipTbG93ZXIgZW5jb2RpbmcqKjogRmlyc3QgcmVxdWVzdCBtYXkgaGF2ZSBoaWdoZXIgbGF0ZW5jeQotICoqQnJvd3NlciBkZXRlY3Rpb24qKjoKYGBgdHlwZXNjcmlwdApjb25zdCBmb3JtYXQgPSAvaW1hZ2VcL2F2aWYvLnRlc3QocmVxdWVzdC5oZWFkZXJzLmdldCgnQWNjZXB0JykgfHwgJycpID8gJ2F2aWYnIDogJ3dlYnAnOwpgYGAKCiMjIEFudGktUGF0dGVybnMKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIE5vIGNhY2hpbmcgLSB0cmFuc2Zvcm1zIGV2ZXJ5IHJlcXVlc3QKcmV0dXJuIGVudi5JTUFHRVMuaW5wdXQoYnVmZmVyKS50cmFuc2Zvcm0oey4uLn0pLm91dHB1dCgpLnJlc3BvbnNlKCk7CgovLyDinYwgY292ZXIgd2l0aG91dCBib3RoIGRpbWVuc2lvbnMKdHJhbnNmb3JtKHsgd2lkdGg6IDgwMCwgZml0OiAnY292ZXInIH0pCgovLyDinIUgQWx3YXlzIHNldCBib3RoIGZvciBjb3Zlcgp0cmFuc2Zvcm0oeyB3aWR0aDogODAwLCBoZWlnaHQ6IDYwMCwgZml0OiAnY292ZXInIH0pCgovLyDinYwgRXhwb3NlcyBBUEkgdG9rZW4gdG8gY2xpZW50Ci8vIOKchSBVc2UgRGlyZWN0IENyZWF0b3IgVXBsb2FkIChwYXR0ZXJucy5tZCkKYGBgCgojIyBEZWJ1Z2dpbmcKCmBgYHR5cGVzY3JpcHQKLy8gQ2hlY2sgcmVzcG9uc2UgaGVhZGVycwpjb25zb2xlLmxvZygnQ29udGVudC1UeXBlOicsIHJlc3BvbnNlLmhlYWRlcnMuZ2V0KCdDb250ZW50LVR5cGUnKSk7CgovLyBUZXN0IHdpdGggY3VybAovLyBjdXJsIC1JICJodHRwczovL2ltYWdlZGVsaXZlcnkubmV0L3toYXNofS97aWR9L3dpZHRoPTgwMCxmb3JtYXQ9YXZpZiIKCi8vIE1vbml0b3IgbG9ncwovLyBucHggd3JhbmdsZXIgdGFpbApgYGAK
+# Gotchas & Best Practices
+
+## Fit Modes
+
+| Mode | Best For | Behavior |
+|------|----------|----------|
+| `cover` | Hero images, thumbnails | Fills space, crops excess |
+| `contain` | Product images, artwork | Preserves full image, may add padding |
+| `scale-down` | User uploads | Never enlarges |
+| `crop` | Precise crops | Uses gravity |
+| `pad` | Fixed aspect ratio | Adds background |
+
+## Format Selection
+
+```typescript
+format: 'auto' // Recommended - negotiates best format
+```
+
+**Support:** AVIF (Chrome 85+, Firefox 93+, Safari 16.4+), WebP (Chrome 23+, Firefox 65+, Safari 14+)
+
+## Quality Settings
+
+| Use Case | Quality |
+|----------|---------|
+| Thumbnails | 75-80 |
+| Standard | 85 (default) |
+| High-quality | 90-95 |
+
+## Common Errors
+
+### 5403: "Image transformation failed"
+- Verify `width`/`height` ≤ 12000
+- Check `quality` 1-100, `dpr` 1-3
+- Don't combine incompatible options
+
+### 9413: "Rate limit exceeded"
+Implement caching and exponential backoff:
+```typescript
+for (let i = 0; i < 3; i++) {
+  try { return await env.IMAGES.input(buffer).transform({...}).output(); }
+  catch { await new Promise(r => setTimeout(r, 2 ** i * 1000)); }
+}
+```
+
+### 5401: "Image too large"
+Pre-process images before upload (max 100MB, 12000×12000px)
+
+### 5400: "Invalid image format"
+Supported: JPEG, PNG, GIF, WebP, AVIF, SVG
+
+### 401/403: "Unauthorized"
+Verify API token has `Cloudflare Images → Edit` permission
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Max input size | 100MB |
+| Max dimensions | 12000×12000px |
+| Quality range | 1-100 |
+| DPR range | 1-3 |
+| API rate limit | ~1200 req/min |
+
+## AVIF Gotchas
+
+- **Slower encoding**: First request may have higher latency
+- **Browser detection**:
+```typescript
+const format = /image\/avif/.test(request.headers.get('Accept') || '') ? 'avif' : 'webp';
+```
+
+## Anti-Patterns
+
+```typescript
+// ❌ No caching - transforms every request
+return env.IMAGES.input(buffer).transform({...}).output().response();
+
+// ❌ cover without both dimensions
+transform({ width: 800, fit: 'cover' })
+
+// ✅ Always set both for cover
+transform({ width: 800, height: 600, fit: 'cover' })
+
+// ❌ Exposes API token to client
+// ✅ Use Direct Creator Upload (patterns.md)
+```
+
+## Debugging
+
+```typescript
+// Check response headers
+console.log('Content-Type:', response.headers.get('Content-Type'));
+
+// Test with curl
+// curl -I "https://imagedelivery.net/{hash}/{id}/width=800,format=avif"
+
+// Monitor logs
+// npx wrangler tail
+```

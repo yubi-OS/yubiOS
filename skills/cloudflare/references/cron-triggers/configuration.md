@@ -1,1 +1,180 @@
-IyBDcm9uIFRyaWdnZXJzIENvbmZpZ3VyYXRpb24KCiMjIHdyYW5nbGVyLmpzb25jCgpgYGBqc29uYwp7CiAgIiRzY2hlbWEiOiAiLi9ub2RlX21vZHVsZXMvd3JhbmdsZXIvY29uZmlnLXNjaGVtYS5qc29uIiwKICAibmFtZSI6ICJteS1jcm9uLXdvcmtlciIsCiAgIm1haW4iOiAic3JjL2luZGV4LnRzIiwKICAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiLCAvLyBVc2UgY3VycmVudCBkYXRlIGZvciBuZXcgcHJvamVjdHMKICAKICAidHJpZ2dlcnMiOiB7CiAgICAiY3JvbnMiOiBbCiAgICAgICIqLzUgKiAqICogKiIsICAgICAvLyBFdmVyeSA1IG1pbnV0ZXMKICAgICAgIjAgKi8yICogKiAqIiwgICAgIC8vIEV2ZXJ5IDIgaG91cnMKICAgICAgIjAgOSAqICogTU9OLUZSSSIsIC8vIFdlZWtkYXlzIGF0IDlhbSBVVEMKICAgICAgIjAgMiAxICogKiIgICAgICAgIC8vIE1vbnRobHkgb24gMXN0IGF0IDJhbSBVVEMKICAgIF0KICB9Cn0KYGBgCgojIyBHcmVlbiBDb21wdXRlIChCZXRhKQoKU2NoZWR1bGUgY3JvbnMgZHVyaW5nIGxvdy1jYXJib24gcGVyaW9kcyBmb3IgY2FyYm9uLWF3YXJlIGV4ZWN1dGlvbjoKCmBgYGpzb25jCnsKICAibmFtZSI6ICJlY28tY3Jvbi13b3JrZXIiLAogICJ0cmlnZ2VycyI6IHsKICAgICJjcm9ucyI6IFsiMCAyICogKiAqIl0KICB9LAogICJwbGFjZW1lbnQiOiB7CiAgICAibW9kZSI6ICJzbWFydCIgIC8vIFJ1bnMgZHVyaW5nIGxvdy1jYXJib24gcGVyaW9kcwogIH0KfQpgYGAKCioqTW9kZXM6KioKLSBgInNtYXJ0ImAgLSBDYXJib24tYXdhcmUgc2NoZWR1bGluZyAobWF5IGRlbGF5IHVwIHRvIDI0aCBmb3Igb3B0aW1hbCB3aW5kb3cpCi0gRGVmYXVsdCAobm8gcGxhY2VtZW50IGNvbmZpZykgLSBTdGFuZGFyZCBzY2hlZHVsaW5nIChubyBkZWxheSkKCioqSG93IGl0IHdvcmtzOioqCi0gQ2xvdWRmbGFyZSBkZWxheXMgZXhlY3V0aW9uIHVudGlsIGdyaWQgY2FyYm9uIGludGVuc2l0eSBpcyBsb3dlcgotIE1heGltdW0gZGVsYXk6IDI0IGhvdXJzIGZyb20gc2NoZWR1bGVkIHRpbWUKLSBJZGVhbCBmb3IgYmF0Y2ggam9icyB3aXRoIGZsZXhpYmxlIHRpbWluZyByZXF1aXJlbWVudHMKCioqVXNlIGNhc2VzOioqIAotIE5pZ2h0bHkgZGF0YSBwcm9jZXNzaW5nIGFuZCBFVEwgcGlwZWxpbmVzCi0gV2Vla2x5L21vbnRobHkgcmVwb3J0IGdlbmVyYXRpb24KLSBEYXRhYmFzZSBiYWNrdXBzIGFuZCBtYWludGVuYW5jZQotIEFuYWx5dGljcyBhZ2dyZWdhdGlvbgotIE1MIG1vZGVsIHRyYWluaW5nCgoqKk5vdCBzdWl0YWJsZSBmb3I6KiogCi0gVGltZS1zZW5zaXRpdmUgb3BlcmF0aW9ucyAoU0xBIHJlcXVpcmVtZW50cykKLSBVc2VyLWZhY2luZyBmZWF0dXJlcyByZXF1aXJpbmcgaW1tZWRpYXRlIGV4ZWN1dGlvbgotIFJlYWwtdGltZSBtb25pdG9yaW5nIGFuZCBhbGVydGluZwotIENvbXBsaWFuY2UgdGFza3Mgd2l0aCBzdHJpY3QgdGltZSB3aW5kb3dzCgojIyBFbnZpcm9ubWVudC1TcGVjaWZpYyBTY2hlZHVsZXMKCmBgYGpzb25jCnsKICAibmFtZSI6ICJteS1jcm9uLXdvcmtlciIsCiAgInRyaWdnZXJzIjogewogICAgImNyb25zIjogWyIwICovNiAqICogKiJdICAvLyBQcm9kOiBldmVyeSA2IGhvdXJzCiAgfSwKICAiZW52IjogewogICAgInN0YWdpbmciOiB7CiAgICAgICJ0cmlnZ2VycyI6IHsKICAgICAgICAiY3JvbnMiOiBbIiovMTUgKiAqICogKiJdICAvLyBTdGFnaW5nOiBldmVyeSAxNW1pbgogICAgICB9CiAgICB9LAogICAgImRldiI6IHsKICAgICAgInRyaWdnZXJzIjogewogICAgICAgICJjcm9ucyI6IFsiKi81ICogKiAqICoiXSAgLy8gRGV2OiBldmVyeSA1bWluCiAgICAgIH0KICAgIH0KICB9Cn0KYGBgCgojIyBTY2hlZHVsZSBGb3JtYXQKCioqU3RydWN0dXJlOioqIGBtaW51dGUgaG91ciBkYXktb2YtbW9udGggbW9udGggZGF5LW9mLXdlZWtgCgoqKlNwZWNpYWwgY2hhcnM6KiogYCpgIChhbnkpLCBgLGAgKGxpc3QpLCBgLWAgKHJhbmdlKSwgYC9gIChzdGVwKSwgYExgIChsYXN0KSwgYFdgICh3ZWVrZGF5KSwgYCNgIChudGgpCgojIyBNYW5hZ2luZyBUcmlnZ2VycwoKKipSZW1vdmUgYWxsOioqIGAidHJpZ2dlcnMiOiB7ICJjcm9ucyI6IFtdIH1gICAKKipQcmVzZXJ2ZSBleGlzdGluZzoqKiBPbWl0IGAidHJpZ2dlcnMiYCBmaWVsZCBlbnRpcmVseQoKIyMgRGVwbG95bWVudAoKYGBgYmFzaAojIERlcGxveSB3aXRoIGNvbmZpZyBjcm9ucwpucHggd3JhbmdsZXIgZGVwbG95CgojIERlcGxveSBzcGVjaWZpYyBlbnZpcm9ubWVudApucHggd3JhbmdsZXIgZGVwbG95IC0tZW52IHByb2R1Y3Rpb24KCiMgVmlldyBkZXBsb3ltZW50cwpucHggd3JhbmdsZXIgZGVwbG95bWVudHMgbGlzdApgYGAKCioq4pqg77iPIENoYW5nZXMgdGFrZSB1cCB0byAxNSBtaW51dGVzIHRvIHByb3BhZ2F0ZSBnbG9iYWxseSoqCgojIyBBUEkgTWFuYWdlbWVudAoKKipHZXQgdHJpZ2dlcnM6KioKYGBgYmFzaApjdXJsICJodHRwczovL2FwaS5jbG91ZGZsYXJlLmNvbS9jbGllbnQvdjQvYWNjb3VudHMve2FjY291bnRfaWR9L3dvcmtlcnMvc2NyaXB0cy97c2NyaXB0X25hbWV9L3NjaGVkdWxlcyIgXAogIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIge2FwaV90b2tlbn0iCmBgYAoKKipVcGRhdGUgdHJpZ2dlcnM6KioKYGBgYmFzaApjdXJsIC1YIFBVVCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS93b3JrZXJzL3NjcmlwdHMve3NjcmlwdF9uYW1lfS9zY2hlZHVsZXMiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyIHthcGlfdG9rZW59IiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC1kICd7ImNyb25zIjogWyIqLzUgKiAqICogKiIsICIwIDIgKiAqICoiXX0nCmBgYAoKKipEZWxldGUgYWxsOioqCmBgYGJhc2gKY3VybCAtWCBQVVQgImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97YWNjb3VudF9pZH0vd29ya2Vycy9zY3JpcHRzL3tzY3JpcHRfbmFtZX0vc2NoZWR1bGVzIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciB7YXBpX3Rva2VufSIgXAogIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAtZCAneyJjcm9ucyI6IFtdfScKYGBgCgojIyBDb21iaW5pbmcgTXVsdGlwbGUgV29ya2VycwoKRm9yIGNvbXBsZXggc2NoZWR1bGVzLCB1c2UgbXVsdGlwbGUgd29ya2VyczoKCmBgYGpzb25jCi8vIHdvcmtlci1mcmVxdWVudC5qc29uYwp7CiAgIm5hbWUiOiAiZGF0YS1zeW5jLWZyZXF1ZW50IiwKICAidHJpZ2dlcnMiOiB7ICJjcm9ucyI6IFsiKi81ICogKiAqICoiXSB9Cn0KCi8vIHdvcmtlci1kYWlseS5qc29uYwp7CiAgIm5hbWUiOiAicmVwb3J0cy1kYWlseSIsCiAgInRyaWdnZXJzIjogeyAiY3JvbnMiOiBbIjAgMiAqICogKiJdIH0sCiAgInBsYWNlbWVudCI6IHsgIm1vZGUiOiAic21hcnQiIH0KfQoKLy8gd29ya2VyLXdlZWtseS5qc29uYwp7CiAgIm5hbWUiOiAiY2xlYW51cC13ZWVrbHkiLAogICJ0cmlnZ2VycyI6IHsgImNyb25zIjogWyIwIDMgKiAqIFNVTiJdIH0KfQpgYGAKCioqQmVuZWZpdHM6KioKLSBTZXBhcmF0ZSBDUFUgbGltaXRzIHBlciB3b3JrZXIKLSBJbmRlcGVuZGVudCBlcnJvciBpc29sYXRpb24KLSBEaWZmZXJlbnQgR3JlZW4gQ29tcHV0ZSBwb2xpY2llcwotIEVhc2llciB0byBtYWludGFpbiBhbmQgZGVidWcKCiMjIFZhbGlkYXRpb24KCioqVGVzdCBjcm9uIHN5bnRheDoqKgotIFtjcm9udGFiLmd1cnVdKGh0dHBzOi8vY3JvbnRhYi5ndXJ1LykgLSBJbnRlcmFjdGl2ZSB2YWxpZGF0b3IKLSBXcmFuZ2xlciB2YWxpZGF0ZXMgb24gZGVwbG95IGJ1dCB3b24ndCBjYXRjaCBsb2dpYyBlcnJvcnMKCioqQ29tbW9uIG1pc3Rha2VzOioqCi0gYDAgMCAqICogKmAgcnVucyBkYWlseSBhdCBtaWRuaWdodCBVVEMsIG5vdCB5b3VyIGxvY2FsIHRpbWV6b25lCi0gYCovNjAgKiAqICogKmAgaXMgaW52YWxpZCAodXNlIGAwICogKiAqICpgIGZvciBob3VybHkpCi0gYDAgMiAzMSAqICpgIG9ubHkgcnVucyBvbiBtb250aHMgd2l0aCAzMSBkYXlzCgojIyBTZWUgQWxzbwoKLSBbUkVBRE1FLm1kXSguL1JFQURNRS5tZCkgLSBPdmVydmlldywgcXVpY2sgc3RhcnQKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBIYW5kbGVyIGltcGxlbWVudGF0aW9uCi0gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIE11bHRpLWNyb24gcm91dGluZyBleGFtcGxlcwo=
+# Cron Triggers Configuration
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-cron-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01", // Use current date for new projects
+  
+  "triggers": {
+    "crons": [
+      "*/5 * * * *",     // Every 5 minutes
+      "0 */2 * * *",     // Every 2 hours
+      "0 9 * * MON-FRI", // Weekdays at 9am UTC
+      "0 2 1 * *"        // Monthly on 1st at 2am UTC
+    ]
+  }
+}
+```
+
+## Green Compute (Beta)
+
+Schedule crons during low-carbon periods for carbon-aware execution:
+
+```jsonc
+{
+  "name": "eco-cron-worker",
+  "triggers": {
+    "crons": ["0 2 * * *"]
+  },
+  "placement": {
+    "mode": "smart"  // Runs during low-carbon periods
+  }
+}
+```
+
+**Modes:**
+- `"smart"` - Carbon-aware scheduling (may delay up to 24h for optimal window)
+- Default (no placement config) - Standard scheduling (no delay)
+
+**How it works:**
+- Cloudflare delays execution until grid carbon intensity is lower
+- Maximum delay: 24 hours from scheduled time
+- Ideal for batch jobs with flexible timing requirements
+
+**Use cases:** 
+- Nightly data processing and ETL pipelines
+- Weekly/monthly report generation
+- Database backups and maintenance
+- Analytics aggregation
+- ML model training
+
+**Not suitable for:** 
+- Time-sensitive operations (SLA requirements)
+- User-facing features requiring immediate execution
+- Real-time monitoring and alerting
+- Compliance tasks with strict time windows
+
+## Environment-Specific Schedules
+
+```jsonc
+{
+  "name": "my-cron-worker",
+  "triggers": {
+    "crons": ["0 */6 * * *"]  // Prod: every 6 hours
+  },
+  "env": {
+    "staging": {
+      "triggers": {
+        "crons": ["*/15 * * * *"]  // Staging: every 15min
+      }
+    },
+    "dev": {
+      "triggers": {
+        "crons": ["*/5 * * * *"]  // Dev: every 5min
+      }
+    }
+  }
+}
+```
+
+## Schedule Format
+
+**Structure:** `minute hour day-of-month month day-of-week`
+
+**Special chars:** `*` (any), `,` (list), `-` (range), `/` (step), `L` (last), `W` (weekday), `#` (nth)
+
+## Managing Triggers
+
+**Remove all:** `"triggers": { "crons": [] }`  
+**Preserve existing:** Omit `"triggers"` field entirely
+
+## Deployment
+
+```bash
+# Deploy with config crons
+npx wrangler deploy
+
+# Deploy specific environment
+npx wrangler deploy --env production
+
+# View deployments
+npx wrangler deployments list
+```
+
+**⚠️ Changes take up to 15 minutes to propagate globally**
+
+## API Management
+
+**Get triggers:**
+```bash
+curl "https://api.cloudflare.com/client/v4/accounts/{account_id}/workers/scripts/{script_name}/schedules" \
+  -H "Authorization: Bearer {api_token}"
+```
+
+**Update triggers:**
+```bash
+curl -X PUT "https://api.cloudflare.com/client/v4/accounts/{account_id}/workers/scripts/{script_name}/schedules" \
+  -H "Authorization: Bearer {api_token}" \
+  -H "Content-Type: application/json" \
+  -d '{"crons": ["*/5 * * * *", "0 2 * * *"]}'
+```
+
+**Delete all:**
+```bash
+curl -X PUT "https://api.cloudflare.com/client/v4/accounts/{account_id}/workers/scripts/{script_name}/schedules" \
+  -H "Authorization: Bearer {api_token}" \
+  -H "Content-Type: application/json" \
+  -d '{"crons": []}'
+```
+
+## Combining Multiple Workers
+
+For complex schedules, use multiple workers:
+
+```jsonc
+// worker-frequent.jsonc
+{
+  "name": "data-sync-frequent",
+  "triggers": { "crons": ["*/5 * * * *"] }
+}
+
+// worker-daily.jsonc
+{
+  "name": "reports-daily",
+  "triggers": { "crons": ["0 2 * * *"] },
+  "placement": { "mode": "smart" }
+}
+
+// worker-weekly.jsonc
+{
+  "name": "cleanup-weekly",
+  "triggers": { "crons": ["0 3 * * SUN"] }
+}
+```
+
+**Benefits:**
+- Separate CPU limits per worker
+- Independent error isolation
+- Different Green Compute policies
+- Easier to maintain and debug
+
+## Validation
+
+**Test cron syntax:**
+- [crontab.guru](https://crontab.guru/) - Interactive validator
+- Wrangler validates on deploy but won't catch logic errors
+
+**Common mistakes:**
+- `0 0 * * *` runs daily at midnight UTC, not your local timezone
+- `*/60 * * * *` is invalid (use `0 * * * *` for hourly)
+- `0 2 31 * *` only runs on months with 31 days
+
+## See Also
+
+- [README.md](./README.md) - Overview, quick start
+- [api.md](./api.md) - Handler implementation
+- [patterns.md](./patterns.md) - Multi-cron routing examples

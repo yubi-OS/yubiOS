@@ -1,1 +1,147 @@
-IyBDbG91ZGZsYXJlIENhY2hlIFJlc2VydmUKCioqUGVyc2lzdGVudCBjYWNoZSBzdG9yYWdlIGJ1aWx0IG9uIFIyIGZvciBsb25nLXRlcm0gY29udGVudCByZXRlbnRpb24qKgoKIyMgU21hcnQgU2hpZWxkIEludGVncmF0aW9uCgpDYWNoZSBSZXNlcnZlIGlzIHBhcnQgb2YgKipTbWFydCBTaGllbGQqKiwgQ2xvdWRmbGFyZSdzIGNvbXByZWhlbnNpdmUgc2VjdXJpdHkgYW5kIHBlcmZvcm1hbmNlIHN1aXRlOgoKLSAqKlNtYXJ0IFNoaWVsZCBBZHZhbmNlZCB0aWVyKio6IEluY2x1ZGVzIDJUQiBDYWNoZSBSZXNlcnZlIHN0b3JhZ2UKLSAqKlN0YW5kYWxvbmUgcHVyY2hhc2UqKjogQXZhaWxhYmxlIHNlcGFyYXRlbHkgaWYgbm90IHVzaW5nIFNtYXJ0IFNoaWVsZAotICoqTWlncmF0aW9uKio6IEV4aXN0aW5nIHN0YW5kYWxvbmUgY3VzdG9tZXJzIGNhbiBtaWdyYXRlIHRvIFNtYXJ0IFNoaWVsZCBidW5kbGVzCgoqKkRlY2lzaW9uKio6IEFscmVhZHkgb24gU21hcnQgU2hpZWxkIEFkdmFuY2VkPyBDYWNoZSBSZXNlcnZlIGlzIGluY2x1ZGVkLiBPdGhlcndpc2UgZXZhbHVhdGUgc3RhbmRhbG9uZSBwdXJjaGFzZSB2cyBTbWFydCBTaGllbGQgdXBncmFkZS4KCiMjIE92ZXJ2aWV3CgpDYWNoZSBSZXNlcnZlIGlzIENsb3VkZmxhcmUncyBwZXJzaXN0ZW50LCBsYXJnZS1zY2FsZSBjYWNoZSBzdG9yYWdlIGxheWVyIGJ1aWx0IG9uIFIyLiBJdCBhY3RzIGFzIHRoZSB1bHRpbWF0ZSB1cHBlci10aWVyIGNhY2hlLCBzdG9yaW5nIGNhY2hlYWJsZSBjb250ZW50IGZvciBleHRlbmRlZCBwZXJpb2RzICgzMCsgZGF5cykgdG8gbWF4aW1pemUgY2FjaGUgaGl0cywgcmVkdWNlIG9yaWdpbiBlZ3Jlc3MgZmVlcywgYW5kIHNoaWVsZCBvcmlnaW5zIGZyb20gcmVwZWF0ZWQgcmVxdWVzdHMgZm9yIGxvbmctdGFpbCBjb250ZW50LgoKIyMgQ29yZSBDb25jZXB0cwoKIyMjIFdoYXQgaXMgQ2FjaGUgUmVzZXJ2ZT8KCi0gKipQZXJzaXN0ZW50IHN0b3JhZ2UgbGF5ZXIqKjogQnVpbHQgb24gUjIsIHNpdHMgYWJvdmUgdGllcmVkIGNhY2hlIGhpZXJhcmNoeQotICoqTG9uZy10ZXJtIHJldGVudGlvbioqOiAzMC1kYXkgZGVmYXVsdCByZXRlbnRpb24sIGV4dGVuZGVkIG9uIGVhY2ggYWNjZXNzCi0gKipBdXRvbWF0aWMgb3BlcmF0aW9uKio6IFdvcmtzIHNlYW1sZXNzbHkgd2l0aCBleGlzdGluZyBDRE4sIG5vIGNvZGUgY2hhbmdlcyByZXF1aXJlZAotICoqT3JpZ2luIHNoaWVsZGluZyoqOiBEcmFtYXRpY2FsbHkgcmVkdWNlcyBvcmlnaW4gZWdyZXNzIGJ5IHNlcnZpbmcgY2FjaGVkIGNvbnRlbnQgbG9uZ2VyCi0gKipVc2FnZS1iYXNlZCBwcmljaW5nKio6IFBheSBvbmx5IGZvciBzdG9yYWdlICsgcmVhZC93cml0ZSBvcGVyYXRpb25zCgojIyMgQ2FjaGUgSGllcmFyY2h5CgpgYGAKVmlzaXRvciBSZXF1ZXN0CiAgICDihpMKTG93ZXItVGllciBDYWNoZSAoY2xvc2VzdCB0byB2aXNpdG9yKQogICAg4oaTIChvbiBtaXNzKQpVcHBlci1UaWVyIENhY2hlIChjbG9zZXN0IHRvIG9yaWdpbikKICAgIOKGkyAob24gbWlzcykKQ2FjaGUgUmVzZXJ2ZSAoUjIgcGVyc2lzdGVudCBzdG9yYWdlKQogICAg4oaTIChvbiBtaXNzKQpPcmlnaW4gU2VydmVyCmBgYAoKIyMjIEhvdyBJdCBXb3JrcwoKMS4gKipPbiBjYWNoZSBtaXNzKio6IENvbnRlbnQgZmV0Y2hlZCBmcm9tIG9yaWdpbiDvv73vv70gd3JpdHRlbiB0byBDYWNoZSBSZXNlcnZlICsgZWRnZSBjYWNoZXMgc2ltdWx0YW5lb3VzbHkKMi4gKipPbiBlZGdlIGV2aWN0aW9uKio6IENvbnRlbnQgbWF5IGJlIGV2aWN0ZWQgZnJvbSBlZGdlIGNhY2hlIGJ1dCByZW1haW5zIGluIENhY2hlIFJlc2VydmUKMy4gKipPbiBzdWJzZXF1ZW50IHJlcXVlc3QqKjogSWYgZWRnZSBjYWNoZSBtaXNzZXMgYnV0IENhY2hlIFJlc2VydmUgaGl0cyDihpIgY29udGVudCByZXN0b3JlZCB0byBlZGdlIGNhY2hlcwo0LiAqKlJldGVudGlvbioqOiBBc3NldHMgcmVtYWluIGluIENhY2hlIFJlc2VydmUgZm9yIDMwIGRheXMgc2luY2UgbGFzdCBhY2Nlc3MgKGNvbmZpZ3VyYWJsZSB2aWEgVFRMKQoKIyMgV2hlbiB0byBVc2UgQ2FjaGUgUmVzZXJ2ZQoKYGBgCk5lZWQgcGVyc2lzdGVudCBjYWNoaW5nPwrilJzilIAgSGlnaCBvcmlnaW4gZWdyZXNzIGNvc3RzIOKGkiBDYWNoZSBSZXNlcnZlIOKckwrilJzilIAgTG9uZy10YWlsIGNvbnRlbnQgKGFyY2hpdmVzLCBtZWRpYSBsaWJyYXJpZXMpIOKGkiBDYWNoZSBSZXNlcnZlIOKckwrilJzilIAgQWxyZWFkeSB1c2luZyBTbWFydCBTaGllbGQgQWR2YW5jZWQg4oaSIEluY2x1ZGVkISDinJMK4pSc4pSAIFZpZGVvIHN0cmVhbWluZyB3aXRoIHNlZWtpbmcgKHJhbmdlIHJlcXVlc3RzKSDihpIg4pyXIE5vdCBzdXBwb3J0ZWQK4pSc4pSAIER5bmFtaWMvcGVyc29uYWxpemVkIGNvbnRlbnQg4oaSIOKclyBVc2UgZWRnZSBjYWNoZSBvbmx5CuKUnOKUgCBOZWVkIHBlci1yZXF1ZXN0IGNhY2hlIGNvbnRyb2wgZnJvbSBXb3JrZXJzIOKGkiDinJcgVXNlIFIyIGRpcmVjdGx5CuKUlOKUgCBGcmVxdWVudGx5IHVwZGF0ZWQgY29udGVudCAoPCAxMGhyIGxpZmV0aW1lKSDihpIg4pyXIE5vdCBlbGlnaWJsZQpgYGAKCiMjIEFzc2V0IEVsaWdpYmlsaXR5CgpDYWNoZSBSZXNlcnZlIG9ubHkgc3RvcmVzIGFzc2V0cyBtZWV0aW5nICoqQUxMKiogY3JpdGVyaWE6CgotIENhY2hlYWJsZSBwZXIgQ2xvdWRmbGFyZSdzIHN0YW5kYXJkIHJ1bGVzCi0gTWluaW11bSAxMC1ob3VyIFRUTCAoMzYwMDAgc2Vjb25kcykKLSBgQ29udGVudC1MZW5ndGhgIGhlYWRlciBwcmVzZW50Ci0gT3JpZ2luYWwgZmlsZXMgb25seSAobm90IHRyYW5zZm9ybWVkIGltYWdlcykKCiMjIyBFbGlnaWJpbGl0eSBDaGVja2xpc3QKClVzZSB0aGlzIGNoZWNrbGlzdCB0byB2ZXJpZnkgaWYgYW4gYXNzZXQgaXMgZWxpZ2libGU6CgotIFsgXSBab25lIGhhcyBDYWNoZSBSZXNlcnZlIGVuYWJsZWQKLSBbIF0gWm9uZSBoYXMgVGllcmVkIENhY2hlIGVuYWJsZWQgKHJlcXVpcmVkKQotIFsgXSBBc3NldCBUVEwg4omlIDEwIGhvdXJzICgzNiwwMDAgc2Vjb25kcykKLSBbIF0gYENvbnRlbnQtTGVuZ3RoYCBoZWFkZXIgcHJlc2VudCBvbiBvcmlnaW4gcmVzcG9uc2UKLSBbIF0gTm8gYFNldC1Db29raWVgIGhlYWRlciAob3IgdXNlcyBwcml2YXRlIGRpcmVjdGl2ZSkKLSBbIF0gYFZhcnlgIGhlYWRlciBpcyBOT1QgYCpgIChjYW4gYmUgYEFjY2VwdC1FbmNvZGluZ2ApCi0gWyBdIE5vdCBhbiBpbWFnZSB0cmFuc2Zvcm1hdGlvbiB2YXJpYW50IChvcmlnaW5hbCBpbWFnZXMgT0spCi0gWyBdIE5vdCBhIHJhbmdlIHJlcXVlc3QgKG5vIEhUVFAgMjA2IHN1cHBvcnQpCi0gWyBdIE5vdCBPMk8gKE9yYW5nZS10by1PcmFuZ2UpIHByb3hpZWQgcmVxdWVzdAoKKipBbGwgYm94ZXMgbXVzdCBiZSBjaGVja2VkIGZvciBDYWNoZSBSZXNlcnZlIGVsaWdpYmlsaXR5LioqCgojIyMgTm90IEVsaWdpYmxlCgotIEFzc2V0cyB3aXRoIFRUTCA8IDEwIGhvdXJzCi0gUmVzcG9uc2VzIHdpdGhvdXQgYENvbnRlbnQtTGVuZ3RoYCBoZWFkZXIKLSBJbWFnZSB0cmFuc2Zvcm1hdGlvbiB2YXJpYW50cyAob3JpZ2luYWwgaW1hZ2VzIGFyZSBlbGlnaWJsZSkKLSBSZXNwb25zZXMgd2l0aCBgU2V0LUNvb2tpZWAgaGVhZGVycwotIFJlc3BvbnNlcyB3aXRoIGBWYXJ5OiAqYCBoZWFkZXIKLSBBc3NldHMgZnJvbSBSMiBwdWJsaWMgYnVja2V0cyBvbiBzYW1lIHpvbmUKLSBPMk8gKE9yYW5nZS10by1PcmFuZ2UpIHNldHVwIHJlcXVlc3RzCi0gKipSYW5nZSByZXF1ZXN0cyoqICh2aWRlbyBzZWVraW5nLCBwYXJ0aWFsIGNvbnRlbnQgZG93bmxvYWRzKQoKIyMgUXVpY2sgU3RhcnQKCmBgYGJhc2gKIyBFbmFibGUgdmlhIERhc2hib2FyZApodHRwczovL2Rhc2guY2xvdWRmbGFyZS5jb20vY2FjaGluZy9jYWNoZS1yZXNlcnZlCiMgQ2xpY2sgIkVuYWJsZSBTdG9yYWdlIFN5bmMiIG9yICJQdXJjaGFzZSIgYnV0dG9uCmBgYAoKKipQcmVyZXF1aXNpdGVzOioqCi0gUGFpZCBDYWNoZSBSZXNlcnZlIHBsYW4gb3IgU21hcnQgU2hpZWxkIEFkdmFuY2VkIHJlcXVpcmVkCi0gVGllcmVkIENhY2hlIHJlcXVpcmVkIGZvciBvcHRpbWFsIHBlcmZvcm1hbmNlCgojIyBFc3NlbnRpYWwgQ29tbWFuZHMKCmBgYGJhc2gKIyBDaGVjayBDYWNoZSBSZXNlcnZlIHN0YXR1cwpjdXJsIC1YIEdFVCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzLyRaT05FX0lEL2NhY2hlL2NhY2hlX3Jlc2VydmUiIFwKICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUElfVE9LRU4iCgojIEVuYWJsZSBDYWNoZSBSZXNlcnZlCmN1cmwgLVggUEFUQ0ggImh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC96b25lcy8kWk9ORV9JRC9jYWNoZS9jYWNoZV9yZXNlcnZlIiBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkQVBJX1RPS0VOIiBcCiAgLUggIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC1kICd7InZhbHVlIjogIm9uIn0nCgojIENoZWNrIGFzc2V0IGNhY2hlIHN0YXR1cwpjdXJsIC1JIGh0dHBzOi8vZXhhbXBsZS5jb20vYXNzZXQuanBnIHwgZ3JlcCAtaSBjYWNoZQpgYGAKCiMjIEluIFRoaXMgUmVmZXJlbmNlCgp8IFRhc2sgfCBGaWxlcyB8CnwtLS0tLS18LS0tLS0tLXwKfCBFdmFsdWF0ZSBpZiBDYWNoZSBSZXNlcnZlIGZpdHMgeW91ciB1c2UgY2FzZSB8IFJFQURNRS5tZCAodGhpcyBmaWxlKSB8CnwgRW5hYmxlIENhY2hlIFJlc2VydmUgZm9yIHlvdXIgem9uZSB8IFJFQURNRS5tZCArIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIHwKfCBVc2Ugd2l0aCBXb3JrZXJzICh1bmRlcnN0YW5kIGxpbWl0YXRpb25zKSB8IFthcGkubWRdKC4vYXBpLm1kKSB8CnwgU2V0dXAgdmlhIFNES3Mgb3IgSWFDIChUeXBlU2NyaXB0LCBQeXRob24sIFRlcnJhZm9ybSkgfCBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSB8CnwgT3B0aW1pemUgY29zdHMgYW5kIGRlYnVnIGlzc3VlcyB8IFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgKyBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSB8CnwgVW5kZXJzdGFuZCBlbGlnaWJpbGl0eSBhbmQgdHJvdWJsZXNob290IHwgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkg4oaSIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgfAoKKipGaWxlczoqKgotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gU2V0dXAsIEFQSSwgU0RLcywgYW5kIENhY2hlIFJ1bGVzCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gUHVyZ2luZywgbW9uaXRvcmluZywgV29ya2VycyBpbnRlZ3JhdGlvbgotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBCZXN0IHByYWN0aWNlcywgY29zdCBvcHRpbWl6YXRpb24sIGRlYnVnZ2luZwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gQ29tbW9uIGlzc3VlcywgbGltaXRhdGlvbnMsIHRyb3VibGVzaG9vdGluZwoKIyMgU2VlIEFsc28KLSBbcjJdKC4uL3IyLykgLSBDYWNoZSBSZXNlcnZlIGJ1aWx0IG9uIFIyIHN0b3JhZ2UKLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VycyBpbnRlZ3JhdGlvbiB3aXRoIENhY2hlIEFQSQo=
+# Cloudflare Cache Reserve
+
+**Persistent cache storage built on R2 for long-term content retention**
+
+## Smart Shield Integration
+
+Cache Reserve is part of **Smart Shield**, Cloudflare's comprehensive security and performance suite:
+
+- **Smart Shield Advanced tier**: Includes 2TB Cache Reserve storage
+- **Standalone purchase**: Available separately if not using Smart Shield
+- **Migration**: Existing standalone customers can migrate to Smart Shield bundles
+
+**Decision**: Already on Smart Shield Advanced? Cache Reserve is included. Otherwise evaluate standalone purchase vs Smart Shield upgrade.
+
+## Overview
+
+Cache Reserve is Cloudflare's persistent, large-scale cache storage layer built on R2. It acts as the ultimate upper-tier cache, storing cacheable content for extended periods (30+ days) to maximize cache hits, reduce origin egress fees, and shield origins from repeated requests for long-tail content.
+
+## Core Concepts
+
+### What is Cache Reserve?
+
+- **Persistent storage layer**: Built on R2, sits above tiered cache hierarchy
+- **Long-term retention**: 30-day default retention, extended on each access
+- **Automatic operation**: Works seamlessly with existing CDN, no code changes required
+- **Origin shielding**: Dramatically reduces origin egress by serving cached content longer
+- **Usage-based pricing**: Pay only for storage + read/write operations
+
+### Cache Hierarchy
+
+```
+Visitor Request
+    ↓
+Lower-Tier Cache (closest to visitor)
+    ↓ (on miss)
+Upper-Tier Cache (closest to origin)
+    ↓ (on miss)
+Cache Reserve (R2 persistent storage)
+    ↓ (on miss)
+Origin Server
+```
+
+### How It Works
+
+1. **On cache miss**: Content fetched from origin  written to Cache Reserve + edge caches simultaneously
+2. **On edge eviction**: Content may be evicted from edge cache but remains in Cache Reserve
+3. **On subsequent request**: If edge cache misses but Cache Reserve hits → content restored to edge caches
+4. **Retention**: Assets remain in Cache Reserve for 30 days since last access (configurable via TTL)
+
+## When to Use Cache Reserve
+
+```
+Need persistent caching?
+├─ High origin egress costs → Cache Reserve ✓
+├─ Long-tail content (archives, media libraries) → Cache Reserve ✓
+├─ Already using Smart Shield Advanced → Included! ✓
+├─ Video streaming with seeking (range requests) → ✗ Not supported
+├─ Dynamic/personalized content → ✗ Use edge cache only
+├─ Need per-request cache control from Workers → ✗ Use R2 directly
+└─ Frequently updated content (< 10hr lifetime) → ✗ Not eligible
+```
+
+## Asset Eligibility
+
+Cache Reserve only stores assets meeting **ALL** criteria:
+
+- Cacheable per Cloudflare's standard rules
+- Minimum 10-hour TTL (36000 seconds)
+- `Content-Length` header present
+- Original files only (not transformed images)
+
+### Eligibility Checklist
+
+Use this checklist to verify if an asset is eligible:
+
+- [ ] Zone has Cache Reserve enabled
+- [ ] Zone has Tiered Cache enabled (required)
+- [ ] Asset TTL ≥ 10 hours (36,000 seconds)
+- [ ] `Content-Length` header present on origin response
+- [ ] No `Set-Cookie` header (or uses private directive)
+- [ ] `Vary` header is NOT `*` (can be `Accept-Encoding`)
+- [ ] Not an image transformation variant (original images OK)
+- [ ] Not a range request (no HTTP 206 support)
+- [ ] Not O2O (Orange-to-Orange) proxied request
+
+**All boxes must be checked for Cache Reserve eligibility.**
+
+### Not Eligible
+
+- Assets with TTL < 10 hours
+- Responses without `Content-Length` header
+- Image transformation variants (original images are eligible)
+- Responses with `Set-Cookie` headers
+- Responses with `Vary: *` header
+- Assets from R2 public buckets on same zone
+- O2O (Orange-to-Orange) setup requests
+- **Range requests** (video seeking, partial content downloads)
+
+## Quick Start
+
+```bash
+# Enable via Dashboard
+https://dash.cloudflare.com/caching/cache-reserve
+# Click "Enable Storage Sync" or "Purchase" button
+```
+
+**Prerequisites:**
+- Paid Cache Reserve plan or Smart Shield Advanced required
+- Tiered Cache required for optimal performance
+
+## Essential Commands
+
+```bash
+# Check Cache Reserve status
+curl -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/cache/cache_reserve" \
+  -H "Authorization: Bearer $API_TOKEN"
+
+# Enable Cache Reserve
+curl -X PATCH "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/cache/cache_reserve" \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"value": "on"}'
+
+# Check asset cache status
+curl -I https://example.com/asset.jpg | grep -i cache
+```
+
+## In This Reference
+
+| Task | Files |
+|------|-------|
+| Evaluate if Cache Reserve fits your use case | README.md (this file) |
+| Enable Cache Reserve for your zone | README.md + [configuration.md](./configuration.md) |
+| Use with Workers (understand limitations) | [api.md](./api.md) |
+| Setup via SDKs or IaC (TypeScript, Python, Terraform) | [configuration.md](./configuration.md) |
+| Optimize costs and debug issues | [patterns.md](./patterns.md) + [gotchas.md](./gotchas.md) |
+| Understand eligibility and troubleshoot | [gotchas.md](./gotchas.md) → [patterns.md](./patterns.md) |
+
+**Files:**
+- [configuration.md](./configuration.md) - Setup, API, SDKs, and Cache Rules
+- [api.md](./api.md) - Purging, monitoring, Workers integration
+- [patterns.md](./patterns.md) - Best practices, cost optimization, debugging
+- [gotchas.md](./gotchas.md) - Common issues, limitations, troubleshooting
+
+## See Also
+- [r2](../r2/) - Cache Reserve built on R2 storage
+- [workers](../workers/) - Workers integration with Cache API

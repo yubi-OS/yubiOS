@@ -1,1 +1,110 @@
-IyBDb2RlbW9kZSAoRXhwZXJpbWVudGFsKQoKRmV0Y2ggaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FnZW50cy9hcGktcmVmZXJlbmNlL2NvZGVtb2RlLyBmb3IgY29tcGxldGUgZG9jdW1lbnRhdGlvbi4KCkNvZGVtb2RlIGxldHMgTExNcyB3cml0ZSBhbmQgZXhlY3V0ZSBjb2RlIHRoYXQgb3JjaGVzdHJhdGVzIHlvdXIgdG9vbHMsIGluc3RlYWQgb2YgY2FsbGluZyB0aGVtIG9uZSBhdCBhIHRpbWUuIFRoZSBMTE0gZ2V0cyBhIHNpbmdsZSAid3JpdGUgY29kZSIgdG9vbDsgZ2VuZXJhdGVkIEphdmFTY3JpcHQgcnVucyBpbiBhbiBpc29sYXRlZCBXb3JrZXIgc2FuZGJveC4KCiMjIFdoZW4gdG8gVXNlCgp8IFNjZW5hcmlvIHwgVXNlIENvZGVtb2RlPyB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLXwKfCBTaW5nbGUgdG9vbCBjYWxsIHwgTm8g4oCUIHN0YW5kYXJkIHRvb2wgY2FsbGluZyBpcyBzaW1wbGVyIHwKfCBDaGFpbmVkIHRvb2wgY2FsbHMgd2l0aCBsb2dpYyB8IFllcyB8CnwgQ29uZGl0aW9uYWwgbG9naWMgYWNyb3NzIHRvb2xzIHwgWWVzIHwKfCBNQ1AgbXVsdGktc2VydmVyIHdvcmtmbG93cyB8IFllcyB8CnwgU2ltcGxlIFEmQSBjaGF0IHwgTm8gfAoKIyMgU2V0dXAKCiMjIyBXcmFuZ2xlciBDb25maWcKCmBgYGpzb25jCnsKICAid29ya2VyX2xvYWRlcnMiOiBbeyAiYmluZGluZyI6ICJMT0FERVIiIH1dLAogICJjb21wYXRpYmlsaXR5X2ZsYWdzIjogWyJub2RlanNfY29tcGF0Il0KfQpgYGAKCiMjIyBJbnN0YWxsCgpgYGBiYXNoCm5wbSBpbnN0YWxsIEBjbG91ZGZsYXJlL2NvZGVtb2RlIGFpIHpvZApgYGAKCiMjIFVzYWdlCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGNyZWF0ZUNvZGVUb29sIH0gZnJvbSAiQGNsb3VkZmxhcmUvY29kZW1vZGUvYWkiOwppbXBvcnQgeyBEeW5hbWljV29ya2VyRXhlY3V0b3IgfSBmcm9tICJAY2xvdWRmbGFyZS9jb2RlbW9kZSI7CmltcG9ydCB7IHN0cmVhbVRleHQsIHRvb2wsIGNvbnZlcnRUb01vZGVsTWVzc2FnZXMgfSBmcm9tICJhaSI7CmltcG9ydCB7IHogfSBmcm9tICJ6b2QiOwoKY29uc3QgdG9vbHMgPSB7CiAgZ2V0V2VhdGhlcjogdG9vbCh7CiAgICBkZXNjcmlwdGlvbjogIkdldCB3ZWF0aGVyIGZvciBhIGxvY2F0aW9uIiwKICAgIGlucHV0U2NoZW1hOiB6Lm9iamVjdCh7IGxvY2F0aW9uOiB6LnN0cmluZygpIH0pLAogICAgZXhlY3V0ZTogYXN5bmMgKHsgbG9jYXRpb24gfSkgPT4gYFdlYXRoZXI6ICR7bG9jYXRpb259IDcywrBGYAogIH0pLAogIHNlbmRFbWFpbDogdG9vbCh7CiAgICBkZXNjcmlwdGlvbjogIlNlbmQgYW4gZW1haWwiLAogICAgaW5wdXRTY2hlbWE6IHoub2JqZWN0KHsgdG86IHouc3RyaW5nKCksIHN1YmplY3Q6IHouc3RyaW5nKCksIGJvZHk6IHouc3RyaW5nKCkgfSksCiAgICBleGVjdXRlOiBhc3luYyAoeyB0bywgc3ViamVjdCwgYm9keSB9KSA9PiBgRW1haWwgc2VudCB0byAke3RvfWAKICB9KQp9OwoKZXhwb3J0IGNsYXNzIE15QWdlbnQgZXh0ZW5kcyBBZ2VudDxFbnYsIFN0YXRlPiB7CiAgYXN5bmMgb25DaGF0TWVzc2FnZSgpIHsKICAgIGNvbnN0IGV4ZWN1dG9yID0gbmV3IER5bmFtaWNXb3JrZXJFeGVjdXRvcih7CiAgICAgIGxvYWRlcjogdGhpcy5lbnYuTE9BREVSCiAgICB9KTsKCiAgICBjb25zdCBjb2RlbW9kZSA9IGNyZWF0ZUNvZGVUb29sKHsgdG9vbHMsIGV4ZWN1dG9yIH0pOwoKICAgIGNvbnN0IHJlc3VsdCA9IHN0cmVhbVRleHQoewogICAgICBtb2RlbCwKICAgICAgc3lzdGVtOiAiWW91IGFyZSBhIGhlbHBmdWwgYXNzaXN0YW50LiIsCiAgICAgIG1lc3NhZ2VzOiBhd2FpdCBjb252ZXJ0VG9Nb2RlbE1lc3NhZ2VzKHRoaXMubWVzc2FnZXMpLAogICAgICB0b29sczogeyBjb2RlbW9kZSB9CiAgICB9KTsKCiAgICByZXR1cm4gcmVzdWx0LnRvVUlNZXNzYWdlU3RyZWFtUmVzcG9uc2UoKTsKICB9Cn0KYGBgCgojIyBXaXRoIE1DUCBUb29scwoKYGBgdHlwZXNjcmlwdApjb25zdCBjb2RlbW9kZSA9IGNyZWF0ZUNvZGVUb29sKHsKICB0b29sczogewogICAgLi4ubXlUb29scywKICAgIC4uLnRoaXMubWNwLmdldEFJVG9vbHMoKQogIH0sCiAgZXhlY3V0b3IKfSk7CmBgYAoKIyMgSG93IEl0IFdvcmtzCgoxLiBgY3JlYXRlQ29kZVRvb2xgIGdlbmVyYXRlcyBUeXBlU2NyaXB0IHR5cGUgZGVmaW5pdGlvbnMgZnJvbSB5b3VyIHRvb2xzCjIuIFRoZSBMTE0gd3JpdGVzIGFuIGFzeW5jIGFycm93IGZ1bmN0aW9uIGNhbGxpbmcgYGNvZGVtb2RlLnRvb2xOYW1lKGFyZ3MpYAozLiBDb2RlIHJ1bnMgaW4gYW4gaXNvbGF0ZWQgV29ya2VyIHNhbmRib3ggdmlhIGBEeW5hbWljV29ya2VyRXhlY3V0b3JgCjQuIFRvb2wgY2FsbHMgcm91dGUgYmFjayB0byB0aGUgaG9zdCB2aWEgV29ya2VycyBSUEMKNS4gRXh0ZXJuYWwgYGZldGNoKClgIGlzIGJsb2NrZWQgYnkgZGVmYXVsdCDigJQgc2FuZGJveCBjYW4gb25seSBjYWxsIHlvdXIgdG9vbHMKCiMjIE5ldHdvcmsgSXNvbGF0aW9uCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGV4ZWN1dG9yID0gbmV3IER5bmFtaWNXb3JrZXJFeGVjdXRvcih7CiAgbG9hZGVyOiBlbnYuTE9BREVSLAogIGdsb2JhbE91dGJvdW5kOiBudWxsICAgICAgICAgICAvLyBkZWZhdWx0IOKAlCBmdWxseSBpc29sYXRlZAogIC8vIGdsb2JhbE91dGJvdW5kOiBlbnYuTVlfU0VSVklDRSAgLy8gcm91dGUgdGhyb3VnaCBhIEZldGNoZXIKfSk7CmBgYAoKIyMgTGltaXRhdGlvbnMKCi0gRXhwZXJpbWVudGFsIOKAlCBBUEkgbWF5IGNoYW5nZQotIGBuZWVkc0FwcHJvdmFsYCB0b29scyBleGVjdXRlIGltbWVkaWF0ZWx5IGluIHNhbmRib3ggKG5vIGFwcHJvdmFsIHBhdXNlIHlldCkKLSBKYXZhU2NyaXB0IGV4ZWN1dGlvbiBvbmx5Ci0gUmVxdWlyZXMgYHdvcmtlcl9sb2FkZXJzYCBiaW5kaW5nCg==
+# Codemode (Experimental)
+
+Fetch https://developers.cloudflare.com/agents/api-reference/codemode/ for complete documentation.
+
+Codemode lets LLMs write and execute code that orchestrates your tools, instead of calling them one at a time. The LLM gets a single "write code" tool; generated JavaScript runs in an isolated Worker sandbox.
+
+## When to Use
+
+| Scenario | Use Codemode? |
+|----------|---------------|
+| Single tool call | No — standard tool calling is simpler |
+| Chained tool calls with logic | Yes |
+| Conditional logic across tools | Yes |
+| MCP multi-server workflows | Yes |
+| Simple Q&A chat | No |
+
+## Setup
+
+### Wrangler Config
+
+```jsonc
+{
+  "worker_loaders": [{ "binding": "LOADER" }],
+  "compatibility_flags": ["nodejs_compat"]
+}
+```
+
+### Install
+
+```bash
+npm install @cloudflare/codemode ai zod
+```
+
+## Usage
+
+```typescript
+import { createCodeTool } from "@cloudflare/codemode/ai";
+import { DynamicWorkerExecutor } from "@cloudflare/codemode";
+import { streamText, tool, convertToModelMessages } from "ai";
+import { z } from "zod";
+
+const tools = {
+  getWeather: tool({
+    description: "Get weather for a location",
+    inputSchema: z.object({ location: z.string() }),
+    execute: async ({ location }) => `Weather: ${location} 72°F`
+  }),
+  sendEmail: tool({
+    description: "Send an email",
+    inputSchema: z.object({ to: z.string(), subject: z.string(), body: z.string() }),
+    execute: async ({ to, subject, body }) => `Email sent to ${to}`
+  })
+};
+
+export class MyAgent extends Agent<Env, State> {
+  async onChatMessage() {
+    const executor = new DynamicWorkerExecutor({
+      loader: this.env.LOADER
+    });
+
+    const codemode = createCodeTool({ tools, executor });
+
+    const result = streamText({
+      model,
+      system: "You are a helpful assistant.",
+      messages: await convertToModelMessages(this.messages),
+      tools: { codemode }
+    });
+
+    return result.toUIMessageStreamResponse();
+  }
+}
+```
+
+## With MCP Tools
+
+```typescript
+const codemode = createCodeTool({
+  tools: {
+    ...myTools,
+    ...this.mcp.getAITools()
+  },
+  executor
+});
+```
+
+## How It Works
+
+1. `createCodeTool` generates TypeScript type definitions from your tools
+2. The LLM writes an async arrow function calling `codemode.toolName(args)`
+3. Code runs in an isolated Worker sandbox via `DynamicWorkerExecutor`
+4. Tool calls route back to the host via Workers RPC
+5. External `fetch()` is blocked by default — sandbox can only call your tools
+
+## Network Isolation
+
+```typescript
+const executor = new DynamicWorkerExecutor({
+  loader: env.LOADER,
+  globalOutbound: null           // default — fully isolated
+  // globalOutbound: env.MY_SERVICE  // route through a Fetcher
+});
+```
+
+## Limitations
+
+- Experimental — API may change
+- `needsApproval` tools execute immediately in sandbox (no approval pause yet)
+- JavaScript execution only
+- Requires `worker_loaders` binding

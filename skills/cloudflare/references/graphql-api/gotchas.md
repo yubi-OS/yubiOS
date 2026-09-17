@@ -1,1 +1,110 @@
-IyBHcmFwaFFMIEFuYWx5dGljcyBBUEkgR290Y2hhcyAmIFRyb3VibGVzaG9vdGluZwoKIyMgUmF0ZSBMaW1pdHMKCnwgTGltaXQgfCBWYWx1ZSB8CnwtLS0tLS0tfC0tLS0tLS18CnwgR3JhcGhRTCBxdWVyaWVzIHBlciB1c2VyIHwgKipEZWZhdWx0IDMwMCBwZXIgNSBtaW51dGVzKiogKG1heCAzMjAsIGF0IGxlYXN0IDEvc2VjKSB8CnwgR2VuZXJhbCBBUEkgcmF0ZSBsaW1pdCB8IDEyMDAgcmVxdWVzdHMgcGVyIDUgbWludXRlcyAoc2hhcmVkIGFjcm9zcyBhbGwgQVBJIGNhbGxzKSB8CnwgWm9uZSBzY29wZSBwZXIgcXVlcnkgfCBVcCB0byAqKjEwIHpvbmVzKiogfAp8IEFjY291bnQgc2NvcGUgcGVyIHF1ZXJ5IHwgRXhhY3RseSAqKjEgYWNjb3VudCoqIHwKClRoZSBHcmFwaFFMIHJhdGUgbGltaXQgaXMgc2VwYXJhdGUgZnJvbSB0aGUgZ2VuZXJhbCBBUEkgbGltaXQuIEV4Y2VlZGluZyBlaXRoZXIgcmVzdWx0cyBpbiBgSFRUUCA0MjlgIGFuZCBibG9ja3MgYWxsIEFQSSBjYWxscyBmb3IgNSBtaW51dGVzLiBFbnRlcnByaXNlIGN1c3RvbWVycyBjYW4gY29udGFjdCBzdXBwb3J0IHRvIHJhaXNlIGxpbWl0cy4KCiMjIyAiNDI5IFRvbyBNYW55IFJlcXVlc3RzIgoKKipDYXVzZToqKiBFeGNlZWRlZCByYXRlIGxpbWl0LgoKKipTb2x1dGlvbjoqKiBCYXRjaCBtdWx0aXBsZSBkYXRhc2V0cyBpbnRvIHNpbmdsZSBxdWVyaWVzLCBjYWNoZSByZXN1bHRzLCBpbmNyZWFzZSBpbnRlcnZhbHMgYmV0d2VlbiBxdWVyaWVzLiBVc2UgYHsgdmlld2VyIHsgYnVkZ2V0IH0gfWAgdG8gbW9uaXRvciByZW1haW5pbmcgYnVkZ2V0LgoKIyMgU2FtcGxpbmcgJiBEYXRhIEFjY3VyYWN5CgojIyMgQWRhcHRpdmUgQml0IFJhdGUgKEFCUikgU2FtcGxpbmcKCkRhdGFzZXRzIHdpdGggYEFkYXB0aXZlYCBpbiB0aGUgbmFtZSB1c2UgYWRhcHRpdmUgc2FtcGxpbmc6Ci0gUmVzdWx0cyBhcmUgKipzdGF0aXN0aWNhbGx5IHJlcHJlc2VudGF0aXZlKiosIG5vdCBleGFjdAotIFNhbWUgcXVlcnkgbWF5IHJldHVybiAqKnNsaWdodGx5IGRpZmZlcmVudCBudW1iZXJzKiogZWFjaCBydW4KLSBIaWdoZXIgdHJhZmZpYyA9IGhpZ2hlciBzYW1wbGluZyByYXRlID0gbW9yZSBhY2N1cmF0ZQotIGBzYW1wbGVJbnRlcnZhbGAgZGltZW5zaW9uIHNob3dzIHRoZSByYXRpbyAoMSA9IG5vIHNhbXBsaW5nLCAxMCA9IH4xLWluLTEwIHNhbXBsZWQpCgpGb3IgaGlnaC1jb25maWRlbmNlIG51bWJlcnMsIHVzZSBgY29uZmlkZW5jZShsZXZlbDogMC45NSlgIHRvIGdldCBlc3RpbWF0ZSBib3VuZHMuIEZvciBleGFjdCBjb3VudHMsIHVzZSByb2xsdXAgbm9kZXMgKGBodHRwUmVxdWVzdHMxaEdyb3Vwc2AsIGBodHRwUmVxdWVzdHMxZEdyb3Vwc2ApIHdoaWNoIGFyZSBwcmUtYWdncmVnYXRlZCB3aXRob3V0IHNhbXBsaW5nLgoKIyMjIFJvbGx1cCB2cy4gQWRhcHRpdmUKCnwgRmVhdHVyZSB8IFJvbGx1cCAoYCoxaEdyb3Vwc2AsIGAqMWRHcm91cHNgKSB8IEFkYXB0aXZlIChgKkFkYXB0aXZlR3JvdXBzYCkgfAp8LS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tfAp8IFNhbXBsaW5nIHwgTm8gKHByZS1hZ2dyZWdhdGVkKSB8IFllcyAoQUJSKSB8CnwgRmxleGliaWxpdHkgfCBGaXhlZCB0aW1lIGJ1Y2tldHMgfCBBbnkgZ3JhbnVsYXJpdHkgfAp8IERpbWVuc2lvbnMgfCBGZXdlciB8IE1hbnkgbW9yZSB8CnwgQWNjdXJhY3kgfCBFeGFjdCB8IFN0YXRpc3RpY2FsIGVzdGltYXRlIHwKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAiQWNjZXNzIGRlbmllZCIgLyAiYXV0aGVudGljYXRpb24gZXJyb3IiCgoqKkNhdXNlOioqIFRva2VuIGxhY2tzIHJlcXVpcmVkIHBlcm1pc3Npb24gb3Igd3Jvbmcgc2NvcGUuCgoqKlNvbHV0aW9uOioqIEFjY291bnQtc2NvcGVkIHF1ZXJpZXMgbmVlZCAqKkFjY291bnQgQW5hbHl0aWNzOiBSZWFkKiouIFpvbmUtc2NvcGVkIHF1ZXJpZXMgbmVlZCAqKlpvbmUgQW5hbHl0aWNzOiBSZWFkKiouIFZlcmlmeTogYGN1cmwgLXMgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3VzZXIvdG9rZW5zL3ZlcmlmeSAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRUT0tFTiJgCgojIyMgImZpZWxkIG5vdCBmb3VuZCIgLyAiQ2Fubm90IHF1ZXJ5IGZpZWxkIgoKKipDYXVzZToqKiBXcm9uZyBkYXRhc2V0IG5hbWUsIG5vbmV4aXN0ZW50IGZpZWxkLCBvciB3cm9uZyBzY29wZSAoem9uZSB2cy4gYWNjb3VudCkuCgoqKlNvbHV0aW9uOioqIE5hbWVzIGFyZSBjYXNlLXNlbnNpdGl2ZSBjYW1lbENhc2UgKGBodHRwUmVxdWVzdHNBZGFwdGl2ZUdyb3Vwc2ApLiBab25lIGRhdGFzZXRzIGdvIHVuZGVyIGB6b25lcyguLi4pYCwgYWNjb3VudCBkYXRhc2V0cyB1bmRlciBgYWNjb3VudHMoLi4uKWAuIFVzZSBpbnRyb3NwZWN0aW9uIHRvIHZlcmlmeS4KCiMjIyAiZmlsdGVyIGlzIHJlcXVpcmVkIiAvIGVtcHR5IHJlc3VsdHMKCioqQ2F1c2U6KiogTWlzc2luZyByZXF1aXJlZCB0aW1lIHJhbmdlIGZpbHRlciBvciBpbmNvcnJlY3Qgem9uZS9hY2NvdW50IHRhZy4KCioqU29sdXRpb246KiogQWx3YXlzIGluY2x1ZGUgYGRhdGV0aW1lX2d0YCAvIGBkYXRldGltZV9sdGAgKG9yIGBfZ2VxYCAvIGBfbGVxYCkuCgojIyMgImxpbWl0IGlzIHJlcXVpcmVkIiAvICJsaW1pdCBleGNlZWRzIG1heGltdW0iCgoqKkNhdXNlOioqIE1pc3NpbmcgYGxpbWl0YCBvciBleGNlZWRpbmcgbm9kZSdzIG1heCBwYWdlIHNpemUuCgoqKlNvbHV0aW9uOioqIEFsd2F5cyBzcGVjaWZ5IGBsaW1pdGAuIE1heCB2YXJpZXMgYnkgZGF0YXNldCAodHlwaWNhbGx5IDEwLDAwMCBmb3IgZ3JvdXBzLCAxMDAgZm9yIHJhdyBldmVudHMpLiBDaGVjayB2aWEgc2V0dGluZ3MgcXVlcnkuCgojIyMgInF1ZXJ5IGlzIHRvbyBjb21wbGV4IiAvICJxdWVyeSBleGNlZWRzIGJ1ZGdldCIKCioqQ2F1c2U6KiogVG9vIG1hbnkgZmllbGRzLCBkYXRhc2V0cywgb3IgdG9vIGJyb2FkIGEgdGltZSByYW5nZS4KCioqU29sdXRpb246KiogUmVkdWNlIHRpbWUgcmFuZ2UsIHJlcXVlc3QgZmV3ZXIgZGltZW5zaW9ucy9tZXRyaWNzLCBicmVhayBpbnRvIHNtYWxsZXIgcXVlcmllcy4gTW9uaXRvciBgY29zdGAgYW5kIGBidWRnZXRgIGluIHJlc3BvbnNlcy4KCiMjIyAyMDAgUmVzcG9uc2Ugd2l0aCBFcnJvcnMKCkdyYXBoUUwgcmV0dXJucyBIVFRQIDIwMCBldmVuIG9uIGZhaWx1cmVzLiAqKkFsd2F5cyBjaGVjayBgcmVzcG9uc2UuZXJyb3JzYDoqKgoKYGBganNvbgp7ICJkYXRhIjogbnVsbCwgImVycm9ycyI6IFt7ICJtZXNzYWdlIjogImZpbHRlciBpcyByZXF1aXJlZCBmb3IgaHR0cFJlcXVlc3RzQWRhcHRpdmVHcm91cHMiIH1dIH0KYGBgCgojIyBQbGFuLUJhc2VkIEF2YWlsYWJpbGl0eQoKTm90IGFsbCBkYXRhc2V0cyBhcmUgYXZhaWxhYmxlIG9uIGFsbCBwbGFucy4gSGlnaGVyIHBsYW5zIGdldCBtb3JlIGRhdGFzZXRzLCBsb25nZXIgcmV0ZW50aW9uIChgbm90T2xkZXJUaGFuYCksIHdpZGVyIHRpbWUgcmFuZ2VzIChgbWF4RHVyYXRpb25gKSwgbW9yZSBmaWVsZHMsIGFuZCBsYXJnZXIgcGFnZSBzaXplcy4KCiMjIyAibm9kZSBpcyBub3QgYXZhaWxhYmxlIiAvICJub2RlIGlzIGRpc2FibGVkIgoKKipDYXVzZToqKiBEYXRhc2V0IG5vdCBvbiB5b3VyIHBsYW4sIG9yIHByb2R1Y3Qgbm90IGVuYWJsZWQuCgoqKlNvbHV0aW9uOioqIENoZWNrIGBzZXR0aW5ncyB7IDxub2RlTmFtZT4geyBlbmFibGVkIH0gfWAuIFNvbWUgZGF0YXNldHMgcmVxdWlyZSBzcGVjaWZpYyBzdWJzY3JpcHRpb25zIChlLmcuLCBOZXR3b3JrIEFuYWx5dGljcyByZXF1aXJlcyBNYWdpYyBUcmFuc2l0L1NwZWN0cnVtKS4KCiMjIERhdGVUaW1lICYgVGltZXpvbmUgSGFuZGxpbmcKCi0gQWxsIHRpbWVzIGFyZSAqKlVUQyBvbmx5KiogKElTTyA4NjAxOiBgIjIwMjUtMDEtMTVUMTA6MzA6MDBaImApCi0gYERhdGVgIHR5cGU6IGAiMjAyNS0wMS0xNSJgICh1c2VkIGluIGBkYXRlX2dlcWAvYGRhdGVfbGVxYCBmb3Igc3RvcmFnZSBkYXRhc2V0cykKLSBgVGltZWAgdHlwZTogYCIyMDI1LTAxLTE1VDEwOjMwOjAwWiJgICh1c2VkIGluIGBkYXRldGltZV9ndGAvYGRhdGV0aW1lX2x0YCkKLSBGaWx0ZXJzIGFyZSBzdGFydC1pbmNsdXNpdmU6IGV2ZW50cyB0aGF0IHN0YXJ0IHdpdGhpbiB0aGUgd2luZG93IGFyZSBpbmNsdWRlZAoKIyMgUGVyZm9ybWFuY2UgVGlwcwoKLSAqKk5hcnJvdyB0aW1lIHJhbmdlcyoqIGFyZSBmYXN0ZXIgYW5kIGNoZWFwZXIKLSAqKlNlbGVjdCBvbmx5IG5lZWRlZCBkaW1lbnNpb25zKiog4oCUIGVhY2ggYWRkaXRpb25hbCBkaW1lbnNpb24gaW5jcmVhc2VzIGNvc3QKLSAqKlVzZSByb2xsdXAgbm9kZXMqKiAoYCoxZEdyb3Vwc2ApIGZvciBzaW1wbGUgZGFpbHkgdG90YWxzIHdpdGhvdXQgZGltZW5zaW9uIGJyZWFrZG93bnMKLSAqKkJhdGNoIGRhdGFzZXRzKiogaW50byBvbmUgcXVlcnkgaW5zdGVhZCBvZiBzZXBhcmF0ZSBIVFRQIHJlcXVlc3RzCgojIyBTZWUgQWxzbwoKLSBbUkVBRE1FLm1kXShSRUFETUUubWQpIC0gT3ZlcnZpZXcsIGRlY2lzaW9uIHRyZWUsIGRhdGFzZXQgaW5kZXgKLSBbYXBpLm1kXShhcGkubWQpIC0gUXVlcnkgc3RydWN0dXJlLCBhZ2dyZWdhdGlvbiBmaWVsZHMsIGZpbHRlcmluZyBvcGVyYXRvcnMKLSBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkgLSBBdXRoZW50aWNhdGlvbiwgY2xpZW50IHNldHVwLCBpbnRyb3NwZWN0aW9uIHF1ZXJpZXMKLSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSAtIENvbW1vbiBxdWVyeSBwYXR0ZXJucyAodGltZS1zZXJpZXMsIHRvcC1OLCBwZXItcHJvZHVjdCkK
+# GraphQL Analytics API Gotchas & Troubleshooting
+
+## Rate Limits
+
+| Limit | Value |
+|-------|-------|
+| GraphQL queries per user | **Default 300 per 5 minutes** (max 320, at least 1/sec) |
+| General API rate limit | 1200 requests per 5 minutes (shared across all API calls) |
+| Zone scope per query | Up to **10 zones** |
+| Account scope per query | Exactly **1 account** |
+
+The GraphQL rate limit is separate from the general API limit. Exceeding either results in `HTTP 429` and blocks all API calls for 5 minutes. Enterprise customers can contact support to raise limits.
+
+### "429 Too Many Requests"
+
+**Cause:** Exceeded rate limit.
+
+**Solution:** Batch multiple datasets into single queries, cache results, increase intervals between queries. Use `{ viewer { budget } }` to monitor remaining budget.
+
+## Sampling & Data Accuracy
+
+### Adaptive Bit Rate (ABR) Sampling
+
+Datasets with `Adaptive` in the name use adaptive sampling:
+- Results are **statistically representative**, not exact
+- Same query may return **slightly different numbers** each run
+- Higher traffic = higher sampling rate = more accurate
+- `sampleInterval` dimension shows the ratio (1 = no sampling, 10 = ~1-in-10 sampled)
+
+For high-confidence numbers, use `confidence(level: 0.95)` to get estimate bounds. For exact counts, use rollup nodes (`httpRequests1hGroups`, `httpRequests1dGroups`) which are pre-aggregated without sampling.
+
+### Rollup vs. Adaptive
+
+| Feature | Rollup (`*1hGroups`, `*1dGroups`) | Adaptive (`*AdaptiveGroups`) |
+|---------|-----------------------------------|-----------------------------|
+| Sampling | No (pre-aggregated) | Yes (ABR) |
+| Flexibility | Fixed time buckets | Any granularity |
+| Dimensions | Fewer | Many more |
+| Accuracy | Exact | Statistical estimate |
+
+## Common Errors
+
+### "Access denied" / "authentication error"
+
+**Cause:** Token lacks required permission or wrong scope.
+
+**Solution:** Account-scoped queries need **Account Analytics: Read**. Zone-scoped queries need **Zone Analytics: Read**. Verify: `curl -s https://api.cloudflare.com/client/v4/user/tokens/verify -H "Authorization: Bearer $TOKEN"`
+
+### "field not found" / "Cannot query field"
+
+**Cause:** Wrong dataset name, nonexistent field, or wrong scope (zone vs. account).
+
+**Solution:** Names are case-sensitive camelCase (`httpRequestsAdaptiveGroups`). Zone datasets go under `zones(...)`, account datasets under `accounts(...)`. Use introspection to verify.
+
+### "filter is required" / empty results
+
+**Cause:** Missing required time range filter or incorrect zone/account tag.
+
+**Solution:** Always include `datetime_gt` / `datetime_lt` (or `_geq` / `_leq`).
+
+### "limit is required" / "limit exceeds maximum"
+
+**Cause:** Missing `limit` or exceeding node's max page size.
+
+**Solution:** Always specify `limit`. Max varies by dataset (typically 10,000 for groups, 100 for raw events). Check via settings query.
+
+### "query is too complex" / "query exceeds budget"
+
+**Cause:** Too many fields, datasets, or too broad a time range.
+
+**Solution:** Reduce time range, request fewer dimensions/metrics, break into smaller queries. Monitor `cost` and `budget` in responses.
+
+### 200 Response with Errors
+
+GraphQL returns HTTP 200 even on failures. **Always check `response.errors`:**
+
+```json
+{ "data": null, "errors": [{ "message": "filter is required for httpRequestsAdaptiveGroups" }] }
+```
+
+## Plan-Based Availability
+
+Not all datasets are available on all plans. Higher plans get more datasets, longer retention (`notOlderThan`), wider time ranges (`maxDuration`), more fields, and larger page sizes.
+
+### "node is not available" / "node is disabled"
+
+**Cause:** Dataset not on your plan, or product not enabled.
+
+**Solution:** Check `settings { <nodeName> { enabled } }`. Some datasets require specific subscriptions (e.g., Network Analytics requires Magic Transit/Spectrum).
+
+## DateTime & Timezone Handling
+
+- All times are **UTC only** (ISO 8601: `"2025-01-15T10:30:00Z"`)
+- `Date` type: `"2025-01-15"` (used in `date_geq`/`date_leq` for storage datasets)
+- `Time` type: `"2025-01-15T10:30:00Z"` (used in `datetime_gt`/`datetime_lt`)
+- Filters are start-inclusive: events that start within the window are included
+
+## Performance Tips
+
+- **Narrow time ranges** are faster and cheaper
+- **Select only needed dimensions** — each additional dimension increases cost
+- **Use rollup nodes** (`*1dGroups`) for simple daily totals without dimension breakdowns
+- **Batch datasets** into one query instead of separate HTTP requests
+
+## See Also
+
+- [README.md](README.md) - Overview, decision tree, dataset index
+- [api.md](api.md) - Query structure, aggregation fields, filtering operators
+- [configuration.md](configuration.md) - Authentication, client setup, introspection queries
+- [patterns.md](patterns.md) - Common query patterns (time-series, top-N, per-product)

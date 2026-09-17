@@ -1,1 +1,15 @@
-IyBgQG5leHRgIGV4YW1wbGVzIGluZGV4CgpQb2ludGVycyBvbmx54oCUbm90IGEgZnVsbCBjYXRhbG9nLiBQcmVmZXIgdGhlIHJlcG8gdHJlZSBhbmQgZG9jcy4KCmh0dHBzOi8vZ2l0aHViLmNvbS9jbG91ZGZsYXJlL3NhbmRib3gtc2RrL3RyZWUvbmV4dC9leGFtcGxlcwoKfCBFeGFtcGxlIHwgVXNlIHdoZW4gfAp8IC0tLS0tLS0gfCAtLS0tLS0tLSB8CnwgYG1pbmltYWxgIHwgQmFzaWMgYEBuZXh0YCBXb3JrZXIgfAp8IGBjb2RlLWludGVycHJldGVyYCB8IGB3aXRoSW50ZXJwcmV0ZXJgIHwKfCBgb3BlbmFpLWFnZW50c2AgLyBgb3BlbmNvZGVgIC8gYGNsYXVkZS1jb2RlYCAvIGBjb2RleGAgfCBBZ2VudCBoYXJuZXNzZXMgfAp8IGBjb2xsYWJvcmF0aXZlLXRlcm1pbmFsYCAvIGBzMy1tb3VudGAgfCBUZXJtaW5hbHMgLyBtb3VudHMgfAp8IGBhdXRoZW50aWNhdGlvbmAgfCBNdWx0aS11c2VyIHNhbmRib3ggSURzIHwKClVzZSB0aGUgKipgbmV4dGAqKiBicmFuY2ggZm9yIGBAY2xvdWRmbGFyZS9zYW5kYm94QG5leHRgLg==
+# `@next` examples index
+
+Pointers only—not a full catalog. Prefer the repo tree and docs.
+
+https://github.com/cloudflare/sandbox-sdk/tree/next/examples
+
+| Example | Use when |
+| ------- | -------- |
+| `minimal` | Basic `@next` Worker |
+| `code-interpreter` | `withInterpreter` |
+| `openai-agents` / `opencode` / `claude-code` / `codex` | Agent harnesses |
+| `collaborative-terminal` / `s3-mount` | Terminals / mounts |
+| `authentication` | Multi-user sandbox IDs |
+
+Use the **`next`** branch for `@cloudflare/sandbox@next`.

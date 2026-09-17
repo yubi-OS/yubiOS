@@ -1,1 +1,144 @@
-IyBLViBDb25maWd1cmF0aW9uCgojIyBDcmVhdGUgTmFtZXNwYWNlCgpgYGBiYXNoCndyYW5nbGVyIGt2IG5hbWVzcGFjZSBjcmVhdGUgTVlfTkFNRVNQQUNFCiMgT3V0cHV0OiB7IGJpbmRpbmcgPSAiTVlfTkFNRVNQQUNFIiwgaWQgPSAiYWJjMTIzLi4uIiB9Cgp3cmFuZ2xlciBrdiBuYW1lc3BhY2UgY3JlYXRlIE1ZX05BTUVTUEFDRSAtLXByZXZpZXcgICMgRm9yIGxvY2FsIGRldgpgYGAKCiMjIFdvcmtlcnMgQmluZGluZwoKKip3cmFuZ2xlci5qc29uYzoqKgpgYGBqc29uYwp7CiAgImt2X25hbWVzcGFjZXMiOiBbCiAgICB7CiAgICAgICJiaW5kaW5nIjogIk1ZX0tWIiwKICAgICAgImlkIjogImFiYzEyM3h5ejc4OSIKICAgIH0sCiAgICAvLyBPcHRpb25hbDogRGlmZmVyZW50IG5hbWVzcGFjZSBmb3IgcHJldmlldy9kZXZlbG9wbWVudAogICAgewogICAgICAiYmluZGluZyI6ICJNWV9LViIsCiAgICAgICJwcmV2aWV3X2lkIjogInByZXZpZXctYWJjMTIzIgogICAgfQogIF0KfQpgYGAKCiMjIFR5cGVTY3JpcHQgVHlwZXMKCioqZW52LmQudHM6KioKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBNWV9LVjogS1ZOYW1lc3BhY2U7CiAgU0VTU0lPTlM6IEtWTmFtZXNwYWNlOwogIENBQ0hFOiBLVk5hbWVzcGFjZTsKfQpgYGAKCioqd29ya2VyLnRzOioqCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICAvLyBlbnYuTVlfS1YgaXMgbm93IHR5cGVkIGFzIEtWTmFtZXNwYWNlCiAgICBjb25zdCB2YWx1ZSA9IGF3YWl0IGVudi5NWV9LVi5nZXQoImtleSIpOwogICAgcmV0dXJuIG5ldyBSZXNwb25zZSh2YWx1ZSB8fCAiTm90IGZvdW5kIik7CiAgfQp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgoqKlR5cGUtc2FmZSBKU09OIG9wZXJhdGlvbnM6KioKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgVXNlclByb2ZpbGUgewogIG5hbWU6IHN0cmluZzsKICBlbWFpbDogc3RyaW5nOwogIHJvbGU6ICJhZG1pbiIgfCAidXNlciI7Cn0KCmNvbnN0IHByb2ZpbGUgPSBhd2FpdCBlbnYuVVNFUlMuZ2V0PFVzZXJQcm9maWxlPigidXNlcjoxMjMiLCAianNvbiIpOwovLyBwcm9maWxlOiBVc2VyUHJvZmlsZSB8IG51bGwgKHR5cGUtc2FmZSEpCmlmIChwcm9maWxlKSB7CiAgY29uc29sZS5sb2cocHJvZmlsZS5uYW1lKTsgLy8gVHlwZVNjcmlwdCBrbm93cyB0aGlzIGlzIGEgc3RyaW5nCn0KYGBgCgojIyBDTEkgT3BlcmF0aW9ucwoKYGBgYmFzaAojIFB1dAp3cmFuZ2xlciBrdiBrZXkgcHV0IC0tYmluZGluZz1NWV9LViAia2V5IiAidmFsdWUiCndyYW5nbGVyIGt2IGtleSBwdXQgLS1iaW5kaW5nPU1ZX0tWICJrZXkiIC0tcGF0aD0uL2ZpbGUuanNvbiAtLXR0bD0zNjAwCgojIEdldAp3cmFuZ2xlciBrdiBrZXkgZ2V0IC0tYmluZGluZz1NWV9LViAia2V5IgoKIyBEZWxldGUKd3JhbmdsZXIga3Yga2V5IGRlbGV0ZSAtLWJpbmRpbmc9TVlfS1YgImtleSIKCiMgTGlzdAp3cmFuZ2xlciBrdiBrZXkgbGlzdCAtLWJpbmRpbmc9TVlfS1YgLS1wcmVmaXg9InVzZXI6IgoKIyBCdWxrIG9wZXJhdGlvbnMgKG1heCAxMCwwMDAga2V5cyBwZXIgZmlsZSkKd3JhbmdsZXIga3YgYnVsayBwdXQgZGF0YS5qc29uIC0tYmluZGluZz1NWV9LVgp3cmFuZ2xlciBrdiBidWxrIGdldCBrZXlzLmpzb24gLS1iaW5kaW5nPU1ZX0tWCndyYW5nbGVyIGt2IGJ1bGsgZGVsZXRlIGtleXMuanNvbiAtLWJpbmRpbmc9TVlfS1YgLS1mb3JjZQpgYGAKCiMjIExvY2FsIERldmVsb3BtZW50CgpgYGBiYXNoCndyYW5nbGVyIGRldiAgICAgICAgICAgICAgICAjIExvY2FsIEtWIChpc29sYXRlZCkKd3JhbmdsZXIgZGV2IC0tcmVtb3RlICAgICAgICMgUmVtb3RlIEtWIChwcm9kdWN0aW9uKQoKIyBPciBpbiB3cmFuZ2xlci5qc29uYzoKIyAia3ZfbmFtZXNwYWNlcyI6IFt7ICJiaW5kaW5nIjogIk1ZX0tWIiwgImlkIjogIi4uLiIsICJyZW1vdGUiOiB0cnVlIH1dCmBgYAoKIyMgUkVTVCBBUEkKCiMjIyBTaW5nbGUgT3BlcmF0aW9ucwoKYGBgdHlwZXNjcmlwdAppbXBvcnQgQ2xvdWRmbGFyZSBmcm9tICdjbG91ZGZsYXJlJzsKCmNvbnN0IGNsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsKICBhcGlFbWFpbDogcHJvY2Vzcy5lbnYuQ0xPVURGTEFSRV9FTUFJTCwKICBhcGlLZXk6IHByb2Nlc3MuZW52LkNMT1VERkxBUkVfQVBJX0tFWQp9KTsKCi8vIFNpbmdsZSBrZXkgb3BlcmF0aW9ucwphd2FpdCBjbGllbnQua3YubmFtZXNwYWNlcy52YWx1ZXMudXBkYXRlKG5hbWVzcGFjZUlkLCAna2V5JywgewogIGFjY291bnRfaWQ6IGFjY291bnRJZCwKICB2YWx1ZTogJ3ZhbHVlJywKICBleHBpcmF0aW9uX3R0bDogMzYwMAp9KTsKYGBgCgojIyMgQnVsayBPcGVyYXRpb25zCgpgYGB0eXBlc2NyaXB0Ci8vIEJ1bGsgdXBkYXRlICh1cCB0byAxMCwwMDAga2V5cywgbWF4IDEwME1CIHRvdGFsKQphd2FpdCBjbGllbnQua3YubmFtZXNwYWNlcy5idWxrVXBkYXRlKG5hbWVzcGFjZUlkLCB7CiAgYWNjb3VudF9pZDogYWNjb3VudElkLAogIGJvZHk6IFsKICAgIHsga2V5OiAia2V5MSIsIHZhbHVlOiAidmFsdWUxIiwgZXhwaXJhdGlvbl90dGw6IDM2MDAgfSwKICAgIHsga2V5OiAia2V5MiIsIHZhbHVlOiAidmFsdWUyIiwgbWV0YWRhdGE6IHsgdmVyc2lvbjogMSB9IH0sCiAgICB7IGtleTogImtleTMiLCB2YWx1ZTogInZhbHVlMyIgfQogIF0KfSk7CgovLyBCdWxrIGdldCAodXAgdG8gMTAwIGtleXMpCmNvbnN0IHJlc3VsdHMgPSBhd2FpdCBjbGllbnQua3YubmFtZXNwYWNlcy5idWxrR2V0KG5hbWVzcGFjZUlkLCB7CiAgYWNjb3VudF9pZDogYWNjb3VudElkLAogIGtleXM6IFsia2V5MSIsICJrZXkyIiwgImtleTMiXQp9KTsKCi8vIEJ1bGsgZGVsZXRlICh1cCB0byAxMCwwMDAga2V5cykKYXdhaXQgY2xpZW50Lmt2Lm5hbWVzcGFjZXMuYnVsa0RlbGV0ZShuYW1lc3BhY2VJZCwgewogIGFjY291bnRfaWQ6IGFjY291bnRJZCwKICBrZXlzOiBbImtleTEiLCAia2V5MiIsICJrZXkzIl0KfSk7CmBgYAo=
+# KV Configuration
+
+## Create Namespace
+
+```bash
+wrangler kv namespace create MY_NAMESPACE
+# Output: { binding = "MY_NAMESPACE", id = "abc123..." }
+
+wrangler kv namespace create MY_NAMESPACE --preview  # For local dev
+```
+
+## Workers Binding
+
+**wrangler.jsonc:**
+```jsonc
+{
+  "kv_namespaces": [
+    {
+      "binding": "MY_KV",
+      "id": "abc123xyz789"
+    },
+    // Optional: Different namespace for preview/development
+    {
+      "binding": "MY_KV",
+      "preview_id": "preview-abc123"
+    }
+  ]
+}
+```
+
+## TypeScript Types
+
+**env.d.ts:**
+```typescript
+interface Env {
+  MY_KV: KVNamespace;
+  SESSIONS: KVNamespace;
+  CACHE: KVNamespace;
+}
+```
+
+**worker.ts:**
+```typescript
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // env.MY_KV is now typed as KVNamespace
+    const value = await env.MY_KV.get("key");
+    return new Response(value || "Not found");
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+**Type-safe JSON operations:**
+```typescript
+interface UserProfile {
+  name: string;
+  email: string;
+  role: "admin" | "user";
+}
+
+const profile = await env.USERS.get<UserProfile>("user:123", "json");
+// profile: UserProfile | null (type-safe!)
+if (profile) {
+  console.log(profile.name); // TypeScript knows this is a string
+}
+```
+
+## CLI Operations
+
+```bash
+# Put
+wrangler kv key put --binding=MY_KV "key" "value"
+wrangler kv key put --binding=MY_KV "key" --path=./file.json --ttl=3600
+
+# Get
+wrangler kv key get --binding=MY_KV "key"
+
+# Delete
+wrangler kv key delete --binding=MY_KV "key"
+
+# List
+wrangler kv key list --binding=MY_KV --prefix="user:"
+
+# Bulk operations (max 10,000 keys per file)
+wrangler kv bulk put data.json --binding=MY_KV
+wrangler kv bulk get keys.json --binding=MY_KV
+wrangler kv bulk delete keys.json --binding=MY_KV --force
+```
+
+## Local Development
+
+```bash
+wrangler dev                # Local KV (isolated)
+wrangler dev --remote       # Remote KV (production)
+
+# Or in wrangler.jsonc:
+# "kv_namespaces": [{ "binding": "MY_KV", "id": "...", "remote": true }]
+```
+
+## REST API
+
+### Single Operations
+
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({
+  apiEmail: process.env.CLOUDFLARE_EMAIL,
+  apiKey: process.env.CLOUDFLARE_API_KEY
+});
+
+// Single key operations
+await client.kv.namespaces.values.update(namespaceId, 'key', {
+  account_id: accountId,
+  value: 'value',
+  expiration_ttl: 3600
+});
+```
+
+### Bulk Operations
+
+```typescript
+// Bulk update (up to 10,000 keys, max 100MB total)
+await client.kv.namespaces.bulkUpdate(namespaceId, {
+  account_id: accountId,
+  body: [
+    { key: "key1", value: "value1", expiration_ttl: 3600 },
+    { key: "key2", value: "value2", metadata: { version: 1 } },
+    { key: "key3", value: "value3" }
+  ]
+});
+
+// Bulk get (up to 100 keys)
+const results = await client.kv.namespaces.bulkGet(namespaceId, {
+  account_id: accountId,
+  keys: ["key1", "key2", "key3"]
+});
+
+// Bulk delete (up to 10,000 keys)
+await client.kv.namespaces.bulkDelete(namespaceId, {
+  account_id: accountId,
+  keys: ["key1", "key2", "key3"]
+});
+```

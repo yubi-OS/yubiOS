@@ -1,1 +1,112 @@
-IyBBbmFseXRpY3MgRW5naW5lIEFQSSBSZWZlcmVuY2UKCiMjIFdyaXRpbmcgRGF0YQoKIyMjIGB3cml0ZURhdGFQb2ludCgpYAoKRmlyZS1hbmQtZm9yZ2V0IChyZXR1cm5zIGB2b2lkYCwgbm90IFByb21pc2UpLiBXcml0ZXMgaGFwcGVuIGFzeW5jaHJvbm91c2x5LgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgQW5hbHl0aWNzRW5naW5lRGF0YVBvaW50IHsKICBibG9icz86IHN0cmluZ1tdOyAgICAgIC8vIFVwIHRvIDIwIHN0cmluZ3MgKGRpbWVuc2lvbnMpLCAxNktCIGVhY2gKICBkb3VibGVzPzogbnVtYmVyW107ICAgIC8vIFVwIHRvIDIwIG51bWJlcnMgKG1ldHJpY3MpCiAgaW5kZXhlcz86IHN0cmluZ1tdOyAgICAvLyAxIGluZGV4ZWQgc3RyaW5nIGZvciBoaWdoLWNhcmRpbmFsaXR5IGZpbHRlcmluZwp9CgplbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICBibG9iczogWyIvYXBpL3VzZXJzIiwgIkdFVCIsICIyMDAiXSwKICBkb3VibGVzOiBbMTQ1LjIsIDFdLCAgLy8gbGF0ZW5jeV9tcywgY291bnQKICBpbmRleGVzOiBbImN1c3RvbWVyX2FiYzEyMyJdCn0pOwpgYGAKCioqQmVoYXZpb3JzOioqIE5vIGF3YWl0IG5lZWRlZCwgbm8gZXJyb3IgdGhyb3duIChjaGVjayB0YWlsIGxvZ3MpLCBhdXRvLXNhbXBsZWQgYXQgaGlnaCB2b2x1bWVzLCBhdXRvLXRpbWVzdGFtcGVkLgoKKipCbG9iIHZzIEluZGV4OioqIEJsb2IgZm9yIEdST1VQIEJZICg8MTAwayB1bmlxdWUpLCBJbmRleCBmb3IgZmlsdGVyLW9ubHkgKG1pbGxpb25zIHVuaXF1ZSkuCgojIyMgRnVsbCBFeGFtcGxlCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IHN0YXJ0ID0gRGF0ZS5ub3coKTsKICAgIGNvbnN0IHVybCA9IG5ldyBVUkwocmVxdWVzdC51cmwpOwogICAgdHJ5IHsKICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBoYW5kbGVSZXF1ZXN0KHJlcXVlc3QpOwogICAgICBlbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICAgICAgICBibG9iczogW3VybC5wYXRobmFtZSwgcmVxdWVzdC5tZXRob2QsIHJlc3BvbnNlLnN0YXR1cy50b1N0cmluZygpXSwKICAgICAgICBkb3VibGVzOiBbRGF0ZS5ub3coKSAtIHN0YXJ0LCAxXSwKICAgICAgICBpbmRleGVzOiBbcmVxdWVzdC5oZWFkZXJzLmdldCgieC1hcGkta2V5IikgfHwgImFub255bW91cyJdCiAgICAgIH0pOwogICAgICByZXR1cm4gcmVzcG9uc2U7CiAgICB9IGNhdGNoIChlcnJvcikgewogICAgICBlbnYuQU5BTFlUSUNTLndyaXRlRGF0YVBvaW50KHsKICAgICAgICBibG9iczogW3VybC5wYXRobmFtZSwgcmVxdWVzdC5tZXRob2QsICI1MDAiXSwKICAgICAgICBkb3VibGVzOiBbRGF0ZS5ub3coKSAtIHN0YXJ0LCAxLCAwXSwKICAgICAgfSk7CiAgICAgIHRocm93IGVycm9yOwogICAgfQogIH0KfTsKYGBgCgojIyBTUUwgQVBJIChFeHRlcm5hbCBPbmx5KQoKYGBgYmFzaApjdXJsIC1YIFBPU1QgaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L2FjY291bnRzL3thY2NvdW50X2lkfS9hbmFseXRpY3NfZW5naW5lL3NxbCBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkVE9LRU4iIFwKICAtZCAiU0VMRUNUIGJsb2IxIEFTIGVuZHBvaW50LCBDT1VOVCgqKSBBUyByZXF1ZXN0cyBGUk9NIGRhdGFzZXQgV0hFUkUgdGltZXN0YW1wID49IE5PVygpIC0gSU5URVJWQUwgJzEnIEhPVVIgR1JPVVAgQlkgYmxvYjEiCmBgYAoKIyMjIENvbHVtbiBSZWZlcmVuY2VzCgpgYGBzcWwKLS0gYmxvYjEuLmJsb2IyMCwgZG91YmxlMS4uZG91YmxlMjAsIGluZGV4MSwgdGltZXN0YW1wClNFTEVDVCBibG9iMSBBUyBlbmRwb2ludCwgU1VNKGRvdWJsZTEpIEFTIGxhdGVuY3ksIENPVU5UKCopIEFTIHJlcXVlc3RzCkZST00gbXlfZGF0YXNldApXSEVSRSBpbmRleDEgPSAnY3VzdG9tZXJfMTIzJyBBTkQgdGltZXN0YW1wID49IE5PVygpIC0gSU5URVJWQUwgJzcnIERBWQpHUk9VUCBCWSBibG9iMQpIQVZJTkcgQ09VTlQoKikgPiAxMDAKT1JERVIgQlkgcmVxdWVzdHMgREVTQyBMSU1JVCAxMDAKYGBgCgoqKkFnZ3JlZ2F0aW9uczoqKiBgU1VNKClgLCBgQVZHKClgLCBgQ09VTlQoKWAsIGBNSU4oKWAsIGBNQVgoKWAsIGBxdWFudGlsZSgwLjk1KSgpYAoKKipUaW1lIHJhbmdlczoqKiBgTk9XKCkgLSBJTlRFUlZBTCAnMScgSE9VUmAsIGBCRVRXRUVOICcyMDI2LTAxLTAxJyBBTkQgJzIwMjYtMDEtMzEnYAoKIyMjIFF1ZXJ5IEV4YW1wbGVzCgpgYGBzcWwKLS0gVG9wIGVuZHBvaW50cwpTRUxFQ1QgYmxvYjEsIENPVU5UKCopIEFTIHJlcXVlc3RzLCBBVkcoZG91YmxlMSkgQVMgYXZnX2xhdGVuY3kKRlJPTSBhcGlfcmVxdWVzdHMgV0hFUkUgdGltZXN0YW1wID49IE5PVygpIC0gSU5URVJWQUwgJzI0JyBIT1VSCkdST1VQIEJZIGJsb2IxIE9SREVSIEJZIHJlcXVlc3RzIERFU0MgTElNSVQgMjAKCi0tIEVycm9yIHJhdGUKU0VMRUNUIGJsb2IxLCBDT1VOVCgqKSBBUyB0b3RhbCwKICBTVU0oQ0FTRSBXSEVOIGJsb2IzIExJS0UgJzUlJyBUSEVOIDEgRUxTRSAwIEVORCkgQVMgZXJyb3JzCkZST00gYXBpX3JlcXVlc3RzIFdIRVJFIHRpbWVzdGFtcCA+PSBOT1coKSAtIElOVEVSVkFMICcxJyBIT1VSCkdST1VQIEJZIGJsb2IxIEhBVklORyB0b3RhbCA+IDUwCgotLSBQOTUgbGF0ZW5jeQpTRUxFQ1QgYmxvYjEsIHF1YW50aWxlKDAuOTUpKGRvdWJsZTEpIEFTIHA5NQpGUk9NIGFwaV9yZXF1ZXN0cyBHUk9VUCBCWSBibG9iMQpgYGAKCiMjIFJlc3BvbnNlIEZvcm1hdAoKYGBganNvbgp7ImRhdGEiOiBbeyJlbmRwb2ludCI6ICIvYXBpL3VzZXJzIiwgInJlcXVlc3RzIjogMTUyM31dLCAicm93cyI6IDJ9CmBgYAoKIyMgTGltaXRzCgp8IFJlc291cmNlIHwgTGltaXQgfAp8LS0tLS0tLS0tLXwtLS0tLS0tfAp8IEJsb2JzL0RvdWJsZXMgcGVyIHBvaW50IHwgMjAgZWFjaCB8CnwgSW5kZXhlcyBwZXIgcG9pbnQgfCAxIHwKfCBCbG9iL0luZGV4IHNpemUgfCAxNktCIHwKfCBEYXRhIHJldGVudGlvbiB8IDkwIGRheXMgfAp8IFF1ZXJ5IHRpbWVvdXQgfCAzMHMgfAoKKipDcml0aWNhbDoqKiBIaWdoIHdyaXRlIHZvbHVtZXMgKD4xTS9taW4pIHRyaWdnZXIgYXV0b21hdGljIHNhbXBsaW5nLgo=
+# Analytics Engine API Reference
+
+## Writing Data
+
+### `writeDataPoint()`
+
+Fire-and-forget (returns `void`, not Promise). Writes happen asynchronously.
+
+```typescript
+interface AnalyticsEngineDataPoint {
+  blobs?: string[];      // Up to 20 strings (dimensions), 16KB each
+  doubles?: number[];    // Up to 20 numbers (metrics)
+  indexes?: string[];    // 1 indexed string for high-cardinality filtering
+}
+
+env.ANALYTICS.writeDataPoint({
+  blobs: ["/api/users", "GET", "200"],
+  doubles: [145.2, 1],  // latency_ms, count
+  indexes: ["customer_abc123"]
+});
+```
+
+**Behaviors:** No await needed, no error thrown (check tail logs), auto-sampled at high volumes, auto-timestamped.
+
+**Blob vs Index:** Blob for GROUP BY (<100k unique), Index for filter-only (millions unique).
+
+### Full Example
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const start = Date.now();
+    const url = new URL(request.url);
+    try {
+      const response = await handleRequest(request);
+      env.ANALYTICS.writeDataPoint({
+        blobs: [url.pathname, request.method, response.status.toString()],
+        doubles: [Date.now() - start, 1],
+        indexes: [request.headers.get("x-api-key") || "anonymous"]
+      });
+      return response;
+    } catch (error) {
+      env.ANALYTICS.writeDataPoint({
+        blobs: [url.pathname, request.method, "500"],
+        doubles: [Date.now() - start, 1, 0],
+      });
+      throw error;
+    }
+  }
+};
+```
+
+## SQL API (External Only)
+
+```bash
+curl -X POST https://api.cloudflare.com/client/v4/accounts/{account_id}/analytics_engine/sql \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "SELECT blob1 AS endpoint, COUNT(*) AS requests FROM dataset WHERE timestamp >= NOW() - INTERVAL '1' HOUR GROUP BY blob1"
+```
+
+### Column References
+
+```sql
+-- blob1..blob20, double1..double20, index1, timestamp
+SELECT blob1 AS endpoint, SUM(double1) AS latency, COUNT(*) AS requests
+FROM my_dataset
+WHERE index1 = 'customer_123' AND timestamp >= NOW() - INTERVAL '7' DAY
+GROUP BY blob1
+HAVING COUNT(*) > 100
+ORDER BY requests DESC LIMIT 100
+```
+
+**Aggregations:** `SUM()`, `AVG()`, `COUNT()`, `MIN()`, `MAX()`, `quantile(0.95)()`
+
+**Time ranges:** `NOW() - INTERVAL '1' HOUR`, `BETWEEN '2026-01-01' AND '2026-01-31'`
+
+### Query Examples
+
+```sql
+-- Top endpoints
+SELECT blob1, COUNT(*) AS requests, AVG(double1) AS avg_latency
+FROM api_requests WHERE timestamp >= NOW() - INTERVAL '24' HOUR
+GROUP BY blob1 ORDER BY requests DESC LIMIT 20
+
+-- Error rate
+SELECT blob1, COUNT(*) AS total,
+  SUM(CASE WHEN blob3 LIKE '5%' THEN 1 ELSE 0 END) AS errors
+FROM api_requests WHERE timestamp >= NOW() - INTERVAL '1' HOUR
+GROUP BY blob1 HAVING total > 50
+
+-- P95 latency
+SELECT blob1, quantile(0.95)(double1) AS p95
+FROM api_requests GROUP BY blob1
+```
+
+## Response Format
+
+```json
+{"data": [{"endpoint": "/api/users", "requests": 1523}], "rows": 2}
+```
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Blobs/Doubles per point | 20 each |
+| Indexes per point | 1 |
+| Blob/Index size | 16KB |
+| Data retention | 90 days |
+| Query timeout | 30s |
+
+**Critical:** High write volumes (>1M/min) trigger automatic sampling.

@@ -1,1 +1,75 @@
-IyBDbG91ZGZsYXJlIFIyIERhdGEgQ2F0YWxvZwoKTWFuYWdlZCBBcGFjaGUgSWNlYmVyZyBSRVNUIGNhdGFsb2cgYnVpbHQgaW50byBSMiBidWNrZXRzLiBObyBjYXRhbG9nIHNlcnZlcnMgdG8gcnVuLgoKIyMgRG9jdW1lbnRhdGlvbgoKVGhpcyByZWZlcmVuY2UgaXMgYSBmYXN0LXN0YXJ0IHdpdGggdmVyaWZpZWQgY29ubmVjdGlvbiBkZXRhaWxzIGFuZCBjb2RlLiBGb3IgbGltaXRzLCBtYWludGVuYW5jZSBzZXR0aW5ncywgZW5naW5lIGNvbmZpZyBleGFtcGxlcywgYW5kIHByaWNpbmcsICoqcmV0cmlldmUgdGhlIGxpdmUgZG9jcyoqIOKAlCB1c2UgdGhlIENsb3VkZmxhcmUgTUNQIGBkb2NzYCB0b29sIGlmIGF2YWlsYWJsZSwgb3RoZXJ3aXNlIGB3ZWJmZXRjaGAgdGhlIFVSTC4gRG9jcyBhcmUgc291cmNlIG9mIHRydXRoIG92ZXIgdGhpcyBmaWxlLgoKfCBUb3BpYyB8IFVSTCB8CnwtLS0tLS0tfC0tLS0tfAp8IE92ZXJ2aWV3IC8gZ2V0IHN0YXJ0ZWQgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyL2RhdGEtY2F0YWxvZy9nZXQtc3RhcnRlZC9gIHwKfCBNYW5hZ2UgY2F0YWxvZ3MgKGVuYWJsZSwgdG9rZW5zKSB8IGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjIvZGF0YS1jYXRhbG9nL21hbmFnZS1jYXRhbG9ncy9gIHwKfCBFbmdpbmUgY29uZmlnIGV4YW1wbGVzIHwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yMi9kYXRhLWNhdGFsb2cvY29uZmlnLWV4YW1wbGVzL2AgKGBweWljZWJlcmcvYCwgYHNwYXJrLXB5dGhvbi9gLCBgc3Bhcmstc2NhbGEvYCwgYGR1Y2tkYi9gLCBgc25vd2ZsYWtlL2AsIGB0cmluby9gLCBgc3RhcnJvY2tzL2ApIHwKfCBUYWJsZSBtYWludGVuYW5jZSAoY29tcGFjdGlvbiwgc25hcHNob3RzKSB8IGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vcjIvZGF0YS1jYXRhbG9nL3RhYmxlLW1haW50ZW5hbmNlL2AgfAp8IERlbGV0aW5nIGRhdGEgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyL2RhdGEtY2F0YWxvZy9kZWxldGluZy1kYXRhL2AgfAp8IE1ldHJpY3MgKEdyYXBoUUwpIHwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yMi9kYXRhLWNhdGFsb2cvb2JzZXJ2YWJpbGl0eS9tZXRyaWNzL2AgfAp8IFByaWNpbmcgfCBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3IyL2RhdGEtY2F0YWxvZy9wbGF0Zm9ybS9wcmljaW5nL2AgfAp8IEljZWJlcmcgc3BlYyB8IGBodHRwczovL2ljZWJlcmcuYXBhY2hlLm9yZy9zcGVjL2AgfAoKIyMgQ29ubmVjdGlvbiBWYWx1ZXMKClVzZSB0aGUgZXhhY3QgKipDYXRhbG9nIFVSSSoqIGFuZCAqKldhcmVob3VzZSoqIHByaW50ZWQgYnkgYG5weCB3cmFuZ2xlciByMiBidWNrZXQgY2F0YWxvZyBlbmFibGUgPGJ1Y2tldD5gIChhbHNvIHNob3duIGluIHRoZSBkYXNoYm9hcmQpLiBUaGV5IGZvbGxvdyB0aGVzZSBmb3JtYXRzOgoKfCBWYWx1ZSB8IEZvcm1hdCB8IEV4YW1wbGUgfAp8LS0tLS0tLXwtLS0tLS0tLXwtLS0tLS0tLS18CnwgQ2F0YWxvZyBVUkkgfCBgaHR0cHM6Ly9jYXRhbG9nLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS97QUNDT1VOVF9JRH0ve0JVQ0tFVH1gIHwgYGh0dHBzOi8vY2F0YWxvZy5jbG91ZGZsYXJlc3RvcmFnZS5jb20vNDQ4MmExLi4uL2xpdmUtZGF0YWAgfAp8IFdhcmVob3VzZSB8IGB7QUNDT1VOVF9JRH1fe0JVQ0tFVH1gIChoeXBoZW5zIHByZXNlcnZlZCkgfCBgNDQ4MmExLi4uX2xpdmUtZGF0YWAgfAp8IFRva2VuIHwgUjIgQVBJIHRva2VuIChBZG1pbiBSJlcgb24gU3RvcmFnZSArIFImVyBvbiBEYXRhIENhdGFsb2cpIHwgYGNmdXRfLi4uYCB8CgpUaGUgSWNlYmVyZyBgL2NvbmZpZ2Agcm91dGUgbmVlZHMgYD93YXJlaG91c2U9e1dBUkVIT1VTRX1gLgoKIyMgQXJjaGl0ZWN0dXJlCgpgYGAKRW5naW5lcyAoUHlJY2ViZXJnLCBQeVNwYXJrLCBUcmlubywgU25vd2ZsYWtlLCBEdWNrREIsIFIyIFNRTCkKICAg4pSCICBJY2ViZXJnIFJFU1QgQVBJIChCZWFyZXIgdG9rZW4pCiAgIOKWvApSMiBEYXRhIENhdGFsb2cgIOKUgOKUgCBuYW1lc3BhY2UvdGFibGUgbWV0YWRhdGEsIHNuYXBzaG90cywgdHhuIGNvb3JkaW5hdGlvbgogICDilIIgIHZlbmRlZCBTMyBjcmVkZW50aWFscwogICDilrwKUjIgQnVja2V0ICDilIDilIAgUGFycXVldCBkYXRhIGZpbGVzICsgSWNlYmVyZyBtZXRhZGF0YQpgYGAKCi0gKipXYXJlaG91c2UqKiDigJQgdG9wLWxldmVsIGNhdGFsb2cgZ3JvdXBpbmcgKGB7QUNDT1VOVF9JRH1fe0JVQ0tFVH1gKQotICoqTmFtZXNwYWNlKiog4oCUIHNjaGVtYS9kYXRhYmFzZTsgbmVzdGVkIG5hbWVzcGFjZXMgc3VwcG9ydGVkCi0gKipUYWJsZSoqIOKAlCBJY2ViZXJnIHRhYmxlIChzY2hlbWEsIHBhcnRpdGlvbiBzcGVjLCBzbmFwc2hvdHMpCi0gKipWZW5kZWQgY3JlZGVudGlhbHMqKiDigJQgdGVtcCBTMyBjcmVkcyB0aGUgY2F0YWxvZyBoYW5kcyBlbmdpbmVzIChgWC1JY2ViZXJnLUFjY2Vzcy1EZWxlZ2F0aW9uOiB2ZW5kZWQtY3JlZGVudGlhbHNgKQoKIyMgV2hlbiB0byBVc2UKCioqVXNlIGZvcjoqKiBsb2cvYW5hbHl0aWNzIGRhdGEgbGFrZXMsIEJJIHBpcGVsaW5lcywgdGltZS1zZXJpZXMvZXZlbnQgZGF0YSwgbXVsdGktY2xvdWQgb3IgbXVsdGktZW5naW5lIGFuYWx5dGljcyBuZWVkaW5nIEFDSUQgKyBzY2hlbWEgZXZvbHV0aW9uIG9uIG9iamVjdCBzdG9yYWdlLgoKKipEb24ndCB1c2UgZm9yOioqIE9MVFAgKHVzZSBEMS9hIGRhdGFiYXNlKSwgc3ViLXNlY29uZCBwb2ludCBsb29rdXBzLCB0aW55IGRhdGFzZXRzICg8MSBHQiksIG9yIHVuc3RydWN0dXJlZCBibG9icyAoc3RvcmUgZGlyZWN0bHkgaW4gUjIpLgoKIyMgVHdvIEFQSXMg4oCUIERvbid0IENvbmZ1c2UgVGhlbQoKfCBBUEkgfCBCYXNlIHwgVXNlIGZvciB8CnwtLS0tLXwtLS0tLS18LS0tLS0tLS0tfAp8ICoqSWNlYmVyZyBSRVNUIGNhdGFsb2cqKiB8IGBodHRwczovL2NhdGFsb2cuY2xvdWRmbGFyZXN0b3JhZ2UuY29tL3tBQ0NPVU5UX0lEfS97QlVDS0VUfWAgfCBUYWJsZSByZWFkcy93cml0ZXMgdmlhIFB5SWNlYmVyZywgUHlTcGFyaywgVHJpbm8sIGV0Yy4gfAp8ICoqQ29udHJvbC1wbGFuZSBSRVNUIEFQSSoqIHwgYGh0dHBzOi8vYXBpLmNsb3VkZmxhcmUuY29tL2NsaWVudC92NC9hY2NvdW50cy97QUNDT1VOVF9JRH0vcjItY2F0YWxvZy97QlVDS0VUfWAgfCBFbmFibGUvZGlzYWJsZSwgbWFpbnRlbmFuY2UgY29uZmlnLCBsaXN0IG5hbWVzcGFjZXMvdGFibGVzLCBnZXQtdGFibGUgfAoKKipTdGF0dXM6KiogT3BlbiBiZXRhLiBBdmFpbGFibGUgdG8gYWxsIFIyIHN1YnNjcmliZXJzOyB2ZXJpZnkgcHJpY2luZy9iaWxsaW5nIHN0YXR1cyBpbiBkb2NzLgoKIyMgUmVhZGluZyBPcmRlcgoKMS4gW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIOKAlCBlbmFibGUgY2F0YWxvZywgdG9rZW5zLCBtYWludGVuYW5jZSwgY2xpZW50IGNvbm5lY3Rpb24KMi4gW2FwaS5tZF0oYXBpLm1kKSDigJQgY29udHJvbC1wbGFuZSBSRVNUIChpbmNsLiBnZXQtdGFibGUpLCBQeUljZWJlcmcgY2xpZW50LCBtYWludGVuYW5jZQozLiBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kKSDigJQgUHlJY2ViZXJnICsgUHlTcGFyayB0ZW1wbGF0ZXMsIHBhcnRpdGlvbmluZywgZXh0ZXJuYWwgZW5naW5lcwo0LiBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkg4oCUIGF1dGggZXJyb3JzLCBtYWludGVuYW5jZSBiZWhhdmlvciwgdHJvdWJsZXNob290aW5nCgojIyBTZWUgQWxzbwoKLSBbcGlwZWxpbmVzXSguLi9waXBlbGluZXMvKSDigJQgc3RyZWFtIGV2ZW50cyBpbnRvIEljZWJlcmcgdGFibGVzCi0gW3IyLXNxbF0oLi4vcjItc3FsLykg4oCUIHNlcnZlcmxlc3MgU1FMIG92ZXIgdGhlc2UgdGFibGVzCi0gW3IyXSguLi9yMi8pIOKAlCB1bmRlcmx5aW5nIG9iamVjdCBzdG9yYWdlCg==
+# Cloudflare R2 Data Catalog
+
+Managed Apache Iceberg REST catalog built into R2 buckets. No catalog servers to run.
+
+## Documentation
+
+This reference is a fast-start with verified connection details and code. For limits, maintenance settings, engine config examples, and pricing, **retrieve the live docs** — use the Cloudflare MCP `docs` tool if available, otherwise `webfetch` the URL. Docs are source of truth over this file.
+
+| Topic | URL |
+|-------|-----|
+| Overview / get started | `https://developers.cloudflare.com/r2/data-catalog/get-started/` |
+| Manage catalogs (enable, tokens) | `https://developers.cloudflare.com/r2/data-catalog/manage-catalogs/` |
+| Engine config examples | `https://developers.cloudflare.com/r2/data-catalog/config-examples/` (`pyiceberg/`, `spark-python/`, `spark-scala/`, `duckdb/`, `snowflake/`, `trino/`, `starrocks/`) |
+| Table maintenance (compaction, snapshots) | `https://developers.cloudflare.com/r2/data-catalog/table-maintenance/` |
+| Deleting data | `https://developers.cloudflare.com/r2/data-catalog/deleting-data/` |
+| Metrics (GraphQL) | `https://developers.cloudflare.com/r2/data-catalog/observability/metrics/` |
+| Pricing | `https://developers.cloudflare.com/r2/data-catalog/platform/pricing/` |
+| Iceberg spec | `https://iceberg.apache.org/spec/` |
+
+## Connection Values
+
+Use the exact **Catalog URI** and **Warehouse** printed by `npx wrangler r2 bucket catalog enable <bucket>` (also shown in the dashboard). They follow these formats:
+
+| Value | Format | Example |
+|-------|--------|---------|
+| Catalog URI | `https://catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}` | `https://catalog.cloudflarestorage.com/4482a1.../live-data` |
+| Warehouse | `{ACCOUNT_ID}_{BUCKET}` (hyphens preserved) | `4482a1..._live-data` |
+| Token | R2 API token (Admin R&W on Storage + R&W on Data Catalog) | `cfut_...` |
+
+The Iceberg `/config` route needs `?warehouse={WAREHOUSE}`.
+
+## Architecture
+
+```
+Engines (PyIceberg, PySpark, Trino, Snowflake, DuckDB, R2 SQL)
+   │  Iceberg REST API (Bearer token)
+   ▼
+R2 Data Catalog  ── namespace/table metadata, snapshots, txn coordination
+   │  vended S3 credentials
+   ▼
+R2 Bucket  ── Parquet data files + Iceberg metadata
+```
+
+- **Warehouse** — top-level catalog grouping (`{ACCOUNT_ID}_{BUCKET}`)
+- **Namespace** — schema/database; nested namespaces supported
+- **Table** — Iceberg table (schema, partition spec, snapshots)
+- **Vended credentials** — temp S3 creds the catalog hands engines (`X-Iceberg-Access-Delegation: vended-credentials`)
+
+## When to Use
+
+**Use for:** log/analytics data lakes, BI pipelines, time-series/event data, multi-cloud or multi-engine analytics needing ACID + schema evolution on object storage.
+
+**Don't use for:** OLTP (use D1/a database), sub-second point lookups, tiny datasets (<1 GB), or unstructured blobs (store directly in R2).
+
+## Two APIs — Don't Confuse Them
+
+| API | Base | Use for |
+|-----|------|---------|
+| **Iceberg REST catalog** | `https://catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}` | Table reads/writes via PyIceberg, PySpark, Trino, etc. |
+| **Control-plane REST API** | `https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/r2-catalog/{BUCKET}` | Enable/disable, maintenance config, list namespaces/tables, get-table |
+
+**Status:** Open beta. Available to all R2 subscribers; verify pricing/billing status in docs.
+
+## Reading Order
+
+1. [configuration.md](configuration.md) — enable catalog, tokens, maintenance, client connection
+2. [api.md](api.md) — control-plane REST (incl. get-table), PyIceberg client, maintenance
+3. [patterns.md](patterns.md) — PyIceberg + PySpark templates, partitioning, external engines
+4. [gotchas.md](gotchas.md) — auth errors, maintenance behavior, troubleshooting
+
+## See Also
+
+- [pipelines](../pipelines/) — stream events into Iceberg tables
+- [r2-sql](../r2-sql/) — serverless SQL over these tables
+- [r2](../r2/) — underlying object storage

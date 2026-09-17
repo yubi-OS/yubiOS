@@ -1,1 +1,190 @@
-IyBSMiBHb3RjaGFzICYgVHJvdWJsZXNob290aW5nCgojIyBMaXN0IFRydW5jYXRpb24KCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HOiBEb24ndCBjb21wYXJlIG9iamVjdCBjb3VudCB3aGVuIHVzaW5nIGluY2x1ZGUKd2hpbGUgKGxpc3RlZC5vYmplY3RzLmxlbmd0aCA8IG9wdGlvbnMubGltaXQpIHsgLi4uIH0KCi8vIOKchSBDT1JSRUNUOiBBbHdheXMgdXNlIHRydW5jYXRlZCBwcm9wZXJ0eQp3aGlsZSAobGlzdGVkLnRydW5jYXRlZCkgewogIGNvbnN0IG5leHQgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmxpc3QoeyBjdXJzb3I6IGxpc3RlZC5jdXJzb3IgfSk7CiAgLy8gLi4uCn0KYGBgCgoqKlJlYXNvbjoqKiBgaW5jbHVkZWAgd2l0aCBtZXRhZGF0YSBtYXkgcmV0dXJuIGZld2VyIG9iamVjdHMgcGVyIHBhZ2UgdG8gZml0IG1ldGFkYXRhLgoKIyMgRVRhZyBGb3JtYXQKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HOiBVc2luZyBldGFnICh1bnF1b3RlZCkgaW4gaGVhZGVycwpoZWFkZXJzLnNldCgnZXRhZycsIG9iamVjdC5ldGFnKTsgLy8gTWlzc2luZyBxdW90ZXMKCi8vIOKchSBDT1JSRUNUOiBVc2UgaHR0cEV0YWcgKHF1b3RlZCkKaGVhZGVycy5zZXQoJ2V0YWcnLCBvYmplY3QuaHR0cEV0YWcpOwpgYGAKCiMjIENoZWNrc3VtIExpbWl0cwoKT25seSBPTkUgY2hlY2tzdW0gYWxnb3JpdGhtIGFsbG93ZWQgcGVyIFBVVDoKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HOiBNdWx0aXBsZSBjaGVja3N1bXMKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5wdXQoa2V5LCBkYXRhLCB7IG1kNTogaGFzaDEsIHNoYTI1NjogaGFzaDIgfSk7IC8vIEVycm9yCgovLyDinIUgQ09SUkVDVDogUGljayBvbmUKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5wdXQoa2V5LCBkYXRhLCB7IHNoYTI1NjogaGFzaCB9KTsKYGBgCgojIyBNdWx0aXBhcnQgUmVxdWlyZW1lbnRzCgotIEFsbCBwYXJ0cyBtdXN0IGJlIHVuaWZvcm0gc2l6ZSAoZXhjZXB0IGxhc3QgcGFydCkKLSBQYXJ0IG51bWJlcnMgc3RhcnQgYXQgMSAobm90IDApCi0gVW5jb21wbGV0ZWQgdXBsb2FkcyBhdXRvLWFib3J0IGFmdGVyIDcgZGF5cwotIGByZXN1bWVNdWx0aXBhcnRVcGxvYWRgIGRvZXNuJ3QgdmFsaWRhdGUgdXBsb2FkSWQgZXhpc3RlbmNlCgojIyBDb25kaXRpb25hbCBPcGVyYXRpb25zCgpgYGB0eXBlc2NyaXB0Ci8vIFByZWNvbmRpdGlvbiBmYWlsdXJlIHJldHVybnMgb2JqZWN0IFdJVEhPVVQgYm9keQpjb25zdCBvYmplY3QgPSBhd2FpdCBlbnYuTVlfQlVDS0VULmdldChrZXksIHsKICBvbmx5SWY6IHsgZXRhZ01hdGNoZXM6ICcid3JvbmciJyB9Cn0pOwoKLy8gQ2hlY2sgZm9yIGJvZHksIG5vdCBqdXN0IG51bGwKaWYgKCFvYmplY3QpIHJldHVybiBuZXcgUmVzcG9uc2UoJ05vdCBmb3VuZCcsIHsgc3RhdHVzOiA0MDQgfSk7CmlmICghb2JqZWN0LmJvZHkpIHJldHVybiBuZXcgUmVzcG9uc2UobnVsbCwgeyBzdGF0dXM6IDMwNCB9KTsgLy8gUHJlY29uZGl0aW9uIGZhaWxlZApgYGAKCiMjIEtleSBWYWxpZGF0aW9uCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBEQU5HRVJPVVM6IFBhdGggdHJhdmVyc2FsCmNvbnN0IGtleSA9IHVybC5wYXRobmFtZS5zbGljZSgxKTsgLy8gQ291bGQgYmUgLi4vLi4vLi4vZXRjL3Bhc3N3ZAphd2FpdCBlbnYuTVlfQlVDS0VULmdldChrZXkpOwoKLy8g4pyFIFNBRkU6IFZhbGlkYXRlIGtleXMKaWYgKCFrZXkgfHwga2V5LmluY2x1ZGVzKCcuLicpIHx8IGtleS5zdGFydHNXaXRoKCcvJykpIHsKICByZXR1cm4gbmV3IFJlc3BvbnNlKCdJbnZhbGlkIGtleScsIHsgc3RhdHVzOiA0MDAgfSk7Cn0KYGBgCgojIyBTdG9yYWdlIENsYXNzIFBpdGZhbGxzCgotIEluZnJlcXVlbnRBY2Nlc3M6IDMwLWRheSBtaW5pbXVtIGJpbGxpbmcgKGV2ZW4gaWYgZGVsZXRlZCBlYXJseSkKLSBDYW4ndCB0cmFuc2l0aW9uIElBIOKGkiBTdGFuZGFyZCB2aWEgbGlmZWN5Y2xlICh1c2UgUzMgQ29weU9iamVjdCkKLSBSZXRyaWV2YWwgZmVlcyBhcHBseSBmb3IgSUEgcmVhZHMKCiMjIFN0cmVhbSBMZW5ndGggUmVxdWlyZW1lbnQKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIFdST05HOiBTdHJlYW1pbmcgdW5rbm93biBsZW5ndGggZmFpbHMgc2lsZW50bHkKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaCh1cmwpOwphd2FpdCBlbnYuTVlfQlVDS0VULnB1dChrZXksIHJlc3BvbnNlLmJvZHkpOyAvLyBNYXkgZmFpbCB3aXRob3V0IGVycm9yCgovLyDinIUgQ09SUkVDVDogQnVmZmVyIG9yIHVzZSBDb250ZW50LUxlbmd0aApjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTsKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5wdXQoa2V5LCBkYXRhKTsKCi8vIE9SOiBQYXNzIENvbnRlbnQtTGVuZ3RoIGlmIGtub3duCmNvbnN0IG9iamVjdCA9IGF3YWl0IGVudi5NWV9CVUNLRVQucHV0KGtleSwgcmVxdWVzdC5ib2R5LCB7CiAgaHR0cE1ldGFkYXRhOiB7CiAgICBjb250ZW50TGVuZ3RoOiBwYXJzZUludChyZXF1ZXN0LmhlYWRlcnMuZ2V0KCdjb250ZW50LWxlbmd0aCcpIHx8ICcwJykKICB9Cn0pOwpgYGAKCioqUmVhc29uOioqIFIyIHJlcXVpcmVzIGtub3duIGxlbmd0aCBmb3Igc3RyZWFtcy4gVW5rbm93biBsZW5ndGggbWF5IGNhdXNlIHNpbGVudCB0cnVuY2F0aW9uLgoKIyMgUzMgU0RLIFJlZ2lvbiBDb25maWd1cmF0aW9uCgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBXUk9ORzogTWlzc2luZyByZWdpb24gYnJlYWtzIEFMTCBTMyBTREsgY2FsbHMKY29uc3QgczMgPSBuZXcgUzNDbGllbnQoewogIGVuZHBvaW50OiBgaHR0cHM6Ly8ke2FjY291bnRJZH0ucjIuY2xvdWRmbGFyZXN0b3JhZ2UuY29tYCwKICBjcmVkZW50aWFsczogeyAuLi4gfQp9KTsKCi8vIOKchSBDT1JSRUNUOiBNVVNUIHNldCByZWdpb249J2F1dG8nCmNvbnN0IHMzID0gbmV3IFMzQ2xpZW50KHsKICByZWdpb246ICdhdXRvJywgLy8gUkVRVUlSRUQKICBlbmRwb2ludDogYGh0dHBzOi8vJHthY2NvdW50SWR9LnIyLmNsb3VkZmxhcmVzdG9yYWdlLmNvbWAsCiAgY3JlZGVudGlhbHM6IHsgLi4uIH0KfSk7CmBgYAoKKipSZWFzb246KiogUzMgU0RLIHJlcXVpcmVzIHJlZ2lvbi4gUjIgdXNlcyAnYXV0bycgYXMgcGxhY2Vob2xkZXIuCgojIyBMb2NhbCBEZXZlbG9wbWVudCBMaW1pdHMKCmBgYHR5cGVzY3JpcHQKLy8g4p2MIE1pbmlmbGFyZS93cmFuZ2xlciBkZXY6IExpbWl0ZWQgUjIgc3VwcG9ydAovLyAtIE5vIG11bHRpcGFydCB1cGxvYWRzCi8vIC0gTm8gcHJlc2lnbmVkIFVSTHMgKHJlcXVpcmVzIFMzIFNESyArIG5ldHdvcmspCi8vIC0gTWVtb3J5LWJhY2tlZCBzdG9yYWdlIChsb3N0IG9uIHJlc3RhcnQpCgovLyDinIUgVXNlIHJlbW90ZSBiaW5kaW5ncyBmb3IgZnVsbCBmZWF0dXJlcwp3cmFuZ2xlciBkZXYgLS1yZW1vdGUKCi8vIE9SOiBDb25kaXRpb25hbCBsb2dpYwppZiAoZW52LkVOVklST05NRU5UID09PSAnZGV2ZWxvcG1lbnQnKSB7CiAgLy8gRmFsbGJhY2sgZm9yIGxvY2FsIGRldgp9IGVsc2UgewogIC8vIEZ1bGwgUjIgZmVhdHVyZXMKfQpgYGAKCiMjIFByZXNpZ25lZCBVUkwgRXhwaXJ5CgpgYGB0eXBlc2NyaXB0Ci8vIOKdjCBXUk9ORzogVVJMIGV4cGlyZXMgYnV0IG5vIGNsaWVudCB2YWxpZGF0aW9uCmNvbnN0IHVybCA9IGF3YWl0IGdldFNpZ25lZFVybChzMywgY29tbWFuZCwgeyBleHBpcmVzSW46IDYwIH0pOwovLyA2MSBzZWNvbmRzIGxhdGVyOiA0MDMgRm9yYmlkZGVuCgovLyDinIUgQ09SUkVDVDogUmV0dXJuIGV4cGlyeSB0byBjbGllbnQKcmV0dXJuIFJlc3BvbnNlLmpzb24oewogIHVwbG9hZFVybDogdXJsLAogIGV4cGlyZXNBdDogbmV3IERhdGUoRGF0ZS5ub3coKSArIDYwMDAwKS50b0lTT1N0cmluZygpCn0pOwpgYGAKCiMjIExpbWl0cwoKfCBMaW1pdCB8IFZhbHVlIHwKfC0tLS0tLS18LS0tLS0tLXwKfCBPYmplY3Qgc2l6ZSB8IDUgVEIgfAp8IE11bHRpcGFydCBwYXJ0IGNvdW50IHwgMTAsMDAwIHwKfCBNdWx0aXBhcnQgcGFydCBtaW4gc2l6ZSB8IDUgTUIgKGV4Y2VwdCBsYXN0KSB8CnwgQmF0Y2ggZGVsZXRlIHwgMSwwMDAga2V5cyB8CnwgTGlzdCBsaW1pdCB8IDEsMDAwIHBlciByZXF1ZXN0IHwKfCBLZXkgc2l6ZSB8IDEwMjQgYnl0ZXMgfAp8IEN1c3RvbSBtZXRhZGF0YSB8IDIgS0IgcGVyIG9iamVjdCB8CnwgUHJlc2lnbmVkIFVSTCBtYXggZXhwaXJ5IHwgNyBkYXlzIHwKCiMjIENvbW1vbiBFcnJvcnMKCiMjIyAiU3RyZWFtIHVwbG9hZCBmYWlsZWQiIC8gU2lsZW50IFRydW5jYXRpb24KCioqQ2F1c2U6KiogU3RyZWFtIGxlbmd0aCB1bmtub3duIG9yIENvbnRlbnQtTGVuZ3RoIG1pc3NpbmcgIAoqKlNvbHV0aW9uOioqIEJ1ZmZlciBkYXRhIG9yIHBhc3MgZXhwbGljaXQgQ29udGVudC1MZW5ndGgKCiMjIyAiSW52YWxpZCBjcmVkZW50aWFscyIgLyBTMyBTREsKCioqQ2F1c2U6KiogTWlzc2luZyBgcmVnaW9uOiAnYXV0bydgIGluIFMzQ2xpZW50IGNvbmZpZyAgCioqU29sdXRpb246KiogQWx3YXlzIHNldCBgcmVnaW9uOiAnYXV0bydgIGZvciBSMgoKIyMjICJPYmplY3Qgbm90IGZvdW5kIgoKKipDYXVzZToqKiBPYmplY3Qga2V5IGRvZXNuJ3QgZXhpc3Qgb3Igd2FzIGRlbGV0ZWQgIAoqKlNvbHV0aW9uOioqIFZlcmlmeSBvYmplY3Qga2V5IGNvcnJlY3QsIGNoZWNrIGlmIG9iamVjdCB3YXMgZGVsZXRlZCwgZW5zdXJlIGJ1Y2tldCBjb3JyZWN0CgojIyMgIkxpc3QgY29tcGF0aWJpbGl0eSBlcnJvciIKCioqQ2F1c2U6KiogTWlzc2luZyBvciBvbGQgY29tcGF0aWJpbGl0eV9kYXRlLCBvciBmbGFnIG5vdCBlbmFibGVkICAKKipTb2x1dGlvbjoqKiBTZXQgYGNvbXBhdGliaWxpdHlfZGF0ZSA+PSAyMDIyLTA4LTA0YCBvciBlbmFibGUgYHIyX2xpc3RfaG9ub3JfaW5jbHVkZWAgZmxhZwoKIyMjICJNdWx0aXBhcnQgdXBsb2FkIGZhaWxlZCIKCioqQ2F1c2U6KiogUGFydCBzaXplcyBub3QgdW5pZm9ybSBvciBpbmNvcnJlY3QgcGFydCBudW1iZXIgIAoqKlNvbHV0aW9uOioqIEVuc3VyZSB1bmlmb3JtIHNpemUgZXhjZXB0IGZpbmFsIHBhcnQsIHZlcmlmeSBwYXJ0IG51bWJlcnMgc3RhcnQgYXQgMQo=
+# R2 Gotchas & Troubleshooting
+
+## List Truncation
+
+```typescript
+// ❌ WRONG: Don't compare object count when using include
+while (listed.objects.length < options.limit) { ... }
+
+// ✅ CORRECT: Always use truncated property
+while (listed.truncated) {
+  const next = await env.MY_BUCKET.list({ cursor: listed.cursor });
+  // ...
+}
+```
+
+**Reason:** `include` with metadata may return fewer objects per page to fit metadata.
+
+## ETag Format
+
+```typescript
+// ❌ WRONG: Using etag (unquoted) in headers
+headers.set('etag', object.etag); // Missing quotes
+
+// ✅ CORRECT: Use httpEtag (quoted)
+headers.set('etag', object.httpEtag);
+```
+
+## Checksum Limits
+
+Only ONE checksum algorithm allowed per PUT:
+
+```typescript
+// ❌ WRONG: Multiple checksums
+await env.MY_BUCKET.put(key, data, { md5: hash1, sha256: hash2 }); // Error
+
+// ✅ CORRECT: Pick one
+await env.MY_BUCKET.put(key, data, { sha256: hash });
+```
+
+## Multipart Requirements
+
+- All parts must be uniform size (except last part)
+- Part numbers start at 1 (not 0)
+- Uncompleted uploads auto-abort after 7 days
+- `resumeMultipartUpload` doesn't validate uploadId existence
+
+## Conditional Operations
+
+```typescript
+// Precondition failure returns object WITHOUT body
+const object = await env.MY_BUCKET.get(key, {
+  onlyIf: { etagMatches: '"wrong"' }
+});
+
+// Check for body, not just null
+if (!object) return new Response('Not found', { status: 404 });
+if (!object.body) return new Response(null, { status: 304 }); // Precondition failed
+```
+
+## Key Validation
+
+```typescript
+// ❌ DANGEROUS: Path traversal
+const key = url.pathname.slice(1); // Could be ../../../etc/passwd
+await env.MY_BUCKET.get(key);
+
+// ✅ SAFE: Validate keys
+if (!key || key.includes('..') || key.startsWith('/')) {
+  return new Response('Invalid key', { status: 400 });
+}
+```
+
+## Storage Class Pitfalls
+
+- InfrequentAccess: 30-day minimum billing (even if deleted early)
+- Can't transition IA → Standard via lifecycle (use S3 CopyObject)
+- Retrieval fees apply for IA reads
+
+## Stream Length Requirement
+
+```typescript
+// ❌ WRONG: Streaming unknown length fails silently
+const response = await fetch(url);
+await env.MY_BUCKET.put(key, response.body); // May fail without error
+
+// ✅ CORRECT: Buffer or use Content-Length
+const data = await response.arrayBuffer();
+await env.MY_BUCKET.put(key, data);
+
+// OR: Pass Content-Length if known
+const object = await env.MY_BUCKET.put(key, request.body, {
+  httpMetadata: {
+    contentLength: parseInt(request.headers.get('content-length') || '0')
+  }
+});
+```
+
+**Reason:** R2 requires known length for streams. Unknown length may cause silent truncation.
+
+## S3 SDK Region Configuration
+
+```typescript
+// ❌ WRONG: Missing region breaks ALL S3 SDK calls
+const s3 = new S3Client({
+  endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+  credentials: { ... }
+});
+
+// ✅ CORRECT: MUST set region='auto'
+const s3 = new S3Client({
+  region: 'auto', // REQUIRED
+  endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+  credentials: { ... }
+});
+```
+
+**Reason:** S3 SDK requires region. R2 uses 'auto' as placeholder.
+
+## Local Development Limits
+
+```typescript
+// ❌ Miniflare/wrangler dev: Limited R2 support
+// - No multipart uploads
+// - No presigned URLs (requires S3 SDK + network)
+// - Memory-backed storage (lost on restart)
+
+// ✅ Use remote bindings for full features
+wrangler dev --remote
+
+// OR: Conditional logic
+if (env.ENVIRONMENT === 'development') {
+  // Fallback for local dev
+} else {
+  // Full R2 features
+}
+```
+
+## Presigned URL Expiry
+
+```typescript
+// ❌ WRONG: URL expires but no client validation
+const url = await getSignedUrl(s3, command, { expiresIn: 60 });
+// 61 seconds later: 403 Forbidden
+
+// ✅ CORRECT: Return expiry to client
+return Response.json({
+  uploadUrl: url,
+  expiresAt: new Date(Date.now() + 60000).toISOString()
+});
+```
+
+## Limits
+
+| Limit | Value |
+|-------|-------|
+| Object size | 5 TB |
+| Multipart part count | 10,000 |
+| Multipart part min size | 5 MB (except last) |
+| Batch delete | 1,000 keys |
+| List limit | 1,000 per request |
+| Key size | 1024 bytes |
+| Custom metadata | 2 KB per object |
+| Presigned URL max expiry | 7 days |
+
+## Common Errors
+
+### "Stream upload failed" / Silent Truncation
+
+**Cause:** Stream length unknown or Content-Length missing  
+**Solution:** Buffer data or pass explicit Content-Length
+
+### "Invalid credentials" / S3 SDK
+
+**Cause:** Missing `region: 'auto'` in S3Client config  
+**Solution:** Always set `region: 'auto'` for R2
+
+### "Object not found"
+
+**Cause:** Object key doesn't exist or was deleted  
+**Solution:** Verify object key correct, check if object was deleted, ensure bucket correct
+
+### "List compatibility error"
+
+**Cause:** Missing or old compatibility_date, or flag not enabled  
+**Solution:** Set `compatibility_date >= 2022-08-04` or enable `r2_list_honor_include` flag
+
+### "Multipart upload failed"
+
+**Cause:** Part sizes not uniform or incorrect part number  
+**Solution:** Ensure uniform size except final part, verify part numbers start at 1

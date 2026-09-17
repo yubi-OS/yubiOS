@@ -1,1 +1,157 @@
-IyBUdW5uZWwgQ29uZmlndXJhdGlvbgoKIyMgQ29uZmlnIFNvdXJjZQoKVHVubmVscyB1c2Ugb25lIG9mIHR3byBjb25maWcgc291cmNlczoKCnwgQ29uZmlnIFNvdXJjZSB8IFN0b3JhZ2UgfCBVcGRhdGVzIHwgVXNlIENhc2UgfAp8LS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS0tLXwKfCBMb2NhbCB8IGBjb25maWcueW1sYCBmaWxlIHwgRWRpdCBmaWxlLCByZXN0YXJ0IHwgRGV2LCBtdWx0aS1lbnYsIHZlcnNpb24gY29udHJvbCB8CnwgQ2xvdWRmbGFyZSB8IERhc2hib2FyZC9BUEkgfCBJbnN0YW50LCBubyByZXN0YXJ0IHwgUHJvZHVjdGlvbiwgY2VudHJhbGl6ZWQgbWFuYWdlbWVudCB8CgoqKlRva2VuLWJhc2VkIHR1bm5lbHMqKiA9IGNvbmZpZyBzb3VyY2U6IENsb3VkZmxhcmUKKipMb2NhbGx5LW1hbmFnZWQgdHVubmVscyoqID0gY29uZmlnIHNvdXJjZTogbG9jYWwKCiMjIENvbmZpZyBGaWxlIExvY2F0aW9uCgpgYGAKfi8uY2xvdWRmbGFyZWQvY29uZmlnLnltbCAgICAgICAgICAjIFVzZXIgY29uZmlnCi9ldGMvY2xvdWRmbGFyZWQvY29uZmlnLnltbCAgICAgICAgIyBTeXN0ZW0td2lkZSAoTGludXgpCmBgYAoKIyMgQmFzaWMgU3RydWN0dXJlCgpgYGB5YW1sCnR1bm5lbDogPFVVSUQ+CmNyZWRlbnRpYWxzLWZpbGU6IC9wYXRoL3RvLzxVVUlEPi5qc29uCgppbmdyZXNzOgogIC0gaG9zdG5hbWU6IGFwcC5leGFtcGxlLmNvbQogICAgc2VydmljZTogaHR0cDovL2xvY2FsaG9zdDo4MDAwCiAgLSBzZXJ2aWNlOiBodHRwX3N0YXR1czo0MDQgICMgUmVxdWlyZWQgY2F0Y2gtYWxsCmBgYAoKIyMgSW5ncmVzcyBSdWxlcwoKUnVsZXMgZXZhbHVhdGVkICoqdG9wIHRvIGJvdHRvbSoqLCBmaXJzdCBtYXRjaCB3aW5zLgoKYGBgeWFtbAppbmdyZXNzOgogICMgRXhhY3QgaG9zdG5hbWUgKyBwYXRoIHJlZ2V4CiAgLSBob3N0bmFtZTogc3RhdGljLmV4YW1wbGUuY29tCiAgICBwYXRoOiBcLihqcGd8cG5nfGNzc3xqcykkCiAgICBzZXJ2aWNlOiBodHRwczovL2xvY2FsaG9zdDo4MDAxCiAgCiAgIyBXaWxkY2FyZCBob3N0bmFtZQogIC0gaG9zdG5hbWU6ICIqLmV4YW1wbGUuY29tIgogICAgc2VydmljZTogaHR0cHM6Ly9sb2NhbGhvc3Q6ODAwMgogIAogICMgUGF0aCBvbmx5IChhbGwgaG9zdG5hbWVzKQogIC0gcGF0aDogL2FwaS8uKgogICAgc2VydmljZTogaHR0cDovL2xvY2FsaG9zdDo5MDAwCiAgCiAgIyBDYXRjaC1hbGwgKHJlcXVpcmVkKQogIC0gc2VydmljZTogaHR0cF9zdGF0dXM6NDA0CmBgYAoKKipWYWxpZGF0aW9uKio6CmBgYGJhc2gKY2xvdWRmbGFyZWQgdHVubmVsIGluZ3Jlc3MgdmFsaWRhdGUKY2xvdWRmbGFyZWQgdHVubmVsIGluZ3Jlc3MgcnVsZSBodHRwczovL2Zvby5leGFtcGxlLmNvbQpgYGAKCiMjIFNlcnZpY2UgVHlwZXMKCnwgUHJvdG9jb2wgfCBGb3JtYXQgfCBDbGllbnQgUmVxdWlyZW1lbnQgfAp8LS0tLS0tLS0tLXwtLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tfAp8IEhUVFAgfCBgaHR0cDovL2xvY2FsaG9zdDo4MDAwYCB8IEJyb3dzZXIgfAp8IEhUVFBTIHwgYGh0dHBzOi8vbG9jYWxob3N0Ojg0NDNgIHwgQnJvd3NlciB8CnwgVENQIHwgYHRjcDovL2xvY2FsaG9zdDoyMjIyYCB8IGBjbG91ZGZsYXJlZCBhY2Nlc3MgdGNwYCB8CnwgU1NIIHwgYHNzaDovL2xvY2FsaG9zdDoyMmAgfCBgY2xvdWRmbGFyZWQgYWNjZXNzIHNzaGAgfAp8IFJEUCB8IGByZHA6Ly9sb2NhbGhvc3Q6MzM4OWAgfCBgY2xvdWRmbGFyZWQgYWNjZXNzIHJkcGAgfAp8IFVuaXggfCBgdW5peDovcGF0aC90by9zb2NrZXRgIHwgQnJvd3NlciB8CnwgVGVzdCB8IGBoZWxsb193b3JsZGAgfCBCcm93c2VyIHwKCiMjIE9yaWdpbiBDb25maWd1cmF0aW9uCgojIyMgQ29ubmVjdGlvbiBTZXR0aW5ncwpgYGB5YW1sCm9yaWdpblJlcXVlc3Q6CiAgY29ubmVjdFRpbWVvdXQ6IDMwcwogIHRsc1RpbWVvdXQ6IDEwcwogIHRjcEtlZXBBbGl2ZTogMzBzCiAga2VlcEFsaXZlVGltZW91dDogOTBzCiAga2VlcEFsaXZlQ29ubmVjdGlvbnM6IDEwMApgYGAKCiMjIyBUTFMgU2V0dGluZ3MKYGBgeWFtbApvcmlnaW5SZXF1ZXN0OgogIG5vVExTVmVyaWZ5OiB0cnVlICAgICAgICAgICAgICAgICAgICAgICMgRGlzYWJsZSBjZXJ0IHZlcmlmaWNhdGlvbgogIG9yaWdpblNlcnZlck5hbWU6ICJhcHAuaW50ZXJuYWwiICAgICAgICMgT3ZlcnJpZGUgU05JCiAgY2FQb29sOiAvcGF0aC90by9jYS5wZW0gICAgICAgICAgICAgICAgIyBDdXN0b20gQ0EKYGBgCgojIyMgSFRUUCBTZXR0aW5ncwpgYGB5YW1sCm9yaWdpblJlcXVlc3Q6CiAgZGlzYWJsZUNodW5rZWRFbmNvZGluZzogdHJ1ZQogIGh0dHBIb3N0SGVhZGVyOiAiYXBwLmludGVybmFsIgogIGh0dHAyT3JpZ2luOiB0cnVlCmBgYAoKIyMgUHJpdmF0ZSBOZXR3b3JrIE1vZGUKCmBgYHlhbWwKdHVubmVsOiA8VVVJRD4KY3JlZGVudGlhbHMtZmlsZTogL3BhdGgvdG8vY3JlZHMuanNvbgoKd2FycC1yb3V0aW5nOgogIGVuYWJsZWQ6IHRydWUKYGBgCgpgYGBiYXNoCmNsb3VkZmxhcmVkIHR1bm5lbCByb3V0ZSBpcCBhZGQgMTAuMC4wLjAvOCBteS10dW5uZWwKY2xvdWRmbGFyZWQgdHVubmVsIHJvdXRlIGlwIGFkZCAxOTIuMTY4LjEuMTAwLzMyIG15LXR1bm5lbApgYGAKCiMjIENvbmZpZyBTb3VyY2UgQ29tcGFyaXNvbgoKIyMjIExvY2FsIENvbmZpZwpgYGB5YW1sCiMgY29uZmlnLnltbAp0dW5uZWw6IDxVVUlEPgpjcmVkZW50aWFscy1maWxlOiAvcGF0aC90by88VVVJRD4uanNvbgoKaW5ncmVzczoKICAtIGhvc3RuYW1lOiBhcHAuZXhhbXBsZS5jb20KICAgIHNlcnZpY2U6IGh0dHA6Ly9sb2NhbGhvc3Q6ODAwMAogIC0gc2VydmljZTogaHR0cF9zdGF0dXM6NDA0CmBgYAoKYGBgYmFzaApjbG91ZGZsYXJlZCB0dW5uZWwgcnVuIG15LXR1bm5lbApgYGAKCioqUHJvczoqKiBWZXJzaW9uIGNvbnRyb2wsIG11bHRpLWVudmlyb25tZW50LCBvZmZsaW5lIGVkaXRzCioqQ29uczoqKiBSZXF1aXJlcyBmaWxlIGRpc3RyaWJ1dGlvbiwgbWFudWFsIHJlc3RhcnRzCgojIyMgQ2xvdWRmbGFyZSBDb25maWcgKFRva2VuLUJhc2VkKQpgYGBiYXNoCiMgTm8gY29uZmlnIGZpbGUgbmVlZGVkCmNsb3VkZmxhcmVkIHR1bm5lbCAtLW5vLWF1dG91cGRhdGUgcnVuIC0tdG9rZW4gPFRPS0VOPgpgYGAKCkNvbmZpZ3VyZSByb3V0ZXMgaW4gZGFzaGJvYXJkOiAqKlplcm8gVHJ1c3QqKiA+ICoqTmV0d29ya3MqKiA+ICoqVHVubmVscyoqID4gW1R1bm5lbF0gPiAqKlB1YmxpYyBIb3N0bmFtZSoqCgoqKlByb3M6KiogQ2VudHJhbGl6ZWQgdXBkYXRlcywgbm8gZmlsZSBtYW5hZ2VtZW50LCBpbnN0YW50IHJvdXRlIGNoYW5nZXMKKipDb25zOioqIFJlcXVpcmVzIGRhc2hib2FyZC9BUEkgYWNjZXNzLCBsZXNzIHBvcnRhYmxlCgojIyBFbnZpcm9ubWVudCBWYXJpYWJsZXMKCmBgYGJhc2gKVFVOTkVMX1RPS0VOPTx0b2tlbj4gICAgICAgICAgICAgICAgICAgICMgVG9rZW4gZm9yIGNvbmZpZyBzb3VyY2U6IGNsb3VkZmxhcmUKVFVOTkVMX09SSUdJTl9DRVJUPS9wYXRoL3RvL2NlcnQucGVtICAgIyBPdmVycmlkZSBjZXJ0IHBhdGggKGxvY2FsIGNvbmZpZykKTk9fQVVUT1VQREFURT10cnVlICAgICAgICAgICAgICAgICAgICAgICMgRGlzYWJsZSBhdXRvLXVwZGF0ZXMKVFVOTkVMX0xPR0xFVkVMPWRlYnVnICAgICAgICAgICAgICAgICAgICMgTG9nIGxldmVsCmBgYAo=
+# Tunnel Configuration
+
+## Config Source
+
+Tunnels use one of two config sources:
+
+| Config Source | Storage | Updates | Use Case |
+|---------------|---------|---------|----------|
+| Local | `config.yml` file | Edit file, restart | Dev, multi-env, version control |
+| Cloudflare | Dashboard/API | Instant, no restart | Production, centralized management |
+
+**Token-based tunnels** = config source: Cloudflare
+**Locally-managed tunnels** = config source: local
+
+## Config File Location
+
+```
+~/.cloudflared/config.yml          # User config
+/etc/cloudflared/config.yml        # System-wide (Linux)
+```
+
+## Basic Structure
+
+```yaml
+tunnel: <UUID>
+credentials-file: /path/to/<UUID>.json
+
+ingress:
+  - hostname: app.example.com
+    service: http://localhost:8000
+  - service: http_status:404  # Required catch-all
+```
+
+## Ingress Rules
+
+Rules evaluated **top to bottom**, first match wins.
+
+```yaml
+ingress:
+  # Exact hostname + path regex
+  - hostname: static.example.com
+    path: \.(jpg|png|css|js)$
+    service: https://localhost:8001
+  
+  # Wildcard hostname
+  - hostname: "*.example.com"
+    service: https://localhost:8002
+  
+  # Path only (all hostnames)
+  - path: /api/.*
+    service: http://localhost:9000
+  
+  # Catch-all (required)
+  - service: http_status:404
+```
+
+**Validation**:
+```bash
+cloudflared tunnel ingress validate
+cloudflared tunnel ingress rule https://foo.example.com
+```
+
+## Service Types
+
+| Protocol | Format | Client Requirement |
+|----------|--------|-------------------|
+| HTTP | `http://localhost:8000` | Browser |
+| HTTPS | `https://localhost:8443` | Browser |
+| TCP | `tcp://localhost:2222` | `cloudflared access tcp` |
+| SSH | `ssh://localhost:22` | `cloudflared access ssh` |
+| RDP | `rdp://localhost:3389` | `cloudflared access rdp` |
+| Unix | `unix:/path/to/socket` | Browser |
+| Test | `hello_world` | Browser |
+
+## Origin Configuration
+
+### Connection Settings
+```yaml
+originRequest:
+  connectTimeout: 30s
+  tlsTimeout: 10s
+  tcpKeepAlive: 30s
+  keepAliveTimeout: 90s
+  keepAliveConnections: 100
+```
+
+### TLS Settings
+```yaml
+originRequest:
+  noTLSVerify: true                      # Disable cert verification
+  originServerName: "app.internal"       # Override SNI
+  caPool: /path/to/ca.pem                # Custom CA
+```
+
+### HTTP Settings
+```yaml
+originRequest:
+  disableChunkedEncoding: true
+  httpHostHeader: "app.internal"
+  http2Origin: true
+```
+
+## Private Network Mode
+
+```yaml
+tunnel: <UUID>
+credentials-file: /path/to/creds.json
+
+warp-routing:
+  enabled: true
+```
+
+```bash
+cloudflared tunnel route ip add 10.0.0.0/8 my-tunnel
+cloudflared tunnel route ip add 192.168.1.100/32 my-tunnel
+```
+
+## Config Source Comparison
+
+### Local Config
+```yaml
+# config.yml
+tunnel: <UUID>
+credentials-file: /path/to/<UUID>.json
+
+ingress:
+  - hostname: app.example.com
+    service: http://localhost:8000
+  - service: http_status:404
+```
+
+```bash
+cloudflared tunnel run my-tunnel
+```
+
+**Pros:** Version control, multi-environment, offline edits
+**Cons:** Requires file distribution, manual restarts
+
+### Cloudflare Config (Token-Based)
+```bash
+# No config file needed
+cloudflared tunnel --no-autoupdate run --token <TOKEN>
+```
+
+Configure routes in dashboard: **Zero Trust** > **Networks** > **Tunnels** > [Tunnel] > **Public Hostname**
+
+**Pros:** Centralized updates, no file management, instant route changes
+**Cons:** Requires dashboard/API access, less portable
+
+## Environment Variables
+
+```bash
+TUNNEL_TOKEN=<token>                    # Token for config source: cloudflare
+TUNNEL_ORIGIN_CERT=/path/to/cert.pem   # Override cert path (local config)
+NO_AUTOUPDATE=true                      # Disable auto-updates
+TUNNEL_LOGLEVEL=debug                   # Log level
+```

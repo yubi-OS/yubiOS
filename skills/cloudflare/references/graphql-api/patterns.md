@@ -1,1 +1,225 @@
-IyBHcmFwaFFMIEFuYWx5dGljcyBBUEkgUGF0dGVybnMgJiBCZXN0IFByYWN0aWNlcwoKIyMgVGltZS1TZXJpZXMgUXVlcmllcwoKVXNlIHRpbWUgZGltZW5zaW9uIGdyYW51bGFyaXR5IG1hdGNoaW5nIHlvdXIgcmFuZ2UgKHNlZSBCZXN0IFByYWN0aWNlcyBiZWxvdykuCgpgYGBncmFwaHFsCnF1ZXJ5IFRyYWZmaWNUaW1lU2VyaWVzKCR6b25lVGFnOiBzdHJpbmchLCAkc3RhcnQ6IFRpbWUhLCAkZW5kOiBUaW1lISkgewogIHZpZXdlciB7CiAgICB6b25lcyhmaWx0ZXI6IHsgem9uZVRhZzogJHpvbmVUYWcgfSkgewogICAgICBodHRwUmVxdWVzdHNBZGFwdGl2ZUdyb3VwcygKICAgICAgICBmaWx0ZXI6IHsgZGF0ZXRpbWVfZ3Q6ICRzdGFydCwgZGF0ZXRpbWVfbHQ6ICRlbmQgfQogICAgICAgIGxpbWl0OiAxMDAwCiAgICAgICAgb3JkZXJCeTogW2RhdGV0aW1lRml2ZU1pbnV0ZXNfQVNDXSAgIyBvciBkYXRldGltZUhvdXJfQVNDIGZvciBsb25nZXIgcmFuZ2VzCiAgICAgICkgewogICAgICAgIGNvdW50CiAgICAgICAgZGltZW5zaW9ucyB7IGRhdGV0aW1lRml2ZU1pbnV0ZXMgfQogICAgICAgIHN1bSB7IGVkZ2VSZXNwb25zZUJ5dGVzIH0KICAgICAgICByYXRpbyB7IHN0YXR1czR4eCBzdGF0dXM1eHggfQogICAgICB9CiAgICB9CiAgfQp9CmBgYAoKIyMgVG9wLU4gUXVlcmllcwoKIyMjIFRvcCBDb3VudHJpZXMgYnkgUmVxdWVzdCBDb3VudAoKYGBgZ3JhcGhxbApxdWVyeSBUb3BDb3VudHJpZXMoJHpvbmVUYWc6IHN0cmluZyEsICRzdGFydDogVGltZSEsICRlbmQ6IFRpbWUhKSB7CiAgdmlld2VyIHsKICAgIHpvbmVzKGZpbHRlcjogeyB6b25lVGFnOiAkem9uZVRhZyB9KSB7CiAgICAgIGh0dHBSZXF1ZXN0c0FkYXB0aXZlR3JvdXBzKAogICAgICAgIGZpbHRlcjogeyBkYXRldGltZV9ndDogJHN0YXJ0LCBkYXRldGltZV9sdDogJGVuZCB9CiAgICAgICAgbGltaXQ6IDEwCiAgICAgICAgb3JkZXJCeTogW2NvdW50X0RFU0NdCiAgICAgICkgewogICAgICAgIGNvdW50CiAgICAgICAgZGltZW5zaW9ucyB7IGNsaWVudENvdW50cnlOYW1lIH0KICAgICAgfQogICAgfQogIH0KfQpgYGAKClVzZSBgb3JkZXJCeTogW3N1bV9lZGdlUmVzcG9uc2VCeXRlc19ERVNDXWAgZm9yIHRvcCBwYXRocyBieSBiYW5kd2lkdGguIEFkZCBgZWRnZVJlc3BvbnNlU3RhdHVzX2dlcTogNDAwYCB0byB0aGUgZmlsdGVyIGZvciB0b3AgZXJyb3Igc3RhdHVzIGNvZGVzLgoKIyMgV29ya2VycyBBbmFseXRpY3MKCmBgYGdyYXBocWwKcXVlcnkgV29ya2Vyc092ZXJ2aWV3KCRhY2NvdW50VGFnOiBzdHJpbmchLCAkc3RhcnQ6IFRpbWUhLCAkZW5kOiBUaW1lISkgewogIHZpZXdlciB7CiAgICBhY2NvdW50cyhmaWx0ZXI6IHsgYWNjb3VudFRhZzogJGFjY291bnRUYWcgfSkgewogICAgICB3b3JrZXJzSW52b2NhdGlvbnNBZGFwdGl2ZSgKICAgICAgICBmaWx0ZXI6IHsgZGF0ZXRpbWVfZ3Q6ICRzdGFydCwgZGF0ZXRpbWVfbHQ6ICRlbmQgfQogICAgICAgIGxpbWl0OiAxMDAKICAgICAgICBvcmRlckJ5OiBbc3VtX3JlcXVlc3RzX0RFU0NdCiAgICAgICkgewogICAgICAgIHN1bSB7IHJlcXVlc3RzIGVycm9ycyBzdWJyZXF1ZXN0cyB3YWxsVGltZSB9CiAgICAgICAgcXVhbnRpbGVzIHsgY3B1VGltZVA1MCBjcHVUaW1lUDk5IHdhbGxUaW1lUDUwIHdhbGxUaW1lUDk5IH0KICAgICAgICBkaW1lbnNpb25zIHsgc2NyaXB0TmFtZSB9CiAgICAgIH0KICAgIH0KICB9Cn0KYGBgCgpGaWx0ZXIgYnkgYHNjcmlwdE5hbWVgIGZvciBhIHNwZWNpZmljIFdvcmtlci4gQWRkIGBkYXRldGltZUZpdmVNaW51dGVzYCBkaW1lbnNpb24gKyBgb3JkZXJCeTogW2RhdGV0aW1lRml2ZU1pbnV0ZXNfQVNDXWAgZm9yIGVycm9yIHJhdGUgb3ZlciB0aW1lLgoKIyMgRmlyZXdhbGwgLyBTZWN1cml0eQoKYGBgZ3JhcGhxbApxdWVyeSBSZWNlbnRGaXJld2FsbEV2ZW50cygkem9uZVRhZzogc3RyaW5nISwgJHN0YXJ0OiBUaW1lISkgewogIHZpZXdlciB7CiAgICB6b25lcyhmaWx0ZXI6IHsgem9uZVRhZzogJHpvbmVUYWcgfSkgewogICAgICBmaXJld2FsbEV2ZW50c0FkYXB0aXZlKAogICAgICAgIGZpbHRlcjogeyBkYXRldGltZV9ndDogJHN0YXJ0IH0KICAgICAgICBsaW1pdDogNTAKICAgICAgICBvcmRlckJ5OiBbZGF0ZXRpbWVfREVTQ10KICAgICAgKSB7CiAgICAgICAgYWN0aW9uIHNvdXJjZSBjbGllbnRJUCBjbGllbnRDb3VudHJ5TmFtZSB1c2VyQWdlbnQKICAgICAgICBjbGllbnRSZXF1ZXN0SFRUUEhvc3QgY2xpZW50UmVxdWVzdFBhdGggcnVsZUlkIGRhdGV0aW1lCiAgICAgIH0KICAgIH0KICB9Cn0KYGBgCgpGb3IgYWdncmVnYXRlZCBmaXJld2FsbCBzdGF0cywgdXNlIGBmaXJld2FsbEV2ZW50c0FkYXB0aXZlR3JvdXBzYCB3aXRoIGBhY3Rpb246ICJibG9jayJgIGZpbHRlciBhbmQgZ3JvdXAgYnkgYHJ1bGVJZGAsIGBzb3VyY2VgLCBgZGF0ZXRpbWVIb3VyYC4KCiMjIEROUyBBbmFseXRpY3MKCmBgYGdyYXBocWwKcXVlcnkgRE5TUXVlcnlWb2x1bWUoJHpvbmVUYWc6IHN0cmluZyEsICRzdGFydDogVGltZSEsICRlbmQ6IFRpbWUhKSB7CiAgdmlld2VyIHsKICAgIHpvbmVzKGZpbHRlcjogeyB6b25lVGFnOiAkem9uZVRhZyB9KSB7CiAgICAgIGRuc0FuYWx5dGljc0FkYXB0aXZlR3JvdXBzKAogICAgICAgIGZpbHRlcjogeyBkYXRldGltZV9ndDogJHN0YXJ0LCBkYXRldGltZV9sdDogJGVuZCB9CiAgICAgICAgbGltaXQ6IDUwMAogICAgICAgIG9yZGVyQnk6IFtkYXRldGltZUZpdmVNaW51dGVzX0FTQ10KICAgICAgKSB7CiAgICAgICAgY291bnQKICAgICAgICBkaW1lbnNpb25zIHsgZGF0ZXRpbWVGaXZlTWludXRlcyB9CiAgICAgIH0KICAgIH0KICB9Cn0KYGBgCgojIyBTdG9yYWdlIEFuYWx5dGljcyAoQWNjb3VudC1TY29wZWQpCgpSMiwgS1YsIGFuZCBEMSB1c2UgYGRhdGVgIChEYXRlIHR5cGUpIGZpbHRlcnMgaW5zdGVhZCBvZiBgZGF0ZXRpbWVgIChUaW1lIHR5cGUpLgoKYGBgZ3JhcGhxbAojIFIyIG9wZXJhdGlvbnMKcjJPcGVyYXRpb25zQWRhcHRpdmVHcm91cHMoZmlsdGVyOiB7IGRhdGVfZ2VxOiAkc3RhcnQsIGRhdGVfbGVxOiAkZW5kIH0sIGxpbWl0OiAxMDAsIG9yZGVyQnk6IFtkYXRlX0RFU0NdKSB7CiAgZGltZW5zaW9ucyB7IGRhdGUgYnVja2V0TmFtZSBhY3Rpb25UeXBlIH0KICBzdW0geyByZXF1ZXN0cyB9Cn0KCiMgS1Ygb3BlcmF0aW9ucwprdk9wZXJhdGlvbnNBZGFwdGl2ZUdyb3VwcyhmaWx0ZXI6IHsgZGF0ZV9nZXE6ICRzdGFydCwgZGF0ZV9sZXE6ICRlbmQgfSwgbGltaXQ6IDEwMCwgb3JkZXJCeTogW2RhdGVfREVTQ10pIHsKICBkaW1lbnNpb25zIHsgZGF0ZSBhY3Rpb25UeXBlIH0KICBzdW0geyByZXF1ZXN0cyB9Cn0KCiMgRDEgYW5hbHl0aWNzCmQxQW5hbHl0aWNzQWRhcHRpdmVHcm91cHMoZmlsdGVyOiB7IGRhdGVfZ2VxOiAkc3RhcnQsIGRhdGVfbGVxOiAkZW5kIH0sIGxpbWl0OiAxMDAsIG9yZGVyQnk6IFtkYXRlX0RFU0NdKSB7CiAgZGltZW5zaW9ucyB7IGRhdGUgZGF0YWJhc2VJZCB9CiAgc3VtIHsgcmVhZFF1ZXJpZXMgd3JpdGVRdWVyaWVzIHJvd3NSZWFkIHJvd3NXcml0dGVuIH0KfQpgYGAKCiMjIENhY2hlIEFuYWx5dGljcwoKYGBgZ3JhcGhxbApxdWVyeSBDYWNoZVN0YXR1c0JyZWFrZG93bigkem9uZVRhZzogc3RyaW5nISwgJHN0YXJ0OiBUaW1lISwgJGVuZDogVGltZSEpIHsKICB2aWV3ZXIgewogICAgem9uZXMoZmlsdGVyOiB7IHpvbmVUYWc6ICR6b25lVGFnIH0pIHsKICAgICAgaHR0cFJlcXVlc3RzQWRhcHRpdmVHcm91cHMoCiAgICAgICAgZmlsdGVyOiB7IGRhdGV0aW1lX2d0OiAkc3RhcnQsIGRhdGV0aW1lX2x0OiAkZW5kIH0KICAgICAgICBsaW1pdDogMjAKICAgICAgICBvcmRlckJ5OiBbY291bnRfREVTQ10KICAgICAgKSB7CiAgICAgICAgY291bnQKICAgICAgICBkaW1lbnNpb25zIHsgY2FjaGVTdGF0dXMgfQogICAgICAgIHN1bSB7IGVkZ2VSZXNwb25zZUJ5dGVzIH0KICAgICAgfQogICAgfQogIH0KfQpgYGAKCkZvciBjYWNoZSBoaXQgcmF0aW8gb3ZlciB0aW1lLCB1c2UgYWxpYXNlcyB0byBxdWVyeSB0aGUgc2FtZSBkYXRhc2V0IHR3aWNlIOKAlCBvbmNlIHdpdGggYGNhY2hlU3RhdHVzOiAiaGl0ImAgZmlsdGVyIGFuZCBvbmNlIHdpdGhvdXQg4oCUIHRoZW4gY29tcHV0ZSB0aGUgcmF0aW8gY2xpZW50LXNpZGUuCgojIyBNdWx0aS1EYXRhc2V0IFF1ZXJpZXMKCkEgc2luZ2xlIHJlcXVlc3QgY2FuIHF1ZXJ5IG11bHRpcGxlIGRhdGFzZXRzLCBhdm9pZGluZyBleHRyYSBIVFRQIHJvdW5kLXRyaXBzOgoKYGBgZ3JhcGhxbApxdWVyeSBEYXNoYm9hcmRPdmVydmlldygkem9uZVRhZzogc3RyaW5nISwgJHN0YXJ0OiBUaW1lISwgJGVuZDogVGltZSEpIHsKICB2aWV3ZXIgewogICAgem9uZXMoZmlsdGVyOiB7IHpvbmVUYWc6ICR6b25lVGFnIH0pIHsKICAgICAgaHR0cFRyYWZmaWM6IGh0dHBSZXF1ZXN0c0FkYXB0aXZlR3JvdXBzKAogICAgICAgIGZpbHRlcjogeyBkYXRldGltZV9ndDogJHN0YXJ0LCBkYXRldGltZV9sdDogJGVuZCB9LCBsaW1pdDogMQogICAgICApIHsgY291bnQgIHN1bSB7IGVkZ2VSZXNwb25zZUJ5dGVzIH0gIHJhdGlvIHsgc3RhdHVzNHh4IHN0YXR1czV4eCB9IH0KICAgICAgZmlyZXdhbGxFdmVudHM6IGZpcmV3YWxsRXZlbnRzQWRhcHRpdmVHcm91cHMoCiAgICAgICAgZmlsdGVyOiB7IGRhdGV0aW1lX2d0OiAkc3RhcnQsIGRhdGV0aW1lX2x0OiAkZW5kIH0sIGxpbWl0OiA1LCBvcmRlckJ5OiBbY291bnRfREVTQ10KICAgICAgKSB7IGNvdW50ICBkaW1lbnNpb25zIHsgYWN0aW9uIHNvdXJjZSB9IH0KICAgICAgZG5zUXVlcmllczogZG5zQW5hbHl0aWNzQWRhcHRpdmVHcm91cHMoCiAgICAgICAgZmlsdGVyOiB7IGRhdGV0aW1lX2d0OiAkc3RhcnQsIGRhdGV0aW1lX2x0OiAkZW5kIH0sIGxpbWl0OiAxCiAgICAgICkgeyBjb3VudCB9CiAgICB9CiAgfQp9CmBgYAoKIyMgQUkgJiBHYXRld2F5IEFuYWx5dGljcwoKYGBgZ3JhcGhxbAojIFdvcmtlcnMgQUkgaW5mZXJlbmNlCmFpSW5mZXJlbmNlQWRhcHRpdmVHcm91cHMoCiAgZmlsdGVyOiB7IGRhdGV0aW1lX2d0OiAkc3RhcnQsIGRhdGV0aW1lX2x0OiAkZW5kIH0sIGxpbWl0OiAxMDAsIG9yZGVyQnk6IFtkYXRldGltZUhvdXJfREVTQ10KKSB7CiAgY291bnQKICBzdW0geyB0b3RhbElucHV0VG9rZW5zIHRvdGFsT3V0cHV0VG9rZW5zIHRvdGFsUmVxdWVzdEJ5dGVzSW4gfQogIGRpbWVuc2lvbnMgeyBtb2RlbElkIGRhdGV0aW1lSG91ciB9Cn0KCiMgQUkgR2F0ZXdheSByZXF1ZXN0cwphaUdhdGV3YXlSZXF1ZXN0c0FkYXB0aXZlR3JvdXBzKAogIGZpbHRlcjogeyBkYXRldGltZV9ndDogJHN0YXJ0LCBkYXRldGltZV9sdDogJGVuZCB9LCBsaW1pdDogMTAwLCBvcmRlckJ5OiBbZGF0ZXRpbWVIb3VyX0RFU0NdCikgewogIGNvdW50CiAgZGltZW5zaW9ucyB7IGdhdGV3YXkgcHJvdmlkZXIgbW9kZWwgZGF0ZXRpbWVIb3VyIH0KICBzdW0geyBjYWNoZWRUb2tlbnNJbiBjYWNoZWRUb2tlbnNPdXQgdW5jYWNoZWRUb2tlbnNJbiB1bmNhY2hlZFRva2Vuc091dCB9Cn0KYGBgCgpCb3RoIGFyZSBhY2NvdW50LXNjb3BlZCDigJQgbmVzdCB1bmRlciBgYWNjb3VudHMoZmlsdGVyOiB7IGFjY291bnRUYWc6ICRhY2NvdW50VGFnIH0pYC4KCiMjIEJlc3QgUHJhY3RpY2VzCgoqKkFsd2F5cyBpbmNsdWRlIHRpbWUgZmlsdGVycy4qKiBRdWVyaWVzIHdpdGhvdXQgdGltZSBmaWx0ZXJzIHNjYW4gYWxsIGRhdGEgYW5kIGFyZSBzbG93L2V4cGVuc2l2ZS4KCioqTWF0Y2ggdGltZSBncmFudWxhcml0eSB0byByYW5nZToqKgoKfCBUaW1lIFJhbmdlIHwgUmVjb21tZW5kZWQgRGltZW5zaW9uIHwKfC0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tfAp8IDwgNiBob3VycyB8IGBkYXRldGltZU1pbnV0ZWAgb3IgYGRhdGV0aW1lRml2ZU1pbnV0ZXNgIHwKfCA2LTQ4IGhvdXJzIHwgYGRhdGV0aW1lRml2ZU1pbnV0ZXNgIG9yIGBkYXRldGltZUZpZnRlZW5NaW51dGVzYCB8CnwgMi0xNCBkYXlzIHwgYGRhdGV0aW1lSG91cmAgfAp8IDE0KyBkYXlzIHwgYGRhdGVgIHwKCioqVXNlIGFsaWFzZXMqKiBmb3IgcXVlcnlpbmcgdGhlIHNhbWUgZGF0YXNldCB3aXRoIGRpZmZlcmVudCBmaWx0ZXJzIGluIG9uZSByZXF1ZXN0LgoKKipSZXF1ZXN0IG9ubHkgbmVlZGVkIGZpZWxkcy4qKiBFeHRyYSBkaW1lbnNpb25zIGFuZCBtZXRyaWNzIGluY3JlYXNlIHF1ZXJ5IGNvc3QuCgojIyBTZWUgQWxzbwoKLSBbUkVBRE1FLm1kXShSRUFETUUubWQpIC0gT3ZlcnZpZXcsIGRlY2lzaW9uIHRyZWUsIGRhdGFzZXQgaW5kZXgKLSBbYXBpLm1kXShhcGkubWQpIC0gUXVlcnkgc3RydWN0dXJlLCBhZ2dyZWdhdGlvbiBmaWVsZHMsIGZpbHRlcmluZyBvcGVyYXRvcnMKLSBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkgLSBBdXRoZW50aWNhdGlvbiwgY2xpZW50IHNldHVwLCBpbnRyb3NwZWN0aW9uIHF1ZXJpZXMKLSBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkgLSBSYXRlIGxpbWl0cywgc2FtcGxpbmcsIHRyb3VibGVzaG9vdGluZwo=
+# GraphQL Analytics API Patterns & Best Practices
+
+## Time-Series Queries
+
+Use time dimension granularity matching your range (see Best Practices below).
+
+```graphql
+query TrafficTimeSeries($zoneTag: string!, $start: Time!, $end: Time!) {
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      httpRequestsAdaptiveGroups(
+        filter: { datetime_gt: $start, datetime_lt: $end }
+        limit: 1000
+        orderBy: [datetimeFiveMinutes_ASC]  # or datetimeHour_ASC for longer ranges
+      ) {
+        count
+        dimensions { datetimeFiveMinutes }
+        sum { edgeResponseBytes }
+        ratio { status4xx status5xx }
+      }
+    }
+  }
+}
+```
+
+## Top-N Queries
+
+### Top Countries by Request Count
+
+```graphql
+query TopCountries($zoneTag: string!, $start: Time!, $end: Time!) {
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      httpRequestsAdaptiveGroups(
+        filter: { datetime_gt: $start, datetime_lt: $end }
+        limit: 10
+        orderBy: [count_DESC]
+      ) {
+        count
+        dimensions { clientCountryName }
+      }
+    }
+  }
+}
+```
+
+Use `orderBy: [sum_edgeResponseBytes_DESC]` for top paths by bandwidth. Add `edgeResponseStatus_geq: 400` to the filter for top error status codes.
+
+## Workers Analytics
+
+```graphql
+query WorkersOverview($accountTag: string!, $start: Time!, $end: Time!) {
+  viewer {
+    accounts(filter: { accountTag: $accountTag }) {
+      workersInvocationsAdaptive(
+        filter: { datetime_gt: $start, datetime_lt: $end }
+        limit: 100
+        orderBy: [sum_requests_DESC]
+      ) {
+        sum { requests errors subrequests wallTime }
+        quantiles { cpuTimeP50 cpuTimeP99 wallTimeP50 wallTimeP99 }
+        dimensions { scriptName }
+      }
+    }
+  }
+}
+```
+
+Filter by `scriptName` for a specific Worker. Add `datetimeFiveMinutes` dimension + `orderBy: [datetimeFiveMinutes_ASC]` for error rate over time.
+
+## Firewall / Security
+
+```graphql
+query RecentFirewallEvents($zoneTag: string!, $start: Time!) {
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      firewallEventsAdaptive(
+        filter: { datetime_gt: $start }
+        limit: 50
+        orderBy: [datetime_DESC]
+      ) {
+        action source clientIP clientCountryName userAgent
+        clientRequestHTTPHost clientRequestPath ruleId datetime
+      }
+    }
+  }
+}
+```
+
+For aggregated firewall stats, use `firewallEventsAdaptiveGroups` with `action: "block"` filter and group by `ruleId`, `source`, `datetimeHour`.
+
+## DNS Analytics
+
+```graphql
+query DNSQueryVolume($zoneTag: string!, $start: Time!, $end: Time!) {
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      dnsAnalyticsAdaptiveGroups(
+        filter: { datetime_gt: $start, datetime_lt: $end }
+        limit: 500
+        orderBy: [datetimeFiveMinutes_ASC]
+      ) {
+        count
+        dimensions { datetimeFiveMinutes }
+      }
+    }
+  }
+}
+```
+
+## Storage Analytics (Account-Scoped)
+
+R2, KV, and D1 use `date` (Date type) filters instead of `datetime` (Time type).
+
+```graphql
+# R2 operations
+r2OperationsAdaptiveGroups(filter: { date_geq: $start, date_leq: $end }, limit: 100, orderBy: [date_DESC]) {
+  dimensions { date bucketName actionType }
+  sum { requests }
+}
+
+# KV operations
+kvOperationsAdaptiveGroups(filter: { date_geq: $start, date_leq: $end }, limit: 100, orderBy: [date_DESC]) {
+  dimensions { date actionType }
+  sum { requests }
+}
+
+# D1 analytics
+d1AnalyticsAdaptiveGroups(filter: { date_geq: $start, date_leq: $end }, limit: 100, orderBy: [date_DESC]) {
+  dimensions { date databaseId }
+  sum { readQueries writeQueries rowsRead rowsWritten }
+}
+```
+
+## Cache Analytics
+
+```graphql
+query CacheStatusBreakdown($zoneTag: string!, $start: Time!, $end: Time!) {
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      httpRequestsAdaptiveGroups(
+        filter: { datetime_gt: $start, datetime_lt: $end }
+        limit: 20
+        orderBy: [count_DESC]
+      ) {
+        count
+        dimensions { cacheStatus }
+        sum { edgeResponseBytes }
+      }
+    }
+  }
+}
+```
+
+For cache hit ratio over time, use aliases to query the same dataset twice — once with `cacheStatus: "hit"` filter and once without — then compute the ratio client-side.
+
+## Multi-Dataset Queries
+
+A single request can query multiple datasets, avoiding extra HTTP round-trips:
+
+```graphql
+query DashboardOverview($zoneTag: string!, $start: Time!, $end: Time!) {
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      httpTraffic: httpRequestsAdaptiveGroups(
+        filter: { datetime_gt: $start, datetime_lt: $end }, limit: 1
+      ) { count  sum { edgeResponseBytes }  ratio { status4xx status5xx } }
+      firewallEvents: firewallEventsAdaptiveGroups(
+        filter: { datetime_gt: $start, datetime_lt: $end }, limit: 5, orderBy: [count_DESC]
+      ) { count  dimensions { action source } }
+      dnsQueries: dnsAnalyticsAdaptiveGroups(
+        filter: { datetime_gt: $start, datetime_lt: $end }, limit: 1
+      ) { count }
+    }
+  }
+}
+```
+
+## AI & Gateway Analytics
+
+```graphql
+# Workers AI inference
+aiInferenceAdaptiveGroups(
+  filter: { datetime_gt: $start, datetime_lt: $end }, limit: 100, orderBy: [datetimeHour_DESC]
+) {
+  count
+  sum { totalInputTokens totalOutputTokens totalRequestBytesIn }
+  dimensions { modelId datetimeHour }
+}
+
+# AI Gateway requests
+aiGatewayRequestsAdaptiveGroups(
+  filter: { datetime_gt: $start, datetime_lt: $end }, limit: 100, orderBy: [datetimeHour_DESC]
+) {
+  count
+  dimensions { gateway provider model datetimeHour }
+  sum { cachedTokensIn cachedTokensOut uncachedTokensIn uncachedTokensOut }
+}
+```
+
+Both are account-scoped — nest under `accounts(filter: { accountTag: $accountTag })`.
+
+## Best Practices
+
+**Always include time filters.** Queries without time filters scan all data and are slow/expensive.
+
+**Match time granularity to range:**
+
+| Time Range | Recommended Dimension |
+|------------|----------------------|
+| < 6 hours | `datetimeMinute` or `datetimeFiveMinutes` |
+| 6-48 hours | `datetimeFiveMinutes` or `datetimeFifteenMinutes` |
+| 2-14 days | `datetimeHour` |
+| 14+ days | `date` |
+
+**Use aliases** for querying the same dataset with different filters in one request.
+
+**Request only needed fields.** Extra dimensions and metrics increase query cost.
+
+## See Also
+
+- [README.md](README.md) - Overview, decision tree, dataset index
+- [api.md](api.md) - Query structure, aggregation fields, filtering operators
+- [configuration.md](configuration.md) - Authentication, client setup, introspection queries
+- [gotchas.md](gotchas.md) - Rate limits, sampling, troubleshooting

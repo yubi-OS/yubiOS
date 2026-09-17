@@ -1,1 +1,122 @@
-IyBSMiBEYXRhIENhdGFsb2cgUGF0dGVybnMKCkNvZGUgdGVtcGxhdGVzIHdpdGggUHlJY2ViZXJnIChsaWdodHdlaWdodCwgbm8gSlZNKSBhbmQgUHlTcGFyayAoZnVsbCBJY2ViZXJnIGVjb3N5c3RlbSkuIEZvciBwZXItZW5naW5lIGNvbmZpZyAoRHVja0RCLCBUcmlubywgU25vd2ZsYWtlLCBTdGFyUm9ja3MpIGFuZCBwYXJ0aXRpb25pbmcvbWFpbnRlbmFuY2UgYmVzdCBwcmFjdGljZXMsIHB1bGwgYGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9yMi9kYXRhLWNhdGFsb2cvY29uZmlnLWV4YW1wbGVzL2AgYW5kIGAuLi4vdGFibGUtbWFpbnRlbmFuY2UvYC4KCnwgTmVlZCB8IFRvb2wgfAp8LS0tLS0tfC0tLS0tLXwKfCBDYXRhbG9nIG9wcywgYXBwZW5kL3NjYW4sIHNtYWxsLW1lZGl1bSBsb2FkcyB8IFB5SWNlYmVyZyB8CnwgQmF0Y2ggRVRMLCBJTlNFUlQgSU5UTyBTRUxFQ1QsIERFTEVURS9NRVJHRSwgd3JpdGUtYmFjaywgPjEgVEIgbWFpbnRlbmFuY2UgfCBQeVNwYXJrIHwKfCBQdXJlIFNRTCBhbmFseXRpY3MgKG5vIHdyaXRlcykgfCBbUjIgU1FMXSguLi9yMi1zcWwvKSB8CgojIyBQeUljZWJlcmc6IENvbm5lY3QsIENyZWF0ZSwgTG9hZAoKYGBgcHl0aG9uCmltcG9ydCBvcywgcHlhcnJvdyBhcyBwYQpmcm9tIHB5aWNlYmVyZy5jYXRhbG9nLnJlc3QgaW1wb3J0IFJlc3RDYXRhbG9nCgpjYXRhbG9nID0gUmVzdENhdGFsb2coCiAgICBuYW1lPSJyMiIsCiAgICB3YXJlaG91c2U9b3MuZW52aXJvblsiUjJfV0FSRUhPVVNFIl0sICAgIyB7QUNDT1VOVF9JRH1fe0JVQ0tFVH0KICAgIHVyaT1vcy5lbnZpcm9uWyJSMl9DQVRBTE9HX1VSSSJdLCAgICAgICAjIGh0dHBzOi8vY2F0YWxvZy5jbG91ZGZsYXJlc3RvcmFnZS5jb20ve0FDQ09VTlRfSUR9L3tCVUNLRVR9CiAgICB0b2tlbj1vcy5lbnZpcm9uWyJSMl9UT0tFTiJdLAopCmNhdGFsb2cuY3JlYXRlX25hbWVzcGFjZV9pZl9ub3RfZXhpc3RzKCJhbmFseXRpY3MiKQoKc2NoZW1hID0gcGEuc2NoZW1hKFsoImlkIiwgcGEuaW50NjQoKSksICgibmFtZSIsIHBhLnN0cmluZygpKSwgKCJhbW91bnQiLCBwYS5mbG9hdDY0KCkpXSkKdGFibGUgPSBjYXRhbG9nLmNyZWF0ZV90YWJsZSgoImFuYWx5dGljcyIsICJldmVudHMiKSwgc2NoZW1hPXNjaGVtYSkKdGFibGUuYXBwZW5kKHBhLnRhYmxlKHsiaWQiOiBbMSwgMl0sICJuYW1lIjogWyJhIiwgImIiXSwgImFtb3VudCI6IFs4MC4wLCA5Mi41XX0pKQpwcmludCh0YWJsZS5zY2FuKCkudG9fYXJyb3coKS50b19wYW5kYXMoKSkKYGBgCgojIyBQeUljZWJlcmc6IFBhcnRpdGlvbmVkIFRpbWUtU2VyaWVzIFRhYmxlCgpgYGBweXRob24KZnJvbSBweWljZWJlcmcuc2NoZW1hIGltcG9ydCBTY2hlbWEKZnJvbSBweWljZWJlcmcudHlwZXMgaW1wb3J0IE5lc3RlZEZpZWxkLCBUaW1lc3RhbXBUeXBlLCBTdHJpbmdUeXBlCmZyb20gcHlpY2ViZXJnLnBhcnRpdGlvbmluZyBpbXBvcnQgUGFydGl0aW9uU3BlYywgUGFydGl0aW9uRmllbGQKZnJvbSBweWljZWJlcmcudHJhbnNmb3JtcyBpbXBvcnQgRGF5VHJhbnNmb3JtCgpzY2hlbWEgPSBTY2hlbWEoCiAgICBOZXN0ZWRGaWVsZCgxLCAidGltZXN0YW1wIiwgVGltZXN0YW1wVHlwZSgpLCByZXF1aXJlZD1UcnVlKSwKICAgIE5lc3RlZEZpZWxkKDIsICJsZXZlbCIsIFN0cmluZ1R5cGUoKSwgcmVxdWlyZWQ9VHJ1ZSksCiAgICBOZXN0ZWRGaWVsZCgzLCAibWVzc2FnZSIsIFN0cmluZ1R5cGUoKSwgcmVxdWlyZWQ9RmFsc2UpLAopCnNwZWMgPSBQYXJ0aXRpb25TcGVjKFBhcnRpdGlvbkZpZWxkKHNvdXJjZV9pZD0xLCBmaWVsZF9pZD0xMDAwLCB0cmFuc2Zvcm09RGF5VHJhbnNmb3JtKCksIG5hbWU9ImRheSIpKQp0YWJsZSA9IGNhdGFsb2cuY3JlYXRlX3RhYmxlKCgibG9ncyIsICJhcHBfbG9ncyIpLCBzY2hlbWE9c2NoZW1hLCBwYXJ0aXRpb25fc3BlYz1zcGVjKQplcnJvcnMgPSB0YWJsZS5zY2FuKHJvd19maWx0ZXI9ImxldmVsID0gJ0VSUk9SJyIpLnRvX3BhbmRhcygpICAgIyBwYXJ0aXRpb24gcHJ1bmluZwpgYGAKCiMjIFB5U3BhcmsgU2Vzc2lvbgoKVmVyaWZpZWQgdGVtcGxhdGUg4oCUIHJlcXVpcmVzIEljZWJlcmcgKioxLjYuMSoqIGFuZCB2ZW5kZWQgY3JlZGVudGlhbHMuIFMzIGtleXMgYXJlIG9ubHkgbmVlZGVkIGZvciBvcnBoYW4tZmlsZSByZW1vdmFsLiAoSWYgdGhpcyBkcmlmdHMsIGNyb3NzLWNoZWNrIGBjb25maWctZXhhbXBsZXMvc3BhcmstcHl0aG9uL2AuKQoKYGBgcHl0aG9uCmZyb20gcHlzcGFyay5zcWwgaW1wb3J0IFNwYXJrU2Vzc2lvbgoKc3BhcmsgPSBTcGFya1Nlc3Npb24uYnVpbGRlciBcCiAgICAuYXBwTmFtZSgiUjJEYXRhQ2F0YWxvZyIpIFwKICAgIC5jb25maWcoJ3NwYXJrLmphcnMucGFja2FnZXMnLAogICAgICAgICdvcmcuYXBhY2hlLmljZWJlcmc6aWNlYmVyZy1zcGFyay1ydW50aW1lLTMuNV8yLjEyOjEuNi4xLCcKICAgICAgICAnb3JnLmFwYWNoZS5pY2ViZXJnOmljZWJlcmctYXdzLWJ1bmRsZToxLjYuMSwnCiAgICAgICAgJ29yZy5hcGFjaGUuaGFkb29wOmhhZG9vcC1hd3M6My4zLjQsJwogICAgICAgICdjb20uYW1hem9uYXdzOmF3cy1qYXZhLXNkay1idW5kbGU6MS4xMi4yNjInKSBcCiAgICAuY29uZmlnKCJzcGFyay5zcWwuZXh0ZW5zaW9ucyIsICJvcmcuYXBhY2hlLmljZWJlcmcuc3BhcmsuZXh0ZW5zaW9ucy5JY2ViZXJnU3BhcmtTZXNzaW9uRXh0ZW5zaW9ucyIpIFwKICAgIC5jb25maWcoInNwYXJrLnNxbC5jYXRhbG9nLnIyZGMiLCAib3JnLmFwYWNoZS5pY2ViZXJnLnNwYXJrLlNwYXJrQ2F0YWxvZyIpIFwKICAgIC5jb25maWcoInNwYXJrLnNxbC5jYXRhbG9nLnIyZGMudHlwZSIsICJyZXN0IikgXAogICAgLmNvbmZpZygic3Bhcmsuc3FsLmNhdGFsb2cucjJkYy51cmkiLCBDQVRBTE9HX1VSSSkgXAogICAgLmNvbmZpZygic3Bhcmsuc3FsLmNhdGFsb2cucjJkYy53YXJlaG91c2UiLCBXQVJFSE9VU0UpIFwKICAgIC5jb25maWcoInNwYXJrLnNxbC5jYXRhbG9nLnIyZGMudG9rZW4iLCBUT0tFTikgXAogICAgLmNvbmZpZygic3Bhcmsuc3FsLmNhdGFsb2cucjJkYy5oZWFkZXIuWC1JY2ViZXJnLUFjY2Vzcy1EZWxlZ2F0aW9uIiwgInZlbmRlZC1jcmVkZW50aWFscyIpIFwKICAgIC5jb25maWcoInNwYXJrLnNxbC5jYXRhbG9nLnIyZGMuczMucmVtb3RlLXNpZ25pbmctZW5hYmxlZCIsICJmYWxzZSIpIFwKICAgIC5jb25maWcoInNwYXJrLnNxbC5kZWZhdWx0Q2F0YWxvZyIsICJyMmRjIikgXAogICAgLmNvbmZpZygic3BhcmsuaGFkb29wLmZzLnMzYS5hY2Nlc3Mua2V5IiwgUzNfQUNDRVNTX0tFWSkgXAogICAgLmNvbmZpZygic3BhcmsuaGFkb29wLmZzLnMzYS5zZWNyZXQua2V5IiwgUzNfU0VDUkVUX0tFWSkgXAogICAgLmNvbmZpZygic3BhcmsuaGFkb29wLmZzLnMzYS5lbmRwb2ludCIsIFMzX0VORFBPSU5UKSBcCiAgICAuY29uZmlnKCJzcGFyay5oYWRvb3AuZnMuczNhLnBhdGguc3R5bGUuYWNjZXNzIiwgInRydWUiKSBcCiAgICAuZ2V0T3JDcmVhdGUoKQpzcGFyay5zcWwoIlVTRSByMmRjIikKYGBgCgo+IGBYLUljZWJlcmctQWNjZXNzLURlbGVnYXRpb246IHZlbmRlZC1jcmVkZW50aWFsc2AgaXMgcmVxdWlyZWQ7IGBzMy5yZW1vdGUtc2lnbmluZy1lbmFibGVkYCBtdXN0IGJlIGBmYWxzZWAuIEZpcnN0IHN0YXJ0dXAgfjMw4oCTNjBzIGZvciBKQVIgZG93bmxvYWRzIChjYWNoZWQgYWZ0ZXIpLgoKIyMgUHlTcGFyazogQmF0Y2ggRVRMCgpgYGBweXRob24Kc3Bhcmsuc3FsKCIiIgpDUkVBVEUgVEFCTEUgSUYgTk9UIEVYSVNUUyBteV9ucy5ldmVudHMgKAogICAgX19pbmdlc3RfdHMgVElNRVNUQU1QLCBldmVudF9pZCBTVFJJTkcsIGNhdGVnb3J5IFNUUklORywgYW1vdW50IERPVUJMRQopIFBBUlRJVElPTkVEIEJZIChkYXlzKF9faW5nZXN0X3RzKSkKIiIiKQoKc3BhcmsucmVhZC5vcHRpb24oImhlYWRlciIsInRydWUiKS5jc3YoImRhdGEuY3N2Iikud3JpdGVUbygibXlfbnMuZXZlbnRzIikuYXBwZW5kKCkKc3BhcmsucmVhZC5wYXJxdWV0KCJkYXRhLnBhcnF1ZXQiKS53cml0ZVRvKCJteV9ucy5ldmVudHMiKS5hcHBlbmQoKQpzcGFyay5zcWwoIklOU0VSVCBJTlRPIG15X25zLnRhcmdldCBTRUxFQ1QgY29sMSwgY29sMiBGUk9NIG15X25zLnNvdXJjZSBXSEVSRSBjb2wxID4gMCIpCnNwYXJrLnNxbCgiREVMRVRFIEZST00gbXlfbnMuZXZlbnRzIFdIRVJFIGFtb3VudCA8IDAiKQpgYGAKCj4gUGFydGl0aW9uIGxhcmdlIHRhYmxlcyAoYFBBUlRJVElPTkVEIEJZIChkYXlzKF9faW5nZXN0X3RzKSlgKS4gVW5wYXJ0aXRpb25lZCB3b3JrcyBmb3Igc21hbGwgZGF0YXNldHMgKDwxMDAwIGZpbGVzKSBidXQgZGVncmFkZXMgYXQgc2NhbGUuCgojIyBDb25jdXJyZW50IFdyaXRlcyB3aXRoIFJldHJ5IChQeUljZWJlcmcpCgpgYGBweXRob24KZnJvbSBweWljZWJlcmcuZXhjZXB0aW9ucyBpbXBvcnQgQ29tbWl0RmFpbGVkRXhjZXB0aW9uCmltcG9ydCB0aW1lCgpkZWYgYXBwZW5kX3dpdGhfcmV0cnkodGFibGUsIGRhdGEsIG1heF9yZXRyaWVzPTMpOgogICAgZm9yIGF0dGVtcHQgaW4gcmFuZ2UobWF4X3JldHJpZXMpOgogICAgICAgIHRyeToKICAgICAgICAgICAgdGFibGUuYXBwZW5kKGRhdGEpOyByZXR1cm4KICAgICAgICBleGNlcHQgQ29tbWl0RmFpbGVkRXhjZXB0aW9uOgogICAgICAgICAgICBpZiBhdHRlbXB0ID09IG1heF9yZXRyaWVzIC0gMTogcmFpc2UKICAgICAgICAgICAgdGltZS5zbGVlcCgyICoqIGF0dGVtcHQpCmBgYAoKT3B0aW1pc3RpYyBsb2NraW5nOiBjb25jdXJyZW50IGNvbW1pdHMgdG8gdGhlIHNhbWUgdGFibGUgbWF5IGNvbmZsaWN0OyBkaWZmZXJlbnQtcGFydGl0aW9uIHdyaXRlcyBhcmUgc2FmZS4KCiMjIENvbm5lY3RpbmcgQW55IEljZWJlcmcgRW5naW5lCgpFbmdpbmVzIGNvbm5lY3Qgd2l0aCB0aGUgSWNlYmVyZyBSRVNUIGNhdGFsb2cgY29uZmlnIOKAlCBDYXRhbG9nIFVSSSBgaHR0cHM6Ly9jYXRhbG9nLmNsb3VkZmxhcmVzdG9yYWdlLmNvbS97QUNDT1VOVF9JRH0ve0JVQ0tFVH1gLCB3YXJlaG91c2UgYHtBQ0NPVU5UX0lEfV97QlVDS0VUfWAsIHlvdXIgdG9rZW4sIGFuZCBoZWFkZXIgYFgtSWNlYmVyZy1BY2Nlc3MtRGVsZWdhdGlvbjogdmVuZGVkLWNyZWRlbnRpYWxzYC4gQ29weS1wYXN0ZSBjb25maWdzIHBlciBlbmdpbmU6IGBjb25maWctZXhhbXBsZXMvYC4KCiMjIFNlZSBBbHNvCgotIFthcGkubWRdKGFwaS5tZCkgwrcgW2dvdGNoYXMubWRdKGdvdGNoYXMubWQpIMK3IFtwaXBlbGluZXMvcGF0dGVybnMubWRdKC4uL3BpcGVsaW5lcy9wYXR0ZXJucy5tZCkgwrcgW3IyLXNxbC9wYXR0ZXJucy5tZF0oLi4vcjItc3FsL3BhdHRlcm5zLm1kKQo=
+# R2 Data Catalog Patterns
+
+Code templates with PyIceberg (lightweight, no JVM) and PySpark (full Iceberg ecosystem). For per-engine config (DuckDB, Trino, Snowflake, StarRocks) and partitioning/maintenance best practices, pull `https://developers.cloudflare.com/r2/data-catalog/config-examples/` and `.../table-maintenance/`.
+
+| Need | Tool |
+|------|------|
+| Catalog ops, append/scan, small-medium loads | PyIceberg |
+| Batch ETL, INSERT INTO SELECT, DELETE/MERGE, write-back, >1 TB maintenance | PySpark |
+| Pure SQL analytics (no writes) | [R2 SQL](../r2-sql/) |
+
+## PyIceberg: Connect, Create, Load
+
+```python
+import os, pyarrow as pa
+from pyiceberg.catalog.rest import RestCatalog
+
+catalog = RestCatalog(
+    name="r2",
+    warehouse=os.environ["R2_WAREHOUSE"],   # {ACCOUNT_ID}_{BUCKET}
+    uri=os.environ["R2_CATALOG_URI"],       # https://catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}
+    token=os.environ["R2_TOKEN"],
+)
+catalog.create_namespace_if_not_exists("analytics")
+
+schema = pa.schema([("id", pa.int64()), ("name", pa.string()), ("amount", pa.float64())])
+table = catalog.create_table(("analytics", "events"), schema=schema)
+table.append(pa.table({"id": [1, 2], "name": ["a", "b"], "amount": [80.0, 92.5]}))
+print(table.scan().to_arrow().to_pandas())
+```
+
+## PyIceberg: Partitioned Time-Series Table
+
+```python
+from pyiceberg.schema import Schema
+from pyiceberg.types import NestedField, TimestampType, StringType
+from pyiceberg.partitioning import PartitionSpec, PartitionField
+from pyiceberg.transforms import DayTransform
+
+schema = Schema(
+    NestedField(1, "timestamp", TimestampType(), required=True),
+    NestedField(2, "level", StringType(), required=True),
+    NestedField(3, "message", StringType(), required=False),
+)
+spec = PartitionSpec(PartitionField(source_id=1, field_id=1000, transform=DayTransform(), name="day"))
+table = catalog.create_table(("logs", "app_logs"), schema=schema, partition_spec=spec)
+errors = table.scan(row_filter="level = 'ERROR'").to_pandas()   # partition pruning
+```
+
+## PySpark Session
+
+Verified template — requires Iceberg **1.6.1** and vended credentials. S3 keys are only needed for orphan-file removal. (If this drifts, cross-check `config-examples/spark-python/`.)
+
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("R2DataCatalog") \
+    .config('spark.jars.packages',
+        'org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.6.1,'
+        'org.apache.iceberg:iceberg-aws-bundle:1.6.1,'
+        'org.apache.hadoop:hadoop-aws:3.3.4,'
+        'com.amazonaws:aws-java-sdk-bundle:1.12.262') \
+    .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions") \
+    .config("spark.sql.catalog.r2dc", "org.apache.iceberg.spark.SparkCatalog") \
+    .config("spark.sql.catalog.r2dc.type", "rest") \
+    .config("spark.sql.catalog.r2dc.uri", CATALOG_URI) \
+    .config("spark.sql.catalog.r2dc.warehouse", WAREHOUSE) \
+    .config("spark.sql.catalog.r2dc.token", TOKEN) \
+    .config("spark.sql.catalog.r2dc.header.X-Iceberg-Access-Delegation", "vended-credentials") \
+    .config("spark.sql.catalog.r2dc.s3.remote-signing-enabled", "false") \
+    .config("spark.sql.defaultCatalog", "r2dc") \
+    .config("spark.hadoop.fs.s3a.access.key", S3_ACCESS_KEY) \
+    .config("spark.hadoop.fs.s3a.secret.key", S3_SECRET_KEY) \
+    .config("spark.hadoop.fs.s3a.endpoint", S3_ENDPOINT) \
+    .config("spark.hadoop.fs.s3a.path.style.access", "true") \
+    .getOrCreate()
+spark.sql("USE r2dc")
+```
+
+> `X-Iceberg-Access-Delegation: vended-credentials` is required; `s3.remote-signing-enabled` must be `false`. First startup ~30–60s for JAR downloads (cached after).
+
+## PySpark: Batch ETL
+
+```python
+spark.sql("""
+CREATE TABLE IF NOT EXISTS my_ns.events (
+    __ingest_ts TIMESTAMP, event_id STRING, category STRING, amount DOUBLE
+) PARTITIONED BY (days(__ingest_ts))
+""")
+
+spark.read.option("header","true").csv("data.csv").writeTo("my_ns.events").append()
+spark.read.parquet("data.parquet").writeTo("my_ns.events").append()
+spark.sql("INSERT INTO my_ns.target SELECT col1, col2 FROM my_ns.source WHERE col1 > 0")
+spark.sql("DELETE FROM my_ns.events WHERE amount < 0")
+```
+
+> Partition large tables (`PARTITIONED BY (days(__ingest_ts))`). Unpartitioned works for small datasets (<1000 files) but degrades at scale.
+
+## Concurrent Writes with Retry (PyIceberg)
+
+```python
+from pyiceberg.exceptions import CommitFailedException
+import time
+
+def append_with_retry(table, data, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            table.append(data); return
+        except CommitFailedException:
+            if attempt == max_retries - 1: raise
+            time.sleep(2 ** attempt)
+```
+
+Optimistic locking: concurrent commits to the same table may conflict; different-partition writes are safe.
+
+## Connecting Any Iceberg Engine
+
+Engines connect with the Iceberg REST catalog config — Catalog URI `https://catalog.cloudflarestorage.com/{ACCOUNT_ID}/{BUCKET}`, warehouse `{ACCOUNT_ID}_{BUCKET}`, your token, and header `X-Iceberg-Access-Delegation: vended-credentials`. Copy-paste configs per engine: `config-examples/`.
+
+## See Also
+
+- [api.md](api.md) · [gotchas.md](gotchas.md) · [pipelines/patterns.md](../pipelines/patterns.md) · [r2-sql/patterns.md](../r2-sql/patterns.md)

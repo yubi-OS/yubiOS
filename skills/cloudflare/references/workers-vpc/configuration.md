@@ -1,1 +1,147 @@
-IyBDb25maWd1cmF0aW9uCgpTZXR1cCBhbmQgY29uZmlndXJhdGlvbiBmb3IgVENQIFNvY2tldHMgaW4gQ2xvdWRmbGFyZSBXb3JrZXJzLgoKIyMgV3JhbmdsZXIgQ29uZmlndXJhdGlvbgoKIyMjIEJhc2ljIFNldHVwCgpUQ1AgU29ja2V0cyBhcmUgYXZhaWxhYmxlIGJ5IGRlZmF1bHQgaW4gV29ya2VycyBydW50aW1lLiBObyBzcGVjaWFsIGNvbmZpZ3VyYXRpb24gcmVxdWlyZWQgaW4gYHdyYW5nbGVyLmpzb25jYDoKCmBgYGpzb25jCnsKICAibmFtZSI6ICJwcml2YXRlLW5ldHdvcmstd29ya2VyIiwKICAibWFpbiI6ICJzcmMvaW5kZXgudHMiLAogICJjb21wYXRpYmlsaXR5X2RhdGUiOiAiMjAyNS0wMS0wMSIKfQpgYGAKCiMjIyBFbnZpcm9ubWVudCBWYXJpYWJsZXMKClN0b3JlIGNvbm5lY3Rpb24gZGV0YWlscyBhcyBlbnYgdmFyczoKCmBgYGpzb25jCnsKICAidmFycyI6IHsgIkRCX0hPU1QiOiAiMTAuMC4xLjUwIiwgIkRCX1BPUlQiOiAiNTQzMiIgfQp9CmBgYAoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsgREJfSE9TVDogc3RyaW5nOyBEQl9QT1JUOiBzdHJpbmc7IH0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXE6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3Qgc29ja2V0ID0gY29ubmVjdCh7IGhvc3RuYW1lOiBlbnYuREJfSE9TVCwgcG9ydDogcGFyc2VJbnQoZW52LkRCX1BPUlQpIH0pOwogIH0KfTsKYGBgCgojIyMgUGVyLUVudmlyb25tZW50IENvbmZpZ3VyYXRpb24KCmBgYGpzb25jCnsKICAidmFycyI6IHsgIkRCX0hPU1QiOiAibG9jYWxob3N0IiB9LAogICJlbnYiOiB7CiAgICAic3RhZ2luZyI6IHsgInZhcnMiOiB7ICJEQl9IT1NUIjogInN0YWdpbmctZGIuaW50ZXJuYWwubmV0IiB9IH0sCiAgICAicHJvZHVjdGlvbiI6IHsgInZhcnMiOiB7ICJEQl9IT1NUIjogInByb2QtZGIuaW50ZXJuYWwubmV0IiB9IH0KICB9Cn0KYGBgCgpEZXBsb3k6IGB3cmFuZ2xlciBkZXBsb3kgLS1lbnYgc3RhZ2luZ2Agb3IgYHdyYW5nbGVyIGRlcGxveSAtLWVudiBwcm9kdWN0aW9uYAoKIyMgSW50ZWdyYXRpb24gd2l0aCBDbG91ZGZsYXJlIFR1bm5lbAoKVG8gY29ubmVjdCBXb3JrZXJzIHRvIHByaXZhdGUgbmV0d29ya3MsIGNvbWJpbmUgVENQIFNvY2tldHMgd2l0aCBDbG91ZGZsYXJlIFR1bm5lbDoKCmBgYApXb3JrZXIgKFRDUCBTb2NrZXQpIOKGkiBUdW5uZWwgaG9zdG5hbWUg4oaSIGNsb3VkZmxhcmVkIOKGkiBQcml2YXRlIE5ldHdvcmsKYGBgCgojIyMgUXVpY2sgU2V0dXAKCjEuICoqSW5zdGFsbCBjbG91ZGZsYXJlZCoqIG9uIGEgc2VydmVyIGluc2lkZSB5b3VyIHByaXZhdGUgbmV0d29yawoyLiAqKkNyZWF0ZSB0dW5uZWwqKjogYGNsb3VkZmxhcmVkIHR1bm5lbCBjcmVhdGUgbXktcHJpdmF0ZS1uZXR3b3JrYAozLiAqKkNvbmZpZ3VyZSByb3V0aW5nKiogaW4gYGNvbmZpZy55bWxgOgoKYGBgeWFtbAp0dW5uZWw6IDxUVU5ORUxfSUQ+CmNyZWRlbnRpYWxzLWZpbGU6IC9wYXRoL3RvLzxUVU5ORUxfSUQ+Lmpzb24KaW5ncmVzczoKICAtIGhvc3RuYW1lOiBkYi5pbnRlcm5hbC5leGFtcGxlLmNvbQogICAgc2VydmljZTogdGNwOi8vMTAuMC4xLjUwOjU0MzIKICAtIHNlcnZpY2U6IGh0dHBfc3RhdHVzOjQwNCAgIyBSZXF1aXJlZCBjYXRjaC1hbGwKYGBgCgo0LiAqKlJ1biB0dW5uZWwqKjogYGNsb3VkZmxhcmVkIHR1bm5lbCBydW4gbXktcHJpdmF0ZS1uZXR3b3JrYAo1LiAqKkNvbm5lY3QgZnJvbSBXb3JrZXIqKjoKCmBgYHR5cGVzY3JpcHQKY29uc3Qgc29ja2V0ID0gY29ubmVjdCgKICB7IGhvc3RuYW1lOiAiZGIuaW50ZXJuYWwuZXhhbXBsZS5jb20iLCBwb3J0OiA1NDMyIH0sICAvLyBUdW5uZWwgaG9zdG5hbWUKICB7IHNlY3VyZVRyYW5zcG9ydDogIm9uIiB9Cik7CmBgYAoKRm9yIGRldGFpbGVkIFR1bm5lbCBzZXR1cCwgc2VlIFtUdW5uZWwgY29uZmlndXJhdGlvbiByZWZlcmVuY2VdKC4uL3R1bm5lbC9jb25maWd1cmF0aW9uLm1kKS4KCiMjIFNtYXJ0IFBsYWNlbWVudCBJbnRlZ3JhdGlvbgoKUmVkdWNlIGxhdGVuY3kgYnkgYXV0by1wbGFjaW5nIFdvcmtlcnMgbmVhciBiYWNrZW5kczoKCmBgYGpzb25jCnsgInBsYWNlbWVudCI6IHsgIm1vZGUiOiAic21hcnQiIH0gfQpgYGAKCldvcmtlcnMgYXV0b21hdGljYWxseSByZWxvY2F0ZSBjbG9zZXIgdG8gVENQIHNvY2tldCBkZXN0aW5hdGlvbnMgYWZ0ZXIgb2JzZXJ2aW5nIGNvbm5lY3Rpb24gbGF0ZW5jeS4gU2VlIFtTbWFydCBQbGFjZW1lbnQgcmVmZXJlbmNlXSguLi9zbWFydC1wbGFjZW1lbnQvKS4KCiMjIFNlY3JldHMgTWFuYWdlbWVudAoKU3RvcmUgc2Vuc2l0aXZlIGNyZWRlbnRpYWxzIGFzIHNlY3JldHMgKG5vdCBpbiB3cmFuZ2xlci5qc29uYyk6CgpgYGBiYXNoCndyYW5nbGVyIHNlY3JldCBwdXQgREJfUEFTU1dPUkQgICMgRW50ZXIgdmFsdWUgd2hlbiBwcm9tcHRlZApgYGAKCkFjY2VzcyBpbiBXb3JrZXIgdmlhIGBlbnYuREJfUEFTU1dPUkRgLiBVc2UgaW4gcHJvdG9jb2wgaGFuZHNoYWtlIG9yIGF1dGhlbnRpY2F0aW9uLgoKIyMgTG9jYWwgRGV2ZWxvcG1lbnQKClRlc3Qgd2l0aCBgd3JhbmdsZXIgZGV2YC4gTm90ZTogTG9jYWwgbW9kZSBtYXkgbm90IGFjY2VzcyBwcml2YXRlIG5ldHdvcmtzLiBVc2UgcHVibGljIGVuZHBvaW50cyBvciBtb2NrIHNlcnZlcnMgZm9yIGRldmVsb3BtZW50OgoKYGBgdHlwZXNjcmlwdApjb25zdCBjb25maWcgPSBwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gJ2RldicgCiAgPyB7IGhvc3RuYW1lOiAnbG9jYWxob3N0JywgcG9ydDogNTQzMiB9ICAvLyBNb2NrCiAgOiB7IGhvc3RuYW1lOiAnZGIuaW50ZXJuYWwuZXhhbXBsZS5jb20nLCBwb3J0OiA1NDMyIH07ICAvLyBQcm9kdWN0aW9uCmBgYAoKIyMgQ29ubmVjdGlvbiBTdHJpbmcgUGF0dGVybnMKClBhcnNlIGNvbm5lY3Rpb24gc3RyaW5ncyB0byBleHRyYWN0IGhvc3QgYW5kIHBvcnQ6CgpgYGB0eXBlc2NyaXB0CmZ1bmN0aW9uIHBhcnNlQ29ubmVjdGlvblN0cmluZyhjb25uU3RyOiBzdHJpbmcpOiBTb2NrZXRBZGRyZXNzIHsKICBjb25zdCB1cmwgPSBuZXcgVVJMKGNvbm5TdHIpOyAvLyBlLmcuLCAicG9zdGdyZXM6Ly8xMC4wLjEuNTA6NTQzMi9teWRiIgogIHJldHVybiB7IGhvc3RuYW1lOiB1cmwuaG9zdG5hbWUsIHBvcnQ6IHBhcnNlSW50KHVybC5wb3J0KSB8fCA1NDMyIH07Cn0KYGBgCgojIyBIeXBlcmRyaXZlIEludGVncmF0aW9uCgpGb3IgUG9zdGdyZVNRTC9NeVNRTCwgcHJlZmVyIEh5cGVyZHJpdmUgb3ZlciByYXcgVENQIHNvY2tldHMgKGluY2x1ZGVzIGNvbm5lY3Rpb24gcG9vbGluZyk6CgpgYGBqc29uYwp7ICJoeXBlcmRyaXZlIjogW3sgImJpbmRpbmciOiAiREIiLCAiaWQiOiAiPEhZUEVSRFJJVkVfSUQ+IiB9XSB9CmBgYAoKU2VlIFtIeXBlcmRyaXZlIHJlZmVyZW5jZV0oLi4vaHlwZXJkcml2ZS8pIGZvciBjb21wbGV0ZSBzZXR1cC4KCiMjIENvbXBhdGliaWxpdHkKClRDUCBTb2NrZXRzIGF2YWlsYWJsZSBpbiBhbGwgbW9kZXJuIFdvcmtlcnMuIFVzZSBjdXJyZW50IGRhdGU6IGAiY29tcGF0aWJpbGl0eV9kYXRlIjogIjIwMjUtMDEtMDEiYC4gTm8gc3BlY2lhbCBmbGFncyByZXF1aXJlZC4KCiMjIFJlbGF0ZWQgQ29uZmlndXJhdGlvbgoKLSAqKltUdW5uZWwgQ29uZmlndXJhdGlvbl0oLi4vdHVubmVsL2NvbmZpZ3VyYXRpb24ubWQpKiogLSBEZXRhaWxlZCBjbG91ZGZsYXJlZCBzZXR1cAotICoqW1NtYXJ0IFBsYWNlbWVudF0oLi4vc21hcnQtcGxhY2VtZW50L2NvbmZpZ3VyYXRpb24ubWQpKiogLSBQbGFjZW1lbnQgbW9kZSBvcHRpb25zCi0gKipbSHlwZXJkcml2ZV0oLi4vaHlwZXJkcml2ZS9jb25maWd1cmF0aW9uLm1kKSoqIC0gRGF0YWJhc2UgY29ubmVjdGlvbiBwb29saW5nIHNldHVwCg==
+# Configuration
+
+Setup and configuration for TCP Sockets in Cloudflare Workers.
+
+## Wrangler Configuration
+
+### Basic Setup
+
+TCP Sockets are available by default in Workers runtime. No special configuration required in `wrangler.jsonc`:
+
+```jsonc
+{
+  "name": "private-network-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01"
+}
+```
+
+### Environment Variables
+
+Store connection details as env vars:
+
+```jsonc
+{
+  "vars": { "DB_HOST": "10.0.1.50", "DB_PORT": "5432" }
+}
+```
+
+```typescript
+interface Env { DB_HOST: string; DB_PORT: string; }
+
+export default {
+  async fetch(req: Request, env: Env): Promise<Response> {
+    const socket = connect({ hostname: env.DB_HOST, port: parseInt(env.DB_PORT) });
+  }
+};
+```
+
+### Per-Environment Configuration
+
+```jsonc
+{
+  "vars": { "DB_HOST": "localhost" },
+  "env": {
+    "staging": { "vars": { "DB_HOST": "staging-db.internal.net" } },
+    "production": { "vars": { "DB_HOST": "prod-db.internal.net" } }
+  }
+}
+```
+
+Deploy: `wrangler deploy --env staging` or `wrangler deploy --env production`
+
+## Integration with Cloudflare Tunnel
+
+To connect Workers to private networks, combine TCP Sockets with Cloudflare Tunnel:
+
+```
+Worker (TCP Socket) → Tunnel hostname → cloudflared → Private Network
+```
+
+### Quick Setup
+
+1. **Install cloudflared** on a server inside your private network
+2. **Create tunnel**: `cloudflared tunnel create my-private-network`
+3. **Configure routing** in `config.yml`:
+
+```yaml
+tunnel: <TUNNEL_ID>
+credentials-file: /path/to/<TUNNEL_ID>.json
+ingress:
+  - hostname: db.internal.example.com
+    service: tcp://10.0.1.50:5432
+  - service: http_status:404  # Required catch-all
+```
+
+4. **Run tunnel**: `cloudflared tunnel run my-private-network`
+5. **Connect from Worker**:
+
+```typescript
+const socket = connect(
+  { hostname: "db.internal.example.com", port: 5432 },  // Tunnel hostname
+  { secureTransport: "on" }
+);
+```
+
+For detailed Tunnel setup, see [Tunnel configuration reference](../tunnel/configuration.md).
+
+## Smart Placement Integration
+
+Reduce latency by auto-placing Workers near backends:
+
+```jsonc
+{ "placement": { "mode": "smart" } }
+```
+
+Workers automatically relocate closer to TCP socket destinations after observing connection latency. See [Smart Placement reference](../smart-placement/).
+
+## Secrets Management
+
+Store sensitive credentials as secrets (not in wrangler.jsonc):
+
+```bash
+wrangler secret put DB_PASSWORD  # Enter value when prompted
+```
+
+Access in Worker via `env.DB_PASSWORD`. Use in protocol handshake or authentication.
+
+## Local Development
+
+Test with `wrangler dev`. Note: Local mode may not access private networks. Use public endpoints or mock servers for development:
+
+```typescript
+const config = process.env.NODE_ENV === 'dev' 
+  ? { hostname: 'localhost', port: 5432 }  // Mock
+  : { hostname: 'db.internal.example.com', port: 5432 };  // Production
+```
+
+## Connection String Patterns
+
+Parse connection strings to extract host and port:
+
+```typescript
+function parseConnectionString(connStr: string): SocketAddress {
+  const url = new URL(connStr); // e.g., "postgres://10.0.1.50:5432/mydb"
+  return { hostname: url.hostname, port: parseInt(url.port) || 5432 };
+}
+```
+
+## Hyperdrive Integration
+
+For PostgreSQL/MySQL, prefer Hyperdrive over raw TCP sockets (includes connection pooling):
+
+```jsonc
+{ "hyperdrive": [{ "binding": "DB", "id": "<HYPERDRIVE_ID>" }] }
+```
+
+See [Hyperdrive reference](../hyperdrive/) for complete setup.
+
+## Compatibility
+
+TCP Sockets available in all modern Workers. Use current date: `"compatibility_date": "2025-01-01"`. No special flags required.
+
+## Related Configuration
+
+- **[Tunnel Configuration](../tunnel/configuration.md)** - Detailed cloudflared setup
+- **[Smart Placement](../smart-placement/configuration.md)** - Placement mode options
+- **[Hyperdrive](../hyperdrive/configuration.md)** - Database connection pooling setup

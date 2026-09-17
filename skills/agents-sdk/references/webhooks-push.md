@@ -1,1 +1,86 @@
-IyBXZWJob29rcyAmIFB1c2ggTm90aWZpY2F0aW9ucwoKIyMgV2ViaG9va3MKCkZldGNoIGh0dHBzOi8vZGV2ZWxvcGVycy5jbG91ZGZsYXJlLmNvbS9hZ2VudHMvYXBpLXJlZmVyZW5jZS93ZWJob29rcy8gZm9yIGNvbXBsZXRlIGRvY3VtZW50YXRpb24uCgpSb3V0ZSBleHRlcm5hbCB3ZWJob29rcyB0byBhZ2VudCBpbnN0YW5jZXMgdmlhIGBvblJlcXVlc3RgOgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxOiBSZXF1ZXN0LCBlbnY6IEVudikgewogICAgY29uc3QgdXJsID0gbmV3IFVSTChyZXEudXJsKTsKICAgIGlmICh1cmwucGF0aG5hbWUuc3RhcnRzV2l0aCgiL3dlYmhvb2tzLyIpKSB7CiAgICAgIGNvbnN0IGVudGl0eUlkID0gdXJsLnBhdGhuYW1lLnNwbGl0KCIvIilbMl07CiAgICAgIGNvbnN0IGFnZW50ID0gZ2V0QWdlbnRCeU5hbWUoZW52Lk15QWdlbnQsIGVudGl0eUlkKTsKICAgICAgcmV0dXJuIGFnZW50LmZldGNoKHJlcSk7CiAgICB9CiAgICByZXR1cm4gcm91dGVBZ2VudFJlcXVlc3QocmVxLCBlbnYpOwogIH0KfTsKYGBgCgpJbiB0aGUgYWdlbnQ6CgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBjbGFzcyBNeUFnZW50IGV4dGVuZHMgQWdlbnQ8RW52LCBTdGF0ZT4gewogIGFzeW5jIG9uUmVxdWVzdChyZXF1ZXN0OiBSZXF1ZXN0KSB7CiAgICBjb25zdCBzaWduYXR1cmUgPSByZXF1ZXN0LmhlYWRlcnMuZ2V0KCJYLVNpZ25hdHVyZSIpOwogICAgaWYgKCF2ZXJpZnlTaWduYXR1cmUoc2lnbmF0dXJlLCBhd2FpdCByZXF1ZXN0LnRleHQoKSwgdGhpcy5lbnYuV0VCSE9PS19TRUNSRVQpKSB7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIlVuYXV0aG9yaXplZCIsIHsgc3RhdHVzOiA0MDEgfSk7CiAgICB9CiAgICBjb25zdCBwYXlsb2FkID0gSlNPTi5wYXJzZShhd2FpdCByZXF1ZXN0LnRleHQoKSk7CiAgICB0aGlzLnF1ZXVlKCJwcm9jZXNzV2ViaG9vayIsIHBheWxvYWQpOwogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiT0siLCB7IHN0YXR1czogMjAyIH0pOwogIH0KfQpgYGAKCioqVGlwczoqKiBSZXNwb25kIHF1aWNrbHkgKDIwMC8yMDIpLCB2ZXJpZnkgc2lnbmF0dXJlcywgZGVkdXBsaWNhdGUgd2l0aCBzdG9yZWQgZXZlbnQgSURzLCB1c2UgYHF1ZXVlKClgIGZvciBhc3luYyBwcm9jZXNzaW5nLgoKIyMgUHVzaCBOb3RpZmljYXRpb25zCgpGZXRjaCBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYWdlbnRzL2FwaS1yZWZlcmVuY2UvcHVzaC1ub3RpZmljYXRpb25zLyBmb3IgY29tcGxldGUgZG9jdW1lbnRhdGlvbi4KCldlYiBQdXNoIHZpYSBWQVBJRCBmcm9tIGFnZW50cy4gU3RvcmUgc3Vic2NyaXB0aW9ucyBpbiBhZ2VudCBzdGF0ZSwgc2VuZCB2aWEgYHdlYi1wdXNoYC4KCmBgYGJhc2gKbnBtIGluc3RhbGwgd2ViLXB1c2gKYGBgCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB3ZWJwdXNoIGZyb20gIndlYi1wdXNoIjsKCmV4cG9ydCBjbGFzcyBOb3RpZnlBZ2VudCBleHRlbmRzIEFnZW50PEVudiwgU3RhdGU+IHsKICBAY2FsbGFibGUoKQogIGFzeW5jIHN1YnNjcmliZShzdWJzY3JpcHRpb246IFB1c2hTdWJzY3JpcHRpb24pIHsKICAgIHRoaXMuc2V0U3RhdGUoewogICAgICAuLi50aGlzLnN0YXRlLAogICAgICBzdWJzY3JpcHRpb25zOiBbLi4udGhpcy5zdGF0ZS5zdWJzY3JpcHRpb25zLCBzdWJzY3JpcHRpb25dCiAgICB9KTsKICB9CgogIGFzeW5jIHNlbmRSZW1pbmRlcihwYXlsb2FkOiB7IG1lc3NhZ2U6IHN0cmluZyB9LCBzY2hlZHVsZTogU2NoZWR1bGUpIHsKICAgIGZvciAoY29uc3Qgc3ViIG9mIHRoaXMuc3RhdGUuc3Vic2NyaXB0aW9ucykgewogICAgICB0cnkgewogICAgICAgIGF3YWl0IHdlYnB1c2guc2VuZE5vdGlmaWNhdGlvbihzdWIsIEpTT04uc3RyaW5naWZ5KHsKICAgICAgICAgIHRpdGxlOiAiUmVtaW5kZXIiLAogICAgICAgICAgYm9keTogcGF5bG9hZC5tZXNzYWdlCiAgICAgICAgfSksIHsKICAgICAgICAgIHZhcGlkRGV0YWlsczogewogICAgICAgICAgICBzdWJqZWN0OiAibWFpbHRvOnlvdUBleGFtcGxlLmNvbSIsCiAgICAgICAgICAgIHB1YmxpY0tleTogdGhpcy5lbnYuVkFQSURfUFVCTElDX0tFWSwKICAgICAgICAgICAgcHJpdmF0ZUtleTogdGhpcy5lbnYuVkFQSURfUFJJVkFURV9LRVkKICAgICAgICAgIH0KICAgICAgICB9KTsKICAgICAgfSBjYXRjaCAoZXJyKSB7CiAgICAgICAgaWYgKGVyci5zdGF0dXNDb2RlID09PSA0MDQgfHwgZXJyLnN0YXR1c0NvZGUgPT09IDQxMCkgewogICAgICAgICAgLy8gUmVtb3ZlIGV4cGlyZWQgc3Vic2NyaXB0aW9uCiAgICAgICAgfQogICAgICB9CiAgICB9CiAgfQp9CmBgYAoKVkFQSUQga2V5czogZ2VuZXJhdGUgd2l0aCBgbnB4IHdlYi1wdXNoIGdlbmVyYXRlLXZhcGlkLWtleXNgLCBzdG9yZSBhcyBzZWNyZXRzLgo=
+# Webhooks & Push Notifications
+
+## Webhooks
+
+Fetch https://developers.cloudflare.com/agents/api-reference/webhooks/ for complete documentation.
+
+Route external webhooks to agent instances via `onRequest`:
+
+```typescript
+export default {
+  async fetch(req: Request, env: Env) {
+    const url = new URL(req.url);
+    if (url.pathname.startsWith("/webhooks/")) {
+      const entityId = url.pathname.split("/")[2];
+      const agent = getAgentByName(env.MyAgent, entityId);
+      return agent.fetch(req);
+    }
+    return routeAgentRequest(req, env);
+  }
+};
+```
+
+In the agent:
+
+```typescript
+export class MyAgent extends Agent<Env, State> {
+  async onRequest(request: Request) {
+    const signature = request.headers.get("X-Signature");
+    if (!verifySignature(signature, await request.text(), this.env.WEBHOOK_SECRET)) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+    const payload = JSON.parse(await request.text());
+    this.queue("processWebhook", payload);
+    return new Response("OK", { status: 202 });
+  }
+}
+```
+
+**Tips:** Respond quickly (200/202), verify signatures, deduplicate with stored event IDs, use `queue()` for async processing.
+
+## Push Notifications
+
+Fetch https://developers.cloudflare.com/agents/api-reference/push-notifications/ for complete documentation.
+
+Web Push via VAPID from agents. Store subscriptions in agent state, send via `web-push`.
+
+```bash
+npm install web-push
+```
+
+```typescript
+import webpush from "web-push";
+
+export class NotifyAgent extends Agent<Env, State> {
+  @callable()
+  async subscribe(subscription: PushSubscription) {
+    this.setState({
+      ...this.state,
+      subscriptions: [...this.state.subscriptions, subscription]
+    });
+  }
+
+  async sendReminder(payload: { message: string }, schedule: Schedule) {
+    for (const sub of this.state.subscriptions) {
+      try {
+        await webpush.sendNotification(sub, JSON.stringify({
+          title: "Reminder",
+          body: payload.message
+        }), {
+          vapidDetails: {
+            subject: "mailto:you@example.com",
+            publicKey: this.env.VAPID_PUBLIC_KEY,
+            privateKey: this.env.VAPID_PRIVATE_KEY
+          }
+        });
+      } catch (err) {
+        if (err.statusCode === 404 || err.statusCode === 410) {
+          // Remove expired subscription
+        }
+      }
+    }
+  }
+}
+```
+
+VAPID keys: generate with `npx web-push generate-vapid-keys`, store as secrets.

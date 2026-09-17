@@ -1,1 +1,147 @@
-IyBUdW5uZWwgR290Y2hhcwoKIyMgQ29tbW9uIEVycm9ycwoKIyMjICJFcnJvciAxMDE2IChPcmlnaW4gRE5TIEVycm9yKSIKCioqQ2F1c2U6KiogVHVubmVsIG5vdCBydW5uaW5nIG9yIG5vdCBjb25uZWN0ZWQKKipTb2x1dGlvbjoqKgpgYGBiYXNoCmNsb3VkZmxhcmVkIHR1bm5lbCBpbmZvIG15LXR1bm5lbCAgICAgIyBDaGVjayBzdGF0dXMKcHMgYXV4IHwgZ3JlcCBjbG91ZGZsYXJlZCAgICAgICAgICAgICAjIFZlcmlmeSBydW5uaW5nCmpvdXJuYWxjdGwgLXUgY2xvdWRmbGFyZWQgLW4gMTAwICAgICAgIyBDaGVjayBsb2dzCmBgYAoKIyMjICJTZWxmLXNpZ25lZCBjZXJ0aWZpY2F0ZSByZWplY3RlZCIKCioqQ2F1c2U6KiogT3JpZ2luIHVzaW5nIHNlbGYtc2lnbmVkIGNlcnRpZmljYXRlCioqU29sdXRpb246KioKYGBgeWFtbApvcmlnaW5SZXF1ZXN0OgogIG5vVExTVmVyaWZ5OiB0cnVlICAgICAgIyBEZXYgb25seQogIGNhUG9vbDogL3BhdGgvdG8vY2EucGVtICAjIEN1c3RvbSBDQQpgYGAKCiMjIyAiQ29ubmVjdGlvbiB0aW1lb3V0IgoKKipDYXVzZToqKiBPcmlnaW4gc2xvdyB0byByZXNwb25kIG9yIHRpbWVvdXQgc2V0dGluZ3MgdG9vIGxvdwoqKlNvbHV0aW9uOioqCmBgYHlhbWwKb3JpZ2luUmVxdWVzdDoKICBjb25uZWN0VGltZW91dDogNjBzCiAgdGxzVGltZW91dDogMjBzCiAga2VlcEFsaXZlVGltZW91dDogMTIwcwpgYGAKCiMjIyAiVHVubmVsIG5vdCBzdGFydGluZyIKCioqQ2F1c2U6KiogSW52YWxpZCBjb25maWcsIG1pc3NpbmcgY3JlZGVudGlhbHMsIG9yIHR1bm5lbCBkb2Vzbid0IGV4aXN0CioqU29sdXRpb246KioKYGBgYmFzaApjbG91ZGZsYXJlZCB0dW5uZWwgaW5ncmVzcyB2YWxpZGF0ZSAgIyBWYWxpZGF0ZSBjb25maWcKbHMgLWxhIH4vLmNsb3VkZmxhcmVkLyouanNvbiAgICAgICAgICMgVmVyaWZ5IGNyZWRlbnRpYWxzCmNsb3VkZmxhcmVkIHR1bm5lbCBsaXN0ICAgICAgICAgICAgICAjIFZlcmlmeSB0dW5uZWwgZXhpc3RzCmBgYAoKIyMjICJDb25uZWN0aW9uIGFscmVhZHkgcmVnaXN0ZXJlZCIKCioqQ2F1c2U6KiogTXVsdGlwbGUgcmVwbGljYXMgd2l0aCBzYW1lIGNvbm5lY3RvciBJRCBvciBzdGFsZSBjb25uZWN0aW9uCioqU29sdXRpb246KioKYGBgYmFzaAojIENoZWNrIGFjdGl2ZSBjb25uZWN0aW9ucwpjbG91ZGZsYXJlZCB0dW5uZWwgaW5mbyBteS10dW5uZWwKCiMgV2FpdCA2MHMgZm9yIHN0YWxlIGNvbm5lY3Rpb24gY2xlYW51cCwgb3IgcmVzdGFydCB3aXRoIG5ldyBjb25uZWN0b3IgSUQKY2xvdWRmbGFyZWQgdHVubmVsIHJ1biBteS10dW5uZWwKYGBgCgojIyMgIlR1bm5lbCBjcmVkZW50aWFscyByb3RhdGVkIGJ1dCBjb25uZWN0aW9ucyBmYWlsIgoKKipDYXVzZToqKiBPbGQgY2xvdWRmbGFyZWQgcHJvY2Vzc2VzIHVzaW5nIGV4cGlyZWQgY3JlZGVudGlhbHMKKipTb2x1dGlvbjoqKgpgYGBiYXNoCiMgU3RvcCBhbGwgY2xvdWRmbGFyZWQgcHJvY2Vzc2VzCnBraWxsIGNsb3VkZmxhcmVkCgojIFZlcmlmeSBzdG9wcGVkCnBzIGF1eCB8IGdyZXAgY2xvdWRmbGFyZWQKCiMgUmVzdGFydCB3aXRoIG5ldyBjcmVkZW50aWFscwpjbG91ZGZsYXJlZCB0dW5uZWwgcnVuIG15LXR1bm5lbApgYGAKCiMjIExpbWl0cwoKfCBSZXNvdXJjZS9MaW1pdCB8IFZhbHVlIHwgTm90ZXMgfAp8LS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tfC0tLS0tLS18CnwgRnJlZSB0aWVyIHwgVW5saW1pdGVkIHR1bm5lbHMgfCBVbmxpbWl0ZWQgdHJhZmZpYyB8CnwgVHVubmVsIHJlcGxpY2FzIHwgMTAwMCBwZXIgdHVubmVsIHwgTWF4IGNvbmN1cnJlbnQgfAp8IENvbm5lY3Rpb24gZHVyYXRpb24gfCBObyBoYXJkIGxpbWl0IHwgSG91cnMgdG8gZGF5cyB8CnwgTG9uZy1saXZlZCBjb25uZWN0aW9ucyB8IE1heSBkcm9wIGR1cmluZyB1cGRhdGVzIHwgV2ViU29ja2V0LCBTU0gsIFVEUCB8CnwgUmVwbGljYSByZWdpc3RyYXRpb24gfCB+NXMgVFRMIHwgT2xkIHJlcGxpY2EgZHJvcHBlZCBhZnRlciA1cyBubyBoZWFydGJlYXQgfAp8IFRva2VuIHJvdGF0aW9uIGdyYWNlIHwgMjQgaG91cnMgfCBPbGQgdG9rZW5zIHdvcmsgZHVyaW5nIGdyYWNlIHBlcmlvZCB8CgojIyBCZXN0IFByYWN0aWNlcwoKIyMjIFNlY3VyaXR5CjEuIFVzZSB0b2tlbi1iYXNlZCB0dW5uZWxzIChjb25maWcgc291cmNlOiBjbG91ZGZsYXJlKSBmb3IgY2VudHJhbGl6ZWQgY29udHJvbAoyLiBFbmFibGUgQWNjZXNzIHBvbGljaWVzIGZvciBzZW5zaXRpdmUgc2VydmljZXMKMy4gUm90YXRlIHR1bm5lbCBjcmVkZW50aWFscyByZWd1bGFybHkKNC4gQWZ0ZXIgcm90YXRpb246IHN0b3AgYWxsIG9sZCBjbG91ZGZsYXJlZCBwcm9jZXNzZXMgd2l0aGluIDI0aCBncmFjZSBwZXJpb2QKNS4gVmVyaWZ5IFRMUyBjZXJ0cyAoYG5vVExTVmVyaWZ5OiBmYWxzZWApCjYuIFJlc3RyaWN0IGBiYXN0aW9uYCBzZXJ2aWNlIHR5cGUKCiMjIyBQZXJmb3JtYW5jZQoxLiBSdW4gbXVsdGlwbGUgcmVwbGljYXMgZm9yIEhBICgyLTQgdHlwaWNhbCwgbG9hZCBiYWxhbmNlZCBhdXRvbWF0aWNhbGx5KQoyLiBSZXBsaWNhcyBzaGFyZSBzYW1lIHR1bm5lbCBVVUlELCBnZXQgdW5pcXVlIGNvbm5lY3RvciBJRHMKMy4gUGxhY2UgYGNsb3VkZmxhcmVkYCBjbG9zZSB0byBvcmlnaW4gKHNhbWUgbmV0d29yaykKNC4gVXNlIEhUVFAvMiBmb3IgZ1JQQyAoYGh0dHAyT3JpZ2luOiB0cnVlYCkKNS4gVHVuZSBrZWVwYWxpdmUgZm9yIGxvbmctbGl2ZWQgY29ubmVjdGlvbnMKNi4gTW9uaXRvciBjb25uZWN0aW9uIGNvdW50cwoKIyMjIENvbmZpZ3VyYXRpb24KMS4gVXNlIGVudmlyb25tZW50IHZhcmlhYmxlcyBmb3Igc2VjcmV0cwoyLiBWZXJzaW9uIGNvbnRyb2wgY29uZmlnIGZpbGVzCjMuIFZhbGlkYXRlIGJlZm9yZSBkZXBsb3lpbmcgKGBjbG91ZGZsYXJlZCB0dW5uZWwgaW5ncmVzcyB2YWxpZGF0ZWApCjQuIFRlc3QgcnVsZXMgKGBjbG91ZGZsYXJlZCB0dW5uZWwgaW5ncmVzcyBydWxlIDxVUkw+YCkKNS4gRG9jdW1lbnQgcnVsZSBvcmRlciAoZmlyc3QgbWF0Y2ggd2lucykKCiMjIyBPcGVyYXRpb25zCjEuIE1vbml0b3IgdHVubmVsIGhlYWx0aCBpbiBkYXNoYm9hcmQgKHNob3dzIGFjdGl2ZSByZXBsaWNhcykKMi4gU2V0IHVwIGRpc2Nvbm5lY3QgYWxlcnRzICh3aGVuIHJlcGxpY2EgY291bnQgZHJvcHMgdG8gMCkKMy4gR3JhY2VmdWwgc2h1dGRvd24gZm9yIGNvbmZpZyB1cGRhdGVzCjQuIFVwZGF0ZSByZXBsaWNhcyBpbiByb2xsaW5nIGZhc2hpb24gKHVwZGF0ZSAxLCB3YWl0LCB1cGRhdGUgbmV4dCkKNS4gS2VlcCBgY2xvdWRmbGFyZWRgIHVwZGF0ZWQgKDEgeWVhciBzdXBwb3J0IHdpbmRvdykKNi4gVXNlIGAtLW5vLWF1dG91cGRhdGVgIGluIHByb2Q7IGNvbnRyb2wgdXBkYXRlcyBtYW51YWxseQoKIyMgRGVidWcgTW9kZQoKYGBgYmFzaApjbG91ZGZsYXJlZCB0dW5uZWwgLS1sb2dsZXZlbCBkZWJ1ZyBydW4gbXktdHVubmVsCmNsb3VkZmxhcmVkIHR1bm5lbCBpbmdyZXNzIHJ1bGUgaHR0cHM6Ly9hcHAuZXhhbXBsZS5jb20KYGBgCgojIyBNaWdyYXRpb24gU3RyYXRlZ2llcwoKIyMjIEZyb20gTmdyb2sKYGBgeWFtbAojIE5ncm9rOiBuZ3JvayBodHRwIDgwMDAKIyBDbG91ZGZsYXJlIFR1bm5lbDoKaW5ncmVzczoKICAtIGhvc3RuYW1lOiBhcHAuZXhhbXBsZS5jb20KICAgIHNlcnZpY2U6IGh0dHA6Ly9sb2NhbGhvc3Q6ODAwMAogIC0gc2VydmljZTogaHR0cF9zdGF0dXM6NDA0CmBgYAoKIyMjIEZyb20gVlBOCmBgYHlhbWwKIyBSZXBsYWNlIFZQTiB3aXRoIHByaXZhdGUgbmV0d29yayByb3V0aW5nCndhcnAtcm91dGluZzoKICBlbmFibGVkOiB0cnVlCmBgYAoKYGBgYmFzaApjbG91ZGZsYXJlZCB0dW5uZWwgcm91dGUgaXAgYWRkIDEwLjAuMC4wLzggbXktdHVubmVsCmBgYAoKVXNlcnMgaW5zdGFsbCBXQVJQIGNsaWVudCBpbnN0ZWFkIG9mIFZQTi4K
+# Tunnel Gotchas
+
+## Common Errors
+
+### "Error 1016 (Origin DNS Error)"
+
+**Cause:** Tunnel not running or not connected
+**Solution:**
+```bash
+cloudflared tunnel info my-tunnel     # Check status
+ps aux | grep cloudflared             # Verify running
+journalctl -u cloudflared -n 100      # Check logs
+```
+
+### "Self-signed certificate rejected"
+
+**Cause:** Origin using self-signed certificate
+**Solution:**
+```yaml
+originRequest:
+  noTLSVerify: true      # Dev only
+  caPool: /path/to/ca.pem  # Custom CA
+```
+
+### "Connection timeout"
+
+**Cause:** Origin slow to respond or timeout settings too low
+**Solution:**
+```yaml
+originRequest:
+  connectTimeout: 60s
+  tlsTimeout: 20s
+  keepAliveTimeout: 120s
+```
+
+### "Tunnel not starting"
+
+**Cause:** Invalid config, missing credentials, or tunnel doesn't exist
+**Solution:**
+```bash
+cloudflared tunnel ingress validate  # Validate config
+ls -la ~/.cloudflared/*.json         # Verify credentials
+cloudflared tunnel list              # Verify tunnel exists
+```
+
+### "Connection already registered"
+
+**Cause:** Multiple replicas with same connector ID or stale connection
+**Solution:**
+```bash
+# Check active connections
+cloudflared tunnel info my-tunnel
+
+# Wait 60s for stale connection cleanup, or restart with new connector ID
+cloudflared tunnel run my-tunnel
+```
+
+### "Tunnel credentials rotated but connections fail"
+
+**Cause:** Old cloudflared processes using expired credentials
+**Solution:**
+```bash
+# Stop all cloudflared processes
+pkill cloudflared
+
+# Verify stopped
+ps aux | grep cloudflared
+
+# Restart with new credentials
+cloudflared tunnel run my-tunnel
+```
+
+## Limits
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| Free tier | Unlimited tunnels | Unlimited traffic |
+| Tunnel replicas | 1000 per tunnel | Max concurrent |
+| Connection duration | No hard limit | Hours to days |
+| Long-lived connections | May drop during updates | WebSocket, SSH, UDP |
+| Replica registration | ~5s TTL | Old replica dropped after 5s no heartbeat |
+| Token rotation grace | 24 hours | Old tokens work during grace period |
+
+## Best Practices
+
+### Security
+1. Use token-based tunnels (config source: cloudflare) for centralized control
+2. Enable Access policies for sensitive services
+3. Rotate tunnel credentials regularly
+4. After rotation: stop all old cloudflared processes within 24h grace period
+5. Verify TLS certs (`noTLSVerify: false`)
+6. Restrict `bastion` service type
+
+### Performance
+1. Run multiple replicas for HA (2-4 typical, load balanced automatically)
+2. Replicas share same tunnel UUID, get unique connector IDs
+3. Place `cloudflared` close to origin (same network)
+4. Use HTTP/2 for gRPC (`http2Origin: true`)
+5. Tune keepalive for long-lived connections
+6. Monitor connection counts
+
+### Configuration
+1. Use environment variables for secrets
+2. Version control config files
+3. Validate before deploying (`cloudflared tunnel ingress validate`)
+4. Test rules (`cloudflared tunnel ingress rule <URL>`)
+5. Document rule order (first match wins)
+
+### Operations
+1. Monitor tunnel health in dashboard (shows active replicas)
+2. Set up disconnect alerts (when replica count drops to 0)
+3. Graceful shutdown for config updates
+4. Update replicas in rolling fashion (update 1, wait, update next)
+5. Keep `cloudflared` updated (1 year support window)
+6. Use `--no-autoupdate` in prod; control updates manually
+
+## Debug Mode
+
+```bash
+cloudflared tunnel --loglevel debug run my-tunnel
+cloudflared tunnel ingress rule https://app.example.com
+```
+
+## Migration Strategies
+
+### From Ngrok
+```yaml
+# Ngrok: ngrok http 8000
+# Cloudflare Tunnel:
+ingress:
+  - hostname: app.example.com
+    service: http://localhost:8000
+  - service: http_status:404
+```
+
+### From VPN
+```yaml
+# Replace VPN with private network routing
+warp-routing:
+  enabled: true
+```
+
+```bash
+cloudflared tunnel route ip add 10.0.0.0/8 my-tunnel
+```
+
+Users install WARP client instead of VPN.

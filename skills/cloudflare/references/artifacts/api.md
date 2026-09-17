@@ -1,1 +1,128 @@
-IyBBcnRpZmFjdHMgQVBJIFJlZmVyZW5jZQoKVXNlIEFydGlmYWN0cyB0aHJvdWdoIHRoZSAqKldvcmtlcnMgYmluZGluZyoqLCB0aGUgKipSRVNUIGNvbnRyb2wgcGxhbmUqKiwgYW5kICoqR2l0LWNvbXBhdGlibGUgcmVtb3RlcyoqLgoKKipQcmVmZXIgcmV0cmlldmFsKiogZm9yIGV4YWN0IHJlcXVlc3QgYW5kIHJlc3BvbnNlIGRldGFpbHMuIFZlcmlmeSBjdXJyZW50IGJlaGF2aW9yIGF0IGBodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vYXJ0aWZhY3RzL2AgYmVmb3JlIHJlbHlpbmcgb24gc3BlY2lmaWMgYXV0aCBmbG93cywgcm91dGUgZGV0YWlscywgb3IgZ2VuZXJhdGVkIGJpbmRpbmcgdHlwZXMuCgojIyBXb3JrZXJzIEJpbmRpbmcKCkFydGlmYWN0cyBleHBvc2VzIGEgV29ya2VyIGJpbmRpbmcgb24gYGVudi5BUlRJRkFDVFNgLgoKIyMjIE5hbWVzcGFjZSBNZXRob2RzCgp8IE1ldGhvZCB8IFVzZSBGb3IgfAp8LS0tLS0tLS18LS0tLS0tLS0tfAp8IGBjcmVhdGUobmFtZSwgb3B0cz8pYCB8IENyZWF0ZSBhIHJlcG8gYW5kIHJlY2VpdmUgaXRzIGluaXRpYWwgcmVtb3RlIGFuZCB0b2tlbiB8CnwgYGdldChuYW1lKWAgfCBSZXNvbHZlIGEgcmVwbyBoYW5kbGUgZm9yIHJlcG8tc2NvcGVkIG9wZXJhdGlvbnMgfAp8IGBsaXN0KG9wdHM/KWAgfCBMaXN0IHJlcG9zIGluIGEgbmFtZXNwYWNlIHwKfCBgZGVsZXRlKG5hbWUpYCB8IERlbGV0ZSBhIHJlcG8gfAoKYGBgdHlwZXNjcmlwdApjb25zdCBjcmVhdGVkID0gYXdhaXQgZW52LkFSVElGQUNUUy5jcmVhdGUoInN0YXJ0ZXItcmVwbyIsIHsKICBkZXNjcmlwdGlvbjogIlJlcG9zaXRvcnkgZm9yIGF1dG9tYXRpb24gZXhwZXJpbWVudHMiLAogIHNldERlZmF1bHRCcmFuY2g6ICJtYWluIgp9KTsKY29uc3QgcmVwbyA9IGF3YWl0IGVudi5BUlRJRkFDVFMuZ2V0KCJzdGFydGVyLXJlcG8iKTsKY29uc3QgcGFnZSA9IGF3YWl0IGVudi5BUlRJRkFDVFMubGlzdCh7IGxpbWl0OiAxMCB9KTsKYGBgCgpVc2UgdGhlIFJFU1QgQVBJIHdoZW4geW91IG5lZWQgdG8gaW1wb3J0IGEgcmVwbyBmcm9tIGFub3RoZXIgSFRUUFMgcmVtb3RlLgoKIyMjIFJlcG8gSGFuZGxlIE1ldGhvZHMKClVzZSBhIHJlcG8gaGFuZGxlIHJldHVybmVkIGJ5IGBnZXQoKWAgb3IgYGNyZWF0ZSgpYC4KCnwgTWV0aG9kIHwgVXNlIEZvciB8CnwtLS0tLS0tLXwtLS0tLS0tLS18CnwgYGluZm8oKWAgfCBSZWFkIHJlcG8gbWV0YWRhdGEsIGluY2x1ZGluZyB0aGUgcmVtb3RlIFVSTCB8CnwgYGNyZWF0ZVRva2VuKHNjb3BlPywgdHRsPylgIHwgTWludCBhIHJlcG8tc2NvcGVkIHJlYWQgb3Igd3JpdGUgdG9rZW4gfAp8IGBsaXN0VG9rZW5zKClgIHwgSW5zcGVjdCBhY3RpdmUgdG9rZW5zIHwKfCBgdmFsaWRhdGVUb2tlbih0b2tlbilgIHwgQ2hlY2sgd2hldGhlciBhIHRva2VuIGlzIHN0aWxsIHZhbGlkIHwKfCBgcmV2b2tlVG9rZW4odG9rZW5PcklkKWAgfCBSZXZva2UgYSB0b2tlbiBieSBJRCBvciB2YWx1ZSB8CnwgYGZvcmsobmFtZSwgb3B0cz8pYCB8IEZvcmsgb25lIHJlcG8gaW50byBhbm90aGVyIHwKCmBgYHR5cGVzY3JpcHQKY29uc3QgcmVwbyA9IGF3YWl0IGVudi5BUlRJRkFDVFMuZ2V0KCJzdGFydGVyLXJlcG8iKTsKaWYgKCFyZXBvKSB0aHJvdyBuZXcgRXJyb3IoIlJlcG8gbm90IGZvdW5kIik7Cgpjb25zdCBpbmZvID0gYXdhaXQgcmVwby5pbmZvKCk7CmNvbnN0IHRva2VuID0gYXdhaXQgcmVwby5jcmVhdGVUb2tlbigicmVhZCIsIDM2MDApOwpjb25zdCBmb3JrZWQgPSBhd2FpdCByZXBvLmZvcmsoInN0YXJ0ZXItcmVwby1jb3B5IiwgewogIGRlZmF1bHRCcmFuY2hPbmx5OiB0cnVlCn0pOwpgYGAKCiMjIyBCaW5kaW5nIE5vdGVzCgotIEN1cnJlbnQgZG9jcyBkZXNjcmliZSB0aGUgcnVudGltZSBiaW5kaW5nIHN1cmZhY2UgYXMgYGNyZWF0ZWAsIGBnZXRgLCBgbGlzdGAsIGBkZWxldGVgLCBhbmQgcmVwby1oYW5kbGUgbWV0aG9kcyBsaWtlIGBpbmZvYCwgYGNyZWF0ZVRva2VuYCwgYW5kIGBmb3JrYC4KLSBVc2UgYG5weCB3cmFuZ2xlciB0eXBlc2AgaW4gdGhlIHRhcmdldCBwcm9qZWN0IGFuZCB0cmVhdCB0aGUgZ2VuZXJhdGVkIGB3b3JrZXItY29uZmlndXJhdGlvbi5kLnRzYCBhcyB0aGUgc291cmNlIG9mIHRydXRoIGZvciB0aGF0IGVudmlyb25tZW50LgotIElmIGdlbmVyYXRlZCB0eXBlcyBhcHBlYXIgdG8gZXhwb3NlIGBpbXBvcnQoKWAgb3IgYSBkaWZmZXJlbnQgYGdldCgpYCBzaGFwZSwgdmVyaWZ5IHRoZSBsaXZlIGRvY3MgYmVmb3JlIGRlcGVuZGluZyBvbiB0aG9zZSBtZXRob2RzLgoKVmVyaWZ5IGN1cnJlbnQgcnVudGltZSBiZWhhdmlvciBpbiB0aGUgbGl2ZSBkb2NzIGJlZm9yZSBkZXBlbmRpbmcgb24gbWV0aG9kcyB0aGF0IGFyZSBub3Qgc2hvd24gaW4gdGhlIFdvcmtlcnMgYmluZGluZyByZWZlcmVuY2UuCgojIyBSRVNUIEFQSQoKQXJ0aWZhY3RzIGN1cnJlbnRseSBkb2N1bWVudHMgYSBuYW1lc3BhY2Utc2NvcGVkIGNvbnRyb2wgcGxhbmU6CgpgYGB0eHQKaHR0cHM6Ly9hcnRpZmFjdHMuY2xvdWRmbGFyZS5uZXQvdjEvYXBpL25hbWVzcGFjZXMvJEFSVElGQUNUU19OQU1FU1BBQ0UKYGBgCgpTb21lIGRlcGxveW1lbnRzIGFsc28gZXhwb3NlIGFuIGAvZWRnZS92MS9hcGkvLi4uYCBiYXNlIHBhdGguIFZlcmlmeSB0aGUgY29ycmVjdCBiYXNlIFVSTCBmb3IgeW91ciBlbnZpcm9ubWVudCBpbiB0aGUgbGl2ZSBkb2NzLgoKUmVxdWVzdHMgdG8gdGhlIHN0YW5kYXJkIGAvdjEvYXBpLy4uLmAgcm91dGVzIHVzZSBhICoqZ2F0ZXdheSBKV1QqKiB3aXRoIEJlYXJlciBhdXRoZW50aWNhdGlvbi4KClJldHVybmVkIHJlcG8gdG9rZW5zIGF1dGhlbnRpY2F0ZSAqKkdpdCBvcGVyYXRpb25zKiogYWdhaW5zdCB0aGUgcmVwbyBgcmVtb3RlYC4gVGhleSBkbyBub3QgYXV0aGVudGljYXRlIFJFU1QgY29udHJvbC1wbGFuZSByZXF1ZXN0cy4KCkN1cnJlbnQgZG9jcyBzaG93IHRoZSBzdGFuZGFyZCBDbG91ZGZsYXJlIHY0IHJlc3BvbnNlIGVudmVsb3BlIGFyb3VuZCBSRVNUIHJlc3VsdHMuCgojIyMgUmVwbyBSb3V0ZXMKCnwgUm91dGUgfCBVc2UgRm9yIHwKfC0tLS0tLS18LS0tLS0tLS0tfAp8IGBQT1NUIC9yZXBvc2AgfCBDcmVhdGUgYSByZXBvIHwKfCBgR0VUIC9yZXBvc2AgfCBMaXN0IHJlcG9zIHwKfCBgR0VUIC9yZXBvcy86bmFtZWAgfCBSZWFkIHJlcG8gbWV0YWRhdGEgYW5kIHJlbW90ZSB8CnwgYERFTEVURSAvcmVwb3MvOm5hbWVgIHwgRGVsZXRlIGEgcmVwbyB8CnwgYFBPU1QgL3JlcG9zLzpuYW1lL2ZvcmtgIHwgRm9yayBhIHJlcG8gfAp8IGBQT1NUIC9yZXBvcy86bmFtZS9pbXBvcnRgIHwgSW1wb3J0IGEgcHVibGljIEhUVFBTIHJlbW90ZSB8CgpgYGBiYXNoCmN1cmwgLS1yZXF1ZXN0IFBPU1QgIiRBUlRJRkFDVFNfQkFTRV9VUkwvcmVwb3MiIFwKICAtLWhlYWRlciAiQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUlRJRkFDVFNfSldUIiBcCiAgLS1oZWFkZXIgIkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbiIgXAogIC0tZGF0YSAneyJuYW1lIjoic3RhcnRlci1yZXBvIn0nCmBgYAoKSW1wb3J0YW50IGN1cnJlbnQgZGV0YWlscyBmcm9tIHRoZSBkb2NzIGRyYWZ0OgotIGBQT1NUIC9yZXBvcy86bmFtZS9pbXBvcnRgIGFjY2VwdHMgYSBmdWxsIEhUVFBTIHJlbW90ZSBVUkwgc3VjaCBhcyBHaXRIdWIgb3IgR2l0TGFiLgotIEltcG9ydCBzdXBwb3J0cyBvcHRpb25zIHN1Y2ggYXMgYGJyYW5jaGAsIGBkZXB0aGAsIGFuZCBgcmVhZF9vbmx5YC4KLSBSZXBvIG1ldGFkYXRhIGluY2x1ZGVzIGZpZWxkcyBzdWNoIGFzIGRlc2NyaXB0aW9uLCBkZWZhdWx0IGJyYW5jaCwgdGltZXN0YW1wcywgYW5kIHRoZSBHaXQgYHJlbW90ZWAuCgojIyMgVG9rZW4gUm91dGVzCgp8IFJvdXRlIHwgVXNlIEZvciB8CnwtLS0tLS0tfC0tLS0tLS0tLXwKfCBgR0VUIC9yZXBvcy86bmFtZS90b2tlbnNgIHwgTGlzdCByZXBvIHRva2VucyB8CnwgYFBPU1QgL3Rva2Vuc2AgfCBDcmVhdGUgYSB0b2tlbiBmb3IgYSByZXBvIHwKfCBgREVMRVRFIC90b2tlbnMvOmlkYCB8IFJldm9rZSBhIHRva2VuIGJ5IElEIHwKCkN1cnJlbnQgZG9jcyBzaG93IGxpc3QtdG9rZW4gZmlsdGVyaW5nIGFuZCBwYWdpbmF0aW9uIGJ5IHRva2VuIHN0YXRlLiBSZXRyaWV2ZSB0aGUgZXhhY3QgcXVlcnkgc2hhcGUgZnJvbSB0aGUgbGl2ZSBkb2NzIHdoZW4geW91IG5lZWQgdG9rZW4gYXVkaXQgb3IgY2xlYW51cCB3b3JrZmxvd3MuCgpVc2UgKipyZWFkKiogdG9rZW5zIGZvciBjbG9uZSwgZmV0Y2gsIHB1bGwsIGFuZCBpbmRleGluZyB3b3JrZmxvd3MuIFVzZSAqKndyaXRlKiogdG9rZW5zIG9ubHkgd2hlbiBhIHdvcmtmbG93IG11c3QgcHVzaCBvciBvdGhlcndpc2UgbXV0YXRlIGEgcmVwby4KCiMjIEdpdC1Db21wYXRpYmxlIEFjY2VzcwoKQXJ0aWZhY3RzIHJldHVybnMgcmVwbyBgcmVtb3RlYCBVUkxzIHRoYXQgd29yayB3aXRoIHN0YW5kYXJkIGdpdC1vdmVyLUhUVFBTIHRvb2xpbmcuCgpSZWNvbW1lbmRlZCBjdXJyZW50IGF1dGggcGF0dGVybiBmb3IgbG9jYWwgd29ya2Zsb3dzOgoKYGBgYmFzaApnaXQgLWMgaHR0cC5leHRyYUhlYWRlcj0iQXV0aG9yaXphdGlvbjogQmVhcmVyICRBUlRJRkFDVFNfVE9LRU4iIGNsb25lICIkQVJUSUZBQ1RTX1JFTU9URSIgYXJ0aWZhY3RzLWNsb25lCmBgYAoKVXNlIGEgc2VsZi1jb250YWluZWQgQmFzaWMtYXV0aCByZW1vdGUgb25seSBmb3Igc2hvcnQtbGl2ZWQgY29tbWFuZHMgdGhhdCBuZWVkIGNyZWRlbnRpYWxzIGVtYmVkZGVkIGluIHRoZSBVUkwuCgpgcmVhZGAgdG9rZW5zIHN1cHBvcnQgYGNsb25lYCwgYGZldGNoYCwgYW5kIGBwdWxsYC4gYGdpdCBwdXNoYCByZXF1aXJlcyBhIGB3cml0ZWAgdG9rZW4uCgpGb3IgbGFyZ2UgcmVwb3Mgd2hlcmUgc3RhcnR1cCB0aW1lIG1hdHRlcnMgbW9yZSB0aGFuIGEgZnVsbCBjbG9uZSwgQXJ0aWZhY3RzIGFsc28gZG9jdW1lbnRzICoqQXJ0aWZhY3RGUyoqLiBSZXRyaWV2ZSBjdXJyZW50IGRldGFpbHMgZnJvbSBgaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL2FydGlmYWN0cy9gIHdoZW4geW91IG5lZWQgbW91bnQtc3R5bGUgYWNjZXNzLgo=
+# Artifacts API Reference
+
+Use Artifacts through the **Workers binding**, the **REST control plane**, and **Git-compatible remotes**.
+
+**Prefer retrieval** for exact request and response details. Verify current behavior at `https://developers.cloudflare.com/artifacts/` before relying on specific auth flows, route details, or generated binding types.
+
+## Workers Binding
+
+Artifacts exposes a Worker binding on `env.ARTIFACTS`.
+
+### Namespace Methods
+
+| Method | Use For |
+|--------|---------|
+| `create(name, opts?)` | Create a repo and receive its initial remote and token |
+| `get(name)` | Resolve a repo handle for repo-scoped operations |
+| `list(opts?)` | List repos in a namespace |
+| `delete(name)` | Delete a repo |
+
+```typescript
+const created = await env.ARTIFACTS.create("starter-repo", {
+  description: "Repository for automation experiments",
+  setDefaultBranch: "main"
+});
+const repo = await env.ARTIFACTS.get("starter-repo");
+const page = await env.ARTIFACTS.list({ limit: 10 });
+```
+
+Use the REST API when you need to import a repo from another HTTPS remote.
+
+### Repo Handle Methods
+
+Use a repo handle returned by `get()` or `create()`.
+
+| Method | Use For |
+|--------|---------|
+| `info()` | Read repo metadata, including the remote URL |
+| `createToken(scope?, ttl?)` | Mint a repo-scoped read or write token |
+| `listTokens()` | Inspect active tokens |
+| `validateToken(token)` | Check whether a token is still valid |
+| `revokeToken(tokenOrId)` | Revoke a token by ID or value |
+| `fork(name, opts?)` | Fork one repo into another |
+
+```typescript
+const repo = await env.ARTIFACTS.get("starter-repo");
+if (!repo) throw new Error("Repo not found");
+
+const info = await repo.info();
+const token = await repo.createToken("read", 3600);
+const forked = await repo.fork("starter-repo-copy", {
+  defaultBranchOnly: true
+});
+```
+
+### Binding Notes
+
+- Current docs describe the runtime binding surface as `create`, `get`, `list`, `delete`, and repo-handle methods like `info`, `createToken`, and `fork`.
+- Use `npx wrangler types` in the target project and treat the generated `worker-configuration.d.ts` as the source of truth for that environment.
+- If generated types appear to expose `import()` or a different `get()` shape, verify the live docs before depending on those methods.
+
+Verify current runtime behavior in the live docs before depending on methods that are not shown in the Workers binding reference.
+
+## REST API
+
+Artifacts currently documents a namespace-scoped control plane:
+
+```txt
+https://artifacts.cloudflare.net/v1/api/namespaces/$ARTIFACTS_NAMESPACE
+```
+
+Some deployments also expose an `/edge/v1/api/...` base path. Verify the correct base URL for your environment in the live docs.
+
+Requests to the standard `/v1/api/...` routes use a **gateway JWT** with Bearer authentication.
+
+Returned repo tokens authenticate **Git operations** against the repo `remote`. They do not authenticate REST control-plane requests.
+
+Current docs show the standard Cloudflare v4 response envelope around REST results.
+
+### Repo Routes
+
+| Route | Use For |
+|-------|---------|
+| `POST /repos` | Create a repo |
+| `GET /repos` | List repos |
+| `GET /repos/:name` | Read repo metadata and remote |
+| `DELETE /repos/:name` | Delete a repo |
+| `POST /repos/:name/fork` | Fork a repo |
+| `POST /repos/:name/import` | Import a public HTTPS remote |
+
+```bash
+curl --request POST "$ARTIFACTS_BASE_URL/repos" \
+  --header "Authorization: Bearer $ARTIFACTS_JWT" \
+  --header "Content-Type: application/json" \
+  --data '{"name":"starter-repo"}'
+```
+
+Important current details from the docs draft:
+- `POST /repos/:name/import` accepts a full HTTPS remote URL such as GitHub or GitLab.
+- Import supports options such as `branch`, `depth`, and `read_only`.
+- Repo metadata includes fields such as description, default branch, timestamps, and the Git `remote`.
+
+### Token Routes
+
+| Route | Use For |
+|-------|---------|
+| `GET /repos/:name/tokens` | List repo tokens |
+| `POST /tokens` | Create a token for a repo |
+| `DELETE /tokens/:id` | Revoke a token by ID |
+
+Current docs show list-token filtering and pagination by token state. Retrieve the exact query shape from the live docs when you need token audit or cleanup workflows.
+
+Use **read** tokens for clone, fetch, pull, and indexing workflows. Use **write** tokens only when a workflow must push or otherwise mutate a repo.
+
+## Git-Compatible Access
+
+Artifacts returns repo `remote` URLs that work with standard git-over-HTTPS tooling.
+
+Recommended current auth pattern for local workflows:
+
+```bash
+git -c http.extraHeader="Authorization: Bearer $ARTIFACTS_TOKEN" clone "$ARTIFACTS_REMOTE" artifacts-clone
+```
+
+Use a self-contained Basic-auth remote only for short-lived commands that need credentials embedded in the URL.
+
+`read` tokens support `clone`, `fetch`, and `pull`. `git push` requires a `write` token.
+
+For large repos where startup time matters more than a full clone, Artifacts also documents **ArtifactFS**. Retrieve current details from `https://developers.cloudflare.com/artifacts/` when you need mount-style access.

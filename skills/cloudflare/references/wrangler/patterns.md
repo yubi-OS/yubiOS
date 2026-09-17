@@ -1,1 +1,209 @@
-IyBXcmFuZ2xlciBEZXZlbG9wbWVudCBQYXR0ZXJucwoKQ29tbW9uIHdvcmtmbG93cyBhbmQgYmVzdCBwcmFjdGljZXMuCgojIyBOZXcgV29ya2VyIFByb2plY3QKCmBgYGJhc2gKd3JhbmdsZXIgaW5pdCBteS13b3JrZXIgJiYgY2QgbXktd29ya2VyCndyYW5nbGVyIGRldiAgICAgICAgICAgICAgIyBEZXZlbG9wIGxvY2FsbHkKd3JhbmdsZXIgZGVwbG95ICAgICAgICAgICAjIERlcGxveQpgYGAKCiMjIExvY2FsIERldmVsb3BtZW50CgpgYGBiYXNoCndyYW5nbGVyIGRldiAgICAgICAgICAgICAgIyBMb2NhbCBtb2RlIChmYXN0LCBzaW11bGF0ZWQpCndyYW5nbGVyIGRldiAtLXJlbW90ZSAgICAgIyBSZW1vdGUgbW9kZSAocHJvZHVjdGlvbi1hY2N1cmF0ZSkKd3JhbmdsZXIgZGV2IC0tZW52IHN0YWdpbmcgLS1wb3J0IDg3ODcKd3JhbmdsZXIgZGV2IC0taW5zcGVjdG9yLXBvcnQgOTIyOSAgIyBFbmFibGUgZGVidWdnaW5nCmBgYAoKRGVidWc6IGNocm9tZTovL2luc3BlY3Qg4oaSIENvbmZpZ3VyZSDihpIgbG9jYWxob3N0OjkyMjkKCiMjIFNlY3JldHMKCmBgYGJhc2gKIyBQcm9kdWN0aW9uCmVjaG8gInNlY3JldC12YWx1ZSIgfCB3cmFuZ2xlciBzZWNyZXQgcHV0IFNFQ1JFVF9LRVkKCiMgTG9jYWw6IHVzZSAuZGV2LnZhcnMgKGdpdGlnbm9yZWQpCiMgU0VDUkVUX0tFWT1sb2NhbC1kZXYta2V5CmBgYAoKIyMgQWRkaW5nIEtWCgpgYGBiYXNoCndyYW5nbGVyIGt2IG5hbWVzcGFjZSBjcmVhdGUgTVlfS1YKd3JhbmdsZXIga3YgbmFtZXNwYWNlIGNyZWF0ZSBNWV9LViAtLXByZXZpZXcKIyBBZGQgdG8gd3JhbmdsZXIuanNvbmM6IHsgImJpbmRpbmciOiAiTVlfS1YiLCAiaWQiOiAiYWJjMTIzIiB9CndyYW5nbGVyIGRlcGxveQpgYGAKCiMjIEFkZGluZyBEMQoKYGBgYmFzaAp3cmFuZ2xlciBkMSBjcmVhdGUgbXktZGIKd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBjcmVhdGUgbXktZGIgImluaXRpYWxfc2NoZW1hIgojIEVkaXQgbWlncmF0aW9uIGZpbGUgaW4gbWlncmF0aW9ucy8sIHRoZW46CndyYW5nbGVyIGQxIG1pZ3JhdGlvbnMgYXBwbHkgbXktZGIgLS1sb2NhbAp3cmFuZ2xlciBkZXBsb3kKd3JhbmdsZXIgZDEgbWlncmF0aW9ucyBhcHBseSBteS1kYiAtLXJlbW90ZQoKIyBUaW1lIFRyYXZlbCAocmVzdG9yZSB0byBwb2ludCBpbiB0aW1lKQp3cmFuZ2xlciBkMSB0aW1lLXRyYXZlbCByZXN0b3JlIG15LWRiIC0tdGltZXN0YW1wIDIwMjUtMDEtMDFUMTI6MDA6MDBaCmBgYAoKIyMgTXVsdGktRW52aXJvbm1lbnQKCmBgYGJhc2gKd3JhbmdsZXIgZGVwbG95IC0tZW52IHN0YWdpbmcKd3JhbmdsZXIgZGVwbG95IC0tZW52IHByb2R1Y3Rpb24KYGBgCgpgYGBqc29uYwp7ICJlbnYiOiB7ICJzdGFnaW5nIjogeyAidmFycyI6IHsgIkVOViI6ICJzdGFnaW5nIiB9IH0gfSB9CmBgYAoKIyMgVGVzdGluZwoKIyMjIEludGVncmF0aW9uIFRlc3RzIHdpdGggTm9kZS5qcyBUZXN0IFJ1bm5lcgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBzdGFydFdvcmtlciB9IGZyb20gIndyYW5nbGVyIjsKaW1wb3J0IHsgZGVzY3JpYmUsIGl0LCBiZWZvcmUsIGFmdGVyIH0gZnJvbSAibm9kZTp0ZXN0IjsKaW1wb3J0IGFzc2VydCBmcm9tICJub2RlOmFzc2VydCI7CgpkZXNjcmliZSgiQVBJIiwgKCkgPT4gewogIGxldCB3b3JrZXI7CiAgCiAgYmVmb3JlKGFzeW5jICgpID0+IHsKICAgIHdvcmtlciA9IGF3YWl0IHN0YXJ0V29ya2VyKHsgCiAgICAgIGNvbmZpZzogIndyYW5nbGVyLmpzb25jIiwKICAgICAgcmVtb3RlOiAibWluaW1hbCIgIC8vIEZhc3QgdGVzdHMgd2l0aCByZWFsIGJpbmRpbmdzCiAgICB9KTsKICB9KTsKICAKICBhZnRlcihhc3luYyAoKSA9PiBhd2FpdCB3b3JrZXIuZGlzcG9zZSgpKTsKICAKICBpdCgiY3JlYXRlcyB1c2VyIiwgYXN5bmMgKCkgPT4gewogICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCB3b3JrZXIuZmV0Y2goImh0dHA6Ly9leGFtcGxlLmNvbS9hcGkvdXNlcnMiLCB7CiAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IG5hbWU6ICJBbGljZSIgfSkKICAgIH0pOwogICAgYXNzZXJ0LnN0cmljdEVxdWFsKHJlc3BvbnNlLnN0YXR1cywgMjAxKTsKICB9KTsKfSk7CmBgYAoKIyMjIFRlc3Rpbmcgd2l0aCBWaXRlc3QKCkluc3RhbGw6IGBucG0gaW5zdGFsbCAtRCB2aXRlc3QgQGNsb3VkZmxhcmUvdml0ZXN0LXBvb2wtd29ya2Vyc2AKCioqdml0ZXN0LmNvbmZpZy50czoqKgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGRlZmluZVdvcmtlcnNDb25maWcgfSBmcm9tICJAY2xvdWRmbGFyZS92aXRlc3QtcG9vbC13b3JrZXJzL2NvbmZpZyI7CmV4cG9ydCBkZWZhdWx0IGRlZmluZVdvcmtlcnNDb25maWcoewogIHRlc3Q6IHsgcG9vbE9wdGlvbnM6IHsgd29ya2VyczogeyB3cmFuZ2xlcjogeyBjb25maWdQYXRoOiAiLi93cmFuZ2xlci5qc29uYyIgfSB9IH0gfQp9KTsKYGBgCgoqKnRlc3RzL2FwaS50ZXN0LnRzOioqCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgZW52LCBTRUxGIH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKaW1wb3J0IHsgZGVzY3JpYmUsIGl0LCBleHBlY3QgfSBmcm9tICJ2aXRlc3QiOwoKaXQoImZldGNoZXMgdXNlcnMiLCBhc3luYyAoKSA9PiB7CiAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBTRUxGLmZldGNoKCJodHRwczovL2V4YW1wbGUuY29tL2FwaS91c2VycyIpOwogIGV4cGVjdChyZXNwb25zZS5zdGF0dXMpLnRvQmUoMjAwKTsKfSk7CgppdCgidXNlcyBiaW5kaW5ncyIsIGFzeW5jICgpID0+IHsKICBhd2FpdCBlbnYuTVlfS1YucHV0KCJrZXkiLCAidmFsdWUiKTsKICBleHBlY3QoYXdhaXQgZW52Lk1ZX0tWLmdldCgia2V5IikpLnRvQmUoInZhbHVlIik7Cn0pOwpgYGAKCiMjIyBNdWx0aS1Xb3JrZXIgRGV2ZWxvcG1lbnQgKFNlcnZpY2UgQmluZGluZ3MpCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGF1dGhXb3JrZXIgPSBhd2FpdCBzdGFydFdvcmtlcih7IGNvbmZpZzogIi4vYXV0aC93cmFuZ2xlci5qc29uYyIgfSk7CmNvbnN0IGFwaVdvcmtlciA9IGF3YWl0IHN0YXJ0V29ya2VyKHsKICBjb25maWc6ICIuL2FwaS93cmFuZ2xlci5qc29uYyIsCiAgYmluZGluZ3M6IHsgQVVUSDogYXV0aFdvcmtlciB9ICAvLyBTZXJ2aWNlIGJpbmRpbmcKfSk7CgovLyBUZXN0IEFQSSBjYWxsaW5nIEFVVEgKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBhcGlXb3JrZXIuZmV0Y2goImh0dHA6Ly9leGFtcGxlLmNvbS9hcGkvcHJvdGVjdGVkIik7CmF3YWl0IGF1dGhXb3JrZXIuZGlzcG9zZSgpOwphd2FpdCBhcGlXb3JrZXIuZGlzcG9zZSgpOwpgYGAKCiMjIyBNb2NrIEV4dGVybmFsIEFQSXMKCmBgYHR5cGVzY3JpcHQKY29uc3Qgd29ya2VyID0gYXdhaXQgc3RhcnRXb3JrZXIoeyAKICBjb25maWc6ICJ3cmFuZ2xlci5qc29uYyIsCiAgb3V0Ym91bmRTZXJ2aWNlOiAocmVxKSA9PiB7CiAgICBjb25zdCB1cmwgPSBuZXcgVVJMKHJlcS51cmwpOwogICAgaWYgKHVybC5ob3N0bmFtZSA9PT0gImFwaS5leHRlcm5hbC5jb20iKSB7CiAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoSlNPTi5zdHJpbmdpZnkoeyBtb2NrZWQ6IHRydWUgfSksIHsKICAgICAgICBoZWFkZXJzOiB7ICJjb250ZW50LXR5cGUiOiAiYXBwbGljYXRpb24vanNvbiIgfQogICAgICB9KTsKICAgIH0KICAgIHJldHVybiBmZXRjaChyZXEpOyAgLy8gUGFzcyB0aHJvdWdoIG90aGVyIHJlcXVlc3RzCiAgfQp9KTsKCi8vIFRlc3QgV29ya2VyIHRoYXQgY2FsbHMgZXh0ZXJuYWwgQVBJCmNvbnN0IHJlc3BvbnNlID0gYXdhaXQgd29ya2VyLmZldGNoKCJodHRwOi8vZXhhbXBsZS5jb20vcHJveHkiKTsKLy8gV29ya2VyIGludGVybmFsbHkgZmV0Y2hlcyBhcGkuZXh0ZXJuYWwuY29tIC0gZ2V0cyBtb2NrZWQgcmVzcG9uc2UKYGBgCgojIyBNb25pdG9yaW5nICYgVmVyc2lvbnMKCmBgYGJhc2gKd3JhbmdsZXIgdGFpbCAgICAgICAgICAgICAgICAgIyBSZWFsLXRpbWUgbG9ncwp3cmFuZ2xlciB0YWlsIC0tc3RhdHVzIGVycm9yICAjIEZpbHRlciBlcnJvcnMKd3JhbmdsZXIgdmVyc2lvbnMgbGlzdAp3cmFuZ2xlciByb2xsYmFjayBbaWRdCmBgYAoKIyMgVHlwZVNjcmlwdAoKYGBgYmFzaAp3cmFuZ2xlciB0eXBlcyAgIyBHZW5lcmF0ZSB0eXBlcyBmcm9tIGNvbmZpZwpgYGAKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyB2YWx1ZTogYXdhaXQgZW52Lk1ZX0tWLmdldCgia2V5IikgfSk7CiAgfQp9IHNhdGlzZmllcyBFeHBvcnRlZEhhbmRsZXI8RW52PjsKYGBgCgojIyBXb3JrZXJzIEFzc2V0cwoKYGBganNvbmMKeyAiYXNzZXRzIjogeyAiZGlyZWN0b3J5IjogIi4vZGlzdCIsICJiaW5kaW5nIjogIkFTU0VUUyIgfSB9CmBgYAoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52KSB7CiAgICAvLyBBUEkgcm91dGVzIGZpcnN0CiAgICBpZiAobmV3IFVSTChyZXF1ZXN0LnVybCkucGF0aG5hbWUuc3RhcnRzV2l0aCgiL2FwaS8iKSkgewogICAgICByZXR1cm4gUmVzcG9uc2UuanNvbih7IGRhdGE6ICJmcm9tIEFQSSIgfSk7CiAgICB9CiAgICByZXR1cm4gZW52LkFTU0VUUy5mZXRjaChyZXF1ZXN0KTsgIC8vIFN0YXRpYyBhc3NldHMKICB9Cn0KYGBgCgojIyBTZWUgQWxzbwoKLSBbUkVBRE1FLm1kXSguL1JFQURNRS5tZCkgLSBDb21tYW5kcwotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gQ29uZmlnCi0gW2FwaS5tZF0oLi9hcGkubWQpIC0gUHJvZ3JhbW1hdGljIEFQSQotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gSXNzdWVzCg==
+# Wrangler Development Patterns
+
+Common workflows and best practices.
+
+## New Worker Project
+
+```bash
+wrangler init my-worker && cd my-worker
+wrangler dev              # Develop locally
+wrangler deploy           # Deploy
+```
+
+## Local Development
+
+```bash
+wrangler dev              # Local mode (fast, simulated)
+wrangler dev --remote     # Remote mode (production-accurate)
+wrangler dev --env staging --port 8787
+wrangler dev --inspector-port 9229  # Enable debugging
+```
+
+Debug: chrome://inspect → Configure → localhost:9229
+
+## Secrets
+
+```bash
+# Production
+echo "secret-value" | wrangler secret put SECRET_KEY
+
+# Local: use .dev.vars (gitignored)
+# SECRET_KEY=local-dev-key
+```
+
+## Adding KV
+
+```bash
+wrangler kv namespace create MY_KV
+wrangler kv namespace create MY_KV --preview
+# Add to wrangler.jsonc: { "binding": "MY_KV", "id": "abc123" }
+wrangler deploy
+```
+
+## Adding D1
+
+```bash
+wrangler d1 create my-db
+wrangler d1 migrations create my-db "initial_schema"
+# Edit migration file in migrations/, then:
+wrangler d1 migrations apply my-db --local
+wrangler deploy
+wrangler d1 migrations apply my-db --remote
+
+# Time Travel (restore to point in time)
+wrangler d1 time-travel restore my-db --timestamp 2025-01-01T12:00:00Z
+```
+
+## Multi-Environment
+
+```bash
+wrangler deploy --env staging
+wrangler deploy --env production
+```
+
+```jsonc
+{ "env": { "staging": { "vars": { "ENV": "staging" } } } }
+```
+
+## Testing
+
+### Integration Tests with Node.js Test Runner
+
+```typescript
+import { startWorker } from "wrangler";
+import { describe, it, before, after } from "node:test";
+import assert from "node:assert";
+
+describe("API", () => {
+  let worker;
+  
+  before(async () => {
+    worker = await startWorker({ 
+      config: "wrangler.jsonc",
+      remote: "minimal"  // Fast tests with real bindings
+    });
+  });
+  
+  after(async () => await worker.dispose());
+  
+  it("creates user", async () => {
+    const response = await worker.fetch("http://example.com/api/users", {
+      method: "POST",
+      body: JSON.stringify({ name: "Alice" })
+    });
+    assert.strictEqual(response.status, 201);
+  });
+});
+```
+
+### Testing with Vitest
+
+Install: `npm install -D vitest @cloudflare/vitest-pool-workers`
+
+**vitest.config.ts:**
+```typescript
+import { defineWorkersConfig } from "@cloudflare/vitest-pool-workers/config";
+export default defineWorkersConfig({
+  test: { poolOptions: { workers: { wrangler: { configPath: "./wrangler.jsonc" } } } }
+});
+```
+
+**tests/api.test.ts:**
+```typescript
+import { env, SELF } from "cloudflare:test";
+import { describe, it, expect } from "vitest";
+
+it("fetches users", async () => {
+  const response = await SELF.fetch("https://example.com/api/users");
+  expect(response.status).toBe(200);
+});
+
+it("uses bindings", async () => {
+  await env.MY_KV.put("key", "value");
+  expect(await env.MY_KV.get("key")).toBe("value");
+});
+```
+
+### Multi-Worker Development (Service Bindings)
+
+```typescript
+const authWorker = await startWorker({ config: "./auth/wrangler.jsonc" });
+const apiWorker = await startWorker({
+  config: "./api/wrangler.jsonc",
+  bindings: { AUTH: authWorker }  // Service binding
+});
+
+// Test API calling AUTH
+const response = await apiWorker.fetch("http://example.com/api/protected");
+await authWorker.dispose();
+await apiWorker.dispose();
+```
+
+### Mock External APIs
+
+```typescript
+const worker = await startWorker({ 
+  config: "wrangler.jsonc",
+  outboundService: (req) => {
+    const url = new URL(req.url);
+    if (url.hostname === "api.external.com") {
+      return new Response(JSON.stringify({ mocked: true }), {
+        headers: { "content-type": "application/json" }
+      });
+    }
+    return fetch(req);  // Pass through other requests
+  }
+});
+
+// Test Worker that calls external API
+const response = await worker.fetch("http://example.com/proxy");
+// Worker internally fetches api.external.com - gets mocked response
+```
+
+## Monitoring & Versions
+
+```bash
+wrangler tail                 # Real-time logs
+wrangler tail --status error  # Filter errors
+wrangler versions list
+wrangler rollback [id]
+```
+
+## TypeScript
+
+```bash
+wrangler types  # Generate types from config
+```
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    return Response.json({ value: await env.MY_KV.get("key") });
+  }
+} satisfies ExportedHandler<Env>;
+```
+
+## Workers Assets
+
+```jsonc
+{ "assets": { "directory": "./dist", "binding": "ASSETS" } }
+```
+
+```typescript
+export default {
+  async fetch(request, env) {
+    // API routes first
+    if (new URL(request.url).pathname.startsWith("/api/")) {
+      return Response.json({ data: "from API" });
+    }
+    return env.ASSETS.fetch(request);  // Static assets
+  }
+}
+```
+
+## See Also
+
+- [README.md](./README.md) - Commands
+- [configuration.md](./configuration.md) - Config
+- [api.md](./api.md) - Programmatic API
+- [gotchas.md](./gotchas.md) - Issues

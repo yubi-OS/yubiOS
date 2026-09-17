@@ -1,1 +1,90 @@
-IyBWZWN0b3JpemUgUGF0dGVybnMKCiMjIFdvcmtlcnMgQUkgSW50ZWdyYXRpb24KCmBgYHR5cGVzY3JpcHQKLy8gR2VuZXJhdGUgZW1iZWRkaW5nICsgcXVlcnkKY29uc3QgcmVzdWx0ID0gYXdhaXQgZW52LkFJLnJ1bigiQGNmL2JhYWkvYmdlLWJhc2UtZW4tdjEuNSIsIHsgdGV4dDogW3F1ZXJ5XSB9KTsKY29uc3QgbWF0Y2hlcyA9IGF3YWl0IGVudi5WRUNUT1JJWkUucXVlcnkocmVzdWx0LmRhdGFbMF0sIHsgdG9wSzogNSB9KTsgLy8gUGFzcyBkYXRhWzBdIQpgYGAKCnwgTW9kZWwgfCBEaW1lbnNpb25zIHwKfC0tLS0tLS18LS0tLS0tLS0tLS0tfAp8IGBAY2YvYmFhaS9iZ2Utc21hbGwtZW4tdjEuNWAgfCAzODQgfAp8IGBAY2YvYmFhaS9iZ2UtYmFzZS1lbi12MS41YCB8IDc2OCAocmVjb21tZW5kZWQpIHwKfCBgQGNmL2JhYWkvYmdlLWxhcmdlLWVuLXYxLjVgIHwgMTAyNCB8CgojIyBPcGVuQUkgSW50ZWdyYXRpb24KCmBgYHR5cGVzY3JpcHQKY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBvcGVuYWkuZW1iZWRkaW5ncy5jcmVhdGUoeyBtb2RlbDogInRleHQtZW1iZWRkaW5nLWFkYS0wMDIiLCBpbnB1dDogcXVlcnkgfSk7CmNvbnN0IG1hdGNoZXMgPSBhd2FpdCBlbnYuVkVDVE9SSVpFLnF1ZXJ5KHJlc3BvbnNlLmRhdGFbMF0uZW1iZWRkaW5nLCB7IHRvcEs6IDUgfSk7CmBgYAoKIyMgUkFHIFBhdHRlcm4KCmBgYHR5cGVzY3JpcHQKLy8gMS4gRW1iZWQgcXVlcnkKY29uc3QgZW1iID0gYXdhaXQgZW52LkFJLnJ1bigiQGNmL2JhYWkvYmdlLWJhc2UtZW4tdjEuNSIsIHsgdGV4dDogW3F1ZXJ5XSB9KTsKCi8vIDIuIFNlYXJjaCB2ZWN0b3JzCmNvbnN0IG1hdGNoZXMgPSBhd2FpdCBlbnYuVkVDVE9SSVpFLnF1ZXJ5KGVtYi5kYXRhWzBdLCB7IHRvcEs6IDUsIHJldHVybk1ldGFkYXRhOiAiaW5kZXhlZCIgfSk7CgovLyAzLiBGZXRjaCBmdWxsIGRvY3MgZnJvbSBSMi9EMS9LVgpjb25zdCBkb2NzID0gYXdhaXQgUHJvbWlzZS5hbGwobWF0Y2hlcy5tYXRjaGVzLm1hcChtID0+IGVudi5SMi5nZXQobS5tZXRhZGF0YS5rZXkpLnRoZW4obyA9PiBvPy50ZXh0KCkpKSk7CgovLyA0LiBHZW5lcmF0ZSB3aXRoIGNvbnRleHQKY29uc3QgYW5zd2VyID0gYXdhaXQgZW52LkFJLnJ1bigiQGNmL21ldGEvbGxhbWEtMy04Yi1pbnN0cnVjdCIsIHsKICBwcm9tcHQ6IGBDb250ZXh0OlxuJHtkb2NzLmZpbHRlcihCb29sZWFuKS5qb2luKCJcblxuIil9XG5cblF1ZXN0aW9uOiAke3F1ZXJ5fVxuXG5BbnN3ZXI6YAp9KTsKYGBgCgojIyBNdWx0aS1UZW5hbnQKCiMjIyBOYW1lc3BhY2VzICg8IDUwSyB0ZW5hbnRzLCBmYXN0ZXN0KQoKYGBgdHlwZXNjcmlwdAphd2FpdCBlbnYuVkVDVE9SSVpFLnVwc2VydChbeyBpZDogIjEiLCB2YWx1ZXM6IGVtYiwgbmFtZXNwYWNlOiBgdGVuYW50LSR7aWR9YCB9XSk7CmF3YWl0IGVudi5WRUNUT1JJWkUucXVlcnkodmVjLCB7IG5hbWVzcGFjZTogYHRlbmFudC0ke2lkfWAsIHRvcEs6IDEwIH0pOwpgYGAKCiMjIyBNZXRhZGF0YSBGaWx0ZXIgKD4gNTBLIHRlbmFudHMpCgpgYGBiYXNoCndyYW5nbGVyIHZlY3Rvcml6ZSBjcmVhdGUtbWV0YWRhdGEtaW5kZXggbXktaW5kZXggLS1wcm9wZXJ0eS1uYW1lPXRlbmFudElkIC0tdHlwZT1zdHJpbmcKYGBgCgpgYGB0eXBlc2NyaXB0CmF3YWl0IGVudi5WRUNUT1JJWkUudXBzZXJ0KFt7IGlkOiAiMSIsIHZhbHVlczogZW1iLCBtZXRhZGF0YTogeyB0ZW5hbnRJZDogaWQgfSB9XSk7CmF3YWl0IGVudi5WRUNUT1JJWkUucXVlcnkodmVjLCB7IGZpbHRlcjogeyB0ZW5hbnRJZDogaWQgfSwgdG9wSzogMTAgfSk7CmBgYAoKIyMgSHlicmlkIFNlYXJjaAoKYGBgdHlwZXNjcmlwdApjb25zdCBtYXRjaGVzID0gYXdhaXQgZW52LlZFQ1RPUklaRS5xdWVyeSh2ZWMsIHsKICB0b3BLOiAyMCwKICBmaWx0ZXI6IHsKICAgIGNhdGVnb3J5OiB7ICRpbjogWyJ0ZWNoIiwgInNjaWVuY2UiXSB9LAogICAgcHVibGlzaGVkOiB7ICRndGU6IGxhc3RNb250aFRpbWVzdGFtcCB9CiAgfQp9KTsKYGBgCgojIyBCYXRjaCBJbmdlc3Rpb24KCmBgYHR5cGVzY3JpcHQKY29uc3QgQkFUQ0ggPSA1MDA7CmZvciAobGV0IGkgPSAwOyBpIDwgdmVjdG9ycy5sZW5ndGg7IGkgKz0gQkFUQ0gpIHsKICBhd2FpdCBlbnYuVkVDVE9SSVpFLnVwc2VydCh2ZWN0b3JzLnNsaWNlKGksIGkgKyBCQVRDSCkpOwp9CmBgYAoKIyMgQmVzdCBQcmFjdGljZXMKCjEuICoqUGFzcyBgZGF0YVswXWAqKiBub3QgYGRhdGFgIG9yIGZ1bGwgcmVzcG9uc2UKMi4gKipCYXRjaCA1MDAqKiB2ZWN0b3JzIHBlciB1cHNlcnQKMy4gKipDcmVhdGUgbWV0YWRhdGEgaW5kZXhlcyoqIGJlZm9yZSBpbnNlcnRpbmcKNC4gKipVc2UgbmFtZXNwYWNlcyoqIGZvciB0ZW5hbnQgaXNvbGF0aW9uIChmYXN0ZXIgdGhhbiBmaWx0ZXJzKQo1LiAqKmByZXR1cm5NZXRhZGF0YTogImluZGV4ZWQiYCoqIGZvciBiZXN0IHNwZWVkL2RhdGEgYmFsYW5jZQo2LiAqKkhhbmRsZSA1LTEwcyBtdXRhdGlvbiBkZWxheSoqIGluIGFzeW5jIG9wZXJhdGlvbnMK
+# Vectorize Patterns
+
+## Workers AI Integration
+
+```typescript
+// Generate embedding + query
+const result = await env.AI.run("@cf/baai/bge-base-en-v1.5", { text: [query] });
+const matches = await env.VECTORIZE.query(result.data[0], { topK: 5 }); // Pass data[0]!
+```
+
+| Model | Dimensions |
+|-------|------------|
+| `@cf/baai/bge-small-en-v1.5` | 384 |
+| `@cf/baai/bge-base-en-v1.5` | 768 (recommended) |
+| `@cf/baai/bge-large-en-v1.5` | 1024 |
+
+## OpenAI Integration
+
+```typescript
+const response = await openai.embeddings.create({ model: "text-embedding-ada-002", input: query });
+const matches = await env.VECTORIZE.query(response.data[0].embedding, { topK: 5 });
+```
+
+## RAG Pattern
+
+```typescript
+// 1. Embed query
+const emb = await env.AI.run("@cf/baai/bge-base-en-v1.5", { text: [query] });
+
+// 2. Search vectors
+const matches = await env.VECTORIZE.query(emb.data[0], { topK: 5, returnMetadata: "indexed" });
+
+// 3. Fetch full docs from R2/D1/KV
+const docs = await Promise.all(matches.matches.map(m => env.R2.get(m.metadata.key).then(o => o?.text())));
+
+// 4. Generate with context
+const answer = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
+  prompt: `Context:\n${docs.filter(Boolean).join("\n\n")}\n\nQuestion: ${query}\n\nAnswer:`
+});
+```
+
+## Multi-Tenant
+
+### Namespaces (< 50K tenants, fastest)
+
+```typescript
+await env.VECTORIZE.upsert([{ id: "1", values: emb, namespace: `tenant-${id}` }]);
+await env.VECTORIZE.query(vec, { namespace: `tenant-${id}`, topK: 10 });
+```
+
+### Metadata Filter (> 50K tenants)
+
+```bash
+wrangler vectorize create-metadata-index my-index --property-name=tenantId --type=string
+```
+
+```typescript
+await env.VECTORIZE.upsert([{ id: "1", values: emb, metadata: { tenantId: id } }]);
+await env.VECTORIZE.query(vec, { filter: { tenantId: id }, topK: 10 });
+```
+
+## Hybrid Search
+
+```typescript
+const matches = await env.VECTORIZE.query(vec, {
+  topK: 20,
+  filter: {
+    category: { $in: ["tech", "science"] },
+    published: { $gte: lastMonthTimestamp }
+  }
+});
+```
+
+## Batch Ingestion
+
+```typescript
+const BATCH = 500;
+for (let i = 0; i < vectors.length; i += BATCH) {
+  await env.VECTORIZE.upsert(vectors.slice(i, i + BATCH));
+}
+```
+
+## Best Practices
+
+1. **Pass `data[0]`** not `data` or full response
+2. **Batch 500** vectors per upsert
+3. **Create metadata indexes** before inserting
+4. **Use namespaces** for tenant isolation (faster than filters)
+5. **`returnMetadata: "indexed"`** for best speed/data balance
+6. **Handle 5-10s mutation delay** in async operations

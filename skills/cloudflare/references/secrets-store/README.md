@@ -1,1 +1,74 @@
-IyBDbG91ZGZsYXJlIFNlY3JldHMgU3RvcmUKCkFjY291bnQtbGV2ZWwgZW5jcnlwdGVkIHNlY3JldCBtYW5hZ2VtZW50IGZvciBXb3JrZXJzIGFuZCBBSSBHYXRld2F5LgoKIyMgT3ZlcnZpZXcKCioqU2VjcmV0cyBTdG9yZSoqOiBDZW50cmFsaXplZCwgYWNjb3VudC1sZXZlbCBzZWNyZXRzLCByZXVzYWJsZSBhY3Jvc3MgV29ya2VycwoqKldvcmtlciBTZWNyZXRzKio6IFBlci1Xb3JrZXIgc2VjcmV0cyAoYHdyYW5nbGVyIHNlY3JldCBwdXRgKQoKIyMjIEFyY2hpdGVjdHVyZQoKLSAqKlN0b3JlKio6IENvbnRhaW5lciAoMS9hY2NvdW50IGluIGJldGEpCi0gKipTZWNyZXQqKjogU3RyaW5nIOKJpDEwMjQgYnl0ZXMKLSAqKlNjb3BlcyoqOiBQZXJtaXNzaW9uIGJvdW5kYXJpZXMgY29udHJvbGxpbmcgYWNjZXNzCiAgLSBgd29ya2Vyc2A6IEZvciBXb3JrZXJzIHJ1bnRpbWUgYWNjZXNzCiAgLSBgYWktZ2F0ZXdheWA6IEZvciBBSSBHYXRld2F5IGFjY2VzcwogIC0gU2VjcmV0cyBtdXN0IGhhdmUgY29ycmVjdCBzY29wZSBmb3IgYmluZGluZyB0byB3b3JrCi0gKipCaW5kaW5ncyoqOiBDb25uZWN0IHNlY3JldHMgdmlhIGBlbnZgIG9iamVjdAoKKipSZWdpb25hbCBBdmFpbGFiaWxpdHkqKjogR2xvYmFsIGV4Y2VwdCBDaGluYSBOZXR3b3JrICh1bmF2YWlsYWJsZSkKCiMjIyBBY2Nlc3MgQ29udHJvbAoKLSAqKlN1cGVyIEFkbWluKio6IEZ1bGwgYWNjZXNzCi0gKipBZG1pbioqOiBDcmVhdGUvZWRpdC9kZWxldGUgc2VjcmV0cywgdmlldyBtZXRhZGF0YQotICoqRGVwbG95ZXIqKjogVmlldyBtZXRhZGF0YSArIGJpbmRpbmdzCi0gKipSZXBvcnRlcioqOiBWaWV3IG1ldGFkYXRhIG9ubHkKCkFQSSBUb2tlbiBwZXJtaXNzaW9uczogYEFjY291bnQgU2VjcmV0cyBTdG9yZSBFZGl0L1JlYWRgCgojIyMgTGltaXRzIChCZXRhKQoKLSAxMDAgc2VjcmV0cy9hY2NvdW50Ci0gMSBzdG9yZS9hY2NvdW50Ci0gMTAyNCBieXRlcyBtYXgvc2VjcmV0Ci0gUHJvZHVjdGlvbiBzZWNyZXRzIGNvdW50IHRvd2FyZCBsaW1pdAoKIyMgV2hlbiB0byBVc2UKCioqVXNlIFNlY3JldHMgU3RvcmUgd2hlbjoqKgotIE11bHRpcGxlIFdvcmtlcnMgc2hhcmUgc2FtZSBjcmVkZW50aWFsCi0gQ2VudHJhbGl6ZWQgbWFuYWdlbWVudCBuZWVkZWQKLSBDb21wbGlhbmNlIHJlcXVpcmVzIGF1ZGl0IHRyYWlsCi0gVGVhbSBjb2xsYWJvcmF0aW9uIG9uIHNlY3JldHMKCioqVXNlIFdvcmtlciBTZWNyZXRzIHdoZW46KioKLSBTZWNyZXQgdW5pcXVlIHRvIG9uZSBXb3JrZXIKLSBTaW1wbGUgc2luZ2xlLVdvcmtlciBwcm9qZWN0Ci0gTm8gY3Jvc3MtV29ya2VyIHNoYXJpbmcgbmVlZGVkCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKIyMjIFJlYWRpbmcgT3JkZXIgYnkgVGFzawoKfCBUYXNrIHwgU3RhcnQgSGVyZSB8IFRoZW4gUmVhZCB8CnwtLS0tLS18LS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tfAp8IFF1aWNrIG92ZXJ2aWV3IHwgUkVBRE1FLm1kIHwgLSB8CnwgRmlyc3QtdGltZSBzZXR1cCB8IFJFQURNRS5tZCDihpIgY29uZmlndXJhdGlvbi5tZCB8IGFwaS5tZCB8CnwgQWRkIHNlY3JldCB0byBXb3JrZXIgfCBjb25maWd1cmF0aW9uLm1kIHwgYXBpLm1kIHwKfCBJbXBsZW1lbnQgYWNjZXNzIHBhdHRlcm4gfCBhcGkubWQgfCBwYXR0ZXJucy5tZCB8CnwgRGVidWcgZXJyb3JzIHwgZ290Y2hhcy5tZCB8IGFwaS5tZCB8CnwgU2VjcmV0IHJvdGF0aW9uIHwgcGF0dGVybnMubWQgfCBjb25maWd1cmF0aW9uLm1kIHwKfCBCZXN0IHByYWN0aWNlcyB8IGdvdGNoYXMubWQgfCBwYXR0ZXJucy5tZCB8CgojIyMgRmlsZXMKCi0gW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgLSBXcmFuZ2xlciBjb21tYW5kcywgYmluZGluZyBjb25maWcKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBCaW5kaW5nIEFQSSwgZ2V0L3B1dC9kZWxldGUgb3BlcmF0aW9ucwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBSb3RhdGlvbiwgZW5jcnlwdGlvbiwgYWNjZXNzIGNvbnRyb2wKLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIFNlY3VyaXR5IGlzc3VlcywgbGltaXRzLCBiZXN0IHByYWN0aWNlcwoKIyMgU2VlIEFsc28KLSBbd29ya2Vyc10oLi4vd29ya2Vycy8pIC0gV29ya2VyIGJpbmRpbmdzIGludGVncmF0aW9uCi0gW3dyYW5nbGVyXSguLi93cmFuZ2xlci8pIC0gQ0xJIHNlY3JldCBtYW5hZ2VtZW50IGNvbW1hbmRzCg==
+# Cloudflare Secrets Store
+
+Account-level encrypted secret management for Workers and AI Gateway.
+
+## Overview
+
+**Secrets Store**: Centralized, account-level secrets, reusable across Workers
+**Worker Secrets**: Per-Worker secrets (`wrangler secret put`)
+
+### Architecture
+
+- **Store**: Container (1/account in beta)
+- **Secret**: String ≤1024 bytes
+- **Scopes**: Permission boundaries controlling access
+  - `workers`: For Workers runtime access
+  - `ai-gateway`: For AI Gateway access
+  - Secrets must have correct scope for binding to work
+- **Bindings**: Connect secrets via `env` object
+
+**Regional Availability**: Global except China Network (unavailable)
+
+### Access Control
+
+- **Super Admin**: Full access
+- **Admin**: Create/edit/delete secrets, view metadata
+- **Deployer**: View metadata + bindings
+- **Reporter**: View metadata only
+
+API Token permissions: `Account Secrets Store Edit/Read`
+
+### Limits (Beta)
+
+- 100 secrets/account
+- 1 store/account
+- 1024 bytes max/secret
+- Production secrets count toward limit
+
+## When to Use
+
+**Use Secrets Store when:**
+- Multiple Workers share same credential
+- Centralized management needed
+- Compliance requires audit trail
+- Team collaboration on secrets
+
+**Use Worker Secrets when:**
+- Secret unique to one Worker
+- Simple single-Worker project
+- No cross-Worker sharing needed
+
+## In This Reference
+
+### Reading Order by Task
+
+| Task | Start Here | Then Read |
+|------|------------|-----------|
+| Quick overview | README.md | - |
+| First-time setup | README.md → configuration.md | api.md |
+| Add secret to Worker | configuration.md | api.md |
+| Implement access pattern | api.md | patterns.md |
+| Debug errors | gotchas.md | api.md |
+| Secret rotation | patterns.md | configuration.md |
+| Best practices | gotchas.md | patterns.md |
+
+### Files
+
+- [configuration.md](./configuration.md) - Wrangler commands, binding config
+- [api.md](./api.md) - Binding API, get/put/delete operations
+- [patterns.md](./patterns.md) - Rotation, encryption, access control
+- [gotchas.md](./gotchas.md) - Security issues, limits, best practices
+
+## See Also
+- [workers](../workers/) - Worker bindings integration
+- [wrangler](../wrangler/) - CLI secret management commands

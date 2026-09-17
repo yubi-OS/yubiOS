@@ -1,1 +1,52 @@
-IyBDbG91ZGZsYXJlIFNwZWN0cnVtIFNraWxsIFJlZmVyZW5jZQoKIyMgT3ZlcnZpZXcKCkNsb3VkZmxhcmUgU3BlY3RydW0gcHJvdmlkZXMgc2VjdXJpdHkgYW5kIGFjY2VsZXJhdGlvbiBmb3IgQU5ZIFRDUCBvciBVRFAtYmFzZWQgYXBwbGljYXRpb24uIEl0J3MgYSBnbG9iYWwgTGF5ZXIgNCAoTDQpIHJldmVyc2UgcHJveHkgcnVubmluZyBvbiBDbG91ZGZsYXJlJ3MgZWRnZSBub2RlcyB0aGF0IHJvdXRlcyBNUVRULCBlbWFpbCwgZmlsZSB0cmFuc2ZlciwgdmVyc2lvbiBjb250cm9sLCBnYW1lcywgYW5kIG1vcmUgdGhyb3VnaCBDbG91ZGZsYXJlIHRvIG1hc2sgb3JpZ2lucyBhbmQgcHJvdGVjdCBmcm9tIEREb1MgYXR0YWNrcy4KCioqV2hlbiB0byBVc2UgU3BlY3RydW0qKjogV2hlbiB5b3VyIHByb3RvY29sIGlzbid0IEhUVFAvSFRUUFMgKHVzZSBDbG91ZGZsYXJlIHByb3h5IGZvciBIVFRQKS4gU3BlY3RydW0gaGFuZGxlcyBldmVyeXRoaW5nIGVsc2U6IFNTSCwgZ2FtaW5nLCBkYXRhYmFzZXMsIE1RVFQsIFNNVFAsIFJEUCwgY3VzdG9tIHByb3RvY29scy4KCiMjIFBsYW4gQ2FwYWJpbGl0aWVzCgp8IENhcGFiaWxpdHkgfCBQcm8vQnVzaW5lc3MgfCBFbnRlcnByaXNlIHwKfC0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgVENQIHByb3RvY29scyB8IFNlbGVjdGVkIHBvcnRzIG9ubHkgfCBBbGwgcG9ydHMgKDEtNjU1MzUpIHwKfCBVRFAgcHJvdG9jb2xzIHwgU2VsZWN0ZWQgcG9ydHMgb25seSB8IEFsbCBwb3J0cyAoMS02NTUzNSkgfAp8IFBvcnQgcmFuZ2VzIHwg4p2MIHwg4pyFIHwKfCBBcmdvIFNtYXJ0IFJvdXRpbmcgfCDinIUgfCDinIUgfAp8IElQIEZpcmV3YWxsIHwg4pyFIHwg4pyFIHwKfCBMb2FkIGJhbGFuY2VyIG9yaWdpbnMgfCDinIUgfCDinIUgfAoKIyMgRGVjaXNpb24gVHJlZQoKKipXaGF0IGFyZSB5b3UgdHJ5aW5nIHRvIGRvPyoqCgoxLiAqKkNyZWF0ZS9tYW5hZ2UgU3BlY3RydW0gYXBwKioKICAgLSBWaWEgRGFzaGJvYXJkIOKGkiBTZWUgW0Nsb3VkZmxhcmUgRGFzaGJvYXJkXShodHRwczovL2Rhc2guY2xvdWRmbGFyZS5jb20pCiAgIC0gVmlhIEFQSSDihpIgU2VlIFthcGkubWRdKGFwaS5tZCkgLSBSRVNUIGVuZHBvaW50cwogICAtIFZpYSBTREsg4oaSIFNlZSBbYXBpLm1kXShhcGkubWQpIC0gVHlwZVNjcmlwdC9QeXRob24vR28gZXhhbXBsZXMKICAgLSBWaWEgSWFDIOKGkiBTZWUgW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIC0gVGVycmFmb3JtL1B1bHVtaQoKMi4gKipQcm90ZWN0IHNwZWNpZmljIHByb3RvY29sKioKICAgLSBTU0gg4oaSIFNlZSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kIzEtc3NoLXNlcnZlci1wcm90ZWN0aW9uKQogICAtIEdhbWluZyAoTWluZWNyYWZ0LCBldGMpIOKGkiBTZWUgW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCMyLWdhbWUtc2VydmVyKQogICAtIE1RVFQvSW9UIOKGkiBTZWUgW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCMzLW1xdHQtYnJva2VyKQogICAtIFNNVFAvRW1haWwg4oaSIFNlZSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kIzQtc210cC1yZWxheSkKICAgLSBEYXRhYmFzZSDihpIgU2VlIFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQjNS1kYXRhYmFzZS1wcm94eSkKICAgLSBSRFAg4oaSIFNlZSBbcGF0dGVybnMubWRdKHBhdHRlcm5zLm1kIzYtcmRwLXJlbW90ZS1kZXNrdG9wKQoKMy4gKipDaG9vc2Ugb3JpZ2luIHR5cGUqKgogICAtIERpcmVjdCBJUCAoc2luZ2xlIHNlcnZlcikg4oaSIFNlZSBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCNkaXJlY3QtaXAtb3JpZ2luKQogICAtIENOQU1FIChob3N0bmFtZSkg4oaSIFNlZSBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCNjbmFtZS1vcmlnaW4pCiAgIC0gTG9hZCBiYWxhbmNlciAoSEEvZmFpbG92ZXIpIOKGkiBTZWUgW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQjbG9hZC1iYWxhbmNlci1vcmlnaW4pCgojIyBSZWFkaW5nIE9yZGVyCgoxLiBTdGFydCB3aXRoIFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIGZvciB5b3VyIHNwZWNpZmljIHByb3RvY29sCjIuIFRoZW4gW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIGZvciB5b3VyIG9yaWdpbiB0eXBlCjMuIENoZWNrIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSBiZWZvcmUgZ29pbmcgdG8gcHJvZHVjdGlvbgo0LiBVc2UgW2FwaS5tZF0oYXBpLm1kKSBmb3IgcHJvZ3JhbW1hdGljIGFjY2VzcwoKIyMgU2VlIEFsc28KCi0gW0Nsb3VkZmxhcmUgRG9jc10oaHR0cHM6Ly9kZXZlbG9wZXJzLmNsb3VkZmxhcmUuY29tL3NwZWN0cnVtLykK
+# Cloudflare Spectrum Skill Reference
+
+## Overview
+
+Cloudflare Spectrum provides security and acceleration for ANY TCP or UDP-based application. It's a global Layer 4 (L4) reverse proxy running on Cloudflare's edge nodes that routes MQTT, email, file transfer, version control, games, and more through Cloudflare to mask origins and protect from DDoS attacks.
+
+**When to Use Spectrum**: When your protocol isn't HTTP/HTTPS (use Cloudflare proxy for HTTP). Spectrum handles everything else: SSH, gaming, databases, MQTT, SMTP, RDP, custom protocols.
+
+## Plan Capabilities
+
+| Capability | Pro/Business | Enterprise |
+|------------|--------------|------------|
+| TCP protocols | Selected ports only | All ports (1-65535) |
+| UDP protocols | Selected ports only | All ports (1-65535) |
+| Port ranges | ❌ | ✅ |
+| Argo Smart Routing | ✅ | ✅ |
+| IP Firewall | ✅ | ✅ |
+| Load balancer origins | ✅ | ✅ |
+
+## Decision Tree
+
+**What are you trying to do?**
+
+1. **Create/manage Spectrum app**
+   - Via Dashboard → See [Cloudflare Dashboard](https://dash.cloudflare.com)
+   - Via API → See [api.md](api.md) - REST endpoints
+   - Via SDK → See [api.md](api.md) - TypeScript/Python/Go examples
+   - Via IaC → See [configuration.md](configuration.md) - Terraform/Pulumi
+
+2. **Protect specific protocol**
+   - SSH → See [patterns.md](patterns.md#1-ssh-server-protection)
+   - Gaming (Minecraft, etc) → See [patterns.md](patterns.md#2-game-server)
+   - MQTT/IoT → See [patterns.md](patterns.md#3-mqtt-broker)
+   - SMTP/Email → See [patterns.md](patterns.md#4-smtp-relay)
+   - Database → See [patterns.md](patterns.md#5-database-proxy)
+   - RDP → See [patterns.md](patterns.md#6-rdp-remote-desktop)
+
+3. **Choose origin type**
+   - Direct IP (single server) → See [configuration.md](configuration.md#direct-ip-origin)
+   - CNAME (hostname) → See [configuration.md](configuration.md#cname-origin)
+   - Load balancer (HA/failover) → See [configuration.md](configuration.md#load-balancer-origin)
+
+## Reading Order
+
+1. Start with [patterns.md](patterns.md) for your specific protocol
+2. Then [configuration.md](configuration.md) for your origin type
+3. Check [gotchas.md](gotchas.md) before going to production
+4. Use [api.md](api.md) for programmatic access
+
+## See Also
+
+- [Cloudflare Docs](https://developers.cloudflare.com/spectrum/)

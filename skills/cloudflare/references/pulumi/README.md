@@ -1,1 +1,100 @@
-IyBDbG91ZGZsYXJlIFB1bHVtaSBQcm92aWRlcgoKRXhwZXJ0IGd1aWRhbmNlIGZvciBDbG91ZGZsYXJlIFB1bHVtaSBQcm92aWRlciAoQHB1bHVtaS9jbG91ZGZsYXJlKS4KCiMjIE92ZXJ2aWV3CgpQcm9ncmFtbWF0aWMgbWFuYWdlbWVudCBvZiBDbG91ZGZsYXJlIHJlc291cmNlczogV29ya2VycywgUGFnZXMsIEQxLCBLViwgUjIsIEROUywgUXVldWVzLCBldGMuCgoqKlBhY2thZ2VzOioqCi0gVHlwZVNjcmlwdC9KUzogYEBwdWx1bWkvY2xvdWRmbGFyZWAKLSBQeXRob246IGBwdWx1bWktY2xvdWRmbGFyZWAKLSBHbzogYGdpdGh1Yi5jb20vcHVsdW1pL3B1bHVtaS1jbG91ZGZsYXJlL3Nkay92Ni9nby9jbG91ZGZsYXJlYAotIC5ORVQ6IGBQdWx1bWkuQ2xvdWRmbGFyZWAKCioqVmVyc2lvbjoqKiB2Ni54CgojIyBDb3JlIFByaW5jaXBsZXMKCjEuIFVzZSBBUEkgdG9rZW5zIChub3QgbGVnYWN5IEFQSSBrZXlzKQoyLiBTdG9yZSBhY2NvdW50SWQgaW4gc3RhY2sgY29uZmlnCjMuIE1hdGNoIGJpbmRpbmcgbmFtZXMgYWNyb3NzIGNvZGUvY29uZmlnCjQuIFVzZSBgbW9kdWxlOiB0cnVlYCBmb3IgRVMgbW9kdWxlcwo1LiBTZXQgYGNvbXBhdGliaWxpdHlEYXRlYCB0byBsb2NrIGJlaGF2aW9yCgojIyBBdXRoZW50aWNhdGlvbgoKYGBgdHlwZXNjcmlwdAppbXBvcnQgKiBhcyBjbG91ZGZsYXJlIGZyb20gIkBwdWx1bWkvY2xvdWRmbGFyZSI7CgovLyBBUEkgVG9rZW4gKHJlY29tbWVuZGVkKTogQ0xPVURGTEFSRV9BUElfVE9LRU4gZW52CmNvbnN0IHByb3ZpZGVyID0gbmV3IGNsb3VkZmxhcmUuUHJvdmlkZXIoImNmIiwgeyBhcGlUb2tlbjogcHJvY2Vzcy5lbnYuQ0xPVURGTEFSRV9BUElfVE9LRU4gfSk7CgovLyBBUEkgS2V5IChsZWdhY3kpOiBDTE9VREZMQVJFX0FQSV9LRVkgKyBDTE9VREZMQVJFX0VNQUlMIGVudgpjb25zdCBwcm92aWRlciA9IG5ldyBjbG91ZGZsYXJlLlByb3ZpZGVyKCJjZiIsIHsgYXBpS2V5OiBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0FQSV9LRVksIGVtYWlsOiBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0VNQUlMIH0pOwoKLy8gQVBJIFVzZXIgU2VydmljZSBLZXk6IENMT1VERkxBUkVfQVBJX1VTRVJfU0VSVklDRV9LRVkgZW52CmNvbnN0IHByb3ZpZGVyID0gbmV3IGNsb3VkZmxhcmUuUHJvdmlkZXIoImNmIiwgeyBhcGlVc2VyU2VydmljZUtleTogcHJvY2Vzcy5lbnYuQ0xPVURGTEFSRV9BUElfVVNFUl9TRVJWSUNFX0tFWSB9KTsKYGBgCgojIyBTZXR1cAoKKipQdWx1bWkueWFtbDoqKgpgYGB5YW1sCm5hbWU6IG15LWNsb3VkZmxhcmUtYXBwCnJ1bnRpbWU6IG5vZGVqcwpjb25maWc6CiAgY2xvdWRmbGFyZTphcGlUb2tlbjoKICAgIHZhbHVlOiAke0NMT1VERkxBUkVfQVBJX1RPS0VOfQpgYGAKCioqUHVsdW1pLjxzdGFjaz4ueWFtbDoqKgpgYGB5YW1sCmNvbmZpZzoKICBjbG91ZGZsYXJlOmFjY291bnRJZDogImFiYzEyMy4uLiIKYGBgCgoqKmluZGV4LnRzOioqCmBgYHR5cGVzY3JpcHQKaW1wb3J0ICogYXMgcHVsdW1pIGZyb20gIkBwdWx1bWkvcHVsdW1pIjsKaW1wb3J0ICogYXMgY2xvdWRmbGFyZSBmcm9tICJAcHVsdW1pL2Nsb3VkZmxhcmUiOwpjb25zdCBhY2NvdW50SWQgPSBuZXcgcHVsdW1pLkNvbmZpZygiY2xvdWRmbGFyZSIpLnJlcXVpcmUoImFjY291bnRJZCIpOwpgYGAKCiMjIENvbW1vbiBSZXNvdXJjZSBUeXBlcwotIGBQcm92aWRlcmAgLSBQcm92aWRlciBjb25maWcKLSBgV29ya2VyU2NyaXB0YCAtIFdvcmtlcgotIGBXb3JrZXJzS3ZOYW1lc3BhY2VgIC0gS1YKLSBgUjJCdWNrZXRgIC0gUjIKLSBgRDFEYXRhYmFzZWAgLSBEMQotIGBRdWV1ZWAgLSBRdWV1ZQotIGBQYWdlc1Byb2plY3RgIC0gUGFnZXMKLSBgRG5zUmVjb3JkYCAtIEROUwotIGBXb3JrZXJSb3V0ZWAgLSBXb3JrZXIgcm91dGUKLSBgV29ya2Vyc0RvbWFpbmAgLSBDdXN0b20gZG9tYWluCgojIyBLZXkgUHJvcGVydGllcwotIGBhY2NvdW50SWRgIC0gUmVxdWlyZWQgZm9yIG1vc3QgcmVzb3VyY2VzCi0gYHpvbmVJZGAgLSBSZXF1aXJlZCBmb3IgRE5TL2RvbWFpbgotIGBuYW1lYC9gdGl0bGVgIC0gUmVzb3VyY2UgaWRlbnRpZmllcgotIGAqQmluZGluZ3NgIC0gQ29ubmVjdCByZXNvdXJjZXMgdG8gV29ya2VycwoKIyMgUmVhZGluZyBPcmRlcgoKfCBPcmRlciB8IEZpbGUgfCBXaGF0IHwgV2hlbiB0byBSZWFkIHwKfC0tLS0tLS18LS0tLS0tfC0tLS0tLXwtLS0tLS0tLS0tLS0tLXwKfCAxIHwgW2NvbmZpZ3VyYXRpb24ubWRdKC4vY29uZmlndXJhdGlvbi5tZCkgfCBSZXNvdXJjZSBjb25maWcgZm9yIFdvcmtlcnMvS1YvRDEvUjIvUXVldWVzL1BhZ2VzIHwgRmlyc3QgdGltZSBzZXR1cCwgcmVzb3VyY2UgcmVmZXJlbmNlIHwKfCAyIHwgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSB8IEFyY2hpdGVjdHVyZSBwYXR0ZXJucywgbXVsdGktZW52LCBjb21wb25lbnQgcmVzb3VyY2VzIHwgQnVpbGRpbmcgY29tcGxleCBhcHBzLCBiZXN0IHByYWN0aWNlcyB8CnwgMyB8IFthcGkubWRdKC4vYXBpLm1kKSB8IE91dHB1dHMsIGRlcGVuZGVuY2llcywgaW1wb3J0cywgZHluYW1pYyBwcm92aWRlcnMgfCBBZHZhbmNlZCBmZWF0dXJlcywgaW50ZWdyYXRpb25zIHwKfCA0IHwgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgfCBDb21tb24gZXJyb3JzLCB0cm91Ymxlc2hvb3RpbmcsIGxpbWl0cyB8IERlYnVnZ2luZywgZGVwbG95bWVudCBpc3N1ZXMgfAoKIyMgSW4gVGhpcyBSZWZlcmVuY2UKLSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIFByb3ZpZGVyIGNvbmZpZywgc3RhY2sgc2V0dXAsIFdvcmtlcnMvYmluZGluZ3MKLSBbYXBpLm1kXSguL2FwaS5tZCkgLSBSZXNvdXJjZSB0eXBlcywgV29ya2VycyBzY3JpcHQsIEtWL0QxL1IyL3F1ZXVlcy9QYWdlcwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBNdWx0aS1lbnYsIHNlY3JldHMsIENJL0NELCBzdGFjayBtYW5hZ2VtZW50Ci0gW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgLSBTdGF0ZSBpc3N1ZXMsIGRlcGxveW1lbnQgZmFpbHVyZXMsIGxpbWl0cwoKIyMgU2VlIEFsc28KLSBbdGVycmFmb3JtXSguLi90ZXJyYWZvcm0vKSAtIEFsdGVybmF0aXZlIElhQyBmb3IgQ2xvdWRmbGFyZQotIFt3cmFuZ2xlcl0oLi4vd3JhbmdsZXIvKSAtIENMSSBkZXBsb3ltZW50IGFsdGVybmF0aXZlCi0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIFdvcmtlciBydW50aW1lIGRvY3VtZW50YXRpb24K
+# Cloudflare Pulumi Provider
+
+Expert guidance for Cloudflare Pulumi Provider (@pulumi/cloudflare).
+
+## Overview
+
+Programmatic management of Cloudflare resources: Workers, Pages, D1, KV, R2, DNS, Queues, etc.
+
+**Packages:**
+- TypeScript/JS: `@pulumi/cloudflare`
+- Python: `pulumi-cloudflare`
+- Go: `github.com/pulumi/pulumi-cloudflare/sdk/v6/go/cloudflare`
+- .NET: `Pulumi.Cloudflare`
+
+**Version:** v6.x
+
+## Core Principles
+
+1. Use API tokens (not legacy API keys)
+2. Store accountId in stack config
+3. Match binding names across code/config
+4. Use `module: true` for ES modules
+5. Set `compatibilityDate` to lock behavior
+
+## Authentication
+
+```typescript
+import * as cloudflare from "@pulumi/cloudflare";
+
+// API Token (recommended): CLOUDFLARE_API_TOKEN env
+const provider = new cloudflare.Provider("cf", { apiToken: process.env.CLOUDFLARE_API_TOKEN });
+
+// API Key (legacy): CLOUDFLARE_API_KEY + CLOUDFLARE_EMAIL env
+const provider = new cloudflare.Provider("cf", { apiKey: process.env.CLOUDFLARE_API_KEY, email: process.env.CLOUDFLARE_EMAIL });
+
+// API User Service Key: CLOUDFLARE_API_USER_SERVICE_KEY env
+const provider = new cloudflare.Provider("cf", { apiUserServiceKey: process.env.CLOUDFLARE_API_USER_SERVICE_KEY });
+```
+
+## Setup
+
+**Pulumi.yaml:**
+```yaml
+name: my-cloudflare-app
+runtime: nodejs
+config:
+  cloudflare:apiToken:
+    value: ${CLOUDFLARE_API_TOKEN}
+```
+
+**Pulumi.<stack>.yaml:**
+```yaml
+config:
+  cloudflare:accountId: "abc123..."
+```
+
+**index.ts:**
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as cloudflare from "@pulumi/cloudflare";
+const accountId = new pulumi.Config("cloudflare").require("accountId");
+```
+
+## Common Resource Types
+- `Provider` - Provider config
+- `WorkerScript` - Worker
+- `WorkersKvNamespace` - KV
+- `R2Bucket` - R2
+- `D1Database` - D1
+- `Queue` - Queue
+- `PagesProject` - Pages
+- `DnsRecord` - DNS
+- `WorkerRoute` - Worker route
+- `WorkersDomain` - Custom domain
+
+## Key Properties
+- `accountId` - Required for most resources
+- `zoneId` - Required for DNS/domain
+- `name`/`title` - Resource identifier
+- `*Bindings` - Connect resources to Workers
+
+## Reading Order
+
+| Order | File | What | When to Read |
+|-------|------|------|--------------|
+| 1 | [configuration.md](./configuration.md) | Resource config for Workers/KV/D1/R2/Queues/Pages | First time setup, resource reference |
+| 2 | [patterns.md](./patterns.md) | Architecture patterns, multi-env, component resources | Building complex apps, best practices |
+| 3 | [api.md](./api.md) | Outputs, dependencies, imports, dynamic providers | Advanced features, integrations |
+| 4 | [gotchas.md](./gotchas.md) | Common errors, troubleshooting, limits | Debugging, deployment issues |
+
+## In This Reference
+- [configuration.md](./configuration.md) - Provider config, stack setup, Workers/bindings
+- [api.md](./api.md) - Resource types, Workers script, KV/D1/R2/queues/Pages
+- [patterns.md](./patterns.md) - Multi-env, secrets, CI/CD, stack management
+- [gotchas.md](./gotchas.md) - State issues, deployment failures, limits
+
+## See Also
+- [terraform](../terraform/) - Alternative IaC for Cloudflare
+- [wrangler](../wrangler/) - CLI deployment alternative
+- [workers](../workers/) - Worker runtime documentation

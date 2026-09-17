@@ -1,1 +1,207 @@
-IyBQYXR0ZXJucwoKIyMgU2VjcmV0IFJvdGF0aW9uCgpaZXJvLWRvd250aW1lIHJvdGF0aW9uIHdpdGggdmVyc2lvbmVkIG5hbWluZyAoYGFwaV9rZXlfdjFgLCBgYXBpX2tleV92MmApOgoKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBQUklNQVJZX0tFWTogeyBnZXQoKTogUHJvbWlzZTxzdHJpbmc+IH07CiAgRkFMTEJBQ0tfS0VZPzogeyBnZXQoKTogUHJvbWlzZTxzdHJpbmc+IH07Cn0KCmFzeW5jIGZ1bmN0aW9uIGZldGNoV2l0aEF1dGgodXJsOiBzdHJpbmcsIGtleTogc3RyaW5nKSB7CiAgcmV0dXJuIGZldGNoKHVybCwgeyBoZWFkZXJzOiB7ICJBdXRob3JpemF0aW9uIjogYEJlYXJlciAke2tleX1gIH0gfSk7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGxldCByZXNwID0gYXdhaXQgZmV0Y2hXaXRoQXV0aCgiaHR0cHM6Ly9hcGkuZXhhbXBsZS5jb20iLCBhd2FpdCBlbnYuUFJJTUFSWV9LRVkuZ2V0KCkpOwogICAgCiAgICAvLyBGYWxsYmFjayBkdXJpbmcgcm90YXRpb24KICAgIGlmICghcmVzcC5vayAmJiBlbnYuRkFMTEJBQ0tfS0VZKSB7CiAgICAgIHJlc3AgPSBhd2FpdCBmZXRjaFdpdGhBdXRoKCJodHRwczovL2FwaS5leGFtcGxlLmNvbSIsIGF3YWl0IGVudi5GQUxMQkFDS19LRVkuZ2V0KCkpOwogICAgfQogICAgCiAgICByZXR1cm4gcmVzcDsKICB9Cn0KYGBgCgpXb3JrZmxvdzogQ3JlYXRlIGBhcGlfa2V5X3YyYCDihpIgYWRkIGZhbGxiYWNrIGJpbmRpbmcg4oaSIGRlcGxveSDihpIgc3dhcCBwcmltYXJ5IOKGkiBkZXBsb3kg4oaSIHJlbW92ZSBgdjFgCgojIyBFbmNyeXB0aW9uIHdpdGggS1YKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgQ0FDSEU6IEtWTmFtZXNwYWNlOwogIEVOQ1JZUFRJT05fS0VZOiB7IGdldCgpOiBQcm9taXNlPHN0cmluZz4gfTsKfQoKYXN5bmMgZnVuY3Rpb24gZW5jcnlwdFZhbHVlKHZhbHVlOiBzdHJpbmcsIGtleTogc3RyaW5nKTogUHJvbWlzZTxzdHJpbmc+IHsKICBjb25zdCBlbmMgPSBuZXcgVGV4dEVuY29kZXIoKTsKICBjb25zdCBrZXlNYXRlcmlhbCA9IGF3YWl0IGNyeXB0by5zdWJ0bGUuaW1wb3J0S2V5KAogICAgInJhdyIsIGVuYy5lbmNvZGUoa2V5KSwgeyBuYW1lOiAiQUVTLUdDTSIgfSwgZmFsc2UsIFsiZW5jcnlwdCJdCiAgKTsKICBjb25zdCBpdiA9IGNyeXB0by5nZXRSYW5kb21WYWx1ZXMobmV3IFVpbnQ4QXJyYXkoMTIpKTsKICBjb25zdCBlbmNyeXB0ZWQgPSBhd2FpdCBjcnlwdG8uc3VidGxlLmVuY3J5cHQoCiAgICB7IG5hbWU6ICJBRVMtR0NNIiwgaXYgfSwga2V5TWF0ZXJpYWwsIGVuYy5lbmNvZGUodmFsdWUpCiAgKTsKICAKICBjb25zdCBjb21iaW5lZCA9IG5ldyBVaW50OEFycmF5KGl2Lmxlbmd0aCArIGVuY3J5cHRlZC5ieXRlTGVuZ3RoKTsKICBjb21iaW5lZC5zZXQoaXYpOwogIGNvbWJpbmVkLnNldChuZXcgVWludDhBcnJheShlbmNyeXB0ZWQpLCBpdi5sZW5ndGgpOwogIHJldHVybiBidG9hKFN0cmluZy5mcm9tQ2hhckNvZGUoLi4uY29tYmluZWQpKTsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3Qga2V5ID0gYXdhaXQgZW52LkVOQ1JZUFRJT05fS0VZLmdldCgpOwogICAgY29uc3QgZW5jcnlwdGVkID0gYXdhaXQgZW5jcnlwdFZhbHVlKCJzZW5zaXRpdmUtZGF0YSIsIGtleSk7CiAgICBhd2FpdCBlbnYuQ0FDSEUucHV0KCJ1c2VyOjEyMzpkYXRhIiwgZW5jcnlwdGVkKTsKICAgIHJldHVybiBSZXNwb25zZS5qc29uKHsgb2s6IHRydWUgfSk7CiAgfQp9CmBgYAoKIyMgSE1BQyBTaWduaW5nCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIEhNQUNfU0VDUkVUOiB7IGdldCgpOiBQcm9taXNlPHN0cmluZz4gfTsKfQoKYXN5bmMgZnVuY3Rpb24gc2lnblJlcXVlc3QoZGF0YTogc3RyaW5nLCBzZWNyZXQ6IHN0cmluZyk6IFByb21pc2U8c3RyaW5nPiB7CiAgY29uc3QgZW5jID0gbmV3IFRleHRFbmNvZGVyKCk7CiAgY29uc3Qga2V5ID0gYXdhaXQgY3J5cHRvLnN1YnRsZS5pbXBvcnRLZXkoCiAgICAicmF3IiwgZW5jLmVuY29kZShzZWNyZXQpLCB7IG5hbWU6ICJITUFDIiwgaGFzaDogIlNIQS0yNTYiIH0sIGZhbHNlLCBbInNpZ24iXQogICk7CiAgY29uc3Qgc2lnID0gYXdhaXQgY3J5cHRvLnN1YnRsZS5zaWduKCJITUFDIiwga2V5LCBlbmMuZW5jb2RlKGRhdGEpKTsKICByZXR1cm4gYnRvYShTdHJpbmcuZnJvbUNoYXJDb2RlKC4uLm5ldyBVaW50OEFycmF5KHNpZykpKTsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3Qgc2VjcmV0ID0gYXdhaXQgZW52LkhNQUNfU0VDUkVULmdldCgpOwogICAgY29uc3QgcGF5bG9hZCA9IGF3YWl0IHJlcXVlc3QudGV4dCgpOwogICAgY29uc3Qgc2lnbmF0dXJlID0gYXdhaXQgc2lnblJlcXVlc3QocGF5bG9hZCwgc2VjcmV0KTsKICAgIHJldHVybiBSZXNwb25zZS5qc29uKHsgc2lnbmF0dXJlIH0pOwogIH0KfQpgYGAKCiMjIEF1ZGl0ICYgTW9uaXRvcmluZwoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCkgewogICAgY29uc3Qgc3RhcnRUaW1lID0gRGF0ZS5ub3coKTsKICAgIHRyeSB7CiAgICAgIGNvbnN0IGFwaUtleSA9IGF3YWl0IGVudi5BUElfS0VZLmdldCgpOwogICAgICBjb25zdCByZXNwID0gYXdhaXQgZmV0Y2goImh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiwgewogICAgICAgIGhlYWRlcnM6IHsgIkF1dGhvcml6YXRpb24iOiBgQmVhcmVyICR7YXBpS2V5fWAgfQogICAgICB9KTsKICAgICAgCiAgICAgIGN0eC53YWl0VW50aWwoCiAgICAgICAgZmV0Y2goImh0dHBzOi8vbG9nLmV4YW1wbGUuY29tL2xvZyIsIHsKICAgICAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoewogICAgICAgICAgICBldmVudDogInNlY3JldF91c2VkIiwKICAgICAgICAgICAgc2VjcmV0X25hbWU6ICJBUElfS0VZIiwKICAgICAgICAgICAgdGltZXN0YW1wOiBuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKCksCiAgICAgICAgICAgIGR1cmF0aW9uX21zOiBEYXRlLm5vdygpIC0gc3RhcnRUaW1lLAogICAgICAgICAgICBzdWNjZXNzOiByZXNwLm9rCiAgICAgICAgICB9KQogICAgICAgIH0pCiAgICAgICk7CiAgICAgIHJldHVybiByZXNwOwogICAgfSBjYXRjaCAoZXJyb3IpIHsKICAgICAgY3R4LndhaXRVbnRpbCgKICAgICAgICBmZXRjaCgiaHR0cHM6Ly9sb2cuZXhhbXBsZS5jb20vbG9nIiwgewogICAgICAgICAgbWV0aG9kOiAiUE9TVCIsCiAgICAgICAgICBib2R5OiBKU09OLnN0cmluZ2lmeSh7CiAgICAgICAgICAgIGV2ZW50OiAic2VjcmV0X2FjY2Vzc19mYWlsZWQiLAogICAgICAgICAgICBzZWNyZXRfbmFtZTogIkFQSV9LRVkiLAogICAgICAgICAgICBlcnJvcjogZXJyb3IgaW5zdGFuY2VvZiBFcnJvciA/IGVycm9yLm1lc3NhZ2UgOiAiVW5rbm93biIKICAgICAgICAgIH0pCiAgICAgICAgfSkKICAgICAgKTsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgiRXJyb3IiLCB7IHN0YXR1czogNTAwIH0pOwogICAgfQogIH0KfQpgYGAKCiMjIE1pZ3JhdGlvbiBmcm9tIFdvcmtlciBTZWNyZXRzCgpDaGFuZ2UgYGVudi5TRUNSRVRgIChkaXJlY3QpIHRvIGBhd2FpdCBlbnYuU0VDUkVULmdldCgpYCAoYXN5bmMpLgoKU3RlcHM6CjEuIENyZWF0ZSBpbiBTZWNyZXRzIFN0b3JlOiBgd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgY3JlYXRlIDxzdG9yZS1pZD4gLS1uYW1lIEFQSV9LRVkgLS1zY29wZXMgd29ya2VycyAtLXJlbW90ZWAKMi4gQWRkIGJpbmRpbmcgdG8gYHdyYW5nbGVyLmpzb25jYDogYHsiYmluZGluZyI6ICJBUElfS0VZIiwgInN0b3JlX2lkIjogImFiYzEyMyIsICJzZWNyZXRfbmFtZSI6ICJhcGlfa2V5In1gCjMuIFVwZGF0ZSBjb2RlOiBgY29uc3Qga2V5ID0gYXdhaXQgZW52LkFQSV9LRVkuZ2V0KCk7YAo0LiBUZXN0IHN0YWdpbmcsIGRlcGxveQo1LiBSZW1vdmUgb2xkOiBgd3JhbmdsZXIgc2VjcmV0IGRlbGV0ZSBBUElfS0VZYAoKIyMgU2hhcmluZyBBY3Jvc3MgV29ya2VycwoKU2FtZSBzZWNyZXQsIGRpZmZlcmVudCBiaW5kaW5nIG5hbWVzOgoKYGBganNvbmMKLy8gd29ya2VyLTE6IGJpbmRpbmc9IlNIQVJFRF9EQiIsIHNlY3JldF9uYW1lPSJwb3N0Z3Jlc191cmwiCi8vIHdvcmtlci0yOiBiaW5kaW5nPSJEQl9DT05OIiwgc2VjcmV0X25hbWU9InBvc3RncmVzX3VybCIKYGBgCgojIyBKU09OIFNlY3JldCBQYXJzaW5nCgpTdG9yZSBzdHJ1Y3R1cmVkIGNvbmZpZyBhcyBKU09OIHNlY3JldHM6CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIERCX0NPTkZJRzogeyBnZXQoKTogUHJvbWlzZTxzdHJpbmc+IH07Cn0KCmludGVyZmFjZSBEYkNvbmZpZyB7CiAgaG9zdDogc3RyaW5nOwogIHBvcnQ6IG51bWJlcjsKICB1c2VybmFtZTogc3RyaW5nOwogIHBhc3N3b3JkOiBzdHJpbmc7Cn0KCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIHRyeSB7CiAgICAgIGNvbnN0IGNvbmZpZ1N0ciA9IGF3YWl0IGVudi5EQl9DT05GSUcuZ2V0KCk7CiAgICAgIGNvbnN0IGNvbmZpZzogRGJDb25maWcgPSBKU09OLnBhcnNlKGNvbmZpZ1N0cik7CiAgICAgIAogICAgICAvLyBVc2UgcGFyc2VkIGNvbmZpZwogICAgICBjb25zdCBkYlVybCA9IGBwb3N0Z3JlczovLyR7Y29uZmlnLnVzZXJuYW1lfToke2NvbmZpZy5wYXNzd29yZH1AJHtjb25maWcuaG9zdH06JHtjb25maWcucG9ydH1gOwogICAgICAKICAgICAgcmV0dXJuIFJlc3BvbnNlLmpzb24oeyBjb25uZWN0ZWQ6IHRydWUgfSk7CiAgICB9IGNhdGNoIChlcnJvcikgewogICAgICBpZiAoZXJyb3IgaW5zdGFuY2VvZiBTeW50YXhFcnJvcikgewogICAgICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIkludmFsaWQgY29uZmlnIEpTT04iLCB7IHN0YXR1czogNTAwIH0pOwogICAgICB9CiAgICAgIHRocm93IGVycm9yOwogICAgfQogIH0KfQpgYGAKClN0b3JlIEpTT04gc2VjcmV0OgoKYGBgYmFzaAplY2hvICd7Imhvc3QiOiJkYi5leGFtcGxlLmNvbSIsInBvcnQiOjU0MzIsInVzZXJuYW1lIjoiYXBwIiwicGFzc3dvcmQiOiJzZWNyZXQifScgfCBcCiAgd3JhbmdsZXIgc2VjcmV0cy1zdG9yZSBzZWNyZXQgY3JlYXRlIDxzdG9yZS1pZD4gXAogICAgLS1uYW1lIERCX0NPTkZJRyAtLXNjb3BlcyB3b3JrZXJzIC0tcmVtb3RlCmBgYAoKIyMgSW50ZWdyYXRpb24KCiMjIyBTZXJ2aWNlIEJpbmRpbmdzCgpBdXRoIFdvcmtlciBzaWducyBKV1Qgd2l0aCBTZWNyZXRzIFN0b3JlOyBBUEkgV29ya2VyIHZlcmlmaWVzIHZpYSBzZXJ2aWNlIGJpbmRpbmcuCgpTZWU6IFt3b3JrZXJzXSguLi93b3JrZXJzLykgZm9yIHNlcnZpY2UgYmluZGluZyBwYXR0ZXJucy4KClNlZTogW2FwaS5tZF0oLi9hcGkubWQpLCBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKQo=
+# Patterns
+
+## Secret Rotation
+
+Zero-downtime rotation with versioned naming (`api_key_v1`, `api_key_v2`):
+
+```typescript
+interface Env {
+  PRIMARY_KEY: { get(): Promise<string> };
+  FALLBACK_KEY?: { get(): Promise<string> };
+}
+
+async function fetchWithAuth(url: string, key: string) {
+  return fetch(url, { headers: { "Authorization": `Bearer ${key}` } });
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    let resp = await fetchWithAuth("https://api.example.com", await env.PRIMARY_KEY.get());
+    
+    // Fallback during rotation
+    if (!resp.ok && env.FALLBACK_KEY) {
+      resp = await fetchWithAuth("https://api.example.com", await env.FALLBACK_KEY.get());
+    }
+    
+    return resp;
+  }
+}
+```
+
+Workflow: Create `api_key_v2` → add fallback binding → deploy → swap primary → deploy → remove `v1`
+
+## Encryption with KV
+
+```typescript
+interface Env {
+  CACHE: KVNamespace;
+  ENCRYPTION_KEY: { get(): Promise<string> };
+}
+
+async function encryptValue(value: string, key: string): Promise<string> {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw", enc.encode(key), { name: "AES-GCM" }, false, ["encrypt"]
+  );
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv }, keyMaterial, enc.encode(value)
+  );
+  
+  const combined = new Uint8Array(iv.length + encrypted.byteLength);
+  combined.set(iv);
+  combined.set(new Uint8Array(encrypted), iv.length);
+  return btoa(String.fromCharCode(...combined));
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const key = await env.ENCRYPTION_KEY.get();
+    const encrypted = await encryptValue("sensitive-data", key);
+    await env.CACHE.put("user:123:data", encrypted);
+    return Response.json({ ok: true });
+  }
+}
+```
+
+## HMAC Signing
+
+```typescript
+interface Env {
+  HMAC_SECRET: { get(): Promise<string> };
+}
+
+async function signRequest(data: string, secret: string): Promise<string> {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, enc.encode(data));
+  return btoa(String.fromCharCode(...new Uint8Array(sig)));
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const secret = await env.HMAC_SECRET.get();
+    const payload = await request.text();
+    const signature = await signRequest(payload, secret);
+    return Response.json({ signature });
+  }
+}
+```
+
+## Audit & Monitoring
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext) {
+    const startTime = Date.now();
+    try {
+      const apiKey = await env.API_KEY.get();
+      const resp = await fetch("https://api.example.com", {
+        headers: { "Authorization": `Bearer ${apiKey}` }
+      });
+      
+      ctx.waitUntil(
+        fetch("https://log.example.com/log", {
+          method: "POST",
+          body: JSON.stringify({
+            event: "secret_used",
+            secret_name: "API_KEY",
+            timestamp: new Date().toISOString(),
+            duration_ms: Date.now() - startTime,
+            success: resp.ok
+          })
+        })
+      );
+      return resp;
+    } catch (error) {
+      ctx.waitUntil(
+        fetch("https://log.example.com/log", {
+          method: "POST",
+          body: JSON.stringify({
+            event: "secret_access_failed",
+            secret_name: "API_KEY",
+            error: error instanceof Error ? error.message : "Unknown"
+          })
+        })
+      );
+      return new Response("Error", { status: 500 });
+    }
+  }
+}
+```
+
+## Migration from Worker Secrets
+
+Change `env.SECRET` (direct) to `await env.SECRET.get()` (async).
+
+Steps:
+1. Create in Secrets Store: `wrangler secrets-store secret create <store-id> --name API_KEY --scopes workers --remote`
+2. Add binding to `wrangler.jsonc`: `{"binding": "API_KEY", "store_id": "abc123", "secret_name": "api_key"}`
+3. Update code: `const key = await env.API_KEY.get();`
+4. Test staging, deploy
+5. Remove old: `wrangler secret delete API_KEY`
+
+## Sharing Across Workers
+
+Same secret, different binding names:
+
+```jsonc
+// worker-1: binding="SHARED_DB", secret_name="postgres_url"
+// worker-2: binding="DB_CONN", secret_name="postgres_url"
+```
+
+## JSON Secret Parsing
+
+Store structured config as JSON secrets:
+
+```typescript
+interface Env {
+  DB_CONFIG: { get(): Promise<string> };
+}
+
+interface DbConfig {
+  host: string;
+  port: number;
+  username: string;
+  password: string;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    try {
+      const configStr = await env.DB_CONFIG.get();
+      const config: DbConfig = JSON.parse(configStr);
+      
+      // Use parsed config
+      const dbUrl = `postgres://${config.username}:${config.password}@${config.host}:${config.port}`;
+      
+      return Response.json({ connected: true });
+    } catch (error) {
+      if (error instanceof SyntaxError) {
+        return new Response("Invalid config JSON", { status: 500 });
+      }
+      throw error;
+    }
+  }
+}
+```
+
+Store JSON secret:
+
+```bash
+echo '{"host":"db.example.com","port":5432,"username":"app","password":"secret"}' | \
+  wrangler secrets-store secret create <store-id> \
+    --name DB_CONFIG --scopes workers --remote
+```
+
+## Integration
+
+### Service Bindings
+
+Auth Worker signs JWT with Secrets Store; API Worker verifies via service binding.
+
+See: [workers](../workers/) for service binding patterns.
+
+See: [api.md](./api.md), [gotchas.md](./gotchas.md)

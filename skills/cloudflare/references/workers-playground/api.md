@@ -1,1 +1,101 @@
-IyBXb3JrZXJzIFBsYXlncm91bmQgQVBJCgojIyBIYW5kbGVyCgpgYGBqYXZhc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYsIGN0eCkgewogICAgLy8gcmVxdWVzdDogUmVxdWVzdCwgZW52OiB7fSAoZW1wdHkgaW4gcGxheWdyb3VuZCksIGN0eDogRXhlY3V0aW9uQ29udGV4dAogICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnSGVsbG8nKTsKICB9Cn07CmBgYAoKIyMgUmVxdWVzdAoKYGBgamF2YXNjcmlwdApjb25zdCBtZXRob2QgPSByZXF1ZXN0Lm1ldGhvZDsgICAgICAgLy8gIkdFVCIsICJQT1NUIgpjb25zdCB1cmwgPSBuZXcgVVJMKHJlcXVlc3QudXJsKTsgICAgLy8gUGFyc2UgVVJMCmNvbnN0IGhlYWRlcnMgPSByZXF1ZXN0LmhlYWRlcnM7ICAgICAvLyBIZWFkZXJzIG9iamVjdApjb25zdCBib2R5ID0gYXdhaXQgcmVxdWVzdC5qc29uKCk7ICAgLy8gUmVhZCBib2R5IChjb25zdW1lcyBzdHJlYW0pCmNvbnN0IGNsb25lID0gcmVxdWVzdC5jbG9uZSgpOyAgICAgICAvLyBDbG9uZSBiZWZvcmUgcmVhZGluZyBib2R5CgovLyBRdWVyeSBwYXJhbXMKdXJsLnNlYXJjaFBhcmFtcy5nZXQoJ3BhZ2UnKTsgICAgICAgIC8vIFNpbmdsZSB2YWx1ZQp1cmwuc2VhcmNoUGFyYW1zLmdldEFsbCgndGFnJyk7ICAgICAgLy8gQXJyYXkKCi8vIENsb3VkZmxhcmUgbWV0YWRhdGEKcmVxdWVzdC5jZi5jb3VudHJ5OyAgICAgICAgICAgICAgICAgIC8vICJVUyIKcmVxdWVzdC5jZi5jb2xvOyAgICAgICAgICAgICAgICAgICAgIC8vICJTRk8iCmBgYAoKIyMgUmVzcG9uc2UKCmBgYGphdmFzY3JpcHQKLy8gVGV4dApyZXR1cm4gbmV3IFJlc3BvbnNlKCdIZWxsbycsIHsgc3RhdHVzOiAyMDAgfSk7CgovLyBKU09OCnJldHVybiBSZXNwb25zZS5qc29uKHsgZGF0YSB9LCB7IHN0YXR1czogMjAwLCBoZWFkZXJzOiB7Li4ufSB9KTsKCi8vIFJlZGlyZWN0CnJldHVybiBSZXNwb25zZS5yZWRpcmVjdCgnL25ldy1wYXRoJywgMzAxKTsKCi8vIE1vZGlmeSBleGlzdGluZwpjb25zdCBtb2RpZmllZCA9IG5ldyBSZXNwb25zZShyZXNwb25zZS5ib2R5LCByZXNwb25zZSk7Cm1vZGlmaWVkLmhlYWRlcnMuc2V0KCdYLUN1c3RvbScsICd2YWx1ZScpOwpgYGAKCiMjIEV4ZWN1dGlvbkNvbnRleHQKCmBgYGphdmFzY3JpcHQKLy8gQmFja2dyb3VuZCB3b3JrIChhZnRlciByZXNwb25zZSBzZW50KQpjdHgud2FpdFVudGlsKGZldGNoKCdodHRwczovL2xvZ3MuZXhhbXBsZS5jb20nLCB7IG1ldGhvZDogJ1BPU1QnLCBib2R5OiAnLi4uJyB9KSk7CnJldHVybiBuZXcgUmVzcG9uc2UoJ09LJyk7IC8vIFJldHVybnMgaW1tZWRpYXRlbHkKYGBgCgojIyBGZXRjaAoKYGBgamF2YXNjcmlwdApjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKCdodHRwczovL2FwaS5leGFtcGxlLmNvbScpOwpjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuanNvbigpOwoKLy8gV2l0aCBvcHRpb25zCmF3YWl0IGZldGNoKHVybCwgewogIG1ldGhvZDogJ1BPU1QnLAogIGhlYWRlcnM6IHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9LAogIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsgbmFtZTogJ0FsaWNlJyB9KQp9KTsKYGBgCgojIyBDYWNoZQoKYGBgamF2YXNjcmlwdApjb25zdCBjYWNoZSA9IGNhY2hlcy5kZWZhdWx0OwoKLy8gQ2hlY2sgY2FjaGUKbGV0IHJlc3BvbnNlID0gYXdhaXQgY2FjaGUubWF0Y2gocmVxdWVzdCk7CmlmICghcmVzcG9uc2UpIHsKICByZXNwb25zZSA9IGF3YWl0IGZldGNoKG9yaWdpbik7CiAgYXdhaXQgY2FjaGUucHV0KHJlcXVlc3QsIHJlc3BvbnNlLmNsb25lKCkpOyAvLyBDbG9uZSBiZWZvcmUgcHV0IQp9CnJldHVybiByZXNwb25zZTsKYGBgCgojIyBDcnlwdG8KCmBgYGphdmFzY3JpcHQKY3J5cHRvLnJhbmRvbVVVSUQoKTsgICAgICAgICAgICAgICAgIC8vIFVVSUQgdjQKY3J5cHRvLmdldFJhbmRvbVZhbHVlcyhuZXcgVWludDhBcnJheSgxNikpOwoKLy8gU0hBLTI1NiBoYXNoCmNvbnN0IGhhc2ggPSBhd2FpdCBjcnlwdG8uc3VidGxlLmRpZ2VzdCgnU0hBLTI1NicsIG5ldyBUZXh0RW5jb2RlcigpLmVuY29kZShkYXRhKSk7CmBgYAoKIyMgTGltaXRzIChQbGF5Z3JvdW5kID0gRnJlZSBQbGFuKQoKfCBSZXNvdXJjZSB8IExpbWl0IHwKfC0tLS0tLS0tLS18LS0tLS0tLXwKfCBDUFUgdGltZSB8IDEwbXMgKEZyZWUgcGxhbjsgUGFpZDogMzBzIGRlZmF1bHQsIDVtaW4gbWF4KSB8CnwgU3VicmVxdWVzdHMgfCA1MCB8CnwgTWVtb3J5IHwgMTI4IE1CIHwK
+# Workers Playground API
+
+## Handler
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    // request: Request, env: {} (empty in playground), ctx: ExecutionContext
+    return new Response('Hello');
+  }
+};
+```
+
+## Request
+
+```javascript
+const method = request.method;       // "GET", "POST"
+const url = new URL(request.url);    // Parse URL
+const headers = request.headers;     // Headers object
+const body = await request.json();   // Read body (consumes stream)
+const clone = request.clone();       // Clone before reading body
+
+// Query params
+url.searchParams.get('page');        // Single value
+url.searchParams.getAll('tag');      // Array
+
+// Cloudflare metadata
+request.cf.country;                  // "US"
+request.cf.colo;                     // "SFO"
+```
+
+## Response
+
+```javascript
+// Text
+return new Response('Hello', { status: 200 });
+
+// JSON
+return Response.json({ data }, { status: 200, headers: {...} });
+
+// Redirect
+return Response.redirect('/new-path', 301);
+
+// Modify existing
+const modified = new Response(response.body, response);
+modified.headers.set('X-Custom', 'value');
+```
+
+## ExecutionContext
+
+```javascript
+// Background work (after response sent)
+ctx.waitUntil(fetch('https://logs.example.com', { method: 'POST', body: '...' }));
+return new Response('OK'); // Returns immediately
+```
+
+## Fetch
+
+```javascript
+const response = await fetch('https://api.example.com');
+const data = await response.json();
+
+// With options
+await fetch(url, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name: 'Alice' })
+});
+```
+
+## Cache
+
+```javascript
+const cache = caches.default;
+
+// Check cache
+let response = await cache.match(request);
+if (!response) {
+  response = await fetch(origin);
+  await cache.put(request, response.clone()); // Clone before put!
+}
+return response;
+```
+
+## Crypto
+
+```javascript
+crypto.randomUUID();                 // UUID v4
+crypto.getRandomValues(new Uint8Array(16));
+
+// SHA-256 hash
+const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(data));
+```
+
+## Limits (Playground = Free Plan)
+
+| Resource | Limit |
+|----------|-------|
+| CPU time | 10ms (Free plan; Paid: 30s default, 5min max) |
+| Subrequests | 50 |
+| Memory | 128 MB |

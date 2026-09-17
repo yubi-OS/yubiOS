@@ -1,1 +1,203 @@
-IyBCaW5kaW5ncyBBUEkgUmVmZXJlbmNlCgojIyBUeXBlU2NyaXB0IFR5cGVzCgpDbG91ZGZsYXJlIGdlbmVyYXRlcyBiaW5kaW5nIHR5cGVzIHZpYSBgbnB4IHdyYW5nbGVyIHR5cGVzYC4gVGhpcyBjcmVhdGVzIGAud3JhbmdsZXIvdHlwZXMvcnVudGltZS5kLnRzYCB3aXRoIHlvdXIgRW52IGludGVyZmFjZS4KCiMjIyBHZW5lcmF0ZWQgRW52IEludGVyZmFjZQoKQWZ0ZXIgcnVubmluZyBgd3JhbmdsZXIgdHlwZXNgLCBUeXBlU2NyaXB0IGtub3dzIHlvdXIgYmluZGluZ3M6CgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBFbnYgewogIC8vIEZyb20gd3JhbmdsZXIuanNvbmMgYmluZGluZ3MKICBNWV9LVjogS1ZOYW1lc3BhY2U7CiAgTVlfQlVDS0VUOiBSMkJ1Y2tldDsKICBEQjogRDFEYXRhYmFzZTsKICBNWV9TRVJWSUNFOiBGZXRjaGVyOwogIEFJOiBBaTsKICAKICAvLyBGcm9tIHZhcnMKICBBUElfVVJMOiBzdHJpbmc7CiAgCiAgLy8gRnJvbSBzZWNyZXRzIChzZXQgdmlhIHdyYW5nbGVyIHNlY3JldCBwdXQpCiAgQVBJX0tFWTogc3RyaW5nOwp9CmBgYAoKIyMjIEJpbmRpbmcgVHlwZXMKCnwgQ29uZmlnIHwgVHlwZVNjcmlwdCBUeXBlIHwgUGFja2FnZSB8CnwtLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS18CnwgYGt2X25hbWVzcGFjZXNgIHwgYEtWTmFtZXNwYWNlYCB8IGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYCB8CnwgYHIyX2J1Y2tldHNgIHwgYFIyQnVja2V0YCB8IGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYCB8CnwgYGQxX2RhdGFiYXNlc2AgfCBgRDFEYXRhYmFzZWAgfCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AgfAp8IGBkdXJhYmxlX29iamVjdHMuYmluZGluZ3NgIHwgYER1cmFibGVPYmplY3ROYW1lc3BhY2VgIHwgYEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXNgIHwKfCBgdmVjdG9yaXplYCB8IGBWZWN0b3JpemVJbmRleGAgfCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AgfAp8IGBxdWV1ZXMucHJvZHVjZXJzYCB8IGBRdWV1ZWAgfCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AgfAp8IGBzZXJ2aWNlc2AgfCBgRmV0Y2hlcmAgfCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AgfAp8IGBhaWAgfCBgQWlgIHwgYEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXNgIHwKfCBgYnJvd3NlcmAgfCBgRmV0Y2hlcmAgfCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2AgfAp8IGBhbmFseXRpY3NfZW5naW5lX2RhdGFzZXRzYCB8IGBBbmFseXRpY3NFbmdpbmVEYXRhc2V0YCB8IGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYCB8CnwgYGh5cGVyZHJpdmVgIHwgYEh5cGVyZHJpdmVgIHwgYEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXNgIHwKfCBgcmF0ZV9saW1pdGluZ2AgfCBgUmF0ZUxpbWl0YCB8IGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYCB8CnwgYHdvcmtmbG93c2AgfCBgV29ya2Zsb3dgIHwgYEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXNgIHwKfCBgbXRsc19jZXJ0aWZpY2F0ZXNgIC8gYHZhcnNgIC8gYHRleHRfYmxvYnNgIC8gYGRhdGFfYmxvYnNgIHwgYHN0cmluZ2AgfCBCdWlsdC1pbiB8CnwgYHdhc21fbW9kdWxlc2AgfCBgV2ViQXNzZW1ibHkuTW9kdWxlYCB8IEJ1aWx0LWluIHwKCiMjIEFjY2Vzc2luZyBCaW5kaW5ncwoKIyMjIE1ldGhvZCAxOiBmZXRjaCgpIEhhbmRsZXIgKFJlY29tbWVuZGVkKQoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYsIGN0eDogRXhlY3V0aW9uQ29udGV4dCk6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIGNvbnN0IHZhbHVlID0gYXdhaXQgZW52Lk1ZX0tWLmdldCgna2V5Jyk7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKHZhbHVlKTsKICB9Cn0KYGBgCgoqKldoeToqKiBUeXBlLXNhZmUsIGFsaWducyB3aXRoIFdvcmtlcnMgQVBJLCBzdXBwb3J0cyBjdHggZm9yIHdhaXRVbnRpbC9wYXNzVGhyb3VnaE9uRXhjZXB0aW9uLgoKIyMjIE1ldGhvZCAyOiBIb25vIEZyYW1ld29yawoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBIb25vIH0gZnJvbSAnaG9ubyc7Cgpjb25zdCBhcHAgPSBuZXcgSG9ubzx7IEJpbmRpbmdzOiBFbnYgfT4oKTsKCmFwcC5nZXQoJy8nLCBhc3luYyAoYykgPT4gewogIGNvbnN0IHZhbHVlID0gYXdhaXQgYy5lbnYuTVlfS1YuZ2V0KCdrZXknKTsKICByZXR1cm4gYy5qc29uKHsgdmFsdWUgfSk7Cn0pOwoKZXhwb3J0IGRlZmF1bHQgYXBwOwpgYGAKCioqV2h5OioqIGMuZW52IGF1dG8tdHlwZWQsIGVyZ29ub21pYyBmb3Igcm91dGluZy1oZWF2eSBhcHBzLgoKIyMjIE1ldGhvZCAzOiBNb2R1bGUgV29ya2VycyAoTGVnYWN5KQoKYGBgdHlwZXNjcmlwdApleHBvcnQgYXN5bmMgZnVuY3Rpb24gaGFuZGxlUmVxdWVzdChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICBjb25zdCB2YWx1ZSA9IGF3YWl0IGVudi5NWV9LVi5nZXQoJ2tleScpOwogIHJldHVybiBuZXcgUmVzcG9uc2UodmFsdWUpOwp9CgphZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIChldmVudCkgPT4gewogIC8vIGVudiBub3QgZGlyZWN0bHkgYXZhaWxhYmxlIC0gcmVxdWlyZXMgd29ya2Fyb3VuZHMKfSk7CmBgYAoKKipBdm9pZDoqKiBVc2UgZmV0Y2goKSBoYW5kbGVyIGluc3RlYWQgKE1ldGhvZCAxKS4KCiMjIFR5cGUgR2VuZXJhdGlvbiBXb3JrZmxvdwoKIyMjIEluaXRpYWwgU2V0dXAKCmBgYGJhc2gKIyBJbnN0YWxsIHdyYW5nbGVyCm5wbSBpbnN0YWxsIC1EIHdyYW5nbGVyCgojIEdlbmVyYXRlIHR5cGVzIGZyb20gd3JhbmdsZXIuanNvbmMKbnB4IHdyYW5nbGVyIHR5cGVzCmBgYAoKIyMjIEFmdGVyIENoYW5naW5nIEJpbmRpbmdzCgpgYGBiYXNoCiMgQWRkZWQvbW9kaWZpZWQgYmluZGluZyBpbiB3cmFuZ2xlci5qc29uYwpucHggd3JhbmdsZXIgdHlwZXMKCiMgVHlwZVNjcmlwdCBub3cgc2VlcyB1cGRhdGVkIEVudiBpbnRlcmZhY2UKYGBgCgoqKk5vdGU6KiogYHdyYW5nbGVyIHR5cGVzYCBvdXRwdXRzIHRvIGAud3JhbmdsZXIvdHlwZXMvcnVudGltZS5kLnRzYC4gVHlwZVNjcmlwdCBwaWNrcyB0aGlzIHVwIGF1dG9tYXRpY2FsbHkgaWYgYEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXNgIGlzIGluIGB0c2NvbmZpZy5qc29uYCBgInR5cGVzImAgYXJyYXkuCgojIyBLZXkgQmluZGluZyBNZXRob2RzCgoqKktWOioqCmBgYHR5cGVzY3JpcHQKYXdhaXQgZW52Lk1ZX0tWLmdldChrZXksIHsgdHlwZTogJ2pzb24nIH0pOyAgLy8gdGV4dHxqc29ufGFycmF5QnVmZmVyfHN0cmVhbQphd2FpdCBlbnYuTVlfS1YucHV0KGtleSwgdmFsdWUsIHsgZXhwaXJhdGlvblR0bDogMzYwMCB9KTsKYXdhaXQgZW52Lk1ZX0tWLmRlbGV0ZShrZXkpOwphd2FpdCBlbnYuTVlfS1YubGlzdCh7IHByZWZpeDogJ3VzZXI6JyB9KTsKYGBgCgoqKlIyOioqCmBgYHR5cGVzY3JpcHQKYXdhaXQgZW52LkJVQ0tFVC5nZXQoa2V5KTsKYXdhaXQgZW52LkJVQ0tFVC5wdXQoa2V5LCB2YWx1ZSk7CmF3YWl0IGVudi5CVUNLRVQuZGVsZXRlKGtleSk7CmF3YWl0IGVudi5CVUNLRVQubGlzdCh7IHByZWZpeDogJ2ltYWdlcy8nIH0pOwpgYGAKCioqRDE6KioKYGBgdHlwZXNjcmlwdAphd2FpdCBlbnYuREIucHJlcGFyZSgnU0VMRUNUICogRlJPTSB1c2VycyBXSEVSRSBpZCA9ID8nKS5iaW5kKHVzZXJJZCkuZmlyc3QoKTsKYXdhaXQgZW52LkRCLmJhdGNoKFtzdG10MSwgc3RtdDJdKTsKYGBgCgoqKlNlcnZpY2U6KioKYGBgdHlwZXNjcmlwdAphd2FpdCBlbnYuTVlfU0VSVklDRS5mZXRjaChuZXcgUmVxdWVzdCgnaHR0cHM6Ly9mYWtlL3BhdGgnKSk7CmBgYAoKKipXb3JrZXJzIEFJOioqCmBgYHR5cGVzY3JpcHQKYXdhaXQgZW52LkFJLnJ1bignQGNmL21ldGEvbGxhbWEtMy4xLThiLWluc3RydWN0JywgeyBwcm9tcHQ6ICdIZWxsbycgfSk7CmBgYAoKKipRdWV1ZXM6KioKYGBgdHlwZXNjcmlwdAphd2FpdCBlbnYuTVlfUVVFVUUuc2VuZCh7IHVzZXJJZDogMTIzLCBhY3Rpb246ICdwcm9jZXNzJyB9KTsKYGBgCgoqKkR1cmFibGUgT2JqZWN0czoqKgpgYGB0eXBlc2NyaXB0CmNvbnN0IGlkID0gZW52Lk1ZX0RPLmlkRnJvbU5hbWUoJ3VzZXItMTIzJyk7CmNvbnN0IHN0dWIgPSBlbnYuTVlfRE8uZ2V0KGlkKTsKYXdhaXQgc3R1Yi5mZXRjaChuZXcgUmVxdWVzdCgnaHR0cHM6Ly9mYWtlL2luY3JlbWVudCcpKTsKYGBgCgojIyBSdW50aW1lIHZzIEJ1aWxkLVRpbWUgVHlwZXMKCnwgVHlwZSBTb3VyY2UgfCBXaGVuIEdlbmVyYXRlZCB8IFVzZSBDYXNlIHwKfC0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tfAp8IGBAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzYCB8IG5wbSBpbnN0YWxsIHwgQmFzZSBXb3JrZXJzIEFQSXMgKFJlcXVlc3QsIFJlc3BvbnNlLCBldGMuKSB8CnwgYHdyYW5nbGVyIHR5cGVzYCB8IEFmdGVyIGNvbmZpZyBjaGFuZ2UgfCBZb3VyIHNwZWNpZmljIGJpbmRpbmdzIChFbnYgaW50ZXJmYWNlKSB8CgoqKkluc3RhbGwgYm90aDoqKgpgYGBiYXNoCm5wbSBpbnN0YWxsIC1EIEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXMKbnB4IHdyYW5nbGVyIHR5cGVzCmBgYAoKIyMgVHlwZSBTYWZldHkgQmVzdCBQcmFjdGljZXMKCjEuICoqTmV2ZXIgdXNlIGBhbnlgIGZvciBlbnY6KioKYGBgdHlwZXNjcmlwdAovLyDinYwgQkFECmFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogYW55KSB7IH0KCi8vIOKchSBHT09ECmFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52KSB7IH0KYGBgCgoyLiAqKlJ1biB3cmFuZ2xlciB0eXBlcyBhZnRlciBjb25maWcgY2hhbmdlczoqKgpgYGBiYXNoCiMgQWZ0ZXIgZWRpdGluZyB3cmFuZ2xlci5qc29uYwpucHggd3JhbmdsZXIgdHlwZXMKYGBgCgozLiAqKkNoZWNrIGdlbmVyYXRlZCB0eXBlcyBtYXRjaCBjb25maWc6KioKYGBgYmFzaAojIFZpZXcgZ2VuZXJhdGVkIEVudiBpbnRlcmZhY2UKY2F0IC53cmFuZ2xlci90eXBlcy9ydW50aW1lLmQudHMKYGBgCgojIyBTZWUgQWxzbwoKLSBbV29ya2VycyBUeXBlcyBQYWNrYWdlXShodHRwczovL3d3dy5ucG1qcy5jb20vcGFja2FnZS9AY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzKQotIFtXcmFuZ2xlciBUeXBlcyBDb21tYW5kXShodHRwczovL2RldmVsb3BlcnMuY2xvdWRmbGFyZS5jb20vd29ya2Vycy93cmFuZ2xlci9jb21tYW5kcy8jdHlwZXMp
+# Bindings API Reference
+
+## TypeScript Types
+
+Cloudflare generates binding types via `npx wrangler types`. This creates `.wrangler/types/runtime.d.ts` with your Env interface.
+
+### Generated Env Interface
+
+After running `wrangler types`, TypeScript knows your bindings:
+
+```typescript
+interface Env {
+  // From wrangler.jsonc bindings
+  MY_KV: KVNamespace;
+  MY_BUCKET: R2Bucket;
+  DB: D1Database;
+  MY_SERVICE: Fetcher;
+  AI: Ai;
+  
+  // From vars
+  API_URL: string;
+  
+  // From secrets (set via wrangler secret put)
+  API_KEY: string;
+}
+```
+
+### Binding Types
+
+| Config | TypeScript Type | Package |
+|--------|-----------------|---------|
+| `kv_namespaces` | `KVNamespace` | `@cloudflare/workers-types` |
+| `r2_buckets` | `R2Bucket` | `@cloudflare/workers-types` |
+| `d1_databases` | `D1Database` | `@cloudflare/workers-types` |
+| `durable_objects.bindings` | `DurableObjectNamespace` | `@cloudflare/workers-types` |
+| `vectorize` | `VectorizeIndex` | `@cloudflare/workers-types` |
+| `queues.producers` | `Queue` | `@cloudflare/workers-types` |
+| `services` | `Fetcher` | `@cloudflare/workers-types` |
+| `ai` | `Ai` | `@cloudflare/workers-types` |
+| `browser` | `Fetcher` | `@cloudflare/workers-types` |
+| `analytics_engine_datasets` | `AnalyticsEngineDataset` | `@cloudflare/workers-types` |
+| `hyperdrive` | `Hyperdrive` | `@cloudflare/workers-types` |
+| `rate_limiting` | `RateLimit` | `@cloudflare/workers-types` |
+| `workflows` | `Workflow` | `@cloudflare/workers-types` |
+| `mtls_certificates` / `vars` / `text_blobs` / `data_blobs` | `string` | Built-in |
+| `wasm_modules` | `WebAssembly.Module` | Built-in |
+
+## Accessing Bindings
+
+### Method 1: fetch() Handler (Recommended)
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const value = await env.MY_KV.get('key');
+    return new Response(value);
+  }
+}
+```
+
+**Why:** Type-safe, aligns with Workers API, supports ctx for waitUntil/passThroughOnException.
+
+### Method 2: Hono Framework
+
+```typescript
+import { Hono } from 'hono';
+
+const app = new Hono<{ Bindings: Env }>();
+
+app.get('/', async (c) => {
+  const value = await c.env.MY_KV.get('key');
+  return c.json({ value });
+});
+
+export default app;
+```
+
+**Why:** c.env auto-typed, ergonomic for routing-heavy apps.
+
+### Method 3: Module Workers (Legacy)
+
+```typescript
+export async function handleRequest(request: Request, env: Env): Promise<Response> {
+  const value = await env.MY_KV.get('key');
+  return new Response(value);
+}
+
+addEventListener('fetch', (event) => {
+  // env not directly available - requires workarounds
+});
+```
+
+**Avoid:** Use fetch() handler instead (Method 1).
+
+## Type Generation Workflow
+
+### Initial Setup
+
+```bash
+# Install wrangler
+npm install -D wrangler
+
+# Generate types from wrangler.jsonc
+npx wrangler types
+```
+
+### After Changing Bindings
+
+```bash
+# Added/modified binding in wrangler.jsonc
+npx wrangler types
+
+# TypeScript now sees updated Env interface
+```
+
+**Note:** `wrangler types` outputs to `.wrangler/types/runtime.d.ts`. TypeScript picks this up automatically if `@cloudflare/workers-types` is in `tsconfig.json` `"types"` array.
+
+## Key Binding Methods
+
+**KV:**
+```typescript
+await env.MY_KV.get(key, { type: 'json' });  // text|json|arrayBuffer|stream
+await env.MY_KV.put(key, value, { expirationTtl: 3600 });
+await env.MY_KV.delete(key);
+await env.MY_KV.list({ prefix: 'user:' });
+```
+
+**R2:**
+```typescript
+await env.BUCKET.get(key);
+await env.BUCKET.put(key, value);
+await env.BUCKET.delete(key);
+await env.BUCKET.list({ prefix: 'images/' });
+```
+
+**D1:**
+```typescript
+await env.DB.prepare('SELECT * FROM users WHERE id = ?').bind(userId).first();
+await env.DB.batch([stmt1, stmt2]);
+```
+
+**Service:**
+```typescript
+await env.MY_SERVICE.fetch(new Request('https://fake/path'));
+```
+
+**Workers AI:**
+```typescript
+await env.AI.run('@cf/meta/llama-3.1-8b-instruct', { prompt: 'Hello' });
+```
+
+**Queues:**
+```typescript
+await env.MY_QUEUE.send({ userId: 123, action: 'process' });
+```
+
+**Durable Objects:**
+```typescript
+const id = env.MY_DO.idFromName('user-123');
+const stub = env.MY_DO.get(id);
+await stub.fetch(new Request('https://fake/increment'));
+```
+
+## Runtime vs Build-Time Types
+
+| Type Source | When Generated | Use Case |
+|-------------|----------------|----------|
+| `@cloudflare/workers-types` | npm install | Base Workers APIs (Request, Response, etc.) |
+| `wrangler types` | After config change | Your specific bindings (Env interface) |
+
+**Install both:**
+```bash
+npm install -D @cloudflare/workers-types
+npx wrangler types
+```
+
+## Type Safety Best Practices
+
+1. **Never use `any` for env:**
+```typescript
+// ❌ BAD
+async fetch(request: Request, env: any) { }
+
+// ✅ GOOD
+async fetch(request: Request, env: Env) { }
+```
+
+2. **Run wrangler types after config changes:**
+```bash
+# After editing wrangler.jsonc
+npx wrangler types
+```
+
+3. **Check generated types match config:**
+```bash
+# View generated Env interface
+cat .wrangler/types/runtime.d.ts
+```
+
+## See Also
+
+- [Workers Types Package](https://www.npmjs.com/package/@cloudflare/workers-types)
+- [Wrangler Types Command](https://developers.cloudflare.com/workers/wrangler/commands/#types)

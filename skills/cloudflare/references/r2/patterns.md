@@ -1,1 +1,193 @@
-IyBSMiBQYXR0ZXJucyAmIEJlc3QgUHJhY3RpY2VzCgojIyBTdHJlYW1pbmcgTGFyZ2UgRmlsZXMKCmBgYHR5cGVzY3JpcHQKY29uc3Qgb2JqZWN0ID0gYXdhaXQgZW52Lk1ZX0JVQ0tFVC5nZXQoa2V5KTsKaWYgKCFvYmplY3QpIHJldHVybiBuZXcgUmVzcG9uc2UoJ05vdCBmb3VuZCcsIHsgc3RhdHVzOiA0MDQgfSk7Cgpjb25zdCBoZWFkZXJzID0gbmV3IEhlYWRlcnMoKTsKb2JqZWN0LndyaXRlSHR0cE1ldGFkYXRhKGhlYWRlcnMpOwpoZWFkZXJzLnNldCgnZXRhZycsIG9iamVjdC5odHRwRXRhZyk7CgpyZXR1cm4gbmV3IFJlc3BvbnNlKG9iamVjdC5ib2R5LCB7IGhlYWRlcnMgfSk7CmBgYAoKIyMgQ29uZGl0aW9uYWwgR0VUICgzMDQgTm90IE1vZGlmaWVkKQoKYGBgdHlwZXNjcmlwdApjb25zdCBpZk5vbmVNYXRjaCA9IHJlcXVlc3QuaGVhZGVycy5nZXQoJ2lmLW5vbmUtbWF0Y2gnKTsKY29uc3Qgb2JqZWN0ID0gYXdhaXQgZW52Lk1ZX0JVQ0tFVC5nZXQoa2V5LCB7CiAgb25seUlmOiB7IGV0YWdEb2VzTm90TWF0Y2g6IGlmTm9uZU1hdGNoPy5yZXBsYWNlKC8iL2csICcnKSB8fCAnJyB9Cn0pOwoKaWYgKCFvYmplY3QpIHJldHVybiBuZXcgUmVzcG9uc2UoJ05vdCBmb3VuZCcsIHsgc3RhdHVzOiA0MDQgfSk7CmlmICghb2JqZWN0LmJvZHkpIHJldHVybiBuZXcgUmVzcG9uc2UobnVsbCwgeyBzdGF0dXM6IDMwNCwgaGVhZGVyczogeyAnZXRhZyc6IG9iamVjdC5odHRwRXRhZyB9IH0pOwoKcmV0dXJuIG5ldyBSZXNwb25zZShvYmplY3QuYm9keSwgeyBoZWFkZXJzOiB7ICdldGFnJzogb2JqZWN0Lmh0dHBFdGFnIH0gfSk7CmBgYAoKIyMgVXBsb2FkIHdpdGggVmFsaWRhdGlvbgoKYGBgdHlwZXNjcmlwdApjb25zdCBrZXkgPSB1cmwucGF0aG5hbWUuc2xpY2UoMSk7CmlmICgha2V5IHx8IGtleS5pbmNsdWRlcygnLi4nKSkgcmV0dXJuIG5ldyBSZXNwb25zZSgnSW52YWxpZCBrZXknLCB7IHN0YXR1czogNDAwIH0pOwoKY29uc3Qgb2JqZWN0ID0gYXdhaXQgZW52Lk1ZX0JVQ0tFVC5wdXQoa2V5LCByZXF1ZXN0LmJvZHksIHsKICBodHRwTWV0YWRhdGE6IHsgY29udGVudFR5cGU6IHJlcXVlc3QuaGVhZGVycy5nZXQoJ2NvbnRlbnQtdHlwZScpIHx8ICdhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW0nIH0sCiAgY3VzdG9tTWV0YWRhdGE6IHsgdXBsb2FkZWRBdDogbmV3IERhdGUoKS50b0lTT1N0cmluZygpLCBpcDogcmVxdWVzdC5oZWFkZXJzLmdldCgnY2YtY29ubmVjdGluZy1pcCcpIHx8ICd1bmtub3duJyB9Cn0pOwoKcmV0dXJuIFJlc3BvbnNlLmpzb24oeyBrZXk6IG9iamVjdC5rZXksIHNpemU6IG9iamVjdC5zaXplLCBldGFnOiBvYmplY3QuaHR0cEV0YWcgfSk7CmBgYAoKIyMgTXVsdGlwYXJ0IHdpdGggUHJvZ3Jlc3MKCmBgYHR5cGVzY3JpcHQKY29uc3QgUEFSVF9TSVpFID0gNSAqIDEwMjQgKiAxMDI0OyAvLyA1TUIKY29uc3QgcGFydENvdW50ID0gTWF0aC5jZWlsKGZpbGUuc2l6ZSAvIFBBUlRfU0laRSk7CmNvbnN0IG11bHRpcGFydCA9IGF3YWl0IGVudi5NWV9CVUNLRVQuY3JlYXRlTXVsdGlwYXJ0VXBsb2FkKGtleSwgeyBodHRwTWV0YWRhdGE6IHsgY29udGVudFR5cGU6IGZpbGUudHlwZSB9IH0pOwoKY29uc3QgdXBsb2FkZWRQYXJ0czogUjJVcGxvYWRlZFBhcnRbXSA9IFtdOwp0cnkgewogIGZvciAobGV0IGkgPSAwOyBpIDwgcGFydENvdW50OyBpKyspIHsKICAgIGNvbnN0IHN0YXJ0ID0gaSAqIFBBUlRfU0laRTsKICAgIGNvbnN0IHBhcnQgPSBhd2FpdCBtdWx0aXBhcnQudXBsb2FkUGFydChpICsgMSwgZmlsZS5zbGljZShzdGFydCwgc3RhcnQgKyBQQVJUX1NJWkUpKTsKICAgIHVwbG9hZGVkUGFydHMucHVzaChwYXJ0KTsKICAgIG9uUHJvZ3Jlc3M/LihNYXRoLnJvdW5kKCgoaSArIDEpIC8gcGFydENvdW50KSAqIDEwMCkpOwogIH0KICByZXR1cm4gYXdhaXQgbXVsdGlwYXJ0LmNvbXBsZXRlKHVwbG9hZGVkUGFydHMpOwp9IGNhdGNoIChlcnJvcikgewogIGF3YWl0IG11bHRpcGFydC5hYm9ydCgpOwogIHRocm93IGVycm9yOwp9CmBgYAoKIyMgQmF0Y2ggRGVsZXRlCgpgYGB0eXBlc2NyaXB0CmFzeW5jIGZ1bmN0aW9uIGRlbGV0ZVByZWZpeChwcmVmaXg6IHN0cmluZywgZW52OiBFbnYpIHsKICBsZXQgY3Vyc29yOiBzdHJpbmcgfCB1bmRlZmluZWQ7CiAgbGV0IHRydW5jYXRlZCA9IHRydWU7CgogIHdoaWxlICh0cnVuY2F0ZWQpIHsKICAgIGNvbnN0IGxpc3RlZCA9IGF3YWl0IGVudi5NWV9CVUNLRVQubGlzdCh7IHByZWZpeCwgbGltaXQ6IDEwMDAsIGN1cnNvciB9KTsKICAgIGlmIChsaXN0ZWQub2JqZWN0cy5sZW5ndGggPiAwKSB7CiAgICAgIGF3YWl0IGVudi5NWV9CVUNLRVQuZGVsZXRlKGxpc3RlZC5vYmplY3RzLm1hcChvID0+IG8ua2V5KSk7CiAgICB9CiAgICB0cnVuY2F0ZWQgPSBsaXN0ZWQudHJ1bmNhdGVkOwogICAgY3Vyc29yID0gbGlzdGVkLmN1cnNvcjsKICB9Cn0KYGBgCgojIyBDaGVja3N1bSBWYWxpZGF0aW9uICYgU3RvcmFnZSBUcmFuc2l0aW9ucwoKYGBgdHlwZXNjcmlwdAovLyBVcGxvYWQgd2l0aCBjaGVja3N1bQpjb25zdCBoYXNoID0gYXdhaXQgY3J5cHRvLnN1YnRsZS5kaWdlc3QoJ1NIQS0yNTYnLCBkYXRhKTsKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5wdXQoa2V5LCBkYXRhLCB7IHNoYTI1NjogaGFzaCB9KTsKCi8vIFRyYW5zaXRpb24gc3RvcmFnZSBjbGFzcyAocmVxdWlyZXMgUzMgU0RLKQppbXBvcnQgeyBTM0NsaWVudCwgQ29weU9iamVjdENvbW1hbmQgfSBmcm9tICdAYXdzLXNkay9jbGllbnQtczMnOwphd2FpdCBzMy5zZW5kKG5ldyBDb3B5T2JqZWN0Q29tbWFuZCh7CiAgQnVja2V0OiAnbXktYnVja2V0JywgS2V5OiBrZXksCiAgQ29weVNvdXJjZTogYC9teS1idWNrZXQvJHtrZXl9YCwKICBTdG9yYWdlQ2xhc3M6ICdTVEFOREFSRF9JQScKfSkpOwpgYGAKCiMjIENsaWVudC1TaWRlIFVwbG9hZHMgKFByZXNpZ25lZCBVUkxzKQoKYGBgdHlwZXNjcmlwdAppbXBvcnQgeyBTM0NsaWVudCB9IGZyb20gJ0Bhd3Mtc2RrL2NsaWVudC1zMyc7CmltcG9ydCB7IGdldFNpZ25lZFVybCB9IGZyb20gJ0Bhd3Mtc2RrL3MzLXJlcXVlc3QtcHJlc2lnbmVyJzsKaW1wb3J0IHsgUHV0T2JqZWN0Q29tbWFuZCB9IGZyb20gJ0Bhd3Mtc2RrL2NsaWVudC1zMyc7CgovLyBXb3JrZXI6IEdlbmVyYXRlIHByZXNpZ25lZCB1cGxvYWQgVVJMCmNvbnN0IHMzID0gbmV3IFMzQ2xpZW50KHsKICByZWdpb246ICdhdXRvJywKICBlbmRwb2ludDogYGh0dHBzOi8vJHtlbnYuQUNDT1VOVF9JRH0ucjIuY2xvdWRmbGFyZXN0b3JhZ2UuY29tYCwKICBjcmVkZW50aWFsczogeyBhY2Nlc3NLZXlJZDogZW52LlIyX0FDQ0VTU19LRVlfSUQsIHNlY3JldEFjY2Vzc0tleTogZW52LlIyX1NFQ1JFVF9BQ0NFU1NfS0VZIH0KfSk7Cgpjb25zdCB1cmwgPSBhd2FpdCBnZXRTaWduZWRVcmwoczMsIG5ldyBQdXRPYmplY3RDb21tYW5kKHsgQnVja2V0OiAnbXktYnVja2V0JywgS2V5OiBrZXkgfSksIHsgZXhwaXJlc0luOiAzNjAwIH0pOwpyZXR1cm4gUmVzcG9uc2UuanNvbih7IHVwbG9hZFVybDogdXJsIH0pOwoKLy8gQ2xpZW50OiBVcGxvYWQgZGlyZWN0bHkKY29uc3QgeyB1cGxvYWRVcmwgfSA9IGF3YWl0IGZldGNoKCcvYXBpL3VwbG9hZC11cmwnKS50aGVuKHIgPT4gci5qc29uKCkpOwphd2FpdCBmZXRjaCh1cGxvYWRVcmwsIHsgbWV0aG9kOiAnUFVUJywgYm9keTogZmlsZSB9KTsKYGBgCgojIyBDYWNoaW5nIHdpdGggQ2FjaGUgQVBJCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudiwgY3R4OiBFeGVjdXRpb25Db250ZXh0KTogUHJvbWlzZTxSZXNwb25zZT4gewogICAgY29uc3QgY2FjaGUgPSBjYWNoZXMuZGVmYXVsdDsKICAgIGNvbnN0IHVybCA9IG5ldyBVUkwocmVxdWVzdC51cmwpOwogICAgY29uc3QgY2FjaGVLZXkgPSBuZXcgUmVxdWVzdCh1cmwudG9TdHJpbmcoKSwgcmVxdWVzdCk7CgogICAgLy8gQ2hlY2sgY2FjaGUgZmlyc3QKICAgIGxldCByZXNwb25zZSA9IGF3YWl0IGNhY2hlLm1hdGNoKGNhY2hlS2V5KTsKICAgIGlmIChyZXNwb25zZSkgcmV0dXJuIHJlc3BvbnNlOwoKICAgIC8vIEZldGNoIGZyb20gUjIKICAgIGNvbnN0IGtleSA9IHVybC5wYXRobmFtZS5zbGljZSgxKTsKICAgIGNvbnN0IG9iamVjdCA9IGF3YWl0IGVudi5NWV9CVUNLRVQuZ2V0KGtleSk7CiAgICBpZiAoIW9iamVjdCkgcmV0dXJuIG5ldyBSZXNwb25zZSgnTm90IGZvdW5kJywgeyBzdGF0dXM6IDQwNCB9KTsKCiAgICBjb25zdCBoZWFkZXJzID0gbmV3IEhlYWRlcnMoKTsKICAgIG9iamVjdC53cml0ZUh0dHBNZXRhZGF0YShoZWFkZXJzKTsKICAgIGhlYWRlcnMuc2V0KCdldGFnJywgb2JqZWN0Lmh0dHBFdGFnKTsKICAgIGhlYWRlcnMuc2V0KCdjYWNoZS1jb250cm9sJywgJ3B1YmxpYywgbWF4LWFnZT0zMTUzNjAwMCwgaW1tdXRhYmxlJyk7CgogICAgcmVzcG9uc2UgPSBuZXcgUmVzcG9uc2Uob2JqZWN0LmJvZHksIHsgaGVhZGVycyB9KTsKCiAgICAvLyBDYWNoZSBmb3Igc3Vic2VxdWVudCByZXF1ZXN0cwogICAgY3R4LndhaXRVbnRpbChjYWNoZS5wdXQoY2FjaGVLZXksIHJlc3BvbnNlLmNsb25lKCkpKTsKCiAgICByZXR1cm4gcmVzcG9uc2U7CiAgfQp9OwpgYGAKCiMjIFB1YmxpYyBCdWNrZXQgd2l0aCBDdXN0b20gRG9tYWluCgpgYGB0eXBlc2NyaXB0CmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0OiBSZXF1ZXN0LCBlbnY6IEVudik6IFByb21pc2U8UmVzcG9uc2U+IHsKICAgIC8vIENPUlMgcHJlZmxpZ2h0CiAgICBpZiAocmVxdWVzdC5tZXRob2QgPT09ICdPUFRJT05TJykgewogICAgICByZXR1cm4gbmV3IFJlc3BvbnNlKG51bGwsIHsKICAgICAgICBoZWFkZXJzOiB7CiAgICAgICAgICAnYWNjZXNzLWNvbnRyb2wtYWxsb3ctb3JpZ2luJzogJyonLAogICAgICAgICAgJ2FjY2Vzcy1jb250cm9sLWFsbG93LW1ldGhvZHMnOiAnR0VULCBIRUFEJywKICAgICAgICAgICdhY2Nlc3MtY29udHJvbC1tYXgtYWdlJzogJzg2NDAwJwogICAgICAgIH0KICAgICAgfSk7CiAgICB9CgogICAgY29uc3Qga2V5ID0gbmV3IFVSTChyZXF1ZXN0LnVybCkucGF0aG5hbWUuc2xpY2UoMSk7CiAgICBpZiAoIWtleSkgcmV0dXJuIFJlc3BvbnNlLnJlZGlyZWN0KCcvaW5kZXguaHRtbCcsIDMwMik7CgogICAgY29uc3Qgb2JqZWN0ID0gYXdhaXQgZW52Lk1ZX0JVQ0tFVC5nZXQoa2V5KTsKICAgIGlmICghb2JqZWN0KSByZXR1cm4gbmV3IFJlc3BvbnNlKCdOb3QgZm91bmQnLCB7IHN0YXR1czogNDA0IH0pOwoKICAgIGNvbnN0IGhlYWRlcnMgPSBuZXcgSGVhZGVycygpOwogICAgb2JqZWN0LndyaXRlSHR0cE1ldGFkYXRhKGhlYWRlcnMpOwogICAgaGVhZGVycy5zZXQoJ2V0YWcnLCBvYmplY3QuaHR0cEV0YWcpOwogICAgaGVhZGVycy5zZXQoJ2FjY2Vzcy1jb250cm9sLWFsbG93LW9yaWdpbicsICcqJyk7CiAgICBoZWFkZXJzLnNldCgnY2FjaGUtY29udHJvbCcsICdwdWJsaWMsIG1heC1hZ2U9MzE1MzYwMDAsIGltbXV0YWJsZScpOwoKICAgIHJldHVybiBuZXcgUmVzcG9uc2Uob2JqZWN0LmJvZHksIHsgaGVhZGVycyB9KTsKICB9Cn07CmBgYAoKIyMgcjIuZGV2IFB1YmxpYyBVUkxzCgpFbmFibGUgcjIuZGV2IGluIGRhc2hib2FyZCBmb3Igc2ltcGxlIHB1YmxpYyBhY2Nlc3M6IGBodHRwczovL3B1Yi0ke2hhc2hJZH0ucjIuZGV2LyR7a2V5fWAgIApPciBhZGQgY3VzdG9tIGRvbWFpbiB2aWEgZGFzaGJvYXJkOiBgaHR0cHM6Ly9maWxlcy5leGFtcGxlLmNvbS8ke2tleX1gCgoqKkxpbWl0YXRpb25zOioqIE5vIGF1dGgsIGJ1Y2tldC1sZXZlbCBDT1JTLCBubyBjYWNoZSBvdmVycmlkZS4K
+# R2 Patterns & Best Practices
+
+## Streaming Large Files
+
+```typescript
+const object = await env.MY_BUCKET.get(key);
+if (!object) return new Response('Not found', { status: 404 });
+
+const headers = new Headers();
+object.writeHttpMetadata(headers);
+headers.set('etag', object.httpEtag);
+
+return new Response(object.body, { headers });
+```
+
+## Conditional GET (304 Not Modified)
+
+```typescript
+const ifNoneMatch = request.headers.get('if-none-match');
+const object = await env.MY_BUCKET.get(key, {
+  onlyIf: { etagDoesNotMatch: ifNoneMatch?.replace(/"/g, '') || '' }
+});
+
+if (!object) return new Response('Not found', { status: 404 });
+if (!object.body) return new Response(null, { status: 304, headers: { 'etag': object.httpEtag } });
+
+return new Response(object.body, { headers: { 'etag': object.httpEtag } });
+```
+
+## Upload with Validation
+
+```typescript
+const key = url.pathname.slice(1);
+if (!key || key.includes('..')) return new Response('Invalid key', { status: 400 });
+
+const object = await env.MY_BUCKET.put(key, request.body, {
+  httpMetadata: { contentType: request.headers.get('content-type') || 'application/octet-stream' },
+  customMetadata: { uploadedAt: new Date().toISOString(), ip: request.headers.get('cf-connecting-ip') || 'unknown' }
+});
+
+return Response.json({ key: object.key, size: object.size, etag: object.httpEtag });
+```
+
+## Multipart with Progress
+
+```typescript
+const PART_SIZE = 5 * 1024 * 1024; // 5MB
+const partCount = Math.ceil(file.size / PART_SIZE);
+const multipart = await env.MY_BUCKET.createMultipartUpload(key, { httpMetadata: { contentType: file.type } });
+
+const uploadedParts: R2UploadedPart[] = [];
+try {
+  for (let i = 0; i < partCount; i++) {
+    const start = i * PART_SIZE;
+    const part = await multipart.uploadPart(i + 1, file.slice(start, start + PART_SIZE));
+    uploadedParts.push(part);
+    onProgress?.(Math.round(((i + 1) / partCount) * 100));
+  }
+  return await multipart.complete(uploadedParts);
+} catch (error) {
+  await multipart.abort();
+  throw error;
+}
+```
+
+## Batch Delete
+
+```typescript
+async function deletePrefix(prefix: string, env: Env) {
+  let cursor: string | undefined;
+  let truncated = true;
+
+  while (truncated) {
+    const listed = await env.MY_BUCKET.list({ prefix, limit: 1000, cursor });
+    if (listed.objects.length > 0) {
+      await env.MY_BUCKET.delete(listed.objects.map(o => o.key));
+    }
+    truncated = listed.truncated;
+    cursor = listed.cursor;
+  }
+}
+```
+
+## Checksum Validation & Storage Transitions
+
+```typescript
+// Upload with checksum
+const hash = await crypto.subtle.digest('SHA-256', data);
+await env.MY_BUCKET.put(key, data, { sha256: hash });
+
+// Transition storage class (requires S3 SDK)
+import { S3Client, CopyObjectCommand } from '@aws-sdk/client-s3';
+await s3.send(new CopyObjectCommand({
+  Bucket: 'my-bucket', Key: key,
+  CopySource: `/my-bucket/${key}`,
+  StorageClass: 'STANDARD_IA'
+}));
+```
+
+## Client-Side Uploads (Presigned URLs)
+
+```typescript
+import { S3Client } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { PutObjectCommand } from '@aws-sdk/client-s3';
+
+// Worker: Generate presigned upload URL
+const s3 = new S3Client({
+  region: 'auto',
+  endpoint: `https://${env.ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  credentials: { accessKeyId: env.R2_ACCESS_KEY_ID, secretAccessKey: env.R2_SECRET_ACCESS_KEY }
+});
+
+const url = await getSignedUrl(s3, new PutObjectCommand({ Bucket: 'my-bucket', Key: key }), { expiresIn: 3600 });
+return Response.json({ uploadUrl: url });
+
+// Client: Upload directly
+const { uploadUrl } = await fetch('/api/upload-url').then(r => r.json());
+await fetch(uploadUrl, { method: 'PUT', body: file });
+```
+
+## Caching with Cache API
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const cache = caches.default;
+    const url = new URL(request.url);
+    const cacheKey = new Request(url.toString(), request);
+
+    // Check cache first
+    let response = await cache.match(cacheKey);
+    if (response) return response;
+
+    // Fetch from R2
+    const key = url.pathname.slice(1);
+    const object = await env.MY_BUCKET.get(key);
+    if (!object) return new Response('Not found', { status: 404 });
+
+    const headers = new Headers();
+    object.writeHttpMetadata(headers);
+    headers.set('etag', object.httpEtag);
+    headers.set('cache-control', 'public, max-age=31536000, immutable');
+
+    response = new Response(object.body, { headers });
+
+    // Cache for subsequent requests
+    ctx.waitUntil(cache.put(cacheKey, response.clone()));
+
+    return response;
+  }
+};
+```
+
+## Public Bucket with Custom Domain
+
+```typescript
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    // CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        headers: {
+          'access-control-allow-origin': '*',
+          'access-control-allow-methods': 'GET, HEAD',
+          'access-control-max-age': '86400'
+        }
+      });
+    }
+
+    const key = new URL(request.url).pathname.slice(1);
+    if (!key) return Response.redirect('/index.html', 302);
+
+    const object = await env.MY_BUCKET.get(key);
+    if (!object) return new Response('Not found', { status: 404 });
+
+    const headers = new Headers();
+    object.writeHttpMetadata(headers);
+    headers.set('etag', object.httpEtag);
+    headers.set('access-control-allow-origin', '*');
+    headers.set('cache-control', 'public, max-age=31536000, immutable');
+
+    return new Response(object.body, { headers });
+  }
+};
+```
+
+## r2.dev Public URLs
+
+Enable r2.dev in dashboard for simple public access: `https://pub-${hashId}.r2.dev/${key}`  
+Or add custom domain via dashboard: `https://files.example.com/${key}`
+
+**Limitations:** No auth, bucket-level CORS, no cache override.

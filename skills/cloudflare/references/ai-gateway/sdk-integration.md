@@ -1,1 +1,114 @@
-IyBBSSBHYXRld2F5IFNESyBJbnRlZ3JhdGlvbgoKIyMgVmVyY2VsIEFJIFNESyAoUmVjb21tZW5kZWQpCgpgYGB0eXBlc2NyaXB0CmltcG9ydCB7IGNyZWF0ZUFpR2F0ZXdheSB9IGZyb20gJ2FpLWdhdGV3YXktcHJvdmlkZXInOwppbXBvcnQgeyBjcmVhdGVPcGVuQUkgfSBmcm9tICdAYWktc2RrL29wZW5haSc7CmltcG9ydCB7IGdlbmVyYXRlVGV4dCB9IGZyb20gJ2FpJzsKCmNvbnN0IGdhdGV3YXkgPSBjcmVhdGVBaUdhdGV3YXkoewogIGFjY291bnRJZDogcHJvY2Vzcy5lbnYuQ0ZfQUNDT1VOVF9JRCwKICBnYXRld2F5OiBwcm9jZXNzLmVudi5DRl9HQVRFV0FZX0lELAogIGFwaUtleTogcHJvY2Vzcy5lbnYuQ0ZfQVBJX1RPS0VOIC8vIE9wdGlvbmFsIGZvciBhdXRoIGdhdGV3YXlzCn0pOwoKY29uc3Qgb3BlbmFpID0gY3JlYXRlT3BlbkFJKHsgYXBpS2V5OiBwcm9jZXNzLmVudi5PUEVOQUlfQVBJX0tFWSB9KTsKCi8vIFNpbmdsZSBtb2RlbApjb25zdCB7IHRleHQgfSA9IGF3YWl0IGdlbmVyYXRlVGV4dCh7CiAgbW9kZWw6IGdhdGV3YXkob3BlbmFpKCdncHQtNG8nKSksCiAgcHJvbXB0OiAnSGVsbG8nCn0pOwoKLy8gQXV0b21hdGljIGZhbGxiYWNrIGFycmF5CmNvbnN0IHsgdGV4dCB9ID0gYXdhaXQgZ2VuZXJhdGVUZXh0KHsKICBtb2RlbDogZ2F0ZXdheShbCiAgICBvcGVuYWkoJ2dwdC00bycpLAogICAgYW50aHJvcGljKCdjbGF1ZGUtc29ubmV0LTQtNScpLAogICAgb3BlbmFpKCdncHQtNG8tbWluaScpCiAgXSksCiAgcHJvbXB0OiAnQ29tcGxleCB0YXNrJwp9KTsKYGBgCgojIyMgT3B0aW9ucwoKYGBgdHlwZXNjcmlwdAptb2RlbDogZ2F0ZXdheShvcGVuYWkoJ2dwdC00bycpLCB7CiAgY2FjaGVLZXk6ICdteS1rZXknLAogIGNhY2hlVHRsOiAzNjAwLAogIG1ldGFkYXRhOiB7IHVzZXJJZDogJ3UxMjMnLCB0ZWFtOiAnZW5nJyB9LCAvLyBNYXggNSBlbnRyaWVzCiAgcmV0cmllczogeyBtYXhBdHRlbXB0czogMywgYmFja29mZjogJ2V4cG9uZW50aWFsJyB9Cn0pCmBgYAoKIyMgT3BlbkFJIFNESwoKYGBgdHlwZXNjcmlwdApjb25zdCBjbGllbnQgPSBuZXcgT3BlbkFJKHsKICBhcGlLZXk6IHByb2Nlc3MuZW52Lk9QRU5BSV9BUElfS0VZLAogIGJhc2VVUkw6IGBodHRwczovL2dhdGV3YXkuYWkuY2xvdWRmbGFyZS5jb20vdjEvJHthY2NvdW50SWR9LyR7Z2F0ZXdheUlkfS9vcGVuYWlgLAogIGRlZmF1bHRIZWFkZXJzOiB7ICdjZi1haWctYXV0aG9yaXphdGlvbic6IGBCZWFyZXIgJHtjZlRva2VufWAgfQp9KTsKCi8vIFVuaWZpZWQgQVBJIC0gc3dpdGNoIHByb3ZpZGVycyB2aWEgbW9kZWwgbmFtZQptb2RlbDogJ29wZW5haS9ncHQtNG8nICAvLyBvciAnYW50aHJvcGljL2NsYXVkZS1zb25uZXQtNC01JwpgYGAKCiMjIEFudGhyb3BpYyBTREsKCmBgYHR5cGVzY3JpcHQKY29uc3QgY2xpZW50ID0gbmV3IEFudGhyb3BpYyh7CiAgYXBpS2V5OiBwcm9jZXNzLmVudi5BTlRIUk9QSUNfQVBJX0tFWSwKICBiYXNlVVJMOiBgaHR0cHM6Ly9nYXRld2F5LmFpLmNsb3VkZmxhcmUuY29tL3YxLyR7YWNjb3VudElkfS8ke2dhdGV3YXlJZH0vYW50aHJvcGljYCwKICBkZWZhdWx0SGVhZGVyczogeyAnY2YtYWlnLWF1dGhvcml6YXRpb24nOiBgQmVhcmVyICR7Y2ZUb2tlbn1gIH0KfSk7CmBgYAoKIyMgV29ya2VycyBBSSBCaW5kaW5nCgpgYGB0b21sCiMgd3JhbmdsZXIudG9tbApbYWldCmJpbmRpbmcgPSAiQUkiCltbYWkuZ2F0ZXdheV1dCmlkID0gIm15LWdhdGV3YXkiCmBgYAoKYGBgdHlwZXNjcmlwdAphd2FpdCBlbnYuQUkucnVuKCdAY2YvbWV0YS9sbGFtYS0zLThiLWluc3RydWN0JywgCiAgeyBtZXNzYWdlczogWy4uLl0gfSwKICB7IGdhdGV3YXk6IHsgaWQ6ICdteS1nYXRld2F5JywgbWV0YWRhdGE6IHsgdXNlcklkOiAnMTIzJyB9IH0gfQopOwpgYGAKCiMjIExhbmdDaGFpbiAvIExsYW1hSW5kZXgKCmBgYHR5cGVzY3JpcHQKLy8gVXNlIE9wZW5BSSBTREsgcGF0dGVybiB3aXRoIGN1c3RvbSBiYXNlVVJMCm5ldyBDaGF0T3BlbkFJKHsKICBjb25maWd1cmF0aW9uOiB7CiAgICBiYXNlVVJMOiBgaHR0cHM6Ly9nYXRld2F5LmFpLmNsb3VkZmxhcmUuY29tL3YxLyR7YWNjb3VudElkfS8ke2dhdGV3YXlJZH0vb3BlbmFpYAogIH0KfSk7CmBgYAoKIyMgSFRUUCAvIGNVUkwKCmBgYGJhc2gKY3VybCBodHRwczovL2dhdGV3YXkuYWkuY2xvdWRmbGFyZS5jb20vdjEve2FjY291bnR9L3tnYXRld2F5fS9vcGVuYWkvY2hhdC9jb21wbGV0aW9ucyBcCiAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAkT1BFTkFJX0tFWSIgXAogIC1IICJjZi1haWctYXV0aG9yaXphdGlvbjogQmVhcmVyICRDRl9UT0tFTiIgXAogIC1IICJjZi1haWctbWV0YWRhdGE6IHtcInVzZXJJZFwiOlwiMTIzXCJ9IiBcCiAgLWQgJ3sibW9kZWwiOiJncHQtNG8iLCJtZXNzYWdlcyI6Wy4uLl19JwpgYGAKCiMjIEhlYWRlcnMgUmVmZXJlbmNlCgp8IEhlYWRlciB8IFB1cnBvc2UgfAp8LS0tLS0tLS18LS0tLS0tLS0tfAp8IGBjZi1haWctYXV0aG9yaXphdGlvbmAgfCBHYXRld2F5IGF1dGggdG9rZW4gfAp8IGBjZi1haWctbWV0YWRhdGFgIHwgSlNPTiBvYmplY3QgKG1heCA1IGtleXMpIHwKfCBgY2YtYWlnLWNhY2hlLXR0bGAgfCBDYWNoZSBUVEwgaW4gc2Vjb25kcyB8CnwgYGNmLWFpZy1za2lwLWNhY2hlYCB8IGB0cnVlYCB0byBieXBhc3MgY2FjaGUgfAo=
+# AI Gateway SDK Integration
+
+## Vercel AI SDK (Recommended)
+
+```typescript
+import { createAiGateway } from 'ai-gateway-provider';
+import { createOpenAI } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const gateway = createAiGateway({
+  accountId: process.env.CF_ACCOUNT_ID,
+  gateway: process.env.CF_GATEWAY_ID,
+  apiKey: process.env.CF_API_TOKEN // Optional for auth gateways
+});
+
+const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// Single model
+const { text } = await generateText({
+  model: gateway(openai('gpt-4o')),
+  prompt: 'Hello'
+});
+
+// Automatic fallback array
+const { text } = await generateText({
+  model: gateway([
+    openai('gpt-4o'),
+    anthropic('claude-sonnet-4-5'),
+    openai('gpt-4o-mini')
+  ]),
+  prompt: 'Complex task'
+});
+```
+
+### Options
+
+```typescript
+model: gateway(openai('gpt-4o'), {
+  cacheKey: 'my-key',
+  cacheTtl: 3600,
+  metadata: { userId: 'u123', team: 'eng' }, // Max 5 entries
+  retries: { maxAttempts: 3, backoff: 'exponential' }
+})
+```
+
+## OpenAI SDK
+
+```typescript
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/openai`,
+  defaultHeaders: { 'cf-aig-authorization': `Bearer ${cfToken}` }
+});
+
+// Unified API - switch providers via model name
+model: 'openai/gpt-4o'  // or 'anthropic/claude-sonnet-4-5'
+```
+
+## Anthropic SDK
+
+```typescript
+const client = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+  baseURL: `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/anthropic`,
+  defaultHeaders: { 'cf-aig-authorization': `Bearer ${cfToken}` }
+});
+```
+
+## Workers AI Binding
+
+```toml
+# wrangler.toml
+[ai]
+binding = "AI"
+[[ai.gateway]]
+id = "my-gateway"
+```
+
+```typescript
+await env.AI.run('@cf/meta/llama-3-8b-instruct', 
+  { messages: [...] },
+  { gateway: { id: 'my-gateway', metadata: { userId: '123' } } }
+);
+```
+
+## LangChain / LlamaIndex
+
+```typescript
+// Use OpenAI SDK pattern with custom baseURL
+new ChatOpenAI({
+  configuration: {
+    baseURL: `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/openai`
+  }
+});
+```
+
+## HTTP / cURL
+
+```bash
+curl https://gateway.ai.cloudflare.com/v1/{account}/{gateway}/openai/chat/completions \
+  -H "Authorization: Bearer $OPENAI_KEY" \
+  -H "cf-aig-authorization: Bearer $CF_TOKEN" \
+  -H "cf-aig-metadata: {\"userId\":\"123\"}" \
+  -d '{"model":"gpt-4o","messages":[...]}'
+```
+
+## Headers Reference
+
+| Header | Purpose |
+|--------|---------|
+| `cf-aig-authorization` | Gateway auth token |
+| `cf-aig-metadata` | JSON object (max 5 keys) |
+| `cf-aig-cache-ttl` | Cache TTL in seconds |
+| `cf-aig-skip-cache` | `true` to bypass cache |

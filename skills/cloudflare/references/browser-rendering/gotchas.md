@@ -1,1 +1,88 @@
-IyBCcm93c2VyIFJlbmRlcmluZyBHb3RjaGFzCgojIyBUaWVyIExpbWl0cwoKfCBMaW1pdCB8IEZyZWUgfCBQYWlkIHwKfC0tLS0tLS18LS0tLS0tfC0tLS0tLXwKfCBEYWlseSBicm93c2VyIHRpbWUgfCAxMCBtaW4gfCBVbmxpbWl0ZWQqIHwKfCBDb25jdXJyZW50IHNlc3Npb25zIHwgMyB8IDMwIHwKfCBSZXF1ZXN0cy9taW51dGUgfCA2IHwgMTgwIHwKfCBTZXNzaW9uIGtlZXAtYWxpdmUgfCAxMCBtaW4gbWF4IHwgMTAgbWluIG1heCB8CgoqU3ViamVjdCB0byBmYWlyLXVzZSBwb2xpY3kuCgoqKkNoZWNrIHF1b3RhOioqCmBgYHR5cGVzY3JpcHQKY29uc3QgbGltaXRzID0gYXdhaXQgcHVwcGV0ZWVyLmxpbWl0cyhlbnYuTVlCUk9XU0VSKTsKLy8geyByZW1haW5pbmc6IDU0MDAwMCwgdG90YWw6IDYwMDAwMCwgY29uY3VycmVudDogMiB9CmBgYAoKIyMgQWx3YXlzIENsb3NlIEJyb3dzZXJzCgpgYGB0eXBlc2NyaXB0CmNvbnN0IGJyb3dzZXIgPSBhd2FpdCBwdXBwZXRlZXIubGF1bmNoKGVudi5NWUJST1dTRVIpOwp0cnkgewogIGNvbnN0IHBhZ2UgPSBhd2FpdCBicm93c2VyLm5ld1BhZ2UoKTsKICBhd2FpdCBwYWdlLmdvdG8oImh0dHBzOi8vZXhhbXBsZS5jb20iKTsKICByZXR1cm4gbmV3IFJlc3BvbnNlKGF3YWl0IHBhZ2UuY29udGVudCgpKTsKfSBmaW5hbGx5IHsKICBhd2FpdCBicm93c2VyLmNsb3NlKCk7IC8vIEFMV0FZUyBpbiBmaW5hbGx5Cn0KYGBgCgoqKldvcmtlcnMgdnMgUkVTVDoqKiBSRVNUIGF1dG8tY2xvc2VzIGFmdGVyIHRpbWVvdXQuIFdvcmtlcnMgbXVzdCBjYWxsIGBjbG9zZSgpYCBvciBzZXNzaW9uIHN0YXlzIG9wZW4gdW50aWwgYGtlZXBfYWxpdmVgIGV4cGlyZXMuCgojIyBPcHRpbWl6ZSBDb25jdXJyZW5jeQoKYGBgdHlwZXNjcmlwdAovLyDinYwgMyBzZXNzaW9ucyAoaGl0cyBmcmVlIHRpZXIgbGltaXQpCmNvbnN0IGJyb3dzZXIxID0gYXdhaXQgcHVwcGV0ZWVyLmxhdW5jaChlbnYuTVlCUk9XU0VSKTsKY29uc3QgYnJvd3NlcjIgPSBhd2FpdCBwdXBwZXRlZXIubGF1bmNoKGVudi5NWUJST1dTRVIpOwoKLy8g4pyFIDEgc2Vzc2lvbiwgbXVsdGlwbGUgcGFnZXMKY29uc3QgYnJvd3NlciA9IGF3YWl0IHB1cHBldGVlci5sYXVuY2goZW52Lk1ZQlJPV1NFUik7CmNvbnN0IHBhZ2UxID0gYXdhaXQgYnJvd3Nlci5uZXdQYWdlKCk7CmNvbnN0IHBhZ2UyID0gYXdhaXQgYnJvd3Nlci5uZXdQYWdlKCk7CmBgYAoKIyMgQ29tbW9uIEVycm9ycwoKfCBFcnJvciB8IENhdXNlIHwgRml4IHwKfC0tLS0tLS18LS0tLS0tLXwtLS0tLXwKfCBTZXNzaW9uIGxpbWl0IGV4Y2VlZGVkIHwgVG9vIG1hbnkgY29uY3VycmVudCB8IENsb3NlIHVudXNlZCBicm93c2VycywgdXNlIHBhZ2VzIG5vdCBicm93c2VycyB8CnwgUGFnZSBuYXZpZ2F0aW9uIHRpbWVvdXQgfCBTbG93IHBhZ2Ugb3IgYG5ldHdvcmtpZGxlYCBvbiBidXN5IHBhZ2UgfCBJbmNyZWFzZSB0aW1lb3V0LCB1c2UgYHdhaXRVbnRpbDogImxvYWQiYCB8CnwgU2Vzc2lvbiBub3QgZm91bmQgfCBFeHBpcmVkIHNlc3Npb24gfCBDYXRjaCBlcnJvciwgbGF1bmNoIG5ldyBzZXNzaW9uIHwKfCBFdmFsdWF0aW9uIGZhaWxlZCB8IERPTSBlbGVtZW50IG1pc3NpbmcgfCBVc2UgYD8uYCBvcHRpb25hbCBjaGFpbmluZyB8CnwgUHJvdG9jb2wgZXJyb3I6IFRhcmdldCBjbG9zZWQgfCBQYWdlIGNsb3NlZCBkdXJpbmcgb3BlcmF0aW9uIHwgQXdhaXQgYWxsIG9wcyBiZWZvcmUgY2xvc2luZyB8CgojIyBwYWdlLmV2YWx1YXRlKCkgR290Y2hhcwoKYGBgdHlwZXNjcmlwdAovLyDinYwgT3V0ZXIgc2NvcGUgbm90IGF2YWlsYWJsZQpjb25zdCBzZWxlY3RvciA9ICJoMSI7CmF3YWl0IHBhZ2UuZXZhbHVhdGUoKCkgPT4gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihzZWxlY3RvcikpOwoKLy8g4pyFIFBhc3MgYXMgYXJndW1lbnQKYXdhaXQgcGFnZS5ldmFsdWF0ZSgoc2VsKSA9PiBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKHNlbCk/LnRleHRDb250ZW50LCBzZWxlY3Rvcik7CmBgYAoKIyMgUGVyZm9ybWFuY2UKCioqd2FpdFVudGlsIG9wdGlvbnMgKGZhc3Rlc3QgdG8gc2xvd2VzdCk6KioKMS4gYGRvbWNvbnRlbnRsb2FkZWRgIC0gRE9NIHJlYWR5CjIuIGBsb2FkYCAtIGxvYWQgZXZlbnQgKGRlZmF1bHQpCjMuIGBuZXR3b3JraWRsZTBgIC0gbm8gbmV0d29yayBmb3IgNTAwbXMKCioqQmxvY2sgdW5uZWNlc3NhcnkgcmVzb3VyY2VzOioqCmBgYHR5cGVzY3JpcHQKYXdhaXQgcGFnZS5zZXRSZXF1ZXN0SW50ZXJjZXB0aW9uKHRydWUpOwpwYWdlLm9uKCJyZXF1ZXN0IiwgKHJlcSkgPT4gewogIGlmIChbImltYWdlIiwgInN0eWxlc2hlZXQiLCAiZm9udCJdLmluY2x1ZGVzKHJlcS5yZXNvdXJjZVR5cGUoKSkpIHsKICAgIHJlcS5hYm9ydCgpOwogIH0gZWxzZSB7CiAgICByZXEuY29udGludWUoKTsKICB9Cn0pOwpgYGAKCioqU2Vzc2lvbiByZXVzZToqKiBDb2xkIHN0YXJ0IH4xLTJzLCB3YXJtIGNvbm5lY3QgfjEwMC0yMDBtcy4gU3RvcmUgc2Vzc2lvbklkIGluIEtWIGZvciByZXVzZS4K
+# Browser Rendering Gotchas
+
+## Tier Limits
+
+| Limit | Free | Paid |
+|-------|------|------|
+| Daily browser time | 10 min | Unlimited* |
+| Concurrent sessions | 3 | 30 |
+| Requests/minute | 6 | 180 |
+| Session keep-alive | 10 min max | 10 min max |
+
+*Subject to fair-use policy.
+
+**Check quota:**
+```typescript
+const limits = await puppeteer.limits(env.MYBROWSER);
+// { remaining: 540000, total: 600000, concurrent: 2 }
+```
+
+## Always Close Browsers
+
+```typescript
+const browser = await puppeteer.launch(env.MYBROWSER);
+try {
+  const page = await browser.newPage();
+  await page.goto("https://example.com");
+  return new Response(await page.content());
+} finally {
+  await browser.close(); // ALWAYS in finally
+}
+```
+
+**Workers vs REST:** REST auto-closes after timeout. Workers must call `close()` or session stays open until `keep_alive` expires.
+
+## Optimize Concurrency
+
+```typescript
+// ❌ 3 sessions (hits free tier limit)
+const browser1 = await puppeteer.launch(env.MYBROWSER);
+const browser2 = await puppeteer.launch(env.MYBROWSER);
+
+// ✅ 1 session, multiple pages
+const browser = await puppeteer.launch(env.MYBROWSER);
+const page1 = await browser.newPage();
+const page2 = await browser.newPage();
+```
+
+## Common Errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| Session limit exceeded | Too many concurrent | Close unused browsers, use pages not browsers |
+| Page navigation timeout | Slow page or `networkidle` on busy page | Increase timeout, use `waitUntil: "load"` |
+| Session not found | Expired session | Catch error, launch new session |
+| Evaluation failed | DOM element missing | Use `?.` optional chaining |
+| Protocol error: Target closed | Page closed during operation | Await all ops before closing |
+
+## page.evaluate() Gotchas
+
+```typescript
+// ❌ Outer scope not available
+const selector = "h1";
+await page.evaluate(() => document.querySelector(selector));
+
+// ✅ Pass as argument
+await page.evaluate((sel) => document.querySelector(sel)?.textContent, selector);
+```
+
+## Performance
+
+**waitUntil options (fastest to slowest):**
+1. `domcontentloaded` - DOM ready
+2. `load` - load event (default)
+3. `networkidle0` - no network for 500ms
+
+**Block unnecessary resources:**
+```typescript
+await page.setRequestInterception(true);
+page.on("request", (req) => {
+  if (["image", "stylesheet", "font"].includes(req.resourceType())) {
+    req.abort();
+  } else {
+    req.continue();
+  }
+});
+```
+
+**Session reuse:** Cold start ~1-2s, warm connect ~100-200ms. Store sessionId in KV for reuse.

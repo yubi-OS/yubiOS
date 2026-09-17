@@ -1,1 +1,112 @@
-IyBBbmFseXRpY3MgRW5naW5lIENvbmZpZ3VyYXRpb24KCiMjIFNldHVwCgoxLiBBZGQgYmluZGluZyB0byBgd3JhbmdsZXIuanNvbmNgCjIuIERlcGxveSBXb3JrZXIKMy4gRGF0YXNldCBjcmVhdGVkIGF1dG9tYXRpY2FsbHkgb24gZmlyc3Qgd3JpdGUKNC4gUXVlcnkgdmlhIFNRTCBBUEkKCiMjIHdyYW5nbGVyLmpzb25jCgpgYGBqc29uYwp7CiAgIm5hbWUiOiAibXktd29ya2VyIiwKICAiYW5hbHl0aWNzX2VuZ2luZV9kYXRhc2V0cyI6IFsKICAgIHsgImJpbmRpbmciOiAiQU5BTFlUSUNTIiwgImRhdGFzZXQiOiAibXlfZXZlbnRzIiB9CiAgXQp9CmBgYAoKTXVsdGlwbGUgZGF0YXNldHMgZm9yIHNlcGFyYXRlIGNvbmNlcm5zOgpgYGBqc29uYwp7CiAgImFuYWx5dGljc19lbmdpbmVfZGF0YXNldHMiOiBbCiAgICB7ICJiaW5kaW5nIjogIkFQSV9BTkFMWVRJQ1MiLCAiZGF0YXNldCI6ICJhcGlfcmVxdWVzdHMiIH0sCiAgICB7ICJiaW5kaW5nIjogIlVTRVJfRVZFTlRTIiwgImRhdGFzZXQiOiAidXNlcl9hY3Rpdml0eSIgfQogIF0KfQpgYGAKCiMjIFR5cGVTY3JpcHQKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgQU5BTFlUSUNTOiBBbmFseXRpY3NFbmdpbmVEYXRhc2V0Owp9CgpleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdDogUmVxdWVzdCwgZW52OiBFbnYpIHsKICAgIC8vIE5vIGF3YWl0IC0gcmV0dXJucyB2b2lkLCBmaXJlLWFuZC1mb3JnZXQKICAgIGVudi5BTkFMWVRJQ1Mud3JpdGVEYXRhUG9pbnQoewogICAgICBibG9iczogW3BhdGhuYW1lLCBtZXRob2QsIHN0YXR1c10sICAgICAgLy8gU3RyaW5nIGRpbWVuc2lvbnMgKG1heCAyMCkKICAgICAgZG91YmxlczogW2xhdGVuY3ksIDFdLCAgICAgICAgICAgICAgICAgICAvLyBOdW1lcmljIG1ldHJpY3MgKG1heCAyMCkKICAgICAgaW5kZXhlczogW2FwaUtleV0gICAgICAgICAgICAgICAgICAgICAgICAvLyBIaWdoLWNhcmRpbmFsaXR5IGZpbHRlciAobWF4IDEpCiAgICB9KTsKICAgIHJldHVybiByZXNwb25zZTsKICB9Cn07CmBgYAoKIyMgRGF0YSBQb2ludCBMaW1pdHMKCnwgRmllbGQgfCBMaW1pdCB8IFNRTCBBY2Nlc3MgfAp8LS0tLS0tLXwtLS0tLS0tfC0tLS0tLS0tLS0tLXwKfCBibG9icyB8IDIwIHN0cmluZ3MsIDE2S0IgZWFjaCB8IGBibG9iMWAuLi5gYmxvYjIwYCB8CnwgZG91YmxlcyB8IDIwIG51bWJlcnMgfCBgZG91YmxlMWAuLi5gZG91YmxlMjBgIHwKfCBpbmRleGVzIHwgMSBzdHJpbmcsIDE2S0IgfCBgaW5kZXgxYCB8CgojIyBXcml0ZSBCZWhhdmlvcgoKfCBTY2VuYXJpbyB8IEJlaGF2aW9yIHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLXwKfCA8MU0gd3JpdGVzL21pbiB8IEFsbCBhY2NlcHRlZCB8CnwgPjFNIHdyaXRlcy9taW4gfCBBdXRvbWF0aWMgc2FtcGxpbmcgfAp8IEludmFsaWQgZGF0YSB8IFNpbGVudCBmYWlsdXJlIChjaGVjayB0YWlsIGxvZ3MpIHwKCioqTWl0aWdhdGUgc2FtcGxpbmc6KiogUHJlLWFnZ3JlZ2F0ZSwgdXNlIG11bHRpcGxlIGRhdGFzZXRzLCB3cml0ZSBvbmx5IGNyaXRpY2FsIG1ldHJpY3MuCgojIyBRdWVyeSBMaW1pdHMKCnwgUmVzb3VyY2UgfCBMaW1pdCB8CnwtLS0tLS0tLS0tfC0tLS0tLS18CnwgUXVlcnkgdGltZW91dCB8IDMwIHNlY29uZHMgfAp8IERhdGEgcmV0ZW50aW9uIHwgOTAgZGF5cyAoZGVmYXVsdCkgfAp8IFJlc3VsdCBzaXplIHwgfjEwTUIgfAoKIyMgQ29zdAoKKipGcmVlIHRpZXI6KiogMTBNIHdyaXRlcy9tb250aCwgMU0gcmVhZHMvbW9udGgKCioqUGFpZDoqKiAkMC4wNSBwZXIgMU0gd3JpdGVzLCAkMS4wMCBwZXIgMU0gcmVhZHMKCiMjIEVudmlyb25tZW50LVNwZWNpZmljCgpgYGBqc29uYwp7CiAgImFuYWx5dGljc19lbmdpbmVfZGF0YXNldHMiOiBbCiAgICB7ICJiaW5kaW5nIjogIkFOQUxZVElDUyIsICJkYXRhc2V0IjogInByb2RfZXZlbnRzIiB9CiAgXSwKICAiZW52IjogewogICAgInN0YWdpbmciOiB7CiAgICAgICJhbmFseXRpY3NfZW5naW5lX2RhdGFzZXRzIjogWwogICAgICAgIHsgImJpbmRpbmciOiAiQU5BTFlUSUNTIiwgImRhdGFzZXQiOiAic3RhZ2luZ19ldmVudHMiIH0KICAgICAgXQogICAgfQogIH0KfQpgYGAKCiMjIE1vbml0b3JpbmcKCmBgYGJhc2gKbnB4IHdyYW5nbGVyIHRhaWwgICMgQ2hlY2sgZm9yIHNhbXBsaW5nL3dyaXRlIGVycm9ycwpgYGAKCmBgYHNxbAotLSBDaGVjayB3cml0ZSBhY3Rpdml0eQpTRUxFQ1QgREFURV9UUlVOQygnaG91cicsIHRpbWVzdGFtcCkgQVMgaG91ciwgQ09VTlQoKikgQVMgd3JpdGVzCkZST00gbXlfZGF0YXNldApXSEVSRSB0aW1lc3RhbXAgPj0gTk9XKCkgLSBJTlRFUlZBTCAnMjQnIEhPVVIKR1JPVVAgQlkgaG91cgpgYGAK
+# Analytics Engine Configuration
+
+## Setup
+
+1. Add binding to `wrangler.jsonc`
+2. Deploy Worker
+3. Dataset created automatically on first write
+4. Query via SQL API
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "name": "my-worker",
+  "analytics_engine_datasets": [
+    { "binding": "ANALYTICS", "dataset": "my_events" }
+  ]
+}
+```
+
+Multiple datasets for separate concerns:
+```jsonc
+{
+  "analytics_engine_datasets": [
+    { "binding": "API_ANALYTICS", "dataset": "api_requests" },
+    { "binding": "USER_EVENTS", "dataset": "user_activity" }
+  ]
+}
+```
+
+## TypeScript
+
+```typescript
+interface Env {
+  ANALYTICS: AnalyticsEngineDataset;
+}
+
+export default {
+  async fetch(request: Request, env: Env) {
+    // No await - returns void, fire-and-forget
+    env.ANALYTICS.writeDataPoint({
+      blobs: [pathname, method, status],      // String dimensions (max 20)
+      doubles: [latency, 1],                   // Numeric metrics (max 20)
+      indexes: [apiKey]                        // High-cardinality filter (max 1)
+    });
+    return response;
+  }
+};
+```
+
+## Data Point Limits
+
+| Field | Limit | SQL Access |
+|-------|-------|------------|
+| blobs | 20 strings, 16KB each | `blob1`...`blob20` |
+| doubles | 20 numbers | `double1`...`double20` |
+| indexes | 1 string, 16KB | `index1` |
+
+## Write Behavior
+
+| Scenario | Behavior |
+|----------|----------|
+| <1M writes/min | All accepted |
+| >1M writes/min | Automatic sampling |
+| Invalid data | Silent failure (check tail logs) |
+
+**Mitigate sampling:** Pre-aggregate, use multiple datasets, write only critical metrics.
+
+## Query Limits
+
+| Resource | Limit |
+|----------|-------|
+| Query timeout | 30 seconds |
+| Data retention | 90 days (default) |
+| Result size | ~10MB |
+
+## Cost
+
+**Free tier:** 10M writes/month, 1M reads/month
+
+**Paid:** $0.05 per 1M writes, $1.00 per 1M reads
+
+## Environment-Specific
+
+```jsonc
+{
+  "analytics_engine_datasets": [
+    { "binding": "ANALYTICS", "dataset": "prod_events" }
+  ],
+  "env": {
+    "staging": {
+      "analytics_engine_datasets": [
+        { "binding": "ANALYTICS", "dataset": "staging_events" }
+      ]
+    }
+  }
+}
+```
+
+## Monitoring
+
+```bash
+npx wrangler tail  # Check for sampling/write errors
+```
+
+```sql
+-- Check write activity
+SELECT DATE_TRUNC('hour', timestamp) AS hour, COUNT(*) AS writes
+FROM my_dataset
+WHERE timestamp >= NOW() - INTERVAL '24' HOUR
+GROUP BY hour
+```

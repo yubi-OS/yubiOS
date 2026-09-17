@@ -1,1 +1,204 @@
-IyBBUEkgUmVmZXJlbmNlCgojIyBDbGllbnQgSW5pdGlhbGl6YXRpb24KCiMjIyBUeXBlU2NyaXB0CgpgYGB0eXBlc2NyaXB0CmltcG9ydCBDbG91ZGZsYXJlIGZyb20gJ2Nsb3VkZmxhcmUnOwoKY29uc3QgY2xpZW50ID0gbmV3IENsb3VkZmxhcmUoewogIGFwaVRva2VuOiBwcm9jZXNzLmVudi5DTE9VREZMQVJFX0FQSV9UT0tFTiwKfSk7CmBgYAoKIyMjIFB5dGhvbgoKYGBgcHl0aG9uCmZyb20gY2xvdWRmbGFyZSBpbXBvcnQgQ2xvdWRmbGFyZQoKY2xpZW50ID0gQ2xvdWRmbGFyZShhcGlfdG9rZW49b3MuZW52aXJvbi5nZXQoIkNMT1VERkxBUkVfQVBJX1RPS0VOIikpCgojIEZvciBhc3luYzoKZnJvbSBjbG91ZGZsYXJlIGltcG9ydCBBc3luY0Nsb3VkZmxhcmUKY2xpZW50ID0gQXN5bmNDbG91ZGZsYXJlKGFwaV90b2tlbj1vcy5lbnZpcm9uWyJDTE9VREZMQVJFX0FQSV9UT0tFTiJdKQpgYGAKCiMjIyBHbwoKYGBgZ28KaW1wb3J0ICgKICAgICJnaXRodWIuY29tL2Nsb3VkZmxhcmUvY2xvdWRmbGFyZS1nby92NCIKICAgICJnaXRodWIuY29tL2Nsb3VkZmxhcmUvY2xvdWRmbGFyZS1nby92NC9vcHRpb24iCikKCmNsaWVudCA6PSBjbG91ZGZsYXJlLk5ld0NsaWVudCgKICAgIG9wdGlvbi5XaXRoQVBJVG9rZW4ob3MuR2V0ZW52KCJDTE9VREZMQVJFX0FQSV9UT0tFTiIpKSwKKQpgYGAKCiMjIEF1dGhlbnRpY2F0aW9uCgojIyMgQVBJIFRva2VuIChSZWNvbW1lbmRlZCkKCioqQ3JlYXRlIHRva2VuKio6IERhc2hib2FyZCDihpIgTXkgUHJvZmlsZSDihpIgQVBJIFRva2VucyDihpIgQ3JlYXRlIFRva2VuCgpgYGBiYXNoCmV4cG9ydCBDTE9VREZMQVJFX0FQSV9UT0tFTj0neW91ci10b2tlbi1oZXJlJwoKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzIiBcCiAgLS1oZWFkZXIgIkF1dGhvcml6YXRpb246IEJlYXJlciAkQ0xPVURGTEFSRV9BUElfVE9LRU4iCmBgYAoKKipUb2tlbiBzY29wZXMqKjogQWx3YXlzIHVzZSBtaW5pbWFsIHBlcm1pc3Npb25zICh6b25lLXNwZWNpZmljLCB0aW1lLWxpbWl0ZWQpLgoKIyMjIEFQSSBLZXkgKExlZ2FjeSkKCmBgYGJhc2gKY3VybCAiaHR0cHM6Ly9hcGkuY2xvdWRmbGFyZS5jb20vY2xpZW50L3Y0L3pvbmVzIiBcCiAgLS1oZWFkZXIgIlgtQXV0aC1FbWFpbDogdXNlckBleGFtcGxlLmNvbSIgXAogIC0taGVhZGVyICJYLUF1dGgtS2V5OiAkQ0xPVURGTEFSRV9BUElfS0VZIgpgYGAKCioqTm90IHJlY29tbWVuZGVkOioqIEZ1bGwgYWNjb3VudCBhY2Nlc3MsIGNhbm5vdCBzY29wZSBwZXJtaXNzaW9ucy4KCiMjIEF1dG8tUGFnaW5hdGlvbgoKQWxsIFNES3Mgc3VwcG9ydCBhdXRvbWF0aWMgcGFnaW5hdGlvbiBmb3IgbGlzdCBvcGVyYXRpb25zLgoKYGBgdHlwZXNjcmlwdAovLyBUeXBlU2NyaXB0OiBmb3IgYXdhaXQuLi5vZgpmb3IgYXdhaXQgKGNvbnN0IHpvbmUgb2YgY2xpZW50LnpvbmVzLmxpc3QoKSkgewogIGNvbnNvbGUubG9nKHpvbmUuaWQpOwp9CmBgYAoKYGBgcHl0aG9uCiMgUHl0aG9uOiBpdGVyYXRvciBwcm90b2NvbApmb3Igem9uZSBpbiBjbGllbnQuem9uZXMubGlzdCgpOgogICAgcHJpbnQoem9uZS5pZCkKYGBgCgpgYGBnbwovLyBHbzogTGlzdEF1dG9QYWdpbmcKaXRlciA6PSBjbGllbnQuWm9uZXMuTGlzdEF1dG9QYWdpbmcoY3R4LCBjbG91ZGZsYXJlLlpvbmVMaXN0UGFyYW1ze30pCmZvciBpdGVyLk5leHQoKSB7CiAgICB6b25lIDo9IGl0ZXIuQ3VycmVudCgpCiAgICBmbXQuUHJpbnRsbih6b25lLklEKQp9CmBgYAoKIyMgRXJyb3IgSGFuZGxpbmcKCmBgYHR5cGVzY3JpcHQKdHJ5IHsKICBjb25zdCB6b25lID0gYXdhaXQgY2xpZW50LnpvbmVzLmdldCh7IHpvbmVfaWQ6ICd4eHgnIH0pOwp9IGNhdGNoIChlcnIpIHsKICBpZiAoZXJyIGluc3RhbmNlb2YgQ2xvdWRmbGFyZS5Ob3RGb3VuZEVycm9yKSB7CiAgICAvLyA0MDQKICB9IGVsc2UgaWYgKGVyciBpbnN0YW5jZW9mIENsb3VkZmxhcmUuUmF0ZUxpbWl0RXJyb3IpIHsKICAgIC8vIDQyOSAtIFNESyBhdXRvLXJldHJpZXMgd2l0aCBiYWNrb2ZmCiAgfSBlbHNlIGlmIChlcnIgaW5zdGFuY2VvZiBDbG91ZGZsYXJlLkFQSUVycm9yKSB7CiAgICBjb25zb2xlLmxvZyhlcnIuc3RhdHVzLCBlcnIubWVzc2FnZSk7CiAgfQp9CmBgYAoKKipDb21tb24gRXJyb3IgVHlwZXM6KioKLSBgQXV0aGVudGljYXRpb25FcnJvcmAgKDQwMSkgLSBJbnZhbGlkIHRva2VuCi0gYFBlcm1pc3Npb25EZW5pZWRFcnJvcmAgKDQwMykgLSBJbnN1ZmZpY2llbnQgc2NvcGUKLSBgTm90Rm91bmRFcnJvcmAgKDQwNCkgLSBSZXNvdXJjZSBub3QgZm91bmQKLSBgUmF0ZUxpbWl0RXJyb3JgICg0MjkpIC0gUmF0ZSBsaW1pdCBleGNlZWRlZAotIGBJbnRlcm5hbFNlcnZlckVycm9yYCAo4omlNTAwKSAtIENsb3VkZmxhcmUgZXJyb3IKCiMjIFpvbmUgTWFuYWdlbWVudAoKYGBgdHlwZXNjcmlwdAovLyBMaXN0IHpvbmVzCmNvbnN0IHpvbmVzID0gYXdhaXQgY2xpZW50LnpvbmVzLmxpc3QoewogIGFjY291bnQ6IHsgaWQ6ICdhY2NvdW50LWlkJyB9LAogIHN0YXR1czogJ2FjdGl2ZScsCn0pOwoKLy8gQ3JlYXRlIHpvbmUKY29uc3Qgem9uZSA9IGF3YWl0IGNsaWVudC56b25lcy5jcmVhdGUoewogIGFjY291bnQ6IHsgaWQ6ICdhY2NvdW50LWlkJyB9LAogIG5hbWU6ICdleGFtcGxlLmNvbScsCiAgdHlwZTogJ2Z1bGwnLCAvLyBvciAncGFydGlhbCcKfSk7CgovLyBVcGRhdGUgem9uZQphd2FpdCBjbGllbnQuem9uZXMuZWRpdCgnem9uZS1pZCcsIHsKICBwYXVzZWQ6IGZhbHNlLAp9KTsKCi8vIERlbGV0ZSB6b25lCmF3YWl0IGNsaWVudC56b25lcy5kZWxldGUoJ3pvbmUtaWQnKTsKYGBgCgpgYGBnbwovLyBHbzogcmVxdWlyZXMgY2xvdWRmbGFyZS5GKCkgd3JhcHBlcgp6b25lLCBlcnIgOj0gY2xpZW50LlpvbmVzLk5ldyhjdHgsIGNsb3VkZmxhcmUuWm9uZU5ld1BhcmFtc3sKICAgIEFjY291bnQ6IGNsb3VkZmxhcmUuRihjbG91ZGZsYXJlLlpvbmVOZXdQYXJhbXNBY2NvdW50ewogICAgICAgIElEOiBjbG91ZGZsYXJlLkYoImFjY291bnQtaWQiKSwKICAgIH0pLAogICAgTmFtZTogY2xvdWRmbGFyZS5GKCJleGFtcGxlLmNvbSIpLAogICAgVHlwZTogY2xvdWRmbGFyZS5GKGNsb3VkZmxhcmUuWm9uZU5ld1BhcmFtc1R5cGVGdWxsKSwKfSkKYGBgCgojIyBETlMgTWFuYWdlbWVudAoKYGBgdHlwZXNjcmlwdAovLyBDcmVhdGUgRE5TIHJlY29yZAphd2FpdCBjbGllbnQuZG5zLnJlY29yZHMuY3JlYXRlKHsKICB6b25lX2lkOiAnem9uZS1pZCcsCiAgdHlwZTogJ0EnLAogIG5hbWU6ICdzdWJkb21haW4uZXhhbXBsZS5jb20nLAogIGNvbnRlbnQ6ICcxOTIuMC4yLjEnLAogIHR0bDogMSwgLy8gYXV0bwogIHByb3hpZWQ6IHRydWUsIC8vIE9yYW5nZSBjbG91ZAp9KTsKCi8vIExpc3QgRE5TIHJlY29yZHMgKHdpdGggYXV0by1wYWdpbmF0aW9uKQpmb3IgYXdhaXQgKGNvbnN0IHJlY29yZCBvZiBjbGllbnQuZG5zLnJlY29yZHMubGlzdCh7CiAgem9uZV9pZDogJ3pvbmUtaWQnLAogIHR5cGU6ICdBJywKfSkpIHsKICBjb25zb2xlLmxvZyhyZWNvcmQubmFtZSwgcmVjb3JkLmNvbnRlbnQpOwp9CgovLyBVcGRhdGUgRE5TIHJlY29yZAphd2FpdCBjbGllbnQuZG5zLnJlY29yZHMudXBkYXRlKHsKICB6b25lX2lkOiAnem9uZS1pZCcsCiAgZG5zX3JlY29yZF9pZDogJ3JlY29yZC1pZCcsCiAgdHlwZTogJ0EnLAogIG5hbWU6ICdzdWJkb21haW4uZXhhbXBsZS5jb20nLAogIGNvbnRlbnQ6ICcyMDMuMC4xMTMuMScsCiAgcHJveGllZDogdHJ1ZSwKfSk7CgovLyBEZWxldGUgRE5TIHJlY29yZAphd2FpdCBjbGllbnQuZG5zLnJlY29yZHMuZGVsZXRlKHsKICB6b25lX2lkOiAnem9uZS1pZCcsCiAgZG5zX3JlY29yZF9pZDogJ3JlY29yZC1pZCcsCn0pOwpgYGAKCmBgYHB5dGhvbgojIFB5dGhvbiBleGFtcGxlCmNsaWVudC5kbnMucmVjb3Jkcy5jcmVhdGUoCiAgICB6b25lX2lkPSJ6b25lLWlkIiwKICAgIHR5cGU9IkEiLAogICAgbmFtZT0ic3ViZG9tYWluLmV4YW1wbGUuY29tIiwKICAgIGNvbnRlbnQ9IjE5Mi4wLjIuMSIsCiAgICB0dGw9MSwKICAgIHByb3hpZWQ9VHJ1ZSwKKQpgYGAKCiMjIFNlZSBBbHNvCgotIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIC0gU0RLIGNvbmZpZ3VyYXRpb24sIGVudmlyb25tZW50IHZhcmlhYmxlcwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBSZWFsLXdvcmxkIHBhdHRlcm5zIGFuZCB3b3JrZmxvd3MKLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIFJhdGUgbGltaXRzLCB0cm91Ymxlc2hvb3RpbmcK
+# API Reference
+
+## Client Initialization
+
+### TypeScript
+
+```typescript
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({
+  apiToken: process.env.CLOUDFLARE_API_TOKEN,
+});
+```
+
+### Python
+
+```python
+from cloudflare import Cloudflare
+
+client = Cloudflare(api_token=os.environ.get("CLOUDFLARE_API_TOKEN"))
+
+# For async:
+from cloudflare import AsyncCloudflare
+client = AsyncCloudflare(api_token=os.environ["CLOUDFLARE_API_TOKEN"])
+```
+
+### Go
+
+```go
+import (
+    "github.com/cloudflare/cloudflare-go/v4"
+    "github.com/cloudflare/cloudflare-go/v4/option"
+)
+
+client := cloudflare.NewClient(
+    option.WithAPIToken(os.Getenv("CLOUDFLARE_API_TOKEN")),
+)
+```
+
+## Authentication
+
+### API Token (Recommended)
+
+**Create token**: Dashboard → My Profile → API Tokens → Create Token
+
+```bash
+export CLOUDFLARE_API_TOKEN='your-token-here'
+
+curl "https://api.cloudflare.com/client/v4/zones" \
+  --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+```
+
+**Token scopes**: Always use minimal permissions (zone-specific, time-limited).
+
+### API Key (Legacy)
+
+```bash
+curl "https://api.cloudflare.com/client/v4/zones" \
+  --header "X-Auth-Email: user@example.com" \
+  --header "X-Auth-Key: $CLOUDFLARE_API_KEY"
+```
+
+**Not recommended:** Full account access, cannot scope permissions.
+
+## Auto-Pagination
+
+All SDKs support automatic pagination for list operations.
+
+```typescript
+// TypeScript: for await...of
+for await (const zone of client.zones.list()) {
+  console.log(zone.id);
+}
+```
+
+```python
+# Python: iterator protocol
+for zone in client.zones.list():
+    print(zone.id)
+```
+
+```go
+// Go: ListAutoPaging
+iter := client.Zones.ListAutoPaging(ctx, cloudflare.ZoneListParams{})
+for iter.Next() {
+    zone := iter.Current()
+    fmt.Println(zone.ID)
+}
+```
+
+## Error Handling
+
+```typescript
+try {
+  const zone = await client.zones.get({ zone_id: 'xxx' });
+} catch (err) {
+  if (err instanceof Cloudflare.NotFoundError) {
+    // 404
+  } else if (err instanceof Cloudflare.RateLimitError) {
+    // 429 - SDK auto-retries with backoff
+  } else if (err instanceof Cloudflare.APIError) {
+    console.log(err.status, err.message);
+  }
+}
+```
+
+**Common Error Types:**
+- `AuthenticationError` (401) - Invalid token
+- `PermissionDeniedError` (403) - Insufficient scope
+- `NotFoundError` (404) - Resource not found
+- `RateLimitError` (429) - Rate limit exceeded
+- `InternalServerError` (≥500) - Cloudflare error
+
+## Zone Management
+
+```typescript
+// List zones
+const zones = await client.zones.list({
+  account: { id: 'account-id' },
+  status: 'active',
+});
+
+// Create zone
+const zone = await client.zones.create({
+  account: { id: 'account-id' },
+  name: 'example.com',
+  type: 'full', // or 'partial'
+});
+
+// Update zone
+await client.zones.edit('zone-id', {
+  paused: false,
+});
+
+// Delete zone
+await client.zones.delete('zone-id');
+```
+
+```go
+// Go: requires cloudflare.F() wrapper
+zone, err := client.Zones.New(ctx, cloudflare.ZoneNewParams{
+    Account: cloudflare.F(cloudflare.ZoneNewParamsAccount{
+        ID: cloudflare.F("account-id"),
+    }),
+    Name: cloudflare.F("example.com"),
+    Type: cloudflare.F(cloudflare.ZoneNewParamsTypeFull),
+})
+```
+
+## DNS Management
+
+```typescript
+// Create DNS record
+await client.dns.records.create({
+  zone_id: 'zone-id',
+  type: 'A',
+  name: 'subdomain.example.com',
+  content: '192.0.2.1',
+  ttl: 1, // auto
+  proxied: true, // Orange cloud
+});
+
+// List DNS records (with auto-pagination)
+for await (const record of client.dns.records.list({
+  zone_id: 'zone-id',
+  type: 'A',
+})) {
+  console.log(record.name, record.content);
+}
+
+// Update DNS record
+await client.dns.records.update({
+  zone_id: 'zone-id',
+  dns_record_id: 'record-id',
+  type: 'A',
+  name: 'subdomain.example.com',
+  content: '203.0.113.1',
+  proxied: true,
+});
+
+// Delete DNS record
+await client.dns.records.delete({
+  zone_id: 'zone-id',
+  dns_record_id: 'record-id',
+});
+```
+
+```python
+# Python example
+client.dns.records.create(
+    zone_id="zone-id",
+    type="A",
+    name="subdomain.example.com",
+    content="192.0.2.1",
+    ttl=1,
+    proxied=True,
+)
+```
+
+## See Also
+
+- [configuration.md](./configuration.md) - SDK configuration, environment variables
+- [patterns.md](./patterns.md) - Real-world patterns and workflows
+- [gotchas.md](./gotchas.md) - Rate limits, troubleshooting

@@ -1,1 +1,160 @@
-IyBDb25maWd1cmF0aW9uCgojIyBFbnZpcm9ubWVudCBWYXJpYWJsZXMKCiMjIyBTZXQgVmFyaWFibGVzCgp8IFBsYXRmb3JtIHwgQ29tbWFuZCB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLXwKfCBMaW51eC9tYWNPUyB8IGBleHBvcnQgQ0xPVURGTEFSRV9BUElfVE9LRU49J3Rva2VuJ2AgfAp8IFBvd2VyU2hlbGwgfCBgJGVudjpDTE9VREZMQVJFX0FQSV9UT0tFTiA9ICd0b2tlbidgIHwKfCBXaW5kb3dzIENNRCB8IGBzZXQgQ0xPVURGTEFSRV9BUElfVE9LRU49dG9rZW5gIHwKCioqU2VjdXJpdHk6KiogTmV2ZXIgY29tbWl0IHRva2Vucy4gVXNlIGAuZW52YCBmaWxlcyAoZ2l0aWdub3JlZCkgb3Igc2VjcmV0IG1hbmFnZXJzLgoKIyMjIC5lbnYgRmlsZSBQYXR0ZXJuCgpgYGBiYXNoCiMgLmVudiAoYWRkIHRvIC5naXRpZ25vcmUpCkNMT1VERkxBUkVfQVBJX1RPS0VOPXlvdXItdG9rZW4taGVyZQpDTE9VREZMQVJFX0FDQ09VTlRfSUQ9eW91ci1hY2NvdW50LWlkCmBgYAoKYGBgdHlwZXNjcmlwdAovLyBUeXBlU2NyaXB0CmltcG9ydCAnZG90ZW52L2NvbmZpZyc7Cgpjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7CiAgYXBpVG9rZW46IHByb2Nlc3MuZW52LkNMT1VERkxBUkVfQVBJX1RPS0VOLAp9KTsKYGBgCgpgYGBweXRob24KIyBQeXRob24KZnJvbSBkb3RlbnYgaW1wb3J0IGxvYWRfZG90ZW52CmxvYWRfZG90ZW52KCkKCmNsaWVudCA9IENsb3VkZmxhcmUoYXBpX3Rva2VuPW9zLmVudmlyb25bIkNMT1VERkxBUkVfQVBJX1RPS0VOIl0pCmBgYAoKIyMgU0RLIENvbmZpZ3VyYXRpb24KCiMjIyBUeXBlU2NyaXB0CgpgYGB0eXBlc2NyaXB0CmNvbnN0IGNsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsKICBhcGlUb2tlbjogcHJvY2Vzcy5lbnYuQ0xPVURGTEFSRV9BUElfVE9LRU4sCiAgdGltZW91dDogMTIwMDAwLCAgICAgICAgLy8gMiBtaW4gKGRlZmF1bHQgNjBzKSwgaW4gbWlsbGlzZWNvbmRzCiAgbWF4UmV0cmllczogNSwgICAgICAgICAgLy8gZGVmYXVsdCAyCiAgYmFzZVVSTDogJ2h0dHBzOi8vLi4uJywgLy8gcHJveHkgKHJhcmUpCn0pOwoKLy8gUGVyLXJlcXVlc3Qgb3ZlcnJpZGVzCmF3YWl0IGNsaWVudC56b25lcy5nZXQoCiAgeyB6b25lX2lkOiAnem9uZS1pZCcgfSwKICB7IHRpbWVvdXQ6IDUwMDAsIG1heFJldHJpZXM6IDAgfQopOwpgYGAKCiMjIyBQeXRob24KCmBgYHB5dGhvbgpjbGllbnQgPSBDbG91ZGZsYXJlKAogICAgYXBpX3Rva2VuPW9zLmVudmlyb25bIkNMT1VERkxBUkVfQVBJX1RPS0VOIl0sCiAgICB0aW1lb3V0PTEyMCwgICAgICAgICAjIHNlY29uZHMgKGRlZmF1bHQgNjApCiAgICBtYXhfcmV0cmllcz01LCAgICAgICAjIGRlZmF1bHQgMgogICAgYmFzZV91cmw9Imh0dHBzOi8vLi4uIiwgICMgcHJveHkgKHJhcmUpCikKCiMgUGVyLXJlcXVlc3Qgb3ZlcnJpZGVzCmNsaWVudC53aXRoX29wdGlvbnModGltZW91dD01LCBtYXhfcmV0cmllcz0wKS56b25lcy5nZXQoem9uZV9pZD0iem9uZS1pZCIpCmBgYAoKIyMjIEdvCgpgYGBnbwpjbGllbnQgOj0gY2xvdWRmbGFyZS5OZXdDbGllbnQoCiAgICBvcHRpb24uV2l0aEFQSVRva2VuKG9zLkdldGVudigiQ0xPVURGTEFSRV9BUElfVE9LRU4iKSksCiAgICBvcHRpb24uV2l0aE1heFJldHJpZXMoNSksICAvLyBkZWZhdWx0IDEwIChoaWdoZXIgdGhhbiBUUy9QeXRob24pCiAgICBvcHRpb24uV2l0aFJlcXVlc3RUaW1lb3V0KDIgKiB0aW1lLk1pbnV0ZSksICAvLyBkZWZhdWx0IDYwcwogICAgb3B0aW9uLldpdGhCYXNlVVJMKCJodHRwczovLy4uLiIpLCAgLy8gcHJveHkgKHJhcmUpCikKCi8vIFBlci1yZXF1ZXN0IG92ZXJyaWRlcwpjbGllbnQuWm9uZXMuR2V0KGN0eCwgInpvbmUtaWQiLCBvcHRpb24uV2l0aE1heFJldHJpZXMoMCkpCmBgYAoKIyMgQ29uZmlndXJhdGlvbiBPcHRpb25zCgp8IE9wdGlvbiB8IFR5cGVTY3JpcHQgfCBQeXRob24gfCBHbyB8IERlZmF1bHQgfAp8LS0tLS0tLS18LS0tLS0tLS0tLS18LS0tLS0tLS18LS0tLS18LS0tLS0tLS0tfAp8IFRpbWVvdXQgfCBgdGltZW91dGAgKG1zKSB8IGB0aW1lb3V0YCAocykgfCBgV2l0aFJlcXVlc3RUaW1lb3V0YCB8IDYwcyB8CnwgUmV0cmllcyB8IGBtYXhSZXRyaWVzYCB8IGBtYXhfcmV0cmllc2AgfCBgV2l0aE1heFJldHJpZXNgIHwgMiAoR286IDEwKSB8CnwgQmFzZSBVUkwgfCBgYmFzZVVSTGAgfCBgYmFzZV91cmxgIHwgYFdpdGhCYXNlVVJMYCB8IGFwaS5jbG91ZGZsYXJlLmNvbSB8CgoqKk5vdGU6KiogR28gU0RLIGhhcyBoaWdoZXIgZGVmYXVsdCByZXRyaWVzICgxMCkgdGhhbiBUeXBlU2NyaXB0L1B5dGhvbiAoMikuCgojIyBUaW1lb3V0IENvbmZpZ3VyYXRpb24KCioqV2hlbiB0byBpbmNyZWFzZToqKgotIExhcmdlIHpvbmUgdHJhbnNmZXJzCi0gQnVsayBETlMgb3BlcmF0aW9ucwotIFdvcmtlciBzY3JpcHQgdXBsb2FkcwoKYGBgdHlwZXNjcmlwdApjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7CiAgdGltZW91dDogMzAwMDAwLCAvLyA1IG1pbnV0ZXMKfSk7CmBgYAoKIyMgUmV0cnkgQ29uZmlndXJhdGlvbgoKKipXaGVuIHRvIGluY3JlYXNlOioqIFJhdGUtbGltaXQtaGVhdnkgd29ya2Zsb3dzLCBmbGFreSBuZXR3b3JrCgoqKldoZW4gdG8gZGVjcmVhc2U6KiogRmFzdC1mYWlsIHJlcXVpcmVtZW50cywgdXNlci1mYWNpbmcgcmVxdWVzdHMKCmBgYHR5cGVzY3JpcHQKLy8gSW5jcmVhc2UgcmV0cmllcyBmb3IgYmF0Y2ggb3BlcmF0aW9ucwpjb25zdCBjbGllbnQgPSBuZXcgQ2xvdWRmbGFyZSh7IG1heFJldHJpZXM6IDEwIH0pOwoKLy8gRGlzYWJsZSByZXRyaWVzIGZvciBmYXN0LWZhaWwKY29uc3QgZmFzdENsaWVudCA9IG5ldyBDbG91ZGZsYXJlKHsgbWF4UmV0cmllczogMCB9KTsKYGBgCgojIyBXcmFuZ2xlciBDTEkgSW50ZWdyYXRpb24KCmBgYGJhc2gKIyBDb25maWd1cmUgYXV0aGVudGljYXRpb24Kd3JhbmdsZXIgbG9naW4KIyBPcgpleHBvcnQgQ0xPVURGTEFSRV9BUElfVE9LRU49J3Rva2VuJwoKIyBDb21tb24gY29tbWFuZHMgdGhhdCB1c2UgQVBJCndyYW5nbGVyIGRlcGxveSAgICAgICAgICAgICAgIyBVcGxvYWRzIHdvcmtlciB2aWEgQVBJCndyYW5nbGVyIGt2OmtleSBwdXQgICAgICAgICAgIyBLViBvcGVyYXRpb25zCndyYW5nbGVyIHIyIGJ1Y2tldCBjcmVhdGUgICAgIyBSMiBvcGVyYXRpb25zCndyYW5nbGVyIGQxIGV4ZWN1dGUgICAgICAgICAgIyBEMSBvcGVyYXRpb25zCndyYW5nbGVyIHBhZ2VzIGRlcGxveSAgICAgICAgIyBQYWdlcyBvcGVyYXRpb25zCgojIEdldCBBUEkgY29uZmlndXJhdGlvbgp3cmFuZ2xlciB3aG9hbWkgICAgICAgICAgICAgICMgU2hvd3MgYXV0aGVudGljYXRlZCB1c2VyCmBgYAoKIyMjIHdyYW5nbGVyLnRvbWwKCmBgYHRvbWwKbmFtZSA9ICJteS13b3JrZXIiCm1haW4gPSAic3JjL2luZGV4LnRzIgpjb21wYXRpYmlsaXR5X2RhdGUgPSAiMjAyNC0wMS0wMSIKYWNjb3VudF9pZCA9ICJ5b3VyLWFjY291bnQtaWQiCgojIENhbiBhbHNvIHVzZSBlbnYgdmFyczoKIyBDTE9VREZMQVJFX0FDQ09VTlRfSUQKIyBDTE9VREZMQVJFX0FQSV9UT0tFTgpgYGAKCiMjIFNlZSBBbHNvCgotIFthcGkubWRdKC4vYXBpLm1kKSAtIENsaWVudCBpbml0aWFsaXphdGlvbiwgYXV0aGVudGljYXRpb24KLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIFJhdGUgbGltaXRzLCB0aW1lb3V0IGVycm9ycwotIFtXcmFuZ2xlciBSZWZlcmVuY2VdKC4uL3dyYW5nbGVyLykgLSBDTEkgdG9vbCBkZXRhaWxzCg==
+# Configuration
+
+## Environment Variables
+
+### Set Variables
+
+| Platform | Command |
+|----------|---------|
+| Linux/macOS | `export CLOUDFLARE_API_TOKEN='token'` |
+| PowerShell | `$env:CLOUDFLARE_API_TOKEN = 'token'` |
+| Windows CMD | `set CLOUDFLARE_API_TOKEN=token` |
+
+**Security:** Never commit tokens. Use `.env` files (gitignored) or secret managers.
+
+### .env File Pattern
+
+```bash
+# .env (add to .gitignore)
+CLOUDFLARE_API_TOKEN=your-token-here
+CLOUDFLARE_ACCOUNT_ID=your-account-id
+```
+
+```typescript
+// TypeScript
+import 'dotenv/config';
+
+const client = new Cloudflare({
+  apiToken: process.env.CLOUDFLARE_API_TOKEN,
+});
+```
+
+```python
+# Python
+from dotenv import load_dotenv
+load_dotenv()
+
+client = Cloudflare(api_token=os.environ["CLOUDFLARE_API_TOKEN"])
+```
+
+## SDK Configuration
+
+### TypeScript
+
+```typescript
+const client = new Cloudflare({
+  apiToken: process.env.CLOUDFLARE_API_TOKEN,
+  timeout: 120000,        // 2 min (default 60s), in milliseconds
+  maxRetries: 5,          // default 2
+  baseURL: 'https://...', // proxy (rare)
+});
+
+// Per-request overrides
+await client.zones.get(
+  { zone_id: 'zone-id' },
+  { timeout: 5000, maxRetries: 0 }
+);
+```
+
+### Python
+
+```python
+client = Cloudflare(
+    api_token=os.environ["CLOUDFLARE_API_TOKEN"],
+    timeout=120,         # seconds (default 60)
+    max_retries=5,       # default 2
+    base_url="https://...",  # proxy (rare)
+)
+
+# Per-request overrides
+client.with_options(timeout=5, max_retries=0).zones.get(zone_id="zone-id")
+```
+
+### Go
+
+```go
+client := cloudflare.NewClient(
+    option.WithAPIToken(os.Getenv("CLOUDFLARE_API_TOKEN")),
+    option.WithMaxRetries(5),  // default 10 (higher than TS/Python)
+    option.WithRequestTimeout(2 * time.Minute),  // default 60s
+    option.WithBaseURL("https://..."),  // proxy (rare)
+)
+
+// Per-request overrides
+client.Zones.Get(ctx, "zone-id", option.WithMaxRetries(0))
+```
+
+## Configuration Options
+
+| Option | TypeScript | Python | Go | Default |
+|--------|-----------|--------|-----|---------|
+| Timeout | `timeout` (ms) | `timeout` (s) | `WithRequestTimeout` | 60s |
+| Retries | `maxRetries` | `max_retries` | `WithMaxRetries` | 2 (Go: 10) |
+| Base URL | `baseURL` | `base_url` | `WithBaseURL` | api.cloudflare.com |
+
+**Note:** Go SDK has higher default retries (10) than TypeScript/Python (2).
+
+## Timeout Configuration
+
+**When to increase:**
+- Large zone transfers
+- Bulk DNS operations
+- Worker script uploads
+
+```typescript
+const client = new Cloudflare({
+  timeout: 300000, // 5 minutes
+});
+```
+
+## Retry Configuration
+
+**When to increase:** Rate-limit-heavy workflows, flaky network
+
+**When to decrease:** Fast-fail requirements, user-facing requests
+
+```typescript
+// Increase retries for batch operations
+const client = new Cloudflare({ maxRetries: 10 });
+
+// Disable retries for fast-fail
+const fastClient = new Cloudflare({ maxRetries: 0 });
+```
+
+## Wrangler CLI Integration
+
+```bash
+# Configure authentication
+wrangler login
+# Or
+export CLOUDFLARE_API_TOKEN='token'
+
+# Common commands that use API
+wrangler deploy              # Uploads worker via API
+wrangler kv:key put          # KV operations
+wrangler r2 bucket create    # R2 operations
+wrangler d1 execute          # D1 operations
+wrangler pages deploy        # Pages operations
+
+# Get API configuration
+wrangler whoami              # Shows authenticated user
+```
+
+### wrangler.toml
+
+```toml
+name = "my-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+account_id = "your-account-id"
+
+# Can also use env vars:
+# CLOUDFLARE_ACCOUNT_ID
+# CLOUDFLARE_API_TOKEN
+```
+
+## See Also
+
+- [api.md](./api.md) - Client initialization, authentication
+- [gotchas.md](./gotchas.md) - Rate limits, timeout errors
+- [Wrangler Reference](../wrangler/) - CLI tool details

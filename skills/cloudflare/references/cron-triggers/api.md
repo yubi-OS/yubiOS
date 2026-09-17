@@ -1,1 +1,196 @@
-IyBDcm9uIFRyaWdnZXJzIEFQSQoKIyMgQmFzaWMgSGFuZGxlcgoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgc2NoZWR1bGVkKGNvbnRyb2xsZXI6IFNjaGVkdWxlZENvbnRyb2xsZXIsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGNvbnNvbGUubG9nKCJDcm9uIGV4ZWN1dGVkOiIsIG5ldyBEYXRlKGNvbnRyb2xsZXIuc2NoZWR1bGVkVGltZSkpOwogIH0sCn07CmBgYAoKKipKYXZhU2NyaXB0OioqIFNhbWUgc2lnbmF0dXJlIHdpdGhvdXQgdHlwZXMgIAoqKlB5dGhvbjoqKiBgY2xhc3MgRGVmYXVsdChXb3JrZXJFbnRyeXBvaW50KTogYXN5bmMgZGVmIHNjaGVkdWxlZChzZWxmLCBjb250cm9sbGVyLCBlbnYsIGN0eClgCgojIyBTY2hlZHVsZWRDb250cm9sbGVyCgpgYGB0eXBlc2NyaXB0CmludGVyZmFjZSBTY2hlZHVsZWRDb250cm9sbGVyIHsKICBzY2hlZHVsZWRUaW1lOiBudW1iZXI7ICAvLyBVbml4IG1zIHdoZW4gc2NoZWR1bGVkIHRvIHJ1bgogIGNyb246IHN0cmluZzsgICAgICAgICAgIC8vIEV4cHJlc3Npb24gdGhhdCB0cmlnZ2VyZWQgKGUuZy4sICIqLzUgKiAqICogKiIpCiAgdHlwZTogc3RyaW5nOyAgICAgICAgICAgLy8gQWx3YXlzICJzY2hlZHVsZWQiCiAgbm9SZXRyeSgpOiB2b2lkOyAgICAgICAgLy8gUHJldmVudCBhdXRvbWF0aWMgcmV0cnkgb24gZmFpbHVyZQp9CmBgYAoKKipQcmV2ZW50IHJldHJ5IG9uIGZhaWx1cmU6KioKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgc2NoZWR1bGVkKGNvbnRyb2xsZXIsIGVudiwgY3R4KSB7CiAgICB0cnkgewogICAgICBhd2FpdCByaXNreU9wZXJhdGlvbihlbnYpOwogICAgfSBjYXRjaCAoZXJyb3IpIHsKICAgICAgLy8gRG9uJ3QgcmV0cnkgLSBmYWlsdXJlIGlzIGV4cGVjdGVkL2FjY2VwdGFibGUKICAgICAgY29udHJvbGxlci5ub1JldHJ5KCk7CiAgICAgIGNvbnNvbGUuZXJyb3IoIk9wZXJhdGlvbiBmYWlsZWQsIG5vdCByZXRyeWluZzoiLCBlcnJvcik7CiAgICB9CiAgfSwKfTsKYGBgCgoqKldoZW4gdG8gdXNlIG5vUmV0cnkoKToqKgotIEV4dGVybmFsIEFQSSBmYWlsdXJlcyBvdXRzaWRlIHlvdXIgY29udHJvbCAoYXZvaWQgaGFtbWVyaW5nIGZhaWxlZCBzZXJ2aWNlcykKLSBSYXRlIGxpbWl0IGVycm9ycyAocmV0cnkgd291bGQgZmFpbCBhZ2FpbiBpbW1lZGlhdGVseSkKLSBEdXBsaWNhdGUgZXhlY3V0aW9uIGRldGVjdGVkIChpZGVtcG90ZW5jeSBjaGVjayBmYWlsZWQpCi0gTm9uLWNyaXRpY2FsIG9wZXJhdGlvbnMgd2hlcmUgc2tpcCBpcyBhY2NlcHRhYmxlIChhbmFseXRpY3MsIGNhY2hpbmcpCi0gVmFsaWRhdGlvbiBlcnJvcnMgdGhhdCB3b24ndCByZXNvbHZlIG9uIHJldHJ5CgojIyBIYW5kbGVyIFBhcmFtZXRlcnMKCioqYGNvbnRyb2xsZXI6IFNjaGVkdWxlZENvbnRyb2xsZXJgKioKLSBBY2Nlc3MgY3JvbiBleHByZXNzaW9uIGFuZCBzY2hlZHVsZWQgdGltZQoKKipgZW52OiBFbnZgKioKLSBBbGwgYmluZGluZ3M6IEtWLCBSMiwgRDEsIHNlY3JldHMsIHNlcnZpY2UgYmluZGluZ3MKCioqYGN0eDogRXhlY3V0aW9uQ29udGV4dGAqKgotIGBjdHgud2FpdFVudGlsKHByb21pc2UpYCAtIEV4dGVuZCBleGVjdXRpb24gZm9yIGFzeW5jIHRhc2tzIChsb2dnaW5nLCBjbGVhbnVwLCBleHRlcm5hbCBBUElzKQotIEZpcnN0IGB3YWl0VW50aWxgIGZhaWx1cmUgcmVjb3JkZWQgaW4gQ3JvbiBFdmVudHMKCiMjIE11bHRpcGxlIFNjaGVkdWxlcwoKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgc2NoZWR1bGVkKGNvbnRyb2xsZXIsIGVudiwgY3R4KSB7CiAgICBzd2l0Y2ggKGNvbnRyb2xsZXIuY3JvbikgewogICAgICBjYXNlICIqLzMgKiAqICogKiI6IGN0eC53YWl0VW50aWwodXBkYXRlUmVjZW50RGF0YShlbnYpKTsgYnJlYWs7CiAgICAgIGNhc2UgIjAgKiAqICogKiI6IGN0eC53YWl0VW50aWwocHJvY2Vzc0hvdXJseUFnZ3JlZ2F0aW9uKGVudikpOyBicmVhazsKICAgICAgY2FzZSAiMCAyICogKiAqIjogY3R4LndhaXRVbnRpbChwZXJmb3JtRGFpbHlNYWludGVuYW5jZShlbnYpKTsgYnJlYWs7CiAgICAgIGRlZmF1bHQ6IGNvbnNvbGUud2FybihgVW5oYW5kbGVkOiAke2NvbnRyb2xsZXIuY3Jvbn1gKTsKICAgIH0KICB9LAp9OwpgYGAKCiMjIGN0eC53YWl0VW50aWwgVXNhZ2UKCmBgYHR5cGVzY3JpcHQKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHNjaGVkdWxlZChjb250cm9sbGVyLCBlbnYsIGN0eCkgewogICAgY29uc3QgZGF0YSA9IGF3YWl0IGZldGNoQ3JpdGljYWxEYXRhKCk7IC8vIENyaXRpY2FsIHBhdGgKICAgIAogICAgLy8gTm9uLWJsb2NraW5nIGJhY2tncm91bmQgdGFza3MKICAgIGN0eC53YWl0VW50aWwoUHJvbWlzZS5hbGwoWwogICAgICBsb2dUb0FuYWx5dGljcyhkYXRhKSwKICAgICAgY2xlYW51cE9sZFJlY29yZHMoZW52LkRCKSwKICAgICAgbm90aWZ5V2ViaG9vayhlbnYuV0VCSE9PS19VUkwsIGRhdGEpLAogICAgXSkpOwogIH0sCn07CmBgYAoKIyMgV29ya2Zsb3cgSW50ZWdyYXRpb24KCmBgYHR5cGVzY3JpcHQKaW1wb3J0IHsgV29ya2Zsb3dFbnRyeXBvaW50IH0gZnJvbSAiY2xvdWRmbGFyZTp3b3JrZXJzIjsKCmV4cG9ydCBjbGFzcyBEYXRhUHJvY2Vzc2luZ1dvcmtmbG93IGV4dGVuZHMgV29ya2Zsb3dFbnRyeXBvaW50IHsKICBhc3luYyBydW4oZXZlbnQsIHN0ZXApIHsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBzdGVwLmRvKCJmZXRjaC1kYXRhIiwgKCkgPT4gZmV0Y2hMYXJnZURhdGFzZXQoKSk7CiAgICBjb25zdCBwcm9jZXNzZWQgPSBhd2FpdCBzdGVwLmRvKCJwcm9jZXNzLWRhdGEiLCAoKSA9PiBwcm9jZXNzRGF0YXNldChkYXRhKSk7CiAgICBhd2FpdCBzdGVwLmRvKCJzdG9yZS1yZXN1bHRzIiwgKCkgPT4gc3RvcmVSZXN1bHRzKHByb2Nlc3NlZCkpOwogIH0KfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHNjaGVkdWxlZChjb250cm9sbGVyLCBlbnYsIGN0eCkgewogICAgY29uc3QgaW5zdGFuY2UgPSBhd2FpdCBlbnYuTVlfV09SS0ZMT1cuY3JlYXRlKHsKICAgICAgcGFyYW1zOiB7IHNjaGVkdWxlZFRpbWU6IGNvbnRyb2xsZXIuc2NoZWR1bGVkVGltZSwgY3JvbjogY29udHJvbGxlci5jcm9uIH0sCiAgICB9KTsKICAgIGNvbnNvbGUubG9nKGBTdGFydGVkIHdvcmtmbG93OiAke2luc3RhbmNlLmlkfWApOwogIH0sCn07CmBgYAoKIyMgVGVzdGluZyBIYW5kbGVyCgoqKkxvY2FsIGRldmVsb3BtZW50ICgvX19zY2hlZHVsZWQgZW5kcG9pbnQpOioqCmBgYGJhc2gKIyBTdGFydCBkZXYgc2VydmVyCm5weCB3cmFuZ2xlciBkZXYKCiMgVHJpZ2dlciBhbnkgY3JvbgpjdXJsICJodHRwOi8vbG9jYWxob3N0Ojg3ODcvX19zY2hlZHVsZWQ/Y3Jvbj0qLzUrKisqKyorKiIKCiMgVHJpZ2dlciBzcGVjaWZpYyBjcm9uIHdpdGggY3VzdG9tIHRpbWUKY3VybCAiaHR0cDovL2xvY2FsaG9zdDo4Nzg3L19fc2NoZWR1bGVkP2Nyb249MCsyKyorKisqJnNjaGVkdWxlZFRpbWU9MTcwNDA2NzIwMDAwMCIKYGBgCgoqKlF1ZXJ5IHBhcmFtZXRlcnM6KioKLSBgY3JvbmAgLSBSZXF1aXJlZC4gVVJMLWVuY29kZWQgY3JvbiBleHByZXNzaW9uICh1c2UgYCtgIGZvciBzcGFjZXMpCi0gYHNjaGVkdWxlZFRpbWVgIC0gT3B0aW9uYWwuIFVuaXggdGltZXN0YW1wIGluIG1pbGxpc2Vjb25kcyAoZGVmYXVsdHMgdG8gY3VycmVudCB0aW1lKQoKKipQcm9kdWN0aW9uIHNlY3VyaXR5OioqIFRoZSBgL19fc2NoZWR1bGVkYCBlbmRwb2ludCBpcyBhdmFpbGFibGUgaW4gcHJvZHVjdGlvbiBhbmQgY2FuIGJlIHRyaWdnZXJlZCBieSBhbnlvbmUuIEJsb2NrIGl0IG9yIGltcGxlbWVudCBhdXRoZW50aWNhdGlvbiAtIHNlZSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kI3NlY3VyaXR5LWNvbmNlcm5zKQoKKipVbml0IHRlc3RpbmcgKFZpdGVzdCk6KioKYGBgdHlwZXNjcmlwdAovLyB0ZXN0L3NjaGVkdWxlZC50ZXN0LnRzCmltcG9ydCB7IGRlc2NyaWJlLCBpdCwgZXhwZWN0IH0gZnJvbSAidml0ZXN0IjsKaW1wb3J0IHsgZW52IH0gZnJvbSAiY2xvdWRmbGFyZTp0ZXN0IjsKaW1wb3J0IHdvcmtlciBmcm9tICIuLi9zcmMvaW5kZXgiOwoKZGVzY3JpYmUoIlNjaGVkdWxlZCBIYW5kbGVyIiwgKCkgPT4gewogIGl0KCJwcm9jZXNzZXMgc2NoZWR1bGVkIGV2ZW50IiwgYXN5bmMgKCkgPT4gewogICAgY29uc3QgY29udHJvbGxlciA9IHsgc2NoZWR1bGVkVGltZTogRGF0ZS5ub3coKSwgY3JvbjogIiovNSAqICogKiAqIiwgdHlwZTogInNjaGVkdWxlZCIgYXMgY29uc3QsIG5vUmV0cnk6ICgpID0+IHt9IH07CiAgICBjb25zdCBjdHggPSB7IHdhaXRVbnRpbDogKHA6IFByb21pc2U8YW55PikgPT4gcCwgcGFzc1Rocm91Z2hPbkV4Y2VwdGlvbjogKCkgPT4ge30gfTsKICAgIGF3YWl0IHdvcmtlci5zY2hlZHVsZWQoY29udHJvbGxlciwgZW52LCBjdHgpOwogICAgZXhwZWN0KGF3YWl0IGVudi5NWV9LVi5nZXQoImxhc3RfcnVuIikpLnRvQmVEZWZpbmVkKCk7CiAgfSk7CiAgCiAgaXQoImhhbmRsZXMgbXVsdGlwbGUgY3JvbnMiLCBhc3luYyAoKSA9PiB7CiAgICBjb25zdCBjdHggPSB7IHdhaXRVbnRpbDogKCkgPT4ge30sIHBhc3NUaHJvdWdoT25FeGNlcHRpb246ICgpID0+IHt9IH07CiAgICBhd2FpdCB3b3JrZXIuc2NoZWR1bGVkKHsgc2NoZWR1bGVkVGltZTogRGF0ZS5ub3coKSwgY3JvbjogIiovNSAqICogKiAqIiwgdHlwZTogInNjaGVkdWxlZCIsIG5vUmV0cnk6ICgpID0+IHt9IH0sIGVudiwgY3R4KTsKICAgIGV4cGVjdChhd2FpdCBlbnYuTVlfS1YuZ2V0KCJsYXN0X3R5cGUiKSkudG9CZSgiZnJlcXVlbnQiKTsKICB9KTsKfSk7CmBgYAoKIyMgRXJyb3IgSGFuZGxpbmcKCioqQXV0b21hdGljIHJldHJpZXM6KioKLSBGYWlsZWQgY3JvbiBleGVjdXRpb25zIGFyZSByZXRyaWVkIGF1dG9tYXRpY2FsbHkgdW5sZXNzIGBub1JldHJ5KClgIGlzIGNhbGxlZAotIFJldHJ5IGhhcHBlbnMgYWZ0ZXIgYSBkZWxheSAodHlwaWNhbGx5IG1pbnV0ZXMpCi0gT25seSBmaXJzdCBgd2FpdFVudGlsKClgIGZhaWx1cmUgaXMgcmVjb3JkZWQgaW4gQ3JvbiBFdmVudHMKCioqQmVzdCBwcmFjdGljZXM6KioKYGBgdHlwZXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgc2NoZWR1bGVkKGNvbnRyb2xsZXIsIGVudiwgY3R4KSB7CiAgICB0cnkgewogICAgICBhd2FpdCBjcml0aWNhbE9wZXJhdGlvbihlbnYpOwogICAgfSBjYXRjaCAoZXJyb3IpIHsKICAgICAgLy8gTG9nIGVycm9yIGRldGFpbHMKICAgICAgY29uc29sZS5lcnJvcigiQ3JvbiBmYWlsZWQ6IiwgewogICAgICAgIGNyb246IGNvbnRyb2xsZXIuY3JvbiwKICAgICAgICBzY2hlZHVsZWRUaW1lOiBjb250cm9sbGVyLnNjaGVkdWxlZFRpbWUsCiAgICAgICAgZXJyb3I6IGVycm9yLm1lc3NhZ2UsCiAgICAgICAgc3RhY2s6IGVycm9yLnN0YWNrLAogICAgICB9KTsKICAgICAgCiAgICAgIC8vIERlY2lkZTogcmV0cnkgb3Igc2tpcAogICAgICBpZiAoZXJyb3IubWVzc2FnZS5pbmNsdWRlcygicmF0ZSBsaW1pdCIpKSB7CiAgICAgICAgY29udHJvbGxlci5ub1JldHJ5KCk7IC8vIFNraXAgcmV0cnkgZm9yIHJhdGUgbGltaXRzCiAgICAgIH0KICAgICAgLy8gT3RoZXJ3aXNlIGFsbG93IGF1dG9tYXRpYyByZXRyeQogICAgICB0aHJvdyBlcnJvcjsKICAgIH0KICB9LAp9OwpgYGAKCiMjIFNlZSBBbHNvCgotIFtSRUFETUUubWRdKC4vUkVBRE1FLm1kKSAtIE92ZXJ2aWV3Ci0gW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSAtIFVzZSBjYXNlcywgZXhhbXBsZXMKLSBbZ290Y2hhcy5tZF0oLi9nb3RjaGFzLm1kKSAtIENvbW1vbiBlcnJvcnMsIHRlc3RpbmcgaXNzdWVzCg==
+# Cron Triggers API
+
+## Basic Handler
+
+```typescript
+export default {
+  async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+    console.log("Cron executed:", new Date(controller.scheduledTime));
+  },
+};
+```
+
+**JavaScript:** Same signature without types  
+**Python:** `class Default(WorkerEntrypoint): async def scheduled(self, controller, env, ctx)`
+
+## ScheduledController
+
+```typescript
+interface ScheduledController {
+  scheduledTime: number;  // Unix ms when scheduled to run
+  cron: string;           // Expression that triggered (e.g., "*/5 * * * *")
+  type: string;           // Always "scheduled"
+  noRetry(): void;        // Prevent automatic retry on failure
+}
+```
+
+**Prevent retry on failure:**
+```typescript
+export default {
+  async scheduled(controller, env, ctx) {
+    try {
+      await riskyOperation(env);
+    } catch (error) {
+      // Don't retry - failure is expected/acceptable
+      controller.noRetry();
+      console.error("Operation failed, not retrying:", error);
+    }
+  },
+};
+```
+
+**When to use noRetry():**
+- External API failures outside your control (avoid hammering failed services)
+- Rate limit errors (retry would fail again immediately)
+- Duplicate execution detected (idempotency check failed)
+- Non-critical operations where skip is acceptable (analytics, caching)
+- Validation errors that won't resolve on retry
+
+## Handler Parameters
+
+**`controller: ScheduledController`**
+- Access cron expression and scheduled time
+
+**`env: Env`**
+- All bindings: KV, R2, D1, secrets, service bindings
+
+**`ctx: ExecutionContext`**
+- `ctx.waitUntil(promise)` - Extend execution for async tasks (logging, cleanup, external APIs)
+- First `waitUntil` failure recorded in Cron Events
+
+## Multiple Schedules
+
+```typescript
+export default {
+  async scheduled(controller, env, ctx) {
+    switch (controller.cron) {
+      case "*/3 * * * *": ctx.waitUntil(updateRecentData(env)); break;
+      case "0 * * * *": ctx.waitUntil(processHourlyAggregation(env)); break;
+      case "0 2 * * *": ctx.waitUntil(performDailyMaintenance(env)); break;
+      default: console.warn(`Unhandled: ${controller.cron}`);
+    }
+  },
+};
+```
+
+## ctx.waitUntil Usage
+
+```typescript
+export default {
+  async scheduled(controller, env, ctx) {
+    const data = await fetchCriticalData(); // Critical path
+    
+    // Non-blocking background tasks
+    ctx.waitUntil(Promise.all([
+      logToAnalytics(data),
+      cleanupOldRecords(env.DB),
+      notifyWebhook(env.WEBHOOK_URL, data),
+    ]));
+  },
+};
+```
+
+## Workflow Integration
+
+```typescript
+import { WorkflowEntrypoint } from "cloudflare:workers";
+
+export class DataProcessingWorkflow extends WorkflowEntrypoint {
+  async run(event, step) {
+    const data = await step.do("fetch-data", () => fetchLargeDataset());
+    const processed = await step.do("process-data", () => processDataset(data));
+    await step.do("store-results", () => storeResults(processed));
+  }
+}
+
+export default {
+  async scheduled(controller, env, ctx) {
+    const instance = await env.MY_WORKFLOW.create({
+      params: { scheduledTime: controller.scheduledTime, cron: controller.cron },
+    });
+    console.log(`Started workflow: ${instance.id}`);
+  },
+};
+```
+
+## Testing Handler
+
+**Local development (/__scheduled endpoint):**
+```bash
+# Start dev server
+npx wrangler dev
+
+# Trigger any cron
+curl "http://localhost:8787/__scheduled?cron=*/5+*+*+*+*"
+
+# Trigger specific cron with custom time
+curl "http://localhost:8787/__scheduled?cron=0+2+*+*+*&scheduledTime=1704067200000"
+```
+
+**Query parameters:**
+- `cron` - Required. URL-encoded cron expression (use `+` for spaces)
+- `scheduledTime` - Optional. Unix timestamp in milliseconds (defaults to current time)
+
+**Production security:** The `/__scheduled` endpoint is available in production and can be triggered by anyone. Block it or implement authentication - see [gotchas.md](./gotchas.md#security-concerns)
+
+**Unit testing (Vitest):**
+```typescript
+// test/scheduled.test.ts
+import { describe, it, expect } from "vitest";
+import { env } from "cloudflare:test";
+import worker from "../src/index";
+
+describe("Scheduled Handler", () => {
+  it("processes scheduled event", async () => {
+    const controller = { scheduledTime: Date.now(), cron: "*/5 * * * *", type: "scheduled" as const, noRetry: () => {} };
+    const ctx = { waitUntil: (p: Promise<any>) => p, passThroughOnException: () => {} };
+    await worker.scheduled(controller, env, ctx);
+    expect(await env.MY_KV.get("last_run")).toBeDefined();
+  });
+  
+  it("handles multiple crons", async () => {
+    const ctx = { waitUntil: () => {}, passThroughOnException: () => {} };
+    await worker.scheduled({ scheduledTime: Date.now(), cron: "*/5 * * * *", type: "scheduled", noRetry: () => {} }, env, ctx);
+    expect(await env.MY_KV.get("last_type")).toBe("frequent");
+  });
+});
+```
+
+## Error Handling
+
+**Automatic retries:**
+- Failed cron executions are retried automatically unless `noRetry()` is called
+- Retry happens after a delay (typically minutes)
+- Only first `waitUntil()` failure is recorded in Cron Events
+
+**Best practices:**
+```typescript
+export default {
+  async scheduled(controller, env, ctx) {
+    try {
+      await criticalOperation(env);
+    } catch (error) {
+      // Log error details
+      console.error("Cron failed:", {
+        cron: controller.cron,
+        scheduledTime: controller.scheduledTime,
+        error: error.message,
+        stack: error.stack,
+      });
+      
+      // Decide: retry or skip
+      if (error.message.includes("rate limit")) {
+        controller.noRetry(); // Skip retry for rate limits
+      }
+      // Otherwise allow automatic retry
+      throw error;
+    }
+  },
+};
+```
+
+## See Also
+
+- [README.md](./README.md) - Overview
+- [patterns.md](./patterns.md) - Use cases, examples
+- [gotchas.md](./gotchas.md) - Common errors, testing issues

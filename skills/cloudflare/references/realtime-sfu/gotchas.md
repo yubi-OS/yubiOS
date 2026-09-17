@@ -1,1 +1,133 @@
-IyBHb3RjaGFzICYgVHJvdWJsZXNob290aW5nCgojIyBDb21tb24gRXJyb3JzCgojIyMgIlNsb3cgaW5pdGlhbCBjb25uZWN0ICh+MS44cykiCgoqKkNhdXNlOioqIEZpcnN0IFNUVU4gZGVsYXllZCBkdXJpbmcgY29uc2Vuc3VzIGZvcm1pbmcgKG5vcm1hbCBiZWhhdmlvcikKKipTb2x1dGlvbjoqKiBTdWJzZXF1ZW50IGNvbm5lY3Rpb25zIGFyZSBmYXN0ZXIuIENGIGRldGVjdHMgRFRMUyBDbGllbnRIZWxsbyBlYXJseSB0byBjb21wZW5zYXRlLgoKIyMjICJObyBtZWRpYSBmbG93IgoKKipDYXVzZToqKiBTRFAgZXhjaGFuZ2UgaW5jb21wbGV0ZSwgY29ubmVjdGlvbiBub3QgZXN0YWJsaXNoZWQsIHRyYWNrcyBub3QgYWRkZWQgYmVmb3JlIG9mZmVyLCBicm93c2VyIHBlcm1pc3Npb25zIG1pc3NpbmcKKipTb2x1dGlvbjoqKiAKMS4gVmVyaWZ5IFNEUCBleGNoYW5nZSBjb21wbGV0ZQoyLiBDaGVjayBgcGMuY29ubmVjdGlvblN0YXRlID09PSAnY29ubmVjdGVkJ2AKMy4gRW5zdXJlIHRyYWNrcyBhZGRlZCBiZWZvcmUgY3JlYXRpbmcgb2ZmZXIKNC4gQ29uZmlybSBicm93c2VyIHBlcm1pc3Npb25zIGdyYW50ZWQKNS4gVXNlIGBjaHJvbWU6Ly93ZWJydGMtaW50ZXJuYWxzYCBmb3IgZGVidWdnaW5nCgojIyMgIlRyYWNrIG5vdCByZWNlaXZpbmciCgoqKkNhdXNlOioqIFRyYWNrIG5vdCBwdWJsaXNoZWQsIHRyYWNrIElEIG5vdCBzaGFyZWQsIHNlc3Npb24gSURzIG1pc21hdGNoLCBgcGMub250cmFja2Agbm90IHNldCwgcmVuZWdvdGlhdGlvbiBuZWVkZWQKKipTb2x1dGlvbjoqKiAKMS4gVmVyaWZ5IHRyYWNrIHB1Ymxpc2hlZCBzdWNjZXNzZnVsbHkKMi4gQ29uZmlybSB0cmFjayBJRCBzaGFyZWQgYmV0d2VlbiBwZWVycwozLiBDaGVjayBzZXNzaW9uIElEcyBtYXRjaAo0LiBTZXQgYHBjLm9udHJhY2tgIGhhbmRsZXIgYmVmb3JlIGFuc3dlcgo1LiBUcmlnZ2VyIHJlbmVnb3RpYXRpb24gaWYgbmVlZGVkCgojIyMgIklDRSBjb25uZWN0aW9uIGZhaWxlZCIKCioqQ2F1c2U6KiogTmV0d29yayBjaGFuZ2VkLCBmaXJld2FsbCBibG9ja2VkIFVEUCwgVFVSTiBuZWVkZWQsIHRyYW5zaWVudCBuZXR3b3JrIGlzc3VlCioqU29sdXRpb246KioKYGBgdHlwZXNjcmlwdApwYy5vbmljZWNvbm5lY3Rpb25zdGF0ZWNoYW5nZSA9IGFzeW5jICgpID0+IHsKICBpZiAocGMuaWNlQ29ubmVjdGlvblN0YXRlID09PSAnZmFpbGVkJykgewogICAgY29uc29sZS53YXJuKCdJQ0UgZmFpbGVkLCBhdHRlbXB0aW5nIHJlc3RhcnQnKTsKICAgIGF3YWl0IHBjLnJlc3RhcnRJY2UoKTsgLy8gVHJpZ2dlcnMgbmV3IElDRSBnYXRoZXJpbmcKICAgIAogICAgLy8gQ3JlYXRlIG5ldyBvZmZlciB3aXRoIElDRSByZXN0YXJ0IGZsYWcKICAgIGNvbnN0IG9mZmVyID0gYXdhaXQgcGMuY3JlYXRlT2ZmZXIoe2ljZVJlc3RhcnQ6IHRydWV9KTsKICAgIGF3YWl0IHBjLnNldExvY2FsRGVzY3JpcHRpb24ob2ZmZXIpOwogICAgCiAgICAvLyBTZW5kIHRvIGJhY2tlbmQg4oaSIENsb3VkZmxhcmUgQVBJCiAgICBhd2FpdCBmZXRjaChgL2FwaS9zZXNzaW9ucy8ke3Nlc3Npb25JZH0vcmVuZWdvdGlhdGVgLCB7CiAgICAgIG1ldGhvZDogJ1BVVCcsCiAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHtzZHA6IG9mZmVyLnNkcH0pCiAgICB9KTsKICB9Cn07CmBgYAoKIyMjICJUcmFjayBzdHVjay9mcm96ZW4iCgoqKkNhdXNlOioqIFNlbmRlciBwYXVzZWQgdHJhY2ssIG5ldHdvcmsgY29uZ2VzdGlvbiwgY29kZWMgbWlzbWF0Y2gsIG1vYmlsZSBicm93c2VyIGJhY2tncm91bmRlZAoqKlNvbHV0aW9uOioqCjEuIENoZWNrIGB0cmFjay5lbmFibGVkYCBhbmQgYHRyYWNrLnJlYWR5U3RhdGUgPT09ICdsaXZlJ2AKMi4gVmVyaWZ5IHNlbmRlciBhY3RpdmU6IGBwYy5nZXRTZW5kZXJzKCkuZmluZChzID0+IHMudHJhY2sgPT09IHRyYWNrKWAKMy4gQ2hlY2sgc3RhdHMgZm9yIHBhY2tldCBsb3NzL2ppdHRlciAoc2VlIHBhdHRlcm5zLm1kKQo0LiBPbiBtb2JpbGU6IFJlLWFjcXVpcmUgdHJhY2tzIHdoZW4gYXBwIGZvcmVncm91bmRlZAo1LiBUZXN0IHdpdGggZGlmZmVyZW50IGNvZGVjcyBpZiBwZXJzaXN0ZW50CgojIyMgIk5ldHdvcmsgY2hhbmdlIGRpc2Nvbm5lY3RzIGNhbGwiCgoqKkNhdXNlOioqIE1vYmlsZSBzd2l0Y2hpbmcgV2lGaeKGlGNlbGx1bGFyLCBsYXB0b3AgY2hhbmdpbmcgbmV0d29ya3MKKipTb2x1dGlvbjoqKgpgYGB0eXBlc2NyaXB0Ci8vIExpc3RlbiBmb3IgbmV0d29yayBjaGFuZ2VzCmlmICgnY29ubmVjdGlvbicgaW4gbmF2aWdhdG9yKSB7CiAgKG5hdmlnYXRvciBhcyBhbnkpLmNvbm5lY3Rpb24uYWRkRXZlbnRMaXN0ZW5lcignY2hhbmdlJywgYXN5bmMgKCkgPT4gewogICAgY29uc29sZS5sb2coJ05ldHdvcmsgY2hhbmdlZCcpOwogICAgYXdhaXQgcGMucmVzdGFydEljZSgpOyAvLyBVc2UgSUNFIHJlc3RhcnQgcGF0dGVybiBhYm92ZQogIH0pOwp9CgovLyBPciB1c2UgUGFydHlUcmFja3MgKGhhbmRsZXMgYXV0b21hdGljYWxseSkKYGBgCgojIyBSZXRyeSB3aXRoIEV4cG9uZW50aWFsIEJhY2tvZmYKCmBgYHR5cGVzY3JpcHQKYXN5bmMgZnVuY3Rpb24gZmV0Y2hXaXRoUmV0cnkodXJsOiBzdHJpbmcsIG9wdGlvbnM6IFJlcXVlc3RJbml0LCBtYXhSZXRyaWVzID0gMykgewogIGZvciAobGV0IGkgPSAwOyBpIDwgbWF4UmV0cmllczsgaSsrKSB7CiAgICB0cnkgewogICAgICBjb25zdCByZXMgPSBhd2FpdCBmZXRjaCh1cmwsIG9wdGlvbnMpOwogICAgICBpZiAocmVzLm9rKSByZXR1cm4gcmVzOwogICAgICBpZiAocmVzLnN0YXR1cyA+PSA1MDApIHRocm93IG5ldyBFcnJvcignU2VydmVyIGVycm9yJyk7CiAgICAgIHJldHVybiByZXM7IC8vIENsaWVudCBlcnJvciwgZG9uJ3QgcmV0cnkKICAgIH0gY2F0Y2ggKGVycikgewogICAgICBpZiAoaSA9PT0gbWF4UmV0cmllcyAtIDEpIHRocm93IGVycjsKICAgICAgY29uc3QgZGVsYXkgPSBNYXRoLm1pbigxMDAwICogMiAqKiBpLCAxMDAwMCk7IC8vIENhcCBhdCAxMHMKICAgICAgYXdhaXQgbmV3IFByb21pc2UocmVzb2x2ZSA9PiBzZXRUaW1lb3V0KHJlc29sdmUsIGRlbGF5KSk7CiAgICB9CiAgfQp9CmBgYAoKIyMgRGVidWdnaW5nIHdpdGggY2hyb21lOi8vd2VicnRjLWludGVybmFscwoKMS4gT3BlbiBgY2hyb21lOi8vd2VicnRjLWludGVybmFsc2AgaW4gQ2hyb21lL0VkZ2UKMi4gRmluZCB5b3VyIFBlZXJDb25uZWN0aW9uIGluIHRoZSBsaXN0CjMuIENoZWNrICoqU3RhdHMgZ3JhcGhzKiogZm9yIHBhY2tldCBsb3NzLCBqaXR0ZXIsIGJhbmR3aWR0aAo0LiBDaGVjayAqKklDRSBjYW5kaWRhdGUgcGFpcnMqKjogTG9vayBmb3IgYHN1Y2NlZWRlZGAgc3RhdGUsIHJlbGF5IHZzIGhvc3QgY2FuZGlkYXRlcwo1LiBDaGVjayAqKmdldFN0YXRzKio6IFJhdyBtZXRyaWNzIGZvciBpbmJvdW5kL291dGJvdW5kIFJUUAo2LiBMb29rIGZvciBlcnJvcnMgaW4gKipFdmVudCBsb2cqKjogYGljZUNvbm5lY3Rpb25TdGF0ZWAsIGBjb25uZWN0aW9uU3RhdGVgIGNoYW5nZXMKNy4gRXhwb3J0IGRhdGEgd2l0aCAiRG93bmxvYWQgdGhlIFBlZXJDb25uZWN0aW9uIHVwZGF0ZXMgYW5kIHN0YXRzIGRhdGEiIGJ1dHRvbgo4LiBDb21tb24gaXNzdWVzIHZpc2libGUgaGVyZTogSUNFIGZhaWx1cmVzLCBoaWdoIHBhY2tldCBsb3NzLCBiaXRyYXRlIGRyb3BzCgojIyBMaW1pdHMKCnwgUmVzb3VyY2UvTGltaXQgfCBWYWx1ZSB8IE5vdGVzIHwKfC0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLXwtLS0tLS0tfAp8IEVncmVzcyAoRnJlZSkgfCAxVEIvbW9udGggfCBQZXIgYWNjb3VudCB8CnwgRWdyZXNzIChQYWlkKSB8ICQwLjA1L0dCIHwgQWZ0ZXIgZnJlZSB0aWVyIHwKfCBJbmJvdW5kIHRyYWZmaWMgfCBGcmVlIHwgQWxsIHBsYW5zIHwKfCBUVVJOIHNlcnZpY2UgfCBGcmVlIHwgSW5jbHVkZWQgd2l0aCBTRlUgfAp8IFBhcnRpY2lwYW50cyB8IE5vIGhhcmQgbGltaXQgfCBDbGllbnQgYmFuZHdpZHRoL0NQVSBib3VuZCAodHlwaWNhbGx5IDEwLTUwIHRyYWNrcykgfAp8IFRyYWNrcyBwZXIgc2Vzc2lvbiB8IE5vIGhhcmQgbGltaXQgfCBDbGllbnQgcmVzb3VyY2VzIGxpbWl0ZWQgfAp8IFNlc3Npb24gZHVyYXRpb24gfCBObyBoYXJkIGxpbWl0IHwgUHJvZHVjdGlvbiBjYWxscyBydW4gZm9yIGhvdXJzIHwKfCBXZWJSVEMgcG9ydHMgfCBVRFAgMTAyNC02NTUzNSB8IE91dGJvdW5kIG9ubHksIHJlcXVpcmVkIGZvciBtZWRpYSB8CnwgQVBJIHJhdGUgbGltaXQgfCA2MDAgcmVxL21pbiB8IFBlciBhcHAsIGJ1cnN0IGFsbG93ZWQgfAoKIyMgU2VjdXJpdHkgQ2hlY2tsaXN0CgotIOKchSAqKk5ldmVyIGV4cG9zZSoqIGBDQUxMU19BUFBfU0VDUkVUYCB0byBjbGllbnQKLSDinIUgKipWYWxpZGF0ZSB1c2VyIGlkZW50aXR5KiogaW4gYmFja2VuZCBiZWZvcmUgY3JlYXRpbmcgc2Vzc2lvbnMKLSDinIUgKipJbXBsZW1lbnQgYXV0aCB0b2tlbnMqKiBmb3Igc2Vzc2lvbiBhY2Nlc3MgKEpXVCBpbiBjdXN0b20gaGVhZGVyKQotIOKchSAqKlJhdGUgbGltaXQqKiBzZXNzaW9uIGNyZWF0aW9uIGVuZHBvaW50cwotIOKchSAqKkV4cGlyZSBzZXNzaW9ucyoqIHNlcnZlci1zaWRlIGFmdGVyIGluYWN0aXZpdHkKLSDinIUgKipWYWxpZGF0ZSB0cmFjayBJRHMqKiBiZWZvcmUgc3Vic2NyaWJpbmcgKHByZXZlbnQgdW5hdXRob3JpemVkIGFjY2VzcykKLSDinIUgKipVc2UgSFRUUFMqKiBmb3IgYWxsIHNpZ25hbGluZyAoQVBJIGNhbGxzKQotIOKchSAqKkVuYWJsZSBEVExTLVNSVFAqKiAoYXV0b21hdGljIHdpdGggQ2xvdWRmbGFyZSwgZW5jcnlwdHMgbWVkaWEpCi0g4pqg77iPICoqQ29uc2lkZXIgRTJFRSoqIGZvciBzZW5zaXRpdmUgY29udGVudCAoaW1wbGVtZW50IGNsaWVudC1zaWRlIHdpdGggSW5zZXJ0YWJsZSBTdHJlYW1zIEFQSSkK
+# Gotchas & Troubleshooting
+
+## Common Errors
+
+### "Slow initial connect (~1.8s)"
+
+**Cause:** First STUN delayed during consensus forming (normal behavior)
+**Solution:** Subsequent connections are faster. CF detects DTLS ClientHello early to compensate.
+
+### "No media flow"
+
+**Cause:** SDP exchange incomplete, connection not established, tracks not added before offer, browser permissions missing
+**Solution:** 
+1. Verify SDP exchange complete
+2. Check `pc.connectionState === 'connected'`
+3. Ensure tracks added before creating offer
+4. Confirm browser permissions granted
+5. Use `chrome://webrtc-internals` for debugging
+
+### "Track not receiving"
+
+**Cause:** Track not published, track ID not shared, session IDs mismatch, `pc.ontrack` not set, renegotiation needed
+**Solution:** 
+1. Verify track published successfully
+2. Confirm track ID shared between peers
+3. Check session IDs match
+4. Set `pc.ontrack` handler before answer
+5. Trigger renegotiation if needed
+
+### "ICE connection failed"
+
+**Cause:** Network changed, firewall blocked UDP, TURN needed, transient network issue
+**Solution:**
+```typescript
+pc.oniceconnectionstatechange = async () => {
+  if (pc.iceConnectionState === 'failed') {
+    console.warn('ICE failed, attempting restart');
+    await pc.restartIce(); // Triggers new ICE gathering
+    
+    // Create new offer with ICE restart flag
+    const offer = await pc.createOffer({iceRestart: true});
+    await pc.setLocalDescription(offer);
+    
+    // Send to backend → Cloudflare API
+    await fetch(`/api/sessions/${sessionId}/renegotiate`, {
+      method: 'PUT',
+      body: JSON.stringify({sdp: offer.sdp})
+    });
+  }
+};
+```
+
+### "Track stuck/frozen"
+
+**Cause:** Sender paused track, network congestion, codec mismatch, mobile browser backgrounded
+**Solution:**
+1. Check `track.enabled` and `track.readyState === 'live'`
+2. Verify sender active: `pc.getSenders().find(s => s.track === track)`
+3. Check stats for packet loss/jitter (see patterns.md)
+4. On mobile: Re-acquire tracks when app foregrounded
+5. Test with different codecs if persistent
+
+### "Network change disconnects call"
+
+**Cause:** Mobile switching WiFi↔cellular, laptop changing networks
+**Solution:**
+```typescript
+// Listen for network changes
+if ('connection' in navigator) {
+  (navigator as any).connection.addEventListener('change', async () => {
+    console.log('Network changed');
+    await pc.restartIce(); // Use ICE restart pattern above
+  });
+}
+
+// Or use PartyTracks (handles automatically)
+```
+
+## Retry with Exponential Backoff
+
+```typescript
+async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const res = await fetch(url, options);
+      if (res.ok) return res;
+      if (res.status >= 500) throw new Error('Server error');
+      return res; // Client error, don't retry
+    } catch (err) {
+      if (i === maxRetries - 1) throw err;
+      const delay = Math.min(1000 * 2 ** i, 10000); // Cap at 10s
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+}
+```
+
+## Debugging with chrome://webrtc-internals
+
+1. Open `chrome://webrtc-internals` in Chrome/Edge
+2. Find your PeerConnection in the list
+3. Check **Stats graphs** for packet loss, jitter, bandwidth
+4. Check **ICE candidate pairs**: Look for `succeeded` state, relay vs host candidates
+5. Check **getStats**: Raw metrics for inbound/outbound RTP
+6. Look for errors in **Event log**: `iceConnectionState`, `connectionState` changes
+7. Export data with "Download the PeerConnection updates and stats data" button
+8. Common issues visible here: ICE failures, high packet loss, bitrate drops
+
+## Limits
+
+| Resource/Limit | Value | Notes |
+|----------------|-------|-------|
+| Egress (Free) | 1TB/month | Per account |
+| Egress (Paid) | $0.05/GB | After free tier |
+| Inbound traffic | Free | All plans |
+| TURN service | Free | Included with SFU |
+| Participants | No hard limit | Client bandwidth/CPU bound (typically 10-50 tracks) |
+| Tracks per session | No hard limit | Client resources limited |
+| Session duration | No hard limit | Production calls run for hours |
+| WebRTC ports | UDP 1024-65535 | Outbound only, required for media |
+| API rate limit | 600 req/min | Per app, burst allowed |
+
+## Security Checklist
+
+- ✅ **Never expose** `CALLS_APP_SECRET` to client
+- ✅ **Validate user identity** in backend before creating sessions
+- ✅ **Implement auth tokens** for session access (JWT in custom header)
+- ✅ **Rate limit** session creation endpoints
+- ✅ **Expire sessions** server-side after inactivity
+- ✅ **Validate track IDs** before subscribing (prevent unauthorized access)
+- ✅ **Use HTTPS** for all signaling (API calls)
+- ✅ **Enable DTLS-SRTP** (automatic with Cloudflare, encrypts media)
+- ⚠️ **Consider E2EE** for sensitive content (implement client-side with Insertable Streams API)

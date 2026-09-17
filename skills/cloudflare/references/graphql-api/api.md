@@ -1,1 +1,175 @@
-IyBHcmFwaFFMIEFuYWx5dGljcyBBUEkgUmVmZXJlbmNlCgojIyBRdWVyeSBSb290CgpUaGUgc2NoZW1hIGhhcyBhIHNpbmdsZSBlbnRyeSBwb2ludDogYFF1ZXJ5LnZpZXdlcmAuIE11dGF0aW9ucyBhcmUgbm90IHN1cHBvcnRlZC4KCmBgYGdyYXBocWwKewogIGNvc3QgICAgICAgIyB1aW50NjQgLS0gcXVlcnkgY29zdCAocmV0dXJuZWQgaW4gcmVzcG9uc2UpCiAgdmlld2VyIHsKICAgIGJ1ZGdldCAgICMgdWludDY0IC0tIHJlbWFpbmluZyBidWRnZXQKICAgIHpvbmVzKGZpbHRlcjogeyB6b25lVGFnOiAiLi4uIiB9KSB7IC4uLiB9CiAgICBhY2NvdW50cyhmaWx0ZXI6IHsgYWNjb3VudFRhZzogIi4uLiIgfSkgeyAuLi4gfQogIH0KfQpgYGAKCiMjIEFnZ3JlZ2F0aW9uIEZpZWxkcwoKQWdncmVnYXRlZCBkYXRhc2V0IG5vZGVzIChgKkdyb3Vwc2ApIHJldHVybiB0aGVzZSBmaWVsZCBjYXRlZ29yaWVzLiBOb3QgZXZlcnkgbm9kZSBoYXMgYWxsIOKAlCB1c2UgaW50cm9zcGVjdGlvbiB0byBjaGVjay4KCiMjIyBjb3VudAoKVG90YWwgZXZlbnRzIGluIHRoZSBncm91cC4gQXZhaWxhYmxlIG9uIGAqR3JvdXBzYCBub2RlcyBidXQgKipub3QqKiBvbiByYXcgYCpBZGFwdGl2ZWAgbm9kZXMgKGUuZy4sIGB3b3JrZXJzSW52b2NhdGlvbnNBZGFwdGl2ZWAg4oCUIHVzZSBgc3VtIHsgcmVxdWVzdHMgfWAgaW5zdGVhZCkuCgojIyMgc3VtCgpDdW11bGF0aXZlIG1ldHJpY3MuIEZpZWxkcyB2YXJ5IGJ5IGRhdGFzZXQ6CgpgYGBncmFwaHFsCiMgSFRUUCByZXF1ZXN0cwpzdW0geyBlZGdlUmVzcG9uc2VCeXRlcyBlZGdlUmVxdWVzdEJ5dGVzIHZpc2l0cyBlZGdlVGltZVRvRmlyc3RCeXRlTXMgb3JpZ2luUmVzcG9uc2VEdXJhdGlvbk1zIH0KCiMgV29ya2VycyBpbnZvY2F0aW9ucwpzdW0geyByZXF1ZXN0cyBlcnJvcnMgc3VicmVxdWVzdHMgY3B1VGltZVVzIHdhbGxUaW1lIGR1cmF0aW9uIHJlc3BvbnNlQm9keVNpemUgY2xpZW50RGlzY29ubmVjdHMgcmVxdWVzdER1cmF0aW9uIH0KYGBgCgojIyMgcXVhbnRpbGVzCgpQZXJjZW50aWxlIGRpc3RyaWJ1dGlvbnMgKG9uIGRhdGFzZXRzIGxpa2UgYHdvcmtlcnNJbnZvY2F0aW9uc0FkYXB0aXZlYCkuIEF2YWlsYWJsZSBwZXJjZW50aWxlczogUDI1LCBQNTAsIFA3NSwgUDkwLCBQOTUsIFA5OSwgUDk5OSBmb3IgYGNwdVRpbWVgLCBgd2FsbFRpbWVgLCBgcmVxdWVzdER1cmF0aW9uYCwgYGR1cmF0aW9uYCwgYHJlc3BvbnNlQm9keVNpemVgLgoKYGBgZ3JhcGhxbApxdWFudGlsZXMgeyBjcHVUaW1lUDUwIGNwdVRpbWVQOTkgd2FsbFRpbWVQNTAgd2FsbFRpbWVQOTkgfQpgYGAKCiMjIyByYXRpbywgYXZnLCB1bmlxLCBjb25maWRlbmNlCgpgYGBncmFwaHFsCnJhdGlvIHsgc3RhdHVzNHh4IHN0YXR1czV4eCB9ICAgICAgIyBmbG9hdDY0ICgwIHRvIDEpIC0tIEhUVFAgZGF0YXNldHMgb25seQphdmcgeyBzYW1wbGVJbnRlcnZhbCB9ICAgICAgICAgICAgICAjIHVzZWZ1bCBmb3IgdW5kZXJzdGFuZGluZyBzYW1wbGluZyByZXNvbHV0aW9uCnVuaXEgeyB1bmlxdWVzIH0gICAgICAgICAgICAgICAgICAgICMgdW5pcXVlIElQIGNvdW50IC0tIHJvbGx1cCBkYXRhc2V0cyAoKjFoR3JvdXBzLCAqMWRHcm91cHMpIG9ubHkKY29uZmlkZW5jZShsZXZlbDogMC45NSkgeyAgICAgICAgICAgIyBBZGFwdGl2ZSBkYXRhc2V0cyBvbmx5OyB3b3JrcyBvbiBjb3VudCBhbmQgc3VtIGZpZWxkcwogIGNvdW50IHsgZXN0aW1hdGUgbG93ZXIgdXBwZXIgc2FtcGxlU2l6ZSB9Cn0KYGBgCgojIyBEaW1lbnNpb25zCgpEaW1lbnNpb25zIGFyZSBmaWVsZHMgeW91IGNhbiBncm91cCBieSB2aWEgdGhlIGBkaW1lbnNpb25zYCBzdWItc2VsZWN0aW9uLgoKIyMjIFRpbWUgRGltZW5zaW9ucwoKfCBEaW1lbnNpb24gfCBHcmFudWxhcml0eSB8CnwtLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS18CnwgYGRhdGVgIHwgRGF5IHwKfCBgZGF0ZXRpbWVgIHwgRXhhY3QgdGltZXN0YW1wIHwKfCBgZGF0ZXRpbWVNaW51dGVgIHwgMSBtaW51dGUgfAp8IGBkYXRldGltZUZpdmVNaW51dGVzYCB8IDUgbWludXRlcyB8CnwgYGRhdGV0aW1lRmlmdGVlbk1pbnV0ZXNgIHwgMTUgbWludXRlcyB8CnwgYGRhdGV0aW1lSG91cmAgfCAxIGhvdXIgfAoKV29ya2VycyBkYXRhc2V0cyBhbHNvIHN1cHBvcnQgYGRhdGV0aW1lU2l4SG91cnNgLgoKIyMjIEhUVFAgUmVxdWVzdCBEaW1lbnNpb25zIChodHRwUmVxdWVzdHNBZGFwdGl2ZUdyb3VwcykKCjgzIGRpbWVuc2lvbnMgYXZhaWxhYmxlLiBLZXkgb25lczoKCnwgRGltZW5zaW9uIHwgRGVzY3JpcHRpb24gfAp8LS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwKfCBgY2xpZW50Q291bnRyeU5hbWVgIHwgQ291bnRyeSBvZiBvcmlnaW4gfAp8IGBjbGllbnRSZXF1ZXN0SFRUUEhvc3RgIHwgUmVxdWVzdGVkIGhvc3RuYW1lIHwKfCBgY2xpZW50UmVxdWVzdEhUVFBNZXRob2ROYW1lYCB8IEhUVFAgbWV0aG9kIHwKfCBgY2xpZW50UmVxdWVzdFBhdGhgIHwgVVJJIHBhdGggfAp8IGBlZGdlUmVzcG9uc2VTdGF0dXNgIHwgRWRnZSBIVFRQIHN0YXR1cyBjb2RlIHwKfCBgY2FjaGVTdGF0dXNgIHwgQ2FjaGUgc3RhdHVzIChoaXQsIG1pc3MsIGR5bmFtaWMsIGV0Yy4pIHwKfCBgY29sb0NvZGVgIHwgQ2xvdWRmbGFyZSBkYXRhY2VudGVyIElBVEEgY29kZSB8CnwgYGNsaWVudElQYCAvIGBjbGllbnRBc25gIHwgQ2xpZW50IElQIGFkZHJlc3MgLyBBU04gfAp8IGBib3RTY29yZWAgLyBgYm90TWFuYWdlbWVudERlY2lzaW9uYCB8IEJvdCBtYW5hZ2VtZW50IHNjb3JlICgwLTk5KSAvIHZlcmRpY3QgfAp8IGB3YWZBdHRhY2tTY29yZWAgLyBgc2VjdXJpdHlBY3Rpb25gIHwgV0FGIHNjb3JlIC8gZmlyZXdhbGwgYWN0aW9uIHRha2VuIHwKfCBgamEzSGFzaGAgLyBgamE0YCB8IFRMUyBmaW5nZXJwcmludHMgfAp8IGBzYW1wbGVJbnRlcnZhbGAgfCBBQlIgc2FtcGxlIGludGVydmFsIHwKCiMjIyBXb3JrZXJzIERpbWVuc2lvbnMgKHdvcmtlcnNJbnZvY2F0aW9uc0FkYXB0aXZlKQoKYHNjcmlwdE5hbWVgLCBgc2NyaXB0VGFnYCwgYHNjcmlwdFZlcnNpb25gLCBgZW52aXJvbm1lbnROYW1lYCwgYHN0YXR1c2AsIGB1c2FnZU1vZGVsYCwgYGNvbG9Db2RlYCwgYGRpc3BhdGNoTmFtZXNwYWNlTmFtZWAsIGBpc0Rpc3BhdGNoZXJgCgojIyMgRmlyZXdhbGwgRGltZW5zaW9ucyAoZmlyZXdhbGxFdmVudHNBZGFwdGl2ZSkKCmBhY3Rpb25gLCBgc291cmNlYCwgYHJ1bGVJZGAsIGBjbGllbnRDb3VudHJ5TmFtZWAsIGBjbGllbnRJUGAsIGBjbGllbnRBc25gLCBgdXNlckFnZW50YAoKIyMgRmlsdGVyaW5nCgojIyMgU2NvcGUgRmlsdGVycwoKYGBgZ3JhcGhxbAp6b25lcyhmaWx0ZXI6IHsgem9uZVRhZzogIlpPTkVfSUQiIH0pICAgICAgICAgICAjIHVwIHRvIDEwIHpvbmVzCnpvbmVzKGZpbHRlcjogeyB6b25lVGFnX2luOiBbIloxIiwgIloyIl0gfSkKYWNjb3VudHMoZmlsdGVyOiB7IGFjY291bnRUYWc6ICJBQ0NPVU5UX0lEIiB9KSAgICMgZXhhY3RseSAxIGFjY291bnQKYGBgCgojIyMgRGF0YXNldCBGaWx0ZXJzCgoqKkFsd2F5cyBpbmNsdWRlIGEgdGltZSByYW5nZSBmaWx0ZXIuKiogTXVsdGlwbGUgZmlsdGVycyBhdCB0aGUgc2FtZSBsZXZlbCBhcmUgaW1wbGljaXRseSBBTkQtZWQuCgpgYGBncmFwaHFsCmh0dHBSZXF1ZXN0c0FkYXB0aXZlR3JvdXBzKAogIGZpbHRlcjogeyBkYXRldGltZV9ndDogIjIwMjUtMDEtMDFUMDA6MDA6MDBaIiwgZGF0ZXRpbWVfbHQ6ICIyMDI1LTAxLTAyVDAwOjAwOjAwWiIsIGNsaWVudENvdW50cnlOYW1lOiAiVVMiIH0KICBsaW1pdDogMTAwMAopCmBgYAoKIyMjIEZpbHRlciBPcGVyYXRvcnMKCnwgT3BlcmF0b3IgfCBNZWFuaW5nIHwgRXhhbXBsZSB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLXwtLS0tLS0tLS18CnwgKG5vbmUpIHwgZXF1YWxzIHwgYGNsaWVudENvdW50cnlOYW1lOiAiVVMiYCB8CnwgYF9ndGAgLyBgX2x0YCB8IGdyZWF0ZXIgLyBsZXNzIHRoYW4gfCBgZGF0ZXRpbWVfZ3Q6ICIuLi4iYCB8CnwgYF9nZXFgIC8gYF9sZXFgIHwgZ3JlYXRlci9sZXNzIG9yIGVxdWFsIHwgYGRhdGV0aW1lX2dlcTogIi4uLiJgIHwKfCBgX25lcWAgfCBub3QgZXF1YWwgfCBgY2FjaGVTdGF0dXNfbmVxOiAiaGl0ImAgfAp8IGBfaW5gIC8gYF9ub3RpbmAgfCBpbiAvIG5vdCBpbiBsaXN0IHwgYGNsaWVudENvdW50cnlOYW1lX2luOiBbIlVTIiwgIkdCIl1gIHwKfCBgX2xpa2VgIC8gYF9ub3RsaWtlYCB8IFNRTCBMSUtFIHdpdGggYCVgIHwgYGNsaWVudFJlcXVlc3RQYXRoX2xpa2U6ICIvYXBpLyUiYCB8CnwgYF9oYXNgIC8gYF9oYXNhbGxgIC8gYF9oYXNhbnlgIHwgYXJyYXkgY29udGFpbnMgfCBgYm90RGV0ZWN0aW9uSWRzX2hhczogImFiYyJgIHwKCj4gYF9ub3RpbmAgYW5kIGBfbm90bGlrZWAgYXJlIGluIHRoZSBzY2hlbWEgYnV0IG5vdCBpbiBvZmZpY2lhbCBkb2NzLiBDb25maXJtZWQgdmlhIGludHJvc3BlY3Rpb24uCgojIyMgQm9vbGVhbiBPcGVyYXRvcnMgKEFORCAvIE9SKQoKYGBgZ3JhcGhxbAojIEV4cGxpY2l0IEFORApmaWx0ZXI6IHsgQU5EOiBbeyBkYXRldGltZV9ndDogIi4uLiIgfSwgeyBkYXRldGltZV9sdDogIi4uLiIgfSwgeyBjbGllbnRDb3VudHJ5TmFtZTogIlVTIiB9XSB9CgojIEV4cGxpY2l0IE9SCmZpbHRlcjogeyBkYXRldGltZV9ndDogIi4uLiIsIE9SOiBbeyBlZGdlUmVzcG9uc2VTdGF0dXM6IDQwMyB9LCB7IGVkZ2VSZXNwb25zZVN0YXR1czogNDI5IH1dIH0KYGBgCgojIyBQYWdpbmF0aW9uICYgU29ydGluZwoKTm8gY3Vyc29yLWJhc2VkIHBhZ2luYXRpb24uIFVzZSBgbGltaXRgLCBgb3JkZXJCeWAsIGFuZCBmaWx0ZXItYmFzZWQgb2Zmc2V0czoKCmBgYGdyYXBocWwKIyBGaXJzdCBwYWdlCmh0dHBSZXF1ZXN0c0FkYXB0aXZlR3JvdXBzKGZpbHRlcjogeyBkYXRldGltZV9ndDogIi4uLiIgfSwgbGltaXQ6IDEwMCwgb3JkZXJCeTogW2RhdGV0aW1lX0FTQ10pCgojIE5leHQgcGFnZTogZmlsdGVyIGJ5IGxhc3Qgc2VlbiB2YWx1ZSBmcm9tIHByZXZpb3VzIHBhZ2UKaHR0cFJlcXVlc3RzQWRhcHRpdmVHcm91cHMoZmlsdGVyOiB7IGRhdGV0aW1lX2d0OiAiMjAyNS0wMS0wMVQwMTozNTowMFoiIH0sIGxpbWl0OiAxMDAsIG9yZGVyQnk6IFtkYXRldGltZV9BU0NdKQpgYGAKClNvcnQgd2l0aCBgb3JkZXJCeTogW2ZpZWxkX0FTQ11gIG9yIGBbZmllbGRfREVTQ11gLiBNdWx0aXBsZSBzb3J0IGZpZWxkcyBzdXBwb3J0ZWQuCgojIyBTZXR0aW5ncyBOb2RlCgpRdWVyeSBwZXItbm9kZSBsaW1pdHMgYW5kIGF2YWlsYWJpbGl0eToKCmBgYGdyYXBocWwKdmlld2VyIHsgem9uZXMoZmlsdGVyOiB7IHpvbmVUYWc6ICIuLi4iIH0pIHsgc2V0dGluZ3MgewogIGh0dHBSZXF1ZXN0c0FkYXB0aXZlR3JvdXBzIHsgZW5hYmxlZCBtYXhEdXJhdGlvbiBtYXhOdW1iZXJPZkZpZWxkcyBtYXhQYWdlU2l6ZSBub3RPbGRlclRoYW4gfQp9IH0gfQpgYGAKCiMjIFNlZSBBbHNvCgotIFtSRUFETUUubWRdKFJFQURNRS5tZCkgLSBPdmVydmlldywgZGVjaXNpb24gdHJlZSwgZGF0YXNldCBpbmRleAotIFtjb25maWd1cmF0aW9uLm1kXShjb25maWd1cmF0aW9uLm1kKSAtIEF1dGhlbnRpY2F0aW9uLCBjbGllbnQgc2V0dXAsIGludHJvc3BlY3Rpb24gcXVlcmllcwotIFtwYXR0ZXJucy5tZF0ocGF0dGVybnMubWQpIC0gQ29tbW9uIHF1ZXJ5IHBhdHRlcm5zICh0aW1lLXNlcmllcywgdG9wLU4sIHBlci1wcm9kdWN0KQotIFtnb3RjaGFzLm1kXShnb3RjaGFzLm1kKSAtIFJhdGUgbGltaXRzLCBzYW1wbGluZywgdHJvdWJsZXNob290aW5nCg==
+# GraphQL Analytics API Reference
+
+## Query Root
+
+The schema has a single entry point: `Query.viewer`. Mutations are not supported.
+
+```graphql
+{
+  cost       # uint64 -- query cost (returned in response)
+  viewer {
+    budget   # uint64 -- remaining budget
+    zones(filter: { zoneTag: "..." }) { ... }
+    accounts(filter: { accountTag: "..." }) { ... }
+  }
+}
+```
+
+## Aggregation Fields
+
+Aggregated dataset nodes (`*Groups`) return these field categories. Not every node has all — use introspection to check.
+
+### count
+
+Total events in the group. Available on `*Groups` nodes but **not** on raw `*Adaptive` nodes (e.g., `workersInvocationsAdaptive` — use `sum { requests }` instead).
+
+### sum
+
+Cumulative metrics. Fields vary by dataset:
+
+```graphql
+# HTTP requests
+sum { edgeResponseBytes edgeRequestBytes visits edgeTimeToFirstByteMs originResponseDurationMs }
+
+# Workers invocations
+sum { requests errors subrequests cpuTimeUs wallTime duration responseBodySize clientDisconnects requestDuration }
+```
+
+### quantiles
+
+Percentile distributions (on datasets like `workersInvocationsAdaptive`). Available percentiles: P25, P50, P75, P90, P95, P99, P999 for `cpuTime`, `wallTime`, `requestDuration`, `duration`, `responseBodySize`.
+
+```graphql
+quantiles { cpuTimeP50 cpuTimeP99 wallTimeP50 wallTimeP99 }
+```
+
+### ratio, avg, uniq, confidence
+
+```graphql
+ratio { status4xx status5xx }      # float64 (0 to 1) -- HTTP datasets only
+avg { sampleInterval }              # useful for understanding sampling resolution
+uniq { uniques }                    # unique IP count -- rollup datasets (*1hGroups, *1dGroups) only
+confidence(level: 0.95) {           # Adaptive datasets only; works on count and sum fields
+  count { estimate lower upper sampleSize }
+}
+```
+
+## Dimensions
+
+Dimensions are fields you can group by via the `dimensions` sub-selection.
+
+### Time Dimensions
+
+| Dimension | Granularity |
+|-----------|------------|
+| `date` | Day |
+| `datetime` | Exact timestamp |
+| `datetimeMinute` | 1 minute |
+| `datetimeFiveMinutes` | 5 minutes |
+| `datetimeFifteenMinutes` | 15 minutes |
+| `datetimeHour` | 1 hour |
+
+Workers datasets also support `datetimeSixHours`.
+
+### HTTP Request Dimensions (httpRequestsAdaptiveGroups)
+
+83 dimensions available. Key ones:
+
+| Dimension | Description |
+|-----------|-------------|
+| `clientCountryName` | Country of origin |
+| `clientRequestHTTPHost` | Requested hostname |
+| `clientRequestHTTPMethodName` | HTTP method |
+| `clientRequestPath` | URI path |
+| `edgeResponseStatus` | Edge HTTP status code |
+| `cacheStatus` | Cache status (hit, miss, dynamic, etc.) |
+| `coloCode` | Cloudflare datacenter IATA code |
+| `clientIP` / `clientAsn` | Client IP address / ASN |
+| `botScore` / `botManagementDecision` | Bot management score (0-99) / verdict |
+| `wafAttackScore` / `securityAction` | WAF score / firewall action taken |
+| `ja3Hash` / `ja4` | TLS fingerprints |
+| `sampleInterval` | ABR sample interval |
+
+### Workers Dimensions (workersInvocationsAdaptive)
+
+`scriptName`, `scriptTag`, `scriptVersion`, `environmentName`, `status`, `usageModel`, `coloCode`, `dispatchNamespaceName`, `isDispatcher`
+
+### Firewall Dimensions (firewallEventsAdaptive)
+
+`action`, `source`, `ruleId`, `clientCountryName`, `clientIP`, `clientAsn`, `userAgent`
+
+## Filtering
+
+### Scope Filters
+
+```graphql
+zones(filter: { zoneTag: "ZONE_ID" })           # up to 10 zones
+zones(filter: { zoneTag_in: ["Z1", "Z2"] })
+accounts(filter: { accountTag: "ACCOUNT_ID" })   # exactly 1 account
+```
+
+### Dataset Filters
+
+**Always include a time range filter.** Multiple filters at the same level are implicitly AND-ed.
+
+```graphql
+httpRequestsAdaptiveGroups(
+  filter: { datetime_gt: "2025-01-01T00:00:00Z", datetime_lt: "2025-01-02T00:00:00Z", clientCountryName: "US" }
+  limit: 1000
+)
+```
+
+### Filter Operators
+
+| Operator | Meaning | Example |
+|----------|---------|---------|
+| (none) | equals | `clientCountryName: "US"` |
+| `_gt` / `_lt` | greater / less than | `datetime_gt: "..."` |
+| `_geq` / `_leq` | greater/less or equal | `datetime_geq: "..."` |
+| `_neq` | not equal | `cacheStatus_neq: "hit"` |
+| `_in` / `_notin` | in / not in list | `clientCountryName_in: ["US", "GB"]` |
+| `_like` / `_notlike` | SQL LIKE with `%` | `clientRequestPath_like: "/api/%"` |
+| `_has` / `_hasall` / `_hasany` | array contains | `botDetectionIds_has: "abc"` |
+
+> `_notin` and `_notlike` are in the schema but not in official docs. Confirmed via introspection.
+
+### Boolean Operators (AND / OR)
+
+```graphql
+# Explicit AND
+filter: { AND: [{ datetime_gt: "..." }, { datetime_lt: "..." }, { clientCountryName: "US" }] }
+
+# Explicit OR
+filter: { datetime_gt: "...", OR: [{ edgeResponseStatus: 403 }, { edgeResponseStatus: 429 }] }
+```
+
+## Pagination & Sorting
+
+No cursor-based pagination. Use `limit`, `orderBy`, and filter-based offsets:
+
+```graphql
+# First page
+httpRequestsAdaptiveGroups(filter: { datetime_gt: "..." }, limit: 100, orderBy: [datetime_ASC])
+
+# Next page: filter by last seen value from previous page
+httpRequestsAdaptiveGroups(filter: { datetime_gt: "2025-01-01T01:35:00Z" }, limit: 100, orderBy: [datetime_ASC])
+```
+
+Sort with `orderBy: [field_ASC]` or `[field_DESC]`. Multiple sort fields supported.
+
+## Settings Node
+
+Query per-node limits and availability:
+
+```graphql
+viewer { zones(filter: { zoneTag: "..." }) { settings {
+  httpRequestsAdaptiveGroups { enabled maxDuration maxNumberOfFields maxPageSize notOlderThan }
+} } }
+```
+
+## See Also
+
+- [README.md](README.md) - Overview, decision tree, dataset index
+- [configuration.md](configuration.md) - Authentication, client setup, introspection queries
+- [patterns.md](patterns.md) - Common query patterns (time-series, top-N, per-product)
+- [gotchas.md](gotchas.md) - Rate limits, sampling, troubleshooting

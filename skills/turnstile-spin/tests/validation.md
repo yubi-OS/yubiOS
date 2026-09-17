@@ -1,1 +1,62 @@
-IyBTa2lsbCB2YWxpZGF0aW9uIGNhc2VzCgpUaGVzZSBjYXNlcyBtYXRjaCB0aGUgYXNzZXJ0aW9ucyBpbiB0aGUgVHVybnN0aWxlIFNwaW4gUFJELiBSdW4gdGhlbSBhZnRlciBlZGl0aW5nIHRoaXMgc2tpbGwgdG8gY29uZmlybSBhbiBhZ2VudCBsb2FkaW5nIGl0IGNhbiBzdGlsbCBleGVjdXRlIHRoZSB3aXphcmQgZW5kLXRvLWVuZC4KCiMjIFRlc3QgMTogRHVtbXkgU2l0ZXZlcmlmeSByZXR1cm5zIGEgc3RydWN0dXJlZCBlcnJvcgoKU3RlcCAxMCdzIGB2YWxpZGF0ZS5zaGAgc2VuZHMgYSBkZWxpYmVyYXRlbHktaW52YWxpZCB0b2tlbiBkaXJlY3RseSB0byBgY2hhbGxlbmdlcy5jbG91ZGZsYXJlLmNvbS90dXJuc3RpbGUvdjAvc2l0ZXZlcmlmeWAgdXNpbmcgdGhlIGNhcHR1cmVkIHNlY3JldC4gVGhlIGV4cGVjdGVkIHJlc3BvbnNlIGlzIGBzdWNjZXNzOiBmYWxzZWAgd2l0aCBgZXJyb3ItY29kZXM6IFsiaW52YWxpZC1pbnB1dC1yZXNwb25zZSJdYC4gQW55dGhpbmcgZWxzZSBtZWFucyB0aGUgc2VjcmV0IGlzIHdyb25nIG9yIHRoZSB3aWRnZXQgaXMgbWlzY29uZmlndXJlZC4KCmBgYHNoCnByaW50ZiAnJXMnICIkV0lER0VUX1NFQ1JFVCIgfAogIHB5dGhvbjMgLUkgLWMgJ2ltcG9ydCBzeXMsdXJsbGliLnBhcnNlOyBwcmludCh1cmxsaWIucGFyc2UudXJsZW5jb2RlKHsic2VjcmV0IjpzeXMuc3RkaW4ucmVhZCgpLCJyZXNwb25zZSI6IlhYWFguRFVNTVkuVE9LRU4uWFhYWCJ9KSxlbmQ9IiIpJyB8CiAgY3VybCAtLWRpc2FibGUgLS1mYWlsIC0tc2lsZW50IC0tc2hvdy1lcnJvciBcCiAgICAiaHR0cHM6Ly9jaGFsbGVuZ2VzLmNsb3VkZmxhcmUuY29tL3R1cm5zdGlsZS92MC9zaXRldmVyaWZ5IiBcCiAgICAtSCAiQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQiIFwKICAgIC0tZGF0YS1iaW5hcnkgQC0gfAogIGpxIC1lICcuc3VjY2VzcyA9PSBmYWxzZSBhbmQgKC5bImVycm9yLWNvZGVzIl0gfCBpbmRleCgiaW52YWxpZC1pbnB1dC1yZXNwb25zZSIpKScKYGBgCgpFeHBlY3RlZCBleGl0IGNvZGU6IDAuCgojIyBUZXN0IDI6IE1ldGFkYXRhIG1hdGNoZXMgdGhlIHNpdGVrZXkgYW5kIHNlY3JldAoKYGBgc2gKcHJpbnRmICclcycgIiRXSURHRVRfU0VDUkVUIiB8CiAgc2NyaXB0cy92YWxpZGF0ZS5zaCBcCiAgICAtLXNpdGVrZXkgIiRTSVRFS0VZIiBcCiAgICAtLWFjY291bnQtaWQgIiRBQ0NPVU5UX0lEIiBcCiAgICAtLWV4cGVjdGVkLWRvbWFpbnMgJ1siZXhhbXBsZS5jb20iLCJsb2NhbGhvc3QiLCIxMjcuMC4wLjEiXScKYGBgCgpFeHBlY3RlZCBleGl0IGNvZGU6IDAgZm9yIGFsbCB2YWxpZCBjbGVhcmFuY2UgbGV2ZWxzOiBgbm9fY2xlYXJhbmNlYCwgYGludGVyYWN0aXZlYCwgYG1hbmFnZWRgLCBhbmQgYGpzY2hhbGxlbmdlYC4gQSBzZWNyZXQgZnJvbSBhbm90aGVyIHNpdGVrZXkgbXVzdCBmYWlsLgoKIyMgVGVzdCAzOiBSdW50aW1lIGNoZWNrcyBtYXRjaCB0aGUgcHJvdGVjdGVkIHN1cmZhY2UKCkluc3BlY3QgZXZlcnkgZ2VuZXJhdGVkIGZyb250ZW5kIGFuZCBiYWNrZW5kIHBhaXI6CgotIFRoZSB3aWRnZXQgaGFzIGEgbWVhbmluZ2Z1bCBhY3Rpb24gc3VjaCBhcyBgc2lnbnVwYCwgYGxvZ2luYCwgb3IgYGNvbnRhY3RgLgotIFRoZSBiYWNrZW5kIHJlcXVpcmVzIHRoZSBzYW1lIGByZXN1bHQuYWN0aW9uYCB2YWx1ZS4KLSBUaGUgYmFja2VuZCByZXF1aXJlcyBgcmVzdWx0Lmhvc3RuYW1lYCB0byBtYXRjaCBpdHMgZGVwbG95bWVudC1zcGVjaWZpYyBmcm9udGVuZCBob3N0bmFtZSBhbGxvd2xpc3QuCi0gQSBwcm9kdWN0aW9uIGhvc3RuYW1lIGFsbG93bGlzdCBkb2VzIG5vdCBjb250YWluIGBsb2NhbGhvc3RgIG9yIGAxMjcuMC4wLjFgLgoKIyMgVGVzdCA0OiBTYW1lLXBhZ2UgcmV0cmllcyByZXNldCB0aGUgY29ycmVjdCB3aWRnZXQKCk5hdGl2ZSBmb3JtcyB0aGF0IG5hdmlnYXRlIGRvIG5vdCBuZWVkIHJlc2V0IGxvZ2ljLiBGb3IgZWFjaCBzYW1lLXBhZ2UgZmxvdywgdmVyaWZ5IHRoYXQgdGhlIGNvZGUgcmV0YWlucyB0aGUgd2lkZ2V0IElEIHJldHVybmVkIGJ5IGB0dXJuc3RpbGUucmVuZGVyKClgIGFuZCBjYWxscyBgdHVybnN0aWxlLnJlc2V0KHdpZGdldElkKWAgYWZ0ZXIgdGhlIHJlcXVlc3QgY29tcGxldGVzLiBNdWx0aXBsZSBwcm90ZWN0ZWQgc3VyZmFjZXMgbXVzdCBub3Qgc2hhcmUgYSB3aWRnZXQgSUQgb3IgcmVzZXQgd2l0aG91dCBhbiBJRC4KCiMjIFRlc3QgNTogU2tpbGwgcGVyc2lzdHMgdG8gYSBidW5kbGUgbG9jYXRpb24KCkFmdGVyIFN0ZXAgMTE6CgpgYGBzaAp0ZXN0IC1mIC5jbGF1ZGUvc2tpbGxzL3R1cm5zdGlsZS1zcGluL1NLSUxMLm1kIFwKICB8fCB0ZXN0IC1mIC5jb2RleC9za2lsbHMvdHVybnN0aWxlLXNwaW4vU0tJTEwubWQgXAogIHx8IHRlc3QgLWYgLm9wZW5jb2RlL3NraWxscy90dXJuc3RpbGUtc3Bpbi9TS0lMTC5tZApgYGAKCkV4cGVjdGVkIGV4aXQgY29kZTogMC4gRmlsZS1vcmllbnRlZCBydWxlcyB0YXJnZXRzIGluc3RhbGwgdGhlIGhvc3RlZCBgcHJvbXB0Lm1kYCBkaXJlY3RseSBpbnN0ZWFkIG9mIHVzaW5nIGBwZXJzaXN0LXNraWxsLnNoYC4KCiMjIFJ1bm5pbmcgYWxsIGNhc2VzCgpUaGUgY29uc3VtaW5nIHRlc3QgaGFybmVzcyBtdXN0IHBhc3MgdGhlIHdpZGdldCBzZWNyZXQgdGhyb3VnaCBzdGFuZGFyZCBpbnB1dC4gSXQgbXVzdCBub3QgZXhwb3J0IGl0IG9yIHBsYWNlIGl0IGluIGEgY29tbWFuZCBhcmd1bWVudC4KCihgcnVuLWFsbC5zaGAgaXMgbm90IGJ1bmRsZWQgd2l0aCB0aGlzIHNraWxsOyB0aGUgY2FzZXMgYWJvdmUgYXJlIGludGVuZGVkIHRvIGJlIHdpcmVkIGludG8gdGhlIGNvbnN1bWluZyBhZ2VudCdzIG93biB0ZXN0IGhhcm5lc3MsIG9yIHJ1biBieSBoYW5kIGFmdGVyIGEgZGVwbG95LikK
+# Skill validation cases
+
+These cases match the assertions in the Turnstile Spin PRD. Run them after editing this skill to confirm an agent loading it can still execute the wizard end-to-end.
+
+## Test 1: Dummy Siteverify returns a structured error
+
+Step 10's `validate.sh` sends a deliberately-invalid token directly to `challenges.cloudflare.com/turnstile/v0/siteverify` using the captured secret. The expected response is `success: false` with `error-codes: ["invalid-input-response"]`. Anything else means the secret is wrong or the widget is misconfigured.
+
+```sh
+printf '%s' "$WIDGET_SECRET" |
+  python3 -I -c 'import sys,urllib.parse; print(urllib.parse.urlencode({"secret":sys.stdin.read(),"response":"XXXX.DUMMY.TOKEN.XXXX"}),end="")' |
+  curl --disable --fail --silent --show-error \
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify" \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    --data-binary @- |
+  jq -e '.success == false and (.["error-codes"] | index("invalid-input-response"))'
+```
+
+Expected exit code: 0.
+
+## Test 2: Metadata matches the sitekey and secret
+
+```sh
+printf '%s' "$WIDGET_SECRET" |
+  scripts/validate.sh \
+    --sitekey "$SITEKEY" \
+    --account-id "$ACCOUNT_ID" \
+    --expected-domains '["example.com","localhost","127.0.0.1"]'
+```
+
+Expected exit code: 0 for all valid clearance levels: `no_clearance`, `interactive`, `managed`, and `jschallenge`. A secret from another sitekey must fail.
+
+## Test 3: Runtime checks match the protected surface
+
+Inspect every generated frontend and backend pair:
+
+- The widget has a meaningful action such as `signup`, `login`, or `contact`.
+- The backend requires the same `result.action` value.
+- The backend requires `result.hostname` to match its deployment-specific frontend hostname allowlist.
+- A production hostname allowlist does not contain `localhost` or `127.0.0.1`.
+
+## Test 4: Same-page retries reset the correct widget
+
+Native forms that navigate do not need reset logic. For each same-page flow, verify that the code retains the widget ID returned by `turnstile.render()` and calls `turnstile.reset(widgetId)` after the request completes. Multiple protected surfaces must not share a widget ID or reset without an ID.
+
+## Test 5: Skill persists to a bundle location
+
+After Step 11:
+
+```sh
+test -f .claude/skills/turnstile-spin/SKILL.md \
+  || test -f .codex/skills/turnstile-spin/SKILL.md \
+  || test -f .opencode/skills/turnstile-spin/SKILL.md
+```
+
+Expected exit code: 0. File-oriented rules targets install the hosted `prompt.md` directly instead of using `persist-skill.sh`.
+
+## Running all cases
+
+The consuming test harness must pass the widget secret through standard input. It must not export it or place it in a command argument.
+
+(`run-all.sh` is not bundled with this skill; the cases above are intended to be wired into the consuming agent's own test harness, or run by hand after a deploy.)

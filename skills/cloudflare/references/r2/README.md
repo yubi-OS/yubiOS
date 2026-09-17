@@ -1,1 +1,95 @@
-IyBDbG91ZGZsYXJlIFIyIE9iamVjdCBTdG9yYWdlCgpTMy1jb21wYXRpYmxlIG9iamVjdCBzdG9yYWdlIHdpdGggemVybyBlZ3Jlc3MgZmVlcywgb3B0aW1pemVkIGZvciBsYXJnZSBmaWxlIHN0b3JhZ2UgYW5kIGRlbGl2ZXJ5LgoKIyMgT3ZlcnZpZXcKClIyIHByb3ZpZGVzOgotIFMzLWNvbXBhdGlibGUgQVBJIChXb3JrZXJzIEFQSSArIFMzIFJFU1QpCi0gWmVybyBlZ3Jlc3MgZmVlcyBnbG9iYWxseQotIFN0cm9uZyBjb25zaXN0ZW5jeSBmb3Igd3JpdGVzL2RlbGV0ZXMKLSBTdG9yYWdlIGNsYXNzZXMgKFN0YW5kYXJkL0luZnJlcXVlbnQgQWNjZXNzKQotIFNTRS1DIGVuY3J5cHRpb24gc3VwcG9ydAoKKipVc2UgY2FzZXM6KiogTWVkaWEgc3RvcmFnZSwgYmFja3Vwcywgc3RhdGljIGFzc2V0cywgdXNlciB1cGxvYWRzLCBkYXRhIGxha2VzCgojIyBRdWljayBTdGFydAoKYGBgYmFzaAp3cmFuZ2xlciByMiBidWNrZXQgY3JlYXRlIG15LWJ1Y2tldCAtLWxvY2F0aW9uPWVuYW0Kd3JhbmdsZXIgcjIgb2JqZWN0IHB1dCBteS1idWNrZXQvZmlsZS50eHQgLS1maWxlPS4vbG9jYWwudHh0CmBgYAoKYGBgdHlwZXNjcmlwdAovLyBVcGxvYWQKYXdhaXQgZW52Lk1ZX0JVQ0tFVC5wdXQoa2V5LCBkYXRhLCB7CiAgaHR0cE1ldGFkYXRhOiB7IGNvbnRlbnRUeXBlOiAnaW1hZ2UvanBlZycgfQp9KTsKCi8vIERvd25sb2FkCmNvbnN0IG9iamVjdCA9IGF3YWl0IGVudi5NWV9CVUNLRVQuZ2V0KGtleSk7CmlmIChvYmplY3QpIHJldHVybiBuZXcgUmVzcG9uc2Uob2JqZWN0LmJvZHkpOwpgYGAKCiMjIENvcmUgT3BlcmF0aW9ucwoKfCBNZXRob2QgfCBQdXJwb3NlIHwgUmV0dXJucyB8CnwtLS0tLS0tLXwtLS0tLS0tLS18LS0tLS0tLS0tfAp8IGBwdXQoa2V5LCB2YWx1ZSwgb3B0aW9ucz8pYCB8IFVwbG9hZCBvYmplY3QgfCBgUjJPYmplY3QgXHwgbnVsbGAgfAp8IGBnZXQoa2V5LCBvcHRpb25zPylgIHwgRG93bmxvYWQgb2JqZWN0IHwgYFIyT2JqZWN0Qm9keSBcfCBSMk9iamVjdCBcfCBudWxsYCB8CnwgYGhlYWQoa2V5KWAgfCBHZXQgbWV0YWRhdGEgb25seSB8IGBSMk9iamVjdCBcfCBudWxsYCB8CnwgYGRlbGV0ZShrZXlzKWAgfCBEZWxldGUgb2JqZWN0KHMpIHwgYFByb21pc2U8dm9pZD5gIHwKfCBgbGlzdChvcHRpb25zPylgIHwgTGlzdCBvYmplY3RzIHwgYFIyT2JqZWN0c2AgfAoKIyMgU3RvcmFnZSBDbGFzc2VzCgotICoqU3RhbmRhcmQqKjogRnJlcXVlbnQgYWNjZXNzLCBsb3cgbGF0ZW5jeSByZWFkcwotICoqSW5mcmVxdWVudEFjY2VzcyoqOiAzMC1kYXkgbWluaW11bSBzdG9yYWdlLCByZXRyaWV2YWwgZmVlcywgbG93ZXIgc3RvcmFnZSBjb3N0CgojIyBFdmVudCBOb3RpZmljYXRpb25zCgpSMiBpbnRlZ3JhdGVzIHdpdGggQ2xvdWRmbGFyZSBRdWV1ZXMgZm9yIHJlYWN0aXZlIHdvcmtmbG93czoKCmBgYHR5cGVzY3JpcHQKLy8gd3JhbmdsZXIuanNvbmMKewogICJldmVudF9ub3RpZmljYXRpb25zIjogW3sKICAgICJxdWV1ZSI6ICJyMi1ub3RpZmljYXRpb25zIiwKICAgICJhY3Rpb25zIjogWyJQdXRPYmplY3QiLCAiRGVsZXRlT2JqZWN0Il0KICB9XQp9CgovLyBDb25zdW1lcgphc3luYyBxdWV1ZShiYXRjaDogTWVzc2FnZUJhdGNoLCBlbnY6IEVudikgewogIGZvciAoY29uc3QgbWVzc2FnZSBvZiBiYXRjaC5tZXNzYWdlcykgewogICAgY29uc3QgZXZlbnQgPSBtZXNzYWdlLmJvZHk7IC8vIHsgYWN0aW9uLCBidWNrZXQsIG9iamVjdCwgdGltZXN0YW1wcyB9CiAgICBpZiAoZXZlbnQuYWN0aW9uID09PSAnUHV0T2JqZWN0JykgewogICAgICAvLyBQcm9jZXNzIHVwbG9hZDogdGh1bWJuYWlsIGdlbmVyYXRpb24sIHZpcnVzIHNjYW4sIGV0Yy4KICAgIH0KICB9Cn0KYGBgCgojIyBSZWFkaW5nIE9yZGVyCgoqKkZpcnN0LXRpbWUgdXNlcnM6KiogUkVBRE1FIOKGkiBjb25maWd1cmF0aW9uLm1kIOKGkiBhcGkubWQg4oaSIHBhdHRlcm5zLm1kICAKKipTcGVjaWZpYyB0YXNrczoqKgotIFNldHVwOiBjb25maWd1cmF0aW9uLm1kCi0gQ2xpZW50IHVwbG9hZHM6IHBhdHRlcm5zLm1kIChwcmVzaWduZWQgVVJMcykKLSBQdWJsaWMgc3RhdGljIHNpdGU6IHBhdHRlcm5zLm1kIChwdWJsaWMgYWNjZXNzICsgY3VzdG9tIGRvbWFpbikKLSBQcm9jZXNzaW5nIHVwbG9hZHM6IFJFQURNRSAoZXZlbnQgbm90aWZpY2F0aW9ucykgKyBxdWV1ZXMgcmVmZXJlbmNlCi0gRGVidWdnaW5nOiBnb3RjaGFzLm1kCgojIyBJbiBUaGlzIFJlZmVyZW5jZQoKLSBbY29uZmlndXJhdGlvbi5tZF0oLi9jb25maWd1cmF0aW9uLm1kKSAtIEJpbmRpbmdzLCBTMyBTREssIENPUlMsIGxpZmVjeWNsZXMsIHRva2VuIHNjb3BlcwotIFthcGkubWRdKC4vYXBpLm1kKSAtIFdvcmtlcnMgQVBJLCBtdWx0aXBhcnQsIGNvbmRpdGlvbmFsIHJlcXVlc3RzLCBwcmVzaWduZWQgVVJMcwotIFtwYXR0ZXJucy5tZF0oLi9wYXR0ZXJucy5tZCkgLSBTdHJlYW1pbmcsIGNhY2hpbmcsIGNsaWVudCB1cGxvYWRzLCBwdWJsaWMgYnVja2V0cwotIFtnb3RjaGFzLm1kXSguL2dvdGNoYXMubWQpIC0gTGlzdCB0cnVuY2F0aW9uLCBldGFnIGZvcm1hdCwgc3RyZWFtIGxlbmd0aCwgUzMgU0RLIHJlZ2lvbgoKIyMgU2VlIEFsc28KCi0gW3dvcmtlcnNdKC4uL3dvcmtlcnMvKSAtIFdvcmtlciBydW50aW1lIGFuZCBmZXRjaCBoYW5kbGVycwotIFtrdl0oLi4va3YvKSAtIE1ldGFkYXRhIHN0b3JhZ2UgZm9yIFIyIG9iamVjdHMKLSBbZDFdKC4uL2QxLykgLSBTdG9yZSBSMiBVUkxzIGluIHJlbGF0aW9uYWwgZGF0YWJhc2UKLSBbcXVldWVzXSguLi9xdWV1ZXMvKSAtIFByb2Nlc3MgUjIgdXBsb2FkcyBhc3luY2hyb25vdXNseQo=
+# Cloudflare R2 Object Storage
+
+S3-compatible object storage with zero egress fees, optimized for large file storage and delivery.
+
+## Overview
+
+R2 provides:
+- S3-compatible API (Workers API + S3 REST)
+- Zero egress fees globally
+- Strong consistency for writes/deletes
+- Storage classes (Standard/Infrequent Access)
+- SSE-C encryption support
+
+**Use cases:** Media storage, backups, static assets, user uploads, data lakes
+
+## Quick Start
+
+```bash
+wrangler r2 bucket create my-bucket --location=enam
+wrangler r2 object put my-bucket/file.txt --file=./local.txt
+```
+
+```typescript
+// Upload
+await env.MY_BUCKET.put(key, data, {
+  httpMetadata: { contentType: 'image/jpeg' }
+});
+
+// Download
+const object = await env.MY_BUCKET.get(key);
+if (object) return new Response(object.body);
+```
+
+## Core Operations
+
+| Method | Purpose | Returns |
+|--------|---------|---------|
+| `put(key, value, options?)` | Upload object | `R2Object \| null` |
+| `get(key, options?)` | Download object | `R2ObjectBody \| R2Object \| null` |
+| `head(key)` | Get metadata only | `R2Object \| null` |
+| `delete(keys)` | Delete object(s) | `Promise<void>` |
+| `list(options?)` | List objects | `R2Objects` |
+
+## Storage Classes
+
+- **Standard**: Frequent access, low latency reads
+- **InfrequentAccess**: 30-day minimum storage, retrieval fees, lower storage cost
+
+## Event Notifications
+
+R2 integrates with Cloudflare Queues for reactive workflows:
+
+```typescript
+// wrangler.jsonc
+{
+  "event_notifications": [{
+    "queue": "r2-notifications",
+    "actions": ["PutObject", "DeleteObject"]
+  }]
+}
+
+// Consumer
+async queue(batch: MessageBatch, env: Env) {
+  for (const message of batch.messages) {
+    const event = message.body; // { action, bucket, object, timestamps }
+    if (event.action === 'PutObject') {
+      // Process upload: thumbnail generation, virus scan, etc.
+    }
+  }
+}
+```
+
+## Reading Order
+
+**First-time users:** README → configuration.md → api.md → patterns.md  
+**Specific tasks:**
+- Setup: configuration.md
+- Client uploads: patterns.md (presigned URLs)
+- Public static site: patterns.md (public access + custom domain)
+- Processing uploads: README (event notifications) + queues reference
+- Debugging: gotchas.md
+
+## In This Reference
+
+- [configuration.md](./configuration.md) - Bindings, S3 SDK, CORS, lifecycles, token scopes
+- [api.md](./api.md) - Workers API, multipart, conditional requests, presigned URLs
+- [patterns.md](./patterns.md) - Streaming, caching, client uploads, public buckets
+- [gotchas.md](./gotchas.md) - List truncation, etag format, stream length, S3 SDK region
+
+## See Also
+
+- [workers](../workers/) - Worker runtime and fetch handlers
+- [kv](../kv/) - Metadata storage for R2 objects
+- [d1](../d1/) - Store R2 URLs in relational database
+- [queues](../queues/) - Process R2 uploads asynchronously

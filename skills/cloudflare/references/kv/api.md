@@ -1,1 +1,160 @@
-IyBLViBBUEkgUmVmZXJlbmNlCgojIyBSZWFkIE9wZXJhdGlvbnMKCmBgYHR5cGVzY3JpcHQKLy8gU2luZ2xlIGtleSAoc3RyaW5nKQpjb25zdCB2YWx1ZSA9IGF3YWl0IGVudi5NWV9LVi5nZXQoInVzZXI6MTIzIik7CgovLyBKU09OIHR5cGUgKGF1dG8tcGFyc2VkKQpjb25zdCBjb25maWcgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0PEFwcENvbmZpZz4oImNvbmZpZyIsICJqc29uIik7CgovLyBBcnJheUJ1ZmZlciBmb3IgYmluYXJ5CmNvbnN0IGJ1ZmZlciA9IGF3YWl0IGVudi5NWV9LVi5nZXQoImltYWdlIiwgImFycmF5QnVmZmVyIik7CgovLyBTdHJlYW0gZm9yIGxhcmdlIHZhbHVlcwpjb25zdCBzdHJlYW0gPSBhd2FpdCBlbnYuTVlfS1YuZ2V0KCJsYXJnZS1maWxlIiwgInN0cmVhbSIpOwoKLy8gV2l0aCBjYWNoZSBUVEwgKG1pbiA2MHMpCmNvbnN0IHZhbHVlID0gYXdhaXQgZW52Lk1ZX0tWLmdldCgia2V5IiwgeyB0eXBlOiAidGV4dCIsIGNhY2hlVHRsOiAzMDAgfSk7CgovLyBCdWxrIGdldCAobWF4IDEwMCBrZXlzLCBjb3VudHMgYXMgMSBvcGVyYXRpb24pCmNvbnN0IGtleXMgPSBbInVzZXI6MSIsICJ1c2VyOjIiLCAidXNlcjozIiwgIm1pc3Npbmc6a2V5Il07CmNvbnN0IHJlc3VsdHMgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0KGtleXMpOwovLyBSZXR1cm5zIE1hcDxzdHJpbmcsIHN0cmluZyB8IG51bGw+Cgpjb25zb2xlLmxvZyhyZXN1bHRzLmdldCgidXNlcjoxIikpOyAgICAgLy8gIkpvaG4iIChpZiBleGlzdHMpCmNvbnNvbGUubG9nKHJlc3VsdHMuZ2V0KCJtaXNzaW5nOmtleSIpKTsgLy8gbnVsbAoKLy8gUHJvY2VzcyByZXN1bHRzIHdpdGggbnVsbCBoYW5kbGluZwpmb3IgKGNvbnN0IFtrZXksIHZhbHVlXSBvZiByZXN1bHRzKSB7CiAgaWYgKHZhbHVlICE9PSBudWxsKSB7CiAgICAvLyBIYW5kbGUgZm91bmQga2V5cwogICAgY29uc29sZS5sb2coYCR7a2V5fTogJHt2YWx1ZX1gKTsKICB9Cn0KCi8vIFR5cGVTY3JpcHQgd2l0aCBnZW5lcmljcyAodHlwZS1zYWZlIEpTT04gcGFyc2luZykKaW50ZXJmYWNlIFVzZXJQcm9maWxlIHsgbmFtZTogc3RyaW5nOyBlbWFpbDogc3RyaW5nOyB9CmNvbnN0IHByb2ZpbGUgPSBhd2FpdCBlbnYuVVNFUlMuZ2V0PFVzZXJQcm9maWxlPigidXNlcjoxMjMiLCAianNvbiIpOwovLyBwcm9maWxlIGlzIHR5cGVkIGFzIFVzZXJQcm9maWxlIHwgbnVsbAppZiAocHJvZmlsZSkgewogIGNvbnNvbGUubG9nKHByb2ZpbGUubmFtZSk7IC8vIFR5cGUtc2FmZSBhY2Nlc3MKfQoKLy8gQnVsayBnZXQgd2l0aCB0eXBlCmNvbnN0IGNvbmZpZ3MgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0PENvbmZpZz4oWyJjb25maWc6YXBwIiwgImNvbmZpZzpmZWF0dXJlIl0sICJqc29uIik7Ci8vIE1hcDxzdHJpbmcsIENvbmZpZyB8IG51bGw+CmBgYAoKIyMgV3JpdGUgT3BlcmF0aW9ucwoKYGBgdHlwZXNjcmlwdAovLyBCYXNpYyBwdXQKYXdhaXQgZW52Lk1ZX0tWLnB1dCgia2V5IiwgInZhbHVlIik7CmF3YWl0IGVudi5NWV9LVi5wdXQoImNvbmZpZyIsIEpTT04uc3RyaW5naWZ5KHsgdGhlbWU6ICJkYXJrIiB9KSk7CgovLyBXaXRoIGV4cGlyYXRpb24gKFVOSVggdGltZXN0YW1wKQphd2FpdCBlbnYuTVlfS1YucHV0KCJzZXNzaW9uIiwgdG9rZW4sIHsKICBleHBpcmF0aW9uOiBNYXRoLmZsb29yKERhdGUubm93KCkgLyAxMDAwKSArIDM2MDAKfSk7CgovLyBXaXRoIFRUTCAoc2Vjb25kcyBmcm9tIG5vdywgbWluIDYwKQphd2FpdCBlbnYuTVlfS1YucHV0KCJjYWNoZSIsIGRhdGEsIHsgZXhwaXJhdGlvblR0bDogMzAwIH0pOwoKLy8gV2l0aCBtZXRhZGF0YSAobWF4IDEwMjQgYnl0ZXMpCmF3YWl0IGVudi5NWV9LVi5wdXQoInVzZXI6cHJvZmlsZSIsIHVzZXJEYXRhLCB7CiAgbWV0YWRhdGE6IHsgdmVyc2lvbjogMiwgbGFzdFVwZGF0ZWQ6IERhdGUubm93KCkgfQp9KTsKCi8vIENvbWJpbmVkCmF3YWl0IGVudi5NWV9LVi5wdXQoInRlbXAiLCB2YWx1ZSwgewogIGV4cGlyYXRpb25UdGw6IDM2MDAsCiAgbWV0YWRhdGE6IHsgdGVtcG9yYXJ5OiB0cnVlIH0KfSk7CmBgYAoKIyMgR2V0IHdpdGggTWV0YWRhdGEKCmBgYHR5cGVzY3JpcHQKLy8gU2luZ2xlIGtleQpjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0V2l0aE1ldGFkYXRhKCJ1c2VyOnByb2ZpbGUiKTsKLy8geyB2YWx1ZTogc3RyaW5nIHwgbnVsbCwgbWV0YWRhdGE6IGFueSB8IG51bGwgfQoKaWYgKHJlc3VsdC52YWx1ZSAmJiByZXN1bHQubWV0YWRhdGEpIHsKICBjb25zdCB7IHZlcnNpb24sIGxhc3RVcGRhdGVkIH0gPSByZXN1bHQubWV0YWRhdGE7Cn0KCi8vIE11bHRpcGxlIGtleXMgKGJ1bGspCmNvbnN0IGtleXMgPSBbImtleTEiLCAia2V5MiIsICJrZXkzIl07CmNvbnN0IHJlc3VsdHMgPSBhd2FpdCBlbnYuTVlfS1YuZ2V0V2l0aE1ldGFkYXRhKGtleXMpOwovLyBSZXR1cm5zIE1hcDxzdHJpbmcsIHsgdmFsdWUsIG1ldGFkYXRhLCBjYWNoZVN0YXR1cz8gfT4KCmZvciAoY29uc3QgW2tleSwgcmVzdWx0XSBvZiByZXN1bHRzKSB7CiAgaWYgKHJlc3VsdC52YWx1ZSkgewogICAgY29uc29sZS5sb2coYCR7a2V5fTogJHtyZXN1bHQudmFsdWV9YCk7CiAgICBjb25zb2xlLmxvZyhgTWV0YWRhdGE6ICR7SlNPTi5zdHJpbmdpZnkocmVzdWx0Lm1ldGFkYXRhKX1gKTsKICAgIC8vIGNhY2hlU3RhdHVzIGZpZWxkIGluZGljYXRlcyBjYWNoZSBoaXQvbWlzcyAod2hlbiBhdmFpbGFibGUpCiAgfQp9CgovLyBXaXRoIHR5cGUKY29uc3QgcmVzdWx0ID0gYXdhaXQgZW52Lk1ZX0tWLmdldFdpdGhNZXRhZGF0YTxVc2VyRGF0YT4oInVzZXI6MTIzIiwgImpzb24iKTsKLy8gcmVzdWx0OiB7IHZhbHVlOiBVc2VyRGF0YSB8IG51bGwsIG1ldGFkYXRhOiBhbnkgfCBudWxsLCBjYWNoZVN0YXR1cz86IHN0cmluZyB9CmBgYAoKIyMgRGVsZXRlIE9wZXJhdGlvbnMKCmBgYHR5cGVzY3JpcHQKYXdhaXQgZW52Lk1ZX0tWLmRlbGV0ZSgia2V5Iik7IC8vIEFsd2F5cyBzdWNjZWVkcyAoZXZlbiBpZiBrZXkgbWlzc2luZykKYGBgCgojIyBMaXN0IE9wZXJhdGlvbnMKCmBgYHR5cGVzY3JpcHQKLy8gTGlzdCBhbGwKY29uc3Qga2V5cyA9IGF3YWl0IGVudi5NWV9LVi5saXN0KCk7Ci8vIHsga2V5czogWy4uLl0sIGxpc3RfY29tcGxldGU6IGJvb2xlYW4sIGN1cnNvcj86IHN0cmluZyB9CgovLyBXaXRoIHByZWZpeApjb25zdCB1c2VyS2V5cyA9IGF3YWl0IGVudi5NWV9LVi5saXN0KHsgcHJlZml4OiAidXNlcjoiIH0pOwoKLy8gUGFnaW5hdGlvbgpsZXQgY3Vyc29yOiBzdHJpbmcgfCB1bmRlZmluZWQ7CmxldCBhbGxLZXlzID0gW107CmRvIHsKICBjb25zdCByZXN1bHQgPSBhd2FpdCBlbnYuTVlfS1YubGlzdCh7IGN1cnNvciwgbGltaXQ6IDEwMDAgfSk7CiAgYWxsS2V5cy5wdXNoKC4uLnJlc3VsdC5rZXlzKTsKICBjdXJzb3IgPSByZXN1bHQuY3Vyc29yOwp9IHdoaWxlICghcmVzdWx0Lmxpc3RfY29tcGxldGUpOwpgYGAKCiMjIFBlcmZvcm1hbmNlIENvbnNpZGVyYXRpb25zCgojIyMgVHlwZSBTZWxlY3Rpb24KCnwgVHlwZSB8IFVzZSBDYXNlIHwgUGVyZm9ybWFuY2UgfAp8LS0tLS0tfC0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwKfCBgc3RyZWFtYCB8IExhcmdlIHZhbHVlcyAoPjFNQikgfCBGYXN0ZXN0IC0gbm8gYnVmZmVyaW5nIHwKfCBgYXJyYXlCdWZmZXJgIHwgQmluYXJ5IGRhdGEgfCBGYXN0IC0gc2luZ2xlIGFsbG9jYXRpb24gfAp8IGB0ZXh0YCB8IFN0cmluZyB2YWx1ZXMgfCBNZWRpdW0gfAp8IGBqc29uYCB8IE9iamVjdHMgKHBhcnNlIG92ZXJoZWFkKSB8IFNsb3dlc3QgLSBwYXJzaW5nIGNvc3QgfAoKIyMjIFBhcmFsbGVsIFJlYWRzCgpgYGB0eXBlc2NyaXB0Ci8vIEVmZmljaWVudCBwYXJhbGxlbCByZWFkcyB3aXRoIFByb21pc2UuYWxsKCkKY29uc3QgW3VzZXIsIHNldHRpbmdzLCBjYWNoZV0gPSBhd2FpdCBQcm9taXNlLmFsbChbCiAgZW52LlVTRVJTLmdldCgidXNlcjoxMjMiLCAianNvbiIpLAogIGVudi5TRVRUSU5HUy5nZXQoImNvbmZpZzphcHAiLCAianNvbiIpLAogIGVudi5DQUNIRS5nZXQoImRhdGE6bGF0ZXN0IikKXSk7CmBgYAoKIyMgRXJyb3IgSGFuZGxpbmcKCi0gKipNaXNzaW5nIGtleXM6KiogUmV0dXJuIGBudWxsYCAobm90IGFuIGVycm9yKQotICoqUmF0ZSBsaW1pdCAoNDI5KToqKiBSZXRyeSB3aXRoIGV4cG9uZW50aWFsIGJhY2tvZmYgKHNlZSBnb3RjaGFzLm1kKQotICoqUmVzcG9uc2UgdG9vIGxhcmdlICg0MTMpOioqIFZhbHVlcyA+MjVNQiBmYWlsIHdpdGggNDEzIGVycm9yCgpTZWUgW2dvdGNoYXMubWRdKC4vZ290Y2hhcy5tZCkgZm9yIGRldGFpbGVkIGVycm9yIHBhdHRlcm5zIGFuZCBzb2x1dGlvbnMuCg==
+# KV API Reference
+
+## Read Operations
+
+```typescript
+// Single key (string)
+const value = await env.MY_KV.get("user:123");
+
+// JSON type (auto-parsed)
+const config = await env.MY_KV.get<AppConfig>("config", "json");
+
+// ArrayBuffer for binary
+const buffer = await env.MY_KV.get("image", "arrayBuffer");
+
+// Stream for large values
+const stream = await env.MY_KV.get("large-file", "stream");
+
+// With cache TTL (min 60s)
+const value = await env.MY_KV.get("key", { type: "text", cacheTtl: 300 });
+
+// Bulk get (max 100 keys, counts as 1 operation)
+const keys = ["user:1", "user:2", "user:3", "missing:key"];
+const results = await env.MY_KV.get(keys);
+// Returns Map<string, string | null>
+
+console.log(results.get("user:1"));     // "John" (if exists)
+console.log(results.get("missing:key")); // null
+
+// Process results with null handling
+for (const [key, value] of results) {
+  if (value !== null) {
+    // Handle found keys
+    console.log(`${key}: ${value}`);
+  }
+}
+
+// TypeScript with generics (type-safe JSON parsing)
+interface UserProfile { name: string; email: string; }
+const profile = await env.USERS.get<UserProfile>("user:123", "json");
+// profile is typed as UserProfile | null
+if (profile) {
+  console.log(profile.name); // Type-safe access
+}
+
+// Bulk get with type
+const configs = await env.MY_KV.get<Config>(["config:app", "config:feature"], "json");
+// Map<string, Config | null>
+```
+
+## Write Operations
+
+```typescript
+// Basic put
+await env.MY_KV.put("key", "value");
+await env.MY_KV.put("config", JSON.stringify({ theme: "dark" }));
+
+// With expiration (UNIX timestamp)
+await env.MY_KV.put("session", token, {
+  expiration: Math.floor(Date.now() / 1000) + 3600
+});
+
+// With TTL (seconds from now, min 60)
+await env.MY_KV.put("cache", data, { expirationTtl: 300 });
+
+// With metadata (max 1024 bytes)
+await env.MY_KV.put("user:profile", userData, {
+  metadata: { version: 2, lastUpdated: Date.now() }
+});
+
+// Combined
+await env.MY_KV.put("temp", value, {
+  expirationTtl: 3600,
+  metadata: { temporary: true }
+});
+```
+
+## Get with Metadata
+
+```typescript
+// Single key
+const result = await env.MY_KV.getWithMetadata("user:profile");
+// { value: string | null, metadata: any | null }
+
+if (result.value && result.metadata) {
+  const { version, lastUpdated } = result.metadata;
+}
+
+// Multiple keys (bulk)
+const keys = ["key1", "key2", "key3"];
+const results = await env.MY_KV.getWithMetadata(keys);
+// Returns Map<string, { value, metadata, cacheStatus? }>
+
+for (const [key, result] of results) {
+  if (result.value) {
+    console.log(`${key}: ${result.value}`);
+    console.log(`Metadata: ${JSON.stringify(result.metadata)}`);
+    // cacheStatus field indicates cache hit/miss (when available)
+  }
+}
+
+// With type
+const result = await env.MY_KV.getWithMetadata<UserData>("user:123", "json");
+// result: { value: UserData | null, metadata: any | null, cacheStatus?: string }
+```
+
+## Delete Operations
+
+```typescript
+await env.MY_KV.delete("key"); // Always succeeds (even if key missing)
+```
+
+## List Operations
+
+```typescript
+// List all
+const keys = await env.MY_KV.list();
+// { keys: [...], list_complete: boolean, cursor?: string }
+
+// With prefix
+const userKeys = await env.MY_KV.list({ prefix: "user:" });
+
+// Pagination
+let cursor: string | undefined;
+let allKeys = [];
+do {
+  const result = await env.MY_KV.list({ cursor, limit: 1000 });
+  allKeys.push(...result.keys);
+  cursor = result.cursor;
+} while (!result.list_complete);
+```
+
+## Performance Considerations
+
+### Type Selection
+
+| Type | Use Case | Performance |
+|------|----------|-------------|
+| `stream` | Large values (>1MB) | Fastest - no buffering |
+| `arrayBuffer` | Binary data | Fast - single allocation |
+| `text` | String values | Medium |
+| `json` | Objects (parse overhead) | Slowest - parsing cost |
+
+### Parallel Reads
+
+```typescript
+// Efficient parallel reads with Promise.all()
+const [user, settings, cache] = await Promise.all([
+  env.USERS.get("user:123", "json"),
+  env.SETTINGS.get("config:app", "json"),
+  env.CACHE.get("data:latest")
+]);
+```
+
+## Error Handling
+
+- **Missing keys:** Return `null` (not an error)
+- **Rate limit (429):** Retry with exponential backoff (see gotchas.md)
+- **Response too large (413):** Values >25MB fail with 413 error
+
+See [gotchas.md](./gotchas.md) for detailed error patterns and solutions.

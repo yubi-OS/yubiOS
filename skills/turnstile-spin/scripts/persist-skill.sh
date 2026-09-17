@@ -1,1 +1,114 @@
-IyEvdXNyL2Jpbi9lbnYgYmFzaAojIFBlcnNpc3RzIHRoZSBjYW5vbmljYWwgU3BpbiBza2lsbCBidW5kbGUgaW50byB0aGUgY3VycmVudCBwcm9qZWN0LgoKc2V0ICt4CnNldCAtdW8gcGlwZWZhaWwKCnVuc2V0IENMT1VERkxBUkVfQVBJX1RPS0VOIENGX0FQSV9UT0tFTiBDTE9VREZMQVJFX0FQSV9LRVkgQ0ZfQVBJX0tFWQp1bnNldCBDTE9VREZMQVJFX0VNQUlMIENGX0FQSV9FTUFJTCBXSURHRVRfU0VDUkVUIFRVUk5TVElMRV9TRUNSRVQKdW5zZXQgV1JBTkdMRVJfQklOIFdSQU5HTEVSX1ZFUlNJT04KdW5zZXQgR0lUSFVCX1RPS0VOIEdIX1RPS0VOIEdJVExBQl9UT0tFTiBOUE1fVE9LRU4KCm5lZWRfYXJnKCkgewogIGlmIFtbIC16ICIkezItfSIgfHwgIiQyIiA9PSAtLSogXV07IHRoZW4KICAgIGVjaG8gInBlcnNpc3Qtc2tpbGw6IG1pc3NpbmcgdmFsdWUgZm9yICQxIiA+JjIKICAgIGV4aXQgMgogIGZpCn0KClBBVEhfQVJHPSIiCndoaWxlIFtbICQjIC1ndCAwIF1dOyBkbwogIGNhc2UgIiQxIiBpbgogICAgLS1wYXRoKSBuZWVkX2FyZyAiJDEiICIkezItfSI7IFBBVEhfQVJHPSIkMiI7IHNoaWZ0IDIgOzsKICAgICopIGVjaG8gInBlcnNpc3Qtc2tpbGw6IHVua25vd24gYXJnICQxIiA+JjI7IGV4aXQgMiA7OwogIGVzYWMKZG9uZQoKW1sgLW4gIiRQQVRIX0FSRyIgXV0gfHwgeyBlY2hvICJwZXJzaXN0LXNraWxsOiAtLXBhdGggcmVxdWlyZWQiID4mMjsgZXhpdCAyOyB9CmlmIFtbICIkKGJhc2VuYW1lICIkUEFUSF9BUkciKSIgIT0gIlNLSUxMLm1kIiBdXTsgdGhlbgogIGVjaG8gInBlcnNpc3Qtc2tpbGw6IC0tcGF0aCBtdXN0IGVuZCBpbiBTS0lMTC5tZCBmb3IgYSBkaXJlY3RvcnktYmFzZWQgc2tpbGwgYnVuZGxlIiA+JjIKICBlY2hvICd7InN0YXR1cyI6ImVycm9yIiwicmVhc29uIjoiZmlsZV90YXJnZXRfbm90X3N1cHBvcnRlZCJ9JwogIGV4aXQgMgpmaQoKZm9yIGNvbW1hbmRfbmFtZSBpbiBnaXQgcHl0aG9uMzsgZG8KICBjb21tYW5kIC12ICIkY29tbWFuZF9uYW1lIiA+L2Rldi9udWxsIDI+JjEgfHwgewogICAgZWNobyAicGVyc2lzdC1za2lsbDogJGNvbW1hbmRfbmFtZSBpcyByZXF1aXJlZCIgPiYyCiAgICBlY2hvICJ7XCJzdGF0dXNcIjpcImVycm9yXCIsXCJyZWFzb25cIjpcIiR7Y29tbWFuZF9uYW1lfV9ub3RfYXZhaWxhYmxlXCJ9IgogICAgZXhpdCAxCiAgfQpkb25lCgpQUk9KRUNUX1JPT1Q9IiQocHdkIC1QKSIKVEFSR0VUX0RJUj0iJChweXRob24zIC1JIC1jICdpbXBvcnQgb3Msc3lzOyBwcmludChvcy5wYXRoLnJlYWxwYXRoKG9zLnBhdGguYWJzcGF0aChzeXMuYXJndlsxXSkpKScgIiQoZGlybmFtZSAiJFBBVEhfQVJHIikiKSIKaWYgW1sgIiRUQVJHRVRfRElSIiAhPSAiJFBST0pFQ1RfUk9PVCIgJiYgIiRUQVJHRVRfRElSIiAhPSAiJFBST0pFQ1RfUk9PVC8iKiBdXTsgdGhlbgogIGVjaG8gInBlcnNpc3Qtc2tpbGw6IHRhcmdldCBtdXN0IGJlIGluc2lkZSB0aGUgY3VycmVudCBwcm9qZWN0IiA+JjIKICBlY2hvICd7InN0YXR1cyI6ImVycm9yIiwicmVhc29uIjoidGFyZ2V0X291dHNpZGVfcHJvamVjdCJ9JwogIGV4aXQgMQpmaQppZiBbWyAtZSAiJFRBUkdFVF9ESVIiIF1dICYmICEgcHl0aG9uMyAtSSAtYyAnaW1wb3J0IG9zLHN5czsgcmFpc2UgU3lzdGVtRXhpdCgwIGlmIG5vdCBvcy5saXN0ZGlyKHN5cy5hcmd2WzFdKSBlbHNlIDEpJyAiJFRBUkdFVF9ESVIiOyB0aGVuCiAgZWNobyAicGVyc2lzdC1za2lsbDogdGFyZ2V0IGRpcmVjdG9yeSBpcyBub3QgZW1wdHkiID4mMgogIGVjaG8gJ3sic3RhdHVzIjoiZXJyb3IiLCJyZWFzb24iOiJ0YXJnZXRfbm90X2VtcHR5In0nCiAgZXhpdCAxCmZpCgppZiAhIFRFTVBfRElSPSIkKG1rdGVtcCAtZCAiJHtUTVBESVI6LS90bXB9L3R1cm5zdGlsZS1zcGluLXBlcnNpc3QuWFhYWFhYIikiOyB0aGVuCiAgZWNobyAicGVyc2lzdC1za2lsbDogY291bGQgbm90IGNyZWF0ZSBhIHRlbXBvcmFyeSBkaXJlY3RvcnkiID4mMgogIGVjaG8gJ3sic3RhdHVzIjoiZXJyb3IiLCJyZWFzb24iOiJ0ZW1wb3JhcnlfZGlyZWN0b3J5X2ZhaWxlZCJ9JwogIGV4aXQgMQpmaQp0cmFwICdybSAtcmYgIiRURU1QX0RJUiInIEVYSVQKCmlmICEgZ2l0IC1jIGNvcmUuaG9va3NQYXRoPS9kZXYvbnVsbCBjbG9uZSBcCiAgLS1xdWlldCBcCiAgLS1kZXB0aCAxIFwKICAtLWZpbHRlcj1ibG9iOm5vbmUgXAogIC0tc3BhcnNlIFwKICAiaHR0cHM6Ly9naXRodWIuY29tL2Nsb3VkZmxhcmUvc2tpbGxzLmdpdCIgXAogICIkVEVNUF9ESVIvcmVwbyI7IHRoZW4KICBlY2hvICJwZXJzaXN0LXNraWxsOiBjbG9uZSBmYWlsZWQiID4mMgogIGVjaG8gJ3sic3RhdHVzIjoiZXJyb3IiLCJyZWFzb24iOiJjbG9uZV9mYWlsZWQifScKICBleGl0IDEKZmkKaWYgISBnaXQgLUMgIiRURU1QX0RJUi9yZXBvIiAtYyBjb3JlLmhvb2tzUGF0aD0vZGV2L251bGwgc3BhcnNlLWNoZWNrb3V0IHNldCBza2lsbHMvdHVybnN0aWxlLXNwaW47IHRoZW4KICBlY2hvICJwZXJzaXN0LXNraWxsOiBzcGFyc2UgY2hlY2tvdXQgZmFpbGVkIiA+JjIKICBlY2hvICd7InN0YXR1cyI6ImVycm9yIiwicmVhc29uIjoic3BhcnNlX2NoZWNrb3V0X2ZhaWxlZCJ9JwogIGV4aXQgMQpmaQoKU09VUkNFX0RJUj0iJFRFTVBfRElSL3JlcG8vc2tpbGxzL3R1cm5zdGlsZS1zcGluIgppZiBbWyAhIC1mICIkU09VUkNFX0RJUi9TS0lMTC5tZCIgXV07IHRoZW4KICBlY2hvICJwZXJzaXN0LXNraWxsOiBjYW5vbmljYWwgYnVuZGxlIGlzIG1pc3NpbmcgU0tJTEwubWQiID4mMgogIGVjaG8gJ3sic3RhdHVzIjoiZXJyb3IiLCJyZWFzb24iOiJza2lsbF9taXNzaW5nIn0nCiAgZXhpdCAxCmZpCgpweXRob24zIC1JIC0gIiRTT1VSQ0VfRElSIiAiJFRBUkdFVF9ESVIiIDw8J1BZJwppbXBvcnQgcGF0aGxpYgppbXBvcnQgc2h1dGlsCmltcG9ydCBzeXMKCnNvdXJjZSA9IHBhdGhsaWIuUGF0aChzeXMuYXJndlsxXSkKdGFyZ2V0ID0gcGF0aGxpYi5QYXRoKHN5cy5hcmd2WzJdKQppZiB0YXJnZXQuZXhpc3RzKCk6CiAgICB0YXJnZXQucm1kaXIoKQp0YXJnZXQucGFyZW50Lm1rZGlyKHBhcmVudHM9VHJ1ZSwgZXhpc3Rfb2s9VHJ1ZSkKc2h1dGlsLmNvcHl0cmVlKHNvdXJjZSwgdGFyZ2V0LCBkaXJzX2V4aXN0X29rPUZhbHNlKQpmb3Igc2NyaXB0IGluICh0YXJnZXQgLyAic2NyaXB0cyIpLmdsb2IoIiouc2giKToKICAgIHNjcmlwdC5jaG1vZCgwbzc1NSkKUFkKCnB5dGhvbjMgLUkgLSAiJFBBVEhfQVJHIiAiJFRBUkdFVF9ESVIiIDw8J1BZJwppbXBvcnQganNvbgppbXBvcnQgcGF0aGxpYgppbXBvcnQgc3lzCgpwYXRoX2FyZywgYnVuZGxlX3Jvb3QgPSBzeXMuYXJndlsxXSwgcGF0aGxpYi5QYXRoKHN5cy5hcmd2WzJdKQpzY3JpcHRzID0gc29ydGVkKHBhdGgubmFtZSBmb3IgcGF0aCBpbiAoYnVuZGxlX3Jvb3QgLyAic2NyaXB0cyIpLmdsb2IoIiouc2giKSkKcHJpbnQoanNvbi5kdW1wcyh7CiAgICAic3RhdHVzIjogIm9rIiwKICAgICJwYXRoIjogcGF0aF9hcmcsCiAgICAiYnVuZGxlX3Jvb3QiOiBzdHIoYnVuZGxlX3Jvb3QpLAogICAgInNjcmlwdHMiOiBzY3JpcHRzLAp9KSkKUFkK
+#!/usr/bin/env bash
+# Persists the canonical Spin skill bundle into the current project.
+
+set +x
+set -uo pipefail
+
+unset CLOUDFLARE_API_TOKEN CF_API_TOKEN CLOUDFLARE_API_KEY CF_API_KEY
+unset CLOUDFLARE_EMAIL CF_API_EMAIL WIDGET_SECRET TURNSTILE_SECRET
+unset WRANGLER_BIN WRANGLER_VERSION
+unset GITHUB_TOKEN GH_TOKEN GITLAB_TOKEN NPM_TOKEN
+
+need_arg() {
+  if [[ -z "${2-}" || "$2" == --* ]]; then
+    echo "persist-skill: missing value for $1" >&2
+    exit 2
+  fi
+}
+
+PATH_ARG=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --path) need_arg "$1" "${2-}"; PATH_ARG="$2"; shift 2 ;;
+    *) echo "persist-skill: unknown arg $1" >&2; exit 2 ;;
+  esac
+done
+
+[[ -n "$PATH_ARG" ]] || { echo "persist-skill: --path required" >&2; exit 2; }
+if [[ "$(basename "$PATH_ARG")" != "SKILL.md" ]]; then
+  echo "persist-skill: --path must end in SKILL.md for a directory-based skill bundle" >&2
+  echo '{"status":"error","reason":"file_target_not_supported"}'
+  exit 2
+fi
+
+for command_name in git python3; do
+  command -v "$command_name" >/dev/null 2>&1 || {
+    echo "persist-skill: $command_name is required" >&2
+    echo "{\"status\":\"error\",\"reason\":\"${command_name}_not_available\"}"
+    exit 1
+  }
+done
+
+PROJECT_ROOT="$(pwd -P)"
+TARGET_DIR="$(python3 -I -c 'import os,sys; print(os.path.realpath(os.path.abspath(sys.argv[1])))' "$(dirname "$PATH_ARG")")"
+if [[ "$TARGET_DIR" != "$PROJECT_ROOT" && "$TARGET_DIR" != "$PROJECT_ROOT/"* ]]; then
+  echo "persist-skill: target must be inside the current project" >&2
+  echo '{"status":"error","reason":"target_outside_project"}'
+  exit 1
+fi
+if [[ -e "$TARGET_DIR" ]] && ! python3 -I -c 'import os,sys; raise SystemExit(0 if not os.listdir(sys.argv[1]) else 1)' "$TARGET_DIR"; then
+  echo "persist-skill: target directory is not empty" >&2
+  echo '{"status":"error","reason":"target_not_empty"}'
+  exit 1
+fi
+
+if ! TEMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/turnstile-spin-persist.XXXXXX")"; then
+  echo "persist-skill: could not create a temporary directory" >&2
+  echo '{"status":"error","reason":"temporary_directory_failed"}'
+  exit 1
+fi
+trap 'rm -rf "$TEMP_DIR"' EXIT
+
+if ! git -c core.hooksPath=/dev/null clone \
+  --quiet \
+  --depth 1 \
+  --filter=blob:none \
+  --sparse \
+  "https://github.com/cloudflare/skills.git" \
+  "$TEMP_DIR/repo"; then
+  echo "persist-skill: clone failed" >&2
+  echo '{"status":"error","reason":"clone_failed"}'
+  exit 1
+fi
+if ! git -C "$TEMP_DIR/repo" -c core.hooksPath=/dev/null sparse-checkout set skills/turnstile-spin; then
+  echo "persist-skill: sparse checkout failed" >&2
+  echo '{"status":"error","reason":"sparse_checkout_failed"}'
+  exit 1
+fi
+
+SOURCE_DIR="$TEMP_DIR/repo/skills/turnstile-spin"
+if [[ ! -f "$SOURCE_DIR/SKILL.md" ]]; then
+  echo "persist-skill: canonical bundle is missing SKILL.md" >&2
+  echo '{"status":"error","reason":"skill_missing"}'
+  exit 1
+fi
+
+python3 -I - "$SOURCE_DIR" "$TARGET_DIR" <<'PY'
+import pathlib
+import shutil
+import sys
+
+source = pathlib.Path(sys.argv[1])
+target = pathlib.Path(sys.argv[2])
+if target.exists():
+    target.rmdir()
+target.parent.mkdir(parents=True, exist_ok=True)
+shutil.copytree(source, target, dirs_exist_ok=False)
+for script in (target / "scripts").glob("*.sh"):
+    script.chmod(0o755)
+PY
+
+python3 -I - "$PATH_ARG" "$TARGET_DIR" <<'PY'
+import json
+import pathlib
+import sys
+
+path_arg, bundle_root = sys.argv[1], pathlib.Path(sys.argv[2])
+scripts = sorted(path.name for path in (bundle_root / "scripts").glob("*.sh"))
+print(json.dumps({
+    "status": "ok",
+    "path": path_arg,
+    "bundle_root": str(bundle_root),
+    "scripts": scripts,
+}))
+PY

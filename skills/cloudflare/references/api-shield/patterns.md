@@ -1,1 +1,180 @@
-IyBQYXR0ZXJucyAmIFVzZSBDYXNlcwoKIyMgUHJvdGVjdCBBUEkgd2l0aCBTY2hlbWEgKyBKV1QKCmBgYGJhc2gKIyAxLiBVcGxvYWQgT3BlbkFQSSBzY2hlbWEKUE9TVCAvem9uZXMve3pvbmVfaWR9L2FwaV9nYXRld2F5L3VzZXJfc2NoZW1hcwoKIyAyLiBDb25maWd1cmUgSldUIHZhbGlkYXRpb24KUE9TVCAvem9uZXMve3pvbmVfaWR9L2FwaV9nYXRld2F5L3Rva2VuX3ZhbGlkYXRpb24KewogICJuYW1lIjogIkF1dGgwIiwKICAibG9jYXRpb24iOiB7ImhlYWRlciI6ICJBdXRob3JpemF0aW9uIn0sCiAgImp3a3MiOiAiey4uLn0iCn0KCiMgMy4gQ3JlYXRlIEpXVCBydWxlClBPU1QgL3pvbmVzL3t6b25lX2lkfS9hcGlfZ2F0ZXdheS9qd3RfdmFsaWRhdGlvbl9ydWxlcwoKIyA0LiBTZXQgc2NoZW1hIHZhbGlkYXRpb24gYWN0aW9uClBVVCAvem9uZXMve3pvbmVfaWR9L2FwaV9nYXRld2F5L3NldHRpbmdzL3NjaGVtYV92YWxpZGF0aW9uCnsidmFsaWRhdGlvbl9kZWZhdWx0X21pdGlnYXRpb25fYWN0aW9uIjogImJsb2NrIn0KYGBgCgojIyBQcm9ncmVzc2l2ZSBSb2xsb3V0CgpgYGAKMS4gTG9nIG1vZGU6IE9ic2VydmUgZmFsc2UgcG9zaXRpdmVzCiAgIC0gU2NoZW1hOiBBY3Rpb24gPSBMb2cKICAgLSBKV1Q6IEFjdGlvbiA9IExvZwoKMi4gQmxvY2sgc3Vic2V0OiBQcm90ZWN0IGNyaXRpY2FsIGVuZHBvaW50cwogICAtIENoYW5nZSBzcGVjaWZpYyBlbmRwb2ludCBhY3Rpb25zIHRvIEJsb2NrCiAgIC0gTW9uaXRvciBmaXJld2FsbCBldmVudHMKCjMuIEZ1bGwgZW5mb3JjZW1lbnQ6IEJsb2NrIGFsbCB2aW9sYXRpb25zCiAgIC0gQ2hhbmdlIGRlZmF1bHQgYWN0aW9uIHRvIEJsb2NrCiAgIC0gSGFuZGxlIGZhbGx0aHJvdWdoIHdpdGggY3VzdG9tIHJ1bGUKYGBgCgojIyBCT0xBIERldGVjdGlvbgoKIyMjIEVudW1lcmF0aW9uIERldGVjdGlvbgpEZXRlY3RzIHNlcXVlbnRpYWwgcmVzb3VyY2UgYWNjZXNzIChlLmcuLCBgL3VzZXJzLzFgLCBgL3VzZXJzLzJgLCBgL3VzZXJzLzNgKS4KCmBgYGphdmFzY3JpcHQKLy8gQmxvY2sgQk9MQSBlbnVtZXJhdGlvbiBhdHRlbXB0cwooY2YuYXBpX2dhdGV3YXkuY2Ytcmlzay1ib2xhLWVudW1lcmF0aW9uIGFuZCBodHRwLmhvc3QgZXEgImFwaS5leGFtcGxlLmNvbSIpCi8vIEFjdGlvbjogQmxvY2sgb3IgQ2hhbGxlbmdlCmBgYAoKIyMjIFBhcmFtZXRlciBQb2xsdXRpb24KRGV0ZWN0cyBkdXBsaWNhdGUvZXhjZXNzaXZlIHBhcmFtZXRlcnMgaW4gcmVxdWVzdHMuCgpgYGBqYXZhc2NyaXB0Ci8vIEJsb2NrIHBhcmFtZXRlciBwb2xsdXRpb24KKGNmLmFwaV9nYXRld2F5LmNmLXJpc2stYm9sYS1wb2xsdXRpb24gYW5kIGh0dHAuaG9zdCBlcSAiYXBpLmV4YW1wbGUuY29tIikKLy8gQWN0aW9uOiBCbG9jawpgYGAKCiMjIyBDb21iaW5lZCBCT0xBIFByb3RlY3Rpb24KYGBgamF2YXNjcmlwdAovLyBDb21wcmVoZW5zaXZlIEJPTEEgcnVsZQooY2YuYXBpX2dhdGV3YXkuY2Ytcmlzay1ib2xhLWVudW1lcmF0aW9uIG9yIGNmLmFwaV9nYXRld2F5LmNmLXJpc2stYm9sYS1wb2xsdXRpb24pCmFuZCBodHRwLmhvc3QgZXEgImFwaS5leGFtcGxlLmNvbSIKLy8gQWN0aW9uOiBCbG9jawpgYGAKCiMjIEF1dGhlbnRpY2F0aW9uIFBvc3R1cmUKCiMjIyBEZXRlY3QgTWlzc2luZyBBdXRoCmBgYGphdmFzY3JpcHQKLy8gTG9nIGVuZHBvaW50cyBsYWNraW5nIGF1dGhlbnRpY2F0aW9uCihjZi5hcGlfZ2F0ZXdheS5jZi1yaXNrLW1pc3NpbmctYXV0aCBhbmQgaHR0cC5ob3N0IGVxICJhcGkuZXhhbXBsZS5jb20iKQovLyBBY3Rpb246IExvZyAoZm9yIGF1ZGl0KQpgYGAKCiMjIyBEZXRlY3QgTWl4ZWQgQXV0aApgYGBqYXZhc2NyaXB0Ci8vIEFsZXJ0IG9uIGluY29uc2lzdGVudCBhdXRoIHBhdHRlcm5zCihjZi5hcGlfZ2F0ZXdheS5jZi1yaXNrLW1peGVkLWF1dGggYW5kIGh0dHAuaG9zdCBlcSAiYXBpLmV4YW1wbGUuY29tIikKLy8gQWN0aW9uOiBMb2cgKHJldmlldyByZXF1aXJlZCkKYGBgCgojIyBGYWxsdGhyb3VnaCBEZXRlY3Rpb24gKFNoYWRvdyBBUElzKQoKYGBgamF2YXNjcmlwdAovLyBXQUYgQ3VzdG9tIFJ1bGUKKGNmLmFwaV9nYXRld2F5LmZhbGx0aHJvdWdoX3RyaWdnZXJlZCBhbmQgaHR0cC5ob3N0IGVxICJhcGkuZXhhbXBsZS5jb20iKQovLyBBY3Rpb246IExvZyAoZGlzY292ZXIgdW5rbm93bikgb3IgQmxvY2sgKHN0cmljdCkKYGBgCgojIyBSYXRlIExpbWl0aW5nIGJ5IFVzZXIKCmBgYGphdmFzY3JpcHQKLy8gUmF0ZSBMaW1pdGluZyBSdWxlIChtb2Rlcm4gc3ludGF4KQooaHR0cC5ob3N0IGVxICJhcGkuZXhhbXBsZS5jb20iIGFuZAogaXNfand0X3ZhbGlkKGh0dHAucmVxdWVzdC5qd3QucGF5bG9hZFsie2NvbmZpZ19pZH0iXVswXSkpCgovLyBSYXRlOiAxMDAgcmVxLzYwcwovLyBDb3VudGluZyBleHByZXNzaW9uOiBsb29rdXBfanNvbl9zdHJpbmcoaHR0cC5yZXF1ZXN0Lmp3dC5wYXlsb2FkWyJ7Y29uZmlnX2lkfSJdWzBdLCAic3ViIikKYGBgCgojIyBWb2x1bWV0cmljIEFidXNlIFJlc3BvbnNlCgpgYGBqYXZhc2NyaXB0Ci8vIERldGVjdCBhYm5vcm1hbCB0cmFmZmljIHNwaWtlcwooY2YuYXBpX2dhdGV3YXkudm9sdW1ldHJpY19hYnVzZV9kZXRlY3RlZCBhbmQgaHR0cC5ob3N0IGVxICJhcGkuZXhhbXBsZS5jb20iKQovLyBBY3Rpb246IENoYWxsZW5nZSBvciBSYXRlIExpbWl0CgovLyBDb21iaW5lZCB3aXRoIHJhdGUgbGltaXRpbmcKKGNmLmFwaV9nYXRld2F5LnZvbHVtZXRyaWNfYWJ1c2VfZGV0ZWN0ZWQgb3IKIGNmLnRocmVhdF9zY29yZSBndCA1MCkgYW5kIGh0dHAuaG9zdCBlcSAiYXBpLmV4YW1wbGUuY29tIgovLyBBY3Rpb246IEpTIENoYWxsZW5nZQpgYGAKCiMjIEdyYXBoUUwgUHJvdGVjdGlvbgoKYGBgamF2YXNjcmlwdAovLyBCbG9jayBvdmVyc2l6ZWQgcXVlcmllcwooaHR0cC5yZXF1ZXN0LnVyaS5wYXRoIGVxICIvZ3JhcGhxbCIgYW5kCiBjZi5hcGlfZ2F0ZXdheS5ncmFwaHFsX3F1ZXJ5X3NpemUgZ3QgMTAwMDAwKQovLyBBY3Rpb246IEJsb2NrCgovLyBCbG9jayBkZWVwIG5lc3RlZCBxdWVyaWVzCihodHRwLnJlcXVlc3QudXJpLnBhdGggZXEgIi9ncmFwaHFsIiBhbmQKIGNmLmFwaV9nYXRld2F5LmdyYXBocWxfcXVlcnlfZGVwdGggZ3QgMTApCi8vIEFjdGlvbjogQmxvY2sKYGBgCgojIyBBcmNoaXRlY3R1cmUgUGF0dGVybnMKCioqUHVibGljIEFQSToqKiBEaXNjb3ZlcnkgKyBTY2hlbWEgVmFsaWRhdGlvbiAyLjAgKyBKV1QgKyBSYXRlIExpbWl0aW5nICsgQm90IE1hbmFnZW1lbnQgIAoqKlBhcnRuZXIgQVBJOioqIG1UTFMgKyBTY2hlbWEgVmFsaWRhdGlvbiArIFNlcXVlbmNlIE1pdGlnYXRpb24gIAoqKkludGVybmFsIEFQSToqKiBEaXNjb3ZlcnkgKyBTY2hlbWEgTGVhcm5pbmcgKyBBdXRoIFBvc3R1cmUKCiMjIE9XQVNQIEFQSSBTZWN1cml0eSBUb3AgMTAgTWFwcGluZyAoMjAyNikKCnwgT1dBU1AgSXNzdWUgfCBBUEkgU2hpZWxkIFNvbHV0aW9ucyB8CnwtLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLXwKfCBBUEkxOjIwMjMgQnJva2VuIE9iamVjdCBMZXZlbCBBdXRob3JpemF0aW9uIHwgKipCT0xBIERldGVjdGlvbioqIChlbnVtZXJhdGlvbiArIHBvbGx1dGlvbiksIFNlcXVlbmNlIG1pdGlnYXRpb24sIFNjaGVtYSwgSldULCBSYXRlIExpbWl0aW5nIHwKfCBBUEkyOjIwMjMgQnJva2VuIEF1dGhlbnRpY2F0aW9uIHwgKipBdXRoIFBvc3R1cmUqKiwgbVRMUywgSldUIHZhbGlkYXRpb24sIEJvdCBNYW5hZ2VtZW50IHwKfCBBUEkzOjIwMjMgQnJva2VuIE9iamVjdCBQcm9wZXJ0eSBBdXRoIHwgU2NoZW1hIHZhbGlkYXRpb24sIEpXVCB2YWxpZGF0aW9uIHwKfCBBUEk0OjIwMjMgVW5yZXN0cmljdGVkIFJlc291cmNlIEFjY2VzcyB8IFJhdGUgTGltaXRpbmcsICoqVm9sdW1ldHJpYyBBYnVzZSBEZXRlY3Rpb24qKiwgKipHcmFwaFFMIFByb3RlY3Rpb24qKiwgQm90IE1hbmFnZW1lbnQgfAp8IEFQSTU6MjAyMyBCcm9rZW4gRnVuY3Rpb24gTGV2ZWwgQXV0aCB8IFNjaGVtYSB2YWxpZGF0aW9uLCBKV1QgdmFsaWRhdGlvbiwgQXV0aCBQb3N0dXJlIHwKfCBBUEk2OjIwMjMgVW5yZXN0cmljdGVkIEJ1c2luZXNzIEZsb3dzIHwgU2VxdWVuY2UgbWl0aWdhdGlvbiwgQm90IE1hbmFnZW1lbnQgfAp8IEFQSTc6MjAyMyBTU1JGIHwgU2NoZW1hIHZhbGlkYXRpb24sIFdBRiBtYW5hZ2VkIHJ1bGVzIHwKfCBBUEk4OjIwMjMgU2VjdXJpdHkgTWlzY29uZmlndXJhdGlvbiB8ICoqU2NoZW1hIFZhbGlkYXRpb24gMi4wKiosIEF1dGggUG9zdHVyZSwgV0FGIHJ1bGVzIHwKfCBBUEk5OjIwMjMgSW1wcm9wZXIgSW52ZW50b3J5IE1hbmFnZW1lbnQgfCAqKkFQSSBEaXNjb3ZlcnkqKiwgU2NoZW1hIGxlYXJuaW5nLCBBdXRoIFBvc3R1cmUgfAp8IEFQSTEwOjIwMjMgVW5zYWZlIEFQSSBDb25zdW1wdGlvbiB8IEpXVCB2YWxpZGF0aW9uLCBTY2hlbWEgdmFsaWRhdGlvbiwgV0FGIG1hbmFnZWQgfAoKIyMgTW9uaXRvcmluZwoKKipTZWN1cml0eSBFdmVudHM6KiogYFNlY3VyaXR5ID4gRXZlbnRzYCDihpIgRmlsdGVyOiBBY3Rpb24gPSBibG9jaywgU2VydmljZSA9IEFQSSBTaGllbGQgIAoqKkZpcmV3YWxsIEFuYWx5dGljczoqKiBgQW5hbHl0aWNzID4gU2VjdXJpdHlgIOKGkiBGaWx0ZXIgYnkgYGNmLmFwaV9nYXRld2F5LipgIGZpZWxkcyAgCioqTG9ncHVzaCBmaWVsZHM6KiogQVBJR2F0ZXdheUF1dGhJRFByZXNlbnQsIEFQSUdhdGV3YXlSZXF1ZXN0VmlvbGF0ZXNTY2hlbWEsIEFQSUdhdGV3YXlGYWxsdGhyb3VnaERldGVjdGVkLCBKV1RWYWxpZGF0aW9uUmVzdWx0CgojIyBBdmFpbGFiaWxpdHkgKDIwMjYpCgp8IEZlYXR1cmUgfCBBdmFpbGFiaWxpdHkgfCBOb3RlcyB8CnwtLS0tLS0tLS18LS0tLS0tLS0tLS0tLXwtLS0tLS0tfAp8IG1UTFMgKENGLW1hbmFnZWQgQ0EpIHwgQWxsIHBsYW5zIHwgU2VsZi1zZXJ2aWNlIHwKfCBFbmRwb2ludCBNYW5hZ2VtZW50IHwgQWxsIHBsYW5zIHwgTGltaXRlZCBvcGVyYXRpb25zIHwKfCBTY2hlbWEgVmFsaWRhdGlvbiAyLjAgfCBBbGwgcGxhbnMgfCBMaW1pdGVkIG9wZXJhdGlvbnMgfAp8IEFQSSBEaXNjb3ZlcnkgfCBFbnRlcnByaXNlIHwgMTBLKyBvcHMgfAp8IEpXVCBWYWxpZGF0aW9uIHwgRW50ZXJwcmlzZSBhZGQtb24gfCBGdWxsIHZhbGlkYXRpb24gfAp8IEJPTEEgRGV0ZWN0aW9uIHwgRW50ZXJwcmlzZSBhZGQtb24gfCBSZXF1aXJlcyBzZXNzaW9uIElEcyB8CnwgQXV0aCBQb3N0dXJlIHwgRW50ZXJwcmlzZSBhZGQtb24gfCBTZWN1cml0eSBhdWRpdCB8CnwgVm9sdW1ldHJpYyBBYnVzZSBEZXRlY3Rpb24gfCBFbnRlcnByaXNlIGFkZC1vbiB8IFRyYWZmaWMgYW5hbHlzaXMgfAp8IEdyYXBoUUwgUHJvdGVjdGlvbiB8IEVudGVycHJpc2UgYWRkLW9uIHwgUXVlcnkgbGltaXRzIHwKfCBTZXF1ZW5jZSBNaXRpZ2F0aW9uIHwgRW50ZXJwcmlzZSAoYmV0YSkgfCBDb250YWN0IHRlYW0gfAp8IEZ1bGwgU3VpdGUgfCBFbnRlcnByaXNlIGFkZC1vbiB8IEFsbCBmZWF0dXJlcyB8CgoqKkVudGVycHJpc2UgbGltaXRzOioqIDEwSyBvcGVyYXRpb25zIChjb250YWN0IGZvciBoaWdoZXIpLiBQcmV2aWV3IGFjY2VzcyBhdmFpbGFibGUgZm9yIG5vbi1jb250cmFjdCBldmFsdWF0aW9uLgoKIyMgU2VlIEFsc28KCi0gW2NvbmZpZ3VyYXRpb24ubWRdKGNvbmZpZ3VyYXRpb24ubWQpIC0gU2V0dXAgYWxsIGZlYXR1cmVzIGJlZm9yZSBjcmVhdGluZyBydWxlcwotIFthcGkubWRdKGFwaS5tZCkgLSBGaXJld2FsbCBmaWVsZCByZWZlcmVuY2UgYW5kIEFQSSBlbmRwb2ludHMKLSBbZ290Y2hhcy5tZF0oZ290Y2hhcy5tZCkgLSBDb21tb24gaXNzdWVzIGFuZCBsaW1pdHMK
+# Patterns & Use Cases
+
+## Protect API with Schema + JWT
+
+```bash
+# 1. Upload OpenAPI schema
+POST /zones/{zone_id}/api_gateway/user_schemas
+
+# 2. Configure JWT validation
+POST /zones/{zone_id}/api_gateway/token_validation
+{
+  "name": "Auth0",
+  "location": {"header": "Authorization"},
+  "jwks": "{...}"
+}
+
+# 3. Create JWT rule
+POST /zones/{zone_id}/api_gateway/jwt_validation_rules
+
+# 4. Set schema validation action
+PUT /zones/{zone_id}/api_gateway/settings/schema_validation
+{"validation_default_mitigation_action": "block"}
+```
+
+## Progressive Rollout
+
+```
+1. Log mode: Observe false positives
+   - Schema: Action = Log
+   - JWT: Action = Log
+
+2. Block subset: Protect critical endpoints
+   - Change specific endpoint actions to Block
+   - Monitor firewall events
+
+3. Full enforcement: Block all violations
+   - Change default action to Block
+   - Handle fallthrough with custom rule
+```
+
+## BOLA Detection
+
+### Enumeration Detection
+Detects sequential resource access (e.g., `/users/1`, `/users/2`, `/users/3`).
+
+```javascript
+// Block BOLA enumeration attempts
+(cf.api_gateway.cf-risk-bola-enumeration and http.host eq "api.example.com")
+// Action: Block or Challenge
+```
+
+### Parameter Pollution
+Detects duplicate/excessive parameters in requests.
+
+```javascript
+// Block parameter pollution
+(cf.api_gateway.cf-risk-bola-pollution and http.host eq "api.example.com")
+// Action: Block
+```
+
+### Combined BOLA Protection
+```javascript
+// Comprehensive BOLA rule
+(cf.api_gateway.cf-risk-bola-enumeration or cf.api_gateway.cf-risk-bola-pollution)
+and http.host eq "api.example.com"
+// Action: Block
+```
+
+## Authentication Posture
+
+### Detect Missing Auth
+```javascript
+// Log endpoints lacking authentication
+(cf.api_gateway.cf-risk-missing-auth and http.host eq "api.example.com")
+// Action: Log (for audit)
+```
+
+### Detect Mixed Auth
+```javascript
+// Alert on inconsistent auth patterns
+(cf.api_gateway.cf-risk-mixed-auth and http.host eq "api.example.com")
+// Action: Log (review required)
+```
+
+## Fallthrough Detection (Shadow APIs)
+
+```javascript
+// WAF Custom Rule
+(cf.api_gateway.fallthrough_triggered and http.host eq "api.example.com")
+// Action: Log (discover unknown) or Block (strict)
+```
+
+## Rate Limiting by User
+
+```javascript
+// Rate Limiting Rule (modern syntax)
+(http.host eq "api.example.com" and
+ is_jwt_valid(http.request.jwt.payload["{config_id}"][0]))
+
+// Rate: 100 req/60s
+// Counting expression: lookup_json_string(http.request.jwt.payload["{config_id}"][0], "sub")
+```
+
+## Volumetric Abuse Response
+
+```javascript
+// Detect abnormal traffic spikes
+(cf.api_gateway.volumetric_abuse_detected and http.host eq "api.example.com")
+// Action: Challenge or Rate Limit
+
+// Combined with rate limiting
+(cf.api_gateway.volumetric_abuse_detected or
+ cf.threat_score gt 50) and http.host eq "api.example.com"
+// Action: JS Challenge
+```
+
+## GraphQL Protection
+
+```javascript
+// Block oversized queries
+(http.request.uri.path eq "/graphql" and
+ cf.api_gateway.graphql_query_size gt 100000)
+// Action: Block
+
+// Block deep nested queries
+(http.request.uri.path eq "/graphql" and
+ cf.api_gateway.graphql_query_depth gt 10)
+// Action: Block
+```
+
+## Architecture Patterns
+
+**Public API:** Discovery + Schema Validation 2.0 + JWT + Rate Limiting + Bot Management  
+**Partner API:** mTLS + Schema Validation + Sequence Mitigation  
+**Internal API:** Discovery + Schema Learning + Auth Posture
+
+## OWASP API Security Top 10 Mapping (2026)
+
+| OWASP Issue | API Shield Solutions |
+|-------------|---------------------|
+| API1:2023 Broken Object Level Authorization | **BOLA Detection** (enumeration + pollution), Sequence mitigation, Schema, JWT, Rate Limiting |
+| API2:2023 Broken Authentication | **Auth Posture**, mTLS, JWT validation, Bot Management |
+| API3:2023 Broken Object Property Auth | Schema validation, JWT validation |
+| API4:2023 Unrestricted Resource Access | Rate Limiting, **Volumetric Abuse Detection**, **GraphQL Protection**, Bot Management |
+| API5:2023 Broken Function Level Auth | Schema validation, JWT validation, Auth Posture |
+| API6:2023 Unrestricted Business Flows | Sequence mitigation, Bot Management |
+| API7:2023 SSRF | Schema validation, WAF managed rules |
+| API8:2023 Security Misconfiguration | **Schema Validation 2.0**, Auth Posture, WAF rules |
+| API9:2023 Improper Inventory Management | **API Discovery**, Schema learning, Auth Posture |
+| API10:2023 Unsafe API Consumption | JWT validation, Schema validation, WAF managed |
+
+## Monitoring
+
+**Security Events:** `Security > Events` → Filter: Action = block, Service = API Shield  
+**Firewall Analytics:** `Analytics > Security` → Filter by `cf.api_gateway.*` fields  
+**Logpush fields:** APIGatewayAuthIDPresent, APIGatewayRequestViolatesSchema, APIGatewayFallthroughDetected, JWTValidationResult
+
+## Availability (2026)
+
+| Feature | Availability | Notes |
+|---------|-------------|-------|
+| mTLS (CF-managed CA) | All plans | Self-service |
+| Endpoint Management | All plans | Limited operations |
+| Schema Validation 2.0 | All plans | Limited operations |
+| API Discovery | Enterprise | 10K+ ops |
+| JWT Validation | Enterprise add-on | Full validation |
+| BOLA Detection | Enterprise add-on | Requires session IDs |
+| Auth Posture | Enterprise add-on | Security audit |
+| Volumetric Abuse Detection | Enterprise add-on | Traffic analysis |
+| GraphQL Protection | Enterprise add-on | Query limits |
+| Sequence Mitigation | Enterprise (beta) | Contact team |
+| Full Suite | Enterprise add-on | All features |
+
+**Enterprise limits:** 10K operations (contact for higher). Preview access available for non-contract evaluation.
+
+## See Also
+
+- [configuration.md](configuration.md) - Setup all features before creating rules
+- [api.md](api.md) - Firewall field reference and API endpoints
+- [gotchas.md](gotchas.md) - Common issues and limits

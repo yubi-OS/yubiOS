@@ -1,1 +1,122 @@
-IyBDb25maWd1cmF0aW9uCgojIyBUeXBlU2NyaXB0IFNldHVwCgoqKkdlbmVyYXRlIHR5cGVzIGZyb20gd3JhbmdsZXIuanNvbmMqKiAocmVwbGFjZXMgZGVwcmVjYXRlZCBgQGNsb3VkZmxhcmUvd29ya2Vycy10eXBlc2ApOgoKYGBgYmFzaApucHggd3JhbmdsZXIgdHlwZXMKYGBgCgpDcmVhdGVzIGB3b3JrZXItY29uZmlndXJhdGlvbi5kLnRzYCB3aXRoIHR5cGVkIGBFbnZgIGludGVyZmFjZSBiYXNlZCBvbiB5b3VyIGJpbmRpbmdzLgoKYGBgdHlwZXNjcmlwdAovLyBmdW5jdGlvbnMvYXBpLnRzCmV4cG9ydCBjb25zdCBvblJlcXVlc3Q6IFBhZ2VzRnVuY3Rpb248RW52PiA9IGFzeW5jIChjdHgpID0+IHsKICAvLyBjdHguZW52LktWLCBjdHguZW52LkRCLCBldGMuIGFyZSBmdWxseSB0eXBlZAogIHJldHVybiBSZXNwb25zZS5qc29uKHsgb2s6IHRydWUgfSk7Cn07CmBgYAoKKipNYW51YWwgdHlwZXMqKiAoaWYgbm90IHVzaW5nIHdyYW5nbGVyIHR5cGVzKToKCmBgYHR5cGVzY3JpcHQKaW50ZXJmYWNlIEVudiB7CiAgS1Y6IEtWTmFtZXNwYWNlOwogIERCOiBEMURhdGFiYXNlOwogIEFQSV9LRVk6IHN0cmluZzsKfQpleHBvcnQgY29uc3Qgb25SZXF1ZXN0OiBQYWdlc0Z1bmN0aW9uPEVudj4gPSBhc3luYyAoY3R4KSA9PiB7IC8qIC4uLiAqLyB9OwpgYGAKCiMjIHdyYW5nbGVyLmpzb25jCgpgYGBqc29uYwp7CiAgIiRzY2hlbWEiOiAiLi9ub2RlX21vZHVsZXMvd3JhbmdsZXIvY29uZmlnLXNjaGVtYS5qc29uIiwKICAibmFtZSI6ICJteS1wYWdlcy1hcHAiLAogICJwYWdlc19idWlsZF9vdXRwdXRfZGlyIjogIi4vZGlzdCIsCiAgImNvbXBhdGliaWxpdHlfZGF0ZSI6ICIyMDI1LTAxLTAxIiwKICAiY29tcGF0aWJpbGl0eV9mbGFncyI6IFsibm9kZWpzX2NvbXBhdCJdLAogIAogICJ2YXJzIjogeyAiQVBJX1VSTCI6ICJodHRwczovL2FwaS5leGFtcGxlLmNvbSIgfSwKICAia3ZfbmFtZXNwYWNlcyI6IFt7ICJiaW5kaW5nIjogIktWIiwgImlkIjogImFiYzEyMyIgfV0sCiAgImQxX2RhdGFiYXNlcyI6IFt7ICJiaW5kaW5nIjogIkRCIiwgImRhdGFiYXNlX25hbWUiOiAicHJvZC1kYiIsICJkYXRhYmFzZV9pZCI6ICJ4eXo3ODkiIH1dLAogICJyMl9idWNrZXRzIjogW3sgImJpbmRpbmciOiAiQlVDS0VUIiwgImJ1Y2tldF9uYW1lIjogIm15LWJ1Y2tldCIgfV0sCiAgImR1cmFibGVfb2JqZWN0cyI6IHsgImJpbmRpbmdzIjogW3sgIm5hbWUiOiAiQ09VTlRFUiIsICJjbGFzc19uYW1lIjogIkNvdW50ZXIiLCAic2NyaXB0X25hbWUiOiAiY291bnRlci13b3JrZXIiIH1dIH0sCiAgInNlcnZpY2VzIjogW3sgImJpbmRpbmciOiAiQVVUSCIsICJzZXJ2aWNlIjogImF1dGgtd29ya2VyIiB9XSwKICAiYWkiOiB7ICJiaW5kaW5nIjogIkFJIiB9LAogICJ2ZWN0b3JpemUiOiBbeyAiYmluZGluZyI6ICJWRUNUT1JJWkUiLCAiaW5kZXhfbmFtZSI6ICJteS1pbmRleCIgfV0sCiAgImFuYWx5dGljc19lbmdpbmVfZGF0YXNldHMiOiBbeyAiYmluZGluZyI6ICJBTkFMWVRJQ1MiIH1dCn0KYGBgCgojIyBFbnZpcm9ubWVudCBPdmVycmlkZXMKClRvcC1sZXZlbCDihpIgbG9jYWwgZGV2LCBgZW52LnByZXZpZXdgIOKGkiBwcmV2aWV3LCBgZW52LnByb2R1Y3Rpb25gIOKGkiBwcm9kdWN0aW9uCgpgYGBqc29uYwp7CiAgInZhcnMiOiB7ICJBUElfVVJMIjogImh0dHA6Ly9sb2NhbGhvc3Q6ODc4NyIgfSwKICAiZW52IjogewogICAgInByb2R1Y3Rpb24iOiB7ICJ2YXJzIjogeyAiQVBJX1VSTCI6ICJodHRwczovL2FwaS5leGFtcGxlLmNvbSIgfSB9CiAgfQp9CmBgYAoKKipOb3RlOioqIElmIG92ZXJyaWRpbmcgYHZhcnNgLCBga3ZfbmFtZXNwYWNlc2AsIGBkMV9kYXRhYmFzZXNgLCBldGMuLCBBTEwgbXVzdCBiZSByZWRlZmluZWQgKG5vbi1pbmhlcml0YWJsZSkKCiMjIExvY2FsIFNlY3JldHMgKC5kZXYudmFycykKCioqTG9jYWwgZGV2IG9ubHkqKiAtIE5PVCBkZXBsb3llZDoKCmBgYGJhc2gKIyAuZGV2LnZhcnMgKGFkZCB0byAuZ2l0aWdub3JlKQpTRUNSRVRfS0VZPSJteS1zZWNyZXQtdmFsdWUiCmBgYAoKQWNjZXNzZWQgdmlhIGBjdHguZW52LlNFQ1JFVF9LRVlgLiBTZXQgcHJvZHVjdGlvbiBzZWNyZXRzOgpgYGBiYXNoCmVjaG8gInZhbHVlIiB8IG5weCB3cmFuZ2xlciBwYWdlcyBzZWNyZXQgcHV0IFNFQ1JFVF9LRVkgLS1wcm9qZWN0LW5hbWU9bXktYXBwCmBgYAoKIyMgU3RhdGljIENvbmZpZyBGaWxlcwoKKipfcm91dGVzLmpzb24qKiAtIEN1c3RvbSByb3V0aW5nOgpgYGBqc29uCnsgInZlcnNpb24iOiAxLCAiaW5jbHVkZSI6IFsiL2FwaS8qIl0sICJleGNsdWRlIjogWyIvc3RhdGljLyoiXSB9CmBgYAoKKipfaGVhZGVycyoqIC0gU3RhdGljIGhlYWRlcnM6CmBgYAovc3RhdGljLyoKICBDYWNoZS1Db250cm9sOiBwdWJsaWMsIG1heC1hZ2U9MzE1MzYwMDAKYGBgCgoqKl9yZWRpcmVjdHMqKiAtIFJlZGlyZWN0czoKYGBgCi9vbGQgIC9uZXcgIDMwMQpgYGAKCiMjIExvY2FsIERldiAmIERlcGxveW1lbnQKCmBgYGJhc2gKIyBEZXYgc2VydmVyCm5weCB3cmFuZ2xlciBwYWdlcyBkZXYgLi9kaXN0CgojIFdpdGggYmluZGluZ3MKbnB4IHdyYW5nbGVyIHBhZ2VzIGRldiAuL2Rpc3QgLS1rdj1LViAtLWQxPURCPWRiLWlkIC0tcjI9QlVDS0VUCgojIER1cmFibGUgT2JqZWN0cyAoMiB0ZXJtaW5hbHMpCmNkIGRvLXdvcmtlciAmJiBucHggd3JhbmdsZXIgZGV2CmNkIHBhZ2VzLXByb2plY3QgJiYgbnB4IHdyYW5nbGVyIHBhZ2VzIGRldiAuL2Rpc3QgLS1kbyBDT1VOVEVSPUNvdW50ZXJAZG8td29ya2VyCgojIERlcGxveQpucHggd3JhbmdsZXIgcGFnZXMgZGVwbG95IC4vZGlzdApucHggd3JhbmdsZXIgcGFnZXMgZGVwbG95IC4vZGlzdCAtLWJyYW5jaCBwcmV2aWV3CgojIERvd25sb2FkIGNvbmZpZwpucHggd3JhbmdsZXIgcGFnZXMgZG93bmxvYWQgY29uZmlnIG15LXByb2plY3QKYGBgCgoqKlNlZSBhbHNvOioqIFthcGkubWRdKC4vYXBpLm1kKSBmb3IgYmluZGluZyB1c2FnZSBleGFtcGxlcwo=
+# Configuration
+
+## TypeScript Setup
+
+**Generate types from wrangler.jsonc** (replaces deprecated `@cloudflare/workers-types`):
+
+```bash
+npx wrangler types
+```
+
+Creates `worker-configuration.d.ts` with typed `Env` interface based on your bindings.
+
+```typescript
+// functions/api.ts
+export const onRequest: PagesFunction<Env> = async (ctx) => {
+  // ctx.env.KV, ctx.env.DB, etc. are fully typed
+  return Response.json({ ok: true });
+};
+```
+
+**Manual types** (if not using wrangler types):
+
+```typescript
+interface Env {
+  KV: KVNamespace;
+  DB: D1Database;
+  API_KEY: string;
+}
+export const onRequest: PagesFunction<Env> = async (ctx) => { /* ... */ };
+```
+
+## wrangler.jsonc
+
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-pages-app",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  
+  "vars": { "API_URL": "https://api.example.com" },
+  "kv_namespaces": [{ "binding": "KV", "id": "abc123" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "prod-db", "database_id": "xyz789" }],
+  "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "my-bucket" }],
+  "durable_objects": { "bindings": [{ "name": "COUNTER", "class_name": "Counter", "script_name": "counter-worker" }] },
+  "services": [{ "binding": "AUTH", "service": "auth-worker" }],
+  "ai": { "binding": "AI" },
+  "vectorize": [{ "binding": "VECTORIZE", "index_name": "my-index" }],
+  "analytics_engine_datasets": [{ "binding": "ANALYTICS" }]
+}
+```
+
+## Environment Overrides
+
+Top-level → local dev, `env.preview` → preview, `env.production` → production
+
+```jsonc
+{
+  "vars": { "API_URL": "http://localhost:8787" },
+  "env": {
+    "production": { "vars": { "API_URL": "https://api.example.com" } }
+  }
+}
+```
+
+**Note:** If overriding `vars`, `kv_namespaces`, `d1_databases`, etc., ALL must be redefined (non-inheritable)
+
+## Local Secrets (.dev.vars)
+
+**Local dev only** - NOT deployed:
+
+```bash
+# .dev.vars (add to .gitignore)
+SECRET_KEY="my-secret-value"
+```
+
+Accessed via `ctx.env.SECRET_KEY`. Set production secrets:
+```bash
+echo "value" | npx wrangler pages secret put SECRET_KEY --project-name=my-app
+```
+
+## Static Config Files
+
+**_routes.json** - Custom routing:
+```json
+{ "version": 1, "include": ["/api/*"], "exclude": ["/static/*"] }
+```
+
+**_headers** - Static headers:
+```
+/static/*
+  Cache-Control: public, max-age=31536000
+```
+
+**_redirects** - Redirects:
+```
+/old  /new  301
+```
+
+## Local Dev & Deployment
+
+```bash
+# Dev server
+npx wrangler pages dev ./dist
+
+# With bindings
+npx wrangler pages dev ./dist --kv=KV --d1=DB=db-id --r2=BUCKET
+
+# Durable Objects (2 terminals)
+cd do-worker && npx wrangler dev
+cd pages-project && npx wrangler pages dev ./dist --do COUNTER=Counter@do-worker
+
+# Deploy
+npx wrangler pages deploy ./dist
+npx wrangler pages deploy ./dist --branch preview
+
+# Download config
+npx wrangler pages download config my-project
+```
+
+**See also:** [api.md](./api.md) for binding usage examples

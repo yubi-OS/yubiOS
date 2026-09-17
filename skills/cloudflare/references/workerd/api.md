@@ -1,1 +1,185 @@
-IyBXb3JrZXJkIEFQSXMKCiMjIFdvcmtlciBDb2RlIChKUy9UUykKCiMjIyBFUyBNb2R1bGVzIChSZWNvbW1lbmRlZCkKYGBgamF2YXNjcmlwdApleHBvcnQgZGVmYXVsdCB7CiAgYXN5bmMgZmV0Y2gocmVxdWVzdCwgZW52LCBjdHgpIHsKICAgIGNvbnN0IHZhbHVlID0gYXdhaXQgZW52LktWLmdldCgia2V5Iik7ICAgICAgICAgICAvLyBCaW5kaW5ncyBpbiBlbnYKICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZW52LkFQSS5mZXRjaChyZXF1ZXN0KTsgICAvLyBTZXJ2aWNlIGJpbmRpbmcKICAgIGN0eC53YWl0VW50aWwobG9nUmVxdWVzdChyZXF1ZXN0KSk7ICAgICAgICAgICAgICAvLyBCYWNrZ3JvdW5kIHRhc2sKICAgIHJldHVybiBuZXcgUmVzcG9uc2UoIk9LIik7CiAgfSwKICBhc3luYyBhZG1pbkFwaShyZXF1ZXN0LCBlbnYsIGN0eCkgeyAvKiBOYW1lZCBlbnRyeXBvaW50ICovIH0sCiAgYXN5bmMgcXVldWUoYmF0Y2gsIGVudiwgY3R4KSB7IC8qIFF1ZXVlIGNvbnN1bWVyICovIH0sCiAgYXN5bmMgc2NoZWR1bGVkKGV2ZW50LCBlbnYsIGN0eCkgeyAvKiBDcm9uIGhhbmRsZXIgKi8gfQp9OwpgYGAKCiMjIyBUeXBlU2NyaXB0IFR5cGVzCgoqKkdlbmVyYXRlIGZyb20gd3JhbmdsZXIudG9tbCAoUmVjb21tZW5kZWQpOioqCmBgYGJhc2gKd3JhbmdsZXIgdHlwZXMgICMgT3V0cHV0OiB3b3JrZXItY29uZmlndXJhdGlvbi5kLnRzCmBgYAoKKipNYW51YWwgdHlwZXM6KioKYGBgdHlwZXNjcmlwdAppbnRlcmZhY2UgRW52IHsKICBBUEk6IEZldGNoZXI7CiAgQ0FDSEU6IEtWTmFtZXNwYWNlOwogIFNUT1JBR0U6IFIyQnVja2V0OwogIFJPT01TOiBEdXJhYmxlT2JqZWN0TmFtZXNwYWNlOwogIEFQSV9LRVk6IHN0cmluZzsKfQoKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3Q6IFJlcXVlc3QsIGVudjogRW52LCBjdHg6IEV4ZWN1dGlvbkNvbnRleHQpOiBQcm9taXNlPFJlc3BvbnNlPiB7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKGF3YWl0IGVudi5DQUNIRS5nZXQoImtleSIpKTsKICB9Cn07CmBgYAoKKipTZXR1cDoqKgpgYGBiYXNoCm5wbSBpbnN0YWxsIC1EIEBjbG91ZGZsYXJlL3dvcmtlcnMtdHlwZXMKYGBgCgpgYGBqc29uCi8vIHRzY29uZmlnLmpzb24KeyJjb21waWxlck9wdGlvbnMiOiB7InR5cGVzIjogWyJAY2xvdWRmbGFyZS93b3JrZXJzLXR5cGVzIl19fQpgYGAKCiMjIyBTZXJ2aWNlIFdvcmtlciBTeW50YXggKExlZ2FjeSkKYGBgamF2YXNjcmlwdAphZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGV2ZW50ID0+IHsKICBldmVudC5yZXNwb25kV2l0aChoYW5kbGVSZXF1ZXN0KGV2ZW50LnJlcXVlc3QpKTsKfSk7Cgphc3luYyBmdW5jdGlvbiBoYW5kbGVSZXF1ZXN0KHJlcXVlc3QpIHsKICBjb25zdCB2YWx1ZSA9IGF3YWl0IEtWLmdldCgia2V5Iik7ICAvLyBCaW5kaW5ncyBhcyBnbG9iYWxzCiAgcmV0dXJuIG5ldyBSZXNwb25zZSgiT0siKTsKfQpgYGAKCiMjIyBEdXJhYmxlIE9iamVjdHMKYGBgamF2YXNjcmlwdApleHBvcnQgY2xhc3MgUm9vbSB7CiAgY29uc3RydWN0b3Ioc3RhdGUsIGVudikgeyB0aGlzLnN0YXRlID0gc3RhdGU7IHRoaXMuZW52ID0gZW52OyB9CiAgCiAgYXN5bmMgZmV0Y2gocmVxdWVzdCkgewogICAgY29uc3QgdXJsID0gbmV3IFVSTChyZXF1ZXN0LnVybCk7CiAgICBpZiAodXJsLnBhdGhuYW1lID09PSAiL2luY3JlbWVudCIpIHsKICAgICAgY29uc3QgdmFsdWUgPSAoYXdhaXQgdGhpcy5zdGF0ZS5zdG9yYWdlLmdldCgiY291bnRlciIpKSB8fCAwOwogICAgICBhd2FpdCB0aGlzLnN0YXRlLnN0b3JhZ2UucHV0KCJjb3VudGVyIiwgdmFsdWUgKyAxKTsKICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZShTdHJpbmcodmFsdWUgKyAxKSk7CiAgICB9CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCJOb3QgZm91bmQiLCB7c3RhdHVzOiA0MDR9KTsKICB9Cn0KYGBgCgojIyMgUlBDIEJldHdlZW4gU2VydmljZXMKYGBgamF2YXNjcmlwdAovLyBDYWxsZXI6IGVudi5BVVRILnZhbGlkYXRlVG9rZW4odG9rZW4pIHJldHVybnMgc3RydWN0dXJlZCBkYXRhCmNvbnN0IHVzZXIgPSBhd2FpdCBlbnYuQVVUSC52YWxpZGF0ZVRva2VuKHJlcXVlc3QuaGVhZGVycy5nZXQoIkF1dGhvcml6YXRpb24iKSk7CgovLyBDYWxsZWU6IGV4cG9ydCBtZXRob2RzIHRoYXQgcmV0dXJuIGRhdGEKZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIHZhbGlkYXRlVG9rZW4odG9rZW4pIHsgcmV0dXJuIHtpZDogMTIzLCBuYW1lOiAiQWxpY2UifTsgfQp9OwpgYGAKCiMjIFdlYiBQbGF0Zm9ybSBBUElzCgojIyMgRmV0Y2gKLSBgZmV0Y2goKWAsIGBSZXF1ZXN0YCwgYFJlc3BvbnNlYCwgYEhlYWRlcnNgCi0gYEFib3J0Q29udHJvbGxlcmAsIGBBYm9ydFNpZ25hbGAKCiMjIyBTdHJlYW1zCi0gYFJlYWRhYmxlU3RyZWFtYCwgYFdyaXRhYmxlU3RyZWFtYCwgYFRyYW5zZm9ybVN0cmVhbWAKLSBCeXRlIHN0cmVhbXMsIEJZT0IgcmVhZGVycwoKIyMjIFdlYiBDcnlwdG8KLSBgY3J5cHRvLnN1YnRsZWAgKGVuY3J5cHQvZGVjcnlwdC9zaWduL3ZlcmlmeSkKLSBgY3J5cHRvLnJhbmRvbVVVSUQoKWAsIGBjcnlwdG8uZ2V0UmFuZG9tVmFsdWVzKClgCgojIyMgRW5jb2RpbmcKLSBgVGV4dEVuY29kZXJgLCBgVGV4dERlY29kZXJgCi0gYGF0b2IoKWAsIGBidG9hKClgCgojIyMgV2ViIFN0YW5kYXJkcwotIGBVUkxgLCBgVVJMU2VhcmNoUGFyYW1zYAotIGBCbG9iYCwgYEZpbGVgLCBgRm9ybURhdGFgCi0gYFdlYlNvY2tldGAKCiMjIyBTZXJ2ZXItU2VudCBFdmVudHMgKEV2ZW50U291cmNlKQpgYGBqYXZhc2NyaXB0Ci8vIFNlcnZlci1zaWRlIFNTRQpjb25zdCB7IHJlYWRhYmxlLCB3cml0YWJsZSB9ID0gbmV3IFRyYW5zZm9ybVN0cmVhbSgpOwpjb25zdCB3cml0ZXIgPSB3cml0YWJsZS5nZXRXcml0ZXIoKTsKd3JpdGVyLndyaXRlKG5ldyBUZXh0RW5jb2RlcigpLmVuY29kZSgnZGF0YTogSGVsbG9cblxuJykpOwpyZXR1cm4gbmV3IFJlc3BvbnNlKHJlYWRhYmxlLCB7aGVhZGVyczogeydDb250ZW50LVR5cGUnOiAndGV4dC9ldmVudC1zdHJlYW0nfX0pOwpgYGAKCiMjIyBIVE1MUmV3cml0ZXIgKEhUTUwgUGFyc2luZy9UcmFuc2Zvcm1hdGlvbikKYGBgamF2YXNjcmlwdApjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKCdodHRwczovL2V4YW1wbGUuY29tJyk7CnJldHVybiBuZXcgSFRNTFJld3JpdGVyKCkKICAub24oJ2FbaHJlZl0nLCB7CiAgICBlbGVtZW50KGVsKSB7CiAgICAgIGVsLnNldEF0dHJpYnV0ZSgnaHJlZicsIGAvcHJveHk/dXJsPSR7ZW5jb2RlVVJJQ29tcG9uZW50KGVsLmdldEF0dHJpYnV0ZSgnaHJlZicpKX1gKTsKICAgIH0KICB9KQogIC5vbignc2NyaXB0JywgeyBlbGVtZW50KGVsKSB7IGVsLnJlbW92ZSgpOyB9IH0pCiAgLnRyYW5zZm9ybShyZXNwb25zZSk7CmBgYAoKIyMjIFRDUCBTb2NrZXRzIChFeHBlcmltZW50YWwpCmBgYGphdmFzY3JpcHQKY29uc3Qgc29ja2V0ID0gYXdhaXQgY29ubmVjdCh7IGhvc3RuYW1lOiAnZXhhbXBsZS5jb20nLCBwb3J0OiA4MCB9KTsKY29uc3Qgd3JpdGVyID0gc29ja2V0LndyaXRhYmxlLmdldFdyaXRlcigpOwphd2FpdCB3cml0ZXIud3JpdGUobmV3IFRleHRFbmNvZGVyKCkuZW5jb2RlKCdHRVQgLyBIVFRQLzEuMVxyXG5cclxuJykpOwpjb25zdCByZWFkZXIgPSBzb2NrZXQucmVhZGFibGUuZ2V0UmVhZGVyKCk7CmNvbnN0IHsgdmFsdWUgfSA9IGF3YWl0IHJlYWRlci5yZWFkKCk7CnJldHVybiBuZXcgUmVzcG9uc2UodmFsdWUpOwpgYGAKCiMjIyBQZXJmb3JtYW5jZQotIGBwZXJmb3JtYW5jZS5ub3coKWAsIGBwZXJmb3JtYW5jZS50aW1lT3JpZ2luYAotIGBzZXRUaW1lb3V0KClgLCBgc2V0SW50ZXJ2YWwoKWAsIGBxdWV1ZU1pY3JvdGFzaygpYAoKIyMjIENvbnNvbGUKLSBgY29uc29sZS5sb2coKWAsIGBjb25zb2xlLmVycm9yKClgLCBgY29uc29sZS53YXJuKClgCgojIyMgTm9kZS5qcyBDb21wYXQgKGBub2RlanNfY29tcGF0YCBmbGFnKQpgYGBqYXZhc2NyaXB0CmltcG9ydCB7IEJ1ZmZlciB9IGZyb20gJ25vZGU6YnVmZmVyJzsKaW1wb3J0IHsgcmFuZG9tQnl0ZXMgfSBmcm9tICdub2RlOmNyeXB0byc7Cgpjb25zdCBidWYgPSBCdWZmZXIuZnJvbSgnSGVsbG8nKTsKY29uc3QgcmFuZG9tID0gcmFuZG9tQnl0ZXMoMTYpOwpgYGAKCioqQXZhaWxhYmxlOioqIGBub2RlOmJ1ZmZlcmAsIGBub2RlOmNyeXB0b2AsIGBub2RlOnN0cmVhbWAsIGBub2RlOnV0aWxgLCBgbm9kZTpldmVudHNgLCBgbm9kZTphc3NlcnRgLCBgbm9kZTpwYXRoYCwgYG5vZGU6cXVlcnlzdHJpbmdgLCBgbm9kZTp1cmxgCioqTk9UIGF2YWlsYWJsZToqKiBgbm9kZTpmc2AsIGBub2RlOmh0dHBgLCBgbm9kZTpuZXRgLCBgbm9kZTpjaGlsZF9wcm9jZXNzYAoKIyMgQ0xJIENvbW1hbmRzCgpgYGBiYXNoCndvcmtlcmQgc2VydmUgY29uZmlnLmNhcG5wIFtjb25zdGFudE5hbWVdICAgICAgICAgICMgU3RhcnQgc2VydmVyCndvcmtlcmQgc2VydmUgY29uZmlnLmNhcG5wIC0tc29ja2V0LWFkZHIgaHR0cD0qOjMwMDAgLS12ZXJib3NlCndvcmtlcmQgY29tcGlsZSBjb25maWcuY2FwbnAgY29uc3RhbnROYW1lIC1vIGJpbmFyeSAgIyBDb21waWxlIHRvIGJpbmFyeQp3b3JrZXJkIHRlc3QgY29uZmlnLmNhcG5wIFstLXRlc3Qtb25seT10ZXN0LmpzXSAgICAjIFJ1biB0ZXN0cwpgYGAKCiMjIFdyYW5nbGVyIEludGVncmF0aW9uCgpVc2UgV3JhbmdsZXIgZm9yIGRldmVsb3BtZW50OgpgYGBiYXNoCndyYW5nbGVyIGRldiAgICAgIyBVc2VzIHdvcmtlcmQgaW50ZXJuYWxseQp3cmFuZ2xlciB0eXBlcyAgICMgR2VuZXJhdGUgVHlwZVNjcmlwdCB0eXBlcyBmcm9tIHdyYW5nbGVyLnRvbWwKYGBgCgpTZWUgW3BhdHRlcm5zLm1kXSguL3BhdHRlcm5zLm1kKSBmb3IgdXNhZ2UgZXhhbXBsZXMsIFtjb25maWd1cmF0aW9uLm1kXSguL2NvbmZpZ3VyYXRpb24ubWQpIGZvciBjb25maWcgZGV0YWlscy4K
+# Workerd APIs
+
+## Worker Code (JS/TS)
+
+### ES Modules (Recommended)
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    const value = await env.KV.get("key");           // Bindings in env
+    const response = await env.API.fetch(request);   // Service binding
+    ctx.waitUntil(logRequest(request));              // Background task
+    return new Response("OK");
+  },
+  async adminApi(request, env, ctx) { /* Named entrypoint */ },
+  async queue(batch, env, ctx) { /* Queue consumer */ },
+  async scheduled(event, env, ctx) { /* Cron handler */ }
+};
+```
+
+### TypeScript Types
+
+**Generate from wrangler.toml (Recommended):**
+```bash
+wrangler types  # Output: worker-configuration.d.ts
+```
+
+**Manual types:**
+```typescript
+interface Env {
+  API: Fetcher;
+  CACHE: KVNamespace;
+  STORAGE: R2Bucket;
+  ROOMS: DurableObjectNamespace;
+  API_KEY: string;
+}
+
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    return new Response(await env.CACHE.get("key"));
+  }
+};
+```
+
+**Setup:**
+```bash
+npm install -D @cloudflare/workers-types
+```
+
+```json
+// tsconfig.json
+{"compilerOptions": {"types": ["@cloudflare/workers-types"]}}
+```
+
+### Service Worker Syntax (Legacy)
+```javascript
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request));
+});
+
+async function handleRequest(request) {
+  const value = await KV.get("key");  // Bindings as globals
+  return new Response("OK");
+}
+```
+
+### Durable Objects
+```javascript
+export class Room {
+  constructor(state, env) { this.state = state; this.env = env; }
+  
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/increment") {
+      const value = (await this.state.storage.get("counter")) || 0;
+      await this.state.storage.put("counter", value + 1);
+      return new Response(String(value + 1));
+    }
+    return new Response("Not found", {status: 404});
+  }
+}
+```
+
+### RPC Between Services
+```javascript
+// Caller: env.AUTH.validateToken(token) returns structured data
+const user = await env.AUTH.validateToken(request.headers.get("Authorization"));
+
+// Callee: export methods that return data
+export default {
+  async validateToken(token) { return {id: 123, name: "Alice"}; }
+};
+```
+
+## Web Platform APIs
+
+### Fetch
+- `fetch()`, `Request`, `Response`, `Headers`
+- `AbortController`, `AbortSignal`
+
+### Streams
+- `ReadableStream`, `WritableStream`, `TransformStream`
+- Byte streams, BYOB readers
+
+### Web Crypto
+- `crypto.subtle` (encrypt/decrypt/sign/verify)
+- `crypto.randomUUID()`, `crypto.getRandomValues()`
+
+### Encoding
+- `TextEncoder`, `TextDecoder`
+- `atob()`, `btoa()`
+
+### Web Standards
+- `URL`, `URLSearchParams`
+- `Blob`, `File`, `FormData`
+- `WebSocket`
+
+### Server-Sent Events (EventSource)
+```javascript
+// Server-side SSE
+const { readable, writable } = new TransformStream();
+const writer = writable.getWriter();
+writer.write(new TextEncoder().encode('data: Hello\n\n'));
+return new Response(readable, {headers: {'Content-Type': 'text/event-stream'}});
+```
+
+### HTMLRewriter (HTML Parsing/Transformation)
+```javascript
+const response = await fetch('https://example.com');
+return new HTMLRewriter()
+  .on('a[href]', {
+    element(el) {
+      el.setAttribute('href', `/proxy?url=${encodeURIComponent(el.getAttribute('href'))}`);
+    }
+  })
+  .on('script', { element(el) { el.remove(); } })
+  .transform(response);
+```
+
+### TCP Sockets (Experimental)
+```javascript
+const socket = await connect({ hostname: 'example.com', port: 80 });
+const writer = socket.writable.getWriter();
+await writer.write(new TextEncoder().encode('GET / HTTP/1.1\r\n\r\n'));
+const reader = socket.readable.getReader();
+const { value } = await reader.read();
+return new Response(value);
+```
+
+### Performance
+- `performance.now()`, `performance.timeOrigin`
+- `setTimeout()`, `setInterval()`, `queueMicrotask()`
+
+### Console
+- `console.log()`, `console.error()`, `console.warn()`
+
+### Node.js Compat (`nodejs_compat` flag)
+```javascript
+import { Buffer } from 'node:buffer';
+import { randomBytes } from 'node:crypto';
+
+const buf = Buffer.from('Hello');
+const random = randomBytes(16);
+```
+
+**Available:** `node:buffer`, `node:crypto`, `node:stream`, `node:util`, `node:events`, `node:assert`, `node:path`, `node:querystring`, `node:url`
+**NOT available:** `node:fs`, `node:http`, `node:net`, `node:child_process`
+
+## CLI Commands
+
+```bash
+workerd serve config.capnp [constantName]          # Start server
+workerd serve config.capnp --socket-addr http=*:3000 --verbose
+workerd compile config.capnp constantName -o binary  # Compile to binary
+workerd test config.capnp [--test-only=test.js]    # Run tests
+```
+
+## Wrangler Integration
+
+Use Wrangler for development:
+```bash
+wrangler dev     # Uses workerd internally
+wrangler types   # Generate TypeScript types from wrangler.toml
+```
+
+See [patterns.md](./patterns.md) for usage examples, [configuration.md](./configuration.md) for config details.

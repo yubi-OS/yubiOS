@@ -1,1 +1,169 @@
-IyBSZWFsdGltZUtpdCBHb3RjaGFzICYgVHJvdWJsZXNob290aW5nCgojIyBDb21tb24gRXJyb3JzCgojIyMgIkNhbm5vdCBjb25uZWN0IHRvIG1lZXRpbmciCgoqKkNhdXNlOioqIEF1dGggdG9rZW4gaW52YWxpZC9leHBpcmVkLCBBUEkgY3JlZGVudGlhbHMgbGFjayBwZXJtaXNzaW9ucywgb3IgbmV0d29yayBibG9ja3MgV2ViUlRDCioqU29sdXRpb246KioKVmVyaWZ5IHRva2VuIHZhbGlkaXR5LCBjaGVjayBBUEkgdG9rZW4gaGFzICoqUmVhbHRpbWUgLyBSZWFsdGltZSBBZG1pbioqIHBlcm1pc3Npb25zLCBlbmFibGUgVFVSTiBzZXJ2aWNlIGZvciByZXN0cmljdGl2ZSBuZXR3b3JrcwoKIyMjICJObyB2aWRlby9hdWRpbyB0cmFja3MiCgoqKkNhdXNlOioqIEJyb3dzZXIgcGVybWlzc2lvbnMgbm90IGdyYW50ZWQsIHZpZGVvL2F1ZGlvIG5vdCBlbmFibGVkLCBkZXZpY2UgaW4gdXNlLCBvciBkZXZpY2UgdW5hdmFpbGFibGUKKipTb2x1dGlvbjoqKgpSZXF1ZXN0IGJyb3dzZXIgcGVybWlzc2lvbnMgZXhwbGljaXRseSwgdmVyaWZ5IGluaXRpYWxpemF0aW9uIGNvbmZpZywgdXNlIGBtZWV0aW5nLnNlbGYuZ2V0QWxsRGV2aWNlcygpYCB0byBkZWJ1ZywgY2xvc2Ugb3RoZXIgYXBwcyB1c2luZyBkZXZpY2UKCiMjIyAiUGFydGljaXBhbnQgY291bnQgbWlzbWF0Y2hlZCIKCioqQ2F1c2U6KiogYG1lZXRpbmcucGFydGljaXBhbnRzYCBkb2Vzbid0IGluY2x1ZGUgYG1lZXRpbmcuc2VsZmAKKipTb2x1dGlvbjoqKiBUb3RhbCBjb3VudCA9IGBtZWV0aW5nLnBhcnRpY2lwYW50cy5qb2luZWQuc2l6ZSgpICsgMWAKCiMjIyAiRXZlbnRzIG5vdCBmaXJpbmciCgoqKkNhdXNlOioqIExpc3RlbmVycyByZWdpc3RlcmVkIGFmdGVyIGFjdGlvbnMsIGluY29ycmVjdCBldmVudCBuYW1lLCBvciB3cm9uZyBuYW1lc3BhY2UKKipTb2x1dGlvbjoqKgpSZWdpc3RlciBsaXN0ZW5lcnMgYmVmb3JlIGNhbGxpbmcgYG1lZXRpbmcuam9pbigpYCwgY2hlY2sgZXZlbnQgbmFtZXMgYWdhaW5zdCBkb2NzLCB2ZXJpZnkgY29ycmVjdCBuYW1lc3BhY2UKCiMjIyAiQ09SUyBlcnJvcnMgaW4gQVBJIGNhbGxzIgoKKipDYXVzZToqKiBNYWtpbmcgUkVTVCBBUEkgY2FsbHMgZnJvbSBjbGllbnQtc2lkZQoqKlNvbHV0aW9uOioqIEFsbCBSRVNUIEFQSSBjYWxscyAqKm11c3QqKiBiZSBzZXJ2ZXItc2lkZSAoV29ya2VycywgYmFja2VuZCkuIE5ldmVyIGV4cG9zZSBBUEkgdG9rZW5zIHRvIGNsaWVudHMuCgojIyMgIlByZXNldCBub3QgYXBwbHlpbmciCgoqKkNhdXNlOioqIFByZXNldCBkb2Vzbid0IGV4aXN0LCBuYW1lIG1pc21hdGNoIChjYXNlLXNlbnNpdGl2ZSksIG9yIHBhcnRpY2lwYW50IGNyZWF0ZWQgYmVmb3JlIHByZXNldAoqKlNvbHV0aW9uOioqClZlcmlmeSBwcmVzZXQgZXhpc3RzIHZpYSBEYXNoYm9hcmQgb3IgQVBJLCBjaGVjayBleGFjdCBzcGVsbGluZyBhbmQgY2FzZSwgY3JlYXRlIHByZXNldCBiZWZvcmUgYWRkaW5nIHBhcnRpY2lwYW50cwoKIyMjICJUb2tlbiByZXVzZSBlcnJvciIKCioqQ2F1c2U6KiogUmV1c2luZyBwYXJ0aWNpcGFudCB0b2tlbnMgYWNyb3NzIHNlc3Npb25zCioqU29sdXRpb246KiogR2VuZXJhdGUgZnJlc2ggdG9rZW4gcGVyIHNlc3Npb24uIFVzZSByZWZyZXNoIGVuZHBvaW50IGlmIHRva2VuIGV4cGlyZXMgZHVyaW5nIHNlc3Npb24uCgojIyMgIlZpZGVvIHF1YWxpdHkgcG9vciIKCioqQ2F1c2U6KiogSW5zdWZmaWNpZW50IGJhbmR3aWR0aCwgcmVzb2x1dGlvbi9iaXRyYXRlIHRvbyBoaWdoLCBvciBDUFUgb3ZlcmxvYWQKKipTb2x1dGlvbjoqKgpMb3dlciBgbWVkaWFDb25maWd1cmF0aW9uLnZpZGVvYCByZXNvbHV0aW9uL2ZyYW1lUmF0ZSwgbW9uaXRvciBuZXR3b3JrIGNvbmRpdGlvbnMsIHJlZHVjZSBwYXJ0aWNpcGFudCBjb3VudCBvciBncmlkIHNpemUKCiMjIyAiRWNobyBvciBhdWRpbyBmZWVkYmFjayIKCioqQ2F1c2U6KiogTXVsdGlwbGUgZGV2aWNlcyBwaWNraW5nIHVwIHNhbWUgYXVkaW8gc291cmNlCioqU29sdXRpb246KioKLSBMb3dlciBgbWVkaWFDb25maWd1cmF0aW9uLnZpZGVvYCByZXNvbHV0aW9uL2ZyYW1lUmF0ZQotIE1vbml0b3IgbmV0d29yayBjb25kaXRpb25zCi0gUmVkdWNlIHBhcnRpY2lwYW50IGNvdW50IG9yIGdyaWQgc2l6ZQoKIyMjIElzc3VlOiBFY2hvIG9yIGF1ZGlvIGZlZWRiYWNrCioqQ2F1c2UqKjogTXVsdGlwbGUgZGV2aWNlcyBwaWNraW5nIHVwIHNhbWUgYXVkaW8gc291cmNlCgoqKlNvbHV0aW9ucyoqOgpFbmFibGUgYGVjaG9DYW5jZWxsYXRpb246IHRydWVgIGluIGBtZWRpYUNvbmZpZ3VyYXRpb24uYXVkaW9gLCB1c2UgaGVhZHBob25lcywgbXV0ZSB3aGVuIG5vdCBzcGVha2luZwoKIyMjICJTY3JlZW4gc2hhcmUgbm90IHdvcmtpbmciCgoqKkNhdXNlOioqIEJyb3dzZXIgZG9lc24ndCBzdXBwb3J0IHNjcmVlbiBzaGFyaW5nIEFQSSwgcGVybWlzc2lvbiBkZW5pZWQsIG9yIHdyb25nIGBkaXNwbGF5U3VyZmFjZWAgY29uZmlnCioqU29sdXRpb246KioKVXNlIENocm9tZS9FZGdlL0ZpcmVmb3ggKFNhZmFyaSBsaW1pdGVkIHN1cHBvcnQpLCBjaGVjayBicm93c2VyIHBlcm1pc3Npb25zLCB0cnkgZGlmZmVyZW50IGBkaXNwbGF5U3VyZmFjZWAgdmFsdWVzICgnd2luZG93JywgJ21vbml0b3InLCAnYnJvd3NlcicpCgojIyMgIkhvdyBkbyBJIHNjaGVkdWxlIG1lZXRpbmdzPyIKCioqQ2F1c2U6KiogUmVhbHRpbWVLaXQgaGFzIG5vIGJ1aWx0LWluIHNjaGVkdWxpbmcgc3lzdGVtCioqU29sdXRpb246KioKU3RvcmUgbWVldGluZyBJRHMgaW4geW91ciBkYXRhYmFzZSB3aXRoIHRpbWVzdGFtcHMuIEdlbmVyYXRlIHBhcnRpY2lwYW50IHRva2VucyBvbmx5IHdoZW4gdXNlciBzaG91bGQgam9pbi4gRXhhbXBsZToKYGBgdHlwZXNjcmlwdAovLyBTdG9yZSBpbiBEQgp7IG1lZXRpbmdJZDogJ2FiYzEyMycsIHNjaGVkdWxlZEZvcjogJzIwMjYtMDItMTVUMTA6MDA6MDBaJywgdXNlcklkOiAndXNlcjQ1NicgfQoKLy8gR2VuZXJhdGUgdG9rZW4gd2hlbiB1c2VyIGNsaWNrcyAiSm9pbiIgbmVhciBzY2hlZHVsZWQgdGltZQpjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKCcvYXBpL2pvaW4tbWVldGluZycsIHsKICBtZXRob2Q6ICdQT1NUJywKICBib2R5OiBKU09OLnN0cmluZ2lmeSh7IG1lZXRpbmdJZDogJ2FiYzEyMycgfSkKfSk7CmNvbnN0IHsgYXV0aFRva2VuIH0gPSBhd2FpdCByZXNwb25zZS5qc29uKCk7CmBgYAoKIyMjICJSZWNvcmRpbmcgbm90IHN0YXJ0aW5nIgoKKipDYXVzZToqKiBQcmVzZXQgbGFja3MgcmVjb3JkaW5nIHBlcm1pc3Npb25zLCBubyBhY3RpdmUgc2Vzc2lvbiwgb3IgQVBJIGNhbGwgZnJvbSBjbGllbnQKKipTb2x1dGlvbjoqKgpWZXJpZnkgcHJlc2V0IGhhcyBgY2FuUmVjb3JkOiB0cnVlYCBhbmQgYGNhblN0YXJ0U3RvcFJlY29yZGluZzogdHJ1ZWAsIGVuc3VyZSBzZXNzaW9uIGlzIGFjdGl2ZSAoYXQgbGVhc3Qgb25lIHBhcnRpY2lwYW50KSwgbWFrZSByZWNvcmRpbmcgQVBJIGNhbGxzIHNlcnZlci1zaWRlIG9ubHkKCiMjIExpbWl0cwoKfCBSZXNvdXJjZSB8IExpbWl0IHwKfC0tLS0tLS0tLS18LS0tLS0tLXwKfCBNYXggcGFydGljaXBhbnRzIHBlciBzZXNzaW9uIHwgMTAwIHwKfCBNYXggY29uY3VycmVudCBzZXNzaW9ucyBwZXIgQXBwIHwgMTAwMCB8CnwgTWF4IHJlY29yZGluZyBkdXJhdGlvbiB8IDYgaG91cnMgfAp8IE1heCBtZWV0aW5nIGR1cmF0aW9uIHwgMjQgaG91cnMgfAp8IE1heCBjaGF0IG1lc3NhZ2UgbGVuZ3RoIHwgNDAwMCBjaGFyYWN0ZXJzIHwKfCBNYXggcHJlc2V0IG5hbWUgbGVuZ3RoIHwgNjQgY2hhcmFjdGVycyB8CnwgTWF4IG1lZXRpbmcgdGl0bGUgbGVuZ3RoIHwgMjU2IGNoYXJhY3RlcnMgfAp8IE1heCBwYXJ0aWNpcGFudCBuYW1lIGxlbmd0aCB8IDI1NiBjaGFyYWN0ZXJzIHwKfCBUb2tlbiBleHBpcmF0aW9uIHwgMjQgaG91cnMgKGRlZmF1bHQpIHwKfCBXZWJSVEMgcG9ydHMgcmVxdWlyZWQgfCBVRFAgMTAyNC02NTUzNSB8CgojIyBOZXR3b3JrIFJlcXVpcmVtZW50cwoKIyMjIEZpcmV3YWxsIFJ1bGVzCkFsbG93IG91dGJvdW5kIFVEUC9UQ1AgdG86Ci0gYCouY2xvdWRmbGFyZS5jb21gIHBvcnRzIDQ0MywgODAKLSBVRFAgcG9ydHMgMTAyNC02NTUzNSAoV2ViUlRDIG1lZGlhKQoKIyMjIFRVUk4gU2VydmljZQpFbmFibGUgZm9yIHVzZXJzIGJlaGluZCByZXN0cmljdGl2ZSBmaXJld2FsbHMvcHJveGllczoKYGBganNvbmMKLy8gd3JhbmdsZXIuanNvbmMKewogICJ2YXJzIjogewogICAgIlRVUk5fU0VSVklDRV9JRCI6ICJ5b3VyX3R1cm5fc2VydmljZV9pZCIKICB9CiAgLy8gU2V0IHNlY3JldDogd3JhbmdsZXIgc2VjcmV0IHB1dCBUVVJOX1NFUlZJQ0VfVE9LRU4KfQpgYGAKClRVUk4gYXV0b21hdGljYWxseSBjb25maWd1cmVkIGluIFNESyB3aGVuIGVuYWJsZWQgaW4gYWNjb3VudC4KCiMjIERlYnVnZ2luZyBUaXBzCgpgYGB0eXBlc2NyaXB0Ci8vIENoZWNrIGRldmljZXMKY29uc3QgZGV2aWNlcyA9IGF3YWl0IG1lZXRpbmcuc2VsZi5nZXRBbGxEZXZpY2VzKCk7Cm1lZXRpbmcuc2VsZi5vbignZGV2aWNlTGlzdFVwZGF0ZScsICh7IGFkZGVkLCByZW1vdmVkLCBkZXZpY2VzIH0pID0+IGNvbnNvbGUubG9nKCdEZXZpY2VzOicsIHsgYWRkZWQsIHJlbW92ZWQsIGRldmljZXMgfSkpOwoKLy8gTW9uaXRvciBwYXJ0aWNpcGFudHMKbWVldGluZy5wYXJ0aWNpcGFudHMuam9pbmVkLm9uKCdwYXJ0aWNpcGFudEpvaW5lZCcsIChwKSA9PiBjb25zb2xlLmxvZyhgJHtwLm5hbWV9IGpvaW5lZDpgLCB7IGlkOiBwLmlkLCB1c2VySWQ6IHAudXNlcklkLCBhdWRpb0VuYWJsZWQ6IHAuYXVkaW9FbmFibGVkLCB2aWRlb0VuYWJsZWQ6IHAudmlkZW9FbmFibGVkIH0pKTsKCi8vIENoZWNrIHJvb20gc3RhdGUKbWVldGluZy5zZWxmLm9uKCdyb29tSm9pbmVkJywgKCkgPT4gY29uc29sZS5sb2coJ1Jvb206JywgeyBtZWV0aW5nSWQ6IG1lZXRpbmcubWV0YS5tZWV0aW5nSWQsIG1lZXRpbmdUaXRsZTogbWVldGluZy5tZXRhLm1lZXRpbmdUaXRsZSwgcGFydGljaXBhbnRDb3VudDogbWVldGluZy5wYXJ0aWNpcGFudHMuam9pbmVkLnNpemUoKSArIDEsIGF1ZGlvRW5hYmxlZDogbWVldGluZy5zZWxmLmF1ZGlvRW5hYmxlZCwgdmlkZW9FbmFibGVkOiBtZWV0aW5nLnNlbGYudmlkZW9FbmFibGVkIH0pKTsKCi8vIExvZyBhbGwgZXZlbnRzClsncm9vbUpvaW5lZCcsICdhdWRpb1VwZGF0ZScsICd2aWRlb1VwZGF0ZScsICdzY3JlZW5TaGFyZVVwZGF0ZScsICdkZXZpY2VVcGRhdGUnLCAnZGV2aWNlTGlzdFVwZGF0ZSddLmZvckVhY2goZXZlbnQgPT4gbWVldGluZy5zZWxmLm9uKGV2ZW50LCAoZGF0YSkgPT4gY29uc29sZS5sb2coYFtzZWxmXSAke2V2ZW50fTpgLCBkYXRhKSkpOwpbJ3BhcnRpY2lwYW50Sm9pbmVkJywgJ3BhcnRpY2lwYW50TGVmdCddLmZvckVhY2goZXZlbnQgPT4gbWVldGluZy5wYXJ0aWNpcGFudHMuam9pbmVkLm9uKGV2ZW50LCAoZGF0YSkgPT4gY29uc29sZS5sb2coYFtwYXJ0aWNpcGFudHNdICR7ZXZlbnR9OmAsIGRhdGEpKSk7Cm1lZXRpbmcuY2hhdC5vbignY2hhdFVwZGF0ZScsIChkYXRhKSA9PiBjb25zb2xlLmxvZygnW2NoYXRdIGNoYXRVcGRhdGU6JywgZGF0YSkpOwpgYGAKCiMjIFNlY3VyaXR5ICYgUGVyZm9ybWFuY2UKCiMjIyBTZWN1cml0eTogRG8gTk9UCi0gRXhwb3NlIGBDTE9VREZMQVJFX0FQSV9UT0tFTmAgaW4gY2xpZW50IGNvZGUsIGhhcmRjb2RlIGNyZWRlbnRpYWxzIGluIGZyb250ZW5kCi0gUmV1c2UgcGFydGljaXBhbnQgdG9rZW5zLCBzdG9yZSB0b2tlbnMgaW4gbG9jYWxTdG9yYWdlIHdpdGhvdXQgZW5jcnlwdGlvbgotIEFsbG93IGNsaWVudC1zaWRlIG1lZXRpbmcgY3JlYXRpb24KCiMjIyBTZWN1cml0eTogRE8KLSBHZW5lcmF0ZSB0b2tlbnMgc2VydmVyLXNpZGUgb25seSwgdXNlIEhUVFBTLCBpbXBsZW1lbnQgcmF0ZSBsaW1pdGluZwotIFZhbGlkYXRlIHVzZXIgYXV0aCBiZWZvcmUgZ2VuZXJhdGluZyB0b2tlbnMsIHVzZSBgY3VzdG9tX3BhcnRpY2lwYW50X2lkYCB0byBtYXAgdG8geW91ciB1c2VyIHN5c3RlbQotIFNldCBhcHByb3ByaWF0ZSBwcmVzZXQgcGVybWlzc2lvbnMgcGVyIHVzZXIgcm9sZSwgcm90YXRlIEFQSSB0b2tlbnMgcmVndWxhcmx5CgojIyMgUGVyZm9ybWFuY2UKLSAqKkNQVSoqOiBMb3dlciB2aWRlbyByZXNvbHV0aW9uL2ZyYW1lUmF0ZSwgZGlzYWJsZSB2aWRlbyBmb3IgYXVkaW8tb25seSwgdXNlIGBtZWV0aW5nLnBhcnRpY2lwYW50cy5hY3RpdmVgIGZvciBsYXJnZSBtZWV0aW5ncywgaW1wbGVtZW50IHZpcnR1YWwgc2Nyb2xsaW5nCi0gKipCYW5kd2lkdGgqKjogU2V0IG1heCByZXNvbHV0aW9uIGluIGBtZWRpYUNvbmZpZ3VyYXRpb25gLCBkaXNhYmxlIHNjcmVlbnNoYXJlIGF1ZGlvIGlmIHVubmVlZGVkLCB1c2UgYXVkaW8tb25seSBtb2RlLCBpbXBsZW1lbnQgYWRhcHRpdmUgYml0cmF0ZQotICoqTWVtb3J5Kio6IENsZWFuIHVwIGV2ZW50IGxpc3RlbmVycyBvbiB1bm1vdW50LCBjYWxsIGBtZWV0aW5nLmxlYXZlKClgIHdoZW4gZG9uZSwgZG9uJ3Qgc3RvcmUgbGFyZ2UgcGFydGljaXBhbnQgYXJyYXlzCgojIyBJbiBUaGlzIFJlZmVyZW5jZQotIFtSRUFETUUubWRdKFJFQURNRS5tZCkgLSBPdmVydmlldywgY29yZSBjb25jZXB0cywgcXVpY2sgc3RhcnQKLSBbY29uZmlndXJhdGlvbi5tZF0oY29uZmlndXJhdGlvbi5tZCkgLSBTREsgY29uZmlnLCBwcmVzZXRzLCB3cmFuZ2xlciBzZXR1cAotIFthcGkubWRdKGFwaS5tZCkgLSBDbGllbnQgU0RLIEFQSXMsIFJFU1QgZW5kcG9pbnRzCi0gW3BhdHRlcm5zLm1kXShwYXR0ZXJucy5tZCkgLSBDb21tb24gcGF0dGVybnMsIFJlYWN0IGhvb2tzLCBiYWNrZW5kIGludGVncmF0aW9uCg==
+# RealtimeKit Gotchas & Troubleshooting
+
+## Common Errors
+
+### "Cannot connect to meeting"
+
+**Cause:** Auth token invalid/expired, API credentials lack permissions, or network blocks WebRTC
+**Solution:**
+Verify token validity, check API token has **Realtime / Realtime Admin** permissions, enable TURN service for restrictive networks
+
+### "No video/audio tracks"
+
+**Cause:** Browser permissions not granted, video/audio not enabled, device in use, or device unavailable
+**Solution:**
+Request browser permissions explicitly, verify initialization config, use `meeting.self.getAllDevices()` to debug, close other apps using device
+
+### "Participant count mismatched"
+
+**Cause:** `meeting.participants` doesn't include `meeting.self`
+**Solution:** Total count = `meeting.participants.joined.size() + 1`
+
+### "Events not firing"
+
+**Cause:** Listeners registered after actions, incorrect event name, or wrong namespace
+**Solution:**
+Register listeners before calling `meeting.join()`, check event names against docs, verify correct namespace
+
+### "CORS errors in API calls"
+
+**Cause:** Making REST API calls from client-side
+**Solution:** All REST API calls **must** be server-side (Workers, backend). Never expose API tokens to clients.
+
+### "Preset not applying"
+
+**Cause:** Preset doesn't exist, name mismatch (case-sensitive), or participant created before preset
+**Solution:**
+Verify preset exists via Dashboard or API, check exact spelling and case, create preset before adding participants
+
+### "Token reuse error"
+
+**Cause:** Reusing participant tokens across sessions
+**Solution:** Generate fresh token per session. Use refresh endpoint if token expires during session.
+
+### "Video quality poor"
+
+**Cause:** Insufficient bandwidth, resolution/bitrate too high, or CPU overload
+**Solution:**
+Lower `mediaConfiguration.video` resolution/frameRate, monitor network conditions, reduce participant count or grid size
+
+### "Echo or audio feedback"
+
+**Cause:** Multiple devices picking up same audio source
+**Solution:**
+- Lower `mediaConfiguration.video` resolution/frameRate
+- Monitor network conditions
+- Reduce participant count or grid size
+
+### Issue: Echo or audio feedback
+**Cause**: Multiple devices picking up same audio source
+
+**Solutions**:
+Enable `echoCancellation: true` in `mediaConfiguration.audio`, use headphones, mute when not speaking
+
+### "Screen share not working"
+
+**Cause:** Browser doesn't support screen sharing API, permission denied, or wrong `displaySurface` config
+**Solution:**
+Use Chrome/Edge/Firefox (Safari limited support), check browser permissions, try different `displaySurface` values ('window', 'monitor', 'browser')
+
+### "How do I schedule meetings?"
+
+**Cause:** RealtimeKit has no built-in scheduling system
+**Solution:**
+Store meeting IDs in your database with timestamps. Generate participant tokens only when user should join. Example:
+```typescript
+// Store in DB
+{ meetingId: 'abc123', scheduledFor: '2026-02-15T10:00:00Z', userId: 'user456' }
+
+// Generate token when user clicks "Join" near scheduled time
+const response = await fetch('/api/join-meeting', {
+  method: 'POST',
+  body: JSON.stringify({ meetingId: 'abc123' })
+});
+const { authToken } = await response.json();
+```
+
+### "Recording not starting"
+
+**Cause:** Preset lacks recording permissions, no active session, or API call from client
+**Solution:**
+Verify preset has `canRecord: true` and `canStartStopRecording: true`, ensure session is active (at least one participant), make recording API calls server-side only
+
+## Limits
+
+| Resource | Limit |
+|----------|-------|
+| Max participants per session | 100 |
+| Max concurrent sessions per App | 1000 |
+| Max recording duration | 6 hours |
+| Max meeting duration | 24 hours |
+| Max chat message length | 4000 characters |
+| Max preset name length | 64 characters |
+| Max meeting title length | 256 characters |
+| Max participant name length | 256 characters |
+| Token expiration | 24 hours (default) |
+| WebRTC ports required | UDP 1024-65535 |
+
+## Network Requirements
+
+### Firewall Rules
+Allow outbound UDP/TCP to:
+- `*.cloudflare.com` ports 443, 80
+- UDP ports 1024-65535 (WebRTC media)
+
+### TURN Service
+Enable for users behind restrictive firewalls/proxies:
+```jsonc
+// wrangler.jsonc
+{
+  "vars": {
+    "TURN_SERVICE_ID": "your_turn_service_id"
+  }
+  // Set secret: wrangler secret put TURN_SERVICE_TOKEN
+}
+```
+
+TURN automatically configured in SDK when enabled in account.
+
+## Debugging Tips
+
+```typescript
+// Check devices
+const devices = await meeting.self.getAllDevices();
+meeting.self.on('deviceListUpdate', ({ added, removed, devices }) => console.log('Devices:', { added, removed, devices }));
+
+// Monitor participants
+meeting.participants.joined.on('participantJoined', (p) => console.log(`${p.name} joined:`, { id: p.id, userId: p.userId, audioEnabled: p.audioEnabled, videoEnabled: p.videoEnabled }));
+
+// Check room state
+meeting.self.on('roomJoined', () => console.log('Room:', { meetingId: meeting.meta.meetingId, meetingTitle: meeting.meta.meetingTitle, participantCount: meeting.participants.joined.size() + 1, audioEnabled: meeting.self.audioEnabled, videoEnabled: meeting.self.videoEnabled }));
+
+// Log all events
+['roomJoined', 'audioUpdate', 'videoUpdate', 'screenShareUpdate', 'deviceUpdate', 'deviceListUpdate'].forEach(event => meeting.self.on(event, (data) => console.log(`[self] ${event}:`, data)));
+['participantJoined', 'participantLeft'].forEach(event => meeting.participants.joined.on(event, (data) => console.log(`[participants] ${event}:`, data)));
+meeting.chat.on('chatUpdate', (data) => console.log('[chat] chatUpdate:', data));
+```
+
+## Security & Performance
+
+### Security: Do NOT
+- Expose `CLOUDFLARE_API_TOKEN` in client code, hardcode credentials in frontend
+- Reuse participant tokens, store tokens in localStorage without encryption
+- Allow client-side meeting creation
+
+### Security: DO
+- Generate tokens server-side only, use HTTPS, implement rate limiting
+- Validate user auth before generating tokens, use `custom_participant_id` to map to your user system
+- Set appropriate preset permissions per user role, rotate API tokens regularly
+
+### Performance
+- **CPU**: Lower video resolution/frameRate, disable video for audio-only, use `meeting.participants.active` for large meetings, implement virtual scrolling
+- **Bandwidth**: Set max resolution in `mediaConfiguration`, disable screenshare audio if unneeded, use audio-only mode, implement adaptive bitrate
+- **Memory**: Clean up event listeners on unmount, call `meeting.leave()` when done, don't store large participant arrays
+
+## In This Reference
+- [README.md](README.md) - Overview, core concepts, quick start
+- [configuration.md](configuration.md) - SDK config, presets, wrangler setup
+- [api.md](api.md) - Client SDK APIs, REST endpoints
+- [patterns.md](patterns.md) - Common patterns, React hooks, backend integration
