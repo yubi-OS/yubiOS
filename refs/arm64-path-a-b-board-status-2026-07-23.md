@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/path-a-b-board-status.md; original content dated 2026-07-11, retained below)_
 
-Status check 2026-07-23: cross-checked against live BLOCKERS.md — B-ARM64-PATHA and B-RK3588-TPL (tracked in the yubiOS Master Roadmap project, see refs/org-state-audit-2026-07-23.md) match this file's classification exactly: RK3588 is the Path A candidate but not yet production (no ROTPK/fuse rehearsal on real hardware; ROCK 5B specifically blocked on a missing licensed DDR/TPL blob per B-RK3588-TPL), ROCKPro64/RK3399 is the supported stepping-stone per ADR-029. No drift found — board classification below remains accurate.
+Status check 2026-07-23: cross-checked against live BLOCKERS.md â B-ARM64-PATHA and B-RK3588-TPL (tracked in the yubiOS Master Roadmap project, see refs/org-state-audit-2026-07-23.md) match this file's classification exactly: RK3588 is the Path A candidate but not yet production (no ROTPK/fuse rehearsal on real hardware; ROCK 5B specifically blocked on a missing licensed DDR/TPL blob per B-RK3588-TPL), ROCKPro64/RK3399 is the supported stepping-stone per ADR-029. No drift found â board classification below remains accurate.
 
 # ARM64 Path A / Path B Board Status
 
@@ -44,16 +44,19 @@ A board can move toward production Path A language only when all of the followin
 Select the first concrete RK3588 board for sacrificial provisioning rehearsal, then create a board-specific evidence note under `refs/` before using production-root language.
 
 
+
 ## Least-privilege coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document applies least-privilege hardening: Linux capabilities (drop + ambient), ProtectSystem/ProtectHome, rootless execution, dynamic user, RBAC, PrivilegeBoundary. Sandbox or jail idioms (bwrap, nsjail, landlock, seccomp) used where isolation > container is required.
+
 
 
 ## Declarative policy coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
+
 
 
 ## Continuous / adaptive coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.

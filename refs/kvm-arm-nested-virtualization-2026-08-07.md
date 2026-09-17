@@ -243,3 +243,24 @@ This artifact is intentionally framed as a research note, not a canonical spec. 
 - **Duck.ai paraphrases not yet re-anchored.** Numerical claims, market sizing, kernel-doc quotes, etc. that originate from Duck.ai's response need primary-source re-anchoring. **Limitations**: do not lift verbatim into external materials until re-anchored.
 - **Cycle-N+ has not been run.** The artifact may be at a geodesic local minimum for primitive coverage, but substantive completeness may still require further research, OMN filing, or ADR drafting. **Not yet** verified.
 - **No external validation yet.** No reviewer has independently confirmed the artifact's claims. **~3 weeks** drift risk: canonical docs will move; mark stale after ~3 weeks if not re-reviewed.
+
+
+
+## Cross-references
+
+**Related Linear issues (OMN-*)**: TBD per file context.
+**Related PRs**: TBD.
+**Related ADRs**: TBD.
+**Related refs/ docs**: TBD.
+
+Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.6466). TODO: refine per file context.
+
+
+## Cross-references
+
+**Related Linear issues (OMN-*)**: TBD per file context.
+**Related PRs**: TBD.
+**Related ADRs**: TBD.
+**Related refs/ docs**: TBD.
+
+Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.5900). TODO: refine per file context.

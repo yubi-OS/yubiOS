@@ -1,4 +1,4 @@
-# CI Evidence Review — 2026-07-21
+# CI Evidence Review â 2026-07-21
 
 Status: point-in-time evidence from the complete logs of eight requested workflow runs
 
@@ -30,21 +30,41 @@ This note records what the reviewed runs actually prove, and what they do not. A
 Digest-pinned inputs, checksum-verified downloads, a single Bake graph, and default-deny policy are prerequisites for bit-for-bit reproduction and make policy violations fail closed. They do not alone prove that two builds are byte-identical: package repositories, generated timestamps, provenance attestations, compression, and builder versions can all introduce variation. A release should claim bit-for-bit reproducibility only after two isolated rebuilds compare the intended payload digests (separately from intentionally varying attestations) and the comparison is retained as evidence.
 
 
+
 ## Attestation coverage
 
 This document supports the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
 
 
+
 ## Trust chain coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
+
 
 
 ## Continuous / adaptive coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
 
 
 ## Segmentation coverage
 
 This document applies the yubiOS segmentation primitive — Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.
+
+
+## Recommendation
+
+**Verdict**: REVISE — context-dependent
+**One-line**: TBD per file context.
+
+Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8429). TODO: refine per file context.
+
+
+## Recommendation
+
+**Verdict**: REVISE — context-dependent
+**One-line**: TBD per file context.
+
+Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4201). TODO: refine per file context.

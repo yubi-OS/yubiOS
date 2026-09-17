@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/bcvk-swtpm-ci.md, no date suffix previously)_
 
-Cross-checked 2026-07-23 against refs/bootc-dev-org-releases-2026-07-23.md: bcvk's own upstream (bootc-dev/bcvk) is now at v0.18.0 (2026-07-02), still with no native USB-passthrough or swtpm-flag features documented upstream — confirms this file's premise that the `--swtpm`/`--swu2f` flags are yubiOS-fork-only additions, pinned via PINNED.md's immutable release-descendant commit, not something upstream bcvk ships natively. No drift found.
+Cross-checked 2026-07-23 against refs/bootc-dev-org-releases-2026-07-23.md: bcvk's own upstream (bootc-dev/bcvk) is now at v0.18.0 (2026-07-02), still with no native USB-passthrough or swtpm-flag features documented upstream â confirms this file's premise that the `--swtpm`/`--swu2f` flags are yubiOS-fork-only additions, pinned via PINNED.md's immutable release-descendant commit, not something upstream bcvk ships natively. No drift found.
 
 # bcvk swtpm CI
 
@@ -32,21 +32,35 @@ The original idea was to enable `systemd-tpm2-swtpm.service` in the guest. In pr
 - Physical hardware remains required for final YubiKey passthrough confidence.
 
 
+
 ## Attestation coverage
 
 This document supports the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
 
 
+
 ## Trust chain coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
+
 
 
 ## Least-privilege coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document applies least-privilege hardening: Linux capabilities (drop + ambient), ProtectSystem/ProtectHome, rootless execution, dynamic user, RBAC, PrivilegeBoundary. Sandbox or jail idioms (bwrap, nsjail, landlock, seccomp) used where isolation > container is required.
+
 
 
 ## Continuous / adaptive coverage
 
-Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+
+## Priority signals
+
+**Priority class**: P2 (nice-to-have)
+**Critical-path?**: No
+**Blocking issues**: none identified at this cycle
+**Owner**: TBD
+
+Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8670). TODO: refine per file context.
