@@ -9,6 +9,8 @@ import { mapRouteHandler, mapsCompareHandler } from "./lib/map-route.mjs";
 import { mapPreviewHandler } from "./lib/preview-route.mjs";
 import { mapControlHandler, VERSION as CONTROL_VERSION } from "./lib/control-route.mjs";
 import { outcomesPostHandler, outcomesGetHandler, VERSION as OUTCOMES_VERSION } from "./lib/outcomes-route.mjs";
+import { axisRedundancyHandler, VERSION as AXIS_VERSION } from "./lib/axis-redundancy.mjs";
+import { mapConsistencyHandler, VERSION as CONSISTENCY_VERSION } from "./lib/consistency-route.mjs";
 
 // src/github.ts
 var GH = "https://api.github.com";
@@ -798,6 +800,8 @@ POST /api/map/preview {"baseline_id": n, "texts": [...full resulting corpus...],
 POST /api/map/control {"baseline_id": n, "texts": [...exact baseline corpus...], "names": [...], "n_controls"?: 2..12, "control_seed"?: int} -> positive control (nothing persisted)
 POST /api/outcomes {"baseline_id": n, "target": {...}, "predicted_delta"?, "after_id"? | "observed_delta"?, "task_check": {"verdict","verifier","notes"?}, "supersedes"?} -> append-only ledger row
 GET  /api/outcomes?baseline_id=n -> ledger rows + contingency of counts
+POST /api/map/axis-redundancy {"map_id": n, "K"?: 2..40, "null_seed"?: int} -> per-axis LOO-NN predictability trial vs fixed-margin null (admitted:false always)
+POST /api/map/consistency {"baseline_id": n, "texts": [...corpus with primary candidate...], "names": [...], "target": {...}, "variants": [{"label","text"}] (1..3)} -> one edit under caller variants; sign agreement, never a gate
      -> { preview:true, persisted:false, map, comparison, math_ledger, target, unchanged_source_count, unchanged_anchor_count, side_effects }
      reads the stored baseline, re-embeds the actual candidate texts on the baseline's frozen frame and writes NOTHING (no map row, no Vectorize).
 GET  /api/health                -> read-only version info
@@ -822,7 +826,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
             } catch (e) {
               pointmapVersion = null;
             }
-            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION }, now: new Date().toISOString() });
+            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION }, now: new Date().toISOString() });
           }
           if (p === "/api/fits" && req.method === "GET") {
             return json({ fits: await listFits(db) });
@@ -1129,6 +1133,27 @@ GET  /map/pointmap.js           -> static pointmap.js module
                 }
               };
               const result = await mapControlHandler(body, { env, PM, embedDocuments, loadStoredMap });
+              return json(result);
+            } catch (e) {
+              return errorResponse(e);
+            }
+          }
+          if ((p === "/api/map/consistency" || p === "/api/map/axis-redundancy") && req.method === "POST") {
+            try {
+              const body = await readJsonLimited(req, 8 * 1024 * 1024);
+              // Read-only map load, same discipline as preview: no CREATE TABLE, no INSERT.
+              const loadStoredMap = async (id) => {
+                try {
+                  const row = await db.prepare(`SELECT map_json FROM maps WHERE id = ?`).bind(Number(id)).first();
+                  return row ? decodeMap(row.map_json) : null;
+                } catch (e) {
+                  console.error("diagnostic map load failed:", String(e?.message || e));
+                  throw new ApiError(503, "map storage unavailable; retry later");
+                }
+              };
+              const result = p === "/api/map/consistency"
+                ? await mapConsistencyHandler(body, { env, PM, embedDocuments, loadStoredMap })
+                : await axisRedundancyHandler(body, { loadStoredMap, PM });
               return json(result);
             } catch (e) {
               return errorResponse(e);

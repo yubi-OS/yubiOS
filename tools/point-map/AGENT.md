@@ -22,6 +22,8 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | DELETE | `/api/maps/:id` | delete one saved map; explicit user authorization required |
 | POST | `/api/map/control` | `{baseline_id, texts, names, n_controls?, control_seed?}` (the EXACT baseline corpus) — CutPaste-style positive control: n seeded splice CHANGEs measured through the preview path on the frozen frame; writes nothing; recipe fixed |
 | POST | `/api/outcomes` | `{baseline_id, target, predicted_delta?, after_id? \| observed_delta?, task_check:{verdict,verifier,notes?}, supersedes?}` — append-only pre-registration ledger row (201) |
+| POST | `/api/map/axis-redundancy` | `{map_id, K?, null_seed?}` — per-axis leave-one-out predictability of bit j from the other bits, run against K draws of the fixed-margin null; exclusion-only verdicts; `admitted:false` always; no embedding, nothing written |
+| POST | `/api/map/consistency` | `{baseline_id, texts, names, target, variants:[{label,text}] (1..3), predicted_delta?}` — one candidate measured under caller-supplied text variants on the frozen frame; sign agreement reported, never used as a gate; nothing written |
 | GET | `/api/outcomes?baseline_id=` | ledger rows plus a contingency of COUNTS with n; never a rate |
 | POST | `/api/vector/search` | existing cosine search; its historical index may mix prefix and pooled-document representations; scores are not calibrated across ingestion versions |
 | GET | `/map/` | browser view, full-file uploads, frozen baseline selector, comparison panel |
@@ -198,4 +200,29 @@ POST /api/outcomes  { "baseline_id": 123, "target": {"action":"change","name":"r
 - `GET /api/outcomes?baseline_id=` returns rows and a `contingency` of counts: `n_rows`, `n_pending`, `n_superseded`, `n_effective`, `n_preregistered`, `n_sign_comparable`, `sign_exact_count`, `by_verdict`, `predicted_sign_by_observed_sign`, `verdict_by_sign_exact`, `observed_source_counts`. No rate, percentage or z is computed. A sign-exact geometric prediction is an instrumentation outcome; a kept verdict does not imply the geometry predicted it. The historical 4/10 figure stays a historical count.
 
 Existing stored map rows, frames, ledgers, radius diagnostics and the `/map/` UI are unchanged by both additions. `GET /api/health` now lists the diagnostic module versions.
+
+## Axis redundancy trial (axis-trial/1)
+
+`POST /api/map/axis-redundancy {map_id, K?, null_seed?}` executes the membership condition for one candidate per-axis statistic instead of leaving it unstated. Following TabNet's masked-feature pretraining (Arik & Pfister, AAAI 2021), the statistic `loo-nn-vote/1` predicts each document's bit j from its other d−1 bits by a leave-one-out nearest-neighbour vote (Hamming distance on the remaining axes; ties count 0.5). The same statistic is then computed on K draws of the existing fixed-attempt checkerboard chain (`PM._internal.nullDraw`, every row and column margin preserved; a distinct seed, `map.seed XOR 0x5bd1e995` by default, so the trial chain is not the map's own V2 chain).
+
+Because column margins are fixed under the null, the majority baseline of every axis is identical between observed and null; `observed_minus_margin_baseline` and the null comparison measure inter-axis dependence beyond margins, per axis. Output per axis: `observed_hits`, `observed_ties`, `margin_baseline_hits`, null `{K, mean, sd, min, max, degenerate}`, `z_descriptive` (null when the null is degenerate), plus-one two-sided `p_two_sided` with `p_resolution = 1/(K+1)`, `direction`, and an exclusion-only `verdict`: `excluded-from-fixed-margin-null`, `not-excluded`, or `null-degenerate: no trial possible on this corpus`. A `total` block sums over axes; `counts` tallies verdicts; `margins_preserved` certifies the chain.
+
+`admitted` is hard-coded `false`. Admission of a coordinate is a paper-level decision recorded in `refs/` after trials on more than one corpus; one response never flips it. The statistic never enters rung ranking, sector geometry or any recommendation; `weights`, `importance`, `rank`, `admit` and instrument keys are rejected. No embedding runs, nothing is written. K must be an integer 2..40 (defaults to the map's K); K=40 cannot resolve tails below 1/41, and an "excluded" verdict at that resolution is a small-chain observation, not a discovery threshold.
+
+## Perturbation consistency (consistency/1)
+
+`POST /api/map/consistency` measures ONE candidate edit under several caller-supplied text variants on the same frozen frame and reports whether the geometric reading agrees. FixMatch and UDA trust a pseudo-label only when the model's reading is stable between a weak and a strong augmentation of the same input; the wayfinder has no labels and no trainable model, so only the diagnostic half transplants.
+
+```json
+{ "baseline_id": 123, "texts": ["...full resulting corpus with the primary candidate..."], "names": ["..."],
+  "target": { "action": "change", "name": "refs/x.md" },
+  "variants": [ { "label": "weak", "text": "...minor rephrasing..." }, { "label": "strong", "text": "...different wording, same intent..." } ],
+  "predicted_delta": -1 }
+```
+
+- The API never generates variants (there is no canonical text augmentation, and a server-made one would be tuned to the instrument). 1..3 variants, unique labels (`primary` reserved), echoed by SHA256. `augment`, `generate_variants`, `gate`, `strength` are rejected; instrument keys are rejected (409).
+- Every measurement runs through `/api/map/preview`, inheriting the exact-source-hash checks, anchor verification and no-persist discipline. A variant equal to the baseline source is an explicit no-op measurement; identical variants are flagged as adding no evidence.
+- `measurements[]` carry label, sha256, `isolated_delta`/`isolated_sign`, ledger delta, bits changed, displacement, quantization-silent, anchors. `consistency` reports `signs`, `sign_set`, `all_same_sign`, `delta_min/max/spread`, `bits_moved_count`, `quantization_silent_count`, `noop_count`, and `sign_exact_count` against `predicted_delta` when supplied. No consensus delta or score is computed.
+
+Reading: agreement means the isolated-delta sign is not sensitive to those phrasings; disagreement means the reading is perturbation-sensitive and should be treated as undetermined for planning. Neither outcome authorizes keeping, reverting or deleting; the independent task check still governs, and `task_verdict` stays `not-tested`.
 
