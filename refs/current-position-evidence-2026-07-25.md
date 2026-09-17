@@ -32,9 +32,9 @@ State plainly what is verified today versus what is aspirational, so every other
 - Business-planning groundwork has produced draft docs across the days-0-30/31-60/61-90 trio (PR #103/#105/#111), readiness gates (PR #118), pricing architecture (PR #108, referenced by other docs), and pilot collateral (PR #113).
 
 **Product-market fit (no evidence yet):**
-- Zero customer discovery interviews are recorded in the repo as of this doc. OMN-65âs 10-15 interview target is a plan, not a completed activity.
+- Zero customer discovery interviews are recorded in the repo as of this doc. OMN-65’s 10-15 interview target is a plan, not a completed activity.
 - Zero design partners are recruited (flagged as an open question in both the OMN-65 and OMN-66 drafts).
-- Zero paid pilots have run. OMN-67âs pilot design exists only as a plan (PR #111).
+- Zero paid pilots have run. OMN-67’s pilot design exists only as a plan (PR #111).
 - Zero priced, signed statements of work exist; OMN-71/OMN-84 supply pricing hypotheses and templates, not committed prices with a real customer.
 - This is the core distinction this doc exists to make explicit: engineering artifacts (code, docs, CI) are real and inspectable; commercial validation (someone will pay, at this price, for this problem) does not yet exist in any form.
 
@@ -51,7 +51,7 @@ Per the live BLOCKERS.md (2026-07-22), the following are still open and directly
 
 ## 4. Claims that must remain off-limits until evidence exists
 
-- "Production-ready" or "enterprise-ready" -- off-limits company-wide until at minimum B-VM-CTAP2, B-HARDENING-RUNTIME, and B-REAL-FIDO2 close, per OMN-66âs own exit criteria.
+- "Production-ready" or "enterprise-ready" -- off-limits company-wide until at minimum B-VM-CTAP2, B-HARDENING-RUNTIME, and B-REAL-FIDO2 close, per OMN-66’s own exit criteria.
 - "ARM64 support" as a shipped capability -- off-limits until B-ARM64-PATHA and B-RK3588-TPL close with real-board evidence; today it is groundwork only (6 forks staged), not a working path.
 - "Customers save X with yubiOS" or any ROI figure -- off-limits until at least one real pilot produces measured data, per the claim boundaries in refs/customer-roi-model-2026-07-25.md (OMN-78, PR #115).
 - "Sealed/attested boot" or "tamper-proof" -- off-limits until B-BOOTC-SEAL resolves to an actual signed UKI plus Secure Boot chain, not the current mutable-anchor fs-verity story.
@@ -65,57 +65,17 @@ yubiOS is a public, LGPL-2.1-licensed, work-in-progress FIDO2-first immutable OS
 ## Dependency map
 
 - This is the evidence-boundary document that OMN-65 (PR #103) and OMN-73 (PR #118) each referenced but did not draft themselves.
-- OMN-69 (who pays and why) should read this doc before finalizing target-customer claims, per OMN-65âs own dependency map (OMN-68 and OMN-69 together shape messaging before offer finalization).
+- OMN-69 (who pays and why) should read this doc before finalizing target-customer claims, per OMN-65’s own dependency map (OMN-68 and OMN-69 together shape messaging before offer finalization).
 - Every other landed business doc (OMN-66/67/71/73/78/81/84) should be read against this boundary rather than restating their own evidence claims independently.
 
 ## Open questions
 
 - Whether this doc should be the canonical evidence-boundary reference cited by name in every future business doc, or whether each doc should keep restating a short version -- left as a documentation-convention question, not resolved here.
 
+## Coverage note
 
-
-## Trust chain coverage
-
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
-
-
-## Least-privilege coverage
-
-This document applies least-privilege hardening: Linux capabilities (drop + ambient), ProtectSystem/ProtectHome, rootless execution, dynamic user, RBAC, PrivilegeBoundary. Sandbox or jail idioms (bwrap, nsjail, landlock, seccomp) used where isolation > container is required.
-
-
-
-## Declarative policy coverage
-
-This document integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
-
-
-
-## Continuous / adaptive coverage
-
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
-
+This is a business evidence-boundary document. It introduces no trust anchor, key, certificate, policy file, service unit or runtime detector, so the yubiOS primitive-coverage sections (trust chain, least privilege, declarative policy, continuous/adaptive) do not apply to it. Earlier appended template sections asserting otherwise were removed on 2026-09-17 because they were false for this document; their removal changes no claim in sections 1–5.
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8361). TODO: refine per file context.
-
-
-## Recommendation
-
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.8390). TODO: refine per file context.
-
-
-## Recommendation
-
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.6561). TODO: refine per file context.
+**Verdict**: KEEP as a dated snapshot. **One-line**: sections 1–5 state the evidence boundary as of 2026-07-25 against BLOCKERS.md reviewed 2026-07-22; the live `docs/BLOCKERS.md` on main remains the single source of truth for current blocker status, and any later closure (for example runs or PRs that retired B-VM-CTAP2, B-REAL-FIDO2 or B-BOOTC-SEAL) supersedes the corresponding line here without being back-edited into this snapshot.
