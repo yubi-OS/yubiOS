@@ -1,6 +1,19 @@
 import re,base64,sys
 TEMPLATE_STARTS=["This document applies least-privilege hardening","This document integrates with the yubiOS declarative-policy substrate","This document supports the yubiOS continuous-monitoring layer","This document participates in the yubiOS root-of-trust chain","This skill applies least-privilege hardening","This skill integrates with the yubiOS declarative-policy substrate","This skill supports the yubiOS continuous-monitoring layer","This skill participates in the yubiOS root-of-trust chain"]
 MOJI={'â\x80\x99':'’','â\x80\x98':'‘','â\x80\x9c':'“','â\x80\x9d':'”','â\x80\x94':'—','â\x80\x93':'–','â\x80\xa6':'…','Ã©':'é','Ã¨':'è','Ã¡':'á','Ã¶':'ö','Ã¼':'ü','Ã±':'ñ','Â\xa0':' ','Â ':' ','\ufffd':''}
+# C1x: comprehensive deterministic table — every BMP codepoint whose UTF-8 bytes were
+# misdecoded as cp1252 gets mapped back. Built at import; collisions (same mojibake
+# string from two codepoints) keep the first (lowest) codepoint.
+def _build_moji():
+    t={}
+    for cp in range(0xa0, 0x2500):
+        ch=chr(cp)
+        try: s=ch.encode('utf-8').decode('cp1252')
+        except Exception: continue
+        if s==ch or len(s)<2: continue
+        if s not in t: t[s]=ch
+    return t
+MOJI.update(_build_moji())
 def fix(text, path):
     log=[]
     # C4a: whole file base64-encoded

@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/luks-fido2-e2e-test.md, no date suffix previously)_
 
-Status check 2026-07-23: this file's "Latest CI milestone" section (run 29525332901, bootloader-update.service failure) is now superseded by live BLOCKERS.md, which shows that failure was retired â run 29872832727 reached the guest without the old root-SSH/DirectBoot bootloader-update failures, leaving **B-VM-CTAP2** (no CTAP2 token enumerates) as the narrower remaining gap. Cross-checked against refs/fido2-ci-emulator-status-2026-07-23.md: passless (the software authenticator this file references) remains the actively-maintained correct choice (v0.13.0, 2026-07-12) â the guardrails and test-path table below remain accurate. Recommend the next update to this file happen once B-VM-CTAP2 closes.
+Status check 2026-07-23: this file's "Latest CI milestone" section (run 29525332901, bootloader-update.service failure) is now superseded by live BLOCKERS.md, which shows that failure was retired — run 29872832727 reached the guest without the old root-SSH/DirectBoot bootloader-update failures, leaving **B-VM-CTAP2** (no CTAP2 token enumerates) as the narrower remaining gap. Cross-checked against refs/fido2-ci-emulator-status-2026-07-23.md: passless (the software authenticator this file references) remains the actively-maintained correct choice (v0.13.0, 2026-07-12) — the guardrails and test-path table below remain accurate. Recommend the next update to this file happen once B-VM-CTAP2 closes.
 
 # LUKS2 FIDO2 end-to-end test
 
@@ -48,25 +48,21 @@ The active failure moved inside the guest: `bootloader-update.service` failed du
 `--swtpm` and `--swu2f` are required from the immutable yubi-OS/bcvk release-descendant commit in `PINNED.md`. bcvk is referenced by yubiOS CI and is not merged into this repository.
 
 
-
 ## Attestation coverage
 
 This document supports the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Least-privilege coverage
 
-This document applies least-privilege hardening: Linux capabilities (drop + ambient), ProtectSystem/ProtectHome, rootless execution, dynamic user, RBAC, PrivilegeBoundary. Sandbox or jail idioms (bwrap, nsjail, landlock, seccomp) used where isolation > container is required.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Continuous / adaptive coverage
 
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
