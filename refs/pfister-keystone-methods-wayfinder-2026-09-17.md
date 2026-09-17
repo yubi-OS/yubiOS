@@ -70,3 +70,12 @@ Stress test of the two winners against the recorded "do not do" set: neither del
 1. Run `/api/map/control` on a round-3 style refs/ baseline (n=12, two seeds) and record the response distribution next to the round-3 real-edit deltas; that comparison, not the control alone, states whether real edits are inside or outside the known-signal band.
 2. Pre-register the next wayfinder round through `/api/outcomes` (pending rows before any task check), then append verdict rows. Only that produces forward sign-agreement counts.
 3. If an axis-redundancy statistic is ever wanted, run it on curveball draws first and file the admission result as a negative or positive before any endpoint exposes it.
+
+## 7. Deployment receipts (2026-09-17, UTC)
+
+- PR #235 squash-merged as `a426ed47ef0eea36fed383f13bd87e06b2d7f6cf` (branch `point-map-control-outcomes-2026-09-17`, head `8c2b2661`).
+- Worker `steady-orbit` PUT at 2026-09-17T10:13:41Z: 13 modules re-uploaded byte-identical except `index.js` (rebuilt from this commit, 201,844 B, sha256 `cbd2f7ccdccf…`), `main_module solar-entry.mjs`, `keep_bindings` for all binding types; settings/bindings unchanged (AI, DB, SITE, VEC, WEBSITE_RATE_LIMIT). Pre-upload check: all 13 live modules matched the 01:03Z index snapshot (no concurrent change overwritten).
+- SITE KV `AGENT.md` (sha256 `6ef4d0e5e9a0…`, verified equal to `tools/point-map/AGENT.md`) and `llms.txt` replaced.
+- Live: `/api/health` → `diagnostics {math: wayfinder-math/1, radius: radius/1, control: calibration/1, outcomes: outcomes/1}`; `/` 200 (42,397 B), `/map/` 200; `DELETE /api/outcomes/1` → 405.
+- Smoke on 12 refs/ docs pinned at `a426ed47` → baseline map **77** (frame `6b13364cd8ac5b57`, isolated 12/12, occupied 10): `POST /api/map/control` n=3 seed 20260917 in 4.2 s → isolated_delta {−2, 0, 0}, bits_changed {4, 3, 1}, geodesic displacement 0.53–1.06, 0 quantization-silent, 11/11 anchors byte-equal per control, ledger delta == comparison delta for all three; `splice_fraction` → 422. `POST /api/outcomes` pending row **1** (201, preregistered true, observed none); verifier `geometry` → 422; GET contingency n_rows 1, n_effective 0.
+- Reading of the smoke: on this 12-document frame a 25% splice moved 1–4 bits in every case and changed the isolated count in one of three; this is an instrument reading on frame `6b13364cd8ac5b57` only, not a benchmark and not evidence about any real edit.
