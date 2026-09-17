@@ -42,9 +42,9 @@ import { mapPreviewHandler, requireTextBaseline } from "./preview-route.mjs";
 export const VERSION = "calibration/1";
 export const GENERATOR = "cutpaste-splice/1";
 export const SPLICE_FRACTION = 0.25;
-export const DEFAULT_N = 6;
+export const DEFAULT_N = 4;
 export const MIN_N = 2;
-export const MAX_N = 12;
+export const MAX_N = 6;
 export const DEFAULT_SEED = 20260917;
 
 const FIXED_RECIPE_KEYS = ["splice_fraction", "fraction", "generator", "recipe", "window", "hosts", "donors", "host", "donor", "segment"];
@@ -151,7 +151,11 @@ function signCounts(values) {
  * mapPreviewHandler so every control is measured by the shipped preview path.
  */
 export async function mapControlHandler(body, ctx) {
-  const { env, PM, embedDocuments, loadStoredMap } = ctx;
+  const { env, PM, embedDocuments } = ctx;
+  // One request = one baseline. Memoize the stored-map load so n controls do
+  // not re-read (and re-decode) the same ~MB row 2n times from D1.
+  const loadCache = new Map();
+  const loadStoredMap = async (id) => { const k = Number(id); if (!loadCache.has(k)) loadCache.set(k, await ctx.loadStoredMap(k)); return loadCache.get(k); };
   const preview = ctx.previewHandler || mapPreviewHandler;
   const { texts, names, n, seed } = validateRequest(body);
   validateDocs(texts);

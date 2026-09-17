@@ -131,7 +131,7 @@ async function controlPreflightTests() {
     for (const k of ["d", "K", "T", "seed", "threshold", "frame", "persist", "target", "predicted_delta"]) await expectApiError(() => call({ [k]: 1 }), 409, k);
   });
   await test("rejects n_controls / control_seed out of range", async () => {
-    await expectApiError(() => call({ n_controls: 1 }), 422, "n=1"); await expectApiError(() => call({ n_controls: 13 }), 422, "n=13"); await expectApiError(() => call({ n_controls: 2.5 }), 422, "float");
+    await expectApiError(() => call({ n_controls: 1 }), 422, "n=1"); await expectApiError(() => call({ n_controls: 7 }), 422, "n=7"); await expectApiError(() => call({ n_controls: 2.5 }), 422, "float");
     await expectApiError(() => call({ control_seed: 1.5 }), 422, "seed float");
   });
   await test("rejects a corpus that is not byte-identical to the baseline with 409 (changed / added / missing)", async () => {
@@ -188,9 +188,9 @@ async function controlRunTests() {
     const r3 = await mapControlHandler({ baseline_id: fx.baseline_id, texts: TEXTS, names: NAMES, n_controls: 4, control_seed: 12 }, ctxOf(fx));
     assert.notDeepEqual(r3.controls.map((c) => [c.host, c.donor]), r.controls.map((c) => [c.host, c.donor]));
   });
-  await test("default n_controls is 6 and default seed is echoed", async () => {
+  await test("default n_controls is 4 and default seed is echoed", async () => {
     const r4 = await mapControlHandler({ baseline_id: fx.baseline_id, texts: TEXTS, names: NAMES }, ctxOf(fx));
-    assert.equal(r4.recipe.n_controls, 6); assert.equal(r4.recipe.control_seed, 20260917); assert.equal(r4.controls.length, 6);
+    assert.equal(r4.recipe.n_controls, 4); assert.equal(r4.recipe.control_seed, 20260917); assert.equal(r4.controls.length, 4);
   });
   await test("an injected preview double is used per control (wiring), and the real one is the default", async () => {
     let calls = 0;
