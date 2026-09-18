@@ -1,4 +1,4 @@
-# yubiOS Workflow Patterns â Deep Dive (2026-07-30)
+# yubiOS Workflow Patterns — Deep Dive (2026-07-30)
 
 ## TL;DR
 
@@ -15,11 +15,11 @@ container:
     password: ${{ secrets.DOCKER }}
   image: docker://dhi.io/debian-base@sha256:4440cf16b142316744a7fd1c5070eb23df54c7c335d8684c8d72864f0f3eb30e
 ```
-`ci_test_sealed-uki-vm.yml` (Jenny current focus, PR #155) lacks this block entirely â that is the security architecture gap driving the v2/v3/v4 fix series on `sealed-uki-vm-lane-v2`.
+`ci_test_sealed-uki-vm.yml` (Jenny current focus, PR #155) lacks this block entirely — that is the security architecture gap driving the v2/v3/v4 fix series on `sealed-uki-vm-lane-v2`.
 
 **2. AGENTS.md and the in-repo `github-actions` skill are STALE relative to `main`.** They still document:
-- `actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd` (v6.0.2) â but 30 of 38 in-repo uses already at `3d3c42e5aac5ba805825da76410c181273ba90b1` (v7.0.1)
-- `dhi.io/debian-base@sha256:9415967â¦` (v2026.03.14) â but all 21 container jobs use `sha256:9d293dadâ¦` (multi-arch OCI INDEX)
+- `actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd` (v6.0.2) — but 30 of 38 in-repo uses already at `3d3c42e5aac5ba805825da76410c181273ba90b1` (v7.0.1)
+- `dhi.io/debian-base@sha256:9415967…` (v2026.03.14) — but all 21 container jobs use `sha256:9d293dad…` (multi-arch OCI INDEX)
 
 Any agent or developer copy-pasting from the skill today would re-introduce superseded refs.
 
@@ -27,18 +27,18 @@ Any agent or developer copy-pasting from the skill today would re-introduce supe
 
 **Five concrete fixes the org needs:**
 - **A.** Update `skills/github-yubios-KS9n5GAT/github-actions/SKILL.md` to match `main` (live digest + checkout v7.0.1)
-- **B.** Roll 8 `actions/checkout@de0fac2e4500â¦` (v6.0.2) to `3d3c42e5aac5â¦` (v7.0.1) in `ci_fork_bcvk.yml`, `ci_fork_edk2.yml`, `ci_fork_mkosi.yml`, `ci_fork_optee-os.yml`, `ci_test_sealed-uki-vm.yml`
+- **B.** Roll 8 `actions/checkout@de0fac2e4500…` (v6.0.2) to `3d3c42e5aac5…` (v7.0.1) in `ci_fork_bcvk.yml`, `ci_fork_edk2.yml`, `ci_fork_mkosi.yml`, `ci_fork_optee-os.yml`, `ci_test_sealed-uki-vm.yml`
 - **C.** Restore the canonical `container:` block in `ci_test_sealed-uki-vm.yml` (the v4 fix Jenny is iterating on)
 - **D.** Adopt the canonical SoftHSM + `provider:pkcs11` + `systemd-sbsign` signing pattern in `ci_test_sealed-uki-vm.yml`
 - **E.** Provision OVMF_CODE.fd / OVMF_VARS.fd from `ci_fork_edk2.yml` artifact + enroll yubiOS ROTPK via `virt-fw-vars` (currently no workflow does this)
 
 ---
 
-## Stream 1 â Container + dind patterns (subagent 1)
+## Stream 1 — Container + dind patterns (subagent 1)
 
 **Coverage:** All 24 workflow files scanned. 21 jobs use a `container:` block; the rest run on the bare `ubuntu-24.04` runner.
 
-**Canonical block order** (matters â every "good" job places them in this order):
+**Canonical block order** (matters — every "good" job places them in this order):
 ```yaml
 container:
   options: --privileged          # enables dind + user-namespace operations
@@ -51,47 +51,47 @@ container:
 ```
 
 **dind usage in 14 jobs:**
-- 13 of 14 use the **rootless-via-socket** pattern: `docker -H unix:///run/docker-rootless/docker.sock buildx bake â¦`. Outer `--privileged` makes this work (rootless dockerd needs kernel namespace privileges to spawn its user-namespace mapping inside the container).
+- 13 of 14 use the **rootless-via-socket** pattern: `docker -H unix:///run/docker-rootless/docker.sock buildx bake …`. Outer `--privileged` makes this work (rootless dockerd needs kernel namespace privileges to spawn its user-namespace mapping inside the container).
 - 1 outlier (`ci_test_bootc-filesystem.yml::install-to-filesystem`) uses the **legacy inner-dind** pattern: `docker run --rm --privileged --pid=host --ipc=host` inside a container that has NO outer `options:`. Same class of bug Jenny is hitting in `sealed-uki-vm`.
 
-**Canonical block deployment:** 14/21 container jobs have the full canonical shape (options + volumes + credentials + image). 7/21 correctly omit `options:` and `volumes:` (linter / reproducibility subset â no docker, no `/mnt`). 1 workflow (`ci_test_sealed-uki-vm.yml`) has NO `container:` block at all (the regression state Jenny is iterating on).
+**Canonical block deployment:** 14/21 container jobs have the full canonical shape (options + volumes + credentials + image). 7/21 correctly omit `options:` and `volumes:` (linter / reproducibility subset — no docker, no `/mnt`). 1 workflow (`ci_test_sealed-uki-vm.yml`) has NO `container:` block at all (the regression state Jenny is iterating on).
 
-**Non-dhi.io outlier:** `yubiOS-ci.yml::hadolint` uses `docker://ghcr.io/hadolint/hadolint:v2.14.0-debian@sha256:158cd0184â¦` with **no credentials block**. AGENTS.md currently forbids non-dhi.io containers â this is the only exception in the entire org.
+**Non-dhi.io outlier:** `yubiOS-ci.yml::hadolint` uses `docker://ghcr.io/hadolint/hadolint:v2.14.0-debian@sha256:158cd0184…` with **no credentials block**. AGENTS.md currently forbids non-dhi.io containers — this is the only exception in the entire org.
 
-**Live image digest vs documented:** Live is `sha256:9d293dadâ¦` (multi-arch INDEX, per `ci_mkosi-installer.yml` comment `# auto-resolves to ${{ matrix.arch }}`). AGENTS.md / `github-actions/SKILL.md` document `sha256:9415967â¦` (v2026.03.14 per-arch). The skill and AGENTS.md are STALE.
+**Live image digest vs documented:** Live is `sha256:9d293dad…` (multi-arch INDEX, per `ci_mkosi-installer.yml` comment `# auto-resolves to ${{ matrix.arch }}`). AGENTS.md / `github-actions/SKILL.md` document `sha256:9415967…` (v2026.03.14 per-arch). The skill and AGENTS.md are STALE.
 
 ---
 
-## Stream 2 â Action SHA + workflow integrity (subagent 2)
+## Stream 2 — Action SHA + workflow integrity (subagent 2)
 
 **Coverage:** 65 total `uses:` lines across 24 workflows. **Zero floating refs. Zero unpinned refs.** Every `uses:` has a 40-char hex SHA or `sha256:` digest.
 
 **Authoritative allowlist:** `/PINNED.md` (file blob SHA `2581269d96d2c1a83549de61754028fcdc568b2c`, 10937 bytes). Two critical entries differ from the `github-actions/SKILL.md` body:
-- `actions/checkout` rolled from v6.0.2 (`de0fac2e4500â¦`) to **v7.0.1 (`3d3c42e5aac5â¦`)**
-- `dhi.io/debian-base` rotated from `sha256:9415967â¦` to **`sha256:9d293dadâ¦`** (multi-arch INDEX)
+- `actions/checkout` rolled from v6.0.2 (`de0fac2e4500…`) to **v7.0.1 (`3d3c42e5aac5…`)**
+- `dhi.io/debian-base` rotated from `sha256:9415967…` to **`sha256:9d293dad…`** (multi-arch INDEX)
 
 **Drift summary:**
 - Floating refs (`@v4`, `@main`, `@latest`): **0**
 - Unpinned refs: **0**
-- Superseded SHAs (mismatch with PINNED.md): **8** â all `actions/checkout@de0fac2e4500â¦` (v6.0.2)
-- Workflows containing stale SHAs: **5** â `ci_fork_bcvk.yml` (Ã2), `ci_fork_edk2.yml` (Ã1), `ci_fork_mkosi.yml` (Ã3), `ci_fork_optee-os.yml` (Ã1), `ci_test_sealed-uki-vm.yml` (Ã1)
-- `actions/download-artifact@37930b1c2abaâ¦` is in PINNED.md but NOT in the `github-actions` skill allowlist â skill allowlist is incomplete
+- Superseded SHAs (mismatch with PINNED.md): **8** — all `actions/checkout@de0fac2e4500…` (v6.0.2)
+- Workflows containing stale SHAs: **5** — `ci_fork_bcvk.yml` (×2), `ci_fork_edk2.yml` (×1), `ci_fork_mkosi.yml` (×3), `ci_fork_optee-os.yml` (×1), `ci_test_sealed-uki-vm.yml` (×1)
+- `actions/download-artifact@37930b1c2aba…` is in PINNED.md but NOT in the `github-actions` skill allowlist — skill allowlist is incomplete
 
-**Permissions catalog:** All 24 workflows declare a top-level `permissions:` block â **zero workflows rely on the read-write `GITHUB_TOKEN` default**. 19 of 24 add a redundant job-level `permissions:` override (same minimum, harmless). The 3 `fetch-*` workflows have `contents: write, actions: write` at workflow level (needed for Contents API push to repo); job-level downgrades to `contents: read` are defensive belt-and-suspenders. No workflow grants `packages: write`, `id-token: write`, or `attestations: write` â sigstore/SLSA work happens out-of-band.
+**Permissions catalog:** All 24 workflows declare a top-level `permissions:` block — **zero workflows rely on the read-write `GITHUB_TOKEN` default**. 19 of 24 add a redundant job-level `permissions:` override (same minimum, harmless). The 3 `fetch-*` workflows have `contents: write, actions: write` at workflow level (needed for Contents API push to repo); job-level downgrades to `contents: read` are defensive belt-and-suspenders. No workflow grants `packages: write`, `id-token: write`, or `attestations: write` — sigstore/SLSA work happens out-of-band.
 
-**Matrix strategy catalog:** Every matrix job uses `matrix.include: [{arch: amd64}]` forward-looking stub + `fail-fast: false` (explicit, not default) + `runs-on: ubuntu-24.04` (pinned, never `ubuntu-latest`). The `matrix.include` shape is a placeholder â when the org is ready to add `arm64`, the stub flips to two entries. Single non-stub axis is `ci_firmware-rk.yml:firmware-reproducibility`'s `matrix.board: [qemu-arm64, rockpro64-rk3399, rock5b-rk3588]`.
+**Matrix strategy catalog:** Every matrix job uses `matrix.include: [{arch: amd64}]` forward-looking stub + `fail-fast: false` (explicit, not default) + `runs-on: ubuntu-24.04` (pinned, never `ubuntu-latest`). The `matrix.include` shape is a placeholder — when the org is ready to add `arm64`, the stub flips to two entries. Single non-stub axis is `ci_firmware-rk.yml:firmware-reproducibility`'s `matrix.board: [qemu-arm64, rockpro64-rk3399, rock5b-rk3588]`.
 
 **Canonical action SHAs (single recommendation per action):**
 | Action | SHA | Note |
 |---|---|---|
-| `actions/checkout` | `3d3c42e5aac5â¦` (v7.0.1) | matches PINNED.md; 30 of 38 uses already at this SHA |
-| `actions/upload-artifact` | `bbbca2ddaa5d8feâ¦` (v4) | matches PINNED.md + skill allowlist |
-| `actions/download-artifact` | `37930b1c2abaa49bâ¦` | matches PINNED.md; **missing from skill allowlist** |
-| `dhi.io/debian-base` (multi-arch INDEX) | `sha256:9d293dadâ¦` | matches PINNED.md; **skill still shows superseded `sha256:9415967â¦`** |
+| `actions/checkout` | `3d3c42e5aac5…` (v7.0.1) | matches PINNED.md; 30 of 38 uses already at this SHA |
+| `actions/upload-artifact` | `bbbca2ddaa5d8fe…` (v4) | matches PINNED.md + skill allowlist |
+| `actions/download-artifact` | `37930b1c2abaa49b…` | matches PINNED.md; **missing from skill allowlist** |
+| `dhi.io/debian-base` (multi-arch INDEX) | `sha256:9d293dad…` | matches PINNED.md; **skill still shows superseded `sha256:9415967…`** |
 
 ---
 
-## Stream 3 â Crypto/signing patterns (subagent 3)
+## Stream 3 — Crypto/signing patterns (subagent 3)
 
 **Coverage:** Only **2 of 24 workflows** touch the crypto/signing lane: `ci_mkosi-installer.yml` (canonical, 33 pattern matches) and `ci_test_sealed-uki-vm.yml` (stub, 3 matches). Every other workflow is signing-agnostic.
 
@@ -112,7 +112,7 @@ printf 'pkcs11:token=yubios-9c;object=piv-9c;type=private?pin-value=123456' \
   > mkosi.secure-boot.pkcs11-uri
 ```
 
-**Canonical signing invocation** (mkosi â systemd-sbsign via pkcs11-provider):
+**Canonical signing invocation** (mkosi → systemd-sbsign via pkcs11-provider):
 ```bash
 mkosi \
   --profile minimal --distribution fedora --release 45 \
@@ -148,42 +148,42 @@ SignExpectedPcr=no
 
 **Stub divergences** (`ci_test_sealed-uki-vm.yml` vs canonical):
 - `--free` slot allocator vs `--slot 0` (stub hard-codes slot)
-- `SOFTHSM2_CONF` not set (stub relies on `~/.config/softhsm2/softhsm2.conf` default â will hit `C_Initialize error 5` inside mkosi sandbox)
+- `SOFTHSM2_CONF` not set (stub relies on `~/.config/softhsm2/softhsm2.conf` default — will hit `C_Initialize error 5` inside mkosi sandbox)
 - No private-key import (stub cannot sign anything)
 - No cert generation (no `mkosi.secure-boot.pem` to feed `sbverify`)
-- `engine:pkcs11` in design-doc sketch â violates **ADR-008** (canonical uses `provider:pkcs11`)
-- `libsofthsm2.so` path: design doc says `/usr/lib64/libsofthsm2.so` (Fedora path) â **wrong for the dhi container** which is Debian (correct Debian path: `/usr/lib/softhsm/libsofthsm2.so`)
+- `engine:pkcs11` in design-doc sketch — violates **ADR-008** (canonical uses `provider:pkcs11`)
+- `libsofthsm2.so` path: design doc says `/usr/lib64/libsofthsm2.so` (Fedora path) — **wrong for the dhi container** which is Debian (correct Debian path: `/usr/lib/softhsm/libsofthsm2.so`)
 - No OVMF_CODE.fd / OVMF_VARS.fd provisioning (no workflow does this)
 - No ROTPK enrollment into OVMF `db` (no workflow does this)
 
 ---
 
-## What this means â cross-cutting recommendations
+## What this means — cross-cutting recommendations
 
 ### Priority 1: Fix `ci_test_sealed-uki-vm.yml` (Jenny current focus, PR #155)
 
-The v4 fix in flight (commit pending, branch `sealed-uki-vm-lane-v2`) needs to restore the canonical `container:` block on all 3 jobs. The deep dive confirms this is the right call â 14/21 jobs use this exact pattern, all proven working.
+The v4 fix in flight (commit pending, branch `sealed-uki-vm-lane-v2`) needs to restore the canonical `container:` block on all 3 jobs. The deep dive confirms this is the right call — 14/21 jobs use this exact pattern, all proven working.
 
 Beyond the container block, the stub needs to adopt the canonical SoftHSM bootstrap (otherwise step 5 `Bootstrap SoftHSM` will fail the same way run #8 did). And it needs `sbverify --cert mkosi.secure-boot.pem` between signing and QEMU boot (otherwise a sign-time failure propagates into a confusing OVMF rejection that looks like a Secure-Boot violation).
 
 ### Priority 2: Update the in-repo skill to match `main`
 
 The `github-actions` skill body still documents superseded entries:
-- `actions/checkout@de0fac2e4500â¦` (v6.0.2)
-- `dhi.io/debian-base@sha256:9415967â¦` (v2026.03.14)
+- `actions/checkout@de0fac2e4500…` (v6.0.2)
+- `dhi.io/debian-base@sha256:9415967…` (v2026.03.14)
 
 Any agent or developer copy-pasting from the skill today re-introduces drift. Two-line fix to the skill body: bump the SHA + version comment to match PINNED.md.
 
-Also add `actions/download-artifact@37930b1c2abaâ¦` and `docker/setup-buildx-action@d7f5e7f5â¦` to the skill allowlist (both in PINNED.md and used in workflows, currently absent from skill body).
+Also add `actions/download-artifact@37930b1c2aba…` and `docker/setup-buildx-action@d7f5e7f5…` to the skill allowlist (both in PINNED.md and used in workflows, currently absent from skill body).
 
 ### Priority 3: Roll 8 stale checkout SHAs
 
-All `actions/checkout@de0fac2e4500â¦` (v6.0.2) invocations in 5 fork-CI workflows should become `3d3c42e5aac5â¦` (v7.0.1):
+All `actions/checkout@de0fac2e4500…` (v6.0.2) invocations in 5 fork-CI workflows should become `3d3c42e5aac5…` (v7.0.1):
 - `ci_fork_bcvk.yml` (lines 93, 131)
 - `ci_fork_edk2.yml` (line 102)
 - `ci_fork_mkosi.yml` (lines 76, 94, 110)
 - `ci_fork_optee-os.yml` (line 99)
-- `ci_test_sealed-uki-vm.yml` (line 28) â Jenny's current focus
+- `ci_test_sealed-uki-vm.yml` (line 28) — Jenny's current focus
 
 ### Priority 4: Provision OVMF for Secure Boot VM tests
 
@@ -195,9 +195,9 @@ Without this, the QEMU OVMF Secure Boot step will refuse the signed UKI with an 
 
 ## Sources
 
-**Repo files inspected** (all on `main` branch @ `aa8f9dee12â¦`):
-- `/PINNED.md` (blob `2581269d96d2c1a83549de61754028fcdc568b2c`, 10937 bytes) â authoritative allowlist
-- `mkosi.conf` (repo root, lines 56-60) â `[Validation]` block
+**Repo files inspected** (all on `main` branch @ `aa8f9dee12…`):
+- `/PINNED.md` (blob `2581269d96d2c1a83549de61754028fcdc568b2c`, 10937 bytes) — authoritative allowlist
+- `mkosi.conf` (repo root, lines 56-60) — `[Validation]` block
 - 24 workflows in `.github/workflows/`:
   - `ci.yml` (dispatch orchestrator)
   - `ci_dev_image.yml`, `ci_firmware-rk.yml` (matrix builds)
