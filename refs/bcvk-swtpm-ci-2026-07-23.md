@@ -64,3 +64,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 **Owner**: TBD
 
 Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8670).
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 61)
+
+bcvk swtpm CI record: the swu2f/swtpm lanes it documents remain the working pattern the hardware-leg proof exercised; note additive.
