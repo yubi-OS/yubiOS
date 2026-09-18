@@ -163,3 +163,7 @@ Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+1.0531).
 **Out of scope**: TBD.
 
 Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4341).
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 84)
+
+assets repoint verification record (round-7 repaired): the repoint commits it documents are historical; the assets repo is separate now (census: 19 non-dot repos); note additive.
