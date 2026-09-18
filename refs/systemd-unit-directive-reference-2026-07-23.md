@@ -1,5 +1,5 @@
 # systemd Reference: exec/unit/service/directives
-_Refreshed: June 23, 2026 â Sources: man7.org systemd v260 â v261 additions appended 2026-07-23, see bottom section_
+_Refreshed: June 23, 2026 — Sources: man7.org systemd v260 — v261 additions appended 2026-07-23, see bottom section_
 
 ## Man Page Map
 
@@ -54,8 +54,8 @@ _Refreshed: June 23, 2026 â Sources: man7.org systemd v260 â v261 addi
 | `PartOf=` | Weak coupling. Stop/restart together; no failure propagation. |
 | `After=` | Ordering only (no dep). Start after listed units. |
 | `Before=` | Ordering only. Start before listed units. |
-| `WantedBy=` | [Install] â symlink target for `systemctl enable`. Usually `multi-user.target`. |
-| `RequiredBy=` | [Install] â reverse of Requires=. |
+| `WantedBy=` | [Install] — symlink target for `systemctl enable`. Usually `multi-user.target`. |
+| `RequiredBy=` | [Install] — reverse of Requires=. |
 | `Upholds=` | Like Wants= but continuously re-activates if target stops. v250+. |
 
 ---
@@ -176,16 +176,16 @@ For type-wide drops: `/etc/systemd/system/service.d/99-sandbox.conf` applies to 
 ## systemd.unit(5) Key Sections
 
 ### [Unit]
-- `Description=` â human-readable name
-- `Documentation=` â man pages, URLs
+- `Description=` — human-readable name
+- `Documentation=` — man pages, URLs
 - `After=`, `Before=`, `Requires=`, `Wants=`, `BindsTo=`, `PartOf=`, `Upholds=`
 - `ConditionPathExists=`, `ConditionFileIsExecutable=`, `AssertPathExists=`
-- `DefaultDependencies=no` â opt out of automatic sysinit/shutdown deps
+- `DefaultDependencies=no` — opt out of automatic sysinit/shutdown deps
 
 ### [Install]
-- `WantedBy=`, `RequiredBy=` â `systemctl enable` symlink targets
-- `Alias=` â alternative unit name symlinks
-- `Also=` â additional units to enable/disable together
+- `WantedBy=`, `RequiredBy=` — `systemctl enable` symlink targets
+- `Alias=` — alternative unit name symlinks
+- `Also=` — additional units to enable/disable together
 
 ### Unit File Search Path (system mode, precedence order)
 1. `/etc/systemd/system.control/` (API-managed)
@@ -247,26 +247,26 @@ BindReadOnlyPaths=/dev/hidraw0 /dev/hidraw1 /dev/hidraw2
 
 ---
 
-## v261 Additions (2026-07-23 refresh â supersedes v260 baseline above)
+## v261 Additions (2026-07-23 refresh — supersedes v260 baseline above)
 
 systemd v261 shipped 2026-06-19. New directives/behavior since v260, confirmed against the v261 release notes/NEWS:
 
 | Directive | Section | What it does | yubiOS relevance |
 |---|---|---|---|
-| `RestrictFileSystemAccess=` | **system.conf `[Manager]`, NOT systemd.exec** (corrected 2026-07-24, see note below) | BPF-LSM restriction: only execute binaries on a signed, dm-verity-protected filesystem | Distinct from the existing `RestrictFileSystems=` (per-unit filesystem-*type* limiter) already used on enrollment units â do not conflate. This one is manager-wide, no per-unit opt-out. Tracked as B-HARDENING-RUNTIME in yubiOS BLOCKERS.md: static audit done, runtime evidence (Bats + `systemd-analyze verify`) still pending before adoption |
+| `RestrictFileSystemAccess=` | **system.conf `[Manager]`, NOT systemd.exec** (corrected 2026-07-24, see note below) | BPF-LSM restriction: only execute binaries on a signed, dm-verity-protected filesystem | Distinct from the existing `RestrictFileSystems=` (per-unit filesystem-*type* limiter) already used on enrollment units — do not conflate. This one is manager-wide, no per-unit opt-out. Tracked as B-HARDENING-RUNTIME in yubiOS BLOCKERS.md: static audit done, runtime evidence (Bats + `systemd-analyze verify`) still pending before adoption |
 | `CPUSetPartition=` | systemd.resource-control | cgroup cpuset partition type: `root`, `isolated`, `member` | Not yet used by yubiOS units |
 | `FileDescriptorStorePreserve=on-success` | systemd.service | New option value: only preserve the FD store when the unit stops successfully | Relevant if any yubiOS daemon uses FD store handoff across restarts |
 | `CPUPressureWatch=`, `CPUPressureThresholdSec=`, `IOPressureWatch=`, `IOPressureThresholdSec=` | systemd.resource-control | Per-unit CPU/IO PSI (pressure stall information) notifications | Useful for CI runner health signals, not yet wired |
 | `ConditionFraction=` | systemd.unit | Staged rollout gating via machine-ID hash against a percentage | Could gate progressive rollout of new yubiOS images |
 | `ConditionMachineTag=` | systemd.unit | Key off tags set in /etc/machine-info | Could be used for board-scoped units (e.g. rock5b-rk3588 vs rockpro64-rk3399 tags) |
 
-**Breaking/compat change:** several `io.systemd.Unit` Varlink fields moved from plain strings to enums, with wire values changing from dash/plus forms to underscore forms (e.g. `tty-force` â `tty_force`, `kmsg+console` â `kmsg_console`). Affected enums: `ExecInputType`, `ExecOutputType`, `ProtectHome`, `CGroupController`, `CollectMode`, `EmergencyAction`, `JobMode`. Audit any yubiOS tooling that talks to systemd over Varlink for these wire-value strings.
+**Breaking/compat change:** several `io.systemd.Unit` Varlink fields moved from plain strings to enums, with wire values changing from dash/plus forms to underscore forms (e.g. `tty-force` → `tty_force`, `kmsg+console` → `kmsg_console`). Affected enums: `ExecInputType`, `ExecOutputType`, `ProtectHome`, `CGroupController`, `CollectMode`, `EmergencyAction`, `JobMode`. Audit any yubiOS tooling that talks to systemd over Varlink for these wire-value strings.
 
-**New component (not a directive):** `systemd-sysinstall` â a textual OS installer wrapping `systemd-repart`, `bootctl link`, `bootctl install`, and `systemd-creds`. yubiOS TODO.md keeps this watch-list only; repart/bootc remains the install baseline.
+**New component (not a directive):** `systemd-sysinstall` — a textual OS installer wrapping `systemd-repart`, `bootctl link`, `bootctl install`, and `systemd-creds`. yubiOS TODO.md keeps this watch-list only; repart/bootc remains the install baseline.
 
 Sources: https://github.com/systemd/systemd/releases/tag/v261, https://raw.githubusercontent.com/systemd/systemd/main/NEWS, https://freedesktop.org/software/systemd/man/latest/systemd.exec.html, https://freedesktop.org/software/systemd/man/latest/systemd.service.html, https://freedesktop.org/software/systemd/man/latest/systemd.unit.html
 
-> **Correction (2026-07-24):** the table above lists `RestrictFileSystemAccess=` alongside per-unit `systemd.exec` directives. That's wrong. Verified against the systemd v261 release, the merged PR (systemd/systemd#41340), and `systemd-system.conf(5)`: **`RestrictFileSystemAccess=` is a manager-level setting in the `[Manager]` section of `system.conf` (or via the `systemd.restrict_filesystem_access=` kernel command-line parameter), not a per-service `systemd.exec` directive, and it has no per-unit opt-out** â it's a hard, global security invariant for fully-verified image-based systems, not something an individual yubiOS service unit can turn on for itself. It requires booting with `dm_verity.require_signatures=1` and `lsm=...,bpf`; PID 1 refuses to start without those. This matters for yubiOS's BLOCKERS.md B-HARDENING-RUNTIME entry: adopting this control is a system-wide boot-chain decision (system.conf + kernel cmdline), not a drop-in on the enrollment unit the way `RestrictFileSystems=~@network` is today. Do not conflate the two when writing the runtime hardening evidence for B-HARDENING-RUNTIME.
+> **Correction (2026-07-24):** the table above lists `RestrictFileSystemAccess=` alongside per-unit `systemd.exec` directives. That's wrong. Verified against the systemd v261 release, the merged PR (systemd/systemd#41340), and `systemd-system.conf(5)`: **`RestrictFileSystemAccess=` is a manager-level setting in the `[Manager]` section of `system.conf` (or via the `systemd.restrict_filesystem_access=` kernel command-line parameter), not a per-service `systemd.exec` directive, and it has no per-unit opt-out** — it's a hard, global security invariant for fully-verified image-based systems, not something an individual yubiOS service unit can turn on for itself. It requires booting with `dm_verity.require_signatures=1` and `lsm=...,bpf`; PID 1 refuses to start without those. This matters for yubiOS's BLOCKERS.md B-HARDENING-RUNTIME entry: adopting this control is a system-wide boot-chain decision (system.conf + kernel cmdline), not a drop-in on the enrollment unit the way `RestrictFileSystems=~@network` is today. Do not conflate the two when writing the runtime hardening evidence for B-HARDENING-RUNTIME.
 
 
 
