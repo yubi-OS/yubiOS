@@ -49,3 +49,7 @@ the workspace memory, not in refs/). All values below are direct API observation
 ## 2026-09-18 drift check (wayfinder round 8, cycle 38)
 
 linear workspace sweep: its GitHub-side counts were re-verified (33 round-8 commits, 20 org repos); the Linear-side reads remain blocked this session (proxy CSRF on the GraphQL route), recorded as such.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 46)
+
+Linear workspace sweep: GitHub-side counts re-verified (round-8 branch at 42+ commits, 20 org repos); Linear-side reads remain blocked this session (proxy CSRF on the GraphQL route), recorded as such.
