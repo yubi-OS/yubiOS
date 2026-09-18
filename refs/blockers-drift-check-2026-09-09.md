@@ -55,3 +55,7 @@ it either expired or was superseded by these three.
 - Companion: `refs/linear-workspace-sweep-2026-09-09.md` (tracker half), this loop's
   `refs/wayfinder-loop-results-2026-09-09.md` (how the check was found: rung exemplars named
   the runner family).
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 49)
+
+the round-2 drift check: its B-VGPU-VM-UNZIP retirement finding was re-confirmed by this round's register check (row still active at 2026-09-18); the evidence-vs-register drift now persists 9 more days.
