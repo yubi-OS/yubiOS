@@ -218,3 +218,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4144) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 99)
+
+The sealed-UKI VM lane design record: its 5-job matrix (green at PR #155, V83) is historical evidence the corpus already holds; the round-8 register check confirms no newer sealed-UKI failure mode has been filed; note additive.
