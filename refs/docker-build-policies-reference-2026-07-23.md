@@ -3,19 +3,19 @@ _Refreshed: 2026-07-23 (supersedes refs/archive-docker-build-policies.md, origin
 
 ## 2026-07-23 correction and update
 
-**Correction to prior research:** the old note said "`docker buildx policy eval` does NOT exist." That's now wrong â **it exists and is documented**: `docker buildx policy eval` evaluates a policy against a single source, with options `--fields` (fetch specific metadata), `-f/--file` (base Dockerfile name used to locate the policy file, default `Dockerfile`), `--platform`, and `--print`.
+**Correction to prior research:** the old note said "`docker buildx policy eval` does NOT exist." That's now wrong — **it exists and is documented**: `docker buildx policy eval` evaluates a policy against a single source, with options `--fields` (fetch specific metadata), `-f/--file` (base Dockerfile name used to locate the policy file, default `Dockerfile`), `--platform`, and `--print`.
 
-**Status:** still documented as an **experimental** Docker feature as of 2026-07-23. Version requirement: **Buildx 0.31.0+** (confirmed, matches prior yubiOS note). BuildKit minimum has a doc inconsistency between Docker's own pages: the policies overview says 0.27.0+, the usage page says 0.26.0+ â either is safely under yubiOS's pinned toolchain, so this doesn't block anything, just flagging the upstream doc mismatch.
+**Status:** still documented as an **experimental** Docker feature as of 2026-07-23. Version requirement: **Buildx 0.31.0+** (confirmed, matches prior yubiOS note). BuildKit minimum has a doc inconsistency between Docker's own pages: the policies overview says 0.27.0+, the usage page says 0.26.0+ — either is safely under yubiOS's pinned toolchain, so this doesn't block anything, just flagging the upstream doc mismatch.
 
-**Filename convention confirmed:** Buildx auto-loads a `.rego` file next to the Dockerfile using the Dockerfile's base name (`Dockerfile` â `Dockerfile.rego`, `app.Dockerfile` â `app.Dockerfile.rego`). yubiOS's own convention (centralizing on `yubiOS.rego` with explicit `filename=` + `reset=true`, per refs/docker-bake-consolidation-2026-07-17.md) deliberately opts out of this auto-load magic â still the right call, since auto-load-by-Dockerfile-name doesn't fit a bake-file-driven multi-target build.
+**Filename convention confirmed:** Buildx auto-loads a `.rego` file next to the Dockerfile using the Dockerfile's base name (`Dockerfile` → `Dockerfile.rego`, `app.Dockerfile` → `app.Dockerfile.rego`). yubiOS's own convention (centralizing on `yubiOS.rego` with explicit `filename=` + `reset=true`, per refs/docker-bake-consolidation-2026-07-17.md) deliberately opts out of this auto-load magic — still the right call, since auto-load-by-Dockerfile-name doesn't fit a bake-file-driven multi-target build.
 
-**`input.image` fields â confirmed full list** (docs.docker.com/build/policies/inputs/): `ref`, `host`, `repo`, `fullRepo`, `tag`, `isCanonical`, `checksum`, `platform`, `os`, `arch`, `hasProvenance`, `labels`, `env`, `volumes`, `workingDir`, `user`, `signatures`. Notably **no `hasSBOM` field** in the documented list â the old note's `input.image.hasSBOM` example is speculative/unconfirmed, flag before relying on it in a real policy; SBOM presence would need to be checked another way (e.g. via `signatures`/attestation metadata, not a dedicated boolean).
+**`input.image` fields — confirmed full list** (docs.docker.com/build/policies/inputs/): `ref`, `host`, `repo`, `fullRepo`, `tag`, `isCanonical`, `checksum`, `platform`, `os`, `arch`, `hasProvenance`, `labels`, `env`, `volumes`, `workingDir`, `user`, `signatures`. Notably **no `hasSBOM` field** in the documented list — the old note's `input.image.hasSBOM` example is speculative/unconfirmed, flag before relying on it in a real policy; SBOM presence would need to be checked another way (e.g. via `signatures`/attestation metadata, not a dedicated boolean).
 
 ## Original research (2026-06-25, still valid except where corrected above)
 
 ## What it is
 
-Docker Build Policies (Buildx â¥ 0.31.0) enforce supply-chain rules on build inputs using OPA Rego. They run before any layer executes, gating on attestations, allowed registries, signed Git tags, digests, etc.
+Docker Build Policies (Buildx ≥ 0.31.0) enforce supply-chain rules on build inputs using OPA Rego. They run before any layer executes, gating on attestations, allowed registries, signed Git tags, digests, etc.
 
 Policy file is named after the Containerfile: `<repo>.rego`, placed alongside it. Or specify with `filename=<file>` in the `--policy` flag.
 
@@ -93,7 +93,7 @@ allow if {
 }
 ```
 
-(Note: the SBOM-attestation example from prior research used `input.image.hasSBOM`, which is not in Docker's documented field list as of this refresh â verify against docs.docker.com/build/policies/inputs/ before relying on it.)
+(Note: the SBOM-attestation example from prior research used `input.image.hasSBOM`, which is not in Docker's documented field list as of this refresh — verify against docs.docker.com/build/policies/inputs/ before relying on it.)
 
 ---
 
