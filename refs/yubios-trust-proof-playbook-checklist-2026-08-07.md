@@ -380,8 +380,5 @@ The Sources section is auditable: each row should pass `webfetch` or `git show` 
 
 ## Verification plan
 
-**Run cmd**: TBD per file context.
-**Expected output**: TBD.
-**Pass criterion**: TBD.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4560). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4560) were identical placeholder copies with no per-file content; merged on 2026-09-18.
