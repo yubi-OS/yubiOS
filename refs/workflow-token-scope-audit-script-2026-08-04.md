@@ -3,7 +3,7 @@ contract: "yubiOS workflow token-scope audit script spec. The PR #148 cycle (202
 short_description: "Workflow token-scope audit script"
 ---
 
-# Workflow Token-Scope Audit Script â yubiOS CI Hygiene (2026-08-04)
+# Workflow Token-Scope Audit Script — yubiOS CI Hygiene (2026-08-04)
 
 **Linked Linear issue:** [OMN-161](https://linear.app/omni-agent/issue/OMN-161)
 **Project:** yubiOS Production Proof & Release Gates
@@ -16,9 +16,9 @@ short_description: "Workflow token-scope audit script"
 
 PR #148 (commit `a49e95db`, 2026-07-29) replaced all 6 `GH_TK` secret references in 3 workflow files with `github.token`:
 
-- `.github/workflows/fetch-dhi-manifest.yml` â checkout token + dead env var + git push (3 references)
-- `.github/workflows/fetch-released-tag-ref.yml` â checkout token + compare endpoint env (2 references)
-- `.github/workflows/fetch-fedora-bootc-manifest.yml` â git push (1 reference)
+- `.github/workflows/fetch-dhi-manifest.yml` — checkout token + dead env var + git push (3 references)
+- `.github/workflows/fetch-released-tag-ref.yml` — checkout token + compare endpoint env (2 references)
+- `.github/workflows/fetch-fedora-bootc-manifest.yml` — git push (1 reference)
 
 All 3 files now declare `permissions: { contents: write, actions: write }` at workflow level. After PR #148's merge, the `GH_TK` repo secret is unused and could be deleted.
 
@@ -36,11 +36,11 @@ The script is runnable from any developer laptop (no CI required) AND as a CI ga
 
 ### 2.1 Inputs
 
-- `--repo-root PATH` (default: `.`) â root of the yubiOS checkout.
-- `--secrets-config PATH` (optional, default: `scripts/audit-workflow-tokens.allowlist.yaml`) â allowlist of known repo secrets (so the script doesn't false-positive on `secrets.DOCKER` etc.).
-- `--offline` (default: false) â don't call GitHub API to enumerate repo secrets; rely on the allowlist only.
-- `--output-format` (default: `text`; alternatives: `json`, `sarif`) â for CI integration.
-- `--fail-on ERROR|WARN|INFO|NEVER` (default: `ERROR`) â exit code threshold.
+- `--repo-root PATH` (default: `.`) — root of the yubiOS checkout.
+- `--secrets-config PATH` (optional, default: `scripts/audit-workflow-tokens.allowlist.yaml`) — allowlist of known repo secrets (so the script doesn't false-positive on `secrets.DOCKER` etc.).
+- `--offline` (default: false) — don't call GitHub API to enumerate repo secrets; rely on the allowlist only.
+- `--output-format` (default: `text`; alternatives: `json`, `sarif`) — for CI integration.
+- `--fail-on ERROR|WARN|INFO|NEVER` (default: `ERROR`) — exit code threshold.
 
 ### 2.2 Output (text mode)
 
@@ -184,7 +184,7 @@ jobs:
 | ci_firmware-rk.yml | unknown | unknown | NEEDS RUN |
 | ci_test-vm.yml | unknown | secrets.GITHUB_TOKEN (auto) | likely PASS |
 | ci_test-vgpu-vm.yml | unknown | secrets.GITHUB_TOKEN | likely PASS |
-| ci_test-vgpu-vm-destructive.yml (per v0.10 pushback split proposal) | not present | â | N/A |
+| ci_test-vgpu-vm-destructive.yml (per v0.10 pushback split proposal) | not present | — | N/A |
 | ci_test_rootless-docker.yml | unknown | secrets.GITHUB_TOKEN | likely PASS |
 | ci_test_bootc-filesystem.yml | unknown | secrets.GITHUB_TOKEN | likely PASS |
 | ci_test_pq_tls_verify.yml | unknown | secrets.GITHUB_TOKEN | likely PASS |
@@ -197,23 +197,23 @@ jobs:
 | fetch-released-tag-ref.yml | {contents: write, actions: write} (post-PR #148) | github.token | PASS |
 | ci_fork_*.yml (8 files: mkosi, bcvk, arm-trusted-firmware, optee-os, ms-tpm-20-ref, optee-ftpm, u-boot, edk2) | unknown | secrets.GITHUB_TOKEN | likely PASS |
 
-The first script run after merge fills the "NEEDS RUN" + "unknown" cells. The expected baseline post-run is **0 ERROR, â¤3 WARN, 22+ INFO**.
+The first script run after merge fills the "NEEDS RUN" + "unknown" cells. The expected baseline post-run is **0 ERROR, ≤3 WARN, 22+ INFO**.
 
 ## 5. Migration plan
 
-### Phase 1 (this PR) â Ship the script + the audit workflow
+### Phase 1 (this PR) — Ship the script + the audit workflow
 
 - Land `scripts/audit-workflow-tokens.py` + `scripts/audit-workflow-tokens.allowlist.yaml` + `.github/workflows/ci_token-audit.yml`.
 - PR title: `feat(ci): workflow token-scope audit script + ci_token-audit.yml gate (OMN-161)`.
 - Branch: `feat/ci-token-scope-audit-2026-08-04`.
 - First run on main populates the gap table with verified data.
 
-### Phase 2 â Tighten WARN-level findings
+### Phase 2 — Tighten WARN-level findings
 
 - Any WARN finding (e.g. `JOB_LESS_PERMISSIVE_THAN_WORKFLOW`, `UNKNOWN_SECRET`) gets a follow-up PR to tighten.
 - Target: zero WARN by 2026-08-22.
 
-### Phase 3 â Required gate on workflow-touching PRs
+### Phase 3 — Required gate on workflow-touching PRs
 
 - Update `ci_token-audit.yml` to set `fail-on: WARN` for `pull_request` triggers (Phase 1 default is `fail-on: ERROR`).
 - Merge after Phase 2 confirms zero WARN baseline.
@@ -241,9 +241,9 @@ The script output (text or JSON) is the evidence artifact. The first CI gate run
 
 ## 7. References
 
-- PR #148 (commit `a49e95db`, 2026-07-29) â `ci/remove-gh-tk-references` branch; replaced 6 `GH_TK` references with `github.token`
-- Linear [OMN-161](https://linear.app/omni-agent/issue/OMN-161) â Workflow token-scope audit script (this spec's parent issue)
-- Linear [OMN-158](https://linear.app/omni-agent/issue/OMN-158) â input-shape doctrine (companion; this script is the audit-half, OMN-158 is the validation-half)
+- PR #148 (commit `a49e95db`, 2026-07-29) — `ci/remove-gh-tk-references` branch; replaced 6 `GH_TK` references with `github.token`
+- Linear [OMN-161](https://linear.app/omni-agent/issue/OMN-161) — Workflow token-scope audit script (this spec's parent issue)
+- Linear [OMN-158](https://linear.app/omni-agent/issue/OMN-158) — input-shape doctrine (companion; this script is the audit-half, OMN-158 is the validation-half)
 - `PROJECT_RULES.md` lines 79-87 (PR diff verification, YAML input shape, the workflow file pattern)
 
 ---
