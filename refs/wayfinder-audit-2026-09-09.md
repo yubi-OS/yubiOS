@@ -73,3 +73,7 @@ Recorded negatives remain: A1 admission failed; Pennes uniform loss cancels in a
 Freeze a held-out edit benchmark before seeing outcomes: literal target files, factual acceptance predicates, preservation constraints, model/budget and blinded grader. Compare v0.1, v0.2 and an ordinary source-inspection baseline on identical tasks. Report useful-edit rate, factual regressions, abstentions and cost separately, with uncertainty. Learn or validate the semantic proposal layer from those outcomes; geometry alone does not supply it.
 
 Current limitations are explicit: task-quality calibration is unmeasured; finite-chain mixing at K=40 is not established for every corpus; named-set comparison currently covers CHANGE, while ADD/REMOVE set changes are not-tested; binary placement can hide small real semantic changes; public saved maps share storage; chunk pooling is lossy; embedding model alias revisions require deliberate rebaselining. These are the reasons the release is not labeled 10/10.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 47)
+
+the instrument audit record: re-verified as the standing operating-evidence doc for pointmap/0.2; this round adds placements and ledger rows on top of it without changing its boundary claims.
