@@ -1,22 +1,22 @@
-# yubi-OS/image-builder-cli Fork â Status Update
+# yubi-OS/image-builder-cli Fork — Status Update
 _Refreshed: 2026-07-23 (supersedes refs/archive-image-builder-cli-fork.md, originally forked/scoped 2026-05-11)_
 
-## â ï¸ Fork no longer exists
+## ⚠️ Fork no longer exists
 
-**`yubi-OS/image-builder-cli` returns 404 as of 2026-07-23** â it is not in the current 17-repo yubi-OS org listing either. The fork described in the original research below was removed or never persisted past the initial 2026-05-11 scoping. If this fork is still wanted, it needs to be re-created from `osbuild/image-builder-cli`.
+**`yubi-OS/image-builder-cli` returns 404 as of 2026-07-23** — it is not in the current 17-repo yubi-OS org listing either. The fork described in the original research below was removed or never persisted past the initial 2026-05-11 scoping. If this fork is still wanted, it needs to be re-created from `osbuild/image-builder-cli`.
 
-**Bigger context change: the upstream project itself has been absorbed.** Per refs/osbuild-image-builder-2026-07-23.md, `osbuild/image-builder-cli` PR #374 (merged) made `bootc-image-builder` a multi-call binary of ibcli, and `osbuild/bootc-image-builder` is now archived/merged into the unified `osbuild/image-builder` project. **If yubiOS re-forks this tool, fork `osbuild/image-builder` (the current unified project), not the older standalone `image-builder-cli` or `bootc-image-builder` repos** â those are legacy names for what's now one project.
+**Bigger context change: the upstream project itself has been absorbed.** Per refs/osbuild-image-builder-2026-07-23.md, `osbuild/image-builder-cli` PR #374 (merged) made `bootc-image-builder` a multi-call binary of ibcli, and `osbuild/bootc-image-builder` is now archived/merged into the unified `osbuild/image-builder` project. **If yubiOS re-forks this tool, fork `osbuild/image-builder` (the current unified project), not the older standalone `image-builder-cli` or `bootc-image-builder` repos** — those are legacy names for what's now one project.
 
 ## Recommendation
 
 Given:
 1. The fork doesn't currently exist,
 2. The upstream tool has consolidated into `osbuild/image-builder`,
-3. yubiOS's current CI pipeline doesn't appear to depend on a dedicated image-builder-cli fork (per live CI_MAP.md / workflow list â no `ci_fork_image-builder` workflow exists among the 20 registered workflows),
+3. yubiOS's current CI pipeline doesn't appear to depend on a dedicated image-builder-cli fork (per live CI_MAP.md / workflow list — no `ci_fork_image-builder` workflow exists among the 20 registered workflows),
 
 **this fork looks like it can stay retired** unless there's a specific yubiOS customization need for disk-image generation beyond what `bootc install to-filesystem` / `bcvk to-disk` already cover. Re-fork only if a concrete need for the unified `image-builder` CLI's disk-image types (qcow2, iso, ami, etc.) comes up.
 
-## Original research (2026-05-11, background â describes the pre-consolidation, pre-fork-deletion state)
+## Original research (2026-05-11, background — describes the pre-consolidation, pre-fork-deletion state)
 
 **Forked from**: osbuild/image-builder-cli (name at the time; now part of osbuild/image-builder)  
 **Forked**: 2026-05-11T02:24:14Z  
@@ -26,7 +26,7 @@ Given:
 
 ### What it was
 
-A modern, stateless CLI tool for building OS images (disk images, ISOs, containers) from blueprint TOML files. Replaces the service-based `osbuild-composer` / `composer-cli` stack. At the time, it was described as what `bootc-image-builder` uses internally â that relationship has since become a full merge (see update above).
+A modern, stateless CLI tool for building OS images (disk images, ISOs, containers) from blueprint TOML files. Replaces the service-based `osbuild-composer` / `composer-cli` stack. At the time, it was described as what `bootc-image-builder` uses internally — that relationship has since become a full merge (see update above).
 
 ### Why the fork was created
 
@@ -40,7 +40,7 @@ A modern, stateless CLI tool for building OS images (disk images, ISOs, containe
 | `yubi-OS/bootc` | Core bootc runtime fork |
 | `yubi-OS/mkosi` | mkosi image builder |
 | `yubi-OS/bcvk` | Ephemeral VM testing |
-| ~~`yubi-OS/image-builder-cli`~~ | **No longer exists** â disk image builder, retired |
+| ~~`yubi-OS/image-builder-cli`~~ | **No longer exists** — disk image builder, retired |
 
 `bcvk` remains the tool actually in active use for ephemeral VM testing and CI disk image builds.
 
