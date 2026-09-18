@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/luks-fido2-e2e-test.md, no date suffix previously)_
 
-Status check 2026-07-23: this file's "Latest CI milestone" section (run 29525332901, bootloader-update.service failure) is now superseded by live BLOCKERS.md, which shows that failure was retired â run 29872832727 reached the guest without the old root-SSH/DirectBoot bootloader-update failures, leaving **B-VM-CTAP2** (no CTAP2 token enumerates) as the narrower remaining gap. Cross-checked against refs/fido2-ci-emulator-status-2026-07-23.md: passless (the software authenticator this file references) remains the actively-maintained correct choice (v0.13.0, 2026-07-12) â the guardrails and test-path table below remain accurate. Recommend the next update to this file happen once B-VM-CTAP2 closes.
+Status check 2026-07-23: this file's "Latest CI milestone" section (run 29525332901, bootloader-update.service failure) is now superseded by live BLOCKERS.md, which shows that failure was retired — run 29872832727 reached the guest without the old root-SSH/DirectBoot bootloader-update failures, leaving **B-VM-CTAP2** (no CTAP2 token enumerates) as the narrower remaining gap. Cross-checked against refs/fido2-ci-emulator-status-2026-07-23.md: passless (the software authenticator this file references) remains the actively-maintained correct choice (v0.13.0, 2026-07-12) — the guardrails and test-path table below remain accurate. Recommend the next update to this file happen once B-VM-CTAP2 closes.
 
 # LUKS2 FIDO2 end-to-end test
 
