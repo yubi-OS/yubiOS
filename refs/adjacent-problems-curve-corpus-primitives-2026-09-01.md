@@ -84,3 +84,7 @@ the matched-parameter ablation went negative on the holdout across three seeds.
 Coverage: verification chain (the audited object), rootless privilege and capabilities (the
 absent primitives), corpus/curve/sparse (focal), YubiKey boot (pole neighbourhood),
 container isolation (absent primitives). Omitted clusters omitted by design.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 54)
+
+curve-corpus-primitives record: its five-file cell (z0/phi3) gained the nspawn-boundary and drift-check records this round; the family is denser than when it was written.
