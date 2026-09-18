@@ -79,3 +79,6 @@ sysext instead. nspawn would give way to VMs for dev if a workflow needed a diff
 Coverage: verification chain (digest admission), rootless privilege and capabilities (the
 boundary family), corpus/curve/sparse (this cell), YubiKey boot (the VM passthrough case),
 container isolation and seccomp (focal). Omitted clusters omitted by design.
+## 2026-09-18 drift check (wayfinder round 8, cycle 76)
+
+the focal container-isolation record: this round's nspawn-boundary record already corrects its stale caveat (cross-linked); this cycle records the interlock and nothing more.
