@@ -267,3 +267,7 @@ This closes the last open verdict of the phonon bridge: all three proposed exten
 (omega, kappa, two-population) are now excluded/void on the recorded evidence, both
 identities stand, and the exclusion machinery itself produced one new corroborating
 deflection.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 96)
+
+the phonon bridge record: its recorded negatives (Pennes VOID, FCS FAIL, Gaunt negative) are preserved intact this round; note additive.
