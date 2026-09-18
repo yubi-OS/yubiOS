@@ -46,3 +46,7 @@ it fixed, not open regressions.
   private-preview API gated to regulators/media/fact-checkers/independent researchers).
 - Detection stack and the ADR-000 `block_on_detect` / `provenance_required` modes are recorded in
   the Linear OMN-165 description; this doc deliberately does not duplicate them.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 94)
+
+already drift-checked in cycle 12; this pass adds nothing (no-op abstain recorded in the ledger, no commit).
