@@ -36,3 +36,7 @@ AGENT.md lesson 9 now reads: execute ADD rungs as real documents, never stubs, n
 ## Not changed
 
 Frames, bits, null chain, radius 0.095, rung ranking, ledger semantics, the honesty rules (geometry never authorizes keep/revert; counts only). Round 5's reverted lint fixes are not lost: the same defects can be re-swept in a plain PR with the instrument uninvolved, if wanted.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 52)
+
+the rounds 5/6 post-mortem: rounds 7 and 8 are its first two live tests; round 7 used rungs and real records (the post-mortem's rule); round 8 discloses its own mid-round re-baseline honestly - the framework is holding; note additive.
