@@ -3,7 +3,7 @@ contract: "yubiOS workflow_dispatch reachability assertion script. Asserts every
 short_description: "workflow_dispatch reachability assertion"
 ---
 
-# workflow_dispatch Reachability Assertion â yubiOS CI Hygiene (2026-08-04)
+# workflow_dispatch Reachability Assertion — yubiOS CI Hygiene (2026-08-04)
 
 **Linked Linear issue:** [OMN-159](https://linear.app/omni-agent/issue/OMN-159)
 **Project:** yubiOS Production Proof & Release Gates
@@ -24,8 +24,8 @@ The bug class is real: a workflow added to `.github/workflows/` with a `workflow
 
 ### 2.1 Inputs
 
-- `--repo-root PATH` (default: `.`) â root of the yubiOS checkout.
-- `--ci-yml PATH` (default: `.github/workflows/ci.yml`) â the orchestrator.
+- `--repo-root PATH` (default: `.`) — root of the yubiOS checkout.
+- `--ci-yml PATH` (default: `.github/workflows/ci.yml`) — the orchestrator.
 - `--output-format` (default: `text`; alternatives: `json`, `sarif`).
 - `--fail-on ERROR|WARN|NEVER` (default: `ERROR`).
 
@@ -33,7 +33,7 @@ The bug class is real: a workflow added to `.github/workflows/` with a `workflow
 
 1. Walk `.github/workflows/*.yml` and parse each YAML.
 2. For each workflow that has `on.workflow_dispatch` (or the YAML 1.1 boolean True key), record the workflow filename.
-3. Parse `ci.yml` and extract the groupâworkflow-file mapping from the dispatcher's group tables (the dispatcher is typically a `case "$GROUP"` block listing workflow file paths).
+3. Parse `ci.yml` and extract the group→workflow-file mapping from the dispatcher's group tables (the dispatcher is typically a `case "$GROUP"` block listing workflow file paths).
 4. For each workflow with `workflow_dispatch`, check whether its filename appears in any group table.
 5. Flag as ERROR any orphan workflow.
 6. Flag as WARN any workflow whose path appears in a group table but whose filename doesn't match (likely a stale entry; informational only).
@@ -185,18 +185,18 @@ Total: 24 dispatchable workflows, 24 group memberships. Expected baseline post-r
 
 ## 5. Migration plan
 
-### Phase 1 (this PR) â Ship the script + the audit workflow
+### Phase 1 (this PR) — Ship the script + the audit workflow
 
 - Land `scripts/assert-dispatch-reachable.py` + `.github/workflows/ci_dispatch-reachability.yml`.
 - PR title: `feat(ci): workflow_dispatch reachability assertion + ci_dispatch-reachability.yml gate (OMN-159)`.
 - Branch: `feat/ci-dispatch-reachability-2026-08-04`.
 - First run on main populates the gap table; expected 0 ERROR baseline.
 
-### Phase 2 â Tighten any baseline WARN
+### Phase 2 — Tighten any baseline WARN
 
 - The first CI run may surface a WARN (e.g. a stale group entry). Each WARN gets a follow-up PR to remove the stale entry from ci.yml.
 
-### Phase 3 â Required gate on workflow-touching PRs
+### Phase 3 — Required gate on workflow-touching PRs
 
 - Update `ci_dispatch-reachability.yml` to require zero orphan workflows on `pull_request` (Phase 1 default is `fail-on: ERROR`; phase 3 is `fail-on: ERROR` enforced on PR).
 
@@ -219,13 +219,13 @@ GET /actions/runs/{id}/jobs to read the 'audit' job output
 
 ## 7. References
 
-- PR #145 (commit `9d6ec85d`, 2026-07-29) â ci.yml group-routing redesign (the source of the group tables)
-- PR #146 (input surface expand) and #147 (GH_TK auth fix) â also merged 2026-07-29
-- `RECENT_ACTIVITY.md` 2026-08-02 entry â ci-launchpad per-workflow dispatch update + 4 orphan workflows folded into tests group
-- Linear [OMN-159](https://linear.app/omni-agent/issue/OMN-159) â Assert every workflow_dispatch workflow is reachable from a group (this spec's parent)
-- Linear [OMN-161](https://linear.app/omni-agent/issue/OMN-161) â Workflow token-scope audit script (companion; this is the dispatch-graph half)
-- Linear [OMN-158](https://linear.app/omni-agent/issue/OMN-158) â input-shape doctrine (the validate-input-shape CI gate)
-- `PROJECT_RULES.md` line 113 (skill-load directive for subagents â not directly relevant but the operating-discipline doc)
+- PR #145 (commit `9d6ec85d`, 2026-07-29) — ci.yml group-routing redesign (the source of the group tables)
+- PR #146 (input surface expand) and #147 (GH_TK auth fix) — also merged 2026-07-29
+- `RECENT_ACTIVITY.md` 2026-08-02 entry — ci-launchpad per-workflow dispatch update + 4 orphan workflows folded into tests group
+- Linear [OMN-159](https://linear.app/omni-agent/issue/OMN-159) — Assert every workflow_dispatch workflow is reachable from a group (this spec's parent)
+- Linear [OMN-161](https://linear.app/omni-agent/issue/OMN-161) — Workflow token-scope audit script (companion; this is the dispatch-graph half)
+- Linear [OMN-158](https://linear.app/omni-agent/issue/OMN-158) — input-shape doctrine (the validate-input-shape CI gate)
+- `PROJECT_RULES.md` line 113 (skill-load directive for subagents — not directly relevant but the operating-discipline doc)
 
 ---
 
