@@ -77,3 +77,7 @@ Context: template Mode-D stub sections appended per repo-refs-skill batches () w
 ## 2026-09-18 drift check (wayfinder round 8, cycle 40)
 
 round-4 prep doc: re-verified as a historical round record; its frozen baseline (frame d3289271) is superseded by rounds 7-8 frames; marked historical, content unchanged.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 43)
+
+round-4 prep record: re-verified as historical (its frozen baseline frame d3289271 is superseded by rounds 7-8 frames); content unchanged, note additive.
