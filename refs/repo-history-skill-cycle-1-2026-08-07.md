@@ -36,17 +36,11 @@
 
 ## Recommendation
 
+
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4408). TODO: refine per file context.
-
-
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4408) were identical placeholder copies with no per-file content; merged on 2026-09-18.
 ## Cross-references
 
-**Related Linear issues (OMN-*)**: TBD per file context.
-**Related PRs**: TBD.
-**Related ADRs**: TBD.
-**Related refs/ docs**: TBD.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4739). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4739) were identical placeholder copies with no per-file content; merged on 2026-09-18.
