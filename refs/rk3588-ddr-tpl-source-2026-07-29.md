@@ -2,7 +2,7 @@
 
 > Source-grounded research supporting OMN-56 ("Select and pin a redistributable RK3588 DDR/TPL source") and the B-RK3588-TPL blocker. Companion to [refs/arm64-rk-board-status-2026-07-17.md](arm64-rk-board-status-2026-07-17.md) and [refs/firmware-rk-workflow-2026-07-17.md](firmware-rk-workflow-2026-07-17.md).
 
-# RK3588 DDR/TPL redistribution â research note (2026-07-29)
+# RK3588 DDR/TPL redistribution — research note (2026-07-29)
 
 Supports OMN-56 ("Select and pin a redistributable RK3588 DDR/TPL source"). Not a refs/ push; this is a session-only research note to ground a future ADR-018/019 hardware-evidence decision or OMN-56 promotion.
 
@@ -18,10 +18,10 @@ There is exactly one upstream source: **Rockchip's `rkbin` git repository** (`ht
 
 Status of the broader open-source boot chain (per Collabora "Almost a fully open-source boot chain for Rockchip's RK3588" blog, 2024-02-21, and confirmed by re-reading in 2026-07):
 
-- BL31 (TF-A) â open-source replacement available; mainline TF-A can be compiled from source.
-- BL32 (OP-TEE) â open-source; yubiOS owns the fork.
-- BL33 (U-Boot) â mainline supports RK3588.
-- TPL/DDR â closed source. Rockchip has not open-sourced this. Collabora confirms this is the primary remaining closed component as of their 2024 blog.
+- BL31 (TF-A) — open-source replacement available; mainline TF-A can be compiled from source.
+- BL32 (OP-TEE) — open-source; yubiOS owns the fork.
+- BL33 (U-Boot) — mainline supports RK3588.
+- TPL/DDR — closed source. Rockchip has not open-sourced this. Collabora confirms this is the primary remaining closed component as of their 2024 blog.
 
 Community build environments that pull from rkbin (not alternative sources, just packaging):
 - `blark/rk3588-firmware-flake` (Nix flake wrapper)
@@ -33,8 +33,8 @@ Community build environments that pull from rkbin (not alternative sources, just
 
 | Option | Mechanism | Verifiable | Redistributable | Notes |
 |---|---|---|---|---|
-| Pull rkbin at build time | `git clone github.com/rockchip-linux/rkbin` from CI, vendor specific blob by sha256 | Yes (sha256) | NO â uses Rockchip binary without redistribution license | This is what every current Rockchip distro does; it is the "default" but legally murky for a redistributable OS |
-| Carry rkbin blob in yubi-OS/yubiOS repo | Commit the blob with sha256 pin | Yes (sha256) | NO â would need Rockchip redistribution permission | Rejected by Jenny in spirit (yubiOS has no permission to ship closed blobs without a license agreement) |
+| Pull rkbin at build time | `git clone github.com/rockchip-linux/rkbin` from CI, vendor specific blob by sha256 | Yes (sha256) | NO — uses Rockchip binary without redistribution license | This is what every current Rockchip distro does; it is the "default" but legally murky for a redistributable OS |
+| Carry rkbin blob in yubi-OS/yubiOS repo | Commit the blob with sha256 pin | Yes (sha256) | NO — would need Rockchip redistribution permission | Rejected by Jenny in spirit (yubiOS has no permission to ship closed blobs without a license agreement) |
 | Out-of-band user fetch | Each user downloads rkbin, places in known path, yubiOS verifies sha256 | Yes (sha256) | N/A | Honest but pushes friction to users |
 | Negotiate redistribution license | Contact Rockchip for explicit redistribution rights | Unclear | Yes (with license) | Slow, expensive, unclear outcome |
 | Wait for Collabora / open-source DDR init | Watch for community progress | N/A | N/A | DDR init is complex, controller-specific; 2024 Collabora blog expressed hope but no concrete timeline |
