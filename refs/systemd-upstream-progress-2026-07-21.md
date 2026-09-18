@@ -1,4 +1,4 @@
-# Project-Relevant Upstream Progress â 2026-07-21
+# Project-Relevant Upstream Progress — 2026-07-21
 
 Status: dated research snapshot; not a replacement for `PINNED.md`
 
@@ -54,7 +54,7 @@ Direct human commit volume in `containers/composefs` was low in this window, whi
 | 1 | Yu Watanabe | 379 | systemd 379 |
 | 2 | Luca Boccassi | 342 | systemd 334, mkosi 6, particleos 2 |
 | 3 | Lennart Poettering | 319 | systemd 318, particleos 1 |
-| 4 | Zbigniew JÄdrzejewski-Szmek | 252 | systemd 252 |
+| 4 | Zbigniew Jędrzejewski-Szmek | 252 | systemd 252 |
 | 5 | Daan De Meyer | 154 | systemd 123, mkosi 31 |
 | 6 | dongshengyuan | 90 | systemd 90 |
 | 7 | Colin Walters | 58 | bootc 56, composefs 2 |
@@ -62,10 +62,10 @@ Direct human commit volume in `containers/composefs` was low in this window, whi
 | 9 | Paul Meyer | 52 | systemd 50, mkosi 2 |
 | 10 | Christian Brauner | 48 | systemd 48 |
 | 11 | Michael Vogt | 46 | systemd 45, mkosi 1 |
-| 12 | FrantiÅ¡ek Å umÅ¡al | 36 | systemd 36 |
+| 12 | František Šumšal | 36 | systemd 36 |
 | 13 | Philip Withnall | 36 | systemd 36 |
 | 14 | Martin Pitt | 33 | mkosi 29, particleos 4 |
-| 15 | Kai LÃ¼ke | 28 | systemd 28 |
+| 15 | Kai Lüke | 28 | systemd 28 |
 
 ## yubiOS follow-through
 
@@ -90,15 +90,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8429). TODO: refine per file context.
-
-
-## Recommendation
 
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4201). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.8429, Δ=+0.4201) were identical placeholder copies with no per-file content; merged on 2026-09-18.
