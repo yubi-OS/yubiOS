@@ -135,3 +135,19 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4144) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8)
+
+The Gate 1 definition and its blocker dependencies were re-checked 52 days after review:
+
+- The review-gate discipline this doc pioneered (same-day diff against BLOCKERS.md) has a new
+  application: BLOCKERS.md has not been reviewed since 2026-08-24, and this round's blockers
+  drift check found two rows whose retirement conditions were met and unreflected (see
+  `refs/blockers-drift-check-2026-09-18.md`). A fresh BLOCKERS.md review is the next step the
+  gate discipline itself prescribes.
+- Gate evidence state: the physical-YubiKey leg has one closed proof point (OMN-42/89, rock1
+  hardware leg) since this doc's review; the ARM64 Path A board gate remains open. The
+  channel-coverage skeleton in the outreach section remains unfilled (its unfilled markers
+  were made explicit in round 7, cycle 98 — no plans were invented then or now).
+- Release-cadence context: 6 releases since this doc's review (v0.8.3 through v0.8.8), all
+  still tagged experimental in SECURITY.md's supported-versions table.
