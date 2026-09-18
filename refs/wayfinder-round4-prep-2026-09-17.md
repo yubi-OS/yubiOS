@@ -73,3 +73,7 @@ Order of events (UTC, 2026-09-17): inspect source + exemplars (`sbsign-pkcs11-va
 Cycles 2–4 (the three ADD rungs, predicted +1 each) have not been run.
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches () were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 40)
+
+round-4 prep doc: re-verified as a historical round record; its frozen baseline (frame d3289271) is superseded by rounds 7-8 frames; marked historical, content unchanged.
