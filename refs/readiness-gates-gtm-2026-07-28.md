@@ -7,7 +7,7 @@ Source: OMN-73 (team OMNI-AGENT), section 5 of the yubiOS Business and Stewardsh
 **Last reviewed:** 2026-07-28
 **<last-reviewed-against-blockers>** 2026-07-25
 **Review-gate diff vs 2026-07-25 version:**
-- The previous version cited BLOCKERS.md `as of 2026-07-22` and called B-VM-CTAP2 the binding constraint for Gate 1â2. BLOCKERS.md `Last reviewed: 2026-07-25` (same-day, four days later) marked B-VM-CTAP2 RESOLVED with run 30139433902. This is the same-day doc drift pattern; corrected here.
+- The previous version cited BLOCKERS.md `as of 2026-07-22` and called B-VM-CTAP2 the binding constraint for Gate 1→2. BLOCKERS.md `Last reviewed: 2026-07-25` (same-day, four days later) marked B-VM-CTAP2 RESOLVED with run 30139433902. This is the same-day doc drift pattern; corrected here.
 - The previous version cited PR #114 as evidence for OMN-81. PR #114 is closed-not-merged; PR #110 is the actual landed evidence.
 - The previous version said "OMN-70/82 (covenant) and OMN-83 (Technical Preview entry criteria) have not landed a PR as of this doc." OMN-70 + OMN-82 are Done; OMN-83 is In Progress.
 - This re-issue adds three missing gates (security audit, pricing-validity, reference-customer) found by the 5-plan stress-test 2026-07-28 (`session/stress-test-5-plans-2026-07-28.md`).
@@ -36,7 +36,7 @@ Define Gate 0 through Gate 3, the evidence required to move between them, what c
 ### Gate 1: Safe to discuss the offer
 
 - Criteria: an evidence boundary exists so external conversation does not overstate readiness; naming/licensing/legal review tracks are open; a covenant draft exists; Technical Preview entry criteria are explicit.
-- Evidence required to move from Gate 0 to Gate 1: refs/days-0-30-safe-offer-2026-07-25.md (OMN-65, PR #103, Done) for the evidence boundary; refs/naming-licensing-provenance-2026-07-25.md (OMN-81, **PR #110** â not PR #114 which is closed-not-merged) for the legal-review-open status; covenant draft (OMN-70/82, **Done** as of 2026-07-25); Technical Preview entry criteria (OMN-83, **In Progress** as of 2026-07-28).
+- Evidence required to move from Gate 0 to Gate 1: refs/days-0-30-safe-offer-2026-07-25.md (OMN-65, PR #103, Done) for the evidence boundary; refs/naming-licensing-provenance-2026-07-25.md (OMN-81, **PR #110** — not PR #114 which is closed-not-merged) for the legal-review-open status; covenant draft (OMN-70/82, **Done** as of 2026-07-25); Technical Preview entry criteria (OMN-83, **In Progress** as of 2026-07-28).
 - Allowed commercial activity: discovery conversations, interviews, and discussing a future offer under NDA. Explicitly not: pricing commitments, signed pilots, or public claims of production readiness.
 - **Status (corrected 2026-07-28):** **met pending OMN-83 landing.** Discovery conversations are unblocked.
 
@@ -44,9 +44,9 @@ Define Gate 0 through Gate 3, the evidence required to move between them, what c
 
 Three sub-gates, each required:
 
-- **Gate 1.5a â Security audit gate:** an independent security review of the supported release and management plane, OR a documented self-audit with named independent reviewer (third-party consultancy or qualified external individual). Not a full SOC2/ISO27001 certification; an evidence-grade review against the yubiOS threat model (`docs/THREAT_MODEL.md`) with a published report or summary, captured before any paid pilot SOW is signed. **Rationale (per stress-test 2026-07-28):** enterprise buyers in target segments routinely require third-party review before signing pilot agreements. Without it, design-partner recruitment may stall on procurement, not engineering. The trust thesis ("FIDO2-first, immutable, signed UKIs, verified /usr") demands external evidence before paid pilots.
-- **Gate 1.5b â Pricing-validity gate:** at least two of three priced proposals received at the documented list price (or above) for the Assured Fleet subscription tier ($600/node/year, $25k annual minimum) or above, per `docs/PLAN.md` Â§4. A priced proposal is a written, addressed response from a qualified buyer who has reviewed the SOW and the offer catalog. **Rationale:** the entire `docs/PLAN.md` Â§6 financial model assumes these prices hold. The first priced proposal that requires a >40% discount invalidates the financial model. Without this gate, paid pilots that close at steep discounts distort the model silently.
-- **Gate 1.5c â B-REAL-FIDO2 hardware evidence:** a documented sacrificial hardware run on real YubiKey + ROCK 5B/RockPro64 (or equivalent) executing OMN-63's 12 scenarios end-to-end. Captured in a `refs/vm-e2e-run-<id>.md` evidence file with full chain logs. **Rationale:** B-VM-CTAP2 closing 2026-07-25 retired the software-validation gate. The remaining production-confidence gap is hardware-validated FIDO2 â running a paid pilot without it would mean the pilot customer is the de-facto hardware-validation guinea pig.
+- **Gate 1.5a — Security audit gate:** an independent security review of the supported release and management plane, OR a documented self-audit with named independent reviewer (third-party consultancy or qualified external individual). Not a full SOC2/ISO27001 certification; an evidence-grade review against the yubiOS threat model (`docs/THREAT_MODEL.md`) with a published report or summary, captured before any paid pilot SOW is signed. **Rationale (per stress-test 2026-07-28):** enterprise buyers in target segments routinely require third-party review before signing pilot agreements. Without it, design-partner recruitment may stall on procurement, not engineering. The trust thesis ("FIDO2-first, immutable, signed UKIs, verified /usr") demands external evidence before paid pilots.
+- **Gate 1.5b — Pricing-validity gate:** at least two of three priced proposals received at the documented list price (or above) for the Assured Fleet subscription tier ($600/node/year, $25k annual minimum) or above, per `docs/PLAN.md` §4. A priced proposal is a written, addressed response from a qualified buyer who has reviewed the SOW and the offer catalog. **Rationale:** the entire `docs/PLAN.md` §6 financial model assumes these prices hold. The first priced proposal that requires a >40% discount invalidates the financial model. Without this gate, paid pilots that close at steep discounts distort the model silently.
+- **Gate 1.5c — B-REAL-FIDO2 hardware evidence:** a documented sacrificial hardware run on real YubiKey + ROCK 5B/RockPro64 (or equivalent) executing OMN-63's 12 scenarios end-to-end. Captured in a `refs/vm-e2e-run-<id>.md` evidence file with full chain logs. **Rationale:** B-VM-CTAP2 closing 2026-07-25 retired the software-validation gate. The remaining production-confidence gap is hardware-validated FIDO2 — running a paid pilot without it would mean the pilot customer is the de-facto hardware-validation guinea pig.
 
 - Allowed commercial activity: signing a paid pilot SOW, scoped strictly to the platforms and configurations actually evidenced. Not allowed: signing for production-readiness claims, signing for ARM64 hardware-root claims without separate Gate 1.5c evidence, signing without Gate 1.5a/b cleared.
 
@@ -75,7 +75,7 @@ Three sub-gates, each required:
 | Transition | Key evidence | Landed as of 2026-07-28 |
 |---|---|---|
 | Gate 0 -> Gate 1 | Evidence boundary doc, legal/naming review opened, covenant drafted, Technical Preview criteria defined | All landed or in flight: OMN-65/68/81/70/82 Done; OMN-83 In Progress. |
-| Gate 1 -> Gate 1.5 | All of Gate 1 + security audit report + â¥2 of 3 priced proposals at list + B-REAL-FIDO2 hardware evidence | Security audit: not started. Priced proposals: 0 of 3. Hardware evidence: not started. |
+| Gate 1 -> Gate 1.5 | All of Gate 1 + security audit report + ≥2 of 3 priced proposals at list + B-REAL-FIDO2 hardware evidence | Security audit: not started. Priced proposals: 0 of 3. Hardware evidence: not started. |
 | Gate 1.5 -> Gate 2 | B-HARDENING-RUNTIME runtime-proven, B-BOOTC-SEAL reclassified or resolved, 2 design partners, priced SOW | B-HARDENING-RUNTIME: open. B-BOOTC-SEAL: in flight (OMN-51). Design partners: not sourced. Priced SOW: not drafted. |
 | Gate 2 -> Gate 2.5 | Completed paid pilot readout + signed case-study agreement | Not started (depends on Gate 2). |
 | Gate 2.5 -> Gate 3 | Physical-YubiKey evidence, sealed UKI, ARM64 board evidence (if claimed), completed pilot readout, signed case-study | None of these exist yet; this doc only specifies what is needed. |
@@ -92,7 +92,7 @@ A staged motion where each stage's proof is a precondition for the next, not a m
 
 ## Aligning current blockers and pilot work to the next gate
 
-The organization is at Gate 1 (met pending OMN-83 landing), working toward Gate 1.5. Per BLOCKERS.md as of 2026-07-25, B-VM-CTAP2 (the previous binding constraint) is RESOLVED. The new binding constraints for the Gate 1 â Gate 1.5 transition are Gate 1.5a (security audit, not started), Gate 1.5b (0 of 3 priced proposals at list), Gate 1.5c (B-REAL-FIDO2 hardware evidence, not started). B-HARDENING-RUNTIME and B-BOOTC-SEAL are technical work that can proceed in parallel; the pilot itself cannot start without all three Gate 1.5 sub-gates.
+The organization is at Gate 1 (met pending OMN-83 landing), working toward Gate 1.5. Per BLOCKERS.md as of 2026-07-25, B-VM-CTAP2 (the previous binding constraint) is RESOLVED. The new binding constraints for the Gate 1 → Gate 1.5 transition are Gate 1.5a (security audit, not started), Gate 1.5b (0 of 3 priced proposals at list), Gate 1.5c (B-REAL-FIDO2 hardware evidence, not started). B-HARDENING-RUNTIME and B-BOOTC-SEAL are technical work that can proceed in parallel; the pilot itself cannot start without all three Gate 1.5 sub-gates.
 
 ## Dependency map
 
@@ -133,8 +133,5 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Verification plan
 
-**Run cmd**: TBD per file context.
-**Expected output**: TBD.
-**Pass criterion**: TBD.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4144). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4144) were identical placeholder copies with no per-file content; merged on 2026-09-18.
