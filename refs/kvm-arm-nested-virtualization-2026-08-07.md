@@ -250,3 +250,7 @@ This artifact is intentionally framed as a research note, not a canonical spec. 
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6466, Δ=+0.5900) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 71)
+
+KVM ARM nested-virtualization record: unchanged; the rock1 KVM label still gates the VM legs; note additive.
