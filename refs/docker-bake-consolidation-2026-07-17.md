@@ -35,7 +35,7 @@ The scope is the workflow chain that `ci.yml` currently dispatches. The standalo
 |---|---|---|
 | `fetch-dhi-manifest.yml` | None | Registry lookup, repository rewrite, commit, and push are source mutation rather than an image build. The recursive digest replacement will update `yubiOS-bake.hcl`. |
 | `fetch-fedora-bootc-manifest.yml` | None | Same source-mutation boundary; the refreshed pin is consumed by `Containerfile`. |
-| `ci_firmware-rk.yml` | `firmware` | Native/cross firmware compilation, QEMU evidence, artifact download, and the RK3588 TPL gate remain in Actions; every Stage 1â4 job uses the pinned DHI container and user-scoped Buildx setup. |
+| `ci_firmware-rk.yml` | `firmware` | Native/cross firmware compilation, QEMU evidence, artifact download, and the RK3588 TPL gate remain in Actions; every Stage 1–4 job uses the pinned DHI container and user-scoped Buildx setup. |
 | `yubiOS-ci.yml` | `yubios-ci`, `yubios` | Native amd64/arm64 scheduling and final `imagetools` index assembly remain outside Bake. |
 | `ci_dev_image.yml` | `yubios-dev-ci`, `yubios-dev` | Native runner scheduling and final dev index assembly remain outside Bake. |
 | `ci_test-vm.yml` | None | bcvk's Podman image store, DirectBoot SSH credential transport, KVM, FUSE, and hardware-only exclusions are host evidence, not Docker image-build configuration. |
