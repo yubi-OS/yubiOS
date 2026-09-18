@@ -15,7 +15,7 @@ Repository commit reviewed: `6ff2b98a17cc5ff7c2a2142aa2ca6f1bdbe33f4c`
 
 ## Internal synthesis
 
-The strongest consistent story is an owner-held **human-presence and identity root** paired with a separate **platform-integrity root**. The public âNo TPMâ and âsole rootâ shorthand is not precise enough for proactive outreach because current architecture uses TPM/fTPM measurement and explicitly retains OEM-controlled lower firmware boundaries on x86-64.
+The strongest consistent story is an owner-held **human-presence and identity root** paired with a separate **platform-integrity root**. The public “No TPM” and “sole root” shorthand is not precise enough for proactive outreach because current architecture uses TPM/fTPM measurement and explicitly retains OEM-controlled lower firmware boundaries on x86-64.
 
 The current campaign mode must be build in public:
 
@@ -33,7 +33,7 @@ The current campaign mode must be build in public:
 | YubiKey and Yubico are registered Yubico trademarks, and the project name uses the `yubi` stem. | Obtain a name/trademark review, use an independence notice, and avoid implied endorsement. |
 | `MAINTAINER.md` contains personal contact details. | Replace unnecessary personal data with monitored role-based press, security, and maintainer contacts before increasing discovery. |
 | No root-level license, security policy, contribution guide, or code-of-conduct file was found. | Establish basic trust and contributor infrastructure before a recruitment campaign. |
-| Some public language says âNo TPM,â âsole trust anchor,â or âat every layer.â | Use the evidence-backed identity/platform split and maintain a formal claim ledger. |
+| Some public language says “No TPM,” “sole trust anchor,” or “at every layer.” | Use the evidence-backed identity/platform split and maintain a formal claim ledger. |
 | Public disk-install commands can destroy data. | Put tested-hardware, backup, recovery, and destructive-operation warnings beside amplified install instructions. |
 
 These are communications-readiness findings, not legal conclusions or a security audit.
@@ -44,7 +44,7 @@ These are communications-readiness findings, not legal conclusions or a security
 |---|---|---|
 | Category | bootc and Fedora Atomic Desktops make image-based host operating systems legible to a growing audience. | Explain yubiOS inside this established category rather than claiming to invent it. |
 | Verified Linux | Fedora sealed bootable container test images and Amutable both foreground verifiable integrity. | Do not claim immutability or verified boot as unique; differentiate on owner-held control and explicit trust boundaries. |
-| Adjacent security systems | Qubes emphasizes compartmentalization, secureblue hardened Fedora Atomic images, and Talos immutable Kubernetes nodes. | Compare jobs and trust models without adversarial âbetter thanâ language. |
+| Adjacent security systems | Qubes emphasizes compartmentalization, secureblue hardened Fedora Atomic images, and Talos immutable Kubernetes nodes. | Compare jobs and trust models without adversarial “better than” language. |
 | Supply chain | SLSA v1.2 defines provenance and graduated supply-chain controls. | Describe provenance as evidence of origin/process, not proof that code is benign; do not claim a SLSA level without an audit. |
 | Secure by design | CISA encourages public evidence and security-by-default practices. | Make transparency, recovery, and shifting burden away from owners supporting themes. |
 | Trademark | Yubico publishes brand assets and identifies YubiKey/Yubico as registered marks. | Use conservative brand treatment and an independence statement. |
@@ -61,7 +61,7 @@ Support it with the precise category:
 
 > FIDO2-first, owner-controlled, image-based Linux.
 
-Do not use âfirst,â âonly,â âmost secure,â âunhackable,â or unqualified âNo TPM.â
+Do not use “first,” “only,” “most secure,” “unhackable,” or unqualified “No TPM.”
 
 ## Primary external sources
 
@@ -111,27 +111,19 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Priority signals
 
+
 **Priority class**: P2 (nice-to-have)
 **Critical-path?**: No
 **Blocking issues**: none identified at this cycle
-**Owner**: TBD
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4361). TODO: refine per file context.
-
-
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4361) were identical placeholder copies with no per-file content; merged on 2026-09-18.
 ## Recommendation
 
+
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.5402). TODO: refine per file context.
-
-
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.5402) were identical placeholder copies with no per-file content; merged on 2026-09-18.
 ## Cross-references
 
-**Related Linear issues (OMN-*)**: TBD per file context.
-**Related PRs**: TBD.
-**Related ADRs**: TBD.
-**Related refs/ docs**: TBD.
 
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.6587). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6587) were identical placeholder copies with no per-file content; merged on 2026-09-18.
