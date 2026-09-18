@@ -336,3 +336,7 @@ so the reference now has a real-hardware evidence trail behind it, not only CI-e
 The reference's systemd-version-sensitive claims were not re-diffed against a v261 changelog
 this pass (flagged for the next upstream review); the round's upstream drift check
 (`refs/upstream-progress-drift-check-2026-09-18.md`) covers the mkosi/bootc sides.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 42)
+
+already re-verified in cycle 30; this pass adds nothing and is recorded as a no-op abstain to keep the cycle ledger honest.
