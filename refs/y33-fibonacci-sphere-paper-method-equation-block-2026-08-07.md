@@ -208,3 +208,23 @@ This artifact is intentionally framed as a research note, not a canonical spec. 
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6466, Δ=+0.5900) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## Correspondence with the revised-passage companion (wayfinder round 8, cycle 1)
+
+The companion artifact `refs/y33-fibonacci-sphere-paper-revised-passage-2026-08-07.md` patches
+the paper's prose around the same insertion point this block patches its equations. Row-by-row,
+the two artifacts must stay synchronized:
+
+| This block | Revised passage (its rule table) | Sync obligation |
+|---|---|---|
+| Section 2 sampling equations, implicit form: `z_i = 1 - (2i+1)/N`, `phi_i = 2 pi i / phi`, `theta_i = arccos(z_i)` | Row 2 — "explicitly state the Fibonacci nodes `z_i, phi_i, theta_i` and the per-node evaluation `Y_3^3(theta_i, phi_i)`" | Same node indexing (`i` from 0), same golden-ratio `phi`, per-node evaluation present in both |
+| Sections 2-3 real-form factorization: `Re{Y_3^3} = K sin^3(theta) cos(3 phi)` | Row 3 — "the explicit identity `Y_3^3(theta,phi) ∝ sin^3 theta e^{i3 phi}`" | Angular-probe reading (3-fold azimuthal), not radial variation; implicit real form equals the passage's complex form times phase |
+| Constraint 1: `phi = (1+sqrt(5))/2` golden ratio for canonical Fibonacci indexing | The passage TeX: `varphi = (1+sqrt5)/2` | Identical constant, identical role; Vogel and Saff-Kuijlaars variants stay excluded in both |
+| Section 4 "why this works" (uniform coverage, pole avoidance) | Quick tip — "use Fibonacci points for sampling; use Y_3^3 for the angular probe" | Division of labor preserved: sampling scheme vs. diagnostic probe are separate primitives |
+
+The revised passage's own equation chain (`z_i = 1 - (2i+1)/N`, `phi_i = 2 pi i / varphi`,
+`theta_i = arccos(z_i)`, then the per-node `Y_3^3` evaluation) is the same three-step sampling
+sequence this block writes as its implicit-form equations (1)-(3): passage prose and block
+equations are two renderings of one method. A change to any constant, node scheme, or
+normalization here must be mirrored in the companion passage before either artifact is lifted
+into the paper.
