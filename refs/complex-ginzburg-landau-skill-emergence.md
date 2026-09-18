@@ -431,3 +431,12 @@ Nothing in this errata transports evidence of Ginzburg–Landau dynamics to the
 corpus. The corpus still has no autonomous field evolution and no independently
 measured amplitude or phase, so the analogy remains structural, exactly as
 caveats 1–3 and 6–7 above already state.
+
+## 2026-09-18 negative-preservation check (wayfinder round 8, cycle 33)
+
+The corpus's recorded negatives (A1 admission failed; Gaunt coupling negative at L=3; FCS
+factorization not identifiable; uniform Pennes loss cancels; margin-clean two-branch exclusion)
+are load-bearing content this round must not erase. Checked: the GL reference doc is intact
+(25899 bytes, unchanged by any round-8 edit so far), and the negative keywords still resolve
+across the corpus at the round's pin. No round-8 record asserts a new physics term; the
+wayfinder ranking's exclusion-only discipline holds.
