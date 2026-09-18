@@ -151,3 +151,17 @@ Quantitative anchors for the 8 stress tests. Verified via the commit-time signat
 | 8 | CI-to-runtime gap | n/a | n/a | `ci_token-audit.yml` | LOW - token-only |
 
 **Verification gate**: section 4 cross-check table updates when any of these workflow / script SHAs advance. Top 3 un-covered gaps from cycle-0 cross-check: key-loss recovery (#2), partial enrollment (#3), platform matrix disclosure (#6).
+
+## 2026-09-18 re-verification (wayfinder round 8, cycle 15)
+
+The doc's time-sensitive repo reads were re-checked against live main (`a6fbbdb9`):
+
+| Claim (2026-08-07) | Live 2026-09-18 | Verdict |
+|---|---|---|
+| "missing from the repo at the time of this write: a THREAT_MODEL.md file (returned 404) and a SECURITY.md (also 404)" | `.github/SECURITY.md` now exists (a real policy: private vulnerability reporting preferred, 7-day best-effort acknowledgement, last reviewed 2026-07-17); the policy references `THREAT_MODEL.md`, `MITIGATE.md`, and `TODO.md` as the status surface | **superseded** — the doc's "missing top-level policy docs" observation has been partly resolved by real files landing since |
+| "2 open issues" | the open-issues listing this pass names exactly one open issue (#24, post-launch CHIPSEC) | consistent direction |
+| Eight stress tests with falsifiable pass criteria | unchanged; the universal pass rule ("every test fails closed or recovers cleanly") remains the standing standard | consistent |
+
+The doc's adversarial-validation posture is the same posture this round's discipline inherits
+(frozen checks, independent verification); the finding is that its "404" observations have since
+been resolved by real files, which is drift toward a harder posture, not a regression.
