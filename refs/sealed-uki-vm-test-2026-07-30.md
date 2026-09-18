@@ -1,4 +1,4 @@
-# Sealed UKI VM test lane â scoping the missing Secure Boot e2e proof
+# Sealed UKI VM test lane — scoping the missing Secure Boot e2e proof
 
 **Date:** 2026-07-30
 **Status:** Draft. Parent issue: OMN-53.
@@ -18,7 +18,7 @@ carves out: *a separate Secure Boot VM lane is required to prove sealing*) and
 proposes a companion workflow `ci_test_sealed-uki-vm.yml` that exercises it on
 fresh GitHub-hosted QEMU.
 
-## Scope â what to prove
+## Scope — what to prove
 
 1. **Signed UKI build.** `mkosi ... Format=ukify` (or `bootc container ukify`)
    with `SecureBootKey=pkcs11:token=yubiOS-ci;object=sb-key;type=private` per the
@@ -47,7 +47,7 @@ fresh GitHub-hosted QEMU.
    target). Workflow asserts `systemd-cryptsetup status` shows the FIDO2-bound
    slot.
 
-6. **Negative tamper â sealed lane.** Three negative-path assertions:
+6. **Negative tamper — sealed lane.** Three negative-path assertions:
    - **Tampered UKI:** flip one byte in the signed UKI after signing; the
      Secure Boot VM must refuse to boot (assert QEMU exits with `Secure Boot
      violation`).
@@ -58,7 +58,7 @@ fresh GitHub-hosted QEMU.
 
 ## Out of scope (parked for follow-on PRs)
 
-- **yubiOS-side BLSConfig wiring (OMN-150 Phase 2)** â required for the BLS
+- **yubiOS-side BLSConfig wiring (OMN-150 Phase 2)** — required for the BLS
   entries to point at the signed UKI rather than the composefs-blessed
   kernel. The upstream bootc 1.16.6 capability IS met (verified by
   `ci_test_bootc-filesystem.yml` run #11 at `7eba4856e7` job `91037694742`,
@@ -68,7 +68,7 @@ fresh GitHub-hosted QEMU.
   entry on the new image still points at
   `/EFI/Linux/bootc_composefs-<sha512>/vmlinuz` with `composefs=<sha512>`
   in options (verified in the same run, line 909). So the yubios-side wiring
-  (Containerfile.dev â ukify call, BLSConfig drop-in for UKI) has not landed.
+  (Containerfile.dev → ukify call, BLSConfig drop-in for UKI) has not landed.
   This VM lane proves the *primitive* (signed UKI + ROTPK + dm-verity +
   sealed LUKS works in a QEMU Secure Boot VM) but does NOT prove the
   yubios install-time wiring. The two need to land separately.
@@ -164,7 +164,7 @@ Folding sealing into the existing workflow would either:
 1. force that workflow to depend on `mkosi ukify` + SoftHSM + QEMU OVMF +
    measured-boot + signed UKI build chain, none of which it needs today, or
 2. silently mask whether the unsealed lane still works (the failure mode
-   today is "we tried to seal and the install broke" â a different class of
+   today is "we tried to seal and the install broke" — a different class of
    failure than "the unsealed install broke").
 
 Keeping them as siblings also lets the sealed lane land in parallel with the
@@ -216,8 +216,5 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Verification plan
 
-**Run cmd**: TBD per file context.
-**Expected output**: TBD.
-**Pass criterion**: TBD.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4144). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4144) were identical placeholder copies with no per-file content; merged on 2026-09-18.
