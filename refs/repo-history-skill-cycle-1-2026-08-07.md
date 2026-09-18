@@ -44,3 +44,7 @@ Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4739) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 93)
+
+repo-history-skill cycle-1 record (round-7 repaired): historical; note additive.
