@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/path-a-b-board-status.md; original content dated 2026-07-11, retained below)_
 
-Status check 2026-07-23: cross-checked against live BLOCKERS.md â B-ARM64-PATHA and B-RK3588-TPL (tracked in the yubiOS Master Roadmap project, see refs/org-state-audit-2026-07-23.md) match this file's classification exactly: RK3588 is the Path A candidate but not yet production (no ROTPK/fuse rehearsal on real hardware; ROCK 5B specifically blocked on a missing licensed DDR/TPL blob per B-RK3588-TPL), ROCKPro64/RK3399 is the supported stepping-stone per ADR-029. No drift found â board classification below remains accurate.
+Status check 2026-07-23: cross-checked against live BLOCKERS.md — B-ARM64-PATHA and B-RK3588-TPL (tracked in the yubiOS Master Roadmap project, see refs/org-state-audit-2026-07-23.md) match this file's classification exactly: RK3588 is the Path A candidate but not yet production (no ROTPK/fuse rehearsal on real hardware; ROCK 5B specifically blocked on a missing licensed DDR/TPL blob per B-RK3588-TPL), ROCKPro64/RK3399 is the supported stepping-stone per ADR-029. No drift found — board classification below remains accurate.
 
 # ARM64 Path A / Path B Board Status
 

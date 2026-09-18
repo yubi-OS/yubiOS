@@ -110,4 +110,4 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 **Blocking issues**: none identified at this cycle
 **Owner**: TBD
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8670). TODO: refine per file context.
+Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8670).

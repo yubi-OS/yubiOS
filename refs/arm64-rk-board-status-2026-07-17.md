@@ -65,7 +65,7 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 **Blocking issues**: none identified at this cycle
 **Owner**: TBD
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4834). TODO: refine per file context.
+Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4834).
 
 
 ## Cross-references
@@ -75,4 +75,4 @@ Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4834).
 **Related ADRs**: TBD.
 **Related refs/ docs**: TBD.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4739). TODO: refine per file context.
+Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4739).

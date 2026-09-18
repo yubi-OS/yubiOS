@@ -1,15 +1,15 @@
 ---
-contract: "Cycle 5 run log for curve-guided-rsi on the yubiOS 69-skill expanded corpus (63 existing + 6 new from deep research). Records the corpus growth strategy (deep research â gap-fill skills â expanded fit), the curve fit metrics (PC1+PC2 = 0.4615, holdout RÂ² = +0.2244), the per-skill RSI edit pattern (one ## <primitive> coverage section per skill), and verification. Companion to PR #158 on yubi-OS/yubiOS and direct commit e9ae9eba1ef0 on yubi-OS/agent-skills."
-short_description: "Cycle 5 run log â deep-research corpus growth + RSI on 69 skills"
+contract: "Cycle 5 run log for curve-guided-rsi on the yubiOS 69-skill expanded corpus (63 existing + 6 new from deep research). Records the corpus growth strategy (deep research → gap-fill skills → expanded fit), the curve fit metrics (PC1+PC2 = 0.4615, holdout R² = +0.2244), the per-skill RSI edit pattern (one ## <primitive> coverage section per skill), and verification. Companion to PR #158 on yubi-OS/yubiOS and direct commit e9ae9eba1ef0 on yubi-OS/agent-skills."
+short_description: "Cycle 5 run log — deep-research corpus growth + RSI on 69 skills"
 ---
 
-# curve-guided-rsi Cycle 5 â Deep-Research Corpus Growth Run (2026-08-04)
+# curve-guided-rsi Cycle 5 — Deep-Research Corpus Growth Run (2026-08-04)
 
 ## TL;DR
 
 Cycle 5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new from `parallel-deep-research`). The new skills fill the four highest-leverage sparse-cell primitive axes (cryptographic identity, immutability, segmentation, attestation) per Stream 1 (coverage gaps) and Stream 3 (upstream comparative) synthesis. Each existing skill received a substantive RSI edit declaring its contribution to one of the 10 internal-big-picture primitives.
 
-**Curve fit on the 69-skill corpus:** PC1+PC2 = **0.4615** (â¥0.40 PASS), holdout RÂ² = **+0.2244** (>0 PASS).
+**Curve fit on the 69-skill corpus:** PC1+PC2 = **0.4615** (≥0.40 PASS), holdout R² = **+0.2244** (>0 PASS).
 
 **Two-repo landing:**
 - `yubi-OS/yubiOS`: branch `feat/curve-rsi-cycle5-deep-research` @ `59d87a090a86`, opened as PR [#158](https://github.com/yubi-OS/yubiOS/pull/158) (draft, awaiting Jenny's merge per the standing "Jenny merges" rule)
@@ -23,9 +23,9 @@ The user's directive was: *"lets do that again on all the skills but open a PR t
 
 The strategy was:
 
-1. **Grow horizontally, not vertically** â per Stream 2's prior-art scan, "don't chase scale." 63 is in the ideal regime. Add skills under new 10-primitive bases (cryptographic identity, immutability, segmentation, attestation â all under-represented on the prior corpus) rather than adding more `docker-*` skills.
-2. **Use Stream 1 (coverage gaps) + Stream 3 (upstream comparative) as gap-detection inputs** â both streams independently identified `yubikey-operations`, `dm-verity-and-integrity`, and `sigstore-rekor-v2` as high-leverage. Convergence is the strongest signal.
-3. **Apply RSI to ALL skills, not just sparse-cell ones** â the curve's sparse-cell detector picks the top-N (cap 10) per the skill's protocol. The user's directive was "all skills get substantive edits" â so RSI was applied uniformly. This is a v2 protocol change; the cycle-5 metrics account for it.
+1. **Grow horizontally, not vertically** — per Stream 2's prior-art scan, "don't chase scale." 63 is in the ideal regime. Add skills under new 10-primitive bases (cryptographic identity, immutability, segmentation, attestation — all under-represented on the prior corpus) rather than adding more `docker-*` skills.
+2. **Use Stream 1 (coverage gaps) + Stream 3 (upstream comparative) as gap-detection inputs** — both streams independently identified `yubikey-operations`, `dm-verity-and-integrity`, and `sigstore-rekor-v2` as high-leverage. Convergence is the strongest signal.
+3. **Apply RSI to ALL skills, not just sparse-cell ones** — the curve's sparse-cell detector picks the top-N (cap 10) per the skill's protocol. The user's directive was "all skills get substantive edits" — so RSI was applied uniformly. This is a v2 protocol change; the cycle-5 metrics account for it.
 
 ---
 
@@ -53,7 +53,7 @@ Pattern: each skill (existing or new) gets a `## <primitive> coverage for <skill
 
 Each section includes:
 - The cycle-5 fit coordinate `(u, v)` for the skill
-- The PC1+PC2 and holdout RÂ² of the cycle-5 fit
+- The PC1+PC2 and holdout R² of the cycle-5 fit
 - The cross-references to other skills in the gap-fill set
 - A pointer to this run log for traceability
 
@@ -66,20 +66,20 @@ target               : 384-D Z via seeded QR lift of the 9-D coverage
 t                    : PC1+PC2 of Z
 PC1 explained var    : 0.2719
 PC2 explained var    : 0.1896
-PC1+PC2              : 0.4615   (gate â¥ 0.40   PASS)
-Holdout RÂ²           : +0.2244  (gate > 0      PASS)
-Sparse cells         : 304 (21Ã21 grid, r=0.05)
+PC1+PC2              : 0.4615   (gate ≥ 0.40   PASS)
+Holdout R²           : +0.2244  (gate > 0      PASS)
+Sparse cells         : 304 (21×21 grid, r=0.05)
 ```
 
-The sparse-cell count of 304 reflects the natural sparsity of 69 skills across 441 cells (137 occupied cells, average density ~0.5 per cell). The cycle-5 protocol change is that sparse-cell count is no longer the headline metric â the per-skill primitive coverage is the primary signal.
+The sparse-cell count of 304 reflects the natural sparsity of 69 skills across 441 cells (137 occupied cells, average density ~0.5 per cell). The cycle-5 protocol change is that sparse-cell count is no longer the headline metric — the per-skill primitive coverage is the primary signal.
 
 ### Deep-research sources
 
 Three streams (all on disk in `session/`):
 
-- **Stream 1** â Coverage-gap audit of 63-skill corpus (272 lines): `session/subagents/ses_0342f86a7ffe97ZpPJkIUwhrdv/stream1-yubios-coverage-gaps-2026-08-04.md`
-- **Stream 2** â Prior-art corpus patterns across 7 ecosystems (239 lines): `session/subagents/ses_0342f7515ffe8nWW5ur3WB9E4c/stream2-prior-art-skill-corpus-patterns-2026-08-04.md`
-- **Stream 3** â Upstream comparative for systemd v262 / bootc 1.16.4-1.16.6 / mkosi v25-27 / Rekor v2 / CoCo (288 lines): `session/stream3-yubios-upstream-comparative-2026-08-04.md`
+- **Stream 1** — Coverage-gap audit of 63-skill corpus (272 lines): `session/subagents/ses_0342f86a7ffe97ZpPJkIUwhrdv/stream1-yubios-coverage-gaps-2026-08-04.md`
+- **Stream 2** — Prior-art corpus patterns across 7 ecosystems (239 lines): `session/subagents/ses_0342f7515ffe8nWW5ur3WB9E4c/stream2-prior-art-skill-corpus-patterns-2026-08-04.md`
+- **Stream 3** — Upstream comparative for systemd v262 / bootc 1.16.4-1.16.6 / mkosi v25-27 / Rekor v2 / CoCo (288 lines): `session/stream3-yubios-upstream-comparative-2026-08-04.md`
 
 **Convergence between streams:** Stream 1 and Stream 3 independently identified 4 of the 6 new-skill picks (`yubikey-operations`, `dm-verity-and-integrity`, `sigstore-rekor-v2`, `composefs-kernel-floors` were all named in both streams). The remaining 2 (`nspawn-containers`, `audit-evidence-packaging`) were Stream 1 picks with Stream 2 cross-references.
 
@@ -87,22 +87,22 @@ Three streams (all on disk in `session/`):
 
 ## Anti-patterns avoided
 
-- **Vertical growth** (more `docker-*` skills) â Stream 2's "borrow / don't borrow" verdict was explicit: 8 `docker-*` skills is enough.
-- **Whole-corpus NSS** â would defeat the curve-lens prioritization. Only sparse-cell skills get focused NSS.
-- **RSI without NSS** â NSS provides the gap-list; RSI without it produces blind edits.
-- **Skipping Stage 5 verification** â without it, the "curve moved" claim is ungrounded.
-- **Caching TUF metadata** beyond the metadata timestamp (~7 days) â would cause `cosign verify-attestation` to fail.
-- **Hardcoding a composefs root hash** outside BLS â kernel command lines are mutable.
-- **Using Rekor v1 for new deployments** â Rekor v1 is in maintenance mode; v2 is GA.
+- **Vertical growth** (more `docker-*` skills) — Stream 2's "borrow / don't borrow" verdict was explicit: 8 `docker-*` skills is enough.
+- **Whole-corpus NSS** — would defeat the curve-lens prioritization. Only sparse-cell skills get focused NSS.
+- **RSI without NSS** — NSS provides the gap-list; RSI without it produces blind edits.
+- **Skipping Stage 5 verification** — without it, the "curve moved" claim is ungrounded.
+- **Caching TUF metadata** beyond the metadata timestamp (~7 days) — would cause `cosign verify-attestation` to fail.
+- **Hardcoding a composefs root hash** outside BLS — kernel command lines are mutable.
+- **Using Rekor v1 for new deployments** — Rekor v1 is in maintenance mode; v2 is GA.
 
 ---
 
 ## Verification
 
-- [x] N = 69 (corpus size gate, â¥20 PASS)
-- [x] PC1+PC2 = 0.4615 (curve fit quality gate, â¥0.40 PASS)
-- [x] Holdout RÂ² = +0.2244 (curve generalization gate, >0 PASS)
-- [x] All 69 SKILL.md files have valid `js-yaml` frontmatter (name regex `^[a-z0-9-]{1,64}$`, description â¤1024 chars, no `<`/`>`, closing `---` intact)
+- [x] N = 69 (corpus size gate, ≥20 PASS)
+- [x] PC1+PC2 = 0.4615 (curve fit quality gate, ≥0.40 PASS)
+- [x] Holdout R² = +0.2244 (curve generalization gate, >0 PASS)
+- [x] All 69 SKILL.md files have valid `js-yaml` frontmatter (name regex `^[a-z0-9-]{1,64}$`, description ≤1024 chars, no `<`/`>`, closing `---` intact)
 - [x] All 69 SKILL.md files include a cycle-5 RSI edit (verified via grep)
 - [x] All 6 new skills have a `## Changelog` entry referencing the cycle-5 work
 - [x] Two-repo landing: PR #158 on yubi-OS/yubiOS (draft, awaiting Jenny), direct commit `e9ae9eba1ef0` on yubi-OS/agent-skills main
@@ -121,7 +121,7 @@ agent-skills, the generic-skills repo, follows direct-to-main per the user's "to
 
 ### Why draft, not ready
 
-PR #158 is opened as draft to give Jenny a chance to review the 75-file change before merge. Once she approves, she can mark it ready-for-review (the system flips draftâready on PR API patch with `draft: false`).
+PR #158 is opened as draft to give Jenny a chance to review the 75-file change before merge. Once she approves, she can mark it ready-for-review (the system flips draft→ready on PR API patch with `draft: false`).
 
 ### Why I didn't call PUT /pulls/158/merge
 
@@ -134,18 +134,18 @@ This rule applies. PR #158 is opened and ready for Jenny to merge; I do not auto
 
 ## Next-cycle candidates (cycle 6 backlog)
 
-1. **`hitrust-csf-mapping` + `cisa-ztmm-mapping`** â 2 multi-axis compliance-mapping skills. Defer to cycle 6.
-2. **`chronicle-yara-l-detection`** â YARA-L 2.0 generic skill. Defer to cycle 6.
-3. **3 skill extensions** per Stream 3: `0pointer-mastery` (add v262 row), `mkosi-image-builder` (pin MinimumVersion=26 + `--verity=defer`), `bootc-images` (pin base to bootc â¥ 1.16.4 + document `split-kernel-and-rootfs`).
-4. **Naming audit** per Stream 2: kill `the-cult` + `the-follower` prefix-clustering anti-pattern; merge into `cult-orchestration` per Stream 1 Â§5.1.
-5. **Discovery-skill workflow** per Stream 2 Â§6: a skill that says "audit the corpus, find sparse cells, propose new skills to fill them" â complements RSI-edits-of-existing-skills with skill-creation-for-empty-cells. This is the v2 trajectory for `curve-guided-rsi`.
-6. **Coverage-matrix heatmap visualization** per Stream 2 Â§6 #4: 69 rows Ã 9 columns, 0/1 coloring, with PC1+PC2 coordinates annotated.
+1. **`hitrust-csf-mapping` + `cisa-ztmm-mapping`** — 2 multi-axis compliance-mapping skills. Defer to cycle 6.
+2. **`chronicle-yara-l-detection`** — YARA-L 2.0 generic skill. Defer to cycle 6.
+3. **3 skill extensions** per Stream 3: `0pointer-mastery` (add v262 row), `mkosi-image-builder` (pin MinimumVersion=26 + `--verity=defer`), `bootc-images` (pin base to bootc ≥ 1.16.4 + document `split-kernel-and-rootfs`).
+4. **Naming audit** per Stream 2: kill `the-cult` + `the-follower` prefix-clustering anti-pattern; merge into `cult-orchestration` per Stream 1 §5.1.
+5. **Discovery-skill workflow** per Stream 2 §6: a skill that says "audit the corpus, find sparse cells, propose new skills to fill them" — complements RSI-edits-of-existing-skills with skill-creation-for-empty-cells. This is the v2 trajectory for `curve-guided-rsi`.
+6. **Coverage-matrix heatmap visualization** per Stream 2 §6 #4: 69 rows × 9 columns, 0/1 coloring, with PC1+PC2 coordinates annotated.
 
 ---
 
 ## References
 
-- PR #158: [feat: curve-guided-rsi cycle 5 â 6 new skills + RSI on 69-skill corpus](https://github.com/yubi-OS/yubiOS/pull/158)
+- PR #158: [feat: curve-guided-rsi cycle 5 — 6 new skills + RSI on 69-skill corpus](https://github.com/yubi-OS/yubiOS/pull/158)
 - yubi-OS/agent-skills main commit: `e9ae9eba1ef0`
 - yubi-OS/yubiOS branch: `feat/curve-rsi-cycle5-deep-research` @ `59d87a090a86`
 - Stream 1: `session/subagents/ses_0342f86a7ffe97ZpPJkIUwhrdv/stream1-yubios-coverage-gaps-2026-08-04.md`
@@ -194,4 +194,4 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 **Scope**: TBD.
 **Out of scope**: TBD.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4341). TODO: refine per file context.
+Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4341).
