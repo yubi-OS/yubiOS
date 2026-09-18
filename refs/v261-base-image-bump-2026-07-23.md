@@ -71,3 +71,7 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 **Blocking issues**: none identified at this cycle
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.8670) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 64)
+
+v261 base image bump record: the bump is historical; the current fedora-bootc digest question is tracked by this round's pin-resolution audit (the pin is stale, 404 on quay); note additive.
