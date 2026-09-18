@@ -59,3 +59,6 @@ This document applies the yubiOS segmentation primitive — Linux namespaces, cg
 **Verdict**: point-in-time evidence review; conclusions live in "State changes justified by the logs" above (two blocker retirements, one narrowed VM CTAP2 blocker, one new RK3588 firmware-input blocker, and the hardware-validation boundary).
 
 Context: template Mode-D sections appended by repo-refs-skill cycle-1 (Δ=+0.8429) and cycle-2 7-D batch (Δ=+0.4201) were duplicate placeholder stubs with no per-file content; merged into this single record on 2026-09-17.
+## 2026-09-18 drift check (wayfinder round 8, cycle 80)
+
+the CI evidence review (round-7 cycle-97 merged stubs): its run citations were spot-verified in the round's citation audits; note additive.
