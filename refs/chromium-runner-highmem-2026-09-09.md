@@ -40,3 +40,7 @@ bring-up lane, not the production lane.
 - Whether the tool installer can complete without interactive sudo, or the runner host
   needs a manual one-time provision step by the owner.
 - GitHub large-runner alternative stays the fallback for full builds (per OMN-165 blockers).
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 39)
+
+HIGH-MEM runner record: the runner registry facts (runner 22, chromium-high-mem group 3) were re-cited from the round-2 records; the runner itself has had no new workflow runs this round (runs API shows only lean-check/lean-run on yubiOS).
