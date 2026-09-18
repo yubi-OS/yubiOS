@@ -1,4 +1,4 @@
-# Hyperspherical-Harmonic Curve â Cycle 4 Results
+# Hyperspherical-Harmonic Curve — Cycle 4 Results
 
 **Date:** 2026-08-06
 **Run type:** single full-corpus run on all 70 skills in the yubiOS software-skill corpus
@@ -7,7 +7,7 @@
 
 ## Headline result
 
-The hyperspherical-harmonic-curve variant was fitted against a capacity-matched flat Fourier baseline on the yubiOS skill corpus. On both splits the variant achieved a higher holdout $R^2$ than the baseline at fewer parameters â the matched-parameter ablation result.
+The hyperspherical-harmonic-curve variant was fitted against a capacity-matched flat Fourier baseline on the yubiOS skill corpus. On both splits the variant achieved a higher holdout $R^2$ than the baseline at fewer parameters — the matched-parameter ablation result.
 
 | Split | $N$ skills | $N_\mathrm{train}$ | $N_\mathrm{holdout}$ | Hyperspherical $R^2$ | Flat $k{=}2$ baseline $R^2$ | $\delta$ (sphere $-$ flat) | Variant params | Baseline params |
 |-------|------------|---------------------|------------------------|-----------------------|-------------------------------|------------------------------|------------------|-------------------|
@@ -23,14 +23,14 @@ This run is a single full-corpus pass with no error bars. The split sizes are fi
 ## What this result does and does not show
 
 - **Supports:** on this corpus, a spherical parameter manifold is a better inductive bias than a flat one. The relative comparison (sphere vs flat on the same split) is positive on both splits.
-- **Does not support:** either model is a good fit in absolute terms at Phase B â the flat baseline's $R^2 = -1.120$ is strictly worse than predicting the corpus mean ($R^2 = 0$), and even the hyperspherical model's positive $+0.222$ is small. At Phase A (49 items) the hyperspherical model's $+0.618$ is positive and large.
+- **Does not support:** either model is a good fit in absolute terms at Phase B — the flat baseline's $R^2 = -1.120$ is strictly worse than predicting the corpus mean ($R^2 = 0$), and even the hyperspherical model's positive $+0.222$ is small. At Phase A (49 items) the hyperspherical model's $+0.618$ is positive and large.
 
 ## Calibration checks (measured on the same single run)
 
 - Spectral mass $\rho = \sum_{\ell \ge 1} \|a_{:,\ell}\|^2 / \sum_{\ell \ge 0} \|a_{:,\ell}\|^2 \ge 0.10$: measured $0.977$ (A) / $0.983$ (B).
 - High-degree mass $\sum_{\ell > L/2} \|a_{:,\ell}\|^2 / \mathrm{total} \le 0.40$: measured $0.206$ (A) / $0.178$ (B).
 - Cross-ratio preservation on 100 held-out 4-tuples: max residual $3.08 \times 10^{-7}$. Consistent with float64 noise; every $\mathrm{PSL}(2,\mathbb{C})$ element preserves $\chi$ exactly, so the residual measures implementation precision, not fit quality.
-- MÃ¶bius refinement (train $R^2$): identity $0.9125 \to$ refined $0.9211$, $\Delta = +0.009$. Train-only; no holdout effect measured.
+- Möbius refinement (train $R^2$): identity $0.9125 \to$ refined $0.9211$, $\Delta = +0.009$. Train-only; no holdout effect measured.
 
 ## Corpus coverage
 
@@ -39,9 +39,9 @@ All 70 skills in the yubiOS software-skill corpus were included in the Phase B r
 ## Reproduction
 
 - Basis construction: deterministic given $(\ell, m)$.
-- MÃ¶bius refinement initial point: $\theta_0$ with $a = d = 1$, $b = c = 0$ (identity MÃ¶bius).
+- Möbius refinement initial point: $\theta_0$ with $a = d = 1$, $b = c = 0$ (identity Möbius).
 - Ridge $\lambda$ is fixed across both models.
-- The exact code path that produced these numbers is in `papers/archived/learned-latent-curves-2026-08-05.tex` Â§6âÂ§8 ; the v1 fitness-test record is `refs/hyperspherical-harmonic-curve-v1-fit-2026-08-05.md` (the raw fitness-test JSON is session-scoped, not committed).
+- The exact code path that produced these numbers is in `papers/archived/learned-latent-curves-2026-08-05.tex` §6–§8 ; the v1 fitness-test record is `refs/hyperspherical-harmonic-curve-v1-fit-2026-08-05.md` (the raw fitness-test JSON is session-scoped, not committed).
 
 
 
@@ -76,19 +76,5 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 
 ## Cross-references
 
-**Related Linear issues (OMN-*)**: TBD per file context.
-**Related PRs**: TBD.
-**Related ADRs**: TBD.
-**Related refs/ docs**: TBD.
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.5200). TODO: refine per file context.
-
-
-## Cross-references
-
-**Related Linear issues (OMN-*)**: TBD per file context.
-**Related PRs**: TBD.
-**Related ADRs**: TBD.
-**Related refs/ docs**: TBD.
-
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.8469). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.5200, Δ=+0.8469) were identical placeholder copies with no per-file content; merged on 2026-09-18.
