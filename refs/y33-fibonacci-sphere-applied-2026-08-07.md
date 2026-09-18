@@ -32,9 +32,9 @@ To avoid polar clustering when probing the hyperspherical model, we sample
 $S^2$ with a Fibonacci sphere and evaluate the harmonic basis on those
 nodes. Specifically,
 \[
-z_i = 1 - rac{2i+1}{N}, \quad
-\phi_i = 2\pi rac{i}{arphi}, \quad
-	heta_i = rccos(z_i),
+z_i = 1 - rac{2i+1}{N}, \quad
+\phi_i = 2\pi rac{i}{arphi}, \quad
+	heta_i = rccos(z_i),
 \]
 where $\varphi = \frac{1+\sqrt5}{2}$. We then evaluate $Y_3^3(\theta_i,\phi_i)$
 at each point. Since

@@ -1,9 +1,9 @@
 ---
-contract: "yubios package-floor verification checklist. The pre- and post-digest-bump verification protocol that ensures every digest bump in PINNED.md preserves the package-floor invariants (kernel â¥6.5/6.6/6.12 per composefs mode, systemd version, bootc â¥1.16.6 for container split-kernel-and-rootfs, package-set diff). Codifies the 3 documented fedora-bootc:45 digest rotations in 7 days (f6b5b775â¦ â 1dcca7acâ¦ â 2d6f1df3â¦) as the failure-mode evidence base. Lands via PR on yubi-OS/yubiOS main under refs/package-floor-verification-checklist-2026-08-04.md + scripts/verify-package-floor.sh + .github/workflows/ci_package-floor.yml."
+contract: "yubios package-floor verification checklist. The pre- and post-digest-bump verification protocol that ensures every digest bump in PINNED.md preserves the package-floor invariants (kernel ≥6.5/6.6/6.12 per composefs mode, systemd version, bootc ≥1.16.6 for container split-kernel-and-rootfs, package-set diff). Codifies the 3 documented fedora-bootc:45 digest rotations in 7 days (f6b5b775… → 1dcca7ac… → 2d6f1df3…) as the failure-mode evidence base. Lands via PR on yubi-OS/yubiOS main under refs/package-floor-verification-checklist-2026-08-04.md + scripts/verify-package-floor.sh + .github/workflows/ci_package-floor.yml."
 short_description: "Package-floor verification checklist for digest changes"
 ---
 
-# Package-Floor Verification Checklist â yubios Digest Bump Hygiene (2026-08-04)
+# Package-Floor Verification Checklist — yubios Digest Bump Hygiene (2026-08-04)
 
 **Linked Linear issue:** [OMN-62](https://linear.app/omni-agent/issue/OMN-62)
 **Project:** yubiOS Production Proof & Release Gates
@@ -18,11 +18,11 @@ yubios's base image (`quay.io/fedora/fedora-bootc:45`) has rotated 3 times in 7 
 
 | Incident | Date | Old digest | New digest | Trigger | Commit |
 |---|---|---|---|---|---|
-| OMN-139 (stream truncation) | 2026-07-26 | `sha256:f6b5b775â¦` | (re-resolved) | quay.io stream truncation on arm64 layer 16,045,778 | (rebuilt via `fetch-fedora-bootc-manifest.yml`) |
-| Re-resolution #1 | 2026-07-29 | `sha256:f6b5b775â¦` | `sha256:1dcca7ac54b243bef0cf65bfca165fb4a514d7891854db216a4ab6cbc10215ff` | manual refresh via `fetch-fedora-bootc-manifest.yml` | [`8ccffa71`](https://github.com/yubi-OS/yubiOS/commit/8ccffa71) |
-| Re-resolution #2 | 2026-07-30 | `sha256:1dcca7acâ¦` (404 on quay.io) | `sha256:2d6f1df373be1423db91dd32a217b5d99fd4940d651fc1e2477b9b660e063906` | Jenny's directive "stale image? just re-run the fetch group ci" | [`d2646452`](https://github.com/yubi-OS/yubiOS/commit/d2646452) |
+| OMN-139 (stream truncation) | 2026-07-26 | `sha256:f6b5b775…` | (re-resolved) | quay.io stream truncation on arm64 layer 16,045,778 | (rebuilt via `fetch-fedora-bootc-manifest.yml`) |
+| Re-resolution #1 | 2026-07-29 | `sha256:f6b5b775…` | `sha256:1dcca7ac54b243bef0cf65bfca165fb4a514d7891854db216a4ab6cbc10215ff` | manual refresh via `fetch-fedora-bootc-manifest.yml` | [`8ccffa71`](https://github.com/yubi-OS/yubiOS/commit/8ccffa71) |
+| Re-resolution #2 | 2026-07-30 | `sha256:1dcca7ac…` (404 on quay.io) | `sha256:2d6f1df373be1423db91dd32a217b5d99fd4940d651fc1e2477b9b660e063906` | Jenny's directive "stale image? just re-run the fetch group ci" | [`d2646452`](https://github.com/yubi-OS/yubiOS/commit/d2646452) |
 
-Each digest bump is a non-trivial event: it potentially changes the package floor (kernel version, systemd version, bootc version, package set). Without a structured verification protocol, a digest bump can silently regress composefs support (kernel â¥6.5 / 6.6 / 6.12 floors per the `composefs-kernel-floors` skill), or signed UKI build (sbsign + libykcs11), or any other invariant.
+Each digest bump is a non-trivial event: it potentially changes the package floor (kernel version, systemd version, bootc version, package set). Without a structured verification protocol, a digest bump can silently regress composefs support (kernel ≥6.5 / 6.6 / 6.12 floors per the `composefs-kernel-floors` skill), or signed UKI build (sbsign + libykcs11), or any other invariant.
 
 This spec defines the pre-bump and post-bump verification checklist that every digest bump must clear.
 
@@ -34,46 +34,46 @@ The package floor is the set of minimum versions for kernel, systemd, bootc, and
 
 | Mode | Kernel floor | Mount requirement | Source |
 |------|-------------|-------------------|--------|
-| data-only OverlayFS (composefs primary backing fs) | â¥6.5 | data-only overlayfs | composefs-kernel-floors skill |
-| verity=require mount option (enforces composefs-signed catalog) | â¥6.6 | verity=require | composefs-kernel-floors skill |
-| file-backed EROFS (composefs alternate backing fs) | â¥6.12 | file-backed EROFS | composefs-kernel-floors skill |
+| data-only OverlayFS (composefs primary backing fs) | ≥6.5 | data-only overlayfs | composefs-kernel-floors skill |
+| verity=require mount option (enforces composefs-signed catalog) | ≥6.6 | verity=require | composefs-kernel-floors skill |
+| file-backed EROFS (composefs alternate backing fs) | ≥6.12 | file-backed EROFS | composefs-kernel-floors skill |
 
-The `yubios` convention: pick the lowest-supported kernel in PINNED.md as the floor; production builds use the pinned digest's kernel; dev image is allowed to use a newer kernel as long as â¥floor.
+The `yubios` convention: pick the lowest-supported kernel in PINNED.md as the floor; production builds use the pinned digest's kernel; dev image is allowed to use a newer kernel as long as ≥floor.
 
 ### 2.2 systemd floor
 
 | Feature | systemd floor | Reference |
 |---------|--------------|-----------|
-| Boot loader spec BLS entries | â¥v246 (2020-06) | systemd-boot(7) |
-| Discoverable Partitions Specification (DPS) | â¥v252 (2022-10) | systemd-repart(8) |
-| LUKS2 hardware unlock (FIDO2/TPM2/PKCS#11) | â¥v252 (2022-10) | systemd-cryptenroll(8) |
-| portable services + portablectl attach/detach | â¥v254 (2023-06) | portablectl(1) |
-| sysext overlay lifecycle | â¥v256 (2024-06) | systemd-sysext(8) |
-| confext | â¥v256 (2024-06) | systemd-confext(8) |
-| dynamic users | â¥v235 (2018) | systemd DynamicUser= docs |
-| factory reset + stateless systems | â¥v256 (2024-06) | systemd 0pointer blog |
+| Boot loader spec BLS entries | ≥v246 (2020-06) | systemd-boot(7) |
+| Discoverable Partitions Specification (DPS) | ≥v252 (2022-10) | systemd-repart(8) |
+| LUKS2 hardware unlock (FIDO2/TPM2/PKCS#11) | ≥v252 (2022-10) | systemd-cryptenroll(8) |
+| portable services + portablectl attach/detach | ≥v254 (2023-06) | portablectl(1) |
+| sysext overlay lifecycle | ≥v256 (2024-06) | systemd-sysext(8) |
+| confext | ≥v256 (2024-06) | systemd-confext(8) |
+| dynamic users | ≥v235 (2018) | systemd DynamicUser= docs |
+| factory reset + stateless systems | ≥v256 (2024-06) | systemd 0pointer blog |
 
-yubios targets â¥v256 (current `systemd v261` per `0pointer-mastery` skill notes).
+yubios targets ≥v256 (current `systemd v261` per `0pointer-mastery` skill notes).
 
 ### 2.3 bootc floor
 
 | Feature | bootc floor | Reference |
 |---------|------------|-----------|
-| Basic bootc install | â¥v1.0.0 | bootc-docs |
-| `bootc container split-kernel-and-rootfs` (Phase 2 BLSConfig wiring, OMN-150) | â¥v1.16.4 | PR #143 kernel+rootfs split notes |
-| `bootc install to-filesystem --composefs-backend` (OMN-149 fix v0.11) | â¥v1.16.3 (composefs backend stable) | bootc-dev/bootc#2098 |
+| Basic bootc install | ≥v1.0.0 | bootc-docs |
+| `bootc container split-kernel-and-rootfs` (Phase 2 BLSConfig wiring, OMN-150) | ≥v1.16.4 | PR #143 kernel+rootfs split notes |
+| `bootc install to-filesystem --composefs-backend` (OMN-149 fix v0.11) | ≥v1.16.3 (composefs backend stable) | bootc-dev/bootc#2098 |
 
-yubios targets â¥v1.16.6 (current `bootc 1.16.6` per `0pointer-mastery` skill notes; the build pipeline uses `bootc 1.16.4+` per PR #143 OMN-51 Phase 2 dependency).
+yubios targets ≥v1.16.6 (current `bootc 1.16.6` per `0pointer-mastery` skill notes; the build pipeline uses `bootc 1.16.4+` per PR #143 OMN-51 Phase 2 dependency).
 
 ### 2.4 Other package floors
 
 | Package | Floor | Why |
 |---------|-------|-----|
-| mkosi | â¥v25 (MinimumVersion=26~devel per `mkosi.conf`) | PIV slot 9c signing pattern, systemd-sysext integration |
-| podman | â¥v4.5 | rootless container builds via `rootless-container-builds` skill |
-| OPA/Rego Build Policy | â¥buildx v0.16 (the `--policy` flag landed in v0.16) | `yubiOS.rego` Build Policy |
-| SoftHSM (CI substitute for YubiKey PIV slot 9c) | â¥v2.6 | canonical PKCS#11 signing pattern; cross-version trap at v2.6 â v2.7 (commit `a50ecac42cc0` documented in `refs/sbsign-pkcs11-validate-2026-07-23.md`) |
-| sbsign + libykcs11 | â¥systemd v252-era (signed UKI build) | PR #32 merged |
+| mkosi | ≥v25 (MinimumVersion=26~devel per `mkosi.conf`) | PIV slot 9c signing pattern, systemd-sysext integration |
+| podman | ≥v4.5 | rootless container builds via `rootless-container-builds` skill |
+| OPA/Rego Build Policy | ≥buildx v0.16 (the `--policy` flag landed in v0.16) | `yubiOS.rego` Build Policy |
+| SoftHSM (CI substitute for YubiKey PIV slot 9c) | ≥v2.6 | canonical PKCS#11 signing pattern; cross-version trap at v2.6 → v2.7 (commit `a50ecac42cc0` documented in `refs/sbsign-pkcs11-validate-2026-07-23.md`) |
+| sbsign + libykcs11 | ≥systemd v252-era (signed UKI build) | PR #32 merged |
 
 ## 3. Pre-bump verification (BEFORE updating PINNED.md)
 
@@ -103,9 +103,9 @@ bootc-1.16.x-...
 
 | Check | Pass criterion | Action on fail |
 |-------|---------------|----------------|
-| Kernel version â¥ floor | Compare against composefs mode requirement (Â§2.1) | If kernel regressed: ABORT bump; file new OMN issue; do not commit. |
-| systemd version â¥ v256 | Compare against floor (Â§2.2) | If systemd regressed: ABORT bump; file new OMN issue. |
-| bootc version â¥ v1.16.4 | Compare against floor (Â§2.3) | If bootc regressed: ABORT bump; file new OMN issue. |
+| Kernel version ≥ floor | Compare against composefs mode requirement (§2.1) | If kernel regressed: ABORT bump; file new OMN issue; do not commit. |
+| systemd version ≥ v256 | Compare against floor (§2.2) | If systemd regressed: ABORT bump; file new OMN issue. |
+| bootc version ≥ v1.16.4 | Compare against floor (§2.3) | If bootc regressed: ABORT bump; file new OMN issue. |
 | Package set diff | Diff `rpm -qa` between old and new digest | If a package was added/removed/renamed: review; if the change affects signing or bootc, ABORT bump. |
 | Containerfile FROM digest matches | The new digest equals what PINNED.md will commit | If mismatch: STOP; re-fetch. |
 
@@ -136,10 +136,10 @@ $ bash scripts/verify-package-floor.sh --target-image docker.io/0mniteck/yubios:
 
 [1/5] Pulling target image... OK
 [2/5] Extracting kernel version... OK: kernel-6.x.x
-[3/5] Comparing kernel floor (â¥6.5 for composefs primary, â¥6.6 for verity=require, â¥6.12 for EROFS)... PASS
+[3/5] Comparing kernel floor (≥6.5 for composefs primary, ≥6.6 for verity=require, ≥6.12 for EROFS)... PASS
 [4/5] Extracting systemd version... OK: systemd-2xx
 [5/5] Extracting bootc version... OK: bootc-1.16.x
-Comparing bootc floor (â¥v1.16.4)... PASS
+Comparing bootc floor (≥v1.16.4)... PASS
 
 Summary: 5/5 PASS
 ```
@@ -198,18 +198,18 @@ jobs:
 
 ## 6. Migration plan
 
-### Phase 1 (this PR) â Ship the checklist + the script + the CI gate
+### Phase 1 (this PR) — Ship the checklist + the script + the CI gate
 
 - Land `scripts/verify-package-floor.sh` + `.github/workflows/ci_package-floor.yml` + `refs/package-floor-verification-checklist-2026-08-04.md`.
 - PR title: `feat(ci): package-floor verification checklist + ci_package-floor.yml gate (OMN-62)`.
 - Branch: `feat/ci-package-floor-2026-08-04`.
 - First scheduled run on main populates the floor report.
 
-### Phase 2 â Required on PINNED.md + Containerfile PRs
+### Phase 2 — Required on PINNED.md + Containerfile PRs
 
 - Update `ci_package-floor.yml` to require `verify-floor` step PASS on any PR touching PINNED.md or Containerfile.
 
-### Phase 3 â Run on every digest bump event
+### Phase 3 — Run on every digest bump event
 
 - After PR #148's GH_TK cleanup, the dispatcher is consistent enough that this gate can run on every digest bump automatically.
 
@@ -221,20 +221,20 @@ After the script ships, run it manually against the current dev image:
 $ bash scripts/verify-package-floor.sh --target-image docker.io/0mniteck/yubios:dev
 ```
 
-Expected output: `Summary: 5/5 PASS` (kernel â¥6.5, kernel â¥6.6, systemd â¥v256, bootc â¥v1.16.4, package-set diff empty or non-significant).
+Expected output: `Summary: 5/5 PASS` (kernel ≥6.5, kernel ≥6.6, systemd ≥v256, bootc ≥v1.16.4, package-set diff empty or non-significant).
 
 ## 8. References
 
-- Linear [OMN-62](https://linear.app/omni-agent/issue/OMN-62) â Define the package-floor verification checklist for digest changes (this spec's parent)
-- Linear [OMN-41](https://linear.app/omni-agent/issue/OMN-41) â Keep PINNED.md and package floors in lockstep with digest bumps (companion)
-- Linear [OMN-139](https://linear.app/omni-agent/issue/OMN-139) â CI incident: quay.io stream truncation on fedora-bootc:45 arm64 layer 16,045,778 bytes (the first of the 3 documented digest rotations)
-- Linear [OMN-150](https://linear.app/omni-agent/issue/OMN-150) â Sealed composefs Phase 2: install-time BLSConfig wiring (bootc 1.16.4+ dependency)
-- `PROJECT_RULES.md` lines 220-239 â fedora-bootc:45 base-image digest stale-pin pattern (the 3-rotation incident record)
-- `skills/github-yubios-KS9n5GAT/composefs-kernel-floors/SKILL.md` â kernel floor source of truth
-- `skills/github-yubios-KS9n5GAT/fedora-bootc-base-images/SKILL.md` â base image tier source
-- `skills/github-yubios-KS9n5GAT/bootc-images/SKILL.md` â bootc floor source
-- `skills/github-yubios-KS9n5GAT/0pointer-mastery/SKILL.md` â systemd floor source
-- commits `8ccffa71` and `d2646452` â the two recent digest-bump commits that establish the pattern
+- Linear [OMN-62](https://linear.app/omni-agent/issue/OMN-62) — Define the package-floor verification checklist for digest changes (this spec's parent)
+- Linear [OMN-41](https://linear.app/omni-agent/issue/OMN-41) — Keep PINNED.md and package floors in lockstep with digest bumps (companion)
+- Linear [OMN-139](https://linear.app/omni-agent/issue/OMN-139) — CI incident: quay.io stream truncation on fedora-bootc:45 arm64 layer 16,045,778 bytes (the first of the 3 documented digest rotations)
+- Linear [OMN-150](https://linear.app/omni-agent/issue/OMN-150) — Sealed composefs Phase 2: install-time BLSConfig wiring (bootc 1.16.4+ dependency)
+- `PROJECT_RULES.md` lines 220-239 — fedora-bootc:45 base-image digest stale-pin pattern (the 3-rotation incident record)
+- `skills/github-yubios-KS9n5GAT/composefs-kernel-floors/SKILL.md` — kernel floor source of truth
+- `skills/github-yubios-KS9n5GAT/fedora-bootc-base-images/SKILL.md` — base image tier source
+- `skills/github-yubios-KS9n5GAT/bootc-images/SKILL.md` — bootc floor source
+- `skills/github-yubios-KS9n5GAT/0pointer-mastery/SKILL.md` — systemd floor source
+- commits `8ccffa71` and `d2646452` — the two recent digest-bump commits that establish the pattern
 
 ---
 

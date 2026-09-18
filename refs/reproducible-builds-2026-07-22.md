@@ -1,4 +1,4 @@
-# Reproducible build contract â 2026-07-22
+# Reproducible build contract — 2026-07-22
 
 ## Scope
 
@@ -118,27 +118,19 @@ This document applies the yubiOS segmentation primitive — Linux namespaces, cg
 
 ## Priority signals
 
+
 **Priority class**: P2 (nice-to-have)
 **Critical-path?**: No
 **Blocking issues**: none identified at this cycle
-**Owner**: TBD
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4361). TODO: refine per file context.
-
-
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4361) were identical placeholder copies with no per-file content; merged on 2026-09-18.
 ## Recommendation
 
+
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.5402). TODO: refine per file context.
-
-
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.5402) were identical placeholder copies with no per-file content; merged on 2026-09-18.
 ## Cross-references
 
-**Related Linear issues (OMN-*)**: TBD per file context.
-**Related PRs**: TBD.
-**Related ADRs**: TBD.
-**Related refs/ docs**: TBD.
 
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.6587). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6587) were identical placeholder copies with no per-file content; merged on 2026-09-18.

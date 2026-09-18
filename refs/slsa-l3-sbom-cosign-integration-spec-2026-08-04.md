@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Spec ID | OMN-157 |
-| Linear tracker | OMN-157 (Backlog, High) â `yubiOS Production Proof & Release Gates` |
+| Linear tracker | OMN-157 (Backlog, High) — `yubiOS Production Proof & Release Gates` |
 | Filed by | PR #156 / commit `3e74579c8e50` (playbooks/ drop) on branch `feat/playbooks-2026-08-01` |
 | Filing date | 2026-08-01 |
 | Drafted | 2026-08-04 (this doc) |
@@ -29,23 +29,23 @@ The audience for this document is: the yubiOS release engineer (currently 0mnite
 **In scope:**
 - Three yubiOS release workflows: `yubiOS-ci.yml`, `ci_mkosi-installer.yml`, `ci_dev_image.yml`
 - One new verifier workflow: `ci_attestation-verify.yml`
-- SLSA v1.0 Build L3 (the highest Build level in v1.0 â explicitly flagged below)
+- SLSA v1.0 Build L3 (the highest Build level in v1.0 — explicitly flagged below)
 - SPDX SBOM (CycloneDX not in scope for this iteration)
 - cosign keyless signing (GitHub OIDC, `https://token.actions.githubusercontent.com`)
 - Rekor v2 transparency log entry per attestation
 - Builder isolation options (a) GitHub-hosted ephemeral, (b) hardened self-hosted on `rock1`, (c) TEE-backed
 
 **Out of scope:**
-- SLSA Source-track requirements (versioned history, retention, two-person review) â these are a separate SLSA track in v1.0, not a Build level. See "Why no Build L4" below.
+- SLSA Source-track requirements (versioned history, retention, two-person review) — these are a separate SLSA track in v1.0, not a Build level. See "Why no Build L4" below.
 - `mkosi#2`-driven installer signing keys (PIV slot 9c / SoftHSM lifecycle already documented in `memory/personal-WbtUgeUv/COMPANY.md`; this spec only attaches provenance + SBOM + cosign around the existing artifact, it does not re-architect signing).
-- Cycle 5 curve-guided-rsi 10-primitive mapping for this skill â that lives in `slsa-provenance` and `sigstore-rekor-v2` SKILL.md footers, not here.
+- Cycle 5 curve-guided-rsi 10-primitive mapping for this skill — that lives in `slsa-provenance` and `sigstore-rekor-v2` SKILL.md footers, not here.
 
 ## Why no SLSA Build L4
 
 This is the single most important framing fact for this spec and it is worth stating up front so it does not get re-litigated every cycle:
 
 > **SLSA v1.0 Build track runs L1 to L3 only. There is no Build L4 in v1.0.**
-> Source-track requirements (two-person review, retention, versioned history) were split out of the Build track entirely in the v1.0 redesign and are now a separate track â not a numbered Build level. The Build L4 language that appears in older yubiOS notes is v0.2-era and should not be used going forward.
+> Source-track requirements (two-person review, retention, versioned history) were split out of the Build track entirely in the v1.0 redesign and are now a separate track — not a numbered Build level. The Build L4 language that appears in older yubiOS notes is v0.2-era and should not be used going forward.
 
 Source: `skills/github-yubios-KS9n5GAT/slsa-provenance/SKILL.md` line 12 (the 2026-07-24 correction note), and `https://slsa.dev/spec/v1.0/levels` (verified upstream). The phrasing in this spec ("target L3") is correct under v1.0; do not let a reviewer push for "Build L4" without checking the SLSA v1.0 spec.
 
@@ -73,14 +73,14 @@ Source: `skills/github-yubios-KS9n5GAT/slsa-provenance/SKILL.md` line 12 (the 20
 
 ### 1.1 yubiOS-ci.yml (`.github/workflows/yubiOS-ci.yml`, 5270 B)
 
-The `yubiOS-ci.yml` workflow is the OCI-image-build backbone. As of the 2026-07-29 ci.yml group-routing redesign (PR #145, commit `9d6ec85d`) and the subsequent fix chain (PRs #146-#150 per `memory/personal-WbtUgeUv/RECENT_ACTIVITY.md` line 110), it runs on `workflow_dispatch` only â no `on: push:` triggers per `PROJECT_RULES.md` ci.yml:27. Inputs declared: `Docker_push: type: boolean` (per `RECENT_ACTIVITY.md` line 209 â the dispatcher must serialize this as a real JSON boolean, not a string).
+The `yubiOS-ci.yml` workflow is the OCI-image-build backbone. As of the 2026-07-29 ci.yml group-routing redesign (PR #145, commit `9d6ec85d`) and the subsequent fix chain (PRs #146-#150 per `memory/personal-WbtUgeUv/RECENT_ACTIVITY.md` line 110), it runs on `workflow_dispatch` only — no `on: push:` triggers per `PROJECT_RULES.md` ci.yml:27. Inputs declared: `Docker_push: type: boolean` (per `RECENT_ACTIVITY.md` line 209 — the dispatcher must serialize this as a real JSON boolean, not a string).
 
 **What it currently produces:**
-- OCI image `0mniteck/yubios:dev-<sha>` (the dev variant) or `0mniteck/yubios:installer-<sha>` (the installer variant), pushed when `Docker_push: true`. Builds use rootless dockerd on a pinned own-dockerd-on-ducker.sock pattern (per `RECENT_ACTIVITY.md` line 334 â docker-29.6.0 + buildx-v0.35.0, `/mnt/docker` overlayfs, host-side pull).
+- OCI image `0mniteck/yubios:dev-<sha>` (the dev variant) or `0mniteck/yubios:installer-<sha>` (the installer variant), pushed when `Docker_push: true`. Builds use rootless dockerd on a pinned own-dockerd-on-ducker.sock pattern (per `RECENT_ACTIVITY.md` line 334 — docker-29.6.0 + buildx-v0.35.0, `/mnt/docker` overlayfs, host-side pull).
 - A multi-job pipeline (hadolint, mkosi amd64+arm64, shellcheck, unit-tests amd64+arm64, build amd64+arm64, merge-manifest) per `RECENT_ACTIVITY.md` line 199. Verified end-to-end at run #237 (id `30512750431`, completed/success 04:02:57Z / 04:03:08Z, all 9 jobs green) on commit `e06de35`.
 
 **What it does NOT currently produce:**
-- No SLSA provenance attestation. `docker build-push-action` is configured (per `RECENT_ACTIVITY.md` line 372 â "yubiOS-ci.yml is deployed at .github/workflows/yubiOS-ci.yml (5270B), but 7 completed runs today all failed... Build job uses `dockerd` (rootless commented out); `yubiOS.rego` build policy step is TODO'd pending the file landing"). The build policy is shipped; SLSA provenance is not.
+- No SLSA provenance attestation. `docker build-push-action` is configured (per `RECENT_ACTIVITY.md` line 372 — "yubiOS-ci.yml is deployed at .github/workflows/yubiOS-ci.yml (5270B), but 7 completed runs today all failed... Build job uses `dockerd` (rootless commented out); `yubiOS.rego` build policy step is TODO'd pending the file landing"). The build policy is shipped; SLSA provenance is not.
 - No SPDX SBOM attached to the published image.
 - No cosign signature on the published image digest.
 - No Rekor v2 transparency log entry.
@@ -91,7 +91,7 @@ The `yubiOS-ci.yml` workflow is the OCI-image-build backbone. As of the 2026-07-
 
 The `ci_mkosi-installer.yml` workflow builds the DPS disk image + UKI on a bare runner (minimal profile, Fedora 45, Debian tools tree) and signs the UKI via `provider:pkcs11` + `systemd-sbsign` against a SoftHSM mock of PIV 9c. Verified with `sbverify`. Per `memory/personal-WbtUgeUv/RECENT_ACTIVITY.md` line 351:
 
-> #10 closed. mkosi#2 merged (`b2b1ea6`), yubiOS-ci installs mkosi from `@main` (`19d951b`). New `ci_mkosi-installer.yml` green (run 28912825384): full DPS disk image + UKI built on a bare runner (minimal profile, Fedora 45, Debian tools tree), UKI signed via `provider:pkcs11` + systemd-sbsign against a SoftHSM mock of PIV 9c, verified with sbverify. Key mechanism: mkosi's signing sandbox binds host `/run` for non-file key sources â SoftHSM conf+tokens at `/run/yubios-hsm`, `PKCS11_PROVIDER_MODULE` â libsofthsm2.so. 7-iteration debug: debian keyring â /run token plumbing (C_Initialize err 5 = conf unreachable) â sign-expected-pcr source match â distribution-gpg-keys â dnf â rpm (rpmkeys) â systemd-boot-unsigned+Bootable=yes (ESP repart def) â ship full yubiOS.raw not esp split. Publishes `0mniteck/yubios:installer` + `installer-<sha>` (digest `bca60347`, yubiOS.raw.zst 476MiB + signed UKI + manifest + CI cert + MANIFEST.txt). ADR-022 amended (`611f8ff`): installer live.
+> #10 closed. mkosi#2 merged (`b2b1ea6`), yubiOS-ci installs mkosi from `@main` (`19d951b`). New `ci_mkosi-installer.yml` green (run 28912825384): full DPS disk image + UKI built on a bare runner (minimal profile, Fedora 45, Debian tools tree), UKI signed via `provider:pkcs11` + systemd-sbsign against a SoftHSM mock of PIV 9c, verified with sbverify. Key mechanism: mkosi's signing sandbox binds host `/run` for non-file key sources → SoftHSM conf+tokens at `/run/yubios-hsm`, `PKCS11_PROVIDER_MODULE` → libsofthsm2.so. 7-iteration debug: debian keyring → /run token plumbing (C_Initialize err 5 = conf unreachable) → sign-expected-pcr source match → distribution-gpg-keys → dnf → rpm (rpmkeys) → systemd-boot-unsigned+Bootable=yes (ESP repart def) → ship full yubiOS.raw not esp split. Publishes `0mniteck/yubios:installer` + `installer-<sha>` (digest `bca60347`, yubiOS.raw.zst 476MiB + signed UKI + manifest + CI cert + MANIFEST.txt). ADR-022 amended (`611f8ff`): installer live.
 
 **What it currently produces:**
 - OCI artifact at `0mniteck/yubios:installer` and `installer-<sha>` (digest `bca60347`).
@@ -103,7 +103,7 @@ The `ci_mkosi-installer.yml` workflow builds the DPS disk image + UKI on a bare 
 - No cosign signature on the OCI artifact or the `yubiOS.raw.zst` byte stream.
 - No Rekor v2 entry.
 
-**SLSA level implied by current state:** Build L1 only. The PKCS#11 / SoftHSM signing on the UKI is a content-signing concern (Secure Boot chain), not an SLSA provenance concern â they compose, they are not the same thing.
+**SLSA level implied by current state:** Build L1 only. The PKCS#11 / SoftHSM signing on the UKI is a content-signing concern (Secure Boot chain), not an SLSA provenance concern — they compose, they are not the same thing.
 
 ### 1.3 ci_dev_image.yml (`.github/workflows/ci_dev_image.yml`)
 
@@ -116,7 +116,7 @@ The dev-image workflow ships `:dev` tagged images for CI consumption and rock1 h
 **What it does NOT currently produce:**
 - No SLSA provenance. No SPDX SBOM. No cosign. No Rekor.
 
-**SLSA level implied by current state:** Build L1 (same as the other two â provenance "exists" only in the sense that docker build-push-action could emit it; nothing is wired).
+**SLSA level implied by current state:** Build L1 (same as the other two — provenance "exists" only in the sense that docker build-push-action could emit it; nothing is wired).
 
 ### 1.4 Joint current state summary
 
@@ -136,7 +136,7 @@ The "L1 informal" tag means: provenance could be emitted by `docker build-push-a
 
 Every published artifact from the three workflows carries:
 
-1. **A SLSA v1.0 Build L3 provenance attestation** in the in-toto Statement format (`_type: https://in-toto.io/Statement/v1`, `predicateType: https://slsa.dev/provenance/v1`) wrapped in a DSSE envelope, signed by the build service's OIDC identity (`https://token.actions.githubusercontent.com`), and logged to **Rekor v2** (the Sigstore public transparency log). Per `skills/github-yubios-KS9n5GAT/slsa-provenance/SKILL.md` lines 72-98, the v1.0 predicate uses `buildDefinition` (with `buildType`, `externalParameters`, `internalParameters`, `resolvedDependencies`) and `runDetails` (with `builder.id` plus invocation metadata) â it is NOT the v0.2 flat shape.
+1. **A SLSA v1.0 Build L3 provenance attestation** in the in-toto Statement format (`_type: https://in-toto.io/Statement/v1`, `predicateType: https://slsa.dev/provenance/v1`) wrapped in a DSSE envelope, signed by the build service's OIDC identity (`https://token.actions.githubusercontent.com`), and logged to **Rekor v2** (the Sigstore public transparency log). Per `skills/github-yubios-KS9n5GAT/slsa-provenance/SKILL.md` lines 72-98, the v1.0 predicate uses `buildDefinition` (with `buildType`, `externalParameters`, `internalParameters`, `resolvedDependencies`) and `runDetails` (with `builder.id` plus invocation metadata) — it is NOT the v0.2 flat shape.
 
 2. **An SPDX 2.3 SBOM** in JSON form, generated by Syft (the canonical SPDX generator in the sigstore ecosystem), attached as a cosign attestation with `predicateType: spdxjson`. The SBOM covers the OCI image contents (installed packages, layers, base image references) and, for `ci_mkosi-installer.yml`, also covers the host-side `yubiOS.raw.zst` filesystem layout.
 
@@ -152,7 +152,7 @@ Per `slsa-provenance` skill lines 16-21:
 |---|---|
 | L1 | Provenance exists, showing how the artifact was built |
 | L2 | Provenance is authenticated (signed by a service) |
-| **L3** | Provenance is non-falsifiable â build runs in a hardened, isolated environment the tenant project can't tamper with |
+| **L3** | Provenance is non-falsifiable — build runs in a hardened, isolated environment the tenant project can't tamper with |
 
 The "hardened, isolated environment the tenant project can't tamper with" is the key L3 requirement. The canonical way to satisfy this on GitHub Actions is to use the **GitHub-hosted ephemeral runner** that backs `slsa-framework/slsa-github-generator`'s reusable workflows (per `slsa-provenance` skill line 28: "They run in isolated GitHub-hosted runners (the isolation is what makes it L3)"). Alternative builders (hardened self-hosted on rock1, TEE-backed) are discussed in section 5.
 
@@ -204,7 +204,7 @@ For each workflow, what needs to change.
 | G-MK-3 | No SPDX SBOM of installed packages | absent | run Syft on the OCI artifact, attach as cosign attestation | one job step |
 | G-MK-4 | No cosign signature on the OCI artifact | absent | `cosign sign --keyless ghcr.io/...:installer-<sha>` (or 0mniteck/yubios:installer-<sha>) | one job step |
 | G-MK-5 | No cosign signature on the UKI byte stream | absent | `cosign sign-blob` over the signed UKI (SBOM-side; not Secure Boot) | one job step |
-| G-MK-6 | SoftHSM / PKCS#11 lifecycle stays in-container | already canonical per `COMPANY.md` line 42 | unchanged â this is signing, not SLSA | no change |
+| G-MK-6 | SoftHSM / PKCS#11 lifecycle stays in-container | already canonical per `COMPANY.md` line 42 | unchanged — this is signing, not SLSA | no change |
 | G-MK-7 | No `id-token: write` permission | default token scope | declare `id-token: write` for OIDC | YAML permissions block |
 
 ### 3.3 `ci_dev_image.yml` gaps
@@ -225,16 +225,16 @@ For each workflow, what needs to change.
 | G-X-1 | cosign version not pinned | pin cosign to >= v2.4 in a shared `actions/setup-go` + `go install github.com/sigstore/cosign/v2/cmd/cosign@v2.4.x` step |
 | G-X-2 | syft not installed | install via `anchore/syft@<sha>` action OR `go install github.com/anchore/syft/cmd/syft@<sha>` |
 | G-X-3 | Rekor v2 TUF metadata not refreshed on each CI run | mount a build-time secret `cosign-tuf-cache.json` and refresh on every run per `sigstore-rekor-v2` skill line 69 ("mount the TUF metadata cache as a build-time secret and refresh it on every CI run to avoid rotation-related failures") |
-| G-X-4 | Witness quorum not declared | declare the public Sigstore witness quorum (default; cosign auto-discovers via TUF) â no action required, but document in the workflow's README |
+| G-X-4 | Witness quorum not declared | declare the public Sigstore witness quorum (default; cosign auto-discovers via TUF) — no action required, but document in the workflow's README |
 | G-X-5 | No attestation verifier gate anywhere in the pipeline | new `ci_attestation-verify.yml` workflow (section 4.4) |
 
 ### 3.5 Build L3 specific gaps (the isolation requirement)
 
-L3's distinguishing requirement is "build runs in a hardened, isolated environment the tenant project can't tamper with." Per `slsa-provenance` skill line 28, the canonical L3 builder on GitHub Actions is the GitHub-hosted ephemeral runner used by `slsa-framework/slsa-github-generator`. The current `yubiOS-ci.yml` builds on rootless dockerd in the runner itself â this is **NOT** L3 because the runner is shared with the tenant project (the workflow file in the same repo can mutate the build environment via subsequent steps).
+L3's distinguishing requirement is "build runs in a hardened, isolated environment the tenant project can't tamper with." Per `slsa-provenance` skill line 28, the canonical L3 builder on GitHub Actions is the GitHub-hosted ephemeral runner used by `slsa-framework/slsa-github-generator`. The current `yubiOS-ci.yml` builds on rootless dockerd in the runner itself — this is **NOT** L3 because the runner is shared with the tenant project (the workflow file in the same repo can mutate the build environment via subsequent steps).
 
-To satisfy L3, each workflow must call the `slsa-github-generator` reusable workflow as its build step. The reusable workflow runs in its own ephemeral runner â that runner is not addressable from the tenant project, so the tenant cannot tamper with it mid-build. The reusable workflow accepts the OCI image digest (for container SLSA3) or the SHA256 base64 of the subject bytes (for generic SLSA3) as input and emits the in-toto Statement attestation in the workflow's output.
+To satisfy L3, each workflow must call the `slsa-github-generator` reusable workflow as its build step. The reusable workflow runs in its own ephemeral runner — that runner is not addressable from the tenant project, so the tenant cannot tamper with it mid-build. The reusable workflow accepts the OCI image digest (for container SLSA3) or the SHA256 base64 of the subject bytes (for generic SLSA3) as input and emits the in-toto Statement attestation in the workflow's output.
 
-This is the **single biggest behavioral change** in the spec â moving from "build in our runner" to "call a reusable workflow that builds in an isolated runner." See section 5 for builder isolation options and section 6 for phasing.
+This is the **single biggest behavioral change** in the spec — moving from "build in our runner" to "call a reusable workflow that builds in an isolated runner." See section 5 for builder isolation options and section 6 for phasing.
 
 ### 3.6 Gap rollup
 
@@ -281,9 +281,9 @@ jobs:
   unit-tests-arm64:
     # existing
   build-amd64:
-    # existing â uses rootless dockerd on ducker.sock
+    # existing — uses rootless dockerd on ducker.sock
   build-arm64:
-    # existing â uses rootless dockerd on ducker.sock
+    # existing — uses rootless dockerd on ducker.sock
   merge-manifest:
     # existing
 ```
@@ -413,7 +413,7 @@ This is well under the ~5-file cap from `planning-and-task-breakdown` (only one 
 2. After the existing build/sign job completes, compute SHA256 base64 of the OCI artifact contents (the `base64-subjects` input to the generic SLSA3 generator).
 3. Add a `provenance` job that calls `slsa-framework/slsa-github-generator`'s generic reusable workflow.
 4. Add a `sbom` job (Syft over the OCI artifact + the yubiOS.raw.zst filesystem).
-5. Add a `sign` job (cosign keyless over the OCI artifact + a `cosign sign-blob` over the signed UKI byte stream â the SBOM-side signature, distinct from the Secure Boot signature).
+5. Add a `sign` job (cosign keyless over the OCI artifact + a `cosign sign-blob` over the signed UKI byte stream — the SBOM-side signature, distinct from the Secure Boot signature).
 
 #### 4.2.3 Concrete YAML for the new jobs
 
@@ -504,11 +504,11 @@ jobs:
 
 #### 4.2.4 What stays unchanged
 
-The SoftHSM / PKCS#11 / systemd-sbsign signing pipeline (the Secure Boot chain) is unchanged. Per `COMPANY.md` line 42, this is the canonical pattern: keep the entire SoftHSM token lifecycle inside ONE OS environment â `/run/yubios-hsm/softhsm2.conf` with `directories.tokendir = /run/yubios-hsm/tokens`, `chmod -R a+rwX /run/yubios-hsm`, `softhsm2-util --init-token --free`, `softhsm2-util --import sb.p8`, `PKCS11_PROVIDER_MODULE` pointed at the direct lib (skip the `/usr/lib64/pkcs11/` p11-kit symlink). The cross-version trap (V36âV37 sealed-UKI VM lane fix â init the token INSIDE the Fedora container with the same softhsm that will sign) also stays.
+The SoftHSM / PKCS#11 / systemd-sbsign signing pipeline (the Secure Boot chain) is unchanged. Per `COMPANY.md` line 42, this is the canonical pattern: keep the entire SoftHSM token lifecycle inside ONE OS environment — `/run/yubios-hsm/softhsm2.conf` with `directories.tokendir = /run/yubios-hsm/tokens`, `chmod -R a+rwX /run/yubios-hsm`, `softhsm2-util --init-token --free`, `softhsm2-util --import sb.p8`, `PKCS11_PROVIDER_MODULE` pointed at the direct lib (skip the `/usr/lib64/pkcs11/` p11-kit symlink). The cross-version trap (V36→V37 sealed-UKI VM lane fix — init the token INSIDE the Fedora container with the same softhsm that will sign) also stays.
 
 #### 4.2.5 Why two cosign signatures on the UKI
 
-The UKI is already signed by `systemd-sbsign` (Secure Boot chain â verifies in firmware). The new `cosign sign-blob` is a **second** signature that wraps a cosign bundle for the SBOM-side attestation chain (used by `cosign verify-attestation` downstream). These are independent signatures over the same byte stream; they do not conflict. Document this in the workflow's README so reviewers do not flag it as a duplicate.
+The UKI is already signed by `systemd-sbsign` (Secure Boot chain — verifies in firmware). The new `cosign sign-blob` is a **second** signature that wraps a cosign bundle for the SBOM-side attestation chain (used by `cosign verify-attestation` downstream). These are independent signatures over the same byte stream; they do not conflict. Document this in the workflow's README so reviewers do not flag it as a duplicate.
 
 #### 4.2.6 Net diff size
 
@@ -526,11 +526,11 @@ Publishes `0mniteck/yubios:dev` (mutable) and `0mniteck/yubios:dev-<sha>` (immut
 
 Same pattern as `yubiOS-ci.yml` (section 4.1) but scoped to the dev image. Three new jobs after the existing build:
 
-1. `provenance` â `generator_container_slsa3.yml@v2.1.0` over the dev image digest
-2. `sbom` â Syft + `cosign attest --type spdxjson`
-3. `sign` â cosign keyless
+1. `provenance` — `generator_container_slsa3.yml@v2.1.0` over the dev image digest
+2. `sbom` — Syft + `cosign attest --type spdxjson`
+3. `sign` — cosign keyless
 
-#### 4.3.3 Concrete YAML (abbreviated â same shape as 4.1.3)
+#### 4.3.3 Concrete YAML (abbreviated — same shape as 4.1.3)
 
 ```yaml
 name: ci-dev-image
@@ -669,7 +669,7 @@ jobs:
           go install github.com/sigstore/rekor/v2/cmd/rekor-cli@v2.0.0
           echo "$HOME/go/bin" >> "$GITHUB_PATH"
 
-      - name: Verify SLSA L3 (container â via cosign verify-attestation)
+      - name: Verify SLSA L3 (container — via cosign verify-attestation)
         if: inputs.subject_path == ''
         env:
           COSIGN_EXPERIMENTAL: "1"
@@ -680,7 +680,7 @@ jobs:
             --certificate-identity-regexp 'https://github.com/slsa-framework/slsa-github-generator' \
             "${{ inputs.image_ref }}"
 
-      - name: Verify SLSA L3 (generic â via slsa-verifier)
+      - name: Verify SLSA L3 (generic — via slsa-verifier)
         if: inputs.subject_path != '' && inputs.provenance_path != ''
         run: |
           slsa-verifier verify-artifact "${{ inputs.subject_path }}" \
@@ -761,7 +761,7 @@ jobs:
 #### 4.4.4 What this verifier does NOT do (explicit out-of-scope)
 
 - It does NOT verify the Secure Boot chain on the UKI (that's `sbverify` in `ci_mkosi-installer.yml`).
-- It does NOT verify the in-toto attestation chain across multiple workflows (single-attestation verification is the scope per `audit-evidence-packaging` line 19 â "independently", not "comprehensively").
+- It does NOT verify the in-toto attestation chain across multiple workflows (single-attestation verification is the scope per `audit-evidence-packaging` line 19 — "independently", not "comprehensively").
 - It does NOT publish a new attestation; it only reads and verifies.
 
 #### 4.4.5 Net new file size
@@ -770,7 +770,7 @@ jobs:
 
 ### 4.5 Group-routing update (`ci.yml`)
 
-`ci.yml` is the workflow group-routing dispatcher (per PR #145, commit `9d6ec85d`, merged 2026-07-29). It does not need structural changes â the new attestation jobs are added inside each builder workflow (`yubiOS-ci.yml`, `ci_mkosi-installer.yml`, `ci_dev_image.yml`), not in the dispatcher. The new `ci_attestation-verify.yml` may be added to a `verify` group in `ci.yml`'s `groups:` input (existing pattern: `tests`, `vm-tests`, `ci-builders`). Recommend a new group:
+`ci.yml` is the workflow group-routing dispatcher (per PR #145, commit `9d6ec85d`, merged 2026-07-29). It does not need structural changes — the new attestation jobs are added inside each builder workflow (`yubiOS-ci.yml`, `ci_mkosi-installer.yml`, `ci_dev_image.yml`), not in the dispatcher. The new `ci_attestation-verify.yml` may be added to a `verify` group in `ci.yml`'s `groups:` input (existing pattern: `tests`, `vm-tests`, `ci-builders`). Recommend a new group:
 
 ```yaml
 # in ci.yml groups input:
@@ -810,7 +810,7 @@ This is the canonical L3 builder. Per `slsa-provenance` skill line 28: "They run
 
 **Cons:**
 - Adds a network hop (call to the reusable workflow's runner). Adds ~30-60 s to total build time.
-- Reusable workflow pins to a specific version (`v2.1.0`) â version upgrades require coordinated change.
+- Reusable workflow pins to a specific version (`v2.1.0`) — version upgrades require coordinated change.
 - The reusable workflow's runner is shared with all other GitHub Actions users; L3 isolation here is "the tenant cannot tamper with this specific runner's environment during the build", not "the build runs on hardware exclusively owned by yubiOS."
 
 **Cost:** included in GitHub Actions minutes.
@@ -830,7 +830,7 @@ This is the canonical L3 builder. Per `slsa-provenance` skill line 28: "They run
 - Fits the yubiOS "owned-root-of-trust" posture.
 
 **Cons:**
-- The yubiOS project is responsible for proving isolation. This is a heavy audit burden â the HITRUST assessor will ask "how do you know rock1's build environment wasn't tampered with?" and the answer is "we have seccomp + AppArmor + a custom script" which is weaker than "we used the SLSA framework's reference runner."
+- The yubiOS project is responsible for proving isolation. This is a heavy audit burden — the HITRUST assessor will ask "how do you know rock1's build environment wasn't tampered with?" and the answer is "we have seccomp + AppArmor + a custom script" which is weaker than "we used the SLSA framework's reference runner."
 - The runner is shared with the tenant project (rock1 is a dev box that has many other workflows). L3 isolation here requires more careful configuration than the GitHub-hosted option.
 - Requires a custom provenance generator. `slsa-github-generator`'s reusable workflow is the easy path; the self-hosted path requires either adapting the framework's source OR writing a custom in-toto Statement emitter that conforms to `predicateType: https://slsa.dev/provenance/v1`.
 
@@ -839,7 +839,7 @@ This is the canonical L3 builder. Per `slsa-provenance` skill line 28: "They run
 ### 5.3 Option C: TEE-backed builder (Confidential Containers / Intel TDX / AMD SEV / ARM CCA)
 
 **Mechanism:**
-- The build runs inside a confidential container (Confidential Containers project â `confidentialcontainers.org`).
+- The build runs inside a confidential container (Confidential Containers project — `confidentialcontainers.org`).
 - The TEE provides hardware-isolated memory + attestation (TPM2 quote for SEV, TEE quote for TDX).
 - The attestation quote is embedded in the SLSA provenance as `runDetails.builder.id` is replaced with the attestation evidence.
 - yubiOS's `internal-big-picture` 10-primitive model includes attestation as primitive P1; this option makes P1 hardware-rooted instead of OIDC-rooted.
@@ -847,7 +847,7 @@ This is the canonical L3 builder. Per `slsa-provenance` skill line 28: "They run
 **Pros:**
 - Strongest isolation model. The tenant cannot tamper with the build even if they have root on the host.
 - Future-proof: as more confidential compute becomes available on commodity cloud (Azure Confidential VMs, GCP Confidential VMs, AWS Graviton with CCA), this option scales.
-- Aligns with the yubiOS posture (UKI signed by YubiKey PIV 9c, dm-verity on /usr, fTPM for measured boot â confidential compute is the same posture for builds).
+- Aligns with the yubiOS posture (UKI signed by YubiKey PIV 9c, dm-verity on /usr, fTPM for measured boot — confidential compute is the same posture for builds).
 
 **Cons:**
 - Confidential Containers tooling is newer; some upstream pieces (e.g., `confidentialcontainers.org` v0.x) are still stabilizing.
@@ -861,9 +861,9 @@ This is the canonical L3 builder. Per `slsa-provenance` skill line 28: "They run
 
 **Phase 1-3: Option A (GitHub-hosted ephemeral).** This is the canonical L3 builder, the lowest-cost path to compliance, and the easiest for HITRUST assessors to audit ("you used the SLSA framework's reference runner" is a stronger answer than "you configured your own hardened runner"). The tradeoffs are acceptable: the network hop adds ~30-60 s and we pin to `v2.1.0` for stability.
 
-**Phase 4 (post-OMN-157): Option B (hardened rock1) as a parallel path.** Once rock1 stability is confirmed (the option framing explicitly flags this as "gated on rock1 stability"), add a self-hosted variant of `generator_container_slsa3.yml` so critical builds can be re-built on the yubiOS-owned infrastructure. This is a defense-in-depth posture â GitHub-hosted is the primary, rock1 is the fallback.
+**Phase 4 (post-OMN-157): Option B (hardened rock1) as a parallel path.** Once rock1 stability is confirmed (the option framing explicitly flags this as "gated on rock1 stability"), add a self-hosted variant of `generator_container_slsa3.yml` so critical builds can be re-built on the yubiOS-owned infrastructure. This is a defense-in-depth posture — GitHub-hosted is the primary, rock1 is the fallback.
 
-**Phase 5 (future): Option C (TEE-backed) when tooling matures.** Out of scope for OMN-157. Track as a future Linear issue (OMN-XXX, "confidential compute build runners" â not yet filed).
+**Phase 5 (future): Option C (TEE-backed) when tooling matures.** Out of scope for OMN-157. Track as a future Linear issue (OMN-XXX, "confidential compute build runners" — not yet filed).
 
 ### 5.5 Why the "v2.1.0" pin matters
 
@@ -872,7 +872,7 @@ This is the canonical L3 builder. Per `slsa-provenance` skill line 28: "They run
 - Upstream breaking changes do not silently affect yubiOS builds.
 - The `builder-id` claim in the in-toto Statement is stable (the verifier's `--builder-id` input can pin to the exact ref).
 
-If a yubiOS maintainer upgrades `slsa-github-generator` to `v2.2.0` later, the `ci_attestation-verify.yml` workflow must be updated to match â the builder-id pin in `ci.yml` and the verifier's `--builder-id` must be updated in lockstep.
+If a yubiOS maintainer upgrades `slsa-github-generator` to `v2.2.0` later, the `ci_attestation-verify.yml` workflow must be updated to match — the builder-id pin in `ci.yml` and the verifier's `--builder-id` must be updated in lockstep.
 
 ---
 
@@ -883,7 +883,7 @@ The four phases below are sequenced to minimize risk. Each phase is independentl
 ### 6.1 Phase 1: SBOM + cosign sign (already-done territory)
 
 **Scope:**
-- Wire `--sbom=true` on the three workflow `docker build-push-action` calls (where present â `yubiOS-ci.yml`, `ci_dev_image.yml`; `ci_mkosi-installer.yml` does not use build-push-action directly).
+- Wire `--sbom=true` on the three workflow `docker build-push-action` calls (where present — `yubiOS-ci.yml`, `ci_dev_image.yml`; `ci_mkosi-installer.yml` does not use build-push-action directly).
 - Wire a cosign keyless sign step on each workflow's published artifact digest.
 - Pin cosign to >= v2.4.
 - Install Syft v1.18.0 in the workflows that need explicit SBOM generation (the OCI artifact + yubiOS.raw.zst for `ci_mkosi-installer.yml`).
@@ -902,7 +902,7 @@ The four phases below are sequenced to minimize risk. Each phase is independentl
 
 **Scope:**
 - Wire `--provenance=true` on the three `docker build-push-action` calls (L1).
-- Wire a `cosign attest --type slsaprovenance` step that wraps the buildx-generated provenance in a DSSE envelope + signs with OIDC (L2 â provenance is now authenticated).
+- Wire a `cosign attest --type slsaprovenance` step that wraps the buildx-generated provenance in a DSSE envelope + signs with OIDC (L2 — provenance is now authenticated).
 - Add `id-token: write` permissions on each workflow.
 
 **Acceptance:**
@@ -926,7 +926,7 @@ The four phases below are sequenced to minimize risk. Each phase is independentl
 - `cosign verify-attestation --type slsaprovenance` succeeds AND the `runDetails.builder.id` matches `https://github.com/slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@refs/tags/v2.1.0`.
 - `slsa-verifier verify-artifact` succeeds against the provenance (for the generic case).
 
-**Risk:** medium. This is the biggest behavioral change. The build no longer happens in the tenant's runner â it happens in the reusable workflow's runner. Coordinate with the existing build jobs to avoid double-building (the build job stays for hadolint/shellcheck/unit-tests inputs, but the OCI image push moves to the reusable workflow).
+**Risk:** medium. This is the biggest behavioral change. The build no longer happens in the tenant's runner — it happens in the reusable workflow's runner. Coordinate with the existing build jobs to avoid double-building (the build job stays for hadolint/shellcheck/unit-tests inputs, but the OCI image push moves to the reusable workflow).
 
 **Estimated effort:** 3-5 days.
 
@@ -962,7 +962,7 @@ Total: ~7-12 days of implementation work, plus 1-2 weeks of verifier-side integr
 
 ### 6.6 Phase gating rule
 
-Phases do not block each other â they ship in independent PRs and each PR's verifier (the new `ci_attestation-verify.yml` once landed, OR a manual `cosign verify-attestation` invocation) confirms the new level of compliance. A failure in Phase 3 (e.g., the reusable workflow's runner is unavailable) does not regress Phases 1+2+4 because those phases' artifacts are still signed and SBOM-tagged.
+Phases do not block each other — they ship in independent PRs and each PR's verifier (the new `ci_attestation-verify.yml` once landed, OR a manual `cosign verify-attestation` invocation) confirms the new level of compliance. A failure in Phase 3 (e.g., the reusable workflow's runner is unavailable) does not regress Phases 1+2+4 because those phases' artifacts are still signed and SBOM-tagged.
 
 ---
 
@@ -1065,7 +1065,7 @@ A failure at any step means the artifact should be treated as untrusted and the 
 ### 7.5 What the verifier does NOT check
 
 - It does NOT check that the build was reproducible (deterministic byte-for-byte rebuild). SLSA L3 does not require reproducibility; that is a v0.2-era "Build L4" requirement that is gone in v1.0.
-- It does NOT check that the workflow file's git history is preserved (versioned history, retention, two-person review) â those are Source-track requirements in v1.0, not Build requirements.
+- It does NOT check that the workflow file's git history is preserved (versioned history, retention, two-person review) — those are Source-track requirements in v1.0, not Build requirements.
 - It does NOT check the Secure Boot chain on the UKI (that's `sbverify` in `ci_mkosi-installer.yml`, separate concern).
 - It does NOT check that the SBOM's package list is vulnerability-free (that's a separate Trivy / Grype scan).
 
@@ -1075,21 +1075,21 @@ A failure at any step means the artifact should be treated as untrusted and the 
 
 ### 8.1 Upstream specifications
 
-- **SLSA v1.0 levels**: https://slsa.dev/spec/v1.0/levels â authoritative; Build track is L1-L3 only.
-- **SLSA v1.0 provenance**: https://slsa.dev/spec/v1.0/provenance â in-toto Statement, `predicateType: https://slsa.dev/provenance/v1`, `buildDefinition` + `runDetails` shape.
-- **SLSA v1.0 build requirements**: https://slsa.dev/spec/v1.0/build-requirements â the L3 isolation requirement in detail.
-- **in-toto Statement v1**: https://in-toto.io/Statement/v1 â the attestation envelope format.
-- **Sigstore cosign**: https://docs.sigstore.dev/cosign/ â signing and verification CLI.
-- **Sigstore Rekor v2 spec**: https://github.com/sigstore/architecture-docs/blob/main/rekor-v2-spec.md â tile-based log + witness quorum.
-- **Sigstore Rekor v2 GA announcement**: https://blog.sigstore.dev/rekor-v2-ga/ â May 2026 GA.
-- **TUF specification**: https://theupdateframework.github.io/specification/latest/ â endpoint discovery via TUF SigningConfig.
+- **SLSA v1.0 levels**: https://slsa.dev/spec/v1.0/levels — authoritative; Build track is L1-L3 only.
+- **SLSA v1.0 provenance**: https://slsa.dev/spec/v1.0/provenance — in-toto Statement, `predicateType: https://slsa.dev/provenance/v1`, `buildDefinition` + `runDetails` shape.
+- **SLSA v1.0 build requirements**: https://slsa.dev/spec/v1.0/build-requirements — the L3 isolation requirement in detail.
+- **in-toto Statement v1**: https://in-toto.io/Statement/v1 — the attestation envelope format.
+- **Sigstore cosign**: https://docs.sigstore.dev/cosign/ — signing and verification CLI.
+- **Sigstore Rekor v2 spec**: https://github.com/sigstore/architecture-docs/blob/main/rekor-v2-spec.md — tile-based log + witness quorum.
+- **Sigstore Rekor v2 GA announcement**: https://blog.sigstore.dev/rekor-v2-ga/ — May 2026 GA.
+- **TUF specification**: https://theupdateframework.github.io/specification/latest/ — endpoint discovery via TUF SigningConfig.
 
 ### 8.2 GitHub-specific tooling
 
-- **slsa-framework/slsa-github-generator**: https://github.com/slsa-framework/slsa-github-generator â the reusable workflows that achieve L3 on GitHub-hosted ephemeral runners.
-- **slsa-framework/slsa-verifier**: https://github.com/slsa-framework/slsa-verifier â the canonical verifier CLI for generic L3 attestations.
+- **slsa-framework/slsa-github-generator**: https://github.com/slsa-framework/slsa-github-generator — the reusable workflows that achieve L3 on GitHub-hosted ephemeral runners.
+- **slsa-framework/slsa-verifier**: https://github.com/slsa-framework/slsa-verifier — the canonical verifier CLI for generic L3 attestations.
 - **cosign verify-attestation docs**: https://github.com/sigstore/cosign/blob/main/doc/cosign_verify-attestation.md.
-- **docker/build-push-action**: https://github.com/docker/build-push-action â the action that emits `--provenance=true` and `--sbom=true` for L1/L2.
+- **docker/build-push-action**: https://github.com/docker/build-push-action — the action that emits `--provenance=true` and `--sbom=true` for L1/L2.
 
 ### 8.3 yubiOS-internal references
 
@@ -1101,24 +1101,24 @@ A failure at any step means the artifact should be treated as untrusted and the 
 - **Commit `f58d6c14`** (line-continuation fix for ci_dev_image.yml): dev image workflow cascade verified end-to-end.
 - **Commit `72e2af1`** (docker/podman pass): converted `ci_mkosi-installer.yml` and `ci_test-int.yml` Stage 4 onto pinned own-dockerd-on-ducker.sock pattern (docker-29.6.0 + buildx-v0.35.0).
 - **Commit `611f8ff`** (ADR-022 amendment): installer is live; documented in `memory/personal-WbtUgeUv/COMPANY.md`.
-- **Commit `e9ae9eba1ef0`** (agent-skills cycle 5 direct-push): 6 new SKILL.md files created (yubikey-operations, dm-verity-and-integrity, nspawn-containers, sigstore-rekor-v2, composefs-kernel-floors, audit-evidence-packaging) + substantive RSI edits applied to all 69 skills (PC1+PC2=0.4615 PASS, Holdout RÂ²=+0.2244 PASS).
+- **Commit `e9ae9eba1ef0`** (agent-skills cycle 5 direct-push): 6 new SKILL.md files created (yubikey-operations, dm-verity-and-integrity, nspawn-containers, sigstore-rekor-v2, composefs-kernel-floors, audit-evidence-packaging) + substantive RSI edits applied to all 69 skills (PC1+PC2=0.4615 PASS, Holdout R²=+0.2244 PASS).
 - **PR #158** (cycle 5 run log): OPEN as draft, awaiting Jenny's merge per the standing "Jenny merges" rule. Cycle log at `refs/curve-guided-rsi-v2-cycle5-deep-research-2026-08-04.md` on yubi-OS/yubiOS main @ `1145d4424738`.
 - **v0.7.1 first formal release tag**: published 2026-08-01T13:44:30Z by 0mniteck. First "v" tag, full changelog from v0.0.1 covering 156 PRs.
 
 ### 8.4 yubiOS skills directly referenced
 
-- `skills/github-yubios-KS9n5GAT/slsa-provenance/SKILL.md` â SLSA v1.0 L3, in-toto Statement, DSSE, Rekor v2 reference.
-- `skills/github-yubios-KS9n5GAT/sigstore-rekor-v2/SKILL.md` â TUF SigningConfig, witness quorum, tile-based log, cosign verify-attestation.
-- `skills/github-yubios-KS9n5GAT/audit-evidence-packaging/SKILL.md` â evidence bundle format that uses Rekor v2 as the transparency log.
-- `skills/github-yubios-KS9n5GAT/docker-build-push-action/SKILL.md` â the action that emits `--provenance=true` and `--sbom=true` for L1/L2.
-- `skills/github-yubios-KS9n5GAT/docker-buildx-rootless/SKILL.md` â the buildx pattern yubiOS uses (rootless dockerd on ducker.sock).
-- `skills/github-yubios-KS9n5GAT/spec-driven-development/SKILL.md` â the meta-skill this spec follows.
-- `skills/github-yubios-KS9n5GAT/mkosi-image-builder/SKILL.md` â the mkosi pattern that ci_mkosi-installer.yml uses.
+- `skills/github-yubios-KS9n5GAT/slsa-provenance/SKILL.md` — SLSA v1.0 L3, in-toto Statement, DSSE, Rekor v2 reference.
+- `skills/github-yubios-KS9n5GAT/sigstore-rekor-v2/SKILL.md` — TUF SigningConfig, witness quorum, tile-based log, cosign verify-attestation.
+- `skills/github-yubios-KS9n5GAT/audit-evidence-packaging/SKILL.md` — evidence bundle format that uses Rekor v2 as the transparency log.
+- `skills/github-yubios-KS9n5GAT/docker-build-push-action/SKILL.md` — the action that emits `--provenance=true` and `--sbom=true` for L1/L2.
+- `skills/github-yubios-KS9n5GAT/docker-buildx-rootless/SKILL.md` — the buildx pattern yubiOS uses (rootless dockerd on ducker.sock).
+- `skills/github-yubios-KS9n5GAT/spec-driven-development/SKILL.md` — the meta-skill this spec follows.
+- `skills/github-yubios-KS9n5GAT/mkosi-image-builder/SKILL.md` — the mkosi pattern that ci_mkosi-installer.yml uses.
 
 ### 8.5 Memory files consulted
 
-- `memory/personal-WbtUgeUv/COMPANY.md` â yubiOS company state, PRs, commits, the SoftHSM canonical pattern (line 42), the workflow authoring convention (line 52).
-- `memory/personal-WbtUgeUv/RECENT_ACTIVITY.md` â recent yubiOS CI work; PR #156 / OMN-157 lineage (line 26); the group-routing redesign (line 30); the docker/podman pass (line 334); the mkosi#2 merged (line 351).
+- `memory/personal-WbtUgeUv/COMPANY.md` — yubiOS company state, PRs, commits, the SoftHSM canonical pattern (line 42), the workflow authoring convention (line 52).
+- `memory/personal-WbtUgeUv/RECENT_ACTIVITY.md` — recent yubiOS CI work; PR #156 / OMN-157 lineage (line 26); the group-routing redesign (line 30); the docker/podman pass (line 334); the mkosi#2 merged (line 351).
 
 ---
 
@@ -1139,7 +1139,7 @@ These are the testable conditions per `spec-driven-development` skill's "Success
 
 - [ ] All three workflows: a dispatched run produces a `cosign verify-attestation --type spdxjson` success.
 - [ ] The SBOM is SPDX 2.3 JSON format (verifiable by `jq '.spdxVersion'` returning `"SPDX-2.3"`).
-- [ ] `ci_mkosi-installer.yml`: produces TWO SBOMs â one for the OCI artifact (rpm/dnf packages), one for the `yubiOS.raw.zst` filesystem.
+- [ ] `ci_mkosi-installer.yml`: produces TWO SBOMs — one for the OCI artifact (rpm/dnf packages), one for the `yubiOS.raw.zst` filesystem.
 
 ### 9.3 cosign keyless signature (Phase 1)
 
@@ -1177,13 +1177,13 @@ These are the testable conditions per `spec-driven-development` skill's "Success
 
 Items that need human input OR are explicitly deferred. Per `spec-driven-development` skill: "Anything unresolved that needs human input."
 
-### 10.1 Builder isolation â Option A vs B vs C
+### 10.1 Builder isolation — Option A vs B vs C
 
 **Question:** Confirm Phase 3 ships Option A (GitHub-hosted ephemeral via `slsa-github-generator`) as the primary L3 path, with Option B (rock1) as a parallel Phase-5 fallback gated on rock1 stability.
 
 **Default if no answer:** Option A. This is the canonical SLSA framework recommendation and the lowest-cost path.
 
-### 10.2 Verifier workflow â separate repo or yubiOS?
+### 10.2 Verifier workflow — separate repo or yubiOS?
 
 **Question:** Should `ci_attestation-verify.yml` live in `yubi-OS/yubiOS` (alongside the workflows it verifies) or in a separate `yubi-OS/yubios-verifier` repo (so it can be re-run independently by auditors without checking out the full yubiOS repo)?
 
@@ -1209,7 +1209,7 @@ Items that need human input OR are explicitly deferred. Per `spec-driven-develop
 
 ### 10.6 Does this spec need a pre-implementation review?
 
-**Question:** Per `spec-driven-development` skill, "Phase 1: Specify â Human reviews." Should this spec go through Jenny + 0mniteck review before any code is written?
+**Question:** Per `spec-driven-development` skill, "Phase 1: Specify — Human reviews." Should this spec go through Jenny + 0mniteck review before any code is written?
 
 **Default if no answer:** yes. This is a multi-workflow change touching 4 files (3 modified + 1 new) and adding ~300 lines of YAML. A 1-day review window with Jenny + 0mniteck is appropriate before Phase 1 starts.
 
@@ -1223,7 +1223,7 @@ Items that need human input OR are explicitly deferred. Per `spec-driven-develop
 
 ## Appendix A: full current-state `yubiOS-ci.yml` shape
 
-This is a verbatim recap of the structure (not the actual file content â that is 5270 B per `RECENT_ACTIVITY.md` line 372 and not duplicated here) so the implementer can diff against section 4.1.3.
+This is a verbatim recap of the structure (not the actual file content — that is 5270 B per `RECENT_ACTIVITY.md` line 372 and not duplicated here) so the implementer can diff against section 4.1.3.
 
 ```yaml
 name: yubiOS-ci
@@ -1233,7 +1233,7 @@ on:
       Docker_push:
         type: boolean
         default: false
-# NO permissions block (default token scope â G-OCI-7)
+# NO permissions block (default token scope — G-OCI-7)
 jobs:
   hadolint:
     # existing
@@ -1248,9 +1248,9 @@ jobs:
   unit-tests-arm64:
     # existing
   build-amd64:
-    # existing â rootless dockerd on ducker.sock per RECENT_ACTIVITY.md line 334
+    # existing — rootless dockerd on ducker.sock per RECENT_ACTIVITY.md line 334
   build-arm64:
-    # existing â rootless dockerd on ducker.sock
+    # existing — rootless dockerd on ducker.sock
   merge-manifest:
     # existing
 # NO provenance job (G-OCI-1, G-OCI-2)
@@ -1414,11 +1414,11 @@ Every commit, PR, and Linear issue cited in this spec, in one place for cross-ch
 
 | Issue | Title | State | Severity | Filed |
 |---|---|---|---|---|
-| OMN-152 | playbooks/ operational runbooks for yubiOS CI/CD | Done | â | 2026-08-01 |
+| OMN-152 | playbooks/ operational runbooks for yubiOS CI/CD | Done | — | 2026-08-01 |
 | **OMN-157** | **SLSA L3 + SPDX SBOM + cosign** | **Backlog** | **High** | **2026-08-01** |
 | OMN-156 | bootc upgrade/rollback + sysext + portable-service VM tests | Backlog | High | 2026-08-01 |
 | OMN-158 | input-shape doctrine + validate-input-shape CI gate | Backlog | High | 2026-08-01 |
-| OMN-159 | workflow_dispatchâgroup reachability assert | Backlog | Medium | 2026-08-01 |
+| OMN-159 | workflow_dispatch→group reachability assert | Backlog | Medium | 2026-08-01 |
 | OMN-160 | daily fork-upstream drift detection schedule | Backlog | Medium | 2026-08-01 |
 | OMN-161 | workflow token-scope audit script | Backlog | Medium | 2026-08-01 |
 | OMN-162 | 4 missing VM test scripts | Backlog | Low | 2026-08-01 |
@@ -1494,23 +1494,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8361). TODO: refine per file context.
-
-
-## Recommendation
 
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.8390). TODO: refine per file context.
-
-
-## Recommendation
-
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.6561). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.8361, Δ=+0.8390, Δ=+0.6561) were identical placeholder copies with no per-file content; merged on 2026-09-18.

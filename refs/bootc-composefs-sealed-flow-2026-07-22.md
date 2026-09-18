@@ -1,4 +1,4 @@
-# bootc composefs and sealed UKI flow â 2026-07-22
+# bootc composefs and sealed UKI flow — 2026-07-22
 
 Status: researched implementation boundary; current install smoke strengthened, sealed promotion still gated.
 
@@ -37,7 +37,7 @@ and [composefs backend design](https://github.com/bootc-dev/bootc/blob/v1.16.4/d
 | Where is EROFS used? | `/composefs/images/<digest>` points to a metadata-only EROFS image. File content is stored under `/composefs/objects`; deployment state is under `/state/deploy`. | Verify the repository layout, EROFS metadata image, and fs-verity measurements separately. |
 | Is composefs the same as dm-verity? | No. Native bootc composefs verifies individual files with fs-verity. dm-verity authenticates a fixed block-device image and belongs to the separate mkosi/systemd-repart path. | Do not request a `dm-verity` dracut module for the bootc composefs path or describe it as an EROFS root partition. |
 | Does strict fs-verity alone make the deployment sealed? | No. The composefs digest also has to be authenticated by the signed UKI command line. | A traditional BLS entry with raw kernel/initramfs is still unsealed, even when `composefs=<digest>` has no `?`. |
-| What does `--allow-missing-verity` mean? | It makes verification optional and encodes an explicitly unsealed composefs reference. | Production must not pass it. CI rejects a `composefs=?â¦` boot argument. |
+| What does `--allow-missing-verity` mean? | It makes verification optional and encodes an explicitly unsealed composefs reference. | Production must not pass it. CI rejects a `composefs=?…` boot argument. |
 | What initializes the root? | The bootc dracut module installs `bootc-root-setup.service`. In the initramfs it opens the physical `/sysroot/composefs` repository, verifies the selected image and objects, assembles writable state, and replaces `/sysroot`. | Include upstream dracut module `51bootc`; `composefs` and `dm-verity` are not the module names for this path. |
 
 The repository layout and digest rules are documented in the
@@ -48,8 +48,8 @@ enabled, the file is read-only and reads are checked against its Merkle tree.
 
 ## Corrections to the attached example
 
-The attached answer has the right high-level sequenceâsplit the kernel, build
-a UKI, sign it, then install the UKI-bearing imageâbut its concrete commands
+The attached answer has the right high-level sequence—split the kernel, build
+a UKI, sign it, then install the UKI-bearing image—but its concrete commands
 need these corrections:
 
 1. `bootc container split-kernel-and-rootfs` writes to `--output`, not
@@ -184,7 +184,7 @@ for the 1.17 milestone when this note was written. Released v1.16.4 code still
 uses the legacy `composefs=<digest>` form.
 
 Do not add the proposed `--erofs-version` or
-`composefs.digest=v1-â¦` interfaces until they exist in the version pinned by
+`composefs.digest=v1-…` interfaces until they exist in the version pinned by
 yubiOS. Refresh this note when the Fedora base digest, bootc version, composefs
 repository format, or sealed-image CLI changes.
 
@@ -224,23 +224,7 @@ This document applies the yubiOS segmentation primitive — Linux namespaces, cg
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8361). TODO: refine per file context.
-
-
-## Recommendation
 
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.8390). TODO: refine per file context.
-
-
-## Recommendation
-
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.6561). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.8361, Δ=+0.8390, Δ=+0.6561) were identical placeholder copies with no per-file content; merged on 2026-09-18.

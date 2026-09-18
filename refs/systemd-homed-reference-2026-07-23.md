@@ -1,15 +1,15 @@
 # systemd-homed Reference
-_Sources: man7.org (systemd 260~devel), deep research â May 10, 2026 â v261 updates appended 2026-07-23, see bottom section_
+_Sources: man7.org (systemd 260~devel), deep research — May 10, 2026 — v261 updates appended 2026-07-23, see bottom section_
 
 ## What it is
 
 `systemd-homed.service` manages portable, self-contained home directories.
-Each home embeds the full JSON user record inside its own storage â account
+Each home embeds the full JSON user record inside its own storage — account
 and home directory are the same concept. No `/etc/passwd` entries; users are
 synthesized via NSS at runtime and visible through `userdbctl`.
 
 **Key property**: the home carries its own identity. Plug in a USB stick with
-a LUKS2 home, authenticate, and you're in â on any machine that trusts the
+a LUKS2 home, authenticate, and you're in — on any machine that trusts the
 signing key.
 
 ---
@@ -100,10 +100,10 @@ homectl inspect jenny
 # Full JSON record
 homectl inspect jenny --json=pretty
 
-# Export for migration (stripped â keeps original signature)
+# Export for migration (stripped — keeps original signature)
 homectl inspect jenny -E | ssh root@target homectl create -i-
 
-# Export for migration (minimal â re-signs on target)
+# Export for migration (minimal — re-signs on target)
 homectl inspect jenny -EE | ssh root@target homectl create -i-
 
 # List all managed users
@@ -151,7 +151,7 @@ homectl activate jenny
 ## Authentication: FIDO2 with YubiKey (yubiOS primary path)
 
 FIDO2 uses the **hmac-secret** extension. YubiKey generates an HMAC of a
-random salt stored in the user record â the result unlocks the LUKS volume.
+random salt stored in the user record — the result unlocks the LUKS volume.
 
 ```bash
 # Enroll FIDO2 (requires YubiKey plugged in)
@@ -171,7 +171,7 @@ homectl create jenny --fido2-credential-algorithm=es256
 ```
 
 **Limitation (current)**: only one FIDO2 device per home at a time.
-Issue #28893 tracks multi-key support â **confirmed still open, no movement as of 2026-07-23, see update below**.
+Issue #28893 tracks multi-key support — **confirmed still open, no movement as of 2026-07-23, see update below**.
 
 ---
 
@@ -189,7 +189,7 @@ homectl create jenny \
   --pkcs11-token-uri="pkcs11:manufacturer=piv_II;id=%9c;type=private"
 ```
 
-PIV advantage: token identity visible before auth â can determine username
+PIV advantage: token identity visible before auth → can determine username
 from plugged-in YubiKey. FIDO2 doesn't allow this.
 
 ---
@@ -231,7 +231,7 @@ one home across host/VM while keeping separate configs.
 # On target machine:
 mkdir -p ~/Areas/dev ~/Areas/prod
 
-# Login to area (terminal â append %area to username):
+# Login to area (terminal — append %area to username):
 # At login prompt: jenny%dev
 
 # run0 with area:
@@ -255,7 +255,7 @@ All PEM format. Records are signed with Ed25519.
 
 ---
 
-## Version Notes (systemd 257â260)
+## Version Notes (systemd 257–260)
 
 | Version | What's new |
 |---|---|
@@ -279,10 +279,10 @@ All PEM format. Records are signed with Ed25519.
 
 ## References
 
-- `man systemd-homed.service` â https://www.man7.org/linux/man-pages/man8/systemd-homed.8.html
-- `man homectl` â https://www.man7.org/linux/man-pages/man1/homectl.1.html
-- `man homed.conf` â https://www.man7.org/linux/man-pages/man5/homed.conf.5.html
-- `man pam_systemd_home` â https://www.man7.org/linux/man-pages/man8/pam_systemd_home.8.html
+- `man systemd-homed.service` — https://www.man7.org/linux/man-pages/man8/systemd-homed.8.html
+- `man homectl` — https://www.man7.org/linux/man-pages/man1/homectl.1.html
+- `man homed.conf` — https://www.man7.org/linux/man-pages/man5/homed.conf.5.html
+- `man pam_systemd_home` — https://www.man7.org/linux/man-pages/man8/pam_systemd_home.8.html
 - https://systemd.io/HOME_DIRECTORY
 - https://systemd.io/USER_RECORD
 
@@ -291,7 +291,7 @@ All PEM format. Records are signed with Ed25519.
 ## v261 Updates (2026-07-23 refresh)
 
 - **New**: `homectl --birth-date=YYYY-MM-DD` sets the JSON user record's new optional `birthDate` field (ISO 8601 calendar date, earliest representable year 1900; empty string resets/unsets). Added in v261. Cosmetic for yubiOS today, no action needed.
-- **Still open, no movement**: systemd issue **#28893** ("Allow multiple FIDO2 devices for a given home directory w/ systemd-homed") remains open since 2023 with no merged fix or maintainer commitment as of this refresh. **This is the concrete upstream limitation behind yubiOS's "only one FIDO2 device per home at a time" note below** â still true, still worth documenting as a known constraint for yubiOS's backup-YubiKey enrollment story (yubiOS's own `yubiOS-enroll-backup` script works around this at the LUKS2/cryptenroll layer, not at the homed layer â verify that workaround still applies if homed-based homes are ever adopted for interactive users).
+- **Still open, no movement**: systemd issue **#28893** ("Allow multiple FIDO2 devices for a given home directory w/ systemd-homed") remains open since 2023 with no merged fix or maintainer commitment as of this refresh. **This is the concrete upstream limitation behind yubiOS's "only one FIDO2 device per home at a time" note below** — still true, still worth documenting as a known constraint for yubiOS's backup-YubiKey enrollment story (yubiOS's own `yubiOS-enroll-backup` script works around this at the LUKS2/cryptenroll layer, not at the homed layer — verify that workaround still applies if homed-based homes are ever adopted for interactive users).
 
 Sources: https://github.com/systemd/systemd/releases/tag/v261, https://github.com/systemd/systemd/issues/28893, https://man7.org/linux/man-pages/man1/homectl.1.html, https://systemd.io/USER_RECORD/
 
@@ -322,15 +322,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.6921). TODO: refine per file context.
-
-
-## Recommendation
 
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4199). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6921, Δ=+0.4199) were identical placeholder copies with no per-file content; merged on 2026-09-18.

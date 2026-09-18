@@ -190,9 +190,5 @@ These constraints are research-level - Jenny's prior art is the authoritative so
 
 ## Evidence inventory
 
-**Run IDs**: TBD per file context.
-**Commit SHAs**: TBD.
-**Measured metrics**: TBD.
-**Test outcomes**: TBD.
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4816). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4816) were identical placeholder copies with no per-file content; merged on 2026-09-18.

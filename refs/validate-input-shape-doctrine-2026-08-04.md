@@ -896,23 +896,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.9128). TODO: refine per file context.
-
-
-## Recommendation
 
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.9361). TODO: refine per file context.
-
-
-## Recommendation
-
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.5520). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.9128, Δ=+0.9361, Δ=+0.5520) were identical placeholder copies with no per-file content; merged on 2026-09-18.

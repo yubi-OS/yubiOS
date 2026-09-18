@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/sbsign-pkcs11-validate.md, no date suffix previously)_
 
-Cross-checked 2026-07-23 against refs/mkosi-bcvk-fork-status-2026-07-23.md: mkosi upstream (v27) confirms native support for `SecureBootKeySource=engine:pkcs11` / `provider:pkcs11` via `systemd-sbsign`, matching this file's validation shape exactly. No drift found â yubiOS's implementation is aligned with current upstream mkosi capability.
+Cross-checked 2026-07-23 against refs/mkosi-bcvk-fork-status-2026-07-23.md: mkosi upstream (v27) confirms native support for `SecureBootKeySource=engine:pkcs11` / `provider:pkcs11` via `systemd-sbsign`, matching this file's validation shape exactly. No drift found — yubiOS's implementation is aligned with current upstream mkosi capability.
 
 # systemd-sbsign PKCS#11 validation
 
@@ -58,24 +58,11 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.9090). TODO: refine per file context.
-
-
-## Recommendation
 
 **Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
 
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.7964). TODO: refine per file context.
-
-
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.9090, Δ=+0.7964) were identical placeholder copies with no per-file content; merged on 2026-09-18.
 ## Problem Statement
 
-**Question**: TBD per file context.
-**Scope**: TBD.
-**Out of scope**: TBD.
 
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.6732). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6732) were identical placeholder copies with no per-file content; merged on 2026-09-18.

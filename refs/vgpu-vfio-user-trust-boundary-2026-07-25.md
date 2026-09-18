@@ -17,22 +17,22 @@ Per the ADR-031 posture (virtio-gpu default / vfio-user preferred / IOMMU-gated 
 
 Inputs analysed:
 
-- `k-amin07/47cb06e4598e0c81f2b42904c6909329` (gist) â a bare-metal GPU-passthrough
+- `k-amin07/47cb06e4598e0c81f2b42904c6909329` (gist) — a bare-metal GPU-passthrough
   recipe: enable VT-d, `intel_iommu=on`, verify IOMMU groups, bind the GPU to
   `vfio-pci` via `vfio.conf` + initramfs, blacklist the host display driver,
   attach the PCI GPU (plus its audio function) to a guest in virt-manager.
   Operational playbook, not a spec.
-- `docs.kernel.org/7.0/driver-api/vfio.html` â the kernel framework the gist
+- `docs.kernel.org/7.0/driver-api/vfio.html` — the kernel framework the gist
   depends on: IOMMU groups as the isolation unit, container (`/dev/vfio/vfio`) +
   group (`/dev/vfio/$GROUP`) + device, `VFIO_GROUP_SET_CONTAINER`, and the
   migration to **iommufd + the device cdev** (`VFIO_DEVICE_BIND_IOMMUFD` claims
   DMA ownership) with the legacy container/group path headed for deprecation.
   Root is needed to *bind* a device; using an already-permissioned node is not
   inherently privileged (`/dev/vfio/vfio` grants no capability by itself).
-- `qemu.org/docs/master/interop/vfio-user.html` â the vfio-user protocol: the
+- `qemu.org/docs/master/interop/vfio-user.html` — the vfio-user protocol: the
   device model lives in a **separate userspace process**, QEMU is the client over
   an `AF_UNIX` socket (FD passing via `SCM_RIGHTS`), negotiation is
-  `VFIO_USER_VERSION` â `GET_INFO`/`REGION_INFO` â `DMA_MAP`/`DMA_UNMAP` â
+  `VFIO_USER_VERSION` → `GET_INFO`/`REGION_INFO` → `DMA_MAP`/`DMA_UNMAP` →
   `READ`/`WRITE`/`SET_IRQS`. The spec states client and server **must not trust
   each other** and both must validate input. One socket per connection, PCI only,
   no client/device multiplexing, live migration deferred. No kernel VFIO modules
@@ -40,7 +40,7 @@ Inputs analysed:
 
 Also confirmed (matters for what CI can run today): the **vfio-user client landed
 upstream in QEMU 10.1** as `vfio-user-pci`, configured with
-`-device '{"driver":"vfio-user-pci","socket":{"path":"â¦","type":"unix"}}'`.
+`-device '{"driver":"vfio-user-pci","socket":{"path":"…","type":"unix"}}'`.
 The self-hosted rock1 runner already builds QEMU 10.2.50 for the zstd zboot
 workaround, so that device model is available there.
 
@@ -71,7 +71,7 @@ The consequences for yubiOS:
    enabled, and the device is in a group that isolates it.
 2. **The gist's recipe is exactly the shape we must not ship by default.**
    Blacklisting host drivers, `vfio-pci` bound at initramfs, devices claimable by
-   anything with the right node permissions â every step widens the attack
+   anything with the right node permissions — every step widens the attack
    surface of the boot path we sign. Passthrough is an opt-in, policy-gated,
    documented deviation, never an image default.
 3. **vfio-user is the architecture that fits yubiOS.** The device implementation
@@ -82,7 +82,7 @@ The consequences for yubiOS:
    that is honestly testable in CI without hardware.
 4. **The GPU is never in the unlock or measurement path.** No PCR, no UKI
    section, no cryptenroll token may depend on a display device. A vGPU present
-   or absent must not change LUKS2/homed/pam-u2f behaviour â which is precisely
+   or absent must not change LUKS2/homed/pam-u2f behaviour — which is precisely
    the invariant the new workflow asserts by re-running the whole VM e2e suite
    with a GPU attached.
 
@@ -92,7 +92,7 @@ The consequences for yubiOS:
    `vfio.conf`, no initramfs binding.
 2. Passthrough requires, all of: IOMMU enabled and reporting groups, the target
    device alone in its group (or the whole group assigned), explicit operator
-   policy, and a documented deviation. Absent any one, refuse â do not degrade.
+   policy, and a documented deviation. Absent any one, refuse — do not degrade.
 3. Prefer **iommufd + device cdev** over the legacy container/group ioctls for
    anything we write; the kernel docs mark the legacy path for deprecation.
 4. Userspace device models use **vfio-user**, run unprivileged, with the socket
@@ -110,7 +110,7 @@ The consequences for yubiOS:
 | Test | Where it can run | Why |
 | --- | --- | --- |
 | `virtio-gpu-pci` device model present in the CI QEMU | any runner | host-side `-device help` probe |
-| `vfio-user-pci` client present (QEMU â¥ 10.1) | any runner with the built QEMU | upstream since 10.1 |
+| `vfio-user-pci` client present (QEMU ≥ 10.1) | any runner with the built QEMU | upstream since 10.1 |
 | vfio-user negotiation + `DMA_MAP` against a userspace server | any runner | pure userspace, no kernel VFIO, no IOMMU |
 | Guest binds `virtio_gpu`, `/dev/dri/card0` + `renderD128` appear | rock1 self-hosted (KVM) | needs a booted yubiOS guest |
 | Negative: no `/dev/vfio`, no `vfio-pci` bound, no IOMMU-group claim in a default guest | rock1 self-hosted | image-policy assertion |
@@ -126,24 +126,24 @@ self-hosted rock1 leg is the only place a guest actually boots.
 
 ## 4. Implementation landed with this doc
 
-- `.github/workflows/ci_test-vgpu-vm.yml` â derived from `ci_test-vm.yml`
+- `.github/workflows/ci_test-vgpu-vm.yml` — derived from `ci_test-vm.yml`
   (same lint gate, same host-deps/zstd-QEMU/bcvk-build/KVM/AppArmor preflight,
   same rc contract of 0 pass / 77 loud SKIP / else fail, same artifact upload and
   `ci.yml` callback). It runs **every** `ci_test-vm.yml` leg, with
   `YUBIOS_VGPU=1` in scope, plus two new legs.
-- `tests/vm/test-vgpu-virtio-ci.sh` â host-side device-model probe, then a guest
+- `tests/vm/test-vgpu-virtio-ci.sh` — host-side device-model probe, then a guest
   leg: boot with a virtio-gpu attached and assert the DRM nodes, the bound
   driver, and the negative VFIO surface. SKIPs 77 (naming the gap) when the
   pinned bcvk exposes no QEMU-argument passthrough.
-- `tests/vm/test-vfio-user-host-ci.sh` â QEMU version + `vfio-user-pci` probe,
+- `tests/vm/test-vfio-user-host-ci.sh` — QEMU version + `vfio-user-pci` probe,
   then a real client/server handshake against a libvfio-user sample server
   (`VFIO_USER_SERVER`), asserting socket mode `0600` and that no kernel `vfio`
   module was loaded. QEMU runs with `-S`, so PCI realize (and the whole
-  VERSION/GET_INFO/REGION_INFO negotiation) happens with no guest code running â
+  VERSION/GET_INFO/REGION_INFO negotiation) happens with no guest code running —
   no kernel, no firmware, no disk needed.
 - Both dependencies are provisioned in-run by `ci_test-vgpu-vm.yml`, cached under
   `/opt` keyed by pinned commit, same pattern as the zstd QEMU build:
-  - **bcvk `--extra-qemu-arg`** â a CI patch applied to the pinned bcvk source
+  - **bcvk `--extra-qemu-arg`** — a CI patch applied to the pinned bcvk source
     before `cargo build`, in the same perl-regex style as the existing privileged
     / CAP_SYS_ADMIN / ed25519 / DirectBoot-SSH patches. It adds
     `extra_qemu_args: Vec<String>` to `QemuConfig` (emitted verbatim onto the
@@ -155,7 +155,7 @@ self-hosted rock1 leg is the only place a guest actually boots.
     reused. If a hunk stops applying, the step SKIPs instead of shipping a bcvk
     that silently ignores the flag. Upstreaming it into `yubi-OS/bcvk` retires the
     patch.
-  - **libvfio-user** â built from pinned `nutanix/libvfio-user`
+  - **libvfio-user** — built from pinned `nutanix/libvfio-user`
     `37491ed9af828fc161238dacd82e83ea35a09f87` (2026-07-23, BSD-3-Clause) with
     meson/ninja, staging `samples/gpio-pci-idio-16` plus `libvfio-user.so*`, then
     smoke-checking that the staged binary actually opens a socket before the test

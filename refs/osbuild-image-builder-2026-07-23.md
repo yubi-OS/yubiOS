@@ -1,4 +1,4 @@
-# osbuild / Image Builder â On-Premises Overview
+# osbuild / Image Builder — On-Premises Overview
 _Refreshed: 2026-07-23 (supersedes refs/archive-osbuild-image-builder.md, originally researched 2026-05-11)_
 
 ## 2026-07-23 major update: ibcli and bootc-image-builder have converged and archived
@@ -8,12 +8,12 @@ _Refreshed: 2026-07-23 (supersedes refs/archive-osbuild-image-builder.md, origin
 - `image-builder-cli` PR **#374** (merged) makes **`bootc-image-builder` a multi-call binary of ibcli**.
 - The `osbuild/bootc-image-builder` repo now shows a notice that it has been **merged into `image-builder` and archived**.
 - Osbuild's own deprecation notice (osbuild.org/docs/bootc/deprecation-notice/) confirms the standalone `bootc-image-builder` CLI/container is being **deprecated in favor of the unified `image-builder` CLI**, keeping compatibility entry points for a transition period; the RHEL container will eventually wrap the unified CLI and later drop the standalone binary.
-- **Practical yubiOS impact:** `yubi-OS/image-builder-cli` (forked from `osbuild/image-builder-cli`, see refs/image-builder-cli-fork-2026-07-23.md) is now tracking the tool that also *absorbed* bootc-image-builder's role. Any yubiOS tooling still referencing a separate `bootc-image-builder` binary/container should be checked against this convergence â it's the same project now, invoked via `--bootc-*` flags on ibcli rather than a separate binary.
+- **Practical yubiOS impact:** `yubi-OS/image-builder-cli` (forked from `osbuild/image-builder-cli`, see refs/image-builder-cli-fork-2026-07-23.md) is now tracking the tool that also *absorbed* bootc-image-builder's role. Any yubiOS tooling still referencing a separate `bootc-image-builder` binary/container should be checked against this convergence — it's the same project now, invoked via `--bootc-*` flags on ibcli rather than a separate binary.
 - Latest `osbuild/image-builder-cli` release found: **v69** (2026-06-17).
 
-### composefs-native backend â still experimental, not a blocker resolution
+### composefs-native backend — still experimental, not a blocker resolution
 
-bootc's composefs backend remains **experimental** per bootc's own docs (compiled in, not production-ready). Active integration work is tracked in `osbuild/image-builder` issue #2427 (2026-04-29), which lays out the blocker chain: osbuild changes â images changes â image-builder release â bootc release â bootloader/config plumbing. **This directly corroborates yubiOS's own BLOCKERS.md B-BOOTC-SEAL entry** ("pin a base with v1.16.4-equivalent split/ukify capabilities") â the upstream gap yubiOS is waiting on is the same one tracked in this issue, not yet resolved as of this refresh.
+bootc's composefs backend remains **experimental** per bootc's own docs (compiled in, not production-ready). Active integration work is tracked in `osbuild/image-builder` issue #2427 (2026-04-29), which lays out the blocker chain: osbuild changes → images changes → image-builder release → bootc release → bootloader/config plumbing. **This directly corroborates yubiOS's own BLOCKERS.md B-BOOTC-SEAL entry** ("pin a base with v1.16.4-equivalent split/ukify capabilities") — the upstream gap yubiOS is waiting on is the same one tracked in this issue, not yet resolved as of this refresh.
 
 ### Current supported distros (osbuild.org/docs/user-guide/image-descriptions/, as of 2026-07-20)
 - RHEL 10.1, 9.7, 8.10
@@ -27,14 +27,14 @@ container, iot-bootable-container, iot-commit, iot-container, iot-installer, iot
 
 ---
 
-## Original research (2026-05-11, background/history â tool names below are now the pre-convergence names)
+## Original research (2026-05-11, background/history — tool names below are now the pre-convergence names)
 
 ## What it is
 
 osbuild is a pipeline execution engine for building customized OS images. Image Builder wraps it with higher-level UX. Historically two main components existed (now unified per the update above):
 
-- **osbuild-composer** â daemon-based service; manages blueprints, queues builds, Weldr/lorax-compatible API
-- **image-builder-cli (ibcli)** â modern stateless tool; no daemon, no database; blueprints are local TOML files (now the umbrella tool that also absorbs bootc-image-builder's role)
+- **osbuild-composer** — daemon-based service; manages blueprints, queues builds, Weldr/lorax-compatible API
+- **image-builder-cli (ibcli)** — modern stateless tool; no daemon, no database; blueprints are local TOML files (now the umbrella tool that also absorbs bootc-image-builder's role)
 
 osbuild itself is the low-level pipeline engine that both use under the hood.
 

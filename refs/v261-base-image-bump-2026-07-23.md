@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/v261-base-image.md, no date suffix previously)_
 
-Cross-checked 2026-07-23 against refs/fedora-bootc-base-images-status-2026-07-23.md: Fedora bootc base-images repo currently tracks Fedora 42/43/44/Rawhide, with `quay.io/fedora/fedora-bootc` as the published image name â consistent with this file's `PINNED.md`-is-source-of-truth guidance. Also cross-checked: Fedora Rawhide's `bootc` package is at 1.16.3 (not yet 1.16.4, despite bootc-dev/bootc releasing 1.16.4 upstream on 2026-07-15) â relevant if this file is ever used to reason about B-BOOTC-SEAL timing.
+Cross-checked 2026-07-23 against refs/fedora-bootc-base-images-status-2026-07-23.md: Fedora bootc base-images repo currently tracks Fedora 42/43/44/Rawhide, with `quay.io/fedora/fedora-bootc` as the published image name — consistent with this file's `PINNED.md`-is-source-of-truth guidance. Also cross-checked: Fedora Rawhide's `bootc` package is at 1.16.3 (not yet 1.16.4, despite bootc-dev/bootc releasing 1.16.4 upstream on 2026-07-15) — relevant if this file is ever used to reason about B-BOOTC-SEAL timing.
 
 # v261 base-image bump
 
@@ -65,9 +65,9 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 
 ## Priority signals
 
+
 **Priority class**: P2 (nice-to-have)
 **Critical-path?**: No
 **Blocking issues**: none identified at this cycle
-**Owner**: TBD
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8670). TODO: refine per file context.
+Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.8670) were identical placeholder copies with no per-file content; merged on 2026-09-18.

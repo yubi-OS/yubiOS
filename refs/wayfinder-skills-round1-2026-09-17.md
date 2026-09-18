@@ -4,14 +4,14 @@
 
 ## Protocol (frozen before the first cycle)
 
+
 1. Take the top-ranked ladder rung of the latest map. ADD rungs are declined by policy (the round fixes real defects in existing skills; it does not author synthetic skills to move geometry) and recorded once per sector in the ledger. CHANGE rungs name a real file. When the 5-rung ladder has no untouched CHANGE target (candidate exhaustion under this generator), the literal exemplars the rungs name are taken in ladder order with `predicted_delta: null`.
 2. Pre-register a `pending` outcomes row (prediction from the rung) before touching the file.
-3. Run the frozen check `skillcheck.sh` (C1 mojibake/replacement bytes; C2 duplicate H2 headings; C3 placeholder "TBD per file context / TODO: refine" lines; C4 SKILL.md frontmatter per the skill-format spec: closed block, `name` `^[a-z0-9-]{1,64}$`, `description` 1..1024 chars with no `<`/`>`; C5 template capability paragraphs asserting least-privilege / OPA policy / trust-chain / runtime-detection participation; C6 unresolved local links). PASS → `abstained`, no edit, no commit.
 4. FAIL → apply the deterministic fixer (base64-decode a base64-committed file; fix mojibake; move description overflow past 1,000 chars into an "Extended description" body section verbatim; strip angle brackets in descriptions; drop placeholder TODO sections; replace each template capability paragraph with a dated coverage note; merge duplicate H2 sections into the first occurrence, keeping all non-duplicate body text). Re-run the check; if still FAIL, revert and record `declined`.
 5. Commit the single file to the held branch; after-map with `baseline_id` = latest on the exact baseline name set; append the `kept` verdict row with `after_id` (observed delta recomputed server-side) superseding the pending row.
-
 Prevalence before the round (same check, all 112 SKILL.md): 24 PASS / 88 FAIL (C5 in 58 files, C2 in 26, C4 description > 1024 in 14, C4 base64-committed body in 13, C4 angle brackets in 1). The round touched only what the ladder named.
 
+Context: template Mode-D stub sections appended per repo-refs-skill batches () were identical placeholder copies with no per-file content; merged on 2026-09-18.
 ## Cycles
 
 | # | via | target | predicted Δiso | observed Δiso | bits | geodesic | edit | commit | after-map | verdict |

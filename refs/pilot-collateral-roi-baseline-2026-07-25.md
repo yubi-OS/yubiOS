@@ -8,7 +8,7 @@ OMN-84 asks for the collateral needed to run a first paid pilot: a statement of
 work, a public data sheet with support boundaries, an ROI baseline worksheet,
 and the assumptions that still need customer-discovery validation. This builds
 directly on [refs/offer-pricing-architecture-2026-07-25.md](offer-pricing-architecture-2026-07-25.md)
-(OMN-71, PR #108) â the pilot offers here are O1 (managed enrollment) and O3
+(OMN-71, PR #108) — the pilot offers here are O1 (managed enrollment) and O3
 (support/SLA), the two offers that document already flagged as gated on
 specific readiness gates rather than sellable today. Nothing below invents a
 customer, a price, or a result; each template has its blanks intact and its
@@ -17,18 +17,18 @@ assumptions named.
 ## 1. Pilot statement of work (template)
 
 ```
-yubiOS Pilot â Statement of Work (template)
+yubiOS Pilot — Statement of Work (template)
 
-Customer: [pilot partner name â not yet identified]
-Pilot offer: [O1 Managed fleet enrollment | O3 Support/SLA â per OMN-71 catalog]
-Duration: [to be set with partner; suggest 4â8 weeks per a first pilot,
+Customer: [pilot partner name — not yet identified]
+Pilot offer: [O1 Managed fleet enrollment | O3 Support/SLA — per OMN-71 catalog]
+Duration: [to be set with partner; suggest 4–8 weeks per a first pilot,
            not asserted as agreed]
-Fleet size: [pilot-scale, e.g. 10â50 devices per OMN-71's O1 pricing
-             hypothesis â actual size set with partner]
+Fleet size: [pilot-scale, e.g. 10–50 devices per OMN-71's O1 pricing
+             hypothesis — actual size set with partner]
 
 Scope:
 - What yubiOS will do: [enrollment/rotation for O1, or defined SLA response
-  windows for O3 â fill in against the specific offer selected]
+  windows for O3 — fill in against the specific offer selected]
 - What the customer provides: [hardware, YubiKeys, environment access,
   a named point of contact]
 - Explicit readiness-gate dependency: this pilot cannot start selling O1
@@ -36,17 +36,17 @@ Scope:
   relevant to enrollment (H1, H4, H10, H11) have actual evidence, not just
   a defined scenario list. O3 cannot start until B-VM-CTAP2 closes (per
   BLOCKERS.md). State clearly to the pilot partner which gate status
-  applies at the time the SOW is signed â don't imply readiness that
+  applies at the time the SOW is signed — don't imply readiness that
   hasn't been evidenced yet.
 
-Success criteria: [defined jointly with partner â e.g. "N devices enrolled
+Success criteria: [defined jointly with partner — e.g. "N devices enrolled
   with zero unintended lockouts" for O1, or "SLA response time met in M/N
-  incidents" for O3 â not pre-filled here since no partner exists yet]
+  incidents" for O3 — not pre-filled here since no partner exists yet]
 
-Pricing: per OMN-71's relevant offer row â hypothesis, to be confirmed with
+Pricing: per OMN-71's relevant offer row — hypothesis, to be confirmed with
   partner, not a committed number until the pilot itself validates it]
 
-Data/telemetry: per covenant Â§3 (OMN-70) â no telemetry beyond what the
+Data/telemetry: per covenant §3 (OMN-70) — no telemetry beyond what the
   pilot's own managed service inherently requires to operate, and that scope
   is disclosed to the partner up front, not implied.
 ```
@@ -54,7 +54,7 @@ Data/telemetry: per covenant Â§3 (OMN-70) â no telemetry beyond what the
 ## 2. Public data sheet and support boundaries (template)
 
 ```
-yubiOS [Offer Name] â Data Sheet (template)
+yubiOS [Offer Name] — Data Sheet (template)
 
 What it is: [one paragraph, grounded in MISSION.md and the specific offer's
   covenant-compliant description from OMN-71's catalog table]
@@ -62,41 +62,41 @@ What it is: [one paragraph, grounded in MISSION.md and the specific offer's
 What's included:
 - [Bulleted from the specific offer row in OMN-71's catalog]
 
-What's NOT included (support boundaries â per covenant Â§2/Â§3):
+What's NOT included (support boundaries — per covenant §2/§3):
 - Access to a different or stronger trust-chain mechanism than the free,
-  public path â the covenant explicitly rules this out; the data sheet
+  public path — the covenant explicitly rules this out; the data sheet
   should say so plainly rather than let a prospect assume otherwise.
-- Priority security fixes ahead of the public disclosure timeline â per
-  covenant Â§3 Disclosure, fixes ship to everyone simultaneously; a pilot
+- Priority security fixes ahead of the public disclosure timeline — per
+  covenant §3 Disclosure, fixes ship to everyone simultaneously; a pilot
   buys support response time, not early access to a fix.
-- Custody of the customer's own key material â per covenant Â§2, no offer
+- Custody of the customer's own key material — per covenant §2, no offer
   requires surrendering FIDO2/PIV/LUKS keys to yubiOS or a yubiOS-run
   service as a condition of the pilot.
 
 Known limitations at pilot time: [pull the live, current BLOCKERS.md
-  entries relevant to the offer â do not paraphrase from a stale cache;
+  entries relevant to the offer — do not paraphrase from a stale cache;
   BLOCKERS.md is the source of truth per PROJECT_RULES.md]
 
 Non-affiliation notice: yubiOS is not affiliated with or endorsed by Yubico
   (flagged as an open item to formalize once naming/trademark review closes
-  â see refs/naming-licensing-provenance-2026-07-25.md, OMN-81).
+  — see refs/naming-licensing-provenance-2026-07-25.md, OMN-81).
 ```
 
 ## 3. ROI baseline worksheet (template)
 
-A framework for the customer-side calculation, not a filled-in result â no
+A framework for the customer-side calculation, not a filled-in result — no
 pilot has run yet to produce real inputs:
 
 | Line item | Baseline (pre-yubiOS) | With yubiOS pilot offer | Source of the number |
 |---|---|---|---|
-| Cost of current root-of-trust approach (TPM/OEM/none) | [customer-provided] | N/A â YubiKey hardware cost only (~$25â70/device per MISSION.md) | Customer discovery interview |
+| Cost of current root-of-trust approach (TPM/OEM/none) | [customer-provided] | N/A — YubiKey hardware cost only (~$25–70/device per MISSION.md) | Customer discovery interview |
 | Incident response time for a lost/compromised credential | [customer-provided] | [pilot-measured, per O3 SLA terms if applicable] | Pilot SLA logs |
 | Time to onboard/enroll a new device | [customer-provided] | [pilot-measured, per O1 enrollment logs] | Pilot enrollment logs |
-| Audit/compliance evidence burden (time to produce proof of a trust-chain control) | [customer-provided] | [pilot-measured â e.g. time to pull an ADR + attestation vs. an opaque vendor claim] | Pilot + ADR.md/PINNED.md as evidence sources |
+| Audit/compliance evidence burden (time to produce proof of a trust-chain control) | [customer-provided] | [pilot-measured — e.g. time to pull an ADR + attestation vs. an opaque vendor claim] | Pilot + ADR.md/PINNED.md as evidence sources |
 | Recurring cost of the pilot offer itself | N/A | [per OMN-71 pricing hypothesis, TBD with partner] | SOW pricing line |
 
 **This worksheet only produces a real ROI once a specific customer fills in
-the "customer-provided" baseline column** â this document supplies the
+the "customer-provided" baseline column** — this document supplies the
 structure, not invented industry-average figures, which this session has no
 grounded source for.
 
@@ -104,19 +104,19 @@ grounded source for.
 
 - That a prospective pilot partner's current baseline (TPM, OEM secure
   enclave, or no hardware root of trust) is actually more expensive or slower
-  than the pilot claims â unverified until a real conversation happens.
+  than the pilot claims — unverified until a real conversation happens.
 - That "time to produce compliance evidence" is a metric the target customer
   segment (per OMN-86's eventual public-security funding targets) actually
   tracks and cares about, rather than a metric this document assumes matters.
-- That the pilot fleet size hypothesis (10â50 devices) matches what a real
+- That the pilot fleet size hypothesis (10–50 devices) matches what a real
   partner is willing to commit, rather than over- or under-shooting their
   actual appetite.
 - That the readiness-gate disclosures in section 1 (stating current
-  BLOCKERS.md status plainly) don't kill pilot interest â untested; the
+  BLOCKERS.md status plainly) don't kill pilot interest — untested; the
   alternative (overstating readiness) is ruled out by doctrine, but its
   commercial cost is a real open question.
 - That "support response time" (O3) is the value proposition a prospect
-  actually wants, versus enrollment convenience (O1) â the two pilot offer
+  actually wants, versus enrollment convenience (O1) — the two pilot offer
   candidates haven't been ranked against real customer interest yet.
 
 ## Dependencies
@@ -124,8 +124,8 @@ grounded source for.
 - Builds on **OMN-71** (offer/pricing, PR #108) for offer selection and
   pricing hypotheses, **OMN-70/82** (covenant + conflict policy, PR #106/#107)
   for support-boundary language, and **OMN-63** (real-hardware validation,
-  PR #104) + BLOCKERS.md for the readiness-gate disclosure in sections 1â2.
-- Shares its ROI structure with **T17 (OMN-78 customer ROI model)** â that
+  PR #104) + BLOCKERS.md for the readiness-gate disclosure in sections 1–2.
+- Shares its ROI structure with **T17 (OMN-78 customer ROI model)** — that
   issue should extend this worksheet with a fuller model once real pilot data
   exists, not redefine the line items from scratch.
 
