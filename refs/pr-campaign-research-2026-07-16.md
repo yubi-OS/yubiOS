@@ -127,3 +127,7 @@ Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6587) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 59)
+
+PR campaign research record: the campaign-mode posture it set (proof-first, build in public) is unchanged; the readiness rows it fed were re-verified by this round's friend-map drift check; note additive.
