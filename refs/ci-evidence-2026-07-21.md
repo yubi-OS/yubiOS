@@ -1,4 +1,4 @@
-# CI Evidence Review â 2026-07-21
+# CI Evidence Review — 2026-07-21
 
 Status: point-in-time evidence from the complete logs of eight requested workflow runs
 
@@ -56,15 +56,6 @@ This document applies the yubiOS segmentation primitive — Linux namespaces, cg
 
 ## Recommendation
 
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
+**Verdict**: point-in-time evidence review; conclusions live in "State changes justified by the logs" above (two blocker retirements, one narrowed VM CTAP2 blocker, one new RK3588 firmware-input blocker, and the hardware-validation boundary).
 
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.8429). TODO: refine per file context.
-
-
-## Recommendation
-
-**Verdict**: REVISE — context-dependent
-**One-line**: TBD per file context.
-
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4201). TODO: refine per file context.
+Context: template Mode-D sections appended by repo-refs-skill cycle-1 (Δ=+0.8429) and cycle-2 7-D batch (Δ=+0.4201) were duplicate placeholder stubs with no per-file content; merged into this single record on 2026-09-17.
