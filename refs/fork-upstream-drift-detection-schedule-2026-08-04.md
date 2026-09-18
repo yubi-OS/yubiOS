@@ -3,7 +3,7 @@ contract: "Daily cron schedule that detects drift between the yubi-OS fork HEAD 
 short_description: "Daily fork-upstream drift detection schedule"
 ---
 
-# Fork-Upstream Drift Detection Schedule â yubios CI Hygiene (2026-08-04)
+# Fork-Upstream Drift Detection Schedule — yubios CI Hygiene (2026-08-04)
 
 **Linked Linear issue:** [OMN-160](https://linear.app/omni-agent/issue/OMN-160)
 **Project:** yubiOS Production Proof & Release Gates
@@ -15,14 +15,14 @@ short_description: "Daily fork-upstream drift detection schedule"
 ## 1. Problem statement
 
 yubi-OS maintains 8 fork repos in the org (per `SAUNA_TOOLS.md`):
-- `arm-trusted-firmware` (â ARM-software)
-- `optee_os` (â OP-TEE)
-- `optee_ftpm` (â OP-TEE)
-- `u-boot` (â u-boot/u-boot)
-- `ms-tpm-20-ref` (â microsoft)
-- `edk2-rk3588` (â edk2-porting)
-- `bcvk` (â congatec-os/bcvk or bootc-dev/bcvk; merged into yubios branch)
-- `mkosi` (â systemd/mkosi; on `feature/yubiOS-profile` branch)
+- `arm-trusted-firmware` (← ARM-software)
+- `optee_os` (← OP-TEE)
+- `optee_ftpm` (← OP-TEE)
+- `u-boot` (← u-boot/u-boot)
+- `ms-tpm-20-ref` (← microsoft)
+- `edk2-rk3588` (← edk2-porting)
+- `bcvk` (← congatec-os/bcvk or bootc-dev/bcvk; merged into yubios branch)
+- `mkosi` (← systemd/mkosi; on `feature/yubiOS-profile` branch)
 
 Each fork pins to a specific upstream SHA via `PINNED.md` and the `ci_fork_*.yml` workflow family. If upstream moves (e.g. a security release lands on `upstream/main`), the yubi-OS fork falls behind. Without a daily check, the lag can accumulate until a build breaks or a CVE is missed.
 
@@ -37,12 +37,12 @@ This spec defines a daily cron that:
 
 ### 2.1 Inputs
 
-- `--repo-root PATH` (default: `.`) â root of the yubiOS checkout.
-- `--pinned PATH` (default: `PINNED.md`) â the pinned SHAs file.
-- `--org NAME` (default: `yubi-OS`) â GitHub org.
-- `--upstream-map PATH` (default: `scripts/detect-fork-drift.upstream-map.yaml`) â fork-to-upstream mapping.
+- `--repo-root PATH` (default: `.`) — root of the yubiOS checkout.
+- `--pinned PATH` (default: `PINNED.md`) — the pinned SHAs file.
+- `--org NAME` (default: `yubi-OS`) — GitHub org.
+- `--upstream-map PATH` (default: `scripts/detect-fork-drift.upstream-map.yaml`) — fork-to-upstream mapping.
 - `--output-format` (default: `text`; alternatives: `json`, `sarif`).
-- `--threshold-commits N` (default: `10`) â drift threshold; commits beyond this flag as drift.
+- `--threshold-commits N` (default: `10`) — drift threshold; commits beyond this flag as drift.
 
 ### 2.2 Upstream map file
 
@@ -98,14 +98,14 @@ for each fork in upstream_map:
 
 ```
 $ python3 scripts/detect-fork-drift.py --repo-root . --threshold-commits 10
-INFO  arm-trusted-firmware: pinned=2a33c..., upstream=2b441..., behind=3 commits â minor-lag
-INFO  optee_os: pinned=440b10c..., upstream=440b10c..., behind=0 commits â synced
-WARN  optee_ftpm: pinned=5e09cdb..., upstream=8a12ff..., behind=14 commits â drifted
-INFO  u-boot: pinned=..., upstream=..., behind=1 commit â minor-lag
-INFO  ms-tpm-20-ref: pinned=..., upstream=..., behind=0 commits â synced
-INFO  edk2-rk3588: pinned=..., upstream=..., behind=2 commits â minor-lag
-INFO  bcvk: pinned=a9303e77..., upstream=a9303e77..., behind=0 commits â synced
-WARN  mkosi: pinned=..., upstream=..., behind=18 commits â drifted
+INFO  arm-trusted-firmware: pinned=2a33c..., upstream=2b441..., behind=3 commits → minor-lag
+INFO  optee_os: pinned=440b10c..., upstream=440b10c..., behind=0 commits → synced
+WARN  optee_ftpm: pinned=5e09cdb..., upstream=8a12ff..., behind=14 commits → drifted
+INFO  u-boot: pinned=..., upstream=..., behind=1 commit → minor-lag
+INFO  ms-tpm-20-ref: pinned=..., upstream=..., behind=0 commits → synced
+INFO  edk2-rk3588: pinned=..., upstream=..., behind=2 commits → minor-lag
+INFO  bcvk: pinned=a9303e77..., upstream=a9303e77..., behind=0 commits → synced
+WARN  mkosi: pinned=..., upstream=..., behind=18 commits → drifted
 
 Summary: 2 DRIFTED, 4 MINOR-LAG, 2 SYNCED across 8 forks
 ```
@@ -193,18 +193,18 @@ jobs:
 
 ## 5. Migration plan
 
-### Phase 1 (this PR) â Ship the script + the cron + the issue-filer
+### Phase 1 (this PR) — Ship the script + the cron + the issue-filer
 
 - Land `scripts/detect-fork-drift.py` + `scripts/file-drift-issues.py` + `scripts/detect-fork-drift.upstream-map.yaml` + `.github/workflows/ci_fork-drift-detect.yml`.
 - PR title: `feat(ci): daily fork-upstream drift detection schedule (OMN-160)`.
 - Branch: `feat/ci-fork-drift-2026-08-04`.
 - First cron run on main produces the baseline drift report.
 
-### Phase 2 â Tighten threshold
+### Phase 2 — Tighten threshold
 
 - After 30 days of baseline data, lower the threshold from 10 commits to 5 commits (drift becomes more aggressive as the lag becomes a CVE risk).
 
-### Phase 3 â Cross-link to other drift detection
+### Phase 3 — Cross-link to other drift detection
 
 - The same cron pattern can be reused for: BLOCKERS.md drift vs planning docs (per PROJECT_RULES.md), SELF-CHANGELOG drift (the differential curve skill), Linear state vs yubios release tags (the om omn-tagging pattern).
 
@@ -214,7 +214,7 @@ After the script ships, run it locally:
 
 ```
 $ python3 scripts/detect-fork-drift.py --repo-root /path/to/yubiOS --threshold-commits 10
-INFO  arm-trusted-firmware: ... â minor-lag
+INFO  arm-trusted-firmware: ... → minor-lag
 ...
 Summary: N DRIFTED, M MINOR-LAG, K SYNCED across 8 forks
 ```
@@ -223,17 +223,17 @@ Or via the CI cron (the first run lands 24 hours after merge):
 
 ```
 GET /repos/yubi-OS/yubiOS/actions/runs?workflow=ci_fork-drift-detect.yml&per_page=1
-GET /actions/runs/{id}/artifacts â fork-drift-report-{run-id}
+GET /actions/runs/{id}/artifacts → fork-drift-report-{run-id}
 ```
 
 ## 7. References
 
-- Linear [OMN-160](https://linear.app/omni-agent/issue/OMN-160) â Daily fork-upstream drift detection schedule (this spec's parent)
-- `SAUNA_TOOLS.md` lines 8-13 â fork inventory (8 forks in the yubi-OS org)
-- `SAUNA_TOOLS.md` line 130-150 â the projects/cycles workflow pattern; similar cron-shaped workflows already in place
-- `skills/github-yubios-KS9n5GAT/fedora-bootc-base-images/SKILL.md` â base image digest handling (similar protocol for digest tracking)
-- `PROJECT_RULES.md` lines 220-239 â fedora-bootc:45 base-image digest stale-pin pattern (3-rotation incident record; the same drift-detection pattern applies to forks)
-- `schedules/github-yubios-KS9n5GAT/linear-github-projects-sync/schedule.md` â the existing daily cron precedent (per SAUNA_TOOLS line 86)
+- Linear [OMN-160](https://linear.app/omni-agent/issue/OMN-160) — Daily fork-upstream drift detection schedule (this spec's parent)
+- `SAUNA_TOOLS.md` lines 8-13 — fork inventory (8 forks in the yubi-OS org)
+- `SAUNA_TOOLS.md` line 130-150 — the projects/cycles workflow pattern; similar cron-shaped workflows already in place
+- `skills/github-yubios-KS9n5GAT/fedora-bootc-base-images/SKILL.md` — base image digest handling (similar protocol for digest tracking)
+- `PROJECT_RULES.md` lines 220-239 — fedora-bootc:45 base-image digest stale-pin pattern (3-rotation incident record; the same drift-detection pattern applies to forks)
+- `schedules/github-yubios-KS9n5GAT/linear-github-projects-sync/schedule.md` — the existing daily cron precedent (per SAUNA_TOOLS line 86)
 
 ---
 
