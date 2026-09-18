@@ -82,3 +82,6 @@ Coverage over the learned primitives of the yubiOS corpus: verification chain (b
 rootless privilege and capabilities (focal), corpus/curve (this note occupies a sparse cell
 on the fitted curve), YubiKey boot (the enrol-time exception), container isolation (the
 boundary family). Omitted clusters are omitted on purpose.
+## 2026-09-18 drift check (wayfinder round 8, cycle 75)
+
+rootless-privilege record: the corpus's least-privilege skills and the OMN-157 cosign hardening it sits next to are unchanged; note additive.
