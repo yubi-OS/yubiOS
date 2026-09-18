@@ -67,3 +67,7 @@ transparency log becomes required if Chromium builds are ever distributed beyond
 
 Coverage: verification chain (parent family), runner privilege (prerequisite), corpus/curve
 (this cell via series format), provenance gate (consumer side). Omitted clusters by design.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 57)
+
+mirror-provenance record: the chromium-provenance CI facts it cites were re-verified this round (ci green at the new HEAD 839369e2).
