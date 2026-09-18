@@ -66,3 +66,7 @@ the edits.
 - Isolated-count reduction is an instrument reading, not a quality score. The independent task
   checks (live API verification of every claim, append-only edits, no duplication) are the keep
   gate. `task_verdict` remains not-tested per the instrument's own contract.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 37)
+
+round-2 loop-results record: re-verified that its round-2 numbers (10 cycles, isolated 43 to 37, 2 sign-exact) are historical counts, unchanged by this round; cross-linked to the round-7/8 results records.
