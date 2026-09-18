@@ -149,3 +149,7 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 **Blocking issues**: none identified at this cycle
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.5943) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 88)
+
+prior-art-search RSI audit (round-7 repaired): historical measurement; note additive.
