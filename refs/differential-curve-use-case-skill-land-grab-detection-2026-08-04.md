@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-04
 **Source:** ideate-solo one-pager at `session/diff-curves/ideate-differential-use-case-solo-2026-08-04.md`
-**Finalist:** V3 â "Skill Land-Grab Detection from Self-Doc Corpus" (scored 18/20)
+**Finalist:** V3 — "Skill Land-Grab Detection from Self-Doc Corpus" (scored 18/20)
 **Status:** MVP applied to top-5 skill-only cells (see `## MVP Application` below)
 
 ## TL;DR
@@ -15,7 +15,7 @@ The differential fits a single 2-D curve on the union of the yubiOS skill corpus
 
 - **Skill-only cells (25):** yubiOS skills whose primitive coverage doesn't match any self-doc item. The agent's self-documentation is structurally silent about a capability it has.
 - **Selfdoc-only cells (50):** self-doc items (audit trails, memory sections, self-mode entries) that describe capabilities or states without a corresponding yubiOS skill.
-- **Jointly-occupied cells (0 at r=0.05):** alignment anchors â items from both corpora that share primitive coverage.
+- **Jointly-occupied cells (0 at r=0.05):** alignment anchors — items from both corpora that share primitive coverage.
 
 The skill-only cells are the actionable land-grab signal: the agent has capabilities that the agent-being doesn't document. Closing this gap means each isolated skill gets a self-archaeology dispatch that returns a candidate SELF-CHANGELOG entry or memory-file section.
 
@@ -23,14 +23,14 @@ The skill-only cells are the actionable land-grab signal: the agent has capabili
 
 V3 wins over the other 5 variations:
 
-- **V1 (Cross-Corpus Gap Detection, Constraint removal) â 16/20, dropped:** the differential's sparse-cell detector already does this. V3 makes it actionable.
-- **V2 (Skill Acquisition Prioritization, Audience shift) â 13/20, dropped:** downstream of V3 â once you have a new skill, V2 helps you find the closest self-doc item.
-- **V3 (Skill Land-Grab Detection, Combination) â 18/20, WINNER:** combines the parent's sparse-cell detection with the offshoot's per-corpus dispatch into a bidirectional gap-fill.
-- **V4 (Joint-Anchor Alignment Audit, Inversion) â 12/20, dropped:** verification only â doesn't generate items, just checks existing ones.
-- **V5 (Inverse Protocol Verification, Inversion) â 9/20, dropped:** too narrow â restful-self â curve-guided-rsi-self anti-correlation.
-- **V6 (System Coherence Score, Simplification) â 12/20, dropped:** lossy â collapses structural detail into a single number.
+- **V1 (Cross-Corpus Gap Detection, Constraint removal) — 16/20, dropped:** the differential's sparse-cell detector already does this. V3 makes it actionable.
+- **V2 (Skill Acquisition Prioritization, Audience shift) — 13/20, dropped:** downstream of V3 — once you have a new skill, V2 helps you find the closest self-doc item.
+- **V3 (Skill Land-Grab Detection, Combination) — 18/20, WINNER:** combines the parent's sparse-cell detection with the offshoot's per-corpus dispatch into a bidirectional gap-fill.
+- **V4 (Joint-Anchor Alignment Audit, Inversion) — 12/20, dropped:** verification only — doesn't generate items, just checks existing ones.
+- **V5 (Inverse Protocol Verification, Inversion) — 9/20, dropped:** too narrow — restful-self ↔ curve-guided-rsi-self anti-correlation.
+- **V6 (System Coherence Score, Simplification) — 12/20, dropped:** lossy — collapses structural detail into a single number.
 
-V3's defensibility is high (the gap-list shrinks over RSI cycles; the Jaccard overlap grows from 0.074 toward â¥ 0.20). V3's testability is high (re-fit is cheap; comparison is direct via the existing differential pipeline).
+V3's defensibility is high (the gap-list shrinks over RSI cycles; the Jaccard overlap grows from 0.074 toward ≥ 0.20). V3's testability is high (re-fit is cheap; comparison is direct via the existing differential pipeline).
 
 ## MVP Application: top-5 skill-only cells
 
@@ -38,7 +38,7 @@ The differential's skill-only cells (25 total) at lowest-v (most structurally un
 
 | Skill | (u, v) | Notes |
 |---|---|---|
-| `internal-big-picture` | (-2.121, 0.569) | The 10-primitive basis itself â defines what "primitive coverage" means across all corpora. |
+| `internal-big-picture` | (-2.121, 0.569) | The 10-primitive basis itself — defines what "primitive coverage" means across all corpora. |
 | `curve-guided-rsi-self` | (-2.121, 0.569) | The offshoot that produced the self-doc corpus fit. |
 | `dm-verity-and-integrity` | (-2.121, 0.569) | yubiOS skill with no self-doc counterpart in the differential. |
 | `audit-evidence-packaging` | (-2.052, 0.519) | Skill that bundles attestation evidence; structurally isolated from self-doc. |
@@ -50,7 +50,7 @@ For each, a structural-uniqueness SELF-CHANGELOG entry is added noting:
 - The reference to the differential baseline as the audit substrate
 - The implicit "what self-doc item would close this gap" question
 
-This is the MVP scope: 5 entries, 1 cycle, target gap-list shrinkage â¥ 30%.
+This is the MVP scope: 5 entries, 1 cycle, target gap-list shrinkage ≥ 30%.
 
 ## Verification
 
@@ -58,15 +58,15 @@ This is the MVP scope: 5 entries, 1 cycle, target gap-list shrinkage â¥ 30%.
 - [ ] Each cell has a structural-uniqueness SELF-CHANGELOG entry
 - [ ] Each entry references the differential baseline at `refs/curve-guided-rsi-and-self-differential-2026-08-04.md`
 - [ ] Each entry's primitive coverage is computed and recorded
-- [ ] Re-fit (v4 differential) shows gap-list shrinkage â¥ 30% OR migration to lower-frequency regions
+- [ ] Re-fit (v4 differential) shows gap-list shrinkage ≥ 30% OR migration to lower-frequency regions
 - [ ] The full improvement run (RSI Cycle 3 across all memory files) closes the remaining sparse cells
 
 ## Key assumptions to validate
 
 - The skill-only cells are real gaps, not artifacts of the curve fit. **Test:** dispatch 5 fresh-context subagents, each on one skill-only cell, asking "does any self-doc item reference this skill or its capability?"
 - The selfdoc-only cells correspond to real agent states without skill backing. **Test:** dispatch 5 fresh-context subagents, each on one selfdoc-only cell, asking "does any yubiOS skill cover this capability or state?"
-- The gap-list shrinks over RSI cycles. **Testable bet:** gap-list shrinks by â¥ 30% in one RSI cycle.
-- The Jaccard overlap (currently 0.074) grows over RSI cycles. **Testable bet:** Jaccard grows to â¥ 0.20 in one RSI cycle.
+- The gap-list shrinks over RSI cycles. **Testable bet:** gap-list shrinks by ≥ 30% in one RSI cycle.
+- The Jaccard overlap (currently 0.074) grows over RSI cycles. **Testable bet:** Jaccard grows to ≥ 0.20 in one RSI cycle.
 
 ## Open questions
 
@@ -118,4 +118,4 @@ This document applies the yubiOS segmentation primitive — Linux namespaces, cg
 **Scope**: TBD.
 **Out of scope**: TBD.
 
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.4966). TODO: refine per file context.
+Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.4966).
