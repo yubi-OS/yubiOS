@@ -2,21 +2,111 @@
   "file": "papers/data/lean/RayleighBounds.lean",
   "version": "rayleigh/1",
   "theorems": [
-    "Rayleigh.sq_nonneg",
-    "Rayleigh.quad_nonneg",
-    "Rayleigh.quad_const",
-    "Rayleigh.quad_shift",
-    "Rayleigh.sq_mul",
-    "Rayleigh.quad_scale",
-    "Rayleigh.ind_sq_diff",
-    "Rayleigh.quad_indicator",
-    "Rayleigh.edgeCut_singleton_untouched",
-    "Rayleigh.cut_singleton_untouched",
-    "Rayleigh.quad_no_incident",
-    "Rayleigh.witness_numerator",
-    "Rayleigh.witness_denominator",
-    "Rayleigh.rr_path_example",
-    "Rayleigh.rr_path_quad"
+    {
+      "name": "Rayleigh.sq_nonneg",
+      "status": "lean-proved",
+      "statement": "0 <= a*a for every Int a",
+      "runtime_counterpart": "float Fiedler estimate is compared against exact quotients; PSD is why x\u1d40Lx \u2265 0",
+      "runtime_predicate": "graphRayleigh reports nonnegative quadratic forms"
+    },
+    {
+      "name": "Rayleigh.quad_nonneg",
+      "status": "lean-proved",
+      "statement": "quad edges x >= 0 (Laplacian quadratic form is PSD)",
+      "runtime_counterpart": "lib/rayleigh.mjs laplacianQuadratic",
+      "runtime_predicate": "every quad value reported is >= 0"
+    },
+    {
+      "name": "Rayleigh.quad_const",
+      "status": "lean-proved",
+      "statement": "quad edges (fun _ => c) = 0 (constants are in the kernel)",
+      "runtime_counterpart": "graphRayleigh.exact.quadratic_form_of_constant",
+      "runtime_predicate": "quadratic_form_of_constant == 0"
+    },
+    {
+      "name": "Rayleigh.quad_shift",
+      "status": "lean-proved",
+      "statement": "quad edges (x + b) = quad edges x",
+      "runtime_counterpart": "witness_numerator derivation",
+      "runtime_predicate": "centering a vector does not change x\u1d40Lx"
+    },
+    {
+      "name": "Rayleigh.sq_mul",
+      "status": "lean-proved",
+      "statement": "c*a*(c*a) = c*c*(a*a)",
+      "runtime_counterpart": "algebra for quad_scale",
+      "runtime_predicate": "\u2014"
+    },
+    {
+      "name": "Rayleigh.quad_scale",
+      "status": "lean-proved",
+      "statement": "quad edges (c*x) = c*c*quad edges x",
+      "runtime_counterpart": "witness_numerator derivation",
+      "runtime_predicate": "scaling a vector scales x\u1d40Lx by c\u00b2"
+    },
+    {
+      "name": "Rayleigh.ind_sq_diff",
+      "status": "lean-proved",
+      "statement": "(1_S a \u2212 1_S b)\u00b2 = edgeCut S a b",
+      "runtime_counterpart": "cut counting in cutWitness",
+      "runtime_predicate": "per-edge term of an indicator is 0 or 1"
+    },
+    {
+      "name": "Rayleigh.quad_indicator",
+      "status": "lean-proved",
+      "statement": "quad edges (1_S) = cut edges S",
+      "runtime_counterpart": "cutWitness.cut",
+      "runtime_predicate": "x\u1d40Lx of a 0/1 indicator equals the number of cut edges"
+    },
+    {
+      "name": "Rayleigh.edgeCut_singleton_untouched",
+      "status": "lean-proved",
+      "statement": "edge not touching v has edgeCut [v] = 0",
+      "runtime_counterpart": "isolate handling",
+      "runtime_predicate": "\u2014"
+    },
+    {
+      "name": "Rayleigh.cut_singleton_untouched",
+      "status": "lean-proved",
+      "statement": "no edge touches v \u21d2 cut edges [v] = 0",
+      "runtime_counterpart": "graphRayleigh.exact.isolates",
+      "runtime_predicate": "an isolated vertex has no cut edges"
+    },
+    {
+      "name": "Rayleigh.quad_no_incident",
+      "status": "lean-proved",
+      "statement": "no edge touches v \u21d2 quad edges (1_{v}) = 0 (isolated vertex indicator is in the kernel)",
+      "runtime_counterpart": "graphRayleigh.exact.nullity_identity (stated)",
+      "runtime_predicate": "isolates contribute zero eigenvalues"
+    },
+    {
+      "name": "Rayleigh.witness_numerator",
+      "status": "lean-proved",
+      "statement": "x = n\u00b71_S \u2212 k\u00b71 \u21d2 quad edges x = n\u00b2\u00b7cut edges S",
+      "runtime_counterpart": "cutWitness.quotient numerator",
+      "runtime_predicate": "numerator of the exact rational Rayleigh\u2013Ritz witness"
+    },
+    {
+      "name": "Rayleigh.witness_denominator",
+      "status": "lean-proved",
+      "statement": "k(n\u2212k)\u00b2 + (n\u2212k)k\u00b2 = n\u00b7k\u00b7(n\u2212k)",
+      "runtime_counterpart": "cutWitness.quotient denominator (\u2016x\u2016\u00b2 for |S|=k)",
+      "runtime_predicate": "denominator of the exact rational Rayleigh\u2013Ritz witness"
+    },
+    {
+      "name": "Rayleigh.rr_path_example",
+      "status": "lean-proved",
+      "statement": "8-vertex path, S={0,1,2,3}: cut=1 and 8\u00b71\u00b72 = 4\u00b7(8\u22124) (witness 1/2)",
+      "runtime_counterpart": "test-rayleigh.mjs path-graph check (fiedler 2(1\u2212cos \u03c0/8) \u2264 1/2)",
+      "runtime_predicate": "decide instance"
+    },
+    {
+      "name": "Rayleigh.rr_path_quad",
+      "status": "lean-proved",
+      "statement": "quad path8 (1_{0..3}) = 1",
+      "runtime_counterpart": "test-rayleigh.mjs",
+      "runtime_predicate": "decide instance"
+    }
   ],
   "permitted_axioms": [
     "propext",
