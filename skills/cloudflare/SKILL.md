@@ -246,3 +246,14 @@ Need IaC? → pulumi/ (Pulumi), terraform/ (Terraform), or api/ (REST API)
 | Static Assets | `references/static-assets/` |
 | Bindings | `references/bindings/` |
 | Cache Reserve | `references/cache-reserve/` |
+
+## Examples
+
+**In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, Quick Decision Trees, "I need feature flags", "I need to run code".
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Fetch the **latest** information before citing specific numbers, API signatures, or configuration options. Do not rely on baked-in knowledge or these reference files alone.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

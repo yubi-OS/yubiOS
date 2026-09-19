@@ -920,3 +920,21 @@ wrangler docs configuration
 7. **Test locally first**: `wrangler dev` with local bindings before deploying.
 8. **Use `--dry-run` before major deploys**: Validate changes without deployment.
 9. **Never embed secrets in commands**: Use interactive prompts (`wrangler secret put`), file-based input (`wrangler secret bulk`), or secure CI environment variables. Never echo, log, or pass secret values as CLI arguments.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Use `wrangler.jsonc`**: Prefer JSON config over TOML. Newer features are JSON-only.
+- Set `compatibility_date`**: Use a recent date (within 30 days). Check https://developers.cloudflare.com/workers/configuration/compatibility-dates/
+- Generate types after config changes**: Run `wrangler types` to update TypeScript bindings.
+- Local dev defaults to local storage**: Bindings use local simulation unless `remote: true`.
+
+**In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, FIRST: Check if Wrangler is installed, and if not, install it, Key Guidelines, Quick Start: New Worker.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Fetch the **latest** information before writing or reviewing Wrangler commands and config. Do not rely on baked-in knowledge for CLI flags, config fields, or binding shapes.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

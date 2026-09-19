@@ -209,3 +209,21 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Load the raw idea.** Restate it as a one-sentence problem statement. If you can't write that sentence, the intent is unclear — escalate (use interview-me, or surface to the user).
+- Check the scope class.** Systemic idea (policy, platform, architecture) → generate 5-8 variations across all five lenses. Atomic idea (one-line feature, bug fix) → 2-3 variations from Simplification lens only. Adjust scale; the default 5-8 is for product-shaped ideas of medium scope.
+- Generate 5-8 variations** across five autonomous lenses. Apply each lens independently; do not blend lenses in a single variation.
+- Inversion.** What is the opposite of this idea? What would the world look like if we did the inverse? Surface the structural assumption the inversion breaks.
+
+**In-repo touchpoints** — sections this skill owns or extends: Philosophy, When to Use, The Process, The Output.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Read-only.** This skill produces documents, not external side effects. Do not call tools that write to external systems.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

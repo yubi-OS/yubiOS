@@ -388,3 +388,22 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `attestation` primitive
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Inlining too aggressively** — removing a helper that gave a concept a name makes the call site harder to read
+- Combining unrelated logic** — two simple functions merged into one complex function is not simpler
+- Removing "unnecessary" abstraction** — some abstractions exist for extensibility or testability, not complexity
+- Optimizing for line count** — fewer lines is not the goal; easier comprehension is
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, The Five Principles, 1. Preserve Behavior Exactly.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't change what the code does — only how it expresses it. All inputs, outputs, side effects, error behavior, and edge cases must remain identical. If you're not sure a simplification preserves behavior, don't make it.
+2. | "This abstraction might be useful later" | Don't preserve speculative abstractions. If it's not used now, it's complexity without value. Remove it and re-add when needed. |
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

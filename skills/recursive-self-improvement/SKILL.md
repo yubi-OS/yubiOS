@@ -480,3 +480,23 @@ Declarative policy relevance: schema-driven specification, config-as-code, and p
 This skill's bounded RSI loop is the per-cycle mechanism that drives both `curve-guided-rsi`'s Stage 4 and `single-action-curve-rsi`'s single-action cycle. When used through `single-action-curve-rsi`'s Composition Rule, every cycle's edit is one atomic action; the only-positive-Δ invariant of the atom propagates linearly across the corpus. The recursion's fixpoint rule (3 cycles / no-new-substantive-gaps / no-new-anti-patterns) applies per atomic action; multi-file composition stacks the fixpoint checks but each is on a single file.
 
 The stochastic RSI extensions introduced in cycle 5 compose with the Composition Rule by making the *prioritization signal* (which clusters to attack) and the *traversal order* (which corpus item next) stochastic. The atomic action itself remains deterministic — the curve-fit → primitive-flip → argmin Δ → verify-Δ-≥0 pipeline is unchanged. The extensions only modify WHAT and IN WHAT ORDER; the per-action Δ ≥ 0 invariant (Lemma 1) is preserved because the constraint set remains a subset of "all missing primitives" (Theorem 1 input condition).
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Use a fresh-context subagent (`context-isolation`) for every cycle in
+- Edited SKILL.md** — the real change.
+- One changelog line** appended to the skill's `## Changelog` section.
+- A fixpoint or "continue" verdict** — explicit, not implied.
+
+**In-repo touchpoints** — sections this skill owns or extends: Edit Taxonomy, Modes, Improvement mode (default), Self-mode.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't loop on hypotheses the user would reject.
+2. Don't re-read SKILL.md end-to-end after every edit when a targeted
+3. supplement, NEVER as a substitute for the subagent requirement
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

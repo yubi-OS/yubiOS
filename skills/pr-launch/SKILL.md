@@ -290,3 +290,25 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `attestation` primitive
 This skill already covers all 5 remaining MOVABLE corpus-priority primitives post-cycle-6 (attestation, trust chain, declarative policy, immutability, least privilege). The cycle-7 RSI audit verified full movable coverage; no primitive closure needed.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to close.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Technical** — Linux engineers, security researchers, homelab operators, corporate Linux admins. Channels: HN, LWN.net, r/linux, r/netsec, r/linuxhardware, Phoronix, The Register, Lobste.rs
+- General** — Privacy-conscious users tired of vendor lock-in, people who own YubiKeys and don't know this is possible, hardware enthusiasts. Channels: r/privacy, r/hardware, broader tech press (Ars Technica, Wired), product-focused newsletters
+- README audit** — ensure it answers the 4 questions every first-time reader has:
+- Asset creation** (see templates below):
+
+**In-repo touchpoints** — sections this skill owns or extends: When to Use, Project Context: yubios, Launch Phases, Phase 0: Pre-Launch Prep (2-3 days before).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't cross-post to 5 subreddits at once.** Stagger by 30-60 minutes. Mods notice.
+2. Don't lead with features.** Lead with the problem (TPM lock-in, OEM opacity) then show the solution.
+3. Don't write for everyone.** The technical post assumes they know what FIDO2 is. The general post doesn't. Same project, different story.
+4. Don't disappear after posting.** The first 2-4 hours of comments are where launches live or die.
+5. Don't use "revolutionary," "game-changing," "novel."** Signals insecurity. Let the tech speak.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

@@ -162,3 +162,20 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Production yubiOS**: kernel ≥ 6.12 (full composefs feature set, EROFS where applicable)
+- Long-term-support (LTS) yubiOS**: kernel ≥ 6.6 (data-only OverlayFS + `verity=require`, no EROFS)
+- Experimental / pre-release**: kernel ≥ 6.5 (data-only OverlayFS only; no signed-catalog enforcement)
+- Pinning a kernel < 6.5 for "stability"** — composefs is the yubiOS load-bearing invariant; a kernel < 6.5 silently disables it. The "stability" gain is a fiction (the composefs feature has been stable since 6.5).
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Why these floors, Kernel ≥ 6.5 — Data-only OverlayFS.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

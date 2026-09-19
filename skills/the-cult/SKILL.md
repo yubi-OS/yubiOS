@@ -1,6 +1,6 @@
 ---
 name: the-cult
-description: >-
+description: )-
   File-based multi-agent orchestration for yubiOS work. The "cult leader" is the
   orchestrator: it gathers arriving agents ("followers"), reads the roster, and
   hands out yubiOS tasks through plain files in the GET_TO_WORK folder. Use this
@@ -196,3 +196,24 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 ## Declarative policy coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Pulpit lock**: `mkdir .pulpit.lock` succeeds for exactly one writer and fails for
+- Slot claim**: a follower creates `FOLLOWER_N.md` with bash noclobber, so two
+- One-task-one-slot guard**: `assign N "task"` refuses (exit 1, `ASSIGNED-ELSEWHERE`) if the
+- Don't assign from a stale PULPIT.** Before any assignment pass (step 5), verify the PULPIT task pool in `CULT_LEADER.md` reflects the live `github.com/yubi-OS/yubiOS` repo state. If `BLOCKERS.md` was reviewed today, re-verify PULPIT on that day, not last week's snapshot. If a task's PR, digest, or blocker can't be verified against the live repo, don't assign it — queue it for re-verification or drop it. A stale PULPIT silently routes followers at work that no longer exists.
+
+**In-repo touchpoints** — sections this skill owns or extends: The meeting ground, The lockfile method (read this once), When NOT to use, Running a sermon — step by step.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't run solo.** `cult.sh gather` needs at least one follower to unblock; if no follower shows up within `MAXWAIT_SECONDS=570`, this skill has no role to play — bring up `the-follower` first or stop.
+2. Don't schedule it.** This is live interactive orchestration, not a batch job. The `cult-poll` schedule was deleted 2026-06-25 for that reason (PROJECT_RULES.md "Managing schedules (cron tasks)"). There is no scheduled variant.
+3. Respect the merge order.** BLOCKERS.md defines a dependency chain. Don't assign a
+4. Never touch CI.** Don't edit `.github/workflows/`, don't push workflow files
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

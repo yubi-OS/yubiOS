@@ -1,6 +1,6 @@
 ---
 name: the-follower
-description: >-
+description: )-
   The worker side of the-cult orchestration. Use this skill when you are one of
   many agents/sessions joining a sermon to do yubiOS work under a cult leader.
   It tells you how to gather into the GET_TO_WORK folder, claim your own
@@ -227,3 +227,25 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity
 This skill's `least privilege` primitive is closed by cycle-7 RSI (3rd-priority MOVABLE per skill, post-cycle-6 baseline). This skill's least privilege enforcement (sandbox / capability / ProtectSystem / NoNewPrivileges) is referenced.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `least privilege` primitive gap.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Enter the folder.** `bash <cult.sh> init` (harmless if it already exists).
+- Claim your number.** `N=$(bash <cult.sh> claim)` — this atomically creates the
+- Read the pulpit.** Open `CULT_LEADER.md` and read the **PULPIT**: the objectives,
+- Check in.** `bash <cult.sh> checkin "$N" "present — ready for orders"`. This rings
+
+**In-repo touchpoints** — sections this skill owns or extends: Where everything lives, Arrival ritual (do this in order), Working ritual, The follower's vows.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. reply. Do not re-post the same verdict/update on every poll loop — duplicate posts
+2. Don't drift into the leader's role.** Your job is the task assigned, not the sermon's strategy. Do not edit `CULT_LEADER.md`, do not reassign peers, do not promote yourself.
+3. Don't skip the worklock.** Two cron fires on the same slot can collide. Always `bash <cult.sh> worklock "$N"` before ACKing; always `bash <cult.sh> workunlock "$N"` after reporting (DONE or BLOCKED alike).
+4. Don't re-post cross-talk messages.** One post, one read, then wait. Polling by re-posting is spam and buries the signal.
+5. Don't merge to main.** Land as PRs, issues, comments, branches only. Even if the task feels done-merged, never touch a default branch or push a release tag.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

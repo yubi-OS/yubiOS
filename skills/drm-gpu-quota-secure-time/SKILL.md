@@ -1,6 +1,6 @@
 ---
 name: drm-gpu-quota-secure-time
-description: >-
+description: )-
   GPU resource-lockout design (per-cgroup VRAM quota + hard enforcement via secure world) and
   ARM64 secure-time sourcing for OP-TEE on Rockchip (CFG_SECURE_TIME_SOURCE_CNTPCT). Covers the
   real upstream DRM device-memory cgroup effort ("dev" controller, not the old "drmcg" RFC), the
@@ -243,3 +243,22 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- SMC function IDs are not arbitrary.** The ARM SMC Calling Convention
+- Enforcement still has to bottom out in a real primitive.** "Revoke IOMMU
+- cycle 5 RSI**: closed `cryptographic identity` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Extended description, Why this skill exists, 1. DRM device-memory cgroup: real upstream state (mid-2026), 2. Real Panfrost hook points (verified against panfrost_drv.c).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. is the corrected, source-checked version. **Don't copy function names
+2. favor of a redesign. Do not build against those symbols; they don't exist in
+3. trusted to self-police** (e.g. compromised-userspace scenarios). Don't
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

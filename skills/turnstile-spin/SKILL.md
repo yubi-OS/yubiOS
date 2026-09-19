@@ -328,3 +328,25 @@ Edge cases to surface to the user:
 | Token expired mid-flow                         | Stop, re-run `scripts/auth-probe.sh`, prompt for fresh credentials                                                                                                                                                                    |
 | Validation returns `invalid-input-secret`      | The secret didn't reach the backend. Re-check `TURNSTILE_SECRET` in the customer's env / secret manager. If it's a Workers backend, run `wrangler secret list` to confirm the secret is bound to the right script.                    |
 | Validation returns `invalid-input-response`    | Expected for a dummy probe token; that means the secret IS valid. validate.sh treats this as success.                                                                                                                                 |
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Brief acknowledge.** One sentence: "I'll run Turnstile setup end to end. That's: check auth, scan the codebase, create the widget, embed it where visitor requests need verification, wire server-side siteverify, validate. Proceed?" **[wait for user]** Do NOT present a plan yet. Auth + scan come first.
+- CLI check.** Spin's helper scripts use `curl` against `api.cloudflare.com`. Account enumeration requires either an explicit `$CLOUDFLARE_ACCOUNT_ID` or a user-approved canonical absolute `WRANGLER_BIN` outside the project with exact `WRANGLER_VERSION`. Never use `npx`, `pnpm exec`, a package script, a project-local binary, or an unapproved executable for a credential-bearing command. Never install Wrangler automatically during the flow.
+- Auth + scope probe (FIRST irreversible action).** Run `scripts/auth-probe.sh`. If account enumeration needs Wrangler, set `PROJECT_ROOT`, approved canonical `WRANGLER_BIN`, and exact `WRANGLER_VERSION` first. Branch on `status`:
+- Export + relaunch** (token enters neither chat nor shell history): `read -rsp 'Cloudflare API token: ' token; echo; export CLOUDFLARE_API_TOKEN="$token"; unset token`, then restart the agent from that terminal.
+
+**In-repo touchpoints** — sections this skill owns or extends: When to load this skill, Choose the flow before responding, Conversation flow, Things you must NOT do.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Do not load for unrelated Cloudflare tasks (Workers, Pages, R2, etc.) unless Turnstile is also mentioned.
+2. Do not ask the user to paste the API token into chat. When auth is established, re-run `auth-probe.sh` and resume from Step 4.
+3. `network_failure`: the probe could not reach `api.cloudflare.com`. Show the diagnostic (VPN/proxy, TLS interception, DNS). Do not treat this as a scope problem. Ask the user to fix connectivity, then re-run `auth-probe.sh`.
+4. `upstream_failure`: the API returned an unexpected response (`http_code` non-4xx). Do not assume the token is bad. Show the code, ask the user to retry after a brief wait, and re-run `auth-probe.sh`.
+5. Do not write the Turnstile secret to disk except as part of the user's own env / secret store.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

@@ -219,3 +219,20 @@ function App() {
 - **[references/voice.md](references/voice.md)** — `@cloudflare/voice` STT/TTS
 - **[references/codemode.md](references/codemode.md)** — Code Mode for tool orchestration
 - **[references/browse-the-web.md](references/browse-the-web.md)** — CDP browser tools
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Persistent state** — SQLite-backed, auto-synced to clients via `setState`
+- Callable RPC** — `@callable()` methods invoked over WebSocket
+- Scheduling** — One-time, recurring (`scheduleEvery`), and cron tasks
+- Workflows** — Durable multi-step background processing via `AgentWorkflow`
+
+**In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, Capabilities, FIRST: Verify Installation, Wrangler Configuration.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

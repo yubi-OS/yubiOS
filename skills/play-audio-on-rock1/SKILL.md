@@ -146,3 +146,24 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Cryptographic identity coverage
 
 This skill manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Mono→stereo expansion**: `hw:1,0` rejects mono. The player expands each mono sample to L=R stereo on the fly. Generate stereo PCM directly (`output_format=pcm_22050` is mono; pass `--in-channels 2` if you have stereo input).
+- sudo vs audio group**: shant isn't in the audio group on rock1 by default. Either `sudo usermod -aG audio shant` (then restart the bridge to pick up the new group) or use `sudo -n` (root bypasses group via `CAP_DAC_OVERRIDE`).
+- Mixer state is in-memory**: ES8316 driver state resets on reboot. Run `sudo alsactl store -f /var/lib/alsa/asound.state` to persist.
+- The "DAC at 0% but audio plays" quirk**: ES8316 auto-enables the I2S→DAC→HP path on `snd_pcm_open`, ignoring muted-mixer state until something else changes it. Playback works even when mixer controls report off — `set_mixer.py` forces them on so the path stays alive across `snd_pcm_close`.
+
+**In-repo touchpoints** — sections this skill owns or extends: Why this exists, Audio hardware on rock1, Quick start, 1. Generate a clip (Sauna side).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't apt install alsa-utils** unless you need it persistently. The ctypes path works without it; saves 30s+ per install round-trip.
+2. Don't send the full PCM as one argv** — chunk into base64 ≤ ~60KB each so the bridge stays under any practical argv limit.
+3. Don't trust the "DAC at 0%" reading alone** — the ES8316 driver ignores the muted state until you actually play. Run `set_mixer.py` to force-on before relying on `aplay`-style usage.
+4. Don't tee player stdout with `%s`** — use `printf '...\n'` (or `printf '%b'` if you need `\n` interpreted). `%s` will print literal `\n` to the UART.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

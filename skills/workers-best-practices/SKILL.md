@@ -2,6 +2,7 @@
 name: workers-best-practices
 description: Reviews and authors Cloudflare Workers code against production best practices. Load when writing new Workers, reviewing Worker code, configuring wrangler.jsonc, or checking for common Workers anti-patterns (streaming, floating promises, global state, secrets, bindings, observability). Biases towards retrieval from Cloudflare docs over pre-trained knowledge.
 ---
+# Fetch latest workers types
 
 Your knowledge of Cloudflare Workers APIs, types, and configuration may be outdated. **Prefer retrieval over pre-training** for any Workers code task — writing or reviewing.
 
@@ -21,7 +22,6 @@ Fetch the **latest** versions before writing or reviewing Workers code. Do not r
 Before reviewing or writing Workers code, retrieve the current best practices page and relevant type definitions. If the project's `node_modules` has an older version, **prefer the latest published version**.
 
 ```bash
-# Fetch latest workers types
 mkdir -p /tmp/workers-types-latest && \
   npm pack @cloudflare/workers-types --pack-destination /tmp/workers-types-latest && \
   tar -xzf /tmp/workers-types-latest/cloudflare-workers-types-*.tgz -C /tmp/workers-types-latest
@@ -125,3 +125,21 @@ This skill covers Workers-specific best practices and code review. For related t
 - **Provide evidence.** Reference line numbers, tool output, or docs links.
 - **Focus on what developers will copy.** Workers code in examples and docs gets pasted into production.
 - **Correctness over completeness.** A concise example that works beats a comprehensive one with errors.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Retrieve** — fetch latest best practices page, workers types, and wrangler schema
+- Read full files** — not just diffs; context matters for binding access patterns
+- Check types** — binding access, handler signatures, no `any`, no unsafe casts (see `references/review.md`)
+- Check config** — compatibility_date, nodejs_compat, observability, secrets, binding-code consistency
+
+**In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, FIRST: Fetch Latest References, Reference Documentation, Rules Quick Reference.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Fetch the **latest** versions before writing or reviewing Workers code. Do not rely on baked-in knowledge for API signatures, config fields, or binding shapes.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

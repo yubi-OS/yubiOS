@@ -282,3 +282,20 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- `idea-refine`**: downstream. If the confirmed intent is "I want X but I don't know how to scope it," hand off to `idea-refine` to generate variations against the now-explicit intent.
+- `spec-driven-development`**: downstream. If the confirmed intent is concrete ("I want X for Y users with Z success criteria"), hand off to `spec-driven-development` to write it down.
+- `planning-and-task-breakdown`**: two hops downstream of this skill (after the spec).
+- `doubt-driven-development`**: opposite end of the timeline. Interview-me is pre-decision intent extraction; doubt-driven is post-decision artifact review. Both catch divergence, but at different moments.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Loading Constraints, The Process.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

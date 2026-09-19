@@ -273,3 +273,21 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 ## Least-privilege coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- It must be actionable.** If the response is "ignore it, it self-heals", delete the alert.
+- It links to a runbook** — even three lines: what it means, first query to run, escalation path.
+- It has a threshold and duration** justified by the SLO or by historical data, not by a guess.
+- cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Process, 1. Define "working" before instrumenting.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. NEVER a label:  user_id, email, request_id, full URL, error message text
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

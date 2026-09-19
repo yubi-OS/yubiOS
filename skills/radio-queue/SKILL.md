@@ -235,3 +235,25 @@ All scripts are pure bash + standard GNU userland (no Python deps on the device 
 - [`play-audio-on-rock1`](../play-audio-on-rock1/SKILL.md) — parent skill. Provides `play2.py` and `set_mixer.py` at `/tmp/audio/`. This skill *requires* those files; deploy the parent first.
 - [`debug-with-cli`](../debug-with-cli/SKILL.md) — the shell bridge pattern. This skill uses the bridge to *seed* the queue but never for per-song data transfer.
 - `ascii-uart-animator` — same `/dev/ttyS2` banner tee pattern; this skill tees its log lines there so you can watch downloads + playbacks on a serial console.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Ensure `current.pcm` is ready** — if `next.pcm` exists (worker finished during the previous track), atomically swap `next.*` → `current.*` (instant). Otherwise cold-download + transcode.
+- Launch the prequeue worker** for the next URL in `queue.txt` — only if no worker is already running (guarded by `prequeue.lock`). The worker writes `next.webm`, `next.mp3`, `next.pcm` in sequence, then removes the lock.
+- Play `current.pcm`** via `play2.py`, then `rm current.*`. The worker keeps churning on `next.*` — they don't collide.
+- Prequeue eliminates pause between tracks** — in steady state (queue has ≥2 entries), the next track is downloaded + transcoded while the current one plays. The atomic `next.*` → `current.*` swap on track boundary is instant. The cold-start first song still pays the download cost (or any time the prequeue falls behind, e.g. very short clips on slow networks).
+
+**In-repo touchpoints** — sections this skill owns or extends: Why this exists, Architecture, Quick start (one-shot deploy), Recipes.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. `scripts/examples/playlist-classic-rock.md` — sample classic-rock URLs to seed a new queue (Don't Stop Me Now ID was wrong, fixed 2026-08-05 — `HgzGwKwLmgQ` → `HgzGwKwLmgM`)
+2. `scripts/examples/playlist-upbeat-verified.md` — 6 upbeat YouTube IDs verified via yt-dlp 2026-08-05 (Don't Stop Me Now / Walking on Sunshine / Happy / September / I Gotta Feeling / Uptown Funk). New default for "queue something upbeat" requests.
+3. Don't run yt-dlp on Sauna + transfer PCM chunks** — that's the slow path. The whole point of this skill is to keep downloads on-device. Use this skill or extend it; don't bolt yt-dlp onto the parent's chunked-transfer path.
+4. Don't write to `current.*` or `next.*` while the daemon is running** — both paths are scratch files owned by the daemon + prequeue worker. Race conditions are possible.
+5. Don't apt install `alsa-utils`** — the parent skill explicitly avoids this to keep the rock1 box clean. We *do* apt-install `ffmpeg` here because there's no stdlib alternative for audio decoding; that's the one trade-off.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

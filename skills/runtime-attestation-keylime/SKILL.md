@@ -2,6 +2,8 @@
 name: runtime-attestation-keylime
 description: Runtime attestation for yubiOS using Keylime, in-toto, and confidential-containers. The 4-component evidence shape (quote / measurement / evidence bundle / Rekor v2 anchor) shared across the three frameworks. Anchors P0 (attestation) and contributes to P3 (declarative policy) and P6 (audit/evidence).
 ---
+# Runtime Attestation Keylime
+
 ## Changelog
 
 - 2026-08-06 cycle 9: **Initial v1.** New skill created per deep-research Stream 1 §4.3 (corpus enrichment for the 8-cell attestation residual post-cycle-8). Body covers the canonical 4-component evidence shape (quote / measurement / evidence bundle / Rekor v2 anchor) shared across Keylime, in-toto, and confidential-containers. Skill mapped to 10-primitive axes: P0 attestation (primary), P3 declarative policy (the attestation policy itself is declarative), P6 audit/evidence (the bundle is the audit artifact). Frontmatter validated by `js-yaml`. This is the corpus-enrichment addition that closes the 8 attestation closure cells structurally.
@@ -15,3 +17,13 @@ For runtime attestation keylime, the attestation primitive applies as follows: t
 
 Concrete implications for runtime attestation keylime: any change should be reviewed for impact on attestation coverage; gaps in attestation that are attributable to this skill are tracked in the cycle-9 run log at `refs/curve-guided-rsi-v2-cycle9-corpus-enrichment-2026-08-06.md` on `yubi-OS/yubiOS`. The 8 attestation closure cells are: `ci-cd-and-automation` (CI attestation generation), `composefs-kernel-floors` (signed catalog attestation), `incremental-implementation` (test-first discipline producing verification evidence), `performance-optimization` (measurement-based optimization evidence), `planning-and-task-breakdown` (acceptance criteria as attestation), `recursive-self-improvement` (gap-map audit trail), `shipping-and-launch` (production monitoring evidence), `the-cult` (follower check-in attestation). This skill is the corpus-additive anchor that ensures all 8 are well-served.
 - 2026-08-06: Cycle 8 RSI audit-only entry — corpus-additive, not cycle-8-targeted. The cycle-8 audit ran on the pre-enrichment 70-skill corpus; this skill's fit contribution was not in scope.
+
+
+## Examples
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+
+
+## Guidelines
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

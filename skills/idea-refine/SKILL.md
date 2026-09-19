@@ -235,3 +235,25 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Understand & Expand (Divergent):** Restate the idea, ask sharpening questions, and generate variations.
+- Evaluate & Converge:** Cluster ideas, stress-test them, and surface hidden assumptions.
+- Sharpen & Ship:** Produce a concrete markdown one-pager moving work forward.
+- Restate the idea** as a crisp "How Might We" problem statement. This forces clarity on what's actually being solved.
+
+**In-repo touchpoints** — sections this skill owns or extends: How It Works, Usage, Output, Detailed Instructions.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. This is where most ideation fails. Don't skip it.
+2. Don't generate 20+ ideas.** Quality over quantity. 5-8 well-considered variations beat 20 shallow ones.
+3. Don't be a yes-machine.** Push back on weak ideas with specificity and kindness.
+4. Don't skip "who is this for."** Every good idea starts with a person and their problem.
+5. Don't produce a plan without surfacing assumptions.** Untested assumptions are the #1 killer of good ideas.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

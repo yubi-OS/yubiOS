@@ -443,3 +443,20 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 ## Declarative policy coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Ship code without enabling it.** Merge to main early, enable when ready.
+- Roll back without redeploying.** Disable the flag instead of reverting code.
+- Canary new features.** Enable for 1% of users, then 10%, then 100%.
+- Run A/B tests.** Compare behavior with and without the feature.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, The Quality Gate Pipeline, GitHub Actions Configuration.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

@@ -302,3 +302,23 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 ## Declarative policy coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Implement** the smallest complete piece of functionality
+- Test** — run the test suite (or write a test if none exists)
+- Verify** — confirm the slice works as expected (tests pass, build succeeds, manual check)
+- Commit** -- save your progress with a descriptive message (see `git-workflow-and-versioning` for atomic commit guidance)
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, The Increment Cycle, Slicing Strategies.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Each increment changes one logical thing. Don't mix concerns:
+2. After each increment, the project must build and existing tests must pass. Don't leave the codebase in a broken state between slices.
+3. Don't touch the UI yet — we'll do that in the next increment.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

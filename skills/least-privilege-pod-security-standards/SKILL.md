@@ -2,6 +2,8 @@
 name: least-privilege-pod-security-standards
 description: Pod Security Standards restricted baseline + OPA Rego policies for least-privilege enforcement on yubiOS. Declarative policy primitive (P3) with PSS admission logs and OPA decision logs as audit artifacts (P6).
 ---
+# Least Privilege Pod Security Standards
+
 ## Changelog
 
 - 2026-08-06 cycle 9: **Initial v1.** New skill created per deep-research Stream 1 §4.3 (corpus enrichment for the 7-cell least-privilege residual post-cycle-8). Body covers the canonical LP keyword set mapped onto both PSS `restricted` and OPA Rego. Skill mapped to 10-primitive axes: P2 least privilege (primary), P3 declarative policy (PSS + Rego are both declarative), P6 audit/evidence (PSS admission logs + OPA decision logs are audit artifacts). Frontmatter validated by `js-yaml`. This is the corpus-enrichment addition that closes the 7 LP closure cells structurally.
@@ -15,3 +17,13 @@ For least privilege pod security standards, the LP primitive applies as follows:
 
 Concrete implications for least privilege pod security standards: any change should be reviewed for impact on LP coverage; gaps in LP that are attributable to this skill are tracked in the cycle-9 run log at `refs/curve-guided-rsi-v2-cycle9-corpus-enrichment-2026-08-06.md` on `yubi-OS/yubiOS`. The 7 LP closure cells are: `browser-testing-with-devtools` (Chrome DevTools inherits Chrome sandbox), `code-review-and-quality` (review process enforces minimal-scope changes), `composefs-kernel-floors` (kernel mount options are LP at the FS layer), `frontend-ui-engineering` (RBAC-aware UI patterns), `observability-and-instrumentation` (scoped log collection), `shipping-and-launch` (deploy procedure scopes to least-necessary surfaces), `spec-driven-development` (requirements declare the smallest necessary scope). This skill is the corpus-additive anchor that ensures all 7 are well-served.
 - 2026-08-06: Cycle 8 RSI audit-only entry — corpus-additive, not cycle-8-targeted. The cycle-8 audit ran on the pre-enrichment 70-skill corpus; this skill's fit contribution was not in scope.
+
+
+## Examples
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+
+
+## Guidelines
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

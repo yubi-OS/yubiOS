@@ -309,3 +309,22 @@ The skill was applied correctly when:
 - `test-driven-development` — the suite that coverage and mutation constraints measure
 - `security-and-hardening` — what the security dimension should contain
 - `performance-optimization` — where the performance numbers come from
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- `--redact` on gitleaks is not optional.** Without it the matched secret lands in the agent's transcript, which is how a leaked key ends up in a log, a summary, or a commit message. Report the rule and the location, never the value.
+- Lighthouse and axe need a URL.** They only work against a running app, so they belong in the runtime stage against a preview deploy or a local server you start first. If the project has no URL to hit — a CLI, a library, a desktop app — say so and drop the dimension rather than inventing a check that can't run.
+- Scope the expensive ones to the diff.** `stryker run --mutate` on the whole repo takes hours and gets turned off; on the files a change touched it takes under a minute. Same for Semgrep, which takes a path list.
+- Coverage needs no second test run.** Read the lcov your suite already writes and intersect it with `git diff`. Running the suite twice to get a number is the fastest way to make people hate this.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Loading Constraints, The Process.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. The interview needs a live user. **Don't run it in non-interactive contexts** (CI, `/loop`, autonomous runs). If constraints are missing and you're in one of those, apply the Floor below, note that you did, and flag the rest for a human.
+2. Then add one line to `AGENTS.md` and `CLAUDE.md`: `Read CONSTRAINTS.md before writing code. Do not weaken it to make a change pass.`
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

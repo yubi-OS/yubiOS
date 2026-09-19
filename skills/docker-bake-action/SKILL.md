@@ -233,3 +233,20 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Native parallelization**: one runner per platform, no emulation
+- Trusted isolation**: build steps pre-defined by Docker org, can't be tampered with by repo workflow
+- Automatic SLSA signing**: GitHub OIDC token binds provenance to commit + workflow identity
+- Centralized config**: no per-repo buildx/driver setup needed
+
+**In-repo touchpoints** — sections this skill owns or extends: When to use, Action reference, Example bake file (`docker-bake.hcl`), With metadata-action bake file output.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

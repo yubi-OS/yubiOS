@@ -2,6 +2,8 @@
 name: continuous-runtime-detection-falco
 description: Detects runtime security events using Falco rules, Tetragon TracingPolicy, OTel Collector, and Prometheus recording rules. Declarative continuous/adaptive telemetry for yubiOS — provides the audit artifact for primitive P4 and anchors P3 (declarative policy) and P6 (audit/evidence).
 ---
+# Continuous Runtime Detection Falco
+
 ## Changelog
 
 - 2026-08-06 cycle 9: **Initial v1.** New skill created per deep-research Stream 1 §4.3 (corpus enrichment for the 2-cell continuous/adaptive residual post-cycle-8, accepting the structural-gap residual for `composefs-kernel-floors` and `yubikey-operations` per §3.4 recommendation). Body covers the canonical C/A keyword set mapped onto all 4 frameworks. Skill mapped to 10-primitive axes: P4 continuous/adaptive (primary), P3 declarative policy (Falco rules + Tetragon TracingPolicy + OTel Collector config + Prometheus recording rules are all declarative), P6 audit/evidence (the continuous telemetry is the audit artifact). Frontmatter validated by `js-yaml`. This is the corpus-enrichment addition that closes the C/A residual structurally.
@@ -15,3 +17,13 @@ For continuous runtime detection falco, the C/A primitive applies as follows: th
 
 Concrete implications for continuous runtime detection falco: any change should be reviewed for impact on C/A coverage; gaps in C/A that are attributable to this skill are tracked in the cycle-9 run log at `refs/curve-guided-rsi-v2-cycle9-corpus-enrichment-2026-08-06.md` on `yubi-OS/yubiOS`. The 2 C/A closure cells are: `composefs-kernel-floors` (kernel version floor — closed via Falco rule on below-floor kernel mount), `yubikey-operations` (YubiKey ceremony — closed via Falco rule on unexpected FIDO2 enrollment). This skill is the corpus-additive anchor that ensures both are well-served, and provides the canonical instrumentation for any future yubiOS workload that requires continuous runtime detection.
 - 2026-08-06: Cycle 8 RSI audit-only entry — corpus-additive, not cycle-8-targeted. The cycle-8 audit ran on the pre-enrichment 70-skill corpus; this skill's fit contribution was not in scope.
+
+## Examples
+
+**In-repo touchpoints** — sections this skill owns or extends: Changelog, Continuous/adaptive coverage for continuous runtime detection falco (curve-guided-rsi cycle-9 corpus-enrichment edit).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

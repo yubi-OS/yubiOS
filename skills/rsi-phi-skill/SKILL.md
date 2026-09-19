@@ -1,6 +1,6 @@
 ---
 name: rsi-phi-skill
-description: >-
+description: )-
   Recursive self-improvement on the Fibonacci sphere — uses Vogel's golden-angle sphere sampling
   (i = t, so the Fibonacci index IS the parameter) and the native Y_3^3 = K sin³θ · cos(3φ) real
   spherical harmonic as the basis, extended to higher SH degree/order (ℓ=128/m=256 or vice-versa)
@@ -164,3 +164,25 @@ For 384 lobes with `m = 3·k` for `k = 1, …, 128`: the basis is `sin³θ · co
 - **Curve-guided-rsi** (the bounded RSI loop this skill inherits the 3-cycle default cap from).
 - **Parallel-deep-research** (per-cycle subagent dispatch).
 - **Refs corpus** at `yubi-OS/yubiOS/refs/` — primary corpus this skill operates on.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Fibonacci index `i` plays the role of `t`.** Because `φ_i = 2π·i/φ_golden` and `cos θ_i = 1 - (2i+1)/N` are closed-form in `i`, no lookup table is needed — the corpus item at position `i` IS the parameter point on the sphere. This collapses `i → (θ, φ)` into `O(1)`.
+- Native basis `Y_3^3`, extended to `(ℓ, m)` with 384 azimuthal lobes.** `cos(3φ)` is the 3-fold azimuthal probe; `cos(384φ)` = 384-fold (384 = 2⁷·3) is the high-resolution extension that still keeps the `sin³θ` polar factor. The skill's basis is `sin³θ · cos(mφ)` with `m ∈ {3, 128, 256, 384}` — the user tests BOTH orderings `(ℓ=128, m=256)` AND `(ℓ=256, m=128)` and reports which passes the gate.
+- Fibonacci sphere sampling** (`i = t`): `θ_i` and `φ_i` are closed-form in `i`. The Fibonacci index `i` plays a dual role as the corpus index AND as the latent parameter — `t = i/N` survives unchanged.
+- Native basis `Y_3^3`**: real form `K sin³θ cos(3φ)`, Condon-Shortley normalization, 3-fold azimuthal symmetry. The `sin³θ` factor vanishes at the poles and peaks near the equator; `cos(3φ)` folds the 3-fold structure into the embedding.
+
+**In-repo touchpoints** — sections this skill owns or extends: Extended description, When to use, When NOT to use, The math — 3-equation Fibonacci-sphere block.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. MUST** use `φ_golden = (1+√5)/2` for canonical Fibonacci indexing. Don't substitute `π` (Vogel's spiral variant) or `(1+√5)/2 · π` (Saff-Kuijlaars variant) without explicit renaming.
+2. MUST** use Condon-Shortley normalization `K = √(245/(64π))` for `Y_3^3`. Don't drop the phase; this is the standard `dlmf.nist.gov` convention.
+3. MUST NOT** swap `Y_3^3` for another `Y_ℓ^m` without re-deriving the closed-form real part. The `sin³θ · cos(3φ)` factorization is `(ℓ=3, m=3)`-specific.
+4. MUST NOT** apply the Fibonacci sphere to non-orientable surfaces or manifolds with non-trivial topology — `S²` is hard-coded in the projection `Π_{S²}(z) = z / ‖z‖`.
+5. MUST** test BOTH `(ℓ=128, m=256)` AND `(ℓ=256, m=128)` orderings in the cycle's parameterization step. The skill's gate is the higher PC1+PC2 of the two (the sparse-cell signal picks which order loses less information).
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

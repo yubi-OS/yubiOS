@@ -191,3 +191,20 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — no movable primitive gap to cl
 This skill already covers all 5 remaining MOVABLE corpus-priority primitives post-cycle-6 (attestation, trust chain, declarative policy, immutability, least privilege). The cycle-7 RSI audit verified full movable coverage; no primitive closure needed.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to close.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- dm-verity** — block-level Merkle tree verification of /usr at mount time. The block device refuses to mount if any block has been modified.
+- fs-verity** — file-level Merkle tree for individual files. Used for /etc-style configuration files that need per-file signed measurements.
+- composefs** — signed digest catalog that composes multiple /usr overlays (base + sysext + confext) and presents them as a single verified /usr to the kernel.
+- IMA** — Integrity Measurement Architecture. Kernel-measured runtime integrity that extends the boot-time trust chain into userspace.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, dm-verity, How dm-verity works.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

@@ -220,3 +220,22 @@ These were tried or evaluated before settling on the bridge pattern. Document wh
 - **One bridge per target machine.** If the target has multiple "shells" (e.g. different allowlists), run them on different ports. Don't multiplex allowlists via env vars — that's a footgun.
 - **Token rotation cadence:** rotate the Bearer when (a) the Sauna connection is dropped, (b) the target box's Tailscale node is removed/re-added, (c) any team-member with access to the box changes. Rotation = new `openssl rand -hex 32`, update `/etc/rock1-shell.env`, restart the bridge, update the Sauna connection form.
 - **Read the alternatives section before re-evaluating this approach.** If a future session proposes mcp-proxy or Cloudflare Tunnel without checking the auth model, surface this skill as the precedent.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Tailscale**: `curl -fsSL https://tailscale.com/install.sh | sh`. Auth headlessly with a non-ephemeral reusable auth key from `https://login.tailscale.com/admin/settings/keys` — non-ephemeral keeps the node identity stable across reboots (the Funnel URL is tied to the node name; ephemeral nodes would rotate the URL each session).
+- Funnel**: pick a port (8080 is canonical), expose it: `tailscale funnel --bg 8080`. Confirm with `tailscale funnel status`. The public URL is `https://<node-name>.<tailnet-name>.ts.net`.
+- Bridge script**: copy the script below to `/usr/local/bin/rock1-shell-server.py` on the target. `chmod +x`. Stdlib only — no `pip install` required.
+- Bearer token**: `openssl rand -hex 32` — 256 bits of entropy. Store it in `/etc/rock1-shell.env` (`ROCK1_SHELL_TOKEN=<hex>`) so the nohup wrapper picks it up across restarts. Mode 600; never committed to git.
+
+**In-repo touchpoints** — sections this skill owns or extends: Philosophy, When to Use, The Setup, On the target box (one-time, ~2 minutes).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Argv-only by design.** Do not extend the bridge to accept shell strings. If a caller needs pipes or `&&`, they pass `["bash", "-c", "..."]` themselves — and accept the responsibility.
+2. One bridge per target machine.** If the target has multiple "shells" (e.g. different allowlists), run them on different ports. Don't multiplex allowlists via env vars — that's a footgun.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

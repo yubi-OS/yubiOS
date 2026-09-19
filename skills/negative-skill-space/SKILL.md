@@ -2,6 +2,8 @@
 name: negative-skill-space
 description: 12-axis qualitative sweep (Audience, Inputs, Outputs, Mode, Assumption set, Adjacent problems, Failure modes, Lifecycle, Composition, Knowledge sources, Calibration, Recursion) for gap-mapping any skill before recursive-self-improvement cycles. Upstream gap-proposer in the curve-rsi dispatch chain.
 ---
+# Negative Skill Space
+
 ## Role in the Atom-Bound Pipeline (NSS proposes, atom disposes)
 
 As of 2026-08-06 this skill's role in the parent's Stage 3 dispatch is **upstream gap-proposer**, not gap-closer. The dispatch chain is:
@@ -50,3 +52,13 @@ This skill upholds the yubiOS immutability layer — composefs repository, dm-ve
 ## Cryptographic identity coverage
 
 This skill manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
+
+
+## Examples
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+
+
+## Guidelines
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

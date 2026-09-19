@@ -578,3 +578,23 @@ This skill's `declarative policy` primitive is closed by cycle-7 RSI (3rd-priori
 The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `declarative policy` primitive gap.
 - [ ] Personal data is classified, minimized to a stated purpose, and has a retention limit
 - [ ] Deletion and export requests work end-to-end (including backups, caches, and analytics copies)
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Map the trust boundaries.** Where does untrusted data cross into your system? HTTP requests, form fields, file uploads, webhooks, third-party APIs, message queues, and **LLM output** — plus the local values that look internal because the OS handed them to you: another process's command line or environment, filenames on a shared volume, a path in a job payload. Trust follows who *wrote* a value, not which channel delivered it. Every boundary is attack surface.
+- Name the assets.** What's worth stealing or breaking? Credentials, PII, payment data, admin actions, money movement.
+- Run STRIDE over each boundary** — a quick lens, not a ceremony:
+- Write abuse cases next to use cases.** For each feature, ask "how would I misuse this?" — then make that your first test.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Process: Threat Model First, The Three-Tier Boundary System.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. // If you MUST render HTML, sanitize first
+2. // Don't trust the file extension — check magic bytes if critical
+3. Keep secrets and other users' data out of prompts (LLM02 / LLM07).** Anything in the context can be echoed back. Don't put API keys, cross-tenant data, or the full system prompt where the model can repeat it.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

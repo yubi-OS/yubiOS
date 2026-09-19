@@ -262,3 +262,20 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `declarative policy` pr
 ## Trust chain coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Atomic commits per layer.** One logical change per commit; don't mix
+- No long-lived stack branches.** Land the stack or rebase it. A stack that
+- Each layer still must pass CI individually.** Required checks per PR still
+- Jenny merges.** Per the yubiOS doctrine (`never merge to main, no
+
+**In-repo touchpoints** — sections this skill owns or extends: What It Is, When to Use, Mechanics, CLI Extension: github/gh-stack.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

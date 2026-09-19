@@ -1,6 +1,6 @@
 ---
 name: curved-corpus-create
-description: >-
+description: )-
   Generate binary corpora with PRESCRIBED curved structure (planted real spherical-harmonic signal
   on a Fibonacci golden-angle S^2 lattice), matched null corpora (curveball / column-permutation /
   iid), a calibration pack (signal-recovery curve, false-positive rate, detection threshold), and

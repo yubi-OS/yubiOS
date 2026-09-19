@@ -182,4 +182,22 @@ Then day-to-day work uses **`sandbox-next`**.
 - Inventing `gitCheckout`, process stdin, or undocumented APIs  
 - Keeping pre-cutover process/terminal IDs after deploy  
 - Forcing production cutover without user agreement  
-- Putting live secrets in `setEnvVars` / launch `env`  
+- Putting live secrets in `setEnvVars` / launch `env`
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Review** hard rules and the replacement map
+- Audit** the codebase; list hits and target shapes
+- Clarify** with the user (cutover, bridge, Python image, unclear sites)
+- Upgrade** package, image, and code
+
+**In-repo touchpoints** — sections this skill owns or extends: Workflow, Hard rules, Replacement map, Audit.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Do not invent APIs (`gitCheckout` on core, process stdin, string-exec completion helper).
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

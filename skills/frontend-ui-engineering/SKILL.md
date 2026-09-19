@@ -377,3 +377,21 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity
 This skill's `trust chain` primitive is closed by cycle-7 RSI (3rd-priority MOVABLE per skill, post-cycle-6 baseline). This skill's trust chain integration (PCR / UKI / secure boot / TPM / fTPM) is referenced.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive gap.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Component Architecture, File Structure.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Use a consistent spacing scale. Don't invent values:
+2. Don't skip heading levels. Don't use heading styles for non-heading content.
+3. Don't rely solely on color to convey information (use icons, text, or patterns too)
+4. // Don't show blank screens
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

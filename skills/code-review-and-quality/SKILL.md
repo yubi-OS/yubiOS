@@ -442,3 +442,24 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Could this be done in fewer lines?** (1000 lines where 100 suffice is a failure)
+- Are abstractions earning their complexity?** (Don't generalize until the third use case)
+- Is a new conditional bolted onto an unrelated flow?** That's a design smell, not a nit — push the logic into its own helper, state, or policy instead of tangling an existing path.
+- Do repeated conditionals on the same shape appear?** They signal a missing model or dispatcher. A "temporary" branch is usually permanent debt.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, The Five-Axis Review, 1. Correctness.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Are abstractions earning their complexity?** (Don't generalize until the third use case)
+2. Don't leave dead code lying around — it confuses future readers and agents. But don't silently delete things you're not sure about. When in doubt, ask.
+3. Don't rubber-stamp.** "LGTM" without evidence of review helps no one.
+4. Don't soften real issues.** "This might be a minor concern" when it's a bug that will hit production is dishonest.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

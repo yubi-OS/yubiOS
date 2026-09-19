@@ -288,3 +288,21 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Least-privilege coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Single-action discipline** — only one primitive flips per cycle. Multi-flip is the parent's Stage 3, not this skill.
+- Measurable geodesic delta** — every cycle produces `(d_pre, d_post, Δ)` on S² (chordal proxy is fine; great-circle is the principled default when corpus is large enough).
+- Honest cost ranking** — the geodesic-only criterion picks the missing primitive that moves the S² point closest to the ideal pole. The cheapest edit is NOT always the geodesic winner — and the skill reports both.
+- NSS proposes.** `negative-skill-space`'s 12-axis sweep returns a list of real gaps (not performative, not intentional narrow scope) per the `self-archaeology`-derived filter (Extend / Pair / Accept). Only gaps with action recommendation **Extend** enter the atom's constraint set. **Pair** and **Accept** gaps are forwarded to the parent for non-atomic resolution.
+
+**In-repo touchpoints** — sections this skill owns or extends: Philosophy, When to Use, The Model — atom of the 5-stage pipeline, The 9-D Primitive Basis (deep-research reports).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. | p3 | `has_constraint` | `Must`, `Never`, `Cannot`, `ADR-\d+`, `Don't`, `ban` |
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.

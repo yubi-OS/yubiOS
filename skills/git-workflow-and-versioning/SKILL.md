@@ -361,3 +361,23 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Dev branches are costs.** Every day a branch lives, it accumulates merge risk.
+- Release branches are acceptable.** When you need to stabilize a release while main moves forward.
+- Feature flags > long branches.** Prefer deploying incomplete work behind flags rather than keeping it on a branch for weeks.
+- Commit generated files** only if the project expects them (e.g., `package-lock.json`, Prisma migrations)
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Core Principles, Trunk-Based Development (Recommended).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Each successful increment gets its own commit. Don't accumulate large uncommitted changes.
+2. Don't combine formatting changes with behavior changes. Don't combine refactors with features. Each type of change should be a separate commit — and ideally a separate PR:
+3. Don't commit** build output (`dist/`, `.next/`), environment files (`.env`), or IDE config (`.vscode/settings.json` unless shared)
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
