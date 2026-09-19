@@ -34,13 +34,13 @@ Group-routing redesign (no-chain model): the single `group:` choice input decide
 
 | group | workflows dispatched (each independently) | publishes with `Docker_push=true` |
 |---|---|---|
-| `none` | â (no dispatch) | â |
+| `none` | — (no dispatch) | — |
 | `firmware` | `ci_firmware-rk.yml` | firmware bundle |
-| `tests` | `ci_test_rootless-docker.yml`, `ci_test_bootc-filesystem.yml`, `ci_test_pq_tls_verify.yml` | â |
-| `vm-tests` | `ci_test-vm.yml`, `ci_test-vgpu-vm.yml` | â |
-| `fetches` | `fetch-dhi-manifest.yml`, `fetch-fedora-bootc-manifest.yml`, `fetch-released-tag-ref.yml` | â |
+| `tests` | `ci_test_rootless-docker.yml`, `ci_test_bootc-filesystem.yml`, `ci_test_pq_tls_verify.yml` | — |
+| `vm-tests` | `ci_test-vm.yml`, `ci_test-vgpu-vm.yml` | — |
+| `fetches` | `fetch-dhi-manifest.yml`, `fetch-fedora-bootc-manifest.yml`, `fetch-released-tag-ref.yml` | — |
 | `ci-builders` | `yubiOS-ci.yml`, `ci_dev_image.yml`, `ci_mkosi-installer.yml` (firmware is its own group) | production + dev + installer |
-| `forks` | `ci_fork_mkosi.yml`, `ci_fork_bcvk.yml`, `ci_fork_arm-trusted-firmware.yml`, `ci_fork_optee-os.yml`, `ci_fork_ms-tpm-20-ref.yml`, `ci_fork_optee-ftpm.yml`, `ci_fork_u-boot.yml`, `ci_fork_edk2.yml` | â |
+| `forks` | `ci_fork_mkosi.yml`, `ci_fork_bcvk.yml`, `ci_fork_arm-trusted-firmware.yml`, `ci_fork_optee-os.yml`, `ci_fork_ms-tpm-20-ref.yml`, `ci_fork_optee-ftpm.yml`, `ci_fork_u-boot.yml`, `ci_fork_edk2.yml` | — |
 | `all` | union of firmware, tests, vm-tests, fetches, ci-builders, forks | firmware, production, dev, installer |
 
 ```mermaid
@@ -299,29 +299,29 @@ sequenceDiagram
 The exact dispatch order is defined by the state-machine graph above. The detailed job trees below are grouped by lane for readability. Each job contains every declared `jobs.<job>.steps` entry in execution order. Matrix jobs are shown once; job and step `if` conditions still determine whether an entry runs for a particular event or matrix leg. GitHub-generated setup and cleanup operations are not declared workflow steps and are omitted.
 
 - Workflow details
-  - [`ci.yml`](../.github/workflows/ci.yml) â workflow: `CI`
-    - Job `dispatch-next` â `Dispatch next workflow from current state`
+  - [`ci.yml`](../.github/workflows/ci.yml) — workflow: `CI`
+    - Job `dispatch-next` — `Dispatch next workflow from current state`
       - Step 1: `Resolve and dispatch next workflow`
-  - [`fetch-dhi-manifest.yml`](../.github/workflows/fetch-dhi-manifest.yml) â workflow: `fetch-dhi-manifest`
-    - Job `fetch` â `fetch`
+  - [`fetch-dhi-manifest.yml`](../.github/workflows/fetch-dhi-manifest.yml) — workflow: `fetch-dhi-manifest`
+    - Job `fetch` — `fetch`
       - Step 1: `Checkout yubiOS for PINNED.md update`
       - Step 2: `Fetch dhi.io Debian base manifest and update pinned refs`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`fetch-fedora-bootc-manifest.yml`](../.github/workflows/fetch-fedora-bootc-manifest.yml) â workflow: `fetch-fedora-bootc-manifest`
-    - Job `fetch` â `fetch`
+  - [`fetch-fedora-bootc-manifest.yml`](../.github/workflows/fetch-fedora-bootc-manifest.yml) — workflow: `fetch-fedora-bootc-manifest`
+    - Job `fetch` — `fetch`
       - Step 1: `Checkout yubiOS for PINNED.md update`
       - Step 2: `Fetch Fedora bootc manifest and update pinned refs`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`fetch-released-tag-ref.yml`](../.github/workflows/fetch-released-tag-ref.yml) â workflow: `fetch-released-tag-ref`
-    - Job `fetch-release-refs` â `Resolve upstream releases and verify fork refs`
+  - [`fetch-released-tag-ref.yml`](../.github/workflows/fetch-released-tag-ref.yml) — workflow: `fetch-released-tag-ref`
+    - Job `fetch-release-refs` — `Resolve upstream releases and verify fork refs`
       - Step 1: `Checkout yubiOS for fork-ref updates`
       - Step 2: `Fetch release tags, verify fork objects, and update pins`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`ci_firmware-rk.yml`](../.github/workflows/ci_firmware-rk.yml) â workflow: `yubiOS RK firmware`
-    - Job `stmm` â `Stage 1 - BL32_AP_MM.fd (StandaloneMM RPMB, AARCH64) ${{ matrix.artifact_suffix }}`
+  - [`ci_firmware-rk.yml`](../.github/workflows/ci_firmware-rk.yml) — workflow: `yubiOS RK firmware`
+    - Job `stmm` — `Stage 1 - BL32_AP_MM.fd (StandaloneMM RPMB, AARCH64) ${{ matrix.artifact_suffix }}`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
@@ -333,7 +333,7 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 9: `Build StandaloneMM RPMB platform`
       - Step 10: `Stage BL32_AP_MM.fd`
       - Step 11: `Upload BL32_AP_MM.fd`
-    - Job `optee_fip` â `Stage 2 - ${{ matrix.board }} OP-TEE/TF-A/U-Boot ${{ matrix.artifact_suffix }}`
+    - Job `optee_fip` — `Stage 2 - ${{ matrix.board }} OP-TEE/TF-A/U-Boot ${{ matrix.artifact_suffix }}`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
@@ -351,7 +351,7 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 15: `Build Rockchip U-Boot board image`
       - Step 16: `Write firmware artifact manifest`
       - Step 17: `Upload fip + flash artifacts`
-    - Job `firmware-reproducibility` â `Stage 2 proof - ${{ matrix.board }} unsigned components (arm64)`
+    - Job `firmware-reproducibility` — `Stage 2 proof - ${{ matrix.board }} unsigned components (arm64)`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
@@ -362,7 +362,7 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 8: `Download rebuilt board artifact`
       - Step 9: `Prove two clean firmware component builds match`
       - Step 10: `Retain firmware reproducibility evidence`
-    - Job `qemu` â `Stage 3 - QEMU fTPM e2e (${{ matrix.arch }})`
+    - Job `qemu` — `Stage 3 - QEMU fTPM e2e (${{ matrix.arch }})`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
@@ -373,7 +373,7 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 8: `Resolve or assemble flash.bin`
       - Step 9: `Boot stitched image under QEMU and assert fTPM markers`
       - Step 10: `Loud skip when no bootable image exists`
-    - Job `firmware-publish` â `Stage 4 - Publish firmware bundle (${{ matrix.board }})`
+    - Job `firmware-publish` — `Stage 4 - Publish firmware bundle (${{ matrix.board }})`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
@@ -385,24 +385,24 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 9: `Log in to Docker Hub`
       - Step 10: `Build and push firmware OCI artifact through Bake`
       - Step 11: `Verify pushed board tag`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`yubiOS-ci.yml`](../.github/workflows/yubiOS-ci.yml) â workflow: `yubiOS CI`
-    - Job `shellcheck` â `shellcheck`
+  - [`yubiOS-ci.yml`](../.github/workflows/yubiOS-ci.yml) — workflow: `yubiOS CI`
+    - Job `shellcheck` — `shellcheck`
       - Step 1: `Checkout`
       - Step 2: `shellcheck`
-    - Job `hadolint` â `hadolint`
+    - Job `hadolint` — `hadolint`
       - Step 1: `Checkout`
       - Step 2: `hadolint (Containerfile lint)`
-    - Job `unit-tests` â `unit-tests`
+    - Job `unit-tests` — `unit-tests`
       - Step 1: `Checkout`
       - Step 2: `Install test dependencies`
       - Step 3: `Run unit tests (${{ matrix.arch }})`
-    - Job `mkosi` â `mkosi`
+    - Job `mkosi` — `mkosi`
       - Step 1: `Checkout`
       - Step 2: `Install mkosi (from yubi-OS fork)`
       - Step 3: `Validate mkosi config (${{ matrix.arch }})`
-    - Job `build` â `build`
+    - Job `build` — `build`
       - Step 1: `Checkout`
       - Step 2: `Resolve reproducible build environment`
       - Step 3: `Install docker CLI + buildx (${{ matrix.arch }})`
@@ -411,15 +411,15 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 6: `Prove two clean production OCI builds match`
       - Step 7: `Retain production reproducibility evidence`
       - Step 8: `Push per-arch image (${{ matrix.arch }})`
-    - Job `merge-manifest` â `merge-manifest`
+    - Job `merge-manifest` — `merge-manifest`
       - Step 1: `Install docker CLI + buildx`
       - Step 2: `Log in to Docker Hub`
       - Step 3: `Create + push multi-arch manifest`
       - Step 4: `Verify manifest list`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`ci_dev_image.yml`](../.github/workflows/ci_dev_image.yml) â workflow: `yubiOS dev/test image (swu2f, ADR-026)`
-    - Job `build` â `build`
+  - [`ci_dev_image.yml`](../.github/workflows/ci_dev_image.yml) — workflow: `yubiOS dev/test image (swu2f, ADR-026)`
+    - Job `build` — `build`
       - Step 1: `Checkout`
       - Step 2: `Resolve reproducible build environment`
       - Step 3: `Install docker CLI + buildx (${{ matrix.arch }})`
@@ -428,19 +428,19 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 6: `Prove two clean dev OCI builds match`
       - Step 7: `Retain dev reproducibility evidence`
       - Step 8: `Push per-arch dev image (${{ matrix.arch }})`
-    - Job `merge-manifest` â `merge-manifest`
+    - Job `merge-manifest` — `merge-manifest`
       - Step 1: `Install docker CLI + buildx`
       - Step 2: `Log in to Docker Hub`
       - Step 3: `Guard dev/test manifest tags`
       - Step 4: `Create + push multi-arch dev manifest`
       - Step 5: `Verify manifest list`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`ci_test-vm.yml`](../.github/workflows/ci_test-vm.yml) â workflow: `yubiOS VM e2e (tests/vm)`
-    - Job `lint-vm-scripts` â `lint-vm-scripts`
+  - [`ci_test-vm.yml`](../.github/workflows/ci_test-vm.yml) — workflow: `yubiOS VM e2e (tests/vm)`
+    - Job `lint-vm-scripts` — `lint-vm-scripts`
       - Step 1: `Checkout`
       - Step 2: `shellcheck + bash -n on tests/vm/*.sh`
-    - Job `vm-e2e` â `vm-e2e`
+    - Job `vm-e2e` — `vm-e2e`
       - Step 1: `Checkout`
       - Step 2: `Free disk space (self-hosted rock1 persists disk across runs -- unlike hosted runners)`
       - Step 3: `Install host deps (swtpm + qemu + fido2 + cryptsetup)`
@@ -459,23 +459,23 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 16: `Run tests/vm/test-fido2-enrollment.sh (enrollment surface,`
       - Step 17: `Free disk space (post-run -- leave rock1 clean for the next run)`
       - Step 18: `Note hardware-only variant (lint-only in CI)`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`ci_mkosi-installer.yml`](../.github/workflows/ci_mkosi-installer.yml) â workflow: `yubiOS mkosi-installer`
-    - Job `build` â `mkosi disk image â SoftHSM PKCS#11 signed UKI (${{ matrix.artifact_suffix }})`
+  - [`ci_mkosi-installer.yml`](../.github/workflows/ci_mkosi-installer.yml) — workflow: `yubiOS mkosi-installer`
+    - Job `build` — `mkosi disk image — SoftHSM PKCS#11 signed UKI (${{ matrix.artifact_suffix }})`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
       - Step 4: `Install docker CLI + buildx (${{ matrix.arch }})`
       - Step 5: `Install mkosi build deps + mkosi (pinned yubi-OS fork)`
-      - Step 6: `SoftHSM token in /run â mock of YubiKey PIV slot 9c`
+      - Step 6: `SoftHSM token in /run — mock of YubiKey PIV slot 9c`
       - Step 7: `Build disk image (minimal profile, PKCS#11-signed UKI)`
       - Step 8: `Verify UKI is signed by the PKCS#11 (SoftHSM) key`
       - Step 9: `Assemble /installer payload + MANIFEST`
       - Step 10: `Record unsigned installer subjects and signing boundary`
       - Step 11: `Upload installer reproducibility subject`
       - Step 12: `Upload prepared installer payload`
-    - Job `installer-reproducibility` â `Prove unsigned mkosi installer subjects (arm64)`
+    - Job `installer-reproducibility` — `Prove unsigned mkosi installer subjects (arm64)`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
@@ -484,23 +484,23 @@ The exact dispatch order is defined by the state-machine graph above. The detail
       - Step 6: `Download rebuilt installer subject`
       - Step 7: `Prove two clean unsigned installer builds match`
       - Step 8: `Retain installer reproducibility evidence`
-    - Job `installer-publish` â `Publish installer OCI artifact (${{ matrix.arch }})`
+    - Job `installer-publish` — `Publish installer OCI artifact (${{ matrix.arch }})`
       - Step 1: `Install git for checkout and reproducibility`
       - Step 2: `Checkout`
       - Step 3: `Resolve reproducible build environment`
       - Step 4: `Download prepared installer payload`
       - Step 5: `Install docker CLI + buildx (${{ matrix.arch }})`
       - Step 6: `Build and push installer OCI artifact through Bake`
-    - Job `merge-manifest` â `Merge installer multi-arch manifest`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `merge-manifest` — `Merge installer multi-arch manifest`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
-  - [`ci_test_pq_tls_verify.yml`](../.github/workflows/ci_test_pq_tls_verify.yml) â workflow: `TEST - PQ hybrid TLS verification (ADR-025)`
-    - Job `pq-tls-verify` â `pq-tls-verify`
+  - [`ci_test_pq_tls_verify.yml`](../.github/workflows/ci_test_pq_tls_verify.yml) — workflow: `TEST - PQ hybrid TLS verification (ADR-025)`
+    - Job `pq-tls-verify` — `pq-tls-verify`
       - Step 1: `Checkout`
       - Step 2: `Resolve reproducible build environment`
       - Step 3: `Install docker CLI + buildx`
       - Step 4: `Verify PQ hybrid TLS through the policy-bound Bake target`
-    - Job `ci-callback` â `Callback to ci.yml orchestrator`
+    - Job `ci-callback` — `Callback to ci.yml orchestrator`
       - Step 1: `Report current state to ci.yml`
 
 ## Pre-Image TEST Workflow Detail and Self-Change Evidence
@@ -513,21 +513,21 @@ The bootc filesystem workflow runs before the production build and resolves a
 published image tag to an immutable digest. It is deliberately classified as
 an external-image regression smoke, not a test of the checked-out commit.
 
-- [`ci_test_bootc-filesystem.yml`](../.github/workflows/ci_test_bootc-filesystem.yml) â workflow: `TEST - bootc to-filesystem install e2e`
-  - Job `install-to-filesystem` â `install-to-filesystem (${{ matrix.arch }})`, native amd64/arm64 matrix on fresh hosted VMs
+- [`ci_test_bootc-filesystem.yml`](../.github/workflows/ci_test_bootc-filesystem.yml) — workflow: `TEST - bootc to-filesystem install e2e`
+  - Job `install-to-filesystem` — `install-to-filesystem (${{ matrix.arch }})`, native amd64/arm64 matrix on fresh hosted VMs
     - Step 1: `Checkout`
     - Step 2: `Assert README install contract`
     - Step 3: `Prepare fresh externally partitioned target at /mnt` with ext4 `verity`
     - Step 4: `Resolve image digest and install with the README command`, reporting bootc sealed-build capabilities and checking the shipped initramfs
     - Step 5: `Verify strict composefs repository and unsealed BLS deployment`, including EROFS parsing, fs-verity measurement, rejected tamper, digest-bound BLS paths, and omitted `root=`
     - Step 6: `Detach disposable target`
-  - Job `ci-callback` â `Callback to ci.yml orchestrator`
+  - Job `ci-callback` — `Callback to ci.yml orchestrator`
     - Step 1: `Report current state to ci.yml`
-- [`ci_test_rootless-docker.yml`](../.github/workflows/ci_test_rootless-docker.yml) â workflow: `TEST - Rootless Docker bootstrap validation`
-  - Job `rootless-docker` â native amd64/arm64 matrix inside the pinned privileged DHI container
+- [`ci_test_rootless-docker.yml`](../.github/workflows/ci_test_rootless-docker.yml) — workflow: `TEST - Rootless Docker bootstrap validation`
+  - Job `rootless-docker` — native amd64/arm64 matrix inside the pinned privileged DHI container
     - Step 1: `Exercise rootless Docker bootstrap (${{ matrix.arch }})`
     - Step 2: `Verify rootless Docker across the step boundary (${{ matrix.arch }})`
-  - Job `ci-callback` â `Callback to ci.yml orchestrator`
+  - Job `ci-callback` — `Callback to ci.yml orchestrator`
     - Step 1: `Report current state to ci.yml`
 
 

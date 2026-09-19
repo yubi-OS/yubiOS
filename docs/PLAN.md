@@ -7,7 +7,7 @@ Planning horizon: three years after the first supported release
 
 ## Executive decision
 
-yubiOS should be operated as a public-first cybersecurity project with a capital-light commercial company around it. The company should sell accountable operationsâsupported releases, fleet assurance, integration, recovery, evidence, and responseânot access to the security-critical source code.
+yubiOS should be operated as a public-first cybersecurity project with a capital-light commercial company around it. The company should sell accountable operations—supported releases, fleet assurance, integration, recovery, evidence, and response—not access to the security-critical source code.
 
 The recommended model is **services-to-subscription**:
 
@@ -19,7 +19,7 @@ The recommended model is **services-to-subscription**:
 
 This model fits the mission: an individual can retain owner control without a vendor relationship, while an enterprise can pay for a named party to operate the release, support, evidence, and recovery process.
 
-The base-case planning model reaches approximately **$350,000, $1.2 million, and $3.55 million of recognized revenue** in Years 1â3, with operating break-even during Year 3. **These figures are illustrative scaffolding, not validated forecasts â see Â§6 and `refs/three-year-revenue-cost-model-2026-07-25.md` (OMN-77).** These are planning assumptions, not forecasts. The model assumes current revenue is $0 because no revenue, paying-customer, or production-deployment evidence was supplied or found in the repository.
+The base-case planning model reaches approximately **$350,000, $1.2 million, and $3.55 million of recognized revenue** in Years 1–3, with operating break-even during Year 3. **These figures are illustrative scaffolding, not validated forecasts — see §6 and `refs/three-year-revenue-cost-model-2026-07-25.md` (OMN-77).** These are planning assumptions, not forecasts. The model assumes current revenue is $0 because no revenue, paying-customer, or production-deployment evidence was supplied or found in the repository.
 
 ## 1. Current position and evidence boundary
 
@@ -44,7 +44,7 @@ GitHub activity is evidence of work, not evidence of product-market fit. Stars, 
 
 ### Claims that remain off-limits
 
-- âProduction-ready,â âcertified,â âunbreakable,â âzero trust anchors,â âonly,â âfirst,â or âmost secure.â
+- “Production-ready,” “certified,” “unbreakable,” “zero trust anchors,” “only,” “first,” or “most secure.”
 - An affiliation with, endorsement by, or certification from Yubico, Fedora, systemd, bootc, OpenSSF, or a hardware vendor without a signed agreement.
 - Quantified breach reduction or compliance savings without customer-specific baseline data.
 - Equal platform-root guarantees across ARM64 Path A, ARM64 Path B, and x86-64.
@@ -53,18 +53,18 @@ GitHub activity is evidence of work, not evidence of product-market fit. Stars, 
 
 ### Initial customer profile
 
-Start with organizations for which a small fleet has unusually high consequence or trust requirementsânot with general desktop buyers.
+Start with organizations for which a small fleet has unusually high consequence or trust requirements—not with general desktop buyers.
 
 | Segment | Initial fleet | Job to be done | Economic buyer | Why yubiOS may fit |
 |---|---:|---|---|---|
-| Release and signing workstations | 25â150 nodes | Protect artifact signing, release engineering, SSH, and privileged local identity | CISO, VP Engineering, Head of Platform | Owner-held authorization plus verified, replaceable OS images |
-| Security engineering and privileged developer fleets | 50â500 nodes | Standardize a hardened endpoint with recoverable hardware-token ceremonies | CISO, security platform lead | Public threat model, immutable OS, evidence and recovery workflow |
-| Regulated labs and high-assurance environments | 25â250 nodes | Produce repeatable deployment and control evidence, including offline operation | Compliance lead, lab director, CISO | Signed releases, evidence packs, air-gap option, bounded platform claims |
-| ARM64 appliance and edge builders | 100â10,000 devices | Avoid building and maintaining a verified Linux and owner-key workflow alone | CTO, product security lead | Board-specific enablement, firmware-chain work, bootc lifecycle |
+| Release and signing workstations | 25–150 nodes | Protect artifact signing, release engineering, SSH, and privileged local identity | CISO, VP Engineering, Head of Platform | Owner-held authorization plus verified, replaceable OS images |
+| Security engineering and privileged developer fleets | 50–500 nodes | Standardize a hardened endpoint with recoverable hardware-token ceremonies | CISO, security platform lead | Public threat model, immutable OS, evidence and recovery workflow |
+| Regulated labs and high-assurance environments | 25–250 nodes | Produce repeatable deployment and control evidence, including offline operation | Compliance lead, lab director, CISO | Signed releases, evidence packs, air-gap option, bounded platform claims |
+| ARM64 appliance and edge builders | 100–10,000 devices | Avoid building and maintaining a verified Linux and owner-key workflow alone | CTO, product security lead | Board-specific enablement, firmware-chain work, bootc lifecycle |
 
 Research labs, firmware specialists, and security consultancies are useful design partners. General consumers, broad office fleets, and safety-critical deployments are not initial commercial targets.
 
-**Note (added 2026-07-28):** the four enterprise segments above (release/signing workstations, security engineering fleets, regulated labs, ARM64 appliance builders) are the **enterprise overlay** for paid operators; the canonical demand-side segment list (including S1 individuals, S2 small teams, S3 public-interest orgs) lives in `refs/who-pays-and-why-2026-07-25.md` (OMN-69). This doc does not enumerate the full demand side; it only describes the enterprise subset of it. The two lists are not in conflict â they cover different altitudes (demand vs. paid-operator overlay).
+**Note (added 2026-07-28):** the four enterprise segments above (release/signing workstations, security engineering fleets, regulated labs, ARM64 appliance builders) are the **enterprise overlay** for paid operators; the canonical demand-side segment list (including S1 individuals, S2 small teams, S3 public-interest orgs) lives in `refs/who-pays-and-why-2026-07-25.md` (OMN-69). This doc does not enumerate the full demand side; it only describes the enterprise subset of it. The two lists are not in conflict — they cover different altitudes (demand vs. paid-operator overlay).
 
 ### The enterprise value proposition
 
@@ -77,7 +77,7 @@ The free project supplies capability. The paid operator supplies accountability:
 - Procurement-ready SBOM, provenance, dependency, vulnerability, and control evidence.
 - Help integrating identity, logging, update infrastructure, and incident procedures.
 
-The economic comparison is not âfree Linux versus paid Linux.â It is **yubiOS operations versus the next-best alternative**: internal platform/security engineering, external integration, continuing test maintenance, and the cost of assembling evidence for every release.
+The economic comparison is not “free Linux versus paid Linux.” It is **yubiOS operations versus the next-best alternative**: internal platform/security engineering, external integration, continuing test maintenance, and the cost of assembling evidence for every release.
 
 ## 3. Public-interest operating covenant
 
@@ -104,7 +104,7 @@ The following commitments should be published before accepting unrestricted spon
 - Disclose material sponsors, customer-funded roadmap work, conflicts, and any exception to normal release policy.
 - Prefer a Developer Certificate of Origin and contributor ownership over mandatory copyright assignment. Do not make dual licensing a core revenue dependency.
 - Do not maintain permanent customer-only forks of security-critical code. Upstream reusable fixes unless a documented confidentiality or hardware constraint prevents it.
-- At $1 million ARR, create an annual public-interest budget equal to the greater of $25,000 or 5% of the prior yearâs subscription gross profit for upstream fixes, independent review, hardware access, documentation, and security work.
+- At $1 million ARR, create an annual public-interest budget equal to the greater of $25,000 or 5% of the prior year’s subscription gross profit for upstream fixes, independent review, hardware access, documentation, and security work.
 - Publish an annual transparency report covering revenue mix, sponsor concentration, public-interest spending, security response performance, governance changes, and unresolved conflicts.
 
 ## 4. Offer and pricing architecture
@@ -114,11 +114,11 @@ Prices below are launch hypotheses for customer discovery. They should be tested
 | Offer | Public starting price | Buyer receives | Launch gate |
 |---|---:|---|---|
 | Community | $0 | Public images/source, public fixes, SBOM/provenance, self-service docs, community support | Available throughout pre-launch with current warnings |
-| Design-partner pilot | $35,000â$75,000 fixed fee | 6â10 week scoped evaluation, deployment design, recovery exercise, evidence report, measured operator-time baseline | Technical Preview |
+| Design-partner pilot | $35,000–$75,000 fixed fee | 6–10 week scoped evaluation, deployment design, recovery exercise, evidence report, measured operator-time baseline | Technical Preview |
 | Assured Fleet subscription | $600/node/year; $25,000 annual minimum | Supported stable channel, lifecycle policy, business-hours cases, advisories, compatibility matrix, release evidence, update/rollback and recovery runbooks | Supported Pilot |
 | Regulated / air-gapped assurance | $1,200/node/year; $75,000 annual minimum | Offline bundles, enhanced evidence, designated technical owner, 24x7 P1 response when staffing exists, quarterly recovery exercise | General Availability and support coverage |
 | Managed fleet operations | +$240/node/year; $15,000 annual minimum | Hosted rollout rings, fleet inventory, policy/evidence export, health and update orchestration | After a secure, self-hostable management protocol exists |
-| Board or appliance enablement | $100,000â$250,000 NRE; $25,000â$75,000/model/year maintenance | Board bring-up, firmware-chain validation, test automation, update lifecycle, evidence | Board-specific proof and contract review |
+| Board or appliance enablement | $100,000–$250,000 NRE; $25,000–$75,000/model/year maintenance | Board bring-up, firmware-chain validation, test automation, update lifecycle, evidence | Board-specific proof and contract review |
 | Private training | $20,000/cohort or $2,500/seat | Operator enrollment, recovery, release verification, incident and update drills | Technical Preview |
 
 There should be no per-device royalty for the right to use the open-source operating system. Hardware and OEM revenue should pay for engineering, validation, certification maintenance, and support.
@@ -135,7 +135,7 @@ Grants are useful but should not be treated as recurring customer revenue. Spons
 
 ## 5. Readiness gates and go-to-market
 
-### Gate 0 â Current groundwork
+### Gate 0 — Current groundwork
 
 Allowed: public development, grants, sponsored research with public deliverables, customer interviews, and clearly non-production advisory work.
 
@@ -147,7 +147,7 @@ Required before leaving Gate 0:
 - Publish the operating covenant, support boundaries, privacy position, contribution policy, and commercial conflict policy.
 - Define one bounded pilot platform rather than promising the full future hardware matrix.
 
-### Gate 1 â Technical Preview
+### Gate 1 — Technical Preview
 
 Required evidence:
 
@@ -156,9 +156,9 @@ Required evidence:
 - Reproducible release identifiers, signed verification material, SBOM, provenance, and production/dev separation.
 - One published recovery exercise and one externally reviewed threat/control correction.
 
-Allowed: paid pilots with non-production terms, 25â50 disposable or non-critical devices, fixed scope, and explicit acceptance criteria.
+Allowed: paid pilots with non-production terms, 25–50 disposable or non-critical devices, fixed scope, and explicit acceptance criteria.
 
-### Gate 2 â Supported Pilot
+### Gate 2 — Supported Pilot
 
 Required evidence:
 
@@ -170,7 +170,7 @@ Required evidence:
 
 Allowed: limited annual subscriptions with bounded SLAs.
 
-### Gate 3 â General Availability
+### Gate 3 — General Availability
 
 Required evidence:
 
@@ -192,7 +192,7 @@ flowchart LR
 
 1. Publish a narrow, reproducible proof with limitations.
 2. Qualify for consequence, platform fit, budget, fleet size, and an executive owner.
-3. Baseline the customerâs current labor, release, evidence, and recovery cost.
+3. Baseline the customer’s current labor, release, evidence, and recovery cost.
 4. Run a fixed-fee pilot with pre-agreed technical and economic acceptance criteria.
 5. Offer an annual subscription only if the pilot establishes fit.
 
@@ -212,11 +212,11 @@ Do not use mass cold outreach. Use the existing proof-first community strategy t
 
 ### Base case
 
-**The base-case numbers below are illustrative scaffolding, not validated forecasts.** Per `refs/three-year-revenue-cost-model-2026-07-25.md` (OMN-77): *"There is no base-case model with real numbers in this repo to validate â RULES.md and COMPANY.md both list Financial as unset, and `refs/team-budget-use-of-funds-2026-07-25.md` (OMN-74) already established that no funding/revenue figure exists for this session to ground one in. Producing a three-year model with invented revenue and cost figures would be exactly the fabrication the pulpit's doctrine rules out."* The structural framework is correct (revenue categories, sensitivity shapes, stop-rule categories); the numeric cells are placeholder inputs to be replaced once real data exists.
+**The base-case numbers below are illustrative scaffolding, not validated forecasts.** Per `refs/three-year-revenue-cost-model-2026-07-25.md` (OMN-77): *"There is no base-case model with real numbers in this repo to validate — RULES.md and COMPANY.md both list Financial as unset, and `refs/team-budget-use-of-funds-2026-07-25.md` (OMN-74) already established that no funding/revenue figure exists for this session to ground one in. Producing a three-year model with invented revenue and cost figures would be exactly the fabrication the pulpit's doctrine rules out."* The structural framework is correct (revenue categories, sensitivity shapes, stop-rule categories); the numeric cells are placeholder inputs to be replaced once real data exists.
 
 The numbers below ($350k / $1.2M / $3.55M revenue; 3/10/25 customers; 225/1,500/6,250 nodes; exit ARR $135k / $900k / $3.75M; opex $500k / $1M / $1.75M; cumulative ~$550k operating loss; ~$700k total runway) are **planning assumptions, not forecasts, and explicitly not validated.** They will be replaced with measured inputs after the first priced proposal (Gate 1.5b) lands and the first paid pilot readout (OMN-67) provides actual support-cost and conversion data.
 
-**Required update cadence:** Â§6 must be re-stated against actuals within 30 days of (a) the first priced proposal landing, (b) the first paid pilot completing, or (c) any material change to the runway/funding assumption. RULES.md and COMPANY.md must be updated together so the three files do not drift.
+**Required update cadence:** §6 must be re-stated against actuals within 30 days of (a) the first priced proposal landing, (b) the first paid pilot completing, or (c) any material change to the runway/funding assumption. RULES.md and COMPANY.md must be updated together so the three files do not drift.
 
 All figures are USD thousands except customer and node counts.
 
@@ -236,7 +236,7 @@ All figures are USD thousands except customer and node counts.
 
 The model implies roughly $550,000 of cumulative operating loss before break-even. With working-capital and schedule contingency, plan for approximately **$700,000 of total runway** from founder capital, customer prepayments, grants, revenue-based financing, or equity. Raising capital is not a substitute for the technical and paid-pilot gates.
 
-At a 75% recurring gross margin, a subscription-only business with $1.75 million of annual operating expense would need approximately $2.33 million in subscription revenue to break even. At $600 per node, that is about 3,900 subscribed nodes. Services gross profit can lower the practical threshold to roughly 3,000â3,500 nodes, but permanent dependence on services will cap margin and maintainer capacity.
+At a 75% recurring gross margin, a subscription-only business with $1.75 million of annual operating expense would need approximately $2.33 million in subscription revenue to break even. At $600 per node, that is about 3,900 subscribed nodes. Services gross profit can lower the practical threshold to roughly 3,000–3,500 nodes, but permanent dependence on services will cap margin and maintainer capacity.
 
 ### Sensitivity and stop rules
 
@@ -269,7 +269,7 @@ Use a customer-specific cost-of-alternative model. Do not lead with the theoreti
 avoidable baseline cost = internal labor + external integration + recurring test/evidence work
 net annual benefit = avoidable baseline cost - yubiOS cash spend
 cash-spend ROI = net annual benefit / yubiOS cash spend
-payback months = yubiOS cash spend / avoidable baseline cost Ã 12
+payback months = yubiOS cash spend / avoidable baseline cost × 12
 ```
 
 Residual customer labor and third-party validation must remain visible in the total-cost comparison.
@@ -288,7 +288,7 @@ This is a hypothesis to validate during a pilot, not a customer result.
 
 | With yubiOS | Assumption | Cost |
 |---|---|---:|
-| Assured Fleet subscription | 100 Ã $600 | $60,000 |
+| Assured Fleet subscription | 100 × $600 | $60,000 |
 | First-year implementation | Fixed fee | $45,000 |
 | Residual platform labor | 0.35 loaded FTE | $63,000 |
 | Residual security/compliance labor | 0.10 loaded FTE | $20,000 |
@@ -305,7 +305,7 @@ Illustrative result:
 
 The pilot must measure actual operator hours, failed-update time, evidence-preparation time, recovery outcomes, and residual support burden. If those numbers do not substantiate the case, do not publish the illustrative ROI as a customer claim.
 
-Security-risk reduction is upside, not base ROI. A customer may add `change in incident probability Ã defensible loss estimate` only when it owns the data and accepts the assumptions. yubiOS should never promise that a specific breach, audit finding, or regulatory penalty will be prevented.
+Security-risk reduction is upside, not base ROI. A customer may add `change in incident probability × defensible loss estimate` only when it owns the data and accepts the assumptions. yubiOS should never promise that a specific breach, audit finding, or regulatory penalty will be prevented.
 
 ## 8. Team, budget, and use of funds
 
@@ -368,16 +368,16 @@ Do not publish vanity metrics without the decision they inform.
 
 ## 11. First 90 days
 
-### Days 0â30: make the offer safe to discuss
+### Days 0–30: make the offer safe to discuss
 
 - Complete trademark/name, license, contributor-provenance, and entity consultations.
 - Publish the public-interest covenant and conflict policy.
 - Turn the current blocker list into explicit Technical Preview entry criteria.
 - Draft the pilot statement of work, data sheet, support boundaries, and ROI baseline worksheet.
-- Conduct 10â15 problem interviews with release engineering, security platform, firmware, and regulated-lab operators. Do not pitch before understanding their alternative cost.
+- Conduct 10–15 problem interviews with release engineering, security platform, firmware, and regulated-lab operators. Do not pitch before understanding their alternative cost.
 - Apply selectively for public-security funding only where yubiOS has a scoped, public deliverable.
 
-### Days 31â60: prove the narrow product
+### Days 31–60: prove the narrow product
 
 - Retire or reclassify the VM, physical-token, runtime-hardening, and release blockers for one pilot platform.
 - Publish a reproducible physical-YubiKey and recovery demonstration with exact evidence and limits.
@@ -385,9 +385,9 @@ Do not publish vanity metrics without the decision they inform.
 - Price the pilot; do not default to unpaid custom engineering.
 - Establish vulnerability triage, release severity, escalation, backup, and incident communications exercises.
 
-### Days 61â90: test willingness to pay
+### Days 61–90: test willingness to pay
 
-- If Gate 1 is met, run one paid 25â50 node pilot on disposable or non-critical systems.
+- If Gate 1 is met, run one paid 25–50 node pilot on disposable or non-critical systems.
 - Measure deployment hours, operator training, update/rollback success, evidence preparation, recovery time, and support load.
 - Produce a confidential customer ROI readout and, with permission, a bounded public case study.
 - Decide: proceed to a second pilot, narrow the offer, change the target segment, or pause commercial hiring.
@@ -426,17 +426,17 @@ These sources are directional benchmarks, not evidence that yubiOS has comparabl
 
 - [yubiOS README](https://github.com/yubi-OS/yubiOS/blob/main/README.md), [mission](https://github.com/yubi-OS/yubiOS/blob/main/docs/MISSION.md), [security policy](https://github.com/yubi-OS/yubiOS/blob/main/.github/SECURITY.md), [blockers](https://github.com/yubi-OS/yubiOS/blob/main/docs/BLOCKERS.md), and [public-relations plan](https://github.com/yubi-OS/yubiOS/blob/main/docs/PR.md).
 - [CISA Open Source Software Security](https://www.cisa.gov/opensource) describes open source as widely used across government and critical infrastructure; [Secure by Design](https://www.cisa.gov/securebydesign) supports publishing concrete security practices and shifting avoidable burden away from users.
-- The European Commissionâs [CRA open-source guidance](https://digital-strategy.ec.europa.eu/en/policies/cra-open-source) distinguishes non-monetized FOSS, commercial activity, and open-source software stewards; its [implementation timeline](https://digital-strategy.ec.europa.eu/en/factpages/cyber-resilience-act-implementation) lists 2026 reporting and 2027 full-application dates.
-- Linux Foundation Researchâs [State of Global Open Source 2025](https://www.linuxfoundation.org/research/world-of-open-source-global-2025) reports demand for formal support and security in production: 71% of surveyed organizations expected sub-12-hour support responses, and paid support was considered essential for mission-critical, sensitive-data, and regulated workloads by 54%, 43%, and 38% respectively.
-- Linux Foundation Researchâs [State of Commercial Open Source 2025](https://www.linuxfoundation.org/hubfs/Research%20Reports/lfr_serena_capital_report_082225b.pdf) describes commercial open source as an established category while also showing that success is far from automatic.
-- OpenSSFâs [2026 $12.5 million grant announcement](https://openssf.org/press-release/2026/03/17/linux-foundation-announces-12-5-million-in-grant-funding-from-leading-organizations-to-advance-open-source-security/) demonstrates that scoped public-security funding exists; it does not imply yubiOS eligibility.
+- The European Commission’s [CRA open-source guidance](https://digital-strategy.ec.europa.eu/en/policies/cra-open-source) distinguishes non-monetized FOSS, commercial activity, and open-source software stewards; its [implementation timeline](https://digital-strategy.ec.europa.eu/en/factpages/cyber-resilience-act-implementation) lists 2026 reporting and 2027 full-application dates.
+- Linux Foundation Research’s [State of Global Open Source 2025](https://www.linuxfoundation.org/research/world-of-open-source-global-2025) reports demand for formal support and security in production: 71% of surveyed organizations expected sub-12-hour support responses, and paid support was considered essential for mission-critical, sensitive-data, and regulated workloads by 54%, 43%, and 38% respectively.
+- Linux Foundation Research’s [State of Commercial Open Source 2025](https://www.linuxfoundation.org/hubfs/Research%20Reports/lfr_serena_capital_report_082225b.pdf) describes commercial open source as an established category while also showing that success is far from automatic.
+- OpenSSF’s [2026 $12.5 million grant announcement](https://openssf.org/press-release/2026/03/17/linux-foundation-announces-12-5-million-in-grant-funding-from-leading-organizations-to-advance-open-source-security/) demonstrates that scoped public-security funding exists; it does not imply yubiOS eligibility.
 - [SUSE Linux Enterprise Server public pricing](https://www.suse.com/shop/server/) lists $799/year for standard and $1,299/year for priority support, providing a directional Linux-support anchor.
-- [Grafanaâs public pricing](https://grafana.com/pricing/) starts its enterprise offering at a $25,000 annual commitment, a useful directional floor for a high-touch enterprise motion.
-- GitLab reported crossing [$1 billion in ARR and $220 million in free cash flow in FY2026](https://about.gitlab.com/press/releases/2026-03-03-gitlab-reports-fourth-quarter-fiscal-year-2026-financial-results/), demonstrating that enterprises pay for security, governance, and operations around an open-source-rooted platform. GitLabâs scale and product are not a yubiOS forecast.
+- [Grafana’s public pricing](https://grafana.com/pricing/) starts its enterprise offering at a $25,000 annual commitment, a useful directional floor for a high-touch enterprise motion.
+- GitLab reported crossing [$1 billion in ARR and $220 million in free cash flow in FY2026](https://about.gitlab.com/press/releases/2026-03-03-gitlab-reports-fourth-quarter-fiscal-year-2026-financial-results/), demonstrating that enterprises pay for security, governance, and operations around an open-source-rooted platform. GitLab’s scale and product are not a yubiOS forecast.
 
 ---
 
-The commercial test is simple: keep the ownerâs control and the public security work genuinely public, then determine whether enterprises will pay for reliable operation, evidence, recovery, and accountability. If the paid layer requires weakening those public guarantees, it is the wrong business model for yubiOS.
+The commercial test is simple: keep the owner’s control and the public security work genuinely public, then determine whether enterprises will pay for reliable operation, evidence, recovery, and accountability. If the paid layer requires weakening those public guarantees, it is the wrong business model for yubiOS.
 
 
 

@@ -1,4 +1,4 @@
-# Path A device options â upstream survey (2026-07-19)
+# Path A device options — upstream survey (2026-07-19)
 
 Status: research note. This file does **not** promote a board, change [ADR-029](ADR.md), or make a production-readiness claim. ROCK 5B remains the primary Path A proof target and ROCKPro64 remains the supported secondary target. Every device below remains unqualified until the hardware evidence gates in this document pass.
 
@@ -15,9 +15,9 @@ That is a materially smaller source-integration gap than any newly surveyed Rock
 Other findings:
 
 1. **Orange Pi 5 Plus** and **FriendlyElec NanoPC-T6 LTS** are the best low-delta RK3588 alternatives. They share the existing SoC work and their upstream defconfigs already enable SPL FIT signatures and eMMC RPMB transport, but not the OP-TEE/StandaloneMM/fTPM chain.
-2. **NXP i.MX93 EVK** has unusually strong current U-Boot integrationâOP-TEE, RPMB, and EFI MM communication are already enabledâbut the pre-owner trust boundary includes NXP EdgeLock Enclave firmware and TF-A supplies BL31 only. It is a conditional candidate, not yet a strict Path A match.
+2. **NXP i.MX93 EVK** has unusually strong current U-Boot integration—OP-TEE, RPMB, and EFI MM communication are already enabled—but the pre-owner trust boundary includes NXP EdgeLock Enclave firmware and TF-A supplies BL31 only. It is a conditional candidate, not yet a strict Path A match.
 3. **RK3576**, represented by Radxa ROCK 4D and ArmSoM Sige5, is the genuinely new Rockchip intersection across U-Boot, TF-A, and OP-TEE. It is not Path A-ready: upstream OP-TEE lacks the RK3588 secure-boot/OTP path and the U-Boot board configs do not enable the TEE stack.
-4. **STM32MP257F-EV1** best matches the desired firmware stage shapeâTF-A BL2 + BL31, OP-TEE BL32, U-Boot BL33âbut its upstream U-Boot defconfig lacks the secure-state integrations yubiOS needs.
+4. **STM32MP257F-EV1** best matches the desired firmware stage shape—TF-A BL2 + BL31, OP-TEE BL32, U-Boot BL33—but its upstream U-Boot defconfig lacks the secure-state integrations yubiOS needs.
 5. **NXP LX2160A-RDB** is a strong architectural reference: upstream has owner fuse/TBBR documentation plus separate Secure Boot and StandaloneMM U-Boot configurations. It is a large specialist board, and no single upstream defconfig combines the two paths.
 6. **Qualcomm RB3 Gen 2** is a frontier watch item. Recent upstream sources now include TF-A BL2/FIP, OP-TEE Kodiak plus QFPROM fuse provisioning, and a U-Boot board config. It still depends on QTI signing and `qtiseclib`, and lacks an upstream RPMB/StandaloneMM/fTPM path.
 
@@ -36,7 +36,7 @@ Presence in all three upstream trees is necessary but not sufficient. A candidat
 | Rollback, recovery, debug | Anti-rollback policy is defined; a tested owner recovery path exists; debug access and ROM download modes are closed or policy-controlled without destroying recovery. |
 | Reproducibility | Board-specific firmware pins, configs, build manifests, licenses, and negative-test logs are committed. CI emulates what it can, while hardware-only claims remain tied to durable device evidence. |
 
-The wording matters on platforms where TF-A is not the first verifier. âTF-A Trusted Board Bootâ should be mapped to the platform's actual first-owner-verifier chain rather than assumed to mean TF-A BL1 on every SoC.
+The wording matters on platforms where TF-A is not the first verifier. “TF-A Trusted Board Boot” should be mapped to the platform's actual first-owner-verifier chain rather than assumed to mean TF-A BL1 on every SoC.
 
 ## Upstream snapshots reviewed
 
@@ -50,7 +50,7 @@ This survey is pinned so later changes in `master` do not silently change its co
 
 ## Comparison matrix
 
-âYesâ means an upstream source or configuration exists, not that yubiOS has validated it on hardware.
+“Yes” means an upstream source or configuration exists, not that yubiOS has validated it on hardware.
 
 | Target | Early owner-verification path | OP-TEE upstream | RPMB / EFI MM / fTPM in reviewed U-Boot configs | Principal blocker | Lane |
 | --- | --- | --- | --- | --- | --- |
@@ -65,13 +65,13 @@ This survey is pinned so later changes in `master` do not silently change its co
 
 ## Ranked options
 
-### Priority 1 â i.MX8M Mini: CompuLab IOT-GATE-iMX8 / SBC-IOT-iMX8 and NXP EVKB
+### Priority 1 — i.MX8M Mini: CompuLab IOT-GATE-iMX8 / SBC-IOT-iMX8 and NXP EVKB
 
 **Why it surfaced**
 
 This is the closest current upstream source match to the full yubiOS Path A stack outside the already selected Rockchip targets.
 
-- The [TF-A i.MX8M documentation](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/imx8m.rst) describes the normal ROM â SPL â BL31 â U-Boot flow and an i.MX8MM `NEED_BL2=1` TBBR flow: ROM â SPL â BL2 â BL31 â U-Boot UEFI, with SPL verifying BL2 and BL2 verifying the BL3x images in a FIP. It also documents HABv4 support through the ROM Vector Table API. The [i.MX8MM platform makefile](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/plat/imx/imx8m/imx8mm/platform.mk) contains the BL2 authentication and ROTPK plumbing.
+- The [TF-A i.MX8M documentation](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/imx8m.rst) describes the normal ROM → SPL → BL31 → U-Boot flow and an i.MX8MM `NEED_BL2=1` TBBR flow: ROM → SPL → BL2 → BL31 → U-Boot UEFI, with SPL verifying BL2 and BL2 verifying the BL3x images in a FIP. It also documents HABv4 support through the ROM Vector Table API. The [i.MX8MM platform makefile](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/plat/imx/imx8m/imx8mm/platform.mk) contains the BL2 authentication and ROTPK plumbing.
 - OP-TEE's [i.MX platform configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-imx/conf.mk) contains maintained `mx8mmevk` and `mx8mm_cl_iot_gate` flavors.
 - U-Boot's [`imx8mm-cl-iot-gate-optee_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/imx8mm-cl-iot-gate-optee_defconfig) enables `CONFIG_EFI_SECURE_BOOT`, FIT signatures, OP-TEE, eMMC RPMB support, and both `CONFIG_TPM2_FTPM_TEE` and a discrete TPM driver. At the reviewed snapshot, repository search found only this CompuLab board family and Nuvoton Arbel board defconfigs enabling the U-Boot fTPM-over-TEE driver.
 - U-Boot's [`imx8mm_evk_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/imx8mm_evk_defconfig) supplies the complementary secure-variable path: `CONFIG_EFI_MM_COMM_TEE`, `CONFIG_CMD_OPTEE_RPMB`, `CONFIG_SUPPORT_EMMC_RPMB`, `CONFIG_TEE`, and `CONFIG_OPTEE`.
@@ -80,7 +80,7 @@ This is the closest current upstream source match to the full yubiOS Path A stac
 **Unproven or missing**
 
 - No reviewed upstream defconfig contains the entire set at once. The CompuLab OP-TEE config lacks `CONFIG_EFI_MM_COMM_TEE` and `CONFIG_CMD_OPTEE_RPMB`; the EVK config lacks `CONFIG_TPM2_FTPM_TEE`.
-- TF-A contains the BL2/TBBR implementation, but its current i.MX8M documentation still says the matching U-Boot/imx-mkimage packaging work will be upstreamed later. Treat the complete SPL FIT â TF-A BL2 â authenticated FIP build as an explicit feasibility item, not an already integrated board flow.
+- TF-A contains the BL2/TBBR implementation, but its current i.MX8M documentation still says the matching U-Boot/imx-mkimage packaging work will be upstreamed later. Treat the complete SPL FIT → TF-A BL2 → authenticated FIP build as an explicit feasibility item, not an already integrated board flow.
 - Neither config proves OP-TEE `CFG_RPMB_FS`, one-time RPMB key programming, StandaloneMM deployment, or the repository-pinned ms-tpm TA.
 - Current board build documentation still consumes NXP DDR firmware. It must be pinned, licensed, and placed explicitly in the trust boundary.
 - HAB development-mode success is not production closure. A sacrificial board must show owner SRK hash programming, closed/enforcing lifecycle state, wrong-key rejection, recovery behavior, and debug policy.
@@ -88,7 +88,7 @@ This is the closest current upstream source match to the full yubiOS Path A stac
 
 **Verdict:** highest-priority new SoC/device feasibility lane. Start on the EVKB for fuse/recovery observability, then validate the same firmware policy on the CompuLab device if an industrial target is desirable.
 
-### Priority 1 â RK3588 alternates: Orange Pi 5 Plus and NanoPC-T6 LTS
+### Priority 1 — RK3588 alternates: Orange Pi 5 Plus and NanoPC-T6 LTS
 
 **Why they surfaced**
 
@@ -108,7 +108,7 @@ These are new board targets rather than a new SoC port. That is valuable: they t
 
 **Verdict:** best low-delta secondary board ports. Do not displace ROCK 5B; use one to prove that the RK3588 implementation is portable after the primary hardware proof succeeds.
 
-### Priority 2 â NXP i.MX93 EVK
+### Priority 2 — NXP i.MX93 EVK
 
 **Why it surfaced**
 
@@ -127,13 +127,13 @@ Current [TF-A i.MX9 documentation](https://github.com/ARM-software/arm-trusted-f
 
 **Verdict:** excellent integration prototype and possibly a conditional Path A board, but not a strict owner-root candidate until the EdgeLock/Sentinel trust boundary is resolved.
 
-### Priority 2 â STM32MP257F-EV1
+### Priority 2 — STM32MP257F-EV1
 
 **Why it surfaced**
 
 - TF-A's [STM32MP2 documentation](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/st/stm32mp2.rst) describes a full TF-A BL2/BL31 FIP flow with OP-TEE BL32 and U-Boot BL33. The security-enabled `F` parts support secure boot and hardware cryptography.
 - OP-TEE's [STM32MP2 configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-stm32mp2/conf.mk) contains `stm32mp257f-ev1` and `stm32mp257f-dk` flavors and is maintained upstream.
-- The [STM32MP257F-EV1](https://www.st.com/en/evaluation-tools/stm32mp257f-ev1.html) is active, and ST documents the ROM â TF-A â OP-TEE â U-Boot boot chain.
+- The [STM32MP257F-EV1](https://www.st.com/en/evaluation-tools/stm32mp257f-ev1.html) is active, and ST documents the ROM → TF-A → OP-TEE → U-Boot boot chain.
 
 **Unproven or missing**
 
@@ -144,7 +144,7 @@ Current [TF-A i.MX9 documentation](https://github.com/ARM-software/arm-trusted-f
 
 **Verdict:** strongest alternative firmware architecture, but a larger U-Boot and secure-storage port than i.MX8MM.
 
-### Priority 2 â RK3576: ROCK 4D and ArmSoM Sige5
+### Priority 2 — RK3576: ROCK 4D and ArmSoM Sige5
 
 **Why it surfaced**
 
@@ -164,7 +164,7 @@ RK3576 is new in the current three-way upstream intersection.
 
 **Verdict:** highest-value new Rockchip research target, but not a near-term Path A board. First upstream or carry a reviewed RK3576 fuse/OTP implementation and negative-test it before purchasing multiple devices.
 
-### Priority 3 â NXP LX2160A-RDB
+### Priority 3 — NXP LX2160A-RDB
 
 **Why it surfaced**
 
@@ -181,7 +181,7 @@ RK3576 is new in the current three-way upstream intersection.
 
 **Verdict:** preserve as an architectural reference and possible lab target. Do not prioritize it over i.MX8MM or an RK3588 alternate.
 
-### Watch â Qualcomm RB3 Gen 2 (QCS6490)
+### Watch — Qualcomm RB3 Gen 2 (QCS6490)
 
 **Why it surfaced**
 
@@ -218,9 +218,9 @@ This is one of the newest meaningful additions across all three upstream project
 
 Current [TF-A Rockchip documentation](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/rockchip.rst) says BL1/BL2 are supplied by U-Boot or coreboot and TF-A builds BL31 on AArch64. The current RK3576 and RK3588 platform makefiles are BL31 ports. Therefore the Rockchip proof must explicitly show:
 
-`BootROM owner key/eFuse â authenticated U-Boot TPL/SPL â authenticated TF-A BL31 + OP-TEE BL32 + U-Boot BL33 â StandaloneMM/TAs â signed UKI`
+`BootROM owner key/eFuse → authenticated U-Boot TPL/SPL → authenticated TF-A BL31 + OP-TEE BL32 + U-Boot BL33 → StandaloneMM/TAs → signed UKI`
 
-This does not make Rockchip ineligible, but evidence should name the real verifier at each transition. A generic assertion that âTF-A BL1 rejects the imageâ would be false for these ports.
+This does not make Rockchip ineligible, but evidence should name the real verifier at each transition. A generic assertion that “TF-A BL1 rejects the image” would be false for these ports.
 
 ### 2. No reviewed board arrives with the complete yubiOS configuration
 
@@ -244,7 +244,7 @@ The surveyed families require at least one early binary in their normal upstream
 - LX2160A: DDR PHY firmware/FIP;
 - RB3 Gen 2: `qtiseclib` and QTI signing tooling/inputs.
 
-For each candidate, record the producer, license, exact digest, update channel, signing authority, execution privilege, and whether the owner-authenticated chain covers the binary. âUpstream U-Boot supports the boardâ does not remove this trust dependency.
+For each candidate, record the producer, license, exact digest, update channel, signing authority, execution privilege, and whether the owner-authenticated chain covers the binary. “Upstream U-Boot supports the board” does not remove this trust dependency.
 
 ## Recommended next work
 
