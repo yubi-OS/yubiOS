@@ -1,6 +1,6 @@
 ---
 name: 0pointer-mastery
-description: >-
+description: )-
   Mastery and big picture skill for the Lennart Poettering / systemd ecosystem. Covers the full
   blog canon: "Fitting Everything Together" OS architecture vision, UKI/PCR/TPM trusted boot
   chain, Discoverable Partitions Specification, LUKS2 hardware unlock (FIDO2/TPM2/PKCS#11),
@@ -309,3 +309,17 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — no movable primitive gap to cl
 This skill already covers all 5 remaining MOVABLE corpus-priority primitives post-cycle-6 (attestation, trust chain, declarative policy, immutability, least privilege). The cycle-7 RSI audit verified full movable coverage; no primitive closure needed.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to close.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- cycle 5 RSI**: closed `declarative policy` primitive gap (corpus-wide count 27→28/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Extended description, How to Use This Skill, The 17 Design Goals, The Modularity Ladder.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
