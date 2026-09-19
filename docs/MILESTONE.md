@@ -7,7 +7,7 @@ Source: mirrors the Linear project "yubiOS Production Proof & Release Gates" (id
 
 ## Goal
 
-**Last reviewed against docs/BLOCKERS.md:** 2026-07-30 review (sha 7501fa0c13a4). No new blocker retirements since this doc's prior review (Last reviewed 2026-07-28). B-VM-CTAP2 was RESOLVED 2026-07-25 (5 days before this BLOCKERS.md review) and is already noted correctly in this doc. BLOCKERS.md gained a new "Permanent CI-Evidence Patterns" section (systemd drop-in lex-sort rule, source OMN-149) â does not affect this doc's content. The 2026-07-28 review diff (corrected against the same-day BLOCKERS.md) remains the binding drift correction; this 2026-07-30 stamp is a no-new-retirements confirmation.
+**Last reviewed against docs/BLOCKERS.md:** 2026-07-30 review (sha 7501fa0c13a4). No new blocker retirements since this doc's prior review (Last reviewed 2026-07-28). B-VM-CTAP2 was RESOLVED 2026-07-25 (5 days before this BLOCKERS.md review) and is already noted correctly in this doc. BLOCKERS.md gained a new "Permanent CI-Evidence Patterns" section (systemd drop-in lex-sort rule, source OMN-149) — does not affect this doc's content. The 2026-07-28 review diff (corrected against the same-day BLOCKERS.md) remains the binding drift correction; this 2026-07-30 stamp is a no-new-retirements confirmation.
 
 Drive yubiOS from research-backed roadmap items to production-proof evidence across ARM64 Path A, token-backed CI, sealed bootc flow, and runtime/supply-chain validation.
 
@@ -28,7 +28,7 @@ Close the real-hardware production proof gaps for the targeted ARM64 path, inclu
 
 **Seeded blockers (per BLOCKERS.md Last reviewed 2026-07-25):** B-ARM64-PATHA (no board has proven the full chain yet), B-RK3588-TPL (ROCK 5B build is diagnostic packaging, not flashable).
 
-**Status (2026-07-28):** 0% â all 4 child issues Backlog/Todo, no assignees outside the agent, last updated 2026-07-23/24. **No work in flight.** This is now the second-longest pole after Milestone 3.
+**Status (2026-07-28):** 0% — all 4 child issues Backlog/Todo, no assignees outside the agent, last updated 2026-07-23/24. **No work in flight.** This is now the second-longest pole after Milestone 3.
 
 ### 2. Token-backed VM and CI coverage
 
@@ -37,11 +37,11 @@ Make token-dependent guest operations execute deterministically in CI, keep PQ T
 **Linear ownership:** OMN-38 (parent, **Done**), OMN-48 (path trace, **Done**), OMN-49 (fail-closed, **Done**), OMN-50 (proof logs, **Done**). Plus OMN-39 (QEMU zboot workaround tracking, Backlog P3), OMN-59 (runner/QEMU boundary, **In Progress** P3), OMN-60 (zboot version-gating, Backlog P3).
 
 **Seeded blockers (corrected 2026-07-28 against BLOCKERS.md Last reviewed 2026-07-25):**
-- **B-VM-CTAP2 â RESOLVED 2026-07-25** (run 30139433902, OMN-48 Done). The 2026-07-25 version of this doc incorrectly named B-VM-CTAP2 as "the single highest-leverage blocker." That claim is no longer true; see BLOCKERS.md Not-Current-Blockers entry for the closure evidence (LUKS2 unlock â homed â pamu2fcfg â ed25519-sk, end-to-end, no skips).
-- B-QEMU-ZBOOT â contained workaround per BLOCKERS.md same review, not an open failure. Keep version-gated until upstream QEMU carries the fix.
-- **B-REAL-FIDO2 â NOW READY TO EXECUTE.** Was gated on B-VM-CTAP2 closing; that gate is now open. Awaiting human owner with physical hardware (per OMN-63's 12 scenarios, OMN-63 itself Done).
+- **B-VM-CTAP2 — RESOLVED 2026-07-25** (run 30139433902, OMN-48 Done). The 2026-07-25 version of this doc incorrectly named B-VM-CTAP2 as "the single highest-leverage blocker." That claim is no longer true; see BLOCKERS.md Not-Current-Blockers entry for the closure evidence (LUKS2 unlock → homed → pamu2fcfg → ed25519-sk, end-to-end, no skips).
+- B-QEMU-ZBOOT — contained workaround per BLOCKERS.md same review, not an open failure. Keep version-gated until upstream QEMU carries the fix.
+- **B-REAL-FIDO2 — NOW READY TO EXECUTE.** Was gated on B-VM-CTAP2 closing; that gate is now open. Awaiting human owner with physical hardware (per OMN-63's 12 scenarios, OMN-63 itself Done).
 
-**Status (2026-07-28):** 65.6% â software-validated FIDO2 path fully delivered. The post-B-VM-CTAP2 long pole has moved to Milestone 3 (Sealed composefs), not back to M2.
+**Status (2026-07-28):** 65.6% — software-validated FIDO2 path fully delivered. The post-B-VM-CTAP2 long pole has moved to Milestone 3 (Sealed composefs), not back to M2.
 
 ### 3. Sealed composefs boot chain
 
@@ -53,7 +53,7 @@ Promote the current unsealed integrity path to a signed-UKI plus Secure Boot pro
 
 **Seeded blocker:** B-BOOTC-SEAL (fs-verity currently proven through a mutable BLS digest anchor, not a sealed/signed UKI; see refs/bootc-composefs-sealed-flow-2026-07-22.md).
 
-**Status (2026-07-28):** 6.25% â **actual long pole of the whole project right now.** OMN-51 is the only in-flight work; it gates OMN-43 (parent) and OMN-52 (P1); OMN-52 gates OMN-53 (P1). Critical path: OMN-51 â OMN-52 â OMN-53. With 6 weeks to project target 2026-09-13, any week lost here is unrecoverable without scope cut.
+**Status (2026-07-28):** 6.25% — **actual long pole of the whole project right now.** OMN-51 is the only in-flight work; it gates OMN-43 (parent) and OMN-52 (P1); OMN-52 gates OMN-53 (P1). Critical path: OMN-51 → OMN-52 → OMN-53. With 6 weeks to project target 2026-09-13, any week lost here is unrecoverable without scope cut.
 
 ### 4. Runtime hardening and supply-chain validation
 
@@ -63,7 +63,7 @@ Back hardening and rebuildability claims with target-image runtime validation, p
 
 **Seeded blockers (per BLOCKERS.md Last reviewed 2026-07-25):** B-HARDENING-RUNTIME (static audit complete, runtime Bats/systemd-analyze verify still needed against a target image), B-PINS (base-image digest changes require explicit PINNED.md updates).
 
-**Status (2026-07-28):** 25% â OMN-61 done; OMN-54/55/62 Backlog, no recent activity.
+**Status (2026-07-28):** 25% — OMN-61 done; OMN-54/55/62 Backlog, no recent activity.
 
 ## Cross-milestone (no parent)
 
@@ -84,7 +84,7 @@ This is a planning-only repository documentation task, per OMN-44's own framing:
 
 ## Planning doc publish-gate (process rule, added 2026-07-28)
 
-Per `memory/github-yubios-KS9n5GAT/PROJECT_RULES.md` (Planning doc publish-gate section), this doc was re-read against `docs/BLOCKERS.md` `Last reviewed: 2026-07-25` immediately before this re-issue. Same-day drift on the previous (2026-07-25) version of this doc â calling B-VM-CTAP2 "single highest-leverage blocker" when BLOCKERS.md same-day review had marked it RESOLVED â is the failure mode this rule is designed to catch. Future re-issues must include a `<last-reviewed-against-blockers>` header stamped at the top of any planning doc that lands the same day BLOCKERS.md is reviewed.
+Per `memory/github-yubios-KS9n5GAT/PROJECT_RULES.md` (Planning doc publish-gate section), this doc was re-read against `docs/BLOCKERS.md` `Last reviewed: 2026-07-25` immediately before this re-issue. Same-day drift on the previous (2026-07-25) version of this doc — calling B-VM-CTAP2 "single highest-leverage blocker" when BLOCKERS.md same-day review had marked it RESOLVED — is the failure mode this rule is designed to catch. Future re-issues must include a `<last-reviewed-against-blockers>` header stamped at the top of any planning doc that lands the same day BLOCKERS.md is reviewed.
 
 
 
