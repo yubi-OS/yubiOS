@@ -1,5 +1,6 @@
 # Round 11 commit-citation audit (2026-09-18)
 
+_Moved from docs/ to refs/ 2026-09-19 per Jenny directive: docs/ holds ALL-CAPS normative docs only; wayfinding receipts and drift records live in refs/._
 Date: 2026-09-18. Family: integrity audit record (the round-8 pattern applied to this round).
 Origin: wayfinder round 11 cycle 28.
 

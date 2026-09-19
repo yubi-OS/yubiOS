@@ -1,5 +1,6 @@
 # CI_MAP drift check (2026-09-18)
 
+_Moved from docs/ to refs/ 2026-09-19 per Jenny directive: docs/ holds ALL-CAPS normative docs only; wayfinding receipts and drift records live in refs/._
 Date: 2026-09-18. Family: drift-check record. Origin: wayfinder round 11 rung
 `add:s11:011110000`, exemplars `docs/SELF.md`, `docs/CI_MAP.md`, `docs/MAINTAINER.md`.
 

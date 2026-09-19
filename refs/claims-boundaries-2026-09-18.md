@@ -1,5 +1,6 @@
 # Claims boundaries: what the campaign surfaces may say vs. what the threat model bounds (2026-09-18)
 
+_Moved from docs/ to refs/ 2026-09-19 per Jenny directive: docs/ holds ALL-CAPS normative docs only; wayfinding receipts and drift records live in refs/._
 Date: 2026-09-18. Family: boundary record. Origin: wayfinder round 11 rung `add:s4:110010100`,
 sitting between `docs/PR.md`, `docs/THREAT_MODEL.md`, and `docs/ARCHITECTURE.md` (its exemplars).
 

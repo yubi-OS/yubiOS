@@ -1,5 +1,6 @@
 # Self-corpus drift check: SELF.md and SOUL.md vs. the round record (2026-09-18)
 
+_Moved from docs/ to refs/ 2026-09-19 per Jenny directive: docs/ holds ALL-CAPS normative docs only; wayfinding receipts and drift records live in refs/._
 Date: 2026-09-18. Family: drift-check record. Origin: wayfinder round 11 rung
 `add:s9:111100000`, exemplars `docs/SELF.md`, `docs/SOUL.md`, `docs/BLOCKERS.md`.
 

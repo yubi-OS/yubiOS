@@ -1,5 +1,6 @@
 # Mitigation coverage check: MITIGATE.md rows vs. ADR anchors (2026-09-18)
 
+_Moved from docs/ to refs/ 2026-09-19 per Jenny directive: docs/ holds ALL-CAPS normative docs only; wayfinding receipts and drift records live in refs/._
 Date: 2026-09-18. Family: integrity record. Origin: wayfinder round 11 rung `add:s5:100000100`,
 exemplars `docs/MITIGATE.md`, `docs/THREAT_MODEL.md`, `docs/ADR.md`.
 

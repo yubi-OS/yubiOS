@@ -1,5 +1,6 @@
 # Wayfinder round 11 results: docs/ corpus at frame 5b50eaeff5c6d1c1
 
+_Moved from docs/ to refs/ 2026-09-19 per Jenny directive: docs/ holds ALL-CAPS normative docs only; wayfinding receipts and drift records live in refs/._
 Date: 2026-09-18. Family: run-results record. Origin: round 11, cycle 30 — the closing record.
 30 iterations on the `docs/` corpus (21 docs at round start), one file per commit, every cycle
 pre-registered on the outcomes ledger, held PR throughout.
