@@ -204,3 +204,20 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- YubiKey** = user-held, removable, owner-controlled identity. Used for: SSH, Git signing, disk unlock (LUKS2 FIDO2), PAM login (pam-u2f), home unlock (systemd-homed), age/age-plugin-yubikey decryption, TPM2-PKCS#11 attestation key fallback, OAuth/webauthn.
+- fTPM** = platform-bound integrity attestation. Used for: PCR measurement, IMA, TPM2 quote emission, LUKS2 TPM2 unlock, measured boot. Pairs with YubiKey, never substitutes for it.
+- Key A**: Daily-driver YubiKey 5 NFC (in pocket / on desk)
+- Key B**: Backup YubiKey 5 NFC (in safe / safe deposit box)
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, PIV Slot Conventions, FIDO2 Patterns.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
