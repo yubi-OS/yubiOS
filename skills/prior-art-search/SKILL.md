@@ -250,3 +250,22 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Load the topic or idea.** Accept any of:
+- Generate 3-5 search queries** across four angles:
+- Direct competitors / equivalents.** "[topic] alternative", "[topic] vs", "best [topic] tool", "[topic] comparison".
+- Failed attempts.** "[topic] failed", "[topic] abandoned", "[topic] shutdown", "[topic] why it didn't work".
+
+**In-repo touchpoints** — sections this skill owns or extends: Philosophy, When to Use, The Process, The Output.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Pick 3-5 queries. Do not run more — this skill is bounded.
+2. Fabricated findings.** If a query returns nothing useful, say so. Do not invent prior art to fill the report.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
