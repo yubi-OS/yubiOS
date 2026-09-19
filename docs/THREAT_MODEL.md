@@ -176,3 +176,7 @@ Version: 5a580cd32ff82feb03e25faf3291fb1b18f756a4
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 8)
+
+THREAT_MODEL.md (round-10 cycle-7 repaired): its assumption bounds are the bounds the round's claims-boundaries record cites; note additive (cross-link).
