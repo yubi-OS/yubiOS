@@ -91,3 +91,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## Cryptographic identity coverage
 
 This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
+
+## 2026-09-18 drift check (wayfinder round 10, cycle 17)
+
+maintainer doc: unchanged; the Jenny-merges rules it encodes were honored by every round (all agent PRs held for review, merged by the maintainer); note additive.
