@@ -30,7 +30,7 @@ yubiOS is a FIDO2-first immutable Linux system where the owner-held YubiKey is t
 
 ```mermaid
 graph LR
-    YK["ð YubiKey 5\nSingle hardware root of trust"]
+    YK["🔑 YubiKey 5\nSingle hardware root of trust"]
 
     subgraph CCID["CCID interface (USB smartcard)"]
         PIV["PIV slot 9c\nEC P-256 keypair\nsystemd-sbsign --key pkcs11:..."]
@@ -64,13 +64,13 @@ graph LR
 
 ```mermaid
 graph TD
-    FW["â¬ UEFI Firmware\nSecureBoot db"]
-    SDB["ð· systemd-boot\n(UEFI PE signed via PIV)"]
-    UKI["ð¦ Unified Kernel Image\n.linux + .initrd + .cmdline\n.pcrsig + .pcrpkey"]
-    CFS["ð composefs deployment\nEROFS metadata + fs-verity objects\n/etc + /var from writable /state"]
-    BACKING["ð physical sysroot\next4/Btrfs with fs-verity\noptionally inside LUKS2"]
-    HOMED["ð  systemd-homed\nper-user LUKS2 btrfs\nFIDO2 per user"]
-    YK["ð YubiKey 5\nPhysical possession required"]
+    FW["⬛ UEFI Firmware\nSecureBoot db"]
+    SDB["🔷 systemd-boot\n(UEFI PE signed via PIV)"]
+    UKI["📦 Unified Kernel Image\n.linux + .initrd + .cmdline\n.pcrsig + .pcrpkey"]
+    CFS["🔒 composefs deployment\nEROFS metadata + fs-verity objects\n/etc + /var from writable /state"]
+    BACKING["🔐 physical sysroot\next4/Btrfs with fs-verity\noptionally inside LUKS2"]
+    HOMED["🏠 systemd-homed\nper-user LUKS2 btrfs\nFIDO2 per user"]
+    YK["🔑 YubiKey 5\nPhysical possession required"]
     PCR["PCR 11 (TPM/fTPM, if present)\nboot phases measured\ninitrd-enter to complete"]
 
     FW ---|validates + measures| SDB
@@ -110,7 +110,7 @@ a traditional BLS entry and is therefore still an unsealed boot proof.
 
 ```mermaid
 graph TD
-    ROTPK["ð ROTPK hash\nSoC OTP / eFuse\n(Path A only)"]
+    ROTPK["🔑 ROTPK hash\nSoC OTP / eFuse\n(Path A only)"]
     BL1["BL1 boot ROM"]
     BL2["BL2 Trusted Boot\nverifies BL31/32/33 vs FIP certs"]
     BL31["BL31 EL3 Secure Monitor\nPSCI + SMC routing"]
@@ -118,9 +118,9 @@ graph TD
     FTPM["fTPM TA (ms-tpm-20-ref)\nSecure-EL0\nUUID bc50d971..."]
     STMM["StandaloneMM TA\nUEFI vars PK/KEK/db/dbx\non RPMB"]
     UBOOT["BL33 U-Boot\nEFI_LOADER = UEFI firmware"]
-    SDB["systemd-boot â UKI\nsame artifacts as x86-64"]
+    SDB["systemd-boot → UKI\nsame artifacts as x86-64"]
     LINUX["Linux\ntpm_ftpm_tee + IMA"]
-    YK["ð YubiKey 5\nFIDO2 LUKS2 unlock"]
+    YK["🔑 YubiKey 5\nFIDO2 LUKS2 unlock"]
 
     ROTPK -.->|Path A anchors| BL1
     BL1 -->|measures| BL2
@@ -144,8 +144,8 @@ graph TD
 graph TD
     Q{Can we burn\nROTPK to OTP/eFuse?}
 
-    Q -->|Yes â Path A| A["ENFORCING\nfull Trusted Board Boot\nROTPK in fuses\nBL1 rejects unsigned images\nbad code never runs"]
-    Q -->|No / locked / dev board â Path B| B["MEASURED + ATTESTED\nU-Boot FIT verified boot\nkey in control DTB\nmeasure into fTPM PCRs\ntrust decided AFTER boot"]
+    Q -->|Yes — Path A| A["ENFORCING\nfull Trusted Board Boot\nROTPK in fuses\nBL1 rejects unsigned images\nbad code never runs"]
+    Q -->|No / locked / dev board — Path B| B["MEASURED + ATTESTED\nU-Boot FIT verified boot\nkey in control DTB\nmeasure into fTPM PCRs\ntrust decided AFTER boot"]
 
     A --> AT["Targets: RK3588 (Orange Pi 5, Rock 5B),\nRK3399 (RockPro64), Ampere"]
     B --> BT["Targets: dev boards, early bring-up,\nRPi 5 (VideoCore closes owner RoT)"]
@@ -177,7 +177,7 @@ flowchart TD
     S["Pinned TF-A + OP-TEE + U-Boot<br/>StandaloneMM + fTPM TA"]
     F["QEMU flash.bin<br/>BL1 + FIP"]
     Q["QEMU virt boot<br/>normal + secure logs"]
-    A["Assertions<br/>Early TA Â· TPM Â· StMM"]
+    A["Assertions<br/>Early TA · TPM · StMM"]
     O["firmware-qemu-arm64 OCI bundle"]
 
     S --> F --> Q --> A --> O
@@ -189,11 +189,11 @@ The workflow selects the RK3588 TF-A and OP-TEE platforms and the ROCK 5B U-Boot
 
 ```mermaid
 flowchart TD
-    P["Pinned RK3588 sources<br/>TF-A Â· OP-TEE Â· U-Boot"]
+    P["Pinned RK3588 sources<br/>TF-A · OP-TEE · U-Boot"]
     T{"Verified DDR/TPL<br/>ROCKCHIP_TPL present?"}
     N["No: diagnostic bundle only<br/>no combined boot image"]
     B["Yes: u-boot-rockchip.bin<br/>candidate for board test"]
-    H["ROCK 5B evidence<br/>ROTPK Â· RPMB Â· fTPM NV Â· signed UKI"]
+    H["ROCK 5B evidence<br/>ROTPK · RPMB · fTPM NV · signed UKI"]
 
     P --> T
     T -->|No, current run| N
@@ -206,11 +206,11 @@ The RK3399 lane currently produces `idbloader.img`, `u-boot.itb`, `u-boot-rockch
 
 ```mermaid
 flowchart TD
-    P["Pinned RK3399 sources<br/>TF-A Â· OP-TEE Â· U-Boot"]
+    P["Pinned RK3399 sources<br/>TF-A · OP-TEE · U-Boot"]
     B["Board bundle<br/>idbloader + ITB + combined images"]
     F["firmware-rockpro64-rk3399 OCI"]
     H["Physical ROCKPro64 boot"]
-    E["Path A evidence<br/>ROTPK Â· RPMB Â· fTPM NV Â· signed UKI"]
+    E["Path A evidence<br/>ROTPK · RPMB · fTPM NV · signed UKI"]
 
     P --> B --> F
     F --> H --> E
@@ -315,9 +315,9 @@ graph LR
     REGO -->|policy passes| OCI
     OCI --> REG
 
-    REG -->|bcvk native-to-disk\nno QEMU| HW["ð½ Physical disk\n/dev/nvme0n1"]
-    REG -->|bcvk to-disk\nQEMU VM| IMG["ð qcow2 image\nfor cloud/VM"]
-    REG -->|bcvk ephemeral run\nYubiKey passthrough| VM["ð¥ Ephemeral VM\nCI / dev loop"]
+    REG -->|bcvk native-to-disk\nno QEMU| HW["💽 Physical disk\n/dev/nvme0n1"]
+    REG -->|bcvk to-disk\nQEMU VM| IMG["📁 qcow2 image\nfor cloud/VM"]
+    REG -->|bcvk ephemeral run\nYubiKey passthrough| VM["🖥 Ephemeral VM\nCI / dev loop"]
 
     HW -->|first boot| ENROLL["yubiOS-enroll.service\nConditionSecurity=measured-os\nYubiKey tap"]
 
@@ -335,7 +335,7 @@ graph LR
         SIGA["4 /usr A sig\nPKCS7 of root hash"]
     end
 
-    subgraph REPART["Created on first boot â systemd-repart"]
+    subgraph REPART["Created on first boot — systemd-repart"]
         USRB["5-7 /usr B\n_empty until first update"]
         ROOTFS["8 root fs\nLUKS2 btrfs\nFIDO2 enrolled\nsized to disk"]
         HOMEFS["9 home fs\nhomed per-user LUKS2"]
