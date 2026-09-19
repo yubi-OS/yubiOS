@@ -125,3 +125,21 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity
 This skill's `declarative policy` primitive is closed by cycle-7 RSI (3rd-priority MOVABLE per skill, post-cycle-6 baseline). This skill's declarative policy (.rego / OPA / Build Policy) integration is referenced.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `declarative policy` primitive gap.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Search before you read.** Use grep/glob to find the right file and the right line before reading anything. Reading a whole file to find one function wastes every line that isn't that function.
+- Read narrow.** For large files, read a targeted offset/limit range instead of the whole thing. Re-read a different range later if needed — that's still cheaper than one giant read most of which goes unused.
+- Batch independent work.** When two or more tool calls don't depend on each other's output, issue them together instead of serially. Each round trip carries fixed overhead beyond the actual payload.
+- Don't restate what's already visible.** Content already surfaced to the user, or already sitting earlier in context, doesn't need to be echoed back before adding to it. Reference it; don't reproduce it.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, Core practices, Load-order protocol, Anti-patterns.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't restate what's already visible.** Content already surfaced to the user, or already sitting earlier in context, doesn't need to be echoed back before adding to it. Reference it; don't reproduce it.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
