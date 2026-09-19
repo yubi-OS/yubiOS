@@ -107,3 +107,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## 2026-09-18 drift check (wayfinder round 10, cycle 12)
 
 the milestone target dated 2026-09-13 on the Production Proof & Release Gates project has passed; per the planning doctrine, the milestone state is Jenny's call; this note records the date passage only.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 11)
+
+MILESTONE.md: the passed 2026-09-13 target was flagged in round 10; still flagged; milestone state remains Jenny's call.

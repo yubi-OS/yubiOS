@@ -157,3 +157,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## 2026-09-18 drift check (wayfinder round 10, cycle 14)
 
 the citation-discipline doc: this round's citation-integrity audits (refs-side, cycles 14/34-35) are the doc's own rule applied to the round's records; note additive.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 20)
+
+CITATION.md (round-9 cycle-4 repaired): the citation discipline's rule is what the round's commit audits operationalize; note additive.

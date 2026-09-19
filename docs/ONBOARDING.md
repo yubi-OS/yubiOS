@@ -99,3 +99,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## 2026-09-18 drift check (wayfinder round 10, cycle 15)
 
 onboarding record: unchanged; the docs corpus it introduces was fully mojibake-repaired this round (rounds 9-10), so new readers see clean text; note additive.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 25)
+
+onboarding record: unchanged; the docs corpus a new reader now sees is fully mojibake-repaired and single-version (SPEC resolved); note additive.

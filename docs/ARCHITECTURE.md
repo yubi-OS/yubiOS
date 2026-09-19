@@ -453,3 +453,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## 2026-09-18 drift check (wayfinder round 10, cycle 19)
 
 architecture record (round-9 cycle-2 repaired): its boundary claims (UKI, composefs, FIDO2 roots) are unchanged this round; the nspawn-boundary record (round 8) extends its isolation family; note additive.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 23)
+
+architecture record: the isolation-family extensions (nspawn boundary) and claims-boundaries records from rounds 8/11 sit inside the architecture it describes; note additive.

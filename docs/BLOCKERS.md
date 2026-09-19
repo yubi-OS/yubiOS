@@ -126,3 +126,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## 2026-09-18 drift check (wayfinder round 10, cycle 11)
 
 the register's two stale rows (B-VGPU-VM-UNZIP retirement condition met 2026-09-09; B-ROCK1-OFFLINE naming the retired GPU runner) were already flagged by this round's refs-side drift check; this addendum records the flag inside the register itself as a review-request note, not a row edit (register edits belong to the next review).
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 22)
+
+the register: the two stale rows remain flagged in-register (round 10); no register edit this round; the register review remains the prescribed next step.

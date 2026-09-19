@@ -901,3 +901,7 @@ The closest cousin in the yubiOS repo is `drm-gpu-quota-secure-time` (per-cgroup
   - OQ4. What's the recovery story after SEVER? Fresh vfio-user socket + cold VM resume. A "clean room" vfio-user server with verified inputs is a downstream improvement.
 
 **Where the depth lives.** The ideation one-pager ([SOLO] V3 finalist, refs/adr-033-misbehavior-cutoff-policy-2026-07-28.md) and the prior-art search (refs/adr-033-prior-art-search-2026-07-28.md, 14 cited sources across the vfio-user / mdev / NVIDIA vGPU families) carry the long-form reasoning. This ADR is the decision anchor.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 5)
+
+ADR.md (round-9 cycle-1 mojibake-repaired): the ADR corpus is unchanged this round; the round-8 upstream note (bootc v1.16.13) keeps ADR-032/OMN-150 option (b) viable; note additive.

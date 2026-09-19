@@ -546,3 +546,7 @@ This document applies least-privilege hardening: Linux capabilities (drop + ambi
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 9)
+
+PR.md (round-10 cycle-2 repaired): the claims-boundaries record (cycle 1 of this round) now sits next to it as the pre-publish check; note additive.
