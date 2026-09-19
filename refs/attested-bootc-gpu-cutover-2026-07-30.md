@@ -266,10 +266,8 @@ Full source lists are preserved in each stream's report (3 parallel subagent rep
 - **Comparative:** CoCo policies, NVIDIA CoCo ref arch, Kata GPU passthrough, SLSA at admission, Qubes sys-gui-gpu, Secureblue-sealed
 
 
-
 ## Continuous / adaptive coverage
 
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
-## 2026-09-18 drift check (wayfinder round 8, cycle 79)
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.## 2026-09-18 drift check (wayfinder round 8, cycle 79)
 
 attested bootc GPU cutover record (round-7 repaired): the ADR-031 boundary it extends is unchanged this round; note additive.
