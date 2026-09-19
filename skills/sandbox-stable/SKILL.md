@@ -107,4 +107,20 @@ This path does **not** switch you to `@next`.
 - Typecheck against installed stable types  
 - No live secrets in sandbox env  
 - If using deprecated transports/helpers, finish or track [2026 deprecation](https://developers.cloudflare.com/sandbox/guides/2026-deprecation/) cleanup  
-- When the team is ready for 1.0, use **`sandbox-migrate-to-next`**—do not force cutover unprompted  
+- When the team is ready for 1.0, use **`sandbox-migrate-to-next`**—do not force cutover unprompted
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Sessions** can preserve working directory and environment across commands (default session / `enableDefaultSession`, `createSession`). See Sessions docs when state must carry across calls.
+
+**In-repo touchpoints** — sections this skill owns or extends: 1. Gate — confirm the package line, 2. Contract — non-negotiables, 3. Retrieve — open the doc for the task, Deprecated-API cleanup (stay on stable).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. We recommend **new projects** on `@cloudflare/sandbox@next` with **`sandbox-next`**. When you can, plan a move with **`sandbox-migrate-to-next`** so you are ready when 1.0 becomes the stable release. Do not force that port unless the user asks.
+2. | User wants to port to 1.0 / `@next` | **Stop.** Load **`sandbox-migrate-to-next`**. Do not half-apply preview APIs on a stable package. |
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
