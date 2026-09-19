@@ -294,3 +294,22 @@ This skill's `trust chain` primitive is closed by cycle-7 RSI (3rd-priority MOVA
 The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive gap.
 - [ ] If the request bundles several independently testable capabilities, a capability map (module ids, dependency direction, build order) was approved before any module spec was written
 - [ ] Every module spec traces to a module id in the approved map
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Stable module ids.** Kebab-case, chosen once, never renamed mid-initiative. Specs, plans, and downstream commands select work by these ids instead of guessing which spec is active.
+- Dependency direction, no cycles.** Arrows point one way. If two modules each need the other, they are one module.
+- Interfaces live at the boundary.** The map records that `billing` depends on `identity`; the contract between them belongs in the provider module's spec (see `api-and-interface-design` for designing it).
+- Objective** — What are we building and why? Who is the user? What does success look like?
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, The Gated Workflow, Phase 0: Scope Check.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Spec-driven development has four phases, preceded by a scope check (Phase 0) that activates only when one request bundles several independently testable capabilities. Do not advance to the next phase until the current one is validated.
+2. Don't silently fill in ambiguous requirements. The spec's entire purpose is to surface misunderstandings *before* code gets written — assumptions are the most dangerous form of misunderstanding.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
