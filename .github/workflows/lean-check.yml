@@ -130,6 +130,9 @@ jobs:
       - name: Resolve measurement-side claims
         run: python3 papers/data/lean/verify_claims.py
 
+      - name: Resolve rayleigh/1 measurement-side claims (exact components/nullity, witness bound, indicator=cut)
+        run: python3 papers/data/lean/verify_rayleigh_claims.py
+
   verify-tools:
     runs-on: ubuntu-latest
     timeout-minutes: 45

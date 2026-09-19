@@ -32,7 +32,7 @@ export const ISO_RADIUS = 0.095;
 export const MAX_N = AXIS_TRIAL_MAX_N;
 const REJECTED = ["weights", "rank", "admit", "admitted", "radius", "radii", "score", "threshold", "d", "T", "seed", "frame", "steps"];
 
-export const SCOPE = "Rayleigh-quotient diagnostics on the frozen frame: exact integer component/isolate counts and exact rational Rayleigh–Ritz upper bounds on the isolation graph, a float Fiedler estimate for the largest component compared to K fixed-margin null draws (exclusion-only), and Ky Fan's frozen-frame gap when embeddings are available. None of these is a ranking term, an admitted coordinate, a quality score or a keep/revert rule.";
+export const SCOPE = "Rayleigh-quotient diagnostics on the frozen frame: exact integer component/isolate counts and exact rational Rayleigh–Ritz upper bounds on the isolation graph, a float Fiedler estimate for the largest component compared to K fixed-margin null draws (exclusion-only), and Ky Fan's frozen-frame gap when embeddings are available. None of these is a ranking term, a quality score or a keep/revert rule; `admitted` is computed per frame from explicit criteria (non-degenerate null, seed-reproducible verdicts, exact witness bound, Ky Fan bound, N >= 100) and only licenses reporting the statistics as instrument readings.";
 
 function chord(a, b) { let s = 0; for (let k = 0; k < 3; k++) s += (a[k] - b[k]) ** 2; return Math.sqrt(s); }
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -157,12 +157,41 @@ export async function rayleighHandler(body, ctx) {
   const PM = ctx.PM; const nullDraw = PM._internal.nullDraw; const ops = PM._internal.frameOps(map.frame);
   const nul = graphNull(map, nullDraw, ops.toS2, K, seed);
   const obs = { components: graph.exact.components, isolates: graph.exact.isolates, largest: graph.largest_component.size, lambda2: graph.largest_component.fiedler_lambda2, edges: graph.edges };
-  const tails = Object.fromEntries(Object.entries({ components: "components", isolates: "isolates", largest: "largest", lambda2: "lambda2", edges: "edges" }).map(([k, key]) => [k, obs[k] === null ? null : nul.tail(key, obs[k])]));
+  const keys = ["components", "isolates", "largest", "lambda2", "edges"];
+  const tails = Object.fromEntries(keys.map((k) => [k, obs[k] === null ? null : nul.tail(k, obs[k])]));
   const { tail, ...nullOut } = nul;
+  // Admission trial (membership condition, is-this-x §admission): the statistic is admitted for REPORTING on this
+  // frame only when (a) its null is non-degenerate, (b) the exclusion verdict reproduces under an independent
+  // null seed, (c) the exact Rayleigh–Ritz witness bound holds for the float estimate, (d) the Ky Fan bound holds
+  // when a frame gap is present, and (e) N is large enough that a K-draw tail has resolution (N >= 100).
+  const seed2 = (seed ^ 0x7f4a7c15) | 0; const nul2 = graphNull(map, nullDraw, ops.toS2, K, seed2);
+  const tails2 = Object.fromEntries(keys.map((k) => [k, obs[k] === null ? null : nul2.tail(k, obs[k])]));
+  const frameGap = map.rayleigh_frame ?? null;
+  const per = {};
+  for (const k of keys) {
+    const t1 = tails[k], t2 = tails2[k];
+    const nondeg = !!(t1 && t2 && t1.verdict !== "null-degenerate" && t2.verdict !== "null-degenerate");
+    const reproducible = !!(t1 && t2 && t1.verdict === t2.verdict);
+    per[k] = { observed: obs[k], null_nondegenerate: nondeg, verdict_seed_a: t1 ? t1.verdict : null, verdict_seed_b: t2 ? t2.verdict : null, verdict_reproducible: reproducible, z_seed_a: t1 ? t1.z_descriptive : null, z_seed_b: t2 ? t2.z_descriptive : null };
+  }
+  const criteria = {
+    null_nondegenerate_all: keys.every((k) => per[k].null_nondegenerate),
+    verdicts_reproducible_all: keys.every((k) => per[k].verdict_reproducible),
+    witness_bound_holds: graph.largest_component.bound_holds === true || graph.largest_component.bound_holds === null,
+    ky_fan_bound_holds: frameGap && frameGap.available ? frameGap.ky_fan_bound_holds === true : null,
+    n_at_least_100: graph.n >= 100,
+    lean_identities: "papers/data/lean/RayleighBounds.lean (kernel-checked in lean-check.yml): PSD, kernel of constants and isolates, indicator = cut, witness numerator/denominator",
+  };
+  const admitted = criteria.null_nondegenerate_all && criteria.verdicts_reproducible_all && criteria.witness_bound_holds && (criteria.ky_fan_bound_holds !== false) && criteria.n_at_least_100;
+  const admission = {
+    admitted, scope: "reporting on this frame_id/instrument_id only: the five graph statistics may be quoted as instrument readings with their null tails; admission is NOT a ranking term, NOT a radius change, NOT a keep/revert rule, and does not transfer to another frame without its own trial",
+    criteria, per_statistic: per, seeds: { a: seed, b: seed2 }, K,
+    why_not: admitted ? null : Object.entries({ null_nondegenerate_all: "a null is degenerate", verdicts_reproducible_all: "a verdict flipped between independent null seeds", witness_bound_holds: "the float Fiedler estimate violated the exact Rayleigh-Ritz witness", ky_fan_bound_holds: "the frozen-frame Ky Fan gap came out negative", n_at_least_100: "N < 100: a K-draw tail has no resolution at this size" }).filter(([k]) => criteria[k] === false).map(([, v]) => v),
+  };
   return {
     trial: true, persisted: false, version: VERSION, map_id: v.map_id, frame_id: map.frame_id ?? null, instrument_id: map.instrument_id ?? null,
-    graph, observed: obs, null: { ...nullOut, seed, tails }, frame_gap: map.rayleigh_frame ?? { available: false, reason: "stored map carries no rayleigh_frame block (computed only when embeddings are available at map time)" },
-    admitted: false, admission_note: "diagnostic trial record; no coordinate, ranking term or radius is admitted or changed by this response",
+    graph, observed: obs, null: { ...nullOut, seed, tails, seed_b: seed2, tails_seed_b: tails2 }, frame_gap: frameGap ?? { available: false, reason: "stored map carries no rayleigh_frame block (computed only when embeddings are available at map time)" },
+    admitted, admission, admission_note: admitted ? "admission criteria met on this frame (see admission.criteria); the statistics may be reported as readings; nothing else changes" : "admission criteria not met on this frame (see admission.why_not); diagnostic record only",
     side_effects: { map_storage: false, repository: false, vectorize: false, embedding_cache: false }, task_verdict: "not-applicable", scope: SCOPE,
   };
 }
