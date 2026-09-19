@@ -197,3 +197,20 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `least privilege` primi
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- No single global checkpoint.** Each tile has its own checkpoint signed by the tile's witness quorum. A Rekor v2 entry's inclusion proof references the specific tile the entry was appended to.
+- No single point of compromise.** Rekor v1 had a single root key whose compromise would invalidate the entire log; Rekor v2's witness quorum per tile means a witness compromise can only invalidate that tile, not the whole log.
+- Endpoint discovery via TUF.** Rekor v2 endpoints are advertised via a TUF (The Update Framework) SigningConfig that cosign fetches at runtime. The TUF key rotates every ~6 months; cosign auto-rotates.
+- Rekor v2 GA** as of 2026-05. Rekor v1 is in maintenance mode; new Sigstore deployments should target v2.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Rekor v2 Architecture, TUF SigningConfig.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
