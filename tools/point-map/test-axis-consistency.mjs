@@ -86,7 +86,7 @@ async function axisRouteTests() {
     const r = await axisRedundancyHandler({ map_id: fx.baseline_id }, ctx);
     assert.equal(r.trial, true); assert.equal(r.persisted, false); assert.equal(r.K, fx.baseline.null.K); assert.equal(r.d, fx.baseline.bits[0].length); assert.equal(r.N, NAMES.length);
     assert.equal(r.frame_id, fx.baseline.frame_id); assert.equal(r.null_seed, (fx.baseline.seed ^ 0x5bd1e995) | 0); assert.match(r.seed_note, /XOR/);
-    assert.equal(r.admitted, false); assert.equal(r.task_verdict, "not-applicable"); assert.deepEqual(r.side_effects, { map_storage: false, repository: false, vectorize: false, embedding_cache: false });
+    assert.equal(typeof r.admitted, "boolean"); assert.equal(r.admission.admitted, r.admitted); assert.equal(r.admitted, false, "N=14 cannot be admitted"); assert.ok(r.admission.why_not.includes("n_at_least_100")); assert.equal(r.task_verdict, "not-applicable"); assert.deepEqual(r.side_effects, { map_storage: false, repository: false, vectorize: false, embedding_cache: false });
     assert.equal(fx.store.counters.saves, saves); assert.equal(fx.env._counters.aiCalls, ai);
     assert.equal(r.counts.excluded_from_null + r.counts.not_excluded + r.counts.null_degenerate, r.d);
     assert.ok(!JSON.stringify(r).includes('"weight"'));

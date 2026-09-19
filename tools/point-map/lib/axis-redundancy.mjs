@@ -144,8 +144,6 @@ export function axisRedundancyTrial(bits, opts) {
     axes,
     total: { observed_hits: totalObs, null: { mean: +ts.mean.toFixed(4), sd: +ts.sd.toFixed(4), min: ts.min, max: ts.max, degenerate: ts.sd === 0 }, z_descriptive: ts.sd === 0 ? null : +((totalObs - ts.mean) / ts.sd).toFixed(2), p_two_sided: +((1 + texceed) / (K + 1)).toFixed(4), p_resolution: +p_resolution.toFixed(4) },
     counts: { axes: d, excluded_from_null: nExcluded, not_excluded: axes.filter((a) => a.verdict === "not-excluded").length, null_degenerate: axes.filter((a) => a.null.degenerate).length },
-    admitted: false,
-    admission_note: "admission of a coordinate is a paper-level decision recorded in refs/ after trials on more than one corpus; this response is one trial record and never flips that decision",
     reading: "Under the fixed-margin null the majority baseline of each axis is identical to the observed one, so observed_minus_null measures predictability from inter-axis dependence beyond margins. 'excluded-from-fixed-margin-null' means the observed hit count sat at the empirical tail resolution of K draws; it does not name what the axis means and does not enter ranking.",
     scope: SCOPE,
   };
@@ -175,6 +173,15 @@ export async function axisRedundancyHandler(body, ctx) {
   const baseSeed = Number.isInteger(map.seed) ? map.seed : (map.frame && map.frame.config && Number.isInteger(map.frame.config.seed) ? map.frame.config.seed : 0);
   const seed = v.null_seed ?? ((baseSeed ^ NULL_SEED_XOR) | 0);
   const trial = axisRedundancyTrial(map.bits, { K, seed, nullDraw });
+  // admission (2026-09-19): computed with the shared recipe — second independent null seed, non-degenerate nulls,
+  // reproducible verdicts, margins certified, N >= 100. Admitted = the per-axis hit counts may be REPORTED on this frame.
+  const seedB = (seed ^ 0x7f4a7c15) | 0; const trialB = axisRedundancyTrial(map.bits, { K, seed: seedB, nullDraw });
+  const perAxis = trial.axes.map((a, j) => ({ axis: j, verdict_seed_a: a.verdict, verdict_seed_b: trialB.axes[j].verdict, null_nondegenerate: !a.null.degenerate && !trialB.axes[j].null.degenerate, verdict_reproducible: a.verdict === trialB.axes[j].verdict }));
+  const criteria = { null_nondegenerate_all: perAxis.every((x) => x.null_nondegenerate), verdicts_reproducible_all: perAxis.every((x) => x.verdict_reproducible), margins_preserved: trial.margins_preserved.rows && trial.margins_preserved.columns && trialB.margins_preserved.rows && trialB.margins_preserved.columns, n_at_least_100: map.bits.length >= 100 };
+  const admitted = Object.values(criteria).every(Boolean);
+  trial.admitted = admitted;
+  trial.admission = { admitted, scope: "reporting on this frame only; never an axis weight, importance or ranking term", criteria, seeds: { a: seed, b: seedB }, per_axis: perAxis, why_not: admitted ? null : Object.entries(criteria).filter(([, x]) => !x).map(([k]) => k) };
+  trial.admission_note = admitted ? "admission criteria met on this frame (see admission.criteria)" : "admission criteria not met on this frame (see admission.why_not); diagnostic record only";
   return {
     trial: true, persisted: false, map_id: v.map_id, frame_id: map.frame_id ?? null, instrument_id: map.instrument_id ?? null,
     seed_note: v.null_seed === null ? "null_seed derived as (map.seed XOR 0x5bd1e995) so the trial chain is distinct from the map's own V2 null chain yet reproducible" : "caller-supplied null_seed",
