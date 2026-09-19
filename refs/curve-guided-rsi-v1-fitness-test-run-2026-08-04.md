@@ -153,11 +153,9 @@ The `curve-guided-rsi` meta-skill works. v1 fitness-test demonstrates the closed
 Next steps: push the cycle log to `yubi-OS/yubiOS refs/` for audit trail, then leave the skill running on the corpus. Re-run on next milestone (corpus growth ≥25%, i.e., when skill count reaches ~79).
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Cryptographic identity coverage

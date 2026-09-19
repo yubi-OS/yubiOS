@@ -269,19 +269,16 @@ Sources: https://github.com/systemd/systemd/releases/tag/v261, https://raw.githu
 > **Correction (2026-07-24):** the table above lists `RestrictFileSystemAccess=` alongside per-unit `systemd.exec` directives. That's wrong. Verified against the systemd v261 release, the merged PR (systemd/systemd#41340), and `systemd-system.conf(5)`: **`RestrictFileSystemAccess=` is a manager-level setting in the `[Manager]` section of `system.conf` (or via the `systemd.restrict_filesystem_access=` kernel command-line parameter), not a per-service `systemd.exec` directive, and it has no per-unit opt-out** — it's a hard, global security invariant for fully-verified image-based systems, not something an individual yubiOS service unit can turn on for itself. It requires booting with `dm_verity.require_signatures=1` and `lsm=...,bpf`; PID 1 refuses to start without those. This matters for yubiOS's BLOCKERS.md B-HARDENING-RUNTIME entry: adopting this control is a system-wide boot-chain decision (system.conf + kernel cmdline), not a drop-in on the enrollment unit the way `RestrictFileSystems=~@network` is today. Do not conflate the two when writing the runtime hardening evidence for B-HARDENING-RUNTIME.
 
 
-
 ## Attestation coverage
 
 This document supports the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Continuous / adaptive coverage
 
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.

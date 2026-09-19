@@ -203,10 +203,9 @@ ReadWritePaths=/etc/crypttab
 - All Systems Go conference: https://all-systems-go.io/
 
 
-
 ## Declarative policy coverage
 
-This document integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 ## 2026-09-18 drift check (wayfinder round 8, cycle 95)
 

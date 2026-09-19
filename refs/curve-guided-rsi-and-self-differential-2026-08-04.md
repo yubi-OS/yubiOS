@@ -201,23 +201,19 @@ New for differential:
 - 2026-08-04 cycle 1: **Initial differential run.** Hypothesis "concat the parent and offshoot primitive bases into a union basis, fit a single curve on the combined corpus, and report the overlay as a cross-corpus (u,v) coordinate system." Edit: built `session/diff-curves/differential_pipeline.py` (one-shot pipeline: load skills via API + memory files via fs, compute 10-D yubiOS coverage + 9-D self-doc coverage, fit per-corpus curves + union curve, compute overlay, persist JSON + markdown). Single intent: ship the differential baseline. Validation: pipeline ran end-to-end on the current 77-skill yubiOS corpus + 10-file self-doc corpus (131 items after per-file granularity rule). Per-corpus Stage 1 metrics: **yubiOS** N=77, PC1+PC2=0.4885, R²=+0.4239, sparse=6; **self-doc combined** N=131, PC1+PC2=0.6134, R²=+0.5946, sparse=7. **Differential Stage 1** N=208, PC1+PC2=**0.6770**, R²=**+0.7013**, sparse=**0**, Jaccard overlay=0.0741, jointly-occupied cells=6. Result: the closed-loop metric FIRES on all three planes; the union curve is denser than either parent; the differential baseline is established and persisted in `differential_fit.json` and this document. RSI Cycle 1 on the differential is staged for user approval.
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Declarative policy coverage
 
-This document integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Continuous / adaptive coverage
 
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Cryptographic identity coverage
