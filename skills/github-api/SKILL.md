@@ -1,6 +1,6 @@
 ---
 name: github-api
-description: >-
+description: )-
   GitHub REST API patterns for the yubi-OS org. Covers the four operations used
   constantly: (1) Git Data API — committing files without cloning (blob→tree→commit→ref
   chain); (2) Contents API — reading and writing single files via base64; (3)
@@ -351,3 +351,17 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `declarative policy` pr
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Auth, Pattern 1 — Commit files without cloning (Git Data API), Pattern 2 — Read / write a single file (Contents API), Pattern 3 — Issues.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
