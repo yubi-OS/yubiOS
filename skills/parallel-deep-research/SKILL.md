@@ -1,6 +1,6 @@
 ---
 name: parallel-deep-research
-description: >-
+description: )-
   When user asks for 'deep research X' or 'research X with parallel agents' — dispatch 3-N
   parallel subagents covering independent angles (deep-dive, prior-art, comparative analysis),
   synthesize findings, then push to `yubi-OS/yubiOS/refs/topic-slug-YYYY-MM-DD.md`. Always verify
@@ -49,3 +49,21 @@ When Jenny asks for "deep research X" with parallel agents (or just "deep resear
 - Per subagent: ~1500-2500 words
 - Synthesis: ~2000-3000 words (consolidated; can be longer if multi-stream)
 - Refs/ note (for discovery findings): ~500-1500 words
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Read skills first** (in order): using-agent-skills, token-efficiency, context-isolation, then the domain skill that fits the topic (prior-art-search, github-api, mkosi-image-builder, etc.).
+- Design parallel streams** (3-5 is the sweet spot):
+- Each subagent prompt MUST**:
+- After subagents return, synthesize**:
+
+**In-repo touchpoints** — sections this skill owns or extends: Workflow, Length budgets.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Each subagent prompt MUST**:
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
