@@ -544,3 +544,23 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — no movable primitive gap to cl
 This skill already covers all 5 remaining MOVABLE corpus-priority primitives post-cycle-6 (attestation, trust chain, declarative policy, immutability, least privilege). The cycle-7 RSI audit verified full movable coverage; no primitive closure needed.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to close.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Security telemetry / SIEM** — Google Chronicle / YARA-L detection-as-code, Unified Data Model (UDM), continuous evaluation.
+- Compliance assurance** — HITRUST CSF v11.7.0 (latest minor at fetch date 2026-07-29): 14 control categories × 49 control objectives × 156 control specifications, organized in 5 PRISMA maturity levels × 5 HITRUST compliance levels, third-party attestation.
+- Federal security doctrine** — CISA Zero Trust Maturity Model v2.0 (April 2023): 5 pillars (Identity, Devices, Networks, Applications, Data) + 3 cross-cutting capabilities (Governance; Visibility and Analytics; Automation and Orchestration) + 4 maturity stages (Traditional → Initial → Advanced → Optimal). See "Source versions used" below for v1.0 vs v2.0 deltas.
+- Image-based OS architecture** — Lennart Poettering / 0pointer.net: 17 design goals, UKI/PCR/TPM trust chain, Discoverable Partitions Specification, hermetic /usr, modular (sysext / portable service / nspawn).
+
+**In-repo touchpoints** — sections this skill owns or extends: Why this skill exists, The 10-primitive spine, Source versions used, 1. Attestation / measurement.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. `stage` — CISA uses it (4 maturity stages). HITRUST uses it informally (5 compliance levels, sometimes called stages). 0pointer uses it (boot phases). NEVER mix.
+2. When a cell fails any check**, drop it from the table. Don't soften ● to ○ to keep the row visible. Empty cells are honest; mis-marked cells are a 12-axes-wide problem because every cycle's re-map will surface them as drift.
+3. When a yubiOS design decision arrives, answer four times in sequence. Use the source's own vocabulary; cite the source. Do not skip any of the four.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
