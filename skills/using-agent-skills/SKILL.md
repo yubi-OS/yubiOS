@@ -241,3 +241,24 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity
 This skill's `trust chain` primitive is closed by cycle-7 RSI (3rd-priority MOVABLE per skill, post-cycle-6 baseline). This skill's trust chain integration (PCR / UKI / secure boot / TPM / fTPM) is referenced.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive gap.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- STOP.** Do not proceed with a guess.
+- Check for an applicable skill before starting work.** Skills encode processes that prevent common mistakes.
+- Skills are workflows, not suggestions.** Follow the steps in order. Don't skip verification steps.
+- Multiple skills can apply.** A feature implementation might involve `idea-refine` → `spec-driven-development` → `planning-and-task-breakdown` → `incremental-implementation` → `test-driven-development` → `code-review-and-quality` → `code-simplification` → `shipping-and-launch` in sequence.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, Skill Discovery, Core Operating Behaviors, 1. Surface Assumptions.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. ├── Don't know what you want yet? ──────→ interview-me
+2. Don't silently fill in ambiguous requirements. The most common failure mode is making wrong assumptions and running with them unchecked. Surface uncertainty early — it's cheaper than rework.
+3. STOP.** Do not proceed with a guess.
+4. Skills are workflows, not suggestions.** Follow the steps in order. Don't skip verification steps.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
