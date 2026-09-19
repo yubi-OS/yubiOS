@@ -18,12 +18,12 @@ The campaign thesis is:
 
 > **yubiOS is building a Linux trust chain the owner can hold in their hand.**
 
-The public story is not âa more secure Linux distribution.â That category is crowded and difficult to prove. The sharper story is that yubiOS separates two questions that conventional systems often blur:
+The public story is not “a more secure Linux distribution.” That category is crowded and difficult to prove. The sharper story is that yubiOS separates two questions that conventional systems often blur:
 
 1. **Is the authorized owner present?** An owner-held YubiKey gates signing, unlock, SSH, and privileged local identity.
 2. **Did the expected platform boot?** Signed boot artifacts, verified operating-system content, and platform measurement answer this separately.
 
-This distinction is both technically honest and memorable. It also prevents the current âNo TPMâ shorthand from becoming a misleading claim: yubiOS avoids a **mandatory TPM as the owner-facing unlock and identity gate**, while still using TPM/fTPM measurement where it adds platform evidence.
+This distinction is both technically honest and memorable. It also prevents the current “No TPM” shorthand from becoming a misleading claim: yubiOS avoids a **mandatory TPM as the owner-facing unlock and identity gate**, while still using TPM/fTPM measurement where it adds platform evidence.
 
 The first campaign should optimize for qualified reviewers, contributors, hardware collaborators, and technical credibility. Downloads, broad consumer coverage, and enterprise adoption are later outcomes.
 
@@ -66,7 +66,7 @@ This convergence validates the category but removes any basis for claiming that 
 
 ### Public whitespace
 
-As of 2026-07-16, broad web discovery primarily surfaces the projectâs own [GitHub repository](https://github.com/yubi-OS/yubiOS) and [GitHub Pages site](https://yubi-os.github.io/). That creates a clean opportunity to establish the category language before outside summaries harden around the ambiguous âNo TPMâ slogan.
+As of 2026-07-16, broad web discovery primarily surfaces the project’s own [GitHub repository](https://github.com/yubi-OS/yubiOS) and [GitHub Pages site](https://yubi-os.github.io/). That creates a clean opportunity to establish the category language before outside summaries harden around the ambiguous “No TPM” slogan.
 
 ### Reference and comparison map
 
@@ -80,7 +80,7 @@ These projects are references or adjacent alternatives, not targets for adversar
 | [Talos Linux](https://www.siderolabs.com/talos-linux) | Minimal, immutable, API-managed Kubernetes nodes | yubiOS targets owner-operated machines and physical-presence workflows rather than Kubernetes-only infrastructure. |
 | [Amutable](https://amutable.com/) | Deterministic, verifiable Linux foundations | yubiOS adds an owner-held identity and secret-release constraint while building from many of the same systemd-era ideas. |
 
-Never claim âfirst,â âonly,â or âmost secure.â The defensible language is âyubiOS explores,â âyubiOS is building,â or âthe project combines.â
+Never claim “first,” “only,” or “most secure.” The defensible language is “yubiOS explores,” “yubiOS is building,” or “the project combines.”
 
 ## Audience priorities
 
@@ -118,11 +118,11 @@ Never claim âfirst,â âonly,â or âmost secure.â The
 
 Use the level appropriate to the audience:
 
-1. **Human:** âYour machine should ask for a key you control before it unlocks or accepts privileged identity.â
-2. **Product:** âyubiOS uses an owner-held YubiKey across Secure Boot signing, disk and home unlock, SSH, and PAM.â
-3. **Technical:** âPIV signs the UKI; FIDO2 `hmac-secret` gates LUKS2 without PCR-hash update lock-in; verified `/usr` and signed image delivery protect the operating-system content.â
-4. **Platform:** âARM64 Path A aims to extend owner control below the UKI through TF-A, OP-TEE, RPMB-backed state, fTPM measurement, and U-Boot; that path is not production-proven yet.â
-5. **Social:** âSecurity defaults should not require an enterprise contract or an invisible vendor-controlled trust anchor.â
+1. **Human:** “Your machine should ask for a key you control before it unlocks or accepts privileged identity.”
+2. **Product:** “yubiOS uses an owner-held YubiKey across Secure Boot signing, disk and home unlock, SSH, and PAM.”
+3. **Technical:** “PIV signs the UKI; FIDO2 `hmac-secret` gates LUKS2 without PCR-hash update lock-in; verified `/usr` and signed image delivery protect the operating-system content.”
+4. **Platform:** “ARM64 Path A aims to extend owner control below the UKI through TF-A, OP-TEE, RPMB-backed state, fTPM measurement, and U-Boot; that path is not production-proven yet.”
+5. **Social:** “Security defaults should not require an enterprise contract or an invisible vendor-controlled trust anchor.”
 
 ### Short descriptors
 
@@ -142,7 +142,7 @@ Use the level appropriate to the audience:
 
 > yubiOS is an independent community project. It is not affiliated with, sponsored by, or endorsed by Yubico. YubiKey and Yubico are registered trademarks of Yubico AB.
 
-Use Yubicoâs [official brand assets and usage guidance](https://brandfolder.yubico.com/yubico/public) only after a name and trademark review. Do not imply a partnership, certification, compatibility endorsement, or review-unit relationship.
+Use Yubico’s [official brand assets and usage guidance](https://brandfolder.yubico.com/yubico/public) only after a name and trademark review. Do not imply a partnership, certification, compatibility endorsement, or review-unit relationship.
 
 ## Claim ledger
 
@@ -150,20 +150,20 @@ Every public claim must have an owner, evidence link, review date, and maturity 
 
 | Topic | Approved wording now | Evidence | Do not say yet |
 |---|---|---|---|
-| Status | âPre-launch,â âexperimental,â âgroundwork,â âtechnical previewâ | [README.md](../README.md), [TODO.md](TODO.md), [BLOCKERS.md](BLOCKERS.md) | âProduction-ready,â âGA,â âsafe for daily useâ |
-| YubiKey role | âOwner-facing human-presence and identity rootâ | [SPEC.md](SPEC.md), [ARCHITECTURE.md](ARCHITECTURE.md), [THREAT_MODEL.md](THREAT_MODEL.md) | âThe only root of trust at every layerâ |
-| TPM stance | âNo mandatory TPM for owner-facing disk unlock or identity workflowsâ | [ADR-003](ADR.md#adr-003-luks2--fido2-via-systemd-cryptenroll-no-tpm), [SPEC.md](SPEC.md) | Unqualified âNo TPMâ or âreplaces every TPM functionâ |
-| Secure Boot | âDesigned to sign UKIs through YubiKey PIV slot 9c using PKCS#11â | [ADR-002](ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw), [sbsign validation note](../refs/sbsign-pkcs11-validate-2026-07-23.md) | âFIDO2 signs Secure Boot artifactsâ or âproduction signing fully provenâ |
-| FIDO2 unlock | âDesigned around FIDO2 `hmac-secret`, PIN, touch, and an offline recovery keyâ | [ADR-003](ADR.md#adr-003-luks2--fido2-via-systemd-cryptenroll-no-tpm), [LUKS/FIDO2 test note](../refs/luks-fido2-e2e-test-2026-07-23.md) | âProduction hardware flow fully validatedâ until physical evidence exists |
-| Immutable OS | â`/usr` is intended to be read-only and verified through composefs/erofs and dm-verityâ | [SPEC.md](SPEC.md), [ARCHITECTURE.md](ARCHITECTURE.md) | âThe whole system is immutableâ or âruntime compromise is impossibleâ |
-| ARM64 | âPrimary target and planned owner-owned platform-root pathâ | [ADR-023](ADR.md#adr-023-arm64-as-primary-target-platform), [board status](../refs/arm64-path-a-b-board-status-2026-07-23.md) | âProduction Path A is provenâ |
-| x86-64 | âSupported above the UKI; OEM firmware remains below the owner-controlled boundaryâ | [SPEC.md](SPEC.md), [THREAT_MODEL.md](THREAT_MODEL.md) | âNo OEM trust on x86-64â |
-| VM evidence | âThe recorded ARM64 lane reached a Fedora guest; enrollment proof remained gated by a guest failure in that runâ | [VM evidence](../refs/vm-e2e-run-29525332901.md) | âARM64 end-to-end CI is greenâ without a newer verified run |
-| Software authenticators | âTEST-only regression tools isolated to `dev` tagsâ | [ADR-026](ADR.md#adr-026-devdev-sha-test-image-tag-swu2f-enabled-on-0mniteckyubios), [CI_MAP.md](CI_MAP.md) | âEquivalent to a physical YubiKeyâ |
-| Supply chain | âBuilds are designed to use digest-pinned inputs, policy gates, provenance, and SBOM attestationsâ | [PINNED.md](../PINNED.md), [CI_MAP.md](CI_MAP.md), [MISSION.md](MISSION.md) | A SLSA level unless independently verified against the current specification |
-| PQ TLS | âCurrent dependency floors are intended to preserve hybrid ML-KEM defaults, with CI drift checksâ | [ADR-025](ADR.md#adr-025-post-quantum-hybrid-tls-x25519mlkem768-for-updateattestation-endpoints), [TODO.md](TODO.md) | âPost-quantum secureâ as a whole-product guarantee |
-| Firmware inspection | âOne-shot, warning-oriented first-boot inspectionâ | [ADR-024](ADR.md#adr-024-chipsec-first-boot-firmware-validation-as-a-portable-service), [MITIGATE.md](MITIGATE.md) | âCHIPSEC proves firmware is cleanâ |
-| AI resilience | âDesigned so deployed authority depends on verification rather than trust in an authorâ | [MISSION.md](MISSION.md), [THREAT_MODEL.md](THREAT_MODEL.md) | âAI cannot compromise yubiOSâ or âverification proves the code is benignâ |
+| Status | “Pre-launch,” “experimental,” “groundwork,” “technical preview” | [README.md](../README.md), [TODO.md]— (unfilled), [BLOCKERS.md](BLOCKERS.md) | “Production-ready,” “GA,” “safe for daily use” |
+| YubiKey role | “Owner-facing human-presence and identity root” | [SPEC.md](SPEC.md), [ARCHITECTURE.md](ARCHITECTURE.md), [THREAT_MODEL.md](THREAT_MODEL.md) | “The only root of trust at every layer” |
+| TPM stance | “No mandatory TPM for owner-facing disk unlock or identity workflows” | [ADR-003](ADR.md#adr-003-luks2--fido2-via-systemd-cryptenroll-no-tpm), [SPEC.md](SPEC.md) | Unqualified “No TPM” or “replaces every TPM function” |
+| Secure Boot | “Designed to sign UKIs through YubiKey PIV slot 9c using PKCS#11” | [ADR-002](ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw), [sbsign validation note](../refs/sbsign-pkcs11-validate-2026-07-23.md) | “FIDO2 signs Secure Boot artifacts” or “production signing fully proven” |
+| FIDO2 unlock | “Designed around FIDO2 `hmac-secret`, PIN, touch, and an offline recovery key” | [ADR-003](ADR.md#adr-003-luks2--fido2-via-systemd-cryptenroll-no-tpm), [LUKS/FIDO2 test note](../refs/luks-fido2-e2e-test-2026-07-23.md) | “Production hardware flow fully validated” until physical evidence exists |
+| Immutable OS | “`/usr` is intended to be read-only and verified through composefs/erofs and dm-verity” | [SPEC.md](SPEC.md), [ARCHITECTURE.md](ARCHITECTURE.md) | “The whole system is immutable” or “runtime compromise is impossible” |
+| ARM64 | “Primary target and planned owner-owned platform-root path” | [ADR-023](ADR.md#adr-023-arm64-as-primary-target-platform), [board status](../refs/arm64-path-a-b-board-status-2026-07-23.md) | “Production Path A is proven” |
+| x86-64 | “Supported above the UKI; OEM firmware remains below the owner-controlled boundary” | [SPEC.md](SPEC.md), [THREAT_MODEL.md](THREAT_MODEL.md) | “No OEM trust on x86-64” |
+| VM evidence | “The recorded ARM64 lane reached a Fedora guest; enrollment proof remained gated by a guest failure in that run” | [VM evidence](../refs/vm-e2e-run-29525332901.md) | “ARM64 end-to-end CI is green” without a newer verified run |
+| Software authenticators | “TEST-only regression tools isolated to `dev` tags” | [ADR-026](ADR.md#adr-026-devdev-sha-test-image-tag-swu2f-enabled-on-0mniteckyubios), [CI_MAP.md](CI_MAP.md) | “Equivalent to a physical YubiKey” |
+| Supply chain | “Builds are designed to use digest-pinned inputs, policy gates, provenance, and SBOM attestations” | [PINNED.md](../PINNED.md), [CI_MAP.md](CI_MAP.md), [MISSION.md](MISSION.md) | A SLSA level unless independently verified against the current specification |
+| PQ TLS | “Current dependency floors are intended to preserve hybrid ML-KEM defaults, with CI drift checks” | [ADR-025](ADR.md#adr-025-post-quantum-hybrid-tls-x25519mlkem768-for-updateattestation-endpoints), [TODO.md]— (unfilled) | “Post-quantum secure” as a whole-product guarantee |
+| Firmware inspection | “One-shot, warning-oriented first-boot inspection” | [ADR-024](ADR.md#adr-024-chipsec-first-boot-firmware-validation-as-a-portable-service), [MITIGATE.md](MITIGATE.md) | “CHIPSEC proves firmware is clean” |
+| AI resilience | “Designed so deployed authority depends on verification rather than trust in an author” | [MISSION.md](MISSION.md), [THREAT_MODEL.md](THREAT_MODEL.md) | “AI cannot compromise yubiOS” or “verification proves the code is benign” |
 
 ## Readiness gates
 
@@ -171,8 +171,8 @@ Every public claim must have an owner, evidence link, review date, and maturity 
 
 Complete before proactive outreach:
 
-- [ ] Complete a name and trademark review for âyubiOS,â document independence from Yubico, and review logo use. This is a launch-risk check, not a legal conclusion.
-- [ ] Reconcile the README and repository description with the claim ledger: remove or qualify âNo TPM,â âsole root,â âat every layer,â and unqualified âshipsâ language.
+- [ ] Complete a name and trademark review for “yubiOS,” document independence from Yubico, and review logo use. This is a launch-risk check, not a legal conclusion.
+- [ ] Reconcile the README and repository description with the claim ledger: remove or qualify “No TPM,” “sole root,” “at every layer,” and unqualified “ships” language.
 - [ ] Put a destructive-install warning, supported-hardware matrix, backup requirement, and recovery link beside every public disk-write command.
 - [ ] Confirm that public `latest`, immutable, `dev`, installer, and firmware tags match the documented classification.
 - [ ] Publish a current release-evidence page linking the commit, build, tests, artifact digests, provenance, SBOM, and known gaps.
@@ -189,7 +189,7 @@ Required evidence:
 - A public demo or log showing at least one signed-UKI or FIDO2 flow, with its trust level labeled.
 - A current blocker list and a fast correction path for public factual errors.
 
-Allowed language: âbuilding,â âtechnical preview,â âseeking reviewers,â and âhere is what is proven today.â
+Allowed language: “building,” “technical preview,” “seeking reviewers,” and “here is what is proven today.”
 
 ### Gate 2: physical-YubiKey technical preview
 
@@ -201,7 +201,7 @@ Required evidence:
 - Repeatable commands, logs, versions, and video from a clean install.
 - A second person reproduces the flow without private coaching.
 
-Allowed language: âhardware-backed technical preview on tested configurations.â
+Allowed language: “hardware-backed technical preview on tested configurations.”
 
 ### Gate 3: flagship ARM64 launch
 
@@ -214,13 +214,13 @@ Required evidence:
 - Recovery for failed provisioning, lost token, bad update, and failed Secure Boot enrollment.
 - An external technical review and closure or explicit acceptance of high-severity findings.
 
-Only after this gate should the campaign use âlaunch,â ârelease,â or production Path A language.
+Only after this gate should the campaign use “launch,” “release,” or production Path A language.
 
 ## Campaign architecture
 
 ### Wave 0: credibility foundation
 
-Duration: 2â4 weeks, dependent on engineering.
+Duration: 2–4 weeks, dependent on engineering.
 
 Deliverables:
 
@@ -235,15 +235,15 @@ No broad announcement in this wave.
 
 ### Wave 1: build in public
 
-Duration: 4â8 weeks.
+Duration: 4–8 weeks.
 
-Theme: **âHere is the trust boundary; help us break the assumptions.â**
+Theme: **“Here is the trust boundary; help us break the assumptions.”**
 
 Publish a weekly evidence series, not a stream of generic project updates:
 
 1. Why identity root and platform root are different.
 2. Why PIV signs the UKI while FIDO2 unlocks the disk.
-3. What FIDO2 unlock survives across updatesâand what it does not attest.
+3. What FIDO2 unlock survives across updates—and what it does not attest.
 4. How `dev` software-authenticator images are prevented from crossing into production.
 5. What an ARM64 VM proves, and what only a real board can prove.
 6. Recovery as a security property: backup key, lost token, and bad update.
@@ -255,7 +255,7 @@ Each post should contain one new artifact, one limitation, one specific request 
 
 Trigger: Gate 2 passes.
 
-Theme: **âOne key, four owner workflows, one reproducible proof.â**
+Theme: **“One key, four owner workflows, one reproducible proof.”**
 
 Package the physical-YubiKey demo as:
 
@@ -269,7 +269,7 @@ Package the physical-YubiKey demo as:
 
 Trigger: Gate 3 passes.
 
-Theme: **âFrom a key in your hand to a chain below the kernel.â**
+Theme: **“From a key in your hand to a chain below the kernel.”**
 
 Lead with real-board evidence, not feature count. Publish the provisioning ceremony, fuse safety model, Path A/Path B comparison, independent review, recovery demonstration, and artifact verification before sending pitches.
 
@@ -298,7 +298,7 @@ Pitch only when the project has evidence appropriate to the outlet.
 | [The New Stack](https://thenewstack.io/contributions/) | A timely argument about verifiable image-based Linux and owner-held identity | Pitch analysis with a reason it matters that week; its current guidance says it wants a point of view rather than a generic technical tutorial. |
 | [Fedora Magazine](https://fedoramagazine.org/building-your-own-atomic-bootc-desktop/) | Practical bootc integration and lessons that benefit Fedora users | Coordinate with the Fedora/bootc community; make the article useful without requiring adoption of yubiOS. |
 | [OpenSSF community](https://openssf.org/blog/2026/03/05/your-voice-belongs-here-how-to-get-involved-in-the-openssf-community/) | Production/test separation, pinned inputs, provenance verification, and AI-era contribution controls | Participate before pitching; offer a case study or tech talk, not a product announcement. |
-| [Hacker News](https://news.ycombinator.com/newsguidelines.html) | A working demo and candid technical trade-offs | Use âShow HNâ only after people can run or inspect something meaningful. Post in the maintainerâs own voice and stay available for the full discussion window. |
+| [Hacker News](https://news.ycombinator.com/newsguidelines.html) | A working demo and candid technical trade-offs | Use “Show HN” only after people can run or inspect something meaningful. Post in the maintainer’s own voice and stay available for the full discussion window. |
 | bootc, systemd, Fedora, OP-TEE, TF-A, U-Boot, and FIDO communities | Upstream-relevant findings and review requests | Engage through their normal issue, discussion, mailing-list, or conference processes; never drop a cross-posted press release. |
 
 Do not buy a mass press-release wire for the first campaign. The audience is narrow, proof-sensitive, and more likely to respond to a primary artifact or direct technical briefing.
@@ -337,11 +337,11 @@ Do not buy a mass press-release wire for the first campaign. The audience is nar
 
 > yubiOS is an independent, pre-launch Linux project exploring a specific trust model: a YubiKey is the owner-facing gate for UKI signing, LUKS2 and home unlock, SSH, and PAM, while platform measurement remains a separate root with explicitly bounded guarantees. We have now reproduced **[milestone]** on **[named hardware]** and published the commands, logs, signatures, artifact digests, recovery result, threat model, and gaps at **[evidence URL]**. The interesting part is not another immutable distribution; it is the attempt to move owner authority out of an invisible board-bound root without pretending firmware or active-session risks disappear. If this fits your Linux/security coverage, we can provide a live demo and answer technical questions on the record.
 
-Personalize the first two sentences for the recipientâs recent work. Never attach an unsolicited binary or write âjust following upâ more than once.
+Personalize the first two sentences for the recipient’s recent work. Never attach an unsolicited binary or write “just following up” more than once.
 
 ### Community post
 
-**Suggested title:** Show HN: yubiOSâan experimental Linux trust chain built around an owner-held YubiKey
+**Suggested title:** Show HN: yubiOS—an experimental Linux trust chain built around an owner-held YubiKey
 
 > We are building yubiOS to test a narrow idea: the credential that authorizes owner actions should live with the owner, while platform integrity should be measured and described separately. PIV signs the UKI; FIDO2 `hmac-secret` gates disk and home unlock; resident FIDO2 credentials cover SSH; pam-u2f covers local privilege. The OS side is image-based and intended to verify `/usr`. This is not production-ready, not affiliated with Yubico, and not a claim that firmware or runtime compromise disappears. Here is the current proof, the failed assumptions, and the blocker list: **[URL]**. We especially want review from **[two specific expertise areas]**.
 
@@ -395,7 +395,7 @@ Because authorship is not a sufficient trust primitive. The project is testing w
 
 ### D-7 to D-3: targeted briefings
 
-- Offer no more than 3â5 tailored briefings.
+- Offer no more than 3–5 tailored briefings.
 - Give every recipient the same factual evidence and launch time.
 - Maintain a question log and update the FAQ without changing the underlying claims.
 - Prepare correction, security, and infrastructure incident responses.
@@ -427,7 +427,7 @@ Because authorship is not a sufficient trust primitive. The project is testing w
 | Risk | Prevention | Response |
 |---|---|---|
 | Project name or logo creates perceived Yubico affiliation | Trademark review, independence line, conservative asset use | Pause amplification, correct copy everywhere, cooperate on rename or asset changes if required |
-| âNo TPMâ becomes the headline | Use the identity/platform split in headline and briefing | Correct promptly: no mandatory TPM for owner-facing unlock; TPM/fTPM may provide measurement |
+| “No TPM” becomes the headline | Use the identity/platform split in headline and briefing | Correct promptly: no mandatory TPM for owner-facing unlock; TPM/fTPM may provide measurement |
 | WIP image is treated as safe for daily use | Gate labels, hardware matrix, destructive-install warnings | Pin a warning, contact the outlet, correct the canonical page, document affected users |
 | TEST-only authenticator reaches a production tag | Automated separation gates and release verification | Stop distribution, revoke/retag as appropriate, publish incident facts, rotate affected artifacts, investigate authority path |
 | Security finding arrives during campaign | `SECURITY.md`, monitored role address, response owner | Acknowledge privately, triage, coordinate disclosure, pause scheduled claims that depend on the control |
@@ -487,7 +487,7 @@ This strategy was synthesized from all 27 pre-existing Markdown files on `main` 
 - [README.md](../README.md)
 - [SPEC.md](SPEC.md)
 - [THREAT_MODEL.md](THREAT_MODEL.md)
-- [TODO.md](TODO.md)
+- [TODO.md]— (unfilled)
 
 ### Dated and task-specific evidence
 

@@ -37,3 +37,7 @@ flowchart LR
   J --> L["Real-world capability change"]
   K --> L
 ```
+
+## 2026-09-18 drift check (wayfinder round 10, cycle 16)
+
+LEARN.md: unchanged this round; inventory completeness only.
