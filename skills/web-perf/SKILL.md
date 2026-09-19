@@ -199,3 +199,21 @@ Present findings as:
 2. **Top Issues** - Prioritized list of problems with estimated impact (high/medium/low)
 3. **Recommendations** - Specific, actionable fixes with code snippets or config changes
 4. **Codebase Findings** - Framework/bundler detected, optimization opportunities (omit if no codebase access)
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Be assertive**: Verify claims by checking network requests, DOM, or codebase—then state findings definitively.
+- Verify before recommending**: Confirm something is unused before suggesting removal.
+- Quantify impact**: Use estimated savings from insights. Don't prioritize changes with 0ms impact.
+- Skip non-issues**: If render-blocking resources have 0ms estimated impact, note but don't recommend action.
+
+**In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, FIRST: Verify MCP Tools Available, Key Guidelines, Quick Reference.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Quantify impact**: Use estimated savings from insights. Don't prioritize changes with 0ms impact.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
