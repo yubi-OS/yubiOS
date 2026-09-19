@@ -108,3 +108,15 @@ Pilot plan:
 Validation:
 Rollback:
 ```
+
+## Examples
+
+**In-repo touchpoints** — sections this skill owns or extends: Workflow, Exports To Ask For, Mapping Heuristics, Migration Assessment Prompts.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Palo Alto rules map only after understanding traffic direction, zones, objects, users, apps, decryption, and hit counts. Do not flatten zones blindly into lists.
+2. Broad `any` destination/service rules and very broad CIDRs require manual review. Do not auto-create broad catchalls.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
