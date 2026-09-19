@@ -143,4 +143,24 @@ theorem rr_path_example : cut path8 [0,1,2,3] = 1 ∧ (8 : Int) * cut path8 [0,1
 theorem rr_path_quad : quad path8 (ind [0,1,2,3]) = 1 := by
   decide
 
+/-! ## Printed axiom obligations
+
+The CI gate parses this output; it does not grep source comments. -/
+
+#print axioms sq_nonneg
+#print axioms quad_nonneg
+#print axioms quad_const
+#print axioms quad_shift
+#print axioms sq_mul
+#print axioms quad_scale
+#print axioms ind_sq_diff
+#print axioms quad_indicator
+#print axioms edgeCut_singleton_untouched
+#print axioms cut_singleton_untouched
+#print axioms quad_no_incident
+#print axioms witness_numerator
+#print axioms witness_denominator
+#print axioms rr_path_example
+#print axioms rr_path_quad
+
 end Rayleigh
