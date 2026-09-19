@@ -26,7 +26,7 @@ where relevant, the primary sources below that ground its design.
 
 ### Authentication: FIDO2 / WebAuthn / CTAP
 
-- W3C. *Web Authentication: An API for accessing Public Key Credentials (WebAuthn) â Level 2.* W3C Recommendation, 2021. https://www.w3.org/TR/webauthn-2/
+- W3C. *Web Authentication: An API for accessing Public Key Credentials (WebAuthn) — Level 2.* W3C Recommendation, 2021. https://www.w3.org/TR/webauthn-2/
 - FIDO Alliance. *Client to Authenticator Protocol (CTAP) 2.1.* FIDO Alliance Proposed Standard, 2021. https://fidoalliance.org/specs/fido-v2.1-ps-20210615/
 - IETF. Pechanec, J. & Moustakas, D. *RFC 7512: The PKCS #11 URI Scheme.* 2015. https://www.rfc-editor.org/rfc/rfc7512
 
