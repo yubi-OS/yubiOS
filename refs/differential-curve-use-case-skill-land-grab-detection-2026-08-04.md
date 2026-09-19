@@ -82,23 +82,19 @@ See `session/diff-curves/ideate-differential-use-case-solo-2026-08-04.md` for th
 - 2026-08-04 cycle 1: **Initial V3 use case + MVP application.** Hypothesis "the differential's 25 skill-only cells are a prioritized action list for self-archaeology dispatch." Edit: drafted this refs/ doc + the 5 structural-uniqueness SELF-CHANGELOG entries (top-5 skill-only cells). Validation: pre-RSI differential sparse=0; post-MVP differential re-fit will be in v0.24. **Single intent: ship the use case + apply MVP.**
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Declarative policy coverage
 
-This document integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Continuous / adaptive coverage
 
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Cryptographic identity coverage
@@ -106,16 +102,6 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
 
 
-
 ## Segmentation coverage
 
 This document applies the yubiOS segmentation primitive — Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.
-
-
-## Problem Statement
-
-**Question**: TBD per file context.
-**Scope**: TBD.
-**Out of scope**: TBD.
-
-Context: section appended per repo-refs-skill cycle-3 7-D Mode D batch (Δ=+0.4966).
