@@ -449,3 +449,7 @@ See [refs/kernel-rootfs-split-2026-07-29.md](../refs/kernel-rootfs-split-2026-07
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 2026-09-18 drift check (wayfinder round 10, cycle 19)
+
+architecture record (round-9 cycle-2 repaired): its boundary claims (UKI, composefs, FIDO2 roots) are unchanged this round; the nspawn-boundary record (round 8) extends its isolation family; note additive.
