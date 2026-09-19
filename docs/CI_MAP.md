@@ -541,3 +541,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## Segmentation coverage
 
 This document applies the yubiOS segmentation primitive — Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 21)
+
+the workflow map: this round's ci-map drift record flagged its counts vs the 39-workflow census; this addendum cross-links it and nothing more (the map edit itself belongs to the next content pass).
