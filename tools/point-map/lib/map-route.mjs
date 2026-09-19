@@ -1,6 +1,7 @@
 import { radiusOptions, attachRadius } from './radius-api.mjs';
 import { ApiError } from './http.mjs';
 import { placement } from './placement.mjs';
+import { kyFanFrameGap } from './rayleigh.mjs';
 import { MAX_ITEMS } from './limits.mjs';
 function id(v,n){if(!Number.isSafeInteger(v)||v<1)throw new ApiError(422,`${n} must be a positive integer`);return v;}
 function aligned(v,n,key,unique=false){
@@ -28,6 +29,14 @@ export async function mapRouteHandler(body,ctx){
   aligned(body.names,input.length,'names',true);aligned(body.labels,input.length,'labels');
   if(body.persist!==undefined&&typeof body.persist!=='boolean')throw new ApiError(422,'persist must be boolean');
   if(body.frame!==undefined)throw new ApiError(422,'use baseline_id; arbitrary frames are not accepted by the API');
+  // transition guard (2026-09-18, after the round-8 stale-state incident): the caller declares the single transition it intends
+  let transition=null;
+  if(body.transition!==undefined){
+    const t=body.transition; if(!t||typeof t!=='object'||Array.isArray(t))throw new ApiError(422,'transition must be an object {max_changed_names?, max_added?, max_removed?}');
+    transition={};
+    for(const k of ['max_changed_names','max_added','max_removed']){ if(t[k]===undefined)continue; if(!Number.isInteger(t[k])||t[k]<0)throw new ApiError(422,`transition.${k} must be a non-negative integer`); transition[k]=t[k]; }
+    if(body.baseline_id==null)throw new ApiError(422,'transition requires baseline_id');
+  }
   if(texts&&input.some(t=>typeof t!=='string'||!t.trim()))throw new ApiError(422,'texts must be nonempty strings');
   if(!texts){const D=input[0]?.length;if(!Number.isInteger(D)||D<2||D>768||input.some(r=>!Array.isArray(r)||r.length!==D||r.some(x=>typeof x!=='number'||!Number.isFinite(x))))throw new ApiError(422,'vectors must be finite rectangular rows, D=2..768');}
   if(body.predicted_delta!=null&&(typeof body.predicted_delta!=='number'||!Number.isFinite(body.predicted_delta)))throw new ApiError(422,'predicted_delta must be a finite number');
@@ -50,9 +59,21 @@ export async function mapRouteHandler(body,ctx){
   const source=texts?`texts:${embedding.model}`:'vectors';map.source=source;if(embedding)map.embedding_metadata=embedding.metadata;
   let comparison=null;
   if(baseline){try{comparison=PM.compareMaps(baseline,map,{predicted_delta:body.predicted_delta});}catch(e){if(!String(e.message).startsWith('name sets differ'))throw new ApiError(409,`comparison validation failed: ${e.message}`);comparison={comparable:false,task_verdict:'not-tested',reason:e.message};}}
+  if(baseline&&transition){
+    const bn=new Set(baseline.names||[]),an=new Set(map.names||[]);
+    const added=[...an].filter(n=>!bn.has(n)),removed=[...bn].filter(n=>!an.has(n));
+    let changed=[]; if(comparison&&Array.isArray(comparison.changed_content_names))changed=comparison.changed_content_names; else if(comparison&&Array.isArray(comparison.changed_names))changed=comparison.changed_names;
+    else if(baseline.embedding_metadata&&baseline.embedding_metadata.docs&&embedding&&embedding.metadata&&embedding.metadata.docs){const bh=new Map((baseline.names||[]).map((n,i)=>[n,baseline.embedding_metadata.docs[i]&&baseline.embedding_metadata.docs[i].sha256]));changed=map.names.filter((n,i)=>bh.has(n)&&embedding.metadata.docs[i]&&bh.get(n)!==embedding.metadata.docs[i].sha256);}
+    const over=[];
+    if(transition.max_changed_names!==undefined&&changed.length>transition.max_changed_names)over.push({limit:'max_changed_names',declared:transition.max_changed_names,actual:changed.length,names:changed.slice(0,10)});
+    if(transition.max_added!==undefined&&added.length>transition.max_added)over.push({limit:'max_added',declared:transition.max_added,actual:added.length,names:added.slice(0,10)});
+    if(transition.max_removed!==undefined&&removed.length>transition.max_removed)over.push({limit:'max_removed',declared:transition.max_removed,actual:removed.length,names:removed.slice(0,10)});
+    if(over.length)throw new ApiError(409,'the submitted corpus differs from the baseline by more than the declared transition; the map was computed but NOT persisted (driver state is stale or the corpus was rebuilt from the wrong tree)',{transition_violations:over,persisted:false});
+  }
   let math_ledger=null;
   const explain=ctx.explainTransition||(typeof PM.explainTransition==='function'?PM.explainTransition.bind(PM):null);
   if(baseline&&explain){try{math_ledger=!ctx.explainTransition&&comparison?.math_ledger?comparison.math_ledger:explain(baseline,map,{predicted_delta:body.predicted_delta});}catch(e){throw new ApiError(409,`transition validation failed: ${e.message}`);}}
+  try{map.rayleigh_frame={...kyFanFrameGap(X,map.frame||opts.frame,{iters:200}),version:'rayleigh/1',frame_source:baseline?'inherited baseline frame':'fresh frame (fitted on this corpus)'};}catch(e){map.rayleigh_frame={available:false,reason:e.message};}
   const radius_comparison=attachRadius(map,baseline,radiusOpts);
   // single ADD or single CHANGE against a baseline: report where the item landed even when compareMaps is name-set incomparable
   let placement_block=null;

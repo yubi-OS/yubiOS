@@ -13,6 +13,7 @@ import { mapControlHandler, VERSION as CONTROL_VERSION } from "./lib/control-rou
 import { outcomesPostHandler, outcomesGetHandler, VERSION as OUTCOMES_VERSION } from "./lib/outcomes-route.mjs";
 import { axisRedundancyHandler, VERSION as AXIS_VERSION } from "./lib/axis-redundancy.mjs";
 import { mapConsistencyHandler, VERSION as CONSISTENCY_VERSION } from "./lib/consistency-route.mjs";
+import { rayleighHandler, VERSION as RAYLEIGH_VERSION } from "./lib/rayleigh.mjs";
 
 // src/github.ts
 var GH = "https://api.github.com";
@@ -803,6 +804,7 @@ POST /api/map/control {"baseline_id": n, "texts": [...exact baseline corpus...],
 POST /api/outcomes {"baseline_id": n, "target": {...}, "predicted_delta"?, "after_id"? | "observed_delta"?, "task_check": {"verdict","verifier","notes"?}, "supersedes"?} -> append-only ledger row
 GET  /api/outcomes?baseline_id=n -> ledger rows + contingency of counts
 POST /api/map/axis-redundancy {"map_id": n, "K"?: 2..40, "null_seed"?: int} -> per-axis LOO-NN predictability trial vs fixed-margin null (admitted:false always)
+POST /api/map/rayleigh {"map_id": n, "K"?: 2..40, "null_seed"?: int} -> isolation-graph components/isolates (exact), Fiedler lambda2 of the largest component + exact Rayleigh-Ritz cut witness, fixed-margin null tails; frame Ky Fan gap echoed
 POST /api/map/consistency {"baseline_id": n, "texts": [...corpus with primary candidate...], "names": [...], "target": {...}, "variants": [{"label","text"}] (1..3)} -> one edit under caller variants; sign agreement, never a gate
      -> { preview:true, persisted:false, map, comparison, math_ledger, target, unchanged_source_count, unchanged_anchor_count, side_effects }
      reads the stored baseline, re-embeds the actual candidate texts on the baseline's frozen frame and writes NOTHING (no map row, no Vectorize).
@@ -828,7 +830,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
             } catch (e) {
               pointmapVersion = null;
             }
-            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, limits: { version: LIMITS_VERSION, max_items: LIMIT_MAX_ITEMS }, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION }, now: new Date().toISOString() });
+            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, limits: { version: LIMITS_VERSION, max_items: LIMIT_MAX_ITEMS }, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION, placement: "placement/1", rayleigh: RAYLEIGH_VERSION }, now: new Date().toISOString() });
           }
           if (p === "/api/fits" && req.method === "GET") {
             return json({ fits: await listFits(db) });
@@ -1133,7 +1135,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
               return errorResponse(e);
             }
           }
-          if ((p === "/api/map/consistency" || p === "/api/map/axis-redundancy") && req.method === "POST") {
+          if ((p === "/api/map/consistency" || p === "/api/map/axis-redundancy" || p === "/api/map/rayleigh") && req.method === "POST") {
             try {
               const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               // Read-only map load, same discipline as preview: no CREATE TABLE, no INSERT.
@@ -1147,6 +1149,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
               };
               const result = p === "/api/map/consistency"
                 ? await mapConsistencyHandler(body, { env, PM, embedDocuments, loadStoredMap })
+                : p === "/api/map/rayleigh" ? await rayleighHandler(body, { loadStoredMap, PM })
                 : await axisRedundancyHandler(body, { loadStoredMap, PM });
               return json(result);
             } catch (e) {

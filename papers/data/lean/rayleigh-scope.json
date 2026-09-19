@@ -1,0 +1,13 @@
+{
+  "file": "papers/data/lean/RayleighBounds.lean",
+  "version": "rayleigh/1",
+  "theorems": ["quad_nonneg", "quad_const", "quad_shift", "quad_scale", "ind_sq_diff", "quad_indicator", "cut_singleton_untouched", "quad_no_incident", "witness_numerator", "witness_denominator", "rr_path_example", "rr_path_quad"],
+  "permitted_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "nonclaims": [
+    "nullity(L) = number of connected components is NOT proved (needs finite-dimensional linear algebra); the runtime reports BFS components and states the identity",
+    "the Fiedler value lambda_2 is a float power-iteration estimate; nothing here certifies it, only the exact rational Rayleigh-Ritz witness it is compared against",
+    "Ky Fan's maximum principle (tr(X^T C X) <= lambda_1 + lambda_2) is NOT proved here; the runtime reports the frozen-frame gap as a measurement",
+    "no statement about embedding semantics, task quality, or whether any document should be kept or reverted",
+    "Rayleigh's inviscid stability equation and the Rayleigh-Plesset equation are not used: they need real analysis and describe physical systems the instrument does not measure"
+  ]
+}

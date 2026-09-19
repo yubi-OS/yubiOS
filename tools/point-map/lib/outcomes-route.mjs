@@ -186,12 +186,18 @@ export function contingency(rows) {
 
 /** ctx: { listOutcomes(baseline_id|null) -> rows (ascending id, each {id,...entry}) } */
 export async function outcomesGetHandler(query, ctx) {
-  let baseline_id = null;
+  let baseline_id = null, frame_id = null;
   if (query && query.baseline_id !== undefined && query.baseline_id !== null && query.baseline_id !== "") {
     const n = Number(query.baseline_id);
     baseline_id = posInt(n, "baseline_id");
   }
-  const rows = await ctx.listOutcomes(baseline_id);
+  if (query && typeof query.frame_id === "string" && query.frame_id.length) {
+    if (!/^[0-9a-f]{8,32}$/i.test(query.frame_id)) throw new ApiError(422, "frame_id must be a hex fingerprint");
+    frame_id = query.frame_id.toLowerCase();
+  }
+  let rows = await ctx.listOutcomes(baseline_id);
+  // a chained round spreads its rows over many baseline ids on ONE frozen frame; frame_id gathers them (round-11 lesson)
+  if (frame_id !== null) rows = rows.filter((r) => typeof r.frame_id === "string" && r.frame_id.toLowerCase() === frame_id);
   if (!Array.isArray(rows)) throw new ApiError(503, "outcome storage unavailable");
-  return { version: VERSION, baseline_id, rows: rows.slice(0, MAX_ROWS), truncated: rows.length > MAX_ROWS, contingency: contingency(rows), append_only: true, scope: SCOPE };
+  return { version: VERSION, baseline_id, frame_id, rows: rows.slice(0, MAX_ROWS), truncated: rows.length > MAX_ROWS, contingency: contingency(rows), append_only: true, scope: SCOPE };
 }
