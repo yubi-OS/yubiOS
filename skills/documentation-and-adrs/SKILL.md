@@ -335,3 +335,25 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Don't delete old ADRs.** They capture historical context.
+- CLAUDE.md / rules files** — Document project conventions so agents follow them
+- Spec files** — Keep specs updated so agents build the right thing
+- ADRs** — Help agents understand why past decisions were made (prevents re-deciding)
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Architecture Decision Records (ADRs), When to Write an ADR.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. When NOT to use:** Don't document obvious code. Don't add comments that restate what the code already says. Don't write docs for throwaway prototypes.
+2. Don't delete old ADRs.** They capture historical context.
+3. // Don't comment self-explanatory code
+4. // Don't leave TODO comments for things you should just do now
+5. // Don't leave commented-out code
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
