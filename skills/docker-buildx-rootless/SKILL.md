@@ -1,6 +1,6 @@
 ---
 name: docker-buildx-rootless
-description: >-
+description: )-
   Docker CLI-level skill covering three topics: (1) dockerd rootless mode — running the Docker
   daemon as a non-root user via user namespaces, daemon socket location, systemd user unit,
   contexts; (2) docker buildx CLI — builder instances, driver types (docker, docker-container,
@@ -436,3 +436,17 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Extended description, Part 1 — dockerd Rootless Mode, How it works, Prerequisites.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
