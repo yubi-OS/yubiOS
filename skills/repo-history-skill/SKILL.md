@@ -891,3 +891,20 @@ PC1+PC2 ≥ 0.40; sparse-cell count ∈ [5, 20] on the 37-item corpus.
 
 
 - 2026-08-07 cycle 4 (post-mode-D re-fit + user override of 3-cycle RSI cap): Hypothesis "The corpus after the 15 mode-D per-item edits (batches 1+2) needs re-fit + sparse-cell re-detection; pick the top actionable sparse cell and apply one RSI edit; user override lifts the cycle cap." Edit: (a) re-fetched all 4 git sub-corpora + Linear OMN → corpus grew 16% (279 → 324 items: PRs top-30 + Issues 31 + Commits 100 + Releases 16 + Linear OMN 138, plus agent-skills mirror: 9 PRs + 0 issues + 100 commits + 0 releases). (b) Re-fit with cycle-2-broadened regexes; primitive survival stable at 7/9 (same survivors as cycle 3: `has_purpose`, `has_sha`, `has_pr_ref`, `has_linear_ref`, `has_state_progression`, `has_evidence`, `has_temporal_anchor`; `has_author` flipped to 100% saturated; `has_cross_corpus_link` recovered from 1.6% → 7.1% but still dropped as constant-zero on PR-only sub-corpus). (c) PC1+PC2 = **0.8534** (gate ≥ 0.40 PASS) — actually *higher* than cycle 3's 0.5721 because the post-edit corpus has more structurally-distinct items after the mode-D appends; closed-loop metric FIRES. ‖p‖ = 1.0 ± 1e-6 PASS; sparse-cell count = 324 (one per item with missing primitive). (d) Top actionable sparse cell: **Linear OMN-94** with Δ=+1.0 (the corpus saturation after the batch-2 SHA-line edit left only `has_temporal_anchor` missing); applied single-action RSI by appending real API `completedAt: 2026-07-25T10:10:35.427Z` to the description (not fabricated). Linear `issueUpdate` mutation succeeded; primitive coverage on OMN-94 is now 9/9. **RSI fixpoint rule**: condition (1) ✓ PASS (no new gaps introduced), (2) ✓ PASS (1 of 1 cycle-4 hypothesis-driven edit applied), (3) ✓ PASS (no new primitives, join keys, or sub-corpora). **CYCLE 4 SHIPS** — the user override is logged for future cycle-cadence review. **Cycle progression**: cycle 1 (N=34, 3/9 survivors, 0.7311, 0 sparse) → cycle 2 (N=248, 7/9, 0.7437, 3 sparse) → cycle 3 (N=279, 7/9, 0.5721, 16 sparse) → cycle 4 (N=324, 7/9 → 8/9 effective after OMN-94 edit, 0.8534, 324 → 323 sparse). The closed-loop metric FIRES across all 4 cycles — PC1+PC2 stays above gate every time; the corpus-saturation story is consistent (7-9 of 9 primitives always survive, the 1-2 dropped primitives are structural limits of the yubOS workflow). **Carryover for cycle 5+ (requires another user override)**: (high) semantic-similarity join via embedding → would rescue `has_linear_ref` + `has_cross_corpus_link` on PR-only sub-corpus (still 0/16 PRs have both, even after 5 cycle-1 cycle-2 cycle-3 attempts); (low) pull issues for agent-skills too — confirmed 0 real issues as of 2026-08-07 (corpus fact, not a gap); (low) apply Mode D batch on remaining cycle-4 sparse cells (323 still sparse; top-N actionable by Δ for cycle-5 dispatch). The cycle-4 JSON is at [papers/data/repo-history-skill-cycle-4-post-mode-d-2026-08-07.json](file://documents/github-yubios-KS9n5GAT/papers/data/repo-history-skill-cycle-4-post-mode-d-2026-08-07.json); the mode-D audit trail is at [papers/data/mode_d/mode-d-batches-combined-2026-08-07.md](file://documents/github-yubios-KS9n5GAT/papers/data/mode_d/mode-d-batches-combined-2026-08-07.md); the conceptualization doc lands at `yubi-OS/yubiOS refs/repo-history-skill-cycle-4-2026-08-07.md`.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- PR body → Linear issue**: regex `OMN-\d+` on PR `body`. PRs that
+- Commit → PR**: `merge_commit_sha` on the PR → commit SHA. The
+- Issue/PR body → SHA**: regex `[0-9a-f]{40}` on PR/issue `body`.
+- D binary primitive coverage** — analogue to the curve-rsi
+
+**In-repo touchpoints** — sections this skill owns or extends: When to Use, When NOT to Use, The Two Substrates, git side (GitHub REST API via `conn_3h7rj41VF6hs`).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
