@@ -108,8 +108,8 @@ theorem edgeCut_singleton_untouched (v a b : Nat) (ha : a ≠ v) (hb : b ≠ v) 
 theorem cut_singleton_untouched : ∀ (es : List (Nat × Nat)) (v : Nat), untouched es v → cut es [v] = 0
   | [], _, _ => rfl
   | e :: es, v, h => by
-      have he := h e (List.mem_cons_self e es)
-      have hrest : untouched es v := fun e' he' => h e' (List.mem_cons_of_mem e he')
+      have he : e.1 ≠ v ∧ e.2 ≠ v := h e (by simp)
+      have hrest : untouched es v := fun e' he' => h e' (by simp [he'])
       show edgeCut [v] e.1 e.2 + cut es [v] = 0
       rw [edgeCut_singleton_untouched v e.1 e.2 he.1 he.2, cut_singleton_untouched es v hrest]
       rfl
@@ -123,7 +123,7 @@ theorem quad_no_incident (es : List (Nat × Nat)) (v : Nat) (h : untouched es v)
 theorem witness_numerator (es : List (Nat × Nat)) (S : List Nat) (n k : Int) :
     quad es (fun v => n * ind S v - k) = n * n * cut es S := by
   have h1 : (fun v => n * ind S v - k) = (fun v => (fun w => n * ind S w) v + (-k)) := by
-    funext v; omega
+    funext v; rw [Int.sub_eq_add_neg]
   rw [h1, quad_shift, quad_scale, quad_indicator]
 
 /-- Rayleigh–Ritz witness denominator, algebraically: k(n−k)² + (n−k)k² = n·k·(n−k). -/
