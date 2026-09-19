@@ -1,6 +1,6 @@
 ---
 name: linkedin-browser-outreach
-description: >-
+description: )-
   Send and read LinkedIn messages via a live cloud browser session (browser_use) instead of Beeper
   or the LinkedIn API, both of which have no outreach path. Use when the user wants to log into
   LinkedIn, message an existing chat, or run candidate/recruiter outreach on LinkedIn and has no
@@ -120,3 +120,21 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Draft first, every time**, per the standard external-actions process — one message to a real person is exactly the high-stakes case that process exists for. Batch drafts are fine (e.g. 4 replies in one file) but each individual message's content still needs the user's eyes before it goes out.
+- One-sided-thread limitation:** if the account owner sent the *first* message in a thread and the other party hasn't replied yet, LinkedIn hides the compose box entirely ("You haven't received a response yet"). No message can be sent until they reply. Don't treat this as a bug — report it as a hard LinkedIn UI constraint and move on to the next recipient.
+- Human-speed rate limiting:** never fire messages back-to-back with no gap or in a tight loop. Space sends out — treat each `browser_use` call as one message, confirm success, and only then move to the next. For a batch (e.g. 20-person outreach), spread sends across a session rather than one micro-burst; if the user wants dozens sent, break the batch across multiple turns/sessions rather than one uninterrupted sequence.
+- cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Extended description, When to use this instead of `beeper` or the LinkedIn connector, Credential rule — never break this, Reading / mapping the network (safe, read-only).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Do not touch the password field yourself, ever.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
