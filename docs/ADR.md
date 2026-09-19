@@ -56,11 +56,11 @@ ykman config usb --enable FIDO --enable CCID
 ```
 
 
-**Amendment (2026-07-28):** Reviewed against today's `docs/BLOCKERS.md` â no blocking
+**Amendment (2026-07-28):** Reviewed against today's `docs/BLOCKERS.md` — no blocking
 blockers retired today affect this ADR. The `systemd v257+` floor in the signing-toolchain
 line above is the correct `systemd-sbsign` minimum (per ADR-008, sbsign landed in v257 in
 Dec 2024); the yubiOS base remains pinned to v261 per ADR-015/ADR-016. This PR completes
-the v257âv261 doc-sync flagged in `RECENT_ACTIVITY.md` (2026-07-08 entry); no further
+the v257→v261 doc-sync flagged in `RECENT_ACTIVITY.md` (2026-07-08 entry); no further
 swap is needed in this ADR.
 
 <last-reviewed-against-blockers>2026-07-28</last-reviewed-against-blockers>
@@ -104,11 +104,11 @@ TPM-dependent layer.
 This ships in `usr/lib/dracut.conf.d/50-yubiOS-fido2.conf`.
 
 
-**Amendment (2026-07-28):** Reviewed against today's `docs/BLOCKERS.md` â no blocking
+**Amendment (2026-07-28):** Reviewed against today's `docs/BLOCKERS.md` — no blocking
 blockers retired today affect this ADR. The 2026-07-11 v261 review note above remains
-accurate: no FIDO2/YubiKey regressions from v257 â v261 affect the
+accurate: no FIDO2/YubiKey regressions from v257 → v261 affect the
 `systemd-cryptenroll --fido2-device=auto` / `--fido2-with-client-pin=yes` paths used by
-this ADR. This PR completes the v257âv261 doc-sync flagged in `RECENT_ACTIVITY.md`
+this ADR. This PR completes the v257→v261 doc-sync flagged in `RECENT_ACTIVITY.md`
 (2026-07-08 entry).
 
 <last-reviewed-against-blockers>2026-07-28</last-reviewed-against-blockers>
@@ -810,7 +810,7 @@ flowchart TD
 **Context.** Three pre-existing ADRs implicitly define a kernel+rootfs split that the codebase has not named as a single principle:
 
 - **ADR-006** contrasts the two build paths and notes mkosi produces "signed UKI `.efi`, dm-verity root, composefs image" (3 separate artifacts) while the bootc path produces a single "OCI image deployable via `bootc install to-filesystem`".
-- **ADR-013** (A/B updates) describes updates as 4 separate artifacts: new `/usr` partition, verity data partition, PKCS#7 signature partition, and a new UKI in the ESP â the kernel (`/EFI/Linux/bootc/...`) is structurally separable from the rootfs (`/sysroot`).
+- **ADR-013** (A/B updates) describes updates as 4 separate artifacts: new `/usr` partition, verity data partition, PKCS#7 signature partition, and a new UKI in the ESP — the kernel (`/EFI/Linux/bootc/...`) is structurally separable from the rootfs (`/sysroot`).
 - **ADR-022** (Unified OCI Distribution) already publishes kernel and rootfs as separate OCI tags on `0mniteck/yubios`: `firmware`, `installer` (UKI), `latest` (bootc OS image), `dev` (test-only). The tag scheme acknowledges the split at the distribution surface.
 
 The phrase "kernel+rootfs split" is **not** present in `docs/ADR.md` anywhere; grep across the file confirms 0 occurrences. The three ADRs above establish the pattern as an implicit invariant.
@@ -819,7 +819,7 @@ The split matters because:
 
 1. **A/B updates (ADR-013)** move only the rootfs when the kernel is unchanged, and only the kernel when the rootfs is unchanged; conflating them forces both to be re-fetched and re-verified on every update.
 2. **Reproducibility (ADR-030)** is sharper when each artifact is independently pinable: a kernel regression pins to a known UKI digest, a rootfs regression pins to a known composefs digest, and provenance attestations can target each piece separately.
-3. **Bootc's composefs fsverity chain (B-BOOTC-SEAL)** is "unsealed" specifically because the BLS digest anchor mutates per image rebuild â the fix (PR #2305 in bootc v1.16.4, plus the BLSConfig `uki` key from PR #2269 in v1.16.3) requires the kernel artifact to be addressable separately so its digest stays stable across rootfs-only changes.
+3. **Bootc's composefs fsverity chain (B-BOOTC-SEAL)** is "unsealed" specifically because the BLS digest anchor mutates per image rebuild — the fix (PR #2305 in bootc v1.16.4, plus the BLSConfig `uki` key from PR #2269 in v1.16.3) requires the kernel artifact to be addressable separately so its digest stays stable across rootfs-only changes.
 
 **Decision.** yubiOS adopts the **kernel+rootfs split as a first-class principle**. Specifically:
 
@@ -846,57 +846,57 @@ The split matters because:
 **Date:** 2026-07-30
 **Status:** Proposed
 **ADR:** ADR-033
-**Related:** ADR-031 (GPU trust boundary â virtio-gpu default, vfio-user preferred, IOMMU-gated PCI passthrough), OMN-144 (one-pager), OMN-145 (prior-art search), OMN-146 (bare-metal PCI-passthrough scope), OMN-147 (trigger model), `drm-gpu-quota-secure-time` skill (cousin: resource-exhaustion policy)
+**Related:** ADR-031 (GPU trust boundary — virtio-gpu default, vfio-user preferred, IOMMU-gated PCI passthrough), OMN-144 (one-pager), OMN-145 (prior-art search), OMN-146 (bare-metal PCI-passthrough scope), OMN-147 (trigger model), `drm-gpu-quota-secure-time` skill (cousin: resource-exhaustion policy)
 **Background:** [refs/adr-033-misbehavior-cutoff-policy-2026-07-28.md](../refs/adr-033-misbehavior-cutoff-policy-2026-07-28.md) ([SOLO] ideation, V3 finalist), [refs/adr-033-prior-art-search-2026-07-28.md](../refs/adr-033-prior-art-search-2026-07-28.md) (sources + gap analysis)
 
 **Context.** ADR-031 established the yubiOS GPU trust boundary: virtio-gpu is the default device model, vfio-user is the preferred mediation layer when a workload must reach a physical GPU, and IOMMU-gated PCI passthrough is the post-launch hardware enforcement gate. ADR-031 settled the *mechanism*. This ADR settles the *policy* that decides when to invoke the boundary.
 
-A workload (typically an AI/ML model inside a yubiOS bootc VM) that reaches a GPU via vfio-user can misbehave in ways that the device boundary can observe but the model cannot observe or attack: DMA-window anomaly patterns, suspicious region-access frequencies, syscall sequences inconsistent with the declared workload. ADR-031's rule 5 (no trust-boundary component may consume GPU state) closes the model-self-policing failure mode â the policy that decides when to invoke ADR-031's mechanism must therefore live outside the model, in the same place ADR-031 puts the device: the vfio-user server.
+A workload (typically an AI/ML model inside a yubiOS bootc VM) that reaches a GPU via vfio-user can misbehave in ways that the device boundary can observe but the model cannot observe or attack: DMA-window anomaly patterns, suspicious region-access frequencies, syscall sequences inconsistent with the declared workload. ADR-031's rule 5 (no trust-boundary component may consume GPU state) closes the model-self-policing failure mode — the policy that decides when to invoke ADR-031's mechanism must therefore live outside the model, in the same place ADR-031 puts the device: the vfio-user server.
 
 The threat model is concrete: an untranslated DMA-capable device can read an unsealed LUKS volume key straight out of guest RAM. The current policy (ADR-031 only) is "let the workload run; trust the boundary." That trust is correct for well-behaved workloads but cannot be unconditional for workloads that exhibit behavioral patterns known to be unsafe. A behavioral cutoff policy is the missing piece.
 
 The mechanism family decision tree (per the prior-art search at `refs/adr-033-prior-art-search-2026-07-28.md`):
 
-1. **vfio-user protocol** (QEMU, Nutanix libvfio-user) â the substrate. Mutual-distrust validation is per-message, not per-pattern. Built-in response to misbehavior is reset (discards state). No trigger vocabulary. No severity ladder. No forensic-state capture.
-2. **VFIO mdev** (kernel-mediated, vendor-driver) â isolation unit = IOMMU group, not the mdev itself. Behavioral handling is delegated to vendor driver error paths. No shared policy engine across vendors. No severity ladder.
-3. **NVIDIA vGPU / SR-IOV / MIG** â closest commercial cousin. Resource-scheduling policies (Best Effort / Equal Share / Fixed Share) are orthogonal modes, not escalating tiers. Suspend-resume discards in-flight GPU work. Policy lives in the hypervisor/orchestration layer, not the device boundary.
+1. **vfio-user protocol** (QEMU, Nutanix libvfio-user) — the substrate. Mutual-distrust validation is per-message, not per-pattern. Built-in response to misbehavior is reset (discards state). No trigger vocabulary. No severity ladder. No forensic-state capture.
+2. **VFIO mdev** (kernel-mediated, vendor-driver) — isolation unit = IOMMU group, not the mdev itself. Behavioral handling is delegated to vendor driver error paths. No shared policy engine across vendors. No severity ladder.
+3. **NVIDIA vGPU / SR-IOV / MIG** — closest commercial cousin. Resource-scheduling policies (Best Effort / Equal Share / Fixed Share) are orthogonal modes, not escalating tiers. Suspend-resume discards in-flight GPU work. Policy lives in the hypervisor/orchestration layer, not the device boundary.
 
 The closest cousin in the yubiOS repo is `drm-gpu-quota-secure-time` (per-cgroup VRAM quota + SMC hard cutoff on Rockchip). Different trigger (resource exhaustion, not behavioral) and complementary, not duplicative.
 
-**Decision.** yubiOS adopts a **4-tier severity ladder** (INFO â WARN â THROTTLE â SEVER) for behavioral cutoff of AI/ML workloads at the vfio-user boundary, with **state-preservation-before-cutoff** as the design invariant. Specifically:
+**Decision.** yubiOS adopts a **4-tier severity ladder** (INFO → WARN → THROTTLE → SEVER) for behavioral cutoff of AI/ML workloads at the vfio-user boundary, with **state-preservation-before-cutoff** as the design invariant. Specifically:
 
-1. **The ladder lives in the vfio-user server process**, not the orchestrator/hypervisor. Closes the model-self-policing failure mode â the model cannot observe or attack its own evaluator (per ADR-031 rule 5). The server exposes a pluggable trigger evaluator interface; the initial evaluator is a DMA-window anomaly score with tunable threshold.
+1. **The ladder lives in the vfio-user server process**, not the orchestrator/hypervisor. Closes the model-self-policing failure mode — the model cannot observe or attack its own evaluator (per ADR-031 rule 5). The server exposes a pluggable trigger evaluator interface; the initial evaluator is a DMA-window anomaly score with tunable threshold.
 
 2. **Each tier captures the prior tier's state before escalating.** Forensic preservation is monotonic: an INFO log is captured before a WARN snapshot; a WARN metadata snapshot is captured before a THROTTLE state snapshot; a THROTTLE state snapshot is captured before a SEVER full-VM snapshot. The design invariant: a higher tier never fires without the lower-tier capture being durable first.
 
-3. **SEVER snapshots and severs â does not kill.** VM state (qcow2 + bootc delta) is snapshotted; the vfio-user socket is revoked; the VM is frozen; an operator webhook fires. The VM stays alive at SEVER â only the device access is severed. A fresh vfio-user socket can be attached later in a clean environment.
+3. **SEVER snapshots and severs — does not kill.** VM state (qcow2 + bootc delta) is snapshotted; the vfio-user socket is revoked; the VM is frozen; an operator webhook fires. The VM stays alive at SEVER — only the device access is severed. A fresh vfio-user socket can be attached later in a clean environment.
 
 4. **The trigger model is workload-agnostic** (per OMN-147, not finalized here). No LLM-agent-vs-training-vs-inference distinctions in the policy itself; workload-specific triggers can be downstream issues.
 
-5. **The honesty note carries forward from ADR-031.** ADR-031's hardware IOMMU enforcement is post-launch. The SEVER cutoff operates in *software* on top of ADR-031's *design* â the policy is in scope now, even before the hardware gate is validated. The software policy is also the right test bed for what the hardware gate eventually enforces.
+5. **The honesty note carries forward from ADR-031.** ADR-031's hardware IOMMU enforcement is post-launch. The SEVER cutoff operates in *software* on top of ADR-031's *design* — the policy is in scope now, even before the hardware gate is validated. The software policy is also the right test bed for what the hardware gate eventually enforces.
 
 **Key Assumptions to Validate (per OMN-144 one-pager).**
 
 - [ ] **A1.** Misbehavior can be detected from a vfio-user-server-side observer without seeing model internals. *Test:* prototype a vfio-user server watching DMA-window patterns and flagging anomalies; check false-positive rate against known-good traffic.
 - [ ] **A2.** VM state can be snapshotted at SEVER without losing GPU's pending work. *Test:* qcow2 snapshot + vfio-user socket teardown + cold-restore; measure model recovery time.
 - [ ] **A3.** Operators will respond to a SEVER alert within the model-state-preservation window (e.g., minutes, not hours). *Test:* simulation with synthetic operator response times.
-- [ ] **A4.** The severity ladder is monotonic â a higher tier is never triggered without a lower one being captured first. *Test:* policy state-machine verification.
+- [ ] **A4.** The severity ladder is monotonic — a higher tier is never triggered without a lower one being captured first. *Test:* policy state-machine verification.
 
 **Consequences.**
 
-- The vfio-user server (currently a thin protocol layer) gains a pluggable trigger evaluator interface and a 4-tier policy engine. The protocol itself is unchanged â the policy sits on top, like ADR-031's mechanism sits below.
+- The vfio-user server (currently a thin protocol layer) gains a pluggable trigger evaluator interface and a 4-tier policy engine. The protocol itself is unchanged — the policy sits on top, like ADR-031's mechanism sits below.
 - An audit log captures every tier transition with: timestamp, trigger signal, tier, action, snapshot hash. This is the "what was the system doing when it misbehaved" log that AI safety papers currently lack.
-- The NVIDIA vGPU Fixed Share + suspend-resume pattern is the closest commercial analogue but is policy-mode (orthogonal modes), not escalation; ADR-033's contribution is *escalation with state-preservation*. NVIDIA's discard-on-suspend is the explicit differentiator â ADR-033's SEVER preserves.
+- The NVIDIA vGPU Fixed Share + suspend-resume pattern is the closest commercial analogue but is policy-mode (orthogonal modes), not escalation; ADR-033's contribution is *escalation with state-preservation*. NVIDIA's discard-on-suspend is the explicit differentiator — ADR-033's SEVER preserves.
 - The `drm-gpu-quota-secure-time` skill's SMC-based hard cutoff (resource-exhaustion) and ADR-033's behavioral ladder operate at different layers (DRM cgroup vs vfio-user server); both can fire on the same workload with different state captures. They are complementary, not duplicative.
-- OMN-146 (bare-metal PCI-passthrough testing in scope for v1?) and OMN-147 (trigger model â what counts as misbehavior?) are downstream of this ADR. The policy is in scope now; the trigger model and the hardware test bed are post-launch or scope-deferred per their respective Linear threads.
+- OMN-146 (bare-metal PCI-passthrough testing in scope for v1?) and OMN-147 (trigger model — what counts as misbehavior?) are downstream of this ADR. The policy is in scope now; the trigger model and the hardware test bed are post-launch or scope-deferred per their respective Linear threads.
 
 **Follow-ups (deferred, not part of this ADR).**
 
 - **OMN-146:** Decide whether bare-metal PCI-passthrough testing is in scope for v1 launch. Affects whether A2's "qcow2 snapshot + vfio-user socket teardown + cold-restore" test runs on real hardware or stays in QEMU-only.
 - **OMN-147:** Define the trigger model. Affects what "DMA-window anomaly" means precisely. Default-first evaluator is anomaly-score with tunable threshold; the formal vocabulary is OMN-147's work.
 - **Open Questions (carried forward from the one-pager):**
-  - OQ1. Where do trigger evaluators live â in the vfio-user server, in a sidecar, or in a separate observer process? Default: in-process for the initial evaluator, sidecar-extractable later.
-  - OQ2. Who owns the snapshot at SEVER â the host (operator can reattach) or the guest (guest controls its own state)? ADR-031's rule 5 cuts against guest-side capture; default is host-owned snapshot.
+  - OQ1. Where do trigger evaluators live — in the vfio-user server, in a sidecar, or in a separate observer process? Default: in-process for the initial evaluator, sidecar-extractable later.
+  - OQ2. Who owns the snapshot at SEVER — the host (operator can reattach) or the guest (guest controls its own state)? ADR-031's rule 5 cuts against guest-side capture; default is host-owned snapshot.
   - OQ3. How does this interact with `drm-gpu-quota-secure-time`? Both can fire; their state captures differ. The MVP does not unify them.
   - OQ4. What's the recovery story after SEVER? Fresh vfio-user socket + cold VM resume. A "clean room" vfio-user server with verified inputs is a downstream improvement.
 
