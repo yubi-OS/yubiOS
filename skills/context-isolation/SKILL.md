@@ -116,3 +116,21 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `attestation` primitive
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Independent verification or adversarial review.** A reviewer that can see the original author's reasoning inherits its blind spots and biases toward agreeing. Verification needs a fresh context: give it the artifact and the acceptance criteria, not the story of how it was built.
+- Parallel independent workstreams.** If two pieces of work don't depend on each other's intermediate state, running them in the same context serializes them for no benefit and lets one's noise bleed into the other's reasoning.
+- Large exploratory research or search.** Most of what a broad search turns up is noise you discard. Isolate the search so only the distilled conclusion — not every dead end — lands in the main thread.
+- Anything whose failure shouldn't contaminate the main thread.** A speculative approach that might not pan out should be explored somewhere its abandonment doesn't leave confusing half-finished context behind.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to isolate, When NOT to isolate, How to isolate.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Every `@tool/task` general-subagent prompt MUST begin with a skill-load directive. The prompt should literally start with:
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
