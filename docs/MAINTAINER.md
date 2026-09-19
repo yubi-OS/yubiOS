@@ -95,3 +95,7 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 ## 2026-09-18 drift check (wayfinder round 10, cycle 17)
 
 maintainer doc: unchanged; the Jenny-merges rules it encodes were honored by every round (all agent PRs held for review, merged by the maintainer); note additive.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 12)
+
+MAINTAINER.md (round-10 cycle-17 drift-checked): the Jenny-merges discipline held through rounds 9-11 (all three PRs merged by Jenny); note additive.
