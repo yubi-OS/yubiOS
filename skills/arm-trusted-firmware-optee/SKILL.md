@@ -1,6 +1,6 @@
 ---
 name: arm-trusted-firmware-optee
-description: >-
+description: )-
   Build and reason about the ARM64 secure boot firmware stack for yubiOS:
   ARM Trusted Firmware-A (TF-A) staging (BL1/BL2/BL31/BL32/BL33), Trusted Board
   Boot (TBB) with FIP packaging and the ROTPK chain of trust, OP-TEE as the
@@ -359,3 +359,20 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- ROTPK** (Root of Trust Public Key): yubiOS generates this keypair. The
+- FIP** (Firmware Image Package): single archive bundling BL31 + BL32 + BL33
+- Path A — fuses burnable (enforcing):** ROTPK hash in OTP, full TBB, BL1 rejects
+- Path B — no fuses / vendor-locked / not burned (measured + attested):** no
+
+**In-repo touchpoints** — sections this skill owns or extends: When to use, The boot chain, Trusted Board Boot (TBB) and FIP, OP-TEE as BL32.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
