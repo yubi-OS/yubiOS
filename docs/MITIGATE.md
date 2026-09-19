@@ -1,4 +1,4 @@
-# MITIGATE.md â yubiOS vs. Faux Phy Attack Chain
+# MITIGATE.md — yubiOS vs. Faux Phy Attack Chain
 
 > Reference: **Faux Phy ... Phe Phum v1.05** by Shant Tchatalbachian (0mniteck)  
 > https://gist.github.com/0mniteck/e92c74276333e43912a5baa6802fcbd4
@@ -11,19 +11,19 @@
 
 The Faux Phy attack chain is a multi-stage, supply-chain-initiated compromise across three phases:
 
-1. **Step 1 â OEM/Vendor persistence**: Modified power manager, stacked UEFI firmware, hidden partitions, CVE-driven page-cache poisoning.
-2. **Step 2 â Pre-init hijack**: Kernel modules before systemd, modified libc/LSM libraries sideloaded via firmware, /usr bind-mounted over /usr with poisoned generators.
-3. **Step 3 â Runtime control**: Faux ACPI tables from hidden media, TEE/TrustZone MitM, Absolute Persistence (Computrace), radio persistence, dmesg/proc scrubbing.
+1. **Step 1 — OEM/Vendor persistence**: Modified power manager, stacked UEFI firmware, hidden partitions, CVE-driven page-cache poisoning.
+2. **Step 2 — Pre-init hijack**: Kernel modules before systemd, modified libc/LSM libraries sideloaded via firmware, /usr bind-mounted over /usr with poisoned generators.
+3. **Step 3 — Runtime control**: Faux ACPI tables from hidden media, TEE/TrustZone MitM, Absolute Persistence (Computrace), radio persistence, dmesg/proc scrubbing.
 
-yubiOS is built on the principle that *every component must be cryptographically validated before it runs*. Many of these vectors require substituting /usr files, the initrd, ACPI tables, or UEFI firmware â all treated as untrusted without a valid signature.
+yubiOS is built on the principle that *every component must be cryptographically validated before it runs*. Many of these vectors require substituting /usr files, the initrd, ACPI tables, or UEFI firmware — all treated as untrusted without a valid signature.
 
 ---
 
-## Step 1 â OEM/Vendor Supply Chain Compromise
+## Step 1 — OEM/Vendor Supply Chain Compromise
 
 ### 1-A: Modified Power Manager + Stacked PME
 
-**Attack:** OEM modifies firmware PM, adds #PME enforcables across D0âD3 states for controlled reboot triggers. Creates a modified S3 sleep path under OEM control.
+**Attack:** OEM modifies firmware PM, adds #PME enforcables across D0–D3 states for controlled reboot triggers. Creates a modified S3 sleep path under OEM control.
 
 | Control | How | Coverage |
 |---|---|---|
@@ -43,7 +43,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 |---|---|---|
 | UKI as single signed binary | Kernel + initrd + cmdline bundled into one UEFI PE signed by yubiOS PIV slot 9c. Any evil-twin lacking this signature is rejected. | **Block** |
 | `usrhash=` in signed cmdline | dm-verity root hash of /usr baked into the UKI cmdline at build time. Any substitute /usr fails the kernel hash check. | **Block** |
-| x86-64 (primary): platform scope | CNTVOFF_EL2 is ARMv8-only â no attack surface on x86-64. | **N/A** |
+| x86-64 (primary): platform scope | CNTVOFF_EL2 is ARMv8-only — no attack surface on x86-64. | **N/A** |
 | arm64 (in dev): kernel arch_timer erratum workarounds | Linux `arch_timer` driver applies per-CPU erratum workarounds at boot. Virtual offset manipulation at EL1/EL0 is corrected at the kernel level before userspace runs. UKI/PCR trust chain unchanged on ARM64. | **Mitigated (kernel)** |
 | PCR 11 measurement | All UKI components measured into PCR 11. Evil-twin produces different values, detectable via attestation. | **Detect** |
 
@@ -62,7 +62,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 ---
 
-## Step 2 â Pre-Init Hijack
+## Step 2 — Pre-Init Hijack
 
 ### 2-A: Obfuscated Kernel Modules Before systemd Init
 
@@ -70,11 +70,11 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Control | How | Coverage |
 |---|---|---|
-| Signed initrd embedded in UKI | initrd embedded in the UKI as the `.initrd` PE section, signed and measured into PCR 11. No external initrd path â module injection without invalidating the UKI signature is impossible. | **Block** |
+| Signed initrd embedded in UKI | initrd embedded in the UKI as the `.initrd` PE section, signed and measured into PCR 11. No external initrd path — module injection without invalidating the UKI signature is impossible. | **Block** |
 | Kernel lockdown (SecureBoot) | When UEFI SecureBoot is active, Linux enters lockdown mode. Unsigned kernel modules are rejected by the kernel itself. | **Block** |
 | IMA measurement | All kernel modules measured by IMA before loading. | **Detect** |
 | `ConditionSecurity=measured-os` | PCR 11 state check. Module injection that alters measurements breaks this condition. | **Gate** |
-| arm64 (in dev): kernel lockdown disables CoreSight | When UEFI SecureBoot is active, Linux enters lockdown mode (`CONFIG_LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY`). CoreSight trace interfaces are explicitly disabled â no ARM64 trace exfiltration channel. | **Block** |
+| arm64 (in dev): kernel lockdown disables CoreSight | When UEFI SecureBoot is active, Linux enters lockdown mode (`CONFIG_LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY`). CoreSight trace interfaces are explicitly disabled — no ARM64 trace exfiltration channel. | **Block** |
 
 ---
 
@@ -82,15 +82,15 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 **Attack:** qcom firmware sideload replaces `libselinux.so.1`, `libapparmor.so.1`, `libacl`, `libmount`. Modified `libmount` bind-mounts a poisoned /usr over the real /usr *before* systemd loads, nullifying all LSM enforcement.
 
-> **This is the centrepiece of the attack. yubiOSâs core defence applies here.**
+> **This is the centrepiece of the attack. yubiOS’s core defence applies here.**
 
 | Control | How | Coverage |
 |---|---|---|
-| **dm-verity on /usr (on every IO)** | Every dlopen() and read from /usr â including `libselinux.so.1` â is validated against the Merkle tree. A modified library produces a hash mismatch â IO error. The poisoned library is never served to any process. | **Block â hard** |
+| **dm-verity on /usr (on every IO)** | Every dlopen() and read from /usr — including `libselinux.so.1` — is validated against the Merkle tree. A modified library produces a hash mismatch → IO error. The poisoned library is never served to any process. | **Block — hard** |
 | Immutable /usr mount | /usr is mounted read-only via dm-verity. Cannot be bind-mounted over using modified libmount. | **Block** |
-| x86-64 (primary): no qcom,dload path | `qcom,dload` is Qualcomm-specific â does not exist on x86-64 UEFI. | **N/A** |
-| arm64 (in dev): dm-verity blocks library substitution | Even if sideload runs on Qualcomm ARM64 hardware, every `dlopen()` from /usr traverses the dm-verity Merkle tree. Modified library â hash mismatch â IO error. Sideload without a dm-verity bypass changes nothing. Preferred non-Qualcomm ARM64 targets avoid this entirely. | **Block (dm-verity)** |
-| `usrhash=` in signed cmdline | Kernel refuses to mount any /usr whose root hash doesnât match the signed cmdline. | **Block** |
+| x86-64 (primary): no qcom,dload path | `qcom,dload` is Qualcomm-specific — does not exist on x86-64 UEFI. | **N/A** |
+| arm64 (in dev): dm-verity blocks library substitution | Even if sideload runs on Qualcomm ARM64 hardware, every `dlopen()` from /usr traverses the dm-verity Merkle tree. Modified library → hash mismatch → IO error. Sideload without a dm-verity bypass changes nothing. Preferred non-Qualcomm ARM64 targets avoid this entirely. | **Block (dm-verity)** |
+| `usrhash=` in signed cmdline | Kernel refuses to mount any /usr whose root hash doesn’t match the signed cmdline. | **Block** |
 
 ---
 
@@ -100,24 +100,24 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Control | How | Coverage |
 |---|---|---|
-| dm-verity on generators | All files in `/usr/lib/systemd/system-generators/` are dm-verity protected. Poisoned generator â hash mismatch â IO error â not executed. | **Block** |
-| `usrhash=` integrity | Kernel refuses to run with a /usr whose root hash doesnât match. Poisoned /usr never mounts. | **Block** |
+| dm-verity on generators | All files in `/usr/lib/systemd/system-generators/` are dm-verity protected. Poisoned generator → hash mismatch → IO error → not executed. | **Block** |
+| `usrhash=` integrity | Kernel refuses to run with a /usr whose root hash doesn’t match. Poisoned /usr never mounts. | **Block** |
 | PCR boot phase measurements | `initrd-enter` and `initrd-leave` measured into PCR 11. Journal flush creates detectable gaps in the measurement log. | **Detect** |
-| DPS fallback discovery | systemd-gpt-auto-generator uses DPS UUIDs for discovery â resilient to device node enumeration being blocked. | **Resilient** |
+| DPS fallback discovery | systemd-gpt-auto-generator uses DPS UUIDs for discovery — resilient to device node enumeration being blocked. | **Resilient** |
 
 ---
 
-## Step 3 â Runtime Control
+## Step 3 — Runtime Control
 
 ### 3-A: Faux ACPI Tables + TEE MitM + Absolute Persistence (Computrace)
 
-**Attack:** Loads fake ACPI tables from `(hd1,gpt42)/acpi/ACPI.lzma`. Modified `tz.uefisecapp` MitMs the TrustZone TEE. PCR 4 shows `Fv()\ComputraceAgent` â Absolute Persistence firmware active.
+**Attack:** Loads fake ACPI tables from `(hd1,gpt42)/acpi/ACPI.lzma`. Modified `tz.uefisecapp` MitMs the TrustZone TEE. PCR 4 shows `Fv()\ComputraceAgent` — Absolute Persistence firmware active.
 
 | Control | How | Coverage |
 |---|---|---|
 | Signed cmdline blocks ACPI override | ACPI table overrides via boot parameters require modifying the signed UKI cmdline, which would break the SecureBoot signature. | **Block** |
-| **No TEE dependency** | yubiOS uses **YubiKey FIDO2** as trust anchor â no TrustZone/TEE. There is no `tz.uefisecapp` equivalent to compromise. Compromising the TEE does not unlock the LUKS2 root fs. | **Architectural immunity** |
-| Computrace detection | `Fv()\ComputraceAgent` in the PCR event log is detectable via `chipsec`. `ConditionSecurity=measured-os` fails if PCR state doesnât match a clean boot. | **Detect** |
+| **No TEE dependency** | yubiOS uses **YubiKey FIDO2** as trust anchor — no TrustZone/TEE. There is no `tz.uefisecapp` equivalent to compromise. Compromising the TEE does not unlock the LUKS2 root fs. | **Architectural immunity** |
+| Computrace detection | `Fv()\ComputraceAgent` in the PCR event log is detectable via `chipsec`. `ConditionSecurity=measured-os` fails if PCR state doesn’t match a clean boot. | **Detect** |
 
 **Residual risk:** Computrace/Absolute in UEFI ROM is installed below the OS. yubiOS can detect it via chipsec and refuse enrollment, but cannot remove it without reflashing firmware.
 
@@ -129,7 +129,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Control | How | Coverage |
 |---|---|---|
-| **No passphrase to capture** | LUKS2 disk unlock uses YubiKey FIDO2 hmac-secret â no typed passphrase. The framebuffer/ttyHS path captures nothing useful because no cleartext secret is ever entered. | **Architectural immunity** |
+| **No passphrase to capture** | LUKS2 disk unlock uses YubiKey FIDO2 hmac-secret — no typed passphrase. The framebuffer/ttyHS path captures nothing useful because no cleartext secret is ever entered. | **Architectural immunity** |
 | systemd-homed FIDO2 | User login uses FIDO2 touch + PIN. `pam-u2f` requires physical YubiKey presence. Captured PIN without the physical token is useless. | **Render capture useless** |
 | `PrivateNetwork=yes` / `BindNetworkInterface=` | Security-critical services use private network namespaces. Cannot reach hidden radio interfaces. | **Contain** |
 | dm-verity on drivers | Modified hci_uart/btqcom drivers in /usr rejected by dm-verity. Unsigned drivers rejected by kernel lockdown. | **Block new drivers** |
@@ -143,7 +143,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 | Control | How | Coverage |
 |---|---|---|
 | dm-verity on service units | All service units in `/usr/lib/systemd/system/` are dm-verity protected. Foreign service cannot be injected without breaking Merkle tree. | **Block** |
-| `DynamicUser=` + `ProtectProc=invisible` | Service processes cannot see other PIDsâ /proc entries. Scrubbing service cannot enumerate or attach to other processes. | **Contain** |
+| `DynamicUser=` + `ProtectProc=invisible` | Service processes cannot see other PIDs’ /proc entries. Scrubbing service cannot enumerate or attach to other processes. | **Contain** |
 | `RestrictFileSystems=` (v261) | BPF LSM restricts which filesystem types are accessible per service. Rogue services cannot open arbitrary /proc or /sys paths. | **Contain** |
 | `NoNewPrivileges=yes` | Enrollment and auth services cannot escalate to inject code into systemd parent PID. | **Contain** |
 | Journal forward-secure sealing | HMAC-based sealing detects journal tampering via `journalctl --verify`. | **Detect** |
@@ -154,30 +154,30 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Attack Surface | Step | yubiOS Control | Coverage |
 |---|---|---|---|
-| OEM power manager firmware | 1-A | PCR 4 + chipsec + ConditionSecurity=measured-os | ð¡ Detect |
-| Stacked UEFI / evil-twin EDK2 | 1-B | Signed UKI + SecureBoot + PCR 11 | ð¢ Block |
-| Virtual timer CNTVOFF_EL2 | 1-B | x86-64: N/A (ARM-only vuln). arm64: kernel arch_timer erratum workarounds | â N/A (x86-64) / ð¢ Mitigated (arm64) |
-| Page-cache CVE (dirtyfrag) | 1-C | Fedora 45 patch cadence + dm-verity | ð¡ Reduce |
-| Hidden GPT partitions (91 GPT) | 1-C | DPS UUID-only automount | ð¢ Ignore |
-| BPF filesystem restriction | 1-C | RestrictFileSystems= (v261) | ð¢ Counter |
-| Obfuscated kernel modules | 2-A | Kernel lockdown + IMA + signed initrd | ð¢ Block |
-| ARM CoreSight debug | 2-A | arm64: kernel lockdown (SecureBoot) disables CoreSight trace interfaces | ð¢ Block (arm64) |
-| qcom,dload firmware sideload | 2-B | x86-64: N/A. arm64: dm-verity blocks substitution; prefer non-Qualcomm hardware | â N/A (x86-64) / ð¢ Block (arm64) |
-| Modified libselinux/libapparmor | 2-B | **dm-verity /usr on every IO** | ð¢ Block |
-| /usr bind-mount poison | 2-B | Immutable dm-verity + usrhash= | ð¢ Block |
-| Poisoned systemd generators | 2-C | **dm-verity /usr on every IO** | ð¢ Block |
-| Journal flush / pre-pivot wipe | 2-C | Forward-secure sealing + PCR phases | ð¡ Detect |
-| NVMe / GPT-auto blocking | 2-C | DPS UUID fallback discovery | ð¢ Resilient |
-| Faux ACPI table injection | 3-A | Signed UKI cmdline | ð¢ Block |
-| TEE / tz.uefisecapp MitM | 3-A | **No TEE dependency â YubiKey FIDO2** | â Immune |
-| Absolute Persistence (Computrace) | 3-A | chipsec + ConditionSecurity=measured-os | ð¡ Detect |
-| Radio that wonât power off | 3-B | PrivateNetwork= + BindNetworkInterface= | ð¡ Contain |
-| Passphrase capture via framebuffer | 3-B | **FIDO2 hmac-secret â no typed passphrase** | â Immune |
-| Runtime dmesg/proc scrubbing | 3-C | dm-verity + DynamicUser + ProtectProc= | ð¢ Block |
-| fd hijacking from parent PID | 3-C | NoNewPrivileges= + DynamicUser= | ð¢ Contain |
-| Magic-number monitoring service | 3-C | dm-verity service units | ð¢ Block |
+| OEM power manager firmware | 1-A | PCR 4 + chipsec + ConditionSecurity=measured-os | 🟡 Detect |
+| Stacked UEFI / evil-twin EDK2 | 1-B | Signed UKI + SecureBoot + PCR 11 | 🟢 Block |
+| Virtual timer CNTVOFF_EL2 | 1-B | x86-64: N/A (ARM-only vuln). arm64: kernel arch_timer erratum workarounds | ✅ N/A (x86-64) / 🟢 Mitigated (arm64) |
+| Page-cache CVE (dirtyfrag) | 1-C | Fedora 45 patch cadence + dm-verity | 🟡 Reduce |
+| Hidden GPT partitions (91 GPT) | 1-C | DPS UUID-only automount | 🟢 Ignore |
+| BPF filesystem restriction | 1-C | RestrictFileSystems= (v261) | 🟢 Counter |
+| Obfuscated kernel modules | 2-A | Kernel lockdown + IMA + signed initrd | 🟢 Block |
+| ARM CoreSight debug | 2-A | arm64: kernel lockdown (SecureBoot) disables CoreSight trace interfaces | 🟢 Block (arm64) |
+| qcom,dload firmware sideload | 2-B | x86-64: N/A. arm64: dm-verity blocks substitution; prefer non-Qualcomm hardware | ✅ N/A (x86-64) / 🟢 Block (arm64) |
+| Modified libselinux/libapparmor | 2-B | **dm-verity /usr on every IO** | 🟢 Block |
+| /usr bind-mount poison | 2-B | Immutable dm-verity + usrhash= | 🟢 Block |
+| Poisoned systemd generators | 2-C | **dm-verity /usr on every IO** | 🟢 Block |
+| Journal flush / pre-pivot wipe | 2-C | Forward-secure sealing + PCR phases | 🟡 Detect |
+| NVMe / GPT-auto blocking | 2-C | DPS UUID fallback discovery | 🟢 Resilient |
+| Faux ACPI table injection | 3-A | Signed UKI cmdline | 🟢 Block |
+| TEE / tz.uefisecapp MitM | 3-A | **No TEE dependency — YubiKey FIDO2** | ✅ Immune |
+| Absolute Persistence (Computrace) | 3-A | chipsec + ConditionSecurity=measured-os | 🟡 Detect |
+| Radio that won’t power off | 3-B | PrivateNetwork= + BindNetworkInterface= | 🟡 Contain |
+| Passphrase capture via framebuffer | 3-B | **FIDO2 hmac-secret — no typed passphrase** | ✅ Immune |
+| Runtime dmesg/proc scrubbing | 3-C | dm-verity + DynamicUser + ProtectProc= | 🟢 Block |
+| fd hijacking from parent PID | 3-C | NoNewPrivileges= + DynamicUser= | 🟢 Contain |
+| Magic-number monitoring service | 3-C | dm-verity service units | 🟢 Block |
 
-**Legend:** ð¢ Block/Contain  ð¡ Detect/Reduce  â Architectural immunity (attack does not apply to this platform/design)
+**Legend:** 🟢 Block/Contain  🟡 Detect/Reduce  ✅ Architectural immunity (attack does not apply to this platform/design)
 
 ---
 
@@ -197,21 +197,21 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 ```mermaid
 flowchart TD
-    OEM["ð­ OEM / Vendor\nSupply Chain Access"]
+    OEM["🏭 OEM / Vendor\nSupply Chain Access"]
 
-    subgraph S1["Step 1 â OEM Persistence"]
+    subgraph S1["Step 1 — OEM Persistence"]
         S1A["1-A Modified PM firmware\n#PME enforcables\nModified S3 path"]
         S1B["1-B Stacked UEFI / EDK2\nevil-twin firmware\nBroken CNTVOFF_EL2"]
         S1C["1-C CVE exploitation\nPage-cache poisoning\n91 hidden GPT partitions"]
     end
 
-    subgraph S2["Step 2 â Pre-Init Hijack"]
+    subgraph S2["Step 2 — Pre-Init Hijack"]
         S2A["2-A Obfuscated kernel modules\nInvisible device tree nodes\nCoresight debug channels"]
         S2B["2-B Firmware sideload\nModified libselinux/libapparmor\n/usr bind-mount poison"]
         S2C["2-C Poisoned generators\nJournal flush\nNVMe / GPT-auto blocked"]
     end
 
-    subgraph S3["Step 3 â Runtime Control"]
+    subgraph S3["Step 3 — Runtime Control"]
         S3A["3-A Faux ACPI tables\nTEE MitM / tz.uefisecapp\nAbsolute Persistence"]
         S3B["3-B Radio persistence\nPassphrase exfil via framebuffer\nttyHS to TX/RX"]
         S3C["3-C dmesg/proc scrub\nfd hijacking\nMagic-number services"]
@@ -224,19 +224,19 @@ flowchart TD
     S2C --> S3A
     S3A --> S3B & S3C
 
-    M1A["ð PCR 4 measurement\nConditionSecurity=measured-os\nchipsec detection"]
-    M1B["ð¡ Signed UKI + SecureBoot\nPCR 11 + usrhash= cmdline"]
-    M1C1["ð Fedora 45 CVE patches\ndm-verity read protection"]
-    M1C2["ð¡ DPS UUID-only automount\nHidden partitions ignored"]
-    M2A["ð¡ Kernel lockdown SecureBoot\nSigned modules + IMA"]
-    M2B["ð¡ dm-verity /usr\non every IO read\nModified libs â IO error"]
-    M2C["ð¡ dm-verity generators\nusrhash= enforced\nDPS fallback discovery"]
-    M3A1["ð¡ Signed cmdline blocks\nACPI table override"]
-    M3A2["â No TEE dependency\nYubiKey FIDO2 trust anchor\nNo tz.uefisecapp to MitM"]
-    M3A3["ð chipsec detects\nComputrace in PCR event log"]
-    M3B1["ð¡ PrivateNetwork=yes\nBindNetworkInterface="]
-    M3B2["â No passphrase to capture\nFIDO2 hmac-secret only\npam-u2f touch required"]
-    M3C["ð¡ dm-verity service units\nDynamicUser + ProtectProc=\nNoNewPrivileges="]
+    M1A["🔍 PCR 4 measurement\nConditionSecurity=measured-os\nchipsec detection"]
+    M1B["🛡 Signed UKI + SecureBoot\nPCR 11 + usrhash= cmdline"]
+    M1C1["🔄 Fedora 45 CVE patches\ndm-verity read protection"]
+    M1C2["🛡 DPS UUID-only automount\nHidden partitions ignored"]
+    M2A["🛡 Kernel lockdown SecureBoot\nSigned modules + IMA"]
+    M2B["🛡 dm-verity /usr\non every IO read\nModified libs → IO error"]
+    M2C["🛡 dm-verity generators\nusrhash= enforced\nDPS fallback discovery"]
+    M3A1["🛡 Signed cmdline blocks\nACPI table override"]
+    M3A2["✅ No TEE dependency\nYubiKey FIDO2 trust anchor\nNo tz.uefisecapp to MitM"]
+    M3A3["🔍 chipsec detects\nComputrace in PCR event log"]
+    M3B1["🛡 PrivateNetwork=yes\nBindNetworkInterface="]
+    M3B2["✅ No passphrase to capture\nFIDO2 hmac-secret only\npam-u2f touch required"]
+    M3C["🛡 dm-verity service units\nDynamicUser + ProtectProc=\nNoNewPrivileges="]
 
     S1A -. detected by .-> M1A
     S1B -. blocked by .-> M1B
@@ -265,7 +265,7 @@ flowchart TD
 
 ---
 
-*Attack chain reference: Faux Phy ... Phe Phum v1.5 by 0mniteck â https://0mniteck.com/*  
+*Attack chain reference: Faux Phy ... Phe Phum v1.5 by 0mniteck — https://0mniteck.com/*  
 *yubiOS architecture references: [ADR.md](ADR.md) | [ARCHITECTURE.md](ARCHITECTURE.md)*
 
 # yubiOS Mitigation Matrix
@@ -331,8 +331,6 @@ CHIPSEC does not provide a reliable automated Absolute/Computrace verdict. The b
 ## systemd Hardening Notes
 
 Use `RestrictFileSystems=` when a filesystem-type allow/deny policy is appropriate and the kernel has BPF LSM support. Do not describe this as a systemd v261-only feature. Track `RestrictFileSystemAccess=` separately as the v261 filesystem-access primitive to evaluate in future service audits.
-
-## What yubiOS Cannot Fully Prevent
 
 - A malicious or vulnerable CPU/SoC executing below the owner-controlled chain.
 - Closed boot ROM or firmware stages that cannot be replaced or verified by the owner.
