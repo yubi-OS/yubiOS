@@ -188,3 +188,20 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `attestation` primitive
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Need a sandbox for a build** → nspawn with `RootImage=` from a built mkosi image
+- Need to test the build inside the exact runtime /usr** → nspawn with `RootImage=` + `--boot`
+- Need full isolation / kernel independence** → `bcvk-virtualization` (QEMU-based)
+- Need to ship a service to another host** → systemd portable service (uses nspawn under the hood)
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Anatomy of an nspawn invocation, Boot in container.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
