@@ -158,6 +158,7 @@ jobs:
           node tools/point-map/test-axis-consistency.mjs
           node tools/point-map/test-placement.mjs
           node tools/point-map/test-rayleigh.mjs
+          node tools/point-map/test-admission.mjs
 
       - name: corpus-auditor selftest
         run: python3 tools/corpus-auditor/auditor.py --selftest
