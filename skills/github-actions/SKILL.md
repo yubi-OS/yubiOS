@@ -1,6 +1,6 @@
 ---
 name: github-actions
-description: >-
+description: )-
   GitHub Actions for the yubi-OS org: workflow file structure, event triggers,
   GITHUB_TOKEN permissions, yubiOS-specific pinned action SHAs, the dhi.io
   container pattern, triggering workflows via the GitHub REST API
@@ -608,3 +608,20 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity
 This skill already covers all 5 remaining MOVABLE corpus-priority primitives post-cycle-6 (attestation, trust chain, declarative policy, immutability, least privilege). The cycle-7 RSI audit verified full movable coverage; no primitive closure needed.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to close.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- All action refs must be pinned to a full SHA** — no `@v4`, no `@main`.
+- Container image must use the approved dhi.io digest** (or be absent).
+- Only approved actions are allowed** — see the allowlist below.
+- Workflow files live at `<repo>/.github/workflows/*.yml`.** Edit these directly via
+
+**In-repo touchpoints** — sections this skill owns or extends: yubiOS hard rules, Approved action SHAs (from AGENTS.md), Approved container image, Workflow file structure.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
