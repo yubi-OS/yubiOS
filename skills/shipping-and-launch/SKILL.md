@@ -387,3 +387,19 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 - [ ] Error budget policy in place: know what action to take when budget drops below 20% and when it's exhausted
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, The Pre-Launch Checklist, Code Quality.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't nest feature flags (creates exponential combinations)
+2. // Don't expose internals to users
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
