@@ -184,3 +184,20 @@ describe("MyDO", () => {
   });
 });
 ```
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Model around coordination atoms** - One DO per chat room/game/user, not one global DO
+- Use `getByName()` for deterministic routing** - Same input = same DO instance
+- Use SQLite storage** - Configure `new_sqlite_classes` in migrations
+- Initialize in constructor** - Use `blockConcurrencyWhile()` for schema setup only
+
+**In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, When to Use, Reference Documentation, Core Principles.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
