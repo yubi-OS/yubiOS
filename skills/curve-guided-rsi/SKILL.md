@@ -2,6 +2,8 @@
 name: curve-guided-rsi
 description: Recursive self-improvement driven by negative-skill-space gap-mapping and hypersphere curve-fitting on the SKILL.md corpus. The bounded RSI loop — hypothesis per cycle, fixpoint rule (no new gaps, old gaps closed, no new anti-patterns), 3-cycle default cap, fresh-context subagent per cycle to avoid author bias.
 ---
+# Curve Guided Rsi
+
 ## Changelog entry to the gap candidate's SKILL.md
 ELSE:
   Mark gap as "non-fixable by NSS" (likely an artifact of the curve fit, not a real gap)
@@ -155,3 +157,20 @@ Concrete implications for curve-guided-rsi: any change should be reviewed for im
 ## Trust chain coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Sparse-cell threshold `r = 0.05`** — tuned on the v3 fit's neighbor distances; expose as a configurable parameter.
+- Top-N gap candidates capped at 10 per run** — bounds the compute; larger corpora need multiple runs.
+- RSI cap of 3 cycles per gap per run** — matches `recursive-self-improvement`'s soft cap; user-override protocol preserved.
+- Curve re-fit after every run** — re-fit cadence per `## Lifecycle` §re-fit cadence.
+
+**In-repo touchpoints** — sections this skill owns or extends: Changelog entry to the gap candidate's SKILL.md, Stage 5: Re-fit + verify, Architectural Choices, Losses (not applicable — closed-loop pipeline, not a single-model fit).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
