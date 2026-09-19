@@ -220,3 +220,23 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Load the idea.** Accept any of:
+- Identify the bet.** Every idea rests on a bet — a claim that must be true for the idea to work. Name the bet in one sentence. If you can't, the idea is unfocused — surface that as the verdict (PAUSE: "can't name the bet").
+- Steelman the opposition.** Generate the strongest possible critique. Not the easiest critique — the strongest one a thoughtful opponent would raise. Cover at least three of these:
+- Why this won't work.** What's the mechanism by which this idea fails?
+
+**In-repo touchpoints** — sections this skill owns or extends: Philosophy, When to Use, The Process, The Output.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Do not produce "maybe". Do not produce "interesting but...". The verdict is one word.
+2. One pass.** Do not loop. The verdict is one shot.
+3. Read-only.** The verdict is a document. Do not modify the source idea; do not act on the verdict (downstream skills consume it).
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
