@@ -1,6 +1,6 @@
 ---
 name: docker-build-policy
-description: >-
+description: )-
   Write, wire, and debug Docker Build Policies (OPA/Rego) for the yubi-OS org — the `docker buildx
   build --policy reset=true,strict=true,filename=yubiOS.rego` supply-chain gate that vets every
   build input (FROM images) before any layer executes. Covers the Rego policy schema (package
@@ -186,3 +186,20 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Add an approved registry:** add one `approved_registry(ref) if startswith(ref, "<prefix>/")` line. Keep prefixes tight (org path, not bare host) and mirror the change into PINNED.md / AGENTS.md.
+- Require provenance:** uncomment the `hasProvenance` rule — but only once the base image actually ships provenance (quay.io/fedora/fedora-bootc did not, last checked), else every build denies.
+- New registry → also update `yubiOS.rego` AND the rego policy doesn't replace digest pinning:** the Containerfile `FROM` must still be `@sha256:` (the policy enforces it, PINNED.md records it).
+- cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+**In-repo touchpoints** — sections this skill owns or extends: Extended description, How it is invoked, The `input` object (what the policy sees), The yubiOS.rego pattern (repo root).
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
