@@ -244,3 +244,21 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Intent unclear** AND **cost of building wrong high** -> `interview-me` (ask).
+- Intent inferable** AND **cost of asking high** -> `human-for-feasibility` (infer).
+- Both true for different sub-decisions** -> both apply; this skill decides *which sub-decisions* are inferable.
+- The user's most recent message.** Did they answer this already?
+
+**In-repo touchpoints** — sections this skill owns or extends: Philosophy, When to Use, The Discipline: When to Ask vs. When to Infer, 1. Is it documented in working context?.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. If YES -> **ask**, with a single concrete recommendation attached. Don't ask "what do you want?" — ask "I'm leaning toward X because Y. Right?"
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
