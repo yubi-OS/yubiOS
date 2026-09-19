@@ -143,23 +143,11 @@
 The `curve-guided-rsi` meta-skill continues to fire its verification metric across multiple cycles. The closed-loop corpus audit pipeline is operational, the metric improves monotonically (cycle 0 → cycle 3: holdout R² +0.2945, sparse cells -19, mean breadth +0.40), and the skill's CAP-at-3-cycles-per-gap default is being respected. After 3 cycles the curve is approaching its asymptote (only 2 of 63 skills remain isolated, both at the curve's edges); further cycles would have diminishing returns. The skill is ready for production deployment — set a re-run cadence per its `## Lifecycle` section (≥25% corpus growth OR 6 months elapsed) and re-measure.
 
 
-
 ## Attestation coverage
 
 This document supports the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
-
-## Evidence inventory
-
-**Run IDs**: TBD per file context.
-**Commit SHAs**: TBD.
-**Measured metrics**: TBD.
-**Test outcomes**: TBD.
-
-Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4816).
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
