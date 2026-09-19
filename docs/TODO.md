@@ -186,3 +186,7 @@ No previously active blockers were retired in this review. OMN-150 stays in Back
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 2026-09-18 drift check (wayfinder round 10, cycle 13)
+
+the TODO surface is the register's companion; no agent edits this round; recorded as part of the docs/ round-10 sweep for inventory completeness.
