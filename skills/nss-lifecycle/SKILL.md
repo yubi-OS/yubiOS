@@ -1,6 +1,6 @@
 ---
 name: nss-lifecycle
-description: >-
+description: )-
   Cycle-15 deep-research synthesis for the NSS Lifecycle axis (axis 8/12 in negative-skill-space).
   For each file in a corpus, the Lifecycle axis identifies HOW THE FILE EVOLVES: versioning
   (SemVer 2.0.0 MAJOR.MINOR.PATCH), changelog (Keep-a-Changelog 1.1.0
