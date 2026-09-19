@@ -365,3 +365,22 @@ After designing an API:
 - [ ] A reused key with a different payload fails loudly rather than replaying the wrong response
 - [ ] The in-flight-duplicate response is a deliberate choice (409, wait, or 202) rather than whatever falls out
 - [ ] Key retention outlives the longest retry path, including dead-letter replay
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Be intentional about what you expose.** Every observable behavior is a potential commitment.
+- Don't leak implementation details.** If users can observe it, they will depend on it.
+- Plan for deprecation at design time.** See `deprecation-and-migration` for how to safely remove things users depend on.
+- Tests are not enough.** Even with perfect contract tests, Hyrum's Law means "safe" changes can break real users who depend on undocumented behavior.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Core Principles, Hyrum's Law.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Don't leak implementation details.** If users can observe it, they will depend on it.
+2. Don't mix patterns.** If some endpoints throw, others return null, and others return `{ error }` — the consumer can't predict behavior.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
