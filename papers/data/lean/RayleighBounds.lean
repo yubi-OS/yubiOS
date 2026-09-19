@@ -27,11 +27,18 @@
 
 namespace Rayleigh
 
+theorem sq_nonneg (a : Int) : 0 ≤ a * a := by
+  cases Int.le_total 0 a with
+  | inl h => exact Int.mul_nonneg h h
+  | inr h =>
+    have h' : 0 ≤ -a := Int.neg_nonneg_of_nonpos h
+    have e : a * a = (-a) * (-a) := by rw [Int.neg_mul_neg]
+    rw [e]
+    exact Int.mul_nonneg h' h'
+
 def quad : List (Nat × Nat) → (Nat → Int) → Int
   | [], _ => 0
   | e :: es, x => (x e.1 - x e.2) * (x e.1 - x e.2) + quad es x
-
-theorem quad_nil (x : Nat → Int) : quad [] x = 0 := rfl
 
 theorem quad_cons (e : Nat × Nat) (es : List (Nat × Nat)) (x : Nat → Int) :
     quad (e :: es) x = (x e.1 - x e.2) * (x e.1 - x e.2) + quad es x := rfl
@@ -40,7 +47,7 @@ theorem quad_nonneg : ∀ (es : List (Nat × Nat)) (x : Nat → Int), 0 ≤ quad
   | [], _ => Int.le_refl 0
   | e :: es, x => by
       rw [quad_cons]
-      exact Int.add_nonneg (Int.mul_self_nonneg _) (quad_nonneg es x)
+      exact Int.add_nonneg (sq_nonneg _) (quad_nonneg es x)
 
 theorem quad_const : ∀ (es : List (Nat × Nat)) (c : Int), quad es (fun _ => c) = 0
   | [], _ => rfl
@@ -56,6 +63,9 @@ theorem quad_shift : ∀ (es : List (Nat × Nat)) (x : Nat → Int) (b : Int),
       have h : x e.1 + b - (x e.2 + b) = x e.1 - x e.2 := by omega
       rw [h]
 
+theorem sq_mul (c a : Int) : c * a * (c * a) = c * c * (a * a) := by
+  rw [Int.mul_assoc c a (c * a), Int.mul_comm a (c * a), Int.mul_assoc c a a, ← Int.mul_assoc c c (a * a)]
+
 theorem quad_scale : ∀ (es : List (Nat × Nat)) (x : Nat → Int) (c : Int),
     quad es (fun v => c * x v) = c * c * quad es x
   | [], _, _ => by simp [quad]
@@ -63,59 +73,56 @@ theorem quad_scale : ∀ (es : List (Nat × Nat)) (x : Nat → Int) (c : Int),
       rw [quad_cons, quad_cons, quad_scale es x c]
       have h : c * x e.1 - c * x e.2 = c * (x e.1 - x e.2) := by
         rw [Int.mul_sub]
-      rw [h, Int.mul_add]
-      -- c*(a) * (c*(a)) = c*c*(a*a)
-      have h2 : c * (x e.1 - x e.2) * (c * (x e.1 - x e.2))
-              = c * c * ((x e.1 - x e.2) * (x e.1 - x e.2)) := by
-        rw [Int.mul_assoc, Int.mul_comm (x e.1 - x e.2) (c * (x e.1 - x e.2)), Int.mul_assoc,
-            ← Int.mul_assoc c c]
-      rw [h2]
+      rw [h, Int.mul_add, sq_mul]
 
 /-- 0/1 indicator of a vertex list. -/
-def ind (S : List Nat) (v : Nat) : Int := if S.elem v then 1 else 0
+def ind (S : List Nat) (v : Nat) : Int := if v ∈ S then 1 else 0
 
-/-- number of edges with exactly one endpoint in S. -/
-def cut : List (Nat × Nat) → List Nat → Nat
+/-- 1 if the edge (a,b) has exactly one endpoint in S, else 0. -/
+def edgeCut (S : List Nat) (a b : Nat) : Int :=
+  if decide (a ∈ S) = decide (b ∈ S) then 0 else 1
+
+/-- number of edges with exactly one endpoint in S (as an Int, to avoid casts). -/
+def cut : List (Nat × Nat) → List Nat → Int
   | [], _ => 0
-  | e :: es, S => (if S.elem e.1 = S.elem e.2 then 0 else 1) + cut es S
+  | e :: es, S => edgeCut S e.1 e.2 + cut es S
 
 theorem ind_sq_diff (S : List Nat) (a b : Nat) :
-    (ind S a - ind S b) * (ind S a - ind S b) = (if S.elem a = S.elem b then 0 else 1 : Int) := by
-  unfold ind
-  cases S.elem a <;> cases S.elem b <;> simp
+    (ind S a - ind S b) * (ind S a - ind S b) = edgeCut S a b := by
+  by_cases ha : a ∈ S <;> by_cases hb : b ∈ S <;> simp [ind, edgeCut, ha, hb]
 
 theorem quad_indicator : ∀ (es : List (Nat × Nat)) (S : List Nat),
-    quad es (ind S) = (cut es S : Int)
+    quad es (ind S) = cut es S
   | [], _ => rfl
   | e :: es, S => by
       rw [quad_cons, ind_sq_diff, quad_indicator es S]
-      unfold cut
-      cases h : (S.elem e.1 = S.elem e.2) <;> simp_all [Nat.cast_add]
+      rfl
 
 /-- an edge list where no edge touches v -/
 def untouched (es : List (Nat × Nat)) (v : Nat) : Prop := ∀ e ∈ es, e.1 ≠ v ∧ e.2 ≠ v
+
+theorem edgeCut_singleton_untouched (v a b : Nat) (ha : a ≠ v) (hb : b ≠ v) :
+    edgeCut [v] a b = 0 := by
+  simp [edgeCut, ha, hb]
 
 theorem cut_singleton_untouched : ∀ (es : List (Nat × Nat)) (v : Nat), untouched es v → cut es [v] = 0
   | [], _, _ => rfl
   | e :: es, v, h => by
       have he := h e (List.mem_cons_self e es)
       have hrest : untouched es v := fun e' he' => h e' (List.mem_cons_of_mem e he')
-      unfold cut
-      rw [cut_singleton_untouched es v hrest]
-      have h1 : [v].elem e.1 = false := by simp [List.elem, he.1]
-      have h2 : [v].elem e.2 = false := by simp [List.elem, he.2]
-      simp [h1, h2]
+      show edgeCut [v] e.1 e.2 + cut es [v] = 0
+      rw [edgeCut_singleton_untouched v e.1 e.2 he.1 he.2, cut_singleton_untouched es v hrest]
+      rfl
 
 /-- isolated vertex ⇒ its indicator is in the kernel of the quadratic form -/
 theorem quad_no_incident (es : List (Nat × Nat)) (v : Nat) (h : untouched es v) :
     quad es (ind [v]) = 0 := by
   rw [quad_indicator, cut_singleton_untouched es v h]
-  rfl
 
 /-- Rayleigh–Ritz witness numerator: x = n·1_S − k·1 has xᵀLx = n²·cut(S). -/
 theorem witness_numerator (es : List (Nat × Nat)) (S : List Nat) (n k : Int) :
-    quad es (fun v => n * ind S v - k) = n * n * (cut es S : Int) := by
-  have h1 : (fun v => n * ind S v - k) = (fun v => (n * ind S v) + (-k)) := by
+    quad es (fun v => n * ind S v - k) = n * n * cut es S := by
+  have h1 : (fun v => n * ind S v - k) = (fun v => (fun w => n * ind S w) v + (-k)) := by
     funext v; omega
   rw [h1, quad_shift, quad_scale, quad_indicator]
 
@@ -130,7 +137,7 @@ theorem witness_denominator (n k : Int) :
 /-- concrete instance: 8-vertex path 0-1-…-7, S = {0,1,2,3}: cut = 1, witness R = 8·1/(4·4) = 1/2 -/
 def path8 : List (Nat × Nat) := [(0,1),(1,2),(2,3),(3,4),(4,5),(5,6),(6,7)]
 
-theorem rr_path_example : cut path8 [0,1,2,3] = 1 ∧ (8 : Nat) * cut path8 [0,1,2,3] * 2 = 4 * (8 - 4) := by
+theorem rr_path_example : cut path8 [0,1,2,3] = 1 ∧ (8 : Int) * cut path8 [0,1,2,3] * 2 = 4 * (8 - 4) := by
   decide
 
 theorem rr_path_quad : quad path8 (ind [0,1,2,3]) = 1 := by
