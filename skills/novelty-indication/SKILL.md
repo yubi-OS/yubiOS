@@ -270,3 +270,20 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Continuous / adaptive coverage
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Direct equivalents:** what existing products/projects address the same problem?
+- Failed attempts:** what was tried and abandoned, and why?
+- Academic / formal:** any research papers or surveys?
+- Adjacent / historical:** earlier or related efforts in the same family?
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, The Framework, Step 1 — Restate the idea as a one-sentence problem statement.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
