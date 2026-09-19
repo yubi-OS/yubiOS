@@ -1,5 +1,7 @@
 # Wayfinder round 10 results: docs/ corpus at frame 988e8997623c442c
 
+_Moved from docs/ to refs/ 2026-09-18 per Jenny directive: wayfinding receipts live in refs/._
+
 Date: 2026-09-18. Family: run-results record (cf. `docs/` sibling rounds; refs/ results:
 `refs/wayfinder-round8-results-2026-09-18.md`). Origin: round 10, cycle 20 — the closing record.
 Same protocol: 20 iterations on the `docs/` corpus (21 docs), one file per commit, every cycle
