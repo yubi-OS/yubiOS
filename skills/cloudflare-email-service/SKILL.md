@@ -101,3 +101,20 @@ Read the reference that matches your situation. You don't need all of them.
 - **[references/routing.md](references/routing.md)** — Inbound `email()` handler, forwarding, replying, parsing. For receiving emails.
 - **[references/cli-and-mcp.md](references/cli-and-mcp.md)** — Domain setup, wrangler commands, MCP tools. For first-time setup.
 - **[references/deliverability.md](references/deliverability.md)** — SPF/DKIM/DMARC, bounces, suppressions, best practices.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Domain onboarded?** Run `npx wrangler email sending list` to see which domains have email sending enabled. If the domain isn't listed, run `npx wrangler email sending enable userdomain.com` or see [cli-and-mcp.md](references/cli-and-mcp.md) for full setup instructions.
+- Binding configured?** Look for `send_email` in `wrangler.jsonc` (for Workers)
+- postal-mime installed?** Run `npm ls postal-mime` (only needed for receiving/parsing emails)
+- [references/sending.md](references/sending.md)** — Workers binding API, attachments, Agents SDK email. For Workers or Agents SDK.
+
+**In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, FIRST: Check Prerequisites, What Do You Need?, Quick Start — Workers Binding.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
