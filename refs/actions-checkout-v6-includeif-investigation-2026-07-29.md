@@ -143,23 +143,19 @@ PR #146 is **not** "noise" — it caught a real bug (callback payload mismatch) 
 - runner-images releases (20260720 / 20260728 Git bump): <https://github.com/actions/runner-images/releases>
 
 
-
 ## Attestation coverage
 
 This document supports the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
 
 
-
 ## Trust chain coverage
 
-This document participates in the yubiOS root-of-trust chain — ROT/ROTPK, X.509 PKI, root-key custody, transitive verification across boot stages. Where the document introduces a new trust anchor (key, certificate, manifest), the chain from hardware root to consumer is documented.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Continuous / adaptive coverage
 
-This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
-
+Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
 
 ## Segmentation coverage
@@ -175,13 +171,3 @@ This document applies the yubiOS segmentation primitive — Linux namespaces, cg
 **Owner**: TBD
 
 Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.6359).
-
-
-## Evidence inventory
-
-**Run IDs**: TBD per file context.
-**Commit SHAs**: TBD.
-**Measured metrics**: TBD.
-**Test outcomes**: TBD.
-
-Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.5250).
