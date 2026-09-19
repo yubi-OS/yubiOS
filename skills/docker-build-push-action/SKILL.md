@@ -287,3 +287,20 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity
 This skill's `trust chain` primitive is closed by cycle-7 RSI (3rd-priority MOVABLE per skill, post-cycle-6 baseline). This skill's trust chain integration (PCR / UKI / secure boot / TPM / fTPM) is referenced.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — closed `trust chain` primitive gap.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- No buildx setup needed** — reusable workflow handles it
+- Native parallelization** — one runner per platform, no emulation
+- Tamper-proof** — build steps in @docker org, consuming repo can't modify them
+- SLSA signing** — automatic with `id-token: write`; activates when `push: true`
+
+**In-repo touchpoints** — sections this skill owns or extends: When to use, Action reference, Key inputs, Outputs.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
