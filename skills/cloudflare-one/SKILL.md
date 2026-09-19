@@ -174,3 +174,15 @@ Use these to avoid jumping straight to configuration. Ask only the prompts relev
 - Use fully qualified MCP tool names when MCP tools are available.
 - Never guess category IDs, application IDs, wirefilter fields, or API request bodies. Retrieve the current schema/docs and existing account objects.
 - Do not enable broad production policies without explicit approval.
+
+## Examples
+
+**In-repo touchpoints** — sections this skill owns or extends: Workflow, Assessment Prompts, Architecture and Current State, Access and SaaS Federation.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. Browser Rendering for SSH/VNC/RDP is an Access capability. Browser Isolation renders general web content remotely. Do not conflate them.
+2. Do not enable broad production policies without explicit approval.
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
