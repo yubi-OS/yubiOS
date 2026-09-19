@@ -88,4 +88,15 @@ Fetch the page before implementing. Installed `@next` types win over guesses.
 - Lockfile and Dockerfile on the **same** `@next` line  
 - Typecheck against installed `@next` types  
 - No live secrets in sandbox env  
-- Production preview hostnames need wildcard DNS on a custom domain when using those URL patterns  
+- Production preview hostnames need wildcard DNS on a custom domain when using those URL patterns
+
+## Examples
+
+**In-repo touchpoints** — sections this skill owns or extends: 1. Gate — confirm the package line, 2. Contract — non-negotiables, 3. Retrieve — open the doc for the task, 4. Before you ship.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+1. | Default `@cloudflare/sandbox` (no `@next`) | **Stop.** Load **`sandbox-stable`**. Do not apply this skill’s APIs. |
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
