@@ -461,3 +461,7 @@ This document integrates with the yubiOS declarative-policy substrate — OPA/Re
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 2026-09-18 drift check (wayfinder round 11, cycle 6)
+
+PLAN.md (round-9 cycle-10 repaired): planning claims re-anchored to the round records; the register-review gap this round surfaced is the plan's own next step; note additive.
