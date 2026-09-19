@@ -79,3 +79,7 @@ This is a business evidence-boundary document. It introduces no trust anchor, ke
 ## Recommendation
 
 **Verdict**: KEEP as a dated snapshot. **One-line**: sections 1–5 state the evidence boundary as of 2026-07-25 against BLOCKERS.md reviewed 2026-07-22; the live `docs/BLOCKERS.md` on main remains the single source of truth for current blocker status, and any later closure (for example runs or PRs that retired B-VM-CTAP2, B-REAL-FIDO2 or B-BOOTC-SEAL) supersedes the corresponding line here without being back-edited into this snapshot.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 41)
+
+position-evidence record (round-4 repaired): re-verified that its dated claims are historical positions, not current ones; cross-linked to the round-7/8 results records. Content unchanged by this round; the drift note is additive.

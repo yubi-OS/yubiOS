@@ -77,3 +77,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 **Verdict**: REVISE — context-dependent
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6921, Δ=+0.4199) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 50)
+
+org state audit: the org has since grown (20 repos incl. the chromium mirror + provenance overlay); the audit's role-based map is otherwise unchanged; note additive.

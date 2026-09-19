@@ -228,3 +228,7 @@ This document applies the yubiOS segmentation primitive — Linux namespaces, cg
 **Verdict**: REVISE — context-dependent
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.8361, Δ=+0.8390, Δ=+0.6561) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 65)
+
+bootc composefs sealed flow spec: its Phase-2 question (install-time BLSConfig wiring) is unchanged; upstream bootc is now v1.16.13, past the version floor option (b) names; note additive.

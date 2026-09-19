@@ -91,3 +91,6 @@ Deployment: Worker `steady-orbit` PUT 2026-09-17T10:34:43Z, only `index.js` chan
 
 Live smoke on map 77 (12 refs docs, frame `6b13364cd8ac5b57`): axis trial K=40 in 0.67 s → all 9 axes `not-excluded` (observed hits 5–7 vs null means 4.8–5.7, |z| ≤ 0.85, total z +0.69, p 0.54; margins preserved over 21,600 attempts / 1,267 accepted). On this 12-document frame no axis is distinguishable from the fixed-margin null — a trial record, not an admission decision. Consistency on the pfister refs doc with a primary + weak + strong appended-note variant → all three quantization-silent (0 bits, 0 displacement, isolated Δ 0), `all_same_sign:true`, sign_exact 3/3 against predicted 0 — an instrument reading that small appended notes do not move this document's bits on this frame.
 
+## 2026-09-18 drift check (wayfinder round 8, cycle 51)
+
+the methods doc for calibration/outcomes: this round ran on exactly that surface (controls, axis trials, pre-registration); its deferred items (axis-redundancy admission null, consistency gate) remain deferred; note additive.

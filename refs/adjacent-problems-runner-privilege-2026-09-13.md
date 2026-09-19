@@ -73,3 +73,7 @@ and audio lab roles are not worth sharing a boundary with PR input.
 Coverage: verification chain (build policy), rootless privilege (the no-sudo provision
 step), corpus/curve (this cell via the series format), runner/CI isolation (focal),
 YubiKey boot (not touched — rock1's lab roles documented in their own skills).
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 58)
+
+runner-privilege record: the HIGH-MEM runner grouping and group-restricted access it documents are unchanged.

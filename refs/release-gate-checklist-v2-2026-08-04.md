@@ -261,3 +261,18 @@ This document applies least-privilege hardening: Linux capabilities (drop + ambi
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 2026-09-18 drift check (wayfinder round 8)
+
+The checklist's three missing non-engineering gates (security audit, pricing-validity,
+reference-customer) were re-checked at the corpus level, 45 days after authoring:
+
+- The milestone target this checklist served (2026-09-13 on the Production Proof & Release
+  Gates project) has **passed** — 5 days before this read. The gates themselves show no
+  landed-evidence change in the round's records: the releases train continued (v0.8.8,
+  2026-09-09) without the three gates being recorded as closed in any refs/ doc this round.
+- The engineering-side context the checklist tracked is mixed: the physical-YubiKey hardware
+  proof point exists (OMN-42/89 closed, rock1 hardware leg), while ARM64 Path A
+  (`B-ARM64-PATHA`) remains the open board-evidence gate.
+- The checklist's own status line ("Draft for PR") is stale: the checklist is a merged corpus
+  artifact now. Worth a status-line touch-up in a future edit.

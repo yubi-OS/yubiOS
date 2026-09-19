@@ -104,3 +104,15 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## Segmentation coverage
 
 This document applies the yubiOS segmentation primitive — Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.
+
+## 2026-09-18 re-verification (wayfinder round 8)
+
+The doc's CRITICAL FINDING said bootc v1.16.4 (2026-07-15) may make B-BOOTC-SEAL a digest-bump
+matter. Live 2026-09-18: upstream bootc is at **v1.16.13** (v1.16.12 2026-09-10, v1.16.11
+2026-09-03) — two months of weekly-cadence releases past the finding. The finding's logic now
+holds even more strongly: the version floor for `bootc container split-kernel-and-rootfs`
+(v1.16.4+) is far behind upstream, and the binding constraint is purely the fedora-bootc
+digest. Which is currently stale: this round's digest drift check found the `Containerfile`
+pin 404ing on quay since ~2026-08-05 (`refs/fedora-bootc-digest-drift-check-2026-09-18.md`).
+So B-BOOTC-SEAL option (b) is now exactly what the 2026-07-23 doc predicted: a digest bump
+that would also carry the v1.16.4+ capability.

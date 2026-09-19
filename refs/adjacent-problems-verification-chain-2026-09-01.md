@@ -93,3 +93,7 @@ alongside the rejected-models note. Its coverage over the learned primitives is:
 chain yes, rootless privilege yes (the builder link), corpus/curve yes (this section), YubiKey
 boot yes, container isolation yes; it deliberately says nothing about the two omitted
 clusters so that the file occupies the target pattern and not the existing pole.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 56)
+
+verification-chain record: this round's pin-resolution audit (fedora-bootc 404) is a live instance of the chain gap it names.

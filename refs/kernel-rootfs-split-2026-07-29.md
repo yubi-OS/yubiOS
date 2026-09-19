@@ -123,3 +123,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 **Verdict**: REVISE — context-dependent
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.7834, Δ=+0.8394, Δ=+0.6471) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 70)
+
+kernel+rootfs split record: the doc's Phase-2 tracker (OMN-150) still lists the same two options; this round adds the upstream note (bootc v1.16.13 past the floor); note additive.

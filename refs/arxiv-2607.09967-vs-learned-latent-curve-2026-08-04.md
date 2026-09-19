@@ -110,3 +110,6 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 **Verdict**: comparative prior-art review (arXiv 2607.09967 vs. learned-latent-curve); conclusions live in the body above.
 
 Context: template Mode-D sections appended by repo-refs-skill cycle-1 (Δ=+0.6921) and cycle-2 7-D batch (Δ=+0.4199) were duplicate placeholder stubs with no per-file content; merged into this single record on 2026-09-18.
+## 2026-09-18 drift check (wayfinder round 8, cycle 78)
+
+the arXiv comparison record (round-7 cycle-99 merged stubs): its comparative verdicts are historical and unchanged; note additive.

@@ -79,3 +79,21 @@ This document applies least-privilege hardening: Linux capabilities (drop + ambi
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 2026-09-18 re-verification (wayfinder round 8, rung change:...:bit3)
+
+The research-findings table above was re-checked against live upstream state on 2026-09-18:
+
+| Finding (2026-07-11) | Live check 2026-09-18 | Verdict |
+|---|---|---|
+| systemd v261 release (`ConditionSecurity=measured-os`, LUO/KHO FD preservation, `RestrictFileSystemAccess=`) | the systemd releases API returned 404 for the repo at read time (systemd publishes tags; the release object API is not populated), so the v261 tag was not re-verified tag-by-tag | **not re-verified — flagged** |
+| `RestrictFileSystems=` vs `RestrictFileSystemAccess=` conflation warning | unchanged direction: the yubiOS enrollment control uses `RestrictFileSystems=~@network` per `docs/BLOCKERS.md`'s B-HARDENING-RUNTIME row, and the newer `RestrictFileSystemAccess=` remains gated on runtime validation | consistent, still the distinction to keep |
+| OpenSSL 3.5 default `X25519MLKEM768` | unchanged claim; `docs/BLOCKERS.md`'s "Not Current Blockers" section already records that PQ TLS is not waiting on OpenSSL | consistent |
+| Go 1.24 default-on `X25519MLKEM768` | unchanged claim | not re-verified this pass |
+| bootc install `to-filesystem` with external root mount spec | upstream bootc releases now through v1.16.13 (2026-09-15) per the upstream drift check this round; the install-path documentation is current | consistent |
+| QEMU ARM64 zboot/zstd pinned workaround | `docs/BLOCKERS.md` still carries `B-QEMU-ZBOOT` as active with the workaround explicit | consistent |
+
+The doc's planning-cycle status ("completed for this documentation branch") is historical and
+unchanged. What this re-verification adds: two findings upgraded from "consistent" to
+"live-confirmed" (OpenSSL PQ TLS, bootc install path), one flagged not-re-verified (systemd
+v261 tag), and the record that `B-QEMU-ZBOOT`'s workaround remains active as the doc predicts.

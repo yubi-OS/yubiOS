@@ -207,3 +207,7 @@ ReadWritePaths=/etc/crypttab
 ## Declarative policy coverage
 
 This document integrates with the yubiOS declarative-policy substrate — OPA/Rego policy files, signing-config JSON, policy-as-code workflows. Policy gates are named at the integration point; policy evaluation is the gate, not an afterthought.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 95)
+
+the 0pointer big-picture record (round-7 mojibake-repaired): its architecture-vision mapping is unchanged; note additive.

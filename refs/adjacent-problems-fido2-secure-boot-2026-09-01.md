@@ -83,3 +83,7 @@ multi-key quorum item in the yubikey-operations skill.
 Coverage: verification chain, rootless privilege (enrol moment), corpus/curve (this cell),
 YubiKey FIDO2 boot (focal), container isolation (the VM test boundary). Omitted clusters are
 omitted so that the file lands in the target cell rather than on the pole.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 55)
+
+fido2-secure-boot record: the hardware-leg proof point (OMN-42/89) landed after this doc was written; its flip conditions are closer to satisfied than at write time.

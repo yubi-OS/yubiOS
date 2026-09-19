@@ -270,3 +270,6 @@ Full source lists are preserved in each stream's report (3 parallel subagent rep
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+## 2026-09-18 drift check (wayfinder round 8, cycle 79)
+
+attested bootc GPU cutover record (round-7 repaired): the ADR-031 boundary it extends is unchanged this round; note additive.

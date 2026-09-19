@@ -263,3 +263,30 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## Segmentation coverage
 
 This document applies the yubiOS segmentation primitive — Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.
+
+## 9. Re-verification 2026-09-18 (wayfinder round 8, rung change:...:bit3)
+
+This checklist's protocol was re-verified against live state on 2026-09-18; the fourth rotation
+it predicted has now happened and was NOT caught:
+
+1. **Rotation history is now 4, not 3.** The checklist's evidence table lists three rotations
+   (2026-07-26, 2026-07-29, 2026-07-30). Live check 2026-09-18: the `Containerfile` pin at
+   `a6fbbdb9` is `sha256:c7e6b357...` (last refresh commit `959ead70`, 2026-08-05), and **that
+   manifest now 404s on quay** while the `:45` tag resolves a new index (4 children,
+   `0157de4d`/`ac6f851f`/`5c1a944b`/`62c290f5`). Three more refresh commits exist
+   (`e2462889`/`d5581f08` 2026-08-01, `e7078f90` 2026-08-04, `959ead70` 2026-08-05), none after.
+   Incident 4: pin stale ~44 days at this read; the next main image build fails at pull until
+   `fetch-fedora-bootc-manifest.yml` re-resolves. See
+   `refs/fedora-bootc-digest-drift-check-2026-09-18.md`.
+2. **The pre-bump check list is executable now.** Nothing in the protocol requires a release:
+   step 2 (quay HEAD query) and step 3 (manifest digest match) are one-line curl checks. The
+   gap between this checklist's design and its execution is scheduling, not tooling — exactly
+   the failure incident 4 demonstrates.
+3. **OMN-62 status.** This checklist's linked issue was listed Done in the round-7 records
+   (2026-08-04 spec cycle); the failure it was written to catch has since recurred (incident 4),
+   which is the strongest argument yet for the scheduled weekly resolution check the
+   digest-drift record proposes.
+
+The checklist's protocol is otherwise unchanged and remains the standing procedure; this
+section records that its trigger condition (a fresh rotation) is currently live and
+unremediated.

@@ -37,3 +37,7 @@ canceled 2026-07-30, post-launch posture) are unchanged.
 - Companion: `refs/arm64-path-a-b-board-status-2026-07-23.md` (the original board roles doc,
   still the hardware reference), `refs/linear-workspace-sweep-2026-09-09.md` (project-level
   rollup).
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 48)
+
+Path A status record: the round re-cited its blockers (B-ARM64-PATHA active; the 2026-09-12 target date has passed per round-7 records); no new hardware evidence landed this round; content unchanged, note additive.

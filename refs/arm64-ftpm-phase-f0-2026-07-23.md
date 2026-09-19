@@ -78,3 +78,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 ## Immutability coverage
 
 This document upholds the yubiOS immutability layer — composefs repository, dm-verity root hash, ostree deployment, read-only / append-only semantics, sealed UKI / measured boot. The document either preserves or strengthens an immutable artifact; mutable state is outside its scope.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 81)
+
+fTPM Phase F0 record (round-7 repaired): historical CI-era record, unchanged; the fTPM TA work it documents is the ADR-018/019/020 fork lineage; note additive.

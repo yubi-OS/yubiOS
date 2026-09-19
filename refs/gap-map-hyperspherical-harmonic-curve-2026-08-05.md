@@ -141,3 +141,7 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6466, Δ=+0.5900) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 67)
+
+gap-map record (round-4 repaired): its sparse-cell priorities fed the hyperspherical-harmonic-curve skill; the round-8 corpus is denser at those cells than at write time; note additive.

@@ -45,3 +45,7 @@ Chain of maps: 81 → 83 → 84 → 85 → 86 → 87 → 88 (map 82 is a stray a
 
 - `limits/2` (PR #238, `eb373674`): 4000-item corpora, per-request uncached-embedding budget with a batch warm-up hint, KV overflow storage for maps > 1.9 MB, Worker CPU budget 300 s. The first deploy bound `map.classes` (an object) into D1 and returned 500 on every persist for ~9 minutes (11:16–11:26Z); fixed in `74882bf5` with a strict-D1 test on a real `runMap` output.
 - Cache warm-up: 495 documents embedded in 5 batches of 100 (61 s total); the baseline map then took 11.6 s, each after-map 6.5–9.1 s.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 44)
+
+skills round-1 record: re-verified as historical (its 11 cycles and 82-defective backlog finding predate the sweep PR #246 which cleared the refs-side classes); content unchanged, note additive.

@@ -326,3 +326,17 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 **Verdict**: REVISE — context-dependent
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6921, Δ=+0.4199) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## 2026-09-18 re-verification (wayfinder round 8)
+
+The reference's claims were re-checked against live state on 2026-09-18 at `a6fbbdb9`. The
+FIDO2-enrollment and homed flows it documents are the same paths the hardware-leg proof
+exercised (OMN-42/89: LUKS2 FIDO2 enroll slot 2, systemd-homed FIDO2 home create on rock1) —
+so the reference now has a real-hardware evidence trail behind it, not only CI-emulated runs.
+The reference's systemd-version-sensitive claims were not re-diffed against a v261 changelog
+this pass (flagged for the next upstream review); the round's upstream drift check
+(`refs/upstream-progress-drift-check-2026-09-18.md`) covers the mkosi/bootc sides.
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 42)
+
+already re-verified in cycle 30; this pass adds nothing and is recorded as a no-op abstain to keep the cycle ledger honest.

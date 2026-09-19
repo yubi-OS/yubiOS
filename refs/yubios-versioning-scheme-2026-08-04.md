@@ -136,3 +136,15 @@ This document integrates with the yubiOS declarative-policy substrate — OPA/Re
 ## Continuous / adaptive coverage
 
 This document supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.
+
+## 9. Re-verification 2026-09-18 (wayfinder round 8)
+
+The scheme has now governed 10+ releases beyond the v0.7.1 anchor it codifies. Live releases
+API read 2026-09-18: v0.8.8 (2026-09-09), v0.8.7 (2026-08-25), v0.8.6 (2026-08-22), v0.8.5
+(2026-08-13), v0.8.2 (2026-08-12), and earlier v0.7.x/v0.8.0 tags. Every one is a SemVer
+2.0.0 `vMAJOR.MINOR.PATCH` tag with the immutable `:<sha>` OCI tag pairing intact. The scheme
+held under load: 0.7.x to 0.8.x were minor bumps (no breaking change claimed), and no release
+tag was cut by any agent account, matching the scheme's Jenny-cuts-tags rule. One nuance the
+scheme's text predates: the v0.8.5 tag's visibility gap (confirmed only via compare links in
+the round-7 records) — a tagging-flow gap worth a look next time a release is cut, not a
+scheme violation.

@@ -108,3 +108,12 @@ Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.9792).
 **Pass criterion**: TBD.
 
 Context: section appended per repo-refs-skill cycle-2 7-D Mode D batch (Δ=+0.4144).
+
+## 2026-09-18 drift check (wayfinder round 8, cycle 31)
+
+The model's live assumptions re-checked at corpus level, 2 months after its last repair: the
+release context it prices against moved (6 releases since review, v0.8.3 through v0.8.8,
+latest 2026-09-09), the dev/latest separation is still intact in SECURITY.md's
+supported-versions table, and the pricing-validity gate the release-gate checklist names is
+still open - consistent with the model's own claim boundaries. No number in the model is
+restated here; the model remains the pricing source of truth.
