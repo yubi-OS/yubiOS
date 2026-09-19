@@ -179,3 +179,20 @@ The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `least privilege` primi
 This skill already covers all 5 remaining MOVABLE corpus-priority primitives post-cycle-6 (attestation, trust chain, declarative policy, immutability, least privilege). The cycle-7 RSI audit verified full movable coverage; no primitive closure needed.
 
 The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to close.
+
+## Examples
+
+**Worked setup** — the flow this skill drives, using its own artifacts:
+
+- Bundling without a Merkle tree** — a signed list of files can be modified individually; the bundle's signature doesn't catch per-file changes. The Merkle tree is the tamper-evidence.
+- Attesting the Merkle root with a key that's also used to sign the artifacts** — the same key compromise invalidates both the artifact signatures and the bundle signature. The bundle's attestation key should be dedicated to evidence bundling.
+- Skipping the Rekor v2 publication** — the transparency log is what makes the bundle's attestation publicly verifiable. Without it, an attacker can publish a counter-bundle with a different Merkle root.
+- Re-using a TPM2 PCR quote across bundles** — the PCR values change as the system runs; each bundle needs a fresh quote for its current state.
+
+**In-repo touchpoints** — sections this skill owns or extends: Overview, When to Use, Anatomy of an evidence bundle, Generating a bundle.
+
+**Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Guidelines
+
+
+Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
