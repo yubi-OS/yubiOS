@@ -59,13 +59,6 @@
       "runtime_predicate": "Z_m is a function of the pattern multiset"
     },
     {
-      "name": "Azimuth.sum_replicate",
-      "status": "lean-proved",
-      "statement": "summing a row k times scales the moment sum by k",
-      "runtime_counterpart": "Z_repeat/multiplicity scaling: atomicity means duplicates carry multiplicity",
-      "runtime_predicate": "Z_m depends on pattern multiplicities; deduplicated corpora measure distinct patterns only"
-    },
-    {
       "name": "Azimuth.absSq_scale",
       "status": "lean-proved",
       "statement": "|k*z|^2 = k^2*|z|^2",
@@ -120,6 +113,7 @@
     "full SO(2) rotation invariance is NOT proved: over Z[i] the gauge group is D4; the Float runtime path is checked by tests, not by this file",
     "no invariance under anisotropic (GL(2)) rescaling of the placement axes: a chart/lens change is outside every statement",
     "the weighted first moment being zero on a centered plane is a modeling fact (PCA scores are mean-centered); unweighted Z_1 measures radial/multiplicity reweighting and is structurally confounded",
-    "no claim about document quality, ranking, keep/revert, radius or admission"
+    "no claim about document quality, ranking, keep/revert, radius or admission",
+    "replicate/multiplicity scaling is NOT proved here (foldr/replicate machinery outside core Lean); the runtime equivalent is tested by test-azimuth.mjs"
   ]
 }

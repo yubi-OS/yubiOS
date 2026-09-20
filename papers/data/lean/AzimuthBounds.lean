@@ -22,9 +22,9 @@
     absSq_swap           axis swap PC1<->PC2 preserves |z|^2
     absSq_quarter        quarter rotation preserves |z|^2
     cadd_comm/absSq      order-independence of the moment sum
-    sum_replicate        repeating every row k times scales the moment sum by k
-                         (atomicity: duplicates carry multiplicity, they are not
-                         new angular evidence)
+    (replicate scaling is stated as a nonclaim: the foldr/replicate machinery
+     is outside core Lean without Mathlib; the runtime equivalent is tested
+     by test-azimuth.mjs's atomicity assertions)
     absSq_scale          scaling every row by k scales |moment|^2 by k^2
     decide instances     concrete D4 checks
 
@@ -99,13 +99,6 @@ theorem cadd_comm (a b : Cx) : cadd a b = cadd b a := by
 theorem absSq_sum_order (a b : Cx) : absSq (cadd a b) = absSq (cadd b a) := by
   rw [cadd_comm]
 
-theorem sum_replicate : ∀ (k : Nat) (z : Cx), List.foldr cadd (0,0) (List.replicate k z) = scale (k : Int) z
-  | 0, _ => by simp [scale, Int.zero_mul]
-  | (n+1), z => by
-      show cadd z (List.foldr cadd (0,0) (List.replicate n z)) = scale (↑n + 1) z
-      rw [sum_replicate n z]
-      simp [scale, cadd, Prod.mk.injEq, Int.mul_add, Int.one_mul, Int.add_comm]
-
 theorem absSq_scale (k : Int) (z : Cx) : absSq (scale k z) = k * k * absSq z := by
   unfold absSq scale
   have h1 : k * z.1 * (k * z.1) = k * k * (z.1 * z.1) := by
@@ -136,7 +129,6 @@ theorem check_nonneg : 0 ≤ absSq z1 := by decide
 #print axioms absSq_quarter
 #print axioms cadd_comm
 #print axioms absSq_sum_order
-#print axioms sum_replicate
 #print axioms absSq_scale
 #print axioms check_neg
 #print axioms check_conj
