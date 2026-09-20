@@ -344,13 +344,15 @@ var PM = (function () {
     const bitName = (j) => "bit " + j + " (frozen PCA axis " + j + " " + (threshold === "zero" ? "> 0" : "> frozen median") + ")";
     const ham = (a, b) => a.reduce((acc, v, j) => acc + (v !== b[j] ? 1 : 0), 0);
     const exemplars = (target, pred, n) => bits.map((r, k) => ({ k, h: ham(r, target) })).filter(o => pred(o.k)).sort((a, b) => a.h - b.h).slice(0, n || 3).map(o => nameOf(o.k));
-    const guardrails = (m) =>
-      "Inspect the actual content of those files before you write anything — a bit pattern is a coordinate, not a description. " +
-      "Do not take any destructive action. " +
-      "Afterwards re-run the map on the frozen frame (frame_id " + frame_id + ", d=" + d + ", seed=" + seed + ", threshold=" + threshold + ") and diff with PM.compareMaps. " +
-      "Predicted movement on this frame: occupied sectors " + (m.occupied_sectors_delta >= 0 ? "+" : "") + m.occupied_sectors_delta +
-      ", isolated points " + (m.isolated_delta >= 0 ? "+" : "") + m.isolated_delta + ". " +
-      "A matching sign does not mean the edit was good — geometry here is diagnostic, so the task itself must be checked by a task-specific independent verifier.";
+    // prompt geometry (2026-09-19): the same computations with the numbers kept instead of discarded.
+    const exemplarsH = (target, pred, n) => bits.map((r, k) => ({ k, h: ham(r, target) })).filter(o => pred(o.k)).sort((a, b) => a.h - b.h).slice(0, n || 3).map(o => nameOf(o.k) + " (h=" + o.h + ")");
+    // nearest-neighbour clearance of an existing item: its depth of isolation, not a distance a writer closes
+    const clearanceOf = (i) => Math.min.apply(null, pts.map((q, j) => j === i ? Infinity : chord(pts[i], q)));
+    const idxOf = (nm) => keys.findIndex((k, i) => nameOf(i) === nm); // names are unique in practice; a duplicate would bind to the first index
+    const joinBudget = (nm) => { const i = idxOf(nm); if (i < 0) return nm; const c = clearanceOf(i); return nm + " (nearest neighbour " + c.toFixed(3) + " away; the new embedding must land within " + ISO_RADIUS + " of it)"; };
+    const poleGap = (b) => chord(ops.toS2(b), ops.pole);
+    const TAIL = "Inspect the actual content of those files; do not take any destructive action. Keep only on the independent verifier's frozen check \u2014 a matching sign does not mean the edit was good. Contract: /AGENT.md";
+    const adverse = (m) => m.isolated_delta > 0 ? " ADVERSE on this frame: " : " ";
 
     const cands = [];
     // (a) add — ONE new row whose frozen coordinate lands in a thin geometric sector
@@ -384,10 +386,14 @@ var PM = (function () {
           (off.length ? " and not " + off.map(bitName).join(", ") : "") + " lands in geometric sector " + (sIdx + 1) +
           " (" + (c === 0 ? "empty" : c + " item" + (c === 1 ? "" : "s")) + ") under the frozen frame",
         method: "insert one synthetic row with that pattern, re-place on the FROZEN frame (no refit), remeasure occupancy and isolation",
-        prompt: "[add · geometric sector " + (sIdx + 1) + "] Write one new item for this corpus" +
-          (joins.length ? " whose content sits next to " + joins.join(", ") + " (the isolated item(s) this rung would join)" : "") +
-          ". Nearest existing items by bit pattern: " + (ex.join(", ") || "(none)") +
-          ". Pass this rung as `rung` to POST /api/map/preview and read `placement` (achieved bits vs pattern, sector, joins_realised) before committing. " + guardrails(m)
+        prompt: "[add \u00b7 geometric sector " + (sIdx + 1) + "] New document" +
+          (joins.length ? " joining " + joins.map(joinBudget).join(", ") + "." : " landing in a thin sector (joins nothing; the predicted delta is its own isolation).") +
+          " Model on: " + (exemplarsH(pat, () => true).join(", ") || "(none)") + " \u2014 Hamming distance in the " + d + "-bit frozen frame." +
+          " Pole gap of the target pattern " + poleGap(pat).toFixed(3) + "." +
+          "\nPredicted isolated" + adverse(m) + (m.isolated_delta >= 0 ? "+" : "") + m.isolated_delta +
+          (m.occupied_sectors_delta !== 0 ? ", occupied sectors " + (m.occupied_sectors_delta > 0 ? "+" : "") + m.occupied_sectors_delta : "") +
+          (joins.length ? "; realised only if the real embedding lands within chord " + ISO_RADIUS + " of that item. " : ". ") +
+          "Pass this rung as `rung` to POST /api/map/preview and read `placement` first. " + TAIL
       });
     }
     // (b) change — flip one bit on one item (the strongest single-action atoms)
@@ -404,8 +410,12 @@ var PM = (function () {
         hypothesis: "bit-space hypothesis: turning on " + bitName(a.flip) + " for " + nameOf(a.i) +
           " is its single-action atom (delta=" + a.delta.toFixed(3) + " toward the frozen pole)",
         method: "flip one bit, re-place on the FROZEN frame (no refit), remeasure occupancy and isolation",
-        prompt: "[change · geometric sector " + (sectorIndex(pts[a.i]) + 1) + "] Open " + nameOf(a.i) + " and edit it so it acquires what these nearest items with " +
-          bitName(a.flip) + " on have in common: " + (ex.join(", ") || "(no exemplar with that bit on)") + ". " + guardrails(m)
+        prompt: "[change \u00b7 geometric sector " + (sectorIndex(pts[a.i]) + 1) + "] " + nameOf(a.i) +
+          " \u2014 acquire what these share: " + (exemplarsH(bits[a.i], k => k !== a.i && bits[k][a.flip] === 1).join(", ") || "(no exemplar with that bit on)") +
+          " (nearest items on this frame carrying " + bitName(a.flip) + ")." +
+          "\nPole gap " + gaps[a.i].toFixed(3) + " \u2192 " + (gaps[a.i] - a.delta).toFixed(3) + " (\u0394 " + a.delta.toFixed(3) + ", the only reading with a monotonicity theorem)." +
+          " Predicted isolated" + adverse(m) + (m.isolated_delta >= 0 ? "+" : "") + m.isolated_delta + " (non-monotone: de-isolating one point can isolate another)." +
+          " Clearance " + clearanceOf(a.i).toFixed(3) + ". " + TAIL
       });
     }
     // rank: lexicographic (most-negative isolated delta first, then largest occupancy gain).

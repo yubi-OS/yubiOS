@@ -53,7 +53,7 @@ async function axisUnitTests() {
   await test("trial: null preserves every row/column margin, K draws, plus-one tail, descriptive z, admitted:false", () => {
     const B = []; for (let i = 0; i < 30; i++) { const a = i % 3 === 0 ? 1 : 0; B.push([a, a, (i * 7) % 2, (i >> 1) % 2, i % 5 === 0 ? 1 : 0]); }
     const t = axisRedundancyTrial(B, { K: 20, seed: 5, nullDraw: PM._internal.nullDraw });
-    assert.equal(t.version, AXIS_VERSION); assert.equal(t.K, 20); assert.equal(t.axes.length, 5); assert.equal(t.admitted, false);
+    assert.equal(t.version, AXIS_VERSION); assert.equal(t.K, 20); assert.equal(t.axes.length, 5); assert.equal(t.admitted, undefined, 'admission is computed at the handler level (two seeds), not by the pure trial function');
     assert.equal(t.margins_preserved.rows, true); assert.equal(t.margins_preserved.columns, true);
     for (const a of t.axes) { assert.equal(a.p_resolution, +(1 / 21).toFixed(4)); assert.ok(a.p_two_sided >= a.p_resolution - 1e-9 && a.p_two_sided <= 1); assert.ok(["excluded-from-fixed-margin-null", "not-excluded", "null-degenerate: no trial possible on this corpus"].includes(a.verdict)); if (a.null.degenerate) assert.equal(a.z_descriptive, null); assert.equal(a.margin_baseline_hits, Math.max(a.column_ones, 30 - a.column_ones)); }
     // redundant pair (axes 0,1) should be far more predictable than the null
