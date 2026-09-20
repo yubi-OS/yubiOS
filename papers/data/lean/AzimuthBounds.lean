@@ -92,20 +92,20 @@ theorem absSq_quarter (z : Cx) : absSq (cquarter z) = absSq z := by
 
 theorem cadd_comm (a b : Cx) : cadd a b = cadd b a := by
   unfold cadd
-  rw [Int.add_comm, Int.add_comm]
+  rw [Int.add_comm a.1 b.1, Int.add_comm a.2 b.2]
 
 /-- The moment sum is order-independent (dedup keeps first occurrences; the
     statistic cannot tell). -/
 theorem absSq_sum_order (a b : Cx) : absSq (cadd a b) = absSq (cadd b a) := by
   rw [cadd_comm]
 
-theorem sum_replicate : ∀ (k : Nat) (z : Cx), foldr Cx cadd (replicate k z) (0,0) = scale (k : Int) z
+theorem sum_replicate : ∀ (k : Nat) (z : Cx), List.foldr cadd (0,0) (List.replicate k z) = scale (k : Int) z
   | 0, _ => rfl
   | (n+1), z => by
-      show cadd z (foldr Cx cadd (replicate n z) (0,0)) = scale ((n: Int) + 1) z
+      show cadd z (List.foldr cadd (0,0) (List.replicate n z)) = scale ((n: Int) + 1) z
       rw [sum_replicate n z]
       unfold scale cadd
-      simp [Int.mul_add]
+      simp [Int.mul_add, Int.one_mul, Int.add_comm]
 
 theorem absSq_scale (k : Int) (z : Cx) : absSq (scale k z) = k * k * absSq z := by
   unfold absSq scale
