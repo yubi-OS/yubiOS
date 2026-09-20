@@ -100,12 +100,12 @@ theorem absSq_sum_order (a b : Cx) : absSq (cadd a b) = absSq (cadd b a) := by
   rw [cadd_comm]
 
 theorem sum_replicate : ∀ (k : Nat) (z : Cx), List.foldr cadd (0,0) (List.replicate k z) = scale (k : Int) z
-  | 0, _ => rfl
+  | 0, _ => by simp [scale]
   | (n+1), z => by
-      show cadd z (List.foldr cadd (0,0) (List.replicate n z)) = scale ((n: Int) + 1) z
+      show cadd z (List.foldr cadd (0,0) (List.replicate n z)) = scale (↑n + 1) z
       rw [sum_replicate n z]
-      unfold scale cadd
-      simp [Int.mul_add, Int.one_mul, Int.add_comm]
+      simp only [scale, cadd, Prod.mk.injEq]
+      omega
 
 theorem absSq_scale (k : Int) (z : Cx) : absSq (scale k z) = k * k * absSq z := by
   unfold absSq scale
