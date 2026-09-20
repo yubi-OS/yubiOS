@@ -104,9 +104,7 @@ theorem sum_replicate : ∀ (k : Nat) (z : Cx), List.foldr cadd (0,0) (List.repl
   | (n+1), z => by
       show cadd z (List.foldr cadd (0,0) (List.replicate n z)) = scale (↑n + 1) z
       rw [sum_replicate n z]
-      simp only [scale, cadd, Prod.mk.injEq]
-      rw [Int.mul_add, Int.one_mul]
-      simp [Int.add_comm]
+      simp [scale, cadd, Prod.mk.injEq, Int.mul_add, Int.one_mul, Int.add_comm]
 
 theorem absSq_scale (k : Int) (z : Cx) : absSq (scale k z) = k * k * absSq z := by
   unfold absSq scale
