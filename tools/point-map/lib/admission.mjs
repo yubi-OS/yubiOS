@@ -25,6 +25,7 @@ import { axisRedundancyTrial } from "./axis-redundancy.mjs";
 import { rayleighHandler } from "./rayleigh.mjs";
 import { RADII, CANONICAL_RADIUS } from "./radius-diagnostics.mjs";
 import { AXIS_TRIAL_MAX_N } from "./limits.mjs";
+import { binaryAzimuthTrial, DEFAULT_MODES as AZIMUTH_MODES } from "./azimuth.mjs";
 
 export const VERSION = "admission/1";
 const REJECTED = ["weights", "rank", "admit", "admitted", "radius", "radii", "score", "threshold", "d", "T", "seed", "frame", "steps"];
@@ -91,9 +92,14 @@ export async function admissionHandler(body, ctx) {
   const obsRad = radiusCounts(map.pts_full);
   const radius = trialOnStats("radius_profile", obsRad, radiusCounts, map, PM, K, seedA, seedB, { canonical_radius_unchanged: CANONICAL_RADIUS === 0.095, canonical_count_matches_map: obsRad["I_0.095"] === map.isolated || map.isolated === undefined });
   radius.version = "radius-trial/1"; radius.grid = RADII.slice(); radius.canonical_radius = CANONICAL_RADIUS; radius.bounds_note = "the profile's robustness `bounds` (`validated:false, certified:false`) describe caller-supplied perturbation assumptions and stay false by construction; they are not part of this trial. The grid is fixed and never reselected."; radius.scope = "I(r) counts on the fixed grid admitted for reporting only; the operative radius stays 0.095";
-  const blocks = { rayleigh, axis_trial, spectra, radius_profile: radius };
+  // 5. binary azimuth trial: descriptive only until a size-matched de-atomized null exists
+  const azimuth = binaryAzimuthTrial(map, PM, { K, seedA, modes: AZIMUTH_MODES });
+  azimuth.diagnostic = "azimuth";
+  azimuth.version = "azimuth/1";
+  azimuth.scope = "rotation/reflection-invariant Rayleigh Z_m (m=2,3,4,6,12) plus largest gap; Holm-corrected, two-sided tails. The channel remains not admitted because its binary placement is atomic and lacks a size-matched de-atomized null.";
+  const blocks = { rayleigh, axis_trial, spectra, radius_profile: radius, azimuth };
   const summary = Object.fromEntries(Object.entries(blocks).map(([k, b]) => [k, b.admitted]));
   return { trial: true, persisted: false, version: VERSION, map_id: v.map_id, frame_id: map.frame_id ?? null, instrument_id: map.instrument_id ?? null, N: map.names.length, K, summary, ...blocks,
-    permanently_not_admitted: ["physical (Raman/IR, dipole, polarizability, lifetime, temperature) readings of the spectra card", "heat eigenvalues l(l+1)", "caller-supplied radius robustness bounds (validated/certified stay false)", "any use of an admitted statistic as a ranking term, radius, or keep/revert rule"],
+    permanently_not_admitted: ["physical (Raman/IR, dipole, polarizability, lifetime, temperature) readings of the spectra card", "heat eigenvalues l(l+1)", "caller-supplied radius robustness bounds (validated/certified stay false)", "m=1 / circular variance on a centered PCA plane (radius/multiplicity reweighting)", "azimuthal corpus claims without a size-matched de-atomized null or chart-selection null", "sector-number corpus claims (origin and width are arbitrary)", "any use of an admitted statistic as a ranking term, radius, or keep/revert rule"],
     side_effects: { map_storage: false, repository: false, vectorize: false, embedding_cache: false }, task_verdict: "not-applicable", scope: SCOPE };
 }
