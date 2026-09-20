@@ -15,6 +15,7 @@ import { axisRedundancyHandler, VERSION as AXIS_VERSION } from "./lib/axis-redun
 import { mapConsistencyHandler, VERSION as CONSISTENCY_VERSION } from "./lib/consistency-route.mjs";
 import { rayleighHandler, VERSION as RAYLEIGH_VERSION } from "./lib/rayleigh.mjs";
 import { admissionHandler, VERSION as ADMISSION_VERSION } from "./lib/admission.mjs";
+import { azimuthHandler, VERSION as AZIMUTH_VERSION } from "./lib/azimuth.mjs";
 
 // src/github.ts
 var GH = "https://api.github.com";
@@ -832,7 +833,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
             } catch (e) {
               pointmapVersion = null;
             }
-            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, limits: { version: LIMITS_VERSION, max_items: LIMIT_MAX_ITEMS }, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION, placement: "placement/1", rayleigh: RAYLEIGH_VERSION, admission: ADMISSION_VERSION }, now: new Date().toISOString() });
+            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, limits: { version: LIMITS_VERSION, max_items: LIMIT_MAX_ITEMS }, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION, placement: "placement/1", rayleigh: RAYLEIGH_VERSION, admission: ADMISSION_VERSION, azimuth: AZIMUTH_VERSION }, now: new Date().toISOString() });
           }
           if (p === "/api/fits" && req.method === "GET") {
             return json({ fits: await listFits(db) });
@@ -1137,7 +1138,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
               return errorResponse(e);
             }
           }
-          if ((p === "/api/map/consistency" || p === "/api/map/axis-redundancy" || p === "/api/map/rayleigh" || p === "/api/map/admission") && req.method === "POST") {
+          if ((p === "/api/map/consistency" || p === "/api/map/axis-redundancy" || p === "/api/map/rayleigh" || p === "/api/map/admission" || p === "/api/map/azimuth") && req.method === "POST") {
             try {
               const body = await readJsonLimited(req, JSON_BODY_LIMIT);
               // Read-only map load, same discipline as preview: no CREATE TABLE, no INSERT.
@@ -1153,6 +1154,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
                 ? await mapConsistencyHandler(body, { env, PM, embedDocuments, loadStoredMap })
                 : p === "/api/map/rayleigh" ? await rayleighHandler(body, { loadStoredMap, PM })
                 : p === "/api/map/admission" ? await admissionHandler(body, { loadStoredMap, PM })
+                : p === "/api/map/azimuth" ? await azimuthHandler(body, { loadStoredMap, PM })
                 : await axisRedundancyHandler(body, { loadStoredMap, PM });
               return json(result);
             } catch (e) {

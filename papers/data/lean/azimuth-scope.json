@@ -1,0 +1,119 @@
+{
+  "file": "papers/data/lean/AzimuthBounds.lean",
+  "version": "azimuth/1",
+  "theorems": [
+    {
+      "name": "Azimuth.sq_nonneg",
+      "status": "lean-proved",
+      "statement": "0 <= a*a for every Int a",
+      "runtime_counterpart": "absSq_nonneg",
+      "runtime_predicate": "every reported Z_m and modulus-squared is nonnegative"
+    },
+    {
+      "name": "Azimuth.absSq_nonneg",
+      "status": "lean-proved",
+      "statement": "|z|^2 = re^2+im^2 >= 0 for every integer pair",
+      "runtime_counterpart": "rayleighZ returns (C^2+S^2)/N >= 0",
+      "runtime_predicate": "Z_m values are nonnegative"
+    },
+    {
+      "name": "Azimuth.absSq_neg",
+      "status": "lean-proved",
+      "statement": "negating the whole plane preserves |z|^2",
+      "runtime_counterpart": "rotation/reflection invariance of Z_m",
+      "runtime_predicate": "Z_m is unchanged under PCA sign flips"
+    },
+    {
+      "name": "Azimuth.absSq_conj",
+      "status": "lean-proved",
+      "statement": "conjugation (phi -> -phi) preserves |z|^2",
+      "runtime_counterpart": "reflection invariance of Z_m",
+      "runtime_predicate": "Z_m is unchanged under PC sign flip of one axis"
+    },
+    {
+      "name": "Azimuth.absSq_swap",
+      "status": "lean-proved",
+      "statement": "axis swap preserves |z|^2",
+      "runtime_counterpart": "PC1<->PC2 swap invariance of Z_m",
+      "runtime_predicate": "Z_m is unchanged under axis order"
+    },
+    {
+      "name": "Azimuth.absSq_quarter",
+      "status": "lean-proved",
+      "statement": "quarter rotation preserves |z|^2",
+      "runtime_counterpart": "D4 gauge invariance of Z_m",
+      "runtime_predicate": "Z_m is unchanged under 90-degree placement rotation"
+    },
+    {
+      "name": "Azimuth.cadd_comm",
+      "status": "lean-proved",
+      "statement": "componentwise addition commutes",
+      "runtime_counterpart": "order-independence of the moment sum",
+      "runtime_predicate": "dedup first-occurrence order cannot change Z_m"
+    },
+    {
+      "name": "Azimuth.absSq_sum_order",
+      "status": "lean-proved",
+      "statement": "|a+b|^2 = |b+a|^2",
+      "runtime_counterpart": "order-independence of the moment sum",
+      "runtime_predicate": "Z_m is a function of the pattern multiset"
+    },
+    {
+      "name": "Azimuth.absSq_scale",
+      "status": "lean-proved",
+      "statement": "|k*z|^2 = k^2*|z|^2",
+      "runtime_counterpart": "Z_m scales with multiplicity squared",
+      "runtime_predicate": "duplicating every document k times scales Z_m numerator by k^2 and N by k"
+    },
+    {
+      "name": "Azimuth.check_neg",
+      "status": "lean-proved",
+      "statement": "concrete D4 instance",
+      "runtime_counterpart": "runtime smoke on real fixture",
+      "runtime_predicate": "\u2014"
+    },
+    {
+      "name": "Azimuth.check_conj",
+      "status": "lean-proved",
+      "statement": "concrete D4 instance",
+      "runtime_counterpart": "runtime smoke on real fixture",
+      "runtime_predicate": "\u2014"
+    },
+    {
+      "name": "Azimuth.check_swap",
+      "status": "lean-proved",
+      "statement": "concrete D4 instance",
+      "runtime_counterpart": "runtime smoke on real fixture",
+      "runtime_predicate": "\u2014"
+    },
+    {
+      "name": "Azimuth.check_quarter",
+      "status": "lean-proved",
+      "statement": "concrete D4 instance",
+      "runtime_counterpart": "runtime smoke on real fixture",
+      "runtime_predicate": "\u2014"
+    },
+    {
+      "name": "Azimuth.check_nonneg",
+      "status": "lean-proved",
+      "statement": "concrete instance",
+      "runtime_counterpart": "runtime smoke on real fixture",
+      "runtime_predicate": "\u2014"
+    }
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "nonclaims": [
+    "nothing about the null distribution of Z_m under the fixed-margin or column-shuffle null",
+    "no p-value, tail, multiplicity correction or significance statement",
+    "no claim that the corpus has or lacks angular structure",
+    "full SO(2) rotation invariance is NOT proved: over Z[i] the gauge group is D4; the Float runtime path is checked by tests, not by this file",
+    "no invariance under anisotropic (GL(2)) rescaling of the placement axes: a chart/lens change is outside every statement",
+    "the weighted first moment being zero on a centered plane is a modeling fact (PCA scores are mean-centered); unweighted Z_1 measures radial/multiplicity reweighting and is structurally confounded",
+    "no claim about document quality, ranking, keep/revert, radius or admission",
+    "replicate/multiplicity scaling is NOT proved here (foldr/replicate machinery outside core Lean); the runtime equivalent is tested by test-azimuth.mjs"
+  ]
+}

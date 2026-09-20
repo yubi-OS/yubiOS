@@ -106,6 +106,34 @@ jobs:
           ! grep -n "sorry" papers/data/lean/RayleighBounds.lean
           echo "NO_SORRY_OK rayleigh"
 
+      - name: Check AzimuthBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/AzimuthBounds.lean > /tmp/azimuth-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/AzimuthBounds.lean"
+            cat /tmp/azimuth-axioms.txt
+            exit 1
+          }
+          cat /tmp/azimuth-axioms.txt
+          echo "LEAN_OK: papers/data/lean/AzimuthBounds.lean checks with no sorry"
+
+      - name: Assert no sorry in AzimuthBounds.lean
+        run: |
+          ! grep -n "sorry" papers/data/lean/AzimuthBounds.lean
+          echo "NO_SORRY_OK azimuth"
+
+      - name: Validate azimuth scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 -c "import json; d=json.load(open('papers/data/lean/azimuth-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('AZIMUTH_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+
+      - name: Assert printed azimuth axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/azimuth-axioms.txt \
+            --manifest papers/data/lean/azimuth-scope.json
+
       - name: Validate rayleigh scope manifest is well-formed
         run: |
           set -euo pipefail
@@ -159,6 +187,7 @@ jobs:
           node tools/point-map/test-placement.mjs
           node tools/point-map/test-rayleigh.mjs
           node tools/point-map/test-admission.mjs
+          node tools/point-map/test-azimuth.mjs
 
       - name: corpus-auditor selftest
         run: python3 tools/corpus-auditor/auditor.py --selftest
