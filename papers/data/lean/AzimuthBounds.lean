@@ -8,7 +8,7 @@
   Model: a complex number with integer coordinates is a pair (re, im) of Ints;
   the modulus-squared quadratic form is absSq z = re*re + im*im.
 
-  The PCA gauge group over Z[i] is the dihedral group D4 (units +/-1, +/-i plus
+  The PCA gauge group over Z[i] is the dihedral group D4 (units +-1, +-i plus
   conjugation): sign flips, axis swap, quarter rotation and reflection. Every
   element preserves absSq exactly. These are the gauge symmetries the runtime
   statistic genuinely has; the full SO(2) rotation invariance is a real/Float
