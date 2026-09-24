@@ -100,12 +100,12 @@ jobs:
             buildx_arch: linux-amd64
             artifact_suffix: amd64
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -339,7 +339,7 @@ jobs:
             tfa_plat: qemu
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -365,7 +365,7 @@ jobs:
             tfa_plat: rk3399
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -391,7 +391,7 @@ jobs:
             tfa_plat: rk3588
             requires_rockchip_tpl: true
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -404,7 +404,7 @@ jobs:
             tfa_plat: rk3588
             requires_rockchip_tpl: true
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -417,7 +417,7 @@ jobs:
             tfa_plat: qemu
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -430,7 +430,7 @@ jobs:
             tfa_plat: rk3399
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -983,7 +983,7 @@ jobs:
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
