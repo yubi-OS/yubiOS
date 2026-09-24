@@ -1,6 +1,6 @@
 ---
 name: rsi-phi-skill
-description: )-
+description: >-
   Recursive self-improvement on the Fibonacci sphere — uses Vogel's golden-angle sphere sampling
   (i = t, so the Fibonacci index IS the parameter) and the native Y_3^3 = K sin³θ · cos(3φ) real
   spherical harmonic as the basis, extended to higher SH degree/order (ℓ=128/m=256 or vice-versa)

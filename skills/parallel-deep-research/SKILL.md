@@ -1,6 +1,6 @@
 ---
 name: parallel-deep-research
-description: )-
+description: >-
   When user asks for 'deep research X' or 'research X with parallel agents' — dispatch 3-N
   parallel subagents covering independent angles (deep-dive, prior-art, comparative analysis),
   synthesize findings, then push to `yubi-OS/yubiOS/refs/topic-slug-YYYY-MM-DD.md`. Always verify

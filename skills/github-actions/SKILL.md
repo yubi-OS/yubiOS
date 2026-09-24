@@ -1,6 +1,6 @@
 ---
 name: github-actions
-description: )-
+description: >-
   GitHub Actions for the yubi-OS org: workflow file structure, event triggers,
   GITHUB_TOKEN permissions, yubiOS-specific pinned action SHAs, the dhi.io
   container pattern, triggering workflows via the GitHub REST API

@@ -1,6 +1,6 @@
 ---
 name: nss-inputs
-description: )-
+description: >-
   Cycle-9 deep-research synthesis for the NSS Inputs axis (axis 2/12 in negative-skill-space). For
   each file in a corpus, the Inputs axis identifies WHAT the file needs: environment variables,
   command-line arguments, configuration parameters, file inputs, stdin, request

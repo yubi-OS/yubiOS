@@ -1,6 +1,6 @@
 ---
 name: drm-gpu-quota-secure-time
-description: )-
+description: >-
   GPU resource-lockout design (per-cgroup VRAM quota + hard enforcement via secure world) and
   ARM64 secure-time sourcing for OP-TEE on Rockchip (CFG_SECURE_TIME_SOURCE_CNTPCT). Covers the
   real upstream DRM device-memory cgroup effort ("dev" controller, not the old "drmcg" RFC), the

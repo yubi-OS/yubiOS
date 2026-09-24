@@ -1,6 +1,6 @@
 ---
 name: ftpm-optee-tpm
-description: )-
+description: >-
   Build and integrate a firmware TPM 2.0 for yubiOS on ARM64: the Microsoft
   ms-tpm-20-ref reference implementation running as an OP-TEE Trusted
   Application via OP-TEE/optee_ftpm. Covers building the fTPM TA, the Early-TA

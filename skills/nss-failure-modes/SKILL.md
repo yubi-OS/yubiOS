@@ -1,6 +1,6 @@
 ---
 name: nss-failure-modes
-description: )-
+description: >-
   Cycle-14 deep-research synthesis for the NSS Failure modes axis (7/12 in negative-skill-space).
   For each file in a corpus, the Failure modes axis identifies WHAT CAN GO WRONG -- error cases,
   edge cases, partial-failure scenarios, footguns, TOCTOU races, partial-write hazards,

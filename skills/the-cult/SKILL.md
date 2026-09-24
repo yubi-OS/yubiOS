@@ -1,6 +1,6 @@
 ---
 name: the-cult
-description: )-
+description: >-
   File-based multi-agent orchestration for yubiOS work. The "cult leader" is the
   orchestrator: it gathers arriving agents ("followers"), reads the roster, and
   hands out yubiOS tasks through plain files in the GET_TO_WORK folder. Use this

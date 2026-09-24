@@ -1,6 +1,6 @@
 ---
 name: linkedin-browser-outreach
-description: )-
+description: >-
   Send and read LinkedIn messages via a live cloud browser session (browser_use) instead of Beeper
   or the LinkedIn API, both of which have no outreach path. Use when the user wants to log into
   LinkedIn, message an existing chat, or run candidate/recruiter outreach on LinkedIn and has no
