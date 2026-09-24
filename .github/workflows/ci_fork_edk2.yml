@@ -93,7 +93,7 @@ jobs:
           - arch: amd64
             runner: ubuntu-24.04
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, GPU]
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
     runs-on: ${{ matrix.runner }}
     concurrency:
       group: ${{ github.workflow }}-stmm-${{ matrix.arch }}-${{ github.ref }}
