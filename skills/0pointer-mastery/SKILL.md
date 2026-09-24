@@ -1,6 +1,6 @@
 ---
 name: 0pointer-mastery
-description: )-
+description: >-
   Mastery and big picture skill for the Lennart Poettering / systemd ecosystem. Covers the full
   blog canon: "Fitting Everything Together" OS architecture vision, UKI/PCR/TPM trusted boot
   chain, Discoverable Partitions Specification, LUKS2 hardware unlock (FIDO2/TPM2/PKCS#11),

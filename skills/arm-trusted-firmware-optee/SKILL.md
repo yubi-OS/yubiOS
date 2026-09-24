@@ -1,6 +1,6 @@
 ---
 name: arm-trusted-firmware-optee
-description: )-
+description: >-
   Build and reason about the ARM64 secure boot firmware stack for yubiOS:
   ARM Trusted Firmware-A (TF-A) staging (BL1/BL2/BL31/BL32/BL33), Trusted Board
   Boot (TBB) with FIP packaging and the ROTPK chain of trust, OP-TEE as the

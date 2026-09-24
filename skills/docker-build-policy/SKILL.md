@@ -1,6 +1,6 @@
 ---
 name: docker-build-policy
-description: )-
+description: >-
   Write, wire, and debug Docker Build Policies (OPA/Rego) for the yubi-OS org — the `docker buildx
   build --policy reset=true,strict=true,filename=yubiOS.rego` supply-chain gate that vets every
   build input (FROM images) before any layer executes. Covers the Rego policy schema (package

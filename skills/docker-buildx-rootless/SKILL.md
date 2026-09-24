@@ -1,6 +1,6 @@
 ---
 name: docker-buildx-rootless
-description: )-
+description: >-
   Docker CLI-level skill covering three topics: (1) dockerd rootless mode — running the Docker
   daemon as a non-root user via user namespaces, daemon socket location, systemd user unit,
   contexts; (2) docker buildx CLI — builder instances, driver types (docker, docker-container,

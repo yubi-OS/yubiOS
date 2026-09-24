@@ -1,6 +1,6 @@
 ---
 name: nss-adjacent-problems
-description: )-
+description: >-
   Sixth NSS axis (after Audience, Inputs, Outputs, Mode, Assumption set) -- the Adjacent problems
   axis scores a file's coverage of RELATED issues, alternative solutions, problem-family taxonomy,
   and prior-art cross-references. Per the 12-axis negative-skill-space sweep, each file should

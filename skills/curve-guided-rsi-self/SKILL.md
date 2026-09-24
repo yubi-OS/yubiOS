@@ -1,6 +1,6 @@
 ---
 name: curve-guided-rsi-self
-description: )-
+description: >-
   Closed-loop audit pipeline retargeted at self-doc corpora — fits a learned-latent-curve on
   SELF.md and SELF-CHANGELOG.md as separate corpora (or on the expanded 10-memory-file corpus
   including USER_PREFERENCES, COMPANY, RULES, SAUNA_IDENTITY, SAUNA_TOOLS, USER_PROFILE,

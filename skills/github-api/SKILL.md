@@ -1,6 +1,6 @@
 ---
 name: github-api
-description: )-
+description: >-
   GitHub REST API patterns for the yubi-OS org. Covers the four operations used
   constantly: (1) Git Data API — committing files without cloning (blob→tree→commit→ref
   chain); (2) Contents API — reading and writing single files via base64; (3)

@@ -1,6 +1,6 @@
 ---
 name: the-follower
-description: )-
+description: >-
   The worker side of the-cult orchestration. Use this skill when you are one of
   many agents/sessions joining a sermon to do yubiOS work under a cult leader.
   It tells you how to gather into the GET_TO_WORK folder, claim your own

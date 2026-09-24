@@ -1,6 +1,6 @@
 ---
 name: curve-compass-skill
-description: )-
+description: >-
   Reversible quantized-atom dynamics on the empirical Phi ladder (skills79, d=9), with curated
   -L/--lens mode that emits each improvement as a guided-curve-ideate-format new idea: hypothesis
   + method + parameters + Δ + verdict + score. The historical corpus dynamics (is-this-x paper
