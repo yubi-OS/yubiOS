@@ -209,7 +209,10 @@ async function run(){
 }
 $("run").onclick=run;$("retry").onclick=run;
 $("dl").onclick=()=>{if(!last)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(last,null,1)],{type:"application/json"}));a.download=`MapResult-${last.frame_id}.json`;a.click()};
-setTimeout(()=>{ if($("src").value==="synthetic") run(); else $("status").textContent="ready - texts mode: paste or fetch items, then run"; },90);
+setTimeout(()=>{ // load the synthetic cloud as the demo visual until the first run; the dropdown stays on texts
+  const o={d:+$("d").value,seed:+$("seed").value,T:+$("T").value,K:+$("K").value};
+  render(PM.runMap(PM.synth(+$("N").value,+$("D").value,o.seed),o),null,null);
+},90);
 
 
 // ===========================================================================
