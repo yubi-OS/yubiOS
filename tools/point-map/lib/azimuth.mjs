@@ -21,7 +21,7 @@ import { AXIS_TRIAL_MAX_N } from "./limits.mjs";
 
 export const VERSION = "azimuth";
 export const DEFAULT_MODES = Object.freeze([2, 3, 4, 6, 12]);
-export const MAX_K = 200;
+export const MAX_K = 400;   // family of 6 needs K >= 239 for any exclusion to be arithmetically reachable
 export const MAX_N = AXIS_TRIAL_MAX_N;
 const PCA_SEED_XOR = 0x1f123bb5;
 const SECOND_SEED_XOR = 0x7f4a7c15;
@@ -78,13 +78,29 @@ export function holmAdjust(entries, alpha = 0.05) {
   for (let r = 0; r < sorted.length; r++) { const adj = Math.min(1, Math.max(prev, (sorted.length - r) * sorted[r].p_two_sided)); sorted[r].p_holm = adj; sorted[r].excluded_after_holm = adj <= alpha; prev = adj; }
   return sorted.sort((a, b) => a.i - b.i).map(({ i, ...e }) => e);
 }
+// The smallest Holm-adjusted p this family can produce is |family| * 2/(K+1): a plus-one two-sided
+// tail cannot go below 2/(K+1). If that floor exceeds alpha, NO exclusion is reachable at this K and
+// "not-excluded" would be a statement about power, not about the corpus. Report it as such.
+export function powerFloor(familySize, K, alpha = 0.05) {
+  const min_attainable_p_holm = Math.min(1, familySize * 2 / (K + 1));
+  return { family_size: familySize, K, alpha, min_attainable_p_holm,
+    resolvable: min_attainable_p_holm <= alpha,
+    K_required_for_resolution: Math.ceil(familySize * 2 / alpha) - 1 };
+}
 function evaluate(obs, draws, alpha = 0.05) {
   const keys = Object.keys(obs);
+  const floor = powerFloor(keys.length, draws.length, alpha);
   const raw = keys.map((key) => {
     const vals = draws.map((d) => d[key]); const s = summary(vals); const t = rawTail(vals, obs[key]);
     return { key, observed: obs[key], null: { n: s.n, mean: +s.mean.toFixed(6), sd: +s.sd.toFixed(6), min: s.min, median: s.median, max: s.max, degenerate: s.sd === 0 }, ...t };
   });
-  return Object.fromEntries(holmAdjust(raw, alpha).map((r) => [r.key, { ...r, verdict: r.null.degenerate ? "null-degenerate" : r.excluded_after_holm ? "excluded-after-holm" : "not-excluded-after-holm" }]));
+  // per-row, so the floor travels with every verdict in JSON without adding a non-verdict key to
+  // the map that verdictsReproduce()/nondegenerate() iterate over.
+  return Object.fromEntries(holmAdjust(raw, alpha).map((r) => [r.key, { ...r, power_floor: floor,
+    verdict: r.null.degenerate ? "null-degenerate"
+      : r.excluded_after_holm ? "excluded-after-holm"
+      : floor.resolvable ? "not-excluded-after-holm"
+      : "unresolvable-at-this-K" }]));
 }
 function runNull(bits, PM, K, seed, modes, prep = (x) => x) {
   const N = bits.length, d = bits[0].length, rnd = PM.mulberry32(seed), cert = { rowOk: true, colOk: true, attempted: 0, accepted: 0 }, draws = [], sizes = [];

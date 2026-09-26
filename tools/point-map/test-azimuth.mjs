@@ -83,7 +83,7 @@ await test("real fixture: continuous trial is descriptive but permanently not ad
 
 await test("handler validates modes/refit/multiplicity and stored-vector fingerprints", async () => {
   const ctx = { ...store, PM };
-  for (const body of [{}, { map_id: 0 }, { map_id: 1, modes: [1] }, { map_id: 1, modes: [2, 2] }, { map_id: 1, refit: false }, { map_id: 1, multiplicity: "none" }, { map_id: 1, K: 201 }]) await expectApi(() => azimuthHandler(body, ctx), 422);
+  for (const body of [{}, { map_id: 0 }, { map_id: 1, modes: [1] }, { map_id: 1, modes: [2, 2] }, { map_id: 1, refit: false }, { map_id: 1, multiplicity: "none" }, { map_id: 1, K: 401 }]) await expectApi(() => azimuthHandler(body, ctx), 422);
   await expectApi(() => azimuthHandler({ map_id: 999 }, ctx), 404);
   const b = await azimuthHandler({ map_id: 1, K: 8, null_seed: 7 }, ctx);
   assert.equal(b.version, VERSION); assert.equal(b.variant, "binary"); assert.equal(b.admitted, false); assert.equal(b.persisted, false);
