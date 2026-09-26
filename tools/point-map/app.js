@@ -140,11 +140,13 @@ function render(R,id,comparison){
   kv("compass",{"T":R.compass.T,"<k> analytic / empirical":`${R.compass.kmean_analytic.toFixed(4)} / ${R.compass.kmean_empirical.toFixed(4)}`,"detailed balance (identity, analytic)":R.compass.flux_identity_analytic.ok?`ok (max resid ${R.compass.flux_identity_analytic.max_abs_residual.toExponential(2)})`:"FAILED","empirical flux max|z| (measurement, descriptive)":R.compass.empirical_flux.maxAbsZ.toFixed(2),"acceptance":R.compass.acceptance,"T-crossover":R.compass.Tx??"none (Phi non-monotone at T->0)","steps":`${R.compass.steps} (single chain)`});
   renderSpectra(R);renderRadiusProfile(R);
   kv("bridge",{"bridge":`item ${R.bridge.i} -> frozen pole, ${R.bridge.rungs.length} rungs (slerp)`});
-  kv("meta",{"version":R.version,"map id":lastId===null?"local (no server id)":lastId,"seed":R.seed,"identity failures":R.summary.identity_failures,"measurement red":R.summary.measurement_red,"source":escapeHtml(R.source||"client")});
+  kv("meta",{"version":R.version,"map id":lastId===null?"local (no server id)":lastId,"seed":R.seed,"identity failures":`${R.summary.identity_failures}/${R.certificates.filter(c=>c.class==="identity").length}`,"measurement certs failed":(function(){const m=R.certificates.filter(c=>c.class!=="identity"),r=m.filter(c=>!c.ok);return r.length?`${r.length}/${m.length} (${r.map(c=>(c.theorem||"").split(" (")[0]).join(", ")})`:`0/${m.length}`})(),"source":escapeHtml(R.source||"client")});
   $("useBaseline").style.display=lastId===null?"none":"inline-block";
   $("useBaseline").onclick=()=>{$("baseline").value=lastId;$("status").textContent=`baseline set to map id ${lastId}`;freezeBaseline()};
   $("certs").querySelector("tbody").innerHTML=R.certificates.map(c=>`<tr><td class="dim">${escapeHtml(c.class)}</td><td>${escapeHtml(c.theorem)}</td><td class="${c.ok?"ok":"bad"}">${c.ok?"PASS":"FAIL"}</td><td class="dim">${escapeHtml(c.detail)}</td></tr>`).join("");
-  draw(R);$("status").textContent=`done - ${R.summary.identity_failures} identity failures - ${R.summary.measurement_red} measurement red`;$("retry").style.display="none"
+  draw(R);const icert=R.certificates.filter(c=>c.class==="identity"),mcert=R.certificates.filter(c=>c.class!=="identity"),mred=mcert.filter(c=>!c.ok);
+  $("status").textContent=`done - ${R.summary.identity_failures}/${icert.length} identity failures (must all pass) - ${mred.length}/${mcert.length} measurement certificates failed${mred.length?` (${mred.map(c=>(c.theorem||"").split(" (")[0]).join(", ")})`:""} - failed measurement certs are findings, not errors`;
+  $("retry").style.display="none"
 }
 
 const view={yaw:0.61,pitch:-0.44,zoom:1};let dragging=null,spin=!matchMedia("(prefers-reduced-motion: reduce)").matches,hover=-1,screen=[],poleXY=null;
