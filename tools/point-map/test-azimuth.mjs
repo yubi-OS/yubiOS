@@ -75,6 +75,7 @@ await test("real fixture: binary statistic values reproduce the uploaded trial",
 
 await test("real fixture: continuous trial is descriptive but permanently not admitted", () => {
   const r = continuousAzimuthTrial(X, PM, { K: 40, seedA: 0xc33, modes: DEFAULT_MODES });
+  assert.equal(r.criteria.vector_hashes_match_map, false, "unverified direct call must not claim vector match");
   assert.equal(r.N, 301); assert.equal(r.D, 24); assert.equal(r.admitted, false);
   assert.equal(r.criteria.null_adequate_for_negative_claim, false);
   assert.match(r.admission_note, /over-strong/);

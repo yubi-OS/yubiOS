@@ -171,13 +171,16 @@ export function binaryAzimuthTrial(map, PM, { K, seedA, modes = DEFAULT_MODES, a
 }
 
 function shuffleColumns(X, rnd) { const M = X.map((r) => r.slice()), N = M.length, D = M[0].length; for (let j = 0; j < D; j++) for (let i = N - 1; i > 0; i--) { const t = Math.floor(rnd() * (i + 1)); [M[i][j], M[t][j]] = [M[t][j], M[i][j]]; } return M; }
-export function continuousAzimuthTrial(X, PM, { K, seedA, modes = DEFAULT_MODES, alpha = 0.05 }) {
+export function continuousAzimuthTrial(X, PM, { K, seedA, modes = DEFAULT_MODES, alpha = 0.05, vectorHashesMatchMap }) {
   finiteMatrix(X, "vectors"); const seedB = (seedA ^ SECOND_SEED_XOR) | 0, obs = azimuthStats(anglesRefit(X, pcaSeed(0), PM), modes);
   const draw = (seed) => { const rnd = mulberry32(seed), out = []; for (let k = 0; k < K; k++) out.push(azimuthStats(anglesRefit(shuffleColumns(X, rnd), pcaSeed(seed ^ (k + 1)), PM), modes)); return out; };
   const A = evaluate(obs, draw(seedA), alpha), B = evaluate(obs, draw(seedB), alpha);
   return { variant: "continuous", N: X.length, D: X[0].length, modes, K, seeds: { a: seedA, b: seedB }, multiplicity: { method: "Holm", family: [...modes.map((m) => `Z${m}`), "largest_gap"], alpha }, observed: obs, seed_a: A, seed_b: B,
     placement_eigengap: eigengap(X, PM, pcaSeed(0)),
-    criteria: { null_nondegenerate_all: nondegenerate(A, B), holm_verdicts_reproducible_all: verdictsReproduce(A, B), vector_hashes_match_map: true, n_at_least_100: X.length >= 100, null_adequate_for_negative_claim: false }, admitted: false,
+    criteria: { null_nondegenerate_all: nondegenerate(A, B), holm_verdicts_reproducible_all: verdictsReproduce(A, B),
+      // computed, never flipped (lesson 29): the handler passes its actual vector-fingerprint check;
+      // a direct call without that verification reports false, not a hardcoded true.
+      vector_hashes_match_map: vectorHashesMatchMap === true, n_at_least_100: X.length >= 100, null_adequate_for_negative_claim: false }, admitted: false,
     admission_note: "continuous azimuth channel not admitted: the per-column shuffle null destroys all inter-column covariance and is intentionally over-strong; not-exclusion under it is uninformative. A chart-selection null with a predeclared optimizer/stopping rule is required." };
 }
 
@@ -204,7 +207,7 @@ export async function azimuthHandler(body, ctx) {
     const D = finiteMatrix(v.vectors, "vectors"); if (v.vectors.length !== map.names.length) throw new ApiError(409, `vectors length ${v.vectors.length} != map N ${map.names.length}`);
     const bad = v.vectors.map((r, i) => ctx.PM.hashVec(r) !== map.keys[i].hash ? map.names[i] : null).filter(Boolean);
     if (bad.length) throw new ApiError(409, "vectors do not match the stored map row order/fingerprints", { mismatch_count: bad.length, mismatch_names: bad.slice(0, 10) });
-    result = continuousAzimuthTrial(v.vectors, ctx.PM, { K: v.K, seedA: v.seed, modes: v.modes });
+    result = continuousAzimuthTrial(v.vectors, ctx.PM, { K: v.K, seedA: v.seed, modes: v.modes, vectorHashesMatchMap: bad.length === 0 });
   }
   return { trial: true, persisted: false, version: VERSION, map_id: v.map_id, frame_id: map.frame_id ?? null, instrument_id: map.instrument_id ?? null, ...result,
     permanently_not_admitted: ["m=1 / circular variance (centered-plane radius/multiplicity reweighting)", "sector-number corpus claims (origin and width are arbitrary; sectors stay opaque display labels)", "negative corpus claims from the continuous column-shuffle null", "powered-lens claims without a selection null optimizing every null draw"],
