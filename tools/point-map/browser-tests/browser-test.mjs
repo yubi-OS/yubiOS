@@ -171,6 +171,7 @@ async function run() {
     await page.select("#src", "synthetic");
     await clickSafe(page, "#run");
     await page.waitForFunction("document.getElementById('status').textContent.startsWith('done')", { timeout: 90000 });
+    await page.evaluate(() => switchTab("rounds")); // candidate preview lives in the rounds pane
 
     check("no frozen baseline on load", /no frozen baseline yet/.test(
       await page.$eval("#candbaseline", (e) => e.textContent)));
@@ -200,6 +201,7 @@ async function run() {
     check("submitted names are the literal line ordinals",
       JSON.stringify(mapPosts[0].body.names) === JSON.stringify(fx.baseline_names));
 
+    await page.evaluate(() => switchTab("instrument")); // use-as-baseline lives in the result card (instrument pane)
     await clickSafe(page, "#useBaseline");
     const banner = await page.$eval("#candbaseline", (e) => e.textContent);
     check("'use as baseline' freezes the submitted corpus",
@@ -211,6 +213,7 @@ async function run() {
     check("frozen snapshot survives later control edits", /14 verified documents/.test(stillFrozen));
 
     // ---- ADD preview ----
+    await page.evaluate(() => switchTab("rounds")); // preview controls live in the rounds pane
     await page.evaluate(() => {
       document.getElementById("candname").value = "";
       document.getElementById("candtext").value = "";

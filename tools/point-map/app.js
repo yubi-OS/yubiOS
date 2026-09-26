@@ -1044,3 +1044,12 @@ const _rbs=renderBaselineState;
 renderBaselineState=function(msg,isError){_rbs(msg,isError);const cb=$("consbaseline");if(cb){const el=$("candbaseline");cb.innerHTML=el.innerHTML;cb.className=el.className}const ctl=$("ctlrun");if(ctl)ctl.disabled=!baselineSnapshot};
 renderBaselineState(null,false);
 function setTip(iconId,labelId,tip){const ic=$(iconId),lb=$(labelId);if(!ic)return;if(!tip){ic.style.display="none";if(lb)lb.style.display="none";return}ic.setAttribute("data-tip",tip);ic.style.display="";if(lb)lb.style.display=""}
+
+// ===================== right-column tabs (structure only) =====================
+// Every card keeps its id and its renderer; tabs only toggle pane visibility.
+const TABS=[...document.querySelectorAll("#tabs button")];
+function switchTab(name){for(const b of TABS){const on=b.dataset.tab===name;b.setAttribute("aria-selected",on?"true":"false");b.tabIndex=on?0:-1;const p=document.getElementById("pane-"+b.dataset.tab);if(p){p.classList.toggle("active",on);p.hidden=!on}try{sessionStorage.setItem("sos-map-tab",name)}catch(e){}}}
+TABS.forEach((b,i)=>{b.addEventListener("click",()=>switchTab(b.dataset.tab));
+  b.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const n=TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length];n.focus();n.click()}})});
+const SAVED_TAB=(()=>{try{return sessionStorage.getItem("sos-map-tab")}catch(e){return null}})();
+switchTab(TABS.some(b=>b.dataset.tab===SAVED_TAB)?SAVED_TAB:"instrument");
