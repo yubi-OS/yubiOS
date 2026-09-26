@@ -4,6 +4,8 @@
 
 Date: 2026-09-19. Family: instrument trial record. Corpus: the real 301×24 fixture (`tools/point-map/data/real-cloud-reduced24-2026-09-06.json`), d=9, threshold median, seed 20260906. Scripts: `azimuth-trial-rayleigh.cjs`, `azimuth-trial-dedup.cjs`, `azimuth-trial-continuous.cjs`. Nothing persisted; no frame, bit, radius, ranking or ledger semantics touched.
 
+> **Re-read 2026-09-26 (power floor: commits `abb8cfdd`, `a032aee2`).** Every `not-excluded` verdict quoted in this record was measured at K=40 (binary, Result 1) or K≤200 (the m=1 K=200 check and the continuous trial), where the smallest Holm-adjusted p the family can emit is |family|·2/(K+1): about 0.29 at K=40 and 0.0597 at K=200, both above α = 0.05. Formally those verdicts are `unresolvable-at-this-K`, not `not-excluded-after-holm`: statements about power, not about the corpus. Two consequences. (1) §4's "No angular structure at the identity chart, with atomicity fully removed" is a power statement, not a null result; that agrees with §5's own finding that the chart cause went untested here, so the record's decision stands for the right reason. (2) What survives unchanged is everything that never leaned on a not-exclusion: the m=1 structural confound (centering), the atomicity finding (a false m=1 positive carried by duplicate rows), the dedup-size mismatch (167 outside the null support), and the sector-index retirement. Default K is now 240, so trials at the default are resolvable; `placement_eigengap` now quantifies why the continuous null is wide.
+
 ## 0. A correction to the prompt-geometry analysis
 
 That analysis called the azimuthal channel a "dead channel" and cited the papers' burial of the three-fold narrative as the reason. **That conflated two different constructions.**
