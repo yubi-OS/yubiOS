@@ -2,7 +2,7 @@
 // POST /api/outcomes, GET /api/outcomes — an APPEND-ONLY pre-registration
 // ledger joining a geometric prediction to an independent task verdict.
 //
-// Methodology transplant (outcomes/1): business-metric-aware forecasting
+// Methodology transplant (outcomes): business-metric-aware forecasting
 // (google-research/business_metric_aware_forecasting, arXiv:2308.13118) and
 // the COVID-19 public forecasts evaluate a forecaster on the decision it
 // feeds, not on a proxy loss, and they evaluate prospectively — predictions
@@ -33,7 +33,7 @@
 
 import { ApiError } from "./http.mjs";
 
-export const VERSION = "outcomes/1";
+export const VERSION = "outcomes";
 export const VERDICTS = Object.freeze(["pending", "kept", "reverted", "declined", "abstained", "neutral"]);
 export const MAX_VERIFIER = 200;
 export const MAX_NOTES = 2000;

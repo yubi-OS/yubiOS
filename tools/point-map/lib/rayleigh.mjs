@@ -1,4 +1,4 @@
-// lib/rayleigh.mjs — Rayleigh-quotient diagnostics (rayleigh/1).
+// lib/rayleigh.mjs — Rayleigh-quotient diagnostics (rayleigh).
 //
 // Two places where Rayleigh's variational principle already lives inside the
 // instrument, made explicit and auditable:
@@ -27,7 +27,7 @@
 import { ApiError } from "./http.mjs";
 import { AXIS_TRIAL_MAX_N } from "./limits.mjs";
 
-export const VERSION = "rayleigh/1";
+export const VERSION = "rayleigh";
 export const ISO_RADIUS = 0.095;
 export const MAX_N = AXIS_TRIAL_MAX_N;
 const REJECTED = ["weights", "rank", "admit", "admitted", "radius", "radii", "score", "threshold", "d", "T", "seed", "frame", "steps"];

@@ -340,7 +340,7 @@ async function ledgerAndDiagnosticsTests() {
     const fx=await makeBaseline(),body={baseline_id:fx.baseline_id,texts:BASE_TEXTS,names:BASE_NAMES,target:{action:"change",name:BASE_NAMES[0]}};
     const plain=await mapPreviewHandler(body,previewCtx(fx));
     const bounded=await mapPreviewHandler({...body,coordinate_epsilon:0.001,distance_error_bound:1e-12},previewCtx(fx));
-    assert.equal(plain.map.radius_profile.version,"radius/1");
+    assert.equal(plain.map.radius_profile.version,"radius");
     assert.equal(plain.map.radius_profile.canonical_isolated,plain.map.isolated);
     assert.equal(plain.radius_comparison.canonical_delta,plain.math_ledger.ledger.delta);
     assert.equal(plain.map.frame_id,bounded.map.frame_id);assert.equal(plain.map.instrument_id,bounded.map.instrument_id);

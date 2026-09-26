@@ -1,4 +1,4 @@
-// test-math.mjs — wayfinder-math/1 diagnostics suite for pointmap.js.
+// test-math.mjs — wayfinder-math diagnostics suite for pointmap.js.
 // Run: node session/subagent/point-map/test-math.mjs
 // Zero deps, no network. pointmap.js is a browser/Worker IIFE (`var PM = ...`), so it is loaded
 // into a vm sandbox exactly the way a <script> tag would load it. The pre-change baseline copy
@@ -141,9 +141,9 @@ test("radius is eps*L1 + roundoff", () => {
 console.log("\n[math_diagnostics]");
 const MD_OPTS = { d: 4, K: 6, T: 0.05, steps: 800, seed: 0 };
 const MX = PM.synth(24, 6, 11);
-test("diagnostics_version is wayfinder-math/1", () => {
+test("diagnostics_version is wayfinder-math", () => {
   const r = PM.runMap(MX, MD_OPTS);
-  assert.strictEqual(r.math_diagnostics.diagnostics_version, "wayfinder-math/1");
+  assert.strictEqual(r.math_diagnostics.diagnostics_version, "wayfinder-math");
 });
 test("one margin row per input per axis", () => {
   const r = PM.runMap(MX, MD_OPTS);
@@ -207,7 +207,7 @@ for (const seed of [3, 11, 29]) {
 test("ladder candidate rung ranking is unchanged", () => {
   const X = PM.synth(30, 8, 5);
   const o = { d: 5, K: 8, steps: 1000, seed: 1, names: X.map((_, i) => "n" + i) };
-  // Additive rung fields (rung_key, joins, creates_isolate, joins_note, target_pattern; placement/1, 2026-09-17)
+  // Additive rung fields (rung_key, joins, creates_isolate, joins_note, target_pattern; placement, 2026-09-17)
   // are stripped before comparison: the RANKING and every historical field must be byte-identical.
   const ADDITIVE = new Set(["rung_key", "joins", "creates_isolate", "joins_note", "target_pattern"]);
   const strip = (lc) => ({ ...lc, rungs: lc.rungs.map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !ADDITIVE.has(k) && k !== "prompt"))) });
@@ -232,7 +232,7 @@ test("compareMaps carries a math_ledger when the frames and name sets agree", ()
   const X = PM.synth(24, 6, 2);
   const o = { d: 4, K: 6, steps: 900, seed: 0, names: X.map((_, i) => "n" + i) };
   const c = PM.compareMaps(PM.runMap(X, o), PM.runMap(X, o));
-  assert.strictEqual(c.math_ledger.diagnostics_version, "wayfinder-math/1");
+  assert.strictEqual(c.math_ledger.diagnostics_version, "wayfinder-math");
   assert.strictEqual(c.math_ledger.kind, "CHANGE");
   assert.strictEqual(c.math_ledger.ledger.delta, 0);
 });

@@ -1,7 +1,7 @@
 // lib/control-route.mjs
 // POST /api/map/control — a POSITIVE CONTROL for the frozen instrument.
 //
-// Methodology transplant (calibration/1): CutPaste (Li, Sohn, Yoon, Pfister,
+// Methodology transplant (calibration): CutPaste (Li, Sohn, Yoon, Pfister,
 // CVPR 2021, arXiv:2104.04015) trains one-class detectors on normal data plus
 // synthetic anomalies made by cutting a patch from one image and pasting it
 // into another. The is-this-x paper's standard-candle generator applies the
@@ -27,7 +27,7 @@
 //   - Reuses mapPreviewHandler per splice, so NO D1 write, NO Vectorize
 //     write, NO map row, ever. Only the disclosed content-hash embedding cache.
 //   - The splice recipe is fixed (fraction 0.25, centered window, generator
-//     id `cutpaste-splice/1`). Requests that try to tune it are rejected, the
+//     id `cutpaste-splice`). Requests that try to tune it are rejected, the
 //     same way radius grids are rejected. n_controls and control_seed are the
 //     only knobs and both are echoed.
 //   - Every shape/hash check runs BEFORE any AI or KV call.
@@ -40,8 +40,8 @@ import { sha256Hex } from "./chunking.mjs";
 import { validateDocs } from "./embed-pipeline.mjs";
 import { mapPreviewHandler, requireTextBaseline } from "./preview-route.mjs";
 
-export const VERSION = "calibration/1";
-export const GENERATOR = "cutpaste-splice/1";
+export const VERSION = "calibration";
+export const GENERATOR = "cutpaste-splice";
 export const SPLICE_FRACTION = 0.25;
 export const DEFAULT_N = 4;
 export const MIN_N = 2;

@@ -1,7 +1,7 @@
-// lib/admission.mjs — unified admission trials (admission/1).
+// lib/admission.mjs — unified admission trials (admission).
 //
 // One call runs the membership condition for every non-admitted diagnostic
-// the instrument carries, with the same recipe rayleigh/1 introduced:
+// the instrument carries, with the same recipe rayleigh introduced:
 //   null non-degenerate + verdicts reproducible under an independent second
 //   null seed + exact-identity bounds hold + N >= 100  =>  admitted for
 //   REPORTING on this frame. Nothing else changes: no ranking term, no radius,
@@ -27,7 +27,7 @@ import { RADII, CANONICAL_RADIUS } from "./radius-diagnostics.mjs";
 import { AXIS_TRIAL_MAX_N } from "./limits.mjs";
 import { binaryAzimuthTrial, DEFAULT_MODES as AZIMUTH_MODES } from "./azimuth.mjs";
 
-export const VERSION = "admission/1";
+export const VERSION = "admission";
 const REJECTED = ["weights", "rank", "admit", "admitted", "radius", "radii", "score", "threshold", "d", "T", "seed", "frame", "steps"];
 export const SCOPE = "Unified membership trials: each diagnostic's statistics are tested against K fixed-margin null draws under two independent seeds; a diagnostic is admitted for REPORTING on this frame only when every null is non-degenerate, every exclusion verdict reproduces across the two seeds, its exact identities hold, and N >= 100. Admission never feeds ranking, never moves the radius, never authorizes keeping or reverting, and does not transfer to another frame.";
 
@@ -87,15 +87,15 @@ export async function admissionHandler(body, ctx) {
   // 3. spectra shares
   const obsSpec = spectraStats(map.pts_full);
   const spectra = trialOnStats("spectra", obsSpec, spectraStats, map, PM, K, seedA, seedB, { shares_sum_to_one: Math.abs(obsSpec.E0 + obsSpec.E1 + obsSpec.E2 + obsSpec.E3 - 1) < 1e-9 });
-  spectra.version = "spectra-trial/1"; spectra.physical_claims = { admitted: false, permanent: true, reason: "no dipole, polarizability, response kernel, frequency, lifetime or temperature is measured; Raman/IR selection rules need those observables. Admission here covers the S^2 Parseval shares as geometric statistics only" }; spectra.heat_eigenvalues = { admitted: false, permanent: true, reason: "l(l+1) are constants of the sphere Laplacian, not statistics of the corpus" }; spectra.scope = "degree shares E_0..E_3 and even/odd blocks of the point cloud, tested against the fixed-margin null; admitted for reporting only";
+  spectra.version = "spectra-trial"; spectra.physical_claims = { admitted: false, permanent: true, reason: "no dipole, polarizability, response kernel, frequency, lifetime or temperature is measured; Raman/IR selection rules need those observables. Admission here covers the S^2 Parseval shares as geometric statistics only" }; spectra.heat_eigenvalues = { admitted: false, permanent: true, reason: "l(l+1) are constants of the sphere Laplacian, not statistics of the corpus" }; spectra.scope = "degree shares E_0..E_3 and even/odd blocks of the point cloud, tested against the fixed-margin null; admitted for reporting only";
   // 4. radius profile I(r) on the fixed grid
   const obsRad = radiusCounts(map.pts_full);
   const radius = trialOnStats("radius_profile", obsRad, radiusCounts, map, PM, K, seedA, seedB, { canonical_radius_unchanged: CANONICAL_RADIUS === 0.095, canonical_count_matches_map: obsRad["I_0.095"] === map.isolated || map.isolated === undefined });
-  radius.version = "radius-trial/1"; radius.grid = RADII.slice(); radius.canonical_radius = CANONICAL_RADIUS; radius.bounds_note = "the profile's robustness `bounds` (`validated:false, certified:false`) describe caller-supplied perturbation assumptions and stay false by construction; they are not part of this trial. The grid is fixed and never reselected."; radius.scope = "I(r) counts on the fixed grid admitted for reporting only; the operative radius stays 0.095";
+  radius.version = "radius-trial"; radius.grid = RADII.slice(); radius.canonical_radius = CANONICAL_RADIUS; radius.bounds_note = "the profile's robustness `bounds` (`validated:false, certified:false`) describe caller-supplied perturbation assumptions and stay false by construction; they are not part of this trial. The grid is fixed and never reselected."; radius.scope = "I(r) counts on the fixed grid admitted for reporting only; the operative radius stays 0.095";
   // 5. binary azimuth trial: descriptive only until a size-matched de-atomized null exists
   const azimuth = binaryAzimuthTrial(map, PM, { K, seedA, modes: AZIMUTH_MODES });
   azimuth.diagnostic = "azimuth";
-  azimuth.version = "azimuth/1";
+  azimuth.version = "azimuth";
   azimuth.scope = "rotation/reflection-invariant Rayleigh Z_m (m=2,3,4,6,12) plus largest gap; Holm-corrected, two-sided tails. The channel remains not admitted because its binary placement is atomic and lacks a size-matched de-atomized null.";
   const blocks = { rayleigh, axis_trial, spectra, radius_profile: radius, azimuth };
   const summary = Object.fromEntries(Object.entries(blocks).map(([k, b]) => [k, b.admitted]));

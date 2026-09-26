@@ -11,7 +11,7 @@
 // model, a ranking score, or an admission of scientific validity. The
 // `validated` and `certified` flags are structurally pinned to false.
 
-export const VERSION = "radius/1";
+export const VERSION = "radius";
 export const CANONICAL_RADIUS = 0.095;
 export const RADII = Object.freeze([0.075, 0.085, 0.095, 0.105, 0.115]);
 export const DOMAIN = Object.freeze([0, 2]);

@@ -111,7 +111,7 @@ async function spliceTests() {
     assert.deepEqual(a, b); for (const [h, d] of a) { assert.notEqual(h, d); assert.ok(h >= 0 && h < 12 && d >= 0 && d < 12); }
     const c = planControls(12, 12, 8).map((p) => [p.host, p.donor]); assert.notDeepEqual(a, c);
   });
-  await test("recipe constants are the documented fixed values", () => { assert.equal(SPLICE_FRACTION, 0.25); assert.equal(GENERATOR, "cutpaste-splice/1"); assert.equal(CONTROL_VERSION, "calibration/1"); });
+  await test("recipe constants are the documented fixed values", () => { assert.equal(SPLICE_FRACTION, 0.25); assert.equal(GENERATOR, "cutpaste-splice"); assert.equal(CONTROL_VERSION, "calibration"); });
 }
 
 async function controlPreflightTests() {
@@ -151,7 +151,7 @@ async function controlRunTests() {
   const vec0 = fx.env._counters.vecUpserts, saves0 = fx.store.counters.saves;
   const r = await mapControlHandler({ baseline_id: fx.baseline_id, texts: TEXTS, names: NAMES, n_controls: 4, control_seed: 11 }, ctxOf(fx));
   await test("response shape: control/persisted/version/recipe/summary/scope", () => {
-    assert.equal(r.control, true); assert.equal(r.persisted, false); assert.equal(r.version, "calibration/1");
+    assert.equal(r.control, true); assert.equal(r.persisted, false); assert.equal(r.version, "calibration");
     assert.equal(r.recipe.generator, GENERATOR); assert.equal(r.recipe.splice_fraction, 0.25); assert.equal(r.recipe.control_seed, 11); assert.equal(r.recipe.n_controls, 4); assert.equal(r.recipe.fixed, true);
     assert.equal(r.frame_id, fx.baseline.frame_id); assert.equal(r.instrument_id, fx.baseline.instrument_id);
     assert.equal(r.task_verdict, "not-applicable"); assert.match(r.scope, /not a quality score/);

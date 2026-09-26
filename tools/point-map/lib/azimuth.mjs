@@ -1,4 +1,4 @@
-// lib/azimuth.mjs — rotation-invariant azimuth trials (azimuth/1).
+// lib/azimuth.mjs — rotation-invariant azimuth trials (azimuth).
 //
 // The point-map azimuth is atan2(PC2, PC1) on a PCA fit of either:
 //   - binary primitive rows (`variant: "binary"`), with a fixed-margin checkerboard null; or
@@ -19,7 +19,7 @@
 import { ApiError } from "./http.mjs";
 import { AXIS_TRIAL_MAX_N } from "./limits.mjs";
 
-export const VERSION = "azimuth/1";
+export const VERSION = "azimuth";
 export const DEFAULT_MODES = Object.freeze([2, 3, 4, 6, 12]);
 export const MAX_K = 200;
 export const MAX_N = AXIS_TRIAL_MAX_N;

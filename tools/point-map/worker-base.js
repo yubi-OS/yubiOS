@@ -833,7 +833,7 @@ GET  /map/pointmap.js           -> static pointmap.js module
             } catch (e) {
               pointmapVersion = null;
             }
-            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, limits: { version: LIMITS_VERSION, max_items: LIMIT_MAX_ITEMS }, diagnostics: { math: "wayfinder-math/1", radius: "radius/1", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION, placement: "placement/1", rayleigh: RAYLEIGH_VERSION, admission: ADMISSION_VERSION, azimuth: AZIMUTH_VERSION }, now: new Date().toISOString() });
+            return json({ ok: true, worker: "sos-agent/worker-base", pointmap_version: pointmapVersion, limits: { version: LIMITS_VERSION, max_items: LIMIT_MAX_ITEMS }, diagnostics: { math: "wayfinder-math", radius: "radius", control: CONTROL_VERSION, outcomes: OUTCOMES_VERSION, axis_trial: AXIS_VERSION, consistency: CONSISTENCY_VERSION, placement: "placement", rayleigh: RAYLEIGH_VERSION, admission: ADMISSION_VERSION, azimuth: AZIMUTH_VERSION }, now: new Date().toISOString() });
           }
           if (p === "/api/fits" && req.method === "GET") {
             return json({ fits: await listFits(db) });

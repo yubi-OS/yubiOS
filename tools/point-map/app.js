@@ -443,7 +443,7 @@ renderBaselineState(null,false);
 // radius-persistence diagnostics - ADDITIVE, DIAGNOSTIC ONLY
 // ---------------------------------------------------------------------------
 // Reads two blocks supplied by the backend module:
-//   map.radius_profile   (version "radius/1") on any saved or previewed map
+//   map.radius_profile   (version "radius") on any saved or previewed map
 //   resp.radius_comparison on a preview response
 //
 // Deliberate non-features, each one a standing requirement:
@@ -459,8 +459,8 @@ renderBaselineState(null,false);
 //   * A map with no radius_profile (local synthetic, legacy stored map) renders
 //     an explicit "unavailable" note and is NOT an error.
 // ===========================================================================
-const RADIUS_PROFILE_VERSION="radius/1";
-const RADIUS_COMPARISON_VERSION="radius/1";
+const RADIUS_PROFILE_VERSION="radius";
+const RADIUS_COMPARISON_VERSION="radius";
 
 const RADIUS_PROMPT_NOTE="\n\nThe preview response also carries a diagnostic-only radius_comparison block. Read canonical_delta at the canonical radius 0.095 as the operative isolation reading, and read the fixed-grid before/after/delta samples plus the exact same-delta and same-sign intervals around 0.095 as sensitivity to an instrument parameter. They are exact frozen-coordinate parameter clearances, not confidence intervals, not significance tests and not pre-edit forecasts. Never reselect the radius from that grid: 0.095 is canonical, the displayed sweep never changes the operative metric, and a sign that reverses elsewhere on the grid is an instrument-sensitivity finding to report, not a better reading to adopt.";
 

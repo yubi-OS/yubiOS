@@ -3,7 +3,7 @@
 // caller-supplied text variants on the same frozen frame, and report whether
 // the geometric reading agrees across them.
 //
-// Methodology transplant (consistency/1): FixMatch (Sohn, Berthelot, Li,
+// Methodology transplant (consistency): FixMatch (Sohn, Berthelot, Li,
 // Zhang, Carlini, Cubuk, Kurakin, Zhang, Raffel, NeurIPS 2020,
 // arXiv:2001.07685) and UDA (arXiv:1904.12848) trust a pseudo-label only when
 // the model's reading is stable between a weak and a strong augmentation of
@@ -33,7 +33,7 @@ import { MAX_ITEMS } from "./limits.mjs";
 import { sha256Hex } from "./chunking.mjs";
 import { mapPreviewHandler } from "./preview-route.mjs";
 
-export const VERSION = "consistency/1";
+export const VERSION = "consistency";
 export const MIN_VARIANTS = 1;
 export const MAX_VARIANTS = 3;
 export const MAX_LABEL = 40;

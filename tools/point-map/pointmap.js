@@ -27,7 +27,7 @@ var PM = (function () {
     threshold: "median", preprocessing_id: "raw/v1"
   };
   var ISO_RADIUS = 0.095;   // chord radius that defines an "isolated" point
-  var DIAGNOSTICS_VERSION = "wayfinder-math/1";   // additive diagnostics layer; the 0.2 instrument is unchanged
+  var DIAGNOSTICS_VERSION = "wayfinder-math";   // additive diagnostics layer; the 0.2 instrument is unchanged
   var SECTORS = 12;         // anonymous geometric azimuthal sectors, numbered 1..12
   var FLUX_TOL = 1e-9;
 
@@ -712,7 +712,7 @@ var PM = (function () {
   }
 
 
-  // ---- wayfinder-math/1: additive diagnostics ------------------------------
+  // ---- wayfinder-math: additive diagnostics ------------------------------
   // Everything below is DIAGNOSTIC. It does not touch the frame, the hashes, the geometry, the
   // certificates or any 0.2 result field, and it introduces no score, ranking or probability.
   function reqBudget(v, label) {

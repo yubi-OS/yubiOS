@@ -2,7 +2,7 @@
 // POST /api/map/axis-redundancy — a TRIAL of one candidate statistic against
 // the fixed-margin null, executed per the membership condition.
 //
-// Methodology transplant (axis-trial/1): TabNet (Arik & Pfister, AAAI 2021,
+// Methodology transplant (axis-trial): TabNet (Arik & Pfister, AAAI 2021,
 // arXiv:1908.07442) selects, per decision step, the sparse subset of features
 // that carries information, and its self-supervised pretraining predicts
 // masked features from the unmasked ones. The wayfinder analogue asks, for
@@ -36,8 +36,8 @@
 import { ApiError } from "./http.mjs";
 import { AXIS_TRIAL_MAX_N } from "./limits.mjs";
 
-export const VERSION = "axis-trial/1";
-export const STATISTIC = "loo-nn-vote/1";
+export const VERSION = "axis-trial";
+export const STATISTIC = "loo-nn-vote";
 export const NULL_SEED_XOR = 0x5bd1e995;
 export const MIN_K = 2;
 export const MAX_K = 40;

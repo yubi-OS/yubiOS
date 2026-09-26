@@ -118,7 +118,7 @@ function nextAfter(x, dir) {
 // ================================================================
 
 test("exports the pinned contract constants", () => {
-  eq(VERSION, "radius/1", "VERSION");
+  eq(VERSION, "radius", "VERSION");
   eq(CANONICAL_RADIUS, 0.095, "CANONICAL_RADIUS");
   deepEq(RADII, [0.075, 0.085, 0.095, 0.105, 0.115], "RADII");
   deepEq(DOMAIN, [0, 2], "DOMAIN");
