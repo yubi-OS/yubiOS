@@ -1,0 +1,7 @@
+interface:
+  display_name: "DefAPI Decisions (jev-1.13)"
+  short_description: "Yes/no, choice, and score decisions via DefAPI"
+  default_prompt: "Use $defapi-jev to triage this ticket: pick the owning team and rate its urgency."
+
+policy:
+  allow_implicit_invocation: true
