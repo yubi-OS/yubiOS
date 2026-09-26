@@ -201,7 +201,7 @@ async function run() {
     check("submitted names are the literal line ordinals",
       JSON.stringify(mapPosts[0].body.names) === JSON.stringify(fx.baseline_names));
 
-    await page.evaluate(() => switchTab("instrument")); // use-as-baseline lives in the result card (instrument pane)
+    await page.evaluate(() => switchTab("results")); // use-as-baseline lives in the result card (results pane since the results-tab change)
     await clickSafe(page, "#useBaseline");
     const banner = await page.$eval("#candbaseline", (e) => e.textContent);
     check("'use as baseline' freezes the submitted corpus",
