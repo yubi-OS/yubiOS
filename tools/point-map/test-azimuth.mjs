@@ -111,9 +111,15 @@ await test("trial results carry a well-formed placement_eigengap diagnostic (rev
   assert.ok(eg.lambda1 >= eg.lambda2, "eigenvalues not sorted");
   assert.ok(eg.rel_gap_12 >= 0 && eg.rel_gap_12 <= 1, "rel_gap_12 out of range");
   assert.ok(/licenses nothing/.test(eg.note), "caveat missing");
-  const rv = await azimuthHandler({ map_id: 1, vectors: X.slice(0, 50), K: 4 }, { ...store, PM });
+  // review follow-up A: the continuous leg must actually run variant:"continuous" (a call without
+  // the variant runs the binary trial a second time) and the eigengap must equal the z-scored
+  // matrix anglesRefit fits on, not the raw rows.
+  const Xz = (() => { const n = X.length, D = X[0].length; const mu = new Array(D).fill(0), sd = new Array(D).fill(0); for (const r of X) for (let j = 0; j < D; j++) mu[j] += r[j] / n; for (const r of X) for (let j = 0; j < D; j++) sd[j] += (r[j] - mu[j]) ** 2 / Math.max(1, n - 1); const sc = sd.map(v => Math.sqrt(v) || 1); return X.map(r => r.map((x, j) => (x - mu[j]) / sc[j])); })();
+  const egExp = (() => { const v = PM._internal.pcaTop(Xz, 3, PM.mulberry32(0)).values; return (v[0] - v[1]) / v[0]; })();
+  const rv = await azimuthHandler({ map_id: 1, variant: "continuous", vectors: X, K: 4 }, { ...store, PM });
   assert.ok(rv.placement_eigengap, "no placement_eigengap on continuous trial");
   assert.equal(typeof rv.placement_eigengap.rel_gap_12, "number");
+  assert.ok(Math.abs(rv.placement_eigengap.rel_gap_12 - egExp) < 1e-5, "continuous eigengap is not the z-scored fitted matrix: module " + rv.placement_eigengap.rel_gap_12 + " vs z-scored " + egExp.toFixed(6));
 });
 
 console.log(`\n${pass}/${pass + fail} passed`); if (fail) process.exit(1);

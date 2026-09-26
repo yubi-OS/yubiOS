@@ -35,7 +35,7 @@ const pcaSeed = (base) => base ^ PCA_SEED_XOR;
 // Davis-Kahan subspace-stability gap. Diagnostic only: it licenses nothing and admits nothing.
 function eigengap(rows, PM, seed) {
   const d = rows[0].length, k = Math.min(3, d);
-  const v = PM._internal.pcaTop(rows, k, PM.mulberry32(seed)).values;
+  const v = PM._internal.pcaTop(zscoreColumns(rows), k, PM.mulberry32(seed)).values;
   const f = (x) => +x.toFixed(6);
   return { lambda1: f(v[0]), lambda2: f(v[1]), ...(v[2] !== undefined ? { lambda3: f(v[2]) } : {}),
     rel_gap_12: f((v[0] - v[1]) / v[0]), ...(v[2] !== undefined ? { rel_gap_23: f((v[1] - v[2]) / v[1]) } : {}),
@@ -55,13 +55,19 @@ function finiteMatrix(X, label) {
 }
 function binaryMatrix(B) { const d = finiteMatrix(B, "bits"); if (B.some((r) => r.some((x) => x !== 0 && x !== 1))) throw new ApiError(409, "stored bits must contain only 0/1"); return d; }
 
-export function anglesRefit(rows, seed, PM) {
+// column z-scoring: the exact preprocessing anglesRefit fits PCA on. The eigengap MUST describe
+// this same matrix (review finding A): on continuous inputs the raw and z-scored covariances
+// diverge, and a diagnostic computed on the wrong matrix reports a stable plane for a degenerate one.
+function zscoreColumns(rows) {
   const n = rows.length, D = rows[0].length;
   const mu = new Array(D).fill(0), sd = new Array(D).fill(0);
   for (const r of rows) for (let j = 0; j < D; j++) mu[j] += r[j] / n;
   for (const r of rows) for (let j = 0; j < D; j++) sd[j] += (r[j] - mu[j]) ** 2 / Math.max(1, n - 1);
   const scales = sd.map((v) => Math.sqrt(v) || 1);
-  const Z = rows.map((r) => r.map((x, j) => (x - mu[j]) / scales[j]));
+  return rows.map((r) => r.map((x, j) => (x - mu[j]) / scales[j]));
+}
+export function anglesRefit(rows, seed, PM) {
+  const Z = zscoreColumns(rows);
   const p2 = PM._internal.pcaTop(Z, 2, PM.mulberry32(seed));
   return p2.scores.map((r) => Math.atan2(r[1] || 0, r[0] || 0));
 }
