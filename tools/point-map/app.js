@@ -1049,6 +1049,9 @@ renderBaselineState=function(msg,isError){_rbs(msg,isError);const cb=$("consbase
 renderBaselineState(null,false);
 function setTip(iconId,labelId,tip){const ic=$(iconId),lb=$(labelId);if(!ic)return;if(!tip){ic.style.display="none";if(lb)lb.style.display="none";return}ic.setAttribute("data-tip",tip);ic.style.display="";if(lb)lb.style.display=""}
 
+// show/hide the input fields (button left of run)
+$("toggleinputs").onclick=()=>{const off=document.body.classList.toggle("inputs-off");$("toggleinputs").textContent=off?"show inputs":"hide inputs"};
+
 // ===================== right-column tabs (structure only) =====================
 // Every card keeps its id and its renderer; tabs only toggle pane visibility.
 const TABS=[...document.querySelectorAll("#tabs button")];
