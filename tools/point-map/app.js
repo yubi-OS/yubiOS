@@ -1,6 +1,6 @@
 function escapeHtml(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 const $=id=>document.getElementById(id);let last=null,lastId=null;
-$("src").onchange=()=>{const v=$("src").value;$("input").style.display=v==="synthetic"?"none":"block";const tx=v==="texts";$("uploadbox").style.display=tx?"flex":"none";$("localonlywrap").style.display=v==="vectors"?"inline":"none";$("fileinfo").style.display="none";$("dirinfo").style.display="none";$("repoinfo").style.display="none";$("files").value="";$("dirs").value=""};
+$("src").onchange=()=>{const v=$("src").value;const show=v!=="synthetic";const tr=$("textsrow");if(tr)tr.style.display=show?"flex":"none";$("input").style.display=show?"block":"none";const tx=v==="texts";$("uploadbox").style.display=tx?"flex":"none";$("localonlywrap").style.display=v==="vectors"?"inline":"none";$("fileinfo").style.display="none";$("dirinfo").style.display="none";$("repoinfo").style.display="none";$("files").value="";$("dirs").value=""};
 
 const GLOSSARY={
 "pole":"rho* = the frozen frame's all-ones pole: the top of the Boolean lattice - every one of the frame's own d axes fully on. gap[i] is the geodesic/chord distance from item i to it on this frozen frame, not a count of absent dimensions. A reference direction of the designed rule, not a goal; it moves only if the frame is rebuilt.",
