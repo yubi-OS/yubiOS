@@ -140,7 +140,7 @@ function render(R,id,comparison){
   kv("compass",{"T":R.compass.T,"<k> analytic / empirical":`${R.compass.kmean_analytic.toFixed(4)} / ${R.compass.kmean_empirical.toFixed(4)}`,"detailed balance (identity, analytic)":R.compass.flux_identity_analytic.ok?`ok (max resid ${R.compass.flux_identity_analytic.max_abs_residual.toExponential(2)})`:"FAILED","empirical flux max|z| (measurement, descriptive)":R.compass.empirical_flux.maxAbsZ.toFixed(2),"acceptance":R.compass.acceptance,"T-crossover":R.compass.Tx??"none (Phi non-monotone at T->0)","steps":`${R.compass.steps} (single chain)`});
   renderSpectra(R);renderRadiusProfile(R);
   kv("bridge",{"bridge":`item ${R.bridge.i} -> frozen pole, ${R.bridge.rungs.length} rungs (slerp)`});
-  kv("meta",{"version":R.version,"map id":lastId===null?"local (no server id)":lastId,"seed":R.seed,"identity failures":R.summary.identity_failures,"measurement red":R.summary.measurement_red,"source":escapeHtml(R.source||"client")});
+  kv("meta",{"version":R.version,"map id":lastId===null?"local (no server id)":lastId,"seed":R.seed,"identity failures":R.summary.identity_failures,"source":escapeHtml(R.source||"client")});
   $("useBaseline").style.display=lastId===null?"none":"inline-block";
   $("useBaseline").onclick=()=>{$("baseline").value=lastId;$("status").textContent=`baseline set to map id ${lastId}`;freezeBaseline()};
   $("certs").querySelector("tbody").innerHTML=R.certificates.map(c=>`<tr><td class="dim">${escapeHtml(c.class)}</td><td>${escapeHtml(c.theorem)}</td><td class="${c.ok?"ok":"bad"}">${c.ok?"PASS":"FAIL"}</td><td class="dim">${escapeHtml(c.detail)}</td></tr>`).join("");
