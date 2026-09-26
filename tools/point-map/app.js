@@ -162,7 +162,7 @@ function draw(R){if(!R)return;const cv=$("sphere"),g=cv.getContext("2d"),W=cv.wi
  g.strokeStyle="#DB46F5";g.lineWidth=2;g.beginPath();R.bridge.rungs.forEach((q,i)=>{const[x,y]=S(q);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();R.bridge.rungs.forEach(q=>{const[x,y]=S(q);g.fillStyle="#DB46F5";g.beginPath();g.arc(x,y,2.5,0,2*Math.PI);g.fill()});
  const[px,py]=S(R.pole);poleXY=[px,py];g.strokeStyle="#fff";g.lineWidth=1.5;g.beginPath();g.arc(px,py,6,0,2*Math.PI);g.stroke();g.fillStyle="#fff";g.font="11px monospace";g.fillText("p* (frozen all-ones pole)",px+9,py-6);
  if(hover>=0){const[x,y]=S(R.pts[hover]);g.fillStyle="#fff";g.font="11px monospace";g.fillText(labelOf(R,hover),x+8,y-8)}
- g.fillStyle="#7d8894";g.font="11px monospace";g.fillText((window.rcompOn&&window.rcompFill)?"colors = isolation-graph components - white/red = isolates - drag to rotate - wheel to zoom - hover a point":"drag to rotate - wheel to zoom - hover a point - hue = k-shell - green = atom delta>=0 - violet = slerp",12,W-10)}
+ g.fillStyle="#7d8894";g.font="11px monospace";const TL="drag to rotate - wheel to zoom - hover a point";g.fillText(TL,12,16);g.fillText((window.rcompOn&&window.rcompFill)?"colors = isolation-graph components - white/red = isolates":"hue = k-shell - green = atom delta>=0 - violet = slerp",12,30)}
 (function(){const cv=$("sphere");const pos=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
  cv.addEventListener("pointerdown",e=>{dragging=pos(e);cv.style.cursor="grabbing";cv.setPointerCapture(e.pointerId)});
  cv.addEventListener("pointerup",e=>{dragging=null;cv.style.cursor="grab"});cv.addEventListener("pointerleave",()=>{dragging=null;hover=-1;$("tip").textContent="";draw(last)});
