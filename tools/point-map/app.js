@@ -82,11 +82,14 @@ $("files").onchange=()=>{const n=$("files").files.length;if(n){$("fileinfo").tex
 
 function renderNSS(R){
   const L=R.ladder_candidates;const box=$("nssbox");
-  if(!L){box.style.display="none";return}
+  if(!L){box.style.display="none";setTip("lexi","lexl","");setTip("dectip","decl","");setTip("lentip","lenl","");return}
   box.style.display="";
-  $("nssdecision").innerHTML=`decision: <b class="${L.decision==="ranked"?"ok":"dim"}">${escapeHtml(L.decision)}</b> - ${escapeHtml(L.reason)} <span class="gi" data-tip="${escapeHtml(L.ranking_rule+'. '+L.score_note)}">i</span>`;
+  $("nssdecision").innerHTML=`decision: <b class="${L.decision==="ranked"?"ok":"dim"}">${escapeHtml(L.decision)}</b>`;
+  setTip("lexi","lexl",L.ranking_rule+". "+(L.score_note||""));
+  setTip("dectip","decl","decision "+L.decision+": "+L.reason);
   $("nsssectors").textContent=`sector counts (1..12, anonymous geometry): ${L.sector_counts.join(" ")} - base occupied ${L.base.occupied_sectors} - base isolated ${L.base.isolated}`;
-  $("nsslens").innerHTML=`NSS axis lens (<b>${escapeHtml(L.nss_lens_dictionary.semantic_status)}</b>): ${L.nss_lens_dictionary.axes.map(escapeHtml).join(", ")} - ${escapeHtml(L.nss_lens_dictionary.note)}`;
+  $("nsslens").innerHTML=`NSS axis lens (<b>${escapeHtml(L.nss_lens_dictionary.semantic_status)}</b>)`;
+  setTip("lentip","lenl","NSS axis lens ("+L.nss_lens_dictionary.semantic_status+"): "+L.nss_lens_dictionary.axes.join(", ")+" - "+L.nss_lens_dictionary.note);
   const rungs=L.rungs||[];
   $("nsstab").querySelector("tbody").innerHTML=rungs.length?rungs.map((r,i)=>`<tr><td><input type="radio" name="ideal" value="${i}" ${i===0?"checked":""}></td><td><b>${escapeHtml(r.rung)}</b></td><td>${escapeHtml(r.action)}${r.item!==undefined?` #${r.item}`:""}</td><td>${r.sector}</td><td class="dim">${escapeHtml(r.semantic_status)}</td><td>${r.score}</td><td>${r.delta.occupied_sectors_delta}</td><td>${r.delta.isolated_delta}</td></tr>`).join(""):`<tr><td colspan="8" class="dim">no candidates - ${escapeHtml(L.reason)}</td></tr>`;
   const outliers=(L.review_only_audit&&L.review_only_audit.outliers)||[];
@@ -1042,3 +1045,4 @@ function resetDiags(){
 const _rbs=renderBaselineState;
 renderBaselineState=function(msg,isError){_rbs(msg,isError);const cb=$("consbaseline");if(cb){const el=$("candbaseline");cb.innerHTML=el.innerHTML;cb.className=el.className}const ctl=$("ctlrun");if(ctl)ctl.disabled=!baselineSnapshot};
 renderBaselineState(null,false);
+function setTip(iconId,labelId,tip){const ic=$(iconId),lb=$(labelId);if(!ic)return;if(!tip){ic.style.display="none";if(lb)lb.style.display="none";return}ic.setAttribute("data-tip",tip);ic.style.display="";if(lb)lb.style.display=""}
