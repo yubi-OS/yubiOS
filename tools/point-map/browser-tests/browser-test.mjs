@@ -167,6 +167,9 @@ async function run() {
     const page = await newPage(browser, DESKTOP, clipboardStub("ok", true));
     await page.goto(BASE + "/map/", { waitUntil: "domcontentloaded" });
     await page.waitForSelector("#preview");
+    // texts is the default src now; the load-time auto-run only fires for synthetic, so build it explicitly
+    await page.select("#src", "synthetic");
+    await clickSafe(page, "#run");
     await page.waitForFunction("document.getElementById('status').textContent.startsWith('done')", { timeout: 90000 });
 
     check("no frozen baseline on load", /no frozen baseline yet/.test(

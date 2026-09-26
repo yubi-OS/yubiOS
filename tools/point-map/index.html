@@ -30,8 +30,8 @@ html{scrollbar-color:#DB46F5 #0a0e12;scrollbar-width:thin}
 #previewout h3:first-child{margin-top:0}
 #candbaseline{margin-bottom:8px}
 </style></head><body>
-<header><h1>SOS AGENT <span class="dim">/ latent space map · pointmap/0.2</span></h1>
-<select id="src"><option value="synthetic">synthetic cloud (client)</option><option value="vectors">paste vectors JSON</option><option value="texts">texts → server embed + map (/api/map)</option></select>
+<header><h1>SOS AGENT</h1>
+<select id="src"><option value="synthetic">synthetic cloud (client)</option><option value="vectors">paste vectors JSON</option><option value="texts" selected>texts → server embed + map (/api/map)</option></select>
 <label>N <input id="N" type="number" value="240" style="width:64px"></label><label>D <input id="D" type="number" value="32" style="width:64px"></label><label>d <input id="d" type="number" value="9" style="width:48px"></label><label>seed <input id="seed" type="number" value="20260906" style="width:96px"></label><label>T <input id="T" type="number" step="0.005" value="0.05" style="width:64px"></label><label>K <input id="K" type="number" min="2" max="40" value="40" style="width:64px"></label>
 <label>Frozen baseline map ID (optional) <input id="baseline" type="number" style="width:90px"></label>
 <button id="run" class="primary">run</button><button id="retry" style="display:none">retry</button>
@@ -83,4 +83,5 @@ html{scrollbar-color:#DB46F5 #0a0e12;scrollbar-width:thin}
 </div></main>
 <script src="/map/pointmap.js"></script>
 <script src="/map/app.js"></script>
+<div id="gtip"></div>
 </body></html>

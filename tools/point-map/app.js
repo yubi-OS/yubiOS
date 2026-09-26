@@ -209,7 +209,7 @@ async function run(){
 }
 $("run").onclick=run;$("retry").onclick=run;
 $("dl").onclick=()=>{if(!last)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(last,null,1)],{type:"application/json"}));a.download=`MapResult-${last.frame_id}.json`;a.click()};
-setTimeout(run,90);
+setTimeout(()=>{ if($("src").value==="synthetic") run(); else $("status").textContent="ready - texts mode: paste or fetch items, then run"; },90);
 
 
 // ===========================================================================
@@ -665,3 +665,11 @@ const INTRO_PROMPT="Use SOS Agent to assess and improve the corpus I provide.\n\
  function fallbackCopy(text){const ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.top="-1000px";document.body.appendChild(ta);ta.select();let done=false;try{done=document.execCommand("copy")===true}catch(e){done=false}document.body.removeChild(ta);if(done)show(ok);else{err.textContent="clipboard unavailable - open /AGENT.md and copy it manually";show(err)}}
  btn.onclick=()=>{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(INTRO_PROMPT).then(()=>show(ok)).catch(()=>fallbackCopy(INTRO_PROMPT));else fallbackCopy(INTRO_PROMPT)};
 })();
+
+// glossary tooltips: .gi[data-tip] -> #gtip (wired here; the div lives in index.html)
+let gtip=$("gtip");if(!gtip){gtip=document.createElement("div");gtip.id="gtip";document.body.appendChild(gtip);}
+document.addEventListener("pointerover",e=>{const g=e.target.closest(".gi[data-tip]");if(!g)return;gtip.textContent=g.getAttribute("data-tip");gtip.style.display="block";});
+document.addEventListener("pointermove",e=>{if(gtip.style.display!=="block")return;const pad=14;let x=e.clientX+pad,y=e.clientY+pad;const r=gtip.getBoundingClientRect();if(x+r.width>innerWidth-8)x=e.clientX-r.width-pad;if(y+r.height>innerHeight-8)y=e.clientY-r.height-pad;gtip.style.left=x+"px";gtip.style.top=y+"px";});
+document.addEventListener("pointerout",e=>{if(e.target.closest&&e.target.closest(".gi"))gtip.style.display="none";});
+// fire the src handler once so panel visibility matches the default selection (texts)
+$("src").onchange();
