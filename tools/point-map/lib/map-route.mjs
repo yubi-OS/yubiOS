@@ -73,7 +73,7 @@ export async function mapRouteHandler(body,ctx){
   let math_ledger=null;
   const explain=ctx.explainTransition||(typeof PM.explainTransition==='function'?PM.explainTransition.bind(PM):null);
   if(baseline&&explain){try{math_ledger=!ctx.explainTransition&&comparison?.math_ledger?comparison.math_ledger:explain(baseline,map,{predicted_delta:body.predicted_delta});}catch(e){throw new ApiError(409,`transition validation failed: ${e.message}`);}}
-  try{map.rayleigh_frame={...kyFanFrameGap(X,map.frame||opts.frame,{iters:200}),version:'rayleigh/1',frame_source:baseline?'inherited baseline frame':'fresh frame (fitted on this corpus)'};}catch(e){map.rayleigh_frame={available:false,reason:e.message};}
+  try{map.rayleigh_frame={...kyFanFrameGap(X,map.frame||opts.frame,{iters:200}),version:'rayleigh',frame_source:baseline?'inherited baseline frame':'fresh frame (fitted on this corpus)'};}catch(e){map.rayleigh_frame={available:false,reason:e.message};}
   const radius_comparison=attachRadius(map,baseline,radiusOpts);
   // single ADD or single CHANGE against a baseline: report where the item landed even when compareMaps is name-set incomparable
   let placement_block=null;

@@ -1,4 +1,4 @@
-// lib/placement.mjs — where did the candidate actually land? (placement/1)
+// lib/placement.mjs — where did the candidate actually land? (placement)
 //
 // Rounds 5/6 (2026-09-17) showed the gap: an ADD rung predicts "isolated -1"
 // but nothing told the operator whether the authored document actually
@@ -39,7 +39,7 @@ export function placement(baseline, after, targetName, action, rung) {
   const deisolated = [...isoBefore].filter((n) => !isoAfter.has(n) && n !== targetName);
   const newlyIsolated = [...isoAfter].filter((n) => !isoBefore.has(n) && n !== targetName);
   const out = {
-    version: 'placement/1', target: targetName, action,
+    version: 'placement', target: targetName, action,
     achieved_bits: after.bits[j].slice(), achieved_sector: sectorOf(p), degree, neighbours: neighbours.slice(0, 12), neighbours_total: neighbours.length,
     target_isolated: degree === 0,
     deisolated_items: deisolated, newly_isolated_items: newlyIsolated,
