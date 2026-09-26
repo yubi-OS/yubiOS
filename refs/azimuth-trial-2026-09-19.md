@@ -1,10 +1,14 @@
-> Validated 2026-09-20: re-run against main `8e07c44d` reproduces every number below. Advisor corrections applied: the apparent m=1 exclusion at K=40 was a multiplicity artifact (7 statistics, family-wise error ~7/41; with Holm over the two-sided family no default statistic is excluded at any K); m=1 is excluded a priori on centering grounds (PCA scores are mean-centered, so the radius-weighted first moment is identically zero; unweighted Z₁ measures radial/multiplicity reweighting); the dedup null sizes never match the observed 167 (support 209..245 over 2000 draws), so the deduplicated comparison is descriptive; the continuous column-shuffle null is over-strong (destroys inter-column covariance) and cannot support a negative corpus claim.
-
 # Azimuth channel: what actually killed it, and the one path with prior evidence
 
 Date: 2026-09-19. Family: instrument trial record. Corpus: the real 301×24 fixture (`tools/point-map/data/real-cloud-reduced24-2026-09-06.json`), d=9, threshold median, seed 20260906. Scripts: `azimuth-trial-rayleigh.cjs`, `azimuth-trial-dedup.cjs`, `azimuth-trial-continuous.cjs`. Nothing persisted; no frame, bit, radius, ranking or ledger semantics touched.
 
-> **Re-read 2026-09-26 (power floor: commits `abb8cfdd`, `a032aee2`).** Every `not-excluded` verdict quoted in this record was measured at K=40 (binary, Result 1) or K≤200 (the m=1 K=200 check and the continuous trial), where the smallest Holm-adjusted p the family can emit is |family|·2/(K+1): about 0.29 at K=40 and 0.0597 at K=200, both above α = 0.05. Formally those verdicts are `unresolvable-at-this-K`, not `not-excluded-after-holm`: statements about power, not about the corpus. Two consequences. (1) §4's "No angular structure at the identity chart, with atomicity fully removed" is a power statement, not a null result; that agrees with §5's own finding that the chart cause went untested here, so the record's decision stands for the right reason. (2) What survives unchanged is everything that never leaned on a not-exclusion: the m=1 structural confound (centering), the atomicity finding (a false m=1 positive carried by duplicate rows), the dedup-size mismatch (167 outside the null support), and the sector-index retirement. Default K is now 240, so trials at the default are resolvable; `placement_eigengap` now quantifies why the continuous null is wide.
+> **Errata, 2026-09-26** (append-only; the body below is unchanged except where marked ✱).
+> 1. **No multiplicity correction.** Every verdict here is an uncorrected one-sided plus-one tail across six modes. The m=1 "exclusion" in §2 would not survive a family correction, which strengthens its rejection. The shipped endpoint uses Holm; its verdicts and these are not the same rule.
+> 2. **§3's dedup comparison is size-mismatched.** Observed Z was computed on 167 distinct rows; null draws dedup to 212–241 rows, with zero draws at 167. The module detects this (`size_matched:false`) and refuses to conclude from it. "The signal is entirely carried by duplicate rows" remains the right reading of m=1, but on the *structural* ground the module states — PCA centering makes Σrⱼe^{iφⱼ} ≡ 0, so unweighted Z₁ measures radius–angle coupling — not on this table.
+> 3. **§4's continuous non-exclusions are low-power, not a null result.** The raw tails (0.20–0.92) are far from any threshold, but the per-column-shuffle null is wide because its refits land on near-degenerate eigenplanes. "No angular structure at the identity chart" should read "no detectable angular structure against a low-power null."
+> 4. **✱ m=12 was mischaracterised.** On the *binary* placement (the one sectors are read from), Z₁₂ is the most extreme non-m=1 mode (obs 5.632 vs null median 1.328, tail 0.0976/0.1463) — not the weakest. It is only the least extreme on the *continuous* placement. Not excluded either way, but it is the binary mode to watch, and the likeliest source is the lattice of angles a 9-bit hypercube projects to, i.e. atomicity again.
+> 5. **✱ Circular variance should not have been recommended.** Circular variance is 1 − R̄₁, the same structurally confounded m=1 quantity. The endpoint correctly lists it as permanently not admitted.
+> 6. **Eigengap by variant.** Binary placement rel_gap_12 = 0.0686, at its fixed-margin null median (0.0692, plus-one lower tail 0.4975) — ordinary, not degenerate. Continuous (z-scored) rel_gap_12 = 0.0205 and rel_gap_23 = 0.0042, below the shuffle-null median 0.0631 (not below its minimum 0.0036). The continuous refit plane is itself nearly unstable, not just the rotation within it.
 
 ## 0. A correction to the prompt-geometry analysis
 
@@ -29,37 +33,35 @@ Null draws are **refit**: each null bit matrix gets its own placement PCA2. Plac
 
 ## 2. Result 1 — an apparent m=1 exclusion, at K=40
 
-Fixed-margin (checkerboard-switch) null, margins verified preserved, K=40, two independent seeds:
+Fixed-margin (checkerboard-switch) null, margins verified preserved, K=40, two independent seeds, uncorrected one-sided tails:
 
 | m | obs Z | null med | null max | tail (a) | tail (b) | verdict |
 |---|---|---|---|---|---|---|
-| **1** | **0.711** | 0.094 | 0.581 | **0.0244** | **0.0244** | **excluded, both seeds** |
+| **1** | **0.711** | 0.094 | 0.581 | **0.0244** | **0.0244** | **excluded, both seeds (uncorrected)** |
 | 2 | 1.720 | 0.446 | 3.750 | 0.0732 | 0.0732 | not-excluded |
 | 3 | 0.410 | 0.517 | 4.698 | 0.5854 | 0.6585 | not-excluded |
 | 4 | 1.711 | 1.062 | 5.665 | 0.3415 | 0.3659 | not-excluded |
 | 6 | 2.252 | 0.953 | 9.419 | 0.3171 | 0.2683 | not-excluded |
 | 12 | 5.632 | 1.328 | 8.766 | 0.0976 | 0.1463 | not-excluded |
 
-m=1 exceeded all 40 draws under both seeds — tail pinned at the 1/41 resolution floor. Seed-reproducible, which is lesson 30's criterion. Two side notes worth keeping: **m=3 is the least extreme mode in the table**, independently consistent with the papers' burial of the three-fold narrative; and **m=12 is not excluded**, so the instrument's own choice of twelve sectors has no angular basis in the data.
+m=1 exceeded all 40 draws under both seeds — tail pinned at the 1/41 resolution floor. Two side notes: **m=3 is the least extreme mode in the table**, consistent with the papers' burial of the three-fold narrative; and ✱ **m=12 is the most extreme mode after m=1, yet not excluded** — see errata 4.
 
 ## 3. Result 2 — the m=1 exclusion is atomicity, not angle
 
 301 documents occupy **167 distinct 9-bit patterns** (44.5% collision). Azimuth is a function of the pattern alone, so the angular distribution is a set of heavy point masses with large multiplicities — exactly the mechanism curved-corpus §5.3 names: *"only 176 distinct rows of 512 possible, so the point cloud is a set of heavy point masses."*
 
-Re-running m=1 at K=200, with and without deduplication:
+Re-running m=1 at K=200, with and without deduplication (✱ size-mismatched; see errata 2):
 
 | variant | obs Z | null med | null max | tail (a) | tail (b) |
 |---|---|---|---|---|---|
 | all 301 rows | 0.711 | 0.119 | 0.746 | 0.0100 | 0.0199 |
-| **deduplicated (167 distinct)** | **0.061** | 0.077 | 0.682 | **0.5572** | **0.6219** |
+| deduplicated (167 distinct) | 0.061 | 0.077 | 0.682 | 0.5572 | 0.6219 |
 
-Deduplicated, the observed value falls **below the null median**. The signal is entirely carried by duplicate rows. At K=200 even the all-rows tail (0.0100 / 0.0199) is no longer at the resolution floor and straddles any threshold you would pick — a flip to report, not average.
+Deduplicated, the observed value falls below the null median. At K=200 the all-rows tail (0.0100 / 0.0199) is off the resolution floor and straddles any threshold — a flip to report, not average.
 
-**m=1 fails the membership condition.** It was measuring how many documents share a bit pattern.
+**m=1 fails the membership condition** — structurally, because centering forces the radius-weighted first moment to zero.
 
 ## 4. Result 3 — removing atomicity does not revive it either
-
-Two ways to remove the degeneracy:
 
 **Raise d.** Collisions are a d=9 artifact:
 
@@ -71,7 +73,7 @@ Two ways to remove the degeneracy:
 | 20 | 297 | 1.3% |
 | 24 | 298 | 1.0% |
 
-**Skip binarization.** Place on the continuous PCA scores directly: **300 distinct angles of 301**, atomicity gone. Matched null is then the independent per-column shuffle (the papers' named null for the continuous branch, since curveball requires a binary matrix). K=200, two seeds:
+**Skip binarization.** Place on the continuous PCA scores directly: **300 distinct angles of 301**, atomicity gone. Matched null is the independent per-column shuffle. K=200, two seeds:
 
 | m | obs Z | null med | null max | tail (a) | tail (b) | verdict |
 |---|---|---|---|---|---|---|
@@ -82,34 +84,30 @@ Two ways to remove the degeneracy:
 | 6 | 0.809 | 0.731 | 6.017 | 0.4478 | 0.4328 | not-excluded, both |
 | 12 | 0.120 | 0.815 | 3.714 | 0.8557 | 0.9204 | not-excluded, both |
 
-Every mode sits above the null median for m=1..4 and nowhere near the null's range — nulls reach 5–10× the observed. **No angular structure at the identity chart, with atomicity fully removed.**
+✱ No *detectable* angular structure at the identity chart against this null, with atomicity removed. The null is wide (errata 3), so this is a low-power non-detection.
 
 ## 5. What this leaves standing
-
-Three candidate causes of death; the trial rules out two.
 
 | Cause | Status |
 |---|---|
 | Index-assignment (the papers' burial) | **Does not apply.** Different construction. |
-| Atomicity / duplicate patterns | **Real, and it manufactured a false m=1 positive** — but removing it does not produce a signal. |
+| Atomicity / duplicate patterns | **Real, and it manufactured a false m=1 positive.** Removing it does not produce a detectable signal. |
 | **The chart** | **Untested here, and the only one with prior positive evidence.** |
 
-Every measurement above is at the **identity Möbius chart** — which is precisely the regime curved-corpus v2 §8 measures as blind. On the real corpus at the identity chart the ℓ=3 energy share sits *below* its null (J = −1.51, share 0.031 vs 0.074 ± 0.028) — the same pattern reproduced above. Under an optimized loxodromic chart the same corpus reaches 0.408 vs a collapsed null 0.0345 ± 0.0030, **ΔJ = +126.1**, against a *selection* null (optimize a lens for each of 10 curveball draws) of median +5.1, max +25.5 — roughly 4.9× the strongest control. The paper's own conclusion: *"admission is chart-dependent — the coordinate that fails under the frozen chart is precisely what the powered lens separates."*
-
-And Y₃³ ∝ sin³θ·cos(3φ) is the azimuthal member of ℓ=3. The lens surfacing ℓ=3 structure **is** the azimuthal channel reviving, in the paper's own data.
+Every measurement above is at the **identity Möbius chart** — the regime curved-corpus v2 §8 measures as blind: ℓ=3 share *below* its null (J = −1.51, 0.031 vs 0.074 ± 0.028). Under an optimized loxodromic chart the same corpus reaches 0.408 vs a collapsed null 0.0345 ± 0.0030, **ΔJ = +126.1**, against a selection null of median +5.1, max +25.5. *"Admission is chart-dependent — the coordinate that fails under the frozen chart is precisely what the powered lens separates."* Y₃³ ∝ sin³θ·cos(3φ) is the azimuthal member of ℓ=3.
 
 ## 6. Reignition paths, ordered
 
-**1. Powered lens (the live one).** Fit the Möbius chart `φ_θ ∈ PSL(2,ℂ)` — six real DOF — and measure the rotation-invariant azimuthal statistics under it. Non-negotiable: the null must be a **selection null**, optimizing a lens for each null draw; otherwise you measure the optimizer's capacity, not the corpus. Two guards the paper already found: the optimizer converges onto the anti-caustic boundary (condition number 997.8 against a 10³ cap, 155/471 evaluations guard-rejected), and J(t) along the canonical flow is perfectly monotone (Spearman ρ = 1.0) with the guard failing at t = 1.05 — so the procedure is "sail toward the caustic at constant heading, stop at the rim," and the stopping rule must be declared before the run, not chosen from the result.
+**1. Powered lens.** Fit `φ_θ ∈ PSL(2,ℂ)` (six real DOF) and measure the rotation-invariant statistics under it. The null must be a **selection null** optimizing a lens for each draw. Guards the paper found: convergence onto the anti-caustic boundary (condition 997.8 vs a 10³ cap, 155/471 guard-rejected); J(t) perfectly monotone with the guard failing at t = 1.05. The stopping rule is declared before the run.
 
-**2. Continuous placement as a second coordinate.** Keep bits for the ladder, the Hamming metric and the curveball null; add `toS2_continuous` for angle only. It removes atomicity for free (300/301 distinct) and it is a precondition for (1) being interpretable — a lens fitted to 167 point masses is fitting multiplicities.
+**2. Continuous placement as a second coordinate.** Keep bits for the ladder, Hamming metric and curveball null; add `toS2_continuous` for angle only. A lens fitted to 167 point masses is fitting multiplicities. ✱ Note the continuous refit plane is nearly unstable on this fixture (rel_gap_23 = 0.0042), so a continuous chart needs an eigengap guard before any lens is fitted to it.
 
-**3. Krawtchouk spectrum — the "measure the real object" option.** curved-corpus v2 §10(iv): a {0,1}⁹ corpus decomposes *exactly* over the Hamming scheme H(9,2), Laplacian eigenvalue 2j at weight j, multiplicity C(9,j), Krawtchouk polynomials in Legendre's role; the sphere is "its continuum idealization." Azimuth is a lossy shadow of a Krawtchouk-mode pattern on the hypercube. That spectrum is exact, finite, chart-free, gauge-free, needs no binning, and the fixed-margin null runs on it directly. If the aim is angular structure *used well* rather than azimuth specifically, this is the defensible target.
+**3. Krawtchouk spectrum.** A {0,1}⁹ corpus decomposes exactly over H(9,2); azimuth is a lossy shadow of a Krawtchouk-mode pattern. Exact, finite, chart-free, gauge-free; the fixed-margin null runs on it directly.
 
-**4. Cross-cutting, do regardless: retire the sector index as a statistic.** It is not rotation-invariant, its origin and width are arbitrary, and m=12 is the least-excluded mode in the table above. Replace every corpus-level angular readout with Rayleigh Z_m, the angular gap spectrum and circular variance. Keep sector numbers only as an opaque display label, as now.
+**4. Retire the sector index as a statistic.** Not rotation-invariant; arbitrary origin and width. ✱ Replace corpus-level angular readouts with Rayleigh Z_m (m ≥ 2) and the angular gap spectrum — **not** circular variance (errata 5). Sector numbers stay opaque display labels.
 
-**5. The use that needs no admission at all.** Angular adjacency as a *retrieval* structure — "these documents are neighbours on the placement plane" — is a statement about the chart, not about the corpus, so the membership condition does not bind it. That is legitimately usable in rung prompts today, and the prompt-geometry change already does the bit-space version of it via Hamming distance. The admission machinery binds claims about the corpus; it does not bind a lookup.
+**5. The use that needs no admission.** Angular adjacency as *retrieval* is a statement about the chart, not the corpus.
 
 ## 7. What this record does not claim
 
-Counts and empirical tails only, with n and the resolution `1/(K+1)`; no rates, no Gaussian translation. K=40 cannot resolve below 1/41 and K=200 below 1/201. The m=1 flip between thresholds at K=200 is reported, not averaged. One corpus, one frame, one instrument — a different corpus is a different instrument reading, not a benchmark. No admitted coordinate, ranking term, radius change or keep/revert rule follows from any of it, and `admitted:false` stands for every azimuthal statistic named here.
+Counts and empirical tails only, with n and resolution `1/(K+1)`; no rates, no Gaussian translation; no multiplicity correction (errata 1). One corpus, one frame, one instrument. No admitted coordinate, ranking term, radius change or keep/revert rule follows, and `admitted:false` stands for every azimuthal statistic named here.
