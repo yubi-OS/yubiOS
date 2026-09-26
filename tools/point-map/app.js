@@ -81,9 +81,9 @@ $("fetchrepo").onclick=async()=>{const repo=$("repo").value.trim();if(!repo)retu
 $("files").onchange=()=>{const n=$("files").files.length;if(n){$("fileinfo").textContent=`${n} file(s) loaded`;$("fileinfo").style.display="inline"}};
 
 function renderNSS(R){
-  const L=R.ladder_candidates;const box=$("nssbox");
-  if(!L){box.style.display="none";setTip("lexi","lexl","");setTip("dectip","decl","");setTip("lentip","lenl","");setTip("outtip","outl","");return}
-  box.style.display="";
+  const L=R.ladder_candidates;const box=$("nssbox"),pbox=$("nsspromptbox");
+  if(!L){box.style.display="none";if(pbox)pbox.style.display="none";setTip("lexi","lexl","");setTip("dectip","decl","");setTip("lentip","lenl","");setTip("outtip","outl","");return}
+  box.style.display="";if(pbox)pbox.style.display="";
   setTip("lexi","lexl",L.ranking_rule+". "+(L.score_note||""));
   setTip("dectip","decl","decision "+L.decision+": "+L.reason);
   $("nsssectors").textContent=`sector counts (1..12, anonymous geometry): ${L.sector_counts.join(" ")} - base occupied ${L.base.occupied_sectors} - base isolated ${L.base.isolated}`;
