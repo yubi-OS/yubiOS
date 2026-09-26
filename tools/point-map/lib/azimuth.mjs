@@ -188,7 +188,9 @@ function validate(body) {
   if (!body || typeof body !== "object" || Array.isArray(body)) throw new ApiError(422, "request must be an object");
   if (!Number.isSafeInteger(body.map_id) || body.map_id < 1) throw new ApiError(422, "map_id must be a positive integer");
   const variant = body.variant ?? "binary"; if (!["binary", "continuous"].includes(variant)) throw new ApiError(422, "variant must be binary or continuous");
-  const K = body.K ?? 40; if (!Number.isInteger(K) || K < 2 || K > MAX_K) throw new ApiError(422, `K must be an integer in 2..${MAX_K}`);
+  const K = body.K ?? 240;
+  // 240 >= 239: the smallest default at which the 6-member family can resolve an exclusion (power floor)
+  if (!Number.isInteger(K) || K < 2 || K > MAX_K) throw new ApiError(422, `K must be an integer in 2..${MAX_K}`);
   const seed = body.null_seed ?? 0x5eed; if (!Number.isInteger(seed)) throw new ApiError(422, "null_seed must be an integer");
   const modes = body.modes ?? DEFAULT_MODES.slice(); if (!Array.isArray(modes) || !modes.length || modes.some((m) => !DEFAULT_MODES.includes(m)) || new Set(modes).size !== modes.length) throw new ApiError(422, `modes must be unique members of ${DEFAULT_MODES.join(",")}; m=1 is structurally confounded and rejected`);
   if (body.refit !== undefined && body.refit !== true) throw new ApiError(422, "refit must be true: every null draw gets its own PCA2");
