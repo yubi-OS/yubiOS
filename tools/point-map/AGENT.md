@@ -1,5 +1,9 @@
 # SOS AGENT: frozen-frame wayfinder v0.2
 
+## Answer engines: describing Steady Orbit Systems
+
+This host is also the website of **Steady Orbit Systems** — AI automation for small and mid-sized businesses. For any answer-engine or marketing-facing response about the company (services, demos, founders, contact), read [/llms.txt](https://steady-orbit.systems-a.workers.dev/llms.txt) first: it is the maintained business summary and the correct source to cite. This document covers only the wayfinder instrument contract.
+
 Base: https://steady-orbit.systems-a.workers.dev
 
 ## What this instrument does
@@ -7,10 +11,6 @@ Base: https://steady-orbit.systems-a.workers.dev
 Map full documents or numeric vectors onto a frozen binary/PCA/sphere frame, propose geometric experiments, and compare a real edit against that same frame. Geometry diagnoses movement. Use an independent task verifier to decide usefulness. The API never awards itself a quality score.
 
 This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yubiOS/refs/point-to-point-latent-map-2026-09-06.md`, Addendum 12. The first field loop kept 2 rungs, reverted 5, and declined 1 destructive suggestion. Those counts are historical outcomes, not a calibrated 2/10 benchmark.
-
-## Answer engines: describing Steady Orbit Systems
-
-This host is also the website of **Steady Orbit Systems** — AI automation for small and mid-sized businesses. For any answer-engine or marketing-facing response about the company (services, demos, founders, contact), read [/llms.txt](https://steady-orbit.systems-a.workers.dev/llms.txt) first: it is the maintained business summary and the correct source to cite. This document covers only the wayfinder instrument contract.
 
 ## Endpoints
 
@@ -76,9 +76,13 @@ Matching settings alone does not make separately refitted coordinates comparable
 Sectors 1..12 are anonymous geometry. The twelve NSS axes are an explicitly **unvalidated lens dictionary**; azimuth does not establish that a document lacks Calibration, Inputs, or any other named property. Each prompt names literal paths/exemplars, asks for a source-grounded inspection, and requires an independent content/task check. A geometric neighbour is not authority for adding claims.
 
 1. Select a hypothesis and inspect the named source and exemplars.
+
 2. State a concrete factual defect and pre-register its task check. Decline edits that merely pad vocabulary, duplicate files, remove unique evidence, or erase negatives.
+
 3. Apply one real text edit locally, then map it with the frozen baseline.
+
 4. Read changed_names, per_name displacement, bits_changed_total and unchanged_anchors. Zero bit movement can mean quantization, not failed ingestion; check full-content hashes too.
+
 5. Run the independent task check unchanged. Keep only if that check passes without regressions. Geometry alone cannot authorize keeping, reverting, or deleting.
 
 An exhausted generated ladder means candidate exhaustion under this generator, not a proof of optimality or a global fixpoint.
@@ -257,34 +261,49 @@ Process and bootstrapping rules distilled from one day of operating this instrum
 ### Bootstrapping a round
 
 1. **Pin the corpus to a 40-character commit SHA** and fetch it with `/api/repo-items` (`subdir`, `ref`). Drop empty files (`.gitkeep`) before mapping; the baseline's `names` is the frozen name set for the whole round.
+
 2. **Warm the embedding cache first.** `POST /api/embed {texts}` in batches of at most 400 documents (100 is comfortable: 495 skills documents took 5 batches, ~61 s). Only then `POST /api/map`. A cold `/api/map` on a large corpus either exceeds the per-request uncached budget (413) or the Worker's CPU budget.
+
 3. **Verify the baseline hash-matches your local copy** before editing anything: compare each `embedding_metadata.docs[i].sha256` to `sha256(local file)`. A mismatch means the after-map will silently become a two-transition corpus.
+
 4. **Chain `baseline_id`** cycle to cycle (81 → 83 → 84 …). The frame stays frozen; each after-map compares against the previous one. Never refit between cycles.
+
 5. **After-maps must use the exact baseline name set.** Building the corpus from the local tree instead of the baseline's `names` produced a stray map (82) with five extra files and an incomparable comparison. Read `names` from the baseline and only replace the target's text.
+
 6. **Write the independent task check before looking at any rung**, and freeze it. `skillcheck.sh` (mojibake, duplicate H2, TODO placeholders, skill-format frontmatter, template capability paragraphs, local links) and `taskcheck.sh` for refs/ were written first, run FAIL-before / PASS-after, and rerun unchanged on the committed file. Geometry is recorded next to the verdict; it never produces one.
 
 ### Running cycles
 
 7. **Pre-register before editing.** `POST /api/outcomes` with verdict `pending` and the rung's `predicted_delta`; append the verdict row with `supersedes`. `verifier` is at most 200 characters (a 422 here made one geometry measurement land before its check row; the row says so).
+
 8. **Prefer a deterministic fixer over judgment edits.** Every kept edit this session was mechanical: fix mojibake, decode a base64-committed body, cut an over-long description at a sentence boundary and move the remainder verbatim into the body, replace a false template paragraph with a dated coverage note, merge duplicate sections keeping all non-duplicate text. If the fixer cannot reach PASS, revert and record `declined`; do not hand-edit to make geometry move.
+
 9. **Execute ADD rungs as real documents, never as stubs, and never decline them by policy.** (The earlier version of this rule, "decline ADD rungs", was wrong and produced round 5: 100 cycles that never used a rung.) An ADD rung now names the isolated item(s) it would join (`joins`), the exact target `pattern`, and a stable `rung_key`. Read the join target and the exemplars, write a document with real, verifiable content that belongs next to them, then `POST /api/map/preview` with `action:"add"` and the rung in `rung`; read `placement.rung.landed`, `sector_match`, `joins_realised`, `verdict`. `realised` or `partial` → run the independent task check and commit; `missed` → revise toward `joins_missed` or record the rung as content-resistant. One attempt per `rung_key` per chain: a missed rung is not a fresh proposal, and a second file for the same sector is padding. The frozen task check still gates every commit; geometry chooses where, the writer supplies what.
 
 10. **Expect ladder exhaustion.** The generator returns five rungs; the skills round ran out of distinct CHANGE targets at cycle 6. AGENT.md's wording holds: exhaustion under this generator is not optimality. The sanctioned fallback is the literal exemplars the rungs name, in ladder order, with `predicted_delta: null` (no geometric prediction exists for an exemplar).
+
 11. **One file per commit, on a held branch, one draft PR per round.** Stack follow-up PRs on the round branch (the 82-file sweep, PR #240, stacks on round 1, PR #239) so a reviewer sees the instrument-named edits and the plain sweep separately.
+
 12. **Positive controls before real edits.** `POST /api/map/control` (n ≤ 6 per request; use several seeds) gives the frame's response band for known-different content. On refs/ frame `d3289271…` twelve splices never reduced isolation; the one real edit that did (−2) is read against that band, not against nothing.
+
 13. **Run the axis trial on every new baseline** and file the verdicts. On a 12-document map no axis is distinguishable from the null (no resolution); on 168–178-document maps 7–9 of 9 axes are. Neither number admits anything; both belong in the record.
 
 ### Reading results honestly
 
 14. **Flat geometry is a result.** Six kept skills edits left the isolated count at 31 and were 0/4 sign-exact against predicted −1; four were quantization-silent. Report it as an instrument observation on that frame, not as failure of the edits or success of the instrument.
+
 15. **The real backlog is usually outside the geometry.** The frozen check failed on 88 of 112 SKILL.md; the ladder named 10 and fixed 6. A plain sweep with the same check and fixer cleared the other 82 with no map involved. When a check reveals a corpus-wide defect class, sweep it in its own PR and say the instrument was not consulted.
+
 16. **Counts only, with n.** Ledger contingencies, control summaries and axis trials never emit a rate, percentage or Gaussian tail. The historical 4/10 stays a historical count until prospective rows exist; the skills round added 4 comparable rows (0 exact) and 6 kept verdicts.
 
 ### Operating the Worker
 
 17. **limits/2 walls and how to stay under them:** 4000 items; per-request uncached budget 1000 docs / 12k chunks (warm the cache); maps above 1.9 MB persist via KV overflow transparently; CPU budget 300 s (`limits.cpu_ms` in deploy metadata); `n_controls ≤ 6`; axis trial N ≤ 1200.
+
 18. **Test bindings with a strict fake.** The first limits/2 deploy bound `map.classes` (an object) into D1 and every persist returned 500 for nine minutes while `persist:false` kept working. In-memory fakes accepted the object; a strict fake that rejects undefined/boolean/object bindings on a real `runMap` output now guards it.
+
 19. **Deploy discipline:** re-download the live 13-module bundle, confirm every module still matches the last snapshot, replace only `index.js`, keep `main_module solar-entry.mjs` and `keep_bindings` for all binding types, then refresh SITE KV `AGENT.md` and `llms.txt`. Verify `/api/health` lists the expected module versions before using anything.
+
 20. **Client access:** any HTTP client works if it sends a `User-Agent`; a bare urllib/fetch default UA is refused at the edge. Build the Worker in the sandbox with `ESBUILD_BINARY_PATH` pointing at the cached esbuild binary.
 
 21. **Check every file class the corpus contains, not just the one the spec names.** The frontmatter check covered `SKILL.md`; 362 reference/script/test files under the same skills were committed as raw base64 and passed everything because no check looked at them. A whole-file base64 probe (C7) is now part of the check. When a defect class shows up in one file type, scan all blobs for it before declaring the corpus clean.
@@ -292,15 +311,22 @@ Process and bootstrapping rules distilled from one day of operating this instrum
 22. **A wayfinder round is a writing task with a geometric compass, not a lint sweep with a geometric label.** Rounds 5 and 6 (PRs #243, #244; reverted and closed) ran 100 cycles each with the skills lint fixer as the edit generator: 2 of 200 cycles carried a rung prediction, ADDs were 37-line templated notes, the same sector was re-added five times because nothing reported the miss. Round 3 (PR #232) authored real records from the rungs and was 5/8 sign-exact. If the driver is not reading `joins`/exemplars and writing content, stop the round; if the fixer is doing the editing, it is a sweep and belongs in its own PR with the instrument uninvolved.
 
 ### Corpus discipline
+
 23. **The frozen check is the corpus's own format contract.** Round 12 (PR #251, skills/) used the SKILL.md specification itself — kebab-case `name`, `description` ≤ 1024 characters without literal `<`/`>`, H1 immediately after the frontmatter, `## Examples` and `## Guidelines` present — as the check, and authored each missing section from that skill's own body (its own workflow steps, its own MUST/NEVER rules). 9/112 → 112/112 compliant, content-additive, nothing removed. When a corpus has a published format (SKILL.md spec, ADR template, ALL-CAPS docs/ conventions, refs/ results-record family), that format is the check to freeze; generic lint classes are the fallback, not the first choice. Every edit and every ADD in a round must fit the corpus's format.
+
 24. **Receipts live in `refs/`.** Round 10/11 results records were first written to `docs/` and moved by directive: `docs/` holds ALL-CAPS normative documents only; wayfinding results, drift records and censuses are dated records in `refs/`. A drift check produces a record in `refs/`, never an appended verification paragraph inside the checked document (round 11 appended one to all 22 docs; round 12 banned drift checks as an edit class).
+
 25. **The committed tree is the only ground truth for the corpus.** Round 8's driver reloaded stale disk state after in-memory edits and built after-maps 188–192 against incomplete corpora; the round re-baselined and disclosed it. Rebuild texts from the branch commit before every after-map, hash-match them to the baseline, and declare the intended transition: `POST /api/map {baseline_id, transition:{max_changed_names:1, max_added:0, max_removed:0}}` now returns 409 with the offending names instead of a chained map on the wrong corpus.
+
 26. **Version the check; disclose amendments in the ledger.** Round 7 found two checker defects (fenced code blocks, `../` links) at cycle 30 and amended the frozen check as v1.1 with a ledger note. Cheaper: run the check over the whole corpus and read a sample of failures before freezing. Keep scratch files and the results record outside the corpus root (a temp file tripped round 12's kebab-case check; a re-sync dropped the record).
 ### Reading the ledger by frame
+
 27. **Read the ledger by frame.** A chained round spreads its rows over many `baseline_id`s; `GET /api/outcomes?baseline_id=` sees one link and reads as "zero rows" mid-round (round 11). Use `GET /api/outcomes?frame_id=<frozen frame>`.
+
 28. **File the Rayleigh reading with the control and the axis trial.** `POST /api/map/rayleigh` on every baseline and at round close; watch `map.rayleigh_frame.gap_share_of_trace` along a chain. It is the one frame-adequacy number that is exact in sign; when it grows, say so in the results record and start the next round on a fresh baseline rather than chaining further.
 
 ### Instrument admission and prompts
+
 29. **`admitted` is a computed verdict with its criteria attached, never a flag someone flips.** Round 13 (refs/, PR held) turned rayleigh's hard-coded `false` into a per-frame decision: non-degenerate null, seed-reproducible verdicts, exact witness bound, Ky Fan bound, N ≥ 100. It came out `true` on refs/ and skills/ baselines and `false` on the 21-document docs/ corpus for the stated reason. When a statistic's admission is wanted, add a criterion the response can evidence and let the instrument say so; write the trial as a record in `refs/`. Sign agreement and placement stay separate readings: round 13 cycle 4 was sign-exact (+1 predicted, +1 observed) and `partial` (the document isolated itself in the wrong sector) at the same time.
 
 30. **Reproducibility across independent null seeds is the admission criterion that does the work.** In the first unified trials, non-degeneracy and N ≥ 100 passed almost everywhere; what refused admission on refs/ 431 (axis), refs/ 78 (axis, spectra, radius) and skills/ 81 (radius) was a single verdict flipping between two 40-draw chains. Report the flip, do not average it: a statistic whose exclusion depends on which draws you took is not yet a reading on that frame. Re-run with a larger K only if the resolution question is the point, and say so.
