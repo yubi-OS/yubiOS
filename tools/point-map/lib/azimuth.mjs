@@ -28,6 +28,19 @@ const PCA_SEED_XOR = 0x1f123bb5;
 // seeded with base ^ PCA_SEED_XOR, so observed, null and m1 draws use the same
 // derivation even when pcaTop consumes RNG (the D > 40 power-iteration path).
 const pcaSeed = (base) => base ^ PCA_SEED_XOR;
+
+// Placement eigengap diagnostic (review Finding 5): rel_gap_12 = (lambda1-lambda2)/lambda1 measures
+// how nearly degenerate the top-2 eigenplane is — when it is small the rotation WITHIN the plane is
+// nearly arbitrary and basis-dependent readouts (the sector index) are unstable. rel_gap_23 is the
+// Davis-Kahan subspace-stability gap. Diagnostic only: it licenses nothing and admits nothing.
+function eigengap(rows, PM, seed) {
+  const d = rows[0].length, k = Math.min(3, d);
+  const v = PM._internal.pcaTop(rows, k, PM.mulberry32(seed)).values;
+  const f = (x) => +x.toFixed(6);
+  return { lambda1: f(v[0]), lambda2: f(v[1]), ...(v[2] !== undefined ? { lambda3: f(v[2]) } : {}),
+    rel_gap_12: f((v[0] - v[1]) / v[0]), ...(v[2] !== undefined ? { rel_gap_23: f((v[1] - v[2]) / v[1]) } : {}),
+    note: "diagnostic only: small rel_gap_12 means the top-2 eigenplane is nearly degenerate and the sector index reads off an unstable basis; it licenses nothing" };
+}
 const SECOND_SEED_XOR = 0x7f4a7c15;
 const REJECTED = ["rank", "weights", "score", "radius", "radii", "threshold", "d", "T", "frame", "admit", "admitted"];
 
@@ -147,6 +160,7 @@ export function binaryAzimuthTrial(map, PM, { K, seedA, modes = DEFAULT_MODES, a
   return {
     variant: "binary", N: map.bits.length, d: map.bits[0].length, modes, K, seeds: { a: seedA, b: seedB }, multiplicity: { method: "Holm", family: [...modes.map((m) => `Z${m}`), "largest_gap"], alpha },
     observed: obs, seed_a: evA, seed_b: evB,
+    placement_eigengap: eigengap(map.bits, PM, pcaSeed(map.seed ?? 0)),
     atomicity: { distinct_patterns: observedDistinct, possible_patterns: 2 ** Math.min(map.bits[0].length, 30), collision_count: map.bits.length - observedDistinct, collision_fraction: collisionRate,
       m1_audit: { observed: m1Obs, seed_a: m1aa, seed_b: m1bb, admitted: false, reason: "PCA scores are mean-centered, so the radius-weighted first moment is identically zero; unweighted Z1 measures radial/multiplicity reweighting and is structurally confounded" },
       deduplicated: { N: observedDistinct, observed: obsD, seed_a: deA, seed_b: deB, null_distinct_sizes_seed_a: dedupSupportA, null_distinct_sizes_seed_b: dedupSupportB, exact_size_matches: { a: exactA, b: exactB }, size_matched: sizeMatched, admitted: false, reason: sizeMatched ? "descriptive de-atomized control only; no coordinate is admitted by this block" : "no size-matched fixed-margin dedup null exists in these draws; the observed atomicity lies outside null support" } },
@@ -162,6 +176,7 @@ export function continuousAzimuthTrial(X, PM, { K, seedA, modes = DEFAULT_MODES,
   const draw = (seed) => { const rnd = mulberry32(seed), out = []; for (let k = 0; k < K; k++) out.push(azimuthStats(anglesRefit(shuffleColumns(X, rnd), pcaSeed(seed ^ (k + 1)), PM), modes)); return out; };
   const A = evaluate(obs, draw(seedA), alpha), B = evaluate(obs, draw(seedB), alpha);
   return { variant: "continuous", N: X.length, D: X[0].length, modes, K, seeds: { a: seedA, b: seedB }, multiplicity: { method: "Holm", family: [...modes.map((m) => `Z${m}`), "largest_gap"], alpha }, observed: obs, seed_a: A, seed_b: B,
+    placement_eigengap: eigengap(X, PM, pcaSeed(0)),
     criteria: { null_nondegenerate_all: nondegenerate(A, B), holm_verdicts_reproducible_all: verdictsReproduce(A, B), vector_hashes_match_map: true, n_at_least_100: X.length >= 100, null_adequate_for_negative_claim: false }, admitted: false,
     admission_note: "continuous azimuth channel not admitted: the per-column shuffle null destroys all inter-column covariance and is intentionally over-strong; not-exclusion under it is uninformative. A chart-selection null with a predeclared optimizer/stopping rule is required." };
 }

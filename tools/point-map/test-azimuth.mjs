@@ -102,4 +102,17 @@ await test("m=1 remains an audit-only field and cannot enter the requested mode 
   assert.ok(!Object.keys(r.seed_a).includes("Z1"));
 });
 
+await test("trial results carry a well-formed placement_eigengap diagnostic (review Finding 5)", async () => {
+  const r = await azimuthHandler({ map_id: 1, K: 4 }, { ...store, PM });
+  const eg = r.placement_eigengap;
+  assert.ok(eg, "no placement_eigengap on binary trial");
+  assert.equal(typeof eg.lambda1, "number"); assert.equal(typeof eg.lambda2, "number");
+  assert.ok(eg.lambda1 >= eg.lambda2, "eigenvalues not sorted");
+  assert.ok(eg.rel_gap_12 >= 0 && eg.rel_gap_12 <= 1, "rel_gap_12 out of range");
+  assert.ok(/licenses nothing/.test(eg.note), "caveat missing");
+  const rv = await azimuthHandler({ map_id: 1, vectors: X.slice(0, 50), K: 4 }, { ...store, PM });
+  assert.ok(rv.placement_eigengap, "no placement_eigengap on continuous trial");
+  assert.equal(typeof rv.placement_eigengap.rel_gap_12, "number");
+});
+
 console.log(`\n${pass}/${pass + fail} passed`); if (fail) process.exit(1);
