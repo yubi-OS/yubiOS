@@ -1060,3 +1060,20 @@ TABS.forEach((b,i)=>{b.addEventListener("click",()=>switchTab(b.dataset.tab));
   b.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const n=TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length];n.focus();n.click()}})});
 const SAVED_TAB=(()=>{try{return sessionStorage.getItem("sos-map-tab")}catch(e){return null}})();
 switchTab(TABS.some(b=>b.dataset.tab===SAVED_TAB)?SAVED_TAB:"instrument");
+
+// ---- lean check CI status (proofs pane) ----
+async function loadLeanCheck(){
+  const st=$("leanstate");
+  if(!st)return;
+  try{
+    const r=await fetch("https://api.github.com/repos/yubi-OS/yubiOS/actions/workflows/lean-check.yml/runs?per_page=1");
+    const j=await r.json();
+    const run=j.workflow_runs&&j.workflow_runs[0];
+    if(!run){st.innerHTML='<span class="dim">no lean-check runs found yet</span>';return}
+    const cls=run.conclusion==="success"?"ok":(run.conclusion==="failure"?"bad":"dim");
+    const when=String(run.created_at||"").replace("T"," ").slice(0,16);
+    st.innerHTML=`<span class="dim">latest run</span><span><b class="${cls}">${escapeHtml(run.conclusion||run.status)}</b> on <code>${escapeHtml(String(run.head_sha).slice(0,8))}</code> at ${when} UTC <a href="${run.html_url}" style="color:var(--acc)">open run ↗</a></span>`;
+  }catch(e){st.innerHTML=`<span class="dim">CI status unavailable: ${escapeHtml(e.message)}</span>`}
+}
+$("tabbtn-proofs").addEventListener("click",loadLeanCheck);
+loadLeanCheck();
