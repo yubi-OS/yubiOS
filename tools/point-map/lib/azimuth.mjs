@@ -24,6 +24,10 @@ export const DEFAULT_MODES = Object.freeze([2, 3, 4, 6, 12]);
 export const MAX_K = 400;   // family of 6 needs K >= 239 for any exclusion to be arithmetically reachable
 export const MAX_N = AXIS_TRIAL_MAX_N;
 const PCA_SEED_XOR = 0x1f123bb5;
+// Single derivation for every PCA-fit seed in this module: a PCA refit is always
+// seeded with base ^ PCA_SEED_XOR, so observed, null and m1 draws use the same
+// derivation even when pcaTop consumes RNG (the D > 40 power-iteration path).
+const pcaSeed = (base) => base ^ PCA_SEED_XOR;
 const SECOND_SEED_XOR = 0x7f4a7c15;
 const REJECTED = ["rank", "weights", "score", "radius", "radii", "threshold", "d", "T", "frame", "admit", "admitted"];
 
@@ -104,7 +108,7 @@ function evaluate(obs, draws, alpha = 0.05) {
 }
 function runNull(bits, PM, K, seed, modes, prep = (x) => x) {
   const N = bits.length, d = bits[0].length, rnd = PM.mulberry32(seed), cert = { rowOk: true, colOk: true, attempted: 0, accepted: 0 }, draws = [], sizes = [];
-  for (let k = 0; k < K; k++) { const M = prep(PM._internal.nullDraw(bits, 5 * N * d, rnd, cert)); sizes.push(M.length); draws.push(azimuthStats(anglesRefit(M, seed ^ (k + 1) ^ PCA_SEED_XOR, PM), modes)); }
+  for (let k = 0; k < K; k++) { const M = prep(PM._internal.nullDraw(bits, 5 * N * d, rnd, cert)); sizes.push(M.length); draws.push(azimuthStats(anglesRefit(M, pcaSeed(seed ^ (k + 1)), PM), modes)); }
   if (!cert.rowOk || !cert.colOk) throw new ApiError(500, "fixed-margin null violated a row or column margin");
   return { draws, sizes, cert };
 }
@@ -113,16 +117,16 @@ function nondegenerate(a, b) { return Object.keys(a).every((k) => !a[k].null.deg
 
 export function binaryAzimuthTrial(map, PM, { K, seedA, modes = DEFAULT_MODES, alpha = 0.05 }) {
   binaryMatrix(map.bits); const seedB = (seedA ^ SECOND_SEED_XOR) | 0;
-  const obsPhi = anglesRefit(map.bits, (map.seed ?? 0) ^ PCA_SEED_XOR, PM), obs = azimuthStats(obsPhi, modes);
+  const obsPhi = anglesRefit(map.bits, pcaSeed(map.seed ?? 0), PM), obs = azimuthStats(obsPhi, modes);
   const A = runNull(map.bits, PM, K, seedA, modes), B = runNull(map.bits, PM, K, seedB, modes);
   const evA = evaluate(obs, A.draws, alpha), evB = evaluate(obs, B.draws, alpha);
-  const distinct = dedupRows(map.bits), obsDPhi = anglesRefit(distinct, (map.seed ?? 0) ^ PCA_SEED_XOR, PM), obsD = azimuthStats(obsDPhi, modes);
+  const distinct = dedupRows(map.bits), obsDPhi = anglesRefit(distinct, pcaSeed(map.seed ?? 0), PM), obsD = azimuthStats(obsDPhi, modes);
   const DA = runNull(map.bits, PM, K, seedA ^ 0x1337, modes, dedupRows), DB = runNull(map.bits, PM, K, seedB ^ 0x1337, modes, dedupRows);
   const deA = evaluate(obsD, DA.draws, alpha), deB = evaluate(obsD, DB.draws, alpha);
   const observedDistinct = distinct.length, exactA = DA.sizes.filter((n) => n === observedDistinct).length, exactB = DB.sizes.filter((n) => n === observedDistinct).length;
   const m1Obs = rayleighZ(obsPhi, 1);
   // m=1 audit uses a separate small refit loop only to expose the confound; it is never part of the family.
-  const m1Draws = (seed) => { const N = map.bits.length, d = map.bits[0].length, rnd = PM.mulberry32(seed), cert = { rowOk: true, colOk: true, attempted: 0, accepted: 0 }, out = []; for (let k = 0; k < K; k++) { const M = PM._internal.nullDraw(map.bits, 5 * N * d, rnd, cert); out.push(rayleighZ(anglesRefit(M, seed ^ (k + 1), PM), 1)); } return out; };
+  const m1Draws = (seed) => { const N = map.bits.length, d = map.bits[0].length, rnd = PM.mulberry32(seed), cert = { rowOk: true, colOk: true, attempted: 0, accepted: 0 }, out = []; for (let k = 0; k < K; k++) { const M = PM._internal.nullDraw(map.bits, 5 * N * d, rnd, cert); out.push(rayleighZ(anglesRefit(M, pcaSeed(seed ^ (k + 1)), PM), 1)); } return out; };
   const m1aa = rawTail(m1Draws(seedA ^ 0x5151), m1Obs), m1bb = rawTail(m1Draws(seedB ^ 0x5151), m1Obs);
   const collisionRate = 1 - observedDistinct / map.bits.length;
   const dedupSupportA = summary(DA.sizes), dedupSupportB = summary(DB.sizes);
@@ -154,8 +158,8 @@ export function binaryAzimuthTrial(map, PM, { K, seedA, modes = DEFAULT_MODES, a
 
 function shuffleColumns(X, rnd) { const M = X.map((r) => r.slice()), N = M.length, D = M[0].length; for (let j = 0; j < D; j++) for (let i = N - 1; i > 0; i--) { const t = Math.floor(rnd() * (i + 1)); [M[i][j], M[t][j]] = [M[t][j], M[i][j]]; } return M; }
 export function continuousAzimuthTrial(X, PM, { K, seedA, modes = DEFAULT_MODES, alpha = 0.05 }) {
-  finiteMatrix(X, "vectors"); const seedB = (seedA ^ SECOND_SEED_XOR) | 0, obs = azimuthStats(anglesRefit(X, PCA_SEED_XOR, PM), modes);
-  const draw = (seed) => { const rnd = mulberry32(seed), out = []; for (let k = 0; k < K; k++) out.push(azimuthStats(anglesRefit(shuffleColumns(X, rnd), seed ^ (k + 1) ^ PCA_SEED_XOR, PM), modes)); return out; };
+  finiteMatrix(X, "vectors"); const seedB = (seedA ^ SECOND_SEED_XOR) | 0, obs = azimuthStats(anglesRefit(X, pcaSeed(0), PM), modes);
+  const draw = (seed) => { const rnd = mulberry32(seed), out = []; for (let k = 0; k < K; k++) out.push(azimuthStats(anglesRefit(shuffleColumns(X, rnd), pcaSeed(seed ^ (k + 1)), PM), modes)); return out; };
   const A = evaluate(obs, draw(seedA), alpha), B = evaluate(obs, draw(seedB), alpha);
   return { variant: "continuous", N: X.length, D: X[0].length, modes, K, seeds: { a: seedA, b: seedB }, multiplicity: { method: "Holm", family: [...modes.map((m) => `Z${m}`), "largest_gap"], alpha }, observed: obs, seed_a: A, seed_b: B,
     criteria: { null_nondegenerate_all: nondegenerate(A, B), holm_verdicts_reproducible_all: verdictsReproduce(A, B), vector_hashes_match_map: true, n_at_least_100: X.length >= 100, null_adequate_for_negative_claim: false }, admitted: false,
