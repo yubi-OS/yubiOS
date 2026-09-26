@@ -82,18 +82,16 @@ $("files").onchange=()=>{const n=$("files").files.length;if(n){$("fileinfo").tex
 
 function renderNSS(R){
   const L=R.ladder_candidates;const box=$("nssbox");
-  if(!L){box.style.display="none";setTip("lexi","lexl","");setTip("dectip","decl","");setTip("lentip","lenl","");return}
+  if(!L){box.style.display="none";setTip("lexi","lexl","");setTip("dectip","decl","");setTip("lentip","lenl","");setTip("outtip","outl","");return}
   box.style.display="";
-  $("nssdecision").innerHTML=`decision: <b class="${L.decision==="ranked"?"ok":"dim"}">${escapeHtml(L.decision)}</b>`;
   setTip("lexi","lexl",L.ranking_rule+". "+(L.score_note||""));
   setTip("dectip","decl","decision "+L.decision+": "+L.reason);
   $("nsssectors").textContent=`sector counts (1..12, anonymous geometry): ${L.sector_counts.join(" ")} - base occupied ${L.base.occupied_sectors} - base isolated ${L.base.isolated}`;
-  $("nsslens").innerHTML=`NSS axis lens (<b>${escapeHtml(L.nss_lens_dictionary.semantic_status)}</b>)`;
   setTip("lentip","lenl","NSS axis lens ("+L.nss_lens_dictionary.semantic_status+"): "+L.nss_lens_dictionary.axes.join(", ")+" - "+L.nss_lens_dictionary.note);
   const rungs=L.rungs||[];
   $("nsstab").querySelector("tbody").innerHTML=rungs.length?rungs.map((r,i)=>`<tr><td><input type="radio" name="ideal" value="${i}" ${i===0?"checked":""}></td><td><b>${escapeHtml(r.rung)}</b></td><td>${escapeHtml(r.action)}${r.item!==undefined?` #${r.item}`:""}</td><td>${r.sector}</td><td class="dim">${escapeHtml(r.semantic_status)}</td><td>${r.score}</td><td>${r.delta.occupied_sectors_delta}</td><td>${r.delta.isolated_delta}</td></tr>`).join(""):`<tr><td colspan="8" class="dim">no candidates - ${escapeHtml(L.reason)}</td></tr>`;
   const outliers=(L.review_only_audit&&L.review_only_audit.outliers)||[];
-  $("nssoutliers").innerHTML=outliers.length?`<b>review-only outliers</b> (${escapeHtml(L.review_only_audit.note)}): `+outliers.map(o=>`#${o.item} ${escapeHtml(o.name)} (sector ${o.sector}, ${escapeHtml(o.reason)}, ${escapeHtml(o.semantic_status)})`).join("; "):"";
+  setTip("outtip","outl",outliers.length?("review-only outliers ("+L.review_only_audit.note+"): "+outliers.map(o=>`#${o.item} ${o.name} (sector ${o.sector}, ${o.reason}, ${o.semantic_status})`).join("; ")):"");
   function showPrompt(i){const r=rungs[i];$("nssprompt").textContent=r?r.prompt+"\n\nBefore changing the repository, preview the actual candidate text with POST /api/map/preview and the saved baseline_id, full resulting texts/names and target {action,name}. Inspect the touched-neighbour ledger and signed margins, then run the independent task check. Preview creates no map row or repository edit."+RADIUS_PROMPT_NOTE:"";$("nssrec").innerHTML=r?`<b>${escapeHtml(r.rung)}</b> - sector ${r.sector} - ${escapeHtml(r.hypothesis)} <span class="dim">(${escapeHtml(r.caveat)})</span>`:""}
   $("nsstab").querySelectorAll("input[name=ideal]").forEach((el,i)=>{el.onchange=()=>showPrompt(i)});
   showPrompt(rungs.length?0:-1);
