@@ -130,6 +130,7 @@ function renderSpectra(R){
 
 function render(R,id,comparison){
   last=R;lastId=id===undefined?null:id;
+  resetDiags();
   renderNSS(R);renderCompare(comparison||null);
   $("rule").setAttribute("data-tip", `rule ${R.rule.rule}: ${R.rule.note} (d=${R.d}). frame_id=${R.frame_id} (frozen - every point on this map is placed on this exact frame; re-running with the same frame never refits). Two maps are comparable only if frame_id matches; compareMaps additionally requires instrument_id to match.`);
   kv("ident",{"items (N) / latent dim (D)":`${R.n} / ${R.D}`,"keys":`ordinal ${R.n}/${R.n} injective; ${new Set(R.keys.map(k=>k.hash)).size} distinct content hashes`,"measurement classes":`${R.classes.count} distinct ${R.d}-bit vectors (largest ${R.classes.largest})`,"pairs unresolvable by measurement":R.classes.unresolvable_pairs});
@@ -153,12 +154,12 @@ function draw(R){if(!R)return;const cv=$("sphere"),g=cv.getContext("2d"),W=cv.wi
  g.strokeStyle="#1e2440";g.lineWidth=1;g.beginPath();g.arc(cx,cy,Rr,0,2*Math.PI);g.stroke();
  for(let lat=-60;lat<=60;lat+=30){g.beginPath();for(let a=0;a<=360;a+=4){const th=lat*Math.PI/180,ph=a*Math.PI/180;const[px,py,pz]=S([Math.cos(th)*Math.cos(ph),Math.cos(th)*Math.sin(ph),Math.sin(th)]);if(pz<0){g.moveTo(px,py);continue}a===0?g.moveTo(px,py):g.lineTo(px,py)}g.stroke()}
  for(const a of R.atoms){if(a.flip<0)continue;const[x1,y1,z1]=S(R.pts[a.i]),[x2,y2,z2]=S(a.to);if(z1<0&&z2<0)continue;g.strokeStyle="rgba(60,247,165,0.22)";g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke()}
- const front=[];R.pts.forEach((p,i)=>{const[x,y,z]=S(p);screen.push([x,y,z,i]);const h=200+120*(R.k[i]/R.d);g.fillStyle=z<0?`hsla(${h},70%,55%,0.18)`:`hsla(${h},80%,60%,0.9)`;g.beginPath();g.arc(x,y,z<0?1.6:(i===hover?4.5:2.6),0,2*Math.PI);g.fill();if(z>=0)front.push([x,y,z,i])});
+ const front=[];R.pts.forEach((p,i)=>{const[x,y,z]=S(p);screen.push([x,y,z,i]);const ov=(window.rcompOn&&window.rcompFill)?window.rcompFill[i]:null;if(ov){g.fillStyle=z<0?ov.back:ov.front}else{const h=200+120*(R.k[i]/R.d);g.fillStyle=z<0?`hsla(${h},70%,55%,0.18)`:`hsla(${h},80%,60%,0.9)`}g.beginPath();g.arc(x,y,z<0?1.6:(i===hover?4.5:2.6),0,2*Math.PI);g.fill();if(z>=0)front.push([x,y,z,i])});
  if($("labels").checked){g.font="9px monospace";const taken=[];front.sort((a,b)=>b[2]-a[2]);for(const[x,y,z,i]of front){const lx=x+5,ly=y+3;if(taken.some(([tx,ty])=>Math.abs(tx-lx)<58&&Math.abs(ty-ly)<9))continue;taken.push([lx,ly]);g.fillStyle=`rgba(214,221,230,${0.35+0.55*z})`;g.fillText(labelOf(R,i).slice(0,14),lx,ly)}}
  g.strokeStyle="#DB46F5";g.lineWidth=2;g.beginPath();R.bridge.rungs.forEach((q,i)=>{const[x,y]=S(q);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();R.bridge.rungs.forEach(q=>{const[x,y]=S(q);g.fillStyle="#DB46F5";g.beginPath();g.arc(x,y,2.5,0,2*Math.PI);g.fill()});
  const[px,py]=S(R.pole);poleXY=[px,py];g.strokeStyle="#fff";g.lineWidth=1.5;g.beginPath();g.arc(px,py,6,0,2*Math.PI);g.stroke();g.fillStyle="#fff";g.font="11px monospace";g.fillText("p* (frozen all-ones pole)",px+9,py-6);
  if(hover>=0){const[x,y]=S(R.pts[hover]);g.fillStyle="#fff";g.font="11px monospace";g.fillText(labelOf(R,hover),x+8,y-8)}
- g.fillStyle="#7d8894";g.font="11px monospace";g.fillText("drag to rotate - wheel to zoom - hover a point - hue = k-shell - green = atom delta>=0 - violet = slerp",12,W-10)}
+ g.fillStyle="#7d8894";g.font="11px monospace";g.fillText((window.rcompOn&&window.rcompFill)?"colors = isolation-graph components - white/red = isolates - drag to rotate - wheel to zoom - hover a point":"drag to rotate - wheel to zoom - hover a point - hue = k-shell - green = atom delta>=0 - violet = slerp",12,W-10)}
 (function(){const cv=$("sphere");const pos=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
  cv.addEventListener("pointerdown",e=>{dragging=pos(e);cv.style.cursor="grabbing";cv.setPointerCapture(e.pointerId)});
  cv.addEventListener("pointerup",e=>{dragging=null;cv.style.cursor="grab"});cv.addEventListener("pointerleave",()=>{dragging=null;hover=-1;$("tip").textContent="";draw(last)});
@@ -676,3 +677,368 @@ document.addEventListener("pointermove",e=>{if(gtip.style.display!=="block")retu
 document.addEventListener("pointerout",e=>{if(e.target.closest&&e.target.closest(".gi"))gtip.style.display="none";});
 // fire the src handler once so panel visibility matches the default selection (texts)
 $("src").onchange();
+
+// ===================== round diagnostics (preview only) =====================
+// Seven read-only diagnostics keyed to the current saved map id. Nothing here
+// persists, ranks, scores, or changes any instrument setting.
+
+function diagErr(id,msg){const el=$(id);el.style.display="block";el.innerHTML=`<b>rejected (nothing was sent or saved):</b> ${escapeHtml(msg)}`}
+function diagClear(errId,outId){const e=$(errId);if(e){e.style.display="none";e.innerHTML=""}if(outId){const o=$(outId);if(o)o.innerHTML=""}}
+function needServerMap(){if(lastId===null||lastId===undefined)throw new Error("needs a saved server map id - local synthetic runs have none. Run a server map first.");return lastId}
+async function getJSONStrict(u){const r=await fetch(u);const t=await r.text();let d;try{d=JSON.parse(t)}catch(e){throw new Error(`HTTP ${r.status} - non-JSON response: ${t.slice(0,160)}`)}if(!r.ok)throw new Error(d&&d.error?`HTTP ${r.status}: ${typeof d.error==="object"?d.error.message:d.error}`:`HTTP ${r.status}`);return d}
+
+Object.assign(GLOSSARY,{
+ "tail":"Fixed-margin checkerboard null draws compared to the observed statistic by a two-sided plus-one p-value at the achieved resolution. Exclusion-only verdicts: excluded-from-fixed-margin-null, not-excluded, or null-degenerate. Not a significance claim and not a probability of truth.",
+ "components":"Connected components of the isolation graph (adjacency = chord < 0.095), counted exactly by BFS. A geometric coloring of the frozen frame, not a clustering score and not a quality judgement.",
+ "isolates":"Points with no neighbour within chord 0.095 - each is its own component. Drawn white/red on the sphere. Isolation is a geometric fact of the frozen frame, not a defect verdict.",
+ "fiedler":"lambda2, the algebraic connectivity of the LARGEST component, estimated by float power iteration. The exact rational witness upper-bounds it (Rayleigh-Ritz).",
+ "witness":"R = n*cut(S)/(|S|(n-|S|)) for the Fiedler sign split S: an exact rational Rayleigh-Ritz upper bound on lambda2. If the float estimate exceeds it, the float estimate is wrong - the theorem is not.",
+ "ky fan":"Ky Fan: the frozen frame's two axes explain at most the top-2 eigen sum, so the measured gap is >= 0 exactly. Near zero on the fitting corpus; on a later corpus the gap is how much variance the frozen frame no longer captures. A frame-adequacy reading, not a quality score.",
+ "power floor":"The smallest Holm p this K can attain (family size x 2/(K+1)). When it exceeds alpha, no exclusion is arithmetically reachable at this K; such rows read unresolvable at this K and report the K needed to resolve.",
+ "eigengap":"rel_gap_12 = (lambda1-lambda2)/lambda1: how nearly degenerate the top-2 eigenplane is. Small means rotation within the plane is nearly arbitrary and basis-dependent readouts (the sector index) are unstable. rel_gap_23 is the Davis-Kahan subspace-stability gap. Diagnostic: it licenses nothing.",
+ "atomicity":"How many distinct bit patterns the cloud contains vs its size. Duplicated patterns make binary azimuth partly a function of multiplicity, so the trial reports a deduplicated control alongside; the deduplicated comparison is descriptive only and admits no coordinate.",
+ "rayleigh":"Rayleigh-quotient diagnostics on the isolation graph: exact integer component/isolate counts, a float Fiedler estimate for the largest component, an exact rational Rayleigh-Ritz witness over it, fixed-margin null tails, and the frozen-frame Ky Fan gap. Exclusion-only. Preview only: nothing is persisted and none of it enters ranking, frames or any score.",
+ "calibration reading":"Positive control: a known content change of fixed, untunable size is planted n times and measured by the ordinary preview path on the frozen frame. Verifies the instrument responds to known structure when present; says nothing about your corpus or task quality. No pass verdict, no rate, no z."
+});
+
+// ---- azimuth trial (POST /api/map/azimuth) ----
+$("azrun").onclick=async()=>{
+  diagClear("azerrors","azout");
+  let body;try{const mid=needServerMap();const K=Number($("azK").value);
+    if(!Number.isInteger(K)||K<2||K>400)throw new Error(`K must be an integer in 2..400 (got "${$("azK").value}")`);
+    body={map_id:mid,variant:"binary",K};
+    const raw=String($("azseed").value||"").trim();
+    if(raw!==""){const s=Number(raw);if(!Number.isInteger(s))throw new Error(`null seed must be an integer, or left blank to omit it (got "${raw}")`);body.null_seed=s}
+  }catch(e){diagErr("azerrors",e.message);return}
+  const btn=$("azrun");btn.disabled=true;$("azstatus").textContent=`running azimuth trial (K=${body.K}, two seed families, ~seconds)...`;
+  const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),30000);
+  try{
+    const r=await fetch("/api/map/azimuth",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),signal:ctl.signal});
+    const txt=await r.text();let data;try{data=JSON.parse(txt)}catch(e){throw new Error(`HTTP ${r.status} - non-JSON response: ${txt.slice(0,160)}`)}
+    if(!r.ok)throw new Error(data&&data.error?`HTTP ${r.status}: ${typeof data.error==="object"?data.error.message:data.error}`:`HTTP ${r.status}`);
+    renderAzimuth(data);
+    $("azstatus").textContent=`preview returned - nothing was saved (persisted: ${data.persisted})`;
+  }catch(e){
+    if(e.name==="AbortError")diagErr("azerrors","the azimuth trial timed out after 30 s - it normally takes 1-2 s at K=240. Retry, or lower K.");
+    else if(/HTTP 409/.test(e.message))diagErr("azerrors","this map is a legacy map: no frozen frame, bits or keys stored, so the azimuth trial cannot run on it. Create a new baseline and retry against that id.");
+    else diagErr("azerrors",e.message);
+    $("azstatus").textContent="preview failed";
+  }finally{clearTimeout(t);btn.disabled=false}
+};
+function renderAzimuth(R){
+  const eg=R.placement_eigengap||{},at=R.atomicity||{},m1=at.m1_audit||{},dd=at.deduplicated||{};
+  const rows=Object.keys(R.observed||{}).map(k=>{const a=R.seed_a[k],b=R.seed_b[k];const rep=a&&b?a.verdict===b.verdict:null;
+    const pf=a.power_floor||{},v=a.verdict;
+    const vCell=v==="unresolvable-at-this-K"?`<b>unresolvable at this K</b> <span class="dim">- min attainable Holm p ${num(pf.min_attainable_p_holm,4)} > alpha ${pf.alpha}; exclusion needs K >= ${pf.K_required_for_resolution}</span>`
+      :v==="excluded-after-holm"?'<b>excluded (Holm)</b>'
+      :v==="null-degenerate"?'<b class="bad">null degenerate</b>'
+      :'<span class="dim">not excluded (Holm)</span>';
+    return `<tr><td>${escapeHtml(k)}</td><td>${num(a.observed,4)}</td><td>${num(a.null.median,4)}</td><td>${num(a.null.max,4)}</td><td>${num(a.p_holm,4)}</td><td>${vCell}</td><td class="dim">${rep===null?"n/a":rep?"reproduces":"differs"}</td></tr>`}).join("");
+  $("azout").innerHTML=`<div class="kv">
+    <span class="dim">map / variant / K</span><span>${escapeHtml(String(R.map_id))} / ${escapeHtml(R.variant)} / ${escapeHtml(String(R.K))}</span>
+    <span class="dim">N / d / alpha</span><span>${escapeHtml(String(R.N))} / ${escapeHtml(String(R.d))} / ${escapeHtml(String(R.multiplicity.alpha))}</span>
+    <span class="dim">null seeds (a / b)</span><span>${escapeHtml(String(R.seeds.a))} / ${escapeHtml(String(R.seeds.b))}</span>
+    <span class="dim">family</span><span>${escapeHtml(R.multiplicity.family.join(", "))}</span>
+    <span class="dim">frame / instrument</span><span><code>${escapeHtml(String(R.frame_id))}</code> / <code>${escapeHtml(String(R.instrument_id))}</code></span>
+    <span class="dim">persisted</span><span><b class="ok">false</b> <span class="dim">- read-only trial</span></span></div>
+    <table style="margin-top:6px;font-size:85%"><thead><tr><th>statistic</th><th>observed</th><th>null median</th><th>null max</th><th>Holm p</th><th>verdict</th><th>seed b</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="kv" style="margin-top:8px">
+      <span class="dim">placement eigengap</span><span>rel_gap_12 ${eg.rel_gap_12} / rel_gap_23 ${eg.rel_gap_23} <span class="dim">- small rel_gap_12 means the top-2 eigenplane is nearly degenerate and the sector index reads off an unstable basis; it licenses nothing</span></span>
+      <span class="dim">distinct bit patterns / collisions</span><span>${escapeHtml(String(at.distinct_patterns))} / ${escapeHtml(String(at.collision_count))} (fraction ${num(at.collision_fraction,4)})</span>
+      <span class="dim">m=1 audit</span><span>admitted: false <span class="dim">- ${escapeHtml(String(m1.reason||""))}</span></span>
+      <span class="dim">deduplicated control</span><span>N ${escapeHtml(String(dd.N))}, size-matched: ${escapeHtml(String(dd.size_matched))} <span class="dim">- admitted: false; ${escapeHtml(String(dd.reason||""))}</span></span></div>
+    <div class="wall dim"><b>admission:</b> ${escapeHtml(String(R.admission_note||""))}</div>
+    <div class="wall dim">${escapeHtml(String(R.scope||""))}</div>`;
+}
+
+// ---- rayleigh: isolation graph + sphere component coloring ----
+const RC_ISOLATE={front:"rgba(255,255,255,0.95)",back:"rgba(255,93,108,0.45)"};
+const RC_PALETTE=["#4da3ff","#ffc247","#ff7ad9","#7dfff0","#ffb37d","#5dffd4","#ff5d8f","#ffe45d","#8f9dff","#c0ff5d"];
+const RC_FALLBACK="rgba(122,130,148,0.35)";
+var rcompFill=null,rcompOn=false;
+function buildRcompFill(graph){const comp=graph.component_of;if(!comp)return null;const sizes=new Map();
+  for(const c of comp)sizes.set(c,(sizes.get(c)||0)+1);
+  const multi=[...sizes.keys()].filter(c=>sizes.get(c)>1).sort((a,b)=>sizes.get(b)-sizes.get(a));
+  const slot=new Map(multi.map((c,i)=>[c,i%RC_PALETTE.length]));
+  const rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+  return comp.map(c=>{if(sizes.get(c)===1)return RC_ISOLATE;const sc=slot.has(c)?RC_PALETTE[slot.get(c)]:null;
+    if(!sc)return{front:RC_FALLBACK,back:RC_FALLBACK};const[r,g2,b]=rgb(sc);return{front:`rgba(${r},${g2},${b},0.9)`,back:`rgba(${r},${g2},${b},0.18)`}})}
+function clearRayleighOverlay(){rcompFill=null;rcompOn=false;window.rcompFill=null;window.rcompOn=false;const rb=$("rbyc");rb.style.display="none";rb.textContent="color by rayleigh components"}
+$("rbyc").onclick=()=>{if(!rcompFill)return;rcompOn=!rcompOn;window.rcompOn=rcompOn;$("rbyc").textContent=rcompOn?"hue by k-shell":"color by rayleigh components";draw(last)};
+$("rayrun").onclick=async()=>{
+  diagClear(null);const note=$("rayleighnote");
+  let mid;try{mid=needServerMap()}catch(e){note.innerHTML=`<span class="dim">${escapeHtml(e.message)}</span>`;return}
+  note.textContent="measuring isolation graph, null tails and frame gap...";
+  try{const resp=await postJSONStrict("/api/map/rayleigh",{map_id:mid});renderRayleigh(resp)}
+  catch(e){clearRayleighOverlay();
+    note.innerHTML=/HTTP 409/.test(e.message)?'<div class="wall">legacy map: no frozen frame/bits/points stored for this map id, so there is nothing to overlay. Re-run a texts map to create a new baseline. Not an error in the page.</div>':`<div class="wall bad">rayleigh unavailable: ${escapeHtml(e.message)}</div>`}
+};
+function renderRayleigh(resp){
+  const el=$("rayleigh"),note=$("rayleighnote"),run=$("rayrun");
+  if(!resp||resp.version!=="rayleigh"){el.innerHTML='<div class="wall bad">unrecognised rayleigh response version.</div>';return}
+  const G=resp.graph||{},LC=G.largest_component||{},W=LC.rayleigh_ritz_witness,Q=W&&W.quotient;
+  const okLen=Array.isArray(G.component_of)&&last&&last.pts&&G.component_of.length===last.pts.length;
+  rcompFill=okLen?buildRcompFill(G):null;rcompOn=false;window.rcompFill=rcompFill;window.rcompOn=false;
+  const rb=$("rbyc");if(rcompFill){rb.style.display="inline-block";rb.textContent="color by rayleigh components"}else rb.style.display="none";
+  $("raytip").setAttribute("data-tip",GLOSSARY.rayleigh);
+  const frac=q=>q.den===1?String(q.num):`${q.num}/${q.den} = ${q.value.toFixed(6)}`;
+  kv("rayleigh",{
+    "map id":String(resp.map_id),
+    "components (exact)":`${G.exact.components} (largest ${LC.size})`,
+    "isolates (exact)":G.exact.isolates,
+    "edges (chord < radius)":`${G.edges} at chord < ${G.radius}`,
+    "lambda2 (Fiedler)":LC.fiedler_lambda2===null||LC.fiedler_lambda2===undefined?"n/a (largest component < 2)":String(LC.fiedler_lambda2),
+    "witness R":Q?`${frac(Q)} <span class="dim">(cut ${W.cut_edges}, |S| ${W.subset_size})</span>`:'<span class="dim">none recorded</span>',
+    "witness bound holds":LC.bound_holds===true?'<span class="ok">holds</span>':LC.bound_holds===false?'<span class="bad">violated - the float estimate is wrong, not the theorem</span>':'<span class="dim">no witness</span>',
+    "Ky Fan gap":resp.frame_gap&&resp.frame_gap.available?`${resp.frame_gap.gap} <span class="dim">(share of trace ${resp.frame_gap.gap_share_of_trace})</span>`:'<span class="dim">n/a</span>',
+    "admission":resp.admitted?'<span class="ok">admitted for reporting on this frame</span>':'<b>not admitted</b> <span class="dim">- diagnostic record only</span>',
+    "why_not":resp.admission&&resp.admission.why_not&&resp.admission.why_not.length?resp.admission.why_not.map(escapeHtml).join("; "):'<span class="dim">none - all criteria held</span>'
+  });
+  const tails=resp.null&&resp.null.tails?resp.null.tails:{};
+  el.insertAdjacentHTML("beforeend",["components","isolates","largest","lambda2","edges"].map(k=>{const t=tails[k];
+    return t?`<span class="dim">null tail - ${escapeHtml(k)}</span><span>p ${num(t.p_two_sided,4)} (res ${num(t.p_resolution,4)}) - <b>${escapeHtml(t.verdict)}</b></span>`:""}).join(""));
+  note.innerHTML=`<div class="wall dim">${escapeHtml(String(resp.scope||""))}</div>`;
+  run.style.display="inline-block";
+}
+
+// ---- admission (POST /api/map/admission) ----
+$("admrun").onclick=async()=>{
+  diagClear("admerrors","admout");
+  let mid;try{mid=needServerMap()}catch(e){diagErr("admerrors",e.message);return}
+  const btn=$("admrun");btn.disabled=true;$("admstatus").textContent="running admission - K null chains x 2 seeds per diagnostic; can take a minute on large maps...";
+  try{const resp=await postJSONStrict("/api/map/admission",{map_id:mid});renderAdmission(resp);$("admstatus").textContent=`admission returned - nothing was persisted`}
+  catch(e){diagErr("admerrors",e.message);$("admstatus").textContent="admission failed"}
+  finally{btn.disabled=(lastId===null)}
+};
+function renderAdmission(R){
+  const order=["rayleigh","axis_trial","spectra","radius_profile","azimuth"];
+  const label={rayleigh:"rayleigh (isolation graph)",axis_trial:"axis_trial (per-axis LOO-NN)",spectra:"spectra (S2 Parseval shares)",radius_profile:"radius (I(r) fixed grid)",azimuth:"azimuth (rotation-invariant Z_m)"};
+  const crit=c=>c?Object.entries(c).map(([k,v])=>`<span class="${v===true?"ok":(v===false?"bad":"dim")}">${escapeHtml(k)}: ${v===true?"met":v===false?"MISSED":escapeHtml(String(v))}</span>`).join(" - "):'<span class="dim">none</span>';
+  const matrix=order.map(k=>{const b=R[k]||{};const blockers=b.why_not?b.why_not.map(escapeHtml).join(", "):(b.admission&&b.admission.blocking_reasons)?b.admission.blocking_reasons.map(escapeHtml).join("; "):"-";
+    const cell=b.admitted?'<b class="ok">admitted (reporting)</b>':k==="azimuth"?'<b class="bad">not admitted (permanent)</b>':'<b class="bad">not admitted on this frame</b>';
+    return `<tr><td>${label[k]}</td><td>${cell}</td><td class="dim">${b.admitted?"":blockers}</td><td>${crit(b.criteria)}</td></tr>`}).join("");
+  const seeds=R.seeds||{};
+  $("admout").innerHTML=`<div class="kv">
+      <span class="dim">map / frame / instrument</span><span>${escapeHtml(String(R.map_id))} / <code>${escapeHtml(String(R.frame_id))}</code> / <code>${escapeHtml(String(R.instrument_id))}</code></span>
+      <span class="dim">K (server) / seeds a, b</span><span>${escapeHtml(String(R.K))} / ${escapeHtml(String(seeds.a))}, ${escapeHtml(String(seeds.b))}</span>
+      <span class="dim">persisted</span><span><b class="ok">false</b></span></div>
+    <table style="margin-top:6px;font-size:85%"><thead><tr><th>diagnostic</th><th>status</th><th>blocked by</th><th>criteria</th></tr></thead><tbody>${matrix}</tbody></table>
+    ${(R.permanently_not_admitted||[]).length?`<div class="wall dim"><b>excluded by construction on every frame:</b> <ul style="margin:4px 0 0;padding-left:18px">${R.permanently_not_admitted.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul></div>`:""}
+    <div class="wall dim">${escapeHtml(String(R.scope||""))}</div>`;
+}
+
+// ---- axis redundancy trial (POST /api/map/axis-redundancy) ----
+$("axrun").onclick=async()=>{
+  diagClear("arerrors","axisredundancy");
+  const idRaw=String($("arid").value||"").trim();
+  if(idRaw===""){diagErr("arerrors","no map id - the trial reads a stored map's frozen bits. Run a texts map, let it save, then run the trial.");return}
+  const body={map_id:Number(idRaw)};
+  const kv=String($("arK").value||"").trim();
+  if(kv!==""){const K=Number(kv);if(!Number.isInteger(K)||K<2||K>40){diagErr("arerrors",`K must be an integer in 2..40 (got "${kv}")`);return}body.K=K}
+  const sv=String($("arseed").value||"").trim();
+  if(sv!==""){const s=Number(sv);if(!Number.isInteger(s)){diagErr("arerrors",`null_seed must be an integer (got "${sv}")`);return}body.null_seed=s}
+  const btn=$("axrun");btn.disabled=true;$("arstatus").textContent=`running axis trial on map id ${body.map_id}...`;
+  try{const resp=await postJSONStrict("/api/map/axis-redundancy",body);renderAxisTrial(resp);$("arstatus").textContent="trial returned - nothing was saved"}
+  catch(e){diagErr("arerrors",e.message);$("arstatus").textContent="trial failed"}finally{btn.disabled=false}
+};
+function renderAxisTrial(T){
+  const out=$("axisredundancy");
+  if(!T||T.trial!==true||T.version!=="axis-trial"){out.innerHTML=`<div class="wall bad">unrecognised axis-trial response - displayed nothing rather than guessing.</div>`;return}
+  const N=T.N;
+  const pct=v=>(Number.isFinite(Number(v))&&N>0)?Math.max(0,Math.min(100,100*Number(v)/N)):null;
+  const rowBar=a=>{const lo=pct(a.null.min),hi=pct(a.null.max),mg=pct(a.margin_baseline_hits),ob=pct(a.observed_hits);
+    const band=(a.null.degenerate||lo===null||hi===null)?"":`<span class="arnullband" style="left:${lo.toFixed(2)}%;width:${Math.max(0.4,hi-lo).toFixed(2)}%"></span>`;
+    const m=mg===null?"":`<span class="armargin" style="left:${mg.toFixed(2)}%"></span>`;
+    const o=ob===null?"":`<span class="arobs" style="left:${ob.toFixed(2)}%"></span>`;
+    return `<div class="arbar">${band}${m}${o}</div>`};
+  const vCls=v=>String(v).startsWith("null-degenerate")?"bad":(v==="excluded-from-fixed-margin-null"?"":"dim");
+  const zStr=z=>(z===null||z===undefined)?"void":String(z);
+  const rows=T.axes.map(a=>`<tr><td>${escapeHtml(String(a.axis))}</td><td>${rowBar(a)}</td>
+      <td><b>${escapeHtml(String(a.observed_hits))}</b> <span class="dim">/ base ${escapeHtml(String(a.margin_baseline_hits))}</span></td>
+      <td class="dim">${escapeHtml(String(a.null.mean))} &plusmn; ${escapeHtml(String(a.null.sd))}</td>
+      <td class="${a.z_descriptive===null?"bad dim":""}">${escapeHtml(zStr(a.z_descriptive))}</td>
+      <td class="dim">${escapeHtml(String(a.p_two_sided))} (res ${escapeHtml(String(a.p_resolution))})</td>
+      <td class="dim">${escapeHtml(a.direction===null?"-":String(a.direction))}</td>
+      <td class="${vCls(a.verdict)}">${escapeHtml(String(a.verdict))}</td></tr>`).join("");
+  const mp=T.margins_preserved||{rows:false,columns:false};
+  out.innerHTML=`<div class="kv">
+      <span class="dim">map / frame / instrument</span><span>${escapeHtml(String(T.map_id))} / <code>${escapeHtml(String(T.frame_id))}</code> / <code>${escapeHtml(String(T.instrument_id))}</code></span>
+      <span class="dim">statistic / N / d / K</span><span>${escapeHtml(String(T.statistic))}, N=${escapeHtml(String(T.N))}, d=${escapeHtml(String(T.d))} axes, K=${escapeHtml(String(T.K))} draws</span>
+      <span class="dim">margins preserved</span><span class="${mp.rows&&mp.columns?"ok":"bad"}">rows ${mp.rows?"ok":"VIOLATED"}, columns ${mp.columns?"ok":"VIOLATED"}</span>
+      <span class="dim">counts</span><span>${escapeHtml(JSON.stringify(T.counts||{}))}</span>
+      <span class="dim">persisted</span><span><b class="ok">${escapeHtml(String(T.persisted))}</b></span></div>
+    <table style="margin-top:6px;font-size:85%"><thead><tr><th>axis</th><th>hits on 0..N</th><th>observed / margin base</th><th>null mean &plusmn; sd</th><th>z (descriptive)</th><th>p two-sided (res)</th><th>direction</th><th>verdict</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="arlegend">bar scale 0..N hits - violet tick = observed - grey band = null min..max - thin tick = fixed-margin majority baseline - z "void" = degenerate null - verdict colour is emphasis, not a score</div>
+    ${T.counts&&T.counts.null_degenerate>0?`<div class="wall bad">${escapeHtml(String(T.counts.null_degenerate))} axis(es) had a degenerate null: every K draw produced the same hit count, so no trial is possible on those axes on this corpus. A finding about the corpus, not an error.</div>`:""}
+    <div class="wall dim">${escapeHtml(String(T.reading||""))}</div>
+    ${T.admission?`<div class="wall dim"><b>admission: ${escapeHtml(String(T.admission.admitted))}</b> - ${escapeHtml(String(T.admission_note||""))}</div>`:""}
+    <div class="wall dim">${escapeHtml(String(T.scope||""))}</div>`;
+}
+
+// ---- consistency check (POST /api/map/consistency) ----
+function parseVariants(){
+  let cur=null;const blocks=[];
+  for(const line of $("consvariants").value.split("\n")){
+    const m=line.match(/^label:\s*(.+)\s*$/i);
+    if(m){if(cur)blocks.push(cur);cur={label:m[1].trim(),lines:[]}}
+    else if(cur)cur.lines.push(line)}
+  if(cur)blocks.push(cur);
+  const vs=blocks.map(b=>({label:b.label,text:b.lines.join("\n").trim()})).filter(v=>v.label!==""||v.text!=="");
+  if(!vs.length)throw new Error("at least one variant is required: add a block whose first line is 'label: short-name' followed by the replacement text");
+  if(vs.length>3)throw new Error(`at most 3 variants are measured per check (got ${vs.length})`);
+  const seen=new Set();
+  for(const v of vs){
+    if(!v.label)throw new Error("every variant needs a 'label: short-name' first line");
+    if(v.label.toLowerCase()==="primary")throw new Error("label 'primary' is reserved for the as-drafted candidate");
+    if(v.label.length>40)throw new Error(`variant label "${v.label.slice(0,10)}..." exceeds 40 chars`);
+    if(!v.text)throw new Error(`variant "${v.label}" has empty text - the replacement document must be non-empty`);
+    if(seen.has(v.label))throw new Error(`duplicate variant label "${v.label}"`);seen.add(v.label)}
+  return vs;
+}
+function buildConsistencyBody(){const body=buildCandidateBody();body.variants=parseVariants();return body}
+$("consrun").onclick=async()=>{
+  diagClear("conserrors","consout");
+  let body;try{body=buildConsistencyBody()}catch(e){diagErr("conserrors",e.message);return}
+  const n=body.variants.length;const btn=$("consrun");btn.disabled=true;const t0=Date.now();
+  $("consstatus").textContent=`running: ${n+1} preview pass(es) (primary + ${n} variant(s)) through the embedding path - nothing is saved...`;
+  const timer=setInterval(()=>{$("consstatus").textContent=`running: ${n+1} preview pass(es) - nothing is saved... (elapsed ${Math.round((Date.now()-t0)/1000)}s)`},1000);
+  try{const resp=await postJSONStrict("/api/map/consistency",body);renderConsistency(resp);$("consstatus").textContent="consistency returned - nothing was saved, committed or published"}
+  catch(e){diagErr("conserrors",e.message);$("consstatus").textContent="consistency check failed"}
+  finally{clearInterval(timer);btn.disabled=false}
+};
+function renderConsistency(resp){
+  const C=resp.consistency||{},ms=resp.measurements||[];
+  const primarySha=ms.length?ms[0].sha256:null;
+  const signWord=s=>({positive:"positive",negative:"negative",zero:"zero",none:"undetermined"}[s]||String(s));
+  const vTxt=C.all_same_sign?`sign stable - all ${C.n_measurements} measurement(s) agree on "${(C.sign_set||[])[0]}"`:`sign varies (${(C.sign_set||[]).map(signWord).join(" / ")}) - the geometric reading of this edit is perturbation-sensitive and undetermined for planning (not evidence against the edit)`;
+  const rows=ms.map(m=>{const ident=primarySha&&m.sha256===primarySha&&m.label!=="primary";
+    const what=m.noop?"equals baseline source (nothing moved)":ident?"byte-identical to the primary (agrees by construction)":(resp.target&&resp.target.action==="add")?"replaces the added document":"replaces the target document's text";
+    return `<tr><td><b>${escapeHtml(String(m.label))}</b></td><td class="dim"><code>${escapeHtml(String(m.sha256||"").slice(0,8))}</code></td><td class="dim">${escapeHtml(what)}</td>
+      <td>${escapeHtml(String(m.isolated_delta===null?"n/a":m.isolated_delta))}</td>
+      <td class="${m.isolated_sign==="none"?"dim":""}">${escapeHtml(signWord(m.isolated_sign))}</td>
+      <td>${escapeHtml(String(m.bits_changed===undefined||m.bits_changed===null?"n/a":m.bits_changed))}</td>
+      <td class="dim">${m.displacement_geodesic==null?"n/a (ADD)":escapeHtml(num(m.displacement_geodesic,4))}</td></tr>`}).join("");
+  $("consout").innerHTML=`<div class="kv">
+      <span class="dim">verdict</span><span class="${C.all_same_sign?"ok":"bad"}"><b>${escapeHtml(vTxt)}</b></span>
+      <span class="dim">measurements / distinct texts</span><span>${escapeHtml(String(C.n_measurements))} / ${escapeHtml(String(C.n_distinct_texts))}</span>
+      <span class="dim">isolated delta range</span><span>${escapeHtml(String(C.delta_min))} ... ${escapeHtml(String(C.delta_max))} (spread ${escapeHtml(String(C.delta_spread))})</span>
+      <span class="dim">rows where nothing moved</span><span>${escapeHtml(String(C.noop_count===undefined?0:C.noop_count))}</span>
+      <span class="dim">persisted</span><span><b class="ok">false</b> <span class="dim">- only the embedding cache may gain entries</span></span>
+      <span class="dim">task_verdict</span><span><b>${escapeHtml(String(resp.task_verdict))}</b></span></div>
+    <table style="margin-top:8px;font-size:85%"><thead><tr><th>measurement</th><th>text sha</th><th>what it changed</th><th>isolated delta</th><th>sign</th><th>bits moved</th><th>target displacement</th></tr></thead><tbody>${rows}</tbody></table>
+    ${C.note?`<div class="wall dim">${escapeHtml(String(C.note))}</div>`:""}
+    <div class="wall dim">${escapeHtml(String(C.reading||""))}</div>
+    <div class="wall"><b>this measures sign stability, not quality.</b> Agreement across the phrasings you supplied does not authorize keeping; disagreement does not authorize reverting. The independent task check still governs.</div>
+    <div class="wall dim">${escapeHtml(String(resp.scope||""))}</div>`;
+}
+
+// ---- positive control (POST /api/map/control) ----
+async function postControl(body){let r,txt;
+  for(let a=1;a<=3;a++){r=await fetch("/api/map/control",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});txt=await r.text();
+    if(r.status>=500&&a<3){$("ctlstatus").textContent=`server error (HTTP ${r.status}) - retry ${a}/2...`;await new Promise(res=>setTimeout(res,1200*a));continue}
+    break}
+  let data;try{data=JSON.parse(txt)}catch(e){throw new Error(`HTTP ${r.status} - non-JSON response: ${txt.slice(0,160)}`)}
+  if(!r.ok){const err=new Error(`HTTP ${r.status}: ${data&&data.error?(typeof data.error==="object"?data.error.message:data.error):""}`);err.payload=data&&data.error?data.error:null;throw err}
+  return data}
+$("ctlrun").onclick=async()=>{
+  diagClear("ctlerrors","ctlout");
+  if(!baselineSnapshot){diagErr("ctlerrors","needs a frozen baseline first: run a texts map, let it save, then press \"use as baseline\".");return}
+  const body={baseline_id:baselineSnapshot.id,texts:baselineSnapshot.texts.slice(),names:baselineSnapshot.names.slice()};
+  const n=Number($("ctln").value);
+  if(!Number.isInteger(n)||n<2||n>6){diagErr("ctlerrors",`n must be an integer in 2..6 (got "${$("ctln").value}")`);return}
+  if(n!==4)body.n_controls=n;
+  const sv=String($("ctlseed").value).trim();
+  if(sv!==""){const sd=Number(sv);if(!Number.isInteger(sd)){diagErr("ctlerrors","seed must be an integer, or left blank");return}if(sd!==20260917)body.control_seed=sd}
+  const btn=$("ctlrun");btn.disabled=true;
+  $("ctlstatus").textContent=`planting ${body.n_controls||4} synthetic splices and measuring each on frozen baseline ${body.baseline_id} (server-side; nothing is persisted)...`;
+  try{const resp=await postControl(body);renderControl(resp);$("ctlstatus").textContent="control returned - nothing was saved, committed or published"}
+  catch(e){renderCtlError(e);$("ctlstatus").textContent="control failed"}
+  finally{btn.disabled=!baselineSnapshot}
+};
+function renderCtlError(e){
+  const msg=String(e&&e.message||e),m=msg.match(/^HTTP (\d+)/),st=m?Number(m[1]):0,p=e&&e.payload;
+  let head=escapeHtml(msg.replace(/^HTTP \d+:?\s*/,""));
+  if(st===404)head="baseline not found on the server - it may have been deleted. Re-run the texts map and press \"use as baseline\" again.";
+  else if(st===409&&p&&(p.missing_count||p.added_count||p.changed_count))head=`the stored baseline no longer matches the frozen snapshot - a control on a drifted corpus is not a control. Missing: ${(p.missing_names||[]).join(", ")||"none"}. Added: ${(p.added_names||[]).join(", ")||"none"}. Changed: ${(p.changed_names||[]).join(", ")||"none"}. Re-run the texts map and re-freeze.`;
+  diagErr("ctlerrors",head);
+}
+function renderControl(R){
+  if(!R||R.control!==true){diagErr("ctlerrors","response is not a control envelope (control:true missing) - refusing to render");return}
+  const S=R.summary||{},meas=S.n_measured||0;
+  const detected=(R.controls||[]).filter(c=>!c.degenerate&&(c.bits_changed>0||(c.displacement_geodesic||0)>0)).length;
+  const silent=S.quantization_silent_count!=null?S.quantization_silent_count:(R.controls||[]).filter(c=>c.quantization_silent).length;
+  let reading,cls;
+  if(meas===0){reading=`no controls were measurable (all ${S.n_degenerate} degenerate) - a finding to inspect, not a failure of your corpus`;cls="bad"}
+  else if(detected===meas){reading=`instrument responded to all ${detected} of ${meas} planted controls${silent?` (${silent} quantization-silent)`:""}`;cls="ok"}
+  else if(detected>0){reading=`instrument responded to ${detected} of ${meas} planted controls; ${silent} quantization-silent (splice landed inside a quantization bin - reported, not hidden)`;cls=""}
+  else{reading=`instrument responded to 0 of ${meas} planted controls; all ${silent} quantization-silent - a detection-sensitivity finding, not a pass`;cls="bad"}
+  const iso=S.isolated_delta||{};
+  const fmtQ=q=>q&&q.n?`min ${num(q.min,4)}, median ${num(q.median,4)}, max ${num(q.max,4)} (n=${q.n})`:"no finite values (n=0)";
+  const br=R.baseline_reference||{},nr=R.no_change_reference||{};
+  $("ctlout").innerHTML=`<div class="kv">
+    <span class="dim">calibration reading</span><span><b class="${cls}">${escapeHtml(reading)}</b> <span class="dim">(client-derived: responded = bits changed or point moved; the server returns counts only)</span></span>
+    <span class="dim">planted vs detected</span><span><b>${detected} detected</b> of <b>${meas}</b> planted (requested ${escapeHtml(String(S.n_requested))}, degenerate ${escapeHtml(String(S.n_degenerate))})</span>
+    <span class="dim">recipe (fixed)</span><span>${escapeHtml(String(R.recipe&&R.recipe.generator))} - splice_fraction ${escapeHtml(String(R.recipe&&R.recipe.splice_fraction))}, seed ${escapeHtml(String(R.recipe&&R.recipe.control_seed))} <span class="dim">- not caller-tunable</span></span>
+    <span class="dim">baseline</span><span>map id <b>${escapeHtml(String(R.baseline_id))}</b> - ${escapeHtml(String(br.n))} docs, isolated ${escapeHtml(String(br.isolated))}</span>
+    <span class="dim">frame / instrument</span><span><code>${escapeHtml(String(R.frame_id))}</code> / <code>${escapeHtml(String(R.instrument_id))}</code> <span class="dim">- comparable only on both matching</span></span>
+    <span class="dim">isolated delta (sign counts)</span><span>${escapeHtml(String(iso.negative))} negative / ${escapeHtml(String(iso.zero))} zero / ${escapeHtml(String(iso.positive))} positive (n=${escapeHtml(String(iso.n))})</span>
+    <span class="dim">displacement (geodesic)</span><span>${fmtQ(S.displacement_geodesic)}</span>
+    <span class="dim">no-change reference</span><span>identity: isolated_delta ${escapeHtml(String(nr.isolated_delta))}, displacement ${escapeHtml(String(nr.displacement_geodesic))} <span class="dim">- a byte-identical CHANGE moves nothing on the frozen frame</span></span>
+    <span class="dim">persisted / side effects</span><span><b class="ok">${escapeHtml(String(R.persisted))}</b> - map storage false, repository false, vectorize false, embedding cache ${R.side_effects&&R.side_effects.embedding_cache?"true":"false"}</span>
+    <span class="dim">task_verdict</span><span><b>${escapeHtml(String(R.task_verdict))}</b></span></div>
+    <div class="wall"><b>what this does and does not say:</b> this positive control verifies that the frozen instrument detects known structure when it is present by construction. It says nothing about your corpus, about whether any real edit improves the underlying task, and it is never a reason to keep, revert or delete a document.</div>
+    <div class="wall dim">${escapeHtml(String(R.scope||""))}</div>`;
+}
+
+// ---- outcome ledger (GET /api/outcomes?frame_id=..., read-only) ----
+$("outrun").onclick=async()=>{
+  diagClear("outerrors");
+  const el=$("outcomes");
+  if(!last||!last.frame_id){diagErr("outerrors","this map has no frozen frame (a legacy stored map or a pre-frame run). The ledger is frame-scoped, so there is nothing to read for it. Create a new baseline map.");return}
+  $("outstatus").textContent="reading ledger...";
+  try{const j=await getJSONStrict("/api/outcomes?frame_id="+encodeURIComponent(String(last.frame_id)));renderOutcomes(j);$("outstatus").textContent=""}
+  catch(e){diagErr("outerrors",e.message);$("outstatus").textContent="ledger read failed"}
+};
+function renderOutcomes(j){
+  const el=$("outcomes");
+  const rows=Array.isArray(j.rows)?j.rows:[];
+  const c=j.contingency||{};
+  const ev=r=>{const p=[`baseline <code>#${escapeHtml(String(r.baseline_id))}</code>`];
+    if(r.after_id!=null)p.push(`after <code>#${escapeHtml(String(r.after_id))}</code>`);
+    if(r.supersedes!=null)p.push(`supersedes <code>#${escapeHtml(String(r.supersedes))}</code>`);return p.join(" &middot; ")};
+  const head=`<div class="kv">
+      <span class="dim">frame_id filter</span><span><code>${escapeHtml(String(j.frame_id))}</code> <span class="dim">- a chained round spreads its rows over many baseline ids on one frozen frame; this filter gathers the whole round</span></span>
+      <span class="dim">rows shown / effective / pending / superseded</span><span>${escapeHtml(String(rows.length))}${j.truncated?" <b>(truncated)</b>":""} / ${escapeHtml(String(c.n_effective))} / ${escapeHtml(String(c.n_pending))} / ${escapeHtml(String(c.n_superseded))}</span>
+      <span class="dim">sign-exact predictions</span><span>${escapeHtml(String(c.sign_exact_count))} of ${escapeHtml(String(c.n_sign_comparable))} comparable</span>
+      <span class="dim">by verdict</span><span>${Object.entries(c.by_verdict||{}).map(([k,v])=>`${escapeHtml(k)} ${escapeHtml(String(v))}`).join(", ")}</span>
+      <span class="dim">append-only</span><span>${j.append_only?"yes":"unknown"} <span class="dim">- corrections are new rows with supersedes, written by task runs</span></span></div>`;
+  const table=rows.length?`<table style="margin-top:6px;font-size:85%"><thead><tr><th>recorded</th><th>task</th><th>verdict</th><th>prediction &rarr; observed</th><th>evidence</th></tr></thead><tbody>${
+    rows.map(r=>{const v=r.task_check?r.task_check.verdict:"(malformed row)";
+      const cls=v==="kept"?"ok":(v==="reverted"||v==="declined")?"bad":"dim";
+      const by=r.task_check&&r.task_check.verifier?` <span class="dim">by ${escapeHtml(r.task_check.verifier)}</span>`:"";
+      const se=r.sign_exact===true?' <span class="ok">sign match</span>':r.sign_exact===false?' <span class="bad">sign mismatch</span>':"";
+      const signCell=s=>s==="none"||s===null||s===undefined?'<span class="dim">none</span>':escapeHtml(String(s));
+      return `<tr><td class="dim">${escapeHtml(String(r.created_at||"").replace("T"," ").slice(0,19))}</td>
+        <td>${escapeHtml(String((r.target&&r.target.action||"?").toUpperCase()))} <code>${escapeHtml(String(r.target&&r.target.name||""))}</code>${r.preregistered?' <span class="badge">preregistered</span>':""}</td>
+        <td><span class="${cls}"><b>${escapeHtml(v)}</b></span>${by}${r.task_check&&r.task_check.notes?`<div class="dim" style="font-size:90%">${escapeHtml(r.task_check.notes)}</div>`:""}</td>
+        <td>${signCell(r.predicted_sign)} &rarr; ${signCell(r.observed_sign)}${se}</td>
+        <td class="dim">${ev(r)}</td></tr>`}).join("")}</tbody></table>`
+    :'<div class="wall dim" style="margin-top:6px">no ledger entries for this frame yet - an empty ledger is a gap in the record, not evidence about task quality.</div>';
+  el.innerHTML=head+table+`<div class="wall dim">${escapeHtml(String(j.scope||""))}</div>`;
+}
+
+// ---- shared reset on every map render + initial state ----
+function resetDiags(){
+  clearRayleighOverlay();
+  ["azout","admout","axisredundancy","consout","ctlout"].forEach(id=>{const el=$(id);if(el)el.innerHTML=""});
+  ["azerrors","admerrors","arerrors","conserrors","ctlerrors","outerrors"].forEach(id=>{const el=$(id);if(el){el.style.display="none";el.innerHTML=""}});
+  ["azstatus","admstatus","arstatus","consstatus","ctlstatus","outstatus"].forEach(id=>{const el=$(id);if(el)el.textContent=""});
+  $("admrun").disabled=(lastId===null);
+  $("rayrun").style.display=lastId===null?"none":"inline-block";
+  $("arid").value=(lastId===null||lastId===undefined)?"":lastId;
+  $("outcomes").innerHTML='<span class="dim">press "read ledger" to load the frame-scoped ledger</span>';
+}
+// mirror the frozen-baseline state into the consistency card + gate the control button
+const _rbs=renderBaselineState;
+renderBaselineState=function(msg,isError){_rbs(msg,isError);const cb=$("consbaseline");if(cb){const el=$("candbaseline");cb.innerHTML=el.innerHTML;cb.className=el.className}const ctl=$("ctlrun");if(ctl)ctl.disabled=!baselineSnapshot};
+renderBaselineState(null,false);

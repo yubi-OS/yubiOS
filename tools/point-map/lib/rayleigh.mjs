@@ -95,6 +95,7 @@ export function graphRayleigh(map, opts = {}) {
     exact: { components: c.count, isolates: c.isolates, nullity_identity: "nullity(L) = #components (kernel = span of component indicators); every isolated vertex is one component", component_sizes_sorted: c.sizes.slice().sort((a, b) => b - a).slice(0, 12), quadratic_form_of_constant: laplacianQuadratic(g.edges, new Array(g.n).fill(1)) },
     largest_component: { size: largest.length, fiedler_lambda2: f.lambda2 === null ? null : +f.lambda2.toFixed(6), power_iterations: f.iters, sign_split: f.vector_sign_split, rayleigh_ritz_witness: witness ? { subset_size: witness.size, cut_edges: witness.cut, quotient: witness.quotient, identity: witness.identity } : null, bound_holds: bound_ok, bound_note: "λ₂(largest) ≤ R(centered indicator of the Fiedler sign cut) is an exact consequence of Rayleigh–Ritz; a violation would mean the float estimate is wrong, not that the theorem is" },
     isolate_names: names.filter((_, i) => g.degrees[i] === 0).slice(0, 64),
+    component_of: c.comp, // per-item isolation-graph component id, index-aligned with map.names/keys/pts (for preview-only UI overlays)
   };
 }
 
