@@ -1,4 +1,5 @@
 # Post-Quantum TLS — X25519MLKEM768 Adoption Status
+
 _Refreshed: 2026-07-23 (supersedes refs/archive-cloudflare-pq-research.md, originally researched 2026-06-23)_
 
 ## 2026-07-23 status update
@@ -18,11 +19,12 @@ _Refreshed: 2026-07-23 (supersedes refs/archive-cloudflare-pq-research.md, origi
 | X25519Kyber768Draft00 | `0x6399` | Obsolete |
 | ~~X25519Kyber512Draft00~~ | ~~`0xfe30`~~ | Removed |
 
-Standard: https://datatracker.ietf.org/doc/draft-kwiatkowski-tls-ecdhe-mlkem
+Standard: RFC 10024 (https://www.rfc-editor.org/rfc/rfc10024.html), published from draft-kwiatkowski-tls-ecdhe-mlkem
 
 ### What is X25519MLKEM768?
 
 Hybrid KEM combining:
+
 - **X25519** — classical ECDH (for classical adversaries)
 - **ML-KEM-768** (CRYSTALS-Kyber Level 3) — lattice-based KEM (for quantum adversaries)
 
@@ -83,3 +85,29 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Immutability coverage
 
 This document upholds the yubiOS immutability layer — composefs repository, dm-verity root hash, ostree deployment, read-only / append-only semantics, sealed UKI / measured boot. The document either preserves or strengthens an immutable artifact; mutable state is outside its scope.
+
+## Refresh: 2026-09-29
+
+Append-mostly refresh. Existing 2026-07-23 analysis unchanged except two Cloudflare adoption figures updated in place (direct first-party evidence) and the standard line updated from draft to published RFC. No material change to the OpenSSL, Go, or NIST bullets was found.
+
+What changed since 2026-07-23:
+
+- The X25519MLKEM768 / SecP256r1MLKEM768 / SecP384r1MLKEM1024 draft (draft-kwiatkowski-tls-ecdhe-mlkem) is now published as **RFC 10024**, "Post-Quantum Traditional (PQ/T) Hybrid Key Agreement Mechanisms for TLS 1.3", IETF Standards Track, authors K. Kwiatkowski (PQShield) and P. Kampanakis (AWS). Verified directly against https://www.rfc-editor.org/rfc/rfc10024.html. (noul 0.89 via Cloudflare first-party citation, RFC confirmed 200.)
+- Cloudflare client-side adoption rose: **about 70% of browser-generated traffic hitting Cloudflare's network** is protected with hybrid ML-KEM (up from >60% by Feb 2026). Source: https://blog.cloudflare.com/post-quantum-visibility/ (2026-09-29). (noul 0.89)
+- Cloudflare origin-side adoption rose: **about 15% of origins Cloudflare connects to use hybrid ML-KEM** (up from ~10% of customer origins in early 2026). Source: https://blog.cloudflare.com/post-quantum-visibility/ (2026-09-29). (noul 0.89)
+- Cloudflare shipped **per-domain PQ key-exchange visibility**: TLS Key Exchange cards in HTTP Traffic Analytics, plus ClientTLSKeyExchangeGroup and OriginTLSKeyExchangeGroup fields in Logpush / Log Explorer, letting customers audit per-connection PQ posture and compliance against 2030 quantum-readiness deadlines. Source: https://blog.cloudflare.com/post-quantum-visibility/ (2026-09-29). (noul 0.89)
+- Cloudflare still targets **2029 for full PQ security**; the 2026-07-23 doc claim is reaffirmed, and the products matrix (https://developers.cloudflare.com/ssl/post-quantum-cryptography/pqc-cloudflare-products/, updated 2026-09-16) stresses that a Cloudflare-side PQ checkmark delivers end-to-end PQ only when the peer also supports PQ. (noul 0.80 / 0.87)
+- Google Cloud published a PQ roadmap (2026-08-11) that includes **quantum-confidential TLS 1.3 handshakes for Google Cloud services and configured load balancers**. Source: https://cloud.google.com/blog/products/identity-security/pqc-in-plaintext-google-clouds-post-quantum-cryptography-roadmap. (noul 0.76)
+- ACM news piece (2026-09-14, search-snippet only: direct fetch returned HTTP 403) reports every major deployment selected the same hybrid construction, X25519MLKEM768, and frames a **49.22% share of the top million domains** as "concentration, not adoption". Treat as secondary reporting; the underlying primary dataset was not directly retrievable. Source: https://cacm.acm.org/news/post-quantum-tls-finished-the-easy-half/. (noul 0.28)
+
+### Sources considered
+
+- https://blog.cloudflare.com/post-quantum-visibility/ — noul 0.89 — cited (client ~70%, origin ~15%, per-domain visibility, 2029 target reaffirmation)
+- https://developers.cloudflare.com/ssl/post-quantum-cryptography/pqc-cloudflare-products/ — noul 0.87 — cited (peer-support requirement)
+- https://blog.cloudflare.com/post-quantum-roadmap/ — noul 0.80 — cited (2029 target reaffirmation)
+- https://cloud.google.com/blog/products/identity-security/pqc-in-plaintext-google-clouds-post-quantum-cryptography-roadmap — noul 0.76 — cited (Google Cloud quantum-confidential TLS 1.3 roadmap)
+- https://www.f5.com/labs/articles/2026-state-of-pqc-on-the-web — noul 0.40 — not cited (snippet only; report not directly fetched this pass)
+- https://cacm.acm.org/news/post-quantum-tls-finished-the-easy-half/ — noul 0.28 — cited with caveat (snippet only, HTTP 403 on direct fetch)
+- https://www.wiz.io/blog/state-of-post-quantum-cryptography — noul 0.25 — not cited (snippet only)
+- https://shattered.io/ml-kem-vs-x25519-tls-1-3-2026/ — noul 0.17 — not cited (marketing/aggregator)
+- https://technologychecker.io/blog/http-protocol-adoption — noul 0.08 — not cited (off-topic HTTP/3 aggregator)
