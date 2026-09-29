@@ -92,3 +92,40 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 **Verdict**: REVISE — context-dependent
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.8429, Δ=+0.4201) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## Refresh: 2026-09-29
+
+Deep-research refresh via searXNG dig plus primary-source verification against the GitHub API and the v262 NEWS file. One material change found; the rest of the snapshot stands.
+
+### What changed upstream since 2026-07-21
+
+- systemd v262 shipped: final tagged 2026-09-22 13:19 UTC ([release](https://github.com/systemd/systemd/releases/tag/v262)), after v262-rc3 on 2026-09-15 ([release](https://github.com/systemd/systemd/releases/tag/v262-rc3)). Quality weight: 0.92 (noul). The v262 milestone closed later than the 2026-09-17 date this doc recorded as planning state; the doc already labeled those dates as non-guarantees, so this confirms rather than contradicts.
+- The v262 [NEWS](https://github.com/systemd/systemd/blob/v262/NEWS) confirms the items this doc tracked as merged: repart and dissect now support DDIs combining Encrypt= with Verity=data (LUKS2 inner, dm-verity outer, shipped exactly as the snapshot's "needs target-image testing" caveat anticipated); TPM2 PIN enrollment hardens PINs with Argon2id with tunable parameters; cryptenroll gained the optional first-boot wizard; FIDO2 prompting now shows remaining PIN attempts; the systemd-sysupdate service/timer rename is in effect; and new TPM-sealed credentials remain unreadable by older systemd, the compatibility gate this doc already called out. Quality weight: 0.92 (noul).
+- New, watchable in v262 NEWS: the experimental systemd-sysupdated D-Bus API is slated for removal in v263, replaced by direct Varlink IPC to systemd-sysupdate with updatectl reworked. yubiOS code touching sysupdate should target Varlink, not D-Bus. Quality weight: 0.92 (noul).
+- Secondary confirmation of the v262 release with the September 22 tag date and three earlier release candidates: [Linux Journal](https://www.linuxjournal.com/content/systemd-262-released-static-pid-1-intel-tdx-tpm-improvements-and-new-container-features). Quality weight: 0.35 (noul).
+- No material change found for mkosi, particleos, composefs, or bootc in this dig: searches returned nothing dated after the 2026-07-21 snapshot for those repos. Their snapshot claims remain accurate as far as this refresh can establish.
+
+### Sources considered
+
+| # | Source | Weight (noul) |
+|---|---|---:|
+| 0 | [Linux Journal: systemd 262 released](https://www.linuxjournal.com/content/systemd-262-released-static-pid-1-intel-tdx-tpm-improvements-and-new-container-features) | 0.35 |
+| 1 | Tux Machines antiX Linux 26.1 release notes | 0.05 |
+| 2 | Qualcomm Snapdragon X2 Linux early developer preview | 0.17 |
+| 3 | aerynOS blog: packaging systemd restructure | 0.13 |
+| 4 | linuxteck: systemd 260 SysV init removal | 0.18 |
+| 5 | Infosecurity Magazine: Ubuntu local root flaw | 0.05 |
+| 6 | [systemd/systemd releases page](https://github.com/systemd/systemd/releases) | 0.92 |
+| 7 | [systemd/systemd repository](https://github.com/systemd/systemd) | 0.68 |
+| 8 | Phoronix: systemd 261-rc3 | 0.46 |
+| 9 | github.com/systemd org page | 0.55 |
+| 10 | helpnetsecurity: systemd 261 release | 0.27 |
+| 11 | Cybernews: systemd birth-date field forks | 0.08 |
+| 12 | r/linux: systemd 261 systemd-sysinstall thread | 0.10 |
+| 13 | Lennart Poettering on Mastodon (v262 tag) | 0.51 |
+| 14 | Phoronix: KDE Linux May 2026 | 0.21 |
+| 15 | mkosi man page (github.com/systemd/mkosi) | 0.80 |
+| 16 | r/systemd subreddit | 0.09 |
+| 17 | pointieststick KDE Linux category | 0.09 |
+
+Weighting performed in one batched DefAPI jev-1.13 call (18 questions, task `tac93b42-80e0-44a8-b520-78af30417d74`). Release facts above were then verified against primary sources: the GitHub Releases API for tag dates and the v262 NEWS file.
