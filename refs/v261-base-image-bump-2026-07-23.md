@@ -75,3 +75,28 @@ Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=
 ## 2026-09-18 drift check (wayfinder round 8, cycle 64)
 
 v261 base image bump record: the bump is historical; the current fedora-bootc digest question is tracked by this round's pin-resolution audit (the pin is stale, 404 on quay); note additive.
+
+## Refresh: 2026-09-29
+
+Method note: the searXNG dig ran 3 queries ("fedora rawhide systemd version 2026", "systemd v262 release date changelog", plus one fallback query "systemd 262 released fedora") and returned zero results on all three; every upstream engine was suspended or timed out. The evidence below comes from direct primary-source fetches instead. Fedora rawhide's `systemd.spec` on src.fedoraproject.org was behind an Anubis bot challenge, so no claim is made here about which systemd version rawhide currently ships. Quality weights are noul probabilities from typesafe/jev-1.13.
+
+Findings (one line of fact + source + weight):
+
+1. systemd v262 released upstream on 2026-09-22; v262-rc3 on 2026-09-15; v261.3 stable patch on 2026-09-10; v260.5 on 2026-09-10. Source: https://api.github.com/repos/systemd/systemd/releases (noul 0.87) and https://github.com/systemd/systemd/releases/tag/v262 (noul 0.90). The doc's v261 anchor stays accurate; v261.3 is the newest v261.x. No direct evidence that `RestrictFileSystemAccess=` semantics changed, so no in-place edits were made.
+2. The v262 changelog announces two v263 removals relevant to image-based OS tooling: the experimental systemd-sysupdated D-Bus API (clients move to Varlink against systemd-sysupdate directly, updatectl gets reworked) and systemd-logind's `/run/boot-loader-entries/` compatibility interface (UAPI.1 itself stays). Source: https://github.com/systemd/systemd/releases/tag/v262 (noul 0.90). Watch item for future yubiOS image-refresh tooling design.
+3. `quay.io/fedora/fedora-bootc:45` has moved since the pin: the upstream tag now resolves to index digest `sha256:efccfcd332447...` (last modified 2026-09-29), while `PINNED.md` pins `sha256:c7e6b357...` (re-resolved 2026-08-05). Source: https://quay.io/api/v1/repository/fedora/fedora-bootc/tag/ (noul 0.83) and https://raw.githubusercontent.com/yubi-OS/yubiOS/main/PINNED.md (noul 0.83). Consistent with the 2026-09-18 drift check note that the pin is stale. `PINNED.md` remains the source of truth; re-resolve with `fetch-fedora-bootc-manifest.yml`, never copy a digest from this doc.
+4. quay.io now also publishes a `:46` tag (index digest `sha256:1f38166e...`, updated 2026-09-29) alongside `:43`, `:44`, `:45`, and `:rawhide`; all refreshed 2026-09-29. Source: https://quay.io/api/v1/repository/fedora/fedora-bootc/tag/ (noul 0.83). The 2026-07-23 cross-check above said the base-images repo tracked Fedora 42/43/44/Rawhide; a `:46` tag existing upstream as of today is new information but the dated statement is left untouched.
+
+Verdict: no material change to the doc's own claims. `PINNED.md` is still the source of truth, the completed v261 gate text is historical record, and the `RestrictFileSystems=` vs `RestrictFileSystemAccess=` consistency note is unchanged. The stale pin drift (finding 3) is the one actionable item and it is owned by the pin-resolution audit, not this doc.
+
+Sources considered (all weighted, noul):
+
+| # | Source | URL | noul |
+|---|--------|-----|------|
+| 0 | systemd v262 release tag page | https://github.com/systemd/systemd/releases/tag/v262 | 0.90 |
+| 1 | systemd releases API (v262 2026-09-22, v262-rc3 2026-09-15, v261.3 2026-09-10) | https://api.github.com/repos/systemd/systemd/releases | 0.87 |
+| 2 | quay.io registry API tag listing for fedora/fedora-bootc | https://quay.io/api/v1/repository/fedora/fedora-bootc/tag/ | 0.83 |
+| 3 | yubi-OS/yubiOS PINNED.md | https://raw.githubusercontent.com/yubi-OS/yubiOS/main/PINNED.md | 0.83 |
+| 4 | src.fedoraproject.org rawhide systemd.spec (blocked by Anubis bot check, no content) | https://src.fedoraproject.org/rpms/systemd/raw/rawhide/f/systemd.spec | 0.16 |
+
+searXNG attempts returned no results and are not cited.
