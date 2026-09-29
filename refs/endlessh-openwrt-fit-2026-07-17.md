@@ -229,3 +229,32 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.6466, Δ=+0.5900) were identical placeholder copies with no per-file content; merged on 2026-09-18.
+
+## Refresh: 2026-09-29
+
+Dig method: 2 searXNG queries ("endlessh openwrt package status 2026", "ssh tarpit endlessh alternatives 2026"), 1 follow-up query ("skeeto endlessh ssh tarpit") that returned 0 results, and 2 direct GitHub API checks against upstream and the openwrt/packages monorepo. All 12 search results were scored with jev (typesafe/jev-1.13-20260917); none scored above noul 0.22, so web search surfaced no primary-quality sources this pass.
+
+Findings: what changed upstream since 2026-07-17.
+
+- Nothing material found. Upstream [`skeeto/endlessh`](https://github.com/skeeto/endlessh) remains dormant: latest commit `dfe44eb2c5` dated 2021-04-30 and tags unchanged at 1.1, 1.0, 0.1. Source: https://api.github.com/repos/skeeto/endlessh/commits (primary source: upstream git history; not jev-scored).
+- `openwrt/packages` still ships no endlessh package: GitHub code search for `endlessh` scoped to `repo:openwrt/packages` returns `total_count: 0` on 2026-09-29. Source: https://api.github.com/search/code?q=endlessh+repo%3Aopenwrt%2Fpackages (primary source: official package repo; not jev-scored). The "OpenWrt packaging status" section's no-package claim stands unchanged.
+- Web search surfaced no new endlessh release, no new OpenWrt package feed or proposal, and no competing SSH tarpit aimed at OpenWrt. The highest-scored hits were the awesome-honeypots list (noul 0.22) and the linuxserver/endlessh Docker image (noul 0.21): both already-known packaging paths, not upstream changes.
+
+Verdict: no material change found; doc remains accurate as of 2026-09-29. All existing analysis sections are intentionally untouched (append-mostly audit trail). jev call: 1 request, task_id `tacb8d03-6e0c-4b85-acdc-75e0f7f43773`, cost $0.000278.
+
+### Sources considered (jev weights, noul: 0 low, 1 high)
+
+| Query | # | Result | URL | Weight (noul) |
+| --- | --- | --- | --- | --- |
+| endlessh openwrt package status 2026 | 0 | CISA Vulnerability Summary, week of September 21 2026 | https://www.cisa.gov/news-events/bulletins/sb26-271 | 0.20 |
+| endlessh openwrt package status 2026 | 1 | Reddit r/freebsd: startup infra on FreeBSD in 2026 | https://www.reddit.com/r/freebsd/comments/1r7mp9n/we_built_our_entire_startup_infra_on_freebsd_in/ | 0.20 |
+| endlessh openwrt package status 2026 | 2 | openwrt/openwrt issue 13043: TL-WDR3600 v1.5 reboot hang | https://github.com/openwrt/openwrt/issues/13043 | 0.20 |
+| endlessh openwrt package status 2026 | 3 | DistroWatch: NethSecurity | https://distrowatch.com/nethsecurity | 0.20 |
+| endlessh openwrt package status 2026 | 4 | Debian Package Tracker: linux | https://tracker.debian.org/linux | 0.20 |
+| endlessh openwrt package status 2026 | 5 | SUNET mirror index | https://ftp.sunet.se/mirror/ | 0.20 |
+| ssh tarpit endlessh alternatives 2026 | 0 | awesome-honeypots list | https://github.com/paralax/awesome-honeypots | 0.22 |
+| ssh tarpit endlessh alternatives 2026 | 1 | Ziggit: SSX remote commands from an SSHFS mount | https://ziggit.dev/t/ssx-execute-remote-commands-from-an-sshfs-mount/15123 | 0.21 |
+| ssh tarpit endlessh alternatives 2026 | 2 | CrowdSec blog author index | https://www.crowdsec.net/blog/author/crowdsec | 0.21 |
+| ssh tarpit endlessh alternatives 2026 | 3 | Docker Hub: linuxserver/endlessh | https://hub.docker.com/r/linuxserver/endlessh | 0.21 |
+| ssh tarpit endlessh alternatives 2026 | 4 | itrpoka: Linux Server Hardening 2026 guide | https://itrpoka.com/blog/linux-server-hardening/ | 0.20 |
+| ssh tarpit endlessh alternatives 2026 | 5 | SourceForge: syslog client directory | https://sourceforge.net/directory/?q=syslog+client | 0.20 |
