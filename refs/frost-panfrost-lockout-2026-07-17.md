@@ -84,3 +84,27 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Cryptographic identity coverage
 
 This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
+
+## Refresh: 2026-09-29
+
+Method: the scheduled searXNG dig returned 0 results for all 3 queries ("panfrost DRM device memory cgroup 2026", "Mali GPU memory cgroup kernel mainline 2026", plus the follow-up "panfrost gpu cgroup memory limit"); the shared searxng instance reported every upstream engine suspended or rate limited (brave, duckduckgo, google cse). No web-index evidence was available, so 2 primary sources were fetched and checked directly instead. No in-place edits were made: no finding contradicted an existing claim.
+
+Findings:
+
+- The cgroup v2 dmem controller is unchanged as documented: dmem.max, dmem.min, dmem.low, dmem.peak, dmem.capacity, dmem.current, with region-keyed files (drm/0000:03:00.0/vram0 style) shown only for the Intel xe driver; no panfrost region appears. The doc's determination that Panfrost device-memory accounting is prototype work, not an existing dependency, still holds. Source: https://docs.kernel.org/admin-guide/cgroup-v2.html#dmem (fetched 2026-09-29), jev quality weight noul 0.71.
+- Mesa Panfrost documentation now states GL conformance on Mali-G52, Mali-G57 and Mali-G610, and PanVK conformance on Mali-G610; Midgard/Bifrost scope unchanged. This slightly widens the doc's "including G52 and G610 conformance notes" wording; no downstream claim in this doc changes. Source: https://docs.mesa3d.org/drivers/panfrost.html (fetched 2026-09-29), jev quality weight noul 0.53.
+- drivers/gpu/drm/panfrost/panfrost_drv.c and panfrost_device.h still exist at torvalds/linux master (HTTP 200 via the GitHub Contents API on 2026-09-29). Symbol-level drift inside those files was not re-verified this pass.
+
+Verdict: no material change found; doc remains accurate as of 2026-09-29.
+
+### Sources considered
+
+| Source | Weight (noul) |
+|---|---|
+| searxng query "panfrost DRM device memory cgroup 2026": 0 results, engines suspended | n/a |
+| searxng query "Mali GPU memory cgroup kernel mainline 2026": 0 results, engines suspended | n/a |
+| searxng query "panfrost gpu cgroup memory limit": 0 results, engines suspended | n/a |
+| Linux cgroup v2 admin guide, DMEM section, fetched live 2026-09-29: https://docs.kernel.org/admin-guide/cgroup-v2.html#dmem | 0.71 |
+| Mesa Panfrost driver docs, fetched live 2026-09-29: https://docs.mesa3d.org/drivers/panfrost.html | 0.53 |
+
+Jev run: 1 decide call, 2 questions batched, model typesafe/jev-1.13-20260917, task_id taeaf151-e2bb-407c-a513-a8abe4dee01b, cost 0.000061068.
