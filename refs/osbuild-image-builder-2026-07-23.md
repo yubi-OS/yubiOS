@@ -9,7 +9,7 @@ _Refreshed: 2026-07-23 (supersedes refs/archive-osbuild-image-builder.md, origin
 - The `osbuild/bootc-image-builder` repo now shows a notice that it has been **merged into `image-builder` and archived**.
 - Osbuild's own deprecation notice (osbuild.org/docs/bootc/deprecation-notice/) confirms the standalone `bootc-image-builder` CLI/container is being **deprecated in favor of the unified `image-builder` CLI**, keeping compatibility entry points for a transition period; the RHEL container will eventually wrap the unified CLI and later drop the standalone binary.
 - **Practical yubiOS impact:** `yubi-OS/image-builder-cli` (forked from `osbuild/image-builder-cli`, see refs/image-builder-cli-fork-2026-07-23.md) is now tracking the tool that also *absorbed* bootc-image-builder's role. Any yubiOS tooling still referencing a separate `bootc-image-builder` binary/container should be checked against this convergence — it's the same project now, invoked via `--bootc-*` flags on ibcli rather than a separate binary.
-- Latest `osbuild/image-builder-cli` release found: **v69** (2026-06-17).
+- Latest `osbuild/image-builder-cli` release found: **v69** (2026-06-17; confirmed final, upstream repo archived 2026-09-01).
 
 ### composefs-native backend — still experimental, not a blocker resolution
 
@@ -137,3 +137,42 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Segmentation coverage
 
 This document applies the yubiOS segmentation primitive — Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.
+
+---
+
+## Refresh: 2026-09-29
+
+Dig method: searXNG via the n8n proxy endpoint, queries "osbuild image builder release 2026" and "fedora osbuild bootc image mode 2026". At dig time all searXNG engines (brave, duckduckgo, google cse) were suspended for shared rate limiting, so the results below were captured from the same endpoint earlier on 2026-09-29 and are dated as such. Every load-bearing claim was then verified directly against the primary source.
+
+### What changed upstream since 2026-07-23
+
+- `osbuild/image-builder-cli` is now read-only: the repo notice reads "This repository was archived by the owner on Sep 1, 2026". The archive date is the new fact; the 2026-07-23 section already recorded the merge into `image-builder`. Source: https://github.com/osbuild/image-builder-cli (noul 0.49)
+- The v69 claim above is confirmed as the final release: the releases feed lists v69 (2026-06-17) as the newest tag, nothing after. Source: https://github.com/osbuild/image-builder-cli/releases.atom (noul 0.49)
+- Upstream version ladder on the official release overview page: osbuild 53.1, osbuild-composer v191, cockpit-image-builder v179, image-builder v110, bootc-image-builder v69. Forward motion lives in the unified `image-builder` (v110); the absorbed `bootc-image-builder` is frozen at v69. Source: https://osbuild.org/docs/on-premises/overview/release-overview/ (noul 0.88)
+- osbuild.org now hosts a dedicated migration page for bootc users: a container that creates disk images from bootc container inputs, oriented at Fedora/CentOS bootc or derivatives, replacing the standalone bootc-image-builder workflow. Source: https://osbuild.org/docs/bootc/ (noul 0.84)
+- Red Hat shipped a `cockpit-image-builder` errata for RHEL 10 (RHSA-2026:71543): the Cockpit frontend for osbuild is still actively updated. Source: https://access.redhat.com/errata/RHSA-2026:71543 (noul 0.85)
+- `ublue-os/bootc-image-builder-action` is in maintenance mode and points users at the upstream osbuild action. Source: https://github.com/ublue-os/bootc-image-builder-action (noul 0.20)
+- No new evidence found on the composefs backend or on `osbuild/image-builder` issue #2427; the 2026-07-23 status of that blocker chain stands.
+
+### Practical yubiOS impact
+
+`yubi-OS/image-builder-cli` (fork of `osbuild/image-builder-cli`) now tracks a frozen, archived upstream: v69 is the last ibcli release and all future capability lands in the unified `image-builder` (currently v110). Any yubiOS work that still diffs against ibcli upstream will see no movement; follow `image-builder` releases and the osbuild.org/docs/bootc/ migration page instead.
+
+### Sources considered
+
+| # | Source | URL | noul |
+|---|--------|-----|------|
+| 0 | Releases overview, Image Builder docs | https://osbuild.org/docs/on-premises/overview/release-overview/ | 0.88 |
+| 1 | RHSA-2026:71543 (cockpit-image-builder, RHEL 10) | https://access.redhat.com/errata/RHSA-2026:71543 | 0.85 |
+| 2 | Tenable plugin for RHSA-2026:67139 (aggregator) | https://www.tenable.com/plugins/nessus/345586 | 0.24 |
+| 3 | Deprecation notice, bootc-image-builder | https://osbuild.org/docs/bootc/deprecation-notice/ | 0.57 |
+| 4 | OSBuild developer guide, project principles | https://osbuild.org/docs/developer-guide/projects/osbuild/ | 0.90 |
+| 5 | osbuild/image-builder-cli repo (archive notice) | https://github.com/osbuild/image-builder-cli | 0.49 |
+| 6 | Migration page, Image Builder bootc docs | https://osbuild.org/docs/bootc/ | 0.84 |
+| 7 | Deprecation notice (repeat hit under query 2) | https://osbuild.org/docs/bootc/deprecation-notice/ | 0.71 |
+| 8 | ublue-os/bootc-image-builder-action | https://github.com/ublue-os/bootc-image-builder-action | 0.20 |
+| 9 | Red Hat docs: RHEL 9 image mode disk image customization | https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/using_image_mode_for_rhel_to_build_deploy_and_manage_operating_systems/customizing-disk-images-of-rhel-image-mode-with-advanced-partitioning_building-and-managing-physically-bound-images | 0.77 |
+| 10 | Blueprint reference, Image Builder docs | https://osbuild.org/docs/user-guide/blueprint-reference/ | 0.91 |
+| 11 | Fedora wiki: Changes/RemoveFipsModeSetup | https://fedoraproject.org/wiki/Changes/RemoveFipsModeSetup | 0.57 |
+
+jev weighting: 1 POST to the steady-orbit /api/decide endpoint, 12 noul questions batched, task_id taf4cc06-0eb4-4e01-b523-9fb97b312775, cost $0.000204372.
