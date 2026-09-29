@@ -49,7 +49,16 @@ the process as it actually executed, including every operational trap.
    call needs a `User-Agent` header AND the connection passed in the tool's
    `connections` parameter plus `X-Sauna-Connection-Id` header.
 
-## The Pipeline (6 phases)
+## The Pipeline (7 phases)
+
+### Phase 0: Endpoint preflight (REQUIRED gate)
+
+Both backing endpoints MUST be verified healthy before any later phase runs. If either fails, STOP and surface to the user; do not silently degrade into a weakened run (2026-09-29 lesson: the first yubios corpus mint ran while searXNG engines were suspended for 5 of 6 docs, shipped research-db entries with zero dig results, and had to be re-minted).
+
+1. **searXNG.** `GET https://p01--n8n-service--mcx7zcrbvdyt.code.run/webhook/searxng?endpoint=search&qs=q%3Dsystemd` (User-Agent required) must return HTTP 200 with >= 1 result and no `Suspended:` entries in `unresponsive_engines`. Known blind spot: engines whose errors land after the response closes are NOT reported (searxng bug `add_unresponsive_engine after close`); if results == 0 with a suspiciously short unresponsive list, grep the Northflank service logs for `ERROR:searx.engines` before concluding anything about health.
+2. **jev.** `POST https://steady-orbit.systems-a.workers.dev/api/decide` with a one-question noul smoke probe (User-Agent required) must return HTTP 200 with an `answers` object.
+
+Record both probe results (timestamp, result counts, cost) in the run's research DB under a `preflight` key.
 
 ### Phase 1: Enumerate + signals
 
@@ -203,6 +212,7 @@ jev call count + cost, failures.
 
 ## Verification
 
+- [ ] Phase 0 preflight passed (both endpoints healthy, probe results recorded in the DB) before any dig ran.
 - [ ] Every corpus row has jev verdict + task_id + cost in the DB.
 - [ ] Every collected result has a jev quality weight.
 - [ ] Plan doc states the jev-vs-age agreement analysis honestly.
