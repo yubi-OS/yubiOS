@@ -1,0 +1,137 @@
+{
+ "doc": "systemd-upstream-progress-2026-07-21.md",
+ "queries": [
+  {
+   "query": "systemd upstream development news September 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "systemd 262 Released with Static PID 1, Intel TDX, TPM ...",
+     "url": "https://www.linuxjournal.com/content/systemd-262-released-static-pid-1-intel-tdx-tpm-improvements-and-new-container-features",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "5 days ago ... The final release was tagged on September 22, 2026, following three release candidates earlier in the month. Systemd 262 introduces improvements\u00a0...",
+     "jev_quality_noul": 0.58,
+     "jev_cost_usd": "0.000134232"
+    },
+    {
+     "title": "Tux Machines \u2014 Debian-Based and systemd-Free antiX Linux 26.1 ...",
+     "url": "http://news.tuxmachines.org/n/2026/09/29/Debian_Based_and_systemd_Free_antiX_Linux_26_1_Released_with_Up.shtml",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "6 hours ago ... 3, the Flatpak 1.18.4 release is here to address several security vulnerabilities, including CVE-2026-97024 to prevent privileged overwrite of\u00a0...",
+     "jev_quality_noul": 0.34,
+     "jev_cost_usd": "0.000134232"
+    },
+    {
+     "title": "Announcing Linux on Snapdragon X2 Series Early Developer Preview",
+     "url": "https://www.qualcomm.com/developer/blog/2026/09/announcing-linux-on-snapdragon-x2-series-early-developer-preview",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "6 days ago ... Upstreaming will continue beyond November 2026 to support mainline kernel updates, certification, and OEM commercialization. This phase focuses\u00a0...",
+     "jev_quality_noul": 0.08,
+     "jev_cost_usd": "0.000134232"
+    },
+    {
+     "title": "Solid foundations are leading to expanding horizons | aerynOS",
+     "url": "https://aerynos.com/blog/2026/08/02/solid-foundations-are-leading-to-expanding-horizons/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Aug 2, 2026 ... Alongside the upstream update, we have restructured how systemd is packaged in AerynOS. ... Website development updates. Section titled \u201cWebsite\u00a0...",
+     "jev_quality_noul": 0.24,
+     "jev_cost_usd": "0.000129444"
+    },
+    {
+     "title": "Systemd 260 SysV Init Support Dropped in Major Linux Cleanup",
+     "url": "https://www.linuxteck.com/systemd-260-sysv-init-support/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 18, 2026 ... Distros like Fedora Linux, which sits at the bleeding edge of upstream adoption, are expected to ship systemd 260 in upcoming releases. RHEL-\u00a0...",
+     "jev_quality_noul": 0.23,
+     "jev_cost_usd": "0.000129444"
+    },
+    {
+     "title": "New Ubuntu Flaw Enables Local Attackers to Gain Root Access",
+     "url": "https://www.infosecurity-magazine.com/news/ubuntu-flaw-enables-root-access/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 18, 2026 ... Ubuntu 26.04 (development): snapd 2.74.1+ubuntu26.04.1 or later. Upstream snapd: version 2.75 or later. Legacy systems are not affected by\u00a0...",
+     "jev_quality_noul": 0.14,
+     "jev_cost_usd": "0.000129444"
+    }
+   ]
+  },
+  {
+   "query": "systemd github recent merged features 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Releases \u00b7 systemd/systemd - GitHub",
+     "url": "https://github.com/systemd/systemd/releases",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "In the human-readable table output a hierarchy that is not merged is now shown as \"-\" instead of \"none\". * The JSON payload returned by systemd-sysupdated's\u00a0...",
+     "jev_quality_noul": 0.09,
+     "jev_cost_usd": "0.000129444"
+    },
+    {
+     "title": "systemd 261-rc3 Released With Individual Binaries Now Embedding ...",
+     "url": "https://www.phoronix.com/news/systemd-261-rc3",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 4, 2026 ... ... systemd 261 is quickly approaching for being found in H2'2026 Linux distributions. Systemd 261 is bringing many new features as previously\u00a0...",
+     "jev_quality_noul": 0.93,
+     "jev_cost_usd": "0.000129444"
+    },
+    {
+     "title": "The systemd System and Service Manager - GitHub",
+     "url": "https://github.com/systemd/systemd",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Consult our NEWS file for information about what's new in the most recent systemd versions. ... HTML0%. Footer. \u00a9 2026 GitHub, Inc. Footer navigation. Terms\u00a0...",
+     "jev_quality_noul": 0.88,
+     "jev_cost_usd": "0.000123144"
+    },
+    {
+     "title": "systemd/docs/CONTRIBUTING.md at main - GitHub",
+     "url": "https://github.com/systemd/systemd/blob/main/docs/CONTRIBUTING.md",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "In case a new feature is added to both systemd and one of its dependencies, we expect the corresponding feature code to be merged upstream in the dependency\u00a0...",
+     "jev_quality_noul": 0.88,
+     "jev_cost_usd": "0.000123144"
+    },
+    {
+     "title": "The systemd 261 release brings a software TPM, new OS installer",
+     "url": "https://www.helpnetsecurity.com/2026/06/22/systemd-261-released/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 22, 2026 ... Linux distributions that ship systemd as their init system now have a new version to track. The systemd 261 update adds a cloud metadata\u00a0...",
+     "jev_quality_noul": 0.86,
+     "jev_cost_usd": "0.000123144"
+    },
+    {
+     "title": "systemd - GitHub",
+     "url": "https://github.com/systemd",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "systemd systemd Public. The systemd System and Service Manager \u00b7 systemd-stable systemd-stable Public. Backports of patches from systemd git for stable versions\u00a0...",
+     "jev_quality_noul": 0.12,
+     "jev_cost_usd": "0.000123144"
+    }
+   ]
+  }
+ ]
+}

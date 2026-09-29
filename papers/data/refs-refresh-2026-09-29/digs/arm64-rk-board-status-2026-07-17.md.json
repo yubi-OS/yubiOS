@@ -1,0 +1,137 @@
+{
+ "doc": "arm64-rk-board-status-2026-07-17.md",
+ "queries": [
+  {
+   "query": "RK3588 mainline linux kernel support status 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Mainline video capture and camera support for Rockchip RK3588",
+     "url": "https://www.collabora.com/news-and-blog/news-and-events/mainline-video-capture-and-camera-support-for-rockchip-rk3588.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Apr 13, 2026 ... ... mainline Linux kernel (January 2026). This came to pass right in time for FOSDEM 2026 in Brussels, where Collabora presented \"Upstreaming\u00a0...",
+     "jev_quality_noul": 0.06,
+     "jev_cost_usd": "0.000136248"
+    },
+    {
+     "title": "Rockchip RK3588 and RK3576 H.264 and H.265 video decoders ...",
+     "url": "https://www.cnx-software.com/2026/02/27/rockchip-rk3588-rk3576-h-264-and-h-265-video-decoders-mainline-linux/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 27, 2026 ... Rockchip RK3588 and RK3576 get mainline Linux support for H.264 (AVC) and H.265 (HEVC) hardware video coders thanks to work from Collabora.",
+     "jev_quality_noul": 0.79,
+     "jev_cost_usd": "0.000136248"
+    },
+    {
+     "title": "Kernel & Embedded News: slab_tiny Targets 7.4 - TECH VEDA",
+     "url": "https://www.techveda.live/2026/09/29/slab-tiny-boot-option/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "13 hours ago ... Linux 7.3 reached rc5 with a final release projected for mid-October, and the 7.1 series is now end-of-life. RK3588 mainline video decoding is\u00a0...",
+     "jev_quality_noul": 0.28,
+     "jev_cost_usd": "0.000136248"
+    },
+    {
+     "title": "hardware acceleration for Rockchip RK3588 mainline kernel support",
+     "url": "https://github.com/blakeblackshear/frigate/discussions/18311",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 19, 2025 ... ... mainline-status.md. NPU. The RK3588 NPU can be used through as a TFLite Delegate by using Mesa's Teflon library with upcoming Rocket support in Mesa 25.3 and\u00a0...",
+     "jev_quality_noul": 0.11,
+     "jev_cost_usd": "0.000136248"
+    },
+    {
+     "title": "Will be new kernels for ROCK 5B / RK3588? - Radxa Forum",
+     "url": "https://forum.radxa.com/t/will-be-new-kernels-for-rock-5b-rk3588/31128",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jul 6, 2026 ... ... Kernel, which is currently based on Linux 6.1 ... Most of the SoC's features are already support by mainline kernel, you can check on them here.",
+     "jev_quality_noul": 0.13,
+     "jev_cost_usd": "0.000134148"
+    },
+    {
+     "title": "Running Mainline Linux, U-Boot, and Mesa on Rockchip - Collabora",
+     "url": "https://www.collabora.com/news-and-blog/blog/2026/03/02/running-mainline-linux-u-boot-and-mesa-on-rockchip-a-year-in-review/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 2, 2026 ... During FOSDEM 2026, I gave a talk on the progress of mainline support for Rockchip SoCs over the past year. There was so much to cover that\u00a0...",
+     "jev_quality_noul": 0.13,
+     "jev_cost_usd": "0.000134148"
+    }
+   ]
+  },
+  {
+   "query": "Rockchip RK3588 upstream bootloader status 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Secure Boot on Rockchip RK3588 - Pengutronix",
+     "url": "https://pengutronix.de/en/blog/2026-06-19-rk3588-secure-boot.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 19, 2026 ... The Rockchip RK3588 SoC provides hardware features to verify the integrity and legitimacy of firmware running on a device.",
+     "jev_quality_noul": 0.83,
+     "jev_cost_usd": "0.000134148"
+    },
+    {
+     "title": "Kernel & Embedded News: slab_tiny Targets 7.4 - TECH VEDA",
+     "url": "https://www.techveda.live/2026/09/29/slab-tiny-boot-option/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "13 hours ago ... ... bootloader environment instead. The ... RK3588 and RK3576 video decoders merged upstream \u00b7 Decoding with Rockchip at Kernel Recipes 2026\u00a0...",
+     "jev_quality_noul": 0.71,
+     "jev_cost_usd": "0.000134148"
+    },
+    {
+     "title": "Mainline video capture and camera support for Rockchip RK3588",
+     "url": "https://www.collabora.com/news-and-blog/news-and-events/mainline-video-capture-and-camera-support-for-rockchip-rk3588.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Apr 13, 2026 ... Our RK3588 upstream status matrix and the recent review blog post ... Decoding with Rockchip at Kernel Recipes 2026. 17/09/2026. Next\u00a0...",
+     "jev_quality_noul": 0.14,
+     "jev_cost_usd": "0.000134148"
+    },
+    {
+     "title": "Schedule - Embedded Recipes",
+     "url": "https://embedded-recipes.org/2026/schedule/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "02.0, users may enable and use Secure Boot on RK3588 without needing any special Rockchip tools. In this session, Michael will show you how to enable Secure\u00a0...",
+     "jev_quality_noul": 0.15,
+     "jev_cost_usd": "0.000132216"
+    },
+    {
+     "title": "Rockchip RK3588 mainline Linux support - Current status and future ...",
+     "url": "https://www.reddit.com/r/linux/comments/1hj93kw/rockchip_rk3588_mainline_linux_support_current/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Dec 21, 2024 ... ... upstream Linux support for Rockchip RK3588. Rockchip RK3588 mainline Linux progress in 2024 Linux 6.7 kernel - Network support on the Radxa\u00a0...",
+     "jev_quality_noul": 0.15,
+     "jev_cost_usd": "0.000132216"
+    },
+    {
+     "title": "Rockchip RK3588 mainline Linux support - Current status and future ...",
+     "url": "https://www.cnx-software.com/2024/12/21/rockchip-rk3588-mainline-linux-support-current-status-and-future-work-for-2025/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Dec 21, 2024 ... ... upstream Linux support for Rockchip RK3588. Rockchip RK3588 mainline ... That means the only closed-source binary needed in the bootloader is for\u00a0...",
+     "jev_quality_noul": 0.1,
+     "jev_cost_usd": "0.000132216"
+    }
+   ]
+  }
+ ]
+}

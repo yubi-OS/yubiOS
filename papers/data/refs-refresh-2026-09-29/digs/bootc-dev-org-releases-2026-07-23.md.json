@@ -1,0 +1,137 @@
+{
+ "doc": "bootc-dev-org-releases-2026-07-23.md",
+ "queries": [
+  {
+   "query": "bootc release changelog 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Releases \u00b7 bootc-dev/bootc - GitHub",
+     "url": "https://github.com/bootc-dev/bootc/releases/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Update Rust by @bootc-bot[bot] in #2374; Add ALT Atomic to list of adopters ... Footer. \u00a9 2026 GitHub, Inc. Footer navigation. Terms \u00b7 Privacy \u00b7 Security\u00a0...",
+     "jev_quality_noul": 0.21,
+     "jev_cost_usd": "0.000123144"
+    },
+    {
+     "title": "bootc",
+     "url": "https://bootc.dev/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... changes. Documentation. The project documentation is hosted on a different site: Docs. Versioning. Although bootc is not released to crates.io as a library\u00a0...",
+     "jev_quality_noul": 0.74,
+     "jev_cost_usd": "0.000130368"
+    },
+    {
+     "title": "May 12, 2026\u2014KB5087539(OS Build 26100.32860)",
+     "url": "https://support.microsoft.com/en-us/servicing/os/windows-server/2026/05/may-12-2026-kb5087539-os-build-26100-32860",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 12, 2026 ... This security update contains fixes and quality improvements from5078740 KB5082063 (released April 14, 2026) and KB5091157 (release April 19,\u00a0...",
+     "jev_quality_noul": 0.74,
+     "jev_cost_usd": "0.000130368"
+    },
+    {
+     "title": "Spring Boot 4.1.1 Released? : r/SpringBoot - Reddit",
+     "url": "https://www.reddit.com/r/SpringBoot/comments/1vtljrr/spring_boot_411_released/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Aug 20, 2026 ... This release is an official one, we're just in the progress of revamping our release tooling and this is the first OSS release we've done with\u00a0...",
+     "jev_quality_noul": 0.3,
+     "jev_cost_usd": "0.000130368"
+    },
+    {
+     "title": "Updated Debian 13: 13.6 released",
+     "url": "https://www.debian.org/News/2026/20260711",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jul 11, 2026 ... fwupd has been updated to upstream version 2.0.20, which has the ability to update the Secure Boot certificate authority (CA), Key Exchange Key\u00a0...",
+     "jev_quality_noul": 0.05,
+     "jev_cost_usd": "0.000130368"
+    },
+    {
+     "title": "Control image mode updates with download-only via bootc",
+     "url": "https://developers.redhat.com/articles/2026/02/18/control-updates-download-only-mode-bootc",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 18, 2026 ... Discover the download-only mode, a new bootc feature which provides control over when a staged update is allowed to become the active boot\u00a0...",
+     "jev_quality_noul": 0.63,
+     "jev_cost_usd": "0.000130368"
+    }
+   ]
+  },
+  {
+   "query": "bootc containers org latest release",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "GitHub - bootc-dev/bootc: Boot and upgrade via container images",
+     "url": "https://github.com/bootc-dev/bootc",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Although bootc is not released to crates.io as a library, version numbers are expected to follow semantic versioning standards. This practice began with the\u00a0...",
+     "jev_quality_noul": 0.86,
+     "jev_cost_usd": "0.00012432"
+    },
+    {
+     "title": "Getting Started with Bootable Containers - Fedora Docs",
+     "url": "https://docs.fedoraproject.org/en-US/bootc/getting-started/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "The bootc documentation summarizes bootable containers as \"transactional, in-place operating system updates using OCI/Docker container images\". In other words,\u00a0...",
+     "jev_quality_noul": 0.86,
+     "jev_cost_usd": "0.00012432"
+    },
+    {
+     "title": "dev-bootc versions - GitHub",
+     "url": "https://github.com/orgs/bootc-dev/packages/container/dev-bootc/684109743?tag=fedora-43-uki",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "This package version was published on Feb 12 . To provide a description, add the following line to your Dockerfile: LABEL org.opencontainers.image.",
+     "jev_quality_noul": 0.76,
+     "jev_cost_usd": "0.00012432"
+    },
+    {
+     "title": "A roadmap of the OpenShift boot images update - Red Hat Developer",
+     "url": "https://developers.redhat.com/articles/2025/08/18/roadmap-openshift-boot-images-update",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Aug 18, 2025 ... ... final OS update to the latest OS image due to missing or incompatible packages. Related Posts. bootc: Getting started with bootable containers\u00a0...",
+     "jev_quality_noul": 0.68,
+     "jev_cost_usd": "0.00012432"
+    },
+    {
+     "title": "Provisioning and managing bootc machines with Foreman - Tutorials",
+     "url": "https://community.theforeman.org/t/provisioning-and-managing-bootc-machines-with-foreman/46441",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 13, 2026 ... Updating bootc machines entails running bootc upgrade which fetches the latest version of the container image in use, which is applied on reboot\u00a0...",
+     "jev_quality_noul": 0.49,
+     "jev_cost_usd": "0.00012432"
+    },
+    {
+     "title": "Introducing the new bootc kickstart command in Anaconda",
+     "url": "https://fedoramagazine.org/introducing-the-new-bootc-kickstart-command-in-anaconda/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Dec 31, 2025 ... Anaconda installer now supports installation of bootc based bootable container images using the new bootc command. It has supported several\u00a0...",
+     "jev_quality_noul": 0.34,
+     "jev_cost_usd": "0.000136248"
+    }
+   ]
+  }
+ ]
+}

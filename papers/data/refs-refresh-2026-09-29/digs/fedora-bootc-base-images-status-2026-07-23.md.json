@@ -1,0 +1,137 @@
+{
+ "doc": "fedora-bootc-base-images-status-2026-07-23.md",
+ "queries": [
+  {
+   "query": "fedora bootc base images quay.io 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Base images - Fedora Docs",
+     "url": "https://docs.fedoraproject.org/en-US/bootc/base-images/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Fedora: quay.io/fedora/fedora-bootc:42 (source repo). CentOS Stream 10 (in ... Last build: 2026-09-21 13:50:07 UTC | Last content update: 2024-06-08.",
+     "jev_quality_noul": 0.06,
+     "jev_cost_usd": "0.000132216"
+    },
+    {
+     "title": "Building a hardened, image-based foundation for AI agents - Red Hat",
+     "url": "https://www.redhat.com/en/blog/building-hardened-image-based-foundation-ai-agents",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Apr 28, 2026 ... I used quay.io/fedora/fedora-bootc:latest as the base OS. The Containerfile installs Podman, cloud-init, SSH, and Python, then creates a\u00a0...",
+     "jev_quality_noul": 0.9,
+     "jev_cost_usd": "0.000132216"
+    },
+    {
+     "title": "Taking the Hummingbird model to the full operating system",
+     "url": "https://fedoramagazine.org/fedora-hummingbird-linux-taking-the-hummingbird-model-to-the-full-os/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 12, 2026 ... This is where Fedora Hummingbird comes in. This image is already live at https://quay.io/repository/hummingbird-community/bootc-os. The team\u00a0...",
+     "jev_quality_noul": 0.3,
+     "jev_cost_usd": "0.00012642"
+    },
+    {
+     "title": "Getting Started with Bootable Containers - Fedora Docs",
+     "url": "https://docs.fedoraproject.org/en-US/bootc/getting-started/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "The base images of Fedora and CentOS Stream are listed and continuously updated on the base images page. The RHEL bootc images can be found in the Red Hat\u00a0...",
+     "jev_quality_noul": 0.31,
+     "jev_cost_usd": "0.00012642"
+    },
+    {
+     "title": "Bootc and OSTree: Modernizing Linux System Deployment",
+     "url": "https://a-cup-of.coffee/blog/ostree-bootc/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 8, 2026 ... FROM quay.io/fedora/fedora-bootc:latest # -- Package installation ... Concretely, we start from a base Fedora image with Bootc prepared.",
+     "jev_quality_noul": 0.92,
+     "jev_cost_usd": "0.00012642"
+    },
+    {
+     "title": "Fedora Hummingbird: Is This the End of Traditional Linux?",
+     "url": "https://www.fosslinux.com/156974/fedora-hummingbird-is-this-the-end-of-traditional-linux.htm",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 17, 2026 ... ... quay.io/hummingbird-community/bootc-os:latest. During execution, the ... In my security labs, I run base Fedora Hummingbird images\u00a0...",
+     "jev_quality_noul": 0.15,
+     "jev_cost_usd": "0.00012642"
+    }
+   ]
+  },
+  {
+   "query": "centos stream bootc image tiers 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "CentOS Connect 2026",
+     "url": "https://www.centos.org/events/connect-2026/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... Stream, RHEL, AlmaLinux, and Rocky Linux in one step. Amazing homelabs with ... The session covers how to use the centos-bootc base image, how to reuse\u00a0...",
+     "jev_quality_noul": 0.09,
+     "jev_cost_usd": "0.00012642"
+    },
+    {
+     "title": "Bootc - Boot with custom kernel - Fedora Discussion",
+     "url": "https://discussion.fedoraproject.org/t/bootc-boot-with-custom-kernel/138470",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Nov 26, 2024 ... I'm new to bootc and I was able to create my own image based on bootc tier-1 base image. ... centos-stream / containers / bootc \u00b7 GitLab. My only\u00a0...",
+     "jev_quality_noul": 0.14,
+     "jev_cost_usd": "0.000130536"
+    },
+    {
+     "title": "Taking the Hummingbird model to the full operating system",
+     "url": "https://fedoramagazine.org/fedora-hummingbird-linux-taking-the-hummingbird-model-to-the-full-os/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 12, 2026 ... Introducing the Fedora Hummingbird Linux image-based OS: A new rolling Linux ... The Hummingbird bootc OS image boots today. What's still in\u00a0...",
+     "jev_quality_noul": 0.14,
+     "jev_cost_usd": "0.000130536"
+    },
+    {
+     "title": "bootc: Managing Your CentOS Deployments Like You ... - YouTube",
+     "url": "https://www.youtube.com/watch?v=f7AUl_PRjJ0",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 27, 2026 ... Joseph Marrero Corchado presented about bootc at CentOS Connect 2026. Maintaining CentOS deployments often relies on tools like bash scripts\u00a0...",
+     "jev_quality_noul": 0.56,
+     "jev_cost_usd": "0.000130536"
+    },
+    {
+     "title": "Debian vs Ubuntu 2026: 21% Faster Boot, 8 Arches vs 4 [Tested]",
+     "url": "https://tech-insider.org/debian-vs-ubuntu-2026/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 7, 2026 ... CentOS Stream and AlmaLinux/Rocky Linux split most of the remainder of the RHEL-derived share. The Ubuntu lead is largely a function of cloud\u00a0...",
+     "jev_quality_noul": 0.18,
+     "jev_cost_usd": "0.000130536"
+    },
+    {
+     "title": "Fedora Hummingbird: Is This the End of Traditional Linux?",
+     "url": "https://www.fosslinux.com/156974/fedora-hummingbird-is-this-the-end-of-traditional-linux.htm",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 17, 2026 ... By moving from legacy client-side builders to native OCI container images managed via bootc , Hummingbird shifts the operating system from a pet\u00a0...",
+     "jev_quality_noul": 0.06,
+     "jev_cost_usd": "0.000130536"
+    }
+   ]
+  }
+ ]
+}

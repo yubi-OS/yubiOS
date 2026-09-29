@@ -1,0 +1,137 @@
+{
+ "doc": "endlessh-openwrt-fit-2026-07-17.md",
+ "queries": [
+  {
+   "query": "endlessh openwrt package status 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Vulnerability Summary for the Week of September 21, 2026 - CISA",
+     "url": "https://www.cisa.gov/news-events/bulletins/sb26-271",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "18 hours ago ... 0 fails to verify deletion status when serving cached bundle artifacts from the public file read endpoint. Unauthenticated attackers can\u00a0...",
+     "jev_quality_noul": 0.2,
+     "jev_cost_usd": "0.000128352"
+    },
+    {
+     "title": "We built our entire startup infra on FreeBSD in 2026. Now ... - Reddit",
+     "url": "https://www.reddit.com/r/freebsd/comments/1r7mp9n/we_built_our_entire_startup_infra_on_freebsd_in/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 17, 2026 ... I just misremebered the package name. It's correct name is pam_jail ... Sometimes it works masterfully well (see OpenWRT) other times\u00a0...",
+     "jev_quality_noul": 0.71,
+     "jev_cost_usd": "0.000128352"
+    },
+    {
+     "title": "NethSecurity - DistroWatch.com",
+     "url": "https://distrowatch.com/nethsecurity",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jul 30, 2026 ... ... 2026-07-30: Distribution ... Not to mention, given it works with OpenWrt, there's no simple way to install packages like with OpenWrt.",
+     "jev_quality_noul": 0.1,
+     "jev_cost_usd": "0.000129864"
+    },
+    {
+     "title": "linux - Debian Package Tracker",
+     "url": "https://tracker.debian.org/linux",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Last run: 2026-09-12T12:04:35.000Z Previous status: unknown. Created: 2026-05-01 Last update: 2026-09-26 06:32. 2071 security issues in trixie high.",
+     "jev_quality_noul": 0.09,
+     "jev_cost_usd": "0.000129864"
+    },
+    {
+     "title": "Changelog for PyInstaller \u2014 PyInstaller 6.22.3 documentation",
+     "url": "https://pyinstaller.org/en/stable/CHANGES.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... 3 (2026-09-12) . Bugfix . (Windows) Revise earlier fix for #9508 to avoid breaking executables located on ... Fix endless recursion if a package's\u00a0...",
+     "jev_quality_noul": 0.22,
+     "jev_cost_usd": "0.000129864"
+    },
+    {
+     "title": "Photonicat 2 \u56fa\u4ef6 Changelog",
+     "url": "https://photonicat.com/wiki/Photonicat_2_%E5%9B%BA%E4%BB%B6_Changelog",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "OpenWRT base system \u2014 Updated routing and telephony packages to OpenWRT 25.12 branch. Switch default firewall to fw4. 2026-07-31 r7853. Boot time cut by 59% \u2014\u00a0...",
+     "jev_quality_noul": 0.25,
+     "jev_cost_usd": "0.000129864"
+    }
+   ]
+  },
+  {
+   "query": "ssh tarpit endlessh alternatives 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "an awesome list of honeypot resources - GitHub",
+     "url": "https://github.com/paralax/awesome-honeypots",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Cowrie - Cowrie SSH Honeypot (based on kippo). DShield docker - Docker container running cowrie with DShield output enabled. endlessh - SSH tarpit that slowly\u00a0...",
+     "jev_quality_noul": 0.33,
+     "jev_cost_usd": "0.000129864"
+    },
+    {
+     "title": "SSX: Execute remote commands from an SSHFS mount - Ziggit",
+     "url": "https://ziggit.dev/t/ssx-execute-remote-commands-from-an-sshfs-mount/15123",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Apr 22, 2026 ... spiffyk April 22, 2026 ... I have been running the tarpit endlessh on public facing servers on port 22. I put the alternative port for these\u00a0...",
+     "jev_quality_noul": 0.11,
+     "jev_cost_usd": "0.00012348"
+    },
+    {
+     "title": "Articles from CrowdSec",
+     "url": "https://www.crowdsec.net/blog/author/crowdsec",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... endlessh (an ssh tarpit) and a web server which only purpose is for CrowdSec to detect attacks in its logfiles. Raspberry Pi is a perfect device [\u2026] Apr 14\u00a0...",
+     "jev_quality_noul": 0.11,
+     "jev_cost_usd": "0.00012348"
+    },
+    {
+     "title": "linuxserver/endlessh - Docker Image",
+     "url": "https://hub.docker.com/r/linuxserver/endlessh",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Endlessh\u2060 is an SSH tarpit that very slowly sends an endless, random SSH banner. ... \u00a9 2026 Docker, Inc. All rights reserved. | Terms of Service\u00a0...",
+     "jev_quality_noul": 0.3,
+     "jev_cost_usd": "0.00012348"
+    },
+    {
+     "title": "Linux Server Hardening: The Complete 2026 Guide - itrpoka",
+     "url": "https://itrpoka.com/blog/linux-server-hardening/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... tarpit. A tool like endlessh answers on a port and then trickles an endless, randomly-slow SSH banner \u2014 never completing the handshake \u2014 so automated\u00a0...",
+     "jev_quality_noul": 0.26,
+     "jev_cost_usd": "0.00012348"
+    },
+    {
+     "title": "syslog client free download - SourceForge",
+     "url": "https://sourceforge.net/directory/?q=syslog+client",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Endlessh is a lightweight SSH tarpit that occupies automated attackers by slowly transmitting an endless, randomly generated protocol banner. Administrators can\u00a0...",
+     "jev_quality_noul": 0.13,
+     "jev_cost_usd": "0.00012348"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,137 @@
+{
+ "doc": "post-quantum-tls-adoption-2026-07-23.md",
+ "queries": [
+  {
+   "query": "X25519MLKEM768 TLS adoption statistics 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Post-Quantum TLS Finished the Easy Half",
+     "url": "https://cacm.acm.org/news/post-quantum-tls-finished-the-easy-half/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Sep 14, 2026 ... Every one of them selected the same hybrid construction: X25519MLKEM768. Concentration, Not Adoption. A 49.22% share of the million domains\u00a0...",
+     "jev_quality_noul": 0.02,
+     "jev_cost_usd": "0.000126588"
+    },
+    {
+     "title": "2026 State of PQC on the Web | F5 Labs",
+     "url": "https://www.f5.com/labs/articles/2026-state-of-pqc-on-the-web",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "8 days ago ... Explore F5 Labs' 2026 PQC report: adoption trends, CDN dependence, TLS technical debt, certificate risks, and steps toward quantum\u00a0...",
+     "jev_quality_noul": 0.38,
+     "jev_cost_usd": "0.000130284"
+    },
+    {
+     "title": "Is your domain using post-quantum encryption? Now you can see ...",
+     "url": "https://blog.cloudflare.com/post-quantum-visibility/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "8 hours ago ... ... adoption in TLS through Cloudflare Radar. On Radar, we track global post-quantum encryption statistics, both when Cloudflare proxies HTTP\u00a0...",
+     "jev_quality_noul": 0.41,
+     "jev_cost_usd": "0.000130284"
+    },
+    {
+     "title": "ML-KEM vs X25519 TLS 1.3: 52% Adoption, +1.5ms [2026]",
+     "url": "https://shattered.io/ml-kem-vs-x25519-tls-1-3-2026/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Compare benchmarks, adoption data, pricing, and migration steps for post-quantum TLS in 2026 ... Three hybrid groups now exist for TLS 1.3: X25519MLKEM768\u00a0...",
+     "jev_quality_noul": 0.83,
+     "jev_cost_usd": "0.000130284"
+    },
+    {
+     "title": "We analyzed HTTP protocol adoption in 2026: 28.6% of the web still ...",
+     "url": "https://technologychecker.io/blog/http-protocol-adoption",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "September 2026 update (August 2026 data): HTTP/3 fell for a second consecutive month, to 19.48% of requests, and is now down 2.70 points year over year from\u00a0...",
+     "jev_quality_noul": 0.24,
+     "jev_cost_usd": "0.000130284"
+    },
+    {
+     "title": "State of Post Quantum Cryptography | Wiz Blog",
+     "url": "https://www.wiz.io/blog/state-of-post-quantum-cryptography",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 28, 2026 ... Discussion of PQC relevant statistics that we see across our customers and other data sources ... get TLS to use X25519MLKEM768). Google is now\u00a0...",
+     "jev_quality_noul": 0.08,
+     "jev_cost_usd": "0.000130284"
+    }
+   ]
+  },
+  {
+   "query": "post-quantum TLS deployment Cloudflare Google 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "PQC in Plaintext: Google Cloud's post-quantum cryptography roadmap",
+     "url": "https://cloud.google.com/blog/products/identity-security/pqc-in-plaintext-google-clouds-post-quantum-cryptography-roadmap",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Aug 11, 2026 ... Securing your customer workloads: Offer quantum-confidential TLS 1.3 handshakes for your Google Cloud services and configured load balancers to\u00a0...",
+     "jev_quality_noul": 0.81,
+     "jev_cost_usd": "0.000128688"
+    },
+    {
+     "title": "Is your domain using post-quantum encryption? Now you can see ...",
+     "url": "https://blog.cloudflare.com/post-quantum-visibility/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "8 hours ago ... Cloudflare has added visibility into post-quantum (PQ) encryption in TLS 1.3 directly into HTTP Analytics, Log Explorer, and Logpush.",
+     "jev_quality_noul": 0.8,
+     "jev_cost_usd": "0.000128688"
+    },
+    {
+     "title": "Post-Quantum TLS Finished the Easy Half",
+     "url": "https://cacm.acm.org/news/post-quantum-tls-finished-the-easy-half/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Sep 14, 2026 ... Post-quantum cryptography (PQC) arrived on the open Internet in the eight months between July 2025 and March 2026, without many people\u00a0...",
+     "jev_quality_noul": 0.82,
+     "jev_cost_usd": "0.000128688"
+    },
+    {
+     "title": "PQC in Cloudflare products - SSL/TLS",
+     "url": "https://developers.cloudflare.com/ssl/post-quantum-cryptography/pqc-cloudflare-products/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Sep 16, 2026 ... A Cloudflare-side \u2713 entry only delivers end-to-end post-quantum protection when the party on the other side of the connection also supports the\u00a0...",
+     "jev_quality_noul": 0.47,
+     "jev_cost_usd": "0.000128688"
+    },
+    {
+     "title": "2026 State of PQC on the Web | F5 Labs",
+     "url": "https://www.f5.com/labs/articles/2026-state-of-pqc-on-the-web",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "8 days ago ... Explore F5 Labs' 2026 PQC report: adoption trends, CDN dependence, TLS technical debt, certificate risks, and steps toward quantum\u00a0...",
+     "jev_quality_noul": 0.88,
+     "jev_cost_usd": "0.000128688"
+    },
+    {
+     "title": "Cloudflare targets 2029 for full post-quantum security",
+     "url": "https://blog.cloudflare.com/post-quantum-roadmap/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Apr 7, 2026 ... Cloudflare is accelerating its post-quantum roadmap. We now target 2029 to be fully post-quantum (PQ) secure including, crucially,\u00a0...",
+     "jev_quality_noul": 0.88,
+     "jev_cost_usd": "0.00012558"
+    }
+   ]
+  }
+ ]
+}

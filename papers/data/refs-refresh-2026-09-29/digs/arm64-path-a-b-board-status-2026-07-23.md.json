@@ -1,0 +1,137 @@
+{
+ "doc": "arm64-path-a-b-board-status-2026-07-23.md",
+ "queries": [
+  {
+   "query": "RK3588 U-Boot OP-TEE mainline support 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Secure Boot on Rockchip RK3588 - Pengutronix",
+     "url": "https://pengutronix.de/en/blog/2026-06-19-rk3588-secure-boot.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 19, 2026 ... ... OP-TEE OS to support the necessary SoCs. The signing tools are not integrated into U-Boot, yet. rkimage can re-sign existing U-Boot images\u00a0...",
+     "jev_quality_noul": 0.13,
+     "jev_cost_usd": "0.000129696"
+    },
+    {
+     "title": "Schedule - Embedded Recipes",
+     "url": "https://embedded-recipes.org/2026/schedule/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Secure boot is a security feature that enables device manufacturers to ensure that a device only boots trusted and signed software. This feature depends on\u00a0...",
+     "jev_quality_noul": 0.76,
+     "jev_cost_usd": "0.000129696"
+    },
+    {
+     "title": "Rockchip RK3588 mainline Linux support - Current status and future ...",
+     "url": "https://www.cnx-software.com/2024/12/21/rockchip-rk3588-mainline-linux-support-current-status-and-future-work-for-2025/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Dec 21, 2024 ... ... U-Boot master branch and USB-PD support should be upstreamed in the 2025.01 release. Rockchip OP-TEE was merged a few days ago, as Rockchip\u00a0...",
+     "jev_quality_noul": 0.15,
+     "jev_cost_usd": "0.000129696"
+    },
+    {
+     "title": "Upstream support for Rockchip's RK3588: Progress and future plans",
+     "url": "https://www.collabora.com/news-and-blog/news-and-events/rockchip-rk3588-upstream-support-progress-future-plans.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Dec 20, 2024 ... The Rockchip RK3588 upstream support has progressed a lot over the last few years. As 2024 comes to a close, it is a great time to have a\u00a0...",
+     "jev_quality_noul": 0.71,
+     "jev_cost_usd": "0.000132888"
+    },
+    {
+     "title": "Rockchip RK3576 mainline support - Flipper One Documentation",
+     "url": "https://docs.flipper.net/one/cpu-software/rk3576-mainlining",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mainline U-boot fully works with a couple of in-progress patches. TF-A (BL31): ... OP-TEE (BL32): no support for RK3576. Collabora has been working on\u00a0...",
+     "jev_quality_noul": 0.71,
+     "jev_cost_usd": "0.000132888"
+    },
+    {
+     "title": "Armbian 26.2.1 can't boot from MTD on OrangePi5",
+     "url": "https://forum.armbian.com/topic/57922-armbian-2621-cant-boot-from-mtd-on-orangepi5/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 8, 2026 ... Is OPi5 NVMe support included in upstream mainline u-boot? 0. Quote ... orangepi5: bump u-boot to v2026.04-rc3. This part might not be\u00a0...",
+     "jev_quality_noul": 0.45,
+     "jev_cost_usd": "0.000132888"
+    }
+   ]
+  },
+  {
+   "query": "rockchip arm64 secure boot TF-A 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "schneid-l/u-boot-rockchip - GitHub",
+     "url": "https://github.com/schneid-l/u-boot-rockchip",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Sep 17, 2026 ... Pre-built, signed U-Boot binaries for mainline-supported Rockchip ARM64 boards \u2014 auto-built and released from upstream sources.",
+     "jev_quality_noul": 0.13,
+     "jev_cost_usd": "0.000132888"
+    },
+    {
+     "title": "7.40. Rockchip SoCs \u2014 Trusted Firmware-A 2.15.0 documentation",
+     "url": "https://trustedfirmware-a.readthedocs.io/en/stable/plat/rockchip.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Rockchip SoCs expect TF-A's BL31 (AARCH64) or BL32 (AARCH32) to get integrated with other boot software like U-Boot or Coreboot, so only these images need\u00a0...",
+     "jev_quality_noul": 0.22,
+     "jev_cost_usd": "0.000132888"
+    },
+    {
+     "title": "DRTM on ARM - TrenchBoot",
+     "url": "https://trenchboot.org/blueprints/DRTM_On_ARM/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... TF-A @ da738d5e , 2026-05-28). The reference implementation targets v1.0 ... Add an AArch64 DLME entry to Linux and Xen alongside the x86 Secure Launch\u00a0...",
+     "jev_quality_noul": 0.75,
+     "jev_cost_usd": "0.000126588"
+    },
+    {
+     "title": "Gahing's Space",
+     "url": "https://blog.gahingwoo.com/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Upstream firmware and embedded Linux \u2014 Rockchip bring-up, secure boot, and NPU work from the gaps between hardware and mainline.",
+     "jev_quality_noul": 0.76,
+     "jev_cost_usd": "0.000126588"
+    },
+    {
+     "title": "- TF-A - lists.trustedfirmware.org",
+     "url": "https://lists.trustedfirmware.org/archives/list/tf-a@lists.trustedfirmware.org/latest?count=200",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Re: Guidance on direct Linux boot from TF-A (bypassing U-Boot) on ARM64. by ... TF-A Tech Forum Thursday Jun 11, 2026 \u22c5 5pm \u2013 6pm Central European Time\u00a0...",
+     "jev_quality_noul": 0.25,
+     "jev_cost_usd": "0.000126588"
+    },
+    {
+     "title": "Arch Linux ARM on Odroid M1S \u2013 Complete Installation Guide",
+     "url": "https://forum.odroid.com/viewtopic.php?t=50877",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 17, 2026 ... rkbin \u2013 Closed-source Rockchip firmware blobs required to build U-Boot: DDR training (RAM init) and TF-A BL31 (ARM Trusted Firmware). Landlock \u2013\u00a0...",
+     "jev_quality_noul": 0.68,
+     "jev_cost_usd": "0.000126588"
+    }
+   ]
+  }
+ ]
+}
