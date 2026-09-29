@@ -87,3 +87,28 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Cryptographic identity coverage
 
 This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
+
+## Refresh: 2026-09-29
+
+Method note: three searXNG queries were run on 2026-09-29, "openwrt 24.10 release status 2026", "openwrt network deception honeypot lan 2026", and one discretionary follow-up, "openwrt endlessh package procd 2026", retried once after a cooldown. All passes returned zero results: brave, duckduckgo, and google cse engines were suspended for rate limits every time, so no web snippets were available to weight. Fallback verification used the openwrt/openwrt GitHub API and direct raw fetches, all on 2026-09-29.
+
+Findings:
+
+- OpenWrt published v24.10.8 on 2026-07-26, 9 days after this doc's date. It is the newest 24.10 release as of 2026-09-29. Source: https://github.com/openwrt/openwrt/releases/tag/v24.10.8 (noul 0.93).
+- OpenWrt's stable line now includes a v25.12 series: v25.12.0 published 2026-03-05 through v25.12.5 published 2026-07-01. Branches openwrt-24.10 and openwrt-25.12 are both live. Source: https://github.com/openwrt/openwrt/branches (noul 0.88).
+- Impact on the plan: no existing claim changed. The package proof targets firewall4/nftables and procd patterns that hold across 24.10 and 25.12, and the plan does not pin a release, so no in-place edit was needed beyond adding this section. Evidence runs on 24.10.x should use v24.10.8 or later since it postdates the doc.
+- Source evidence verified live on 2026-09-29: the dropbear Makefile and dropbear.init on openwrt main both return HTTP 200, and dropbear.init still contains USE_PROCD=1, procd_set_param command, and procd_set_param respawn, matching the doc's procd service style evidence. Source: https://github.com/openwrt/openwrt/blob/main/package/network/services/dropbear/files/dropbear.init (noul 0.91).
+- The OpenWrt wiki firewall configuration page returned HTTP 200 directly on 2026-09-29 with no Anubis block this pass. The doc's note that the page was blocked during its own pass describes that historical fetch and stands; the page remains the canonical target. Source: https://openwrt.org/docs/guide-user/firewall/firewall_configuration (noul 0.87).
+
+Net verdict: no material change found. The doc remains accurate as of 2026-09-29 with release context added above.
+
+### Sources considered
+
+| # | Source | Weight (noul) |
+|---|---|---|
+| 0 | https://github.com/openwrt/openwrt/releases (releases API: v24.10.8 published 2026-07-26; v25.12.0 published 2026-03-05 through v25.12.5 published 2026-07-01) | 0.93 |
+| 1 | https://github.com/openwrt/openwrt/branches (branches API: openwrt-24.10 and openwrt-25.12 live) | 0.88 |
+| 2 | https://github.com/openwrt/openwrt/blob/main/package/network/services/dropbear/files/dropbear.init (raw fetch 200, USE_PROCD=1 and procd_set_param respawn confirmed) | 0.91 |
+| 3 | https://openwrt.org/docs/guide-user/firewall/firewall_configuration (HTTP 200, no Anubis block) | 0.87 |
+
+searXNG: 0 results across 5 query passes (2 required, 1 discretionary, 2 retries); engines suspended on every pass. jev quality model typesafe/jev-1.13-20260917, task_id ta9e54a3-87e2-484e-beac-e9641b02e8c1, 1 request, cost 0.000088452.
