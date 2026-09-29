@@ -62,3 +62,44 @@ This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PK
 **Owner**: TBD
 
 Context: section appended per repo-refs-skill cycle-1 Mode D batch (Δ=+0.4834).
+
+## Refresh: 2026-09-29
+
+Dig outcome: no material change found against this document's own claims. The board matrix (Run 29869527608 outputs, Path A vs Path B split, pre-production board tags) is yubiOS-internal evidence and no upstream source found contradicts it. Path A hardware proof remains the open item. No existing analysis was edited; everything below is appended context.
+
+Findings observed on 2026-09-29:
+
+- kernel.org (fetched directly, primary): mainline is 7.3-rc5, stable 7.2.8 and 7.1.13, longterm series include 6.12.111 and 6.18.54. Context for which kernel floors the Path A firmware chain would target next. https://www.kernel.org/ (jev weight: n/a, primary source outside the dig batch)
+- Kernel Recipes 2026 session "Decoding with Rockchip" (2026-09-17): RK3588 and RK3576 video decoder mainline work presented; listed under Collabora's related posts. https://www.collabora.com/news-and-blog/blog/2026/03/02/running-mainline-linux-u-boot-and-mesa-on-rockchip-a-year-in-review/ (jev weight 0.81)
+- TECH VEDA (2026-09-29): frames RK3588 mainline video decoding as a continuing thread and reports Linux 7.3 at rc5 with a mid-October final release projection; corroborates kernel.org. https://www.techveda.live/2026/09/29/slab-tiny-boot-option/ (jev weight 0.76, aggregator)
+- Nothing found indicating upstream RK3399 / ROCKPro64 status changes since 2026-07-17. The Path A open items (real DDR/TPL input, ROTPK/fuse, RPMB, fTPM NV, signed UKI) remain as stated.
+
+Context predating this doc's 2026-07-17 date, retained for orientation (not counted as changes since then):
+
+- Pengutronix RK3588 Secure Boot deep dive (2026-06-19): BootROM verifies the RSA key hash in OTP eFuses, then the signed firmware header chain; barebox integration covered; presented at Embedded Recipes 2026. https://pengutronix.de/en/blog/2026-06-19-rk3588-secure-boot.html (jev weight 0.85)
+- Collabora year-in-review (2026-03-02): Vulkan 1.4 conformance on RK3588 Mali, the Rocket NPU driver, multimedia progress, RK3576 support. https://www.collabora.com/news-and-blog/blog/2026/03/02/running-mainline-linux-u-boot-and-mesa-on-rockchip-a-year-in-review/ (jev weight 0.81)
+- CNX Software (2026-02-27): RK3588 and RK3576 H.264/HEVC hardware decoders merged in mainline Linux. https://www.cnx-software.com/2026/02/27/rockchip-rk3588-rk3576-h-264-and-h-265-video-decoders-mainline-linux/ (jev weight 0.87)
+- Embedded Recipes 2026 held 27-28 May 2026 in Nice, France; RK3588 Secure Boot sessions on the program. https://embedded-recipes.org/2026/schedule/ (jev weight 0.81)
+
+Sources considered (18 dig results, jev noul weights):
+
+- 0.86 Collabora: Mainline video capture and camera support for Rockchip RK3588 (2026-04-13) https://www.collabora.com/news-and-blog/news-and-events/mainline-video-capture-and-camera-support-for-rockchip-rk3588.html
+- 0.87 CNX Software: RK3588/RK3576 H.264 and H.265 video decoders mainline (2026-02-27) https://www.cnx-software.com/2026/02/27/rockchip-rk3588-rk3576-h-264-and-h-265-video-decoders-mainline-linux/
+- 0.52 Frigate discussion: RK3588 mainline kernel hardware acceleration status https://github.com/blakeblackshear/frigate/discussions/18311
+- 0.15 TECH VEDA (kernel news digest) https://www.techveda.live/2026/09/29/slab-tiny-boot-option/
+- 0.12 Radxa forum: new kernels for ROCK 5B / RK3588 https://forum.radxa.com/t/will-be-new-kernels-for-rock-5b-rk3588/31128
+- 0.12 Collabora: Running mainline Linux, U-Boot, Mesa on Rockchip, year in review (2026-03-02) https://www.collabora.com/news-and-blog/blog/2026/03/02/running-mainline-linux-u-boot-and-mesa-on-rockchip-a-year-in-review/
+- 0.85 Pengutronix: Secure Boot on Rockchip RK3588 (2026-06-19) https://pengutronix.de/en/blog/2026-06-19-rk3588-secure-boot.html
+- 0.76 TECH VEDA: slab_tiny targets 7.4 (2026-09-29) https://www.techveda.live/2026/09/29/slab-tiny-boot-option/
+- 0.81 Collabora: Mainline video capture and camera support for Rockchip RK3588 (2026-04-13) https://www.collabora.com/news-and-blog/news-and-events/mainline-video-capture-and-camera-support-for-rockchip-rk3588.html
+- 0.81 Embedded Recipes 2026 schedule https://embedded-recipes.org/2026/schedule/
+- 0.13 Reddit: RK3588 mainline Linux support status https://www.reddit.com/r/linux/comments/1hj93kw/rockchip_rk3588_mainline_linux_support_current/
+- 0.11 CNX Software: RK3588 mainline Linux support, status and future work (2024-12-21) https://www.cnx-software.com/2024/12/21/rockchip-rk3588-mainline-linux-support-current-status-and-future-work-for-2025/
+- 0.46 Radxa forum: mainline U-Boot and kernel restarts during boot (2026-04-14) https://forum.radxa.com/t/mainline-u-boot-and-kernel-restarts-during-boot/30664
+- 0.10 Reddit: RK3588 mainline Linux support status https://www.reddit.com/r/linux/comments/1hj93kw/rockchip_rk3588_mainline_linux_support_current/
+- 0.11 Collabora: Almost a fully open-source boot chain for RK3588 (2024-02-21) https://www.collabora.com/news-and-blog/blog/2024/02/21/almost-a-fully-open-source-boot-chain-for-rockchips-rk3588/
+- 0.67 CNX Software: RK3588 mainline Linux support, status and future work (2024-12-21) https://www.cnx-software.com/2024/12/21/rockchip-rk3588-mainline-linux-support-current-status-and-future-work-for-2025/
+- 0.25 Interfacing Linux: EDK2 UEFI for the ROCK 5 ITX (2025-08-25) https://interfacinglinux.com/2025/08/25/edk2-uefi-for-the-rock-5-itx/
+- 0.33 DietPi forum: compaction disabled on Rockchip kernel https://dietpi.com/forum/t/why-is-compaction-disabled-on-the-rockchip-kernel/25175
+
+Refresh performed by a repo-refs-skill refresh agent; jev quality model typesafe/jev-1.13-20260917, one batched call, task ta2e16e1-b34b-4d1b-98ba-77978f29df3a.
