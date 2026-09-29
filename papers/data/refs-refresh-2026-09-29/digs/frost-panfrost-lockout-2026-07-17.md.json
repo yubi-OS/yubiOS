@@ -1,0 +1,137 @@
+{
+ "doc": "frost-panfrost-lockout-2026-07-17.md",
+ "queries": [
+  {
+   "query": "panfrost DRM device memory cgroup 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Security update for the Linux Kernel | SUSE Support",
+     "url": "https://www.suse.com/support/update/announcement/2026/suse-su-20262238-1/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 3, 2026 ... drm/panfrost: Fix wait_bo ioctl leaking positive return from ... media: as102: fix to not free memory after the device is registered in\u00a0...",
+     "jev_quality_noul": 0.62,
+     "jev_cost_usd": "0.000137676"
+    },
+    {
+     "title": "Kernel 7.1: Graphics, Rust, and SoC Improvements - Collabora",
+     "url": "https://www.collabora.com/news-and-blog/news-and-events/kernel-7.1-graphics,-rust,-and-soc-improvements.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 17, 2026 ... Extended scheduler class gains per-cgroup sub-scheduler support; Long-standing control group memory retention bug fixed. For a complete overview\u00a0...",
+     "jev_quality_noul": 0.62,
+     "jev_cost_usd": "0.000137676"
+    },
+    {
+     "title": "On Stock firmware, after apt upgrade, webcam and HDMI ...",
+     "url": "https://forum.sovol3d.com/t/on-stock-firmware-after-apt-upgrade-webcam-and-hdmi-touchscreen-stop-working/9655",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 22, 2026 ... ... device: /dev/video0 [02/22/26 10:51:15] crowsnest: resolution ... cgroup_enable=memory\", will be passed to user space. ... [ 3.240923]\u00a0...",
+     "jev_quality_noul": 0.53,
+     "jev_cost_usd": "0.000137676"
+    },
+    {
+     "title": "Linux Kernel 6.14 Officially Released, This Is What's New - 9to5Linux",
+     "url": "https://9to5linux.com/linux-kernel-6-14-officially-released-this-is-whats-new",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 24, 2025 ... ... cgroup controller for device memory. It also brings core energy ... Panfrost driver, support for the Nacon Evol-X and Nacon Pro Compact\u00a0...",
+     "jev_quality_noul": 0.06,
+     "jev_cost_usd": "0.000137676"
+    },
+    {
+     "title": "Board Bring-up Youyeetoo YY3568 RockChip RK3568",
+     "url": "https://forum.armbian.com/topic/49775-board-bring-up-youyeetoo-yy3568-rockchip-rk3568/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 11, 2025 ... [ 0.000000] Unknown kernel command line parameters \"splash ubootpart=41a72af7-ee03-854a-8ec3-780abdbcac11 cgroup_enable=memory cgroup_memory=1\",\u00a0...",
+     "jev_quality_noul": 0.14,
+     "jev_cost_usd": "0.000137676"
+    },
+    {
+     "title": "Home Assistant Green wipe (reset to factory settings) failed after ...",
+     "url": "https://github.com/home-assistant/operating-system/issues/3660",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Nov 5, 2024 ... I finally manage to reset the device. I think there is a bug when data is on an external storage, reset procedure do not rename hassos-data-old\u00a0...",
+     "jev_quality_noul": 0.38,
+     "jev_cost_usd": "0.00012558"
+    }
+   ]
+  },
+  {
+   "query": "Mali GPU memory cgroup kernel mainline 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Linux_6.19 - Linux Kernel Newbies",
+     "url": "https://kernelnewbies.org/Linux_6.19",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 8, 2026 ... ... memory, devices and their dependencies, across the kernel transition. ... Add support for Mali-G1 GPUs (cover), commit, commit, commit, commit\u00a0...",
+     "jev_quality_noul": 0.35,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "Linux Plumbers Conference 2025 (11-13 December 2025) \u00b7 Indico",
+     "url": "https://lpc.events/event/19/timetable/?view=standard",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "It occurs when a memory cgroup is destroyed by users, but kernel metadata ... Nova GPU Workshop: GPU Firmware: status and 2026 plans \u00b7 Nova GPU Workshop\u00a0...",
+     "jev_quality_noul": 0.19,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "Release Notes | SUSE Linux Enterprise Server 15 SP2",
+     "url": "https://documentation.suse.com/releasenotes/sles/html/releasenotes_sles_15-SP2/index.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 5, 2026 ... To use them, the Device Tree passed by the bootloader to the kernel needs to include a description of the Mali GPU for the kernel driver to get\u00a0...",
+     "jev_quality_noul": 0.3,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "GitHub - ravindu644/Droidspaces-OSS",
+     "url": "https://github.com/ravindu644/Droidspaces-OSS",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "20 hours ago ... Spotty (cgroup conflicts, broken on many old Android kernels) ... Seccomp Filters: Common exploit vectors (like CVE-2026-31431 and malicious\u00a0...",
+     "jev_quality_noul": 0.66,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "TracePacket - Perfetto Tracing Docs",
+     "url": "https://perfetto.dev/docs/reference/trace-packet-proto",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Must be specified on first trace packet of the trusted sequence if using mode 2. counters, GpuCounter[]. gpu_id, int32, Identifier for GPU in a multi-gpu device\u00a0...",
+     "jev_quality_noul": 0.74,
+     "jev_cost_usd": "0.000122388"
+    },
+    {
+     "title": "Collect and view traces | Android Open Source Project",
+     "url": "https://source.android.com/docs/core/power/wattson/how-to-wattson",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 17, 2026 ... For a given selection, the Wattson GPU power estimates appear in the Perfetto UI on the Wattson estimates tab. GPU Power Estimation. Figure 8.",
+     "jev_quality_noul": 0.75,
+     "jev_cost_usd": "0.000122388"
+    }
+   ]
+  }
+ ]
+}

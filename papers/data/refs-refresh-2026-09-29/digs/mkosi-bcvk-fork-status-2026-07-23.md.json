@@ -1,0 +1,137 @@
+{
+ "doc": "mkosi-bcvk-fork-status-2026-07-23.md",
+ "queries": [
+  {
+   "query": "mkosi v28 release changelog 2026",
+   "n_results": 13,
+   "top": [
+    {
+     "title": "Appendix B. Release Notes - NixOS",
+     "url": "https://nixos.org/manual/nixos/stable/release-notes",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Release 26.05 (\u201cYarara\u201d, 2026.05/30). Highlights. Stage 1 (a.k.a. initrd) is now based on systemd by\u00a0...",
+     "jev_quality_noul": 0.76,
+     "jev_cost_usd": "0.000130116"
+    },
+    {
+     "title": "Bitcoin Core 28.0",
+     "url": "https://bitcoincore.org/en/releases/28.0/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Oct 2, 2024 ... 28.0 Release Notes. Bitcoin Core version 28.0 is now available from: https://bitcoincore.org/bin/bitcoin-core-28.0/. This release includes new\u00a0...",
+     "jev_quality_noul": 0.75,
+     "jev_cost_usd": "0.000130116"
+    },
+    {
+     "title": "Longitudinal Analysis of Flavored Cigar Use and Cigar Smoking ...",
+     "url": "https://academic.oup.com/ntr/article/26/7/816/7492742",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "To capture changes in cigar-smoking behavior and to ensure the exposure temporally preceded the outcome, flavored cigar use was allowed to time-vary and was\u00a0...",
+     "jev_quality_noul": 0.73,
+     "jev_cost_usd": "0.000130116"
+    },
+    {
+     "title": "INVITED SYMPOSIUM : International Journal of Psychology - Ovid",
+     "url": "https://www.ovid.com/journals/ijpsy/fulltext/10.1002/ijop.13208~invited-symposium",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "These neurodevelopmental changes were implicated in the observed decline in emotional sharing behaviour. In conclusion, the prefrontal cortex emerges as a\u00a0...",
+     "jev_quality_noul": 0.02,
+     "jev_cost_usd": "0.000130116"
+    },
+    {
+     "title": "Pathology Awards 2022 - The University of British Columbia",
+     "url": "https://file.pathology.ubc.ca/AR2023/RefereedPublications2022.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... 2026 (#Co-first author, *Co-senior author, SA), 1. journals. Hui-MinYang ... v28.i19.2076. PMID: 35664032; PMCID: PMC9134131. 1. journals. Zu-Hua Gao, Hu\u00a0...",
+     "jev_quality_noul": 0.02,
+     "jev_cost_usd": "0.000130116"
+    },
+    {
+     "title": "2023 - International Business Conference",
+     "url": "https://internationalbusinessconference.com/2023-2/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "2026. IBC Programme 2026 \u00b7 IBC 2nd Call for papers 2026 \u00b7 IBC WIP Paper Template ... Statistical analyses, executed using SPSS and AMOS V28, included\u00a0...",
+     "jev_quality_noul": 0.02,
+     "jev_cost_usd": "0.00012474"
+    }
+   ]
+  },
+  {
+   "query": "mkosi systemd image builder release 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "systemd/mkosi: Build Bespoke OS Images - GitHub",
+     "url": "https://github.com/systemd/mkosi",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... generatorinitramfs-imageluksmkosiopensusepartitionsquashfsubuntuverity ... \u00a9 2026 GitHub, Inc. Footer navigation. Terms \u00b7 Privacy \u00b7 Security \u00b7 Status \u00b7 Community\u00a0...",
+     "jev_quality_noul": 0.02,
+     "jev_cost_usd": "0.00012474"
+    },
+    {
+     "title": "mkosi - ArchWiki",
+     "url": "https://wiki.archlinux.org/title/Mkosi",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 26, 2026 ... Deep Freedesktop.org and systemd integration; Wide range of output formats like Raw GPT disk image, plain directory, tar, cpio and USI / UKI.",
+     "jev_quality_noul": 0.92,
+     "jev_cost_usd": "0.00012474"
+    },
+    {
+     "title": "Building an image-based Debian 13 disk image using mkosi",
+     "url": "https://jasminchen.dev/notes/2026/experimenting-with-mkosi-and-debian/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 15, 2026 ... (Update 2026-07-02: It is the default folder of systemctl switch-root .) Since the systemd-fstab-generator mentions the mount.usr=dissect boot\u00a0...",
+     "jev_quality_noul": 0.63,
+     "jev_cost_usd": "0.00012474"
+    },
+    {
+     "title": "Safely Building Images - Systemd",
+     "url": "https://systemd.io/BUILDING_IMAGES/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Most of the points described here are implemented by the mkosi OS image builder developed and maintained by the systemd project. If you are using or working\u00a0...",
+     "jev_quality_noul": 0.17,
+     "jev_cost_usd": "0.00012474"
+    },
+    {
+     "title": "Self-hosting my websites using bootable containers - Yorick Peterse",
+     "url": "https://yorickpeterse.com/articles/self-hosting-my-websites-using-bootable-containers/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 18, 2026 ... mkosi, a tool from the systemd project used for building custom ... First, when building the image using bootc-image-builder, the image\u00a0...",
+     "jev_quality_noul": 0.22,
+     "jev_cost_usd": "0.000129696"
+    },
+    {
+     "title": "Supported Build Recipes and Package Formats | User Guide",
+     "url": "https://openbuildservice.org/help/manuals/obs-user-guide/cha-obs-package-formats",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "... systemd-nspawn, or as Portable Services in systemd. GRUB2 is also ... In order to build an image in mkosi you need at least a mkosi.conf recipe\u00a0...",
+     "jev_quality_noul": 0.21,
+     "jev_cost_usd": "0.000129696"
+    }
+   ]
+  }
+ ]
+}

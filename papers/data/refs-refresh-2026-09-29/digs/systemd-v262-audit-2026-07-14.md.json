@@ -1,0 +1,137 @@
+{
+ "doc": "systemd-v262-audit-2026-07-14.md",
+ "queries": [
+  {
+   "query": "systemd v263 release changelog 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Releases \u00b7 systemd/systemd - GitHub",
+     "url": "https://github.com/systemd/systemd/releases",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "1 itself, which found adoption far beyond systemd), and its implementation is incomplete. With the future v263 release we intend to remove support for /run/boot\u00a0...",
+     "jev_quality_noul": 0.85,
+     "jev_cost_usd": "0.00013734"
+    },
+    {
+     "title": "systemd 262 Released with Static PID 1, Intel TDX, TPM ...",
+     "url": "https://www.linuxjournal.com/content/systemd-262-released-static-pid-1-intel-tdx-tpm-improvements-and-new-container-features",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "5 days ago ... The final release was tagged on September 22, 2026, following three release candidates earlier in the month. ... These changes continue systemd's\u00a0...",
+     "jev_quality_noul": 0.87,
+     "jev_cost_usd": "0.00013734"
+    },
+    {
+     "title": "v263 \u00b7 Milestone #40 \u00b7 systemd/systemd - GitHub",
+     "url": "https://github.com/systemd/systemd/milestone/40",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "RC1: 2026-11-19 RC2: 2026-11-26 RC3: 2026-12-03 RC4: 2026-12-10. 33% complete ... sysext: IMAGE_ID, IMAGE_VERSION in extension-release \u00b7 claude-review.",
+     "jev_quality_noul": 0.27,
+     "jev_cost_usd": "0.00013734"
+    },
+    {
+     "title": "Milestones \u00b7 systemd/systemd - GitHub",
+     "url": "https://github.com/systemd/systemd/milestones",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Changelog \u00b7 Marketplace \u00b7 View all features. Solutions. BY COMPANY SIZE ... v263. RC1: 2026-11-19 RC2: 2026-11-26 RC3: 2026-12-03 RC4: 2026-12-10. Due by\u00a0...",
+     "jev_quality_noul": 0.87,
+     "jev_cost_usd": "0.00013734"
+    },
+    {
+     "title": "Minecraft Bedrock Patch Vs 2644 | TikTok",
+     "url": "https://www.tiktok.com/discover/minecraft-bedrock-patch-vs-2644",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Aug 24, 2026 ... ... 2026-08-24. 382 Likes, 41 Comments. TikTok video from Ho\u00e0ng Anh MC ... V263 C\u00e1ch T\u1ea3i \u00b7 Link T\u1ea3i Minecraft Patch Ipa Ios. 262Likes. 55\u00a0...",
+     "jev_quality_noul": 0.71,
+     "jev_cost_usd": "0.00013734"
+    },
+    {
+     "title": "The npm Threat Landscape: Attack Surface and Mitigations ...",
+     "url": "https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jul 15, 2026 ... July 2026 Campaign. Attackers compromised the release pipelines of four core AsyncAPI GitHub repositories on July 14, 2026. In a campaign\u00a0...",
+     "jev_quality_noul": 0.11,
+     "jev_cost_usd": "0.000129948"
+    }
+   ]
+  },
+  {
+   "query": "systemd release notes new features 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "systemd 262 Released with Static PID 1, Intel TDX, TPM ...",
+     "url": "https://www.linuxjournal.com/content/systemd-262-released-static-pid-1-intel-tdx-tpm-improvements-and-new-container-features",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "5 days ago ... The final release was tagged on September 22, 2026, following three release candidates earlier in the month. Systemd 262 introduces improvements\u00a0...",
+     "jev_quality_noul": 0.1,
+     "jev_cost_usd": "0.000129948"
+    },
+    {
+     "title": "systemd 262 Released With AI/LLM Canary For Unreviewed Code ...",
+     "url": "https://www.phoronix.com/news/systemd-262",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "8 days ago ... - systemd-coredump now supports the kernel coredump socket protocol introduced in Linux 6.17. - New FSCRYPT-backed home directories with systemd\u00a0...",
+     "jev_quality_noul": 0.3,
+     "jev_cost_usd": "0.000129948"
+    },
+    {
+     "title": "Releases \u00b7 systemd/systemd - GitHub",
+     "url": "https://github.com/systemd/systemd/releases",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "1 itself, which found adoption far beyond systemd), and its implementation is incomplete. With the future v263 release we intend to remove support for /run/boot\u00a0...",
+     "jev_quality_noul": 0.33,
+     "jev_cost_usd": "0.000129948"
+    },
+    {
+     "title": "systemd 261 Released With New systemd-sysinstall OS Installer ...",
+     "url": "https://www.phoronix.com/news/systemd-261",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 19, 2026 ... Systemd 261 is out as stable today with a number of new features and ready to coincide with H2'2026 Linux distributions. The systemd 261 release\u00a0...",
+     "jev_quality_noul": 0.91,
+     "jev_cost_usd": "0.000129948"
+    },
+    {
+     "title": "systemd 261-rc3 Released With Individual Binaries Now Embedding ...",
+     "url": "https://www.phoronix.com/news/systemd-261-rc3",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jun 4, 2026 ... The stable release of systemd 261 is quickly approaching for being found in H2'2026 Linux distributions. Systemd 261 is bringing many new\u00a0...",
+     "jev_quality_noul": 0.21,
+     "jev_cost_usd": "0.000134232"
+    },
+    {
+     "title": "NixOS 26.05 released | Blog",
+     "url": "https://nixos.org/blog/announcements/2026/nixos-2605/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 30, 2026 ... Stage 1 (a.k.a. initrd) is now based on systemd by default, and the old scripted implementation is deprecated and scheduled for removal in 26.11\u00a0...",
+     "jev_quality_noul": 0.22,
+     "jev_cost_usd": "0.000134232"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,137 @@
+{
+ "doc": "systemd-hardening-audit-2026-07-17.md",
+ "queries": [
+  {
+   "query": "systemd sandboxing directives new 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "systemd/Sandboxing - ArchWiki",
+     "url": "https://wiki.archlinux.org/title/Systemd/Sandboxing",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Aug 28, 2026 ... systemd enables users to harden and sandbox system service units. Because of technical limitations, and ironically security reasons,\u00a0...",
+     "jev_quality_noul": 0.09,
+     "jev_cost_usd": "0.000122388"
+    },
+    {
+     "title": "Changes/SystemdSecurityHardening - Fedora Project Wiki",
+     "url": "https://fedoraproject.org/wiki/Changes/SystemdSecurityHardening",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 10, 2025 ... Improve security by enabling some of the high level systemd security hardening settings that isolate and sandbox default system services.",
+     "jev_quality_noul": 0.5,
+     "jev_cost_usd": "0.000122388"
+    },
+    {
+     "title": "AI Sandbox: The Complete Guide to Sandboxing AI Agents in 2026",
+     "url": "https://cosmonic.com/blog/ai-sandbox-guide/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "May 26, 2026 ... A poisoned Model Context Protocol (MCP) tool can pivot from an AI agent into production systems. ... For new infrastructure built around AI agent\u00a0...",
+     "jev_quality_noul": 0.77,
+     "jev_cost_usd": "0.000122388"
+    },
+    {
+     "title": "Practical Security Guidance for Sandboxing Agentic Workflows and ...",
+     "url": "https://developer.nvidia.com/blog/practical-security-guidance-for-sandboxing-agentic-workflows-and-managing-execution-risk/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jan 30, 2026 ... Many agentic systems only apply sandboxing at the time of tool ... As agentic tools continue to evolve, gaining new capabilities, integrations,\u00a0...",
+     "jev_quality_noul": 0.21,
+     "jev_cost_usd": "0.000127848"
+    },
+    {
+     "title": "systemd - ArchWiki",
+     "url": "https://wiki.archlinux.org/title/Systemd",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Sep 7, 2026 ... ... systemctl preset or systemctl preset-all whenever a new systemd unit is installed. ... directives for various components of systemd can be\u00a0...",
+     "jev_quality_noul": 0.21,
+     "jev_cost_usd": "0.000127848"
+    },
+    {
+     "title": "systemd.exec(5) - Linux manual page - man7.org",
+     "url": "https://man7.org/linux/man-pages/man5/systemd.exec.5.html",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "SECURITY top. NoNewPrivileges= Takes a boolean argument. If true, ensures that the service process and all its children can never gain new privileges through\u00a0...",
+     "jev_quality_noul": 0.41,
+     "jev_cost_usd": "0.000127848"
+    }
+   ]
+  },
+  {
+   "query": "systemd service hardening systemd-analyze 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "How to Configure systemd Service Hardening on Ubuntu - OneUptime",
+     "url": "https://oneuptime.com/blog/post/2026-03-02-how-to-configure-systemd-service-hardening-on-ubuntu/view",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 2, 2026 ... A well-hardened systemd service has limited access outside its designated directories, can be blocked from calling dangerous system calls, and\u00a0...",
+     "jev_quality_noul": 0.88,
+     "jev_cost_usd": "0.000127848"
+    },
+    {
+     "title": "Harden Linux Services with `systemd-analyze security`: From Score ...",
+     "url": "https://dev.to/lyraalishaikh/harden-linux-services-with-systemd-analyze-security-from-score-to-enforceable-policy-3045",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Mar 5, 2026 ... Harden Linux Services with systemd analyze security: From Score to Enforceable Policy If you run long lived services on Linux,\u00a0...",
+     "jev_quality_noul": 0.15,
+     "jev_cost_usd": "0.000127848"
+    },
+    {
+     "title": "alegrey91/systemd-service-hardening: Basic guide to ... - GitHub",
+     "url": "https://github.com/alegrey91/systemd-service-hardening",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "The systemd-analyze security command generates a report about security exposure for each service present in our distribution. This allow us to check the\u00a0...",
+     "jev_quality_noul": 0.18,
+     "jev_cost_usd": "0.000043932"
+    },
+    {
+     "title": "Quick Linux hardening check: systemd-analyze security - Reddit",
+     "url": "https://www.reddit.com/r/linux4noobs/comments/1qdejfe/quick_linux_hardening_check_systemdanalyze/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jan 15, 2026 ... It gives you a clear picture of how locked down a service actually is. Filesystem access, kernel capabilities, networking, namespaces, and\u00a0...",
+     "jev_quality_noul": 0.07,
+     "jev_cost_usd": "0.000085512"
+    },
+    {
+     "title": "systemd hardening made easy with SHH - Synacktiv",
+     "url": "https://synacktiv.com/publications/systemd-hardening-made-easy-with-shh",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Nov 7, 2023 ... For example, they allow running a service while preventing it from writing any data on the file system, making it unable to access the network,\u00a0...",
+     "jev_quality_noul": 0.07,
+     "jev_cost_usd": "0.000085512"
+    },
+    {
+     "title": "Mastering systemd: Securing and sandboxing applications and ...",
+     "url": "https://www.redhat.com/en/blog/mastering-systemd",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Jan 2, 2020 ... This output from systemd-analyze security shows the name, a convenient description, and an exposure rating, which demonstrates the consumption\u00a0...",
+     "jev_quality_noul": 0.47,
+     "jev_cost_usd": "0.000085512"
+    }
+   ]
+  }
+ ]
+}

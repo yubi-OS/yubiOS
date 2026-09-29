@@ -1,0 +1,137 @@
+{
+ "doc": "osbuild-image-builder-2026-07-23.md",
+ "queries": [
+  {
+   "query": "osbuild image builder release 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Releases - Image Builder",
+     "url": "https://osbuild.org/docs/on-premises/overview/release-overview/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "osbuild, osbuild-composer, cockpit-image-builder, image-builder, bootc-image-builder. Upstream (GitHub), 53.1 \u00b7 v191 \u00b7 v179 \u00b7 v110 \u00b7 v69, -. Fedora 44, 53-5\u00a0...",
+     "jev_quality_noul": 0.05,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "RHSA-2026:71543 - Security Advisory - Red Hat Customer Portal",
+     "url": "https://access.redhat.com/errata/RHSA-2026:71543",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "5 days ago ... An update for cockpit-image-builder is now available for Red Hat Enterprise Linux 10. ... It integrates into Cockpit as a frontend for osbuild.",
+     "jev_quality_noul": 0.93,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "RHEL 10 : image-builder (RHSA-2026:67139) | Tenable\u00ae",
+     "url": "https://www.tenable.com/plugins/nessus/345586",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Sep 14, 2026 ... A local binary for building customized OS artifacts such as VM images and OSTree commits. Uses osbuild under the hood. ... For more details about\u00a0...",
+     "jev_quality_noul": 0.81,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "Deprecation notice \u2014 bootc-image-builder",
+     "url": "https://osbuild.org/docs/bootc/deprecation-notice/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "The osbuild project is converging package mode and image mode into a single, unified image-building experience. As part of that effort, the standalone\u00a0...",
+     "jev_quality_noul": 0.13,
+     "jev_cost_usd": "0.00012558"
+    },
+    {
+     "title": "OSBuild - Image Builder",
+     "url": "https://osbuild.org/docs/developer-guide/projects/osbuild/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Principles\u200b \u00b7 OSBuild stages are never broken, only deprecated. \u00b7 OSBuild stages should be explicit whenever possible instead of e.g. relying on the state of the\u00a0...",
+     "jev_quality_noul": 0.9,
+     "jev_cost_usd": "0.000114996"
+    },
+    {
+     "title": "GitHub - osbuild/image-builder-cli: Building operating system ...",
+     "url": "https://github.com/osbuild/image-builder-cli",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "This repository was archived by the owner on Sep 1, 2026. It is now ... https://github.com/osbuild/image-builder-cli/releases. Repository. web: https\u00a0...",
+     "jev_quality_noul": 0.9,
+     "jev_cost_usd": "0.000114996"
+    }
+   ]
+  },
+  {
+   "query": "fedora osbuild bootc image mode 2026",
+   "n_results": 20,
+   "top": [
+    {
+     "title": "Migration | Image Builder",
+     "url": "https://osbuild.org/docs/bootc/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "A container to create disk images from bootc container inputs, especially oriented towards Fedora/CentOS bootc or derivatives. Installation\u200b. Have podman\u00a0...",
+     "jev_quality_noul": 0.41,
+     "jev_cost_usd": "0.000114996"
+    },
+    {
+     "title": "Deprecation notice \u2014 bootc-image-builder",
+     "url": "https://osbuild.org/docs/bootc/deprecation-notice/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "The osbuild project is converging package mode and image mode into a single, unified image-building experience. As part of that effort, the standalone\u00a0...",
+     "jev_quality_noul": 0.86,
+     "jev_cost_usd": "0.000114996"
+    },
+    {
+     "title": "ublue-os/bootc-image-builder-action - GitHub",
+     "url": "https://github.com/ublue-os/bootc-image-builder-action",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "This action is now in maintenance mode and will not have any new features. Please migrate to the upstream osbuild action.",
+     "jev_quality_noul": 0.92,
+     "jev_cost_usd": "0.000114996"
+    },
+    {
+     "title": "Chapter 6. Customizing disk images of RHEL image mode with ...",
+     "url": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/using_image_mode_for_rhel_to_build_deploy_and_manage_operating_systems/customizing-disk-images-of-rhel-image-mode-with-advanced-partitioning_building-and-managing-physically-bound-images",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "You can customize your bootc-image-builder blueprint to implement advanced partitioning for osbuild-composer . The following are possible custom mountpoints\u00a0...",
+     "jev_quality_noul": 0.79,
+     "jev_cost_usd": "0.000128352"
+    },
+    {
+     "title": "Blueprint Reference - Image Builder",
+     "url": "https://osbuild.org/docs/user-guide/blueprint-reference/",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "You can upload a blueprint with the osbuild-composer blueprints push $filename command, the blueprint will then be usable in osbuild-composer compose as the\u00a0...",
+     "jev_quality_noul": 0.79,
+     "jev_cost_usd": "0.000128352"
+    },
+    {
+     "title": "Changes/RemoveFipsModeSetup - Fedora Project Wiki",
+     "url": "https://fedoraproject.org/wiki/Changes/RemoveFipsModeSetup",
+     "engines": [
+      "google cse"
+     ],
+     "snippet": "Feb 18, 2025 ... customization to build an image in FIPS mode; Use bootc as documented ... use osbuild-composer with the following customization to build a FIPS-\u00a0...",
+     "jev_quality_noul": 0.9,
+     "jev_cost_usd": "0.000128352"
+    }
+   ]
+  }
+ ]
+}
