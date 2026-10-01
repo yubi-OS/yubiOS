@@ -39,6 +39,15 @@ Calibration facts this file's own dead-row history produced:
 - **Error-code discrimination table**: `6111` (malformed stored Authorization value) = row defect, stop retrying; `9109` (invalid access token) = expired/revoked, the row needs re-creation. Both are calibration signals about the row, not transient errors.
 - **Drift trigger**: re-run the health check after any Settings change to Cloudflare rows. The working row id has churned (two prior working rows died), so pin ids dynamically per session, never from memory.
 
+## Recursion
+
+Self-audit rules for this connection file, with cadence triggers:
+
+- **Session-start audit**: run the health check (`GET /accounts` through the currently-listed working row) before any Cloudflare work in a session; the working row id has churned twice, so this file's tables are provisional until the check returns 200.
+- **Table update discipline**: when a row's status changes (worked → dead, or a new row lands), update the dead/working table in the same session. The tables are the audit trail; a stale table misdirects the next session exactly the way the six dead rows once did.
+- **Append, don't rewrite**: status changes get dated lines (the 2026-09-21 resolution note is the pattern). Rewriting history here hides the drift the tables exist to expose.
+- **Re-run triggers**: a 9109 or 6111 on a previously-working row, a workers.dev subdomain rename, or any new Cloudflare credential flow in Settings.
+
 ## Patterns that worked
 
 - **Live check (no auth needed):** `curl -o /tmp/body.html -w "%{http_code} %{time_total}s %{size_download}B" https://steady-orbit.systems-a.workers.dev/` — 200 expected. The old `old-queen-53c8` URL returned 530 `error code: 1016` on 2026-09-21 (was 200 on 2026-09-04).
