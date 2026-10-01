@@ -366,6 +366,15 @@ Who this checklist is written for, per its own steps:
 - **Secondary readers**: CI operators triaging build failures (the Build Failure Triage tree targets them directly) and reviewers judging a post-fix diff (the Verification checklist is the review rubric they apply).
 - **Not for**: incident command without repo access. With no reproducing environment, Step 1 (Reproduce) cannot pass, so this checklist is the wrong tool — the file's own non-reproducible path says to document conditions and monitor instead.
 
+## Calibration
+
+Calibration anchors this skill's own record carries, and their handling rules:
+
+- **Measured fit anchors**: the cycle-5 corpus fit placed this skill at (u=0.753, v=0.483) with PC1+PC2 = 0.4615 and holdout R² = +0.2244 (per the audit/evidence coverage entry). These are the numbers to re-measure after any corpus-wide change; quote them with their cycle, never without.
+- **Unvalidated prior flagged as such**: the Common Rationalizations table carries a base-rate claim ("You might be right 70% of the time"). It has no measured false-positive backing — treat it as an unvalidated prior, not a calibrated statistic.
+- **Binary verification gate**: the Verification checklist's 6 items are pass/fail. A fix that cannot pass all 6 is not verified; "it works now" without the checklist is the failure mode the Red Flags list names.
+- **Non-reproducible handling**: a bug that resists reproduction is never closed by calibration-by-guessing — the triage routes it to documentation plus monitoring, and the monitoring signature becomes the future calibration point.
+
 ## Examples
 
 **Worked setup** — the flow this skill drives, using its own artifacts:
