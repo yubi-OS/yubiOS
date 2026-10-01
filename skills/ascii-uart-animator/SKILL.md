@@ -103,6 +103,15 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 
 This skill manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
 
+## Recursion
+
+Self-audit rules for this skill, with cadence triggers:
+
+- **Connection check before every play**: the frontmatter's bridge connection id has churned before (the current rock1 shell bridge row was re-created during the 2026-09-24 auth repair; old rows `conn_6rp6oRY9DBJG` and friends were deleted from Settings). Verify the live rock1 bridge connection id in the session's connection list before posting; a stale id 401s or 530s.
+- **Table-vs-scripts audit**: before any `play_all`, verify the Built-in animations table's frame counts and FPS against the actual constants in `scripts/*.py` — the table is the calibration source of truth and rots if scripts change without it.
+- **Unsupported-claims rule (standing precedent 2026-09-17)**: the primitive-coverage template paragraphs formerly in this file asserted capabilities the skill does not implement and were removed. Re-runs must not re-add unsupported claims; coverage sections stay only where the skill itself delivers the primitive.
+- **Re-run triggers**: UART device path or baud rate changes on rock1; the shell bridge is re-created or re-tokened; a new animation script is added (then update the table + this section's audit line).
+
 ## Examples
 
 **In-repo touchpoints** — sections this skill owns or extends: How it works, Running, Built-in animations, Knobs.
