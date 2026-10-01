@@ -46,6 +46,8 @@ Together" essay at [0pointer.net](https://0pointer.net/blog/fitting-everything-t
 primary design reference for yubiOS — hermetic /usr, DPS partitions, systemd-repart first-boot,
 A/B sysupdate, systemd-homed per-user encryption, and UKI + dm-verity trust chain.
 
+<img src="https://raw.githubusercontent.com/yubi-OS/assets/main/yubiOS_slide_2.png" width="80%" >
+
 ## Trust chain
 
 ```text
