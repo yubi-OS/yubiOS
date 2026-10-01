@@ -116,4 +116,16 @@ Failure paths, all explicit:
 4. When the gate blocks for policy reasons you keep working for free; when it blocks for spend/limits, promote a learning (human step) rather than raising limits silently.
 5. The dashboard's confirm dialogs are the irreversibility contract: approve dispatches the exact bound action.
 
+## Automations (Jev Automations layer, 2026-10-01)
+
+On top of the task loop, the worker hosts **automations**: versioned templates in D1 that run stage pipelines (deterministic tool fetches → LLM stages → safety guard → gated action proposals) and can fire on a schedule. A freeform **prompt** is also a first-class task input — the 70b Llama model proposes actions, and every proposal passes the same deterministic gate as hand-written ones. The LLM never authorizes anything.
+
+- **Model routes**: `classify` → llama-3.1-8b-instruct-fp8 (cheap extraction/classification) · `draft` → llama-3.3-70b-instruct-fp8-fast (generation, prompt-intake action proposals) · `guard` → llama-guard-3-8b (outbound-content safety verdict; unsafe → human review). `raw:<model>` pins anything else. Neuron usage lands on the task's `llm_neurons`.
+- **Console** ([/jev/](https://steady-orbit.systems-a.workers.dev/jev/)): Prompt console (type → task), Automations tab (deploy / activate / pause / run-now with input), models pill.
+- **Endpoints**: `GET/POST /api/jev/automations`, `POST /api/jev/automations/:id/activate|pause|run`, `GET /api/jev/models`, `POST /api/jev/webhooks/reply` (reply records; optional `?k=` shared secret).
+- **Automation def shape**: `{name, description, trigger: {type:'manual'}|{type:'interval', every_minutes, batch}, input, tool_refs (hosts/methods the def's tool stages may use — non-GET stages MUST be covered by a policy tool, else validation refuses), stages: [{id, type: tool|llm|builtin|guard|propose_actions, ...}], limits}`. Stage prompts interpolate run context with `{{ $.stage_id.path }}`. Deploy edits create a new draft version; activation is single-active-per-name.
+- **Scheduler**: worker cron (every 5 min) fires interval automations; fires are compare-and-set on `last_fired_at` (double-fire impossible) and carry per-interval idempotency keys.
+- **First suite**: the Steady Orbit lead machine (research audit lib ported verbatim with all refuse-to-claim guards; drafts → guard → `resend.send` approval-gated; reply webhook records). D1 `jev_leads` is the v1 system of record; HubSpot integration is a future policy learning.
+- **Caveat**: automations needing >30s CPU must be chunked (v1 lead-research batches per business); a run that exhausts its stage budget closes `terminal:failed` with `stage_budget_exhausted`, honestly.
+
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
