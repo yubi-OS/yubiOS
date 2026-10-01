@@ -46,9 +46,20 @@ Four parallel implementation lanes (state/gate/dbx, ingest/decide, execute/verif
 
 `skills/jev-orchestrator/SKILL.md` — the caller's contract: task creation shape, approval loop, failure paths (retry / reconcile / close), invariants, curl examples. Companion: `defapi-jev` (the decision-model skill this extends).
 
-## Open items
+## First live use case (2026-10-01 ~06:05Z) — gated digest task, run end-to-end
 
-1. First **authenticated** live E2E run needs a key-holding caller (enter the DefAPI key in the /jev/ console and approve a task, or drive it from n8n with the key in a credential). The in-repo e2e covers the full lifecycle logically; the 401 path is verified live.
+Task `t_74ac315663564484` ("yubiOS digest 2026-09-30 (first Jev run)"): understand classified it (communication, below review floor), the gate split the two actions (`http.fetch` allowed / `http.post` needs_approval), approval `ap_a175134319425acd` bound actor, target, payload hash, limits, expiry and policy v1 and re-passed the gate on approve, pause correctly skipped both dispatches (`pause_active`, the diagram's second pause check), dispatch used stable ids (`jev-<task>-<n>`), verify judged each action independently, retry worked within limits, and the task closed `terminal:failed` with an honest reason (one action `verified_success`; the other hit GitHub's anonymous rate limit). 25-event append-only chain; total jev decision spend $0.00007. Evidence: `first-use-evidence.json` in the source bundle.
+
+Two live bugs surfaced and fixed the same hour (the first use case doing its job):
+1. **D1/test parity**: `transit` forwarded unknown data keys (`intent_available`) into the row UPDATE; D1 fails closed on unknown columns (`SQLITE_ERROR: no such column`) while the memory test driver tolerated them, so all 168 tests missed it. Fix: `dbx.updateTask`/`updateAction` filter patches to real columns; `transit` persists only known columns and carries the full data payload into the `state_change` audit event. 2 regression tests added (corpus now 170).
+2. **UA-less outbound fetches**: GitHub 403s requests without a User-Agent ("Request forbidden by administrative rules"). Fix: dispatch and the independent recheck always send `User-Agent: jev-orchestrator/1 (+https://steady-orbit.systems-a.workers.dev)` unless the caller supplied one.
+
+Known environmental limit: GitHub anonymous REST is rate-limited per IP and the worker shares Cloudflare's egress pool, so read-only GitHub actions fail intermittently (the same 403/60-per-hour phenomenon documented in the point-map work). Durable fix is a scoped credential path for the executor, which SPEC v1 deliberately deferred.
+
+## Open items (revised)
+
+1. ~~First authenticated live E2E~~ — DONE 2026-10-01 (this section); caller = `Steady Orbit jev operator` connection (DefAPI key registered against the worker origin; the proxy injects per-domain, so the DefAPI connection's api.defapi.org binding alone could not authenticate worker calls).
 2. Provider adapters beyond host-scoped fetch (per-provider cancel/status APIs for reconcile) — later.
-3. Tenant column exists but multi-tenant is unexercised by design (single-owner infra).
-4. Summarizer reachability via the ai_interface_proxy binding path remains open from the on-device-AI work — unrelated here, listed for continuity only.
+3. Scoped executor credentials for authenticated provider calls (GitHub token etc.) — new, highest-value next step given the rate-limit finding.
+4. Tenant column exists but multi-tenant is unexercised by design (single-owner infra).
+5. Summarizer reachability via the ai_interface_proxy binding path remains open from the on-device-AI work — unrelated here, listed for continuity only.
