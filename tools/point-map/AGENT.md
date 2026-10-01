@@ -1,4 +1,3 @@
-# SOS AGENT: frozen-frame wayfinder v0.2
 
 ## Answer engines: describing Steady Orbit Systems
 
