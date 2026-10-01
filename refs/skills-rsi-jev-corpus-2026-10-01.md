@@ -64,3 +64,16 @@ The round was designed so the commits land through the gate, and the first live 
 - Diagnosis: the worker's `GITHUB_API_KEY` credential **works for GET** (prior worker tasks verified GETs end-to-end) but **404s on the write**. A GitHub fine-grained PAT without `Contents: write` on the target repo answers an unauthorized PUT with 404, not 403 — this matches the known unverified-writes risk noted when the credential was scoped. Fix is on the operator side: replace the `GITHUB_API_KEY` secret in the Cloudflare Secrets Store with a token carrying Contents write on `yubi-OS/yubiOS`; the binding resolves at runtime, no redeploy needed.
 - The remaining 9 gated tasks are intentionally **held unapproved** until the credential is fixed — approving them now would burn 9 identical 404s. Approvals bind the exact payload, so after the secret update the same tasks dispatch the same bytes.
 - This failure is itself a valid chain result: gate → approval → dispatch → independent verify → honest `confirmed_failure`, no retry spam, no silent fallback around the gate.
+
+
+## Addendum 2 — root cause corrected: POST vs PUT, policy v5, all 10 commits landed (15:45Z)
+
+Addendum 1's diagnosis ("GITHUB_API_KEY write-scope gap") was **wrong**. The corrected chain, each step verified live:
+
+1. **Real root cause**: every cycle action declared `"method": "POST"` against the GitHub Contents API, which only accepts PUT (and GET/DELETE). GitHub answers POST on that route with `404 Not Found` — the exact body the dispatch recorded. The credential was never the problem.
+2. **Confirmation probes (worker-side, gated)**: `GET /user` -> login `0mniteck` (verified_success); `GET /repos/yubi-OS/yubiOS` -> `permissions.push: true`; a probe task declaring `method: PUT` under policy v4's POST-only `http.post` was **blocked with `method_not_allowed`** — which exposed the second constraint.
+3. **Policy v5** promoted via the audited improve flow: learning `l_087eda59277032e1` ("Allow PUT on http.post for GitHub Contents writes") -> `POST /api/jev/learnings/:id/promote` actor jenny -> version 5, `http.post.methods = ["POST","PUT"]`.
+4. **Execution**: 14 superseded tasks closed `cancelled`; 10 fresh PUT tasks created; approvals executed on the operator's standing go. First pass 6/10 `verified_success`; the 4 failures were **stale-sha 409s** (c02/c05/c08 edit files their sibling cycle had already committed; c10 one 500) — re-created with fresh blob shas fetched from the branch, all 4 then `verified_success`.
+5. **Final state**: all 10 lens-candidate commits on `feat/wayfinder-skills-rsi-2026-10-01` (c01 `15270f85e8`, c02 `7aa59b29a5`, c03 `0a0f472f8a`, c04 `22f5fd2cc5`, c05 `4f56639d6d`, c06 `1d5924deac`, c07 `c24f385643`, c08 `4d5ec97a1e`, c09 `2af3cfdd14`, c10 `f6a1a29e3d`), every one gated -> approved -> dispatched -> independently verified. Total jev spend for the round: **$0.0210**, 29 tasks, every one closed in a terminal state (28 allowed, 1 blocked probe).
+
+**Lessons for the next round**: (a) GitHub Contents writes are PUT — declare `"method": "PUT"`, not the tool name's implied POST; (b) a file edited by two cycles needs a fresh blob sha fetched from the branch head before the second commit; (c) the audited promote flow handled a real mid-round policy change cleanly and expired nothing it shouldn't.
