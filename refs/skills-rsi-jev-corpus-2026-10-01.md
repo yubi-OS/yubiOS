@@ -55,3 +55,12 @@ Per lesson 11: one file per commit on the held branch `feat/wayfinder-skills-rsi
 ## Unexecuted remainder
 
 Lens reals 11 and 12 (`resend-connection` × calibration and × recursion) were never claimed — the 10-cycle cap stopped the round before them. An exhausted ladder means candidate exhaustion under this generator, not optimality (AGENT.md).
+## Addendum — first live approval surfaced a credential scope gap (15:02Z)
+
+The round was designed so the commits land through the gate, and the first live approval exercised exactly that path:
+
+- Cycle-1 approval `ap_5676039fa77a1e62` was **granted in the /jev/ console (actor "Shant")**; approve auto-dispatched the bound action (POST GitHub Contents PUT, stable id `jev-t_dda8687ef8282dc8-1`).
+- The dispatch came back **404 Not Found**; the independent verify marked **confirmed_failure** with the expected predicate `{status_range:[200,299], json_path:"commit.sha"}` failing both checks. `continue` honestly left the task in `gated` with the failed action.
+- Diagnosis: the worker's `GITHUB_API_KEY` credential **works for GET** (prior worker tasks verified GETs end-to-end) but **404s on the write**. A GitHub fine-grained PAT without `Contents: write` on the target repo answers an unauthorized PUT with 404, not 403 — this matches the known unverified-writes risk noted when the credential was scoped. Fix is on the operator side: replace the `GITHUB_API_KEY` secret in the Cloudflare Secrets Store with a token carrying Contents write on `yubi-OS/yubiOS`; the binding resolves at runtime, no redeploy needed.
+- The remaining 9 gated tasks are intentionally **held unapproved** until the credential is fixed — approving them now would burn 9 identical 404s. Approvals bind the exact payload, so after the secret update the same tasks dispatch the same bytes.
+- This failure is itself a valid chain result: gate → approval → dispatch → independent verify → honest `confirmed_failure`, no retry spam, no silent fallback around the gate.
