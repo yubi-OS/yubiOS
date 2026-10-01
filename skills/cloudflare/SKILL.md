@@ -247,6 +247,15 @@ Need IaC? → pulumi/ (Pulumi), terraform/ (Terraform), or api/ (REST API)
 | Bindings | `references/bindings/` |
 | Cache Reserve | `references/cache-reserve/` |
 
+## Calibration
+
+This skill ships no baked-in numbers, and its calibration stance is deliberate: every numeric claim (limits, pricing tiers, compatibility dates, type signatures) must be re-retrieved from the sources in the table above at use time.
+
+- **Docs over references**: when a bundled reference file disagrees with the live docs, the docs win. This is the standing resolution order, especially for numeric limits, pricing, and configuration options.
+- **Drift class**: Cloudflare limits, pricing, and API signatures change frequently. A limit or price read from any source older than the current retrieval is expired, not stale-but-usable.
+- **False-positive handling**: a failed retrieval is never permission to cite baked-in knowledge. The claim fails openly ("cannot cite without retrieval") rather than being guessed.
+- **No in-skill baselines**: measured numbers belong to the specific `references/<product>/` file or the docs themselves, never to this index page.
+
 ## Examples
 
 **In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, Quick Decision Trees, "I need feature flags", "I need to run code".
