@@ -38,6 +38,62 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 
 Legacy `/api/assess`, `/api/fits`, `/api/narrate` and site chat remain separate APIs. The Sauna-hosted mirror has not received this Cloudflare release.
 
+## Jev orchestrator API (jev, bearer-auth)
+
+The same worker also serves the Jev v2 gated-approval orchestration API: ops console at `/jev/` (key entered once, sessionStorage), bearer-auth via the JEV_API_KEY operator key on every route except `/api/jev/health`. The gate is deterministic and fails closed: allowed, needs_approval, or blocked. Approvals bind actor, target, payload, limits, expiry and policy version. Six terminal states: succeeded, blocked, rejected, expired, failed, cancelled. Unknown outcomes reconcile-before-repeat; every stage appends an audit event.
+
+| Method | Path | Contract |
+|---|---|---|
+| GET | `/api/jev/health` | `{ok, jev, policy_version, paused}`; unauthenticated |
+| POST | `/api/jev/tasks` | task create with caller-supplied `payload.actions` or a freeform `prompt`; `idempotency_key` dedupes per (tenant, key) |
+| GET | `/api/jev/tasks` , `/api/jev/tasks/:id` | list (filter by state) and detail with actions, gate reasons, audit events |
+| POST | `/api/jev/tasks/:id/execute` | dispatch (re-checks pause; skips rather than firing) |
+| POST | `/api/jev/tasks/:id/verify` | `{action_id}`; verdict verified_success, confirmed_failure, or unknown |
+| POST | `/api/jev/tasks/:id/continue` | next: more_work (re-decide + re-gate) or terminal |
+| POST | `/api/jev/tasks/:id/retry` | `{action_id}`; within limits only |
+| POST | `/api/jev/tasks/:id/reconcile` | `{action_id, evidence}`; never re-dispatch on unknown |
+| POST | `/api/jev/tasks/:id/close` | `{outcome, reason}`; `/cancel` closes cancelled |
+| GET | `/api/jev/approvals` | pending queue with expiry countdowns |
+| POST | `/api/jev/approvals/:id/approve` , `/reject` | approve auto-dispatches the bound action (re-checked against the CURRENT policy version first) |
+| POST | `/api/jev/pause` | `{paused, scope}`; blocks new and queued dispatch, never undoes completed effects |
+| GET | `/api/jev/summary` | tasks by state/outcome, pending approvals, cost rollup |
+| GET/POST | `/api/jev/learnings` | proposal ledger; `POST /api/jev/learnings/:id/promote` is the human promotion step (a policy bump invalidates affected approvals) |
+| GET/POST | `/api/jev/automations` | versioned automation defs; `POST /api/jev/automations/:id/activate` , `/pause` , `/run` (single-active per name) |
+| GET | `/api/jev/models` | model routes for the console |
+| POST | `/api/jev/webhooks/reply` | reply records; optional `?k=` shared secret |
+
+## Automations (Jev Automations, stages + cron)
+
+Versioned defs in D1 with stage pipelines: `tool` (GET-only unless a policy tool covers the host; capped, every call audited), `llm` (interpolated prompt, JSON repair), `builtin` (pure deterministic function), `guard` (advisory safety verdict; unsafe skips propose_actions and routes to human review), `propose_actions` (proposals enter the same gate as hand-written ones). Interval automations fire on the worker cron via compare-and-set on last_fired_at (double-fire impossible). Model routes: classify = llama-3.1-8b, draft = llama-3.3-70b, guard = llama-guard-3-8b; `raw:` pins anything else. Builtins registered: `lead_research` (the refuse-to-claim lead machine), `corpus_audit`, `corpus_lens`, `corpus_drift`, `tautology_gate`.
+
+## Evolution (hourly cycle + directives)
+
+| Method | Path | Contract |
+|---|---|---|
+| POST | `/api/jev/evolution/sweep` | structured report ingest, idempotent per fire; findings become directives |
+| GET | `/api/jev/evolution/directives` | directive list with CAS `claim=1`; `POST /directives/:id/result` records execution |
+| POST | `/api/jev/evolution/directives/:id/approve` , `/reject` | human approval (forced for every kind except the auto whitelist) |
+| GET | `/api/jev/evolution/state` | sweeps, calibration trend, queue, notify state |
+| GET/POST | `/api/jev/evolution/cycles` , `/cycle/run` | cycle history; manual run of the hourly cycle |
+| GET | `/api/jev/evolution/atoms` , `/candles` , `/memory/search` | atom ledger, standard-candle ledger, memory recall |
+
+Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_edit`, `skill_push`, `schedule_change`, `repo_push`, `worker_change`, `ops_fix`, `external_comms` need approval; unknown kinds rejected. The hourly cycle measures worker state and, once 5 completed cycles of history accumulate, corpus metrics (`dbc`, `z`, `verdict`, `drift_vs_prev`); before that it records an honest corpus error instead of fabricating. Lens candidates enter proposals as fail-closed `note` directives.
+
+## Corpus math (jev-corpus, parity-tested against papers/data/lean)
+
+| Method | Path | Contract |
+|---|---|---|
+| GET | `/api/jev/corpus/health` | `{ok, corpus:"ready", modules:{math,atom,lens}}`; unauthenticated |
+| POST | `/api/jev/corpus/audit` | `{matrix, labels?, nulls?}` returns `{v2, z, verdict, dbc, shares, E_l, run_id}`; idempotent per input sha256 (repeat returns the same run_id + `cached:true`); nulls default 100, cap 1000 |
+| POST | `/api/jev/corpus/lens` | `{matrix, top?}` returns lens-format candidates: `{id, cell, kind:"real"|"control", hypothesis, method, params, expected_delta, score}`; K reals + K paired controls |
+| POST | `/api/jev/corpus/atom` | `{matrix, max_flips?}` returns a DRY-RUN plan `{plan:[{i,primitive,delta}], finalDelta, converged}`; the Delta >= 0 invariant is asserted (CurvedCorpus.lean atom_delta_nonneg); execution is a gated directive, never inline |
+| POST | `/api/jev/corpus/classify` | `{sentence}` returns `{verdict:"tautology"|"falsifiable"|"paradox"|"undecidable", refuter, run_id}`; exact parity with tools/tautology-discerner |
+| POST | `/api/jev/corpus/placements` | `{matrix, labels}` audits then POSTs vectors to the worker's own `/api/map`; returns `{map_id, map_url:"/map/?id=N"}`; map-endpoint rejections relay as `MAP_FAILED` |
+| GET | `/api/jev/corpus/runs` | last 50 run rows |
+| GET | `/api/jev/corpus/selftest` | runs all three module selftests (fixture parity vs the Python sources); 200 all-pass, 500 with failing checks |
+
+The math is a port, never a re-derivation: the system of record is `papers/data/lean/verify_claims.py` (v2_corr, curveball) plus `tools/rsi-descent`, `tools/spectral-decomposer`, `tools/spectral-defocus`, `tools/boltzmann-collapse`, `tools/tautology-discerner`. Every deploy is verified with `/selftest` before results are trusted; on any fixture mismatch the JavaScript is wrong until proven otherwise. Audit/lens results are data, never authorization: only directives through the gate act.
+
 ## Full-content ingestion
 
 `chunked/v1` uses `@cf/baai/bge-base-en-v1.5`, explicit mean pooling, contiguous Unicode-safe chunks of at most 400 UTF-8 bytes, byte-length-weighted mean over chunk vectors, then L2 normalization. Every input byte is submitted, including content after character 2,000. Coverage is input coverage, not a claim that an embedding preserves all meaning.
