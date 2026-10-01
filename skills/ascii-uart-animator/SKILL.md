@@ -73,6 +73,16 @@ The `%b` printf directive is the key — it interprets the `\n` escapes that `re
 - The bridge runs `subprocess.run(argv)` directly — there's no shell interpolation. So everything dangerous goes inside the bash `-c` script as one big quoted string.
 - A bridge call with a multi-thousand-line bash script takes 20+ seconds of wall clock; set `run_script` timeout accordingly.
 
+## Calibration
+
+Measured numbers this skill's own operation produced (rock1, 115200 8N1, bridge user `shant`):
+
+- **Wire-interval floor**: actual frame interval is `FPS_DELAY + (bytes_per_frame / baud_rate)`. At 115200 baud a 200-byte frame adds ~17 ms of transmission time on top of the schedule. When pacing looks stuttery, recompute the wire interval before touching FPS_DELAY.
+- **Demonstrated FPS ceiling**: 30 fps (0.033 s interval) is demonstrated working end-to-end (`bouncing_ball_ansi`, 30 frames @ 30fps). Rates above that are untested on this bridge — treat them as unvalidated.
+- **Bridge latency bound**: one bridge call carrying a multi-thousand-line bash script takes 20+ seconds of wall clock. If a single animation's script approaches this bound, split it into per-batch calls instead of growing TOTAL_FRAMES.
+- **Calibration source of truth**: the Built-in animations table (9@10fps, 30@30fps, 150@25fps, 120@20fps, 309 mixed ≈ 17 s for `play_all`). Verify a modified script's frame count and FPS against that table before queueing it.
+- **False-positive check**: a rendered-but-frozen animation means pacing was scheduled but transmission dominated — recompute the wire interval; do not blame the renderer or the UART.
+
 ## Attestation coverage
 
 This skill contributes to the yubiOS attestation layer by anchoring primitive patterns: in-toto attestations, Rekor transparency-log entries, SLSA provenance, Sigstore signing-config, bootupd measurement, keylime runtime attestation. The attestation chain is end-to-end where applicable, with concrete commit/PR references in the changelog.
