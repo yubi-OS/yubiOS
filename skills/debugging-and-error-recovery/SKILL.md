@@ -358,6 +358,14 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 
 Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph formerly here asserted capabilities this skill does not itself implement; removed as unsupported. Skill-specific content in this section is unchanged.
 
+## Audience
+
+Who this checklist is written for, per its own steps:
+
+- **Primary reader**: the agent or developer actively debugging a failure in a repository they control. Every step assumes write access to the code, the repository's own test command (the file says "substitute the repository's own test command"), and CI logs.
+- **Secondary readers**: CI operators triaging build failures (the Build Failure Triage tree targets them directly) and reviewers judging a post-fix diff (the Verification checklist is the review rubric they apply).
+- **Not for**: incident command without repo access. With no reproducing environment, Step 1 (Reproduce) cannot pass, so this checklist is the wrong tool — the file's own non-reproducible path says to document conditions and monitor instead.
+
 ## Examples
 
 **Worked setup** — the flow this skill drives, using its own artifacts:
