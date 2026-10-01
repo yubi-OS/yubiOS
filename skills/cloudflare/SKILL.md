@@ -256,6 +256,15 @@ This skill ships no baked-in numbers, and its calibration stance is deliberate: 
 - **False-positive handling**: a failed retrieval is never permission to cite baked-in knowledge. The claim fails openly ("cannot cite without retrieval") rather than being guessed.
 - **No in-skill baselines**: measured numbers belong to the specific `references/<product>/` file or the docs themselves, never to this index page.
 
+## Recursion
+
+Self-audit rules for this index skill, with cadence triggers:
+
+- **Index-rot audit before each retrieval**: this skill is a pointer table, and pointer tables rot. Before following any `references/<product>/` path, verify the directory exists in the loaded skill folder; product renames (a recurring Cloudflare pattern) break rows silently.
+- **Drift check per use**: if a decision tree routes to a product whose reference content contradicts the docs fetch, record the broken row and fix the tree in the same session — the next cycle starts from the corrected map.
+- **Changelog discipline**: when Cloudflare ships a new product (the tree's blind spot by construction), add the row to the matching decision tree AND the Product Index in one edit; an index that knows about a product only through prose is half-indexed.
+- **Re-run triggers**: compatibility-date bumps, new product announcements on the changelog, or any task that needed a reference file the index lacked.
+
 ## Examples
 
 **In-repo touchpoints** — sections this skill owns or extends: Retrieval Sources, Quick Decision Trees, "I need feature flags", "I need to run code".
