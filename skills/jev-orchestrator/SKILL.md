@@ -128,4 +128,15 @@ On top of the task loop, the worker hosts **automations**: versioned templates i
 - **First suite**: the Steady Orbit lead machine (research audit lib ported verbatim with all refuse-to-claim guards; drafts → guard → `resend.send` approval-gated; reply webhook records). D1 `jev_leads` is the v1 system of record; HubSpot integration is a future policy learning.
 - **Caveat**: automations needing >30s CPU must be chunked (v1 lead-research batches per business); a run that exhausts its stage budget closes `terminal:failed` with `stage_budget_exhausted`, honestly.
 
+## Gated repo commits + prompt-intake contracts (verified 2026-10-01/02, RSI rounds 1-3)
+
+Patterns proven across the three rounds (PRs #276/#277/#278) and the email regression:
+
+- **GitHub Contents writes are PUT, not POST.** `POST /repos/<o>/<r>/contents/<path>` 404s; declare `"method": "PUT"`. Policy v5+ allows PUT on `http.post` (learning `l_087eda59277032e1`).
+- **Same-file sibling commits need a fresh blob sha.** When two cycles touch one file, fetch the branch head's blob sha again before the second commit; a stale sha 409s. Round 1 went 6/10 first pass, 4 retries all stale-sha.
+- **Approve auto-dispatches.** The approve endpoint re-gates against the CURRENT policy version, then executes the bound action + verify + continue in one request (`autoexecuted` in the response). No separate execute call needed.
+- **Evolution sweep `fire` is unique per (fire, date).** Sibling sweep rows on the same date collide; label the sweep with the corpus name (e.g. "refs/-corpus") and reuse one sweep's directives per round instead of stacking same-fire sweeps.
+- **`resend.send` body schema.** Bodies must be `{"from": "...", "to": ["..."], "subject": "...", "html": "..."}` (from = `Steady Orbit <site@axel.steadyorbitsystems.ai>`). Anything else (e.g. the LLM-proposed `{recipient, message}`) 422s `missing_required_field` at the provider, which verifies as `unknown` (never `confirmed_failure`) and strands the task in `gated`. Reject placeholder bodies ("[insert summary here]") at propose-time: a prompt-intake draft must either generate the real content or not propose the send. Reference: task `t_e173b0b1d05a1877` (2026-10-02), approval granted, Resend 422, email never sent.
+- **Below-floor prompts still gate, correctly.** Intent `actionable: 0` / `below_floor` does not block a proposed action; the deterministic gate still decides. The email regression was a schema defect, not a gate defect.
+
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
