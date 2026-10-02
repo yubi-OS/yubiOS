@@ -21,7 +21,7 @@ The `steady-orbit` worker is a multi-part ES module bundle: `solar-rbs-entry.mjs
 5. **Check imports before upload**: `node --check` every part AND resolve the import graph. A part importing `./fixtures/x.mjs` needs that module shipped as a part with its path-qualified name (`-F "fixtures/corpus-math-fixtures.mjs=@file;filename=fixtures/corpus-math-fixtures.mjs;type=application/javascript+module"`) or CF rejects the whole upload with 10021 "No such module". This bit the jev-corpus deploy (2026-10-01).
 6. **Upload**: `curl -X PUT .../workers/scripts/steady-orbit -F "metadata=@meta.json;type=application/json" -F "<part>=@<file>;type=application/javascript+module" (one -F per part)`. Success = `{success:true}`; capture `result.etag` as the deployed-code id.
 7. **Verify schedules + bindings**: `GET .../scripts/steady-orbit/schedules` must still show `["0 * * * *", "*/5 * * * *"]` (hourly evolution cycle + 5-min automation scheduler) and settings must list all 13 bindings. Re-PUT schedules only if the upload dropped them.
-8. **KV console updates** (separate step, after the worker deploy): PUT the console HTML to KV namespace `SITE` (`b9de35ecd3ca44999b38cfd107c0d44a`) key `jev-index.html`; verify with `GET /jev/`.
+8. **KV updates** (separate step, after the worker deploy): PUT the console HTML to KV namespace `SITE` (`b9de35ecd3ca44999b38cfd107c0d44a`) key `jev-index.html`; verify with `GET /jev/`. KV text docs (`AGENT.md`, `llms.txt`) update the same way; after an `AGENT.md` PUT verify `GET /AGENT.md` returns the new bytes (it is also mirrored in git at `yubi-OS/yubiOS/tools/point-map/AGENT.md`; keep both identical).
 
 ## Deploy-safety rules
 
