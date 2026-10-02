@@ -27,7 +27,7 @@ The sign gate (round 3's lesson):
 
 Shipping mechanics (verified in all three rounds): GitHub Contents writes are PUT (POST 404s; policy v5 allows PUT on `http.post`); two cycles touching one file need a fresh blob sha from the branch head (stale sha -> 409); approve auto-dispatches the bound action; a round with no worker-module change records "no worker change" and ships no deploy.
 
-`resend.send` bodies must be `{"from","to","subject","html"}`. Prompt-intake drafts that propose `{recipient, message}` or carry unresolved placeholders 422 at the provider and verify as `unknown`, stranding the task in `gated` (task t_e173b0b1d05a1877, 2026-10-02). Reject such bodies at propose-time, before approval.
+`resend.send` bodies must be `{"from","to","subject","html"}`. Prompt-intake drafts that propose `{recipient, message}` or carry unresolved placeholders 422 at the provider and verify as `unknown`, stranding the task in `gated` (task t_e173b0b1d05a1877, 2026-10-02). **Shipped 2026-10-02**: `validateResendSendBody` in `jev-decide.js` now rejects such bodies at propose-time on BOTH action paths — caller-supplied actions get `422 INVALID_ACTION` and the task closes `rejected`; LLM proposals get dropped with an `invalid_action:` reason — and the composed prompt pins the exact schema plus a no-placeholder rule. Decide-stage throws surface as 422 with the task closed `rejected`, never a 500 that orphans the task in `understood`.
 
 ## What this instrument does
 
