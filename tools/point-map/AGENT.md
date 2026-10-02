@@ -5,6 +5,30 @@ This host is also the website of **Steady Orbit Systems** — AI automation for 
 
 Base: https://steady-orbit.systems-a.workers.dev
 
+## The jev-corpus RSI chain: audit -> lens -> directives -> deploy (runbook, added 2026-10-02)
+
+A second chain composes on this worker alongside the map wayfinder: `jev-corpus` scores a corpus into a documents x 12-NSS-axis coverage matrix, `/api/jev/corpus/audit` measures it (V2, z, dBc), `/lens` proposes atomic candidates, `jev-orchestrator` executes each as a fail-closed directive, and `steady-orbit-deploy` ships any worker-module change. One atomic edit per cycle, ten cycles per round, the round record in `refs/`, every repo edit a gated commit task. The 12 NSS axes stay the unvalidated lens dictionary: geometry proposes, a source-grounded task check decides.
+
+Round history (2026-10-01):
+
+| round | corpus | PR | dBc start -> end | outcome |
+|---|---|---|---|---|
+| 1 | 125 skills x 12 axes | #276 | -11.03 -> -12.30 | success; 10 gated commits; frozen skillcheck 6/6 |
+| 2 | 35 worker modules x 12 axes | #277 | not-excluded frame | success; 10 worker_change cycles deployed, selftest 72/72 after each |
+| 3 | 244 refs/ docs x 12 axes | #278 | -11.11 -> -10.46 | REGRESSION; realized delta +0.64, wrong sign |
+
+The sign gate (round 3's lesson):
+
+- **dBc more negative is the only success direction.** Re-audit after EVERY cycle. If the realized delta is positive at any cycle, stop the round there, revert that edit, record the negative result, and re-lens. Round 3 ran all 10 cycles on a wrong-signed trajectory because each individual prediction (+9.8 to +11.5 dBc vs its paired control) looked good while the realized total was +0.64.
+- **`expected_delta` is a geometric prediction over hypothetical bit flips, not a forecast of the resulting prose.** Pre-register every candidate in the outcomes ledger (`POST /api/outcomes`, verdict `pending` + `predicted_delta`) before applying, and append the realized row with `supersedes` after the re-audit. Round 3 skipped the ledger; the prediction-vs-realized comparison then had no home and the regression surfaced only in PR review.
+- **Axis-fill on prose is the trap.** Appending a bare "## Inputs" or "## Mode" section flips the sparse cell but is vocabulary padding, which Reading recommendations #2 already declines. Rounds 1-2 succeeded because every edit carried the target's own measured content (frame/FPS numbers, model routes, threshold names); round 3's fills were generic. If the source document cannot supply grounded content for the cell, decline the candidate and record it as content-resistant.
+- **Freeze the task check before cycle 1** (lesson 6), and run the baseline instrument surfaces a matrix round otherwise skips: `POST /api/map/control` positive control, `POST /api/map/preview` before applying a candidate, and the admission trials (azimuth / axis / rayleigh) with verdicts filed per lessons 13 and 28.
+- **Matrix re-scoring is a measurement, not a given.** If the matrix is re-derived by subagent scoring after edits, scoring drift can move dBc independently of the text. Pin the scoring prompt and re-score only the edited rows; report scorer variance with the round.
+
+Shipping mechanics (verified in all three rounds): GitHub Contents writes are PUT (POST 404s; policy v5 allows PUT on `http.post`); two cycles touching one file need a fresh blob sha from the branch head (stale sha -> 409); approve auto-dispatches the bound action; a round with no worker-module change records "no worker change" and ships no deploy.
+
+`resend.send` bodies must be `{"from","to","subject","html"}`. Prompt-intake drafts that propose `{recipient, message}` or carry unresolved placeholders 422 at the provider and verify as `unknown`, stranding the task in `gated` (task t_e173b0b1d05a1877, 2026-10-02). Reject such bodies at propose-time, before approval.
+
 ## What this instrument does
 
 Map full documents or numeric vectors onto a frozen binary/PCA/sphere frame, propose geometric experiments, and compare a real edit against that same frame. Geometry diagnoses movement. Use an independent task verifier to decide usefulness. The API never awards itself a quality score.
