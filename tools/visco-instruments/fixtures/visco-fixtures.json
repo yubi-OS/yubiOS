@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "generated": "2026-10-03",
+  "source": "verify_visco.py (Python source of record, Lane A)",
+  "sign_convention": "dBc improvement = MORE NEGATIVE; deltas recorded as-is (realized +0.16 means dBc moved toward the null)",
+  "persistence": [
+    {
+      "name": "nine_flips_all_persist",
+      "input": {
+        "applied_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            9
+          ]
+        ],
+        "regraded_passes": [
+          {
+            "pass_id": "blind_head_state_rescore",
+            "bits_by_row": {
+              "0": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "1": [
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "2": [
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "base_dbc": -16.884,
+        "loaded_dbc": -14.318,
+        "regraded_dbcs": [
+          -13.664
+        ]
+      },
+      "expected": {
+        "applied_count": 9,
+        "persisted_count": 9,
+        "persistence_fraction": 1.0,
+        "per_pass_fractions": [
+          1.0
+        ],
+        "level": {
+          "dbc_base": -16.884,
+          "dbc_loaded": -14.318,
+          "dbc_regraded_passes": [
+            -13.664
+          ],
+          "delta_load": 2.5660000000000007,
+          "delta_regraded_passes": [
+            3.2200000000000006
+          ]
+        },
+        "scorer_variance": {
+          "inter_pass_offset_dbc": 0.0,
+          "max_bit_disagreement": 0
+        }
+      }
+    },
+    {
+      "name": "partial_persistence",
+      "input": {
+        "applied_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            9
+          ]
+        ],
+        "regraded_passes": [
+          {
+            "pass_id": "blind_rescore_partial",
+            "bits_by_row": {
+              "0": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "1": [
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "2": [
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "base_dbc": -16.884,
+        "loaded_dbc": -14.318,
+        "regraded_dbcs": [
+          -15.2
+        ]
+      },
+      "expected": {
+        "applied_count": 9,
+        "persisted_count": 6,
+        "persistence_fraction": 0.6666666666666666,
+        "per_pass_fractions": [
+          0.6666666666666666
+        ],
+        "level": {
+          "dbc_base": -16.884,
+          "dbc_loaded": -14.318,
+          "dbc_regraded_passes": [
+            -15.2
+          ],
+          "delta_load": 2.5660000000000007,
+          "delta_regraded_passes": [
+            1.684000000000001
+          ]
+        },
+        "scorer_variance": {
+          "inter_pass_offset_dbc": 0.0,
+          "max_bit_disagreement": 0
+        }
+      }
+    },
+    {
+      "name": "scorer_variance_two_pass",
+      "input": {
+        "applied_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            9
+          ]
+        ],
+        "regraded_passes": [
+          {
+            "pass_id": "pass_a",
+            "bits_by_row": {
+              "0": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "1": [
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "2": [
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "pass_id": "pass_b",
+            "bits_by_row": {
+              "0": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "1": [
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "2": [
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "base_dbc": -16.884,
+        "loaded_dbc": -14.318,
+        "regraded_dbcs": [
+          -13.664,
+          -12.1
+        ]
+      },
+      "expected": {
+        "applied_count": 9,
+        "persisted_count": 9,
+        "persistence_fraction": 1.0,
+        "per_pass_fractions": [
+          1.0,
+          1.0
+        ],
+        "level": {
+          "dbc_base": -16.884,
+          "dbc_loaded": -14.318,
+          "dbc_regraded_passes": [
+            -13.664,
+            -12.1
+          ],
+          "delta_load": 2.5660000000000007,
+          "delta_regraded_passes": [
+            3.2200000000000006,
+            4.784000000000001
+          ]
+        },
+        "scorer_variance": {
+          "inter_pass_offset_dbc": 1.564,
+          "max_bit_disagreement": 1
+        }
+      }
+    }
+  ],
+  "hysteresis": [
+    {
+      "name": "round3_recorded",
+      "input": {
+        "rows": [
+          {
+            "cycle": 1,
+            "predicted_delta": 11.5,
+            "realized_delta": 0.16,
+            "supersedes": null
+          },
+          {
+            "cycle": 2,
+            "predicted_delta": 10.84,
+            "realized_delta": 0.01,
+            "supersedes": null
+          },
+          {
+            "cycle": 3,
+            "predicted_delta": 10.44,
+            "realized_delta": 0.44,
+            "supersedes": null
+          },
+          {
+            "cycle": 4,
+            "predicted_delta": 10.1,
+            "realized_delta": -0.1,
+            "supersedes": null
+          },
+          {
+            "cycle": 5,
+            "predicted_delta": 10.12,
+            "realized_delta": 0.4,
+            "supersedes": null
+          },
+          {
+            "cycle": 6,
+            "predicted_delta": 10.07,
+            "realized_delta": -0.07,
+            "supersedes": null
+          },
+          {
+            "cycle": 7,
+            "predicted_delta": 10.34,
+            "realized_delta": -0.39,
+            "supersedes": null
+          },
+          {
+            "cycle": 8,
+            "predicted_delta": 10.17,
+            "realized_delta": 0.24,
+            "supersedes": null
+          },
+          {
+            "cycle": 9,
+            "predicted_delta": 10.14,
+            "realized_delta": 0.28,
+            "supersedes": null
+          },
+          {
+            "cycle": 10,
+            "predicted_delta": 9.79,
+            "realized_delta": -0.32,
+            "supersedes": null
+          }
+        ]
+      },
+      "expected": {
+        "loops": [
+          {
+            "chain_ids": [
+              1
+            ],
+            "predicted": [
+              11.5
+            ],
+            "realized": [
+              0.16
+            ],
+            "sum_abs": 11.34,
+            "mean_abs": 11.34
+          },
+          {
+            "chain_ids": [
+              2
+            ],
+            "predicted": [
+              10.84
+            ],
+            "realized": [
+              0.01
+            ],
+            "sum_abs": 10.83,
+            "mean_abs": 10.83
+          },
+          {
+            "chain_ids": [
+              3
+            ],
+            "predicted": [
+              10.44
+            ],
+            "realized": [
+              0.44
+            ],
+            "sum_abs": 10.0,
+            "mean_abs": 10.0
+          },
+          {
+            "chain_ids": [
+              4
+            ],
+            "predicted": [
+              10.1
+            ],
+            "realized": [
+              -0.1
+            ],
+            "sum_abs": 10.2,
+            "mean_abs": 10.2
+          },
+          {
+            "chain_ids": [
+              5
+            ],
+            "predicted": [
+              10.12
+            ],
+            "realized": [
+              0.4
+            ],
+            "sum_abs": 9.719999999999999,
+            "mean_abs": 9.719999999999999
+          },
+          {
+            "chain_ids": [
+              6
+            ],
+            "predicted": [
+              10.07
+            ],
+            "realized": [
+              -0.07
+            ],
+            "sum_abs": 10.14,
+            "mean_abs": 10.14
+          },
+          {
+            "chain_ids": [
+              7
+            ],
+            "predicted": [
+              10.34
+            ],
+            "realized": [
+              -0.39
+            ],
+            "sum_abs": 10.73,
+            "mean_abs": 10.73
+          },
+          {
+            "chain_ids": [
+              8
+            ],
+            "predicted": [
+              10.17
+            ],
+            "realized": [
+              0.24
+            ],
+            "sum_abs": 9.93,
+            "mean_abs": 9.93
+          },
+          {
+            "chain_ids": [
+              9
+            ],
+            "predicted": [
+              10.14
+            ],
+            "realized": [
+              0.28
+            ],
+            "sum_abs": 9.860000000000001,
+            "mean_abs": 9.860000000000001
+          },
+          {
+            "chain_ids": [
+              10
+            ],
+            "predicted": [
+              9.79
+            ],
+            "realized": [
+              -0.32
+            ],
+            "sum_abs": 10.11,
+            "mean_abs": 10.11
+          }
+        ],
+        "active_rows": 10,
+        "total_sum_abs": 102.86000000000001,
+        "total_mean_per_cycle": 10.286000000000001,
+        "n_cycles": 10
+      }
+    },
+    {
+      "name": "synthetic_two_loops",
+      "input": {
+        "rows": [
+          {
+            "id": "h1",
+            "predicted_delta": 8.0,
+            "realized_delta": 0.2,
+            "supersedes": null
+          },
+          {
+            "id": "h2",
+            "predicted_delta": 7.0,
+            "realized_delta": 0.1,
+            "supersedes": "h1"
+          },
+          {
+            "id": "h3",
+            "predicted_delta": 5.0,
+            "realized_delta": -0.3,
+            "supersedes": null
+          },
+          {
+            "id": "h4",
+            "predicted_delta": 4.0,
+            "realized_delta": 0.0,
+            "supersedes": "h3"
+          },
+          {
+            "id": "h5",
+            "predicted_delta": 2.5,
+            "realized_delta": 0.4,
+            "supersedes": null
+          }
+        ]
+      },
+      "expected": {
+        "loops": [
+          {
+            "chain_ids": [
+              "h1",
+              "h2"
+            ],
+            "predicted": [
+              8.0,
+              7.0
+            ],
+            "realized": [
+              0.2,
+              0.1
+            ],
+            "sum_abs": 14.7,
+            "mean_abs": 7.35
+          },
+          {
+            "chain_ids": [
+              "h3",
+              "h4"
+            ],
+            "predicted": [
+              5.0,
+              4.0
+            ],
+            "realized": [
+              -0.3,
+              0.0
+            ],
+            "sum_abs": 9.3,
+            "mean_abs": 4.65
+          },
+          {
+            "chain_ids": [
+              "h5"
+            ],
+            "predicted": [
+              2.5
+            ],
+            "realized": [
+              0.4
+            ],
+            "sum_abs": 2.1,
+            "mean_abs": 2.1
+          }
+        ],
+        "active_rows": 3,
+        "total_sum_abs": 26.1,
+        "total_mean_per_cycle": 8.700000000000001,
+        "n_cycles": 3
+      }
+    }
+  ],
+  "prony": [
+    {
+      "name": "round3_recorded_trajectory",
+      "input": {
+        "series": [
+          {
+            "t": 0,
+            "value": -11.11
+          },
+          {
+            "t": 1,
+            "value": -10.95
+          },
+          {
+            "t": 2,
+            "value": -10.94
+          },
+          {
+            "t": 3,
+            "value": -10.5
+          },
+          {
+            "t": 4,
+            "value": -10.6
+          },
+          {
+            "t": 5,
+            "value": -10.2
+          },
+          {
+            "t": 6,
+            "value": -10.27
+          },
+          {
+            "t": 7,
+            "value": -10.66
+          },
+          {
+            "t": 8,
+            "value": -10.42
+          },
+          {
+            "t": 9,
+            "value": -10.14
+          },
+          {
+            "t": 10,
+            "value": -10.46
+          }
+        ],
+        "arms": 2,
+        "tau_grid": null
+      },
+      "expected": {
+        "ke": -10.568181818181818,
+        "arms": [
+          {
+            "k": 0.0,
+            "tau": 0.01
+          },
+          {
+            "k": 0.0,
+            "tau": 0.0822724134170047
+          }
+        ],
+        "fit_quality_r2": 0.0,
+        "fitted": [
+          {
+            "t": 0.0,
+            "value": -11.11,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 1.0,
+            "value": -10.95,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 2.0,
+            "value": -10.94,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 3.0,
+            "value": -10.5,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 4.0,
+            "value": -10.6,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 5.0,
+            "value": -10.2,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 6.0,
+            "value": -10.27,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 7.0,
+            "value": -10.66,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 8.0,
+            "value": -10.42,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 9.0,
+            "value": -10.14,
+            "fitted": -10.568181818181818
+          },
+          {
+            "t": 10.0,
+            "value": -10.46,
+            "fitted": -10.568181818181818
+          }
+        ],
+        "sse": 1.033163636363635
+      }
+    },
+    {
+      "name": "synthetic_exact_2arm",
+      "input": {
+        "series": [
+          {
+            "t": 0,
+            "value": -7.0
+          },
+          {
+            "t": 1,
+            "value": -8.38174421507252
+          },
+          {
+            "t": 2,
+            "value": -8.95052865045537
+          },
+          {
+            "t": 3,
+            "value": -9.2131365844733
+          },
+          {
+            "t": 4,
+            "value": -9.356838062509897
+          },
+          {
+            "t": 5,
+            "value": -9.451262677482838
+          },
+          {
+            "t": 6,
+            "value": -9.522675942905652
+          },
+          {
+            "t": 7,
+            "value": -9.581314216390384
+          },
+          {
+            "t": 8,
+            "value": -9.631449633572752
+          },
+          {
+            "t": 9,
+            "value": -9.675100713033476
+          },
+          {
+            "t": 10,
+            "value": -9.713404403280286
+          }
+        ],
+        "arms": 2,
+        "tau_grid": [
+          0.5,
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "expected": {
+        "ke": -10.000000000000007,
+        "arms": [
+          {
+            "k": 1.999999999999989,
+            "tau": 1.0
+          },
+          {
+            "k": 1.0000000000000182,
+            "tau": 8.0
+          }
+        ],
+        "fit_quality_r2": 1.0,
+        "fitted": [
+          {
+            "t": 0.0,
+            "value": -7.0,
+            "fitted": -7.0
+          },
+          {
+            "t": 1.0,
+            "value": -8.38174421507252,
+            "fitted": -8.381744215072516
+          },
+          {
+            "t": 2.0,
+            "value": -8.95052865045537,
+            "fitted": -8.950528650455363
+          },
+          {
+            "t": 3.0,
+            "value": -9.2131365844733,
+            "fitted": -9.213136584473295
+          },
+          {
+            "t": 4.0,
+            "value": -9.356838062509897,
+            "fitted": -9.356838062509894
+          },
+          {
+            "t": 5.0,
+            "value": -9.451262677482838,
+            "fitted": -9.451262677482836
+          },
+          {
+            "t": 6.0,
+            "value": -9.522675942905652,
+            "fitted": -9.52267594290565
+          },
+          {
+            "t": 7.0,
+            "value": -9.581314216390384,
+            "fitted": -9.581314216390382
+          },
+          {
+            "t": 8.0,
+            "value": -9.631449633572752,
+            "fitted": -9.631449633572752
+          },
+          {
+            "t": 9.0,
+            "value": -9.675100713033476,
+            "fitted": -9.675100713033478
+          },
+          {
+            "t": 10.0,
+            "value": -9.713404403280286,
+            "fitted": -9.713404403280288
+          }
+        ],
+        "sse": 1.199068575935938e-28
+      }
+    }
+  ],
+  "snapback": [
+    {
+      "name": "round3_recorded",
+      "input": {
+        "series": [
+          {
+            "cycle": 1,
+            "predicted_delta": 11.5,
+            "realized_delta": 0.16
+          },
+          {
+            "cycle": 2,
+            "predicted_delta": 10.84,
+            "realized_delta": 0.01
+          },
+          {
+            "cycle": 3,
+            "predicted_delta": 10.44,
+            "realized_delta": 0.44
+          },
+          {
+            "cycle": 4,
+            "predicted_delta": 10.1,
+            "realized_delta": -0.1
+          },
+          {
+            "cycle": 5,
+            "predicted_delta": 10.12,
+            "realized_delta": 0.4
+          },
+          {
+            "cycle": 6,
+            "predicted_delta": 10.07,
+            "realized_delta": -0.07
+          },
+          {
+            "cycle": 7,
+            "predicted_delta": 10.34,
+            "realized_delta": -0.39
+          },
+          {
+            "cycle": 8,
+            "predicted_delta": 10.17,
+            "realized_delta": 0.24
+          },
+          {
+            "cycle": 9,
+            "predicted_delta": 10.14,
+            "realized_delta": 0.28
+          },
+          {
+            "cycle": 10,
+            "predicted_delta": 9.79,
+            "realized_delta": -0.32
+          }
+        ]
+      },
+      "expected": {
+        "snapback": true,
+        "inversion_runs": [
+          [
+            4
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            10
+          ]
+        ],
+        "run_lengths": [
+          1,
+          2,
+          1
+        ],
+        "verdict": "snapback",
+        "gate_input": {
+          "action": "halt_round"
+        },
+        "gate_noise_context": null
+      }
+    },
+    {
+      "name": "clean_single_inversion_no_snapback",
+      "input": {
+        "series": [
+          {
+            "cycle": 1,
+            "predicted_delta": 1.2,
+            "realized_delta": 0.4
+          },
+          {
+            "cycle": 2,
+            "predicted_delta": 1.0,
+            "realized_delta": -0.05
+          },
+          {
+            "cycle": 3,
+            "predicted_delta": 0.9,
+            "realized_delta": 0.3
+          },
+          {
+            "cycle": 4,
+            "predicted_delta": 1.1,
+            "realized_delta": 0.0
+          },
+          {
+            "cycle": 5,
+            "predicted_delta": 1.0,
+            "realized_delta": 0.5
+          }
+        ]
+      },
+      "expected": {
+        "snapback": false,
+        "inversion_runs": [
+          [
+            2
+          ]
+        ],
+        "run_lengths": [
+          1
+        ],
+        "verdict": "no_snapback",
+        "gate_input": {
+          "action": "continue"
+        },
+        "gate_noise_context": null
+      }
+    }
+  ]
+}

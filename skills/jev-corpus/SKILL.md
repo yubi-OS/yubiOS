@@ -38,6 +38,19 @@ Not for: executing the atom (that is a gated directive, never inline), policy ch
 | `/api/jev/corpus/runs` | GET | - | last 50 run rows (kind, input_hash, result) |
 | `/api/jev/corpus/selftest` | GET | - | runs all three module selftests (fixture parity vs the Python sources); 200 all-pass, 500 with failing checks |
 
+## Viscoelastic instruments (added 2026-10-02)
+
+Four bearer-auth routes under `/api/jev/corpus/visco/*` + two pure builtins (`visco_hysteresis`, `visco_snapback`), shipped from the round-3 creep-recovery replay findings. Python source of record: `tools/visco-instruments/` (verify_visco.py + fixtures); the JS port (`jev-visco-math.js`, NEW worker part) is fixture-parity-tested and never re-derived.
+
+| Route | Method | Body | Returns |
+|---|---|---|---|
+| `/api/jev/corpus/visco/persistence` | POST | `{matrix, flipped_cells:[{row,axis}], regraded:[{pass, rows:[{row, bits}]}], metric?}` | `{applied, persisted, persistence_fraction, dbc:{base,loaded,regraded_passes,delta_load}, scorer_variance:{inter_pass_offset_dbc}, verdict, run_id}`; audits base + loaded internally |
+| `/api/jev/corpus/visco/hysteresis` | GET | `?baseline_id=<number>` | `{loops[], total_sum_abs, mean_per_cycle, n_cycles, verdict}`; closes supersedes chains in the outcomes ledger; empty -> `no_data` |
+| `/api/jev/corpus/visco/prony` | GET | `?metric=dbc&arms=2` | `{ke, arms:[{k,tau}], fit_quality_r2, sse, series[], t_basis}`; fits over corpus-runs history; <5 points -> 422 |
+| `/api/jev/corpus/visco/snapback` | POST | `{series:[{cycle,predicted_delta,realized_delta}]}` or `{baseline_id}` | `{snapback, inversion_runs, verdict, gate_input:{action}}`; verdicts only, never auto-actions |
+
+Sign convention: dBc improvement = MORE NEGATIVE. Rate-dependent R is deliberately deferred (deterministic scoring collapses R to 1; the replay proved this); persistence-under-regrading is the discriminating measurement.
+
 ## The flow (what a caller does)
 
 ```bash

@@ -13,7 +13,7 @@ The `steady-orbit` worker is a multi-part ES module bundle: `solar-rbs-entry.mjs
 
 1. **Pull the live bundle** (rollback source + part source of record):
    `GET /accounts/{account}/workers/scripts/steady-orbit` returns the multipart bundle; parts split on the response boundary. Save it unmodified before every change.
-2. **Extract parts** to one file per part name (part name = Content-Disposition name). Current part count is the source of truth; do not guess it.
+2. **Extract parts** to one file per part name (part name = Content-Disposition name). Current part count is the source of truth; do not guess it. 37 parts as of 2026-10-02 (NEW `jev-visco-math.js` joins the corpus family; fixture part still path-qualified `fixtures/corpus-math-fixtures.mjs`; the jev-corpus-math.js selfTest skips `visco_*` fixture kinds).
 3. **Overlay**: copy each new/edited part over the extracted set. Everything else ships byte-identical.
 4. **Metadata from live settings** (never from memory): `GET .../scripts/steady-orbit/settings` then
    `jq -c '{main_module:"solar-rbs-entry.mjs", compatibility_date:.result.compatibility_date, bindings:.result.bindings}' settings.json > meta.json`.
