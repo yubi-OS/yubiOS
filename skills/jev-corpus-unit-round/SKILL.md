@@ -20,13 +20,15 @@ Source of truth: `/AGENT.md` on the worker (https://steady-orbit.systems-a.worke
 
 1. **Pin.** `GET /repos/yubi-OS/yubiOS/branches/main` for the SHA. Pull the corpus fresh via `codeload.github.com/yubi-OS/yubiOS/tar.gz/refs/heads/main` (never reuse a stale mirror); extract `refs/` and `tools/point-map/taskcheck_refs.sh`. Count the docs — it grows every round.
 
-2. **Score the matrix.** Per-doc `POST /api/jev/corpus/scorer/score {doc:{name,text}}` (the batch `/scorer/matrix` route 500s through the egress proxy on long paced requests — per-doc from a 6-way concurrent pool is the working path; ~250 docs in ~1-2 min, ~$0.05). Save as JSONL keyed by doc name.
+2. **Score the matrix.** Per-doc `POST /api/jev/corpus/scorer/score {doc:{name,text}}` at **concurrency 12** — the measured sweet spot (refs10 experiment: conc 6 -> 3.9s per 24-doc slice, conc 12 -> 2.5s, conc 24+ WORSE as per-call p50 inflates 716ms -> 1.9s). ~257 docs in ~27s at conc 12 vs 52.7s at conc 6. The batch `/scorer/matrix` route 500s through the egress proxy; per-doc pooling is the working path. Save as JSONL keyed by doc name (resumable).
 
-3. **Frozen baseline check** (every step is required at every unit interval):
+3. **Frozen baseline check** (every step is required at every unit interval; run it with `scripts/baseline.mjs --dir <refs-dir> --out <workdir> --skip skip.json` — the reference harness encodes the optimized fetch plan below, ~100s sequential -> ~38s):
    - `POST /api/jev/corpus/audit {matrix, labels, nulls: 400}` — the gate statistic is `level_dbc = 20*log10(|z|)` (the verify_claims.py claim-8 law). NEVER gate on the `dbc` field: it is an L2 share-spectrum distance to the null vacuum, negative-when-close, and uncorrelated with z at cycle scale.
    - `POST /api/map {texts, names, labels, d:9, seed:20260906, threshold:'median', K:40, T:0.05}` — the frozen frame. (`/api/jev/corpus/placements` may 404 with upstream error 1042; the direct `/api/map` texts flow is the working path.)
    - `POST /api/map/control {baseline_id, texts, names}` (positive control), `POST /api/map/admission`, `/api/map/azimuth`, `/api/map/axis-redundancy` — record verdicts whatever they are.
    - `POST /api/jev/corpus/lens {matrix, labels, top, skip}` — one snapshot per unit; it feeds `GET /api/jev/corpus/visco/mobility` (the saturation series).
+
+   Fetch plan (identical results, just concurrent): **Phase A** score(conc 12) || map; **Phase B** audit || control (needs the map id; 3 retries on 503/1102 — it is the flakiest call, 33.9s measured and it 1102'd once at 257 docs) || admission || azimuth || axis-redundancy || lens; **Phase C** rungs read. The control CANNOT run before the map (it requires baseline_id), which is why it lands in Phase B rather than overlapping the score block directly.
 
 4. **Candidates.** Derive the skip-list from the outcomes ledger: every (doc, axis) pair with a final verdict of declined, reverted, or neutral gets `skip: ["name" | {name, axis}]` on the lens call. Then read the map's rungs: `GET /api/maps/:id` -> `ladder_candidates.rungs`. **Prefer rung JOINS** (`joins` non-empty, `isolated_delta` negative) over create-isolate rungs. Ground truth from nine rounds: generator-endorsed rung joins are 2/2 keeps; the lens on refs/ proposes only closed-class axis-fills (retired as a candidate source); caller-proposed adds went 0/5. The lens still earns its keep as a pre-flight detectability filter and through the mobility series.
 
