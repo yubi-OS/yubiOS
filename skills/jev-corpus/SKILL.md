@@ -44,6 +44,8 @@ Four bearer-auth routes under `/api/jev/corpus/visco/*` + two pure builtins (`vi
 
 | Route | Method | Body | Returns |
 |---|---|---|---|
+| `/api/jev/corpus/scorer/score` | POST | `{doc:{name,text}, hysteresis?:{low,high,pre_row}}` | structured-evidence scorer v2: deterministic per-axis evidence extraction (pinned regexes) + ONE batched jev-1.13 request (12 noul questions, threshold 0.5); returns `{name, row[12], probs, evidence_counts, hysteresis_applied, defapi.consumed}`; ~$0.0002/call; the low-noise scorer that resolved the refs3 finding (free-prose band 6-8x the true effect); v2.1 hysteresis removes threshold jitter; run rows kind `scorer` |
+| `/api/jev/corpus/scorer/matrix` | POST | `{docs 1..20, hysteresis?:{pre_rows[]}, spacing_ms?}` | paced batch scoring (default 4.5s between docs); one run row kind `scorer-matrix` |
 | `/api/jev/corpus/visco/persistence` | POST | `{matrix, flipped_cells:[{row,axis}], regraded:[{pass, rows:[{row, bits}]}], metric?}` | `{applied, persisted, persistence_fraction, dbc:{base,loaded,regraded_passes,delta_load}, scorer_variance:{inter_pass_offset_dbc}, verdict, run_id}`; audits base + loaded internally |
 | `/api/jev/corpus/visco/hysteresis` | GET | `?baseline_id=<number>` | `{loops[], total_sum_abs, mean_per_cycle, n_cycles, verdict}`; closes supersedes chains in the outcomes ledger; empty -> `no_data` |
 | `/api/jev/corpus/visco/prony` | GET | `?metric=dbc&arms=2` | `{ke, arms:[{k,tau}], fit_quality_r2, sse, series[], t_basis}`; fits over corpus-runs history; <5 points -> 422 |
@@ -51,6 +53,10 @@ Four bearer-auth routes under `/api/jev/corpus/visco/*` + two pure builtins (`vi
 | `/api/jev/corpus/visco/policy-log` | GET | - | `{log:[{id, created_at, version, actor, source, summary, backfilled}], current_version}`; wipe-proof policy changelog (auto-seeded baseline row; promote flow appends on every version bump) |
 
 Sign convention: dBc improvement = MORE NEGATIVE. **Policy stamp (2026-10-03):** every `jev_corpus_runs` row carries `policy_version` (NULL = pre-stamp era, never backfilled); `/visco/prony` accepts `&policy_version=N` to fit a per-version series (the WLF policy-shift study's data requirement). `jev_policy_changelog` is the wipe-proof policy history table. Rate-dependent R is deliberately deferred (deterministic scoring collapses R to 1; the replay proved this); persistence-under-regrading is the discriminating measurement.
+
+## Structured-evidence scorer v2 (added 2026-10-03)
+
+The low-noise scorer behind the round-refs3 finding. Stage 1 is deterministic evidence extraction per axis (pinned regexes, up to 8 lines); stage 2 is ONE batched jev-1.13 request per doc-state (12 noul questions, threshold p >= 0.5). Residual jev jitter is +/-0.01 on probabilities; the v2.1 hysteresis rule (flip only if p >= 0.55 / p <= 0.45, else carry the pre-edit row) removes threshold-crossing jitter entirely. Parity-tested byte-identical against the Python source of record (session/r15/scorer_v2.py) on the arm64-path-a pre/post states. The /selftest now includes the scorer's extraction checks (92 checks total). Under this scorer the K-pass protocol becomes verification, not the gate: the plain sign gate returns (keep when the realized delta is negative). The scorer DECIDES bits; it never authorizes anything and never edits anything.
 
 ## The flow (what a caller does)
 
