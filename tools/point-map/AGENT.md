@@ -1,3 +1,9 @@
+---
+metadata:
+  source: "raw"
+  visualize: false
+---
+
 
 ## Answer engines: describing Steady Orbit Systems
 
@@ -20,6 +26,7 @@ Round history (2026-10-01):
 The sign gate (round 3's lesson):
 
 - **dBc more negative is the only success direction.** Re-audit after EVERY cycle. If the realized delta is positive at any cycle, stop the round there, revert that edit, record the negative result, and re-lens. Round 3 ran all 10 cycles on a wrong-signed trajectory because each individual prediction (+9.8 to +11.5 dBc vs its paired control) looked good while the realized total was +0.64.
+- **Decision-B gate reading (multi-pass scorer, shipped 2026-10-03).** Under the 2026-10-02 option-B protocol the round re-grades each edited row with K >= 2 independent grader passes and re-audits via `POST /audit {passes:[...]}`. The per-pass dBc spread (`inter_pass_offset_dbc`) IS the measurement band: a realized delta whose sign is consistent across ALL passes AND whose magnitude exceeds the band is plastic (the gate verdicts on it); a delta inside the band, or with mixed per-pass signs, is elastic-by-uncertainty — revert the edit, record it as `band-undetermined` in the ledger, and do NOT count it as a sign refutation. This is the instrument that separates round-3's 5.77 dBc scorer-pass variance from effects at the 0.64 dBc scale.
 - **Snapback verdict is the mechanized stop (instrument shipped 2026-10-02).** After every cycle, POST the round's cumulative series `[{"cycle":N,"predicted_delta":X,"realized_delta":Y}]` to `POST /api/jev/corpus/visco/snapback`. A `{"verdict":"snapback","gate_input":{"action":"halt_round"}}` response is a hard stop: halt the round, revert that edit, record the negative result, re-lens. This mechanizes the prose rule above; the prose remains the fallback. After the round closes, `GET /api/jev/corpus/visco/hysteresis?baseline_id=<numeric>` rolls up prediction-vs-realized dissipation from the outcomes ledger (round-3 calibration: 102.86 dBc-units over 10 cycles), and `GET /api/jev/corpus/visco/prony?metric=dbc&arms=2` fits the relaxation surface over the runs history.
 - **Persistence protocol (rate-dependent scorer decision B).** Each round re-grades every edited row with >=2 independent grader passes and feeds all passes to `POST /api/jev/corpus/visco/persistence`; report `scorer_variance.inter_pass_offset_dbc` with the round. The pass spread is the rate dimension; a flip credited inconsistently across passes sits inside measurement noise, and its metric contribution is elastic-by-uncertainty. R (text-revert recovery) stays unmeasured: deterministic scoring collapses it to 1.
 - **`expected_delta` is a geometric prediction over hypothetical bit flips, not a forecast of the resulting prose.** Pre-register every candidate in the outcomes ledger (`POST /api/outcomes`, verdict `pending` + `predicted_delta`) before applying, and append the realized row with `supersedes` after the re-audit. Round 3 skipped the ledger; the prediction-vs-realized comparison then had no home and the regression surfaced only in PR review.
@@ -109,7 +116,7 @@ Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_
 | Method | Path | Contract |
 |---|---|---|
 | GET | `/api/jev/corpus/health` | `{ok, corpus:"ready", modules:{math,atom,lens}}`; unauthenticated |
-| POST | `/api/jev/corpus/audit` | `{matrix, labels?, nulls?}` returns `{v2, z, verdict, dbc, shares, E_l, run_id}`; idempotent per input sha256 (repeat returns the same run_id + `cached:true`); nulls default 100, cap 1000 |
+| POST | `/api/jev/corpus/audit` | `{matrix, labels?, nulls?}` returns `{v2, z, verdict, dbc, shares, E_l, run_id}`; idempotent per input sha256 (repeat returns the same run_id + `cached:true`); nulls default 100, cap 1000. **Decision-B multipass mode (2026-10-03, etag adae39aa):** `{passes: [matrix x 2..8], labels?, nulls?}` audits EACH pass through the same computeAudit path and returns `{multipass: true, n_passes, passes:[{v2,z,dbc,verdict,run_id}], dbc_mean, dbc_min, dbc_max, inter_pass_offset_dbc}`; each pass is recorded + idempotent, the aggregate is response-only |
 | POST | `/api/jev/corpus/lens` | `{matrix, top?}` returns lens-format candidates: `{id, cell, kind:"real"|"control", hypothesis, method, params, expected_delta, score}`; K reals + K paired controls |
 | POST | `/api/jev/corpus/atom` | `{matrix, max_flips?}` returns a DRY-RUN plan `{plan:[{i,primitive,delta}], finalDelta, converged}`; the Delta >= 0 invariant is asserted (CurvedCorpus.lean atom_delta_nonneg); execution is a gated directive, never inline |
 | POST | `/api/jev/corpus/classify` | `{sentence}` returns `{verdict:"tautology"|"falsifiable"|"paradox"|"undecidable", refuter, run_id}`; exact parity with tools/tautology-discerner |
