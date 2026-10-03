@@ -18,6 +18,24 @@ The newer open issue's number/title is recorded from this pass's listing read; n
 made to triage it here. The CHIPSEC gate itself (gating check at provisioning time) is
 unchanged by anything this round did.
 
+## Inputs
+
+What this pass consumed, from the pass's own record:
+
+- GitHub issues listing read: `GET /repos/yubi-OS/yubiOS/issues?state=open` at the round-8
+  pin, filtered to the repo's open set (the read that named #24 plus the one newer issue;
+  the open count of 2 is the measured result, up from 1 at the 2026-09-09 census).
+- Single-issue read behind the #24 row: issue number 24, whose title
+  ("[post-launch] finish CHIPSEC portable image and enrollment-result gating"), assignee
+  (`foil-copy-overrate`), open state, and ADR-010 DPS framing are all fields taken from
+  that read, not from memory of earlier censuses.
+- Comparison baseline: `refs/org-census-drift-check-2026-09-18.md`, whose open-issue count
+  is the "up from 1" figure the verdict column is measured against.
+
+Nothing else: no Linear read (workspace read was blocked this pass, per the
+does-not-claim section), no CI-run data, and no CHIPSEC tooling output — this record
+verifies issue bookkeeping state only.
+
 ## What this record does not claim
 
 no Linear pass was run (the workspace read is blocked this session); issue states are GitHub-side
