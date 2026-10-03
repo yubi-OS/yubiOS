@@ -41,13 +41,16 @@ NLINES=$(printf '%s\n' "$ADDED" | grep -c . || true)
 [ "$NLINES" -le 40 ] || fail C4 "added $NLINES lines (> 40; keep the edit atomic)"
 pass C4 "added $NLINES lines"
 
-# C5 axis vocabulary: added text must not carry OTHER axes' section vocabulary
+# C5 axis vocabulary: added text must not carry OTHER axes'"'"' section vocabulary.
+# Word-boundary-aware (2026-10-03): \b${w}\b matches the axis word only as a
+# standalone token, so "attestation modes" does NOT trip the "mode" axis
+# (plural is a different word), while "## Inputs" DOES trip the "inputs" axis.
 AXIS_NAME=$(printf '%s' "$AXIS" | awk '{split("audience inputs outputs mode assumption adjacent failure lifecycle composition knowledge calibration recursion", a, " "); print a[$1+1]}')
 [ -n "$AXIS_NAME" ] || fail C5 "target axis must be 0..11"
 BAD=0
 for w in audience inputs outputs mode assumption adjacent failure lifecycle composition knowledge calibration recursion; do
   [ "$w" = "$AXIS_NAME" ] && continue
-  if printf '%s\n' "$ADDED" | grep -qi "^## .*$w\|$w coverage"; then BAD=1; echo "  trips axis: $w"; fi
+  if printf '%s\n' "$ADDED" | grep -qiE "^## .*\b${w}\b|\b${w}\b coverage"; then BAD=1; echo "  trips axis: $w"; fi
 done
 [ "$BAD" -eq 0 ] || fail C5 "added text carries another axis's vocabulary (refs4/refs6 collateral lesson)"
 pass C5 "no cross-axis vocabulary (target: $AXIS_NAME)"
