@@ -113,3 +113,40 @@ noted on the predicted-vs-realized series), and the persistence endpoint receive
 - If the K=8 band still swallows the effect, the class is genuinely sub-noise on refs/
   and the instrument needs a different edit class (structure-level: new docs joining
   isolates) or a lower-noise scorer — not more single-flip rounds.
+
+## Addendum: the K=8 re-measurement (recommended follow-up, executed same session)
+
+The record's recommendation was to re-measure cycle 4's candidate (arm64-path-a inputs
+fill) at K=5-8. Executed at the endpoint's K=8 cap: 8 independent grader passes over the
+same edit (7 fresh blind subagent passes + the conservative canonical row), frozen check
+PASS, pre-registered before the audit.
+
+| pass | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|
+| dBc delta vs baseline | -0.185 | -0.230 | **+0.145** | -0.058 | -0.071 | -0.071 | -0.071 | **+0.145** |
+
+- mean delta **-0.0495**, inter_pass_offset (max-min) 0.3747, sd of pass deltas 0.1264
+- **The K=3 all-negative consensus did NOT survive K=8.** Six passes read negative, two
+  read positive (both +0.145). The K=3 consensus was a small-sample artifact, not signal:
+  with more independent passes the direction is no longer consistent, and the mean
+  collapses from -0.345 toward zero.
+- Gate verdict: **elastic-band-undetermined** at K=8 — the edit was NOT shipped, the
+  local file restored, and the realized row landed in the outcomes ledger with the
+  per-pass deltas in the notes.
+
+**Class verdict (the record's own fork, second branch): the axis-fill class is genuinely
+sub-noise on refs/ under this scorer.** Three independent K-measurements of the same
+class (K=3 x4 cycles, K=8 on the strongest candidate) never produced a sign consensus
+that survives additional passes; the effects (0.03-0.35) sit inside the row-scoped
+scorer spread (0.37-0.49). The recommendation now moves to the two directions that
+survive the evidence:
+
+1. **Structure-level edits**: new documents joining isolated neighbours (the placement
+   contract), which change corpus structure rather than filling cells in existing rows.
+2. **A lower-noise scorer**: the pass spread comes from grader disagreement on what
+   "substantive coverage" means for prose docs (the blind passes disagreed with the
+   canonical row on 2-6 axes per cycle). Tightening the scoring prompt or scoring from
+   structured evidence instead of prose judgment would shrink the band itself.
+
+Single-flip axis-fill rounds on refs/ are retired: refuted under the single-scorer sign
+gate (rounds 3, refs2) and unresolvable under the decision-B band (refs3, K=3 and K=8).
