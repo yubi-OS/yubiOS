@@ -13,7 +13,7 @@ Base: https://steady-orbit.systems-a.workers.dev
 
 ## The jev-corpus RSI chain: audit -> lens -> directives -> deploy (runbook, added 2026-10-02)
 
-A second chain composes on this worker alongside the map wayfinder: `jev-corpus` scores a corpus into a documents x 12-NSS-axis coverage matrix, `/api/jev/corpus/audit` measures it (V2, z, dBc), `/lens` proposes atomic candidates, `jev-orchestrator` executes each as a fail-closed directive, and `steady-orbit-deploy` ships any worker-module change. One atomic edit per cycle, ten cycles per round, the round record in `refs/`, every repo edit a gated commit task. The 12 NSS axes stay the unvalidated lens dictionary: geometry proposes, a source-grounded task check decides.
+A second chain composes on this worker alongside the map wayfinder: `jev-corpus` scores a corpus into a documents x 12-NSS-axis coverage matrix, `/api/jev/corpus/audit` measures it (V2, z, dBc), `/lens` proposes atomic candidates, `jev-orchestrator` executes each as a fail-closed directive, and `steady-orbit-deploy` ships any worker-module change. Protocol (2026-10-03, unit-round): ONE atomic change per round; the whole runflow runs as a unit per change - pin, frozen baseline check (fresh matrix + nulls-400 audit + map + control + admission), instrument candidates, the single edit, pre-register, hysteresis re-score, gate-grade audit, bearing + level_dbc gate, taskcheck-gated commit or revert, realized outcome row, snapback, rollups, round record in `refs/`. The frozen baseline is re-checked at every unit interval; no baseline carryover across units. Every repo edit is a taskcheck-gated commit. The 12 NSS axes stay the unvalidated lens dictionary: geometry proposes, a source-grounded task check decides.
 
 Round history (2026-10-01):
 
