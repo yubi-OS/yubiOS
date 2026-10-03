@@ -150,3 +150,42 @@ survive the evidence:
 
 Single-flip axis-fill rounds on refs/ are retired: refuted under the single-scorer sign
 gate (rounds 3, refs2) and unresolvable under the decision-B band (refs3, K=3 and K=8).
+
+## Addendum 2: the K=5 fresh-pass test (Jenny directive, same session)
+
+The K=8 addendum recommended retiring the class; Jenny asked to test K=5 next. Executed as
+a FRESH replication (5 new blind grader passes, canonical row excluded — an independent
+sample, not a subset of the K=8 passes), same edit, frozen check PASS, pre-registered.
+
+| pass | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| dBc delta vs baseline | -0.230 | -0.618 | -0.230 | -0.230 | -0.058 |
+
+- All five fresh passes read NEGATIVE (5/5 — the direction replicates), mean **-0.2729**,
+  offset (max-min) **0.5598**, sd 0.1848.
+- Gate: **elastic-band-undetermined** — |mean| 0.273 sits inside the fresh-sample band
+  0.56. NOT shipped. (Note the band is wider here than at K=8 because this sample carries
+  its own -0.62 outlier pass; max-min grows with any new extreme draw.)
+- Free subset analysis over the K=8 sample (computed from the 8 measured per-pass dBc
+  values, no new audits): **all 56 possible K=5 subsets verdict elastic; only 6/56 have
+  an all-negative sign at all, and none clear the band.** No cherry-picked subset of the
+  existing data would have shipped this edit — the gate is robust to subset selection.
+- Ledger: pending row 1300 -> realized row with the per-pass deltas; persistence with all
+  5 passes; snapback no_snapback (inversion runs [[2],[4]]).
+
+### What the three K-measurements say together
+
+| measurement | passes | sign split | mean delta | band | verdict |
+|---|---|---|---|---|---|
+| K=3 (canonical + 2 blind) | 3 | 3 neg / 0 pos | -0.345 | 0.436 | elastic |
+| K=8 (canonical + 7 blind) | 8 | 6 neg / 2 pos | -0.049 | 0.375 | elastic |
+| K=5 fresh (5 blind) | 5 | 5 neg / 0 pos | -0.273 | 0.560 | elastic |
+
+The DIRECTION leans negative in every sample (13 of 16 total passes read negative), but
+the MAGNITUDE never separates from the pass spread: the effect, if real, is smaller than
+the grader's disagreement about what the row covers. The class verdict stands — axis-fill
+on refs/ is sub-noise under this scorer — with one refinement the K=5 sample adds: the
+direction is consistently negative-leaning, so the effect is more plausibly a small real
+improvement swamped by scorer noise than a zero effect. That is exactly the case a
+LOWER-NOISE scorer (the surviving recommendation) is for: shrink the band until a -0.27
+mean is resolvable. Structure-level edits remain the other path.
