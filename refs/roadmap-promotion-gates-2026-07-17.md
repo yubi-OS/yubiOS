@@ -72,15 +72,3 @@ Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=
 
 
 Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=+0.4739) were identical placeholder copies with no per-file content; merged on 2026-09-18.
-
-## Where the gate sits in the planning flow
-
-The promotion gate is one station in a fixed handoff chain: a FUTURE item enters from the
-roadmap, passes this table, and lands as an ADR draft, a SPEC section, a CI workflow, or
-implementation work, each with its own downstream owner. Upstream of the gate are the roadmap
-edits that create FUTURE items; downstream, the promoted artifact binds to the release-gate
-checklist (what merges once work is active) and to the production-gaps register (where the
-Evidence-target rows land). The gate itself is a document-level edge: nothing imports it and
-nothing calls it; its readers are the people and agent sessions that consult it at promotion
-time. Changing this table changes what every future promotion must answer, but does not change
-the downstream gates themselves, which keep their own files and their own wording.
