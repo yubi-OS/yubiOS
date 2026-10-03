@@ -66,23 +66,7 @@ Principles of Optics, ch. 9 (aberration theory); Berry & Upstill, Progress in Op
 (1980) (catastrophe optics: caustics as catastrophes of the aberration function); Nye, Natural
 Focusing (1999); radial polynomials as Jacobi polynomials: standard (e.g. Born & Wolf app.).
 
-## Audience
+## Status
 
-Who acts on this mapping, per the dispatch it actually drove:
-
-- The slot-execution lanes: four parallel work items dispatched 2026-08-24 (slot 1
-  aberrated-lens extension, slot 2 F4 caustic classification, slot 3 disk-side Zernike
-  channel, slot 4 the naming-collision flag). Each lane reads exactly its own slot section
-  plus the Identity/measurement split, which is the house-style contract both slot 1's
-  admission gate (A_1, flow coordinate u failed it) and slot 3's curveball condition
-  (z > 3 or inadmissible) are stated against.
-- The Lean CI maintainer: slot 4's collision flag lands in the papers' 'Optical language'
-  discipline paragraph, and the Identity-type half of the split (radial polynomials as
-  binomial sums, R_n^m(1) = 1, parity structure) is written to be kernel-checkable in the
-  CurvedCorpus.lean style of sections 10-12.
-- The reviewer of the slot results: results land under papers/data/ and tools/ with their
-  own seeded CI checks (see Status), so the verification surface is CI, not prose review.
-
-Not an audience for this document: anyone looking for Zernike numerics themselves — the
-paper sources under Load-bearing sources carry those; this doc is only the placement map
-and the slot contracts.
+2026-08-24: slots 1-4 dispatched as parallel work items; results land under papers/data/ and
+tools/ with their own seeded CI checks.
