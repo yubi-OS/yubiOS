@@ -128,3 +128,18 @@ Context: template Mode-D stub sections appended per repo-refs-skill batches (Δ=
 ## 2026-09-18 drift check (wayfinder round 8, cycle 59)
 
 PR campaign research record: the campaign-mode posture it set (proof-first, build in public) is unchanged; the readiness rows it fed were re-verified by this round's friend-map drift check; note additive.
+
+## Related problems and alternative routes
+
+This note sits in a campaign-side family the corpus tracks separately. The go-to-market readiness
+gate (`refs/readiness-gates-gtm-2026-07-25.md`) decides when an outreach wave is allowed at all;
+`refs/naming-licensing-provenance-2026-07-25.md` owns the name-clearance and trademark questions
+this note only flags as a stop gate; `refs/pr-friend-map-2026-07-17.md` maps the friendly outlets
+this note treats under editorial fit.
+
+The same goal has other routes this note deliberately does not take: a retained agency pitches and
+places on the project's behalf but buys reach with budget instead of published proof; paid
+placement shortens the timeline but contradicts the build-in-public posture; contributor-community
+participation (OpenSSF working groups, Hacker News Show threads) trades reach for slower
+compounding. The stop-gate rows under Readiness findings exist because the cheaper routes (announce
+before license, pitch before proof) backfire in ways a campaign cannot recover from.
