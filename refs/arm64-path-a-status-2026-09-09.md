@@ -5,6 +5,25 @@ the Linear state of every tracked Path A item, verified live via the GraphQL API
 2026-09-09. This doc records states only; the architecture decisions (ADR-018/019/020,
 canceled 2026-07-30, post-launch posture) are unchanged.
 
+
+## Inputs
+
+What the refresh pass consumed, from the pass's own record:
+
+- The Linear GraphQL API read itself: the OMNI-AGENT workspace query over the 8 tracked
+  Path A items (OMN-36, OMN-45, OMN-46, OMN-47, OMN-56, OMN-57, OMN-58, OMN-141),
+  pulling each item's `state`, `completedAt`, and `dueDate` fields — the three columns
+  the tracked-items table reports.
+- The staleness baseline being refreshed: `refs/arm64-path-a-b-board-status-2026-07-23.md`,
+  48 days older, whose Todo/Backlog split (3 Todo, 5 Backlog) is the figure the deltas
+  section measures against.
+- The workspace-memory snapshot named in the deltas section (the 2026-08-02 picture),
+  which is the second comparison point for "no state movement in 48 days".
+
+Scope of the input set: Linear reads only. No GitHub data, no CI runs, and no hardware
+feeds — the doc records tracker state, and its does-not-claim boundary is the
+architecture decisions (ADR-018/019/020), which the refresh does not re-open.
+
 ## Tracked items (Linear team OMNI-AGENT)
 
 | Item | Title | State (2026-09-09) | completedAt | dueDate |
