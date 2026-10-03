@@ -48,8 +48,9 @@ Four bearer-auth routes under `/api/jev/corpus/visco/*` + two pure builtins (`vi
 | `/api/jev/corpus/visco/hysteresis` | GET | `?baseline_id=<number>` | `{loops[], total_sum_abs, mean_per_cycle, n_cycles, verdict}`; closes supersedes chains in the outcomes ledger; empty -> `no_data` |
 | `/api/jev/corpus/visco/prony` | GET | `?metric=dbc&arms=2` | `{ke, arms:[{k,tau}], fit_quality_r2, sse, series[], t_basis}`; fits over corpus-runs history; <5 points -> 422 |
 | `/api/jev/corpus/visco/snapback` | POST | `{series:[{cycle,predicted_delta,realized_delta}]}` or `{baseline_id}` | `{snapback, inversion_runs, verdict, gate_input:{action}}`; verdicts only, never auto-actions |
+| `/api/jev/corpus/visco/policy-log` | GET | - | `{log:[{id, created_at, version, actor, source, summary, backfilled}], current_version}`; wipe-proof policy changelog (auto-seeded baseline row; promote flow appends on every version bump) |
 
-Sign convention: dBc improvement = MORE NEGATIVE. Rate-dependent R is deliberately deferred (deterministic scoring collapses R to 1; the replay proved this); persistence-under-regrading is the discriminating measurement.
+Sign convention: dBc improvement = MORE NEGATIVE. **Policy stamp (2026-10-03):** every `jev_corpus_runs` row carries `policy_version` (NULL = pre-stamp era, never backfilled); `/visco/prony` accepts `&policy_version=N` to fit a per-version series (the WLF policy-shift study's data requirement). `jev_policy_changelog` is the wipe-proof policy history table. Rate-dependent R is deliberately deferred (deterministic scoring collapses R to 1; the replay proved this); persistence-under-regrading is the discriminating measurement.
 
 ## The flow (what a caller does)
 
