@@ -143,3 +143,13 @@ placement shortens the timeline but contradicts the build-in-public posture; con
 participation (OpenSSF working groups, Hacker News Show threads) trades reach for slower
 compounding. The stop-gate rows under Readiness findings exist because the cheaper routes (announce
 before license, pitch before proof) backfire in ways a campaign cannot recover from.
+
+## When this research re-runs, and what comes back
+
+This note is a dated snapshot, so its re-run contract matters more than its prose. The refresh
+rule above names the external facts to re-verify; the re-run itself has a loop back into the
+corpus: findings return as updates to the deliverable `docs/PR.md`, as changes to the stop-gate
+rows in Readiness findings, and as new rows in the friend map when outlet guidance moves. A
+re-run that changes none of those three is recorded as a drift check only, like the
+2026-09-18 entry below. The note never becomes a live source: each re-run produces a new dated
+pass, and this file keeps its own history instead of overwriting it.
