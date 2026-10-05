@@ -136,4 +136,9 @@ The chain (full contract: `/AGENT.md` on the worker): audit -> lens -> fail-clos
 4. Atom plans are proposals; execution is a gated directive, always.
 5. Fixtures are the truth: on any mismatch, the JS is wrong until proven otherwise.
 
+
+## Taste instrument (2026-10-05, taste-v1)
+
+The nature-based taste instrument rides the same worker: `POST /api/jev/corpus/taste/score` (deterministic extraction via `jev-taste-math.js`: box-counting fractal dimension, mirror symmetry, scale coherence + caller-supplied measurements; ONE batched clef call over 8 nature-law axes with the measured number embedded in each instruction; 0.45/0.55 hysteresis; `order_seed` position-bias control; run rows kind `taste`/`taste-matrix`). `GET /taste/selftest` carries 6-fixture parity against the Python extractor source of record (`session/taste/lane-b/extractor.py`, validated 12/12; JS/Python max deviation 3.1e-15). The instrument never awards itself a quality score: it returns a vector + probabilities, never a composite beauty number. Validation record: `refs/natural-taste-engine-2026-10-05.md` on yubi-OS/yubiOS (24/24 gold-set separation vs measured D, clef jitter sd=0 across 24 re-calls). Live-verified 2026-10-05: selftest 13/13, caller-features and bitmap image paths both verdict correctly, ~$0.0002/score, consumed=0 (clef plan billing). Lesson from the deploy: clef `choice` questions take a `criteria` object (option->description), not a `choices` array; and bare integer scores ("1") confused the symmetry band question until fmt renders "1.000" — always render measured numbers with decimals in clef instructions.
+
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
