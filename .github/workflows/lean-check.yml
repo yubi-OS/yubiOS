@@ -217,3 +217,9 @@ jobs:
 
       - name: phonon-dispersion selftest
         run: python3 tools/phonon-dispersion/phonon.py --selftest
+
+      - name: edge-standard selftest (taste-engine source of record)
+        run: python3 tools/edge-standard/edge_standard.py --selftest
+
+      - name: edge-standard fixture parity (Python source of record vs JS worker port)
+        run: node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
