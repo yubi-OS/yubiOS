@@ -56,7 +56,7 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | GET | `/api/maps` | stored map metrics |
 | GET | `/api/maps/:id` | complete stored MapResult |
 | POST | `/api/maps/compare` | `{before_id,after_id}`; conflicts return 409 |
-| DELETE | `/api/maps/:id` | delete one saved map; explicit user authorization required |
+| DELETE | `/api/maps/:id` | delete one saved map incl. KV overflow cleanup, `{ok:true}`; **AUTH GAP: no authentication in code** — the earlier "explicit user authorization required" wording is not enforced; any caller can delete |
 | POST | `/api/map/control` | `{baseline_id, texts, names, n_controls?, control_seed?}` (the EXACT baseline corpus) — CutPaste-style positive control: n seeded splice CHANGEs measured through the preview path on the frozen frame; writes nothing; recipe fixed |
 | POST | `/api/outcomes` | `{baseline_id, target, predicted_delta?, after_id? \| observed_delta?, task_check:{verdict,verifier,notes?}, supersedes?}` — append-only pre-registration ledger row (201) |
 | POST | `/api/map/axis-redundancy` | `{map_id, K?, null_seed?}` — per-axis leave-one-out predictability of bit j from the other bits, run against K draws of the fixed-margin null; exclusion-only verdicts; `admitted:false` always; no embedding, nothing written |
@@ -68,8 +68,45 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | POST | `/api/vector/search` | existing cosine search; its historical index may mix prefix and pooled-document representations; scores are not calibrated across ingestion versions |
 | GET | `/map/` | browser view, full-file uploads, frozen baseline selector, comparison panel |
 | GET | `/map/pointmap.js` | identical dependency-free numeric core used by Worker |
+| GET | `/map/app.js` | map UI application script served from KV (`map-app.js`); 404 when the KV key is missing |
 
 Legacy `/api/assess`, `/api/fits`, `/api/narrate` and site chat remain separate APIs. The Sauna-hosted mirror has not received this Cloudflare release.
+
+| Method | Path | Contract |
+|---|---|---|
+| GET | `/api/fits` | legacy SOS Agent API: list stored repository FIT assessments (population), `{fits:[...]}` |
+| GET | `/api/fits/:id` | one stored FIT with full `fit_json` and population comparison; 404 when missing |
+| DELETE | `/api/fits/:id` | delete a stored FIT row (`{ok:true}`); **AUTH GAP: unauthenticated destructive delete in code** — no auth check, any caller can remove rows |
+| POST | `/api/chat` | legacy site assistant (Workers AI `llama-3.3-70b-instruct-fp8-fast`, pinned SOS system prompt): `{message}` (<=1000 chars) -> `{reply}`; no markdown/em-dash prompt rules; superseded on the live site by `/api/site-assistant` |
+
+### CORS preflights
+
+OPTIONS preflights are answered on the major route families for CORS: `/api/jev/*` (including `/api/jev/corpus/*` and the taste routes), `/api/searxng`, and the public relays (`/api/tts`, `/api/stt`, `/api/contact`, `/api/decide`). The relay preflights serve 204 with `Access-Control-Allow-Origin: *`. Only `/api/searxng`'s preflight was previously listed in the table above.
+
+## Public relays (ElevenLabs / Resend / DefAPI relays, CORS open)
+
+Public relays in the main worker module: CORS open (`Access-Control-Allow-Origin: *`), per-IP rate limiting via the relay limiter, 503 when the backing key binding is absent and 502 on upstream failure.
+
+| Method | Path | Contract |
+|---|---|---|
+| GET/POST | `/api/tts` | ElevenLabs text-to-speech relay (`eleven_turbo_v2_5`): POST `{text` (<=4000)`, voice_id?}` or GET `?text` (<=900) `&voice_id`; returns an `audio/mpeg` stream; `ELEVENLABS_API_KEY`; rate-limited (15/min per IP) |
+| POST | `/api/stt` | speech-to-text via ElevenLabs `scribe_v1`: multipart `file` (<=10MB, 413 over) + optional `language_code`; returns `{text, language_code}`; `ELEVENLABS_API_KEY`; rate-limited (15/min per IP) |
+| POST | `/api/contact` | website contact form -> Resend email (from `site@axel.steadyorbitsystems.ai` to `mike@steadyorbitsystems.com`): `{name` (<=120)`, company?` (<=160)`, email` (<=200)`, message` (<=4000)`, source?}`; `RESEND_API_KEY`; stricter per-IP rate limit (5/min, "try again in a minute") |
+| GET/POST | `/api/decide` | browser-friendly decision relay, DefAPI `typesafe/jev-1.13` (or clef / clef-flash via Workers AI when the route selects it): POST `{state, questions, session_id?, user?}` or GET `?state&questions` (urlencoded JSON) `&session_id&user`; question types choice/score/noul validated; `DEFAPI_API_KEY` (+`AI` for the clef path); rate-limited (15/min per IP) |
+
+## Site surfaces (solar-rbs-entry + legacy assets)
+
+| Method | Path | Contract |
+|---|---|---|
+| POST | `/api/site-assistant` | same-origin site assistant (entry module): `{message}` (<=1500 chars, <=10KB body) -> `{reply}`; Origin host must match else 403 `CROSS_ORIGIN`; POST-only (405 otherwise); grounded on KV `llms.txt`; `AI` + `WEBSITE_RATE_LIMIT` (limiter failure = allow) |
+| POST | `/api/brain/preview` | brain page preview chat — identical handler to `/api/site-assistant` (same `siteChat()` handler) |
+| GET | `/sos`, `/sos/`, `/sos/index.html` | Steady Orbit Systems voice-agent UI (KV `sos-index.html`) |
+| GET | `/sos/client.js` | voice client script (KV `sos-client.js`) |
+| GET | `/index.html` | legacy site index from KV; shadowed by the entry module's page table when a KV page exists |
+| GET | `/audio/reply-1|2|3.mp3` | three pre-baked voice reply audio files from KV (`audio/mpeg`); 404 when the KV key is missing |
+| GET | `/sitemap.xml` | sitemap served from KV (`application/xml`); falls through to the legacy module when the KV key is missing |
+| GET | `/robots.txt` | robots served from KV (`text/plain`); same fallthrough |
+| GET | `/AGENT.md` (and `/agent.md`) | this document, served from KV at BOTH spellings, no-cache; fallback text "AGENT.md not uploaded" |
 
 ## Jev orchestrator API (jev, bearer-auth)
 
@@ -88,7 +125,9 @@ The same worker also serves the Jev v2 gated-approval orchestration API: ops con
 | POST | `/api/jev/tasks/:id/close` | `{outcome, reason}`; `/cancel` closes cancelled |
 | GET | `/api/jev/approvals` | pending queue with expiry countdowns |
 | POST | `/api/jev/approvals/:id/approve` , `/reject` | approve auto-dispatches the bound action (re-checked against the CURRENT policy version first) |
+| POST | `/api/jev/approvals/:id/guide` | `{actor, guidance, task_id?}`; attach human guidance to the approval's task (third branch of the approvals route alongside approve/reject) |
 | POST | `/api/jev/pause` | `{paused, scope}`; blocks new and queued dispatch, never undoes completed effects |
+| GET | `/api/jev/pause` | read pause state: `{paused, scope, note?}`; fail-closed — an unreadable policy reports `paused:true, scope:"all"` |
 | GET | `/api/jev/summary` | tasks by state/outcome, pending approvals, cost rollup |
 | GET/POST | `/api/jev/learnings` | proposal ledger; `POST /api/jev/learnings/:id/promote` is the human promotion step (a policy bump invalidates affected approvals) |
 | GET/POST | `/api/jev/automations` | versioned automation defs; `POST /api/jev/automations/:id/activate` , `/pause` , `/run` (single-active per name) |
@@ -121,7 +160,7 @@ Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_
 | POST | `/api/jev/corpus/scorer/score` | `{doc:{name,text}, hysteresis?:{low,high,pre_row}}` — the structured-evidence scorer (2026-10-03, PR #280 addendum 3): deterministic per-axis evidence extraction (pinned regexes, `jev-corpus-scorer.js`) + ONE batched jev-1.13 request (12 noul questions, threshold p>=0.5); returns `{name, row[12], probs, evidence_counts, hysteresis_applied, defapi.consumed}`; ~$0.0002/call; run rows recorded under kind `scorer`. v2.1 hysteresis (flip only if p>=0.55 / p<=0.45, else carry pre_row) removes threshold jitter. The low-noise scorer behind the round-refs3 finding: the free-prose grader band (0.44-0.56 dBc) was 6-8x the true single-flip effect (-0.073). Python source of record: session/r15/scorer_v2.py (parity-tested byte-identical on arm64-path-a pre/post) |
 | POST | `/api/jev/corpus/scorer/matrix` | `{docs:[{name,text}] 1..20, hysteresis?:{low,high,pre_rows[]}, spacing_ms?}` — paced batch scoring (default 4.5s between docs; one run row kind `scorer-matrix` per batch) |
 | POST | `/api/jev/corpus/taste/score` | the nature-based taste instrument (2026-10-05, taste-v1): deterministic extraction (`jev-taste-math.js`: box-counting D, mirror symmetry, scale coherence; fixture parity vs the Python extractor source of record) + ONE batched clef call over 8 nature-law axes, every instruction carrying a measured number, 0.45/0.55 hysteresis, `order_seed` permutation for position-bias control; caller-supplied measurements stamped `source: caller`. The instrument never awards itself a quality score. 2026-10-05 addendum: calibration sweeps exact (symmetry_present steps at 0.6, symmetry_variation honors the 0.3-0.95 window with sterile-perfect rejected, complexity_economy steps at 0.5); real-photo multi-class trial (18 Wikimedia images, 3 classes) NOT admitted - classifier faithful to measured D on every image but photo edge maps read D 1.5-1.6 (pipeline-dependent; band recalibration or standardized edge pipeline required before admission). Addendum 2 (2026-10-05): edge-standard-v1 SHIPPED - POST /api/jev/corpus/taste/edge-standard (gray_b64 in -> ink-normalized 1px contour bitmap + features, run rows kind edge-standard; Python source of record + JS port, 4-fixture parity, max dD 4.4e-16); trial-2 on the same 18 photos through the standardized pipeline moved D from 1.5-1.6 to 1.11-1.40 with coverage pinned at ~6% and 8/18 in-band - the pipeline-confound blocker is RESOLVED; admitted:false stays, remaining gate = human-rated real-photo gold set + matched-triad protocol (corpus doc 07). Grounding corpus: yubi-OS/knowledge edge-map-standardization (draft PR #83). ~$0.0002/score |
-| GET | `/api/searxng` | searXNG proxy: `?endpoint=<path>&qs=<urlencoded-querystring>` -> forwards to the n8n searxng-proxy webhook on Northflank. No rate limiting, CORS open, 20s timeout. NORTHFLANK_API_KEY binding (Secrets Store). Example: `/api/searxng?endpoint=search&qs=q%3Dsystemd%26format%3Djson` |
+| GET | `/api/searxng` | searXNG proxy: `?endpoint=<path>&qs=<urlencoded-querystring>` -> forwards to the n8n searxng-proxy webhook on Northflank. No rate limiting, CORS open, 20s timeout. The NORTHFLANK_API_KEY binding (Secrets Store) is reserved for future direct-Northflank API access; the current proxy goes through the n8n webhook, which is public. Example: `/api/searxng?endpoint=search&qs=q%3Dsystemd%26format%3Djson` |
 | GET | `/api/searxng` (OPTIONS) | CORS preflight |
 | POST | `/api/jev/corpus/taste/matrix` | `{items: 1..20}` paced batch taste scoring, one `taste-matrix` run row |
 | GET | `/api/jev/corpus/taste/selftest` | taste-math selftest + 6-fixture parity against the Python source of record |
@@ -136,7 +175,7 @@ Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_
 | GET | `/api/jev/corpus/visco/prony?metric=dbc&arms=1-3` | Prony relaxation fit (tau grid + non-negative least squares) over the corpus-runs history, t_basis `created_at`; `&policy_version=N` filters to one policy version (NULL-era rows excluded); <5 points -> 422 `INSUFFICIENT_SERIES` |
 | POST | `/api/jev/corpus/visco/snapback` | `{series:[{cycle, predicted_delta, realized_delta}]}` or `{baseline_id}` (reads the ledger); `{snapback, inversion_runs, verdict, gate_input:{action:"halt_round"|"continue"}}`; verdicts only, never auto-actions |
 | GET | `/api/jev/corpus/visco/policy-log` | `{log:[{id, created_at, version, actor, source, summary, backfilled}], current_version}`; the wipe-proof policy changelog (promote flow appends on every version bump) |
-| builtins | `visco_hysteresis`, `visco_snapback` | pure automation builtins for the hourly cycle; purity contract identical to the corpus builtins (no fetch, `{ref}`/`{source_ref}` rejected) |
+| builtins | `visco_hysteresis`, `visco_snapback` | automation builtins (NOT HTTP routes — implemented in `jev-corpus-builtins.js`) for the hourly cycle; purity contract identical to the corpus builtins (no fetch, `{ref}`/`{source_ref}` rejected) |
 
 The math is a port, never a re-derivation: the system of record is `papers/data/lean/verify_claims.py` (v2_corr, curveball) plus `tools/rsi-descent`, `tools/spectral-decomposer`, `tools/spectral-defocus`, `tools/boltzmann-collapse`, `tools/tautology-discerner`. Every deploy is verified with `/selftest` before results are trusted; on any fixture mismatch the JavaScript is wrong until proven otherwise. Audit/lens results are data, never authorization: only directives through the gate act. Visco instruments (shipped 2026-10-02/03): source of record `tools/visco-instruments/` (yubiOS) + `jev-visco-math.js` worker part, fixture-parity-tested. Every `jev_corpus_runs` row carries `policy_version` (NULL = pre-stamp era, never backfilled); `jev_policy_changelog` is the wipe-proof policy history; the promote flow appends a row on every bump.
 
