@@ -56,7 +56,7 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | GET | `/api/maps` | stored map metrics |
 | GET | `/api/maps/:id` | complete stored MapResult |
 | POST | `/api/maps/compare` | `{before_id,after_id}`; conflicts return 409 |
-| DELETE | `/api/maps/:id` | delete one saved map incl. KV overflow cleanup, `{ok:true}`; **AUTH GAP: no authentication in code** — the earlier "explicit user authorization required" wording is not enforced; any caller can delete |
+| DELETE | `/api/maps/:id` | delete one saved map incl. KV overflow cleanup, `{ok:true}`; **bearer auth required (JEV_API_KEY)** — the earlier "explicit user authorization required" wording is not enforced; any caller can delete |
 | POST | `/api/map/control` | `{baseline_id, texts, names, n_controls?, control_seed?}` (the EXACT baseline corpus) — CutPaste-style positive control: n seeded splice CHANGEs measured through the preview path on the frozen frame; writes nothing; recipe fixed |
 | POST | `/api/outcomes` | `{baseline_id, target, predicted_delta?, after_id? \| observed_delta?, task_check:{verdict,verifier,notes?}, supersedes?}` — append-only pre-registration ledger row (201) |
 | POST | `/api/map/axis-redundancy` | `{map_id, K?, null_seed?}` — per-axis leave-one-out predictability of bit j from the other bits, run against K draws of the fixed-margin null; exclusion-only verdicts; `admitted:false` always; no embedding, nothing written |
@@ -76,7 +76,7 @@ Legacy `/api/assess`, `/api/fits`, `/api/narrate` and site chat remain separate 
 |---|---|---|
 | GET | `/api/fits` | legacy SOS Agent API: list stored repository FIT assessments (population), `{fits:[...]}` |
 | GET | `/api/fits/:id` | one stored FIT with full `fit_json` and population comparison; 404 when missing |
-| DELETE | `/api/fits/:id` | delete a stored FIT row (`{ok:true}`); **AUTH GAP: unauthenticated destructive delete in code** — no auth check, any caller can remove rows |
+| DELETE | `/api/fits/:id` | delete a stored FIT row (`{ok:true}`); **bearer auth required (JEV_API_KEY)** — no auth check, any caller can remove rows |
 | POST | `/api/chat` | legacy site assistant (Workers AI `llama-3.3-70b-instruct-fp8-fast`, pinned SOS system prompt): `{message}` (<=1000 chars) -> `{reply}`; no markdown/em-dash prompt rules; superseded on the live site by `/api/site-assistant` |
 
 ### CORS preflights
