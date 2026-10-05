@@ -1,0 +1,6 @@
+#!/bin/bash
+# Pin Realtek RTSx card-reader runtime PM to on every boot (boot-crash debug 2026-10-05)
+for d in /sys/bus/pci/drivers/rtsx_pci/*/; do
+  if [ -f "$d/power/control" ]; then echo on > "$d/power/control"; fi
+done
+exit 0

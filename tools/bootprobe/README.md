@@ -13,3 +13,12 @@ Two systemd oneshots that record the next 50 boots of the Snapdragon X Elite lap
 Install: copy scripts to /usr/local/sbin/, units to /etc/systemd/system/,
 `systemctl daemon-reload && systemctl enable bootprobe-early bootprobe-finalize`.
 Counter caps at 50 (`CAPTURE_DONE`). Plan: session/boot-log-plan-laptop-2026-10-05.md.
+
+## rtsx-pm-pin (2026-10-05)
+
+`rtsx-pm-pin.service` (multi-user.target oneshot) writes `on` to `power/control`
+of every rtsx_pci device (Realtek RTS5261 SD Express reader on the Surface Laptop 7,
+10ec:5261 @ PCI 0003:01:00.0) at every boot — prevents runtime suspend of the card
+reader mid-access during the boot-crash investigation. Also: `pcie_aspm=off` added
+to the default GRUB cmdline the same day (update-grub run throttled). Both part of
+the x1e80100-linux-pm research round (session/x1e80100-linux-pm-research-2026-10-05.md).
