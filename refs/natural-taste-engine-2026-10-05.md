@@ -110,3 +110,23 @@ What remains uncalibrated is the semantic grounding of the bands themselves (hum
 - symmetry_present behaved correctly on all 18 real photos (scores 0.08–0.20, all correctly off).
 
 Trial artifacts: `session/taste/trial/` (manifest.json, trial_features.json, raw/ + edges/).
+
+## Addendum 2 (2026-10-05, later): edge-standard-v1 shipped + trial-2
+
+**Mint.** `edge-map-standardization` corpus landed as DRAFT PR #83 on yubi-OS/knowledge (7 docs + research-db v2: 138 results, all clef-weighted, 30 strong >= 0.5; outline score-validated 7/7 kept; Phase 0 preflight passed; post-push verification: 20/20 files in the PR diff, archive parses, 0 unweighted). Held for review, not merged.
+
+**Pipeline (edge-standard-v1, IBSI pattern).** Raw gray in -> ink-normalization threshold (argmin |coverage - 0.06|, ties to smaller t) -> 4-connected components -> Moore outer-boundary tracing (1 px contours, components < 12 px dropped) -> pinned box-counting window 4..64, 8 scales, log N vs log(1/s) regression + r2 gate. Python source of record (stdlib, 34/34 checks) + JS worker port (28/28 incl 13 parity checks, max |dD| 4.4e-16). Fixture pack: f1/f2 carry the doc-02 normalization property (same shape at different gray levels -> identical traced grid + identical D); f3 Sierpinski leaves D 1.5926; f4 two-level nested disk. All 4 fixtures parity-PASS against the LIVE worker.
+
+**Worker.** `POST /api/jev/corpus/taste/edge-standard` live (etag 26e837ed, 43 parts): gray_b64 in -> standardized bitmap + fractal/symmetry features + run row kind `edge-standard`. Schedules + 13 bindings preserved.
+
+**Trial-2 (the same 18 real photos through edge-standard-v1):**
+
+| class | D range | mean D | mean p | in-band |
+|---|---|---|---|---|
+| trees | 1.182-1.347 | 1.301 | 0.676 | 4/6 |
+| coast | 1.114-1.395 | 1.260 | 0.344 | 2/6 |
+| urban | 1.150-1.393 | 1.265 | 0.339 | 2/6 |
+
+Trial-1 (unstandardized edgedetect maps) had D parked at 1.5-1.6 with 3/18 in-band. The standardized pipeline removes the systematic offset: real-photo D now lands in the Spehar regime, achieved coverage pinned at 0.048-0.063 on 16/18 images, and the classifier verdicts track D exactly (D >= ~1.31 -> on), consistent with the calibration sweeps. Recorded saturation case: 2 urban images hit threshold 255 with coverage 0.123/0.073 (under-inked guard fired) — excluded from band reads.
+
+**Admission status.** The pipeline-confound blocker from trial-1 is RESOLVED — measurements are now comparable across sources at pinned ink coverage. `fractal_band` remains `admitted: false`, and the remaining gate is now cleanly stated (per corpus doc 07): a human-rated real-photo gold set + the matched-triad protocol — a semantic-transfer question, not a measurement-comparability question. A second benefit: taste deltas under a pinned pipeline are now re-runnable (any artifact re-measures identically).
