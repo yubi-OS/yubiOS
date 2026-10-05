@@ -71,9 +71,21 @@ Record both probe results (timestamp, result counts, cost) in the corpus's resea
   a one-line scope statement and 2 seed dig queries. Decompose by the
   domain's own joints (subsystems, lifecycle stages, comparison axes),
   not by round count.
-- jev-validate the outline: ONE `choice` or `score` request over the
-  outline asking which subtopics are load-bearing vs padding; drop what
-  scores low. Record the verdict in the run's plan doc.
+- jev-validate the outline: ONE `score` request over the outline, criteria
+  lowest-first `["padding: drop", "marginal: keep only if the dig comes back
+  strong", "load-bearing: core subtopic"]`; drop score 0. Record the full
+  answers (score, probabilities, legend, usage) in `outline.json`.
+
+## Metric mapping (each clef decision uses the RIGHT metric)
+
+| Decision | Metric | Shape |
+|---|---|---|
+| Outline: is each subtopic load-bearing? | `score` | 3 levels lowest-first (padding / marginal / load-bearing); drop 0 |
+| Source quality weighting | `noul` | true = primary/official source; weight = the probability |
+| Source-class either-or judgment (rare) | `choice` | criteria `{option: description}` |
+
+Store EVERY decision's full record: type, instructions, criteria, the raw
+answer object (probabilities/legend/confidence), model, usage tokens, timestamp.
 
 ### Phase 2: Dig + weight (per subtopic, may fan out)
 
@@ -82,8 +94,15 @@ Record both probe results (timestamp, result counts, cost) in the corpus's resea
 - jev-weight EVERY result as it lands (noul "high-quality authoritative
   source worth citing", true = primary source / false = aggregator, forum,
   marketing, dead link, off-topic), batched 5 results per request.
-- Rate-limit discipline is SHARED across any parallel agents: on 429/5xx
-  sleep 30s, max 3 retries, and log task_id + cost per batch.
+- **/api/decide failure is a REDO, not a degrade**: on 429/5xx or any failed
+  request, sleep 30s and re-send (up to 3 attempts; split into smaller
+  batches on retry). NEVER ship results unweighted — a decision-model
+  failure is treated exactly like a thin dig: the affected results get
+  redone, and results that still cannot be scored mean the affected docs
+  are SKIPPED and recorded as gaps.
+- Pacing: >= 1s between jev requests and between searXNG queries (no
+  published rate limit; courtesy pacing only). Append every request and its
+  usage tokens to `jev-log.json`.
 
 ### Phase 3: Repo bootstrap (idempotent)
 
@@ -93,10 +112,24 @@ Record both probe results (timestamp, result counts, cost) in the corpus's resea
 - A fresh repo is EMPTY and the Git Data API returns 409 on it: seed one
   Contents-API commit first (top-level `README.md` explaining the repo
   convention), THEN use the Git Data API for everything else.
-- Structure per run: `knowledge/<ref>/README.md` (corpus index: doc list
-  + one-line scope each + research summary), `knowledge/<ref>/<NN>-<slug>.md`
-  (the docs, numbered in outline order), `knowledge/<ref>/research-db/`
-  (`archive.json`, `digs/<doc>.json`, `db.ts` typed index).
+- Structure per run (research-db schema v2, store ALL info):
+  `knowledge/<ref>/README.md` (corpus index: doc list + one-line scope each
+  + research summary), `knowledge/<ref>/<NN>-<slug>.md` (the docs, numbered
+  in outline order), and `knowledge/<ref>/research-db/`:
+  - `preflight.json` — searXNG + decide probe results (url, counts, model).
+  - `outline.json` — topic, subtopics (nn/slug/scope/seed_queries), the
+    score-metric validation answers in full, dropped/kept lists.
+  - `archive.json` — JSON ARRAY of result entries, one per collected
+    result: `{query, title, url, snippet, collected_at, weight: <float|null>,
+    decision: {type, instructions, model, answer: <raw answer object>,
+    usage: {input_tokens, output_tokens}, requested_at}, redo_of}`.
+  - `digs/<NN>-<slug>.json` — `{nn, slug, scope, queries_attempted:
+    [{query, attempt, raw_results, kept}], redo_count, redo_log, results_kept,
+    outcome: authored|skipped, skip_reason?}`.
+  - `jev-log.json` — one entry per jev HTTP request: timestamp, endpoint,
+    state, model, n_questions, question_names, metric_types, usage.
+  - `db.ts` — TypeScript interfaces matching ALL of the above.
+  Plain UTF-8 JSON only; NEVER push base64-encoded text as file content.
 
 ### Phase 4: Author fan-out (parallel subagents)
 
@@ -106,14 +139,18 @@ Record both probe results (timestamp, result counts, cost) in the corpus's resea
   dig queries, endpoint URLs, rate-limit warning, the authoring contract,
   and the report format.
 - Authoring contract per subagent:
-  - Write a NEW doc (`<NN>-<slug>.md`) grounded in the jev-weighted dig
-    results plus direct primary-source verification (GitHub API, upstream
-    docs) when the dig is thin.
+  - Write a NEW doc (`<NN>-<slug>.md`) grounded ONLY in the jev-weighted
+    dig results.
+  - **REDO RULE (hard): if a subtopic's dig is too thin to author honestly,
+    REDO the dig with DIFFERENT queries (up to 2 redos), logging each redo
+    in the dig record. NEVER fall back to fetching primary sources directly
+    to fill a thin dig.** If still thin after redos, SKIP the doc and
+    record it as a gap in the README. Never pad.
   - Every factual claim carries its source URL and the jev weight that
-    backed it. A claim with no source is deleted, not softened.
-  - If sources are too thin to write the doc honestly, return a
-    "cannot author" report instead of padding. That is a success signal,
-    not a failure.
+    backed it. A claim with no source is deleted, not softened. Weight
+    >= 0.5 = authoritative backing; < 0.5 = weak backing, label it as such.
+  - A "cannot author" verdict after redos is a success signal, not a
+    failure.
   - Writing style: sharp, specific, no em dashes, numbers as digits,
     headings for wayfinding.
 - The orchestrator (not the subagents) assembles the repo tree: subagents
@@ -124,11 +161,23 @@ Record both probe results (timestamp, result counts, cost) in the corpus's resea
 ### Phase 5: Land the corpus
 
 - ONE Git Data API chain in ONE bash call (sandbox /tmp wipes between
-  calls): ref/heads/main -> commits (tree) -> blobs (base64) -> trees
-  (base_tree) -> commits -> `POST /git/refs` branch `mint/<ref>-<date>`
-  (branch names must NOT start with `refs/`) -> `POST /pulls` (draft).
-- The PR carries: the corpus docs, the README index, the research DB, and
-  a PR body with the outline, jev stats, and per-doc source counts.
+  calls): ref/heads/main -> commits (tree) -> blobs (**utf-8 encoding,
+  NEVER base64**) -> trees (base_tree) -> commits -> `POST /git/refs`
+  branch `mint/<ref>-<date>` (branch names must NOT start with `refs/`)
+  -> `POST /pulls` (draft).
+- **Post-push verification (REQUIRED before reporting success):**
+  (1) `GET /pulls/<n>/files?per_page=100` — the research-db files MUST be
+  in the PR diff (a mint whose research-db is missing from the PR is a
+  FAILED mint; this bit a live run 2026-10-05, PR #12);
+  (2) re-fetch each research-db .json from raw.githubusercontent and
+  `json.loads` it — every file must parse and every archive entry must
+  carry a non-null `weight` (a live run pushed base64-encoded JSON and
+  shipped unweighted archives, PRs #16/#21);
+  (3) report `VERIFIED: files <n>, research-db <m> parse, weights <k>/<k>`.
+- PR body format (fixed order): Source doc; Outline table (NN/slug/score/
+  verdict); Metrics (score outline / noul weighting via clef); Jev stats
+  (requests, usage tokens, weights high/low); Per-doc sources; Redo log;
+  Gaps/skips; Preflight line; Verification line.
 
 ### Phase 6: Merge
 
@@ -188,6 +237,14 @@ Scope: <ONE-LINE SCOPE>.
   seed the README via Contents API first.
 - **Naming the branch with a `refs/` prefix** (GitHub rejects it) or
   merging a draft via the PR endpoint (draft:false PATCH no-ops here).
+- **Shipping unweighted results.** A failed decide call is a REDO (sleep
+  30s, re-send, split batches), never a silent degrade to unweighted.
+- **Pushing base64-encoded text as blob content.** Use `encoding: "utf-8"`
+  with plain text; verify by re-fetching and `json.loads`-ing after push
+  (2026-10-05: PR #21's whole research-db landed as base64).
+- **Reporting success without the post-push verification.** The PR files
+  list is the truth; a subagent's self-report once said "23 paths pushed"
+  for a PR that contained 10 (2026-10-05, PR #12).
 
 ## Red Flags
 
@@ -263,6 +320,15 @@ questions, 5 per request.
 
 ## Changelog
 
+- 2026-10-05 v2: metric mapping formalized (score for outline validation,
+  noul for source weighting, choice for either-or) after the first live
+  multi-wave run (yubi-OS/knowledge PRs #12-#21); decide-failure = REDO
+  (never ship unweighted); pacing lowered to >= 1s (the "15/min/IP" rate
+  limit was hallucinated and removed); research-db schema v2 (preflight,
+  outline, archive with full per-decision records, digs with redo_log,
+  jev-log, db.ts); PR body format fixed; post-push verification required
+  (PR files list + json.loads re-fetch); anti-patterns added for
+  base64-pushed JSON, missing research-db, and unverified self-reports.
 - 2026-09-29 v1: shipped as a variant of refs-refresh-sweep (which was
   validated live the same day: PRs #260, #261-#274 all merged). Phase
   mechanics inherited from the validated run; the mint-specific phases
