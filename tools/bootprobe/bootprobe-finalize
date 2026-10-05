@@ -1,0 +1,20 @@
+#!/bin/bash
+# bootprobe-finalize: marks the boot complete; absence of .prev_complete on next boot = unclean previous boot.
+D=/var/lib/bootprobe
+[ -d "$D" ] || exit 0
+[ -f "$D/CAPTURE_DONE" ] && exit 0
+N=$(cat "$D/count" 2>/dev/null) || exit 0
+O="$D/boot-$(printf %03d "$N")"
+{
+  echo "== finalize =="
+  echo "completed: $(date -Is)"
+  echo "uptime: $(cat /proc/uptime 2>/dev/null)"
+  echo "-- systemd-analyze --"
+  systemd-analyze 2>/dev/null
+  echo "-- critical-chain (top) --"
+  systemd-analyze critical-chain 2>/dev/null | head -12
+  echo "-- diskstats (final: mmc+nvme) --"
+  grep -E "mmcblk|nvme" /proc/diskstats 2>/dev/null
+} >> "$O.log" 2>&1
+echo 1 > "$D/.prev_complete"
+exit 0

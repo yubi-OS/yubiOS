@@ -1,0 +1,30 @@
+#!/bin/bash
+# bootprobe-early: per-boot crash-debug record (50-boot budget). Part of the laptop boot-log plan 2026-10-05.
+D=/var/lib/bootprobe
+mkdir -p "$D" 2>/dev/null
+[ -f "$D/CAPTURE_DONE" ] && exit 0
+N=$(( $(cat "$D/count" 2>/dev/null || echo 0) + 1 ))
+if [ "$N" -gt 50 ]; then touch "$D/CAPTURE_DONE"; exit 0; fi
+echo "$N" > "$D/count"
+O="$D/boot-$(printf %03d "$N")"
+{
+  echo "== boot $N =="
+  echo "started: $(date -Is)"
+  echo "boot_id: $(cat /proc/sys/kernel/random/boot_id 2>/dev/null)"
+  echo "kernel: $(uname -r)"
+  echo "cmdline: $(cat /proc/cmdline 2>/dev/null)"
+  echo "root: $(findmnt -n -o SOURCE / 2>/dev/null)"
+  echo "prev_boot_completed: $(cat "$D/.prev_complete" 2>/dev/null || echo NO)"
+  echo "-- diskstats (early: mmc+nvme) --"
+  grep -E "mmcblk|nvme" /proc/diskstats 2>/dev/null
+  echo "-- dmesg error count so far --"
+  dmesg 2>/dev/null | grep -icE "i/o error|blk_update|mmc[0-9].*error|nvme.*error|timeout" || true
+  echo "-- dmesg errors (first 20) --"
+  dmesg 2>/dev/null | grep -iE "i/o error|blk_update|mmc[0-9].*error|nvme.*error" | head -20
+  echo "-- pstore --"
+  ls /sys/fs/pstore/ 2>/dev/null | head -10
+  echo "-- nvme smart-log --"
+  if command -v nvme >/dev/null 2>&1; then nvme smart-log /dev/nvme0 2>&1 | grep -iE "media_errors|percentage_used|error_log|critical_warning|num_err_log" | head -8; else echo nvme-cli-not-installed; fi
+} > "$O.log" 2>&1
+rm -f "$D/.prev_complete"
+exit 0

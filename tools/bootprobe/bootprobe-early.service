@@ -1,0 +1,13 @@
+[Unit]
+Description=bootprobe: per-boot crash-debug record (early)
+DefaultDependencies=no
+After=local-fs.target systemd-journald.service
+ConditionPathExists=!/var/lib/bootprobe/CAPTURE_DONE
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bootprobe-early
+RemainAfterExit=no
+
+[Install]
+WantedBy=sysinit.target

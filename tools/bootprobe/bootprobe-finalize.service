@@ -1,0 +1,12 @@
+[Unit]
+Description=bootprobe: mark boot complete (late)
+After=multi-user.target
+ConditionPathExists=!/var/lib/bootprobe/CAPTURE_DONE
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bootprobe-finalize
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
