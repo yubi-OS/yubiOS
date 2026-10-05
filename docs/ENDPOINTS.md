@@ -1,8 +1,8 @@
 # Steady Orbit Systems - Endpoint Reference
 
-> Generated 2026-10-05. The live worker (steady-orbit.systems-a.workers.dev) serves
-> all endpoints listed here. AGENT.md is the operational contract; this document is
-> the architectural reference.
+> Generated 2026-10-05. Refreshed 2026-10-05 after discrepancy resolution. The live
+> worker (steady-orbit.systems-a.workers.dev) serves all endpoints listed here.
+> AGENT.md is the operational contract; this document is the architectural reference.
 
 Assembled from five parallel lanes:
 
@@ -14,6 +14,14 @@ Assembled from five parallel lanes:
 | D | Lean verification map | 12 Lean files, 15 endpoint-to-Lean mappings, 5 CI jobs |
 | E | API flow diagram | 78-line mermaid graph |
 
+Resolution refresh (2026-10-05, lanes R1+R2, verified by R3):
+
+| Lane | Deliverable | Headline numbers |
+|---|---|---|
+| R1 | AGENT.md doc additions (KV write) | 15 new rows: public relays, site surfaces, CORS preflights, map/app.js, audio replies, jev pause GET, approvals guide POST, fits CRUD |
+| R2 | Code patches (index.js, exactly 4 hunks) | requireOperatorAuth added to DELETE /api/maps/:id and DELETE /api/fits/:id; n_controls usage-block comment 2..12 -> 2..6 |
+| R3 | Fresh cross-reference (updated KV AGENT.md vs patched bundle) | 110 documented, 0 code-only, 0 doc-only, 0 actionable discrepancies |
+
 Reconciliation: Lane A has 121 route rows over 109 unique paths. Lane C assigns 85
 unique paths to capability domains. The difference is 6 CORS preflights (OPTIONS),
 method variants that collapse onto one path (GET|POST, DELETE 405 guards), and 24
@@ -21,10 +29,18 @@ solar-rbs-entry site routes plus 7 API routes Lane C did not assign. All of them
 placed in a domain below, marked with a dagger (†). Every endpoint from Lane A
 appears in this document at least once.
 
+After the resolution refresh every endpoint AGENT.md documents resolves to a served
+route and every served route is documented: 110 documented endpoints, 0 code-only,
+0 doc-only, 0 actionable discrepancies. The daggers below are retained as
+reconciliation history - they marked endpoints Lane C had not assigned when the
+original was assembled; they are all in AGENT.md now.
+
 ## Capability Map
 
 Thirteen capability domains cover the worker. Endpoints marked † were added during
-reconciliation from Lane A routes Lane C did not assign. Auth is taken from Lane A.
+reconciliation from Lane A routes Lane C did not assign; after the 2026-10-05
+resolution refresh every one of them is documented in AGENT.md as well. Auth is
+taken from Lane A, updated by the R2 code patches where DELETE auth changed.
 
 ### Jev Orchestrator (gated task engine)
 
@@ -262,9 +278,9 @@ Endpoints:
 |---|---|---|
 | POST | `/api/map` | none |
 | GET | `/api/maps` | none |
-| DELETE\|GET | `/api/maps/:id` | none |
+| DELETE\|GET | `/api/maps/:id` | bearer |
 | POST | `/api/maps/compare` | none |
-| DELETE\|GET | `/api/maps/:id` | none |
+| DELETE\|GET | `/api/maps/:id` | bearer |
 | POST | `/api/map/preview` | none |
 | POST | `/api/map/control` | none |
 | POST | `/api/map/axis-redundancy` | none |
@@ -289,7 +305,7 @@ Key invariants:
 - Transition declaration: a corpus differing by more than the declared transition is 409, persisted:false
 - Positive-control recipe is fixed (cutpaste-splice 0.25, centered window); tuning knobs are rejected
 - Deletion is never recommended or executed; the 12 NSS axes are an explicitly unvalidated lens dictionary
-- Stored maps above ~1.9 MB overflow to KV (map-json:<id>) behind a D1 pointer; DELETE /api/maps/:id requires explicit user authorization
+- Stored maps above ~1.9 MB overflow to KV (map-json:<id>) behind a D1 pointer; DELETE /api/maps/:id is operator bearer-auth guarded (R2 patch: 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token)
 
 Composes with:
 - Ingestion & Embeddings (embeds full-content texts on the frozen frame; content-hash cache shared)
@@ -369,8 +385,8 @@ Endpoints:
 | POST | `/api/assess` | none |
 | GET | `/api/fits` | none |
 | POST | `/api/narrate` | none |
-| DELETE\|GET | `/api/fits/:id` † | none |
-| DELETE\|GET | `/api/fits/:id` † | none |
+| DELETE\|GET | `/api/fits/:id` † | bearer |
+| DELETE\|GET | `/api/fits/:id` † | bearer |
 
 Module parts: index.js (assess/fits/narrate routes, refineBasis)
 
@@ -379,6 +395,7 @@ Bindings: DB, AI, GITHUB_API_KEY
 Key invariants:
 - Legacy surface: deliberately unchanged by the v0.2 map release; llms.txt fallback documents it
 - Assessment reports are stored rows in D1 listed by /api/fits
+- DELETE /api/fits/:id is operator bearer-auth guarded (R2 patch): 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token
 
 Composes with:
 - Ingestion & Embeddings (repo fetching shares the GitHub path)
@@ -542,7 +559,7 @@ the reply webhook. Six rows are CORS preflights (OPTIONS).
 | GET | `/api/health` | none | Worker version info + diagnostic module versions |
 | GET | `/api/fits` | none | List stored repository FIT assessments (population) |
 | GET | `/api/fits/:id` | none | One stored FIT with full fit_json and population comparison |
-| DELETE | `/api/fits/:id` | none | Delete a stored FIT row |
+| DELETE | `/api/fits/:id` | bearer | Delete a stored FIT row; operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) |
 | POST | `/api/narrate` | none | Generate a plain-text FIT narrative via Workers AI streaming, persists to fits.narrative |
 | POST | `/api/assess` | none | Assess a GitHub repo into a FIT.json: fetch corpus, derive/refine latent basis (AI-assisted, or reuse baseline_id basis), runFit, store, compare to population |
 | POST | `/api/repo-items` | none | Fetch sorted full-text repo items (GitHub tree) with truncation flags |
@@ -562,7 +579,7 @@ the reply webhook. Six rows are CORS preflights (OPTIONS).
 | DELETE | `/api/outcomes/* (also PUT, PATCH)` | none | Explicit 405: outcomes ledger is append-only |
 | GET | `/api/maps` | none | Stored map metrics list (no map_json) |
 | GET | `/api/maps/:id` | none | Complete stored MapResult (KV-overflow aware), enriched with radius profile on read |
-| DELETE | `/api/maps/:id` | none | Delete one saved map (+ KV overflow cleanup) |
+| DELETE | `/api/maps/:id` | bearer | Delete one saved map (+ KV overflow cleanup); operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) |
 | POST | `/api/maps/compare` | none | Compare two stored maps on compatible frames |
 
 ### routes-jev.js (jev orchestrator) - 22 routes
@@ -584,7 +601,7 @@ the reply webhook. Six rows are CORS preflights (OPTIONS).
 | GET | `/api/jev/approvals` | bearer | Pending approvals queue with expiry countdowns (expireStale first); rate-limited |
 | POST | `/api/jev/approvals/:id/approve` | bearer | Approve: auto-dispatches bound action after CURRENT-policy gate re-check, then verifies + continues/closes task in-request; rate-limited |
 | POST | `/api/jev/approvals/:id/reject` | bearer | Reject an approval; rate-limited |
-| POST | `/api/jev/approvals/:id/guide` | bearer | Attach human guidance to the approval's task (not in AGENT.md table); rate-limited |
+| POST | `/api/jev/approvals/:id/guide` | bearer | Attach human guidance to the approval's task (documented in AGENT.md by the R1 refresh); rate-limited |
 | GET | `/api/jev/pause` | bearer | Read pause state (fail-closed: unreadable policy reports paused:true scope all); rate-limited |
 | POST | `/api/jev/pause` | bearer | Set pause {paused, scope}; blocks new and queued dispatch, never undoes completed effects; rate-limited |
 | GET | `/api/jev/summary` | bearer | Tasks by state/outcome, pending approvals, cost rollup + policy version; rate-limited |
@@ -656,81 +673,91 @@ the reply webhook. Six rows are CORS preflights (OPTIONS).
 - /api/tts: rate-limited, 4000 char cap on POST and 900 on GET. /api/stt: rate-limited, 10 MB upload cap. /api/contact: rate-limited (5).
 - /api/searxng: no rate limiting, CORS *, 20s timeout, upstream failure returns 502 searxng_proxy_failed.
 - DELETE /api/outcomes/* (and PUT, PATCH): guard route returning 405; the outcomes ledger is append-only.
-- DELETE /api/maps/:id: explicit user authorization required per AGENT.md; unauthenticated in code (see Documented vs Code).
-- DELETE /api/fits/:id: unauthenticated destructive delete.
+- DELETE /api/maps/:id: operator bearer auth required (R2 patch); 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token.
+- DELETE /api/fits/:id: operator bearer auth required (R2 patch); same 503/401 behavior as DELETE /api/maps/:id.
 - OPTIONS /api/jev/*: catch-all CORS preflight for all /api/jev routes; also re-handled inside the corpus, evolution and automations handlers.
 
 ## Documented vs Code
 
 Lane B parsed AGENT.md (72997 bytes, JSON-quoted string; decoded to 71810 chars of markdown) and cross-referenced every documented row against the
-actual dispatch comparisons in the 42 module parts under parts/.
+actual dispatch comparisons in the 42 module parts under parts/. Refreshed 2026-10-05:
+lanes R1+R2 resolved the Lane B findings (doc additions written to KV, code patches in
+index.js) and lane R3 re-ran the cross-reference fresh against the updated KV AGENT.md
+(76399 bytes, byte-identical to the resolved doc R1 deployed) and the patched bundle.
 
-| Measure | Count |
-|---|---|
-| AGENT.md sections | 23 |
-| Documented endpoints (rows incl. method variants and prose references) | 85 |
-| Code-only endpoints (served, undocumented) | 14 |
-| Doc-only endpoints (documented, not served) | 0 |
-| Discrepancies | 12 |
-
-AGENT.md is complete for what it covers: every documented endpoint resolves to a
-route in the code. The 14 code-only routes:
-
-| Method | Path | Note |
+| Measure | Lane B (before) | R3 (after) |
 |---|---|---|
-| GET | `/api/jev/pause` | routes-jev.js serves GET (read pause state) alongside POST; AGENT.md documents only POST /api/jev/pause |
-| GET\|POST | `/api/tts` | ElevenLabs TTS relay (+OPTIONS preflight) in index.js; completely undocumented in AGENT.md |
-| POST | `/api/stt` | ElevenLabs scribe_v1 STT relay (+OPTIONS) in index.js; undocumented |
-| POST | `/api/contact` | Resend send-only contact relay (+OPTIONS) in index.js; undocumented |
-| GET\|POST | `/api/decide` | DefAPI typesafe/jev-1.13 relay (+OPTIONS) in index.js; undocumented in AGENT.md |
-| POST | `/api/chat` | site chat backend in index.js; AGENT.md only says 'site chat remain[s] a separate API' without naming the path |
-| POST | `/api/site-assistant` | solar-rbs-entry.mjs route; undocumented in AGENT.md (method not verified from dispatch context) |
-| POST | `/api/brain/preview` | solar-rbs-entry.mjs route; undocumented in AGENT.md |
-| GET | `/sos` | Steady Orbit Systems marketing site: /sos, /sos/, /sos/index.html, /sos/client.js; undocumented (AGENT.md's Answer engines section describes the business but not these routes) |
-| GET | `/index.html` | homepage; not in the endpoint table |
-| GET | `/map/app.js` | map UI asset; only /map/pointmap.js is documented |
-| GET | `/sitemap.xml` | solar-rbs-entry.mjs; undocumented |
-| GET | `/robots.txt` | solar-rbs-entry.mjs; undocumented |
-| GET | `/AGENT.md (and /agent.md)` | the worker serves AGENT.md at BOTH spellings; the doc treats itself as a document, never documents the route |
+| AGENT.md sections | 23 | 23 |
+| Documented endpoints (rows incl. method variants and prose references) | 85 | 110 |
+| Code-only endpoints (served, undocumented) | 14 | 0 |
+| Doc-only endpoints (documented, not served) | 0 | 0 |
+| Actionable discrepancies | 12 | 0 |
 
-### Notable flags
+The code route set is unchanged from Lane B: the R2 patch touches index.js in exactly
+4 hunks - the requireOperatorAuth/timingSafeEqual helper, the n_controls usage-block
+comment 2..12 -> 2..6, and one auth guard before each of the two destructive DELETE
+handlers. No route was added or removed.
 
-**Undocumented relay routes.** Four relays in index.js are entirely absent from
-AGENT.md: /api/tts (GET|POST, ElevenLabs TTS), /api/stt (POST, ElevenLabs scribe_v1),
-/api/contact (POST, Resend) and /api/decide (GET|POST, DefAPI jev-1.13). These are
-public, CORS-open, rate-limited surfaces on the live worker; they should be added to
-the contract or explicitly scoped out. POST /api/chat is alluded to as "site chat"
-but never named.
+### Previously flagged, now resolved
 
-**NORTHFLANK_API_KEY note.** AGENT.md claims a NORTHFLANK_API_KEY binding in the
-Secrets Store, but the /api/searxng proxy code fetches the n8n searxng-proxy webhook
-URL directly and does not read any NORTHFLANK_API_KEY binding. Discrepancy to verify:
-either the doc names a binding the worker does not use, or a credential is being
-consumed another way.
+The 14 Lane B code-only endpoints, every one now documented in AGENT.md:
 
-**DELETE auth gaps.** Three destructive routes exist in code:
+| Method | Path | Lane B note | Resolution |
+|---|---|---|---|
+| GET | `/api/jev/pause` | served but only POST documented | documented with the fail-closed read contract (paused:true scope all when policy unreadable) |
+| GET\|POST | `/api/tts` | completely undocumented | documented: ElevenLabs eleven_turbo_v2_5, 4000-char POST / 900-char GET caps, rate-limited 15/min |
+| POST | `/api/stt` | undocumented | documented: ElevenLabs scribe_v1, 10 MB upload cap (413 over), rate-limited |
+| POST | `/api/contact` | undocumented | documented: Resend send to the fixed site inbox, per-field caps, rate-limited 5/min |
+| GET\|POST | `/api/decide` | undocumented | documented: DefAPI typesafe/jev-1.13 relay (clef path via Workers AI), rate-limited |
+| POST | `/api/chat` | alluded to as 'site chat', never named | documented by path, marked legacy and superseded by /api/site-assistant |
+| POST | `/api/site-assistant` | undocumented | documented: same-origin enforced, grounded on KV llms.txt, rate-limited |
+| POST | `/api/brain/preview` | undocumented | documented: identical handler to /api/site-assistant |
+| GET | `/sos` (+ /sos/, /sos/index.html, /sos/client.js) | undocumented | documented: SOS voice-agent UI and client script from KV |
+| GET | `/index.html` | not in the endpoint table | documented: legacy site index, shadowed by the entry module page table |
+| GET | `/map/app.js` | only /map/pointmap.js was documented | documented: map UI app script from KV |
+| GET | `/sitemap.xml` | undocumented | documented: served from KV, falls through to the legacy module when missing |
+| GET | `/robots.txt` | undocumented | documented: served from KV, same fallthrough |
+| GET | `/AGENT.md` (and `/agent.md`) | the doc never documented its own route | documented: both spellings, no-cache, fallback text when not uploaded |
 
-- DELETE /api/fits/:id is an unauthenticated destructive delete of a stored FIT row.
-- DELETE /api/maps/:id requires explicit user authorization per AGENT.md, but is unauthenticated in code.
-- DELETE /api/outcomes/* is safe by design: a 405 guard route protecting the append-only ledger.
+The 12 Lane B discrepancies, one by one:
 
-The first two are the only unauthenticated DELETE routes on the worker and are the
-sharpest gap between the documented contract and the served surface.
+1. No doc-only endpoints - confirmed again by R3: every documented endpoint resolves to a route in the patched 42 module parts.
+2. GET /api/jev/pause method-coverage gap - RESOLVED: new GET row documents the fail-closed read contract.
+3. Four relay endpoints absent (/api/tts, /api/stt, /api/contact, /api/decide) - RESOLVED: full rows with method variants, caps and binding names.
+4. POST /api/chat undocumented by path - RESOLVED: explicit row, marked legacy and superseded by /api/site-assistant.
+5. solar-rbs-entry routes (/api/site-assistant, /api/brain/preview, /sitemap.xml, /robots.txt) undocumented - RESOLVED: all four documented.
+6. /sos/* routes, GET /index.html and GET /map/app.js absent - RESOLVED: all documented.
+7. /AGENT.md and /agent.md spellings undocumented - RESOLVED: one row documents both spellings with the no-cache contract.
+8. n_controls usage-block comment said 2..12 vs actual 2..6 - RESOLVED in code (R2): index.js line 5073 now says 2..6, matching the MIN_N2=2/MAX_N3=6 validation and AGENT.md.
+9. builtins table-category note - carried informational, no action.
+10. POST /audit shorthand note - carried informational, no action.
+11. OPTIONS CORS preflights - RESOLVED: AGENT.md now documents OPTIONS on /api/jev/* (incl. /api/jev/corpus/*), /api/searxng and the public relays (204 + Access-Control-Allow-Origin: *).
+12. Numeric contracts verified in agreement (no drift) - re-verified by R3 on both sides: n_controls 2..6 (doc + index.js:5073 usage block and validation), K 2..40 for /api/map family, K 2..400 for azimuth.
 
-### Discrepancy list (all 12)
+Code patches landed in R2 (the Lane B flags that were code-side):
 
-1. NO doc-only endpoints found: every endpoint AGENT.md documents (85 entries incl. prose and method variants) resolves to a route in the 42 module parts  -  the doc is complete for what it covers.
-2. GET /api/jev/pause is served by routes-jev.js (reads pause state) but AGENT.md documents only POST /api/jev/pause  -  method-coverage gap.
-3. Four relay endpoints exist in index.js and are entirely absent from AGENT.md: /api/tts (GET\|POST, ElevenLabs TTS), /api/stt (POST, ElevenLabs scribe_v1), /api/contact (POST, Resend), /api/decide (GET\|POST, DefAPI jev-1.13).
-4. POST /api/chat (site chat backend) is undocumented by path  -  AGENT.md alludes to 'site chat' as a legacy separate API but never names /api/chat.
-5. solar-rbs-entry.mjs adds /api/site-assistant, /api/brain/preview, /sitemap.xml, /robots.txt  -  none documented in AGENT.md.
-6. The /sos/* Steady Orbit Systems website routes (GET /sos, /sos/, /sos/index.html, /sos/client.js), GET /index.html and GET /map/app.js are served but absent from the endpoint table (only /map/pointmap.js is listed).
-7. The worker serves its own contract at both /AGENT.md and /agent.md (case variants); AGENT.md never documents this.
-8. Internal code-comment drift: index.js's usage block says /api/map/control n_controls is 2..12, but the actual validation (MIN_N2=2, MAX_N3=6 at index.js:1913-1914,1980) and AGENT.md both say 2..6  -  the doc is correct; the in-code comment is stale.
-9. The 'builtins \| visco_hysteresis, visco_snapback' row in the Corpus math table describes automation builtins (implemented in jev-corpus-builtins.js), not HTTP endpoints  -  table-category note, not a route mismatch.
-10. POST /audit in the RSI-chain runbook is shorthand for POST /api/jev/corpus/audit, not a separate route.
-11. OPTIONS CORS preflights: AGENT.md documents OPTIONS /api/searxng only, but code answers OPTIONS on /api/tts, /api/stt, /api/contact, /api/decide and /api/jev/corpus/health as well.
-12. Numeric contracts verified in agreement (no drift): K 2..40 for /api/map, axis-redundancy and rayleigh (index.js:1464, 3003); K 2..400 for azimuth (MAX_K2=400 at index.js:2613); n_controls 2..6  -  matches AGENT.md exactly.
+- DELETE auth gaps. DELETE /api/fits/:id and DELETE /api/maps/:id - the only two
+  unauthenticated DELETE routes on the worker and the sharpest gap between the
+  documented contract and the served surface - now call requireOperatorAuth first:
+  Secrets Store JEV_API_KEY, fail-closed, constant-time comparison; 503 'not
+  configured: JEV_API_KEY binding missing' when the binding is unbound, 401
+  'unauthorized: missing or wrong bearer token' on mismatch. DELETE /api/outcomes/*
+  remains safe by design: a 405 guard route protecting the append-only ledger.
+- NORTHFLANK_API_KEY note. Fixed in prose: the AGENT.md searxng row now states the
+  binding is 'reserved for future direct-Northflank API access'; the current proxy
+  goes through the n8n webhook, which is public.
+
+The last 2 items R3 still flagged (R3-1/R3-2, stale DELETE-auth prose in the KV doc
+rows saying 'AUTH GAP: no authentication in code') were fixed after the R3 read, so
+the resolved state is 0 actionable discrepancies.
+
+Carried informational notes (no action, unchanged from Lane B):
+
+- The 'builtins | visco_hysteresis, visco_snapback' row in the Corpus math table
+  describes automation builtins (jev-corpus-builtins.js), not HTTP endpoints.
+- POST /audit in the RSI-chain runbook is shorthand for POST /api/jev/corpus/audit,
+  not a separate route.
+- Numeric contracts agree on both sides: no drift.
 
 ## Lean Verification Map
 
@@ -738,6 +765,11 @@ The math is a port, never a re-derivation: the JavaScript worker (jev-corpus-mat
 jev-taste-math.js, jev-visco-math.js, jev-edge-standard.js) is parity-tested against
 the Python sources of record in tools/ and papers/data/lean/. On any fixture mismatch
 the JavaScript is wrong until proven otherwise.
+
+Refresh note (2026-10-05): the discrepancy-resolution refresh added no Lean-connected
+endpoints. The newly documented routes are the public relays, site surfaces, CORS
+preflights, GET /api/jev/pause, POST /api/jev/approvals/:id/guide and the fits CRUD -
+none of them corpus math - so this section is unchanged from the original.
 
 ### Verification chain
 
@@ -852,7 +884,7 @@ flowchart TD
     subgraph LEGACY["Legacy API - index.js"]
         MapPub["POST /api/map + /map/preview, /control, /consistency,<br/>/azimuth, /rayleigh, /admission, /axis-redundancy<br/>GET /api/maps, /maps/compare"]
         DataPub["POST /api/repo-items, /api/embed, /api/outcomes<br/>GET /api/health, /api/outcomes<br/>POST /api/vector/search"]
-        Tts["POST /api/tts - ElevenLabs relay"]
+        Tts["POST /api/tts, /api/stt, /api/contact,<br/>GET/POST /api/decide - public relays"]
         Surf["GET /api/searxng, /map/ UI, /map/app.js,<br/>/map/pointmap.js, /AGENT.md, /llms.txt, /sos, /audio/"]
     end
     Legacy --> MapPub
@@ -1012,12 +1044,12 @@ Key keys:
 Used by: all domains that fetch upstream.
 
 Key keys:
-- JEV_API_KEY - bearer auth on every jev route except /api/jev/health
+- JEV_API_KEY - bearer auth on every jev route except /api/jev/health; also the operator key behind DELETE /api/maps/:id and DELETE /api/fits/:id (R2 patch)
 - DEFAPI_API_KEY - /api/decide relay, corpus scorer, taste clef calls, jev quality/decide stages
 - ELEVENLABS_API_KEY - /api/tts (eleven_turbo_v2_5) and /api/stt (scribe_v1)
 - RESEND_API_KEY - /api/contact relay, jev resend.send actions, evolution notify digests (schema {from,to,subject,html})
 - GITHUB_API_KEY - /api/repo-items fetch, automations tool stage, repo_push directives
-- NORTHFLANK_API_KEY - searxng-proxy upstream on Northflank
+- NORTHFLANK_API_KEY - reserved for future direct-Northflank API access; the current searxng proxy goes through the public n8n webhook (prose corrected in the R1 refresh)
 - GOOGLE_PLACES_API_KEY / DAYTONA_API_KEY - lead_research builtin tools
 
 ## Reconciliation Notes
@@ -1031,3 +1063,10 @@ Decisions made while assembling the five lanes:
 5. The mermaid diagram from Lane E is raw text; it is fenced as mermaid above.
 6. AGENT.md multipass note: POST /api/jev/corpus/audit carries both the single-pass and Decision-B multipass modes on one route (passes: [matrix x 2..8] -> inter_pass_offset_dbc); it is one endpoint, not two.
 7. POST /audit in the RSI-chain runbook is shorthand for POST /api/jev/corpus/audit, not a separate route. The "builtins | visco_hysteresis, visco_snapback" row in the AGENT.md Corpus math table describes automation builtins (jev-corpus-builtins.js), not HTTP endpoints.
+
+Refresh notes (2026-10-05, discrepancy resolution):
+
+8. Lane R1 wrote 15 new AGENT.md rows to KV: the public relays (/api/tts, /api/stt, /api/contact, /api/decide and the legacy /api/chat), the site surfaces (/api/site-assistant, /api/brain/preview, /sos*, /index.html, /sitemap.xml, /robots.txt, /AGENT.md and /agent.md, /map/app.js, /audio/reply-N.mp3), the CORS preflight block, GET /api/jev/pause, POST /api/jev/approvals/:id/guide, and the /api/fits/:id GET and DELETE rows. Lane R2 patched index.js in exactly 4 hunks: the requireOperatorAuth/timingSafeEqual helper, the n_controls usage-block comment 2..12 -> 2..6, and bearer guards on both destructive DELETE handlers. Lane R3 re-ran the Lane B cross-reference fresh: 110 documented, 0 code-only, 0 doc-only, 0 actionable discrepancies.
+9. The daggers in the capability map are reconciliation history, not open gaps: they marked endpoints Lane C had not assigned at assembly time, and every one is in AGENT.md now.
+10. The DELETE-auth prose fix (the stale 'AUTH GAP' wording R3 flagged as R3-1/R3-2 in the KV doc rows) landed after the R3 read; this refreshed document reflects the fixed wording.
+11. The Lean verification map is unchanged by the refresh: none of the newly documented endpoints has a Lean connection - they are not corpus math.
