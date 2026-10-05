@@ -86,3 +86,27 @@ One axis (`fractal_band`), one artifact class (branching/tree-like images), gold
 - V6 Taste axis dictionary inside the unit roundflow (Combination) — 13: pain 2, switch 4, def 4, test 3
 
 Stress-test of V5: strongest critique = "taste" is doing a lot of work; what's measured is structural conformity to biological organization, and human preference data only covers 2–3 of the axes (fractal D, symmetry, branch α). Response: admit only axes with empirical anchors, report the vector, never a single beauty number. Second-order effect: if it works on images, the same axis machinery scores yubiOS module graphs and corpus structure (V3) for free. Un-testable bet: that calibrated noul probabilities from clef on measured-number instructions carry real signal rather than regurgitating the number back — kill-able cheaply by the jitter test + gold set in the MVP.
+
+## Addendum (2026-10-05, same day): open issues resolved
+
+**1. Family choice echo — shipped.** clef `choice` answers are now echoed on the family axis: `choice`, per-option `probabilities`, and `confidence` (verified live: a dendritic river-network description returned choice `tree`, p(tree) 0.34, confidence 0.07 — low-confidence read, honestly reported). Also a documented clef contract: `choice` questions take a `criteria` object (option→description), never a `choices` array.
+
+**2. Calibration sweeps (21 points × 3 axes, one clef call each, deterministic).** The "opinion-shaped" axes behave like calibrated numeric-band classifiers — clef reads the stated thresholds exactly:
+
+| axis | stated semantics | measured response |
+|---|---|---|
+| symmetry_present | strong if score ≥ 0.6 | sharp step: 0.55→0.009, 0.60→0.975, plateau ~0.99 |
+| symmetry_variation | middle band 0.3–0.95, sterile-perfect rejected | ON across 0.30–0.90; 0.95→0.15; 1.00→0.015 |
+| complexity_economy | on if slope ≥ 0.5 | sharp step: 0.45→0.012, 0.50→0.980; soft wobble at 0.90 (0.81) and 1.00 (0.79) |
+
+What remains uncalibrated is the semantic grounding of the bands themselves (human gold labels), not the classifier's response. The 0.45/0.55 hysteresis is confirmed as cheap insurance: single-pass reads are already deterministic on fixed numeric instructions.
+
+**3. Multi-class admission trial (fractal_band on real photos) — NOT admitted.** 18 real Wikimedia photos (6 tree/branch scenes, 6 coastlines, 6 urban facades), ffmpeg edgedetect → 512² binary edge maps, validated Python extractor, taste-route classification:
+
+- Measured D: trees 1.411–1.618, coast 1.151–1.638, urban 1.330–1.624; all r² ≥ 0.98. In-band rates: trees 1/6 (mean p 0.19), coast 0/6 (mean p 0.03), urban 2/6 (mean p 0.35).
+- The classifier was faithful to measured D on every image (D 1.411 → p 0.978 on; D 1.521 → p 0.064 off), exactly matching the sweep curve — the instrument itself is consistent across artifact classes.
+- The failure is upstream of the classifier: dense photo edge maps from this edge-detector pipeline read systematically HIGHER (mostly 1.5–1.6) than the Spehar contour-statistic band, which was established on isolated-contour stimuli. Measured D is pipeline-dependent (edge-detector thresholds, texture density, ink coverage 4.7k–28k pixels vs 1.7k–124k in the synthetic corpus).
+- Admission verdict per the rayleigh pattern: `fractal_band` stays `admitted: false` for real-photo classes until either (a) the edge-map pipeline is standardized (single-scale contour extraction at fixed ink density) or (b) the band is recalibrated on a human-rated real-photo gold set. The synthetic-class validation (24/24 vs measured D) stands.
+- symmetry_present behaved correctly on all 18 real photos (scores 0.08–0.20, all correctly off).
+
+Trial artifacts: `session/taste/trial/` (manifest.json, trial_features.json, raw/ + edges/).
