@@ -26,7 +26,6 @@
 | Total declared jobs across all workflows | 87 |
 | Workflows in the ci.yml group taxonomy | 38 |
 | Workflows outside ci.yml's own group lists | 1 (`ci.yml` itself) |
-| Workflows outside every grouping (incl. ci-launchpad taxonomy) | 0 |
 | ci.yml `all` group size (independent dispatches) | 38 |
 | Largest workflow file | `ci_firmware-rk.yml` (69,375 B) |
 

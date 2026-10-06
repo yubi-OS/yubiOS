@@ -52,7 +52,6 @@ Endpoints:
 |---|---|---|
 | GET | `/api/jev/health` | none |
 | GET\|POST | `/api/jev/tasks` | bearer |
-| GET\|POST | `/api/jev/tasks` | bearer |
 | GET | `/api/jev/tasks/:id` | bearer |
 | POST | `/api/jev/tasks/:id/execute` | bearer |
 | POST | `/api/jev/tasks/:id/verify` | bearer |
@@ -65,9 +64,7 @@ Endpoints:
 | POST | `/api/jev/approvals/:id/approve` | bearer |
 | POST | `/api/jev/approvals/:id/reject` | bearer |
 | GET\|POST | `/api/jev/pause` | bearer |
-| GET\|POST | `/api/jev/pause` | bearer |
 | GET | `/api/jev/summary` | bearer |
-| GET\|POST | `/api/jev/learnings` | bearer |
 | GET\|POST | `/api/jev/learnings` | bearer |
 | POST | `/api/jev/learnings/:id/promote` | bearer |
 | POST | `/api/jev/approvals/:id/guide` † | bearer |
@@ -101,7 +98,6 @@ Endpoints:
 
 | Method | Path | Auth |
 |---|---|---|
-| GET\|POST | `/api/jev/automations` | bearer |
 | GET\|POST | `/api/jev/automations` | bearer |
 | POST | `/api/jev/automations/:id/activate` | bearer |
 | POST | `/api/jev/automations/:id/pause` | bearer |
@@ -280,7 +276,6 @@ Endpoints:
 | GET | `/api/maps` | none |
 | DELETE\|GET | `/api/maps/:id` | bearer |
 | POST | `/api/maps/compare` | none |
-| DELETE\|GET | `/api/maps/:id` | bearer |
 | POST | `/api/map/preview` | none |
 | POST | `/api/map/control` | none |
 | POST | `/api/map/axis-redundancy` | none |
@@ -386,7 +381,6 @@ Endpoints:
 | GET | `/api/fits` | none |
 | POST | `/api/narrate` | none |
 | DELETE\|GET | `/api/fits/:id` † | bearer |
-| DELETE\|GET | `/api/fits/:id` † | bearer |
 
 Module parts: index.js (assess/fits/narrate routes, refineBasis)
 
@@ -410,11 +404,9 @@ Endpoints:
 | Method | Path | Auth |
 |---|---|---|
 | GET\|OPTIONS | `/api/tts` | none |
-| GET\|OPTIONS | `/api/tts` | none |
 | OPTIONS\|POST | `/api/stt` | none |
 | OPTIONS\|POST | `/api/contact` | none |
 | POST | `/api/chat` | none |
-| GET\|OPTIONS | `/api/decide` | none |
 | GET\|OPTIONS | `/api/decide` | none |
 | POST | `/api/site-assistant` † | none |
 | POST | `/api/brain/preview` † | none |
@@ -443,7 +435,6 @@ Endpoints:
 
 | Method | Path | Auth |
 |---|---|---|
-| GET\|OPTIONS | `/api/searxng` | none |
 | GET\|OPTIONS | `/api/searxng` | none |
 
 Module parts: index.js (searxng proxy block)
