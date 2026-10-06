@@ -1,0 +1,139 @@
+{
+ "comment": "Falsification-corpus regression anchors for the powered lens correct-loop (lens-standard-v1, Lane G harness). Pre-registered bands and tolerances live in PREREGISTRATION-lens-2026-10-06.md and are NEVER retuned post-hoc. Expected VALUES are null: they get pinned once, after the FIRST CLEAN RUN (adding values is the only permitted edit; editing a pinned value requires a logged amendment with a-priori reasoning, dated, before any re-measurement).",
+ "_status": "pinned-2026-10-06",
+ "preregistration": "PREREGISTRATION-lens-2026-10-06.md",
+ "module_under_test": "session/subagent/lane-f/lens_standard.py (Lane F; imported by path, never substituted)",
+ "measurement_pipeline": "edge-standard-v1 (standardize -> measure; scales [4,6,9,13,20,29,43,64])",
+ "golds": {
+  "gasket-v2-L384": {
+   "D_ref": 1.5589,
+   "n_ref": 366,
+   "source": "first clean run 2026-10-06"
+  },
+  "tri": {
+   "D_ref": 1.2636,
+   "source": "first clean run 2026-10-06"
+  },
+  "shuffle-s42": "gen_v2.gen_shuffle(512, 42) via gen_v2.render_disks -- B3/B4/B5 only, B1/B2 reported non-gated"
+ },
+ "modes": [
+  "astigmatism",
+  "spherical",
+  "trefoil"
+ ],
+ "ladder": [
+  0.05,
+  0.1,
+  0.15
+ ],
+ "idempotence_rung": 0.0,
+ "tolerances": {
+  "B1_recovery_absD": 0.05,
+  "B3_estimation_abs": 0.05,
+  "B4_idle_coef_abs": 0.05,
+  "B4_byte_identical": true,
+  "B6_r2_min": 0.98,
+  "B2_monotonicity": "strict: |D_ab - D_ref| > |D_corr - D_ref| at every rung; D_ab drift monotonically outward in |c|"
+ },
+ "derivations": {
+  "B1_B3": "Half-pixel integer rasterization bounds per-droplet radius uncertainty at delta_r/r = 0.5/3 = 0.167 (r=3); pooled over N=366 with independent rounding gives sigma_chat = 0.167/sqrt(366) = 0.0087; 5-sigma = 0.044 <= 0.05. Residual sub-pixel warp contributes at most (0.5/384) x the L-convergence render-bias spread (0.099 at L=256 vs 0.012 at L=384) ~ 3e-4, negligible. B1 = 0.05 is exactly half the measured L-convergence D spread, the largest re-rasterization shift a sub-pixel-residual re-render could plausibly carry.",
+  "caveat_LF5": "Gasket droplets sit on a coherent triangular lattice, so rounding bias is correlated and the sqrt(N) credit may overstate precision. If B3 fails with a coherent-sign bias, the verdict is a preregistered-amendment path (jitter-augmented gold), never a silent tolerance change."
+ },
+ "classes": {
+  "gasket-v2-L384": {
+   "D_ref": null,
+   "n_ref": null,
+   "per_mode": {
+    "astigmatism": {
+     "c0_abs": null,
+     "byte_identical_c0": null,
+     "c_hat": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     },
+     "shift_D_ab": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     },
+     "shift_D_corr": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     }
+    },
+    "spherical": {
+     "c0_abs": null,
+     "byte_identical_c0": null,
+     "c_hat": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     },
+     "shift_D_ab": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     },
+     "shift_D_corr": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     }
+    },
+    "trefoil": {
+     "c0_abs": null,
+     "byte_identical_c0": null,
+     "c_hat": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     },
+     "shift_D_ab": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     },
+     "shift_D_corr": {
+      "0.05": null,
+      "0.10": null,
+      "0.15": null
+     }
+    }
+   }
+  },
+  "tri": {
+   "D_ref": null,
+   "n_ref": null,
+   "per_mode": "same shape as gasket; B1/B2 reported non-gated"
+  },
+  "shuffle-s42": {
+   "D_ref": null,
+   "n_ref": null,
+   "per_mode": "same shape as gasket; B1/B2 reported non-gated"
+  }
+ },
+ "structural_asserts": {
+  "non_empty_mask_every_render": true,
+  "component_count_preserved_through_loop": true,
+  "LF3_crop_rows_recorded_not_dropped": true,
+  "LF1_fallback_verdict_if_B1_fails_only_at_top_rung": "correction reduces but does not eliminate the D shift"
+ },
+ "failure_modes_predeclared": [
+  "LF-1 re-rasterization",
+  "LF-2 cross-talk",
+  "LF-3 off-canvas cropping",
+  "LF-4 estimator sign ambiguity",
+  "LF-5 lattice-coherent rounding bias"
+ ],
+ "exit_codes": {
+  "0": "all gated checks pass",
+  "1": "any check fails",
+  "2": "usage",
+  "4": "MODULE SURFACE ERROR (Lane F module or function family missing; no local substitution)"
+ },
+ "_pin_note": "Pinned from the first clean run (75/75 checks PASS): gasket-v2-L384 D_ref 1.5589 n 366; worst |D_corr-D_ref| = 0.0000 across astig/spherical/trefoil on all three golds; B4 |c0| = 0.0000 byte-identical; roundtrip_recovery = 1.0000.",
+ "worst_recovery_residual": 0.0,
+ "roundtrip_recovery": 1.0
+}
