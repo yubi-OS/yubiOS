@@ -52,3 +52,33 @@ Root cause was NOT the outcome capture: the dispatch had captured the model resp
 **API-contract note (not a bug)**: the task verify endpoint requires `body.action_id` — without it the handler resolves `action = null` and verifyAction 500s (`Cannot read properties of null (reading 'expected_json')`). Callers must pass the action id; the router's own in-request chain does.
 
 **Remaining follow-up (unchanged)**: the multimodal band stays `provisional` until its 21-point calibration sweep on real multi-input artifacts; it never auto-dispatches.
+
+## Addendum — multimodal calibration sweep SHIPPED (2026-10-06 ~04:40 PT, follow-up 2 resolved)
+
+The multimodal-probe band's calibration ran per the falsification-corpus discipline, with the acceptance criteria pre-registered before any measurement (sweep spec: jitter sd ≤ 0.02 required; paired hint-discrimination delta ≥ 0.15 required; a 21-point morphological axis recorded as a property, not gated).
+
+**Leg 1 — jitter (stability): PASS.** Same artifact + fixed neutral hint, 5 re-calls × 2 artifact classes: gasket-L384 sd = 0 (5 × 0.1434), shuffle-s42 sd = 0 (5 × 0.5226). Clef is deterministic on fixed instructions + fixed images — the images path inherits the jitter-free property measured on text in the taste engine.
+
+**Leg 2 — hint-discrimination (signal): PASS with margin.** Paired hints on the same artifacts:
+
+| artifact | hint | score | verdict |
+|---|---|---|---|
+| gasket-L384 (D 1.5589) | "a hierarchical self-similar Sierpinski-gasket droplet arrangement" | **0.9527** | match |
+| gasket-L384 | "a random scattered droplet field with no hierarchical structure" | **0.0357** | mismatch |
+| shuffle-s42 (D 1.0355) | "a random scattered droplet field…" | **0.8463** | match |
+| shuffle-s42 | "a hierarchical self-similar Sierpinski-gasket…" | **0.1271** | mismatch |
+| gasket-L384 | (no hint) | 0.8330 | baseline |
+
+Mean(matched) 0.8995 vs mean(mismatched) 0.0814 — **paired Δ 0.818 ≥ 0.15**. The score measures hint-artifact match quality, exactly its designed semantics.
+
+**Leg 3 — 21-point morphological axis (property, recorded):** 21 gaskets, depth 0–6 × L ∈ {192, 256, 320}, one fixed neutral hint. Spearman ρ(score, depth) = 0.322, ρ(score, D) = 0.288 — weak. Expected from the question's semantics: the score is hint-anchored, not an absolute morphology judge. Scores cluster by depth level; one low outlier (d6-L192 → 0.1062). This is why image artifacts route on the DETERMINISTIC edge-standard D, and the multimodal band is the hint-artifact-match lane.
+
+**Instruction sensitivity (recorded finding):** a vague neutral hint scored LOW (0.1434) on a gasket that scored 0.9527 with a matched descriptive hint and 0.833 with NO hint. Multimodal routing quality depends on caller hint quality — callers get out what they describe.
+
+**Verdict: 2/2 gated criteria PASS → multimodal-probe flipped provisional → calibrated via policy v8** (audited promote, learning `l_9bf21d1a3df53c33`, actor jenny; 26 v7-bound approvals expired — the cancelled calibration probes among them, expected).
+
+**Post-v8 end-to-end proof:** hint-only multimodal artifact → clef score 0.8498 → multimodal-probe (calibrated) → gate **allowed** → 70b lane-draft dispatch (text_len 2395) → verified_success → **task t_1af9a2adaf22e8f7 terminal, "all actions verified_success"** in-request. Pending approvals: 0.
+
+**Caller-contract caveat (recorded, not a router bug):** degenerate stub images (8×8 PNG) fail clef inference (error 3043) through the router path → 422 MEASUREMENT_FAILED; all 31 real-render calls in the sweep succeeded. Use real images.
+
+All calibration probe tasks were cancelled immediately after their measurement was read (provisional band → needs_approval tasks); the router run rows (kind `router`) are the durable measurement record.
