@@ -1,23 +1,22 @@
 name: docker-purge
 
-# Deletes ENTIRE image repositories from the Docker Hub namespace CI
-# publishes to (docker.io/0mniteck/*) so a relaunch starts from an empty
-# registry — images AND tags, not just tags. Docker Hub auto-creates a
-# repo on the next push, so deleting the CI repos is self-healing.
+# Clears ALL TAGS + IMAGE MANIFESTS from the CI repos in the Docker Hub
+# namespace (docker.io/0mniteck/*) so a relaunch starts from an empty
+# image history. THE REPOSITORIES THEMSELVES ARE NEVER DELETED — they
+# stay in place with their settings and history; only tags/images go.
 # SAFETY: the default mode is `report` — a dry-run that only lists repos
 # + tag counts. Actual deletion requires an explicit dispatch with
 # mode=purge, so an accidental group/cron fire can never delete images.
 # Member of the ci.yml `audits` group (dispatch reachability); it is
 # intentionally NOT in the `all` group.
-# Endpoint: DELETE /v2/repositories/{namespace}/{repository}/ returns
-# 202 (async deletion) — verified 2026-10-06; the modern
-# /v2/namespaces/... routes carry no delete op in the official spec.
+# Endpoint: DELETE /v2/repositories/{namespace}/{repository}/tags/{tag}
+# (per-tag; on Docker Hub deleting a tag removes its manifest).
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'report = dry-run listing only; purge = DELETE the listed repositories (images + tags)'
+        description: 'report = dry-run listing only; purge = DELETE every tag/image in the listed repos (repos stay)'
         type: choice
         required: true
         default: 'report'
@@ -40,10 +39,10 @@ permissions:
 
 jobs:
   purge:
-    name: Purge Docker Hub image repositories
+    name: Purge Docker Hub image history (tags + images)
     runs-on: ubuntu-24.04
     steps:
-      - name: Report or delete repositories
+      - name: Report or clear tags/images
         env:
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER }}
           MODE: ${{ github.event.inputs.mode }}
@@ -101,18 +100,21 @@ jobs:
             COUNT=0; [ -n "$TAGS" ] && COUNT=$(echo "$TAGS" | wc -w)
             DELETED=0
             if [ "$MODE" = "purge" ]; then
-              CODE="$(curl -s -o /tmp/del-body -w '%{http_code}' -X DELETE -H "$AUTH" \
-                "https://hub.docker.com/v2/repositories/${NAMESPACE}/${REPO}/")"
-              if [ "$CODE" = "202" ] || [ "$CODE" = "204" ]; then
-                DELETED=1; TOTAL_DELETED=$((TOTAL_DELETED + 1))
-              else
-                echo "::warning::delete repo ${NAMESPACE}/${REPO} -> HTTP ${CODE} $(head -c 200 /tmp/del-body 2>/dev/null | tr -d '\n')"
-              fi
+              for TAG in $TAGS; do
+                CODE="$(curl -s -o /tmp/del-body -w '%{http_code}' -X DELETE -H "$AUTH" \
+                  "https://hub.docker.com/v2/repositories/${NAMESPACE}/${REPO}/tags/${TAG}")"
+                if [ "$CODE" = "204" ]; then
+                  DELETED=$((DELETED + 1))
+                else
+                  echo "::warning::delete ${NAMESPACE}/${REPO}:${TAG} -> HTTP ${CODE} $(head -c 200 /tmp/del-body 2>/dev/null | tr -d '\n')"
+                fi
+              done
             fi
+            TOTAL_DELETED=$((TOTAL_DELETED + DELETED))
             echo "| ${REPO} | ${COUNT} | ${DELETED} |" | tee -a "$SUMMARY"
           done
           {
             echo
-            echo "Total deleted: **${TOTAL_DELETED}**"
+            echo "Tags deleted: **${TOTAL_DELETED}** (repositories untouched)"
           } | tee -a "$SUMMARY"
-          echo "done mode=${MODE} repos=$(echo $REPOS | wc -w) repos_deleted=${TOTAL_DELETED}"
+          echo "done mode=${MODE} repos=$(echo $REPOS | wc -w) tags_deleted=${TOTAL_DELETED}"
