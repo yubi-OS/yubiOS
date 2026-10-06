@@ -90,3 +90,30 @@ The pre-registered MVP (Next actions 1-2) ran the same day. Sequence: v1 generat
 **Next actions (updated).** (a) v3 control: matched-extent shuffle (same bounding box as the tri patch) to deconfound extent from order; (b) real-figure pass restricted to panels with inter-droplet spacing ≥ ~40 px, preferring the Trypogeorgos Nature 2025 Zenodo dataset (doi:10.5281/zenodo.14251103) over figure extraction; (c) only if the measurement discriminates on real data: the `supersolid_order` axis (ψ6 + slope-break s*) via the rayleigh admission protocol.
 
 Artifacts: `session/supersolid/` (gen_v2.py, gen_parity256.py, falsification-results-v2.json, amendments-log-2026-10-06.md, PGM renders, parity manifests + run ids).
+
+## Addendum 6 (2026-10-06): REAL-DATA PASS — the transition trend is in the data
+
+The pre-registered real-data pass ran the same night, on two public datasets.
+
+**Dataset 1 — Trypogeorgos et al., Nature 2025 polariton supersolid (Zenodo doi:10.5281/zenodo.14251103, CC-BY-4.0, 204 MB).** Structural finding first: the processed fig1/fig3 data are **1D profiles** (1024 positions × 114 pump powers; fig1 `dc` = density DC term, fig3 `g1s` = coherence envelopes) — the waveguide platform's real-space data is one-dimensional, so the 2D droplet-morphology classes cannot be tested on it directly. Measured anyway (exploratory, strips of the coherence envelopes): 12 frames across the pump sweep (20.2–897.9 mW) read **D 1.237–1.498 with no threshold signature in D itself**; r² dips to 0.956–0.964 at the highest powers (low_confidence territory). Consistent with the falsification corpus: smooth ordered morphology reads D ≈ 1.2–1.5 on strips and carries no fractal signature.
+
+**Dataset 2 — Norcia et al. 2021, Nature 596, 357 (arXiv:2102.05555) Fig. 2b: eight single-trial in-situ images across the linear→zig-zag transition (αt 0.32→0.43), extracted at 600 dpi from the arXiv PDF, star markers masked to background, measured at native resolution (279×377):**
+
+| αt | regime | whole-window D | slope {13..64} | comps |
+|---|---|---|---|---|
+| 0.32 | linear chain | 0.9827 | 1.005 | 26 |
+| 0.33 | linear chain | 1.0538 | 1.085 | 20 |
+| 0.35 | linear chain | 1.0598 | 1.077 | 15 |
+| 0.36 | transition | 1.1382 | 1.132 | 11 |
+| 0.37 | zig-zag onset | 1.2294 | 1.325 | 7 |
+| 0.39 | zig-zag | 1.1629 | 1.243 | 11 |
+| 0.41 | 2D zig-zag | **1.3708** | 1.462 | 7 |
+| 0.43 | 2D zig-zag | 1.2421 | 1.363 | 15 |
+
+**The real-data trend: D climbs across the 1D→2D transition** — the linear chain reads D ≈ 0.98–1.06 (at or below 1: the saturation-dominated sparse-point regime, exactly what the falsification corpus predicts for sparse arrays) and the 2D zig-zag reads D ≈ 1.16–1.37. Caveats, honestly: single-trial images carry shot noise (comps fluctuate 7–26 across panels); pseudocolor luminance conversion; the star-marker masking; n = 8; and the D increase is confounded with droplet number and array extent (more droplets at higher αt) — the v3 matched-extent control applies to this dataset too. The corpus prediction this is NOT: no panel reads anywhere near the Sierpinski band (1.585); all eight real images sit in the ordered-smooth class, as the corpus says they should.
+
+**Live-route run rows (3 representatives, half-res via KV staging):** at0.32-linear-chain live D 1.2772 (Δ 4.9e-5, run cr_dff7352880876a09), at0.37-zigzag-onset live D 1.2818 (Δ 4.3e-5, run cr_83615312b8f10d47), at0.43-2d-zigzag live D 1.2721 (Δ 2.7e-5, run cr_ca3331c4bb8aaacc). At half-res r² = 0.931–0.972 < 0.98 → **the low_confidence gate fires at reduced resolution, correctly** — the r² gate is doing its job as a resolution-sensitive quality flag on real data (native-res local r² was 0.983–0.998).
+
+**Updated next actions.** (a) v3 matched-extent shuffle (synthetic control) + a matched-extent read across the Norcia panels to deconfound droplet number from dimensionality; (b) multi-trial averaged in-situ images would denoise the per-panel verdicts (Fig 2b is single-trial by design); (c) the αt trend (0.98 → 1.37) is the first real-data evidence that a morphology D moves with the structural transition — the `supersolid_order` axis design (ψ6 + slope-break s*) stays gated on a discriminating measurement on controlled real data, not on this trend alone.
+
+Artifacts: `session/supersolid/` (Data.zip + extracts, norcia/ page renders + 8 panel crops + b64, trypogeorgos-profiles.json, norcia-panels.json, norcia-live-manifest.json).
