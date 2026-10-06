@@ -148,7 +148,7 @@ def _regress(xs, ys):
     cov = sxy - (sx * sy) / n
     vx = sxx - (sx * sx) / n
     vy = syy - (sy * sy) / n
-    if vx == 0 or vy == 0:
+    if vx <= 0 or vy <= 0:  # zero-variance guard: float cancellation can make vy tiny-negative (math domain error, found 2026-10-06 on the tri gold's flat return series)
         return 0.0, 0.0
     slope = cov / vx
     r = cov / math.sqrt(vx * vy)
