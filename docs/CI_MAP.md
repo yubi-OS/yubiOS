@@ -25,7 +25,8 @@
 | `workflow_call`-callable workflows | 1 (`ci_test_sealed-uki-vm.yml`) |
 | Total declared jobs across all workflows | 87 |
 | Workflows in the ci.yml group taxonomy | 26 |
-| Workflows outside any ci.yml group | 12 |
+| Workflows outside ci.yml's own group lists | 12 |
+| Workflows outside every grouping (incl. ci-launchpad taxonomy) | 0 |
 | Largest workflow file | `ci_firmware-rk.yml` (69,365 B) |
 
 Supersedes the 2026-09-18 drift-check addendum: that record flagged the map's
@@ -293,6 +294,209 @@ flowchart TD
     policy --> pq
 ```
 
+### Diagrams carried from the pre-regeneration map
+
+The diagrams below are carried verbatim from the pre-regeneration CI_MAP
+(2026-07-29 shape, drifted-note 2026-09-18). The callback-contract diagram is
+historical: PR #145 removed the callback chain, so that diagram describes a
+contract that no longer fires.
+
+**Top-level dispatch router (group choice fan-out)**
+
+```mermaid
+flowchart TD
+    start["ci.yml dispatch step"]
+    pick{"group: choice"}
+    none_path["none\nno dispatch"]
+    firmware_path["firmware\n[ci_firmware-rk]"]
+    tests_path["tests\n[rootless-docker, bootc-filesystem, pq-tls-verify]\n(3 independent dispatches)"]
+    vm_tests_path["vm-tests\n[ci_test-vm, ci_test-vgpu-vm]\n(2 independent dispatches)"]\n    fetches_path["fetches\n[dhi, fedora-bootc, released-tag]\n(3 independent dispatches)"]\n    ci_builders_path["ci-builders\n[yubiOS-ci, ci_dev_image, ci_mkosi-installer]\n(3 independent dispatches)"]\n    forks_path["forks\n[8 ci_fork_*]\n(8 independent dispatches)"]\n    all_path["all\nunion of every group\n(20 independent dispatches)"]\n    done["exit"]\n\n    start --> pick\n    pick -- "none" --> none_path --> done\n    pick -- "firmware" --> firmware_path --> done\n    pick -- "tests" --> tests_path --> done\n    pick -- "vm-tests" --> vm_tests_path --> done
+    pick -- "fetches" --> fetches_path --> done
+    pick -- "ci-builders" --> ci_builders_path --> done
+    pick -- "forks" --> forks_path --> done
+    pick -- "all" --> all_path --> done
+```
+
+**Canonical Docker Bake graph**
+
+```mermaid
+flowchart TD
+    policy["_policy\nyubiOS.rego\nreset + strict"]
+    metadata["_source-metadata\nsource + revision labels"]
+    exporter["_image-export\nDocker or registry"]
+    base["_yubios-base\nContainerfile"]
+    prod["yubios"]
+    prod_smoke["yubios-smoke\ncacheonly"]
+    dev["yubios-dev"]
+    dev_smoke["yubios-dev-smoke\ncacheonly"]
+    artifacts["firmware\ninstaller"]
+    pq["pq-tls-verify\nno-cache + cacheonly"]
+
+    policy --> base
+    metadata --> base
+    base --> prod
+    exporter --> prod
+    base -. "target context" .-> prod_smoke
+    policy --> prod_smoke
+    base -. "target context" .-> dev
+    policy --> dev
+    metadata --> dev
+    exporter --> dev
+    dev -. "target context" .-> dev_smoke
+    policy --> dev_smoke
+    policy --> artifacts
+    metadata --> artifacts
+    exporter --> artifacts
+    policy --> pq
+```
+
+**ARM64/RK firmware integration**
+
+```mermaid
+flowchart TD
+    wf["ci_firmware-rk.yml"]
+    refs["Pinned env refs\nTF-A\nOP-TEE OS\noptee_ftpm\nU-Boot\nEDK2\nEDK2 platforms\nms-tpm-20-ref\nmbedTLS"]
+    stmm["DHI job: stmm\namd64 + primary/rebuild arm64\ndeterministic EDK2 stack cookies\nbuild StandaloneMM RPMB"]
+    stmm_out["artifacts\nBL32_AP_MM-amd64\nBL32_AP_MM-arm64\nBL32_AP_MM-arm64-repro"]
+    optee["DHI job: optee_fip\namd64 + primary/rebuild arm64\nU-Boot + OP-TEE/fTPM + TF-A\nQEMU, RK3399, RK3588"]
+    optee_out["board artifacts\nfip-flash-board-suffix\nBL32 + OP-TEE + U-Boot + TF-A"]
+    proof["job: firmware-reproducibility\ncompare intended unsigned bytes\nrecord QEMU signing boundary\nrecord RK3588 TPL boundary"]
+    evidence["30-day JSON evidence\none ARM64 report per board"]
+    qemu["DHI job: qemu\nuser-scoped hardened builder\ndownload fip-flash\nassemble flash.bin if needed\nboot qemu-system-aarch64"]
+    asserts["QEMU asserts\nfTPM Early TA loads\nTPM self-test marker\nno known failure signatures\nStMM SP loaded"]
+    publish["job: firmware-publish in DHI container\ncheckout + user-scoped hardened builder\nmatrix: qemu-arm64, rock5b-rk3588, rockpro64-rk3399\nif workflow_dispatch + Docker_push=true"]
+    fw_payload["/firmware payload\nboard MANIFEST.txt\nfip.bin flash.bin bl1.bin\nBL32_AP_MM.fd u-boot.bin tee bins"]
+    bake["Bake target: firmware\nstrict yubiOS.rego policy\nregistry exporter"]
+    fw_registry["Docker Hub outputs\nfirmware[-sha] for QEMU compatibility\nfirmware-qemu-arm64[-sha]\nfirmware-rock5b-rk3588[-sha]\nfirmware-rockpro64-rk3399[-sha]"]
+    cb["ci-callback to ci.yml\nstate=yubiOS RK firmware"]
+
+    wf --> refs
+    refs --> stmm --> stmm_out --> optee --> optee_out --> proof --> evidence
+    proof --> qemu --> asserts --> publish --> fw_payload --> bake --> fw_registry
+    stmm --> cb
+    optee --> cb
+    proof --> cb
+    qemu --> cb
+    publish --> cb
+```
+
+**TEST / production / dev / installer / final VM lanes**
+
+```mermaid
+flowchart TD
+    prod_wf["yubiOS-ci.yml\nnative amd64 + arm64"]
+    prod_bake["Bake: yubios-ci / yubios\nbuild + smoke"]
+    prod_out["per-arch sha-arch\nimagetools -> sha + latest"]
+    dev_wf["ci_dev_image.yml\nTEST-only swu2f/passless"]
+    dev_bake["Bake: yubios-dev-ci / yubios-dev\nproduction target context + smoke"]
+    dev_out["per-arch dev-sha-arch\nimagetools -> dev-sha + dev"]
+    vm["ci_test-vm.yml\nfinal sudo Podman + bcvk VM e2e\nARM64 DirectBoot credential"]
+    vm_out["VM boot + mandatory CTAP2 hmac-secret\nLUKS2, homed, pam-u2f, ed25519-sk"]
+    installer["ci_mkosi-installer.yml DHI build job\namd64 + primary/rebuild arm64\nmkosi + SoftHSM PKCS#11 signing"]
+    installer_proof["installer-reproducibility\ncompare canonical root tree + initrd + manifest\nrecord signed/Btrfs envelopes"]
+    installer_evidence["30-day ARM64 JSON evidence"]
+    installer_payload["prepared installer payload\nworkflow artifact handoff"]
+    installer_bake["DHI publish job\nuser-scoped hardened builder\nBake: installer + registry exporter"]
+    installer_out["installer\ninstaller-sha"]
+    rootless["ci_test_rootless-docker.yml\nrootless daemon + hardened builder"]
+    bootc["ci_test_bootc-filesystem.yml\nstrict composefs + unsealed BLS"]
+    pq["ci_test_pq_tls_verify.yml"]
+    pq_bake["Bake: pq-tls-verify\nno-cache + cacheonly"]
+    pq_out["non-blocking PQ TLS result"]
+
+    prod_wf --> prod_bake --> prod_out
+    dev_wf --> dev_bake --> dev_out --> installer --> installer_proof --> installer_evidence
+    installer_proof --> installer_payload --> installer_bake --> installer_out --> vm --> vm_out
+    rootless --> bootc --> pq --> pq_bake --> pq_out
+```
+
+**Optional fork component CI chain**
+
+```mermaid
+flowchart TD
+    start["ci.yml after fork release-ref refresh"]
+    mkosi["ci_fork_mkosi.yml"]
+    bcvk["ci_fork_bcvk.yml"]
+    tfa["ci_fork_arm-trusted-firmware.yml"]
+    optee["ci_fork_optee-os.yml"]
+    ms["ci_fork_ms-tpm-20-ref.yml"]
+    ftpm["ci_fork_optee-ftpm.yml"]
+    uboot["ci_fork_u-boot.yml"]
+    edk2["ci_fork_edk2.yml"]
+    tests["Optional ci_test_* pre-image chain"]
+    firmware["ci_firmware-rk.yml"]
+
+    start --> mkosi --> bcvk --> tfa --> optee --> ms --> ftpm --> uboot --> edk2 --> tests --> firmware
+```
+
+**Trigger policy (post-PR-#145)**
+
+```mermaid
+flowchart TD
+    manual["operator dispatches ci.yml"]
+    pick{"group: choice\nnone / firmware / tests / vm-tests / fetches\nci-builders / forks / all"}
+    dispatch["ci.yml fires one workflow_dispatch per workflow\nin the chosen group, then exits\n(no chain, no callback)"]
+    sibling["22 sibling workflows\nworkflow_dispatch only\n(no callback to ci.yml)"]
+    none_path["none: no-op, dispatch acknowledged"]
+
+    manual --> pick
+    pick -- "none" --> none_path
+    pick -- "any group" --> dispatch --> sibling
+```
+
+**Artifact and registry output map**
+
+```mermaid
+flowchart TD
+    source["Source files\nprepared firmware/installer payloads"]
+    pins["PINNED.md digests and action SHAs"]
+    policy["yubiOS.rego\nstrict inherited target.policy"]
+    bake["yubiOS-bake.hcl\ntargets, tags, platforms, labels, outputs"]
+    prod["Production OCI\nsha-arch -> sha + latest"]
+    dev["TEST-only OCI\ndev-sha-arch -> dev-sha + dev"]
+    firmware["Firmware OCI\nfirmware[-sha]\nfirmware-board[-sha]"]
+    installer["Installer OCI\ninstaller[-sha]"]
+    pq["PQ TLS verification\ncacheonly result"]
+    vm["Host/Podman/KVM evidence"]
+    install["Disposable-disk bootc evidence\nexternal mounts + no root="]
+    rootless["Rootless Docker evidence\ndaemon + hardened builder"]
+    ci_logs["CI outputs\nartifacts, step summaries,\nexplicit skips, callback states"]
+
+    source --> bake
+    pins --> bake
+    policy --> bake
+    bake --> prod
+    bake --> dev
+    bake --> firmware
+    bake --> installer
+    bake --> pq
+    source --> vm
+    prod --> ci_logs
+    dev --> ci_logs
+    firmware --> ci_logs
+    installer --> ci_logs
+    pq --> ci_logs
+    vm --> ci_logs
+    install --> ci_logs
+    rootless --> ci_logs
+```
+
+**Callback contract (historical, pre-PR-#145)**
+
+```mermaid
+sequenceDiagram
+    participant C as ci.yml
+    participant W as child workflow
+    participant J as jobs in child workflow
+
+    C->>W: workflow_dispatch(ref, inputs, ci_callback=true)
+    W->>J: run declared jobs and matrices
+    J-->>W: needs JSON with job results
+    W->>W: reduce needs to success or failure
+    W->>C: workflow_dispatch(state, completed_conclusion, original inputs)
+    C->>C: stop on non-success, else dispatch next workflow
+```
+
 ## Canonical Docker Bake Graph
 
 `yubiOS-bake.hcl` owns every Docker build in the non-fork chain. Four hidden
@@ -531,13 +735,28 @@ Triggers: non-workflow YAML. Jobs (0): (no jobs — declarative only). Runner(s)
 
 ci-launchpad (the Sauna CI app) is the live tracker for this surface. Its
 hand-maintained group taxonomy covered 27 files (26 group members + ci.yml);
-12 workflows existed on main but sat outside any group:
+12 workflows existed on main but sat outside any group. 2026-10-05: every
+straggler is now assigned in the app's taxonomy:
 
-`ci_build-test-fixtures.yml`, `ci_dispatch-reachability.yml`,
-`ci_fork-drift-detect.yml`, `ci_input-shape.yml`, `ci_package-floor.yml`,
-`ci_token-audit.yml`, `lean-check.yml`, `lean-run.yml`,
-`phonon-followups.yml`, `zernike-caustics.yml`, `zernike-lens.yml`,
-`zernike-spectrum.yml`
+| Straggler | Assigned group | Rationale |
+|---|---|---|
+| `ci_input-shape.yml` | tests | workflow-file governance guard, same validation bucket as the diag workflows |
+| `ci_token-audit.yml` | tests | workflow-file governance guard, same validation bucket |
+| `ci_dispatch-reachability.yml` | tests | workflow-file governance guard, same validation bucket |
+| `ci_package-floor.yml` | tests | verifies package floors against the built dev image |
+| `ci_fork-drift-detect.yml` | fetches | detects drift in the same fork pins fetch-released-tag-ref refreshes |
+| `ci_build-test-fixtures.yml` | ci-builders | builds the fixture images the other builders/tests consume |
+| `lean-check.yml` | research | papers/ + tools/ research-corpus CI lane |
+| `lean-run.yml` | research | papers/ + tools/ research-corpus CI lane |
+| `phonon-followups.yml` | research | papers/ + tools/ research-corpus CI lane |
+| `zernike-lens.yml` | research | papers/ + tools/ research-corpus CI lane |
+| `zernike-caustics.yml` | research | papers/ + tools/ research-corpus CI lane |
+| `zernike-spectrum.yml` | research | papers/ + tools/ research-corpus CI lane |
+
+`research` is a display-only group: ci.yml's own `group` choice has no
+`research` value, so the app blocks orchestrator dispatch for it (with a hint)
+while its six members remain directly dispatchable from their rows and via
+their push lanes. Every workflow on main (39) is now in exactly one group.
 
 Updated 2026-10-05: the app now derives its workflow set from a full-repo
 git-tree census (one `GET /repos/yubi-OS/yubiOS/git/trees/main?recursive=1`
@@ -555,7 +774,7 @@ Cross-check at regeneration time:
 | `.yml` files in repo census | 40 |
 | Workflows run-tracked by ci-launchpad | 39 |
 | Non-workflow YAML inventoried (not run-tracked) | 1 |
-| Files in the app's static group taxonomy | 27 |
+| Files in the app's static group taxonomy | 39 (32 dispatchable + 6 research display-only + ci.yml) |
 | Files reachable via taxonomy + auto-adoption | 39 |
 | Doc-only entries (documented, not on main) | 0 |
 | Code-only entries (on main, undocumented here) | 0 |
