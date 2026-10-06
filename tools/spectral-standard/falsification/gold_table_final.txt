@@ -1,0 +1,18 @@
+ST    ROW                              DETAIL
+FINDING row1-L3-d_s                      d_s=1.334812 band=[1.29500,1.43500] r2=0.946650 band_verdict=OUT — AM-5 seam-c: the SG spectrum is a log-periodic staircase; series counting on the gasket family is a documented finding (Lane A F2 / Lane B), not a gate
+FINDING row1-L4-d_s                      d_s=1.493125 band=[1.29500,1.43500] r2=0.960080 band_verdict=OUT — AM-5 seam-c: the SG spectrum is a log-periodic staircase; series counting on the gasket family is a documented finding (Lane A F2 / Lane B), not a gate
+PASS  row2-d_w                         d_w=2.399315 band=[2.22193,2.42193] r2=0.999954
+PASS  row3-alpha_msd                   alpha_msd=0.833571 band=[0.82135,0.90135] r2=0.999954
+PASS  row4-chain-d_s                   d_s=0.948750 band=[0.90000,1.10000] r2=0.998814
+PASS  row5-patch-d_s                   d_s=1.953583 band=[1.85000,2.15000] r2=0.992962
+PASS  row6-permutation-null            all 3 permutations collapsed (min gap 0.083, alpha_sorted=0.746563)
+FINDING row7a-gasket-render-d_s          d_s=0.230451 band=[1.29500,1.43500] r2=0.595608 band_verdict=OUT — AM-6: FM-4 detector FIRED — the traced contour mask is 366 disconnected 16-px rings (trace does not bridge inter-droplet gaps); documented corpus-construction finding, non-gating
+FINDING row7a-tri-d_s                    d_s=0.986063 band=[1.85000,2.15000] r2=0.999113 band_verdict=OUT — AM-6: contour-walk construction reads the boundary curve (quasi-1D, d_s ~ 1), not the filled region the ~2.0 prediction assumed; documented finding
+FINDING row7a-jitter-d_s                 mean d_s=0.980962 over 5 seeds, band=(1.85, 2.15) band_verdict=OUT; order-blindness null jitter~=0.9860628212613154: REPRODUCED (|mean jitter - tri| = 0.0051) — AM-6 documented finding
+FINDING row7b-contact-gasket-d_s         d_s=0.389096 band=[1.29500,1.43500] r2=0.971126 band_verdict=OUT — AM-6: contact graph is 24 fragmented components (max 56 of 366 nodes), not a single gasket graph — documented corpus-construction finding
+FINDING row7b-contact-tri-d_s            d_s=0.005137 band=[1.85000,2.15000] r2=0.014185 band_verdict=OUT — AM-6: 19-node/42-edge contact graph saturates by the bottom rung (diameter ~4 << t_lo=16) — no power law exists; documented corpus-construction finding
+PASS  row8-log-periodic                present=True (7 octave bands of curvature residuals, 4 sign alternations; boolean only, amplitude/phase never fitted — A-7)
+PASS  determinism-rerun                bitwise-identical rerun of row 2 inputs
+PASS  fm11-einstein-wrongD-flip        caller D=1.0 -> verdict=inconsistent (a trivially-consistent oracle is an instrument bug, FM-11)
+gold table: 15/15 rows passed
+RESULT: PASS

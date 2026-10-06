@@ -1,0 +1,243 @@
+{
+ "_amendments": "See amendments-spectral-2026-10-06.md (advisor, 2026-10-06): AM-1..AM-5, all PRE-first-clean-run, no band value moved.",
+ "_comment": "Falsification-corpus regression anchors for spectral-standard-v1. Pre-registered 2026-10-06 BEFORE any measurement (Lane C). Expected values are null until the first CLEAN gold-table run fills them via harness_spectral.py --write-anchors; a failing band is a result to fix in the instrument, never an anchor to move. Any post-hoc anchor change requires a dated amendment in this directory plus a major version bump (see PREREGISTRATION-spectral-2026-10-06.md \u00a70).",
+ "_status": "anchored-first-run-2026-10-06",
+ "gold": {
+  "determinism-rerun": {
+   "criterion": "full-precision outputs identical",
+   "expected": {
+    "identical": true
+   },
+   "gold": "bitwise-identical rerun of row 2 inputs"
+  },
+  "fm11-einstein-wrongD-flip": {
+   "criterion": "verdict MUST be 'inconsistent' \u2014 a trivially-consistent oracle is an instrument bug (FM-11)",
+   "expected": {
+    "verdict": "inconsistent"
+   },
+   "gold": "einstein() called with deliberately wrong caller D=1.0"
+  },
+  "row1-L3-d_s": {
+   "_status": "FINDING (AM-5 seam-c): documented staircase finding, regression-anchored, non-gating",
+   "band": [
+    1.295,
+    1.435
+   ],
+   "expected": {
+    "alpha_r2": null,
+    "d_s": 1.3348121287939565,
+    "r2": 0.9466502575467937
+   },
+   "gold": "gasket graph level 3 (42 vertices, 27 cells), exact Laplacian eigenvalues"
+  },
+  "row1-L4-d_s": {
+   "_status": "FINDING (AM-5 seam-c): documented staircase finding, regression-anchored, non-gating",
+   "band": [
+    1.295,
+    1.435
+   ],
+   "expected": {
+    "alpha_r2": null,
+    "d_s": 1.4931252334933818,
+    "r2": 0.9600804460525805
+   },
+   "gold": "gasket graph level 4 (123 vertices, 81 cells), exact Laplacian eigenvalues"
+  },
+  "row2-d_w": {
+   "band": [
+    2.22193,
+    2.42193
+   ],
+   "expected": {
+    "d_w": 2.399314510897431,
+    "d_w_r2": null,
+    "r2": 0.9999543136932004,
+    "seed": 2199123478
+   },
+   "gold": "gasket graph canonical level 6 (V=1095), walk mode, pinned ladder K=4, 4096 walkers (AM-2/AM-3)"
+  },
+  "row3-alpha_msd": {
+   "band": [
+    0.82135,
+    0.90135
+   ],
+   "expected": {
+    "alpha_msd": 0.8335714183847982,
+    "alpha_r2": null,
+    "r2": 0.9999543136932004
+   },
+   "gold": "gasket graph canonical level 6 (V=1095), walk mode, MSD exponent alpha = 2/d_w (AM-2/AM-3)"
+  },
+  "row4-chain-d_s": {
+   "band": [
+    0.9,
+    1.1
+   ],
+   "expected": {
+    "d_s": 0.9487500128889222,
+    "d_s_r2": null,
+    "r2": 0.9988140315780003
+   },
+   "gold": "1D path graph, N=256"
+  },
+  "row5-patch-d_s": {
+   "band": [
+    1.85,
+    2.15
+   ],
+   "expected": {
+    "d_s": 1.9535827724982349,
+    "d_s_r2": null,
+    "r2": 0.992961951093059
+   },
+   "gold": "2D 4-connected lattice patch, 128x128 = 16384 vertices (AM-3b)"
+  },
+  "row6-permutation-null": {
+   "criterion": "EVERY permuted run: |alpha_perm - alpha_sorted| >= 0.5 OR r2_perm < 0.98; null-unfailable outcome = INVALID-INSTRUMENT (FM-3b)",
+   "expected": {
+    "alpha_sorted": 0.7465626167466909,
+    "per_seed": {
+     "2026": {
+      "alpha_perm": 2.831686765182803,
+      "gap": 2.085124148436112,
+      "r2_perm": 0.624619384406584
+     },
+     "42": {
+      "alpha_perm": 0.5899498709101447,
+      "gap": 0.15661274583654616,
+      "r2_perm": 0.728170246308088
+     },
+     "99": {
+      "alpha_perm": 0.8298245273449918,
+      "gap": 0.0832619105983009,
+      "r2_perm": 0.7259086813709769
+     }
+    },
+    "r2_sorted": 0.9600804460525805
+   },
+   "gold": "gasket level-4 eigenvalue series permuted, Fisher-Yates seeds [42, 2026, 99]"
+  },
+  "row7a-gasket-render-d_s": {
+   "_status": "FINDING (AM-6 seam-c/FM-4): FM-4 detector fired on the corpus construction (disconnected contour rings / fragmented contact graphs); documented, regression-anchored, non-gating",
+   "band": [
+    1.295,
+    1.435
+   ],
+   "expected": {
+    "d_s": 0.23045074967205398,
+    "d_s_r2": null,
+    "r2": 0.5956081165830333
+   },
+   "gold": "gasket render (gen_v2, L=384, r=3, 366 droplets) via oracle path: edge-standard trace -> mask -> walk"
+  },
+  "row7a-jitter-d_s": {
+   "_status": "FINDING (AM-6 seam-c/FM-4): FM-4 detector fired on the corpus construction (disconnected contour rings / fragmented contact graphs); documented, regression-anchored, non-gating",
+   "band": [
+    1.85,
+    2.15
+   ],
+   "expected": {
+    "mean_d_s": 0.980962206765852,
+    "null_reproduced": true,
+    "per_seed": {
+     "jitter-s1337": 0.9872466345904072,
+     "jitter-s2026": 0.972187737153017,
+     "jitter-s42": 0.9738064552444764,
+     "jitter-s7": 0.9833624137141586,
+     "jitter-s99": 0.9882077931272009
+    },
+    "tri_d_s": 0.9860628212613154
+   },
+   "gold": "jitter renders (5 seeds [42,1337,2026,7,99]) via oracle path; jitter ~= tri is the predicted null (order-blindness reproduces in d_s)"
+  },
+  "row7a-tri-d_s": {
+   "_status": "FINDING (AM-6 seam-c/FM-4): FM-4 detector fired on the corpus construction (disconnected contour rings / fragmented contact graphs); documented, regression-anchored, non-gating",
+   "band": [
+    1.85,
+    2.15
+   ],
+   "expected": {
+    "d_s": 0.9860628212613154,
+    "r2": 0.9991134706553523
+   },
+   "gold": "tri render (19 droplets) via oracle path"
+  },
+  "row7b-contact-gasket-d_s": {
+   "_status": "FINDING (AM-6 seam-c/FM-4): FM-4 detector fired on the corpus construction (disconnected contour rings / fragmented contact graphs); documented, regression-anchored, non-gating",
+   "band": [
+    1.295,
+    1.435
+   ],
+   "expected": {
+    "d_s": 0.38909645523992836,
+    "d_s_r2": null,
+    "r2": 0.9711259457604728
+   },
+   "gold": "gasket render droplet-center contact graph (structural control, resolution A-8)"
+  },
+  "row7b-contact-tri-d_s": {
+   "_status": "FINDING (AM-6 seam-c/FM-4): FM-4 detector fired on the corpus construction (disconnected contour rings / fragmented contact graphs); documented, regression-anchored, non-gating",
+   "band": [
+    1.85,
+    2.15
+   ],
+   "expected": {
+    "d_s": 0.005136965256518437,
+    "d_s_r2": null,
+    "r2": 0.014185408607007396
+   },
+   "gold": "tri droplet-center contact graph (structural control, resolution A-8)"
+  },
+  "row8-log-periodic": {
+   "_anchor_note": "These expected values are corpus-side exact computations (independent of the instrument), filled PRE-run \u2014 they are pinned here the way the physics constants are, and the --selftest asserts the detector reproduces them exactly.",
+   "criterion": "present = >= 3 sign alternations across >= 4 non-empty octave-band means; boolean only, amplitude/phase never fitted",
+   "expected": {
+    "n_alternations": 4,
+    "n_bands": 7,
+    "present": true
+   },
+   "gold": "exact level-4 gasket eigenvalues (Jacobi, corpus-side computation \u2014 this row never passes through the instrument); discrete curvature (second difference) of log lambda vs log rank, banded into octave bands of the value (resolution A-7 final form)"
+  }
+ },
+ "instrument": "spectral-standard-v1",
+ "physics_constants": {
+  "d_f": 1.584963,
+  "d_s": 1.365212,
+  "d_w": 2.321928,
+  "note": "d_s = 2 ln3/ln5 = 1.365212 (resolution A-1: the SPEC's 1.36507 is a truncation artifact; bands unchanged)"
+ },
+ "pinned_parameters": {
+  "msd_metric": "explicit graphs: chemical (graph-hop) distance^2; masks: Euclidean pixel^2",
+  "patch_side": 128,
+  "patch_side_amendment": "AM-3b (advisor, 2026-10-06, pre-first-clean-run): 32 -> 128; finite-size window requirement t_hi/N <= 1/64 for the diffusive return-probability regime (disclosed: criterion strengthened after the 64^2 diagnostic showed rung-to-rung slope scatter at t/N = 1/16)",
+  "prng": "mulberry32 bit-exact port",
+  "r2_gate_min": 0.98,
+  "return_prob": "fraction of walkers at start vertex at step t; zero-return rungs dropped (max 2, else insufficient)",
+  "seed_derivation": "seed_u32 = int(sha256(canonical_json(mode+inputs)).hexdigest()[:8], 16), canonical_json = sort_keys compact",
+  "series_ordering": "consumed AS GIVEN; the module must NOT sort internally (FM-3b)",
+  "series_rank_ladder": "r_i = round(N/8 + (l_i/64)*(3N/8)), l_i in [4,6,9,13,20,29,43,64]",
+  "start_rule": "graph mode 'spread' (AM-2); mask mode 'first' (SPEC rule)",
+  "step_rule": "non-lazy; idx = min(int(u*deg), deg-1); mask: 8-connected ink neighbors; isolated pixel stays (stay counts as a step)",
+  "walk_gold_level": "canonical level 6 (V=1095); AM-2 replaces pre-registered level 4",
+  "walk_ladder_K": 4,
+  "walk_ladder_steps": [
+   16,
+   24,
+   36,
+   52,
+   80,
+   116,
+   172,
+   256
+  ],
+  "walker_seed": "harness canonical_json sha256[:8] forwarded as run_walks base_seed (AM-4)",
+  "walkers": 32768,
+  "walkers_amendment": "AM-3 (advisor, 2026-10-06, pre-first-clean-run): 64 -> 32768; a-priori criterion: expected return count >= 32 at the smallest-P ladder rung (diffusive P(0,256) ~ 1/(pi*256) -> W >= ~26k); gasket closed-form P(0,256) = 256^(-d_s_true/2) = 0.0156 -> W >= 2058"
+ },
+ "record": "SPEC-spectral-oracle-2026-10-06.md + PREREGISTRATION-spectral-2026-10-06.md",
+ "tolerances": {
+  "anchor_regression": 1e-09,
+  "band_check": "inside pre-registered band AND r2 >= 0.98",
+  "einstein_abs_tol": 0.1
+ }
+}
