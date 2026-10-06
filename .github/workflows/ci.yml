@@ -25,7 +25,8 @@ name: CI
 #                 ci_fork_u-boot.yml, ci_fork_edk2.yml
 #   audits      — ci_token-audit.yml, ci_input-shape.yml,
 #                 ci_dispatch-reachability.yml, ci_fork-drift-detect.yml,
-#                 ci_package-floor.yml, ci_docker-purge.yml
+#                 ci_package-floor.yml, ci_docker-purge.yml,
+#                 ci_docker-repos-ensure.yml
 #   research    — lean-check.yml, lean-run.yml, phonon-followups.yml,
 #                 zernike-caustics.yml, zernike-lens.yml, zernike-spectrum.yml
 #   all         — union of firmware, tests, vm-tests, fetches, ci-builders,
@@ -132,7 +133,7 @@ jobs:
               WORKFLOWS=(ci_fork_mkosi.yml ci_fork_bcvk.yml ci_fork_arm-trusted-firmware.yml ci_fork_optee-os.yml ci_fork_ms-tpm-20-ref.yml ci_fork_optee-ftpm.yml ci_fork_u-boot.yml ci_fork_edk2.yml)
               ;;
             audits)
-              WORKFLOWS=(ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml ci_docker-purge.yml)
+              WORKFLOWS=(ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml ci_docker-purge.yml ci_docker-repos-ensure.yml)
               ;;
             research)
               WORKFLOWS=(lean-check.yml lean-run.yml phonon-followups.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml)

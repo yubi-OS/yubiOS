@@ -1,0 +1,86 @@
+name: docker-repos-ensure
+
+# Ensures every Docker Hub repository declared in .github/docker-repos.json
+# exists in its namespace with the declared description — the registry-side
+# spec of the CI-published image repos. Creates missing repos and PATCHes
+# descriptions that drifted. NEVER deletes anything. Dispatch-only; member
+# of the ci.yml `audits` group (dispatch reachability); not in `all`.
+
+on:
+  workflow_dispatch:
+    inputs:
+      namespace:
+        description: 'Docker Hub namespace'
+        type: string
+        required: false
+        default: '0mniteck'
+
+permissions:
+  contents: read
+
+jobs:
+  ensure:
+    name: Ensure Docker Hub repos + descriptions
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Ensure repos and descriptions
+        env:
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER }}
+          NAMESPACE: ${{ github.event.inputs.namespace }}
+        run: |
+          set -euo pipefail
+          JWT="$(curl -sf -H 'Content-Type: application/json' \
+            -d "{\"username\":\"0mniteck42\",\"password\":\"${DOCKERHUB_PASSWORD}\"}" \
+            https://hub.docker.com/v2/users/login | jq -r .token)"
+          if [ -z "$JWT" ] || [ "$JWT" = "null" ]; then
+            echo "::error::Docker Hub login failed for 0mniteck42"
+            exit 1
+          fi
+          AUTH="Authorization: Bearer ${JWT}"
+          SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/stdout}"
+          {
+            echo "## Docker Hub repos — namespace \`${NAMESPACE}\`"
+            echo
+            echo "| repo | action | description set |"
+            echo "|---|---|---|"
+          } | tee -a "$SUMMARY"
+          jq -c '.repos[]' .github/docker-repos.json | while read -r SPEC; do
+            NAME="$(echo "$SPEC" | jq -r .name)"
+            PRIVATE="$(echo "$SPEC" | jq -r .private)"
+            DESC="$(echo "$SPEC" | jq -r .description)"
+            FULLDESC="$(echo "$SPEC" | jq -r '.full_description // ""')"
+            CODE="$(curl -s -o /tmp/repo-body -w '%{http_code}' -H "$AUTH" \
+              "https://hub.docker.com/v2/repositories/${NAMESPACE}/${NAME}/")"
+            if [ "$CODE" = "404" ]; then
+              CREATE="$(jq -n --arg n "$NAME" --arg ns "$NAMESPACE" --arg d "$DESC" --arg fd "$FULLDESC" --argjson p "$PRIVATE" \
+                '{name: $n, namespace: $ns, description: $d, full_description: $fd, private: $p}')"
+              C2="$(curl -s -o /tmp/create-body -w '%{http_code}' -X POST -H "$AUTH" -H 'Content-Type: application/json' \
+                -d "$CREATE" "https://hub.docker.com/v2/repositories/${NAMESPACE}/")"
+              if [ "$C2" = "201" ] || [ "$C2" = "200" ]; then
+                echo "| ${NAME} | created | yes |" | tee -a "$SUMMARY"
+              else
+                echo "::warning::create ${NAMESPACE}/${NAME} -> HTTP ${C2} $(head -c 200 /tmp/create-body | tr -d '\n')"
+                echo "| ${NAME} | create FAILED (HTTP ${C2}) | - |" | tee -a "$SUMMARY"
+              fi
+            elif [ "$CODE" = "200" ]; then
+              CUR="$(jq -r '.description // ""' /tmp/repo-body)"
+              if [ "$CUR" = "$DESC" ]; then
+                echo "| ${NAME} | ok (description matches) | unchanged |" | tee -a "$SUMMARY"
+              else
+                PATCH="$(jq -n --arg d "$DESC" --arg fd "$FULLDESC" '{description: $d, full_description: $fd}')"
+                P2="$(curl -s -o /tmp/patch-body -w '%{http_code}' -X PATCH -H "$AUTH" -H 'Content-Type: application/json' \
+                  -d "$PATCH" "https://hub.docker.com/v2/repositories/${NAMESPACE}/${NAME}/")"
+                if [ "$P2" = "200" ]; then
+                  echo "| ${NAME} | description updated | yes |" | tee -a "$SUMMARY"
+                else
+                  echo "::warning::patch ${NAMESPACE}/${NAME} -> HTTP ${P2} $(head -c 200 /tmp/patch-body | tr -d '\n')"
+                  echo "| ${NAME} | patch FAILED (HTTP ${P2}) | - |" | tee -a "$SUMMARY"
+                fi
+              fi
+            else
+              echo "::warning::repo lookup ${NAMESPACE}/${NAME} -> HTTP ${CODE}"
+              echo "| ${NAME} | lookup FAILED (HTTP ${CODE}) | - |" | tee -a "$SUMMARY"
+            fi
+          done
+          echo "done"

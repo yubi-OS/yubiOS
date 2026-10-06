@@ -1,0 +1,9 @@
+{
+  "namespace": "0mniteck",
+  "repos": [
+    {"name": "yubios", "private": false, "description": "yubiOS container images - production (yubios), dev/test (yubios-dev), installer, and RK firmware (firmware-qemu-arm64, firmware-rock5b-rk3588, firmware-rockpro64-rk3399). Digest-pinned bases, OPA/Rego policy-gated builds. Published by yubi-OS CI.", "full_description": "Published by [yubi-OS/yubiOS](https://github.com/yubi-OS/yubiOS) CI.\n\nTags:\n- `yubios`, `yubios:<sha>` - production image\n- `yubios-dev`, `yubios-dev:<sha>` - TEST-only dev image (software FIDO2, ADR-026)\n- `installer`, `installer:<sha>` - mkosi installer image with signed UKI\n- `firmware[-sha]`, `firmware-qemu-arm64[-sha]`, `firmware-rock5b-rk3588[-sha]`, `firmware-rockpro64-rk3399[-sha]` - RK firmware bundles\n\nDigest-pinned bases; builds pass the `yubiOS.rego` OPA policy."}
+  , {"name": "yubios-sysext-test", "private": false, "description": "Test image for yubiOS sysext attach/detach + portable-service VM tests (OMN-156). Published by yubi-OS CI.", "full_description": "Consumed by `ci_test-sysext-portable.yml`. Published by [yubi-OS/yubiOS](https://github.com/yubi-OS/yubiOS) CI."}
+  , {"name": "yubios-portable-svc-test", "private": false, "description": "Test image for yubiOS portable-service activation tests. Published by yubi-OS CI.", "full_description": "Consumed by `ci_test-sysext-portable.yml`. Published by [yubi-OS/yubiOS](https://github.com/yubi-OS/yubiOS) CI."}
+  , {"name": "build-cache", "private": false, "description": "BuildKit cache for yubiOS image builds.", "full_description": "BuildKit/GHA cache export target for yubiOS Bake builds. Managed by [yubi-OS/yubiOS](https://github.com/yubi-OS/yubiOS) CI."}
+  ]
+}
