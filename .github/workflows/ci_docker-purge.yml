@@ -97,11 +97,12 @@ jobs:
             DELETED=0
             if [ "$MODE" = "purge" ]; then
               for TAG in $TAGS; do
-                if curl -sf -X DELETE -H "$AUTH" \
-                  "https://hub.docker.com/v2/repositories/${NAMESPACE}/${REPO}/tags/${TAG}"; then
+                CODE="$(curl -s -o /tmp/del-body -w '%{http_code}' -X DELETE -H "$AUTH" \
+                  "https://hub.docker.com/v2/repositories/${NAMESPACE}/${REPO}/tags/${TAG}")"
+                if [ "$CODE" = "204" ]; then
                   DELETED=$((DELETED + 1))
                 else
-                  echo "::warning::failed to delete ${NAMESPACE}/${REPO}:${TAG}"
+                  echo "::warning::delete ${NAMESPACE}/${REPO}:${TAG} -> HTTP ${CODE} $(head -c 200 /tmp/del-body 2>/dev/null | tr -d '\n')"
                 fi
               done
             fi
