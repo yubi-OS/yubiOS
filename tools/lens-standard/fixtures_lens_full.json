@@ -1,0 +1,285 @@
+{
+  "fixtures": [
+    {
+      "coef": 0.1,
+      "coefficients_est": 0.09997696761905042,
+      "d_aberrated": 1.4649205711880333,
+      "d_corrected": 1.5589369960067876,
+      "d_ref": 1.5589369960067876,
+      "estimation_error": -2.3032380949583597e-05,
+      "id": "gasket-astig-0.1",
+      "mode": "astig",
+      "monotone": true,
+      "recovered": true,
+      "render": "gasket",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "8b4992e045b4d3c96d351ce95ada49d753d4558d1cb65ffe3de7a4e3f49e27fd",
+      "sha_corrected": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2",
+      "sha_ref": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2"
+    },
+    {
+      "coef": 0.2,
+      "coefficients_est": 0.19957689405420265,
+      "d_aberrated": 1.2832456910445045,
+      "d_corrected": 1.5589369960067876,
+      "d_ref": 1.5589369960067876,
+      "estimation_error": -0.00042310594579736405,
+      "id": "gasket-astig-0.2",
+      "mode": "astig",
+      "monotone": true,
+      "recovered": true,
+      "render": "gasket",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "0951b5c5e205231ed9d3f3ca0fa1ff95cdb2c4259a69b866e98d7d519b25ac01",
+      "sha_corrected": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2",
+      "sha_ref": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2"
+    },
+    {
+      "coef": 0.06,
+      "coefficients_est": 0.059953772004137595,
+      "d_aberrated": 1.534490666985404,
+      "d_corrected": 1.5589369960067876,
+      "d_ref": 1.5589369960067876,
+      "estimation_error": -4.622799586240234e-05,
+      "id": "gasket-spherical-0.06",
+      "mode": "spherical",
+      "monotone": true,
+      "recovered": true,
+      "render": "gasket",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "55f4973762aaa7263d9aeb8b16ca2f2f5eb8341b121ae90bc01c49410585e6a1",
+      "sha_corrected": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2",
+      "sha_ref": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2"
+    },
+    {
+      "coef": 0.12,
+      "coefficients_est": 0.1199785350820088,
+      "d_aberrated": 1.4994958675697574,
+      "d_corrected": 1.5589369960067876,
+      "d_ref": 1.5589369960067876,
+      "estimation_error": -2.1464917991195764e-05,
+      "id": "gasket-spherical-0.12",
+      "mode": "spherical",
+      "monotone": true,
+      "recovered": true,
+      "render": "gasket",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "97d5ec6d0fda10a55f175feb8fdeb86544426c6280757e593191156c4a377589",
+      "sha_corrected": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2",
+      "sha_ref": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2"
+    },
+    {
+      "coef": 0.0001,
+      "coefficients_est": 0.00010042084921636023,
+      "d_aberrated": 1.508762033835103,
+      "d_corrected": 1.558699154490871,
+      "d_ref": 1.5589369960067876,
+      "estimation_error": 4.2084921636022286e-07,
+      "id": "gasket-trefoil-0.0001",
+      "mode": "trefoil",
+      "monotone": true,
+      "recovered": true,
+      "render": "gasket",
+      "roundtrip_recovery": 0.9998115696250236,
+      "sha_aberrated": "e9ea1714542db19d2629d4f00a96226ad97e90855225294f726021710d076319",
+      "sha_corrected": "ef1e085b4dac5abf941197a93dd5682f9eabc93df32789e88b5e6878cc06f245",
+      "sha_ref": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2"
+    },
+    {
+      "coef": 0.00015,
+      "coefficients_est": 0.00014998268262005483,
+      "d_aberrated": 1.4665325924950023,
+      "d_corrected": 1.5589369960067876,
+      "d_ref": 1.5589369960067876,
+      "estimation_error": -1.7317379945156917e-08,
+      "id": "gasket-trefoil-0.00015",
+      "mode": "trefoil",
+      "monotone": true,
+      "recovered": true,
+      "render": "gasket",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "0bf24972bc54313663a9d4b0188e55f4b096d4eff010f142c497f5088c14c5f3",
+      "sha_corrected": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2",
+      "sha_ref": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2"
+    },
+    {
+      "coef": 0.1,
+      "coefficients_est": 0.09965849212585891,
+      "d_aberrated": 1.4352479815253865,
+      "d_corrected": 1.2635947654356825,
+      "d_ref": 1.2635947654356825,
+      "estimation_error": -0.0003415078741410976,
+      "id": "tri-astig-0.1",
+      "mode": "astig",
+      "monotone": true,
+      "recovered": true,
+      "render": "tri",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "72bc4f1cf7aae7e7e4913861d3f6698385775277683ba0f9e95eaab93834785e",
+      "sha_corrected": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6",
+      "sha_ref": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6"
+    },
+    {
+      "coef": 0.2,
+      "coefficients_est": 0.19923637749961837,
+      "d_aberrated": 1.5041652676995683,
+      "d_corrected": 1.2635947654356825,
+      "d_ref": 1.2635947654356825,
+      "estimation_error": -0.0007636225003816444,
+      "id": "tri-astig-0.2",
+      "mode": "astig",
+      "monotone": true,
+      "recovered": true,
+      "render": "tri",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "62a44970d5eec1b3fe117f3e266903412ac62a9fa84c4999b4daa85fcecaecbf",
+      "sha_corrected": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6",
+      "sha_ref": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6"
+    },
+    {
+      "coef": 0.06,
+      "coefficients_est": 0.05998247220965304,
+      "d_aberrated": 1.343908972795401,
+      "d_corrected": 1.2635947654356825,
+      "d_ref": 1.2635947654356825,
+      "estimation_error": -1.752779034695784e-05,
+      "id": "tri-spherical-0.06",
+      "mode": "spherical",
+      "monotone": true,
+      "recovered": true,
+      "render": "tri",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "5574e496ac50399c8234c814b90a7cab846aad8febde7fcce0efb8e9dc4dacea",
+      "sha_corrected": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6",
+      "sha_ref": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6"
+    },
+    {
+      "coef": 0.12,
+      "coefficients_est": 0.12005034789039641,
+      "d_aberrated": 1.3910372037951597,
+      "d_corrected": 1.2635947654356825,
+      "d_ref": 1.2635947654356825,
+      "estimation_error": 5.034789039641552e-05,
+      "id": "tri-spherical-0.12",
+      "mode": "spherical",
+      "monotone": true,
+      "recovered": true,
+      "render": "tri",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "fbf27b14c8cf0972762fcb5f1f5583a18f4cc449498f0dd4418de7a27c42d9d1",
+      "sha_corrected": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6",
+      "sha_ref": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6"
+    },
+    {
+      "coef": 0.0001,
+      "coefficients_est": 9.992543928674179e-05,
+      "d_aberrated": 1.4716440386733203,
+      "d_corrected": 1.2635947654356825,
+      "d_ref": 1.2635947654356825,
+      "estimation_error": -7.456071325821312e-08,
+      "id": "tri-trefoil-0.0001",
+      "mode": "trefoil",
+      "monotone": true,
+      "recovered": true,
+      "render": "tri",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "5892e4be067a2bb4b0beb48486f7aae9d6cdb1227eb2f9803865a5310f81070b",
+      "sha_corrected": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6",
+      "sha_ref": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6"
+    },
+    {
+      "coef": 0.00015,
+      "coefficients_est": 0.00015002904356730215,
+      "d_aberrated": 1.4801576709438042,
+      "d_corrected": 1.2635947654356825,
+      "d_ref": 1.2635947654356825,
+      "estimation_error": 2.9043567302159757e-08,
+      "id": "tri-trefoil-0.00015",
+      "mode": "trefoil",
+      "monotone": true,
+      "recovered": true,
+      "render": "tri",
+      "roundtrip_recovery": 1.0,
+      "sha_aberrated": "6f97e826ebc009060475f6166a3bf422629a513373ab46b60fbb8cf94b5059f1",
+      "sha_corrected": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6",
+      "sha_ref": "6138abeab614739acca13373bc9d2e65f7b7b3b4bf18a51fd32bb996223af6b6"
+    }
+  ],
+  "meta": {
+    "fixture_count": 12,
+    "generated_at": "2026-10-06T16:17:26Z",
+    "generated_by": "gen_fixtures_lens_full.py (Lane H, full parity pack)",
+    "mask_serialization": "newline-joined '1'/'0' rows (edge-standard selftest convention); sha256 of utf-8 bytes",
+    "pinned": {
+      "aberrations": [
+        [
+          "astig",
+          0.1
+        ],
+        [
+          "astig",
+          0.2
+        ],
+        [
+          "spherical",
+          0.06
+        ],
+        [
+          "spherical",
+          0.12
+        ],
+        [
+          "trefoil",
+          0.0001
+        ],
+        [
+          "trefoil",
+          0.00015
+        ]
+      ],
+      "astig_kappa": 0.5,
+      "center": 255.5,
+      "d_band": 0.05,
+      "est_corrector_steps": 2,
+      "est_newton_steps": 6,
+      "est_tol": {
+        "astig": 0.005,
+        "spherical": 0.005,
+        "trefoil": 0.005
+      },
+      "gasket": {
+        "L": 384,
+        "depths": 6,
+        "r": 3
+      },
+      "max_astig": 0.5,
+      "max_spherical": 0.3,
+      "max_trefoil": 0.0002,
+      "r_max": 256,
+      "rounding_rule": "nint(v) = floor(v + 0.5); out-of-canvas destinations dropped; row-major source order",
+      "size": 512,
+      "spherical_inverse_steps": 12,
+      "trefoil_inverse_steps": 12,
+      "trefoil_zoom_k": 460.0,
+      "tri": {
+        "a": 52,
+        "dy": 45,
+        "r": 16,
+        "rows": [
+          3,
+          4,
+          5,
+          4,
+          3
+        ]
+      }
+    },
+    "pipeline": "lens-standard-v1",
+    "purpose": "full cross-language parity anchor for the powered lens (measure->correct): every (mode, magnitude) x gold render must reproduce mask shas exactly, estimates to 1e-9 and D readings to 1e-9 in any port.",
+    "render_ink": {
+      "gasket": 10614,
+      "tri": 15143
+    },
+    "source_of_record": "lens_standard.py (Lane F, Python)"
+  }
+}
