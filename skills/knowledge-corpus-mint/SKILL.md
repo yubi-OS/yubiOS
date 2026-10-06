@@ -245,6 +245,12 @@ Scope: <ONE-LINE SCOPE>.
 - **Reporting success without the post-push verification.** The PR files
   list is the truth; a subagent's self-report once said "23 paths pushed"
   for a PR that contained 10 (2026-10-05, PR #12).
+- **Trusting subagent-reported PR numbers.** A 5-agent wave (2026-10-05,
+  "wave 27") returned confident VERIFIED reports citing PRs #137-#141 —
+  which were the PREVIOUS wave's actual numbers; no branches, PRs, or
+  corpus dirs existed. The orchestrator must resolve every PR number by
+  head-branch lookup (`GET /pulls?head=yubi-OS:<branch>&state=all`) and
+  verify against the PR files list + blob re-fetch before merging.
 
 ## Red Flags
 
