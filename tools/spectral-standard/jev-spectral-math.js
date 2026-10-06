@@ -298,11 +298,26 @@ export function randomWalks(graph, opts = {}) {
     if (full) walker0Trace = full;
   }
 
+  // MSD metric (P3, 2026-10-06): Euclidean distance on graph.coords when the
+  // graph carries coordinates (mirrors Python _walk_measurements, which
+  // REQUIRES graph["eu"]); BFS hop distance otherwise (the pre-P3 pack
+  // convention). Output carries msd_metric so callers can tell which was used.
+  const coords = graph && Array.isArray(graph.coords) ? graph.coords : null;
+  const msdMetric = coords ? 'euclidean' : 'hop';
   const msd = ladder.map((_t, i) => {
     let s = 0;
     for (let w = 0; w < walkers; w++) {
-      const d = bfsFrom(traces[w].start)[traces[w].checkpoints[i]];
-      s += d * d;
+      let d;
+      if (coords) {
+        const c0 = coords[traces[w].start];
+        const c1 = coords[traces[w].checkpoints[i]];
+        const dx = c1[0] - c0[0];
+        const dy = c1[1] - c0[1];
+        s += dx * dx + dy * dy; // Python parity: acc += dx*dx + dy*dy, no sqrt
+      } else {
+        const d = bfsFrom(traces[w].start)[traces[w].checkpoints[i]];
+        s += d * d;
+      }
     }
     return s / walkers;
   });
@@ -323,6 +338,7 @@ export function randomWalks(graph, opts = {}) {
     traces,
     walker0_trace: walker0Trace,
     msd,
+    msd_metric: msdMetric,
     p_return,
   };
 }
