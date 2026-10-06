@@ -1,0 +1,169 @@
+{
+ "comment": "Falsification-corpus regression anchors for edge-standard-v1 (edge-standard-v1 pipeline, 512x512, MAX_GRID=512, TARGET_COVERAGE=0.06, MIN_COMPONENT=12, scales [4,6,9,13,20,29,43,64]). Measured from the validated v2 run (2026-10-06); deterministic given the pinned integer parameters and seeds. Do not move post-hoc: any anchor change requires a logged amendment in amendments-log (see amendments-log-2026-10-06.md).",
+ "record": "refs/sierpinski-supersolid-connection-2026-10-06.md",
+ "pipeline": "edge-standard-v1",
+ "size": 512,
+ "tolerances": {
+  "whole_window_D": 0.002,
+  "gate_slope": 0.002,
+  "gate_r2_min": 0.98
+ },
+ "gate": {
+  "name": "Sierpinski local slope (amended pre-v2, logged)",
+  "window_scales": [
+   13,
+   20,
+   29,
+   43,
+   64
+  ],
+  "slope": 1.5968,
+  "tolerance": 0.002,
+  "r2_min": 0.98,
+  "evaluated_at_L": 384,
+  "note": "Amended gate window {13,20,29,43,64} (2.30 octaves) replaces the ill-posed 's ~ 16-64' pre-registration; center 1.585 +/- 0.05 re-expressed at L=384 via L-convergence calibration (slope drift r/L-dependent, measured -0.099 at L=256, +0.012 at L=384)."
+ },
+ "seeds_shuffle": [
+  42,
+  1337,
+  2026,
+  7,
+  99
+ ],
+ "classes": {
+  "gasket-v2-L384": {
+   "D": 1.5589,
+   "r2": 0.996357,
+   "slope_13_64": 1.5968,
+   "comps": 366,
+   "params": {
+    "L": 384,
+    "r": 16,
+    "depths": 6,
+    "dedupe": "keep coarsest depth",
+    "layout": "Sierpinski, h = round(L*sqrt(3)/2), apex at (256, 256 - 2h/3)"
+   }
+  },
+  "gasket-v2-L256": {
+   "D": 1.5967,
+   "r2": 0.997473,
+   "slope_13_64": 1.4858,
+   "comps": 366,
+   "params": {
+    "L": 256,
+    "r": 16,
+    "depths": 6,
+    "dedupe": "keep coarsest depth",
+    "layout": "Sierpinski, h = round(L*sqrt(3)/2), apex at (256, 256 - 2h/3)"
+   }
+  },
+  "tri": {
+   "D": 1.2636,
+   "r2": 0.983638,
+   "slope_13_64": 1.4667,
+   "comps": 19,
+   "params": {
+    "r": 16,
+    "rows": [
+     3,
+     4,
+     5,
+     4,
+     3
+    ],
+    "a": 52,
+    "dy": 45,
+    "diameter_d": 32
+   }
+  },
+  "shuffle-s42": {
+   "D": 1.0355,
+   "r2": 0.997911,
+   "slope_13_64": 1.0467,
+   "comps": 19,
+   "params": {
+    "r": 16,
+    "seed": 42,
+    "min_sep": 40,
+    "margin": 64,
+    "n": 19
+   }
+  },
+  "shuffle-s1337": {
+   "D": 1.0305,
+   "r2": 0.99923,
+   "slope_13_64": 1.0714,
+   "comps": 19,
+   "params": {
+    "r": 16,
+    "seed": 1337,
+    "min_sep": 40,
+    "margin": 64,
+    "n": 19
+   }
+  },
+  "shuffle-s2026": {
+   "D": 1.0302,
+   "r2": 0.999111,
+   "slope_13_64": 1.0483,
+   "comps": 19,
+   "params": {
+    "r": 16,
+    "seed": 2026,
+    "min_sep": 40,
+    "margin": 64,
+    "n": 19
+   }
+  },
+  "shuffle-s7": {
+   "D": 1.0404,
+   "r2": 0.99686,
+   "slope_13_64": 1.0853,
+   "comps": 19,
+   "params": {
+    "r": 16,
+    "seed": 7,
+    "min_sep": 40,
+    "margin": 64,
+    "n": 19
+   }
+  },
+  "shuffle-s99": {
+   "D": 1.0456,
+   "r2": 0.996831,
+   "slope_13_64": 1.0999,
+   "comps": 19,
+   "params": {
+    "r": 16,
+    "seed": 99,
+    "min_sep": 40,
+    "margin": 64,
+    "n": 19
+   }
+  },
+  "pumpkin_ring": {
+   "D": 0.9772,
+   "r2": 0.982647,
+   "slope_13_64": 0.8685,
+   "comps": 6,
+   "params": {
+    "r": 16,
+    "R": 200,
+    "n": 6,
+    "angles": "k*pi/3 at |Y_3^3| maxima",
+    "status": "exploratory, non-gated"
+   }
+  },
+  "pumpkin_field": {
+   "D": 1.0384,
+   "r2": 0.999275,
+   "slope_13_64": 1.0452,
+   "comps": 6,
+   "params": {
+    "R_s": 240,
+    "intensity": "(rho/R_s)^3 * |cos(3*phi)| orthographic",
+    "status": "exploratory, non-gated"
+   }
+  }
+ }
+}

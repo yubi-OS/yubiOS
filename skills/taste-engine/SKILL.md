@@ -65,6 +65,20 @@ Raw gray in -> ink-normalization threshold (argmin |coverage - 0.06|, ties small
 
 **Add a new axis** — extend the axis dictionary (extractor + clef question template with the measured number embedded), add fixture parity, run the jitter test + calibration sweep, then record the admission decision in refs/ — never flip `admitted` from a single response.
 
+## Falsification corpus (2026-10-06)
+
+edge-standard-v1 was tested as a supersolid droplet-morphology measure via a falsification corpus, and the corpus is CI-guarded: `tools/edge-standard/falsification/gen_v2.py --selftest` asserts the measured anchors — gasket-v2 L=384 local slope 1.5968 over {13,20,29,43,64} vs Sierpinski theory 1.585, tri 1.2636, shuffle ~1.035, and the pumpkin pair (ring 0.9772 / field 1.0384) — run it after any pipeline change.
+
+Deploy-lesson-class findings, stated as rules:
+
+1. Binary renders above ~12% ink are silently thresholded to an EMPTY set by the argmin rule — assert non-empty masks on every run.
+2. Gate windows must be checked against the pinned scale lattice [4,6,9,13,20,29,43,64] BEFORE running: the pre-registered "16-64" window was ill-posed on that lattice (no two-octave span); it was amended to {13,20,29,43,64} pre-v2 with a-priori justification, logged, and never moved post-hoc.
+3. Render bias is r/L-dependent (measured −0.099 at L=256, +0.012 at L=384) — calibrate by L-convergence (same generator at two L); analytic bias models got the sign wrong.
+4. Keep element size uniform and ≪ the finest hierarchy spacing; size-grading elements by hierarchy depth puts each level's contour→point transition inside the pinned window (the v1 gate failure: D 0.9478).
+5. Order-vs-disorder is extent-confounded in naive designs (tri 1.2636 vs shuffle ~1.035 — predicted near-degenerate); matched-extent controls are required.
+
+Real-data record: Norcia 2021 Fig 2b's 8 in-situ panels across the 1D→2D transition read D 0.98→1.37 (single-trial noise, extent-confounded); the Trypogeorgos Zenodo data is 1D profiles only (no threshold signature in D; strips 1.24–1.50); the r² low_confidence gate fired at half-res on real data exactly as designed; live-route parity max Δ 4.9e-5. Canonical record: `refs/sierpinski-supersolid-connection-2026-10-06.md`.
+
 ## Guidelines
 
 1. Every noul instruction carries a measured number; no free-prose classification.
