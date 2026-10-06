@@ -59,3 +59,34 @@ The ideate-solo winner (physics re-target with a falsification-first MVP) surviv
 3. **Public-imagery pass** restricted to panels with a ≥ ~40 px — prefer the Trypogeorgos Zenodo dataset (native data beats figure extraction) and the Brakensiek 2026 sequence figures; record `under_inked`/`low_confidence` per image; per-image run ids are already the audit trail (`edge-standard` run rows).
 4. **Only if the measurement discriminates**: draft the Sierpinski-gasket droplet-crystal proposal (differentiation paragraph per Lane 2) and the `supersolid_order` axis (ψ6 + s*); admission via the rayleigh-pattern trial.
 5. **Never**: retune TARGET_COVERAGE/MIN_COMPONENT/the window toward a D outcome; flip `admitted` from this result alone.
+
+## Addendum 5 (2026-10-06): falsification corpus MEASURED — v1 gate failure, advisor amendment, v2 pass
+
+The pre-registered MVP (Next actions 1-2) ran the same day. Sequence: v1 generators → gate failure on the gasket → advisor review (pre-build, per directive) → logged amendments → v2 → live-route parity.
+
+**1. v1 failure (stands as recorded).** Gasket v1 (L=320, 4 vertex depths, size-graded droplets r=20/10/5/3) read whole-window D 0.9478 and local {13..64} slope 1.1149 — a wide miss of the 1.585 ± 0.05 gate. Advisor review (count model) CONFIRMED design error, instrument exonerated: the model reproduces the measured numbers (predicted whole-window ≈ 0.95-1.00, local ≈ 1.1). Two faults: droplet size ∝ 1/2^depth puts each level's contour→point transition INSIDE the window (transitions at s = 40/20/10/6), and the vertex hierarchy (spacings 40-320) provides only ~1.5 octaves inside the 4..64 window. tri passed in the same run (D 1.2636, predicted 1.05-1.30).
+
+**2. Amendments logged BEFORE any v2 measurement (dated, a-priori).** Gate window re-expressed as {13,20,29,43,64} (2.30 octaves; the literal "16-64" is ill-posed on the pinned scale set), center 1.585 ± 0.05 and r² ≥ 0.98 unchanged; L-convergence calibration (L=256 vs L=384) required before gate evaluation; whole-window D demoted to diagnostic (expected 1.30-1.45); component-count assertion 366; NON-EMPTY-mask assertion (new instrument-hazard finding: a binary render above ~12% ink is silently thresholded to an empty set by the argmin rule); lattice s* diagnostic re-expressed as plateau detection (N(43) ≈ 19 ± 20%; the measured 13-64 slope 1.4667 is a model-reproduced blend artifact); shuffle constraints pre-registered (min center sep ≥ d+2, border margin ≥ 64 px); pumpkin classes marked exploratory/non-gated.
+
+**3. v2 measured (uniform r=3, 6 depths, 366 droplets at deduped corner vertices).** r=2 was rejected EMPIRICALLY first: an isolated d=4 disk traces 0 boundary pixels (dropped by MIN_COMPONENT=12); r=3 traces 16 ✓. Results (local source of record, 512×512):
+
+| class | whole-window D | gate slope {13..64} | r² | comps |
+|---|---|---|---|---|
+| gasket L=256 | 1.5967 | 1.4858 | 0.995 | 366 ✓ |
+| gasket L=384 | 1.5589 | **1.5968** | 0.999 | 366 ✓ |
+| tri (lattice) | 1.2636 | 1.4667 (blend) | 0.988 | 19 ✓ |
+| shuffle ×5 seeds | 1.030-1.046 | 1.047-1.100 | ≥ 0.992 | 19 ✓ |
+| pumpkin_ring | 0.9772 | 0.869 | 0.983 | 6 |
+| pumpkin_field | 1.0384 | 1.045 | 0.999 | 6 |
+
+**L-convergence (the advisor's make-or-break check): the slope DRIFTS with L** (Δ 0.111 between L=256 and L=384) — the render bias is real but NEGATIVE at L=256 (−0.099 vs theory) and ~zero at L=384 (+0.012); the advisor's thickened-point-set models predicted +0.1..+0.35 — wrong in sign at these parameters, recorded as such. Calibration amendment: the gate evaluates at the smallest available r/L (L=384). **Gate verdict: 1.5968 vs 1.585 ± 0.05 = PASS** (r² 0.999). The whole-window diagnostic band (1.30-1.45) was missed HIGH (1.52-1.60): the thin-curve contamination was ~3× smaller than modeled — recorded honestly.
+
+**4. Surprise finding (revises the Lane-3 prediction): tri and shuffle are NOT near-degenerate.** D separates ordered-lattice (1.2636) from random-field (1.030-1.046) by ~0.23 in this design. Caveat: the design confounds order with array extent (the tri patch spans ~236 px; the shuffle fills 384×384), so the discriminator may be extent-driven, not order-driven. v3 control = matched-extent shuffle before any claim that "D reads order vs disorder".
+
+**5. The pumpkin/Y₃³ answer (exploratory, non-gated).** pumpkin_ring (6 droplets at the six |Y₃³| maxima — the equatorial hexagonal ring) reads D 0.9772; pumpkin_field (the orthographic |Y₃³| render itself) reads D 1.0384 with the 6 lobes as separate components. Both are SMOOTH, ordered morphology: the instrument reads them at D ≈ 1, a full unit below the Sierpinski hierarchy (1.60). So the operator's instinct resolves measurably: if the barrier-sweep paper's un-realized "pumpkin" droplet configuration is Y₃³-like (3-fold/6-fold smooth lobed order), it lives in the ordered-smooth class — and a Sierpinski-gasket droplet crystal would be a *genuinely distinct* target state whose certification signature is D ≈ 1.585 vs ≈ 1.0-1.3 for every periodic or shuffled configuration measured.
+
+**6. Live-route parity (worker, 256 renders through POST /api/jev/corpus/taste/edge-standard).** All four classes PASS against the local source of record: tri Δ 1.2e-5, shuffle Δ 4.5e-5, pumpkin_ring Δ 2.4e-5 (r² 0.905 → low_confidence flagged by the route, exactly the small-N regime the advisor predicted: report, don't gate), pumpkin_field Δ 4.3e-5. Run rows: cr_6f652cfed686aae1, cr_87bffecea50f0c31, cr_aad7cfcd6615e546, cr_7dcb87d362eb7809.
+
+**Next actions (updated).** (a) v3 control: matched-extent shuffle (same bounding box as the tri patch) to deconfound extent from order; (b) real-figure pass restricted to panels with inter-droplet spacing ≥ ~40 px, preferring the Trypogeorgos Nature 2025 Zenodo dataset (doi:10.5281/zenodo.14251103) over figure extraction; (c) only if the measurement discriminates on real data: the `supersolid_order` axis (ψ6 + slope-break s*) via the rayleigh admission protocol.
+
+Artifacts: `session/supersolid/` (gen_v2.py, gen_parity256.py, falsification-results-v2.json, amendments-log-2026-10-06.md, PGM renders, parity manifests + run ids).
