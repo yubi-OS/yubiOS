@@ -14,7 +14,7 @@ on:
       from_image:
         description: 'FROM image (current)'
         required: false
-        default: 'docker.io/0mniteck/yubios:dev-1576bce1acbe2b1875098e1a37bf6309a23cee75'
+        default: 'docker.io/0mniteck/yubios:dev-ccb5e52b4376aa228835c2b1fa125f76dec9ffaf'
       to_image:
         description: 'TO image (target upgrade)'
         required: false
@@ -64,7 +64,7 @@ jobs:
           bcvk --help >/dev/null
       - name: Verify test images are pullable
         run: |
-          sudo podman pull "${{ inputs.from_image || 'docker.io/0mniteck/yubios:dev-1576bce1acbe2b1875098e1a37bf6309a23cee75' }}"
+          sudo podman pull "${{ inputs.from_image || 'docker.io/0mniteck/yubios:dev-ccb5e52b4376aa228835c2b1fa125f76dec9ffaf' }}"
           sudo podman pull "${{ inputs.to_image || 'docker.io/0mniteck/yubios:dev' }}"
       - name: Run test-bootc-upgrade.sh (VM boot legs)
         if: ${{ inputs.run_vm_legs == true }}
@@ -72,7 +72,7 @@ jobs:
           ALLOW_REAL_U2F: ${{ inputs.allow_real_u2f }}
         run: |
           bash tests/vm/test-bootc-upgrade.sh \
-            --from-image "${{ inputs.from_image || 'docker.io/0mniteck/yubios:dev-1576bce1acbe2b1875098e1a37bf6309a23cee75' }}" \
+            --from-image "${{ inputs.from_image || 'docker.io/0mniteck/yubios:dev-ccb5e52b4376aa228835c2b1fa125f76dec9ffaf' }}" \
             --to-image "${{ inputs.to_image || 'docker.io/0mniteck/yubios:dev' }}" \
             --allow-real-u2f "${{ inputs.allow_real_u2f || false }}"
       - name: Loud-skip VM boot legs (ADR-023 precedent)
