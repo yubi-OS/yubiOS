@@ -24,6 +24,11 @@ on:
         type: string
         required: false
         default: '0mniteck'
+      repos:
+        description: 'Comma-separated repo names to restrict to (empty = all repos in the namespace)'
+        type: string
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -38,6 +43,7 @@ jobs:
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER }}
           MODE: ${{ github.event.inputs.mode }}
           NAMESPACE: ${{ github.event.inputs.namespace }}
+          REPOS_INPUT: ${{ github.event.inputs.repos }}
         run: |
           set -euo pipefail
           JWT="$(curl -sf -H 'Content-Type: application/json' \
@@ -56,6 +62,16 @@ jobs:
             URL="$(echo "$PAGE" | jq -r '.next // empty')"
           done
           REPOS="$(echo "$REPOS" | xargs)"
+          if [ -n "${REPOS_INPUT// /}" ]; then
+            FILTERED=""
+            for WANT in ${REPOS_INPUT//,/ }; do
+              case " $REPOS " in
+                *" $WANT "*) FILTERED="$FILTERED $WANT";;
+                *) echo "::warning::requested repo '${WANT}' not found in namespace ${NAMESPACE}";;
+              esac
+            done
+            REPOS="$(echo "$FILTERED" | xargs)"
+          fi
           echo "namespace=${NAMESPACE} mode=${MODE} repos: ${REPOS}"
           SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/stdout}"
           {
