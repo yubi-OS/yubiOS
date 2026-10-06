@@ -23,7 +23,7 @@ on:
         description: 'Docker Hub namespace to operate on'
         type: string
         required: false
-        default: '0mniteck42'
+        default: '0mniteck'
 
 permissions:
   contents: read
@@ -69,7 +69,10 @@ jobs:
             TAGS=""
             URL="https://hub.docker.com/v2/repositories/${NAMESPACE}/${REPO}/tags?page_size=100"
             while [ -n "$URL" ]; do
-              PAGE="$(curl -sf -H "$AUTH" "$URL")"
+              if ! PAGE="$(curl -sf -H "$AUTH" "$URL" 2>/dev/null)"; then
+                echo "::warning::tag listing failed for ${NAMESPACE}/${REPO} (skipping remaining pages)"
+                break
+              fi
               TAGS="$TAGS $(echo "$PAGE" | jq -r '.results[].name' | tr '\n' ' ')"
               URL="$(echo "$PAGE" | jq -r '.next // empty')"
             done
