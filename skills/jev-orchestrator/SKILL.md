@@ -140,3 +140,17 @@ Patterns proven across the three rounds (PRs #276/#277/#278) and the email regre
 - **Below-floor prompts still gate, correctly.** Intent `actionable: 0` / `below_floor` does not block a proposed action; the deterministic gate still decides. The email regression was a schema defect, not a gate defect.
 
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
+
+## Hierarchy Router (measurement-gated routing, 2026-10-06)
+
+The routing regime on the worker: `POST /api/jev/route` accepts ANY artifact modality — image (deterministic edge-standard-v1 D), text (structured-evidence scorer), multimodal/any (ONE clef noul call over the caller hint + data-URI images + any measured context). Band lookup reads `routing.bands` from the LIVE policy at call time; the routing action `{tool:"route.dispatch", method:"POST", url:"https://jev.route/<target>", body:{target, artifact_ref, band_id}}` passes the SAME fail-closed gate as every action; on allow the router auto-dispatches (the approve-leg contract) and the task closes in-request. Invariant: the detector proposes the route; the gate disposes — measurements are data, never authorization.
+
+Routes: `POST /api/jev/route` · `GET /api/jev/route/bands` · `POST /api/jev/route/selftest` (21 checks) · `GET /api/jev/route/runs` (kind `router` rows, idempotent per artifact sha256).
+
+Policy v7 added `routing.bands` (hierarchy-image ≥1.45→lane-draft; ordered-image [1.0,1.45)→lane-classify; sparse-image [0,1.0)→lane-classify; multimodal-probe→lane-draft) + the `route.dispatch` builtin (hosts jev.route, methods POST, targets lane-draft/lane-classify, model_routes classify/draft). Policy v8 flipped multimodal-probe to calibrated after its sweep.
+
+Verify semantics (the route.dispatch branch in jev-verify): model dispatches verify `verified_success` iff the captured response text is non-empty; automation dispatches verify from the run task's terminal state; the evidence carries `route_verify: {basis: model_text | automation_run_state}`. Without this branch the stock status_range predicate finds nothing decidable on a model response and demotes a SUCCESSFUL dispatch to unknown.
+
+Calibration on record: image bands 6/6 HIT through the live route (band edges [1.0, 1.45, 2.0] confirmed, gaskets ≥1.55 vs the 1.45 edge); multimodal band 2/2 sweep PASS (jitter sd=0 on both classes; hint-discrimination paired Δ 0.818). Multimodal routing quality depends on CALLER HINT QUALITY — a vague hint scores 0.14 on a gasket that scores 0.95 with a matched hint; callers get out what they describe.
+
+Caller caveats: degenerate stub images (8×8 PNG) fail clef inference (3043) → 422 MEASUREMENT_FAILED — use real images; same-artifact re-routes dedup to the existing task via idempotency (a re-route is NOT a re-dispatch); no text bands in v1 (text artifacts measure but route fail-closed blocked); the task verify endpoint REQUIRES `body.action_id` — without it the handler resolves action=null and 500s.

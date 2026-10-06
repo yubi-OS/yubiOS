@@ -32,6 +32,22 @@ The `steady-orbit` worker is a multi-part ES module bundle: `solar-rbs-entry.mjs
 - Never ship unverified math: run the selftest endpoint after any engine deploy before trusting results.
 - Secrets never ride the upload; they resolve from the Secrets Store bindings at runtime via `await env.BINDING.get()`.
 
+## Router parts (2026-10-06 deploy)
+
+Part count is now **43** (was 42): new `jev-router.js` + 6 patched parts. Deploy etag sequence: `5e3447e5` (router v1 + policy-agnostic code) → `6792ff0a` (jev-verify route.dispatch verify branch).
+
+- `jev-gate.js` + `jev-execute.js`: Lane B's routing modules are INLINED per their INLINE MODE notes (no extra parts; execute imports `runLLM` from jev-llm).
+- `jev-main.js`: `deps.gateAction = patchedGateAction` — the ONE binding covering runPipeline, runExecute, approve re-run, and the router leg; `deps.dispatchAction` branches `action.tool === 'route.dispatch'` → dispatchRouteAction; `validatePolicyDoc(doc) || validateRoutingDoc(doc)` so v6 policy docs pass the promote validator unchanged.
+- `routes-jev.js`: import + delegation line `if (p.startsWith("/api/jev/route")) return handleJevRouter(req, env, deps);` immediately after the corpus delegation, BEFORE the task regexes.
+- `jev-decide.js`: askJev forwards `opts.images` to the clef binding (multimodal intake).
+- `jev-verify.js`: route.dispatch verify-shape branch — model dispatches verify by text_len > 0, automation dispatches by the run task's terminal state.
+
+Deploy ORDER matters: code first, THEN the policy promote. A stock v6 gate seeing `route.dispatch` blocks with `invalid_action` (harmless); the patched gate tolerates a v6 policy and fails closed as `unknown_tool`.
+
+Console: the Router card lives in KV `jev-index.html` (SITE ns), inserted inside sec-corpus after the taste card. Validate the merged console with an HTML parser (0 unmatched closes) before ANY console KV PUT.
+
+**KV HTML PUT gotcha: curl `-d` strips CRLF** — a 173,183-byte console PUT shrank to 169,638 bytes silently. Re-PUT with `--data-binary` and byte-verify via a delayed re-GET.
+
 ## Examples
 
 **Ship a new module part**: pull bundle, extract, drop the new part in, rebuild metadata from live settings, upload, check schedules + bindings, hit the new endpoint live, record etag.
