@@ -33,29 +33,29 @@
  "classes": {
   "gasket-v2-L384": {
    "D": 1.5589,
-   "r2": 0.996357,
    "slope_13_64": 1.5968,
    "comps": 366,
    "params": {
     "L": 384,
-    "r": 16,
+    "r": 3,
     "depths": 6,
     "dedupe": "keep coarsest depth",
     "layout": "Sierpinski, h = round(L*sqrt(3)/2), apex at (256, 256 - 2h/3)"
-   }
+   },
+   "r2_whole_window": 0.996357
   },
   "gasket-v2-L256": {
    "D": 1.5967,
-   "r2": 0.997473,
    "slope_13_64": 1.4858,
    "comps": 366,
    "params": {
     "L": 256,
-    "r": 16,
+    "r": 3,
     "depths": 6,
     "dedupe": "keep coarsest depth",
     "layout": "Sierpinski, h = round(L*sqrt(3)/2), apex at (256, 256 - 2h/3)"
-   }
+   },
+   "r2_whole_window": 0.997473
   },
   "tri": {
    "D": 1.2636,
