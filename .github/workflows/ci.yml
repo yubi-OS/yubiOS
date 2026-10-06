@@ -26,8 +26,8 @@ name: CI
 #   audits      — ci_token-audit.yml, ci_input-shape.yml,
 #                 ci_dispatch-reachability.yml, ci_fork-drift-detect.yml,
 #                 ci_package-floor.yml
-#   research    — lean-check.yml, zernike-caustics.yml, zernike-lens.yml,
-#                 zernike-spectrum.yml
+#   research    — lean-check.yml, lean-run.yml, phonon-followups.yml,
+#                 zernike-caustics.yml, zernike-lens.yml, zernike-spectrum.yml
 #   all         — union of firmware, tests, vm-tests, fetches, ci-builders,
 #                 forks, audits, research (every workflow, dispatched
 #                 independently)
@@ -135,10 +135,10 @@ jobs:
               WORKFLOWS=(ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml)
               ;;
             research)
-              WORKFLOWS=(lean-check.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml)
+              WORKFLOWS=(lean-check.yml lean-run.yml phonon-followups.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml)
               ;;
             all)
-              WORKFLOWS=(ci_firmware-rk.yml ci_test_rootless-docker.yml ci_test_bootc-filesystem.yml ci_test_pq_tls_verify.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test-fedora-bootc-arm64-pull.yml ci_test-ftpm-tpm0.yml diag_sign-matrix.yml ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml fetch-dhi-manifest.yml fetch-fedora-bootc-manifest.yml fetch-released-tag-ref.yml yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml ci_build-test-fixtures.yml ci_fork_mkosi.yml ci_fork_bcvk.yml ci_fork_arm-trusted-firmware.yml ci_fork_optee-os.yml ci_fork_ms-tpm-20-ref.yml ci_fork_optee-ftpm.yml ci_fork_u-boot.yml ci_fork_edk2.yml ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml lean-check.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml)
+              WORKFLOWS=(ci_firmware-rk.yml ci_test_rootless-docker.yml ci_test_bootc-filesystem.yml ci_test_pq_tls_verify.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test-fedora-bootc-arm64-pull.yml ci_test-ftpm-tpm0.yml diag_sign-matrix.yml ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml fetch-dhi-manifest.yml fetch-fedora-bootc-manifest.yml fetch-released-tag-ref.yml yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml ci_build-test-fixtures.yml ci_fork_mkosi.yml ci_fork_bcvk.yml ci_fork_arm-trusted-firmware.yml ci_fork_optee-os.yml ci_fork_ms-tpm-20-ref.yml ci_fork_optee-ftpm.yml ci_fork_u-boot.yml ci_fork_edk2.yml ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml lean-check.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml lean-run.yml phonon-followups.yml)
               PUSH_WORKFLOWS=(ci_firmware-rk.yml yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml)
               ;;
             *)
