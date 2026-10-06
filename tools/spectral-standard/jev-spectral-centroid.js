@@ -9,7 +9,7 @@
 //      (parameter-free — no radius, no k), with pinned determinism rules.
 //   4. Unweighted hop-count walk on the Delaunay graph, delegating EXACTLY to
 //      the canonical module's randomWalks() + walkDimensions() (per-walker
-//      mulberry32((seed+i)>>>0) streams, pinned ladder base*K, BFS MSD).
+//      mulberry32((seed+i)>>>0) streams, pinned ladder base*K, Euclidean MSD on centroid coords — P4).
 //   5. Guard: disconnected Delaunay graph -> walk the largest component only
 //      and report n_components (preregistration guard, CF-4 honest verdict).
 //
@@ -458,15 +458,21 @@ export function walkCentroidMode(mask, opts = {}) {
     };
   }
   let adj = graph.adj;
+  let coords = graph.centroids;
   let walkedNodes = null;
   const comps = graphComponents(adj);
   if (comps.length > 1) {
     const largest = largestConnectedComponent(adj);
     const remap = new Map(largest.nodes.map((old, i) => [old, i]));
     adj = largest.nodes.map((old) => graph.adj[old].map((v) => remap.get(v)).sort((a, b) => a - b));
+    coords = largest.nodes.map((old) => graph.centroids[old]);
     walkedNodes = largest.nodes;
   }
-  const walk = randomWalks({ adj }, {
+  // P4 (2026-10-06): attach the centroid coordinates so randomWalks measures
+  // MSD in EUCLIDEAN distance (the Python source of record requires coords;
+  // hop was the pre-P3 fallback and diverged from _walk_measurements on
+  // non-uniform Delaunay edge lengths).
+  const walk = randomWalks({ adj, coords }, {
     walkers: opts.walkers === undefined ? 64 : opts.walkers,
     seed: opts.seed,
     k: opts.k,
