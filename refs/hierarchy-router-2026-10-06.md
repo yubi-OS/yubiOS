@@ -38,3 +38,17 @@ All 6 gold falsification-corpus fixtures routed through the LIVE route:
 ## Doctrine, restated
 
 The detector proposes the route; the fail-closed gate disposes. Measurements are data, never authorization. Route decisions are run rows (kind `router`) + append-only task events, idempotent per artifact sha256.
+
+## Addendum — dispatch-leg fix SHIPPED (2026-10-06 ~04:20 PT, follow-up 1 resolved)
+
+Root cause was NOT the outcome capture: the dispatch had captured the model response all along (response_json with route/text_len/neurons/text). The bug was in the VERIFY semantics: the action carries `expected: {status_range:[200,299]}` (required by the propose-time caller-action validator for http-shaped actions), but a lane-* model dispatch has no HTTP status — `evalPredicates` found nothing decidable → verdict `unknown` → the action was demoted AFTER a successful dispatch.
+
+**Fix** (jev-verify.js, one branch): route.dispatch dispatches are verified by their dispatch SHAPE, not the stock http predicates — model dispatches (response has `route` + `text_len`) verify `verified_success` iff text_len > 0; automation dispatches (response has `run_state`) verify from the run task's terminal state; everything else falls through to the stock decision. The evidence row carries `route_verify: {basis: model_text | automation_run_state}` for auditability. Redeploy etag `6792ff0a9ee2cf9f` (43 parts, crons + 14 bindings unchanged).
+
+**Proof, both directions:**
+- **Fresh E2E in one request**: gasket-L320 (a never-routed gasket variant, live-measured D 1.600459680939992, r² 0.9996, 366 components) → band `hierarchy-image` → gate allowed → 70b draft dispatch (text_len 2603) → patched verify `verified_success` → **task state `terminal`, reason "all actions verified_success"** — the full lifecycle closed in-request.
+- **Seed task closed**: t_894b380e6126f9bd re-verified against its stored model response → `verified_success` (basis model_text) → continue → **terminal, "all actions verified_success"**. No re-dispatch was needed — the outcome was already stored; only the verifier misread it.
+
+**API-contract note (not a bug)**: the task verify endpoint requires `body.action_id` — without it the handler resolves `action = null` and verifyAction 500s (`Cannot read properties of null (reading 'expected_json')`). Callers must pass the action id; the router's own in-request chain does.
+
+**Remaining follow-up (unchanged)**: the multimodal band stays `provisional` until its 21-point calibration sweep on real multi-input artifacts; it never auto-dispatches.
