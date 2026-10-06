@@ -44,7 +44,7 @@ This survey is pinned so later changes in `master` do not silently change its co
 
 | Project | Snapshot | Snapshot date | Notes |
 | --- | --- | --- | --- |
-| U-Boot | [`ece349ade2973e220f524ce59e59711cc919263f`](https://github.com/u-boot/u-boot/commit/ece349ade2973e220f524ce59e59711cc919263f) | 2026-07-06 | v2026.07 release commit |
+| U-Boot | [`5508406582f6f7120dce0c4b3059819a41788db2`](https://github.com/u-boot/u-boot/commit/5508406582f6f7120dce0c4b3059819a41788db2) | 2026-07-06 | v2026.07 release commit |
 | Trusted Firmware-A | [`b5eaba47efc5e4e3029086d5c25eee0e8dbb0129`](https://github.com/ARM-software/arm-trusted-firmware/commit/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129) | 2026-07-08 | Current upstream snapshot used for platform docs and makefiles |
 | OP-TEE OS | [`991587c721a603e831cad228626078289adad159`](https://github.com/OP-TEE/optee_os/commit/991587c721a603e831cad228626078289adad159) | 2026-07-17 | Current upstream snapshot used for platform configs and maintenance state |
 
@@ -73,8 +73,8 @@ This is the closest current upstream source match to the full yubiOS Path A stac
 
 - The [TF-A i.MX8M documentation](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/imx8m.rst) describes the normal ROM → SPL → BL31 → U-Boot flow and an i.MX8MM `NEED_BL2=1` TBBR flow: ROM → SPL → BL2 → BL31 → U-Boot UEFI, with SPL verifying BL2 and BL2 verifying the BL3x images in a FIP. It also documents HABv4 support through the ROM Vector Table API. The [i.MX8MM platform makefile](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/plat/imx/imx8m/imx8mm/platform.mk) contains the BL2 authentication and ROTPK plumbing.
 - OP-TEE's [i.MX platform configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-imx/conf.mk) contains maintained `mx8mmevk` and `mx8mm_cl_iot_gate` flavors.
-- U-Boot's [`imx8mm-cl-iot-gate-optee_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/imx8mm-cl-iot-gate-optee_defconfig) enables `CONFIG_EFI_SECURE_BOOT`, FIT signatures, OP-TEE, eMMC RPMB support, and both `CONFIG_TPM2_FTPM_TEE` and a discrete TPM driver. At the reviewed snapshot, repository search found only this CompuLab board family and Nuvoton Arbel board defconfigs enabling the U-Boot fTPM-over-TEE driver.
-- U-Boot's [`imx8mm_evk_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/imx8mm_evk_defconfig) supplies the complementary secure-variable path: `CONFIG_EFI_MM_COMM_TEE`, `CONFIG_CMD_OPTEE_RPMB`, `CONFIG_SUPPORT_EMMC_RPMB`, `CONFIG_TEE`, and `CONFIG_OPTEE`.
+- U-Boot's [`imx8mm-cl-iot-gate-optee_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/imx8mm-cl-iot-gate-optee_defconfig) enables `CONFIG_EFI_SECURE_BOOT`, FIT signatures, OP-TEE, eMMC RPMB support, and both `CONFIG_TPM2_FTPM_TEE` and a discrete TPM driver. At the reviewed snapshot, repository search found only this CompuLab board family and Nuvoton Arbel board defconfigs enabling the U-Boot fTPM-over-TEE driver.
+- U-Boot's [`imx8mm_evk_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/imx8mm_evk_defconfig) supplies the complementary secure-variable path: `CONFIG_EFI_MM_COMM_TEE`, `CONFIG_CMD_OPTEE_RPMB`, `CONFIG_SUPPORT_EMMC_RPMB`, `CONFIG_TEE`, and `CONFIG_OPTEE`.
 - The [CompuLab gateway](https://www.compulab.com/products/iot-gateways/iot-gate-imx8-industrial-arm-iot-gateway/) is an industrial i.MX8M Mini device; its [reference guide](https://www.compulab.com/wp-content/uploads/2020/06/iot-gate-imx8_reference-guide_2023-02-06.pdf) documents soldered eMMC. The current [SBC-IOT-iMX8 product](https://www.compulab.com/products/sbcs/sbc-iot-imx8-nxp-i-mx8m-mini-internet-of-things-single-board-computer/) advertises long availability and eMMC options. The active [NXP EVKB](https://www.nxp.com/design/design-center/development-boards-and-designs/8MMINILPD4-EVK) has 16 GB eMMC 5.1.
 
 **Unproven or missing**
@@ -94,8 +94,8 @@ This is the closest current upstream source match to the full yubiOS Path A stac
 
 These are new board targets rather than a new SoC port. That is valuable: they test whether the Path A work is genuinely RK3588-wide instead of accidentally ROCK 5B-specific.
 
-- Current [U-Boot Rockchip documentation](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/doc/board/rockchip/rockchip.rst) lists both boards.
-- [`orangepi-5-plus-rk3588_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/orangepi-5-plus-rk3588_defconfig) and [`nanopc-t6-rk3588_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/nanopc-t6-rk3588_defconfig) enable SPL FIT signatures, TF-A handoff, and eMMC RPMB transport.
+- Current [U-Boot Rockchip documentation](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/doc/board/rockchip/rockchip.rst) lists both boards.
+- [`orangepi-5-plus-rk3588_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/orangepi-5-plus-rk3588_defconfig) and [`nanopc-t6-rk3588_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/nanopc-t6-rk3588_defconfig) enable SPL FIT signatures, TF-A handoff, and eMMC RPMB transport.
 - The [Orange Pi 5 Plus](https://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5-plus.html) supports eMMC, and the [NanoPC-T6 LTS](https://friendlyelec.com/index.php?route=product/product&product_id=292) is offered with eMMC configurations.
 - They share TF-A and OP-TEE SoC code with ROCK 5B. OP-TEE's [Rockchip configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-rockchip/conf.mk) gives RK3588 the Rockchip OTP driver and `CFG_RK_SECURE_BOOT`; it also warns that secure-boot simulation defaults on and must be deliberately disabled before real fuse programming.
 
@@ -112,7 +112,7 @@ These are new board targets rather than a new SoC port. That is valuable: they t
 
 **Why it surfaced**
 
-- [`imx93_11x11_evk_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/imx93_11x11_evk_defconfig) already enables `CONFIG_EFI_MM_COMM_TEE`, `CONFIG_CMD_OPTEE_RPMB`, `CONFIG_SUPPORT_EMMC_RPMB`, `CONFIG_TEE`, and `CONFIG_OPTEE`. It lacks only the board-level fTPM selection from the most visible yubiOS integration set.
+- [`imx93_11x11_evk_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/imx93_11x11_evk_defconfig) already enables `CONFIG_EFI_MM_COMM_TEE`, `CONFIG_CMD_OPTEE_RPMB`, `CONFIG_SUPPORT_EMMC_RPMB`, `CONFIG_TEE`, and `CONFIG_OPTEE`. It lacks only the board-level fTPM selection from the most visible yubiOS integration set.
 - OP-TEE's [i.MX configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-imx/conf.mk) has an `mx93evk` flavor and EdgeLock Enclave integration.
 - The active [i.MX93 EVK](https://www.nxp.com/design/design-center/development-boards-and-designs/i.MX93EVK) contains 16 GB eMMC.
 - NXP documents owner-signed AHAB containers, while the current board config exposes U-Boot fuse commands and secure storage transport.
@@ -137,7 +137,7 @@ Current [TF-A i.MX9 documentation](https://github.com/ARM-software/arm-trusted-f
 
 **Unproven or missing**
 
-- [`stm32mp25_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/stm32mp25_defconfig) does not enable `CONFIG_SUPPORT_EMMC_RPMB`, `CONFIG_TEE`, `CONFIG_OPTEE`, `CONFIG_EFI_MM_COMM_TEE`, or `CONFIG_TPM2_FTPM_TEE`.
+- [`stm32mp25_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/stm32mp25_defconfig) does not enable `CONFIG_SUPPORT_EMMC_RPMB`, `CONFIG_TEE`, `CONFIG_OPTEE`, `CONFIG_EFI_MM_COMM_TEE`, or `CONFIG_TPM2_FTPM_TEE`.
 - Confirm the selected board/storage population exposes eMMC RPMB and that U-Boot's STM32 SDMMC path supports it.
 - TF-A requires an ST DDR PHY firmware binary; pin and threat-model it.
 - Fuse provisioning, closed-state failure, anti-rollback, debug lockdown, and recovery all remain hardware exercises.
@@ -152,7 +152,7 @@ RK3576 is new in the current three-way upstream intersection.
 
 - TF-A's [Rockchip platform list](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/rockchip.rst) and [RK3576 platform makefile](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/plat/rockchip/rk3576/platform.mk) now contain RK3576 BL31 support.
 - OP-TEE's [Rockchip configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-rockchip/conf.mk) contains an RK3576 flavor and platform source.
-- Current U-Boot lists seven RK3576 boards. [`rock-4d-rk3576_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/rock-4d-rk3576_defconfig) and [`sige5-rk3576_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/sige5-rk3576_defconfig) enable eMMC RPMB transport.
+- Current U-Boot lists seven RK3576 boards. [`rock-4d-rk3576_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/rock-4d-rk3576_defconfig) and [`sige5-rk3576_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/sige5-rk3576_defconfig) enable eMMC RPMB transport.
 - The [ROCK 4D](https://radxa.com/products/rock4/4d/) has an eMMC/UFS module connector; the [Sige5](https://www.armsom.org/product-page/sige5) is sold in eMMC variants. Prefer eMMC for the first proof because the current yubiOS secure-state design is explicitly eMMC RPMB based.
 
 **Why it is behind RK3588**
@@ -170,7 +170,7 @@ RK3576 is new in the current three-way upstream intersection.
 
 - TF-A's [Layerscape TBBR guide](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/nxp/nxp-ls-tbbr.rst) explicitly requires owner-programmed OTPMK and SRKH fuses, distinguishes permissive development mode from fatal production mode, and documents TF-A BL2 authentication of BL31, BL32, and BL33.
 - OP-TEE's [Layerscape platform](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-ls/conf.mk) has a maintained LX2160A-RDB flavor.
-- U-Boot's [`lx2160ardb_tfa_stmm_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/lx2160ardb_tfa_stmm_defconfig) enables OP-TEE, eMMC RPMB, and `CONFIG_EFI_MM_COMM_TEE`; [`lx2160ardb_tfa_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/lx2160ardb_tfa_defconfig) additionally enables the OP-TEE RPMB command; and [`lx2160ardb_tfa_SECURE_BOOT_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig) enables NXP secure boot.
+- U-Boot's [`lx2160ardb_tfa_stmm_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/lx2160ardb_tfa_stmm_defconfig) enables OP-TEE, eMMC RPMB, and `CONFIG_EFI_MM_COMM_TEE`; [`lx2160ardb_tfa_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/lx2160ardb_tfa_defconfig) additionally enables the OP-TEE RPMB command; and [`lx2160ardb_tfa_SECURE_BOOT_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig) enables NXP secure boot.
 
 **Unproven or missing**
 
@@ -189,7 +189,7 @@ This is one of the newest meaningful additions across all three upstream project
 
 - TF-A's [RB3 Gen 2 port](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/qti/rb3gen2.rst) replaces the normal TZ payload with TF-A BL2 and packages BL31, OP-TEE BL32, and U-Boot BL33 in a FIP.
 - OP-TEE's [Qualcomm configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-qcom/conf.mk) defaults to Kodiak, and its [Kodiak target](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-qcom/hoya/kodiak/target.mk) enables QFPROM fuse provisioning in secure builds. The [fuse-region table](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/drivers/qcom/qfprom/kodiak/qfprom_fuse_region.c) includes OEM secure boot, public-key hash, permissions, and anti-rollback regions.
-- U-Boot's [`qcm6490_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/qcm6490_defconfig) targets the RB3 Gen 2 and supports UFS boot. Qualcomm publishes [QCS6490 secure-boot and fuse guidance](https://docs.qualcomm.com/doc/80-80022-11/topic/enable-secure-boot.html).
+- U-Boot's [`qcm6490_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/qcm6490_defconfig) targets the RB3 Gen 2 and supports UFS boot. Qualcomm publishes [QCS6490 secure-boot and fuse guidance](https://docs.qualcomm.com/doc/80-80022-11/topic/enable-secure-boot.html).
 
 **Blocking gaps**
 
@@ -210,7 +210,7 @@ This is one of the newest meaningful additions across all three upstream project
 | Allwinner A64 boards | OP-TEE's [maintainer file](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/MAINTAINERS) marks the A64 platform orphaned, and the reviewed upstream sources do not provide a convincing owner-fuse production closure flow. |
 | NXP i.MX8MQ EVK | OP-TEE and U-Boot support it, but current [TF-A i.MX8M documentation](https://github.com/ARM-software/arm-trusted-firmware/blob/b5eaba47efc5e4e3029086d5c25eee0e8dbb0129/docs/plat/imx8m.rst) notes that i.MX8MQ was dropped from TF-A CI because of OCRAM constraints. i.MX8MM is the stronger target. |
 | Newer i.MX9 variants | OP-TEE's [i.MX configuration](https://github.com/OP-TEE/optee_os/blob/991587c721a603e831cad228626078289adad159/core/arch/arm/plat-imx/conf.mk) is adding i.MX91/95/943 flavors, but current upstream TF-A documentation is materially thinner than i.MX93 and the EdgeLock vendor-firmware boundary is the same. Revisit after the upstream boot chain and board configs mature. |
-| Nuvoton Arbel EVB | U-Boot's [`arbel_evb_defconfig`](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/configs/arbel_evb_defconfig) enables OP-TEE, RPMB, and fTPM but explicitly disables the EFI loader; it is a BMC reference platform, not a fit for the current ARM64 product path. |
+| Nuvoton Arbel EVB | U-Boot's [`arbel_evb_defconfig`](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/configs/arbel_evb_defconfig) enables OP-TEE, RPMB, and fTPM but explicitly disables the EFI loader; it is a BMC reference platform, not a fit for the current ARM64 product path. |
 
 ## Cross-cutting upstream conclusions
 
@@ -224,7 +224,7 @@ This does not make Rockchip ineligible, but evidence should name the real verifi
 
 ### 2. No reviewed board arrives with the complete yubiOS configuration
 
-U-Boot implements the needed pieces, but upstream board configs distribute them unevenly. [U-Boot's UEFI documentation](https://github.com/u-boot/u-boot/blob/ece349ade2973e220f524ce59e59711cc919263f/doc/develop/uefi/uefi.rst) confirms that `CONFIG_EFI_MM_COMM_TEE` connects U-Boot to StandaloneMM in OP-TEE and persists variables through eMMC RPMB. The survey found:
+U-Boot implements the needed pieces, but upstream board configs distribute them unevenly. [U-Boot's UEFI documentation](https://github.com/u-boot/u-boot/blob/5508406582f6f7120dce0c4b3059819a41788db2/doc/develop/uefi/uefi.rst) confirms that `CONFIG_EFI_MM_COMM_TEE` connects U-Boot to StandaloneMM in OP-TEE and persists variables through eMMC RPMB. The survey found:
 
 - fTPM-over-TEE already selected on the CompuLab i.MX8MM board family;
 - EFI MM + OP-TEE RPMB already selected on NXP i.MX8M EVKs, i.MX93 EVK, and the LX2160A StandaloneMM config;

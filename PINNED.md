@@ -1,6 +1,6 @@
 # PINNED.md - yubiOS approved refs & digests
 
-_Last reviewed: 2026-08-04 during the OMN-157 SLSA L3+SBOM+cosign wiring._
+_Last reviewed: 2026-10-06 during the upstream release-ref audit._
 
 All GitHub Actions, internal yubi-OS fork refs, external GitHub source refs, container image references, and directly downloaded workflow artifacts used across the yubi-OS org must appear here before being added to any workflow or Containerfile. Non-pinned refs such as mutable tags and branch names are not permitted.
 
@@ -60,14 +60,14 @@ project does not publish EDK2-style stable release tags.
 | Fork repository | Upstream source | Upstream release/reference | Release commit in fork | Pinned source commit | Workflow role |
 |-----------------|-----------------|----------------------------|------------------------|----------------------|---------------|
 | `yubi-OS/arm-trusted-firmware` | `ARM-software/arm-trusted-firmware` | `v2.15.0` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | TF-A component validation and firmware assembly. |
-| `yubi-OS/bcvk` | `bootc-dev/bcvk` | `v0.21.0 (fork release v0.18.0-yubios.1)` | `3292e7a9836a3bd5f04e5912e846d1198c6c9b25` | `bbd00ad7dfc031c4046d00b2f3c71ff4d48eb714` | `yubios` branch: release plus yubiOS swtpm/swu2f support (former pin), native-to-disk installer (PR #1), YubiKey USB passthrough for ephemeral VMs (PR #2), `--extra-qemu-arg` CLI option (PR #8, retires ci_test-vgpu-vm.yml in-run patch), and ephemeral SSH/vsock concurrent poll fix; merged together via direct merge commits. Component validation and VM harness. |
+| `yubi-OS/bcvk` | `bootc-dev/bcvk` | `v0.21.0` | `3292e7a9836a3bd5f04e5912e846d1198c6c9b25` | `bbd00ad7dfc031c4046d00b2f3c71ff4d48eb714` | `yubios` branch: release plus yubiOS swtpm/swu2f support (former pin), native-to-disk installer (PR #1), YubiKey USB passthrough for ephemeral VMs (PR #2), `--extra-qemu-arg` CLI option (PR #8, retires ci_test-vgpu-vm.yml in-run patch), and ephemeral SSH/vsock concurrent poll fix; merged together via direct merge commits. Component validation and VM harness. |
 | `yubi-OS/edk2` | `tianocore/edk2` | `edk2-stable202602` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | Newest stable EDK2 release compatible with the StandaloneMM pre-removal platform snapshot; component validation and firmware build. |
 | `yubi-OS/edk2-platforms` | `tianocore/edk2-platforms` | `20260316-before-platform-removals` | `cc384840c440415a091623a7658112fedc416094` | `cc384840c440415a091623a7658112fedc416094` | StandaloneMM platform build compatibility snapshot. |
-| `yubi-OS/mkosi` | `systemd/mkosi` | `v26` | `84af20892b61c8e177e391f997ded8b4cb5514f2` | `25c40d44732f2aed0d0c81eedb0ce57d57c79068` | Release plus yubiOS profile; component validation, summary, and installer build. |
+| `yubi-OS/mkosi` | `systemd/mkosi` | `v27.1` | `ecf7f5702bb2052b7a69cab3fe7d37bc3b9ad77b` | `25c40d44732f2aed0d0c81eedb0ce57d57c79068` | Release plus yubiOS profile; component validation, summary, and installer build. |
 | `yubi-OS/ms-tpm-20-ref` | `microsoft/ms-tpm-20-ref` | `v1.83r1` | `98b60a44aba79b15fcce1c0d1e46cf5918400f6a` | `98b60a44aba79b15fcce1c0d1e46cf5918400f6a` | TPM reference validation and fTPM firmware build. |
 | `yubi-OS/optee_ftpm` | `OP-TEE/optee_ftpm` | `4.10.0` | `a09269b15de635e1816fe832e26adfbfb44c5455` | `d1cf4a04cb0ba8974051816623e039a1206f7cca` | Release plus yubiOS volatile NV support; component validation and TA build. |
 | `yubi-OS/optee_os` | `OP-TEE/optee_os` | `4.10.0` | `753afbbee1682f5d16fd30e87b31058a4fd4f4b8` | `440b10c3f9b1c8501f2550e282ae071bb5424972` | Release plus yubiOS volatile StMM storage; component validation, TA dev kit, and BL32 build. |
-| `yubi-OS/u-boot` | `u-boot/u-boot` | `v2026.07` | `ece349ade2973e220f524ce59e59711cc919263f` | `ece349ade2973e220f524ce59e59711cc919263f` | U-Boot component validation and firmware BL33 build. |
+| `yubi-OS/u-boot` | `u-boot/u-boot` | `v2026.10` | `5508406582f6f7120dce0c4b3059819a41788db2` | `5508406582f6f7120dce0c4b3059819a41788db2` | U-Boot component validation and firmware BL33 build. |
 
 ## External GitHub Source Refs
 
