@@ -77,11 +77,11 @@ jobs:
       - name: Checkout yubiOS for fork-ref updates
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.WORKFLOW }}
 
       - name: Fetch release tags, verify fork objects, and update pins
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.WORKFLOW }}
         run: |
           set -euo pipefail
 
@@ -281,7 +281,7 @@ jobs:
     steps:
       - name: Report current state to ci.yml
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.WORKFLOW }}
           REPO: ${{ github.repository }}
           WORKFLOW_NAME: ${{ github.workflow }}
           REF: ${{ inputs.ci_chain_ref != '' && inputs.ci_chain_ref || github.ref_name }}
