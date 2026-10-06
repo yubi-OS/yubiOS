@@ -1,0 +1,96 @@
+name: docker-purge
+
+# Purges ALL image tags from the Docker Hub namespace CI publishes to
+# (docker.io/0mniteck42/*) so a relaunch starts from an empty registry
+# history. SAFETY: the default mode is `report` — a dry-run that only
+# lists repos + tags. Actual deletion requires an explicit dispatch with
+# mode=purge, so an accidental group/cron fire can never delete images.
+# Member of the ci.yml `audits` group (dispatch reachability); it is
+# intentionally NOT in the `all` group.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'report = dry-run listing only; purge = DELETE every tag in every repo'
+        type: choice
+        required: true
+        default: 'report'
+        options:
+        - report
+        - purge
+      namespace:
+        description: 'Docker Hub namespace to operate on'
+        type: string
+        required: false
+        default: '0mniteck42'
+
+permissions:
+  contents: read
+
+jobs:
+  purge:
+    name: Purge Docker Hub image history
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Report or purge Docker Hub tags
+        env:
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER }}
+          MODE: ${{ github.event.inputs.mode }}
+          NAMESPACE: ${{ github.event.inputs.namespace }}
+        run: |
+          set -euo pipefail
+          JWT="$(curl -sf -H 'Content-Type: application/json' \
+            -d "{\"username\":\"0mniteck42\",\"password\":\"${DOCKERHUB_PASSWORD}\"}" \
+            https://hub.docker.com/v2/users/login | jq -r .token)"
+          if [ -z "$JWT" ] || [ "$JWT" = "null" ]; then
+            echo "::error::Docker Hub login failed for 0mniteck42"
+            exit 1
+          fi
+          AUTH="Authorization: Bearer ${JWT}"
+          REPOS=""
+          URL="https://hub.docker.com/v2/repositories/${NAMESPACE}/?page_size=100"
+          while [ -n "$URL" ]; do
+            PAGE="$(curl -sf -H "$AUTH" "$URL")"
+            REPOS="$REPOS $(echo "$PAGE" | jq -r '.results[].name' | tr '\n' ' ')"
+            URL="$(echo "$PAGE" | jq -r '.next // empty')"
+          done
+          REPOS="$(echo "$REPOS" | xargs)"
+          echo "namespace=${NAMESPACE} mode=${MODE} repos: ${REPOS}"
+          SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/stdout}"
+          {
+            echo "## Docker Hub ${MODE} — namespace \`${NAMESPACE}\`"
+            echo
+            echo "| repo | tags found | deleted |"
+            echo "|---|---|---|"
+          } >> "$SUMMARY"
+          TOTAL_DELETED=0
+          for REPO in $REPOS; do
+            TAGS=""
+            URL="https://hub.docker.com/v2/repositories/${NAMESPACE}/${REPO}/tags?page_size=100"
+            while [ -n "$URL" ]; do
+              PAGE="$(curl -sf -H "$AUTH" "$URL")"
+              TAGS="$TAGS $(echo "$PAGE" | jq -r '.results[].name' | tr '\n' ' ')"
+              URL="$(echo "$PAGE" | jq -r '.next // empty')"
+            done
+            TAGS="$(echo "$TAGS" | xargs)"
+            COUNT=0; [ -n "$TAGS" ] && COUNT=$(echo "$TAGS" | wc -w)
+            DELETED=0
+            if [ "$MODE" = "purge" ]; then
+              for TAG in $TAGS; do
+                if curl -sf -X DELETE -H "$AUTH" \
+                  "https://hub.docker.com/v2/repositories/${NAMESPACE}/${REPO}/tags/${TAG}"; then
+                  DELETED=$((DELETED + 1))
+                else
+                  echo "::warning::failed to delete ${NAMESPACE}/${REPO}:${TAG}"
+                fi
+              done
+            fi
+            TOTAL_DELETED=$((TOTAL_DELETED + DELETED))
+            echo "| ${REPO} | ${COUNT} | ${DELETED} |" >> "$SUMMARY"
+          done
+          {
+            echo
+            echo "Total deleted: **${TOTAL_DELETED}**"
+          } >> "$SUMMARY"
+          echo "done mode=${MODE} repos=$(echo $REPOS | wc -w) tags_deleted=${TOTAL_DELETED}"
