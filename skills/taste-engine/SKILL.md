@@ -79,6 +79,8 @@ Deploy-lesson-class findings, stated as rules:
 
 Real-data record: Norcia 2021 Fig 2b's 8 in-situ panels across the 1D→2D transition read D 0.98→1.37 (single-trial noise, extent-confounded); the Trypogeorgos Zenodo data is 1D profiles only (no threshold signature in D; strips 1.24–1.50); the r² low_confidence gate fired at half-res on real data exactly as designed; live-route parity max Δ 4.9e-5. Canonical record: `refs/sierpinski-supersolid-connection-2026-10-06.md`.
 
+v3 matched-extent control (2026-10-06): jittered lattice 1.2609 vs lattice 1.2636 — the tri/shuffle gap was array extent; D is a hierarchy/fill detector, not an order parameter (Addendum 7).
+
 ## Guidelines
 
 1. Every noul instruction carries a measured number; no free-prose classification.

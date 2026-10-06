@@ -164,6 +164,117 @@
     "intensity": "(rho/R_s)^3 * |cos(3*phi)| orthographic",
     "status": "exploratory, non-gated"
    }
+  },
+  "v3j-s42": {
+   "D": 1.2502,
+   "r2": 0.9979,
+   "comps": 19,
+   "params": {
+    "base": "tri-lattice",
+    "jitter_px": 15,
+    "min_center_sep": 40,
+    "note": "order destroyed, extent kept"
+   }
+  },
+  "v3j-s1337": {
+   "D": 1.2815,
+   "r2": 0.9991,
+   "comps": 19,
+   "params": {
+    "base": "tri-lattice",
+    "jitter_px": 15,
+    "min_center_sep": 40,
+    "note": "order destroyed, extent kept"
+   }
+  },
+  "v3j-s2026": {
+   "D": 1.2946,
+   "r2": 0.999,
+   "comps": 19,
+   "params": {
+    "base": "tri-lattice",
+    "jitter_px": 15,
+    "min_center_sep": 40,
+    "note": "order destroyed, extent kept"
+   }
+  },
+  "v3j-s7": {
+   "D": 1.2309,
+   "r2": 0.9967,
+   "comps": 19,
+   "params": {
+    "base": "tri-lattice",
+    "jitter_px": 15,
+    "min_center_sep": 40,
+    "note": "order destroyed, extent kept"
+   }
+  },
+  "v3j-s99": {
+   "D": 1.2472,
+   "r2": 0.9969,
+   "comps": 19,
+   "params": {
+    "base": "tri-lattice",
+    "jitter_px": 15,
+    "min_center_sep": 40,
+    "note": "order destroyed, extent kept"
+   }
+  },
+  "v3rsa-s42": {
+   "D": 1.2558,
+   "comps": 19,
+   "params": {
+    "min_center_sep": 40,
+    "region": "tri-center-bbox",
+    "feasible": true,
+    "attempts_range": "155-30132 (seed-dependent, near RSA jamming)"
+   }
+  },
+  "v3rsa-s1337": {
+   "D": 1.2554,
+   "comps": 19,
+   "params": {
+    "min_center_sep": 40,
+    "region": "tri-center-bbox",
+    "feasible": true,
+    "attempts_range": "155-30132 (seed-dependent, near RSA jamming)"
+   }
+  },
+  "v3rsa-s2026": {
+   "D": 1.2903,
+   "comps": 19,
+   "params": {
+    "min_center_sep": 40,
+    "region": "tri-center-bbox",
+    "feasible": true,
+    "attempts_range": "155-30132 (seed-dependent, near RSA jamming)"
+   }
+  },
+  "v3rsa-s7": {
+   "D": 1.2561,
+   "comps": 19,
+   "params": {
+    "min_center_sep": 40,
+    "region": "tri-center-bbox",
+    "feasible": true,
+    "attempts_range": "155-30132 (seed-dependent, near RSA jamming)"
+   }
+  },
+  "v3rsa-s99": {
+   "D": 1.2648,
+   "comps": 19,
+   "params": {
+    "min_center_sep": 40,
+    "region": "tri-center-bbox",
+    "feasible": true,
+    "attempts_range": "155-30132 (seed-dependent, near RSA jamming)"
+   }
   }
+ },
+ "extent_invariance": {
+  "mean_v3j_D": 1.2609,
+  "tri_D": 1.2636,
+  "tol": 0.01,
+  "verdict": "extent-driven (Addendum 7): the v2 tri-vs-shuffle gap was array extent, not order"
  }
 }

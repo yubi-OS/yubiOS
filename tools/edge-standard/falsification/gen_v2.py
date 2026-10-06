@@ -135,6 +135,50 @@ def gen_pumpkin_ring(size):
 
 # --------------------------------------------------------------- selftest --
 
+
+# ---- v3 matched-extent control generators (Addendum 7, 2026-10-06) --------
+# Pre-registered verdict: the v2 tri-vs-shuffle gap was EXTENT, not order.
+# These are regression anchors for the instrument's extent-invariance: destroying
+# the lattice's order at matched extent must NOT move D.
+
+def gen_v3_jitter(size, seed, jit=15):
+    """Tri lattice positions with per-droplet uniform jitter +/-jit px, placed
+    sequentially with per-droplet rejection at min center sep 40 (v2's constraint).
+    Destroys translational order; keeps N, element size, extent, density."""
+    base = gen_tri(size)
+    r_tri = base[0][2]
+    rng = random.Random(seed)
+    placed = []
+    for bx, by in [(x, y) for x, y, _ in base]:
+        ok = False
+        for _t in range(200):
+            jx = bx + rng.randint(-jit, jit)
+            jy = by + rng.randint(-jit, jit)
+            if all((jx - px) ** 2 + (jy - py) ** 2 >= 40 ** 2 for px, py in placed):
+                placed.append((jx, jy))
+                ok = True
+                break
+        if not ok:
+            placed.append((bx, by))
+    return [(x, y, r_tri) for x, y in placed]
+
+def gen_v3_rsa(size, seed, budget=200000):
+    """Uniform RSA in the tri center bbox, min center sep 40. Feasibility at this
+    density is itself an order datum (the lattice achieves deterministically what
+    random placement only achieves slowly)."""
+    lo_x, hi_x = size * 152 // 512, size * 360 // 512
+    lo_y, hi_y = size * 166 // 512, size * 346 // 512
+    rng = random.Random(seed)
+    pts = []
+    attempts = 0
+    while len(pts) < 19 and attempts < budget:
+        attempts += 1
+        x, y = rng.randint(lo_x, hi_x), rng.randint(lo_y, hi_y)
+        if all((x - px) ** 2 + (y - py) ** 2 >= 40 ** 2 for px, py in pts):
+            pts.append((x, y))
+    return [(x, y, gen_tri(size)[0][2]) for x, y in pts], attempts
+
+
 def _measure(gray):
     """Run the full edge-standard-v1 pipeline + box-counting measure."""
     st = es.standardize(gray, SIZE, SIZE)
@@ -240,6 +284,37 @@ def _run_selftest():
           "D=%.4f (want %.4f) comps=%d thr=%d cov=%.4f"
           % (m["D"], a["D"], st["meta"]["n_components_traced"],
              st["meta"]["chosen_threshold"], st["meta"]["achieved_coverage"]))
+
+    # --- v3 matched-extent control (Addendum 7: order-vs-extent verdict) ------
+    # Extent-invariance regression anchor: destroying the lattice's order at
+    # matched extent must NOT move D (measured mean 1.2609 vs tri 1.2636).
+    v3j_ds = []
+    for seed in SEEDS:
+        st, m = _measure(render_disks(SIZE, gen_v3_jitter(SIZE, seed)))
+        a = anchors["classes"]["v3j-s%d" % seed]
+        ok = (abs(m["D"] - a["D"]) <= D_TOL
+              and st["meta"]["n_components_traced"] == a["comps"]
+              and m["counts"][0] > 0 and not st["meta"]["under_inked"])
+        check("anchor v3j-s%d" % seed, ok,
+              "D=%.4f (want %.4f) comps=%d (want %d)"
+              % (m["D"], a["D"], st["meta"]["n_components_traced"], a["comps"]))
+        v3j_ds.append(m["D"])
+    mean_v3j = sum(v3j_ds) / len(v3j_ds)
+    ei = anchors["extent_invariance"]
+    check("extent invariance (v3 verdict)",
+          abs(mean_v3j - ei["tri_D"]) <= ei["tol"],
+          "mean v3j D=%.4f vs tri %.4f (tol %.3f) -> %s"
+          % (mean_v3j, ei["tri_D"], ei["tol"], ei["verdict"]))
+    for seed in SEEDS:
+        disks, attempts = gen_v3_rsa(SIZE, seed)
+        a = anchors["classes"]["v3rsa-s%d" % seed]
+        if len(disks) != a["comps"]:
+            check("anchor v3rsa-s%d" % seed, False,
+                  "RSA placed %d/19 after %d attempts" % (len(disks), attempts))
+            continue
+        st, m = _measure(render_disks(SIZE, disks))
+        check("anchor v3rsa-s%d" % seed, abs(m["D"] - a["D"]) <= D_TOL,
+              "D=%.4f (want %.4f) attempts=%d" % (m["D"], a["D"], attempts))
 
     print("selftest: %d/%d checks passed" % (len(checks) - fails, len(checks)))
     if fails:
