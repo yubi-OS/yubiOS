@@ -117,3 +117,21 @@ The pre-registered real-data pass ran the same night, on two public datasets.
 **Updated next actions.** (a) v3 matched-extent shuffle (synthetic control) + a matched-extent read across the Norcia panels to deconfound droplet number from dimensionality; (b) multi-trial averaged in-situ images would denoise the per-panel verdicts (Fig 2b is single-trial by design); (c) the αt trend (0.98 → 1.37) is the first real-data evidence that a morphology D moves with the structural transition — the `supersolid_order` axis design (ψ6 + slope-break s*) stays gated on a discriminating measurement on controlled real data, not on this trend alone.
 
 Artifacts: `session/supersolid/` (Data.zip + extracts, norcia/ page renders + 8 panel crops + b64, trypogeorgos-profiles.json, norcia-panels.json, norcia-live-manifest.json).
+
+## Addendum 7 (2026-10-06): v3 matched-extent control — the v2 order-gap was EXTENT, and the instrument's claim set is now precise
+
+The v3 control ran the same night with the decision rules pre-registered before any measurement (`v3-preregistration.md`: extent-driven if |mean D_v3j − 1.2636| < 0.05; order-sensitive if ≤ 1.1636).
+
+**v3-jitter (primary):** the exact tri lattice with every droplet jittered ±15 px (sequential per-droplet rejection, min center sep 40 — v2's constraint; translational order destroyed, N/d/extent/density kept). Five seeds: D 1.2309–1.2946, **mean 1.2609 vs tri 1.2636 — |Δ| 0.0027** → **EXTENT-DRIVEN**. The v2 tri-vs-shuffle gap (Δ 0.23) was array extent, not order.
+
+**v3-rsa (secondary):** uniform random sequential adsorption in the tri center bbox, min sep 40 — feasible at all five seeds (155–30,132 attempts; the density is near the RSA jamming regime and seed-dependent, which is itself an order datum: the lattice achieves deterministically what random placement only achieves slowly). D 1.2554–1.2903 — corroborates the jitter verdict exactly.
+
+**Consequence for the instrument's claim set — now precise:**
+1. D **reads hierarchy**: the Sierpinski gasket reads 1.585–1.60 while every periodic, jittered, random, and real experimental morphology measured reads ≤ 1.37. VALIDATED.
+2. D does **NOT** read order-vs-disorder at matched extent. REFUTED (this control).
+3. D **reads area-filling/compactness**: how much of the measurement window the droplet morphology occupies. The real-data αt trend (Addendum 6) survives bbox-cropping (early-class mean 1.0278 → late-class 1.3287, Δ 0.3009 ≥ 0.10 — trend SURVIVES the pre-registered rule) but is reinterpreted through v3: the 1D chain fills less of the window than the 2D zig-zag. Real morphology signal, not an order parameter.
+4. The `supersolid_order` axis idea is therefore REFUTED as designed — the honest instrument label is a hierarchy/fill detector, not an order parameter. The Sierpinski-gasket droplet crystal proposal is UNCHANGED and strengthened: it remains the only measured-or-proposed configuration whose certification signature is D ≈ 1.585.
+
+The falsification corpus did exactly its job: it caught the extent confound before any real-data overclaim was written into the record.
+
+Artifacts: `session/supersolid/v3-preregistration.md`, `v3-results.json` (per-seed D, slopes, extents, retry/attempt counts, bbox-crop table for tri/shuffle-v2/gasket + all 8 Norcia panels).
