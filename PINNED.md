@@ -87,9 +87,9 @@ Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chai
 | Image | Pinned Digest | Notes |
 |-------|---------------|-------|
 | `docker.io/moby/buildkit:v0.31.2` (multi-arch INDEX) | `sha256:2f5adac4ecd194d9f8c10b7b5d7bceb5186853db1b26e5abd3a657af0b7e26ec` | BuildKit daemon used by every `docker-container` Buildx builder. Buildx 0.35.0 is only the client and does not pin this daemon implicitly. |
-| `dhi.io/debian-base` (multi-arch INDEX) | `sha256:4440cf16b142316744a7fd1c5070eb23df54c7c335d8684c8d72864f0f3eb30e` | **Canonical for workflows + Containerfile `FROM` where DHI is used.** OCI image index for `trixie-debian13-dev`; auto-resolves per runner arch. |
-| child `linux/amd64` | `sha256:503cd6ca90125a687c0974938d54f5664dc64f360ca4a774a2e126d366ab16bb` | Resolved automatically; do not pin directly unless an amd64-only job requires it. |
-| child `linux/arm64` | `sha256:4ba9e9aa5a847950064c1fcc4dea2a0147147a0526c29e1164d9d52701c7fb42` | Resolved automatically. |
+| `dhi.io/debian-base` (multi-arch INDEX) | `sha256:61dc022a1908439c478ed4b00e883fe8a7a03540fac23a8aed61352e28e6ae07` | **Canonical for workflows + Containerfile `FROM` where DHI is used.** OCI image index for `trixie-debian13-dev`; auto-resolves per runner arch. |
+| child `linux/amd64` | `sha256:b9aec4e96f5b945ff8120cf4618abee42216d194329b5c82b25b32bec0feb674` | Resolved automatically; do not pin directly unless an amd64-only job requires it. |
+| child `linux/arm64` | `sha256:1d721188629c91f0344746097950c1d3b3844c0eb2e614b382b19ab5fca6fe5c` | Resolved automatically. |
 | `quay.io/fedora/fedora-bootc:45` (multi-arch INDEX) | `sha256:d3a7b4a7f60d06868d5d1193204872e711f5271ff54add6a82dcec62a68268aa` | **Containerfile `FROM` base.** OCI image index; auto-resolves per arch. Re-resolved 2026-10-06 via MASTER GIT SU (fetch-fedora-bootc-manifest blocked on dead org WORKFLOW PAT). Refresh with `fetch-fedora-bootc-manifest`. |
 | `ghcr.io/actions/jekyll-build-pages` | `sha256:6791ebfd912185ed59bfb5fb102664fa872496b79f87ff8b9cfba292a7345041` | Pages build image. |
 | `ghcr.io/hadolint/hadolint:v2.14.0-debian` | `sha256:158cd0184dcaa18bd8ec20b61f4c1cabdf8b32a592d062f57bdcb8e4c1d312e2` | Hadolint image. |
