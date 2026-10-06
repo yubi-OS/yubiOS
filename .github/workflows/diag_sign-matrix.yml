@@ -116,5 +116,5 @@ jobs:
             -e VARIANT=${{ matrix.variant }} \
             -v "$PWD/pki:/pki:ro" \
             -v "$PWD/sign-test.sh:/sign-test.sh:ro" \
-            0mniteck/yubios@sha256:976b0b39e6139661c57a1cf732e30ad36aa22c7d5a39fa6beef10a6139847be9 \
+            0mniteck/yubios:dev \
             bash /sign-test.sh
