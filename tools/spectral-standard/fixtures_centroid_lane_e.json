@@ -710590,14 +710590,14 @@
           ]
         ],
         "msd": [
-          0.75,
-          0.8125,
-          0.65625,
-          0.78125,
-          0.640625,
-          0.640625,
-          0.75,
-          0.734375
+          76.40625,
+          77.328125,
+          67.1875,
+          74.5234375,
+          63.703125,
+          62.375,
+          74.6796875,
+          72.3046875
         ],
         "p_return": [
           0.25,
@@ -710611,11 +710611,12 @@
         ],
         "alpha_msd": null,
         "d_w": null,
-        "d_w_r2": 0.06939691904462589,
+        "d_w_r2": 0.110940392,
         "d_s": null,
         "d_s_r2": 0.09423877328186828,
-        "msd_low_confidence": true,
-        "return_low_confidence": true
+        "return_low_confidence": true,
+        "msd_metric": "euclidean",
+        "msd_low_confidence": true
       }
     },
     {
@@ -718129,5 +718130,13 @@
         ]
       }
     }
-  ]
+  ],
+  "regenerated": {
+    "note": "AM-9 / F1b (2026-10-07): fixture regenerated under the EUCLIDEAN msd metric post-P4. The mask_three_blobs_walk expected block was captured pre-P4 under the HOP metric (msd ~0.6-0.8 hop^2, alpha_msd null / msd_low_confidence true); the P4 walker (walkCentroidMode now attaches centroid coords to randomWalks) measures EUCLIDEAN px^2 (msd ~62-77), which also un-degenerates the msd fit. All walkDimensions-derived fields (msd, alpha_msd, d_w, d_w_r2, msd_low_confidence) regenerated from the current walker; walker0_trace / checkpoint_matrix / p_return / d_s are metric-independent and untouched. Points-source walk fixtures are unaffected: the parity suite delegates them through randomWalks({adj}) without coords, which remains the hop metric by design. Hop-metric fixture was stale; see falsification/CROSSPARITY-centroid-2026-10-06.md.",
+    "regenerated_at": "2026-10-07",
+    "fixtures_updated": [
+      "mask_three_blobs_walk"
+    ],
+    "tool": "regen_f1b.mjs (runs the repo-current walker on the fixture mask)"
+  }
 }
