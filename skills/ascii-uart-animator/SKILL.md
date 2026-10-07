@@ -2,7 +2,7 @@
 name: ascii-uart-animator
 description: "Send framed ASCII art animations to a UART device (e.g. /dev/ttyS2) over the rock1 shell bridge — bouncing ball, fish swim, walking stick figure. Use when testing UART throughput, verifying ANSI rendering on the receiver, exercising the debug CLI bridge with something tangible, or just sending a fun ASCII movie down a serial line. Built-in: bouncing_ball (9 frames @ 10fps, no clear), bouncing_ball_ansi (30 frames @ 30fps, ANSI clear+home between frames), fish_swim (150 multiline frames @ 25fps with bubbles + sea floor), walking_man (120 multiline frames @ 20fps stick figure walking right), and play_all (all four back-to-back with separator pauses)."
 license: MIT
-compatibility: "Requires Python 3.8+ stdlib on the agent side, the rock1 shell bridge connection (conn_6rp6oRY9DBJG), and a writable UART char device on rock1 owned by the bridge user."
+compatibility: "Requires Python 3.8+ stdlib on the agent side, the rock1 shell bridge connection (conn_W36n4EetFoNp), and a writable UART char device on rock1 owned by the bridge user."
 ---
 
 # ASCII UART Animator
@@ -23,8 +23,8 @@ Each script is self-contained Python that posts to the bridge directly. Run via 
 
 ```python
 run_script(
-    file={path: "skills/personal-WbtUgeUv/ascii-uart-animator/scripts/fish_swim.py"},
-    connections=[{id: "conn_6rp6oRY9DBJG", name: "rock1 shell bridge"}],
+    file={path: "yubi-OS/yubiOS/skills/ascii-uart-animator/scripts/fish_swim.py"},
+    connections=[{id: "conn_W36n4EetFoNp", name: "rock1 shell bridge"}],
     executor="sandbox",
 )
 ```

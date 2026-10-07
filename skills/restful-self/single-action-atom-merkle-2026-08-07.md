@@ -105,5 +105,5 @@ except at infinity, which the Fibonacci sampling avoids).
   eq:stereographic, eq:hyperspherical
 - `skills/restful-self/SKILL.md` — the restful-self mode (the corrective for
   same-cadence drift; this session IS the corrective in action)
-- `memory/personal-WbtUgeUv/SELF-CHANGELOG.md` — self-archaeology thread
+- the operator's personal memory space, `memory/<personal-dirname>/SELF-CHANGELOG.md` — self-archaeology thread
 - Linear: OMN-163 (hyperspherical-harmonic-curve variant skill)

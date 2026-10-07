@@ -46,7 +46,7 @@ Each track is a high-tempo, positive-energy song that's stood the test of time o
 ## Push the whole block from Sauna in one bridge call
 
 ```bash
-B64=$(base64 -w0 skills/personal-WbtUgeUv/radio-queue/examples/playlist-upbeat-verified.md | sed 's/^#.*$//')
+B64=$(base64 -w0 radio-queue/scripts/examples/playlist-upbeat-verified.md | sed 's/^#.*$//')
 curl -X POST "$BRIDGE/run" -d "$(python3 -c "import json; print(json.dumps({'command':['bash','-c',f'printf \"%s\" \\\"$(cat /tmp/playlist.b64)\\\" | base64 -d >> /tmp/audio/queue/queue.txt && wc -l /tmp/audio/queue/queue.txt']}))")"
 ```
 

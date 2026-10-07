@@ -1,6 +1,6 @@
 # SPEC-EVOLUTION — Self-Evolution layer on the jev orchestrator (v1)
 
-Worker: `steady-orbit` (steady-orbit.systems-a.workers.dev). Source bundle parts: `session/evolution/parts/`.
+Worker: `steady-orbit` (steady-orbit.systems-a.workers.dev). Source bundle parts: `session/evolution/parts/` (session artifact, not repo-truth).
 
 ## Purpose
 

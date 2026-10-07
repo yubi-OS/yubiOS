@@ -206,7 +206,7 @@ homectl add-signing-key /path/to/remote.public --key-name=remote.public
 - https://www.man7.org/linux/man-pages/man5/homed.conf.5.html
 - https://www.man7.org/linux/man-pages/man8/pam_systemd_home.8.html
 - https://systemd.io/HOME_DIRECTORY
-- Deep research doc: documents/knowledge/deep-research/systemd-homed.md
+- Deep research doc: documents/knowledge/deep-research/systemd-homed.md (session artifact, not repo-truth; the minted corpus lives at `yubi-OS/knowledge/knowledge/systemd-homed-reference/`)
 
 ## Note on least privilege coverage (curve-guided-rsi cycle-3 gap-fix)
 

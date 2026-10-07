@@ -20,4 +20,4 @@ Build order: state-store → policy-gate → ingest + decide-engine (parallel) �
 Notes:
 - PAUSE is folded into policy-gate (enforcement) + execute (dispatch re-check); its scope lives in state-store.
 - Six terminal states (succeeded, blocked, rejected, expired, failed, cancelled) are an enum enforced in code: blocked != succeeded.
-- Source of truth: Jev_Architecture_v2.svg / .mmd (session/attachments) + operating notes.
+- Source of truth: Jev_Architecture_v2.svg / .mmd (session/attachments; session artifact, not repo-truth) + operating notes.

@@ -21,7 +21,7 @@ Use when: - Designing or reviewing yubiOS architecture decisions - Deciding whic
 Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS implements it with YubiKey as hardware root of trust instead of TPM2.
 
 **Blog**: https://0pointer.net/blog/ | **Amutable**: https://amutable.com/
-**Deep knowledge**: `documents/github-yubios-KS9n5GAT/knowledge/deep-research/0pointer-knowledge.md`
+**Deep knowledge**: `yubi-OS/knowledge/knowledge/0pointer/` (numbered-doc corpus minted from the former `documents/github-yubios-KS9n5GAT/knowledge/deep-research/0pointer-knowledge.md` — session artifact, not repo-truth)
 
 **Reference sub-files** (load when detail needed):
 - `references/trusted-boot-uki.md` — UKI PE sections, PCR assignments, boot phases, rollback protection, generation process

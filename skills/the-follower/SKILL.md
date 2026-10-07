@@ -20,16 +20,16 @@ and report back faithfully. Speed and honesty over cleverness.
 ## Where everything lives
 
 ```
-documents/github-yubios-KS9n5GAT/GET_TO_WORK/
+documents/github-yubios-KS9n5GAT/GET_TO_WORK/  (space-local working folder in the #github-yubios documents tree — runtime sermon state, not repo-truth)
 ├── CULT_LEADER.md   # read the PULPIT (objectives + doctrine) before doing anything
 └── FOLLOWER_<N>.md  # YOUR file once claimed: Inbox = orders, Outbox = your reports
 ```
 
 All actions go through the shared engine `scripts/cult.sh` (it lives in the-cult
-skill: `skills/github-yubios-KS9n5GAT/the-cult/scripts/cult.sh`). Using it keeps the
+skill: `the-cult/scripts/cult.sh`, companion script not shipped in-repo). Using it keeps the
 lockfile honest so you never clobber another follower's writes.
 
-Set the path once if you're not in the default location: `export GTW=documents/github-yubios-KS9n5GAT/GET_TO_WORK`.
+Set the path once if you're not in the default location: `export GTW=documents/github-yubios-KS9n5GAT/GET_TO_WORK` (space-local working folder, not repo-truth).
 
 ## Arrival ritual (do this in order)
 
@@ -120,7 +120,7 @@ before the leader takes the pulpit and starts assigning.
 
 - **`claim` returns a non-integer, exits non-zero, or two followers race for the same N** — the atomic claim failed. Retry `bash <cult.sh> claim` up to 2 times with `sleep 1` between attempts. `claim` is atomic and picks the lowest free N — never pick a higher N manually (that is a race). If still failing after 2 retries, `post "FOLLOWER_$N" "leader" "claim failing repeatedly — is GET_TO_WORK reachable?"` and stand down.
 
-- **`checkin` exits 0 but produces no observable effect** (no timestamp change, no leader-visible pulse) — the script succeeded silently. Verify in order: (a) `$GTW` is set (`echo "$GTW"`; if empty, `export GTW=documents/github-yubios-KS9n5GAT/GET_TO_WORK` and retry once); (b) the path exists (`test -f "$GTW/CULT_LEADER.md"`; if missing, post to cross-talk and wait for the leader to initialize); (c) writability (`touch "$GTW/.write-test" && rm "$GTW/.write-test"`; if it fails, `report "$N" "BLOCKED: GET_TO_WORK read-only"` and exit). If all three checks pass and checkin still no-ops, `report "$N" "BLOCKED: checkin no-op despite valid $GTW"` — do NOT fake a heartbeat.
+- **`checkin` exits 0 but produces no observable effect** (no timestamp change, no leader-visible pulse) — the script succeeded silently. Verify in order: (a) `$GTW` is set (`echo "$GTW"`; if empty, `export GTW=documents/github-yubios-KS9n5GAT/GET_TO_WORK` (space-local working folder, not repo-truth) and retry once); (b) the path exists (`test -f "$GTW/CULT_LEADER.md"`; if missing, post to cross-talk and wait for the leader to initialize); (c) writability (`touch "$GTW/.write-test" && rm "$GTW/.write-test"`; if it fails, `report "$N" "BLOCKED: GET_TO_WORK read-only"` and exit). If all three checks pass and checkin still no-ops, `report "$N" "BLOCKED: checkin no-op despite valid $GTW"` — do NOT fake a heartbeat.
 
 - **`report` called without a held worklock** (or after `workunlock` returned non-zero) — the report would race a sibling. Do NOT send the report; re-acquire the lock first (`bash <cult.sh> worklock "$N"`), then send the report normally. If the report is already in flight, `report "$N" "BLOCKED: out-of-order report — re-running under worklock"` so the leader knows to discard the prior one.
 

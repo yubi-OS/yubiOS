@@ -3,7 +3,7 @@
 You are minting ONE knowledge corpus into the yubi-OS org repo **yubi-OS/knowledge** (public). Your corpus directory: `knowledge/<REF>/` (REF given in your task prompt). Branch: `mint/<REF>-2026-10-05`. You open ONE draft PR. You are one of 5 parallel agents: touch ONLY your own branch, never main, never another corpus dir.
 
 ## Source of truth
-Your task prompt names the SOURCE DOC file path under `session/refs-mint/refs_corpus/` (extracted from yubi-OS/yubiOS `refs/`). Read that file IN FULL first. Its topic is what the corpus is about. The doc itself is NOT copied into the corpus; it is the input you decompose.
+Your task prompt names the SOURCE DOC file path under `session/refs-mint/refs_corpus/` (a fresh working copy extracted at run time from yubi-OS/yubiOS `refs/`). Read that file IN FULL first. Its topic is what the corpus is about. The doc itself is NOT copied into the corpus; it is the input you decompose.
 
 ## Metric mapping (each clef decision uses the RIGHT metric)
 | Decision | Metric | Shape |

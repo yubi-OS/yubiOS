@@ -459,10 +459,10 @@ For each cycle-17 patch that closes a knowledge_sources OR recursion gap:
 9. **The next NSS sweep on the same file does NOT re-flag knowledge_sources or
    recursion as the top Extend gap.** If it does, the patch did not close the
    gap and the cycle-17 lens is a NO verdict.
-10. **Skill is byte-identical across 3 repos.** The new `nss-knowledge-recursion`
-    SKILL.md is pushed to `local`, `yubi-OS/agent-skills`, and `yubi-OS/yubiOS`
-    with byte-identical content_sha (verifiable via `GET .../contents/.../SKILL.md`
-    `sha` field).
+10. **Skill is byte-identical with the local space copy.** The new `nss-knowledge-recursion`
+    SKILL.md is pushed to `yubi-OS/yubiOS` (and the local space copy, regenerated
+    by generate_skill_registry.py), with byte-identical content_sha (verifiable
+    via `GET .../contents/.../SKILL.md` `sha` field).
 
 ## Changelog
 
@@ -500,8 +500,8 @@ For each cycle-17 patch that closes a knowledge_sources OR recursion gap:
   closing `---` intact; H1 immediately after frontmatter; Examples / Guidelines
   / Constraints / Anti-patterns / Red flags / Composition / Verification /
   Changelog sections all present; no dangling `references/*.md` pointers).
-  Byte-identical content_sha verified across `skills/github-yubios-KS9n5GAT/`,
-  `yubi-OS/agent-skills`, and `yubi-OS/yubiOS`.
+  Byte-identical content_sha verified across `yubi-OS/yubiOS` and the local
+  space copy (`yubi-OS/agent-skills` retired 2026-09-24; historical).
 
 ## Maintainer
 

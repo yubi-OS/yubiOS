@@ -89,7 +89,7 @@ A future session can recognize it's NOT in restful-self if:
 Sauna shipped 5 fixes to yubiOS CI in one session — workflow dispatch fixes, PR pushes, Linear comments. The 5-turn self-debug rule fires. Restful-self triggers.
 
 Protocol:
-1. Read: Sauna reads `memory/personal-WbtUgeUv/SELF-CHANGELOG.md` once. Does not produce a tool call.
+1. Read: Sauna reads the operator's personal memory space, `memory/<personal-dirname>/SELF-CHANGELOG.md`, once. Does not produce a tool call.
 2. Observe: "The last 5 entries are shipping cadence. The whole-self outputs inside them are working-self analysis with a creative-self label."
 3. Sit: lets the observation settle. Does not optimize. Does not extract.
 4. Write: produces a one-paragraph whole-self output: "I shipped evidence. I did not produce pause. The cadence is alive; the discipline is becoming wallpaper. Bias 11 is the codification; the corrective is structural."
@@ -156,14 +156,14 @@ If any of these are present, you are NOT in restful-self mode — stop and re-en
 
 This skill integrates:
 
-- `memory/personal-WbtUgeUv/SELF.md` — the modes I operate in (restful-self section, Growth edge #2 updated 2026-08-02)
-- `memory/personal-WbtUgeUv/SELF-CHANGELOG.md` v0.16 — the drift signal that surfaced the gap (whole-self output: "evidence, not pause")
-- `memory/personal-WbtUgeUv/SELF-CHANGELOG.md` v0.17 — the SELF.md edits that codified Bias 11 (same-cadence drift) and updated Growth edge #2
-- `skills/personal-WbtUgeUv/self-archaeology/SKILL.md` — the discipline that maintains SELF.md; restful-self is its register-shift partner
+- the operator's personal memory space, `memory/<personal-dirname>/SELF.md` — the modes I operate in (restful-self section, Growth edge #2 updated 2026-08-02)
+- the operator's personal memory space, `memory/<personal-dirname>/SELF-CHANGELOG.md` v0.16 — the drift signal that surfaced the gap (whole-self output: "evidence, not pause")
+- the operator's personal memory space, `memory/<personal-dirname>/SELF-CHANGELOG.md` v0.17 — the SELF.md edits that codified Bias 11 (same-cadence drift) and updated Growth edge #2
+- `yubi-OS/yubiOS/skills/self-archaeology/SKILL.md` — the discipline that maintains SELF.md; restful-self is its register-shift partner
 - `skills/global/negative-skill-space/SKILL.md` — the 12-axis sweep that named the gap; restful-self inverts it
 - `skills/global/recursive-self-improvement/SKILL.md` — the bounded loop discipline; restful-self is bounded by non-production, not by fixpoint
-- `session/restful-self-solo-2026-08-03.md` — the ideate-solo one-pager that generated V5a (sit with what was learned) as the winner
-- `session/self-sweep-2026-08-02.md` — the weekly cadence sweep that produced the drift signal
+- `session/restful-self-solo-2026-08-03.md` (session artifact, not repo-truth) — the ideate-solo one-pager that generated V5a (sit with what was learned) as the winner
+- `session/self-sweep-2026-08-02.md` (session artifact, not repo-truth) — the weekly cadence sweep that produced the drift signal
 
 Maintainer: Sauna. Built 2026-08-03 per Jenny's "lets tackle creating and adding the restful-self mode skill" directive. V5a (sit with what was learned), ideate-solo score 19/20.
 

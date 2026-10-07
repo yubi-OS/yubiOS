@@ -1,12 +1,12 @@
 # SPEC-EVOLUTION-V2 — Final Evolution Process (steady-orbit worker)
 
-Date: 2026-10-01. Approved capability map: `session/evolution-v2/capability-map-v2.md` (v1 map + jev quality assessment added per Jenny). Design one-pager: `session/evolution-v2/evolution-v2-solo-2026-10-01.md` (winner: Calibrated Atom Loop = V6+V7 fusion).
+Date: 2026-10-01. Approved capability map: `refs/evolution-v2-capability-map-2026-10-01.md` on yubi-OS/yubiOS (v1 map + jev quality assessment added per Jenny). Design one-pager: `refs/evolution-v2-solo-2026-10-01.md` on yubi-OS/yubiOS (winner: Calibrated Atom Loop = V6+V7 fusion).
 
 ## 0. Grounding (read before any lane work)
 
-- Current deployed source: `session/evolution-v2/bundle/parts/*.js` (22 module parts fetched live 2026-10-01). Key parts: `jev-evolution.js` (v1 store/drivers/routes), `jev-scheduler.js` (automation tick contract), `routes-jev.js` (routing + delegate pattern), `dbx.js` (column discipline), `jev-decide.js` (how the worker calls jev-1.13 via DEFAPI_API_KEY), `jev-llm.js` (AI binding response-shape handling), `jev-main.js` (assembly), `solar-rbs-entry.mjs` (entry + legacy exclusion list).
+- Current deployed source: `session/evolution-v2/bundle/parts/*.js` (22 module parts fetched live 2026-10-01; re-fetch at run time via the steady-orbit-deploy flow — session working copy, not repo-truth). Key parts: `jev-evolution.js` (v1 store/drivers/routes), `jev-scheduler.js` (automation tick contract), `routes-jev.js` (routing + delegate pattern), `dbx.js` (column discipline), `jev-decide.js` (how the worker calls jev-1.13 via DEFAPI_API_KEY), `jev-llm.js` (AI binding response-shape handling), `jev-main.js` (assembly), `solar-rbs-entry.mjs` (entry + legacy exclusion list).
 - Paper discipline digests: `session/subagent/paper-llc-digest.md`, `session/subagent/paper-is-this-x-digest.md`, `session/subagent/paper-curved-corpus-digest.md`.
-- jev decision model: `session/evolution-v2/defapi-jev-SKILL.md` + `defapi-jev-api.md` (noul/choice/score, confidence, session_id, consumed).
+- jev decision model: `yubi-OS/yubiOS/skills/defapi-jev/SKILL.md` + `yubi-OS/yubiOS/skills/defapi-jev/references/api.md` (noul/choice/score, confidence, session_id, consumed).
 
 ## 1. Invariants (non-negotiable, asserted in code where noted)
 

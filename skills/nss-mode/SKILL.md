@@ -247,7 +247,7 @@ Writes: lens-format JSON per file. Depends on: stdlib only.
 ## Verification
 
 ```
-python3.12 -c "import re; s=open('skills/github-yubios-KS9n5GAT/nss-mode/SKILL.md').read(); assert re.match(r'^---\n.*name: nss-mode\n.*description: .*', s, re.S); print('OK')"
+python3.12 -c "import re; s=open('yubi-OS/yubiOS/skills/nss-mode/SKILL.md').read(); assert re.match(r'^---\n.*name: nss-mode\n.*description: .*', s, re.S); print('OK')"
 ```
 
 Plus the lens output schema: lens, file, hypothesis, method, parameters,

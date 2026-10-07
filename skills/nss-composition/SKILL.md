@@ -483,14 +483,14 @@ Writes: lens-format JSON per file. Depends on: stdlib only.
 ## Verification
 
 ```
-python3.12 -c "import re; s=open('skills/github-yubios-KS9n5GAT/nss-composition/SKILL.md').read(); assert re.match(r'^---\n.*name: nss-composition\n.*description: .*', s, re.S); print('OK')"
+python3.12 -c "import re; s=open('yubi-OS/yubiOS/skills/nss-composition/SKILL.md').read(); assert re.match(r'^---\n.*name: nss-composition\n.*description: .*', s, re.S); print('OK')"
 ```
 
 Plus the lens output schema: lens, file, hypothesis, method, parameters, delta, verdict, score, caveat all present; verdict in {YES, PARTIAL, NO}; score 0-50; parameters.axis == "composition".
 
 Plus the frontmatter validation:
 ```
-python3.12 -c "import re, yaml; d=yaml.safe_load(open('skills/github-yubios-KS9n5GAT/nss-composition/SKILL.md').read().split('---',2)[1]); assert re.match(r'^[a-z0-9-]+$', d['name']); assert 1 <= len(d['description']) <= 1024; assert '<' not in d['description'] and '>' not in d['description']; print('OK')"
+python3.12 -c "import re, yaml; d=yaml.safe_load(open('yubi-OS/yubiOS/skills/nss-composition/SKILL.md').read().split('---',2)[1]); assert re.match(r'^[a-z0-9-]+$', d['name']); assert 1 <= len(d['description']) <= 1024; assert '<' not in d['description'] and '>' not in d['description']; print('OK')"
 ```
 
 ## Changelog

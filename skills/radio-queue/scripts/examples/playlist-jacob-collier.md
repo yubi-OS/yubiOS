@@ -52,7 +52,7 @@ Curator's note: this is a 6-song sample. For a longer playlist, add his Djesse V
 ## Push the whole block from Sauna in one bridge call
 
 ```bash
-B64=$(base64 -w0 skills/personal-WbtUgeUv/radio-queue/examples/playlist-jacob-collier.md | sed 's/^#.*$//')
+B64=$(base64 -w0 radio-queue/scripts/examples/playlist-jacob-collier.md | sed 's/^#.*$//')
 curl -X POST "$BRIDGE/run" -d "$(python3 -c "import json; print(json.dumps({'command':['bash','-c',f'printf \"%s\" \\\"$(cat /tmp/playlist.b64)\\\" | base64 -d >> /tmp/audio/queue/queue.txt && wc -l /tmp/audio/queue/queue.txt']}))")"
 ```
 

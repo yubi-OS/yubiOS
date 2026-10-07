@@ -21,9 +21,8 @@ deep-research hook is the cycle's intake.
 
 ## When to Use
 
-- A new Sauna session opens on either `yubi-OS/yubiOS` or
-  `yubi-OS/agent-skills` and needs the full project history (cold-start
-  problem).
+- A new Sauna session opens on `yubi-OS/yubiOS` and needs the full
+  project history (cold-start problem).
 - After a large merge batch (e.g. the 9-spec-for-every-gap cycle landed
   15:07–15:09 UTC 2026-08-04), the archive needs a refresh + an RSI
   audit pass.
@@ -52,8 +51,9 @@ deep-research hook is the cycle's intake.
   (different substrate; this skill does NOT audit the agent-being, it
   audits the repo-being).
 - Reading `refs/` documents — read them directly.
-- The `agent-skills` mirror (read-only purpose) — refresh it by
-  mirroring from yubiOS, don't run the skill against it directly.
+- The `agent-skills` mirror (repo retired 2026-09-24; historical) —
+  there is no mirror to refresh; `yubi-OS/yubiOS` is the single
+  target, don't run the skill against anything else.
 
 ## The Two Substrates
 
@@ -70,13 +70,13 @@ Four sub-corpora per target repo:
 
 The repo-history-skill treats yubiOS GitHub Issues as a separate
 sub-corpus even though Jenny's team uses Linear as the planning brain
-(per `memory/personal-WbtUgeUv/SAUNA_TOOLS.md` line ~30). GitHub
+(per the operator's personal memory space, `memory/<personal-dirname>/SAUNA_TOOLS.md`, line ~30). GitHub
 Issues surface when Jenny posts via the GitHub UI directly (rare)
 or when PRs convert to Issues (the `pull_request` key on the issue
 body marks the conversion — handle by skipping items with
 `pull_request.url` set).
 
-### Linear side (GraphQL API via `conn_pd_apn_KAhrZxw`)
+### Linear side (GraphQL API via `conn_pd_apn_Jjhzk0j`)
 
 One sub-corpus:
 
@@ -226,15 +226,14 @@ Verify the fit metrics before push:
 - Sparse-cell count: per-file isolated count or corpus-wide count
   per the chosen granularity
 
-Push the canonical artifacts:
+Run-output artifacts: the session files are captured to `session/`
+during the run and stay local; the summary is pushed:
 - `session/repo-history-archive-<repo>-<date>.json` (the cached
   archive) — local only, big file
 - `session/repo-history-fit-<repo>-<date>.json` (the metrics) —
   local only
 - `yubi-OS/yubiOS refs/repo-history-archive-<repo>-<date>.md`
-  (the human-readable summary) — pushed to both repos per the
-  standard dual-push pattern (or `agent-skills refs/` if the cycle
-  was on agent-skills data)
+  (the human-readable summary) — pushed to `yubi-OS/yubiOS`
 - Optionally a Linear status comment on the parent OMN issue
 
 ## The Refreshable Property
@@ -287,6 +286,8 @@ items for follow-up cycles).
 
 ### Local artifacts (per cycle, per repo)
 
+(Captured to `session/` during the run — session artifacts, not repo-truth.)
+
 | File | Format | Purpose |
 |---|---|---|
 | `session/repo-history-archive-<repo>-<date>.json` | JSON, ~50-200 KB | The cached corpus + 9-D coverage + (u,v) + S² point per item + d_pre per item + last_run_timestamp |
@@ -300,8 +301,8 @@ items for follow-up cycles).
 
 | File | Repo | Format |
 |---|---|---|
-| `refs/repo-history-archive-<repo>-<date>.md` | `yubi-OS/yubiOS` (or `agent-skills`) | The human-readable summary — single-page view of the corpus shape |
-| `skills/repo-history-skill/SKILL.md` | both | The skill itself (this file) |
+| `refs/repo-history-archive-<repo>-<date>.md` | `yubi-OS/yubiOS` | The human-readable summary — single-page view of the corpus shape |
+| `skills/repo-history-skill/SKILL.md` | `yubi-OS/yubiOS` | The skill itself (this file) |
 | `refs/repo-history-skill-2026-08-07.md` | `yubi-OS/yubiOS` | The conceptualization doc (the deep-research synthesis) |
 
 ### Linear artifact (per cycle, per project)
@@ -554,7 +555,7 @@ After applying `repo-history-skill`:
 - [ ] If RSI cycle: bounded `recursive-self-improvement` loop
   applied with cycle cap ≤ 3 (or explicit user override)
 - [ ] If push: single bash call per /tmp wipe rule (PROJECT_RULES.md)
-- [ ] If push: both `yubi-OS/agent-skills` AND `yubi-OS/yubiOS`
+- [ ] If push: `yubi-OS/yubiOS`
   received the skill (or the conceptualization doc if applicable)
 - [ ] No fabricated SHA strings, PR numbers, or Linear IDs (per
   PROJECT_RULES.md "PR diff verification — always read the patch,
@@ -716,7 +717,7 @@ gaps; re-fit; re-map; fixpoint rule.
 
 **Pending fit**: refresh the archive on the live repos (current
 state: `yubi-OS/yubiOS` head `f355223`, `yubi-OS/agent-skills` head
-`1cd9412c`); compute the 9-D basis; run the NSS re-map; refit.
+`1cd9412c` (repo retired 2026-09-24; historical)); compute the 9-D basis; run the NSS re-map; refit.
 
 **Expected**: 5 of 9 primitives survive the near-constant filter;
 PC1+PC2 ≥ 0.40; sparse-cell count ∈ [5, 20] on the 37-item corpus.
@@ -821,7 +822,7 @@ PC1+PC2 ≥ 0.40; sparse-cell count ∈ [5, 20] on the 37-item corpus.
 1. **(high-cost)** Semantic-similarity join (PR title ↔ Linear title via embedding) → would rescue `has_linear_ref` and `has_cross_corpus_link` on PR-only sub-corpus.
 2. **(medium-cost)** Add `## Key Assumptions` section to SKILL.md body — documents yubOS PR-body workflow-convention, Linear `creator` (NOT `createdBy`) field name, issues endpoint requires since-filter for real issues.
 3. **(medium-cost)** Replace spread-preserving Möbius loss with regularized loss that penalizes cross-ratio deviation directly → would un-freeze φ_θ.
-4. **(low-cost)** Pull issues for agent-skills too (currently 0 real issues) — thin corpus on mirror, worth documenting as a fact.
+4. **(low-cost)** Pull issues for agent-skills too (currently 0 real issues) — thin corpus on mirror, worth documenting as a fact (repo retired 2026-09-24; historical).
 
 
 ## Changelog
@@ -885,12 +886,12 @@ PC1+PC2 ≥ 0.40; sparse-cell count ∈ [5, 20] on the 37-item corpus.
   re-map via fresh-context subagent; pick the top-1 gap; hypothesis-
   driven edit; re-fit; apply fixpoint rule.
 
-- 2026-08-07 cycle 2 (the first bounded-RSI cycle): Hypothesis "Apply 3 detection-pattern fixes from cycle-1 NSS re-map (broaden `has_linear_ref` / `has_cross_corpus_link` / `has_temporal_anchor` regexes) and verify the cycle-2 corpus exhibits measurable lift in primitive survival + PC1+PC2 quality gate." Edit: broadened the 3 regexes in `## Detection Patterns` (accept `OMN[\-_]\d+` with both separators; URL-decoded `%2F` + query-string for linear.app; cross-line `.*?` + `re.DOTALL` for cross-corpus; ISO-8601 with or without T/Z + bare `YYYY-MM-DD`); also tightened `has_state_progression` (was over-matching in cycle-1 — now requires moving states only). Cycle-2 fit ran in `session/repo-history-cycle-2-2026-08-07/scripts/cycle2-fit.py`; corpus grew 7.3× (34 → 248 items: PRs 34 + Commits 60 + Releases 16 + Linear OMN 138); primitive survival grew 2.3× (3 → 7 of 9); PC1+PC2 = 0.7437 ≥ 0.40 PASS (up from 0.7311); ‖p‖ = 1.0 ± 1e-6 PASS; sparse-cell count = 3/248 PASS; Möbius frozen at identity-init (L-BFGS-B refinement collapsed under unconstrained centroid-loss — per red-flag rule). **Cycle-2 fix impact (PR-only, N=34)**: 3 of 3 cycle-1 regex fixes WORKED (`has_purpose` +44.1%, `has_sha` +88.2%, `has_temporal_anchor` +91.2%); 2 of 3 DID NOT WORK on PR-only (`has_linear_ref`, `has_cross_corpus_link` — root cause is yubOS workflow convention: PR bodies don't carry OMN-### inline, only commit SHAs + PR numbers); 1 cycle-1 over-match flipped (`has_state_progression` 100% → 29.4% — honest correction). **RSI fixpoint rule**: condition (1) ✓ PASS (5 gaps surfaced but MEASURED, not invented), (2) ✓ PASS (3 of 3 cycle-1 regex fixes verified), (3) ✓ PASS. Cycle 2 ships. Cycle 3 candidates (carryover, ranked by edit cost): (low) broaden Linear GraphQL query to include `createdBy { name }` → rescues `has_author` on Linear items; (low) use `?since=2024-01-01` for issues endpoint → captures real (non-PR) yubOS issues; (medium) replace centroid-loss in Möbius refinement with spread-preserving loss → un-freezes φ_θ with marginal expected gain (+0.0086 R² per hyperspherical-harmonic-curve cycle 3); (high) add semantic-similarity join (PR title ↔ Linear title via embedding) → rescues `has_linear_ref` and `has_cross_corpus_link` on PR-only sub-corpus. Cycle 3 is the final allowed cycle under the 3-cycle RSI cap; user may override for further iterations.
+- 2026-08-07 cycle 2 (the first bounded-RSI cycle): Hypothesis "Apply 3 detection-pattern fixes from cycle-1 NSS re-map (broaden `has_linear_ref` / `has_cross_corpus_link` / `has_temporal_anchor` regexes) and verify the cycle-2 corpus exhibits measurable lift in primitive survival + PC1+PC2 quality gate." Edit: broadened the 3 regexes in `## Detection Patterns` (accept `OMN[\-_]\d+` with both separators; URL-decoded `%2F` + query-string for linear.app; cross-line `.*?` + `re.DOTALL` for cross-corpus; ISO-8601 with or without T/Z + bare `YYYY-MM-DD`); also tightened `has_state_progression` (was over-matching in cycle-1 — now requires moving states only). Cycle-2 fit ran in `session/repo-history-cycle-2-2026-08-07/scripts/cycle2-fit.py` (session artifact, not repo-truth); corpus grew 7.3× (34 → 248 items: PRs 34 + Commits 60 + Releases 16 + Linear OMN 138); primitive survival grew 2.3× (3 → 7 of 9); PC1+PC2 = 0.7437 ≥ 0.40 PASS (up from 0.7311); ‖p‖ = 1.0 ± 1e-6 PASS; sparse-cell count = 3/248 PASS; Möbius frozen at identity-init (L-BFGS-B refinement collapsed under unconstrained centroid-loss — per red-flag rule). **Cycle-2 fix impact (PR-only, N=34)**: 3 of 3 cycle-1 regex fixes WORKED (`has_purpose` +44.1%, `has_sha` +88.2%, `has_temporal_anchor` +91.2%); 2 of 3 DID NOT WORK on PR-only (`has_linear_ref`, `has_cross_corpus_link` — root cause is yubOS workflow convention: PR bodies don't carry OMN-### inline, only commit SHAs + PR numbers); 1 cycle-1 over-match flipped (`has_state_progression` 100% → 29.4% — honest correction). **RSI fixpoint rule**: condition (1) ✓ PASS (5 gaps surfaced but MEASURED, not invented), (2) ✓ PASS (3 of 3 cycle-1 regex fixes verified), (3) ✓ PASS. Cycle 2 ships. Cycle 3 candidates (carryover, ranked by edit cost): (low) broaden Linear GraphQL query to include `createdBy { name }` → rescues `has_author` on Linear items; (low) use `?since=2024-01-01` for issues endpoint → captures real (non-PR) yubOS issues; (medium) replace centroid-loss in Möbius refinement with spread-preserving loss → un-freezes φ_θ with marginal expected gain (+0.0086 R² per hyperspherical-harmonic-curve cycle 3); (high) add semantic-similarity join (PR title ↔ Linear title via embedding) → rescues `has_linear_ref` and `has_cross_corpus_link` on PR-only sub-corpus. Cycle 3 is the final allowed cycle under the 3-cycle RSI cap; user may override for further iterations.
 
-- 2026-08-07 cycle 3 (the final bounded-RSI cycle — FIXPOINT REACHED): Hypothesis "Close the top-3 cycle-2 audit gaps by edit cost (broaden Linear query with `creator { name email }`; use `?since=2024-01-01T00:00:00Z` + filter PRs for the issues endpoint; replace centroid-loss with spread-preserving Möbius loss) and reach FIXPOINT." Edit: (a) added `creator { name email }` to Linear issue GraphQL selection set — the field is `creator`, NOT `createdBy` (the GraphQL validator explicitly told us on first attempt); 133/138 items have non-null creator.name (5 imports from other tools). (b) broadened yubOS issues query with `?since=2024-01-01T00:00:00Z&sort=created&direction=asc` + filter `pull_request != null` — captured 31 real yubOS issues (vs cycle-2's 0). (c) replaced centroid-loss with spread-preserving loss `(mean_d − 0.4)²`; L-BFGS-B refinement still collapses (cross-ratio gate fails with error 17.3), so per the red-flag rule, Möbius remains frozen at identity-init. Cycle-3 fit ran in `session/repo-history-cycle-3-2026-08-07/scripts/cycle3-fit.py`; corpus grew 12% (248 → 279 items: PRs 34 + Issues 31 + Commits 60 + Releases 16 + Linear OMN 138); primitive survival stable at 7/9 (different primitives: `has_state_progression` recovered from drop to 13.3%; `has_author` flipped to near-constant at 98.2% as a corpus-saturation signal); PC1+PC2 = 0.5721 ≥ 0.40 PASS (down from 0.7437 because corpus growth + structurally-unique issues sub-corpus spread principal-component mass — gate still passes); ‖p‖ = 1.0 ± 1e-6 PASS; sparse-cell count = 16/279 PASS (5.7%, up from 3/248 because issues sub-corpus added structurally-unique items); 16 Mode D per-item RSI actions identified (largest Δs: Issue #70 +1.0841 flip `has_pr_ref`, Linear OMN-101 +1.0704 flip `has_pr_ref`, Issue #63 +0.8960 flip `has_pr_ref`). **RSI fixpoint rule**: condition (1) ✓ PASS (corpus grew; 2 primitives flipped status as measured corpus-facts), (2) ✓ PASS (3 of 3 cycle-2 audit edits applied and verified), (3) ✓ PASS (no new primitives, join keys, or sub-corpora introduced). **CYCLE 3 REACHES FIXPOINT — RSI LOOP TERMINATES.** The variant is shippable: all measurable gates PASS, primitive survival stable at 7/9 (the 2 dropped primitives are structural limits of the yubOS workflow, not skill-spec errors), PC1+PC2 stays above gate across all 3 cycles (0.7311 → 0.7437 → 0.5721), sparse-cell detector working (16 candidates for Mode D follow-up). **Carryover for cycle 4+ (requires user override of 3-cycle RSI cap)**: (high) semantic-similarity join (PR title ↔ Linear title via embedding) → rescues `has_linear_ref` + `has_cross_corpus_link` on PR-only; (medium) add `## Key Assumptions` section to SKILL.md body — documents yubOS PR-body workflow-convention, Linear `creator` (NOT `createdBy`) field name, issues endpoint requires since-filter; (medium) replace spread-preserving Möbius loss with regularized loss that penalizes cross-ratio deviation directly → un-freezes φ_θ; (low) pull issues for agent-skills too — currently 0 real issues, thin corpus on mirror.
+- 2026-08-07 cycle 3 (the final bounded-RSI cycle — FIXPOINT REACHED): Hypothesis "Close the top-3 cycle-2 audit gaps by edit cost (broaden Linear query with `creator { name email }`; use `?since=2024-01-01T00:00:00Z` + filter PRs for the issues endpoint; replace centroid-loss with spread-preserving Möbius loss) and reach FIXPOINT." Edit: (a) added `creator { name email }` to Linear issue GraphQL selection set — the field is `creator`, NOT `createdBy` (the GraphQL validator explicitly told us on first attempt); 133/138 items have non-null creator.name (5 imports from other tools). (b) broadened yubOS issues query with `?since=2024-01-01T00:00:00Z&sort=created&direction=asc` + filter `pull_request != null` — captured 31 real yubOS issues (vs cycle-2's 0). (c) replaced centroid-loss with spread-preserving loss `(mean_d − 0.4)²`; L-BFGS-B refinement still collapses (cross-ratio gate fails with error 17.3), so per the red-flag rule, Möbius remains frozen at identity-init. Cycle-3 fit ran in `session/repo-history-cycle-3-2026-08-07/scripts/cycle3-fit.py` (session artifact, not repo-truth); corpus grew 12% (248 → 279 items: PRs 34 + Issues 31 + Commits 60 + Releases 16 + Linear OMN 138); primitive survival stable at 7/9 (different primitives: `has_state_progression` recovered from drop to 13.3%; `has_author` flipped to near-constant at 98.2% as a corpus-saturation signal); PC1+PC2 = 0.5721 ≥ 0.40 PASS (down from 0.7437 because corpus growth + structurally-unique issues sub-corpus spread principal-component mass — gate still passes); ‖p‖ = 1.0 ± 1e-6 PASS; sparse-cell count = 16/279 PASS (5.7%, up from 3/248 because issues sub-corpus added structurally-unique items); 16 Mode D per-item RSI actions identified (largest Δs: Issue #70 +1.0841 flip `has_pr_ref`, Linear OMN-101 +1.0704 flip `has_pr_ref`, Issue #63 +0.8960 flip `has_pr_ref`). **RSI fixpoint rule**: condition (1) ✓ PASS (corpus grew; 2 primitives flipped status as measured corpus-facts), (2) ✓ PASS (3 of 3 cycle-2 audit edits applied and verified), (3) ✓ PASS (no new primitives, join keys, or sub-corpora introduced). **CYCLE 3 REACHES FIXPOINT — RSI LOOP TERMINATES.** The variant is shippable: all measurable gates PASS, primitive survival stable at 7/9 (the 2 dropped primitives are structural limits of the yubOS workflow, not skill-spec errors), PC1+PC2 stays above gate across all 3 cycles (0.7311 → 0.7437 → 0.5721), sparse-cell detector working (16 candidates for Mode D follow-up). **Carryover for cycle 4+ (requires user override of 3-cycle RSI cap)**: (high) semantic-similarity join (PR title ↔ Linear title via embedding) → rescues `has_linear_ref` + `has_cross_corpus_link` on PR-only; (medium) add `## Key Assumptions` section to SKILL.md body — documents yubOS PR-body workflow-convention, Linear `creator` (NOT `createdBy`) field name, issues endpoint requires since-filter; (medium) replace spread-preserving Möbius loss with regularized loss that penalizes cross-ratio deviation directly → un-freezes φ_θ; (low) pull issues for agent-skills too — currently 0 real issues, thin corpus on mirror.
 
 
-- 2026-08-07 cycle 4 (post-mode-D re-fit + user override of 3-cycle RSI cap): Hypothesis "The corpus after the 15 mode-D per-item edits (batches 1+2) needs re-fit + sparse-cell re-detection; pick the top actionable sparse cell and apply one RSI edit; user override lifts the cycle cap." Edit: (a) re-fetched all 4 git sub-corpora + Linear OMN → corpus grew 16% (279 → 324 items: PRs top-30 + Issues 31 + Commits 100 + Releases 16 + Linear OMN 138, plus agent-skills mirror: 9 PRs + 0 issues + 100 commits + 0 releases). (b) Re-fit with cycle-2-broadened regexes; primitive survival stable at 7/9 (same survivors as cycle 3: `has_purpose`, `has_sha`, `has_pr_ref`, `has_linear_ref`, `has_state_progression`, `has_evidence`, `has_temporal_anchor`; `has_author` flipped to 100% saturated; `has_cross_corpus_link` recovered from 1.6% → 7.1% but still dropped as constant-zero on PR-only sub-corpus). (c) PC1+PC2 = **0.8534** (gate ≥ 0.40 PASS) — actually *higher* than cycle 3's 0.5721 because the post-edit corpus has more structurally-distinct items after the mode-D appends; closed-loop metric FIRES. ‖p‖ = 1.0 ± 1e-6 PASS; sparse-cell count = 324 (one per item with missing primitive). (d) Top actionable sparse cell: **Linear OMN-94** with Δ=+1.0 (the corpus saturation after the batch-2 SHA-line edit left only `has_temporal_anchor` missing); applied single-action RSI by appending real API `completedAt: 2026-07-25T10:10:35.427Z` to the description (not fabricated). Linear `issueUpdate` mutation succeeded; primitive coverage on OMN-94 is now 9/9. **RSI fixpoint rule**: condition (1) ✓ PASS (no new gaps introduced), (2) ✓ PASS (1 of 1 cycle-4 hypothesis-driven edit applied), (3) ✓ PASS (no new primitives, join keys, or sub-corpora). **CYCLE 4 SHIPS** — the user override is logged for future cycle-cadence review. **Cycle progression**: cycle 1 (N=34, 3/9 survivors, 0.7311, 0 sparse) → cycle 2 (N=248, 7/9, 0.7437, 3 sparse) → cycle 3 (N=279, 7/9, 0.5721, 16 sparse) → cycle 4 (N=324, 7/9 → 8/9 effective after OMN-94 edit, 0.8534, 324 → 323 sparse). The closed-loop metric FIRES across all 4 cycles — PC1+PC2 stays above gate every time; the corpus-saturation story is consistent (7-9 of 9 primitives always survive, the 1-2 dropped primitives are structural limits of the yubOS workflow). **Carryover for cycle 5+ (requires another user override)**: (high) semantic-similarity join via embedding → would rescue `has_linear_ref` + `has_cross_corpus_link` on PR-only sub-corpus (still 0/16 PRs have both, even after 5 cycle-1 cycle-2 cycle-3 attempts); (low) pull issues for agent-skills too — confirmed 0 real issues as of 2026-08-07 (corpus fact, not a gap); (low) apply Mode D batch on remaining cycle-4 sparse cells (323 still sparse; top-N actionable by Δ for cycle-5 dispatch). The cycle-4 JSON is at [papers/data/repo-history-skill-cycle-4-post-mode-d-2026-08-07.json](file://documents/github-yubios-KS9n5GAT/papers/data/repo-history-skill-cycle-4-post-mode-d-2026-08-07.json); the mode-D audit trail is at [papers/data/mode_d/mode-d-batches-combined-2026-08-07.md](file://documents/github-yubios-KS9n5GAT/papers/data/mode_d/mode-d-batches-combined-2026-08-07.md); the conceptualization doc lands at `yubi-OS/yubiOS refs/repo-history-skill-cycle-4-2026-08-07.md`.
+- 2026-08-07 cycle 4 (post-mode-D re-fit + user override of 3-cycle RSI cap): Hypothesis "The corpus after the 15 mode-D per-item edits (batches 1+2) needs re-fit + sparse-cell re-detection; pick the top actionable sparse cell and apply one RSI edit; user override lifts the cycle cap." Edit: (a) re-fetched all 4 git sub-corpora + Linear OMN → corpus grew 16% (279 → 324 items: PRs top-30 + Issues 31 + Commits 100 + Releases 16 + Linear OMN 138, plus agent-skills mirror: 9 PRs + 0 issues + 100 commits + 0 releases; repo retired 2026-09-24; historical). (b) Re-fit with cycle-2-broadened regexes; primitive survival stable at 7/9 (same survivors as cycle 3: `has_purpose`, `has_sha`, `has_pr_ref`, `has_linear_ref`, `has_state_progression`, `has_evidence`, `has_temporal_anchor`; `has_author` flipped to 100% saturated; `has_cross_corpus_link` recovered from 1.6% → 7.1% but still dropped as constant-zero on PR-only sub-corpus). (c) PC1+PC2 = **0.8534** (gate ≥ 0.40 PASS) — actually *higher* than cycle 3's 0.5721 because the post-edit corpus has more structurally-distinct items after the mode-D appends; closed-loop metric FIRES. ‖p‖ = 1.0 ± 1e-6 PASS; sparse-cell count = 324 (one per item with missing primitive). (d) Top actionable sparse cell: **Linear OMN-94** with Δ=+1.0 (the corpus saturation after the batch-2 SHA-line edit left only `has_temporal_anchor` missing); applied single-action RSI by appending real API `completedAt: 2026-07-25T10:10:35.427Z` to the description (not fabricated). Linear `issueUpdate` mutation succeeded; primitive coverage on OMN-94 is now 9/9. **RSI fixpoint rule**: condition (1) ✓ PASS (no new gaps introduced), (2) ✓ PASS (1 of 1 cycle-4 hypothesis-driven edit applied), (3) ✓ PASS (no new primitives, join keys, or sub-corpora). **CYCLE 4 SHIPS** — the user override is logged for future cycle-cadence review. **Cycle progression**: cycle 1 (N=34, 3/9 survivors, 0.7311, 0 sparse) → cycle 2 (N=248, 7/9, 0.7437, 3 sparse) → cycle 3 (N=279, 7/9, 0.5721, 16 sparse) → cycle 4 (N=324, 7/9 → 8/9 effective after OMN-94 edit, 0.8534, 324 → 323 sparse). The closed-loop metric FIRES across all 4 cycles — PC1+PC2 stays above gate every time; the corpus-saturation story is consistent (7-9 of 9 primitives always survive, the 1-2 dropped primitives are structural limits of the yubOS workflow). **Carryover for cycle 5+ (requires another user override)**: (high) semantic-similarity join via embedding → would rescue `has_linear_ref` + `has_cross_corpus_link` on PR-only sub-corpus (still 0/16 PRs have both, even after 5 cycle-1 cycle-2 cycle-3 attempts); (low) pull issues for agent-skills too — confirmed 0 real issues as of 2026-08-07 (corpus fact, not a gap; repo retired 2026-09-24; historical); (low) apply Mode D batch on remaining cycle-4 sparse cells (323 still sparse; top-N actionable by Δ for cycle-5 dispatch). The cycle-4 JSON is at `yubi-OS/yubiOS papers/data/repo-history-skill-cycle-4-post-mode-d-2026-08-07.json`; the mode-D audit trail is at `yubi-OS/yubiOS papers/data/mode_d/mode-d-batches-combined-2026-08-07.md`; the conceptualization doc lands at `yubi-OS/yubiOS refs/repo-history-skill-cycle-4-2026-08-07.md`.
 
 ## Examples
 

@@ -20,7 +20,7 @@ talks through one document, and never clobbers each other's writes.
 ## The meeting ground
 
 ```
-documents/github-yubios-KS9n5GAT/GET_TO_WORK/
+documents/github-yubios-KS9n5GAT/GET_TO_WORK/  (space-local working folder in the #github-yubios documents tree — runtime sermon state, not repo-truth)
 ├── CULT_LEADER.md      # PULPIT (objectives) on top, CROSS-TALK (message index) below
 ├── FOLLOWER_1.md       # one per follower: Inbox (orders) + Outbox (reports)
 ├── FOLLOWER_2.md

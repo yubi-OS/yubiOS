@@ -48,7 +48,7 @@ Mirror the 12 axes from `negative-skill-space`, retargeted at the agent itself:
 6. **Apply bounded RSI cycles.** Use `recursive-self-improvement`'s mechanics: gap-map → edit → re-map → stop when fixpoint. 3 cycles soft cap.
 7. **Append SELF-CHANGELOG.md.** One entry per meaningful shift. Date, what changed, why, evidence. Append-only.
 8. **Bound the loop.** After one recursive pass, stop. Second pass only if substantive new gaps emerge. Three cycles is the upper bound — past that, escalate to the user.
-9. **Save the gap map.** Convention: `session/self-sweep-YYYY-MM-DD.md`. Include the date, the substrate being swept, the mapper, the positive-space sentence, the filtered gaps, the actions, and the recursive findings.
+9. **Save the gap map.** Convention: `session/self-sweep-YYYY-MM-DD.md` (ephemeral session capture at run time; not repo-truth). Include the date, the substrate being swept, the mapper, the positive-space sentence, the filtered gaps, the actions, and the recursive findings.
 
 ## The output
 
@@ -75,12 +75,12 @@ Agent:
 6. Build this `self-archaeology` skill per Format 2.2.
 7. Append the cadence rule to RULES.md.
 8. Create the Sunday 9 AM Pacific schedule.
-9. Push the skill to both GitHub repos (yubi-OS/agent-skills + yubi-OS/yubiOS).
+9. Push the skill to `yubi-OS/yubiOS` on `main`.
 10. Verify all checks; write the verification log.
 
 **Example 2: 5-turn self-mode cadence trigger**
 
-After 5 consecutive self-mode shipping turns (commits, CI dispatches, PRs), force a 12-axis self-sweep via self-archaeology. Save the gap map to `session/self-sweep-YYYY-MM-DD-N.md`. The sweep must check:
+After 5 consecutive self-mode shipping turns (commits, CI dispatches, PRs), force a 12-axis self-sweep via self-archaeology. Save the gap map to `session/self-sweep-YYYY-MM-DD-N.md` (ephemeral session capture at run time). The sweep must check:
 (a) tool-call reflex (don't re-fetch context already loaded; internal reasoning is prose, not research)
 (b) narrate-before-do reflex (delete preambles before sending)
 (c) alignment with the deeper intent, not just the literal directive
@@ -145,18 +145,18 @@ After applying self-archaeology:
 - [ ] Each real gap has an action: Extend / Pair / Accept
 - [ ] At least one bounded RSI cycle ran (if Extend gaps warranted)
 - [ ] Frontmatter validated with `js-yaml` if any new artifacts were created
-- [ ] The gap map was saved to `session/self-sweep-YYYY-MM-DD.md`
+- [ ] The gap map was saved to `session/self-sweep-YYYY-MM-DD.md` (ephemeral session capture at run time)
 - [ ] At least one whole-self output was produced (the test that the discipline took)
 
 ## Source / evidence
 
 This skill integrates:
-- `skills/github-yubios-KS9n5GAT/negative-skill-space/SKILL.md` — the 12 axes
-- `skills/github-yubios-KS9n5GAT/recursive-self-improvement/SKILL.md` — the bounded fixpoint loop
-- `memory/personal-WbtUgeUv/SELF.md` — the substrate
-- `memory/personal-WbtUgeUv/SELF-CHANGELOG.md` — the audit trail
-- `memory/personal-WbtUgeUv/RULES.md` — the cadence rule added 2026-07-31
-- `session/self-exploration-2026-07-31.md` — the inventory + gap map + plan that produced this skill
+- `yubi-OS/yubiOS/skills/negative-skill-space/SKILL.md` — the 12 axes
+- `yubi-OS/yubiOS/skills/recursive-self-improvement/SKILL.md` — the bounded fixpoint loop
+- the operator's personal memory space, `memory/<personal-dirname>/SELF.md` — the substrate
+- the operator's personal memory space, `memory/<personal-dirname>/SELF-CHANGELOG.md` — the audit trail
+- the operator's personal memory space, `memory/<personal-dirname>/RULES.md` — the cadence rule added 2026-07-31
+- `session/self-exploration-2026-07-31.md` (session artifact, not repo-truth) — the inventory + gap map + plan that produced this skill
 
 Maintainer: Sauna. Cadence: per the rule in RULES.md. Last updated: 2026-07-31.
 

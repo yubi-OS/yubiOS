@@ -202,8 +202,8 @@ score + caveat, in the cycle-34 format.
 
 ```bash
 python3.12 scripts/curve_compass.py lens \
-    --corpus session/rsi-compass-cycle2/corpus.json \
-    --out session/rsi-compass-cycle2/lenses.json
+    --corpus <corpus JSON captured at run time, e.g. session/rsi-compass-cycle2/corpus.json> \
+    --out <run-time output path, e.g. session/rsi-compass-cycle2/lenses.json>
 ```
 
 Output schema:

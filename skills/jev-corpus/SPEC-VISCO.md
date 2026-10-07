@@ -1,4 +1,4 @@
-> NOTE (recovery): the original `session/SPEC-VISCO.md` file body was never echoed in full in the transcript — the file was written to that session's temp dir and referenced only by link. What follows is the spec reassembled verbatim from the transcript passages that carry its content, in document order. Unrecoverable sections are marked inline.
+> NOTE (recovery): the original `session/SPEC-VISCO.md` file body was never echoed in full in the transcript — the file was written to that session's temp dir and referenced only by link (session artifact, not repo-truth). What follows is the spec reassembled verbatim from the transcript passages that carry its content, in document order. Unrecoverable sections are marked inline.
 
 # SPEC-VISCO.md — `/api/jev/corpus/visco` instrument surface (steady-orbit worker)
 

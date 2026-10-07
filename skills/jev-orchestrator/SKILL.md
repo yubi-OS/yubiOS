@@ -98,7 +98,7 @@ Failure paths, all explicit:
 
 ## Design sources
 
-- Architecture: `Jev_Architecture_v2.svg` (ingest → understand → decide → gate → execute → verify → continue/terminal + central state + improve loop), formalized in `session/jev/SPEC.md` and the refs doc.
+- Architecture: `Jev_Architecture_v2.svg` (ingest → understand → decide → gate → execute → verify → continue/terminal + central state + improve loop), formalized in `yubi-OS/yubiOS/skills/jev-orchestrator/SPEC.md` and the refs doc.
 - Implemented as 12 ES modules on the `steady-orbit` worker (parts `jev-main.js` … `routes-jev.js`), D1 tables `jev_*` (schema auto-applies), dashboard from KV key `jev-index.html`.
 - 168 unit/e2e tests; full lifecycle validated in CI-style e2e (create → gate → approve → pause-skip → dispatch → verify → terminal:succeeded, plus policy-change supersede).
 

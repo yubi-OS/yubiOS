@@ -25,8 +25,7 @@ protocol on the archive. The deep-research hook is the cycle's intake.
 
 ## When to Use
 
-- A new Sauna session opens on either `yubi-OS/yubiOS` or
-  `yubi-OS/agent-skills` and needs the full project's **durable
+- A new Sauna session opens on `yubi-OS/yubiOS` and needs the full project's **durable
   knowledge** (the `refs/` archival layer — distinct from git+Linear
   event history which `repo-history-skill` covers).
 - After a major theme of work lands (e.g. the 9-cycle RSI loop
@@ -59,7 +58,7 @@ protocol on the archive. The deep-research hook is the cycle's intake.
 - **Memory-file audits** (SELF.md, USER_PREFERENCES, etc.) — route
   to `curve-guided-rsi-self` (different substrate: the agent's
   identity layer).
-- **Skill audit** (SKILL.md corpus on `yubi-OS/agent-skills`) —
+- **Skill audit** (SKILL.md corpus on `yubi-OS/yubiOS`) —
   route to `curve-guided-rsi` / `curve-guided-rsi-self` (different
   substrate: skills vs docs).
 - **Security audit of a refs/ corpus** — route to
@@ -68,11 +67,8 @@ protocol on the archive. The deep-research hook is the cycle's intake.
   (`GET /repos/{r}/contents/refs/{file}`). This skill operates on
   the corpus; reading one doc is one cycle's input, not the skill's
   primary mode.
-- **The `agent-skills` mirror's `refs/` directory** — refresh it
-  by mirroring from `yubi-OS/yubiOS refs/`, don't run the skill
-  against it directly. The mirror is sparse by design (only
-  cross-cutting docs land there; the cycle's primary fit is on
-  `yubi-OS/yubiOS refs/`).
+- **The `agent-skills` mirror's `refs/` directory** (repo retired 2026-09-24; historical) — there is no mirror to refresh; `yubi-OS/yubiOS` is the single target and the primary fit is on
+  `yubi-OS/yubiOS refs/`.
 
 ## The Substrate — `refs/*.md`
 
@@ -136,7 +132,7 @@ Only 3 files as of 2026-08-07:
 
 The mirror keeps cycle outputs (cross-cutting, useful for skill
 audit), but NOT the bulk of research docs (those are
-yubiOS-specific, don't belong in the skill mirror).
+yubiOS-specific, don't belong in the skill mirror) (repo retired 2026-09-24; historical).
 
 ## The 9-D Primitive Basis (initial derivation)
 
@@ -275,7 +271,8 @@ Verify the fit metrics before push:
   doc cross-referencing it (the `has_cross_reference` join back
   to Linear — via `OMN-\d+` regex on file body)
 
-Push the canonical artifacts:
+Run-output artifacts: the session files are captured to `session/`
+during the run and stay local; the coverage-map is pushed:
 - `session/repo-refs-archive-<repo>-<date>.json` — local only
 - `session/repo-refs-fit-<repo>-<date>.json` — local only
 - `yubi-OS/yubiOS refs/repo-refs-coverage-map-<repo>-<date>.md`
@@ -340,6 +337,8 @@ follow-up cycles).
 
 ### Local artifacts (per cycle, per repo)
 
+(Captured to `session/` during the run — session artifacts, not repo-truth.)
+
 | File | Format | Purpose |
 |---|---|---|
 | `session/repo-refs-archive-<repo>-<date>.json` | JSON, ~50-200 KB | The cached corpus + 9-D coverage + (u,v) + S² point per item + d_pre per item + last_run_timestamp |
@@ -354,7 +353,7 @@ follow-up cycles).
 | File | Repo | Format |
 |---|---|---|
 | `refs/repo-refs-coverage-map-<repo>-<date>.md` | `yubi-OS/yubiOS` | The human-readable summary — topic-coverage map + sparse-cell priority queue + RSI dispatch plan |
-| `skills/repo-refs-skill/SKILL.md` | both | The skill itself (this file) |
+| `skills/repo-refs-skill/SKILL.md` | `yubi-OS/yubiOS` | The skill itself (this file) |
 
 ### Linear artifact (per cycle, per project)
 
@@ -554,9 +553,9 @@ workstation without sampling.
   Per `parallel-deep-research`, session-only outputs don't survive
   the session.
 - **Fitting on `agent-skills refs/` instead of `yubiOS refs/`** —
-  the mirror is sparse by design (3 files vs 129). A fit on the
-  mirror would degenerate (N < 20). Always fit on `yubiOS refs/`;
-  mirror the result downstream.
+  the mirror (repo retired 2026-09-24; historical) was sparse by
+  design (3 files vs 129). A fit on the mirror would degenerate
+  (N < 20). Always fit on `yubiOS refs/`.
 - **Treating cache invalidation as silent** — if the cache is
   older than 7 days, the skill must WARN (not just re-fetch)
   because the cached `last_run_timestamp` might miss
@@ -624,8 +623,7 @@ After applying `repo-refs-skill`:
       applied with cycle cap ≤ 3 (or explicit user override)
 - [ ] If push: single bash call per /tmp wipe rule
       (`PROJECT_RULES.md`)
-- [ ] If push: both `yubi-OS/agent-skills` AND
-      `yubi-OS/yubiOS` received the skill (or the
+- [ ] If push: `yubi-OS/yubiOS` received the skill (or the
       coverage-map if applicable)
 - [ ] No fabricated file names, OMN IDs, or PR numbers (per
       `PROJECT_RULES.md` "PR diff verification — always read
@@ -718,7 +716,7 @@ the skill's expectations before running it.
 1. **Target repo = `yubi-OS/yubiOS`** (NOT `yubi-OS/agent-skills`).
    The `refs/` substrate is dense (129 files, 1.55 MB) on the
    product repo; the skill mirror keeps only cross-cutting cycle
-   outputs (3 files). Fitting on `agent-skills refs/` would
+   outputs (3 files; repo retired 2026-09-24; historical). Fitting on `agent-skills refs/` would
    degenerate (N < 20 → decomposition rule fires → unstable basis).
    Validation: count `refs/*.md` via Contents API; if N < 20 on
    the chosen repo, fall back to `repo-history-skill` instead.
@@ -772,12 +770,12 @@ the skill's expectations before running it.
    general `documents/` rule and does NOT apply to `refs/`.
    Subagents that propose doc names with the wrong pattern
    need a rename before push.
-10. **`agent-skills refs/` is sparse by design** (3 files).
-    Mirror the yubiOS `refs/coverage-map` output downstream,
-    but DO NOT run the fit on `agent-skills refs/` — it would
-    degenerate. The skill mirror keeps cycle outputs (cross-
-    cutting, useful for skill audit) and drops the bulk of
-    research docs (those are yubiOS-specific).
+10. **`agent-skills refs/` is sparse by design** (3 files;
+     repo retired 2026-09-24; historical). `yubi-OS/yubiOS` is
+     the single target: DO NOT run the fit on any other repo's
+     `refs/` — it would degenerate. The former skill mirror kept
+     cycle outputs (cross-cutting, useful for skill audit) and
+     dropped the bulk of research docs (those are yubiOS-specific).
 
 ## Empirical Validation
 
@@ -875,7 +873,7 @@ filter; PC1+PC2 ≥ 0.40; sparse-cell count ∈ [3, 20] on the
 - Git + Linear event history** — route to `repo-history-skill`
 - Single-doc RSI** — route to `single-action-curve-rsi` (atomic,
 - Memory-file audits** (SELF.md, USER_PREFERENCES, etc.) — route
-- Skill audit** (SKILL.md corpus on `yubi-OS/agent-skills`) —
+- Skill audit** (SKILL.md corpus on `yubi-OS/yubiOS`) —
 
 **In-repo touchpoints** — sections this skill owns or extends: When to Use, When NOT to Use, The Substrate — `refs/*.md`, Source (GitHub Contents API via `conn_3h7rj41VF6hs`).
 

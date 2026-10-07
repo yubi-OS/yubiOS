@@ -29,7 +29,7 @@ Per the user's explicit directive ("dont start this yet"), this file exists as a
 curl -X POST "$BRIDGE/run" -d '{"command":["bash","-c","yt-dlp --no-check-certificates --skip-download --print title --print id --print duration "https://www.youtube.com/watch?v=7zSZToj9qdc""]}'
 
 # Then append the whole playlist (or pipe from this file via base64 push)
-B64=$(base64 -w0 skills/personal-WbtUgeUv/radio-queue/examples/playlist-samplman.md | sed 's/^#.*$//')
+B64=$(base64 -w0 radio-queue/scripts/examples/playlist-samplman.md | sed 's/^#.*$//')
 curl -X POST "$BRIDGE/run" -d "$(python3 -c "import json; print(json.dumps({'command':['bash','-c',f'printf "%s" \"$(cat /tmp/playlist.b64)\" | base64 -d >> /tmp/audio/queue/queue.txt && wc -l /tmp/audio/queue/queue.txt']}))")"
 ```
 

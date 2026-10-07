@@ -1,6 +1,6 @@
 # SPEC-CORPUS: the papers' math engine on the steady-orbit worker ("Jev Corpus")
 
-Status: formal spec. Capability map approved by Jenny 2026-10-01 (with backref: the math's system of record is `papers/data/lean/` — verify_claims.py + CurvedCorpus.lean; ports must be parity-tested against it, never re-derived). Ideate-solo one-pager: `session/jev-corpus-solo-2026-10-01.md` (V1 won).
+Status: formal spec. Capability map approved by Jenny 2026-10-01 (with backref: the math's system of record is `papers/data/lean/` — verify_claims.py + CurvedCorpus.lean; ports must be parity-tested against it, never re-derived). Ideate-solo one-pager: `session/jev-corpus-solo-2026-10-01.md` (session artifact, not repo-truth) (V1 won).
 
 Reads first (same invariants as SPEC.md + SPEC-AUTOMATIONS.md): jev-orchestrator/SPEC.md (§1 invariants, §6 schema, §8 gate), SPEC-AUTOMATIONS.md (§3 stage semantics).
 
@@ -142,9 +142,9 @@ Redesign (user-facing evolution sections must NOT show machine-readable dumps as
 
 ## 8. Source paths (lanes: use THESE, fresh working copies only in session/)
 
-- Python math (system of record): `/var/workspace/session/yubios-pull/papers/data/lean/verify_claims.py`
-- `/var/workspace/session/yubios-pull/tools/{corpus-auditor,rsi-descent,spectral-decomposer,spectral-defocus,boltzmann-collapse,tautology-discerner}/`
-- Drift core: `/var/workspace/session/yubios-pull/papers/scripts/curve-drift-detector.py`
-- Deployed worker source (part name \t line format): `/var/workspace/session/worker-bundle/parts.tab`
-- Build dir with prior SPECs: `/var/workspace/documents/github-yubios-KS9n5GAT/jev-orchestrator/`
-- Current console HTML: `/var/workspace/session/jev-index-current.html`
+- Python math (system of record): `papers/data/lean/verify_claims.py` (yubi-OS/yubiOS)
+- `tools/{corpus-auditor,rsi-descent,spectral-decomposer,spectral-defocus,boltzmann-collapse,tautology-discerner}/` (yubi-OS/yubiOS)
+- Drift core: `papers/scripts/curve-drift-detector.py` (yubi-OS/yubiOS)
+- Deployed worker source (part name \t line format): fetched live from the steady-orbit worker at run time via the steady-orbit-deploy flow (write the bundle to `session/worker-bundle/parts.tab`)
+- Build dir with prior SPECs: `yubi-OS/yubiOS/skills/jev-orchestrator/` (repo-truth; the space-local mirror under `documents/github-yubios-KS9n5GAT/jev-orchestrator/` is a working copy, not repo-truth)
+- Current console HTML: fetch live from the steady-orbit worker at run time (write to `session/jev-index-current.html`)

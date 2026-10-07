@@ -1,6 +1,6 @@
 # SPEC: Jev Automations — worker-hosted Llama automations on the /jev/ console
 
-Status: formal spec. Decisions locked (Jenny, 2026-09-30 ~23:50 PT): daytona = code-exec sandbox (future slot for JS-rendered fetches); HYBRID model split (DefAPI jev-1.13 stays the structured decision layer; Llama = generation + safety); THREE-TIER model routing. Extends the deployed jev-orchestrator (session/jev/build/*, live on the steady-orbit worker). Same invariants as SPEC.md apply — read /var/workspace/session/jev/SPEC.md first, especially §1 invariants, §6 schema, §8 gate.
+Status: formal spec. Decisions locked (Jenny, 2026-09-30 ~23:50 PT): daytona = code-exec sandbox (future slot for JS-rendered fetches); HYBRID model split (DefAPI jev-1.13 stays the structured decision layer; Llama = generation + safety); THREE-TIER model routing. Extends the deployed jev-orchestrator (session/jev/build/* — session artifact, not repo-truth; live on the steady-orbit worker). Same invariants as SPEC.md apply — read `yubi-OS/yubiOS/skills/jev-orchestrator/SPEC.md` first, especially §1 invariants, §6 schema, §8 gate.
 
 ## 1. Objective
 
@@ -96,7 +96,7 @@ Def validation (`validateAutomationDef`) returns error strings; activation refus
 
 ## 8. Lead machine v1 (builtins + automations)
 
-Ported from session/jev/lead-machine/lead-machine/ (lib is the source of truth; tests exist there). v1 scope decisions:
+Ported from session/jev/lead-machine/lead-machine/ (session artifact, not repo-truth; lib is the source of truth; tests exist there). v1 scope decisions:
 - **System of record is D1** (jev tasks + a `jev_leads` table) — HubSpot integration is deferred (no HubSpot token in Secrets Store; it becomes a policy learning later). `jev_leads`: id, business_name, domain, place_id, finding_code, finding_text, evidence_url, contact_email, contact_status, draft_subject, draft_body, guard_verdict, stage, task_id, created_at.
 - **`lead_audit` builtin**: port `lib/audit.js` + `lib/extract.js` + `lib/normalize.js` + `lib/template.js` + `nodes/fanout-pages.js`/`apply-mx.js` logic into `jev-lead-lib.js` (plain JS, no fs/npm — the lib is already dependency-free; preserve the refuse-to-claim guards verbatim: javascript_rendered, embedded-form vendor fingerprints, booking-by-script detection, facebook-only/no-website lanes). Port the TESTS too (test/run-tests.js + test-extract.js + test-pipeline.js cases) as worker-runnable node tests in build/test/lead-lib.test.mjs — the lib must pass the same behavioral assertions.
 - **`lead-research` automation (builtin type `lead_research`)**: params {niche, location, limit (≤ 20), min_reviews}. One run = ONE Places text search (≤ 20 results) + per-business pipeline CHUNKED BY THE SCHEDULER: the run processes up to `batch` businesses per invocation and records a continuation cursor (`jev_leads.pending_batch` or a `run_context` KV key) for the next tick. Per business: fetch home/contact/about/pricing pages (tool stages, GET, web.fetch_public rules below) → lead_audit → email+MX (dns.google) → template draft → guard stage → propose ONE `resend.send` action → gate. Businesses needing JS rendering → `stage='javascript_rendered'`, skipped (Daytona is the future recovery lane, noted not built).
