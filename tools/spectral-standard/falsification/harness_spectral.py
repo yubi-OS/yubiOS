@@ -339,9 +339,25 @@ def contact_graph(disks, sep_tol=1.05):
     if len(disks) < 2:
         raise Skip("contact graph needs >= 2 droplets")
     pts = [(x, y) for (x, y, _r) in disks]
-    dmin = min(math.dist(pts[i], pts[j])
-               for i in range(len(pts)) for j in range(i + 1, len(pts)))
+    # AM-8 (2026-10-07, platform stability): droplet centers are an integer
+    # lattice, so squared distances are computed in EXACT integer arithmetic
+    # and dmin = math.sqrt(dmin2) — IEEE-754 correctly rounded, bit-identical
+    # on every platform. math.dist/hypot is NOT guaranteed correctly rounded;
+    # its last ulp varied across libm versions (glibc 2.34 vs 2.39/2.43),
+    # which leaked into the walker seed via the canonical_json repr of dmin
+    # (derive_seed) and silently re-seeded the row7b walks on CI. Threshold
+    # compares move to the exact-integer domain too (d2 <= thr*thr); the
+    # nearest non-edge squared distance (150) sits ~5e-3 from thr*thr
+    # (149.94), so the edge set is unchanged on every platform.
+    def _d2(p, q):
+        dx = p[0] - q[0]
+        dy = p[1] - q[1]
+        return dx * dx + dy * dy
+    dmin2 = min(_d2(pts[i], pts[j])
+                for i in range(len(pts)) for j in range(i + 1, len(pts)))
+    dmin = math.sqrt(dmin2)
     thr = dmin * sep_tol
+    thr2 = thr * thr
     idx = {}
     verts = []
     for p in pts:
@@ -351,7 +367,7 @@ def contact_graph(disks, sep_tol=1.05):
     edges = set()
     for i in range(len(pts)):
         for j in range(i + 1, len(pts)):
-            if math.dist(pts[i], pts[j]) <= thr:
+            if _d2(pts[i], pts[j]) <= thr2:
                 edges.add(tuple(sorted((idx[pts[i]], idx[pts[j]]))))
     return sorted(edges), verts, dmin
 

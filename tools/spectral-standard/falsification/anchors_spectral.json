@@ -1,5 +1,5 @@
 {
- "_amendments": "See amendments-spectral-2026-10-06.md (advisor, 2026-10-06): AM-1..AM-5, all PRE-first-clean-run, no band value moved.",
+ "_amendments": "See amendments-spectral-2026-10-06.md (advisor, 2026-10-06): AM-1..AM-5, all PRE-first-clean-run, no band value moved. AM-8 (2026-10-07, Lane E, POST-first-clean-run): row7b contact-graph distance made platform-stable; row7b contact-gasket anchors re-derived from the stable path, logged BEFORE gates re-run \u2014 no band moved, no criterion weakened.",
  "_comment": "Falsification-corpus regression anchors for spectral-standard-v1. Pre-registered 2026-10-06 BEFORE any measurement (Lane C). Expected values are null until the first CLEAN gold-table run fills them via harness_spectral.py --write-anchors; a failing band is a result to fix in the instrument, never an anchor to move. Any post-hoc anchor change requires a dated amendment in this directory plus a major version bump (see PREREGISTRATION-spectral-2026-10-06.md \u00a70).",
  "_status": "anchored-first-run-2026-10-06",
  "gold": {
@@ -163,15 +163,16 @@
    "gold": "tri render (19 droplets) via oracle path"
   },
   "row7b-contact-gasket-d_s": {
+   "_amendment": "AM-8 2026-10-07: re-derived from the platform-stable path (exact-integer squared distances + math.sqrt; math.dist's last ulp varied across libm versions and leaked into the walker seed via canonical_json repr of dmin). Old values 0.38909645523992836 / 0.9711259457604728 were a platform-dependent capture (CPython 3.9, glibc 2.34). See amendments-spectral-2026-10-06.md AM-8. Logged BEFORE the gates were re-run.",
    "_status": "FINDING (AM-6 seam-c/FM-4): FM-4 detector fired on the corpus construction (disconnected contour rings / fragmented contact graphs); documented, regression-anchored, non-gating",
    "band": [
     1.295,
     1.435
    ],
    "expected": {
-    "d_s": 0.38909645523992836,
+    "d_s": 0.3904734045226643,
     "d_s_r2": null,
-    "r2": 0.9711259457604728
+    "r2": 0.9724738808882158
    },
    "gold": "gasket render droplet-center contact graph (structural control, resolution A-8)"
   },
