@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-06",
+  "endpoint": "POST https://steady-orbit.systems-a.workers.dev/api/jev/corpus/scorer/score",
+  "scorer_version": "scorer-v2.2",
+  "request_shape": "{doc: {name, text}} -> {row, row_plain, probs, evidence_counts, hysteresis_applied, defapi.consumed, scorer_version}; axes indexed 0-11 mapped as audience, inputs, outputs, mode, assumption_set, adjacent, failure_modes, lifecycle, composition, knowledge_sources, calibration, recursion (mapping confirmed by planted docs: I-docs lit index 1, C-docs index 8)",
+  "preregistration": "scorer-preregistration.md (pinned before measurement)",
+  "schema_probe": {"doc": "lane-d-schema-probe (neutral maintenance-window note, no planted evidence)", "result": "evidence_counts axis3(mode)=1, probs 0.4958, no flip, hysteresis_applied false; all other axes 0"},
+  "docs": [
+    {"name":"I1","planted":{"inputs":3},"evidence_counts":{"inputs":1},"probs":{"inputs":0.0118},"recall_floor":3,"verdict":"RECALL FAIL"},
+    {"name":"I2","planted":{"inputs":4},"evidence_counts":{"inputs":1},"probs":{"inputs":0.0116},"recall_floor":3,"verdict":"RECALL FAIL"},
+    {"name":"I3","planted":{"inputs":5},"evidence_counts":{"inputs":2},"probs":{"inputs":0.0413},"recall_floor":4,"verdict":"RECALL FAIL"},
+    {"name":"I4","planted":{"inputs":2},"evidence_counts":{"inputs":1},"probs":{"inputs":0.0116},"recall_floor":2,"verdict":"RECALL FAIL"},
+    {"name":"C1","planted":{"composition":2},"evidence_counts":{"composition":2,"mode":1,"assumption_set":1},"probs":{"composition":0.5237,"mode":0.4992,"assumption_set":0.4707},"recall_floor":2,"verdict":"PASS"},
+    {"name":"C2","planted":{"composition":3},"evidence_counts":{"composition":2,"assumption_set":1},"probs":{"composition":0.2826,"assumption_set":0.6505},"recall_floor":3,"verdict":"RECALL FAIL (2/3)"},
+    {"name":"C3","planted":{"composition":4},"evidence_counts":{"composition":4,"outputs":1,"assumption_set":1},"probs":{"composition":0.8907,"outputs":0.273,"assumption_set":0.6125},"recall_floor":3,"verdict":"PASS"},
+    {"name":"C4","planted":{"composition":5},"evidence_counts":{"composition":3,"inputs":1,"assumption_set":1},"probs":{"composition":0.8433,"inputs":0.5887,"assumption_set":0.6072},"recall_floor":4,"verdict":"RECALL FAIL (3/5)"},
+    {"name":"D1","planted":{},"evidence_counts":{"audience":1},"probs":{"audience":0.1148},"specificity":"inputs 0 / composition 0, no trap-axis flip","verdict":"PASS"},
+    {"name":"D2","planted":{},"evidence_counts":{"composition":1,"outputs":1,"mode":1,"assumption_set":1},"probs":{"composition":0.2646},"specificity":"inputs 0 / composition 1 (p 0.2646 < 0.55)","verdict":"PASS"},
+    {"name":"D3","planted":{},"evidence_counts":{"composition":1,"mode":1,"adjacent":1,"failure_modes":1,"lifecycle":1},"probs":{"composition":0.4927},"specificity":"inputs 0 / composition 1 (p 0.4927 < 0.55)","verdict":"PASS"},
+    {"name":"D4","planted":{},"evidence_counts":{"composition":1,"audience":1,"outputs":1,"assumption_set":1,"calibration":1},"probs":{"composition":0.5279},"specificity":"inputs 0 / composition 1 (p 0.5279 < 0.55)","verdict":"PASS"}
+  ],
+  "gates": {
+    "recall_inputs": "FAIL (0/4 docs at floor; extractor found 1-2 of 3-5 canonical planted items; decision p ~0.01-0.04, far below any flip)",
+    "recall_composition": "FAIL (2/4 docs at floor; item-level recall 11/14 = 0.786)",
+    "specificity_distractors": "PASS (4/4; inputs axis 0 everywhere; composition <=1 with p < 0.55 on all distractors)",
+    "collateral_precision": "report-only per prereg: assumption_set evidence credited on 4/8 planted docs with p > 0.55 flips on C2/C3/C4/C4-companions (cross-axis bleed finding F3)"
+  },
+  "slice_verdict": "FAIL on recall gates, PASS on specificity — exactly the refs4 extraction-recall limitation, now quantified on canonical phrasing. This is the known-answer set the v2.3 extractor-recall pass can regress against.",
+  "cost": "13 scored docs total (1 schema probe + 12 slice) at ~$0.0002/score = ~$0.0026, under the $0.01 cap"
+}
