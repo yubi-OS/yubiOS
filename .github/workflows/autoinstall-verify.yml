@@ -41,4 +41,4 @@ jobs:
           git clone --depth 1 https://github.com/canonical/probert /tmp/subiquity/probert
           curl -fsSL "https://raw.githubusercontent.com/${{ inputs.repo }}/${{ inputs.branch }}/${{ inputs.path }}" -o /tmp/target-user-data
           echo "Validating ${{ inputs.repo }}@${{ inputs.branch }}:${{ inputs.path }} against subiquity@${{ inputs.subiquity_ref }}"
-          cd /tmp/subiquity && python3 scripts/validate-autoinstall-user-data.py /tmp/target-user-data
+          cd /tmp/subiquity && python3 scripts/validate-autoinstall-user-data.py -vvv /tmp/target-user-data
