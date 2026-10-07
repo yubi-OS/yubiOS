@@ -11,6 +11,15 @@ Pass criteria (all must hold):
   2. Each reported axiom set is a subset of `permitted_axioms`.
   3. No forbidden axiom (notably `sorryAx`) appears anywhere in the output.
   4. The output contains no Lean `error:` line.
+  5. STATEMENT PINS (Lane 3, CI hardening): for every manifest theorem carrying
+     a `statement_sha256`, the normalized statement text extracted from the
+     .lean source must hash to exactly that pin. This checks CONTENT, not just
+     names: renaming nothing but weakening a statement to `True` now fails the
+     gate. If no manifest theorem carries a pin, this check is skipped with a
+     note (legacy manifest). Extraction/normalization logic lives in
+     pin_statements.py, which is imported from this script's directory; if the
+     module is missing while pins exist, the gate FAILS (fail-closed) rather
+     than certifying statements it could not check.
 
 Exit 0 on pass, 1 on failure, 2 on bad usage.
 """
@@ -18,7 +27,9 @@ Exit 0 on pass, 1 on failure, 2 on bad usage.
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
+import os
 import re
 import sys
 
@@ -60,10 +71,93 @@ def parse(text: str) -> tuple[dict[str, list[str]], list[str]]:
     return reported, errors
 
 
+def resolve_lean_file(manifest: dict, manifest_path: str,
+                      lean_file_arg: str | None) -> str | None:
+    """Locate the .lean source for statement checking (Lane 3)."""
+    if lean_file_arg:
+        return lean_file_arg
+    rel = manifest.get("lean_file") or manifest.get("file")
+    if not rel:
+        return None
+    manifest_dir = os.path.dirname(os.path.abspath(manifest_path))
+    # repo root is three levels above papers/data/lean/<manifest>.json
+    repo_root = os.path.abspath(os.path.join(manifest_dir, "..", "..", ".."))
+    for base in (os.getcwd(), repo_root, manifest_dir):
+        cand = os.path.join(base, rel)
+        if os.path.isfile(cand):
+            return cand
+    return None
+
+
+def check_statement_pins(manifest: dict, lean_path: str | None,
+                         failures: list[str]) -> int:
+    """Lane 3 statement-pin gate. Returns the number of pins verified.
+
+    Fail-closed: pins present but the lean file or the extractor cannot be
+    resolved is a FAILURE, not a skip.
+    """
+    pinned = [
+        (t["name"], t["statement_sha256"])
+        for t in manifest["theorems"]
+        if t.get("statement_sha256")
+    ]
+    if not pinned:
+        return 0
+    if lean_path is None or not os.path.isfile(lean_path):
+        failures.append(
+            "statement pins present in the manifest but the lean source could "
+            "not be located; pass --lean-file <path> (fail-closed)"
+        )
+        return 0
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        pin_statements = importlib.import_module("pin_statements")
+    except ImportError as exc:
+        failures.append(
+            f"statement pins present in the manifest but pin_statements.py "
+            f"(the shared extractor) could not be imported: {exc} (fail-closed)"
+        )
+        return 0
+    with open(lean_path, "r", encoding="utf-8") as fh:
+        lean_text = fh.read()
+    try:
+        theorems = pin_statements.extract_theorems(lean_text)
+    except ValueError as exc:
+        failures.append(f"statement extraction failed on {lean_path}: {exc}")
+        return 0
+
+    verified = 0
+    for name, sha in pinned:
+        short = name.split(".")[-1]
+        if short not in theorems:
+            failures.append(
+                f"statement pin for {name}: declaration not found in {lean_path}"
+            )
+            continue
+        actual = theorems[short]["sha256"]
+        if actual != sha:
+            failures.append(
+                f"STATEMENT PIN MISMATCH for {name}:\n"
+                f"    pinned sha256: {sha}\n"
+                f"    actual sha256: {actual}\n"
+                f"    actual statement: {theorems[short]['statement']}\n"
+                f"    If this change is deliberate, regenerate the pin in the "
+                f"same PR: python3 papers/data/lean/pin_statements.py pin "
+                f"<manifest.json>"
+            )
+        else:
+            verified += 1
+    return verified
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--axioms", required=True, help="captured lean stdout/stderr")
-    ap.add_argument("--manifest", required=True, help="wayfinder-scope.json")
+    ap.add_argument("--manifest", required=True, help="scope manifest json")
+    ap.add_argument("--lean-file", default=None,
+                    help="path to the manifest's .lean source, for the "
+                         "statement-pin check (default: resolved from the "
+                         "manifest's lean_file/file key)")
     args = ap.parse_args()
 
     with open(args.axioms, "r", encoding="utf-8") as fh:
@@ -101,11 +195,23 @@ def main() -> int:
         if extra:
             failures.append(f"{name}: axiom(s) outside permitted set {extra}")
 
+    # ---- Lane 3: statement-pin gate (content, not just names) ----
+    lean_path = resolve_lean_file(manifest, args.manifest, args.lean_file)
+    pins_verified = check_statement_pins(manifest, lean_path, failures)
+
     print("=== parsed #print axioms ===")
     for name, axioms in sorted(reported.items()):
         print(f"  {name}: {axioms if axioms else '(none)'}")
     print(f"permitted axioms: {sorted(permitted)}")
     print(f"expected theorems: {len(expected)}, parsed declarations: {len(reported)}")
+    if pins_verified:
+        print(f"statement pins verified against {lean_path}: {pins_verified}/"
+              f"{sum(1 for t in manifest['theorems'] if t.get('statement_sha256'))}")
+    elif not any(t.get("statement_sha256") for t in manifest["theorems"]):
+        print("statement pins: none in manifest; statement check skipped "
+              "(legacy manifest)")
+    else:
+        print("statement pins: present but NOT verified (see failures)")
 
     if failures:
         print("\nAXIOM_GATE_FAIL")
@@ -114,7 +220,8 @@ def main() -> int:
         return 1
 
     print("\nAXIOM_GATE_OK: all expected theorems present, "
-          "axioms within the permitted core set, no sorryAx")
+          "axioms within the permitted core set, no sorryAx"
+          + (", all statement pins match" if pins_verified else ""))
     return 0
 
 

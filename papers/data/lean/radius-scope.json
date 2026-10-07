@@ -22,126 +22,144 @@
       "status": "lean-proved",
       "statement": "connAt distance radius + isoAt distance radius = 1 (Nat)",
       "runtime_counterpart": "point-map strict-edge / isolation predicate pair",
-      "runtime_predicate": "edge iff d < r (strict); isolated iff r <= d; ties are isolated, never edges"
+      "runtime_predicate": "edge iff d < r (strict); isolated iff r <= d; ties are isolated, never edges",
+      "statement_sha256": "f21a57c7bf0ead3784376d6dd0f4b08c69fba846a330ea3511aa950fe4344719"
     },
     {
       "name": "RadiusBounds.isoAt_le_one",
       "status": "lean-proved",
       "statement": "isoAt distance radius <= 1 (Nat)",
       "runtime_counterpart": "per-point isolation indicator",
-      "runtime_predicate": "the indicator is a 0/1 bit, never a multiplicity"
+      "runtime_predicate": "the indicator is a 0/1 bit, never a multiplicity",
+      "statement_sha256": "a1fc5b9edbb998b221d491bb71b6d2fec98880e1339a368363b8afa224d96e7c"
     },
     {
       "name": "RadiusBounds.isoAt_zero",
       "status": "lean-proved",
       "statement": "isoAt distance 0 = 1 (Nat)",
       "runtime_counterpart": "degenerate radius-0 endpoint of a radius sweep",
-      "runtime_predicate": "at radius 0 no pair is an edge, so every point is isolated"
+      "runtime_predicate": "at radius 0 no pair is an edge, so every point is isolated",
+      "statement_sha256": "ea711e67fa0066b182c7fea4812a688bba73b46e72391901410841bd4d7c9710"
     },
     {
       "name": "RadiusBounds.isoAt_tie",
       "status": "lean-proved",
       "statement": "isoAt distance distance = 1 (Nat)",
       "runtime_counterpart": "exact strict-threshold tie case in the radius sweep",
-      "runtime_predicate": "at radius exactly equal to the nearest-neighbour distance the point counts as isolated"
+      "runtime_predicate": "at radius exactly equal to the nearest-neighbour distance the point counts as isolated",
+      "statement_sha256": "645828754ecfa43c50660e0c15acbd180a932c4509591e42660af5f593da472c"
     },
     {
       "name": "RadiusBounds.isoAt_antitone",
       "status": "lean-proved",
       "statement": "r <= s implies isoAt distance s <= isoAt distance r (Nat)",
       "runtime_counterpart": "per-point radius sweep",
-      "runtime_predicate": "a point that is isolated at a larger radius is isolated at every smaller radius"
+      "runtime_predicate": "a point that is isolated at a larger radius is isolated at every smaller radius",
+      "statement_sha256": "cd65bf172db29e6d25493e949113cd5d695713f8c204c3fe330f03da43dbfa47"
     },
     {
       "name": "RadiusBounds.isoCount_nil",
       "status": "lean-proved",
       "statement": "isoCount [] r = 0 (Nat)",
       "runtime_counterpart": "empty-list base case of the isolate census",
-      "runtime_predicate": "no points means no isolates at any radius"
+      "runtime_predicate": "no points means no isolates at any radius",
+      "statement_sha256": "b32b44a546c6dff0f5d37fa452e0975dfd2c56b357ce59fff8f66d20d263fad5"
     },
     {
       "name": "RadiusBounds.isoCount_cons",
       "status": "lean-proved",
       "statement": "isoCount (d :: ds) r = isoAt d r + isoCount ds r (Nat)",
       "runtime_counterpart": "accumulation step of the isolate census",
-      "runtime_predicate": "the census sums each point's indicator exactly once"
+      "runtime_predicate": "the census sums each point's indicator exactly once",
+      "statement_sha256": "4f10a3f45be6d67aa37e71ebdb79bb05386a231a31e0c590c555a02022cd5257"
     },
     {
       "name": "RadiusBounds.radius_count_antitone",
       "status": "lean-proved",
       "statement": "r <= s implies isoCount distances s <= isoCount distances r (Nat)",
       "runtime_counterpart": "I(r) isolate-count curve over a radius sweep",
-      "runtime_predicate": "the isolate count is antitone in the radius: enlarging the radius never increases it"
+      "runtime_predicate": "the isolate count is antitone in the radius: enlarging the radius never increases it",
+      "statement_sha256": "c2a19b9665c4fc333a61e5723d8ae7ba293c2a57e88c196e27cbf1c5e20a91b2"
     },
     {
       "name": "RadiusBounds.isoCount_le_length",
       "status": "lean-proved",
       "statement": "isoCount ds r <= ds.length (Nat)",
       "runtime_counterpart": "I(r) normalisation sanity bound",
-      "runtime_predicate": "the isolate count never exceeds the number of points"
+      "runtime_predicate": "the isolate count never exceeds the number of points",
+      "statement_sha256": "ff3bddaa007e6d0968b5a399389934f9ad70ef3ccb7311613b7d6adf2d29cdd8"
     },
     {
       "name": "RadiusBounds.isolated_perturbation",
       "status": "lean-proved",
       "statement": "r + 2*e <= d and d <= dnew + 2*e implies r <= dnew (Int)",
       "runtime_counterpart": "conditional isolate-persistence check under a bounded coordinate perturbation",
-      "runtime_predicate": "a pair with integer clearance at least 2*e stays a non-edge; the bound 2*e is a supplied premise, not a proved float property"
+      "runtime_predicate": "a pair with integer clearance at least 2*e stays a non-edge; the bound 2*e is a supplied premise, not a proved float property",
+      "statement_sha256": "b564420424a92b3ab9f53c08dd151f2cef1461027bf80642d89659f8e8d3f50a"
     },
     {
       "name": "RadiusBounds.connected_perturbation",
       "status": "lean-proved",
       "statement": "d + 2*e < r and dnew <= d + 2*e implies dnew < r (Int)",
       "runtime_counterpart": "conditional edge-persistence check under a bounded coordinate perturbation",
-      "runtime_predicate": "a strictly-interior pair stays an edge under the same premise; strictness matches the runtime d < r edge test"
+      "runtime_predicate": "a strictly-interior pair stays an edge under the same premise; strictness matches the runtime d < r edge test",
+      "statement_sha256": "dd4ad93ae33d817789aff655926fcc007309a4a6b7746781a776726af31d2af3"
     },
     {
       "name": "RadiusBounds.perturbation_band",
       "status": "lean-proved",
       "statement": "dnew <= d + 2*e and d <= dnew + 2*e implies -(2*e) <= dnew - d and dnew - d <= 2*e (Int)",
       "runtime_counterpart": "statement of the perturbation premise used by the two persistence theorems",
-      "runtime_predicate": "the two directional premises are exactly a symmetric band on the distance change"
+      "runtime_predicate": "the two directional premises are exactly a symmetric band on the distance change",
+      "statement_sha256": "2b0eed938862cfbb39fc976c28024f97571d24782b8753c5a5943d47e81ce5a0"
     },
     {
       "name": "RadiusBounds.clampLow_ge",
       "status": "lean-proved",
       "statement": "lo <= clampLow lo a (Int)",
       "runtime_counterpart": "lower clip of an interval to the display window",
-      "runtime_predicate": "clipping never moves an endpoint below the window"
+      "runtime_predicate": "clipping never moves an endpoint below the window",
+      "statement_sha256": "dff59f74dfa31361a3796eabf5b1816acb00afbcc5e646d9838b55254628bcda"
     },
     {
       "name": "RadiusBounds.clampHigh_le",
       "status": "lean-proved",
       "statement": "clampHigh hi b <= hi (Int)",
       "runtime_counterpart": "upper clip of an interval to the display window",
-      "runtime_predicate": "clipping never moves an endpoint above the window"
+      "runtime_predicate": "clipping never moves an endpoint above the window",
+      "statement_sha256": "612c824fa775c58b3334ab48fd30b61a8c911bc7124ef8ef7c715cc22ee32b3d"
     },
     {
       "name": "RadiusBounds.clipLen_nonneg",
       "status": "lean-proved",
       "statement": "0 <= clipLen lo hi a b (Int)",
       "runtime_counterpart": "clipped extent of one axis",
-      "runtime_predicate": "an empty overlap reports 0, never a negative extent"
+      "runtime_predicate": "an empty overlap reports 0, never a negative extent",
+      "statement_sha256": "b3e64c903173578e4cfb3064c485c660f5b7b661dc6df38de07c3921cceeac69"
     },
     {
       "name": "RadiusBounds.clipLen_le_window",
       "status": "lean-proved",
       "statement": "lo <= hi implies clipLen lo hi a b <= hi - lo (Int)",
       "runtime_counterpart": "clipped extent of one axis",
-      "runtime_predicate": "a clipped extent never exceeds the window extent"
+      "runtime_predicate": "a clipped extent never exceeds the window extent",
+      "statement_sha256": "0c104767e33508602953f91bbf1862ec09ea4e5d917ddf72f8f08cb99ee3de31"
     },
     {
       "name": "RadiusBounds.clipArea_nonneg",
       "status": "lean-proved",
       "statement": "0 <= clipArea lo1 hi1 a1 b1 lo2 hi2 a2 b2 (Int)",
       "runtime_counterpart": "integer skeleton of the clipped-area diagnostic",
-      "runtime_predicate": "the exact integer clipped area is non-negative"
+      "runtime_predicate": "the exact integer clipped area is non-negative",
+      "statement_sha256": "12fdc7a34ec4c0cdc5b8686bddbd95b204cc9eca11bbfd8cc8f6aa2ea70e0322"
     },
     {
       "name": "RadiusBounds.clipArea_le_window",
       "status": "lean-proved",
       "statement": "lo1 <= hi1 and lo2 <= hi2 implies clipArea lo1 hi1 a1 b1 lo2 hi2 a2 b2 <= (hi1 - lo1) * (hi2 - lo2) (Int)",
       "runtime_counterpart": "integer skeleton of the clipped-area diagnostic",
-      "runtime_predicate": "the exact integer clipped area never exceeds the window area"
+      "runtime_predicate": "the exact integer clipped area never exceeds the window area",
+      "statement_sha256": "c632f32a83a6d2a52986ed5d484ada5e996ad3890dbc26758c92d24c4cb7c65a"
     }
   ],
   "runtime_verified_not_lean_proved": [
@@ -171,5 +189,14 @@
     "The canonical radius 0.095 is unchanged; nothing here admits a new score, ranking, or keep/revert/delete policy.",
     "A displayed radius sweep remains diagnostic; these theorems do not license changing the operative metric.",
     "A checked identity here is not evidence that the runtime diagnostic is correctly wired; see runtime_verified_not_lean_proved."
-  ]
+  ],
+  "statement_pinning": {
+    "schema": "statement-pins/1",
+    "pin": "sha256 of the normalized Lean statement text",
+    "normalization": "Lean comments stripped (/- -/ nested blocks, -- line); string literals respected; statement = source text between the declaration name and the first top-level ':=' (or the first top-level match-arm '|' line for pattern proofs); whitespace runs collapsed to single spaces; proof text excluded.",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
+    "pinned_from_commit": "ebfb8b58",
+    "pinned_from_source": "yubiOS-main/papers/data/lean/RadiusBounds.lean"
+  }
 }
