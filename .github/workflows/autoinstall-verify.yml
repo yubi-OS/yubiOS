@@ -1,0 +1,38 @@
+name: autoinstall-verify
+
+# Validates an autoinstall user-data file with the canonical/subiquity
+# parser (scripts/validate-autoinstall-user-data.py) so seed-file changes
+# (e.g. 0mniteck/U-Boot Deploy/ubuntu/*) are schema-checked before deploy.
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: "GitHub repo holding the autoinstall user-data"
+        required: false
+        default: "0mniteck/U-Boot"
+      branch:
+        description: "Branch or tag ref"
+        required: false
+        default: "Docker"
+      path:
+        description: "Path to the user-data file in the repo"
+        required: false
+        default: "Deploy/ubuntu/user-data"
+      subiquity_ref:
+        description: "canonical/subiquity ref for the parser"
+        required: false
+        default: "main"
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Validate with subiquity autoinstall parser
+        run: |
+          set -euo pipefail
+          pip install --quiet jsonschema pyyaml
+          git clone --depth 1 --branch "${{ inputs.subiquity_ref }}" https://github.com/canonical/subiquity /tmp/subiquity
+          curl -fsSL "https://raw.githubusercontent.com/${{ inputs.repo }}/${{ inputs.branch }}/${{ inputs.path }}" -o /tmp/target-user-data
+          echo "Validating ${{ inputs.repo }}@${{ inputs.branch }}:${{ inputs.path }} against subiquity@${{ inputs.subiquity_ref }}"
+          python3 /tmp/subiquity/scripts/validate-autoinstall-user-data.py /tmp/target-user-data
