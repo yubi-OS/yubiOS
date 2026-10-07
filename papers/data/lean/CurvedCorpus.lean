@@ -76,7 +76,7 @@ theorem imin_le_left (a b : Int) : imin a b ≤ a := by
   unfold imin
   split <;> omega
 
-theorem imin_le_right (b a : Int) : imin a b ≤ b := by
+theorem imin_le_right (a b : Int) : imin a b ≤ b := by
   unfold imin
   split <;> omega
 
