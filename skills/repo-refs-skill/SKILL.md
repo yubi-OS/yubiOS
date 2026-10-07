@@ -713,7 +713,7 @@ skill's correctness. A second-cycle author can use this list to
 decide whether the corpus / target repo / operator setup matches
 the skill's expectations before running it.
 
-1. **Target repo = `yubi-OS/yubiOS`** (NOT `yubi-OS/agent-skills`).
+1. **Target repo = `yubi-OS/yubiOS`** (single target; the agent-skills mirror retired 2026-09-24).
    The `refs/` substrate is dense (129 files, 1.55 MB) on the
    product repo; the skill mirror keeps only cross-cutting cycle
    outputs (3 files; repo retired 2026-09-24; historical). Fitting on `agent-skills refs/` would
