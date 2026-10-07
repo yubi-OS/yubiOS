@@ -229,3 +229,25 @@ jobs:
 
       - name: edge-standard fixture parity (Python source of record vs JS worker port)
         run: node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
+
+      - name: spectral-standard selftest (42 gold checks, pure stdlib)
+        run: python3 tools/spectral-standard/spectral_standard.py --selftest
+
+      - name: spectral-standard fixture parity (Python source of record vs JS worker port)
+        run: node --test tools/spectral-standard/test_parity_spectral.test.js
+
+      - name: spectral-standard falsification harness selftest (61 anchored checks, caller-side adapter)
+        run: |
+          PYTHONPATH=tools/spectral-standard \
+            python3 tools/spectral-standard/falsification/harness_spectral.py \
+            --module tools/spectral-standard/falsification/harness_adapter.py \
+            --selftest
+
+      - name: lens-standard selftest (46 gold checks, powered lens correct loop)
+        run: python3 tools/lens-standard/lens_standard.py --selftest
+
+      - name: lens-standard falsification harness selftest (75 gated checks + anchors)
+        run: python3 tools/lens-standard/falsification/harness_lens.py --selftest
+
+      - name: lens-standard fixture parity (Python source of record vs JS worker port)
+        run: node --test tools/lens-standard/test_parity_lens.test.js

@@ -38,9 +38,13 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # --- pinned paths -----------------------------------------------------------
-LANE_F_DIR = os.path.join(os.path.dirname(HERE), "lane-f")
-FALSIFICATION_DIR = ("/var/workspace/session/ingest-2026-10-06/yubiOS/"
-                     "tools/edge-standard/falsification")
+# Post-merge layout: Lane F's module lives at tools/lens-standard/lens_standard.py
+# (the parallel-lane lane-f/ staging dir was folded into the tool dir on merge).
+LANE_F_DIR = os.path.dirname(HERE)
+# In-repo location of the pinned edge-standard generators (dev-ingest absolute
+# path replaced with the repo-relative path; same generators, same pins).
+FALSIFICATION_DIR = os.path.join(os.path.dirname(HERE), os.pardir,
+                                 "edge-standard", "falsification")
 
 # --- pre-registered bands (PREREGISTRATION-lens-2026-10-06.md; NEVER retune) --
 SIZE = 512

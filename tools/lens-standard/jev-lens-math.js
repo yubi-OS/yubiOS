@@ -64,7 +64,7 @@
 // trefoilMomentSums, estAstig, estSpherical, estTrefoil, algebraicEstimate,
 // estimateCoefficient, measureD, correctLoop.
 
-import { standardize, measure } from './jev-edge-standard.js';
+import { standardize, measure } from '../edge-standard/jev-edge-standard.js';
 
 export const LENS_PIPELINE = 'lens-standard-v1';
 export const SIZE = 512;

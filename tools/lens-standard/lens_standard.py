@@ -166,8 +166,9 @@ EST_CORRECTOR_STEPS = 2            # predictor-corrector depth (fixed, pinned)
 SPHERICAL_INVERSE_STEPS = 12       # spherical inverse root solve (fixed count)
 
 _EDGE_PATHS = (
-    # deployed in-repo location (tools/edge-standard/ sibling of this file)
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "edge_standard.py"),
+    # deployed in-repo location: tools/edge-standard/ is the sibling TOOL dir
+    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                 os.pardir, "edge-standard", "edge_standard.py"),
     # session ingest mirror of yubi-OS/yubiOS tools/edge-standard/
     "/var/workspace/session/ingest-2026-10-06/yubiOS/tools/edge-standard/edge_standard.py",
 )
