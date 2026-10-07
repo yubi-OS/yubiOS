@@ -1283,6 +1283,3 @@ theorem weights_exact_sum : 2 + 2 + 2 + 2 + 1 = 9 := by decide
 
 
 end CurvedCorpus
-
-
-theorem mut_sorry_test : 1 = 1 := by sorry
