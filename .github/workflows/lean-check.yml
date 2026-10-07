@@ -236,6 +236,9 @@ jobs:
       - name: spectral-standard fixture parity (Python source of record vs JS worker port)
         run: node --test tools/spectral-standard/test_parity_spectral.test.js
 
+      - name: spectral-standard centroid-walk parity (Lane E pack, euclidean post-P4)
+        run: node --test tools/spectral-standard/test_centroid_parity.test.js
+
       - name: spectral-standard falsification harness selftest (61 anchored checks, caller-side adapter)
         run: |
           PYTHONPATH=tools/spectral-standard \
