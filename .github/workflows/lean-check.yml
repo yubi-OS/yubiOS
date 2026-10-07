@@ -197,6 +197,17 @@ jobs:
             --axioms /tmp/rayleigh-axioms.txt \
             --manifest papers/data/lean/rayleigh-scope.json
 
+      - name: Check CurvedCorpus.lean (statement pins via scope manifest)
+        run: |
+          set -euo pipefail
+          # Reuses /tmp/CurvedCorpus-axioms.txt produced by the axiom-coverage
+          # gate step earlier in this job (probe compile of the full source +
+          # one #print axioms per theorem). 90 theorem statement pins checked.
+          test -s /tmp/CurvedCorpus-axioms.txt
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/CurvedCorpus-axioms.txt \
+            --manifest papers/data/lean/curvedcorpus-scope.json
+
   verify-measurements:
     runs-on: ubuntu-latest
     timeout-minutes: 30
