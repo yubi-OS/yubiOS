@@ -1,0 +1,184 @@
+{
+ "meta": {
+  "instrument": "GET /api/jev/corpus/visco/hysteresis?baseline_id=N @ https://steady-orbit.systems-a.workers.dev",
+  "run_utc": "2026-10-07T04:42:40.943Z",
+  "gates_reference": "preregistration.md section 2 (H0 added via amendments 2026-10-07T04:35Z; reference corrected per amendments 2026-10-07T04:44Z)"
+ },
+ "gates": {
+  "H0_repo_fixtures": {
+   "pass": true,
+   "detail": [
+    {
+     "fixture": "round3_recorded",
+     "checks": {
+      "loops_count": true,
+      "active_rows": true,
+      "total_sum_abs": true,
+      "total_mean_per_cycle": true,
+      "n_cycles": true
+     },
+     "pass": true,
+     "computed": {
+      "total_sum_abs": 102.86000000000001,
+      "total_mean_per_cycle": 10.286000000000001,
+      "n_cycles": 10,
+      "active_rows": 10,
+      "loops": 10
+     }
+    },
+    {
+     "fixture": "synthetic_two_loops",
+     "checks": {
+      "loops_count": true,
+      "active_rows": true,
+      "total_sum_abs": true,
+      "total_mean_per_cycle": true,
+      "n_cycles": true,
+      "loop_sums": true,
+      "loop_means": true
+     },
+     "pass": true,
+     "computed": {
+      "total_sum_abs": 26.1,
+      "total_mean_per_cycle": 8.700000000000001,
+      "n_cycles": 3,
+      "active_rows": 3,
+      "loops": 3
+     }
+    }
+   ]
+  },
+  "H1_live_parity": {
+   "pass": true,
+   "detail": [
+    {
+     "baseline": 565,
+     "pass": true,
+     "diffs": []
+    },
+    {
+     "baseline": 566,
+     "pass": true,
+     "diffs": []
+    },
+    {
+     "baseline": 569,
+     "pass": true,
+     "diffs": []
+    }
+   ]
+  },
+  "H2_contract": {
+   "pass": true,
+   "detail": [
+    {
+     "id": "no_param",
+     "pass": true,
+     "detail": "422 INVALID_BASELINE 'baseline_id query parameter is required'"
+    },
+    {
+     "id": "non_numeric",
+     "pass": true,
+     "detail": "422 INVALID_BASELINE 'baseline_id must be a number'"
+    },
+    {
+     "id": "empty_0",
+     "pass": true
+    },
+    {
+     "id": "empty_1",
+     "pass": true
+    },
+    {
+     "id": "empty_99999",
+     "pass": true
+    },
+    {
+     "id": "empty_-1",
+     "pass": true
+    },
+    {
+     "id": "identities_565",
+     "pass": true,
+     "detail": "total_sum_abs==sum_abs; total_mean==mean_per_cycle; active+skipped==ledger_rows (1+1==2)"
+    },
+    {
+     "id": "identities_566",
+     "pass": true,
+     "detail": "4+4==8"
+    },
+    {
+     "id": "identities_569",
+     "pass": true,
+     "detail": "1+1==2"
+    }
+   ]
+  },
+  "H3_analytic_fixtures_reference_only": {
+   "pass": true,
+   "detail": [
+    {
+     "name": "single_row_both_shapes",
+     "pass": true,
+     "threw": null,
+     "note": "one row carrying both shapes closes its own loop"
+    },
+    {
+     "name": "multi_cycle_chain",
+     "pass": true,
+     "threw": null,
+     "note": "3-row supersedes chain; per-row contributions 8+9+5.5=22.5; mean over chain length 3 = 7.5 (re-pinned per amendment 04:44Z)"
+    },
+    {
+     "name": "mixed_two_chains_plus_singleton",
+     "pass": true,
+     "threw": null,
+     "note": "chain loop 3+3.5=6.5 mean 3.25; singleton 1.75"
+    },
+    {
+     "name": "pending_only",
+     "pass": true,
+     "threw": null,
+     "note": "pending-only ledger: no loops, zeros (amendment interpretation)"
+    },
+    {
+     "name": "pending_chain_root",
+     "pass": true,
+     "threw": null,
+     "note": "chain root carries the predicted direction; realized row closes the loop; mean over chain LENGTH 2 = 3.7 per the contract (mean_abs = sum_abs / len(chain), as the frozen synthetic_two_loops confirms: 14.7/2 = 7.35). Hand-pin corrected 7.4 -> 3.7 before gate evaluation."
+    },
+    {
+     "name": "supersedes_cycle",
+     "pass": true,
+     "threw": null,
+     "note": "supersedes cycle a<->b -> leftover singleton loops, each row counted once (contract rule)"
+    },
+    {
+     "name": "unknown_supersedes_root",
+     "pass": true,
+     "threw": null,
+     "note": "unknown supersedes id -> treated as root (contract rule)"
+    },
+    {
+     "name": "duplicate_ids_throw",
+     "pass": true,
+     "threw": "duplicate ids",
+     "note": "contract: duplicate ids -> throw"
+    },
+    {
+     "name": "empty_ledger",
+     "pass": true,
+     "threw": null,
+     "note": "contract: empty ledger -> all zeros"
+    }
+   ]
+  }
+ },
+ "overall_pass": true,
+ "interpretation_notes": [
+  "Per-row area rule (CONTRACTS.md): each chain row contributes its OWN |predicted_delta - realized_delta|; superseded attempts dissipate too. For two-phase ledger rows, a row with null predicted takes the chain root's predicted_delta; a row with null realized contributes zero and never forms a loop on its own.",
+  "mean_abs = sum_abs / len(chain) where len counts every chain row (frozen fixture synthetic_two_loops: 14.7/2 = 7.35 confirms).",
+  "Supersedes-cycle handling (a<->b): leftover singleton loops per contract; active_rows counts each singleton as its own loop-active row (interpretation, reference-only).",
+  "Multi-realization chains (pred <- real1 <- real2) are not exercised by any live data; the reference fills missing predicted from the chain ROOT for every realized row. Flagged as interpretation, reference-only."
+ ]
+}

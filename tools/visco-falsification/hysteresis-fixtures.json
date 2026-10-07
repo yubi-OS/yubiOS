@@ -1,0 +1,518 @@
+{
+ "meta": {
+  "instrument": "GET /api/jev/corpus/visco/hysteresis?baseline_id=N",
+  "reference_source": "tools/visco-instruments/CONTRACTS.md section 2 hysteresis_rollup (fetched from yubi-OS/yubiOS main raw, 2026-10-07); corrected to the documented per-row rule after the frozen fixture falsified the initial implementation (amendments 2026-10-07T04:44Z)",
+  "prereg": "preregistration.md",
+  "amendments": "amendments.md",
+  "generated_utc": "2026-10-07T04:42:39.982Z"
+ },
+ "repo_fixtures_used": [
+  "round3_recorded",
+  "synthetic_two_loops"
+ ],
+ "analytic_fixtures": [
+  {
+   "name": "single_row_both_shapes",
+   "note": "one row carrying both shapes closes its own loop",
+   "input": [
+    {
+     "id": 1,
+     "predicted_delta": 3.5,
+     "realized_delta": -1.2,
+     "supersedes": null
+    }
+   ],
+   "expected": {
+    "loops": [
+     {
+      "chain_ids": [
+       1
+      ],
+      "predicted": [
+       3.5
+      ],
+      "realized": [
+       -1.2
+      ],
+      "sum_abs": 4.7,
+      "mean_abs": 4.7
+     }
+    ],
+    "active_rows": 1,
+    "total_sum_abs": 4.7,
+    "total_mean_per_cycle": 4.7,
+    "n_cycles": 1
+   },
+   "computed": {
+    "loops": [
+     {
+      "chain_ids": [
+       1
+      ],
+      "predicted": [
+       3.5
+      ],
+      "realized": [
+       -1.2
+      ],
+      "sum_abs": 4.7,
+      "mean_abs": 4.7
+     }
+    ],
+    "active_rows": 1,
+    "total_sum_abs": 4.7,
+    "total_mean_per_cycle": 4.7,
+    "n_cycles": 1,
+    "skipped_rows": 0
+   },
+   "threw": null,
+   "pass": true
+  },
+  {
+   "name": "multi_cycle_chain",
+   "note": "3-row supersedes chain; per-row contributions 8+9+5.5=22.5; mean over chain length 3 = 7.5 (re-pinned per amendment 04:44Z)",
+   "input": [
+    {
+     "id": "c1",
+     "predicted_delta": 10,
+     "realized_delta": 2,
+     "supersedes": null
+    },
+    {
+     "id": "c2",
+     "predicted_delta": 8,
+     "realized_delta": -1,
+     "supersedes": "c1"
+    },
+    {
+     "id": "c3",
+     "predicted_delta": 6,
+     "realized_delta": 0.5,
+     "supersedes": "c2"
+    }
+   ],
+   "expected": {
+    "loops": [
+     {
+      "chain_ids": [
+       "c1",
+       "c2",
+       "c3"
+      ],
+      "predicted": [
+       10,
+       8,
+       6
+      ],
+      "realized": [
+       2,
+       -1,
+       0.5
+      ],
+      "sum_abs": 22.5,
+      "mean_abs": 7.5
+     }
+    ],
+    "active_rows": 1,
+    "total_sum_abs": 22.5,
+    "total_mean_per_cycle": 22.5,
+    "n_cycles": 1
+   },
+   "computed": {
+    "loops": [
+     {
+      "chain_ids": [
+       "c1",
+       "c2",
+       "c3"
+      ],
+      "predicted": [
+       10,
+       8,
+       6
+      ],
+      "realized": [
+       2,
+       -1,
+       0.5
+      ],
+      "sum_abs": 22.5,
+      "mean_abs": 7.5
+     }
+    ],
+    "active_rows": 1,
+    "total_sum_abs": 22.5,
+    "total_mean_per_cycle": 22.5,
+    "n_cycles": 1,
+    "skipped_rows": 0
+   },
+   "threw": null,
+   "pass": true
+  },
+  {
+   "name": "mixed_two_chains_plus_singleton",
+   "note": "chain loop 3+3.5=6.5 mean 3.25; singleton 1.75",
+   "input": [
+    {
+     "id": "m1",
+     "predicted_delta": 4,
+     "realized_delta": 1,
+     "supersedes": null
+    },
+    {
+     "id": "m2",
+     "predicted_delta": 3,
+     "realized_delta": -0.5,
+     "supersedes": "m1"
+    },
+    {
+     "id": "m3",
+     "predicted_delta": 2,
+     "realized_delta": 0.25,
+     "supersedes": null
+    }
+   ],
+   "expected": {
+    "loops": [
+     {
+      "chain_ids": [
+       "m1",
+       "m2"
+      ],
+      "predicted": [
+       4,
+       3
+      ],
+      "realized": [
+       1,
+       -0.5
+      ],
+      "sum_abs": 6.5,
+      "mean_abs": 3.25
+     },
+     {
+      "chain_ids": [
+       "m3"
+      ],
+      "predicted": [
+       2
+      ],
+      "realized": [
+       0.25
+      ],
+      "sum_abs": 1.75,
+      "mean_abs": 1.75
+     }
+    ],
+    "active_rows": 2,
+    "total_sum_abs": 8.25,
+    "n_cycles": 2
+   },
+   "computed": {
+    "loops": [
+     {
+      "chain_ids": [
+       "m1",
+       "m2"
+      ],
+      "predicted": [
+       4,
+       3
+      ],
+      "realized": [
+       1,
+       -0.5
+      ],
+      "sum_abs": 6.5,
+      "mean_abs": 3.25
+     },
+     {
+      "chain_ids": [
+       "m3"
+      ],
+      "predicted": [
+       2
+      ],
+      "realized": [
+       0.25
+      ],
+      "sum_abs": 1.75,
+      "mean_abs": 1.75
+     }
+    ],
+    "active_rows": 2,
+    "total_sum_abs": 8.25,
+    "total_mean_per_cycle": 4.125,
+    "n_cycles": 2,
+    "skipped_rows": 0
+   },
+   "threw": null,
+   "pass": true
+  },
+  {
+   "name": "pending_only",
+   "note": "pending-only ledger: no loops, zeros (amendment interpretation)",
+   "input": [
+    {
+     "id": "p1",
+     "predicted_delta": 5,
+     "realized_delta": null,
+     "supersedes": null
+    }
+   ],
+   "expected": {
+    "loops": [],
+    "active_rows": 1,
+    "total_sum_abs": 0,
+    "n_cycles": 0
+   },
+   "computed": {
+    "loops": [],
+    "active_rows": 1,
+    "total_sum_abs": 0,
+    "total_mean_per_cycle": 0,
+    "n_cycles": 0,
+    "skipped_rows": 1
+   },
+   "threw": null,
+   "pass": true
+  },
+  {
+   "name": "pending_chain_root",
+   "note": "chain root carries the predicted direction; realized row closes the loop; mean over chain LENGTH 2 = 3.7 per the contract (mean_abs = sum_abs / len(chain), as the frozen synthetic_two_loops confirms: 14.7/2 = 7.35). Hand-pin corrected 7.4 -> 3.7 before gate evaluation.",
+   "input": [
+    {
+     "id": "q1",
+     "predicted_delta": 7,
+     "realized_delta": null,
+     "supersedes": null
+    },
+    {
+     "id": "q2",
+     "predicted_delta": null,
+     "realized_delta": -0.4,
+     "supersedes": "q1"
+    }
+   ],
+   "expected": {
+    "loops": [
+     {
+      "chain_ids": [
+       "q1",
+       "q2"
+      ],
+      "predicted": [
+       7
+      ],
+      "realized": [
+       -0.4
+      ],
+      "sum_abs": 7.4,
+      "mean_abs": 3.7
+     }
+    ],
+    "active_rows": 1,
+    "n_cycles": 1,
+    "total_sum_abs": 7.4
+   },
+   "computed": {
+    "loops": [
+     {
+      "chain_ids": [
+       "q1",
+       "q2"
+      ],
+      "predicted": [
+       7
+      ],
+      "realized": [
+       -0.4
+      ],
+      "sum_abs": 7.4,
+      "mean_abs": 3.7
+     }
+    ],
+    "active_rows": 1,
+    "total_sum_abs": 7.4,
+    "total_mean_per_cycle": 7.4,
+    "n_cycles": 1,
+    "skipped_rows": 1
+   },
+   "threw": null,
+   "pass": true
+  },
+  {
+   "name": "supersedes_cycle",
+   "note": "supersedes cycle a<->b -> leftover singleton loops, each row counted once (contract rule)",
+   "input": [
+    {
+     "id": "a",
+     "predicted_delta": 5,
+     "realized_delta": 1,
+     "supersedes": "b"
+    },
+    {
+     "id": "b",
+     "predicted_delta": 2,
+     "realized_delta": 0.5,
+     "supersedes": "a"
+    }
+   ],
+   "expected": {
+    "loops": [
+     {
+      "chain_ids": [
+       "a"
+      ],
+      "predicted": [
+       5
+      ],
+      "realized": [
+       1
+      ],
+      "sum_abs": 4,
+      "mean_abs": 4
+     },
+     {
+      "chain_ids": [
+       "b"
+      ],
+      "predicted": [
+       2
+      ],
+      "realized": [
+       0.5
+      ],
+      "sum_abs": 1.5,
+      "mean_abs": 1.5
+     }
+    ],
+    "n_cycles": 2,
+    "total_sum_abs": 5.5
+   },
+   "computed": {
+    "loops": [
+     {
+      "chain_ids": [
+       "a"
+      ],
+      "predicted": [
+       5
+      ],
+      "realized": [
+       1
+      ],
+      "sum_abs": 4,
+      "mean_abs": 4
+     },
+     {
+      "chain_ids": [
+       "b"
+      ],
+      "predicted": [
+       2
+      ],
+      "realized": [
+       0.5
+      ],
+      "sum_abs": 1.5,
+      "mean_abs": 1.5
+     }
+    ],
+    "active_rows": 0,
+    "total_sum_abs": 5.5,
+    "total_mean_per_cycle": 2.75,
+    "n_cycles": 2,
+    "skipped_rows": 0
+   },
+   "threw": null,
+   "pass": true
+  },
+  {
+   "name": "unknown_supersedes_root",
+   "note": "unknown supersedes id -> treated as root (contract rule)",
+   "input": [
+    {
+     "id": "u1",
+     "predicted_delta": 6,
+     "realized_delta": 2,
+     "supersedes": "zzz"
+    }
+   ],
+   "expected": {
+    "loops": [
+     {
+      "chain_ids": [
+       "u1"
+      ],
+      "predicted": [
+       6
+      ],
+      "realized": [
+       2
+      ],
+      "sum_abs": 4,
+      "mean_abs": 4
+     }
+    ],
+    "n_cycles": 1
+   },
+   "computed": {
+    "loops": [
+     {
+      "chain_ids": [
+       "u1"
+      ],
+      "predicted": [
+       6
+      ],
+      "realized": [
+       2
+      ],
+      "sum_abs": 4,
+      "mean_abs": 4
+     }
+    ],
+    "active_rows": 1,
+    "total_sum_abs": 4,
+    "total_mean_per_cycle": 4,
+    "n_cycles": 1,
+    "skipped_rows": 0
+   },
+   "threw": null,
+   "pass": true
+  },
+  {
+   "name": "duplicate_ids_throw",
+   "note": "contract: duplicate ids -> throw",
+   "input": "two rows with id 1",
+   "expected": {
+    "throws": true
+   },
+   "threw": "duplicate ids",
+   "pass": true
+  },
+  {
+   "name": "empty_ledger",
+   "note": "contract: empty ledger -> all zeros",
+   "input": [],
+   "expected": {
+    "loops": [],
+    "active_rows": 0,
+    "total_sum_abs": 0,
+    "total_mean_per_cycle": 0,
+    "n_cycles": 0
+   },
+   "computed": {
+    "loops": [],
+    "active_rows": 0,
+    "total_sum_abs": 0,
+    "total_mean_per_cycle": 0,
+    "n_cycles": 0,
+    "skipped_rows": 0
+   },
+   "threw": null,
+   "pass": true
+  }
+ ]
+}

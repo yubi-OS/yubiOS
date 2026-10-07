@@ -1,0 +1,58 @@
+{
+  "purpose": "Schema-discovery probe log for POST /api/jev/corpus/visco/snapback and GET /api/jev/corpus/visco/hysteresis (steady-orbit worker), recorded BEFORE preregistration. Every value below was observed live on 2026-10-07 (UTC) via the worker executor with the 'Steady Orbit jev operator' bearer connection (conn_QAvrBSyEG8ml). This log is the empirical basis of preregistration.md section 0; nothing here is inferred without an observation.",
+  "snapback": [
+    {"probe": "empty-body", "req": "POST '' (no JSON)", "status": 400, "resp": {"error": {"code": "INVALID_BODY", "message": "invalid JSON body"}}},
+    {"probe": "no-auth", "req": "POST {series:[]} without bearer", "status": 401, "resp": {"error": {"code": "UNAUTHORIZED", "message": "missing or wrong bearer token"}}},
+    {"probe": "wrong-method-GET", "req": "GET /api/jev/corpus/visco/snapback", "status": 404, "resp": {"error": {"code": "NOT_FOUND", "message": "no corpus route for GET /api/jev/corpus/visco/snapback"}}},
+    {"probe": "empty-obj", "req": "POST {}", "status": 422, "resp": {"error": {"code": "INVALID_INPUT", "message": "snapback needs {series: [{cycle, predicted_delta, realized_delta}]} or {baseline_id}"}}},
+    {"probe": "series-empty-array", "req": "POST {series:[]}", "status": 200, "resp": {"snapback": false, "inversion_runs": [], "run_lengths": [], "verdict": "no_snapback", "gate_input": {"action": "continue"}, "gate_noise_context": null, "source": "inline", "baseline_id": null, "n_points": 0}},
+    {"probe": "series-missing-fields", "req": "POST {series:[{cycle:1}]}", "status": 422, "resp": {"error": {"code": "INVALID_SERIES", "message": "series[0].predicted_delta and .realized_delta must be finite numbers"}}},
+    {"probe": "bare-array", "req": "POST [{cycle:1,predicted_delta:1,realized_delta:1}]", "status": 400, "resp": {"error": {"code": "INVALID_BODY", "message": "invalid JSON body"}}},
+    {"probe": "runs-shape-guess (recorded round-3 runs)", "req": "POST {runs:[[4],[6,7],[10]]}", "status": 422, "resp": {"error": {"code": "INVALID_INPUT", "message": "snapback needs {series: [{cycle, predicted_delta, realized_delta}]} or {baseline_id}"}}},
+    {"probe": "valid-3-cycle pred +2 realized [1.8,1.7,-1.0]", "status": 200, "resp": {"snapback": false, "inversion_runs": [[3]], "run_lengths": [1], "verdict": "no_snapback", "gate_input": {"action": "continue"}, "n_points": 3}},
+    {"probe": "aligned-all (3x pred2/real2)", "status": 200, "verdict": "no_snapback", "action": "continue", "runs": [], "note": "aligned -> continue"},
+    {"probe": "zero-realized (pred 2, real 0 x3)", "status": 200, "verdict": "no_snapback", "action": "continue", "runs": [], "note": "realized 0 = neutral, no inversion"},
+    {"probe": "all-zero-both", "status": 200, "verdict": "no_snapback", "runs": []},
+    {"probe": "single-inversion (pred 2, real -1)", "status": 200, "verdict": "no_snapback", "action": "continue", "runs": [[1]], "lens": [1], "note": "single inversion never halts"},
+    {"probe": "two-consec-inversions", "status": 200, "verdict": "snapback", "action": "halt_round", "runs": [[1, 2]], "lens": [2], "snapback_field": true, "note": "HALT RULE: run length >= 2"},
+    {"probe": "three-consec-inversions", "status": 200, "verdict": "snapback", "action": "halt_round", "runs": [[1, 2, 3]]},
+    {"probe": "long-run-5", "status": 200, "verdict": "snapback", "action": "halt_round", "runs": [[1, 2, 3, 4, 5]]},
+    {"probe": "neg-pred-pos-realized (pred -2, real 3)", "status": 200, "verdict": "no_snapback", "runs": [[1]], "note": "inversion is sign-opposition, direction-symmetric"},
+    {"probe": "two-sep-runs (inv, aligned, inv)", "status": 200, "verdict": "no_snapback", "runs": [[1], [3]], "lens": [1, 1], "note": "separated inversions do not accumulate"},
+    {"probe": "tiny-negative-realized (pred 2, real -0.001)", "status": 200, "verdict": "no_snapback", "runs": [[1]], "note": "NO magnitude threshold on inversion"},
+    {"probe": "tiny-negative-run2 (pred 2, real -0.001,-0.002)", "status": 200, "verdict": "snapback", "action": "halt_round", "runs": [[1, 2]], "note": "tiny magnitudes still halt when consecutive"},
+    {"probe": "mixed-zero-in-run (inv, zero, inv)", "status": 200, "verdict": "no_snapback", "runs": [[1], [3]], "note": "zero BREAKS a run"},
+    {"probe": "pred0-realized-pos", "status": 200, "verdict": "no_snapback", "runs": [], "note": "predicted 0 = no direction, never opposed"},
+    {"probe": "pred0-realized-neg", "status": 200, "verdict": "no_snapback", "runs": []},
+    {"probe": "neg-pred-zero-realized", "status": 200, "verdict": "no_snapback", "runs": []},
+    {"probe": "inversion-then-zero-then-inversion", "status": 200, "runs": [[1], [3]]},
+    {"probe": "zero-then-inversion", "status": 200, "runs": [[2]]},
+    {"probe": "baseline-id-and-series both supplied", "req": "POST {series:[aligned], baseline_id:5}", "status": 200, "resp": {"source": "inline", "baseline_id": null, "n_points": 1}, "note": "series wins; baseline_id ignored, echoed null"},
+    {"probe": "validation-lenient cycle-as-string/float, delta-as-string, null delta, NaN->null, negative cycle, dup cycles, out-of-order cycles, extra fields", "status": 200, "note": "all accepted with n_points counted; only non-finite/absent deltas and non-object bodies 4xx; gate_noise_context null in every probe"},
+    {"probe": "ledger-path baseline_id=565", "status": 200, "resp": {"source": "ledger", "baseline_id": 565, "inversion_runs": [[1415]], "run_lengths": [1], "verdict": "no_snapback", "n_points": 1}},
+    {"probe": "ledger-path baseline_id=566", "status": 200, "resp": {"source": "ledger", "baseline_id": 566, "inversion_runs": [[1417], [1423]], "run_lengths": [1, 1], "verdict": "no_snapback", "n_points": 4}},
+    {"probe": "ledger-path baseline_id=569", "status": 200, "resp": {"source": "ledger", "baseline_id": 569, "inversion_runs": [], "verdict": "no_snapback", "n_points": 1}},
+    {"probe": "ledger-path baseline_id=99999 (empty)", "status": 200, "resp": {"source": "ledger", "inversion_runs": [], "verdict": "no_snapback", "n_points": 0, "note": "ledger empty for this baseline"}}
+  ],
+  "hysteresis": [
+    {"probe": "no-baseline", "req": "GET /api/jev/corpus/visco/hysteresis", "status": 422, "resp": {"error": {"code": "INVALID_BASELINE", "message": "baseline_id query parameter is required"}}},
+    {"probe": "baseline=abc", "status": 422, "resp": {"error": {"code": "INVALID_BASELINE", "message": "baseline_id must be a number"}}},
+    {"probe": "baseline=0/1/99999/-1 (no rows)", "status": 200, "resp": {"loops": [], "total_sum_abs": 0, "total_mean_per_cycle": 0, "sum_abs": 0, "mean_per_cycle": 0, "n_cycles": 0, "active_rows": 0, "verdict": "no_data", "note": "ledger empty for this baseline", "ledger_rows": 0, "skipped_rows": 0}, "note": "no positivity check on baseline id"},
+    {"probe": "baseline=565 (2 rows: pred -1 pending + realized 0.023492596445013447 kept)", "status": 200, "resp": {"loops": [{"chain_ids": [1415], "predicted": [-1], "realized": [0.023492596445013447], "sum_abs": 1.0234925964450134, "mean_abs": 1.0234925964450134, "ledger_chain_ids": [1414, 1415]}], "active_rows": 1, "total_sum_abs": 1.0234925964450134, "total_mean_per_cycle": 1.0234925964450134, "n_cycles": 1, "sum_abs": 1.0234925964450134, "mean_per_cycle": 1.0234925964450134, "verdict": "measured", "ledger_rows": 2, "skipped_rows": 1}},
+    {"probe": "baseline=566 (8 rows, 4 pairs)", "status": 200, "resp_summary": {"loops": 4, "loop_sums": [1.0188833186133657, 0.7989160985047761, 0.788788159327602, 1.292919939014908], "total_sum_abs": 3.8995075154606518, "total_mean_per_cycle": 0.9748768788651629, "n_cycles": 4, "active_rows": 4, "ledger_rows": 8, "skipped_rows": 4, "verdict": "measured"}},
+    {"probe": "baseline=569 (pred -1 pending + realized -0.2952529804912345 reverted)", "status": 200, "resp_summary": {"loops": 1, "loop_sums": [0.7047470195087655], "total_sum_abs": 0.7047470195087655, "n_cycles": 1, "active_rows": 1, "verdict": "measured"}}
+  ],
+  "sources_fetched_pre_prereg": [
+    "skills/falsification-corpus/SKILL.md (local workspace)",
+    "https://raw.githubusercontent.com/yubi-OS/yubiOS/main/refs/falsification-harness-coverage-2026-10-06.md (build-order items 5+6)",
+    "https://steady-orbit.systems-a.workers.dev/AGENT.md (visco route contract rows)",
+    "https://raw.githubusercontent.com/yubi-OS/yubiOS/main/refs/visco-instruments-2026-10-02.md (recorded e2e: round-3 series runs [[4],[6,7],[10]] -> halt_round; 102.86 hysteresis anchor)",
+    "https://raw.githubusercontent.com/yubi-OS/yubiOS/main/tools/visco-instruments/CONTRACTS.md (documented hysteresis_rollup + snapback_detect rules)",
+    "https://raw.githubusercontent.com/yubi-OS/yubiOS/main/tools/visco-instruments/fixtures/visco-fixtures.json (frozen source-of-record fixtures)"
+  ],
+  "documented_contract_notes": {
+    "snapback_detect (CONTRACTS.md section 4)": "inversion iff sign(realized) OPPOSES sign(predicted); realized 0 neutral; predicted 0 no direction; consecutive inversions group into runs, agreeing or neutral cycle breaks a run; snapback iff any run length >= 2; verdicts only, never auto-actions",
+    "hysteresis_rollup (CONTRACTS.md section 2)": "supersedes chain root<-...<-active closes into one loop oldest->active; area per loop = sum |predicted_delta - realized_delta| over WHOLE chain; mean_abs = sum_abs/len(chain); active_rows = rows no other row supersedes; n_cycles = number of loops; unknown supersedes -> root; supersedes cycle -> leftover singleton loops; empty -> all zeros",
+    "parity tolerance rule": "1e-9 * (1 + |expected|); 0.05 for the 102.86 anchor; 0.01 for its mean"
+  }
+}
