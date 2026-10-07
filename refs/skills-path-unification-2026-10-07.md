@@ -61,3 +61,14 @@ Full-diff review: rule compliance, no over-edits, YAML still parses (`js-yaml`/p
 
 ## Ship + sync
 Orchestrator pushes changed files + this spec to `yubi-OS/yubiOS@main` via Git Data API (single commit), then syncs `skills/github-yubios-KS9n5GAT/` copies and regenerates `skill_registry.json`.
+
+## Enforcement (shipped 2026-10-07)
+
+The path lint now lives in `generate_skill_registry.py` (local space tool, not pushed to the repo per the standing directive). Every registry generation also lints every top-level SKILL.md against the four dead-path classes:
+
+- `conn_id` — any `conn_*` id not on the live allowlist in `lint_allowlist.json` (updated alongside connection churn; ids never hardcoded in the generator).
+- `agent_skills_repo` — any `yubi-OS/agent-skills` reference outside a line carrying a historical/retired marker (with 1-line lookahead for wrapped annotations).
+- `personal_dirname` — hardcoded `skills/personal-*` / `memory/personal-*` dirNames outside historical lines.
+- `session_citation` — a concrete `session/<file>` path cited outside a changelog/evidence section, without a runtime-capture marker ("capture to session/", "e.g." placeholders) or the "(session artifact" annotation.
+
+Usage: `generate_skill_registry.py` (registry + lint), `--lint-only`, `--strict` (exit 1 on findings), optional positional root for testing other trees. Findings print to stdout and land in `skill_lint_report.json` next to the registry. Validated: 52 findings on the pre-fix corpus (pristine main tarball), 0 on the post-fix corpus.
