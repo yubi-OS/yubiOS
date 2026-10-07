@@ -35,7 +35,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update -qq
-          sudo apt-get install -y -qq python3-aiohttp python3-jsonschema python3-requests python3-requests-unixsocket python3-systemd python3-yaml
+          sudo apt-get install -y -qq python3-aiohttp python3-apport python3-attr python3-bson python3-debian python3-distro-info python3-jsonschema python3-more-itertools python3-oauthlib python3-packaging python3-passlib python3-pkg-resources python3-pyroute2 python3-pyrsistent python3-pyudev python3-requests python3-requests-unixsocket python3-systemd python3-urwid python3-yaml python3-yarl
           git clone --depth 1 https://github.com/canonical/subiquity /tmp/subiquity
           git clone --depth 1 https://github.com/canonical/curtin /tmp/subiquity/curtin
           git clone --depth 1 https://github.com/canonical/probert /tmp/subiquity/probert
