@@ -1,0 +1,62 @@
+{
+  "fixture": {
+    "aberrated_mask_sha256": "55f4973762aaa7263d9aeb8b16ca2f2f5eb8341b121ae90bc01c49410585e6a1",
+    "coefficient": 0.06,
+    "coefficients_est": {
+      "spherical": 0.059953772004137595
+    },
+    "corrected_mask_sha256": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2",
+    "d_aberrated": 1.534490666985404,
+    "d_corrected": 1.5589369960067876,
+    "d_ref": 1.5589369960067876,
+    "estimation_error": -4.622799586240234e-05,
+    "id": "gasket-spherical-0.06",
+    "mode": "spherical",
+    "monotone": true,
+    "recovered": true,
+    "reference_mask_sha256": "bf3f7398384ebc44dc3ffdceda33cf4059ac5cd3a725e8e8294641ca7f14c6c2",
+    "render": "gasket",
+    "roundtrip_recovery": 1.0
+  },
+  "meta": {
+    "mask_serialization": "newline-joined '1'/'0' rows (edge-standard selftest convention); sha256 of utf-8 bytes",
+    "pinned": {
+      "astig_kappa": 0.5,
+      "center": 255.5,
+      "d_band": 0.05,
+      "est_newton_steps": 6,
+      "est_tol": {
+        "astig": 0.005,
+        "spherical": 0.005,
+        "trefoil": 0.005
+      },
+      "gasket": {
+        "L": 384,
+        "depths": 6,
+        "r": 3
+      },
+      "max_astig": 0.5,
+      "max_spherical": 0.3,
+      "max_trefoil": 0.0002,
+      "r_max": 256,
+      "rounding_rule": "nint(v) = floor(v + 0.5); out-of-canvas destinations dropped; row-major source order",
+      "size": 512,
+      "spherical_inverse_steps": 12,
+      "tri": {
+        "a": 52,
+        "dy": 45,
+        "r": 16,
+        "rows": [
+          3,
+          4,
+          5,
+          4,
+          3
+        ]
+      }
+    },
+    "pipeline": "lens-standard-v1",
+    "purpose": "cross-language parity anchor for the powered lens (measure->correct): same gold render + mode must reproduce mask shas, estimates and D readings exactly (floats) in any port.",
+    "source_of_record": "lens_standard.py (Lane F, Python)"
+  }
+}

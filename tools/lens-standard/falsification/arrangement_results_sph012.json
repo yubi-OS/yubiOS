@@ -1,0 +1,13 @@
+{
+ "spherical_0.12_recentered": {
+  "dropped": 0,
+  "n_kept": 366,
+  "D_ref_recentered": 1.5273,
+  "D_arrangement": 1.4756,
+  "dD_arrangement": -0.0516,
+  "d_w_clean_recentered": 2.7812,
+  "d_w": 2.7715,
+  "dD_w": -0.0097,
+  "d_w_r2": 0.99168
+ }
+}

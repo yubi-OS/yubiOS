@@ -1,0 +1,21 @@
+{
+  "name": "jev-spectral-math",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pure deterministic ES-module spectral math for spectral-standard-v1 + hierarchy-oracle-v1 (Lane B JS worker port). stdlib-free, Workers-compatible.",
+  "main": "jev-spectral-math.js",
+  "scripts": {
+    "test": "node --test test_parity_spectral.test.js",
+    "gen-fixtures": "node gen_fixtures.mjs"
+  },
+  "keywords": [
+    "spectral-dimension",
+    "walk-dimension",
+    "sierpinski-gasket",
+    "einstein-relation",
+    "log-periodic",
+    "jev"
+  ],
+  "license": "UNLICENSED",
+  "private": true
+}
