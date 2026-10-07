@@ -3,6 +3,9 @@ name: autoinstall-verify
 # Validates an autoinstall user-data file with the canonical/subiquity
 # parser (scripts/validate-autoinstall-user-data.py) so seed-file changes
 # (e.g. 0mniteck/U-Boot Deploy/ubuntu/*) are schema-checked before deploy.
+# Deps follow subiquity snapcraft.yaml (python3-aiohttp/-jsonschema/
+# -requests/-requests-unixsocket/-systemd/-yaml); curtin + probert are
+# cloned into the subiquity tree as siblings, matching the snap layout.
 
 on:
   workflow_dispatch:
@@ -31,8 +34,11 @@ jobs:
       - name: Validate with subiquity autoinstall parser
         run: |
           set -euo pipefail
-          pip install --quiet jsonschema pyyaml
-          git clone --depth 1 --branch "${{ inputs.subiquity_ref }}" https://github.com/canonical/subiquity /tmp/subiquity
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq python3-aiohttp python3-jsonschema python3-requests python3-requests-unixsocket python3-systemd python3-yaml
+          git clone --depth 1 https://github.com/canonical/subiquity /tmp/subiquity
+          git clone --depth 1 https://github.com/canonical/curtin /tmp/subiquity/curtin
+          git clone --depth 1 https://github.com/canonical/probert /tmp/subiquity/probert
           curl -fsSL "https://raw.githubusercontent.com/${{ inputs.repo }}/${{ inputs.branch }}/${{ inputs.path }}" -o /tmp/target-user-data
           echo "Validating ${{ inputs.repo }}@${{ inputs.branch }}:${{ inputs.path }} against subiquity@${{ inputs.subiquity_ref }}"
           python3 /tmp/subiquity/scripts/validate-autoinstall-user-data.py /tmp/target-user-data
