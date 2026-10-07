@@ -3,9 +3,16 @@ name: autoinstall-verify
 # Validates an autoinstall user-data file with the canonical/subiquity
 # parser (scripts/validate-autoinstall-user-data.py) so seed-file changes
 # (e.g. 0mniteck/U-Boot Deploy/ubuntu/*) are schema-checked before deploy.
-# Deps follow subiquity snapcraft.yaml (python3-aiohttp/-jsonschema/
-# -requests/-requests-unixsocket/-systemd/-yaml); curtin + probert are
+#
+# Deps follow subiquity snapcraft.yaml stage-packages; curtin + probert are
 # cloned into the subiquity tree as siblings, matching the snap layout.
+#
+# The dry-run server has no ISO: its default source catalog contains only
+# the synthesized server entry, so a desktop source id would fail the
+# Source controller. We plant /cdrom/casper/install-sources.yaml (the path
+# the controller loads when present) with the desktop/server source ids
+# documented as current in the subiquity autoinstall reference:
+# https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html
 
 on:
   workflow_dispatch:
@@ -39,6 +46,73 @@ jobs:
           git clone --depth 1 https://github.com/canonical/subiquity /tmp/subiquity
           git clone --depth 1 https://github.com/canonical/curtin /tmp/subiquity/curtin
           git clone --depth 1 https://github.com/canonical/probert /tmp/subiquity/probert
+          sudo mkdir -p /cdrom/casper
+          sudo tee /cdrom/casper/install-sources.yaml > /dev/null <<'EOF'
+          version: 2
+          kernel:
+            default: linux-generic
+          sources:
+            - id: ubuntu-desktop-minimal
+              name:
+                en: Ubuntu Desktop (minimal)
+              description:
+                en: The default minimal desktop installation
+              variant: desktop
+              path: /media/filesystem
+              type: cp
+              size: 4000000000
+              default: true
+              locale_support: locale-only
+              variations:
+                default:
+                  path: /media/filesystem
+                  size: 4000000000
+            - id: ubuntu-desktop
+              name:
+                en: Ubuntu Desktop (standard)
+              description:
+                en: The standard desktop installation
+              variant: desktop
+              path: /media/filesystem
+              type: cp
+              size: 5000000000
+              default: false
+              locale_support: locale-only
+              variations:
+                default:
+                  path: /media/filesystem
+                  size: 5000000000
+            - id: ubuntu-server-minimal
+              name:
+                en: Ubuntu Server (minimal)
+              description:
+                en: The default minimal server installation
+              variant: server
+              path: /media/filesystem
+              type: cp
+              size: 2000000000
+              default: false
+              locale_support: locale-only
+              variations:
+                default:
+                  path: /media/filesystem
+                  size: 2000000000
+            - id: ubuntu-server
+              name:
+                en: Ubuntu Server (standard)
+              description:
+                en: The standard server installation
+              variant: server
+              path: /media/filesystem
+              type: cp
+              size: 2500000000
+              default: false
+              locale_support: locale-only
+              variations:
+                default:
+                  path: /media/filesystem
+                  size: 2500000000
+          EOF
           curl -fsSL "https://raw.githubusercontent.com/${{ inputs.repo }}/${{ inputs.branch }}/${{ inputs.path }}" -o /tmp/target-user-data
           echo "Validating ${{ inputs.repo }}@${{ inputs.branch }}:${{ inputs.path }} against subiquity@${{ inputs.subiquity_ref }}"
           cd /tmp/subiquity && python3 scripts/validate-autoinstall-user-data.py -vvv /tmp/target-user-data
