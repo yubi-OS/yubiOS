@@ -272,7 +272,7 @@ autoinstall:
       encrypted: yes
       match:
         - path: /dev/mmcblk0
-  ubuntu-pro:
+  ubuntu-pro: {}
   active-directory:
     admin-name: ""
     domain-name: ""
