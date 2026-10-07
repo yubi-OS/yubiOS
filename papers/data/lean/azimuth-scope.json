@@ -7,98 +7,112 @@
       "status": "lean-proved",
       "statement": "0 <= a*a for every Int a",
       "runtime_counterpart": "absSq_nonneg",
-      "runtime_predicate": "every reported Z_m and modulus-squared is nonnegative"
+      "runtime_predicate": "every reported Z_m and modulus-squared is nonnegative",
+      "statement_sha256": "a15d2368ab92cca2f994461bdf6a59596e7052127d68fb087f12ee1d1e62d565"
     },
     {
       "name": "Azimuth.absSq_nonneg",
       "status": "lean-proved",
       "statement": "|z|^2 = re^2+im^2 >= 0 for every integer pair",
       "runtime_counterpart": "rayleighZ returns (C^2+S^2)/N >= 0",
-      "runtime_predicate": "Z_m values are nonnegative"
+      "runtime_predicate": "Z_m values are nonnegative",
+      "statement_sha256": "c50fa87743e480fed7fc8e709f0d2e88829e722f4d94a4b015e278f1964c6ae4"
     },
     {
       "name": "Azimuth.absSq_neg",
       "status": "lean-proved",
       "statement": "negating the whole plane preserves |z|^2",
       "runtime_counterpart": "rotation/reflection invariance of Z_m",
-      "runtime_predicate": "Z_m is unchanged under PCA sign flips"
+      "runtime_predicate": "Z_m is unchanged under PCA sign flips",
+      "statement_sha256": "7afae3b29a2847e532740102a7047408095db4b18006fd7210e15187ea373656"
     },
     {
       "name": "Azimuth.absSq_conj",
       "status": "lean-proved",
       "statement": "conjugation (phi -> -phi) preserves |z|^2",
       "runtime_counterpart": "reflection invariance of Z_m",
-      "runtime_predicate": "Z_m is unchanged under PC sign flip of one axis"
+      "runtime_predicate": "Z_m is unchanged under PC sign flip of one axis",
+      "statement_sha256": "150a24f27a824523a4ac524ff05964b290c6b632245cb96ac45c4cd22aa0515d"
     },
     {
       "name": "Azimuth.absSq_swap",
       "status": "lean-proved",
       "statement": "axis swap preserves |z|^2",
       "runtime_counterpart": "PC1<->PC2 swap invariance of Z_m",
-      "runtime_predicate": "Z_m is unchanged under axis order"
+      "runtime_predicate": "Z_m is unchanged under axis order",
+      "statement_sha256": "75ab706747f970632e0c424c93633fe93372c8cda0b9cb744e7d409a653434d9"
     },
     {
       "name": "Azimuth.absSq_quarter",
       "status": "lean-proved",
       "statement": "quarter rotation preserves |z|^2",
       "runtime_counterpart": "D4 gauge invariance of Z_m",
-      "runtime_predicate": "Z_m is unchanged under 90-degree placement rotation"
+      "runtime_predicate": "Z_m is unchanged under 90-degree placement rotation",
+      "statement_sha256": "37e992575e7b602e21f266b2bb0a32c5eee113e49b635a15b2edea7e6aad9f5e"
     },
     {
       "name": "Azimuth.cadd_comm",
       "status": "lean-proved",
       "statement": "componentwise addition commutes",
       "runtime_counterpart": "order-independence of the moment sum",
-      "runtime_predicate": "dedup first-occurrence order cannot change Z_m"
+      "runtime_predicate": "dedup first-occurrence order cannot change Z_m",
+      "statement_sha256": "38622e158b2ce6910cfa6660431b76036ee229bdeb9e5d1cb3a132fa3bd107b1"
     },
     {
       "name": "Azimuth.absSq_sum_order",
       "status": "lean-proved",
       "statement": "|a+b|^2 = |b+a|^2",
       "runtime_counterpart": "order-independence of the moment sum",
-      "runtime_predicate": "Z_m is a function of the pattern multiset"
+      "runtime_predicate": "Z_m is a function of the pattern multiset",
+      "statement_sha256": "0396965042b6e4302f4c567d5971b01a0b4a586972fa32d49ca546f16d8904c8"
     },
     {
       "name": "Azimuth.absSq_scale",
       "status": "lean-proved",
       "statement": "|k*z|^2 = k^2*|z|^2",
       "runtime_counterpart": "Z_m scales with multiplicity squared",
-      "runtime_predicate": "duplicating every document k times scales Z_m numerator by k^2 and N by k"
+      "runtime_predicate": "duplicating every document k times scales Z_m numerator by k^2 and N by k",
+      "statement_sha256": "d400ae59bb475a1c0e26970ac47899f816382bdede1cb738e35ad7707270dd2f"
     },
     {
       "name": "Azimuth.check_neg",
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "\u2014"
+      "runtime_predicate": "—",
+      "statement_sha256": "9e35a7a2c33519c97ea7c46925cd5fb711fa4e95ea0938c50a3bba5f4ce87367"
     },
     {
       "name": "Azimuth.check_conj",
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "\u2014"
+      "runtime_predicate": "—",
+      "statement_sha256": "4618f4381aebb7e423608b380d18694b54a341c47e673465623f96d5acefeee4"
     },
     {
       "name": "Azimuth.check_swap",
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "\u2014"
+      "runtime_predicate": "—",
+      "statement_sha256": "2780091b62d570a6410e2521371c57298f814b1d49d9e2ff8d517eb5eddfb15a"
     },
     {
       "name": "Azimuth.check_quarter",
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "\u2014"
+      "runtime_predicate": "—",
+      "statement_sha256": "d3fc3d811074ad147a5cd899f8949a8d219acbb73b8d9ce2f5683e7a396186ff"
     },
     {
       "name": "Azimuth.check_nonneg",
       "status": "lean-proved",
       "statement": "concrete instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "\u2014"
+      "runtime_predicate": "—",
+      "statement_sha256": "46cfa295ae4525c8ccc5c73ac7b4c3a9f2e6b3e1a4a0f57a8cd280fff461e22c"
     }
   ],
   "permitted_axioms": [
@@ -115,5 +129,14 @@
     "the weighted first moment being zero on a centered plane is a modeling fact (PCA scores are mean-centered); unweighted Z_1 measures radial/multiplicity reweighting and is structurally confounded",
     "no claim about document quality, ranking, keep/revert, radius or admission",
     "replicate/multiplicity scaling is NOT proved here (foldr/replicate machinery outside core Lean); the runtime equivalent is tested by test-azimuth.mjs"
-  ]
+  ],
+  "statement_pinning": {
+    "schema": "statement-pins/1",
+    "pin": "sha256 of the normalized Lean statement text",
+    "normalization": "Lean comments stripped (/- -/ nested blocks, -- line); string literals respected; statement = source text between the declaration name and the first top-level ':=' (or the first top-level match-arm '|' line for pattern proofs); whitespace runs collapsed to single spaces; proof text excluded.",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
+    "pinned_from_commit": "ebfb8b58",
+    "pinned_from_source": "yubiOS-main/papers/data/lean/AzimuthBounds.lean"
+  }
 }

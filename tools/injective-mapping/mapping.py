@@ -34,7 +34,9 @@ import argparse
 import csv
 import json
 import os
+import shutil
 import sys
+import tempfile
 import zipfile
 from collections import Counter
 
@@ -71,21 +73,28 @@ def coverage_key(covered) -> str:
 # --------------------------------------------------------------------------
 
 def collision_structure(rows: list[dict]) -> dict:
+    # Deterministic class numbering: collision_class_id is the LEXICOGRAPHIC
+    # RANK of the row's raw coverage vector among the distinct vectors
+    # (0 = smallest bit string). This is a stable key that does not depend on
+    # numpy's internal sort/inverse behavior or on row order, so re-running
+    # the tool always reproduces the same ids.
     keys = [coverage_key(r["covered"]) for r in rows]
-    unique_keys, inverse, counts = np.unique(keys, return_inverse=True, return_counts=True)
+    counter = Counter(keys)
+    unique_sorted = sorted(counter)  # lexicographic; deterministic
+    rank = {k: i for i, k in enumerate(unique_sorted)}
 
     histogram: dict[int, int] = {}
-    for c in counts:
-        histogram[int(c)] = histogram.get(int(c), 0) + 1
+    for c in counter.values():
+        histogram[c] = histogram.get(c, 0) + 1
 
-    largest_idx = int(np.argmax(counts))
+    largest_key = max(counter, key=lambda k: (counter[k], k))
     return {
-        "distinct_vectors": int(len(unique_keys)),
+        "distinct_vectors": len(unique_sorted),
         "histogram": dict(sorted(histogram.items())),
-        "largest_class_vector": str(unique_keys[largest_idx]),
-        "largest_class_size": int(counts[largest_idx]),
-        "class_id_per_row": inverse.astype(int),          # 0..distinct-1, one per row
-        "class_size_per_row": counts[inverse].astype(int),  # size of that row's class
+        "largest_class_vector": largest_key,
+        "largest_class_size": counter[largest_key],
+        "class_id_per_row": [rank[k] for k in keys],  # 0..distinct-1, one per row
+        "class_size_per_row": [counter[k] for k in keys],  # size of that row's class
     }
 
 
@@ -110,8 +119,16 @@ def s2_embedding(X: np.ndarray) -> dict:
     cov = np.cov(Z, rowvar=False)
     eigvals, eigvecs = np.linalg.eigh(cov)
     order = np.argsort(eigvals)[::-1]
-    top2 = eigvecs[:, order[:2]]
+    top2 = eigvecs[:, order[:2]].copy()
     top2_eigvals = eigvals[order[:2]]
+    # LAPACK may return an eigenvector with either sign (and the choice can
+    # differ across BLAS builds/versions). Canonicalize: flip each vector so
+    # its largest-magnitude component is positive. Without this the whole
+    # S^2 embedding can flip sign between runs on different machines.
+    for j in range(top2.shape[1]):
+        pivot = int(np.argmax(np.abs(top2[:, j])))
+        if top2[pivot, j] < 0:
+            top2[:, j] = -top2[:, j]
 
     scores = Z @ top2  # (N, 2)
 
@@ -181,6 +198,20 @@ def is_monotone_nondecreasing(ladder: dict) -> bool:
 # Step 4: CSV export
 # --------------------------------------------------------------------------
 
+# Pinned output precision for the float columns. The PCA/S^2 coordinates are
+# recomputed by LAPACK on every run and differ between runs/machines in the
+# last few bits (~1e-16). Writing them at full float repr made the committed
+# skill-map.csv non-reproducible (a re-run rewrote every row with drifted
+# digits and turned an exact gap of 0 into 2.78e-17). Rounding to a pinned
+# number of decimal places makes the CSV a deterministic function of the
+# corpus. 10 decimals is far below any meaningful coordinate resolution here.
+FLOAT_DECIMALS = 10
+
+
+def pinned(v: float) -> float:
+    return round(float(v), FLOAT_DECIMALS)
+
+
 def build_rows_for_export(rows: list[dict], primitives: list[str],
                            collisions: dict, embedding: dict) -> list[dict]:
     out = []
@@ -193,10 +224,10 @@ def build_rows_for_export(rows: list[dict], primitives: list[str],
         }
         for j, name in enumerate(primitives):
             rec[name] = int(r["covered"][j])
-        rec["s2_x"] = float(embedding["lifts"][i, 0])
-        rec["s2_y"] = float(embedding["lifts"][i, 1])
-        rec["s2_z"] = float(embedding["lifts"][i, 2])
-        rec["gap"] = float(embedding["gaps"][i])
+        rec["s2_x"] = pinned(embedding["lifts"][i, 0])
+        rec["s2_y"] = pinned(embedding["lifts"][i, 1])
+        rec["s2_z"] = pinned(embedding["lifts"][i, 2])
+        rec["gap"] = pinned(embedding["gaps"][i])
         rec["collision_class_id"] = int(collisions["class_id_per_row"][i])
         rec["collision_class_size"] = int(collisions["class_size_per_row"][i])
         out.append(rec)
@@ -315,52 +346,83 @@ def to_json_summary(result: dict) -> dict:
 # Self-test
 # --------------------------------------------------------------------------
 
-def run_selftest(zip_path: str, out_path: str) -> int:
-    result = run_pipeline(zip_path, out_path)
-    c = result["collisions"]
-    inj = result["injectivity"]
+def run_selftest(zip_path: str, out_path: str, write: bool = False) -> int:
+    # Default: run in a throwaway temp directory so the self-test never
+    # rewrites the committed skill-map.csv (a CI/selftest run must not leave
+    # working-tree noise behind). Pass --write to actually write to out_path.
+    if write:
+        work_dir = os.path.dirname(os.path.abspath(out_path))
+        os.makedirs(work_dir, exist_ok=True)
+        csv_a = out_path
+        csv_b = os.path.join(work_dir, ".selftest-second-run.tmp.csv")
+        cleanup = False
+    else:
+        tmp = tempfile.mkdtemp(prefix="skill-map-selftest-")
+        csv_a = os.path.join(tmp, "skill-map.csv")
+        csv_b = os.path.join(tmp, "skill-map-second-run.csv")
+        cleanup = True
+    try:
+        result = run_pipeline(zip_path, csv_a)
+        c = result["collisions"]
+        inj = result["injectivity"]
 
-    failures = []
+        failures = []
 
-    if result["row_count"] != EXPECTED_ROW_COUNT:
-        failures.append(
-            f"row count {result['row_count']} != expected {EXPECTED_ROW_COUNT}"
-        )
+        if result["row_count"] != EXPECTED_ROW_COUNT:
+            failures.append(
+                f"row count {result['row_count']} != expected {EXPECTED_ROW_COUNT}"
+            )
 
-    print(f"[selftest] distinct coverage vectors: {c['distinct_vectors']}")
-    if not (100 < c["distinct_vectors"] < 400):
-        failures.append(
-            f"distinct coverage vectors {c['distinct_vectors']} not in (100, 400)"
-        )
+        print(f"[selftest] distinct coverage vectors: {c['distinct_vectors']}")
+        if not (100 < c["distinct_vectors"] < 400):
+            failures.append(
+                f"distinct coverage vectors {c['distinct_vectors']} not in (100, 400)"
+            )
 
-    if result["csv_row_count"] != EXPECTED_ROW_COUNT:
-        failures.append(
-            f"csv row count {result['csv_row_count']} != expected {EXPECTED_ROW_COUNT}"
-        )
-    if result["csv_unique_slugs"] != EXPECTED_ROW_COUNT:
-        failures.append(
-            f"csv unique row keys {result['csv_unique_slugs']} != expected {EXPECTED_ROW_COUNT}"
-        )
+        if result["csv_row_count"] != EXPECTED_ROW_COUNT:
+            failures.append(
+                f"csv row count {result['csv_row_count']} != expected {EXPECTED_ROW_COUNT}"
+            )
+        if result["csv_unique_slugs"] != EXPECTED_ROW_COUNT:
+            failures.append(
+                f"csv unique row keys {result['csv_unique_slugs']} != expected {EXPECTED_ROW_COUNT}"
+            )
 
-    if not is_monotone_nondecreasing(inj["ladder"]):
-        failures.append(f"injectivity ladder not monotone non-decreasing: {inj['ladder']}")
+        if not is_monotone_nondecreasing(inj["ladder"]):
+            failures.append(f"injectivity ladder not monotone non-decreasing: {inj['ladder']}")
 
-    final_distinct = list(inj["ladder"].values())[-1]
-    if final_distinct != EXPECTED_ROW_COUNT:
-        failures.append(
-            f"final ladder stage distinct={final_distinct} != {EXPECTED_ROW_COUNT} "
-            "(the row_id stage is injective by construction)"
-        )
+        final_distinct = list(inj["ladder"].values())[-1]
+        if final_distinct != EXPECTED_ROW_COUNT:
+            failures.append(
+                f"final ladder stage distinct={final_distinct} != {EXPECTED_ROW_COUNT} "
+                "(the row_id stage is injective by construction)"
+            )
 
-    if failures:
-        print("[selftest] FAILED:")
-        for f in failures:
-            print(f"  - {f}")
-        return 1
+        # Determinism gate: a second full pipeline run must produce a
+        # byte-identical CSV. This is what failed before the pinned-float /
+        # stable-class-id fix (last-bit LAPACK drift rewrote every row).
+        run_pipeline(zip_path, csv_b)
+        with open(csv_a, "rb") as fa, open(csv_b, "rb") as fb:
+            same = fa.read() == fb.read()
+        if not same:
+            failures.append("determinism: second pipeline run produced a DIFFERENT csv than the first")
+        else:
+            print("[selftest] determinism: two consecutive runs produced byte-identical CSVs")
 
-    print("[selftest] all assertions passed")
-    print(f"[selftest] injectivity ladder: {inj['ladder']}")
-    return 0
+        if failures:
+            print("[selftest] FAILED:")
+            for f in failures:
+                print(f"  - {f}")
+            return 1
+
+        print("[selftest] all assertions passed")
+        print(f"[selftest] injectivity ladder: {inj['ladder']}")
+        return 0
+    finally:
+        if cleanup:
+            shutil.rmtree(tmp, ignore_errors=True)
+        elif os.path.exists(csv_b):
+            os.remove(csv_b)
 
 
 # --------------------------------------------------------------------------
@@ -373,10 +435,15 @@ def main(argv=None) -> int:
     parser.add_argument("--out", default=DEFAULT_OUT, help="path to write skill-map.csv")
     parser.add_argument("--json", action="store_true", help="print a JSON summary instead of prose")
     parser.add_argument("--selftest", action="store_true", help="run self-test assertions")
+    parser.add_argument(
+        "--write", action="store_true",
+        help="with --selftest: write the CSV to --out (default is a throwaway temp dir "
+             "so the committed skill-map.csv is not touched by test runs)",
+    )
     args = parser.parse_args(argv)
 
     if args.selftest:
-        return run_selftest(args.zip, args.out)
+        return run_selftest(args.zip, args.out, write=args.write)
 
     result = run_pipeline(args.zip, args.out)
     if args.json:

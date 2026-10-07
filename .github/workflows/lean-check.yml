@@ -7,6 +7,8 @@ on:
       - 'papers/data/lean/**'
       - 'tools/**'
       - '.github/workflows/lean-check.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
       reason:
@@ -17,14 +19,27 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - name: Install elan (Lean 4.33.0, pinned)
+      - name: Install Lean 4.33.0 (pinned SHA256 release tarball, no installer script)
         run: |
-          curl -sSf https://elan.lean-lang.org/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          set -euo pipefail
+          # Pinned toolchain: official leanprover/lean4 v4.33.0 linux release tarball.
+          # SHA256 captured 2026-10-07 from the official GitHub release asset:
+          #   https://github.com/leanprover/lean4/releases/download/v4.33.0/lean-4.33.0-linux.tar.zst
+          # Provenance note: this hash was captured in one pass from the official
+          # release; confirm it once against an independent copy of the artifact
+          # (re-download from a different network and re-hash) before relying on
+          # this pin for a security-sensitive merge.
+          expected='4b3fb03c29a1e0a253fb1d11f9bae3725f19a0dc6fc09b3ea16d2c9df3349e2c'
+          curl -sSfL --retry 3 -o /tmp/lean.tar.zst \
+            https://github.com/leanprover/lean4/releases/download/v4.33.0/lean-4.33.0-linux.tar.zst
+          echo "$expected  /tmp/lean.tar.zst" | sha256sum --check --status
+          mkdir -p "$HOME/.lean-pinned"
+          tar --zstd -xf /tmp/lean.tar.zst -C "$HOME/.lean-pinned"
+          echo "$HOME/.lean-pinned/lean-4.33.0-linux/bin" >> "$GITHUB_PATH"
 
       - name: Lean version
         run: lean --version
@@ -34,10 +49,61 @@ jobs:
           lean papers/data/lean/CurvedCorpus.lean
           echo "LEAN_OK: all theorems in papers/data/lean/CurvedCorpus.lean check with no sorry"
 
-      - name: Assert no sorry
+      - name: Assert no sorry in all Lean files (warnings-as-errors compile)
         run: |
-          ! grep -n "sorry" papers/data/lean/CurvedCorpus.lean
-          echo "NO_SORRY_OK"
+          set -euo pipefail
+          # A file containing `sorry` fails to compile under -DwarningAsError=true
+          # (the declarationUsesSorry warning is promoted to an error), while a
+          # clean file passes. This replaces the former per-file
+          # `! grep -n "sorry"` steps, which could never fail: bash's stop-on-
+          # error behavior ignores `!`-prefixed commands. The file list is
+          # explicit so a new file cannot silently bypass the gate.
+          for f in \
+            papers/data/lean/CurvedCorpus.lean \
+            papers/data/lean/WayfinderBounds.lean \
+            papers/data/lean/RadiusBounds.lean \
+            papers/data/lean/RayleighBounds.lean \
+            papers/data/lean/AzimuthBounds.lean; do
+            if ! lean -DwarningAsError=true "$f" > /tmp/sorry-gate.out 2>&1; then
+              echo "NO_SORRY_FAIL: $f"
+              cat /tmp/sorry-gate.out
+              exit 1
+            fi
+            echo "NO_SORRY_OK: $f"
+          done
+
+      # Axiom coverage gate (Lane 2) — runs after the pinned-tarball lean install
+      # step (no elan in this workflow), so `lean` is already on PATH.
+      - name: Axiom coverage gate — every theorem in all five lean files
+        run: |
+          set -euo pipefail
+          PERMITTED="propext,Classical.choice,Quot.sound"
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds; do
+            echo "== axiom coverage: ${base}.lean =="
+            # 1. Generate the probe: source text + one `#print axioms` per
+            #    theorem extracted from the source (every declaration,
+            #    manifest-listed or not).
+            python3 papers/data/lean/check_lean_axioms.py --gen \
+              --source "papers/data/lean/${base}.lean" \
+              --out "/tmp/${base}-probe.lean"
+            # 2. Compile the probe with the pinned toolchain; capture the
+            #    `#print axioms` output (stdout+stderr).
+            lean "/tmp/${base}-probe.lean" > "/tmp/${base}-axioms.txt" 2>&1 || {
+              echo "LEAN_FAIL: ${base} probe failed to compile"
+              cat "/tmp/${base}-axioms.txt"
+              exit 1
+            }
+            # 3. Gate: every theorem must have an axiom line; every axiom
+            #    set must be within the permitted core set; sorryAx (and
+            #    any user axiom, incl. Lean.ofReduceBool from
+            #    native_decide) fails. Exit 1 on violation.
+            python3 papers/data/lean/check_lean_axioms.py \
+              --source "papers/data/lean/${base}.lean" \
+              --axioms "/tmp/${base}-axioms.txt" \
+              --permitted "$PERMITTED"
+          done
+          echo "AXIOM_COVERAGE_GATE_OK: all five lean files gated, every theorem checked"
+
 
       - name: Check WayfinderBounds.lean (kernel, pinned toolchain)
         run: |
@@ -73,11 +139,6 @@ jobs:
           cat /tmp/radius-axioms.txt
           echo "LEAN_OK: papers/data/lean/RadiusBounds.lean checks with no sorry"
 
-      - name: Assert no sorry in RadiusBounds.lean
-        run: |
-          ! grep -n "sorry" papers/data/lean/RadiusBounds.lean
-          echo "NO_SORRY_OK radius"
-
       - name: Validate radius scope manifest is well-formed
         run: |
           set -euo pipefail
@@ -101,11 +162,6 @@ jobs:
           cat /tmp/rayleigh-axioms.txt
           echo "LEAN_OK: papers/data/lean/RayleighBounds.lean checks with no sorry"
 
-      - name: Assert no sorry in RayleighBounds.lean
-        run: |
-          ! grep -n "sorry" papers/data/lean/RayleighBounds.lean
-          echo "NO_SORRY_OK rayleigh"
-
       - name: Check AzimuthBounds.lean (kernel, pinned toolchain)
         run: |
           set -euo pipefail
@@ -116,11 +172,6 @@ jobs:
           }
           cat /tmp/azimuth-axioms.txt
           echo "LEAN_OK: papers/data/lean/AzimuthBounds.lean checks with no sorry"
-
-      - name: Assert no sorry in AzimuthBounds.lean
-        run: |
-          ! grep -n "sorry" papers/data/lean/AzimuthBounds.lean
-          echo "NO_SORRY_OK azimuth"
 
       - name: Validate azimuth scope manifest is well-formed
         run: |
@@ -217,12 +268,6 @@ jobs:
 
       - name: phonon-dispersion selftest
         run: python3 tools/phonon-dispersion/phonon.py --selftest
-
-      - name: edge-standard selftest (taste-engine source of record)
-        run: python3 tools/edge-standard/edge_standard.py --selftest
-
-      - name: edge-standard fixture parity (Python source of record vs JS worker port)
-        run: node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
 
       - name: edge-standard selftest (taste-engine source of record)
         run: python3 tools/edge-standard/edge_standard.py --selftest

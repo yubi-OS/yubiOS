@@ -6,106 +6,121 @@
       "name": "Rayleigh.sq_nonneg",
       "status": "lean-proved",
       "statement": "0 <= a*a for every Int a",
-      "runtime_counterpart": "float Fiedler estimate is compared against exact quotients; PSD is why x\u1d40Lx \u2265 0",
-      "runtime_predicate": "graphRayleigh reports nonnegative quadratic forms"
+      "runtime_counterpart": "float Fiedler estimate is compared against exact quotients; PSD is why xᵀLx ≥ 0",
+      "runtime_predicate": "graphRayleigh reports nonnegative quadratic forms",
+      "statement_sha256": "a15d2368ab92cca2f994461bdf6a59596e7052127d68fb087f12ee1d1e62d565"
     },
     {
       "name": "Rayleigh.quad_nonneg",
       "status": "lean-proved",
       "statement": "quad edges x >= 0 (Laplacian quadratic form is PSD)",
       "runtime_counterpart": "lib/rayleigh.mjs laplacianQuadratic",
-      "runtime_predicate": "every quad value reported is >= 0"
+      "runtime_predicate": "every quad value reported is >= 0",
+      "statement_sha256": "c600f98c21740d66d8417a8b7d51c31cab10bc82fafe7dd779c445c1253539db"
     },
     {
       "name": "Rayleigh.quad_const",
       "status": "lean-proved",
       "statement": "quad edges (fun _ => c) = 0 (constants are in the kernel)",
       "runtime_counterpart": "graphRayleigh.exact.quadratic_form_of_constant",
-      "runtime_predicate": "quadratic_form_of_constant == 0"
+      "runtime_predicate": "quadratic_form_of_constant == 0",
+      "statement_sha256": "b73a958afd5d2bfa0d59e5c51d3679ea4b92d81b0601a546209c6901dbe423f2"
     },
     {
       "name": "Rayleigh.quad_shift",
       "status": "lean-proved",
       "statement": "quad edges (x + b) = quad edges x",
       "runtime_counterpart": "witness_numerator derivation",
-      "runtime_predicate": "centering a vector does not change x\u1d40Lx"
+      "runtime_predicate": "centering a vector does not change xᵀLx",
+      "statement_sha256": "5a084b3741f18fa2094816b1b2ef1bc3964061a2b78c1021b6b551f3aad00d2e"
     },
     {
       "name": "Rayleigh.sq_mul",
       "status": "lean-proved",
       "statement": "c*a*(c*a) = c*c*(a*a)",
       "runtime_counterpart": "algebra for quad_scale",
-      "runtime_predicate": "\u2014"
+      "runtime_predicate": "—",
+      "statement_sha256": "376e18f317453c34bdbcfaaa0710371bd3ff1ab43f450698f2cb0515ea881a5d"
     },
     {
       "name": "Rayleigh.quad_scale",
       "status": "lean-proved",
       "statement": "quad edges (c*x) = c*c*quad edges x",
       "runtime_counterpart": "witness_numerator derivation",
-      "runtime_predicate": "scaling a vector scales x\u1d40Lx by c\u00b2"
+      "runtime_predicate": "scaling a vector scales xᵀLx by c²",
+      "statement_sha256": "0b203f0966ea6966e51db676bd62a419cbc0568e2fc9f2d0f898491d2cb000ed"
     },
     {
       "name": "Rayleigh.ind_sq_diff",
       "status": "lean-proved",
-      "statement": "(1_S a \u2212 1_S b)\u00b2 = edgeCut S a b",
+      "statement": "(1_S a − 1_S b)² = edgeCut S a b",
       "runtime_counterpart": "cut counting in cutWitness",
-      "runtime_predicate": "per-edge term of an indicator is 0 or 1"
+      "runtime_predicate": "per-edge term of an indicator is 0 or 1",
+      "statement_sha256": "7e607e576a3685f237bf28b1adf2c89e10c59002d12dd269f52031253d8e2af4"
     },
     {
       "name": "Rayleigh.quad_indicator",
       "status": "lean-proved",
       "statement": "quad edges (1_S) = cut edges S",
       "runtime_counterpart": "cutWitness.cut",
-      "runtime_predicate": "x\u1d40Lx of a 0/1 indicator equals the number of cut edges"
+      "runtime_predicate": "xᵀLx of a 0/1 indicator equals the number of cut edges",
+      "statement_sha256": "d580d69b6115f711b12bc9b4bc1bbda3fbd406acde5492f4df0332d141373ede"
     },
     {
       "name": "Rayleigh.edgeCut_singleton_untouched",
       "status": "lean-proved",
       "statement": "edge not touching v has edgeCut [v] = 0",
       "runtime_counterpart": "isolate handling",
-      "runtime_predicate": "\u2014"
+      "runtime_predicate": "—",
+      "statement_sha256": "dedbc51dfe6ec2a55d332ead95f3813999e632624093c99fee6d3c70014d7aee"
     },
     {
       "name": "Rayleigh.cut_singleton_untouched",
       "status": "lean-proved",
-      "statement": "no edge touches v \u21d2 cut edges [v] = 0",
+      "statement": "no edge touches v ⇒ cut edges [v] = 0",
       "runtime_counterpart": "graphRayleigh.exact.isolates",
-      "runtime_predicate": "an isolated vertex has no cut edges"
+      "runtime_predicate": "an isolated vertex has no cut edges",
+      "statement_sha256": "c0e058a8dde5c83975cc6afbd391763c972b8bbb753dc112757acf8c04a700f6"
     },
     {
       "name": "Rayleigh.quad_no_incident",
       "status": "lean-proved",
-      "statement": "no edge touches v \u21d2 quad edges (1_{v}) = 0 (isolated vertex indicator is in the kernel)",
+      "statement": "no edge touches v ⇒ quad edges (1_{v}) = 0 (isolated vertex indicator is in the kernel)",
       "runtime_counterpart": "graphRayleigh.exact.nullity_identity (stated)",
-      "runtime_predicate": "isolates contribute zero eigenvalues"
+      "runtime_predicate": "isolates contribute zero eigenvalues",
+      "statement_sha256": "cd6979f493aa47c17ab962c0e101379e1a65dc6fabedc5e2fd8c48eb286c7d5b"
     },
     {
       "name": "Rayleigh.witness_numerator",
       "status": "lean-proved",
-      "statement": "x = n\u00b71_S \u2212 k\u00b71 \u21d2 quad edges x = n\u00b2\u00b7cut edges S",
+      "statement": "x = n·1_S − k·1 ⇒ quad edges x = n²·cut edges S",
       "runtime_counterpart": "cutWitness.quotient numerator",
-      "runtime_predicate": "numerator of the exact rational Rayleigh\u2013Ritz witness"
+      "runtime_predicate": "numerator of the exact rational Rayleigh–Ritz witness",
+      "statement_sha256": "f4105db7f30a3cec4aef4f5a781d33aa607c39686163a7ab14fe820ec9184c82"
     },
     {
       "name": "Rayleigh.witness_denominator",
       "status": "lean-proved",
-      "statement": "k(n\u2212k)\u00b2 + (n\u2212k)k\u00b2 = n\u00b7k\u00b7(n\u2212k)",
-      "runtime_counterpart": "cutWitness.quotient denominator (\u2016x\u2016\u00b2 for |S|=k)",
-      "runtime_predicate": "denominator of the exact rational Rayleigh\u2013Ritz witness"
+      "statement": "k(n−k)² + (n−k)k² = n·k·(n−k)",
+      "runtime_counterpart": "cutWitness.quotient denominator (‖x‖² for |S|=k)",
+      "runtime_predicate": "denominator of the exact rational Rayleigh–Ritz witness",
+      "statement_sha256": "1103b488267d0fd6602448aaa8c091c979b8d1a27aaa8259a7ed371166822878"
     },
     {
       "name": "Rayleigh.rr_path_example",
       "status": "lean-proved",
-      "statement": "8-vertex path, S={0,1,2,3}: cut=1 and 8\u00b71\u00b72 = 4\u00b7(8\u22124) (witness 1/2)",
-      "runtime_counterpart": "test-rayleigh.mjs path-graph check (fiedler 2(1\u2212cos \u03c0/8) \u2264 1/2)",
-      "runtime_predicate": "decide instance"
+      "statement": "8-vertex path, S={0,1,2,3}: cut=1 and 8·1·2 = 4·(8−4) (witness 1/2)",
+      "runtime_counterpart": "test-rayleigh.mjs path-graph check (fiedler 2(1−cos π/8) ≤ 1/2)",
+      "runtime_predicate": "decide instance",
+      "statement_sha256": "da24cbdbee6a3888ae14ca53971d76bd3a8d9be8825de4bd6d5540c578c4afc7"
     },
     {
       "name": "Rayleigh.rr_path_quad",
       "status": "lean-proved",
       "statement": "quad path8 (1_{0..3}) = 1",
       "runtime_counterpart": "test-rayleigh.mjs",
-      "runtime_predicate": "decide instance"
+      "runtime_predicate": "decide instance",
+      "statement_sha256": "83ddb22fbebeac0686092786691f086c8df2a0193e5faff53bfb2caef965bad4"
     }
   ],
   "permitted_axioms": [
@@ -119,5 +134,14 @@
     "Ky Fan's maximum principle (tr(X^T C X) <= lambda_1 + lambda_2) is NOT proved here; the runtime reports the frozen-frame gap as a measurement",
     "no statement about embedding semantics, task quality, or whether any document should be kept or reverted",
     "Rayleigh's inviscid stability equation and the Rayleigh-Plesset equation are not used: they need real analysis and describe physical systems the instrument does not measure"
-  ]
+  ],
+  "statement_pinning": {
+    "schema": "statement-pins/1",
+    "pin": "sha256 of the normalized Lean statement text",
+    "normalization": "Lean comments stripped (/- -/ nested blocks, -- line); string literals respected; statement = source text between the declaration name and the first top-level ':=' (or the first top-level match-arm '|' line for pattern proofs); whitespace runs collapsed to single spaces; proof text excluded.",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
+    "pinned_from_commit": "ebfb8b58",
+    "pinned_from_source": "yubiOS-main/papers/data/lean/RayleighBounds.lean"
+  }
 }

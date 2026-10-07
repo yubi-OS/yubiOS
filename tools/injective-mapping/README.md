@@ -123,21 +123,50 @@ can filter/sort by "how many other items share my exact coverage
 ```
 python3 tools/injective-mapping/mapping.py                # run + write CSV + prose report
 python3 tools/injective-mapping/mapping.py --json          # same, JSON summary
-python3 tools/injective-mapping/mapping.py --selftest       # run + assertions, exit 0/1
+python3 tools/injective-mapping/mapping.py --selftest       # run + assertions in a TEMP dir, exit 0/1
+python3 tools/injective-mapping/mapping.py --selftest --write  # selftest that also writes --out
 ```
 
 Dependencies: `numpy` only. Reads the zip already committed at
 `papers/is-this-x-2026-08-12-Final.zip`; no network access required.
 
+## Deterministic output (do not break this)
+
+`skill-map.csv` is a committed artifact, so it must be a stable function of
+the committed corpus — a re-run must produce zero diff. Two things make
+that true:
+
+- **Pinned float precision.** The S²/PCA coordinates are recomputed by
+  LAPACK on every run and differ between runs in the last few bits
+  (~1e-16). All float columns (`s2_x`, `s2_y`, `s2_z`, `gap`) are rounded
+  to a pinned 10 decimal places (`FLOAT_DECIMALS`) before export. Before
+  this pin, a single selftest run rewrote all 2287 lines with drifted
+  digits (an exact `gap` of 0 came back as `2.78e-17`).
+- **Stable collision class ids.** `collision_class_id` is the
+  lexicographic rank of the row's raw coverage vector among the distinct
+  vectors (0 = smallest bit string). This is pinned by definition, not
+  by numpy's internal `np.unique` inverse ordering (which is what produced
+  a silent renumbering against the previously committed CSV).
+- **Canonical eigenvector signs.** LAPACK may return a PCA eigenvector
+  with either sign depending on the BLAS build; each top-2 eigenvector is
+  flipped so its largest-magnitude component is positive before any
+  coordinate is derived from it.
+
+`--selftest` additionally runs the pipeline a second time and asserts the
+two CSVs are byte-identical, so any future determinism regression fails
+the selftest instead of silently dirtying the working tree.
+
 ## Self-test
 
-`--selftest` asserts:
+`--selftest` asserts (and by default writes only to a throwaway temp
+directory — pass `--write` to write the committed path):
 
 - row count == 2286
 - 100 < distinct coverage vectors < 400 (prints the actual count; expect ≈176)
 - the exported CSV has exactly 2286 rows with 2286 unique `slug` values
 - the injectivity ladder is monotone non-decreasing and its final stage
   (coverage+corpus+cycle+slug) equals 2286
+- two consecutive pipeline runs produce byte-identical CSVs (determinism)
 
 ## Limitations
 
