@@ -237,3 +237,48 @@ the same staircase regime).
 - Permutation seeds [42, 2026, 99], jitter seeds, render size: unchanged.
 - Lane A's module: UNMODIFIED throughout (verified — the advisor never
   edited it; the adapter wraps it).
+
+## AM-8 — Row 7b contact-graph distance made platform-stable (POST-first-clean-run, CI reproducibility)
+
+Date: 2026-10-07. Author: Lane E (integration investigation). Trigger: draft
+PR #295 CI (lean-check.yml verify-tools, ubuntu-24.04, runs 37572740105 /
+37573838986) failed 2 of 61 anchored checks — `row7b-contact-gasket-d_s`
+d_s 0.3904734045226643 vs anchored 0.38909645523992836, r2 0.9724738808882158
+vs 0.9711259457604728 — while the same run passed bit-exact in the integration
+sandbox (CPython 3.9, glibc 2.34, x86_64).
+
+**Root cause.** `contact_graph()` computed pairwise droplet-center distances
+with `math.dist`, which is hypot()-based and NOT guaranteed correctly rounded;
+its last ulp differs across libm versions (glibc 2.34 vs 2.39/2.43; confirmed
+empirically: `math.dist((0,0),(286,165))` = 330.1832824356799 on glibc 2.34
+vs 330.18328243568 on glibc 2.43/aarch64). The resulting `dmin` float was fed
+into the row7b walker seed via
+`derive_seed({"mode":"walk_graph","kind":"contact-gasket","dmin":dmin})` —
+`canonical_json` serializes the float repr, so a 1-ulp change in dmin changed
+the sha256 seed (240001799 -> 3296759717), re-seeding every walker. The GRAPH
+itself is identical on all platforms (545 edges, same `_graph_digest`
+4fb45de80a32e89d5d195b16e3561982b67810d346283f6fe504f567fe8c124b); only the
+walks differed. `row7b-contact-tri` passed everywhere because its dmin is the
+exactly-representable 45.0.
+
+**Decision.** `contact_graph` now computes squared distances in EXACT integer
+arithmetic (droplet centers are an integer lattice), takes
+`dmin = math.sqrt(dmin2)` (IEEE-754 correctly rounded — bit-identical on every
+platform), and compares `d2 <= thr*thr`. No pinned parameter, band, or walk
+ladder changed. The nearest non-edge squared distance (150) sits ~5e-3 from
+thr*thr (149.94), so the edge set (545 edges) is unchanged.
+
+**Anchor re-derivation (documented BEFORE the gates were re-run).** The
+platform-stable path yields dmin = 11.661903789690601 (repr of
+math.sqrt(136), identical on CPython 3.9/x86_64/glibc-2.34 and
+CPython 3.14/aarch64/glibc-2.43), walker seed 3296759717, and measured
+d_s = 0.3904734045226643, r2 = 0.9724738808882158 — i.e. the anchored values
+move to the values CI was already producing. The pre-amendment anchors were
+captured on a platform whose `math.dist` deviated 1 ulp from the
+correctly-rounded value, so the OLD anchors, not the new ones, were the
+non-reproducible capture. Cross-platform verification: the patched harness
+selftest passes 61/61 with identical values on both environments.
+
+Scope: measurement-path platform stability only — same class of change as
+AM-2/AM-4 (seed/canonicalization discipline); no band moved, no criterion
+weakened.
