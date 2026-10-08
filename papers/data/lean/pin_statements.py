@@ -417,7 +417,23 @@ def _classify_command(raw: str) -> tuple[str, str | None, int]:
             name = tok
             name_end = m.end()
         break
-    assert kind is not None, "empty command segment"
+    if kind is None:
+        # Fail-closed (round-3 integration fix): an attribute-only command
+        # segment -- an `@[...]` attribute line on its own line whose
+        # decorated declaration starts on the NEXT column-0 line -- has no
+        # command token after the attribute groups. Raise a ValueError (not
+        # an assert) so check_definitions / check_statement_pins report a
+        # proper gate failure instead of an uncaught traceback. Such a
+        # source layout FAILS the gate; it is never silently skipped.
+        raise ValueError(
+            "empty command segment: a column-0 command segment contains no "
+            "command token after its attribute groups -- most likely an "
+            "@[...] attribute line on its own line with the decorated "
+            "declaration on the following line, which commands-v2 does not "
+            "attach. Put the attribute and declaration on one line (or "
+            "regenerate after refactoring); this layout fails the gate "
+            "fail-closed."
+        )
     return kind, name, name_end
 
 
