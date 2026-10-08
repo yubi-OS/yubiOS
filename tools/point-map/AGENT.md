@@ -68,9 +68,9 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | POST | `/api/jev/map/consistency` | `{baseline_id, texts, names, target, variants:[{label,text}] (1..3), predicted_delta?}` — one candidate measured under caller-supplied text variants on the frozen frame; sign agreement reported, never used as a gate; nothing written |
 | GET | `/api/jev/map/outcomes?baseline_id=` | ledger rows plus a contingency of COUNTS with n; never a rate |
 | POST | `/api/jev/map/vector/search` | existing cosine search; its historical index may mix prefix and pooled-document representations; scores are not calibrated across ingestion versions |
-| GET | `/map/` | browser view, full-file uploads, frozen baseline selector, comparison panel |
-| GET | `/map/pointmap.js` | identical dependency-free numeric core used by Worker |
-| GET | `/map/app.js` | map UI application script served from KV (`map-app.js`); 404 when the KV key is missing |
+| GET | `/map/` | 410 since the 2026-10-08 map fold — the map UI lives in the /jev/ console's Map card (diagnostics panel; five tabs: instrument / results / proofs / diagnostics / rounds, carrying the full instrument incl. texts/files/dirs/repo inputs, globe controls, NSS ladder + wayfinder prompt, Lean certificates + lean-check CI, preview-only diagnostics, and the rounds toolkit; the diag panel's pills are view-switching tabs) |
+| GET | `/map/pointmap.js` | identical dependency-free numeric core used by Worker; loaded by the /jev/ Map card as its rendering asset |
+| GET | `/map/app.js` | 410 since the map fold (the /jev/ Map card carries its own logic; KV map-app.js deleted) |
 
 The SOS Agent business APIs (`/api/jev/map/sos/assess`, `/api/jev/map/sos/fits`, `/api/jev/map/sos/narrate`; relocated 2026-10-08, bearer-auth) and the original site chat remain separate APIs. The Sauna-hosted mirror has not received this Cloudflare release.
 
@@ -167,7 +167,7 @@ Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_
 | POST | `/api/jev/corpus/lens` | `{matrix, top?}` returns lens-format candidates: `{id, cell, kind:"real"|"control", hypothesis, method, params, expected_delta, score}`; K reals + K paired controls |
 | POST | `/api/jev/corpus/atom` | `{matrix, max_flips?}` returns a DRY-RUN plan `{plan:[{i,primitive,delta}], finalDelta, converged}`; the Delta >= 0 invariant is asserted (CurvedCorpus.lean atom_delta_nonneg); execution is a gated directive, never inline |
 | POST | `/api/jev/corpus/classify` | `{sentence}` returns `{verdict:"tautology"|"falsifiable"|"paradox"|"undecidable", refuter, run_id}`; exact parity with tools/tautology-discerner |
-| POST | `/api/jev/corpus/placements` | `{matrix, labels}` audits then POSTs vectors to the worker's own `/api/jev/map`; returns `{map_id, map_url:"/map/?id=N"}`; map-endpoint rejections relay as `MAP_FAILED` |
+| POST | `/api/jev/corpus/placements` | `{matrix, labels}` audits then POSTs vectors to the worker's own `/api/jev/map`; returns `{map_id, map_url:"/map/?id=N"}` (map_url string still names the pre-fold page; the card lives in the /jev/ console — cosmetic fix pending a worker deploy); map-endpoint rejections relay as `MAP_FAILED` |
 | GET | `/api/jev/corpus/runs` | last 50 run rows |
 | GET | `/api/jev/corpus/selftest` | runs all module selftests (math, atom, lens + the scorer-v2 extraction checks) (fixture parity vs the Python sources); 200 all-pass, 500 with failing checks |
 | POST | `/api/jev/corpus/visco/persistence` | `{matrix, flipped_cells:[{row,axis}], regraded:[{pass, rows:[{row, bits[12]}]}], metric?}` audits base + loaded internally, measures persistence of flips under independent re-grading; `{applied, persisted, persistence_fraction, dbc:{base, loaded, regraded_passes, delta_load}, scorer_variance:{inter_pass_offset_dbc}, verdict, run_id}` |
