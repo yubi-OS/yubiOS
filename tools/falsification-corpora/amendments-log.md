@@ -51,3 +51,38 @@ after results arrived.
    prose. Report-only in this slice per prereg; the full build gates it.
 
 ## (empty until needed — nothing below this line yet)
+
+## 2026-10-08 (pre-run, full scorer corpus — logged BEFORE any measurement)
+
+4. **Scorer full build executes preregistration §3** — the 62-doc corpus (36 planted
+   F docs = 12 axes x tiers 2/4/6; 8 paraphrase P docs; 12 distractor D docs;
+   4 heading-only H docs; 2 multi-axis A docs). Authored by 3 independent lanes
+   from axis semantics only; no lane saw the extractor implementation.
+5. **Collateral-precision gate ADDED (was report-only in the slice)** — on every
+   planted doc (F/H/A), no non-planted axis may flip true (row bit 1 at the policy
+   threshold). A-priori justification: slice finding F3 recorded 4/8 planted docs
+   crediting assumption_set with p > 0.55 from composition prose; the prereg
+   reserved this gate for the full build.
+6. **Determinism gate ADDED** — 3 sampled docs re-scored; row + probs byte-identical
+   across calls. A-priori: the scorer contract claims deterministic extraction plus
+   one batched decision per doc-state; the corpus should catch any nondeterminism.
+7. **Distractor specificity operationalized** — for Dk (target axis k), gate =
+   evidence_count(k) <= 1 AND no true flip on axis k. A-priori: identical to the
+   slice's pinned gate shape (which tolerated <=1 extraction hit while requiring no
+   decision credit); prereg section 3's "0 planted-axis credits" is ambiguous
+   between extraction and decision layers - the decision layer (no flip) is the
+   binding half.
+8. **Paraphrase floor scaled to 8 variants** - prereg sized 12 variants with
+   stability >= 11/12; this build authors 8 (inputs, outputs, assumption_set,
+   adjacent, failure_modes, lifecycle, knowledge_sources, calibration - one per
+   author lane). Floor scaled proportionally: >= 7/8 verdict-stable on the planted
+   axis.
+9. **Heading-only axes pinned** - H docs target inputs, outputs, assumption_set,
+   calibration (3 terse bullets each; recall floor ceil(0.75 x 3) = 3). A-priori
+   design choice, made before measurement.
+10. **All-axes docs concretized** - A1 plants audience/outputs/composition/
+    calibration = 2 each; A2 plants inputs/mode/failure_modes/lifecycle = 2 each;
+    gate = each planted axis reaches ceil(0.75 x 2) = 2. Prereg said "2
+    all-axes-planted docs" without shape; fixed before measurement.
+
+Expected cost: 62 + 3 determinism re-scores = 65 calls at ~$0.0002 = ~$0.013.
