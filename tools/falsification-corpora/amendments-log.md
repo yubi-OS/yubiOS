@@ -51,3 +51,11 @@ after results arrived.
    prose. Report-only in this slice per prereg; the full build gates it.
 
 ## (empty until needed — nothing below this line yet)
+
+## 2026-10-08 (pre-run, router gate-outcome corpus — logged BEFORE any measurement)
+
+11. **Router full gate-outcome corpus executes** per router-full-preregistration.md
+    (14 rows: the Lane D slice's 12 + the clean family-declared gold R13 + the
+    unregistered-family observability row R14). Expectations pinned to policy v15.
+12. **Plumbing probes P1/P2 authorized** (one schema probe + one R13-expectation
+    pin); results logged here, NOT used as corpus data.
