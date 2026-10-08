@@ -26,6 +26,16 @@ Repo: https://github.com/yubi-OS/yubiOS
 1. **Technical** — Linux engineers, security researchers, homelab operators, corporate Linux admins. Channels: HN, LWN.net, r/linux, r/netsec, r/linuxhardware, Phoronix, The Register, Lobste.rs
 2. **General** — Privacy-conscious users tired of vendor lock-in, people who own YubiKeys and don't know this is possible, hardware enthusiasts. Channels: r/privacy, r/hardware, broader tech press (Ars Technica, Wired), product-focused newsletters
 
+## Project Context: Antimony (active campaign, Linux-specific audiences)
+
+**Antimony** — yubi-OS's provenance-gated Chromium fork (OMN-165). Chromium 153.0.8010.36 with an engine-layer (in-browser C++) AI-content provenance gate: C2PA manifest inspection, three blocking modes (block_on_detect / soft-block-images / provenance_required fail-closed), omnibox provenance chip, navigation interstitial, settings page (chrome://settings/provenance), on-device AI-model removal toggle, and session/persistent/page-scoped exemptions.
+
+- Repo: https://github.com/yubi-OS/chromium-provenance (patch series under `patches/`, series map in `SERIES.md`)
+- First prerelease published 2026-10-07: `antimony-v153.0.8010.36-r2` — 4 assets (arm64 + amd64 deb, aarch64 + x86_64 rpm; official `is_official_build=true` builds, 112.9–128.1 MB), all inner binaries stripped
+- **This campaign targets Linux-specific audiences only.** Channel set differs from the yubios campaign below: Phoronix, The Register, LWN, HN Show HN, r/linux + r/linuxhardware, the linux-surface community (the arm64 builds are native to Surface-class Snapdragon hardware), distro packaging channels (deb/rpm users, AUR/Gentoo later), and OpenSSF/supply-chain circles (the fork's own SLSA-style provenance discipline).
+- Lead angle: engine-layer AI-content provenance gating — the only fork doing detection inside browser C++ rather than at the extension/search layer — plus the honest-limitations doctrine. Do NOT lead with "blocks all AI content": C2PA manifest presence is a signal, not proof; the detector stack is partial (C2PA shipped; SynthID/OpenAI/TrustMark deferred).
+- Canonical doctrine: the claim-ledger + readiness-gates pattern from `yubi-OS/yubiOS/docs/PR.md` applies verbatim — see Knowledge corpus grounding below.
+
 ---
 
 ## Launch Phases
@@ -199,6 +209,24 @@ decision records for every non-obvious security choice.
 
 ---
 
+## Knowledge corpus grounding (yubi-OS/knowledge)
+
+The campaign doctrine's canonical doc is `yubi-OS/yubiOS/docs/PR.md` (Public Relations campaign: thesis, claim ledger, readiness gates, waves, channel plan, runbook, risk plan). It is minted as a knowledge corpus at **`yubi-OS/knowledge/docs/pr/`**:
+
+| Corpus file | What it carries |
+|---|---|
+| `01-campaign-thesis.md` | staged proof-first campaign thesis + the identity-root / platform-root split |
+| `02-positioning-foundations.md` | category, core promise, reference map (Qubes/secureblue/Talos/Amutable) |
+| `03-audiences-message-house.md` | audience priorities, pillars, narrative ladder, short descriptors |
+| `04-claim-ledger.md` | approved wording / evidence / "do not say yet" per claim |
+| `05-readiness-gates.md` | Gate 0-3 evidence requirements |
+| `06-campaign-waves.md` | Wave 0-3 campaign architecture |
+| `07-channel-plan.md` | owned + earned channels with per-outlet approach |
+| `08-press-kit-outreach.md` | press-kit checklist, media pitch, community post, FAQ |
+| `09-runbook-risk-measurement.md` | D-14 → D+30 runbook, risk/response table, weekly dashboard |
+
+Retrieval: the `corpus-recall` skill patterns — codeload tarball + grep, one-call full text via steady-orbit `POST /api/repo-items {"repo":"yubi-OS/knowledge","subdir":"docs"}`, or single raw reads. Adjacent grounding corpora for claim-ledger evidence links: `docs/adr`, `docs/architecture`, `docs/spec`, `docs/threat-model`, `docs/mission`, `docs/mitigate`. Provenance discipline: when a drafted claim cites a fact, trace it to the corpus doc and cross-check `research-db/archive.json` weights.
+
 ## Output Artifacts
 
 When running a PR launch with this skill, produce:
@@ -271,6 +299,7 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 ## Changelog
 
+- **2026-10-07 knowledge-corpus grounding**: canonical campaign doctrine now referenced from `yubi-OS/knowledge/docs/pr/` (the docs-variant mint of `docs/PR.md`); added the Antimony project context (Linux-specific audiences) and its channel set.
 - **2026-08-06 cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
 
 
