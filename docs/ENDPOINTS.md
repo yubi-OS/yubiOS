@@ -1105,12 +1105,21 @@ flowchart TD
     Autom -->|"builtins: lead_research, corpus_audit,<br/>corpus_lens, drift, tautology_gate"| Corpus
     Autom --> Places
     Surf --> NF
-    classDef green fill:#d8f3dc,stroke:#2d6a4f
-    classDef yellow fill:#fdf3c4,stroke:#b58a00
-    classDef red fill:#f8cfcf,stroke:#b02a2a
+    classDef green fill:#e3f6eb,stroke:#2d6a4f
+    classDef yellow fill:#fff5c9,stroke:#a88400
+    classDef red fill:#fbdcdc,stroke:#b02a2a
+    classDef entry fill:#d6e2ff,stroke:#3b5bdb,stroke-width:2px
+    classDef client fill:#eef1f4,stroke:#6b7580
     class Pages,Assets,MapPub,DataPub,Surf,Health green
     class Chat,Tts,Tasks,Autom,Evolve1,Evolve2,Corpus,Taste,Spectral,LensR,Router yellow
     class Approve,Pipe,Hook red
+    class Entry entry
+    class Client client
+    style SITE fill:#e8f0fe,stroke:#4c6ef5,color:#1e3f9e
+    style LEGACY fill:#e2f6ef,stroke:#0ca678,color:#08755a
+    style JEV fill:#efeafe,stroke:#7048e8,color:#4a30a5
+    style STORE fill:#fff6d8,stroke:#d99e00,color:#7a5600
+    style EXT fill:#f0f2f4,stroke:#87919b,color:#3a424a
 ```
 
 ## Cross-Domain Flows
