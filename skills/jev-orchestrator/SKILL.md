@@ -141,6 +141,16 @@ Patterns proven across the three rounds (PRs #276/#277/#278) and the email regre
 
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
 
+## Prompt intake routed through the hierarchy router (policy v15, 2026-10-08)
+
+A prompt submitted to the /jev/ prompt console (payload.prompt on POST /api/jev/tasks) no longer runs a fixed 70b draft. The decide stage first calls `selectForPrompt` (jev-router.js): the prompt is measured as a text artifact through the structured-evidence scorer (feature `scorer.bits`) and matched against the policy's `text-*` bands.
+
+- **Model-lane targets** (`lane-draft` 70b, `lane-classify` 8b, `model:<route>`): the composed-prompt draft flow runs on that model; `decided_via: router:<target>`.
+- **Tool targets** (any entry in the policy `route.dispatch` targets registry): ONE proposed action `{tool: "route.dispatch", url: "https://jev.route/<target>", body: {target, artifact: {text: {name: "prompt", text}}, band_id}}` — the executor dispatches in-process (handleJevCorpus for corpus targets, policy-named-credential fetch for resend_send) and the deterministic gate still disposes everything. Provisional bands never auto-execute.
+- **No matching band** → the legacy 70b flow unchanged (`decided_via: llama_prompt`, `intent_json.router: "no_band"`). Router failure also degrades to the fallback — intake never blocks.
+
+Adding a routable endpoint is a POLICY edit (route.dispatch targets registry), never code. Bands are provisional pending calibration: run `session/auth-pass/router-prompt/verify-prompt-router.mjs` (or the final3 copy), review the bit-row distribution, adjust thresholds, then promote via the audited learning flow (actor jenny). Route run-row cache: the routeArtifact input hash includes `policy_version`, so a promote invalidates stale route decisions (a pre-promote cached `blocked` row must never replay post-promote — that bug shipped and was fixed 2026-10-08).
+
 ## Hierarchy Router (measurement-gated routing, 2026-10-06)
 
 The routing regime on the worker: `POST /api/jev/route` accepts ANY artifact modality — image (deterministic edge-standard-v1 D), text (structured-evidence scorer), multimodal/any (ONE clef noul call over the caller hint + data-URI images + any measured context). Band lookup reads `routing.bands` from the LIVE policy at call time; the routing action `{tool:"route.dispatch", method:"POST", url:"https://jev.route/<target>", body:{target, artifact_ref, band_id}}` passes the SAME fail-closed gate as every action; on allow the router auto-dispatches (the approve-leg contract) and the task closes in-request. Invariant: the detector proposes the route; the gate disposes — measurements are data, never authorization.
@@ -154,3 +164,4 @@ Verify semantics (the route.dispatch branch in jev-verify): model dispatches ver
 Calibration on record: image bands 6/6 HIT through the live route (band edges [1.0, 1.45, 2.0] confirmed, gaskets ≥1.55 vs the 1.45 edge); multimodal band 2/2 sweep PASS (jitter sd=0 on both classes; hint-discrimination paired Δ 0.818). Multimodal routing quality depends on CALLER HINT QUALITY — a vague hint scores 0.14 on a gasket that scores 0.95 with a matched hint; callers get out what they describe.
 
 Caller caveats: degenerate stub images (8×8 PNG) fail clef inference (3043) → 422 MEASUREMENT_FAILED — use real images; same-artifact re-routes dedup to the existing task via idempotency (a re-route is NOT a re-dispatch); no text bands in v1 (text artifacts measure but route fail-closed blocked); the task verify endpoint REQUIRES `body.action_id` — without it the handler resolves action=null and 500s.
+
