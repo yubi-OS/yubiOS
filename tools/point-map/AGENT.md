@@ -52,6 +52,8 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | GET | `/api/health` | version info |
 **Bearer (JEV_API_KEY) required on every route in this table as of 2026-10-08** (`/api/jev/map/repo-items`, `/api/jev/map/embed`, `/api/jev/map*`, `/api/jev/map/outcomes`, `/api/jev/map/vector/search`): requests without the operator key get 401; Sauna-side calls pass the Steady Orbit jev operator connection and the proxy injects the bearer automatically.
 
+**Prompt intake is router-routed (policy v15, 2026-10-08):** a prompt submitted through the /jev/ prompt console is measured as a text artifact (structured-evidence scorer, scorer.bits) and matched against the policy's text bands: model lanes run the draft stage on that lane's model (decided_via `router:lane-draft` / `router:lane-classify`), tool targets emit ONE gated route.dispatch action to the policy-declared endpoint (never auto-executed), and no matching band falls back to the legacy 70b draft flow (`router: no_band` in intent_json). Routing decisions are recorded on the task (intent_json.router) and as kind-route run rows. Adding a routable endpoint is a policy edit (route.dispatch targets registry), never code. Bands are PROVISIONAL pending calibration (verify-prompt-router.mjs).
+
 | POST | `/api/jev/map/repo-items` | `{repo:"owner/repo", subdir?, ref?}` returns sorted full text/path items, truncation flags and resolved_ref. Prefer a 40-character commit SHA. A branch name remains mutable. |
 | POST | `/api/jev/map/embed` | `{texts:string[],source?}` returns 768-D document vectors, model, preprocessing metadata, full-content SHA256, chunk counts/coverage and cache hits |
 | POST | `/api/jev/map` | exactly one of `{texts}` or `{vectors}`, plus names, labels?, d?, seed?, threshold?, K?, T?, baseline_id?, persist? |
@@ -492,6 +494,7 @@ Process and bootstrapping rules distilled from one day of operating this instrum
 31. **Lead the prompt with the protected reading, label the adverse rungs, and point at the contract.** The rung prompt used to spend 58% of its characters on a frame recital that never varies and printed `occupied sectors +0` on every rung while omitting the pole gap, Δ, clearance and Hamming distance it had already computed. The geometric prompt (~1,785 chars/ladder vs ~4,506) leads with Δ (Lemma 1), states clearance as an achieved-geometry fact (never a forecast), labels adverse rungs `ADVERSE on this frame` without suppressing them, and points at `/AGENT.md` instead of restating it. A prompt that only asserts a prediction with a coin-flip track record is noise; one that reports frame readings is an instrument.
 
 Tooling for the loop lives at `tools/skill-check/` (`skillcheck.sh`, `fixer.py`, `wayfinder-cycle.py`, README).
+
 
 
 
