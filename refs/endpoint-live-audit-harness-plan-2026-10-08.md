@@ -181,13 +181,13 @@ and task create/execute/cancel shape-validation (a valid task create requires a 
 | GET | `/llms.txt` | none | 200 OK |
 | GET | `/map/pointmap.js` | none | 200 OK |
 | GET | `/jev` | none | 200 OK |
-| GET | `/[/index.html]` | none | tested (see passes) |
-| GET | `/audio/reply-1\` | 2\ | tested (see passes) |
+| GET | `/[/index.html]` | none | 200 OK |
+| GET | `/audio/reply-1\|2\|3` | none | 200 OK (mp3 magic bytes) |
 | GET | `/api/searxng` | none | 500 on missing qs - relay passthrough (F4) |
-| GET | `/api/tts also POST` | none | tested (see passes) |
+| GET | `/api/tts (also POST)` | none | 422 fail-closed (no params) |
 | POST | `/api/stt` | none | 422 fail-closed (empty body) |
 | POST | `/api/contact` | none | 422 fail-closed (empty body) |
-| GET | `/api/decide also POST` | none | tested (see passes) |
+| GET | `/api/decide (also POST)` | none | 422 fail-closed (no qs) |
 | GET | `/api/health` | none | 200 OK |
 | GET | `/api/jev/map/sos/fits` | bearer | 200 OK |
 | GET | `/api/jev/map/sos/fits/:id` | bearer | 404 correct (nonexistent id) |
@@ -208,7 +208,7 @@ and task create/execute/cancel shape-validation (a valid task create requires a 
 | POST | `/api/jev/map/azimuth` | bearer | 200 trial on live map 570 + 422 fail-closed |
 | POST | `/api/jev/map/outcomes` | bearer | 422/400 fail-closed (empty/invalid body) |
 | GET | `/api/jev/map/outcomes` | bearer | 200 OK (12 rows) |
-| DELETE | `/api/jev/map/outcomes/* also PUT, PATCH` | bearer | tested (see passes) |
+| DELETE | `/api/jev/map/outcomes/*` (also PUT, PATCH) | bearer | 405 append-only enforced (correct) |
 | GET | `/api/jev/map/maps` | bearer | 200 OK |
 | GET | `/api/jev/map/maps/:id` | bearer | 404 correct (nonexistent id) |
 | DELETE | `/api/jev/map/maps/:id` | bearer | 404 correct (nonexistent id) |
@@ -256,7 +256,7 @@ and task create/execute/cancel shape-validation (a valid task create requires a 
 | POST | `/api/jev/corpus/audit` | bearer | 200 functional (real data) + 422 fail-closed |
 | POST | `/api/jev/corpus/lens` | bearer | 200 functional (real data) + 422 fail-closed |
 | POST | `/api/jev/corpus/atom` | bearer | 422/400 fail-closed (empty/invalid body) |
-| POST | `/api/jev/corpus/classify` | bearer | tested (see passes) |
+| POST | `/api/jev/corpus/classify` | bearer | 422 fail-closed (empty body) |
 | POST | `/api/jev/corpus/placements` | bearer | 422/400 fail-closed (empty/invalid body) |
 | GET | `/api/jev/corpus/runs` | bearer | 200 OK |
 | GET | `/api/jev/corpus/selftest` | bearer | 200 ok:true (92 checks) |
