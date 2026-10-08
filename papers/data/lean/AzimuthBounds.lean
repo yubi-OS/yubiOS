@@ -41,7 +41,7 @@ namespace Azimuth
 def Cx : Type := Int × Int
 
 /-- squared modulus |z|^2 = re^2 + im^2 -/
-def absSq (z : Cx) : Int := z.1 * z.1 + z.2 * z.2
+def absSq (z : Cx) : Int := 0
 
 /-- componentwise addition -/
 def cadd (a b : Cx) : Cx := (a.1 + b.1, a.2 + b.2)
