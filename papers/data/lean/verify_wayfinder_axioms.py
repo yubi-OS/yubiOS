@@ -48,6 +48,15 @@ import sys
 DEPENDS_RE = re.compile(r"^'([^']+)' depends on axioms: \[(.*)\]\s*$")
 # 'Foo.bar' does not depend on any axioms
 NO_AXIOM_RE = re.compile(r"^'([^']+)' does not depend on any axioms\s*$")
+# Round-2 enumerate probe emission (check_lean_axioms.py --gen's run_cmd block):
+# AXIOM_LINE <name> -> [axiom, axiom, ...]   (empty [] = no axioms)
+# Accepted alongside the standard '#print axioms' output so the CurvedCorpus
+# gate can reuse the axiom-coverage step's probe output. Mirrors AXIOM_LINE_RE
+# in check_lean_axioms.py (greedy name up to the LAST ' -> [').
+AXIOM_LINE_VERIFY_RE = re.compile(
+    r"^(?:\S+:\d+:\d+:\s*)?(?:[a-zA-Z]+:\s*)?"
+    r"AXIOM_LINE (?P<name>.+) -> \[(?P<axioms>.*)\]\s*$"
+)
 ERROR_RE = re.compile(r"(^|:)\s*error:", re.IGNORECASE)
 
 
@@ -79,6 +88,12 @@ def parse(text: str) -> tuple[dict[str, list[str]], list[str]]:
         m = NO_AXIOM_RE.match(stripped)
         if m:
             reported[m.group(1)] = []
+            continue
+        m = AXIOM_LINE_VERIFY_RE.match(stripped)
+        if m:
+            body = m.group("axioms").strip()
+            axioms = [a.strip() for a in body.split(",") if a.strip()] if body else []
+            reported[m.group("name").strip()] = axioms
     return reported, errors
 
 
