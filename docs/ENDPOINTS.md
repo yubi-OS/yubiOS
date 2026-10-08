@@ -370,17 +370,17 @@ Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| POST | `/api/map` | none | Partial - Lean bounds + regression suite |
-| GET | `/api/maps` | none | No |
+| POST | `/api/map` | bearer | Partial - Lean bounds + regression suite |
+| GET | `/api/maps` | bearer | No |
 | DELETE\|GET | `/api/maps/:id` | bearer | No |
-| POST | `/api/maps/compare` | none | No |
-| POST | `/api/map/preview` | none | Partial - Lean bounds + regression suite |
-| POST | `/api/map/control` | none | Yes - positive-control falsification endpoint |
-| POST | `/api/map/axis-redundancy` | none | Yes - matched-null falsification trials |
-| POST | `/api/map/admission` | none | Yes - matched-null falsification trials |
-| POST | `/api/map/azimuth` | none | Yes - matched-null falsification trials |
-| POST | `/api/map/rayleigh` | none | Yes - matched-null falsification trials |
-| POST | `/api/map/consistency` | none | Partial - sign-agreement control |
+| POST | `/api/maps/compare` | bearer | No |
+| POST | `/api/map/preview` | bearer | Partial - Lean bounds + regression suite |
+| POST | `/api/map/control` | bearer | Yes - positive-control falsification endpoint |
+| POST | `/api/map/axis-redundancy` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/map/admission` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/map/azimuth` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/map/rayleigh` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/map/consistency` | bearer | Partial - sign-agreement control |
 | GET | `/map/` | none | No |
 | GET | `/map/pointmap.js` | none | No |
 | GET | `/map/app.js` | none | No |
@@ -414,9 +414,9 @@ Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| POST | `/api/repo-items` | none | No |
-| POST | `/api/embed` | none | No |
-| POST | `/api/vector/search` | none | No |
+| POST | `/api/repo-items` | bearer | No |
+| POST | `/api/embed` | bearer | No |
+| POST | `/api/vector/search` | bearer | No |
 
 Module parts: index.js (embeddings, repo fetch, vector search, chunked/v1 cache)
 
@@ -443,10 +443,10 @@ Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| GET\|POST | `/api/outcomes` | none | No |
-| GET\|POST | `/api/outcomes?baseline_id=` | none | No |
-| GET\|POST | `/api/outcomes?frame_id=` | none | No |
-| DELETE | `/api/outcomes/*` † | none | No |
+| GET\|POST | `/api/outcomes` | bearer | No |
+| GET\|POST | `/api/outcomes?baseline_id=` | bearer | No |
+| GET\|POST | `/api/outcomes?frame_id=` | bearer | No |
+| DELETE | `/api/outcomes/*` † | bearer | No |
 
 Module parts: index.js (outcomes routes + 405 guard on PUT/PATCH/DELETE)
 
@@ -469,15 +469,15 @@ Composes with:
 
 ### Repo Assessment (SOS Agent FIT)
 
-The original Steady Orbit business API, still live as its own module surface: POST /api/assess fetches and assesses a GitHub repository into a FIT.json report, GET /api/fits lists the stored assessment population, and POST /api/narrate produces natural-language narration over an assessment using Workers AI.
+The original Steady Orbit business API, relocated 2026-10-08 into the bearer-gated /api/map/sos/* surface: POST /api/map/sos/assess fetches and assesses a GitHub repository into a FIT.json report, GET /api/map/sos/fits lists the stored assessment population, and POST /api/map/sos/narrate produces natural-language narration over an assessment using Workers AI. The old /api/assess, /api/fits, /api/fits/:id and /api/narrate paths return 410 gone.
 
 Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| POST | `/api/assess` | none | No |
-| GET | `/api/fits` | none | No |
-| POST | `/api/narrate` | none | No |
+| POST | `/api/assess` | bearer | No |
+| GET | `/api/fits` | bearer | No |
+| POST | `/api/narrate` | bearer | No |
 | DELETE\|GET | `/api/fits/:id` † | bearer | No |
 
 Module parts: index.js (assess/fits/narrate routes, refineBasis)
@@ -486,8 +486,8 @@ Bindings: DB, AI, GITHUB_API_KEY
 
 Key invariants:
 - Core API surface: deliberately unchanged by the v0.2 map release; llms.txt fallback documents it
-- Assessment reports are stored rows in D1 listed by /api/fits
-- DELETE /api/fits/:id is operator bearer-auth guarded (R2 patch): 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token
+- Assessment reports are stored rows in D1 listed by /api/map/sos/fits
+- DELETE /api/map/sos/fits/:id is operator bearer-auth guarded (R2 patch): 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token
 
 Composes with:
 - Ingestion & Embeddings (repo fetching shares the GitHub path)
@@ -576,8 +576,6 @@ Endpoints:
 | GET | `/sitemap.xml` † | none | No |
 | GET | `/robots.txt` † | none | No |
 | GET | `/website-vN/<file>` † | none | No |
-| GET | `/sos[/]\|/sos/index.html` † | none | No |
-| GET | `/sos/client.js` † | none | No |
 | GET | `/audio/reply-1\|2\|3.mp3` † | none | No |
 
 Module parts: index.js (health/AGENT/llms/console routes + scheduled handler), solar-rbs-entry.mjs (site pages + /website-vN assets), jev-main.js (console wiring)
@@ -596,7 +594,7 @@ Composes with:
 
 ## Endpoint Inventory
 
-The complete 131-route inventory (121 from Lane A + 10 added 2026-10-06), grouped by
+The complete 129-route inventory (121 from Lane A + 10 added 2026-10-06, net -2 from the 2026-10-08 auth pass + SOS fold), grouped by
 module part. Auth is `bearer` (JEV_API_KEY) on every /api/jev route except the two
 health endpoints and the reply webhook. Six rows are CORS preflights (OPTIONS).
 
@@ -630,7 +628,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/robots.txt` | none | robots.txt served from KV | No |
 | GET | `/website-vN/<file>` | none | Generic asset pass-through: /website-v<digits>/<[A-Za-z0-9._-]+> served from KV key website-vN/<file> | No |
 
-### index.js (core API module) - 45 routes
+### index.js (core API module) - 43 routes
 
 | Method | Path | Auth | Description | Harness |
 |---|---|---|---|---------|
@@ -640,8 +638,6 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/map/pointmap.js` | none | Dependency-free numeric pointmap core from KV (pointmap.js) | No |
 | GET | `/map[/]` | none | Wayfinder map browser UI (KV map-index.html) | No |
 | GET | `/jev[/]` | none | Jev ops console HTML (KV jev-index.html); key entered once, sessionStorage | No |
-| GET | `/sos[/]\|/sos/index.html` | none | SOS voice-agent UI (KV sos-index.html) | No |
-| GET | `/sos/client.js` | none | SOS voice client script (KV sos-client.js) | No |
 | GET | `/[/index.html]` | none | Fallback site index from KV (shadowed by solar-rbs-entry.mjs page table when KV page exists) | No |
 | GET | `/audio/reply-1\|2\|3.mp3` | none | Three hardcoded voice reply audio files from KV (audio/reply-N.mp3) | No |
 | OPTIONS | `/api/searxng` | none | CORS preflight for the searXNG proxy | No |
@@ -655,30 +651,30 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | OPTIONS | `/api/decide` | none | CORS preflight for decision-model relay | No |
 | GET | `/api/decide (also POST)` | none | DefAPI typesafe/jev-1.13 decision relay (clef/clef-flash via Workers AI when selected); rate-limited | No |
 | GET | `/api/health` | none | Worker version info + diagnostic module versions | No |
-| GET | `/api/fits` | none | List stored repository FIT assessments (population) | No |
-| GET | `/api/fits/:id` | none | One stored FIT with full fit_json and population comparison | No |
+| GET | `/api/fits` | bearer | List stored repository FIT assessments (population) | No |
+| GET | `/api/fits/:id` | bearer | One stored FIT with full fit_json and population comparison | No |
 | DELETE | `/api/fits/:id` | bearer | Delete a stored FIT row; operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
-| POST | `/api/narrate` | none | Generate a plain-text FIT narrative via Workers AI streaming, persists to fits.narrative | No |
-| POST | `/api/assess` | none | Assess a GitHub repo into a FIT.json: fetch corpus, derive/refine latent basis (AI-assisted, or reuse baseline_id basis), runFit, store, compare to population | No |
-| POST | `/api/repo-items` | none | Fetch sorted full-text repo items (GitHub tree) with truncation flags | No |
-| POST | `/api/vector/search` | none | Cosine search over the sos-embeddings Vectorize index | No |
-| POST | `/api/embed` | none | Chunked/v1 document embedding: bge-base-en-v1.5, mean pooling, byte-weighted chunk mean, SHA256 content-hash cache, Vectorize store | No |
+| POST | `/api/narrate` | bearer | Generate a plain-text FIT narrative via Workers AI streaming, persists to fits.narrative | No |
+| POST | `/api/assess` | bearer | Assess a GitHub repo into a FIT.json: fetch corpus, derive/refine latent basis (AI-assisted, or reuse baseline_id basis), runFit, store, compare to population | No |
+| POST | `/api/repo-items` | bearer | Fetch sorted full-text repo items (GitHub tree) with truncation flags | No |
+| POST | `/api/vector/search` | bearer | Cosine search over the sos-embeddings Vectorize index | No |
+| POST | `/api/embed` | bearer | Chunked/v1 document embedding: bge-base-en-v1.5, mean pooling, byte-weighted chunk mean, SHA256 content-hash cache, Vectorize store | No |
 | POST | `/api/chat` | none | Site assistant relay (original /api/chat, Workers AI llama-3.3-70b-instruct-fp8-fast, pinned SOS system prompt) | No |
-| POST | `/api/map` | none | Wayfinder: map texts or vectors onto the frozen pointmap/0.2 frame; optionally persist a stored map; baseline_id freezes frame | Partial - Lean bounds + regression suite |
-| POST | `/api/map/preview` | none | Preview ONE candidate (ADD/CHANGE) against a stored baseline's frozen frame; writes nothing | Partial - Lean bounds + regression suite |
-| POST | `/api/map/control` | none | CutPaste-style positive control: seeded splice CHANGEs measured through the preview path on the frozen frame | Yes - positive-control falsification endpoint |
-| POST | `/api/map/consistency` | none | Measure ONE candidate under 1..3 caller-supplied text variants on the frozen frame; sign agreement report | Partial - sign-agreement control |
-| POST | `/api/map/axis-redundancy` | none | Per-axis leave-one-out NN-vote predictability trial vs fixed-margin null | Yes - matched-null falsification trials |
-| POST | `/api/map/admission` | none | Unified membership trials: rayleigh, axis trial, spectra shares, radius I(r) grid in one call | Yes - matched-null falsification trials |
-| POST | `/api/map/rayleigh` | none | Isolation-graph components/isolates (exact), Fiedler lambda2 + exact Rayleigh-Ritz cut witness, fixed-margin null tails | Yes - matched-null falsification trials |
-| POST | `/api/map/azimuth` | none | Rotation/reflection-invariant Rayleigh Z_m (m=2,3,4,6,12) + largest circular gap trial on the placement plane | Yes - matched-null falsification trials |
-| POST | `/api/outcomes` | none | Append-only pre-registration ledger: prediction separated from independent task-check outcome (201) | No |
-| GET | `/api/outcomes` | none | Ledger rows + contingency of COUNTS (never a rate) | No |
-| DELETE | `/api/outcomes/* (also PUT, PATCH)` | none | Explicit 405: outcomes ledger is append-only | No |
-| GET | `/api/maps` | none | Stored map metrics list (no map_json) | No |
-| GET | `/api/maps/:id` | none | Complete stored MapResult (KV-overflow aware), enriched with radius profile on read | No |
+| POST | `/api/map` | bearer | Wayfinder: map texts or vectors onto the frozen pointmap/0.2 frame; optionally persist a stored map; baseline_id freezes frame | Partial - Lean bounds + regression suite |
+| POST | `/api/map/preview` | bearer | Preview ONE candidate (ADD/CHANGE) against a stored baseline's frozen frame; writes nothing | Partial - Lean bounds + regression suite |
+| POST | `/api/map/control` | bearer | CutPaste-style positive control: seeded splice CHANGEs measured through the preview path on the frozen frame | Yes - positive-control falsification endpoint |
+| POST | `/api/map/consistency` | bearer | Measure ONE candidate under 1..3 caller-supplied text variants on the frozen frame; sign agreement report | Partial - sign-agreement control |
+| POST | `/api/map/axis-redundancy` | bearer | Per-axis leave-one-out NN-vote predictability trial vs fixed-margin null | Yes - matched-null falsification trials |
+| POST | `/api/map/admission` | bearer | Unified membership trials: rayleigh, axis trial, spectra shares, radius I(r) grid in one call | Yes - matched-null falsification trials |
+| POST | `/api/map/rayleigh` | bearer | Isolation-graph components/isolates (exact), Fiedler lambda2 + exact Rayleigh-Ritz cut witness, fixed-margin null tails | Yes - matched-null falsification trials |
+| POST | `/api/map/azimuth` | bearer | Rotation/reflection-invariant Rayleigh Z_m (m=2,3,4,6,12) + largest circular gap trial on the placement plane | Yes - matched-null falsification trials |
+| POST | `/api/outcomes` | bearer | Append-only pre-registration ledger: prediction separated from independent task-check outcome (201) | No |
+| GET | `/api/outcomes` | bearer | Ledger rows + contingency of COUNTS (never a rate) | No |
+| DELETE | `/api/outcomes/* (also PUT, PATCH)` | bearer | Explicit 405: outcomes ledger is append-only | No |
+| GET | `/api/maps` | bearer | Stored map metrics list (no map_json) | No |
+| GET | `/api/maps/:id` | bearer | Complete stored MapResult (KV-overflow aware), enriched with radius profile on read | No |
 | DELETE | `/api/maps/:id` | bearer | Delete one saved map (+ KV overflow cleanup); operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
-| POST | `/api/maps/compare` | none | Compare two stored maps on compatible frames | No |
+| POST | `/api/maps/compare` | bearer | Compare two stored maps on compatible frames | No |
 
 ### routes-jev.js (jev orchestrator) - 22 routes
 
@@ -1042,7 +1038,7 @@ flowchart TD
         MapPub["POST /api/map + /map/preview, /control, /consistency,<br/>/azimuth, /rayleigh, /admission, /axis-redundancy<br/>GET /api/maps, /maps/compare"]
         DataPub["POST /api/repo-items, /api/embed, /api/outcomes<br/>GET /api/health, /api/outcomes<br/>POST /api/vector/search"]
         Tts["POST /api/tts, /api/stt, /api/contact,<br/>GET/POST /api/decide - public relays"]
-        Surf["GET /api/searxng, /map/ UI, /map/app.js,<br/>/map/pointmap.js, /AGENT.md, /llms.txt, /sos, /audio/"]
+        Surf["GET /api/searxng, /map/ UI, /map/app.js,<br/>/map/pointmap.js, /AGENT.md, /llms.txt, /audio/"]
     end
     Core --> MapPub
     Core --> DataPub
@@ -1112,8 +1108,8 @@ flowchart TD
     classDef client fill:#eef1f4,stroke:#6b7580,color:#2f363c
     classDef store fill:#fff6d8,stroke:#d99e00,color:#5c4300
     classDef ext fill:#eef0f3,stroke:#87919b,color:#31383f
-    class Pages,Assets,MapPub,DataPub,Surf,Health green
-    class Chat,Tts,Tasks,Autom,Evolve1,Evolve2,Corpus,Taste,Spectral,LensR,Router yellow
+    class Pages,Assets,Surf,Health green
+    class Chat,Tts,Tasks,Autom,Evolve1,Evolve2,Corpus,Taste,Spectral,LensR,Router,MapPub,DataPub yellow
     class Approve,Pipe,Hook red
     class Entry entry
     class Client client
@@ -1247,4 +1243,6 @@ Refresh notes (2026-10-05, discrepancy resolution):
 10. The DELETE-auth prose fix (the stale 'AUTH GAP' wording R3 flagged as R3-1/R3-2 in the KV doc rows) landed after the R3 read; this refreshed document reflects the fixed wording.
 11. The Lean verification map is unchanged by the refresh: none of the newly documented endpoints has a Lean connection - they are not corpus math.
 12. Refresh 2026-10-06 (falsification-instrument wave): 10 routes added (router 4, spectral 3, oracle 1, lens 2); inventory 121 -> 131; a Harness column added to every capability and inventory table (legend at the top of the Endpoint Inventory); the spectral/lens tools of record sit on draft PR #292, so their Lean-map rows point there until merge. Harness tiers: Yes = pre-registered falsification corpus or matched-null falsification trials; Partial = fixture parity / calibration sweeps / Lean bounds without a dedicated corpus; No = contract-level validation only. The candidate list for endpoints that could adopt one effectively lives at refs/falsification-harness-coverage-2026-10-06.md (draft PR).
+13. Auth pass + SOS fold 2026-10-08: every non-site-tool route bearer-gated with requireOperatorAuth (map engine, outcomes ledger incl. the previously open DELETE/PUT/PATCH, ingestion repo-items/embed/vector-search, the SOS business API); SOS API relocated to /api/map/sos/* with old /api/assess, /api/fits, /api/fits/:id, /api/narrate paths returning 410; /sos page routes + KV assets removed; the /map/ UI gained the /jev/-style operator-key prompt sharing the jev_key sessionStorage entry. 131 -> 129 routes. SPEC-AUTH-SOS-2026-10-08.
+
 
