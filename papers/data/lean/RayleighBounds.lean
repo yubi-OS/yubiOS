@@ -150,6 +150,7 @@ The CI gate parses this output; it does not grep source comments. -/
 #print axioms sq_nonneg
 #print axioms quad_nonneg
 #print axioms quad_const
+#print axioms quad_cons
 #print axioms quad_shift
 #print axioms sq_mul
 #print axioms quad_scale
