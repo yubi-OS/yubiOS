@@ -192,11 +192,11 @@ The math is a port, never a re-derivation: the system of record is `papers/data/
 | Method | Path | Contract |
 |---|---|---|
 | POST | `/api/jev/route` | route an artifact: measure edge-standard D + centroid walk `d_w` + lens features, select the band from policy `routing.bands`, then gated dispatch to the band target. Fail-closed on no band (`default_on_no_band: "blocked"`). Lane-correct bands run a deterministic inline correction in the pinned order (astig->spherical->trefoil) followed by ONE re-select; reroute depth cap 1 with a convergence gate (a re-select landing on lane-correct again blocks with `reroute_depth_exceeded`); the gate disposes of the FINAL route. Multimodal artifacts are NEVER auto-dispatched: `needs_approval` |
-| GET | `/api/jev/route/bands` | the band table from policy `routing.bands` (v7-v12 lineage); `{default_on_no_band, bands[]}` with `default_on_no_band: "blocked"` |
+| GET | `/api/jev/route/bands` | the band table from policy `routing.bands` (v7-v15 lineage; v13/v14 added the aberrated-hierarchy-escalation provisional band, v15 added the prompt-intake text bands + route.dispatch tool targets); `{default_on_no_band, bands[]}` with `default_on_no_band: "blocked"` |
 | POST | `/api/jev/route/selftest` | NOTE: POST, not GET. Checks modality precedence, band edge semantics, pair-band clauses and the fail-closed paths |
 | GET | `/api/jev/route/runs` | recent route run rows (`router_version: "router-v1"`: measurement features, selected band, decision, gate reasons, reroute trace) |
 
-Bearer-auth (JEV_API_KEY) on all four routes. Lens features are computed only when the artifact declares a registered gold family via `lens_family` on a canonical 512x512 gray, so arbitrary artifacts cannot false-positive the lens bands. Bands live in the policy (v12), not in code.
+Bearer-auth (JEV_API_KEY) on all four routes. Lens features are computed only when the artifact declares a registered gold family via `lens_family` on a canonical 512x512 gray, so arbitrary artifacts cannot false-positive the lens bands. Bands live in the policy (v15), not in code. E2E falsification corpus (PR #297): 12 gold rows through the live route, 11/12 band + gate outcomes incl. the convergence-gate negative; open finding F1 - GET /bands drops the policy all-clause arrays, so operative triggers are not preregisterable from descriptions alone.
 
 ## Time series (WAE storage + forecasting, shipped 2026-10-08)
 
