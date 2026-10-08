@@ -62,18 +62,6 @@
   destroyed-dependence baselines (6), completing sections 8-9.
 -/
 
-import Lean
-set_option debug.skipKernelTC true
-
-run_cmd do
-  addDecl (.declDecl {
-    name := `one_eq_two, levelParams := []
-  , type := Lean.mkConst `False
-  , value := Lean.mkConst `Nat.zero
-  , hints := Lean.ReducibilityHints.abbrev, safety := Lean.DefinitionSafety.safe })
-
-theorem false_proved : False := one_eq_two
-
 namespace CurvedCorpus
 
 /-! ### 0. A hand-rolled integer min (no library dependence) -/
