@@ -17,19 +17,19 @@
     {
       "name": "CurvedCorpus.acoustic_sum_rule",
       "status": "lean-proved",
-      "statement": "(w : Nat \u2192 Int) (c : Int) (S : List Nat) : sumOver (fun j => w j * (c - c)) S = 0",
+      "statement": "(w : Nat → Int) (c : Int) (S : List Nat) : sumOver (fun j => w j * (c - c)) S = 0",
       "statement_sha256": "dcade84be8c59670900f043b59b092a1402d4284f34d6d9deec2fa4dc999004b"
     },
     {
       "name": "CurvedCorpus.atom_delta_nonneg",
       "status": "lean-proved",
-      "statement": "(dpre : Int) (cands : List Int) : 0 \u2264 dpre - listMin dpre cands",
+      "statement": "(dpre : Int) (cands : List Int) : 0 ≤ dpre - listMin dpre cands",
       "statement_sha256": "a396a0cc1bc716a27b0e2cf0512bec4635eba0dbd26fac8e0b7804096d1b4cb7"
     },
     {
       "name": "CurvedCorpus.blocked_is_noop",
       "status": "lean-proved",
-      "statement": "(h : HarnessM) (envStep : Int \u2192 Int \u2192 Int \u00d7 Int) (s a : Int) (hb : h.fA a = none) : stepH h envStep s a = (s, 0)",
+      "statement": "(h : HarnessM) (envStep : Int → Int → Int × Int) (s a : Int) (hb : h.fA a = none) : stepH h envStep s a = (s, 0)",
       "statement_sha256": "5ae6017699818f4c8064a6604bd96aa8fe60a97578097d68b54389726240e88b"
     },
     {
@@ -41,13 +41,13 @@
     {
       "name": "CurvedCorpus.bpow_lt_succ",
       "status": "lean-proved",
-      "statement": "(b k : Nat) (hb : 2 \u2264 b) : bpow b k < bpow b (k + 1)",
+      "statement": "(b k : Nat) (hb : 2 ≤ b) : bpow b k < bpow b (k + 1)",
       "statement_sha256": "958bea060a16e3858748c05057c7c647d40aaaa3da03ff8fcc06c91feba46a8b"
     },
     {
       "name": "CurvedCorpus.bpow_mono",
       "status": "lean-proved",
-      "statement": "(b : Nat) (hb : 2 \u2264 b) : \u2200 k l, k < l \u2192 bpow b k < bpow b l",
+      "statement": "(b : Nat) (hb : 2 ≤ b) : ∀ k l, k < l → bpow b k < bpow b l",
       "statement_sha256": "20dbb0e5f11d239867b404590f0a3b5b78f823980f4216fae60571dd293f6b4d"
     },
     {
@@ -65,7 +65,7 @@
     {
       "name": "CurvedCorpus.capped_halts",
       "status": "lean-proved",
-      "statement": "(maxK a : Nat) (acc : Bool) (h : maxK \u2264 a) : cappedStop maxK a acc = true",
+      "statement": "(maxK a : Nat) (acc : Bool) (h : maxK ≤ a) : cappedStop maxK a acc = true",
       "statement_sha256": "16c99d6b02d1dbaad7b1ad8104ef63a98eb71b2b85f061376d2bcb8ec0f28b56"
     },
     {
@@ -77,13 +77,13 @@
     {
       "name": "CurvedCorpus.corpus_sum_nonneg",
       "status": "lean-proved",
-      "statement": "(deltas : List Int) (h : \u2200 d \u2208 deltas, 0 \u2264 d) : 0 \u2264 sumList deltas",
+      "statement": "(deltas : List Int) (h : ∀ d ∈ deltas, 0 ≤ d) : 0 ≤ sumList deltas",
       "statement_sha256": "962d7970ade4bfd64f9012688da11917d6cfb2b0089dd0a10406699bae50b173"
     },
     {
       "name": "CurvedCorpus.cumulative_monotone",
       "status": "lean-proved",
-      "statement": "(deltas : List Int) (h : \u2200 d \u2208 deltas, 0 \u2264 d) (n : Nat) : prefixSum deltas n \u2264 prefixSum deltas (n + 1)",
+      "statement": "(deltas : List Int) (h : ∀ d ∈ deltas, 0 ≤ d) (n : Nat) : prefixSum deltas n ≤ prefixSum deltas (n + 1)",
       "statement_sha256": "b4cbf4540c1fdc1c0bec0efa6e4b1d9bda9c0862fe5aa5c4af76e6eb15b4255d"
     },
     {
@@ -95,37 +95,37 @@
     {
       "name": "CurvedCorpus.dz_band_iff",
       "status": "lean-proved",
-      "statement": "(lo hi sr : Int) : (lo \u2264 sr \u2227 sr \u2264 hi) \u2194 (-(hi - lo) \u2264 2 * sr - (lo + hi) \u2227 2 * sr - (lo + hi) \u2264 hi - lo)",
+      "statement": "(lo hi sr : Int) : (lo ≤ sr ∧ sr ≤ hi) ↔ (-(hi - lo) ≤ 2 * sr - (lo + hi) ∧ 2 * sr - (lo + hi) ≤ hi - lo)",
       "statement_sha256": "e33bb6aafcbfd088c11d7267441a4277b45e52330a06a8d9c0799004f3b62904"
     },
     {
       "name": "CurvedCorpus.exists_max",
       "status": "lean-proved",
-      "statement": "(\u03c0 : Nat \u2192 Int) : \u2200 (S : List Nat), S \u2260 [] \u2192 \u2203 b, b \u2208 S \u2227 \u2200 a \u2208 S, \u03c0 a \u2264 \u03c0 b",
+      "statement": "(π : Nat → Int) : ∀ (S : List Nat), S ≠ [] → ∃ b, b ∈ S ∧ ∀ a ∈ S, π a ≤ π b",
       "statement_sha256": "7ccf4962b9a48f1b65eadcb28f9a5a91cf5ff41996293a53249d5f579c91be76"
     },
     {
       "name": "CurvedCorpus.fixed_halts",
       "status": "lean-proved",
-      "statement": "(k a : Nat) (h : k \u2264 a) : fixedStop k a = true",
+      "statement": "(k a : Nat) (h : k ≤ a) : fixedStop k a = true",
       "statement_sha256": "332f2196fd65722a26fabd622d9782a1d1c8aa37805d323be7ced4c784c19ee8"
     },
     {
       "name": "CurvedCorpus.gap_closes_iff",
       "status": "lean-proved",
-      "statement": "(a b : Int) : (a - b) * (a - b) = 0 \u2194 a = b",
+      "statement": "(a b : Int) : (a - b) * (a - b) = 0 ↔ a = b",
       "statement_sha256": "42d4737e5256c6af40b4b4e13a3864911f36f640283a303a96bba79406fc723e"
     },
     {
       "name": "CurvedCorpus.gap_open_of_ne",
       "status": "lean-proved",
-      "statement": "(a b : Int) (h : a \u2260 b) : 0 < (a - b) * (a - b)",
+      "statement": "(a b : Int) (h : a ≠ b) : 0 < (a - b) * (a - b)",
       "statement_sha256": "d389a26ab027ed58fd19bd757ac43fbe951f38457b0727dc32046e188bbba6cb"
     },
     {
       "name": "CurvedCorpus.gate_rank_identity",
       "status": "lean-proved",
-      "statement": "(p q : Int) (hp : 0 < p) (hq : 0 < q) : fracGe p q 2 5 \u2194 fracGe 5 1 (2 * q) p",
+      "statement": "(p q : Int) (hp : 0 < p) (hq : 0 < q) : fracGe p q 2 5 ↔ fracGe 5 1 (2 * q) p",
       "statement_sha256": "52e902671b81dc702f243f396cd269f17c5ea15a8bf603c0cd74418bbc995211"
     },
     {
@@ -185,7 +185,7 @@
     {
       "name": "CurvedCorpus.heat_exp_dominates_hamming",
       "status": "lean-proved",
-      "statement": "(l : Nat) (h : 1 \u2264 l) : l < heatExp l",
+      "statement": "(l : Nat) (h : 1 ≤ l) : l < heatExp l",
       "statement_sha256": "5a4c49540d1e07f0aeff99fee9b1c0c849e8eed90c094c7348791fb156caf974"
     },
     {
@@ -215,19 +215,19 @@
     {
       "name": "CurvedCorpus.imin_le_left",
       "status": "lean-proved",
-      "statement": "(a b : Int) : imin a b \u2264 a",
+      "statement": "(a b : Int) : imin a b ≤ a",
       "statement_sha256": "5e74f196679d6bad8e82670a3255ea224c15e51c89f58eb28ccae8fc07f7cfee"
     },
     {
       "name": "CurvedCorpus.imin_le_right",
       "status": "lean-proved",
-      "statement": "(a b : Int) : imin a b \u2264 b",
+      "statement": "(a b : Int) : imin a b ≤ b",
       "statement_sha256": "c4b82b2d9727297196e45c479ef3c378f649c3f6e78a89d51774d155457b6966"
     },
     {
       "name": "CurvedCorpus.klemens_condition",
       "status": "lean-proved",
-      "statement": "(u v : Nat) : u + v \u2264 4 * v \u2194 u \u2264 3 * v",
+      "statement": "(u v : Nat) : u + v ≤ 4 * v ↔ u ≤ 3 * v",
       "statement_sha256": "903e5df608f868b5f64daf20ed349e7fed0a8459c9e0f4e8f4ee11ee55e9c0c3"
     },
     {
@@ -239,19 +239,19 @@
     {
       "name": "CurvedCorpus.level_injective",
       "status": "lean-proved",
-      "statement": "(b k l : Nat) (hb : 2 \u2264 b) (h : bpow b k = bpow b l) : k = l",
+      "statement": "(b k l : Nat) (hb : 2 ≤ b) (h : bpow b k = bpow b l) : k = l",
       "statement_sha256": "e26985393e10cc976b0740a19f8c30d28dbae41f7ef4199b700135b7d7d07d11"
     },
     {
       "name": "CurvedCorpus.listMin_le_init",
       "status": "lean-proved",
-      "statement": "(d : Int) (cands : List Int) : listMin d cands \u2264 d",
+      "statement": "(d : Int) (cands : List Int) : listMin d cands ≤ d",
       "statement_sha256": "c78b84c674bbb5de6d6d8ca8a080e76e9609f9e96fc366f524ce624f3206d5c9"
     },
     {
       "name": "CurvedCorpus.max_propagates",
       "status": "lean-proved",
-      "statement": "(K : Nat \u2192 Nat \u2192 Int) (\u03c0 : Nat \u2192 Int) (S : List Nat) (R : Int) (hnn : \u2200 x y, 0 \u2264 K x y) (hsym : \u2200 x y, K x y = K y x) (hrow : \u2200 a, sumOver (fun c => K a c) S = R) (hstat : \u2200 b, sumOver (fun a => \u03c0 a * K a b) S = R * \u03c0 b) (b : Nat) (hmax : \u2200 a \u2208 S, \u03c0 a \u2264 \u03c0 b) : \u2200 a, ReachFrom K S b a \u2192 \u03c0 a = \u03c0 b",
+      "statement": "(K : Nat → Nat → Int) (π : Nat → Int) (S : List Nat) (R : Int) (hnn : ∀ x y, 0 ≤ K x y) (hsym : ∀ x y, K x y = K y x) (hrow : ∀ a, sumOver (fun c => K a c) S = R) (hstat : ∀ b, sumOver (fun a => π a * K a b) S = R * π b) (b : Nat) (hmax : ∀ a ∈ S, π a ≤ π b) : ∀ a, ReachFrom K S b a → π a = π b",
       "statement_sha256": "303621acbb6f839e33ba158d7e412303f25154786096a773b139a439174aa896"
     },
     {
@@ -305,61 +305,61 @@
     {
       "name": "CurvedCorpus.obj_halts",
       "status": "lean-proved",
-      "statement": "(maxK a : Nat) (acc ok : Bool) (h : maxK \u2264 a) : objStop maxK a acc ok = true",
+      "statement": "(maxK a : Nat) (acc ok : Bool) (h : maxK ≤ a) : objStop maxK a acc ok = true",
       "statement_sha256": "a0465ee61e68c62d9b7adf87a96c4f677fb4e6b0578a55decf67a9ddcedd609f"
     },
     {
       "name": "CurvedCorpus.passthrough_step",
       "status": "lean-proved",
-      "statement": "(envStep : Int \u2192 Int \u2192 Int \u00d7 Int) (s a : Int) : stepH idHarness envStep s a = envStep s a",
+      "statement": "(envStep : Int → Int → Int × Int) (s a : Int) : stepH idHarness envStep s a = envStep s a",
       "statement_sha256": "7c681224cfc6357713d2bee050381e16796289a3c9a0ccd3938f0b8ba5557e07"
     },
     {
       "name": "CurvedCorpus.phi_ladder_telescope",
       "status": "lean-proved",
-      "statement": "(\u03a6 : Nat \u2192 Int) (n : Nat) : drops \u03a6 n = \u03a6 0 - \u03a6 n",
+      "statement": "(Φ : Nat → Int) (n : Nat) : drops Φ n = Φ 0 - Φ n",
       "statement_sha256": "2b275df0509c31590624d57d98b809fb1c5ddfb79d734934c62beb9ceae9d2ac"
     },
     {
       "name": "CurvedCorpus.stationary_max_principle",
       "status": "lean-proved",
-      "statement": "(K : Nat \u2192 Nat \u2192 Int) (\u03c0 : Nat \u2192 Int) (S : List Nat) (R : Int) (hnn : \u2200 x y, 0 \u2264 K x y) (hsym : \u2200 x y, K x y = K y x) (hrow : \u2200 a, sumOver (fun c => K a c) S = R) (hstat : \u2200 b, sumOver (fun a => \u03c0 a * K a b) S = R * \u03c0 b) (b : Nat) (hmax : \u2200 a \u2208 S, \u03c0 a \u2264 \u03c0 b) : \u2200 a \u2208 S, 0 < K a b \u2192 \u03c0 a = \u03c0 b",
+      "statement": "(K : Nat → Nat → Int) (π : Nat → Int) (S : List Nat) (R : Int) (hnn : ∀ x y, 0 ≤ K x y) (hsym : ∀ x y, K x y = K y x) (hrow : ∀ a, sumOver (fun c => K a c) S = R) (hstat : ∀ b, sumOver (fun a => π a * K a b) S = R * π b) (b : Nat) (hmax : ∀ a ∈ S, π a ≤ π b) : ∀ a ∈ S, 0 < K a b → π a = π b",
       "statement_sha256": "aa12bdd3e0e80ee59b06d6eafd14c1f25120dc1e568b8bffcaabc3969b2ad596"
     },
     {
       "name": "CurvedCorpus.stationary_unique_uniform",
       "status": "lean-proved",
-      "statement": "(K : Nat \u2192 Nat \u2192 Int) (\u03c0 : Nat \u2192 Int) (S : List Nat) (R : Int) (hnn : \u2200 x y, 0 \u2264 K x y) (hsym : \u2200 x y, K x y = K y x) (hrow : \u2200 a, sumOver (fun c => K a c) S = R) (hstat : \u2200 b, sumOver (fun a => \u03c0 a * K a b) S = R * \u03c0 b) (hirr : \u2200 x \u2208 S, \u2200 y \u2208 S, ReachFrom K S x y) : \u2200 x \u2208 S, \u2200 y \u2208 S, \u03c0 x = \u03c0 y",
+      "statement": "(K : Nat → Nat → Int) (π : Nat → Int) (S : List Nat) (R : Int) (hnn : ∀ x y, 0 ≤ K x y) (hsym : ∀ x y, K x y = K y x) (hrow : ∀ a, sumOver (fun c => K a c) S = R) (hstat : ∀ b, sumOver (fun a => π a * K a b) S = R * π b) (hirr : ∀ x ∈ S, ∀ y ∈ S, ReachFrom K S x y) : ∀ x ∈ S, ∀ y ∈ S, π x = π y",
       "statement_sha256": "a7b422d13b84a4dd2fca844ecf654686a6b69cd70f9e1b3a2059af4ba10c0793"
     },
     {
       "name": "CurvedCorpus.sumOver_congr",
       "status": "lean-proved",
-      "statement": "(f g : Nat \u2192 Int) (l : List Nat) (h : \u2200 x, f x = g x) : sumOver f l = sumOver g l",
+      "statement": "(f g : Nat → Int) (l : List Nat) (h : ∀ x, f x = g x) : sumOver f l = sumOver g l",
       "statement_sha256": "a9fb930f546d2449af97b426e2051a5682c88973b1477d001707555ccc64bb75"
     },
     {
       "name": "CurvedCorpus.sumOver_eq_zero_each",
       "status": "lean-proved",
-      "statement": "(f : Nat \u2192 Int) (l : List Nat) (hnn : \u2200 x \u2208 l, 0 \u2264 f x) (hz : sumOver f l = 0) : \u2200 x \u2208 l, f x = 0",
+      "statement": "(f : Nat → Int) (l : List Nat) (hnn : ∀ x ∈ l, 0 ≤ f x) (hz : sumOver f l = 0) : ∀ x ∈ l, f x = 0",
       "statement_sha256": "71d46a8f77f8ba165597e25f347edcd4a89f361638627304d17022625e4d2ec8"
     },
     {
       "name": "CurvedCorpus.sumOver_mul_left",
       "status": "lean-proved",
-      "statement": "(c : Int) (f : Nat \u2192 Int) (l : List Nat) : sumOver (fun x => c * f x) l = c * sumOver f l",
+      "statement": "(c : Int) (f : Nat → Int) (l : List Nat) : sumOver (fun x => c * f x) l = c * sumOver f l",
       "statement_sha256": "04e87baa19bc82c7438c9432019a719cb99f74e3965b33c704a2c7f92bd5edba"
     },
     {
       "name": "CurvedCorpus.sumOver_nonneg",
       "status": "lean-proved",
-      "statement": "(f : Nat \u2192 Int) (l : List Nat) (h : \u2200 x \u2208 l, 0 \u2264 f x) : 0 \u2264 sumOver f l",
+      "statement": "(f : Nat → Int) (l : List Nat) (h : ∀ x ∈ l, 0 ≤ f x) : 0 ≤ sumOver f l",
       "statement_sha256": "faf378bff38c93b41d84af115d9b8c03b7beeeab8b578b8913d18d4924490080"
     },
     {
       "name": "CurvedCorpus.sumOver_sub",
       "status": "lean-proved",
-      "statement": "(f g : Nat \u2192 Int) (l : List Nat) : sumOver (fun x => f x - g x) l = sumOver f l - sumOver g l",
+      "statement": "(f g : Nat → Int) (l : List Nat) : sumOver (fun x => f x - g x) l = sumOver f l - sumOver g l",
       "statement_sha256": "aa08e414db41788055dcc0727f27e364cd0c79b3e5480d038338181648a34eff"
     },
     {
@@ -371,103 +371,103 @@
     {
       "name": "CurvedCorpus.symm_kernel_balance",
       "status": "lean-proved",
-      "statement": "(K : Nat \u2192 Nat \u2192 Int) (S : List Nat) (hsym : \u2200 x y, K x y = K y x) (b : Nat) : sumOver (fun a => K a b) S = sumOver (fun a => K b a) S",
+      "statement": "(K : Nat → Nat → Int) (S : List Nat) (hsym : ∀ x y, K x y = K y x) (b : Nat) : sumOver (fun a => K a b) S = sumOver (fun a => K b a) S",
       "statement_sha256": "019d37044c7d19fce9ee7e11400c22c111fea403f2e350f806b8e0441198c695"
     },
     {
       "name": "CurvedCorpus.tradeDelta_col_a",
       "status": "lean-proved",
-      "statement": "(i j a b r : Nat) (hab : a \u2260 b) : tradeDelta i j a b r a = (if r = i then (-1 : Int) else 0) + (if r = j then (1 : Int) else 0)",
+      "statement": "(i j a b r : Nat) (hab : a ≠ b) : tradeDelta i j a b r a = (if r = i then (-1 : Int) else 0) + (if r = j then (1 : Int) else 0)",
       "statement_sha256": "d213e808d80766f471a4ec6389e464d895e27fe3dfe27092c8e15aa7b453296a"
     },
     {
       "name": "CurvedCorpus.tradeDelta_col_b",
       "status": "lean-proved",
-      "statement": "(i j a b r : Nat) (hab : a \u2260 b) : tradeDelta i j a b r b = (if r = i then (1 : Int) else 0) + (if r = j then (-1 : Int) else 0)",
+      "statement": "(i j a b r : Nat) (hab : a ≠ b) : tradeDelta i j a b r b = (if r = i then (1 : Int) else 0) + (if r = j then (-1 : Int) else 0)",
       "statement_sha256": "abcaa8c55ae1c0e4ba29203e340bfded1baa9941d605ab7e2842ae75addedc44"
     },
     {
       "name": "CurvedCorpus.tradeDelta_col_other",
       "status": "lean-proved",
-      "statement": "(i j a b r c : Nat) (h1 : c \u2260 a) (h2 : c \u2260 b) : tradeDelta i j a b r c = 0",
+      "statement": "(i j a b r c : Nat) (h1 : c ≠ a) (h2 : c ≠ b) : tradeDelta i j a b r c = 0",
       "statement_sha256": "13c226a8e753f32f4d78e2f87bc6a0e3df714f707da1358661914062a2d2864e"
     },
     {
       "name": "CurvedCorpus.tradeDelta_row_i",
       "status": "lean-proved",
-      "statement": "(i j a b c : Nat) (hij : i \u2260 j) : tradeDelta i j a b i c = (if c = a then (-1 : Int) else 0) + (if c = b then (1 : Int) else 0)",
+      "statement": "(i j a b c : Nat) (hij : i ≠ j) : tradeDelta i j a b i c = (if c = a then (-1 : Int) else 0) + (if c = b then (1 : Int) else 0)",
       "statement_sha256": "38c8cb957a3075dbffe4a1f4c3866b48e62defd494a6cb40427a09a2a1c10228"
     },
     {
       "name": "CurvedCorpus.tradeDelta_row_j",
       "status": "lean-proved",
-      "statement": "(i j a b c : Nat) (hij : i \u2260 j) : tradeDelta i j a b j c = (if c = a then (1 : Int) else 0) + (if c = b then (-1 : Int) else 0)",
+      "statement": "(i j a b c : Nat) (hij : i ≠ j) : tradeDelta i j a b j c = (if c = a then (1 : Int) else 0) + (if c = b then (-1 : Int) else 0)",
       "statement_sha256": "5f4e870a57fa15b59c45d16796047259d28a9e235bcfef423599cffc68ec7814"
     },
     {
       "name": "CurvedCorpus.tradeDelta_row_other",
       "status": "lean-proved",
-      "statement": "(i j a b r c : Nat) (h1 : r \u2260 i) (h2 : r \u2260 j) : tradeDelta i j a b r c = 0",
+      "statement": "(i j a b r c : Nat) (h1 : r ≠ i) (h2 : r ≠ j) : tradeDelta i j a b r c = 0",
       "statement_sha256": "afbbf3510d3936006d14f17ab0ee2daa921188d1e0758293535090ce7f333174"
     },
     {
       "name": "CurvedCorpus.trade_colSum_a",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b : Nat) (rows : List Nat) (hab : a \u2260 b) : sumOver (fun r => trade M i j a b r a) rows = sumOver (fun r => M r a) rows + countN j rows - countN i rows",
+      "statement": "(M : Nat → Nat → Int) (i j a b : Nat) (rows : List Nat) (hab : a ≠ b) : sumOver (fun r => trade M i j a b r a) rows = sumOver (fun r => M r a) rows + countN j rows - countN i rows",
       "statement_sha256": "3cf5c3d1e6284c925082ef1f0481b386dec9c616adeb972d77dfb8d89c11324e"
     },
     {
       "name": "CurvedCorpus.trade_colSum_b",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b : Nat) (rows : List Nat) (hab : a \u2260 b) : sumOver (fun r => trade M i j a b r b) rows = sumOver (fun r => M r b) rows + countN i rows - countN j rows",
+      "statement": "(M : Nat → Nat → Int) (i j a b : Nat) (rows : List Nat) (hab : a ≠ b) : sumOver (fun r => trade M i j a b r b) rows = sumOver (fun r => M r b) rows + countN i rows - countN j rows",
       "statement_sha256": "f8b40710d776695f8670b1b09694fb7300929e8517e866b5f396c7757f568331"
     },
     {
       "name": "CurvedCorpus.trade_colSum_other",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b c : Nat) (rows : List Nat) (h1 : c \u2260 a) (h2 : c \u2260 b) : sumOver (fun r => trade M i j a b r c) rows = sumOver (fun r => M r c) rows",
+      "statement": "(M : Nat → Nat → Int) (i j a b c : Nat) (rows : List Nat) (h1 : c ≠ a) (h2 : c ≠ b) : sumOver (fun r => trade M i j a b r c) rows = sumOver (fun r => M r c) rows",
       "statement_sha256": "7d864565ee64aebed73154632954f01a8187ed82bec3e37cc2fb2b04ab6c75c4"
     },
     {
       "name": "CurvedCorpus.trade_preserves_colSum",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b c : Nat) (rows : List Nat) (hab : a \u2260 b) (hbal : countN i rows = countN j rows) : sumOver (fun r => trade M i j a b r c) rows = sumOver (fun r => M r c) rows",
+      "statement": "(M : Nat → Nat → Int) (i j a b c : Nat) (rows : List Nat) (hab : a ≠ b) (hbal : countN i rows = countN j rows) : sumOver (fun r => trade M i j a b r c) rows = sumOver (fun r => M r c) rows",
       "statement_sha256": "95f37cff1860db0e42c56c2f98538a079bcefacd57fd5dbd9bfe7c79f19a142a"
     },
     {
       "name": "CurvedCorpus.trade_preserves_rowSum",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b r : Nat) (cols : List Nat) (hij : i \u2260 j) (hbal : countN a cols = countN b cols) : sumOver (fun c => trade M i j a b r c) cols = sumOver (fun c => M r c) cols",
+      "statement": "(M : Nat → Nat → Int) (i j a b r : Nat) (cols : List Nat) (hij : i ≠ j) (hbal : countN a cols = countN b cols) : sumOver (fun c => trade M i j a b r c) cols = sumOver (fun c => M r c) cols",
       "statement_sha256": "1197a9f7c6b532a3e64263f0b248aa7c68285d7309dbb7497f1bce6bde9155b5"
     },
     {
       "name": "CurvedCorpus.trade_reversible",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b r c : Nat) : trade (trade M i j a b) i j b a r c = M r c",
+      "statement": "(M : Nat → Nat → Int) (i j a b r c : Nat) : trade (trade M i j a b) i j b a r c = M r c",
       "statement_sha256": "9ceff842762458e46b06b69d5b65827ceddb8f316cf579b66d99536c68c5c1ca"
     },
     {
       "name": "CurvedCorpus.trade_rowSum_i",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b : Nat) (cols : List Nat) (hij : i \u2260 j) : sumOver (fun c => trade M i j a b i c) cols = sumOver (fun c => M i c) cols + countN b cols - countN a cols",
+      "statement": "(M : Nat → Nat → Int) (i j a b : Nat) (cols : List Nat) (hij : i ≠ j) : sumOver (fun c => trade M i j a b i c) cols = sumOver (fun c => M i c) cols + countN b cols - countN a cols",
       "statement_sha256": "4982a654eada359b8c3960cf97ee67ee4a0a711078f23084708dc430e77c2647"
     },
     {
       "name": "CurvedCorpus.trade_rowSum_j",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b : Nat) (cols : List Nat) (hij : i \u2260 j) : sumOver (fun c => trade M i j a b j c) cols = sumOver (fun c => M j c) cols + countN a cols - countN b cols",
+      "statement": "(M : Nat → Nat → Int) (i j a b : Nat) (cols : List Nat) (hij : i ≠ j) : sumOver (fun c => trade M i j a b j c) cols = sumOver (fun c => M j c) cols + countN a cols - countN b cols",
       "statement_sha256": "fa53f5f00e25d23d8413bb557c6e7c46e06d881202c896fc64ece4ce07b10eb8"
     },
     {
       "name": "CurvedCorpus.trade_rowSum_other",
       "status": "lean-proved",
-      "statement": "(M : Nat \u2192 Nat \u2192 Int) (i j a b r : Nat) (cols : List Nat) (h1 : r \u2260 i) (h2 : r \u2260 j) : sumOver (fun c => trade M i j a b r c) cols = sumOver (fun c => M r c) cols",
+      "statement": "(M : Nat → Nat → Int) (i j a b r : Nat) (cols : List Nat) (h1 : r ≠ i) (h2 : r ≠ j) : sumOver (fun c => trade M i j a b r c) cols = sumOver (fun c => M r c) cols",
       "statement_sha256": "b9c6f5c77eece8912b4482044715187d7e254664fe4218e49e86289db7dc31d3"
     },
     {
       "name": "CurvedCorpus.uniform_inflow_constant",
       "status": "lean-proved",
-      "statement": "(K : Nat \u2192 Nat \u2192 Int) (S : List Nat) (R : Int) (hsym : \u2200 x y, K x y = K y x) (hrow : \u2200 a, sumOver (fun c => K a c) S = R) (b : Nat) : sumOver (fun a => K a b) S = R",
+      "statement": "(K : Nat → Nat → Int) (S : List Nat) (R : Int) (hsym : ∀ x y, K x y = K y x) (hrow : ∀ a, sumOver (fun c => K a c) S = R) (b : Nat) : sumOver (fun a => K a b) S = R",
       "statement_sha256": "705d8c3b13e6603797b585cd4780159621f0a046705babee936dff6d6d1f0edb"
     },
     {
@@ -553,6 +553,14 @@
       "status": "lean-proved",
       "statement": ": [parityClean 1 (zernikeR 1 1), parityClean 2 (zernikeR 2 0), parityClean 2 (zernikeR 2 2), parityClean 3 (zernikeR 3 1), parityClean 3 (zernikeR 3 3), parityClean 4 (zernikeR 4 0), parityClean 4 (zernikeR 4 2), parityClean 4 (zernikeR 4 4)] = [true, true, true, true, true, true, true, true]",
       "statement_sha256": "c559f02e231661483c640c3fce472f6e3781b321079f845ddd1d516a1b7e7a6d"
+    },
+    {
+      "name": "one_eq_two",
+      "status": "lean-proved"
+    },
+    {
+      "name": "false_proved",
+      "status": "lean-proved"
     }
   ],
   "nonclaims": [
