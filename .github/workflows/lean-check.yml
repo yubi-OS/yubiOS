@@ -23,6 +23,23 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
+      # Forbidden-token stopgap (round-2 Lane C) — source-side complement to
+      # the kernel-side axiom coverage gate below. Fails if any of the five
+      # lean sources uses `axiom`, `native_decide`, `macro`, `syntax`, or
+      # `elab` OUTSIDE comments and string literals (whole-word match;
+      # comments stripped with the exact same nesting-aware stripper as
+      # check_lean_axioms.py, which this script imports from its own
+      # directory). No Lean toolchain needed.
+      - name: Forbidden-token gate — no axiom/native_decide/macro/syntax/elab outside comments
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/check_forbidden_tokens.py \
+            papers/data/lean/CurvedCorpus.lean \
+            papers/data/lean/WayfinderBounds.lean \
+            papers/data/lean/RadiusBounds.lean \
+            papers/data/lean/RayleighBounds.lean \
+            papers/data/lean/AzimuthBounds.lean
+
       - name: Install Lean 4.33.0 (pinned SHA256 release tarball, no installer script)
         run: |
           set -euo pipefail
@@ -72,37 +89,54 @@ jobs:
             echo "NO_SORRY_OK: $f"
           done
 
-      # Axiom coverage gate (Lane 2) — runs after the pinned-tarball lean install
-      # step (no elan in this workflow), so `lean` is already on PATH.
+      # Axiom coverage gate (Lane A, round 2) — runs after the pinned-tarball
+      # lean install step (no elan in this workflow), so `lean` is on PATH.
       - name: Axiom coverage gate — every theorem in all five lean files
         run: |
           set -euo pipefail
           PERMITTED="propext,Classical.choice,Quot.sound"
           for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds; do
-            echo "== axiom coverage: ${base}.lean =="
-            # 1. Generate the probe: source text + one `#print axioms` per
-            #    theorem extracted from the source (every declaration,
-            #    manifest-listed or not).
+            case "${base}" in
+              CurvedCorpus)    manifest="curvedcorpus" ;;
+              WayfinderBounds) manifest="wayfinder" ;;
+              RadiusBounds)    manifest="radius" ;;
+              RayleighBounds)  manifest="rayleigh" ;;
+              AzimuthBounds)   manifest="azimuth" ;;
+            esac
+            echo "== axiom coverage: ${base}.lean (manifest: ${manifest}-scope.json) =="
+
+            # 1. Generate the probe: source text + the Lean environment-walking
+            #    enumeration block. Lean itself lists every theorem constant of
+            #    the current module — no regex extraction feeds the probe.
             python3 papers/data/lean/check_lean_axioms.py --gen \
               --source "papers/data/lean/${base}.lean" \
               --out "/tmp/${base}-probe.lean"
-            # 2. Compile the probe with the pinned toolchain; capture the
-            #    `#print axioms` output (stdout+stderr).
+
+            # 2. Compile the probe with the pinned toolchain; capture stdout+stderr.
+            #    LOUD BY DESIGN: if the run_cmd block hits an API mismatch in the
+            #    pinned 4.33.0 toolchain, this compile fails and CI stops here.
             lean "/tmp/${base}-probe.lean" > "/tmp/${base}-axioms.txt" 2>&1 || {
-              echo "LEAN_FAIL: ${base} probe failed to compile"
+              echo "LEAN_FAIL: ${base} probe failed to compile (enumeration block API mismatch?)"
               cat "/tmp/${base}-axioms.txt"
               exit 1
             }
-            # 3. Gate: every theorem must have an axiom line; every axiom
-            #    set must be within the permitted core set; sorryAx (and
-            #    any user axiom, incl. Lean.ofReduceBool from
-            #    native_decide) fails. Exit 1 on violation.
+
+            # 3. Gate (enumerate mode): parse AXIOM_LINE lines, then
+            #    - every Lean-listed theorem has an axiom line;
+            #    - every axiom set within PERMITTED (sorryAx and Lean.ofReduceBool
+            #      from native_decide fail);
+            #    - CROSS-CHECK: regex-extracted source names ⊆ Lean-listed names
+            #      (both lists printed on any divergence);
+            #    - COVERAGE: every Lean-listed name appears in the scope manifest.
+            #    Exit 1 on any violation.
             python3 papers/data/lean/check_lean_axioms.py \
               --source "papers/data/lean/${base}.lean" \
               --axioms "/tmp/${base}-axioms.txt" \
-              --permitted "$PERMITTED"
+              --permitted "${PERMITTED}" \
+              --mode enumerate \
+              --require-coverage "papers/data/lean/${manifest}-scope.json"
           done
-          echo "AXIOM_COVERAGE_GATE_OK: all five lean files gated, every theorem checked"
+          echo "AXIOM_COVERAGE_GATE_OK: all five lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
 
 
       - name: Check WayfinderBounds.lean (kernel, pinned toolchain)

@@ -138,5 +138,25 @@
     "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
     "pinned_from_commit": "ebfb8b58",
     "pinned_from_source": "yubiOS-main/papers/data/lean/AzimuthBounds.lean"
+  },
+  "definitions": {
+    "schema": "definition-pins/1",
+    "pin": "sha256 over the sorted 'name:normalized-decl' entries of EVERY top-level def/structure/inductive/abbrev/instance/class declaration in the lean_file (comments stripped, whitespace collapsed); 'decls' maps each definition name to its own normalized-decl sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A definitions-hash mismatch FAILS CI even when every theorem statement is unchanged: redefining a definition changes what the pinned theorems actually prove, so a legitimate definition change requires a deliberate definitions-block regeneration IN THE SAME PR, with the definition diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the definition diff. A block pinning zero definitions is refused (vacuous pin).",
+    "hash": "6aba34d14e83a9fb5a270c74f0179dc09ca8494b5f2ca34f975a398ce4bd4e84",
+    "count": 9,
+    "decls": {
+      "Cx": "ca1ae8c24d28619b8baf4a08d5129e4ff57b7923e899731b850769d49810f936",
+      "absSq": "387cec15e717797cbb9bb142306f825ee537c80816aaaba18b22ac948e7ca343",
+      "cadd": "853a807e9885847218ebff8b99072fce3a23250e570b23375adb6c40c8039353",
+      "cconj": "d7838bbe226981f3bda4f7a5794012067df5c4dd6ec80472a42d4862ed775d6b",
+      "cneg": "dd9bafa7de1bdf3cfdd9384e3a03aed90cecdef0fe6983b105593aaca1cab41c",
+      "cquarter": "c04afacae84042c78fa4aac239b481486179e298f344a5f0c3ff89130c012cb0",
+      "cswap": "6e2ee0bd3d538b0d5aaf1f3528bade928dbb1ddaadf983adc06980472b5e9644",
+      "scale": "cc7b769219a335bbadfb767d1d3b9539708a4144ccec62ab1df3b300838c0d2b",
+      "z1": "02513c6d474f19353c881d8c6a51d50307c53d014616b437164897bf5e055171"
+    },
+    "pinned_from_commit": "644f983b253"
   }
 }

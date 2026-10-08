@@ -10,6 +10,18 @@ For every theorem entry in a scope manifest, it extracts the theorem's
 STATEMENT TEXT from the .lean source, normalizes it, and pins the sha256 of
 the normalized text into the manifest as `statement_sha256`.
 
+Lane B (CI hardening round 2) adds DEFINITION PINS on top: a per-file
+`definitions` block in each scope manifest pins (a) a `hash` over EVERY
+top-level `def` / `structure` / `inductive` / `abbrev` / `instance` / `class`
+declaration in the .lean source and (b) a per-definition `decls` map. Why:
+theorem STATEMENT pins hash statement text, which is unchanged when someone
+redefines a definition the statements refer to -- e.g. rewriting
+`def absSq (z : Cx) : Int := z.1 * z.1 + z.2 * z.2` to `:= 0` leaves all 14
+AzimuthBounds theorem statements byte-identical while the theorems collapse
+to trivialities. The definitions hash changes on ANY definition-body,
+signature, name, or kind edit, so such a mutation fails CI until the
+manifest's `definitions` block is deliberately regenerated in the same PR.
+
 Why sha256-of-normalized-statement rather than a literal text pin:
   * A literal pin breaks on harmless reformatting (line re-wraps, indentation
     churn), which trains maintainers to regenerate pins reflexively -- exactly
@@ -64,6 +76,17 @@ THEOREM_RE = re.compile(
     r"(?m)^[\t ]*(?:(?:private|protected|noncomputable|unsafe)\s+)*"
     r"theorem\s+([A-Za-z_][A-Za-z0-9_.']*)"
 )
+
+# Top-level DEFINITION declarations. Like theorems, these start at column 0
+# (the files' uniform style; every continuation line is indented). The name
+# group is optional ONLY for `instance`, which Lean permits anonymously.
+DEF_RE = re.compile(
+    r"(?m)^(?:(?:private|protected|noncomputable|unsafe|partial|scoped|local)\s+)*"
+    r"(?P<kind>def|structure|inductive|abbrev|instance|class)\s+"
+    r"(?:(?P<name>[A-Za-z_][A-Za-z0-9_.']*)\s+)?"
+)
+
+DEFINITION_KINDS = ("def", "structure", "inductive", "abbrev", "instance", "class")
 
 BRACKET_OPEN = {"(", "[", "{"}
 BRACKET_CLOSE = {")", "]", "}"}
@@ -192,6 +215,236 @@ def extract_theorems(lean_text: str) -> dict[str, dict]:
     return result
 
 
+def _line_starts(text: str) -> list[int]:
+    starts = [0]
+    for i, ch in enumerate(text):
+        if ch == "\n":
+            starts.append(i + 1)
+    return starts
+
+
+def _decl_end(stripped: str, decl_start: int) -> int:
+    """End of a top-level declaration.
+
+    Contract: a declaration runs from its keyword line to the start of the
+    next non-blank line that begins at column 0 (or EOF). Every top-level
+    declaration in the corpus starts at column 0 and every continuation line
+    (pattern-match arms, structure fields, indented bodies) is indented, so
+    the first column-0 non-blank line after the declaration opens a new
+    top-level form. Doc comments are already stripped, so a `/-` at column 0
+    cannot masquerade as code.
+    """
+    lines = stripped.splitlines()
+    starts = _line_starts(stripped)
+    # bisect: index of the line containing decl_start
+    lo, hi = 0, len(starts)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if starts[mid] <= decl_start:
+            lo = mid + 1
+        else:
+            hi = mid
+    decl_line = lo - 1
+    for j in range(decl_line + 1, len(lines)):
+        raw = lines[j]
+        if not raw.strip():
+            continue
+        if not raw[0].isspace():
+            return starts[j]
+    return len(stripped)
+
+
+def extract_definitions(lean_text: str) -> dict[str, dict]:
+    """Extract every top-level definition declaration from Lean source text.
+
+    Kinds covered: `def`, `structure`, `inductive`, `abbrev`, `instance`,
+    `class` (with their `private`/`protected`/`noncomputable`/`unsafe`/
+    `partial`/`scoped`/`local` modifiers). `theorem` declarations are
+    deliberately EXCLUDED -- they are covered by extract_theorems/statement
+    pins; the definitions gate exists for what statements refer to.
+
+    Returns {name: {"sha256", "body", "kind", "line"}} where `body` is the
+    NORMALIZED full declaration text (from the first modifier/keyword at
+    column 0 through end-of-declaration, whitespace collapsed) and `sha256`
+    hashes that body. Anonymous `instance` declarations get stable
+    order-derived names (`instance.anon1`, ...) so their presence, absence,
+    or reordering still changes the file hash.
+
+    Names are unique per file (the corpus declares inside a single
+    namespace, mirroring the theorem-extraction contract); a duplicate name
+    raises.
+    """
+    stripped = strip_lean_comments(lean_text)
+    starts = _line_starts(stripped)
+    result: dict[str, dict] = {}
+    anon = 0
+    for m in DEF_RE.finditer(stripped):
+        kind = m.group("kind")
+        name = m.group("name")
+        if name is None:
+            if kind != "instance":
+                raise ValueError(
+                    f"top-level {kind} without a name at line "
+                    f"{stripped.count(chr(10), 0, m.start()) + 1}"
+                )
+            anon += 1
+            name = f"instance.anon{anon}"
+        if name in result:
+            raise ValueError(f"duplicate definition name {name}")
+        raw = stripped[m.start():_decl_end(stripped, m.start())]
+        normalized = re.sub(r"\s+", " ", raw).strip()
+        line = stripped.count("\n", 0, m.start()) + 1
+        result[name] = {
+            "sha256": hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
+            "body": normalized,
+            "kind": kind,
+            "line": line,
+        }
+    return result
+
+
+def definitions_hash(defs: dict[str, dict]) -> str:
+    """Per-file definitions hash.
+
+    sha256 over the SORTED list of "name:normalized-decl" entries joined by
+    newlines. Sorted so declaration order does not affect the hash (a pure
+    reordering of independent definitions is a formatting-level churn we do
+    not want to force a regeneration for; adding/removing/altering one is).
+    """
+    entries = sorted(f"{name}:{defs[name]['body']}" for name in defs)
+    return hashlib.sha256("\n".join(entries).encode("utf-8")).hexdigest()
+
+
+DEFINITIONS_PINNED_FROM_COMMIT = "644f983b253"
+
+DEFINITIONS_SCHEMA_BLOCK = {
+    "schema": "definition-pins/1",
+    "pin": (
+        "sha256 over the sorted 'name:normalized-decl' entries of EVERY "
+        "top-level def/structure/inductive/abbrev/instance/class declaration "
+        "in the lean_file (comments stripped, whitespace collapsed); 'decls' "
+        "maps each definition name to its own normalized-decl sha256"
+    ),
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": (
+        "A definitions-hash mismatch FAILS CI even when every theorem "
+        "statement is unchanged: redefining a definition changes what the "
+        "pinned theorems actually prove, so a legitimate definition change "
+        "requires a deliberate definitions-block regeneration IN THE SAME "
+        "PR, with the definition diff reviewed as a semantic change. Do NOT "
+        "regenerate the block to make CI pass without reviewing the "
+        "definition diff. A block pinning zero definitions is refused "
+        "(vacuous pin)."
+    ),
+}
+
+
+def definitions_block(defs: dict[str, dict]) -> dict:
+    """Build the manifest `definitions` block for an extracted definitions map."""
+    block = dict(DEFINITIONS_SCHEMA_BLOCK)
+    block["hash"] = definitions_hash(defs)
+    block["count"] = len(defs)
+    block["decls"] = {name: defs[name]["sha256"] for name in sorted(defs)}
+    block["pinned_from_commit"] = DEFINITIONS_PINNED_FROM_COMMIT
+    return block
+
+
+def check_definitions(manifest: dict, lean_path, failures: list[str]) -> int:
+    """Definitions-pin gate. Returns the number of definitions verified.
+
+    Fail-closed, mirroring the statement-pin gate: a missing block, an
+    unresolvable lean file, a missing extractor, or an extraction error is
+    a FAILURE, not a skip.
+    """
+    block = manifest.get("definitions")
+    if not isinstance(block, dict) or "hash" not in block:
+        failures.append(
+            "manifest has no 'definitions' block; every scope manifest must "
+            "pin its lean_file's definitions (fail-closed). Regenerate in the "
+            "same PR: python3 papers/data/lean/pin_statements.py pin "
+            "<manifest.json>"
+        )
+        return 0
+    if lean_path is None:
+        failures.append(
+            "definitions block present but the lean source could not be "
+            "located; pass --lean-file <path> (fail-closed)"
+        )
+        return 0
+    try:
+        lean_text = open(lean_path, "r", encoding="utf-8").read()
+    except OSError as exc:
+        failures.append(f"definitions check could not read {lean_path}: {exc}")
+        return 0
+    try:
+        defs = extract_definitions(lean_text)
+    except ValueError as exc:
+        failures.append(f"definition extraction failed on {lean_path}: {exc}")
+        return 0
+    if not defs:
+        failures.append(
+            f"definitions check is VACUOUS on {lean_path}: zero top-level "
+            "def/structure/inductive/abbrev/instance/class declarations found"
+        )
+        return 0
+    if not isinstance(block.get("count"), int) or block["count"] <= 0:
+        failures.append(
+            "definitions block pins a zero/missing count -- a definitions pin "
+            "over zero definitions is vacuous (fail-closed)"
+        )
+        return 0
+    verified = 0
+    actual_hash = definitions_hash(defs)
+    if block["hash"] != actual_hash:
+        failures.append(
+            "DEFINITIONS HASH MISMATCH -- a definition changed in the lean "
+            "source while the manifest's definitions block still pins the "
+            "old one; the theorems may now prove something different even "
+            "though every statement text is unchanged.\n"
+            f"    pinned sha256: {block['hash']}\n"
+            f"    actual sha256: {actual_hash}\n"
+            "    If this change is deliberate, regenerate the manifest's "
+            "definitions block in the SAME PR: python3 "
+            "papers/data/lean/pin_statements.py pin <manifest.json>"
+        )
+    if block["count"] != len(defs):
+        failures.append(
+            f"definitions count mismatch: pinned {block['count']}, "
+            f"actual {len(defs)} in {lean_path}"
+        )
+    decls = block.get("decls")
+    if not isinstance(decls, dict):
+        failures.append("definitions block has no 'decls' per-definition map")
+    else:
+        for name in sorted(set(decls) - set(defs)):
+            failures.append(
+                f"definitions pin for {name}: declaration no longer present "
+                f"in {lean_path}"
+            )
+        for name in sorted(defs):
+            if name not in decls:
+                failures.append(
+                    f"definitions pin missing for {name}: definition present "
+                    f"in {lean_path} but absent from the block's decls map"
+                )
+                continue
+            actual = defs[name]["sha256"]
+            if actual == decls[name]:
+                verified += 1
+            else:
+                failures.append(
+                    f"DEFINITION PIN MISMATCH for {name} ({defs[name]['kind']}, "
+                    f"line {defs[name]['line']}):\n"
+                    f"    pinned sha256: {decls[name]}\n"
+                    f"    actual sha256: {actual}\n"
+                    f"    actual declaration: {defs[name]['body']}\n"
+                    "    If this change is deliberate, regenerate the "
+                    "manifest's definitions block in the SAME PR: python3 "
+                    "papers/data/lean/pin_statements.py pin <manifest.json>"
+                )
+    return verified
+
+
 def _resolve_lean_path(manifest_path: Path, manifest: dict, repo_root: Path) -> Path:
     rel = manifest.get("lean_file") or manifest.get("file")
     if not rel:
@@ -211,37 +464,50 @@ def load_manifest(manifest_path: Path) -> dict:
         return json.load(fh)
 
 
-def pin_manifest(manifest_path: Path, repo_root: Path) -> dict:
+def pin_manifest(manifest_path: Path, repo_root: Path,
+                 defs_only: bool = False) -> dict:
     manifest = load_manifest(manifest_path)
     lean_path = _resolve_lean_path(manifest_path, manifest, repo_root)
-    theorems = extract_theorems(lean_path.read_text(encoding="utf-8"))
-    pinned = missing = 0
-    for entry in manifest["theorems"]:
-        if entry.get("status") != "lean-proved":
-            continue
-        short = entry["name"].split(".")[-1]
-        if short not in theorems:
-            raise SystemExit(
-                f"{manifest_path}: theorem {entry['name']} not found in {lean_path}"
-            )
-        entry["statement_sha256"] = theorems[short]["sha256"]
-        pinned += 1
-    manifest.setdefault("statement_pinning", PINNING_BLOCK.copy())
-    manifest["statement_pinning"]["pinned_from_commit"] = PINNED_FROM_COMMIT
-    manifest["statement_pinning"]["pinned_from_source"] = str(lean_path)
+    defs = extract_definitions(lean_path.read_text(encoding="utf-8"))
+    if not defs:
+        raise SystemExit(
+            f"{manifest_path}: refusing to pin zero definitions from "
+            f"{lean_path} -- a definitions pin over zero definitions is "
+            "vacuous and would make the gate blind"
+        )
+    manifest["definitions"] = definitions_block(defs)
+    # Preserve the manifest's own unicode-escaping style so the regeneration
+    # diff stays additive-only: a manifest stored with \uXXXX escapes is
+    # re-dumped with ensure_ascii=True, one with literal UTF-8 with False.
+    raw_text = manifest_path.read_text(encoding="utf-8")
+    ensure_ascii = all(ord(ch) < 128 for ch in raw_text)
+    pinned = 0
+    if not defs_only:
+        theorems = extract_theorems(lean_path.read_text(encoding="utf-8"))
+        for entry in manifest["theorems"]:
+            if entry.get("status") != "lean-proved":
+                continue
+            short = entry["name"].split(".")[-1]
+            if short not in theorems:
+                raise SystemExit(
+                    f"{manifest_path}: theorem {entry['name']} not found in {lean_path}"
+                )
+            entry["statement_sha256"] = theorems[short]["sha256"]
+            pinned += 1
     with open(manifest_path, "w", encoding="utf-8") as fh:
-        json.dump(manifest, fh, indent=2, ensure_ascii=False)
+        json.dump(manifest, fh, indent=2, ensure_ascii=ensure_ascii)
         fh.write("\n")
     return {"file": str(manifest_path), "lean": str(lean_path), "pinned": pinned,
-            "decls_in_file": len(theorems)}
+            "decls_in_file": len(defs)}
 
 
 def check_manifest(manifest_path: Path, repo_root: Path) -> tuple[int, list[str]]:
-    """Returns (pinned_count, failures)."""
+    """Returns (pinned_count, failures). Checks statement AND definition pins."""
     manifest = load_manifest(manifest_path)
     failures: list[str] = []
     lean_path = _resolve_lean_path(manifest_path, manifest, repo_root)
-    theorems = extract_theorems(lean_path.read_text(encoding="utf-8"))
+    lean_text = lean_path.read_text(encoding="utf-8")
+    theorems = extract_theorems(lean_text)
     pinned = 0
     for entry in manifest["theorems"]:
         sha = entry.get("statement_sha256")
@@ -262,6 +528,7 @@ def check_manifest(manifest_path: Path, repo_root: Path) -> tuple[int, list[str]
                 f"    If this change is deliberate, regenerate the pin in the "
                 f"same PR: pin_statements.py pin {manifest_path}"
             )
+    check_definitions(manifest, lean_path, failures)
     return pinned, failures
 
 
@@ -293,6 +560,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("manifests", nargs="+")
     ap.add_argument("--repo-root", default=None,
                     help="repo root (default: three levels above each manifest)")
+    ap.add_argument("--defs-only", action="store_true",
+                    help="pin mode: regenerate ONLY the definitions block, "
+                         "leaving statement pins untouched (minimal diff)")
     args = ap.parse_args(argv)
 
     any_failure = False
@@ -300,12 +570,14 @@ def main(argv: list[str] | None = None) -> int:
         mpath = Path(mpath)
         repo_root = Path(args.repo_root) if args.repo_root else mpath.parents[3]
         if args.mode == "pin":
-            info = pin_manifest(mpath, repo_root)
-            print(f"PIN {info['file']}: {info['pinned']} pins regenerated from "
-                  f"{info['lean']} ({info['decls_in_file']} declarations in file)")
+            info = pin_manifest(mpath, repo_root, defs_only=args.defs_only)
+            print(f"PIN {info['file']}: {info['pinned']} statement pins"
+                  f"{' (defs-only: statement pins untouched)' if args.defs_only else ''}"
+                  f" + definitions block regenerated from "
+                  f"{info['lean']} ({info['decls_in_file']} definitions in file)")
         else:
             pinned, failures = check_manifest(mpath, repo_root)
-            print(f"CHECK {mpath}: {pinned} pins verified")
+            print(f"CHECK {mpath}: {pinned} statement pins verified")
             for f in failures:
                 print(f"  FAIL: {f}")
             if failures:

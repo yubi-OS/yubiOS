@@ -136,5 +136,29 @@
     "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
     "pinned_from_commit": "ebfb8b58",
     "pinned_from_source": "yubiOS-main/papers/data/lean/WayfinderBounds.lean"
+  },
+  "definitions": {
+    "schema": "definition-pins/1",
+    "pin": "sha256 over the sorted 'name:normalized-decl' entries of EVERY top-level def/structure/inductive/abbrev/instance/class declaration in the lean_file (comments stripped, whitespace collapsed); 'decls' maps each definition name to its own normalized-decl sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A definitions-hash mismatch FAILS CI even when every theorem statement is unchanged: redefining a definition changes what the pinned theorems actually prove, so a legitimate definition change requires a deliberate definitions-block regeneration IN THE SAME PR, with the definition diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the definition diff. A block pinning zero definitions is refused (vacuous pin).",
+    "hash": "68030f4e445b3c9aeb2801c1a8182742cb50b8d802371070646c27809c9d81c8",
+    "count": 13,
+    "decls": {
+      "afterIsoC": "3ba80123833ec075aaeb6b93e7213718883fe3ae02ebaa1ffee6e0f697835bbc",
+      "afterOldIso": "d3b93febf2033c870d5910bdabedc1133eea8688377f65408d4274283edb54ce",
+      "chgHit": "a6eb845006a59f6841f3393bfc6ec8e2b7ec03a46c5145e0c33d07d482377bc1",
+      "chgLedger": "81e44babc76c3e68bbe4dc5d89bd6c342b7e40d0204637eb90db401de092eb67",
+      "degAfterOf": "2db0c2dce4ce7b0255515b0d3f3057d968ad28368d2e8594d558ea72f321a210",
+      "degBeforeOf": "3ec8442c1a994acfe3642b54db68a2b70f75615719a33f6213956458b67aaeda",
+      "edgeNat": "d5911705e2cf37efbc3de706e395e0bea42992b51b0fd4f466357cd7df5658aa",
+      "hit": "399e1ba9bd288253b5ce27ecc1f3ffdcdf7ad6a34bd4b960f80a1bf1856e1a66",
+      "hitIso": "112d76d83e1e7101282d01e4a215d4a27d9bb0511c52190c280a1e0c7f3a617b",
+      "iso": "11b361672e16993cd931a47787fe5b9c0dbc91b936c502a94a75a3f4a157873a",
+      "newDegree": "3e3335d0dd46a38f99a7399bc6f4c304ff04a9d57389ffaec45b6aa31c1732b9",
+      "oldIso": "f7457b66774c29809453ad0b709a65affe98339a3fbcb7bf61d03b5095f03e32",
+      "oldIsoC": "30880ae38640e0fc5e6f4a73dceae00184babd1df3beb4f269a2cb1d413ade99"
+    },
+    "pinned_from_commit": "644f983b253"
   }
 }

@@ -11,6 +11,14 @@
       "statement_sha256": "a15d2368ab92cca2f994461bdf6a59596e7052127d68fb087f12ee1d1e62d565"
     },
     {
+      "name": "Rayleigh.quad_cons",
+      "status": "lean-proved",
+      "statement": "quad (e :: es) x = (x e.1 - x e.2) * (x e.1 - x e.2) + quad es x (quadratic form unfolds one edge at a time)",
+      "runtime_counterpart": "internal rewriting helper for laplacianQuadratic recursion; no separate runtime report",
+      "runtime_predicate": "unfolding law consumed by quad_nonneg/quad_const/quad_shift/quad_scale and every reported quad property",
+      "statement_sha256": "daa160bd39970edb534743c742f6cd8c2aca9fbd4a09aac9328c4eac093da144"
+    },
+    {
       "name": "Rayleigh.quad_nonneg",
       "status": "lean-proved",
       "statement": "quad edges x >= 0 (Laplacian quadratic form is PSD)",
@@ -143,5 +151,22 @@
     "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
     "pinned_from_commit": "ebfb8b58",
     "pinned_from_source": "yubiOS-main/papers/data/lean/RayleighBounds.lean"
+  },
+  "definitions": {
+    "schema": "definition-pins/1",
+    "pin": "sha256 over the sorted 'name:normalized-decl' entries of EVERY top-level def/structure/inductive/abbrev/instance/class declaration in the lean_file (comments stripped, whitespace collapsed); 'decls' maps each definition name to its own normalized-decl sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A definitions-hash mismatch FAILS CI even when every theorem statement is unchanged: redefining a definition changes what the pinned theorems actually prove, so a legitimate definition change requires a deliberate definitions-block regeneration IN THE SAME PR, with the definition diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the definition diff. A block pinning zero definitions is refused (vacuous pin).",
+    "hash": "3c054c1de919c1bd3161a5c41ee1a41bdf4c727072ca45b7ed78a6954691f2f1",
+    "count": 6,
+    "decls": {
+      "cut": "54d8ca8ee7b9c8780e0d30c86e453082ddebe14ca94c16226ce13f83a10db12c",
+      "edgeCut": "fac6b16338036f2c72bdb141c443d079a8fede5a2ea6a03cd2a2fef4c4f9a73a",
+      "ind": "a76c93a87dbf2b66cbf86160798060d3fde989db286dd3f4923e501bba02ae26",
+      "path8": "d8ee028be71a1e5202790a215c4c2a5f6d35618aa69e1b455b73ee685a5c30e8",
+      "quad": "78039f49a7dfb76986338e1e420b97186e1e43b695fe4f83d925ae23c56fbdb6",
+      "untouched": "9be50d19313b8488341ab6a9a7d4c6408c188de9a1bd426464c390a35a5e400a"
+    },
+    "pinned_from_commit": "644f983b253"
   }
 }
