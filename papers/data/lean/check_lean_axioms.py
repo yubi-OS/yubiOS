@@ -127,23 +127,12 @@ TOKEN_RE = re.compile(
 #
 # What it does, in Lean 4.33.0 core (no Mathlib):
 #   - walks `env.constants` (every constant the compiler knows);
-#   - keeps only constants of the CURRENT module — the main module —
-#     identified two ways defensively:
-#       primary:   `env.getModuleIdxFor? n` equals the main module index
-#                  `env.getModuleIdx? env.mainModuleName`, when the main
-#                  module IS registered in the environment header;
-#       fallback:  main-module constants carry NO module index
-#                  (`getModuleIdxFor? n` is none), which is the common case
-#                  for a single-file `lean probe.lean` compile where the
-#                  current module is not yet in the header.
-#     The match below accepts BOTH semantics, so either Lean behaviour
-#     yields the right filter:
-#       (some idx, some idx') -> idx == idx'     (imported / registered case)
-#       (some _,  none)       -> true            (unregistered main-module
-#                                                   constant)
-#       (none,    none)       -> true            (main module not in header)
-#       (none,    some _)     -> false           (imported constant, no main
-#                                                   module registered)
+#   - keeps only constants of the CURRENT module. In a single-file
+#     `lean probe.lean` compile the current module is NOT registered in the
+#     environment header, so current-module constants are exactly those with
+#     `env.getModuleIdxFor? n == none` (advisor fixup 5; `Environment` has no
+#     `mainModuleName` accessor in 4.33.0, and every imported constant carries
+#     a module index, so the none-filter is both necessary and sufficient).
 #   - keeps only `.theoremInfo` constants (the actual theorems);
 #   - for each, computes `Lean.collectAxioms n` — the same transitive axiom
 #     dependency computation `#print axioms` uses — and prints
@@ -154,9 +143,11 @@ TOKEN_RE = re.compile(
 #
 # FALLBACK VARIANTS (if a specific API differs in 4.33.0, the probe compile
 # FAILS LOUD and one of these drops in):
-#   F1. `env.constants.toList` → `env.constants.map.toList`
-#       (SMap exposes its inner HashMap as the public field `map`;
-#       HashMap.toList definitely exists).
+#   F1. RESOLVED (advisor fixup 5, against the v4.33.0 source):
+#       `SMap.toList` is a PUBLIC method on SMap (Lean/Data/SMap.lean);
+#       `env.constants.toList` is the spelling. The intermediate
+#       `env.constants.map.toList` (fixup 2) failed — `SMap` has no `map`
+#       field in 4.33.0 (fields are stage₁ / map₁ / map₂).
 #   F2. `Lean.Elab.Command.liftCoreM Lean.getEnv` →
 #       `Lean.getEnv` (CommandElabM carries MonadEnv via liftCoreM and
 #       exposes `getEnv` directly in recent core versions).
@@ -189,27 +180,29 @@ run_cmd do
   -- Advisor fixup 1: `getEnv` directly in CommandElabM (LEAN_ENUM_BLOCK fallback F2;
   -- the `Lean.getEnv` spelling does not resolve as a class-method path).
   let env ← getEnv
-  let modIdx? := env.getModuleIdx? env.mainModuleName
-  let inMainModule : Name → Bool := fun n =>
-    match modIdx?, env.getModuleIdxFor? n with
-    | some idx, some idx' => idx == idx'
-    | some _, none => true
-    | none, none => true
-    | none, some _ => false
   let mut printed : Nat := 0
-  -- Advisor fixup 2: SMap has no `toList`; iterate the underlying HashMap
-  -- (LEAN_ENUM_BLOCK fallback F1).
-  for (n, ci) in env.constants.map.toList do
-    if inMainModule n then
+  -- Advisor fixup 5 (CI runs 37706893911 / 37707833452 / 37708483075 —
+  -- APIs verified against the v4.33.0 source tree before this change):
+  --   * `Environment` has NO `mainModuleName` accessor in 4.33.0, so the
+  --     two-way module filter is replaced by single-file semantics: in a
+  --     `lean probe.lean` compile the current module is NOT registered in
+  --     the environment header, so current-module constants are exactly
+  --     those with `env.getModuleIdxFor? n == none` (every imported constant
+  --     carries a module index; async constants count as current per
+  --     Lean/Environment.lean v4.33.0).
+  --   * `SMap.toList` is a PUBLIC method on SMap (Lean/Data/SMap.lean,
+  --     v4.33.0) — fixup 2 wrongly reached for the removed `map` field.
+  for (n, ci) in env.constants.toList do
+    if (env.getModuleIdxFor? n).isNone then
       match ci with
       | .theoremInfo _ =>
-        let axioms ← Lean.Elab.Command.liftCoreM (Lean.collectAxioms n)
+        -- `Lean.collectAxioms : [Monad m] [MonadEnv m] → Name → m (Array Name)`
+        -- (Lean/Util/CollectAxioms.lean, v4.33.0); CommandElabM has MonadEnv.
+        let axioms ← Lean.collectAxioms n
         let axiomStrs := axioms.toList.map (fun a => a.toString)
-        -- Advisor fixup 3: `s!"...{...}..."` interpolation with embedded escaped
-        -- quotes is NOT valid term syntax inside interpolation braces (CI run
-        -- 37706893911: "expected '}'"). Use plain string concatenation and
-        -- logInfo (LEAN_ENUM_BLOCK fallback F4; AXIOM_LINE_RE tolerates the
-        -- `file:line:col: info:` prefix).
+        -- Advisor fixup 3: plain string concatenation + logInfo (fallback F4;
+        -- logInfo is `Lean.Log.lean def logInfo [Monad m] [MonadLog m]`;
+        -- AXIOM_LINE_RE tolerates the `file:line:col: info:` prefix).
         logInfo ("AXIOM_LINE " ++ n.toString ++ " -> [" ++ String.intercalate ", " axiomStrs ++ "]")
         printed := printed + 1
       | _ => pure ()
