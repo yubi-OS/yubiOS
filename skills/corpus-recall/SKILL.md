@@ -47,7 +47,7 @@ POST https://steady-orbit.systems-a.workers.dev/api/repo-items
 
 Measured: 824 items with **full text + paths** in ~1s (7.3 MB response). One call replaces any number of file fetches; pipe the response through grep in-script, never dump it into context.
 
-Hard gotcha: this endpoint lives on the workers.dev origin, which the Sauna **sandbox** egress blocks with Cloudflare error 1010 regardless of headers. Call it from `run_script` with `executor: "worker"` only. Auth via the Steady Orbit jev operator connection.
+Hard gotcha: this endpoint lives on the workers.dev origin, which the Sauna **sandbox** egress blocks with Cloudflare error 1010 regardless of headers. Call it from `run_script` with `executor: "worker"` only. Auth via the Steady Orbit jev operator connection — the endpoint is bearer-gated (JEV_API_KEY, as of the 2026-10-08 auth pass) and the operator connection injects that bearer; calls without it get 401.
 
 ## Path 3 — single-doc raw read
 
@@ -72,5 +72,5 @@ Every authored doc cites its sources inline with jev weights (`(source: https://
 - Mirror per session, not per task; the repo is small enough that a fresh pull is always cheaper than staleness reasoning.
 - Never paste full doc bodies into chat; cite paths and quote the specific lines.
 - Prefer Path 1 for anything grep-shaped, Path 2 when you need full text in one shot (mapping, embedding, triage), Path 3 for known-path reads.
-- The `/api/repo-items` call MUST run from the worker executor (sandbox = CF 1010 on workers.dev).
+- The `/api/repo-items` call MUST run from the worker executor (sandbox = CF 1010 on workers.dev) AND pass the Steady Orbit jev operator connection — the endpoint is bearer-gated (401 without the key).
 - knowledge-corpus-mint creates these corpora; corpus-recall only reads them.
