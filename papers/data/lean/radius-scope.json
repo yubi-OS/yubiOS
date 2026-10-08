@@ -198,5 +198,23 @@
     "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
     "pinned_from_commit": "ebfb8b58",
     "pinned_from_source": "yubiOS-main/papers/data/lean/RadiusBounds.lean"
+  },
+  "definitions": {
+    "schema": "definition-pins/1",
+    "pin": "sha256 over the sorted 'name:normalized-decl' entries of EVERY top-level def/structure/inductive/abbrev/instance/class declaration in the lean_file (comments stripped, whitespace collapsed); 'decls' maps each definition name to its own normalized-decl sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A definitions-hash mismatch FAILS CI even when every theorem statement is unchanged: redefining a definition changes what the pinned theorems actually prove, so a legitimate definition change requires a deliberate definitions-block regeneration IN THE SAME PR, with the definition diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the definition diff. A block pinning zero definitions is refused (vacuous pin).",
+    "hash": "6b049f34e3c7f477882cbc3b338769c9242dc0f0bfa7e87c9a615e8f8cf7ce5d",
+    "count": 7,
+    "decls": {
+      "clampHigh": "7b5073360fd582e5a7d37e46e55415bb986b0ef172dc95eaa48de2688063810b",
+      "clampLow": "26fcf5dc4afed08928a9a7edbf27341cfd28e5fad2fba508f1ee793493cf9fc0",
+      "clipArea": "3faf330ec9aafb37a9b5bb4c1b282f6f3ee83201be4884d1af138b8d5524eeae",
+      "clipLen": "dc09fefef1605821d4cb7c4607c0d50fc5f86c50a6f5260687c5ca158dd28021",
+      "connAt": "fffbbdec7618fd574869a2f54303f03f85510fea8b9d92cae2a1ddef7d07af35",
+      "isoAt": "e1495d2ac0cfe21f51aa09a9e304d128c9ab3e2904d99bd59bdc219143917a78",
+      "isoCount": "09f3f4ab03cb337c236a2a4b2123c47fc5f3cfab922f0b3b49fb27203f1ee13f"
+    },
+    "pinned_from_commit": "644f983b253"
   }
 }

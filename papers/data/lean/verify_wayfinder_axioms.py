@@ -20,6 +20,17 @@ Pass criteria (all must hold):
      pin_statements.py, which is imported from this script's directory; if the
      module is missing while pins exist, the gate FAILS (fail-closed) rather
      than certifying statements it could not check.
+   6. DEFINITION PINS (Lane B, CI hardening round 2): the manifest's
+     `definitions` block pins a sha256 over EVERY top-level def/structure/
+     inductive/abbrev/instance/class declaration in the .lean source (plus a
+     per-definition `decls` map). This closes the hole statement pins leave:
+     redefining a definition (e.g. `absSq := 0` in AzimuthBounds.lean)
+     leaves every theorem STATEMENT text unchanged -- all statement pins
+     match -- while the theorems collapse to trivialities. A definitions
+     mismatch fails the gate until the manifest's definitions block is
+     regenerated in the same PR. Fail-closed like the statement gate: a
+     missing block, a missing lean source, a missing pin_statements module,
+     or a vacuous zero-definition pin is a FAILURE, never a skip.
 
 Exit 0 on pass, 1 on failure, 2 on bad usage.
 """
@@ -150,6 +161,47 @@ def check_statement_pins(manifest: dict, lean_path: str | None,
     return verified
 
 
+def check_definition_pins(manifest: dict, lean_path: str | None,
+                          failures: list[str]) -> int:
+    """Lane B definitions-pin gate. Returns the number of definitions verified.
+
+    Fail-closed: the definitions block is REQUIRED on every scope manifest
+    (a manifest without one fails, not skips -- otherwise a mutation PR
+    could simply delete the block). A missing lean source or a missing
+    pin_statements module is likewise a failure.
+    """
+    if not isinstance(manifest.get("definitions"), dict):
+        failures.append(
+            "manifest has no 'definitions' block; every scope manifest must "
+            "pin its lean_file's definitions (fail-closed). Regenerate in the "
+            "same PR: python3 papers/data/lean/pin_statements.py pin "
+            "<manifest.json>"
+        )
+        return 0
+    if lean_path is None or not os.path.isfile(lean_path):
+        failures.append(
+            "definitions block present but the lean source could not be "
+            "located; pass --lean-file <path> (fail-closed)"
+        )
+        return 0
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        pin_statements = importlib.import_module("pin_statements")
+    except ImportError as exc:
+        failures.append(
+            f"definitions block present but pin_statements.py (the shared "
+            f"extractor) could not be imported: {exc} (fail-closed)"
+        )
+        return 0
+    if not hasattr(pin_statements, "check_definitions"):
+        failures.append(
+            "pin_statements.py is present but has no check_definitions(); "
+            "the definitions gate requires the extended extractor (fail-closed)"
+        )
+        return 0
+    return pin_statements.check_definitions(manifest, lean_path, failures)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--axioms", required=True, help="captured lean stdout/stderr")
@@ -199,6 +251,12 @@ def main() -> int:
     lean_path = resolve_lean_file(manifest, args.manifest, args.lean_file)
     pins_verified = check_statement_pins(manifest, lean_path, failures)
 
+    # ---- Lane B: definitions-pin gate (what the statements refer to) ----
+    # Reads the SOURCE file named by the manifest (not the kernel/probe
+    # output), so it works identically for the per-file kernel steps and the
+    # CurvedCorpus step that reuses the axiom-coverage probe output.
+    defs_verified = check_definition_pins(manifest, lean_path, failures)
+
     print("=== parsed #print axioms ===")
     for name, axioms in sorted(reported.items()):
         print(f"  {name}: {axioms if axioms else '(none)'}")
@@ -213,6 +271,15 @@ def main() -> int:
     else:
         print("statement pins: present but NOT verified (see failures)")
 
+    n_defs_pinned = (manifest.get("definitions") or {}).get("count")
+    if defs_verified and not any("DEFINITION" in f or "definitions" in f
+                                 for f in failures):
+        print(f"definitions verified against {lean_path}: "
+              f"{defs_verified}/{n_defs_pinned} "
+              f"(hash {manifest['definitions']['hash'][:16]}...)")
+    else:
+        print("definitions: NOT verified (see failures)")
+
     if failures:
         print("\nAXIOM_GATE_FAIL")
         for f in failures:
@@ -221,7 +288,8 @@ def main() -> int:
 
     print("\nAXIOM_GATE_OK: all expected theorems present, "
           "axioms within the permitted core set, no sorryAx"
-          + (", all statement pins match" if pins_verified else ""))
+          + (", all statement pins match" if pins_verified else "")
+          + (", definitions pins match" if defs_verified else ""))
     return 0
 
 
