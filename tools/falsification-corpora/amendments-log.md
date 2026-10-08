@@ -52,6 +52,41 @@ after results arrived.
 
 ## (empty until needed — nothing below this line yet)
 
+## 2026-10-08 (pre-run, full scorer corpus — logged BEFORE any measurement)
+
+4. **Scorer full build executes preregistration §3** — the 62-doc corpus (36 planted
+   F docs = 12 axes x tiers 2/4/6; 8 paraphrase P docs; 12 distractor D docs;
+   4 heading-only H docs; 2 multi-axis A docs). Authored by 3 independent lanes
+   from axis semantics only; no lane saw the extractor implementation.
+5. **Collateral-precision gate ADDED (was report-only in the slice)** — on every
+   planted doc (F/H/A), no non-planted axis may flip true (row bit 1 at the policy
+   threshold). A-priori justification: slice finding F3 recorded 4/8 planted docs
+   crediting assumption_set with p > 0.55 from composition prose; the prereg
+   reserved this gate for the full build.
+6. **Determinism gate ADDED** — 3 sampled docs re-scored; row + probs byte-identical
+   across calls. A-priori: the scorer contract claims deterministic extraction plus
+   one batched decision per doc-state; the corpus should catch any nondeterminism.
+7. **Distractor specificity operationalized** — for Dk (target axis k), gate =
+   evidence_count(k) <= 1 AND no true flip on axis k. A-priori: identical to the
+   slice's pinned gate shape (which tolerated <=1 extraction hit while requiring no
+   decision credit); prereg section 3's "0 planted-axis credits" is ambiguous
+   between extraction and decision layers - the decision layer (no flip) is the
+   binding half.
+8. **Paraphrase floor scaled to 8 variants** - prereg sized 12 variants with
+   stability >= 11/12; this build authors 8 (inputs, outputs, assumption_set,
+   adjacent, failure_modes, lifecycle, knowledge_sources, calibration - one per
+   author lane). Floor scaled proportionally: >= 7/8 verdict-stable on the planted
+   axis.
+9. **Heading-only axes pinned** - H docs target inputs, outputs, assumption_set,
+   calibration (3 terse bullets each; recall floor ceil(0.75 x 3) = 3). A-priori
+   design choice, made before measurement.
+10. **All-axes docs concretized** - A1 plants audience/outputs/composition/
+    calibration = 2 each; A2 plants inputs/mode/failure_modes/lifecycle = 2 each;
+    gate = each planted axis reaches ceil(0.75 x 2) = 2. Prereg said "2
+    all-axes-planted docs" without shape; fixed before measurement.
+
+Expected cost: 62 + 3 determinism re-scores = 65 calls at ~$0.0002 = ~$0.013.
+
 ## 2026-10-08 (pre-run, router gate-outcome corpus — logged BEFORE any measurement)
 
 11. **Router full gate-outcome corpus executes** per router-full-preregistration.md
@@ -59,3 +94,23 @@ after results arrived.
     unregistered-family observability row R14). Expectations pinned to policy v15.
 12. **Plumbing probes P1/P2 authorized** (one schema probe + one R13-expectation
     pin); results logged here, NOT used as corpus data.
+## 2026-10-08 (pre-corpus-run, plumbing probe corrections — logged BEFORE the corpus run)
+
+13. **Band-id correction from probe P1** — the preregistration table wrote
+    `hierarchy-confirmed` for R1/R13/R14 from session memory; the live policy v15
+    band id is `hierarchy-image` (probe P1, run cr_d6b13c87d6776ffb, returned
+    band.id = "hierarchy-image"). Table corrected BEFORE the corpus run. This is a
+    preregistration-input correction (the Lane D record already used the correct
+    id), not a post-hoc fit.
+14. **R13 expectation PINNED by probe P2** (run cr_49830f885dc26611): the clean
+    family-declared gasket gold reads lens.detect_score = 0 (estimates 0/0/0,
+    family "gasket" — matching the Set A calibration, NOT the 9999 sentinel).
+    Band hierarchy-image, decision allowed, task terminal:succeeded in-request.
+    R13's expected band + outcome are pinned accordingly. Probes are NOT corpus
+    data (unique notes; 2 terminal tasks t_bd05511cca97624a, t_9c2688bd9dc25b80
+    created as probe side effects).
+15. **Response schema pinned by P1**: 201 for allowed rows (task created and
+    dispatched to terminal in-request; auto_dispatch carries dispatched/verified),
+    response carries band.id/decision/gate{outcome,reasons}/run_id/task{state,
+    terminal_outcome}/measurement.features{spectral.d_w, lens.detect_score,
+    lens.skipped_reason}. G2 asserts on gate.outcome + decision.

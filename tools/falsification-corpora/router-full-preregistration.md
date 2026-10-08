@@ -30,7 +30,7 @@ scorer-preregistration.md (same corpus family) and the falsification-corpus skil
 
 | Row | Render | any.lens_family | Expected band | Expected gate outcome |
 |---|---|---|---|---|
-| R1 | gasket-v2-L384 | none | hierarchy-confirmed | allowed (lane-draft dispatch) |
+| R1 | gasket-v2-L384 | none | hierarchy-image | allowed (lane-draft dispatch) |
 | R2 | tri | none | ordered-image | allowed (lane-classify) |
 | R3-R7 | shuffle-s42/s7/s99/s1337/s2026 | none | ordered-image | allowed |
 | R8 | pumpkin_ring | none | sparse-image | allowed |
@@ -38,7 +38,7 @@ scorer-preregistration.md (same corpus family) and the falsification-corpus skil
 | R10 | gasket-astig-0.20 | gasket | corrected-hierarchy (pre-correction band) | blocked, reasons include reroute_not_converged |
 | R11 | gasket-trefoil-1e-4 | gasket | aberrated-hierarchy-escalation | needs_approval (band_provisional) |
 | R12 | gasket-trefoil-3e-4 | gasket | corrected-hierarchy | blocked, reasons include reroute_not_converged |
-| R13 | gasket-v2-L384 | gasket | PINNED BY PROBE P2 (clean family-declared gold; detect_score 0 or the 9999 sentinel decides between hierarchy-confirmed/allowed and aberrated-hierarchy-escalation/needs_approval) | pinned with the band |
+| R13 | gasket-v2-L384 | gasket | PINNED BY PROBE P2 (clean family-declared gold; detect_score 0 or the 9999 sentinel decides between hierarchy-image/allowed and aberrated-hierarchy-escalation/needs_approval) | pinned with the band |
 | R14 | gasket-v2-L384 | gasket-v2-L384 (UNregistered) | hierarchy-confirmed (band decided on D/d_w alone) | allowed, AND lens.skipped_reason present (observability guard) |
 
 R10-R12 expectations carry over the Lane D slice's amended outcomes (live-verified
