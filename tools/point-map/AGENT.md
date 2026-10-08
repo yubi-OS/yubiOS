@@ -70,14 +70,14 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | GET | `/map/pointmap.js` | identical dependency-free numeric core used by Worker |
 | GET | `/map/app.js` | map UI application script served from KV (`map-app.js`); 404 when the KV key is missing |
 
-Legacy `/api/assess`, `/api/fits`, `/api/narrate` and site chat remain separate APIs. The Sauna-hosted mirror has not received this Cloudflare release.
+The SOS Agent business APIs (`/api/assess`, `/api/fits`, `/api/narrate`) and the original site chat remain separate APIs. The Sauna-hosted mirror has not received this Cloudflare release.
 
 | Method | Path | Contract |
 |---|---|---|
-| GET | `/api/fits` | legacy SOS Agent API: list stored repository FIT assessments (population), `{fits:[...]}` |
+| GET | `/api/fits` | SOS Agent API: list stored repository FIT assessments (population), `{fits:[...]}` |
 | GET | `/api/fits/:id` | one stored FIT with full `fit_json` and population comparison; 404 when missing |
 | DELETE | `/api/fits/:id` | delete a stored FIT row (`{ok:true}`); **bearer auth required (JEV_API_KEY)** — no auth check, any caller can remove rows |
-| POST | `/api/chat` | legacy site assistant (Workers AI `llama-3.3-70b-instruct-fp8-fast`, pinned SOS system prompt): `{message}` (<=1000 chars) -> `{reply}`; no markdown/em-dash prompt rules; superseded on the live site by `/api/site-assistant` |
+| POST | `/api/chat` | site assistant (original /api/chat, Workers AI `llama-3.3-70b-instruct-fp8-fast`, pinned SOS system prompt): `{message}` (<=1000 chars) -> `{reply}`; no markdown/em-dash prompt rules; live site pages call `/api/site-assistant` |
 
 ### CORS preflights
 
@@ -94,7 +94,7 @@ Public relays in the main worker module: CORS open (`Access-Control-Allow-Origin
 | POST | `/api/contact` | website contact form -> Resend email (from `site@axel.steadyorbitsystems.ai` to `mike@steadyorbitsystems.com`): `{name` (<=120)`, company?` (<=160)`, email` (<=200)`, message` (<=4000)`, source?}`; `RESEND_API_KEY`; stricter per-IP rate limit (5/min, "try again in a minute") |
 | GET/POST | `/api/decide` | browser-friendly decision relay, DefAPI `typesafe/jev-1.13` (or clef / clef-flash via Workers AI when the route selects it): POST `{state, questions, session_id?, user?}` or GET `?state&questions` (urlencoded JSON) `&session_id&user`; question types choice/score/noul validated; `DEFAPI_API_KEY` (+`AI` for the clef path); rate-limited (15/min per IP) |
 
-## Site surfaces (solar-rbs-entry + legacy assets)
+## Site surfaces (solar-rbs-entry + core module assets)
 
 | Method | Path | Contract |
 |---|---|---|
@@ -102,9 +102,9 @@ Public relays in the main worker module: CORS open (`Access-Control-Allow-Origin
 | POST | `/api/brain/preview` | brain page preview chat — identical handler to `/api/site-assistant` (same `siteChat()` handler) |
 | GET | `/sos`, `/sos/`, `/sos/index.html` | Steady Orbit Systems voice-agent UI (KV `sos-index.html`) |
 | GET | `/sos/client.js` | voice client script (KV `sos-client.js`) |
-| GET | `/index.html` | legacy site index from KV; shadowed by the entry module's page table when a KV page exists |
+| GET | `/index.html` | fallback site index from KV; shadowed by the entry module's page table when a KV page exists |
 | GET | `/audio/reply-1|2|3.mp3` | three pre-baked voice reply audio files from KV (`audio/mpeg`); 404 when the KV key is missing |
-| GET | `/sitemap.xml` | sitemap served from KV (`application/xml`); falls through to the legacy module when the KV key is missing |
+| GET | `/sitemap.xml` | sitemap served from KV (`application/xml`); falls through to the core module when the KV key is missing |
 | GET | `/robots.txt` | robots served from KV (`text/plain`); same fallthrough |
 | GET | `/AGENT.md` (and `/agent.md`) | this document, served from KV at BOTH spellings, no-cache; fallback text "AGENT.md not uploaded" |
 
@@ -492,3 +492,4 @@ Process and bootstrapping rules distilled from one day of operating this instrum
 31. **Lead the prompt with the protected reading, label the adverse rungs, and point at the contract.** The rung prompt used to spend 58% of its characters on a frame recital that never varies and printed `occupied sectors +0` on every rung while omitting the pole gap, Δ, clearance and Hamming distance it had already computed. The geometric prompt (~1,785 chars/ladder vs ~4,506) leads with Δ (Lemma 1), states clearance as an achieved-geometry fact (never a forecast), labels adverse rungs `ADVERSE on this frame` without suppressing them, and points at `/AGENT.md` instead of restating it. A prompt that only asserts a prediction with a coin-flip track record is noise; one that reports frame readings is an instrument.
 
 Tooling for the loop lives at `tools/skill-check/` (`skillcheck.sh`, `fixer.py`, `wayfinder-cycle.py`, README).
+
