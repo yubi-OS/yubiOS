@@ -385,7 +385,7 @@ Endpoints:
 | GET | `/map/pointmap.js` | none | No |
 | GET | `/map/app.js` | none | No |
 
-Module parts: index.js (map routes + PM numeric core + map handlers), solar-rbs-entry.mjs (delegates legacy /map surface)
+Module parts: index.js (map routes + PM numeric core + map handlers), solar-rbs-entry.mjs (site adapter; delegates the core /api + /map surface)
 
 Bindings: DB, AI, VEC, SITE
 
@@ -467,9 +467,9 @@ Composes with:
 - Visco Instruments (hysteresis closes supersedes chains; snapback reads the ledger series)
 - Evolution (round records and realized outcome rows land here)
 
-### Repo Assessment (FIT legacy)
+### Repo Assessment (SOS Agent FIT)
 
-The original Steady Orbit business API, kept as a separate legacy surface: POST /api/assess fetches and assesses a GitHub repository into a FIT.json report, GET /api/fits lists the stored assessment population, and POST /api/narrate produces natural-language narration over an assessment using Workers AI.
+The original Steady Orbit business API, still live as its own module surface: POST /api/assess fetches and assesses a GitHub repository into a FIT.json report, GET /api/fits lists the stored assessment population, and POST /api/narrate produces natural-language narration over an assessment using Workers AI.
 
 Endpoints:
 
@@ -485,7 +485,7 @@ Module parts: index.js (assess/fits/narrate routes, refineBasis)
 Bindings: DB, AI, GITHUB_API_KEY
 
 Key invariants:
-- Legacy surface: deliberately unchanged by the v0.2 map release; llms.txt fallback documents it
+- Core API surface: deliberately unchanged by the v0.2 map release; llms.txt fallback documents it
 - Assessment reports are stored rows in D1 listed by /api/fits
 - DELETE /api/fits/:id is operator bearer-auth guarded (R2 patch): 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token
 
@@ -550,7 +550,7 @@ Composes with:
 
 ### Platform Surface & Ops Console
 
-The operator- and answer-engine-facing surface of the worker: GET /api/health (version info incl. diagnostic module versions), the AGENT.md instrument contract served from KV, the llms.txt business summary (with the pre-upload fallback listing the core API), the /jev/ ops console (key entered once, kept in sessionStorage), and the site page adapter that serves the v19 website from KV and delegates everything else to the legacy API module. Also hosts the worker's scheduled entrypoint that dispatches automations and the evolution cycle by cron expression.
+The operator- and answer-engine-facing surface of the worker: GET /api/health (version info incl. diagnostic module versions), the AGENT.md instrument contract served from KV, the llms.txt business summary (with the pre-upload fallback listing the core API), the /jev/ ops console (key entered once, kept in sessionStorage), and the site page adapter that serves the v19 website from KV and delegates everything else to the core API module. Also hosts the worker's scheduled entrypoint that dispatches automations and the evolution cycle by cron expression.
 
 Endpoints:
 
@@ -630,19 +630,19 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/robots.txt` | none | robots.txt served from KV | No |
 | GET | `/website-vN/<file>` | none | Generic asset pass-through: /website-v<digits>/<[A-Za-z0-9._-]+> served from KV key website-vN/<file> | No |
 
-### index.js (legacy API module) - 45 routes
+### index.js (core API module) - 45 routes
 
 | Method | Path | Auth | Description | Harness |
 |---|---|---|---|---------|
 | GET | `/AGENT.md` | none | Agent guide document (also /agent.md) from KV SITE | No |
-| GET | `/llms.txt` | none | Business summary for answer engines from KV, with inline fallback prompt listing legacy API when not uploaded | No |
+| GET | `/llms.txt` | none | Business summary for answer engines from KV, with inline fallback prompt listing the core API when not uploaded | No |
 | GET | `/map/app.js` | none | Map UI app script from KV (map-app.js) | No |
 | GET | `/map/pointmap.js` | none | Dependency-free numeric pointmap core from KV (pointmap.js) | No |
 | GET | `/map[/]` | none | Wayfinder map browser UI (KV map-index.html) | No |
 | GET | `/jev[/]` | none | Jev ops console HTML (KV jev-index.html); key entered once, sessionStorage | No |
 | GET | `/sos[/]\|/sos/index.html` | none | SOS voice-agent UI (KV sos-index.html) | No |
 | GET | `/sos/client.js` | none | SOS voice client script (KV sos-client.js) | No |
-| GET | `/[/index.html]` | none | Legacy site index from KV (shadowed by solar-rbs-entry.mjs page table when KV page exists) | No |
+| GET | `/[/index.html]` | none | Fallback site index from KV (shadowed by solar-rbs-entry.mjs page table when KV page exists) | No |
 | GET | `/audio/reply-1\|2\|3.mp3` | none | Three hardcoded voice reply audio files from KV (audio/reply-N.mp3) | No |
 | OPTIONS | `/api/searxng` | none | CORS preflight for the searXNG proxy | No |
 | GET | `/api/searxng` | none | searXNG proxy: forwards to the n8n searxng-proxy webhook on Northflank | No |
@@ -663,7 +663,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | POST | `/api/repo-items` | none | Fetch sorted full-text repo items (GitHub tree) with truncation flags | No |
 | POST | `/api/vector/search` | none | Cosine search over the sos-embeddings Vectorize index | No |
 | POST | `/api/embed` | none | Chunked/v1 document embedding: bge-base-en-v1.5, mean pooling, byte-weighted chunk mean, SHA256 content-hash cache, Vectorize store | No |
-| POST | `/api/chat` | none | Legacy site assistant relay (Workers AI llama-3.3-70b-instruct-fp8-fast, pinned SOS system prompt) | No |
+| POST | `/api/chat` | none | Site assistant relay (original /api/chat, Workers AI llama-3.3-70b-instruct-fp8-fast, pinned SOS system prompt) | No |
 | POST | `/api/map` | none | Wayfinder: map texts or vectors onto the frozen pointmap/0.2 frame; optionally persist a stored map; baseline_id freezes frame | Partial - Lean bounds + regression suite |
 | POST | `/api/map/preview` | none | Preview ONE candidate (ADD/CHANGE) against a stored baseline's frozen frame; writes nothing | Partial - Lean bounds + regression suite |
 | POST | `/api/map/control` | none | CutPaste-style positive control: seeded splice CHANGEs measured through the preview path on the frozen frame | Yes - positive-control falsification endpoint |
@@ -851,13 +851,13 @@ The 14 Lane B code-only endpoints, every one now documented in AGENT.md:
 | POST | `/api/stt` | undocumented | documented: ElevenLabs scribe_v1, 10 MB upload cap (413 over), rate-limited |
 | POST | `/api/contact` | undocumented | documented: Resend send to the fixed site inbox, per-field caps, rate-limited 5/min |
 | GET\|POST | `/api/decide` | undocumented | documented: DefAPI typesafe/jev-1.13 relay (clef path via Workers AI), rate-limited |
-| POST | `/api/chat` | alluded to as 'site chat', never named | documented by path, marked legacy and superseded by /api/site-assistant |
+| POST | `/api/chat` | alluded to as 'site chat', never named | documented by path; the live site pages now call /api/site-assistant |
 | POST | `/api/site-assistant` | undocumented | documented: same-origin enforced, grounded on KV llms.txt, rate-limited |
 | POST | `/api/brain/preview` | undocumented | documented: identical handler to /api/site-assistant |
 | GET | `/sos` (+ /sos/, /sos/index.html, /sos/client.js) | undocumented | documented: SOS voice-agent UI and client script from KV |
-| GET | `/index.html` | not in the endpoint table | documented: legacy site index, shadowed by the entry module page table |
+| GET | `/index.html` | not in the endpoint table | documented: fallback site index, shadowed by the entry module page table |
 | GET | `/map/app.js` | only /map/pointmap.js was documented | documented: map UI app script from KV |
-| GET | `/sitemap.xml` | undocumented | documented: served from KV, falls through to the legacy module when missing |
+| GET | `/sitemap.xml` | undocumented | documented: served from KV, falls through to the core module when missing |
 | GET | `/robots.txt` | undocumented | documented: served from KV, same fallthrough |
 | GET | `/AGENT.md` (and `/agent.md`) | the doc never documented its own route | documented: both spellings, no-cache, fallback text when not uploaded |
 
@@ -866,7 +866,7 @@ The 12 Lane B discrepancies, one by one:
 1. No doc-only endpoints - confirmed again by R3: every documented endpoint resolves to a route in the patched 42 module parts.
 2. GET /api/jev/pause method-coverage gap - RESOLVED: new GET row documents the fail-closed read contract.
 3. Four relay endpoints absent (/api/tts, /api/stt, /api/contact, /api/decide) - RESOLVED: full rows with method variants, caps and binding names.
-4. POST /api/chat undocumented by path - RESOLVED: explicit row, marked legacy and superseded by /api/site-assistant.
+4. POST /api/chat undocumented by path - RESOLVED: explicit row, with /api/site-assistant as the live-site assistant path.
 5. solar-rbs-entry routes (/api/site-assistant, /api/brain/preview, /sitemap.xml, /robots.txt) undocumented - RESOLVED: all four documented.
 6. /sos/* routes, GET /index.html and GET /map/app.js absent - RESOLVED: all documented.
 7. /AGENT.md and /agent.md spellings undocumented - RESOLVED: one row documents both spellings with the no-cache contract.
@@ -1036,18 +1036,18 @@ flowchart TD
         Assets["GET /website-vN/*<br/>generic KV pass-through"]
     end
     Entry --> Chat & Pages & Assets
-    Entry -->|"everything else<br/>LEGACY_TERRITORY"| Legacy["index.js<br/>legacy API relay"]
+    Entry -->|"everything else<br/>CORE_TERRITORY"| Core["index.js<br/>core API relay"]
     Entry -->|"/api/jev*"| Jev["jev-main.js<br/>buildDeps + handleJevRequest"]
-    subgraph LEGACY["Legacy API - index.js"]
+    subgraph CORE["Core API - index.js"]
         MapPub["POST /api/map + /map/preview, /control, /consistency,<br/>/azimuth, /rayleigh, /admission, /axis-redundancy<br/>GET /api/maps, /maps/compare"]
         DataPub["POST /api/repo-items, /api/embed, /api/outcomes<br/>GET /api/health, /api/outcomes<br/>POST /api/vector/search"]
         Tts["POST /api/tts, /api/stt, /api/contact,<br/>GET/POST /api/decide - public relays"]
         Surf["GET /api/searxng, /map/ UI, /map/app.js,<br/>/map/pointmap.js, /AGENT.md, /llms.txt, /sos, /audio/"]
     end
-    Legacy --> MapPub
-    Legacy --> DataPub
-    Legacy --> Tts
-    Legacy --> Surf
+    Core --> MapPub
+    Core --> DataPub
+    Core --> Tts
+    Core --> Surf
     subgraph JEV["Jev orchestrator - routes-jev.js"]
         Health["GET /api/jev/health<br/>GET /api/jev/corpus/health - unauth"]
         Bearer{"Bearer auth<br/>JEV_API_KEY"}
@@ -1120,7 +1120,7 @@ flowchart TD
     class DB,KV,VEC,AI,RL store
     class Resend,Eleven,DefAPI,GH,Places,NF ext
     style SITE fill:#e8f0fe,stroke:#4c6ef5
-    style LEGACY fill:#e2f6ef,stroke:#0ca678
+    style CORE fill:#e2f6ef,stroke:#0ca678
     style JEV fill:#efeafe,stroke:#7048e8
     style STORE fill:#fff6d8,stroke:#d99e00
     style EXT fill:#f0f2f4,stroke:#87919b
@@ -1155,7 +1155,7 @@ Which bindings each domain uses, from Lane C.
 
 ### DB (D1)
 
-Used by: Jev Orchestrator (gated task engine), Automations (versioned stage pipelines + cron), Evolution (hourly cycle + directives), Corpus Math (jev-corpus), Taste Engine (taste-v1), Visco Instruments (rate-dependent round gates), Wayfinder Point-Map (frozen-frame geometric instrument), Ingestion & Embeddings (full-content chunked/v1), Outcome Ledger (append-only pre-registration), Repo Assessment (FIT legacy), Platform Surface & Ops Console.
+Used by: Jev Orchestrator (gated task engine), Automations (versioned stage pipelines + cron), Evolution (hourly cycle + directives), Corpus Math (jev-corpus), Taste Engine (taste-v1), Visco Instruments (rate-dependent round gates), Wayfinder Point-Map (frozen-frame geometric instrument), Ingestion & Embeddings (full-content chunked/v1), Outcome Ledger (append-only pre-registration), Repo Assessment (SOS Agent FIT), Platform Surface & Ops Console.
 
 Key tables:
 - jev_tasks (+ actions, gate reasons, terminal_outcome)
@@ -1185,7 +1185,7 @@ Key keys:
 
 ### AI (Workers AI)
 
-Used by: Ingestion & Embeddings (full-content chunked/v1), Wayfinder Point-Map (frozen-frame geometric instrument), Automations (versioned stage pipelines + cron), Evolution (hourly cycle + directives), Public Relays (media, contact, chat, decide), Repo Assessment (FIT legacy).
+Used by: Ingestion & Embeddings (full-content chunked/v1), Wayfinder Point-Map (frozen-frame geometric instrument), Automations (versioned stage pipelines + cron), Evolution (hourly cycle + directives), Public Relays (media, contact, chat, decide), Repo Assessment (SOS Agent FIT).
 
 Key models:
 - @cf/baai/bge-base-en-v1.5 (embeddings, chunked/v1 + evolution memory)
@@ -1247,3 +1247,4 @@ Refresh notes (2026-10-05, discrepancy resolution):
 10. The DELETE-auth prose fix (the stale 'AUTH GAP' wording R3 flagged as R3-1/R3-2 in the KV doc rows) landed after the R3 read; this refreshed document reflects the fixed wording.
 11. The Lean verification map is unchanged by the refresh: none of the newly documented endpoints has a Lean connection - they are not corpus math.
 12. Refresh 2026-10-06 (falsification-instrument wave): 10 routes added (router 4, spectral 3, oracle 1, lens 2); inventory 121 -> 131; a Harness column added to every capability and inventory table (legend at the top of the Endpoint Inventory); the spectral/lens tools of record sit on draft PR #292, so their Lean-map rows point there until merge. Harness tiers: Yes = pre-registered falsification corpus or matched-null falsification trials; Partial = fixture parity / calibration sweeps / Lean bounds without a dedicated corpus; No = contract-level validation only. The candidate list for endpoints that could adopt one effectively lives at refs/falsification-harness-coverage-2026-10-06.md (draft PR).
+
