@@ -133,7 +133,7 @@ TOKEN_RE = re.compile(
 #     `env.getModuleIdxFor? n == none` (advisor fixup 5; `Environment` has no
 #     `mainModuleName` accessor in 4.33.0, and every imported constant carries
 #     a module index, so the none-filter is both necessary and sufficient).
-#   - keeps only `.theoremInfo` constants (the actual theorems);
+#   - keeps only `.thmInfo` constants (the actual theorems;
 #   - for each, computes `Lean.collectAxioms n` — the same transitive axiom
 #     dependency computation `#print axioms` uses — and prints
 #     `AXIOM_LINE <name> -> [<axioms>]` where <name> is `Name.toString`
@@ -190,12 +190,14 @@ run_cmd do
   --     those with `env.getModuleIdxFor? n == none` (every imported constant
   --     carries a module index; async constants count as current per
   --     Lean/Environment.lean v4.33.0).
-  --   * `SMap.toList` is a PUBLIC method on SMap (Lean/Data/SMap.lean,
+  --   * ConstantInfo's theorem constructor is `.thmInfo` in 4.33.0
+--     (Lean/Declaration.lean) — `theoremInfo` was the wrong name.
+--   * `SMap.toList` is a PUBLIC method on SMap (Lean/Data/SMap.lean,
   --     v4.33.0) — fixup 2 wrongly reached for the removed `map` field.
   for (n, ci) in env.constants.toList do
     if (env.getModuleIdxFor? n).isNone then
       match ci with
-      | .theoremInfo _ =>
+      | .thmInfo _ =>
         -- `Lean.collectAxioms : [Monad m] [MonadEnv m] → Name → m (Array Name)`
         -- (Lean/Util/CollectAxioms.lean, v4.33.0); CommandElabM has MonadEnv.
         let axioms ← Lean.collectAxioms n
