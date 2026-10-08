@@ -311,7 +311,16 @@ def gen_probe(source_text: str) -> str:
     extraction feeds the probe any more — that was the round-1 hole."""
     if not source_text.endswith("\n"):
         source_text += "\n"
-    return source_text + LEAN_ENUM_BLOCK
+    # Advisor fixup 4 (CI run 37706893911 step 8, run 37707833452):
+    # `run_cmd` is defined in Lean.Elab.Command, which is NOT in scope for a
+    # bare `lean file.lean` compile — the probe must import it. Imports are
+    # legal only in the file header, so the import line is PREPENDED to the
+    # source text (comments/module docstrings may follow an import; all five
+    # repo files start with a `/-`-comment docstring and declare no imports).
+    import_header = ""
+    if "import Lean.Elab.Command" not in source_text:
+        import_header = "import Lean.Elab.Command  -- advisor fixup: run_cmd probe needs Lean.Elab.Command\n\n"
+    return import_header + source_text + LEAN_ENUM_BLOCK
 
 
 def _split_axiom_list(body: str) -> list[str]:
