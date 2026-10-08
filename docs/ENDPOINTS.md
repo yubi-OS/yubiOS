@@ -170,7 +170,7 @@ Endpoints:
 
 | Method | Path | Auth | Falsification Harness |
 |---|---|---|---------|
-| GET | `/api/jev/corpus/health` | none | No |
+| GET | `/api/jev/corpus/health` | bearer | No |
 | POST | `/api/jev/corpus/audit` | bearer | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/scorer/score` | bearer | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
 | POST | `/api/jev/corpus/scorer/matrix` | bearer | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
@@ -602,7 +602,6 @@ Endpoints:
 | GET | `/` † | none | No |
 | GET | `/revenue-blind-spot[/]` † | none | No |
 | GET | `/systems-lab[/]` † | none | No |
-| GET | `/contact[/]` † | none | No |
 | GET | `/founders[/]` † | none | No |
 | GET | `/terms[/]` † | none | No |
 | GET | `/privacy[/]` † | none | No |
@@ -653,7 +652,6 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/` | none | KV-served site landing page (website-v19/index.html); also /index.html | No |
 | GET | `/revenue-blind-spot[/]` | none | Revenue Blind Spot landing page (website-v19/revenue-blind-spot.html); /RBS, /RBS/, /rbs, /rbs/ alias to the same page | No |
 | GET | `/systems-lab[/]` | none | Systems Lab page (lab.html) with Lumina embeds | No |
-| GET | `/contact[/]` | none | Contact page (contact.html) | No |
 | GET | `/founders[/]` | none | Founders page (founders.html) | No |
 | GET | `/terms[/]` | none | Terms page (terms.html) | No |
 | GET | `/privacy[/]` | none | Privacy page (privacy.html) | No |
@@ -778,7 +776,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
-| GET | `/api/jev/corpus/health` | none | Corpus module health: which math/atom/lens modules are wired | No |
+| GET | `/api/jev/corpus/health` | bearer | Corpus module health: which math/atom/lens modules are wired (bearer-gated live, verified 2026-10-08) | No |
 | POST | `/api/jev/corpus/audit` | bearer | Corpus audit: V2, z, verdict, dBc, shares, E_l; idempotent per input sha256 (repeat returns same run_id cached:true); Decision-B multipass mode; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/lens` | bearer | Lens candidates: K reals + K paired controls in guided-curve-ideate format; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/atom` | bearer | RSI-descent atom plan, DRY-RUN only (Delta >= 0 invariant asserted); rate-limited | Partial - parity-tested vs Python sources of record |
@@ -1092,7 +1090,7 @@ flowchart LR
     Core --> Tts
     Core --> Surf
     subgraph JEV["Jev orchestrator - routes-jev.js"]
-        Health["GET /api/jev/health<br/>GET /api/jev/corpus/health - unauth"]
+        Health["GET /api/jev/health<br/>GET /api/jev/corpus/health - bearer"]
         Bearer{"Bearer auth<br/>JEV_API_KEY"}
         Autom["routes-automations.js: /api/jev/automations<br/>:id/activate|pause|run, /api/jev/models"]
         Hook["POST /api/jev/webhooks/reply<br/>no bearer - optional ?k= secret"]
@@ -1298,6 +1296,7 @@ Refresh notes (2026-10-05, discrepancy resolution):
 14. Map fold 2026-10-08: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/* via a mechanical prefix rewrite in index.js (old paths 410 'moved: this API relocated to /api/jev/map/*'); the /map/ page folded into a Map card in the /jev/ console's diagnostics panel (maps list, repo->embed->map creation, pointmap.js globe, instrument buttons, outcomes ledger, NSS prompt viewer); /map/ + /map/app.js 410 'moved: the map UI lives in the /jev/ console', /map/pointmap.js kept as the card's rendering-library asset; SOS paths moved to /api/jev/map/sos/*; verification: 71-route harness, 71/71 PASS incl. bearer no-key 401 / keyed pass on every transitioned route. Deploy etag 0f07bbe2. SPEC-MAP-FOLD-2026-10-08. Card v2 (same day): full parity with the old /map/ page - the card now carries the five original tabs (instrument / results / proofs / diagnostics / rounds) with every input field, button and info-tip (source select texts/files/dirs/repo, params N/D/d/seed/T/K/baseline/labels, globe controls, candidate ladder, wayfinder prompt, certificates + lean-check CI, azimuth/rayleigh/admission/axis-redundancy/spectroscopy/radius, candidate preview/consistency/positive control/outcome ledger, download/use-as-baseline); the diagnostics panel's anchor pills became view-switching tabs (7 tabs, one card visible at a time, WAI-ARIA); Map card styled to the taste-card family. Advisor design review caught a fatal port defect (dropped src.onchange handler assignment) pre-deploy. Follow-up (owner review): scorer, taste, router and spectral promoted out of the corpus tab to their own diag tabs - the diagnostics panel is now 11 view-switching tabs (tasks, learnings, automations, evolution, corpus, scorer, taste, router, spectral, visco, map), every card with its own tab button.
 15. Style + router round 2026-10-08 (parallel lanes + advisor, SPEC-STYLE-ROUTER-2026-10-08): (a) console-wide style harmonization - every diag-panel card and page-level section carries the map card's eyebrow/title/description heading pattern and surface treatment (additive jev-eyebrow/jev-title/jev-sub/jev-surface classes; scripts byte-identical); (b) prompt intake routed through the hierarchy router - selectForPrompt (jev-router) measures the prompt as a text artifact (scorer.bits), policy v15 adds 6 provisional text bands and 9 tool targets in the route.dispatch targets registry, decideActionsFromPrompt branches on the band target: model lanes (lane-draft 70b / lane-classify 8b / model:*) run the draft flow on that model (decided_via router:<target>), tool targets emit ONE gated route.dispatch action (in-process dispatch via handleJevCorpus / policy-named-credential fetch, never self-fetch, provisional bands never auto-execute), and no matching band falls back to the legacy 70b flow (router: no_band in intent_json); routeArtifact's run-row hash now includes policy_version (stale pre-promote rows no longer replay). Policy v15 promoted via the audited flow (learning l_1110f0713212b026, actor jenny, approvals_expired 2). Harness verify-prompt-router.mjs: 14/14 PASS post-promote (determinism compares decision signatures; a first routed call returns 201 Created because it creates the gated task). Deploy etags 806539f1 -> 8b0c6c6b.
 16. Timeseries wave + harness recatalog 2026-10-08 (this refresh): (a) 3 routes added - GET /api/jev/timeseries/selftest, GET /api/jev/timeseries/series and GET /api/jev/forecast/:series (Workers Analytics Engine dataset jev via the TS analytics_engine binding + the AE_SQL_TOKEN Account Analytics Read token; damped-trend Holt forecaster in jev-forecast-math.js, Python source of record tools/forecast-standard/forecast_ets.py, parity max |delta| = 0 on 4 fixtures; WAE write sites: wrapped deps.transit task_state/task_terminal, jev-review approval created/approved/rejected, recordRun corpus_run; tsWrite never throws into the request path); deploy etag chain 7f8fa641 -> dda2f487 -> f0c6d7c7 -> f2313fa6. (b) Falsification Harness column recataloged against the harnesses shipped since the 2026-10-06 refresh: visco snapback + hysteresis Yes (PR #296 - 852/852 snapback verdict classes + FPR-vs-analytic, 102.86 hysteresis anchor + 9 chain fixtures), router e2e corpus + scorer gold slice noted as Partial with their PR #297 findings (router 11/12 band + gate outcomes, F1 bands-doc defect open; scorer specificity 4/4 PASS, recall 0/4 = the v2.3 extractor-recall gap), spectral centroid fixture regenerated under the euclidean metric (PR #298). (c) The column header is renamed Harness -> Falsification Harness on every capability and inventory table. (d) The flow diagram gained the timeseries node + WAE external and a cron node replacing the client-cron edge, and was re-verified in both light and dark themes. 127 -> 130 routes. (e) Restoration pass after the merge: the parallel time-series doc edit at 99a7fdd894 had richer detail this refresh's wholesale file replace dropped - the datapoint schema line (index1/blob1..3/double1..2), the band formula, the G2 selftest-report fact, the sampling note, the Outcome Ledger + timesfm-tsfm-landscape composes-with cross-refs - all folded back in, and the selftest harness cell re-cataloged Partial -> Yes.
+17. Live endpoint audit 2026-10-08 (refs/endpoint-live-audit-harness-plan-2026-10-08.md, draft PR): every documented route live-tested in 4 passes against the deployed worker (operator bearer; destructive surfaces untouched - no approvals touched, no outcome rows written, no lead sent). Results: all 6 selftests green, sampled 401 gates clean, fail-closed validation correct, map instruments + scorer + forecast + repo-items (294 docs full text) functional on live data, outcomes ledger append-only 405 verified. Findings fixed in this commit: GET /contact 404 (page dropped in the v19 batch; rows removed), GET /api/jev/corpus/health 401 without bearer (auth cell + flow-diagram label corrected). Findings queued as fixes: POST /api/jev/tasks 500 + stack trace on validation errors (P0), searxng 500 on missing qs (relay passthrough), embed validation error names the wrong param, evolution v2 persistence confirmed on the manual cycle path (open defect narrows to the cron leg). Harness tally: 15 Yes / 19 Partial / 93 No across 123 unique routes; improvement plan P0-P3 in the refs doc.
 
 
 
