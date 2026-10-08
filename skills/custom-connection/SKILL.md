@@ -28,7 +28,7 @@ The credential is account-scoped, not a user-level API token:
 
 - Account `b57ee20cd90ebc4e4db28728e450a4b8` — "Shant@steadyorbitsystems.com's Account", created 2026-09-03. Stable Orbit client infrastructure.
 - **Workers.dev subdomain is `systems-a`** (renamed from `shant-b57`; old `*.shant-b57.workers.dev` URLs 530/error-1016 as of 2026-09-21 — stale hostname, not an outage). 0 zones, 0 Pages projects, 0 custom worker domains.
-- One Worker: `steady-orbit` (modified 2026-09-20) — the Steady Orbit Systems marketing site at `https://steady-orbit.systems-a.workers.dev/` (200) plus the SOS Agent API (`/api/fits` → 200 JSON; `/api/tts` → 404 "no route"). It consolidated the two former workers `old-queen-53c8` and `steady-orbit-sos`, which no longer exist as scripts (verified via `/accounts/{id}/workers/scripts` 2026-09-21). Local reference copy of the old sos worker: `documents/consultancy-bZPqW0gK/steady-orbit-sos/` (space-local working copy, not repo-truth).
+- One Worker: `steady-orbit` (modified 2026-09-20) — the Steady Orbit Systems marketing site at `https://steady-orbit.systems-a.workers.dev/` (200) plus the SOS Agent API (`/api/jev/map/sos/fits` → 200 JSON; `/api/tts` → 404 "no route"). It consolidated the two former workers `old-queen-53c8` and `steady-orbit-sos`, which no longer exist as scripts (verified via `/accounts/{id}/workers/scripts` 2026-09-21). Local reference copy of the old sos worker: `documents/consultancy-bZPqW0gK/steady-orbit-sos/` (space-local working copy, not repo-truth).
 
 ## Calibration
 

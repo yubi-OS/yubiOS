@@ -225,7 +225,7 @@ The campaign doctrine's canonical doc is `yubi-OS/yubiOS/docs/PR.md` (Public Rel
 | `08-press-kit-outreach.md` | press-kit checklist, media pitch, community post, FAQ |
 | `09-runbook-risk-measurement.md` | D-14 → D+30 runbook, risk/response table, weekly dashboard |
 
-Retrieval: the `corpus-recall` skill patterns — codeload tarball + grep, one-call full text via steady-orbit `POST /api/repo-items {"repo":"yubi-OS/knowledge","subdir":"docs"}`, or single raw reads. Adjacent grounding corpora for claim-ledger evidence links: `docs/adr`, `docs/architecture`, `docs/spec`, `docs/threat-model`, `docs/mission`, `docs/mitigate`. Provenance discipline: when a drafted claim cites a fact, trace it to the corpus doc and cross-check `research-db/archive.json` weights.
+Retrieval: the `corpus-recall` skill patterns — codeload tarball + grep, one-call full text via steady-orbit `POST /api/jev/map/repo-items {"repo":"yubi-OS/knowledge","subdir":"docs"}`, or single raw reads. Adjacent grounding corpora for claim-ledger evidence links: `docs/adr`, `docs/architecture`, `docs/spec`, `docs/threat-model`, `docs/mission`, `docs/mitigate`. Provenance discipline: when a drafted claim cites a fact, trace it to the corpus doc and cross-check `research-db/archive.json` weights.
 
 ## Output Artifacts
 

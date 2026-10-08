@@ -74,7 +74,7 @@ Routes (all under `/api/jev/corpus`, bearer-auth required except `/health`):
 | `/api/jev/corpus/lens` | POST | `{matrix, labels?, top?:K}` | `{candidates:[...], run_id}` |
 | `/api/jev/corpus/atom` | POST | `{matrix, max_flips?}` | `{plan:[{i,primitive,delta}], finalDelta, converged}` — DRY-RUN PLAN ONLY; execution is a gated directive, never inline |
 | `/api/jev/corpus/classify` | POST | `{sentence}` | `{verdict, refuter}` |
-| `/api/jev/corpus/placements` | POST | `{matrix, labels}` | audits, then POSTs vectors to the worker's OWN `/api/map` (internal fetch, same origin) and returns `{map_id, map_url}` |
+| `/api/jev/corpus/placements` | POST | `{matrix, labels}` | audits, then POSTs vectors to the worker's OWN `/api/jev/map` (internal fetch, same origin) and returns `{map_id, map_url}` |
 | `/api/jev/corpus/runs` | GET | — | last 50 run rows |
 | `/api/jev/corpus/selftest` | GET | — | runs all three selfTests; 200 all-pass / 500 with failing checks; result recorded as a run row |
 
@@ -138,7 +138,7 @@ Redesign (user-facing evolution sections must NOT show machine-readable dumps as
 
 - zernike-spectrum, phonon-dispersion, corpus-sonometer, injective-mapping export, nd-viewer/radar renderers: research instruments without an automation consumer; the lens/audit/atom/drift surfaces cover the RSI loop. Revisit when an automation stage wants them.
 - HubSpot system-of-record learning, Daytona sandbox lane, reply-webhook ?k= mandatory, guide->decided re-decide gap: carried over from SPEC-AUTOMATIONS; separate concern.
-- Embedding/vectorize changes: /api/map already does this.
+- Embedding/vectorize changes: /api/jev/map already does this.
 
 ## 8. Source paths (lanes: use THESE, fresh working copies only in session/)
 

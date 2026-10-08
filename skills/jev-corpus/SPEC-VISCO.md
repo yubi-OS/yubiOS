@@ -6,7 +6,7 @@
 
 1. **Re-grade (persistence) leg** — not revert R. Endpoint: score/load-unload persistence measurement. Input: baseline matrix + loaded matrix + (optional) a set of re-graded rows; output: persistence fraction, level moves.
 
-2. **Hysteresis rollup on /api/outcomes** — close supersedes chains into loops, compute sum |predicted − realized| per round.
+2. **Hysteresis rollup on /api/jev/map/outcomes** — close supersedes chains into loops, compute sum |predicted − realized| per round.
 
 3. **Prony relaxation fit over audit history** — from corpus runs history: fit ke + Σkj e^(−t/τj) per metric (dBc, z, v2).
 
@@ -25,7 +25,7 @@
 What the worker can compute deterministically:
 
 - persistence: given base matrix, loaded matrix, and re-graded rows (caller supplies), compute persisted fraction + dBc deltas via audit calls (audit is available internally).
-- hysteresis: query /api/outcomes rows (D1) grouped by baseline_id/supersedes chains → loop areas.
+- hysteresis: query /api/jev/map/outcomes rows (D1) grouped by baseline_id/supersedes chains → loop areas.
 - prony fit: from stored corpus runs (jev_corpus_runs table) — but does it store dBc history? Runs table stores input_hash + result. Need timestamps? The runbook says audit history accumulates. Fit needs an ordered series of (t, metric). The runs table has rows with result JSON; presumably has created_at. Fit K=1..2 arms Prony by least squares (nonlinear in tau; do a grid over tau + linear least squares for amplitudes — deterministic and simple).
 - snapback: given a series of (predicted, realized) deltas, detect sign inversion runs.
 

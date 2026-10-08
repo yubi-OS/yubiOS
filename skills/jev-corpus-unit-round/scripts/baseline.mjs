@@ -10,7 +10,7 @@
 //            (5 splices, needs the map id, retried on 503/1102 — it is the
 //            flakiest call) || admission || azimuth || axis-redundancy ||
 //            lens snapshot (needs the map; feeds /visco/mobility)
-//   Phase C: rungs read (GET /api/maps/:id -> ladder_candidates.rungs)
+//   Phase C: rungs read (GET /api/jev/map/maps/:id -> ladder_candidates.rungs)
 //
 // Usage:
 //   node baseline.mjs --dir <refs-dir> --out <workdir> [--skip skip.json] [--conc 12] [--controls 5]
@@ -25,7 +25,7 @@
 // here (fresh full-matrix scoring, plain threshold) — hysteresis belongs to
 // edited-row re-scores inside the cycle; control is the flakiest call
 // (worker 1102 CPU kill) and gets retries; /api/jev/corpus/placements 404s —
-// the direct /api/map texts flow is the working path.
+// the direct /api/jev/map texts flow is the working path.
 
 import fs from 'fs';
 import path from 'path';
@@ -98,7 +98,7 @@ const scoreP = (async () => {
 })();
 
 const mapP = (async () => {
-  const { json: m, ms } = await post('/api/map', { texts, names, labels: names, d: 9, seed: 20260906, threshold: 'median', K: 40, T: 0.05 }, 2);
+  const { json: m, ms } = await post('/api/jev/map', { texts, names, labels: names, d: 9, seed: 20260906, threshold: 'median', K: 40, T: 0.05 }, 2);
   tick('map_baseline', ms, { mapId: m.id });
   return m;
 })();
@@ -124,7 +124,7 @@ const controlP = (async () => {
   let ctrl = null, attempts = 0;
   for (let attempt = 1; attempt <= 3; attempt++) {
     attempts = attempt;
-    try { ctrl = (await post('/api/map/control', { baseline_id: map.id, texts, names, n_controls: CONTROLS })).json; break; }
+    try { ctrl = (await post('/api/jev/map/control', { baseline_id: map.id, texts, names, n_controls: CONTROLS })).json; break; }
     catch (e) { console.log(`CONTROL retry ${attempt}: ${String(e).slice(0, 120)}`); await new Promise(res => setTimeout(res, 2000)); }
   }
   const d = ctrl && ctrl.isolated_delta ? { neg: ctrl.isolated_delta.negative, zero: ctrl.isolated_delta.zero, pos: ctrl.isolated_delta.positive } : null;
@@ -141,7 +141,7 @@ const instP = (async () => {
     ['axis-redundancy', { map_id: map.id, K: 40 }],
   ];
   const results = await Promise.all(jobs.map(async ([nm, body]) => {
-    try { return [nm, (await post('/api/map/' + nm, body)).json]; } catch (e) { return [nm, { error: String(e).slice(0, 120) }]; }
+    try { return [nm, (await post('/api/jev/map/' + nm, body)).json]; } catch (e) { return [nm, { error: String(e).slice(0, 120) }]; }
   }));
   for (const [nm, j] of results) out[nm.replace('-', '_')] = j;
   out.lens = (await post('/api/jev/corpus/lens', { matrix, labels: names, top: 15, skip })).json;
@@ -153,7 +153,7 @@ const [audit, control, inst] = await Promise.all([auditP, controlP, instP]);
 
 // ---- Phase C: rungs ----
 const rungStart = Date.now();
-const mp = await (await fetch(`${BASE}/api/maps/${map.id}`, { headers: H })).json();
+const mp = await (await fetch(`${BASE}/api/jev/map/maps/${map.id}`, { headers: H })).json();
 const rungs = (mp.ladder_candidates || {}).rungs || [];
 tick('rungs_read', Date.now() - rungStart, { n: rungs.length });
 

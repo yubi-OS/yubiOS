@@ -1,6 +1,6 @@
 ---
 name: corpus-recall
-description: "Quickly reference and search data in the yubi-OS/knowledge repo (authored corpora with research-db provenance): mirror the whole repo as a codeload tarball into a session dir and grep it, one-call full-text retrieval via the steady-orbit /api/repo-items endpoint, or single-doc raw reads. Use when a session needs to recall, cite, or ground claims in the knowledge corpora without cloning. Triggers on 'corpus recall', 'knowledge repo lookup', 'yubi-OS/knowledge', 'recall from the corpus', 'cite the knowledge corpus'."
+description: "Quickly reference and search data in the yubi-OS/knowledge repo (authored corpora with research-db provenance): mirror the whole repo as a codeload tarball into a session dir and grep it, one-call full-text retrieval via the steady-orbit /api/jev/map/repo-items endpoint, or single-doc raw reads. Use when a session needs to recall, cite, or ground claims in the knowledge corpora without cloning. Triggers on 'corpus recall', 'knowledge repo lookup', 'yubi-OS/knowledge', 'recall from the corpus', 'cite the knowledge corpus'."
 ---
 
 # Corpus Recall
@@ -36,12 +36,12 @@ rg 'pattern' knowledge/*/research-db/archive.json   # provenance records
 
 Measured: 37+ corpora, 300+ docs, 828 files; grep over all docs is sub-minute in the Sauna sandbox (its disk I/O is slow; faster on a real box).
 
-## Path 2 — /api/repo-items one-call full text
+## Path 2 — /api/jev/map/repo-items one-call full text
 
 The steady-orbit worker's existing instrument, pointed at the knowledge repo:
 
 ```
-POST https://steady-orbit.systems-a.workers.dev/api/repo-items
+POST https://steady-orbit.systems-a.workers.dev/api/jev/map/repo-items
 {"repo":"yubi-OS/knowledge","subdir":"knowledge"}
 ```
 
@@ -72,5 +72,5 @@ Every authored doc cites its sources inline with jev weights (`(source: https://
 - Mirror per session, not per task; the repo is small enough that a fresh pull is always cheaper than staleness reasoning.
 - Never paste full doc bodies into chat; cite paths and quote the specific lines.
 - Prefer Path 1 for anything grep-shaped, Path 2 when you need full text in one shot (mapping, embedding, triage), Path 3 for known-path reads.
-- The `/api/repo-items` call MUST run from the worker executor (sandbox = CF 1010 on workers.dev) AND pass the Steady Orbit jev operator connection — the endpoint is bearer-gated (401 without the key).
+- The `/api/jev/map/repo-items` call MUST run from the worker executor (sandbox = CF 1010 on workers.dev) AND pass the Steady Orbit jev operator connection — the endpoint is bearer-gated (401 without the key).
 - knowledge-corpus-mint creates these corpora; corpus-recall only reads them.

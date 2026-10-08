@@ -13,7 +13,7 @@ Source of truth: `/AGENT.md` on the worker (https://steady-orbit.systems-a.worke
 
 ## Prerequisites
 
-- Connections: `Steady Orbit jev operator` (all `/api/jev/*` + `/api/map*` + `/api/outcomes` calls), `MASTER GIT SU` (GitHub). Every fetch carries a `User-Agent` header (Cloudflare 1010 / GitHub 403 otherwise).
+- Connections: `Steady Orbit jev operator` (all `/api/jev/*` + `/api/jev/map*` + `/api/jev/map/outcomes` calls), `MASTER GIT SU` (GitHub). Every fetch carries a `User-Agent` header (Cloudflare 1010 / GitHub 403 otherwise).
 - `GET /api/jev/corpus/selftest` must be all-pass before any result is trusted.
 
 ## The runflow (thirteen steps, one change)
@@ -24,19 +24,19 @@ Source of truth: `/AGENT.md` on the worker (https://steady-orbit.systems-a.worke
 
 3. **Frozen baseline check** (every step is required at every unit interval; run it with `scripts/baseline.mjs --dir <refs-dir> --out <workdir> --skip skip.json` — the reference harness encodes the optimized fetch plan below, ~100s sequential -> ~38s):
    - `POST /api/jev/corpus/audit {matrix, labels, nulls: 400}` — the gate statistic is `level_dbc = 20*log10(|z|)` (the verify_claims.py claim-8 law). NEVER gate on the `dbc` field: it is an L2 share-spectrum distance to the null vacuum, negative-when-close, and uncorrelated with z at cycle scale.
-   - `POST /api/map {texts, names, labels, d:9, seed:20260906, threshold:'median', K:40, T:0.05}` — the frozen frame. (`/api/jev/corpus/placements` may 404 with upstream error 1042; the direct `/api/map` texts flow is the working path.)
-   - `POST /api/map/control {baseline_id, texts, names}` (positive control), `POST /api/map/admission`, `/api/map/azimuth`, `/api/map/axis-redundancy` — record verdicts whatever they are.
+   - `POST /api/jev/map {texts, names, labels, d:9, seed:20260906, threshold:'median', K:40, T:0.05}` — the frozen frame. (`/api/jev/corpus/placements` may 404 with upstream error 1042; the direct `/api/jev/map` texts flow is the working path.)
+   - `POST /api/jev/map/control {baseline_id, texts, names}` (positive control), `POST /api/jev/map/admission`, `/api/jev/map/azimuth`, `/api/jev/map/axis-redundancy` — record verdicts whatever they are.
    - `POST /api/jev/corpus/lens {matrix, labels, top, skip}` — one snapshot per unit; it feeds `GET /api/jev/corpus/visco/mobility` (the saturation series).
 
    Fetch plan (identical results, just concurrent): **Phase A** score(conc 12) || map; **Phase B** audit || control (needs the map id; 3 retries on 503/1102 — it is the flakiest call, 33.9s measured and it 1102'd once at 257 docs) || admission || azimuth || axis-redundancy || lens; **Phase C** rungs read. The control CANNOT run before the map (it requires baseline_id), which is why it lands in Phase B rather than overlapping the score block directly.
 
-4. **Candidates.** Derive the skip-list from the outcomes ledger: every (doc, axis) pair with a final verdict of declined, reverted, or neutral gets `skip: ["name" | {name, axis}]` on the lens call. Then read the map's rungs: `GET /api/maps/:id` -> `ladder_candidates.rungs`. **Prefer rung JOINS** (`joins` non-empty, `isolated_delta` negative) over create-isolate rungs. Ground truth from nine rounds: generator-endorsed rung joins are 2/2 keeps; the lens on refs/ proposes only closed-class axis-fills (retired as a candidate source); caller-proposed adds went 0/5. The lens still earns its keep as a pre-flight detectability filter and through the mobility series.
+4. **Candidates.** Derive the skip-list from the outcomes ledger: every (doc, axis) pair with a final verdict of declined, reverted, or neutral gets `skip: ["name" | {name, axis}]` on the lens call. Then read the map's rungs: `GET /api/jev/map/maps/:id` -> `ladder_candidates.rungs`. **Prefer rung JOINS** (`joins` non-empty, `isolated_delta` negative) over create-isolate rungs. Ground truth from nine rounds: generator-endorsed rung joins are 2/2 keeps; the lens on refs/ proposes only closed-class axis-fills (retired as a candidate source); caller-proposed adds went 0/5. The lens still earns its keep as a pre-flight detectability filter and through the mobility series.
 
-5. **One atomic change.** Either a CHANGE (one section appended to one doc) or an ADD (one new doc). Authored content rules: backticked in-repo paths or concrete dated facts (taskcheck C6), no cross-axis vocabulary in headers or near-miss phrasing (C5), the doc's own subject only, "What this record does not claim" charters respected (C7 blocks companion/census docs unless `TASKCHECK_OVERRIDE` names a reason).
+5. **One atomic change.** Either a CHANGE (one section appended to one doc) or an ADD (one new doc). Authored content rules: backticked in-repo paths or concrete dated facts (taskcheck C6), no cross-axis vocabulary in section headers — word-boundary-aware since 2026-10-03 (C5: \\b${w}\\b matches the axis word as a standalone token; plural forms like "modes" no longer trip "mode"), the doc's own subject only, "What this record does not claim" charters respected (C7 blocks companion/census docs unless `TASKCHECK_OVERRIDE` names a reason).
 
-6. **Pre-register BEFORE measuring.** `POST /api/outcomes {baseline_id: <current map id>, target: {action:'change'|'add', name}, predicted_delta: <lens/rung number in the level convention>, task_check: {verdict:'pending', ...}}`. The target shape is an OBJECT (`{action, name}`); a bare string 422s.
+6. **Pre-register BEFORE measuring.** `POST /api/jev/map/outcomes {baseline_id: <current map id>, target: {action:'change'|'add', name}, predicted_delta: <lens/rung number in the level convention>, task_check: {verdict:'pending', ...}}`. The target shape is an OBJECT (`{action, name}`); a bare string 422s.
 
-7. **Preview.** `POST /api/map/preview {baseline_id, texts (FULL corpus), names, target, predicted_delta}`. A CHANGE must alter exactly one name vs the current baseline — after a keep, the corpus moved, so the next change previews against the POST-KEEP map (step 12's remap). Adds use `target: {action:'add', name}` with the new doc appended to texts/names.
+7. **Preview.** `POST /api/jev/map/preview {baseline_id, texts (FULL corpus), names, target, predicted_delta}`. A CHANGE must alter exactly one name vs the current baseline — after a keep, the corpus moved, so the next change previews against the POST-KEEP map (step 12's remap). Adds use `target: {action:'add', name}` with the new doc appended to texts/names.
 
 8. **Hysteresis re-score — always.** `POST /api/jev/corpus/scorer/score {doc:{name,text}, hysteresis:{low:0.45, high:0.55, pre_row: <current row>}}`. A plain re-score silently drops marginal bits (p in 0.45..0.55) and manufactures wrong signs (refs5 cycle 3: +0.60 refuted, the identical edit kept at -0.41 under hysteresis). For adds, `pre_row` is twelve zeros.
 
@@ -46,7 +46,7 @@ Source of truth: `/AGENT.md` on the worker (https://steady-orbit.systems-a.worke
 
 11. **Keep or revert.** KEEP iff realized level delta > 0 AND snapback does not halt. For a keep: run `bash tools/point-map/taskcheck_refs.sh <before-file> <after-file> <axis>` (C1-C7; for adds the C5/C6 subset applies, C2/C3 are change-shaped); on PASS commit via the Git Data API chain (blob -> tree with `base_tree` -> commit -> `PATCH /git/refs/heads/<branch>`), surfacing every response — a silent commit failure costs a manual recovery. For a REVERT: no commit, local file untouched, verdict `reverted` (or `neutral` on zero delta).
 
-12. **Realized row, THEN remap — in that order.** `POST /api/outcomes {..., observed_delta: <level delta>, task_check: {verdict: 'kept'|'reverted'|'neutral'|'declined', ...}, supersedes: <pre-registration id>}`. The superseding row MUST share `baseline_id` AND `target` with the row it supersedes, and pre-rows carry the map id current at their creation — so post the realized row BEFORE the keep's re-map advances the map id. Then `POST /api/map {texts, names, labels, baseline_id}` to re-freeze the frame for the next unit.
+12. **Realized row, THEN remap — in that order.** `POST /api/jev/map/outcomes {..., observed_delta: <level delta>, task_check: {verdict: 'kept'|'reverted'|'neutral'|'declined', ...}, supersedes: <pre-registration id>}`. The superseding row MUST share `baseline_id` AND `target` with the row it supersedes, and pre-rows carry the map id current at their creation — so post the realized row BEFORE the keep's re-map advances the map id. Then `POST /api/jev/map {texts, names, labels, baseline_id}` to re-freeze the frame for the next unit.
 
 13. **Rollups + record + PR.** `GET /api/jev/corpus/visco/hysteresis?baseline_id=<pre-row map id>` (supersedes-chain rollup), `/visco/prony?metric=dbc&arms=2`, `/visco/mobility` (the lens snapshot just added a point). Write `refs/jev-corpus-rsi-refsN-YYYY-MM-DD.md` (setup, the one change, findings, ledger ids, repro log pointer), commit on the branch, open the DRAFT PR. To merge on directive: REST `PATCH {draft:false}` does NOT clear a draft — use GraphQL `markPullRequestReadyForReview` with the PR's `node_id`, then `PUT /pulls/:n/merge {merge_method:'squash'}`.
 
@@ -58,11 +58,11 @@ Document every endpoint call with ids in a steps log (`steps-refsN-<date>.log`) 
 |---|---|
 | `POST /api/jev/corpus/audit {matrix, labels, nulls:400}` | idempotent per input hash; gate statistic is `level_dbc` |
 | `POST /api/jev/corpus/scorer/score {doc, hysteresis:{low,high,pre_row}}` | ~$0.0002/call; hysteresis is mandatory on re-scores |
-| `POST /api/map`, `/api/map/preview`, `/api/map/control`, `/api/map/admission`, `/api/map/azimuth`, `/api/map/axis-redundancy` | frozen-frame family; d:9 seed:20260906 median K:40 |
-| `POST /api/outcomes` | pre-register then realized-with-supersedes; target is an object |
+| `POST /api/jev/map`, `/api/jev/map/preview`, `/api/jev/map/control`, `/api/jev/map/admission`, `/api/jev/map/azimuth`, `/api/jev/map/axis-redundancy` | frozen-frame family; d:9 seed:20260906 median K:40 |
+| `POST /api/jev/map/outcomes` | pre-register then realized-with-supersedes; target is an object |
 | `POST /api/jev/corpus/visco/snapback {series}` | level-convention series only |
 | `GET /api/jev/corpus/visco/hysteresis?baseline_id=N`, `/visco/prony`, `/visco/mobility` | rollups |
-| `GET /api/maps/:id` | `ladder_candidates.rungs` = the structure-level generator |
+| `GET /api/jev/map/maps/:id` | `ladder_candidates.rungs` = the structure-level generator |
 
 ## Failure lessons baked into the flow
 
