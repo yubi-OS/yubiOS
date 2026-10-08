@@ -186,7 +186,9 @@ LEAN_ENUM_BLOCK = r"""
 -- check_lean_axioms.py (LEAN_ENUM_BLOCK comments).
 open Lean in
 run_cmd do
-  let env ← Lean.Elab.Command.liftCoreM Lean.getEnv
+  -- Advisor fixup 1: `getEnv` directly in CommandElabM (LEAN_ENUM_BLOCK fallback F2;
+  -- the `Lean.getEnv` spelling does not resolve as a class-method path).
+  let env ← getEnv
   let modIdx? := env.getModuleIdx? env.mainModuleName
   let inMainModule : Name → Bool := fun n =>
     match modIdx?, env.getModuleIdxFor? n with
@@ -195,13 +197,20 @@ run_cmd do
     | none, none => true
     | none, some _ => false
   let mut printed : Nat := 0
-  for (n, ci) in env.constants.toList do
+  -- Advisor fixup 2: SMap has no `toList`; iterate the underlying HashMap
+  -- (LEAN_ENUM_BLOCK fallback F1).
+  for (n, ci) in env.constants.map.toList do
     if inMainModule n then
       match ci with
       | .theoremInfo _ =>
         let axioms ← Lean.Elab.Command.liftCoreM (Lean.collectAxioms n)
         let axiomStrs := axioms.toList.map (fun a => a.toString)
-        Lean.IO.println s!"AXIOM_LINE {n.toString} -> [{String.intercalate \", \" axiomStrs}]"
+        -- Advisor fixup 3: `s!"...{...}..."` interpolation with embedded escaped
+        -- quotes is NOT valid term syntax inside interpolation braces (CI run
+        -- 37706893911: "expected '}'"). Use plain string concatenation and
+        -- logInfo (LEAN_ENUM_BLOCK fallback F4; AXIOM_LINE_RE tolerates the
+        -- `file:line:col: info:` prefix).
+        logInfo ("AXIOM_LINE " ++ n.toString ++ " -> [" ++ String.intercalate ", " axiomStrs ++ "]")
         printed := printed + 1
       | _ => pure ()
   if printed == 0 then
