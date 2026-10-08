@@ -198,6 +198,18 @@ The math is a port, never a re-derivation: the system of record is `papers/data/
 
 Bearer-auth (JEV_API_KEY) on all four routes. Lens features are computed only when the artifact declares a registered gold family via `lens_family` on a canonical 512x512 gray, so arbitrary artifacts cannot false-positive the lens bands. Bands live in the policy (v12), not in code.
 
+## Time series (WAE storage + forecasting, shipped 2026-10-08)
+
+Every jev event lands as a datapoint in Workers Analytics Engine dataset `jev` (binding `TS`; D1 stays the append-only system of record, WAE is the trajectory tier with 3-month retention). Series: `task_state` + `task_terminal` (wrapped deps.transit), `corpus_run` (inside recordRun; double1 = level_dbc ?? dbc ?? 0), `approval` (create/approve/reject). tsWrite swallows every error.
+
+| Endpoint | What it does |
+|---|---|
+| GET /api/jev/timeseries/selftest | math falsification gates G1-G6 + WAE write/read-back probe + schema probe (the empirical column arbiter) |
+| GET /api/jev/timeseries/series | series inventory GROUP BY index1 (n/first/last) |
+| GET /api/jev/forecast/:series?h=N | damped-trend Holt ETS v1 forecast with honest quality flags (insufficient_series n<8, low_r2); fail-closed 503 MISSING_READ_TOKEN / 422 BAD_SERIES_NAME / 502 WAE_SQL_ERROR |
+
+Forecasts advise, never authorize. Harness: pre-registered 6-gate falsification corpus; G2 (band coverage) ships FAILING honestly at 0.84 vs the pre-registered [0.88,0.98] (grid-selected residual_sd shrinks on short noisy series) - the gate was NOT moved; v2 fix (train-only residual_sd) is a future major bump. Python source of record: tools/forecast-standard/forecast_ets.py (parity max delta 0 on 4 fixtures). Deploy lessons: secret_text bindings are plain strings (not .get()); the WAE time column is `timestamp` (SELECT * schema probe) but ORDER BY requires the column in the SELECT list; curl -F=x mangles multipart metadata (CF 10021). SPEC: skills/jev-timeseries/SPEC-TIMESERIES-2026-10-08.md.
+
 ## Full-content ingestion
 
 `chunked/v1` uses `@cf/baai/bge-base-en-v1.5`, explicit mean pooling, contiguous Unicode-safe chunks of at most 400 UTF-8 bytes, byte-length-weighted mean over chunk vectors, then L2 normalization. Every input byte is submitted, including content after character 2,000. Coverage is input coverage, not a claim that an embedding preserves all meaning.

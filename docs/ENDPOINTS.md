@@ -362,6 +362,35 @@ Composes with:
 - Taste Engine + Spectral Standard + Lens Standard (the measurement layer)
 - Jev Orchestrator (policy versions, gated dispatch, task ledger, approvals)
 
+### Time Series (WAE storage + ETS forecasting)
+
+Time-series substrate for the /jev/ ecosystem: Workers Analytics Engine (WAE) is the trajectory
+tier (D1 stays the append-only system of record; WAE retention is 3 months and sampling is
+irrelevant at jev volume). Every jev event lands as a datapoint in dataset `jev`:
+`index1` = series name, `blob1..3` = ids/dimensions, `double1..2` = values. Series: `task_state`
+and `task_terminal` (wrapped `deps.transit`), `corpus_run` (inside `recordRun`), `approval`
+(create/approve/reject). `tsWrite` swallows every error - telemetry never breaks orchestration.
+Binding `TS` (analytics_engine, dataset jev) + `AE_SQL_TOKEN` (secret_text, Account Analytics
+Read). Forecaster: damped-trend Holt ETS v1 (no seasonality), pre-registered grid
+(alpha/beta 0.05..0.95, phi 0.98, holdout last 20%), band = 1.96 x residual_sd x sqrt(i),
+flags `insufficient_series` (n<8) / `low_r2`. Forecasts advise, never authorize. Harness: the
+six-gate falsification corpus ships with G2 (band coverage) FAILING honestly at 84/100 vs the
+pre-registered [88,98]% (grid-selected residual_sd shrinks on short noisy series); the gate was
+not moved and v1 reports the failure in every selftest response.
+
+Module parts: jev-timeseries.js, jev-forecast-math.js; Python source of record
+tools/forecast-standard/forecast_ets.py (parity max |delta| = 0 on 4 fixtures)
+
+| Method | Path | Auth | What it does | Harness |
+|---|---|---|---|---|
+| GET | `/api/jev/timeseries/selftest` | bearer | Math falsification gates (G1-G6) + WAE write/read-back probe + schema probe (empirical column arbiter) | Yes |
+| GET | `/api/jev/timeseries/series` | bearer | Series inventory: index1 GROUP BY with n/first/last | No |
+| GET | `/api/jev/forecast/:series?h=5` | bearer | SQL read (last 1000 points) -> etsForecast with honest quality flags; fail-closed 503 MISSING_READ_TOKEN / 422 BAD_SERIES_NAME / 502 WAE_SQL_ERROR | Partial |
+
+Composes with: Jev Orchestrator (the write sites ride its transit/recordRun/approval paths);
+Outcome Ledger (phase-2 {predicted, realized} rows are the visco hysteresis shape);
+Knowledge mint `timesfm-tsfm-landscape` (yubi-OS/knowledge PR #334) grounds the TSFM landscape.
+
 ### Wayfinder Point-Map (frozen-frame geometric instrument)
 
 The pointmap/0.2 instrument: maps documents or numeric vectors onto a frozen binary/PCA/sphere frame (PCA, binary placement, stereographic lift), compares real edits against that same frame, and exposes the diagnostic family - math diagnostics, candidate preview, positive control, exact isolation ledger, radius profiles, axis-redundancy / rayleigh / azimuth admission trials, perturbation consistency, rung placement. Geometry diagnoses movement; an independent task check always decides usefulness. Serves the /map/ browser UI and its dependency-free numeric core.
@@ -593,7 +622,7 @@ Composes with:
 
 ## Endpoint Inventory
 
-The complete 127-route inventory (121 from Lane A + 10 added 2026-10-06; the 2026-10-08 auth pass + SOS fold took it to 129 and the map fold to 127 canonical: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/*, the /map/ page folded into the /jev/ console's Map card; old paths serve 410 aliases), grouped by
+The complete 127-route inventory (121 from Lane A + 10 added 2026-10-06; the 2026-10-08 auth pass + SOS fold took it to 129 and the map fold to 127 canonical, and the time-series round took it to 130: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/*, the /map/ page folded into the /jev/ console's Map card; old paths serve 410 aliases), grouped by
 module part. Auth is `bearer` (JEV_API_KEY) on every /api/jev route except the two
 health endpoints and the reply webhook. Six rows are CORS preflights (OPTIONS).
 
@@ -788,6 +817,14 @@ Parity source of record: tools/lens-standard (on draft PR #292, not yet on main)
 | GET | `/api/jev/route/bands` | bearer | Active band table from policy (modality, feature clauses, target, calibration status); default_on_no_band = blocked | No |
 | POST | `/api/jev/route/selftest` | bearer | Router selftest (POST, not GET): modality precedence, band edge semantics, pair-band clauses, fail-closed defaults | No |
 | GET | `/api/jev/route/runs` | bearer | Recent route run rows with measurement, band selection and gate verdict | No |
+
+### jev-timeseries.js (time series + forecasting) - 3 routes
+
+| Method | Path | Auth | Description | Harness |
+|---|---|---|---|---|
+| GET | `/api/jev/timeseries/selftest` | bearer | Math gates G1-G6 + WAE write/read-back probe + schema probe (meta.columns) | Yes |
+| GET | `/api/jev/timeseries/series` | bearer | Series inventory GROUP BY index1 | No |
+| GET | `/api/jev/forecast/:series` | bearer | ETS forecast from the WAE series with quality flags | Partial |
 
 ### Rate limits and notes
 
@@ -1243,6 +1280,7 @@ Refresh notes (2026-10-05, discrepancy resolution):
 13. Auth pass + SOS fold 2026-10-08: every non-site-tool route bearer-gated with requireOperatorAuth (map engine, outcomes ledger incl. the previously open DELETE/PUT/PATCH, ingestion repo-items/embed/vector-search, the SOS business API); SOS API relocated to /api/jev/map/sos/* with old /api/jev/map/sos/assess, /api/jev/map/sos/fits, /api/jev/map/sos/fits/:id, /api/jev/map/sos/narrate paths returning 410; /sos page routes + KV assets removed; the /map/ UI gained the /jev/-style operator-key prompt sharing the jev_key sessionStorage entry. 131 -> 129 routes. SPEC-AUTH-SOS-2026-10-08.
 14. Map fold 2026-10-08: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/* via a mechanical prefix rewrite in index.js (old paths 410 'moved: this API relocated to /api/jev/map/*'); the /map/ page folded into a Map card in the /jev/ console's diagnostics panel (maps list, repo->embed->map creation, pointmap.js globe, instrument buttons, outcomes ledger, NSS prompt viewer); /map/ + /map/app.js 410 'moved: the map UI lives in the /jev/ console', /map/pointmap.js kept as the card's rendering-library asset; SOS paths moved to /api/jev/map/sos/*; verification: 71-route harness, 71/71 PASS incl. bearer no-key 401 / keyed pass on every transitioned route. Deploy etag 0f07bbe2. SPEC-MAP-FOLD-2026-10-08. Card v2 (same day): full parity with the old /map/ page - the card now carries the five original tabs (instrument / results / proofs / diagnostics / rounds) with every input field, button and info-tip (source select texts/files/dirs/repo, params N/D/d/seed/T/K/baseline/labels, globe controls, candidate ladder, wayfinder prompt, certificates + lean-check CI, azimuth/rayleigh/admission/axis-redundancy/spectroscopy/radius, candidate preview/consistency/positive control/outcome ledger, download/use-as-baseline); the diagnostics panel's anchor pills became view-switching tabs (7 tabs, one card visible at a time, WAI-ARIA); Map card styled to the taste-card family. Advisor design review caught a fatal port defect (dropped src.onchange handler assignment) pre-deploy. Follow-up (owner review): scorer, taste, router and spectral promoted out of the corpus tab to their own diag tabs - the diagnostics panel is now 11 view-switching tabs (tasks, learnings, automations, evolution, corpus, scorer, taste, router, spectral, visco, map), every card with its own tab button.
 15. Style + router round 2026-10-08 (parallel lanes + advisor, SPEC-STYLE-ROUTER-2026-10-08): (a) console-wide style harmonization - every diag-panel card and page-level section carries the map card's eyebrow/title/description heading pattern and surface treatment (additive jev-eyebrow/jev-title/jev-sub/jev-surface classes; scripts byte-identical); (b) prompt intake routed through the hierarchy router - selectForPrompt (jev-router) measures the prompt as a text artifact (scorer.bits), policy v15 adds 6 provisional text bands and 9 tool targets in the route.dispatch targets registry, decideActionsFromPrompt branches on the band target: model lanes (lane-draft 70b / lane-classify 8b / model:*) run the draft flow on that model (decided_via router:<target>), tool targets emit ONE gated route.dispatch action (in-process dispatch via handleJevCorpus / policy-named-credential fetch, never self-fetch, provisional bands never auto-execute), and no matching band falls back to the legacy 70b flow (router: no_band in intent_json); routeArtifact's run-row hash now includes policy_version (stale pre-promote rows no longer replay). Policy v15 promoted via the audited flow (learning l_1110f0713212b026, actor jenny, approvals_expired 2). Harness verify-prompt-router.mjs: 14/14 PASS post-promote (determinism compares decision signatures; a first routed call returns 201 Created because it creates the gated task). Deploy etags 806539f1 -> 8b0c6c6b.
+16. Time-series round 2026-10-08 (jev-timeseries skill, ideate-solo winner 19/20, 4 lanes + advisor): 3 routes added (timeseries selftest/series/forecast); inventory 127 -> 130; new bindings TS (analytics_engine, dataset jev) + AE_SQL_TOKEN (secret_text); WAE is the trajectory tier (D1 stays the append-only system of record); damped-trend ETS forecaster pre-registered and parity-proven vs Python (max delta 0), G2 band coverage ships FAILING honestly at 0.84 (v1 flagged, v2 fix recorded); deploy lessons: secret_text bindings are plain strings (not .get()), WAE time column empirically `timestamp` via the SELECT * schema probe but ORDER BY requires the column in SELECT, curl -F=x mangles multipart metadata (10021); her concurrent CF push was reconciled by re-porting hunks onto the fresh bundle. Deploy etag chain 7f8fa641 -> dda2f487 -> f0c6d7c7 -> f2313fa6. SPEC-TIMESERIES-2026-10-08.
 
 
 
