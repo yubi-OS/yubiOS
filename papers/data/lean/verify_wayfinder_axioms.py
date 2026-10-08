@@ -20,17 +20,26 @@ Pass criteria (all must hold):
      pin_statements.py, which is imported from this script's directory; if the
      module is missing while pins exist, the gate FAILS (fail-closed) rather
      than certifying statements it could not check.
-   6. DEFINITION PINS (Lane B, CI hardening round 2): the manifest's
-     `definitions` block pins a sha256 over EVERY top-level def/structure/
-     inductive/abbrev/instance/class declaration in the .lean source (plus a
-     per-definition `decls` map). This closes the hole statement pins leave:
-     redefining a definition (e.g. `absSq := 0` in AzimuthBounds.lean)
+   6. COMMAND PINS (Lane B, CI hardening round 3, commands-v2): the manifest's
+     `definitions` block pins a sha256 over EVERY top-level command in the
+     .lean source -- imports, open/namespace/end wrappers, attribute lines
+     (hashed WITH the declaration they decorate), declarations of any kind,
+     set_option lines, #print/#eval/#check, notation/syntax/macro/elab,
+     run_cmd blocks (plus a per-command `decls` map). This closes the hole
+     statement pins leave: redefining a definition (e.g. `absSq := 0` in
+     AzimuthBounds.lean) or ADDING an attribute-prefixed declaration (e.g.
+     `@[instance_reducible, instance] def badLE : LE Int := ⟨fun _ _ =>
+     True⟩`, which round 2's line-start keyword regex missed entirely)
      leaves every theorem STATEMENT text unchanged -- all statement pins
-     match -- while the theorems collapse to trivialities. A definitions
-     mismatch fails the gate until the manifest's definitions block is
-     regenerated in the same PR. Fail-closed like the statement gate: a
-     missing block, a missing lean source, a missing pin_statements module,
-     or a vacuous zero-definition pin is a FAILURE, never a skip.
+     match -- while the theorems collapse to trivialities. theorem/lemma/
+     example PROOF BODIES are excluded (kernel-checked content), so a
+     proof-only rewrite passes. A commands mismatch fails the gate until
+     the manifest's definitions block is regenerated in the same PR.
+     Fail-closed like the statement gate: a missing block, a block whose
+     schema is not 'commands-v2' (an old definition-pins/1 defs-only block
+     FAILS with a regenerate message -- it can never pass vacuously), a
+     missing lean source, a missing pin_statements module, or a vacuous
+     zero-command pin is a FAILURE, never a skip.
 
 Exit 0 on pass, 1 on failure, 2 on bad usage.
 """
@@ -178,19 +187,34 @@ def check_statement_pins(manifest: dict, lean_path: str | None,
 
 def check_definition_pins(manifest: dict, lean_path: str | None,
                           failures: list[str]) -> int:
-    """Lane B definitions-pin gate. Returns the number of definitions verified.
+    """Lane B definitions-pin gate (commands-v2). Returns commands verified.
 
     Fail-closed: the definitions block is REQUIRED on every scope manifest
     (a manifest without one fails, not skips -- otherwise a mutation PR
-    could simply delete the block). A missing lean source or a missing
-    pin_statements module is likewise a failure.
+    could simply delete the block). A block whose schema is not
+    'commands-v2' also FAILS -- an old definition-pins/1 defs-only block
+    hashes only line-start keyword-matched declarations and cannot verify
+    command hashing, so it must never pass vacuously. A missing lean source
+    or a missing pin_statements module is likewise a failure.
     """
-    if not isinstance(manifest.get("definitions"), dict):
+    block = manifest.get("definitions")
+    if not isinstance(block, dict):
         failures.append(
             "manifest has no 'definitions' block; every scope manifest must "
             "pin its lean_file's definitions (fail-closed). Regenerate in the "
             "same PR: python3 papers/data/lean/pin_statements.py pin "
             "<manifest.json>"
+        )
+        return 0
+    if block.get("schema") != "commands-v2":
+        failures.append(
+            f"definitions block has schema '{block.get('schema')}' but this "
+            "gate requires 'commands-v2' (the whole-command extractor): an "
+            "older definition-pins/1 defs-only block cannot be verified "
+            "against command hashing -- an @[...]-prefixed declaration or a "
+            "new set_option/#print line would pass it vacuously. Regenerate "
+            "with the commands-v2 extractor in the same PR: python3 "
+            "papers/data/lean/pin_statements.py pin <manifest.json>"
         )
         return 0
     if lean_path is None or not os.path.isfile(lean_path):
