@@ -389,15 +389,57 @@ def _axiom_set_problems(
     return problems
 
 
+_AUTOGEN_SUFFIX_RE = re.compile(
+    # Lean auto-generates theorems for every def/structure/inductive (and for
+    # tactic proofs): equational lemmas (eq_N, eq_def), structure machinery
+    # (mk.inj / mk.injEq / mk.sizeOf_spec / inj / injEq / sizeOf_spec),
+    # inductive recursors (brecOn / brecBelow / below / rec / recOn /
+    # casesOn / noConfusion / noConfusionType) and tactic auxiliaries
+    # (_proof_N[_N]). The FIRST CI run of the enumerate gate measured
+    # 188 enumerated constants vs 90 manifest entries on CurvedCorpus.lean.
+    r"^(?:_proof_\d+(?:_\d+)*|eq_\d+|eq_def|eq_self|eq_iff|inj|injEq|"
+    r"sizeOf_spec|sizeOf|brecOn|brecBelow|below|rec|recOn|casesOn|"
+    r"noConfusion|noConfusionType)$"
+)
+
+
 def _require_coverage(
     manifest_path: Path, lean_names: set[str]
 ) -> list[str]:
     """COVERAGE (check d): every Lean-listed theorem name must appear in
-    the manifest's theorem list. Fail listing the missing ones."""
+    the manifest's theorem list. Fail listing the missing ones.
+
+    Round-2 amendment (2026-10-08): Lean auto-generates theorems no source
+    regex can see (Foo.mk.inj, Foo.eq_1, Foo._proof_1_1, Foo.brecOn, ...).
+    That class is deterministic given the source, is axiom-checked below
+    like every other entry, and the definitions-hash gate (Lane B) already
+    fails on any definition change, so a manifest entry per auto-generated
+    name would be regeneration churn without extra safety. Tolerate a
+    missing name ONLY when its last component matches the auto-generation
+    suffix family; print the tolerated count for observability. SAFETY: the
+    load-bearing gate is the axiom-set check - _axiom_set_problems runs on
+    EVERY enumerated theorem regardless of coverage, so a hidden sorry
+    (sorryAx) or an axiom cheat fails there no matter what the theorem is
+    named; a rogue theorem imitating the suffix family but proven only from
+    the permitted core axioms cannot establish anything new. Coverage on
+    non-auto-generated names remains exact."""
     problems: list[str] = []
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     listed = [t["name"] for t in manifest.get("theorems", [])]
-    missing = sorted(lean_names - set(listed))
+    listed_set = set(listed)
+    missing = []
+    tolerated = 0
+    for name in sorted(lean_names - listed_set):
+        last = name.rsplit(".", 1)[-1]
+        if _AUTOGEN_SUFFIX_RE.match(last):
+            tolerated += 1
+            continue
+        missing.append(name)
+    if tolerated:
+        print(
+            f"coverage: {tolerated} Lean auto-generated theorem(s) tolerated "
+            f"(every enumerated entry is axiom-checked regardless)"
+        )
     if missing:
         problems.append(
             f"coverage: {len(missing)} Lean-listed theorem(s) missing from "
