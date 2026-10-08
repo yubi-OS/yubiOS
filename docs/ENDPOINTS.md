@@ -19,7 +19,7 @@ Resolution refresh (2026-10-05, lanes R1+R2, verified by R3):
 | Lane | Deliverable | Headline numbers |
 |---|---|---|
 | R1 | AGENT.md doc additions (KV write) | 15 new rows: public relays, site surfaces, CORS preflights, map/app.js, audio replies, jev pause GET, approvals guide POST, fits CRUD |
-| R2 | Code patches (index.js, exactly 4 hunks) | requireOperatorAuth added to DELETE /api/maps/:id and DELETE /api/fits/:id; n_controls usage-block comment 2..12 -> 2..6 |
+| R2 | Code patches (index.js, exactly 4 hunks) | requireOperatorAuth added to DELETE /api/jev/map/maps/:id and DELETE /api/jev/map/sos/fits/:id; n_controls usage-block comment 2..12 -> 2..6 |
 | R3 | Fresh cross-reference (updated KV AGENT.md vs patched bundle) | 110 documented, 0 code-only, 0 doc-only, 0 actionable discrepancies |
 
 Reconciliation: Lane A has 121 route rows over 109 unique paths. Lane C assigns 85
@@ -196,7 +196,7 @@ Key invariants:
 - Nulls default 100, cap 1000; scorer carries 0.45/0.55 hysteresis v2.1 and ~$0.0002/call cost
 
 Composes with:
-- Wayfinder Point-Map (placements POSTs vectors to the worker's own /api/map; MAP_FAILED relays rejections)
+- Wayfinder Point-Map (placements POSTs vectors to the worker's own /api/jev/map; MAP_FAILED relays rejections)
 - Jev Orchestrator (lens candidates become gated directives; audit results are data, never authorization)
 - Visco Instruments (visco endpoints audit base+loaded internally using this domain's computeAudit path)
 - Automations (corpus builtins wrap audit/lens/classify)
@@ -370,20 +370,19 @@ Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| POST | `/api/map` | bearer | Partial - Lean bounds + regression suite |
-| GET | `/api/maps` | bearer | No |
-| DELETE\|GET | `/api/maps/:id` | bearer | No |
-| POST | `/api/maps/compare` | bearer | No |
-| POST | `/api/map/preview` | bearer | Partial - Lean bounds + regression suite |
-| POST | `/api/map/control` | bearer | Yes - positive-control falsification endpoint |
-| POST | `/api/map/axis-redundancy` | bearer | Yes - matched-null falsification trials |
-| POST | `/api/map/admission` | bearer | Yes - matched-null falsification trials |
-| POST | `/api/map/azimuth` | bearer | Yes - matched-null falsification trials |
-| POST | `/api/map/rayleigh` | bearer | Yes - matched-null falsification trials |
-| POST | `/api/map/consistency` | bearer | Partial - sign-agreement control |
+| POST | `/api/jev/map` | bearer | Partial - Lean bounds + regression suite |
+| GET | `/api/jev/map/maps` | bearer | No |
+| DELETE\|GET | `/api/jev/map/maps/:id` | bearer | No |
+| POST | `/api/jev/map/maps/compare` | bearer | No |
+| POST | `/api/jev/map/preview` | bearer | Partial - Lean bounds + regression suite |
+| POST | `/api/jev/map/control` | bearer | Yes - positive-control falsification endpoint |
+| POST | `/api/jev/map/axis-redundancy` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/admission` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/azimuth` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/rayleigh` | bearer | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/consistency` | bearer | Partial - sign-agreement control |
 | GET | `/map/` | none | No |
 | GET | `/map/pointmap.js` | none | No |
-| GET | `/map/app.js` | none | No |
 
 Module parts: index.js (map routes + PM numeric core + map handlers), solar-rbs-entry.mjs (site adapter; delegates the core /api + /map surface)
 
@@ -398,25 +397,25 @@ Key invariants:
 - Transition declaration: a corpus differing by more than the declared transition is 409, persisted:false
 - Positive-control recipe is fixed (cutpaste-splice 0.25, centered window); tuning knobs are rejected
 - Deletion is never recommended or executed; the 12 NSS axes are an explicitly unvalidated lens dictionary
-- Stored maps above ~1.9 MB overflow to KV (map-json:<id>) behind a D1 pointer; DELETE /api/maps/:id is operator bearer-auth guarded (R2 patch: 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token)
+- Stored maps above ~1.9 MB overflow to KV (map-json:<id>) behind a D1 pointer; DELETE /api/jev/map/maps/:id is operator bearer-auth guarded (R2 patch: 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token)
 
 Composes with:
 - Ingestion & Embeddings (embeds full-content texts on the frozen frame; content-hash cache shared)
 - Outcome Ledger (preview/control feed pre-registration; observed_delta recomputed via PM.explainTransition)
-- Corpus Math (placements composes with /api/map)
+- Corpus Math (placements composes with /api/jev/map)
 - Jev Orchestrator (mapHandler wired into handleJevRequest so jev tasks can drive the map)
 
 ### Ingestion & Embeddings (full-content chunked/v1)
 
-Turns repositories and raw text into numeric material for the map: /api/repo-items fetches sorted full-text repo items from GitHub (with resolved_ref and truncation flags), /api/embed runs chunked/v1 full-content ingestion (bge-base-en-v1.5, explicit mean pooling, <=400-byte UTF-8 chunks, byte-length-weighted mean, L2 normalization) with a content-hash embedding cache, and /api/vector/search queries the stored Vectorize index. Coverage is input coverage, not a claim about preserved meaning.
+Turns repositories and raw text into numeric material for the map: /api/jev/map/repo-items fetches sorted full-text repo items from GitHub (with resolved_ref and truncation flags), /api/jev/map/embed runs chunked/v1 full-content ingestion (bge-base-en-v1.5, explicit mean pooling, <=400-byte UTF-8 chunks, byte-length-weighted mean, L2 normalization) with a content-hash embedding cache, and /api/jev/map/vector/search queries the stored Vectorize index. Coverage is input coverage, not a claim about preserved meaning.
 
 Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| POST | `/api/repo-items` | bearer | No |
-| POST | `/api/embed` | bearer | No |
-| POST | `/api/vector/search` | bearer | No |
+| POST | `/api/jev/map/repo-items` | bearer | No |
+| POST | `/api/jev/map/embed` | bearer | No |
+| POST | `/api/jev/map/vector/search` | bearer | No |
 
 Module parts: index.js (embeddings, repo fetch, vector search, chunked/v1 cache)
 
@@ -443,10 +442,10 @@ Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| GET\|POST | `/api/outcomes` | bearer | No |
-| GET\|POST | `/api/outcomes?baseline_id=` | bearer | No |
-| GET\|POST | `/api/outcomes?frame_id=` | bearer | No |
-| DELETE | `/api/outcomes/*` † | bearer | No |
+| GET\|POST | `/api/jev/map/outcomes` | bearer | No |
+| GET\|POST | `/api/jev/map/outcomes?baseline_id=` | bearer | No |
+| GET\|POST | `/api/jev/map/outcomes?frame_id=` | bearer | No |
+| DELETE | `/api/jev/map/outcomes/*` † | bearer | No |
 
 Module parts: index.js (outcomes routes + 405 guard on PUT/PATCH/DELETE)
 
@@ -469,16 +468,16 @@ Composes with:
 
 ### Repo Assessment (SOS Agent FIT)
 
-The original Steady Orbit business API, relocated 2026-10-08 into the bearer-gated /api/map/sos/* surface: POST /api/map/sos/assess fetches and assesses a GitHub repository into a FIT.json report, GET /api/map/sos/fits lists the stored assessment population, and POST /api/map/sos/narrate produces natural-language narration over an assessment using Workers AI. The old /api/assess, /api/fits, /api/fits/:id and /api/narrate paths return 410 gone.
+The original Steady Orbit business API, relocated 2026-10-08 into the bearer-gated /api/jev/map/sos/* surface: POST /api/jev/map/sos/assess fetches and assesses a GitHub repository into a FIT.json report, GET /api/jev/map/sos/fits lists the stored assessment population, and POST /api/jev/map/sos/narrate produces natural-language narration over an assessment using Workers AI. The old /api/jev/map/sos/assess, /api/jev/map/sos/fits, /api/jev/map/sos/fits/:id and /api/jev/map/sos/narrate paths return 410 gone.
 
 Endpoints:
 
 | Method | Path | Auth | Harness |
 |---|---|---|---------|
-| POST | `/api/assess` | bearer | No |
-| GET | `/api/fits` | bearer | No |
-| POST | `/api/narrate` | bearer | No |
-| DELETE\|GET | `/api/fits/:id` † | bearer | No |
+| POST | `/api/jev/map/sos/assess` | bearer | No |
+| GET | `/api/jev/map/sos/fits` | bearer | No |
+| POST | `/api/jev/map/sos/narrate` | bearer | No |
+| DELETE\|GET | `/api/jev/map/sos/fits/:id` † | bearer | No |
 
 Module parts: index.js (assess/fits/narrate routes, refineBasis)
 
@@ -486,12 +485,12 @@ Bindings: DB, AI, GITHUB_API_KEY
 
 Key invariants:
 - Core API surface: deliberately unchanged by the v0.2 map release; llms.txt fallback documents it
-- Assessment reports are stored rows in D1 listed by /api/map/sos/fits
-- DELETE /api/map/sos/fits/:id is operator bearer-auth guarded (R2 patch): 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token
+- Assessment reports are stored rows in D1 listed by /api/jev/map/sos/fits
+- DELETE /api/jev/map/sos/fits/:id is operator bearer-auth guarded (R2 patch): 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token
 
 Composes with:
 - Ingestion & Embeddings (repo fetching shares the GitHub path)
-- Wayfinder Point-Map (historically the first consumer of /api/map on assessed corpora)
+- Wayfinder Point-Map (historically the first consumer of /api/jev/map on assessed corpora)
 
 ### Public Relays (media, contact, chat, decide)
 
@@ -594,7 +593,7 @@ Composes with:
 
 ## Endpoint Inventory
 
-The complete 129-route inventory (121 from Lane A + 10 added 2026-10-06, net -2 from the 2026-10-08 auth pass + SOS fold), grouped by
+The complete 127-route inventory (121 from Lane A + 10 added 2026-10-06; the 2026-10-08 auth pass + SOS fold took it to 129 and the map fold to 127 canonical: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/*, the /map/ page folded into the /jev/ console's Map card; old paths serve 410 aliases), grouped by
 module part. Auth is `bearer` (JEV_API_KEY) on every /api/jev route except the two
 health endpoints and the reply webhook. Six rows are CORS preflights (OPTIONS).
 
@@ -628,15 +627,13 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/robots.txt` | none | robots.txt served from KV | No |
 | GET | `/website-vN/<file>` | none | Generic asset pass-through: /website-v<digits>/<[A-Za-z0-9._-]+> served from KV key website-vN/<file> | No |
 
-### index.js (core API module) - 43 routes
+### index.js (core API module) - 41 routes
 
 | Method | Path | Auth | Description | Harness |
 |---|---|---|---|---------|
 | GET | `/AGENT.md` | none | Agent guide document (also /agent.md) from KV SITE | No |
 | GET | `/llms.txt` | none | Business summary for answer engines from KV, with inline fallback prompt listing the core API when not uploaded | No |
-| GET | `/map/app.js` | none | Map UI app script from KV (map-app.js) | No |
 | GET | `/map/pointmap.js` | none | Dependency-free numeric pointmap core from KV (pointmap.js) | No |
-| GET | `/map[/]` | none | Wayfinder map browser UI (KV map-index.html) | No |
 | GET | `/jev[/]` | none | Jev ops console HTML (KV jev-index.html); key entered once, sessionStorage | No |
 | GET | `/[/index.html]` | none | Fallback site index from KV (shadowed by solar-rbs-entry.mjs page table when KV page exists) | No |
 | GET | `/audio/reply-1\|2\|3.mp3` | none | Three hardcoded voice reply audio files from KV (audio/reply-N.mp3) | No |
@@ -651,30 +648,30 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | OPTIONS | `/api/decide` | none | CORS preflight for decision-model relay | No |
 | GET | `/api/decide (also POST)` | none | DefAPI typesafe/jev-1.13 decision relay (clef/clef-flash via Workers AI when selected); rate-limited | No |
 | GET | `/api/health` | none | Worker version info + diagnostic module versions | No |
-| GET | `/api/fits` | bearer | List stored repository FIT assessments (population) | No |
-| GET | `/api/fits/:id` | bearer | One stored FIT with full fit_json and population comparison | No |
-| DELETE | `/api/fits/:id` | bearer | Delete a stored FIT row; operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
-| POST | `/api/narrate` | bearer | Generate a plain-text FIT narrative via Workers AI streaming, persists to fits.narrative | No |
-| POST | `/api/assess` | bearer | Assess a GitHub repo into a FIT.json: fetch corpus, derive/refine latent basis (AI-assisted, or reuse baseline_id basis), runFit, store, compare to population | No |
-| POST | `/api/repo-items` | bearer | Fetch sorted full-text repo items (GitHub tree) with truncation flags | No |
-| POST | `/api/vector/search` | bearer | Cosine search over the sos-embeddings Vectorize index | No |
-| POST | `/api/embed` | bearer | Chunked/v1 document embedding: bge-base-en-v1.5, mean pooling, byte-weighted chunk mean, SHA256 content-hash cache, Vectorize store | No |
+| GET | `/api/jev/map/sos/fits` | bearer | List stored repository FIT assessments (population) | No |
+| GET | `/api/jev/map/sos/fits/:id` | bearer | One stored FIT with full fit_json and population comparison | No |
+| DELETE | `/api/jev/map/sos/fits/:id` | bearer | Delete a stored FIT row; operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
+| POST | `/api/jev/map/sos/narrate` | bearer | Generate a plain-text FIT narrative via Workers AI streaming, persists to fits.narrative | No |
+| POST | `/api/jev/map/sos/assess` | bearer | Assess a GitHub repo into a FIT.json: fetch corpus, derive/refine latent basis (AI-assisted, or reuse baseline_id basis), runFit, store, compare to population | No |
+| POST | `/api/jev/map/repo-items` | bearer | Fetch sorted full-text repo items (GitHub tree) with truncation flags | No |
+| POST | `/api/jev/map/vector/search` | bearer | Cosine search over the sos-embeddings Vectorize index | No |
+| POST | `/api/jev/map/embed` | bearer | Chunked/v1 document embedding: bge-base-en-v1.5, mean pooling, byte-weighted chunk mean, SHA256 content-hash cache, Vectorize store | No |
 | POST | `/api/chat` | none | Site assistant relay (original /api/chat, Workers AI llama-3.3-70b-instruct-fp8-fast, pinned SOS system prompt) | No |
-| POST | `/api/map` | bearer | Wayfinder: map texts or vectors onto the frozen pointmap/0.2 frame; optionally persist a stored map; baseline_id freezes frame | Partial - Lean bounds + regression suite |
-| POST | `/api/map/preview` | bearer | Preview ONE candidate (ADD/CHANGE) against a stored baseline's frozen frame; writes nothing | Partial - Lean bounds + regression suite |
-| POST | `/api/map/control` | bearer | CutPaste-style positive control: seeded splice CHANGEs measured through the preview path on the frozen frame | Yes - positive-control falsification endpoint |
-| POST | `/api/map/consistency` | bearer | Measure ONE candidate under 1..3 caller-supplied text variants on the frozen frame; sign agreement report | Partial - sign-agreement control |
-| POST | `/api/map/axis-redundancy` | bearer | Per-axis leave-one-out NN-vote predictability trial vs fixed-margin null | Yes - matched-null falsification trials |
-| POST | `/api/map/admission` | bearer | Unified membership trials: rayleigh, axis trial, spectra shares, radius I(r) grid in one call | Yes - matched-null falsification trials |
-| POST | `/api/map/rayleigh` | bearer | Isolation-graph components/isolates (exact), Fiedler lambda2 + exact Rayleigh-Ritz cut witness, fixed-margin null tails | Yes - matched-null falsification trials |
-| POST | `/api/map/azimuth` | bearer | Rotation/reflection-invariant Rayleigh Z_m (m=2,3,4,6,12) + largest circular gap trial on the placement plane | Yes - matched-null falsification trials |
-| POST | `/api/outcomes` | bearer | Append-only pre-registration ledger: prediction separated from independent task-check outcome (201) | No |
-| GET | `/api/outcomes` | bearer | Ledger rows + contingency of COUNTS (never a rate) | No |
-| DELETE | `/api/outcomes/* (also PUT, PATCH)` | bearer | Explicit 405: outcomes ledger is append-only | No |
-| GET | `/api/maps` | bearer | Stored map metrics list (no map_json) | No |
-| GET | `/api/maps/:id` | bearer | Complete stored MapResult (KV-overflow aware), enriched with radius profile on read | No |
-| DELETE | `/api/maps/:id` | bearer | Delete one saved map (+ KV overflow cleanup); operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
-| POST | `/api/maps/compare` | bearer | Compare two stored maps on compatible frames | No |
+| POST | `/api/jev/map` | bearer | Wayfinder: map texts or vectors onto the frozen pointmap/0.2 frame; optionally persist a stored map; baseline_id freezes frame | Partial - Lean bounds + regression suite |
+| POST | `/api/jev/map/preview` | bearer | Preview ONE candidate (ADD/CHANGE) against a stored baseline's frozen frame; writes nothing | Partial - Lean bounds + regression suite |
+| POST | `/api/jev/map/control` | bearer | CutPaste-style positive control: seeded splice CHANGEs measured through the preview path on the frozen frame | Yes - positive-control falsification endpoint |
+| POST | `/api/jev/map/consistency` | bearer | Measure ONE candidate under 1..3 caller-supplied text variants on the frozen frame; sign agreement report | Partial - sign-agreement control |
+| POST | `/api/jev/map/axis-redundancy` | bearer | Per-axis leave-one-out NN-vote predictability trial vs fixed-margin null | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/admission` | bearer | Unified membership trials: rayleigh, axis trial, spectra shares, radius I(r) grid in one call | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/rayleigh` | bearer | Isolation-graph components/isolates (exact), Fiedler lambda2 + exact Rayleigh-Ritz cut witness, fixed-margin null tails | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/azimuth` | bearer | Rotation/reflection-invariant Rayleigh Z_m (m=2,3,4,6,12) + largest circular gap trial on the placement plane | Yes - matched-null falsification trials |
+| POST | `/api/jev/map/outcomes` | bearer | Append-only pre-registration ledger: prediction separated from independent task-check outcome (201) | No |
+| GET | `/api/jev/map/outcomes` | bearer | Ledger rows + contingency of COUNTS (never a rate) | No |
+| DELETE | `/api/jev/map/outcomes/* (also PUT, PATCH)` | bearer | Explicit 405: outcomes ledger is append-only | No |
+| GET | `/api/jev/map/maps` | bearer | Stored map metrics list (no map_json) | No |
+| GET | `/api/jev/map/maps/:id` | bearer | Complete stored MapResult (KV-overflow aware), enriched with radius profile on read | No |
+| DELETE | `/api/jev/map/maps/:id` | bearer | Delete one saved map (+ KV overflow cleanup); operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
+| POST | `/api/jev/map/maps/compare` | bearer | Compare two stored maps on compatible frames | No |
 
 ### routes-jev.js (jev orchestrator) - 22 routes
 
@@ -748,7 +745,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/corpus/lens` | bearer | Lens candidates: K reals + K paired controls in guided-curve-ideate format; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/atom` | bearer | RSI-descent atom plan, DRY-RUN only (Delta >= 0 invariant asserted); rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/classify` | bearer | Tautology discerner (parity with tools/tautology-discerner); rate-limited | Partial - parity-tested vs Python sources of record |
-| POST | `/api/jev/corpus/placements` | bearer | Audit then POST vectors to the worker's own /api/map (self-call); rate-limited | Partial - parity-tested vs Python sources of record |
+| POST | `/api/jev/corpus/placements` | bearer | Audit then POST vectors to the worker's own /api/jev/map (self-call); rate-limited | Partial - parity-tested vs Python sources of record |
 | GET | `/api/jev/corpus/runs` | bearer | Last 50 corpus run rows; rate-limited | No |
 | GET | `/api/jev/corpus/selftest` | bearer | All module selftests (math, atom, lens + scorer-v2 extraction) with fixture parity vs Python sources; rate-limited | Yes - the parity selftest harness itself |
 | POST | `/api/jev/corpus/scorer/score` | bearer | Structured-evidence scorer v2.1: deterministic per-axis extraction + ONE batched jev-1.13 request, hysteresis flip p>=0.55/p<=0.45; rate-limited | Partial - byte-exact parity vs Python source of record |
@@ -797,9 +794,9 @@ Parity source of record: tools/lens-standard (on draft PR #292, not yet on main)
 - /api/site-assistant and /api/brain/preview: same-origin enforced (Origin host must match, else 403 CROSS_ORIGIN), POST-only (405 otherwise), rate-limited via the WEBSITE_RATE_LIMIT binding keyed by cf-connecting-ip; limiter failure allows the request.
 - /api/tts: rate-limited, 4000 char cap on POST and 900 on GET. /api/stt: rate-limited, 10 MB upload cap. /api/contact: rate-limited (5).
 - /api/searxng: no rate limiting, CORS *, 20s timeout, upstream failure returns 502 searxng_proxy_failed.
-- DELETE /api/outcomes/* (and PUT, PATCH): guard route returning 405; the outcomes ledger is append-only.
-- DELETE /api/maps/:id: operator bearer auth required (R2 patch); 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token.
-- DELETE /api/fits/:id: operator bearer auth required (R2 patch); same 503/401 behavior as DELETE /api/maps/:id.
+- DELETE /api/jev/map/outcomes/* (and PUT, PATCH): guard route returning 405; the outcomes ledger is append-only.
+- DELETE /api/jev/map/maps/:id: operator bearer auth required (R2 patch); 503 when the JEV_API_KEY binding is missing, 401 on a missing or wrong token.
+- DELETE /api/jev/map/sos/fits/:id: operator bearer auth required (R2 patch); same 503/401 behavior as DELETE /api/jev/map/maps/:id.
 - OPTIONS /api/jev/*: catch-all CORS preflight for all /api/jev routes; also re-handled inside the corpus, evolution and automations handlers.
 
 ## Documented vs Code
@@ -870,16 +867,16 @@ The 12 Lane B discrepancies, one by one:
 9. builtins table-category note - carried informational, no action.
 10. POST /audit shorthand note - carried informational, no action.
 11. OPTIONS CORS preflights - RESOLVED: AGENT.md now documents OPTIONS on /api/jev/* (incl. /api/jev/corpus/*), /api/searxng and the public relays (204 + Access-Control-Allow-Origin: *).
-12. Numeric contracts verified in agreement (no drift) - re-verified by R3 on both sides: n_controls 2..6 (doc + index.js:5073 usage block and validation), K 2..40 for /api/map family, K 2..400 for azimuth.
+12. Numeric contracts verified in agreement (no drift) - re-verified by R3 on both sides: n_controls 2..6 (doc + index.js:5073 usage block and validation), K 2..40 for /api/jev/map family, K 2..400 for azimuth.
 
 Code patches landed in R2 (the Lane B flags that were code-side):
 
-- DELETE auth gaps. DELETE /api/fits/:id and DELETE /api/maps/:id - the only two
+- DELETE auth gaps. DELETE /api/jev/map/sos/fits/:id and DELETE /api/jev/map/maps/:id - the only two
   unauthenticated DELETE routes on the worker and the sharpest gap between the
   documented contract and the served surface - now call requireOperatorAuth first:
   Secrets Store JEV_API_KEY, fail-closed, constant-time comparison; 503 'not
   configured: JEV_API_KEY binding missing' when the binding is unbound, 401
-  'unauthorized: missing or wrong bearer token' on mismatch. DELETE /api/outcomes/*
+  'unauthorized: missing or wrong bearer token' on mismatch. DELETE /api/jev/map/outcomes/*
   remains safe by design: a 405 guard route protecting the append-only ledger.
 - NORTHFLANK_API_KEY note. Fixed in prose: the AGENT.md searxng row now states the
   binding is 'reserved for future direct-Northflank API access'; the current proxy
@@ -944,17 +941,17 @@ CI green -> endpoint serves
 | File | Theorems | What it proves | Endpoints verified | CI job |
 |---|---|---|---|---|
 | `CurvedCorpus.lean` | 90 | The corpus-math algebra kernel-side (core Lean 4.33.0, no Mathlib): atom-plan Delta>=0 invariant (atom_delta_nonneg), cumulative monotonicity, phi-ladder telescope, heat-exponent monotonicity/additivity, checkerboard-swap (MH flux / trade) margin-preservation identities, stationary-distribution uniqueness+uniformity (stationary_unique_uniform, max_propagates), Catalan/MP moment identities (mp_rowsum_eq_catalan, catalan_first_nine), dBc level laws (bpow_*, level_double, level_injective), Zernike R-generator identities (zernikeR_gen_11..44, parity, degrees, normalized), acoustic sum rule, diatomic/gap/Klemens lemmas, Gaunt L3 triangle counts, hcomp associativity/identity, halt-lattice lemmas (blocked_is_noop, fixed_halts, capped_halts), and the dz_band_iff gate-band identity. | POST /api/jev/corpus/audit, POST /api/jev/corpus/atom, POST /api/jev/corpus/lens, GET /api/jev/corpus/selftest | check |
-| `WayfinderBounds.lean` | 11 | 11 core-Lean theorems for strict threshold inequalities and the exact ADD/CHANGE isolation ledgers of the point-map instrument: stable_on/stable_off, crossing_on_iff/crossing_off_iff, old_vertex_after_add, add_isolation_delta, chg_hit_eval, change_neighbour_ledger, change_isolation_delta, change_neutral. Integer/count theorems only; nonclaims exclude float bounds, significance, forecasting, and any keep/revert rule. | POST /api/map/preview, POST /api/map, POST /api/maps/compare, POST /api/map/control, POST /api/map/consistency | check |
-| `RadiusBounds.lean` | 18 | 18 theorems behind the radius diagnostics: isoAt_le_one/isoAt_zero/isoAt_tie/isoAt_antitone, isoCount lemmas, radius_count_antitone, isoCount_le_length, isolated/connected perturbation bounds, perturbation_band, and clipped-area bounds (clampLow_ge, clampHigh_le, clipLen_nonneg/le_window, clipArea_nonneg/le_window). Canonical radius stays 0.095; continuous clipped area stays runtime-derived. | POST /api/map/preview (radius_profile), POST /api/map (radius_profile/radius_comparison), GET /api/maps/:id, POST /api/maps/compare, POST /api/map/admission (radius I(r) grid) | check |
-| `RayleighBounds.lean` | 16 | 16 integer/rational identities for the Rayleigh diagnostics: quadratic-form nonnegativity/consistency/shift/scale (quad_*), indicator-vs-cut identity (quad_indicator, ind_sq_diff), edgeCut/cut_singleton lemmas, quad_no_incident, and the exact rational Rayleigh-Ritz witness numerator/denominator plus path example (witness_numerator, witness_denominator, rr_path_example, rr_path_quad). Nonclaims: nullity=#components, Ky Fan, and the float lambda_2 are stated, not proved. | POST /api/map/rayleigh, POST /api/map (rayleigh_frame Ky Fan gap), POST /api/map/admission | check |
-| `AzimuthBounds.lean` | 14 | 14 theorems for the placement-plane azimuth statistics over Z[i]: \|z\|^2 >= 0 and its D4 gauge invariance (negation/conjugation/swap/quarter-rotation: absSq_neg/conj/swap/quarter, check_* lemmas), sum order-independence, replicate scaling (absSq_scale - duplicating every row k times scales \|moment\|^2 by k^2). SO(2) rotation, GL(2) rescaling, null distributions and Float behaviour are stated non-claims. | POST /api/map/azimuth, POST /api/map/admission | check |
-| `wayfinder-scope.json` | - | Axiom scope manifest for WayfinderBounds.lean: 11 theorems, permitted axioms [propext, Classical.choice, Quot.sound], 8 nonclaims. Validated then checked against the kernel's printed axioms. | POST /api/map/preview, POST /api/map | check |
-| `radius-scope.json` | - | Axiom scope manifest for RadiusBounds.lean: 18 theorems, permitted axioms [propext, Classical.choice, Quot.sound], 8 nonclaims (radius 0.095 unchanged; nothing admits a new score or policy). | POST /api/map/preview (radius_profile) | check |
-| `rayleigh-scope.json` | - | Axiom scope manifest for RayleighBounds.lean: 15 theorem entries, permitted axioms [propext, Classical.choice, Quot.sound], 5 nonclaims (nullity identity, Ky Fan, float lambda_2 explicitly not proved). | POST /api/map/rayleigh | check |
-| `azimuth-scope.json` | - | Axiom scope manifest for AzimuthBounds.lean: 14 theorems, permitted axioms [propext, Classical.choice, Quot.sound], 8 nonclaims (no null distribution, no p-value, gauge group is D4 not SO(2), Z_1 confounding). | POST /api/map/azimuth | check |
+| `WayfinderBounds.lean` | 11 | 11 core-Lean theorems for strict threshold inequalities and the exact ADD/CHANGE isolation ledgers of the point-map instrument: stable_on/stable_off, crossing_on_iff/crossing_off_iff, old_vertex_after_add, add_isolation_delta, chg_hit_eval, change_neighbour_ledger, change_isolation_delta, change_neutral. Integer/count theorems only; nonclaims exclude float bounds, significance, forecasting, and any keep/revert rule. | POST /api/jev/map/preview, POST /api/jev/map, POST /api/jev/map/maps/compare, POST /api/jev/map/control, POST /api/jev/map/consistency | check |
+| `RadiusBounds.lean` | 18 | 18 theorems behind the radius diagnostics: isoAt_le_one/isoAt_zero/isoAt_tie/isoAt_antitone, isoCount lemmas, radius_count_antitone, isoCount_le_length, isolated/connected perturbation bounds, perturbation_band, and clipped-area bounds (clampLow_ge, clampHigh_le, clipLen_nonneg/le_window, clipArea_nonneg/le_window). Canonical radius stays 0.095; continuous clipped area stays runtime-derived. | POST /api/jev/map/preview (radius_profile), POST /api/jev/map (radius_profile/radius_comparison), GET /api/jev/map/maps/:id, POST /api/jev/map/maps/compare, POST /api/jev/map/admission (radius I(r) grid) | check |
+| `RayleighBounds.lean` | 16 | 16 integer/rational identities for the Rayleigh diagnostics: quadratic-form nonnegativity/consistency/shift/scale (quad_*), indicator-vs-cut identity (quad_indicator, ind_sq_diff), edgeCut/cut_singleton lemmas, quad_no_incident, and the exact rational Rayleigh-Ritz witness numerator/denominator plus path example (witness_numerator, witness_denominator, rr_path_example, rr_path_quad). Nonclaims: nullity=#components, Ky Fan, and the float lambda_2 are stated, not proved. | POST /api/jev/map/rayleigh, POST /api/jev/map (rayleigh_frame Ky Fan gap), POST /api/jev/map/admission | check |
+| `AzimuthBounds.lean` | 14 | 14 theorems for the placement-plane azimuth statistics over Z[i]: \|z\|^2 >= 0 and its D4 gauge invariance (negation/conjugation/swap/quarter-rotation: absSq_neg/conj/swap/quarter, check_* lemmas), sum order-independence, replicate scaling (absSq_scale - duplicating every row k times scales \|moment\|^2 by k^2). SO(2) rotation, GL(2) rescaling, null distributions and Float behaviour are stated non-claims. | POST /api/jev/map/azimuth, POST /api/jev/map/admission | check |
+| `wayfinder-scope.json` | - | Axiom scope manifest for WayfinderBounds.lean: 11 theorems, permitted axioms [propext, Classical.choice, Quot.sound], 8 nonclaims. Validated then checked against the kernel's printed axioms. | POST /api/jev/map/preview, POST /api/jev/map | check |
+| `radius-scope.json` | - | Axiom scope manifest for RadiusBounds.lean: 18 theorems, permitted axioms [propext, Classical.choice, Quot.sound], 8 nonclaims (radius 0.095 unchanged; nothing admits a new score or policy). | POST /api/jev/map/preview (radius_profile) | check |
+| `rayleigh-scope.json` | - | Axiom scope manifest for RayleighBounds.lean: 15 theorem entries, permitted axioms [propext, Classical.choice, Quot.sound], 5 nonclaims (nullity identity, Ky Fan, float lambda_2 explicitly not proved). | POST /api/jev/map/rayleigh | check |
+| `azimuth-scope.json` | - | Axiom scope manifest for AzimuthBounds.lean: 14 theorems, permitted axioms [propext, Classical.choice, Quot.sound], 8 nonclaims (no null distribution, no p-value, gauge group is D4 not SO(2), Z_1 confounding). | POST /api/jev/map/azimuth | check |
 | `verify_claims.py` | - | Measurement-side resolution of the 8 claims CurvedCorpus.lean deliberately does NOT make, on the shipped fixtures and the real 2286x9 corpus: CLAIM_1 sampler uniformity (chi2 on an exhaustively enumerated fibre), CLAIM_2 curveball mixing convergence on the real matrix, CLAIM_3 S2 heat-kernel semigroup E[Y_l(B_t)] = exp(-l(l+1)t) Y_l, CLAIM_4 Lean identities hold in float64 at machine precision (500-trade margin preservation), CLAIM_5 real V2 reproduces published 0.7235293731 with curveball null z (published +12.13), CLAIM_6 F3 null canonicity (trade-graph irreducibility; analytic V2 = 2*(d/(d-1))/d at constant margins), CLAIM_7 Lyu-Mukherjee/MP moment anchor vs the Narayana/Catalan target moments, CLAIM_8 corpus level L = 20*log10(\|dV2\|/sigma_null) in dBc (published +21.68 dBc; both windows above the +15.6 dBc floor). | POST /api/jev/corpus/audit, POST /api/jev/corpus/atom, POST /api/jev/corpus/lens | verify-measurements |
-| `verify_rayleigh_claims.py` | - | Measurement-side companion to RayleighBounds.lean (rayleigh/1), stdlib only, on shipped fixtures and seeded random graphs: M1 quad(1_S) == cut(S) numerically on 200 seeded random graphs; M2 the exact rational witness R = n*cut/(k*(n-k)) upper-bounds the power-iteration Fiedler estimate on every fixture map; M3 BFS component count == nullity(L) via exact Fraction Gaussian elimination (the identity Lean states but does not prove); M4 degree-0 isolated count equals the fixture's stored isolated count. Exit 1 on any FAIL. | POST /api/map/rayleigh, POST /api/map (rayleigh_frame) | verify-measurements |
-| `verify_wayfinder_axioms.py` | - | Axiom gate for ALL FOUR bounded .lean files: parses the actual #print axioms output of the pinned Lean toolchain (never source comments, never a sorry-grep), asserts every manifest theorem appears with an axiom line, each axiom set is a subset of permitted_axioms, no sorryAx anywhere, and no Lean error lines. Invoked with --axioms/--manifest for wayfinder, radius, azimuth and rayleigh scope manifests. | POST /api/map/preview, POST /api/map, POST /api/map/rayleigh, POST /api/map/azimuth, POST /api/map/preview (radius_profile) | check |
+| `verify_rayleigh_claims.py` | - | Measurement-side companion to RayleighBounds.lean (rayleigh/1), stdlib only, on shipped fixtures and seeded random graphs: M1 quad(1_S) == cut(S) numerically on 200 seeded random graphs; M2 the exact rational witness R = n*cut/(k*(n-k)) upper-bounds the power-iteration Fiedler estimate on every fixture map; M3 BFS component count == nullity(L) via exact Fraction Gaussian elimination (the identity Lean states but does not prove); M4 degree-0 isolated count equals the fixture's stored isolated count. Exit 1 on any FAIL. | POST /api/jev/map/rayleigh, POST /api/jev/map (rayleigh_frame) | verify-measurements |
+| `verify_wayfinder_axioms.py` | - | Axiom gate for ALL FOUR bounded .lean files: parses the actual #print axioms output of the pinned Lean toolchain (never source comments, never a sorry-grep), asserts every manifest theorem appears with an axiom line, each axiom set is a subset of permitted_axioms, no sorryAx anywhere, and no Lean error lines. Invoked with --axioms/--manifest for wayfinder, radius, azimuth and rayleigh scope manifests. | POST /api/jev/map/preview, POST /api/jev/map, POST /api/jev/map/rayleigh, POST /api/jev/map/azimuth, POST /api/jev/map/preview (radius_profile) | check |
 
 ### Endpoint to Lean map
 
@@ -969,21 +966,21 @@ CI green -> endpoint serves
 | POST /api/jev/corpus/taste/score (+ /taste/matrix, /taste/selftest) | jev-taste-math.js | - | verify-tools (corpus-sonometer/edge-standard ecosystem selftests; taste selftest endpoint) |
 | POST /api/jev/corpus/taste/edge-standard | jev-edge-standard.js | - | verify-tools (edge-standard selftest + fixture parity: test_parity_edge.test.js, test_e2e_edge.test.js) |
 | POST /api/jev/corpus/visco/{persistence,snapback} (+ GET hysteresis, prony, mobility, policy-log) | jev-visco-math.js | - | verify-tools (selftest discipline; visco fixtures via /api/jev/corpus/selftest) |
-| POST /api/jev/corpus/placements | jev-corpus-routes.js -> /api/map | WayfinderBounds.lean | verify_wayfinder_axioms.py |
-| POST /api/map/preview (+ /api/map, /api/maps/compare, /api/map/control, /api/map/consistency) | point-map numeric core (pointmap/0.2) | WayfinderBounds.lean | verify_wayfinder_axioms.py (against wayfinder-scope.json) |
-| radius_profile / radius_comparison (in /api/map, /api/map/preview, /api/maps/:id) | point-map radius module | RadiusBounds.lean | verify_wayfinder_axioms.py (against radius-scope.json) |
-| POST /api/map/rayleigh (+ rayleigh_frame on /api/map, rayleigh block in /api/map/admission) | point-map rayleigh module | RayleighBounds.lean | verify_rayleigh_claims.py |
-| POST /api/map/azimuth (+ azimuth block in /api/map/admission) | point-map azimuth module | AzimuthBounds.lean | verify_wayfinder_axioms.py (against azimuth-scope.json) |
+| POST /api/jev/corpus/placements | jev-corpus-routes.js -> /api/jev/map | WayfinderBounds.lean | verify_wayfinder_axioms.py |
+| POST /api/jev/map/preview (+ /api/jev/map, /api/jev/map/maps/compare, /api/jev/map/control, /api/jev/map/consistency) | point-map numeric core (pointmap/0.2) | WayfinderBounds.lean | verify_wayfinder_axioms.py (against wayfinder-scope.json) |
+| radius_profile / radius_comparison (in /api/jev/map, /api/jev/map/preview, /api/jev/map/maps/:id) | point-map radius module | RadiusBounds.lean | verify_wayfinder_axioms.py (against radius-scope.json) |
+| POST /api/jev/map/rayleigh (+ rayleigh_frame on /api/jev/map, rayleigh block in /api/jev/map/admission) | point-map rayleigh module | RayleighBounds.lean | verify_rayleigh_claims.py |
+| POST /api/jev/map/azimuth (+ azimuth block in /api/jev/map/admission) | point-map azimuth module | AzimuthBounds.lean | verify_wayfinder_axioms.py (against azimuth-scope.json) |
 | POST /api/jev/corpus/spectral/walk (+ /spectral/series, /spectral/selftest) | jev-spectral-math.js + jev-spectral-centroid.js | - | falsification harness in tools/spectral-standard (15/15 golds, 61 anchors; PR #292 draft, verify-tools step pending merge) |
 | POST /api/jev/corpus/oracle | jev-spectral.js (composes jev-edge-standard.js + the centroid walk) | - | falsification gold families (PR #292 draft) |
 | POST /api/jev/corpus/lens/correct (+ GET /lens/selftest) | jev-lens-math.js | - | falsification harness in tools/lens-standard (75/75 PASS, preregistration + anchors; PR #292 draft) |
-| POST /api/map/axis-redundancy (+ axis block in /api/map/admission) | point-map axis-trial module | CurvedCorpus.lean | verify_claims.py |
+| POST /api/jev/map/axis-redundancy (+ axis block in /api/jev/map/admission) | point-map axis-trial module | CurvedCorpus.lean | verify_claims.py |
 
 ### Tool to CI map
 
 | Tool | Endpoints it backs | CI job | Steps |
 |---|---|---|---|
-| tools/point-map/ | POST /api/map; POST /api/map/preview; GET /api/maps; GET /api/maps/:id; POST /api/maps/compare; DELETE /api/maps/:id; POST /api/map/control; POST /api/map/consistency; POST /api/map/axis-redundancy; POST /api/map/admission; POST /api/map/azimuth; POST /api/map/rayleigh | verify-tools | point-map numerical, API and archive regressions (test-pointmap.js, test-api.mjs, test-tar.mjs, test-math.mjs, test-preview.mjs, test-storage.mjs, test-radius.mjs, test-radius-extra.mjs, test-limits.mjs, test-control-outcomes.mjs, test-axis-consistency.mjs, test-placement.mjs, test-rayleigh.mjs, test-admission.mjs, test-azimuth.mjs) |
+| tools/point-map/ | POST /api/jev/map; POST /api/jev/map/preview; GET /api/maps; GET /api/jev/map/maps/:id; POST /api/jev/map/maps/compare; DELETE /api/jev/map/maps/:id; POST /api/jev/map/control; POST /api/jev/map/consistency; POST /api/jev/map/axis-redundancy; POST /api/jev/map/admission; POST /api/jev/map/azimuth; POST /api/jev/map/rayleigh | verify-tools | point-map numerical, API and archive regressions (test-pointmap.js, test-api.mjs, test-tar.mjs, test-math.mjs, test-preview.mjs, test-storage.mjs, test-radius.mjs, test-radius-extra.mjs, test-limits.mjs, test-control-outcomes.mjs, test-axis-consistency.mjs, test-placement.mjs, test-rayleigh.mjs, test-admission.mjs, test-azimuth.mjs) |
 | tools/corpus-auditor/ | POST /api/jev/corpus/audit; POST /api/jev/corpus/visco/persistence (internal audits) | verify-tools + run-real-corpus | corpus-auditor selftest; corpus-auditor on real matrix (reproduce published effect: v2=0.7235293731, z>6, verdict SIGNAL) |
 | tools/rsi-descent/ | POST /api/jev/corpus/atom; POST /api/jev/corpus/lens (descent-side Delta accounting) | verify-tools + run-real-corpus | rsi-descent selftest; rsi-descent on real bundle (Lean Delta invariant on real data: cumulative_delta >= 0, coverage in (0,1]) |
 | tools/boltzmann-collapse/ | POST /api/jev/corpus/lens (collapse diagnostic) | verify-tools | boltzmann-collapse selftest |
@@ -1034,11 +1031,11 @@ flowchart TD
     Entry --> Chat & Pages & Assets
     Entry -->|"everything else<br/>CORE_TERRITORY"| Core["index.js<br/>core API relay"]
     Entry -->|"/api/jev*"| Jev["jev-main.js<br/>buildDeps + handleJevRequest"]
-    subgraph CORE["Core API - index.js"]
-        MapPub["POST /api/map + /map/preview, /control, /consistency,<br/>/azimuth, /rayleigh, /admission, /axis-redundancy<br/>GET /api/maps, /maps/compare"]
-        DataPub["POST /api/repo-items, /api/embed, /api/outcomes<br/>GET /api/health, /api/outcomes<br/>POST /api/vector/search"]
+    subgraph CORE["Core API - index.js (map engine + ledger + ingestion reached via /api/jev/map/*)"]
+        MapPub["POST /api/jev/map + /preview, /control, /consistency,<br/>/azimuth, /rayleigh, /admission, /axis-redundancy<br/>GET /api/jev/map/maps, /maps/compare"]
+        DataPub["POST /api/jev/map/repo-items, /api/jev/map/embed, /api/jev/map/outcomes<br/>GET /api/health, /api/jev/map/outcomes<br/>POST /api/jev/map/vector/search"]
         Tts["POST /api/tts, /api/stt, /api/contact,<br/>GET/POST /api/decide - public relays"]
-        Surf["GET /api/searxng, /map/ UI, /map/app.js,<br/>/map/pointmap.js, /AGENT.md, /llms.txt, /audio/"]
+        Surf["GET /api/searxng, /jev/ console, /map/pointmap.js,<br/>/AGENT.md, /llms.txt, /audio/"]
     end
     Core --> MapPub
     Core --> DataPub
@@ -1134,10 +1131,10 @@ Sixteen flows between capability domains, from Lane C.
 | Evolution (hourly cycle + directives) | Jev Orchestrator (gated task engine) | evolution directives (repo_push, worker_change, ops_fix, external_comms, ...) execute only through the orchestrator's gate; jev-quality wraps the decide call for proposal/execution/sweep scoring |
 | Evolution (hourly cycle + directives) | Corpus Math (jev-corpus) | after 5 completed cycles of history the hourly cycle measures corpus metrics (dbc, z, verdict, drift_vs_prev); lens candidates enter as fail-closed note directives |
 | Evolution (hourly cycle + directives) | Public Relays (media, contact, chat, decide) | the notify module sends cycle digests by email through Resend |
-| Corpus Math (jev-corpus) | Wayfinder Point-Map (frozen-frame geometric instrument) | POST /api/jev/corpus/placements audits a matrix then POSTs its vectors to the worker's own /api/map; map rejections relay back as MAP_FAILED |
+| Corpus Math (jev-corpus) | Wayfinder Point-Map (frozen-frame geometric instrument) | POST /api/jev/corpus/placements audits a matrix then POSTs its vectors to the worker's own /api/jev/map; map rejections relay back as MAP_FAILED |
 | Wayfinder Point-Map (frozen-frame geometric instrument) | Outcome Ledger (append-only pre-registration) | preview/control runs are pre-registered as pending outcome rows; with after_id the ledger recomputes observed_delta on the frozen frame via PM.explainTransition |
 | Visco Instruments (rate-dependent round gates) | Outcome Ledger (append-only pre-registration) | hysteresis closes the supersedes chains and snapback reads the predicted-vs-realized series straight from the ledger |
-| Ingestion & Embeddings (full-content chunked/v1) | Wayfinder Point-Map (frozen-frame geometric instrument) | every map/preview/control/consistency run embeds its corpus through chunked/v1 on the shared content-hash cache; Vectorize stores the document representations for /api/vector/search |
+| Ingestion & Embeddings (full-content chunked/v1) | Wayfinder Point-Map (frozen-frame geometric instrument) | every map/preview/control/consistency run embeds its corpus through chunked/v1 on the shared content-hash cache; Vectorize stores the document representations for /api/jev/map/vector/search |
 | Jev Orchestrator (gated task engine) | Public Relays (media, contact, chat, decide) | the execute stage performs resend.send actions with the same Resend credential, and the jev-1.13 decide model backing /api/decide is the model the understand/decide and quality stages call |
 | Jev Orchestrator (gated task engine) | Wayfinder Point-Map (frozen-frame geometric instrument) | handleJevRequest wires a mapHandler so orchestrator tasks can run map requests inside gated actions |
 | Platform Surface & Ops Console | Jev Orchestrator (gated task engine) | the /jev/ console (bearer JEV_API_KEY, sessionStorage) is the human surface for tasks, approvals, pause and the summary/cost rollup |
@@ -1195,7 +1192,7 @@ Key models:
 Used by: Ingestion & Embeddings (full-content chunked/v1), Wayfinder Point-Map (frozen-frame geometric instrument).
 
 Key keys:
-- document-level length-weighted chunk-mean vectors for /api/vector/search (whole-document representation, not per-chunk)
+- document-level length-weighted chunk-mean vectors for /api/jev/map/vector/search (whole-document representation, not per-chunk)
 
 ### EVEC (Vectorize, evolution memory)
 
@@ -1216,11 +1213,11 @@ Key keys:
 Used by: all domains that fetch upstream.
 
 Key keys:
-- JEV_API_KEY - bearer auth on every jev route except /api/jev/health; also the operator key behind DELETE /api/maps/:id and DELETE /api/fits/:id (R2 patch)
+- JEV_API_KEY - bearer auth on every jev route except /api/jev/health; also the operator key behind DELETE /api/jev/map/maps/:id and DELETE /api/jev/map/sos/fits/:id (R2 patch)
 - DEFAPI_API_KEY - /api/decide relay, corpus scorer, taste clef calls, jev quality/decide stages
 - ELEVENLABS_API_KEY - /api/tts (eleven_turbo_v2_5) and /api/stt (scribe_v1)
 - RESEND_API_KEY - /api/contact relay, jev resend.send actions, evolution notify digests (schema {from,to,subject,html})
-- GITHUB_API_KEY - /api/repo-items fetch, automations tool stage, repo_push directives
+- GITHUB_API_KEY - /api/jev/map/repo-items fetch, automations tool stage, repo_push directives
 - NORTHFLANK_API_KEY - reserved for future direct-Northflank API access; the current searxng proxy goes through the public n8n webhook (prose corrected in the R1 refresh)
 - GOOGLE_PLACES_API_KEY / DAYTONA_API_KEY - lead_research builtin tools
 
@@ -1228,9 +1225,9 @@ Key keys:
 
 Decisions made while assembling the five lanes:
 
-1. Route counts. Lane A inventory = 121 dispatch rows (115 non-OPTIONS). Unique paths = 109. Lane C assigns 97 entries over 85 unique paths. The 121-vs-97 gap decomposes into 6 OPTIONS preflights, 10 method variants collapsing onto shared paths (GET|POST pairs, the DELETE 405 guard, the query-variant forms of GET /api/outcomes), and 24 paths Lane C did not assign.
-2. The 24 uncovered paths were placed into domains and marked †: 17 solar-rbs-entry site routes into Platform Surface & Ops Console, 2 chat assistants (/api/site-assistant, /api/brain/preview) into Public Relays, 2 FIT detail routes into Repo Assessment, POST /api/jev/approvals/:id/guide into Jev Orchestrator, and the DELETE /api/outcomes/* guard into Outcome Ledger. The catch-all OPTIONS /api/jev/* stays in the inventory only.
-3. Zero contradictions between lanes: every Lane C endpoint exists in Lane A, and no doc-only endpoints exist in Lane B. Numeric contracts (K 2..40 for /api/map, K 2..400 for azimuth, n_controls 2..6) were verified in agreement by Lane B.
+1. Route counts. Lane A inventory = 121 dispatch rows (115 non-OPTIONS). Unique paths = 109. Lane C assigns 97 entries over 85 unique paths. The 121-vs-97 gap decomposes into 6 OPTIONS preflights, 10 method variants collapsing onto shared paths (GET|POST pairs, the DELETE 405 guard, the query-variant forms of GET /api/jev/map/outcomes), and 24 paths Lane C did not assign.
+2. The 24 uncovered paths were placed into domains and marked †: 17 solar-rbs-entry site routes into Platform Surface & Ops Console, 2 chat assistants (/api/site-assistant, /api/brain/preview) into Public Relays, 2 FIT detail routes into Repo Assessment, POST /api/jev/approvals/:id/guide into Jev Orchestrator, and the DELETE /api/jev/map/outcomes/* guard into Outcome Ledger. The catch-all OPTIONS /api/jev/* stays in the inventory only.
+3. Zero contradictions between lanes: every Lane C endpoint exists in Lane A, and no doc-only endpoints exist in Lane B. Numeric contracts (K 2..40 for /api/jev/map, K 2..400 for azimuth, n_controls 2..6) were verified in agreement by Lane B.
 4. Lane D cross-reference confirmed: lean-check.yml verify-tools lists edge-standard (11th tool), so the taste-engine source of record is under CI. Lane D also names GET /api/jev/corpus/selftest as the deploy gate tying every ported endpoint to its Python source of record.
 5. The mermaid diagram from Lane E is raw text; it is fenced as mermaid above.
 6. AGENT.md multipass note: POST /api/jev/corpus/audit carries both the single-pass and Decision-B multipass modes on one route (passes: [matrix x 2..8] -> inter_pass_offset_dbc); it is one endpoint, not two.
@@ -1238,11 +1235,13 @@ Decisions made while assembling the five lanes:
 
 Refresh notes (2026-10-05, discrepancy resolution):
 
-8. Lane R1 wrote 15 new AGENT.md rows to KV: the public relays (/api/tts, /api/stt, /api/contact, /api/decide and the legacy /api/chat), the site surfaces (/api/site-assistant, /api/brain/preview, /sos*, /index.html, /sitemap.xml, /robots.txt, /AGENT.md and /agent.md, /map/app.js, /audio/reply-N.mp3), the CORS preflight block, GET /api/jev/pause, POST /api/jev/approvals/:id/guide, and the /api/fits/:id GET and DELETE rows. Lane R2 patched index.js in exactly 4 hunks: the requireOperatorAuth/timingSafeEqual helper, the n_controls usage-block comment 2..12 -> 2..6, and bearer guards on both destructive DELETE handlers. Lane R3 re-ran the Lane B cross-reference fresh: 110 documented, 0 code-only, 0 doc-only, 0 actionable discrepancies.
+8. Lane R1 wrote 15 new AGENT.md rows to KV: the public relays (/api/tts, /api/stt, /api/contact, /api/decide and the legacy /api/chat), the site surfaces (/api/site-assistant, /api/brain/preview, /sos*, /index.html, /sitemap.xml, /robots.txt, /AGENT.md and /agent.md, /map/app.js, /audio/reply-N.mp3), the CORS preflight block, GET /api/jev/pause, POST /api/jev/approvals/:id/guide, and the /api/jev/map/sos/fits/:id GET and DELETE rows. Lane R2 patched index.js in exactly 4 hunks: the requireOperatorAuth/timingSafeEqual helper, the n_controls usage-block comment 2..12 -> 2..6, and bearer guards on both destructive DELETE handlers. Lane R3 re-ran the Lane B cross-reference fresh: 110 documented, 0 code-only, 0 doc-only, 0 actionable discrepancies.
 9. The daggers in the capability map are reconciliation history, not open gaps: they marked endpoints Lane C had not assigned at assembly time, and every one is in AGENT.md now.
 10. The DELETE-auth prose fix (the stale 'AUTH GAP' wording R3 flagged as R3-1/R3-2 in the KV doc rows) landed after the R3 read; this refreshed document reflects the fixed wording.
 11. The Lean verification map is unchanged by the refresh: none of the newly documented endpoints has a Lean connection - they are not corpus math.
 12. Refresh 2026-10-06 (falsification-instrument wave): 10 routes added (router 4, spectral 3, oracle 1, lens 2); inventory 121 -> 131; a Harness column added to every capability and inventory table (legend at the top of the Endpoint Inventory); the spectral/lens tools of record sit on draft PR #292, so their Lean-map rows point there until merge. Harness tiers: Yes = pre-registered falsification corpus or matched-null falsification trials; Partial = fixture parity / calibration sweeps / Lean bounds without a dedicated corpus; No = contract-level validation only. The candidate list for endpoints that could adopt one effectively lives at refs/falsification-harness-coverage-2026-10-06.md (draft PR).
-13. Auth pass + SOS fold 2026-10-08: every non-site-tool route bearer-gated with requireOperatorAuth (map engine, outcomes ledger incl. the previously open DELETE/PUT/PATCH, ingestion repo-items/embed/vector-search, the SOS business API); SOS API relocated to /api/map/sos/* with old /api/assess, /api/fits, /api/fits/:id, /api/narrate paths returning 410; /sos page routes + KV assets removed; the /map/ UI gained the /jev/-style operator-key prompt sharing the jev_key sessionStorage entry. 131 -> 129 routes. SPEC-AUTH-SOS-2026-10-08.
+13. Auth pass + SOS fold 2026-10-08: every non-site-tool route bearer-gated with requireOperatorAuth (map engine, outcomes ledger incl. the previously open DELETE/PUT/PATCH, ingestion repo-items/embed/vector-search, the SOS business API); SOS API relocated to /api/jev/map/sos/* with old /api/jev/map/sos/assess, /api/jev/map/sos/fits, /api/jev/map/sos/fits/:id, /api/jev/map/sos/narrate paths returning 410; /sos page routes + KV assets removed; the /map/ UI gained the /jev/-style operator-key prompt sharing the jev_key sessionStorage entry. 131 -> 129 routes. SPEC-AUTH-SOS-2026-10-08.
+14. Map fold 2026-10-08: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/* via a mechanical prefix rewrite in index.js (old paths 410 'moved: this API relocated to /api/jev/map/*'); the /map/ page folded into a Map card in the /jev/ console's diagnostics panel (maps list, repo->embed->map creation, pointmap.js globe, instrument buttons, outcomes ledger, NSS prompt viewer); /map/ + /map/app.js 410 'moved: the map UI lives in the /jev/ console', /map/pointmap.js kept as the card's rendering-library asset; SOS paths moved to /api/jev/map/sos/*; verification: 71-route harness, 71/71 PASS incl. bearer no-key 401 / keyed pass on every transitioned route. Deploy etag 0f07bbe2. SPEC-MAP-FOLD-2026-10-08.
+
 
 
