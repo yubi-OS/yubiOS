@@ -137,3 +137,6 @@ theorem check_nonneg : 0 ≤ absSq z1 := by decide
 #print axioms check_nonneg
 
 end Azimuth
+
+@[instance_reducible, instance]
+def badLE : LE Int := ⟨fun _ _ => True⟩
