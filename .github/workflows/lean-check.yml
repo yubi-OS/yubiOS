@@ -23,14 +23,19 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      # Forbidden-token stopgap (round-2 Lane C) — source-side complement to
-      # the kernel-side axiom coverage gate below. Fails if any of the five
-      # lean sources uses `axiom`, `native_decide`, `macro`, `syntax`, or
-      # `elab` OUTSIDE comments and string literals (whole-word match;
-      # comments stripped with the exact same nesting-aware stripper as
+      # Forbidden-token stopgap (round-2 Lane C, expanded round-3 Lane A) —
+      # source-side complement to the kernel-side axiom coverage gate below.
+      # Fails if any of the five lean sources uses axiom, native_decide,
+      # macro[_rules], syntax, elab[_rules], import, set_option, run_cmd,
+      # #eval, attribute, notation, or infix[lr] OUTSIDE comments and string
+      # literals (whole-word, identifier-boundary-aware match; comments
+      # stripped with the exact same nesting-aware stripper as
       # check_lean_axioms.py, which this script imports from its own
-      # directory). No Lean toolchain needed.
-      - name: Forbidden-token gate — no axiom/native_decide/macro/syntax/elab outside comments
+      # directory). No Lean toolchain needed. The round-3 additions close
+      # the reviewer's meta-route mutation (import Lean + skipKernelTC +
+      # run_cmd environment mutation), which is additionally belt-and-braced
+      # by the leanchecker kernel re-check below.
+      - name: Forbidden-token gate — no axiom/native_decide/macro[_rules]/syntax/elab[_rules]/import/set_option/run_cmd/#eval/attribute/notation/infix[lr] outside comments
         run: |
           set -euo pipefail
           python3 papers/data/lean/check_forbidden_tokens.py \
@@ -88,6 +93,49 @@ jobs:
             fi
             echo "NO_SORRY_OK: $f"
           done
+
+      # Kernel re-check (round-3 Lane C): replay each module's compiled
+      # olean through a fresh kernel environment. Catches any declaration
+      # that bypassed kernel type-checking (e.g. debug.skipKernelTC +
+      # run_cmd environment mutation). leanchecker ships inside the pinned
+      # lean-4.33.0 toolchain (>= v4.28.0) — zero new artifacts, zero new
+      # pins; the `command -v` guard makes a toolchain without it fail
+      # loudly rather than skip. Same-kernel caveat (Lane C notes): this is
+      # the SAME kernel implementation in a fresh process, not an
+      # independent verifier. The meta-route mutation class is additionally
+      # stopped at the source-side forbidden-token gate above.
+      - name: Kernel re-check (leanchecker) over compiled modules
+        run: |
+          set -euo pipefail
+          command -v leanchecker >/dev/null || {
+            echo "LEANCHECKER_MISSING: leanchecker not found in the pinned lean-4.33.0 toolchain (expected since v4.28.0)" >&2
+            exit 1
+          }
+          # Compile the five files to oleans from a flat source dir so the
+          # module name is unambiguously the file basename (the files import
+          # nothing beyond the Lean prelude, so a flat layout matches their
+          # actual module structure).
+          rm -rf /tmp/leanchecker-src /tmp/leanchecker-oleans
+          mkdir -p /tmp/leanchecker-src /tmp/leanchecker-oleans
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds; do
+            cp "papers/data/lean/${base}.lean" "/tmp/leanchecker-src/${base}.lean"
+            if ! (cd /tmp/leanchecker-src && lean -o "/tmp/leanchecker-oleans/${base}.olean" "${base}.lean") > "/tmp/leanchecker-src/${base}-olean.err" 2>&1; then
+              echo "LEANCHECKER_OLEAN_FAIL: ${base}" >&2
+              cat "/tmp/leanchecker-src/${base}-olean.err" >&2
+              exit 1
+            fi
+          done
+          export LEAN_PATH="/tmp/leanchecker-oleans"
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds; do
+            echo "== leanchecker --fresh ${base} =="
+            if ! leanchecker --fresh "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
+              echo "LEANCHECKER_FAIL: ${base}" >&2
+              cat "/tmp/leanchecker-${base}.out" >&2
+              exit 1
+            fi
+            cat "/tmp/leanchecker-${base}.out"
+          done
+          echo "LEANCHECKER_OK: five modules re-type-checked via fresh kernel environment replay"
 
       # Axiom coverage gate (Lane A, round 2) — runs after the pinned-tarball
       # lean install step (no elan in this workflow), so `lean` is on PATH.
