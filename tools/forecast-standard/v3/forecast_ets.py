@@ -30,7 +30,7 @@ BAND_VERSION = "v3-mad-train-zerotrend"
 # PREREG-v3 section 8 fallback: not calibrated until the v3 pass rule passes.
 CALIBRATED = False
 BAND_LABEL = ("1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v3-mad-train-zerotrend, trend_0 = 0). "
-              "NOT CALIBRATED: PREREG-v3 pass rule not yet evaluated.")
+              "PREREG-v3 FAILED clause (i). EVAL G2 coverage: C0 95, C1 93, C2 100, C3 94, C4 98 (gate 88-98). NOT CALIBRATED.")
 
 PHI = 0.98
 GRID = [k * 0.05 for k in range(1, 20)]
