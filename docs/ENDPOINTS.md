@@ -867,6 +867,31 @@ Parity source of record: tools/lens-standard (on main via PR #292, merged 2026-1
 
 Parity source of record: tools/forecast-standard/forecast_ets.py (yubi-OS/yubiOS; parity max |delta| = 0 on 4 fixtures). Deploy etag chain 7f8fa641 -> dda2f487 -> f0c6d7c7 -> f2313fa6.
 
+### jev-workspace.js (operator workspaces) - 5 routes
+
+Operator workspace directory: a named artifact store in D1 (`jev_workspaces`, `jev_workspace_artifacts`), dispatched from routes-jev.js after the bearer gate. `DELETE` archives the workspace (sets `archived_at`) and removes its artifact rows. A `workspace_id` in a task or automation-run body binds that run to the workspace; an unknown or archived id returns 404 NOT_FOUND with nothing created, and a malformed id returns 422.
+
+| Method | Path | Auth | Description | Falsification Harness |
+|---|---|---|---|---|
+| POST | `/api/jev/workspaces` | bearer | Create a workspace; rate-limited | No |
+| GET | `/api/jev/workspaces/:id` | bearer | Read one workspace; rate-limited | No |
+| DELETE | `/api/jev/workspaces/:id` | bearer | Archive a workspace and remove its artifacts; rate-limited | No |
+| GET | `/api/jev/workspaces/:id/artifacts` | bearer | Artifact index (name, kind, sha256, bytes, created_at); rate-limited | No |
+| GET | `/api/jev/workspaces/:id/artifacts/:name` | bearer | Artifact content with `X-Artifact-Kind` and `X-Artifact-SHA256` headers; rate-limited | No |
+
+Module parts: jev-workspace.js
+
+### Operator selftests outside routes-jev.js (jev-selftest-evolution.js, index.js) - 4 routes
+
+Operator diagnostics, bearer-gated (all four return 401 without a bearer, verified live 2026-10-09). The evolution and automations selftests run on memory drivers only: no D1 writes, no model calls, no sends.
+
+| Method | Path | Auth | Description | Falsification Harness |
+|---|---|---|---|---|
+| GET | `/api/jev/evolution/selftest` | bearer | One real-cycle replay in memory | No |
+| GET | `/api/jev/evolution/selftest/candle` | bearer | Candle positive control | No |
+| GET | `/api/jev/automations/selftest` | bearer | Automation definition validation and CAS probe | No |
+| GET | `/api/jev/map/selftest` | bearer | Map and ingestion selftest (P1-6), served from index.js | No |
+
 ### Rate limits and notes
 
 - /api/site-assistant and /api/brain/preview: same-origin enforced (Origin host must match, else 403 CROSS_ORIGIN), POST-only (405 otherwise), rate-limited via the WEBSITE_RATE_LIMIT binding keyed by cf-connecting-ip; limiter failure allows the request.
