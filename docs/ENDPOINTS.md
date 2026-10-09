@@ -379,9 +379,9 @@ Endpoints:
 
 | Method | Path | Auth | Falsification Harness |
 |---|---|---|---|
-| GET | `/api/jev/forecast/:series` | bearer | Partial - pre-registered G1-G6 gates (G1/G3/G4/G5/G6 PASS; G2 band coverage FAIL 84/100 flagged, never retuned) |
+| GET | `/api/jev/forecast/:series` | bearer | Partial - pre-registered G1-G6 gates on band v2: G2 FAIL (100-replicate coverage C0 99, C1 99, C2 98, C3 93, C4 99 vs [88,98]); band NOT calibrated (quality.calibrated false); recorded v3 harness failed clause (i) with C2 at 100; live selftest names G2 and NEG_G2 |
 | GET | `/api/jev/timeseries/series` | bearer | No |
-| GET | `/api/jev/timeseries/selftest` | bearer | Yes - the selftest harness itself (math gates + live WAE write/read-back probe + SELECT * schema probe) |
+| GET | `/api/jev/timeseries/selftest` | bearer | Yes - the selftest harness itself (math gates + live WAE write/read-back probe + SELECT * schema probe); live 2026-10-09 returns ok:false, failing_gates [G2, NEG_G2] |
 
 Module parts: jev-timeseries.js, jev-forecast-math.js
 
@@ -393,7 +393,7 @@ Key invariants:
 - Fail-closed errors: 503 MISSING_READ_TOKEN, 422 BAD_SERIES_NAME (series must match ^[a-z_]+$), 502 WAE_SQL_ERROR (upstream body truncated)
 - WAE SQL reads lag writes a few seconds - the selftest reports the lag honestly instead of failing
 - The WAE SQL time column is timestamp (empirically settled by the selftest schema probe); ORDER BY needs the column in the SELECT list
-- Band = 1.96 x residual_sd x sqrt(i); the pre-registered G2 band-coverage FAIL (84/100 vs [88,98]%) is reported in every selftest response - the gate was not moved
+- Band v2 (`v2-mad-train`): band[j] = 1.96 x bandSd x sqrt(j), with bandSd = 1.4826 x median |one-step residual| over the train segment only. `quality.calibrated` is false. v2 failed the pre-registered G2 pass rule: 100-replicate band coverage C0 99, C1 99, C2 98, C3 93, C4 99 against [88,98]% (over-covers). The gate was not moved and the forecast is not described as calibrated. The retired v1 band (holdout RMS) measured 84/100. The recorded v3 harness failed clause (i) with C2 at 100 and both of its negative controls fire (recorded result; no v3 artifact on main). The live selftest returns ok:false with failing_gates [G2, NEG_G2]; NEG_G2 (band halved on C0 must fall outside [88,98]) is not detected on the live v2 band.
 
 Composes with:
 - Jev Orchestrator (telemetry series ride the transit / approval / recordRun paths)
@@ -712,13 +712,17 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | DELETE | `/api/jev/map/maps/:id` | bearer | Delete one saved map (+ KV overflow cleanup); operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
 | POST | `/api/jev/map/maps/compare` | bearer | Compare two stored maps on compatible frames | No |
 
-### routes-jev.js (jev orchestrator) - 22 routes
+### routes-jev.js (jev orchestrator) - 26 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
 | OPTIONS | `/api/jev/*` | none | Catch-all CORS preflight for all /api/jev routes (also re-handled inside corpus/evolution/automations handlers) | No |
 | GET | `/api/jev/health` | none | Jev health: policy version + paused flag | No |
-| POST | `/api/jev/tasks` | bearer | Task create: caller-supplied payload.actions or freeform prompt; runs ingest->understand->decide->gate pipeline; rate-limited | No |
+| GET | `/api/jev/policy` | bearer | Stored jev-policy.json returned as-is (404 POLICY_MISSING if absent); rate-limited | No |
+| GET | `/api/jev/policy/tools` | bearer | Policy tool registry only (`tools` object); rate-limited | No |
+| GET | `/api/jev/selftest` | bearer | Orchestrator lifecycle selftest (jev-selftest.js); rate-limited | No |
+| GET | `/api/jev/selftest/ledger` | bearer | Ledger integrity selftest (jev-selftest.js); rate-limited | No |
+| POST | `/api/jev/tasks` | bearer | Task create: caller-supplied payload.actions or freeform prompt; runs ingest->understand->decide->gate pipeline; optional body `workspace_id` binds the task to a workspace (unknown or archived id: 404 NOT_FOUND, nothing created); rate-limited | No |
 | GET | `/api/jev/tasks` | bearer | List tasks (expireStale first); rate-limited | No |
 | GET | `/api/jev/tasks/:id` | bearer | Task detail with actions, approvals, audit events, cost; rate-limited | No |
 | POST | `/api/jev/tasks/:id/execute` | bearer | Dispatch task actions (re-checks pause; skips rather than firing); rate-limited | No |
@@ -751,7 +755,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/automations` | bearer | Create an automation def (stage pipeline validation); rate-limited | No |
 | POST | `/api/jev/automations/:id/activate` | bearer | Activate automation (single-active per name enforced); rate-limited | No |
 | POST | `/api/jev/automations/:id/pause` | bearer | Pause an automation; rate-limited | No |
-| POST | `/api/jev/automations/:id/run` | bearer | Run automation inline (<=25s CPU): body IS the automation input (or {prompt} for prompt-input automations); creates + runs the task and returns full result; rate-limited | No |
+| POST | `/api/jev/automations/:id/run` | bearer | Run automation inline (<=25s CPU): body IS the automation input (or {prompt} for prompt-input automations); creates + runs the task and returns full result; optional body `workspace_id` binds the run to a workspace and the response adds `workspace`; rate-limited | No |
 | GET | `/api/jev/models` | bearer | Model routes for the console (classify=llama-3.1-8b, draft=llama-3.3-70b, guard=llama-guard-3-8b; raw: pins anything else); rate-limited | No |
 
 ### jev-evolution.js (evolution v1) - 6 routes
@@ -832,9 +836,9 @@ Parity source of record: tools/lens-standard (on main via PR #292, merged 2026-1
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---|
-| GET | `/api/jev/forecast/:series` | bearer | Advisory damped-trend Holt forecast over a WAE series (last 1000 points; grid alpha/beta 0.05..0.95 step 0.05, phi 0.98, holdout last 20%); returns {series, n, history_last30, forecast[], band[], quality{insufficient_series, low_r2, holdout_sse, holdout_n, holdout_r2, residual_sd, alpha, beta, holdout_coverage (null - not produced by v1), flags[]}, source:"wae"}; h=1..100 default 5; insufficient_series when n<8, low_r2 when holdout R2 < 0.5; forecasts are advisory, never gate-authorizing | Partial - pre-registered G1-G6 gates (5 PASS; G2 band coverage FAIL 84/100 flagged, never retuned) |
+| GET | `/api/jev/forecast/:series` | bearer | Advisory damped-trend Holt forecast over a WAE series (last 1000 points; grid alpha/beta 0.05..0.95 step 0.05, phi 0.98, holdout last 20%); returns {series, n, history_last30, forecast[], band[], quality{insufficient_series, low_r2, holdout_sse, holdout_n, holdout_r2, residual_sd, alpha, beta, holdout_coverage (null - not produced by v1), flags[]}, source:"wae"}; h=1..100 default 5; insufficient_series when n<8, low_r2 when holdout R2 < 0.5; forecasts are advisory, never gate-authorizing | Partial - pre-registered G1-G6 gates on band v2: G2 FAIL (100-replicate coverage C0 99, C1 99, C2 98, C3 93, C4 99 vs [88,98]); band NOT calibrated (quality.calibrated false); recorded v3 harness failed clause (i) with C2 at 100; live selftest names G2 and NEG_G2 |
 | GET | `/api/jev/timeseries/series` | bearer | Dataset inventory: SELECT index1 AS series, COUNT() AS n, MIN(timestamp), MAX(timestamp) FROM jev GROUP BY index1 ORDER BY n DESC | No |
-| GET | `/api/jev/timeseries/selftest` | bearer | Math selftest (etsSelfTest) + live WAE write/read-back probe on series selftest_probe + SELECT * schema probe (meta.columns, has_timestamp); propagation lag reported honestly instead of failing | Yes - the selftest harness itself |
+| GET | `/api/jev/timeseries/selftest` | bearer | Math selftest (etsSelfTest) + live WAE write/read-back probe on series selftest_probe + SELECT * schema probe (meta.columns, has_timestamp); propagation lag reported honestly instead of failing | Yes - the selftest harness itself; live 2026-10-09 returns ok:false, failing_gates [G2, NEG_G2] |
 
 Parity source of record: tools/forecast-standard/forecast_ets.py (yubi-OS/yubiOS; parity max |delta| = 0 on 4 fixtures). Deploy etag chain 7f8fa641 -> dda2f487 -> f0c6d7c7 -> f2313fa6.
 
