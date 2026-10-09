@@ -8,7 +8,7 @@ Assembled from five parallel lanes:
 
 | Lane | Deliverable | Headline numbers |
 |---|---|---|
-| A | Endpoint inventory from worker code | 121 route rows, 7 module parts |
+| A | Endpoint inventory from worker code | 121 route rows, 7 module parts (2026-10-05 lane count; live bundle has 57 module parts on 2026-10-09) |
 | B | AGENT.md cross-reference | 85 documented, 14 code-only, 0 doc-only, 12 discrepancies |
 | C | Capability map | 13 domains, 97 endpoint assignments, 16 cross-domain flows, 7 resources |
 | D | Lean verification map | 12 Lean files, 15 endpoint-to-Lean mappings, 5 CI jobs |
@@ -647,7 +647,7 @@ Bindings: SITE, DB
 
 Key invariants:
 - AGENT.md is the source of truth served no-cache from KV - the homepage 'Copy agent guide' button references it
-- Ops console is bearer-auth via JEV_API_KEY on every route except /api/jev/health; the key lives in sessionStorage, never persisted
+- Ops console is bearer-auth via JEV_API_KEY on every route except /api/jev/health and POST /api/jev/webhooks/reply (optional ?k= shared secret); the key lives in sessionStorage, never persisted
 - Cron dispatch is by cron expression: the evolution cron runs the evolution cycle, any other cron keeps the automations scheduler tick
 - Site adapter passes every /website-vN/* asset through from KV generically and delegates everything else unchanged
 
@@ -905,7 +905,7 @@ Operator diagnostics, bearer-gated (all four return 401 without a bearer, verifi
 ## Documented vs Code
 
 Lane B parsed AGENT.md (72997 bytes, JSON-quoted string; decoded to 71810 chars of markdown) and cross-referenced every documented row against the
-actual dispatch comparisons in the 42 module parts under parts/. Refreshed 2026-10-05:
+actual dispatch comparisons in the 42 module parts under parts/ (the 2026-10-05 count). Refreshed 2026-10-05:
 lanes R1+R2 resolved the Lane B findings (doc additions written to KV, code patches in
 index.js) and lane R3 re-ran the cross-reference fresh against the updated KV AGENT.md
 (76399 bytes, byte-identical to the resolved doc R1 deployed) and the patched bundle.
@@ -934,7 +934,7 @@ hierarchy oracle (POST /api/jev/corpus/oracle) and the lens standard (POST
 return their documented shape-validation 422s, /api/jev/route/bands serves the
 policy v12 band table and /api/jev/route/runs serves real run rows. Per the R3
 metric these 10 are code-only until AGENT.md (KV + git mirror) gains matching rows;
-the worker bundle is now 51 module parts (was 42 at R3).
+the worker bundle was 51 module parts at this refresh (was 42 at R3); the live bundle has 57 module parts as of 2026-10-09.
 
 ### Previously flagged, now resolved
 
@@ -959,7 +959,7 @@ The 14 Lane B code-only endpoints, every one now documented in AGENT.md:
 
 The 12 Lane B discrepancies, one by one:
 
-1. No doc-only endpoints - confirmed again by R3: every documented endpoint resolves to a route in the patched 42 module parts.
+1. No doc-only endpoints - confirmed again by R3: every documented endpoint resolves to a route in the patched 42 module parts (the 2026-10-05 count).
 2. GET /api/jev/pause method-coverage gap - RESOLVED: new GET row documents the fail-closed read contract.
 3. Four relay endpoints absent (/api/tts, /api/stt, /api/contact, /api/decide) - RESOLVED: full rows with method variants, caps and binding names.
 4. POST /api/chat undocumented by path - RESOLVED: explicit row, with /api/site-assistant as the live-site assistant path.
@@ -1074,9 +1074,9 @@ CI green -> endpoint serves
 | radius_profile / radius_comparison (in /api/jev/map, /api/jev/map/preview, /api/jev/map/maps/:id) | point-map radius module | RadiusBounds.lean | verify_wayfinder_axioms.py (against radius-scope.json) |
 | POST /api/jev/map/rayleigh (+ rayleigh_frame on /api/jev/map, rayleigh block in /api/jev/map/admission) | point-map rayleigh module | RayleighBounds.lean | verify_rayleigh_claims.py |
 | POST /api/jev/map/azimuth (+ azimuth block in /api/jev/map/admission) | point-map azimuth module | AzimuthBounds.lean | verify_wayfinder_axioms.py (against azimuth-scope.json) |
-| POST /api/jev/corpus/spectral/walk (+ /spectral/series, /spectral/selftest) | jev-spectral-math.js + jev-spectral-centroid.js | - | falsification harness in tools/spectral-standard (15/15 golds, 61 anchors; PR #292 draft, verify-tools step pending merge) |
-| POST /api/jev/corpus/oracle | jev-spectral.js (composes jev-edge-standard.js + the centroid walk) | - | falsification gold families (PR #292 draft) |
-| POST /api/jev/corpus/lens/correct (+ GET /lens/selftest) | jev-lens-math.js | - | falsification harness in tools/lens-standard (75/75 PASS, preregistration + anchors; PR #292 draft) |
+| POST /api/jev/corpus/spectral/walk (+ /spectral/series, /spectral/selftest) | jev-spectral-math.js + jev-spectral-centroid.js | - | falsification harness in tools/spectral-standard (15/15 golds, 61 anchors; on main via PR #292, merged 2026-10-07; verify-tools) |
+| POST /api/jev/corpus/oracle | jev-spectral.js (composes jev-edge-standard.js + the centroid walk) | - | falsification gold families (on main via PR #292, merged 2026-10-07) |
+| POST /api/jev/corpus/lens/correct (+ GET /lens/selftest) | jev-lens-math.js | - | falsification harness in tools/lens-standard (75/75 PASS, preregistration + anchors; on main via PR #292, merged 2026-10-07) |
 | POST /api/jev/map/axis-redundancy (+ axis block in /api/jev/map/admission) | point-map axis-trial module | CurvedCorpus.lean | verify_claims.py |
 
 ### Tool to CI map
@@ -1095,8 +1095,8 @@ CI green -> endpoint serves
 | tools/phonon-dispersion/ | GET spectra card diagnostics (E_l, l(l+1) eigenvalues) | verify-tools | phonon-dispersion selftest |
 | tools/zernike-spectrum/ | POST /api/jev/corpus/lens (Zernike admission trials) | run-real-corpus (admission non-empty on real corpus) | zernike-spectrum corpus admission (any_admitted=true) |
 | tools/edge-standard/ | POST /api/jev/corpus/taste/edge-standard | verify-tools (NEWLY ADDED - taste-engine source of record) | edge-standard selftest (taste-engine source of record); edge-standard fixture parity (Python source of record vs JS worker port: test_parity_edge.test.js, test_e2e_edge.test.js) |
-| tools/spectral-standard/ | POST /api/jev/corpus/spectral/walk; POST /api/jev/corpus/spectral/series; POST /api/jev/corpus/oracle | PR #292 (draft - not yet on main) | 42-check selftest + 15/15 falsification golds + 61 committed anchors; verify-tools step planned on merge |
-| tools/lens-standard/ | POST /api/jev/corpus/lens/correct; GET /api/jev/corpus/lens/selftest | PR #292 (draft - not yet on main) | 46-check selftest + 75/75 falsification PASS + preregistration/anchors; verify-tools step planned on merge |
+| tools/spectral-standard/ | POST /api/jev/corpus/spectral/walk; POST /api/jev/corpus/spectral/series; POST /api/jev/corpus/oracle | PR #292 (merged to main 2026-10-07) | 42-check selftest + 15/15 falsification golds + 61 committed anchors; verify-tools (lean-check.yml) |
+| tools/lens-standard/ | POST /api/jev/corpus/lens/correct; GET /api/jev/corpus/lens/selftest | PR #292 (merged to main 2026-10-07) | 46-check selftest + 75/75 falsification PASS + preregistration/anchors; verify-tools (lean-check.yml) |
 
 ### CI jobs
 
@@ -1110,8 +1110,8 @@ CI green -> endpoint serves
 
 **Spectral/lens cross-reference.** tools/spectral-standard and tools/lens-standard
 (the sources of record behind POST /api/jev/corpus/spectral/*, POST
-/api/jev/corpus/oracle and POST /api/jev/corpus/lens/correct) live on draft PR
-#292, not yet on main; on merge their selftests + falsification golds join
+/api/jev/corpus/oracle and POST /api/jev/corpus/lens/correct) are on main via
+PR #292 (merged 2026-10-07); their selftests and falsification golds run in
 lean-check.yml verify-tools.
 
 **Edge-standard cross-reference.** lean-check.yml `verify-tools` lists 11 tools and
@@ -1321,7 +1321,7 @@ Key keys:
 Used by: all domains that fetch upstream.
 
 Key keys:
-- JEV_API_KEY - bearer auth on every jev route except /api/jev/health; also the operator key behind DELETE /api/jev/map/maps/:id and DELETE /api/jev/map/sos/fits/:id (R2 patch)
+- JEV_API_KEY - bearer auth on every jev route except /api/jev/health and POST /api/jev/webhooks/reply (optional ?k= shared secret); also the operator key behind DELETE /api/jev/map/maps/:id and DELETE /api/jev/map/sos/fits/:id (R2 patch)
 - DEFAPI_API_KEY - /api/decide relay, corpus scorer, taste clef calls, jev quality/decide stages
 - ELEVENLABS_API_KEY - /api/tts (eleven_turbo_v2_5) and /api/stt (scribe_v1)
 - RESEND_API_KEY - /api/contact relay, jev resend.send actions, evolution notify digests (schema {from,to,subject,html})
@@ -1353,6 +1353,7 @@ Refresh notes (2026-10-05, discrepancy resolution):
 14. Map fold 2026-10-08: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/* via a mechanical prefix rewrite in index.js (old paths 410 'moved: this API relocated to /api/jev/map/*'); the /map/ page folded into a Map card in the /jev/ console's diagnostics panel (maps list, repo->embed->map creation, pointmap.js globe, instrument buttons, outcomes ledger, NSS prompt viewer); /map/ + /map/app.js 410 'moved: the map UI lives in the /jev/ console', /map/pointmap.js kept as the card's rendering-library asset; SOS paths moved to /api/jev/map/sos/*; verification: 71-route harness, 71/71 PASS incl. bearer no-key 401 / keyed pass on every transitioned route. Deploy etag 0f07bbe2. SPEC-MAP-FOLD-2026-10-08. Card v2 (same day): full parity with the old /map/ page - the card now carries the five original tabs (instrument / results / proofs / diagnostics / rounds) with every input field, button and info-tip (source select texts/files/dirs/repo, params N/D/d/seed/T/K/baseline/labels, globe controls, candidate ladder, wayfinder prompt, certificates + lean-check CI, azimuth/rayleigh/admission/axis-redundancy/spectroscopy/radius, candidate preview/consistency/positive control/outcome ledger, download/use-as-baseline); the diagnostics panel's anchor pills became view-switching tabs (7 tabs, one card visible at a time, WAI-ARIA); Map card styled to the taste-card family. Advisor design review caught a fatal port defect (dropped src.onchange handler assignment) pre-deploy. Follow-up (owner review): scorer, taste, router and spectral promoted out of the corpus tab to their own diag tabs - the diagnostics panel is now 11 view-switching tabs (tasks, learnings, automations, evolution, corpus, scorer, taste, router, spectral, visco, map), every card with its own tab button.
 15. Style + router round 2026-10-08 (parallel lanes + advisor, SPEC-STYLE-ROUTER-2026-10-08): (a) console-wide style harmonization - every diag-panel card and page-level section carries the map card's eyebrow/title/description heading pattern and surface treatment (additive jev-eyebrow/jev-title/jev-sub/jev-surface classes; scripts byte-identical); (b) prompt intake routed through the hierarchy router - selectForPrompt (jev-router) measures the prompt as a text artifact (scorer.bits), policy v15 adds 6 provisional text bands and 9 tool targets in the route.dispatch targets registry, decideActionsFromPrompt branches on the band target: model lanes (lane-draft 70b / lane-classify 8b / model:*) run the draft flow on that model (decided_via router:<target>), tool targets emit ONE gated route.dispatch action (in-process dispatch via handleJevCorpus / policy-named-credential fetch, never self-fetch, provisional bands never auto-execute), and no matching band falls back to the legacy 70b flow (router: no_band in intent_json); routeArtifact's run-row hash now includes policy_version (stale pre-promote rows no longer replay). Policy v15 promoted via the audited flow (learning l_1110f0713212b026, actor jenny, approvals_expired 2). Harness verify-prompt-router.mjs: 14/14 PASS post-promote (determinism compares decision signatures; a first routed call returns 201 Created because it creates the gated task). Deploy etags 806539f1 -> 8b0c6c6b.
 16. Timeseries wave + harness recatalog 2026-10-08 (this refresh): (a) 3 routes added - GET /api/jev/timeseries/selftest, GET /api/jev/timeseries/series and GET /api/jev/forecast/:series (Workers Analytics Engine dataset jev via the TS analytics_engine binding + the AE_SQL_TOKEN Account Analytics Read token; damped-trend Holt forecaster in jev-forecast-math.js, Python source of record tools/forecast-standard/forecast_ets.py, parity max |delta| = 0 on 4 fixtures; WAE write sites: wrapped deps.transit task_state/task_terminal, jev-review approval created/approved/rejected, recordRun corpus_run; tsWrite never throws into the request path); deploy etag chain 7f8fa641 -> dda2f487 -> f0c6d7c7 -> f2313fa6. (b) Falsification Harness column recataloged against the harnesses shipped since the 2026-10-06 refresh: visco snapback + hysteresis Yes (PR #296 - 852/852 snapback verdict classes + FPR-vs-analytic, 102.86 hysteresis anchor + 9 chain fixtures), router e2e corpus + scorer gold slice noted as Partial with their PR #297 findings (router 11/12 band + gate outcomes, F1 bands-doc defect open; scorer specificity 4/4 PASS, recall 0/4 = the v2.3 extractor-recall gap), spectral centroid fixture regenerated under the euclidean metric (PR #298). (c) The column header is renamed Harness -> Falsification Harness on every capability and inventory table. (d) The flow diagram gained the timeseries node + WAE external and a cron node replacing the client-cron edge, and was re-verified in both light and dark themes. 127 -> 130 routes. (e) Restoration pass after the merge: the parallel time-series doc edit at 99a7fdd894 had richer detail this refresh's wholesale file replace dropped - the datapoint schema line (index1/blob1..3/double1..2), the band formula, the G2 selftest-report fact, the sampling note, the Outcome Ledger + timesfm-tsfm-landscape composes-with cross-refs - all folded back in, and the selftest harness cell re-cataloged Partial -> Yes.
+17. Drift fix 2026-10-09 (docs/drift-2026-10-09), each item checked against the live steady-orbit bundle and live routes, or against main: (a) GET /api/jev/corpus/visco/hysteresis requires baseline_id and returns 422 INVALID_BASELINE without it; (b) Prony is clip-and-resolve least squares, not NNLS; (c) 102.86 is a recorded round-3 hysteresis value with tolerance 0.05, not an analytic anchor; (d) spectral-standard and lens-standard are on main via PR #292 (merged 2026-10-07) and run in lean-check.yml verify-tools; (e) timeseries band v2 is not calibrated, and the live selftest returns ok:false naming G2 and NEG_G2; (f) live policy v16 (9 tools) documents github.contents_put, daytona.sandbox and searxng.dig, http.post is POST-only, and route.dispatch requires_approval stays false by decision (Jenny); (g) policy, workspace and selftest routes are in the tables, and GET /api/jev/corpus/health is bearer-gated (401 without it); (h) the live worker has 16 bindings and 57 module parts (2026-10-09).
 
 
 
