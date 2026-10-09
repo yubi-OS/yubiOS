@@ -67,6 +67,15 @@ Endpoints:
 | GET | `/api/jev/summary` | bearer | No |
 | GET\|POST | `/api/jev/learnings` | bearer | No |
 | POST | `/api/jev/learnings/:id/promote` | bearer | No |
+| GET | `/api/jev/policy` | bearer | No |
+| GET | `/api/jev/policy/tools` | bearer | No |
+| POST | `/api/jev/workspaces` | bearer | No |
+| GET | `/api/jev/workspaces/:id` | bearer | No |
+| DELETE | `/api/jev/workspaces/:id` | bearer | No |
+| GET | `/api/jev/workspaces/:id/artifacts` | bearer | No |
+| GET | `/api/jev/workspaces/:id/artifacts/:name` | bearer | No |
+| GET | `/api/jev/selftest` | bearer | No |
+| GET | `/api/jev/selftest/ledger` | bearer | No |
 | POST | `/api/jev/approvals/:id/guide` † | bearer | No |
 
 Module parts: jev-main.js, routes-jev.js, jev-ingest.js, jev-state.js, jev-decide.js, jev-gate.js, jev-execute.js, jev-verify.js, jev-review.js, jev-loop.js, jev-improve.js, dbx.js
@@ -89,6 +98,22 @@ Composes with:
 - Automations (propose_actions stage feeds proposals into the same gate)
 - Evolution (directive execution goes through this gate)
 - Taste Engine / Corpus Math (jev-1.13 decision model shared with the scorer and quality gates)
+
+#### Policy (live jev-policy.json, version 16)
+
+`GET /api/jev/policy` returns the stored `jev-policy.json` as-is and `GET /api/jev/policy/tools` returns its `tools` registry. Both are bearer-gated (401 without a bearer, verified live 2026-10-09). Policy changes still go only through `POST /api/jev/learnings/:id/promote`. The live policy has 9 tools:
+
+| Tool | Methods | Hosts | requires_approval | max_cost_usd | Notes |
+|---|---|---|---|---|---|
+| `http.fetch` | GET, POST | api.github.com, api.defapi.org | false | 0.5 | |
+| `http.post` | POST | api.github.com, api.defapi.org | true | 1 | POST only; PUT is no longer a method on this tool |
+| `github.contents_put` | PUT | api.github.com | true | 0 | GitHub Contents writes; deny_branches `main`, path_prefix_allowlist `scratch/`, blob sha required on update |
+| `daytona.sandbox` | POST, DELETE | app.daytona.io, proxy.app.daytona.io | true | 0.25 | command_allowlist |
+| `searxng.dig` | GET | p01--n8n-service--mcx7zcrbvdyt.code.run | false | 0 | allowed_query_params; search dig via the n8n webhook |
+| `route.dispatch` | POST | jev.route | false | 0 | 12 targets; requires_approval stays false by decision (Jenny) |
+| `resend.send` | POST | api.resend.com | true | 0.5 | |
+| `web.fetch_public` | GET | `*` | false | 0 | |
+| `places.search` | POST | places.googleapis.com | false | 0 | |
 
 ### Automations (versioned stage pipelines + cron)
 
