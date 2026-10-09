@@ -170,7 +170,7 @@ Endpoints:
 
 | Method | Path | Auth | Falsification Harness |
 |---|---|---|---------|
-| GET | `/api/jev/corpus/health` | none | No |
+| GET | `/api/jev/corpus/health` | bearer | No |
 | POST | `/api/jev/corpus/audit` | bearer | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/scorer/score` | bearer | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
 | POST | `/api/jev/corpus/scorer/matrix` | bearer | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
@@ -240,7 +240,7 @@ Endpoints:
 | Method | Path | Auth | Falsification Harness |
 |---|---|---|---------|
 | POST | `/api/jev/corpus/visco/persistence` | bearer | Partial - fixture anchors + recorded-series honest gates |
-| GET | `/api/jev/corpus/visco/hysteresis` | bearer | Yes - falsification corpus (PR #296: 102.86 analytic anchor exact, 9 chain-shape fixtures, live contract checks; synthetic fixtures reference-only, live reads the production ledger) |
+| GET | `/api/jev/corpus/visco/hysteresis` | bearer | Yes - falsification corpus (PR #296: 102.86 recorded round-3 value, tolerance ±0.05, 9 chain-shape fixtures, live contract checks; synthetic fixtures reference-only, live reads the production ledger) |
 | GET | `/api/jev/corpus/visco/prony` | bearer | Partial - fixture anchors + recorded-series honest gates |
 | GET | `/api/jev/corpus/visco/mobility` | bearer | Partial - fixture anchors + recorded-series honest gates |
 | POST | `/api/jev/corpus/visco/snapback` | bearer | Yes - falsification corpus (PR #296: 852/852 verdict classes + FPR-vs-analytic 4/4; recorded round-3 series reproduced live: runs [[4],[6,7],[10]] -> halt_round) |
@@ -257,6 +257,7 @@ Key invariants:
 - Verdicts only, never auto-actions; the prose gate rule remains the fallback
 - Empty ledger -> no_data; fewer than 5 points -> 422 INSUFFICIENT_SERIES
 - Deterministic scoring collapses R (text-revert recovery) to 1 - stays unmeasured
+- `GET /api/jev/corpus/visco/hysteresis` requires the query parameter `baseline_id` (numeric). Without it the route returns 422 `INVALID_BASELINE` ("baseline_id query parameter is required"), verified live 2026-10-09.
 - Prony policy_version filter excludes NULL-era rows
 
 Composes with:
@@ -292,7 +293,7 @@ Bindings: DB, JEV_API_KEY
 Key invariants:
 - Walk-mode d_w is primary for the gasket family; series counting for smooth spectra; the staircase is handled by the secondary gate, never forced into the primary fit
 - Einstein on measured inputs correctly returns `insufficient` below the pinned scale; zero false "consistent" on real data (11/11 held)
-- Falsification harness: 15/15 gold PASS + 61 committed anchors in tools/spectral-standard (PR #292 draft)
+- Falsification harness: 15/15 gold PASS + 61 committed anchors in tools/spectral-standard (on main via PR #292, merged 2026-10-07; run in lean-check.yml verify-tools)
 
 Composes with:
 - Taste Engine (edge-standard D is an oracle input)
@@ -778,7 +779,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
-| GET | `/api/jev/corpus/health` | none | Corpus module health: which math/atom/lens modules are wired | No |
+| GET | `/api/jev/corpus/health` | bearer | Corpus module health: which math/atom/lens modules are wired | No |
 | POST | `/api/jev/corpus/audit` | bearer | Corpus audit: V2, z, verdict, dBc, shares, E_l; idempotent per input sha256 (repeat returns same run_id cached:true); Decision-B multipass mode; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/lens` | bearer | Lens candidates: K reals + K paired controls in guided-curve-ideate format; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/atom` | bearer | RSI-descent atom plan, DRY-RUN only (Delta >= 0 invariant asserted); rate-limited | Partial - parity-tested vs Python sources of record |
@@ -793,8 +794,8 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/corpus/taste/score` | bearer | Nature-based taste instrument: deterministic extraction (box-counting D, mirror symmetry, scale coherence) + ONE batched clef call over 8 nature-law axes, 0.45/0.55 hysteresis, order_seed position-bias control; rate-limited | Partial - jitter + calibration sweeps + gold set; no falsification corpus |
 | POST | `/api/jev/corpus/taste/matrix` | bearer | Paced batch taste scoring of 1..20 items, one run row kind taste-matrix; rate-limited | Partial - jitter + calibration sweeps + gold set; no falsification corpus |
 | POST | `/api/jev/corpus/visco/persistence` | bearer | Persistence of flips under independent re-grading: audits base + loaded internally (same computeAudit path); rate-limited | Partial - fixture anchors + recorded-series honest gates |
-| GET | `/api/jev/corpus/visco/hysteresis` | bearer | Close supersedes chains in the outcomes ledger: prediction-vs-realized dissipation rollup; rate-limited | Yes - falsification corpus (PR #296: 102.86 analytic anchor exact, 9 chain-shape fixtures, live contract checks; synthetic fixtures reference-only, live reads the production ledger) |
-| GET | `/api/jev/corpus/visco/prony` | bearer | Prony relaxation fit (tau grid + NNLS) over corpus-runs history, t_basis created_at; rate-limited | Partial - fixture anchors + recorded-series honest gates |
+| GET | `/api/jev/corpus/visco/hysteresis` | bearer | Close supersedes chains in the outcomes ledger: prediction-vs-realized dissipation rollup; requires `?baseline_id=` (422 INVALID_BASELINE without it); rate-limited | Yes - falsification corpus (PR #296: 102.86 recorded round-3 value, tolerance ±0.05, 9 chain-shape fixtures, live contract checks; synthetic fixtures reference-only, live reads the production ledger) |
+| GET | `/api/jev/corpus/visco/prony` | bearer | Prony relaxation fit (tau grid + clip-and-resolve least squares: normal equations, negative amplitudes clipped to 0 and re-solved) over corpus-runs history, t_basis created_at; rate-limited | Partial - fixture anchors + recorded-series honest gates |
 | GET | `/api/jev/corpus/visco/mobility` | bearer | Mines accumulated lens runs into the cell-mobility series (frozen-baseline recheck input); rate-limited | Partial - fixture anchors + recorded-series honest gates |
 | POST | `/api/jev/corpus/visco/snapback` | bearer | Mechanized stop verdict for a round's cumulative (predicted, realized) series; rate-limited | Yes - falsification corpus (PR #296: 852/852 verdict classes + FPR-vs-analytic 4/4; recorded round-3 series reproduced live) |
 | GET | `/api/jev/corpus/visco/policy-log` | bearer | Wipe-proof policy changelog (promote flow appends on every version bump); rate-limited | Partial - fixture anchors + recorded-series honest gates |
@@ -807,7 +808,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/corpus/spectral/series` | bearer | Series counting exponent d_s over >= 8 spectral values; log-periodic staircase handled by the secondary gate; rate-limited | Yes - falsification corpus |
 | GET | `/api/jev/corpus/spectral/selftest` | bearer | 9-check selftest: Delaunay edge parity, walk parity vs the Python source of record, series golds, permutation-null collapse, Einstein consistency | Yes - falsification corpus |
 
-Parity source of record: tools/spectral-standard (on draft PR #292, not yet on main).
+Parity source of record: tools/spectral-standard (on main via PR #292, merged 2026-10-07; run in lean-check.yml verify-tools).
 
 ### jev-lens.js (lens standard + corrected-hierarchy) - 2 routes
 
@@ -816,7 +817,7 @@ Parity source of record: tools/spectral-standard (on draft PR #292, not yet on m
 | POST | `/api/jev/corpus/lens/correct` | bearer | Corrected-hierarchy instrument: estimate astig/spherical/trefoil, apply the pinned sequential correction (astig -> spherical -> trefoil), re-measure D; envelope-guarded, fail-closed; rate-limited | Yes - falsification harness (75/75 PASS + preregistration) |
 | GET | `/api/jev/corpus/lens/selftest` | bearer | Lens selftest: surface resolution, pinned thresholds T(m), fixture warp + estimate parity, idempotence, cross-talk envelope | Yes - falsification harness |
 
-Parity source of record: tools/lens-standard (on draft PR #292, not yet on main).
+Parity source of record: tools/lens-standard (on main via PR #292, merged 2026-10-07; run in lean-check.yml verify-tools).
 
 ### jev-router.js (measurement-gated hierarchy router) - 4 routes
 
@@ -1092,7 +1093,7 @@ flowchart LR
     Core --> Tts
     Core --> Surf
     subgraph JEV["Jev orchestrator - routes-jev.js"]
-        Health["GET /api/jev/health<br/>GET /api/jev/corpus/health - unauth"]
+        Health["GET /api/jev/health<br/>GET /api/jev/corpus/health - bearer"]
         Bearer{"Bearer auth<br/>JEV_API_KEY"}
         Autom["routes-automations.js: /api/jev/automations<br/>:id/activate|pause|run, /api/jev/models"]
         Hook["POST /api/jev/webhooks/reply<br/>no bearer - optional ?k= secret"]
