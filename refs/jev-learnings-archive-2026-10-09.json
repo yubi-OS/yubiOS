@@ -1,0 +1,203 @@
+{
+  "archive": "jev_learnings",
+  "archived_before": "2026-10-09 data clear 4",
+  "source": "steady-orbit D1 table jev_learnings, rowid order, verbatim",
+  "count": 19,
+  "status_at_archive": {
+    "active": 9,
+    "proposed": 10
+  },
+  "note": "Active rows were promoted through POST /api/jev/learnings/:id/promote (policy versions 7 to 15). Proposed rows were never promoted: they are lesson or evolution-candle records, not policy changes. Promotion needs a full replacement policy doc and bumps the version, so proposed rows were archived here instead of promoted.",
+  "learnings": [
+    {
+      "__rid": 1,
+      "id": "l_5e936507c9740b65",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"policy_change\",\"title\":\"SPEC-ROUTER v1: measurement-gated routing regime\",\"policy_version_from\":6,\"policy_version_to\":7,\"adds\":{\"tools.route.dispatch\":{\"hosts\":[\"jev.route\"],\"methods\":[\"POST\"],\"requires_approval\":false,\"max_cost_usd\":0,\"kind\":\"builtin\",\"targets\":[\"lane-draft\",\"lane-classify\"],\"model_routes\":{\"lane-classify\":\"classify\",\"lane-draft\":\"draft\"},\"schema\":{\"type\":\"object\",\"required\":[\"tool\",\"target\",\"artifact_ref\",\"band_id\"],\"properties\":{\"tool\":{\"const\":\"route.dispatch\"},\"target\":{\"type\":\"string\",\"enum\":[\"lane-draft\",\"lane-classify\"],\"description\":\"must equal the selected band's target AND be listed in targets\"},\"artifact_ref\":{\"type\":\"string\",\"minLength\":1,\"description\":\"the jev_corpus_runs router row id (run row id) being routed\"},\"band_id\":{\"type\":\"string\",\"minLength\":1,\"description\":\"the policy band id that selected this target\"},\"prompt\":{\"type\":\"string\",\"description\":\"optional instruction payload forwarded to lane-* model targets\"}},\"additionalProperties\":false}},\"routing\":{\"default_on_no_band\":\"blocked\",\"bands\":[{\"id\":\"hierarchy-image\",\"modality\":\"image\",\"feature\":\"fractal_band.D\",\"min\":1.45,\"max\":2,\"target\":\"lane-draft\",\"calibration\":\"calibrated\",\"description\":\"hierarchical morphology -> 70b lane\"},{\"id\":\"ordered-image\",\"modality\":\"image\",\"feature\":\"fractal_band.D\",\"min\":1,\"max\":1.45,\"target\":\"lane-classify\",\"calibration\":\"calibrated\",\"description\":\"ordered-smooth morphology -> 8b lane\"},{\"id\":\"sparse-image\",\"modality\":\"image\",\"feature\":\"fractal_band.D\",\"min\":0,\"max\":1,\"target\":\"lane-classify\",\"calibration\":\"calibrated\",\"description\":\"sparse field -> 8b lane\"},{\"id\":\"multimodal-probe\",\"modality\":\"multimodal\",\"feature\":\"multimodal_band.score\",\"min\":0,\"max\":1,\"target\":\"lane-draft\",\"calibration\":\"provisional\",\"description\":\"model-judged; needs_approval until calibrated\"}]}},\"notes\":[\"Band interval semantics pinned: min inclusive, max exclusive; last band per (modality, feature) inclusive-both.\",\"multimodal-probe ships calibration:provisional — routes to needs_approval until the 21-point sweep (spec §9).\",\"Bands read from policy at call time; no new caches.\"]}",
+      "status": "active",
+      "created_at": "2026-10-06T11:04:01.812Z",
+      "promoted_at": "2026-10-06T11:04:03.056Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 2,
+      "id": "l_4bc3b992468d2f8d",
+      "task_id": null,
+      "proposal_json": "{\"from\":\"evolution\",\"reason\":\"auto_record_learning\",\"directive_id\":\"ed_acd19b308e68076f\",\"sweep_id\":\"es_5b05b9549851c3c4\",\"fire\":610061,\"kind\":\"record_learning\",\"title\":\"Hierarchy-oracle MVP = two-axis D + spectral-d_s instrument with Einstein-relation consistency gate\",\"status\":null,\"impact\":null,\"suggestion\":\"Ideation round 2026-10-06 converged (clef choice V1_plus_V6 p 0.686): extend edge-standard-v1 with a spectral sibling instrument; the oracle's ordering is inherited from the Sierpinski gold family (exact d_f = ln3/ln2, d_w = ln5/ln2, d_s = 2 ln3/ln5) rather than sampled. Falsification harness: exact Fukushima-Shima gasket eigenvalues, 1D/2D lattice analytic bands, permutation nulls must collapse the exponent.\",\"evidence\":null}",
+      "status": "proposed",
+      "created_at": "2026-10-06T11:04:07.517Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 3,
+      "id": "l_9bf21d1a3df53c33",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"policy_change\",\"title\":\"multimodal-probe band calibration sweep PASS -> calibrated\",\"policy_version_from\":7,\"policy_version_to\":8,\"adds\":{\"routing.bands[multimodal-probe].calibration\":\"calibrated\"},\"notes\":[\"Pre-registered sweep (calib-mm-preregistration.md): jitter sd=0 on both artifact classes (5 re-calls each, <= 0.02 required) - PASS.\",\"Discrimination: mean(matched hints) 0.8995 vs mean(mismatched hints) 0.0814, paired delta 0.818 >= 0.15 - PASS with margin.\",\"Axis property (recorded, not gated): Spearman rho(score, depth) 0.322, rho(score, D) 0.288 over 21 graduated gaskets - the score is hint-anchored by design (the question scores hint-artifact match, not absolute morphology).\",\"Instruction sensitivity: a vague neutral hint scores LOW (0.1434) on a gasket that scores 0.9527 with a matched descriptive hint and 0.833 with no hint - multimodal routing quality depends on caller hint quality; documented in the calibration record.\"]}",
+      "status": "active",
+      "created_at": "2026-10-06T11:45:53.639Z",
+      "promoted_at": "2026-10-06T11:45:58.234Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 4,
+      "id": "l_a733ba8458ab75c2",
+      "task_id": null,
+      "proposal_json": "{\"title\":\"V4 pair-bands: route on the measured (D, d_w) feature pair\",\"description\":\"Adds hierarchy-confirmed and hierarchy-spectral pair-bands to routing.bands. The router's image measurement now carries the spectral sibling (centroid-Delaunay walk d_w) alongside edge-standard D; pair-bands evaluate all clauses. Calibration: C2 gate (gasket arrangement d_w 2.7049 vs lattice 2.0446, r2 0.993), C3 at-scale (jitter d_w <= 2.045 at 3 seeds), live-route walk parity delta 0.0 vs Python. Directed by operator (Jenny) in-session 2026-10-06: 'then the v4 v3 consume'.\",\"proposed_changes\":[{\"kind\":\"policy\",\"title\":\"routing.bands pair-bands\",\"description\":\"hierarchy-confirmed (D>=1.45 AND d_w>=2.4 -> lane-draft); hierarchy-spectral (D in [1.0,1.45) AND d_w>=2.4 -> lane-draft)\"}]}",
+      "status": "active",
+      "created_at": "2026-10-06T15:09:03.974Z",
+      "promoted_at": "2026-10-06T15:09:05.214Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 5,
+      "id": "l_5856c700a9ad8505",
+      "task_id": null,
+      "proposal_json": "{\"title\":\"V4 calibration retrofit: n-floor clause on the pair-bands (policy v10)\",\"description\":\"The v9 d_w >= 2.40 edge false-positived live on a 19-droplet tri-lattice render (d_w 5.93, pre-asymptotic saturation). Pre-declared caveat from the centroid-walk preregistration: the d_w edge is calibrated only at N >= ~300 (C2 at 366 pts). v10 adds spectral.n_components >= 300 to both pair-bands. Actor jenny per her in-session V4 directive; this is the calibration retrofit of that band.\",\"proposed_changes\":[{\"kind\":\"policy\",\"title\":\"pair-band n-floor\",\"description\":\"spectral.n_components >= 300 added to hierarchy-confirmed and hierarchy-spectral\"}]}",
+      "status": "active",
+      "created_at": "2026-10-06T15:11:10.318Z",
+      "promoted_at": "2026-10-06T15:11:11.354Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 6,
+      "id": "l_e0acdb8a49717ac7",
+      "task_id": null,
+      "proposal_json": "{\"title\":\"Corrected-hierarchy band: lens-gated measure-then-correct routing (policy v11, PROVISIONAL)\",\"description\":\"Adds the corrected-hierarchy pair-band (D ordered AND lens.detect_score >= 1 AND n_components >= 300 -> lane-correct) and the lane-correct target. Router-side semantics: deterministic correction in the pinned sequential order against the caller-declared gold family, then ONE re-select (depth cap 1); the gate disposes of the final route. Family-gated lens features: computed ONLY when artifact.any.lens_family names a registered gold family on a canonical 512x512 gray. Actor jenny per her in-session 'go on next round' directive. Calibration: Set A (clean golds, no false positive) under this provisional policy; v12 promotes to calibrated after Set A; Set B verifies end-to-end under v12.\",\"proposed_changes\":[{\"kind\":\"policy\",\"title\":\"corrected-hierarchy band + lane-correct target\",\"description\":\"routing.bands gains corrected-hierarchy (provisional); route.dispatch.targets gains lane-correct (never in model_routes — the router resolves it deterministically)\"}]}",
+      "status": "active",
+      "created_at": "2026-10-06T17:14:17.689Z",
+      "promoted_at": "2026-10-06T17:14:18.813Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 7,
+      "id": "l_c80ddee42729fcfe",
+      "task_id": null,
+      "proposal_json": "{\"title\":\"Corrected-hierarchy band -> calibrated (policy v12) after Set A\",\"description\":\"Set A PASSED live: clean gasket gold (family gasket) detect_score 0/0/0 estimates exactly zero, no corrected-hierarchy fire, hierarchy-image -> lane-draft unchanged, task terminal; clean tri gold detect_score 0/0/0, ordered-image unchanged. Also verifies the n-floor semantic fix live (n_components = traced droplet count: 366 gasket / 19 tri). Actor jenny per her in-session 'go on next round' directive. Set B (ordered-band-reaching aberrated golds: astig 0.20, spherical 0.24, trefoil 1.9e-4) verifies end-to-end under v12 with revert-on-failure.\",\"proposed_changes\":[{\"kind\":\"policy\",\"title\":\"corrected-hierarchy calibrated\",\"description\":\"calibration provisional -> calibrated after Set A no-false-positive verification\"}]}",
+      "status": "active",
+      "created_at": "2026-10-06T17:17:20.190Z",
+      "promoted_at": "2026-10-06T17:17:21.200Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 8,
+      "id": "l_5074a48b926bc634",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"policy_band_add\",\"title\":\"aberrated-hierarchy-escalation provisional band (policy v13)\",\"description\":\"Closes F1 (Lane D router e2e corpus): trefoil-1e-4 measured D 1.5108 with detect_score 9999 but corrected-hierarchy's D window [1,1.45] refused it, so it fell through to hierarchy-confirmed and auto-dispatched. New pair band BEFORE hierarchy-confirmed: D >= 1.45 AND lens.detect_score >= 1 -> calibration provisional -> needs_approval via band_provisional (never auto-dispatches, never auto-corrects - the estimator cross-reads in this regime). Clean golds must not fire (Set A detect_score 0).\",\"source\":\"Lane D falsification corpus F1 + Lane E investigation\",\"band\":{\"id\":\"aberrated-hierarchy-escalation\",\"modality\":\"image\",\"feature\":\"pair\",\"min\":0,\"max\":100,\"all\":[{\"feature\":\"fractal_band.D\",\"min\":1.45,\"max\":2},{\"feature\":\"lens.detect_score\",\"min\":1,\"max\":9999}],\"target\":\"lane-draft\",\"calibration\":\"provisional\",\"description\":\"Aberrated-hierarchy escalation (policy v13, PROVISIONAL): D >= 1.45 (hierarchy range) AND the lens estimator detects aberration (detect_score >= 1). Closes the F1 hole (Lane D, run cr_93afeeb0fa91f8ea): trefoil-1e-4 rendered D 1.5108 with detect_score 9999 but corrected-hierarchy's D window [1,1.45] refused it, so it fell through to hierarchy-confirmed and auto-dispatched. Auto-correction is WRONG in this regime (the estimator cross-reads: arrangement-arm spherical -0.398, outside the 1/3 envelope), so this band routes to needs_approval via the band_provisional path - it never auto-dispatches and never auto-corrects. Clean golds must NOT fire (detect_score 0 at Set A). Calibrate before promoting to calibrated.\"}}",
+      "status": "active",
+      "created_at": "2026-10-07T16:53:48.123Z",
+      "promoted_at": "2026-10-07T16:54:00.218Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 9,
+      "id": "l_4297c76d3fa56c47",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"policy_band_amend\",\"title\":\"aberrated-hierarchy-escalation detect clause max 9999 -> 10000 (policy v14)\",\"description\":\"v13 live verification MISSED its target case: the trefoil-1e-4 flip carried detect_score 9999 (the out-of-envelope sentinel) and band maxes are EXCLUSIVE (router selftest band_max_exclusive), so the v13 clause [1,9999] excluded exactly the F1 case and the artifact fell through to hierarchy-confirmed (run cr_4fc2c801cdb99916). v14 widens the clause to [1,10000) so the sentinel matches. Clean golds unaffected (detect 0).\",\"source\":\"v13 live verification (pixel-flip re-routes)\",\"band\":{\"id\":\"aberrated-hierarchy-escalation\",\"modality\":\"image\",\"feature\":\"pair\",\"min\":0,\"max\":100,\"all\":[{\"feature\":\"fractal_band.D\",\"min\":1.45,\"max\":2},{\"feature\":\"lens.detect_score\",\"min\":1,\"max\":10000}],\"target\":\"lane-draft\",\"calibration\":\"provisional\",\"description\":\"Aberrated-hierarchy escalation (policy v13, PROVISIONAL): D >= 1.45 (hierarchy range) AND the lens estimator detects aberration (detect_score >= 1). Closes the F1 hole (Lane D, run cr_93afeeb0fa91f8ea): trefoil-1e-4 rendered D 1.5108 with detect_score 9999 but corrected-hierarchy's D window [1,1.45] refused it, so it fell through to hierarchy-confirmed and auto-dispatched. Auto-correction is WRONG in this regime (the estimator cross-reads: arrangement-arm spherical -0.398, outside the 1/3 envelope), so this band routes to needs_approval via the band_provisional path - it never auto-dispatches and never auto-corrects. Clean golds must NOT fire (detect_score 0 at Set A). Calibrate before promoting to calibrated. v14 amendment: detect_score clause max 10000 (band maxes are EXCLUSIVE per the router selftest) so the 9999 out-of-envelope sentinel matches; the v13 clause (max 9999) excluded exactly the F1 case.\"}}",
+      "status": "active",
+      "created_at": "2026-10-07T16:55:52.934Z",
+      "promoted_at": "2026-10-07T16:55:54.215Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 10,
+      "id": "l_1110f0713212b026",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"routing_bands\",\"title\":\"policy v15: text bands + prompt-router integration\",\"description\":\"Add 6 provisional text bands (scorer.bits pair-conditions) and extend the route.dispatch targets registry to 9 tool targets so prompt intake routes through the hierarchy router: model targets pick the draft model, tool targets emit one gated route.dispatch action; no matching band falls back to the legacy 70b draft. Built per SPEC-STYLE-ROUTER-2026-10-08 (lanes A/B/C + advisor, 32/32 + 37/37 + 12/12 harness checks).\",\"payload\":{\"spec\":\"SPEC-STYLE-ROUTER-2026-10-08\",\"bands_added\":6,\"targets_added\":9,\"fallback\":\"llama_prompt\"}}",
+      "status": "active",
+      "created_at": "2026-10-08T15:09:39.531Z",
+      "promoted_at": "2026-10-08T15:09:51.582Z",
+      "promoted_by": "jenny"
+    },
+    {
+      "__rid": 11,
+      "id": "l_98a021cf541c43d0",
+      "task_id": null,
+      "proposal_json": "{\"from\":\"evolution\",\"reason\":\"evolution_v2_directive\",\"directive_id\":\"ed_ce2ed29d8addf091\",\"sweep_id\":\"ev2\",\"fire\":0,\"kind\":\"record_learning\",\"title\":\"calibration candle cdl_2d47f945eff633f7\",\"status\":null,\"impact\":null,\"suggestion\":\"Standard-candle calibration learning; content sealed with fnv1a, not stored in plaintext.\",\"evidence\":{\"candle_hash\":\"e8832ad7\",\"candle_id\":\"cdl_2d47f945eff633f7\",\"candle_kind\":\"standard_candle\",\"low_confidence\":true,\"low_confidence_note\":\"quality routing flagged low confidence; forced needs_approval\",\"source\":\"evolution_v2_cycle\"}}",
+      "status": "proposed",
+      "created_at": "2026-10-08T18:11:58.818Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 12,
+      "id": "l_48f00c92b8c434a5",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"lesson\",\"source\":\"approval-session-2026-10-08\",\"title\":\"Execute gate must receive the stored approvals\",\"lesson\":\"runExecute passed an empty approvals array to the gate, so provisional-band actions with a valid approval re-blocked at execute. Forward the task's approvals to every execute-stage gate call.\",\"evidence\":\"deploy etag 0858ea55; t_bd06, t_39e5, t_4c60 reached terminal:succeeded after the fix\",\"enforced_in\":\"routes-jev.js runExecute\"}",
+      "status": "proposed",
+      "created_at": "2026-10-08T22:40:45.777Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 13,
+      "id": "l_085137557b450661",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"lesson\",\"source\":\"approval-session-2026-10-08\",\"title\":\"A pre-send block must not mark the action unknown\",\"lesson\":\"A dispatch blocked before any provider call (band_provisional, bad_model_route, target_unresolvable, target_payload_invalid) was recorded as dispatched and then verified unknown. Blocked before send means the action stays proposed.\",\"evidence\":\"pre-fix events on t_4c60 and t_39e5: dispatch_blocked then verify unknown\",\"enforced_in\":\"routes-jev.js runExecute skip branch\"}",
+      "status": "proposed",
+      "created_at": "2026-10-08T22:40:46.202Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 14,
+      "id": "l_4028c9472acbcc6a",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"lesson\",\"source\":\"approval-session-2026-10-08\",\"title\":\"Provisional-band dispatch needs an approved action state\",\"lesson\":\"The dispatch layer requires action.state approved for provisional bands and nothing wrote that state, so an approval could never unblock a provisional action. Only a fresh bound approval (gate returns approval_id) may mark the in-memory copy approved; nothing is persisted there.\",\"evidence\":\"dispatch_blocked band_provisional events after approval_granted on all 8 approvals\",\"enforced_in\":\"routes-jev.js aDispatch\"}",
+      "status": "proposed",
+      "created_at": "2026-10-08T22:40:46.617Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 15,
+      "id": "l_409abcd35705e1ad",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"lesson\",\"source\":\"approval-session-2026-10-08\",\"title\":\"Reconcile evidence must match the event log\",\"lesson\":\"Five corpus_audit reconciles were written with the generic detail 'dispatch blocked before any provider call', but their events show automation dispatches. Copy observed and detail from the task's own events, never a generic reason.\",\"evidence\":\"t_fe97, t_dfe5, t_9309, t_9437, t_33c3 reconcile records\",\"enforced_in\":\"procedure; no code yet\"}",
+      "status": "proposed",
+      "created_at": "2026-10-08T22:40:47.022Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 16,
+      "id": "l_42dcb306cd8f5fd8",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"lesson\",\"source\":\"approval-session-2026-10-08\",\"title\":\"Automation builtins take precedence over endpoint dispatch\",\"lesson\":\"corpus_audit is an automation builtin, so dispatchRouteAction takes the automation branch ahead of the endpoint branch. Its verdict depends on an automation run task that never settles, so it verifies unknown. A tool verdict must come from a response the caller sees.\",\"evidence\":\"jev-execute.js branch (a) before branch (c); verify evidence dispatch_response null on the five tasks\",\"enforced_in\":\"open: verify basis rule\"}",
+      "status": "proposed",
+      "created_at": "2026-10-08T22:40:47.423Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 17,
+      "id": "l_13d89eaf165b25db",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"lesson\",\"source\":\"approval-session-2026-10-08\",\"title\":\"Corpus audit endpoint needs a matrix, not a text prompt\",\"lesson\":\"POST /api/jev/corpus/audit requires a numeric matrix and rejects a text prompt (INVALID_MATRIX). Text prompts for corpus tools should route through the router endpoint with a loop guard, where guard depth at or above 1 returns measured-only and creates no task.\",\"evidence\":\"live probe INVALID_MATRIX; policy v15 endpoint_map corpus_audit -> POST /api/jev/corpus/audit\",\"enforced_in\":\"open: router_with_guard\"}",
+      "status": "proposed",
+      "created_at": "2026-10-08T22:40:47.820Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 18,
+      "id": "l_0308a8ba1de30736",
+      "task_id": null,
+      "proposal_json": "{\"kind\":\"lesson\",\"source\":\"approval-session-2026-10-08\",\"title\":\"A verified result must name its basis\",\"lesson\":\"A router echo is not an audit run, and a cached router answer is not a fresh decision. A verify record must say what it verified against, so a green state cannot hide that nothing ran.\",\"evidence\":\"router_with_guard design decision 2026-10-08\",\"enforced_in\":\"open\"}",
+      "status": "proposed",
+      "created_at": "2026-10-08T22:40:48.211Z",
+      "promoted_at": null,
+      "promoted_by": null
+    },
+    {
+      "__rid": 19,
+      "id": "l_1bbd6e1b9c43d093",
+      "task_id": null,
+      "proposal_json": "{\"from\":\"evolution\",\"reason\":\"evolution_v2_directive\",\"directive_id\":\"ed_ec594a3a93f86fe5\",\"sweep_id\":\"ev2\",\"fire\":0,\"kind\":\"record_learning\",\"title\":\"calibration candle cdl_be58226a49a01aa8\",\"status\":null,\"impact\":null,\"suggestion\":\"Standard-candle calibration learning; content sealed with fnv1a, not stored in plaintext.\",\"evidence\":{\"candle_hash\":\"69a83eb8\",\"candle_id\":\"cdl_be58226a49a01aa8\",\"candle_kind\":\"standard_candle\",\"low_confidence\":true,\"low_confidence_note\":\"quality routing flagged low confidence; forced needs_approval\",\"source\":\"evolution_v2_cycle\"}}",
+      "status": "proposed",
+      "created_at": "2026-10-09T04:27:03.877Z",
+      "promoted_at": null,
+      "promoted_by": null
+    }
+  ]
+}
