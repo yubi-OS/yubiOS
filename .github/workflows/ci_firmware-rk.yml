@@ -802,6 +802,23 @@ jobs:
           printf '%s  %s\n' "$RKBIN_TPL_SHA256" rockchip-ddr-tpl.bin | sha256sum --check --strict
           echo "ROCKCHIP_TPL=$GITHUB_WORKSPACE/rockchip-ddr-tpl.bin" >> "$GITHUB_ENV"
 
+      - name: Append pinned OP-TEE node to rock5b U-Boot DT (fail closed)
+        if: matrix.build_kind == 'rockchip' && matrix.board == 'rock5b-rk3588'
+        env:
+          ROCK5B_OPTEE_DTSI_SRC: firmware/u-boot/rock5b-optee-node.dtsi
+          ROCK5B_OPTEE_DTSI_SHA256: dcf8b79503223d77b673b686207367260323649d2d41c187823cad61ebf91d91
+          ROCK5B_OPTEE_DTSI_TARGET: u-boot/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' "$ROCK5B_OPTEE_DTSI_SHA256" "$ROCK5B_OPTEE_DTSI_SRC" | sha256sum --check --strict
+          test -s "$ROCK5B_OPTEE_DTSI_TARGET"
+          if grep -q 'linaro,optee-tz' "$ROCK5B_OPTEE_DTSI_TARGET"; then
+            echo "::error::rock5b U-Boot dtsi already has an OP-TEE node; refusing to double-append"
+            exit 1
+          fi
+          cat "$ROCK5B_OPTEE_DTSI_SRC" >> "$ROCK5B_OPTEE_DTSI_TARGET"
+          echo "appended OP-TEE node (dtsi sha256 $ROCK5B_OPTEE_DTSI_SHA256)"
+
       - name: Build Rockchip U-Boot board image
         if: matrix.build_kind == 'rockchip'
         env:
