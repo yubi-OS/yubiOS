@@ -1,0 +1,13 @@
+// yubiOS: OP-TEE firmware node for the Radxa ROCK 5B U-Boot device tree.
+// Appended to arch/arm/dts/rk3588-rock-5b-u-boot.dtsi by ci_firmware-rk.yml.
+// Without it U-Boot binds no TEE device (Unable to open OP-TEE session,
+// err=-19), so the fTPM and StMM paths fail. QEMU generates its own DT
+// with an OP-TEE node when secure=on, which is why the QEMU image works.
+/ {
+	firmware {
+		optee {
+			compatible = "linaro,optee-tz";
+			method = "smc";
+		};
+	};
+};
