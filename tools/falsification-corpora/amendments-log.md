@@ -86,3 +86,31 @@ after results arrived.
     all-axes-planted docs" without shape; fixed before measurement.
 
 Expected cost: 62 + 3 determinism re-scores = 65 calls at ~$0.0002 = ~$0.013.
+
+## 2026-10-08 (pre-run, router gate-outcome corpus — logged BEFORE any measurement)
+
+11. **Router full gate-outcome corpus executes** per router-full-preregistration.md
+    (14 rows: the Lane D slice's 12 + the clean family-declared gold R13 + the
+    unregistered-family observability row R14). Expectations pinned to policy v15.
+12. **Plumbing probes P1/P2 authorized** (one schema probe + one R13-expectation
+    pin); results logged here, NOT used as corpus data.
+## 2026-10-08 (pre-corpus-run, plumbing probe corrections — logged BEFORE the corpus run)
+
+13. **Band-id correction from probe P1** — the preregistration table wrote
+    `hierarchy-confirmed` for R1/R13/R14 from session memory; the live policy v15
+    band id is `hierarchy-image` (probe P1, run cr_d6b13c87d6776ffb, returned
+    band.id = "hierarchy-image"). Table corrected BEFORE the corpus run. This is a
+    preregistration-input correction (the Lane D record already used the correct
+    id), not a post-hoc fit.
+14. **R13 expectation PINNED by probe P2** (run cr_49830f885dc26611): the clean
+    family-declared gasket gold reads lens.detect_score = 0 (estimates 0/0/0,
+    family "gasket" — matching the Set A calibration, NOT the 9999 sentinel).
+    Band hierarchy-image, decision allowed, task terminal:succeeded in-request.
+    R13's expected band + outcome are pinned accordingly. Probes are NOT corpus
+    data (unique notes; 2 terminal tasks t_bd05511cca97624a, t_9c2688bd9dc25b80
+    created as probe side effects).
+15. **Response schema pinned by P1**: 201 for allowed rows (task created and
+    dispatched to terminal in-request; auto_dispatch carries dispatched/verified),
+    response carries band.id/decision/gate{outcome,reasons}/run_id/task{state,
+    terminal_outcome}/measurement.features{spectral.d_w, lens.detect_score,
+    lens.skipped_reason}. G2 asserts on gate.outcome + decision.

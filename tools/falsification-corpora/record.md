@@ -161,3 +161,26 @@ R10 expected-gate amendment with a-priori justification; scorer schema probe)
 - VERDICT: the extractor fails both directions on canonical gold. The v2.3
   extractor-recall pass now has a full known-answer regression set AND a precision
   target list (the collateral/distractor flip inventory is in scorer-full-results.json).
+## Router gate-outcome corpus EXECUTED (2026-10-08, PR #307)
+
+- 14 rows (the Lane D slice's 12 + clean family-declared gold R13 + unregistered-
+  family observability row R14) through live POST /api/jev/route under policy v15
+  (deploy etag c910118b). Gold renders fetched from this branch; every row carried a
+  unique artifact.any.note (no cached decisions).
+- **PASS 14/14 band + 14/14 gate outcome.** G3 spectral presence 14/14 (no skipped
+  reasons needed, no silent nulls). G4: every row recorded a run_id.
+- **F1 regression guard HOLDS**: R11 gasket-trefoil-1e-4 landed
+  aberrated-hierarchy-escalation -> needs_approval/band_provisional (task
+  t_4c603a0a8fb96079 gated, awaiting review) - it did NOT silently re-land
+  hierarchy-confirmed as in the Lane D slice under v12-13.
+- R10/R12 convergence-gate negatives reproduced live (blocked reroute_not_converged);
+  R13 clean family-declared gasket read lens.detect_score 0 -> hierarchy-image ->
+  allowed (matches the Set A calibration; the probe-pinned expectation held);
+  R14 unregistered family recorded lens.skipped_reason
+  "lens_error:gold_render: unknown render" while the band still decided on D/d_w.
+- Task accounting: 9 allowed rows -> terminal:succeeded in-request; R11 -> gated
+  (the ONE task awaiting review is intentional and expected).
+- Honest notes recorded: shuffle d_w at n=19 reads 2.77-4.51 (the pre-registered
+  AM-6 saturation regime - the corpus asserts band + gate outcome, not d_w values);
+  R10/R12 pre-correction d_w reads 1.73-1.90 on the aberrated renders (data, not a
+  gate). Run ids cr_252659ade5c6c366 ... cr_aedd42e8113239ab.
