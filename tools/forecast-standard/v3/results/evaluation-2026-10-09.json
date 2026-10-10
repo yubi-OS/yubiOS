@@ -1,0 +1,657 @@
+{
+ "cal_sha256_note": "k and K read from the calibration JSON",
+ "eval_seeds": [
+  20261008,
+  20261107
+ ],
+ "frozen": {
+  "K": 1.75,
+  "k": 0.65
+ },
+ "mode": "evaluate",
+ "versions": {
+  "v1": {
+   "gates": {
+    "G1": {
+     "delta": -0.0018316676698322265,
+     "increment": 1.7400842863461676,
+     "name": "G1",
+     "pass": true,
+     "target": 1.7419159540159999
+    },
+    "G2": {
+     "counts": {
+      "C0": 84,
+      "C1": 83,
+      "C2": 80,
+      "C3": 87,
+      "C4": 80
+     },
+     "name": "G2",
+     "pass": false,
+     "window": [
+      88,
+      98
+     ]
+    },
+    "G3": {
+     "bytes": 514,
+     "name": "G3",
+     "pass": true
+    },
+    "G4": {
+     "name": "G4",
+     "pass": true
+    },
+    "G5": {
+     "js_parity": "NOT RUN",
+     "max_fixture_delta": 0.0,
+     "name": "G5",
+     "outputs": {
+      "flat-noise": {
+       "alpha": 0.1,
+       "band": [
+        0.6626692269521278,
+        0.9371558081229938,
+        1.1477767696934766,
+        1.3253384539042556,
+        1.4817734380621936
+       ],
+       "beta": 0.75,
+       "forecast": [
+        9.208005160859052,
+        9.028128349122017,
+        8.851849073619722,
+        8.679095383627473,
+        8.509796767435068
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.648233736786459,
+       "holdoutSse": 0.9144741864834043,
+       "level": 9.39155292793766,
+       "n": 40,
+       "quality": {
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.33809654436333053,
+       "trend": -0.18729363987613043
+      },
+      "linear-noise": {
+       "alpha": 0.05,
+       "band": [
+        0.4571052469099193,
+        0.6464444396119102,
+        0.7917295120542968,
+        0.9142104938198387,
+        1.0221184049624052
+       ],
+       "beta": 0.1,
+       "forecast": [
+        15.917863199844367,
+        16.089754739498392,
+        16.258208448359333,
+        16.42329308304306,
+        16.58507602503311
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.36129817807341813,
+       "holdoutSse": 0.4351212135622206,
+       "level": 15.74246366958516,
+       "n": 40,
+       "quality": {
+        "flags": [
+         "low_r2"
+        ],
+        "insufficient_series": false,
+        "low_r2": true
+       },
+       "residualSd": 0.23321696270914252,
+       "trend": 0.1789791125093959
+      },
+      "ramp": {
+       "alpha": 0.45,
+       "band": [
+        1.4179856564446043,
+        2.005334546594476,
+        2.4560232013659613,
+        2.8359713128892086,
+        3.170712318929798
+       ],
+       "beta": 0.9500000000000001,
+       "forecast": [
+        78.18969305570427,
+        81.574599992755,
+        84.89180879106469,
+        88.1426734134082,
+        91.32852074330484
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.9908727711917825,
+       "holdoutSse": 4.187178929368254,
+       "level": 74.73570638524436,
+       "n": 40,
+       "quality": {
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.723462069614594,
+       "trend": 3.5244761943468537
+      },
+      "spike": {
+       "alpha": 0.4,
+       "band": [
+        0.235392575589734,
+        0.3328953728809358,
+        0.4077119006459167,
+        0.470785151179468,
+        0.5263538004174029
+       ],
+       "beta": 0.9,
+       "forecast": [
+        8.754539184772065,
+        8.522528051487715,
+        8.295157140869051,
+        8.07233364846276,
+        7.8539666259045955
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.9556139906377427,
+       "holdoutSse": 0.11538872270464105,
+       "level": 8.991285239143853,
+       "n": 40,
+       "quality": {
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.1200982528519051,
+       "trend": -0.24157760650182322
+      }
+     },
+     "pass": true,
+     "worst": ""
+    },
+    "G6": {
+     "allFinite": true,
+     "maxBand": 0.0,
+     "maxFcDev": 0.0,
+     "name": "G6",
+     "pass": true
+    },
+    "NEG_high": {
+     "counts": {
+      "C0": 96,
+      "C1": 95,
+      "C2": 93,
+      "C3": 99,
+      "C4": 94
+     },
+     "factor": 1.75,
+     "mean": 95.4,
+     "name": "NEG_high",
+     "pass": false
+    },
+    "NEG_low": {
+     "counts": {
+      "C0": 67,
+      "C1": 62,
+      "C2": 58,
+      "C3": 71,
+      "C4": 67
+     },
+     "factor": 0.65,
+     "mean": 65.0,
+     "name": "NEG_low",
+     "pass": true
+    }
+   },
+   "module_sha256": "382ab9c1de08d3720309000d2a865f4833382edb98dd2f3b3dca140fa4114449"
+  },
+  "v2": {
+   "gates": {
+    "G1": {
+     "delta": -0.0018316676698322265,
+     "increment": 1.7400842863461676,
+     "name": "G1",
+     "pass": true,
+     "target": 1.7419159540159999
+    },
+    "G2": {
+     "counts": {
+      "C0": 99,
+      "C1": 99,
+      "C2": 98,
+      "C3": 93,
+      "C4": 99
+     },
+     "name": "G2",
+     "pass": false,
+     "window": [
+      88,
+      98
+     ]
+    },
+    "G3": {
+     "bytes": 818,
+     "name": "G3",
+     "pass": true
+    },
+    "G4": {
+     "name": "G4",
+     "pass": true
+    },
+    "G5": {
+     "js_parity": "NOT RUN",
+     "max_fixture_delta": 0.0,
+     "name": "G5",
+     "outputs": {
+      "flat-noise": {
+       "alpha": 0.1,
+       "band": [
+        1.9294819783208481,
+        2.7286995820958135,
+        3.34196081874022,
+        3.8589639566416962,
+        4.314452864886192
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v2-mad-train). Measured G2 coverage of 100 replicates: C0 99, C1 99, C2 98, C3 93, C4 99 (gate 88-98). NOT CALIBRATED: over-covers.",
+       "bandSd": 0.9844295807759429,
+       "bandVersion": "v2-mad-train",
+       "beta": 0.75,
+       "forecast": [
+        9.208005160859052,
+        9.028128349122017,
+        8.851849073619722,
+        8.679095383627473,
+        8.509796767435068
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.648233736786459,
+       "holdoutSse": 0.9144741864834043,
+       "level": 9.39155292793766,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.33809654436333053,
+       "trend": -0.18729363987613043
+      },
+      "linear-noise": {
+       "alpha": 0.05,
+       "band": [
+        6.913001489900179,
+        9.776460463722247,
+        11.973669813306456,
+        13.826002979800357,
+        15.457941259974126
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v2-mad-train). Measured G2 coverage of 100 replicates: C0 99, C1 99, C2 98, C3 93, C4 99 (gate 88-98). NOT CALIBRATED: over-covers.",
+       "bandSd": 3.527041576479683,
+       "bandVersion": "v2-mad-train",
+       "beta": 0.1,
+       "forecast": [
+        15.917863199844367,
+        16.089754739498392,
+        16.258208448359333,
+        16.42329308304306,
+        16.58507602503311
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.36129817807341813,
+       "holdoutSse": 0.4351212135622206,
+       "level": 15.74246366958516,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [
+         "low_r2"
+        ],
+        "insufficient_series": false,
+        "low_r2": true
+       },
+       "residualSd": 0.23321696270914252,
+       "trend": 0.1789791125093959
+      },
+      "ramp": {
+       "alpha": 0.45,
+       "band": [
+        0.8791093735924288,
+        1.2432483989437288,
+        1.5226621004721361,
+        1.7582187471848576,
+        1.9657483190099294
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v2-mad-train). Measured G2 coverage of 100 replicates: C0 99, C1 99, C2 98, C3 93, C4 99 (gate 88-98). NOT CALIBRATED: over-covers.",
+       "bandSd": 0.44852519060838203,
+       "bandVersion": "v2-mad-train",
+       "beta": 0.9500000000000001,
+       "forecast": [
+        78.18969305570427,
+        81.574599992755,
+        84.89180879106469,
+        88.1426734134082,
+        91.32852074330484
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.9908727711917825,
+       "holdoutSse": 4.187178929368254,
+       "level": 74.73570638524436,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.723462069614594,
+       "trend": 3.5244761943468537
+      },
+      "spike": {
+       "alpha": 0.4,
+       "band": [
+        1.8159844028481344,
+        2.568189771565838,
+        3.1453772514855967,
+        3.631968805696269,
+        4.060664570847791
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v2-mad-train). Measured G2 coverage of 100 replicates: C0 99, C1 99, C2 98, C3 93, C4 99 (gate 88-98). NOT CALIBRATED: over-covers.",
+       "bandSd": 0.9265226545143543,
+       "bandVersion": "v2-mad-train",
+       "beta": 0.9,
+       "forecast": [
+        8.754539184772065,
+        8.522528051487715,
+        8.295157140869051,
+        8.07233364846276,
+        7.8539666259045955
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.9556139906377427,
+       "holdoutSse": 0.11538872270464105,
+       "level": 8.991285239143853,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.1200982528519051,
+       "trend": -0.24157760650182322
+      }
+     },
+     "pass": true,
+     "worst": ""
+    },
+    "G6": {
+     "allFinite": true,
+     "maxBand": 0.0,
+     "maxFcDev": 0.0,
+     "name": "G6",
+     "pass": true
+    },
+    "NEG_high": {
+     "counts": {
+      "C0": 100,
+      "C1": 100,
+      "C2": 100,
+      "C3": 99,
+      "C4": 100
+     },
+     "factor": 1.75,
+     "mean": 99.8,
+     "name": "NEG_high",
+     "pass": true
+    },
+    "NEG_low": {
+     "counts": {
+      "C0": 97,
+      "C1": 95,
+      "C2": 92,
+      "C3": 78,
+      "C4": 96
+     },
+     "factor": 0.65,
+     "mean": 91.6,
+     "name": "NEG_low",
+     "pass": false
+    }
+   },
+   "module_sha256": "6a9a3f14242a6f4c60dd3aa67d4e984a97a41cb741a741a83b9605412babb58c"
+  },
+  "v3": {
+   "gates": {
+    "G1": {
+     "delta": -0.0018316676698322265,
+     "increment": 1.7400842863461676,
+     "name": "G1",
+     "pass": true,
+     "target": 1.7419159540159999
+    },
+    "G2": {
+     "counts": {
+      "C0": 95,
+      "C1": 93,
+      "C2": 100,
+      "C3": 94,
+      "C4": 98
+     },
+     "name": "G2",
+     "pass": false,
+     "window": [
+      88,
+      98
+     ]
+    },
+    "G3": {
+     "bytes": 806,
+     "name": "G3",
+     "pass": true
+    },
+    "G4": {
+     "name": "G4",
+     "pass": true
+    },
+    "G5": {
+     "js_parity": "NOT RUN",
+     "max_fixture_delta": 0.0,
+     "name": "G5",
+     "outputs": {
+      "flat-noise": {
+       "alpha": 0.1,
+       "band": [
+        1.1971464740062447,
+        1.6930207796867613,
+        2.07351851708075,
+        2.3942929480124895,
+        2.676900894902148
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v3-mad-train-zerotrend, trend_0 = 0). NOT CALIBRATED: PREREG-v3 pass rule not yet evaluated.",
+       "bandSd": 0.6107890173501249,
+       "bandVersion": "v3-mad-train-zerotrend",
+       "beta": 0.8,
+       "forecast": [
+        9.353963362340137,
+        9.181198506719108,
+        9.011888948210498,
+        8.845965580872061,
+        8.683360680880392
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.3693988521903262,
+       "holdoutSse": 1.6393512736856288,
+       "level": 9.530254031341189,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [
+         "low_r2"
+        ],
+        "insufficient_series": false,
+        "low_r2": true
+       },
+       "residualSd": 0.4526796982533054,
+       "trend": -0.17988843775617466
+      },
+      "linear-noise": {
+       "alpha": 0.05,
+       "band": [
+        2.0814002700383365,
+        2.943544490615238,
+        3.60509101859398,
+        4.162800540076673,
+        4.654152492192139
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v3-mad-train-zerotrend, trend_0 = 0). NOT CALIBRATED: PREREG-v3 pass rule not yet evaluated.",
+       "bandSd": 1.0619389132848656,
+       "bandVersion": "v3-mad-train-zerotrend",
+       "beta": 0.7000000000000001,
+       "forecast": [
+        16.045309331384463,
+        16.241050707057713,
+        16.432877255217498,
+        16.62086727241409,
+        16.805097489266746
+       ],
+       "holdoutN": 8,
+       "holdoutR2": -0.23067542957140774,
+       "holdoutSse": 0.8384084216341448,
+       "level": 15.845573233758696,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [
+         "low_r2"
+        ],
+        "insufficient_series": false,
+        "low_r2": true
+       },
+       "residualSd": 0.32372990702786186,
+       "trend": 0.20381234451608787
+      },
+      "ramp": {
+       "alpha": 0.45,
+       "band": [
+        0.8791327319476876,
+        1.2432814326465307,
+        1.5227025583302256,
+        1.7582654638953752,
+        1.9658005498801308
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v3-mad-train-zerotrend, trend_0 = 0). NOT CALIBRATED: PREREG-v3 pass rule not yet evaluated.",
+       "bandSd": 0.4485371081365753,
+       "bandVersion": "v3-mad-train-zerotrend",
+       "beta": 0.9500000000000001,
+       "forecast": [
+        78.18969420025746,
+        81.57460397961583,
+        84.89181556338704,
+        88.14268291548282,
+        91.32853292053669
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.9908731703830876,
+       "holdoutSse": 4.186995797614188,
+       "level": 74.7357046294836,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.7234462486610691,
+       "trend": 3.5244791538508697
+      },
+      "spike": {
+       "alpha": 0.4,
+       "band": [
+        1.849897088256212,
+        2.6161495512064334,
+        3.2041157456334863,
+        3.699794176512424,
+        4.136495640719819
+       ],
+       "bandLabel": "1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v3-mad-train-zerotrend, trend_0 = 0). NOT CALIBRATED: PREREG-v3 pass rule not yet evaluated.",
+       "bandSd": 0.9438250450286796,
+       "bandVersion": "v3-mad-train-zerotrend",
+       "beta": 0.9,
+       "forecast": [
+        8.754523854960787,
+        8.522496670472698,
+        8.295110029674372,
+        8.072271121692012,
+        7.853888991869299
+       ],
+       "holdoutN": 8,
+       "holdoutR2": 0.9556418026097068,
+       "holdoutSse": 0.11531642091479902,
+       "level": 8.991286288111898,
+       "n": 40,
+       "quality": {
+        "calibrated": false,
+        "flags": [],
+        "insufficient_series": false,
+        "low_r2": false
+       },
+       "residualSd": 0.1200606205812292,
+       "trend": -0.2415943195419495
+      }
+     },
+     "pass": true,
+     "worst": ""
+    },
+    "G6": {
+     "allFinite": true,
+     "maxBand": 0.0,
+     "maxFcDev": 0.0,
+     "name": "G6",
+     "pass": true
+    },
+    "NEG_high": {
+     "counts": {
+      "C0": 100,
+      "C1": 100,
+      "C2": 100,
+      "C3": 99,
+      "C4": 100
+     },
+     "factor": 1.75,
+     "mean": 99.8,
+     "name": "NEG_high",
+     "pass": true
+    },
+    "NEG_low": {
+     "counts": {
+      "C0": 85,
+      "C1": 75,
+      "C2": 99,
+      "C3": 76,
+      "C4": 93
+     },
+     "factor": 0.65,
+     "mean": 85.6,
+     "name": "NEG_low",
+     "pass": true
+    }
+   },
+   "module_sha256": "6f3a260742889684abad993905eac40f2d01e97040ca5cc24473fe8328f72c63",
+   "verdict": {
+    "i_G2_window_all_five_corpora": false,
+    "ii_G1_G3_G4_G6": true,
+    "iii_G5_python_fixture_integrity": true,
+    "iii_js_parity": "NOT RUN",
+    "iv_NEG_low_and_NEG_high_detected": true,
+    "pass_clauses_i_to_iv": false,
+    "v_DET": "external: compare two full runs byte-for-byte"
+   }
+  }
+ }
+}
