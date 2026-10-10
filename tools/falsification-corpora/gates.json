@@ -1,0 +1,1032 @@
+{
+ "recall": {
+  "pass": 33,
+  "total": 56,
+  "rows": [
+   {
+    "doc": "F-audience-2",
+    "axis": "audience",
+    "planted": 2,
+    "floor": 2,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "F-audience-4",
+    "axis": "audience",
+    "planted": 4,
+    "floor": 3,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "F-audience-6",
+    "axis": "audience",
+    "planted": 6,
+    "floor": 5,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "F-inputs-2",
+    "axis": "inputs",
+    "planted": 2,
+    "floor": 2,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "F-inputs-4",
+    "axis": "inputs",
+    "planted": 4,
+    "floor": 3,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "F-inputs-6",
+    "axis": "inputs",
+    "planted": 6,
+    "floor": 5,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "F-outputs-2",
+    "axis": "outputs",
+    "planted": 2,
+    "floor": 2,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-outputs-4",
+    "axis": "outputs",
+    "planted": 4,
+    "floor": 3,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "F-outputs-6",
+    "axis": "outputs",
+    "planted": 6,
+    "floor": 5,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "F-mode-2",
+    "axis": "mode",
+    "planted": 2,
+    "floor": 2,
+    "got": 6,
+    "pass": true
+   },
+   {
+    "doc": "F-mode-4",
+    "axis": "mode",
+    "planted": 4,
+    "floor": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-mode-6",
+    "axis": "mode",
+    "planted": 6,
+    "floor": 5,
+    "got": 3,
+    "pass": false
+   },
+   {
+    "doc": "F-assumption_set-2",
+    "axis": "assumption_set",
+    "planted": 2,
+    "floor": 2,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "F-assumption_set-4",
+    "axis": "assumption_set",
+    "planted": 4,
+    "floor": 3,
+    "got": 4,
+    "pass": true
+   },
+   {
+    "doc": "F-assumption_set-6",
+    "axis": "assumption_set",
+    "planted": 6,
+    "floor": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "doc": "F-adjacent-2",
+    "axis": "adjacent",
+    "planted": 2,
+    "floor": 2,
+    "got": 2,
+    "pass": true
+   },
+   {
+    "doc": "F-adjacent-4",
+    "axis": "adjacent",
+    "planted": 4,
+    "floor": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-adjacent-6",
+    "axis": "adjacent",
+    "planted": 6,
+    "floor": 5,
+    "got": 6,
+    "pass": true
+   },
+   {
+    "doc": "P-inputs",
+    "axis": "inputs",
+    "planted": 4,
+    "floor": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "P-outputs",
+    "axis": "outputs",
+    "planted": 4,
+    "floor": 3,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "P-assumption_set",
+    "axis": "assumption_set",
+    "planted": 4,
+    "floor": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "P-adjacent",
+    "axis": "adjacent",
+    "planted": 4,
+    "floor": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-failure_modes-2",
+    "axis": "failure_modes",
+    "planted": 2,
+    "floor": 2,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-failure_modes-4",
+    "axis": "failure_modes",
+    "planted": 4,
+    "floor": 3,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "doc": "F-failure_modes-6",
+    "axis": "failure_modes",
+    "planted": 6,
+    "floor": 5,
+    "got": 4,
+    "pass": false
+   },
+   {
+    "doc": "F-lifecycle-2",
+    "axis": "lifecycle",
+    "planted": 2,
+    "floor": 2,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-lifecycle-4",
+    "axis": "lifecycle",
+    "planted": 4,
+    "floor": 3,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "F-lifecycle-6",
+    "axis": "lifecycle",
+    "planted": 6,
+    "floor": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "doc": "F-composition-2",
+    "axis": "composition",
+    "planted": 2,
+    "floor": 2,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-composition-4",
+    "axis": "composition",
+    "planted": 4,
+    "floor": 3,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "F-composition-6",
+    "axis": "composition",
+    "planted": 6,
+    "floor": 5,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "F-knowledge_sources-2",
+    "axis": "knowledge_sources",
+    "planted": 2,
+    "floor": 2,
+    "got": 2,
+    "pass": true
+   },
+   {
+    "doc": "F-knowledge_sources-4",
+    "axis": "knowledge_sources",
+    "planted": 4,
+    "floor": 3,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "F-knowledge_sources-6",
+    "axis": "knowledge_sources",
+    "planted": 6,
+    "floor": 5,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "F-calibration-2",
+    "axis": "calibration",
+    "planted": 2,
+    "floor": 2,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-calibration-4",
+    "axis": "calibration",
+    "planted": 4,
+    "floor": 3,
+    "got": 4,
+    "pass": true
+   },
+   {
+    "doc": "F-calibration-6",
+    "axis": "calibration",
+    "planted": 6,
+    "floor": 5,
+    "got": 6,
+    "pass": true
+   },
+   {
+    "doc": "F-recursion-2",
+    "axis": "recursion",
+    "planted": 2,
+    "floor": 2,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "F-recursion-4",
+    "axis": "recursion",
+    "planted": 4,
+    "floor": 3,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "doc": "F-recursion-6",
+    "axis": "recursion",
+    "planted": 6,
+    "floor": 5,
+    "got": 7,
+    "pass": true
+   },
+   {
+    "doc": "P-failure_modes",
+    "axis": "failure_modes",
+    "planted": 4,
+    "floor": 3,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "doc": "P-lifecycle",
+    "axis": "lifecycle",
+    "planted": 4,
+    "floor": 3,
+    "got": 4,
+    "pass": true
+   },
+   {
+    "doc": "P-knowledge_sources",
+    "axis": "knowledge_sources",
+    "planted": 4,
+    "floor": 3,
+    "got": 2,
+    "pass": false
+   },
+   {
+    "doc": "P-calibration",
+    "axis": "calibration",
+    "planted": 4,
+    "floor": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "doc": "H-inputs",
+    "axis": "inputs",
+    "planted": 3,
+    "floor": 3,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "H-outputs",
+    "axis": "outputs",
+    "planted": 3,
+    "floor": 3,
+    "got": 6,
+    "pass": true
+   },
+   {
+    "doc": "H-assumption_set",
+    "axis": "assumption_set",
+    "planted": 3,
+    "floor": 3,
+    "got": 4,
+    "pass": true
+   },
+   {
+    "doc": "H-calibration",
+    "axis": "calibration",
+    "planted": 3,
+    "floor": 3,
+    "got": 4,
+    "pass": true
+   },
+   {
+    "doc": "A1",
+    "axis": "audience",
+    "planted": 2,
+    "floor": 2,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "A1",
+    "axis": "outputs",
+    "planted": 2,
+    "floor": 2,
+    "got": 2,
+    "pass": true
+   },
+   {
+    "doc": "A1",
+    "axis": "composition",
+    "planted": 2,
+    "floor": 2,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "A1",
+    "axis": "calibration",
+    "planted": 2,
+    "floor": 2,
+    "got": 2,
+    "pass": true
+   },
+   {
+    "doc": "A2",
+    "axis": "inputs",
+    "planted": 2,
+    "floor": 2,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "A2",
+    "axis": "mode",
+    "planted": 2,
+    "floor": 2,
+    "got": 2,
+    "pass": true
+   },
+   {
+    "doc": "A2",
+    "axis": "failure_modes",
+    "planted": 2,
+    "floor": 2,
+    "got": 1,
+    "pass": false
+   },
+   {
+    "doc": "A2",
+    "axis": "lifecycle",
+    "planted": 2,
+    "floor": 2,
+    "got": 4,
+    "pass": true
+   }
+  ]
+ },
+ "collateral_flips": [
+  {
+   "doc": "F-audience-2",
+   "axis": "mode",
+   "p": 0.8854,
+   "ec": 1
+  },
+  {
+   "doc": "F-audience-2",
+   "axis": "lifecycle",
+   "p": 0.8353,
+   "ec": 2
+  },
+  {
+   "doc": "F-audience-4",
+   "axis": "mode",
+   "p": 0.8648,
+   "ec": 3
+  },
+  {
+   "doc": "F-audience-4",
+   "axis": "assumption_set",
+   "p": 0.5502,
+   "ec": 1
+  },
+  {
+   "doc": "F-audience-6",
+   "axis": "outputs",
+   "p": 0.9121,
+   "ec": 5
+  },
+  {
+   "doc": "F-inputs-4",
+   "axis": "lifecycle",
+   "p": 0.5197,
+   "ec": 1
+  },
+  {
+   "doc": "F-inputs-4",
+   "axis": "calibration",
+   "p": 0.606,
+   "ec": 1
+  },
+  {
+   "doc": "F-inputs-6",
+   "axis": "mode",
+   "p": 0.8515,
+   "ec": 2
+  },
+  {
+   "doc": "F-outputs-2",
+   "axis": "mode",
+   "p": 0.7333,
+   "ec": 3
+  },
+  {
+   "doc": "F-outputs-2",
+   "axis": "assumption_set",
+   "p": 0.5388,
+   "ec": 1
+  },
+  {
+   "doc": "F-outputs-4",
+   "axis": "mode",
+   "p": 0.649,
+   "ec": 1
+  },
+  {
+   "doc": "F-outputs-4",
+   "axis": "calibration",
+   "p": 0.8563,
+   "ec": 2
+  },
+  {
+   "doc": "F-mode-2",
+   "axis": "outputs",
+   "p": 0.8918,
+   "ec": 2
+  },
+  {
+   "doc": "F-mode-6",
+   "axis": "outputs",
+   "p": 0.6658,
+   "ec": 1
+  },
+  {
+   "doc": "F-adjacent-2",
+   "axis": "failure_modes",
+   "p": 0.6863,
+   "ec": 1
+  },
+  {
+   "doc": "F-adjacent-4",
+   "axis": "outputs",
+   "p": 0.7646,
+   "ec": 2
+  },
+  {
+   "doc": "F-adjacent-6",
+   "axis": "assumption_set",
+   "p": 0.5091,
+   "ec": 1
+  },
+  {
+   "doc": "F-adjacent-6",
+   "axis": "failure_modes",
+   "p": 0.5123,
+   "ec": 1
+  },
+  {
+   "doc": "F-adjacent-6",
+   "axis": "composition",
+   "p": 0.6116,
+   "ec": 1
+  },
+  {
+   "doc": "P-inputs",
+   "axis": "outputs",
+   "p": 0.5756,
+   "ec": 2
+  },
+  {
+   "doc": "P-outputs",
+   "axis": "mode",
+   "p": 0.6672,
+   "ec": 1
+  },
+  {
+   "doc": "P-outputs",
+   "axis": "calibration",
+   "p": 0.5304,
+   "ec": 2
+  },
+  {
+   "doc": "F-failure_modes-2",
+   "axis": "outputs",
+   "p": 0.6838,
+   "ec": 2
+  },
+  {
+   "doc": "F-failure_modes-4",
+   "axis": "outputs",
+   "p": 0.7104,
+   "ec": 3
+  },
+  {
+   "doc": "F-lifecycle-4",
+   "axis": "calibration",
+   "p": 0.5736,
+   "ec": 2
+  },
+  {
+   "doc": "F-lifecycle-6",
+   "axis": "mode",
+   "p": 0.6625,
+   "ec": 3
+  },
+  {
+   "doc": "F-lifecycle-6",
+   "axis": "knowledge_sources",
+   "p": 0.6621,
+   "ec": 1
+  },
+  {
+   "doc": "F-composition-2",
+   "axis": "outputs",
+   "p": 0.6479,
+   "ec": 1
+  },
+  {
+   "doc": "F-composition-4",
+   "axis": "inputs",
+   "p": 0.9276,
+   "ec": 3
+  },
+  {
+   "doc": "F-composition-4",
+   "axis": "outputs",
+   "p": 0.9052,
+   "ec": 2
+  },
+  {
+   "doc": "F-composition-4",
+   "axis": "mode",
+   "p": 0.6717,
+   "ec": 1
+  },
+  {
+   "doc": "F-composition-4",
+   "axis": "adjacent",
+   "p": 0.7026,
+   "ec": 1
+  },
+  {
+   "doc": "F-composition-6",
+   "axis": "outputs",
+   "p": 0.6236,
+   "ec": 1
+  },
+  {
+   "doc": "F-composition-6",
+   "axis": "mode",
+   "p": 0.8574,
+   "ec": 1
+  },
+  {
+   "doc": "F-composition-6",
+   "axis": "failure_modes",
+   "p": 0.7227,
+   "ec": 1
+  },
+  {
+   "doc": "F-knowledge_sources-2",
+   "axis": "outputs",
+   "p": 0.833,
+   "ec": 2
+  },
+  {
+   "doc": "F-knowledge_sources-2",
+   "axis": "mode",
+   "p": 0.845,
+   "ec": 2
+  },
+  {
+   "doc": "F-knowledge_sources-4",
+   "axis": "inputs",
+   "p": 0.8434,
+   "ec": 3
+  },
+  {
+   "doc": "F-knowledge_sources-4",
+   "axis": "outputs",
+   "p": 0.8905,
+   "ec": 1
+  },
+  {
+   "doc": "F-knowledge_sources-4",
+   "axis": "adjacent",
+   "p": 0.5255,
+   "ec": 2
+  },
+  {
+   "doc": "F-knowledge_sources-4",
+   "axis": "calibration",
+   "p": 0.8373,
+   "ec": 1
+  },
+  {
+   "doc": "F-knowledge_sources-6",
+   "axis": "outputs",
+   "p": 0.9088,
+   "ec": 2
+  },
+  {
+   "doc": "F-knowledge_sources-6",
+   "axis": "adjacent",
+   "p": 0.8513,
+   "ec": 1
+  },
+  {
+   "doc": "F-calibration-4",
+   "axis": "assumption_set",
+   "p": 0.824,
+   "ec": 1
+  },
+  {
+   "doc": "F-calibration-4",
+   "axis": "adjacent",
+   "p": 0.5441,
+   "ec": 1
+  },
+  {
+   "doc": "F-calibration-4",
+   "axis": "recursion",
+   "p": 0.6676,
+   "ec": 1
+  },
+  {
+   "doc": "F-calibration-6",
+   "axis": "failure_modes",
+   "p": 0.9121,
+   "ec": 1
+  },
+  {
+   "doc": "F-recursion-2",
+   "axis": "mode",
+   "p": 0.8946,
+   "ec": 8
+  },
+  {
+   "doc": "F-recursion-4",
+   "axis": "outputs",
+   "p": 0.7426,
+   "ec": 3
+  },
+  {
+   "doc": "F-recursion-6",
+   "axis": "inputs",
+   "p": 0.7307,
+   "ec": 2
+  },
+  {
+   "doc": "F-recursion-6",
+   "axis": "outputs",
+   "p": 0.8295,
+   "ec": 5
+  },
+  {
+   "doc": "F-recursion-6",
+   "axis": "mode",
+   "p": 0.7993,
+   "ec": 1
+  },
+  {
+   "doc": "F-recursion-6",
+   "axis": "assumption_set",
+   "p": 0.6438,
+   "ec": 1
+  },
+  {
+   "doc": "F-recursion-6",
+   "axis": "calibration",
+   "p": 0.8622,
+   "ec": 2
+  },
+  {
+   "doc": "P-failure_modes",
+   "axis": "outputs",
+   "p": 0.8169,
+   "ec": 4
+  },
+  {
+   "doc": "P-lifecycle",
+   "axis": "failure_modes",
+   "p": 0.8237,
+   "ec": 2
+  },
+  {
+   "doc": "P-knowledge_sources",
+   "axis": "inputs",
+   "p": 0.888,
+   "ec": 3
+  },
+  {
+   "doc": "P-knowledge_sources",
+   "axis": "outputs",
+   "p": 0.7561,
+   "ec": 2
+  },
+  {
+   "doc": "P-knowledge_sources",
+   "axis": "calibration",
+   "p": 0.8075,
+   "ec": 1
+  },
+  {
+   "doc": "P-calibration",
+   "axis": "outputs",
+   "p": 0.6138,
+   "ec": 1
+  },
+  {
+   "doc": "P-calibration",
+   "axis": "assumption_set",
+   "p": 0.8321,
+   "ec": 2
+  },
+  {
+   "doc": "P-calibration",
+   "axis": "failure_modes",
+   "p": 0.5439,
+   "ec": 1
+  },
+  {
+   "doc": "P-calibration",
+   "axis": "recursion",
+   "p": 0.537,
+   "ec": 1
+  },
+  {
+   "doc": "A1",
+   "axis": "inputs",
+   "p": 0.9324,
+   "ec": 2
+  },
+  {
+   "doc": "A2",
+   "axis": "outputs",
+   "p": 0.7882,
+   "ec": 2
+  }
+ ],
+ "distractors": {
+  "pass": 5,
+  "total": 12,
+  "rows": [
+   {
+    "doc": "D1",
+    "target": "audience",
+    "ec": 2,
+    "flip": false,
+    "p": 0.2173,
+    "pass": false
+   },
+   {
+    "doc": "D2",
+    "target": "inputs",
+    "ec": 0,
+    "flip": false,
+    "p": 0,
+    "pass": true
+   },
+   {
+    "doc": "D3",
+    "target": "outputs",
+    "ec": 3,
+    "flip": true,
+    "p": 0.5633,
+    "pass": false
+   },
+   {
+    "doc": "D4",
+    "target": "mode",
+    "ec": 0,
+    "flip": false,
+    "p": 0,
+    "pass": true
+   },
+   {
+    "doc": "D5",
+    "target": "assumption_set",
+    "ec": 1,
+    "flip": true,
+    "p": 0.6111,
+    "pass": false
+   },
+   {
+    "doc": "D6",
+    "target": "adjacent",
+    "ec": 2,
+    "flip": true,
+    "p": 0.9059,
+    "pass": false
+   },
+   {
+    "doc": "D7",
+    "target": "failure_modes",
+    "ec": 5,
+    "flip": true,
+    "p": 0.8485,
+    "pass": false
+   },
+   {
+    "doc": "D8",
+    "target": "lifecycle",
+    "ec": 1,
+    "flip": true,
+    "p": 0.8677,
+    "pass": false
+   },
+   {
+    "doc": "D9",
+    "target": "composition",
+    "ec": 0,
+    "flip": false,
+    "p": 0,
+    "pass": true
+   },
+   {
+    "doc": "D10",
+    "target": "knowledge_sources",
+    "ec": 0,
+    "flip": false,
+    "p": 0,
+    "pass": true
+   },
+   {
+    "doc": "D11",
+    "target": "calibration",
+    "ec": 3,
+    "flip": false,
+    "p": 0.2971,
+    "pass": false
+   },
+   {
+    "doc": "D12",
+    "target": "recursion",
+    "ec": 0,
+    "flip": false,
+    "p": 0,
+    "pass": true
+   }
+  ]
+ },
+ "paraphrase": {
+  "stable": 7,
+  "total": 8,
+  "rows": [
+   {
+    "doc": "P-inputs",
+    "axis": "inputs",
+    "p_row": 1,
+    "base_row": 1,
+    "stable": true
+   },
+   {
+    "doc": "P-outputs",
+    "axis": "outputs",
+    "p_row": 1,
+    "base_row": 0,
+    "stable": false
+   },
+   {
+    "doc": "P-assumption_set",
+    "axis": "assumption_set",
+    "p_row": 1,
+    "base_row": 1,
+    "stable": true
+   },
+   {
+    "doc": "P-adjacent",
+    "axis": "adjacent",
+    "p_row": 1,
+    "base_row": 1,
+    "stable": true
+   },
+   {
+    "doc": "P-failure_modes",
+    "axis": "failure_modes",
+    "p_row": 1,
+    "base_row": 1,
+    "stable": true
+   },
+   {
+    "doc": "P-lifecycle",
+    "axis": "lifecycle",
+    "p_row": 1,
+    "base_row": 1,
+    "stable": true
+   },
+   {
+    "doc": "P-knowledge_sources",
+    "axis": "knowledge_sources",
+    "p_row": 1,
+    "base_row": 1,
+    "stable": true
+   },
+   {
+    "doc": "P-calibration",
+    "axis": "calibration",
+    "p_row": 1,
+    "base_row": 1,
+    "stable": true
+   }
+  ]
+ },
+ "determinism": {
+  "detail": {
+   "F-inputs-4": {
+    "row_equal": true,
+    "probs_equal": true,
+    "ec_equal": true
+   },
+   "F-composition-6": {
+    "row_equal": true,
+    "probs_equal": true,
+    "ec_equal": true
+   },
+   "D7": {
+    "row_equal": true,
+    "probs_equal": true,
+    "ec_equal": true
+   }
+  },
+  "pass": true
+ }
+}
