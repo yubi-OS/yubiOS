@@ -136,6 +136,31 @@ R10 expected-gate amendment with a-priori justification; scorer schema probe)
   jev-router.js, lens_standard.py, anchors.json, falsification SKILL.md, refs doc)
 
 
+## Scorer full corpus EXECUTED (2026-10-08, PR #306)
+
+- 62 docs + 3 determinism re-scores through live POST /api/jev/corpus/scorer/score
+  (scorer-v2.2, deployed etag c910118b). Cost ~$0.013 (65 calls, consumed=0).
+- RECALL 33/56 planted rows at the 0.75 floor. Per-axis: calibration 6/6, recursion
+  3/3, adjacent 4/4, mode 4/4 PASS; audience 0/4 (1 evidence line on 2/4/6-item
+  sections), inputs 1/6, knowledge_sources 1/4, outputs 3/6, composition 2/3 FAIL.
+  Heading-only reproves cleanly in one direction: H-outputs (6 lines), H-assumption_set
+  (4), H-calibration (4) all pass while full-section F-inputs-4 found only 2 of 4.
+- COLLATERAL 65 non-planted flips (pre-registered F3 gate FAIL): cross-axis vocabulary
+  flips decisions - worst: F-composition-4 flipped inputs 0.9276 / outputs 0.9052 /
+  adjacent 0.7026; F-recursion-2 flipped mode 0.8946 on 8 evidence lines of "next
+  round" prose.
+- DISTRACTORS 5/12: D7 failure_modes-vocabulary generated 5 evidence lines and flipped
+  0.8485; D6 adjacent flip 0.9059 on ec 2; D3/D5/D8 flips on 1-3 lines; D1/D11 exceed
+  the ec<=1 bound without flipping.
+- PARAPHRASE 7/8 (P-outputs unstable: base tier-4 p 0.2049 no-flip vs paraphrase
+  p 0.7736 flip - recall variance carrying through, not decision noise).
+- DETERMINISM PASS 3/3 (row + probs + evidence_counts byte-identical on re-score).
+- Threshold observation: decision bits match p >= 0.5 (F-inputs-4 axis7 p 0.5197 ->
+  bit 1) - the served threshold is the scorer default 0.5, not the clef-frame policy
+  0.55; scorer-route wiring observation for the next fix round.
+- VERDICT: the extractor fails both directions on canonical gold. The v2.3
+  extractor-recall pass now has a full known-answer regression set AND a precision
+  target list (the collateral/distractor flip inventory is in scorer-full-results.json).
 ## Router gate-outcome corpus EXECUTED (2026-10-08, PR #307)
 
 - 14 rows (the Lane D slice's 12 + clean family-declared gold R13 + unregistered-
