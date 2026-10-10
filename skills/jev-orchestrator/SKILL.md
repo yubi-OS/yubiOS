@@ -1,13 +1,13 @@
 ---
 name: jev-orchestrator
-description: "Run gated, verifiable, human-approvable automations through the Jev orchestration API on the steady-orbit worker — a fail-closed policy gate, approval bindings that expire and invalidate on policy change, independent verification, six distinct terminal states, and an append-only audit log, with jev-1.13 (DefAPI) as the advisory Understand/Decide layer. Use when an automation or skill must execute an action with real-world effects and needs deterministic gating, spend/rate limits, human approval for risky actions, verified outcomes, and reconcilable unknowns. Live at https://steady-orbit.systems-a.workers.dev (API under /api/jev/*, ops console at /jev/)."
+description: "Run gated, verifiable, human-approvable automations through the Jev orchestration API on the steady-orbit worker — a fail-closed policy gate, approval bindings that expire and invalidate on policy change, independent verification, six distinct terminal states, and an append-only audit log, with clef (clef) as the advisory Understand/Decide layer. Use when an automation or skill must execute an action with real-world effects and needs deterministic gating, spend/rate limits, human approval for risky actions, verified outcomes, and reconcilable unknowns. Live at https://steady-orbit.systems-a.workers.dev (API under /api/jev/*, ops console at /jev/)."
 metadata:
   short-description: "Gated approval-flow orchestration API (Jev v2) on the steady-orbit worker"
 ---
 
 # Jev orchestrator: gated action flow on the steady-orbit worker
 
-Jev is an **operations controller**, not a chat model. You create a task describing what you want done and which tool calls would do it; a deterministic fail-closed policy gate decides whether the actions may run, need a human approval, or are blocked; execution happens with stable idempotency IDs; results are independently verified; and every task closes in exactly one of six terminal states. jev-1.13 classifies intent and proposes actions (advisory only — a probability never authorizes anything).
+Jev is an **operations controller**, not a chat model. You create a task describing what you want done and which tool calls would do it; a deterministic fail-closed policy gate decides whether the actions may run, need a human approval, or are blocked; execution happens with stable idempotency IDs; results are independently verified; and every task closes in exactly one of six terminal states. clef classifies intent and proposes actions (advisory only — a probability never authorizes anything).
 
 ## When to use
 
@@ -29,7 +29,7 @@ Not for: pure read-only research (just call the API directly), or anything where
 
 ## Setup
 
-1. Operator key: the `JEV_API_KEY` binding (Secrets Store, aliased to the DefAPI key). Sent as `Authorization: Bearer <key>`. Without it all routes 401; `/api/jev/health` is unauthenticated.
+1. Operator key: the `JEV_API_KEY` binding (Secrets Store, aliased to the clef key). Sent as `Authorization: Bearer <key>`. Without it all routes 401; `/api/jev/health` is unauthenticated.
 2. Policy doc: KV key `jev-policy.json` (versioned; edit via the dashboard's Promote flow or direct KV write — a version bump invalidates stale approvals).
 3. Console: https://steady-orbit.systems-a.workers.dev/jev/ — enter the key once (sessionStorage), then you get tasks, pending approvals, pause control, costs, and learnings.
 

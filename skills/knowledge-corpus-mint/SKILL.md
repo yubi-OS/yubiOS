@@ -1,6 +1,6 @@
 ---
 name: knowledge-corpus-mint
-description: "Mint a brand-new knowledge corpus from an input request: decompose the request into a doc outline (jev-validated), deep-research every doc via the searXNG dig (n8n searxng-proxy webhook) with jev-1.13 quality weighting on every collected result, fan out one parallel subagent per doc to AUTHOR new markdown (cited, append-auditable), and land the whole corpus in the yubi-OS org under yubi-OS/knowledge/<ref>/<files> with a typed research DB alongside. Variant of refs-refresh-sweep: that skill refreshes docs that exist, this one creates docs that don't. Triggers on 'mint a knowledge repo', 'new knowledge corpus', 'create a corpus for X', 'knowledge repo from request', 'spin up a corpus'."
+description: "Mint a brand-new knowledge corpus from an input request: decompose the request into a doc outline (jev-validated), deep-research every doc via the searXNG dig (n8n searxng-proxy webhook) with clef quality weighting on every collected result, fan out one parallel subagent per doc to AUTHOR new markdown (cited, append-auditable), and land the whole corpus in the yubi-OS org under yubi-OS/knowledge/<ref>/<files> with a typed research DB alongside. Variant of refs-refresh-sweep: that skill refreshes docs that exist, this one creates docs that don't. Triggers on 'mint a knowledge repo', 'new knowledge corpus', 'create a corpus for X', 'knowledge repo from request', 'spin up a corpus'."
 metadata:
   short-description: "Mint a new knowledge corpus repo from a request"
 ---
@@ -41,7 +41,7 @@ Validated shape, not yet validated end-to-end: v1 ships from the
 ## Prerequisites (same three endpoints as refs-refresh-sweep)
 
 1. **Decision model.** `POST https://steady-orbit.systems-a.workers.dev/api/decide`
-   (jev-1.13, model pinned server-side, **15 requests/min/IP**, ~$0.00003
+   (clef, model pinned server-side, **15 requests/min/IP**, ~$0.00003
    per request). ALWAYS send a User-Agent header (Cloudflare error 1010
    otherwise).
 2. **Search.** `GET https://p01--n8n-service--mcx7zcrbvdyt.code.run/webhook/searxng?q=<urlencoded>&format=json`
@@ -279,7 +279,7 @@ Scope: <ONE-LINE SCOPE>.
 - `refs-refresh-sweep` - parent process (signals -> jev -> dig -> weight
   -> DB -> fan-out -> merge). This variant swaps "refresh existing docs"
   for "author new docs into a fresh corpus repo".
-- `defapi-jev` - the decision-model layer; read before writing questions.
+- `clef` - the decision-model layer; read before writing questions.
 - `ideate-solo` - use when the request itself is vague ("a corpus on
   modern storage"); decompose via solo lenses before Phase 1.
 - `parallel-deep-research` - the subagent protocol this specializes for

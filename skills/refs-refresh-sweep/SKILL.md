@@ -1,6 +1,6 @@
 ---
 name: refs-refresh-sweep
-description: "Full-corpus deep-research refresh sweep for a repo's documentation corpus (built for yubi-OS/yubiOS refs/): enumerate every doc, compute staleness signals, triage with the jev-1.13 decision model via the steady-orbit /api/decide endpoint, dig with self-hosted searXNG (via the n8n searxng-proxy webhook), weight every collected result's source quality with jev as it lands, persist a typed research DB in-repo on a PR, then fan out one parallel subagent per top-ranked doc (each opens its own PR) and merge them. Triggers on 'refresh the refs', 'deep-research refresh', 'refs sweep', 'refresh sweep', 'jev triage', 'searxng dig sweep', 'refresh every ref doc', 'stale docs sweep'. Pairs with repo-refs-skill (the archival layer it refreshes) and defapi-jev (the decision model)."
+description: "Full-corpus deep-research refresh sweep for a repo's documentation corpus (built for yubi-OS/yubiOS refs/): enumerate every doc, compute staleness signals, triage with the clef decision model via the steady-orbit /api/decide endpoint, dig with self-hosted searXNG (via the n8n searxng-proxy webhook), weight every collected result's source quality with jev as it lands, persist a typed research DB in-repo on a PR, then fan out one parallel subagent per top-ranked doc (each opens its own PR) and merge them. Triggers on 'refresh the refs', 'deep-research refresh', 'refs sweep', 'refresh sweep', 'jev triage', 'searxng dig sweep', 'refresh every ref doc', 'stale docs sweep'. Pairs with repo-refs-skill (the archival layer it refreshes) and clef (the decision model)."
 metadata:
   short-description: "jev-weighted corpus refresh sweep with subagent fan-out"
 ---
@@ -36,7 +36,7 @@ the process as it actually executed, including every operational trap.
 ## Prerequisites (the three endpoints)
 
 1. **Decision model.** `POST https://steady-orbit.systems-a.workers.dev/api/decide`
-   with `{"state": {...}, "questions": {...}}`. Model `typesafe/jev-1.13`
+   with `{"state": {...}, "questions": {...}}`. Model `clef`
    pinned server-side; no key needed from the caller (Cloudflare Secrets
    Store holds it). Hard cap **15 requests/min/IP**. Cost ~$0.00003-0.0004
    per request depending on state size.
@@ -226,7 +226,7 @@ jev call count + cost, failures.
 
 - `repo-refs-skill` - upstream. The corpus it archives is the corpus this
   refreshes; this skill's triage output is Mode C's intake selector.
-- `defapi-jev` - the decision-model layer (question shapes, batching,
+- `clef` - the decision-model layer (question shapes, batching,
   thresholds). Read it before writing jev questions.
 - `parallel-deep-research` - the fan-out protocol this skill specializes
   for refresh work (one PR per doc instead of one synthesized doc).
