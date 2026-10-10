@@ -68,6 +68,8 @@ Endpoints:
 | GET\|POST | `/api/jev/learnings` | bearer | No |
 | POST | `/api/jev/learnings/:id/promote` | bearer | No |
 | POST | `/api/jev/approvals/:id/guide` † | bearer | No |
+| GET | `/api/jev/selftest` † | bearer | Yes - the selftest harness itself |
+| GET | `/api/jev/selftest/ledger` † | bearer | Yes - the selftest harness itself |
 
 Module parts: jev-main.js, routes-jev.js, jev-ingest.js, jev-state.js, jev-decide.js, jev-gate.js, jev-execute.js, jev-verify.js, jev-review.js, jev-loop.js, jev-improve.js, dbx.js
 
@@ -104,6 +106,7 @@ Endpoints:
 | POST | `/api/jev/automations/:id/run` | bearer | No |
 | GET | `/api/jev/models` | bearer | No |
 | POST | `/api/jev/webhooks/reply` | none | No |
+| GET | `/api/jev/automations/selftest` † | bearer | Yes - the selftest harness itself |
 
 Module parts: routes-automations.js, jev-automations.js, jev-engine.js, jev-scheduler.js, jev-llm.js, jev-lead.js, jev-lead-lib.js, jev-corpus-builtins.js
 
@@ -142,6 +145,8 @@ Endpoints:
 | GET | `/api/jev/evolution/atoms` | bearer | No |
 | GET | `/api/jev/evolution/candles` | bearer | No |
 | POST | `/api/jev/evolution/memory/search` | bearer | No |
+| GET | `/api/jev/evolution/selftest` † | bearer | Yes - the selftest harness itself |
+| GET | `/api/jev/evolution/selftest/candle` † | bearer | Yes - the selftest harness itself |
 
 Module parts: jev-evolution.js, jev-evolution2-routes.js, jev-cycle.js, jev-queue.js, jev-notify.js, jev-memory.js, jev-quality.js, jev-atoms.js, index.js (scheduled handler / runJevScheduled dispatch)
 
@@ -170,7 +175,7 @@ Endpoints:
 
 | Method | Path | Auth | Falsification Harness |
 |---|---|---|---------|
-| GET | `/api/jev/corpus/health` | none | No |
+| GET | `/api/jev/corpus/health` | bearer | No |
 | POST | `/api/jev/corpus/audit` | bearer | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/scorer/score` | bearer | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
 | POST | `/api/jev/corpus/scorer/matrix` | bearer | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
@@ -454,6 +459,7 @@ Endpoints:
 | POST | `/api/jev/map/repo-items` | bearer | No |
 | POST | `/api/jev/map/embed` | bearer | No |
 | POST | `/api/jev/map/vector/search` | bearer | No |
+| GET | `/api/jev/map/selftest` † | bearer | Partial - live contract probes |
 
 Module parts: index.js (embeddings, repo fetch, vector search, chunked/v1 cache)
 
@@ -545,6 +551,7 @@ Endpoints:
 | GET\|OPTIONS | `/api/decide` | none | No |
 | POST | `/api/site-assistant` † | none | No |
 | POST | `/api/brain/preview` † | none | No |
+| GET | `/api/relay/selftest` † | bearer | Partial - live contract probes |
 
 Module parts: index.js (relay block: tts/stt/contact/decide/chat, relayRateLimited, RELAY_CORS)
 
@@ -602,7 +609,6 @@ Endpoints:
 | GET | `/` † | none | No |
 | GET | `/revenue-blind-spot[/]` † | none | No |
 | GET | `/systems-lab[/]` † | none | No |
-| GET | `/contact[/]` † | none | No |
 | GET | `/founders[/]` † | none | No |
 | GET | `/terms[/]` † | none | No |
 | GET | `/privacy[/]` † | none | No |
@@ -653,7 +659,6 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/` | none | KV-served site landing page (website-v19/index.html); also /index.html | No |
 | GET | `/revenue-blind-spot[/]` | none | Revenue Blind Spot landing page (website-v19/revenue-blind-spot.html); /RBS, /RBS/, /rbs, /rbs/ alias to the same page | No |
 | GET | `/systems-lab[/]` | none | Systems Lab page (lab.html) with Lumina embeds | No |
-| GET | `/contact[/]` | none | Contact page (contact.html) | No |
 | GET | `/founders[/]` | none | Founders page (founders.html) | No |
 | GET | `/terms[/]` | none | Terms page (terms.html) | No |
 | GET | `/privacy[/]` | none | Privacy page (privacy.html) | No |
@@ -665,7 +670,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/robots.txt` | none | robots.txt served from KV | No |
 | GET | `/website-vN/<file>` | none | Generic asset pass-through: /website-v<digits>/<[A-Za-z0-9._-]+> served from KV key website-vN/<file> | No |
 
-### index.js (core API module) - 41 routes
+### index.js (core API module) - 43 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
@@ -710,8 +715,10 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/api/jev/map/maps/:id` | bearer | Complete stored MapResult (KV-overflow aware), enriched with radius profile on read | No |
 | DELETE | `/api/jev/map/maps/:id` | bearer | Delete one saved map (+ KV overflow cleanup); operator bearer auth required (R2 patch: 503 when JEV_API_KEY unbound, 401 on missing or wrong token) | No |
 | POST | `/api/jev/map/maps/compare` | bearer | Compare two stored maps on compatible frames | No |
+| GET | `/api/jev/map/selftest` † | bearer | Ingestion recall selftest: embed determinism (bit-identical re-embed, 768-D), canary recall through Vectorize (the one idempotent write; eventual-consistency bounded retry with disclosed skip), small repo-items smoke (playbooks, n>=10) | Partial - live contract probes |
+| GET | `/api/relay/selftest` † | bearer | Live relay diagnostics: decide calibration probe (pinned band, records consumed), chat non-empty, one tiny TTS synth + STT round-trip; <=1 call per service, in-process handler calls (never self-fetch) | Partial - live contract probes |
 
-### routes-jev.js (jev orchestrator) - 22 routes
+### routes-jev.js (jev orchestrator) - 24 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
@@ -737,11 +744,13 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/api/jev/learnings` | bearer | Learning proposal ledger list; rate-limited | No |
 | POST | `/api/jev/learnings` | bearer | Propose a learning; rate-limited | No |
 | POST | `/api/jev/learnings/:id/promote` | bearer | Human promotion: bumps policy version (new_policy optional - falls back to current doc version bump), expires affected approvals, appends policy changelog row; rate-limited | No |
+| GET | `/api/jev/selftest` † | bearer | Orchestrator lifecycle selftest: 26 in-process checks (ingest validation, gate decisions, approval binding + expiry-on-policy-change, dropped-approvals-adapter trap, verify/terminal mapping, six terminal states distinct) against a memory driver - zero D1 writes, zero model calls | Yes - the selftest harness itself |
+| GET | `/api/jev/selftest/ledger` † | bearer | Outcomes ledger integrity selftest: supersedes-chain fixtures through the real consolidateLedgerChains + read-only parse of the real ledger (SELECT-only) | Yes - the selftest harness itself |
 
 routes-jev.js also delegates `/api/jev/route*` to jev-router.js (4 routes, own table
 below), dispatched after the corpus delegation and before the task regexes.
 
-### routes-automations.js (automations + webhooks + models) - 7 routes
+### routes-automations.js (automations + webhooks + models) - 8 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
@@ -752,6 +761,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/automations/:id/pause` | bearer | Pause an automation; rate-limited | No |
 | POST | `/api/jev/automations/:id/run` | bearer | Run automation inline (<=25s CPU): body IS the automation input (or {prompt} for prompt-input automations); creates + runs the task and returns full result; rate-limited | No |
 | GET | `/api/jev/models` | bearer | Model routes for the console (classify=llama-3.1-8b, draft=llama-3.3-70b, guard=llama-guard-3-8b; raw: pins anything else); rate-limited | No |
+| GET | `/api/jev/automations/selftest` † | bearer | Def validation (valid builtin-only / bad name / non-GET web.fetch_public rejection) + scheduler CAS double-fire probe on a memory driver - no real automation runs, no model calls | Yes - the selftest harness itself |
 
 ### jev-evolution.js (evolution v1) - 6 routes
 
@@ -764,7 +774,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/evolution/directives/:id/reject` | bearer | Reject a directive; rate-limited | No |
 | GET | `/api/jev/evolution/state` | bearer | Evolution state: sweeps, directives, calibration trend, notify state; rate-limited | No |
 
-### jev-evolution2-routes.js (evolution v2 cycle) - 5 routes
+### jev-evolution2-routes.js (evolution v2 cycle) - 7 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
@@ -773,12 +783,14 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/evolution/memory/search` | bearer | Memory recall (EVEC-index based) with degrade envelope; rate-limited | No |
 | GET | `/api/jev/evolution/candles` | bearer | Standard-candle ledger with detection power summary; rate-limited | No |
 | POST | `/api/jev/evolution/cycle/run` | bearer | Manual trigger of the hourly cycle: one cycle + enqueue + queue drain (the scheduled pass on demand); rate-limited | No |
+| GET | `/api/jev/evolution/selftest` † | bearer | Evolution cycle replay on memoryEvolutionDriver: preflight, measure report, decision, cycle-row persist read-back - the in-process mirror of the cron-leg defect (same logic persists in-memory) | Yes - the selftest harness itself |
+| GET | `/api/jev/evolution/selftest/candle` † | bearer | Candle positive control: real detectionPower at planted amplitude detects, zero-amplitude does not, candleDue boundaries with fixed timestamps | Yes - the selftest harness itself |
 
 ### jev-corpus-routes.js (corpus, taste, visco, oracle) - 21 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
-| GET | `/api/jev/corpus/health` | none | Corpus module health: which math/atom/lens modules are wired | No |
+| GET | `/api/jev/corpus/health` | bearer | Corpus module health: which math/atom/lens modules are wired (bearer-gated live, verified 2026-10-08) | No |
 | POST | `/api/jev/corpus/audit` | bearer | Corpus audit: V2, z, verdict, dBc, shares, E_l; idempotent per input sha256 (repeat returns same run_id cached:true); Decision-B multipass mode; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/lens` | bearer | Lens candidates: K reals + K paired controls in guided-curve-ideate format; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/atom` | bearer | RSI-descent atom plan, DRY-RUN only (Delta >= 0 invariant asserted); rate-limited | Partial - parity-tested vs Python sources of record |
@@ -1092,7 +1104,7 @@ flowchart LR
     Core --> Tts
     Core --> Surf
     subgraph JEV["Jev orchestrator - routes-jev.js"]
-        Health["GET /api/jev/health<br/>GET /api/jev/corpus/health - unauth"]
+        Health["GET /api/jev/health<br/>GET /api/jev/corpus/health - bearer"]
         Bearer{"Bearer auth<br/>JEV_API_KEY"}
         Autom["routes-automations.js: /api/jev/automations<br/>:id/activate|pause|run, /api/jev/models"]
         Hook["POST /api/jev/webhooks/reply<br/>no bearer - optional ?k= secret"]
@@ -1298,6 +1310,8 @@ Refresh notes (2026-10-05, discrepancy resolution):
 14. Map fold 2026-10-08: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/* via a mechanical prefix rewrite in index.js (old paths 410 'moved: this API relocated to /api/jev/map/*'); the /map/ page folded into a Map card in the /jev/ console's diagnostics panel (maps list, repo->embed->map creation, pointmap.js globe, instrument buttons, outcomes ledger, NSS prompt viewer); /map/ + /map/app.js 410 'moved: the map UI lives in the /jev/ console', /map/pointmap.js kept as the card's rendering-library asset; SOS paths moved to /api/jev/map/sos/*; verification: 71-route harness, 71/71 PASS incl. bearer no-key 401 / keyed pass on every transitioned route. Deploy etag 0f07bbe2. SPEC-MAP-FOLD-2026-10-08. Card v2 (same day): full parity with the old /map/ page - the card now carries the five original tabs (instrument / results / proofs / diagnostics / rounds) with every input field, button and info-tip (source select texts/files/dirs/repo, params N/D/d/seed/T/K/baseline/labels, globe controls, candidate ladder, wayfinder prompt, certificates + lean-check CI, azimuth/rayleigh/admission/axis-redundancy/spectroscopy/radius, candidate preview/consistency/positive control/outcome ledger, download/use-as-baseline); the diagnostics panel's anchor pills became view-switching tabs (7 tabs, one card visible at a time, WAI-ARIA); Map card styled to the taste-card family. Advisor design review caught a fatal port defect (dropped src.onchange handler assignment) pre-deploy. Follow-up (owner review): scorer, taste, router and spectral promoted out of the corpus tab to their own diag tabs - the diagnostics panel is now 11 view-switching tabs (tasks, learnings, automations, evolution, corpus, scorer, taste, router, spectral, visco, map), every card with its own tab button.
 15. Style + router round 2026-10-08 (parallel lanes + advisor, SPEC-STYLE-ROUTER-2026-10-08): (a) console-wide style harmonization - every diag-panel card and page-level section carries the map card's eyebrow/title/description heading pattern and surface treatment (additive jev-eyebrow/jev-title/jev-sub/jev-surface classes; scripts byte-identical); (b) prompt intake routed through the hierarchy router - selectForPrompt (jev-router) measures the prompt as a text artifact (scorer.bits), policy v15 adds 6 provisional text bands and 9 tool targets in the route.dispatch targets registry, decideActionsFromPrompt branches on the band target: model lanes (lane-draft 70b / lane-classify 8b / model:*) run the draft flow on that model (decided_via router:<target>), tool targets emit ONE gated route.dispatch action (in-process dispatch via handleJevCorpus / policy-named-credential fetch, never self-fetch, provisional bands never auto-execute), and no matching band falls back to the legacy 70b flow (router: no_band in intent_json); routeArtifact's run-row hash now includes policy_version (stale pre-promote rows no longer replay). Policy v15 promoted via the audited flow (learning l_1110f0713212b026, actor jenny, approvals_expired 2). Harness verify-prompt-router.mjs: 14/14 PASS post-promote (determinism compares decision signatures; a first routed call returns 201 Created because it creates the gated task). Deploy etags 806539f1 -> 8b0c6c6b.
 16. Timeseries wave + harness recatalog 2026-10-08 (this refresh): (a) 3 routes added - GET /api/jev/timeseries/selftest, GET /api/jev/timeseries/series and GET /api/jev/forecast/:series (Workers Analytics Engine dataset jev via the TS analytics_engine binding + the AE_SQL_TOKEN Account Analytics Read token; damped-trend Holt forecaster in jev-forecast-math.js, Python source of record tools/forecast-standard/forecast_ets.py, parity max |delta| = 0 on 4 fixtures; WAE write sites: wrapped deps.transit task_state/task_terminal, jev-review approval created/approved/rejected, recordRun corpus_run; tsWrite never throws into the request path); deploy etag chain 7f8fa641 -> dda2f487 -> f0c6d7c7 -> f2313fa6. (b) Falsification Harness column recataloged against the harnesses shipped since the 2026-10-06 refresh: visco snapback + hysteresis Yes (PR #296 - 852/852 snapback verdict classes + FPR-vs-analytic, 102.86 hysteresis anchor + 9 chain fixtures), router e2e corpus + scorer gold slice noted as Partial with their PR #297 findings (router 11/12 band + gate outcomes, F1 bands-doc defect open; scorer specificity 4/4 PASS, recall 0/4 = the v2.3 extractor-recall gap), spectral centroid fixture regenerated under the euclidean metric (PR #298). (c) The column header is renamed Harness -> Falsification Harness on every capability and inventory table. (d) The flow diagram gained the timeseries node + WAE external and a cron node replacing the client-cron edge, and was re-verified in both light and dark themes. 127 -> 130 routes. (e) Restoration pass after the merge: the parallel time-series doc edit at 99a7fdd894 had richer detail this refresh's wholesale file replace dropped - the datapoint schema line (index1/blob1..3/double1..2), the band formula, the G2 selftest-report fact, the sampling note, the Outcome Ledger + timesfm-tsfm-landscape composes-with cross-refs - all folded back in, and the selftest harness cell re-cataloged Partial -> Yes.
+17. Live endpoint audit 2026-10-08 (refs/endpoint-live-audit-harness-plan-2026-10-08.md, draft PR): every documented route live-tested in 4 passes against the deployed worker (operator bearer; destructive surfaces untouched - no approvals touched, no outcome rows written, no lead sent). Results: all 6 selftests green, sampled 401 gates clean, fail-closed validation correct, map instruments + scorer + forecast + repo-items (294 docs full text) functional on live data, outcomes ledger append-only 405 verified. Findings fixed in this commit: GET /contact 404 (page dropped in the v19 batch; rows removed), GET /api/jev/corpus/health 401 without bearer (auth cell + flow-diagram label corrected). Findings queued as fixes: POST /api/jev/tasks 500 + stack trace on validation errors (P0), searxng 500 on missing qs (relay passthrough), embed validation error names the wrong param, evolution v2 persistence confirmed on the manual cycle path (open defect narrows to the cron leg). Harness tally: 15 Yes / 19 Partial / 93 No across 123 unique routes; improvement plan P0-P3 in the refs doc.
+18. Audit-fixes + selftest wave 2026-10-08 (SPEC-AUDIT-FIXES-2026-10-08 in skills/steady-orbit-deploy, parallel-build-lanes: 4 lanes + advisor, 85/0 tests): P0 fixes - POST /api/jev/tasks validation errors now 422 INVALID_BODY with no stack leak (jev-ingest.js invalid() stamps validation; route-boundary catch; the one bundle-wide stack-leak site stripped), GET /api/searxng returns 400 on missing qs before the relay hop, embed validator messages name texts. Evolution cron leg instrumented (structured [evolution-cron] cycle_id/persisted logs + persist read-back in runEvolutionCycleScheduled; diagnosis: scheduled and manual legs share the same invocation, the defect is silent error swallowing, not a divergent path). 7 new bearer-gated selftest routes in 3 new module parts (jev-selftest.js, jev-selftest-evolution.js, jev-selftest-live.js): GET /api/jev/selftest (26 lifecycle checks), /api/jev/selftest/ledger (10), /api/jev/evolution/selftest (4), /api/jev/evolution/selftest/candle (4), /api/jev/automations/selftest (5), /api/jev/map/selftest (3), /api/relay/selftest (4) - all in-process/memory-driver, zero production writes (the map selftest's single idempotent Vectorize canary is the one allowed write). Live-verified: all 7 selftest routes 200 ok:true, 401 gates clean, tasks 422 + searxng 400 + embed texts live; spot-checks green (health, tasks GET, corpus selftest 92 checks). Deploy etags fb94637c -> c910118b (56 parts, schedules + 16 bindings preserved; the AE_SQL_TOKEN secret_text binding preserved via keep_bindings since secret values do not round-trip through a settings GET). Amendment: the map selftest's canary-recall reports a DISCLOSED SKIP (never a false contract failure) when a cold canary is not queryable after a bounded retry - Vectorize upserts are eventually consistent (~3-4 min observed), storage proven via a CF REST query at score 1.0.
 
 
 
