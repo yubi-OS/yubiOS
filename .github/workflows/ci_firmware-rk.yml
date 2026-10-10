@@ -790,6 +790,18 @@ jobs:
           grep -qi 'Secure Payload BL32\|tos-fw\|Trusted OS' fip-info.txt
           grep -qi 'Non-Trusted Firmware BL33\|nt-fw\|Non-Trusted' fip-info.txt
 
+      - name: Fetch pinned Rockchip DDR/TPL blob (rkbin)
+        if: matrix.build_kind == 'rockchip' && matrix.requires_rockchip_tpl == true
+        env:
+          RKBIN_REF: 3e288fe814e059dd06833495f845cab04ac20a5c
+          RKBIN_TPL_PATH: bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.24.bin
+          RKBIN_TPL_SHA256: 2853a0da7ab895af43d50615af73eccf0694115dd0202483ee1c93c9071a42c3
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 -o rockchip-ddr-tpl.bin "https://raw.githubusercontent.com/rockchip-linux/rkbin/${RKBIN_REF}/${RKBIN_TPL_PATH}"
+          printf '%s  %s\n' "$RKBIN_TPL_SHA256" rockchip-ddr-tpl.bin | sha256sum --check --strict
+          echo "ROCKCHIP_TPL=$GITHUB_WORKSPACE/rockchip-ddr-tpl.bin" >> "$GITHUB_ENV"
+
       - name: Build Rockchip U-Boot board image
         if: matrix.build_kind == 'rockchip'
         env:

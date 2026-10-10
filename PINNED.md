@@ -114,4 +114,12 @@ Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chai
 - Digests are verified at build time by the explicit `yubiOS.rego` `target.policy` inherited from `yubiOS-bake.hcl` (`reset=true`, `strict=true`).
 - cosign v3.1.2 is the canonical signing binary; downstream verification tooling MUST pin to v3.1.2 SHA-512 above. The yubiOS verifier (`tests/verify-oci-attestations.sh`) keys its identity regex to `^https://github\.com/yubi-OS/yubiOS/\.github/workflows/(yubiOS-ci|ci_dev_image|ci_mkosi-installer)\.yml@refs/(heads|tags)/.+$`; a future publisher workflow must add its filename to that set in the verifier script.
 
+## Rockchip DDR/TPL blob (RK3588)
 
+Pulled at build time by `ci_firmware-rk.yml`, which fails closed on a sha256 mismatch. Not vendored in this repo.
+
+| Source | Ref | Path | sha256 | Consumers |
+|---|---|---|---|---|
+| `rockchip-linux/rkbin` | `3e288fe814e059dd06833495f845cab04ac20a5c` | `bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.24.bin` | `2853a0da7ab895af43d50615af73eccf0694115dd0202483ee1c93c9071a42c3` | `ROCKCHIP_TPL` for the RK3588 (`rock5b-rk3588`) legs |
+
+Redistribution: the blob is Rockchip-proprietary. The packed `u-boot-rockchip.bin` embeds it, so publishing that image needs the licence decision first. See `refs/rk3588-ddr-tpl-source-2026-07-29.md`.

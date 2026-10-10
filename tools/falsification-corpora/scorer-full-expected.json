@@ -1,0 +1,170 @@
+{
+ "F-audience-2": {
+  "audience": 2
+ },
+ "F-audience-4": {
+  "audience": 4
+ },
+ "F-audience-6": {
+  "audience": 6
+ },
+ "F-inputs-2": {
+  "inputs": 2
+ },
+ "F-inputs-4": {
+  "inputs": 4
+ },
+ "F-inputs-6": {
+  "inputs": 6
+ },
+ "F-outputs-2": {
+  "outputs": 2
+ },
+ "F-outputs-4": {
+  "outputs": 4
+ },
+ "F-outputs-6": {
+  "outputs": 6
+ },
+ "F-mode-2": {
+  "mode": 2
+ },
+ "F-mode-4": {
+  "mode": 4
+ },
+ "F-mode-6": {
+  "mode": 6
+ },
+ "F-assumption_set-2": {
+  "assumption_set": 2
+ },
+ "F-assumption_set-4": {
+  "assumption_set": 4
+ },
+ "F-assumption_set-6": {
+  "assumption_set": 6
+ },
+ "F-adjacent-2": {
+  "adjacent": 2
+ },
+ "F-adjacent-4": {
+  "adjacent": 4
+ },
+ "F-adjacent-6": {
+  "adjacent": 6
+ },
+ "P-inputs": {
+  "inputs": 4
+ },
+ "P-outputs": {
+  "outputs": 4
+ },
+ "P-assumption_set": {
+  "assumption_set": 4
+ },
+ "P-adjacent": {
+  "adjacent": 4
+ },
+ "F-failure_modes-2": {
+  "failure_modes": 2
+ },
+ "F-failure_modes-4": {
+  "failure_modes": 4
+ },
+ "F-failure_modes-6": {
+  "failure_modes": 6
+ },
+ "F-lifecycle-2": {
+  "lifecycle": 2
+ },
+ "F-lifecycle-4": {
+  "lifecycle": 4
+ },
+ "F-lifecycle-6": {
+  "lifecycle": 6
+ },
+ "F-composition-2": {
+  "composition": 2
+ },
+ "F-composition-4": {
+  "composition": 4
+ },
+ "F-composition-6": {
+  "composition": 6
+ },
+ "F-knowledge_sources-2": {
+  "knowledge_sources": 2
+ },
+ "F-knowledge_sources-4": {
+  "knowledge_sources": 4
+ },
+ "F-knowledge_sources-6": {
+  "knowledge_sources": 6
+ },
+ "F-calibration-2": {
+  "calibration": 2
+ },
+ "F-calibration-4": {
+  "calibration": 4
+ },
+ "F-calibration-6": {
+  "calibration": 6
+ },
+ "F-recursion-2": {
+  "recursion": 2
+ },
+ "F-recursion-4": {
+  "recursion": 4
+ },
+ "F-recursion-6": {
+  "recursion": 6
+ },
+ "P-failure_modes": {
+  "failure_modes": 4
+ },
+ "P-lifecycle": {
+  "lifecycle": 4
+ },
+ "P-knowledge_sources": {
+  "knowledge_sources": 4
+ },
+ "P-calibration": {
+  "calibration": 4
+ },
+ "D1": {},
+ "D2": {},
+ "D3": {},
+ "D4": {},
+ "D5": {},
+ "D6": {},
+ "D7": {},
+ "D8": {},
+ "D9": {},
+ "D10": {},
+ "D11": {},
+ "D12": {},
+ "H-inputs": {
+  "inputs": 3
+ },
+ "H-outputs": {
+  "outputs": 3
+ },
+ "H-assumption_set": {
+  "assumption_set": 3
+ },
+ "H-calibration": {
+  "calibration": 3
+ },
+ "A1": {
+  "audience": 2,
+  "outputs": 2,
+  "composition": 2,
+  "calibration": 2
+ },
+ "A2": {
+  "inputs": 2,
+  "mode": 2,
+  "failure_modes": 2,
+  "lifecycle": 2
+ }
+}
