@@ -39,6 +39,18 @@ Doctrine: the instrument never awards itself a quality score. It returns a vecto
 
 Raw gray in -> ink-normalization threshold (argmin |coverage - 0.06|, ties smaller t) -> 4-connected components -> Moore outer-boundary tracing (canonical backtrack-relative, 1-px contours, components < 12 px dropped) -> pinned box-counting window 4..64, 8 scales, log N vs log(1/s) regression + r2 gate. Python source of record `edge_standard.py` (stdlib, 34/34) + JS worker port (`jev-edge-standard.js`, imports boxCountingDim from jev-taste-math.js) + `edge_fixtures.json` (4 fixtures incl. the normalization property: same shape at different gray levels -> identical traced grid + identical D). ANY change to TARGET_COVERAGE (0.06), MIN_COMPONENT (12), or the scale window is a major version bump. The threshold targets coverage only, decided before any D is computed — never tune toward a D outcome.
 
+## Degenerate scale coherence (2026-10-11)
+
+Scale coherence is `not_applicable` on degenerate input. It is never reported as satisfied, and the coherence value is not computed:
+
+- `solid_field`: ink at or above 0.99 of the grid.
+- `near_empty`: ink below 0.01 of the grid.
+- `zero_variance`: the box count is constant within either half of the scale window. A constant count has no slope and used to read as perfect self-similarity.
+
+The result carries `reason: "degenerate_input:<case>"`. Effects: a single dot and a sparse 4-dot field no longer score coherence (they used to read 1.0 and -0.15). A solid field no longer returns 422 `invalid_feature`. An all-zero grid still fails with `EMPTY_EDGE_MAP`. Fractal and symmetry outputs are unchanged.
+
+Verdict consumers must treat `not_applicable` as neutral, never as a pass. That was not traced end to end when the change shipped (INTEGRATION-15, item E1), so check any new consumer before relying on it.
+
 ## Validation discipline (do this before trusting any axis)
 
 1. **Jitter test**: same instruction N re-calls (measured: sd = 0.0000 across 24 clef re-calls — clef is deterministic on fixed numeric instructions). If jitter appears, hysteresis becomes load-bearing; if not, it is cheap insurance.

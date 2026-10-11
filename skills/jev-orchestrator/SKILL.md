@@ -151,6 +151,26 @@ A prompt submitted to the /jev/ prompt console (payload.prompt on POST /api/jev/
 
 Adding a routable endpoint is a POLICY edit (route.dispatch targets registry), never code. Bands are provisional pending calibration: run `session/auth-pass/router-prompt/verify-prompt-router.mjs` (or the final3 copy), review the bit-row distribution, adjust thresholds, then promote via the audited learning flow (actor jenny). Route run-row cache: the routeArtifact input hash includes `policy_version`, so a promote invalidates stale route decisions (a pre-promote cached `blocked` row must never replay post-promote — that bug shipped and was fixed 2026-10-08).
 
+## Patched15 additions (2026-10-11)
+
+Approvers and cancel:
+
+- Task approve and reject (`POST /api/jev/approvals/:id/approve|reject`) check the approver allowlist before the approval lookup. The list is the policy `approvers` field when present. Policy v21 has no such field, so the default `["jenny","ermine"]` applies. A malformed list fails closed. A non-listed actor gets 403 `APPROVER_NOT_ALLOWED`.
+- Task cancel (`POST /api/jev/tasks/:id/cancel`) is not behind the allowlist.
+- Directive approve, reject and cancel (`POST /api/jev/evolution/directives/:id/approve|reject|cancel`) use the same list. Cancel is checked by its own helper, which defaults to `["jenny"]` when the policy has no `approvers` field. That is a known gap: until it is aligned, add an `approvers` list to the policy to let a delegate cancel a directive.
+- Cancel body: `{"actor": "<name>", "reason"?: "<text>"}`. Only `approved_ready` and `proposed` directives can be cancelled; other statuses return 409 `DIRECTIVE_NOT_CANCELLABLE`. A held auto candle that cannot be approved is cleared by cancel.
+
+Routing and gate:
+
+- Text with zero scorer evidence (short prompts, nothing flipped) routes to the `text-no-evidence` band (lane-classify, provisional). Before this band, such text blocked at 0 bits. The band is provisional, so the gate accepts it and the classify lane reviews the result.
+- `route.dispatch.read_only_targets` is `["corpus_scorer"]` on policy v21. For a read-only target the gate skips only the band checks. The declared-target, pause and limit checks still run. The target has no band and no external effect.
+- A mutating contents write must name `branch`; a write with no branch is refused (`branch_missing`). main is denied for contents writes. The prompt path builds a create-form PUT for `scratch/` paths on `scratch/` branches, and the executor resolves create or update at dispatch.
+
+Evolution hooks the orchestrator relies on:
+
+- Sweep ingest scoring: each `note` and `record_learning` proposal in a sweep is scored once by the decision model at ingest. A score at or above 0.5 lets the auto gate run it. Otherwise it stays `needs_approval`.
+- Memory: an approved `memory_edit` appends a row to `jev_memory_log`. Read it with `GET /api/jev/evolution/memory/log?key=&limit=` (limit 1 to 200, default 50, newest first).
+
 ## Hierarchy Router (measurement-gated routing, 2026-10-06)
 
 The routing regime on the worker: `POST /api/jev/route` accepts ANY artifact modality — image (deterministic edge-standard-v1 D), text (structured-evidence scorer), multimodal/any (ONE clef noul call over the caller hint + data-URI images + any measured context). Band lookup reads `routing.bands` from the LIVE policy at call time; the routing action `{tool:"route.dispatch", method:"POST", url:"https://jev.route/<target>", body:{target, artifact_ref, band_id}}` passes the SAME fail-closed gate as every action; on allow the router auto-dispatches (the approve-leg contract) and the task closes in-request. Invariant: the detector proposes the route; the gate disposes — measurements are data, never authorization.
