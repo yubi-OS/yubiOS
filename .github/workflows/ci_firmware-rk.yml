@@ -810,22 +810,25 @@ jobs:
           printf '%s  %s\n' "$RKBIN_TPL_SHA256" rockchip-ddr-tpl.bin | sha256sum --check --strict
           echo "ROCKCHIP_TPL=$GITHUB_WORKSPACE/rockchip-ddr-tpl.bin" >> "$GITHUB_ENV"
 
-      - name: Append pinned OP-TEE node to rock5b U-Boot DT (fail closed)
+      - name: Apply pinned rock5b OP-TEE patch to U-Boot as a commit (fail closed, clean tree)
         if: matrix.build_kind == 'rockchip' && matrix.board == 'rock5b-rk3588'
         env:
-          ROCK5B_OPTEE_DTSI_SRC: firmware/u-boot/rock5b-optee-node.dtsi
-          ROCK5B_OPTEE_DTSI_SHA256: dcf8b79503223d77b673b686207367260323649d2d41c187823cad61ebf91d91
-          ROCK5B_OPTEE_DTSI_TARGET: u-boot/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+          ROCK5B_OPTEE_PATCH_SRC: firmware/u-boot/0001-rock5b-add-optee-firmware-node.patch
+          ROCK5B_OPTEE_PATCH_SHA256: 40711776d4f03f3e7b030602a2b66fd02c4f375a0ae6bc86a28d713f21ef5bc0
+          GIT_COMMITTER_NAME: yubiOS CI
+          GIT_COMMITTER_EMAIL: ci@yubi-os.invalid
+          GIT_COMMITTER_DATE: 2026-10-10T00:00:00Z
         run: |
           set -euo pipefail
-          printf '%s  %s\n' "$ROCK5B_OPTEE_DTSI_SHA256" "$ROCK5B_OPTEE_DTSI_SRC" | sha256sum --check --strict
-          test -s "$ROCK5B_OPTEE_DTSI_TARGET"
-          if grep -q 'linaro,optee-tz' "$ROCK5B_OPTEE_DTSI_TARGET"; then
-            echo "::error::rock5b U-Boot dtsi already has an OP-TEE node; refusing to double-append"
+          printf '%s  %s\n' "$ROCK5B_OPTEE_PATCH_SHA256" "$ROCK5B_OPTEE_PATCH_SRC" | sha256sum --check --strict
+          test "$(git -C u-boot rev-parse HEAD)" = "$UBOOT_REF"
+          if grep -q 'linaro,optee-tz' u-boot/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi; then
+            echo "::error::rock5b U-Boot dtsi already has an OP-TEE node; refusing to apply twice"
             exit 1
           fi
-          cat "$ROCK5B_OPTEE_DTSI_SRC" >> "$ROCK5B_OPTEE_DTSI_TARGET"
-          echo "appended OP-TEE node (dtsi sha256 $ROCK5B_OPTEE_DTSI_SHA256)"
+          git -C u-boot am --quiet "$GITHUB_WORKSPACE/$ROCK5B_OPTEE_PATCH_SRC"
+          test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
+          echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
 
       - name: Build Rockchip U-Boot board image
         if: matrix.build_kind == 'rockchip'

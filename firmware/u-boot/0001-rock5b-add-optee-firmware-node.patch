@@ -1,0 +1,35 @@
+From c082d542a730053f1c4f40498769a01281909795 Mon Sep 17 00:00:00 2001
+From: yubiOS CI <ci@yubi-os.invalid>
+Date: Sat, 10 Oct 2026 00:00:00 +0000
+Subject: [PATCH] rock5b: add OP-TEE firmware node to U-Boot DT
+
+Without it U-Boot binds no TEE device (Unable to open OP-TEE session,
+err=-19), so the fTPM, StMM and UEFI init fail on the Radxa ROCK 5B.
+QEMU avoids this because it builds its own device tree with an OP-TEE node.
+---
+ arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+index ddc1773..46d9170 100644
+--- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+@@ -39,3 +39,15 @@
+ &usbc0 {
+ 	status = "okay";
+ };
++
++/* yubiOS: OP-TEE firmware node. Without it U-Boot binds no TEE device
++ * (Unable to open OP-TEE session, err=-19), so fTPM, StMM and UEFI init
++ * fail on the ROCK 5B. QEMU avoids this because it builds its own DT. */
++/ {
++	firmware {
++		optee {
++			compatible = "linaro,optee-tz";
++			method = "smc";
++		};
++	};
++};
+-- 
+2.50.1
+
