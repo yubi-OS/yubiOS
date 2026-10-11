@@ -3,6 +3,7 @@
 > Generated 2026-10-05. Refreshed 2026-10-05 after discrepancy resolution. The live
 > worker (steady-orbit.systems-a.workers.dev) serves all endpoints listed here.
 > AGENT.md is the operational contract; this document is the architectural reference.
+> Updated 2026-10-11 for the patched15 jev build (worker etag 7cce09ac, policy v21). Source record: tools/steady-orbit-worker/2026-10-11/ (CHANGES.md lists each change). Notes are in the Patched15 notes section above the Endpoint Inventory.
 
 Assembled from five parallel lanes:
 
@@ -95,6 +96,9 @@ Key invariants:
 - Idempotency: task create dedupes per (tenant, idempotency_key)
 - Pause blocks new and queued dispatch but never undoes completed effects
 - Invalid resend.send bodies are rejected at propose-time (422 / task closed rejected), never a 500 that orphans the task
+- Approver allowlist (2026-10-11): `POST /api/jev/approvals/:id/approve` and `/reject` accept only actors on the policy `approvers` list (case-insensitive). With no `approvers` field the default is `["jenny","ermine"]`; a malformed list fails closed. A non-listed actor gets 403 `APPROVER_NOT_ALLOWED`, checked before any approval lookup. Task cancel (`POST /api/jev/tasks/:id/cancel`) is not behind this allowlist. Directive decisions use the same list (see Evolution).
+- GitHub contents writes (2026-10-11): a mutating write to a repo- or path-scoped tool must name a `branch`; a write with no branch is refused (`branch_missing`). main is denied for contents writes.
+- Text with zero scorer evidence (short prompts) routes to the `text-no-evidence` band (lane-classify, provisional) instead of blocking at 0 bits. See Policy v21.
 
 Composes with:
 - Automations (propose_actions stage feeds proposals into the same gate)
@@ -116,6 +120,29 @@ Composes with:
 | `resend.send` | POST | api.resend.com | true | 0.5 | |
 | `web.fetch_public` | GET | `*` | false | 0 | |
 | `places.search` | POST | places.googleapis.com | false | 0 | |
+
+#### Policy v21 (live, read 2026-10-11)
+
+The v16 table above is kept as the historical record. The live policy is version 21 (`GET /api/jev/health` returns `policy_version: 21`). What the policy document now says, as read from `GET /api/jev/policy`:
+
+- `decision_model` is `clef`.
+- There is no `approvers` field, so the approver default applies (see Jev Orchestrator key invariants).
+- `route.dispatch.read_only_targets` is `["corpus_scorer"]`. For a read-only target the gate skips only the band checks. The declared-target, pause and limit checks still run.
+- Routing band `text-no-evidence`: modality text, feature `scorer.bits` between 0 and 1, lane-classify, provisional. Text with zero scorer evidence goes to the classify lane for review.
+
+Tool registry at v21 (9 tools):
+
+| Tool | Methods | Hosts | requires_approval | max_cost_usd | Credential |
+|---|---|---|---|---|---|
+| `http.fetch` | GET | api.github.com | false | 0.5 | GITHUB_API_KEY |
+| `github.read` | GET | api.github.com | false | 0.5 | GITHUB_API_KEY |
+| `github.contents_put` | PUT | api.github.com | true | 0 | GITHUB_API_KEY |
+| `resend.send` | POST | api.resend.com | true | 0.5 | RESEND_API_KEY |
+| `web.fetch_public` | GET | steadyorbitsystems.com | false | 0 | none |
+| `places.search` | POST | places.googleapis.com | false | 0 | GOOGLE_PLACES_API_KEY |
+| `route.dispatch` | POST | jev.route | false | 0 | none (12 targets; read_only_targets `corpus_scorer`) |
+| `searxng.dig` | GET | p01--n8n-service--mcx7zcrbvdyt.code.run | false | 0 | none |
+| `daytona.sandbox` | POST, DELETE | app.daytona.io, proxy.app.daytona.io | true | 0.25 | DAYTONA_API_KEY |
 
 ### Automations (versioned stage pipelines + cron)
 
@@ -164,12 +191,14 @@ Endpoints:
 | POST | `/api/jev/evolution/directives/:id/result` | bearer | No |
 | POST | `/api/jev/evolution/directives/:id/approve` | bearer | No |
 | POST | `/api/jev/evolution/directives/:id/reject` | bearer | No |
+| POST | `/api/jev/evolution/directives/:id/cancel` | bearer | No |
 | GET | `/api/jev/evolution/state` | bearer | No |
 | GET | `/api/jev/evolution/cycles` | bearer | No |
 | POST | `/api/jev/evolution/cycle/run` | bearer | No |
 | GET | `/api/jev/evolution/atoms` | bearer | No |
 | GET | `/api/jev/evolution/candles` | bearer | No |
 | POST | `/api/jev/evolution/memory/search` | bearer | No |
+| GET | `/api/jev/evolution/memory/log` | bearer | No |
 | GET | `/api/jev/evolution/selftest` † | bearer | Yes - the selftest harness itself |
 | GET | `/api/jev/evolution/selftest/candle` † | bearer | Yes - the selftest harness itself |
 
@@ -182,6 +211,11 @@ Terminal states: directive executed / result recorded; auto kinds: record_learni
 Key invariants:
 - Fail-closed directive kinds: record_learning and note auto-execute; memory_edit, skill_push, schedule_change, repo_push, worker_change, ops_fix, external_comms need approval; unknown kinds rejected
 - Sweep ingest is idempotent per fire
+- Sweep ingest scoring (2026-10-11): each `note` and `record_learning` proposal in a sweep gets one decision-model score at ingest. A score at or above 0.5 (`SWEEP_CONFIDENCE_FLOOR`) lets the auto gate run it. No score, a failed call, or a score below 0.5 leaves the proposal `needs_approval`.
+- Directive cancel (2026-10-11): `POST /api/jev/evolution/directives/:id/cancel` with body `{"actor": "<name>", "reason"?: "<text>"}` moves an `approved_ready` or `proposed` directive to `cancelled`. The write is a compare and set and writes a `directive_cancelled` event; no schema change. Any other status returns 409 `DIRECTIVE_NOT_CANCELLABLE`. Cancel is how a held auto directive that cannot be approved is cleared (for example a low-confidence candle).
+- Approver gate on directives (2026-10-11): directive approve, reject and cancel check the approver allowlist (403 `APPROVER_NOT_ALLOWED`; an empty actor gets 400 `INVALID_ACTOR`). Known gap: the cancel check falls back to `["jenny"]` when the policy has no `approvers` field, while approve and reject fall back to `["jenny","ermine"]`. Until that is aligned, Ermine can approve or reject a directive but cannot cancel it unless the policy lists `approvers`.
+- Orphan re-enqueue (2026-10-11): an approved runnable directive (delegate and auto kinds, now including `memory_edit`) is re-enqueued when it has no pending or claimed queue row, with at most 3 terminal failed rows. Approved `note` and `record_learning` run through the approved path. A payload with `low_confidence: true` stays `needs_approval`.
+- Memory log (2026-10-11): an approved `memory_edit` appends a row to the D1 table `jev_memory_log` (key, body, directive_id, actor, created_at). The code only INSERTs, so the table is append-only. `GET /api/jev/evolution/memory/log?key=&limit=` returns the newest rows first (limit 1 to 200, default 50).
 - Before 5 completed cycles of history, the cycle records an honest corpus error instead of fabricating metrics
 - Directive claiming uses CAS (claim=1); queue driver has backoff; double-fire impossible via scheduler idempotency keys
 - Notify digest is silent-cycle aware and never invents atoms/steps (selfCheck parity)
@@ -218,12 +252,13 @@ Bindings: DB, DEFAPI_API_KEY, JEV_API_KEY
 
 Key invariants:
 - Audit is idempotent per input sha256 - repeat returns the same run_id + cached:true
+- Audit seed (2026-10-11, AUDIT_PIPELINE `audit-v3-matrix-seed`): null draws are seeded from the matrix alone (first 32 bits of SHA-256 over canonical JSON `{"kind":"audit-null-seed","matrix":...}`; `seed_source` `matrix_sha256_prefix32`). Labels and the null count do not reshuffle the draws. Every audit result echoes `nulls`, `nulls_source` (`default` or `request`), `seed` and `seed_source`. Placements reports the same z and dbc as POST /audit for the same matrix and nulls. The v3 input hash changed, so audit hashes stored under v2 do not recompute.
 - Multipass Decision-B mode: each pass through the same computeAudit path; inter_pass_offset_dbc is the measurement band
 - The math is a port, never a re-derivation: fixture parity vs the Python sources; on mismatch the JavaScript is wrong until proven otherwise
 - Every jev_corpus_runs row carries policy_version (NULL = pre-stamp era, never backfilled)
 - Audit/lens results are data, never authorization: only directives through the gate act
 - Atom plan is dry-run only with the delta >= 0 invariant asserted; execution is a gated directive, never inline
-- Nulls default 100, cap 1000; scorer carries 0.45/0.55 hysteresis v2.1 and ~$0.0002/call cost
+- Nulls default 200 (clampNulls in jev-corpus-routes.js; earlier notes said 100), cap 1000; scorer carries 0.45/0.55 hysteresis v2.1 and ~$0.0002/call cost
 
 Composes with:
 - Wayfinder Point-Map (placements POSTs vectors to the worker's own /api/jev/map; MAP_FAILED relays rejections)
@@ -256,6 +291,7 @@ Key invariants:
 - Fixture parity vs the Python source of record (edge-standard max dD 4.4e-16 across 4 fixtures)
 - 0.45/0.55 hysteresis; matrix is paced batching (1..20 items), one run row per batch
 - Calibration sweeps are exact (symmetry 0.6 step, 0.3-0.95 variation window, complexity 0.5 step); sterile-perfect rejected
+- Degenerate scale coherence (2026-10-11): on a solid field (ink at or above 0.99 of the grid), a near-empty field (ink below 0.01), or a zero-variance box count in either half of the scale window, scale coherence is `not_applicable` with reason `degenerate_input:<case>`. It is never reported as satisfied and the coherence value is not computed. An all-zero grid still fails with `EMPTY_EDGE_MAP`.
 
 Composes with:
 - Corpus Math (same runs-ledger, same hysteresis and batch-pacing conventions)
@@ -422,6 +458,7 @@ Key invariants:
 - Bearer-gated centrally in routes-jev.js plus the defense-in-depth re-check inside handleJevTimeseries
 - Fail-closed errors: 503 MISSING_READ_TOKEN, 422 BAD_SERIES_NAME (series must match ^[a-z_]+$), 502 WAE_SQL_ERROR (upstream body truncated)
 - WAE SQL reads lag writes a few seconds - the selftest reports the lag honestly instead of failing
+- Forecast v4 (2026-10-11): pre-registered and not wired into any route. The live forecast and the timeseries selftest keep the v2 band. `quality.calibrated` stays false, and the timeseries selftest reports `ok: false` by design (G2 and NEG_G2 stay failing). Do not describe the forecast as calibrated.
 - The WAE SQL time column is timestamp (empirically settled by the selftest schema probe); ORDER BY needs the column in the SELECT list
 - Band v2 (`v2-mad-train`): band[j] = 1.96 x bandSd x sqrt(j), with bandSd = 1.4826 x median |one-step residual| over the train segment only. `quality.calibrated` is false. v2 failed the pre-registered G2 pass rule: 100-replicate band coverage C0 99, C1 99, C2 98, C3 93, C4 99 against [88,98]% (over-covers). The gate was not moved and the forecast is not described as calibrated. The retired v1 band (holdout RMS) measured 84/100. The recorded v3 harness failed clause (i) with C2 at 100 and both of its negative controls fire (recorded result; no v3 artifact on main). The live selftest returns ok:false with failing_gates [G2, NEG_G2]; NEG_G2 (band halved on C0 must fall outside [88,98]) is not detected on the live v2 band.
 
@@ -661,6 +698,16 @@ Composes with:
 - Jev Orchestrator (the console is the human surface for tasks/approvals/pause)
 - Automations + Evolution (the scheduled handler dispatches runJevScheduled by cron expression)
 
+### Patched15 notes (2026-10-11)
+
+- POST /api/jev/map (index.js): optional `source` field, one of `synthetic`, `vectors` or `texts` (422 otherwise). `source: "texts"` needs a texts input. `source: "synthetic"` or `"vectors"` needs a vectors input. The recorded map source is `texts:<model>` for text runs, `synthetic` for synthetic runs, and `vectors` otherwise.
+- Selftest envelopes (jev-selftest.js, used by the jev selftest routes that share the runner): a failing run returns `failures` (one `{name, reason}` per failing check), `failed` (the first failing name) and `checks`. The `schema_bootstrap` check is recorded, and a bootstrap failure ends the run early.
+- Branch rule for GitHub contents writes (jev-gate.js): a mutating write to a repo- or path-scoped tool must name `branch`. The prompt path sets `create: true` for a `scratch/` path on a `scratch/` branch with no sha (applyGithubCreateShape in jev-decide.js). jev-execute resolves create or update at dispatch.
+- Approver allowlist: see Jev Orchestrator key invariants. Directive decisions: see Evolution key invariants, including the known cancel default gap.
+- Degenerate scale coherence: see Taste Engine key invariants.
+- Forecast v4: see Timeseries key invariants.
+- Historical names: the Bindings lines above that list DEFAPI_API_KEY, and the jev-1.13 references, predate the 2026-10-10 expunge. DEFAPI_API_KEY was removed from deploy metadata on 2026-10-10. The live decision model is `clef` (policy `decision_model`).
+
 ## Endpoint Inventory
 
 The complete 130-route inventory (121 from Lane A + 10 added 2026-10-06; the 2026-10-08 auth pass + SOS fold took it to 129, the map fold to 127 canonical, and the timeseries wave to 130: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/*, the /map/ page folded into the /jev/ console's Map card, and the WAE telemetry + forecast routes landed under /api/jev/timeseries/* and /api/jev/forecast/*; old paths serve 410 aliases), grouped by
@@ -752,7 +799,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/api/jev/health` | none | Jev health: policy version + paused flag | No |
 | GET | `/api/jev/policy` | bearer | Stored jev-policy.json returned as-is (404 POLICY_MISSING if absent); rate-limited | No |
 | GET | `/api/jev/policy/tools` | bearer | Policy tool registry only (`tools` object); rate-limited | No |
-| GET | `/api/jev/selftest` | bearer | Orchestrator lifecycle selftest (jev-selftest.js); rate-limited | No |
+| GET | `/api/jev/selftest` | bearer | Orchestrator lifecycle selftest (jev-selftest.js); on failure returns `failures` (name and reason per failing check) and `failed` (first failing name); rate-limited | No |
 | GET | `/api/jev/selftest/ledger` | bearer | Ledger integrity selftest (jev-selftest.js); rate-limited | No |
 | POST | `/api/jev/tasks` | bearer | Task create: caller-supplied payload.actions or freeform prompt; runs ingest->understand->decide->gate pipeline; optional body `workspace_id` binds the task to a workspace (unknown or archived id: 404 NOT_FOUND, nothing created); rate-limited | No |
 | GET | `/api/jev/tasks` | bearer | List tasks (expireStale first); rate-limited | No |
@@ -765,8 +812,8 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | POST | `/api/jev/tasks/:id/close` | bearer | Close task with a terminal outcome; rate-limited | No |
 | POST | `/api/jev/tasks/:id/cancel` | bearer | Cancel task (closes cancelled); rate-limited | No |
 | GET | `/api/jev/approvals` | bearer | Pending approvals queue with expiry countdowns (expireStale first); rate-limited | No |
-| POST | `/api/jev/approvals/:id/approve` | bearer | Approve: auto-dispatches bound action after CURRENT-policy gate re-check, then verifies + continues/closes task in-request; rate-limited | No |
-| POST | `/api/jev/approvals/:id/reject` | bearer | Reject an approval; rate-limited | No |
+| POST | `/api/jev/approvals/:id/approve` | bearer | Approve: auto-dispatches bound action after CURRENT-policy gate re-check, then verifies + continues/closes task in-request; approver allowlist (403 APPROVER_NOT_ALLOWED); rate-limited | No |
+| POST | `/api/jev/approvals/:id/reject` | bearer | Reject an approval; approver allowlist (403 APPROVER_NOT_ALLOWED); rate-limited | No |
 | POST | `/api/jev/approvals/:id/guide` | bearer | Attach human guidance to the approval's task (documented in AGENT.md by the R1 refresh); rate-limited | No |
 | GET | `/api/jev/pause` | bearer | Read pause state (fail-closed: unreadable policy reports paused:true scope all); rate-limited | No |
 | POST | `/api/jev/pause` | bearer | Set pause {paused, scope}; blocks new and queued dispatch, never undoes completed effects; rate-limited | No |
@@ -800,17 +847,19 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/evolution/sweep` | bearer | Structured report ingest; findings become directives; idempotent per fire (duplicate -> 200); rate-limited | No |
 | GET | `/api/jev/evolution/directives` | bearer | Directive list, or CAS claim one with ?claim=1; rate-limited | No |
 | POST | `/api/jev/evolution/directives/:id/result` | bearer | Record execution result for a claimed directive; rate-limited | No |
-| POST | `/api/jev/evolution/directives/:id/approve` | bearer | Human approval of a directive (forced for every kind except the auto whitelist); rate-limited | No |
-| POST | `/api/jev/evolution/directives/:id/reject` | bearer | Reject a directive; rate-limited | No |
+| POST | `/api/jev/evolution/directives/:id/approve` | bearer | Human approval of a directive (forced for every kind except the auto whitelist); approver allowlist (403 APPROVER_NOT_ALLOWED); rate-limited | No |
+| POST | `/api/jev/evolution/directives/:id/reject` | bearer | Reject a directive; approver allowlist (403 APPROVER_NOT_ALLOWED); rate-limited | No |
 | GET | `/api/jev/evolution/state` | bearer | Evolution state: sweeps, directives, calibration trend, notify state; rate-limited | No |
 
-### jev-evolution2-routes.js (evolution v2 cycle) - 7 routes
+### jev-evolution2-routes.js (evolution v2 cycle) - 9 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
 | GET | `/api/jev/evolution/cycles` | bearer | Cycle history: cycle_completed events newest-first with preflight/measured/proposed/candle/steps/errors; rate-limited | No |
 | GET | `/api/jev/evolution/atoms` | bearer | Atom ledger plus server-side asserted cumulative (monotone check); rate-limited | No |
 | POST | `/api/jev/evolution/memory/search` | bearer | Memory recall (EVEC-index based) with degrade envelope; rate-limited | No |
+| GET | `/api/jev/evolution/memory/log` | bearer | Memory log read: `jev_memory_log` rows (append-only, written when an approved memory_edit runs), newest first; `?key=` filter; `?limit=` 1..200, default 50; rate-limited | No |
+| POST | `/api/jev/evolution/directives/:id/cancel` | bearer | Cancel an approved_ready or proposed directive (body `{actor, reason?}`); approver allowlist (403); 409 DIRECTIVE_NOT_CANCELLABLE otherwise; writes directive_cancelled; rate-limited | No |
 | GET | `/api/jev/evolution/candles` | bearer | Standard-candle ledger with detection power summary; rate-limited | No |
 | POST | `/api/jev/evolution/cycle/run` | bearer | Manual trigger of the hourly cycle: one cycle + enqueue + queue drain (the scheduled pass on demand); rate-limited | No |
 | GET | `/api/jev/evolution/selftest` † | bearer | Evolution cycle replay on memoryEvolutionDriver: preflight, measure report, decision, cycle-row persist read-back - the in-process mirror of the cron-leg defect (same logic persists in-memory) | Yes - the selftest harness itself |
@@ -821,7 +870,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
 | GET | `/api/jev/corpus/health` | bearer | Corpus module health: which math/atom/lens modules are wired (bearer-gated live, verified 2026-10-08) | No |
-| POST | `/api/jev/corpus/audit` | bearer | Corpus audit: V2, z, verdict, dBc, shares, E_l; idempotent per input sha256 (repeat returns same run_id cached:true); Decision-B multipass mode; rate-limited | Partial - parity-tested vs Python sources of record |
+| POST | `/api/jev/corpus/audit` | bearer | Corpus audit: V2, z, verdict, dBc, shares, E_l; idempotent per input sha256 (repeat returns same run_id cached:true); Decision-B multipass mode; seed and nulls echo (audit-v3-matrix-seed); rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/lens` | bearer | Lens candidates: K reals + K paired controls in guided-curve-ideate format; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/atom` | bearer | RSI-descent atom plan, DRY-RUN only (Delta >= 0 invariant asserted); rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/classify` | bearer | Tautology discerner (parity with tools/tautology-discerner); rate-limited | Partial - parity-tested vs Python sources of record |
