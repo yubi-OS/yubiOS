@@ -772,8 +772,13 @@ jobs:
               echo "FLASH_BIN=$GITHUB_WORKSPACE/$flash" >> "$GITHUB_ENV"
             fi
           else
+            spd_args=()
+            if [ "$TFA_PLAT" = "rk3588" ]; then
+              spd_args=(SPD=opteed)
+            fi
             make -C arm-trusted-firmware -j"$(nproc)" \
               "${tfa_args[@]}" \
+              "${spd_args[@]}" \
               bl31
             bl31="$(find arm-trusted-firmware/build -path "*/release/bl31/bl31.elf" -print -quit)"
             test -n "$bl31"
