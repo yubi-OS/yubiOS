@@ -136,6 +136,10 @@ The same worker also serves the Jev v2 gated-approval orchestration API: ops con
 | GET | `/api/jev/models` | model routes for the console |
 | POST | `/api/jev/webhooks/reply` | reply records; optional `?k=` shared secret |
 
+Approver allowlist (2026-10-11, policy v21): task approve and reject, and directive approve, reject and cancel, accept only actors on the policy `approvers` list. Policy v21 has no `approvers` field, so the default applies: `jenny` and `ermine` for task and directive approve and reject, and `jenny` only for directive cancel (a known gap; adding `approvers` to the policy lets other delegates cancel). A non-listed actor gets 403 `APPROVER_NOT_ALLOWED`. Task cancel is not behind the allowlist.
+
+Policy v21 (live; `GET /api/jev/health` returns `policy_version: 21`): decision model `clef`. `route.dispatch.read_only_targets` is `corpus_scorer`: for that target the gate skips only the band checks. Routing band `text-no-evidence` (lane-classify, provisional) sends text with zero scorer evidence to the classify lane for review.
+
 ## Automations (Jev Automations, stages + cron)
 
 Versioned defs in D1 with stage pipelines: `tool` (GET-only unless a policy tool covers the host; capped, every call audited), `llm` (interpolated prompt, JSON repair), `builtin` (pure deterministic function), `guard` (advisory safety verdict; unsafe skips propose_actions and routes to human review), `propose_actions` (proposals enter the same gate as hand-written ones). Interval automations fire on the worker cron via compare-and-set on last_fired_at (double-fire impossible). Model routes: classify = llama-3.1-8b, draft = llama-3.3-70b, guard = llama-guard-3-8b; `raw:` pins anything else. Builtins registered: `lead_research` (the refuse-to-claim lead machine), `corpus_audit`, `corpus_lens`, `corpus_drift`, `tautology_gate`.
@@ -147,11 +151,13 @@ Versioned defs in D1 with stage pipelines: `tool` (GET-only unless a policy tool
 | POST | `/api/jev/evolution/sweep` | structured report ingest, idempotent per fire; findings become directives |
 | GET | `/api/jev/evolution/directives` | directive list with CAS `claim=1`; `POST /directives/:id/result` records execution |
 | POST | `/api/jev/evolution/directives/:id/approve` , `/reject` | human approval (forced for every kind except the auto whitelist) |
+| POST | `/api/jev/evolution/directives/:id/cancel` | `{actor, reason?}`; moves an `approved_ready` or `proposed` directive to `cancelled` (compare and set; writes `directive_cancelled`). Other statuses return 409 `DIRECTIVE_NOT_CANCELLABLE`. Approver allowlist applies |
 | GET | `/api/jev/evolution/state` | sweeps, calibration trend, queue, notify state |
 | GET/POST | `/api/jev/evolution/cycles` , `/cycle/run` | cycle history; manual run of the hourly cycle |
 | GET / POST | `/api/jev/evolution/atoms` , `/candles` (GET) , `/memory/search` (POST { text, k }) | atom ledger, standard-candle ledger, memory recall (POST) |
+| GET | `/api/jev/evolution/memory/log` | `?key=&limit=` (limit 1 to 200, default 50, newest first); reads the append-only D1 table `jev_memory_log`, written when an approved `memory_edit` runs |
 
-Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_edit`, `skill_push`, `schedule_change`, `repo_push`, `worker_change`, `ops_fix`, `external_comms` need approval; unknown kinds rejected. The hourly cycle measures worker state and, once 5 completed cycles of history accumulate, corpus metrics (`dbc`, `z`, `verdict`, `drift_vs_prev`); before that it records an honest corpus error instead of fabricating. Lens candidates enter proposals as fail-closed `note` directives.
+Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_edit`, `skill_push`, `schedule_change`, `repo_push`, `worker_change`, `ops_fix`, `external_comms` need approval; unknown kinds rejected. The hourly cycle measures worker state and, once 5 completed cycles of history accumulate, corpus metrics (`dbc`, `z`, `verdict`, `drift_vs_prev`); before that it records an honest corpus error instead of fabricating. Lens candidates enter proposals as fail-closed `note` directives. Sweep ingest scoring (2026-10-11): each `note` and `record_learning` from a sweep is scored once by the decision model. A score at or above 0.5 lets the auto gate run it; otherwise it stays `needs_approval`.
 
 ## Corpus math (jev-corpus, parity-tested against papers/data/lean)
 
