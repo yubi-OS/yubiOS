@@ -30,7 +30,7 @@ Not for: executing the atom (that is a gated directive, never inline), policy ch
 | Route | Method | Body | Returns |
 |---|---|---|---|
 | `/api/jev/corpus/health` | GET | - | `{ok, corpus:"ready", modules:{math,atom,lens}}` (no auth) |
-| `/api/jev/corpus/audit` | POST | `{matrix, labels?, nulls?}` | `{v2, z, mean, sd, verdict, dbc, shares, E_l, run_id}`; verdict in {"excluded at the resolution of this null","not-excluded"}; nulls default 100, cap 1000; idempotent per input sha256 (repeat returns same run_id + `cached:true`) | **Decision-B multipass mode (2026-10-03, etag adae39aa):** `{passes: [matrix x 2..8], labels?, nulls?}` audits EACH pass through the same computeAudit path and returns `{multipass, n_passes, passes:[{v2,z,dbc,verdict,run_id}], dbc_mean, dbc_min, dbc_max, inter_pass_offset_dbc}` (aggregate response-only; passes recorded + idempotent). The pass spread is the elastic-vs-plastic band.
+| `/api/jev/corpus/audit` | POST | `{matrix, labels?, nulls?}` | `{v2, z, mean, sd, verdict, dbc, shares, E_l, run_id}`; verdict in {"excluded at the resolution of this null","not-excluded"}; nulls default 200 (code default; earlier notes said 100), cap 1000; idempotent per input sha256 (repeat returns same run_id + `cached:true`) | **Decision-B multipass mode (2026-10-03, etag adae39aa):** `{passes: [matrix x 2..8], labels?, nulls?}` audits EACH pass through the same computeAudit path and returns `{multipass, n_passes, passes:[{v2,z,dbc,verdict,run_id}], dbc_mean, dbc_min, dbc_max, inter_pass_offset_dbc}` (aggregate response-only; passes recorded + idempotent). The pass spread is the elastic-vs-plastic band.
 | `/api/jev/corpus/lens` | POST | `{matrix, labels?, top?}` | `{candidates:[...]}` lens format: `{id, cell, kind:"real"|"control", hypothesis, method, params, expected_delta, score}`; returns K reals + K paired controls |
 | `/api/jev/corpus/atom` | POST | `{matrix, max_flips?}` | `{plan:[{i,primitive,delta}], finalDelta, converged}` DRY-RUN only; execution is a gated directive |
 | `/api/jev/corpus/classify` | POST | `{sentence}` | `{verdict:"tautology"|"falsifiable"|"paradox"|"undecidable", refuter, run_id}` exact parity with the discerner |
@@ -136,6 +136,13 @@ The chain (full contract: `/AGENT.md` on the worker): audit -> lens -> fail-clos
 4. Atom plans are proposals; execution is a gated directive, always.
 5. Fixtures are the truth: on any mismatch, the JS is wrong until proven otherwise.
 
+
+## Audit seed and nulls echo (audit-v3, 2026-10-11)
+
+- `AUDIT_PIPELINE` is `audit-v3-matrix-seed` (it was `audit-v2-pipeline-keyed`). Every audit input hash changed, so audit hashes stored under v2 do not recompute. Re-anchor a baseline audit before comparing it with older runs.
+- The null draws are seeded from the matrix only: seed = first 32 bits of SHA-256 over canonical JSON `{"kind":"audit-null-seed","matrix":...}` (a zero seed maps to `0x9e3779b9`), with `seed_source` `matrix_sha256_prefix32`. Labels and the null count do not reshuffle the draws. Nulls come from one sequential stream, so a longer run on the same matrix shares its first draws with a shorter run.
+- Every audit result echoes `nulls`, `nulls_source` (`default` or `request`), `seed` and `seed_source`. Placements echoes the same fields and reports the z and dbc that `POST /audit` reports for the same matrix and nulls.
+- The sign gate is unchanged: read `level_dbc` (see the RSI chain runbook), not the `dbc` field.
 
 ## Taste instrument (2026-10-05, taste-v1)
 

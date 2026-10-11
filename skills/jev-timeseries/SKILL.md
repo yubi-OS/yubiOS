@@ -34,6 +34,8 @@ Damped-trend Holt, NO seasonality (v1; jev series are irregular event counts). G
 
 G1 trend recovery PASS, G3 determinism PASS, G4 insufficient PASS, G6 flat sanity PASS, G5 parity PASS (run offline; in-worker reports `pass:null` honestly). **G2 band coverage FAIL 84/100 vs pre-registered [88,98]%** — grid-selected residual_sd shrinks on short noisy series (mean ratio 0.877). v1 ships flagged band-undercover; v2 fix (train-only residual_sd or pre-registered inflation factor) is a future major bump. Never retune the gate to pass.
 
+2026-10-11: the live selftest still returns `ok:false` on G2 and NEG_G2. That is by design until a pre-registered gate passes. See the Forecast v4 section for the pre-registered next version, which is not wired.
+
 ## Deploy lessons (2026-10-08, etag chain 7f8fa641 → dda2f487 → f0c6d7c7 → f2313fa6)
 
 1. **secret_text bindings surface as plain strings** — `env.AE_SQL_TOKEN` is a string, NOT a `.get()` object (that's the secrets_store_secret shape). The module handles both: `typeof t === "string" ? t : await t.get()`.
@@ -41,6 +43,15 @@ G1 trend recovery PASS, G3 determinism PASS, G4 insufficient PASS, G6 flat sanit
 3. The `-F=x` curl arg form mangles the multipart metadata field (CF 10021 "Could not read content for part 'metadata'") — use separate `-F` + value array entries.
 4. WAE SQL reads lag writes a few seconds — the selftest reports `wae_read_back ok=true` with an honest "0 rows read back; propagation lag" note instead of failing.
 5. Testing no-auth paths through the Sauna proxy requires `X-Sauna-Connection-Id: none` — passing the operator connection injects the bearer on EVERY fetch and contaminates the 401 check.
+
+## Forecast v4 (pre-registered, not wired, 2026-10-11)
+
+Forecast v4 is pre-registered and is not wired into any route. The live forecast route and the timeseries selftest keep the v2 band. Rules for v4:
+
+- `quality.calibrated` stays `false` until a pre-registered gate passes on the live series. Never set it to true by hand.
+- The timeseries selftest reports `ok:false` by design while G2 and NEG_G2 fail. Do not treat `ok:false` as a deploy failure, and do not change the gates to make it pass.
+- The v4 harness and its results are not stored in this repo. Do not describe the forecast as calibrated.
+- Wiring v4 into `/api/jev/forecast/:series` is a deploy decision, made after the pre-registered gate is recorded. Record the gate result first.
 
 ## Console
 

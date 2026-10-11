@@ -31,6 +31,7 @@ The `steady-orbit` worker is a multi-part ES module bundle: `solar-rbs-entry.mjs
 - Rollback: re-PUT the saved pre-deploy bundle exactly as extracted (all original parts + original metadata). If a new part was ADDED, a rollback must also revert parts that import it (e.g. reverting jev-corpus parts alone breaks jev-main.js's import) - either re-ship the edited importer's previous version or keep the new part present but unused.
 - Never ship unverified math: run the selftest endpoint after any engine deploy before trusting results.
 - Secrets never ride the upload; they resolve from the Secrets Store bindings at runtime via `await env.BINDING.get()`.
+- Stale window (2026-10-11): a worker script deploy can serve the previous code for about 20 seconds after the PUT returns. Wait about 20 seconds, then re-check `GET /api/jev/health` (policy_version) and the new route before any smoke test or live verification. A test inside that window can hit the old bundle and report a false result.
 
 ## Router parts (2026-10-06 deploy)
 
@@ -48,6 +49,18 @@ Console: the Router card lives in KV `jev-index.html` (SITE ns), inserted inside
 
 **KV HTML PUT gotcha: curl `-d` strips CRLF** — a 173,183-byte console PUT shrank to 169,638 bytes silently. Re-PUT with `--data-binary` and byte-verify via a delayed re-GET.
 
+## Patched15 layout and deploy notes (2026-10-11)
+
+- Deployed source lives on the worker only. It is not stored in this repo.
+
+- Changed parts vs patched14: dbx.js, index.js, jev-corpus-routes.js, jev-decide.js, jev-evolution2-routes.js, jev-gate.js, jev-selftest.js, jev-taste-math.js, jev-taste.js, routes-jev.js. Every other part ships byte-identical from the live bundle. Overlay only these.
+- Approver gate placement (routes-jev.js): the cancel dispatch (`POST /api/jev/evolution/directives/:id/cancel`) and the directive approver gate (approve, reject, cancel) sit BEFORE the v1 line `if (p.startsWith("/api/jev/evolution")) return handleJevEvolution(...)`. Keep them above that line when editing. The cancel dispatch returns to `handleJevEvolution2` before the directive gate runs, so cancel is checked by its own helper (`jevCancelApproverCheck`).
+- v2 dispatch list: every new evolution path must appear in the routes-jev v2 dispatch list (the list that returns `handleJevEvolution2`). That list already includes `/api/jev/evolution/memory/log`. A path missing from the list falls through to v1 and gets the wrong handler.
+- Syntax: `node --check` every changed part (copy to a `.mjs` first, as the lane scripts do). Keep the path-qualified `fixtures__` names.
+- Post-upload: schedules must still show `["0 * * * *", "*/5 * * * *"]`. The binding count is now 15 (DEFAPI_API_KEY was removed from deploy metadata on 2026-10-10). Use the live settings count, not the counts in the notes above.
+- Stale window: wait about 20 seconds after the PUT before live checks (see Deploy-safety rules).
+
+## Examples
 ## Examples
 
 **Ship a new module part**: pull bundle, extract, drop the new part in, rebuild metadata from live settings, upload, check schedules + bindings, hit the new endpoint live, record etag.
