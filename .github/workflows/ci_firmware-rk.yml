@@ -691,6 +691,9 @@ jobs:
           if [ -n "$OPTEE_FLAVOR" ]; then
             optee_args+=(PLATFORM_FLAVOR="$OPTEE_FLAVOR")
           fi
+          if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
+            optee_args+=(CFG_DRAM_BASE=0x40000000 CFG_DRAM_SIZE=0xb0000000 CFG_NSEC_DDR_1_BASE=0x100000000 CFG_NSEC_DDR_1_SIZE=0x2fc000000)
+          fi
           make -C optee_os -j"$(nproc)" \
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
