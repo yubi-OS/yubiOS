@@ -1,0 +1,34 @@
+From 435ee13bb1c2eed7808561406307231fce20ce36 Mon Sep 17 00:00:00 2001
+From: yubiOS CI <ci@yubi-os.invalid>
+Date: Sat, 10 Oct 2026 00:00:00 +0000
+Subject: [PATCH] yubiOS: secure boot efi.var seed + measured boot defconfig
+ for rockpro64-rk3399
+
+---
+ configs/rockpro64-rk3399_defconfig | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
+index 1d2bff3..b1262cf 100644
+--- a/configs/rockpro64-rk3399_defconfig
++++ b/configs/rockpro64-rk3399_defconfig
+@@ -97,3 +97,16 @@ CONFIG_DISPLAY=y
+ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+ CONFIG_ERRNO_STR=y
++CONFIG_SYS_PROMPT="YUBIOS:~$ "
++CONFIG_LOCALVERSION=" YUBIOS"
++CONFIG_TPM=y
++CONFIG_MEASURED_BOOT=y
++CONFIG_MEASURE_DEVICETREE=y
++CONFIG_EFI_VARIABLE_NO_STORE=y
++CONFIG_EFI_VARIABLES_PRESEED=y
++CONFIG_EFI_VAR_SEED_FILE="efi.var"
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_EFI_SECURE_BOOT=y
++CONFIG_EFI_TCG2_PROTOCOL=y
++CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y
++CONFIG_SHOW_BOOT_PROGRESS=y
+-- 
+2.50.1
+
