@@ -830,34 +830,46 @@ jobs:
           test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
           echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
 
-      - name: Embed secure boot EFI variable seed and defconfig lines (rockchip)
+      - name: Apply pinned yubiOS secure-boot defconfig patch as a commit (rockchip, fail closed)
         if: matrix.build_kind == 'rockchip'
         env:
           UBOOT_DEFCONFIG: ${{ matrix.uboot_defconfig }}
+          GIT_COMMITTER_NAME: yubiOS CI
+          GIT_COMMITTER_EMAIL: ci@yubi-os.invalid
+          GIT_COMMITTER_DATE: 2026-10-10T00:00:00Z
+        run: |
+          set -euo pipefail
+          case "$UBOOT_DEFCONFIG" in
+            rock5b-rk3588_defconfig)
+              PATCH_SRC=firmware/u-boot/0002-rock5b-yubios-secure-boot-defconfig.patch
+              PATCH_SHA256=c3ffbf0ab51aa3f9224735a50a8bfe7109b2e28ac5bf628f9d052ac3a1156862 ;;
+            rockpro64-rk3399_defconfig)
+              PATCH_SRC=firmware/u-boot/0003-rockpro64-yubios-secure-boot-defconfig.patch
+              PATCH_SHA256=eaf3bc5cdfd3fca33a5fff2d132b61398d960ec8f208a2a5cf9987e260daf848 ;;
+            *)
+              echo "::error::no yubiOS secure-boot defconfig patch for ${UBOOT_DEFCONFIG}"
+              exit 1 ;;
+          esac
+          printf '%s  %s\n' "$PATCH_SHA256" "$PATCH_SRC" | sha256sum --check --strict
+          test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
+          git -C u-boot am --quiet "$GITHUB_WORKSPACE/$PATCH_SRC"
+          test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
+          echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with yubiOS defconfig lines committed"
+
+      - name: Embed secure boot EFI variable seed (rockchip; preseed needs the StMM variable service off)
+        if: matrix.build_kind == 'rockchip'
+        env:
           EFI_VAR_URL: https://raw.githubusercontent.com/0mniteck/U-Boot/Docker/Includes/efi.var
           EFI_VAR_SHA512: 7bc85b694d3341ae20556e9af9cf1fd93fb39ba2213179f014c23e1a8bd9b2b3095458a61f69bc23a7d90332130260d740eea46a97fc647366fe8867ee06fc51
         run: |
           set -euo pipefail
           curl -fsSL --retry 3 -o u-boot/efi.var "$EFI_VAR_URL"
           printf '%s  %s\n' "$EFI_VAR_SHA512" efi.var | (cd u-boot && sha512sum --check --strict)
-          test -s "u-boot/configs/${UBOOT_DEFCONFIG}"
-          printf '\n' >> "u-boot/configs/${UBOOT_DEFCONFIG}"
-          cat >> "u-boot/configs/${UBOOT_DEFCONFIG}" <<'EOF'
-          CONFIG_SYS_PROMPT="YUBIOS:~$ "
-          CONFIG_LOCALVERSION=" YUBIOS"
-          CONFIG_TPM=y
-          CONFIG_MEASURED_BOOT=y
-          CONFIG_MEASURE_DEVICETREE=y
-          CONFIG_EFI_VARIABLE_NO_STORE=y
-          CONFIG_EFI_VARIABLES_PRESEED=y
-          CONFIG_EFI_VAR_SEED_FILE="efi.var"
-          CONFIG_ENV_IS_NOWHERE=y
-          CONFIG_EFI_SECURE_BOOT=y
-          CONFIG_EFI_TCG2_PROTOCOL=y
-          CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y
-          CONFIG_SHOW_BOOT_PROGRESS=y
-          EOF
-          tail -n 16 "u-boot/configs/${UBOOT_DEFCONFIG}"
+          # EFI_VARIABLES_PRESEED depends on !EFI_MM_COMM_TEE. yubios_ftpm.config turns MM on,
+          # and olddefconfig would silently drop the seed, so rockchip builds turn MM off here.
+          sed -i '/^CONFIG_EFI_MM_COMM_TEE=/d' u-boot/yubios_ftpm.config
+          printf '# CONFIG_EFI_MM_COMM_TEE is not set\n' >> u-boot/yubios_ftpm.config
+          grep -c 'EFI_MM_COMM_TEE' u-boot/yubios_ftpm.config
 
       - name: Build Rockchip U-Boot board image
         if: matrix.build_kind == 'rockchip'
@@ -870,10 +882,23 @@ jobs:
           make -C u-boot CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm "$UBOOT_DEFCONFIG"
           ./u-boot/scripts/kconfig/merge_config.sh -m -O u-boot u-boot/.config u-boot/yubios_ftpm.config
           make -C u-boot CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm olddefconfig
-          grep -E 'CONFIG_ROCKCHIP_RK(3399|3588)=y|CONFIG_ROCKCHIP_EXTERNAL_TPL=y|CONFIG_SPL_ATF=y|CONFIG_TPM2_FTPM_TEE=y|CONFIG_EFI_SECURE_BOOT=y|CONFIG_EFI_VARIABLES_PRESEED=y|CONFIG_EFI_VAR_SEED_FILE=' \
+          grep -E 'CONFIG_ROCKCHIP_RK(3399|3588)=y|CONFIG_ROCKCHIP_EXTERNAL_TPL=y|CONFIG_SPL_ATF=y|CONFIG_TPM2_FTPM_TEE=y|CONFIG_EFI_SECURE_BOOT=y|CONFIG_EFI_VARIABLES_PRESEED=y|CONFIG_EFI_VAR_SEED_FILE=|CONFIG_EFI_MM_COMM_TEE' \
             u-boot/.config | tee u-boot-config-summary.txt
+          grep -q '^CONFIG_EFI_VARIABLES_PRESEED=y' u-boot/.config || { echo '::error::EFI_VARIABLES_PRESEED did not survive olddefconfig'; exit 1; }
+          grep -q '^CONFIG_EFI_VAR_SEED_FILE="efi.var"' u-boot/.config || { echo '::error::EFI_VAR_SEED_FILE is not efi.var'; exit 1; }
+          if grep -q '^CONFIG_EFI_MM_COMM_TEE=y' u-boot/.config; then echo '::error::EFI_MM_COMM_TEE is on, so the seed would be dropped'; exit 1; fi
           make -C u-boot -j"$(nproc)" CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm u-boot.bin
           test -s u-boot/u-boot.bin
+          python3 - <<'PY'
+          import sys
+          seed = open("u-boot/efi.var", "rb").read()
+          chunk = seed[len(seed) // 2:len(seed) // 2 + 64]
+          image = open("u-boot/u-boot.bin", "rb").read()
+          if chunk not in image:
+              print("::error::efi.var seed bytes are not in u-boot.bin")
+              sys.exit(1)
+          print("efi.var seed embedded in u-boot.bin at offset", image.find(chunk))
+          PY
           build_args=(BL31="$BL31_BIN" TEE="$TEE_BIN")
           if [ "$REQUIRES_ROCKCHIP_TPL" = "true" ]; then
             if [ -z "${ROCKCHIP_TPL:-}" ]; then
