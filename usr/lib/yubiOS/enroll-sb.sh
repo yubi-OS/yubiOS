@@ -12,7 +12,7 @@
 #            because the next boot enforces Secure Boot.
 #
 # Requires: ykman, libykcs11 (YUBIOS_PKCS11_LIB), efitools (cert-to-efi-sig-list,
-# sign-efi-sig-list, efi-updatevar, efi-readvar), engine_pkcs11, openssl,
+# sign-efi-sig-list, efi-updatevar, efi-readvar), pkcs11-provider, openssl,
 # systemd-sbsign, sbverify (sbsigntools). Keys are RSA-2048 (UEFI needs RSA).
 # Owner keys only. No CI keys. Slot 9a (2026-10-11).
 
@@ -24,7 +24,6 @@ ESP="${YUBIOS_ESP:-/efi}"
 [ -d "$ESP/EFI" ] || ESP=/boot/efi
 KEYDIR=/var/lib/yubiOS/secureboot
 ENROLLED_MARK=/var/lib/yubiOS/.sb-enrolled
-ENGINE_KEY="${YUBIOS_ENGINE_KEY:-1}"             # PKCS#11 id 01 = PIV 9a (SIGN.md "-key 1")
 SB_KEY_URI="pkcs11:id=%01;type=private"
 OWNER_GUID="${YUBIOS_OWNER_GUID:-1404b45e-798b-4249-b5cd-b7f961b44894}"
 CN_PREFIX="${YUBIOS_CN_PREFIX:-YUBIOS}"
@@ -39,6 +38,7 @@ if [ -z "$PKCS11_LIB" ]; then
 fi
 [ -n "$PKCS11_LIB" ] || { echo "libykcs11 not found; set YUBIOS_PKCS11_LIB" >&2; exit 1; }
 export PKCS11_MODULE_PATH="$PKCS11_LIB"
+export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
 T="$(date +%Y-%m-%d) 00:00:00"
 
 for tool in ykman openssl cert-to-efi-sig-list sign-efi-sig-list efi-updatevar efi-readvar systemd-sbsign sbverify; do
@@ -79,30 +79,30 @@ phase_enroll() {
   cd "$KEYDIR"
 
   yubiOS_log "PK: self-signed certificate on slot 9a (PIN and touch)"
-  openssl req -x509 -sha256 -engine pkcs11 -keyform ENGINE -key "$ENGINE_KEY" \
+  openssl req -x509 -sha256 -provider pkcs11 -provider default -key "$SB_KEY_URI" \
     -subj "/CN=${CN_PREFIX} PK/" -out PK.crt -nodes -days "$DAYS"
   cert-to-efi-sig-list -g "$OWNER_GUID" PK.crt PK.esl
   sign-efi-sig-list -c PK.crt -t "$T" -o PK PK.esl PK.forsig
-  openssl smime -sign -binary -engine pkcs11 -keyform ENGINE -in PK.forsig -out PK.signed \
-    -signer PK.crt -inkey "$ENGINE_KEY" -outform DER -md sha256
+  openssl smime -sign -binary -provider pkcs11 -provider default -in PK.forsig -out PK.signed \
+    -signer PK.crt -inkey "$SB_KEY_URI" -outform DER -md sha256
   sign-efi-sig-list -i PK.signed -t "$T" PK PK.esl PK.auth
 
   yubiOS_log "KEK: certificate signed by PK (PIN and touch)"
-  openssl req -x509 -sha256 -engine pkcs11 -keyform ENGINE -key "$ENGINE_KEY" \
+  openssl req -x509 -sha256 -provider pkcs11 -provider default -key "$SB_KEY_URI" \
     -subj "/CN=${CN_PREFIX} KEK/" -out KEK.crt -nodes -days "$DAYS"
   cert-to-efi-sig-list -g "$OWNER_GUID" KEK.crt KEK.esl
   sign-efi-sig-list -c PK.crt -t "$T" -o KEK KEK.esl KEK.forsig
-  openssl smime -sign -binary -engine pkcs11 -keyform ENGINE -in KEK.forsig -out KEK.signed \
-    -signer PK.crt -inkey "$ENGINE_KEY" -outform DER -md sha256
+  openssl smime -sign -binary -provider pkcs11 -provider default -in KEK.forsig -out KEK.signed \
+    -signer PK.crt -inkey "$SB_KEY_URI" -outform DER -md sha256
   sign-efi-sig-list -i KEK.signed -t "$T" KEK KEK.esl KEK.auth
 
   yubiOS_log "db: certificate signed by KEK (PIN and touch)"
-  openssl req -x509 -sha256 -engine pkcs11 -keyform ENGINE -key "$ENGINE_KEY" \
+  openssl req -x509 -sha256 -provider pkcs11 -provider default -key "$SB_KEY_URI" \
     -subj "/CN=${CN_PREFIX} db/" -out db.crt -nodes -days "$DAYS"
   cert-to-efi-sig-list -g "$OWNER_GUID" db.crt db.esl
   sign-efi-sig-list -c KEK.crt -t "$T" -o db db.esl db.forsig
-  openssl smime -sign -binary -engine pkcs11 -keyform ENGINE -in db.forsig -out db.signed \
-    -signer KEK.crt -inkey "$ENGINE_KEY" -outform DER -md sha256
+  openssl smime -sign -binary -provider pkcs11 -provider default -in db.forsig -out db.signed \
+    -signer KEK.crt -inkey "$SB_KEY_URI" -outform DER -md sha256
   sign-efi-sig-list -i db.signed -t "$T" db db.esl db.auth
 
   yubiOS_log "Writing PK, KEK, db through the StMM store"
@@ -133,7 +133,7 @@ phase_resign() {
     tmp="$(mktemp "$KEYDIR/signed-XXXXXX.efi")"
     systemd-sbsign sign \
       --private-key "$SB_KEY_URI" \
-      --private-key-source "engine:pkcs11" \
+      --private-key-source "provider:pkcs11" \
       --certificate "$KEYDIR/db.crt" \
       --certificate-source file \
       --output "$tmp" \
