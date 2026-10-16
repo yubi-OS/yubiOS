@@ -156,6 +156,12 @@ RUN set -- /usr/lib/modules/*/ && \
     { ! grep -q "/vfio\.ko" /tmp/yubiOS-initramfs-listing.txt; } && \
     rm -f /tmp/yubiOS-initramfs-listing.txt
 
+# Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
+# digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
+# so two clean builds of the same sources embed the same digest.
+RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /tmp -o -path /var/cache \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /
+
 # ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
 # efitools, pkcs11-provider, sbsigntools: owner signing tools for enroll-sb.sh
 # (PIV slot 9a db key, signing only). systemd-boot-unsigned: loader and linux
@@ -176,15 +182,9 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
 
-# Reproducibility diagnostic (remove once the UKI is proven deterministic): a second
-# ukify run, compared byte-for-byte with the first. The output stays out of the image
-# (this stage only feeds COPY --from=uki /out/) and lands in the build log.
-RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
-    kver="$(basename "$1")" && \
-    mkdir -p /tmp/ukdiag && \
-    sleep 2 && \
-    bootc container ukify --rootfs /target -- --output "/tmp/ukdiag/${kver}.second.efi" && \
-    python3 -c 'import struct,sys; a=open(sys.argv[1],"rb").read(); b=open(sys.argv[2],"rb").read(); d=[i for i in range(min(len(a),len(b))) if a[i]!=b[i]]; print("UKIDIAG len",len(a),len(b),"ndiff",len(d),"first",d[:40]); pe=struct.unpack("<I",a[0x3c:0x40])[0]; print("UKIDIAG peoff",pe,"timedate",struct.unpack("<I",a[pe+8:pe+12])[0],struct.unpack("<I",b[pe+8:pe+12])[0]); [print("UKIDIAG ctx",i,a[max(0,i-24):i+24],b[max(0,i-24):i+24]) for i in d[:4]]' "/out/${kver}.efi" "/tmp/ukdiag/${kver}.second.efi" || true
+# Reproducibility diagnostic (remove once the UKI is proven deterministic): print the composefs
+# digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
+RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
 
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
