@@ -177,10 +177,12 @@ RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path
 # UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
 # checks. Secure Boot is not part of that check.
 FROM rootfs AS uki
-RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
+RUN --mount=type=bind,from=rootfs,target=/src set -- /src/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
-    mkdir -p /out && \
-    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
+    mkdir -p /out /tmp/ukify-rootfs && \
+    tar -C /src --xattrs --numeric-owner --exclude='./boot/*' -cf - . | tar -C /tmp/ukify-rootfs --xattrs --numeric-owner -xf - && \
+    bootc container ukify --rootfs /tmp/ukify-rootfs -- --output "/out/${kver}.efi" && \
+    rm -rf /tmp/ukify-rootfs
 
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
