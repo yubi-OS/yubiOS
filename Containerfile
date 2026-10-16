@@ -176,6 +176,16 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
 
+# Reproducibility diagnostic (remove once the UKI is proven deterministic): a second
+# ukify run, compared byte-for-byte with the first. The output stays out of the image
+# (this stage only feeds COPY --from=uki /out/) and lands in the build log.
+RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
+    kver="$(basename "$1")" && \
+    mkdir -p /tmp/ukdiag && \
+    sleep 2 && \
+    bootc container ukify --rootfs /target -- --output "/tmp/ukdiag/${kver}.second.efi" && \
+    python3 -c 'import struct,sys; a=open(sys.argv[1],"rb").read(); b=open(sys.argv[2],"rb").read(); d=[i for i in range(min(len(a),len(b))) if a[i]!=b[i]]; print("UKIDIAG len",len(a),len(b),"ndiff",len(d),"first",d[:40]); pe=struct.unpack("<I",a[0x3c:0x40])[0]; print("UKIDIAG peoff",pe,"timedate",struct.unpack("<I",a[pe+8:pe+12])[0],struct.unpack("<I",b[pe+8:pe+12])[0]); [print("UKIDIAG ctx",i,a[max(0,i-24):i+24],b[max(0,i-24):i+24]) for i in d[:4]]' "/out/${kver}.efi" "/tmp/ukdiag/${kver}.second.efi" || true
+
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN case "$(uname -m)" in \
