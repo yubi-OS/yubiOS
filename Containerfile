@@ -179,14 +179,15 @@ RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path
 FROM rootfs AS uki
 RUN --mount=type=bind,from=rootfs,target=/src set -- /src/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
-    mkdir -p /out /tmp/ukify-rootfs && \
+    mkdir -p /out /out-diag /tmp/ukify-rootfs && \
     cp -a /src/. /tmp/ukify-rootfs/ && \
     rm -rf /tmp/ukify-rootfs/boot/* && \
-    bootc container ukify --rootfs /tmp/ukify-rootfs -- --output "/out/${kver}.efi" && \
+    bootc container ukify --rootfs /tmp/ukify-rootfs --write-dumpfile-to /out-diag/uki-view.dump -- --output "/out/${kver}.efi" && \
     rm -rf /tmp/ukify-rootfs
 
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
+COPY --from=uki /out-diag/ /boot/yubios-diag/
 RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
       x86_64)  efi_arch=x64; efi_upper=X64 ;; \
