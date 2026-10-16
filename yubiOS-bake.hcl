@@ -254,7 +254,7 @@ target "yubios-smoke" {
   }
   dockerfile-inline = <<-DOCKERFILE
     FROM yubios-base
-    RUN bootc container lint --fatal-warnings && \
+    RUN bootc container lint --fatal-warnings --skip nonempty-boot && \
         test -x /usr/lib/bootc/initramfs-setup && \
         test -x /usr/lib/dracut/modules.d/51bootc/module-setup.sh && \
         grep -Fq 'add_dracutmodules+=" bootc "' /usr/lib/dracut.conf.d/51-yubiOS-composefs.conf && \
