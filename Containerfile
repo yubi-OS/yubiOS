@@ -4,7 +4,7 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-FROM quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45
+FROM quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45 AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -162,21 +162,27 @@ RUN set -- /usr/lib/modules/*/ && \
 # stub. systemd-ukify: the backend for `bootc container ukify`.
 # bootc install picks a UKI under /boot/EFI/Linux over the raw kernel
 # (crates/lib/src/kernel.rs find_kernel), so the board gets a UKI entry instead
-# of a BLS kernel entry. bootc container ukify computes the composefs digest of
-# this rootfs and embeds it as composefs=, so the digest is taken before the UKI
-# and the bootloader files are written. The UKI is unsigned here: the owner
-# signs the loader and the UKI with the PIV slot 9a db key on the board
-# (enroll-sb.sh resign). sd-stub measures the UKI into PCR 11 and sets
-# StubPcrKernelImage, which ConditionSecurity=measured-os checks. Secure Boot
-# is not part of that check.
-RUN set -- /usr/lib/modules/*/ && \
+# of a BLS kernel entry. bootc container ukify refuses the active root
+# ("Cannot operate on active root filesystem"), so the UKI is built from a
+# read-only bind mount of the rootfs stage, as in bootc's sealed-image recipe.
+# The composefs digest is taken before the UKI and the bootloader files are
+# written. The UKI is unsigned here: the owner signs the loader and the UKI with
+# the PIV slot 9a db key on the board (enroll-sb.sh resign). sd-stub measures the
+# UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
+# checks. Secure Boot is not part of that check.
+FROM rootfs AS uki
+RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
-    case "$(uname -m)" in \
+    mkdir -p /out && \
+    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
+
+FROM rootfs
+COPY --from=uki /out/ /boot/EFI/Linux/
+RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
       x86_64)  efi_arch=x64; efi_upper=X64 ;; \
       *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
     esac && \
-    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
-    bootc container ukify --rootfs / -- --output "/boot/EFI/Linux/${kver}.efi" && \
+    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
