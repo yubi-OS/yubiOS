@@ -182,10 +182,6 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
 
-# Reproducibility diagnostic (remove once the UKI is proven deterministic): print the composefs
-# digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
-RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
-
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN case "$(uname -m)" in \
