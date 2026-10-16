@@ -180,7 +180,8 @@ FROM rootfs AS uki
 RUN --mount=type=bind,from=rootfs,target=/src set -- /src/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     mkdir -p /out /tmp/ukify-rootfs && \
-    tar -C /src --xattrs --numeric-owner --exclude='./boot/*' -cf - . | tar -C /tmp/ukify-rootfs --xattrs --numeric-owner -xf - && \
+    cp -a /src/. /tmp/ukify-rootfs/ && \
+    rm -rf /tmp/ukify-rootfs/boot/* && \
     bootc container ukify --rootfs /tmp/ukify-rootfs -- --output "/out/${kver}.efi" && \
     rm -rf /tmp/ukify-rootfs
 
