@@ -4,7 +4,7 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-FROM quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45
+FROM quay.io/fedora/fedora-bootc:45@sha256:d3a7b4a7f60d06868d5d1193204872e711f5271ff54add6a82dcec62a68268aa
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -43,7 +43,7 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False instal
       gcc \
       osslsigncode \
       efitools \
-      engine_pkcs11 \
+      pkcs11-provider \
       sbsigntools \
       systemd-boot-unsigned \
       systemd-ukify && \
@@ -157,7 +157,7 @@ RUN set -- /usr/lib/modules/*/ && \
     rm -f /tmp/yubiOS-initramfs-listing.txt
 
 # ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
-# efitools, engine_pkcs11, sbsigntools: owner signing tools for enroll-sb.sh
+# efitools, pkcs11-provider, sbsigntools: owner signing tools for enroll-sb.sh
 # (PIV slot 9a db key, signing only). systemd-boot-unsigned: loader and linux
 # stub. systemd-ukify: the backend for `bootc container ukify`.
 # bootc install picks a UKI under /boot/EFI/Linux over the raw kernel
