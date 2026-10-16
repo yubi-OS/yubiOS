@@ -90,7 +90,7 @@ Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chai
 | `dhi.io/debian-base` (multi-arch INDEX) | `sha256:7b1d6522b9a4e72e2ca3537c031ca3650c654ec81c181447bf952069eb827226` | **Canonical for workflows + Containerfile `FROM` where DHI is used.** OCI image index for `trixie-debian13-dev`; auto-resolves per runner arch. |
 | child `linux/amd64` | `sha256:3a7b23112b81b75fd1b54ab058bc6a67ff9351ecee870571ff7409a5f2905673` | Resolved automatically; do not pin directly unless an amd64-only job requires it. |
 | child `linux/arm64` | `sha256:66459a4ed5daf0b1c8f33a856e6c5c66ecc500dc995bf6c632efcd7d17b57c22` | Resolved automatically. |
-| `quay.io/fedora/fedora-bootc:45` (multi-arch INDEX) | `sha256:d3a7b4a7f60d06868d5d1193204872e711f5271ff54add6a82dcec62a68268aa` | **Containerfile `FROM` base.** OCI image index; auto-resolves per arch. Re-resolved 2026-10-06 via MASTER GIT SU (fetch-fedora-bootc-manifest blocked on dead org WORKFLOW PAT). Refresh with `fetch-fedora-bootc-manifest`. |
+| `quay.io/fedora/fedora-bootc:45` (multi-arch INDEX) | `sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45` | **Containerfile `FROM` base.** OCI image index; auto-resolves per arch. Re-resolved 2026-10-16 via MASTER GIT SU (fetch-fedora-bootc-manifest blocked on dead org WORKFLOW PAT). Refresh with `fetch-fedora-bootc-manifest`. |
 | `ghcr.io/actions/jekyll-build-pages` | `sha256:6791ebfd912185ed59bfb5fb102664fa872496b79f87ff8b9cfba292a7345041` | Pages build image. |
 | `ghcr.io/hadolint/hadolint:v2.14.0-debian` | `sha256:158cd0184dcaa18bd8ec20b61f4c1cabdf8b32a592d062f57bdcb8e4c1d312e2` | Hadolint image. |
 
