@@ -159,7 +159,7 @@ RUN set -- /usr/lib/modules/*/ && \
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
-RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /tmp -o -path /var/cache -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
+RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /
 
 # ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
