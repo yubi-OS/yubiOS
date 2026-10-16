@@ -34,7 +34,6 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False instal
       pcsc-lite-ccid \
       tpm2-tools \
       tpm2-tss \
-      bootupd \
       cryptsetup \
       openssh-clients \
       openssh-server \
@@ -42,7 +41,12 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False instal
       python3-pip \
       python3-devel \
       gcc \
-      osslsigncode && \
+      osslsigncode \
+      efitools \
+      engine_pkcs11 \
+      sbsigntools \
+      systemd-boot-unsigned \
+      systemd-ukify && \
     dnf clean all && \
     rm -rf \
       /run/dnf \
@@ -151,3 +155,29 @@ RUN set -- /usr/lib/modules/*/ && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \
     { ! grep -q "/vfio\.ko" /tmp/yubiOS-initramfs-listing.txt; } && \
     rm -f /tmp/yubiOS-initramfs-listing.txt
+
+# ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
+# efitools, engine_pkcs11, sbsigntools: owner signing tools for enroll-sb.sh
+# (PIV slot 9a db key, signing only). systemd-boot-unsigned: loader and linux
+# stub. systemd-ukify: the backend for `bootc container ukify`.
+# bootc install picks a UKI under /boot/EFI/Linux over the raw kernel
+# (crates/lib/src/kernel.rs find_kernel), so the board gets a UKI entry instead
+# of a BLS kernel entry. bootc container ukify computes the composefs digest of
+# this rootfs and embeds it as composefs=, so the digest is taken before the UKI
+# and the bootloader files are written. The UKI is unsigned here: the owner
+# signs the loader and the UKI with the PIV slot 9a db key on the board
+# (enroll-sb.sh resign). sd-stub measures the UKI into PCR 11 and sets
+# StubPcrKernelImage, which ConditionSecurity=measured-os checks. Secure Boot
+# is not part of that check.
+RUN set -- /usr/lib/modules/*/ && \
+    kver="$(basename "$1")" && \
+    case "$(uname -m)" in \
+      aarch64) efi_arch=aa64 ;; \
+      x86_64)  efi_arch=x64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    efi_upper="$(echo "$efi_arch" | tr '[:lower:]' '[:upper:]')" && \
+    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
+    bootc container ukify --rootfs / -- --output "/boot/EFI/Linux/${kver}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
