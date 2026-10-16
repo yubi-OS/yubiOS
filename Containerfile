@@ -172,11 +172,10 @@ RUN set -- /usr/lib/modules/*/ && \
 RUN set -- /usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     case "$(uname -m)" in \
-      aarch64) efi_arch=aa64 ;; \
-      x86_64)  efi_arch=x64 ;; \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
       *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
     esac && \
-    efi_upper="$(echo "$efi_arch" | tr '[:lower:]' '[:upper:]')" && \
     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
     bootc container ukify --rootfs / -- --output "/boot/EFI/Linux/${kver}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
