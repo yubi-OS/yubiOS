@@ -128,8 +128,12 @@ jobs:
     steps:
       - name: Install git for checkout and reproducibility
         run: |
-          apt-get update -qq
-          apt-get install -y -qq --no-install-recommends git
+          # GitHub ubuntu-24.04 images ship git. Only touch apt when it is missing:
+          # the apt solver fails on the runner's perl state (exit 100).
+          if ! command -v git >/dev/null 2>&1; then
+            apt-get update -qq
+            apt-get install -y -qq --no-install-recommends git
+          fi
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -192,8 +196,12 @@ jobs:
     steps:
       - name: Install git for checkout and reproducibility
         run: |
-          apt-get update -qq
-          apt-get install -y -qq --no-install-recommends git
+          # GitHub ubuntu-24.04 images ship git. Only touch apt when it is missing:
+          # the apt solver fails on the runner's perl state (exit 100).
+          if ! command -v git >/dev/null 2>&1; then
+            apt-get update -qq
+            apt-get install -y -qq --no-install-recommends git
+          fi
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
