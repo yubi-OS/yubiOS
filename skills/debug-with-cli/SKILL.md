@@ -181,6 +181,19 @@ When multi-line content (a doc snippet, a fix body, a heredoc) needs to go to th
 Verbatim directive from the user: "echo command sent to the host on the tty always!" and "cant you just make an argv wrapper on your end to split it and tee the output to /dev/ttyS2". Apply the pattern any time the user is debugging live on a target that has a TTY available for inspection.
 
 
+## Backgrounding long jobs on the bridge
+
+The bridge answers each POST synchronously, and the client gives up after roughly 45 to 60 seconds. A job that keeps the response pipe open looks like a timeout even when it is running fine.
+
+- Write the job as a script file. Send it base64 in argv and decode it with `echo <b64> | base64 -d > /path/job.sh`. Do not send multi-line `python3 -c` strings through the bridge. The newlines get mangled.
+- Launch as its own statement, fully detached: `(setsid nohup /path/job.sh > /path/job.log 2>&1 < /dev/null &)`, then `echo launched`. Do not end an `&&` chain with `&`. The whole chain is backgrounded, it keeps the bridge's stdout open, and the call times out while the job keeps running. This caused timeouts during the boot-sound renders.
+- After any timeout, reconcile with one read-only call (tail the log, check the process) before you resend. The job may already have run.
+- Poll in short calls: sleep under 30 seconds, then read the log. The bridge is single-threaded, so one long foreground call blocks the others until it returns.
+- Process checks: `pgrep -f` matches its own wrapper shell when the pattern is in the same command line. Use the bracket form (`pgrep -f '[j]ob.sh'`), and check `/proc` when in doubt.
+- Serial banner: wrap the tty write in a timeout so a stuck tty cannot hang the call, for example `timeout 2 sh -c 'printf %b "$MSG" > /dev/ttyS2'`.
+- Transfers: small binaries fit in one base64 stdout call. Check sha256 on both ends.
+- Put scratch binaries in a job folder such as `/tmp/<job>/`, never over a system tool. Clean up raw files afterwards.
+
 ## Security Model
 
 - **Token entropy**: 32 bytes from `openssl rand -hex 32` = 256 bits. Uncrackable by brute force.
