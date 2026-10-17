@@ -126,7 +126,7 @@ jobs:
       - name: Install git for checkout and reproducibility
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends --allow-downgrades git
+          apt-get install -y -qq --no-install-recommends git
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -455,7 +455,7 @@ jobs:
       - name: Install git for checkout and reproducibility
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends --allow-downgrades git
+          apt-get install -y -qq --no-install-recommends git
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -956,7 +956,7 @@ jobs:
       - name: Install git for checkout and reproducibility
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends --allow-downgrades git
+          apt-get install -y -qq --no-install-recommends git
           apt-get install -y -qq --no-install-recommends python3
 
       - name: Checkout
@@ -1041,7 +1041,7 @@ jobs:
       - name: Install git for checkout and reproducibility
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends --allow-downgrades git
+          apt-get install -y -qq --no-install-recommends git
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -1255,7 +1255,7 @@ jobs:
       - name: Install git for checkout and reproducibility
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends --allow-downgrades git
+          apt-get install -y -qq --no-install-recommends git
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
