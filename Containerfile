@@ -177,11 +177,15 @@ RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path
 # UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
 # checks. Secure Boot is not part of that check.
 FROM rootfs AS uki
+ARG SOURCE_DATE_EPOCH
 RUN --mount=type=bind,from=rootfs,target=/src set -- /src/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     mkdir -p /out /out-diag /tmp/ukify-rootfs && \
     cp -a /src/. /tmp/ukify-rootfs/ && \
+    # /boot's own mtime is part of the composefs digest the UKI embeds. Clearing /boot/* on this
+    # copy leaves /boot at build time, so reset it to SOURCE_DATE_EPOCH to match the stored image.
     rm -rf /tmp/ukify-rootfs/boot/* && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /tmp/ukify-rootfs/boot && \
     bootc container ukify --rootfs /tmp/ukify-rootfs --write-dumpfile-to /out-diag/uki-view.dump -- --output "/out/${kver}.efi" && \
     rm -rf /tmp/ukify-rootfs
 
