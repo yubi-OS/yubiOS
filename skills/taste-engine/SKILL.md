@@ -93,6 +93,44 @@ Real-data record: Norcia 2021 Fig 2b's 8 in-situ panels across the 1D→2D trans
 
 v3 matched-extent control (2026-10-06): jittered lattice 1.2609 vs lattice 1.2636 — the tri/shuffle gap was array extent; D is a hierarchy/fill detector, not an order parameter (Addendum 7).
 
+## Audio through the taste engine
+
+The taste axes were built for images. Audio can reach two of them by turning a spectrogram into a grayscale image. The boot-sound program (v2 to v5, 10 second clips, 17 time-matched reference windows) measured this path.
+
+Mapping that the worker received:
+
+1. Render the clip to mono at 22.05 kHz.
+2. STFT with a 2048-point FFT, hop 512, Hann window.
+3. Take log magnitude, percentile-normalize (1st to 99th percentile), and flip the frequency axis so low frequencies sit at the bottom.
+4. Resize to a 512 x 512 uint8 gray image.
+5. POST the gray block (base64) to `/api/jev/corpus/taste/edge-standard`. Read `fractal_band` D and r2 from the result. Send large bodies from a file, not argv.
+6. Compute the complexity slope on the caller side: the log-log slope of the gzip size of the 512 x 512 gray block, downsampled at 1, 2, 4 and 8. Pass it as `complexity_economy` features to `/taste/score` together with `fractal_band`.
+
+Which axes apply to audio:
+
+- Applicable: `fractal_band` (through edge-standard) and `complexity_economy` (caller-supplied slope).
+- Not measured on audio: `symmetry_present`, `symmetry_variation`, `family`, `branch_exponent` and `sv_balance`. They describe image structure that a spectrogram does not have. Do not report them for audio.
+
+What the measurements showed:
+
+- Reference clips read fractal D between 1.27 and 1.55 in time-matched 10 second windows.
+- Synth candidates read 1.50 to 1.65. Changes to texture, noise floor, ticks, vibrato and sectioning did not move D out of that band.
+- Duration is a confound. The first gold set used 40 second clips squeezed into a 512 pixel image, against 10 second candidates. D is not comparable across durations. Measure references in matching windows. One reference track read 1.31 to 1.47 across its own windows.
+- Flatness and complexity conflict. Spectral flatness is a per-bin geometric mean, so it only moves once a broadband noise floor sits about 40 dB under the tonal peaks. That same floor pushes the complexity slope the other way. Tuning one moves the other.
+
+Gate method used (AM-2, written into the program's PREREG):
+
+- Gate band = the interquartile range of the time-matched references, widened by 10 percent.
+- Min-max envelopes were too loose. One reference spans a spectral centroid from 183 to 1131 Hz, so a min-max gate passes nearly anything.
+- AM-2 was written after some candidates had already been measured. Disclose that whenever the gate is reported.
+- The fractal axis was not gated on references alone, because the references disagree with each other.
+
+Render variance: when a score uses `pink` or `white` noise, the features change between renders (see the strudel-live-coding skill). Measure at least two renders per candidate and gate on the spread.
+
+Outcome: the boot-sound program did not reach gold agreement after v5. The taste axes were weak evidence for audio. Listener ratings and the gate did not agree on the best version, and the v1 baseline stayed strongest on clarity and arrival.
+
+Connection: the taste routes need the Steady Orbit jev operator connection passed on the bash call that hits them. Without it, the proxy refuses the call with `connection_id_invalid`.
+
 ## Guidelines
 
 1. Every noul instruction carries a measured number; no free-prose classification.
