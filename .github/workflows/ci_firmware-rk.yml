@@ -76,7 +76,7 @@ permissions:
   actions: write
 
 env:
-  BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.31.2@sha256:2f5adac4ecd194d9f8c10b7b5d7bceb5186853db1b26e5abd3a657af0b7e26ec
+  BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.34.0@sha256:b059f8d7226d0b326bc871af489a5dddf65e36af4d20d14251b072974d9ee87c
   TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
   OPTEE_OS_REF: 440b10c3f9b1c8501f2550e282ae071bb5424972 # release-descendant ref; see PINNED.md
   OPTEE_FTPM_REF: 5e09cdbe1bcb1bc3bcf4875ebafb4e1a1154417c # release-descendant ref; see PINNED.md

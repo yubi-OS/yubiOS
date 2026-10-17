@@ -7,7 +7,7 @@
 
 # Consumed by scripts that source this library.
 # shellcheck disable=SC2034
-readonly YUBIOS_BUILDKIT_IMAGE='docker.io/moby/buildkit:v0.31.2@sha256:2f5adac4ecd194d9f8c10b7b5d7bceb5186853db1b26e5abd3a657af0b7e26ec'
+readonly YUBIOS_BUILDKIT_IMAGE='docker.io/moby/buildkit:v0.34.0@sha256:b059f8d7226d0b326bc871af489a5dddf65e36af4d20d14251b072974d9ee87c'
 
 reproducible_build_error() {
     printf 'reproducible-build: %s\n' "$*" >&2
