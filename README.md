@@ -123,8 +123,8 @@ LOCAL_TAG=review ./scripts/build-local-images.sh production
 ```
 
 Every mode launches the [PINNED.md](PINNED.md) DHI image as a privileged outer
-container, installs the SHA-512-verified Docker 29.6.0 rootless extras and
-Buildx 0.35.0 used by CI, starts a rootless Docker-in-Docker daemon, and selects
+container, installs the SHA-512-verified Docker 29.9.1 rootless extras and
+Buildx 0.38.0 used by CI, starts a rootless Docker-in-Docker daemon, and selects
 the policy-bound `hardened` builder. Source refs used by the artifact paths are
 also pinned in `PINNED.md`. The entrypoint never logs in or pushes; it transfers
 only the selected local tags into the host Docker daemon.

@@ -29,16 +29,16 @@ Every `wcurl` payload is verified with GNU `sha512sum --check --strict` before i
 
 | Artifact URL | Platform | Pinned SHA-512 |
 |--------------|----------|----------------|
-| `https://download.docker.com/linux/static/stable/x86_64/docker-29.6.0.tgz` | `linux/amd64` | `42401384ef853dab0a1986a7990420e77d3ee2bc39e178f8817d27ba6c4403998b7aacf3c28c7172135cdeec281cd328a8f2af949b5f57db44a211a093cfd20b` |
-| `https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.6.0.tgz` | `linux/amd64` | `184b583a0f325bef12feaf1ca175ff5ea4a65a168f2136eb1daf9c2ae646eecf02134ed65766c8800bd8eb03ac4d338d1e5d700248bc33632027b5b0b52de48a` |
-| `https://github.com/docker/buildx/releases/download/v0.35.0/buildx-v0.35.0.linux-amd64` | `linux/amd64` | `710f4f48a101af939c4a4cace5ca93ab8c1a1a9ae244a4ef73b2a900f228614472b635bd202fae383c851686d383a37cdeddf45e6d54b36cae8458826c272262` |
-| `https://download.docker.com/linux/static/stable/aarch64/docker-29.6.0.tgz` | `linux/arm64` | `04713ac54030bed8b2c096280d034b02f5430ed73ba8bcc4a686f7bbbf4a3444eb027847e896cd9ee91c3237dbe1c25a4cfca43d1dcd922a1a10009c960ace0b` |
-| `https://download.docker.com/linux/static/stable/aarch64/docker-rootless-extras-29.6.0.tgz` | `linux/arm64` | `37649acdaacc597c115d2f19b71a4729a0119c6debbba4b4af18da2fd497ac28f5691df13137b7fc59903551ab0e08868f4b976a9a5704e2b7958b3b5b0cc0af` |
-| `https://github.com/docker/buildx/releases/download/v0.35.0/buildx-v0.35.0.linux-arm64` | `linux/arm64` | `6dc0d4ed11a7bbd8148dab8897594d7050e7f3bc43e6d130e629aa443e50266e77beed8816737e5dc34b7d43617e7a4eef8121561042ef9a87479aea14383058` |
-| `https://github.com/sigstore/cosign/releases/download/v3.1.2/cosign-linux-amd64` | `linux/amd64` | `01174ede4958413aca502e7eafdff34a5a7fab39c25af66b84c24b98e354e5cf2631bf2c07ecdd8c684dfab843f9694237606706eeafc20ae30ed5ed831f1d60` |
-| `https://github.com/sigstore/cosign/releases/download/v3.1.2/cosign-linux-arm64` | `linux/arm64` | `635c9d2d661dc300ce8038f5f922af90886faa8b7baacdbb7f6de9f734b80d18bb13b4d34854720fd6d0a63839b8899d2b4fdea2811c0d7e07a802cdb518df24` |
+| `https://download.docker.com/linux/static/stable/x86_64/docker-29.9.1.tgz` | `linux/amd64` | `f508d7befbb25a9993b762d6b8b5e626d7382884c63d8d6f0db0bc8d7e27b6a7bcaac4f353e79fe2eeaef8233d817e430982138cf94e86aee2ca9ebb975d9323` |
+| `https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.9.1.tgz` | `linux/amd64` | `16ec64b59b207eb6d937b18fa8880dd1b345603f6a2b481d67f9f6fba9a00d19f1d09552fe5b4d75aa4b1e108854306c25519f1489a7a2972c7f94229805573c` |
+| `https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0.linux-amd64` | `linux/amd64` | `fa2a4b38d084304e3993161a7cb5beb46c38f311ca5697dc57e97bf6e4f3505e66d9b4b089faf138e499565fca83620aa0a73a571141111cbd4d1877fe0e692b` |
+| `https://download.docker.com/linux/static/stable/aarch64/docker-29.9.1.tgz` | `linux/arm64` | `f1dbaee45f65122a3edbf59f8f9e7ea77212a300cfabdf54beeb5a115b18536e7d846a0a0b15adffa1e5fb56a9bc7d82fba350ef662c448935d372c98996a34e` |
+| `https://download.docker.com/linux/static/stable/aarch64/docker-rootless-extras-29.9.1.tgz` | `linux/arm64` | `20c59b7b4d680c0cd811fb17c138e5fea4cbac0528837fd9c81a8316cb151338ef8cbf5c55697228b8b32aea81f05e561693525a0cb51c8696889f011e21a07c` |
+| `https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0.linux-arm64` | `linux/arm64` | `ce6749dafc2f662a4fc12857803250608e5b911f69c94f8fb93c55c7a334090527ecf0867476d252a22d31cd2e0af9ca2e4a478e49ea9b14c232cd3138922183` |
+| `https://github.com/sigstore/cosign/releases/download/v3.1.3/cosign-linux-amd64` | `linux/amd64` | `299a32c20b9a6ae981e5decd5a3d91b0f1dfc03c6f38e90f0adfa92b993bfd38faecdd99d80e749b8b9f34e4516c09928cbe785ad6c150db8f3a6a4a84ff5e53` |
+| `https://github.com/sigstore/cosign/releases/download/v3.1.3/cosign-linux-arm64` | `linux/arm64` | `d372dead7e417d60a1e02c34183f32ae171ac82d1085cc5180032dcd38db792ae6ed562de5cfedfd77cf0f8def35a54313253601bffab77e075ea3239ecd99ad` |
 
-> cosign v3.1.2 SHA-512 self-computed locally from the upstream binary; cross-validate against the upstream SHA-256 in `cosign_checksums.txt` at the same release URL when bumping versions.
+> cosign v3.1.3 SHA-512 self-computed from the downloaded upstream binaries on 2026-10-17 and cross-validated against the SHA-256 in the v3.1.3 `cosign_checksums.txt` (amd64 `4629c757b7618056f8ddd7e2625ae9fdd94c0372a65049520bc7d9df9efc7f71`, arm64 `c5d324e091826b0d7a78eb16fef316450b4eb9aaec045611c08ba06f5e73220a`) and the GitHub release asset digests; repeat this cross-check when bumping versions.
 
 ## Internal yubi-OS Fork Refs
 
@@ -61,12 +61,12 @@ project does not publish EDK2-style stable release tags.
 |-----------------|-----------------|----------------------------|------------------------|----------------------|---------------|
 | `yubi-OS/arm-trusted-firmware` | `ARM-software/arm-trusted-firmware` | `v2.15.0` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | TF-A component validation and firmware assembly. |
 | `yubi-OS/bcvk` | `bootc-dev/bcvk` | `v0.21.0` | `3292e7a9836a3bd5f04e5912e846d1198c6c9b25` | `bbd00ad7dfc031c4046d00b2f3c71ff4d48eb714` | `yubios` branch: release plus yubiOS swtpm/swu2f support (former pin), native-to-disk installer (PR #1), YubiKey USB passthrough for ephemeral VMs (PR #2), `--extra-qemu-arg` CLI option (PR #8, retires ci_test-vgpu-vm.yml in-run patch), and ephemeral SSH/vsock concurrent poll fix; merged together via direct merge commits. Component validation and VM harness. |
-| `yubi-OS/edk2` | `tianocore/edk2` | `edk2-stable202602` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | Newest stable EDK2 release compatible with the StandaloneMM pre-removal platform snapshot; component validation and firmware build. |
+| `yubi-OS/edk2` | `tianocore/edk2` | `edk2-stable202602` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | HOLD at edk2-stable202602. Re-tested 2026-10-17 against edk2-stable202608 (`2970e5699ba6267f3384ffab20f96647578aebc8`): 202608 moves the StandaloneMM `ArmBaseLib` from `ArmPkg/Library/ArmLib/ArmBaseLib.inf` to `MdePkg/Library/ArmLib/ArmBaseLib.inf`. `Platform/StandaloneMm/PlatformStandaloneMmPkg/PlatformStandaloneMmRpmb.dsc:35` (`ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf`) would not resolve, and 8 shared StandaloneMM dependency INFs changed content. Component validation and firmware build. |
 | `yubi-OS/edk2-platforms` | `tianocore/edk2-platforms` | `20260316-before-platform-removals` | `cc384840c440415a091623a7658112fedc416094` | `cc384840c440415a091623a7658112fedc416094` | StandaloneMM platform build compatibility snapshot. |
 | `yubi-OS/mkosi` | `systemd/mkosi` | `v27.1` | `ecf7f5702bb2052b7a69cab3fe7d37bc3b9ad77b` | `25c40d44732f2aed0d0c81eedb0ce57d57c79068` | Release plus yubiOS profile; component validation, summary, and installer build. |
 | `yubi-OS/ms-tpm-20-ref` | `microsoft/ms-tpm-20-ref` | `v1.83r1` | `98b60a44aba79b15fcce1c0d1e46cf5918400f6a` | `98b60a44aba79b15fcce1c0d1e46cf5918400f6a` | TPM reference validation and fTPM firmware build. |
-| `yubi-OS/optee_ftpm` | `OP-TEE/optee_ftpm` | `4.10.0` | `a09269b15de635e1816fe832e26adfbfb44c5455` | `d1cf4a04cb0ba8974051816623e039a1206f7cca` | Release plus yubiOS volatile NV support; component validation and TA build. |
-| `yubi-OS/optee_os` | `OP-TEE/optee_os` | `4.10.0` | `753afbbee1682f5d16fd30e87b31058a4fd4f4b8` | `440b10c3f9b1c8501f2550e282ae071bb5424972` | Release plus yubiOS volatile StMM storage; component validation, TA dev kit, and BL32 build. |
+| `yubi-OS/optee_ftpm` | `OP-TEE/optee_ftpm` | `4.11.0` | `f09f4cdad21028289d4e8fc573893b75f7228dc7` | `b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf` | Release plus yubiOS volatile NV support, rebased 2026-10-17 onto 4.11.0 on branch `feat/volatile-nv-ci-4.11` (prior branch `feat/volatile-nv-ci` at d1cf4a04 kept, backup tag `pre-bump-2026-10-17`); component validation and TA build. |
+| `yubi-OS/optee_os` | `OP-TEE/optee_os` | `4.11.0` | `f54190f22611dd5ad5d22546fd4209aa100f56bd` | `0a949c7fb176914a87f69092cd3defc4dc1308b4` | Release plus yubiOS volatile StMM storage, rebased 2026-10-17 onto 4.11.0 on branch `feat/stmm-volatile-storage-ci-4.11` (prior branch `feat/stmm-volatile-storage-ci` at 440b10c3 kept, backup tag `pre-bump-2026-10-17`); component validation, TA dev kit, and BL32 build. |
 | `yubi-OS/u-boot` | `u-boot/u-boot` | `v2026.10` | `5508406582f6f7120dce0c4b3059819a41788db2` | `5508406582f6f7120dce0c4b3059819a41788db2` | U-Boot component validation and firmware BL33 build. |
 
 ## External GitHub Source Refs
@@ -75,10 +75,11 @@ Workflows use the immutable commit in the third column. Branches and tags are re
 
 | Repository | Reviewed branch/tag | Pinned commit | Workflow role |
 |------------|---------------------|---------------|---------------|
-| `docker/buildx` | `v0.35.0` | `a319e5b15052cf6557ceb666eb8ff6e32380b782` | Buildx release assets; payloads are additionally pinned by SHA-512 above. |
-| `Mbed-TLS/mbedtls` | `mbedtls-3.6.6` | `0bebf8b8c7f07abe3571ded48a11aa907a1ffb20` | TF-A trusted-board-boot dependency. |
-| `pando85/passless` | `v0.11.2` | `b67ccdf22e18cf21bcd140e03d22af413342d605` | TEST-image in-guest CTAP2 authenticator; yubiOS enables soft-fido2's implemented `hmac-secret` extension at build time. |
-| `qemu/qemu` | upstream commit | `3a18e8a25992d1643707e2cebdd6e9bb2bd7d3b9` | ARM64 zstd-capable DirectBoot QEMU. |
+| `docker/buildx` | `v0.38.0` | `0dbe87f36ed472fe36b6796c3f70b4210a731fc5` | Buildx release assets; payloads are additionally pinned by SHA-512 above. |
+| `Mbed-TLS/mbedtls` | `mbedtls-3.6.7` | `068ff080b369adfac81509f9b57b2afabaf82dc5` | TF-A trusted-board-boot dependency; the TF-A v2.15.0 build gate requires mbedTLS major 3 (`drivers/auth/mbedtls/mbedtls_common.mk`). |
+| `Mbed-TLS/mbedtls` 4.x (HOLD, not adopted) | `mbedtls-4.2.0` | `ece41aa84d7879d7e55c59e955a5884b541f7f3b` | Held 2026-10-17. TF-A `v2.15.0` (`da738d5e`) requires mbed TLS 3.x: `default_mbedtls_config.h` sets `MBEDTLS_CONFIG_VERSION 0x03060600`, `mbedtls_common.mk` rejects any `MBEDTLS_VERSION_MAJOR` other than 3, and `mbedtls_crypto.c` gates on `MBEDTLS_VERSION_MAJOR < 3` (lines 329, 342, 358) with no 4.x branch. Its include path is `-I${MBEDTLS_DIR}/include`. Release 4.2.0 defines `MBEDTLS_CONFIG_VERSION 0x04000000`, and its tarball holds only 4 of the 14 mbed TLS headers TF-A includes (`error`, `oid`, `version`, `x509`). The rest are absent because `.gitmodules` places the crypto code in the `tf-psa-crypto` submodule, which the tarball leaves empty. |
+| `pando85/passless` | `v0.20.2` | `55139d3e209c62e040806c66181b835d1375971e` | TEST-image in-guest CTAP2 authenticator; yubiOS enables soft-fido2 0.17.0's implemented `hmac-secret` extension at build time. |
+| `qemu/qemu` | `v11.1.2` | `4fc49f46dc95d4a27de2509e7fceb2931e91faeb` | ARM64 zstd-capable DirectBoot QEMU (zstd zboot loader support is contained in v11.1.2). |
 
 Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chain_ref` select commits within `yubi-OS/yubiOS` for the triggering run and the internal workflow chain. They are runtime identities, not external dependency refs; the default `actions/checkout` behavior checks out the triggering commit.
 
@@ -86,19 +87,21 @@ Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chai
 
 | Image | Pinned Digest | Notes |
 |-------|---------------|-------|
-| `docker.io/moby/buildkit:v0.31.2` (multi-arch INDEX) | `sha256:2f5adac4ecd194d9f8c10b7b5d7bceb5186853db1b26e5abd3a657af0b7e26ec` | BuildKit daemon used by every `docker-container` Buildx builder. Buildx 0.35.0 is only the client and does not pin this daemon implicitly. |
+| `docker.io/moby/buildkit:v0.34.0` (multi-arch INDEX) | `sha256:b059f8d7226d0b326bc871af489a5dddf65e36af4d20d14251b072974d9ee87c` | BuildKit daemon used by every `docker-container` Buildx builder. Buildx 0.35.0 is only the client and does not pin this daemon implicitly. Index re-inspected 2026-10-17 via the registry API: contains linux/amd64 (`sha256:3eea2ed5...`) and linux/arm64 (`sha256:455c7870...`). Replaces the v0.31.2 index. |
 | `dhi.io/debian-base` (multi-arch INDEX) | `sha256:7b1d6522b9a4e72e2ca3537c031ca3650c654ec81c181447bf952069eb827226` | **Canonical for workflows + Containerfile `FROM` where DHI is used.** OCI image index for `trixie-debian13-dev`; auto-resolves per runner arch. |
 | child `linux/amd64` | `sha256:3a7b23112b81b75fd1b54ab058bc6a67ff9351ecee870571ff7409a5f2905673` | Resolved automatically; do not pin directly unless an amd64-only job requires it. |
 | child `linux/arm64` | `sha256:66459a4ed5daf0b1c8f33a856e6c5c66ecc500dc995bf6c632efcd7d17b57c22` | Resolved automatically. |
 | `quay.io/fedora/fedora-bootc:45` (multi-arch INDEX) | `sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45` | **Containerfile `FROM` base.** OCI image index; auto-resolves per arch. Re-resolved 2026-10-17 via MASTER GIT SU (fetch-fedora-bootc-manifest blocked on dead org WORKFLOW PAT). Refresh with `fetch-fedora-bootc-manifest`. |
-| `ghcr.io/actions/jekyll-build-pages` | `sha256:6791ebfd912185ed59bfb5fb102664fa872496b79f87ff8b9cfba292a7345041` | Pages build image. |
-| `ghcr.io/hadolint/hadolint:v2.14.0-debian` | `sha256:158cd0184dcaa18bd8ec20b61f4c1cabdf8b32a592d062f57bdcb8e4c1d312e2` | Hadolint image. |
+| `ghcr.io/actions/jekyll-build-pages` | `sha256:6791ebfd912185ed59bfb5fb102664fa872496b79f87ff8b9cfba292a7345041` | Pages build image, pinned to tag `v1.0.13`. Held 2026-10-17: v1.0.13 is the newest upstream release (GitHub `releases/latest`, published 2024-08-06). The `latest` tag (`sha256:0a7bd759...`) is an unversioned `main` build (label `version=main`, created 2026-08-17), so it is not a stable release. This image publishes a single-arch `linux/amd64` manifest and no OCI index; that is the only exception to the index-digest rule. |
+| `ghcr.io/hadolint/hadolint:v2.15.1-debian` | `sha256:9a3944b7fddcb947d1ffd90829ac1a6e5c30479223358f249d8b96c7d0019e27` | Hadolint image. Index re-inspected 2026-10-17: contains linux/amd64 (`sha256:aacf4eda...`) and linux/arm64 (`sha256:5ffe7059...`). Replaces the v2.14.0-debian index. |
 
 > Superseded single-arch or rotated digests kept for audit only:
 > `62bc0610151db7155b7225f1a03c299bf109ab0b884da6777d1f808c7834d4ea`,
 > `9415967aa0ed8adea8b5c048994259d1982026dca143d0303c7bbe0e11ed67d3`,
 > `b7b34d8720b2e0ccaba980fd92347e7820051496ca0e639704172c6f3fb8877d`,
-> `8a1c786152eaf72346a339ae2b869f5f7445cd311700f932f8bc94433a0e7d1b`.
+> `8a1c786152eaf72346a339ae2b869f5f7445cd311700f932f8bc94433a0e7d1b`,
+> `2f5adac4ecd194d9f8c10b7b5d7bceb5186853db1b26e5abd3a657af0b7e26ec` (`moby/buildkit:v0.31.2` index, superseded 2026-10-17),
+> `158cd0184dcaa18bd8ec20b61f4c1cabdf8b32a592d062f57bdcb8e4c1d312e2` (`hadolint/hadolint:v2.14.0-debian` index, superseded 2026-10-17).
 
 ---
 
@@ -112,7 +115,7 @@ Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chai
 - To add or roll a ref: obtain the digest, update this file, update repo references to the old digest, update `yubiOS.rego` if a new registry is introduced, and open a PR.
 - Use `fetch-released-tag-ref` for yubi-OS fork release refs, `fetch-dhi-manifest` for `dhi.io/debian-base`, and `fetch-fedora-bootc-manifest` for `quay.io/fedora/fedora-bootc:45`.
 - Digests are verified at build time by the explicit `yubiOS.rego` `target.policy` inherited from `yubiOS-bake.hcl` (`reset=true`, `strict=true`).
-- cosign v3.1.2 is the canonical signing binary; downstream verification tooling MUST pin to v3.1.2 SHA-512 above. The yubiOS verifier (`tests/verify-oci-attestations.sh`) keys its identity regex to `^https://github\.com/yubi-OS/yubiOS/\.github/workflows/(yubiOS-ci|ci_dev_image|ci_mkosi-installer)\.yml@refs/(heads|tags)/.+$`; a future publisher workflow must add its filename to that set in the verifier script.
+- cosign v3.1.3 is the canonical signing binary; downstream verification tooling MUST pin to v3.1.3 SHA-512 above. The yubiOS verifier (`tests/verify-oci-attestations.sh`) keys its identity regex to `^https://github\.com/yubi-OS/yubiOS/\.github/workflows/(yubiOS-ci|ci_dev_image|ci_mkosi-installer)\.yml@refs/(heads|tags)/.+$`; a future publisher workflow must add its filename to that set in the verifier script.
 
 ## Rockchip DDR/TPL blob (RK3588)
 

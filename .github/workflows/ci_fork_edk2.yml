@@ -99,7 +99,7 @@ jobs:
       group: ${{ github.workflow }}-stmm-${{ matrix.arch }}-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # see PINNED.md
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/edk2
           ref: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md

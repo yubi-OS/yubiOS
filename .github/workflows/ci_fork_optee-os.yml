@@ -96,10 +96,10 @@ jobs:
     env:
       PLATFORM: vexpress-qemu_armv8a
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # see PINNED.md
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/optee_os
-          ref: 440b10c3f9b1c8501f2550e282ae071bb5424972 # release-descendant ref; see PINNED.md
+          ref: 0a949c7fb176914a87f69092cd3defc4dc1308b4 # release-descendant ref; see PINNED.md
 
       - name: Install OP-TEE build deps + cross toolchains
         run: |

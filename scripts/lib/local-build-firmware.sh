@@ -5,13 +5,13 @@
 # scripts/build-local-images.sh after the pinned DHI/rootless Docker bootstrap.
 
 readonly LOCAL_TFA_REF='da738d5eae93af342fdc4995dd3c05acb4c9d757'
-readonly LOCAL_OPTEE_OS_REF='440b10c3f9b1c8501f2550e282ae071bb5424972'
+readonly LOCAL_OPTEE_OS_REF='0a949c7fb176914a87f69092cd3defc4dc1308b4'
 readonly LOCAL_OPTEE_FTPM_REF='5e09cdbe1bcb1bc3bcf4875ebafb4e1a1154417c'
 readonly LOCAL_UBOOT_REF='5508406582f6f7120dce0c4b3059819a41788db2'
 readonly LOCAL_EDK2_REF='b7a715f7c03c45c6b4575bf88596bfd79658b8ce'
 readonly LOCAL_EDK2_PLATFORMS_REF='cc384840c440415a091623a7658112fedc416094'
 readonly LOCAL_MS_TPM_REF='98b60a44aba79b15fcce1c0d1e46cf5918400f6a'
-readonly LOCAL_MBEDTLS_REF='0bebf8b8c7f07abe3571ded48a11aa907a1ffb20'
+readonly LOCAL_MBEDTLS_REF='068ff080b369adfac81509f9b57b2afabaf82dc5'
 readonly LOCAL_FTPM_UUID='bc50d971-d4c9-42c4-82cb-343fb7f37896'
 readonly LOCAL_STMM_PLATFORM='Platform/StandaloneMm/PlatformStandaloneMmPkg/PlatformStandaloneMmRpmb.dsc'
 

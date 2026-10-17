@@ -228,14 +228,14 @@ jobs:
         run: |
           set -euo pipefail
           # Fedora ARM64 vmlinuz images are EFI zboot images with zstd-compressed
-          # payloads. Ubuntu 24.04's packaged QEMU predates upstream commit
-          # 3a18e8a25992 (hw/loader: Add support for zboot images compressed
-          # with zstd), so bcvk's DirectBoot path fails before the guest starts.
+          # payloads. Ubuntu 24.04's packaged QEMU predates upstream zstd zboot support
+          # (hw/loader: Add support for zboot images compressed with zstd), so
+          # bcvk's DirectBoot path fails before the guest starts.
           # Build only qemu-system-aarch64 from that pinned upstream commit and
           # prepend it to PATH for bcvk. rock1 is self-hosted and persistent, so
           # keep /opt/qemu-zstd as a local cache between runs (binary + source,
           # both under /opt so they survive between jobs on this runner).
-          QEMU_ZSTD_COMMIT=3a18e8a25992d1643707e2cebdd6e9bb2bd7d3b9
+          QEMU_ZSTD_COMMIT=4fc49f46dc95d4a27de2509e7fceb2931e91faeb
           QEMU_PREFIX=/opt/qemu-zstd/${QEMU_ZSTD_COMMIT}
           QEMU_SRC=/opt/qemu-zstd-src
           if [ ! -x "${QEMU_PREFIX}/bin/qemu-system-aarch64" ]; then

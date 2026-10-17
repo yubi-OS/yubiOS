@@ -50,13 +50,13 @@ jobs:
           - arch: amd64
             runner: ubuntu-24.04
             docker_arch: x86_64
-            docker_sha512: 42401384ef853dab0a1986a7990420e77d3ee2bc39e178f8817d27ba6c4403998b7aacf3c28c7172135cdeec281cd328a8f2af949b5f57db44a211a093cfd20b
-            rootless_sha512: 184b583a0f325bef12feaf1ca175ff5ea4a65a168f2136eb1daf9c2ae646eecf02134ed65766c8800bd8eb03ac4d338d1e5d700248bc33632027b5b0b52de48a
+            docker_sha512: f508d7befbb25a9993b762d6b8b5e626d7382884c63d8d6f0db0bc8d7e27b6a7bcaac4f353e79fe2eeaef8233d817e430982138cf94e86aee2ca9ebb975d9323
+            rootless_sha512: 16ec64b59b207eb6d937b18fa8880dd1b345603f6a2b481d67f9f6fba9a00d19f1d09552fe5b4d75aa4b1e108854306c25519f1489a7a2972c7f94229805573c
           - arch: arm64
             runner: ubuntu-24.04-arm
             docker_arch: aarch64
-            docker_sha512: 04713ac54030bed8b2c096280d034b02f5430ed73ba8bcc4a686f7bbbf4a3444eb027847e896cd9ee91c3237dbe1c25a4cfca43d1dcd922a1a10009c960ace0b
-            rootless_sha512: 37649acdaacc597c115d2f19b71a4729a0119c6debbba4b4af18da2fd497ac28f5691df13137b7fc59903551ab0e08868f4b976a9a5704e2b7958b3b5b0cc0af
+            docker_sha512: f1dbaee45f65122a3edbf59f8f9e7ea77212a300cfabdf54beeb5a115b18536e7d846a0a0b15adffa1e5fb56a9bc7d82fba350ef662c448935d372c98996a34e
+            rootless_sha512: 20c59b7b4d680c0cd811fb17c138e5fea4cbac0528837fd9c81a8316cb151338ef8cbf5c55697228b8b32aea81f05e561693525a0cb51c8696889f011e21a07c
     container:
       options: --privileged
       volumes:
@@ -96,10 +96,10 @@ jobs:
           # V79: arch-keyed static docker binaries.
           DOCKER_SHA512=${{ matrix.docker_sha512 }}
           ROOTLESS_SHA512=${{ matrix.rootless_sha512 }}
-          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.6.0.tgz" "$DOCKER_SHA512"
-          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.6.0.tgz" "$ROOTLESS_SHA512"
-          tar xzf docker-29.6.0.tgz
-          tar xzf docker-rootless-extras-29.6.0.tgz
+          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.1.tgz" "$DOCKER_SHA512"
+          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.1.tgz" "$ROOTLESS_SHA512"
+          tar xzf docker-29.9.1.tgz
+          tar xzf docker-rootless-extras-29.9.1.tgz
           install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
@@ -563,7 +563,7 @@ jobs:
           echo "Assertions 1-3 PASS"
 
       - name: Upload signed UKI artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: sealed-uki-artifacts-${{ matrix.arch }}
           path: |
@@ -644,7 +644,7 @@ jobs:
           command -v ${{ matrix.qemu_bin }} >/dev/null 2>&1 || { echo "::error::${{ matrix.qemu_bin }} missing"; exit 1; }
 
       - name: Download signed UKI artifact
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # PINNED.md
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
         with:
           name: sealed-uki-artifacts-${{ matrix.arch }}
           path: mkosi.output
@@ -783,7 +783,7 @@ jobs:
           command -v sbverify >/dev/null 2>&1 || { echo "::error::sbverify missing after sbsigntool install"; exit 1; }
 
       - name: Download signed UKI artifact (amd64 build, V79 arch-keyed)
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # PINNED.md
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
         with:
           name: sealed-uki-artifacts-amd64
           path: mkosi.output
