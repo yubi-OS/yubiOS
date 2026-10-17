@@ -26,7 +26,7 @@ Line 2b (N = 3282, ten random seeds, hexagonal control, pre-registered). The gas
 
 Measurement mismatch. The router's d_w is the 64-walker walk on the mask grid. Both studies used the 4096-walker walk on the points path. The quantity the router clause reads has never been tested.
 
-Conclusion. In the tested range the walk leg cannot carry hierarchy evidence. Routing now reads edge-standard D and the traced droplet count only. The walk d_w is diagnostic. A revisit would need a larger N, a saturation-robust estimator or a return-probability dimension, under a new pre-registration. None is scheduled.
+Conclusion. In the tested range the walk leg cannot carry hierarchy evidence. Routing now reads edge-standard D and the traced droplet count only. The walk d_w is diagnostic. A revisit would need a larger N, a saturation-insensitive estimator or a return-probability dimension, under a new pre-registration. None is scheduled.
 
 ## Item 3: AGENT.md, KV canonical
 
