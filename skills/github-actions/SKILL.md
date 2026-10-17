@@ -36,7 +36,7 @@ Every workflow in `yubi-OS/*` must follow these rules from AGENTS.md:
 
 ```yaml
 # Commit these exact SHAs — no floating refs:
-actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd          # v6.0.2
+actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1          # v7.0.1
 actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
 actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
 actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
@@ -100,7 +100,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Build
         run: |
@@ -465,7 +465,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Shellcheck
         run: |
