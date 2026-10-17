@@ -41,7 +41,7 @@ docker buildx build --policy reset=true,strict=true,filename=yubiOS.rego .
 
 **Version requirement:** `--policy` is a recent buildx/BuildKit feature. Confirm
 the buildx in CI supports it (`docker buildx build --help | grep -- --policy`).
-The yubiOS CI installs static buildx (currently v0.35.0) — verify the flag is
+The yubiOS CI installs static buildx (currently v0.38.0) — verify the flag is
 present there; if absent, bump the pinned buildx release (record the new pin in
 PINNED.md) or run the policy via a buildx version that has it. Do NOT silently
 drop the flag to make a build pass.

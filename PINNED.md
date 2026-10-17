@@ -29,16 +29,16 @@ Every `wcurl` payload is verified with GNU `sha512sum --check --strict` before i
 
 | Artifact URL | Platform | Pinned SHA-512 |
 |--------------|----------|----------------|
-| `https://download.docker.com/linux/static/stable/x86_64/docker-29.6.0.tgz` | `linux/amd64` | `42401384ef853dab0a1986a7990420e77d3ee2bc39e178f8817d27ba6c4403998b7aacf3c28c7172135cdeec281cd328a8f2af949b5f57db44a211a093cfd20b` |
-| `https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.6.0.tgz` | `linux/amd64` | `184b583a0f325bef12feaf1ca175ff5ea4a65a168f2136eb1daf9c2ae646eecf02134ed65766c8800bd8eb03ac4d338d1e5d700248bc33632027b5b0b52de48a` |
-| `https://github.com/docker/buildx/releases/download/v0.35.0/buildx-v0.35.0.linux-amd64` | `linux/amd64` | `710f4f48a101af939c4a4cace5ca93ab8c1a1a9ae244a4ef73b2a900f228614472b635bd202fae383c851686d383a37cdeddf45e6d54b36cae8458826c272262` |
-| `https://download.docker.com/linux/static/stable/aarch64/docker-29.6.0.tgz` | `linux/arm64` | `04713ac54030bed8b2c096280d034b02f5430ed73ba8bcc4a686f7bbbf4a3444eb027847e896cd9ee91c3237dbe1c25a4cfca43d1dcd922a1a10009c960ace0b` |
-| `https://download.docker.com/linux/static/stable/aarch64/docker-rootless-extras-29.6.0.tgz` | `linux/arm64` | `37649acdaacc597c115d2f19b71a4729a0119c6debbba4b4af18da2fd497ac28f5691df13137b7fc59903551ab0e08868f4b976a9a5704e2b7958b3b5b0cc0af` |
-| `https://github.com/docker/buildx/releases/download/v0.35.0/buildx-v0.35.0.linux-arm64` | `linux/arm64` | `6dc0d4ed11a7bbd8148dab8897594d7050e7f3bc43e6d130e629aa443e50266e77beed8816737e5dc34b7d43617e7a4eef8121561042ef9a87479aea14383058` |
-| `https://github.com/sigstore/cosign/releases/download/v3.1.2/cosign-linux-amd64` | `linux/amd64` | `01174ede4958413aca502e7eafdff34a5a7fab39c25af66b84c24b98e354e5cf2631bf2c07ecdd8c684dfab843f9694237606706eeafc20ae30ed5ed831f1d60` |
-| `https://github.com/sigstore/cosign/releases/download/v3.1.2/cosign-linux-arm64` | `linux/arm64` | `635c9d2d661dc300ce8038f5f922af90886faa8b7baacdbb7f6de9f734b80d18bb13b4d34854720fd6d0a63839b8899d2b4fdea2811c0d7e07a802cdb518df24` |
+| `https://download.docker.com/linux/static/stable/x86_64/docker-29.9.1.tgz` | `linux/amd64` | `f508d7befbb25a9993b762d6b8b5e626d7382884c63d8d6f0db0bc8d7e27b6a7bcaac4f353e79fe2eeaef8233d817e430982138cf94e86aee2ca9ebb975d9323` |
+| `https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.9.1.tgz` | `linux/amd64` | `16ec64b59b207eb6d937b18fa8880dd1b345603f6a2b481d67f9f6fba9a00d19f1d09552fe5b4d75aa4b1e108854306c25519f1489a7a2972c7f94229805573c` |
+| `https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0.linux-amd64` | `linux/amd64` | `fa2a4b38d084304e3993161a7cb5beb46c38f311ca5697dc57e97bf6e4f3505e66d9b4b089faf138e499565fca83620aa0a73a571141111cbd4d1877fe0e692b` |
+| `https://download.docker.com/linux/static/stable/aarch64/docker-29.9.1.tgz` | `linux/arm64` | `f1dbaee45f65122a3edbf59f8f9e7ea77212a300cfabdf54beeb5a115b18536e7d846a0a0b15adffa1e5fb56a9bc7d82fba350ef662c448935d372c98996a34e` |
+| `https://download.docker.com/linux/static/stable/aarch64/docker-rootless-extras-29.9.1.tgz` | `linux/arm64` | `20c59b7b4d680c0cd811fb17c138e5fea4cbac0528837fd9c81a8316cb151338ef8cbf5c55697228b8b32aea81f05e561693525a0cb51c8696889f011e21a07c` |
+| `https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0.linux-arm64` | `linux/arm64` | `ce6749dafc2f662a4fc12857803250608e5b911f69c94f8fb93c55c7a334090527ecf0867476d252a22d31cd2e0af9ca2e4a478e49ea9b14c232cd3138922183` |
+| `https://github.com/sigstore/cosign/releases/download/v3.1.3/cosign-linux-amd64` | `linux/amd64` | `299a32c20b9a6ae981e5decd5a3d91b0f1dfc03c6f38e90f0adfa92b993bfd38faecdd99d80e749b8b9f34e4516c09928cbe785ad6c150db8f3a6a4a84ff5e53` |
+| `https://github.com/sigstore/cosign/releases/download/v3.1.3/cosign-linux-arm64` | `linux/arm64` | `d372dead7e417d60a1e02c34183f32ae171ac82d1085cc5180032dcd38db792ae6ed562de5cfedfd77cf0f8def35a54313253601bffab77e075ea3239ecd99ad` |
 
-> cosign v3.1.2 SHA-512 self-computed locally from the upstream binary; cross-validate against the upstream SHA-256 in `cosign_checksums.txt` at the same release URL when bumping versions.
+> cosign v3.1.3 SHA-512 self-computed from the downloaded upstream binaries on 2026-10-17 and cross-validated against the SHA-256 in the v3.1.3 `cosign_checksums.txt` (amd64 `4629c757b7618056f8ddd7e2625ae9fdd94c0372a65049520bc7d9df9efc7f71`, arm64 `c5d324e091826b0d7a78eb16fef316450b4eb9aaec045611c08ba06f5e73220a`) and the GitHub release asset digests; repeat this cross-check when bumping versions.
 
 ## Internal yubi-OS Fork Refs
 
@@ -75,10 +75,10 @@ Workflows use the immutable commit in the third column. Branches and tags are re
 
 | Repository | Reviewed branch/tag | Pinned commit | Workflow role |
 |------------|---------------------|---------------|---------------|
-| `docker/buildx` | `v0.35.0` | `a319e5b15052cf6557ceb666eb8ff6e32380b782` | Buildx release assets; payloads are additionally pinned by SHA-512 above. |
-| `Mbed-TLS/mbedtls` | `mbedtls-3.6.6` | `0bebf8b8c7f07abe3571ded48a11aa907a1ffb20` | TF-A trusted-board-boot dependency. |
-| `pando85/passless` | `v0.11.2` | `b67ccdf22e18cf21bcd140e03d22af413342d605` | TEST-image in-guest CTAP2 authenticator; yubiOS enables soft-fido2's implemented `hmac-secret` extension at build time. |
-| `qemu/qemu` | upstream commit | `3a18e8a25992d1643707e2cebdd6e9bb2bd7d3b9` | ARM64 zstd-capable DirectBoot QEMU. |
+| `docker/buildx` | `v0.38.0` | `0dbe87f36ed472fe36b6796c3f70b4210a731fc5` | Buildx release assets; payloads are additionally pinned by SHA-512 above. |
+| `Mbed-TLS/mbedtls` | `mbedtls-3.6.7` | `068ff080b369adfac81509f9b57b2afabaf82dc5` | TF-A trusted-board-boot dependency; the TF-A v2.15.0 build gate requires mbedTLS major 3 (`drivers/auth/mbedtls/mbedtls_common.mk`). |
+| `pando85/passless` | `v0.20.2` | `55139d3e209c62e040806c66181b835d1375971e` | TEST-image in-guest CTAP2 authenticator; yubiOS enables soft-fido2 0.17.0's implemented `hmac-secret` extension at build time. |
+| `qemu/qemu` | `v11.1.2` | `4fc49f46dc95d4a27de2509e7fceb2931e91faeb` | ARM64 zstd-capable DirectBoot QEMU (zstd zboot loader support is contained in v11.1.2). |
 
 Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chain_ref` select commits within `yubi-OS/yubiOS` for the triggering run and the internal workflow chain. They are runtime identities, not external dependency refs; the default `actions/checkout` behavior checks out the triggering commit.
 
@@ -112,7 +112,7 @@ Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chai
 - To add or roll a ref: obtain the digest, update this file, update repo references to the old digest, update `yubiOS.rego` if a new registry is introduced, and open a PR.
 - Use `fetch-released-tag-ref` for yubi-OS fork release refs, `fetch-dhi-manifest` for `dhi.io/debian-base`, and `fetch-fedora-bootc-manifest` for `quay.io/fedora/fedora-bootc:45`.
 - Digests are verified at build time by the explicit `yubiOS.rego` `target.policy` inherited from `yubiOS-bake.hcl` (`reset=true`, `strict=true`).
-- cosign v3.1.2 is the canonical signing binary; downstream verification tooling MUST pin to v3.1.2 SHA-512 above. The yubiOS verifier (`tests/verify-oci-attestations.sh`) keys its identity regex to `^https://github\.com/yubi-OS/yubiOS/\.github/workflows/(yubiOS-ci|ci_dev_image|ci_mkosi-installer)\.yml@refs/(heads|tags)/.+$`; a future publisher workflow must add its filename to that set in the verifier script.
+- cosign v3.1.3 is the canonical signing binary; downstream verification tooling MUST pin to v3.1.3 SHA-512 above. The yubiOS verifier (`tests/verify-oci-attestations.sh`) keys its identity regex to `^https://github\.com/yubi-OS/yubiOS/\.github/workflows/(yubiOS-ci|ci_dev_image|ci_mkosi-installer)\.yml@refs/(heads|tags)/.+$`; a future publisher workflow must add its filename to that set in the verifier script.
 
 ## Rockchip DDR/TPL blob (RK3588)
 

@@ -11,7 +11,7 @@ readonly LOCAL_UBOOT_REF='5508406582f6f7120dce0c4b3059819a41788db2'
 readonly LOCAL_EDK2_REF='b7a715f7c03c45c6b4575bf88596bfd79658b8ce'
 readonly LOCAL_EDK2_PLATFORMS_REF='cc384840c440415a091623a7658112fedc416094'
 readonly LOCAL_MS_TPM_REF='98b60a44aba79b15fcce1c0d1e46cf5918400f6a'
-readonly LOCAL_MBEDTLS_REF='0bebf8b8c7f07abe3571ded48a11aa907a1ffb20'
+readonly LOCAL_MBEDTLS_REF='068ff080b369adfac81509f9b57b2afabaf82dc5'
 readonly LOCAL_FTPM_UUID='bc50d971-d4c9-42c4-82cb-343fb7f37896'
 readonly LOCAL_STMM_PLATFORM='Platform/StandaloneMm/PlatformStandaloneMmPkg/PlatformStandaloneMmRpmb.dsc'
 

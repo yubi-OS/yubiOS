@@ -142,7 +142,7 @@ fi
 # authenticator runs IN the guest. The TEST image (mkosi --profile test) ships
 # `passless`. Start it so /dev/uhid exposes a CTAP2 token for the probe + FIDO2 legs.
 #
-# passless v0.11.2's local backend opens /dev/uhid before initializing storage.
+# passless's local backend opens /dev/uhid before initializing storage (observed on the previously pinned release; re-verify when the pin moves).
 # If the storage directory is absent, it asks a desktop notification daemon for
 # permission to create it and exits in a headless guest. Run 29872832727 hit that
 # path: passless briefly started, but no hidraw device survived to enumerate.

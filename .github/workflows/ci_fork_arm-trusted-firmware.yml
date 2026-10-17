@@ -151,11 +151,11 @@ jobs:
           fi
           aarch64-linux-gnu-gcc --version || gcc --version
 
-      - name: Checkout mbed TLS (3.6.6 — matches TF-A MBEDTLS_CONFIG_VERSION 0x03060600)
+      - name: Checkout mbed TLS (3.6.7 — TF-A default_mbedtls_config.h is compatible with >= 3.6.6, MBEDTLS_CONFIG_VERSION 0x03060600)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
         with:
           repository: Mbed-TLS/mbedtls
-          ref: 0bebf8b8c7f07abe3571ded48a11aa907a1ffb20 # mbedtls-3.6.6
+          ref: 068ff080b369adfac81509f9b57b2afabaf82dc5 # mbedtls-3.6.7
           path: mbedtls
 
       - name: Build BL31 (EL3 monitor, SPD=opteed)

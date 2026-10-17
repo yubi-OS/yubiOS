@@ -28,8 +28,8 @@
 set -euo pipefail
 
 readonly PASSLESS_REPO="https://github.com/pando85/passless.git"
-readonly PASSLESS_TAG="v0.11.2"
-readonly PASSLESS_COMMIT="b67ccdf22e18cf21bcd140e03d22af413342d605"
+readonly PASSLESS_TAG="v0.20.2"
+readonly PASSLESS_COMMIT="55139d3e209c62e040806c66181b835d1375971e"
 readonly PASSLESS_BUILD_ROOT="/tmp/yubios-passless-build"
 
 if ! command -v dnf >/dev/null 2>&1; then
@@ -97,7 +97,7 @@ git -C "${src}" fetch --depth 1 origin "${PASSLESS_COMMIT}"
 git -C "${src}" checkout --detach FETCH_HEAD
 test "$(git -C "${src}" rev-parse HEAD)" = "${PASSLESS_COMMIT}"
 
-# passless v0.11.2 uses soft-fido2 0.13.0, whose hmac-secret makeCredential and
+# passless v0.20.2 uses soft-fido2 0.17.0, whose hmac-secret makeCredential and
 # getAssertion paths are complete, but passless advertises only credProtect in
 # GetInfo. Enable the implemented extension in this TEST-only build so systemd-
 # cryptenroll and systemd-homed can request it. Keep this exact-source assertion
@@ -109,6 +109,12 @@ sed -i 's/\.extensions(vec!\["credProtect"\.to_string()\])/.extensions(vec!["cre
     "${authenticator_rs}"
 grep -Fq '.extensions(vec!["credProtect".to_string(), "hmac-secret".to_string()])' \
     "${authenticator_rs}"
+# v0.20.2 has four authenticator builder sites. Every credProtect-only GetInfo
+# extension list must be patched, not just the first one the sed reached.
+if grep -Fq '.extensions(vec!["credProtect".to_string()])' "${authenticator_rs}"; then
+    echo "install-swu2f-authenticator: unpatched credProtect-only GetInfo site remains" >&2
+    exit 1
+fi
 
 # The real failure this build hit was NOT dnf (dnf completes cleanly, 113/113):
 # cargo's own cache dir ($CARGO_HOME, defaults to /root/.cargo when running as
