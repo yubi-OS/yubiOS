@@ -45,7 +45,7 @@ taken from Lane A, updated by the R2 code patches where DELETE auth changed.
 
 ### Jev Orchestrator (gated task engine)
 
-The Jev v2 gated-approval orchestration core: it ingests a task (caller-supplied actions or a freeform prompt), understands/decides via the jev-1.13 model, passes every proposed action through a deterministic fail-closed gate (allowed / needs_approval / blocked), executes approved actions, verifies outcomes independently, and drives the task to one of six terminal states. Approvals bind actor, target, payload, limits, expiry and policy version; every stage appends an append-only audit event. Learning proposals can only become active policy through an explicit human promote (no automated promotion path exists).
+The Jev v2 gated-approval orchestration core: it ingests a task (caller-supplied actions or a freeform prompt), understands/decides via the clef model (Workers AI binding; policy `decision_model`), passes every proposed action through a deterministic fail-closed gate (allowed / needs_approval / blocked), executes approved actions, verifies outcomes independently, and drives the task to one of six terminal states. Approvals bind actor, target, payload, limits, expiry and policy version; every stage appends an append-only audit event. Learning proposals can only become active policy through an explicit human promote (no automated promotion path exists).
 
 Endpoints:
 
@@ -83,7 +83,7 @@ Endpoints:
 
 Module parts: jev-main.js, routes-jev.js, jev-ingest.js, jev-state.js, jev-decide.js, jev-gate.js, jev-execute.js, jev-verify.js, jev-review.js, jev-loop.js, jev-improve.js, dbx.js
 
-Bindings: DB, JEV_API_KEY, AI, DEFAPI_API_KEY, RESEND_API_KEY
+Bindings: DB, JEV_API_KEY, AI, RESEND_API_KEY
 
 Terminal states: succeeded; blocked; rejected; expired; failed; cancelled
 
@@ -103,16 +103,15 @@ Key invariants:
 Composes with:
 - Automations (propose_actions stage feeds proposals into the same gate)
 - Evolution (directive execution goes through this gate)
-- Taste Engine / Corpus Math (jev-1.13 decision model shared with the scorer and quality gates)
+- Taste Engine / Corpus Math (clef decision model shared with the scorer and quality gates)
 
-#### Policy (live jev-policy.json, version 16)
+#### Policy (live jev-policy.json, version 24)
 
-`GET /api/jev/policy` returns the stored `jev-policy.json` as-is and `GET /api/jev/policy/tools` returns its `tools` registry. Both are bearer-gated (401 without a bearer, verified live 2026-10-09). Policy changes still go only through `POST /api/jev/learnings/:id/promote`. The live policy has 9 tools:
+`GET /api/jev/policy` returns the stored `jev-policy.json` as-is and `GET /api/jev/policy/tools` returns its `tools` registry. Both are bearer-gated (401 without a bearer, verified live 2026-10-09). Policy changes still go only through `POST /api/jev/learnings/:id/promote`. The live policy has 11 tools:
 
 | Tool | Methods | Hosts | requires_approval | max_cost_usd | Notes |
 |---|---|---|---|---|---|
-| `http.fetch` | GET, POST | api.github.com, api.defapi.org | false | 0.5 | |
-| `http.post` | POST | api.github.com, api.defapi.org | true | 1 | POST only; PUT is no longer a method on this tool |
+| `http.fetch` | GET | api.github.com | false | 0.5 | GET only; no defapi host since the 2026-10-10 expunge |
 | `github.contents_put` | PUT | api.github.com | true | 0 | GitHub Contents writes; deny_branches `main`, path_prefix_allowlist `scratch/`, blob sha required on update |
 | `daytona.sandbox` | POST, DELETE | app.daytona.io, proxy.app.daytona.io | true | 0.25 | command_allowlist |
 | `searxng.dig` | GET | p01--n8n-service--mcx7zcrbvdyt.code.run | false | 0 | allowed_query_params; search dig via the n8n webhook |
@@ -228,7 +227,7 @@ Composes with:
 
 ### Corpus Math (jev-corpus)
 
-The corpus-audit math engine, parity-tested against the Python sources of record (papers/data/lean/verify_claims.py + tools/*): scores a documents x 12-NSS-axis matrix into the V2/z/verdict/dBc audit, proposes lens-format atomic candidates with paired controls, computes dry-run atom plans under the delta >= 0 invariant, classifies tautologies, and records every measurement as an idempotent run row. The structured-evidence scorer (deterministic extraction + one batched jev-1.13 call) is the low-noise grader that replaced free-prose scoring.
+The corpus-audit math engine, parity-tested against the Python sources of record (papers/data/lean/verify_claims.py + tools/*): scores a documents x 12-NSS-axis matrix into the V2/z/verdict/dBc audit, proposes lens-format atomic candidates with paired controls, computes dry-run atom plans under the delta >= 0 invariant, classifies tautologies, and records every measurement as an idempotent run row. The structured-evidence scorer (deterministic extraction + one batched clef call) is the low-noise grader that replaced free-prose scoring.
 
 Endpoints:
 
@@ -248,7 +247,7 @@ Endpoints:
 
 Module parts: jev-corpus-routes.js, jev-corpus-math.js, jev-corpus-lens.js, jev-corpus-atom.js, jev-corpus-scorer.js, jev-corpus-deps.js, fixtures__corpus-math-fixtures.mjs
 
-Bindings: DB, DEFAPI_API_KEY, JEV_API_KEY
+Bindings: DB, AI, JEV_API_KEY
 
 Key invariants:
 - Audit is idempotent per input sha256 - repeat returns the same run_id + cached:true
@@ -269,7 +268,7 @@ Composes with:
 
 ### Taste Engine (taste-v1)
 
-The nature-based taste instrument: deterministic extraction (box-counting fractal dimension D, mirror symmetry, scale coherence - fixture-parity-tested against the Python extractor source of record) plus ONE batched jev-1.13/clef call over 8 nature-law axes where every instruction carries a measured number. Includes edge-standard-v1, the standardized ink-normalized edge-map pipeline that made image-derived D comparable across sources and resolved the photo-pipeline confound. Admission stays false pending a human-rated real-photo gold set.
+The nature-based taste instrument: deterministic extraction (box-counting fractal dimension D, mirror symmetry, scale coherence - fixture-parity-tested against the Python extractor source of record) plus ONE batched clef call over 8 nature-law axes where every instruction carries a measured number. Includes edge-standard-v1, the standardized ink-normalized edge-map pipeline that made image-derived D comparable across sources and resolved the photo-pipeline confound. Admission stays false pending a human-rated real-photo gold set.
 
 Endpoints:
 
@@ -282,7 +281,7 @@ Endpoints:
 
 Module parts: jev-taste.js, jev-taste-math.js, jev-edge-standard.js, fixtures__taste-fixtures.mjs
 
-Bindings: DB, AI, DEFAPI_API_KEY, JEV_API_KEY
+Bindings: DB, AI, JEV_API_KEY
 
 Key invariants:
 - The instrument never awards itself a quality score; admitted:false stays until the gold-set gate
@@ -314,7 +313,7 @@ Endpoints:
 
 Module parts: jev-visco-math.js, jev-corpus-routes.js (visco route block)
 
-Bindings: DB, DEFAPI_API_KEY, JEV_API_KEY
+Bindings: DB, JEV_API_KEY
 
 Terminal states: snapback verdict -> gate_input halt_round | continue (verdicts only, never auto-actions)
 
@@ -601,7 +600,7 @@ Composes with:
 
 ### Public Relays (media, contact, chat, decide)
 
-Small CORS-open relay endpoints ported from the standalone relay worker into this worker for the Steady Orbit website and agent clients: text-to-speech and speech-to-text via ElevenLabs, the website contact form via Resend, site chat via Workers AI, and the typesafe jev-1.13 decision relay via DefAPI. All are rate-limited through the WEBSITE_RATE_LIMIT binding and unauthenticated apart from rate limits.
+Small CORS-open relay endpoints ported from the standalone relay worker into this worker for the Steady Orbit website and agent clients: text-to-speech and speech-to-text via ElevenLabs, the website contact form via Resend, site chat via Workers AI, and the clef decision relay (also via Workers AI). All are rate-limited through the WEBSITE_RATE_LIMIT binding and unauthenticated apart from rate limits.
 
 Endpoints:
 
@@ -618,7 +617,7 @@ Endpoints:
 
 Module parts: index.js (relay block: tts/stt/contact/decide/chat, relayRateLimited, RELAY_CORS)
 
-Bindings: ELEVENLABS_API_KEY, RESEND_API_KEY, DEFAPI_API_KEY, AI, WEBSITE_RATE_LIMIT
+Bindings: ELEVENLABS_API_KEY, RESEND_API_KEY, AI, WEBSITE_RATE_LIMIT
 
 Key invariants:
 - Per-endpoint rate limits (tts/stt 15, contact 5) via WEBSITE_RATE_LIMIT
@@ -628,7 +627,7 @@ Key invariants:
 - CORS preflight OPTIONS handled explicitly per relay endpoint
 
 Composes with:
-- Jev Orchestrator / jev-quality (the /api/decide relay exposes the same jev-1.13 decision model the gate and scorer use)
+- Jev Orchestrator / jev-quality (the /api/decide relay exposes the same clef decision model the gate and scorer use)
 - Repo Assessment (narrate/chat share the Workers AI model route)
 - Jev Orchestrator execute (resend.send actions use the same Resend credential)
 
@@ -706,7 +705,7 @@ Composes with:
 - Approver allowlist: see Jev Orchestrator key invariants. Directive decisions: see Evolution key invariants, including the known cancel default gap.
 - Degenerate scale coherence: see Taste Engine key invariants.
 - Forecast v4: see Timeseries key invariants.
-- Historical names: the Bindings lines above that list DEFAPI_API_KEY, and the jev-1.13 references, predate the 2026-10-10 expunge. DEFAPI_API_KEY was removed from deploy metadata on 2026-10-10. The live decision model is `clef` (policy `decision_model`).
+- Historical names: earlier revisions of this doc named DEFAPI_API_KEY and the jev-1.13 model; both were removed from the worker on 2026-10-10 (DefAPI connection removed 2026-10-11). The live decision model is `clef` (policy `decision_model`, version 24), called through the Workers AI `AI` binding with no external egress.
 
 ## Endpoint Inventory
 
@@ -762,7 +761,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | OPTIONS | `/api/contact` | none | CORS preflight for contact relay | No |
 | POST | `/api/contact` | none | Website contact form -> Resend email to mike@steadyorbitsystems.com; rate-limited | No |
 | OPTIONS | `/api/decide` | none | CORS preflight for decision-model relay | No |
-| GET | `/api/decide (also POST)` | none | DefAPI typesafe/jev-1.13 decision relay (clef/clef-flash via Workers AI when selected); rate-limited | No |
+| GET | `/api/decide (also POST)` | none | clef decision relay via Workers AI (clef-flash is the lighter route); rate-limited | No |
 | GET | `/api/health` | none | Worker version info + diagnostic module versions | No |
 | GET | `/api/jev/map/sos/fits` | bearer | List stored repository FIT assessments (population) | No |
 | GET | `/api/jev/map/sos/fits/:id` | bearer | One stored FIT with full fit_json and population comparison | No |
@@ -877,7 +876,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/corpus/placements` | bearer | Audit then POST vectors to the worker's own /api/jev/map (self-call); rate-limited | Partial - parity-tested vs Python sources of record |
 | GET | `/api/jev/corpus/runs` | bearer | Last 50 corpus run rows; rate-limited | No |
 | GET | `/api/jev/corpus/selftest` | bearer | All module selftests (math, atom, lens, visco, stamp + scorer-v2 extraction) with fixture parity vs Python sources; rate-limited | Yes - the parity selftest harness itself |
-| POST | `/api/jev/corpus/scorer/score` | bearer | Structured-evidence scorer v2.1: deterministic per-axis extraction + ONE batched jev-1.13 request, hysteresis flip p>=0.55/p<=0.45; rate-limited | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
+| POST | `/api/jev/corpus/scorer/score` | bearer | Structured-evidence scorer v2.1: deterministic per-axis extraction + ONE batched clef request, hysteresis flip p>=0.55/p<=0.45; rate-limited | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
 | POST | `/api/jev/corpus/scorer/matrix` | bearer | Paced batch scoring of 1..20 docs (default 4.5s spacing between docs); rate-limited | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
 | POST | `/api/jev/corpus/taste/edge-standard` | bearer | edge-standard-v1: gray_b64 in -> ink-normalized 1px contour bitmap + features (fractal D band, mirror symmetry); rate-limited | Yes - falsification-validated pipeline (4-fixture parity) |
 | GET | `/api/jev/corpus/taste/selftest` | bearer | Taste-math selftest + 6-fixture parity against the Python extractor source of record; rate-limited | Partial - jitter + calibration sweeps + gold set; no falsification corpus |
@@ -1007,7 +1006,7 @@ The 14 Lane B code-only endpoints, every one now documented in AGENT.md:
 | GET\|POST | `/api/tts` | completely undocumented | documented: ElevenLabs eleven_turbo_v2_5, 4000-char POST / 900-char GET caps, rate-limited 15/min |
 | POST | `/api/stt` | undocumented | documented: ElevenLabs scribe_v1, 10 MB upload cap (413 over), rate-limited |
 | POST | `/api/contact` | undocumented | documented: Resend send to the fixed site inbox, per-field caps, rate-limited 5/min |
-| GET\|POST | `/api/decide` | undocumented | documented: DefAPI typesafe/jev-1.13 relay (clef path via Workers AI), rate-limited |
+| GET\|POST | `/api/decide` | undocumented | documented: clef relay via Workers AI, rate-limited |
 | POST | `/api/chat` | alluded to as 'site chat', never named | documented by path; the live site pages now call /api/site-assistant |
 | POST | `/api/site-assistant` | undocumented | documented: same-origin enforced, grounded on KV llms.txt, rate-limited |
 | POST | `/api/brain/preview` | undocumented | documented: identical handler to /api/site-assistant |
@@ -1253,7 +1252,6 @@ flowchart LR
     subgraph EXT["External services"]
         Resend["Resend api.resend.com<br/>resend.send + reply webhooks"]
         Eleven["ElevenLabs api.elevenlabs.io"]
-        DefAPI["DefAPI jev-1.13<br/>decide, scorer, taste clef"]
         GH["GitHub API<br/>repo-items, worker_change commits"]
         Places["Google Places<br/>lead research"]
         NF["Northflank n8n<br/>searxng-proxy webhook"]
@@ -1262,7 +1260,7 @@ flowchart LR
     Pipe -->|"gated actions only"| Resend
     Pipe --> GH
     Tts --> Eleven
-    Tasks & Corpus & Taste --> DefAPI
+    Tasks & Corpus & Taste --> AI
     Hook -->|"reply records"| Pipe
     Autom -->|"builtins: lead_research, corpus_audit,<br/>corpus_lens, drift, tautology_gate"| Corpus
     Autom --> Places
@@ -1280,7 +1278,7 @@ flowchart LR
     class Entry entry
     class Client client
     class DB,KV,VEC,AI,RL store
-    class Resend,Eleven,DefAPI,GH,Places,NF,WAE ext
+    class Resend,Eleven,GH,Places,NF,WAE ext
     style SITE fill:#e8f0fe,stroke:#4c6ef5
     style CORE fill:#e2f6ef,stroke:#0ca678
     style JEV fill:#efeafe,stroke:#7048e8
@@ -1304,7 +1302,7 @@ Sixteen flows between capability domains, from Lane C.
 | Wayfinder Point-Map (frozen-frame geometric instrument) | Outcome Ledger (append-only pre-registration) | preview/control runs are pre-registered as pending outcome rows; with after_id the ledger recomputes observed_delta on the frozen frame via PM.explainTransition |
 | Visco Instruments (rate-dependent round gates) | Outcome Ledger (append-only pre-registration) | hysteresis closes the supersedes chains and snapback reads the predicted-vs-realized series straight from the ledger |
 | Ingestion & Embeddings (full-content chunked/v1) | Wayfinder Point-Map (frozen-frame geometric instrument) | every map/preview/control/consistency run embeds its corpus through chunked/v1 on the shared content-hash cache; Vectorize stores the document representations for /api/jev/map/vector/search |
-| Jev Orchestrator (gated task engine) | Public Relays (media, contact, chat, decide) | the execute stage performs resend.send actions with the same Resend credential, and the jev-1.13 decide model backing /api/decide is the model the understand/decide and quality stages call |
+| Jev Orchestrator (gated task engine) | Public Relays (media, contact, chat, decide) | the execute stage performs resend.send actions with the same Resend credential, and the clef decide model backing /api/decide is the model the understand/decide and quality stages call |
 | Jev Orchestrator (gated task engine) | Wayfinder Point-Map (frozen-frame geometric instrument) | handleJevRequest wires a mapHandler so orchestrator tasks can run map requests inside gated actions |
 | Platform Surface & Ops Console | Jev Orchestrator (gated task engine) | the /jev/ console (bearer JEV_API_KEY, sessionStorage) is the human surface for tasks, approvals, pause and the summary/cost rollup |
 | Platform Surface & Ops Console | Automations (versioned stage pipelines + cron) + Evolution (hourly cycle + directives) | the worker's scheduled handler dispatches runJevScheduled by cron expression: the evolution cron runs the machine cycle, other crons run the automation scheduler tick (compare-and-set on last_fired_at) |
@@ -1354,7 +1352,7 @@ Key models:
 - @cf/meta/llama-3.3-70b-instruct-fp8-fast (draft / site chat / narrate)
 - llama-3.1-8b (classify route)
 - llama-guard-3-8b (guard stage)
-- @cf/cloudflare/* decision-model route (the jev-1.13 decide call surface)
+- @cf/cloudflare/* decision-model route (the clef decide call surface)
 
 ### VEC (Vectorize)
 
@@ -1383,7 +1381,6 @@ Used by: all domains that fetch upstream.
 
 Key keys:
 - JEV_API_KEY - bearer auth on every jev route except /api/jev/health and POST /api/jev/webhooks/reply (optional ?k= shared secret); also the operator key behind DELETE /api/jev/map/maps/:id and DELETE /api/jev/map/sos/fits/:id (R2 patch)
-- DEFAPI_API_KEY - /api/decide relay, corpus scorer, taste clef calls, jev quality/decide stages
 - ELEVENLABS_API_KEY - /api/tts (eleven_turbo_v2_5) and /api/stt (scribe_v1)
 - RESEND_API_KEY - /api/contact relay, jev resend.send actions, evolution notify digests (schema {from,to,subject,html})
 - GITHUB_API_KEY - /api/jev/map/repo-items fetch, automations tool stage, repo_push directives
