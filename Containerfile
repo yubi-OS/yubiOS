@@ -4,7 +4,7 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-FROM quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45
+FROM quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45 AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -34,7 +34,6 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False instal
       pcsc-lite-ccid \
       tpm2-tools \
       tpm2-tss \
-      bootupd \
       cryptsetup \
       openssh-clients \
       openssh-server \
@@ -42,7 +41,12 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False instal
       python3-pip \
       python3-devel \
       gcc \
-      osslsigncode && \
+      osslsigncode \
+      efitools \
+      pkcs11-provider \
+      sbsigntools \
+      systemd-boot-unsigned \
+      systemd-ukify && \
     dnf clean all && \
     rm -rf \
       /run/dnf \
@@ -151,3 +155,44 @@ RUN set -- /usr/lib/modules/*/ && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \
     { ! grep -q "/vfio\.ko" /tmp/yubiOS-initramfs-listing.txt; } && \
     rm -f /tmp/yubiOS-initramfs-listing.txt
+
+# Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
+# digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
+# so two clean builds of the same sources embed the same digest.
+RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /
+
+# ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
+# efitools, pkcs11-provider, sbsigntools: owner signing tools for enroll-sb.sh
+# (PIV slot 9a db key, signing only). systemd-boot-unsigned: loader and linux
+# stub. systemd-ukify: the backend for `bootc container ukify`.
+# bootc install picks a UKI under /boot/EFI/Linux over the raw kernel
+# (crates/lib/src/kernel.rs find_kernel), so the board gets a UKI entry instead
+# of a BLS kernel entry. bootc container ukify refuses the active root
+# ("Cannot operate on active root filesystem"), so the UKI is built from a
+# read-only bind mount of the rootfs stage, as in bootc's sealed-image recipe.
+# The composefs digest is taken before the UKI and the bootloader files are
+# written. The UKI is unsigned here: the owner signs the loader and the UKI with
+# the PIV slot 9a db key on the board (enroll-sb.sh resign). sd-stub measures the
+# UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
+# checks. Secure Boot is not part of that check.
+FROM rootfs AS uki
+RUN --mount=type=bind,from=rootfs,target=/src set -- /src/usr/lib/modules/*/ && \
+    kver="$(basename "$1")" && \
+    mkdir -p /out /out-diag /tmp/ukify-rootfs && \
+    cp -a /src/. /tmp/ukify-rootfs/ && \
+    rm -rf /tmp/ukify-rootfs/boot/* && \
+    bootc container ukify --rootfs /tmp/ukify-rootfs --write-dumpfile-to /out-diag/uki-view.dump -- --output "/out/${kver}.efi" && \
+    rm -rf /tmp/ukify-rootfs
+
+FROM rootfs
+COPY --from=uki /out/ /boot/EFI/Linux/
+COPY --from=uki /out-diag/ /boot/yubios-diag/
+RUN case "$(uname -m)" in \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
