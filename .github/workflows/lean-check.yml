@@ -392,3 +392,42 @@ jobs:
 
       - name: lens-standard fixture parity (Python source of record vs JS worker port)
         run: node --test tools/lens-standard/test_parity_lens.test.js
+
+      # visco gate (T27 option 1: committed fixtures + Python source of record).
+      # verify_visco.py runs its fixture selftest (15 checks) against
+      # fixtures/visco-fixtures.json resolved relative to the tool file.
+      - name: visco-instruments fixture selftest (source of record, 15 checks)
+        run: python3 tools/visco-instruments/verify_visco.py
+
+      # forecast gate part 1 (T27 option 1). The v3 selftest prints a gate report
+      # and exits 0 regardless of gate outcomes, so the step pins the recorded
+      # honest state (G2 band-coverage ships failing, G5 unverified; see
+      # tools/forecast-standard/v3/results/VERDICT-2026-10-09.md). Update the pin
+      # deliberately when a version passes its gates.
+      - name: forecast-standard v3 selftest (pinned honest gate state)
+        run: |
+          set -euo pipefail
+          python3 tools/forecast-standard/v3/forecast_ets.py --selftest > /tmp/forecast-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/forecast-selftest.json')); expected={'ok': False, 'failing_gates': ['G2'], 'unverified_gates': ['G5']}; assert d['summary'] == expected, 'forecast gate report drifted: %s' % d['summary']; print('FORECAST_SELFTEST_OK (pinned: G2 failing, G5 unverified)')"
+
+      # forecast gate part 2: harness validate re-runs the committed v1 and v2
+      # modules over the recorded corpora and asserts the recorded hit counts
+      # reproduce (~4s locally). The harness records but does not assert, so the
+      # step asserts both reproduced flags itself.
+      - name: forecast-standard harness validate (recorded-count reproduction, v1+v2)
+        run: |
+          set -euo pipefail
+          python3 tools/forecast-standard/v3/harness_v3.py validate /tmp/forecast-validate.json \
+            --v1 tools/forecast-standard/forecast_ets.py \
+            --v2 tools/forecast-standard/v2/forecast_ets.py
+          python3 -c "import json; d=json.load(open('/tmp/forecast-validate.json')); bad=[k for k,v in d['versions'].items() if not v['reproduced']]; assert not bad, 'recorded counts not reproduced for: %s' % bad; print('FORECAST_VALIDATE_OK', {k: v['reproduced'] for k, v in d['versions'].items()})"
+
+      # Taste-math gate (BLOCKED on artifacts; T27 gate-audit.md section 4).
+      # jev-taste-math.js is committed at tools/edge-standard/ but has no committed
+      # test file and no Python source of record for the 8-axis taste math. Enable
+      # once tools/ carries the Python SoR + taste-axis fixture pack + parity test,
+      # mirroring the edge-standard pattern:
+      # - name: taste-standard selftest (8-axis source of record)
+      #   run: python3 tools/taste-standard/taste_standard.py --selftest
+      # - name: taste-standard fixture parity (Python source of record vs JS port)
+      #   run: node --test tools/taste-standard/test_parity_taste.test.js
