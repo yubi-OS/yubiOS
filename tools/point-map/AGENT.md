@@ -140,6 +140,63 @@ Approver allowlist (2026-10-11, policy v21): task approve and reject, and direct
 
 Policy v21 (live; `GET /api/jev/health` returns `policy_version: 21`): decision model `clef`. `route.dispatch.read_only_targets` is `corpus_scorer`: for that target the gate skips only the band checks. Routing band `text-no-evidence` (lane-classify, provisional) sends text with zero scorer evidence to the classify lane for review.
 
+### Close a task (POST /api/jev/tasks/:id/close)
+
+Operator close. It takes the same bearer token as the other task routes, and the token is checked before the body is read. The body must be a JSON object, so send `{}` for a plain close. `reason` is optional: a string of at most 200 characters. `actor` is optional: a non-empty string of at most 64 characters, default `operator`. A body over 8 KB is refused with 413. Close does not use the approver allowlist.
+
+```json
+{ "reason": "superseded by a newer task", "actor": "operator" }
+```
+
+A close never dispatches. It calls no execute, verify or loop code. It works on tasks in `ingested`, `understood`, `decided`, `gated` or `awaiting_approval`, and it ends the following:
+
+- every pending approval on the task is rejected, with the decision note `closed by operator`, counted as `approvals_rejected`;
+- every approved approval on the task moves to `rejected` with the same note, counted as `approvals_cancelled`, because the approval vocabulary has no `cancelled` state;
+- every action that has not dispatched (state `proposed` or `approved`) moves to `cancelled`, counted as `actions_skipped`;
+- the task moves to `cancelled`, with terminal outcome `cancelled` and terminal reason `closed by operator: <reason>` (or `closed by operator: no reason given`);
+- a `task_closed` event is appended with the actor, the reason and the counts.
+
+Each action is changed only while it is still `proposed` or `approved`, so a dispatch that starts during the close is not cancelled. If the task changes during the close, the close answers 409 `TASK_NOT_CLOSABLE`; repeat the request. The task is committed last, so a request that fails part-way leaves the task open, and the next request finishes the close.
+
+| Status | Body | When |
+|---|---|---|
+| 200 | `closed: true`, `already_closed: false`, `task`, `approvals_rejected`, `approvals_cancelled`, `actions_skipped` | the close ran now |
+| 200 | `closed: false`, `already_closed: true`, `task`, `approvals_rejected`, `approvals_cancelled`, `actions_skipped` | an operator already closed the task; the counts are any leftovers this call finished (zero if none); repeating the call is safe |
+| 400 | `INVALID_BODY` | body is empty or not a JSON object; `reason` is not a string or is over 200 characters; `actor` is not a non-empty string or is over 64 characters |
+| 401 | `UNAUTHORIZED` | missing or wrong bearer token |
+| 404 | `NOT_FOUND` | no task with that id |
+| 409 | `TASK_IN_FLIGHT`, with `state` | task is `dispatching`, `verifying` or `continued`, or one of its actions is `dispatching`; wait for it to finish, then close |
+| 409 | `TASK_TERMINAL`, with `state` | task already ended in another state, for example `failed` after a stale reset |
+| 409 | `TASK_NOT_CLOSABLE`, with `state` | task is in a state that cannot be closed, or it changed during the close |
+| 413 | `BODY_TOO_LARGE` | body is over 8 KB |
+| 500 | `INTERNAL` | close did not finish; retry the request |
+| 503 | `NOT_CONFIGURED` | the `JEV_API_KEY` binding is missing, so the token cannot be checked |
+
+Round 3: a close first runs the stale dispatch reset for its task (see below). If the reset happens during the close, the close answers 409 `TASK_TERMINAL` with `state` set to `failed`, `task_reset` set to `true`, and a note that the task was reset. The close rejects and cancels nothing in that case, so approvals that were still pending stay pending. Approve refuses them (see Approve guards).
+
+### Approve guards
+
+`POST /api/jev/approvals/:id/approve` refuses before anything is dispatched. The checks run in this order:
+
+- the approval is not `pending`. If an operator close ended it (note `closed by operator`) and the task is terminal, the answer is 409 `TASK_TERMINAL`. Otherwise it is 409 `NOT_PENDING`, with the approval status. So approving an approval that a close ended returns `TASK_TERMINAL`, not `NOT_PENDING`;
+- the task is terminal: 409 `TASK_TERMINAL`, with the task state in the message. This covers an approval still pending on a task that a close or a stale reset has ended;
+- the bound action is `cancelled`: 409 `ACTION_CANCELLED`. This check runs after the task check, so on a closed task you see `TASK_TERMINAL` first.
+
+### The dispatching state and the stale reset
+
+`dispatching` is a claim state. Before any tool is called, `dispatchAction` moves the task from `gated` to `dispatching`, and the action from `proposed` or `approved` to `dispatching`, each as a conditional write. When it returns, the task goes back to `gated` unless a stale reset has already moved it, and an action that did not finish goes back to its prior state. The state machine also allows `dispatching` to move on to `verifying`.
+
+Close treats `dispatching`, `verifying` and `continued` as in flight, so a close during a dispatch answers 409 `TASK_IN_FLIGHT`. An action in `dispatching` gets the same answer.
+
+Lands with round 3:
+
+- The sweep runs on every scheduled tick, including the `*/5` cron. The hourly tick runs it too, and a repeat run changes nothing. A close also runs it for its own task before it judges the close.
+- A task in `dispatching` with no update for 5 minutes is reset. The task moves to `failed`, with the terminal reason `dispatch_stale_reset: no result recorded within 5 minutes; outcome unknown; reconcile before any repeat`. The task is written first. Then each of its `dispatching` actions moves to `unknown`, one conditional write each. Stale actions go to `unknown`, never `failed`, because `unknown` is never retried automatically: jev-loop refuses it.
+- The reset appends a `state_change` event and a `dispatch_stale_reset` event, with actor `system:stale-dispatch-sweep` and the counts.
+- A reset is never a retry. It makes no outside call and sends nothing again. Check the outside system for whether the work happened before anyone repeats it.
+- A completion that lands before the sweep wins, and the sweep leaves that row alone.
+- A late result after a reset is never re-sent. Its write to the action fails the state check, the terminal state and the `unknown` action stay as they are, and a `late_result_after_reset` event records a summary of the result (state, provider reference, and a short status or error, never the response body).
+
 ## Automations (Jev Automations, stages + cron)
 
 Versioned defs in D1 with stage pipelines: `tool` (GET-only unless a policy tool covers the host; capped, every call audited), `llm` (interpolated prompt, JSON repair), `builtin` (pure deterministic function), `guard` (advisory safety verdict; unsafe skips propose_actions and routes to human review), `propose_actions` (proposals enter the same gate as hand-written ones). Interval automations fire on the worker cron via compare-and-set on last_fired_at (double-fire impossible). Model routes: classify = llama-3.1-8b, draft = llama-3.3-70b, guard = llama-guard-3-8b; `raw:` pins anything else. Builtins registered: `lead_research` (the refuse-to-claim lead machine), `corpus_audit`, `corpus_lens`, `corpus_drift`, `tautology_gate`.
@@ -193,6 +250,25 @@ Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_
 
 The math is a port, never a re-derivation: the system of record is `papers/data/lean/verify_claims.py` (v2_corr, curveball) plus `tools/rsi-descent`, `tools/spectral-decomposer`, `tools/spectral-defocus`, `tools/boltzmann-collapse`, `tools/tautology-discerner`. Every deploy is verified with `/selftest` before results are trusted; on any fixture mismatch the JavaScript is wrong until proven otherwise. Audit/lens results are data, never authorization: only directives through the gate act. Visco instruments (shipped 2026-10-02/03): source of record `tools/visco-instruments/` (yubiOS) + `jev-visco-math.js` worker part, fixture-parity-tested. Every `jev_corpus_runs` row carries `policy_version` (NULL = pre-stamp era, never backfilled); `jev_policy_changelog` is the wipe-proof policy history; the promote flow appends a row on every bump. Spectral/oracle/lens instruments (shipped 2026-10-06): sources of record `tools/spectral-standard` (15/15 golds, 61 anchors) and `tools/lens-standard` (75/75 PASS) on yubiOS main (merged via PR #292), worker parts `jev-spectral.js`, `jev-corpus-routes.js` (oracle) and `jev-lens.js`.
 
+### Gold oracle form (POST /api/jev/corpus/oracle)
+
+The oracle takes one of three bodies: the gray form (`gray_b64`, `width`, `height`), the bitmap form (`bitmap_b64`, `width`, `height`) or the gold form (`gold` alone). The gray and bitmap forms are unchanged.
+
+```json
+{ "gold": "gasket" }
+```
+
+The gold form takes a pinned name in place of an image. The server renders that gold mask at 512 x 512, runs it through the same edge-standard-v1 pipeline as the gray form, and returns the usual verdict with `gold` and `gold_render` (`width`, `height`, `n_droplets`) added. The measured D is in `edge_standard.D`. Each call records a run row of kind `oracle`, with the gold name in its notes.
+
+| Gold | Droplets | D |
+|---|---|---|
+| `gasket` | 366 | 1.5589 (1.5589369960067876) |
+| `tri` | 19 | 1.2636 (1.2635947654356825) |
+
+The gold render is bright ink on a dark background. Do not invert it: the inverted gasket measures D 1.0402 instead of 1.5589.
+
+A `gold` name other than `gasket` or `tri` returns 422 `INVALID_GOLD`, with the allowed names listed. Sending `gold` together with `gray_b64` or `bitmap_b64` returns 422 `INVALID_BODY`.
+
 ## Artifact routing (jev-router, shipped 2026-10-06)
 
 | Method | Path | Contract |
@@ -215,6 +291,8 @@ Every jev event lands as a datapoint in Workers Analytics Engine dataset `jev` (
 | GET /api/jev/forecast/:series?h=N | damped-trend Holt ETS v1 forecast with honest quality flags (insufficient_series n<8, low_r2); fail-closed 503 MISSING_READ_TOKEN / 422 BAD_SERIES_NAME / 502 WAE_SQL_ERROR |
 
 Forecasts advise, never authorize. Harness: pre-registered 6-gate falsification corpus; G2 (band coverage) ships FAILING honestly at 0.84 vs the pre-registered [0.88,0.98] (grid-selected residual_sd shrinks on short noisy series) - the gate was NOT moved; v2 fix (train-only residual_sd) is a future major bump. Python source of record: tools/forecast-standard/forecast_ets.py (parity max delta 0 on 4 fixtures). Deploy lessons: secret_text bindings are plain strings (not .get()); the WAE time column is `timestamp` (SELECT * schema probe) but ORDER BY requires the column in the SELECT list; curl -F=x mangles multipart metadata (CF 10021). SPEC: skills/jev-timeseries/SPEC-TIMESERIES-2026-10-08.md.
+
+G2 verdict on block 1300 to 1499: FAIL (see PREREG-v4-G2). The calibration flag stays false.
 
 ## Full-content ingestion
 
