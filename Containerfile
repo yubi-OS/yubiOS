@@ -4,11 +4,6 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-# Directory mtimes of the base image, read before any yubiOS change. The rootfs normalisation below
-# restores them so the build view matches the image as pulled (see there).
-FROM quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45 AS basedirs
-RUN find / -xdev \( -path /proc -o -path /sys -o -path /dev \) -prune -o -type d -printf '%T@ %p\n' > /basedirs.txt
-
 FROM quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45 AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
@@ -164,13 +159,8 @@ RUN set -- /usr/lib/modules/*/ && \
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
-# Base-image directories keep their base mtimes. buildkit does not write a directory-only mtime change
-# into a layer, so the touch above left the build view ahead of the image as pulled (diagnostic
-# 2026-10-17: 1724 base directories differed in mtime only). Restore them from basedirs.
-RUN --mount=type=bind,from=basedirs,source=/basedirs.txt,target=/tmp/basedirs.txt \
-    find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve -o -path /tmp/basedirs.txt \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
-    touch -h -d "@${SOURCE_DATE_EPOCH}" / && \
-    while read -r t d; do if [ -d "$d" ] && [ ! -L "$d" ]; then touch -h -d "@$t" "$d"; fi; done < /tmp/basedirs.txt
+RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /
 
 # ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
 # efitools, pkcs11-provider, sbsigntools: owner signing tools for enroll-sb.sh
