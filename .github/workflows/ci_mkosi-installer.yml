@@ -483,7 +483,7 @@ jobs:
           ls -l inst/uki/
       - name: Upload prepared uki payload
         if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true && matrix.publish == true
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # PINNED.md
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
         with:
           name: mkosi-uki-payload-${{ matrix.artifact_suffix }}
           path: inst/uki
@@ -493,7 +493,7 @@ jobs:
 
       - name: Upload installer reproducibility subject
         if: matrix.proof_variant != 'none'
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # PINNED.md
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
         with:
           name: mkosi-installer-repro-${{ matrix.proof_variant }}
           path: installer-repro
@@ -503,7 +503,7 @@ jobs:
 
       - name: Upload prepared installer payload
         if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true && matrix.publish == true
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # PINNED.md
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
         with:
           name: mkosi-installer-payload-${{ matrix.artifact_suffix }}
           path: inst/installer
@@ -544,13 +544,13 @@ jobs:
           apt-get install -y -qq --no-install-recommends python3
 
       - name: Download primary installer subject
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # PINNED.md
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
         with:
           name: mkosi-installer-repro-primary
           path: installer-repro/primary
 
       - name: Download rebuilt installer subject
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # PINNED.md
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
         with:
           name: mkosi-installer-repro-rebuild
           path: installer-repro/rebuild
@@ -564,7 +564,7 @@ jobs:
 
       - name: Retain installer reproducibility evidence
         if: always()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # PINNED.md
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
         with:
           name: reproducibility-installer-arm64
           path: repro-evidence/installer-arm64.json
@@ -619,12 +619,12 @@ jobs:
         run: scripts/lib/reproducible-build.sh . "$GITHUB_SHA" "$ARCH" "$GITHUB_ENV"
 
       - name: Download prepared installer payload
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # PINNED.md
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
         with:
           name: mkosi-installer-payload-${{ matrix.arch }}
           path: inst/installer
       - name: Download prepared uki payload
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # PINNED.md
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
         with:
           name: mkosi-uki-payload-${{ matrix.arch }}
           path: inst/uki

@@ -176,7 +176,7 @@ jobs:
 
       - name: Upload U-Boot artifacts
         if: always()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4 — see PINNED.md
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
         with:
           name: u-boot-qemu_arm64-${{ matrix.runner_name }}
           path: |

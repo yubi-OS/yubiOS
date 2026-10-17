@@ -37,10 +37,10 @@ Every workflow in `yubi-OS/*` must follow these rules from AGENTS.md:
 ```yaml
 # Commit these exact SHAs — no floating refs:
 actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd          # v6.0.2
-actions/attest@59d89421af93a897026c735860bf21b6eb4f7b26
+actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
 actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
-actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
-actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
+actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
 actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
 docker://dhi.io/debian-base@sha256:9415967aa0ed8adea8b5c048994259d1982026dca143d0303c7bbe0e11ed67d3
 docker://ghcr.io/actions/jekyll-build-pages@sha256:6791ebfd912185ed59bfb5fb102664fa872496b79f87ff8b9cfba292a7345041
@@ -111,7 +111,7 @@ jobs:
             .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: build-output
           path: dist/
@@ -481,7 +481,7 @@ jobs:
 
       - name: Upload build log
         if: always()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: build-log-${{ github.run_id }}
           path: /tmp/build.log
