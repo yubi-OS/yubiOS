@@ -209,30 +209,30 @@ jobs:
           apt-get install -y -qq --no-install-recommends \
             git curl iproute2 iptables jq nftables passwd procps python3 util-linux \
             uidmap slirp4netns fuse-overlayfs
-          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.6.0.tgz"
-          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.6.0.tgz"
-          wcurl "https://github.com/docker/buildx/releases/download/v0.35.0/buildx-v0.35.0.${{ matrix.buildx_arch }}"
+          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.1.tgz"
+          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.1.tgz"
+          wcurl "https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0.${{ matrix.buildx_arch }}"
           case "${{ matrix.docker_arch }}" in
             x86_64)
-              DOCKER_SHA512=42401384ef853dab0a1986a7990420e77d3ee2bc39e178f8817d27ba6c4403998b7aacf3c28c7172135cdeec281cd328a8f2af949b5f57db44a211a093cfd20b
-              ROOTLESS_SHA512=184b583a0f325bef12feaf1ca175ff5ea4a65a168f2136eb1daf9c2ae646eecf02134ed65766c8800bd8eb03ac4d338d1e5d700248bc33632027b5b0b52de48a
-              BUILDX_SHA512=710f4f48a101af939c4a4cace5ca93ab8c1a1a9ae244a4ef73b2a900f228614472b635bd202fae383c851686d383a37cdeddf45e6d54b36cae8458826c272262
+              DOCKER_SHA512=f508d7befbb25a9993b762d6b8b5e626d7382884c63d8d6f0db0bc8d7e27b6a7bcaac4f353e79fe2eeaef8233d817e430982138cf94e86aee2ca9ebb975d9323
+              ROOTLESS_SHA512=16ec64b59b207eb6d937b18fa8880dd1b345603f6a2b481d67f9f6fba9a00d19f1d09552fe5b4d75aa4b1e108854306c25519f1489a7a2972c7f94229805573c
+              BUILDX_SHA512=fa2a4b38d084304e3993161a7cb5beb46c38f311ca5697dc57e97bf6e4f3505e66d9b4b089faf138e499565fca83620aa0a73a571141111cbd4d1877fe0e692b
               ;;
             aarch64)
-              DOCKER_SHA512=04713ac54030bed8b2c096280d034b02f5430ed73ba8bcc4a686f7bbbf4a3444eb027847e896cd9ee91c3237dbe1c25a4cfca43d1dcd922a1a10009c960ace0b
-              ROOTLESS_SHA512=37649acdaacc597c115d2f19b71a4729a0119c6debbba4b4af18da2fd497ac28f5691df13137b7fc59903551ab0e08868f4b976a9a5704e2b7958b3b5b0cc0af
-              BUILDX_SHA512=6dc0d4ed11a7bbd8148dab8897594d7050e7f3bc43e6d130e629aa443e50266e77beed8816737e5dc34b7d43617e7a4eef8121561042ef9a87479aea14383058
+              DOCKER_SHA512=f1dbaee45f65122a3edbf59f8f9e7ea77212a300cfabdf54beeb5a115b18536e7d846a0a0b15adffa1e5fb56a9bc7d82fba350ef662c448935d372c98996a34e
+              ROOTLESS_SHA512=20c59b7b4d680c0cd811fb17c138e5fea4cbac0528837fd9c81a8316cb151338ef8cbf5c55697228b8b32aea81f05e561693525a0cb51c8696889f011e21a07c
+              BUILDX_SHA512=ce6749dafc2f662a4fc12857803250608e5b911f69c94f8fb93c55c7a334090527ecf0867476d252a22d31cd2e0af9ca2e4a478e49ea9b14c232cd3138922183
               ;;
             *)
               echo "Unsupported Docker artifact architecture: ${{ matrix.docker_arch }}" >&2
               exit 1
               ;;
           esac
-          printf '%s  %s\n' "$DOCKER_SHA512" docker-29.6.0.tgz | sha512sum --check --strict
-          printf '%s  %s\n' "$ROOTLESS_SHA512" docker-rootless-extras-29.6.0.tgz | sha512sum --check --strict
-          printf '%s  %s\n' "$BUILDX_SHA512" "buildx-v0.35.0.${{ matrix.buildx_arch }}" | sha512sum --check --strict
-          tar xzf docker-29.6.0.tgz
-          tar xzf docker-rootless-extras-29.6.0.tgz
+          printf '%s  %s\n' "$DOCKER_SHA512" docker-29.9.1.tgz | sha512sum --check --strict
+          printf '%s  %s\n' "$ROOTLESS_SHA512" docker-rootless-extras-29.9.1.tgz | sha512sum --check --strict
+          printf '%s  %s\n' "$BUILDX_SHA512" "buildx-v0.38.0.${{ matrix.buildx_arch }}" | sha512sum --check --strict
+          tar xzf docker-29.9.1.tgz
+          tar xzf docker-rootless-extras-29.9.1.tgz
           DOCKER_TOOLS_DIR="${RUNNER_TEMP}/docker-tools"
           ROOTLESS_USER=docker-rootless
           ROOTLESS_RUNTIME_DIR=/run/docker-rootless
@@ -242,7 +242,7 @@ jobs:
           install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
-          install -m 0755 "buildx-v0.35.0.${{ matrix.buildx_arch }}" "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
+          install -m 0755 "buildx-v0.38.0.${{ matrix.buildx_arch }}" "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
           useradd --create-home --shell /bin/sh "$ROOTLESS_USER"
           printf '%s\n' "${ROOTLESS_USER}:100000:65536" > /etc/subuid
           printf '%s\n' "${ROOTLESS_USER}:100000:65536" > /etc/subgid
@@ -366,14 +366,14 @@ jobs:
           apt-get install -y -qq --no-install-recommends \
             git curl iproute2 iptables jq nftables passwd procps util-linux \
             uidmap slirp4netns fuse-overlayfs
-          wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-29.6.0.tgz"
-          wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.6.0.tgz"
-          wcurl "https://github.com/docker/buildx/releases/download/v0.35.0/buildx-v0.35.0.linux-amd64"
-          printf '%s  %s\n' '42401384ef853dab0a1986a7990420e77d3ee2bc39e178f8817d27ba6c4403998b7aacf3c28c7172135cdeec281cd328a8f2af949b5f57db44a211a093cfd20b' docker-29.6.0.tgz | sha512sum --check --strict
-          printf '%s  %s\n' '184b583a0f325bef12feaf1ca175ff5ea4a65a168f2136eb1daf9c2ae646eecf02134ed65766c8800bd8eb03ac4d338d1e5d700248bc33632027b5b0b52de48a' docker-rootless-extras-29.6.0.tgz | sha512sum --check --strict
-          printf '%s  %s\n' '710f4f48a101af939c4a4cace5ca93ab8c1a1a9ae244a4ef73b2a900f228614472b635bd202fae383c851686d383a37cdeddf45e6d54b36cae8458826c272262' buildx-v0.35.0.linux-amd64 | sha512sum --check --strict
-          tar xzf docker-29.6.0.tgz
-          tar xzf docker-rootless-extras-29.6.0.tgz
+          wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-29.9.1.tgz"
+          wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.9.1.tgz"
+          wcurl "https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0.linux-amd64"
+          printf '%s  %s\n' 'f508d7befbb25a9993b762d6b8b5e626d7382884c63d8d6f0db0bc8d7e27b6a7bcaac4f353e79fe2eeaef8233d817e430982138cf94e86aee2ca9ebb975d9323' docker-29.9.1.tgz | sha512sum --check --strict
+          printf '%s  %s\n' '16ec64b59b207eb6d937b18fa8880dd1b345603f6a2b481d67f9f6fba9a00d19f1d09552fe5b4d75aa4b1e108854306c25519f1489a7a2972c7f94229805573c' docker-rootless-extras-29.9.1.tgz | sha512sum --check --strict
+          printf '%s  %s\n' 'fa2a4b38d084304e3993161a7cb5beb46c38f311ca5697dc57e97bf6e4f3505e66d9b4b089faf138e499565fca83620aa0a73a571141111cbd4d1877fe0e692b' buildx-v0.38.0.linux-amd64 | sha512sum --check --strict
+          tar xzf docker-29.9.1.tgz
+          tar xzf docker-rootless-extras-29.9.1.tgz
           DOCKER_TOOLS_DIR="${RUNNER_TEMP}/docker-tools"
           ROOTLESS_USER=docker-rootless
           ROOTLESS_RUNTIME_DIR=/run/docker-rootless
@@ -383,7 +383,7 @@ jobs:
           install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
-          install -m 0755 buildx-v0.35.0.linux-amd64 "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
+          install -m 0755 buildx-v0.38.0.linux-amd64 "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
           useradd --create-home --shell /bin/sh "$ROOTLESS_USER"
           printf '%s\n' "${ROOTLESS_USER}:100000:65536" > /etc/subuid
           printf '%s\n' "${ROOTLESS_USER}:100000:65536" > /etc/subgid
@@ -447,10 +447,10 @@ jobs:
       - name: Verify manifest list
         run: docker -H unix:///run/docker-rootless/docker.sock buildx imagetools inspect "0mniteck/yubios:${{ github.sha }}"
 
-      - name: Install cosign v3.1.2
+      - name: Install cosign v3.1.3
         run: |
-          wcurl "https://github.com/sigstore/cosign/releases/download/v3.1.2/cosign-linux-amd64"
-          COSIGN_SHA512=01174ede4958413aca502e7eafdff34a5a7fab39c25af66b84c24b98e354e5cf2631bf2c07ecdd8c684dfab843f9694237606706eeafc20ae30ed5ed831f1d60
+          wcurl "https://github.com/sigstore/cosign/releases/download/v3.1.3/cosign-linux-amd64"
+          COSIGN_SHA512=299a32c20b9a6ae981e5decd5a3d91b0f1dfc03c6f38e90f0adfa92b993bfd38faecdd99d80e749b8b9f34e4516c09928cbe785ad6c150db8f3a6a4a84ff5e53
           printf '%s  %s\n' "$COSIGN_SHA512" cosign-linux-amd64 | sha512sum --check --strict
           install -D -m 0755 cosign-linux-amd64 /usr/local/bin/cosign
 
@@ -496,10 +496,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
-      - name: Install cosign v3.1.2
+      - name: Install cosign v3.1.3
         run: |
-          curl --fail --silent --show-error --location --output cosign-linux-amd64 "https://github.com/sigstore/cosign/releases/download/v3.1.2/cosign-linux-amd64"
-          COSIGN_SHA512=01174ede4958413aca502e7eafdff34a5a7fab39c25af66b84c24b98e354e5cf2631bf2c07ecdd8c684dfab843f9694237606706eeafc20ae30ed5ed831f1d60
+          curl --fail --silent --show-error --location --output cosign-linux-amd64 "https://github.com/sigstore/cosign/releases/download/v3.1.3/cosign-linux-amd64"
+          COSIGN_SHA512=299a32c20b9a6ae981e5decd5a3d91b0f1dfc03c6f38e90f0adfa92b993bfd38faecdd99d80e749b8b9f34e4516c09928cbe785ad6c150db8f3a6a4a84ff5e53
           printf '%s  %s\n' "$COSIGN_SHA512" cosign-linux-amd64 | sha512sum --check --strict
           install -D -m 0755 cosign-linux-amd64 /usr/local/bin/cosign
       - name: Install jq for attestation predicate inspection
