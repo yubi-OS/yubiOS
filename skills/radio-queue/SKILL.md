@@ -248,6 +248,29 @@ All scripts are pure bash + standard GNU userland (no Python deps on the device 
 **In-repo touchpoints** — sections this skill owns or extends: Why this exists, Architecture, Quick start (one-shot deploy), Recipes.
 
 **Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
+## Reference acquisition from YouTube on rock1
+
+Fetching reference clips for audio work hit two walls. The procedure below works around both.
+
+- The sandbox is blocked by YouTube. Most IDs fail extraction with "Sign in to confirm you're not a bot." Do all YouTube fetches on rock1.
+- The system yt-dlp on rock1 (2026.07.04) could read metadata, but downloads returned HTTP 403.
+
+What worked:
+
+1. Fetch the aarch64 standalone build into a scratch folder, not over the system binary: `https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux_aarch64`. It is about 40 MB; the build used was 2026.08.19. The generic `yt-dlp_linux` is x86_64 and fails with "Exec format error" on this box.
+2. Use the default player client with `-f "bestaudio/18"`. Leave `--extractor-args` off. The default client worked on this IP.
+3. Do not use `--download-sections`. With ffmpeg it exited with code 8 on rock1, and some IDs still returned 403. Download the full bestaudio, then trim with ffmpeg:
+   `ffmpeg -ss 60 -t 10 -i raw.m4a -ac 1 -ar 22050 -b:a 48k clip.mp3`
+   A 10 second mono 48 kbps MP3 is about 60 KB, so one base64 bridge transfer carries a clip. Check sha256 on both ends.
+4. Delete raw downloads after trimming. Rock1's root filesystem is small, and a full root filled up on 2026-10-06.
+
+Playlist index parsing:
+
+- A playlist file can list a title line followed by a URL line. Pairing the lines by position shifted IDs and produced duplicates. Parse the title lines and the URL lines separately, then match them by the track index.
+- In one SAMPLMAN run, one track returned 403 on download. Re-run the URL probe, and if it still fails, pick another index from the same playlist.
+
+The radio daemon and queue format are unchanged by this section.
+
 ## Guidelines
 
 1. `scripts/examples/playlist-classic-rock.md` — sample classic-rock URLs to seed a new queue (Don't Stop Me Now ID was wrong, fixed 2026-08-05 — `HgzGwKwLmgQ` → `HgzGwKwLmgM`)
