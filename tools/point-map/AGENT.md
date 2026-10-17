@@ -138,7 +138,7 @@ The same worker also serves the Jev v2 gated-approval orchestration API: ops con
 
 Approver allowlist (2026-10-11, policy v21): task approve and reject, and directive approve, reject and cancel, accept only actors on the policy `approvers` list. Policy v21 has no `approvers` field, so the default applies: `jenny` and `ermine` for task and directive approve and reject, and `jenny` only for directive cancel (a known gap; adding `approvers` to the policy lets other delegates cancel). A non-listed actor gets 403 `APPROVER_NOT_ALLOWED`. Task cancel is not behind the allowlist.
 
-Policy v21 (live; `GET /api/jev/health` returns `policy_version: 21`): decision model `clef`. `route.dispatch.read_only_targets` is `corpus_scorer`: for that target the gate skips only the band checks. Routing band `text-no-evidence` (lane-classify, provisional) sends text with zero scorer evidence to the classify lane for review.
+Policy v24 (live; `GET /api/jev/health` returns `policy_version: 24`; v24 removed the hierarchy-spectral band and the spectral.d_w clause from hierarchy-confirmed): decision model `clef`. `route.dispatch.read_only_targets` is `corpus_scorer`: for that target the gate skips only the band checks. Routing band `text-no-evidence` (lane-classify, provisional) sends text with zero scorer evidence to the classify lane for review.
 
 ### Close a task (POST /api/jev/tasks/:id/close)
 
