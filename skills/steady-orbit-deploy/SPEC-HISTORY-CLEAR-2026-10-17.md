@@ -65,3 +65,14 @@ A "History" subsection below the Pause controls. Sub text: "Clears task, event, 
 ## Live checks allowed during the build
 
 Acceptance 1 to 4 only. No live clear.
+
+
+## Amendment 1 (2026-10-17): active learnings are permanent
+
+H5 is amended. The clear deletes every row of jev_learnings whose status is not 'active':
+
+    DELETE FROM jev_learnings WHERE status NOT IN ('active')
+
+Active learnings are promoted policy rows and the clear never removes them. The backup still holds every row, active learnings included, so the sha256 covers the full table and the backup counts are full row counts. The console clear dialog shows learnings as "<n> rows, cleared; <m> active kept". All other cleared tables keep the plain DELETE FROM <table> statement.
+
+Verification: history-test2 suite 110/110 green against the amended module (node --test). Live deploy etag 2269e01da3affb7a6f7b8d83a5cbce65db5fd23f5bfbfd65123506028b101215 (63 parts, 15 bindings, schedules unchanged, health policy 24). Console KV jev-index.html patched to sha 57ad10bf0933d7760593 (served bytes verified). Pre-clear backup sha256 339c4183906812e6c6240a4eec5ab505932c44e760f710ca36dde3a94d4689bb.
