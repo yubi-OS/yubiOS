@@ -200,6 +200,38 @@ $: sound("[~ sd ~ sd]")
 - If a sound is silent, try a different sample number (`name:1`) or check the name exists (`bd sd rim hh oh lt mt ht rd cr` for drums; unpitched: `insect wind jazz metal east crow casio space numbers`).
 - Use the punchcard/pianoroll visualization in the REPL to see where events land.
 
+## Offline rendering to WAV
+
+`@strudel/web` 1.3.0 can render a pattern with no live audio device. The boot-sound iterations (v2 to v5) were measured this way. Renders are repeatable except for the noise sources, covered below.
+
+- `renderPatternAudio(pattern, cps, begin, end, sampleRate, maxPolyphony, multiChannelOrbits, downloadName)` returns nothing. It renders through an OfflineAudioContext and triggers a WAV download named `downloadName`. Capture the file by pointing the browser download directory at a scratch folder (CDP `Browser.setDownloadBehavior`), then poll that folder.
+- Tempo: `cps` is cycles per second, so `setcpm(60)` in the score is `cps = 1`. `begin` and `end` are in cycles. A 10 second render at one cycle per second uses `end = 10`.
+- The built-in export is 16-bit at the sample rate you pass. The shipped boot-sound masters were 24-bit at 192 kHz. They came from a raw float capture of the offline buffer, with TPDF dither applied at encode time. Chrome accepted a 192 kHz offline context even though the spec range is 96 kHz. A fresh 44.1 kHz render is not sample-identical to a master: correlation was about 0.84 to 0.86, and RMS read about 2 dB hotter.
+
+Harness that worked:
+
+1. Create a job folder. Install `@strudel/web@1.3.0` with `npm install --no-bin-links`, started under `setsid nohup`. A backgrounded npm inside a subshell died when its bash call ended.
+2. Entry file: `import * as strudel from '@strudel/web'; window.SR = strudel;`. Bundle it to an IIFE with esbuild from the shared cache.
+3. Page: a local html file that loads the bundle. Launch `chrome-headless-shell` through puppeteer-core with `executablePath` set to `/usr/local/bin/chrome-headless-shell` and the args `--no-sandbox --autoplay-policy=no-user-gesture-required --allow-file-access-from-files`.
+4. In the page: `await SR.initStrudel()`, then `const r = await SR.evaluate(code, false)`, then `await SR.renderPatternAudio(r.pattern, 1, 0, seconds, sampleRate, undefined, undefined, 'name.wav')`.
+
+Noise is not repeatable across renders. The `pink`, `white` and `brown` sources run in AudioWorklets with their own random state. Seeding the page's `Math.random` did not make two renders match, and the maximum sample difference was 0.017. Measure each candidate on at least two renders and report the spread, not a single number.
+
+Window edges: anything that lands after `end` is cut. A cadence that landed at 10 seconds did not read as a resolution to listeners. Land resolutions well inside the window.
+
+Patterns that worked in the boot-sound iterations:
+
+- Stereo motion: `.pan(sine.slow(4).range(.2,.8))`.
+- Swells without extra voices: per-cycle values in `<...>`, for example `.lpf("<800 2400 800>")`.
+- Noise beds: `s("pink")` through `.hpf(...)` with a slow gain. Noise ticks: `.decay(...).sustain(0)`.
+- `.vib(5).vibmod(.15)` ran without error. Its effect on the measured features was small.
+
+Listening lessons from the v2 to v5 ratings:
+
+- A minor key read as ominous. An octave-up shimmer read as cold.
+- Trimming the strike to fit a measured dynamic range dropped the arrival rating from 8 to 3. Keep the attack and look for the range somewhere else.
+- Contrast (a breath, then a return) read as dynamism more than a larger measured swing did.
+
 ## Guidelines (checklist)
 
 - Default tempo math: cycle = 2s; `setcpm(bpm/4)` for quarter-note-based bpm.
