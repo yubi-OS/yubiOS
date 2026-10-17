@@ -3,13 +3,13 @@
 > Generated 2026-10-05. Refreshed 2026-10-05 after discrepancy resolution. The live
 > worker (steady-orbit.systems-a.workers.dev) serves all endpoints listed here.
 > AGENT.md is the operational contract; this document is the architectural reference.
-> Updated 2026-10-11 for the patched15 jev build (worker etag 7cce09ac, policy v21). The deployed source is not kept in this repo.
+> Updated 2026-10-16 for the wave-2 build (worker etag b1b71b39, policy v24). The deployed source is not kept in this repo.
 
 Assembled from five parallel lanes:
 
 | Lane | Deliverable | Headline numbers |
 |---|---|---|
-| A | Endpoint inventory from worker code | 121 route rows, 7 module parts (2026-10-05 lane count; live bundle has 57 module parts on 2026-10-09) |
+| A | Endpoint inventory from worker code | 121 route rows, 7 module parts (2026-10-05 lane count; live bundle has 61 module parts on 2026-10-16) |
 | B | AGENT.md cross-reference | 85 documented, 14 code-only, 0 doc-only, 12 discrepancies |
 | C | Capability map | 13 domains, 97 endpoint assignments, 16 cross-domain flows, 7 resources |
 | D | Lean verification map | 12 Lean files, 15 endpoint-to-Lean mappings, 5 CI jobs |
@@ -363,7 +363,7 @@ Key invariants:
 
 Composes with:
 - Taste Engine (edge-standard D is an oracle input)
-- Hierarchy Router (D + d_w are the band features)
+- Hierarchy Router (edge-standard D and the traced droplet count are the band features; the centroid walk d_w is diagnostic only since policy v24)
 - Falsification corpus (gold families with exact closed-form d_f / d_w)
 
 ### Lens Standard (corrected-hierarchy)
@@ -821,7 +821,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/api/jev/learnings` | bearer | Learning proposal ledger list; rate-limited | No |
 | POST | `/api/jev/learnings` | bearer | Propose a learning; rate-limited | No |
 | POST | `/api/jev/learnings/:id/promote` | bearer | Human promotion: bumps policy version (new_policy optional - falls back to current doc version bump), expires affected approvals, appends policy changelog row; rate-limited | No |
-| GET | `/api/jev/selftest` † | bearer | Orchestrator lifecycle selftest: 26 in-process checks (ingest validation, gate decisions, approval binding + expiry-on-policy-change, dropped-approvals-adapter trap, verify/terminal mapping, six terminal states distinct) against a memory driver - zero D1 writes, zero model calls | Yes - the selftest harness itself |
+| GET | `/api/jev/selftest` † | bearer | Orchestrator lifecycle selftest: 27 in-process checks (schema_bootstrap + 26 lifecycle checks) (ingest validation, gate decisions, approval binding + expiry-on-policy-change, dropped-approvals-adapter trap, verify/terminal mapping, six terminal states distinct) against a memory driver - zero D1 writes, zero model calls | Yes - the selftest harness itself |
 | GET | `/api/jev/selftest/ledger` † | bearer | Outcomes ledger integrity selftest: supersedes-chain fixtures through the real consolidateLedgerChains + read-only parse of the real ledger (SELECT-only) | Yes - the selftest harness itself |
 
 routes-jev.js also delegates `/api/jev/route*` to jev-router.js (4 routes, own table
@@ -876,7 +876,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/corpus/classify` | bearer | Tautology discerner (parity with tools/tautology-discerner); rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/placements` | bearer | Audit then POST vectors to the worker's own /api/jev/map (self-call); rate-limited | Partial - parity-tested vs Python sources of record |
 | GET | `/api/jev/corpus/runs` | bearer | Last 50 corpus run rows; rate-limited | No |
-| GET | `/api/jev/corpus/selftest` | bearer | All module selftests (math, atom, lens + scorer-v2 extraction) with fixture parity vs Python sources; rate-limited | Yes - the parity selftest harness itself |
+| GET | `/api/jev/corpus/selftest` | bearer | All module selftests (math, atom, lens, visco, stamp + scorer-v2 extraction) with fixture parity vs Python sources; rate-limited | Yes - the parity selftest harness itself |
 | POST | `/api/jev/corpus/scorer/score` | bearer | Structured-evidence scorer v2.1: deterministic per-axis extraction + ONE batched jev-1.13 request, hysteresis flip p>=0.55/p<=0.45; rate-limited | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
 | POST | `/api/jev/corpus/scorer/matrix` | bearer | Paced batch scoring of 1..20 docs (default 4.5s spacing between docs); rate-limited | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
 | POST | `/api/jev/corpus/taste/edge-standard` | bearer | edge-standard-v1: gray_b64 in -> ink-normalized 1px contour bitmap + features (fractal D band, mirror symmetry); rate-limited | Yes - falsification-validated pipeline (4-fixture parity) |
@@ -913,7 +913,7 @@ Parity source of record: tools/lens-standard (on main via PR #292, merged 2026-1
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---|
-| POST | `/api/jev/route` | bearer | Route an artifact: measure (edge-standard D, centroid walk d_w, lens features) -> select band from policy routing.bands -> gated dispatch to the band target; fail-closed on no band (default blocked); deterministic lane-correct correction inline with depth cap 1 and the convergence gate; multimodal never auto-dispatched | Partial - e2e routing corpus 11/12 band + gate outcomes incl. the convergence-gate negative (PR #297); F1: GET /bands drops the policy all-clause arrays |
+| POST | `/api/jev/route` | bearer | Route an artifact: measure (edge-standard D, centroid walk d_w as diagnostic only since policy v24, lens features) -> select band from policy routing.bands -> gated dispatch to the band target; fail-closed on no band (default blocked); deterministic lane-correct correction inline with depth cap 1 and the convergence gate; multimodal never auto-dispatched | Partial - e2e routing corpus 11/12 band + gate outcomes incl. the convergence-gate negative (PR #297); F1: GET /bands drops the policy all-clause arrays |
 | GET | `/api/jev/route/bands` | bearer | Active band table from policy (modality, feature clauses, target, calibration status); default_on_no_band = blocked | No |
 | POST | `/api/jev/route/selftest` | bearer | Router selftest (POST, not GET): modality precedence, band edge semantics, pair-band clauses, fail-closed defaults | No |
 | GET | `/api/jev/route/runs` | bearer | Recent route run rows with measurement, band selection and gate verdict | No |
@@ -995,7 +995,7 @@ hierarchy oracle (POST /api/jev/corpus/oracle) and the lens standard (POST
 return their documented shape-validation 422s, /api/jev/route/bands serves the
 policy v12 band table and /api/jev/route/runs serves real run rows. Per the R3
 metric these 10 are code-only until AGENT.md (KV + git mirror) gains matching rows;
-the worker bundle was 51 module parts at this refresh (was 42 at R3); the live bundle has 57 module parts as of 2026-10-09.
+the worker bundle was 51 module parts at this refresh (was 42 at R3); the live bundle has 61 module parts as of 2026-10-16 (wave-2 deploy).
 
 ### Previously flagged, now resolved
 
@@ -1090,7 +1090,7 @@ Tool selftests + fixture parity (verify-tools job)
         |
         v
 Worker endpoint selftests
-  GET /api/jev/corpus/selftest (math, atom, lens + scorer-v2 extraction)
+  GET /api/jev/corpus/selftest (math, atom, lens, visco, stamp + scorer-v2 extraction)
   GET /api/jev/corpus/taste/selftest (taste-math + 6-fixture parity)
   GET /api/jev/corpus/spectral/selftest (9 checks: parity + golds + null collapse)
   GET /api/jev/corpus/lens/selftest (fixture warp + estimate parity, thresholds, idempotence)
