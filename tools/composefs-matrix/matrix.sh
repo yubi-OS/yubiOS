@@ -11,6 +11,13 @@ UKI_STAGE=f03d2f8d4d0ee09f61a934ea5112930d5a1b20bdef3833cfe085a9b0f4720e8025b094
 REF_MTIME=1792321520 # final image /boot mtime
 SDE=1792321149       # SOURCE_DATE_EPOCH of that build
 VARIANTS=(V00 V01 V02 V03 V04 V05 V06 V07 V08 V09 V10 V11 V12 V13 V14)
+# C01 is a known-answer control: fa02a222 image, no transformation, value measured on rock1.
+CTRL_IMAGE=docker.io/0mniteck/yubios@sha256:fa02a22209108dec899281a7fff43599600564b1f05ea3e703e16714843f3ee7
+CTRL_EXPECTED=a3156f146d291ec7f087d849fdeca1328067f73b243a0cc6502576bcd1427ead93458e6bdd6412fa76a2c94cfdb812ea9af56580b67053d21a5940ee1e853d25
+CONTROLS=(C01)
+ROWS=("${VARIANTS[@]}" "${CONTROLS[@]}")
+declare -A ROW_IMAGE=([C01]="$CTRL_IMAGE")
+declare -A ROW_EXPECT=([C01]="$CTRL_EXPECTED")
 EMPTY='find /boot -mindepth 1 -maxdepth 1 -exec rm -rf {} +'
 RMEFI='rm -rf /boot/EFI /boot/yubios-diag'
 T_SDE="touch -h -d @$SDE /boot"
@@ -21,6 +28,7 @@ declare -A APPLY=(
   [V05]="$RMEFI; $T_SDE" [V06]="$RMEFI; $T_REF" [V07]="$T_SDE" [V08]="$T_REF" [V09]="$T_0"
   [V10]="$EMPTY; $T_0" [V11]='rm -rf /boot/EFI/Linux' [V12]='rm -rf /boot/EFI/systemd /boot/EFI/BOOT'
   [V13]="touch -h -d @$SDE /boot/EFI" [V14]="$T_SDE; touch -h -d @$SDE /boot/EFI"
+  [C01]=':'
 )
 declare -A DESC=(
   [V00]="baseline, untouched"
@@ -38,6 +46,7 @@ declare -A DESC=(
   [V12]="rm boot/EFI/systemd + boot/EFI/BOOT only"
   [V13]="V00 + boot/EFI mtime=SDE"
   [V14]="V00 + boot mtime=SDE and boot/EFI mtime=SDE"
+  [C01]="CONTROL fa02a222 image, no change (V00 style); expected a3156f14"
 )
 VIEW_BIND='mount --bind / /tmp && /usr/bin/bootc container compute-composefs-digest /tmp'
 VIEW_FB='mkdir -p /tmp/rootview && mount --bind / /tmp/rootview && /usr/bin/bootc container compute-composefs-digest /tmp/rootview'
@@ -54,15 +63,16 @@ probe() {
 }
 run_one() {
   local id=$1 out="" rc=null mi=false ms=false mt=null dig=null err="" toks=() cmd
+  local img=${ROW_IMAGE[$id]:-$IMAGE} exp=${ROW_EXPECT[$id]:-$INSTALL_EXPECTED}
   cmd="${APPLY[$id]}; $VIEW; echo RC=\$?; echo MTIME=\$(stat -c %Y /boot)"
-  out=$(docker run --rm --privileged --entrypoint /bin/bash "$IMAGE" -c "$cmd" 2>&1) || true
+  out=$(docker run --rm --privileged --entrypoint /bin/bash "$img" -c "$cmd" 2>&1) || true
   printf '%s\n' "$out" >"$OUT/logs/$id.log"
   rc=$(sed -n 's/^RC=//p' <<<"$out" | tail -n1); rc=${rc:-null}
   mt=$(sed -n 's/^MTIME=//p' <<<"$out" | tail -n1); mt=${mt:-null}
   read -ra toks <<<"$(grep -Eo '\b[0-9a-f]{128}\b' <<<"$out" || true)" || true
   if [ "${#toks[@]}" -eq 1 ]; then
     dig=${toks[0]}
-    if [ "$dig" = "$INSTALL_EXPECTED" ]; then mi=true; fi
+    if [ "$dig" = "$exp" ]; then mi=true; fi
     if [ "$dig" = "$UKI_STAGE" ]; then ms=true; fi
   else
     err="ERROR: expected exactly one 128-hex token; raw: $(tr '\n\t|' '   ' <<<"$out" | cut -c1-500)"
@@ -73,6 +83,7 @@ mkdir -p -- "$OUT"
 rm -rf -- "$OUT/results"
 mkdir -p -- "$OUT/results" "$OUT/logs"
 docker pull "$IMAGE" >"$OUT/logs/pull.log" 2>&1
+docker pull "$CTRL_IMAGE" >"$OUT/logs/pull-control.log" 2>&1
 bl=$(probe)
 printf '%s\n' "$bl" >"$OUT/logs/baseline-probe.log"
 METHOD=$(sed -n 's/^METHOD=//p' <<<"$bl" | tail -n1)
@@ -91,22 +102,23 @@ if [ "$b_boot" = "$REF_MTIME" ]; then boot_is_ref=true; fi
 printf '{"image":"%s","method":"%s","bootc":"%s","boot_mtime":%s,"boot_mtime_is_ref":%s,"efi_mtime":%s,"children":[%s],"ref_boot_mtime":%s,"source_date_epoch":%s}\n' \
   "$(jesc "$IMAGE")" "$METHOD" "$bootc" "$b_boot" "$boot_is_ref" "$b_efi" "$kids" "$REF_MTIME" "$SDE" >"$OUT/baseline.json"
 running=0
-for V in "${VARIANTS[@]}"; do
+for V in "${ROWS[@]}"; do
   if [ "$running" -ge 3 ]; then wait -n || true; running=$((running - 1)); fi
   run_one "$V" >"$OUT/logs/$V.job" 2>&1 &
   running=$((running + 1))
 done
 wait || true
 : >"$OUT/results.jsonl"
-v00_ok=false; inst=(); stg=(); errs=()
+v00_ok=false; ctrl_ok=false; inst=(); stg=(); errs=()
 {
   echo "# composefs digest matrix (in-container, no export)"; echo
   echo "- image: \`$IMAGE\`"
+  echo "- control C01 image: \`$CTRL_IMAGE\`"
   echo "- in-container root view: \`$METHOD\`; baseline /boot mtime: \`$b_boot\`"
   echo "- INSTALL_EXPECTED: \`${INSTALL_EXPECTED:0:16}\`, UKI_STAGE: \`${UKI_STAGE:0:16}\`"; echo
   echo "| id | digest[:16] | =INSTALL | =UKI_STAGE | boot mtime in ctr | description |"
   echo "|---|---|---|---|---|---|"
-  for V in "${VARIANTS[@]}"; do
+  for V in "${ROWS[@]}"; do
     f=$OUT/results/$V.tsv
     if [ ! -s "$f" ]; then echo "$V|${DESC[$V]}|null|-1|false|false|null|ERROR: no result; see logs/$V.log" >"$f"; fi
     IFS='|' read -r id desc dig rc mi ms mt err <"$f" || true
@@ -118,9 +130,13 @@ v00_ok=false; inst=(); stg=(); errs=()
     s=ERROR
     if [ "$dig" != null ]; then s=${dig:0:16}; else errs+=("$id"); fi
     echo "| $id | \`$s\` | $mi | $ms | $mt | $desc |"
-    if [ "$mi" = true ]; then inst+=("$id"); fi
-    if [ "$ms" = true ]; then stg+=("$id"); fi
-    if [ "$id" = V00 ] && [ "$mi" = true ]; then v00_ok=true; fi
+    if [ "$id" = C01 ]; then
+      if [ "$mi" = true ]; then ctrl_ok=true; fi
+    else
+      if [ "$mi" = true ]; then inst+=("$id"); fi
+      if [ "$ms" = true ]; then stg+=("$id"); fi
+      if [ "$id" = V00 ] && [ "$mi" = true ]; then v00_ok=true; fi
+    fi
   done
   echo; echo "## Decision"
   echo "- equal INSTALL_EXPECTED: ${inst[*]:-none}"
@@ -128,8 +144,11 @@ v00_ok=false; inst=(); stg=(); errs=()
   echo "- no digest (ERROR): ${errs[*]:-none}"
   if [ "$v00_ok" = true ]; then echo "- V00 == INSTALL_EXPECTED: yes (baseline valid)"
   else echo "- V00 == INSTALL_EXPECTED: no -> INVALID_BASELINE"; fi
+  if [ "$ctrl_ok" = true ]; then echo "- CONTROL C01 matches ${CTRL_EXPECTED:0:8}: yes"; echo "- METHOD VALID: yes"
+  else echo "- CONTROL C01 matches ${CTRL_EXPECTED:0:8}: no"; echo "- METHOD VALID: no"; fi
 } >"$OUT/summary.md"
 cat "$OUT/summary.md"
 if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then cat "$OUT/summary.md" >>"$GITHUB_STEP_SUMMARY"; fi
 rm -rf -- "$OUT/results"
+if [ "$ctrl_ok" != true ]; then echo "CONTROL_FAILED: C01 digest != ${CTRL_EXPECTED:0:16}; method invalid"; exit 4; fi
 if [ "$v00_ok" != true ]; then echo "INVALID_BASELINE: V00 digest != INSTALL_EXPECTED"; exit 3; fi
