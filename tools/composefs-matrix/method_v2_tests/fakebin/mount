@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Test stub for mount. Logs argv; overlay mounts succeed unless the target matches FAKE_OVERLAY_FAIL_RE.
+printf 'mount %s\n' "$*" >> "${FAKE_LOG:-/dev/null}"
+case "$*" in
+  *"-t overlay"*)
+    if [ -n "${FAKE_OVERLAY_FAIL_RE:-}" ] && printf '%s' "$*" | grep -qE "$FAKE_OVERLAY_FAIL_RE"; then
+      echo "fake mount: overlay refused" >&2
+      exit 1
+    fi
+    exit 0
+    ;;
+esac
+exit 0

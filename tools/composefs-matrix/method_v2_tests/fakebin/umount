@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Test stub for umount. Logs argv; fails when the argv matches FAKE_UMOUNT_FAIL_RE.
+printf 'umount %s\n' "$*" >> "${FAKE_LOG:-/dev/null}"
+if [ -n "${FAKE_UMOUNT_FAIL_RE:-}" ] && printf '%s' "$*" | grep -qE "$FAKE_UMOUNT_FAIL_RE"; then
+  echo "fake umount: target busy" >&2
+  exit 1
+fi
+exit 0

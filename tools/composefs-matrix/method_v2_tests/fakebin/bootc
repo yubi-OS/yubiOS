@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Test stub for host bootc. The script must never call this (digests run inside podman).
+printf 'bootc %s\n' "$*" >> "${FAKE_LOG:-/dev/null}"
+echo "fake bootc: host invocation is forbidden" >&2
+exit 99

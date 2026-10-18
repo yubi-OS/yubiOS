@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Test stub for df. With FAKE_FREE_BYTES set, reports that many bytes available; otherwise real df.
+if [ -n "${FAKE_FREE_BYTES:-}" ]; then
+  printf 'Filesystem 1-blocks Used Available Capacity Mounted on\n'
+  printf 'fake %s 0 %s 0%% /fake\n' "$FAKE_FREE_BYTES" "$FAKE_FREE_BYTES"
+  exit 0
+fi
+REAL_DF=$(PATH=/usr/bin:/bin command -v df)
+exec "$REAL_DF" "$@"

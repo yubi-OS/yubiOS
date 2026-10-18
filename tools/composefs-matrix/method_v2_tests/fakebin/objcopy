@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Test stub for objcopy -O binary --only-section=.cmdline IN OUT
+# Fixture UKIs are plain text, so the "section" is the input file copied verbatim.
+printf 'objcopy %s\n' "$*" >> "${FAKE_LOG:-/dev/null}"
+if [ -n "${FAKE_OBJCOPY_FAIL:-}" ]; then
+  echo "fake objcopy: refused" >&2
+  exit 1
+fi
+args=("$@")
+in="${args[${#args[@]}-2]}"
+out="${args[${#args[@]}-1]}"
+cat "$in" > "$out"

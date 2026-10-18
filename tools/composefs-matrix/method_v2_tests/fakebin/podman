@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Test stub for podman. Logs argv to $FAKE_LOG.
+#   image mount <ref>   -> prints $FAKE_MNT (fails if FAKE_BASE_MOUNT_FAIL set)
+#   image unmount <ref> -> ok (fails if FAKE_BASE_UNMOUNT_FAIL set)
+#   run ... -v <R>:/target ... -c 'bootc container compute-composefs-digest /target'
+#       -> digest looked up in $FAKE_MAP by variant id (basename of dirname of R);
+#          "FAIL" in the map => exit 1 with six stderr lines; no entry => $FAKE_DEFAULT_DIGEST
+printf 'podman %s\n' "$*" >> "${FAKE_LOG:-/dev/null}"
+args=("$@")
+if [ "${args[0]:-}" = "--root" ]; then
+  args=("${args[@]:4}")
+fi
+case "${args[0]:-}" in
+  image)
+    case "${args[1]:-}" in
+      mount)
+        if [ -n "${FAKE_BASE_MOUNT_FAIL:-}" ]; then
+          echo "fake podman: image mount refused" >&2
+          exit 1
+        fi
+        echo "${FAKE_MNT}"
+        exit 0
+        ;;
+      unmount)
+        if [ -n "${FAKE_BASE_UNMOUNT_FAIL:-}" ]; then
+          echo "fake podman: image unmount refused" >&2
+          exit 1
+        fi
+        exit 0
+        ;;
+    esac
+    ;;
+  run)
+    host=""
+    prev=""
+    for a in "${args[@]}"; do
+      if [ "$prev" = "-v" ]; then
+        host="${a%%:/target*}"
+      fi
+      prev="$a"
+    done
+    id=$(basename "$(dirname "$host")")
+    verdict=""
+    if [ -n "${FAKE_MAP:-}" ] && [ -f "$FAKE_MAP" ]; then
+      verdict=$(awk -v id="$id" '$1 == id {print $2; exit}' "$FAKE_MAP")
+    fi
+    [ -n "$verdict" ] || verdict="${FAKE_DEFAULT_DIGEST:-}"
+    if [ "$verdict" = FAIL ]; then
+      echo "fake bootc: line 1" >&2
+      echo "fake bootc: line 2" >&2
+      echo "fake bootc: line 3" >&2
+      echo "fake bootc: line 4" >&2
+      echo "fake bootc: line 5" >&2
+      echo "fake bootc: crashed while computing digest" >&2
+      exit 1
+    fi
+    echo "computing composefs digest for /target"
+    echo "$verdict"
+    exit 0
+    ;;
+esac
+echo "fake podman: unhandled args: $*" >&2
+exit 1

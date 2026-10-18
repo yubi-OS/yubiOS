@@ -1,0 +1,47 @@
+prio	id	base	cmd
+1	V00	FA02	true
+1	V00	D7E	true
+1	V07	FA02	touch -h -d @1792321149 "$R/boot"
+1	V07	D7E	touch -h -d @1792321149 "$R/boot"
+1	V21	FA02	touch -h -d @1792321149.500000000 "$R/boot"
+1	V21	D7E	touch -h -d @1792321149.500000000 "$R/boot"
+1	V15	FA02	find "$R/boot" -mindepth 1 -exec touch -h -d @1792321149 {} + ; touch -h -d @1792321149 "$R/boot"
+1	V15	D7E	find "$R/boot" -mindepth 1 -exec touch -h -d @1792321149 {} + ; touch -h -d @1792321149 "$R/boot"
+1	V16	FA02	find "$R/boot" -mindepth 1 -delete ; find "$R/boot" -mindepth 0 -exec touch -h -d @1792321149 {} +
+1	V16	D7E	find "$R/boot" -mindepth 1 -delete ; find "$R/boot" -mindepth 0 -exec touch -h -d @1792321149 {} +
+1	V03	FA02	find "$R/boot" -mindepth 1 -delete ; touch -h -d @1792321149 "$R/boot"
+1	V03	D7E	find "$R/boot" -mindepth 1 -delete ; touch -h -d @1792321149 "$R/boot"
+1	V01	FA02	m=$(stat -c %.9Y "$R/boot") ; rm -rf "$R/boot/EFI" "$R/boot/yubios-diag" ; touch -h -d "@$m" "$R/boot"
+1	V01	D7E	m=$(stat -c %.9Y "$R/boot") ; rm -rf "$R/boot/EFI" "$R/boot/yubios-diag" ; touch -h -d "@$m" "$R/boot"
+1	V02	FA02	find "$R/boot" -mindepth 1 -delete ; echo "BOOT_MTIME_AS_RM_LEFT=$(stat -c %.9Y "$R/boot")" >&2
+1	V02	D7E	find "$R/boot" -mindepth 1 -delete ; echo "BOOT_MTIME_AS_RM_LEFT=$(stat -c %.9Y "$R/boot")" >&2
+2	V19	FA02	rm -rf "$R/boot/EFI" ; find "$R/boot" -mindepth 0 -exec touch -h -d @1792321149 {} +
+2	V19	D7E	rm -rf "$R/boot/EFI" ; find "$R/boot" -mindepth 0 -exec touch -h -d @1792321149 {} +
+2	V14	FA02	touch -h -d @1792321149 "$R/boot" "$R/boot/EFI"
+2	V14	D7E	touch -h -d @1792321149 "$R/boot" "$R/boot/EFI"
+2	V08	FA02	touch -h -d @1792321520 "$R/boot"
+2	V08	D7E	touch -h -d @1792321520 "$R/boot"
+2	V09	FA02	touch -h -d @0 "$R/boot"
+2	V09	D7E	touch -h -d @0 "$R/boot"
+2	V11	FA02	e=$(stat -c %.9Y "$R/boot/EFI") ; rm -rf "$R/boot/EFI/Linux" ; touch -h -d "@$e" "$R/boot/EFI"
+2	V11	D7E	e=$(stat -c %.9Y "$R/boot/EFI") ; rm -rf "$R/boot/EFI/Linux" ; touch -h -d "@$e" "$R/boot/EFI"
+2	V12	FA02	e=$(stat -c %.9Y "$R/boot/EFI") ; rm -rf "$R/boot/EFI/systemd" "$R/boot/EFI/BOOT" ; touch -h -d "@$e" "$R/boot/EFI"
+2	V12	D7E	e=$(stat -c %.9Y "$R/boot/EFI") ; rm -rf "$R/boot/EFI/systemd" "$R/boot/EFI/BOOT" ; touch -h -d "@$e" "$R/boot/EFI"
+2	V13	FA02	touch -h -d @1792321149 "$R/boot/EFI"
+2	V13	D7E	touch -h -d @1792321149 "$R/boot/EFI"
+2	V05	FA02	rm -rf "$R/boot/EFI" "$R/boot/yubios-diag" ; touch -h -d @1792321149 "$R/boot"
+2	V05	D7E	rm -rf "$R/boot/EFI" "$R/boot/yubios-diag" ; touch -h -d @1792321149 "$R/boot"
+2	V06	FA02	rm -rf "$R/boot/EFI" "$R/boot/yubios-diag" ; touch -h -d @1792321520 "$R/boot"
+2	V06	D7E	rm -rf "$R/boot/EFI" "$R/boot/yubios-diag" ; touch -h -d @1792321520 "$R/boot"
+2	V04	FA02	find "$R/boot" -mindepth 1 -delete ; touch -h -d @1792321520 "$R/boot"
+2	V04	D7E	find "$R/boot" -mindepth 1 -delete ; touch -h -d @1792321520 "$R/boot"
+2	V10	FA02	find "$R/boot" -mindepth 1 -delete ; touch -h -d @0 "$R/boot"
+2	V10	D7E	find "$R/boot" -mindepth 1 -delete ; touch -h -d @0 "$R/boot"
+2	V17	FA02	B="$R/boot" ; RM=$(stat -c %.9Y "$R") ; M=$(stat -c %a "$B") ; O=$(stat -c %u:%g "$B") ; rm -rf "$B" && mkdir "$B" && chmod "$M" "$B" && chown "$O" "$B" && touch -h -d @1792321149 "$B" && touch -h -d "@$RM" "$R"
+2	V17	D7E	B="$R/boot" ; RM=$(stat -c %.9Y "$R") ; M=$(stat -c %a "$B") ; O=$(stat -c %u:%g "$B") ; rm -rf "$B" && mkdir "$B" && chmod "$M" "$B" && chown "$O" "$B" && touch -h -d @1792321149 "$B" && touch -h -d "@$RM" "$R"
+2	V22	FA02	touch -h -d @1792321149 "$R/boot" ; if [ -d "$R/boot/EFI" ]; then touch -h -d @1792321149.500000000 "$R/boot/EFI"; fi
+2	V22	D7E	touch -h -d @1792321149 "$R/boot" ; if [ -d "$R/boot/EFI" ]; then touch -h -d @1792321149.500000000 "$R/boot/EFI"; fi
+3	V18	FA02	find "$R" -xdev -mindepth 1 \( -path "$R/proc" -o -path "$R/sys" -o -path "$R/dev" -o -path "$R/run" \) -prune -o -exec touch -h -d @1792321149 {} + ; touch -h -d @1792321149 "$R"
+3	V18	D7E	find "$R" -xdev -mindepth 1 \( -path "$R/proc" -o -path "$R/sys" -o -path "$R/dev" -o -path "$R/run" \) -prune -o -exec touch -h -d @1792321149 {} + ; touch -h -d @1792321149 "$R"
+3	V20	FA02	find "$R" -xdev -mindepth 1 \( -path "$R/proc" -o -path "$R/sys" -o -path "$R/dev" -o -path "$R/etc/hosts" -o -path "$R/etc/resolv.conf" -o -path "$R/etc/hostname" -o -path "$R/run/systemd/resolve" \) -prune -o -exec touch -h -d @1792321149 {} + ; touch -h -d @1792321149 "$R"
+3	V20	D7E	find "$R" -xdev -mindepth 1 \( -path "$R/proc" -o -path "$R/sys" -o -path "$R/dev" -o -path "$R/etc/hosts" -o -path "$R/etc/resolv.conf" -o -path "$R/etc/hostname" -o -path "$R/run/systemd/resolve" \) -prune -o -exec touch -h -d @1792321149 {} + ; touch -h -d @1792321149 "$R"
