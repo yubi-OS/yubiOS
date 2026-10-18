@@ -1,7 +1,8 @@
 # yubiOS TODO
 
-Last reviewed: 2026-08-24
+Last reviewed: 2026-10-18
 Status: active task list
+Latest hardware and firmware evidence (2026-10-18): PRs #310 to #326 merged 2026-10-10 to 2026-10-18 (rkbin DDR/TPL pin, OP-TEE DT node, `SPD=opteed`, DYNAMIC_SHM, owner-key PIV 9a signing, UKI mtime fix, org-wide upstream bump, and removal of the `--allow-downgrades` workaround). ROCK 5B booted CI-built firmware and reached OP-TEE and fTPM init (`YUBIOS_TPM_OK`, run 38126763632, 2026-10-11). The install rehearsal still fails its composefs digest check on image `fa02a222` (B-UKI-COMPOSEFS).
 Latest CI-infra evidence (2026-08-24): all 7 failing infra workflows on main green again (SHA pins 5a50b96c, reachability parser + drift script + ci.yml groups 66f47bf7); bcvk fork release [v0.18.0-yubios.1](https://github.com/yubi-OS/bcvk/releases/tag/v0.18.0-yubios.1) cut at pinned source 34fb0b6b with amd64+arm64 binaries + SHA256SUMS (OMN-105/106 Done); lifecycle/sysext lanes green in ADR-023 gated mode with fixture images yubios-sysext-test:v1 / yubios-portable-svc-test:v1 (e587593f); vgpu lint gate fixed (ebf9223a); BLOCKERS.md adds B-ROCK1-OFFLINE (both self-hosted runners offline, all VM-boot verification queued).
 Latest requested-run evidence review: [refs/ci-evidence-2026-07-21.md](../refs/ci-evidence-2026-07-21.md), covering the complete logs of runs 29869480442, 29869503301, 29869527608, 29872130447, 29872433355, 29872832727, 29876111887, and 29876466349.
 Latest upstream progress review: [refs/systemd-upstream-progress-2026-07-21.md](../refs/systemd-upstream-progress-2026-07-21.md).
@@ -40,12 +41,14 @@ Every ADR in [ADR.md](ADR.md) (ADR-001 through ADR-031) now has a matching Linea
 
 - [x] Create one Linear issue per ADR and mark Accepted ones Done: ADR-001..017, 021..026, 028..032 -> Done; ADR-018, ADR-019, ADR-020, ADR-027 -> Backlog (still Proposed).
 - [x] ADR-032 (Kernel+Rootfs Split) accepted 2026-07-29 (commit `a1940330` via PR #143); corresponding Linear OMN-51 marked Done.
-- [ ] ADR-033 (Misbehavior-Triggered PCI-Mediation Cutoff) opened as PR #151 (`feat/adr-033-misbehavior-cutoff-policy`, faithful to `refs/adr-033-misbehavior-cutoff-policy-2026-07-28.md` [SOLO] V3 finalist + `refs/adr-033-prior-art-search-2026-07-28.md`); status Pending until Jenny reviews + merges; companion Linear cluster OMN-144..147 already re-parented to ADR-031.
+- [x] ADR-033 (Misbehavior-Triggered PCI-Mediation Cutoff) merged 2026-07-30 via PR #151 (`feat/adr-033-misbehavior-cutoff-policy`, faithful to `refs/adr-033-misbehavior-cutoff-policy-2026-07-28.md` [SOLO] V3 finalist + `refs/adr-033-prior-art-search-2026-07-28.md`); companion Linear cluster OMN-144..147 already re-parented to ADR-031.
 - [x] Correct the ADR-024 numbering collision: the vGPU/vfio-user trust boundary decision was mislabeled "candidate ADR-024" in refs/vgpu-vfio-user-trust-boundary-2026-07-25.md and in an earlier FUTURE.md edit. ADR-024 is the chipsec first-boot validation ADR; the GPU trust boundary landed as **ADR-031**. Fixed the stale FUTURE.md cross-reference and relabeled OMN-101 accordingly.
 - [ ] Open a follow-up ADR (or amend ADR-031) once the IOMMU passthrough access gate (ADR-031 rule 2) has real enforcement code and hardware evidence, not just accepted design -- see OMN-101/OMN-108.
 - [ ] Promote ADR-018/019/020 (ARM64 secure-world stack, dual root-of-trust paths, U-Boot UEFI+StandaloneMM) from Proposed to Accepted once the Milestone F hardware proof lands (see Current ARM64 Tasks below); update their Linear issues from Backlog to Done at the same time, not before.
 - [ ] Promote ADR-027 (U-Boot FIDO2/U2F console gate) from idea-stage only after the USB HID threat model and recovery design named in FUTURE.md's Deferred Ideas are written.
 - [ ] Keep new ADRs and their Linear issues created together going forward -- an ADR without a tracking issue is easy to lose track of once it leaves this file.
+- [ ] Amend ADR-002 from PIV slot 9c to slot 9a for owner Secure Boot signing (PR #318, merged 2026-10-17). ADR-002's decision text still names slot 9c.
+- [ ] Record the 2026-10-11 Path B decision (TBB/ROTPK rehearsal deferred, Path A stays open as the proof) in ADR-019 and the ARM64 board refs.
 
 ## Current Documentation Tasks
 
@@ -100,7 +103,7 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 
 - [ ] Keep PQ TLS verification visible in CI for OpenSSL 3.5+ and Go 1.24+ defaults; run 29876466349 negotiated TLS 1.3 `X25519MLKEM768`. When the repo toolchain reaches Go 1.26, include `SecP256r1MLKEM768` and `SecP384r1MLKEM1024` in accepted hybrid-group checks.
 - [ ] Keep the QEMU zstd EFI zboot workaround version-gated until runner QEMU contains upstream zstd EFI zboot loader support.
-- [ ] Add `unzip` (or `python3 -m zipfile` / `bsdtar`) to the rock1 apt install in `.github/workflows/ci_test-vgpu-vm.yml`; B-VGPU-VM-UNZIP blocks the sealed-UKI BLSConfig verification path (OMN-150 Phase 2 / B-BOOTC-SEAL) AND the negative-tamper-boot proof. Run 30697269619 hit the gap at step 24 with `unzip: command not found` (exit 127). Same workflow file already installs `binutils fdisk jq docker.io containerd runc` -- extend that line.
+- [x] `unzip` is in the `ci_test-vgpu-vm.yml` `Install extra deps` apt block, ordered before the sealed-UKI extract step (fixed in code 2026-08-24). Verification is still open: the 2026-10-06 arm64 KVM attempt on rock1 failed on disk during the image pull, before step 24 (B-ROCK1-DISK). Confirm steps 21/33/37 and the Negative 2 refusal on rock1, then retire the B-VGPU-VM-UNZIP row.
 - [x] Validate the bcvk virtiofs-root `bootloader-update.service` guard: run 29872832727 reached the guest assertions without the old DirectBoot/virtiofs failure.
 - [x] Validate the bcvk root SSH credential path: run 29872832727 authenticated and ran the ARM64 guest-side assertions.
 - [x] Confirm `tests/vm/test-fido2-enrollment.sh` still runs when token-dependent operations skip: run 29872832727 executed the enrollment-surface script after the passless layer found no CTAP2 device.
@@ -113,16 +116,22 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 - [x] Add board variant fields to real-hardware firmware workflows before hardware lanes land: `rock5b-rk3588` as the Path A variant and `rockpro64-rk3399` as another Path A variant. See `.github/workflows/ci_firmware-rk.yml` and [refs/firmware-rk-workflow-2026-07-17.md](../refs/firmware-rk-workflow-2026-07-17.md).
 - [x] Validate the documented `bootc install to-filesystem` path on a fresh VM or disposable disk, including external partition preparation, mounted `/mnt`, `--skip-finalize`, and omitted `root=` via `--root-mount-spec=""`: [run 29884493346](https://github.com/yubi-OS/yubiOS/actions/runs/29884493346) passed on native amd64 and arm64.
 - [x] Strengthen the external-image `to-filesystem` smoke so it requires an ext4 `verity` feature, the composefs repository instead of an ostree fallback, measurable EROFS metadata images, a rejected protected-object write, and a strict digest-bound BLS entry classified as unsealed.
-- [ ] Promote a sealed composefs lane only after the pinned base exposes the released v1.16.4 split/ukify capabilities; build and sign the exact rootfs UKI, boot it with Secure Boot on both architectures, assert UKI composefs status, and retain a negative tamper-boot proof.
+- [ ] (Blocked on B-UKI-COMPOSEFS, 2026-10-18. The Fedora base moved 86cc9d98 to 0442f325 in PR #318, so confirm that digest carries bootc v1.16.4+.) Promote a sealed composefs lane only after the pinned base exposes the released v1.16.4 split/ukify capabilities; build and sign the exact rootfs UKI, boot it with Secure Boot on both architectures, assert UKI composefs status, and retain a negative tamper-boot proof.
 - [x] PR #143 (commit `a1940330`, merged 2026-07-29) shipped the kernel-side artifact split per ADR-032: `0mniteck/yubios:uki-<sha>-<arch>` published as a separate OCI artifact, `Containerfile.uki`, `usr/lib/yubiOS/uki/install-uki.sh` documented, `usr/lib/bootc/install/50-yubiOS.toml` kargs pinned. Phase 2 (install-time BLSConfig wiring) is the remaining work — see `refs/kernel-rootfs-split-2026-07-29.md`. Closes OMN-51.
+
+- [ ] Fix or retire the five failing `diag_sign-matrix` variants (ec-provider, rsa2048-engine, rsa2048-sbsign-engine, and two ossl signcode variants). They install current Fedora packages at runtime (systemd 262-3 from updates-testing, softhsm 2.7.0-2, pkcs11-provider 1.2.0-3), so the workflow has never been green and its exit 1 hides regressions. The production SoftHSM signing path is not affected.
+- [x] Lean CI gates hardened over PRs #299 to #302: sorry gate, Lean-driven theorem enumeration, axiom coverage, statement and definitions pins, pinned toolchain, and leanchecker kernel replay. All Lean validation runs on CI.
+- [x] `ci_dispatch-reachability` restored by PR #303: `autoinstall-verify.yml` was in no ci.yml group, so every PR touching `.github/workflows/` failed from 2026-10-07.
+- [x] Docker Hub CI repositories (`yubios`, `yubios-sysext-test`, `yubios-portable-svc-test`, `build-cache`) were deleted in error on 2026-10-06 and recreated by `ci_docker-repos-ensure`. The 2026-10-06 relaunch pushed them again (builders 4/4). Descriptions were rebuilt from CI_MAP because the originals were not captured.
+- [x] Firmware lane: the ROCK 5B combined loader builds from the pinned rkbin input (PR #310), with the OP-TEE DT node (PR #311, pinned as a git-am patch in PR #314), `SPD=opteed` (PR #312), and non-secure DDR registration for DYNAMIC_SHM (PR #313). The `--allow-downgrades` workaround was reverted in PR #325 after the upstream bump (PR #324).
 
 ## Current ARM64 Tasks
 
-- [x] Choose the first Path A board for production-root proof: Radxa ROCK 5B / RK3588 is on pause; ROCKPro64 / RK3399 is supported per ADR-029.
-- [ ] Rehearse ROTPK/fuse provisioning on sacrificial hardware before production language.
-- [ ] Prove OP-TEE, StandaloneMM, RPMB-backed variables, fTPM NV, and U-Boot UEFI on ROCKPro64 hardware first, then carry the supported evidence to ROCK 5B.
-- [ ] Record exact TF-A, OP-TEE, StandaloneMM/RPMB, and U-Boot config evidence for Path A, including `CFG_RPMB_FS`, `CONFIG_EFI_MM_COMM_TEE`, and `CONFIG_SUPPORT_EMMC_RPMB`.
-- [ ] Supply ROCK 5B builds with a licensed, immutable, checksum-verified RK3588 DDR/TPL blob and require `u-boot-rockchip.bin`; run 29869527608 published a diagnostic bundle without that bootable image.
+- [x] Choose the first Path A board for production-root proof: Radxa ROCK 5B / RK3588 is the active bring-up board again since 2026-10-10 (it was on pause); ROCKPro64 / RK3399 stays the secondary board per ADR-029.
+- [ ] Rehearse ROTPK/fuse provisioning on sacrificial hardware before production language. Deferred 2026-10-11: Path B first, with TBB flags live only in the QEMU lane. Reopen when Path A moves forward.
+- [ ] Prove OP-TEE, StandaloneMM, RPMB-backed variables, fTPM NV, and U-Boot UEFI on hardware. Progress: ROCK 5B reaches OP-TEE and fTPM init with CI-built firmware (`YUBIOS_TPM_OK`, 2026-10-11). Still open on that board: StandaloneMM owner-key enrollment, RPMB-backed variable storage, fTPM NV persistence. ROCKPro64 has not started and likely needs the same `SPD=opteed` change.
+- [ ] Record exact TF-A, OP-TEE, StandaloneMM/RPMB, and U-Boot config evidence for Path A, including `CFG_RPMB_FS`, `CONFIG_EFI_MM_COMM_TEE`, and `CONFIG_SUPPORT_EMMC_RPMB`. Progress: `SPD=opteed` (PR #312), OP-TEE DT node (PR #311, pinned as a git-am patch in PR #314), and non-secure DDR registration for DYNAMIC_SHM (PR #313). The config evidence itself is still missing.
+- [x] Supply ROCK 5B builds with a licensed, immutable, checksum-verified RK3588 DDR/TPL blob and require `u-boot-rockchip.bin`. Done in PR #310 (rkbin pinned at `3e288fe8`, checksum fail-closed). The 2026-10-11 build booted the board. The license call is the owner's.
 - [x] Document Path A vs Path B status per board, starting with `rock5b-rk3588` and `rockpro64-rk3399`: [refs/arm64-rk-board-status-2026-07-17.md](../refs/arm64-rk-board-status-2026-07-17.md).
 
 ## Current Security Tasks
@@ -130,20 +139,22 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 - [x] Audit services for `ConditionSecurity=measured-os` where enrollment or signing behavior must not run on an unmeasured boot: [refs/systemd-hardening-audit-2026-07-17.md](../refs/systemd-hardening-audit-2026-07-17.md).
 - [x] Audit `RestrictFileSystems=` separately from the v261 `RestrictFileSystemAccess=` control: [refs/systemd-hardening-audit-2026-07-17.md](../refs/systemd-hardening-audit-2026-07-17.md).
 - [x] Keep CHIPSEC first-boot validation scoped as a one-shot exception and document firmware-warning behavior: the unit and Bats coverage enforce the one-shot exception, while `run-firstboot-check.sh` documents `PASS`/`WARN`/`FAILED` semantics and informational WPBT/Computrace evidence.
-- [ ] Add or refresh real-hardware YubiKey validation evidence for FIDO2 unlock and homed flows.
+- [ ] Add or refresh real-hardware YubiKey validation evidence for FIDO2 unlock and homed flows. Partly done: LUKS2 FIDO2 enroll and unlock passed on rock1 (2026-08-01, slot 2, issue #20 closed). Still open: homed on hardware with retained logs, PAM presence, resident SSH keys, PIV signing, recovery and failure paths (B-REAL-FIDO2).
 - [x] Keep recovery paths documented before enabling any feature that can lock an owner out: [refs/roadmap-promotion-gates-2026-07-17.md](../refs/roadmap-promotion-gates-2026-07-17.md).
+- [ ] Run the owner-key ceremony on a YubiKey: attach it to rock1, add the StandaloneMM enrollment step to `enroll-sb.sh`, run it attended, then amend ADR-002 for slot 9a (B-OWNER-KEYS).
+- [ ] Move the cosign signing key out of the repo. `cosign/yubios-omni157.key` is still on main as an encrypted sigstore key (OMN-157 follow-up). Choose a GitHub secret or keyless OIDC signing with Rekor enabled.
 
 ## Current Supply-Chain Tasks
 
 - [ ] Update [PINNED.md](../PINNED.md) for every base-image/tool digest change.
 - [x] Pin the BuildKit daemon independently, derive `SOURCE_DATE_EPOCH` from the source commit, clamp OCI/layer timestamps, and enforce two isolated OCI-layout builds for production and dev: [refs/reproducible-builds-2026-07-22.md](../refs/reproducible-builds-2026-07-22.md).
-- [ ] Replace live Fedora/Debian repository resolution with immutable snapshots plus exact package/toolchain closure before claiming later rebuildability.
+- [ ] Replace live Fedora/Debian repository resolution with immutable snapshots plus exact package/toolchain closure before claiming later rebuildability. Promoted to blocker B-REPRO-MIRROR on 2026-10-18.
 - [x] Separate installer and TF-A signature-bearing envelopes—including the root-resident `systemd-boot*.efi.signed` file—from canonical unsigned subjects in the blocking ARM64 comparisons; retain both envelope digests without treating random keys/signatures as equality subjects.
 - [x] Preseed pinned EDK2 with commit- and platform-scoped deterministic stack-cookie lists, then enforce two clean ARM64 component builds for every firmware board.
-- [ ] Approve a checksum-pinned RK3588 DDR/TPL input before firmware equality can cover the final bootable ROCK 5B image.
+- [x] Approve a checksum-pinned RK3588 DDR/TPL input before firmware equality can cover the final bootable ROCK 5B image. Pinned in PR #310 (rkbin `3e288fe8`, fail-closed). Firmware equality for the final image still depends on B-REPRO-MIRROR.
 - [ ] Verify package floors after digest bumps: systemd target, pam-u2f >= 1.3.1, OpenSSL 3.5+, and Go 1.24+ where relevant.
 - [x] Keep production, installer, firmware, and dev/test artifacts clearly labeled and non-overlapping: [refs/firmware-rk-workflow-2026-07-17.md](../refs/firmware-rk-workflow-2026-07-17.md).
-- [ ] Preserve provenance/SBOM expectations for published artifacts.
+- [x] Preserve provenance/SBOM expectations for published artifacts: SLSA L3, SPDX SBOM, and cosign wired by OMN-157 (Done 2026-08-06). Open follow-ups: move the signing key out of the repo (see Security Tasks), digest-pin `buildkit-syft-scanner`, and run `tests/verify-oci-attestations.sh` end to end.
 - [x] Keep production bootc (`latest`, `<sha>`), dev/test (`dev`, `dev-<sha>`), and installer (`installer`, `installer-<sha>`) tags board-neutral unless the OS or installer artifact actually diverges by board. Firmware is now the only board-scoped tag family.
 - [x] Publish board-scoped firmware tags under the existing `0mniteck/yubios` namespace: `firmware-rock5b-rk3588`, `firmware-rock5b-rk3588-<sha>`, `firmware-rockpro64-rk3399`, and `firmware-rockpro64-rk3399-<sha>`, plus the QEMU baseline tags documented in [refs/arm64-rk-board-status-2026-07-17.md](../refs/arm64-rk-board-status-2026-07-17.md).
 
@@ -152,7 +163,10 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 - Run 29525332901 proved the ARM64 lane can boot the dev image to Fedora login with the pinned QEMU workaround; keep watching for runner QEMU refreshes before removing that workaround.
 - Run 29872832727 retired the old root-SSH and DirectBoot bootloader-update blockers. Its remaining VM gap was narrower: passless starts, but no CTAP2 token enumerates, so token-dependent assertions skip.
 - Run 30697269619 (commit b7f9d467 on main) retires the residual CTAP2-skip leg on rock1: both `test-luks-fido2-ci.sh` and `test-fido2-enrollment.sh` reach their final `PASS:` assertions against the in-guest passless authenticator (not the dev image only). Its remaining gap is the sealed-UKI negative-tamper-boot leg (step 24+), blocked by B-VGPU-VM-UNZIP rather than by harness or guest bugs. Use this run as the canonical VM e2e evidence reference until the next green redline.
-- Run 29869527608 proves the QEMU fTPM/StandaloneMM integration and board-specific compilation, but not physical-board behavior. ROCK 5B additionally lacks the required real DDR/TPL input and combined boot image.
+- Run 29869527608 proves the QEMU fTPM/StandaloneMM integration and board-specific compilation, but not physical-board behavior. Its ROCK 5B DDR/TPL input is now pinned (PR #310), and the 2026-10-11 build booted the board.
+- rock1 root is 12 GB and was about 4.9 GB free after the 2026-10-06 cleanup. The next arm64 KVM image pull can fill it (B-ROCK1-DISK).
+- One of the two ARM64 self-hosted hosts has hard-halted several times under sustained I/O (2026-10-04 to 2026-10-07). Keep long jobs off it until it is declared stable.
+- Linear is out of step with the repo: OMN-56 is Todo although PR #310 landed, OMN-151 is In Progress although its blocker moved, and OMN-53 is Done although B-BOOTC-SEAL still requires Secure Boot and negative tamper boots. Reconcile on the next status comment.
 - `.github/workflows/ci_firmware-rk.yml` is the orchestrated firmware lane. The removed `ci_test-int.yml` workflow is historical context only; do not restore its `yubiOS firmware` state to the top-level `ci.yml` chain.
 - systemd v262 removes `/run/boot-loader-entries/` support and the experimental `systemd-sysupdated` D-Bus API; the 2026-07-14 audit found no repo dependency, but future update UX should stay on UAPI.1/BLS and Varlink/systemd-sysupdate rather than removed interfaces or unaudited `updatectl` assumptions.
 - systemd v262 renames `systemd-sysupdate.service`/`.timer` to `systemd-sysupdate-update.service`/`.timer`; verify compatibility symlinks before adding units against the old names.
@@ -164,12 +178,26 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 - ORAS artifact media types may replace `FROM scratch` carrier images when registry support and UX improve.
 - systemd v262 is active upstream work rather than the current pinned baseline; track credential-sealing compatibility, the sysupdate unit rename, cryptenroll's first-boot/Varlink work, and the FIDO2 zero-length-HMAC rejection in [refs/systemd-upstream-progress-2026-07-21.md](../refs/systemd-upstream-progress-2026-07-21.md).
 
+## Decisions Recorded Since 2026-08-24
+
+- 2026-10-10: the ROCK 5B RK3588 DDR/TPL input is pinned and published (PR #310). The license of the Rockchip blob is the owner's call.
+- 2026-10-11: Path B first. TBB and ROTPK rehearsal are deferred, and TBB flags stay in the QEMU lane only. Path A stays open as the proof.
+- 2026-10-11: owner keys only. No CI keys in any shipped build (PR #315 reverted by PR #317).
+- 2026-10-11: PIV slot 9a for the owner PK/KEK/db chain and UKI signing (PR #318, merged 2026-10-17). Supersedes ADR-002's slot 9c; amendment pending.
+- 2026-10-11: StandaloneMM stays in the rockchip builds. Owner keys enroll into StandaloneMM at provisioning, superseding the earlier plan to keep variables in a U-Boot file store on the ESP.
+- 2026-10-11: no Secure Boot recovery path. Reflash is the recovery route.
+- 2026-10-16: the install route is `bootc install to-filesystem` with a GPT the installer creates, not bcvk native-to-disk. The bcvk fork has no offset option, and a raw write would overwrite firmware at sector 64.
+
 ## Retired From Active TODO
 
 - Treating OpenSSL PQ hybrid support as future-only: current OpenSSL 3.5+ defaults already include `X25519MLKEM768`.
 - Treating swu2f Layer 2 as merely planned: the TEST-only dev image path exists and must stay isolated.
 - Repeating old digest examples from workflow logs as current pins: use [PINNED.md](../PINNED.md).
 - Describing ARM64 as secondary: ADR-023 makes ARM64 primary and x86-64 supported secondary.
+- Treating ROCK 5B as paused: it is the active bring-up board again (2026-10-10).
+- Treating the RK3588 DDR/TPL input as missing: pinned in PR #310.
+- Treating rock1 as offline: it is registered and running; the constraint is disk (B-ROCK1-DISK).
+- Treating the owner Secure Boot slot as 9c: PR #318 moved it to 9a; the ADR-002 amendment is pending.
 
 ## Today's BLOCKERS.md diff (2026-08-01 review)
 
@@ -194,3 +222,15 @@ the TODO surface is the register's companion; no agent edits this round; recorde
 ## 2026-09-18 drift check (wayfinder round 11, cycle 19)
 
 TODO.md: the register's companion; no agent edits; inventory completeness.
+
+## Today's TODO.md diff (2026-10-18 review)
+
+Checked against main (head `f99e5213`), the PRs merged between 2026-09-01 and 2026-10-18 (#223 to #326), and Linear state for the referenced OMN issues.
+
+- Evidence header updated for PRs #310 to #326 and the ROCK 5B boot.
+- ADR-033 marked merged (PR #151, 2026-07-30). New ADR items: the ADR-002 slot 9a amendment and the Path B record.
+- Current CI: the unzip item now reads as fixed in code with verification blocked by disk. Added the diag_sign-matrix fix-or-retire item, two closed items (Lean gate hardening, ci_dispatch-reachability), and the Docker Hub restore.
+- ARM64: ROCK 5B is active again, the DDR/TPL pin is done, OP-TEE and fTPM init reached on hardware, and the rehearsal deferral is recorded.
+- Security: the YubiKey item is narrowed, and the owner-key ceremony and cosign key removal are added.
+- Supply chain: the reproducibility item is promoted to B-REPRO-MIRROR, the DDR/TPL approval is done, and OMN-157 is marked done with its follow-ups.
+- Decisions recorded since 2026-08-24 are listed in a new section. Watch and retired lists updated.
