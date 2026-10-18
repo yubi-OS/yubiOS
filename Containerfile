@@ -177,10 +177,16 @@ RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path
 # UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
 # checks. Secure Boot is not part of that check.
 FROM rootfs AS uki
-RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
+ARG SOURCE_DATE_EPOCH
+RUN --mount=type=bind,from=rootfs,target=/src set -- /src/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
-    mkdir -p /out && \
-    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
+    mkdir -p /out /tmp/ukify-rootfs && \
+    cp -a /src/. /tmp/ukify-rootfs/ && \
+    rm -rf /tmp/ukify-rootfs/boot/* && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /tmp/ukify-rootfs/boot && \
+    echo "UKIDIAG stage_boot_mtime=$(stat -c %Y /tmp/ukify-rootfs/boot) sde=${SOURCE_DATE_EPOCH}" && \
+    bootc container ukify --rootfs /tmp/ukify-rootfs -- --output "/out/${kver}.efi" && \
+    rm -rf /tmp/ukify-rootfs
 
 # Reproducibility diagnostic (remove once the UKI is proven deterministic): print the composefs
 # digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
@@ -188,6 +194,7 @@ RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc
 
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
+RUN echo "FINALDIAG final_boot_mtime=$(stat -c %Y /boot)"
 RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
       x86_64)  efi_arch=x64; efi_upper=X64 ;; \
