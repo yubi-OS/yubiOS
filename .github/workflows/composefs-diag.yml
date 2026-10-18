@@ -26,7 +26,7 @@ jobs:
           set -euo pipefail
           if [ "$MATRIX_BASE" = "oct16" ]; then BASE="$BASE_OCT16"; else BASE="$BASE_CURRENT"; fi
           docker buildx create --name diag --driver docker-container --use
-          docker buildx build --target export \
+          docker buildx build -f Containerfile --target export \
             --build-arg BASE_IMAGE="$BASE" \
             --build-arg SOURCE_DATE_EPOCH=1792321149 \
             --output type=local,dest=out .
