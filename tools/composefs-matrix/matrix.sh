@@ -85,7 +85,7 @@ mkdir -p -- "$BASE" "$VDIR" "$OUT/results" "$OUT/logs"
 docker pull "$IMAGE" >"$OUT/logs/pull.log" 2>&1
 cid=$(docker create "$IMAGE" /bin/true)
 trap 'docker rm -f "$cid" >/dev/null 2>&1 || true' EXIT
-docker export "$cid" | tar --numeric-owner -xpf - -C "$BASE"
+docker export "$cid" | tar --numeric-owner --xattrs --xattrs-include='*' --selinux -xpf - -C "$BASE"
 docker rm -f "$cid" >/dev/null
 trap - EXIT
 
