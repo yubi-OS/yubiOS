@@ -1,6 +1,8 @@
 name: TEST - composefs digest matrix
 
 on:
+  push:
+    branches: [composefs-matrix-2026-10-18]
   workflow_dispatch:
     inputs:
       image:
@@ -21,6 +23,12 @@ jobs:
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 90
     steps:
+      - name: Free runner disk
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+          df -h /
+
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -29,7 +37,7 @@ jobs:
       - name: Run composefs digest matrix
         shell: bash -euo pipefail {0}
         env:
-          IMAGE: ${{ inputs.image }}
+          IMAGE: ${{ inputs.image || 'docker.io/0mniteck/yubios@sha256:d7e662449bd853d26627971c495789ef6c2721410f4149aec6f09aedd2cb4858' }}
         run: bash tools/composefs-matrix/matrix.sh
 
       - name: Upload matrix results
