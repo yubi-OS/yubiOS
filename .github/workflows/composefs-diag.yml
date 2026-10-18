@@ -25,7 +25,8 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$MATRIX_BASE" = "oct16" ]; then BASE="$BASE_OCT16"; else BASE="$BASE_CURRENT"; fi
-          docker buildx create --name diag --driver docker-container --use
+          for i in 1 2 3; do docker pull "$BASE" && break; echo "pull attempt $i failed"; sleep 10; done
+          docker image inspect "$BASE" --format 'pulled {{.Id}} {{.Architecture}}' || true
           docker buildx build -f Containerfile --target export \
             --build-arg BASE_IMAGE="$BASE" \
             --build-arg SOURCE_DATE_EPOCH=1792321149 \
