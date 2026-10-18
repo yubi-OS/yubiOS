@@ -4,7 +4,8 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-FROM quay.io/fedora/fedora-bootc:45@sha256:0442f3257efd5f2ffa137845f2e0d1589d17dda14568f32ffd29c44d12f33986 AS rootfs
+ARG BASE_IMAGE=quay.io/fedora/fedora-bootc:45@sha256:0442f3257efd5f2ffa137845f2e0d1589d17dda14568f32ffd29c44d12f33986
+FROM ${BASE_IMAGE} AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -196,3 +197,27 @@ RUN case "$(uname -m)" in \
     mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+
+FROM rootfs AS finaltree
+COPY --from=uki /out/ /boot/EFI/Linux/
+RUN case "$(uname -m)" in \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+
+FROM finaltree AS diag
+RUN dnf -y install attr binutils && mkdir -p /diag
+RUN --mount=type=bind,from=rootfs,target=/target echo "DIAG stage_composefs=$(bootc container compute-composefs-digest /target)" >> /diag/digests.txt
+RUN --mount=type=bind,from=finaltree,target=/target echo "DIAG final_composefs=$(bootc container compute-composefs-digest /target)" >> /diag/digests.txt
+RUN objcopy -O binary --only-section=.cmdline /boot/EFI/Linux/*.efi /diag/cmdline.bin && echo "DIAG uki_cmdline=$(tr '\0' ' ' < /diag/cmdline.bin)" >> /diag/digests.txt
+RUN --mount=type=bind,from=rootfs,target=/target find /target -xdev -printf '%y %m %U %G %T@ %s %p %l\n' | LC_ALL=C sort > /diag/stage.manifest
+RUN --mount=type=bind,from=finaltree,target=/target find /target -xdev -printf '%y %m %U %G %T@ %s %p %l\n' | LC_ALL=C sort > /diag/final.manifest
+RUN --mount=type=bind,from=rootfs,target=/target getfattr -R -d -m - --absolute-names /target 2>/dev/null | LC_ALL=C sort > /diag/stage.xattr; true
+RUN --mount=type=bind,from=finaltree,target=/target getfattr -R -d -m - --absolute-names /target 2>/dev/null | LC_ALL=C sort > /diag/final.xattr; true
+
+FROM scratch AS export
+COPY --from=diag /diag/ /

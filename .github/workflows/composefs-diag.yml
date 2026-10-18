@@ -1,0 +1,47 @@
+name: composefs-diag
+on:
+  push:
+    branches: [composefs-diag-2026-10-18]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diag:
+    name: diag (${{ matrix.base }})
+    strategy:
+      fail-fast: false
+      matrix:
+        base: [current, oct16]
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 240
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Build diagnostic export
+        env:
+          BASE_CURRENT: quay.io/fedora/fedora-bootc:45@sha256:0442f3257efd5f2ffa137845f2e0d1589d17dda14568f32ffd29c44d12f33986
+          BASE_OCT16: quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45
+          MATRIX_BASE: ${{ matrix.base }}
+        run: |
+          set -euo pipefail
+          if [ "$MATRIX_BASE" = "oct16" ]; then BASE="$BASE_OCT16"; else BASE="$BASE_CURRENT"; fi
+          docker buildx create --name diag --driver docker-container --use
+          docker buildx build --target export \
+            --build-arg BASE_IMAGE="$BASE" \
+            --build-arg SOURCE_DATE_EPOCH=1792321149 \
+            --output type=local,dest=out .
+          {
+            echo "### composefs diag: $MATRIX_BASE"
+            echo '```'
+            cat out/digests.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          diff out/stage.manifest out/final.manifest > out/manifest.diff || true
+          echo "manifest diff lines: $(wc -l < out/manifest.diff)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload diagnostic export
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: composefs-diag-${{ matrix.base }}
+          path: out/
+          if-no-files-found: warn
