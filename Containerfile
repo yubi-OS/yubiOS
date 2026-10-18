@@ -177,21 +177,17 @@ RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path
 # UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
 # checks. Secure Boot is not part of that check.
 FROM rootfs AS uki
-ARG SOURCE_DATE_EPOCH
-RUN --mount=type=bind,from=rootfs,target=/src set -- /src/usr/lib/modules/*/ && \
+RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
-    mkdir -p /out /out-diag /tmp/ukify-rootfs && \
-    cp -a /src/. /tmp/ukify-rootfs/ && \
-    # /boot's own mtime is part of the composefs digest the UKI embeds. Clearing /boot/* on this
-    # copy leaves /boot at build time, so reset it to SOURCE_DATE_EPOCH to match the stored image.
-    rm -rf /tmp/ukify-rootfs/boot/* && \
-    touch -h -d "@${SOURCE_DATE_EPOCH}" /tmp/ukify-rootfs/boot && \
-    bootc container ukify --rootfs /tmp/ukify-rootfs --write-dumpfile-to /out-diag/uki-view.dump -- --output "/out/${kver}.efi" && \
-    rm -rf /tmp/ukify-rootfs
+    mkdir -p /out && \
+    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
+
+# Reproducibility diagnostic (remove once the UKI is proven deterministic): print the composefs
+# digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
+RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
 
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
-COPY --from=uki /out-diag/ /boot/yubios-diag/
 RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
       x86_64)  efi_arch=x64; efi_upper=X64 ;; \
