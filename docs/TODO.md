@@ -142,7 +142,6 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 - [ ] Add or refresh real-hardware YubiKey validation evidence for FIDO2 unlock and homed flows. Partly done: LUKS2 FIDO2 enroll and unlock passed on rock1 (2026-08-01, slot 2, issue #20 closed). Still open: homed on hardware with retained logs, PAM presence, resident SSH keys, PIV signing, recovery and failure paths (B-REAL-FIDO2).
 - [x] Keep recovery paths documented before enabling any feature that can lock an owner out: [refs/roadmap-promotion-gates-2026-07-17.md](../refs/roadmap-promotion-gates-2026-07-17.md).
 - [ ] Run the owner-key ceremony on a YubiKey: attach it to rock1, add the StandaloneMM enrollment step to `enroll-sb.sh`, run it attended, then amend ADR-002 for slot 9a (B-OWNER-KEYS).
-- [ ] Move the cosign signing key out of the repo. `cosign/yubios-omni157.key` is still on main as an encrypted sigstore key (OMN-157 follow-up). Choose a GitHub secret or keyless OIDC signing with Rekor enabled.
 
 ## Current Supply-Chain Tasks
 
@@ -154,7 +153,7 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 - [x] Approve a checksum-pinned RK3588 DDR/TPL input before firmware equality can cover the final bootable ROCK 5B image. Pinned in PR #310 (rkbin `3e288fe8`, fail-closed). Firmware equality for the final image still depends on B-REPRO-MIRROR.
 - [ ] Verify package floors after digest bumps: systemd target, pam-u2f >= 1.3.1, OpenSSL 3.5+, and Go 1.24+ where relevant.
 - [x] Keep production, installer, firmware, and dev/test artifacts clearly labeled and non-overlapping: [refs/firmware-rk-workflow-2026-07-17.md](../refs/firmware-rk-workflow-2026-07-17.md).
-- [x] Preserve provenance/SBOM expectations for published artifacts: SLSA L3, SPDX SBOM, and cosign wired by OMN-157 (Done 2026-08-06). Open follow-ups: move the signing key out of the repo (see Security Tasks), digest-pin `buildkit-syft-scanner`, and run `tests/verify-oci-attestations.sh` end to end.
+- [x] Preserve provenance/SBOM expectations for published artifacts: SLSA L3, SPDX SBOM, and cosign wired by OMN-157 (Done 2026-08-06). Open follow-ups: digest-pin `buildkit-syft-scanner`, and run `tests/verify-oci-attestations.sh` end to end.
 - [x] Keep production bootc (`latest`, `<sha>`), dev/test (`dev`, `dev-<sha>`), and installer (`installer`, `installer-<sha>`) tags board-neutral unless the OS or installer artifact actually diverges by board. Firmware is now the only board-scoped tag family.
 - [x] Publish board-scoped firmware tags under the existing `0mniteck/yubios` namespace: `firmware-rock5b-rk3588`, `firmware-rock5b-rk3588-<sha>`, `firmware-rockpro64-rk3399`, and `firmware-rockpro64-rk3399-<sha>`, plus the QEMU baseline tags documented in [refs/arm64-rk-board-status-2026-07-17.md](../refs/arm64-rk-board-status-2026-07-17.md).
 
@@ -166,7 +165,6 @@ These items map [FUTURE.md](FUTURE.md) sections that were missing or only partia
 - Run 29869527608 proves the QEMU fTPM/StandaloneMM integration and board-specific compilation, but not physical-board behavior. Its ROCK 5B DDR/TPL input is now pinned (PR #310), and the 2026-10-11 build booted the board.
 - rock1 root is 12 GB and was about 4.9 GB free after the 2026-10-06 cleanup. The next arm64 KVM image pull can fill it (B-ROCK1-DISK).
 - One of the two ARM64 self-hosted hosts has hard-halted several times under sustained I/O (2026-10-04 to 2026-10-07). Keep long jobs off it until it is declared stable.
-- Linear is out of step with the repo: OMN-56 is Todo although PR #310 landed, OMN-151 is In Progress although its blocker moved, and OMN-53 is Done although B-BOOTC-SEAL still requires Secure Boot and negative tamper boots. Reconcile on the next status comment.
 - `.github/workflows/ci_firmware-rk.yml` is the orchestrated firmware lane. The removed `ci_test-int.yml` workflow is historical context only; do not restore its `yubiOS firmware` state to the top-level `ci.yml` chain.
 - systemd v262 removes `/run/boot-loader-entries/` support and the experimental `systemd-sysupdated` D-Bus API; the 2026-07-14 audit found no repo dependency, but future update UX should stay on UAPI.1/BLS and Varlink/systemd-sysupdate rather than removed interfaces or unaudited `updatectl` assumptions.
 - systemd v262 renames `systemd-sysupdate.service`/`.timer` to `systemd-sysupdate-update.service`/`.timer`; verify compatibility symlinks before adding units against the old names.
@@ -231,6 +229,6 @@ Checked against main (head `f99e5213`), the PRs merged between 2026-09-01 and 20
 - ADR-033 marked merged (PR #151, 2026-07-30). New ADR items: the ADR-002 slot 9a amendment and the Path B record.
 - Current CI: the unzip item now reads as fixed in code with verification blocked by disk. Added the diag_sign-matrix fix-or-retire item, two closed items (Lean gate hardening, ci_dispatch-reachability), and the Docker Hub restore.
 - ARM64: ROCK 5B is active again, the DDR/TPL pin is done, OP-TEE and fTPM init reached on hardware, and the rehearsal deferral is recorded.
-- Security: the YubiKey item is narrowed, and the owner-key ceremony and cosign key removal are added.
+- Security: the YubiKey item is narrowed, and the owner-key ceremony is added.
 - Supply chain: the reproducibility item is promoted to B-REPRO-MIRROR, the DDR/TPL approval is done, and OMN-157 is marked done with its follow-ups.
-- Decisions recorded since 2026-08-24 are listed in a new section. Watch and retired lists updated.
+- Decisions recorded since 2026-08-24 are listed in a new section. Watch and retired lists updated. Linear reconciled to this register on 2026-10-18: OMN-53 reopened to In Progress, OMN-56 Done, OMN-151 commented.

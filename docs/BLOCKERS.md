@@ -159,4 +159,4 @@ Checked against main (head `f99e5213`), the PRs merged between 2026-09-01 and 20
 - **New active rows:** B-OWNER-KEYS, B-UKI-COMPOSEFS, B-REPRO-MIRROR, B-ROCK1-DISK.
 - **Formatting fix:** blank lines that split the active table after B-BOOTC-SEAL and B-ROCK1-OFFLINE were removed, so those rows render as table rows.
 - **New permanent CI-evidence patterns:** self-hosted runner disk exhaustion; two-build divergence from live package repositories.
-- **Linear and register mismatches:** OMN-53 is Done while B-BOOTC-SEAL still requires Secure Boot and negative tamper boots. OMN-56 is Todo although PR #310 shipped the DDR/TPL pin. OMN-151 is In Progress with its blocker moved to disk. OMN-150 stays Backlog, which matches the open Phase 2 work.
+- **Linear reconciled to this register (2026-10-18):** OMN-53 reopened to In Progress (its Secure Boot and negative tamper scope is not met). OMN-56 set to Done (PR #310). OMN-151 commented with the disk root cause and stays In Progress. OMN-150 stays Backlog, which matches the open Phase 2 work.
