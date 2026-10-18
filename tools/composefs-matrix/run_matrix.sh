@@ -7,6 +7,9 @@ set -u
 
 ROOT="${MATRIX_ROOT:-/mnt/extended/matrix2}"
 SRC="${MATRIX_SRC:-$ROOT/src/tools/composefs-matrix}"
+# One runroot for every call: podman's database is bound to the runroot it was created with
+# (/run/ct-new on rock1). A per-base runroot fails with "database configuration mismatch" (rc=125).
+RUNROOT="/run/ct-new"
 TSV="$SRC/variants_v2.tsv"
 CHAIN_LOG="$ROOT/chain.log"
 CHAIN_STATUS="$ROOT/CHAIN_STATUS"
@@ -54,7 +57,7 @@ for tier in 1 2 3; do
     esac
     out="$ROOT/$base"
     log "START tier=$tier base=$base only=$only"
-    CT_RUNROOT="/run/ct-$base" bash "$SRC/method_v2.sh" --base "$base" --variants "$TSV" \
+    CT_RUNROOT="$RUNROOT" bash "$SRC/method_v2.sh" --base "$base" --variants "$TSV" \
       --out "$out" --only "$only" >> "$ROOT/call-t$tier-$base.log" 2>&1
     rc=$?
     status="$(cat "$out/STATUS" 2>/dev/null || echo MISSING)"
