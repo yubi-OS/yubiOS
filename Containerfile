@@ -298,3 +298,7 @@ RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
 # stage). Re-pin them as the last step so the two digests agree.
 ARG SOURCE_DATE_EPOCH
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+
+# DIAGNOSTIC: single-layer final image (no layer-level whiteouts) from the variant stage.
+FROM scratch
+COPY --from=vA / /
