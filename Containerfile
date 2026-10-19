@@ -159,8 +159,12 @@ RUN set -- /usr/lib/modules/*/ && \
 # Build leftovers: /run and /tmp must be empty in a bootc image (lint nonempty-run-tmp), and the
 # regenerable journal catalog cache under /var is not image state (lint var-tmpfiles). Clean them
 # here, in the rootfs stage, so the UKI stage and the final stage hash the same tree.
+# /run/systemd/resolve/stub-resolv.conf is bind-mounted by the build runtime; it is kept
+# (the bootc lint ignores it too). Everything else under /run and /tmp is removed.
 RUN rm -f /var/lib/systemd/catalog/database && \
-    find /run /tmp -mindepth 1 -delete
+    find /tmp -mindepth 1 -delete && \
+    find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \
+    find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} +
 
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
