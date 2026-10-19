@@ -228,6 +228,8 @@ RUN case "$(uname -m)" in \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+FROM rootfs AS dA
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN --mount=type=bind,from=vA,target=/t echo "VARIANT vA composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
 
 FROM rootfs AS vB
@@ -242,6 +244,8 @@ RUN case "$(uname -m)" in \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+FROM rootfs AS dB
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN --mount=type=bind,from=vB,target=/t echo "VARIANT vB composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
 
 FROM rootfs AS vC
@@ -257,12 +261,16 @@ RUN case "$(uname -m)" in \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
 RUN find /boot -mindepth 1 -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+FROM rootfs AS dC
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN --mount=type=bind,from=vC,target=/t echo "VARIANT vC composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
 
 FROM rootfs AS vD
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG SOURCE_DATE_EPOCH
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+FROM rootfs AS dD
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN --mount=type=bind,from=vD,target=/t echo "VARIANT vD composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
 
 FROM rootfs
