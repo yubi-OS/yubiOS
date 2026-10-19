@@ -196,3 +196,11 @@ RUN case "$(uname -m)" in \
     mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+
+# Final-stage mtime pin (composefs digest). The rootfs stage normalizes mtimes to
+# SOURCE_DATE_EPOCH, but the writes in this stage leave build-time mtimes on /, /run and
+# /boot. bootc hashes those into the composefs digest, so the digest the installer computes
+# for the final image differs from the digest embedded in the UKI (computed on the rootfs
+# stage). Re-pin them as the last step so the two digests agree.
+ARG SOURCE_DATE_EPOCH
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
