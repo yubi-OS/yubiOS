@@ -230,7 +230,7 @@ RUN case "$(uname -m)" in \
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
 FROM rootfs AS dA
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN --mount=type=bind,from=vA,target=/t echo "VARIANT vA composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+RUN --mount=type=bind,from=vA,target=/t bootc container compute-composefs-digest /t > /digest.txt 2>&1; echo "VARIANT vA composefs=$(tail -1 /digest.txt)"
 
 FROM rootfs AS vB
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -246,7 +246,7 @@ RUN case "$(uname -m)" in \
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
 FROM rootfs AS dB
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN --mount=type=bind,from=vB,target=/t echo "VARIANT vB composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+RUN --mount=type=bind,from=vB,target=/t bootc container compute-composefs-digest /t > /digest.txt 2>&1; echo "VARIANT vB composefs=$(tail -1 /digest.txt)"
 
 FROM rootfs AS vC
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -263,7 +263,7 @@ RUN case "$(uname -m)" in \
 RUN find /boot -mindepth 1 -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
 FROM rootfs AS dC
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN --mount=type=bind,from=vC,target=/t echo "VARIANT vC composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+RUN --mount=type=bind,from=vC,target=/t bootc container compute-composefs-digest /t > /digest.txt 2>&1; echo "VARIANT vC composefs=$(tail -1 /digest.txt)"
 
 FROM rootfs AS vD
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -271,10 +271,14 @@ ARG SOURCE_DATE_EPOCH
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
 FROM rootfs AS dD
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN --mount=type=bind,from=vD,target=/t echo "VARIANT vD composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+RUN --mount=type=bind,from=vD,target=/t bootc container compute-composefs-digest /t > /digest.txt 2>&1; echo "VARIANT vD composefs=$(tail -1 /digest.txt)"
 
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
+COPY --from=dA /digest.txt /diag/dA.txt
+COPY --from=dB /digest.txt /diag/dB.txt
+COPY --from=dC /digest.txt /diag/dC.txt
+COPY --from=dD /digest.txt /diag/dD.txt
 RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
       x86_64)  efi_arch=x64; efi_upper=X64 ;; \
