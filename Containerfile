@@ -23,7 +23,9 @@ ARG SOURCE_DATE_EPOCH
 # package scriptlets also refresh ldconfig's regenerable auxiliary cache in
 # filesystem-dependent order. RPM itself honors SOURCE_DATE_EPOCH, so remove
 # those caches while retaining the installed RPM and runtime linker databases.
-RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False install \
+RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
+      --setopt=updates-testing.excludepkgs=kernel-headers,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip \
+      install \
       libfido2 \
       yubikey-manager \
       yubico-piv-tool \
@@ -58,7 +60,10 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False instal
       /var/log/libdnf* \
       /var/lib/dnf/repos \
       /var/lib/dnf/system-repo.lock \
-      /usr/lib/sysimage/libdnf5/transaction_history.sqlite*
+      /usr/lib/sysimage/libdnf5/transaction_history.sqlite* && \
+    rm -f /etc/machine-id /var/lib/systemd/random-seed && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
 
 # ── First-boot firmware validation (ADR-024) ─────────────────────────────
 # CHIPSEC is distributed from PyPI rather than Fedora repos. Pin the source
@@ -165,13 +170,6 @@ RUN rm -f /var/lib/systemd/catalog/database && \
     find /tmp -mindepth 1 -delete && \
     find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \
     find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} +
-
-# DIAGNOSTIC (remove once the arm64 reproducibility gate is green): print the installed package
-# set and the rpm verify state into the build log, so two isolated builds can be diffed.
-RUN rpm -qa --qf '%{NEVRA}|%{BUILDTIME}|%{SIGMD5}\n' | sort; \
-    echo DIAG-RPMVA-BEGIN; rpm -Va 2>/dev/null | sort; echo DIAG-RPMVA-END; \
-    echo DIAG-DNF-BEGIN; dnf history list 2>/dev/null | head -20; echo DIAG-DNF-END; \
-    true
 
 # Remove the identity files as the last rootfs step. The early removal after preset-all
 # did not hold: run 39247824761 still shipped etc/machine-id and var/lib/systemd/random-seed
