@@ -301,4 +301,5 @@ RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /
 
 # DIAGNOSTIC: single-layer final image (no layer-level whiteouts) from the variant stage.
 FROM scratch
+# hadolint ignore=DL3067
 COPY --from=vA / /
