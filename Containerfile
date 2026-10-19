@@ -156,6 +156,12 @@ RUN set -- /usr/lib/modules/*/ && \
     { ! grep -q "/vfio\.ko" /tmp/yubiOS-initramfs-listing.txt; } && \
     rm -f /tmp/yubiOS-initramfs-listing.txt
 
+# Build leftovers: /run and /tmp must be empty in a bootc image (lint nonempty-run-tmp), and the
+# regenerable journal catalog cache under /var is not image state (lint var-tmpfiles). Clean them
+# here, in the rootfs stage, so the UKI stage and the final stage hash the same tree.
+RUN rm -f /var/lib/systemd/catalog/database && \
+    find /run /tmp -mindepth 1 -delete
+
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
