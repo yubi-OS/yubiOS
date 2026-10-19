@@ -209,6 +209,10 @@ RUN case "$(uname -m)" in \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
 
+FROM finaltree AS fixedtree
+ARG SOURCE_DATE_EPOCH
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+
 FROM finaltree AS diag
 RUN dnf -y install attr binutils && mkdir -p /diag
 RUN --mount=type=bind,from=rootfs,target=/target echo "DIAG stage_composefs=$(bootc container compute-composefs-digest /target)" >> /diag/digests.txt
@@ -218,6 +222,9 @@ RUN --mount=type=bind,from=rootfs,target=/target find /target -xdev -printf '%y 
 RUN --mount=type=bind,from=finaltree,target=/target find /target -xdev -printf '%y %m %U %G %T@ %s %p %l\n' | LC_ALL=C sort > /diag/final.manifest
 RUN --mount=type=bind,from=rootfs,target=/target getfattr -R -d -m - --absolute-names /target 2>/dev/null | LC_ALL=C sort > /diag/stage.xattr; true
 RUN --mount=type=bind,from=finaltree,target=/target getfattr -R -d -m - --absolute-names /target 2>/dev/null | LC_ALL=C sort > /diag/final.xattr; true
+
+RUN --mount=type=bind,from=fixedtree,target=/target echo "DIAG fixed_composefs=$(bootc container compute-composefs-digest /target)" >> /diag/digests.txt
+RUN --mount=type=bind,from=fixedtree,target=/target find /target -xdev -printf '%y %m %U %G %T@ %s %p %l\n' | LC_ALL=C sort > /diag/fixed.manifest
 
 FROM scratch AS export
 COPY --from=diag /diag/ /

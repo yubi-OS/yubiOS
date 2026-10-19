@@ -7,11 +7,7 @@ permissions:
   contents: read
 jobs:
   diag:
-    name: diag (${{ matrix.base }})
-    strategy:
-      fail-fast: false
-      matrix:
-        base: [current, oct16]
+    name: diag (current base)
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 240
     steps:
@@ -20,30 +16,27 @@ jobs:
       - name: Build diagnostic export
         env:
           BASE_CURRENT: quay.io/fedora/fedora-bootc:45@sha256:43ee6f8f859835f64f2a1415a41fdd4ccfb878f79d00a6ccca84222204cb9d8e
-          BASE_OCT16: quay.io/fedora/fedora-bootc:45@sha256:86cc9d98ef210b71a6c4eeec4b7d04e7fef0a4415184c2322a14c879df189f45
-          MATRIX_BASE: ${{ matrix.base }}
         run: |
           set -euo pipefail
-          if [ "$MATRIX_BASE" = "oct16" ]; then BASE="$BASE_OCT16"; else BASE="$BASE_CURRENT"; fi
-          echo "base=$BASE"
-          docker buildx imagetools inspect "$BASE" > inspect.txt 2>&1 || echo "imagetools inspect failed"; head -12 inspect.txt || true
-          for i in 1 2 3; do docker pull "$BASE" && break; echo "pull attempt $i failed"; sleep 10; done
+          for i in 1 2 3; do docker pull "$BASE_CURRENT" && break; echo "pull attempt $i failed"; sleep 10; done
           docker buildx build -f Containerfile --target export \
-            --build-arg BASE_IMAGE="$BASE" \
+            --build-arg BASE_IMAGE="$BASE_CURRENT" \
             --build-arg SOURCE_DATE_EPOCH=1792321149 \
             --output type=local,dest=out .
           {
-            echo "### composefs diag: $MATRIX_BASE"
+            echo "### composefs diag (current base 43ee6f8f)"
             echo '```'
             cat out/digests.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-          diff out/stage.manifest out/final.manifest > out/manifest.diff || true
-          echo "manifest diff lines: $(wc -l < out/manifest.diff)" >> "$GITHUB_STEP_SUMMARY"
+          diff out/stage.manifest out/fixed.manifest > out/stage-vs-fixed.diff || true
+          echo "stage vs fixed manifest diff lines: $(wc -l < out/stage-vs-fixed.diff)" >> "$GITHUB_STEP_SUMMARY"
+          diff out/stage.manifest out/final.manifest > out/stage-vs-final.diff || true
+          echo "stage vs final manifest diff lines: $(wc -l < out/stage-vs-final.diff)" >> "$GITHUB_STEP_SUMMARY"
       - name: Upload diagnostic export
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: composefs-diag-${{ matrix.base }}
+          name: composefs-diag-current-fix
           path: out/
           if-no-files-found: warn
