@@ -214,7 +214,7 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
 # digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
 RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
 
-FROM rootfs
+FROM rootfs AS prefinal
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
@@ -235,3 +235,13 @@ RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
 # stage). Re-pin them as the last step so the two digests agree.
 ARG SOURCE_DATE_EPOCH
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+
+# Single-layer shipped image. The composefs digest the installer checks is computed from the
+# image layers, while the UKI embeds the merged-filesystem digest. One layer makes the two agree
+# (rehearsal on the diagnostic single-layer image returned INSTALL_RC=0). Base labels and the
+# command are restored here because a scratch stage starts with no config.
+FROM scratch
+# hadolint ignore=DL3067
+COPY --from=prefinal / /
+LABEL containers.bootc="1" ostree.bootable="true"
+CMD ["/sbin/init"]
