@@ -216,6 +216,7 @@ RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc
 
 # DIAGNOSTIC (throwaway branch): composefs digest of the shipped-image contents, variant by variant.
 FROM rootfs AS vA
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG SOURCE_DATE_EPOCH
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN case "$(uname -m)" in \
@@ -230,6 +231,7 @@ RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /
 RUN --mount=type=bind,from=vA,target=/t echo "VARIANT vA composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
 
 FROM rootfs AS vB
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG SOURCE_DATE_EPOCH
 RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
@@ -243,6 +245,7 @@ RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /
 RUN --mount=type=bind,from=vB,target=/t echo "VARIANT vB composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
 
 FROM rootfs AS vC
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG SOURCE_DATE_EPOCH
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN case "$(uname -m)" in \
@@ -257,6 +260,7 @@ RUN find /boot -mindepth 1 -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && tou
 RUN --mount=type=bind,from=vC,target=/t echo "VARIANT vC composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
 
 FROM rootfs AS vD
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG SOURCE_DATE_EPOCH
 RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
 RUN --mount=type=bind,from=vD,target=/t echo "VARIANT vD composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
