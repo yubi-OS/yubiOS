@@ -34,7 +34,7 @@ Not for: executing the atom (that is a gated directive, never inline), policy ch
 | `/api/jev/corpus/lens` | POST | `{matrix, labels?, top?}` | `{candidates:[...]}` lens format: `{id, cell, kind:"real"|"control", hypothesis, method, params, expected_delta, score}`; returns K reals + K paired controls |
 | `/api/jev/corpus/atom` | POST | `{matrix, max_flips?}` | `{plan:[{i,primitive,delta}], finalDelta, converged}` DRY-RUN only; execution is a gated directive |
 | `/api/jev/corpus/classify` | POST | `{sentence}` | `{verdict:"tautology"|"falsifiable"|"paradox"|"undecidable", refuter, run_id}` exact parity with the discerner |
-| `/api/jev/corpus/placements` | POST | `{matrix, labels}` | audits, then POSTs vectors to the worker's own `/api/jev/map`; returns `{map_id, map_url:"/map/?id=N"}`; <10 rows or D>768 relays the map endpoint's 422 as `MAP_FAILED` |
+| `/api/jev/corpus/placements` | POST | `{matrix, labels}` | audits, then POSTs vectors to the worker's own `/api/jev/map`; returns `{map_id, map_url:"<origin>/jev/"}` (the console; map_id stays machine-readable); <10 rows or D>768 relays the map endpoint's 422 as `MAP_FAILED` |
 | `/api/jev/corpus/runs` | GET | - | last 50 run rows (kind, input_hash, result) |
 | `/api/jev/corpus/selftest` | GET | - | runs all three module selftests (fixture parity vs the Python sources); 200 all-pass, 500 with failing checks |
 

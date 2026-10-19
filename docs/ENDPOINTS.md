@@ -709,7 +709,7 @@ Composes with:
 
 ## Endpoint Inventory
 
-The complete 130-route inventory (121 from Lane A + 10 added 2026-10-06; the 2026-10-08 auth pass + SOS fold took it to 129, the map fold to 127 canonical, and the timeseries wave to 130: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/*, the /map/ page folded into the /jev/ console's Map card, and the WAE telemetry + forecast routes landed under /api/jev/timeseries/* and /api/jev/forecast/*; old paths serve 410 aliases), grouped by
+The complete 135-route inventory (121 from Lane A + 10 added 2026-10-06; the 2026-10-08 auth pass + SOS fold took it to 129, the map fold to 127 canonical, the timeseries wave to 130, and 5 added 2026-10-19: the PWC switches pair, the history backup/clear pair and the evolution queue: the map engine, outcome ledger and ingestion surface moved under /api/jev/map/*, the /map/ page folded into the /jev/ console's Map card, and the WAE telemetry + forecast routes landed under /api/jev/timeseries/* and /api/jev/forecast/*; old paths serve 410 aliases), grouped by
 module part. Auth is `bearer` (JEV_API_KEY) on every /api/jev route except the two
 health endpoints and the reply webhook. Six rows are CORS preflights (OPTIONS).
 
@@ -729,7 +729,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | POST | `/api/site-assistant` | none | Steady Orbit site chat assistant (entry module), grounded on KV llms.txt; rate-limited | No |
 | POST | `/api/brain/preview` | none | Brain demo chat endpoint - identical handler to /api/site-assistant; rate-limited | No |
 | GET | `/` | none | KV-served site landing page (website-v19/index.html); also /index.html | No |
-| GET | `/revenue-blind-spot[/]` | none | Revenue Blind Spot landing page (website-v19/revenue-blind-spot.html); /RBS, /RBS/, /rbs, /rbs/ alias to the same page | No |
+| GET | `/revenue-blind-spot[/]` | none | Revenue Blind Spot landing page (website-v19/revenue-blind-spot.html) | No |
 | GET | `/systems-lab[/]` | none | Systems Lab page (lab.html) with Lumina embeds | No |
 | GET | `/founders[/]` | none | Founders page (founders.html) | No |
 | GET | `/terms[/]` | none | Terms page (terms.html) | No |
@@ -790,7 +790,7 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | GET | `/api/jev/map/selftest` † | bearer | Ingestion recall selftest: embed determinism (bit-identical re-embed, 768-D), canary recall through Vectorize (the one idempotent write; eventual-consistency bounded retry with disclosed skip), small repo-items smoke (playbooks, n>=10) | Partial - live contract probes |
 | GET | `/api/relay/selftest` † | bearer | Live relay diagnostics: decide calibration probe (pinned band, records consumed), chat non-empty, one tiny TTS synth + STT round-trip; <=1 call per service, in-process handler calls (never self-fetch) | Partial - live contract probes |
 
-### routes-jev.js (jev orchestrator) - 26 routes
+### routes-jev.js (jev orchestrator) - 30 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
@@ -816,6 +816,10 @@ refs/falsification-harness-coverage-2026-10-06.md.
 | POST | `/api/jev/approvals/:id/guide` | bearer | Attach human guidance to the approval's task (documented in AGENT.md by the R1 refresh); rate-limited | No |
 | GET | `/api/jev/pause` | bearer | Read pause state (fail-closed: unreadable policy reports paused:true scope all); rate-limited | No |
 | POST | `/api/jev/pause` | bearer | Set pause {paused, scope}; blocks new and queued dispatch, never undoes completed effects; rate-limited | No |
+| GET | `/api/jev/system/switches` | bearer | PWC switches view (SPEC-PWC-SWITCHES D8): switch states (approval_emails, autoapprove with allowlist + per-hour cap) plus usedLastHour count; 503 NOT_CONFIGURED / SWITCHES_UNREADABLE on failure; rate-limited | No |
+| POST | `/api/jev/system/switches` | bearer | Set a switch {name, enabled}; actor recorded; 503 SWITCH_WRITE_FAILED on failure (state may be unchanged, re-read and retry); rate-limited | No |
+| GET | `/api/jev/history/backup` | bearer | Full jev-history backup envelope (jev-history-backup/1) built from the history driver; Content-Disposition attachment + X-Backup-Sha256 header; 500 BACKUP_FAILED on failure (nothing changed); rate-limited | No |
+| POST | `/api/jev/history/clear` | bearer | Clear jev history tables (destructive; active learnings preserved; take GET /api/jev/history/backup first); rate-limited | No |
 | GET | `/api/jev/summary` | bearer | Tasks by state/outcome, pending approvals, cost rollup + policy version; rate-limited | No |
 | GET | `/api/jev/learnings` | bearer | Learning proposal ledger list; rate-limited | No |
 | POST | `/api/jev/learnings` | bearer | Propose a learning; rate-limited | No |
@@ -850,7 +854,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/evolution/directives/:id/reject` | bearer | Reject a directive; approver allowlist (403 APPROVER_NOT_ALLOWED); rate-limited | No |
 | GET | `/api/jev/evolution/state` | bearer | Evolution state: sweeps, directives, calibration trend, notify state; rate-limited | No |
 
-### jev-evolution2-routes.js (evolution v2 cycle) - 9 routes
+### jev-evolution2-routes.js (evolution v2 cycle) - 10 routes
 
 | Method | Path | Auth | Description | Falsification Harness |
 |---|---|---|---|---------|
@@ -861,6 +865,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/evolution/directives/:id/cancel` | bearer | Cancel an approved_ready or proposed directive (body `{actor, reason?}`); approver allowlist (403); 409 DIRECTIVE_NOT_CANCELLABLE otherwise; writes directive_cancelled; rate-limited | No |
 | GET | `/api/jev/evolution/candles` | bearer | Standard-candle ledger with detection power summary; rate-limited | No |
 | POST | `/api/jev/evolution/cycle/run` | bearer | Manual trigger of the hourly cycle: one cycle + enqueue + queue drain (the scheduled pass on demand); rate-limited | No |
+| GET | `/api/jev/evolution/queue` | bearer | Durable-queue rows with status allowlist (pending/claimed/completed/failed; else 422 INVALID_STATUS) and limit clamp (default 50); rate-limited | No |
 | GET | `/api/jev/evolution/selftest` † | bearer | Evolution cycle replay on memoryEvolutionDriver: preflight, measure report, decision, cycle-row persist read-back - the in-process mirror of the cron-leg defect (same logic persists in-memory) | Yes - the selftest harness itself |
 | GET | `/api/jev/evolution/selftest/candle` † | bearer | Candle positive control: real detectionPower at planted amplitude detects, zero-amplitude does not, candleDue boundaries with fixed timestamps | Yes - the selftest harness itself |
 
@@ -873,7 +878,7 @@ below), dispatched after the corpus delegation and before the task regexes.
 | POST | `/api/jev/corpus/lens` | bearer | Lens candidates: K reals + K paired controls in guided-curve-ideate format; rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/atom` | bearer | RSI-descent atom plan, DRY-RUN only (Delta >= 0 invariant asserted); rate-limited | Partial - parity-tested vs Python sources of record |
 | POST | `/api/jev/corpus/classify` | bearer | Tautology discerner (parity with tools/tautology-discerner); rate-limited | Partial - parity-tested vs Python sources of record |
-| POST | `/api/jev/corpus/placements` | bearer | Audit then POST vectors to the worker's own /api/jev/map (self-call); rate-limited | Partial - parity-tested vs Python sources of record |
+| POST | `/api/jev/corpus/placements` | bearer | Audit then POST vectors to the worker's own /api/jev/map (self-call); returns map_url `<origin>/jev/` (the console; map_id stays machine-readable); rate-limited | Partial - parity-tested vs Python sources of record |
 | GET | `/api/jev/corpus/runs` | bearer | Last 50 corpus run rows; rate-limited | No |
 | GET | `/api/jev/corpus/selftest` | bearer | All module selftests (math, atom, lens, visco, stamp + scorer-v2 extraction) with fixture parity vs Python sources; rate-limited | Yes - the parity selftest harness itself |
 | POST | `/api/jev/corpus/scorer/score` | bearer | Structured-evidence scorer v2.1: deterministic per-axis extraction + ONE batched clef request, hysteresis flip p>=0.55/p<=0.45; rate-limited | Partial - byte-exact parity + gold slice (PR #297: specificity 4/4 PASS; recall 0/4 = the v2.3 extractor-recall gap) |
