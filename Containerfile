@@ -214,6 +214,53 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
 # digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
 RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
 
+# DIAGNOSTIC (throwaway branch): composefs digest of the shipped-image contents, variant by variant.
+FROM rootfs AS vA
+ARG SOURCE_DATE_EPOCH
+COPY --from=uki /out/ /boot/EFI/Linux/
+RUN case "$(uname -m)" in \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+RUN --mount=type=bind,from=vA,target=/t echo "VARIANT vA composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+
+FROM rootfs AS vB
+ARG SOURCE_DATE_EPOCH
+RUN case "$(uname -m)" in \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+RUN --mount=type=bind,from=vB,target=/t echo "VARIANT vB composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+
+FROM rootfs AS vC
+ARG SOURCE_DATE_EPOCH
+COPY --from=uki /out/ /boot/EFI/Linux/
+RUN case "$(uname -m)" in \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+RUN find /boot -mindepth 1 -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+RUN --mount=type=bind,from=vC,target=/t echo "VARIANT vC composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+
+FROM rootfs AS vD
+ARG SOURCE_DATE_EPOCH
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+RUN --mount=type=bind,from=vD,target=/t echo "VARIANT vD composefs=$(bootc container compute-composefs-digest /t 2>&1 | tail -1)"
+
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN case "$(uname -m)" in \
