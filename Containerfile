@@ -179,6 +179,11 @@ RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
     ! test -e /etc/machine-id && \
     ! test -e /var/lib/systemd/random-seed
 
+# The final stage creates the EFI directories with mkdir, and the composefs digest covers
+# directory entries. Create them here too, so the UKI (built from this stage) and the shipped
+# image carry the same directory set before the mtime normalisation below.
+RUN mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd
+
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
