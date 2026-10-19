@@ -166,6 +166,14 @@ RUN rm -f /var/lib/systemd/catalog/database && \
     find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \
     find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} +
 
+# Remove the identity files as the last rootfs step. The early removal after preset-all
+# did not hold: run 39247824761 still shipped etc/machine-id and var/lib/systemd/random-seed
+# with per-build random content (isolated OCI layouts differ). The assert fails this step
+# if either file reappears.
+RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
+
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
@@ -206,6 +214,9 @@ RUN case "$(uname -m)" in \
     mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+
+# Shipped-image assert: machine-id and random-seed must be absent (see the rootfs stage).
+RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
 
 # Final-stage mtime pin (composefs digest). The rootfs stage normalizes mtimes to
 # SOURCE_DATE_EPOCH, but the writes in this stage leave build-time mtimes on /, /run and
