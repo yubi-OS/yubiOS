@@ -4,7 +4,7 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-FROM quay.io/fedora/fedora-bootc:45@sha256:3a0c1080f0acd11a344be7e55c405f61f1af13564c61890882ad0834cd6a9a9c AS rootfs
+FROM quay.io/fedora/fedora-bootc:45@sha256:43ee6f8f859835f64f2a1415a41fdd4ccfb878f79d00a6ccca84222204cb9d8e AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -23,7 +23,9 @@ ARG SOURCE_DATE_EPOCH
 # package scriptlets also refresh ldconfig's regenerable auxiliary cache in
 # filesystem-dependent order. RPM itself honors SOURCE_DATE_EPOCH, so remove
 # those caches while retaining the installed RPM and runtime linker databases.
-RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False install \
+RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
+      --setopt=updates-testing.excludepkgs=kernel-headers,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip \
+      install \
       libfido2 \
       yubikey-manager \
       yubico-piv-tool \
@@ -58,7 +60,10 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False instal
       /var/log/libdnf* \
       /var/lib/dnf/repos \
       /var/lib/dnf/system-repo.lock \
-      /usr/lib/sysimage/libdnf5/transaction_history.sqlite*
+      /usr/lib/sysimage/libdnf5/transaction_history.sqlite* && \
+    rm -f /etc/machine-id /var/lib/systemd/random-seed && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
 
 # ── First-boot firmware validation (ADR-024) ─────────────────────────────
 # CHIPSEC is distributed from PyPI rather than Fedora repos. Pin the source
@@ -156,6 +161,29 @@ RUN set -- /usr/lib/modules/*/ && \
     { ! grep -q "/vfio\.ko" /tmp/yubiOS-initramfs-listing.txt; } && \
     rm -f /tmp/yubiOS-initramfs-listing.txt
 
+# Build leftovers: /run and /tmp must be empty in a bootc image (lint nonempty-run-tmp), and the
+# regenerable journal catalog cache under /var is not image state (lint var-tmpfiles). Clean them
+# here, in the rootfs stage, so the UKI stage and the final stage hash the same tree.
+# /run/systemd/resolve/stub-resolv.conf is bind-mounted by the build runtime; it is kept
+# (the bootc lint ignores it too). Everything else under /run and /tmp is removed.
+RUN rm -f /var/lib/systemd/catalog/database && \
+    find /tmp -mindepth 1 -delete && \
+    find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \
+    find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} +
+
+# Remove the identity files as the last rootfs step. The early removal after preset-all
+# did not hold: run 39247824761 still shipped etc/machine-id and var/lib/systemd/random-seed
+# with per-build random content (isolated OCI layouts differ). The assert fails this step
+# if either file reappears.
+RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
+
+# The final stage creates the EFI directories with mkdir, and the composefs digest covers
+# directory entries. Create them here too, so the UKI (built from this stage) and the shipped
+# image carry the same directory set before the mtime normalisation below.
+RUN mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd
+
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
@@ -186,7 +214,7 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
 # digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
 RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
 
-FROM rootfs
+FROM rootfs AS prefinal
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN case "$(uname -m)" in \
       aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
@@ -196,3 +224,24 @@ RUN case "$(uname -m)" in \
     mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
+
+# Shipped-image assert: machine-id and random-seed must be absent (see the rootfs stage).
+RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
+
+# Final-stage mtime pin (composefs digest). The rootfs stage normalizes mtimes to
+# SOURCE_DATE_EPOCH, but the writes in this stage leave build-time mtimes on /, /run and
+# /boot. bootc hashes those into the composefs digest, so the digest the installer computes
+# for the final image differs from the digest embedded in the UKI (computed on the rootfs
+# stage). Re-pin them as the last step so the two digests agree.
+ARG SOURCE_DATE_EPOCH
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+
+# Single-layer shipped image. The composefs digest the installer checks is computed from the
+# image layers, while the UKI embeds the merged-filesystem digest. One layer makes the two agree
+# (rehearsal on the diagnostic single-layer image returned INSTALL_RC=0). Base labels and the
+# command are restored here because a scratch stage starts with no config.
+FROM scratch
+# hadolint ignore=DL3067
+COPY --from=prefinal / /
+LABEL containers.bootc="1" ostree.bootable="true"
+CMD ["/sbin/init"]
