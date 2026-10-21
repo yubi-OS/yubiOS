@@ -291,3 +291,9 @@ jev call count + cost, failures.
   all merged). Every section reflects something that actually happened
   in that run, including the failure modes (1010 UA block, engine
   suspension, draft-PATCH no-op, container restart mid-dig).
+
+## Worker API Parity: Embedded Mint/Refresh Preflight Workflow (`POST /api/jev/workflows/mint-preflight`, 2026-10-21)
+
+Phase 0 searXNG + Clef preflight and batched dig-result quality weighting are embedded on the `steady-orbit` worker:
+
+- `POST /api/jev/workflows/mint-preflight` (or `/workflow.mint_preflight` in the `/jev/` prompt console): runs preflight readiness, Clef `score` triage, and Clef `noul` source-quality weighting (flagging `redo_required` when fewer than 3 high-signal results survive).

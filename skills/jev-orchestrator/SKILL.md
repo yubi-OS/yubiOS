@@ -185,3 +185,19 @@ Calibration on record: image bands 6/6 HIT through the live route (band edges [1
 
 Caller caveats: degenerate stub images (8×8 PNG) fail clef inference (3043) → 422 MEASUREMENT_FAILED — use real images; same-artifact re-routes dedup to the existing task via idempotency (a re-route is NOT a re-dispatch); no text bands in v1 (text artifacts measure but route fail-closed blocked); the task verify endpoint REQUIRES `body.action_id` — without it the handler resolves action=null and 500s.
 
+## Google Research Harness2, PWC Switches, History Restore & Universal Prompt Console Funnel (Policy v25, 2026-10-21)
+
+All endpoints, workflows, automations, and evolutions on the worker are funnelled and controllable from the `/jev/` Prompt Console (`#prompt-console`):
+
+- **Universal Prompt Console Funnel (`jev-console-funnel.js`):**
+  - `GET /api/jev/console/catalog` (`?category=`): returns all 90 registered targets across 6 categories (`orchestrator`, `automations`, `evolution`, `corpus_and_math`, `harness_and_workflows`, `map_and_timeseries`) with `slash`, `aliases`, `method`, `path`, `read_only`, and ready-to-run `sample_args`.
+  - `POST /api/jev/console/dispatch`: executes `{target, args}` or `{prompt}` in-process for read-only targets (zero self-fetch CF 1042) and routes mutating targets through the gated pipeline when `via_task: true`.
+  - `POST /api/jev/tasks`: accepts slash commands (`payload.prompt: "/sofima.relax"`, `"/dream.replay"`, `"/spherical.swsft"`, `"/harness.ppc"`, `"/workflow.unit-round"`, `"/forecast.cascade"`), structured `payload.console_command: {target, args}`, or natural-language aliases (`decided_via: "console_funnel:<target_id>"`), auto-executing and verifying allowed read-only targets in-request.
+  - `GET /api/jev/console/selftest`: 6 deterministic checks (`F1..F6`).
+- **Harness2 Contrastive Propose-Probe-Compose & Experience Library (`jev-harness2.js`, `arXiv:2610.14224`):**
+  - `POST /api/jev/harness/propose-probe-compose`: runs task-level contrastive recursion across the 8 harness components (`system_prompt`, `guardrails`, `memory`, `tool_guidance`, `subagents`, `skills`, `scripts`, `plugins`), enforces the strict `Ledger` budget identity $R=4k, P=3k$ with duplicate-label rejection before count checks, and selects from the SHA-1 seeded anonymized pool (`A..Z`).
+  - `POST /api/jev/harness/reflect` & `GET /api/jev/harness/library`: harnessing-level Experience Reflector requiring non-empty `{cue, lesson, evidence}` triples in `jev_harness_library`.
+  - `POST /api/jev/harness/ledger-check` & `GET /api/jev/harness/selftest` (`G1..G8`).
+- **PWC Switches & History Backup/Clear/Restore:**
+  - `GET/POST /api/jev/system/switches`: fail-closed switches (`approval_emails`, `autoapprove`).
+  - `GET /api/jev/history/backup`, `POST /api/jev/history/clear`, `POST /api/jev/history/restore` (SHA-256 verified envelope restore, `RESTORE_NOT_EMPTY` / `TASKS_IN_FLIGHT` guards), and `GET /api/jev/selftest/coverage`.

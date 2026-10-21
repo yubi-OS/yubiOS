@@ -72,3 +72,10 @@ Forecast card lives in the /jev/ Corpus tab (KV `jev-index.html`, class prefix `
 2. Forecasts advise, never authorize. A forecast that feeds a gate decision must first record a {predicted, realized} pair into the outcomes ledger.
 3. Any gate change is a pre-registered amendment, never a post-hoc loosening (falsification-corpus skill).
 4. Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
+
+## WAE SQL Export & 3-Stage Clairic-TimesFM-Clef Cascade API (2026-10-21)
+
+- **WAE Time-Series Export (`jev-timeseries-export.js`):**
+  - `GET /api/jev/timeseries/export?from=<iso>&to=<iso>` (`/timeseries.export` in the `/jev/` prompt console): exports bounded rows from the WAE `jev` dataset using `toDateTime('YYYY-MM-DD HH:MM:SS')` ClickHouse SQL comparisons and returns `{ rows, next, from, to, max_rows }`.
+- **3-Stage Clairic -> TimesFM 2.5/3.0 -> Clef Cascade (`jev-cascade-forecast.js`):**
+  - `POST /api/jev/forecast/cascade` and `POST /api/jev/forecast/:series` (`/forecast.cascade` in the `/jev/` prompt console): runs Stage 1 Clairic span-grounded extraction/short-horizon forecast, Stage 2 TimesFM 2.5 primary kernel with pre-registered rolling-origin fallback gate to TimesFM 3.0 (MASE, PICP_80, covariate coupling, horizon), and Stage 3 Clef bounded decision (`act`, `wait`, `review`, `fallback_ets`) with `/api/jev/map/outcomes` pre-registration payload.

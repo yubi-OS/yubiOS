@@ -306,3 +306,10 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 1. | p3 | `has_constraint` | `Must`, `Never`, `Cannot`, `ADR-\d+`, `Don't`, `ban` |
 
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
+
+## Worker API Parity: `/api/jev/corpus/atom` & `/api/jev/workflows/wayfinder-cycle` (2026-10-21)
+
+Single-action atomic RSI runs directly on the `steady-orbit` worker without local scripts:
+
+- `POST /api/jev/corpus/atom` (`/corpus.atom` in the `/jev/` prompt console): dry-run single-action primitive flip plan asserting $\Delta \ge 0$.
+- `POST /api/jev/workflows/wayfinder-cycle` (`/workflow.wayfinder`): combines single-action geodesic flip selection on `target_row_index` with Spin-Weighted Spherical Harmonics (`POST /api/jev/corpus/spherical/swsft`) and SOFIMA fold-free elastic relaxation (`POST /api/jev/corpus/sofima/relax`).

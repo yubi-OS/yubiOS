@@ -405,3 +405,10 @@ The whole-self output requirement (SELF.md Bias #11) is preserved as the structu
 2. One-shot pushing without SELF-CHANGELOG entry** — the audit trail is the relationship, not a byproduct. Every push MUST be accompanied by a SELF-CHANGELOG entry per the discipline.
 
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
+
+## Worker API Parity: `/api/jev/workflows/self-archaeology` & `/api/jev/evolution/dream/replay` (2026-10-21)
+
+Self-doc corpus sweeps and replay-world policy evaluation run directly through the `steady-orbit` worker API:
+
+- `POST /api/jev/workflows/self-archaeology` (`/workflow.self_archaeology` in the `/jev/` prompt console): scores self-doc text across the 12 NSS axes, checks DREAM-RSI root-direction diversity, validates Harness² `{cue, lesson, evidence}` experience records, and generates fail-closed evolution sweep proposals.
+- `POST /api/jev/evolution/dream/replay` (`/dream.replay`): evaluates exploration policies across the $ho \in \{0, 0.25, 0.5, 0.75, 1.0\}$ Pareto budget sweep with replay-set monotonicity $V(\pi^\star) \ge V(\pi_0)$.

@@ -71,3 +71,11 @@ This skill contributes to the yubiOS audit-evidence rollup — SBOM, SLSA proven
 
 
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
+
+## Worker API Parity: Spin-Weighted Spherical Harmonics (`jev-spherical-cnn.js`, 2026-10-21)
+
+In addition to the scalar ($s=0$) least-squares spherical-harmonic audit (`POST /api/jev/corpus/audit`), the `steady-orbit` worker exposes exact Huffenberger & Wandelt torus-extended quadrature and Spin-Weighted Spherical Harmonics (`google-research/spherical-cnn`, `arXiv:1711.06721`, `2006.10731`, `2306.05420`):
+
+- `POST /api/jev/corpus/spherical/quadrature` (`/spherical.quadrature`): exact H&W quadrature weights summing to $4\pi$ and `spinSphericalMean`.
+- `POST /api/jev/corpus/spherical/swsft` (`/spherical.swsft`): Wigner $\Delta^\ell_{m,n} = d^\ell_{m,n}(\pi/2)$ forward/backward SWSFT for integer spin $s \in \mathbb{Z}$, degree power spectrum $E_\ell(s)$, and Parseval energy verification.
+- `POST /api/jev/corpus/spherical/convolve` & `POST /api/jev/corpus/spherical/pool` (`/spherical.convolve`, `/spherical.pool`): $SO(3)$-equivariant spin-weighted spectral convolution and bandlimit spectral pooling ($\ell_{\max}' = \lfloor(\ell_{\max}+1)/2floor - 1$).

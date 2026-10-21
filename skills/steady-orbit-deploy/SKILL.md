@@ -79,3 +79,17 @@ Console: the Router card lives in KV `jev-index.html` (SITE ns), inserted inside
 6. Post-deploy: live-verify every new route before reporting success.
 
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
+
+## 74-Part Google Research Quad + Prompt Console Funnel Layout (2026-10-21, Policy v25)
+
+Deployed etag `a0a0473b4b2a09d6782a8d0148a6e845502a63d9585438695eb907fa644ecd42`, policy v25 (promoted via learning `l_7e5ec4c2d5782fa3`, changelog `pc_f57e7664de526499`), KV `jev-index.html` sha256 `12bc3724133a01db568756870faeace5270f8511973ab82e6cb119c8e6997dbe`.
+
+- **Part count: 74** (67 prior parts + 7 new parts):
+  - `jev-sofima.js`: SOFIMA relative-offset coordinate maps, masked cross-correlation, fold-preventing Hookean spring mesh (`prefer_orig_order`), and FIRE solver (`/api/jev/corpus/sofima/*`, `/api/jev/corpus/lens/elastic`).
+  - `jev-dream-rsi.js`: DREAM-RSI `TraceEnv` discovery-tree replay simulator, Eq. 1 Pareto $ho$-sweep evaluator, replay-set monotonicity gate, and root-direction diversity (`/api/jev/evolution/dream/*`).
+  - `jev-spherical-cnn.js`: Spherical-CNN H&W torus quadrature, Wigner $\Delta^\ell_{m,n}$, Spin-Weighted SHT (`swsft`), spectral convolution, and spectral pooling (`/api/jev/corpus/spherical/*`).
+  - `jev-harness2.js`: Harness² 8-component tree validator, $R=4k/P=3k$ budget ledger identity, seeded anonymized `A..Z` selection pool, contrastive Propose-Probe-Compose, and `{cue, lesson, evidence}` Experience Reflector (`/api/jev/harness/*`).
+  - `jev-workflows.js`: embedded skill workflows (`/api/jev/workflows/{unit-round,wayfinder-cycle,mint-preflight,self-archaeology,catalog,selftest}`).
+  - `jev-console-funnel.js`: 90-target Universal `/jev/` Prompt Console Funnel (`/api/jev/console/{catalog,dispatch,selftest}`).
+  - `jev-gr-wiring.js`: deps-injection glue connecting the 6 new modules to the worker's corpus, scorer, visco, decide, execute, and `index.js` `handleCoreRequest` map handlers without self-fetch.
+- **S5 functional fixes wired:** `POST /api/jev/history/restore`, `POST /api/jev/evolution/memory/reindex`, `GET /api/jev/selftest/coverage` (100% part test coverage including `jev-switches.js` and `jev-history.js`), `jev-timeseries-export.js` ClickHouse `toDateTime` fix, and `cycle_replay` active (`skipped: []`) in `GET /api/jev/evolution/selftest`.

@@ -143,3 +143,8 @@ Connection: the taste routes need the Steady Orbit jev operator connection passe
 8. Changes to pinned parameters are major version bumps; prior measurements keep their version stamp.
 
 Every use stays inside the frontmatter description's scope; anything beyond it is a different skill's job.
+
+## SOFIMA Elastic Mesh Pre-Alignment & Prompt Console Funnel (2026-10-21)
+
+- **Non-Rigid Elastic Pre-Alignment (`jev-sofima.js`):** before measuring box-counting $D$ on warped or tiled arrangements, call `POST /api/jev/corpus/sofima/relax` (or `POST /api/jev/corpus/lens/elastic`) to relax local coordinate-map offsets under SOFIMA's fold-preventing Hookean spring mesh (`prefer_orig_order: true`, FIRE solver), ensuring `fold_free: true` ($\min \det J > 0$).
+- **Prompt Console Funnel:** invoke `/taste.score`, `/taste.edge_standard`, or `/sofima.relax` directly from `#prompt-console` on `/jev/`.

@@ -432,3 +432,10 @@ Sauna, wave 2. Built against `papers/is-this-x-2026-08-12.md`
 (sections 3-8, and section 7 in particular), the evidence bundle's
 `tests/T3-results.json`, and the `curved-corpus-create` and
 `guided-curve-ideate` SKILL.md exemplars.
+
+## Worker API Parity: Embedded Wayfinder Workflow & Spin-Weighted Spherical Harmonics (2026-10-21)
+
+The reversible quantized-atom compass and spherical-harmonic analysis are embedded in the `steady-orbit` worker API and controllable from the `/jev/` prompt console:
+
+- `POST /api/jev/workflows/wayfinder-cycle` (`/workflow.wayfinder`): runs single-action geodesic primitive-flip evaluation ($\Delta \ge 0$ stay option), projects the corpus onto $S^2$ through the Spherical-CNN Spin-Weighted Spherical Harmonics Transform (`POST /api/jev/corpus/spherical/swsft`), and computes a fold-free SOFIMA Hookean elastic relaxation preview (`POST /api/jev/corpus/sofima/relax`).
+- `POST /api/jev/map` & `POST /api/jev/map/preview` (`/map.preview`): server-side S^2 placement, curveball fixed-margin null, and compass Metropolis chain.

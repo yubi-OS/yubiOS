@@ -340,3 +340,9 @@ questions, 5 per request.
   mechanics inherited from the validated run; the mint-specific phases
   (outline decomposition, repo bootstrap, orchestrator-owned commit) are
   specified but await first live validation.
+
+## Worker API Parity: Embedded Mint-Preflight Workflow (`POST /api/jev/workflows/mint-preflight`, 2026-10-21)
+
+Phase 0 endpoint preflight, Clef outline validation (`score`), and dig-result quality weighting (`noul` at threshold `0.55` with automatic `redo_required` detection when `kept_count < 3`) are embedded as a single worker workflow:
+
+- `POST /api/jev/workflows/mint-preflight` (or `/workflow.mint_preflight` in the `/jev/` prompt console): accepts `{ topic, outline: [...], dig_results: [...], probe_live }`, runs preflight + outline scoring + dig weighting in one call, and returns `{ preflight, outline_verdicts, dig_weights, redo_required }`.

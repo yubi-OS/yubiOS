@@ -179,3 +179,10 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 ## Cryptographic identity coverage
 
 This skill manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
+
+## Worker API Parity: Embedded Self-Archaeology Workflow, DREAM-RSI & Harness2 Reflection (2026-10-21)
+
+The 12-axis negative-skill-space self-sweep and bounded RSI reflection are embedded on the `steady-orbit` worker and controllable from the `/jev/` prompt console:
+
+- `POST /api/jev/workflows/self-archaeology` (`/workflow.self_archaeology`): runs the 12-axis NSS sweep (`Extend` / `Pair` / `Accept`), computes DREAM-RSI root-direction mechanism diversity (`/api/jev/evolution/dream/directions`), validates Harness² `{cue, lesson, evidence}` experience triples (`/api/jev/harness/reflect`), and emits fail-closed evolution sweep proposals.
+- `POST /api/jev/evolution/memory/reindex` (`/evolution.memory_reindex`): idempotently re-upserts backed-up `jev_evolution_memory` rows into the `EVEC` Vectorize index by deterministic `identity_key`.

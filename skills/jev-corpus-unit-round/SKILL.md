@@ -92,3 +92,14 @@ Document every endpoint call with ids in a steps log (`steps-refsN-<date>.log`) 
 4. Geometry proposes; the frozen task check disposes. A keep without a taskcheck pass is not shipped.
 5. Every unit re-derives its frozen baseline; carry nothing across units except the round number and the lessons.
 6. Selftest before trusting any engine result; fixtures are the truth.
+
+## Embedded Worker API Workflow & DREAM-RSI Replay Verification (2026-10-21)
+
+The unit-round protocol is embedded directly in the `steady-orbit` worker and paired with the DREAM-RSI replay simulator:
+
+- **Embedded Unit-Round Workflow (`jev-workflows.js`):**
+  - `POST /api/jev/workflows/unit-round` (or `/workflow.unit-round` in the `/jev/` prompt console): executes the frozen baseline audit (`nulls`), generates lens candidates honoring `skip`, scores or applies `candidate_edit` with v2.1 hysteresis, computes `realized_level_delta = post.level_dbc - baseline.level_dbc`, evaluates the bearing (`aligned_keep`, `inverted_revert`, `no_flip`), and runs the visco `snapback` detector in a single atomic API call.
+- **DREAM-RSI Replay Worlds & Pareto Policy Sweep (`jev-dream-rsi.js`, `google-research/dream-rsi`, `arXiv:2609.14858`):**
+  - `POST /api/jev/evolution/dream/replay` (`/dream.replay`): builds a deterministic `TraceEnv` discovery tree from stored D1 rounds (`from_d1: true`) or caller traces and evaluates exploration policies (`parallel_refine`, `ucb_greedy`, `thompson_prune`) across $ho \in \{0, 0.25, 0.5, 0.75, 1.0\}$ using Eq. 1 (normalized Pareto hypervolume AUC minus $\lambda$ sequential-round penalty).
+  - `POST /api/jev/evolution/dream/promote-check` (`/dream.promote_check`): verifies replay-set monotonicity $V(\pi^\star) \ge V(\pi_0)$.
+  - `POST /api/jev/evolution/dream/directions` (`/dream.directions`): computes root-direction mechanism diversity (`duplicate_rate`).
