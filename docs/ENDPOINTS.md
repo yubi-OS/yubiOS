@@ -1422,72 +1422,7 @@ Refresh notes (2026-10-05, discrepancy resolution):
 18. Audit-fixes + selftest wave 2026-10-08 (SPEC-AUDIT-FIXES-2026-10-08 in skills/steady-orbit-deploy, parallel-build-lanes: 4 lanes + advisor, 85/0 tests): P0 fixes - POST /api/jev/tasks validation errors now 422 INVALID_BODY with no stack leak (jev-ingest.js invalid() stamps validation; route-boundary catch; the one bundle-wide stack-leak site stripped), GET /api/searxng returns 400 on missing qs before the relay hop, embed validator messages name texts. Evolution cron leg instrumented (structured [evolution-cron] cycle_id/persisted logs + persist read-back in runEvolutionCycleScheduled; diagnosis: scheduled and manual legs share the same invocation, the defect is silent error swallowing, not a divergent path). 7 new bearer-gated selftest routes in 3 new module parts (jev-selftest.js, jev-selftest-evolution.js, jev-selftest-live.js): GET /api/jev/selftest (26 lifecycle checks), /api/jev/selftest/ledger (10), /api/jev/evolution/selftest (4), /api/jev/evolution/selftest/candle (4), /api/jev/automations/selftest (5), /api/jev/map/selftest (3), /api/relay/selftest (4) - all in-process/memory-driver, zero production writes (the map selftest's single idempotent Vectorize canary is the one allowed write). Live-verified: all 7 selftest routes 200 ok:true, 401 gates clean, tasks 422 + searxng 400 + embed texts live; spot-checks green (health, tasks GET, corpus selftest 92 checks). Deploy etags fb94637c -> c910118b (56 parts, schedules + 16 bindings preserved; the AE_SQL_TOKEN secret_text binding preserved via keep_bindings since secret values do not round-trip through a settings GET). Amendment: the map selftest's canary-recall reports a DISCLOSED SKIP (never a false contract failure) when a cold canary is not queryable after a bounded retry - Vectorize upserts are eventually consistent (~3-4 min observed), storage proven via a CF REST query at score 1.0.
 19. Drift fix 2026-10-09 (docs/drift-2026-10-09), each item checked against the live steady-orbit bundle and live routes, or against main: (a) GET /api/jev/corpus/visco/hysteresis requires baseline_id and returns 422 INVALID_BASELINE without it; (b) Prony is clip-and-resolve least squares, not NNLS; (c) 102.86 is a recorded round-3 hysteresis value with tolerance 0.05, not an analytic anchor; (d) spectral-standard and lens-standard are on main via PR #292 (merged 2026-10-07) and run in lean-check.yml verify-tools; (e) timeseries band v2 is not calibrated, and the live selftest returns ok:false naming G2 and NEG_G2; (f) live policy v16 (9 tools) documents github.contents_put, daytona.sandbox and searxng.dig, http.post is POST-only, and route.dispatch requires_approval stays false by decision (Jenny); (g) policy, workspace and selftest routes are in the tables, and GET /api/jev/corpus/health is bearer-gated (401 without it); (h) the live worker has 16 bindings and 57 module parts (2026-10-09).
 20. Hybrid TimesFM (2.5 -> 3.0 fallback) + Clairic + Clef cascade 2026-10-21 (PR #328 merged `eb743c07`, `lean-check.yml` commit `4815c3ae` run 39585507995 green, worker deploy etag `356cb5c1c2e3e3f8b308ba6e29ab06bf27fd99fc107cc9d7f60b01d0dfb7e6b7`, 67 module parts, 15 bindings): adds `jev-cascade-forecast.js` (JS port of `tools/timesfm-clairic-clef/timesfm_clairic_clef.py`, parity max |delta| <= 1.42e-14 on 4 fixtures, 8/8 pre-registered gates G1..G8 PASS in `cascade_selftest`), exposes `?engine=cascade` on `GET /api/jev/forecast/:series` and adds `POST /api/jev/forecast/:series` running Stage 1 (`@cf/cloudflare/clairic` messy-log/CSV extraction, byte-offset spans, and 99-quantile short forecast), Stage 2 (TimesFM 2.5 Apache-2.0 primary with split-conformal calibration and pre-registered rolling-origin fallback gate to TimesFM 3.0 on MASE, coverage, covariate residual R2 >= 0.20, or variate coupling), and Stage 3 (`@cf/cloudflare/clef` bounded decision + deterministic fail-closed gate + `/api/jev/map/outcomes` pre-registration).
----
 
-## Google Research Quad, Skill Workflow Engine & Universal Prompt Console Funnel (Policy v25, 2026-10-21)
 
-Deployed etag `a0a0473b4b2a09d6782a8d0148a6e845502a63d9585438695eb907fa644ecd42`, **74 module parts** (67 prior + 7 new), **15 bindings** (`keep_bindings: ["secret_text"]` for `AE_SQL_TOKEN`), `cpu_ms: 300000`, crons `0 * * * *` and `*/5 * * * *`, **Policy v25** (promoted via learning `l_7e5ec4c2d5782fa3`, changelog `pc_f57e7664de526499`), KV `jev-index.html` sha256 `12bc3724133a01db568756870faeace5270f8511973ab82e6cb119c8e6997dbe`.
 
-### 1. `jev-sofima.js` — SOFIMA Elastic Coordinate Maps & Fold-Free Spring Mesh (`google-research/sofima`, Zenodo `10.5281/zenodo.10534541`)
 
-| Method | Path | Bearer | Falsification Harness | Description |
-| --- | --- | --- | --- | --- |
-| GET | `/api/jev/corpus/sofima/selftest` | Yes | Yes (8 gates G1–G8) | Relative/absolute identity, composition & inverse roundtrip, maskedXcorr2D shift recovery, Hookean zero-force rest, `prefer_orig_order` fold prevention (`min_det_j > 0`), FIRE energy reduction, Jacobian positivity, determinism. |
-| POST | `/api/jev/corpus/sofima/flow` | Yes | Yes | Strided patchwise masked cross-correlation (`grid_a`, `grid_b`, `patch_size`, `stride`) returning a `[2, Hm, Wm]` relative-offset coordinate map + peak ratio & SNR (`kind: "sofima-flow"`). |
-| POST | `/api/jev/corpus/sofima/relax` | Yes | Yes | Relaxes a coordinate map under nearest + diagonal ($k_2 = k/\sqrt{2}$) Hookean springs with SOFIMA fold-prevention (`prefer_orig_order: true`) and FIRE inertial solver (`kind: "sofima-relax"`). Alias: `POST /api/jev/corpus/lens/elastic`. |
-| POST | `/api/jev/corpus/sofima/compose` | Yes | Yes | Composes (`composeMaps`) and optionally inverts (`invertMap`) relative-offset coordinate maps (`kind: "sofima-compose"`). |
-
-### 2. `jev-dream-rsi.js` — DREAM-RSI Replay Worlds, Pareto $ho$-Sweep & Root-Direction Diversity (`google-research/dream-rsi`, `arXiv:2609.14858`)
-
-| Method | Path | Bearer | Falsification Harness | Description |
-| --- | --- | --- | --- | --- |
-| GET | `/api/jev/evolution/dream/selftest` | Yes | Yes (8 gates G1–G8) | `TraceEnv` no-invention invariant, `parallel_refine` wave order, Pareto frontier non-dominance, Eq. 1 AUC bounds, parallelism penalty monotonicity, replay-pool monotonicity $V(\pi^\star) \ge V(\pi_0)$, root-direction duplicate rate, determinism. |
-| POST | `/api/jev/evolution/dream/replay` | Yes | Yes | Runs candidate exploration policies (`parallel_refine`, `ucb_greedy`, `thompson_prune`, `breadth_first`, `depth_first`) on `TraceEnv` discovery trees (`traces`, `use_default_pool: true`, or `from_d1: true`) across $ho \in \{0, 0.25, 0.5, 0.75, 1.0\}$ using Eq. 1 Pareto AUC minus $\lambda$ sequential-round penalty. |
-| POST | `/api/jev/evolution/dream/directions` | Yes | Yes | Computes root-direction (`attempt == 0`) mechanism diversity (`count`, `unique`, `duplicates`, `duplicate_rate`). |
-| POST | `/api/jev/evolution/dream/promote-check` | Yes | Yes | Compares a candidate exploration policy against the incumbent across the trace pool and enforces replay-set monotonicity $V(\pi_{	ext{cand}}) \ge V(\pi_{	ext{inc}})$. |
-
-### 3. `jev-spherical-cnn.js` — Spin-Weighted Spherical Harmonics & H&W Torus Quadrature (`google-research/spherical-cnn`, `arXiv:1711.06721`, `2006.10731`, `2306.05420`)
-
-| Method | Path | Bearer | Falsification Harness | Description |
-| --- | --- | --- | --- | --- |
-| GET | `/api/jev/corpus/spherical/selftest` | Yes | Yes (8 gates G1–G8) | H&W quadrature sum $4\pi \pm 10^{-14}$, spherical mean exactness, Wigner $\Delta^\ell_{m,n}$ orthogonality & symmetry ($\ell=0..6$), $Y_0^0/Y_1^0/Y_2^1$ mode purity, spin $|s|>0$ vanishing for $\ell < |s|$, forward-backward SWSFT roundtrip $< 10^{-14}$, spectral pooling $\ell_{\max} 	o \lfloor(\ell_{\max}+1)/2floor - 1$, Parseval energy conservation. |
-| POST | `/api/jev/corpus/spherical/quadrature` | Yes | Yes | Huffenberger & Wandelt equiangular grid, torus-extended quadrature weights, sphere cell areas summing to $4\pi$, and `spinSphericalMean`. |
-| POST | `/api/jev/corpus/spherical/swsft` | Yes | Yes | Forward and optional backward Spin-Weighted Spherical Fourier Transform for integer spin $s \in \mathbb{Z}$ (accepts equiangular `grid` or scattered $S^2$ `points` + `values`), returning $(\ell_{\max}+1)^2$ coefficients, degree energy $E_\ell(s)$, and `parseval_ratio`. |
-| POST | `/api/jev/corpus/spherical/convolve` | Yes | Yes | $SO(3)$-equivariant spin-weighted spectral convolution ${}_s\widehat{(F*K)}_\ell^m = \sum_i {}_i\hat{f}_\ell^m {}_s\hat{k}_\ell^i$ with optional pooling/upsampling. |
-| POST | `/api/jev/corpus/spherical/pool` | Yes | Yes | Spectral pooling truncating harmonic bandwidth from $\ell_{\max}$ to $\ell_{\max}' = \lfloor(\ell_{\max}+1)/2floor - 1$. |
-
-### 4. `jev-harness2.js` — Harness² Contrastive Propose–Probe–Compose & Experience Library (`google-research/harness2`, `arXiv:2610.14224`)
-
-| Method | Path | Bearer | Falsification Harness | Description |
-| --- | --- | --- | --- | --- |
-| GET | `/api/jev/harness/selftest` | Yes | Yes (8 gates G1–G8) | 8-component tree validation, $R=4k / P=3k$ ledger identity, duplicate-label rejection before count check, `anonId` bijection (`A..Z, AA..AZ`), Python-bit-exact `assignIds` seeded shuffle, `hasExperience` `{cue, lesson, evidence}` gate, parallel & sequential PPC execution, library store roundtrip. |
-| POST | `/api/jev/harness/propose-probe-compose` | Yes | Yes | Executes/records a $k$-step parallel (`agg`) or sequential (`seq`) Propose–Probe–Compose cycle across the 8 harness components (`system_prompt`, `guardrails`, `memory`, `tool_guidance`, `subagents`, `skills`, `scripts`, `plugins`), verifies $R=4k, P=3k$, selects from the anonymized `A..Z` pool, and persists to `jev_harness_runs`. |
-| POST | `/api/jev/harness/reflect` | Yes | Yes | Harnessing-level Experience Reflector: validates `{cue, lesson, evidence}` (`hasExperience`) + 8-component `harness_tree` and persists to `jev_harness_library` (`422 INVALID_EXPERIENCE` on missing fields). |
-| GET | `/api/jev/harness/library` | Yes | Yes | Lists domain-scoped retained harnesses and experience records (`?domain=&mode=&limit=`). |
-| POST | `/api/jev/harness/ledger-check` | Yes | Yes | Validates the $R=4k$ rollout and $P=3k$ improvement-session ledger identity with duplicate-label detection. |
-
-### 5. `jev-workflows.js` — Embedded Skill Workflows
-
-| Method | Path | Bearer | Falsification Harness | Description |
-| --- | --- | --- | --- | --- |
-| GET | `/api/jev/workflows/catalog` | Yes | Yes | Returns the catalog of 4 embedded multi-step skill workflows with stage schemas and `sample_input`. |
-| GET | `/api/jev/workflows/selftest` | Yes | Yes (6 gates W1–W6) | Verifies catalog completeness, `unit-round` bearing/keep/revert, `wayfinder-cycle` $\Delta \ge 0$ + SWSFT + SOFIMA relaxation, `mint-preflight` outline/dig redo gate, `self-archaeology` 12-axis sweep, and determinism. |
-| POST | `/api/jev/workflows/unit-round` | Yes | Yes | Embeds `jev-corpus-unit-round`: baseline audit $	o$ lens candidates (`skip`) $	o$ hysteresis re-score $	o$ `level_dbc` bearing (`aligned_keep` / `inverted_revert`) $	o$ visco `snapback`. |
-| POST | `/api/jev/workflows/wayfinder-cycle` | Yes | Yes | Embeds `curve-compass-skill` + `single-action-curve-rsi` + `hyperspherical-harmonic-curve`: single-action $\Delta \ge 0$ flip + Spin-Weighted SWSFT spectrum + SOFIMA fold-free elastic relaxation preview. |
-| POST | `/api/jev/workflows/mint-preflight` | Yes | Yes | Embeds `knowledge-corpus-mint` + `refs-refresh-sweep`: Phase 0 searXNG/Clef preflight + Clef `score` outline validation + Clef `noul` dig weighting with `redo_required` detection. |
-| POST | `/api/jev/workflows/self-archaeology` | Yes | Yes | Embeds `self-archaeology` + `curve-guided-rsi-self`: 12-axis NSS sweep + DREAM-RSI root-direction diversity + Harness² reflection validation + fail-closed evolution sweep proposals. |
-
-### 6. `jev-console-funnel.js` & S5 Functional Review Routes
-
-| Method | Path | Bearer | Falsification Harness | Description |
-| --- | --- | --- | --- | --- |
-| GET | `/api/jev/console/catalog` | Yes | Yes (6 gates F1–F6) | Returns all 90 controllable targets across 6 categories (`orchestrator`, `automations`, `evolution`, `corpus_and_math`, `harness_and_workflows`, `map_and_timeseries`) with `slash`, `aliases`, `method`, `path`, `read_only`, and `sample_args`. |
-| POST | `/api/jev/console/dispatch` | Yes | Yes | Dispatches `{target, args}` or `{prompt}` in-process for read-only targets (zero CF 1042 self-fetch, including `/api/jev/map/*` via `handleCoreRequest`) and routes mutating targets through `runPipeline` (`via_task: true`). |
-| GET | `/api/jev/console/selftest` | Yes | Yes (6 gates F1–F6) | Verifies catalog uniqueness, slash/JSON parsing, natural-language alias matching, fail-closed unknown commands, in-process dispatch, and determinism. |
-| GET | `/api/jev/selftest/coverage` | Yes | Yes (12 checks) | Dedicated memory-driver selftest covering `jev-switches.js`, `jev-history.js`, `jev-history-restore.js`, `reindex-memory.js`, plus summary checks for SOFIMA, Spherical-CNN, Harness², Workflows, and Console Funnel. |
-| GET/POST | `/api/jev/system/switches` | Yes | Yes | Read and update fail-closed PWC switches (`approval_emails`, `autoapprove`). |
-| GET | `/api/jev/history/backup` | Yes | Yes | Exports SHA-256 signed JSON backup envelope across `HISTORY_CLEAR_TABLES`. |
-| POST | `/api/jev/history/clear` | Yes | Yes | Guarded history clear (requires confirmation phrase, matching backup SHA-256, and zero in-flight tasks; preserves active learnings). |
-| POST | `/api/jev/history/restore` | Yes | Yes | Inverse of history clear (`jev-history-restore.js`): verifies envelope SHA-256, enforces `RESTORE_NOT_EMPTY` / `TASKS_IN_FLIGHT` guards, and restores tables in parent-first order. |
-| POST | `/api/jev/evolution/memory/reindex` | Yes | Yes | Idempotently re-embeds and re-upserts `jev_evolution_memory` rows into `EVEC` by deterministic `identity_key` (`reindex-memory.js`). |
-| POST | `/api/jev/forecast/cascade` | Yes | Yes (8 gates G1–G8) | Direct 3-stage Clairic $	o$ TimesFM 2.5/3.0 $	o$ Clef forecast cascade on caller `series`/`values` or `state_text`. |
