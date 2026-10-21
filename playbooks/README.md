@@ -16,6 +16,7 @@ Operator-view runbooks, one per recurring failure mode. Format proven by
 | [github-token-vs-secrets](github-token-vs-secrets.md) | writing any `token:` / `GH_TOKEN:` line | PR #148, `a49e95db` |
 | [sealed-uki-vm-debug](sealed-uki-vm-debug.md) | `ci_test_sealed-uki-vm.yml` fails | V25–V39 journal, PR #154 + PR #155 |
 | [fido2-vm-e2e-recipe](fido2-vm-e2e-recipe.md) | the FIDO2/LUKS2/homed VM lane regresses | run 30139433902 |
+| [steady-orbit-api](steady-orbit-api.md) | deploying, operating, or debugging the 67-part `steady-orbit` CF Worker and `/jev/` API | PR #328 (`eb743c07`), run 39585507995, etag `356cb5c1` |
 
 ## How to use
 
