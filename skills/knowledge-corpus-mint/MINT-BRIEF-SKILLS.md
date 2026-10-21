@@ -1,14 +1,14 @@
-# Knowledge Corpus Mint Brief — SKILLS VARIANT (one corpus per yubiOS skills/ SKILL.md)
+# Knowledge Corpus Mint Brief -- SKILLS VARIANT (one corpus per yubiOS skills/ SKILL.md)
 
-You are minting ONE knowledge corpus into the yubi-OS org repo **yubi-OS/knowledge** (public). Your corpus directory: `skills/<NAME>/` — a NEW top-level `skills/` in yubi-OS/knowledge, one corpus per ground-source SKILL.md in yubi-OS/yubiOS `skills/<name>/`. Branch: `mint/skills-<NAME>-2026-10-06`. You open ONE draft PR. You are one of 5 parallel agents: touch ONLY your own branch, never main, never another corpus dir.
+You are minting ONE knowledge corpus into the yubi-OS org repo **yubi-OS/knowledge** (public). Your corpus directory: `skills/<NAME>/` -- a top-level `skills/` in yubi-OS/knowledge, one corpus per ground-source SKILL.md in yubi-OS/yubiOS `skills/<name>/`. Branch: `mint/skills-<NAME>-<YYYY-MM-DD>`. You open ONE draft PR. You are one of 5 parallel agents: touch ONLY your own branch, never main, never another corpus dir.
 
-## SPEED OPTIMIZATIONS (2026-10-06, from the 147-mint run analysis — apply all)
+## SPEED OPTIMIZATIONS (updated 2026-10-21 -- apply all)
 Measured per mint: jev phase 4.7 min avg (26 requests, ~2 rate-limit sleeps), authoring+push+verify 7.3 min avg. Apply these:
 
-1. **Weighting via DefAPI direct, not the worker relay.** POST https://api.defapi.org/api/v1/decisions with Bearer auth — pass `connections: [{"id":"conn_fc17EDPHeLCR","name":"DefAPI"}]` in the bash tool call (the proxy injects the key). Body: `{"model":"typesafe/jev-1.13","state":"<name>","questions":{...}}` (same question schema). Measured: ~100 req/min, ZERO 429s, 0.62s mean per call. Batch 10-15 questions per request. Pace >= 0.5s between requests. Keep the worker relay (https://steady-orbit.systems-a.workers.dev/api/decide) as FALLBACK if DefAPI 403s/429s — then drop to batches of 5 with >= 1s pacing and 30s backoff. Log the actual endpoint used per request in jev-log.json.
+1. **Weighting via Cloudflare Clef (`@cf/cloudflare/clef`).** DefAPI (`api.defapi.org` / `typesafe/jev-1.13`) was retired 2026-10-10; `clef` is the sole decision model. For high-throughput multi-corpus mint waves without hitting the worker relay's `WEBSITE_RATE_LIMIT` (12 req/60s), call Workers AI Clef directly: `POST https://api.cloudflare.com/client/v4/accounts/b57ee20cd90ebc4e4db28728e450a4b8/ai/run/@cf/cloudflare/clef` passing `connections: [{"id":"conn_pd_apn_1KhdoD7","name":"Cloudflare"}]` and body `{"model":"clef","state":"<name>","questions":{...}}` (batch 5-15 questions per request, zero 429s). Alternatively, use the steady-orbit worker relay (`POST https://steady-orbit.systems-a.workers.dev/api/decide` with `conn_QAvrBSyEG8ml` and `User-Agent: omni-agent/1.0`, batches of 5-8, pace >= 5s when running >12 requests/min). Log the endpoint and `model: "clef"` in `jev-log.json`.
 2. **Post-push verification via the Git blobs API, NEVER raw.githubusercontent.** CDN lag produced stale 404s and even mismatched content during the run. Verify each pushed .json by `GET /repos/yubi-OS/knowledge/git/blobs/<sha>` (the sha from your own tree response is authoritative) + base64-decode + parse. The PR files list check stays.
-3. **No per-mint preflight.** The orchestrator ran the campaign preflight (searXNG healthy, decide healthy) — your preflight.json records: `{"date":"2026-10-06","searxng":{"url":"https://p01--n8n-service--mcx7zcrbvdyt.code.run/webhook/searxng","probe_results":"campaign preflight healthy (orchestrator)"},"decide":{"url":"https://api.defapi.org/api/v1/decides","model":"typesafe/jev-1.13","note":"campaign preflight run orchestrator-side; agent-side probe skipped for speed"}}`. Do NOT spend a request probing.
-4. **Digs only where the ground source names external mechanisms.** Internal-record subtopics (decisions, blockers, ledger state, CI group assignments) skip searXNG entirely — cite the source doc and say "internal-record subtopic, no dig". Web-shaped subtopics get 2 queries each.
+3. **No per-mint preflight.** The orchestrator ran the campaign preflight (searXNG healthy, decide healthy) -- your preflight.json records: `{"date":"<YYYY-MM-DD>","searxng":{"url":"https://p01--n8n-service--mcx7zcrbvdyt.code.run/webhook/searxng","probe_results":"campaign preflight healthy (orchestrator)"},"decide":{"url":"https://steady-orbit.systems-a.workers.dev/api/decide","model":"clef","note":"campaign preflight run orchestrator-side; agent-side probe skipped for speed"}}`. Do NOT spend a request probing.
+4. **Digs only where the ground source names external mechanisms.** Internal-record subtopics (decisions, blockers, ledger state, CI group assignments) skip searXNG entirely -- cite the source doc and say "internal-record subtopic, no dig". Web-shaped subtopics get 2 queries each.
 
 This variant follows the in-repo copy at `yubi-OS/yubiOS/skills/knowledge-corpus-mint/MINT-BRIEF.md` for the shared flow: outline decomposition by the domain's joints, jev score-validation (drop 0), searXNG digs, jev noul weighting (decide-failure = REDO, never ship unweighted), authoring rules (600-1200 words, every claim carries source URL + jev weight, weak < 0.5 labeled, no em dashes, numbers as digits), research-db schema v2 (preflight, outline, archive, digs, jev-log, db.ts), README index, push mechanics, post-push verification, PR body format, and final report format. Read it IN FULL first. The deltas below override it:
 
@@ -19,27 +19,27 @@ Your corpus lands at `skills/<NAME>/` in yubi-OS/knowledge (NOT `knowledge/<REF>
 Your ground source is ONE SKILL.md from yubi-OS/yubiOS `skills/<name>/`, fetched directly:
 `https://raw.githubusercontent.com/yubi-OS/yubiOS/main/skills/<name>/SKILL.md`
 The SKILL.md is the primary source of record. The corpus explicates the skill: what it does, how to use it, its primitives and patterns, its examples and guidelines, and the domain knowledge it encodes. Decompose by the SKILL.md's own sections (When to Use, Pipeline/Flow, Anti-patterns, Examples, Guidelines, Interaction with Other Skills, etc.). (User-Agent: omni-agent/1.0 required).
-That file is the PRIMARY SOURCE OF RECORD — the corpus explicates and deepens it, it does not replace it:
+That file is the PRIMARY SOURCE OF RECORD -- the corpus explicates and deepens it, it does not replace it:
 - The doc's own structure dictates the outline: decompose by the document's own sections/joints (6-10 subtopics).
-- Every corpus doc cites the source-doc path (`yubi-OS/yubiOS docs/<FILE>`) for its grounding spine, plus searXNG digs for the external mechanisms, tools, and standards the doc references (2 queries per subtopic where web-research-shaped; skip digs for purely internal-record subtopics and say so).
+- Every corpus doc cites the source-doc path (`yubi-OS/yubiOS skills/<name>/SKILL.md`) for its grounding spine, plus searXNG digs for the external mechanisms, tools, and standards the doc references (2 queries per subtopic where web-research-shaped; skip digs for purely internal-record subtopics and say so).
 - Claims from the source doc are attributed to it explicitly ("source doc"); claims from digs carry their URL + jev weight as usual. Do not contradict the source doc; where the dig world has moved past it, note the drift as a dated correction with the dig source.
 - REDO RULE applies to digs as in the parent brief. NEVER fabricate what the source doc does not say.
 
 ## DELTA 3 - Naming
-- Corpus dir: `docs/<NAME>/` where NAME is the lowercase-hyphenated form of the docs filename (ADR -> adr, THREAT_MODEL -> threat-model, CI_MAP -> ci-map).
-- Branch: `mint/skills-<NAME>-2026-10-06`.
-- PR title: `mint: docs/<NAME> knowledge corpus (yubiOS docs/<FILE> ground source)`.
+- Corpus dir: `skills/<NAME>/` where NAME is the skill directory name (`jev-timeseries`, `cf-deployment-backup`, `gradiate`, `rockchip-sd-flash`).
+- Branch: `mint/skills-<NAME>-<YYYY-MM-DD>`.
+- PR title: `mint: skills/<NAME> knowledge corpus (yubiOS skills/<NAME>/SKILL.md ground source)`.
 
 ## Guardrails (same as parent brief)
-- Public repo: docs/ files are public artifacts; ground only in them and in dig results. Never invent.
+- Public repo: skills/ files are public artifacts; ground only in them and in dig results. Never invent.
 - Plain UTF-8, never base64-pushed. Post-push verification REQUIRED (PR files list + re-fetch each research-db .json + weights non-null).
-- jev budget ~40 requests. Never modify files outside `docs/<NAME>/`.
+- jev budget ~40 requests. Never modify files outside `skills/<NAME>/`.
 
 ## Final report format (same as parent brief, plus the ground-source line)
 ```
 PR: #<n> <url>
-branch: mint/skills-<NAME>-2026-10-06
-ground source: yubi-OS/yubiOS docs/<FILE> (<bytes> B fetched)
+branch: mint/skills-<NAME>-<YYYY-MM-DD>
+ground source: yubi-OS/yubiOS skills/<NAME>/SKILL.md (<bytes> B fetched)
 files: <n> (README, <k> docs, research-db x<m>)
 docs kept/skipped: k / s
 results weighted: <total> (high <h> / low <l>)
