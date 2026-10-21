@@ -9,9 +9,10 @@ Time-series substrate for the /jev/ ecosystem: Workers Analytics Engine (WAE) is
 
 ## Routes (all bearer-gated via the operator key)
 
-- `GET /api/jev/timeseries/selftest` — math falsification gates (G1-G6) + WAE write/read-back probe + schema probe (`meta.columns`, `has_timestamp`). Returns `ok:false` honestly when the pre-registered G2 band fails.
+- `GET /api/jev/timeseries/selftest` — math falsification gates (G1-G6) + `cascade_selftest` (8/8 pre-registered gates G1..G8 PASS) + WAE write/read-back probe + schema probe (`meta.columns`, `has_timestamp`). Returns top-level `ok:false` honestly while the pre-registered ETS v2 G2/NEG_G2 gates fail (`cascade_selftest.ok` is `true`).
 - `GET /api/jev/timeseries/series` — inventory: `SELECT index1 AS series, COUNT() AS n, MIN(timestamp), MAX(timestamp) FROM jev GROUP BY index1`.
-- `GET /api/jev/forecast/:series?h=5` — SQL read (last 1000 points) → `etsForecast`. Response: `{series, n, history_last30, forecast[], band[], quality:{insufficient_series, low_r2, holdout_sse, holdout_r2, residual_sd, alpha, beta, flags[]}, source:"wae"}`. Fail-closed errors: `503 MISSING_READ_TOKEN`, `422 BAD_SERIES_NAME` (`^[a-z_]+$`), `502 WAE_SQL_ERROR` (truncated upstream body).
+- `GET /api/jev/forecast/:series?h=5` — SQL read (last 1000 points) → `etsForecast` (default) or `runCascadePipeline` when `&engine=cascade` (and optional `&live_clairic=1`) is passed. Default response: `{series, n, history_last30, forecast[], band[], quality:{insufficient_series, low_r2, holdout_sse, holdout_r2, residual_sd, alpha, beta, flags[]}, source:"wae"}`. Fail-closed errors: `503 MISSING_READ_TOKEN`, `422 BAD_SERIES_NAME` (`^[a-z_]+$`), `502 WAE_SQL_ERROR` (truncated upstream body).
+- `POST /api/jev/forecast/:series` — 3-stage SCAMPER cascade (`jev-cascade-forecast.js`, Python source of record `tools/timesfm-clairic-clef/timesfm_clairic_clef.py`, parity max |delta| <= 1.42e-14 on 4 fixtures): accepts `{values?, state_text?, past_covariates?, future_covariates?, peer_series?, horizon?, season_len?, action_threshold?, commercial_mode?, live_clairic?, live_clef?}` (or reads WAE when `values`/`state_text` omitted). Runs Stage 1 (`@cf/cloudflare/clairic` extraction, byte-offset spans, and 99-quantile short forecast), Stage 2 (TimesFM 2.5 Apache-2.0 primary with split-conformal calibration and pre-registered rolling-origin fallback gate to TimesFM 3.0 on MASE, coverage, covariate R² >= 0.20, or variate coupling), and Stage 3 (`@cf/cloudflare/clef` bounded decision + deterministic fail-closed gate + `/api/jev/map/outcomes` pre-registration with `verdict: "pending"`).
 
 ## Series schema (WAE dataset `jev`)
 
@@ -50,12 +51,12 @@ Forecast v4 is pre-registered and is not wired into any route. The live forecast
 
 - `quality.calibrated` stays `false` until a pre-registered gate passes on the live series. Never set it to true by hand.
 - The timeseries selftest reports `ok:false` by design while G2 and NEG_G2 fail. Do not treat `ok:false` as a deploy failure, and do not change the gates to make it pass.
-- The v4 harness and its results are not stored in this repo. Do not describe the forecast as calibrated.
+- The v4 harness and its results are not part of the 2026-10-11 source record (`tools/steady-orbit-worker/2026-10-11/`). Do not describe the forecast as calibrated in a console, a report, or a demo.
 - Wiring v4 into `/api/jev/forecast/:series` is a deploy decision, made after the pre-registered gate is recorded. Record the gate result first.
 
 ## Console
 
-Forecast card lives in the /jev/ Corpus tab (KV `jev-index.html`, class prefix `jevfc-`, sibling of the spectral card): series selector, horizon input, stat tiles (n points, last value, forecast ± band, source), quality chips only when set, collapsed raw JSON. Auth = sessionStorage `jev_key` (taste-card pattern).
+Forecast card lives in the /jev/ Corpus tab (KV `jev-index.html`, class prefix `jevfc-`, sibling of the spectral card): series selector, engine selector (`cascade` = 3-stage Clairic + TimesFM 2.5->3.0 + Clef vs `ets` = damped-trend Holt v2), Live Clairic checkbox (`&live_clairic=1`), horizon input, stat tiles (n points, last value, forecast ± band, source, plus active model, MASE/PICP_80, Clef choice, gate disposition, and outcomes pre-reg in cascade mode), quality chips only when set, collapsed raw JSON. Auth = sessionStorage `jev_key` (taste-card pattern).
 
 ## Examples
 
