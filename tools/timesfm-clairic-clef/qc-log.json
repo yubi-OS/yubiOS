@@ -1,0 +1,237 @@
+{
+  "date": "2026-10-21",
+  "decision_endpoint": "https://steady-orbit.systems-a.workers.dev/api/decide",
+  "decision_model": "clef (@cf/cloudflare/clef)",
+  "extraction_model_tested": "@cf/cloudflare/clairic",
+  "ideate_solo_variation_scores": {
+    "mvp_winner": {
+      "choice": "V6_unified_cascade_tool",
+      "confidence": 0.906,
+      "probability": 0.9598
+    },
+    "v1_inversion_score": {
+      "confidence": 0.1851,
+      "max": 3.0,
+      "score": 1.4265
+    },
+    "v2_ensemble_score": {
+      "confidence": 0.3306,
+      "max": 3.0,
+      "score": 0.4433
+    },
+    "v3_devops_score": {
+      "confidence": 0.3973,
+      "max": 3.0,
+      "score": 0.9133
+    },
+    "v4_scamper_spec_score": {
+      "confidence": 0.3236,
+      "max": 3.0,
+      "score": 2.398
+    },
+    "v5_offline_cli_score": {
+      "confidence": 0.343,
+      "max": 3.0,
+      "score": 2.5539
+    },
+    "v6_unified_cascade_tool_score": {
+      "confidence": 0.7721,
+      "max": 3.0,
+      "score": 2.8804
+    }
+  },
+  "live_e2e_verification": {
+    "clairic_extracted_count": 28,
+    "clairic_extracted_note": {
+      "confidence": 0.802111029624939,
+      "guess": "sermon S5 W8 deploy",
+      "p_null": 4.466527025215328e-05,
+      "span": [
+        874,
+        893
+      ],
+      "type": "text",
+      "value": "sermon S5 W8 deploy"
+    },
+    "clairic_forecast_3d": {
+      "p10": [
+        21.9,
+        21.3,
+        21.1
+      ],
+      "p90": [
+        23.8,
+        23.5,
+        23.5
+      ],
+      "value": [
+        22.8,
+        22.4,
+        22.3
+      ]
+    },
+    "clairic_status": 200,
+    "clairic_usage": {
+      "image_tokens": 0,
+      "input_tokens": 2490,
+      "output_tokens": 0,
+      "passes": 2,
+      "schema_tokens": 1110,
+      "state_tokens": 690
+    },
+    "clef_25_primary_decision": {
+      "answers": {
+        "action_choice": {
+          "choice": "wait",
+          "confidence": 0.6552,
+          "probabilities": {
+            "act": 0.0941,
+            "fallback_ets": 0.0198,
+            "review": 0.031,
+            "wait": 0.8551
+          },
+          "type": "choice"
+        },
+        "band_calibrated": {
+          "noul": 0.9288,
+          "type": "noul"
+        },
+        "operational_risk": {
+          "confidence": 0.1911,
+          "legend": {
+            "0": "Low risk: calibrated 2.5 forecast, MASE < 0.85, no anomaly note",
+            "1": "Moderate risk: acceptable MASE <= 1.0, minor covariate shift or fallback to 3.0",
+            "2": "High risk: wide prediction band, regime-shift note, or commercial license boundary",
+            "3": "Critical risk: uncalibrated band, MASE > 1.0, or insufficient series"
+          },
+          "probabilities": {
+            "0": 0.5548,
+            "1": 0.2605,
+            "2": 0.1106,
+            "3": 0.0741
+          },
+          "score": 0.7041,
+          "type": "score"
+        }
+      },
+      "model": "clef",
+      "usage": {
+        "input_tokens": 944,
+        "output_tokens": 0
+      }
+    },
+    "clef_30_fallback_decision": {
+      "answers": {
+        "action_choice": {
+          "choice": "review",
+          "confidence": 0.4804,
+          "probabilities": {
+            "act": 0.0315,
+            "fallback_ets": 0.0145,
+            "review": 0.7545,
+            "wait": 0.1995
+          },
+          "type": "choice"
+        },
+        "band_calibrated": {
+          "noul": 0.9714,
+          "type": "noul"
+        },
+        "operational_risk": {
+          "confidence": 0.1781,
+          "legend": {
+            "0": "Low risk: calibrated 2.5 forecast, MASE < 0.85, no anomaly note",
+            "1": "Moderate risk: acceptable MASE <= 1.0, minor covariate shift or fallback to 3.0",
+            "2": "High risk: wide prediction band, regime-shift note, or commercial license boundary",
+            "3": "Critical risk: uncalibrated band, MASE > 1.0, or insufficient series"
+          },
+          "probabilities": {
+            "0": 0.1138,
+            "1": 0.3245,
+            "2": 0.5128,
+            "3": 0.0489
+          },
+          "score": 1.4968,
+          "type": "score"
+        }
+      },
+      "model": "clef",
+      "usage": {
+        "input_tokens": 1040,
+        "output_tokens": 0
+      }
+    },
+    "pipeline_live_e2e_summary": {
+      "active_model": "timesfm-2.5-200m",
+      "effective_action": "wait",
+      "fallback_triggered": false,
+      "gate_disposition": "allowed",
+      "mase_25": 0.448899,
+      "outcomes_preregistration": {
+        "baseline_id": 1,
+        "endpoint": "POST /api/jev/map/outcomes",
+        "predicted_band_h1": [
+          21.409281,
+          23.007968
+        ],
+        "predicted_delta": 1.638625,
+        "predicted_value_h1": 22.208625,
+        "target": "timeseries:messy_ops_log_live:timesfm-2.5-200m",
+        "task_check": "rolling_origin_mase<=1.0_and_picp80_in_[0.70,0.95]",
+        "verdict": "pending",
+        "verifier": "timesfm-clairic-clef/1.0.0"
+      },
+      "picp_80_25": 1
+    },
+    "verified_at": "2026-10-21T10:02:00Z"
+  },
+  "preflight": {
+    "decide_endpoint_status": 200,
+    "preflight_ok_noul": 0.9735,
+    "searxng_webhook_status": 200,
+    "workers_ai_clairic_id": "6b0b79c1-25e6-4498-bb62-5161df39f0ef",
+    "workers_ai_clef_id": "87f39d62-116c-4b26-b2cd-562a9ba01f2f"
+  },
+  "program": "timesfm-clairic-clef",
+  "stream1_clairic_clef_weights": {
+    "blog_cloudflare_clairic": 0.9714,
+    "blog_cloudflare_clef": 0.9566,
+    "changelog_clairic_workers_ai": 0.9561,
+    "changelog_clef_workers_ai": 0.9667,
+    "claim_arch_prefill": 0.8567,
+    "claim_clairic_primitives": 0.9295,
+    "claim_failure_modes": 0.8925,
+    "claim_llm_time_contrast": 0.9026,
+    "claim_pipeline_cascade": 0.8244,
+    "claim_tsa_experiment": 0.8862,
+    "docs_workers_ai_clef": 0.9616,
+    "docs_workers_ai_extraction": 0.936,
+    "llmtime_arxiv_2310_07820_contrast": 0.0217,
+    "revisiting_llms_ts_2506_00457_contrast": 0.0409
+  },
+  "stream2_timesfm_fallback_weights": {
+    "gate_covariate_and_variate_coupling": 0.8886,
+    "gate_horizon_compounding": 0.6446,
+    "gate_picp80_coverage": 0.9047,
+    "gate_pinball_loss_budget": 0.7972,
+    "gate_rolling_mase_vs_baseline": 0.8492,
+    "gift_eval_fev_bench_ranks": 0.8844,
+    "google_research_timesfm_repo": 0.9706,
+    "timesfm_25_architecture_grounding": 0.9628,
+    "timesfm_30_multivariate_blog": 0.9616
+  },
+  "stream3_endpoints_grounding_weights": {
+    "architectural_fitness_score": 2.0796,
+    "endpoints_contract_compliance": 0.8582,
+    "policy_choice_on_gate_fail": {
+      "choice": "review",
+      "probabilities": {
+        "act": 0.007,
+        "fallback_ets": 0.2483,
+        "review": 0.6773,
+        "wait": 0.0674
+      }
+    },
+    "searxng_evidence_soundness": 0.9063
+  }
+}
