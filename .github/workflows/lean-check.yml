@@ -431,3 +431,10 @@ jobs:
       #   run: python3 tools/taste-standard/taste_standard.py --selftest
       # - name: taste-standard fixture parity (Python source of record vs JS port)
       #   run: node --test tools/taste-standard/test_parity_taste.test.js
+
+      - name: timesfm-clairic-clef cascade selftest (8 pre-registered gates G1..G8)
+        run: |
+          set -euo pipefail
+          python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
+
