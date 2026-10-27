@@ -134,7 +134,29 @@ The same worker also serves the Jev v2 gated-approval orchestration API: ops con
 | GET/POST | `/api/jev/learnings` | proposal ledger; `POST /api/jev/learnings/:id/promote` is the human promotion step (a policy bump invalidates affected approvals) |
 | GET/POST | `/api/jev/automations` | versioned automation defs; `POST /api/jev/automations/:id/activate` , `/pause` , `/run` (single-active per name) |
 | GET | `/api/jev/models` | model routes for the console |
-| POST | `/api/jev/webhooks/reply` | reply records; optional `?k=` shared secret |
+| POST | `/api/jev/webhooks/reply` | reply records; required `?k=` shared secret (401 without) — no bearer, but a missing `?k=` returns 401 "webhook secret required (?k=)" and a wrong one 401 "webhook secret mismatch", both before the body is read (D2, etag 493054c0) |
+| GET | `/api/jev/system/switches` | PWC switch states (`approval_emails`, `autoapprove` with allowlist + per-hour cap) plus `usedLastHour`; fail-closed 503 `NOT_CONFIGURED` / `SWITCHES_UNREADABLE` |
+| POST | `/api/jev/system/switches` | `{name, enabled}`; actor recorded; 503 `SWITCH_WRITE_FAILED` (re-read and retry) |
+| GET | `/api/jev/history/backup` | full jev-history backup envelope (`jev-history-backup/1`), `Content-Disposition` attachment + `X-Backup-Sha256`; 500 `BACKUP_FAILED` changes nothing |
+| POST | `/api/jev/history/clear` | DESTRUCTIVE — never called live by agents, probes or tests; operator-only; needs the confirmation phrase, a matching backup SHA-256 and zero in-flight tasks; active learnings preserved; take `/history/backup` first |
+| POST | `/api/jev/history/restore` | inverse of history/clear (`jev-history-restore.js`): verifies the envelope SHA-256, refuses with `RESTORE_NOT_EMPTY` / `TASKS_IN_FLIGHT`, restores parent-first |
+| GET | `/api/jev/evolution/queue` | durable evolution queue rows; `?status=` pending/claimed/completed/failed (else 422 `INVALID_STATUS`), `?limit=` default 50 |
+| POST | `/api/jev/evolution/memory/reindex` | idempotent re-embed + re-upsert of `jev_evolution_memory` into `EVEC` by deterministic `identity_key` |
+| GET | `/api/jev/timeseries/rates` | task-state and terminal-outcome rates from D1 over `?hours=` (default 24, clamp 1..168); fail-soft with `db_available` / `db_error`; `failure_rate` null without terminal rows |
+| GET | `/api/jev/selftest/coverage` | memory-driver coverage selftest for switches, history, history-restore, memory reindex + module summary checks |
+| GET | `/api/jev/enrich/catalog` , `/api/jev/enrich/selftest` | enrichment catalog (10 routes) and 16-check offline selftest E1–E16 (`jev-enrichment-v2.0.0`; v1.0.0 had 7 routes, E1–E12) |
+| POST | `/api/jev/enrich/domain` , `/lead` , `/corpus-item` , `/market` , `/batch` | read-only multi-source enrichment: domain `{domain, probe_live?}`, lead `{email?, domain?}` (SELECT-only on `jev_leads`), corpus-item `{name, text, context?}`, market `{query, series?}` (forecast advisory, `calibrated = false`), batch `{items:[...]}`; 422 `BAD_INPUT`, 413 `BODY_TOO_LARGE`; never sends or writes |
+| POST | `/api/jev/enrich/blindspot` , `/api/jev/enrich/repo` , `/api/jev/enrich/compare` | v2.0.0, read-only: blindspot `{domain}` -> 6-pillar Revenue Blind Spot score + Top 3; repo `{repo?, files/readme_text/matrix}` -> taxonomy, pin ratio, NSS sweep, curved-corpus V2/z; compare `{kind, items:[2..10]}` -> ranking + winner |
+| GET | `/api/jev/n8n/nodes` , `/api/jev/n8n/templates` , `/api/jev/n8n/selftest` | n8n-style DAG engine (`jev-n8n-dag-v2.0.0`): 18 node types + limits (32 nodes, 16 parallel calls), 12 preset templates with waves, offline selftest N1–N16 |
+| POST | `/api/jev/n8n/validate` , `/api/jev/n8n/execute` | validate (422 `DAG_CYCLE_DETECTED`, `DAG_UNKNOWN_NODE_TYPE`, ...) and execute a DAG wave-by-wave; `jev.propose_actions` and mutating funnel calls go through the policy gate, never direct; zero eval |
+| POST | `/api/jev/n8n/compile` | PENDING (jev-n8n-dag v2.1.0, not in the Wave 6 golden; 404 today): compile a DAG/preset to its wave plan without executing; funnel target `n8n.compile` = 125th target |
+| GET | `/api/jev/console/catalog` , `/api/jev/console/selftest` | universal console funnel `console-funnel-v2.0.0`: 124 targets across 8 categories (125 with `n8n.compile`; adds `enrichment`, `n8n_and_agentics`); selftest F1–F10 + agentic A1–A14 (`jev-agentic-console-v2.0.0`) |
+| POST | `/api/jev/console/dispatch` | `{target,args}` / `{prompt}` / `{calls:[...]}` multi-call chains with `{{ $steps... }}` bindings; read-only in-process, mutating needs `via_task:true` (else 409 `GATE_REQUIRED`) |
+| POST | `/api/jev/console/plan` | agentic planner, plan only (no execution): 1..12 catalog-validated steps |
+| POST | `/api/jev/console/agent` | agentic plan + execute; mutating steps without `via_task` are recorded `gate_required` and never dispatched |
+| GET | `/api/jev/console/sessions` , `/api/jev/console/sessions/:id` | v2.0.0 multi-turn console sessions (per-isolate LRU, 100 sessions x 20 turns); unknown id -> 200 `exists:false`, `?strict=1` -> 404; pass `session_id` on `/console/plan` and `/console/agent` to chain turns |
+| GET | `/api/jev/workflows/catalog` , `/api/jev/workflows/selftest` | embedded skill workflows `jev-workflows-v2.0.0`: 8 workflows, selftest W1–W10 |
+| POST | `/api/jev/workflows/unit-round` , `/wayfinder-cycle` , `/mint-preflight` , `/self-archaeology` , `/lead-enrichment-outreach` , `/polymarket-alpha-ranker` , `/full-system-doctor` , `/multi-call-research-synthesis` | run one workflow; every send or mutation is proposed through the gate, never executed in-process |
 
 Approver allowlist (2026-10-11, policy v21): task approve and reject, and directive approve, reject and cancel, accept only actors on the policy `approvers` list. Policy v21 has no `approvers` field, so the default applies: `jenny` and `ermine` for task and directive approve and reject, and `jenny` only for directive cancel (a known gap; adding `approvers` to the policy lets other delegates cancel). A non-listed actor gets 403 `APPROVER_NOT_ALLOWED`. Task cancel is not behind the allowlist.
 
@@ -197,6 +219,15 @@ Lands with round 3:
 - A completion that lands before the sweep wins, and the sweep leaves that row alone.
 - A late result after a reset is never re-sent. Its write to the action fails the state check, the terminal state and the `unknown` action stay as they are, and a `late_result_after_reset` event records a summary of the result (state, provider reference, and a short status or error, never the response body).
 
+## Incident First-5-Minutes Checklist (PRD S5 section 15 G15-4)
+
+Run these in order; each step is safe to run without knowing the cause. Never call `POST /api/jev/history/clear` during an incident.
+
+1. **Health** — `GET /api/jev/health` (unauthenticated). Expect `{ok, jev, policy_version, paused}`; note `policy_version` and whether the worker answers at all (no answer = deploy-level failure: go to step 4).
+2. **Selftest coverage** — `GET /api/jev/selftest/coverage` (bearer). Any failing check names the broken module; also cheap: `GET /api/jev/selftest`, `GET /api/jev/timeseries/rates?hours=1` (a spike in `failure_rate` dates the incident).
+3. **Pause** — `POST /api/jev/pause` with `{"paused":true,"scope":"all"}` (bearer). Blocks new and queued dispatch; never undoes completed effects. Confirm with `GET /api/jev/pause`.
+4. **Rollback pointer** — re-PUT the saved pre-deploy bundle exactly as extracted (all original parts + original metadata) via the Workers modules API, per the steady-orbit-deploy skill's rollback section; if the bad deploy ADDED a part, keep it present but unused or also revert its importers. Then repeat step 1 and confirm the previous etag's behavior. Resume with `POST /api/jev/pause {"paused":false}` only after the selftests are green.
+
 ## Automations (Jev Automations, stages + cron)
 
 Versioned defs in D1 with stage pipelines: `tool` (GET-only unless a policy tool covers the host; capped, every call audited), `llm` (interpolated prompt, JSON repair), `builtin` (pure deterministic function), `guard` (advisory safety verdict; unsafe skips propose_actions and routes to human review), `propose_actions` (proposals enter the same gate as hand-written ones). Interval automations fire on the worker cron via compare-and-set on last_fired_at (double-fire impossible). Model routes: classify = llama-3.1-8b, draft = llama-3.3-70b, guard = llama-guard-3-8b; `raw:` pins anything else. Builtins registered: `lead_research` (the refuse-to-claim lead machine), `corpus_audit`, `corpus_lens`, `corpus_drift`, `tautology_gate`.
@@ -241,11 +272,11 @@ Fail-closed directive kinds: `record_learning` and `note` auto-execute; `memory_
 | POST | `/api/jev/corpus/visco/snapback` | `{series:[{cycle, predicted_delta, realized_delta}]}` or `{baseline_id}` (reads the ledger); `{snapback, inversion_runs, verdict, gate_input:{action:"halt_round"|"continue"}}`; verdicts only, never auto-actions |
 | GET | `/api/jev/corpus/visco/policy-log` | `{log:[{id, created_at, version, actor, source, summary, backfilled}], current_version}`; the wipe-proof policy changelog (promote flow appends on every version bump) |
 | builtins | `visco_hysteresis`, `visco_snapback` | automation builtins (NOT HTTP routes — implemented in `jev-corpus-builtins.js`) for the hourly cycle; purity contract identical to the corpus builtins (no fetch, `{ref}`/`{source_ref}` rejected) |
-| POST | `/api/jev/corpus/spectral/walk` | walk-mode spectral exponent `d_w` (shipped 2026-10-06, `jev-spectral.js`); modes `ink\|centroid\|graph` selected via `mask_b64` / `points` / `edges`; a low `r2` sets `low_confidence` |
+| POST | `/api/jev/corpus/spectral/walk` | walk-mode spectral exponent `d_w` (shipped 2026-10-06, `jev-spectral.js`); modes `ink\|centroid\|graph` selected via `mask_b64` / `points` / `edges`; a low `r2` sets `low_confidence`. Walk `d_w` is diagnostic-only under policy v24+ (walk clause removed after the N 366–3282 sign study) |
 | POST | `/api/jev/corpus/spectral/series` | series counting exponent `d_s`; requires >= 8 values; the log-periodic staircase is the secondary gate |
 | GET | `/api/jev/corpus/spectral/selftest` | 9 checks: Delaunay parity, walk Python parity, series golds, permutation-null collapse, Einstein consistency (pipeline `spectral-standard-v1`); verified live 2026-10-06, 200 all-pass |
 | POST | `/api/jev/corpus/oracle` | one-shot artifact verdict (`jev-corpus-routes.js`): edge-standard D + centroid-Delaunay walk + Einstein gate in a single call; an honest "insufficient" is a first-class result, not an error |
-| POST | `/api/jev/corpus/lens/correct` | estimate astig/spherical/trefoil aberrations (`jev-lens.js`), apply the pinned sequential correction astig->spherical->trefoil, re-measure D; envelope-guarded and fail-closed, with a convergence gate |
+| POST | `/api/jev/corpus/lens/correct` | estimate astig/spherical/trefoil aberrations (`jev-lens.js`), apply the pinned sequential correction astig->spherical->trefoil, re-measure D; envelope-guarded and fail-closed, with a convergence gate. Scope limit: calibrated for astigmatism only (Set A + Set B, policy v12); spherical (LF-3) and trefoil (LF-2/LF-4) are out-of-band scope limits |
 | GET | `/api/jev/corpus/lens/selftest` | lens-math selftest (pinned thresholds, warp idempotence, fixture warp/estimate/recovery parity); verified live 2026-10-06, 200 all-pass |
 
 The math is a port, never a re-derivation: the system of record is `papers/data/lean/verify_claims.py` (v2_corr, curveball) plus `tools/rsi-descent`, `tools/spectral-decomposer`, `tools/spectral-defocus`, `tools/boltzmann-collapse`, `tools/tautology-discerner`. Every deploy is verified with `/selftest` before results are trusted; on any fixture mismatch the JavaScript is wrong until proven otherwise. Audit/lens results are data, never authorization: only directives through the gate act. Visco instruments (shipped 2026-10-02/03): source of record `tools/visco-instruments/` (yubiOS) + `jev-visco-math.js` worker part, fixture-parity-tested. Every `jev_corpus_runs` row carries `policy_version` (NULL = pre-stamp era, never backfilled); `jev_policy_changelog` is the wipe-proof policy history; the promote flow appends a row on every bump. Spectral/oracle/lens instruments (shipped 2026-10-06): sources of record `tools/spectral-standard` (15/15 golds, 61 anchors) and `tools/lens-standard` (75/75 PASS) on yubiOS main (merged via PR #292), worker parts `jev-spectral.js`, `jev-corpus-routes.js` (oracle) and `jev-lens.js`.
@@ -288,6 +319,7 @@ Every jev event lands as a datapoint in Workers Analytics Engine dataset `jev` (
 |---|---|
 | GET /api/jev/timeseries/selftest | math falsification gates G1-G6 + `cascade_selftest` (8/8 pre-registered gates G1..G8 PASS) + WAE write/read-back probe + schema probe (the empirical column arbiter) |
 | GET /api/jev/timeseries/series | series inventory GROUP BY index1 (n/first/last) |
+| GET /api/jev/timeseries/rates?hours=N | task-state and terminal-outcome rates from D1 `jev_tasks` (default 24 h, clamp 1..168); fail-soft (`db_available`, `db_error`) |
 | GET /api/jev/forecast/:series?h=N | damped-trend Holt ETS forecast with honest quality flags (insufficient_series n<8, low_r2); pass `&engine=cascade` (and optional `&live_clairic=1`) to run the 3-stage Clairic -> TimesFM 2.5/3.0 -> Clef cascade over WAE telemetry; fail-closed 503 MISSING_READ_TOKEN / 422 BAD_SERIES_NAME / 502 WAE_SQL_ERROR |
 | POST /api/jev/forecast/:series | 3-stage SCAMPER cascade (`jev-cascade-forecast.js`, Python source of record `tools/timesfm-clairic-clef/timesfm_clairic_clef.py`, parity max delta <= 1.42e-14 on 4 fixtures, 8/8 gates G1..G8 PASS): Stage 1 `@cf/cloudflare/clairic` extraction/spans/99-quantile forecast, Stage 2 TimesFM 2.5 (Apache-2.0, split-conformal calibration) with pre-registered rolling-origin fallback gate to TimesFM 3.0 on covariate/variate coupling or MASE, Stage 3 `@cf/cloudflare/clef` bounded decision (`act\|wait\|review\|fallback_ets`) + deterministic fail-closed gate + `/api/jev/map/outcomes` pre-registration (`verdict: "pending"`) |
 
@@ -593,5 +625,24 @@ Process and bootstrapping rules distilled from one day of operating this instrum
 Tooling for the loop lives at `tools/skill-check/` (`skillcheck.sh`, `fixer.py`, `wayfinder-cycle.py`, README).
 
 
+---
 
+## Forecasts, Data Refinery & 152-Tool Unified MCP + Agent Harness Workflows (2026-10-26)
 
+All forecasting, data refinement, WAE trajectory inspection, and MCP tool execution run on the primary `steady-orbit` worker under `/forecasts/*` and `/api/jev/*`:
+
+### 1. Surface Map (`/forecasts/*`)
+- **WAE & Forecasts Hub (`GET /forecasts/`):** Live WAE `imported` (`1.21M+` trade ticks across `2,936+` market series) and `jev` dataset telemetry, 4-path accuracy scoreboard (`Consensus`, `Cascade`, `ETS`, `Clairic-alone`), and interactive Refinery/Cascade sandbox.
+- **Forecaster Terminal (`GET /forecasts/forecaster/`):** 60fps Distribution Map (`Accuracy × Certainty × Edge`), Switch 1 (`Category` vs `Time Window` + `Horizon Split <=48h vs >48h`), Switch 2 (`Consensus`, `Cascade`, `ETS`, `Clairic-alone` + `4-Path Overlay` + `Actionable Alpha Gate`), Tab 5 (`Kalman & Strike-Ladder Arbitrage`), Tab 6 (`What-If Scenario & Refinery Bridge`), and Von Scale-Invariant Margin Confidence ($\text{conf} = (n p_{\max} - 1)/(n - 1)$).
+- **Data Refinery Studio (`GET /forecasts/refinery/`):** 5-stage data refinement workbench combining `Zer0Fit` irregular tick resampling, `jev-search` Clairic verbatim query-span extraction, DAG Search Proxy (`/webhook/searxng`), `jevgrep` flood-suppressed System-One reranking ($\ge 0.55 / 0.65$), `OpenComputerUse` 9-type Clairic covariate extraction, `timesfm3-studio` $3\sigma$ quantile anomaly scrubbing, and 3-fold rolling-origin $\Delta\text{MASE} < 0$ covariate lift verification.
+
+### 2. API Endpoints (`/api/jev/forecaster/*`, `/api/jev/refinery/*`, `/api/jev/timeseries/wae-summary`)
+- **Forecaster:** `GET /api/jev/forecaster/health`, `GET /api/jev/forecaster/dashboard`, `GET /api/jev/forecaster/wae/live`, `POST /api/jev/forecaster/wae/sync`, `POST /api/jev/forecaster/forecast-open`, `GET /api/jev/forecaster/arbitrage/ladders`, `POST /api/jev/forecaster/scenario/what-if`, `POST /api/jev/forecaster/ingest/:token`.
+- **Refinery:** `GET /api/jev/refinery/health`, `GET /api/jev/refinery/catalog`, `GET /api/jev/refinery/selftest` (`G1..G6`), `GET /api/jev/refinery/playbooks`, `GET /api/jev/refinery/queue`, `POST /api/jev/refinery/resample`, `POST /api/jev/refinery/dig`, `POST /api/jev/refinery/extract`, `POST /api/jev/refinery/commit`, `POST /api/jev/refinery/enrich-market`, `POST /api/jev/refinery/kalman-arb`, `POST /api/jev/refinery/what-if`, `POST /api/jev/refinery/wae-sql`.
+
+### 3. Unified 152-Tool MCP & Agent Harness Gateway (`/api/jev/mcp` & `/api/jev/v1/tools/*`)
+- **Discovery & Selftest:** `GET /api/jev/mcp`, `GET /api/jev/mcp/selftest` (`M1..M4`), `GET /api/jev/v1/tools`.
+- **Execution:** `POST /api/jev/mcp` (JSON-RPC 2.0 `initialize`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, `prompts/list`, `prompts/get`) and `POST /api/jev/v1/tools/:tool`.
+- **Scope (152 tools total):**
+  1. **144 Console Funnel Endpoint Targets** across all 8 categories (`orchestrator`, `automations`, `evolution`, `corpus_and_math`, `harness_and_workflows`, `map_and_timeseries`, `enrichment`, `n8n_and_agentics`), including `agent.plan`, `agent.run`, `agent.chat`, `n8n.compile`, `workflow.*`, `refinery.*`, and `forecaster.*`.
+  2. **8 Dedicated Agent Harness & Direct Endpoint Tools:** `harness.tree_get` (live 8-component Harness² map + `tree_hash`), `harness.tree_validate`, `harness.propose_probe_compose` (contrastive PPC with $R=4k/P=3k$ budget ledger), `harness.reflect` (`{cue, lesson, evidence}` experience library persistence), `harness.library_get`, `harness.runs_list`, `harness.ledger_check`, and `endpoint.invoke` (direct caller for any `/api/jev/*` route).

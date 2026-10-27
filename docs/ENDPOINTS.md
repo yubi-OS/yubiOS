@@ -1424,5 +1424,58 @@ Refresh notes (2026-10-05, discrepancy resolution):
 20. Hybrid TimesFM (2.5 -> 3.0 fallback) + Clairic + Clef cascade 2026-10-21 (PR #328 merged `eb743c07`, `lean-check.yml` commit `4815c3ae` run 39585507995 green, worker deploy etag `356cb5c1c2e3e3f8b308ba6e29ab06bf27fd99fc107cc9d7f60b01d0dfb7e6b7`, 67 module parts, 15 bindings): adds `jev-cascade-forecast.js` (JS port of `tools/timesfm-clairic-clef/timesfm_clairic_clef.py`, parity max |delta| <= 1.42e-14 on 4 fixtures, 8/8 pre-registered gates G1..G8 PASS in `cascade_selftest`), exposes `?engine=cascade` on `GET /api/jev/forecast/:series` and adds `POST /api/jev/forecast/:series` running Stage 1 (`@cf/cloudflare/clairic` messy-log/CSV extraction, byte-offset spans, and 99-quantile short forecast), Stage 2 (TimesFM 2.5 Apache-2.0 primary with split-conformal calibration and pre-registered rolling-origin fallback gate to TimesFM 3.0 on MASE, coverage, covariate residual R2 >= 0.20, or variate coupling), and Stage 3 (`@cf/cloudflare/clef` bounded decision + deterministic fail-closed gate + `/api/jev/map/outcomes` pre-registration).
 
 
+---
 
+## 2026-10-26 Consolidation: `/forecasts/*` Triad Pages, `/api/jev/forecaster/*`, `/api/jev/refinery/*` & 152-Tool Unified MCP Gateway (`/api/jev/mcp`)
 
+All three forecasting and data-refinement surfaces (`WAE & Forecasts Hub`, `Forecaster Terminal`, and `Data Refinery Studio`), their backing APIs, and the 152-tool Streamable HTTP MCP + Agent Harness gateway are consolidated onto the `steady-orbit` worker (`steadyorbitsystems.com` and `steady-orbit.systems-a.workers.dev`).
+
+### 1. Consolidated `/forecasts/*` Page Routes (`solar-rbs-entry.mjs` + KV `SITE`)
+
+| Method | Path | KV Key (`SITE`) | Auth | Description |
+|---|---|---|---|---|
+| `GET` | `/forecasts`, `/forecasts/` | `website-v19/forecasts.html` (`forecasts.html`) | Public | **Steady Orbit WAE & Forecasts Hub**: live WAE `imported` velocity (`1.21M+` trade ticks across `2,936+` series), 4-path accuracy scoreboard (`Consensus`, `Cascade`, `ETS`, `Clairic-alone`), and interactive Refinery/Cascade sandbox. |
+| `GET` | `/forecasts/forecaster`, `/forecasts/forecaster/` | `website-v19/forecasts-forecaster.html` (`forecasts-forecaster.html` + `/website-v19/forecaster-client.js`) | Public | **Ultimate Forecaster Terminal**: 60fps retina Distribution Map (`Accuracy × Certainty × Edge`), Switch 1 (`Category` vs `Time Window` + `Horizon Split <=48h vs >48h`), Switch 2 (`Consensus`, `Cascade`, `ETS`, `Clairic` + `4-Path Overlay` + `Actionable Alpha Gate`), **Tab 5 (`Kalman & Ladder Arbitrage`)**, **Tab 6 (`What-If & Refinery Bridge`)**, and **Von Scale-Invariant Margin Confidence**. |
+| `GET` | `/forecasts/refinery`, `/forecasts/refinery/` | `website-v19/forecasts-refinery.html` (`forecasts-refinery.html`) | Public | **Data Refinery Studio**: 5-stage data refinement workbench — Stage 1 (`Zer0Fit` irregular tick resampler + `RayCodes` 0-ms Gaussian prior), Stage 2 (`jev-search` Clairic verbatim query-span + DAG Search Proxy dig), Stage 3 (`jevgrep` flood-suppressed Clef reranker, `>=0.55/0.65`), Stage 4 (`OpenComputerUse` 9-type Clairic extractor + `timesfm3-studio` $3\sigma$ quantile anomaly scrubber), Stage 5 (`timesfm3-studio` 3-fold rolling-origin $\Delta\text{MASE} < 0$ covariate lift gate + `surf-cli` playbooks). |
+
+### 2. Forecaster API Endpoints (`/api/jev/forecaster/*` in `jev-refinery.js`)
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/forecaster/health` | Public / Bearer | Yes (`refinery_selftest` G1–G6) | Readiness, version (`sos-refinery-triad v1.0.0`), and gate status for the Forecaster subsystem. |
+| `GET` | `/api/jev/forecaster/dashboard` | Public / Bearer | Yes | Returns all `2,934+` markets (`oct21_archive` + `rolling_ledger` + `wae_live_only`), `accuracyHistory`, and `waeMeta` from KV `SITE` (`forecaster:dashboard-v1`) in $<25\text{ms}$. |
+| `GET` | `/api/jev/forecaster/wae/live` | Public / Bearer | Yes | Live WAE `imported` dataset summary (`totalRows`, `totalTrades`, `distinctMarkets`) and recent trade ticks. |
+| `POST` | `/api/jev/forecaster/wae/sync` | Public / Bearer | Yes | Queries Cloudflare WAE SQL (`imported` dataset via `AE_SQL_TOKEN`) and updates `forecaster:dashboard-v1` + `forecaster:wae-summary-v1`. |
+| `POST` | `/api/jev/forecaster/forecast-open` | Public / Bearer | Yes | Runs bounded 3-path forecast batches (`Cascade`, `ETS`, `Clairic-alone`, `Consensus`) on open WAE markets. |
+| `GET` | `/api/jev/forecaster/arbitrage/ladders` | Public / Bearer | Yes (`G6_von_margin_and_kalman`) | Scans active multi-strike ladders for recursive Kalman Filter dynamic hedge ratio ($\beta_t$), Ornstein-Uhlenbeck half-life ($t_{1/2} = \ln(2)/\lambda$), spread $Z$-score ($|Z| \ge 2.0$), and monotonicity arbitrage. |
+| `POST` | `/api/jev/forecaster/scenario/what-if` | Public / Bearer | Yes | Runs counterfactual covariate perturbations (`op: "add"|"multiply"|"set"`, `magnitude`, `horizon`) and returns baseline vs. shocked quantile fans. |
+| `POST` | `/api/jev/forecaster/ingest/:token` | Token-gated | Partial | Bulk upsert endpoint used by `forecast_and_score.py` to push rolling ledger updates into `forecaster:dashboard-v1`. |
+
+### 3. Data Refinery API Endpoints (`/api/jev/refinery/*` & `/api/jev/timeseries/wae-summary`)
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/timeseries/wae-summary` | Public / Bearer | Yes | Cached (45s TTL, `?fresh=1` live) WAE `imported` + `jev` velocity, 4-path scoreboard across domains/structures/tiers, and playbooks. |
+| `GET` | `/api/jev/refinery/health` | Public / Bearer | Yes (`G1..G6`) | Refinery subsystem health and falsification gate summary (`6/6 PASS`). |
+| `GET` | `/api/jev/refinery/catalog` | Public / Bearer | Yes | Lists all Refinery routes, the 9 native Clairic field types (`text`, `number`, `date`, `time`, `datetime`, `duration`, `list`, `estimate`, `forecast`), and default domain playbooks. |
+| `GET` | `/api/jev/refinery/selftest` | Public / Bearer | Yes (`G1..G6`) | Runs 6 deterministic falsification gates: `G1_zer0fit_resampler`, `G2_clairic_query_span`, `G3_jevgrep_flood_gate`, `G4_quantile_sigma_scrubber`, `G5_covariate_lift_mase`, `G6_von_margin_and_kalman`. Wired into `GET /api/jev/selftest/coverage`. |
+| `GET` | `/api/jev/refinery/playbooks` | Public / Bearer | Partial | Returns the 5 domain refinement playbooks (`crypto-strike-ladder`, `esports-map-series`, `sports-injury-lineup-gate`, `cftc-us-settlement-reconciler`, `macro-rates-earnings`) plus custom playbooks in KV `SITE`. |
+| `GET` | `/api/jev/refinery/queue` | Public / Bearer | Partial | Lists sparse (`n < 8` trades), `wae-empirical-prior`, and high-variance sports markets queued for covariate enrichment, plus recent runs from `refinery:runs-v1`. |
+| `POST` | `/api/jev/refinery/resample` | Public / Bearer | Yes (`G1`, `G4`) | Stage 1: resamples irregular WAE trade ticks into uniform cadence bars (`5m`, `15m`, `1h`), scrubs $3\sigma$ quantile glitches, and computes the 0-ms `analytical-gaussian-prior` fan. |
+| `POST` | `/api/jev/refinery/dig` | Public / Bearer | Yes (`G2`, `G3`) | Stage 2 & 3: redacts secrets, extracts verbatim query spans via Clairic, queries the DAG Search Proxy (`/webhook/searxng`), and ranks/deduplicates results with Clef + `jevgrep` flood suppression (`0.55` / `0.65`). |
+| `POST` | `/api/jev/refinery/extract` | Public / Bearer | Yes (`G4`, `G5`, `G6`) | Stage 4 & 5: runs 9-type Clairic covariate extraction, 3-fold rolling-origin $\Delta\text{MASE}$ covariate lift backtest, 3-stage Cascade + Holt ETS + Clairic forecast, and Von Margin Confidence. |
+| `POST` | `/api/jev/refinery/commit` | Public / Bearer | Partial | Commits a refined series and covariate forecast into `refinery:runs-v1`. |
+| `POST` | `/api/jev/refinery/enrich-market` | Public / Bearer | Yes (`G1..G6`) | End-to-end 5-stage market enrichment by `conditionId` or custom series. |
+| `POST` | `/api/jev/refinery/kalman-arb` | Public / Bearer | Yes (`G6`) | Runs recursive Kalman Filter $\beta_t$, Ornstein-Uhlenbeck half-life $t_{1/2}$, and spread $Z$-score gate on `seriesY` vs `seriesX`. |
+| `POST` | `/api/jev/refinery/what-if` | Public / Bearer | Yes | Counterfactual covariate perturbation engine (`add`, `multiply`, `set`). |
+| `POST` | `/api/jev/refinery/wae-sql` | Operator Bearer | Yes | Read-only `SELECT` bridge to Cloudflare WAE SQL via `AE_SQL_TOKEN`. |
+
+### 4. Unified 152-Tool Streamable HTTP MCP & Agent Harness Gateway (`/api/jev/mcp` & `/api/jev/v1/tools/*`)
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/mcp` | Public / Bearer | Yes (`M1..M4`) | Returns the full **152-tool MCP catalog** (**144 Console Funnel endpoint targets** covering all 130+ `/api/jev/*` routes across 8 categories + **8 dedicated Agent Harness & Direct Endpoint tools**), 6 MCP resources (`harness://tree`, `harness://library`, `wae://summary`, `forecaster://scoreboard`, `refinery://playbooks`, `endpoints://catalog`), and 4 MCP prompts. |
+| `POST` | `/api/jev/mcp` | Public (read-only) / Bearer (mutating) | Yes (`M1..M4`) | Streamable HTTP MCP JSON-RPC 2.0 server (`initialize`, `tools/list`, `tools/call`, `resources/list`, `resources/read`, `prompts/list`, `prompts/get`). Dispatches all 152 tools in-process via `dispatchFunnelCommand`, `handleJevHarness2`, and `handleJevRefineryAndForecaster`. |
+| `GET` | `/api/jev/mcp/selftest` | Public / Bearer | Yes (`M1..M4`) | Verifies `M1_catalog_150_plus_tools` (152 tools = 144 funnel + 8 harness), `M2_harness_tree_introspection` (8-component `tree_hash`), `M3_harness_ppc_and_ledger` (`R=4k/P=3k`), and `M4_refinery_tool_dispatch`. |
+| `GET` | `/api/jev/v1/tools` | Public / Bearer | Yes (`M1`) | REST tool discovery listing all 152 tools and their JSON Schemas (`OpenComputerUse` contract). |
+| `POST` | `/api/jev/v1/tools/:tool` | Public (read-only) / Bearer (mutating) | Yes (`M2..M4`) | Direct REST invocation of any of the 152 tools by dot-name (`orchestrator.summary`, `harness.tree_get`, `refinery.dig`) or underscore-name (`orchestrator_summary`). |
