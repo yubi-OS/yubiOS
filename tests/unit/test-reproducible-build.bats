@@ -501,8 +501,8 @@ for relative, report in (
         failures.append(f"{relative} still gates reproducibility evidence on amd64")
 
 firmware_workflow = (root / ".github/workflows/ci_firmware-rk.yml").read_text()
-if firmware_workflow.count("artifact_suffix: arm64-repro") != 4:
-    failures.append("firmware workflow does not rebuild StandaloneMM and all three boards on ARM64")
+if firmware_workflow.count("artifact_suffix: arm64-repro") != 5:
+    failures.append("firmware workflow does not rebuild StandaloneMM and all four boards on ARM64")
 if "write_reproducible_edk2_stack_cookies" not in firmware_workflow:
     failures.append("firmware workflow does not preseed deterministic EDK2 stack cookies")
 if "write_reproducible_edk2_stack_cookies" not in (root / "scripts/lib/local-build-firmware.sh").read_text():
@@ -513,7 +513,7 @@ if "needs: [optee_fip, firmware-reproducibility]" not in firmware_workflow:
     failures.append("QEMU verification is not blocked on firmware reproducibility")
 if 'repro-evidence/firmware-${{ matrix.board }}-arm64.json' not in firmware_workflow:
     failures.append("firmware workflow retains no board-scoped ARM64 evidence")
-for board in ("qemu-arm64", "rockpro64-rk3399", "rock5b-rk3588"):
+for board in ("qemu-arm64", "rockpro64-rk3399", "pinetab2-rk3566", "rock5b-rk3588"):
     if board not in firmware_workflow:
         failures.append(f"firmware proof matrix omits {board}")
 if "CREATE_KEYS=1" not in firmware_proof or "SIGNED_QEMU_REASON" not in firmware_proof:
