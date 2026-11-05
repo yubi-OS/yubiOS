@@ -1,6 +1,6 @@
 # PINNED.md - yubiOS approved refs & digests
 
-_Last reviewed: 2026-10-06 during the upstream release-ref audit._
+_Last reviewed: 2026-11-05 during the yubi-OS/u-boot RK3566 open TPL pin update._
 
 All GitHub Actions, internal yubi-OS fork refs, external GitHub source refs, container image references, and directly downloaded workflow artifacts used across the yubi-OS org must appear here before being added to any workflow or Containerfile. Non-pinned refs such as mutable tags and branch names are not permitted.
 
@@ -67,7 +67,7 @@ project does not publish EDK2-style stable release tags.
 | `yubi-OS/ms-tpm-20-ref` | `microsoft/ms-tpm-20-ref` | `v1.83r1` | `98b60a44aba79b15fcce1c0d1e46cf5918400f6a` | `98b60a44aba79b15fcce1c0d1e46cf5918400f6a` | TPM reference validation and fTPM firmware build. |
 | `yubi-OS/optee_ftpm` | `OP-TEE/optee_ftpm` | `4.11.0` | `f09f4cdad21028289d4e8fc573893b75f7228dc7` | `b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf` | Release plus yubiOS volatile NV support, rebased 2026-10-17 onto 4.11.0 on branch `feat/volatile-nv-ci-4.11` (prior branch `feat/volatile-nv-ci` at d1cf4a04 kept, backup tag `pre-bump-2026-10-17`); component validation and TA build. |
 | `yubi-OS/optee_os` | `OP-TEE/optee_os` | `4.11.0` | `f54190f22611dd5ad5d22546fd4209aa100f56bd` | `0a949c7fb176914a87f69092cd3defc4dc1308b4` | Release plus yubiOS volatile StMM storage, rebased 2026-10-17 onto 4.11.0 on branch `feat/stmm-volatile-storage-ci-4.11` (prior branch `feat/stmm-volatile-storage-ci` at 440b10c3 kept, backup tag `pre-bump-2026-10-17`); component validation, TA dev kit, and BL32 build. |
-| `yubi-OS/u-boot` | `u-boot/u-boot` | `v2026.10` | `5508406582f6f7120dce0c4b3059819a41788db2` | `5508406582f6f7120dce0c4b3059819a41788db2` | U-Boot component validation and firmware BL33 build. |
+| `yubi-OS/u-boot` | `u-boot/u-boot` | `v2026.10` | `5508406582f6f7120dce0c4b3059819a41788db2` | `5c7fe6ca3b1a13458e426c7d66cd461d0d76fe83` | `main` branch: upstream `main` plus PineTab2 CI workflow and Pavel Golikov's 18-patch RK3568/RK3566 open-source TPL DRAM init series (1056 MHz cap, PR #1). U-Boot component validation, open RK3566 TPL, and firmware BL33 build. |
 
 ## External GitHub Source Refs
 
