@@ -2,7 +2,7 @@ name: yubiOS RK firmware
 
 # Rockchip-oriented firmware workflow derived from ci_test-int.yml.
 # It keeps the existing QEMU-validated firmware build path and adds
-# board-specific RK3399/RK3588 build lanes with their U-Boot defconfigs,
+# board-specific RK3399/RK3566/RK3588 build lanes with their U-Boot defconfigs,
 # OP-TEE platform flavors, and TF-A platforms. RK3588 remains gated on a real
 # ROCKCHIP_TPL DDR blob; CI records that gate instead of publishing a faked
 # non-functional Rockchip image.
@@ -78,8 +78,8 @@ permissions:
 env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.34.0@sha256:b059f8d7226d0b326bc871af489a5dddf65e36af4d20d14251b072974d9ee87c
   TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
-  OPTEE_OS_REF: 0a949c7fb176914a87f69092cd3defc4dc1308b4 # release-descendant ref; see PINNED.md
-  OPTEE_FTPM_REF: 5e09cdbe1bcb1bc3bcf4875ebafb4e1a1154417c # release-descendant ref; see PINNED.md
+  OPTEE_OS_REF: b619831e8a89645b43ff7c7459265019292de50b # release-descendant ref; see PINNED.md
+  OPTEE_FTPM_REF: b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf # release-descendant ref; see PINNED.md
   UBOOT_REF: 5c7fe6ca3b1a13458e426c7d66cd461d0d76fe83 # release-descendant ref; see PINNED.md
   EDK2_REF: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
   EDK2_PLATFORMS_REF: cc384840c440415a091623a7658112fedc416094 # compatibility ref; see PINNED.md
@@ -382,6 +382,32 @@ jobs:
             docker_arch: x86_64
             buildx_arch: linux-amd64
             artifact_suffix: amd64
+            board: pinetab2-rk3566
+            board_title: Pine64 PineTab2 / RK3566 supported secondary Path A
+            build_kind: rockchip
+            uboot_defconfig: pinetab2-rk3566_defconfig
+            optee_platform: rockchip
+            optee_flavor: rk3568
+            tfa_plat: rk3568
+            requires_rockchip_tpl: false
+          - arch: arm64
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            docker_arch: aarch64
+            buildx_arch: linux-arm64
+            artifact_suffix: arm64
+            board: pinetab2-rk3566
+            board_title: Pine64 PineTab2 / RK3566 supported secondary Path A
+            build_kind: rockchip
+            uboot_defconfig: pinetab2-rk3566_defconfig
+            optee_platform: rockchip
+            optee_flavor: rk3568
+            tfa_plat: rk3568
+            requires_rockchip_tpl: false
+          - arch: amd64
+            runner: ubuntu-24.04
+            docker_arch: x86_64
+            buildx_arch: linux-amd64
+            artifact_suffix: amd64
             board: rock5b-rk3588
             board_title: Radxa ROCK 5B / RK3588 primary Path A
             build_kind: rockchip
@@ -428,6 +454,19 @@ jobs:
             optee_platform: rockchip
             optee_flavor: rk3399
             tfa_plat: rk3399
+            requires_rockchip_tpl: false
+          - arch: arm64
+            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            docker_arch: aarch64
+            buildx_arch: linux-arm64
+            artifact_suffix: arm64-repro
+            board: pinetab2-rk3566
+            board_title: Pine64 PineTab2 / RK3566 supported secondary Path A
+            build_kind: rockchip
+            uboot_defconfig: pinetab2-rk3566_defconfig
+            optee_platform: rockchip
+            optee_flavor: rk3568
+            tfa_plat: rk3568
             requires_rockchip_tpl: false
           - arch: arm64
             runner: [self-hosted, Linux, ARM64, HIGH-MEM]
@@ -841,7 +880,7 @@ jobs:
           make -C u-boot CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm "$UBOOT_DEFCONFIG"
           ./u-boot/scripts/kconfig/merge_config.sh -m -O u-boot u-boot/.config u-boot/yubios_ftpm.config
           make -C u-boot CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm olddefconfig
-          grep -E 'CONFIG_ROCKCHIP_RK(3399|3588)=y|CONFIG_ROCKCHIP_EXTERNAL_TPL=y|CONFIG_SPL_ATF=y|CONFIG_TPM2_FTPM_TEE=y' \
+          grep -E 'CONFIG_ROCKCHIP_RK(3399|3568|3588)=y|CONFIG_ROCKCHIP_EXTERNAL_TPL=y|CONFIG_TPL=y|CONFIG_RAM_ROCKCHIP_LPDDR4=y|CONFIG_SPL_ATF=y|CONFIG_TPM2_FTPM_TEE=y' \
             u-boot/.config | tee u-boot-config-summary.txt
           make -C u-boot -j"$(nproc)" CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm u-boot.bin
           test -s u-boot/u-boot.bin
@@ -927,6 +966,7 @@ jobs:
             optee_os/out/**/tee.elf
             optee_os/out/**/tee.bin
             u-boot/u-boot.bin
+            u-boot/tpl/u-boot-tpl.bin
             u-boot/u-boot.itb
             u-boot/idbloader.img
             u-boot/u-boot-rockchip.bin
@@ -945,7 +985,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        board: [qemu-arm64, rockpro64-rk3399, rock5b-rk3588]
+        board: [qemu-arm64, rockpro64-rk3399, pinetab2-rk3566, rock5b-rk3588]
     runs-on: ubuntu-24.04
     container:
       credentials:
@@ -1251,6 +1291,15 @@ jobs:
             tfa_plat: rk3399
             uboot_defconfig: rockpro64-rk3399_defconfig
             required_image: u-boot-rockchip.bin
+          - board: pinetab2-rk3566
+            board_title: Pine64 PineTab2 / RK3566 supported secondary Path A
+            publish_original: false
+            storage_note: Open-source U-Boot TPL (1056 MHz LPDDR4); RPMB-backed StMM and fTPM NV required before production hardware claim
+            optee_platform: rockchip
+            optee_flavor: rk3568
+            tfa_plat: rk3568
+            uboot_defconfig: pinetab2-rk3566_defconfig
+            required_image: u-boot-rockchip.bin
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -1382,6 +1431,7 @@ jobs:
           find art -name bl31.elf       -exec cp {} fw/firmware/ \; -quit
           find art -name BL32_AP_MM.fd  -exec cp {} fw/firmware/ \; -quit
           find art -name u-boot.bin     -exec cp {} fw/firmware/ \; -quit
+          find art -name u-boot-tpl.bin -exec cp {} fw/firmware/ \; -quit
           find art -name u-boot.itb     -exec cp {} fw/firmware/ \; -quit
           find art -name idbloader.img  -exec cp {} fw/firmware/ \; -quit
           find art -name u-boot-rockchip.bin     -exec cp {} fw/firmware/ \; -quit

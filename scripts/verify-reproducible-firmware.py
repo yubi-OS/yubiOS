@@ -13,7 +13,7 @@ import re
 import sys
 
 
-BOARDS = ("qemu-arm64", "rockpro64-rk3399", "rock5b-rk3588")
+BOARDS = ("qemu-arm64", "rockpro64-rk3399", "pinetab2-rk3566", "rock5b-rk3588")
 COMMON_REQUIRED = (
     "stmm/BL32_AP_MM.fd",
     "firmware/BL32_AP_MM.fd",
@@ -117,7 +117,7 @@ def required_errors(
         if not any(path.endswith("/bl31.elf") for path in paths):
             errors.append(f"{label} is missing Rockchip TF-A BL31")
         tpl_provided = manifest.get("rockchip_tpl_provided") == "true"
-        if board == "rockpro64-rk3399" or tpl_provided:
+        if board in ("rockpro64-rk3399", "pinetab2-rk3566") or tpl_provided:
             for filename in ROCKCHIP_IMAGE_NAMES:
                 if not any(path.endswith(f"/{filename}") for path in paths):
                     errors.append(
