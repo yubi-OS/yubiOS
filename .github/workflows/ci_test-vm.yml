@@ -167,8 +167,14 @@ jobs:
       - name: Free disk space (self-hosted rock1 persists disk across runs -- unlike hosted runners)
         if: matrix.arch == 'arm64'
         run: |
-          df -h "$PWD" || true
-          echo "--- pruning podman storage from prior runs (root-owned, since bcvk/vm-e2e now runs under sudo) ---"
+          df -h "$PWD" / /mnt/extended || true
+          if mountpoint -q /mnt/extended && ! mountpoint -q /var/lib/containers; then
+            echo "--- bind-mounting /mnt/extended/containers onto /var/lib/containers so podman uses the 117G extended disk ---"
+            sudo mkdir -p /mnt/extended/containers /var/lib/containers
+            sudo mount --bind /mnt/extended/containers /var/lib/containers
+          fi
+          echo "--- resetting/pruning podman storage from prior runs ---"
+          sudo podman system reset -f || true
           sudo podman system prune -af --volumes || true
           echo "--- removing leftover bcvk-src clone + cargo target from a prior run ---"
           sudo rm -rf /opt/bcvk-src || true

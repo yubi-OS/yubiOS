@@ -188,8 +188,14 @@ jobs:
       - name: Free disk space (self-hosted rock1 persists disk across runs -- unlike hosted runners)
         if: matrix.arch == 'arm64'
         run: |
-          df -h "$PWD" || true
-          echo "--- pruning podman storage from prior runs (root-owned, since bcvk/vm-e2e now runs under sudo) ---"
+          df -h "$PWD" / /mnt/extended || true
+          if mountpoint -q /mnt/extended && ! mountpoint -q /var/lib/containers; then
+            echo "--- bind-mounting /mnt/extended/containers onto /var/lib/containers so podman uses the 117G extended disk ---"
+            sudo mkdir -p /mnt/extended/containers /var/lib/containers
+            sudo mount --bind /mnt/extended/containers /var/lib/containers
+          fi
+          echo "--- resetting/pruning podman storage from prior runs ---"
+          sudo podman system reset -f || true
           sudo podman system prune -af --volumes || true
           echo "--- removing leftover bcvk-src clone + cargo target from a prior run ---"
           sudo rm -rf /opt/*-src || true
@@ -667,7 +673,10 @@ jobs:
         id: cfs_disk
         run: |
           set -euo pipefail
-          DISK="$RUNNER_TEMP/yubios-composefs-tamper-${{ matrix.arch }}.raw"
+          DISK_DIR="$RUNNER_TEMP"
+          if mountpoint -q /mnt/extended; then sudo mkdir -p /mnt/extended/tmp && sudo chmod 1777 /mnt/extended/tmp && DISK_DIR="/mnt/extended/tmp"; fi
+          DISK="$DISK_DIR/yubios-composefs-tamper-${{ matrix.arch }}.raw"
+          sudo rm -f "$DISK"
           truncate -s 12G "$DISK"
           LOOP="$(sudo losetup --find --show --partscan "$DISK")"
           printf 'label: gpt\nsize=1G, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name=ESP\ntype=%s, name=yubiOS-root\n' \
