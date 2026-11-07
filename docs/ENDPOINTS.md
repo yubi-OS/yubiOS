@@ -1668,3 +1668,24 @@ Spec: `refs/SPEC-COMMON-THREADS-FEATURE-WAVE-2026-11-06.md`. Adds 19 functional 
 | `GET\|POST` | `/api/jev/corpus/curation-bits` | `corpus.curation_bits` | Bearer | Yes | **`generative.ink` *Quantifying Curation* Sonometer:** computes probability magnification $M$, selection bits $\log_2 M$, optimization pressure $\rho$ (bits/token), selection interval $\lambda = 1/\rho$, $m$-of-$n$ satisficing bits, and `bits_per_kept_edit` by proposal source (`rung_join` vs `lens_fill` vs `caller`). |
 
 
+---
+
+## Agentic Coding Workbench & 7-Category LLM Stack (2026-11-06)
+
+Spec: `refs/SPEC-AGENTIC-CODING-WORKBENCH-2026-11-06.md` · Prior Art: `refs/prior-art-browser-git-monaco-ide-2026-11-06.md`
+
+### 7-Category LLM Stack (`/api/jev/models`, `jev-llm.js`)
+- `classify`: `@cf/meta/llama-3.1-8b-instruct-fp8`
+- `draft`: `@cf/meta/llama-4-scout-17b-16e-instruct`
+- `coding`: `@cf/deepseek-ai/deepseek-v4.1-flash-1017` (7th category — Coding Model for the Agentic Coding Workbench)
+- `guard`: `@cf/meta/llama-guard-3-8b`
+- `decision`: `@cf/cloudflare/clef`
+- `extract`: `@cf/cloudflare/clairic`
+- `embeddings`: `@cf/baai/bge-m3`
+
+### Agentic Coding Workbench Routes (`jev-coding.js`, Funnel Catalog = 292 targets)
+- `GET|POST /api/jev/coding/repo-init` (`coding.repo_init`): Seeds the browser-resident `isomorphic-git` + `LightningFS` repository and Monaco `.d.ts` declarations from the specified or default project repo (`yubi-OS/yubiOS`).
+- `GET|POST /api/jev/coding/plan` (`coding.plan`): Decomposes a coding prompt + active Harness² tree into ordered step-by-step file edits using `getActiveModel("coding")`.
+- `GET|POST /api/jev/coding/step` (`coding.step`): Applies one atomic coding step with unified diff, changed line numbers, local Git commit message, AST/delimiter diagnostics, and operator pause/interjection steering.
+- `GET|POST /api/jev/coding/file` (`coding.file_get`): Lazy-loads any repository file into the Monaco Editor and local `isomorphic-git` working tree.
+- `GET /api/jev/coding/selftest` (`coding.selftest`): Runs the 8-gate deterministic Agentic Coding Workbench self-test (`C1_model_stack_7cat`..`C8_lazy_file_loader`).
