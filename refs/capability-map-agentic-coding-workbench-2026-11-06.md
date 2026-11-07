@@ -1,0 +1,12 @@
+# Capability Map: Agentic Coding Workbench & 7-Category LLM Stack (`steady-orbit` `/jev/`)
+
+Date: 2026-11-06
+Scope: Multi-capability greenfield feature on `steady-orbit` (`/jev/`)
+
+| Module id | Responsibility | Files Touched | Depends on |
+|---|---|---|---|
+| `llm-stack-7cat` | Expand Policy LLM Stack from 6 to **7 categories** by adding `coding` (**Coding & Refactoring LLM**, default `@cf/deepseek-ai/deepseek-v4.1-flash-1017`), and promote all currently active KV models (`draft`: `@cf/meta/llama-4-scout-17b-16e-instruct`, `embeddings`: `@cf/baai/bge-m3`, `classify`: `@cf/meta/llama-3.1-8b-instruct-fp8`, `guard`: `@cf/meta/llama-guard-3-8b`, `decision`: `@cf/cloudflare/clef`, `extract`: `@cf/cloudflare/clairic`) to be the canonical defaults in `DEFAULT_MODEL_STACK`, `/api/jev/models`, KV `jev-model-stack.json`, and `#llm-stack-dlg`. | `jev-llm.js`, `routes-automations.js`, `jev-index.html` | — |
+| `coding-engine-api` | Backend Agentic Coding Engine (`jev-coding.js`) + Funnel/Chat integration: coding-prompt classifier (`isCodingPrompt`), `/api/jev/coding/repo-init` (`coding.repo_init` seeding from GitHub repo / default project repo / workspace), `/api/jev/coding/plan` (`coding.plan` decomposing prompt + active Harness² into atomic file steps using `getActiveModel("coding")`), `/api/jev/coding/step` (`coding.step` applying one step at a time with unified diff, line highlights, syntax check, and mid-loop user interjection support), and `/api/jev/coding/selftest` (`coding.selftest`). | `jev-coding.js`, `jev-console-funnel.js`, `jev-agentic-console.js`, `routes-jev.js`, `jev-selftest.js` | `llm-stack-7cat` |
+| `monaco-git-workbench-ui` | Frontend `/jev/` Chat Coding Specialization (`data-chat-state="coding"`): 3-pane layout with **Left** Agentic Step Stream + `⏸ Pause Session` / `▶ Resume` + pop-up `Interject New Direction` chat input + `☑ Live Refresh` checkbox; **Center** `Monaco Editor` (`vs/loader.js` + built-in JS/TS worker + Steady Orbit `.d.ts` `addExtraLib` + live line decorations + `Editor ↔ Diff` toggle); **Right** narrow `isomorphic-git` + `LightningFS` local browser Git repository & directory tree sidebar (branch badge, file tree with `M`/`A`/`U`/`✓` badges, local commit log per step, and gated GitHub PR/branch push). | `jev-index.html` | `llm-stack-7cat`, `coding-engine-api` |
+
+Build order: `llm-stack-7cat` → `coding-engine-api` → `monaco-git-workbench-ui`
