@@ -1479,3 +1479,165 @@ All three forecasting and data-refinement surfaces (`WAE & Forecasts Hub`, `Fore
 | `GET` | `/api/jev/mcp/selftest` | Public / Bearer | Yes (`M1..M4`) | Verifies `M1_catalog_150_plus_tools` (152 tools = 144 funnel + 8 harness), `M2_harness_tree_introspection` (8-component `tree_hash`), `M3_harness_ppc_and_ledger` (`R=4k/P=3k`), and `M4_refinery_tool_dispatch`. |
 | `GET` | `/api/jev/v1/tools` | Public / Bearer | Yes (`M1`) | REST tool discovery listing all 152 tools and their JSON Schemas (`OpenComputerUse` contract). |
 | `POST` | `/api/jev/v1/tools/:tool` | Public (read-only) / Bearer (mutating) | Yes (`M2..M4`) | Direct REST invocation of any of the 152 tools by dot-name (`orchestrator.summary`, `harness.tree_get`, `refinery.dig`) or underscore-name (`orchestrator_summary`). |
+
+---
+
+## Restored 2026-10-21 Section: Elastic Mesh, Discovery Replay, Spherical Harmonics, Embedded Workflows & S5 Review Routes (Policy v25)
+
+Restored from commit `ccaa8ab9221f` (`2026-10-21`, deployed etag `a0a0473b4b2a09d6782a8d0148a6e845502a63d9585438695eb907fa644ecd42`, 74 module parts, Policy v25) after commit `fd844d829763` dropped this block during a same-day parallel edit.
+
+### 1. `jev-sofima.js` (`sofima-v1.0.0`): Elastic Mesh Coordinate Maps & Fold-Free Spring Relaxation
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/corpus/sofima/selftest` | Bearer | Yes (`G1..G8`) | Verifies relative/absolute identity, composition and inverse roundtrip, `maskedXcorr2D` shift recovery, Hookean zero-force rest, `prefer_orig_order` fold prevention (`min_det_j > 0`), FIRE energy reduction, Jacobian positivity, and determinism. |
+| `POST` | `/api/jev/corpus/sofima/flow` | Bearer | Yes | Strided patchwise masked FFT cross-correlation (`grid_a`, `grid_b`, `patch_size`, `stride`) returning a `[2, Hm, Wm]` relative-offset coordinate map plus peak sharpness ratio and SNR (`kind: "sofima-flow"`). |
+| `POST` | `/api/jev/corpus/sofima/relax` | Bearer | Yes | Relaxes a coordinate map under nearest-neighbor plus diagonal ($k_2 = k/\sqrt{2}$) Hookean springs with fold-preventing directional sign factor (`prefer_orig_order: true`) and FIRE inertial solver (`kind: "sofima-relax"`). Alias: `POST /api/jev/corpus/lens/elastic`. |
+| `POST` | `/api/jev/corpus/sofima/compose` | Bearer | Yes | Bilinear composition (`composeMaps`) and optional fixed-point inversion (`invertMap`) of relative-offset coordinate maps (`kind: "sofima-compose"`). |
+
+### 2. `jev-dream-rsi.js` (`dream-rsi-v1.0.0`): Discovery Replay Worlds, Pareto $\rho$-Sweep & Direction Diversity
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/evolution/dream/selftest` | Bearer | Yes (`G1..G8`) | Verifies `TraceEnv` no-invention invariant, `parallel_refine` wave order, Pareto frontier non-dominance, Eq. 1 AUC bounds, parallelism penalty monotonicity, replay-pool monotonicity $V(\pi^\star) \ge V(\pi_0)$, root-direction duplicate rate, and determinism. |
+| `POST` | `/api/jev/evolution/dream/replay` | Bearer | Yes | Replays candidate exploration policies (`parallel_refine`, `ucb_greedy`, `thompson_prune`, `breadth_first`, `depth_first`) on `TraceEnv` discovery trees (`traces`, `use_default_pool: true`, or `from_d1: true` via `buildTracesFromD1`) across $\rho \in \{0, 0.25, 0.5, 0.75, 1.0\}$ using Eq. 1 Pareto AUC minus $\lambda$ sequential-round penalty. |
+| `POST` | `/api/jev/evolution/dream/directions` | Bearer | Yes | Computes root-direction (`attempt == 0`) mechanism diversity (`count`, `unique`, `duplicates`, `duplicate_rate`). Also reachable via workflow target `/api/jev/dream/directions`. |
+| `POST` | `/api/jev/evolution/dream/promote-check` | Bearer | Yes | Compares a candidate exploration policy against the incumbent across the trace pool and enforces replay-set monotonicity $V(\pi_{\text{cand}}) \ge V(\pi_{\text{inc}})$. |
+
+### 3. `jev-spherical-cnn.js` (`spherical-cnn-v1.0.0`): Spin-Weighted Spherical Harmonics & H&W Torus Quadrature
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/corpus/spherical/selftest` | Bearer | Yes (`G1..G8`) | Verifies H&W quadrature sum $4\pi \pm 10^{-14}$, spherical mean exactness, Wigner $\Delta^\ell_{m,n}$ orthogonality and symmetry ($\ell=0..6$), $Y_0^0/Y_1^0/Y_2^1$ mode purity, spin $|s|>0$ vanishing for $\ell < |s|$, forward-backward SWSFT roundtrip $< 10^{-14}$, spectral pooling $\ell_{\max} \to \lfloor(\ell_{\max}+1)/2\rfloor - 1$, and Parseval energy conservation. |
+| `POST` | `/api/jev/corpus/spherical/quadrature` | Bearer | Yes | Huffenberger & Wandelt equiangular grid, torus-extended quadrature weights, sphere cell areas summing to $4\pi$, and `spinSphericalMean`. |
+| `POST` | `/api/jev/corpus/spherical/swsft` | Bearer | Yes | Forward and optional backward Spin-Weighted Spherical Fourier Transform for integer spin $s \in \mathbb{Z}$ (accepts equiangular `grid` or scattered $S^2$ `points` + `values`), returning $(\ell_{\max}+1)^2$ coefficients, degree power spectrum $E_\ell(s)$, and `parseval_ratio`. |
+| `POST` | `/api/jev/corpus/spherical/convolve` | Bearer | Yes | $SO(3)$-equivariant spin-weighted spectral convolution ${}_s\widehat{(F*K)}_\ell^m = \sum_i {}_i\hat{f}_\ell^m {}_s\hat{k}_\ell^i$ with optional pooling or upsampling. |
+| `POST` | `/api/jev/corpus/spherical/pool` | Bearer | Yes | Spectral pooling truncating harmonic bandwidth from $\ell_{\max}$ to $\ell_{\max}' = \lfloor(\ell_{\max}+1)/2\rfloor - 1$. |
+
+### 4. S5 Functional Review, History Restore, PWC Switches & WAE Timeseries Import/Export Routes
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/selftest/coverage` | Bearer | Yes | Dedicated memory-driver selftest verifying 100% module coverage across `jev-switches.js`, `jev-history.js`, `jev-history-restore.js`, `reindex-memory.js`, plus summary gates for Elastic Mesh, Spherical Harmonics, Discovery Replay, Agent Harness, Workflows, Console Funnel, Data Refinery, and Layered Ontology. |
+| `GET\|POST` | `/api/jev/system/switches` | Bearer | Yes | Read and update fail-closed operator switches (`approval_emails`, `autoapprove` with `AUTOAPPROVE_CAP_PER_HOUR`). |
+| `GET` | `/api/jev/history/backup` | Bearer | Yes | Exports a SHA-256 signed JSON backup envelope across `HISTORY_CLEAR_TABLES`. |
+| `POST` | `/api/jev/history/clear` | Bearer | Yes | Guarded history clear requiring confirmation phrase, matching backup SHA-256, and zero in-flight tasks (preserves active learnings). |
+| `POST` | `/api/jev/history/restore` | Bearer | Yes | Inverse of history clear (`jev-history-restore.js`): verifies envelope SHA-256, enforces `RESTORE_NOT_EMPTY` and `TASKS_IN_FLIGHT` guards, and restores tables in parent-first order. |
+| `POST` | `/api/jev/evolution/memory/reindex` | Bearer | Yes | Idempotently re-embeds and re-upserts `jev_evolution_memory` rows into `EVEC` by deterministic `identity_key` (`reindex-memory.js`). |
+| `POST` | `/api/jev/evolution/memory/store` | Bearer | Yes | Stores a new evolution memory entry in D1 `jev_evolution_memory`, appends to `jev_memory_log`, and indexes into `EVEC`. |
+| `POST` | `/api/jev/timeseries/import` | Bearer | Yes | Writes datapoints (`rows`, `points`, `values`, or `csv`) into WAE dataset `imported` via binding `TS_IMPORTED`, ordered by `timestamp ASC, double2 ASC`. |
+| `GET` | `/api/jev/timeseries/export` | Bearer | Yes | Exports bounded rows (`?from=<iso>&to=<iso>&series=<name>`) from WAE `jev` using ClickHouse `toDateTime('YYYY-MM-DD HH:MM:SS')` comparisons (`jev-timeseries-export.js`). |
+| `GET` | `/api/jev/timeseries/rates` | Bearer | Yes | Computes task state and terminal transition rates over `?hours=24&series=<name>` from WAE `jev`. |
+| `POST` | `/api/jev/forecast/cascade` | Bearer | Yes (`G1..G8`) | Direct 3-stage Clairic -> TimesFM 2.5/3.0 -> Clef forecast cascade on caller `series`/`values` or `state_text`. |
+| `POST` | `/api/jev/forecast/clairic` | Bearer | Yes | Direct Stage 1 `@cf/cloudflare/clairic` structured series extraction and 99-quantile short-horizon forecast. |
+| `POST` | `/api/jev/forecast/events` | Bearer | Yes | Event-sequence arrival and rate forecasting on timestamped event arrays. |
+
+---
+
+## 2026-10-28 to 2026-11-06 Additions: Layered Ontology Engine, Multi-Harness Switching, Agentic Console V2, DAG Compiler, Enrichment, 24 Workflows & `$200` Slip Tracker (80 Parts, Policy v27)
+
+Live worker snapshot verified `2026-11-06`: **80 module parts** (`main_module: solar-rbs-entry.mjs`, `compatibility_date: 2026-09-01`, snapshot etag `38f0238516edb2aa74d106bce08ce6ea7392ad9cc80fcc098ae2e3400f08475d` -> `ff328178fff8f4be20c95efdf4a33bf8d7a021026b79eca5a64955c228c621e0`), **17 bindings** (`AI`, `DB`, `SITE`, `VEC`, `EVEC`, `TS`, `TS_CHAT`, `TS_IMPORTED`, `WEBSITE_RATE_LIMIT`, `AE_SQL_TOKEN`, and 7 `secrets_store_secret` bindings), **3 active crons** (`0 * * * *` hourly evolution, `*/15 * * * *` Polymarket ingest + 3-path forecast freeze + `$200` slip generator/grader, `*/5 * * * *` automation scheduler + stale reset), **Policy v27** (11 gated tools: `daytona.sandbox`, `github.contents_put`, `github.read`, `http.fetch`, `places.search`, `research.report`, `resend.send`, `route.dispatch`, `searxng.dig`, `web.fetch_public`, `workspace.write`), and active model stack (`decision: @cf/cloudflare/clef`, `extract: @cf/cloudflare/clairic`, `classify: @cf/meta/llama-3.1-8b-instruct-fp8`, `draft: @cf/meta/llama-4-scout-17b-16e-instruct`, `guard: @cf/meta/llama-guard-3-8b`, `embeddings: @cf/baai/bge-m3` + `@cf/baai/bge-base-en-v1.5`).
+
+### 1. Layered Ontology Engine (`jev-ontology.js`, `sos-layered-ontology v1.0.0 (clairic-clef-4layer)`, Shipped 2026-11-06)
+
+Combines 4-stage semantic compilation (Stage 1 profiling and `_OrderedCommitQueue` canonical term commit, Stage 2 semantic FK resolution and disjoint pruning, Stage 3 reusable measure/formula suggestion, Stage 4 bridge/junction synthesis) with 5-stage interactive grounding (entity normalization, ambiguity check at `CLARIFY_MAX_DISTANCE = 0.65` and `AMBIGUITY_MAX_GAP = 0.25`, 5-step collision resolution with `COLLISION_WINNER_MARGIN = 0.04` and `@cf/cloudflare/clef` adjudication, 3-level hierarchical expansion, and completeness/evidence block synthesis). Exposed as 5 HTTP endpoints, 5 Console Funnel targets (`ontology.*`), a first-class `ontology.ground` DAG node, and automatic backend grounding on `/api/jev/console/chat` turns (spec: `refs/SPEC-LAYERED-ONTOLOGY-CLAIRIC-CLEF-2026-11-05.md`).
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/ontology/graph` | Bearer | Yes (`G1..G6`) | Alias: `GET /api/jev/ontology`. Returns the compiled 4-layer ontology graph (`?scope=harness\|corpus&id=<id>`): Layer 0 `UnitNode`, Layer 1 `TermNode` & `AttributeNode`, Layer 2 `SemanticFkEdge` & `BridgeNode`, Layer 3 `MeasureNode` & `HierarchyMap`, with pre-truncation `relationship_count`. |
+| `POST` | `/api/jev/ontology/compile` | Bearer | Yes (`G1..G3`) | Runs the 4-stage Clairic+Clef semantic compilation pipeline over `{ scope?: "harness"\|"corpus", harness_id?: string, name?: string, docs?: Array<{name,text}>, use_live_ai?: boolean }`, persists the snapshot to D1 `jev_ontologies`, and returns the compiled graph and layer stats. |
+| `POST` | `/api/jev/ontology/ground` | Bearer | Yes (`G4..G6`) | Runs the 5-stage interactive grounding pipeline over `{ question: string, scope?: "harness"\|"corpus", ontology_id?: string, use_live_ai?: boolean }` and returns resolved terms, collision verdicts, 3-level hierarchy expansion, completeness status (`COMPLETE` vs `INCOMPLETE`), `evidence_block`, and `layered_understanding`. |
+| `GET` | `/api/jev/ontology/path` | Bearer | Yes (`G6`) | Finds the BFS shortest multi-hop semantic path (`?from=<termA>&to=<termB>&ontology_id=<id>`) and returns ordered `hops: [{ source, relationship, target }]`. |
+| `GET` | `/api/jev/ontology/selftest` | Bearer | Yes (`G1..G6`) | Runs 6 deterministic gates: `G1_ordered_commit_and_profiling`, `G2_clairic_span_and_synonym_extract`, `G3_semantic_fk_and_disjoint_prune`, `G4_collision_and_ambiguity_resolver`, `G5_three_level_hierarchy_and_completeness`, `G6_hop_path_and_chat_synthesis`. Wired into `GET /api/jev/selftest/coverage`. |
+
+### 2. 8-Component Agent Harness & Multi-Harness Switching (`jev-harness2.js` `v2.0.0` + `jev-harness2-corpus.js`, Shipped 2026-10-31 to 2026-11-06)
+
+Manages the executable 8-component harness tree (`system_prompt`, `guardrails`, `memory`, `tool_guidance`, `subagents`, `skills`, `scripts`, `plugins`) with system-wide Multi-Harness switching persisted in D1 (`jev_harness_sets`) and KV (`jev-harness-sets.json`). New harness sets seed with 97 curated platform/operations skills (`PLATFORM_HARNESS_SKILL_NAMES`, including `glass-design-skill`) and an isolated empty experience library. Per the 2026-11-02 disclosure rule, harness `system_prompt` and `memory` expose only user-facing and model-facing context (`Ops Console System Manifest`, `NO SOURCE ACCESS` self-knowledge boundary, dynamic `help.ask` call-outs, and `yubi-OS/knowledge` treated strictly as external research).
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/harness/sets` | Bearer | Yes | Lists all named harness sets (`active_harness_id`, `sets[]`) with skill counts, tree hashes, and experience library counts. |
+| `POST` | `/api/jev/harness/sets` | Bearer | Yes | Creates a new named harness set (`{ name?, description?, activate?: boolean }`) seeded with the 97 platform/operations skills and an isolated empty experience library. |
+| `POST` | `/api/jev/harness/switch` | Bearer | Yes | Switches the system-wide active harness set (`{ harness_id: string }`) across chat, planner, and MCP surfaces. |
+| `GET` | `/api/jev/harness/tree` | Bearer | Yes (`G1`, `M2`) | Reads the active or specified (`?harness_id=`) 8-component harness tree, `tree_hash`, `component_hashes`, `always_on_bytes`, and merged experience lessons. |
+| `POST` | `/api/jev/harness/tree/validate` | Bearer | Yes (`G1`) | Validates a candidate 8-component harness tree (`validateHarnessTree`) and returns `tree_hash`, `component_hashes`, and `always_on_bytes`. |
+| `GET` | `/api/jev/harness/runs` | Bearer | Yes | Lists recent `jev_harness_runs` rows and their $R=4k / P=3k$ rollout/session budget ledgers (`?limit=`). |
+| `POST` | `/api/jev/harness/propose-probe-compose` | Bearer | Yes (`G6`, `G7`) | Executes a $k$-step parallel (`agg`) or sequential (`seq`) contrastive Propose-Probe-Compose cycle, verifies $R=4k, P=3k$, selects from the SHA-1/MT19937 seeded anonymized `A..Z` pool, and persists to `jev_harness_runs`. |
+| `POST` | `/api/jev/harness/reflect` | Bearer | Yes (`G5`, `G8`) | Harnessing-level Experience Reflector: validates non-empty `{cue, lesson, evidence}` (`hasExperience`) and persists to `jev_harness_library` scoped by `harness_id`. |
+| `GET` | `/api/jev/harness/library` | Bearer | Yes (`G8`) | Lists retained experience reflections (`?harness_id=&domain=&mode=&limit=`). |
+| `POST` | `/api/jev/harness/ledger-check` | Bearer | Yes (`G2`, `G3`) | Validates the $R=4k$ rollout and $P=3k$ improvement-session ledger identity with duplicate-label rejection before count checks. |
+| `GET` | `/api/jev/harness/selftest` | Bearer | Yes (`G1..G8`) | Runs all 8 deterministic Agent Harness verification gates (`G1..G8`). |
+
+### 3. Agentic Console V2, Session Chat Logs & 270-Target Universal Console Funnel (`jev-agentic-console.js` `v2.2.0` + `jev-console-funnel.js` `v2.1.0`)
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `POST` | `/api/jev/console/chat` | Bearer | Yes | Conversational `/jev/` Chat turn (`{ prompt, session_id?, mode?: "execute"\|"plan"\|"harness"\|"compile_dag", harness_id? }`): runs the simple-question router (weather, math, time, direct answers, typo-tolerant geocoding, dynamic `help.ask` call-outs) or multi-step Funnel/DAG chains, enforces a single deduplicated turn-level approval gate for mutating actions, runs backend `groundQueryWithOntology`, executes the end-of-turn verify gate, and writes synchronously to D1 `jev_chat_logs` and WAE `TS_CHAT`. |
+| `GET` | `/api/jev/console/chat/logs` | Bearer | Yes | Reads logged `/jev/` console chat turns from D1 `jev_chat_logs` and WAE `TS_CHAT` (`?session_id=&limit=`, shipped `2026-10-30`). |
+| `GET` | `/api/jev/console/sessions` | Bearer | Yes | Lists active multi-turn console sessions ordered by MRU. |
+| `GET` | `/api/jev/console/sessions/:id` | Bearer | Yes | Returns one session's turn history and state hydrated from D1 (`hydrateSessionContextFromD1`; returns `200 { exists: false }` on unknown id unless `?strict=1`). |
+| `POST` | `/api/jev/console/plan` | Bearer | Yes | Builds a multi-call execution plan and Harness context preview without executing steps. |
+| `POST` | `/api/jev/console/agent` | Bearer | Yes | Plans and executes a multi-call agentic turn across the 270 Funnel targets. |
+| `GET` | `/api/jev/console/catalog` | Bearer | Yes (`F1..F6`) | Returns all **270 registered Funnel targets** across 8 categories (`orchestrator` [61], `map_and_timeseries` [48], `corpus_and_math` [43], `harness_and_workflows` [38], `enrichment` [25], `n8n_and_agentics` [24], `evolution` [22], `automations` [9]). |
+| `POST` | `/api/jev/console/dispatch` | Bearer | Yes (`F1..F6`) | In-process zero-self-fetch dispatcher for read-only targets and gated pipeline router (`via_task: true`) for mutating targets. |
+| `GET\|POST` | `/api/jev/console/modules` | Bearer | Yes | Lists the 80 worker module parts (`GET`) or routes a module-level invocation (`POST`). |
+| `GET` | `/api/jev/console/modules/selftest` | Bearer | Yes | Runs the module router selftest. |
+| `GET\|POST` | `/api/jev/console/skills` | Bearer | Yes | Lists (`GET`) or invokes (`POST`) embedded skills from the active harness tree. |
+| `GET\|POST` | `/api/jev/console/subagents` | Bearer | Yes | Lists (`GET`) or invokes (`POST`) embedded subagent profiles. |
+| `GET\|POST` | `/api/jev/console/plugins` | Bearer | Yes | Lists (`GET`) or invokes (`POST`) embedded harness plugins/references. |
+| `GET\|POST` | `/api/jev/console/functions` | Bearer | Yes | Lists (`GET`) or invokes (`POST`) pure worker functions. |
+| `POST` | `/api/jev/console/builtin` | Bearer | Yes | Executes a registered deterministic automation builtin (`automation.builtin_run`). |
+| `POST` | `/api/jev/console/golden-set` | Bearer | Yes | Runs the hierarchy router golden-set evaluation (`router.golden_set`). |
+| `GET\|POST` | `/api/jev/suggest` | Bearer | Yes | Alias: `GET\|POST /api/jev/console/wayfinder-suggest`. Generates Wayfinder next-action suggestions (`agent.wayfinder_suggest`). |
+| `GET` | `/api/jev/console/selftest` | Bearer | Yes (`F1..F6`) | Runs 6 deterministic Console Funnel gates (`F1..F6`). |
+
+### 4. DAG Pipeline Compiler, Preset Persistence & Executor (`jev-n8n-dag.js` `v2.2.0`)
+
+User-facing label: `DAG Pipelines` / `Compile & Run as DAG` (API paths retain `/api/jev/n8n/*` and target IDs `n8n.*`).
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/n8n/nodes` | Bearer | Yes | Lists all 21 native DAG node types (including `ontology.ground`, `searxng.dig`, `enrich.*`, `refinery.*`, `forecaster.*`, `resend.send`) and Funnel target nodes. |
+| `GET\|POST` | `/api/jev/n8n/templates` | Bearer | Yes | `GET` lists the 8 built-in DAG presets plus custom presets persisted in KV `SITE` (`n8n:custom-presets-v1`); `POST` saves/updates a custom DAG preset with read-back verification. |
+| `POST` | `/api/jev/n8n/compile` | Bearer | Yes | Compiles a natural-language prompt, numbered directive list, or slash chain into a topological multi-wave DAG definition (with optional `save_preset`). |
+| `POST` | `/api/jev/n8n/validate` | Bearer | Yes | Validates DAG node types, topological wave ordering, and zero-`eval` `{{ $steps... }}` expression references. |
+| `POST` | `/api/jev/n8n/execute` | Bearer | Yes | Executes a compiled or preset DAG in waves; mutating actions (`resend.send`, `github.contents_put`) pass through a single deduplicated turn-level approval gate. |
+| `GET` | `/api/jev/n8n/selftest` | Bearer | Yes | Runs the deterministic DAG compiler, expression engine, and wave-executor selftest suite. |
+
+### 5. Deterministic Data Enrichment Engine (`jev-data-enrichment.js` `v2.0.0`, 10 Routes) & 24 Embedded Skill Workflows (`jev-workflows.js` `v2.0.0`, 26 Routes)
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET` | `/api/jev/enrich/catalog` | Bearer | Yes (`E1..E16`) | Returns the 10-entry enrichment catalog with required fields and dependency declarations. |
+| `GET` | `/api/jev/enrich/selftest` | Bearer | Yes (`E1..E16`) | Runs 16 offline deterministic checks (`E1..E16`) verifying SHA-256 `inputHash`, domain/lead/corpus/market/blindspot/repo/compare enrichers, and batch execution. |
+| `POST` | `/api/jev/enrich/domain` | Bearer | Yes | Enriches a business domain (`{ domain, searxng?, places? }`) with normalized signals, tech stack hints, and SHA-256 `inputHash`. |
+| `POST` | `/api/jev/enrich/lead` | Bearer | Yes | Enriches an SMB lead record and computes outreach readiness and pain-point signals. |
+| `POST` | `/api/jev/enrich/corpus-item` | Bearer | Yes | Scores a corpus document across the 12 NSS axes (`jev-corpus-scorer.js`) and computes atom/lens enrichment metadata. |
+| `POST` | `/api/jev/enrich/market` | Bearer | Yes | Enriches a prediction market series with resampled trajectory metrics, covariate spans, and 3-path forecast signals. |
+| `POST` | `/api/jev/enrich/batch` | Bearer | Yes | Runs any enricher over a batch of items (`1..25`) with deterministic per-item `inputHash` dedup. |
+| `POST` | `/api/jev/enrich/blindspot` | Bearer | Yes | Runs the Revenue Blind Spot v3 diagnostic scoring engine (`rbs-v3.0.0-draft2` parity) over SMB intake answers. |
+| `POST` | `/api/jev/enrich/repo` | Bearer | Yes | Audits a repository or doc-corpus snapshot and computes curveball-null $V_2$, $z$, and `level_dbc = 20*log10(|z|)`. |
+| `POST` | `/api/jev/enrich/compare` | Bearer | Yes | Computes a side-by-side differential between two enriched snapshots (`before` vs `after`). |
+| `GET` | `/api/jev/workflows/catalog` | Bearer | Yes (`W1..W6`) | Lists all **24 embedded skill workflows** with stage schemas, skill mappings, and `sample_input`. |
+| `GET` | `/api/jev/workflows/selftest` | Bearer | Yes (`W1..W6`) | Verifies workflow catalog completeness, stage execution, and deterministic outputs across all 24 workflows. |
+| `POST` | `/api/jev/workflows/:workflow_id` | Bearer | Yes | Executes one of the 24 embedded skill workflows: `unit-round`, `wayfinder-cycle`, `mint-preflight`, `self-archaeology`, `lead-enrichment-outreach`, `polymarket-alpha-ranker`, `full-system-doctor`, `multi-call-research-synthesis`, `dream-rsi`, `taste-falsification-gate`, `refs-refresh-sweep`, `supply-chain-attestation-gate`, `ideate-novelty-kill-gate`, `cf-backup-and-deploy-verify`, `data-refinery-5stage`, `bootc-uki-fido2-verify`, `jev-corpus`, `jev-orchestrator`, `jev-timeseries`, `curved-corpus-create`, `nss-12-axis-deep-audit`, `repo-history-archive`, `parallel-build-lanes`, `debug-cli-bridge-probe`. |
+
+### 6. Unified `/forecasts/` Workstation Additions, Stage-2 Covariant Refinement Fixes & Automated `$200` Slip Tracker (`2026-10-28` to `2026-11-06`)
+
+> **Live Bundle Note (`2026-11-06`, etag `ff328178...`):** In the latest live upload of `jev-refinery.js` (`sha256: 1c19b3daafb3`), an unanchored string replacement (`/jev/` -> `the Operations Console`) corrupted 121 internal route path literals inside `jev-refinery.js` (e.g., `"/apithe Operations Consolerefinery/selftest"`). Restoring those route literals from the verified `38f02385...` part (`sha256: 64b1e2949695`) while keeping the intended help-prompt copy changes is P0 Task 1 in the deployment update plan.
+
+| Method | Path | Auth | Falsification Harness | Contract & Purpose |
+|---|---|---|---|---|
+| `GET\|POST` | `/api/jev/forecaster/recommendations` | Bearer | Yes | Computes 5-gate fractional-Kelly Tier-A (`STRONG BET`) and Tier-B (`REFINE FIRST`) betting recommendations plus Kalman strike-ladder arbitrage over open markets (`n >= 8`), using two-sided empirical regime shrinkage calibration (`bankroll`, `kellyMultiplier`, `maxBankrollPct`, `minEdgePp`, `exchange`, `domain`, `horizon`). |
+| `GET` | `/api/jev/forecaster/cron/status` | Bearer | Yes | Returns 15-minute Cloudflare cron (`*/15 * * * *`) state (`cursorCom`, `cursorUs`, `cursorUsRes`, `totalRuns`, `totalTradesIngested`, `lastRunPt`) and last 20 run reports from `forecaster:cron-state-v1`. |
+| `GET\|POST` | `/api/jev/forecaster/cron/run` | Bearer | Yes | Triggers an immediate 15-minute dual-exchange ingest (`polymarket.com` + `polymarket.us`), overflow-safe WAE write (`>245` rows drained via `/api/jev/timeseries/import`), $n \ge 8$ 3-path forecast freeze (`preStage2`/`postStage2`), Brier grading, and `$200` slip grading pass. |
+| `GET` | `/api/jev/forecaster/slips` | Bearer | Yes | Returns the automated `$200` top-12 slip ledger (`forecaster:slips-v1`) backing the Stage 05 `$200 Slip Tracker` tab on `/forecasts/`, including active and settled slips, per-position entry prices, `preStage2`/`postStage2` probabilities, and realized ROI/PnL. |
+| `GET\|POST` | `/api/jev/forecaster/slips/create` | Bearer | Yes | Mints a new `$200` top-12 fractional-Kelly slip in `forecaster:slips-v1`, prioritizing near-term markets ($\le 96\text{h}$ to close) and correcting stale `.us` entry prices. |
+| `GET\|POST` | `/api/jev/forecaster/slips/grade` | Bearer | Yes | Re-grades all open slips in `forecaster:slips-v1` against verified market settlements, marking positions resolved strictly on true market closure (never grading open futures as resolved). |
+| `GET` | `/api/jev/refinery/summary` | Bearer | Yes | Direct alias for `GET /api/jev/timeseries/wae-summary` (`?fresh=1` forces live ClickHouse WAE SQL aggregation). |
+| `GET` | `/api/jev/help` , `/api/jev/help/docs` | Bearer | Yes | Returns the structured Platform Help & Documentation catalog for the Ops Console (`⌘K` Help dialog). |
+| `POST` | `/api/jev/help` , `/api/jev/help/ask` | Bearer | Yes | Platform Help Ask Agent (`help.ask` Funnel target): answers natural-language questions on how to find, navigate, or execute any feature across the Steady Orbit Systems platform. |
+| `GET\|POST\|DELETE` | `/mcp` | Public (read-only) / Bearer (mutating) | Yes (`M1..M4`) | Root Streamable HTTP MCP gateway (`https://steadyorbitsystems.com/mcp`, connection `conn_yNdhO8uD2JZ3`), rewritten in `index.js` onto `/api/jev/mcp`. |
+| `GET` | `/.well-known/oauth-protected-resource` , `/.well-known/oauth-authorization-server` , `/.well-known/openid-configuration` | Public | Yes | Root and `/api/jev/mcp/.well-known/*` OAuth 2.0 / OIDC discovery metadata for MCP clients. |
+| `GET\|POST` | `/oauth/register` , `/oauth/authorize` , `/oauth/token` | Public / Bearer | Yes | Root and `/api/jev/mcp/oauth/*` dynamic client registration, authorization, and token endpoints for Streamable HTTP MCP connectors. |
+
