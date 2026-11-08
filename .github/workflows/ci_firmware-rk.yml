@@ -117,7 +117,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:61025cea33d5910165ced8b33edd3f6b6bfe161e129174887936a1b9a1442b20 # auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:94571f3dc07fbc7166f6f1cbf1fe068a7647198ee2554e6b90d59a68cc8b053c # auto-resolves to ${{ matrix.arch }}
     env:
       EDK2_REPO: https://github.com/yubi-OS/edk2.git
       EDK2_PLATFORMS_REPO: https://github.com/yubi-OS/edk2-platforms.git
@@ -489,7 +489,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:61025cea33d5910165ced8b33edd3f6b6bfe161e129174887936a1b9a1442b20 # auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:94571f3dc07fbc7166f6f1cbf1fe068a7647198ee2554e6b90d59a68cc8b053c # auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -991,7 +991,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:61025cea33d5910165ced8b33edd3f6b6bfe161e129174887936a1b9a1442b20
+      image: docker://dhi.io/debian-base@sha256:94571f3dc07fbc7166f6f1cbf1fe068a7647198ee2554e6b90d59a68cc8b053c
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -1074,7 +1074,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:61025cea33d5910165ced8b33edd3f6b6bfe161e129174887936a1b9a1442b20 # auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:94571f3dc07fbc7166f6f1cbf1fe068a7647198ee2554e6b90d59a68cc8b053c # auto-resolves to ${{ matrix.arch }}
     env:
       BOOT_TIMEOUT: '180'
     steps:
@@ -1259,7 +1259,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:61025cea33d5910165ced8b33edd3f6b6bfe161e129174887936a1b9a1442b20
+      image: docker://dhi.io/debian-base@sha256:94571f3dc07fbc7166f6f1cbf1fe068a7647198ee2554e6b90d59a68cc8b053c
     strategy:
       fail-fast: false
       matrix:
