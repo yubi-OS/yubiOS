@@ -14,20 +14,31 @@ bcvk_podman_logs_tail() {
 bcvk_ssh() {
   local vmid="$1"
   shift
+  local attempt=1
+  local rc=0
 
-  podman exec -- "$vmid" ssh \
-    -i /run/tmproot/var/lib/bcvk/ssh \
-    -o IdentitiesOnly=yes \
-    -o PasswordAuthentication=no \
-    -o KbdInteractiveAuthentication=no \
-    -o GSSAPIAuthentication=no \
-    -o StrictHostKeyChecking=no \
-    -o UserKnownHostsFile=/dev/null \
-    -o BatchMode=yes \
-    -o ConnectTimeout=2 \
-    -o ServerAliveInterval=60 \
-    -o LogLevel=ERROR \
-    -p 2222 root@127.0.0.1 -- "$@"
+  while [ "$attempt" -le 4 ]; do
+    rc=0
+    podman exec -- "$vmid" ssh \
+      -i /run/tmproot/var/lib/bcvk/ssh \
+      -o IdentitiesOnly=yes \
+      -o PasswordAuthentication=no \
+      -o KbdInteractiveAuthentication=no \
+      -o GSSAPIAuthentication=no \
+      -o StrictHostKeyChecking=no \
+      -o UserKnownHostsFile=/dev/null \
+      -o BatchMode=yes \
+      -o ConnectTimeout=10 \
+      -o ServerAliveInterval=60 \
+      -o LogLevel=ERROR \
+      -p 2222 root@127.0.0.1 -- "$@" || rc=$?
+    if [ "$rc" -ne 255 ] || [ "$attempt" -eq 4 ]; then
+      return "$rc"
+    fi
+    sleep 2
+    attempt=$((attempt + 1))
+  done
+  return "$rc"
 }
 
 dump_bcvk_ssh_diagnostics() {

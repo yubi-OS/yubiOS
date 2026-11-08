@@ -173,14 +173,25 @@ jobs:
             sudo mkdir -p /mnt/extended/containers /var/lib/containers
             sudo mount --bind /mnt/extended/containers /var/lib/containers
           fi
+          if mountpoint -q /mnt/extended && ! mountpoint -q /var/tmp; then
+            echo "--- bind-mounting /mnt/extended/var-tmp onto /var/tmp so podman/bootc temp layers never hit the 12G root disk ---"
+            sudo rm -rf /var/tmp/container_images_storage* /var/tmp/pipeDir* 2>/dev/null || true
+            sudo mkdir -p /mnt/extended/var-tmp /var/tmp
+            sudo chmod 1777 /mnt/extended/var-tmp
+            sudo mount --bind /mnt/extended/var-tmp /var/tmp
+          fi
+          sudo rm -rf /var/tmp/container_images_storage* /var/tmp/pipeDir* 2>/dev/null || true
           echo "--- removing stray containers and dangling untagged layers (preserving cached images) ---"
-          sudo podman ps -aq | xargs -r sudo podman rm -f || true
+          sudo podman ps -aq | xargs -r sudo podman rm -f -t 0 || true
           sudo podman image prune -f || true
+          sudo docker rm -f $(sudo docker ps -aq) 2>/dev/null || true
+          sudo docker system prune -af --volumes 2>/dev/null || true
+          sudo journalctl --vacuum-size=100M 2>/dev/null || true
           echo "--- removing leftover bcvk-src clone + cargo target from a prior run ---"
           sudo rm -rf /opt/bcvk-src || true
           echo "--- cleaning apt cache ---"
           sudo apt-get clean || true
-          df -h "$PWD" /var/lib/containers || true
+          df -h "$PWD" / /var/tmp /var/lib/containers || true
 
       - name: Install host deps (swtpm + qemu + fido2 + cryptsetup)
         run: |

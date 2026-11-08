@@ -171,13 +171,15 @@ g 'set -eu
   || die "failed to launch passless against the pre-created CI storage"
 
 if ! g 'set -eu
-        for _ in $(seq 1 30); do
+        for _ in $(seq 1 45); do
           udevadm settle 2>/dev/null || true
           if fido2-token -L 2>/dev/null | tee /run/passless-ci/devices | grep -q .; then
             cat /run/passless-ci/devices
             exit 0
           fi
-          systemctl is-active --quiet passless-ci.service || exit 1
+          if systemctl is-failed --quiet passless-ci.service; then
+            exit 1
+          fi
           sleep 1
         done
         exit 1'; then

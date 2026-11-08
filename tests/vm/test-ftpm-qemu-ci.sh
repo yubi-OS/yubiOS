@@ -49,7 +49,12 @@ TO_DISK_TIMEOUT="${TO_DISK_TIMEOUT:-900}"
 # works for FTPM_LOG_DIR (recreated + chmod 0777 every run by the workflow), so
 # WORK moves there too, and gets removed at the START of every run for the same
 # reason: a same-run interruption's root-owned leftovers must not survive either.
-WORK="${WORK:-/tmp/yubios-ftpm-work}"
+if mountpoint -q /mnt/extended 2>/dev/null; then
+  mkdir -p /mnt/extended/tmp
+  WORK="${WORK:-/mnt/extended/tmp/yubios-ftpm-work}"
+else
+  WORK="${WORK:-/tmp/yubios-ftpm-work}"
+fi
 LOG_DIR="${LOG_DIR:-/tmp/yubios-ftpm-logs}"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
