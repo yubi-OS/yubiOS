@@ -127,7 +127,7 @@ g 'ls /dev/hidraw* >/dev/null 2>&1' || skip "no /dev/hidraw* — QEMU u2f-emulat
 if g 'command -v pamu2fcfg >/dev/null'; then
   log "pam-u2f: register a token and assert pam_u2f config"
   if g 'ls /dev/hidraw* >/dev/null 2>&1'; then
-    g 'pamu2fcfg -u ci > /tmp/u2f_keys 2>/dev/null && test -s /tmp/u2f_keys' \
+    g 'pamu2fcfg -u ci -o pam.yubios.local -i pam.yubios.local > /tmp/u2f_keys 2>/dev/null && test -s /tmp/u2f_keys' \
       || skip "pamu2fcfg found no token to register (Layer 1 device absent)"
   fi
   # pam_u2f must be present and ordered "required" (not sufficient) in the auth stack.

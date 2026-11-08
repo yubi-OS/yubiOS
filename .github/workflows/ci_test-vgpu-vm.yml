@@ -194,14 +194,14 @@ jobs:
             sudo mkdir -p /mnt/extended/containers /var/lib/containers
             sudo mount --bind /mnt/extended/containers /var/lib/containers
           fi
-          echo "--- resetting/pruning podman storage from prior runs ---"
-          sudo podman system reset -f || true
-          sudo podman system prune -af --volumes || true
+          echo "--- removing stray containers and dangling untagged layers (preserving cached images) ---"
+          sudo podman ps -aq | xargs -r sudo podman rm -f || true
+          sudo podman image prune -f || true
           echo "--- removing leftover bcvk-src clone + cargo target from a prior run ---"
           sudo rm -rf /opt/*-src || true
           echo "--- cleaning apt cache ---"
           sudo apt-get clean || true
-          df -h "$PWD" || true
+          df -h "$PWD" /var/lib/containers || true
 
       - name: Install host deps (swtpm + qemu + fido2 + cryptsetup)
         run: |
@@ -406,22 +406,62 @@ jobs:
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER }}
         run: |
+          set -euo pipefail
           # Login to docker.io if a password is available. arm64 self-hosted
           # runner (rock1): apt installs docker.io but the runner user has
           # no socket access, so use sudo podman throughout. This all-in-one
           # deployment/verifier workflow uses ONE pull for both the
           # vgpu-vm-e2e leg and the composefs-tamper Negative 2 leg; the
-          # podman store is preserved between legs (see step 27 comment).
+          # podman store is preserved between legs and across runs when the
+          # targeted image digest matches the cached image.
           if [ -n "${DOCKER_PASSWORD:-}" ]; then
             printf '%s' "$DOCKER_PASSWORD" | sudo podman login \
               --username 0mniteck42 --password-stdin docker.io
           fi
-          sudo podman pull "${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}"
+          TARGET_IMAGE="${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}"
+          REMOTE_DIGEST="$(python3 - "$TARGET_IMAGE" <<'PY'
+          import json, sys, urllib.request
+          ref = sys.argv[1]
+          if "@sha256:" in ref:
+              print("sha256:" + ref.split("@sha256:", 1)[1])
+              sys.exit(0)
+          clean = ref
+          for pfx in ("docker.io/", "index.docker.io/"):
+              if clean.startswith(pfx):
+                  clean = clean[len(pfx):]
+          repo, tag = (clean.split(":", 1) + ["latest"])[:2]
+          if "/" not in repo:
+              repo = "library/" + repo
+          try:
+              tok_url = f"https://auth.docker.io/token?service=registry.docker.io&scope=repository:{repo}:pull"
+              tok = json.loads(urllib.request.urlopen(tok_url, timeout=15).read().decode())["token"]
+              req = urllib.request.Request(
+                  f"https://registry-1.docker.io/v2/{repo}/manifests/{tag}",
+                  headers={
+                      "Authorization": f"Bearer {tok}",
+                      "Accept": "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json",
+                  },
+                  method="HEAD",
+              )
+              with urllib.request.urlopen(req, timeout=15) as r:
+                  print(r.headers.get("Docker-Content-Digest", "").strip())
+          except Exception:
+              print("")
+          PY
+          )"
+          LOCAL_DIGESTS="$(sudo podman image inspect "$TARGET_IMAGE" --format '{{range .RepoDigests}}{{.}} {{end}}' 2>/dev/null || true)"
+          if [ -n "$REMOTE_DIGEST" ] && [ -n "$LOCAL_DIGESTS" ] && grep -Fq "$REMOTE_DIGEST" <<<"$LOCAL_DIGESTS"; then
+            echo "Cache HIT: $TARGET_IMAGE already cached in podman at $REMOTE_DIGEST -- skipping purge and pull"
+          else
+            echo "Cache MISS or digest updated (remote=${REMOTE_DIGEST:-unknown}, local=${LOCAL_DIGESTS:-none}) -- pruning stale images and pulling $TARGET_IMAGE"
+            sudo podman image prune -af || true
+            sudo podman pull "$TARGET_IMAGE"
+          fi
           sudo podman images | head -5
           # Resolve the immutable digest (pattern from former step 32)
           # for the composefs-tamper Negative 2 leg to reuse. podman
           # supports the same `--format '{{ index .RepoDigests 0 }}'` as docker.
-          RESOLVED="$(sudo podman image inspect "${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}" \
+          RESOLVED="$(sudo podman image inspect "$TARGET_IMAGE" \
             --format '{{ index .RepoDigests 0 }}')"
           case "$RESOLVED" in
             *@sha256:*) ;;
@@ -638,14 +678,13 @@ jobs:
           fi
           # NOTE: `sudo podman system prune -af --volumes` intentionally
           # REMOVED. This all-in-one workflow keeps the yubiOS image in
-          # podman storage between the vgpu-vm-e2e leg (steps before this)
-          # and the composefs-tamper Negative 2 leg (steps after this).
-          # Re-pulling wastes CI minutes; the same podman store is reused
-          # by step 34's `docker run -v /var/lib/containers:/var/lib/containers`.
-          # Container cleanup (the line above) is still safe: it removes
-          # exited containers, not images.
+          # podman storage between the vgpu-vm-e2e leg (steps before this),
+          # the composefs-tamper Negative 2 leg (steps after this), and
+          # subsequent runs when the targeted image digest matches.
+          sudo podman ps -aq | xargs -r sudo podman rm -f || true
+          sudo podman image prune -f || true
           sudo rm -rf /opt/*-src || true
-          df -h "$PWD" || true
+          df -h "$PWD" /var/lib/containers || true
 
       - name: Note hardware-only variant (runs above when dispatched with hw_device, else lint-only)
         run: |

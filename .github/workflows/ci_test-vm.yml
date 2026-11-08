@@ -173,14 +173,14 @@ jobs:
             sudo mkdir -p /mnt/extended/containers /var/lib/containers
             sudo mount --bind /mnt/extended/containers /var/lib/containers
           fi
-          echo "--- resetting/pruning podman storage from prior runs ---"
-          sudo podman system reset -f || true
-          sudo podman system prune -af --volumes || true
+          echo "--- removing stray containers and dangling untagged layers (preserving cached images) ---"
+          sudo podman ps -aq | xargs -r sudo podman rm -f || true
+          sudo podman image prune -f || true
           echo "--- removing leftover bcvk-src clone + cargo target from a prior run ---"
           sudo rm -rf /opt/bcvk-src || true
           echo "--- cleaning apt cache ---"
           sudo apt-get clean || true
-          df -h "$PWD" || true
+          df -h "$PWD" /var/lib/containers || true
 
       - name: Install host deps (swtpm + qemu + fido2 + cryptsetup)
         run: |
@@ -269,7 +269,7 @@ jobs:
       - name: Free disk space (pre-build -- kill stray containers from an aborted prior run)
         run: |
           sudo podman ps -aq | xargs -r sudo podman rm -f || true
-          sudo podman system prune -af --volumes || true
+          sudo podman image prune -f || true
           df -h "$PWD" || true
 
       - name: Build bcvk @ pinned source (feasibility gate)
@@ -401,13 +401,53 @@ jobs:
       - name: Free disk space (pre-pull -- reclaim space the cargo build just used)
         if: steps.bcvk.outputs.skip == '0' && steps.kvm.outputs.kvm == '1' && steps.policy.outputs.boot == '1'
         run: |
-          sudo podman system prune -af --volumes || true
-          df -h "$PWD" || true
+          sudo podman ps -aq | xargs -r sudo podman rm -f || true
+          sudo podman image prune -f || true
+          df -h "$PWD" /var/lib/containers || true
 
       - name: Pull yubiOS image into podman storage (bcvk boots from local storage)
         if: steps.bcvk.outputs.skip == '0' && steps.kvm.outputs.kvm == '1' && steps.policy.outputs.boot == '1'
         run: |
-          sudo podman pull "${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}"
+          set -euo pipefail
+          TARGET_IMAGE="${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}"
+          REMOTE_DIGEST="$(python3 - "$TARGET_IMAGE" <<'PY'
+          import json, sys, urllib.request
+          ref = sys.argv[1]
+          if "@sha256:" in ref:
+              print("sha256:" + ref.split("@sha256:", 1)[1])
+              sys.exit(0)
+          clean = ref
+          for pfx in ("docker.io/", "index.docker.io/"):
+              if clean.startswith(pfx):
+                  clean = clean[len(pfx):]
+          repo, tag = (clean.split(":", 1) + ["latest"])[:2]
+          if "/" not in repo:
+              repo = "library/" + repo
+          try:
+              tok_url = f"https://auth.docker.io/token?service=registry.docker.io&scope=repository:{repo}:pull"
+              tok = json.loads(urllib.request.urlopen(tok_url, timeout=15).read().decode())["token"]
+              req = urllib.request.Request(
+                  f"https://registry-1.docker.io/v2/{repo}/manifests/{tag}",
+                  headers={
+                      "Authorization": f"Bearer {tok}",
+                      "Accept": "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json",
+                  },
+                  method="HEAD",
+              )
+              with urllib.request.urlopen(req, timeout=15) as r:
+                  print(r.headers.get("Docker-Content-Digest", "").strip())
+          except Exception:
+              print("")
+          PY
+          )"
+          LOCAL_DIGESTS="$(sudo podman image inspect "$TARGET_IMAGE" --format '{{range .RepoDigests}}{{.}} {{end}}' 2>/dev/null || true)"
+          if [ -n "$REMOTE_DIGEST" ] && [ -n "$LOCAL_DIGESTS" ] && grep -Fq "$REMOTE_DIGEST" <<<"$LOCAL_DIGESTS"; then
+            echo "Cache HIT: $TARGET_IMAGE already cached in podman at $REMOTE_DIGEST -- skipping purge and pull"
+          else
+            echo "Cache MISS or digest updated (remote=${REMOTE_DIGEST:-unknown}, local=${LOCAL_DIGESTS:-none}) -- pruning stale images and pulling $TARGET_IMAGE"
+            sudo podman image prune -af || true
+            sudo podman pull "$TARGET_IMAGE"
+          fi
           sudo podman images | head -5
 
       - name: Relax AppArmor profiles for bcvk VM boot
@@ -714,9 +754,9 @@ jobs:
             done
           fi
           sudo podman ps -aq | xargs -r sudo podman rm -f || true
-          sudo podman system prune -af --volumes || true
+          sudo podman image prune -f || true
           sudo rm -rf /opt/bcvk-src || true
-          df -h "$PWD" || true
+          df -h "$PWD" /var/lib/containers || true
 
       - name: Note hardware-only variant (runs above when dispatched with hw_device, else lint-only)
         run: |

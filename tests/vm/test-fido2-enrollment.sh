@@ -168,7 +168,7 @@ echo "CTAP2 hmac-secret authenticator up"
 # ---- 4. FIDO2 registration (the wizard's core primitive) ----
 log "pam-u2f: register a credential against the software authenticator"
 g 'command -v pamu2fcfg >/dev/null' || die "pamu2fcfg missing from image"
-g 'pamu2fcfg -u ci-enroll > /tmp/enroll_u2f_keys && test -s /tmp/enroll_u2f_keys' \
+g 'pamu2fcfg -u ci-enroll -o pam.yubios.local -i pam.yubios.local > /tmp/enroll_u2f_keys && test -s /tmp/enroll_u2f_keys' \
   || die "pamu2fcfg registration against CTAP2 authenticator failed"
 echo "FIDO2 registration OK"
 
