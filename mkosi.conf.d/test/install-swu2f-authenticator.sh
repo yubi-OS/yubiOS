@@ -126,9 +126,35 @@ export CARGO_HOME="${cargo_home}"
 export CARGO_INCREMENTAL=0
 export RUSTFLAGS="--remap-path-prefix=${src}=/usr/src/passless --remap-path-prefix=${cargo_home}=/usr/src/cargo-home"
 
-# `cargo install --debug` => debug profile (debug_assertions on) => the
-# PASSLESS_E2E_AUTO_ACCEPT_UV path compiles in. --root /usr installs to /usr/bin.
-( cd "${src}" && cargo install --debug --locked --path cmd/passless --root /usr )
+# Vendor crates so we can also patch soft-fido2-ctap 0.17.0's GetInfo filter
+# (soft-fido2-ctap/src/commands/get_info.rs:87 filters config.extensions to
+# CRED_PROTECT only unless HMAC_SECRET is included in the allowlist).
+(
+    cd "${src}"
+    cargo vendor "${src}/vendor" >/dev/null
+    mkdir -p "${src}/.cargo"
+    cat > "${src}/.cargo/config.toml" <<EOF
+[source.crates-io]
+replace-with = "vendored-sources"
+[source.vendored-sources]
+directory = "${src}/vendor"
+EOF
+    get_info_rs="${src}/vendor/soft-fido2-ctap/src/commands/get_info.rs"
+    grep -Fq '.filter(|extension| extension.as_str() == crate::extensions::ext_ids::CRED_PROTECT)' "${get_info_rs}"
+    sed -i 's/\.filter(|extension| extension\.as_str() == crate::extensions::ext_ids::CRED_PROTECT)/.filter(|extension| matches!(extension.as_str(), crate::extensions::ext_ids::CRED_PROTECT | crate::extensions::ext_ids::HMAC_SECRET))/' "${get_info_rs}"
+    grep -Fq 'crate::extensions::ext_ids::HMAC_SECRET' "${get_info_rs}"
+    python3 - "${src}/vendor/soft-fido2-ctap/.cargo-checksum.json" "${get_info_rs}" <<'PY'
+import hashlib, json, pathlib, sys
+cs_path = pathlib.Path(sys.argv[1])
+gi_path = pathlib.Path(sys.argv[2])
+data = json.loads(cs_path.read_text())
+data["files"]["src/commands/get_info.rs"] = hashlib.sha256(gi_path.read_bytes()).hexdigest()
+cs_path.write_text(json.dumps(data))
+PY
+    # `cargo install --debug` => debug profile (debug_assertions on) => the
+    # PASSLESS_E2E_AUTO_ACCEPT_UV path compiles in. --root /usr installs to /usr/bin.
+    cargo install --debug --locked --offline --path cmd/passless --root /usr
+)
 
 # Ship the upstream integration bits verbatim (sysusers creates the `fido` group,
 # udev grants it /dev/uhid, modules-load ensures uhid even without bcvk's karg).

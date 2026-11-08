@@ -616,7 +616,7 @@ jobs:
 
       - name: Run tests/vm/test-luks-fido2-ci.sh (boot leg gated on image availability)
         if: ${{ always() && steps.bcvk.outputs.skip == '0' && steps.kvm.outputs.kvm == '1' && steps.policy.outputs.boot == '1' }}
-        timeout-minutes: 5
+        timeout-minutes: 20
         env:
           YUBIOS_IMAGE: ${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}
           YUBIOS_SSH_WAIT_SECS: ${{ matrix.arch == 'arm64' && '900' || '300' }}
@@ -664,7 +664,7 @@ jobs:
           echo "### vm-e2e (${{ matrix.arch }}) -- PASS: test-luks-fido2-ci.sh (CTAP2 legs skip unless the test image ships swu2f Layer 2)" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Run tests/vm/test-fido2-enrollment.sh (enrollment surface, #9/#25)
-        timeout-minutes: 5
+        timeout-minutes: 20
         if: ${{ always() && steps.bcvk.outputs.skip == '0' && steps.kvm.outputs.kvm == '1' && steps.policy.outputs.boot == '1' }}
         env:
           YUBIOS_IMAGE: ${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}
