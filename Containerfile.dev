@@ -124,6 +124,14 @@ RUN install -d /usr/lib/systemd/system/multi-user.target.wants && \
       /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service && \
     test -L /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service
 
+# Strip the production base image's pre-built UKI from /boot/EFI/Linux/:
+# Containerfile.dev layers swu2f + serial autologin on top of yubios-base, so
+# the base image's embedded composefs= digest no longer matches this image's
+# rootfs. Leaving the base UKI in /boot/EFI/Linux/ causes `bootc install
+# --composefs-backend` to fail with UKIDigestMismatch and `bootc container ukify`
+# to refuse with "rootfs already contains a UKI".
+RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump
+
 
 LABEL yubiOS.image.kind="dev-test"
 LABEL yubiOS.image.warning="TEST-ONLY: ships the passless swu2f software FIDO2 authenticator AND serial/tty root autologin (local-access bypass of pam_u2f). Never use in production. See ADR-003, ADR-026."

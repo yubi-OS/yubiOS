@@ -838,6 +838,15 @@ jobs:
         run: |
           set -euo pipefail
           sudo install -d -m 0755 /var/lib/containers
+          # Strip any inherited base-image UKI from /boot/EFI/Linux/ in a local
+          # containers-storage derivative so bootc installs via Type1 BLS
+          # (/usr/lib/modules/$kver/vmlinuz + initramfs.img) without failing
+          # UKIDigestMismatch against yubios-base's composefs digest.
+          CFS_SRC_IMAGE="localhost/yubios-cfs-src:latest"
+          sudo env TMPDIR=/var/tmp podman build -t "$CFS_SRC_IMAGE" - <<EOF
+          FROM $RESOLVED
+          RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump
+          EOF
           sudo env TMPDIR=/var/tmp podman run --rm --privileged --pid=host --ipc=host \
             --security-opt label=type:unconfined_t \
             -v /var/lib/containers:/var/lib/containers \
@@ -845,12 +854,13 @@ jobs:
             -e TMPDIR=/var/tmp \
             -v /dev:/dev \
             -v /mnt/cfs-target:/target \
-            "$RESOLVED" \
+            "$CFS_SRC_IMAGE" \
             bootc install to-filesystem \
-              --source-imgref="containers-storage:${RESOLVED}" \
+              --source-imgref="containers-storage:${CFS_SRC_IMAGE}" \
               --composefs-backend \
               --disable-selinux \
               --bootloader=systemd \
+              --karg=console=ttyAMA0 \
               --root-mount-spec="" \
               --skip-finalize \
             /target
@@ -866,6 +876,8 @@ jobs:
           # blob lands on disk at /mnt/cfs-target/composefs/blob/<digest> (or
           # /mnt/cfs-target/composefs/images/<digest>) and we ensure the symlink
           # exists for both the UKI's embedded composefs digest and any Type1 entry.
+          # Note: bootc 1.17.1+ emits composefs.digest=v1-sha512-12:<hex> (V1) or
+          # composefs=<hex> (V2); match both forms.
           entry="/mnt/cfs-target/boot/loader/entries/yubios-ukify.conf"
           if ! sudo test -f "$entry"; then
             entry="$(sudo find /mnt/cfs-target/boot -type f -path '*/loader/entries/*.conf' | head -1)"
@@ -875,10 +887,10 @@ jobs:
           cd_digest=""
           if [ -n "$uki_path" ] && sudo test -f "/mnt/cfs-target/boot${uki_path}"; then
             full_uki="/mnt/cfs-target/boot${uki_path}"
-            cd_digest="$(python3 scripts/extract_uki_cmdline.py "$full_uki" | grep -oE 'composefs=[0-9a-f]{64,128}' | head -1 | cut -d= -f2 || true)"
+            cd_digest="$(python3 scripts/extract_uki_cmdline.py "$full_uki" | grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' | head -1 | sed -E 's/^.*[:=]\??//' || true)"
           fi
           if [ -z "$cd_digest" ]; then
-            cd_digest="$(sudo grep -rhoE 'composefs=[0-9a-f]{64,128}' /mnt/cfs-target/boot/loader/entries/ 2>/dev/null | head -1 | cut -d= -f2 || true)"
+            cd_digest="$(sudo grep -rhoE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' /mnt/cfs-target/boot/loader/entries/ 2>/dev/null | head -1 | sed -E 's/^.*[:=]\??//' || true)"
           fi
           test -n "$cd_digest" || { echo "::error::no composefs= digest found in UKI or BLS entries"; exit 1; }
           echo "composefs digest: $cd_digest"
@@ -913,9 +925,9 @@ jobs:
           sudo cat "$entry"
           options="$(sudo awk '$1 == "options" {sub(/^options[[:space:]]+/, ""); print}' "$entry")"
           echo "options: $options"
-          if [[ " $options " =~ [[:space:]]composefs=([0-9a-f]{64,128})([[:space:]]|$) ]]; then
-            COMPOSEFS_DIGEST="${BASH_REMATCH[1]}"
-            echo "Type1 path: composefs= in options line"
+          COMPOSEFS_DIGEST="$(grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' <<<"$options" | head -1 | sed -E 's/^.*[:=]\??//' || true)"
+          if [ -n "$COMPOSEFS_DIGEST" ]; then
+            echo "Type1 path: composefs digest in options line"
             echo "COMPOSEFS_DIGEST=$COMPOSEFS_DIGEST"
           else
             uki_path="$(sudo awk '$1 == "uki" || $1 == "efi" {sub(/^(uki|efi)[[:space:]]+/, ""); print}' "$entry" | head -1)"
@@ -925,14 +937,14 @@ jobs:
             fi
             full_uki="/mnt/cfs-target/boot${uki_path}"
             test -f "$full_uki" || { echo "::error::UKI $full_uki not found"; exit 1; }
-            COMPOSEFS_DIGEST="$(python3 scripts/extract_uki_cmdline.py "$full_uki")"
+            UKI_CMDLINE="$(python3 scripts/extract_uki_cmdline.py "$full_uki")"
             echo "Type2 path: uki=$uki_path, cmdline from $full_uki"
-            echo "cmdline: $COMPOSEFS_DIGEST"
-            if [[ " $COMPOSEFS_DIGEST " =~ [[:space:]]composefs=([0-9a-f]{64,128})([[:space:]]|$) ]]; then
-              COMPOSEFS_DIGEST="${BASH_REMATCH[1]}"
+            echo "cmdline: $UKI_CMDLINE"
+            COMPOSEFS_DIGEST="$(grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' <<<"$UKI_CMDLINE" | head -1 | sed -E 's/^.*[:=]\??//' || true)"
+            if [ -n "$COMPOSEFS_DIGEST" ]; then
               echo "Type2 path: composefs= in UKI cmdline"
               echo "COMPOSEFS_DIGEST=$COMPOSEFS_DIGEST"
-              if ! sudo grep -q 'composefs=' "$entry"; then
+              if ! sudo grep -qE 'composefs(\.digest)?=' "$entry"; then
                 echo "options composefs=${COMPOSEFS_DIGEST} rw" | sudo tee -a "$entry" >/dev/null
               fi
             else
@@ -952,9 +964,9 @@ jobs:
         if: always() && matrix.arch == 'arm64' && steps.cfs_disk.outcome == 'success'
         run: |
           set +e
-          sudo umount /mnt/cfs-target/boot 2>/dev/null
-          sudo umount /mnt/cfs-target 2>/dev/null
-          sudo losetup --detach "$LOOP" 2>/dev/null
+          sudo umount /mnt/cfs-target/boot 2>/dev/null || true
+          sudo umount /mnt/cfs-target 2>/dev/null || true
+          sudo losetup --detach "$LOOP" 2>/dev/null || true
           echo "teardown done"
 
       - name: Boot baseline (untampered BLS) and assert composefs mount succeeds
@@ -998,7 +1010,7 @@ jobs:
           LOOP="$(sudo losetup --find --show --partscan "$DISK")"
           ROOT="${LOOP}p2"
           ESP="${LOOP}p1"
-          sudo mount "$ROOT" /mnt/cfs-target
+          sudo mount -o noatime "$ROOT" /mnt/cfs-target
           sudo mount "$ESP"  /mnt/cfs-target/boot
           orig="${COMPOSEFS_DIGEST:0:1}"
           if [ "$orig" = "0" ]; then
@@ -1010,9 +1022,9 @@ jobs:
           echo "Original composefs=<digest>: $COMPOSEFS_DIGEST"
           echo "Tampered  composefs=<digest>: $TAMPERED_DIGEST"
           for f in /mnt/cfs-target/boot/loader/entries/*.conf; do
-            sudo sed -i "s/composefs=${COMPOSEFS_DIGEST}/composefs=${TAMPERED_DIGEST}/g" "$f" || true
+            sudo sed -i "s/${COMPOSEFS_DIGEST}/${TAMPERED_DIGEST}/g" "$f" || true
           done
-          sudo grep -E 'composefs=' "$BLS_ENTRY"
+          sudo grep -E 'composefs(\.digest)?=' "$BLS_ENTRY"
           sudo rm -rf "/mnt/cfs-target/composefs/images/$COMPOSEFS_DIGEST" "/mnt/cfs-target/composefs/blob/$COMPOSEFS_DIGEST" 2>/dev/null || true
           if sudo test -e "/mnt/cfs-target/composefs/images/$TAMPERED_DIGEST"; then
             echo "::error::tampered digest $TAMPERED_DIGEST unexpectedly exists in store"
@@ -1026,9 +1038,10 @@ jobs:
         if: always() && matrix.arch == 'arm64' && steps.cfs_disk.outcome == 'success'
         run: |
           set +e
-          sudo umount /mnt/cfs-target/boot 2>/dev/null
-          sudo umount /mnt/cfs-target 2>/dev/null
-          sudo losetup --detach "$LOOP" 2>/dev/null
+          sudo umount /mnt/cfs-target/boot 2>/dev/null || true
+          sudo umount /mnt/cfs-target 2>/dev/null || true
+          sudo losetup --detach "$LOOP" 2>/dev/null || true
+          echo "teardown done"
 
       - name: Reboot, assert composefs refusal (Negative 2)
         if: matrix.arch == 'arm64'
