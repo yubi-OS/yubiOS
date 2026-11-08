@@ -835,7 +835,7 @@ jobs:
 
       - name: bootc install to-filesystem (composefs backend, systemd-boot)
         if: matrix.arch == 'arm64'
-        timeout-minutes: 25
+        timeout-minutes: 45
         run: |
           set -euo pipefail
           sudo install -d -m 0755 /var/lib/containers
@@ -848,6 +848,7 @@ jobs:
             -v /mnt/cfs-target:/target \
             "$RESOLVED" \
             bootc install to-filesystem \
+              --source-imgref="containers-storage:${RESOLVED}" \
               --composefs-backend \
               --disable-selinux \
               --bootloader=systemd \
