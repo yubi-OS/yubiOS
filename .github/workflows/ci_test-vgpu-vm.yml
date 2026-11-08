@@ -838,15 +838,6 @@ jobs:
         run: |
           set -euo pipefail
           sudo install -d -m 0755 /var/lib/containers
-          # Strip any inherited base-image UKI from /boot/EFI/Linux/ in a local
-          # containers-storage derivative so bootc installs via Type1 BLS
-          # (/usr/lib/modules/$kver/vmlinuz + initramfs.img) without failing
-          # UKIDigestMismatch against yubios-base's composefs digest.
-          CFS_SRC_IMAGE="localhost/yubios-cfs-src:latest"
-          sudo env TMPDIR=/var/tmp podman build -t "$CFS_SRC_IMAGE" - <<EOF
-          FROM $RESOLVED
-          RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump
-          EOF
           sudo env TMPDIR=/var/tmp podman run --rm --privileged --pid=host --ipc=host \
             --security-opt label=type:unconfined_t \
             -v /var/lib/containers:/var/lib/containers \
@@ -854,9 +845,9 @@ jobs:
             -e TMPDIR=/var/tmp \
             -v /dev:/dev \
             -v /mnt/cfs-target:/target \
-            "$CFS_SRC_IMAGE" \
+            "$RESOLVED" \
             bootc install to-filesystem \
-              --source-imgref="containers-storage:${CFS_SRC_IMAGE}" \
+              --source-imgref="containers-storage:${RESOLVED}" \
               --composefs-backend \
               --disable-selinux \
               --bootloader=systemd \
