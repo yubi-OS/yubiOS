@@ -4,7 +4,7 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-FROM quay.io/fedora/fedora-bootc:45@sha256:451894faadba48a53c4449efa8b872a1c004b80d8bb3dab71c4c93f631129d59 AS rootfs
+FROM quay.io/fedora/fedora-bootc:45@sha256:0c0d822e8545efe843e72f4a216295e9fd3d8a8213709fff0db6844b5d9aad29 AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
