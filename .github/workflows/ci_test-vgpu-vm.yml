@@ -838,6 +838,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo install -d -m 0755 /var/lib/containers
+          sudo sync -f /var/lib/containers /var/tmp /mnt/extended || true
           sudo env TMPDIR=/var/tmp podman run --rm --privileged --pid=host --ipc=host \
             --security-opt label=type:unconfined_t \
             -v /var/lib/containers:/var/lib/containers \
@@ -851,7 +852,6 @@ jobs:
               --composefs-backend \
               --disable-selinux \
               --bootloader=systemd \
-              --karg=console=ttyAMA0 \
               --root-mount-spec="" \
               --skip-finalize \
             /target

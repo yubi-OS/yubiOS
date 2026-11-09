@@ -21,7 +21,7 @@
 #     --build-context yubios-base=docker-image://<pinned-yubios-ref> .
 
 ARG BASE_IMAGE=yubios-base
-FROM ${BASE_IMAGE}
+FROM ${BASE_IMAGE} AS rootfs
 
 ARG SOURCE_DATE_EPOCH
 
@@ -34,10 +34,15 @@ ARG SOURCE_DATE_EPOCH
 # Re-install here so the dev image carries it explicitly and the
 # destructive hardware leg stops dying at "Installing to disk: bootupd
 # is required for ostree-based installs" (errors/bcvk native_to_disk.rs:262).
-RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False install bootupd && \
+RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
+      --setopt=updates-testing.excludepkgs=kernel-headers,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip \
+      install bootupd && \
     rm -f /var/cache/dnf/*.lock /var/cache/dnf/*.pid /run/dnf5.lock /run/dnf.lock 2>/dev/null || true && \
     dnf -y --setopt=install_weak_deps=False clean all && \
-    rm -rf /var/cache/dnf /var/cache/libdnf5 /run/dnf /var/log/dnf* /var/log/libdnf* /var/lib/dnf/repos /var/lib/dnf/system-repo.lock /usr/lib/sysimage/libdnf5/transaction_history.sqlite* /usr/lib/sysimage/libdnf5/*.toml
+    rm -rf /var/cache/dnf /var/cache/libdnf5 /run/dnf /var/log/dnf* /var/log/libdnf* /var/lib/dnf/repos /var/lib/dnf/system-repo.lock /usr/lib/sysimage/libdnf5/transaction_history.sqlite* /usr/lib/sysimage/libdnf5/*.toml && \
+    rm -f /etc/machine-id /var/lib/systemd/random-seed && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
 
 COPY mkosi.conf.d/test/install-swu2f-authenticator.sh /tmp/install-swu2f-authenticator.sh
 RUN chmod +x /tmp/install-swu2f-authenticator.sh && \
@@ -124,14 +129,42 @@ RUN install -d /usr/lib/systemd/system/multi-user.target.wants && \
       /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service && \
     test -L /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service
 
-# Strip the production base image's pre-built UKI from /boot/EFI/Linux/:
-# Containerfile.dev layers swu2f + serial autologin on top of yubios-base, so
-# the base image's embedded composefs= digest no longer matches this image's
-# rootfs. Leaving the base UKI in /boot/EFI/Linux/ causes `bootc install
-# --composefs-backend` to fail with UKIDigestMismatch and `bootc container ukify`
-# to refuse with "rootfs already contains a UKI".
-RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump
+# ── Composefs digest pinning & single-layer UKI parity (d4b95e208f / 6414edfee4) ──
+# Clean build leftovers, remove the base image's pre-built UKI so ukify hashes this
+# dev rootfs, normalize mtimes to SOURCE_DATE_EPOCH, rebuild the UKI against this
+# rootfs, re-pin mtimes in prefinal, and squash into a single FROM scratch layer so
+# the layer-computed composefs digest and the UKI's embedded composefs= digest match.
+RUN rm -f /var/lib/systemd/catalog/database && \
+    find /tmp -mindepth 1 -delete && \
+    find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \
+    find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} +
 
+RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
 
+RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump && \
+    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd
+
+RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /
+
+FROM rootfs AS uki
+RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
+    kver="$(basename "$1")" && \
+    mkdir -p /out && \
+    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
+
+FROM rootfs AS prefinal
+COPY --from=uki /out/ /boot/EFI/Linux/
+RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
+ARG SOURCE_DATE_EPOCH
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+
+FROM scratch
+# hadolint ignore=DL3067
+COPY --from=prefinal / /
+LABEL containers.bootc="1" ostree.bootable="true"
 LABEL yubiOS.image.kind="dev-test"
 LABEL yubiOS.image.warning="TEST-ONLY: ships the passless swu2f software FIDO2 authenticator AND serial/tty root autologin (local-access bypass of pam_u2f). Never use in production. See ADR-003, ADR-026."
+CMD ["/sbin/init"]
