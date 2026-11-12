@@ -55,7 +55,7 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 **Prompt intake is router-routed (policy v15, 2026-10-08):** a prompt submitted through the /jev/ prompt console is measured as a text artifact (structured-evidence scorer, scorer.bits) and matched against the policy's text bands: model lanes run the draft stage on that lane's model (decided_via `router:lane-draft` / `router:lane-classify`), tool targets emit ONE gated route.dispatch action to the policy-declared endpoint (never auto-executed), and no matching band falls back to the legacy 70b draft flow (`router: no_band` in intent_json). Routing decisions are recorded on the task (intent_json.router) and as kind-route run rows. Adding a routable endpoint is a policy edit (route.dispatch targets registry), never code. Bands are PROVISIONAL pending calibration (verify-prompt-router.mjs).
 
 | POST | `/api/jev/map/repo-items` | `{repo:"owner/repo", subdir?, ref?}` returns sorted full text/path items, truncation flags and resolved_ref. Prefer a 40-character commit SHA. A branch name remains mutable. |
-| POST | `/api/jev/map/embed` | `{texts:string[],source?}` returns 768-D document vectors, model, preprocessing metadata, full-content SHA256, chunk counts/coverage and cache hits |
+| POST | `/api/jev/map/embed` | `{texts:string[],source?}` returns 1024-D `@cf/baai/bge-m3` document vectors (`chunked/v1+bge-m3`; 768-D `bge-base-en-v1.5` retained for legacy baselines), model, preprocessing metadata, full-content SHA256, chunk counts/coverage and cache hits |
 | POST | `/api/jev/map` | exactly one of `{texts}` or `{vectors}`, plus names, labels?, d?, seed?, threshold?, K?, T?, baseline_id?, persist? |
 | GET | `/api/jev/map/maps` | stored map metrics |
 | GET | `/api/jev/map/maps/:id` | complete stored MapResult |
@@ -65,6 +65,8 @@ This version supersedes the v0.1 sign-match recipe. Source findings: `yubi-OS/yu
 | POST | `/api/jev/map/outcomes` | `{baseline_id, target, predicted_delta?, after_id? \| observed_delta?, task_check:{verdict,verifier,notes?}, supersedes?}` — append-only pre-registration ledger row (201) |
 | POST | `/api/jev/map/axis-redundancy` | `{map_id, K?, null_seed?}` — per-axis leave-one-out predictability of bit j from the other bits, run against K draws of the fixed-margin null; exclusion-only verdicts; `admitted:false` always; no embedding, nothing written |
 | POST | `/api/jev/map/admission` | `{map_id, K?, null_seed?}` — unified membership trials for rayleigh, axis trial, spectra shares and radius I(r) grid; `summary` of four computed admissions with `criteria`/`why_not` per block; read-only |
+| POST | `/api/jev/map/focal` | `{map_id, tau?, K?, null_seed?, trades_per_row?, eps?}` or `{map_ids: number[], lens_power?: 'rms'|'best'|'served'|number}` — dimensional focal point `n*` (default `d = n* = 7`), two-seed curveball null, certified classes, stereographic Möbius lens scan, and cross-corpus lensed projection (`focal-point/1`, `FocalBounds.lean` 25 theorems) |
+| GET | `/api/jev/map/classes` | `?map_id=&map_ids=&kind=` returns D1-persisted `map_classes` (`focal_prefix_class`, `bit_class`, `lensed_sphere_class`) stored alongside `maps` for direct consumption by `/api/jev/ontology/*` and `/api/jev/corpus/oracle` |
 | POST | `/api/jev/map/azimuth` | `{map_id, variant?: binary\|continuous, K?: 2..400, null_seed?, modes?}` — rotation/reflection-invariant Rayleigh Z_m (m=2,3,4,6,12) + largest gap, refit-per-null, Holm-corrected two-sided tails; binary variant carries an atomicity control (dedup + m=1 audit); `admitted:false` always |
 | POST | `/api/jev/map/rayleigh` | `{map_id, K?, null_seed?}` — isolation-graph components/isolates (exact), Fiedler λ₂ of the largest component with an exact rational Rayleigh–Ritz cut witness, fixed-margin null tails; echoes the map's Ky Fan frame gap. Read-only; `admitted:false` |
 | POST | `/api/jev/map/consistency` | `{baseline_id, texts, names, target, variants:[{label,text}] (1..3), predicted_delta?}` — one candidate measured under caller-supplied text variants on the frozen frame; sign agreement reported, never used as a gate; nothing written |
@@ -333,7 +335,7 @@ G2 verdict on block 1300 to 1499: FAIL (see PREREG-v4-G2). The calibration flag 
 
 The SHA256 cache key includes the complete content, model, dimension, pooling, chunk size and aggregation/version. No raw document text is placed in the embedding cache. Vectorize metadata continues to hold bounded text snippets as in the existing service. Existing public map storage is shared; do not submit secrets or private customer data.
 
-Limits (limits/2): 10..4000 items per map/preview/control/consistency; 1..4000 documents per embed and per `/api/jev/map/repo-items` result; each document at most 200,000 JavaScript UTF-16 code units; 40,000,000 total UTF-8 bytes and 120,000 chunks per request; JSON body cap 64 MiB. Per-request **uncached** work is bounded separately: at most 1,000 uncached documents / 12,000 uncached chunks per request (413 with `uncached_docs`/`uncached_chunks` counts). Warm the content-hash cache with `POST /api/jev/map/embed {texts}` in batches of at most 400 documents, then repeat the original request; cached documents cost no model work. Stored maps above 1.9 MB are kept in KV overflow (`map-json:<id>`) behind a small D1 pointer; reads are identical. The axis trial is limited to N <= 1200. Numeric vectors must be rectangular, finite, D=2..768. Defaults d=9, seed=20260906, threshold=median, K=40, T=0.05. K must be an integer 2..40 on the Worker; local core permits up to 200. T must be positive. Seed 0 is valid. Empty, oversized, malformed or misaligned inputs fail explicitly. Truncated repo files must be resolved before mapping.
+Limits (limits/2): 10..4000 items per map/preview/control/consistency; 1..4000 documents per embed and per `/api/jev/map/repo-items` result; each document at most 200,000 JavaScript UTF-16 code units; 40,000,000 total UTF-8 bytes and 120,000 chunks per request; JSON body cap 64 MiB. Per-request **uncached** work is bounded separately: at most 1,000 uncached documents / 12,000 uncached chunks per request (413 with `uncached_docs`/`uncached_chunks` counts). Warm the content-hash cache with `POST /api/jev/map/embed {texts}` in batches of at most 400 documents, then repeat the original request; cached documents cost no model work. Stored maps above 1.9 MB are kept in KV overflow (`map-json:<id>`) behind a small D1 pointer; reads are identical. The axis trial is limited to N <= 1200. Numeric vectors must be rectangular, finite, D=2..1024. Defaults d=9, seed=20260906, threshold=median, K=40, T=0.05. K must be an integer 2..40 on the Worker; local core permits up to 200. T must be positive. Seed 0 is valid. Empty, oversized, malformed or misaligned inputs fail explicitly. Truncated repo files must be resolved before mapping.
 
 ## Frozen-baseline loop
 
@@ -693,6 +695,29 @@ Live worker state verified `2026-11-06` (`main_module: solar-rbs-entry.mjs`, **8
    - **Ontology Conflict Arbitration, Localized Uncertainty Spans & Epistemic Framing (`jev-ontology.js`, `ontology/selftest` `10/10`):** `POST /api/jev/ontology/conflict-audit` (`ontology.conflict_audit`, `CLASHarness` verbal-vs-ground-truth state arbiter), `POST /api/jev/ontology/uncertainty-spans` (`ontology.uncertainty_spans`, `r_u_sure` Utility Decision Diagram span localizer), and `POST /api/jev/ontology/epistemic-frame` (`ontology.epistemic_frame`, `epistemic-goggles` 5-frame provenance classifier + standing-invariant locality bank).
    - **Harness Cachescope, Procedural Curriculum & DAG Step Credit (`jev-harness2.js` `16/16`, `jev-n8n-dag.js` `21/21`):** `GET|POST /api/jev/harness/cachescope` (`harness.cachescope`, `ledger-dashboard` `first-write|HIT|rewrite:expired|rewrite:component_mutated:<comp>` prefix analyzer & KV-rotation savings), `POST /api/jev/harness/curriculum-propose` (`harness.curriculum_propose`, `Trainee-to-Trainer` failure-driven procedural scenario generator with `cbs_solvability_check`), and `POST /api/jev/n8n/credit-assignment` (`n8n.credit_assignment`, `Mosaic` per-step Marginal Information Gain $\Delta \text{IG}_t$ with 0 sign flips).
    - **Branching Sessions, Wake Gates, Floor Control & Curation Bits (`jev-console-funnel.js` `14/14`, `285` catalog targets, `jev-agentic-console.js`, `jev-corpus-routes.js`):** `POST /api/jev/console/sessions/fork` (`agent.session_fork`) & `POST /api/jev/console/sessions/diff` (`agent.session_diff`, `chronicle`/`loom` CoW session branching and diff), `GET|POST /api/jev/console/wake-gates` (`mcpl`/`anima-docs` echo-suppressed wake gates), `GET|POST /api/jev/console/floor` (`FLOOR-RFC-001` turn-taking leases with `fifo|priority|round_robin` arbitration and SHA-256 `receipt_hash`), and `POST /api/jev/corpus/curation-bits` (`corpus.curation_bits`, `generative.ink` selection bits $\log_2 M, \rho, \lambda$ and `bits_per_kept_edit` sonometer).
+
+
+---
+
+## Agentic Coding Workbench & 7-Category LLM Stack (2026-11-06)
+
+Spec: `refs/SPEC-AGENTIC-CODING-WORKBENCH-2026-11-06.md` · Prior Art: `refs/prior-art-browser-git-monaco-ide-2026-11-06.md`
+
+### 7-Category LLM Stack (`/api/jev/models`, `jev-llm.js`)
+- `classify`: `@cf/meta/llama-3.1-8b-instruct-fp8`
+- `draft`: `@cf/meta/llama-4-scout-17b-16e-instruct`
+- `coding`: `@cf/deepseek-ai/deepseek-v4.1-flash-1017` (7th category — Coding Model for the Agentic Coding Workbench)
+- `guard`: `@cf/meta/llama-guard-3-8b`
+- `decision`: `@cf/cloudflare/clef`
+- `extract`: `@cf/cloudflare/clairic`
+- `embeddings`: `@cf/baai/bge-m3`
+
+### Agentic Coding Workbench Routes (`jev-coding.js`, Funnel Catalog = 292 targets)
+- `GET|POST /api/jev/coding/repo-init` (`coding.repo_init`): Seeds the browser-resident `isomorphic-git` + `LightningFS` repository and Monaco `.d.ts` declarations from the specified or default project repo (`yubi-OS/yubiOS`).
+- `GET|POST /api/jev/coding/plan` (`coding.plan`): Decomposes a coding prompt + active Harness² tree into ordered step-by-step file edits using `getActiveModel("coding")`.
+- `GET|POST /api/jev/coding/step` (`coding.step`): Applies one atomic coding step with unified diff, changed line numbers, local Git commit message, AST/delimiter diagnostics, and operator pause/interjection steering.
+- `GET|POST /api/jev/coding/file` (`coding.file_get`): Lazy-loads any repository file into the Monaco Editor and local `isomorphic-git` working tree.
+- `GET /api/jev/coding/selftest` (`coding.selftest`): Runs the 8-gate deterministic Agentic Coding Workbench self-test (`C1_model_stack_7cat`..`C8_lazy_file_loader`).
 ---
 
 ## Pfister Round 2 Additions: Group 1 (`OO-Harness`, `Harmony Harness`, `PaperOrchestra`), Group 2 (`WhatIf-Bench`, `FinanceHarness`, `SEER`, `Nexus`) & P5 (`VEPA` Formal Policy Guardrails) (2026-11-07, 81 Parts, 301 Funnel Targets)
