@@ -39,6 +39,10 @@ import { MAX_DOCS, MAX_CHARS_PER_DOC, MAX_TOTAL_BYTES, MAX_CHUNKS_PER_REQUEST, M
 export { MAX_DOCS, MAX_CHARS_PER_DOC, MAX_TOTAL_BYTES, MAX_CHUNKS_PER_REQUEST, MAX_UNCACHED_CHUNKS, MAX_UNCACHED_DOCS };
 export const AI_BATCH_SIZE = 100;
 export const MODEL = "@cf/baai/bge-base-en-v1.5";
+export const EMBED_MODELS = {
+  "@cf/baai/bge-base-en-v1.5": { dim: 768, ingestion: INGESTION_ID },
+  "@cf/baai/bge-m3": { dim: 1024, ingestion: "chunked/v1+bge-m3" },
+};
 
 export const VECTORIZE_SEARCH_CAVEAT =
   "each stored Vectorize vector is a length-weighted mean over ALL of that document's chunks (chunked/v1); " +
@@ -85,14 +89,14 @@ export function validateDocs(rawDocs) {
 /** Runs the AI model over one batch of chunk texts (<=100), with explicit
  *  mean pooling, and rejects (throws ApiError(502)) on any shape mismatch
  *  instead of silently zipping/slicing what came back. */
-async function embedBatch(env, batchTexts) {
-  const out = await env.AI.run(MODEL, { text: batchTexts, pooling: "mean" });
+async function embedBatch(env, batchTexts, model = MODEL, expectedDim = 768) {
+  const out = await env.AI.run(model, { text: batchTexts, pooling: "mean" });
   const data = out && out.data;
   if (!Array.isArray(data) || data.length !== batchTexts.length) {
     throw new ApiError(502, `embedding provider returned ${Array.isArray(data) ? data.length : "no"} vectors for ${batchTexts.length} inputs`);
   }
   return data.map((v, i) => {
-    if (!Array.isArray(v) || v.length !== 768) throw new ApiError(502, `embedding provider returned a vector with unexpected dimension at batch index ${i}`);
+    if (!Array.isArray(v) || v.length !== expectedDim) throw new ApiError(502, `embedding provider returned a vector with unexpected dimension at batch index ${i}`);
     for (const x of v) if (typeof x !== "number" || !Number.isFinite(x)) throw new ApiError(502, `embedding provider returned a non-finite value at batch index ${i}`);
     return v;
   });

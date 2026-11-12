@@ -58,7 +58,7 @@ var PM = (function () {
         for (let k = 0; k < n; k++) { const a = V[k][p], b = V[k][q]; V[k][p] = c * a - s * b; V[k][q] = s * a + c * b; } } }
     const idx = M.map((_, i) => i).sort((a, b) => M[b][b] - M[a][a]); return { values: idx.map(i => M[i][i]), vectors: idx.map(i => V.map(r => r[i])) }; }
   function center(X) { const n = X.length, D = X[0].length, mu = new Float64Array(D); for (const r of X) for (let j = 0; j < D; j++) mu[j] += r[j] / n; return { Xc: X.map(r => r.map((x, j) => x - mu[j])), mu: Array.from(mu) }; }
-  // top-k principal axes of X (n×D) without forming D×D when D is large (the D up to 768 path)
+  // top-k principal axes of X (n×D) without forming D×D when D is large (the D up to 1024 path)
   function pcaTop(X, k, r) { const { Xc, mu } = center(X); const n = Xc.length, D = Xc[0].length; k = Math.max(1, Math.min(k, D, n - 1));
     let axes = [], values = [];
     if (D <= 40) { const C = Array.from({ length: D }, () => Array(D).fill(0)); for (const row of Xc) for (let i = 0; i < D; i++) for (let j = 0; j < D; j++) C[i][j] += row[i] * row[j] / Math.max(1, n - 1); const e = jacobiEig(C); axes = e.vectors.slice(0, k); values = e.values; }
@@ -117,7 +117,7 @@ var PM = (function () {
     const N = X.length;
     if (N < 10 || N > 4000) throw new RangeError("N must be in 10..4000 (got " + N + ")");
     const D = X[0].length;
-    if (!Number.isInteger(D) || D < 2 || D > 768) throw new RangeError("D must be an integer in 2..768 (got " + D + ")");
+    if (!Number.isInteger(D) || D < 2 || D > 1024) throw new RangeError("D must be an integer in 2..1024 (got " + D + ")");
     for (let i = 0; i < N; i++) {
       const row = X[i];
       if (!Array.isArray(row) || row.length !== D) throw new RangeError("X is ragged: row " + i + " has length " + (Array.isArray(row) ? row.length : "n/a") + ", expected " + D);

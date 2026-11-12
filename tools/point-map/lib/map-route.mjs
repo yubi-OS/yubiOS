@@ -38,7 +38,7 @@ export async function mapRouteHandler(body,ctx){
     if(body.baseline_id==null)throw new ApiError(422,'transition requires baseline_id');
   }
   if(texts&&input.some(t=>typeof t!=='string'||!t.trim()))throw new ApiError(422,'texts must be nonempty strings');
-  if(!texts){const D=input[0]?.length;if(!Number.isInteger(D)||D<2||D>768||input.some(r=>!Array.isArray(r)||r.length!==D||r.some(x=>typeof x!=='number'||!Number.isFinite(x))))throw new ApiError(422,'vectors must be finite rectangular rows, D=2..768');}
+  if(!texts){const D=input[0]?.length;if(!Number.isInteger(D)||D<2||D>1024||input.some(r=>!Array.isArray(r)||r.length!==D||r.some(x=>typeof x!=='number'||!Number.isFinite(x))))throw new ApiError(422,'vectors must be finite rectangular rows, D=2..1024');}
   if(body.predicted_delta!=null&&(typeof body.predicted_delta!=='number'||!Number.isFinite(body.predicted_delta)))throw new ApiError(422,'predicted_delta must be a finite number');
   if(body.preprocessing_id!=null&&(typeof body.preprocessing_id!=='string'||!body.preprocessing_id.length))throw new ApiError(422,'preprocessing_id must be nonempty');
   const opts=options(body);let baseline=null;

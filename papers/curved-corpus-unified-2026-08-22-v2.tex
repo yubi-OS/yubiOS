@@ -3,6 +3,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
+\usepackage{graphicx}
+\graphicspath{{charts/}{./}}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black,citecolor=blue!60!black}
 
@@ -184,12 +186,18 @@ $t$ & $\ell$ & measured $E_\ell(t)/E_\ell(0)$ & closed form $e^{-2\ell(\ell+1)t}
 0.005 & 1 / 2 / 3 & 0.388 / 0.100 / 0.323 & 0.980 / 0.942 / 0.887\\
 0.020 & 1 / 2 / 3 & 0.366 / 0.030 / 0.167 & 0.923 / 0.787 / 0.619\\
 0.050 & 1 / 2 / 3 & 0.395 / 0.018 / 0.085 & 0.819 / 0.549 / 0.301\\
-0.100 & 1 / 2 / 3 & 0.386 / 0.014 / 0.067 & 0.670 / 0.301 / 0.091\\
+0.100 & 1 / 2 / 3 & 0.386 / 0.013 / 0.067 & 0.670 / 0.301 / 0.091\\
 \bottomrule
 \end{tabular}
 \caption{G1 Leg 2. Point-diffusion energy decay on the real corpus against the closed form.}
 \label{tab:leg2}
 \end{table}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{curvedcorpus_g1_defocus.png}
+\caption{Experiment G1 spherical defocus: Leg 1 (synthetic Fibonacci lattice vs.\ closed-form heat kernel $e^{-2\ell(\ell+1)t}$) and Leg 2 (real $2286\times9$ corpus point-diffusion decay with atomicity diagnostic $A_1(0.005)\approx0.59$ marked). Source: \texttt{papers/data/g1/g1-results.json}.}
+\label{fig:g1-defocus}
+\end{figure}
 
 The energy collapses at $t=0.005$ (RMS geodesic displacement ${\approx}0.14$ rad) where the closed form permits at most $6\%$ loss; the decay is non-monotone in $\ell$ ($\ell=3$ outlives $\ell=2$ at every $t$), impossible for heat-kernel decay of a smooth field; and a floor persists ($\ell=1$ stabilizes near $0.39$). The mechanism is the corpus's atomicity: only $176$ distinct rows of $512$ possible, so the point cloud is a set of heavy point masses, the fitted energy is carried by atomic coincidences rather than smooth harmonic structure, and an infinitesimal diffusion splits each atom into a cloud and kills the coherent fit. Leg 1 pins the identity; Leg 2 measures where its hypothesis (quasi-uniform design) fails. The gap is promoted to a diagnostic,
 \begin{equation}

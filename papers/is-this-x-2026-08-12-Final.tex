@@ -16,6 +16,7 @@
 
 \usepackage{booktabs}
 \usepackage{graphicx}
+\graphicspath{{charts/}{./}}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black,citecolor=blue!60!black}
 \usepackage[round,authoryear]{natbib}
@@ -228,11 +229,17 @@ Marchenko--Pastur baseline ($q=0.003937$) & $\lambda_\pm=0.878446/1.129428$; top
 \label{tab:nulls}
 \end{table}
 
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{isthisx_fig1_null_ladder_finite_size.png}
+\caption{Null ladder (Table~\ref{tab:nulls}) and finite-size residual profile across subsample sizes $N$.}
+\label{fig:isthisx-null-ladder}
+\end{figure}
+
 Two independent samplers, each proved uniform on the exact row-and-column-marginal fibre, agree. Sampler~A: on a $5\times4$ matrix whose fibre has exactly $120$ elements, $300{,}000$ draws hit all $120$, hit nothing outside, and are uniform ($\chi^2=123.758$, $\mathrm{df}=119$, $p=0.364$). Sampler~B: on the exhaustively enumerated $6\times4$ ensemble ($120$ matrices, $20{,}000$ draws), $\chi^2=118.096$, $\mathrm{df}=119$, $p=0.506$. Marginals were asserted exactly on every one of the $2286\times9$ draws. Mixing is converged: $V_2^{\mathrm{null}}$ against trade count runs $0.7159258$ ($1N$), $0.7103934$ ($5N$), $0.7087008$ ($20N$), $0.7092413$ ($100N$), $0.7094042$ ($400N$), at $12$ replicates per point --- flat from $20N$ on, within a null sd of $\approx0.0012$. These five values are the \texttt{mixing\_convergence} block of \texttt{results/A2-curveball-audit.json} verbatim; the figures printed in an earlier draft ($0.715314$, $0.710096$, $0.708886$, $0.708878$, $0.709364$) appear in no shipped artifact and are withdrawn --- the same defect this section retracts, and it is corrected here rather than left standing. The Marchenko--Pastur prediction $0.241375$ \citep{mp1967} lands on top of the two destroyed-dependence nulls ($0.2397$, $0.2398$), an independent check that the pipeline is sound.
 
 The conclusion is quantitative and modest:
 \begin{equation}
-\Delta V_2=0.723529-0.709180=+0.014415,\qquad \Delta V_2z=+12.13,\qquad \frac{\mathbb{E}_0[V_2]}{V_2}=0.9802 .
+\Delta V_2=0.723529-0.709180=+0.014349,\qquad \Delta V_2z=+12.13,\qquad \frac{\mathbb{E}_0[V_2]}{V_2}=0.9802 .
 \label{eq:yubios-residual}
 \end{equation}
 About $98\%$ of the headline observable is fixed by row and column marginals alone; the surviving corpus-specific signal is $+0.0144$ of eigenvalue share. It is real ($z=+12$, not $|z|<3$), and it is small.
@@ -268,6 +275,12 @@ SCAP SSG rules-dir 700 & 700 & 0.368366 & $0.3274\pm0.0032$ & $+12.92$ & 0.2550 
 \caption{$V_2$ against the fixed-margin null, per corpus. Source: \texttt{results/A-v2-nulls.json}.}
 \label{tab:percorpus}
 \end{table}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{isthisx_fig2_per_corpus_and_power.png}
+\caption{Per-corpus $z$ against the fixed-margin curveball null (Table~\ref{tab:percorpus}) and standard-candle detection power surface from \texttt{signal\_recovery.json}.}
+\label{fig:isthisx-percorpus-power}
+\end{figure}
 
 \subsection{C4 --- there is no critical point}
 \label{sec:c4}

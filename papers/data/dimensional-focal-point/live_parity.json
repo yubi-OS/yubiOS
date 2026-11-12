@@ -1,0 +1,278 @@
+{
+ "date": "2026-11-10",
+ "api": "https://steady-orbit.systems-a.workers.dev",
+ "compared": "live POST trial response vs repo-source (7d095ae) run_map_diagnostics.mjs on the live map record",
+ "per_trial": {
+  "595:axis-redundancy": {
+   "common": 247,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 0
+  },
+  "595:rayleigh": {
+   "common": 381,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 0
+  },
+  "595:azimuth": {
+   "common": 631,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 8.881784197001252e-15
+  },
+  "595:admission": {
+   "common": 1028,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 1.1546319456101628e-14
+  },
+  "596:axis-redundancy": {
+   "common": 248,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 0
+  },
+  "596:rayleigh": {
+   "common": 264,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 0
+  },
+  "596:azimuth": {
+   "common": 631,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 1.2434497875801753e-14
+  },
+  "596:admission": {
+   "common": 1031,
+   "only_live": 0,
+   "only_local": 0,
+   "mismatch": 0,
+   "max_num": 1.865174681370263e-14
+  }
+ },
+ "total_fields": 4461,
+ "max_abs_numeric": 1.865174681370263e-14,
+ "m598_422_messages_identical": {
+  "axis-redundancy": true,
+  "rayleigh": true,
+  "azimuth": true,
+  "admission": true
+ },
+ "m598_live_vs_recovered_margins_maxdiff": 0.0,
+ "unauthenticated_status": 401,
+ "focal_bit_ladders": {
+  "598": {
+   "n": 3232,
+   "classes": 116,
+   "ladder": [
+    2,
+    4,
+    8,
+    16,
+    30,
+    49,
+    79,
+    95,
+    116
+   ],
+   "gains": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.907,
+    0.708,
+    0.689,
+    0.266,
+    0.288
+   ],
+   "n_star": 7,
+   "ceiling": 11.658,
+   "D0_at_9": 6.858,
+   "null_ladder_mean": [
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0,
+    64.0,
+    128.0,
+    255.4,
+    504.0
+   ],
+   "null_ladder_sd": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.5,
+    2.4
+   ],
+   "null_gain_mean": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.997,
+    0.98
+   ],
+   "null_n_star": [
+    9
+   ],
+   "classes_z": -160.5,
+   "bits_match_live_classes": true
+  },
+  "595": {
+   "n": 135,
+   "classes": 108,
+   "ladder": [
+    2,
+    4,
+    8,
+    16,
+    31,
+    52,
+    78,
+    93,
+    108
+   ],
+   "gains": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.954,
+    0.746,
+    0.585,
+    0.254,
+    0.216
+   ],
+   "n_star": 7,
+   "ceiling": 7.077,
+   "D0_at_9": 6.755,
+   "null_ladder_mean": [
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    31.6,
+    57.6,
+    84.0,
+    105.4,
+    119.4
+   ],
+   "null_ladder_sd": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.7,
+    2.1,
+    2.7,
+    3.3,
+    2.4
+   ],
+   "null_gain_mean": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.979,
+    0.868,
+    0.545,
+    0.327,
+    0.179
+   ],
+   "null_n_star": [
+    6,
+    7
+   ],
+   "classes_z": -4.8,
+   "bits_match_live_classes": true
+  },
+  "596": {
+   "n": 52,
+   "classes": 45,
+   "ladder": [
+    2,
+    4,
+    8,
+    14,
+    23,
+    29,
+    36,
+    40,
+    45
+   ],
+   "gains": [
+    1.0,
+    1.0,
+    1.0,
+    0.807,
+    0.716,
+    0.334,
+    0.312,
+    0.152,
+    0.17
+   ],
+   "n_star": 5,
+   "ceiling": 5.7,
+   "D0_at_9": 5.492,
+   "null_ladder_mean": [
+    2.0,
+    4.0,
+    8.0,
+    15.6,
+    26.9,
+    36.8,
+    44.4,
+    48.0,
+    50.0
+   ],
+   "null_ladder_sd": [
+    0.0,
+    0.0,
+    0.0,
+    0.6,
+    1.4,
+    2.6,
+    2.1,
+    2.1,
+    1.1
+   ],
+   "null_gain_mean": [
+    1.0,
+    1.0,
+    1.0,
+    0.962,
+    0.785,
+    0.451,
+    0.273,
+    0.113,
+    0.061
+   ],
+   "null_n_star": [
+    5,
+    6
+   ],
+   "classes_z": -4.4,
+   "bits_match_live_classes": true
+  }
+ }
+}
