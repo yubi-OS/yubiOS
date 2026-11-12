@@ -36,18 +36,90 @@ function chord(a, b) { let s = 0; for (let k = 0; k < 3; k++) s += (a[k] - b[k])
 
 // real spherical harmonics up to degree 3 (identical constants to pointmap.js `sh`)
 function sh([x, y, z]) { return [0.28209479, 0.48860251 * y, 0.48860251 * z, 0.48860251 * x, 1.09254843 * x * y, 1.09254843 * y * z, 0.31539157 * (3 * z * z - 1), 1.09254843 * x * z, 0.54627422 * (x * x - y * y), 0.59004359 * y * (3 * x * x - y * y), 2.89061144 * x * y * z, 0.45704580 * y * (5 * z * z - 1), 0.37317633 * z * (5 * z * z - 3), 0.45704580 * x * (5 * z * z - 1), 1.44530572 * z * (x * x - y * y), 0.59004359 * x * (x * x - 3 * y * y)]; }
-export function parsevalShares(pts) { const m = Array(16).fill(0); for (const p of pts) { const b = sh(p); for (let i = 0; i < 16; i++) m[i] += b[i] / pts.length; } const E = [m[0] ** 2, 0, 0, 0]; for (let i = 1; i < 4; i++) E[1] += m[i] ** 2; for (let i = 4; i < 9; i++) E[2] += m[i] ** 2; for (let i = 9; i < 16; i++) E[3] += m[i] ** 2; const tot = E.reduce((a, b) => a + b, 0) || 1; return E.map((e) => e / tot); }
+export function parsevalShares(pts) {
+  const n = pts.length;
+  const groups = new Map();
+  for (let i = 0; i < n; i++) {
+    const p = pts[i];
+    const k = `${p[0]},${p[1]},${p[2]}`;
+    let g = groups.get(k);
+    if (!g) { g = { p, cnt: 1 }; groups.set(k, g); }
+    else g.cnt++;
+  }
+  const m = Array(16).fill(0);
+  for (const g of groups.values()) {
+    const b = sh(g.p);
+    const w = g.cnt / n;
+    for (let i = 0; i < 16; i++) m[i] += b[i] * w;
+  }
+  const E = [m[0] ** 2, 0, 0, 0];
+  for (let i = 1; i < 4; i++) E[1] += m[i] ** 2;
+  for (let i = 4; i < 9; i++) E[2] += m[i] ** 2;
+  for (let i = 9; i < 16; i++) E[3] += m[i] ** 2;
+  const tot = E.reduce((a, b) => a + b, 0) || 1;
+  return E.map((e) => e / tot);
+}
 export function spectraStats(pts) { const E = parsevalShares(pts); return { E0: E[0], E1: E[1], E2: E[2], E3: E[3], even: E[0] + E[2], odd: E[1] + E[3] }; }
-export function radiusCounts(pts) { const n = pts.length; const clear = pts.map((p, i) => { let b = Infinity; for (let j = 0; j < n; j++) if (j !== i) { const d = chord(p, pts[j]); if (d < b) b = d; } return b; }); const out = {}; for (const r of RADII) out["I_" + r.toFixed(3)] = clear.filter((c) => r <= c).length; return out; }
+export function radiusCounts(pts) {
+  const n = pts.length;
+  const groups = new Map();
+  for (let i = 0; i < n; i++) {
+    const p = pts[i];
+    const k = `${p[0]},${p[1]},${p[2]}`;
+    let g = groups.get(k);
+    if (!g) { g = { p, cnt: 1 }; groups.set(k, g); }
+    else g.cnt++;
+  }
+  const uniq = Array.from(groups.values());
+  const U = uniq.length;
+  const out = {};
+  for (const r of RADII) out["I_" + r.toFixed(3)] = 0;
+  for (let u = 0; u < U; u++) {
+    const gu = uniq[u];
+    let b = gu.cnt >= 2 ? 0 : Infinity;
+    if (b > 0) {
+      for (let v = 0; v < U; v++) {
+        if (v === u) continue;
+        const d = chord(gu.p, uniq[v].p);
+        if (d < b) b = d;
+      }
+    }
+    for (const r of RADII) {
+      if (r <= b) out["I_" + r.toFixed(3)] += gu.cnt;
+    }
+  }
+  return out;
+}
 
 function stats(v) { const n = v.length; const mean = v.reduce((a, b) => a + b, 0) / n; const sd = n > 1 ? Math.sqrt(v.reduce((a, b) => a + (b - mean) ** 2, 0) / (n - 1)) : 0; return { n, mean, sd, min: Math.min(...v), max: Math.max(...v) }; }
 function tail(values, obs, K) { const s = stats(values); const dev = Math.abs(obs - s.mean); const exceed = values.filter((x) => Math.abs(x - s.mean) >= dev).length; const p = (1 + exceed) / (K + 1); return { observed: obs, null_mean: +s.mean.toFixed(6), null_sd: +s.sd.toFixed(6), null_min: s.min, null_max: s.max, z_descriptive: s.sd ? +((obs - s.mean) / s.sd).toFixed(2) : null, p_two_sided: +p.toFixed(4), p_resolution: +(1 / (K + 1)).toFixed(4), verdict: s.sd === 0 ? "null-degenerate" : (p <= 1 / (K + 1) + 1e-12 ? "excluded-from-fixed-margin-null" : "not-excluded") }; }
 
 /** draw K null point clouds from the bit matrix on the frozen frame (same chain as map.null) */
-function nullClouds(map, PM, K, seed) { const nullDraw = PM._internal.nullDraw; const ops = PM._internal.frameOps(map.frame); const bits = map.bits; const attempts = 5 * bits.length * bits[0].length; const rng = mulberry32(seed); const cert = { rowOk: true, colOk: true, attempted: 0, accepted: 0 }; const clouds = []; for (let k = 0; k < K; k++) clouds.push(nullDraw(bits, attempts, rng, cert).map(ops.toS2)); if (!cert.rowOk || !cert.colOk) throw new ApiError(500, "null draw violated a margin"); return { clouds, cert }; }
+function nullClouds(map, PM, K, seed) {
+  const nullDraw = PM._internal.nullDraw;
+  const ops = PM._internal.frameOps(map.frame);
+  const bits = map.bits;
+  const d = bits[0].length;
+  const s2Cache = new Map();
+  const fastToS2 = (r) => {
+    let m = 0;
+    for (let c = 0; c < d; c++) if (r[c]) m |= (1 << c);
+    let pt = s2Cache.get(m);
+    if (!pt) { pt = ops.toS2(r); s2Cache.set(m, pt); }
+    return pt;
+  };
+  const attempts = 5 * bits.length * d;
+  const rng = mulberry32(seed);
+  const cert = { rowOk: true, colOk: true, attempted: 0, accepted: 0 };
+  const clouds = [];
+  for (let k = 0; k < K; k++) clouds.push(nullDraw(bits, attempts, rng, cert).map(fastToS2));
+  if (!cert.rowOk || !cert.colOk) throw new ApiError(500, "null draw violated a margin");
+  return { clouds, cert };
+}
 
-function trialOnStats(name, obsStats, statFn, map, PM, K, seedA, seedB, extraCriteria) {
-  const A = nullClouds(map, PM, K, seedA), Bn = nullClouds(map, PM, K, seedB);
+function trialOnStats(name, obsStats, statFn, map, PM, K, seedA, seedB, extraCriteria, precomputedClouds = null) {
+  const A = precomputedClouds ? precomputedClouds.A : nullClouds(map, PM, K, seedA);
+  const Bn = precomputedClouds ? precomputedClouds.Bn : nullClouds(map, PM, K, seedB);
   const keys = Object.keys(obsStats); const per = {};
   for (const k of keys) {
     const ta = tail(A.clouds.map((c) => statFn(c)[k]), obsStats[k], K), tb = tail(Bn.clouds.map((c) => statFn(c)[k]), obsStats[k], K);
@@ -84,13 +156,13 @@ export async function admissionHandler(body, ctx) {
   const axisCriteria = { null_nondegenerate_all: axes.every((a) => a.null_nondegenerate), verdicts_reproducible_all: axes.every((a) => a.verdict_reproducible), margins_preserved: ta.margins_preserved.rows && ta.margins_preserved.columns && tb.margins_preserved.rows && tb.margins_preserved.columns, n_at_least_100: map.names.length >= 100 };
   const axisAdmitted = Object.values(axisCriteria).every(Boolean);
   const axis_trial = { diagnostic: "axis_trial", version: ta.version, statistic: ta.statistic, K, seeds: { a: seedA, b: seedB }, axes, counts: { excluded_seed_a: ta.counts.excluded_from_null, excluded_seed_b: tb.counts.excluded_from_null }, criteria: axisCriteria, admitted: axisAdmitted, why_not: axisAdmitted ? null : Object.entries(axisCriteria).filter(([, x]) => !x).map(([k]) => k), scope: "per-axis LOO-NN predictability admitted for reporting on this frame only; it never becomes an axis weight, importance or ranking term" };
-  // 3. spectra shares
+  // 3 & 4. spectra shares and radius profile share the exact same seedA / seedB nullClouds
+  const sharedClouds = { A: nullClouds(map, PM, K, seedA), Bn: nullClouds(map, PM, K, seedB) };
   const obsSpec = spectraStats(map.pts_full);
-  const spectra = trialOnStats("spectra", obsSpec, spectraStats, map, PM, K, seedA, seedB, { shares_sum_to_one: Math.abs(obsSpec.E0 + obsSpec.E1 + obsSpec.E2 + obsSpec.E3 - 1) < 1e-9 });
+  const spectra = trialOnStats("spectra", obsSpec, spectraStats, map, PM, K, seedA, seedB, { shares_sum_to_one: Math.abs(obsSpec.E0 + obsSpec.E1 + obsSpec.E2 + obsSpec.E3 - 1) < 1e-9 }, sharedClouds);
   spectra.version = "spectra-trial"; spectra.physical_claims = { admitted: false, permanent: true, reason: "no dipole, polarizability, response kernel, frequency, lifetime or temperature is measured; Raman/IR selection rules need those observables. Admission here covers the S^2 Parseval shares as geometric statistics only" }; spectra.heat_eigenvalues = { admitted: false, permanent: true, reason: "l(l+1) are constants of the sphere Laplacian, not statistics of the corpus" }; spectra.scope = "degree shares E_0..E_3 and even/odd blocks of the point cloud, tested against the fixed-margin null; admitted for reporting only";
-  // 4. radius profile I(r) on the fixed grid
   const obsRad = radiusCounts(map.pts_full);
-  const radius = trialOnStats("radius_profile", obsRad, radiusCounts, map, PM, K, seedA, seedB, { canonical_radius_unchanged: CANONICAL_RADIUS === 0.095, canonical_count_matches_map: obsRad["I_0.095"] === map.isolated || map.isolated === undefined });
+  const radius = trialOnStats("radius_profile", obsRad, radiusCounts, map, PM, K, seedA, seedB, { canonical_radius_unchanged: CANONICAL_RADIUS === 0.095, canonical_count_matches_map: obsRad["I_0.095"] === map.isolated || map.isolated === undefined }, sharedClouds);
   radius.version = "radius-trial"; radius.grid = RADII.slice(); radius.canonical_radius = CANONICAL_RADIUS; radius.bounds_note = "the profile's robustness `bounds` (`validated:false, certified:false`) describe caller-supplied perturbation assumptions and stay false by construction; they are not part of this trial. The grid is fixed and never reselected."; radius.scope = "I(r) counts on the fixed grid admitted for reporting only; the operative radius stays 0.095";
   // 5. binary azimuth trial: descriptive only until a size-matched de-atomized null exists
   const azimuth = binaryAzimuthTrial(map, PM, { K, seedA, modes: AZIMUTH_MODES });

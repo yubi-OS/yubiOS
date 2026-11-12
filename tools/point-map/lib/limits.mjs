@@ -16,6 +16,6 @@ export const EMBED_WARMUP_HINT = "warm the content-hash embedding cache first: P
 export const JSON_BODY_LIMIT = 64 * 1024 * 1024;
 export const D1_MAP_JSON_LIMIT = 1_900_000;     // above this the map_json goes to KV (map-json:<id>)
 export const KV_MAP_JSON_LIMIT = 24 * 1024 * 1024;
-export const AXIS_TRIAL_MAX_N = 1200;           // LOO-NN is O(N^2 d (K+1))
+export const AXIS_TRIAL_MAX_N = MAX_ITEMS;           // LOO-NN is O(N^2 d (K+1))
 export const RADIUS_MAX_N = MAX_ITEMS;
 export const LIMITS_VERSION = "limits/2";

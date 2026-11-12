@@ -63,24 +63,71 @@ function validateBits(bits) {
  * 0 otherwise. Returns { hits[d], ties[d] } as exact rationals (hits are
  * multiples of 0.5).
  */
+function popcount32(x) {
+  x = x - ((x >>> 1) & 0x55555555);
+  x = (x & 0x33333333) + ((x >>> 2) & 0x33333333);
+  return (Math.imul((x + (x >>> 4)) & 0x0f0f0f0f, 0x01010101) >>> 24);
+}
+
 export function looNearestNeighbourHits(B) {
   const N = B.length, d = B[0].length;
-  // full pairwise Hamming distances once: O(N^2 d)
-  const H = Array.from({ length: N }, () => new Int32Array(N));
-  for (let i = 0; i < N; i++) for (let k = i + 1; k < N; k++) { let s = 0; const a = B[i], b = B[k]; for (let j = 0; j < d; j++) if (a[j] !== b[j]) s++; H[i][k] = s; H[k][i] = s; }
+  const rowMasks = new Int32Array(N);
+  for (let i = 0; i < N; i++) {
+    let m = 0;
+    const r = B[i];
+    for (let c = 0; c < d; c++) if (r[c]) m |= (1 << c);
+    rowMasks[i] = m;
+  }
   const hits = new Array(d).fill(0), ties = new Array(d).fill(0);
   for (let j = 0; j < d; j++) {
+    const bitJ = 1 << j;
+    const maskNoJ = ~bitJ;
+    const buckets = new Map();
     for (let i = 0; i < N; i++) {
-      let best = Infinity, ones = 0, cnt = 0;
-      for (let k = 0; k < N; k++) {
-        if (k === i) continue;
-        const dist = H[i][k] - (B[i][j] !== B[k][j] ? 1 : 0); // exclude axis j
-        if (dist < best) { best = dist; ones = B[k][j]; cnt = 1; }
-        else if (dist === best) { ones += B[k][j]; cnt++; }
+      const sub = rowMasks[i] & maskNoJ;
+      const bVal = (rowMasks[i] & bitJ) ? 1 : 0;
+      let b = buckets.get(sub);
+      if (!b) {
+        b = { sub, cnt: 1, ones: bVal };
+        buckets.set(sub, b);
+      } else {
+        b.cnt++;
+        b.ones += bVal;
       }
-      const zeros = cnt - ones;
-      if (ones === zeros) { hits[j] += 0.5; ties[j]++; }
-      else if ((ones > zeros ? 1 : 0) === B[i][j]) hits[j] += 1;
+    }
+    const bucketArr = Array.from(buckets.values());
+    const U = bucketArr.length;
+    for (let u = 0; u < U; u++) {
+      const bk = bucketArr[u];
+      if (bk.cnt >= 2) {
+        const nnCnt = bk.cnt - 1;
+        if (bk.ones > 0) {
+          const ones1 = bk.ones - 1;
+          const zeros1 = nnCnt - ones1;
+          if (ones1 === zeros1) { hits[j] += 0.5 * bk.ones; ties[j] += bk.ones; }
+          else if (ones1 > zeros1) hits[j] += bk.ones;
+        }
+        const zRows = bk.cnt - bk.ones;
+        if (zRows > 0) {
+          const ones0 = bk.ones;
+          const zeros0 = nnCnt - ones0;
+          if (ones0 === zeros0) { hits[j] += 0.5 * zRows; ties[j] += zRows; }
+          else if (zeros0 > ones0) hits[j] += zRows;
+        }
+      } else {
+        let best = Infinity, ones = 0, cnt = 0;
+        const subI = bk.sub;
+        for (let v = 0; v < U; v++) {
+          if (v === u) continue;
+          const other = bucketArr[v];
+          const dist = popcount32(subI ^ other.sub);
+          if (dist < best) { best = dist; ones = other.ones; cnt = other.cnt; }
+          else if (dist === best) { ones += other.ones; cnt += other.cnt; }
+        }
+        const zeros = cnt - ones;
+        if (ones === zeros) { hits[j] += 0.5; ties[j]++; }
+        else if ((ones > zeros ? 1 : 0) === bk.ones) hits[j] += 1;
+      }
     }
   }
   return { hits, ties };

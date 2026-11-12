@@ -66,18 +66,115 @@ function zscoreColumns(rows) {
   const scales = sd.map((v) => Math.sqrt(v) || 1);
   return rows.map((r) => r.map((x, j) => (x - mu[j]) / scales[j]));
 }
+function jacobiEigCov(A, k) {
+  const n = A.length;
+  const V = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i === j ? 1 : 0)));
+  const M = A.map((r) => r.slice());
+  for (let sweep = 0; sweep < 80; sweep++) {
+    let off = 0;
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) off += M[i][j] ** 2;
+    if (off < 1e-14) break;
+    for (let p = 0; p < n; p++) {
+      for (let q = p + 1; q < n; q++) {
+        if (Math.abs(M[p][q]) < 1e-15) continue;
+        const th = (M[q][q] - M[p][p]) / (2 * M[p][q]);
+        const t = Math.sign(th || 1) / (Math.abs(th) + Math.sqrt(th * th + 1));
+        const c = 1 / Math.sqrt(t * t + 1), s = t * c;
+        for (let l = 0; l < n; l++) { const a = M[l][p], b = M[l][q]; M[l][p] = c * a - s * b; M[l][q] = s * a + c * b; }
+        for (let l = 0; l < n; l++) { const a = M[p][l], b = M[q][l]; M[p][l] = c * a - s * b; M[q][l] = s * a + c * b; }
+        for (let l = 0; l < n; l++) { const a = V[l][p], b = V[l][q]; V[l][p] = c * a - s * b; V[l][q] = s * a + c * b; }
+      }
+    }
+  }
+  const idx = M.map((_, i) => i).sort((a, b) => M[b][b] - M[a][a]);
+  const axes = idx.slice(0, k).map((i) => {
+    const a = V.map((r) => r[i]);
+    let m = 0;
+    for (let j = 1; j < a.length; j++) if (Math.abs(a[j]) > Math.abs(a[m])) m = j;
+    return a[m] < 0 ? a.map((x) => -x) : a;
+  });
+  return { axes, values: idx.map((i) => M[i][i]) };
+}
+
 export function anglesRefit(rows, seed, PM) {
+  const n = rows.length, D = rows[0].length;
+  if (D <= 30 && n > 64 && rows[0].every((x) => x === 0 || x === 1)) {
+    const mu = new Float64Array(D), sd = new Float64Array(D);
+    const byMask = new Map();
+    const groups = [];
+    const rowGroup = new Int32Array(n);
+    for (let i = 0; i < n; i++) {
+      const r = rows[i];
+      let m = 0;
+      for (let j = 0; j < D; j++) {
+        const v = r[j];
+        if (v) { m |= (1 << j); mu[j] += 1; }
+      }
+      let g = byMask.get(m);
+      if (g === undefined) {
+        g = groups.length;
+        byMask.set(m, g);
+        groups.push({ r, count: 0 });
+      }
+      groups[g].count++;
+      rowGroup[i] = g;
+    }
+    for (let j = 0; j < D; j++) {
+      mu[j] /= n;
+      const p = mu[j];
+      sd[j] = Math.sqrt((n * p * (1 - p)) / Math.max(1, n - 1)) || 1;
+    }
+    const U = groups.length;
+    const Zg = groups.map((g) => g.r.map((x, j) => (x - mu[j]) / sd[j]));
+    const C = Array.from({ length: D }, () => Array(D).fill(0));
+    const denom = Math.max(1, n - 1);
+    for (let u = 0; u < U; u++) {
+      const cnt = groups[u].count, zu = Zg[u];
+      for (let a = 0; a < D; a++) {
+        const ca = cnt * zu[a];
+        for (let b = a; b < D; b++) C[a][b] += (ca * zu[b]) / denom;
+      }
+    }
+    for (let a = 0; a < D; a++) for (let b = 0; b < a; b++) C[a][b] = C[b][a];
+    const p2 = jacobiEigCov(C, 2);
+    if (p2) {
+      const [ax0, ax1] = p2.axes;
+      const phiG = Zg.map((zu) => {
+        let s0 = 0, s1 = 0;
+        for (let j = 0; j < D; j++) { s0 += zu[j] * ax0[j]; s1 += zu[j] * ax1[j]; }
+        return Math.atan2(s1 || 0, s0 || 0);
+      });
+      return { length: n, _weighted: { phiG, counts: groups.map((g) => g.count), n } };
+    }
+  }
   const Z = zscoreColumns(rows);
   const p2 = PM._internal.pcaTop(Z, 2, PM.mulberry32(seed));
   return p2.scores.map((r) => Math.atan2(r[1] || 0, r[0] || 0));
 }
 
 export function rayleighZ(phis, m) {
+  if (phis && phis._weighted) {
+    const { phiG, counts, n } = phis._weighted;
+    let c = 0, s = 0;
+    for (let u = 0; u < phiG.length; u++) {
+      const p = phiG[u], cnt = counts[u];
+      c += cnt * Math.cos(m * p);
+      s += cnt * Math.sin(m * p);
+    }
+    return (c * c + s * s) / n;
+  }
   let c = 0, s = 0;
   for (const p of phis) { c += Math.cos(m * p); s += Math.sin(m * p); }
   return (c * c + s * s) / phis.length;
 }
 export function largestGap(phis) {
+  if (phis && phis._weighted && phis._weighted.n >= 2) {
+    const a = phis._weighted.phiG.slice().sort((x, y) => x - y);
+    if (a.length === 1) return 2 * Math.PI;
+    let g = 0;
+    for (let i = 1; i < a.length; i++) g = Math.max(g, a[i] - a[i - 1]);
+    return Math.max(g, 2 * Math.PI - (a[a.length - 1] - a[0]));
+  }
   const a = phis.slice().sort((x, y) => x - y); let g = 0;
   for (let i = 1; i < a.length; i++) g = Math.max(g, a[i] - a[i - 1]);
   return Math.max(g, 2 * Math.PI - (a[a.length - 1] - a[0]));
@@ -87,7 +184,22 @@ export function azimuthStats(phis, modes = DEFAULT_MODES) {
   out.largest_gap = largestGap(phis);
   return out;
 }
-export function dedupRows(rows) { const seen = new Set(), out = []; for (const r of rows) { const k = r.join(","); if (!seen.has(k)) { seen.add(k); out.push(r); } } return out; }
+export function dedupRows(rows) {
+  if (!rows.length) return [];
+  const d = rows[0].length;
+  if (d <= 30 && rows[0].every((x) => x === 0 || x === 1)) {
+    const seen = new Set(), out = [];
+    for (let i = 0; i < rows.length; i++) {
+      const r = rows[i]; let m = 0;
+      for (let j = 0; j < d; j++) if (r[j]) m |= (1 << j);
+      if (!seen.has(m)) { seen.add(m); out.push(r); }
+    }
+    return out;
+  }
+  const seen = new Set(), out = [];
+  for (const r of rows) { const k = r.join(","); if (!seen.has(k)) { seen.add(k); out.push(r); } }
+  return out;
+}
 
 function summary(a) { const s = a.slice().sort((x, y) => x - y), n = s.length; const mean = s.reduce((x, y) => x + y, 0) / n; const sd = n > 1 ? Math.sqrt(s.reduce((x, y) => x + (y - mean) ** 2, 0) / (n - 1)) : 0; return { n, mean, sd, min: s[0], median: s[Math.floor(n / 2)], max: s[n - 1] }; }
 function rawTail(a, obs) {

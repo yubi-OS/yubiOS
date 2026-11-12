@@ -70,7 +70,7 @@ No new physics, operative radius control or ranking metric is introduced. Profil
 
 ## limits/2 (2026-09-17)
 
-`lib/limits.mjs` centralizes corpus caps: 4000 items/documents, 40 MB and 120k chunks per request, 64 MiB JSON bodies. Per-request *uncached* embedding work is capped at 1000 docs / 12k chunks (413 with a warm-up hint: `POST /api/embed` in batches of <= 400); KV reads are bulk (100 keys per call). `lib/map-store.mjs` stores maps above 1.9 MB in SITE KV (`map-json:<id>`) behind a D1 pointer, so N=4000 maps persist; reads are unchanged. `pointmap.js` runMap and `radius-diagnostics` accept N <= 4000; axis trial N <= 1200. Run `node test-limits.mjs` (9 checks). Deploy metadata sets `limits.cpu_ms=300000`.
+`lib/limits.mjs` centralizes corpus caps: 4000 items/documents, 40 MB and 120k chunks per request, 64 MiB JSON bodies. Per-request *uncached* embedding work is capped at 1000 docs / 12k chunks (413 with a warm-up hint: `POST /api/embed` in batches of <= 400); KV reads are bulk (100 keys per call). `lib/map-store.mjs` stores maps above 1.9 MB in SITE KV (`map-json:<id>`) behind a D1 pointer, so N=4000 maps persist; reads are unchanged. `pointmap.js` runMap and `radius-diagnostics` accept N <= 4000; axis trial N <= 4000. Run `node test-limits.mjs` (9 checks). Deploy metadata sets `limits.cpu_ms=300000`.
 
 ## Azimuth trials (azimuth/1)
 

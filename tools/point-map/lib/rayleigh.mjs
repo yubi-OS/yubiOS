@@ -43,7 +43,7 @@ function frac(num, den) { if (den === 0) return null; const g = gcd(num, den); r
 export function isolationGraph(pts, radius = ISO_RADIUS) {
   const n = pts.length; const adj = Array.from({ length: n }, () => []); const edges = [];
   for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (chord(pts[i], pts[j]) < radius) { adj[i].push(j); adj[j].push(i); edges.push([i, j]); }
-  return { n, adj, edges, degrees: adj.map((a) => a.length) };
+  return { n, adj, edges, degrees: adj.map((a) => a.length), _pts: pts, _radius: radius };
 }
 
 /** Connected components by BFS. Exact. */
@@ -66,29 +66,228 @@ export function cutWitness(graph, S) {
 }
 
 /** Fiedler value (lambda_2) of one connected component via power iteration on M = 2*dmax*I - L restricted to 1^perp. Float estimate. */
-export function fiedler(graph, vertices, iters = 400) {
+export function fiedler(graph, vertices, iters = 400, ptsOpt = null) {
   const m = vertices.length; if (m < 2) return { lambda2: null, vector: null, note: "component of size < 2 has no Fiedler value" };
-  const idx = new Map(vertices.map((v, i) => [v, i])); const deg = vertices.map((v) => graph.adj[v].filter((w) => idx.has(w)).length); const dmax = Math.max(...deg); const shift = 2 * dmax + 1;
+  const idx = new Map(vertices.map((v, i) => [v, i]));
+  const deg = graph._compDeg && graph._compDeg.length === m ? graph._compDeg : vertices.map((v) => graph.adj[v].filter((w) => idx.has(w)).length);
+  const dmax = Math.max(...deg); const shift = 2 * dmax + 1;
   const rng = mulberry32(20260918); let x = vertices.map(() => rng() - 0.5); const proj = (v) => { const mean = v.reduce((a, b) => a + b, 0) / m; return v.map((t) => t - mean); }; const norm = (v) => Math.sqrt(v.reduce((a, b) => a + b * b, 0));
   x = proj(x); let nx = norm(x); x = x.map((t) => t / nx);
-  const apply = (v) => vertices.map((u, i) => { let s = (shift - deg[i]) * v[i]; for (const w of graph.adj[u]) { const j = idx.get(w); if (j !== undefined) s += v[j]; } return s; }); // (shift*I - L) v
+  const apply = graph._fastApply
+    ? (v) => graph._fastApply(v, shift, deg)
+    : (v) => vertices.map((u, i) => { let s = (shift - deg[i]) * v[i]; for (const w of graph.adj[u]) { const j = idx.get(w); if (j !== undefined) s += v[j]; } return s; }); // (shift*I - L) v
   let mu = 0;
   for (let t = 0; t < iters; t++) { let y = proj(apply(x)); const ny = norm(y); if (!ny) break; mu = ny; x = y.map((v) => v / ny); }
   // Rayleigh quotient of the converged vector under L gives lambda_2 estimate directly
-  let num = 0; for (const [a, b] of graph.edges) { const i = idx.get(a), j = idx.get(b); if (i !== undefined && j !== undefined) num += (x[i] - x[j]) ** 2; }
+  let num = 0;
+  if (graph._fastQuad) {
+    num = graph._fastQuad(x, deg);
+  } else {
+    for (const [a, b] of graph.edges) { const i = idx.get(a), j = idx.get(b); if (i !== undefined && j !== undefined) num += (x[i] - x[j]) ** 2; }
+  }
   const lambda2 = num / x.reduce((a, b) => a + b * b, 0);
   const pos = vertices.filter((_, i) => x[i] >= 0); const neg = vertices.filter((_, i) => x[i] < 0);
   return { lambda2, power_estimate: shift - mu, vector_sign_split: { positive: pos.length, negative: neg.length }, cut_positive_side: pos, iters, note: "float power-iteration estimate; the exact rational cutWitness of the sign partition upper-bounds lambda_2 by Rayleigh–Ritz" };
 }
 
+function fastBitCloudGraphStats(B, toS2, radius = ISO_RADIUS, iters = 200) {
+  const N = B.length, d = B[0].length;
+  const typeByMask = new Map();
+  const types = [];
+  const itemType = new Int32Array(N);
+  for (let i = 0; i < N; i++) {
+    let m = 0; const r = B[i];
+    for (let c = 0; c < d; c++) if (r[c]) m |= (1 << c);
+    let t = typeByMask.get(m);
+    if (t === undefined) {
+      t = types.length;
+      typeByMask.set(m, t);
+      types.push({ mask: m, pt: toS2(r), count: 0, items: [] });
+    }
+    types[t].count++;
+    types[t].items.push(i);
+    itemType[i] = t;
+  }
+  const U = types.length;
+  const tAdj = Array.from({ length: U }, () => []);
+  let totalEdges = 0;
+  for (let u = 0; u < U; u++) {
+    const cu = types[u].count;
+    totalEdges += (cu * (cu - 1)) / 2;
+    for (let v = u + 1; v < U; v++) {
+      if (chord(types[u].pt, types[v].pt) < radius) {
+        tAdj[u].push(v);
+        tAdj[v].push(u);
+        totalEdges += cu * types[v].count;
+      }
+    }
+  }
+  const tComp = new Int32Array(U).fill(-1);
+  const compSizes = [];
+  const compTypes = [];
+  let isolates = 0;
+  for (let s = 0; s < U; s++) {
+    if (tComp[s] >= 0) continue;
+    const cid = compSizes.length;
+    const q = [s]; tComp[s] = cid;
+    let sz = 0; const tList = [];
+    while (q.length) {
+      const u = q.pop();
+      sz += types[u].count;
+      tList.push(u);
+      for (const v of tAdj[u]) if (tComp[v] < 0) { tComp[v] = cid; q.push(v); }
+    }
+    compSizes.push(sz);
+    compTypes.push(tList);
+    if (sz === 1) isolates++;
+  }
+  const largestId = compSizes.indexOf(Math.max(...compSizes));
+  const largestSize = compSizes[largestId];
+  if (largestSize < 2) {
+    return { components: compSizes.length, isolates, largest: largestSize, lambda2: null, edges: totalEdges };
+  }
+  const lTypes = compTypes[largestId];
+  const inLargestType = new Uint8Array(U);
+  for (const u of lTypes) inLargestType[u] = 1;
+  const vertices = [];
+  for (let i = 0; i < N; i++) if (inLargestType[itemType[i]]) vertices.push(i);
+  const m = vertices.length;
+  const vType = new Int32Array(m);
+  const tDeg = new Int32Array(U);
+  for (const u of lTypes) {
+    let dg = types[u].count - 1;
+    for (const v of tAdj[u]) dg += types[v].count;
+    tDeg[u] = dg;
+  }
+  const deg = new Array(m);
+  for (let idx = 0; idx < m; idx++) {
+    const t = itemType[vertices[idx]];
+    vType[idx] = t;
+    deg[idx] = tDeg[t];
+  }
+  const sumByType = new Float64Array(U);
+  const nbrSumByType = new Float64Array(U);
+  const fastGraph = {
+    adj: [],
+    edges: [],
+    _compDeg: deg,
+    _fastApply(v, shift, degArr) {
+      for (const u of lTypes) sumByType[u] = 0;
+      for (let i = 0; i < m; i++) sumByType[vType[i]] += v[i];
+      for (const u of lTypes) {
+        let s = sumByType[u];
+        for (const nb of tAdj[u]) s += sumByType[nb];
+        nbrSumByType[u] = s;
+      }
+      const out = new Array(m);
+      for (let i = 0; i < m; i++) {
+        const vi = v[i];
+        out[i] = (shift - degArr[i]) * vi + (nbrSumByType[vType[i]] - vi);
+      }
+      return out;
+    },
+    _fastQuad(x, degArr) {
+      for (const u of lTypes) sumByType[u] = 0;
+      for (let i = 0; i < m; i++) sumByType[vType[i]] += x[i];
+      for (const u of lTypes) {
+        let s = sumByType[u];
+        for (const nb of tAdj[u]) s += sumByType[nb];
+        nbrSumByType[u] = s;
+      }
+      let num = 0;
+      for (let i = 0; i < m; i++) {
+        const xi = x[i];
+        num += degArr[i] * xi * xi - xi * (nbrSumByType[vType[i]] - xi);
+      }
+      return num;
+    },
+  };
+  const f = fiedler(fastGraph, vertices, iters);
+  return { components: compSizes.length, isolates, largest: largestSize, lambda2: f.lambda2, edges: totalEdges };
+}
+
 /** Full graph reading for one map (pts_full + names). */
+function attachFastPointBuckets(g, largest) {
+  if (!g || !Array.isArray(g._pts) || largest.length < 150) return;
+  const pts = g._pts, radius = g._radius ?? ISO_RADIUS, m = largest.length;
+  const typeByKey = new Map();
+  const types = [];
+  const vType = new Int32Array(m);
+  for (let idx = 0; idx < m; idx++) {
+    const v = largest[idx];
+    const p = pts[v];
+    const k = `${p[0]},${p[1]},${p[2]}`;
+    let t = typeByKey.get(k);
+    if (t === undefined) {
+      t = types.length;
+      typeByKey.set(k, t);
+      types.push({ p, count: 0 });
+    }
+    types[t].count++;
+    vType[idx] = t;
+  }
+  const U = types.length;
+  if (U >= m * 0.8) return;
+  const tAdj = Array.from({ length: U }, () => []);
+  for (let u = 0; u < U; u++) {
+    for (let v = u + 1; v < U; v++) {
+      if (chord(types[u].p, types[v].p) < radius) {
+        tAdj[u].push(v);
+        tAdj[v].push(u);
+      }
+    }
+  }
+  const tDeg = new Int32Array(U);
+  for (let u = 0; u < U; u++) {
+    let dg = types[u].count - 1;
+    for (const v of tAdj[u]) dg += types[v].count;
+    tDeg[u] = dg;
+  }
+  g._compDeg = Array.from({ length: m }, (_, i) => tDeg[vType[i]]);
+  const sumByType = new Float64Array(U);
+  const nbrSumByType = new Float64Array(U);
+  g._fastApply = (v, shift, degArr) => {
+    sumByType.fill(0);
+    for (let i = 0; i < m; i++) sumByType[vType[i]] += v[i];
+    for (let u = 0; u < U; u++) {
+      let s = sumByType[u];
+      for (const nb of tAdj[u]) s += sumByType[nb];
+      nbrSumByType[u] = s;
+    }
+    const out = new Array(m);
+    for (let i = 0; i < m; i++) {
+      const vi = v[i];
+      out[i] = (shift - degArr[i]) * vi + (nbrSumByType[vType[i]] - vi);
+    }
+    return out;
+  };
+  g._fastQuad = (x, degArr) => {
+    sumByType.fill(0);
+    for (let i = 0; i < m; i++) sumByType[vType[i]] += x[i];
+    for (let u = 0; u < U; u++) {
+      let s = sumByType[u];
+      for (const nb of tAdj[u]) s += sumByType[nb];
+      nbrSumByType[u] = s;
+    }
+    let num = 0;
+    for (let i = 0; i < m; i++) {
+      const xi = x[i];
+      num += degArr[i] * xi * xi - xi * (nbrSumByType[vType[i]] - xi);
+    }
+    return num;
+  };
+}
+
 export function graphRayleigh(map, opts = {}) {
   const pts = map.pts_full, names = map.names; if (!Array.isArray(pts) || !Array.isArray(names) || pts.length !== names.length) throw new ApiError(409, "map lacks pts_full/names");
   if (pts.length > MAX_N) throw new ApiError(422, `rayleigh diagnostics are limited to N <= ${MAX_N} (map has ${pts.length})`);
   const g = isolationGraph(pts, opts.radius ?? ISO_RADIUS); const c = components(g.adj);
   const largestId = c.sizes.indexOf(Math.max(...c.sizes)); const largest = c.comp.map((id, i) => id === largestId ? i : -1).filter((i) => i >= 0);
+  attachFastPointBuckets(g, largest);
   const f = fiedler(g, largest);
-  const witness = f.cut_positive_side ? cutWitness({ n: largest.length, edges: g.edges.filter(([i, j]) => c.comp[i] === largestId && c.comp[j] === largestId).map(([i, j]) => [largest.indexOf(i), largest.indexOf(j)]) }, f.cut_positive_side.map((v) => largest.indexOf(v))) : null;
+  const posInLargest = new Int32Array(g.n).fill(-1);
+  for (let i = 0; i < largest.length; i++) posInLargest[largest[i]] = i;
+  const witness = f.cut_positive_side ? cutWitness({ n: largest.length, edges: g.edges.filter(([i, j]) => c.comp[i] === largestId && c.comp[j] === largestId).map(([i, j]) => [posInLargest[i], posInLargest[j]]) }, f.cut_positive_side.map((v) => posInLargest[v])) : null;
   const bound_ok = witness && witness.quotient ? f.lambda2 <= witness.quotient.value + 1e-9 : null;
   return {
     n: g.n, edges: g.edges.length, radius: opts.radius ?? ISO_RADIUS,
@@ -132,7 +331,7 @@ export function kyFanFrameGap(X, frame, opts = {}) {
 export function graphNull(map, nullDraw, toS2, K, seed) {
   const bits = map.bits; const N = bits.length, d = bits[0].length; const attempts = 5 * N * d; const rng = mulberry32(seed); const cert = { rowOk: true, colOk: true, attempted: 0, accepted: 0 };
   const draws = [];
-  for (let k = 0; k < K; k++) { const B = nullDraw(bits, attempts, rng, cert); const pts = B.map(toS2); const g = isolationGraph(pts); const c = components(g.adj); const largestId = c.sizes.indexOf(Math.max(...c.sizes)); const largest = c.comp.map((id, i) => id === largestId ? i : -1).filter((i) => i >= 0); const f = fiedler(g, largest, 200); draws.push({ components: c.count, isolates: c.isolates, largest: largest.length, lambda2: f.lambda2, edges: g.edges.length }); }
+  for (let k = 0; k < K; k++) { const B = nullDraw(bits, attempts, rng, cert); draws.push(fastBitCloudGraphStats(B, toS2, ISO_RADIUS, 200)); }
   if (!cert.rowOk || !cert.colOk) throw new ApiError(500, "null draw violated a margin; no result returned");
   const stat = (key) => { const v = draws.map((x) => x[key]).filter((x) => x !== null && Number.isFinite(x)); const mean = v.reduce((a, b) => a + b, 0) / v.length; const sd = v.length > 1 ? Math.sqrt(v.reduce((a, b) => a + (b - mean) ** 2, 0) / (v.length - 1)) : 0; return { n: v.length, mean: +mean.toFixed(4), sd: +sd.toFixed(4), min: Math.min(...v), max: Math.max(...v) }; };
   const tail = (key, obs) => { const v = draws.map((x) => x[key]).filter((x) => x !== null && Number.isFinite(x)); const mean = v.reduce((a, b) => a + b, 0) / v.length; const dev = Math.abs(obs - mean); const exceed = v.filter((x) => Math.abs(x - mean) >= dev).length; return { p_two_sided: +((1 + exceed) / (K + 1)).toFixed(4), p_resolution: +(1 / (K + 1)).toFixed(4), z_descriptive: stat(key).sd ? +((obs - mean) / stat(key).sd).toFixed(2) : null, verdict: stat(key).sd === 0 ? "null-degenerate" : ((1 + exceed) / (K + 1) <= 1 / (K + 1) + 1e-12 ? "excluded-from-fixed-margin-null" : "not-excluded") }; };

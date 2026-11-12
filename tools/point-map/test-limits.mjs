@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { AXIS_TRIAL_MAX_N } from "./lib/limits.mjs";
+import { axisRedundancyHandler } from "./lib/axis-redundancy.mjs";
 // test-limits.mjs — limits/2: 4000-item caps, uncached-chunk budget, bulk KV reads, KV overflow storage.
 import assert from "node:assert/strict";
 import { ApiError } from "./lib/http.mjs";
@@ -22,3 +24,17 @@ await t("oversize map goes to KV overflow with a D1 pointer; read back identical
 await t("oversize map with no KV binding is an explicit 413", async()=>{const db=fakeDb();const big={names:Array.from({length:300000},(_,i)=>"name_"+i)};await expectApi(()=>saveStoredMap(db,{},big,"x"),413);});
 await t("metricsOf binds only D1-legal primitives for a REAL runMap output (classes is an object in pointmap/0.2)", async()=>{const fs=await import("node:fs");const vm=await import("node:vm");const code=fs.readFileSync(new URL("./pointmap.js",import.meta.url),"utf8");const sb={console,Math,Array,Object,JSON,Number,String,Boolean,RangeError,TypeError,Error,Set,Map,Infinity,NaN,isNaN,isFinite,BigInt,Uint8Array,Float32Array,Float64Array,TextEncoder,TextDecoder};vm.createContext(sb);vm.runInContext(code,sb);const PM=sb.PM;const X=PM.synth(12,8,7);const names=Array.from({length:12},(_,i)=>"p/x"+i+".md");const m=PM.runMap(X,{d:3,seed:1,threshold:"median",K:5,T:0.05,names,labels:names,preprocessing_id:"raw/v1"});assert.equal(typeof m.classes,"object");const {metricsOf}=await import("./lib/map-store.mjs");for(const v of metricsOf(m,"vectors"))assert.ok(v===null||typeof v==="number"||typeof v==="string","illegal bind "+JSON.stringify(v));const strict={prepare(sql){return{bind(...a){for(const v of a){if(v===undefined||typeof v==="boolean"||(v!==null&&typeof v==="object"))throw new Error("D1_TYPE_ERROR "+JSON.stringify(v));}return{async run(){return{meta:{last_row_id:1}}},async first(){return null}}}}}};assert.equal(await saveStoredMap(strict,env(),m,"vectors"),1);});
 console.log(`\n${pass}/${pass+fail} passed`); if(fail)process.exit(1);
+
+await t("AXIS_TRIAL_MAX_N matches MAX_ITEMS (4000) and axisRedundancyHandler runs on N=1500 (>1200)", async()=>{
+  assert.equal(AXIS_TRIAL_MAX_N, MAX_ITEMS);
+  assert.equal(AXIS_TRIAL_MAX_N, 4000);
+  const fs=await import("node:fs");const vm=await import("node:vm");
+  const code=fs.readFileSync(new URL("./pointmap.js",import.meta.url),"utf8");
+  const sb={console,Math,Array,Object,JSON,Number,String,Boolean,RangeError,TypeError,Error,Set,Map,Infinity,NaN,isNaN,isFinite,BigInt,Uint8Array,Int32Array,Float32Array,Float64Array,TextEncoder,TextDecoder};
+  vm.createContext(sb);vm.runInContext(code,sb);const PM=sb.PM;
+  const bits=Array.from({length:1500},(_,i)=>[i&1,(i>>1)&1,(i>>2)&1,((i&1)^((i>>1)&1))]);
+  const fakeMap={id:99,frame:{config:{seed:1}},seed:1,K:4,bits,names:bits.map((_,i)=>"item_"+i)};
+  const res=await axisRedundancyHandler({map_id:99,K:4},{PM,loadStoredMap:async()=>fakeMap});
+  assert.equal(res.N, 1500);
+  assert.equal(res.axes.length, 4);
+});

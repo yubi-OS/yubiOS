@@ -13,7 +13,7 @@
 //      curveball null with two seeds, certified class counts under an l_inf
 //      input perturbation, and the stereographic lens-power scan.
 //
-// Unlike the axis/rayleigh/azimuth/admission trials (O(N^2 d K), N <= 1200),
+// Unlike the axis/rayleigh/azimuth/admission trials (O(N^2 d K), N <= 4000),
 // every block here is linear in N or works on distinct patterns only, so it
 // runs on full-size maps (the 3,232-item map #598 included).
 //
