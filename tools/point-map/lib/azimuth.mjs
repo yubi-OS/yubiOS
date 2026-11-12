@@ -50,7 +50,7 @@ function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; le
 function finiteMatrix(X, label) {
   if (!Array.isArray(X) || X.length < 3 || X.length > MAX_N) throw new ApiError(422, `${label} must contain 3..${MAX_N} rows`);
   const D = X[0] && X[0].length;
-  if (!Number.isInteger(D) || D < 2 || D > 768 || X.some((r) => !Array.isArray(r) || r.length !== D || r.some((x) => typeof x !== "number" || !Number.isFinite(x)))) throw new ApiError(422, `${label} must be finite rectangular rows, D=2..768`);
+  if (!Number.isInteger(D) || D < 2 || D > 1024 || X.some((r) => !Array.isArray(r) || r.length !== D || r.some((x) => typeof x !== "number" || !Number.isFinite(x)))) throw new ApiError(422, `${label} must be finite rectangular rows, D=2..1024`);
   return D;
 }
 function binaryMatrix(B) { const d = finiteMatrix(B, "bits"); if (B.some((r) => r.some((x) => x !== 0 && x !== 1))) throw new ApiError(409, "stored bits must contain only 0/1"); return d; }

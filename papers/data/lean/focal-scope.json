@@ -1,0 +1,325 @@
+{
+  "schema": "wayfinder-scope/1",
+  "lean_file": "papers/data/lean/FocalBounds.lean",
+  "toolchain": "leanprover/lean4:v4.33.0",
+  "dependencies": "core Lean 4 only (no mathlib, no Batteries, no external imports)",
+  "generated_for_branch": "lean-check-focal (local, unpushed; base commit 7d095ae2)",
+  "gate_reuse": "Checked by the existing, unmodified papers/data/lean/verify_wayfinder_axioms.py, invoked with --axioms <captured kernel output> --manifest papers/data/lean/focal-scope.json, and by the unmodified check_forbidden_tokens.py, check_lean_axioms.py (enumerate mode, --require-coverage) and leanchecker --fresh replay. No existing gate, test, or recorded negative was changed or relaxed to admit this file.",
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "forbidden_axioms": [
+    "sorryAx"
+  ],
+  "axiom_policy": "Every declaration listed in `theorems` must appear in the `#print axioms` output of the pinned kernel run. Its reported axiom set must be a subset of `permitted_axioms` (the three core Lean assumptions). Any other axiom, and in particular `sorryAx`, fails the gate. A missing declaration fails the gate. The gate parses the kernel's printed output; it does not grep source comments.",
+  "code_convention": "An item code is a List Bool; its d-bit prefix is List.take d. dedup is defined in the file (keeps the last occurrence); distinctCount l = (dedup l).length; prefixCount codes d = distinctCount (codes.map (List.take d)). focalDim gains t = length of the longest initial run of gains g with t <= g; gains and threshold are Nat numerators over one common positive denominator, so the Nat comparison equals the rational comparison.",
+  "length_premise": "prefix_count_double and prefix_count_pow carry a code-length PREMISE (every code has at least d+1, resp. d, bits). Without it a code shorter than d+1 bits contributes its whole self as a third refinement and the doubling bound can fail. That the runtime emits fixed-length codes is a runtime obligation.",
+  "theorems": [
+    {
+      "name": "FocalBounds.mem_dedup",
+      "status": "lean-proved",
+      "statement": "x in dedup l <-> x in l",
+      "runtime_counterpart": "dedup helper",
+      "runtime_predicate": "dedup keeps exactly the members of its input",
+      "statement_sha256": "c8cc780585dd2f46e03ecea82292540bbc5694ad2fb1b658b9d9dc2ba6f9a1b6"
+    },
+    {
+      "name": "FocalBounds.dedup_nodup",
+      "status": "lean-proved",
+      "statement": "(dedup l).Nodup",
+      "runtime_counterpart": "dedup helper",
+      "runtime_predicate": "dedup output has no repeated element",
+      "statement_sha256": "825ccba4239fbe4bd1584509a09f2e2c5bfb1200024208e977fd91cd8073fb79"
+    },
+    {
+      "name": "FocalBounds.dedup_length_le",
+      "status": "lean-proved",
+      "statement": "(dedup l).length <= l.length (Nat)",
+      "runtime_counterpart": "dedup helper",
+      "runtime_predicate": "removing duplicates never lengthens a list",
+      "statement_sha256": "a494c4711238fb93e126d59d86eef3bc9a593e682891879e89a135b677f14974"
+    },
+    {
+      "name": "FocalBounds.nodup_subset_length_le",
+      "status": "lean-proved",
+      "statement": "l.Nodup and (forall x, x in l -> x in L) implies l.length <= L.length (Nat)",
+      "runtime_counterpart": "pigeonhole helper",
+      "runtime_predicate": "a duplicate-free list contained in L is no longer than L",
+      "statement_sha256": "c9a3e8fe7bda743f0253ae7fa44b976f8039dd5c73f38dffabb4c6b43bbd5d3e"
+    },
+    {
+      "name": "FocalBounds.distinctCount_le_length",
+      "status": "lean-proved",
+      "statement": "distinctCount l <= l.length (Nat)",
+      "runtime_counterpart": "distinct-count helper",
+      "runtime_predicate": "distinct count never exceeds list length",
+      "statement_sha256": "13f94a749207b7aaca07228832be21d32cea2811b3f142ff59c7485e637b7d01"
+    },
+    {
+      "name": "FocalBounds.distinctCount_map_le",
+      "status": "lean-proved",
+      "statement": "distinctCount (l.map g) <= distinctCount l (Nat)",
+      "runtime_counterpart": "class coarsening under any map",
+      "runtime_predicate": "applying a function to every item never increases the number of distinct values",
+      "statement_sha256": "5f8d43621346a995661c5e26f61ff6f9152ff280a293595f7fd9958be19c95b7"
+    },
+    {
+      "name": "FocalBounds.distinctCount_congr",
+      "status": "lean-proved",
+      "statement": "(forall x, x in l <-> x in l') implies distinctCount l = distinctCount l' (Nat)",
+      "runtime_counterpart": "distinct count depends only on the member set",
+      "runtime_predicate": "order and multiplicity of items do not affect the distinct count",
+      "statement_sha256": "998b555066130a675488c8e1229a34f5694f6714b0dddb04997852d8a5d932c4"
+    },
+    {
+      "name": "FocalBounds.distinctCount_perm",
+      "status": "lean-proved",
+      "statement": "l.Perm l' implies distinctCount l = distinctCount l' (Nat)",
+      "runtime_counterpart": "item-order invariance of the ladder",
+      "runtime_predicate": "reshuffling the corpus does not change any prefix count",
+      "statement_sha256": "a26c3c5930e54ed14519f32cdccb6c88de389537246123fc0c10dd579a8656fb"
+    },
+    {
+      "name": "FocalBounds.distinctCount_two_choice",
+      "status": "lean-proved",
+      "statement": "(forall x in l, k x = u (g x) or k x = v (g x)) implies distinctCount (l.map k) <= 2 * distinctCount (l.map g) (Nat)",
+      "runtime_counterpart": "generic one-bit refinement bound",
+      "runtime_predicate": "if each refined value is one of two extensions of the coarse value, the distinct count at most doubles",
+      "statement_sha256": "97eb275b63683509ea7149d086e4306a895aa8b2b0f16705f0cdb24fc96d5871"
+    },
+    {
+      "name": "FocalBounds.prefix_count_mono",
+      "status": "lean-proved",
+      "statement": "prefixCount codes d <= prefixCount codes (d+1) (Nat)",
+      "runtime_counterpart": "bit-prefix ladder, step monotonicity (T1)",
+      "runtime_predicate": "refining by one bit never merges distinguishable classes",
+      "statement_sha256": "3935e706e315fed29d64ba5a327f5528b4d584c866c23b2fc426e189e6b03d48"
+    },
+    {
+      "name": "FocalBounds.prefix_count_mono_le",
+      "status": "lean-proved",
+      "statement": "d <= e implies prefixCount codes d <= prefixCount codes e (Nat)",
+      "runtime_counterpart": "bit-prefix ladder, monotone in depth",
+      "runtime_predicate": "the class ladder is non-decreasing in depth",
+      "statement_sha256": "3e887724a66255f5ebff246044d44f32918c71d5298dcc04d99a0f61b0396cce"
+    },
+    {
+      "name": "FocalBounds.prefix_count_double",
+      "status": "lean-proved",
+      "statement": "(forall c in codes, d+1 <= c.length) implies prefixCount codes (d+1) <= 2 * prefixCount codes d (Nat)",
+      "runtime_counterpart": "bit-prefix ladder, doubling bound (T2)",
+      "runtime_predicate": "one added bit at most doubles the distinguishable count when every code has a (d+1)-th bit",
+      "statement_sha256": "db86e68a1e7563fcd680d5845c06177e0477237ff85a5d053c7e8017dddcf870"
+    },
+    {
+      "name": "FocalBounds.prefix_count_zero_le_one",
+      "status": "lean-proved",
+      "statement": "prefixCount codes 0 <= 1 (Nat)",
+      "runtime_counterpart": "bit-prefix ladder base case",
+      "runtime_predicate": "at depth 0 every code has the empty prefix",
+      "statement_sha256": "1442cae0dc033962975d6d751d8cd1625e2e43a6624deba26ad85d31ce3965a5"
+    },
+    {
+      "name": "FocalBounds.prefix_count_pow",
+      "status": "lean-proved",
+      "statement": "(forall c in codes, d <= c.length) implies prefixCount codes d <= 2^d (Nat)",
+      "runtime_counterpart": "bit-prefix ladder, capacity bound (T3)",
+      "runtime_predicate": "at depth d there are at most 2^d classes when every code has at least d bits",
+      "statement_sha256": "f6a12bc67af0c8a2cf3c6c7e283882c03ff084e999c6eb6eac3ad79c887991ad"
+    },
+    {
+      "name": "FocalBounds.prefix_count_le_length",
+      "status": "lean-proved",
+      "statement": "prefixCount codes d <= codes.length (Nat)",
+      "runtime_counterpart": "bit-prefix ladder, item bound (T4)",
+      "runtime_predicate": "the class count never exceeds the number of items",
+      "statement_sha256": "328bd897e0daf2dafe90b15105027108733cd9288198abfef4e84c033d259d4f"
+    },
+    {
+      "name": "FocalBounds.focalDim_le_length",
+      "status": "lean-proved",
+      "statement": "focalDim gains t <= gains.length (Nat)",
+      "runtime_counterpart": "focal-dimension selection rule (T5)",
+      "runtime_predicate": "the selected dimension never exceeds the number of axes",
+      "statement_sha256": "567e9128404c078fa693773d1e582d5da37189a626e177dbf9ff61f887b5e3f8"
+    },
+    {
+      "name": "FocalBounds.focalDim_prefix_meets",
+      "status": "lean-proved",
+      "statement": "i < focalDim gains t implies exists g, gains[i]? = some g and t <= g (Nat)",
+      "runtime_counterpart": "focal-dimension selection rule (T5)",
+      "runtime_predicate": "every axis before the selected dimension meets the threshold",
+      "statement_sha256": "e6365bbb8109065e4c4504a78bdc492c5dffaf0778c4b43fa849b7bced852c74"
+    },
+    {
+      "name": "FocalBounds.focalDim_stop_fails",
+      "status": "lean-proved",
+      "statement": "focalDim gains t < gains.length implies exists g, gains[focalDim gains t]? = some g and g < t (Nat)",
+      "runtime_counterpart": "focal-dimension selection rule (T5)",
+      "runtime_predicate": "the first axis not selected, if any, fails the threshold",
+      "statement_sha256": "13d0129632ef41ab13c969421f3350800acb4355cfc614ca483885a7709f11fe"
+    },
+    {
+      "name": "FocalBounds.focalDim_maximal",
+      "status": "lean-proved",
+      "statement": "(forall i < n, exists g, gains[i]? = some g and t <= g) implies n <= focalDim gains t (Nat)",
+      "runtime_counterpart": "focal-dimension selection rule (T5)",
+      "runtime_predicate": "focalDim is the largest n whose first n gains all meet the threshold",
+      "statement_sha256": "7cc775423cd38b6423925591f1a419a73f070053164b93e05b2a315e48cdeef8"
+    },
+    {
+      "name": "FocalBounds.focalDim_take_self",
+      "status": "lean-proved",
+      "statement": "focalDim (gains.take (focalDim gains t)) t = focalDim gains t",
+      "runtime_counterpart": "re-freeze recursion (R2)",
+      "runtime_predicate": "re-applying the focal rule to its selected prefix returns the same n*",
+      "statement_sha256": "af566f70c3f14781453f48a44295faf4cd3ca39e315d5f988f4ae3ae286cc902"
+    },
+    {
+      "name": "FocalBounds.focalDim_refreeze_fixed",
+      "status": "lean-proved",
+      "statement": "focalDim (gains.take (focalDim gains t)) t = (gains.take (focalDim gains t)).length",
+      "runtime_counterpart": "re-freeze recursion (R2)",
+      "runtime_predicate": "after re-freezing at d = n*, the focal rule selects every axis (fixed point in one step)",
+      "statement_sha256": "3556f49f3e79abf9f52afacd5035b4bf56a6d0132e4fb46571840672b214721b"
+    },
+    {
+      "name": "FocalBounds.antitone_drop",
+      "status": "lean-proved",
+      "statement": "f antitone and never constant on k <= f 0 implies f k + k <= f 0 for k <= f 0 + 1 (Nat)",
+      "runtime_counterpart": "recursion termination helper",
+      "runtime_predicate": "strict decrease bound",
+      "statement_sha256": "02f2868e5d5f96cb652f4de3b38cf4b3387e0dd020ba150f062565dcf2d0f3f0"
+    },
+    {
+      "name": "FocalBounds.antitone_stabilizes",
+      "status": "lean-proved",
+      "statement": "f antitone on Nat implies exists k <= f 0 with f (k+1) = f k",
+      "runtime_counterpart": "recursion termination",
+      "runtime_predicate": "a non-increasing class-count sequence repeats within f 0 steps",
+      "statement_sha256": "b9fc7a149337a5c421d7a85a3f48e6c31e6729494f7771c7fddde813831d97fa"
+    },
+    {
+      "name": "FocalBounds.recode_count_antitone",
+      "status": "lean-proved",
+      "statement": "distinctCount (recode steps l (k+1)) <= distinctCount (recode steps l k)",
+      "runtime_counterpart": "sphere-as-input recursion (R3)",
+      "runtime_predicate": "recoding each step as a function of the previous codes never increases the class count",
+      "statement_sha256": "09c5aaabc29eb8a005e7bc8bcb7331a526de7b57d9fe369f01452014442df165"
+    },
+    {
+      "name": "FocalBounds.recode_stabilizes",
+      "status": "lean-proved",
+      "statement": "exists k <= distinctCount l with distinctCount (recode steps l (k+1)) = distinctCount (recode steps l k)",
+      "runtime_counterpart": "sphere-as-input recursion (R3)",
+      "runtime_predicate": "the recursion's class count stabilizes within distinctCount l steps",
+      "statement_sha256": "91bdd1a8ddaaba9a98e6b108e95043871de0b3b890693707f58bce28d7912b1c"
+    }
+  ],
+  "runtime_verified_not_lean_proved": [
+    {
+      "obligation": "coordinate-to-bit quantization",
+      "detail": "That the runtime turns floating-point point-map coordinates into the bit codes used here (axis order, bit order, thresholds) deterministically and with one code per item. No float error bound is proved by the kernel."
+    },
+    {
+      "obligation": "fixed code length",
+      "detail": "That every runtime code has at least as many bits as the deepest prefix depth reported, so the length premise of prefix_count_double / prefix_count_pow holds."
+    },
+    {
+      "obligation": "gain numerators",
+      "detail": "That the per-axis gains and threshold supplied to focalDim are exact numerators over one common positive denominator, computed from the observed ladder. The gain definition itself is not proved meaningful."
+    },
+    {
+      "obligation": "observed ladder",
+      "detail": "That the reported ladder values (e.g. 2,4,8,16,30,49,79,95,116) are the distinct-prefix counts of the actual corpus codes. The kernel only proves that any such ladder is monotone, at most doubles per bit, and is capped by 2^d and by the item count."
+    }
+  ],
+  "nonclaims": [
+    "Nothing about floating point is proved: no float error bound, rounding behaviour, or float-to-bit correspondence.",
+    "Nothing about PCA, principal axes, eigen-decompositions, singular values, or variance-explained ratios is proved.",
+    "Nothing about covering numbers, packing numbers, metric entropy, or box-counting dimension of real point sets is proved; all statements are exact combinatorics on finite lists of bit lists and Nat gains.",
+    "No claim that any observed ladder attains the 2^d capacity bound, or that focalDim coincides with any intrinsic, fractal, or effective dimension.",
+    "No probabilistic certificate, confidence interval, significance claim, or calibration claim is proved.",
+    "No claim about prediction accuracy, forecasting skill, ranking quality, or semantic task grading.",
+    "A checked identity here is not evidence that the runtime diagnostic is correctly wired; see runtime_verified_not_lean_proved."
+  ],
+  "statement_pinning": {
+    "schema": "statement-pins/1",
+    "pin": "sha256 of the normalized Lean statement text",
+    "normalization": "Lean comments stripped (/- -/ nested blocks, -- line); string literals respected; statement = source text between the declaration name and the first top-level ':=' (or the first top-level match-arm '|' line for pattern proofs); whitespace runs collapsed to single spaces; proof text excluded.",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
+    "pinned_from_commit": "7d095ae2 (base; FocalBounds.lean uncommitted)",
+    "pinned_from_source": "yubiOS/papers/data/lean/FocalBounds.lean"
+  },
+  "definitions": {
+    "schema": "commands-v2",
+    "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
+    "hash": "1e0196c4b2188f35a2473d4da913ac228f37b1785f9f99c7e6f2ad1963e147f0",
+    "count": 57,
+    "decls": {
+      "#print:axioms": "2505636121559eefb141262ee141894ea1fc8f06ff0c87b0fee9e1bcf647bf95",
+      "#print:axioms#10": "21ca790c7a920248346650bce914538feb556413471e9cb0624b1af0dc06b838",
+      "#print:axioms#11": "f014043f5e4fee3e7d23aff9c0abbc49a80071c95b3f0754c74663727b5c91ef",
+      "#print:axioms#12": "94f6f03e8a1408daf2ada8a174469e9d7765ea4db0f590f19b976fb498340a6c",
+      "#print:axioms#13": "7ce1d116cbf316e5f380d3ccf413bf8a00caf9acfb7f379ee165e2b98d639f58",
+      "#print:axioms#14": "54021fb3f5375f6ce0366c6b36d81377eb283e73bb6510708d088ca35c47fcdf",
+      "#print:axioms#15": "afc7b93d3e544d29e00ad4080954c093eda8c8d9b1fd0d6aa09c8fb3336d5938",
+      "#print:axioms#16": "b960703989a797cbba63dd7948232970f18343a2c9a0861ace6c2112874b584b",
+      "#print:axioms#17": "53693e9f34a7d6eb62f0284d2f1aad8e78f269107a1815d7c9cc66e5e53f78e7",
+      "#print:axioms#18": "147d1b274bb8a9f6c07c4c490558b9e701580f20b3c6cd4d17a6c05ba8a024ed",
+      "#print:axioms#19": "8a8410c6913e50cbce496e6b2f93a67692abd3a55908b76c1e12f4837d1f05e2",
+      "#print:axioms#2": "f4f13b62c7368ff87b02e0c242854629a6b724e1b58911ee3ad0f33dffb4fb59",
+      "#print:axioms#20": "94214e3fc960f273ad7f2750cb18da786c5cfe54f82e799d727c8538e8d95661",
+      "#print:axioms#21": "6724d55b1373208118d791b4599e83cfc33a3072d663fc94c8adc1f0c957fe8d",
+      "#print:axioms#22": "78a617e5eb82dafcbfccfae8c0c1e879cba752c409c3c9a573a0f9887725a8e3",
+      "#print:axioms#23": "ea026f15674b388d4e2bc8dc9f389efe6ef4648dc356cf18dc66c53f34358ae8",
+      "#print:axioms#24": "d67994d631446cd0ade4e47efd79c8c8890f7a16950031bda44863f01641638c",
+      "#print:axioms#25": "6b6d021781b1c8d2930be2593a021bc3e137c48b62ded2474e8a6acf4c982d23",
+      "#print:axioms#3": "4deb78fd100a7ba85c5b403878ee45d55da87ee8a153dfdb8dae7a9ebf70e2bc",
+      "#print:axioms#4": "2983c27b8f264c2c1de195ec0b6c7400dfa57714a2b537fc4716e184e28fca72",
+      "#print:axioms#5": "db2b4448a39cd4cc055a9d305291bed4b2c96ff3e54310b8434a03da06fa5b49",
+      "#print:axioms#6": "4854a9abbdfd52844a63ed538042cb878311c522616c37c531ee08edb371dfef",
+      "#print:axioms#7": "1c0c7a7d3bfd8fd6f805ae275d84e0acd68efc59fa445ae50c50acde3d4d06e2",
+      "#print:axioms#8": "71f474818d7e33f474fe73686e805e7cd453c73db67d5b78e7a300fdc54190ad",
+      "#print:axioms#9": "9aa09e317d8727b51c517bb95c04b37f07065595ce07957fba1f470e443a561c",
+      "def:dedup": "59f0ec15d0de0b75baecb143def3094819251b6071534076e679c2a01adcb3a7",
+      "def:distinctCount": "a01091d66d968169fb1f457bb110615206a0744b0eef6f1b11e3c383c14b82ad",
+      "def:focalDim": "6460b8677ad3af771c239cb08192704cff0dd50945a227805e23722e8b8a26d9",
+      "def:prefixCount": "0b163768ea76d658d473c59c53971032a5e148a59cb62111fd663a30dee920d3",
+      "def:recode": "0f69fa4b6a0f6f7cc35e82664350428459dcb56cef0cc1696a387a44181e2381",
+      "end:FocalBounds": "883878f9c31a874cce8557b8b58663c6b1f1de33ff044dd6bbe6c914ff527cc0",
+      "namespace:FocalBounds": "4581b94c8df781b00f12f0c972db2a2d160bb72ed370ed49f5a28c575f11a15f",
+      "theorem:antitone_drop": "95b6ff7d1a13d6c85da5f0951ce13aba0e6ab7bf2ce08d19507b204632d22527",
+      "theorem:antitone_stabilizes": "40083d3f48663c4009d86c19c09721032be5a1ea64df2b930c45ec8d871c574c",
+      "theorem:dedup_length_le": "ee9011de4746971228f6790730817b74352129c9dc393fc12bd4234d6d8d93c0",
+      "theorem:dedup_nodup": "b30b292e26773ff432c47ba9c8db3561ac5f0dc9afde361dabfafc197ee7b0fe",
+      "theorem:distinctCount_congr": "f7d31e949891ece53223aa6adb4f630425dda60fe2ed5920128595f9844ff733",
+      "theorem:distinctCount_le_length": "86ccd40f73900c27d2a02a3742a6a746d1dbff92e722e83503e765530cce4cc6",
+      "theorem:distinctCount_map_le": "99cff2a554f4168d324c9c0d26f01849a50987128d99f8639a25ba2aca8056ee",
+      "theorem:distinctCount_perm": "111cb4e8844a91807cf57e9ff10ff02bafe3eeb8b4e6de90251de4b2acb389cb",
+      "theorem:distinctCount_two_choice": "0cfc360d9764825442afdce65fd2878798d9a9ddff205818c8943e68eceb7116",
+      "theorem:focalDim_le_length": "76c41cf8f20610f2504cb1bf20b17a1b3b57883e62f71eafaee9a0056258f014",
+      "theorem:focalDim_maximal": "02f8add09a8cb18160253f71f0fa5b981cb1216d88feec757c9ff9c22e48438a",
+      "theorem:focalDim_prefix_meets": "50903ca3161c3c3790a844e67581760f9f2b56b523bbe5174e7346bb73e51133",
+      "theorem:focalDim_refreeze_fixed": "11cfbdaeefb0886cca190432bd1fbe1c429f864febd81abc63d303ac0f2c934c",
+      "theorem:focalDim_stop_fails": "184e9fa923a83ec4a5b73532a77360b1ac35971c9622bc11a8441f77f000cbec",
+      "theorem:focalDim_take_self": "5c7b562ae96df226a281a014152917f2f48926570725d4b88bdfd443a72cda39",
+      "theorem:mem_dedup": "744bb3e798c274f952157e62742a3d1b95553ca00f886f50bedb882b4b798c7d",
+      "theorem:nodup_subset_length_le": "e4938c7f048a0aa4c338cd6f40d01ffe112ae31a228217b85caf31385a4f55fc",
+      "theorem:prefix_count_double": "649713c3ed52293bdf798fd0be6004c6f69bcf49683d41dd1bd6a58a93312c53",
+      "theorem:prefix_count_le_length": "f0b9c3c31b040b488a957d16df64309389cfb14c2837d3ac8c6a2cb031628ece",
+      "theorem:prefix_count_mono": "eef9f2bf9d528249155e1f5fedf74dd3a560a0e42d902ec265dd464439fa720f",
+      "theorem:prefix_count_mono_le": "5d4ab008f1be036d4caad566da280726236d8f2a5cd94f51321f524ce65f5634",
+      "theorem:prefix_count_pow": "bd46149e8b181d3cb857c55942db5b25d9081c49f28ccb377f61bcea906c5ca5",
+      "theorem:prefix_count_zero_le_one": "1a12bac7b10b56e64a3f18aa658b04f48fd7d6c64ef75db9024ed33d6c09647b",
+      "theorem:recode_count_antitone": "83fedde45c01a12912ef0be1b284873e4f11717133a9067c69ed540771001ae8",
+      "theorem:recode_stabilizes": "23286a543a7ddc1dbb1d21138bfe3b1fbbd3224b0260943d3d185c06b2dc4bf2"
+    },
+    "pinned_from_commit": "7d5ee590a55e"
+  }
+}

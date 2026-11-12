@@ -1,0 +1,1005 @@
+{
+ "items": 3232,
+ "distinct_patterns": 135,
+ "instrument_classes": 116,
+ "largest_class": 128,
+ "unresolvable_pairs": 74064,
+ "prefix_counts": [
+  2,
+  4,
+  8,
+  16,
+  30,
+  49,
+  79,
+  95,
+  116
+ ],
+ "pca_var": [
+  0.2864,
+  0.2784,
+  0.2566,
+  0.2393,
+  0.2188,
+  0.2171,
+  0.1449,
+  0.0125,
+  0.0018
+ ],
+ "top2_share": 0.3411,
+ "axis8_9_loading": [
+  0.98,
+  0.982
+ ],
+ "sat_means": [
+  0.987,
+  0.998
+ ],
+ "sat_zero_items": [
+  43,
+  7
+ ],
+ "informative_combos": 128,
+ "D_real": [
+  [
+   1.585,
+   1.1,
+   1.035
+  ],
+  [
+   2.585,
+   2.102,
+   1.786
+  ],
+  [
+   3.322,
+   2.944,
+   2.682
+  ],
+  [
+   4.322,
+   3.883,
+   3.629
+  ],
+  [
+   5.044,
+   4.577,
+   4.274
+  ],
+  [
+   6.0,
+   5.506,
+   5.189
+  ],
+  [
+   7.0,
+   6.568,
+   6.24
+  ],
+  [
+   7.055,
+   6.6,
+   6.263
+  ],
+  [
+   7.077,
+   6.606,
+   6.265
+  ]
+ ],
+ "gain_real": {
+  "D0": [
+   1.585,
+   1.0,
+   0.737,
+   1.0,
+   0.722,
+   0.956,
+   1.0,
+   0.055,
+   0.022
+  ],
+  "D1": [
+   1.1,
+   1.002,
+   0.842,
+   0.939,
+   0.694,
+   0.928,
+   1.063,
+   0.031,
+   0.007
+  ],
+  "D2": [
+   1.035,
+   0.751,
+   0.896,
+   0.947,
+   0.645,
+   0.915,
+   1.051,
+   0.023,
+   0.002
+  ]
+ },
+ "gain_null_cb_mean": [
+  1.585,
+  1.029,
+  0.768,
+  0.692,
+  0.841,
+  1.084,
+  0.99,
+  0.34,
+  0.057
+ ],
+ "gain_null_cb_sd": [
+  0.0,
+  0.139,
+  0.246,
+  0.236,
+  0.184,
+  0.158,
+  0.004,
+  0.026,
+  0.007
+ ],
+ "axis8": {
+  "real": 0.055,
+  "cb_mean": 0.34,
+  "cb_sd": 0.026,
+  "cb_z": -11.0,
+  "cb_n": 20,
+  "cp_mean": 0.342,
+  "cp_sd": 0.021,
+  "cp_z": -13.4,
+  "cp_n": 50
+ },
+ "renyi_n7": {
+  "real": [
+   7.0,
+   6.568,
+   6.24
+  ],
+  "cb_mean": [
+   6.99,
+   6.634,
+   6.334
+  ],
+  "cb_sd": [
+   0.004,
+   0.004,
+   0.008
+  ],
+  "z": [
+   2.3,
+   -15.2,
+   -12.3
+  ]
+ },
+ "renyi_n9": {
+  "real": [
+   7.077,
+   6.606,
+   6.265
+  ],
+  "cb_mean": [
+   7.388,
+   6.726,
+   6.376
+  ],
+  "cb_sd": [
+   0.025,
+   0.005,
+   0.007
+  ],
+  "z": [
+   -12.4,
+   -26.3,
+   -15.1
+  ],
+  "cb_count_mean": 167.5,
+  "cp_count_mean": 168.9
+ },
+ "renyi_inst": [
+  6.858,
+  6.399,
+  6.109
+ ],
+ "renyi_exact": [
+  7.077,
+  6.606,
+  6.265
+ ],
+ "tau_band_D0": [
+  0.055,
+  0.722
+ ],
+ "tau_band_D1": [
+  0.031,
+  0.694
+ ],
+ "plateau_n7": [
+  0.074,
+  0.942
+ ],
+ "d7_map": {
+  "frame_id": "76b98c0e2091d925",
+  "classes": {
+   "count": 79,
+   "largest": 181,
+   "unresolvable_pairs": 95790
+  },
+  "isolated": 0,
+  "v2": 0.38403,
+  "null_z": 33.88
+ },
+ "d9_map": {
+  "frame_id": "77360296af046f8d",
+  "run_fingerprint": "fba40c7b482d4e2e",
+  "v2": 0.39573,
+  "null_z": 70.36,
+  "null_E0": 0.24046,
+  "null_SD0": 0.002207
+ },
+ "certified": {
+  "0.0000": [
+   114,
+   77
+  ],
+  "0.0010": [
+   99,
+   76
+  ],
+  "0.0013": [
+   99,
+   76
+  ],
+  "0.0016": [
+   94,
+   76
+  ],
+  "0.0020": [
+   91,
+   76
+  ],
+  "0.0026": [
+   88,
+   74
+  ],
+  "0.0033": [
+   88,
+   74
+  ],
+  "0.0042": [
+   87,
+   73
+  ],
+  "0.0053": [
+   83,
+   72
+  ],
+  "0.0067": [
+   83,
+   72
+  ],
+  "0.0085": [
+   80,
+   72
+  ],
+  "0.0108": [
+   77,
+   70
+  ],
+  "0.0137": [
+   77,
+   69
+  ],
+  "0.0173": [
+   72,
+   67
+  ],
+  "0.0220": [
+   69,
+   65
+  ],
+  "0.0279": [
+   67,
+   63
+  ],
+  "0.0353": [
+   62,
+   58
+  ],
+  "0.0448": [
+   57,
+   53
+  ],
+  "0.0568": [
+   53,
+   49
+  ],
+  "0.0721": [
+   44,
+   44
+  ],
+  "0.0914": [
+   37,
+   37
+  ],
+  "0.1159": [
+   31,
+   29
+  ],
+  "0.1471": [
+   24,
+   23
+  ],
+  "0.1865": [
+   15,
+   15
+  ],
+  "0.2365": [
+   7,
+   8
+  ],
+  "0.3000": [
+   5,
+   5
+  ]
+ },
+ "median_abs_margin": [
+  0.4563,
+  0.3656,
+  0.4065,
+  0.3697,
+  0.3156,
+  0.3206,
+  0.3346,
+  0.024,
+  0.0017
+ ],
+ "globes": {
+  "deployed": {
+   "distinct": 116,
+   "N095_maxR": 75,
+   "N095_RMS": 79,
+   "N095_star": 80,
+   "N002": 94,
+   "isolated": 2,
+   "rho": 0.314,
+   "s_maxR": 0.342,
+   "s_RMS": 0.53,
+   "s_star": 0.746
+  },
+  "focal": {
+   "distinct": 135,
+   "N095_maxR": 33,
+   "N095_RMS": 61,
+   "N095_star": 64,
+   "N002": 133,
+   "isolated": 0,
+   "rho": 0.438,
+   "s_maxR": 0.378,
+   "s_RMS": 0.707,
+   "s_star": 0.898
+  },
+  "d7": {
+   "distinct": 79,
+   "N095": 71,
+   "rho": 0.3
+  }
+ },
+ "pca2_share_focal": 0.286,
+ "diag": {
+  "d9": {
+   "spectra": {
+    "S2_parseval": [
+     0.4201,
+     0.2519,
+     0.0608,
+     0.2672
+    ],
+    "S2_even": 0.4809,
+    "S2_odd": 0.5191,
+    "rank0_2_block": 0.4809,
+    "rank1_block": 0.2519,
+    "admitted": false
+   },
+   "radius": [
+    3,
+    2,
+    2,
+    2,
+    2
+   ],
+   "rayleigh": {
+    "components": 73,
+    "isolates": 4,
+    "largest": 58,
+    "lambda2": 58,
+    "edges": 15176
+   },
+   "admission": {
+    "rayleigh": true,
+    "axis_trial": true,
+    "spectra": false,
+    "radius_profile": true,
+    "azimuth": false
+   },
+   "axis_total_z": 33.8,
+   "axis_excl": 9,
+   "axis_n": 9
+  },
+  "d7": {
+   "spectra": {
+    "S2_parseval": [
+     0.4393,
+     0.3755,
+     0.0138,
+     0.1714
+    ],
+    "S2_even": 0.4531,
+    "S2_odd": 0.5469,
+    "rank0_2_block": 0.4531,
+    "rank1_block": 0.3755,
+    "admitted": false
+   },
+   "radius": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "rayleigh": {
+    "components": 71,
+    "isolates": 2,
+    "largest": 75,
+    "lambda2": 75,
+    "edges": 14716
+   },
+   "admission": {
+    "rayleigh": true,
+    "axis_trial": true,
+    "spectra": true,
+    "radius_profile": false,
+    "azimuth": false
+   },
+   "axis_total_z": 16.24,
+   "axis_excl": 7,
+   "axis_n": 7
+  },
+  "focal": {
+   "spectra": {
+    "S2_parseval": [
+     0.6963,
+     0.0487,
+     0.2085,
+     0.0465
+    ],
+    "S2_even": 0.9048,
+    "S2_odd": 0.0952,
+    "rank0_2_block": 0.9048,
+    "rank1_block": 0.0487,
+    "admitted": false
+   },
+   "radius": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "rayleigh": {
+    "components": 47,
+    "isolates": 2,
+    "largest": 104,
+    "lambda2": 2.856538,
+    "edges": 18601
+   },
+   "admission": {
+    "rayleigh": true,
+    "axis_trial": true,
+    "spectra": true,
+    "radius_profile": false,
+    "azimuth": false
+   },
+   "axis_total_z": 16.24,
+   "axis_excl": 7,
+   "axis_n": 7
+  }
+ },
+ "axis_redundancy_z_d9": [],
+ "axis_redundancy_d9": [
+  {
+   "axis": 1,
+   "hits": 1145,
+   "null_mean": 664.6,
+   "z": 19.6
+  },
+  {
+   "axis": 2,
+   "hits": 1096.5,
+   "null_mean": 659.2,
+   "z": 19.44
+  },
+  {
+   "axis": 3,
+   "hits": 1094,
+   "null_mean": 662.2,
+   "z": 19.77
+  },
+  {
+   "axis": 4,
+   "hits": 980,
+   "null_mean": 665.2,
+   "z": 14.13
+  },
+  {
+   "axis": 5,
+   "hits": 1071,
+   "null_mean": 663.2,
+   "z": 19.32
+  },
+  {
+   "axis": 6,
+   "hits": 1061.5,
+   "null_mean": 654.8,
+   "z": 19.56
+  },
+  {
+   "axis": 7,
+   "hits": 964,
+   "null_mean": 653.7,
+   "z": 14.2
+  },
+  {
+   "axis": 8,
+   "hits": 1114,
+   "null_mean": 660.4,
+   "z": 21.32
+  },
+  {
+   "axis": 9,
+   "hits": 1108,
+   "null_mean": 666.7,
+   "z": 24.51
+  }
+ ],
+ "rayleigh_null": {
+  "d9": {
+   "n": 40,
+   "mean": 109.575,
+   "sd": 1.7525,
+   "min": 106,
+   "max": 114
+  },
+  "d7": {
+   "n": 40,
+   "mean": 97.925,
+   "sd": 0.2667,
+   "min": 97,
+   "max": 98
+  }
+ },
+ "live": {
+  "api": "https://steady-orbit.systems-a.workers.dev",
+  "date": "2026-11-10",
+  "maps": [
+   {
+    "id": 598,
+    "created_at": "2026-10-29T15:33:43.817Z",
+    "rule_hash": "77360296af046f8d",
+    "seed": 20260906,
+    "n": 3232,
+    "dim": 9,
+    "d": 9,
+    "v2": 0.39573,
+    "z_null": 70.36,
+    "verdict": "excluded at the resolution of this null",
+    "classes": 116,
+    "identity_failures": 0,
+    "measurement_red": 1,
+    "source": "vectors",
+    "corpus": "harness/experience-library"
+   },
+   {
+    "id": 596,
+    "created_at": "2026-10-29T12:54:01.653Z",
+    "rule_hash": "30cedaa0fb4543aa",
+    "seed": 20260906,
+    "n": 52,
+    "dim": 768,
+    "d": 9,
+    "v2": 0.34519,
+    "z_null": -0.14,
+    "verdict": "not-excluded",
+    "classes": 45,
+    "identity_failures": 0,
+    "measurement_red": 2,
+    "source": "texts:@cf/baai/bge-base-en-v1.5",
+    "corpus": "policy/jev-policy.json"
+   },
+   {
+    "id": 595,
+    "created_at": "2026-10-29T12:53:56.620Z",
+    "rule_hash": "46d6cbe5da8a8e84",
+    "seed": 20260906,
+    "n": 135,
+    "dim": 768,
+    "d": 9,
+    "v2": 0.29788,
+    "z_null": 0.26,
+    "verdict": "not-excluded",
+    "classes": 108,
+    "identity_failures": 0,
+    "measurement_red": 2,
+    "source": "texts:@cf/baai/bge-base-en-v1.5",
+    "corpus": "harness/skills"
+   }
+  ],
+  "unauth_status": 401,
+  "m598_margins_maxdiff": 0.0,
+  "m598_frame_id": "77360296af046f8d",
+  "m598_fp": "fba40c7b482d4e2e",
+  "m598_422": {
+   "axis-redundancy": {
+    "error": {
+     "status": 422,
+     "message": "axis trial is O(N^2 d K) and is limited to N <= 1200 (map has 3232 rows)",
+     "max_n": 1200
+    }
+   },
+   "rayleigh": {
+    "error": {
+     "status": 422,
+     "message": "rayleigh diagnostics are limited to N <= 1200 (map has 3232)"
+    }
+   },
+   "azimuth": {
+    "error": {
+     "status": 422,
+     "message": "azimuth trials are limited to N <= 1200"
+    }
+   },
+   "admission": {
+    "error": {
+     "status": 422,
+     "message": "admission trials are limited to N <= 1200"
+    }
+   }
+  },
+  "parity": {
+   "595:axis-redundancy": {
+    "common": 247,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 0
+   },
+   "595:rayleigh": {
+    "common": 381,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 0
+   },
+   "595:azimuth": {
+    "common": 631,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 8.881784197001252e-15
+   },
+   "595:admission": {
+    "common": 1028,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 1.1546319456101628e-14
+   },
+   "596:axis-redundancy": {
+    "common": 248,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 0
+   },
+   "596:rayleigh": {
+    "common": 264,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 0
+   },
+   "596:azimuth": {
+    "common": 631,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 1.2434497875801753e-14
+   },
+   "596:admission": {
+    "common": 1031,
+    "only_live": 0,
+    "only_local": 0,
+    "mismatch": 0,
+    "max_num": 1.865174681370263e-14
+   }
+  },
+  "parity_total_fields": 4461,
+  "parity_max_abs": 1.865174681370263e-14,
+  "trials": {
+   "595": {
+    "N": 135,
+    "axis_excluded": 2,
+    "axis_total_z": 3.26,
+    "axis_admitted": false,
+    "axis_why": [
+     "verdicts_reproducible_all"
+    ],
+    "axis_excluded_axes": [
+     2,
+     7
+    ],
+    "ray_components": 88,
+    "ray_isolates": 60,
+    "ray_largest": 5,
+    "ray_null_mean": 89.1,
+    "ray_null_sd": 4.7111,
+    "ray_z": -0.23,
+    "iso_null_mean": 59.85,
+    "iso_null_sd": 7.3259,
+    "ray_admitted": true,
+    "az_admitted": false,
+    "admission": {
+     "rayleigh": true,
+     "axis_trial": false,
+     "spectra": true,
+     "radius_profile": true,
+     "azimuth": false
+    }
+   },
+   "596": {
+    "N": 52,
+    "axis_excluded": 5,
+    "axis_total_z": 4.58,
+    "axis_admitted": false,
+    "axis_why": [
+     "verdicts_reproducible_all",
+     "n_at_least_100"
+    ],
+    "axis_excluded_axes": [
+     3,
+     4,
+     5,
+     6,
+     8
+    ],
+    "ray_components": 36,
+    "ray_isolates": 25,
+    "ray_largest": 4,
+    "ray_null_mean": 44.2,
+    "ray_null_sd": 2.5939,
+    "ray_z": -3.16,
+    "iso_null_mean": 37.375,
+    "iso_null_sd": 4.6613,
+    "ray_admitted": false,
+    "az_admitted": false,
+    "admission": {
+     "rayleigh": false,
+     "axis_trial": false,
+     "spectra": false,
+     "radius_profile": false,
+     "azimuth": false
+    }
+   }
+  },
+  "focal": {
+   "598": {
+    "n": 3232,
+    "classes": 116,
+    "ladder": [
+     2,
+     4,
+     8,
+     16,
+     30,
+     49,
+     79,
+     95,
+     116
+    ],
+    "gains": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.907,
+     0.708,
+     0.689,
+     0.266,
+     0.288
+    ],
+    "n_star": 7,
+    "ceiling": 11.658,
+    "D0_at_9": 6.858,
+    "null_ladder_mean": [
+     2.0,
+     4.0,
+     8.0,
+     16.0,
+     32.0,
+     64.0,
+     128.0,
+     255.4,
+     504.0
+    ],
+    "null_ladder_sd": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.5,
+     2.4
+    ],
+    "null_gain_mean": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.997,
+     0.98
+    ],
+    "null_n_star": [
+     9
+    ],
+    "classes_z": -160.5,
+    "bits_match_live_classes": true
+   },
+   "595": {
+    "n": 135,
+    "classes": 108,
+    "ladder": [
+     2,
+     4,
+     8,
+     16,
+     31,
+     52,
+     78,
+     93,
+     108
+    ],
+    "gains": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.954,
+     0.746,
+     0.585,
+     0.254,
+     0.216
+    ],
+    "n_star": 7,
+    "ceiling": 7.077,
+    "D0_at_9": 6.755,
+    "null_ladder_mean": [
+     2.0,
+     4.0,
+     8.0,
+     16.0,
+     31.6,
+     57.6,
+     84.0,
+     105.4,
+     119.4
+    ],
+    "null_ladder_sd": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.7,
+     2.1,
+     2.7,
+     3.3,
+     2.4
+    ],
+    "null_gain_mean": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.979,
+     0.868,
+     0.545,
+     0.327,
+     0.179
+    ],
+    "null_n_star": [
+     6,
+     7
+    ],
+    "classes_z": -4.8,
+    "bits_match_live_classes": true
+   },
+   "596": {
+    "n": 52,
+    "classes": 45,
+    "ladder": [
+     2,
+     4,
+     8,
+     14,
+     23,
+     29,
+     36,
+     40,
+     45
+    ],
+    "gains": [
+     1.0,
+     1.0,
+     1.0,
+     0.807,
+     0.716,
+     0.334,
+     0.312,
+     0.152,
+     0.17
+    ],
+    "n_star": 5,
+    "ceiling": 5.7,
+    "D0_at_9": 5.492,
+    "null_ladder_mean": [
+     2.0,
+     4.0,
+     8.0,
+     15.6,
+     26.9,
+     36.8,
+     44.4,
+     48.0,
+     50.0
+    ],
+    "null_ladder_sd": [
+     0.0,
+     0.0,
+     0.0,
+     0.6,
+     1.4,
+     2.6,
+     2.1,
+     2.1,
+     1.1
+    ],
+    "null_gain_mean": [
+     1.0,
+     1.0,
+     1.0,
+     0.962,
+     0.785,
+     0.451,
+     0.273,
+     0.113,
+     0.061
+    ],
+    "null_n_star": [
+     5,
+     6
+    ],
+    "classes_z": -4.4,
+    "bits_match_live_classes": true
+   }
+  }
+ }
+}

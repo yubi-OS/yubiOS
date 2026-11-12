@@ -162,3 +162,15 @@ Acoustic/optical phonon physics placed against the program, same discipline as t
 - **Named prior art on standby:** if E_ℓ(t) is ever measured non-monotone, that is phonon hydrodynamics / second sound (the Gaunt-coupled non-normal generator is exactly what permits transient growth), not measurement error.
 
 CI: `lean-check.yml` gains the `phonon-dispersion selftest` step; Lean §14 adds `acoustic_sum_rule`, `diatomic_disc`, `gap_closes_iff`, `gap_open_of_ne`, `klemens_condition`, the L=3 Gaunt counts (34/23/41) by `decide`, and `heat_exp_dominates_hamming` — all kernel-checked, no `sorry`.
+
+
+---
+
+## PART III — The Dimensional Focal Point of a Corpus Point Map (2026-11-10, Paper 4)
+
+- **Paper:** `papers/dimensional-focal-point-2026-11-10.tex` (`papers/dimensional-focal-point-2026-11-10.pdf`), figures `papers/charts/dfp_fig1..3.png`, data `papers/data/dimensional-focal-point/`.
+- **Lean 4 (25 theorems):** `papers/data/lean/FocalBounds.lean` + `papers/data/lean/focal-scope.json` (dedup and distinct-count ceiling `distinctCount_map_le`, prefix-count monotonicity/doubling/power/length bounds, `focalDim` soundness/maximality, and one-step refreeze idempotence `focalDim_refreeze_fixed` + contraction stabilization `recode_stabilizes`).
+- **Headline findings on Map #598 (`N = 3,232`, `d = 9`):**
+  1. Exact input recovery from stored per-axis signed margins reproduces `frame_id` `77360296af046f8d` and `run_fingerprint` `fba40c7b482d4e2e`.
+  2. Prefix bit ladder `2, 4, 8, 16, 30, 49, 79, 95, 116` selects focal dimension `n* = 7` at `tau = 0.5` bits (stable across `(0.055, 0.722)` bits), with `focal-point-corpus-specific` separation against the two-seed curveball null.
+  3. Stereographic lift scale `s` is the Möbius lens power on `S^2`; RMS rescale recovers `>= 95%` of optimal packing count `N(0.095)` across globes.

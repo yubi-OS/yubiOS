@@ -25,7 +25,7 @@ jobs:
 
       # Forbidden-token stopgap (round-2 Lane C, expanded round-3 Lane A) —
       # source-side complement to the kernel-side axiom coverage gate below.
-      # Fails if any of the five lean sources uses axiom, native_decide,
+      # Fails if any of the six lean sources uses axiom, native_decide,
       # macro[_rules], syntax, elab[_rules], import, set_option, run_cmd,
       # #eval, attribute, notation, or infix[lr] OUTSIDE comments and string
       # literals (whole-word, identifier-boundary-aware match; comments
@@ -43,7 +43,8 @@ jobs:
             papers/data/lean/WayfinderBounds.lean \
             papers/data/lean/RadiusBounds.lean \
             papers/data/lean/RayleighBounds.lean \
-            papers/data/lean/AzimuthBounds.lean
+            papers/data/lean/AzimuthBounds.lean \
+            papers/data/lean/FocalBounds.lean
 
       - name: Install Lean 4.33.0 (pinned SHA256 release tarball, no installer script)
         run: |
@@ -85,7 +86,8 @@ jobs:
             papers/data/lean/WayfinderBounds.lean \
             papers/data/lean/RadiusBounds.lean \
             papers/data/lean/RayleighBounds.lean \
-            papers/data/lean/AzimuthBounds.lean; do
+            papers/data/lean/AzimuthBounds.lean \
+            papers/data/lean/FocalBounds.lean; do
             if ! lean -DwarningAsError=true "$f" > /tmp/sorry-gate.out 2>&1; then
               echo "NO_SORRY_FAIL: $f"
               cat /tmp/sorry-gate.out
@@ -111,13 +113,13 @@ jobs:
             echo "LEANCHECKER_MISSING: leanchecker not found in the pinned lean-4.33.0 toolchain (expected since v4.28.0)" >&2
             exit 1
           }
-          # Compile the five files to oleans from a flat source dir so the
+          # Compile the six files to oleans from a flat source dir so the
           # module name is unambiguously the file basename (the files import
           # nothing beyond the Lean prelude, so a flat layout matches their
           # actual module structure).
           rm -rf /tmp/leanchecker-src /tmp/leanchecker-oleans
           mkdir -p /tmp/leanchecker-src /tmp/leanchecker-oleans
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds; do
             cp "papers/data/lean/${base}.lean" "/tmp/leanchecker-src/${base}.lean"
             if ! (cd /tmp/leanchecker-src && lean -o "/tmp/leanchecker-oleans/${base}.olean" "${base}.lean") > "/tmp/leanchecker-src/${base}-olean.err" 2>&1; then
               echo "LEANCHECKER_OLEAN_FAIL: ${base}" >&2
@@ -126,7 +128,7 @@ jobs:
             fi
           done
           export LEAN_PATH="/tmp/leanchecker-oleans"
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds; do
             echo "== leanchecker --fresh ${base} =="
             if ! leanchecker --fresh "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
               echo "LEANCHECKER_FAIL: ${base}" >&2
@@ -135,21 +137,22 @@ jobs:
             fi
             cat "/tmp/leanchecker-${base}.out"
           done
-          echo "LEANCHECKER_OK: five modules re-type-checked via fresh kernel environment replay"
+          echo "LEANCHECKER_OK: six modules re-type-checked via fresh kernel environment replay"
 
       # Axiom coverage gate (Lane A, round 2) — runs after the pinned-tarball
       # lean install step (no elan in this workflow), so `lean` is on PATH.
-      - name: Axiom coverage gate — every theorem in all five lean files
+      - name: Axiom coverage gate — every theorem in all six lean files
         run: |
           set -euo pipefail
           PERMITTED="propext,Classical.choice,Quot.sound"
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds; do
             case "${base}" in
               CurvedCorpus)    manifest="curvedcorpus" ;;
               WayfinderBounds) manifest="wayfinder" ;;
               RadiusBounds)    manifest="radius" ;;
               RayleighBounds)  manifest="rayleigh" ;;
               AzimuthBounds)   manifest="azimuth" ;;
+              FocalBounds)     manifest="focal" ;;
             esac
             echo "== axiom coverage: ${base}.lean (manifest: ${manifest}-scope.json) =="
 
@@ -184,7 +187,7 @@ jobs:
               --mode enumerate \
               --require-coverage "papers/data/lean/${manifest}-scope.json"
           done
-          echo "AXIOM_COVERAGE_GATE_OK: all five lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
+          echo "AXIOM_COVERAGE_GATE_OK: all six lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
 
 
       - name: Check WayfinderBounds.lean (kernel, pinned toolchain)
@@ -279,6 +282,29 @@ jobs:
             --axioms /tmp/rayleigh-axioms.txt \
             --manifest papers/data/lean/rayleigh-scope.json
 
+      - name: Check FocalBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/FocalBounds.lean > /tmp/focal-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/FocalBounds.lean"
+            cat /tmp/focal-axioms.txt
+            exit 1
+          }
+          cat /tmp/focal-axioms.txt
+          echo "LEAN_OK: papers/data/lean/FocalBounds.lean checks with no sorry"
+
+      - name: Validate focal scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 -c "import json; d=json.load(open('papers/data/lean/focal-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('FOCAL_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+
+      - name: Assert printed focal axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/focal-axioms.txt \
+            --manifest papers/data/lean/focal-scope.json
+
       - name: Check CurvedCorpus.lean (statement pins via scope manifest)
         run: |
           set -euo pipefail
@@ -326,6 +352,7 @@ jobs:
           node tools/point-map/test-radius.mjs
           node tools/point-map/test-radius-extra.mjs
           node tools/point-map/test-limits.mjs
+          node tools/point-map/test-focal-point.mjs
           node tools/point-map/test-control-outcomes.mjs
           node tools/point-map/test-axis-consistency.mjs
           node tools/point-map/test-placement.mjs

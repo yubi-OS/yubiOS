@@ -52,8 +52,11 @@ test("rejects N below 10 and above 4000", () => {
   const big = PM.synth(4001, 2, 3);
   throws(() => PM.runMap(big, opts({ names: names(4001) })), /10\.\.4000|N must/i);
 });
-test("rejects D below 2 and above 768", () => {
-  throws(() => PM.runMap(X.map(r => [r[0]]), opts()), /D must|2\.\.768/i);
+test("rejects D below 2 and above 1024, accepts D=1024", () => {
+  throws(() => PM.runMap(X.map(r => [r[0]]), opts()), /D must|2\.\.1024/i);
+  throws(() => PM.runMap(PM.synth(12, 1025, 1), opts({ names: names(12) })), /D must|2\.\.1024/i);
+  const m1024 = PM.runMap(PM.synth(12, 1024, 1), opts({ names: names(12), K: 2, steps: 500 }));
+  assert.strictEqual(m1024.D, 1024);
 });
 test("rejects K=1 and non-integer / out-of-range K", () => {
   throws(() => PM.runMap(X, opts({ K: 1 })), /K/);
