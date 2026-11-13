@@ -1,4 +1,4 @@
-name: FLASH - Device Signed UKI + bootc SD/Maskrom Flash + Post-Install VM Enrollment
+name: yubiOS Device Flasher & Signed UKI E2E (SD + YubiKey 9a + VM Verify)
 
 on:
   workflow_dispatch:
@@ -12,29 +12,19 @@ on:
           - production
           - test
       board:
-        description: 'Target board firmware flow to run'
+        description: 'Target board firmware to write at sector 64 of the SD card'
         required: true
-        default: 'both-rk3588-and-pinetab2'
+        default: 'pinetab2-rk3566'
         type: choice
         options:
-          - both-rk3588-and-pinetab2
-          - rock5b-rk3588
           - pinetab2-rk3566
+          - rock5b-rk3588
           - rockpro64-rk3399
       sd_device:
         description: 'Removable SD card block device on ubuntu host (guarded against /, /boot, mmcblk0, nvme0n1)'
         required: true
         default: '/dev/sda'
         type: string
-      flash_mode:
-        description: 'Flash mode: sd_and_maskrom, sd_direct, or maskrom_usb'
-        required: true
-        default: 'sd_and_maskrom'
-        type: choice
-        options:
-          - sd_and_maskrom
-          - sd_direct
-          - maskrom_usb
       image:
         description: 'yubiOS bootc OCI image ref to install'
         required: false
@@ -56,20 +46,10 @@ on:
           - never
           - always
       run_post_install_vm_boot:
-        description: 'Boot the provisioned SD card in KVM on ubuntu with swtpm + physical YubiKey USB passthrough after install'
+        description: 'Boot the provisioned disk image in KVM on ubuntu with swtpm + physical YubiKey USB passthrough after SD flash'
         required: false
         default: true
         type: boolean
-      serial_device:
-        description: 'UART serial device connected to target board'
-        required: false
-        default: '/dev/ttyUSB0'
-        type: string
-      serial_baud:
-        description: 'UART baud rate (Rockchip default: 1500000)'
-        required: false
-        default: '1500000'
-        type: string
 
 permissions:
   contents: read
@@ -77,7 +57,7 @@ permissions:
 
 jobs:
   flash-device-e2e:
-    name: Flash & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }}) on ubuntu
+    name: Flash SD & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }}) on ubuntu
     runs-on: [self-hosted, Linux, ARM64, HIGH-MEM]
     timeout-minutes: 90
     steps:
@@ -87,24 +67,21 @@ jobs:
       - name: Checkout yubiOS
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
 
-      - name: Run signed UKI + bootc SD/Maskrom flash + post-install VM boot
+      - name: Run signed UKI + bootc SD flash + post-install VM boot
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER }}
           FLASH_SIGNKEY: ${{ inputs.SIGNKEY }}
           FLASH_BOARD: ${{ inputs.board }}
           FLASH_SD_DEVICE: ${{ inputs.sd_device }}
-          FLASH_MODE: ${{ inputs.flash_mode }}
           FLASH_OS_IMAGE: ${{ inputs.image }}
           FLASH_SIGN_WITH_YUBIKEY: ${{ inputs.sign_with_yubikey }}
           FLASH_PIV_TOUCH_POLICY: ${{ inputs.piv_touch_policy }}
           FLASH_RUN_POST_VM: ${{ inputs.run_post_install_vm_boot }}
-          FLASH_SERIAL_DEV: ${{ inputs.serial_device }}
-          FLASH_SERIAL_BAUD: ${{ inputs.serial_baud }}
         run: |
           chmod +x scripts/flash-device-e2e.sh
           bash scripts/flash-device-e2e.sh
 
-      - name: Upload full VM boot & PineTab2 UART logs
+      - name: Upload full VM boot logs
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.1 — see PINNED.md
         with:

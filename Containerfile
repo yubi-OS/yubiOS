@@ -164,6 +164,9 @@ RUN set -- /usr/lib/modules/*/ && \
     dracut --no-hostonly --force --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \
     { ! grep -q "/vfio\.ko" /tmp/yubiOS-initramfs-listing.txt; } && \
+    grep -q "optee\.ko" /tmp/yubiOS-initramfs-listing.txt && \
+    grep -q "tpm_ftpm_tee\.ko" /tmp/yubiOS-initramfs-listing.txt && \
+    grep -q "usr/lib/modules-load.d/yubiOS-optee-ftpm.conf" /tmp/yubiOS-initramfs-listing.txt && \
     rm -f /tmp/yubiOS-initramfs-listing.txt
 
 # Build leftovers: /run and /tmp must be empty in a bootc image (lint nonempty-run-tmp), and the
