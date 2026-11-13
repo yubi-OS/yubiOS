@@ -338,7 +338,7 @@ EOF
   sudo "${THROTTLE[@]}" mkfs.vfat -F 32 -n EFI "$p1"
   sudo "${THROTTLE[@]}" mkfs.ext4 -F -q -O verity,^has_journal -E lazy_itable_init=1 -L yubiOS-root "$p2"
   sudo mkdir -p "$MNT_DIR"
-  sudo mount -o noatime,nobarrier,commit=600 "$p2" "$MNT_DIR"
+  sudo mount -o noatime,nobarrier "$p2" "$MNT_DIR"
   sudo install -d -m 0755 "$MNT_DIR/boot"
   sudo mount "$p1" "$MNT_DIR/boot"
 
