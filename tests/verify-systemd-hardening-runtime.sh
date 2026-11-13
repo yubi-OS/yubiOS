@@ -376,9 +376,18 @@ if [ "${HARDENING_SKIP_BATS:-0}" != 1 ]; then
   set +e
   "$ENGINE" run --rm \
     -v "$REPO_ROOT/tests:/yubios-tests:ro" \
+    -v "$REPO_ROOT/usr:/checkout-usr:ro" \
+    -v "$REPO_ROOT/mkosi.conf.d:/mkosi.conf.d:ro" \
     -w / \
     "$IMAGE" bash -c '
       set -u
+      if [ -d /checkout-usr/lib/systemd/system ]; then
+        cp -a /checkout-usr/lib/systemd/system/. /usr/lib/systemd/system/
+      fi
+      if [ -d /checkout-usr/lib/yubiOS ]; then
+        mkdir -p /usr/lib/yubiOS
+        cp -a /checkout-usr/lib/yubiOS/. /usr/lib/yubiOS/
+      fi
       if ! command -v bats >/dev/null 2>&1; then
         if ! dnf -y -q --setopt=install_weak_deps=False install bats >/tmp/dnf.log 2>&1; then
           tail -n 20 /tmp/dnf.log >&2
@@ -397,6 +406,10 @@ if [ "${HARDENING_SKIP_BATS:-0}" != 1 ]; then
     cat "$OUT_DIR/bats.stderr" >&2 || true
     bats_mode=host-against-extracted-rootfs
     if command -v bats >/dev/null 2>&1; then
+      cp -a "$REPO_ROOT/usr/lib/systemd/system/." "$ROOTFS/usr/lib/systemd/system/" 2>/dev/null || true
+      mkdir -p "$ROOTFS/usr/lib/yubiOS" "$ROOTFS/mkosi.conf.d"
+      cp -a "$REPO_ROOT/usr/lib/yubiOS/." "$ROOTFS/usr/lib/yubiOS/" 2>/dev/null || true
+      cp -a "$REPO_ROOT/mkosi.conf.d/." "$ROOTFS/mkosi.conf.d/" 2>/dev/null || true
       host_args=()
       for s in "${BATS_SUITES[@]}"; do
         [ -f "$REPO_ROOT/tests/unit/$s" ] && host_args+=("$REPO_ROOT/tests/unit/$s")
