@@ -486,15 +486,12 @@ if [ "$RUN_POST_VM" = "true" ]; then
     fi
   fi
 
-  QEMU_ACCEL="tcg,thread=multi"
-  QEMU_CPU="max"
+  QEMU_ACCEL_ARGS=(-machine virt,gic-version=3 -accel tcg,thread=multi -cpu cortex-a72)
   if [ -e /dev/kvm ]; then
-    QEMU_ACCEL="kvm:tcg"
-    QEMU_CPU="host"
+    QEMU_ACCEL_ARGS=(-machine virt,gic-version=max -accel kvm -cpu host)
   fi
   sudo "${THROTTLE[@]}" timeout 90 qemu-system-aarch64 \
-    -machine "virt,accel=${QEMU_ACCEL},gic-version=3" \
-    -cpu "$QEMU_CPU" -smp 4 -m 4G \
+    "${QEMU_ACCEL_ARGS[@]}" -smp 4 -m 4G \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
     -drive file="$VM_DRIVE",format=raw,if=virtio,cache=writeback \
@@ -520,6 +517,28 @@ fi
 # ---------------------------------------------------------------------------
 if [ "$FLASH_MODE" = "maskrom_usb" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
   log "Stage 7: PineTab2 (RK3566) Firmware Verification + Maskrom USB (2207:350a) & UART ($SERIAL_DEV @ $SERIAL_BAUD)"
+  if [ ! -f "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin" ]; then
+    sudo rm -f "$PODMAN_RAM_IMG"
+    truncate -s 2G "$PODMAN_RAM_IMG"
+    mkfs.ext4 -F -q -O ^has_journal "$PODMAN_RAM_IMG"
+    PODMAN_LOOP="$(sudo losetup --find --show "$PODMAN_RAM_IMG")"
+    sudo mkdir -p /var/lib/containers
+    sudo mount -o noatime "$PODMAN_LOOP" /var/lib/containers
+    if [ -n "${DOCKER_PASSWORD:-}" ]; then
+      printf '%s' "$DOCKER_PASSWORD" | sudo podman login --username 0mniteck42 --password-stdin docker.io >/dev/null
+    fi
+    sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull docker.io/0mniteck/yubios:firmware-pinetab2-rk3566
+    mkdir -p "$FW_DIR/pinetab2-rk3566"
+    sudo "${THROTTLE[@]}" podman create --name fw-pt2 docker.io/0mniteck/yubios:firmware-pinetab2-rk3566 >/dev/null
+    sudo "${THROTTLE[@]}" podman export fw-pt2 | "${THROTTLE[@]}" tar -xf - -C "$FW_DIR/pinetab2-rk3566"
+    sudo podman rm -f fw-pt2 >/dev/null
+    cp -f "$FW_DIR/pinetab2-rk3566/firmware/u-boot-rockchip.bin" "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin"
+    sha256sum "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin" | tee "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin.sha256"
+    sudo umount -l /var/lib/containers 2>/dev/null || true
+    sudo losetup --detach "$PODMAN_LOOP" 2>/dev/null || true
+    PODMAN_LOOP=""
+    sudo rm -f "$PODMAN_RAM_IMG"
+  fi
   if [ -f "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin" ]; then
     echo "PineTab2 (pinetab2-rk3566) u-boot-rockchip.bin ready:"
     cat "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin.sha256"
