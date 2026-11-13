@@ -81,6 +81,9 @@ jobs:
     runs-on: [self-hosted, Linux, ARM64, HIGH-MEM]
     timeout-minutes: 90
     steps:
+      - name: Reclaim workspace before checkout (self-hosted runner can accumulate root-owned files)
+        run: sudo chown -R "$(id -u):$(id -g)" "$GITHUB_WORKSPACE" || true
+
       - name: Checkout yubiOS
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
 
