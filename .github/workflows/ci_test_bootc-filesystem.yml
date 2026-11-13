@@ -212,7 +212,7 @@ jobs:
 
           echo "RESOLVED_IMAGE=$RESOLVED_IMAGE" >> "$GITHUB_ENV"
 
-      - name: Verify strict composefs repository and unsealed BLS deployment
+      - name: Verify strict composefs repository and sealed UKI BLSConfig deployment (OMN-150)
         env:
           ROOT_PART: ${{ steps.disk.outputs.root_part }}
           ESP_PART: ${{ steps.disk.outputs.esp_part }}
@@ -273,57 +273,62 @@ jobs:
 
           bls_count=0
           composefs_digest=''
+          seal_state=''
           while IFS= read -r -d '' entry; do
             bls_count=$((bls_count + 1))
             echo "Inspecting BLS entry: $entry"
             sudo sed -n '1,160p' "$entry"
 
-            options="$(sudo awk '$1 == "options" {sub(/^options[[:space:]]+/, ""); print}' "$entry")"
-            if grep -Eq '(^|[[:space:]])root=' <<<"$options"; then
-              echo "::error::root= unexpectedly present in $entry"
-              exit 1
-            fi
-            if grep -Eq '(^|[[:space:]])composefs(\.digest)?=\?' <<<"$options"; then
-              echo "::error::optional fs-verity marker present in $entry"
-              exit 1
-            fi
-
-            if [[ " $options " =~ [[:space:]]composefs=([0-9a-f]{128})[[:space:]] ]]; then
-              entry_digest="${BASH_REMATCH[1]}"
+            uki_rel="$(sudo awk '$1 == "uki" || $1 == "efi" {print $2}' "$entry" | head -1)"
+            if [ -n "$uki_rel" ]; then
+              # OMN-150 Phase 2 (Type2 UKI BLSConfig): bootc install writes
+              # `uki /EFI/Linux/bootc/bootc_composefs-<digest>.efi` and places the
+              # UKI binary on the ESP.
+              uki_file="/mnt/boot${uki_rel}"
+              sudo test -f "$uki_file" || { echo "::error::UKI file missing at $uki_file"; exit 1; }
+              uki_cmdline="$(sudo python3 scripts/extract_uki_cmdline.py "$uki_file")"
+              echo "UKI .cmdline: $uki_cmdline"
+              if grep -Eq '(^|[[:space:]])root=' <<<"$uki_cmdline"; then
+                echo "::error::root= unexpectedly present in UKI .cmdline"
+                exit 1
+              fi
+              if grep -Eq '(^|[[:space:]])composefs(\.digest)?=([^[:space:]]*\?)' <<<"$uki_cmdline"; then
+                echo "::error::optional fs-verity marker (?) present in UKI .cmdline"
+                exit 1
+              fi
+              entry_digest="$(grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)[0-9a-f]{128}' <<<"$uki_cmdline" | head -1 | sed -E 's/^.*[:=]//')"
+              if [ -z "$entry_digest" ]; then
+                echo "::error::strict 128-hex composefs digest absent in UKI .cmdline: $uki_cmdline"
+                exit 1
+              fi
+              case "$uki_rel" in
+                /EFI/Linux/bootc/bootc_composefs-"${entry_digest}".efi) ;;
+                *) echo "::error::UKI path is not bound to composefs digest: $uki_rel (expected /EFI/Linux/bootc/bootc_composefs-${entry_digest}.efi)"; exit 1 ;;
+              esac
+              sudo test -L "/mnt/composefs/images/${entry_digest}"
+              composefs_digest="$entry_digest"
+              seal_state="sealed-uki-blsconfig"
             else
-              echo "::error::strict legacy composefs=<sha512> argument absent in $entry"
+              echo "::error::expected Type2 UKI BLSConfig entry (uki /EFI/Linux/bootc/bootc_composefs-<digest>.efi) in $entry"
               exit 1
             fi
-            sudo test -L "/mnt/composefs/images/${entry_digest}"
-
-            linux_path="$(sudo awk '$1 == "linux" {print $2}' "$entry")"
-            initrd_path="$(sudo awk '$1 == "initrd" {print $2}' "$entry")"
-            case "$linux_path" in
-              */bootc_composefs-"${entry_digest}"/vmlinuz) ;;
-              *) echo "::error::kernel path is not bound to composefs digest: $linux_path"; exit 1 ;;
-            esac
-            case "$initrd_path" in
-              */bootc_composefs-"${entry_digest}"/initrd) ;;
-              *) echo "::error::initramfs path is not bound to composefs digest: $initrd_path"; exit 1 ;;
-            esac
-            composefs_digest="$entry_digest"
           done < <(sudo find /mnt/boot -type f -path '*/loader/entries/*.conf' -print0)
 
           test "$bls_count" -gt 0
           test -n "$composefs_digest"
-          echo "SEAL_STATE=unsealed-bls" >> "$GITHUB_ENV"
+          echo "SEAL_STATE=${seal_state}" >> "$GITHUB_ENV"
 
           {
-            echo '### bootc composefs install evidence'
+            echo '### bootc composefs install evidence (OMN-150 Phase 2)'
             echo "- Source: \`${RESOLVED_IMAGE}\`"
             echo "- Metadata images verified: ${image_count}"
             echo "- Deployment digest: \`${composefs_digest}\`"
             echo '- fs-verity: enforced; protected-object write rejected'
-            echo '- Seal state: **unsealed BLS** (no signed UKI/Secure Boot boot proof)'
+            echo "- Seal state: **${seal_state}** (\`uki /EFI/Linux/bootc/bootc_composefs-${composefs_digest}.efi\` bound to composefs store)"
           } >> "$GITHUB_STEP_SUMMARY"
 
           echo "bootc to-filesystem installed $RESOLVED_IMAGE onto externally prepared mounts"
-          echo "Verified: strict composefs repository, EROFS metadata, fs-verity, and no root= argument"
+          echo "Verified: strict composefs repository, EROFS metadata, fs-verity, Type2 UKI BLSConfig, and no root= argument"
 
       - name: Detach disposable target
         if: always()

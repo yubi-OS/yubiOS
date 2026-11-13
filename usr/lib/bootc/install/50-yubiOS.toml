@@ -26,22 +26,19 @@ block = ["direct"]
 # PR #2305 (v1.16.4) extends this with user-provided kargs via x-options-source-*.
 kargs = ["root=dissect", "mount.usr=dissect", "rw", "audit=0"]
 
-# OMN-150 Phase 2 -- sealed-UKI BLSConfig integration point.
-# bootc 1.16.6 (verified by ci_test_bootc-filesystem.yml run #11 at 7eba4856e7,
-# job 91037694742) ships `bootc container split-kernel-and-rootfs` + `bootc container
-# ukify` capabilities upstream-side, but the project-authored BLSConfig drop-in
-# intake (PR bootc-dev/bootc#2269 parsing only) is still in flight. So the BLSConfig
-# entry written by `bootc install to-filesystem` today is the composefs-blessed
-# kernel at /EFI/Linux/bootc/bootc_composefs-<digest>/vmlinuz + `composefs=<sha512>`
-# in options (verified). The signed UKI replacement happens at first boot via
-# yubios-uki-install.service (usr/lib/systemd/system/yubios-uki-install.service),
-# which runs install-uki.sh (usr/lib/yubiOS/uki/install-uki.sh) when the signed UKI is
-# present at /usr/lib/yubiOS/uki/yubios.efi. install-uki.sh computes the SHA-512
-# fsverity root hash of the UKI and writes a BLSConfig fragment with
-# `uki /EFI/Linux/bootc/bootc_composefs-<digest>.efi`, matching bootc 1.16's uki key.
-# Once a follow-up PR wires the yubios-uki Bake artifact into the bootc OCI image
-# at build time, the service fires on every fresh install; until then it's a
-# no-op on the bootc image built without the yubios-uki Bake target.
+# OMN-150 Phase 2 -- sealed-UKI BLSConfig integration (active in bootc 1.17.1+).
+# Both Containerfile (`d4b95e208f`) and Containerfile.dev (`c612e010a95c`) build
+# `/boot/EFI/Linux/<kver>.efi` in the `FROM rootfs AS uki` stage via
+# `bootc container ukify --rootfs /target`, re-pin mtimes to `SOURCE_DATE_EPOCH`
+# in `prefinal`, and ship a single-layer `FROM scratch` image so the layer-computed
+# composefs digest matches the UKI's embedded composefs digest. At install time,
+# `bootc install to-filesystem --composefs-backend` (`setup_composefs_uki_boot` in
+# `crates/lib/src/bootc_composefs/boot.rs`) detects `/boot/EFI/Linux/<kver>.efi`
+# (`BootType::Uki`), verifies its embedded `composefs.digest=v1-sha512-12:<digest>`
+# against the installed composefs EROFS image, writes the UKI to the ESP at
+# `/EFI/Linux/bootc/bootc_composefs-<digest>.efi`, and writes the Type2 BLSConfig
+# entry `/loader/entries/bootc_<os_id>-<version>-1.conf` with
+# `uki /EFI/Linux/bootc/bootc_composefs-<digest>.efi`.
 
 [install.filesystem.root]
 # ext4 matches the yubiOS convention already used by the to-filesystem CI lane
