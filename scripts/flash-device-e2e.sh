@@ -149,32 +149,36 @@ CN_LABEL="YUBIOS Owner Slot 9a"
 
 if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
   lsusb | grep -qi '1050:' || die "No physical YubiKey (1050:*) detected on USB"
-  ykman info
-  ykman piv info
+  sudo systemctl start pcscd.socket pcscd.service 2>/dev/null || true
+  # Note: GitHub Actions runner executes as a background service without a desktop Polkit
+  # seat, so pcscd denies unprivileged CCID access. Run all ykman / PKCS#11 operations via sudo.
+  sudo ykman info
+  sudo ykman piv info
   # When SIGNKEY=test (or when slot 9a has no certificate yet), (re-)mint slot 9a with the requested touch policy
   need_mint=0
-  if ! ykman piv certificates export 9a "$KEY_DIR/db.crt" >/dev/null 2>&1; then
+  if ! sudo ykman piv certificates export 9a "$KEY_DIR/db.crt" >/dev/null 2>&1; then
     need_mint=1
   elif [ "$SIGNKEY" = "test" ] && ! openssl x509 -in "$KEY_DIR/db.crt" -noout -subject 2>/dev/null | grep -Fq "YUBIOS Test Slot 9a"; then
     need_mint=1
   fi
   if [ "$need_mint" -eq 1 ]; then
     log "Generating RSA-2048 key in PIV slot 9a on physical YubiKey (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
-    ykman piv keys generate \
+    sudo ykman piv keys generate \
       -a RSA2048 \
       -m "$PIV_MGMT_KEY" \
       --pin-policy ONCE \
       --touch-policy "${PIV_TOUCH_POLICY^^}" \
       9a "$KEY_DIR/slot9a-pub.pem"
     log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
-    ykman piv certificates generate \
+    sudo ykman piv certificates generate \
       -m "$PIV_MGMT_KEY" \
       -P "$PIV_PIN" \
       -s "CN=${CN_LABEL}" \
       -d 1826 \
       9a "$KEY_DIR/slot9a-pub.pem"
-    ykman piv certificates export 9a "$KEY_DIR/db.crt"
+    sudo ykman piv certificates export 9a "$KEY_DIR/db.crt"
   fi
+  sudo chown -R "$(id -u):$(id -g)" "$KEY_DIR"
   openssl x509 -in "$KEY_DIR/db.crt" -noout -subject -issuer -dates -fingerprint -sha256
   cp -f "$KEY_DIR/db.crt" "$KEY_DIR/PK.crt"
   cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
@@ -205,14 +209,14 @@ EOF
     if [ "$PIV_TOUCH_POLICY" != "never" ]; then
       echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey now <<<"
     fi
-    if ! openssl smime -sign -binary \
+    if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
       -provider pkcs11 -provider default \
       -in "$KEY_DIR/${var}.forsig" \
       -out "$KEY_DIR/${var}.signed" \
       -signer "$KEY_DIR/PK.crt" \
       -inkey "$SB_KEY_URI" \
       -outform DER -md sha256 2>/dev/null; then
-      OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" openssl smime -sign -binary \
+      sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" openssl smime -sign -binary \
         -engine pkcs11 -keyform engine \
         -in "$KEY_DIR/${var}.forsig" \
         -out "$KEY_DIR/${var}.signed" \
@@ -220,6 +224,7 @@ EOF
         -inkey "pkcs11:id=%01;type=private" \
         -outform DER -md sha256
     fi
+    sudo chown "$(id -u):$(id -g)" "$KEY_DIR/${var}.signed"
     sign-efi-sig-list -i "$KEY_DIR/${var}.signed" -t "$T" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
   done
   ls -la "$KEY_DIR"
@@ -242,7 +247,7 @@ sign_efi_with_yubikey() {
     echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_path") <<<"
   fi
 
-  if [ -n "$systemd_sbsign_bin" ] && "$systemd_sbsign_bin" sign \
+  if [ -n "$systemd_sbsign_bin" ] && sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" "$systemd_sbsign_bin" sign \
     --private-key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
     --private-key-source "provider:pkcs11" \
     --certificate "$KEY_DIR/db.crt" \
@@ -251,13 +256,14 @@ sign_efi_with_yubikey() {
     "$tmp_in" 2>/dev/null; then
     :
   else
-    OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" sbsign \
+    sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
       --engine pkcs11 \
       --key "pkcs11:id=%01;type=private" \
       --cert "$KEY_DIR/db.crt" \
       --output "$tmp_out" \
       "$tmp_in"
   fi
+  sudo chown "$(id -u):$(id -g)" "$tmp_out"
   sbverify --cert "$KEY_DIR/db.crt" "$tmp_out"
   sudo mv -f "$tmp_out" "$efi_path"
   rm -f "$tmp_in"
