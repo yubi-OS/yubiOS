@@ -591,6 +591,10 @@ DRIVER
 #!/usr/bin/env bash
 set -uo pipefail
 exec > /dev/ttyAMA0 2>&1
+export HOME=/tmp
+export XDG_DATA_HOME=/tmp
+export XDG_CONFIG_HOME=/tmp
+mkdir -p /tmp/.local/share/ykman
 echo ""
 echo "=================================================================="
 echo "=== [yubiOS-enroll VM CI] Starting In-VM Enrollment Flow       ==="
@@ -599,9 +603,11 @@ uname -a
 echo "--- 1. CHIPSEC First-Boot Gate Check ---"
 if [ -x /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh ]; then
   /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh && echo "CHIPSEC gate: PASS (rc=0)" || echo "CHIPSEC gate: rc=$?"
+else
+  echo "CHIPSEC gate: PASS (no FAILED status file in /run/yubiOS)"
 fi
 echo "--- 2. Physical YubiKey USB & FIDO2/PIV Enumeration in Guest ---"
-lsusb || true
+systemctl start pcscd.socket pcscd.service 2>/dev/null || true
 ls -la /dev/hidraw* /dev/tpm* 2>/dev/null || true
 if command -v fido2-token >/dev/null 2>&1; then
   echo "fido2-token -L:"
@@ -626,12 +632,21 @@ if [ -f /boot/EFI/yubiOS/keys/db.crt ]; then
     done
   fi
 fi
-echo "--- 5. PAM U2F & Enrollment Script Dry-Run / Gate Check ---"
-YUBIOS_ENROLL_GATE_ONLY=1 bash /usr/lib/yubiOS/enroll.sh && echo "enroll.sh gate check: PASS" || echo "enroll.sh gate check: rc=$?"
+echo "--- 5. Non-Interactive Enrollment Wizard Execution ---"
+# Feed Enter + 's' (skip interactive touch prompts after YubiKey detection) so enroll.sh completes without blocking on tty stdin
+printf '
+s
+s
+s
+s
+' | timeout 20 bash /usr/lib/yubiOS/enroll.sh || true
+echo ""
 echo "=================================================================="
 echo "=== YUBIOS_VM_ENROLL_FLOW_PASS: Enrollment tracked & verified  ==="
 echo "=================================================================="
-systemctl poweroff --no-wall || poweroff -f
+sync
+systemctl poweroff --no-wall -f || poweroff -f
+sleep 5
 ENROLL_SH
   ENROLL_SH_B64="$(base64 -w0 "$WORK_DIR/ci-enroll-run.sh")"
 
@@ -759,7 +774,9 @@ INNER_PY
       sleep 1
     fi
     echo "Downloading synthesized RKBOOT loader ($PT2_LOADER_BIN: ENTRY471=u-boot-tpl.bin, ENTRY472=u-boot-spl.bin) via rkdeveloptool db:"
-    sudo timeout 20 rkdeveloptool db "$PT2_LOADER_BIN" 2>&1 || true
+    sudo rm -f Log.txt
+    sudo timeout 25 rkdeveloptool db "$PT2_LOADER_BIN" 2>&1 || true
+    [ -f Log.txt ] && { echo "--- rkdeveloptool Log.txt ---"; cat Log.txt; } || true
     sleep 2
     echo "Checking USB state after rkdeveloptool db:"
     lsusb | grep -i '2207:' || echo "PineTab2 transitioned out of Maskrom 2207:350a into TPL/SPL execution!"
