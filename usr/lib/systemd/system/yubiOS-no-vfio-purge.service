@@ -16,7 +16,9 @@
 # See refs/vgpu-vfio-user-trust-boundary-2026-07-25.md.
 [Unit]
 Description=yubiOS: ensure /dev/vfio is absent (ADR-031 rule 1)
-Documentation=https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md (ADR-031)
+# ADR-031 in docs/ADR.md. Documentation= takes space-separated URLs only, so
+# the ADR label stays in this comment (systemd-analyze verify flags it).
+Documentation=https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md
 # Run after devtmpfs has settled AND after tmpfiles-setup has fired its
 # own remove, so we are the last writer to /dev/vfio at boot.
 After=systemd-tmpfiles-setup.service systemd-udevd.service
@@ -29,12 +31,13 @@ ConditionPathExists=/dev/vfio
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/bin/rm -rf /dev/vfio /dev/vfio/*
-ExecStart=/bin/rmdir /dev/vfio 2>/dev/null || true
+# systemd runs Exec lines without a shell: the "-" prefix is the "|| true".
+ExecStart=-/bin/rmdir /dev/vfio
 ExecStart=/bin/sh -c 'echo yubiOS-no-vfio-purge fired $(date -Iseconds) >> /run/yubiOS-no-vfio-purge.log || true'
 # Defensive: udevadm settle so any in-flight uevent for /dev/vfio/vfio
 # lands before we return; otherwise the test could observe a node that
 # udev was still queueing.
-ExecStart=/usr/bin/udevadm settle --timeout=10 || true
+ExecStart=-/usr/bin/udevadm settle --timeout=10
 
 [Install]
 WantedBy=multi-user.target

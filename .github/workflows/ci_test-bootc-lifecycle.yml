@@ -56,10 +56,22 @@ jobs:
           sudo modprobe fuse || true
           [ -e /dev/fuse ] || sudo mknod /dev/fuse c 10 229 || true
           sudo chmod 666 /dev/fuse || true
-          # Arch-aware release binary + checksum verify (OMN-106/107 pattern).
-          curl -fsSL "https://github.com/yubi-OS/bcvk/releases/latest/download/bcvk-${ARCH}" -o /tmp/bcvk
-          curl -fsSL "https://github.com/yubi-OS/bcvk/releases/latest/download/SHA256SUMS" -o /tmp/SHA256SUMS
-          (cd /tmp && grep " bcvk-${ARCH}$" SHA256SUMS | sed "s| bcvk-${ARCH}$| bcvk|" | sha256sum --check --strict)
+          # Pinned yubi-OS/bcvk release binary (OMN-107). Tag, source commit, and
+          # per-arch SHA-256/SHA-512 come from PINNED.md; never releases/latest.
+          BCVK_RELEASE_TAG=v0.22.0-yubios.1 # source commit c9c06416c943d5ff956bc811f09aec0ce25bfdc7; see PINNED.md
+          case "$ARCH" in
+            amd64)
+              BCVK_SHA256=0d87d074ccf43a559aa1cefc2c12eed049bbf547cd9da7212ea971395939ef36
+              BCVK_SHA512=b24091a828373ac7fb214626596fac39b88b115f3be34b441800099e3e5965be5b60964e5393675d7a65732ddd4a7bea8ddd198396eb308d2e90108af2e088a6 ;;
+            arm64)
+              BCVK_SHA256=c6c0ce386b3203ae10829060455754244336301ea256357c49cc6abe4731e1fe
+              BCVK_SHA512=a4c1c31eb31302f0eaf0c7e403868d348488652c165531903e74960ea7fff6fd78936f776516461f17ac452a75a78daf26196a13a4f3803203cfc6c14cf23d43 ;;
+            *) echo "::error::no pinned bcvk release binary for ${ARCH}"; exit 1 ;;
+          esac
+          curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 10 \
+            "https://github.com/yubi-OS/bcvk/releases/download/${BCVK_RELEASE_TAG}/bcvk-${ARCH}" -o /tmp/bcvk
+          echo "${BCVK_SHA256}  /tmp/bcvk" | sha256sum --check --strict
+          echo "${BCVK_SHA512}  /tmp/bcvk" | sha512sum --check --strict
           sudo install -m 0755 /tmp/bcvk /usr/local/bin/bcvk
           bcvk --help >/dev/null
       - name: Verify test images are pullable
@@ -103,10 +115,22 @@ jobs:
           sudo modprobe fuse || true
           [ -e /dev/fuse ] || sudo mknod /dev/fuse c 10 229 || true
           sudo chmod 666 /dev/fuse || true
-          # Arch-aware release binary + checksum verify (OMN-106/107 pattern).
-          curl -fsSL "https://github.com/yubi-OS/bcvk/releases/latest/download/bcvk-${ARCH}" -o /tmp/bcvk
-          curl -fsSL "https://github.com/yubi-OS/bcvk/releases/latest/download/SHA256SUMS" -o /tmp/SHA256SUMS
-          (cd /tmp && grep " bcvk-${ARCH}$" SHA256SUMS | sed "s| bcvk-${ARCH}$| bcvk|" | sha256sum --check --strict)
+          # Pinned yubi-OS/bcvk release binary (OMN-107). Tag, source commit, and
+          # per-arch SHA-256/SHA-512 come from PINNED.md; never releases/latest.
+          BCVK_RELEASE_TAG=v0.22.0-yubios.1 # source commit c9c06416c943d5ff956bc811f09aec0ce25bfdc7; see PINNED.md
+          case "$ARCH" in
+            amd64)
+              BCVK_SHA256=0d87d074ccf43a559aa1cefc2c12eed049bbf547cd9da7212ea971395939ef36
+              BCVK_SHA512=b24091a828373ac7fb214626596fac39b88b115f3be34b441800099e3e5965be5b60964e5393675d7a65732ddd4a7bea8ddd198396eb308d2e90108af2e088a6 ;;
+            arm64)
+              BCVK_SHA256=c6c0ce386b3203ae10829060455754244336301ea256357c49cc6abe4731e1fe
+              BCVK_SHA512=a4c1c31eb31302f0eaf0c7e403868d348488652c165531903e74960ea7fff6fd78936f776516461f17ac452a75a78daf26196a13a4f3803203cfc6c14cf23d43 ;;
+            *) echo "::error::no pinned bcvk release binary for ${ARCH}"; exit 1 ;;
+          esac
+          curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 10 \
+            "https://github.com/yubi-OS/bcvk/releases/download/${BCVK_RELEASE_TAG}/bcvk-${ARCH}" -o /tmp/bcvk
+          echo "${BCVK_SHA256}  /tmp/bcvk" | sha256sum --check --strict
+          echo "${BCVK_SHA512}  /tmp/bcvk" | sha512sum --check --strict
           sudo install -m 0755 /tmp/bcvk /usr/local/bin/bcvk
           bcvk --help >/dev/null
       - name: Verify base image is pullable

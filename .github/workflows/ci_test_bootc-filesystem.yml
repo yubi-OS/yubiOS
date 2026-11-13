@@ -212,6 +212,28 @@ jobs:
 
           echo "RESOLVED_IMAGE=$RESOLVED_IMAGE" >> "$GITHUB_ENV"
 
+      - name: Run runtime systemd hardening and Bats checks in target image (OMN-40 / OMN-54 / OMN-55)
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends bats jq python3 openssl
+          chmod +x tests/verify-systemd-hardening-runtime.sh tests/vm/test-*.sh
+          HARDENING_OUT="${RUNNER_TEMP}/systemd-hardening-runtime-${{ matrix.arch }}"
+          ./tests/verify-systemd-hardening-runtime.sh \
+            --image "$RESOLVED_IMAGE" \
+            --repo-root "$GITHUB_WORKSPACE" \
+            --out-dir "$HARDENING_OUT"
+          echo "HARDENING_OUT=$HARDENING_OUT" >> "$GITHUB_ENV"
+
+      - name: Retain runtime hardening evidence (OMN-40 / OMN-54 / OMN-55)
+        if: always() && env.HARDENING_OUT != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
+        with:
+          name: systemd-hardening-runtime-${{ matrix.arch }}
+          path: ${{ env.HARDENING_OUT }}
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Verify strict composefs repository and sealed UKI BLSConfig deployment (OMN-150)
         env:
           ROOT_PART: ${{ steps.disk.outputs.root_part }}

@@ -136,6 +136,16 @@ jobs:
           done
           [ "$fail" -eq 0 ] || exit 1
 
+      - name: Run OMN-162 negative & channel-isolation VM test scripts
+        run: |
+          set -euo pipefail
+          apt-get install -y -qq --no-install-recommends python3 openssl
+          chmod +x tests/vm/test-secure-boot-tamper.sh tests/vm/test-oci-tag-channel.sh tests/vm/test-bcvk-passthrough.sh tests/vm/test-policy-rejection.sh
+          ./tests/vm/test-secure-boot-tamper.sh --self-test
+          ./tests/vm/test-oci-tag-channel.sh --self-test
+          ./tests/vm/test-bcvk-passthrough.sh --verify-args
+          ./tests/vm/test-policy-rejection.sh
+
   # -- VM e2e: native matrix, bare runner (full host toolchain: cargo + qemu + --
   #    KVM). Hardened dhi base omits crt*.o/libc, so bcvk's cargo build needs the
   #    bare runner (same lesson as the bcvk Rust CI). fail-fast:false for parity.
@@ -242,20 +252,136 @@ jobs:
       - name: Install zstd-capable QEMU for ARM64 DirectBoot
         id: qemu-zstd
         if: matrix.arch == 'arm64'
+        env:
+          # B-QEMU-ZBOOT (OMN-39 / OMN-59 / OMN-60). Version-gated, self-verifying
+          # workaround. Contract + removal recipe:
+          # refs/qemu-zboot-version-gate-audit-2026-11-12.md
+          QEMU_ZSTD_COMMIT: 4fc49f46dc95d4a27de2509e7fceb2931e91faeb # qemu/qemu v11.1.2, see PINNED.md
+          QEMU_ZSTD_VERSION: '11.1.2'
+          QEMU_ZBOOT_FLOOR: '11.0'
+          QEMU_ZBOOT_PROBE_SECS: '5'
+          YUBIOS_IMAGE: ${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}
+          SUMMARY_LABEL: 'vgpu-vm-e2e (arm64)'
         run: |
           set -euo pipefail
-          # Fedora ARM64 vmlinuz images are EFI zboot images with zstd-compressed
-          # payloads. Ubuntu 24.04's packaged QEMU predates upstream zstd zboot support
-          # (hw/loader: Add support for zboot images compressed with zstd), so
-          # bcvk's DirectBoot path fails before the guest starts.
-          # Build only qemu-system-aarch64 from that pinned upstream commit and
-          # prepend it to PATH for bcvk. rock1 is self-hosted and persistent, so
-          # keep /opt/qemu-zstd as a local cache between runs (binary + source,
-          # both under /opt so they survive between jobs on this runner).
-          QEMU_ZSTD_COMMIT=4fc49f46dc95d4a27de2509e7fceb2931e91faeb
+          # Fedora ARM64 vmlinuz is an EFI zboot PE ("zimg" magic at offset 4,
+          # "zstd" compression tag at offset 24). QEMU learned to DirectBoot
+          # zstd zboot in the 11.0 line (hw/loader: Add support for zboot
+          # images compressed with zstd). Older distro QEMU links libzstd for
+          # qcow2/multifd but its zboot loader still rejects the image with
+          # 'unable to handle EFI zboot image with "zstd" compression'.
+          # 2026-11-12 audit: rock1 Ubuntu 26.04.1 ships qemu-system-arm
+          # 1:10.2.1+ds-1ubuntu3.3, which fails that probe; the pinned v11.1.2
+          # build reaches "Booting Linux" on the same kernel.
+          #
+          # Contract, evaluated on every run:
+          #   1. Log runner OS + stock QEMU (RUNNER_QEMU_VERSION).
+          #   2. Stock "claims support" only if version >= QEMU_ZBOOT_FLOOR AND
+          #      it links libzstd. Only then run the non-KVM DirectBoot probe.
+          #   3. Probe pass => REMOVAL CONDITION MET (notice only; the pinned
+          #      build stays active until a deliberate removal PR).
+          #   4. Otherwise activate the pinned build, with a stale-cache guard
+          #      (version + libzstd linkage) and a post-activation probe.
           QEMU_PREFIX=/opt/qemu-zstd/${QEMU_ZSTD_COMMIT}
           QEMU_SRC=/opt/qemu-zstd-src
-          if [ ! -x "${QEMU_PREFIX}/bin/qemu-system-aarch64" ]; then
+          PINNED_QEMU="${QEMU_PREFIX}/bin/qemu-system-aarch64"
+          STOCK_QEMU=/usr/bin/qemu-system-aarch64
+          WORK="$(mktemp -d)"
+          trap 'sudo podman image unmount "${YUBIOS_IMAGE}" >/dev/null 2>&1 || true; rm -rf "${WORK}"' EXIT
+          summary() { echo "### ${SUMMARY_LABEL} -- $*" >> "$GITHUB_STEP_SUMMARY"; }
+          version_ge() { [ "$(printf '%s\n' "$2" "$1" | sort -V | head -n1)" = "$2" ]; }
+          qemu_ver() { { "$1" --version 2>/dev/null || true; } | sed -n '1s/^QEMU emulator version \([0-9][0-9.]*\).*/\1/p'; }
+          # No `ldd | grep -q`: under pipefail an early grep exit can SIGPIPE ldd.
+          links_zstd() { case "$(ldd "$1" 2>/dev/null || true)" in *libzstd.so*) return 0 ;; esac; return 1; }
+
+          # 1. Runner identity + stock QEMU.
+          RUNNER_OS_DESC="$(lsb_release -ds 2>/dev/null || (. /etc/os-release && echo "${PRETTY_NAME:-unknown}"))"
+          RUNNER_QEMU_PKG="$(dpkg-query -W -f='${Version}' qemu-system-arm 2>/dev/null || echo n/a)"
+          if [ -x "${STOCK_QEMU}" ]; then
+            RUNNER_QEMU_VERSION="$(qemu_ver "${STOCK_QEMU}")"
+            RUNNER_QEMU_VERSION="${RUNNER_QEMU_VERSION:-unknown}"
+            if links_zstd "${STOCK_QEMU}"; then STOCK_ZSTD=yes; else STOCK_ZSTD=no; fi
+          else
+            RUNNER_QEMU_VERSION=absent
+            STOCK_ZSTD=no
+          fi
+          echo "RUNNER_OS=${RUNNER_OS_DESC} ($(uname -srm))"
+          echo "RUNNER_QEMU_VERSION=${RUNNER_QEMU_VERSION} (package qemu-system-arm ${RUNNER_QEMU_PKG}, libzstd linked: ${STOCK_ZSTD})"
+          echo "runner_qemu_version=${RUNNER_QEMU_VERSION}" >> "$GITHUB_OUTPUT"
+          summary "INFO: runner ${RUNNER_OS_DESC}, stock qemu-system-aarch64 ${RUNNER_QEMU_VERSION} (pkg ${RUNNER_QEMU_PKG})"
+
+          # Kernel under test: pull vmlinuz from the image if it is already in
+          # local podman storage (rock1 keeps it between runs). No pull here.
+          KERNEL=""
+          if sudo podman image exists "${YUBIOS_IMAGE}" 2>/dev/null; then
+            MP="$(sudo podman image mount "${YUBIOS_IMAGE}" 2>/dev/null || true)"
+            if [ -n "${MP}" ]; then
+              for k in "${MP}"/usr/lib/modules/*/vmlinuz; do
+                [ -f "$k" ] || continue
+                sudo cp "$k" "${WORK}/vmlinuz"
+                sudo chmod 0644 "${WORK}/vmlinuz"
+                KERNEL="${WORK}/vmlinuz"
+                echo "Kernel: ${k#"${MP}"} from ${YUBIOS_IMAGE}"
+                break
+              done
+              sudo podman image unmount "${YUBIOS_IMAGE}" >/dev/null 2>&1 || true
+            fi
+          fi
+          KERNEL_FMT=unknown
+          if [ -n "${KERNEL}" ]; then
+            MAGIC="$(dd if="${KERNEL}" bs=1 skip=4 count=4 2>/dev/null | tr -d '\0')"
+            COMP="$(dd if="${KERNEL}" bs=1 skip=24 count=8 2>/dev/null | tr -d '\0')"
+            if [ "${MAGIC}" = "zimg" ]; then KERNEL_FMT="efi-zboot-${COMP:-unknown}"; else KERNEL_FMT=raw-or-other; fi
+            echo "Kernel format: ${KERNEL_FMT} ($(file -b "${KERNEL}" 2>/dev/null || echo 'file(1) unavailable'))"
+          else
+            echo "::notice::${YUBIOS_IMAGE} not in local podman storage yet; DirectBoot probes skipped this run"
+          fi
+          echo "kernel_format=${KERNEL_FMT}" >> "$GITHUB_OUTPUT"
+
+          # Non-KVM DirectBoot probe: pass iff the guest kernel prints its banner.
+          directboot_probe() {
+            local q="$1" log="${WORK}/probe-$2.log" rc=0
+            timeout "${QEMU_ZBOOT_PROBE_SECS}" "$q" ${3:-} -machine virt -cpu cortex-a57 -m 512M \
+              -nographic -no-reboot -kernel "${KERNEL}" \
+              -append "console=ttyAMA0 earlycon panic=-1" > "${log}" 2>&1 || rc=$?
+            echo "probe[$2]: rc=${rc} (124 = still running at timeout, expected on success)"
+            grep -m3 -E 'Booting Linux|zboot|qemu-system-aarch64:' "${log}" || true
+            grep -q 'Booting Linux on physical CPU' "${log}"
+          }
+
+          # 2 + 3. Version gate and removal condition.
+          REMOVAL_MET=false
+          if [ "${RUNNER_QEMU_VERSION}" != absent ] && [ "${RUNNER_QEMU_VERSION}" != unknown ] \
+             && version_ge "${RUNNER_QEMU_VERSION}" "${QEMU_ZBOOT_FLOOR}" && [ "${STOCK_ZSTD}" = yes ]; then
+            echo "Stock QEMU ${RUNNER_QEMU_VERSION} >= ${QEMU_ZBOOT_FLOOR} and links libzstd; probing native zstd EFI zboot DirectBoot"
+            if [ -z "${KERNEL}" ]; then
+              echo "::warning::REMOVAL CONDITION UNVERIFIED: stock QEMU ${RUNNER_QEMU_VERSION} claims support but no zboot kernel was available to probe"
+              summary "WARN: removal condition unverified (no kernel to probe)"
+            elif directboot_probe "${STOCK_QEMU}" stock; then
+              REMOVAL_MET=true
+              echo "::notice::REMOVAL CONDITION MET: stock runner QEMU ${RUNNER_QEMU_VERSION} natively boots ARM64 zstd EFI zboot"
+              echo "Removal procedure: refs/qemu-zboot-version-gate-audit-2026-11-12.md section 'Removal verification recipe'. Pinned build stays active until that PR lands."
+              summary "NOTICE: REMOVAL CONDITION MET, stock QEMU ${RUNNER_QEMU_VERSION} boots ${KERNEL_FMT}; open the B-QEMU-ZBOOT removal PR"
+            else
+              echo "::warning::Stock QEMU ${RUNNER_QEMU_VERSION} meets the version floor but FAILED the zstd EFI zboot DirectBoot probe; keeping pinned workaround"
+              summary "WARN: stock QEMU ${RUNNER_QEMU_VERSION} >= floor but failed DirectBoot probe"
+            fi
+          else
+            echo "Stock QEMU ${RUNNER_QEMU_VERSION} < ${QEMU_ZBOOT_FLOOR} (lacks upstream ARM64 zstd EFI zboot DirectBoot loader); activating pinned QEMU workaround @ ${QEMU_ZSTD_COMMIT}"
+          fi
+          echo "removal_condition_met=${REMOVAL_MET}" >> "$GITHUB_OUTPUT"
+
+          # 4. Pinned build with stale-cache guard.
+          if [ -x "${PINNED_QEMU}" ]; then
+            CACHED_VER="$(qemu_ver "${PINNED_QEMU}" || true)"
+            if [ "${CACHED_VER}" != "${QEMU_ZSTD_VERSION}" ] || ! links_zstd "${PINNED_QEMU}"; then
+              echo "::warning::Stale qemu-zstd cache at ${QEMU_PREFIX} (version '${CACHED_VER:-?}', want ${QEMU_ZSTD_VERSION}; libzstd linkage required); purging and rebuilding"
+              sudo rm -rf "${QEMU_PREFIX}"
+            else
+              echo "qemu-zstd cache HIT: ${PINNED_QEMU} (${CACHED_VER}, libzstd linked)"
+            fi
+          fi
+          if [ ! -x "${PINNED_QEMU}" ]; then
             sudo apt-get update -qq
             sudo apt-get install -y -qq --no-install-recommends \
               ninja-build python3-venv python3-pip meson pkg-config \
@@ -274,6 +400,7 @@ jobs:
               ./configure \
                 --prefix="${QEMU_PREFIX}" \
                 --target-list=aarch64-softmmu \
+                --enable-zstd \
                 --disable-docs \
                 --disable-werror
               ninja -C build qemu-system-aarch64
@@ -281,31 +408,82 @@ jobs:
             )
             sudo rm -rf "${QEMU_SRC}"
           fi
+          if ! links_zstd "${PINNED_QEMU}"; then
+            echo "::error::${PINNED_QEMU} is not linked against libzstd; zstd EFI zboot DirectBoot cannot work"
+            exit 1
+          fi
+          PINNED_VER="$(qemu_ver "${PINNED_QEMU}")"
+          if [ "${PINNED_VER}" != "${QEMU_ZSTD_VERSION}" ]; then
+            echo "::error::${PINNED_QEMU} reports ${PINNED_VER:-?}, expected ${QEMU_ZSTD_VERSION} for ${QEMU_ZSTD_COMMIT}"
+            exit 1
+          fi
+          if [ -n "${KERNEL}" ] && [ "${KERNEL_FMT}" = efi-zboot-zstd ]; then
+            if ! directboot_probe "${PINNED_QEMU}" pinned "-L ${QEMU_PREFIX}/share/qemu"; then
+              echo "::error::pinned QEMU ${PINNED_VER} @ ${QEMU_ZSTD_COMMIT} failed the zstd EFI zboot DirectBoot probe"
+              exit 1
+            fi
+          fi
           sudo mkdir -p "${QEMU_PREFIX}/bcvk-bin"
           printf '%s\n' \
             '#!/usr/bin/env bash' \
             'exec /run/host-mounts/qemu-zstd/bin/qemu-system-aarch64 -L /run/host-mounts/qemu-zstd/share/qemu "$@"' | sudo tee "${QEMU_PREFIX}/bcvk-bin/qemu-system-aarch64" >/dev/null
-
           sudo chmod 0755 "${QEMU_PREFIX}/bcvk-bin/qemu-system-aarch64"
-          "${QEMU_PREFIX}/bin/qemu-system-aarch64" --version
+          "${PINNED_QEMU}" --version
           echo "${QEMU_PREFIX}/bin" >> "$GITHUB_PATH"
           echo "qemu_prefix=${QEMU_PREFIX}" >> "$GITHUB_OUTPUT"
-          echo "### vgpu-vgpu-vm-e2e (arm64) -- INFO: using zstd-capable QEMU ${QEMU_ZSTD_COMMIT}" >> "$GITHUB_STEP_SUMMARY"
+          echo "qemu_source=pinned" >> "$GITHUB_OUTPUT"
+          summary "INFO: using pinned zstd-capable QEMU ${PINNED_VER} @ ${QEMU_ZSTD_COMMIT} (stock ${RUNNER_QEMU_VERSION}, removal_condition_met=${REMOVAL_MET})"
 
-      - name: Build bcvk @ pinned source (feasibility gate)
+      - name: Install bcvk @ pinned release (source-build fallback, feasibility gate)
         id: bcvk
         run: |
           set +e
-          BCVK_REF=34fb0b6bfff0f59d4ff4a985dab895a7b87a2c5c # yubios branch (PR #8 --extra-qemu-arg + ephemeral SSH/vsock poll + infra sync); see PINNED.md
+          # OMN-107: default to the prebuilt yubi-OS/bcvk release binary for this
+          # arch, verified against the PINNED.md checksums (seconds on a fresh
+          # hosted runner instead of a multi-minute cargo build). The source build
+          # below stays as the automatic fallback when the download or checksum
+          # verify fails, or when BCVK_PIN is moved off BCVK_RELEASE_COMMIT.
+          BCVK_PIN=c9c06416c943d5ff956bc811f09aec0ce25bfdc7 # yubios v0.22.0 merge + baked CI patches (ARM64 DirectBoot SSH karg, --privileged, ed25519); see PINNED.md
+          BCVK_RELEASE_TAG=v0.22.0-yubios.1
+          BCVK_RELEASE_COMMIT=c9c06416c943d5ff956bc811f09aec0ce25bfdc7
+          case "${{ matrix.arch }}" in
+            amd64)
+              BCVK_SHA256=0d87d074ccf43a559aa1cefc2c12eed049bbf547cd9da7212ea971395939ef36
+              BCVK_SHA512=b24091a828373ac7fb214626596fac39b88b115f3be34b441800099e3e5965be5b60964e5393675d7a65732ddd4a7bea8ddd198396eb308d2e90108af2e088a6 ;;
+            arm64)
+              BCVK_SHA256=c6c0ce386b3203ae10829060455754244336301ea256357c49cc6abe4731e1fe
+              BCVK_SHA512=a4c1c31eb31302f0eaf0c7e403868d348488652c165531903e74960ea7fff6fd78936f776516461f17ac452a75a78daf26196a13a4f3803203cfc6c14cf23d43 ;;
+            *) BCVK_SHA256=""; BCVK_SHA512="" ;;
+          esac
+          BCVK_REF="$BCVK_PIN"
           # rock1 is self-hosted and persistent -- cache the built binary under
           # /opt keyed by the pinned commit, same pattern as qemu-zstd above.
-          BCVK_PREFIX="/opt/bcvk/${BCVK_REF}" # cache-keyed by pinned source; rebuilds when BCVK_REF changes (bcvk PR #1+#2+#7+#8 combined upstream; no in-run CI patch since PR #8 merged)
+          BCVK_PREFIX="/opt/bcvk/${BCVK_PIN}" # cache keyed by the pinned commit; a new pin re-downloads or rebuilds
           BCVK_SRC=/opt/bcvk-src
           if [ -x "${BCVK_PREFIX}/bin/bcvk" ]; then
             echo "skip=0" >> "$GITHUB_OUTPUT"
             echo "${BCVK_PREFIX}/bin" >> "$GITHUB_PATH"
             echo "### vgpu-vm-e2e (${{ matrix.arch }}) -- INFO: bcvk cache HIT at ${BCVK_PREFIX}, build skipped" >> "$GITHUB_STEP_SUMMARY"
             exit 0
+          fi
+          if [ "$BCVK_PIN" = "$BCVK_RELEASE_COMMIT" ] && [ -n "$BCVK_SHA256" ]; then
+            BCVK_DL="$(mktemp -d)"
+            if curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 10 -o "$BCVK_DL/bcvk" \
+                 "https://github.com/yubi-OS/bcvk/releases/download/${BCVK_RELEASE_TAG}/bcvk-${{ matrix.arch }}" \
+               && echo "${BCVK_SHA256}  ${BCVK_DL}/bcvk" | sha256sum --check --strict \
+               && echo "${BCVK_SHA512}  ${BCVK_DL}/bcvk" | sha512sum --check --strict \
+               && chmod 0755 "$BCVK_DL/bcvk" \
+               && "$BCVK_DL/bcvk" --help >/dev/null; then
+              sudo mkdir -p "${BCVK_PREFIX}/bin"
+              sudo install -m 0755 "$BCVK_DL/bcvk" "${BCVK_PREFIX}/bin/bcvk"
+              rm -rf "$BCVK_DL"
+              echo "${BCVK_PREFIX}/bin" >> "$GITHUB_PATH"
+              echo "skip=0" >> "$GITHUB_OUTPUT"
+              echo "### vgpu-vm-e2e (${{ matrix.arch }}) -- INFO: bcvk ${BCVK_RELEASE_TAG} release binary verified (sha256 ${BCVK_SHA256}) and cached at ${BCVK_PREFIX}" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            rm -rf "$BCVK_DL"
+            echo "::warning::bcvk ${BCVK_RELEASE_TAG} release download or checksum verify failed -- falling back to the pinned source build"
           fi
           sudo rm -rf "$BCVK_SRC"
           sudo mkdir -p "$BCVK_SRC"
@@ -327,11 +505,15 @@ jobs:
           fi
           grep -Fq -- 'cmd.arg("--privileged")' "$BCVK_SRC/crates/kit/src/run_ephemeral.rs" \
             || { echo "::error::failed to apply bcvk privileged-container CI patch"; exit 1; }
-          if ! grep -Fq -- '--cap-add CAP_SYS_ADMIN' "$BCVK_SRC/crates/kit/scripts/entrypoint.sh"; then
-            perl -0pi -e 's/(bwrap --as-pid-1 --unshare-pid)/$1 --cap-add CAP_SYS_ADMIN/' "$BCVK_SRC/crates/kit/scripts/entrypoint.sh"
+          # bcvk v0.21.0 dropped bwrap from the entrypoint (mount + chroot instead),
+          # so the CAP_SYS_ADMIN patch only applies to older pins that still use it.
+          if grep -Fq -- 'bwrap --as-pid-1' "$BCVK_SRC/crates/kit/scripts/entrypoint.sh"; then
+            if ! grep -Fq -- '--cap-add CAP_SYS_ADMIN' "$BCVK_SRC/crates/kit/scripts/entrypoint.sh"; then
+              perl -0pi -e 's/(bwrap --as-pid-1 --unshare-pid)/$1 --cap-add CAP_SYS_ADMIN/' "$BCVK_SRC/crates/kit/scripts/entrypoint.sh"
+            fi
+            grep -Fq -- '--cap-add CAP_SYS_ADMIN' "$BCVK_SRC/crates/kit/scripts/entrypoint.sh" \
+              || { echo "::error::failed to apply bcvk bwrap CAP_SYS_ADMIN CI patch"; exit 1; }
           fi
-          grep -Fq -- '--cap-add CAP_SYS_ADMIN' "$BCVK_SRC/crates/kit/scripts/entrypoint.sh" \
-            || { echo "::error::failed to apply bcvk bwrap CAP_SYS_ADMIN CI patch"; exit 1; }
           if grep -Fq -- '"rsa"' "$BCVK_SRC/crates/kit/src/ssh.rs"; then
             perl -0pi -e 's/"-t",\n\s+"rsa",\n\s+"-b",\n\s+"4096",\s+\/\/ Use 4096-bit RSA for security/"-t",\n            "ed25519",/s' "$BCVK_SRC/crates/kit/src/ssh.rs"
           fi

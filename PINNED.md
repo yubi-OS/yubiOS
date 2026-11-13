@@ -1,6 +1,6 @@
 # PINNED.md - yubiOS approved refs & digests
 
-_Last reviewed: 2026-11-05 during the yubi-OS/u-boot RK3566 open TPL pin update._
+_Last reviewed: 2026-11-12 during the yubi-OS/bcvk v0.22.0-yubios.1 release-binary pin (OMN-107)._
 
 All GitHub Actions, internal yubi-OS fork refs, external GitHub source refs, container image references, and directly downloaded workflow artifacts used across the yubi-OS org must appear here before being added to any workflow or Containerfile. Non-pinned refs such as mutable tags and branch names are not permitted.
 
@@ -60,7 +60,7 @@ project does not publish EDK2-style stable release tags.
 | Fork repository | Upstream source | Upstream release/reference | Release commit in fork | Pinned source commit | Workflow role |
 |-----------------|-----------------|----------------------------|------------------------|----------------------|---------------|
 | `yubi-OS/arm-trusted-firmware` | `ARM-software/arm-trusted-firmware` | `v2.15.0` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | TF-A component validation and firmware assembly. |
-| `yubi-OS/bcvk` | `bootc-dev/bcvk` | `v0.22.0` | `2a0176b11751b385806fd3cd184e39aec5a955e9` | `1f7c73769a3c4cbf2f127ba6c282ff03661cb797` | `yubios` branch: release plus yubiOS swtpm/swu2f support (former pin), native-to-disk installer (PR #1), YubiKey USB passthrough for ephemeral VMs (PR #2), `--extra-qemu-arg` CLI option (PR #8, retires ci_test-vgpu-vm.yml in-run patch), and ephemeral SSH/vsock concurrent poll fix; merged together via direct merge commits. Component validation and VM harness. |
+| `yubi-OS/bcvk` | `bootc-dev/bcvk` | `v0.22.0` | `2a0176b11751b385806fd3cd184e39aec5a955e9` | `c9c06416c943d5ff956bc811f09aec0ce25bfdc7` | Tag `v0.22.0-yubios.1` on branch `release/v0.22.0-yubios.1`: `yubios` merge commit `1f7c73769a3c4cbf2f127ba6c282ff03661cb797` plus the baked CI patches (ARM64 DirectBoot SSH kernel-command-line credential next to upstream fw_cfg, `--privileged` bcvk container, ed25519 ephemeral SSH keys). Prebuilt binaries are pinned under "yubi-OS Release Binaries" below. `yubios` branch: release plus yubiOS swtpm/swu2f support (former pin), native-to-disk installer (PR #1), YubiKey USB passthrough for ephemeral VMs (PR #2), `--extra-qemu-arg` CLI option (PR #8, retires ci_test-vgpu-vm.yml in-run patch), and ephemeral SSH/vsock concurrent poll fix; merged together via direct merge commits. Component validation and VM harness. |
 | `yubi-OS/edk2` | `tianocore/edk2` | `edk2-stable202602` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | HOLD at edk2-stable202602. Re-tested 2026-10-17 against edk2-stable202608 (`2970e5699ba6267f3384ffab20f96647578aebc8`): 202608 moves the StandaloneMM `ArmBaseLib` from `ArmPkg/Library/ArmLib/ArmBaseLib.inf` to `MdePkg/Library/ArmLib/ArmBaseLib.inf`. `Platform/StandaloneMm/PlatformStandaloneMmPkg/PlatformStandaloneMmRpmb.dsc:35` (`ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf`) would not resolve, and 8 shared StandaloneMM dependency INFs changed content. Component validation and firmware build. |
 | `yubi-OS/edk2-platforms` | `tianocore/edk2-platforms` | `20260316-before-platform-removals` | `cc384840c440415a091623a7658112fedc416094` | `cc384840c440415a091623a7658112fedc416094` | StandaloneMM platform build compatibility snapshot. |
 | `yubi-OS/mkosi` | `systemd/mkosi` | `v27.1` | `ecf7f5702bb2052b7a69cab3fe7d37bc3b9ad77b` | `25c40d44732f2aed0d0c81eedb0ce57d57c79068` | Release plus yubiOS profile; component validation, summary, and installer build. |
@@ -68,6 +68,17 @@ project does not publish EDK2-style stable release tags.
 | `yubi-OS/optee_ftpm` | `OP-TEE/optee_ftpm` | `4.11.0` | `f09f4cdad21028289d4e8fc573893b75f7228dc7` | `b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf` | Release plus yubiOS volatile NV support, rebased 2026-10-17 onto 4.11.0 on branch `feat/volatile-nv-ci-4.11` (prior branch `feat/volatile-nv-ci` at d1cf4a04 kept, backup tag `pre-bump-2026-10-17`); component validation and TA build. |
 | `yubi-OS/optee_os` | `OP-TEE/optee_os` | `4.11.0` | `f54190f22611dd5ad5d22546fd4209aa100f56bd` | `b619831e8a89645b43ff7c7459265019292de50b` | Release plus yubiOS volatile StMM storage and RK3568/RK3566 platform flavor support on branch `feat/stmm-volatile-storage-ci-4.11` (prior branch `feat/stmm-volatile-storage-ci` at 440b10c3 kept, backup tag `pre-bump-2026-10-17`); component validation, TA dev kit, and BL32 build. |
 | `yubi-OS/u-boot` | `u-boot/u-boot` | `v2026.10` | `5508406582f6f7120dce0c4b3059819a41788db2` | `5c7fe6ca3b1a13458e426c7d66cd461d0d76fe83` | `main` branch: upstream `main` plus PineTab2 CI workflow and Pavel Golikov's 18-patch RK3568/RK3566 open-source TPL DRAM init series (1056 MHz cap, PR #1). U-Boot component validation, open RK3566 TPL, and firmware BL33 build. |
+
+## yubi-OS Release Binaries
+
+Prebuilt binaries published by a yubi-OS fork's own release workflow. Workflows download the per-arch asset from the versioned release URL and verify it with both `sha256sum --check --strict` (SHA-256 below, matching the release `SHA256SUMS`) and `sha512sum --check --strict` (SHA-512 below) before installing or executing it. The tag is a provenance label; the bytes are the pin.
+
+| Release | Source commit | Asset URL | Platform | SHA-256 | SHA-512 |
+|---------|---------------|-----------|----------|---------|---------|
+| `yubi-OS/bcvk` `v0.22.0-yubios.1` | `c9c06416c943d5ff956bc811f09aec0ce25bfdc7` | `https://github.com/yubi-OS/bcvk/releases/download/v0.22.0-yubios.1/bcvk-amd64` | `linux/amd64` | `0d87d074ccf43a559aa1cefc2c12eed049bbf547cd9da7212ea971395939ef36` | `b24091a828373ac7fb214626596fac39b88b115f3be34b441800099e3e5965be5b60964e5393675d7a65732ddd4a7bea8ddd198396eb308d2e90108af2e088a6` |
+| `yubi-OS/bcvk` `v0.22.0-yubios.1` | `c9c06416c943d5ff956bc811f09aec0ce25bfdc7` | `https://github.com/yubi-OS/bcvk/releases/download/v0.22.0-yubios.1/bcvk-arm64` | `linux/arm64` | `c6c0ce386b3203ae10829060455754244336301ea256357c49cc6abe4731e1fe` | `a4c1c31eb31302f0eaf0c7e403868d348488652c165531903e74960ea7fff6fd78936f776516461f17ac452a75a78daf26196a13a4f3803203cfc6c14cf23d43` |
+
+> bcvk `v0.22.0-yubios.1` was built by `yubi-OS/bcvk` `yubios-release.yml` run `43339669517` on GitHub-hosted `ubuntu-24.04` and `ubuntu-24.04-arm` runners (release profile, LTO, one codegen unit). The `bcvk` asset is an amd64 compatibility copy with the same SHA-256 as `bcvk-amd64`. Release `SHA256SUMS` asset SHA-256: `6e5430a90920f6c1a4e91df4dc672115461a49e1e2a71bb2807176c26f9edfd5`. Consumers: `ci_test-vm.yml` and `ci_test-vgpu-vm.yml` (default path, source build at the same commit as fallback), `ci_test-bootc-lifecycle.yml`, `ci_test-sysext-portable.yml`. Superseded release: `v0.18.0-yubios.1` (source `34fb0b6bfff0f59d4ff4a985dab895a7b87a2c5c`, `bcvk-amd64` `ce77ae08a4e9929f205976237321a543a5da4f2604f9f5d755813cd38c539070`, `bcvk-arm64` `c8080913b74f41ed7e3b36f53f280837ece1b2f7200f2dc63bdf260afaeb7226`), kept for audit only.
 
 ## External GitHub Source Refs
 
@@ -109,7 +120,7 @@ Dynamic refs such as `github.sha`, `github.ref_name`, `target_ref`, and `ci_chai
 
 - All container image `FROM` statements in Containerfiles, `uses:` entries, external GitHub source refs, and direct workflow downloads must reference an identity pinned here.
 - Every `wcurl` request must be followed by a matching `sha512sum --check --strict` verification before the payload is consumed.
-- Versioned GitHub release URLs may retain their tag-shaped path only when the downloaded bytes are independently pinned and checked by SHA-512.
+- Versioned GitHub release URLs may retain their tag-shaped path only when the downloaded bytes are independently pinned and checked by SHA-512. `releases/latest` URLs are never permitted.
 - For multi-arch jobs, reference the OCI index digest so it auto-resolves per runner architecture; do not pin a single-arch child in a matrix job.
 - Mutable tags such as `:latest`, `:main`, or branch refs are rejected by `yubiOS.rego` and AGENTS.md policy.
 - To add or roll a ref: obtain the digest, update this file, update repo references to the old digest, update `yubiOS.rego` if a new registry is introduced, and open a PR.
