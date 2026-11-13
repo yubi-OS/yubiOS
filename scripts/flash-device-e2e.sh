@@ -384,32 +384,35 @@ EOF
   sudo mount "$p1" "$MNT_DIR/boot"
 
   log "Running bootc install to-filesystem directly onto $dev ($board_name)"
-  sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged --pid=host --ipc=host \
-    --security-opt label=type:unconfined_t \
-    -v /var/lib/containers:/var/lib/containers \
-    -v "$TMPDIR:/var/tmp" \
-    -e TMPDIR=/var/tmp \
-    -v /dev:/dev \
-    -v "$MNT_DIR:/target" \
-    -e RESOLVED_OS="$RESOLVED_OS" \
-    "$RESOLVED_OS" \
-    bash -ceu '
-      cat > /tmp/nofsync.c <<EOF
+  PRELOAD_ENV=()
+  if command -v gcc >/dev/null 2>&1; then
+    cat > "$TMPDIR/nofsync.c" <<'EOF'
 int fsync(int fd) { (void)fd; return 0; }
 int fdatasync(int fd) { (void)fd; return 0; }
 int syncfs(int fd) { (void)fd; return 0; }
 void sync(void) {}
 EOF
-      gcc -shared -fPIC -O2 /tmp/nofsync.c -o /tmp/libnofsync.so
-      LD_PRELOAD=/tmp/libnofsync.so bootc install to-filesystem \
-        --source-imgref="containers-storage:${RESOLVED_OS}" \
-        --composefs-backend \
-        --disable-selinux \
-        --bootloader=systemd \
-        --root-mount-spec="" \
-        --skip-finalize \
-        /target
-    '
+    if gcc -shared -fPIC -O2 "$TMPDIR/nofsync.c" -o "$TMPDIR/libnofsync.so" 2>/dev/null; then
+      PRELOAD_ENV=(-e LD_PRELOAD=/var/tmp/libnofsync.so)
+    fi
+  fi
+  sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged --pid=host --ipc=host \
+    --security-opt label=type:unconfined_t \
+    -v /var/lib/containers:/var/lib/containers \
+    -v "$TMPDIR:/var/tmp" \
+    -e TMPDIR=/var/tmp \
+    "${PRELOAD_ENV[@]}" \
+    -v /dev:/dev \
+    -v "$MNT_DIR:/target" \
+    "$RESOLVED_OS" \
+    bootc install to-filesystem \
+      --source-imgref="containers-storage:${RESOLVED_OS}" \
+      --composefs-backend \
+      --disable-selinux \
+      --bootloader=systemd \
+      --root-mount-spec="" \
+      --skip-finalize \
+      /target
 
   entry="$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
   [ -n "$entry" ] || die "No BLS entry created under $MNT_DIR/boot/loader/entries"
@@ -453,11 +456,12 @@ MODCONF
     *" rw "*) ;;
     *) new_cmdline="rw ${new_cmdline}" ;;
   esac
-  log "Ensuring UKI ($uki_rel) on $p1 has early-initrd optee + tpm_ftpm_tee drivers and rw cmdline"
+  log "Verifying UKI ($uki_rel) on $p1 has early-initrd optee + tpm_ftpm_tee drivers and rw cmdline"
   sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged \
     --security-opt label=type:unconfined_t \
     -v "$MNT_DIR/boot:/target_boot" \
     -e UKI_REL="$uki_rel" \
+    -e ORIG_CMDLINE="$orig_cmdline" \
     -e NEW_CMDLINE="$new_cmdline" \
     "$RESOLVED_OS" \
     bash -ceu '
@@ -465,9 +469,9 @@ MODCONF
       kver="$(basename "$1")"
       shipped_initrd="/usr/lib/modules/$kver/initramfs.img"
       lsinitrd "$shipped_initrd" > /tmp/shipped-initrd.list 2>/dev/null || true
-      if grep -q "optee\.ko" /tmp/shipped-initrd.list && grep -q "tpm_ftpm_tee\.ko" /tmp/shipped-initrd.list && grep -q "usr/lib/modules-load.d/yubiOS-optee-ftpm.conf" /tmp/shipped-initrd.list; then
-        echo "Shipped initramfs already contains optee.ko, tpm_ftpm_tee.ko, and yubiOS-optee-ftpm.conf!"
-        cp -f "$shipped_initrd" /tmp/initramfs-ftpm.img
+      if grep -q "optee\.ko" /tmp/shipped-initrd.list && grep -q "tpm_ftpm_tee\.ko" /tmp/shipped-initrd.list && grep -q "usr/lib/modules-load.d/yubiOS-optee-ftpm.conf" /tmp/shipped-initrd.list && [ "$ORIG_CMDLINE" = "$NEW_CMDLINE" ]; then
+        echo "Shipped UKI and initramfs from CI build already contain optee.ko, tpm_ftpm_tee.ko, yubiOS-optee-ftpm.conf, and rw cmdline — keeping canonical bootc container ukify UKI untouched!"
+        grep -E "(optee\.ko|tpm_ftpm_tee\.ko|yubiOS-optee-ftpm\.conf|initramfs-setup)" /tmp/shipped-initrd.list
       else
         mkdir -p /usr/lib/modules-load.d /usr/lib/dracut.conf.d
         printf "tee\noptee\ntpm_ftpm_tee\n" > /usr/lib/modules-load.d/yubiOS-optee-ftpm.conf
@@ -476,26 +480,24 @@ add_drivers+=" tee optee tpm_ftpm_tee dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-
 install_items+=" /usr/lib/modules-load.d/yubiOS-optee-ftpm.conf "
 EOF
         dracut --no-hostonly --force --kver "$kver" /tmp/initramfs-ftpm.img
+        lsinitrd /tmp/initramfs-ftpm.img > /tmp/initramfs-ftpm.list
+        grep -q "optee\.ko" /tmp/initramfs-ftpm.list
+        grep -q "tpm_ftpm_tee\.ko" /tmp/initramfs-ftpm.list
+        grep -q "usr/lib/modules-load.d/yubiOS-optee-ftpm.conf" /tmp/initramfs-ftpm.list
+        grep -q "usr/lib/bootc/initramfs-setup" /tmp/initramfs-ftpm.list
+        ! grep -q "/vfio\.ko" /tmp/initramfs-ftpm.list
+        ukify_bin="$(command -v ukify || echo /usr/lib/systemd/ukify)"
+        "$ukify_bin" build \
+          --linux="/usr/lib/modules/$kver/vmlinuz" \
+          --initrd="/tmp/initramfs-ftpm.img" \
+          --cmdline="$NEW_CMDLINE" \
+          --os-release="@/etc/os-release" \
+          --uname="$kver" \
+          --efi-arch=aa64 \
+          --stub="/usr/lib/systemd/boot/efi/linuxaa64.efi.stub" \
+          --output="/target_boot${UKI_REL}.new"
+        mv -f "/target_boot${UKI_REL}.new" "/target_boot${UKI_REL}"
       fi
-      lsinitrd /tmp/initramfs-ftpm.img > /tmp/initramfs-ftpm.list
-      grep -q "optee\.ko" /tmp/initramfs-ftpm.list
-      grep -q "tpm_ftpm_tee\.ko" /tmp/initramfs-ftpm.list
-      grep -q "usr/lib/modules-load.d/yubiOS-optee-ftpm.conf" /tmp/initramfs-ftpm.list
-      grep -q "usr/lib/bootc/initramfs-setup" /tmp/initramfs-ftpm.list
-      ! grep -q "/vfio\.ko" /tmp/initramfs-ftpm.list
-      echo "Verified initramfs-ftpm.img contains optee.ko, tpm_ftpm_tee.ko, yubiOS-optee-ftpm.conf, and bootc initramfs-setup:"
-      grep -E "(optee\.ko|tpm_ftpm_tee\.ko|yubiOS-optee-ftpm\.conf|initramfs-setup)" /tmp/initramfs-ftpm.list
-      ukify_bin="$(command -v ukify || echo /usr/lib/systemd/ukify)"
-      "$ukify_bin" build \
-        --linux="/usr/lib/modules/$kver/vmlinuz" \
-        --initrd="/tmp/initramfs-ftpm.img" \
-        --cmdline="$NEW_CMDLINE" \
-        --os-release="@/etc/os-release" \
-        --uname="$kver" \
-        --efi-arch=aa64 \
-        --stub="/usr/lib/systemd/boot/efi/linuxaa64.efi.stub" \
-        --output="/target_boot${UKI_REL}.new"
-      mv -f "/target_boot${UKI_REL}.new" "/target_boot${UKI_REL}"
     '
 
   rebuilt_cmdline="$(python3 scripts/extract_uki_cmdline.py "$MNT_DIR/boot${uki_rel}" | tr -d '\0\r\n' || true)"
