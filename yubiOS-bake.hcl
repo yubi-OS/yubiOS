@@ -403,10 +403,10 @@ target "yubios-uki" {
   platforms   = [PLATFORM]
   labels = {
     "org.opencontainers.image.title"       = "yubiOS signed UKI"
-    "org.opencontainers.image.description" = "PKCS#11-signed UKI (kernel side of ADR-032 kernel+rootfs split). Built via mkosi --secure-boot-sign-tool systemd-sbsign against the YubiKey PIV slot 9c anchor (mocked with SoftHSM in CI; production uses the real YubiKey, ADR-008)."
+    "org.opencontainers.image.description" = "PKCS#11-signed UKI (kernel side of ADR-032 kernel+rootfs split). Built via mkosi --secure-boot-sign-tool systemd-sbsign against the YubiKey PIV slot 9a anchor (mocked with SoftHSM in CI; production uses the real YubiKey, ADR-002/ADR-008)."
     "io.yubios.artifact.role"               = "uki-kernel"
     "io.yubios.uki.sign-tool"               = "systemd-sbsign"
-    "io.yubios.uki.pkcs11"                  = "provider:pkcs11 against SoftHSM (CI) / YubiKey PIV slot 9c (production)"
+    "io.yubios.uki.pkcs11"                  = "provider:pkcs11 against SoftHSM (CI) / YubiKey PIV slot 9a (production)"
     "io.yubios.adr"                         = "ADR-032"
   }
   tags = PUSH ? [
@@ -440,8 +440,13 @@ target "pq-tls-verify" {
     group=$(curl -sv https://omniteck.com/ 2>&1 | grep -o 'SSL connection using[^"]*' || true)
     echo "negotiated: $group"
     case "$group" in
-      *MLKEM*) echo "PQ hybrid group confirmed against omniteck.com" ;;
-      *) echo "No MLKEM group negotiated against the live TLS endpoint" >&2; exit 1 ;;
+      *X25519MLKEM768*|*SecP256r1MLKEM768*|*SecP384r1MLKEM1024*|*MLKEM*)
+        echo "PQ hybrid group confirmed against omniteck.com (accepted policy: X25519MLKEM768, SecP256r1MLKEM768, SecP384r1MLKEM1024)"
+        ;;
+      *)
+        echo "No accepted MLKEM hybrid group negotiated against the live TLS endpoint" >&2
+        exit 1
+        ;;
     esac
     if command -v go >/dev/null 2>&1; then
       go_version=$(go version | awk '{print $3}' | sed 's/^go//')

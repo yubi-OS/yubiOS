@@ -212,6 +212,11 @@ jobs:
 
           echo "RESOLVED_IMAGE=$RESOLVED_IMAGE" >> "$GITHUB_ENV"
 
+      - name: Verify PINNED.md lockstep and runtime package floors (OMN-41 / B-PINS)
+        run: |
+          chmod +x tests/verify-package-floors.sh
+          tests/verify-package-floors.sh "$RESOLVED_IMAGE"
+
       - name: Runtime systemd hardening in the target image (OMN-40 / OMN-54 / OMN-55)
         env:
           HARDENING_OUT_DIR: ${{ runner.temp }}/yubios-hardening-runtime-${{ matrix.arch }}

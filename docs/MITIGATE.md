@@ -41,10 +41,10 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Control | How | Coverage |
 |---|---|---|
-| UKI as single signed binary | Kernel + initrd + cmdline bundled into one UEFI PE signed by yubiOS PIV slot 9c. Any evil-twin lacking this signature is rejected. | **Block** |
-| `usrhash=` in signed cmdline | dm-verity root hash of /usr baked into the UKI cmdline at build time. Any substitute /usr fails the kernel hash check. | **Block** |
-| x86-64 (primary): platform scope | CNTVOFF_EL2 is ARMv8-only — no attack surface on x86-64. | **N/A** |
-| arm64 (in dev): kernel arch_timer erratum workarounds | Linux `arch_timer` driver applies per-CPU erratum workarounds at boot. Virtual offset manipulation at EL1/EL0 is corrected at the kernel level before userspace runs. UKI/PCR trust chain unchanged on ARM64. | **Mitigated (kernel)** |
+| UKI as single signed binary | Kernel + initrd + cmdline bundled into one UEFI PE signed by yubiOS PIV slot 9a (ADR-002). Any evil-twin lacking this signature is rejected. | **Block** |
+| `composefs=<digest>` / `usrhash=` in signed UKI cmdline | The composefs EROFS digest (`composefs=v1-sha512-12:<digest>` on the `bootc` OCI path, ADR-032) or dm-verity root hash (`usrhash=` on the `mkosi` disk path, ADR-007) is baked into the signed UKI `.cmdline` at build time. Any substitute rootfs/`/usr` fails the kernel integrity check. | **Block** |
+| x86-64 (secondary, ADR-023): platform scope | CNTVOFF_EL2 is ARMv8-only — no attack surface on x86-64. | **N/A** |
+| arm64 (primary, ADR-023/029): kernel arch_timer erratum workarounds | Linux `arch_timer` driver applies per-CPU erratum workarounds at boot. Virtual offset manipulation at EL1/EL0 is corrected at the kernel level before userspace runs. UKI/PCR trust chain unchanged on ARM64. | **Mitigated (kernel)** |
 | PCR 11 measurement | All UKI components measured into PCR 11. Evil-twin produces different values, detectable via attestation. | **Detect** |
 
 ---
@@ -55,7 +55,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Control | How | Coverage |
 |---|---|---|
-| dm-verity on /usr | Every /usr read validated against the Merkle tree in real time. Poisoned page-cache produces IO errors, not transparent substitution. | **Block (reads)** |
+| composefs (fs-verity + EROFS) / dm-verity on `/usr` | Every `/usr` read is validated against fs-verity digests + EROFS metadata (`bootc` composefs path) or the dm-verity Merkle tree (`mkosi` path) in real time. Poisoned page-cache or tampered blocks produce I/O errors, not transparent substitution. | **Block (reads)** |
 | DPS UUID-only mount | systemd-gpt-auto-generator ignores partitions without recognised DPS type UUIDs. Hidden attacker partitions are never automounted. | **Ignore** |
 | Kernel CVE patching | Fedora 45 upstream kernel patches. Base image digest policy (ADR-015) ensures they land. | **Reduce** |
 | `RestrictFileSystems=` (v261) | BPF LSM restricts which filesystem types services can access. Attacker-controlled filesystems not propagated. | **Contain** |
@@ -86,11 +86,11 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Control | How | Coverage |
 |---|---|---|
-| **dm-verity on /usr (on every IO)** | Every dlopen() and read from /usr — including `libselinux.so.1` — is validated against the Merkle tree. A modified library produces a hash mismatch → IO error. The poisoned library is never served to any process. | **Block — hard** |
-| Immutable /usr mount | /usr is mounted read-only via dm-verity. Cannot be bind-mounted over using modified libmount. | **Block** |
-| x86-64 (primary): no qcom,dload path | `qcom,dload` is Qualcomm-specific — does not exist on x86-64 UEFI. | **N/A** |
-| arm64 (in dev): dm-verity blocks library substitution | Even if sideload runs on Qualcomm ARM64 hardware, every `dlopen()` from /usr traverses the dm-verity Merkle tree. Modified library → hash mismatch → IO error. Sideload without a dm-verity bypass changes nothing. Preferred non-Qualcomm ARM64 targets avoid this entirely. | **Block (dm-verity)** |
-| `usrhash=` in signed cmdline | Kernel refuses to mount any /usr whose root hash doesn’t match the signed cmdline. | **Block** |
+| **composefs (fs-verity) / dm-verity on `/usr` (on every IO)** | Every `dlopen()` and read from `/usr` — including `libselinux.so.1` — is validated against fs-verity + EROFS (`bootc` composefs path) or the dm-verity Merkle tree (`mkosi` path). A modified library produces a hash mismatch → I/O error. The poisoned library is never served to any process. | **Block — hard** |
+| Immutable `/usr` mount | `/usr` is mounted read-only via composefs (`bootc` path) or dm-verity (`mkosi` path). Cannot be bind-mounted over using modified libmount. | **Block** |
+| x86-64 (secondary, ADR-023): no qcom,dload path | `qcom,dload` is Qualcomm-specific — does not exist on x86-64 UEFI. | **N/A** |
+| arm64 (primary, ADR-023/029): composefs / dm-verity blocks library substitution | Even if sideload runs on Qualcomm ARM64 hardware, every `dlopen()` from `/usr` traverses fs-verity/composefs or dm-verity verification. Modified library → hash mismatch → I/O error. Rockchip targets (`RK3566`, `RK3588`, `RK3399` under ADR-029) avoid Qualcomm `qcom,dload` entirely. | **Block (composefs / dm-verity)** |
+| `composefs=<digest>` / `usrhash=` in signed UKI cmdline | Initramfs/kernel refuses to mount any rootfs/`/usr` whose digest does not match the signed UKI `.cmdline` (verified in `ci_test-vgpu-vm.yml` Negative 2 tamper refusal). | **Block** |
 
 ---
 
@@ -187,7 +187,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 |---|---|---|
 | OEM ROM Absolute Persistence (Computrace) | Firmware in UEFI ROM runs before SecureBoot chain starts | Reflash firmware + custom SecureBoot key enrollment. chipsec at first boot (#24). |
 | Hardware radio ignoring OS power commands | Hardware-wired TX/RX below the OS layer | Hardware selection: open-firmware devices (e.g. Intel AX210 without backdoored microcode) |
-| Novel kernel CVEs (dirtyfrag-class) | Requires upstream kernel patch | Automated fedora-bootc:45 digest bumps (Renovate, ADR-015) |
+| Novel kernel CVEs (dirtyfrag-class) | Requires upstream kernel patch | Automated `quay.io/fedora/fedora-bootc@sha256:<digest>` manifest refreshes (`fetch-fedora-bootc-manifest.yml`, ADR-015, OMN-170) |
 | qcom,dload on Qualcomm ARM64 hardware | dm-verity blocks library substitution, but Qualcomm firmware sideload runs below the Merkle tree check. Risk is present on Qualcomm-based ARM64 boards. | Prefer non-Qualcomm ARM64 hardware (Ampere, RPi 5, Juno). Board matrix in ADR-017. |
 | UEFI firmware supply chain root | If UEFI itself is malicious from the factory, the chain starts compromised | chipsec surfaces anomalies. Hardware RoT (Titan/verified-boot firmware) is beyond OS scope. |
 
