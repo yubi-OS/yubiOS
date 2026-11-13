@@ -486,9 +486,15 @@ if [ "$RUN_POST_VM" = "true" ]; then
     fi
   fi
 
-  sudo "${THROTTLE[@]}" timeout 75 qemu-system-aarch64 \
-    -machine virt,accel=kvm,gic-version=max \
-    -cpu host -smp 4 -m 4G \
+  QEMU_ACCEL="tcg,thread=multi"
+  QEMU_CPU="max"
+  if [ -e /dev/kvm ]; then
+    QEMU_ACCEL="kvm:tcg"
+    QEMU_CPU="host"
+  fi
+  sudo "${THROTTLE[@]}" timeout 90 qemu-system-aarch64 \
+    -machine "virt,accel=${QEMU_ACCEL},gic-version=3" \
+    -cpu "$QEMU_CPU" -smp 4 -m 4G \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
     -drive file="$VM_DRIVE",format=raw,if=virtio,cache=writeback \
