@@ -190,6 +190,8 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
   done
 
   # Build OpenSSL config for PKCS#11 engine/provider signing with libykcs11.so
+  PKCS11_PROV="/usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so"
+  [ -e "$PKCS11_PROV" ] || PKCS11_PROV="pkcs11"
   cat > "$WORK_DIR/openssl-pkcs11.cnf" <<EOF
 openssl_conf = openssl_init
 [openssl_init]
@@ -198,6 +200,7 @@ engines = engine_section
 pkcs11 = pkcs11_section
 [pkcs11_section]
 engine_id = pkcs11
+dynamic_path = /usr/lib/aarch64-linux-gnu/engines-3/pkcs11.so
 MODULE_PATH = ${PKCS11_LIB}
 PIN = ${PIV_PIN}
 init = 0
@@ -210,18 +213,18 @@ EOF
       echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey now <<<"
     fi
     if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
-      -provider pkcs11 -provider default \
+      -provider "$PKCS11_PROV" -provider default \
       -in "$KEY_DIR/${var}.forsig" \
       -out "$KEY_DIR/${var}.signed" \
       -signer "$KEY_DIR/PK.crt" \
       -inkey "$SB_KEY_URI" \
-      -outform DER -md sha256 2>/dev/null; then
+      -outform DER -md sha256; then
       sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" openssl smime -sign -binary \
         -engine pkcs11 -keyform engine \
         -in "$KEY_DIR/${var}.forsig" \
         -out "$KEY_DIR/${var}.signed" \
         -signer "$KEY_DIR/PK.crt" \
-        -inkey "pkcs11:id=%01;type=private" \
+        -inkey "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
         -outform DER -md sha256
     fi
     sudo chown "$(id -u):$(id -g)" "$KEY_DIR/${var}.signed"
@@ -258,7 +261,7 @@ sign_efi_with_yubikey() {
   else
     sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
       --engine pkcs11 \
-      --key "pkcs11:id=%01;type=private" \
+      --key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
       --cert "$KEY_DIR/db.crt" \
       --output "$tmp_out" \
       "$tmp_in"
