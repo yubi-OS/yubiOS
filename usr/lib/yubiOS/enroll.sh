@@ -4,6 +4,37 @@
 # Guides user through: Secure Boot → Disk Encryption → SSH → PAM
 
 set -euo pipefail
+
+# ADR-024 / OMN-18: refuse to enroll when the first-boot CHIPSEC platform
+# check reported FAILED. yubiOS-enroll.service already gates on this via
+# ExecCondition=; repeating it here covers manual runs of the wizard.
+YUBIOS_CHIPSEC_GATE="${YUBIOS_CHIPSEC_GATE:-/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh}"
+chipsec_gate() {
+  if [[ -x "$YUBIOS_CHIPSEC_GATE" ]]; then
+    "$YUBIOS_CHIPSEC_GATE"
+    return
+  fi
+  # Fallback when the gate helper is missing: same contract, inline.
+  local f="${YUBIOS_CHIPSEC_STATE_FILE:-/run/yubiOS/chipsec-firstboot.status}"
+  [[ -r "$f" ]] || f="${YUBIOS_CHIPSEC_PERSIST_FILE:-/var/lib/yubiOS/chipsec-firstboot.status}"
+  [[ -r "$f" ]] || return 0
+  case "$(sed -n 's/^RESULT=//p' "$f" | tail -n 1 | tr -d '[:space:]')" in
+    FAILED)
+      echo "FAIL: CHIPSEC first-boot platform check reported FAILED; blocking YubiKey enrollment per ADR-024." >&2
+      return 1 ;;
+    WARN)
+      echo "WARN: CHIPSEC first-boot platform check reported WARN; proceeding with enrollment (review journal for firmware warnings)." >&2 ;;
+  esac
+  return 0
+}
+if ! chipsec_gate; then
+  exit 1
+fi
+# Test hook (tests/unit/test-enroll-unit.bats): stop after the gate.
+if [[ "${YUBIOS_ENROLL_GATE_ONLY:-0}" == 1 ]]; then
+  exit 0
+fi
+
 # shellcheck source=lib.sh
 source /usr/lib/yubiOS/lib.sh
 

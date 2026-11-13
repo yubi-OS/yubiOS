@@ -42,9 +42,10 @@ allow if input.local
 # builds and payload comparison are still required to prove reproducibility.
 #
 # To pin quay.io/fedora/fedora-bootc:
-#   skopeo inspect --format '{{.Digest}}' docker://quay.io/fedora/fedora-bootc:latest
-#   → sha256:<hash>
+#   skopeo inspect --format '{{.Digest}}' docker://quay.io/fedora/fedora-bootc:45
+#   → sha256:<hash>   (OCI index digest of the tracked :45 stream)
 #   Then in Containerfile: FROM quay.io/fedora/fedora-bootc@sha256:<hash>
+#   (digest-only form, OMN-170; fetch-fedora-bootc-manifest.yml keeps it current)
 allow if {
     approved_registry(input.image.ref)
     input.image.isCanonical

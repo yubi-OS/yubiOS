@@ -12,10 +12,20 @@ ExecStart=/usr/lib/yubiOS/chipsec/run-firstboot-check.sh
 # CHIPSEC's HAL requires raw hardware access (/dev/mem, PCI config space,
 # MSRs) to do its job -- this is the documented, scoped exception referenced
 # in ADR-024, not a blanket relaxation. Confined to this one-shot, first-boot
-# service; no network, no persistence, no lingering privilege.
+# service; no network, no lingering privilege, and no persistence beyond its
+# own first-boot status file (OMN-18).
 PrivateNetwork=yes
 ProtectHome=yes
 ProtectSystem=strict
 ReadWritePaths=/run/yubiOS /tmp
+# OMN-18: RuntimeDirectory= guarantees /run/yubiOS exists before the
+# ReadWritePaths= namespace is set up; Preserve=yes keeps the status file for
+# yubiOS-enroll.service after this one-shot exits. StateDirectory= makes
+# /var/lib/yubiOS writable (only) so the status can be persisted across reboot.
+RuntimeDirectory=yubiOS
+RuntimeDirectoryPreserve=yes
+StateDirectory=yubiOS
+# Optional portable-image mode: install usr/lib/yubiOS/chipsec/yubiOS-chipsec-portable.conf
+# as a drop-in alongside a signed /var/lib/portables/yubios-chipsec.raw.
 CapabilityBoundingSet=CAP_SYS_RAWIO CAP_SYS_ADMIN CAP_DAC_OVERRIDE
 NoNewPrivileges=no

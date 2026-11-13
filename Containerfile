@@ -4,7 +4,11 @@
 # Source: bootc design https://github.com/bootc-dev/bootc
 # Source: particleos ethos https://github.com/systemd/particleos
 
-FROM quay.io/fedora/fedora-bootc:45@sha256:0c0d822e8545efe843e72f4a216295e9fd3d8a8213709fff0db6844b5d9aad29 AS rootfs
+# Base: digest-only ref (OMN-170 / B-REPRO-MIRROR). The Fedora stream (:45) is
+# tracked by .github/workflows/fetch-fedora-bootc-manifest.yml and recorded in
+# PINNED.md; the FROM carries only the immutable OCI index digest so there is a
+# single source of identity (no tag+digest ambiguity for Build Policy/tooling).
+FROM quay.io/fedora/fedora-bootc@sha256:0ae801a078c884ff2553fb755c8a0cb7892523ab6c72d38cd786c592df587917 AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -24,6 +28,7 @@ ARG SOURCE_DATE_EPOCH
 # filesystem-dependent order. RPM itself honors SOURCE_DATE_EPOCH, so remove
 # those caches while retaining the installed RPM and runtime linker databases.
 RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
+      --setopt=metadata_expire=never \
       --setopt=updates-testing.excludepkgs=kernel-headers,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip \
       install \
       libfido2 \

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# Lay the CHIPSEC portable payload into the image root (OMN-18).
+# mkosi exports SRCDIR (repo checkout) and BUILDROOT (image root).
+set -euo pipefail
+
+: "${SRCDIR:?mkosi must export SRCDIR}"
+: "${BUILDROOT:?mkosi must export BUILDROOT}"
+
+"$SRCDIR/usr/lib/yubiOS/chipsec/build-portable-image.sh" stage "$BUILDROOT"

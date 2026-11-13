@@ -2,9 +2,12 @@ name: fetch-fedora-bootc-manifest
 
 # Resolves the quay.io/fedora/fedora-bootc:45 *INDEX* (manifest-list)
 # digest, then replaces the previously pinned Fedora bootc digest everywhere it
-# appears in repo text files.  The Containerfile keeps the :45 tag plus digest
-# suffix so humans can see the Fedora stream while Build Policy gets an
-# immutable ref.
+# appears in repo text files.  The upstream stream tag (:45, FEDORA_STREAM_TAG)
+# is only QUERIED here; the Containerfile carries the digest-only form
+#   FROM quay.io/fedora/fedora-bootc@sha256:<index-digest>
+# (OMN-170 / B-REPRO-MIRROR).  Any legacy `fedora-bootc:<tag>@sha256:` FROM is
+# normalized to the digest-only form, and the run fails closed if the
+# Containerfile FROM does not end up as `fedora-bootc@sha256:<new-digest>`.
 #
 # Runs on the BARE runner (no container): this is only a registry HTTPS query
 # and a repo text update. AGENTS.md allows container absent.
@@ -81,10 +84,13 @@ jobs:
           token: ${{ secrets.WORKFLOW }}
 
       - name: Fetch Fedora bootc manifest and update pinned refs
+        env:
+          # Upstream stream tag that is queried; never written into Containerfile*.
+          FEDORA_STREAM_TAG: '45'
         run: |
           set -euo pipefail
           image_path='fedora/fedora-bootc'
-          tag='45'
+          tag="${FEDORA_STREAM_TAG}"
           manifest_url="https://quay.io/v2/${image_path}/manifests/${tag}"
           accept_headers=(
             -H 'Accept: application/vnd.oci.image.index.v1+json'
@@ -105,6 +111,7 @@ jobs:
           printf '%s\n' "$headers" | grep -i -E 'docker-content-digest|content-type'
           index_digest=$(printf '%s\n' "$headers" | awk 'tolower($1)=="docker-content-digest:" {gsub("\r", "", $2); print $2; exit}')
           test -n "$index_digest"
+          printf '%s\n' "$index_digest" | grep -Eq '^sha256:[0-9a-f]{64}$'
 
           echo "== Confirm it is an INDEX and list its per-arch children =="
           curl -fsSL "${auth_args[@]}" \
@@ -125,14 +132,21 @@ jobs:
           python3 - "$index_digest" <<'PY'
           import datetime, pathlib, re, sys
           new_index = sys.argv[1]
+          if not re.fullmatch(r'sha256:[0-9a-f]{64}', new_index):
+              raise SystemExit(f'Refusing malformed index digest: {new_index!r}')
           today = datetime.date.today().isoformat()
           pinned = pathlib.Path('PINNED.md')
           text = pinned.read_text()
-          match = re.search(r'`quay\.io/fedora/fedora-bootc:45`[^|]*\| `(sha256:[0-9a-f]{64})`', text)
+          # PINNED.md row: digest-only image column (OMN-170) or legacy `:45` column.
+          match = re.search(r'`quay\.io/fedora/fedora-bootc(?::[0-9A-Za-z._-]+)?`[^|]*\| `(sha256:[0-9a-f]{64})`', text)
           if not match:
-              raise SystemExit('Could not find current fedora-bootc:45 digest in PINNED.md')
+              raise SystemExit('Could not find current fedora-bootc digest row in PINNED.md')
           old_index = match.group(1)
           replacements = {old_index: new_index}
+          if old_index == new_index:
+              print(f'fedora-bootc index digest unchanged: {new_index}')
+          # Legacy `fedora-bootc:<tag>@sha256:` -> digest-only `fedora-bootc@sha256:`.
+          legacy_ref = re.compile(r'quay\.io/fedora/fedora-bootc:[0-9A-Za-z._-]+@(sha256:[0-9a-f]{64})')
 
           for path in pathlib.Path('.').rglob('*'):
               if not path.is_file() or '.git' in path.parts:
@@ -145,11 +159,29 @@ jobs:
               for old, new in replacements.items():
                   updated = updated.replace(old, new)
                   updated = updated.replace(old.removeprefix('sha256:'), new.removeprefix('sha256:'))
-              if path == pinned:
+              if path.name.startswith('Containerfile'):
+                  updated = legacy_ref.sub(r'quay.io/fedora/fedora-bootc@\1', updated)
+              if path == pinned and old_index != new_index:
                   updated = re.sub(r'Re-resolved \d{4}-\d{2}-\d{2}', f'Re-resolved {today}', updated)
               if updated != data:
                   path.write_text(updated)
                   print(f'updated {path}')
+
+          # Fail closed: every fedora-bootc FROM in a top-level Containerfile* must be
+          # the digest-only form pinned to the freshly resolved index digest.
+          want = f'quay.io/fedora/fedora-bootc@{new_index}'
+          froms = []
+          for cf in sorted(pathlib.Path('.').glob('Containerfile*')):
+              for line in cf.read_text().splitlines():
+                  s = line.strip()
+                  if s.upper().startswith('FROM ') and 'fedora-bootc' in s:
+                      froms.append((cf.name, s))
+                      if s.split()[1] != want:
+                          raise SystemExit(f'{cf}: FROM is {s.split()[1]!r}, expected {want!r}')
+          if not froms:
+              raise SystemExit('No fedora-bootc FROM found in any top-level Containerfile*')
+          for name, s in froms:
+              print(f'verified {name}: {s}')
           PY
 
           if git diff --quiet; then

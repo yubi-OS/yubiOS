@@ -27,16 +27,39 @@ with vendor keys the user never sees.
 
 ## ADR-002: Secure Boot signing via PIV (CCID), not FIDO2 (hidraw)
 
-**Status:** Accepted
+**Status:** Accepted (amended 2026-10-11 / 2026-10-17 / 2026-11-12: PIV slot `9a`)
 
 **Context:** The user wants YubiKey /dev/hidraw* interfaces throughout.
 Secure Boot UKI signing requires an asymmetric signing operation with a
 certificate that can be enrolled in the UEFI Secure Boot `db`.
 
-**Decision:** Use YubiKey PIV slot 9c (Digital Signature) via PKCS#11 for
-Secure Boot key material. Interface: CCID (USB smartcard), not hidraw.
+**Decision:** Use YubiKey PIV slot `9a` (PIV Authentication) via PKCS#11 for the
+owner Secure Boot chain: the self-signed `PK`, the `KEK` and `db` certificates, and
+UKI signing all come from the slot `9a` key (RSA-2048, PIN policy ALWAYS, touch
+policy ALWAYS). Interface: CCID (USB smartcard), not hidraw. The slot is used for
+signing only; owner keys only, never CI keys. The implementation is
+`usr/lib/yubiOS/enroll-sb.sh` (PR #318, merged 2026-10-17), which refuses to run
+unless slot `9a` holds an RSA-2048 key, builds PK/KEK/db from it in setup mode,
+and verifies each signature against `db.crt`.
 
-**Signing toolchain:** Use `systemd-sbsign` (systemd v257+; yubiOS base is now pinned to v261+, see ADR-015 and ADR-016) via `--key pkcs11:...`.
+**Historical note:** Early Phase 0 drafts of this ADR (and docs that copied it)
+named PIV slot `9c` (Digital Signature). The owner chose slot `9a` on 2026-10-11,
+PR #318 landed it in `enroll-sb.sh` on 2026-10-17, and this ADR was brought into
+line on 2026-11-12 (OMN-83, closing the "ADR-002 still names slot 9c" drift noted
+under `B-OWNER-KEYS`). Any remaining slot `9c` reference in Secure Boot context is
+stale and should be corrected to `9a`.
+
+**Why slot `9a` over `9c`:**
+- One owner key, one PIN-and-touch ceremony: `9a` already carries the owner's PIV
+  identity, so the Secure Boot chain does not need a second slot minted and backed
+  up separately.
+- `enroll-sb.sh` enforces PIN policy ALWAYS and touch policy ALWAYS on the slot,
+  which removes the practical difference that made `9c` attractive (its
+  always-PIN default for signatures).
+- UEFI needs RSA keys; the script checks for RSA-2048 before any enrollment step,
+  so the slot choice and the algorithm floor are verified in one place.
+
+**Signing toolchain:** Use `systemd-sbsign` (systemd v257+; yubiOS base is now pinned to v261+, see ADR-015 and ADR-016) via `--key pkcs11:...` pointing at slot `9a`.
 This replaces legacy `sbsigntools` (`sbsign --engine pkcs11`). Both speak PKCS#11;
 systemd-sbsign integrates tighter with the UKI pipeline and is now the upstream default.
 
@@ -49,10 +72,15 @@ systemd-sbsign integrates tighter with the UKI pipeline and is now the upstream 
 **Future:** A fully hidraw-only signing path (FIDO2 HMAC-secret wrapping a
 Secure Boot key) is tracked in TODO.md. `age-plugin-fido2-hmac` is a candidate.
 
-**Consequence:** Users need `pcscd` running for PIV ops.
+**Consequence:** Users need `pcscd` running for PIV ops. The owner PK/KEK/db chain
+is still unenrolled on hardware: `B-OWNER-KEYS` (OMN-171) remains open until an
+attended slot `9a` ceremony runs on rock1 with the StandaloneMM enrollment step
+added to `enroll-sb.sh`. That ceremony is a Technical Preview Tier 2 gate (see
+[refs/technical-preview-entry-criteria-2026-11-12.md](../refs/technical-preview-entry-criteria-2026-11-12.md)).
 
 ```bash
 ykman config usb --enable FIDO --enable CCID
+ykman piv keys generate -a RSA2048 --pin-policy ALWAYS --touch-policy ALWAYS 9a slot9a-pub.pem
 ```
 
 
@@ -63,7 +91,12 @@ Dec 2024); the yubiOS base remains pinned to v261 per ADR-015/ADR-016. This PR c
 the v257→v261 doc-sync flagged in `RECENT_ACTIVITY.md` (2026-07-08 entry); no further
 swap is needed in this ADR.
 
-<last-reviewed-against-blockers>2026-07-28</last-reviewed-against-blockers>
+**Amendment (2026-11-12, OMN-83):** Slot `9c` -> slot `9a` for the owner PK/KEK/db
+chain and UKI signing, matching the 2026-10-11 owner decision and PR #318
+(2026-10-17, `usr/lib/yubiOS/enroll-sb.sh`). The early-draft slot `9c` wording is
+kept above as a historical note.
+
+<last-reviewed-against-blockers>2026-11-12</last-reviewed-against-blockers>
 ---
 
 ## ADR-003: LUKS2 + FIDO2 via systemd-cryptenroll (no TPM)
@@ -91,7 +124,7 @@ FIDO2. This is the only escape hatch if the YubiKey is lost or damaged.
 Print the recovery key and store it physically offline.
 
 **Boot phase binding (TPM-present systems only):** On hardware with a TPM (or the
-yubiOS-owned ARM64 fTPM, ADR-018), the DEK can additionally be sealed to PCR 11 phase
+yubiOS-owned ARM64 fTPM, ADR-018), the DEK can also be sealed to PCR 11 phase
 word `initrd-enter`; once `initrd-leave` is measured it can no longer be unsealed from
 userspace, protecting against post-boot extraction. On the no-TPM configuration this
 layer does not apply: FIDO2 hmac-secret has no PCR-sealing mechanism, and the
@@ -566,8 +599,8 @@ ConditionSecurity=measured-os
 
 ## ADR-019: Dual Root-of-Trust Provisioning Paths (Fuse-Enforcing vs Measured/Attested)
 
-**Date:** 2026-06-24
-**Status:** Proposed - post-launch (see [FUTURE.md](FUTURE.md))
+**Date:** 2026-06-24 (amended 2026-07-11, 2026-10-11, 2026-11-12)
+**Status:** Accepted for Technical Preview: Path B is the active target; Path A remains open as the production hardware-root proof (see [FUTURE.md](FUTURE.md))
 
 **Decision:** Support two provisioning paths:
 - **Path A - fuses burnable (enforcing):** owner-burned ROTPK hash in OTP/eFuse, full TBB, BL1 rejects any image that does not chain to it.
@@ -576,6 +609,32 @@ ConditionSecurity=measured-os
 **Honest framing:** Path B records what ran and can withhold secrets when measurements are wrong, but compromised code may execute long enough to measure itself. Path A is stronger.
 
 **Amendment (2026-07-11):** RPi 5 remains Path B only because the Broadcom VideoCore firmware remains in the root chain. RK3588 remains the preferred Path A family.
+
+**Amendment (2026-10-11 / 2026-11-12, OMN-83): Path B for Technical Preview; Path A deferred.**
+
+- **Technical Preview target is Path B.** The Technical Preview boot chain is
+  measured and attested without burning irreversible eFuses:
+  TF-A (BL31) -> OP-TEE (BL32) with the fTPM TA and StandaloneMM -> U-Boot UEFI
+  (BL33) -> signed UKI (owner `db`, PIV slot `9a` per ADR-002) -> sealed composefs
+  digest (Type2 `BLSConfig`, `B-BOOTC-SEAL` / `B-UKI-COMPOSEFS`). The 2026-10-11
+  ROCK 5B boot of CI-built firmware to OP-TEE and fTPM init (`YUBIOS_TPM_OK`) is
+  the first hardware evidence on this path.
+- **TBB stays exercised continuously in CI.** TF-A Trusted Board Boot flags are
+  built and booted in the QEMU lane (`ci_test-vm.yml`) on every run, so the Path A
+  image format and chain-of-trust code paths do not rot while the fuses stay unburned.
+- **Path A is deferred past Technical Preview.** Sacrificial ROTPK eFuse
+  provisioning (OMN-45) and hardware eMMC RPMB key programming and write-lock
+  (OMN-36, OMN-46, OMN-47, OMN-58) are not Technical Preview entry criteria.
+- **Path A remains the production gate.** yubiOS must not claim a hardware-enforced
+  boot-ROM root of trust on any board until Path A evidence (burned ROTPK, BL1
+  rejection of an unsigned image, RPMB-locked variables, fTPM NV) is recorded in
+  `refs/` for that board. Technical Preview material describes the boot chain as
+  "measured and attested", never as "fuse-enforced".
+- **Board scope.** Path B applies to all three ADR-029 boards (`rock5b-rk3588`,
+  `rockpro64-rk3399`, `pinetab2-rk3566`). Which board carries the first Path A
+  proof follows the ADR-029 pairwise rule rather than a fixed primary.
+
+See [refs/technical-preview-entry-criteria-2026-11-12.md](../refs/technical-preview-entry-criteria-2026-11-12.md) for the gate tiers.
 
 ---
 
@@ -643,6 +702,8 @@ ConditionSecurity=measured-os
 
 **Security exception:** CHIPSEC needs raw hardware access. This exception is scoped to the one-shot service and must not become a persistent base-system privilege.
 
+**Amendment (2026-11-12, OMN-18):** Completed the portable-service packaging and enrollment-result gating: `mkosi.conf.d/chipsec-portable/mkosi.conf` + `usr/lib/yubiOS/chipsec/build-portable-image.sh` build the `Format=portable` `Verity=signed` GPT `.raw` image (`yubios-chipsec-portable`), `usr/lib/yubiOS/chipsec/yubiOS-chipsec-portable.conf` provides the opt-in `RootImage=/var/lib/portables/yubios-chipsec.raw` (`RootImagePolicy=root=signed:usr=signed+absent:=absent`) drop-in, `usr/lib/yubiOS/chipsec/run-firstboot-check.sh` writes `/run/yubiOS/chipsec-firstboot.status` and `/var/lib/yubiOS/chipsec-firstboot.status` (`RESULT=PASS|WARN|FAILED`) and exits `1` on `FAILED`, and `yubiOS-enroll.service` (`After=yubiOS-chipsec-firstboot.service`, `ExecCondition=/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh`) plus `usr/lib/yubiOS/enroll.sh` refuse YubiKey provisioning when `RESULT=FAILED` while logging a warning and continuing on `RESULT=WARN`. See [refs/chipsec-portable-and-enrollment-gating-2026-11-12.md](../refs/chipsec-portable-and-enrollment-gating-2026-11-12.md).
+
 ---
 
 ## ADR-025: Post-Quantum Hybrid TLS (X25519MLKEM768) for Update/Attestation Endpoints
@@ -706,27 +767,46 @@ ConditionSecurity=measured-os
 
 ---
 
-## ADR-029: Radxa ROCK 5B as Primary Path A Board; ROCKPro64 as Supported Secondary
+## ADR-029: Pairwise Rockchip Board Paths -- ROCK 5B (RK3588), RockPro64 (RK3399), PineTab2 (RK3566); First to a Full Open-Source Stack Becomes the Reference Flagship
 
-**Date:** 2026-07-16
-**Status:** Accepted
+**Date:** 2026-07-16 (amended 2026-11-12)
+**Status:** Accepted (amended 2026-11-12, OMN-83: pairwise framing replaces primary/secondary; PineTab2 added)
 
-**Context:** ADR-023 established ARM64, especially RK3588 Path A, as the primary yubiOS platform direction, but it intentionally left the first concrete production-root board open. The current TODO list still tracked board selection as an active item. The project now needs stable board names for real-hardware evidence, firmware workflow variants, and Path A vs Path B reporting.
+**Context:** ADR-023 established ARM64 as the primary yubiOS platform direction but left the first concrete production-root board open. The original 2026-07-16 decision named Radxa ROCK 5B (RK3588) as the primary Path A board and ROCKPro64 (RK3399) as a supported secondary. Since then the evidence has shifted: ROCK 5B boots CI-built firmware to OP-TEE and fTPM but still depends on a proprietary Rockchip DDR blob, RockPro64 builds blob-free from source, and on 2026-11-05 PineTab2 (RK3566) gained a blob-free open-source DRAM init path verified in CI. A fixed primary/secondary hierarchy no longer describes which board is closest to the yubiOS goal of owner-owned trust below the UKI on a fully open-source stack.
 
-**Decision:** Use Radxa ROCK 5B (RK3588) as the primary Path A production-root proof board. Treat ROCKPro64 (RK3399) as a supported secondary board for bring-up and regression evidence.
+**Decision:** Replace the static primary/secondary hierarchy with a pairwise framing across three active Rockchip board paths:
 
-**Rationale:**
-- RK3588 was already the preferred Path A family in ADR-019 and ADR-023; ROCK 5B makes that preference actionable.
-- A single primary board keeps ROTPK/fuse, RPMB, OP-TEE, StandaloneMM, fTPM NV, and U-Boot UEFI evidence from spreading across too many variants before the first proof is complete.
-- RK3399/ROCKPro64 remains valuable because it exercises the older Rockchip secure-world and U-Boot lineage, but it should not block the RK3588 production-root proof.
+| Variant | Board | SoC | DRAM init | Firmware tag family |
+|---|---|---|---|---|
+| `rock5b-rk3588` | Radxa ROCK 5B | RK3588 (4x A76 + 4x A55) | Proprietary `rkbin` DDR/TPL blob, checksum-pinned at `3e288fe8` (PR #310) | `firmware-rock5b-rk3588[-<sha>]` |
+| `rockpro64-rk3399` | Pine64 RockPro64 | RK3399 (2x A72 + 4x A53) | Open-source U-Boot TPL (`sdram_rk3399.c`, `requires_rockchip_tpl: false`) | `firmware-rockpro64-rk3399[-<sha>]` |
+| `pinetab2-rk3566` | Pine64 PineTab2 | RK3566 (4x A55) | Open-source U-Boot TPL LPDDR4 driver, `1056 MHz` cap (`requires_rockchip_tpl: false`) | `firmware-pinetab2-rk3566[-<sha>]` |
+
+**Governing rule:** The three boards compete and complement each other pairwise. No board is permanently primary. Whichever path is first to achieve a full open-source stack supporting the complete yubiOS architecture becomes the reference flagship. "Full open-source stack" means: source-built DRAM init (no `rkbin` TPL), mainline TF-A BL31 with TBB flags, OP-TEE BL32 with the fTPM TA and StandaloneMM, U-Boot UEFI BL33, a signed UKI enrolled under the owner PIV slot `9a` chain (ADR-002), the sealed composefs digest, and an attended boot to userspace captured on UART. Path B (ADR-019) is enough to claim flagship status for Technical Preview; Path A evidence is needed before the flagship carries a production hardware-root claim.
+
+**PineTab2 (`pinetab2-rk3566`) roster evidence (2026-11-05):**
+- Pavel Golikov's 18-patch open-source U-Boot TPL DRAM controller series (`20260517-rk3568-raminit-v1`, hardware-validated on 4 GB LPDDR4; patch 18/18 caps DDR at `1056 MHz` for RK3566) was identified in [refs/flipper-one-rk3576-rk3566-ddr-2026-11-05.md](../refs/flipper-one-rk3576-rk3566-ddr-2026-11-05.md).
+- Ported to `yubi-OS/u-boot:main` in PR #1 (`5c7fe6ca3b`, merged 2026-11-05), which enables the open TPL in `pinetab2-rk3566_defconfig` and drops the `rk3566_ddr_1056MHz_v1.26.bin` fetch.
+- Paired with OP-TEE `rk3568`/`rk3566` platform support in `yubi-OS/optee_os` (`b619831e8a`).
+- Verified in `ci_firmware-rk.yml` (`3d46182203`), run `42124835234`: two-build reproducible, `requires_rockchip_tpl: false`.
+
+**Pairwise Comparison Matrix:**
+
+1. **`RK3566` (PineTab2) vs `RK3588` (ROCK 5B).** `RK3566` has a 100% open-source boot chain from the reset vector (`requires_rockchip_tpl: false`, open-source U-Boot TPL DRAM init merged and CI-verified), whereas `RK3588` currently requires the checksum-pinned proprietary `rkbin` DDR blob (`3e288fe8`, PR #310) until mainline RK3588 DRAM init matures. Conversely, `RK3588` has the higher compute ceiling (8-core A76/A55, up to 16 GB RAM) and the deeper hardware evidence: OP-TEE + fTPM on the board (`YUBIOS_TPM_OK`, 2026-10-11) and a 59.5 GB SD `bootc install` (`INSTALL_RC=0`, 2026-10-21). PineTab2 leads on openness; ROCK 5B leads on hardware bring-up depth.
+2. **`RK3566` (PineTab2) vs `RK3399` (RockPro64).** Both run 100% open-source DRAM init in U-Boot TPL (`requires_rockchip_tpl: false`). `RK3566` brings the newer Cortex-A55 SoC generation, an integrated form factor (tablet with keyboard and display), and freshly verified open-source LPDDR4 TPL (`1056 MHz`) plus the `optee_os` `rk3568`/`rk3566` flavor. `RK3399` has the longest-standing mainline TF-A/OP-TEE history (including `CFG_SECURE_TIME_SOURCE_CNTPCT` for SecTime) and currently serves as the live `rock1` self-hosted ARM64 KVM/flashing runner, which limits how much destructive boot testing it can take.
+3. **`RK3588` (ROCK 5B) vs `RK3399` (RockPro64).** `RK3588` leads on active target-board OS/fTPM bring-up and compute headroom; `rock1` stays dedicated to CI and flashing duties while ROCK 5B takes destructive and boot tests. `RK3399` already has mainline open-source TPL DRAM init without `rkbin`, which ROCK 5B lacks.
+
+**Reading the matrix:** ROCK 5B is furthest along on hardware bring-up but is the only path with a closed DRAM blob. PineTab2 is the only path that is both blob-free and a dedicated target board (not tied up as the CI runner), so it is the current front-runner for "first to a full open-source stack" once its UART boot capture and fTPM bring-up land. RockPro64 stays the open-source regression baseline.
 
 **Workflow and artifact consequences:**
-- Real-hardware firmware workflows should use explicit variant names: `rock5b-rk3588` for the primary/default Path A lane and `rockpro64-rk3399` for the supported secondary lane.
-- The production bootc OS image remains board-neutral: `0mniteck/yubios:latest` and `0mniteck/yubios:<sha>` should continue to identify the shared OS artifact, not a board-specific build.
+- Real-hardware firmware workflows use explicit variant names: `rock5b-rk3588`, `rockpro64-rk3399`, and `pinetab2-rk3566`. No variant is the implicit default; `ci_firmware-rk.yml` builds all three.
+- The production bootc OS image remains board-neutral: `0mniteck/yubios:latest` and `0mniteck/yubios:<sha>` identify the shared OS artifact, not a board-specific build.
 - `dev`/`dev-<sha>` and `installer`/`installer-<sha>` also remain board-neutral unless their payloads actually diverge by board.
-- Board-specific tags are only needed for firmware once real-hardware payloads diverge from the current QEMU/CI firmware bundle. If that happens, use the existing `0mniteck/yubios` namespace with tags such as `firmware-rock5b-rk3588`, `firmware-rock5b-rk3588-<sha>`, `firmware-rockpro64-rk3399`, and `firmware-rockpro64-rk3399-<sha>`.
+- Board-specific firmware tags live in the existing `0mniteck/yubios` namespace: `firmware-rock5b-rk3588[-<sha>]`, `firmware-rockpro64-rk3399[-<sha>]`, and `firmware-pinetab2-rk3566[-<sha>]`.
 
-**Consequences:** TODO.md should treat board selection as complete, then track evidence collection, sacrificial hardware provisioning, and workflow variant work separately. Documentation should avoid using generic RK3588 language when it means the ROCK 5B proof lane specifically.
+**Consequences:** Board selection is complete; TODO.md tracks evidence per variant. Documentation names the specific variant (`rock5b-rk3588`, `rockpro64-rk3399`, `pinetab2-rk3566`) instead of generic SoC language, and describes boards as paths in a pairwise comparison, not as primary/secondary. When one path meets the full open-source stack definition above, record it in a dated `refs/` note and amend this ADR to name it the reference flagship. ADR-023's "RK3588 Path A" wording should be read through this amendment.
+
+**Historical note (2026-07-16 original decision):** "Use Radxa ROCK 5B (RK3588) as the primary Path A production-root proof board. Treat ROCKPro64 (RK3399) as a supported secondary board for bring-up and regression evidence." Rationale at the time: RK3588 was the preferred Path A family in ADR-019 and ADR-023, and a single primary board kept ROTPK/fuse, RPMB, OP-TEE, StandaloneMM, fTPM NV, and U-Boot UEFI evidence from spreading across too many variants before the first proof. The pairwise rule keeps that discipline through the "first to full stack" criterion instead of a fixed ranking.
 
 ---
 
@@ -788,7 +868,7 @@ flowchart TD
 4. Userspace device models (the CI-testable, no-IOMMU-required path) use **vfio-user**: unprivileged process, `0600` socket owned by the VMM user, mutual distrust per spec. Never expose a vfio-user socket beyond a single host namespace until the protocol has authentication.
 5. **No trust-boundary component may consume GPU state.** Adding or removing a GPU (virtio-gpu or a gated passthrough device) must be a no-op for Secure Boot, LUKS2 FIDO2 unlock (ADR-003), homed (ADR-009), pam-u2f (ADR-005), and fTPM PCR behaviour.
 6. GPU resource quota/lockout (Frost/Panfrost, see [FUTURE.md](FUTURE.md) Milestone Frost) is a separate concern from this access gate and makes no claims here about per-cgroup enforcement.
-7. **Boot-time image attestation gates libvirt launches.** Before any libvirt-class launcher (bcvk, virt-manager, or any `<hostdev>` PCI-assignment path) may attach a PCI GPU -- through any of the three architectures in rules 1-5 (virtio-gpu, vfio-user, vfio-pci) -- to a yubiOS guest, the gate must additionally confirm: (a) the bootc OCI image digest matches a pinned reference digest in the launcher's reference value store, AND (b) the SLSA provenance attestation attached to that image verifies against the expected builder-id. **Enforcement is software-only -- no TEE required.** The builder-id reference is operator-set today (same trust model as rule 2's operator-set passthrough policy); a future iteration may anchor the builder-id to a hardware root of trust (fTPM PCR or YubiKey attestation). The existing `ci_test-vgpu-vm.yml` matrix extends with a `YUBIOS_ATTESTED=1` leg to prove the gate end to end.
+7. **Boot-time image attestation gates libvirt launches.** Before any libvirt-class launcher (bcvk, virt-manager, or any `<hostdev>` PCI-assignment path) may attach a PCI GPU -- through any of the three architectures in rules 1-5 (virtio-gpu, vfio-user, vfio-pci) -- to a yubiOS guest, the gate must also confirm: (a) the bootc OCI image digest matches a pinned reference digest in the launcher's reference value store, AND (b) the SLSA provenance attestation attached to that image verifies against the expected builder-id. **Enforcement is software-only -- no TEE required.** The builder-id reference is operator-set today (same trust model as rule 2's operator-set passthrough policy); a future iteration may anchor the builder-id to a hardware root of trust (fTPM PCR or YubiKey attestation). The existing `ci_test-vgpu-vm.yml` matrix extends with a `YUBIOS_ATTESTED=1` leg to prove the gate end to end.
 
 **Evidence landed with this decision:**
 

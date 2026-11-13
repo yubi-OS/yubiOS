@@ -89,7 +89,7 @@ owner-owned-hardware-root-of-trust goal is fully realized (ADR-023).
 ### 4.1 Image and delivery
 
 - **Format:** bootc OCI image (primary, `docker.io/0mniteck/yubios`, multi-arch amd64+arm64, `:latest` + immutable `:<commit-sha>`) and mkosi disk image (particleos-style UKI + verity, `mkosi --profile yubios`). Both consume the same `usr/` overlay tree and MUST behave identically at runtime (ADR-006).
-- **Base:** `quay.io/fedora/fedora-bootc:45`, digest-pinned; the current digest lives in [PINNED.md](../PINNED.md) only (ADR-015).
+- **Base:** `quay.io/fedora/fedora-bootc@sha256:<digest>` (digest-only, tracking the upstream `:45` stream); the current digest lives in [PINNED.md](../PINNED.md) only (ADR-015, OMN-170).
 - **Build:** rootless Docker Buildx, `--policy reset=true,strict=true,filename=yubiOS.rego`, `--attest type=provenance,mode=max --attest type=sbom` (ADR-014).
 
 ### 4.2 Partition layout (DPS, no /etc/fstab)

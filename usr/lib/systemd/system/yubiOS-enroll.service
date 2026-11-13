@@ -7,6 +7,11 @@ Description=yubiOS YubiKey Enrollment Wizard (First Boot)
 After=local-fs.target systemd-logind.service
 Wants=pcscd.service
 After=pcscd.service
+# ADR-024 / OMN-18: run the first-boot CHIPSEC platform check first and gate
+# enrollment on its result. Wants= (not Requires=) so a skipped or failed
+# CHIPSEC unit never takes enrollment down with it; the gate below decides.
+Wants=yubiOS-chipsec-firstboot.service
+After=yubiOS-chipsec-firstboot.service
 ConditionFirstBoot=yes
 ConditionPathExists=!/var/lib/yubiOS/.enrolled
 # ADR-016: gate enrollment on full measured-boot (systemd >= 261 required)
@@ -19,6 +24,11 @@ TTYPath=/dev/tty1
 StandardInput=tty
 StandardOutput=tty
 StandardError=tty
+# ADR-024 / OMN-18: skip (block) enrollment when the first-boot CHIPSEC
+# status file says RESULT=FAILED; WARN/PASS/absent proceed. ExecCondition=
+# exit 1 skips the unit, so the ExecStartPost= .enrolled marker is not written
+# and enrollment stays pending until the firmware finding is resolved.
+ExecCondition=/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh
 ExecStart=/usr/lib/yubiOS/enroll.sh
 ExecStartPost=/bin/mkdir -p /var/lib/yubiOS
 ExecStartPost=/bin/touch /var/lib/yubiOS/.enrolled

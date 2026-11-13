@@ -43,10 +43,11 @@ jobs:
             echo "::notice::Using manual digest override: ${{ inputs.digest }}"
             exit 0
           fi
-          # PINNED.md has multiple sha256 rows; pick the quay.io/fedora/fedora-bootc:45 line specifically.
-          pinned="$(grep -E 'quay\.io/fedora/fedora-bootc:45' PINNED.md | grep -Eo 'sha256:[a-f0-9]{64}' | head -1 || true)"
+          # PINNED.md has multiple sha256 rows; pick the quay.io/fedora/fedora-bootc row specifically
+          # (digest-only image column since OMN-170; legacy `:45` column still matched).
+          pinned="$(grep -E '^\| `quay\.io/fedora/fedora-bootc(:45)?`' PINNED.md | grep -Eo 'sha256:[a-f0-9]{64}' | head -1 || true)"
           if [ -z "$pinned" ]; then
-            echo "::error::No sha256 digest found on the quay.io/fedora/fedora-bootc:45 row of PINNED.md; supply via workflow_dispatch digest input"
+            echo "::error::No sha256 digest found on the quay.io/fedora/fedora-bootc row of PINNED.md; supply via workflow_dispatch digest input"
             exit 2
           fi
           echo "value=$pinned" >> "$GITHUB_OUTPUT"

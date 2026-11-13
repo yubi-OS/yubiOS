@@ -35,6 +35,7 @@ ARG SOURCE_DATE_EPOCH
 # destructive hardware leg stops dying at "Installing to disk: bootupd
 # is required for ostree-based installs" (errors/bcvk native_to_disk.rs:262).
 RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
+      --setopt=metadata_expire=never \
       --setopt=updates-testing.excludepkgs=kernel-headers,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip \
       install bootupd && \
     rm -f /var/cache/dnf/*.lock /var/cache/dnf/*.pid /run/dnf5.lock /run/dnf.lock 2>/dev/null || true && \

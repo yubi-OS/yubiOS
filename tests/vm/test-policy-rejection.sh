@@ -91,7 +91,9 @@ cases = [
     ("unpinned mutable tag on approved registry", {"local": False, "image": {"ref": "quay.io/fedora/fedora-bootc:45", "isCanonical": False}}, False, "uses a mutable tag"),
     ("pinned digest on unapproved registry", {"local": False, "image": {"ref": "docker.io/library/ubuntu@sha256:" + "a"*64, "isCanonical": True}}, False, "is not from an approved registry"),
     ("unapproved docker.io/docker image", {"local": False, "image": {"ref": "docker.io/docker/dockerfile:1", "isCanonical": False}}, False, "is not from an approved registry"),
-    ("digest-pinned quay.io/fedora base image", {"local": False, "image": {"ref": "quay.io/fedora/fedora-bootc:45@sha256:" + "b"*64, "isCanonical": True}}, True, "Build allowed."),
+    ("unpinned :latest tag on approved registry", {"local": False, "image": {"ref": "quay.io/fedora/fedora-bootc:latest", "isCanonical": False}}, False, "uses a mutable tag"),
+    ("digest-only quay.io/fedora base image (OMN-170 canonical form)", {"local": False, "image": {"ref": "quay.io/fedora/fedora-bootc@sha256:" + "b"*64, "isCanonical": True}}, True, "Build allowed."),
+    ("legacy tag+digest quay.io/fedora base image", {"local": False, "image": {"ref": "quay.io/fedora/fedora-bootc:45@sha256:" + "b"*64, "isCanonical": True}}, True, "Build allowed."),
     ("buildkit-syft-scanner carve-out (OMN-157)", {"local": False, "image": {"ref": "docker.io/docker/buildkit-syft-scanner:stable-1", "isCanonical": False}}, True, "Build allowed."),
 ]
 
