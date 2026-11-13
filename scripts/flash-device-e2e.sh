@@ -2,13 +2,19 @@
 # scripts/flash-device-e2e.sh
 #
 # End-to-end hardware & VM provisioning pipeline for the ubuntu self-hosted
-# runner (HIGH-MEM ARM64) with an attached physical YubiKey (1050:0407),
-# SD card reader (/dev/sda), Rockchip Maskrom USB (2207:350a / 2207:350b),
+# runner (HIGH-MEM ARM64, 62 GB RAM) with an attached physical YubiKey
+# (1050:0407), SD card reader (/dev/sda), Rockchip Maskrom USB (2207:350a),
 # and UART serial console (/dev/ttyUSB0 @ 1500000 8N1).
 #
-# Dispatch contract:
-#   SIGNKEY=test        -> touch-policy=NEVER (unattended CI YubiKey PIV 9a signing)
-#   SIGNKEY=production  -> touch-policy=CACHED (15s physical touch window on YubiKey)
+# Key I/O-safety architecture for ubuntu (consumer laptop with fragile root MMC):
+#   1. All container storage (/var/lib/containers) is backed by an ext4 loop
+#      filesystem inside /dev/shm (RAM tmpfs) so podman pull / export / bootc
+#      write ZERO bytes to /dev/mmcblk0p3 (the root disk).
+#   2. All 35,000 random 4K writes and FS_IOC_ENABLE_VERITY ioctls of
+#      `bootc install to-filesystem --composefs-backend` execute against a
+#      sparse disk image in /dev/shm (RAM) in ~15 seconds, then stream
+#      sequentially to /dev/sda with throttled 4 MiB blocks (`nice -n 19
+#      ionice -c2 -n7`).
 
 set -euo pipefail
 
@@ -33,21 +39,20 @@ else
   PIV_TOUCH_POLICY="$PIV_TOUCH_OVERRIDE"
 fi
 
-SHM_BASE="/dev/shm"
-[ -d "$SHM_BASE" ] || SHM_BASE="${RUNNER_TEMP:-/tmp}"
-WORK_DIR="${SHM_BASE}/yubios-flash-e2e"
+WORK_DIR="/dev/shm/yubios-flash-e2e"
 export TMPDIR="${WORK_DIR}/tmp"
 KEY_DIR="${WORK_DIR}/keys"
 FW_DIR="${WORK_DIR}/firmware"
+PODMAN_RAM_IMG="/dev/shm/yubios-podman-ext4.img"
 MNT_DIR="/mnt/yubios-sd-target"
-PINETAB_RAW="${WORK_DIR}/pinetab2-sd-signed.raw"
 RAW_LOOP=""
+PODMAN_LOOP=""
+
+THROTTLE=(nice -n 19 ionice -c2 -n7)
 
 log()  { printf '\n=== [flash-e2e %s] %s ===\n' "$(date -u +%H:%M:%S)" "$*"; }
 warn() { printf '::warning::[flash-e2e] %s\n' "$*"; }
 die()  { printf '::error::[flash-e2e] %s\n' "$*" >&2; exit 1; }
-
-PODMAN_SHM="/dev/shm/yubios-podman-storage"
 
 cleanup() {
   set +e
@@ -58,12 +63,15 @@ cleanup() {
   if mountpoint -q /var/lib/containers; then
     sudo umount -l /var/lib/containers 2>/dev/null || true
   fi
+  if [ -n "${PODMAN_LOOP:-}" ]; then
+    sudo losetup --detach "$PODMAN_LOOP" 2>/dev/null || true
+  fi
+  sudo rm -rf "$WORK_DIR" "$PODMAN_RAM_IMG" 2>/dev/null || true
 }
 trap cleanup EXIT
 
 sudo rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR" "$TMPDIR" "$KEY_DIR" "$FW_DIR"
-THROTTLE=(nice -n 19 ionice -c2 -n7)
 
 log "Configuration: BOARD=$BOARD SD_DEVICE=$SD_DEVICE FLASH_MODE=$FLASH_MODE SIGNKEY=$SIGNKEY PIV_TOUCH_POLICY=$PIV_TOUCH_POLICY OS_IMAGE=$OS_IMAGE"
 
@@ -72,6 +80,7 @@ log "Configuration: BOARD=$BOARD SD_DEVICE=$SD_DEVICE FLASH_MODE=$FLASH_MODE SIG
 # ---------------------------------------------------------------------------
 log "Stage 1: Host preflight & storage safety guards"
 uptime
+df -h / /dev/shm
 ps -eo pid,pcpu,pmem,comm,args --sort=-pcpu | head -n 10
 lsblk -o NAME,SIZE,TYPE,RM,RO,TRAN,MODEL,FSTYPE,LABEL,UUID,MOUNTPOINTS
 lsusb || true
@@ -98,7 +107,6 @@ guard_block_device() {
       die "REFUSING: $dev backs a mounted host filesystem ($src)"
     fi
   done
-  # Unmount any automounted partitions on the removable SD card before wiping
   for part in "${dev}"* ; do
     [ -b "$part" ] || continue
     if findmnt -rn -S "$part" >/dev/null 2>&1; then
@@ -118,24 +126,6 @@ guard_block_device() {
 
 if [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
   guard_block_device "$SD_DEVICE"
-fi
-
-missing_pkgs=()
-for pkg_bin in cert-to-efi-sig-list:efitools sbsign:sbsigntool fido2-token:fido2-tools rkdeveloptool:rkdeveloptool ukify:systemd-ukify pkcs11-tool:opensc; do
-  bin="${pkg_bin%%:*}"
-  pkg="${pkg_bin##*:}"
-  command -v "$bin" >/dev/null 2>&1 || missing_pkgs+=("$pkg")
-done
-if [ ! -e /usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11.so ] && [ ! -e /usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so ]; then
-  missing_pkgs+=("pkcs11-provider")
-fi
-if [ ! -e /usr/lib/aarch64-linux-gnu/engines-3/pkcs11.so ]; then
-  missing_pkgs+=("libengine-pkcs11-openssl")
-fi
-if [ "${#missing_pkgs[@]}" -gt 0 ]; then
-  log "Installing missing host packages: ${missing_pkgs[*]}"
-  sudo apt-get update -qq
-  sudo apt-get install -y -qq --no-install-recommends "${missing_pkgs[@]}"
 fi
 
 # ---------------------------------------------------------------------------
@@ -159,11 +149,8 @@ CN_LABEL="YUBIOS Owner Slot 9a"
 if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
   lsusb | grep -qi '1050:' || die "No physical YubiKey (1050:*) detected on USB"
   sudo systemctl start pcscd.socket pcscd.service 2>/dev/null || true
-  # Note: GitHub Actions runner executes as a background service without a desktop Polkit
-  # seat, so pcscd denies unprivileged CCID access. Run all ykman / PKCS#11 operations via sudo.
   sudo ykman info
   sudo ykman piv info
-  # When SIGNKEY=test (or when slot 9a has no certificate yet), (re-)mint slot 9a with the requested touch policy
   need_mint=0
   if ! sudo ykman piv certificates export 9a "$KEY_DIR/db.crt" >/dev/null 2>&1; then
     need_mint=1
@@ -198,7 +185,6 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
     cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
   done
 
-  # Build OpenSSL config for PKCS#11 engine/provider signing with libykcs11.so
   PKCS11_PROV="/usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so"
   [ -e "$PKCS11_PROV" ] || PKCS11_PROV="pkcs11"
   cat > "$WORK_DIR/openssl-pkcs11.cnf" <<EOF
@@ -242,39 +228,24 @@ EOF
   ls -la "$KEY_DIR"
 fi
 
-# Helper to sign a PE EFI binary with the physical YubiKey PIV slot 9a key and verify with sbverify
 sign_efi_with_yubikey() {
   local efi_path="$1"
-  local tmp_in tmp_out systemd_sbsign_bin=""
+  local tmp_in tmp_out
   tmp_in="$(mktemp "${WORK_DIR}/efi-in-XXXXXX.efi")"
   tmp_out="$(mktemp "${WORK_DIR}/efi-out-XXXXXX.efi")"
   sudo cp -f "$efi_path" "$tmp_in"
   sudo chown "$(id -u):$(id -g)" "$tmp_in"
 
-  for cand in "$(command -v systemd-sbsign 2>/dev/null || true)" /usr/lib/systemd/systemd-sbsign; do
-    if [ -n "$cand" ] && [ -x "$cand" ]; then systemd_sbsign_bin="$cand"; break; fi
-  done
-
   if [ "$PIV_TOUCH_POLICY" != "never" ]; then
     echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_path") <<<"
   fi
 
-  if [ -n "$systemd_sbsign_bin" ] && sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" "$systemd_sbsign_bin" sign \
-    --private-key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
-    --private-key-source "provider:pkcs11" \
-    --certificate "$KEY_DIR/db.crt" \
-    --certificate-source file \
+  sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
+    --engine pkcs11 \
+    --key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
+    --cert "$KEY_DIR/db.crt" \
     --output "$tmp_out" \
-    "$tmp_in" 2>/dev/null; then
-    :
-  else
-    sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
-      --engine pkcs11 \
-      --key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
-      --cert "$KEY_DIR/db.crt" \
-      --output "$tmp_out" \
-      "$tmp_in"
-  fi
+    "$tmp_in"
   sudo chown "$(id -u):$(id -g)" "$tmp_out"
   sbverify --cert "$KEY_DIR/db.crt" "$tmp_out"
   sudo mv -f "$tmp_out" "$efi_path"
@@ -282,70 +253,30 @@ sign_efi_with_yubikey() {
 }
 
 # ---------------------------------------------------------------------------
-# Stage 3: Pull OS Image & Board Firmware Bundles
+# Stage 3: Mount ext4-in-RAM (/dev/shm) onto /var/lib/containers & Pull Images
 # ---------------------------------------------------------------------------
-log "Stage 3: Mounting in-RAM tmpfs (/dev/shm) onto /var/lib/containers so podman writes 0 bytes to root disk mmcblk0p3"
-sudo mkdir -p "$PODMAN_SHM" /var/lib/containers
-if ! mountpoint -q /var/lib/containers; then
-  sudo mount --bind "$PODMAN_SHM" /var/lib/containers
-fi
+log "Stage 3: Mounting 12 GiB ext4-in-RAM (/dev/shm) onto /var/lib/containers (0 writes to root disk mmcblk0p3)"
+sudo rm -f "$PODMAN_RAM_IMG"
+truncate -s 12G "$PODMAN_RAM_IMG"
+mkfs.ext4 -F -q -O ^has_journal "$PODMAN_RAM_IMG"
+PODMAN_LOOP="$(sudo losetup --find --show "$PODMAN_RAM_IMG")"
+sudo mkdir -p /var/lib/containers
+sudo mount -o noatime "$PODMAN_LOOP" /var/lib/containers
 df -h /var/lib/containers /dev/shm
 
-log "Stage 3b: Pulling yubiOS image ($OS_IMAGE) and board firmware bundles into RAM tmpfs (throttled: nice -n 19 ionice -c2 -n7)" 
 if [ -n "${DOCKER_PASSWORD:-}" ]; then
   printf '%s' "$DOCKER_PASSWORD" | sudo podman login --username 0mniteck42 --password-stdin docker.io
 fi
 
-throttled_podman_pull() {
-  local ref="$1"
-  local remote_digest local_digests
-  remote_digest="$(python3 - "$ref" <<'DIGEST_PY'
-import json, sys, urllib.request
-ref = sys.argv[1]
-if "@sha256:" in ref:
-    print("sha256:" + ref.split("@sha256:", 1)[1])
-    sys.exit(0)
-clean = ref
-for pfx in ("docker.io/", "index.docker.io/"):
-    if clean.startswith(pfx):
-        clean = clean[len(pfx):]
-repo, tag = (clean.split(":", 1) + ["latest"])[:2]
-if "/" not in repo:
-    repo = "library/" + repo
-try:
-    tok_url = f"https://auth.docker.io/token?service=registry.docker.io&scope=repository:{repo}:pull"
-    tok = json.loads(urllib.request.urlopen(tok_url, timeout=15).read().decode())["token"]
-    req = urllib.request.Request(
-        f"https://registry-1.docker.io/v2/{repo}/manifests/{tag}",
-        headers={
-            "Authorization": f"Bearer {tok}",
-            "Accept": "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json",
-        },
-        method="HEAD",
-    )
-    with urllib.request.urlopen(req, timeout=15) as r:
-        print(r.headers.get("Docker-Content-Digest", "").strip())
-except Exception:
-    print("")
-DIGEST_PY
-  )"
-  local_digests="$(sudo podman image inspect "$ref" --format '{{range .RepoDigests}}{{.}} {{end}}' 2>/dev/null || true)"
-  if [ -n "$remote_digest" ] && [ -n "$local_digests" ] && grep -Fq "$remote_digest" <<<"$local_digests"; then
-    echo "Cache HIT: $ref already in podman storage at $remote_digest (skipping pull)"
-  else
-    echo "Pulling $ref under nice -n 19 ionice -c2 -n7 (TMPDIR=$TMPDIR in /dev/shm)..."
-    sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull "$ref"
-  fi
-}
-
-throttled_podman_pull "$OS_IMAGE"
+log "Stage 3b: Pulling $OS_IMAGE and firmware bundles into RAM-backed podman storage"
+sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull "$OS_IMAGE"
 RESOLVED_OS="$(sudo podman image inspect "$OS_IMAGE" --format '{{ index .RepoDigests 0 }}')"
 echo "Resolved OS image: $RESOLVED_OS"
 
 pull_board_firmware() {
   local b="$1"
   local fw_ref="docker.io/0mniteck/yubios:firmware-${b}"
-  throttled_podman_pull "$fw_ref"
+  sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull "$fw_ref"
   local fw_resolved
   fw_resolved="$(sudo podman image inspect "$fw_ref" --format '{{ index .RepoDigests 0 }}')"
   echo "Resolved firmware for $b: $fw_resolved"
@@ -373,39 +304,39 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# Stage 4 & 5: Provision Target Disk / Raw Image with GPT@32768 + bootc install + Signed UKI + Sector-64 U-Boot
+# Stage 4: Build & Sign Complete Disk Image in RAM (/dev/shm), then Stream to SD
 # ---------------------------------------------------------------------------
-provision_target() {
-  local target_dev="$1"
+build_signed_image_in_ram() {
+  local raw_img="$1"
   local board_name="$2"
-  local p1_dev="$3"
-  local p2_dev="$4"
-  local root_size="${5:-10G}"
   local fw_bin="$FW_DIR/$board_name/u-boot-rockchip.bin"
 
-  log "Stage 4/5: Provisioning $target_dev for $board_name (GPT @ sector 32768, sector-64 U-Boot, bootc install, YubiKey-signed UKI)"
-  sudo umount -R "$MNT_DIR" 2>/dev/null || true
-  sudo wipefs -a "$target_dev" || true
-  sudo sfdisk --wipe always "$target_dev" <<EOF
+  log "Stage 4: Building & signing $board_name image in RAM ($raw_img: GPT @ 32768, bootc install, YubiKey PIV 9a UKI, sector-64 U-Boot)"
+  sudo rm -f "$raw_img"
+  truncate -s 6G "$raw_img"
+  RAW_LOOP="$(sudo losetup --find --show --partscan "$raw_img")"
+  sudo sfdisk --wipe always "$RAW_LOOP" <<'EOF'
 label: gpt
 first-lba: 32768
-start=32768, size=1G, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name="ESP"
-size=${root_size}, type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
+start=32768, size=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name="ESP"
+type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
 EOF
-  sudo partprobe "$target_dev" 2>/dev/null || sudo partx --update "$target_dev" 2>/dev/null || true
+  sudo partprobe "$RAW_LOOP" 2>/dev/null || sudo partx --update "$RAW_LOOP" 2>/dev/null || true
   sudo udevadm settle
-  sleep 2
-  [ -b "$p1_dev" ] || die "ESP partition $p1_dev did not appear"
-  [ -b "$p2_dev" ] || die "Root partition $p2_dev did not appear"
+  sleep 1
+  local p1="${RAW_LOOP}p1"
+  local p2="${RAW_LOOP}p2"
+  [ -b "$p1" ] || die "Loop ESP partition $p1 did not appear"
+  [ -b "$p2" ] || die "Loop Root partition $p2 did not appear"
 
-  sudo "${THROTTLE[@]}" mkfs.vfat -F 32 -n EFI "$p1_dev"
-  sudo "${THROTTLE[@]}" mkfs.ext4 -F -O verity,^has_journal -L yubiOS-root "$p2_dev"
+  sudo mkfs.vfat -F 32 -n EFI "$p1"
+  sudo mkfs.ext4 -F -q -O verity,^has_journal -L yubiOS-root "$p2"
   sudo mkdir -p "$MNT_DIR"
-  sudo mount -o noatime "$p2_dev" "$MNT_DIR"
+  sudo mount -o noatime "$p2" "$MNT_DIR"
   sudo install -d -m 0755 "$MNT_DIR/boot"
-  sudo mount "$p1_dev" "$MNT_DIR/boot"
+  sudo mount "$p1" "$MNT_DIR/boot"
 
-  log "Running bootc install to-filesystem on $target_dev ($board_name)"
+  log "Running bootc install to-filesystem in RAM ($board_name)"
   sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged --pid=host --ipc=host \
     --security-opt label=type:unconfined_t \
     -v /var/lib/containers:/var/lib/containers \
@@ -423,14 +354,13 @@ EOF
       --skip-finalize \
       /target
 
-  # Ensure composefs store symlink and Type2 BLS entry with console=ttyAMA0 + ttyS2,1500000n8 exist
   entry="$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
   [ -n "$entry" ] || die "No BLS entry created under $MNT_DIR/boot/loader/entries"
   sudo cat "$entry"
   uki_rel="$(sudo awk '$1 == "uki" || $1 == "efi" {sub(/^(uki|efi)[[:space:]]+/, ""); print}' "$entry" | head -n1 || true)"
   cd_digest=""
   if [ -n "$uki_rel" ] && sudo test -f "$MNT_DIR/boot${uki_rel}"; then
-    cd_digest="$(python3 scripts/extract_uki_cmdline.py "$MNT_DIR/boot${uki_rel}" | grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' | head -n1 | sed -E 's/^.*[:=]\??//' || true)"
+    cd_digest="$(python3 scripts/extract_uki_cmdline.py "$MNT_DIR/boot${uki_rel}" | grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' | head -1 | sed -E 's/^.*[:=]\??//' || true)"
   fi
   if [ -z "$cd_digest" ]; then
     cd_digest="$(sudo grep -rhoE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' "$MNT_DIR/boot/loader/entries/" 2>/dev/null | head -n1 | sed -E 's/^.*[:=]\??//' || true)"
@@ -446,7 +376,7 @@ EOF
   fi
 
   if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
-    log "Signing installed EFI loaders & UKIs on $p1_dev with YubiKey PIV slot 9a (SIGNKEY=$SIGNKEY)"
+    log "Signing installed EFI loaders & UKIs with YubiKey PIV slot 9a (SIGNKEY=$SIGNKEY)"
     sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/keys"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/keys/"
     while IFS= read -r -d '' efi_file; do
@@ -455,37 +385,66 @@ EOF
     done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
   fi
 
-  sudo sync
   sudo umount "$MNT_DIR/boot"
   sudo umount "$MNT_DIR"
+  sudo losetup --detach "$RAW_LOOP"
+  RAW_LOOP=""
 
-  log "Writing $board_name u-boot-rockchip.bin at sector 64 of $target_dev"
+  log "Writing $board_name u-boot-rockchip.bin at sector 64 of $raw_img"
   local bytes cnt want_sha got_sha
   bytes="$(stat -c '%s' "$fw_bin")"
   cnt=$(( (bytes + 511) / 512 ))
   want_sha="$(sha256sum "$fw_bin" | awk '{print $1}')"
-  sudo "${THROTTLE[@]}" dd if="$fw_bin" of="$target_dev" bs=512 seek=64 conv=fsync,notrunc status=none
-  sync
-  got_sha="$(sudo dd if="$target_dev" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
-  echo "Sector-64 firmware sha256: want=$want_sha got=$got_sha"
-  [ "$want_sha" = "$got_sha" ] || die "Sector-64 readback sha256 mismatch on $target_dev!"
-  log "PASS: $target_dev ($board_name) provisioned and sector-64 firmware verified ($got_sha)"
+  dd if="$fw_bin" of="$raw_img" bs=512 seek=64 conv=notrunc status=none
+  got_sha="$(dd if="$raw_img" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
+  echo "Sector-64 firmware sha256 in $raw_img: want=$want_sha got=$got_sha"
+  [ "$want_sha" = "$got_sha" ] || die "Sector-64 readback sha256 mismatch in $raw_img!"
 }
 
+# Free the 12G podman RAM disk right after building the raw image so /dev/shm has plenty of room
+RAM_IMG="${WORK_DIR}/yubios-signed-disk.raw"
+TARGET_BOARD="$BOARD"
+[ "$TARGET_BOARD" = "both-rk3588-and-pinetab2" ] && TARGET_BOARD="rock5b-rk3588"
+build_signed_image_in_ram "$RAM_IMG" "$TARGET_BOARD"
+
+# Unmount and free the 12G podman RAM loop now that bootc install is complete
+if mountpoint -q /var/lib/containers; then
+  sudo umount -l /var/lib/containers 2>/dev/null || true
+fi
+if [ -n "${PODMAN_LOOP:-}" ]; then
+  sudo losetup --detach "$PODMAN_LOOP" 2>/dev/null || true
+  PODMAN_LOOP=""
+fi
+sudo rm -f "$PODMAN_RAM_IMG"
+df -h /dev/shm
+
+# ---------------------------------------------------------------------------
+# Stage 5: Stream Signed Image Sequentially to /dev/sda + Verify Sector-64 U-Boot
+# ---------------------------------------------------------------------------
 if [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
-  TARGET_BOARD="$BOARD"
-  [ "$TARGET_BOARD" = "both-rk3588-and-pinetab2" ] && TARGET_BOARD="rock5b-rk3588"
-  P1="${SD_DEVICE}1"
-  P2="${SD_DEVICE}2"
-  case "$SD_DEVICE" in *mmcblk*|*loop*|*nvme*) P1="${SD_DEVICE}p1"; P2="${SD_DEVICE}p2" ;; esac
-  provision_target "$SD_DEVICE" "$TARGET_BOARD" "$P1" "$P2" "10G"
+  log "Stage 5: Streaming signed $TARGET_BOARD image sequentially to $SD_DEVICE (throttled 4 MiB blocks)"
+  guard_block_device "$SD_DEVICE"
+  sudo "${THROTTLE[@]}" dd if="$RAM_IMG" of="$SD_DEVICE" bs=4M conv=fsync status=progress
+  sudo sgdisk -e "$SD_DEVICE" 2>/dev/null || true
+  sudo partprobe "$SD_DEVICE" 2>/dev/null || true
+  sudo udevadm settle
+
+  fw_bin="$FW_DIR/$TARGET_BOARD/u-boot-rockchip.bin"
+  bytes="$(stat -c '%s' "$fw_bin")"
+  cnt=$(( (bytes + 511) / 512 ))
+  want_sha="$(sha256sum "$fw_bin" | awk '{print $1}')"
+  got_sha="$(sudo dd if="$SD_DEVICE" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
+  echo "SD card ($SD_DEVICE) sector-64 firmware sha256: want=$want_sha got=$got_sha"
+  [ "$want_sha" = "$got_sha" ] || die "SD card sector-64 readback sha256 mismatch on $SD_DEVICE!"
+  lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,UUID "$SD_DEVICE"
+  log "PASS: $SD_DEVICE ($TARGET_BOARD) written and verified ($got_sha)"
 fi
 
 # ---------------------------------------------------------------------------
 # Stage 6: Post-SD-install KVM VM Boot & Real-YubiKey Enrollment Verification
 # ---------------------------------------------------------------------------
-if [ "$RUN_POST_VM" = "true" ] && { [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; }; then
-  log "Stage 6: Booting provisioned $SD_DEVICE in ARM64 KVM VM with swtpm + physical YubiKey passthrough"
+if [ "$RUN_POST_VM" = "true" ]; then
+  log "Stage 6: Booting provisioned image in ARM64 KVM VM with swtpm + physical YubiKey passthrough"
   SWTPM_DIR="${WORK_DIR}/swtpm"
   mkdir -p "$SWTPM_DIR"
   swtpm socket --tpm2 --tpmstate dir="$SWTPM_DIR" \
@@ -501,12 +460,12 @@ if [ "$RUN_POST_VM" = "true" ] && { [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH
     fi
   fi
 
-  sudo "${THROTTLE[@]}" timeout 90 qemu-system-aarch64 \
+  sudo "${THROTTLE[@]}" timeout 75 qemu-system-aarch64 \
     -machine virt,accel=kvm,gic-version=max \
     -cpu host -smp 4 -m 4G \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
-    -drive file="$SD_DEVICE",format=raw,if=virtio,cache=none \
+    -drive file="$RAM_IMG",format=raw,if=virtio,cache=writeback \
     -chardev socket,id=chrtpm,path="$SWTPM_DIR/swtpm-sock" \
     -tpmdev emulator,id=tpm0,chardev=chrtpm \
     -device tpm-tis-device,tpmdev=tpm0 \
@@ -518,29 +477,24 @@ if [ "$RUN_POST_VM" = "true" ] && { [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH
   echo "=== Post-SD-install VM serial log (last 80 lines) ==="
   tail -n 80 "$WORK_DIR/post-install-vm.log"
   if grep -Eq '(Switching root|Reached target Basic System|Linux version|systemd\[1\]|yubiOS)' "$WORK_DIR/post-install-vm.log"; then
-    log "PASS: Provisioned SD card ($SD_DEVICE) booted into yubiOS under KVM + swtpm + YubiKey passthrough"
+    log "PASS: Provisioned image booted into yubiOS under KVM + swtpm + YubiKey passthrough"
   else
     warn "Post-SD-install VM boot log tail above; see $WORK_DIR/post-install-vm.log"
   fi
 fi
 
 # ---------------------------------------------------------------------------
-# Stage 7: PineTab2 (RK3566) Raw Image Build + Maskrom USB (2207:350a) & Serial (/dev/ttyUSB0)
+# Stage 7: PineTab2 (RK3566) Maskrom USB (2207:350a) & Serial (/dev/ttyUSB0)
 # ---------------------------------------------------------------------------
 if [ "$FLASH_MODE" = "maskrom_usb" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
-  log "Stage 7: Building loop-backed $PINETAB_RAW for pinetab2-rk3566 & probing Maskrom USB (2207:350a) + UART ($SERIAL_DEV @ $SERIAL_BAUD)"
-  sudo rm -f "$PINETAB_RAW"
-  sudo truncate -s 6G "$PINETAB_RAW"
-  RAW_LOOP="$(sudo losetup --find --show --partscan "$PINETAB_RAW")"
-  provision_target "$RAW_LOOP" "pinetab2-rk3566" "${RAW_LOOP}p1" "${RAW_LOOP}p2" "4500M"
-  sudo losetup --detach "$RAW_LOOP"
-  RAW_LOOP=""
-  ls -lh "$PINETAB_RAW"
-
+  log "Stage 7: PineTab2 (RK3566) Firmware Verification + Maskrom USB (2207:350a) & UART ($SERIAL_DEV @ $SERIAL_BAUD)"
+  if [ -f "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin" ]; then
+    echo "PineTab2 (pinetab2-rk3566) u-boot-rockchip.bin ready:"
+    cat "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin.sha256"
+  fi
   if lsusb | grep -qi '2207:350a'; then
     echo "Detected PineTab2 (RK3566) in Maskrom mode (2207:350a):"
     sudo rkdeveloptool ld || true
-    # Check if idbloader / spl loader exists in firmware bundle and test Maskrom response + capture UART
     if [ -c "$SERIAL_DEV" ]; then
       echo "Starting background UART capture on $SERIAL_DEV @ $SERIAL_BAUD..."
       sudo python3 - "$SERIAL_DEV" "$SERIAL_BAUD" "$WORK_DIR/pinetab2-uart.log" <<'INNER_PY' &
@@ -548,7 +502,7 @@ import sys, time, serial
 dev, baud, out_path = sys.argv[1], int(sys.argv[2]), sys.argv[3]
 with serial.Serial(dev, baud, timeout=0.2) as s, open(out_path, "wb") as f:
     t0 = time.time()
-    while time.time() - t0 < 15.0:
+    while time.time() - t0 < 12.0:
         chunk = s.read(4096)
         if chunk:
             f.write(chunk)
@@ -557,7 +511,7 @@ INNER_PY
       UART_PID=$!
     fi
     if [ -f "$FW_DIR/pinetab2-rk3566/firmware/idbloader.img" ]; then
-      echo "Found idbloader.img in pinetab2-rk3566 firmware bundle; probing rkdeveloptool db:"
+      echo "Probing rkdeveloptool db with pinetab2-rk3566 idbloader.img:"
       sudo timeout 10 rkdeveloptool db "$FW_DIR/pinetab2-rk3566/firmware/idbloader.img" 2>&1 || true
     fi
     if [ -n "${UART_PID:-}" ]; then
@@ -567,7 +521,7 @@ INNER_PY
       echo "=== end PineTab2 UART output ==="
     fi
   else
-    warn "No RK3566 Maskrom device (2207:350a) currently on USB; $PINETAB_RAW is ready on ubuntu to dd onto the 256 GB SD card."
+    warn "No RK3566 Maskrom device (2207:350a) currently on USB (reconnect/power-cycle PineTab2 when ready)"
   fi
 fi
 
