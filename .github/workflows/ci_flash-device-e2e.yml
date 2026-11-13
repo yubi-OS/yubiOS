@@ -1,0 +1,92 @@
+name: FLASH - Device Signed UKI + bootc SD/Maskrom Flash + Post-Install VM Enrollment
+
+on:
+  workflow_dispatch:
+    inputs:
+      board:
+        description: 'Target board firmware flow to run'
+        required: true
+        default: 'both-rk3588-and-pinetab2'
+        type: choice
+        options:
+          - both-rk3588-and-pinetab2
+          - rock5b-rk3588
+          - pinetab2-rk3566
+          - rockpro64-rk3399
+      sd_device:
+        description: 'Removable SD card block device on ubuntu host (guarded against /, /boot, mmcblk0, nvme0n1)'
+        required: true
+        default: '/dev/sda'
+        type: string
+      flash_mode:
+        description: 'Flash mode: sd_and_maskrom, sd_direct, or maskrom_usb'
+        required: true
+        default: 'sd_and_maskrom'
+        type: choice
+        options:
+          - sd_and_maskrom
+          - sd_direct
+          - maskrom_usb
+      image:
+        description: 'yubiOS bootc OCI image ref to install'
+        required: false
+        default: 'docker.io/0mniteck/yubios:dev'
+        type: string
+      sign_with_yubikey:
+        description: 'Mint/use PIV slot 9a key on attached YubiKey (1050:0407) to sign PK/KEK/db.auth, systemd-boot, and UKI'
+        required: false
+        default: true
+        type: boolean
+      piv_touch_policy:
+        description: 'YubiKey PIV slot 9a touch policy when generating a new key (cached=15s window, never=unattended CI, always=per-sig)'
+        required: false
+        default: 'cached'
+        type: choice
+        options:
+          - cached
+          - never
+          - always
+      run_post_install_vm_boot:
+        description: 'Boot the provisioned SD card in KVM on ubuntu with swtpm + physical YubiKey USB passthrough after install'
+        required: false
+        default: true
+        type: boolean
+      serial_device:
+        description: 'UART serial device connected to target board'
+        required: false
+        default: '/dev/ttyUSB0'
+        type: string
+      serial_baud:
+        description: 'UART baud rate (Rockchip default: 1500000)'
+        required: false
+        default: '1500000'
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  flash-device-e2e:
+    name: Flash & Verify (${{ inputs.board }} / ${{ inputs.flash_mode }}) on ubuntu
+    runs-on: [self-hosted, Linux, ARM64, HIGH-MEM]
+    timeout-minutes: 90
+    steps:
+      - name: Checkout yubiOS
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
+
+      - name: Run signed UKI + bootc SD/Maskrom flash + post-install VM boot
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER }}
+          FLASH_BOARD: ${{ inputs.board }}
+          FLASH_SD_DEVICE: ${{ inputs.sd_device }}
+          FLASH_MODE: ${{ inputs.flash_mode }}
+          FLASH_OS_IMAGE: ${{ inputs.image }}
+          FLASH_SIGN_WITH_YUBIKEY: ${{ inputs.sign_with_yubikey }}
+          FLASH_PIV_TOUCH_POLICY: ${{ inputs.piv_touch_policy }}
+          FLASH_RUN_POST_VM: ${{ inputs.run_post_install_vm_boot }}
+          FLASH_SERIAL_DEV: ${{ inputs.serial_device }}
+          FLASH_SERIAL_BAUD: ${{ inputs.serial_baud }}
+        run: |
+          chmod +x scripts/flash-device-e2e.sh
+          bash scripts/flash-device-e2e.sh
