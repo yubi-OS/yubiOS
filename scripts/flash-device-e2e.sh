@@ -6,36 +6,9 @@
 # SD card reader (/dev/sda), Rockchip Maskrom USB (2207:350a / 2207:350b),
 # and UART serial console (/dev/ttyUSB0 @ 1500000 8N1).
 #
-# Stages:
-#   Stage 1: Preflight & safety guards (verify load, USB YubiKey 1050:*,
-#            serial /dev/ttyUSB*, Maskrom 2207:*, and hard-refuse any target
-#            disk that matches /, /boot, /boot/efi, mmcblk0, or nvme0n1).
-#   Stage 2: YubiKey PIV slot 9a PK/KEK/db key generation / export & UEFI
-#            auth variable bundle creation (PK.auth, KEK.auth, db.auth,
-#            db.crt, yubiOS-db.cer) using hardware PKCS#11 (libykcs11.so).
-#   Stage 3: Pull digest-verified yubiOS OS image + board firmware bundles
-#            (0mniteck/yubios:firmware-rock5b-rk3588, firmware-pinetab2-rk3566,
-#            firmware-rockpro64-rk3399), extract u-boot-rockchip.bin, and
-#            verify RKNS magic (52 4b 4e 53) + FIT offset (16384 - 64) * 512.
-#   Stage 4: Build & sign UKI + systemd-boot EFI binaries with the physical
-#            YubiKey PIV slot 9a key (systemd-sbsign / sbsign + sbverify).
-#   Stage 5: Provision target SD block device (e.g. /dev/sda for rock5b-rk3588)
-#            and/or pre-built raw disk image (for pinetab2-rk3566 maskrom/SD):
-#              - GPT starting at sector 32768 (leaving sectors 64..32767 for
-#                u-boot-rockchip.bin)
-#              - Partition 1: 1 GiB FAT32 ESP
-#              - Partition 2: ext4 -O verity,^has_journal rootfs
-#              - Run `bootc install to-filesystem --composefs-backend`
-#              - Lay down YubiKey-signed UKI + Type2 BLSConfig entry +
-#                StandaloneMM PK/KEK/db.auth enrollment bundle
-#              - Write u-boot-rockchip.bin at sector 64 + sha256 readback verify
-#   Stage 6: Post-SD-install bcvk / KVM VM boot of the real SD card (/dev/sda)
-#            with swtpm + physical YubiKey USB passthrough (1050:0407) to run
-#            and record the enrollment flow (FIDO2 token visibility, PAM/SSH/SB
-#            enrollment state, composefs root verification) before moving the
-#            card to the physical board.
-#   Stage 7: PineTab2 (RK3566) Maskrom USB (2207:350a) loader/SD write attempt
-#            & live UART capture (/dev/ttyUSB0 @ 1500000 8N1).
+# Dispatch contract:
+#   SIGNKEY=test        -> touch-policy=NEVER (unattended CI YubiKey PIV 9a signing)
+#   SIGNKEY=production  -> touch-policy=CACHED (15s physical touch window on YubiKey)
 
 set -euo pipefail
 
@@ -43,15 +16,28 @@ BOARD="${FLASH_BOARD:-both-rk3588-and-pinetab2}"
 SD_DEVICE="${FLASH_SD_DEVICE:-/dev/sda}"
 FLASH_MODE="${FLASH_MODE:-sd_and_maskrom}"
 OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
+SIGNKEY="${FLASH_SIGNKEY:-production}"
 SIGN_WITH_YUBIKEY="${FLASH_SIGN_WITH_YUBIKEY:-true}"
-PIV_TOUCH_POLICY="${FLASH_PIV_TOUCH_POLICY:-cached}"
+PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
 RUN_POST_VM="${FLASH_RUN_POST_VM:-true}"
 SERIAL_DEV="${FLASH_SERIAL_DEV:-/dev/ttyUSB0}"
 SERIAL_BAUD="${FLASH_SERIAL_BAUD:-1500000}"
+
+if [ "$PIV_TOUCH_OVERRIDE" = "auto" ] || [ -z "$PIV_TOUCH_OVERRIDE" ]; then
+  if [ "$SIGNKEY" = "test" ]; then
+    PIV_TOUCH_POLICY="never"
+  else
+    PIV_TOUCH_POLICY="cached"
+  fi
+else
+  PIV_TOUCH_POLICY="$PIV_TOUCH_OVERRIDE"
+fi
+
 WORK_DIR="${RUNNER_TEMP:-/tmp}/yubios-flash-e2e"
 KEY_DIR="${WORK_DIR}/keys"
 FW_DIR="${WORK_DIR}/firmware"
 MNT_DIR="/mnt/yubios-sd-target"
+PINETAB_RAW="/var/tmp/pinetab2-sd-signed.raw"
 RAW_LOOP=""
 
 log()  { printf '\n=== [flash-e2e %s] %s ===\n' "$(date -u +%H:%M:%S)" "$*"; }
@@ -69,6 +55,8 @@ trap cleanup EXIT
 
 sudo rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR" "$KEY_DIR" "$FW_DIR"
+
+log "Configuration: BOARD=$BOARD SD_DEVICE=$SD_DEVICE FLASH_MODE=$FLASH_MODE SIGNKEY=$SIGNKEY PIV_TOUCH_POLICY=$PIV_TOUCH_POLICY OS_IMAGE=$OS_IMAGE"
 
 # ---------------------------------------------------------------------------
 # Stage 1: Preflight & host safety guards
@@ -101,10 +89,17 @@ guard_block_device() {
       die "REFUSING: $dev backs a mounted host filesystem ($src)"
     fi
   done
+  # Unmount any automounted partitions on the removable SD card before wiping
+  for part in "${dev}"* ; do
+    [ -b "$part" ] || continue
+    if findmnt -rn -S "$part" >/dev/null 2>&1; then
+      sudo umount "$part" || true
+    fi
+  done
   local mounts
   mounts="$(lsblk -no MOUNTPOINT "$dev" 2>/dev/null | grep -v '^$' || true)"
   if [ -n "$mounts" ]; then
-    die "REFUSING: $dev has active mountpoints ($mounts)"
+    die "REFUSING: $dev still has active mountpoints ($mounts)"
   fi
   local tran rm_flag
   tran="$(lsblk -dn -o TRAN "$dev" 2>/dev/null | tr -d ' ' || true)"
@@ -117,13 +112,16 @@ if [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
 fi
 
 missing_pkgs=()
-for pkg_bin in cert-to-efi-sig-list:efitools sbsign:sbsigntool fido2-token:fido2-tools rkdeveloptool:rkdeveloptool ukify:systemd-ukify; do
+for pkg_bin in cert-to-efi-sig-list:efitools sbsign:sbsigntool fido2-token:fido2-tools rkdeveloptool:rkdeveloptool ukify:systemd-ukify pkcs11-tool:opensc; do
   bin="${pkg_bin%%:*}"
   pkg="${pkg_bin##*:}"
   command -v "$bin" >/dev/null 2>&1 || missing_pkgs+=("$pkg")
 done
 if [ ! -e /usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11.so ] && [ ! -e /usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so ]; then
   missing_pkgs+=("pkcs11-provider")
+fi
+if [ ! -e /usr/lib/aarch64-linux-gnu/engines-3/pkcs11.so ]; then
+  missing_pkgs+=("libengine-pkcs11-openssl")
 fi
 if [ "${#missing_pkgs[@]}" -gt 0 ]; then
   log "Installing missing host packages: ${missing_pkgs[*]}"
@@ -134,7 +132,7 @@ fi
 # ---------------------------------------------------------------------------
 # Stage 2: YubiKey PIV Slot 9a Key & PK/KEK/db Auth Bundle Preparation
 # ---------------------------------------------------------------------------
-log "Stage 2: Physical YubiKey PIV slot 9a & Secure Boot PK/KEK/db preparation"
+log "Stage 2: Physical YubiKey PIV slot 9a & Secure Boot PK/KEK/db preparation (SIGNKEY=$SIGNKEY, touch=$PIV_TOUCH_POLICY)"
 PKCS11_LIB=""
 for c in /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib64/libykcs11.so /usr/lib/libykcs11.so; do
   if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
@@ -146,28 +144,38 @@ export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
 OWNER_GUID="${YUBIOS_OWNER_GUID:-1404b45e-798b-4249-b5cd-b7f961b44894}"
 PIV_PIN="${YUBIOS_PIV_PIN:-123456}"
 PIV_MGMT_KEY="${YUBIOS_PIV_MGMT_KEY:-010203040506070801020304050607080102030405060708}"
+CN_LABEL="YUBIOS Owner Slot 9a"
+[ "$SIGNKEY" = "test" ] && CN_LABEL="YUBIOS Test Slot 9a"
 
 if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
   lsusb | grep -qi '1050:' || die "No physical YubiKey (1050:*) detected on USB"
   ykman info
   ykman piv info
-  if ! ykman piv keys export 9a "$KEY_DIR/slot9a-pub.pem" >/dev/null 2>&1; then
-    log "Slot 9a has no key yet; generating RSA-2048 key in PIV slot 9a (pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
+  # When SIGNKEY=test (or when slot 9a has no certificate yet), (re-)mint slot 9a with the requested touch policy
+  need_mint=0
+  if ! ykman piv certificates export 9a "$KEY_DIR/db.crt" >/dev/null 2>&1; then
+    need_mint=1
+  elif [ "$SIGNKEY" = "test" ] && ! openssl x509 -in "$KEY_DIR/db.crt" -noout -subject 2>/dev/null | grep -Fq "YUBIOS Test Slot 9a"; then
+    need_mint=1
+  fi
+  if [ "$need_mint" -eq 1 ]; then
+    log "Generating RSA-2048 key in PIV slot 9a on physical YubiKey (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
     ykman piv keys generate \
       -a RSA2048 \
       -m "$PIV_MGMT_KEY" \
       --pin-policy ONCE \
       --touch-policy "${PIV_TOUCH_POLICY^^}" \
       9a "$KEY_DIR/slot9a-pub.pem"
-    log "Generating self-signed slot 9a X.509 certificate on YubiKey (touch YubiKey if flashing)"
+    log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
     ykman piv certificates generate \
       -m "$PIV_MGMT_KEY" \
       -P "$PIV_PIN" \
-      -s "CN=YUBIOS Owner Slot 9a" \
+      -s "CN=${CN_LABEL}" \
       -d 1826 \
       9a "$KEY_DIR/slot9a-pub.pem"
+    ykman piv certificates export 9a "$KEY_DIR/db.crt"
   fi
-  ykman piv certificates export 9a "$KEY_DIR/db.crt"
+  openssl x509 -in "$KEY_DIR/db.crt" -noout -subject -issuer -dates -fingerprint -sha256
   cp -f "$KEY_DIR/db.crt" "$KEY_DIR/PK.crt"
   cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
   openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
@@ -176,23 +184,84 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
   for var in PK KEK db; do
     cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
   done
+
+  # Build OpenSSL config for PKCS#11 engine/provider signing with libykcs11.so
+  cat > "$WORK_DIR/openssl-pkcs11.cnf" <<EOF
+openssl_conf = openssl_init
+[openssl_init]
+engines = engine_section
+[engine_section]
+pkcs11 = pkcs11_section
+[pkcs11_section]
+engine_id = pkcs11
+MODULE_PATH = ${PKCS11_LIB}
+PIN = ${PIV_PIN}
+init = 0
+EOF
+
   SB_KEY_URI="pkcs11:id=%01;type=private?pin-value=${PIV_PIN}"
   for var in PK KEK db; do
     sign-efi-sig-list -c "$KEY_DIR/PK.crt" -t "$T" -o "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.forsig"
     if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-      echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey if flashing <<<"
+      echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey now <<<"
     fi
-    openssl smime -sign -binary \
+    if ! openssl smime -sign -binary \
       -provider pkcs11 -provider default \
       -in "$KEY_DIR/${var}.forsig" \
       -out "$KEY_DIR/${var}.signed" \
       -signer "$KEY_DIR/PK.crt" \
       -inkey "$SB_KEY_URI" \
-      -outform DER -md sha256
+      -outform DER -md sha256 2>/dev/null; then
+      OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" openssl smime -sign -binary \
+        -engine pkcs11 -keyform engine \
+        -in "$KEY_DIR/${var}.forsig" \
+        -out "$KEY_DIR/${var}.signed" \
+        -signer "$KEY_DIR/PK.crt" \
+        -inkey "pkcs11:id=%01;type=private" \
+        -outform DER -md sha256
+    fi
     sign-efi-sig-list -i "$KEY_DIR/${var}.signed" -t "$T" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
   done
   ls -la "$KEY_DIR"
 fi
+
+# Helper to sign a PE EFI binary with the physical YubiKey PIV slot 9a key and verify with sbverify
+sign_efi_with_yubikey() {
+  local efi_path="$1"
+  local tmp_in tmp_out systemd_sbsign_bin=""
+  tmp_in="$(mktemp "${WORK_DIR}/efi-in-XXXXXX.efi")"
+  tmp_out="$(mktemp "${WORK_DIR}/efi-out-XXXXXX.efi")"
+  sudo cp -f "$efi_path" "$tmp_in"
+  sudo chown "$(id -u):$(id -g)" "$tmp_in"
+
+  for cand in "$(command -v systemd-sbsign 2>/dev/null || true)" /usr/lib/systemd/systemd-sbsign; do
+    if [ -n "$cand" ] && [ -x "$cand" ]; then systemd_sbsign_bin="$cand"; break; fi
+  done
+
+  if [ "$PIV_TOUCH_POLICY" != "never" ]; then
+    echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_path") <<<"
+  fi
+
+  if [ -n "$systemd_sbsign_bin" ] && "$systemd_sbsign_bin" sign \
+    --private-key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
+    --private-key-source "provider:pkcs11" \
+    --certificate "$KEY_DIR/db.crt" \
+    --certificate-source file \
+    --output "$tmp_out" \
+    "$tmp_in" 2>/dev/null; then
+    :
+  else
+    OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" sbsign \
+      --engine pkcs11 \
+      --key "pkcs11:id=%01;type=private" \
+      --cert "$KEY_DIR/db.crt" \
+      --output "$tmp_out" \
+      "$tmp_in"
+  fi
+  sbverify --cert "$KEY_DIR/db.crt" "$tmp_out"
+  sudo mv -f "$tmp_out" "$efi_path"
+  rm -f "$tmp_in"
+}
 
 # ---------------------------------------------------------------------------
 # Stage 3: Pull OS Image & Board Firmware Bundles
@@ -225,6 +294,7 @@ pull_board_firmware() {
   [ "$magic" = "524b4e53" ] || die "$bin does not start with RKNS magic (got $magic)"
   sha256sum "$bin" | tee "$FW_DIR/$b/u-boot-rockchip.bin.sha256"
   cp -f "$bin" "$FW_DIR/$b/u-boot-rockchip.bin"
+  ls -la "$FW_DIR/$b/firmware/" 2>/dev/null || ls -la "$FW_DIR/$b/"
 }
 
 if [ "$BOARD" = "both-rk3588-and-pinetab2" ]; then
@@ -242,16 +312,17 @@ provision_target() {
   local board_name="$2"
   local p1_dev="$3"
   local p2_dev="$4"
+  local root_size="${5:-10G}"
   local fw_bin="$FW_DIR/$board_name/u-boot-rockchip.bin"
 
   log "Stage 4/5: Provisioning $target_dev for $board_name (GPT @ sector 32768, sector-64 U-Boot, bootc install, YubiKey-signed UKI)"
   sudo umount -R "$MNT_DIR" 2>/dev/null || true
   sudo wipefs -a "$target_dev" || true
-  sudo sfdisk --wipe always "$target_dev" <<'EOF'
+  sudo sfdisk --wipe always "$target_dev" <<EOF
 label: gpt
 first-lba: 32768
 start=32768, size=1G, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name="ESP"
-size=10G, type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
+size=${root_size}, type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
 EOF
   sudo partprobe "$target_dev" 2>/dev/null || sudo partx --update "$target_dev" 2>/dev/null || true
   sudo udevadm settle
@@ -284,37 +355,35 @@ EOF
       --skip-finalize \
       /target
 
+  # Ensure composefs store symlink and Type2 BLS entry with console=ttyAMA0 + ttyS2,1500000n8 exist
+  entry="$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
+  [ -n "$entry" ] || die "No BLS entry created under $MNT_DIR/boot/loader/entries"
+  sudo cat "$entry"
+  uki_rel="$(sudo awk '$1 == "uki" || $1 == "efi" {sub(/^(uki|efi)[[:space:]]+/, ""); print}' "$entry" | head -n1 || true)"
+  cd_digest=""
+  if [ -n "$uki_rel" ] && sudo test -f "$MNT_DIR/boot${uki_rel}"; then
+    cd_digest="$(python3 scripts/extract_uki_cmdline.py "$MNT_DIR/boot${uki_rel}" | grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' | head -n1 | sed -E 's/^.*[:=]\??//' || true)"
+  fi
+  if [ -z "$cd_digest" ]; then
+    cd_digest="$(sudo grep -rhoE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' "$MNT_DIR/boot/loader/entries/" 2>/dev/null | head -n1 | sed -E 's/^.*[:=]\??//' || true)"
+  fi
+  [ -n "$cd_digest" ] || die "Could not extract composefs digest from installed UKI/BLS entry"
+  echo "Verified installed composefs digest: $cd_digest"
+  sudo mkdir -p "$MNT_DIR/composefs/images" "$MNT_DIR/composefs/blob"
+  if ! sudo test -e "$MNT_DIR/composefs/images/$cd_digest"; then
+    blob_cand="$(sudo find "$MNT_DIR/composefs" -maxdepth 4 -type f -name "${cd_digest}*" 2>/dev/null | head -n1 || true)"
+    if [ -n "$blob_cand" ]; then
+      sudo ln -sfn "$blob_cand" "$MNT_DIR/composefs/images/$cd_digest"
+    fi
+  fi
+
   if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
-    log "Signing installed EFI loaders & UKIs on $p1_dev with YubiKey PIV slot 9a"
-    sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/keys" "$MNT_DIR/var/lib/yubiOS/secureboot"
+    log "Signing installed EFI loaders & UKIs on $p1_dev with YubiKey PIV slot 9a (SIGNKEY=$SIGNKEY)"
+    sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/keys"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/keys/"
-    sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/var/lib/yubiOS/secureboot/"
     while IFS= read -r -d '' efi_file; do
       echo "Signing $efi_file with YubiKey PIV slot 9a..."
-      if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-        echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_file") <<<"
-      fi
-      tmp_efi="$(mktemp "${WORK_DIR}/signed-XXXXXX.efi")"
-      sudo cp -f "$efi_file" "$tmp_efi"
-      sudo chown "$(id -u):$(id -g)" "$tmp_efi"
-      if command -v systemd-sbsign >/dev/null 2>&1; then
-        systemd-sbsign sign \
-          --private-key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
-          --private-key-source "provider:pkcs11" \
-          --certificate "$KEY_DIR/db.crt" \
-          --certificate-source file \
-          --output "${tmp_efi}.out" \
-          "$tmp_efi"
-      else
-        sbsign --engine pkcs11 \
-          --key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
-          --cert "$KEY_DIR/db.crt" \
-          --output "${tmp_efi}.out" \
-          "$tmp_efi"
-      fi
-      sbverify --cert "$KEY_DIR/db.crt" "${tmp_efi}.out"
-      sudo mv -f "${tmp_efi}.out" "$efi_file"
-      rm -f "$tmp_efi"
+      sign_efi_with_yubikey "$efi_file"
     done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
   fi
 
@@ -341,7 +410,7 @@ if [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
   P1="${SD_DEVICE}1"
   P2="${SD_DEVICE}2"
   case "$SD_DEVICE" in *mmcblk*|*loop*|*nvme*) P1="${SD_DEVICE}p1"; P2="${SD_DEVICE}p2" ;; esac
-  provision_target "$SD_DEVICE" "$TARGET_BOARD" "$P1" "$P2"
+  provision_target "$SD_DEVICE" "$TARGET_BOARD" "$P1" "$P2" "10G"
 fi
 
 # ---------------------------------------------------------------------------
@@ -364,7 +433,7 @@ if [ "$RUN_POST_VM" = "true" ] && { [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH
     fi
   fi
 
-  sudo timeout 120 qemu-system-aarch64 \
+  sudo timeout 90 qemu-system-aarch64 \
     -machine virt,accel=kvm,gic-version=max \
     -cpu host -smp 4 -m 4G \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
@@ -383,38 +452,54 @@ if [ "$RUN_POST_VM" = "true" ] && { [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH
   if grep -Eq '(Switching root|Reached target Basic System|Linux version|systemd\[1\]|yubiOS)' "$WORK_DIR/post-install-vm.log"; then
     log "PASS: Provisioned SD card ($SD_DEVICE) booted into yubiOS under KVM + swtpm + YubiKey passthrough"
   else
-    warn "Post-SD-install VM boot did not reach userspace marker within timeout; see $WORK_DIR/post-install-vm.log"
+    warn "Post-SD-install VM boot log tail above; see $WORK_DIR/post-install-vm.log"
   fi
 fi
 
 # ---------------------------------------------------------------------------
-# Stage 7: PineTab2 (RK3566) Maskrom USB (2207:350a) & Serial (/dev/ttyUSB0)
+# Stage 7: PineTab2 (RK3566) Raw Image Build + Maskrom USB (2207:350a) & Serial (/dev/ttyUSB0)
 # ---------------------------------------------------------------------------
 if [ "$FLASH_MODE" = "maskrom_usb" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
-  log "Stage 7: PineTab2 (RK3566) Maskrom USB (2207:350a) & UART Serial ($SERIAL_DEV @ $SERIAL_BAUD)"
+  log "Stage 7: Building loop-backed $PINETAB_RAW for pinetab2-rk3566 & probing Maskrom USB (2207:350a) + UART ($SERIAL_DEV @ $SERIAL_BAUD)"
+  sudo rm -f "$PINETAB_RAW"
+  sudo truncate -s 6G "$PINETAB_RAW"
+  RAW_LOOP="$(sudo losetup --find --show --partscan "$PINETAB_RAW")"
+  provision_target "$RAW_LOOP" "pinetab2-rk3566" "${RAW_LOOP}p1" "${RAW_LOOP}p2" "4500M"
+  sudo losetup --detach "$RAW_LOOP"
+  RAW_LOOP=""
+  ls -lh "$PINETAB_RAW"
+
   if lsusb | grep -qi '2207:350a'; then
-    echo "Detected RK3566 in Maskrom mode (2207:350a):"
+    echo "Detected PineTab2 (RK3566) in Maskrom mode (2207:350a):"
     sudo rkdeveloptool ld || true
-  else
-    warn "No RK3566 Maskrom device (2207:350a) currently on USB"
-  fi
-  if [ -c "$SERIAL_DEV" ]; then
-    echo "Capturing 5s UART snapshot on $SERIAL_DEV @ $SERIAL_BAUD..."
-    sudo python3 - "$SERIAL_DEV" "$SERIAL_BAUD" <<'INNER_PY' || true
+    # Check if idbloader / spl loader exists in firmware bundle and test Maskrom response + capture UART
+    if [ -c "$SERIAL_DEV" ]; then
+      echo "Starting background UART capture on $SERIAL_DEV @ $SERIAL_BAUD..."
+      sudo python3 - "$SERIAL_DEV" "$SERIAL_BAUD" "$WORK_DIR/pinetab2-uart.log" <<'INNER_PY' &
 import sys, time, serial
-dev, baud = sys.argv[1], int(sys.argv[2])
-with serial.Serial(dev, baud, timeout=0.5) as s:
+dev, baud, out_path = sys.argv[1], int(sys.argv[2]), sys.argv[3]
+with serial.Serial(dev, baud, timeout=0.2) as s, open(out_path, "wb") as f:
     t0 = time.time()
-    buf = b""
-    while time.time() - t0 < 5.0:
+    while time.time() - t0 < 15.0:
         chunk = s.read(4096)
         if chunk:
-            buf += chunk
-    if buf:
-        print("UART output:", buf.decode("utf-8", errors="replace"))
-    else:
-        print("UART idle (0 bytes received in 5s window)")
+            f.write(chunk)
+            f.flush()
 INNER_PY
+      UART_PID=$!
+    fi
+    if [ -f "$FW_DIR/pinetab2-rk3566/firmware/idbloader.img" ]; then
+      echo "Found idbloader.img in pinetab2-rk3566 firmware bundle; probing rkdeveloptool db:"
+      sudo timeout 10 rkdeveloptool db "$FW_DIR/pinetab2-rk3566/firmware/idbloader.img" 2>&1 || true
+    fi
+    if [ -n "${UART_PID:-}" ]; then
+      wait "$UART_PID" 2>/dev/null || true
+      echo "=== PineTab2 UART output ($SERIAL_DEV @ $SERIAL_BAUD) ==="
+      cat "$WORK_DIR/pinetab2-uart.log" 2>/dev/null || true
+      echo "=== end PineTab2 UART output ==="
+    fi
+  else
+    warn "No RK3566 Maskrom device (2207:350a) currently on USB; $PINETAB_RAW is ready on ubuntu to dd onto the 256 GB SD card."
   fi
 fi
 

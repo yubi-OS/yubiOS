@@ -3,6 +3,14 @@ name: FLASH - Device Signed UKI + bootc SD/Maskrom Flash + Post-Install VM Enrol
 on:
   workflow_dispatch:
     inputs:
+      SIGNKEY:
+        description: 'Signing key mode: test (touch=never, unattended CI) or production (touch=cached, owner key)'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - test
       board:
         description: 'Target board firmware flow to run'
         required: true
@@ -38,11 +46,12 @@ on:
         default: true
         type: boolean
       piv_touch_policy:
-        description: 'YubiKey PIV slot 9a touch policy when generating a new key (cached=15s window, never=unattended CI, always=per-sig)'
+        description: 'Optional override for YubiKey PIV slot 9a touch policy (auto uses SIGNKEY: test->never, production->cached)'
         required: false
-        default: 'cached'
+        default: 'auto'
         type: choice
         options:
+          - auto
           - cached
           - never
           - always
@@ -68,7 +77,7 @@ permissions:
 
 jobs:
   flash-device-e2e:
-    name: Flash & Verify (${{ inputs.board }} / ${{ inputs.flash_mode }}) on ubuntu
+    name: Flash & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }}) on ubuntu
     runs-on: [self-hosted, Linux, ARM64, HIGH-MEM]
     timeout-minutes: 90
     steps:
@@ -78,6 +87,7 @@ jobs:
       - name: Run signed UKI + bootc SD/Maskrom flash + post-install VM boot
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER }}
+          FLASH_SIGNKEY: ${{ inputs.SIGNKEY }}
           FLASH_BOARD: ${{ inputs.board }}
           FLASH_SD_DEVICE: ${{ inputs.sd_device }}
           FLASH_MODE: ${{ inputs.flash_mode }}
