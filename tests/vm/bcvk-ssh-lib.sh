@@ -117,6 +117,9 @@ wait_for_bcvk_ssh() {
   [ "$tries" -gt 0 ] || tries=1
   while [ "$tries" -gt 0 ]; do
     bcvk_ssh "$vmid" true >/dev/null 2>&1 && return 0
+    if [ "$(podman inspect --format '{{.State.Running}}' -- "$vmid" 2>/dev/null || echo false)" != "true" ]; then
+      break
+    fi
     tries=$((tries - 1))
     sleep 2
   done
