@@ -47,11 +47,16 @@ log()  { printf '\n=== [flash-e2e %s] %s ===\n' "$(date -u +%H:%M:%S)" "$*"; }
 warn() { printf '::warning::[flash-e2e] %s\n' "$*"; }
 die()  { printf '::error::[flash-e2e] %s\n' "$*" >&2; exit 1; }
 
+PODMAN_SHM="/dev/shm/yubios-podman-storage"
+
 cleanup() {
   set +e
   sudo umount -R "$MNT_DIR" 2>/dev/null || true
   if [ -n "${RAW_LOOP:-}" ]; then
     sudo losetup --detach "$RAW_LOOP" 2>/dev/null || true
+  fi
+  if mountpoint -q /var/lib/containers; then
+    sudo umount -l /var/lib/containers 2>/dev/null || true
   fi
 }
 trap cleanup EXIT
@@ -279,7 +284,14 @@ sign_efi_with_yubikey() {
 # ---------------------------------------------------------------------------
 # Stage 3: Pull OS Image & Board Firmware Bundles
 # ---------------------------------------------------------------------------
-log "Stage 3: Pulling yubiOS image ($OS_IMAGE) and board firmware bundles (throttled: nice -n 19 ionice -c2 -n7)"
+log "Stage 3: Mounting in-RAM tmpfs (/dev/shm) onto /var/lib/containers so podman writes 0 bytes to root disk mmcblk0p3"
+sudo mkdir -p "$PODMAN_SHM" /var/lib/containers
+if ! mountpoint -q /var/lib/containers; then
+  sudo mount --bind "$PODMAN_SHM" /var/lib/containers
+fi
+df -h /var/lib/containers /dev/shm
+
+log "Stage 3b: Pulling yubiOS image ($OS_IMAGE) and board firmware bundles into RAM tmpfs (throttled: nice -n 19 ionice -c2 -n7)" 
 if [ -n "${DOCKER_PASSWORD:-}" ]; then
   printf '%s' "$DOCKER_PASSWORD" | sudo podman login --username 0mniteck42 --password-stdin docker.io
 fi
