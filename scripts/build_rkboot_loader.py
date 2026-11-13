@@ -87,7 +87,7 @@ def main():
     # ucLoaderEntryCount=0, dwLoaderEntryOffset, ucLoaderEntrySize=57,
     # ucSignFlag=0, ucRc4Flag=1 (disable pre-RC4; rkdeveloptool RC4s on transfer), reserved[57]
     head = struct.pack(
-        "<IHII7sIBIBIBIBIBBB57s",
+        "<IHII7sIBIBBIBBIBBB57s",
         0x544F4F42,
         head_size,
         0x00000100,

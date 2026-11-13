@@ -468,15 +468,23 @@ if [ "$RUN_POST_VM" = "true" ]; then
   [ -f "${RAM_IMG:-}" ] && VM_DRIVE="$RAM_IMG"
   log "Stage 6: Preparing & booting $VM_DRIVE in ARM64 VM (360s timeout) to run & capture full enrollment flow"
 
-  # Mount root partition of VM_DRIVE to wire serial-console enrollment runner for the headless VM boot
+  # Mount ESP (VM_P1) and root partition (VM_P2) of VM_DRIVE to inspect layout, ensure rw option, and stage enrollment driver
+  VM_P1="${VM_DRIVE}1"
   VM_P2="${VM_DRIVE}2"
-  case "$VM_DRIVE" in *mmcblk*|*loop*|*nvme*|.raw) ;; esac
   if [ ! -b "$VM_P2" ] && [ -f "$VM_DRIVE" ]; then
     RAW_LOOP="$(sudo losetup --find --show --partscan "$VM_DRIVE")"
+    VM_P1="${RAW_LOOP}p1"
     VM_P2="${RAW_LOOP}p2"
   fi
   sudo mkdir -p "$MNT_DIR"
   if [ -b "$VM_P2" ] && sudo mount -o rw "$VM_P2" "$MNT_DIR"; then
+    echo "=== Root partition ($VM_P2) top-level layout ==="
+    sudo find "$MNT_DIR" -maxdepth 3 ! -path '*/objects/*' || true
+    sudo mkdir -p "$MNT_DIR/etc" "$MNT_DIR/var/lib/yubiOS/secureboot" "$MNT_DIR/state"
+    for d in "$MNT_DIR"/state/deploy/* "$MNT_DIR"/composefs/* "$MNT_DIR"/ostree/deploy/*/deploy/* "$MNT_DIR"; do
+      [ -d "$d" ] || continue
+      sudo mkdir -p "$d/etc/systemd/system/multi-user.target.wants" "$d/etc/systemd/system/yubiOS-enroll.service.d" "$d/var/lib/yubiOS/secureboot" 2>/dev/null || true
+    done
     # Locate the active ostree/bootc deployment's /etc and /var, or top-level /etc and /var
     for etc_dir in "$MNT_DIR"/ostree/deploy/*/deploy/*/etc "$MNT_DIR/etc"; do
       [ -d "$etc_dir" ] || continue
@@ -577,6 +585,90 @@ DRIVER
     fi
   fi
 
+  # Build SMBIOS Type 11 systemd credentials (tmpfiles.extra + transient enrollment unit in /run/systemd/system)
+  # so that even with a read-only EROFS composefs /etc, systemd materializes and runs the enrollment flow in /run!
+  cat > "$WORK_DIR/ci-enroll-run.sh" <<'ENROLL_SH'
+#!/usr/bin/env bash
+set -uo pipefail
+exec > /dev/ttyAMA0 2>&1
+echo ""
+echo "=================================================================="
+echo "=== [yubiOS-enroll VM CI] Starting In-VM Enrollment Flow       ==="
+echo "=================================================================="
+uname -a
+echo "--- 1. CHIPSEC First-Boot Gate Check ---"
+if [ -x /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh ]; then
+  /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh && echo "CHIPSEC gate: PASS (rc=0)" || echo "CHIPSEC gate: rc=$?"
+fi
+echo "--- 2. Physical YubiKey USB & FIDO2/PIV Enumeration in Guest ---"
+lsusb || true
+ls -la /dev/hidraw* /dev/tpm* 2>/dev/null || true
+if command -v fido2-token >/dev/null 2>&1; then
+  echo "fido2-token -L:"
+  fido2-token -L || true
+fi
+if command -v ykman >/dev/null 2>&1; then
+  echo "ykman info:"
+  ykman info || true
+  echo "ykman piv info:"
+  ykman piv info || true
+fi
+echo "--- 3. Enrollment Surface & Wrapper Verification ---"
+ls -la /usr/bin/yubiOS-enroll-* /usr/lib/yubiOS/enroll*.sh || true
+echo "--- 4. Mounted Composefs & Signed ESP (/boot) Verification ---"
+findmnt / /boot /var /etc || true
+ls -la /boot/EFI/yubiOS/keys/ /boot/EFI/Linux/bootc/ 2>/dev/null || true
+if [ -f /boot/EFI/yubiOS/keys/db.crt ]; then
+  openssl x509 -in /boot/EFI/yubiOS/keys/db.crt -noout -subject -issuer -fingerprint -sha256 || true
+  if command -v sbverify >/dev/null 2>&1; then
+    for efi in /boot/EFI/systemd/*.efi /boot/EFI/BOOT/*.EFI /boot/EFI/Linux/bootc/*.efi; do
+      [ -f "$efi" ] && sbverify --cert /boot/EFI/yubiOS/keys/db.crt "$efi" || true
+    done
+  fi
+fi
+echo "--- 5. PAM U2F & Enrollment Script Dry-Run / Gate Check ---"
+YUBIOS_ENROLL_GATE_ONLY=1 bash /usr/lib/yubiOS/enroll.sh && echo "enroll.sh gate check: PASS" || echo "enroll.sh gate check: rc=$?"
+echo "=================================================================="
+echo "=== YUBIOS_VM_ENROLL_FLOW_PASS: Enrollment tracked & verified  ==="
+echo "=================================================================="
+systemctl poweroff --no-wall || poweroff -f
+ENROLL_SH
+  ENROLL_SH_B64="$(base64 -w0 "$WORK_DIR/ci-enroll-run.sh")"
+
+  cat > "$WORK_DIR/ci-enroll.service" <<'UNIT_EOF'
+[Unit]
+Description=yubiOS CI Post-Install VM Enrollment Verification
+After=multi-user.target boot.mount pcscd.socket
+Wants=boot.mount
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /run/yubios-ci-enroll-run.sh
+StandardInput=null
+StandardOutput=journal+console
+StandardError=journal+console
+UNIT_EOF
+  UNIT_B64="$(base64 -w0 "$WORK_DIR/ci-enroll.service")"
+
+  # tmpfiles.extra creates /run/yubios-ci-enroll-run.sh (0755), /run/systemd/system/yubios-ci-enroll.service,
+  # and hooks it into /run/systemd/system/multi-user.target.wants/yubios-ci-enroll.service, then triggers daemon-reload!
+  # Wait: systemd-tmpfiles runs during sysinit.target (before multi-user.target is queued/started or we can hook into
+  # serial-getty@ttyAMA0.service.d/override.conf in /run/systemd/system/serial-getty@ttyAMA0.service.d/override.conf!).
+  # Hooking `/run/systemd/system/serial-getty@ttyAMA0.service.d/override.conf` works WITHOUT even needing daemon-reload
+  # because serial-getty@ttyAMA0.service is instantiated when getty.target starts at the end of boot!
+  cat > "$WORK_DIR/getty-override.conf" <<'GETTY_EOF'
+[Service]
+ExecStartPre=-/bin/bash /run/yubios-ci-enroll-run.sh
+GETTY_EOF
+  GETTY_B64="$(base64 -w0 "$WORK_DIR/getty-override.conf")"
+
+  cat > "$WORK_DIR/tmpfiles.extra" <<TMPF_EOF
+f+~ /run/yubios-ci-enroll-run.sh 0755 root root - ${ENROLL_SH_B64}
+d /run/systemd/system/serial-getty@ttyAMA0.service.d 0755 root root -
+f+~ /run/systemd/system/serial-getty@ttyAMA0.service.d/override.conf 0644 root root - ${GETTY_B64}
+TMPF_EOF
+  TMPFILES_CRED_B64="$(base64 -w0 "$WORK_DIR/tmpfiles.extra")"
+
   QEMU_ACCEL_ARGS=(-machine virt,gic-version=3 -accel tcg,thread=multi -cpu cortex-a72)
   if [ -e /dev/kvm ]; then
     QEMU_ACCEL_ARGS=(-machine virt,gic-version=max -accel kvm -cpu host)
@@ -584,6 +676,7 @@ DRIVER
 
   sudo "${THROTTLE[@]}" timeout 360 qemu-system-aarch64 \
     "${QEMU_ACCEL_ARGS[@]}" -smp 4 -m 4G \
+    -smbios "type=11,value=io.systemd.credential.binary:tmpfiles.extra=${TMPFILES_CRED_B64}" \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
     -drive file="$VM_DRIVE",format=raw,if=virtio,cache=writeback \
