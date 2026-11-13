@@ -252,6 +252,24 @@ sign_efi_with_yubikey() {
   rm -f "$tmp_in"
 }
 
+# Fast-path check: if SD_DEVICE already has the target board's sector-64 u-boot-rockchip.bin,
+# sda1 (EFI) with db.crt-verified UKI, and sda2 (yubiOS-root), skip re-streaming 6 GiB unless FLASH_FORCE_REWRITE=true
+ALREADY_PROVISIONED=0
+if [ "${FLASH_FORCE_REWRITE:-false}" != "true" ] && [ -b "${SD_DEVICE}1" ] && [ -b "${SD_DEVICE}2" ]; then
+  if [ "$(lsblk -dn -o LABEL "${SD_DEVICE}2" 2>/dev/null | tr -d ' ')" = "yubiOS-root" ]; then
+    sudo mkdir -p "$MNT_DIR/boot"
+    if sudo mount -o ro "${SD_DEVICE}1" "$MNT_DIR/boot" 2>/dev/null; then
+      ukis="$(sudo find "$MNT_DIR/boot/EFI/Linux" -name '*.efi' 2>/dev/null | head -n1 || true)"
+      if [ -n "$ukis" ] && sudo sbverify --cert "$KEY_DIR/db.crt" "$ukis" >/dev/null 2>&1; then
+        echo "Fast-path HIT: $SD_DEVICE already has yubiOS-root and YubiKey-signed UKI ($ukis) verified against slot 9a db.crt!"
+        ALREADY_PROVISIONED=1
+      fi
+      sudo umount "$MNT_DIR/boot" 2>/dev/null || true
+    fi
+  fi
+fi
+
+if [ "$ALREADY_PROVISIONED" = "0" ]; then
 # ---------------------------------------------------------------------------
 # Stage 3: Mount ext4-in-RAM (/dev/shm) onto /var/lib/containers & Pull Images
 # ---------------------------------------------------------------------------
@@ -440,15 +458,23 @@ if [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
   log "PASS: $SD_DEVICE ($TARGET_BOARD) written and verified ($got_sha)"
 fi
 
+fi # end ALREADY_PROVISIONED == 0
+
 # ---------------------------------------------------------------------------
 # Stage 6: Post-SD-install KVM VM Boot & Real-YubiKey Enrollment Verification
 # ---------------------------------------------------------------------------
 if [ "$RUN_POST_VM" = "true" ]; then
-  log "Stage 6: Booting provisioned image in ARM64 KVM VM with swtpm + physical YubiKey passthrough"
-  SWTPM_DIR="${WORK_DIR}/swtpm"
+  VM_DRIVE="$SD_DEVICE"
+  [ -f "${RAM_IMG:-}" ] && VM_DRIVE="$RAM_IMG"
+  log "Stage 6: Booting provisioned $VM_DRIVE in ARM64 KVM VM with swtpm + physical YubiKey passthrough"
+  aa_complain="$(command -v aa-complain || echo /usr/sbin/aa-complain)"
+  [ -x "$aa_complain" ] && sudo "$aa_complain" swtpm 2>/dev/null || true
+  SWTPM_DIR="/tmp/yubios-swtpm-$$"
+  sudo rm -rf "$SWTPM_DIR"
   mkdir -p "$SWTPM_DIR"
-  swtpm socket --tpm2 --tpmstate dir="$SWTPM_DIR" \
-    --ctrl type=unixio,path="$SWTPM_DIR/swtpm-sock" \
+  chmod 0777 "$SWTPM_DIR"
+  sudo swtpm socket --tpm2 --tpmstate dir="$SWTPM_DIR" \
+    --ctrl type=unixio,path="$SWTPM_DIR/swtpm-sock",mode=0666 \
     --daemon
   cp -f /usr/share/AAVMF/AAVMF_VARS.fd "$WORK_DIR/AAVMF_VARS.fd"
 
@@ -465,7 +491,7 @@ if [ "$RUN_POST_VM" = "true" ]; then
     -cpu host -smp 4 -m 4G \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
-    -drive file="$RAM_IMG",format=raw,if=virtio,cache=writeback \
+    -drive file="$VM_DRIVE",format=raw,if=virtio,cache=writeback \
     -chardev socket,id=chrtpm,path="$SWTPM_DIR/swtpm-sock" \
     -tpmdev emulator,id=tpm0,chardev=chrtpm \
     -device tpm-tis-device,tpmdev=tpm0 \
