@@ -33,11 +33,14 @@ else
   PIV_TOUCH_POLICY="$PIV_TOUCH_OVERRIDE"
 fi
 
-WORK_DIR="${RUNNER_TEMP:-/tmp}/yubios-flash-e2e"
+SHM_BASE="/dev/shm"
+[ -d "$SHM_BASE" ] || SHM_BASE="${RUNNER_TEMP:-/tmp}"
+WORK_DIR="${SHM_BASE}/yubios-flash-e2e"
+export TMPDIR="${WORK_DIR}/tmp"
 KEY_DIR="${WORK_DIR}/keys"
 FW_DIR="${WORK_DIR}/firmware"
 MNT_DIR="/mnt/yubios-sd-target"
-PINETAB_RAW="/var/tmp/pinetab2-sd-signed.raw"
+PINETAB_RAW="${WORK_DIR}/pinetab2-sd-signed.raw"
 RAW_LOOP=""
 
 log()  { printf '\n=== [flash-e2e %s] %s ===\n' "$(date -u +%H:%M:%S)" "$*"; }
@@ -54,7 +57,8 @@ cleanup() {
 trap cleanup EXIT
 
 sudo rm -rf "$WORK_DIR"
-mkdir -p "$WORK_DIR" "$KEY_DIR" "$FW_DIR"
+mkdir -p "$WORK_DIR" "$TMPDIR" "$KEY_DIR" "$FW_DIR"
+THROTTLE=(nice -n 19 ionice -c2 -n7)
 
 log "Configuration: BOARD=$BOARD SD_DEVICE=$SD_DEVICE FLASH_MODE=$FLASH_MODE SIGNKEY=$SIGNKEY PIV_TOUCH_POLICY=$PIV_TOUCH_POLICY OS_IMAGE=$OS_IMAGE"
 
@@ -275,25 +279,68 @@ sign_efi_with_yubikey() {
 # ---------------------------------------------------------------------------
 # Stage 3: Pull OS Image & Board Firmware Bundles
 # ---------------------------------------------------------------------------
-log "Stage 3: Pulling yubiOS image ($OS_IMAGE) and board firmware bundles"
+log "Stage 3: Pulling yubiOS image ($OS_IMAGE) and board firmware bundles (throttled: nice -n 19 ionice -c2 -n7)"
 if [ -n "${DOCKER_PASSWORD:-}" ]; then
   printf '%s' "$DOCKER_PASSWORD" | sudo podman login --username 0mniteck42 --password-stdin docker.io
 fi
-sudo podman pull "$OS_IMAGE"
+
+throttled_podman_pull() {
+  local ref="$1"
+  local remote_digest local_digests
+  remote_digest="$(python3 - "$ref" <<'DIGEST_PY'
+import json, sys, urllib.request
+ref = sys.argv[1]
+if "@sha256:" in ref:
+    print("sha256:" + ref.split("@sha256:", 1)[1])
+    sys.exit(0)
+clean = ref
+for pfx in ("docker.io/", "index.docker.io/"):
+    if clean.startswith(pfx):
+        clean = clean[len(pfx):]
+repo, tag = (clean.split(":", 1) + ["latest"])[:2]
+if "/" not in repo:
+    repo = "library/" + repo
+try:
+    tok_url = f"https://auth.docker.io/token?service=registry.docker.io&scope=repository:{repo}:pull"
+    tok = json.loads(urllib.request.urlopen(tok_url, timeout=15).read().decode())["token"]
+    req = urllib.request.Request(
+        f"https://registry-1.docker.io/v2/{repo}/manifests/{tag}",
+        headers={
+            "Authorization": f"Bearer {tok}",
+            "Accept": "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json",
+        },
+        method="HEAD",
+    )
+    with urllib.request.urlopen(req, timeout=15) as r:
+        print(r.headers.get("Docker-Content-Digest", "").strip())
+except Exception:
+    print("")
+DIGEST_PY
+  )"
+  local_digests="$(sudo podman image inspect "$ref" --format '{{range .RepoDigests}}{{.}} {{end}}' 2>/dev/null || true)"
+  if [ -n "$remote_digest" ] && [ -n "$local_digests" ] && grep -Fq "$remote_digest" <<<"$local_digests"; then
+    echo "Cache HIT: $ref already in podman storage at $remote_digest (skipping pull)"
+  else
+    echo "Pulling $ref under nice -n 19 ionice -c2 -n7 (TMPDIR=$TMPDIR in /dev/shm)..."
+    sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull "$ref"
+  fi
+}
+
+throttled_podman_pull "$OS_IMAGE"
 RESOLVED_OS="$(sudo podman image inspect "$OS_IMAGE" --format '{{ index .RepoDigests 0 }}')"
 echo "Resolved OS image: $RESOLVED_OS"
 
 pull_board_firmware() {
   local b="$1"
   local fw_ref="docker.io/0mniteck/yubios:firmware-${b}"
-  sudo podman pull "$fw_ref"
+  throttled_podman_pull "$fw_ref"
   local fw_resolved
   fw_resolved="$(sudo podman image inspect "$fw_ref" --format '{{ index .RepoDigests 0 }}')"
   echo "Resolved firmware for $b: $fw_resolved"
   mkdir -p "$FW_DIR/$b"
   sudo podman rm -f "fw-$b" >/dev/null 2>&1 || true
-  sudo podman create --name "fw-$b" "$fw_resolved" >/dev/null
-  sudo podman export "fw-$b" | tar -xf - -C "$FW_DIR/$b"
+  sudo "${THROTTLE[@]}" podman create --name "fw-$b" "$fw_resolved" >/dev/null
+  sudo "${THROTTLE[@]}" podman export "fw-$b" | "${THROTTLE[@]}" tar -xf - -C "$FW_DIR/$b"
   sudo podman rm -f "fw-$b" >/dev/null
   local bin="$FW_DIR/$b/firmware/u-boot-rockchip.bin"
   [ -f "$bin" ] || bin="$(find "$FW_DIR/$b" -name 'u-boot-rockchip.bin' | head -n1)"
@@ -339,18 +386,18 @@ EOF
   [ -b "$p1_dev" ] || die "ESP partition $p1_dev did not appear"
   [ -b "$p2_dev" ] || die "Root partition $p2_dev did not appear"
 
-  sudo mkfs.vfat -F 32 -n EFI "$p1_dev"
-  sudo mkfs.ext4 -F -O verity,^has_journal -L yubiOS-root "$p2_dev"
+  sudo "${THROTTLE[@]}" mkfs.vfat -F 32 -n EFI "$p1_dev"
+  sudo "${THROTTLE[@]}" mkfs.ext4 -F -O verity,^has_journal -L yubiOS-root "$p2_dev"
   sudo mkdir -p "$MNT_DIR"
   sudo mount -o noatime "$p2_dev" "$MNT_DIR"
   sudo install -d -m 0755 "$MNT_DIR/boot"
   sudo mount "$p1_dev" "$MNT_DIR/boot"
 
   log "Running bootc install to-filesystem on $target_dev ($board_name)"
-  sudo env TMPDIR=/var/tmp podman run --rm --privileged --pid=host --ipc=host \
+  sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged --pid=host --ipc=host \
     --security-opt label=type:unconfined_t \
     -v /var/lib/containers:/var/lib/containers \
-    -v /var/tmp:/var/tmp \
+    -v "$TMPDIR:/var/tmp" \
     -e TMPDIR=/var/tmp \
     -v /dev:/dev \
     -v "$MNT_DIR:/target" \
@@ -405,7 +452,7 @@ EOF
   bytes="$(stat -c '%s' "$fw_bin")"
   cnt=$(( (bytes + 511) / 512 ))
   want_sha="$(sha256sum "$fw_bin" | awk '{print $1}')"
-  sudo dd if="$fw_bin" of="$target_dev" bs=512 seek=64 conv=fsync,notrunc status=none
+  sudo "${THROTTLE[@]}" dd if="$fw_bin" of="$target_dev" bs=512 seek=64 conv=fsync,notrunc status=none
   sync
   got_sha="$(sudo dd if="$target_dev" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
   echo "Sector-64 firmware sha256: want=$want_sha got=$got_sha"
@@ -442,7 +489,7 @@ if [ "$RUN_POST_VM" = "true" ] && { [ "$FLASH_MODE" = "sd_direct" ] || [ "$FLASH
     fi
   fi
 
-  sudo timeout 90 qemu-system-aarch64 \
+  sudo "${THROTTLE[@]}" timeout 90 qemu-system-aarch64 \
     -machine virt,accel=kvm,gic-version=max \
     -cpu host -smp 4 -m 4G \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
