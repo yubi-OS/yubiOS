@@ -1,29 +1,27 @@
 #!/usr/bin/env bash
 # scripts/flash-device-e2e.sh
 #
-# End-to-end SD card & VM provisioning pipeline for the ubuntu self-hosted
+# Direct-to-SD hardware & VM provisioning pipeline for the ubuntu self-hosted
 # runner (HIGH-MEM ARM64, 62 GB RAM) with an attached physical YubiKey
 # (1050:0407) and SD card reader (/dev/sda).
 #
-# Key I/O-safety architecture for ubuntu (consumer laptop with fragile root MMC):
-#   1. All container storage (/var/lib/containers) is backed by an ext4 loop
+# Key architecture:
+#   1. Container storage (/var/lib/containers) is backed by an ext4 loop
 #      filesystem inside /dev/shm (RAM tmpfs) so podman pull / export / bootc
-#      write ZERO bytes to /dev/mmcblk0p3 (the root disk).
-#   2. All 35,000 random 4K writes and FS_IOC_ENABLE_VERITY ioctls of
-#      `bootc install to-filesystem --composefs-backend` execute against a
-#      sparse disk image in /dev/shm (RAM) in ~15 seconds, then stream
-#      sequentially to /dev/sda with throttled 4 MiB blocks (`nice -n 19
-#      ionice -c2 -n7`).
-#   3. Early-boot fTPM & measured-boot fix (ROCK 5B / PineTab2 / ARM64):
-#      - Ensures `tee`, `optee`, and `tpm_ftpm_tee` kernel modules plus
-#        `/usr/lib/modules-load.d/yubiOS-optee-ftpm.conf` are baked into the
-#        UKI's `.initrd` before YubiKey PIV slot 9a signing so `/dev/tpm0` and
-#        `/dev/tpmrm0` probe at ~3s in initrd (preventing the 45s
-#        dev-tpm0.device initrd timeout and 54s delayed TPM load).
-#      - Prepends `rw` to the UKI `.cmdline` and seeds `uninitialized` into
-#        `state/deploy/<digest>/etc/machine-id` so `bootc-root-setup`'s `/etc`
-#        and `/var` bind-mounts are writable and `systemd-pcrmachine.service`
-#        succeeds when `ConditionSecurity=measured-os` is active.
+#      write ZERO bytes to /dev/mmcblk0p3 (the ubuntu root disk).
+#   2. Provisions $SD_DEVICE (/dev/sda) directly — no intermediate raw disk
+#      image or 6 GiB dd copy step:
+#        - GPT @ sector 32768 (`sda1` 512M ESP, `sda2` yubiOS-root)
+#        - `bootc install to-filesystem --composefs-backend` directly to /dev/sda
+#        - Rebuilds the UKI `.initrd` (with `tee`, `optee`, `tpm_ftpm_tee` +
+#          `/usr/lib/modules-load.d/yubiOS-optee-ftpm.conf`) and `.cmdline`
+#          (with `rw`) so `/dev/tpm0` and `/dev/tpmrm0` probe at ~3s in initrd
+#          and `/etc` + `/var` bind-mounts are writable
+#        - Seeds `state/deploy/<digest>/etc/machine-id` (`uninitialized`) so
+#          `systemd-pcrmachine.service` succeeds under `ConditionSecurity=measured-os`
+#        - Signs PK/KEK/db.auth, `systemd-bootaa64.efi`, `BOOTAA64.EFI`, and
+#          the UKI directly on `/dev/sda1` with the physical YubiKey PIV slot 9a
+#        - Writes board `u-boot-rockchip.bin` directly at sector 64 of `/dev/sda`
 
 set -euo pipefail
 
@@ -51,7 +49,6 @@ KEY_DIR="${WORK_DIR}/keys"
 FW_DIR="${WORK_DIR}/firmware"
 PODMAN_RAM_IMG="/dev/shm/yubios-podman-ext4.img"
 MNT_DIR="/mnt/yubios-sd-target"
-RAW_LOOP=""
 PODMAN_LOOP=""
 
 THROTTLE=(nice -n 19 ionice -c2 -n7)
@@ -63,9 +60,6 @@ die()  { printf '::error::[flash-e2e] %s\n' "$*" >&2; exit 1; }
 cleanup() {
   set +e
   sudo umount -R "$MNT_DIR" 2>/dev/null || true
-  if [ -n "${RAW_LOOP:-}" ]; then
-    sudo losetup --detach "$RAW_LOOP" 2>/dev/null || true
-  fi
   if mountpoint -q /var/lib/containers; then
     sudo umount -l /var/lib/containers 2>/dev/null || true
   fi
@@ -131,6 +125,16 @@ guard_block_device() {
 }
 
 guard_block_device "$SD_DEVICE"
+
+# Helper to resolve partition paths on /dev/sda (sda1/sda2) vs /dev/mmcblkX (mmcblkXp1/p2)
+part_dev() {
+  local dev="$1"
+  local num="$2"
+  case "$dev" in
+    *[0-9]) printf '%sp%s' "$dev" "$num" ;;
+    *)      printf '%s%s' "$dev" "$num" ;;
+  esac
+}
 
 # ---------------------------------------------------------------------------
 # Stage 2: YubiKey PIV Slot 9a Key & PK/KEK/db Auth Bundle Preparation
@@ -303,39 +307,42 @@ pull_board_firmware() {
 pull_board_firmware "$BOARD"
 
 # ---------------------------------------------------------------------------
-# Stage 4: Build & Sign Complete Disk Image in RAM (/dev/shm), then Stream to SD
+# Stage 4: Partition, Install, Rebuild UKI, Sign & Write U-Boot Directly on $SD_DEVICE
 # ---------------------------------------------------------------------------
-build_signed_image_in_ram() {
-  local raw_img="$1"
+provision_sd_directly() {
+  local dev="$1"
   local board_name="$2"
   local fw_bin="$FW_DIR/$board_name/u-boot-rockchip.bin"
+  local p1 p2
+  p1="$(part_dev "$dev" 1)"
+  p2="$(part_dev "$dev" 2)"
 
-  log "Stage 4: Building & signing $board_name image in RAM ($raw_img: GPT @ 32768, bootc install, early-initrd fTPM + rw UKI, YubiKey PIV 9a, sector-64 U-Boot)"
-  sudo rm -f "$raw_img"
-  truncate -s 6G "$raw_img"
-  RAW_LOOP="$(sudo losetup --find --show --partscan "$raw_img")"
-  sudo sfdisk --wipe always "$RAW_LOOP" <<'EOF'
+  log "Stage 4: Partitioning & provisioning $dev ($board_name) directly — no intermediate raw image copy"
+  guard_block_device "$dev"
+
+  # Partition GPT @ sector 32768 (leaving sectors 64..32767 free for u-boot-rockchip.bin):
+  #   p1: 512 MiB ESP
+  #   p2: 8 GiB yubiOS-root (fast mkfs.ext4; expandable on target board via systemd-growfs)
+  sudo sfdisk --wipe always "$dev" <<'EOF'
 label: gpt
 first-lba: 32768
 start=32768, size=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name="ESP"
-type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
+size=8G, type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
 EOF
-  sudo partprobe "$RAW_LOOP" 2>/dev/null || sudo partx --update "$RAW_LOOP" 2>/dev/null || true
+  sudo partprobe "$dev" 2>/dev/null || sudo partx --update "$dev" 2>/dev/null || true
   sudo udevadm settle
-  sleep 1
-  local p1="${RAW_LOOP}p1"
-  local p2="${RAW_LOOP}p2"
-  [ -b "$p1" ] || die "Loop ESP partition $p1 did not appear"
-  [ -b "$p2" ] || die "Loop Root partition $p2 did not appear"
+  sleep 2
+  [ -b "$p1" ] || die "ESP partition $p1 did not appear on $dev"
+  [ -b "$p2" ] || die "Root partition $p2 did not appear on $dev"
 
-  sudo mkfs.vfat -F 32 -n EFI "$p1"
-  sudo mkfs.ext4 -F -q -O verity,^has_journal -L yubiOS-root "$p2"
+  sudo "${THROTTLE[@]}" mkfs.vfat -F 32 -n EFI "$p1"
+  sudo "${THROTTLE[@]}" mkfs.ext4 -F -q -O verity,^has_journal -L yubiOS-root "$p2"
   sudo mkdir -p "$MNT_DIR"
   sudo mount -o noatime "$p2" "$MNT_DIR"
   sudo install -d -m 0755 "$MNT_DIR/boot"
   sudo mount "$p1" "$MNT_DIR/boot"
 
-  log "Running bootc install to-filesystem in RAM ($board_name)"
+  log "Running bootc install to-filesystem directly onto $dev ($board_name)"
   sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged --pid=host --ipc=host \
     --security-opt label=type:unconfined_t \
     -v /var/lib/containers:/var/lib/containers \
@@ -372,13 +379,7 @@ EOF
     fi
   fi
 
-  # Seed state/deploy/*/etc (the bind-mounted /etc for composefs deployments) with:
-  #   1. machine-id = "uninitialized" (mode 0644) so systemd[1] at switch-root can
-  #      initialize/overmount /etc/machine-id and systemd-pcrmachine.service succeeds
-  #      when ConditionSecurity=measured-os is true.
-  #   2. modules-load.d/yubiOS-optee-ftpm.conf so real-root systemd-modules-load also
-  #      keeps tee, optee, and tpm_ftpm_tee loaded.
-  log "Seeding state/deploy/*/etc/machine-id (uninitialized) and modules-load.d/yubiOS-optee-ftpm.conf"
+  log "Seeding state/deploy/*/etc/machine-id (uninitialized) and modules-load.d/yubiOS-optee-ftpm.conf on $p2"
   sudo mkdir -p "$MNT_DIR/etc/modules-load.d" "$MNT_DIR/var/lib/yubiOS/secureboot"
   for deploy_dir in "$MNT_DIR"/state/deploy/* "$MNT_DIR"; do
     [ -d "$deploy_dir" ] || continue
@@ -396,15 +397,12 @@ MODCONF
     fi
   done
 
-  # Rebuild the UKI's .initrd (adding tee, optee, tpm_ftpm_tee, and yubiOS-optee-ftpm.conf)
-  # and .cmdline (prepending `rw` so /dev/gpt-auto-root mounts rw at /sysroot) BEFORE signing
-  # with the physical YubiKey PIV slot 9a key!
   new_cmdline="$orig_cmdline"
   case " $new_cmdline " in
     *" rw "*) ;;
     *) new_cmdline="rw ${new_cmdline}" ;;
   esac
-  log "Rebuilding UKI ($uki_rel) with early-initrd optee + tpm_ftpm_tee drivers and rw cmdline"
+  log "Rebuilding UKI ($uki_rel) on $p1 with early-initrd optee + tpm_ftpm_tee drivers and rw cmdline"
   sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged \
     --security-opt label=type:unconfined_t \
     -v "$MNT_DIR/boot:/target_boot" \
@@ -451,7 +449,7 @@ EOF
   printf '%s' "$rebuilt_cmdline" | grep -Fq "$cd_digest" || die "Rebuilt UKI cmdline lost composefs digest $cd_digest"
 
   if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
-    log "Signing installed EFI loaders & UKIs with YubiKey PIV slot 9a (SIGNKEY=$SIGNKEY)"
+    log "Signing installed EFI loaders & UKIs on $p1 with YubiKey PIV slot 9a (SIGNKEY=$SIGNKEY)"
     sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/keys"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/keys/"
     while IFS= read -r -d '' efi_file; do
@@ -463,24 +461,23 @@ EOF
   sudo sync
   sudo umount "$MNT_DIR/boot"
   sudo umount "$MNT_DIR"
-  sudo losetup --detach "$RAW_LOOP"
-  RAW_LOOP=""
 
-  log "Writing $board_name u-boot-rockchip.bin at sector 64 of $raw_img"
+  log "Writing $board_name u-boot-rockchip.bin directly at sector 64 of $dev"
   local bytes cnt want_sha got_sha
   bytes="$(stat -c '%s' "$fw_bin")"
   cnt=$(( (bytes + 511) / 512 ))
   want_sha="$(sha256sum "$fw_bin" | awk '{print $1}')"
-  dd if="$fw_bin" of="$raw_img" bs=512 seek=64 conv=notrunc status=none
-  got_sha="$(dd if="$raw_img" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
-  echo "Sector-64 firmware sha256 in $raw_img: want=$want_sha got=$got_sha"
-  [ "$want_sha" = "$got_sha" ] || die "Sector-64 readback sha256 mismatch in $raw_img!"
+  sudo "${THROTTLE[@]}" dd if="$fw_bin" of="$dev" bs=512 seek=64 conv=notrunc,fsync status=none
+  got_sha="$(sudo dd if="$dev" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
+  echo "SD card ($dev) sector-64 firmware sha256: want=$want_sha got=$got_sha"
+  [ "$want_sha" = "$got_sha" ] || die "SD card sector-64 readback sha256 mismatch on $dev!"
+  lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,UUID "$dev"
+  log "PASS: $dev ($board_name) provisioned directly and verified ($got_sha)"
 }
 
-RAM_IMG="${WORK_DIR}/yubios-signed-disk.raw"
-build_signed_image_in_ram "$RAM_IMG" "$BOARD"
+provision_sd_directly "$SD_DEVICE" "$BOARD"
 
-# Unmount and free the 12G podman RAM loop now that bootc install + UKI rebuild are complete
+# Unmount and free the 12G podman RAM loop now that direct SD provisioning is complete
 if mountpoint -q /var/lib/containers; then
   sudo umount -l /var/lib/containers 2>/dev/null || true
 fi
@@ -492,32 +489,10 @@ sudo rm -f "$PODMAN_RAM_IMG"
 df -h /dev/shm
 
 # ---------------------------------------------------------------------------
-# Stage 5: Stream Signed Image Sequentially to /dev/sda + Verify Sector-64 U-Boot
-# ---------------------------------------------------------------------------
-log "Stage 5: Streaming signed $BOARD image sequentially to $SD_DEVICE (throttled 4 MiB blocks)"
-guard_block_device "$SD_DEVICE"
-sudo "${THROTTLE[@]}" dd if="$RAM_IMG" of="$SD_DEVICE" bs=4M conv=fsync status=progress
-sudo sgdisk -e "$SD_DEVICE" 2>/dev/null || true
-sudo partprobe "$SD_DEVICE" 2>/dev/null || true
-sudo udevadm settle
-
-fw_bin="$FW_DIR/$BOARD/u-boot-rockchip.bin"
-bytes="$(stat -c '%s' "$fw_bin")"
-cnt=$(( (bytes + 511) / 512 ))
-want_sha="$(sha256sum "$fw_bin" | awk '{print $1}')"
-got_sha="$(sudo dd if="$SD_DEVICE" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
-echo "SD card ($SD_DEVICE) sector-64 firmware sha256: want=$want_sha got=$got_sha"
-[ "$want_sha" = "$got_sha" ] || die "SD card sector-64 readback sha256 mismatch on $SD_DEVICE!"
-lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,UUID "$SD_DEVICE"
-log "PASS: $SD_DEVICE ($BOARD) written and verified ($got_sha)"
-
-# ---------------------------------------------------------------------------
-# Stage 6: Post-SD-install VM Boot & Real-YubiKey Enrollment Flow Execution
+# Stage 5: Post-SD-install VM Boot & Real-YubiKey Enrollment Flow Execution
 # ---------------------------------------------------------------------------
 if [ "$RUN_POST_VM" = "true" ]; then
-  # Boot RAM_IMG so the physical SD card ($SD_DEVICE) stays in pristine first-boot state!
-  VM_DRIVE="$RAM_IMG"
-  log "Stage 6: Booting $VM_DRIVE in ARM64 VM (360s timeout) to verify early TPM + rw /etc + full enrollment flow"
+  log "Stage 5: Booting $SD_DEVICE in ARM64 VM (snapshot=on so $SD_DEVICE stays pristine first-boot) to verify early TPM + rw /etc + enrollment flow"
 
   aa_complain="$(command -v aa-complain || echo /usr/sbin/aa-complain)"
   [ -x "$aa_complain" ] && sudo "$aa_complain" swtpm 2>/dev/null || true
@@ -620,12 +595,14 @@ TMPF_EOF
     QEMU_ACCEL_ARGS=(-machine virt,gic-version=max -accel kvm -cpu host)
   fi
 
+  # snapshot=on keeps all VM guest writes in a temporary overlay so $SD_DEVICE
+  # remains untouched in pristine first-boot state (uninitialized machine-id)!
   sudo "${THROTTLE[@]}" timeout 360 qemu-system-aarch64 \
     "${QEMU_ACCEL_ARGS[@]}" -smp 4 -m 4G \
     -smbios "type=11,value=io.systemd.credential.binary:tmpfiles.extra=${TMPFILES_CRED_B64}" \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
-    -drive file="$VM_DRIVE",format=raw,if=virtio,cache=writeback \
+    -drive file="$SD_DEVICE",format=raw,if=virtio,snapshot=on \
     -chardev socket,id=chrtpm,path="$SWTPM_DIR/swtpm-sock" \
     -tpmdev emulator,id=tpm0,chardev=chrtpm \
     -device tpm-tis-device,tpmdev=tpm0 \
@@ -649,7 +626,7 @@ TMPF_EOF
     die "Post-install VM boot hit systemd-pcrmachine.service forced reboot!"
   fi
   if grep -Fq "YUBIOS_VM_ENROLL_FLOW_PASS" "$WORK_DIR/post-install-vm.log"; then
-    log "PASS: Provisioned image ($BOARD) completed full boot + YUBIOS_VM_ENROLL_FLOW_PASS"
+    log "PASS: Provisioned SD card ($SD_DEVICE / $BOARD) completed full boot + YUBIOS_VM_ENROLL_FLOW_PASS"
   else
     die "Post-SD-install VM boot did not reach YUBIOS_VM_ENROLL_FLOW_PASS marker"
   fi
