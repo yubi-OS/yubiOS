@@ -1,34 +1,37 @@
 #!/usr/bin/env bash
 # scripts/flash-device-e2e.sh
 #
-# Direct-to-SD hardware & VM provisioning pipeline for the ubuntu self-hosted
-# runner (HIGH-MEM ARM64, 62 GB RAM) with an attached physical YubiKey
-# (1050:0407) and SD card reader (/dev/sda).
+# Direct-to-SD hardware & VM provisioning pipeline for the rock1 self-hosted
+# ARM64 runner (or ubuntu HIGH-MEM runner) with SD card slot (/dev/mmcblk1)
+# and YubiKey PIV slot 9a / test-key signing.
 #
 # Key architecture:
-#   1. Container storage (/var/lib/containers) is backed by an ext4 loop
-#      filesystem inside /dev/shm (RAM tmpfs) so podman pull / export / bootc
-#      write ZERO bytes to /dev/mmcblk0p3 (the ubuntu root disk).
-#   2. Provisions $SD_DEVICE (/dev/sda) directly — no intermediate raw disk
-#      image or 6 GiB dd copy step:
-#        - GPT @ sector 32768 (`sda1` 512M ESP, `sda2` yubiOS-root)
-#        - `bootc install to-filesystem --composefs-backend` directly to /dev/sda
-#        - Rebuilds the UKI `.initrd` (with `tee`, `optee`, `tpm_ftpm_tee` +
-#          `/usr/lib/modules-load.d/yubiOS-optee-ftpm.conf`) and `.cmdline`
-#          (with `rw`) so `/dev/tpm0` and `/dev/tpmrm0` probe at ~3s in initrd
-#          and `/etc` + `/var` bind-mounts are writable
+#   1. On rock1 (/mnt/extended mounted on /dev/sda1 with 74 GiB free),
+#      /var/lib/containers and /var/tmp already reside on /mnt/extended so
+#      podman pull / bootc write ZERO bytes to the 12 GiB root disk (/dev/mmcblk0).
+#      On hosts without /mnt/extended (e.g. ubuntu with 62 GB RAM), a 12 GiB
+#      ext4 loop in /dev/shm backs /var/lib/containers.
+#   2. Provisions $SD_DEVICE (/dev/mmcblk1 on rock1) directly — no intermediate
+#      raw disk image or 6 GiB dd copy step:
+#        - GPT @ sector 32768 (`p1` 512M ESP, `p2` 8G yubiOS-root)
+#        - `bootc install to-filesystem --composefs-backend` directly to $SD_DEVICE
+#        - Rebuilds the UKI `.initrd` (if needed, ensuring `tee`, `optee`,
+#          `tpm_ftpm_tee` + `/usr/lib/modules-load.d/yubiOS-optee-ftpm.conf`)
+#          and `.cmdline` (ensuring `rw`) so `/dev/tpm0` and `/dev/tpmrm0`
+#          probe at ~3s in initrd and `/etc` + `/var` bind-mounts are writable
 #        - Seeds `state/deploy/<digest>/etc/machine-id` (`uninitialized`) so
 #          `systemd-pcrmachine.service` succeeds under `ConditionSecurity=measured-os`
 #        - Signs PK/KEK/db.auth, `systemd-bootaa64.efi`, `BOOTAA64.EFI`, and
-#          the UKI directly on `/dev/sda1` with the physical YubiKey PIV slot 9a
-#        - Writes board `u-boot-rockchip.bin` directly at sector 64 of `/dev/sda`
+#          the UKI directly on the ESP with PIV slot 9a (physical YubiKey when
+#          attached, or ephemeral test slot 9a key when SIGNKEY=test on headless rock1)
+#        - Writes board `u-boot-rockchip.bin` directly at sector 64 of $SD_DEVICE
 
 set -euo pipefail
 
-BOARD="${FLASH_BOARD:-pinetab2-rk3566}"
-SD_DEVICE="${FLASH_SD_DEVICE:-/dev/sda}"
+BOARD="${FLASH_BOARD:-rock5b-rk3588}"
+SD_DEVICE="${FLASH_SD_DEVICE:-/dev/mmcblk1}"
 OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
-SIGNKEY="${FLASH_SIGNKEY:-production}"
+SIGNKEY="${FLASH_SIGNKEY:-test}"
 SIGN_WITH_YUBIKEY="${FLASH_SIGN_WITH_YUBIKEY:-true}"
 PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
 RUN_POST_VM="${FLASH_RUN_POST_VM:-true}"
@@ -43,13 +46,22 @@ else
   PIV_TOUCH_POLICY="$PIV_TOUCH_OVERRIDE"
 fi
 
-WORK_DIR="/dev/shm/yubios-flash-e2e"
+if mountpoint -q /mnt/extended 2>/dev/null; then
+  WORK_BASE="/var/tmp"
+  USE_RAM_CONTAINERS=0
+else
+  WORK_BASE="/dev/shm"
+  USE_RAM_CONTAINERS=1
+fi
+
+WORK_DIR="${WORK_BASE}/yubios-flash-e2e"
 export TMPDIR="${WORK_DIR}/tmp"
 KEY_DIR="${WORK_DIR}/keys"
 FW_DIR="${WORK_DIR}/firmware"
 PODMAN_RAM_IMG="/dev/shm/yubios-podman-ext4.img"
 MNT_DIR="/mnt/yubios-sd-target"
 PODMAN_LOOP=""
+SIGN_MODE="none"
 
 THROTTLE=(nice -n 19 ionice -c2 -n7)
 
@@ -60,7 +72,7 @@ die()  { printf '::error::[flash-e2e] %s\n' "$*" >&2; exit 1; }
 cleanup() {
   set +e
   sudo umount -R "$MNT_DIR" 2>/dev/null || true
-  if mountpoint -q /var/lib/containers; then
+  if [ "$USE_RAM_CONTAINERS" = "1" ] && mountpoint -q /var/lib/containers; then
     sudo umount -l /var/lib/containers 2>/dev/null || true
   fi
   if [ -n "${PODMAN_LOOP:-}" ]; then
@@ -73,14 +85,14 @@ trap cleanup EXIT
 sudo rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR" "$TMPDIR" "$KEY_DIR" "$FW_DIR"
 
-log "Configuration: BOARD=$BOARD SD_DEVICE=$SD_DEVICE SIGNKEY=$SIGNKEY PIV_TOUCH_POLICY=$PIV_TOUCH_POLICY OS_IMAGE=$OS_IMAGE"
+log "Configuration: BOARD=$BOARD SD_DEVICE=$SD_DEVICE SIGNKEY=$SIGNKEY PIV_TOUCH_POLICY=$PIV_TOUCH_POLICY OS_IMAGE=$OS_IMAGE WORK_DIR=$WORK_DIR"
 
 # ---------------------------------------------------------------------------
 # Stage 1: Preflight & host safety guards
 # ---------------------------------------------------------------------------
 log "Stage 1: Host preflight & storage safety guards"
 uptime
-df -h / /dev/shm
+df -h / /dev/shm /mnt/extended 2>/dev/null || df -h / /dev/shm
 ps -eo pid,pcpu,pmem,comm,args --sort=-pcpu | head -n 10
 lsblk -o NAME,SIZE,TYPE,RM,RO,TRAN,MODEL,FSTYPE,LABEL,UUID,MOUNTPOINTS
 lsusb || true
@@ -95,16 +107,13 @@ guard_block_device() {
       die "REFUSING: $dev is a protected host disk ($base)"
       ;;
   esac
-  local root_src boot_src efi_src
-  root_src="$(findmnt -no SOURCE / || true)"
-  boot_src="$(findmnt -no SOURCE /boot || true)"
-  efi_src="$(findmnt -no SOURCE /boot/efi || true)"
-  for src in "$root_src" "$boot_src" "$efi_src"; do
+  local mnt src pk
+  for mnt in / /boot /boot/efi /mnt/extended /var/lib/containers /var/tmp; do
+    src="$(findmnt -no SOURCE "$mnt" 2>/dev/null || true)"
     [ -n "$src" ] || continue
-    local pk
     pk="$(lsblk -no PKNAME "$src" 2>/dev/null | head -n1 || true)"
     if [ "$src" = "$dev" ] || [ "$pk" = "$base" ]; then
-      die "REFUSING: $dev backs a mounted host filesystem ($src)"
+      die "REFUSING: $dev backs a mounted host filesystem ($mnt on $src)"
     fi
   done
   for part in "${dev}"* ; do
@@ -126,7 +135,6 @@ guard_block_device() {
 
 guard_block_device "$SD_DEVICE"
 
-# Helper to resolve partition paths on /dev/sda (sda1/sda2) vs /dev/mmcblkX (mmcblkXp1/p2)
 part_dev() {
   local dev="$1"
   local num="$2"
@@ -139,14 +147,7 @@ part_dev() {
 # ---------------------------------------------------------------------------
 # Stage 2: YubiKey PIV Slot 9a Key & PK/KEK/db Auth Bundle Preparation
 # ---------------------------------------------------------------------------
-log "Stage 2: Physical YubiKey PIV slot 9a & Secure Boot PK/KEK/db preparation (SIGNKEY=$SIGNKEY, touch=$PIV_TOUCH_POLICY)"
-PKCS11_LIB=""
-for c in /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib64/libykcs11.so /usr/lib/libykcs11.so; do
-  if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
-done
-[ -n "$PKCS11_LIB" ] || die "libykcs11.so not found"
-export PKCS11_MODULE_PATH="$PKCS11_LIB"
-export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
+log "Stage 2: PIV slot 9a & Secure Boot PK/KEK/db preparation (SIGNKEY=$SIGNKEY, touch=$PIV_TOUCH_POLICY)"
 
 OWNER_GUID="${YUBIOS_OWNER_GUID:-1404b45e-798b-4249-b5cd-b7f961b44894}"
 PIV_PIN="${YUBIOS_PIV_PIN:-123456}"
@@ -154,48 +155,56 @@ PIV_MGMT_KEY="${YUBIOS_PIV_MGMT_KEY:-0102030405060708010203040506070801020304050
 CN_LABEL="YUBIOS Owner Slot 9a"
 [ "$SIGNKEY" = "test" ] && CN_LABEL="YUBIOS Test Slot 9a"
 
+PKCS11_LIB=""
+for c in /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib64/libykcs11.so /usr/lib/libykcs11.so; do
+  if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
+done
+
 if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
-  lsusb | grep -qi '1050:' || die "No physical YubiKey (1050:*) detected on USB"
-  sudo systemctl start pcscd.socket pcscd.service 2>/dev/null || true
-  sudo ykman info
-  sudo ykman piv info
-  need_mint=0
-  if ! sudo ykman piv certificates export 9a "$KEY_DIR/db.crt" >/dev/null 2>&1; then
-    need_mint=1
-  elif [ "$SIGNKEY" = "test" ] && ! openssl x509 -in "$KEY_DIR/db.crt" -noout -subject 2>/dev/null | grep -Fq "YUBIOS Test Slot 9a"; then
-    need_mint=1
-  fi
-  if [ "$need_mint" -eq 1 ]; then
-    log "Generating RSA-2048 key in PIV slot 9a on physical YubiKey (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
-    sudo ykman piv keys generate \
-      -a RSA2048 \
-      -m "$PIV_MGMT_KEY" \
-      --pin-policy ONCE \
-      --touch-policy "${PIV_TOUCH_POLICY^^}" \
-      9a "$KEY_DIR/slot9a-pub.pem"
-    log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
-    sudo ykman piv certificates generate \
-      -m "$PIV_MGMT_KEY" \
-      -P "$PIV_PIN" \
-      -s "CN=${CN_LABEL}" \
-      -d 1826 \
-      9a "$KEY_DIR/slot9a-pub.pem"
-    sudo ykman piv certificates export 9a "$KEY_DIR/db.crt"
-  fi
-  sudo chown -R "$(id -u):$(id -g)" "$KEY_DIR"
-  openssl x509 -in "$KEY_DIR/db.crt" -noout -subject -issuer -dates -fingerprint -sha256
-  cp -f "$KEY_DIR/db.crt" "$KEY_DIR/PK.crt"
-  cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
-  openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
+  if lsusb | grep -qi '1050:' && [ -n "$PKCS11_LIB" ]; then
+    SIGN_MODE="yubikey"
+    export PKCS11_MODULE_PATH="$PKCS11_LIB"
+    export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
+    sudo systemctl start pcscd.socket pcscd.service 2>/dev/null || true
+    sudo ykman info
+    sudo ykman piv info
+    need_mint=0
+    if ! sudo ykman piv certificates export 9a "$KEY_DIR/db.crt" >/dev/null 2>&1; then
+      need_mint=1
+    elif [ "$SIGNKEY" = "test" ] && ! openssl x509 -in "$KEY_DIR/db.crt" -noout -subject 2>/dev/null | grep -Fq "YUBIOS Test Slot 9a"; then
+      need_mint=1
+    fi
+    if [ "$need_mint" -eq 1 ]; then
+      log "Generating RSA-2048 key in PIV slot 9a on physical YubiKey (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
+      sudo ykman piv keys generate \
+        -a RSA2048 \
+        -m "$PIV_MGMT_KEY" \
+        --pin-policy ONCE \
+        --touch-policy "${PIV_TOUCH_POLICY^^}" \
+        9a "$KEY_DIR/slot9a-pub.pem"
+      log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
+      sudo ykman piv certificates generate \
+        -m "$PIV_MGMT_KEY" \
+        -P "$PIV_PIN" \
+        -s "CN=${CN_LABEL}" \
+        -d 1826 \
+        9a "$KEY_DIR/slot9a-pub.pem"
+      sudo ykman piv certificates export 9a "$KEY_DIR/db.crt"
+    fi
+    sudo chown -R "$(id -u):$(id -g)" "$KEY_DIR"
+    openssl x509 -in "$KEY_DIR/db.crt" -noout -subject -issuer -dates -fingerprint -sha256
+    cp -f "$KEY_DIR/db.crt" "$KEY_DIR/PK.crt"
+    cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
+    openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
 
-  T="$(date -u '+%Y-%m-%d %H:%M:%S')"
-  for var in PK KEK db; do
-    cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
-  done
+    T="$(date -u '+%Y-%m-%d %H:%M:%S')"
+    for var in PK KEK db; do
+      cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
+    done
 
-  PKCS11_PROV="/usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so"
-  [ -e "$PKCS11_PROV" ] || PKCS11_PROV="pkcs11"
-  cat > "$WORK_DIR/openssl-pkcs11.cnf" <<EOF
+    PKCS11_PROV="/usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so"
+    [ -e "$PKCS11_PROV" ] || PKCS11_PROV="pkcs11"
+    cat > "$WORK_DIR/openssl-pkcs11.cnf" <<EOF
 openssl_conf = openssl_init
 [openssl_init]
 engines = engine_section
@@ -209,34 +218,58 @@ PIN = ${PIV_PIN}
 init = 0
 EOF
 
-  SB_KEY_URI="pkcs11:id=%01;type=private?pin-value=${PIV_PIN}"
-  for var in PK KEK db; do
-    sign-efi-sig-list -c "$KEY_DIR/PK.crt" -t "$T" -o "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.forsig"
-    if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-      echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey now <<<"
-    fi
-    if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
-      -provider "$PKCS11_PROV" -provider default \
-      -in "$KEY_DIR/${var}.forsig" \
-      -out "$KEY_DIR/${var}.signed" \
-      -signer "$KEY_DIR/PK.crt" \
-      -inkey "$SB_KEY_URI" \
-      -outform DER -md sha256; then
-      sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" openssl smime -sign -binary \
-        -engine pkcs11 -keyform engine \
+    SB_KEY_URI="pkcs11:id=%01;type=private?pin-value=${PIV_PIN}"
+    for var in PK KEK db; do
+      sign-efi-sig-list -c "$KEY_DIR/PK.crt" -t "$T" -o "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.forsig"
+      if [ "$PIV_TOUCH_POLICY" != "never" ]; then
+        echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey now <<<"
+      fi
+      if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
+        -provider "$PKCS11_PROV" -provider default \
         -in "$KEY_DIR/${var}.forsig" \
         -out "$KEY_DIR/${var}.signed" \
         -signer "$KEY_DIR/PK.crt" \
-        -inkey "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
-        -outform DER -md sha256
-    fi
-    sudo chown "$(id -u):$(id -g)" "$KEY_DIR/${var}.signed"
-    sign-efi-sig-list -i "$KEY_DIR/${var}.signed" -t "$T" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
-  done
-  ls -la "$KEY_DIR"
+        -inkey "$SB_KEY_URI" \
+        -outform DER -md sha256; then
+        sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" openssl smime -sign -binary \
+          -engine pkcs11 -keyform engine \
+          -in "$KEY_DIR/${var}.forsig" \
+          -out "$KEY_DIR/${var}.signed" \
+          -signer "$KEY_DIR/PK.crt" \
+          -inkey "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
+          -outform DER -md sha256
+      fi
+      sudo chown "$(id -u):$(id -g)" "$KEY_DIR/${var}.signed"
+      sign-efi-sig-list -i "$KEY_DIR/${var}.signed" -t "$T" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
+    done
+    ls -la "$KEY_DIR"
+  elif [ "$SIGNKEY" = "test" ]; then
+    SIGN_MODE="soft_test"
+    log "No physical YubiKey on USB; SIGNKEY=test -> minting ephemeral RSA-2048 Slot 9a test key ($CN_LABEL)"
+    openssl req -x509 -newkey rsa:2048 -nodes \
+      -keyout "$KEY_DIR/db.key" \
+      -out "$KEY_DIR/db.crt" \
+      -subj "/CN=${CN_LABEL}" \
+      -days 1826 \
+      -sha256
+    openssl x509 -in "$KEY_DIR/db.crt" -noout -subject -issuer -dates -fingerprint -sha256
+    cp -f "$KEY_DIR/db.crt" "$KEY_DIR/PK.crt"
+    cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
+    cp -f "$KEY_DIR/db.key" "$KEY_DIR/PK.key"
+    cp -f "$KEY_DIR/db.key" "$KEY_DIR/KEK.key"
+    openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
+    T="$(date -u '+%Y-%m-%d %H:%M:%S')"
+    for var in PK KEK db; do
+      cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
+      sign-efi-sig-list -g "$OWNER_GUID" -t "$T" -k "$KEY_DIR/PK.key" -c "$KEY_DIR/PK.crt" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
+    done
+    ls -la "$KEY_DIR"
+  else
+    die "SIGNKEY=production requires a physical YubiKey (1050:*) attached on USB"
+  fi
 fi
 
-sign_efi_with_yubikey() {
+sign_efi_binary() {
   local efi_path="$1"
   local tmp_in tmp_out
   tmp_in="$(mktemp "${WORK_DIR}/efi-in-XXXXXX.efi")"
@@ -244,39 +277,50 @@ sign_efi_with_yubikey() {
   sudo cp -f "$efi_path" "$tmp_in"
   sudo chown "$(id -u):$(id -g)" "$tmp_in"
 
-  if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-    echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_path") <<<"
+  if [ "$SIGN_MODE" = "yubikey" ]; then
+    if [ "$PIV_TOUCH_POLICY" != "never" ]; then
+      echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_path") <<<"
+    fi
+    sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
+      --engine pkcs11 \
+      --key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
+      --cert "$KEY_DIR/db.crt" \
+      --output "$tmp_out" \
+      "$tmp_in"
+  else
+    sbsign \
+      --key "$KEY_DIR/db.key" \
+      --cert "$KEY_DIR/db.crt" \
+      --output "$tmp_out" \
+      "$tmp_in"
   fi
-
-  sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
-    --engine pkcs11 \
-    --key "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
-    --cert "$KEY_DIR/db.crt" \
-    --output "$tmp_out" \
-    "$tmp_in"
   sudo chown "$(id -u):$(id -g)" "$tmp_out"
   sbverify --cert "$KEY_DIR/db.crt" "$tmp_out"
-  sudo mv -f "$tmp_out" "$efi_path"
-  rm -f "$tmp_in"
+  sudo cp -f "$tmp_out" "$efi_path"
+  rm -f "$tmp_in" "$tmp_out"
 }
 
 # ---------------------------------------------------------------------------
-# Stage 3: Mount ext4-in-RAM (/dev/shm) onto /var/lib/containers & Pull Images
+# Stage 3: Prepare Container Storage & Pull Images
 # ---------------------------------------------------------------------------
-log "Stage 3: Mounting 12 GiB ext4-in-RAM (/dev/shm) onto /var/lib/containers (0 writes to root disk mmcblk0p3)"
-sudo rm -f "$PODMAN_RAM_IMG"
-truncate -s 12G "$PODMAN_RAM_IMG"
-mkfs.ext4 -F -q -O ^has_journal "$PODMAN_RAM_IMG"
-PODMAN_LOOP="$(sudo losetup --find --show "$PODMAN_RAM_IMG")"
-sudo mkdir -p /var/lib/containers
-sudo mount -o noatime "$PODMAN_LOOP" /var/lib/containers
-df -h /var/lib/containers /dev/shm
+if [ "$USE_RAM_CONTAINERS" = "1" ]; then
+  log "Stage 3: Mounting 12 GiB ext4-in-RAM (/dev/shm) onto /var/lib/containers"
+  sudo rm -f "$PODMAN_RAM_IMG"
+  truncate -s 12G "$PODMAN_RAM_IMG"
+  mkfs.ext4 -F -q -O ^has_journal "$PODMAN_RAM_IMG"
+  PODMAN_LOOP="$(sudo losetup --find --show "$PODMAN_RAM_IMG")"
+  sudo mkdir -p /var/lib/containers
+  sudo mount -o noatime "$PODMAN_LOOP" /var/lib/containers
+else
+  log "Stage 3: Using /mnt/extended-backed /var/lib/containers on rock1 (0 writes to 12G root disk)"
+fi
+df -h /var/lib/containers "$WORK_BASE"
 
 if [ -n "${DOCKER_PASSWORD:-}" ]; then
   printf '%s' "$DOCKER_PASSWORD" | sudo podman login --username 0mniteck42 --password-stdin docker.io
 fi
 
-log "Stage 3b: Pulling $OS_IMAGE and firmware-$BOARD into RAM-backed podman storage"
+log "Stage 3b: Pulling $OS_IMAGE and firmware-$BOARD"
 sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull "$OS_IMAGE"
 RESOLVED_OS="$(sudo podman image inspect "$OS_IMAGE" --format '{{ index .RepoDigests 0 }}')"
 echo "Resolved OS image: $RESOLVED_OS"
@@ -320,9 +364,6 @@ provision_sd_directly() {
   log "Stage 4: Partitioning & provisioning $dev ($board_name) directly — no intermediate raw image copy"
   guard_block_device "$dev"
 
-  # Partition GPT @ sector 32768 (leaving sectors 64..32767 free for u-boot-rockchip.bin):
-  #   p1: 512 MiB ESP
-  #   p2: 8 GiB yubiOS-root (fast mkfs.ext4; expandable on target board via systemd-growfs)
   sudo sfdisk --wipe always "$dev" <<'EOF'
 label: gpt
 first-lba: 32768
@@ -412,7 +453,7 @@ MODCONF
     *" rw "*) ;;
     *) new_cmdline="rw ${new_cmdline}" ;;
   esac
-  log "Rebuilding UKI ($uki_rel) on $p1 with early-initrd optee + tpm_ftpm_tee drivers and rw cmdline"
+  log "Ensuring UKI ($uki_rel) on $p1 has early-initrd optee + tpm_ftpm_tee drivers and rw cmdline"
   sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged \
     --security-opt label=type:unconfined_t \
     -v "$MNT_DIR/boot:/target_boot" \
@@ -422,13 +463,20 @@ MODCONF
     bash -ceu '
       set -- /usr/lib/modules/*/
       kver="$(basename "$1")"
-      mkdir -p /usr/lib/modules-load.d /usr/lib/dracut.conf.d
-      printf "tee\noptee\ntpm_ftpm_tee\n" > /usr/lib/modules-load.d/yubiOS-optee-ftpm.conf
-      cat > /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf <<EOF
+      shipped_initrd="/usr/lib/modules/$kver/initramfs.img"
+      lsinitrd "$shipped_initrd" > /tmp/shipped-initrd.list 2>/dev/null || true
+      if grep -q "optee\.ko" /tmp/shipped-initrd.list && grep -q "tpm_ftpm_tee\.ko" /tmp/shipped-initrd.list && grep -q "usr/lib/modules-load.d/yubiOS-optee-ftpm.conf" /tmp/shipped-initrd.list; then
+        echo "Shipped initramfs already contains optee.ko, tpm_ftpm_tee.ko, and yubiOS-optee-ftpm.conf!"
+        cp -f "$shipped_initrd" /tmp/initramfs-ftpm.img
+      else
+        mkdir -p /usr/lib/modules-load.d /usr/lib/dracut.conf.d
+        printf "tee\noptee\ntpm_ftpm_tee\n" > /usr/lib/modules-load.d/yubiOS-optee-ftpm.conf
+        cat > /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf <<EOF
 add_drivers+=" tee optee tpm_ftpm_tee dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-of-dwcmshc "
 install_items+=" /usr/lib/modules-load.d/yubiOS-optee-ftpm.conf "
 EOF
-      dracut --no-hostonly --force --kver "$kver" /tmp/initramfs-ftpm.img
+        dracut --no-hostonly --force --kver "$kver" /tmp/initramfs-ftpm.img
+      fi
       lsinitrd /tmp/initramfs-ftpm.img > /tmp/initramfs-ftpm.list
       grep -q "optee\.ko" /tmp/initramfs-ftpm.list
       grep -q "tpm_ftpm_tee\.ko" /tmp/initramfs-ftpm.list
@@ -459,12 +507,12 @@ EOF
   printf '%s' "$rebuilt_cmdline" | grep -Fq "$cd_digest" || die "Rebuilt UKI cmdline lost composefs digest $cd_digest"
 
   if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
-    log "Signing installed EFI loaders & UKIs on $p1 with YubiKey PIV slot 9a (SIGNKEY=$SIGNKEY)"
+    log "Signing installed EFI loaders & UKIs on $p1 (mode=$SIGN_MODE, SIGNKEY=$SIGNKEY)"
     sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/keys"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/keys/"
     while IFS= read -r -d '' efi_file; do
-      echo "Signing $efi_file with YubiKey PIV slot 9a..."
-      sign_efi_with_yubikey "$efi_file"
+      echo "Signing $efi_file..."
+      sign_efi_binary "$efi_file"
     done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
   fi
 
@@ -487,8 +535,7 @@ EOF
 
 provision_sd_directly "$SD_DEVICE" "$BOARD"
 
-# Unmount and free the 12G podman RAM loop now that direct SD provisioning is complete
-if mountpoint -q /var/lib/containers; then
+if [ "$USE_RAM_CONTAINERS" = "1" ] && mountpoint -q /var/lib/containers; then
   sudo umount -l /var/lib/containers 2>/dev/null || true
 fi
 if [ -n "${PODMAN_LOOP:-}" ]; then
@@ -496,10 +543,9 @@ if [ -n "${PODMAN_LOOP:-}" ]; then
   PODMAN_LOOP=""
 fi
 sudo rm -f "$PODMAN_RAM_IMG"
-df -h /dev/shm
 
 # ---------------------------------------------------------------------------
-# Stage 5: Post-SD-install VM Boot & Real-YubiKey Enrollment Flow Execution
+# Stage 5: Post-SD-install VM Boot & Enrollment Flow Execution
 # ---------------------------------------------------------------------------
 if [ "$RUN_POST_VM" = "true" ]; then
   log "Stage 5: Booting $SD_DEVICE in ARM64 VM (snapshot=on so $SD_DEVICE stays pristine first-boot) to verify early TPM + rw /etc + enrollment flow"
@@ -605,10 +651,17 @@ TMPF_EOF
     QEMU_ACCEL_ARGS=(-machine "virt,gic-version=max" -accel kvm -cpu host)
   fi
 
-  # snapshot=on keeps all VM guest writes in a temporary overlay so $SD_DEVICE
-  # remains untouched in pristine first-boot state (uninitialized machine-id)!
+  total_mem_kb="$(awk '/MemTotal:/ {print $2}' /proc/meminfo)"
+  if [ "${total_mem_kb:-0}" -ge 8000000 ]; then
+    QEMU_MEM="4G"
+    QEMU_SMP="4"
+  else
+    QEMU_MEM="1536M"
+    QEMU_SMP="2"
+  fi
+
   sudo "${THROTTLE[@]}" timeout 360 qemu-system-aarch64 \
-    "${QEMU_ACCEL_ARGS[@]}" -smp 4 -m 4G \
+    "${QEMU_ACCEL_ARGS[@]}" -smp "$QEMU_SMP" -m "$QEMU_MEM" \
     -smbios "type=11,value=io.systemd.credential.binary:tmpfiles.extra=${TMPFILES_CRED_B64}" \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \

@@ -6,24 +6,24 @@ on:
       SIGNKEY:
         description: 'Signing key mode: test (touch=never, unattended CI) or production (touch=cached, owner key)'
         required: true
-        default: 'production'
+        default: 'test'
         type: choice
         options:
-          - production
           - test
+          - production
       board:
         description: 'Target board firmware to write at sector 64 of the SD card'
         required: true
-        default: 'pinetab2-rk3566'
+        default: 'rock5b-rk3588'
         type: choice
         options:
-          - pinetab2-rk3566
           - rock5b-rk3588
+          - pinetab2-rk3566
           - rockpro64-rk3399
       sd_device:
-        description: 'Removable SD card block device on ubuntu host (guarded against /, /boot, mmcblk0, nvme0n1)'
+        description: 'Removable SD card block device on rock1 host (default /dev/mmcblk1; guarded against /, /boot, /mnt/extended, mmcblk0, sda)'
         required: true
-        default: '/dev/sda'
+        default: '/dev/mmcblk1'
         type: string
       image:
         description: 'yubiOS bootc OCI image ref to install'
@@ -31,7 +31,7 @@ on:
         default: 'docker.io/0mniteck/yubios:dev'
         type: string
       sign_with_yubikey:
-        description: 'Mint/use PIV slot 9a key on attached YubiKey (1050:0407) to sign PK/KEK/db.auth, systemd-boot, and UKI'
+        description: 'Mint/use PIV slot 9a key on attached YubiKey (1050:0407) or test fallback to sign PK/KEK/db.auth, systemd-boot, and UKI'
         required: false
         default: true
         type: boolean
@@ -46,7 +46,7 @@ on:
           - never
           - always
       run_post_install_vm_boot:
-        description: 'Boot the provisioned disk image in KVM on ubuntu with swtpm + physical YubiKey USB passthrough after SD flash'
+        description: 'Boot the provisioned SD card in KVM on rock1 (snapshot=on) with swtpm after SD flash'
         required: false
         default: true
         type: boolean
@@ -57,8 +57,8 @@ permissions:
 
 jobs:
   flash-device-e2e:
-    name: Flash SD & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }}) on ubuntu
-    runs-on: [self-hosted, Linux, ARM64, HIGH-MEM]
+    name: Flash SD & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }}) on rock1
+    runs-on: [self-hosted, Linux, ARM64, KVM]
     timeout-minutes: 90
     steps:
       - name: Reclaim workspace before checkout (self-hosted runner can accumulate root-owned files)
