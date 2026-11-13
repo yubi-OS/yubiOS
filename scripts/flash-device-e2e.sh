@@ -505,7 +505,7 @@ if [ "$RUN_POST_VM" = "true" ]; then
   log "Stage 5: Booting $SD_DEVICE in ARM64 VM (snapshot=on so $SD_DEVICE stays pristine first-boot) to verify early TPM + rw /etc + enrollment flow"
 
   aa_complain="$(command -v aa-complain || echo /usr/sbin/aa-complain)"
-  [ -x "$aa_complain" ] && sudo "$aa_complain" swtpm 2>/dev/null || true
+  if [ -x "$aa_complain" ]; then sudo "$aa_complain" swtpm 2>/dev/null || true; fi
   SWTPM_DIR="/tmp/yubios-swtpm-$$"
   sudo rm -rf "$SWTPM_DIR"
   mkdir -p "$SWTPM_DIR"
@@ -520,7 +520,7 @@ if [ "$RUN_POST_VM" = "true" ]; then
   if lsusb | grep -qi '1050:'; then
     YK_PROD="$(lsusb | grep -i '1050:' | head -n1 | sed -nE 's/.*1050:([0-9a-fA-F]{4}).*/\1/p')"
     if [ -n "$YK_PROD" ]; then
-      YK_USB_ARGS=(-usb -device qemu-xhci,id=xhci -device "usb-host,vendorid=0x1050,productid=0x${YK_PROD}")
+      YK_USB_ARGS=(-usb -device "qemu-xhci,id=xhci" -device "usb-host,vendorid=0x1050,productid=0x${YK_PROD}")
     fi
   fi
 
@@ -600,9 +600,9 @@ f+~ /run/systemd/system/serial-getty@ttyAMA0.service.d/override.conf 0644 root r
 TMPF_EOF
   TMPFILES_CRED_B64="$(base64 -w0 "$WORK_DIR/tmpfiles.extra")"
 
-  QEMU_ACCEL_ARGS=(-machine virt,gic-version=3 -accel tcg,thread=multi -cpu cortex-a72)
+  QEMU_ACCEL_ARGS=(-machine "virt,gic-version=3" -accel "tcg,thread=multi" -cpu cortex-a72)
   if [ -e /dev/kvm ]; then
-    QEMU_ACCEL_ARGS=(-machine virt,gic-version=max -accel kvm -cpu host)
+    QEMU_ACCEL_ARGS=(-machine "virt,gic-version=max" -accel kvm -cpu host)
   fi
 
   # snapshot=on keeps all VM guest writes in a temporary overlay so $SD_DEVICE
@@ -618,8 +618,7 @@ TMPF_EOF
     -device tpm-tis-device,tpmdev=tpm0 \
     "${YK_USB_ARGS[@]}" \
     -net none \
-    -nographic -serial mon:stdio -display none -no-reboot \
-    > "$WORK_DIR/post-install-vm.log" 2>&1 || true
+    -nographic -serial mon:stdio -display none -no-reboot 2>&1 | tee "$WORK_DIR/post-install-vm.log" >/dev/null || true
 
   sudo mkdir -p /tmp/yubios-flash-e2e-logs
   sudo cp -f "$WORK_DIR/post-install-vm.log" /tmp/yubios-flash-e2e-logs/post-install-vm.log
