@@ -20,7 +20,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-REPO_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
+REPO_ROOT="${YUBIOS_REPO_ROOT:-$(cd -- "$SCRIPT_DIR/.." && pwd -P)}"
 
 IMAGE="${1:-${RESOLVED_IMAGE:-}}"
 ENGINE="${CONTAINER_ENGINE:-docker}"
