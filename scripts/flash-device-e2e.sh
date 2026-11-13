@@ -336,9 +336,9 @@ EOF
   [ -b "$p2" ] || die "Root partition $p2 did not appear on $dev"
 
   sudo "${THROTTLE[@]}" mkfs.vfat -F 32 -n EFI "$p1"
-  sudo "${THROTTLE[@]}" mkfs.ext4 -F -q -O verity,^has_journal -L yubiOS-root "$p2"
+  sudo "${THROTTLE[@]}" mkfs.ext4 -F -q -O verity,^has_journal -E lazy_itable_init=1 -L yubiOS-root "$p2"
   sudo mkdir -p "$MNT_DIR"
-  sudo mount -o noatime "$p2" "$MNT_DIR"
+  sudo mount -o noatime,nobarrier,commit=600 "$p2" "$MNT_DIR"
   sudo install -d -m 0755 "$MNT_DIR/boot"
   sudo mount "$p1" "$MNT_DIR/boot"
 
@@ -350,15 +350,25 @@ EOF
     -e TMPDIR=/var/tmp \
     -v /dev:/dev \
     -v "$MNT_DIR:/target" \
+    -e RESOLVED_OS="$RESOLVED_OS" \
     "$RESOLVED_OS" \
-    bootc install to-filesystem \
-      --source-imgref="containers-storage:${RESOLVED_OS}" \
-      --composefs-backend \
-      --disable-selinux \
-      --bootloader=systemd \
-      --root-mount-spec="" \
-      --skip-finalize \
-      /target
+    bash -ceu '
+      cat > /tmp/nofsync.c <<EOF
+int fsync(int fd) { (void)fd; return 0; }
+int fdatasync(int fd) { (void)fd; return 0; }
+int syncfs(int fd) { (void)fd; return 0; }
+void sync(void) {}
+EOF
+      gcc -shared -fPIC -O2 /tmp/nofsync.c -o /tmp/libnofsync.so
+      LD_PRELOAD=/tmp/libnofsync.so bootc install to-filesystem \
+        --source-imgref="containers-storage:${RESOLVED_OS}" \
+        --composefs-backend \
+        --disable-selinux \
+        --bootloader=systemd \
+        --root-mount-spec="" \
+        --skip-finalize \
+        /target
+    '
 
   entry="$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
   [ -n "$entry" ] || die "No BLS entry created under $MNT_DIR/boot/loader/entries"
