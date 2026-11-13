@@ -17,18 +17,21 @@
 # Owner keys only. No CI keys. Slot 9a (2026-10-11).
 
 set -euo pipefail
-source /usr/lib/yubiOS/lib.sh
+# Paths default to production; YUBIOS_* overrides exist so tests/unit/test-enroll-sb.bats
+# can run unprivileged without a YubiKey or a mounted efivarfs.
+# shellcheck source=usr/lib/yubiOS/lib.sh
+source "${YUBIOS_LIB_SH:-/usr/lib/yubiOS/lib.sh}"
 
 PHASE="${1:-all}"
 ESP="${YUBIOS_ESP:-/efi}"
 [ -d "$ESP/EFI" ] || ESP=/boot/efi
-KEYDIR=/var/lib/yubiOS/secureboot
-ENROLLED_MARK=/var/lib/yubiOS/.sb-enrolled
+KEYDIR="${YUBIOS_SB_KEYDIR:-/var/lib/yubiOS/secureboot}"
+ENROLLED_MARK="${YUBIOS_SB_ENROLLED_MARK:-/var/lib/yubiOS/.sb-enrolled}"
 SB_KEY_URI="pkcs11:id=%01;type=private"
 OWNER_GUID="${YUBIOS_OWNER_GUID:-1404b45e-798b-4249-b5cd-b7f961b44894}"
 CN_PREFIX="${YUBIOS_CN_PREFIX:-YUBIOS}"
 DAYS=1826
-EFIVARS=/sys/firmware/efi/efivars
+EFIVARS="${YUBIOS_EFIVARS:-/sys/firmware/efi/efivars}"
 GUID_GLOBAL=8be4df61-93ca-11d2-aa0d-00e098032b8c
 PKCS11_LIB="${YUBIOS_PKCS11_LIB:-}"
 if [ -z "$PKCS11_LIB" ]; then
@@ -48,7 +51,7 @@ done
 setup_mode() {
   # SetupMode is 1 while no PK is enrolled. The data byte follows a 4-byte attribute header.
   local f="$EFIVARS/SetupMode-$GUID_GLOBAL"
-  [ -r "$f" ] || { yubiOS_log "SetupMode not readable; is efivarfs mounted?"; return 2; }
+  [ -r "$f" ] || { yubiOS_log "SetupMode not readable; is efivarfs mounted?" >&2; return 2; }
   od -An -t u1 -j4 -N1 "$f" | tr -d ' '
 }
 

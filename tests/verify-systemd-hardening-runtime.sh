@@ -72,6 +72,8 @@ BATS_SUITES=(
   test-bootloader-update-unit.bats
   test-pam-u2f-stack.bats
   test-lib.bats
+  test-enroll-sb.bats
+  test-pinned-and-floors.bats
 )
 
 FAILURES=0
@@ -378,6 +380,9 @@ if [ "${HARDENING_SKIP_BATS:-0}" != 1 ]; then
     -v "$REPO_ROOT/tests:/yubios-tests:ro" \
     -v "$REPO_ROOT/usr:/checkout-usr:ro" \
     -v "$REPO_ROOT/mkosi.conf.d:/mkosi.conf.d:ro" \
+    -v "$REPO_ROOT/PINNED.md:/PINNED.md:ro" \
+    -v "$REPO_ROOT/Containerfile:/Containerfile:ro" \
+    -v "$REPO_ROOT/yubiOS-bake.hcl:/yubiOS-bake.hcl:ro" \
     -w / \
     "$IMAGE" bash -c '
       set -u
