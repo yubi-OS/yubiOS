@@ -103,3 +103,12 @@ jobs:
         run: |
           chmod +x scripts/flash-device-e2e.sh
           bash scripts/flash-device-e2e.sh
+
+      - name: Upload full VM boot & PineTab2 UART logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.1 — see PINNED.md
+        with:
+          name: flash-device-e2e-logs
+          path: /tmp/yubios-flash-e2e-logs/*.log
+          if-no-files-found: warn
+          retention-days: 14

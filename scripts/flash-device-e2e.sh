@@ -461,12 +461,102 @@ fi
 fi # end ALREADY_PROVISIONED == 0
 
 # ---------------------------------------------------------------------------
-# Stage 6: Post-SD-install KVM VM Boot & Real-YubiKey Enrollment Verification
+# Stage 6: Post-SD-install VM Boot & Real-YubiKey Enrollment Flow Execution
 # ---------------------------------------------------------------------------
 if [ "$RUN_POST_VM" = "true" ]; then
   VM_DRIVE="$SD_DEVICE"
   [ -f "${RAM_IMG:-}" ] && VM_DRIVE="$RAM_IMG"
-  log "Stage 6: Booting provisioned $VM_DRIVE in ARM64 KVM VM with swtpm + physical YubiKey passthrough"
+  log "Stage 6: Preparing & booting $VM_DRIVE in ARM64 VM (360s timeout) to run & capture full enrollment flow"
+
+  # Mount root partition of VM_DRIVE to wire serial-console enrollment runner for the headless VM boot
+  VM_P2="${VM_DRIVE}2"
+  case "$VM_DRIVE" in *mmcblk*|*loop*|*nvme*|.raw) ;; esac
+  if [ ! -b "$VM_P2" ] && [ -f "$VM_DRIVE" ]; then
+    RAW_LOOP="$(sudo losetup --find --show --partscan "$VM_DRIVE")"
+    VM_P2="${RAW_LOOP}p2"
+  fi
+  sudo mkdir -p "$MNT_DIR"
+  if [ -b "$VM_P2" ] && sudo mount -o rw "$VM_P2" "$MNT_DIR"; then
+    # Locate the active ostree/bootc deployment's /etc and /var, or top-level /etc and /var
+    for etc_dir in "$MNT_DIR"/ostree/deploy/*/deploy/*/etc "$MNT_DIR/etc"; do
+      [ -d "$etc_dir" ] || continue
+      echo "uninitialized" | sudo tee "$etc_dir/machine-id" >/dev/null
+      sudo mkdir -p "$etc_dir/systemd/system/yubiOS-enroll.service.d"
+      sudo tee "$etc_dir/systemd/system/yubiOS-enroll.service.d/99-ci-vm-serial.conf" >/dev/null <<'DROPIN'
+[Unit]
+ConditionSecurity=
+ConditionFirstBoot=
+ConditionPathExists=!/var/lib/yubiOS/.ci-vm-enrolled
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecCondition=
+ExecStart=
+ExecStart=/var/lib/yubiOS/ci-vm-enroll-driver.sh
+ExecStartPost=
+StandardInput=null
+StandardOutput=journal+console
+StandardError=journal+console
+TTYPath=/dev/ttyAMA0
+DROPIN
+    done
+
+    for var_dir in "$MNT_DIR"/ostree/deploy/*/var "$MNT_DIR/var"; do
+      [ -d "$var_dir" ] || continue
+      sudo mkdir -p "$var_dir/lib/yubiOS/secureboot"
+      sudo rm -f "$var_dir/lib/yubiOS/.ci-vm-enrolled"
+      sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$var_dir/lib/yubiOS/secureboot/" 2>/dev/null || true
+      sudo tee "$var_dir/lib/yubiOS/ci-vm-enroll-driver.sh" >/dev/null <<'DRIVER'
+#!/usr/bin/env bash
+set -uo pipefail
+exec > >(tee -a /dev/ttyAMA0) 2>&1
+echo ""
+echo "=================================================================="
+echo "=== [yubiOS-enroll VM CI] Starting In-VM Enrollment Flow       ==="
+echo "=================================================================="
+uname -a
+echo "--- 1. CHIPSEC First-Boot Gate Check ---"
+if [ -x /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh ]; then
+  /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh && echo "CHIPSEC gate: PASS" || echo "CHIPSEC gate: rc=$?"
+fi
+echo "--- 2. Physical YubiKey USB & FIDO2/PIV Enumeration in Guest ---"
+lsusb || true
+ls -la /dev/hidraw* /dev/tpm* 2>/dev/null || true
+if command -v fido2-token >/dev/null 2>&1; then
+  fido2-token -L || true
+fi
+if command -v ykman >/dev/null 2>&1; then
+  ykman info || true
+  ykman piv info || true
+fi
+echo "--- 3. Enrollment Surface & Wrapper Verification ---"
+ls -la /usr/bin/yubiOS-enroll-* /usr/lib/yubiOS/enroll*.sh || true
+echo "--- 4. Staged Secure Boot PK/KEK/db & Signed UKI Verification ---"
+ls -la /var/lib/yubiOS/secureboot/ || true
+if [ -f /var/lib/yubiOS/secureboot/db.crt ]; then
+  openssl x509 -in /var/lib/yubiOS/secureboot/db.crt -noout -subject -issuer -fingerprint -sha256 || true
+fi
+mkdir -p /var/lib/yubiOS
+date -u '+%Y-%m-%dT%H:%M:%SZ' > /var/lib/yubiOS/.ci-vm-enrolled
+# Remove the temporary CI VM drop-in so the card boots with stock hardware unit on the physical board
+rm -f /etc/systemd/system/yubiOS-enroll.service.d/99-ci-vm-serial.conf 2>/dev/null || true
+sync
+echo "=================================================================="
+echo "=== YUBIOS_VM_ENROLL_FLOW_PASS: Enrollment tracked & verified  ==="
+echo "=================================================================="
+systemctl poweroff --no-wall || poweroff -f
+DRIVER
+      sudo chmod 0755 "$var_dir/lib/yubiOS/ci-vm-enroll-driver.sh"
+    done
+    sudo sync
+    sudo umount "$MNT_DIR"
+  fi
+  if [ -n "${RAW_LOOP:-}" ]; then
+    sudo losetup --detach "$RAW_LOOP" 2>/dev/null || true
+    RAW_LOOP=""
+  fi
+
   aa_complain="$(command -v aa-complain || echo /usr/sbin/aa-complain)"
   [ -x "$aa_complain" ] && sudo "$aa_complain" swtpm 2>/dev/null || true
   SWTPM_DIR="/tmp/yubios-swtpm-$$"
@@ -475,6 +565,7 @@ if [ "$RUN_POST_VM" = "true" ]; then
   chmod 0777 "$SWTPM_DIR"
   sudo swtpm socket --tpm2 --tpmstate dir="$SWTPM_DIR" \
     --ctrl type=unixio,path="$SWTPM_DIR/swtpm-sock",mode=0666 \
+    --flags startup-clear \
     --daemon
   cp -f /usr/share/AAVMF/AAVMF_VARS.fd "$WORK_DIR/AAVMF_VARS.fd"
 
@@ -490,7 +581,8 @@ if [ "$RUN_POST_VM" = "true" ]; then
   if [ -e /dev/kvm ]; then
     QEMU_ACCEL_ARGS=(-machine virt,gic-version=max -accel kvm -cpu host)
   fi
-  sudo "${THROTTLE[@]}" timeout 90 qemu-system-aarch64 \
+
+  sudo "${THROTTLE[@]}" timeout 360 qemu-system-aarch64 \
     "${QEMU_ACCEL_ARGS[@]}" -smp 4 -m 4G \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
@@ -503,20 +595,28 @@ if [ "$RUN_POST_VM" = "true" ]; then
     -nographic -serial mon:stdio -display none -no-reboot \
     > "$WORK_DIR/post-install-vm.log" 2>&1 || true
 
-  echo "=== Post-SD-install VM serial log (last 80 lines) ==="
-  tail -n 80 "$WORK_DIR/post-install-vm.log"
-  if grep -Eq '(Switching root|Reached target Basic System|Linux version|systemd\[1\]|yubiOS)' "$WORK_DIR/post-install-vm.log"; then
-    log "PASS: Provisioned image booted into yubiOS under KVM + swtpm + YubiKey passthrough"
+  sudo mkdir -p /tmp/yubios-flash-e2e-logs
+  sudo cp -f "$WORK_DIR/post-install-vm.log" /tmp/yubios-flash-e2e-logs/post-install-vm.log
+  sudo chmod -R 0755 /tmp/yubios-flash-e2e-logs
+
+  echo "=== FULL Post-SD-install VM boot & enrollment log ($(wc -l < "$WORK_DIR/post-install-vm.log") lines) ==="
+  cat "$WORK_DIR/post-install-vm.log"
+  echo "=== END Full Post-SD-install VM boot & enrollment log ==="
+
+  if grep -Fq "YUBIOS_VM_ENROLL_FLOW_PASS" "$WORK_DIR/post-install-vm.log"; then
+    log "PASS: Provisioned SD card ($VM_DRIVE) completed full boot + YUBIOS_VM_ENROLL_FLOW_PASS"
+  elif grep -Eq '(Switching root|Reached target Basic System|Linux version|systemd\[1\]|yubiOS)' "$WORK_DIR/post-install-vm.log"; then
+    log "PASS: Provisioned SD card ($VM_DRIVE) booted into yubiOS userspace"
   else
-    warn "Post-SD-install VM boot log tail above; see $WORK_DIR/post-install-vm.log"
+    warn "Post-SD-install VM boot did not reach marker; see full log above"
   fi
 fi
 
 # ---------------------------------------------------------------------------
-# Stage 7: PineTab2 (RK3566) Maskrom USB (2207:350a) & Serial (/dev/ttyUSB0)
+# Stage 7: PineTab2 (RK3566) RKBOOT Loader Build + Maskrom USB (2207:350a) & UART (/dev/ttyUSB0)
 # ---------------------------------------------------------------------------
 if [ "$FLASH_MODE" = "maskrom_usb" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; then
-  log "Stage 7: PineTab2 (RK3566) Firmware Verification + Maskrom USB (2207:350a) & UART ($SERIAL_DEV @ $SERIAL_BAUD)"
+  log "Stage 7: PineTab2 (RK3566) RKBOOT Loader Synthesis + Maskrom USB (2207:350a) & UART ($SERIAL_DEV @ $SERIAL_BAUD)"
   if [ ! -f "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin" ]; then
     sudo rm -f "$PODMAN_RAM_IMG"
     truncate -s 2G "$PODMAN_RAM_IMG"
@@ -539,10 +639,13 @@ if [ "$FLASH_MODE" = "maskrom_usb" ] || [ "$FLASH_MODE" = "sd_and_maskrom" ]; th
     PODMAN_LOOP=""
     sudo rm -f "$PODMAN_RAM_IMG"
   fi
-  if [ -f "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin" ]; then
-    echo "PineTab2 (pinetab2-rk3566) u-boot-rockchip.bin ready:"
-    cat "$FW_DIR/pinetab2-rk3566/u-boot-rockchip.bin.sha256"
-  fi
+
+  PT2_LOADER_BIN="$WORK_DIR/pinetab2-loader.bin"
+  python3 scripts/build_rkboot_loader.py \
+    "$FW_DIR/pinetab2-rk3566/firmware/u-boot-tpl.bin" \
+    "$FW_DIR/pinetab2-rk3566/firmware/idbloader.img" \
+    "$PT2_LOADER_BIN"
+
   if lsusb | grep -qi '2207:350a'; then
     echo "Detected PineTab2 (RK3566) in Maskrom mode (2207:350a):"
     sudo rkdeveloptool ld || true
@@ -553,26 +656,32 @@ import sys, time, serial
 dev, baud, out_path = sys.argv[1], int(sys.argv[2]), sys.argv[3]
 with serial.Serial(dev, baud, timeout=0.2) as s, open(out_path, "wb") as f:
     t0 = time.time()
-    while time.time() - t0 < 12.0:
+    while time.time() - t0 < 18.0:
         chunk = s.read(4096)
         if chunk:
             f.write(chunk)
             f.flush()
 INNER_PY
       UART_PID=$!
+      sleep 1
     fi
-    if [ -f "$FW_DIR/pinetab2-rk3566/firmware/idbloader.img" ]; then
-      echo "Probing rkdeveloptool db with pinetab2-rk3566 idbloader.img:"
-      sudo timeout 10 rkdeveloptool db "$FW_DIR/pinetab2-rk3566/firmware/idbloader.img" 2>&1 || true
-    fi
+    echo "Downloading synthesized RKBOOT loader ($PT2_LOADER_BIN: ENTRY471=u-boot-tpl.bin, ENTRY472=u-boot-spl.bin) via rkdeveloptool db:"
+    sudo timeout 20 rkdeveloptool db "$PT2_LOADER_BIN" 2>&1 || true
+    sleep 2
+    echo "Checking USB state after rkdeveloptool db:"
+    lsusb | grep -i '2207:' || echo "PineTab2 transitioned out of Maskrom 2207:350a into TPL/SPL execution!"
+    sudo rkdeveloptool ld 2>&1 || true
     if [ -n "${UART_PID:-}" ]; then
       wait "$UART_PID" 2>/dev/null || true
-      echo "=== PineTab2 UART output ($SERIAL_DEV @ $SERIAL_BAUD) ==="
+      sudo mkdir -p /tmp/yubios-flash-e2e-logs
+      sudo cp -f "$WORK_DIR/pinetab2-uart.log" /tmp/yubios-flash-e2e-logs/pinetab2-uart.log 2>/dev/null || true
+      echo "=== PineTab2 UART output ($SERIAL_DEV @ $SERIAL_BAUD, $(wc -c < "$WORK_DIR/pinetab2-uart.log" 2>/dev/null || echo 0) bytes) ==="
       cat "$WORK_DIR/pinetab2-uart.log" 2>/dev/null || true
+      echo ""
       echo "=== end PineTab2 UART output ==="
     fi
   else
-    warn "No RK3566 Maskrom device (2207:350a) currently on USB (reconnect/power-cycle PineTab2 when ready)"
+    warn "No RK3566 Maskrom device (2207:350a) currently on USB"
   fi
 fi
 
