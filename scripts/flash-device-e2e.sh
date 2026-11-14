@@ -34,7 +34,7 @@ OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
 SIGNKEY="${FLASH_SIGNKEY:-test}"
 SIGN_WITH_YUBIKEY="${FLASH_SIGN_WITH_YUBIKEY:-true}"
 PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
-RUN_POST_VM="${FLASH_RUN_POST_VM:-false}"
+# RUN_POST_VM="${FLASH_RUN_POST_VM:-false}"
 
 if [ "$PIV_TOUCH_OVERRIDE" = "auto" ] || [ -z "$PIV_TOUCH_OVERRIDE" ]; then
   if [ "$SIGNKEY" = "test" ]; then
