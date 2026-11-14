@@ -425,7 +425,7 @@ function gateOf(v2) {
   return { v2: round(v2, 6), rhat: ok ? round(2 / v2, 4) : null, gate_pass: ok ? 5 * v2 >= 2 : null };
 }
 
-function structureOf(v2, nulls) {
+function tailOf(v2, nulls) {
   const K = nulls.length, E0 = mean(nulls), S0 = sd(nulls);
   const admissible = Number.isFinite(S0) && S0 >= 1e-6 && E0 > 0;
   const obs = Math.abs(v2 - E0);
@@ -433,14 +433,30 @@ function structureOf(v2, nulls) {
   const p = (1 + ext) / (K + 1), res = 1 / (K + 1);
   const excluded = admissible && p <= res + 1e-15;
   const direction = v2 > E0 ? "above-null" : v2 < E0 ? "below-null" : "at-null";
+  return { E0, S0, admissible, p, res, z: admissible ? (v2 - E0) / S0 : null, verdict: !admissible ? "degenerate" : excluded ? direction : "within-null" };
+}
+
+// Structure against two independent null seeds (G6, 2026-11-14): at K = 20 a single seed's z
+// varied by about +-1.5; the verdict counts only when both seeds agree.
+function structureOf(v2, nullsA, nullsB) {
+  const all = nullsB ? nullsA.concat(nullsB) : nullsA;
+  const pooled = tailOf(v2, all), a = tailOf(v2, nullsA), b = nullsB ? tailOf(v2, nullsB) : null;
+  const E0 = pooled.E0, S0 = pooled.S0;
+  let structure;
+  if (!pooled.admissible) structure = "not-tested (degenerate null)";
+  else if (!b) structure = a.verdict;
+  else if (a.verdict === b.verdict) structure = a.verdict;
+  else structure = "not-reproducible-across-seeds";
   return {
     null_v2_mean: round(E0, 6), null_v2_sd: round(S0, 6),
     rhat_null: E0 > 0 ? round(2 / E0, 4) : null,
     delta_rhat: E0 > 0 && v2 > 0 ? round(2 / E0 - 2 / v2, 4) : null,
     delta_rhat_sd: E0 > 0 ? round(2 * S0 / (E0 * E0), 4) : null,
-    z: admissible ? round((v2 - E0) / S0, 2) : null,
-    p_two_sided: round(p, 4), p_resolution: round(res, 4),
-    structure: !admissible ? "not-tested (degenerate null)" : excluded ? direction : "within-null",
+    z: pooled.admissible ? round(pooled.z, 2) : null,
+    z_seed_a: a.z === null ? null : round(a.z, 2),
+    z_seed_b: b && b.z !== null ? round(b.z, 2) : null,
+    p_two_sided: round(a.p, 4), p_two_sided_seed_b: b ? round(b.p, 4) : null, p_resolution: round(a.res, 4),
+    structure,
   };
 }
 
@@ -449,7 +465,8 @@ export function readoutOf(gatePass, structure) {
   if (structure === "above-null") return gatePass ? "low-dimensional and structured" : "structured, above the focus dimension";
   if (structure === "below-null") return gatePass ? "low-dimensional, more dispersed than the null" : "high-dimensional, more dispersed than the null";
   if (structure === "within-null") return gatePass ? "low-dimensional, structure not resolved from the null" : "high-dimensional, structure not resolved from the null";
-  return "low-dimensional by the gate; structure not tested";
+  if (structure === "not-reproducible-across-seeds") return gatePass ? "low-dimensional, structure not reproducible across null seeds" : "high-dimensional, structure not reproducible across null seeds";
+  return gatePass ? "low-dimensional by the gate; structure not tested" : "high-dimensional by the gate; structure not tested";
 }
 
 // Per-prefix profile on the frozen code. The null at each j is a curveball draw
@@ -460,10 +477,12 @@ export function dimensionStructureProfile(rows, D, n, { K, tradesPerRow, seed })
     const mask = j >= 31 ? -1 : (1 << j) - 1;
     const pr = Int32Array.from(rows, (x) => x & mask);
     const v2 = prefixV2(pr, j);
-    const rand = mulberry32((seed ^ Math.imul(j, 0x9e3779b1)) | 0);
-    const nulls = [];
-    for (let k = 0; k < K; k++) nulls.push(prefixV2(curveball(pr, j, tradesPerRow * n, rand), j));
-    const g = gateOf(v2), st = structureOf(v2, nulls);
+    const randA = mulberry32((seed ^ Math.imul(j, 0x9e3779b1)) | 0);
+    const randB = mulberry32((seed ^ 0x7f4a7c15 ^ Math.imul(j, 0x85ebca6b)) | 0);
+    const nullsA = [], nullsB = [];
+    for (let k = 0; k < K; k++) nullsA.push(prefixV2(curveball(pr, j, tradesPerRow * n, randA), j));
+    for (let k = 0; k < K; k++) nullsB.push(prefixV2(curveball(pr, j, tradesPerRow * n, randB), j));
+    const g = gateOf(v2), st = structureOf(v2, nullsA, nullsB);
     prof.push({ j, ...g, ...st, readout: readoutOf(g.gate_pass, st.structure) });
   }
   const passing = prof.filter((r) => r.gate_pass);
@@ -554,7 +573,7 @@ export function focalPointTrial(map, opts = {}) {
     version: DIMSTRUCT_VERSION,
     dimension: { gate_v2: GATE_V2, rank_max: RANK_MAX, lean: "CurvedCorpus.gate_rank_identity (V2 >= 2/5 <-> 2/V2 <= 5)",
       meaning: "effective dimension of the frozen prefix code; the gate marks where the map can be focused" },
-    structure: { null: `curveball on the j-bit prefix matrix, K=${dsK}, ${dsTpr}*N trades per draw, at every prefix j`,
+    structure: { null: `curveball on the j-bit prefix matrix, two independent seeds x K=${dsK}, ${dsTpr}*N trades per draw, at every prefix j; verdict requires both seeds to agree`,
       lean: "FocalBounds.structure_sign_identity (V2 >= E0 <-> 2/E0 >= 2/V2)",
       meaning: "excess concentration over a margin-matched null at the same j; delta_rhat is that excess in dimension units" },
     independence: "FocalBounds.gate_structure_independent: neither readout implies the other, so both are reported",

@@ -50,5 +50,9 @@ const B = dimensionStructureProfile(weak, 12, 2000, { K: 20, tradesPerRow: 20, s
 const b12 = B.profile.find((p) => p.j === 12);
 ok(b12.gate_pass === false && b12.structure === "above-null", `witness B: two weak group factors at j=12 fails the gate (V2=${b12.v2}) and is above the null (z=${b12.z})`);
 ok(b12.readout === "structured, above the focus dimension" && a3.readout === "low-dimensional, structure not resolved from the null", "readouts name both quadrants");
+// 5. two independent null seeds (G6): both z values reported; a verdict counts only when the seeds agree
+const allowed = new Set(["above-null", "below-null", "within-null", "not-reproducible-across-seeds"]);
+ok(ds.profile.every((p) => p.z === null || (Number.isFinite(p.z_seed_a) && Number.isFinite(p.z_seed_b) && allowed.has(p.structure))), "every prefix reports z for both null seeds and a two-seed verdict");
+ok(b12.z_seed_a > 2 && b12.z_seed_b > 2 && a3.structure === "within-null", `two-seed verdicts are stable on the witnesses (B: ${b12.z_seed_a}/${b12.z_seed_b})`);
 console.log(`${pass}/${pass + fail} passed`);
 if (fail) process.exit(1);
