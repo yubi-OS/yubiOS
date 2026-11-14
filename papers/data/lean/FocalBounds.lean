@@ -385,6 +385,50 @@ theorem recode_stabilizes {α : Type} [DecidableEq α]
     (recode_count_antitone steps l)
   exact ⟨k, hk, he⟩
 
+/-! ### Dimension and structure readouts
+
+The fixed gate of `CurvedCorpus` section 4 reads the effective dimension of a
+frozen prefix code: with V₂ = p/q, r̂ = 2/V₂, and V₂ ≥ 2/5 ↔ r̂ ≤ 5. It says
+where a map can be focused. Structure is read with the same statistic against
+a fixed-margin null at the same prefix: with null mean E₀ = r/s, the null's
+effective dimension is r̂₀ = 2/E₀, and the corpus is more concentrated than its
+margins imply exactly when V₂ ≥ E₀, i.e. when r̂ ≤ r̂₀. The two readouts are
+logically independent, so neither can stand in for the other. Fractions are
+compared by cross-multiplication over positive denominators (`fracGe`, the
+encoding of `CurvedCorpus.fracGe`, restated because this module imports
+nothing). -/
+
+/-- a/b ≥ c/d over positive denominators, encoded by cross-multiplication. -/
+def fracGe (a b c d : Int) : Prop := 0 < b ∧ 0 < d ∧ a * d ≥ c * b
+
+/-- Structure sign identity: with V₂ = p/q and E₀ = r/s (all positive),
+    V₂ ≥ E₀ ↔ r̂₀ = 2s/r ≥ r̂ = 2q/p. Both sides are the inequality p·s ≥ r·q. -/
+theorem structure_sign_identity (p q r s : Int) (hp : 0 < p) (hq : 0 < q)
+    (hr : 0 < r) (hs : 0 < s) :
+    fracGe p q r s ↔ fracGe (2 * s) r (2 * q) p := by
+  have e1 : 2 * s * p = 2 * (p * s) := by rw [Int.mul_assoc, Int.mul_comm s p]
+  have e2 : 2 * q * r = 2 * (r * q) := by rw [Int.mul_assoc, Int.mul_comm q r]
+  constructor
+  · intro h
+    have h3 := h.2.2
+    refine ⟨hr, hp, ?_⟩
+    rw [e1, e2]
+    omega
+  · intro h
+    have h3 := h.2.2
+    rw [e1, e2] at h3
+    exact ⟨hq, hs, by omega⟩
+
+/-- Gate and structure are independent: (a) V₂ = 1/2 passes the gate (≥ 2/5)
+    while the null mean E₀ = 3/5 exceeds it (no structure); (b) V₂ = 1/4 fails
+    the gate while E₀ = 1/5 lies below it (structure). -/
+theorem gate_structure_independent :
+    (fracGe 1 2 2 5 ∧ ¬ fracGe 1 2 3 5) ∧ (¬ fracGe 1 4 2 5 ∧ fracGe 1 4 1 5) := by
+  unfold fracGe
+  decide
+
+#print axioms structure_sign_identity
+#print axioms gate_structure_independent
 #print axioms focalDim_take_self
 #print axioms focalDim_refreeze_fixed
 #print axioms antitone_drop

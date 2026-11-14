@@ -32,7 +32,8 @@
 // Web APIs only, no npm. Pure core (focalPointTrial) plus a thin handler.
 // Nothing is persisted: no D1 row, no KV write, no Vectorize, no repository.
 
-export const FOCAL_VERSION = "focal-point/1";
+export const FOCAL_VERSION = "focal-point/2";
+export const DIMSTRUCT_VERSION = "dimension-structure/1";
 export const LEAN_MODULE = "papers/data/lean/FocalBounds.lean";
 
 const DEFAULT_TAU = 0.5;            // half a bit (paper, Definition 2)
@@ -348,6 +349,142 @@ export function lensScan(pts) {
   };
 }
 
+
+// ---------------------------------------------------------------------------
+// dimension x structure (paper 4, Section "Dimension and structure";
+// FocalBounds.structure_sign_identity, FocalBounds.gate_structure_independent)
+//
+// Two readouts of the same prefix code, reported side by side and never merged:
+//   DIMENSION -- the fixed Lean section 4 gate, unchanged: V2 = top-2 share of the
+//     j x j bit-correlation spectrum, rhat = 2/V2, gate V2 >= 0.40 <-> rhat <= 5
+//     (CurvedCorpus.gate_rank_identity). It says how many effective dimensions the
+//     code spans at prefix j, i.e. where the map can be focused.
+//   STRUCTURE -- the same statistic against a fixed-margin null AT THE SAME j:
+//     rhat0 = 2/E0[V2*], delta_rhat = rhat0 - rhat (>= 0 iff V2 >= E0,
+//     structure_sign_identity), z and an empirical two-sided tail. It says whether
+//     the corpus is more concentrated than its margins alone imply.
+// The two are logically independent (gate_structure_independent): a small prefix
+// passes the gate by construction (rhat <= j), and a structured corpus can fail it.
+// ---------------------------------------------------------------------------
+
+export const GATE_V2 = 0.4;
+export const RANK_MAX = 5;
+
+function symEigenvalues(A) { // cyclic Jacobi, small symmetric matrices (j <= 30)
+  const n = A.length, M = A.map((r) => r.slice());
+  for (let sweep = 0; sweep < 100; sweep++) {
+    let off = 0;
+    for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) off += M[p][q] * M[p][q];
+    if (off < 1e-24) break;
+    for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
+      if (Math.abs(M[p][q]) < 1e-300) continue;
+      const th = (M[q][q] - M[p][p]) / (2 * M[p][q]);
+      const t = Math.sign(th || 1) / (Math.abs(th) + Math.sqrt(th * th + 1));
+      const c = 1 / Math.sqrt(t * t + 1), s = t * c;
+      for (let k = 0; k < n; k++) {
+        const a = M[k][p], b = M[k][q];
+        M[k][p] = c * a - s * b; M[k][q] = s * a + c * b;
+      }
+      for (let k = 0; k < n; k++) {
+        const a = M[p][k], b = M[q][k];
+        M[p][k] = c * a - s * b; M[q][k] = s * a + c * b;
+      }
+    }
+  }
+  return M.map((r, i) => r[i]).sort((x, y) => y - x);
+}
+
+// V2 of the first j bits of packed rows: top-2 eigenvalue share of the bit
+// correlation matrix (constant columns contribute nothing, as in pointmap.js V2).
+export function prefixV2(rows, j) {
+  const n = rows.length;
+  const c1 = new Float64Array(j), c11 = Array.from({ length: j }, () => new Float64Array(j));
+  for (let i = 0; i < n; i++) {
+    const r = rows[i];
+    for (let a = 0; a < j; a++) if (r & (1 << a)) {
+      c1[a]++;
+      for (let b = a; b < j; b++) if (r & (1 << b)) c11[a][b]++;
+    }
+  }
+  const p = Array.from(c1, (x) => x / n);
+  const sdv = p.map((x) => Math.sqrt(x * (1 - x)));
+  const C = Array.from({ length: j }, () => new Array(j).fill(0));
+  for (let a = 0; a < j; a++) for (let b = a; b < j; b++) {
+    if (!(sdv[a] > 0 && sdv[b] > 0)) continue;
+    const v = (c11[a][b] / n - p[a] * p[b]) / (sdv[a] * sdv[b]);
+    C[a][b] = v; C[b][a] = v;
+  }
+  const ev = symEigenvalues(C).map((x) => Math.max(0, x));
+  const tr = ev.reduce((s, x) => s + x, 0);
+  if (!(tr > 1e-12)) return 0;
+  return Math.min(1, ((ev[0] || 0) + (ev[1] || 0)) / tr);
+}
+
+function gateOf(v2) {
+  const ok = Number.isFinite(v2) && v2 > 0;
+  return { v2: round(v2, 6), rhat: ok ? round(2 / v2, 4) : null, gate_pass: ok ? 5 * v2 >= 2 : null };
+}
+
+function structureOf(v2, nulls) {
+  const K = nulls.length, E0 = mean(nulls), S0 = sd(nulls);
+  const admissible = Number.isFinite(S0) && S0 >= 1e-6 && E0 > 0;
+  const obs = Math.abs(v2 - E0);
+  const ext = nulls.filter((x) => Math.abs(x - E0) >= obs - 1e-15).length;
+  const p = (1 + ext) / (K + 1), res = 1 / (K + 1);
+  const excluded = admissible && p <= res + 1e-15;
+  const direction = v2 > E0 ? "above-null" : v2 < E0 ? "below-null" : "at-null";
+  return {
+    null_v2_mean: round(E0, 6), null_v2_sd: round(S0, 6),
+    rhat_null: E0 > 0 ? round(2 / E0, 4) : null,
+    delta_rhat: E0 > 0 && v2 > 0 ? round(2 / E0 - 2 / v2, 4) : null,
+    delta_rhat_sd: E0 > 0 ? round(2 * S0 / (E0 * E0), 4) : null,
+    z: admissible ? round((v2 - E0) / S0, 2) : null,
+    p_two_sided: round(p, 4), p_resolution: round(res, 4),
+    structure: !admissible ? "not-tested (degenerate null)" : excluded ? direction : "within-null",
+  };
+}
+
+export function readoutOf(gatePass, structure) {
+  if (gatePass === null) return "not-applicable (degenerate coordinate)";
+  if (structure === "above-null") return gatePass ? "low-dimensional and structured" : "structured, above the focus dimension";
+  if (structure === "below-null") return gatePass ? "low-dimensional, more dispersed than the null" : "high-dimensional, more dispersed than the null";
+  if (structure === "within-null") return gatePass ? "low-dimensional, structure not resolved from the null" : "high-dimensional, structure not resolved from the null";
+  return "low-dimensional by the gate; structure not tested";
+}
+
+// Per-prefix profile on the frozen code. The null at each j is a curveball draw
+// on the j-bit prefix matrix (its own row and column sums preserved).
+export function dimensionStructureProfile(rows, D, n, { K, tradesPerRow, seed }) {
+  const prof = [];
+  for (let j = 2; j <= D; j++) {
+    const mask = j >= 31 ? -1 : (1 << j) - 1;
+    const pr = Int32Array.from(rows, (x) => x & mask);
+    const v2 = prefixV2(pr, j);
+    const rand = mulberry32((seed ^ Math.imul(j, 0x9e3779b1)) | 0);
+    const nulls = [];
+    for (let k = 0; k < K; k++) nulls.push(prefixV2(curveball(pr, j, tradesPerRow * n, rand), j));
+    const g = gateOf(v2), st = structureOf(v2, nulls);
+    prof.push({ j, ...g, ...st, readout: readoutOf(g.gate_pass, st.structure) });
+  }
+  const passing = prof.filter((r) => r.gate_pass);
+  const dGate = passing.length ? Math.max(...passing.map((r) => r.j)) : null;
+  const zs = prof.filter((r) => r.z !== null);
+  const best = zs.length ? zs.reduce((a, b) => (b.z > a.z ? b : a)) : null;
+  const atGate = dGate ? prof.find((r) => r.j === dGate) : null;
+  return {
+    profile: prof,
+    focus: {
+      d_focus: dGate,
+      d_focus_rule: "largest prefix j whose code passes the fixed gate V2 >= 0.40 (rhat <= 5): the dimension at which the map can be focused",
+      structure_at_d_focus: atGate ? atGate.structure : null,
+      z_at_d_focus: atGate ? atGate.z : null,
+      d_max_structure: best ? best.j : null,
+      z_max: best ? best.z : null,
+      structured_prefixes: prof.filter((r) => r.structure === "above-null").map((r) => r.j),
+    },
+  };
+}
+
 // ---------------------------------------------------------------------------
 // the trial
 // ---------------------------------------------------------------------------
@@ -407,6 +544,26 @@ export function focalPointTrial(map, opts = {}) {
   const verdict = !reproducible ? "not-reproducible-across-seeds"
     : sepA ? "focal-point-corpus-specific"
     : "focal-point-not-separable-from-null";
+
+  // 2b. dimension x structure on the same prefix code (gate unchanged; null at each j)
+  const dsK = Math.min(K, 20), dsTpr = Math.min(tpr, 25);
+  const ds = dimensionStructureProfile(rows, D, n, { K: dsK, tradesPerRow: dsTpr, seed: (baseSeed ^ 0x51ed270b) | 0 });
+  const atD = ds.profile[ds.profile.length - 1] || null;
+  const storedNull = map.null && Number.isFinite(map.null.E0) ? map.null : null;
+  const dimension_structure = {
+    version: DIMSTRUCT_VERSION,
+    dimension: { gate_v2: GATE_V2, rank_max: RANK_MAX, lean: "CurvedCorpus.gate_rank_identity (V2 >= 2/5 <-> 2/V2 <= 5)",
+      meaning: "effective dimension of the frozen prefix code; the gate marks where the map can be focused" },
+    structure: { null: `curveball on the j-bit prefix matrix, K=${dsK}, ${dsTpr}*N trades per draw, at every prefix j`,
+      lean: "FocalBounds.structure_sign_identity (V2 >= E0 <-> 2/E0 >= 2/V2)",
+      meaning: "excess concentration over a margin-matched null at the same j; delta_rhat is that excess in dimension units" },
+    independence: "FocalBounds.gate_structure_independent: neither readout implies the other, so both are reported",
+    at_d: atD,
+    stored_null_at_d: storedNull ? { kind: storedNull.kind, K: storedNull.K, null_v2_mean: storedNull.E0, null_v2_sd: storedNull.SD0, z: storedNull.z, verdict: storedNull.verdict,
+      rhat_null: storedNull.E0 > 0 ? round(2 / storedNull.E0, 4) : null } : null,
+    focus: { ...ds.focus, n_star: nStar },
+    profile: ds.profile,
+  };
 
   // 3. certified class counts (needs per-input margins and axis l1 norms)
   let certified = { available: false, reason: "map carries no math_diagnostics.per_input margins / axes norm1" };
@@ -468,6 +625,7 @@ export function focalPointTrial(map, opts = {}) {
       separable: sepA && sepB,
       reproducible,
     },
+    dimension_structure,
     certified,
     lens,
     lean: {
@@ -475,6 +633,7 @@ export function focalPointTrial(map, opts = {}) {
       checked: ["prefix_count_mono", "prefix_count_double", "prefix_count_pow", "prefix_count_le_length",
         "focalDim_le_length", "focalDim_prefix_meets", "focalDim_stop_fails", "focalDim_maximal"],
       ladders_checked: 1 + 2 * K,
+      dimension_structure: ["CurvedCorpus.gate_rank_identity", "FocalBounds.structure_sign_identity", "FocalBounds.gate_structure_independent"],
       violations: 0,
     },
     seconds: round((Date.now() - t0) / 1000, 3),
