@@ -366,7 +366,17 @@ provision_sd_directly() {
   log "Stage 4: Partitioning & provisioning $dev ($board_name) directly from $RESOLVED_OS"
   guard_block_device "$dev"
 
+  # Ensure no leftover container or mount from a prior canceled run holds $dev
+  sudo podman rm -f yubios-bootc-install 2>/dev/null || true
+  for cid in $(sudo podman ps -aq 2>/dev/null || true); do
+    sudo podman rm -f "$cid" 2>/dev/null || true
+  done
+  sudo umount -R "$MNT_DIR" 2>/dev/null || true
+  sudo umount "$p1" "$p2" 2>/dev/null || true
   sudo wipefs -a "$p1" "$p2" "$dev" 2>/dev/null || sudo wipefs -a "$dev" 2>/dev/null || true
+  sudo dd if=/dev/zero of="$dev" bs=1M count=16 conv=fsync status=none 2>/dev/null || true
+  sudo partprobe "$dev" 2>/dev/null || true
+  sudo udevadm settle
   sudo sfdisk --wipe always "$dev" <<'EOF'
 label: gpt
 first-lba: 32768

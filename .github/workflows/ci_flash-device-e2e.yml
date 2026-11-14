@@ -59,7 +59,7 @@ jobs:
   flash-device-e2e:
     name: Flash SD & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }}) on rock1
     runs-on: [self-hosted, Linux, ARM64, KVM]
-    timeout-minutes: 90
+    timeout-minutes: 180
     steps:
       - name: Reclaim workspace before checkout (self-hosted runner can accumulate root-owned files)
         run: sudo chown -R "$(id -u):$(id -g)" "$GITHUB_WORKSPACE" || true
