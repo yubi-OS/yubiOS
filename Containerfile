@@ -100,11 +100,15 @@ RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh
 # ── /usr/bin symlinks for enrollment commands ────────────────────────────
 # Wrapper scripts in /usr/lib/yubiOS/ exec the real scripts.
 # Symlinks here make commands available as: yubiOS-enroll-sb, -luks, -pam, -ssh
-RUN ln -sf /usr/lib/yubiOS/enroll-sb-wrapper.sh   /usr/bin/yubiOS-enroll-sb   && \
+RUN ln -sf /usr/lib/yubiOS/enroll.sh              /usr/bin/yubiOS-enroll       && \
+    ln -sf /usr/lib/yubiOS/enroll-sb-wrapper.sh   /usr/bin/yubiOS-enroll-sb   && \
     ln -sf /usr/lib/yubiOS/enroll-luks-wrapper.sh /usr/bin/yubiOS-enroll-luks && \
     ln -sf /usr/lib/yubiOS/enroll-pam-wrapper.sh  /usr/bin/yubiOS-enroll-pam  && \
     ln -sf /usr/lib/yubiOS/enroll-ssh-wrapper.sh  /usr/bin/yubiOS-enroll-ssh  && \
-    ln -sf /usr/lib/yubiOS/enroll-homed-wrapper.sh /usr/bin/yubiOS-enroll-homed
+    ln -sf /usr/lib/yubiOS/enroll-homed-wrapper.sh /usr/bin/yubiOS-enroll-homed && \
+    if [ ! -e /usr/lib64/libykcs11.so ] && [ -e /usr/lib64/libykcs11.so.2 ]; then \
+      ln -sf libykcs11.so.2 /usr/lib64/libykcs11.so; \
+    fi
 
 # ── Wire PAM: yubiOS-sudo config → /etc/pam.d/sudo ──────────────────────
 # Replaces Fedora's stock sudo PAM with yubiOS policy:

@@ -24,7 +24,7 @@ block = ["direct"]
 # the bootc install path agree on the cmdline, which is required by
 # ADR-006's "both paths behave identically at runtime" principle.
 # PR #2305 (v1.16.4) extends this with user-provided kargs via x-options-source-*.
-kargs = ["root=dissect", "mount.usr=dissect", "rw", "audit=0"]
+kargs = ["root=dissect", "mount.usr=dissect", "rw", "selinux=0", "rd.driver.pre=tee,optee,tpm_ftpm_tee", "audit=0"]
 
 # OMN-150 Phase 2 -- sealed-UKI BLSConfig integration (active in bootc 1.17.1+).
 # Both Containerfile (`d4b95e208f`) and Containerfile.dev (`c612e010a95c`) build

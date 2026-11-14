@@ -24,7 +24,9 @@ source "${YUBIOS_LIB_SH:-/usr/lib/yubiOS/lib.sh}"
 
 PHASE="${1:-all}"
 ESP="${YUBIOS_ESP:-/efi}"
-[ -d "$ESP/EFI" ] || ESP=/boot/efi
+for _esp_cand in "$ESP" /boot/efi /boot; do
+  if [ -d "$_esp_cand/EFI" ]; then ESP="$_esp_cand"; break; fi
+done
 KEYDIR="${YUBIOS_SB_KEYDIR:-/var/lib/yubiOS/secureboot}"
 ENROLLED_MARK="${YUBIOS_SB_ENROLLED_MARK:-/var/lib/yubiOS/.sb-enrolled}"
 SB_KEY_URI="pkcs11:id=%01;type=private"
@@ -34,8 +36,8 @@ DAYS=1826
 EFIVARS="${YUBIOS_EFIVARS:-/sys/firmware/efi/efivars}"
 GUID_GLOBAL=8be4df61-93ca-11d2-aa0d-00e098032b8c
 PKCS11_LIB="${YUBIOS_PKCS11_LIB:-}"
-if [ -z "$PKCS11_LIB" ]; then
-  for c in /usr/lib64/libykcs11.so /usr/lib64/libykcs11.so.2 /usr/lib/libykcs11.so; do
+if [ -z "$PKCS11_LIB" ] || [ ! -e "$PKCS11_LIB" ]; then
+  for c in /usr/lib64/libykcs11.so /usr/lib64/libykcs11.so.2 /usr/lib/libykcs11.so /usr/lib/aarch64-linux-gnu/libykcs11.so; do
     if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
   done
 fi
@@ -126,7 +128,7 @@ phase_resign() {
   [ -f "$KEYDIR/db.crt" ] || { yubiOS_log "db.crt missing. Run the enroll phase first."; exit 1; }
   local -a images=()
   local f
-  for f in "$ESP"/EFI/systemd/systemd-bootaa64.efi "$ESP"/EFI/BOOT/BOOTAA64.EFI "$ESP"/EFI/Linux/*.efi; do
+  for f in "$ESP"/EFI/systemd/systemd-bootaa64.efi "$ESP"/EFI/systemd/systemd-bootx64.efi "$ESP"/EFI/BOOT/BOOTAA64.EFI "$ESP"/EFI/BOOT/BOOTX64.EFI "$ESP"/EFI/Linux/*.efi "$ESP"/EFI/Linux/bootc/*.efi; do
     [ -f "$f" ] && images+=("$f")
   done
   [ "${#images[@]}" -gt 0 ] || { yubiOS_log "No loader or UKI found under $ESP"; exit 1; }

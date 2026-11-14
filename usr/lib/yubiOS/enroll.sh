@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: LGPL-2.1-or-later
 # yubiOS enrollment wizard — runs on first boot via yubiOS-enroll.service
-# Guides user through: Secure Boot → Disk Encryption → SSH → PAM
+# Guides user through: Secure Boot → Disk Encryption → Homed User → SSH → PAM
 
 set -euo pipefail
 
@@ -38,7 +38,7 @@ fi
 # shellcheck source=lib.sh
 source /usr/lib/yubiOS/lib.sh
 
-clear
+clear 2>/dev/null || true
 cat << "BANNER"
  _  _ _   _ ___ ___ ___  ___
 | \| | | | | _ \_ _/ _ \/ __|
@@ -50,10 +50,11 @@ BANNER
 
 echo ""
 echo "This wizard will enroll your YubiKey as the root of trust for:"
-echo "  1. Secure Boot signing (PIV slot 9c, CCID interface)"
+echo "  1. Secure Boot signing (PIV slot 9a, CCID interface)"
 echo "  2. Disk encryption unlock (FIDO2 HMAC-secret, hidraw)"
-echo "  3. SSH keys (ed25519-sk resident key, hidraw)"
-echo "  4. sudo / login auth (U2F pam_u2f, hidraw)"
+echo "  3. User home directory (systemd-homed LUKS2 + FIDO2, default user: yubios)"
+echo "  4. SSH keys (ed25519-sk resident key, hidraw)"
+echo "  5. sudo / login auth (U2F pam_u2f, hidraw)"
 echo ""
 echo "YubiKey firmware >= 5.2.3 required for ed25519-sk."
 echo ""
@@ -65,16 +66,21 @@ echo "YubiKey detected. Confirm FIDO2 PIN is set before continuing."
 echo "  If not: run \"ykman fido access change-pin\" in another terminal."
 read -rp "Press Enter when ready, or Ctrl-C to abort..."
 
+DEFAULT_USER="${YUBIOS_ENROLL_USER:-${SUDO_USER:-yubios}}"
+read -rp "Initial username to enroll [${DEFAULT_USER}]: " ENROLL_USER
+ENROLL_USER="${ENROLL_USER:-$DEFAULT_USER}"
+yubiOS_log "Target username for enrollment: $ENROLL_USER"
+
 echo ""
-echo "─── Step 1/4: Secure Boot Signing ───"
-echo "Uses YubiKey PIV slot 9c. Requires PIV PIN (default: 123456)."
+echo "─── Step 1/5: Secure Boot Signing ───"
+echo "Uses YubiKey PIV slot 9a. Requires PIV PIN (default: 123456)."
 read -rp "Enroll Secure Boot key? [Y/n]: " do_sb
 if [[ "${do_sb:-Y}" =~ ^[Yy] ]]; then
   /usr/lib/yubiOS/enroll-sb.sh
 fi
 
 echo ""
-echo "─── Step 2/4: Disk Encryption (FIDO2 hidraw) ───"
+echo "─── Step 2/5: Disk Encryption (FIDO2 hidraw) ───"
 echo "Enrolls YubiKey FIDO2 as LUKS2 unlock key. Touch + PIN required at boot."
 read -rp "Enroll disk encryption? [Y/n]: " do_luks
 if [[ "${do_luks:-Y}" =~ ^[Yy] ]]; then
@@ -82,24 +88,33 @@ if [[ "${do_luks:-Y}" =~ ^[Yy] ]]; then
 fi
 
 echo ""
-echo "─── Step 3/4: SSH Key (ed25519-sk resident) ───"
-echo "Private key stays on YubiKey. Touch + PIN required per connection."
-read -rp "Generate SSH key? [Y/n]: " do_ssh
-if [[ "${do_ssh:-Y}" =~ ^[Yy] ]]; then
-  sudo -u "${SUDO_USER:-$USER}" /usr/lib/yubiOS/enroll-ssh.sh
+echo "─── Step 3/5: User Home Directory (systemd-homed FIDO2) ───"
+echo "Creates LUKS2-encrypted home for '${ENROLL_USER}' unlocked by YubiKey FIDO2."
+read -rp "Create FIDO2 homed user '${ENROLL_USER}'? [Y/n]: " do_homed
+if [[ "${do_homed:-Y}" =~ ^[Yy] ]]; then
+  /usr/lib/yubiOS/enroll-homed.sh "$ENROLL_USER"
 fi
 
 echo ""
-echo "─── Step 4/4: sudo / Login Auth (U2F pam-u2f) ───"
-echo "Adds YubiKey touch requirement to sudo. Read ONBOARDING.md for recovery."
+echo "─── Step 4/5: SSH Key (ed25519-sk resident) ───"
+echo "Private key stays on YubiKey. Touch + PIN required per connection."
+read -rp "Generate SSH key? [Y/n]: " do_ssh
+if [[ "${do_ssh:-Y}" =~ ^[Yy] ]]; then
+  /usr/lib/yubiOS/enroll-ssh.sh
+fi
+
+echo ""
+echo "─── Step 5/5: sudo / Login Auth (U2F pam-u2f) ───"
+echo "Adds YubiKey touch requirement to sudo for '${ENROLL_USER}' (and root)."
 read -rp "Enroll PAM U2F? [Y/n]: " do_pam
 if [[ "${do_pam:-Y}" =~ ^[Yy] ]]; then
-  /usr/lib/yubiOS/enroll-pam.sh
+  /usr/lib/yubiOS/enroll-pam.sh "$ENROLL_USER"
 fi
 
 echo ""
 echo "─────────────────────────────────────────────────────────────"
 echo "Enrollment complete. Your YubiKey is now the root of trust for this system."
+echo "Enrolled user: ${ENROLL_USER}"
 echo ""
 echo "IMPORTANT: Enroll a BACKUP YubiKey now while you still have access."
 echo "  Run: yubiOS-enroll-luks   (for second YubiKey disk unlock)"

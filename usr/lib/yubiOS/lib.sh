@@ -5,8 +5,8 @@
 # SC2034: export so sourcing scripts can use these constants
 export YUBIOS_STATE_DIR=/var/lib/yubiOS
 export YUBICOS_U2F_KEYS=/etc/yubico/u2f_keys
-export YUBIOS_PIV_SLOT=9c   # Digital Signature slot for Secure Boot
-export YUBIOS_PKCS11_LIB=/usr/lib64/libykcs11.so
+export YUBIOS_PIV_SLOT="${YUBIOS_PIV_SLOT:-9a}"   # PIV Authentication slot 9a for Secure Boot (ADR-002)
+export YUBIOS_PKCS11_LIB="${YUBIOS_PKCS11_LIB:-/usr/lib64/libykcs11.so}"
 
 yubiOS_log() { echo "[yubiOS] $*"; }
 yubiOS_warn() { echo "[yubiOS WARN] $*" >&2; }

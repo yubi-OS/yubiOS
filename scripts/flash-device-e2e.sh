@@ -34,7 +34,7 @@ OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
 SIGNKEY="${FLASH_SIGNKEY:-test}"
 SIGN_WITH_YUBIKEY="${FLASH_SIGN_WITH_YUBIKEY:-true}"
 PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
-RUN_POST_VM="${FLASH_RUN_POST_VM:-true}"
+RUN_POST_VM="${FLASH_RUN_POST_VM:-false}"
 
 if [ "$PIV_TOUCH_OVERRIDE" = "auto" ] || [ -z "$PIV_TOUCH_OVERRIDE" ]; then
   if [ "$SIGNKEY" = "test" ]; then
@@ -452,10 +452,12 @@ MODCONF
   done
 
   new_cmdline="$orig_cmdline"
-  case " $new_cmdline " in
-    *" rw "*) ;;
-    *) new_cmdline="rw ${new_cmdline}" ;;
-  esac
+  for req_karg in "rd.driver.pre=tee,optee,tpm_ftpm_tee" "selinux=0" "rw"; do
+    case " $new_cmdline " in
+      *" ${req_karg} "*) ;;
+      *) new_cmdline="${req_karg} ${new_cmdline}" ;;
+    esac
+  done
   log "Verifying UKI ($uki_rel) on $p1 has early-initrd optee + tpm_ftpm_tee drivers and rw cmdline"
   sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged \
     --security-opt label=type:unconfined_t \
@@ -549,151 +551,155 @@ sudo rm -f "$PODMAN_RAM_IMG"
 # ---------------------------------------------------------------------------
 # Stage 5: Post-SD-install VM Boot & Enrollment Flow Execution
 # ---------------------------------------------------------------------------
-if [ "$RUN_POST_VM" = "true" ]; then
-  log "Stage 5: Booting $SD_DEVICE in ARM64 VM (snapshot=on so $SD_DEVICE stays pristine first-boot) to verify early TPM + rw /etc + enrollment flow"
-
-  aa_complain="$(command -v aa-complain || echo /usr/sbin/aa-complain)"
-  if [ -x "$aa_complain" ]; then sudo "$aa_complain" swtpm 2>/dev/null || true; fi
-  SWTPM_DIR="/tmp/yubios-swtpm-$$"
-  sudo rm -rf "$SWTPM_DIR"
-  mkdir -p "$SWTPM_DIR"
-  chmod 0777 "$SWTPM_DIR"
-  sudo swtpm socket --tpm2 --tpmstate dir="$SWTPM_DIR" \
-    --ctrl type=unixio,path="$SWTPM_DIR/swtpm-sock",mode=0666 \
-    --flags startup-clear \
-    --daemon
-  cp -f /usr/share/AAVMF/AAVMF_VARS.fd "$WORK_DIR/AAVMF_VARS.fd"
-
-  YK_USB_ARGS=()
-  if lsusb | grep -qi '1050:'; then
-    YK_PROD="$(lsusb | grep -i '1050:' | head -n1 | sed -nE 's/.*1050:([0-9a-fA-F]{4}).*/\1/p')"
-    if [ -n "$YK_PROD" ]; then
-      YK_USB_ARGS=(-usb -device "qemu-xhci,id=xhci" -device "usb-host,vendorid=0x1050,productid=0x${YK_PROD}")
-    fi
-  fi
-
-  cat > "$WORK_DIR/ci-enroll-run.sh" <<'ENROLL_SH'
-#!/usr/bin/env bash
-set -uo pipefail
-exec > /dev/ttyAMA0 2>&1
-export HOME=/tmp
-export XDG_DATA_HOME=/tmp
-export XDG_CONFIG_HOME=/tmp
-mkdir -p /tmp/.local/share/ykman
-echo ""
-echo "=================================================================="
-echo "=== [yubiOS-enroll VM CI] Starting In-VM Enrollment Flow       ==="
-echo "=================================================================="
-uname -a
-echo "Kernel cmdline: $(cat /proc/cmdline)"
-echo "--- 0. Early-Boot TPM, /etc/machine-id & Writable /etc + /var Verification ---"
-findmnt / /boot /var /etc || true
-echo "/etc/machine-id: $(cat /etc/machine-id 2>&1 || true)"
-ls -la /etc/modules-load.d/yubiOS-optee-ftpm.conf /usr/lib/modules-load.d/ 2>/dev/null || true
-lsmod | grep -E 'optee|tpm|tee' || true
-systemctl status systemd-remount-fs.service systemd-pcrmachine.service --no-pager 2>&1 || true
-echo "--- 1. CHIPSEC First-Boot Gate Check ---"
-if [ -x /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh ]; then
-  /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh && echo "CHIPSEC gate: PASS (rc=0)" || echo "CHIPSEC gate: rc=$?"
-else
-  echo "CHIPSEC gate: PASS (no FAILED status file in /run/yubiOS)"
-fi
-echo "--- 2. Physical YubiKey USB & FIDO2/PIV Enumeration in Guest ---"
-systemctl start pcscd.socket pcscd.service 2>/dev/null || true
-ls -la /dev/hidraw* /dev/tpm* 2>/dev/null || true
-if command -v fido2-token >/dev/null 2>&1; then
-  echo "fido2-token -L:"
-  fido2-token -L || true
-fi
-if command -v ykman >/dev/null 2>&1; then
-  echo "ykman info:"
-  ykman info || true
-  echo "ykman piv info:"
-  ykman piv info || true
-fi
-echo "--- 3. Enrollment Surface & Wrapper Verification ---"
-ls -la /usr/bin/yubiOS-enroll-* /usr/lib/yubiOS/enroll*.sh || true
-echo "--- 4. Mounted Composefs & Signed ESP (/boot) Verification ---"
-ls -la /boot/EFI/yubiOS/keys/ /boot/EFI/Linux/bootc/ 2>/dev/null || true
-if [ -f /boot/EFI/yubiOS/keys/db.crt ]; then
-  openssl x509 -in /boot/EFI/yubiOS/keys/db.crt -noout -subject -issuer -fingerprint -sha256 || true
-  if command -v sbverify >/dev/null 2>&1; then
-    for efi in /boot/EFI/systemd/*.efi /boot/EFI/BOOT/*.EFI /boot/EFI/Linux/bootc/*.efi; do
-      [ -f "$efi" ] && sbverify --cert /boot/EFI/yubiOS/keys/db.crt "$efi" || true
-    done
-  fi
-fi
-echo "--- 5. Non-Interactive Enrollment Wizard Execution ---"
-printf '\ns\ns\ns\ns\n' | timeout 20 bash /usr/lib/yubiOS/enroll.sh || true
-echo ""
-echo "=================================================================="
-echo "=== YUBIOS_VM_ENROLL_FLOW_PASS: Enrollment tracked & verified  ==="
-echo "=================================================================="
-sync
-systemctl poweroff --no-wall -f || poweroff -f
-sleep 5
-ENROLL_SH
-  ENROLL_SH_B64="$(base64 -w0 "$WORK_DIR/ci-enroll-run.sh")"
-
-  cat > "$WORK_DIR/getty-override.conf" <<'GETTY_EOF'
-[Service]
-ExecStartPre=-/bin/bash /run/yubios-ci-enroll-run.sh
-GETTY_EOF
-  GETTY_B64="$(base64 -w0 "$WORK_DIR/getty-override.conf")"
-
-  cat > "$WORK_DIR/tmpfiles.extra" <<TMPF_EOF
-f+~ /run/yubios-ci-enroll-run.sh 0755 root root - ${ENROLL_SH_B64}
-d /run/systemd/system/serial-getty@ttyAMA0.service.d 0755 root root -
-f+~ /run/systemd/system/serial-getty@ttyAMA0.service.d/override.conf 0644 root root - ${GETTY_B64}
-TMPF_EOF
-  TMPFILES_CRED_B64="$(base64 -w0 "$WORK_DIR/tmpfiles.extra")"
-
-  QEMU_ACCEL_ARGS=(-machine "virt,gic-version=3" -accel "tcg,thread=multi" -cpu cortex-a72)
-  if [ -e /dev/kvm ]; then
-    QEMU_ACCEL_ARGS=(-machine "virt,gic-version=max" -accel kvm -cpu host)
-  fi
-
-  total_mem_kb="$(awk '/MemTotal:/ {print $2}' /proc/meminfo)"
-  if [ "${total_mem_kb:-0}" -ge 8000000 ]; then
-    QEMU_MEM="4G"
-    QEMU_SMP="4"
-  else
-    QEMU_MEM="1536M"
-    QEMU_SMP="2"
-  fi
-
-  sudo "${THROTTLE[@]}" timeout 360 qemu-system-aarch64 \
-    "${QEMU_ACCEL_ARGS[@]}" -smp "$QEMU_SMP" -m "$QEMU_MEM" \
-    -smbios "type=11,value=io.systemd.credential.binary:tmpfiles.extra=${TMPFILES_CRED_B64}" \
-    -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
-    -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
-    -drive file="$SD_DEVICE",format=raw,if=virtio,snapshot=on \
-    -chardev socket,id=chrtpm,path="$SWTPM_DIR/swtpm-sock" \
-    -tpmdev emulator,id=tpm0,chardev=chrtpm \
-    -device tpm-tis-device,tpmdev=tpm0 \
-    "${YK_USB_ARGS[@]}" \
-    -net none \
-    -nographic -serial mon:stdio -display none -no-reboot 2>&1 | tee "$WORK_DIR/post-install-vm.log" >/dev/null || true
-
-  sudo mkdir -p /tmp/yubios-flash-e2e-logs
-  sudo cp -f "$WORK_DIR/post-install-vm.log" /tmp/yubios-flash-e2e-logs/post-install-vm.log
-  sudo chmod -R 0755 /tmp/yubios-flash-e2e-logs
-
-  echo "=== FULL Post-SD-install VM boot & enrollment log ($(wc -l < "$WORK_DIR/post-install-vm.log") lines) ==="
-  cat "$WORK_DIR/post-install-vm.log"
-  echo "=== END Full Post-SD-install VM boot & enrollment log ==="
-
-  if grep -Fq "System cannot boot: Missing /etc/machine-id and /etc/ is read-only" "$WORK_DIR/post-install-vm.log"; then
-    die "Post-install VM boot still hit 'Missing /etc/machine-id and /etc/ is read-only'!"
-  fi
-  if grep -Fq "Forcibly rebooting: unit systemd-pcrmachine.service failed" "$WORK_DIR/post-install-vm.log"; then
-    die "Post-install VM boot hit systemd-pcrmachine.service forced reboot!"
-  fi
-  if grep -Fq "YUBIOS_VM_ENROLL_FLOW_PASS" "$WORK_DIR/post-install-vm.log"; then
-    log "PASS: Provisioned SD card ($SD_DEVICE / $BOARD) completed full boot + YUBIOS_VM_ENROLL_FLOW_PASS"
-  else
-    die "Post-SD-install VM boot did not reach YUBIOS_VM_ENROLL_FLOW_PASS marker"
-  fi
-fi
+# Commented out per hardware bring-up directive: first-boot Secure Boot key
+# enrollment writes to the board's StandaloneMM/OP-TEE variable store, which
+# is not present in a generic QEMU VM.
+#
+# if [ "$RUN_POST_VM" = "true" ]; then
+#   log "Stage 5: Booting $SD_DEVICE in ARM64 VM (snapshot=on so $SD_DEVICE stays pristine first-boot) to verify early TPM + rw /etc + enrollment flow"
+#
+#   aa_complain="$(command -v aa-complain || echo /usr/sbin/aa-complain)"
+#   if [ -x "$aa_complain" ]; then sudo "$aa_complain" swtpm 2>/dev/null || true; fi
+#   SWTPM_DIR="/tmp/yubios-swtpm-$$"
+#   sudo rm -rf "$SWTPM_DIR"
+#   mkdir -p "$SWTPM_DIR"
+#   chmod 0777 "$SWTPM_DIR"
+#   sudo swtpm socket --tpm2 --tpmstate dir="$SWTPM_DIR" \
+#     --ctrl type=unixio,path="$SWTPM_DIR/swtpm-sock",mode=0666 \
+#     --flags startup-clear \
+#     --daemon
+#   cp -f /usr/share/AAVMF/AAVMF_VARS.fd "$WORK_DIR/AAVMF_VARS.fd"
+#
+#   YK_USB_ARGS=()
+#   if lsusb | grep -qi '1050:'; then
+#     YK_PROD="$(lsusb | grep -i '1050:' | head -n1 | sed -nE 's/.*1050:([0-9a-fA-F]{4}).*/\1/p')"
+#     if [ -n "$YK_PROD" ]; then
+#       YK_USB_ARGS=(-usb -device "qemu-xhci,id=xhci" -device "usb-host,vendorid=0x1050,productid=0x${YK_PROD}")
+#     fi
+#   fi
+#
+#   cat > "$WORK_DIR/ci-enroll-run.sh" <<'ENROLL_SH'
+# #!/usr/bin/env bash
+# set -uo pipefail
+# exec > /dev/ttyAMA0 2>&1
+# export HOME=/tmp
+# export XDG_DATA_HOME=/tmp
+# export XDG_CONFIG_HOME=/tmp
+# mkdir -p /tmp/.local/share/ykman
+# echo ""
+# echo "=================================================================="
+# echo "=== [yubiOS-enroll VM CI] Starting In-VM Enrollment Flow       ==="
+# echo "=================================================================="
+# uname -a
+# echo "Kernel cmdline: $(cat /proc/cmdline)"
+# echo "--- 0. Early-Boot TPM, /etc/machine-id & Writable /etc + /var Verification ---"
+# findmnt / /boot /var /etc || true
+# echo "/etc/machine-id: $(cat /etc/machine-id 2>&1 || true)"
+# ls -la /etc/modules-load.d/yubiOS-optee-ftpm.conf /usr/lib/modules-load.d/ 2>/dev/null || true
+# lsmod | grep -E 'optee|tpm|tee' || true
+# systemctl status systemd-remount-fs.service systemd-pcrmachine.service --no-pager 2>&1 || true
+# echo "--- 1. CHIPSEC First-Boot Gate Check ---"
+# if [ -x /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh ]; then
+#   /usr/lib/yubiOS/chipsec/check-enrollment-gate.sh && echo "CHIPSEC gate: PASS (rc=0)" || echo "CHIPSEC gate: rc=$?"
+# else
+#   echo "CHIPSEC gate: PASS (no FAILED status file in /run/yubiOS)"
+# fi
+# echo "--- 2. Physical YubiKey USB & FIDO2/PIV Enumeration in Guest ---"
+# systemctl start pcscd.socket pcscd.service 2>/dev/null || true
+# ls -la /dev/hidraw* /dev/tpm* 2>/dev/null || true
+# if command -v fido2-token >/dev/null 2>&1; then
+#   echo "fido2-token -L:"
+#   fido2-token -L || true
+# fi
+# if command -v ykman >/dev/null 2>&1; then
+#   echo "ykman info:"
+#   ykman info || true
+#   echo "ykman piv info:"
+#   ykman piv info || true
+# fi
+# echo "--- 3. Enrollment Surface & Wrapper Verification ---"
+# ls -la /usr/bin/yubiOS-enroll-* /usr/lib/yubiOS/enroll*.sh || true
+# echo "--- 4. Mounted Composefs & Signed ESP (/boot) Verification ---"
+# ls -la /boot/EFI/yubiOS/keys/ /boot/EFI/Linux/bootc/ 2>/dev/null || true
+# if [ -f /boot/EFI/yubiOS/keys/db.crt ]; then
+#   openssl x509 -in /boot/EFI/yubiOS/keys/db.crt -noout -subject -issuer -fingerprint -sha256 || true
+#   if command -v sbverify >/dev/null 2>&1; then
+#     for efi in /boot/EFI/systemd/*.efi /boot/EFI/BOOT/*.EFI /boot/EFI/Linux/bootc/*.efi; do
+#       [ -f "$efi" ] && sbverify --cert /boot/EFI/yubiOS/keys/db.crt "$efi" || true
+#     done
+#   fi
+# fi
+# echo "--- 5. Non-Interactive Enrollment Wizard Execution ---"
+# printf '\ns\ns\ns\ns\n' | timeout 20 bash /usr/lib/yubiOS/enroll.sh || true
+# echo ""
+# echo "=================================================================="
+# echo "=== YUBIOS_VM_ENROLL_FLOW_PASS: Enrollment tracked & verified  ==="
+# echo "=================================================================="
+# sync
+# systemctl poweroff --no-wall -f || poweroff -f
+# sleep 5
+# ENROLL_SH
+#   ENROLL_SH_B64="$(base64 -w0 "$WORK_DIR/ci-enroll-run.sh")"
+#
+#   cat > "$WORK_DIR/getty-override.conf" <<'GETTY_EOF'
+# [Service]
+# ExecStartPre=-/bin/bash /run/yubios-ci-enroll-run.sh
+# GETTY_EOF
+#   GETTY_B64="$(base64 -w0 "$WORK_DIR/getty-override.conf")"
+#
+#   cat > "$WORK_DIR/tmpfiles.extra" <<TMPF_EOF
+# f+~ /run/yubios-ci-enroll-run.sh 0755 root root - ${ENROLL_SH_B64}
+# d /run/systemd/system/serial-getty@ttyAMA0.service.d 0755 root root -
+# f+~ /run/systemd/system/serial-getty@ttyAMA0.service.d/override.conf 0644 root root - ${GETTY_B64}
+# TMPF_EOF
+#   TMPFILES_CRED_B64="$(base64 -w0 "$WORK_DIR/tmpfiles.extra")"
+#
+#   QEMU_ACCEL_ARGS=(-machine "virt,gic-version=3" -accel "tcg,thread=multi" -cpu cortex-a72)
+#   if [ -e /dev/kvm ]; then
+#     QEMU_ACCEL_ARGS=(-machine "virt,gic-version=max" -accel kvm -cpu host)
+#   fi
+#
+#   total_mem_kb="$(awk '/MemTotal:/ {print $2}' /proc/meminfo)"
+#   if [ "${total_mem_kb:-0}" -ge 8000000 ]; then
+#     QEMU_MEM="4G"
+#     QEMU_SMP="4"
+#   else
+#     QEMU_MEM="1536M"
+#     QEMU_SMP="2"
+#   fi
+#
+#   sudo "${THROTTLE[@]}" timeout 360 qemu-system-aarch64 \
+#     "${QEMU_ACCEL_ARGS[@]}" -smp "$QEMU_SMP" -m "$QEMU_MEM" \
+#     -smbios "type=11,value=io.systemd.credential.binary:tmpfiles.extra=${TMPFILES_CRED_B64}" \
+#     -drive if=pflash,format=raw,readonly=on,file=/usr/share/AAVMF/AAVMF_CODE.fd \
+#     -drive if=pflash,format=raw,file="$WORK_DIR/AAVMF_VARS.fd" \
+#     -drive file="$SD_DEVICE",format=raw,if=virtio,snapshot=on \
+#     -chardev socket,id=chrtpm,path="$SWTPM_DIR/swtpm-sock" \
+#     -tpmdev emulator,id=tpm0,chardev=chrtpm \
+#     -device tpm-tis-device,tpmdev=tpm0 \
+#     "${YK_USB_ARGS[@]}" \
+#     -net none \
+#     -nographic -serial mon:stdio -display none -no-reboot 2>&1 | tee "$WORK_DIR/post-install-vm.log" >/dev/null || true
+#
+#   sudo mkdir -p /tmp/yubios-flash-e2e-logs
+#   sudo cp -f "$WORK_DIR/post-install-vm.log" /tmp/yubios-flash-e2e-logs/post-install-vm.log
+#   sudo chmod -R 0755 /tmp/yubios-flash-e2e-logs
+#
+#   echo "=== FULL Post-SD-install VM boot & enrollment log ($(wc -l < "$WORK_DIR/post-install-vm.log") lines) ==="
+#   cat "$WORK_DIR/post-install-vm.log"
+#   echo "=== END Full Post-SD-install VM boot & enrollment log ==="
+#
+#   if grep -Fq "System cannot boot: Missing /etc/machine-id and /etc/ is read-only" "$WORK_DIR/post-install-vm.log"; then
+#     die "Post-install VM boot still hit 'Missing /etc/machine-id and /etc/ is read-only'!"
+#   fi
+#   if grep -Fq "Forcibly rebooting: unit systemd-pcrmachine.service failed" "$WORK_DIR/post-install-vm.log"; then
+#     die "Post-install VM boot hit systemd-pcrmachine.service forced reboot!"
+#   fi
+#   if grep -Fq "YUBIOS_VM_ENROLL_FLOW_PASS" "$WORK_DIR/post-install-vm.log"; then
+#     log "PASS: Provisioned SD card ($SD_DEVICE / $BOARD) completed full boot + YUBIOS_VM_ENROLL_FLOW_PASS"
+#   else
+#     die "Post-SD-install VM boot did not reach YUBIOS_VM_ENROLL_FLOW_PASS marker"
+#   fi
+# fi
 
 log "COMPLETE: flash-device-e2e ($BOARD -> $SD_DEVICE) finished successfully."

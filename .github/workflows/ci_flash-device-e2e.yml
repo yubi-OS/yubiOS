@@ -46,9 +46,9 @@ on:
           - never
           - always
       run_post_install_vm_boot:
-        description: 'Boot the provisioned SD card in KVM on rock1 (snapshot=on) with swtpm after SD flash'
+        description: 'Optional VM boot check (default false; first-boot Secure Boot enrollment requires board StMM/OP-TEE)'
         required: false
-        default: true
+        default: false
         type: boolean
 
 permissions:

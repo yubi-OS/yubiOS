@@ -5,9 +5,16 @@ kargs = [
   # Mount the backing root partition (/dev/gpt-auto-root) read-write at /sysroot
   # so bootc-root-setup's bind-mounts of state/deploy/<digest>/etc -> /etc and
   # state/deploy/<digest>/var -> /var are writable (while composefs EROFS / and
-  # /sysroot remain read-only). Without rw, /etc is read-only and systemd-pcrmachine
-  # fails when initializing /etc/machine-id on first boot.
+  # /sysroot remain read-only).
   "rw",
+  # Disable SELinux enforcing on the composefs rootfs (yubiOS enforces BPF-LSM
+  # RestrictFileSystems= and systemd service sandboxing; container builds on
+  # Ubuntu runners and `bootc install --disable-selinux` do not write SELinux
+  # file xattrs, which otherwise blocks systemd-journald, dbus-broker, polkit,
+  # and systemd-homed at boot).
+  "selinux=0",
+  # Preload OP-TEE and fTPM drivers as early as possible in initramfs.
+  "rd.driver.pre=tee,optee,tpm_ftpm_tee",
   # Ensure hidraw devices are available; no module parameters needed,
   # hidraw is built-in or auto-loaded by udev.
   # fido2-device=auto is set in /etc/crypttab by yubiOS-enroll-luks,
