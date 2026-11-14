@@ -167,7 +167,7 @@ RUN mkdir -p /etc/yubico && touch /etc/yubico/u2f_keys && chmod 600 /etc/yubico/
 RUN set -- /usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     if [ "$(uname -m)" != "aarch64" ]; then \
-      sed -i 's/optee tpm_ftpm_tee dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-of-dwcmshc //' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
+      sed -i 's/optee tpm_ftpm_tee tee_stmm_efi dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-of-dwcmshc //' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
     fi && \
     dracut --no-hostonly --force --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \

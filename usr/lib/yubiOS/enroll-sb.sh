@@ -53,6 +53,13 @@ done
 
 setup_mode() {
   # SetupMode is 1 while no PK is enrolled. The data byte follows a 4-byte attribute header.
+  if [ "$EFIVARS" = "/sys/firmware/efi/efivars" ]; then
+    modprobe tee_stmm_efi 2>/dev/null || true
+    modprobe efivarfs 2>/dev/null || true
+    if [ -d "$EFIVARS" ] && ! mountpoint -q "$EFIVARS" 2>/dev/null; then
+      mount -t efivarfs efivarfs "$EFIVARS" 2>/dev/null || true
+    fi
+  fi
   local f="$EFIVARS/SetupMode-$GUID_GLOBAL"
   [ -r "$f" ] || { yubiOS_log "SetupMode not readable; is efivarfs mounted?" >&2; return 2; }
   od -An -t u1 -j4 -N1 "$f" | tr -d ' '
