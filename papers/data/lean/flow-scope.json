@@ -1,0 +1,251 @@
+{
+  "schema": "wayfinder-scope/1",
+  "lean_file": "papers/data/lean/FlowBounds.lean",
+  "toolchain": "leanprover/lean4:v4.33.0",
+  "dependencies": "core Lean 4 only (no mathlib, no Batteries, no external imports)",
+  "generated_for_branch": "lean-check-flow (local, unpushed; base commit c2f0bc9e)",
+  "gate_reuse": "Checked by the existing, unmodified papers/data/lean/verify_wayfinder_axioms.py, invoked with --axioms <captured kernel output> --manifest papers/data/lean/flow-scope.json, and by the unmodified check_forbidden_tokens.py, check_lean_axioms.py (enumerate mode, --require-coverage) and leanchecker --fresh replay. No existing gate, test, or recorded negative was changed or relaxed to admit this file.",
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "forbidden_axioms": [
+    "sorryAx"
+  ],
+  "axiom_policy": "Every declaration listed in `theorems` must appear in the `#print axioms` output of the pinned kernel run. Its reported axiom set must be a subset of `permitted_axioms` (the three core Lean assumptions). Any other axiom, and in particular `sorryAx`, fails the gate. A missing declaration fails the gate. The gate parses the kernel's printed output; it does not grep source comments.",
+  "code_convention": "St lists eight working and six terminal task states. tableStep is the orchestrator transition table (spec section 4); step adds close-to-any-terminal from working states and no successor from terminal states. rank orders working states 8..1 with terminals at 0; backEdge lists the five table edges that do not lower rank. potential b s = 9*b + rank s. lindley q a s = (q + a) - s with truncated subtraction.",
+  "theorems": [
+    {
+      "name": "FlowBounds.terminal_absorbing",
+      "status": "lean-proved",
+      "statement": "isTerminal a -> step a b = false",
+      "runtime_counterpart": "jev-state assertTransition",
+      "runtime_predicate": "no transition leaves a terminal state",
+      "statement_sha256": "9548dae8afd90047d60340809dac3978d4514fa59197921c9c9b88c02911c145"
+    },
+    {
+      "name": "FlowBounds.no_dead_state",
+      "status": "lean-proved",
+      "statement": "not isTerminal a -> exists b, tableStep a b",
+      "runtime_counterpart": "jev-flow checkLifecycleModel",
+      "runtime_predicate": "every working state has a table successor",
+      "statement_sha256": "24f4435cd536325ee25ee48e37cb3bb8f12d10141f3fb6654208d5e4484a20c2"
+    },
+    {
+      "name": "FlowBounds.rank_le",
+      "status": "lean-proved",
+      "statement": "rank s <= 8",
+      "runtime_counterpart": "jev-flow RANK / RANK_SPAN",
+      "runtime_predicate": "ranks lie in 0..8, so one back edge raises rank by at most 8",
+      "statement_sha256": "accedf9d58fbda31fb0070ddfeb9ec67378adcfe343a4668211c9df242f015b5"
+    },
+    {
+      "name": "FlowBounds.rank_or_back_edge",
+      "status": "lean-proved",
+      "statement": "step a b -> rank b < rank a or backEdge a b",
+      "runtime_counterpart": "jev-flow checkLifecycleModel",
+      "runtime_predicate": "every edge lowers RANK or is in BACK_EDGES",
+      "statement_sha256": "afd219dd9a151baf10c5944579279650413f0477a94f0660af96162f2a06d7ba"
+    },
+    {
+      "name": "FlowBounds.back_edge_is_table_edge",
+      "status": "lean-proved",
+      "statement": "backEdge a b -> tableStep a b",
+      "runtime_counterpart": "jev-flow BACK_EDGES",
+      "runtime_predicate": "each listed back edge is a table edge",
+      "statement_sha256": "cc6d84506f86afcda2045ddc40821f3dccb297124852813725c7b3de0a881052"
+    },
+    {
+      "name": "FlowBounds.potential_decreases",
+      "status": "lean-proved",
+      "statement": "stepB b a b' c -> potential b' c < potential b a",
+      "runtime_counterpart": "jev-flow runLengthBound",
+      "runtime_predicate": "9*budget + rank strictly decreases on every step",
+      "statement_sha256": "3a8d819512dfbbb01c2324705a8a0845e0b6548731259e7307de1e62e3e47629"
+    },
+    {
+      "name": "FlowBounds.run_length_le",
+      "status": "lean-proved",
+      "statement": "Run b s n -> n <= 9*b + rank s",
+      "runtime_counterpart": "jev-flow runLengthBound",
+      "runtime_predicate": "remaining steps are bounded by RANK_SPAN*budget + rank",
+      "statement_sha256": "bcad724f9d9848381a0a151c328e49185bae28a16ce032767d7c8af35e2545f6"
+    },
+    {
+      "name": "FlowBounds.run_length_no_budget",
+      "status": "lean-proved",
+      "statement": "Run 0 s n -> n <= 8",
+      "runtime_counterpart": "jev-flow runLengthBound",
+      "runtime_predicate": "with no back edges a run has at most 8 steps",
+      "statement_sha256": "0869343bd142ec3c48e7087dc46738cf1591e066e90f5a959258be36cf6aacf8"
+    },
+    {
+      "name": "FlowBounds.occupancy_conserved",
+      "status": "lean-proved",
+      "statement": "working l + finished l = length l",
+      "runtime_counterpart": "jev-flow buildFlowSnapshot conservation",
+      "runtime_predicate": "total = working + terminal",
+      "statement_sha256": "f601df69461d44d4c754de4fc50b90414a8ed771defe8f98252a526a2d393dba"
+    },
+    {
+      "name": "FlowBounds.move_preserves_total",
+      "status": "lean-proved",
+      "statement": "length (set l i s) = length l",
+      "runtime_counterpart": "jev-flow selftest FL18",
+      "runtime_predicate": "moving one task preserves the total",
+      "statement_sha256": "da21a1bf0edf2771d2922d9c408346b3bb9aee1be52ce928980c92b72bbdd0cc"
+    },
+    {
+      "name": "FlowBounds.occupancy_conserved_under_move",
+      "status": "lean-proved",
+      "statement": "working (set l i s) + finished (set l i s) = length l",
+      "runtime_counterpart": "jev-flow selftest FL18",
+      "runtime_predicate": "conservation holds after any move",
+      "statement_sha256": "691acf078671ff5527f623eacec88c824c75ea50a6d589f28fc7a10dbbd59c16"
+    },
+    {
+      "name": "FlowBounds.lindley_le_of_arrivals_le",
+      "status": "lean-proved",
+      "statement": "a <= s -> lindley q a s <= q",
+      "runtime_counterpart": "jev-flow lindleyStep / backlogFlow",
+      "runtime_predicate": "backlog does not grow when arrivals <= capacity",
+      "statement_sha256": "81fb01b5cd57d30442a233b0885673665f0f038e814c345efd7249738420418a"
+    },
+    {
+      "name": "FlowBounds.lindley_surplus",
+      "status": "lean-proved",
+      "statement": "s <= a -> lindley q a s = q + (a - s)",
+      "runtime_counterpart": "jev-flow lindleyStep / backlogFlow",
+      "runtime_predicate": "backlog grows by exactly the surplus",
+      "statement_sha256": "c35d41fc5d927fa6deb684d28ec08a67834fa9dcada7c88d1d071b3689cf7aac"
+    },
+    {
+      "name": "FlowBounds.lindley_mono",
+      "status": "lean-proved",
+      "statement": "q <= q' -> lindley q a s <= lindley q' a s",
+      "runtime_counterpart": "jev-flow lindleyStep",
+      "runtime_predicate": "monotone in the starting backlog",
+      "statement_sha256": "527b8ca3aa5f59b2125c895328be3b64401ec304722ea74f28319734b0501a9e"
+    },
+    {
+      "name": "FlowBounds.lindley_conservation",
+      "status": "lean-proved",
+      "statement": "lindley q a s + min (q + a) s = q + a",
+      "runtime_counterpart": "jev-flow lindleyStep",
+      "runtime_predicate": "carried-over plus served equals work present",
+      "statement_sha256": "4328d36a5f7f59d5deec005b263f0a48179b8d56b9594384784c0d56464b15c8"
+    },
+    {
+      "name": "FlowBounds.backlog_le_start",
+      "status": "lean-proved",
+      "statement": "(all buckets a <= s) -> backlog q l <= q",
+      "runtime_counterpart": "jev-flow backlogFlow verdicts",
+      "runtime_predicate": "keeping_up / draining never end above the start",
+      "statement_sha256": "9b7689550209c4d4326cd9ace698b0e480ae002134b81e823a613eba39424afb"
+    },
+    {
+      "name": "FlowBounds.backlog_growth",
+      "status": "lean-proved",
+      "statement": "(all buckets s + d <= a) -> q + d*length l <= backlog q l",
+      "runtime_counterpart": "jev-flow backlogFlow verdicts",
+      "runtime_predicate": "growing backlogs gain at least the net rate per bucket",
+      "statement_sha256": "a9a1cf550f935e037dc4c00782d2385f9663ddc8ed8c27cca91ff3f2964b5b80"
+    }
+  ],
+  "runtime_verified_not_lean_proved": [
+    {
+      "obligation": "table equality",
+      "detail": "That the deployed VALID_TRANSITIONS table equals tableStep. Checked at runtime by jev-flow checkLifecycleModel (selftest FL1, FL2) and reported in every snapshot as lifecycle_model."
+    },
+    {
+      "obligation": "finite back-edge budget",
+      "detail": "That each task is allowed only finitely many re-gate / re-decide loops. The bound is conditional on the budget; the worker's retry and continuation caps supply it."
+    },
+    {
+      "obligation": "holders act",
+      "detail": "That scheduled sweeps fire and that an operator eventually acts on work the instrument marks as waiting on the operator. No fairness or liveness statement is proved."
+    },
+    {
+      "obligation": "counts",
+      "detail": "Arrival, completion and backlog counts come from D1 rows over a trailing window; they are measurements, not theorems."
+    }
+  ],
+  "nonclaims": [
+    "No new mathematics: workflow-net soundness (van der Aalst 1997), ranking-function termination and the Lindley recursion (1952) are prior art; the file pins the deployed table.",
+    "No liveness under fairness: the run bound limits length, it does not show a waiting task is ever moved.",
+    "No statement about concurrency, CAS claims, leases or D1 transactions.",
+    "No queueing-theoretic stationarity, stability or Little's-law claim; the backlog identities are per-bucket arithmetic.",
+    "No statement about model outputs, policy gates or approval correctness.",
+    "The holder classification (system / operator) of the instrument is a runtime rule and is not formalized here."
+  ],
+  "statement_pinning": {
+    "schema": "statement-pins/1",
+    "pin": "sha256 of the normalized Lean statement text",
+    "normalization": "Lean comments stripped (/- -/ nested blocks, -- line); string literals respected; statement = source text between the declaration name and the first top-level ':=' (or the first top-level match-arm '|' line for pattern proofs); whitespace runs collapsed to single spaces; proof text excluded.",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff.",
+    "pinned_from_commit": "c2f0bc9e (base; FlowBounds.lean uncommitted)",
+    "pinned_from_source": "yubiOS/papers/data/lean/FlowBounds.lean"
+  },
+  "definitions": {
+    "schema": "commands-v2",
+    "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
+    "hash": "55368b85abeca7d86fac2d949b008a519fa47e48f1536a97b0d8e1cf74671b19",
+    "count": 49,
+    "decls": {
+      "#print:axioms": "85e8fa31bd8e11a790e21fbefee4891131eabeb53d9b70e6ec650cbdc56acda3",
+      "#print:axioms#10": "15130b4a1abf2b5c65378de02028c8da72219e9de40b656808173a465f786b8e",
+      "#print:axioms#11": "38957fa8e321a011f467cddcaae46665ef1636b31291eeb843e31b7e23f304f8",
+      "#print:axioms#12": "32c7e1db6da819e172994823b1b7c76130c6a8cbdeb7288dc135511a81b9a215",
+      "#print:axioms#13": "702c15169add7f933494076d8e3d04e527274316c6d6d95ddb1fdd91172c3c0e",
+      "#print:axioms#14": "c4817fa84d652b38c8a90d3d406f1c289096ca15f32c724f86e89a0acae989d0",
+      "#print:axioms#15": "d4ea24cd660a8ffc18095059f10c6ed2881ee626f336fcc144d9a18594f122ff",
+      "#print:axioms#16": "1b77f3b1451da9f391d23e9aa7a64dd0295bf033baa4c7124d4f779e729124c5",
+      "#print:axioms#17": "3f17b443d65210ba64ffc812792f8be4fe0fb1c754bcda7de89d006386e71854",
+      "#print:axioms#2": "15a1f529a32f685d007277ed22af697cd00ab5298815dc1eb07032bac5b4ff38",
+      "#print:axioms#3": "50c4cc2d6478825992dd3c4e11885524249baac287e36fa7b06782f46f290a8c",
+      "#print:axioms#4": "25377376378100e14c8e9c9e5410758c547fabf463045a4c06a73b2b61da624b",
+      "#print:axioms#5": "6fde800e2ea18423aa528a6b0655e9fb348440192a2b088ecd3bb0c86496c341",
+      "#print:axioms#6": "c5ff3c0d13c662751ef708be80af05626704a2c2e2716b0e5dca994a1205683b",
+      "#print:axioms#7": "fe7f2304980db58f9038190905107d009961eabded1e5881d693bd4daa74bfe3",
+      "#print:axioms#8": "08de7aa4edc5a6a3360e12cf81796b9bd438e483a2eabd039015dcb4338f713e",
+      "#print:axioms#9": "78c6090fb558d7d1c368f8a8dcb78ec1cd31d95330b645851cb246ad6d5f7dfb",
+      "def:backEdge": "ef986ee230ad5c7f8eb661b6d8483d524b27fce152c4670cccb028f32f493095",
+      "def:backlog": "4ac6de3b378e17fb8292004830ddf3c9a4a5f43490691dd47b8b8ef449747dbf",
+      "def:finished": "95f9ba9160af528d2f8f2fc212c1b3fab8b0f3dfe27fc627b6a1cb65c3227475",
+      "def:isTerminal": "5d5147ec9976eeb6eaac6cc2ab4283040f50a5605fda2e5e120915a2512af523",
+      "def:lindley": "eef0c7e3003f11f37c57c2f18e154d51397e821bc37d34dabf54c89cbf4ffb1c",
+      "def:potential": "2e19eaec73e458124dae2dc6cc9d678e5c567d8669f803a4e5b3ef5a782be9bb",
+      "def:rank": "4d333fbdfeae311fa07b57df367b992ca6eb094be9ccde3daab6614e7ab42d44",
+      "def:step": "0969b6be436641ab1899d39a37e480fc0f9f7bed56ca35015bd2f06b3b36560c",
+      "def:stepB": "8ef71a297a44420f82f739516c468925d853677d100fbe20f94860e4321ac7f8",
+      "def:tableStep": "0ffb55cae1982136eda4e1b53aadf2a890b79b6f31c71d04f060916bf310f9e7",
+      "def:working": "353e9e5a2efea55e11c6d7aa773753865552e5278de1aa5ec244649601210c82",
+      "end:FlowBounds": "48488414722f99cdcc67cb1ade148ca7c5f9858bc6fe9909261d92a99ecbe307",
+      "inductive:Run": "68e6858c8f29d76113ed35fca7b6582ae41aa4f7683433b60f96aa4af7d90671",
+      "inductive:St": "18fbb8aa757ac2163e84184185b6c90dd7dd3f71dc03a36eae65277a88aa8da1",
+      "namespace:FlowBounds": "5b3a078c3c2a73d48f2b961b147140dd5de8aea494a0ab237d242ab0b15e19eb",
+      "theorem:back_edge_is_table_edge": "3ee62cd7e7739dbb0e618d826f82085e00f39c23325c142f8ba6d699006abd0a",
+      "theorem:backlog_growth": "eb3891d32f9bf273c15bf6e03f6b5497a03fb4cd0b46de2575ac9edd5aa22d11",
+      "theorem:backlog_le_start": "5a2deb8b1d2962389e99c5416ee7b86eef404bdd8237913ded29efec3c821a75",
+      "theorem:lindley_conservation": "81e0d8df63a010cbd127132ed22fea4d366eaa4e932e82cd1788b5621867f1d8",
+      "theorem:lindley_le_of_arrivals_le": "36d63d20b827a26f8822ef04285b7d781be0a42f6d83215a7b8d7f1e11a2cddd",
+      "theorem:lindley_mono": "31a57c0a3ee716c701d5f616db74fea7e4f5d86861433b1bd6f5030db751a1ae",
+      "theorem:lindley_surplus": "2b3dc49ad0343371ae4b2dddd82d81ff94274520ee58879adc1c578f2c2b09be",
+      "theorem:move_preserves_total": "9c696ee24584c2ecef664cbfb9b04c61dec1591f2e16c0045f06f59fe7b2b9c7",
+      "theorem:no_dead_state": "d63523d0115ce61cbd2e9530c49287f3e0d948f3c5fca0d9b4dce59fa9e6b5f1",
+      "theorem:occupancy_conserved": "d2c228b1b2b47381241ba6575afc1b9c210e2ee1c12d3b23972add90f047d566",
+      "theorem:occupancy_conserved_under_move": "a4e8c7c05fa2ef212486b07e2c75fc82d295a25c66fa168aad21595360110693",
+      "theorem:potential_decreases": "8618d77ca5e3c158d11d7883de65a7eae6bc78415a5e67462300bd763517692e",
+      "theorem:rank_le": "972c57cc08056c690b98ecaf238b6fdeafe6ec683f367168d989fc0155e645c0",
+      "theorem:rank_or_back_edge": "3ffea812e7811a4a7a4b39905e1b62472d68909e57b998a29cf68e9e3fdd01fe",
+      "theorem:run_length_le": "f1b1cf47200010354776f386f160eb06fdf7c6e27a3312670f10a534596036e9",
+      "theorem:run_length_no_budget": "f0b37f445c4a339e36b29e83089049e84b974a23acfb2d0f4aa41e3664bcc293",
+      "theorem:terminal_absorbing": "6957c6a8744ae9dae367b7903439f752f3f3e1e66954eeee143715d93f8728be"
+    },
+    "pinned_from_commit": "7d5ee590a55e"
+  }
+}

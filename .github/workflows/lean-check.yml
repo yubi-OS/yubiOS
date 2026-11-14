@@ -44,7 +44,8 @@ jobs:
             papers/data/lean/RadiusBounds.lean \
             papers/data/lean/RayleighBounds.lean \
             papers/data/lean/AzimuthBounds.lean \
-            papers/data/lean/FocalBounds.lean
+            papers/data/lean/FocalBounds.lean \
+            papers/data/lean/FlowBounds.lean
 
       - name: Install Lean 4.33.0 (pinned SHA256 release tarball, no installer script)
         run: |
@@ -87,7 +88,8 @@ jobs:
             papers/data/lean/RadiusBounds.lean \
             papers/data/lean/RayleighBounds.lean \
             papers/data/lean/AzimuthBounds.lean \
-            papers/data/lean/FocalBounds.lean; do
+            papers/data/lean/FocalBounds.lean \
+            papers/data/lean/FlowBounds.lean; do
             if ! lean -DwarningAsError=true "$f" > /tmp/sorry-gate.out 2>&1; then
               echo "NO_SORRY_FAIL: $f"
               cat /tmp/sorry-gate.out
@@ -119,7 +121,7 @@ jobs:
           # actual module structure).
           rm -rf /tmp/leanchecker-src /tmp/leanchecker-oleans
           mkdir -p /tmp/leanchecker-src /tmp/leanchecker-oleans
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds; do
             cp "papers/data/lean/${base}.lean" "/tmp/leanchecker-src/${base}.lean"
             if ! (cd /tmp/leanchecker-src && lean -o "/tmp/leanchecker-oleans/${base}.olean" "${base}.lean") > "/tmp/leanchecker-src/${base}-olean.err" 2>&1; then
               echo "LEANCHECKER_OLEAN_FAIL: ${base}" >&2
@@ -128,7 +130,7 @@ jobs:
             fi
           done
           export LEAN_PATH="/tmp/leanchecker-oleans"
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds; do
             echo "== leanchecker --fresh ${base} =="
             if ! leanchecker --fresh "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
               echo "LEANCHECKER_FAIL: ${base}" >&2
@@ -145,7 +147,7 @@ jobs:
         run: |
           set -euo pipefail
           PERMITTED="propext,Classical.choice,Quot.sound"
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds; do
             case "${base}" in
               CurvedCorpus)    manifest="curvedcorpus" ;;
               WayfinderBounds) manifest="wayfinder" ;;
@@ -153,6 +155,7 @@ jobs:
               RayleighBounds)  manifest="rayleigh" ;;
               AzimuthBounds)   manifest="azimuth" ;;
               FocalBounds)     manifest="focal" ;;
+              FlowBounds)      manifest="flow" ;;
             esac
             echo "== axiom coverage: ${base}.lean (manifest: ${manifest}-scope.json) =="
 
@@ -187,7 +190,7 @@ jobs:
               --mode enumerate \
               --require-coverage "papers/data/lean/${manifest}-scope.json"
           done
-          echo "AXIOM_COVERAGE_GATE_OK: all six lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
+          echo "AXIOM_COVERAGE_GATE_OK: all seven lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
 
 
       - name: Check WayfinderBounds.lean (kernel, pinned toolchain)
@@ -304,6 +307,29 @@ jobs:
           python3 papers/data/lean/verify_wayfinder_axioms.py \
             --axioms /tmp/focal-axioms.txt \
             --manifest papers/data/lean/focal-scope.json
+
+      - name: Check FlowBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/FlowBounds.lean > /tmp/flow-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/FlowBounds.lean"
+            cat /tmp/flow-axioms.txt
+            exit 1
+          }
+          cat /tmp/flow-axioms.txt
+          echo "LEAN_OK: papers/data/lean/FlowBounds.lean checks with no sorry"
+
+      - name: Validate flow scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 -c "import json; d=json.load(open('papers/data/lean/flow-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('FLOW_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+
+      - name: Assert printed flow axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/flow-axioms.txt \
+            --manifest papers/data/lean/flow-scope.json
 
       - name: Check CurvedCorpus.lean (statement pins via scope manifest)
         run: |
