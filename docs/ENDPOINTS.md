@@ -1000,7 +1000,7 @@ hierarchy oracle (POST /api/jev/corpus/oracle) and the lens standard (POST
 2026-10-06: the three selftests return 200 with all checks passing, the POST routes
 return their documented shape-validation 422s, /api/jev/route/bands serves the
 policy v12 band table and /api/jev/route/runs serves real run rows. Per the R3
-metric these 10 are code-only until AGENT.md (KV + git mirror) gains matching rows;
+metric these 10 are code-only until AGENT.md (served from KV /AGENT.md; root git mirror retired in cc629997) gains matching rows;
 the worker bundle was 51 module parts at this refresh (was 42 at R3); the live bundle has 61 module parts as of 2026-10-16 (wave-2 deploy).
 
 ### Previously flagged, now resolved

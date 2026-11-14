@@ -353,6 +353,7 @@ jobs:
           node tools/point-map/test-radius-extra.mjs
           node tools/point-map/test-limits.mjs
           node tools/point-map/test-focal-point.mjs
+          node tools/point-map/test-dimension-structure.mjs
           node tools/point-map/test-control-outcomes.mjs
           node tools/point-map/test-axis-consistency.mjs
           node tools/point-map/test-placement.mjs
