@@ -165,12 +165,13 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
       openssl x509 -in "$KEY_DIR/db.crt" -pubkey -noout > "$KEY_DIR/cert-pub.pem" 2>/dev/null || true
       if ! cmp -s "$KEY_DIR/slot9a-pub.pem" "$KEY_DIR/cert-pub.pem"; then
         echo "Slot 9a public key and certificate public key differ; regenerating matching cert..."
-        cat "$KEY_DIR/slot9a-pub.pem" | sudo ykman piv certificates generate \
+        # shellcheck disable=SC2024
+        sudo ykman piv certificates generate \
           -m "$PIV_MGMT_KEY" \
           -P "$PIV_PIN" \
           -s "CN=${CN_LABEL}" \
           -d 1826 \
-          9a -
+          9a - < "$KEY_DIR/slot9a-pub.pem"
         sudo ykman piv certificates export 9a - | tee "$KEY_DIR/db.crt" >/dev/null
       fi
     fi
@@ -183,12 +184,13 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
         --touch-policy "${PIV_TOUCH_POLICY^^}" \
         9a - | tee "$KEY_DIR/slot9a-pub.pem" >/dev/null
       log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
-      cat "$KEY_DIR/slot9a-pub.pem" | sudo ykman piv certificates generate \
+      # shellcheck disable=SC2024
+      sudo ykman piv certificates generate \
         -m "$PIV_MGMT_KEY" \
         -P "$PIV_PIN" \
         -s "CN=${CN_LABEL}" \
         -d 1826 \
-        9a -
+        9a - < "$KEY_DIR/slot9a-pub.pem"
       sudo ykman piv certificates export 9a - | tee "$KEY_DIR/db.crt" >/dev/null
     fi
     sudo chown -R "$(id -u):$(id -g)" "$KEY_DIR"
