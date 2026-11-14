@@ -169,10 +169,22 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
     sudo ykman info
     sudo ykman piv info
     need_mint=0
-    if ! sudo ykman piv certificates export 9a "$KEY_DIR/db.crt" >/dev/null 2>&1; then
+    if ! sudo ykman piv certificates export 9a - > "$KEY_DIR/db.crt" 2>/dev/null || [ ! -s "$KEY_DIR/db.crt" ]; then
       need_mint=1
     elif [ "$SIGNKEY" = "test" ] && ! openssl x509 -in "$KEY_DIR/db.crt" -noout -subject 2>/dev/null | grep -Fq "YUBIOS Test Slot 9a"; then
       need_mint=1
+    elif sudo ykman piv keys export 9a - > "$KEY_DIR/slot9a-pub.pem" 2>/dev/null && [ -s "$KEY_DIR/slot9a-pub.pem" ]; then
+      openssl x509 -in "$KEY_DIR/db.crt" -pubkey -noout > "$KEY_DIR/cert-pub.pem" 2>/dev/null || true
+      if ! cmp -s "$KEY_DIR/slot9a-pub.pem" "$KEY_DIR/cert-pub.pem"; then
+        echo "Slot 9a public key and certificate public key differ; regenerating matching cert..."
+        sudo ykman piv certificates generate \
+          -m "$PIV_MGMT_KEY" \
+          -P "$PIV_PIN" \
+          -s "CN=${CN_LABEL}" \
+          -d 1826 \
+          9a - < "$KEY_DIR/slot9a-pub.pem"
+        sudo ykman piv certificates export 9a - > "$KEY_DIR/db.crt"
+      fi
     fi
     if [ "$need_mint" -eq 1 ]; then
       log "Generating RSA-2048 key in PIV slot 9a on physical YubiKey (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
@@ -181,15 +193,15 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
         -m "$PIV_MGMT_KEY" \
         --pin-policy ONCE \
         --touch-policy "${PIV_TOUCH_POLICY^^}" \
-        9a "$KEY_DIR/slot9a-pub.pem"
+        9a - > "$KEY_DIR/slot9a-pub.pem"
       log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
       sudo ykman piv certificates generate \
         -m "$PIV_MGMT_KEY" \
         -P "$PIV_PIN" \
         -s "CN=${CN_LABEL}" \
         -d 1826 \
-        9a "$KEY_DIR/slot9a-pub.pem"
-      sudo ykman piv certificates export 9a "$KEY_DIR/db.crt"
+        9a - < "$KEY_DIR/slot9a-pub.pem"
+      sudo ykman piv certificates export 9a - > "$KEY_DIR/db.crt"
     fi
     sudo chown -R "$(id -u):$(id -g)" "$KEY_DIR"
     openssl x509 -in "$KEY_DIR/db.crt" -noout -subject -issuer -dates -fingerprint -sha256
