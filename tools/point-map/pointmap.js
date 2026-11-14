@@ -62,11 +62,22 @@ var PM = (function () {
   function pcaTop(X, k, r) { const { Xc, mu } = center(X); const n = Xc.length, D = Xc[0].length; k = Math.max(1, Math.min(k, D, n - 1));
     let axes = [], values = [];
     if (D <= 40) { const C = Array.from({ length: D }, () => Array(D).fill(0)); for (const row of Xc) for (let i = 0; i < D; i++) for (let j = 0; j < D; j++) C[i][j] += row[i] * row[j] / Math.max(1, n - 1); const e = jacobiEig(C); axes = e.vectors.slice(0, k); values = e.values; }
-    else { const rr = r || mulberry32(1); const tot = Xc.reduce((s, row) => s + row.reduce((a, x) => a + x * x, 0), 0) / Math.max(1, n - 1);
-      for (let a = 0; a < k; a++) { let v = Array.from({ length: D }, () => gauss(rr)); for (let it = 0; it < 40; it++) { const w = new Float64Array(D); for (const row of Xc) { let dot = 0; for (let j = 0; j < D; j++) dot += row[j] * v[j]; for (let j = 0; j < D; j++) w[j] += row[j] * dot; }
-          for (const u of axes) { let d2 = 0; for (let j = 0; j < D; j++) d2 += w[j] * u[j]; for (let j = 0; j < D; j++) w[j] -= d2 * u[j]; }
-          let nrm = 0; for (let j = 0; j < D; j++) nrm += w[j] * w[j]; nrm = Math.sqrt(nrm) || 1; v = Array.from(w, x => x / nrm); }
-        let lam = 0; for (const row of Xc) { let dot = 0; for (let j = 0; j < D; j++) dot += row[j] * v[j]; lam += dot * dot; } values.push(lam / Math.max(1, n - 1)); axes.push(v); }
+    else {
+      // block subspace iteration with QR + Rayleigh-Ritz (Halko, Martinsson & Tropp 2011, Alg. 4.4): converged and
+      // seed-independent at D = 1024, where sequential power iteration with deflation (40 iterations) is not
+      const rr = r || mulberry32(1); const tot = Xc.reduce((s, row) => s + row.reduce((a, x) => a + x * x, 0), 0) / Math.max(1, n - 1);
+      const m = Math.min(D, n - 1, k + 8), STEPS = 16;
+      const mgs = V => { for (let a = 0; a < V.length; a++) { const va = V[a]; for (let pass = 0; pass < 2; pass++) for (let b = 0; b < a; b++) { const vb = V[b]; let d2 = 0; for (let j = 0; j < D; j++) d2 += va[j] * vb[j]; for (let j = 0; j < D; j++) va[j] -= d2 * vb[j]; }
+          let nrm = 0; for (let j = 0; j < D; j++) nrm += va[j] * va[j]; nrm = Math.sqrt(nrm) || 1; for (let j = 0; j < D; j++) va[j] /= nrm; } return V; };
+      let Q = mgs(Array.from({ length: m }, () => Float64Array.from({ length: D }, () => gauss(rr)))); const y = new Float64Array(m);
+      for (let it = 0; it < STEPS; it++) { const Z = Array.from({ length: m }, () => new Float64Array(D));
+        for (const row of Xc) { for (let a = 0; a < m; a++) { const qa = Q[a]; let dot = 0; for (let j = 0; j < D; j++) dot += row[j] * qa[j]; y[a] = dot; } for (let a = 0; a < m; a++) { const za = Z[a], ya = y[a]; for (let j = 0; j < D; j++) za[j] += row[j] * ya; } }
+        Q = mgs(Z); }
+      const Sm = Array.from({ length: m }, () => Array(m).fill(0));
+      for (const row of Xc) { for (let a = 0; a < m; a++) { const qa = Q[a]; let dot = 0; for (let j = 0; j < D; j++) dot += row[j] * qa[j]; y[a] = dot; } for (let a = 0; a < m; a++) for (let b = a; b < m; b++) Sm[a][b] += y[a] * y[b] / Math.max(1, n - 1); }
+      for (let a = 0; a < m; a++) for (let b = 0; b < a; b++) Sm[a][b] = Sm[b][a];
+      const e = jacobiEig(Sm);
+      for (let t = 0; t < k; t++) { const c = e.vectors[t], v = new Array(D).fill(0); for (let a = 0; a < m; a++) { const qa = Q[a], ca = c[a]; for (let j = 0; j < D; j++) v[j] += ca * qa[j]; } values.push(e.values[t]); axes.push(v); }
       values.push(Math.max(0, tot - values.reduce((a, b) => a + b, 0))); }
     // sign convention (determinism across the Jacobi / power-iteration paths): largest-|component| positive
     axes = axes.map(a => { let m = 0; for (let j = 1; j < a.length; j++) if (Math.abs(a[j]) > Math.abs(a[m])) m = j; return a[m] < 0 ? a.map(x => -x) : a; });
@@ -650,6 +661,28 @@ var PM = (function () {
       gaps: gaps.map(x => +x.toFixed(5)),
       pc12: null,                                 // undefined on a frozen frame; see gate_rank / v2
       v2: +v2.toFixed(5), gate_rank,
+      // dimension x structure at this d (paper 4; FocalBounds.structure_sign_identity / gate_structure_independent).
+      // DIMENSION is the fixed Lean section 4 gate above, unchanged. STRUCTURE reads the same V2 against the
+      // fixed-margin null below at the same d: rhat_null = 2/E0, delta_rhat = rhat_null - rhat >= 0 iff V2 >= E0.
+      dimension_structure: {
+        version: "dimension-structure/1",
+        d,
+        dimension: { v2: +v2.toFixed(6), rhat: identity_applicable ? +rhat.toFixed(4) : null, gate_pass: gate_pass },
+        structure: {
+          null_v2_mean: +E0.toFixed(6), null_v2_sd: +SD0.toFixed(6),
+          rhat_null: E0 > 0 ? +(2 / E0).toFixed(4) : null,
+          delta_rhat: E0 > 0 && identity_applicable ? +(2 / E0 - 2 / v2).toFixed(4) : null,
+          z: zV2 === null ? null : +zV2.toFixed(2),
+          structure: !admissible ? "not-tested (degenerate null)" : verdict.startsWith("excluded") ? (v2 > E0 ? "above-null" : "below-null") : "within-null"
+        },
+        readout: !identity_applicable ? "not-applicable (degenerate coordinate)"
+          : !admissible ? (gate_pass ? "low-dimensional by the gate; structure not tested" : "high-dimensional by the gate; structure not tested")
+          : verdict.startsWith("excluded")
+            ? (v2 > E0 ? (gate_pass ? "low-dimensional and structured" : "structured, above the focus dimension")
+                       : (gate_pass ? "low-dimensional, more dispersed than the null" : "high-dimensional, more dispersed than the null"))
+            : (gate_pass ? "low-dimensional, structure not resolved from the null" : "high-dimensional, structure not resolved from the null"),
+        note: "the gate reads dimension (where to focus); the null reads structure at the same d; neither implies the other. Per-prefix profile: POST /api/map/focal"
+      },
       sector_counts,
       occupied_sectors: sector_counts.filter(c => c > 0).length,
       isolated: isolatedCount(pts),
