@@ -15,6 +15,14 @@ kargs = [
   "selinux=0",
   # Preload OP-TEE and fTPM drivers as early as possible in initramfs.
   "rd.driver.pre=tee,optee,tpm_ftpm_tee",
+  # Force kernel IMA TCB measurement policy on with SHA-256 digests from early
+  # boot (even when kernel init_ima runs before modular optee/tpm_ftpm_tee load
+  # and enters TPM-bypass mode, IMA still hashes and records all executed
+  # binaries, mmap'd libraries, kernel modules, firmware, and root-read files
+  # in /sys/kernel/security/ima/ascii_runtime_measurements; /usr execution
+  # appraisal is enforced by composefs + fs-verity).
+  "ima_policy=tcb",
+  "ima_hash=sha256",
   # Ensure hidraw devices are available; no module parameters needed,
   # hidraw is built-in or auto-loaded by udev.
   # fido2-device=auto is set in /etc/crypttab by yubiOS-enroll-luks,
