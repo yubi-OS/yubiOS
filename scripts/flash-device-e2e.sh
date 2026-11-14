@@ -458,6 +458,20 @@ optee
 tpm_ftpm_tee
 MODCONF
     sudo chmod 0644 "$deploy_dir/etc/modules-load.d/yubiOS-optee-ftpm.conf"
+    sudo mkdir -p "$deploy_dir/etc/systemd/system/yubiOS-enroll.service.d"
+    sudo tee "$deploy_dir/etc/systemd/system/yubiOS-enroll.service.d/10-console-order.conf" >/dev/null <<'ENROLL_DROPIN'
+[Unit]
+After=local-fs.target systemd-logind.service systemd-user-sessions.service network.target sshd.service
+Wants=getty-pre.target
+Before=getty-pre.target getty.target serial-getty@ttyS2.service serial-getty@ttyAMA0.service serial-getty@ttyS0.service getty@tty1.service kmsconvt@tty1.service
+
+[Service]
+TTYPath=/dev/console
+TTYReset=yes
+TTYVHangup=yes
+ExecStartPre=/bin/sleep 5
+ENROLL_DROPIN
+    sudo chmod 0644 "$deploy_dir/etc/systemd/system/yubiOS-enroll.service.d/10-console-order.conf" 
     if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
       sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$deploy_dir/var/lib/yubiOS/secureboot/" 2>/dev/null || true
     fi

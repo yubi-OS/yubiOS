@@ -4,9 +4,13 @@
 
 [Unit]
 Description=yubiOS YubiKey Enrollment Wizard (First Boot)
-After=local-fs.target systemd-logind.service
-Wants=pcscd.service
+After=local-fs.target systemd-logind.service systemd-user-sessions.service network.target sshd.service
+Wants=pcscd.service getty-pre.target
 After=pcscd.service
+# Order before getty-pre.target and all console/serial gettys so agetty does not
+# start on /dev/console (/dev/ttyS2 or /dev/tty1) mid-wizard, call vhangup()
+# (SIGHUP), or steal input from enroll.sh. Once enroll.sh finishes, getty starts.
+Before=getty-pre.target getty.target serial-getty@ttyS2.service serial-getty@ttyAMA0.service serial-getty@ttyS0.service getty@tty1.service kmsconvt@tty1.service
 # ADR-024 / OMN-18: run the first-boot CHIPSEC platform check first and gate
 # enrollment on its result. Wants= (not Requires=) so a skipped or failed
 # CHIPSEC unit never takes enrollment down with it; the gate below decides.
@@ -21,6 +25,8 @@ ConditionSecurity=measured-os
 Type=oneshot
 RemainAfterExit=yes
 TTYPath=/dev/console
+TTYReset=yes
+TTYVHangup=yes
 StandardInput=tty
 StandardOutput=tty
 StandardError=tty
@@ -29,6 +35,9 @@ StandardError=tty
 # exit 1 skips the unit, so the ExecStartPost= .enrolled marker is not written
 # and enrollment stays pending until the firmware finding is resolved.
 ExecCondition=/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh
+# Settle delay so late kernel/NIC link messages finish printing before the
+# wizard clears the console and reads stdin.
+ExecStartPre=/bin/sleep 5
 ExecStart=/usr/lib/yubiOS/enroll.sh
 ExecStartPost=/bin/mkdir -p /var/lib/yubiOS
 ExecStartPost=/bin/touch /var/lib/yubiOS/.enrolled
