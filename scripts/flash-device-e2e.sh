@@ -373,58 +373,81 @@ provision_sd_directly() {
   p1="$(part_dev "$dev" 1)"
   p2="$(part_dev "$dev" 2)"
 
-  log "Stage 4: Partitioning & provisioning $dev ($board_name) directly — no intermediate raw image copy"
+  log "Stage 4: Provisioning $dev ($board_name) directly — no intermediate raw image copy"
   guard_block_device "$dev"
 
-  sudo sfdisk --wipe always "$dev" <<'EOF'
+  NEED_FULL_INSTALL=1
+  if [ "${FLASH_FORCE_REINSTALL:-false}" != "true" ] && [ -b "$p1" ] && [ -b "$p2" ]; then
+    if [ "$(lsblk -dn -o LABEL "$p2" 2>/dev/null | tr -d ' ')" = "yubiOS-root" ]; then
+      sudo mkdir -p "$MNT_DIR"
+      if sudo mount -o noatime,nobarrier "$p2" "$MNT_DIR" 2>/dev/null; then
+        sudo install -d -m 0755 "$MNT_DIR/boot"
+        if sudo mount "$p1" "$MNT_DIR/boot" 2>/dev/null; then
+          if [ -n "$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' 2>/dev/null | head -n1)" ] && [ -n "$(sudo find "$MNT_DIR/composefs/images" -mindepth 1 -maxdepth 1 2>/dev/null | head -n1)" ]; then
+            echo "Existing yubiOS composefs installation detected on $dev ($p1 + $p2); updating /etc, UKI signatures, and sector-64 firmware in place!"
+            NEED_FULL_INSTALL=0
+          else
+            sudo umount "$MNT_DIR/boot" 2>/dev/null || true
+            sudo umount "$MNT_DIR" 2>/dev/null || true
+          fi
+        else
+          sudo umount "$MNT_DIR" 2>/dev/null || true
+        fi
+      fi
+    fi
+  fi
+
+  if [ "$NEED_FULL_INSTALL" = "1" ]; then
+    sudo sfdisk --wipe always "$dev" <<'EOF'
 label: gpt
 first-lba: 32768
 start=32768, size=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name="ESP"
 size=8G, type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
 EOF
-  sudo partprobe "$dev" 2>/dev/null || sudo partx --update "$dev" 2>/dev/null || true
-  sudo udevadm settle
-  sleep 2
-  [ -b "$p1" ] || die "ESP partition $p1 did not appear on $dev"
-  [ -b "$p2" ] || die "Root partition $p2 did not appear on $dev"
+    sudo partprobe "$dev" 2>/dev/null || sudo partx --update "$dev" 2>/dev/null || true
+    sudo udevadm settle
+    sleep 2
+    [ -b "$p1" ] || die "ESP partition $p1 did not appear on $dev"
+    [ -b "$p2" ] || die "Root partition $p2 did not appear on $dev"
 
-  sudo "${THROTTLE[@]}" mkfs.vfat -F 32 -n EFI "$p1"
-  sudo "${THROTTLE[@]}" mkfs.ext4 -F -q -O verity,^has_journal -E lazy_itable_init=1 -L yubiOS-root "$p2"
-  sudo mkdir -p "$MNT_DIR"
-  sudo mount -o noatime,nobarrier "$p2" "$MNT_DIR"
-  sudo install -d -m 0755 "$MNT_DIR/boot"
-  sudo mount "$p1" "$MNT_DIR/boot"
+    sudo "${THROTTLE[@]}" mkfs.vfat -F 32 -n EFI "$p1"
+    sudo "${THROTTLE[@]}" mkfs.ext4 -F -q -O verity,^has_journal -E lazy_itable_init=1 -L yubiOS-root "$p2"
+    sudo mkdir -p "$MNT_DIR"
+    sudo mount -o noatime,nobarrier "$p2" "$MNT_DIR"
+    sudo install -d -m 0755 "$MNT_DIR/boot"
+    sudo mount "$p1" "$MNT_DIR/boot"
 
-  log "Running bootc install to-filesystem directly onto $dev ($board_name)"
-  PRELOAD_ENV=()
-  if command -v gcc >/dev/null 2>&1; then
-    cat > "$TMPDIR/nofsync.c" <<'EOF'
+    log "Running bootc install to-filesystem directly onto $dev ($board_name)"
+    PRELOAD_ENV=()
+    if command -v gcc >/dev/null 2>&1; then
+      cat > "$TMPDIR/nofsync.c" <<'EOF'
 int fsync(int fd) { (void)fd; return 0; }
 int fdatasync(int fd) { (void)fd; return 0; }
 int syncfs(int fd) { (void)fd; return 0; }
 void sync(void) {}
 EOF
-    if gcc -shared -fPIC -O2 "$TMPDIR/nofsync.c" -o "$TMPDIR/libnofsync.so" 2>/dev/null; then
-      PRELOAD_ENV=(-e LD_PRELOAD=/var/tmp/libnofsync.so)
+      if gcc -shared -fPIC -O2 "$TMPDIR/nofsync.c" -o "$TMPDIR/libnofsync.so" 2>/dev/null; then
+        PRELOAD_ENV=(-e LD_PRELOAD=/var/tmp/libnofsync.so)
+      fi
     fi
+    sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged --pid=host --ipc=host \
+      --security-opt label=type:unconfined_t \
+      -v /var/lib/containers:/var/lib/containers \
+      -v "$TMPDIR:/var/tmp" \
+      -e TMPDIR=/var/tmp \
+      "${PRELOAD_ENV[@]}" \
+      -v /dev:/dev \
+      -v "$MNT_DIR:/target" \
+      "$RESOLVED_OS" \
+      bootc install to-filesystem \
+        --source-imgref="containers-storage:${RESOLVED_OS}" \
+        --composefs-backend \
+        --disable-selinux \
+        --bootloader=systemd \
+        --root-mount-spec="" \
+        --skip-finalize \
+        /target
   fi
-  sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman run --rm --privileged --pid=host --ipc=host \
-    --security-opt label=type:unconfined_t \
-    -v /var/lib/containers:/var/lib/containers \
-    -v "$TMPDIR:/var/tmp" \
-    -e TMPDIR=/var/tmp \
-    "${PRELOAD_ENV[@]}" \
-    -v /dev:/dev \
-    -v "$MNT_DIR:/target" \
-    "$RESOLVED_OS" \
-    bootc install to-filesystem \
-      --source-imgref="containers-storage:${RESOLVED_OS}" \
-      --composefs-backend \
-      --disable-selinux \
-      --bootloader=systemd \
-      --root-mount-spec="" \
-      --skip-finalize \
-      /target
 
   entry="$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
   [ -n "$entry" ] || die "No BLS entry created under $MNT_DIR/boot/loader/entries"
@@ -466,12 +489,17 @@ Wants=getty-pre.target
 Before=getty-pre.target getty.target serial-getty@ttyS2.service serial-getty@ttyAMA0.service serial-getty@ttyS0.service getty@tty1.service kmsconvt@tty1.service
 
 [Service]
+Environment="PATH=/usr/lib/systemd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 TTYPath=/dev/console
 TTYReset=yes
 TTYVHangup=yes
 ExecStartPre=/bin/sleep 5
 ENROLL_DROPIN
-    sudo chmod 0644 "$deploy_dir/etc/systemd/system/yubiOS-enroll.service.d/10-console-order.conf" 
+    sudo chmod 0644 "$deploy_dir/etc/systemd/system/yubiOS-enroll.service.d/10-console-order.conf"
+    sudo mkdir -p "$deploy_dir/etc/profile.d"
+    printf 'export PATH="$PATH:/usr/lib/systemd"\n' | sudo tee "$deploy_dir/etc/profile.d/yubios-path.sh" >/dev/null
+    sudo chmod 0644 "$deploy_dir/etc/profile.d/yubios-path.sh"
+    sudo rm -f "$deploy_dir/var/lib/yubiOS/.enrolled" "$deploy_dir/var/lib/yubiOS/.sb-enrolled" 
     if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
       sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$deploy_dir/var/lib/yubiOS/secureboot/" 2>/dev/null || true
     fi

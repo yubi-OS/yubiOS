@@ -21,6 +21,7 @@ set -euo pipefail
 # can run unprivileged without a YubiKey or a mounted efivarfs.
 # shellcheck source=usr/lib/yubiOS/lib.sh
 source "${YUBIOS_LIB_SH:-/usr/lib/yubiOS/lib.sh}"
+export PATH="$PATH:/usr/lib/systemd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 PHASE="${1:-all}"
 ESP="${YUBIOS_ESP:-/efi}"

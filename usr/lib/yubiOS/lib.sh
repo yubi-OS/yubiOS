@@ -3,6 +3,7 @@
 # yubiOS shared library: detection, logging, gating functions
 
 # SC2034: export so sourcing scripts can use these constants
+export PATH="$PATH:/usr/lib/systemd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export YUBIOS_STATE_DIR=/var/lib/yubiOS
 export YUBICOS_U2F_KEYS=/etc/yubico/u2f_keys
 export YUBIOS_PIV_SLOT="${YUBIOS_PIV_SLOT:-9a}"   # PIV Authentication slot 9a for Secure Boot (ADR-002)
