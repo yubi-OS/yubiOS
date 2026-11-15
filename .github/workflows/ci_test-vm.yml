@@ -236,7 +236,7 @@ jobs:
           # workaround. Contract + removal recipe:
           # refs/qemu-zboot-version-gate-audit-2026-11-12.md
           QEMU_ZSTD_COMMIT: 005c61c0ef6f6ae615283440b4bb7be51b2c6ddd # qemu/qemu v11.1.3, see PINNED.md
-          QEMU_ZSTD_VERSION: '11.1.2'
+          QEMU_ZSTD_VERSION: '11.1.3'
           QEMU_ZBOOT_FLOOR: '11.0'
           QEMU_ZBOOT_PROBE_SECS: '5'
           YUBIOS_IMAGE: ${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}

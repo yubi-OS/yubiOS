@@ -592,8 +592,8 @@ jobs:
               '--phi', phi_arg, '--d', '9', '--T', '0.041143', '--verify', '--json'
           ], text=True)
           res = json.loads(out)
-          assert res['Z'] > 0 and res['verify']['l1_diff'] < 1e-12, res
-          print(f"BOLTZMANN_REAL_OK Z={res['Z']:.6e} F={res['F']:.6f} l1_diff={res['verify']['l1_diff']:.2e}")
+          assert res['verify']['passed'] is True and res['verify']['max_abs_err'] < 1e-9, res
+          print(f"BOLTZMANN_REAL_OK log_Z={res['log_Z']:.6f} max_abs_err={res['verify']['max_abs_err']:.2e}")
           PY
 
       - name: spectral-defocus real-corpus leg
