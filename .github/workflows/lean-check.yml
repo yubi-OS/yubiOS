@@ -5,8 +5,10 @@ on:
     branches: ['main', 'lean-check-*']
     paths:
       - 'papers/data/lean/**'
+      - 'papers/scripts/**'
       - 'tools/**'
       - '.github/workflows/lean-check.yml'
+      - '.github/workflows/lean-run.yml'
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
@@ -15,6 +17,7 @@ on:
         description: 'Why this check is being run'
         required: false
         default: 'manual lean check'
+        type: string
 
 jobs:
   check:
@@ -357,6 +360,15 @@ jobs:
       - name: Resolve rayleigh/1 measurement-side claims (exact components/nullity, witness bound, indicator=cut)
         run: python3 papers/data/lean/verify_rayleigh_claims.py
 
+      - name: Zernike caustics — F4 caustic classification (disassembled from zernike-caustics.yml)
+        run: python3 papers/scripts/f4_caustic_classify.py --mode classify
+
+      - name: Zernike lens — Slot 1 aberrated Gap D lens (disassembled from zernike-lens.yml)
+        run: python3 papers/scripts/gapD_zernike_lens.py --seed 20260824
+
+      - name: Phonon follow-ups — five phonon-bridge follow-ups (disassembled from phonon-followups.yml)
+        run: python3 papers/scripts/phonon_followups.py --only-5b
+
   verify-tools:
     runs-on: ubuntu-26.04
     timeout-minutes: 45
@@ -401,6 +413,12 @@ jobs:
 
       - name: spectral-defocus atomicity admission (asserts recorded negative)
         run: python3 tools/spectral-defocus/defocus.py --admit-null --n-null 50
+
+      - name: zernike-spectrum selftest (disassembled from zernike-spectrum.yml)
+        run: python3 tools/zernike-spectrum/zernike.py --selftest
+
+      - name: zernike-spectrum corpus spectrum + admission test (disassembled from zernike-spectrum.yml)
+        run: python3 tools/zernike-spectrum/zernike.py --corpus --zip-path papers/is-this-x-2026-08-12-Final.zip --n-null 10 --trades-per-row 20 --out /tmp/zernike-check.json
 
       - name: injective-mapping selftest
         run: python3 tools/injective-mapping/mapping.py --selftest
@@ -492,3 +510,261 @@ jobs:
           python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
           python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
 
+  run-real-corpus:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install numpy
+        run: python3 -m pip install --quiet numpy
+
+      - name: Extract real corpus from evidence bundle
+        run: |
+          python3 - <<'PY'
+          import zipfile, json
+          z = zipfile.ZipFile('papers/is-this-x-2026-08-12-Final.zip')
+          with z.open('is-this-x-2026-08-12/data/real/per_row_coverage_v3.json') as f:
+              j = json.load(f)
+          assert len(j['rows']) == 2286 and len(j['rows'][0]['covered']) == 9
+          open('/tmp/per_row_coverage_v3.json', 'w').write(json.dumps(j))
+          print('EXTRACT_OK 2286x9')
+          PY
+
+      - name: point-map numerical, API and archive regressions (parity with lean-check)
+        run: |
+          node --version
+          node tools/point-map/test-pointmap.js
+          node tools/point-map/test-api.mjs
+          node --test tools/point-map/test-tar.mjs
+          node tools/point-map/test-math.mjs
+          node tools/point-map/test-preview.mjs
+          node tools/point-map/test-storage.mjs
+          node tools/point-map/test-radius.mjs
+          node tools/point-map/test-radius-extra.mjs
+          node tools/point-map/test-limits.mjs
+          node tools/point-map/test-focal-point.mjs
+          node tools/point-map/test-dimension-structure.mjs
+          node tools/point-map/test-control-outcomes.mjs
+          node tools/point-map/test-axis-consistency.mjs
+          node tools/point-map/test-placement.mjs
+          node tools/point-map/test-rayleigh.mjs
+          node tools/point-map/test-admission.mjs
+          node tools/point-map/test-azimuth.mjs
+
+      - name: corpus-auditor on real matrix (reproduce published effect)
+        run: |
+          python3 tools/corpus-auditor/auditor.py --input /tmp/per_row_coverage_v3.json --nsamp 20 --json > /tmp/audit.json
+          python3 - <<'PY'
+          import json
+          j = json.load(open('/tmp/audit.json'))
+          assert abs(j['v2_real'] - 0.7235293731) < 1e-6, j['v2_real']
+          assert j['z'] > 6.0, j['z']
+          assert j['verdict'] == 'SIGNAL', j['verdict']
+          print(f"AUDITOR_REAL_OK v2={j['v2_real']:.10f} z=+{j['z']:.2f} verdict={j['verdict']}")
+          PY
+
+      - name: rsi-descent on real bundle (Lean Delta invariant on real data)
+        run: |
+          python3 tools/rsi-descent/rsi_descent.py --input papers/is-this-x-2026-08-12-Final.zip --max-cycles 1 > /tmp/descent.json
+          python3 - <<'PY'
+          import json
+          j = json.load(open('/tmp/descent.json'))
+          assert j['cumulative_delta'] >= 0.0, j['cumulative_delta']
+          assert 0.0 < j['final_coverage'] <= 1.0
+          print(f"DESCENT_REAL_OK cum_delta=+{j['cumulative_delta']:.4f} coverage={j['final_coverage']:.4f}")
+          PY
+
+      - name: boltzmann-collapse on real empirical Phi(k) ladder (parity with lean-check)
+        run: |
+          python3 - <<'PY'
+          import json, math, subprocess
+          j = json.load(open('/tmp/per_row_coverage_v3.json'))
+          counts = [0] * 10
+          for r in j['rows']:
+              k = sum(int(x) for x in r['covered'])
+              counts[k] += 1
+          n = len(j['rows'])
+          phi = [-math.log((c + 0.5) / (n + 5.0)) for c in counts]
+          phi_arg = ','.join(f'{v:.8f}' for v in phi)
+          out = subprocess.check_output([
+              'python3', 'tools/boltzmann-collapse/collapse.py',
+              '--phi', phi_arg, '--d', '9', '--T', '0.041143', '--verify', '--json'
+          ], text=True)
+          res = json.loads(out)
+          assert res['Z'] > 0 and res['verify']['l1_diff'] < 1e-12, res
+          print(f"BOLTZMANN_REAL_OK Z={res['Z']:.6e} F={res['F']:.6f} l1_diff={res['verify']['l1_diff']:.2e}")
+          PY
+
+      - name: spectral-defocus real-corpus leg
+        run: |
+          python3 tools/spectral-defocus/defocus.py --real-corpus --zip-path papers/is-this-x-2026-08-12-Final.zip --json > /tmp/defocus.json
+          python3 - <<'PY'
+          import json
+          j = json.load(open('/tmp/defocus.json'))
+          assert j['overall_passed'] is True, j
+          print('DEFOCUS_REAL_OK overall_passed=true')
+          PY
+
+      - name: zernike-spectrum corpus admission (non-degenerate coordinates exist)
+        run: |
+          python3 tools/zernike-spectrum/zernike.py --corpus --zip-path papers/is-this-x-2026-08-12-Final.zip --n-null 30 --trades-per-row 20 --out /tmp/zernike.json > /tmp/zernike.log
+          python3 - <<'PY'
+          import json
+          j = json.load(open('/tmp/zernike.json'))
+          adm = j['admission']
+          assert adm['any_admitted'] is True, adm['admitted_j']
+          print(f"ZERNIKE_REAL_OK admitted_j={adm['admitted_j']}")
+          PY
+
+      - name: injective-mapping full-ladder injectivity on real corpus
+        run: |
+          python3 tools/injective-mapping/mapping.py --zip papers/is-this-x-2026-08-12-Final.zip --out /tmp/skill-map.csv --json > /tmp/mapping.json
+          python3 - <<'PY'
+          import json
+          j = json.load(open('/tmp/mapping.json'))
+          assert j['csv_row_count'] == 2286, j['csv_row_count']
+          assert j['csv_unique_slugs'] == 2286, j['csv_unique_slugs']
+          print('MAPPING_REAL_OK 2286/2286 unique keyed rows')
+          PY
+
+      - name: corpus-sonometer level of the real corpus (above detectability floor)
+        run: |
+          python3 - <<'PY'
+          import sys, json, zipfile
+          import numpy as np
+          sys.path.insert(0, 'tools/corpus-sonometer')
+          from sonometer import corpus_level
+          with zipfile.ZipFile('papers/is-this-x-2026-08-12-Final.zip') as z:
+              with z.open('is-this-x-2026-08-12/data/real/per_row_coverage_v3.json') as f:
+                  j = json.load(f)
+          M = np.array([r['covered'] for r in j['rows']], dtype=np.int8)
+          rng = np.random.default_rng(20260822)
+          L, mu, sd = corpus_level(M, draws=12, window=10, rng=rng)
+          assert L > 15.6, f'{L:.2f} dBc is below the +15.6 dBc floor'
+          print(f'SONOMETER_REAL_OK L=+{L:.2f} dBc (floor +15.6, published +21.68)')
+          PY
+
+      - name: spectral-decomposer lens candidates from the real corpus
+        run: |
+          python3 tools/spectral-decomposer/spectral_decomposer.py --input papers/is-this-x-2026-08-12-Final.zip --top-k 2 --json > /tmp/decomposer.json
+          python3 - <<'PY'
+          import json
+          j = json.load(open('/tmp/decomposer.json'))
+          assert j['corpus']['n'] == 2286 and j['corpus']['d'] == 9
+          cands = j['candidates']
+          assert len(cands) >= 1, 'no candidates generated'
+          for c in cands:
+              assert c['verdict'] in {'YES', 'PARTIAL', 'NO'}, c['verdict']
+              for k in ('L_real_dBc', 'L_control_dBc', 'delta_dBc'):
+                  assert k in c['delta'], k
+          print(f"DECOMPOSER_REAL_OK {len(cands)} candidates, verdicts={[c['verdict'] for c in cands]}")
+          PY
+
+      - name: phonon-dispersion real-corpus verification (parity with lean-check)
+        run: python3 tools/phonon-dispersion/phonon.py --selftest
+
+      - name: edge-standard selftest and fixture parity (parity with lean-check)
+        run: |
+          python3 tools/edge-standard/edge_standard.py --selftest
+          node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
+
+      - name: spectral-standard selftest, parity, centroid-walk, and falsification harness (parity with lean-check)
+        run: |
+          python3 tools/spectral-standard/spectral_standard.py --selftest
+          node --test tools/spectral-standard/test_parity_spectral.test.js
+          node --test tools/spectral-standard/test_centroid_parity.test.js
+          PYTHONPATH=tools/spectral-standard \
+            python3 tools/spectral-standard/falsification/harness_spectral.py \
+            --module tools/spectral-standard/falsification/harness_adapter.py \
+            --selftest
+
+      - name: lens-standard selftest, falsification harness, and fixture parity (parity with lean-check)
+        run: |
+          python3 tools/lens-standard/lens_standard.py --selftest
+          python3 tools/lens-standard/falsification/harness_lens.py --selftest
+          node --test tools/lens-standard/test_parity_lens.test.js
+
+      - name: visco-instruments fixture verification (parity with lean-check)
+        run: python3 tools/visco-instruments/verify_visco.py
+
+      - name: forecast-standard v3 selftest and recorded-corpus reproduction (parity with lean-check)
+        run: |
+          set -euo pipefail
+          python3 tools/forecast-standard/v3/forecast_ets.py --selftest > /tmp/forecast-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/forecast-selftest.json')); expected={'ok': False, 'failing_gates': ['G2'], 'unverified_gates': ['G5']}; assert d['summary'] == expected, 'forecast gate report drifted: %s' % d['summary']; print('FORECAST_SELFTEST_OK')"
+          python3 tools/forecast-standard/v3/harness_v3.py validate /tmp/forecast-validate.json \
+            --v1 tools/forecast-standard/forecast_ets.py \
+            --v2 tools/forecast-standard/v2/forecast_ets.py
+          python3 -c "import json; d=json.load(open('/tmp/forecast-validate.json')); bad=[k for k,v in d['versions'].items() if not v['reproduced']]; assert not bad, 'recorded counts not reproduced for: %s' % bad; print('FORECAST_VALIDATE_OK', {k: v['reproduced'] for k, v in d['versions'].items()})"
+
+      - name: timesfm-clairic-clef cascade verification (parity with lean-check)
+        run: |
+          set -euo pipefail
+          python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
+
+  run-real-statements:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: tautology-discerner over the real docs corpus
+        run: |
+          python3 - <<'PY'
+          import sys, re, glob, random
+          from collections import Counter
+          sys.path.insert(0, 'tools/tautology-discerner')
+          from tautology_discerner import classify, token_permutation_null
+
+          def extract_sentences(text):
+              text = re.sub(r'```.*?```', ' ', text, flags=re.DOTALL)
+              text = re.sub(r'^\s*\|.*\|\s*$', ' ', text, flags=re.MULTILINE)
+              text = re.sub(r'^#+ .*$', ' ', text, flags=re.MULTILINE)
+              text = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', text)
+              text = re.sub(r'`[^`]*`', ' ', text)
+              text = re.sub(r'<[^>]+>', ' ', text)
+              out = []
+              for raw in re.split(r'(?<=[.!?])\s+', text):
+                  s = ' '.join(raw.split())
+                  words = s.split()
+                  if not (6 <= len(words) <= 60):
+                      continue
+                  if not s[:1].isupper() or s[-1] not in '.!?':
+                      continue
+                  alpha = sum(c.isalpha() or c.isspace() for c in s) / len(s)
+                  if alpha < 0.8:
+                      continue
+                  out.append(s)
+              return out
+
+          files = sorted(glob.glob('docs/*.md'))
+          assert len(files) >= 15, f'only {len(files)} docs files found'
+          sentences = []
+          for path in files:
+              sentences.extend(extract_sentences(open(path, encoding='utf-8').read()))
+          assert len(sentences) >= 500, f'only {len(sentences)} sentences extracted'
+
+          verdicts = [classify(s)['verdict'] for s in sentences]
+          valid = {'Tautology', 'Falsifiable', 'Paradox', 'Undecidable'}
+          assert all(v in valid for v in verdicts)
+          dist = Counter(verdicts)
+          n = len(sentences)
+          fals_share = dist.get('Falsifiable', 0) / n
+          assert 0.30 <= fals_share <= 0.90, f'Falsifiable share {fals_share:.2%} outside [30%, 90%]'
+          assert dist.get('Paradox', 0) == 0, f"docs contain {dist['Paradox']} liar-paradoxes?"
+
+          verdicts2 = [classify(s)['verdict'] for s in sentences]
+          assert verdicts == verdicts2, 'classifier is not deterministic'
+
+          rng = random.Random(20260825)
+          sample = rng.sample([s for s, v in zip(sentences, verdicts) if v == 'Falsifiable'], 5)
+          for s in sample:
+              null = token_permutation_null(s, n_draws=100, seed=20260825)
+              assert null['invariant_under_fixed_refuter_bag'], f'invariance broke on: {s[:80]}'
+
+          summary = ', '.join(f'{k}={v} ({v/n:.1%})' for k, v in sorted(dist.items()))
+          print(f'DOCS_CORPUS_OK {len(files)} files, {n} sentences: {summary}')
+          print('INVARIANCE_OK fixed-refuter-bag held on 5 sampled real sentences')
+          PY
