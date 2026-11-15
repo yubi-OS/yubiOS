@@ -1,0 +1,509 @@
+{
+  "schema": "wayfinder-scope/1",
+  "lean_file": "papers/data/lean/LifeBounds.lean",
+  "toolchain": "leanprover/lean4:v4.33.0",
+  "dependencies": "core Lean 4 only (no mathlib, no Batteries, no external imports)",
+  "generated_for_branch": "lean-check-life-2026-11-15",
+  "gate_reuse": "Checked by the existing, unmodified papers/data/lean/verify_wayfinder_axioms.py, invoked with --axioms <captured kernel output> --manifest papers/data/lean/life-scope.json, and by the unmodified check_forbidden_tokens.py, check_lean_axioms.py (enumerate mode, --require-coverage) and leanchecker --fresh replay. No existing gate, test, or recorded negative was changed or relaxed to admit this file.",
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "forbidden_axioms": [
+    "sorryAx"
+  ],
+  "axiom_policy": "Every declaration listed in `theorems` must appear in the `#print axioms` output of the pinned kernel run. Its reported axiom set must be a subset of `permitted_axioms` (the three core Lean assumptions). Any other axiom, and in particular `sorryAx`, fails the gate. A missing declaration fails the gate. The gate parses the kernel's printed output; it does not grep source comments.",
+  "code_convention": "lifeRule c s encodes B3/S23; lifeScore c s = 2*s + b2n c; lifeInterval tests 5 <= lifeScore <= 7; outerTotalisticCode = 224. 2D finite grids are List (Int x Int) stepped via stepWindow over mooreOffsets. Mean-field polynomial mfNum p d is scaled by d^9. Supersolid Leggett discriminant, multi-axis D4 light-cone coordinates, discrete glider refractive index, and cognitive modularity/teleological MDL bounds are expressed in exact integer/natural arithmetic.",
+  "theorems": [
+    {
+      "name": "LifeBounds.wolfram_code_224",
+      "status": "lean-proved",
+      "statement": "wolfram_code_224",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.wolfram_code_224 at line 120",
+      "statement_sha256": "62d4b6a8e973be60867b85f1992add1b77f3a2330591631edddb3fd5f95338d9"
+    },
+    {
+      "name": "LifeBounds.life_interval_all_moore",
+      "status": "lean-proved",
+      "statement": "life_interval_all_moore",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_interval_all_moore at line 123",
+      "statement_sha256": "1b1822ee6c8266447c03419cdfd96fd9b6905d19559edb278af8fda487da768c"
+    },
+    {
+      "name": "LifeBounds.life_ninesum_all_moore",
+      "status": "lean-proved",
+      "statement": "life_ninesum_all_moore",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_ninesum_all_moore at line 127",
+      "statement_sha256": "db1581310565160ecef397eee73ad05a976c9b4b32f724af792dc0f2db0d64c8"
+    },
+    {
+      "name": "LifeBounds.life_cubic_roots_all_moore",
+      "status": "lean-proved",
+      "statement": "life_cubic_roots_all_moore",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_cubic_roots_all_moore at line 131",
+      "statement_sha256": "bc8742460d0a9bc11392f11e223702283e09e6d7ce8c75b28ac6463a4f0745d1"
+    },
+    {
+      "name": "LifeBounds.life_lagrange_all_moore",
+      "status": "lean-proved",
+      "statement": "life_lagrange_all_moore",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_lagrange_all_moore at line 135",
+      "statement_sha256": "fc953c26c0377619479bfea1bb27829d8afb2b4d6c914c4b7aa062f9ad8ac609"
+    },
+    {
+      "name": "LifeBounds.life_bitmask_all_moore",
+      "status": "lean-proved",
+      "statement": "life_bitmask_all_moore",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_bitmask_all_moore at line 140",
+      "statement_sha256": "80d9c7c95b75eeafb0e291b913b7db8c4fc56bf16920da83702448a5a2b50382"
+    },
+    {
+      "name": "LifeBounds.life_underpop_score",
+      "status": "lean-proved",
+      "statement": "life_underpop_score",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_underpop_score at line 145",
+      "statement_sha256": "a679e2b299179a2a9957dab259b992b25a11af0eb7c414a44c4da9a06620c915"
+    },
+    {
+      "name": "LifeBounds.life_overpop_score",
+      "status": "lean-proved",
+      "statement": "life_overpop_score",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_overpop_score at line 152",
+      "statement_sha256": "85c58b3ac17385e6800840a56c610d48751dd0c8022903d427ec476ac8d0d22f"
+    },
+    {
+      "name": "LifeBounds.life_birth_score",
+      "status": "lean-proved",
+      "statement": "life_birth_score",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_birth_score at line 159",
+      "statement_sha256": "1d07f7fa75f191e258c41e9043dfde6bf1a91c7cbe4d1a666d39245b386b757f"
+    },
+    {
+      "name": "LifeBounds.life_survival_score",
+      "status": "lean-proved",
+      "statement": "life_survival_score",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.life_survival_score at line 165",
+      "statement_sha256": "9ba0b61cdc7a2e314a689e37e950638f609c494734a2cc8d969c2a0c9c16908f"
+    },
+    {
+      "name": "LifeBounds.state_space_3x3_card",
+      "status": "lean-proved",
+      "statement": "state_space_3x3_card",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.state_space_3x3_card at line 173",
+      "statement_sha256": "053476d8e9d8d355f1c0cdd11b658cfb5734a6a2612b87f4727d7f71f5fca00e"
+    },
+    {
+      "name": "LifeBounds.burnside_3x3_d4_sum",
+      "status": "lean-proved",
+      "statement": "burnside_3x3_d4_sum",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.burnside_3x3_d4_sum at line 176",
+      "statement_sha256": "0863c8d492a64307fb92986a4336f8cad27825870d95a7c02157ff045699d370"
+    },
+    {
+      "name": "LifeBounds.burnside_3x3_d4_classes",
+      "status": "lean-proved",
+      "statement": "burnside_3x3_d4_classes",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.burnside_3x3_d4_classes at line 180",
+      "statement_sha256": "63f8fde8b6ce4f36dcfae2098b4f97c9e69f0486445a38efb0ad03caddb305cd"
+    },
+    {
+      "name": "LifeBounds.wolfram_3x3_outcome_partition",
+      "status": "lean-proved",
+      "statement": "wolfram_3x3_outcome_partition",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.wolfram_3x3_outcome_partition at line 184",
+      "statement_sha256": "3b29feef8091067a099edfe98cdaec03930fea06ee24d239955e4ff8dd8ec725"
+    },
+    {
+      "name": "LifeBounds.interaction_radius_sq",
+      "status": "lean-proved",
+      "statement": "interaction_radius_sq",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.interaction_radius_sq at line 188",
+      "statement_sha256": "13d005e6b819a05b8848bdfa67c5c21c2f9d5b00858c47dec2254cae118148b7"
+    },
+    {
+      "name": "LifeBounds.vacuum_still_life",
+      "status": "lean-proved",
+      "statement": "vacuum_still_life",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.vacuum_still_life at line 235",
+      "statement_sha256": "1ff981cc1023fab62315e35697eeadea004c9f136bbcea9f8635e4a6501ce238"
+    },
+    {
+      "name": "LifeBounds.block_still_life",
+      "status": "lean-proved",
+      "statement": "block_still_life",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.block_still_life at line 238",
+      "statement_sha256": "68f5c9cb34d40b1d75b950d16ef7fd566080f593537728f5106e9c487f9f8566"
+    },
+    {
+      "name": "LifeBounds.beehive_still_life",
+      "status": "lean-proved",
+      "statement": "beehive_still_life",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.beehive_still_life at line 241",
+      "statement_sha256": "8a79a3603fe62dba14a95f590d90d13208aca8fe6a0310a137c35a917c353942"
+    },
+    {
+      "name": "LifeBounds.eater1_still_life",
+      "status": "lean-proved",
+      "statement": "eater1_still_life",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.eater1_still_life at line 244",
+      "statement_sha256": "31fdea3cc6bb14cc29143e6811bb20b86a434e107066e39cbaa448147fc5af3c"
+    },
+    {
+      "name": "LifeBounds.blinker_step1",
+      "status": "lean-proved",
+      "statement": "blinker_step1",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.blinker_step1 at line 247",
+      "statement_sha256": "62596435d7efbdb564d35750c6a96bb8a2c65cb15eba24c1086f8d5c4edc1eb7"
+    },
+    {
+      "name": "LifeBounds.blinker_step2",
+      "status": "lean-proved",
+      "statement": "blinker_step2",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.blinker_step2 at line 250",
+      "statement_sha256": "a85af5a3b36f3efd04a08cb31269093fa2965122a2bb204d877f8b01a0bcf1eb"
+    },
+    {
+      "name": "LifeBounds.glider_period4_translates",
+      "status": "lean-proved",
+      "statement": "glider_period4_translates",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.glider_period4_translates at line 253",
+      "statement_sha256": "509adf7fb8c7b532e439f7c6f0e46f1d5abe7bf353d7251422720ebc2581c3b0"
+    },
+    {
+      "name": "LifeBounds.glider_bipartite_color_invariant",
+      "status": "lean-proved",
+      "statement": "glider_bipartite_color_invariant",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.glider_bipartite_color_invariant at line 257",
+      "statement_sha256": "8fa41f764488a2337b9c64803b9cecff4ea856b620df51d0addaca01ab425d54"
+    },
+    {
+      "name": "LifeBounds.mf_binomial_weights",
+      "status": "lean-proved",
+      "statement": "mf_binomial_weights",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.mf_binomial_weights at line 269",
+      "statement_sha256": "3f9c71b8dfa6536556636f9db0784279d7f060e18855b967d8543dd5f6b1c498"
+    },
+    {
+      "name": "LifeBounds.mf_coeff_identity",
+      "status": "lean-proved",
+      "statement": "mf_coeff_identity",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.mf_coeff_identity at line 273",
+      "statement_sha256": "51e1d9219bb4c7e266ffff1c3612e73ed6aae5ccc694328e5065f1d1b6b8c0ef"
+    },
+    {
+      "name": "LifeBounds.mf_vacuum_fixed_point",
+      "status": "lean-proved",
+      "statement": "mf_vacuum_fixed_point",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.mf_vacuum_fixed_point at line 279",
+      "statement_sha256": "c64adaf45e7509b7a4fb9ff9b6da826e14e62bd1097d9734a1ca09a99c409c7b"
+    },
+    {
+      "name": "LifeBounds.mf_overpop_full_extinct",
+      "status": "lean-proved",
+      "statement": "mf_overpop_full_extinct",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.mf_overpop_full_extinct at line 284",
+      "statement_sha256": "f1156ab4c281051b072d5d9f612d87cc7612de29eab186926694aad0fefa1aa3"
+    },
+    {
+      "name": "LifeBounds.mf_fixed_point_brackets",
+      "status": "lean-proved",
+      "statement": "mf_fixed_point_brackets",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.mf_fixed_point_brackets at line 292",
+      "statement_sha256": "67081acc29945f2f1d62093d51f2f2afb6984cbd841ee9157f0e3d1d9a2fce35"
+    },
+    {
+      "name": "LifeBounds.lightcone_side_step",
+      "status": "lean-proved",
+      "statement": "lightcone_side_step",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.lightcone_side_step at line 302",
+      "statement_sha256": "f47db773a2d357b635c8edadecdef2c225bdfdb9a21f11c8d66265e6018eac63"
+    },
+    {
+      "name": "LifeBounds.lightcone_area_quadratic",
+      "status": "lean-proved",
+      "statement": "lightcone_area_quadratic",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.lightcone_area_quadratic at line 309",
+      "statement_sha256": "e4316d81b102c9e072b06674b78af2e91425475a61eecacd497a4541c7ca6f7a"
+    },
+    {
+      "name": "LifeBounds.gun_emission_hierarchy",
+      "status": "lean-proved",
+      "statement": "gun_emission_hierarchy",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.gun_emission_hierarchy at line 323",
+      "statement_sha256": "e3f25e3859699f8e2555b69f22ed4fc780f6f269c89b8b2f0bf20e0e5b986616"
+    },
+    {
+      "name": "LifeBounds.hashlife_recursion_step",
+      "status": "lean-proved",
+      "statement": "hashlife_recursion_step",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.hashlife_recursion_step at line 331",
+      "statement_sha256": "3b8e34b6fc83a04c2a93a7ca1bfced98d45366f6d9932a4462006207fd3d757b"
+    },
+    {
+      "name": "LifeBounds.otca_metapixel_scale",
+      "status": "lean-proved",
+      "statement": "otca_metapixel_scale",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.otca_metapixel_scale at line 339",
+      "statement_sha256": "64845ed732dba93b387cc4ccd4ef63afe049851803495d48156be7a051c3e5f8"
+    },
+    {
+      "name": "LifeBounds.diehard_pentate_unfold",
+      "status": "lean-proved",
+      "statement": "diehard_pentate_unfold",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.diehard_pentate_unfold at line 352",
+      "statement_sha256": "c131e204c56c19eaff54e493275b76f0045d0f322e08b9925d1f4f5cd5d9f50f"
+    },
+    {
+      "name": "LifeBounds.supersolid_leggett_disc",
+      "status": "lean-proved",
+      "statement": "supersolid_leggett_disc",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.supersolid_leggett_disc at line 359",
+      "statement_sha256": "c05a5bba733904513c5a824b7d161d7fcc935a81dced2e105cf374738f87ed72"
+    },
+    {
+      "name": "LifeBounds.supersolid_leggett_strict_of_modulated",
+      "status": "lean-proved",
+      "statement": "supersolid_leggett_strict_of_modulated",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.supersolid_leggett_strict_of_modulated at line 373",
+      "statement_sha256": "4aafa82ac2c453539c513699651207a9af64189ce5902ca864fd0612bce2dd8d"
+    },
+    {
+      "name": "LifeBounds.multiaxis_cardinal_from_lightcone",
+      "status": "lean-proved",
+      "statement": "multiaxis_cardinal_from_lightcone",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.multiaxis_cardinal_from_lightcone at line 391",
+      "statement_sha256": "098a37d24cb0812b0bb76ddf6c54ced4541d185b75c20b699ea863d997e19fcb"
+    },
+    {
+      "name": "LifeBounds.multiaxis_norm_doubling",
+      "status": "lean-proved",
+      "statement": "multiaxis_norm_doubling",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.multiaxis_norm_doubling at line 398",
+      "statement_sha256": "67ec15f5b5e7b133d40594f784f55f074caccd5b1d54176fa3198c74cd09447e"
+    },
+    {
+      "name": "LifeBounds.optics_neff_mono",
+      "status": "lean-proved",
+      "statement": "optics_neff_mono",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.optics_neff_mono at line 416",
+      "statement_sha256": "67ef2c35f40a530f54e015693638aca9444808ca4deac6368dbad429f2edcc91"
+    },
+    {
+      "name": "LifeBounds.optics_goos_hanchen_additive",
+      "status": "lean-proved",
+      "statement": "optics_goos_hanchen_additive",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.optics_goos_hanchen_additive at line 422",
+      "statement_sha256": "a66a34057f5e53b340186317e1e61d008463793906418b53194c947d36a15f1c"
+    },
+    {
+      "name": "LifeBounds.cognitive_modularity_collapse",
+      "status": "lean-proved",
+      "statement": "cognitive_modularity_collapse",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.cognitive_modularity_collapse at line 432",
+      "statement_sha256": "fd0e949903388334d216f9cacc0efd908e63f03e297d7f4b985c9ca3ade549de"
+    },
+    {
+      "name": "LifeBounds.teleological_mdl_penalty",
+      "status": "lean-proved",
+      "statement": "teleological_mdl_penalty",
+      "runtime_counterpart": "LifeBounds formalization (Wolfram 2025 + supersolid/optics/psychology synthesis)",
+      "runtime_predicate": "verified theorem LifeBounds.teleological_mdl_penalty at line 445",
+      "statement_sha256": "ca1a07cd4824dafd9360130a946408f7c036f2228e16614e0f5fd9bc6cc6548a"
+    }
+  ],
+  "nonclaims": [
+    "Finite integer and boolean identities only: nothing here proves continuum PDE existence (eGPE, Lenia), quantum phase coherence, or infinite-grid percolation limits.",
+    "The mean-field polynomial identities certify exact algebraic factorization and rational sign-change brackets at d=1000, not spatial correlation decay on Z^2.",
+    "The supersolid Leggett bound, discrete optical refractive index, and cognitive MDL / modularity theorems certify the mathematical inequalities of the mapped models, not empirical physical or psychological measurements."
+  ],
+  "statement_pinning": {
+    "schema": "statement-pins/1",
+    "pin": "sha256 of the normalized Lean statement text",
+    "normalization": "Lean comments stripped (/- -/ nested blocks, -- line); string literals respected; statement = source text between the declaration name and the first top-level ':=' (or the first top-level match-arm '|' line for pattern proofs); whitespace runs collapsed to single spaces; proof text excluded.",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A pin mismatch fails CI. A legitimate statement change requires a deliberate pin regeneration in the same PR, with the statement diff reviewed as a semantic change. Do NOT regenerate pins to make CI pass without reviewing the statement diff."
+  },
+  "definitions": {
+    "schema": "commands-v2",
+    "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
+    "hash": "12fb5f43c521d0fa1b0c4bdf6f5e57f7b6a955f8b41cd1189f59b7a8645c7e16",
+    "count": 130,
+    "decls": {
+      "#print:axioms": "37a40ced343c886b5eb8ee020f7952ab3ed5448f8609b7845faca7ee3f88bcb6",
+      "#print:axioms#10": "a2b41941543c4dd7817cae9772b1302a90ba8b2abd795aead3388a7c9518f1d1",
+      "#print:axioms#11": "e0f610b54db6268225cc2560ac79ffc0b776d8991ac301f952b801c0bce06cd6",
+      "#print:axioms#12": "00c427a67574ac7b8ab906d0311369242306c35bb618d05c4afdbe98cff211d4",
+      "#print:axioms#13": "7994f50f9ea644b8514e8eb5241d0b235969acb5eaf9f7de834bb6bed0b2fb18",
+      "#print:axioms#14": "af69f48669c4517598f96e79c6c39b07cfd63b087b9a4f24e1bb036736e8e40d",
+      "#print:axioms#15": "e5c43e42a0dec0a49a2129cc2cf12d2017fe51856cf58f9702b888cd78cbeb34",
+      "#print:axioms#16": "95109333d8a4983b58abc8a6fc5b9840695a5870c4c9130a6ee0d5ab99a0dbe7",
+      "#print:axioms#17": "dde2258676a217a482ad1e60b25f8f78361bda48872043b50f9540849ec88912",
+      "#print:axioms#18": "3c287fa3181809d2a9b4ac1fc8722b923da8f88619a30caf9b5ff5c722de8cba",
+      "#print:axioms#19": "303d8b18b8ca0f7ae6bae166eb1b1fda10d491f0f30c484721f82a41d6d97d17",
+      "#print:axioms#2": "9110270c6134e8198da5e1c755066c6f6cc7a2ddc2088782babfd1d5cd160c8e",
+      "#print:axioms#20": "dcd7e8d921125a62683cfcd73f2bd070fcae0fce459652afb311631b0d5d139a",
+      "#print:axioms#21": "99a2dc362af9ce210232b7e5f2a3ce00ce0c3c37e5cbdbba2d3242449efed05a",
+      "#print:axioms#22": "27d0e15e607de10af01709fa934c3bc18ef22105247df2166609eaf3bd9d6c39",
+      "#print:axioms#23": "133a7231c695e1f2b607fa5a156b2a3e7746647c74ba33c1ac7481ed067f0261",
+      "#print:axioms#24": "b0017aa08e880a9eeb12ffb4e116daaa51dc2072f884ccdf8dbb7e0eaf91ea99",
+      "#print:axioms#25": "445d6315c846e39700a01cb18fe83fb50e15b19c5798c0c7156c58ea76809a4e",
+      "#print:axioms#26": "36ca5e19d401b2281951d4e816daf7325dd3382c3b77012ebb09abb4e445c0e4",
+      "#print:axioms#27": "8ac844bc4b8249438457ace46d29e423897e69464b695e393a9ee24f4549a064",
+      "#print:axioms#28": "864f136db0720e9ee1a7d379a0bf3ab6f7313a8003e9057d4f486050eb3893ca",
+      "#print:axioms#29": "259c3f9bbf8b901e7da147d620cd9a3b46d297bd0740967289d255b6cc8cf51b",
+      "#print:axioms#3": "4d51cc88ade8739c5c0b7e9e5d6ccd6084f71a8cb7e81e99cbf3f1bbcd2fae69",
+      "#print:axioms#30": "e1f3420f614950040c87199d9ec069ec3c10efcca4ca7e619182a30e73d02369",
+      "#print:axioms#31": "758756603f7cac6dbe039dc326be91add6d26ef214c6d4d71fcf77bb3656e2ee",
+      "#print:axioms#32": "9b2b0b661f28284ddb533b05ecfd9f9852ae05aab0a85304c649e445f38e72c9",
+      "#print:axioms#33": "87d638870c95836e221ac65168f5a65127562ea4e6c66dbd2d66e22c5315397d",
+      "#print:axioms#34": "0c7585055425013755c4175e2b4fc06405f9aed3449c13adb35032a03b843369",
+      "#print:axioms#35": "825c29d0e1259001d498e7501d6a4150539f0301a2ee8f092eaaf0737e9dc920",
+      "#print:axioms#36": "fb969be1909464f4af72f6882284fb1f8d902264408f2c37a9cb88f979db1dad",
+      "#print:axioms#37": "3ee68b6aec383391b4e01c93fb9f4a9b03b9820e3fb64c03892b522750d699cf",
+      "#print:axioms#38": "681ac1fe75bd5caf4079c07830a3fb8a55e1f7752e564cd60d6e08675efc2d3b",
+      "#print:axioms#39": "28741c267695d120c5f0624cbfb36d7b78c1f911c641e2ded76564f0d7ab7363",
+      "#print:axioms#4": "517c211cad74050e18db7eb62a0b438a4308ec5675ead7f7a922113406f58fca",
+      "#print:axioms#40": "deb6f23c2f876ae0d226a7c8fc9aac21d6bf24dbb27a5c7ea8078cefa86b02aa",
+      "#print:axioms#41": "6f6e677eddc34a62c50436e0ded8758d09d660ceab7dffae2c0bb64db95a0727",
+      "#print:axioms#42": "1441e7d1d208fe2dcc9e9dc31dea69a1c4294659b10404ccf44f6c88f2e26aa9",
+      "#print:axioms#5": "e993c90876637895740501415b1b3063393468efcc96fa01a9392910774dfb01",
+      "#print:axioms#6": "831cd2616aaa10b93ceffdc4b01f17f7d1259ee23991b2dea765997f69b129da",
+      "#print:axioms#7": "f55110a480aca856bb996ef31ec44258e2d793cabc753a463bcb99e1be2ae398",
+      "#print:axioms#8": "f2aa71eeaf62fba83850def1522aedac9d3595d367bcee1dc9499b5c20a4eca8",
+      "#print:axioms#9": "230778598f96b4492d473062c1489f1675d13bda4d5f37ad97b4f2d03d01afcc",
+      "abbrev:Grid": "e34c51a2d74a397d3fbbe2e49f103e9a0107bafa77b7f5c231bc13de08b55172",
+      "abbrev:Pt": "f89f02d9b4d03622f68296dee7baf2a9342c2f761bffc74e1075f47f011fef61",
+      "def:b2n": "3ab23e479fb9bfc2d4346934cf8e0881c58a3530b98300fe121bf228cc06f960",
+      "def:bboxArea": "910aaf57ef267c38a8c74888a530ad47d08e253c5b411c2c4b8d9655719c343c",
+      "def:bboxSide": "ec589fd44da59ab2cd807ff9f8c5a56a2e417b5b1766d173abd6036ca1e12e8b",
+      "def:beehiveGrid": "6621e3f2d11437dd1dd648e746ea64af1e8d667d0c830596e86f6111d89ebd91",
+      "def:blinkerH": "7d67477f8c8e9eb303ace20f948d0868029fdc62b249917a6d8f1eb75f673932",
+      "def:blinkerV": "bfbe335d842696ea47b4ffba225ed3ca4b396ab86150df84a9af07b2d30f7e13",
+      "def:blockGrid": "52c88ac09f81dd8cfb5338cb266e9bd2fa885e5067f775ea8d0500da37043126",
+      "def:box4": "3cc314236a2a7ecf541c6d3e98354fa1d4be9330309cf409cefb0c1909e8aa04",
+      "def:box5": "3d31e59b9d6417474e9bd79b1450484ea9c532b36d2607fcf072155d975cdfb2",
+      "def:box6": "33131a3a79dbf5e722390679232b8646f0873903d5873cb5c889773db0ad85cf",
+      "def:diagU": "9e40c74b94f1d93e70b25ad7197c22a70b7789feaa830759b485a93d8d968c5a",
+      "def:diagV": "420f3e6cac241a539cfc270f0b13c2020521820d2d4c1eb356f8fb12b6262040",
+      "def:eater1Grid": "331f2dbd6db8be4a0e49917a81e81716e54311f061db4cecd63aac4abbdb900e",
+      "def:ghShift": "b4ccf386d3c5bc1bc99947bbaaf71116ea34fef9753a58957e004b8ab265fe81",
+      "def:glider0": "e56c0484465059f96a3e65fbd97c5bfe19f482614eec5e37a307b1a3ca91eee1",
+      "def:hlSide": "c2d9dff7cd3636050658d7e5ae07676d1bd5448e1c68e7f8ba6133b0c2f0e0b6",
+      "def:hlStep": "266014050980ae0e5b931633c4781bc1dd78bd7fe290d8235bd34e794549a895",
+      "def:isAlive": "5b04328f51b9d2556cc829a6efe1badf389d10589e953dd094d0f5d6520f1fa9",
+      "def:lagrange2": "3222be76e864e937f99d85dd7480e0ae0ac76d52dd6a0d5d5d5711e4a848e9ac",
+      "def:lagrange3": "0dc4d45870c37514b2d5fced766738286e3dd8322a3fb1a7fb74252cc5db51ea",
+      "def:lifeCubic": "205c18c68911281b87743de96d6696d0121a63dd0dbf50bc632b9c7ffad32c28",
+      "def:lifeInterval": "369d517a5dd154817b6e14fb6e5fd049028b8387a7af1bd1bae238a68cdb9000",
+      "def:lifeLagrange1440": "7d863383455207c0716e9ce3857cd60b8a700b9c40250366dead741b2337b150",
+      "def:lifeNineSum": "29606f30184a384d11a37f8951a3eaff7b1a5e1bc526b7a22c874f3bd7651b5a",
+      "def:lifeRule": "c4ea25380717ccbce00ed54f12fa68791f10af50dc0f535c155bc01f512c45d9",
+      "def:lifeScore": "5a2e27b4ab657a19dc690a074de2ba86b31df4ee550b5f3458a483cb58d3e3a1",
+      "def:makeBox": "d224394c50b412bf28896ba0ce5d2955b153d7b8263022db62c5a78b3cacfc99",
+      "def:mfLinearFactor": "8e8c058b694bd8a3e2c4ce39883a7d36e56822bb15e010793659a10407fb7b13",
+      "def:mfNum": "5328dfa4f5e2b1881ac0dfdfddd942ccc3081c1f0c614d1d31ba9a3641d02a6f",
+      "def:mooreOffsets": "b40dbaca0f8ac4579a3c2b5887b9a3f6aee648750e793e6f89d97c75e43708c3",
+      "def:neighborCount": "ac4a83bf5e4a4448812cbc0f8afd3e4dbab7b09aa52953602949a88149111f51",
+      "def:nextCell": "aeee6efb8faba863d74205b92b588f15318b4e4bde84e821a6893056a7ecbb2f",
+      "def:outerTotalisticCode": "abb36eebe258db2ba3256c8884396d520475be8986f07bd154474e838dd27729",
+      "def:pentate": "147b1d8d5dc1478a5614a887f674fe991997e7b67012b8461d55eae72fb9df1c",
+      "def:purposeScore": "f157b843741a1006e107dcd342dfc3f5c92cbb2f363b029205a9acbfd9e5718a",
+      "def:rangeInt": "1e23961c70e5d5b0090617b9729e3e3c1486b3c8e5c138ea9c43598172964ae6",
+      "def:scaledNeff": "da6c7030bcd08f5f9c9472e5852d2d4f1d1ae45466428364c741bf852343f06e",
+      "def:stepN": "23dedc338b78837821bc7554d8bb9bb127e0ad9044e393cce4940355cf259986",
+      "def:stepWindow": "166d852ed207577d7226d70c951fab93cdfa3d9c7eb40f92038c8b33877b04f1",
+      "def:tetrate": "86b545150551e26e346631a7ad5017768c2b751f773e2bc01efd25dd217edb4c",
+      "def:translateGrid": "5f8b0aa9abc1268ad176699c2fbfd09260f67663007ae3bc353c8099c1619141",
+      "def:validMoorePairs": "6dac55d331e042a1f386100d7f91f3af2f857181ea4c6bb4ccbdec69711de6f3",
+      "end:LifeBounds": "691f2f04563d1e8520857f80c982393857a77166de86f498c987585b5f741a9c",
+      "namespace:LifeBounds": "20d97bf3937e80095dd8a145dc872c4fd255763ce978cd925a418a02d320fede",
+      "theorem:beehive_still_life": "46440c6f489c6a96c7f239aea02f6bc065450ff19cb25950bf2ac50cd4c7c1ec",
+      "theorem:blinker_step1": "f61ec60bfb032bffa9a177d043d7cefd2fff740d5748c0b440038b2e97ed5edc",
+      "theorem:blinker_step2": "99456f624573a7ad2f1a33d0da7b7bd463a6471d9dda770300247e1427afcb4c",
+      "theorem:block_still_life": "2353851af09ac0ef78400f735dbd5f8d554f4e85dbb90a028065a1110367479c",
+      "theorem:burnside_3x3_d4_classes": "8068dd0547df524a07c48cfc1811298bc648d9501e7f149ad845a865fe0de38d",
+      "theorem:burnside_3x3_d4_sum": "68f1416792511bfc87dc3041bd4de3ac988d2f46509c09c03afaa7d60e984c1e",
+      "theorem:cognitive_modularity_collapse": "d1b9662842ca9542550f185f4bb12c799427bac1a0d525dd2c1f1ab5726cc23e",
+      "theorem:diehard_pentate_unfold": "b0099b93fb1ba78df667ce02347d51fc1e94a0db9fbf79c93740b5c049c4191a",
+      "theorem:eater1_still_life": "c70af2714ee903a4c3857acda62d09710eec401269ead26252c4cf33941daf4c",
+      "theorem:glider_bipartite_color_invariant": "d3c84220b75ff87fd1247b0bbad40eba8ed81a8fed54a77b63b971cd9935a875",
+      "theorem:glider_period4_translates": "7e55fd94fa356a67cab5d6dc82a1e6f21f833c9b528ef6465b4cc6984bdef7bb",
+      "theorem:gun_emission_hierarchy": "763d9f64128f821c753ff929cdf265952a320bb8e240a51767afa40ceb132f90",
+      "theorem:hashlife_recursion_step": "e6ffb33e19dd601cdf189ca961b25435fdb622641ab23d899336c5fb55e7a22b",
+      "theorem:interaction_radius_sq": "9056f4a0100877fc28e6bfed2b7deedbc7e92a4d7c347e5e2fddca5d2f65c4be",
+      "theorem:life_birth_score": "5cf6951a6bd4764bdb7cfb55b6cc6a8a579a653826a0d27fa43a47bebbb2000c",
+      "theorem:life_bitmask_all_moore": "f033a5b73040727a66102fafec75026800b05db1d048dc164844f399b29e32d8",
+      "theorem:life_cubic_roots_all_moore": "1c7efbd1edc8da1ed7936475bd7e5ff06527d1ba9a64f4f3e0375da2c3e7dccc",
+      "theorem:life_interval_all_moore": "a96414e645bab965072d3af57666d45e52a09192e030c2f22143cf79bafb1214",
+      "theorem:life_lagrange_all_moore": "12e588ae05f737ae59f382d34874e846daa96b8e9a83793eae93d8573a24d43c",
+      "theorem:life_ninesum_all_moore": "22fc029320739e64eda026b2e1e7e78bd8cef276302a35d457f59431d94c7a14",
+      "theorem:life_overpop_score": "d96b8eadc982e39c7ce6a4f1005ce6cbcf025dd6df512d63cbfbaefb54776fb9",
+      "theorem:life_survival_score": "72e91ef98ed209bf4dab662293341a2c504cbee428d0afa8adffbd2d1ce214eb",
+      "theorem:life_underpop_score": "e4ebc12a390e0828df0f94d86b7f854c9ffe32e907ac5076a65608fc1c6c4ef5",
+      "theorem:lightcone_area_quadratic": "afef2cb08e648e1ea41e06bb6bb134382e861be465d79572736cde6866f19546",
+      "theorem:lightcone_side_step": "4d1f3767be1227acbbcb153e3489c1a780239e7ae77fdbe88aa619ad591bcaa2",
+      "theorem:mf_binomial_weights": "00600d1b854aafd9677837815b9bc843eb431f4d7afde33ab1d060ae490c6c85",
+      "theorem:mf_coeff_identity": "912f4dd7f6a04b56645844d91e63e3aff23656a3e2a335c3c1f53a5efa48bb37",
+      "theorem:mf_fixed_point_brackets": "a68f39e6ed48dc1130c166781c15c0397b10d2f8a9e51788a5785f5165de9f99",
+      "theorem:mf_overpop_full_extinct": "4a0c1112a72c50e81040f07fab337d0de0fd00822b989bc5df589269665e9592",
+      "theorem:mf_vacuum_fixed_point": "9fe30eaab835a22fdcc1972d1922b9d01884a6153cc0d51068f903259477aa09",
+      "theorem:multiaxis_cardinal_from_lightcone": "e9d13efab2c1d9ce3b1f3cfc2db6645b7cf3a96474f394d5ffca738c4488d4f2",
+      "theorem:multiaxis_norm_doubling": "e819e5c83ce5eb18d703666b80ca40ebef903dbb5359e12eea4f51c115b4b1dd",
+      "theorem:optics_goos_hanchen_additive": "a57c207696743b5c3eb504703ff1a27b890f6a2379b20275bd9176dda77f2a86",
+      "theorem:optics_neff_mono": "a44835513b23d55211bc9628abfd382701f7424efdcdfa670efa77e1aba5f019",
+      "theorem:otca_metapixel_scale": "6661ad7e84069de69f3fb5d1d7ed6702a316795d14e5aa171b00cb61c9df6c6d",
+      "theorem:state_space_3x3_card": "3170f8c0b8423ec3265f7289a624dd0e02e1cdc3e3214135b7d14b3cfa4252a1",
+      "theorem:supersolid_leggett_disc": "10fd4c5cffda79c591fa6339573264c80ba8194f42088200f44b4fa3d7c6e6e3",
+      "theorem:supersolid_leggett_strict_of_modulated": "23306ff261e851d2a6c0934ae03110aa5f09224f19298d520cdf8f4096e2e04a",
+      "theorem:teleological_mdl_penalty": "62fda7cdafb96c9bab75ae81eb6f30f0e4518bc757d6e889d1ad5b7d2e8dd49a",
+      "theorem:vacuum_still_life": "45356229167d729a6ff8e2e59f4d97f19601e4d351573256da32e9feeb05e278",
+      "theorem:wolfram_3x3_outcome_partition": "2d6961e47d0c4a3fcd176b90fa6cc6d38553675a5dc435193425a04f6eb5e479",
+      "theorem:wolfram_code_224": "35cc99460f99713075bff25b77f10f236a5bb3f13a59d587af65a18717a793d9"
+    },
+    "pinned_from_commit": "7d5ee590a55e"
+  }
+}
