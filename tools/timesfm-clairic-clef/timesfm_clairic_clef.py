@@ -881,36 +881,52 @@ def clef_decide_and_gate(series_name, active_forecast, gate_report, clairic_out=
     if live_clef_response is not None:
         clef_ans = live_clef_response.get("answers", live_clef_response)
     else:
-        # Deterministic Clef System-One rubric model
-        p_cal = 0.915 if is_cal else 0.140
-        if not beats_base:
-            choice = "fallback_ets"
-            probs = {"act": 0.02, "wait": 0.08, "review": 0.25, "fallback_ets": 0.65}
-            risk_score = 2.45
-        elif not is_cal:
-            choice = "review"
-            probs = {"act": 0.03, "wait": 0.12, "review": 0.75, "fallback_ets": 0.10}
-            risk_score = 2.20
-        elif action_threshold is not None and max(active_forecast["p50"]) >= action_threshold:
-            if max(active_forecast["p10"]) >= action_threshold:
-                choice = "act"
-                probs = {"act": 0.82, "wait": 0.06, "review": 0.10, "fallback_ets": 0.02}
-                risk_score = 0.65
-            else:
-                # Threshold sits inside [p10, p90] uncertainty band -> escalate to review
-                choice = "review"
-                probs = {"act": 0.24, "wait": 0.16, "review": 0.56, "fallback_ets": 0.04}
-                risk_score = 1.65
+        # Continuous softmax decision model derived from forecast quantiles, MASE, and PICP_80
+        cov_gap = abs(ho["picp_80"] - 0.80)
+        p_cal = round(
+            1.0 / (1.0 + math.exp(-(10.0 * (ho["picp_80"] - 0.68) - 4.0 * ho["quantile_crossings"])))
+            if is_cal else max(0.01, 0.25 * math.exp(-5.0 * cov_gap)),
+            6,
+        )
+        mase_ratio = ho["mase"] / max(0.05, min(1.0, best_base * 1.05))
+        max_p50 = max(active_forecast["p50"])
+        max_p10 = max(active_forecast["p10"])
+        max_spread = max(
+            1e-3,
+            max(active_forecast["p90"][i] - active_forecast["p10"][i] for i in range(len(active_forecast["p50"]))) / 2.5631,
+        )
+        if action_threshold is not None:
+            z_p50 = (max_p50 - action_threshold) / max_spread
+            z_p10 = (max_p10 - action_threshold) / max_spread
         else:
-            choice = "wait"
-            probs = {"act": 0.05, "wait": 0.81, "review": 0.11, "fallback_ets": 0.03}
-            risk_score = 0.40
+            z_p50 = -2.5
+            z_p10 = -3.5
+
+        u_fallback = 3.5 * (mase_ratio - 1.0) if not beats_base else -2.0 * (1.0 - mase_ratio)
+        u_review = (
+            (2.8 if not is_cal else -0.6)
+            + (1.8 if (action_threshold is not None and z_p50 >= 0.0 > z_p10) else 0.0)
+            + 0.5 * mase_ratio
+        )
+        u_act = (2.4 + 0.6 * min(3.0, z_p10)) if (beats_base and is_cal and z_p10 >= 0.0) else -2.2
+        u_wait = (2.3 - 0.4 * mase_ratio) if (beats_base and is_cal and z_p50 < 0.0) else -1.5
+
+        utilities = {"act": u_act, "wait": u_wait, "review": u_review, "fallback_ets": u_fallback}
+        u_max = max(utilities.values())
+        exps = {k: math.exp(v - u_max) for k, v in utilities.items()}
+        z_sum = sum(exps.values())
+        probs = {k: round(exps[k] / z_sum, 6) for k in ("act", "wait", "review", "fallback_ets")}
+        choice = max(probs.items(), key=lambda kv: kv[1])[0]
+        risk_score = round(
+            min(3.0, max(0.0, 0.9 * mase_ratio + 1.4 * (1.0 - p_cal) + (0.6 if choice == "review" else 0.0))),
+            4,
+        )
 
         if caller_clef_override is not None:
             choice = caller_clef_override
 
         clef_ans = {
-            "action_choice": {"type": "choice", "choice": choice, "probabilities": probs, "confidence": 0.74},
+            "action_choice": {"type": "choice", "choice": choice, "probabilities": probs, "confidence": round(max(probs.values()), 6)},
             "band_calibrated": {"type": "noul", "noul": p_cal},
             "operational_risk": {"type": "score", "score": risk_score},
         }
@@ -1101,20 +1117,22 @@ def _gen_covariate_shock_fallback(seed=20261021, n=56):
     }
 
 
-def _gen_messy_ops_log():
+def _gen_messy_ops_log(seed=20261021 + 333):
     lines = [
-        "Steady Orbit /jev/ daily telemetry export (messy operational log).",
+        "Telemetry stream export (unstructured operational CSV log).",
         "date,weekday,value,covariate,note",
     ]
-    rnd = mulberry32(20261021 + 333)
+    rnd = mulberry32(seed)
     weekly = [1.2, 0.6, 0.2, 0.0, -0.5, -0.9, -0.6]
     wdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     for i in range(28):
         day = 1 + (i % 28)
         dt = "2026-09-%02d" % day
         wd = wdays[i % 7]
-        val = 18.0 + 0.12 * i + weekly[i % 7] + 0.20 * _gauss(rnd)
-        note = "sermon S5 W8 deploy" if i == 25 else "steady"
+        noise = _gauss(rnd)
+        spike = 3.8 if i == 25 else 0.0
+        val = 18.0 + 0.12 * i + weekly[i % 7] + 0.20 * (noise + spike)
+        note = ("innovation_z=%+.2f_step_%d" % (noise + spike, i)) if abs(noise + spike) >= 3.0 else "steady"
         lines.append("%s,%s,%.2f,0,%s" % (dt, wd, val, note))
     lines.append("future_covariates: 0, 0, 0")
     return {
@@ -1272,10 +1290,16 @@ def run_selftest(fixtures=None):
     note_ans = cl3["latest_anomaly_note"]
     span = note_ans["span"]
     extracted_slice = fx3["state_text"][span[0]:span[1]] if span else ""
+    # Prefix-shift perturbation: prepending 10 bytes must shift the extracted character span by +10
+    fx3_shifted = dict(fx3)
+    fx3_shifted["state_text"] = ("# PAD_10\n\n" + fx3["state_text"])
+    span_shifted = run_pipeline(fx3_shifted)["stage1_clairic"]["answers"]["latest_anomaly_note"]["span"]
     steps_fc = cl3["clairic_short_forecast"]["steps"]
     passed_g7 = (
-        note_ans["value"] == "sermon S5 W8 deploy"
-        and extracted_slice == "sermon S5 W8 deploy"
+        note_ans["value"] is not None
+        and note_ans["value"].startswith("innovation_z=")
+        and extracted_slice == note_ans["value"]
+        and span_shifted == [span[0] + 10, span[1] + 10]
         and len(cl3["extracted_series"]["value"]) == 28
         and len(steps_fc) == 3
         and len(steps_fc[0]["quantiles"]) == 99

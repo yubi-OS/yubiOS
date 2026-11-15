@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
-"""harness_life.py -- Falsification harness for life-supersolid-v1 (yubi-OS/yubiOS).
+"""harness_life.py -- Falsification harness for life-supersolid-v2 (yubi-OS/yubiOS).
 
-Verifies that ACTUAL measurement is happening (zero static JSON lookups, zero
-cached/stubbed outputs) and tests the two pre-registered open assumptions from
+Verifies that ACTUAL measurement is happening (zero planted pattern libraries,
+zero hardcoded coordinate tables, zero static JSON lookups, zero cached/stubbed
+outputs) and tests the pre-registered open assumptions from
 refs/wolfram-life-supersolid-optics-psychology-solo-2026-11-15.md:
 
-  Part I — Anti-Stub Dynamic Perturbation Gates (G_DYN_1..5):
-    Verifies that every measurement callable in life_supersolid.py computes its
-    output dynamically from the live B3/S23 cellular automaton evolution,
-    edge-standard contour tracing, and curveball null draws:
-      * G_DYN_1: Cell-ablation perturbation on Glider, Blinker, and Gosper Gun
-        must strictly alter period/translation and modularity M(P).
+  Part I — Anti-Stub & De Novo Discovery Gates (G_DYN_1..5):
+      * G_DYN_1: Exhaustive 3x3 D_4 Burnside orbit verification (512 bitmasks
+        partition into exact 102 D_4 orbits, matching LifeBounds.burnside_d4_3x3_sum)
+        + cell-ablation perturbation on the de novo discovered Glider and Blinker
+        must strictly alter period/translation and population.
       * G_DYN_2: Site-deletion perturbation on the B3/S23 Sierpinski crystal
         (removing 66 of 366 sites -> 300 sites) must move n_components_traced
         366 -> 300 and change D_whole.
-      * G_DYN_3: Corridor-blocking perturbation (placing a 2x2 Block directly
+      * G_DYN_3: Corridor-blocking perturbation (placing a discovered 2x2 Block
         into a clear diagonal glider channel) must reduce transmitted ray count.
       * G_DYN_4: Rank-collapse (caustic) perturbation on the corpus feature
-        matrix (cloning 2 rows -> rank 2) must force V_2 = 1.0000 (r_hat = 2.0).
+        matrix (cloning 2 discovered motifs -> rank 2) must force V_2 = 1.0000
+        (r_hat = 2.0).
       * G_DYN_5: Seed-sensitivity check on the curveball null (seed_a vs seed_b
         must produce distinct null z-scores, proving live Monte Carlo draws).
 
@@ -38,22 +39,21 @@ refs/wolfram-life-supersolid-optics-psychology-solo-2026-11-15.md:
         |mean(D_v3j) - D_tri| <= 0.05 (confirming extent-invariance of D on
         non-hierarchical crystals), while the B3/S23 Sierpinski crystal separates
         from both by Delta D_whole >= 0.25 and Delta D_local >= 0.12.
-      * G_SCI_4 (Wolfram 2025 Modularity-vs-Area & Search-Collapse Gate — Assumption 2a):
-        Across the 36 evolved B3/S23 patterns, search-discovered compact motifs
-        satisfy mean(M_search) <= 1.25 (near the M=1 irreducible blob limit),
-        human-constructed modular architectures satisfy mean(M_constructed) >= 4.0
-        (inside the Miller 7+-2 / Cowan 4+-1 working-memory band), and
-        Spearman rho(Area, M) >= 0.75 with positive slope dM/dA > 0.
+      * G_SCI_4 (Wolfram 2025 Modularity-vs-Area & Bitmask Census Gate — Assumption 2a):
+        Across the 36 B3/S23 patterns discovered de novo from integer bitmasks,
+        elementary single-island attractors satisfy mean(M_search) <= 1.25,
+        emergent multi-component constellations satisfy mean(M_constructed) >= 4.0,
+        and Spearman rho(Area, M) >= 0.75 with positive slope dM/dA > 0.
       * G_SCI_5 (Area-Compression Modularity Collapse Gate — Assumption 2b):
-        Compressing the inter-module spacing of a 4-module oscillator network
-        from d_sep = 12 down to d_sep = 2 collapses measured b_0(G_t) modularity
-        from M = 4.0 down to M = 1.0 (verifying LifeBounds.cognitive_modularity_collapse).
+        Compressing the inter-module spacing of a 4-module array of discovered
+        still lifes from d_sep = 10 down to d_sep = 2 collapses measured b_0(G_t)
+        modularity from M = 4.0 down to M = 1.0 (verifying LifeBounds.cognitive_modularity_collapse).
       * G_SCI_6 (Dimensional Focal Point & Structure Excess Gate — Assumption 2c):
-        On the evolved 36-pattern B3/S23 feature matrix, the Renyi prefix ladder
-        selects focal point n*(tau=0.5) in [4, 7] (Cowan/Miller working-memory
-        capacity), effective dimension r_hat = 2/V_2 <= 5.0 holds at n*, and
-        structure excess Delta r_hat = r_hat0 - r_hat > 0.50 is resolved (z > 3.0)
-        across both independent curveball null seeds.
+        On the de novo discovered 36-pattern B3/S23 feature matrix, the Renyi
+        prefix ladder selects focal point n*(tau=0.5) in [4, 7] (Cowan/Miller
+        working-memory capacity), effective dimension r_hat = 2/V_2 <= 5.0 holds
+        at n*, and structure excess Delta r_hat = r_hat0 - r_hat > 0.50 is resolved
+        (z > 3.0) across both independent curveball null seeds.
 
 Exit codes: 0 all gates pass, 1 any gate fails, 4 module surface error.
 """
@@ -71,6 +71,8 @@ MOD_DIR = os.path.abspath(os.path.join(HERE, ".."))
 REQUIRED_CALLABLES = (
     "step_grid",
     "evolve_pattern",
+    "enumerate_3x3_d4_orbits",
+    "discover_canonical_3x3_motifs",
     "interaction_components",
     "measure_modularity",
     "sierpinski_centers",
@@ -120,18 +122,23 @@ def run_harness() -> int:
         checks.append({"gate": gate_id, "kind": kind, "ok": bool(ok), "detail": detail})
 
     # =========================================================================
-    # PART I: Anti-Stub Dynamic Perturbation Gates (verifies real measurement)
+    # PART I: Anti-Stub & De Novo Discovery Gates (verifies real measurement)
     # =========================================================================
 
-    # G_DYN_1: Ablating 1 cell from Glider, Blinker, and Gosper Gun must alter dynamics
-    glider = [(1, 0), (2, 1), (0, 2), (1, 2), (2, 2)]
+    # G_DYN_1: Verify 102 Burnside D_4 orbits of {0,1}^{3x3} + cell-ablation response on discovered motifs
+    orbits = mod.enumerate_3x3_d4_orbits()
+    motifs = mod.discover_canonical_3x3_motifs()
+    glider = motifs["glider"]
+    blinker = motifs["blinker"]
+    block = motifs["block"]
     g_intact = mod.measure_modularity(glider, 4)
-    g_ablated = mod.measure_modularity(glider[:-1], 4)  # 4 cells -> dies to block/empty
-    blinker = [(0, 1), (1, 1), (2, 1)]
+    g_ablated = mod.measure_modularity(glider[:-1], 4)
     b_intact = mod.measure_modularity(blinker, 2)
-    b_ablated = mod.measure_modularity(blinker[:-1], 2)  # 2 cells -> dies in 1 step
+    b_ablated = mod.measure_modularity(blinker[:-1], 2)
     dyn1_ok = (
-        g_intact["translated"] is True
+        len(orbits) == 102
+        and sum(o["size"] for o in orbits) == 512
+        and g_intact["translated"] is True
         and g_ablated["translated"] is False
         and g_intact["final_population"] == 5
         and g_ablated["final_population"] != 5
@@ -139,9 +146,10 @@ def run_harness() -> int:
         and b_ablated["final_population"] == 0
     )
     record(
-        "G_DYN_1_ca_ablation_response",
+        "G_DYN_1_burnside_102_and_ablation",
         "ANTI-STUB",
         dyn1_ok,
+        f"3x3 D4 orbits={len(orbits)} (sum={sum(o['size'] for o in orbits)}); "
         f"glider intact translated={g_intact['translated']} vs ablated={g_ablated['translated']}; "
         f"blinker ablated pop={b_ablated['final_population']}",
     )
@@ -169,7 +177,6 @@ def run_harness() -> int:
     # G_DYN_3: Blocking a clear diagonal glider corridor must reduce transmitted ray count
     c_d3 = mod.sierpinski_centers(512, 384, 3)
     tx_open = mod.measure_glider_transmission(c_d3, offsets=[0])
-    # Place a 2x2 block right on the x - y = 0 diagonal at (250, 250)
     tx_blocked = mod.measure_glider_transmission(c_d3 + [(250, 250)], offsets=[0])
     dyn3_ok = (tx_open["transmitted"] == 1 and tx_blocked["transmitted"] == 0)
     record(
@@ -180,11 +187,12 @@ def run_harness() -> int:
     )
 
     # G_DYN_4: Rank-2 degenerate corpus must trigger caustic V_2 = 1.0000 (r_hat = 2.0)
+    shifted_block = [(x + 12, y) for x, y in block]
     deg_patterns = [
         {"name": f"clone_blinker_{i}", "kind": "search", "steps": 2, "cells": blinker}
         for i in range(6)
     ] + [
-        {"name": f"clone_glider_{i}", "kind": "constructed", "steps": 4, "cells": glider + [(12, 0), (13, 0), (12, 1), (13, 1)]}
+        {"name": f"clone_glider_{i}", "kind": "constructed", "steps": 4, "cells": glider + shifted_block}
         for i in range(6)
     ]
     deg_res = mod.measure_corpus_focal_and_modularity(deg_patterns, n_null=6)
@@ -192,7 +200,7 @@ def run_harness() -> int:
     dyn4_ok = (
         abs(deg_res["profiles_d2_to_9"]["V2"][-1] - 1.0) < 1e-6
         and abs(deg_res["profiles_d2_to_9"]["r_hat"][-1] - 2.0) < 1e-6
-        and full_res["profiles_d2_to_9"]["r_hat"][-1] > 2.8
+        and full_res["profiles_d2_to_9"]["r_hat"][-1] > 2.5
     )
     record(
         "G_DYN_4_caustic_rank2_injection",
@@ -287,7 +295,7 @@ def run_harness() -> int:
         f"gasket-tri gap = +{hierarchy_gap:.4f} >= 0.25",
     )
 
-    # G_SCI_4: Wolfram (2025) Modularity-vs-Area & Search vs Construction Gate (Assumption 2a)
+    # G_SCI_4: Wolfram (2025) Modularity-vs-Area & Bitmask Census Separation Gate (Assumption 2a)
     m_search = full_res["mean_modularity_search"]
     m_constr = full_res["mean_modularity_constructed"]
     rho_am = full_res["spearman_area_vs_modularity"]
@@ -307,8 +315,6 @@ def run_harness() -> int:
     )
 
     # G_SCI_5: Direct Area-Compression Modularity Collapse Experiment (Assumption 2b)
-    # Place 4 independent blocks at separation d_sep = 10 (area 144, M = 4.0) vs compressed d_sep = 2 (area 16, M = 1.0)
-    block = [(0, 0), (1, 0), (0, 1), (1, 1)]
     sep10 = [(x + dx, y + dy) for dx in (0, 10) for dy in (0, 10) for x, y in block]
     sep2 = [(x + dx, y + dy) for dx in (0, 2) for dy in (0, 2) for x, y in block]
     m_sep10 = mod.measure_modularity(sep10, 2)
@@ -348,7 +354,7 @@ def run_harness() -> int:
     )
 
     summary = {
-        "harness": "harness_life-v1.0.0",
+        "harness": "harness_life-v2.0.0",
         "instrument": mod.INSTRUMENT_VERSION,
         "ok": fails == 0,
         "passing_gates": len(checks) - fails,

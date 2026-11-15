@@ -666,6 +666,63 @@ def selftest(verbose=True):
               and abs(out["sse"]) < 1e-18,
               "r2=%.9f taus=%r sse=%g" % (out["fit_quality_r2"], taus, out["sse"]))
 
+    # ---- procedural ground-truth checks (independent of frozen fixture JSON) ----
+    import random
+    rng = random.Random(20261115)
+    cand_grid = [0.25, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
+    prony_recovered = 0
+    for _ in range(15):
+        t1, t2 = sorted(rng.sample(cand_grid, 2))
+        ke_true = rng.uniform(-25.0, 25.0)
+        k1_true = rng.uniform(0.5, 10.0)
+        k2_true = rng.uniform(0.5, 10.0)
+        syn_series = [
+            {"t": t, "value": ke_true + k1_true * math.exp(-t / t1) + k2_true * math.exp(-t / t2)}
+            for t in range(12)
+        ]
+        fit = prony_fit(syn_series, arms=2, tau_grid=cand_grid)
+        fit_taus = [a["tau"] for a in fit["arms"]]
+        fit_ks = [a["k"] for a in fit["arms"]]
+        if (
+            fit["fit_quality_r2"] >= 0.999999999
+            and abs(fit["ke"] - ke_true) < 1e-7
+            and abs(fit_taus[0] - t1) < 1e-9
+            and abs(fit_taus[1] - t2) < 1e-9
+            and abs(fit_ks[0] - k1_true) < 1e-6
+            and abs(fit_ks[1] - k2_true) < 1e-6
+        ):
+            prony_recovered += 1
+    check("procedural_prony_15_random_2arm_recovery",
+          prony_recovered == 15,
+          "recovered=%d/15" % prony_recovered)
+
+    # Procedural snapback & hysteresis conservation over 20 random chains
+    conserved = 0
+    for trial in range(20):
+        n_rows = rng.randint(4, 14)
+        rows = []
+        sb_series = []
+        expected_total = 0.0
+        for idx in range(n_rows):
+            pd = rng.uniform(-10.0, 10.0)
+            rd = rng.uniform(-5.0, 5.0)
+            sup = (idx if (idx > 0 and rng.random() < 0.35) else None)
+            rows.append({"id": idx + 1, "predicted_delta": pd, "realized_delta": rd, "supersedes": sup})
+            sb_series.append({"cycle": idx + 1, "predicted_delta": pd, "realized_delta": rd})
+            expected_total += abs(pd - rd)
+        h_out = hysteresis_rollup(rows)
+        sb_out = snapback_detect(sb_series)
+        has_len2 = any(
+            (sb_series[i]["predicted_delta"] * sb_series[i]["realized_delta"] < 0)
+            and (sb_series[i + 1]["predicted_delta"] * sb_series[i + 1]["realized_delta"] < 0)
+            for i in range(n_rows - 1)
+        )
+        if abs(h_out["total_sum_abs"] - expected_total) < 1e-9 and (sb_out["snapback"] == has_len2):
+            conserved += 1
+    check("procedural_hysteresis_and_snapback_20_trials",
+          conserved == 20,
+          "conserved=%d/20" % conserved)
+
     return checks
 
 

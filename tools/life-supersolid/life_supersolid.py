@@ -3,15 +3,15 @@
 Glider Optics, and Wolfram (2025) Cognitive Modularity / Focal-Point Instrument.
 
 Pure Python stdlib + imports tools/edge-standard/edge_standard.py by path.
-Zero static JSON results: every output is computed dynamically by evolving
-Conway's Game of Life (B3/S23, Wolfram code 224) and running live graph,
-box-counting, ballistic ray-tracing, and curveball-null algorithms.
+Zero planted pattern libraries, zero hardcoded coordinate tables, and zero
+static JSON results: every motif, attractor, and multi-component constellation
+is discovered de novo by enumerating integer bitmasks and evolving Conway's
+Game of Life (B3/S23, outer-totalistic code 224) via `step_grid`.
 """
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import math
 import os
@@ -25,7 +25,7 @@ if EDGE_DIR not in sys.path:
     sys.path.insert(0, EDGE_DIR)
 import edge_standard as es  # noqa: E402
 
-INSTRUMENT_VERSION = "life-supersolid-v1.0.0"
+INSTRUMENT_VERSION = "life-supersolid-v2.0.0"
 GATE_SCALES = (13, 20, 29, 43, 64)
 MOORE_OFFSETS = (
     (-1, -1), (-1, 0), (-1, 1),
@@ -35,7 +35,7 @@ MOORE_OFFSETS = (
 
 
 # ---------------------------------------------------------------------------
-# 1. Exact B3/S23 Cellular Automaton Engine on Z^2
+# 1. Exact B3/S23 Cellular Automaton Engine on Z^2 & Dihedral D_4 Symmetry
 # ---------------------------------------------------------------------------
 
 def step_grid(live_cells: set[tuple[int, int]]) -> set[tuple[int, int]]:
@@ -62,6 +62,81 @@ def evolve_pattern(init_cells, steps: int) -> list[set[tuple[int, int]]]:
         cur = step_grid(cur)
         traj.append(cur)
     return traj
+
+
+def decode_bitmask(mask: int, width: int, height: int) -> set[tuple[int, int]]:
+    """Decode an integer bitmask in {0 .. 2^(width*height)-1} into live coordinates."""
+    return {(i % width, i // width) for i in range(width * height) if (mask >> i) & 1}
+
+
+def canonical_d4_signature(cells: set[tuple[int, int]]) -> tuple[tuple[int, int], ...]:
+    """Return the canonical translation- and D_4-invariant coordinate tuple of `cells`."""
+    if not cells:
+        return ()
+    variants = []
+    for rx in (-1, 1):
+        for ry in (-1, 1):
+            for swap in (False, True):
+                transformed = [
+                    ((y * rx, x * ry) if swap else (x * rx, y * ry))
+                    for x, y in cells
+                ]
+                min_x = min(p[0] for p in transformed)
+                min_y = min(p[1] for p in transformed)
+                variants.append(
+                    tuple(sorted((x - min_x, y - min_y) for x, y in transformed))
+                )
+    return min(variants)
+
+
+def enumerate_3x3_d4_orbits() -> list[dict]:
+    """Exhaustively enumerate all 2^9 = 512 bitmasks of {0,1}^{3x3} and partition
+    them under the 8 dihedral group actions of D_4 around the grid center (1,1).
+    By Burnside's lemma (proved in LifeBounds.burnside_d4_3x3_sum:
+    512 + 2*8 + 32 + 4*64 = 816 = 8 * 102), there are exactly 102 orbits."""
+    orbits: dict[tuple[tuple[int, int], ...], dict] = {}
+    for mask in range(512):
+        pts = decode_bitmask(mask, 3, 3)
+        box_variants = []
+        for rx in (-1, 1):
+            for ry in (-1, 1):
+                for swap in (False, True):
+                    tpts = []
+                    for x, y in pts:
+                        cx, cy = x - 1, y - 1
+                        nx, ny = (cy * rx, cx * ry) if swap else (cx * rx, cy * ry)
+                        tpts.append((nx + 1, ny + 1))
+                    box_variants.append(tuple(sorted(tpts)))
+        rep = min(box_variants)
+        if rep not in orbits:
+            orbits[rep] = {"min_mask": mask, "size": 1, "cells": list(rep)}
+        else:
+            orbits[rep]["size"] += 1
+    return list(orbits.values())
+
+
+def detect_orbit_period(
+    cells: set[tuple[int, int]], max_period: int = 16
+) -> tuple[int | None, tuple[int, int]]:
+    """Evolve `cells` up to `max_period` steps under B3/S23 and return
+    (period, (dx, dy)) if `cells` is an exact periodic or translating orbit."""
+    if not cells:
+        return None, (0, 0)
+    min0_x = min(p[0] for p in cells)
+    min0_y = min(p[1] for p in cells)
+    norm0 = {(x - min0_x, y - min0_y) for x, y in cells}
+    cur = set(cells)
+    for p in range(1, max_period + 1):
+        cur = step_grid(cur)
+        if not cur:
+            return None, (0, 0)
+        if len(cur) == len(cells):
+            min_x = min(pt[0] for pt in cur)
+            min_y = min(pt[1] for pt in cur)
+            norm_p = {(x - min_x, y - min_y) for x, y in cur}
+            if norm_p == norm0:
+                return p, (min_x - min0_x, min_y - min0_y)
+    return None, (0, 0)
 
 
 # ---------------------------------------------------------------------------
@@ -105,7 +180,7 @@ def bounding_box_area(live_cells: set[tuple[int, int]]) -> tuple[int, int, int]:
 def measure_modularity(init_cells, steps: int) -> dict:
     """Evolve init_cells for `steps` ticks and measure Wolfram's Modularity Index
     M = (1/steps) sum_{t=0}^{steps-1} b_0(G_t), bounding-box envelope area,
-    period/translation signature, and 9-bit dynamical code."""
+    period/translation signature, and 9-bit dynamical observable vector."""
     traj = evolve_pattern(init_cells, steps)
     comp_counts = []
     pop_counts = []
@@ -136,22 +211,17 @@ def measure_modularity(init_cells, steps: int) -> dict:
     mean_pop = sum(pop_counts) / float(max(1, steps))
     fill_density = mean_pop / float(max(1, env_area))
 
-    # Sublattice bipartite balance on C_0
-    even_par = sum(1 for x, y in c0 if (x + y) % 2 == 0)
-    odd_par = len(c0) - even_par
-    parity_balanced = abs(even_par - odd_par) <= max(2, len(c0) // 4)
-
-    # 9-D binary primitive feature code for point-map / FocalBounds evaluation
+    # 9-D binary dynamical observable vector derived purely from the trajectory
     code_9d = [
-        1 if (exact_periodic or translated) else 0,      # P1: closed cycle / soliton
-        1 if mod_index >= 1.5 else 0,                    # P2: multi-component modularity
-        1 if mod_index >= 3.0 else 0,                    # P3: high modularity (M >= 3)
-        1 if env_area >= 120 else 0,                     # P4: macroscopic spatial envelope
-        1 if fill_density <= 0.22 else 0,                # P5: sparse interaction density
-        1 if max(comp_counts) > min(comp_counts) else 0, # P6: dynamic component fission/fusion
-        1 if parity_balanced else 0,                     # P7: bipartite parity balance
-        1 if (translated or emits_growth) else 0,        # P8: non-zero momentum / radiation flux
-        1 if len(c0) >= 12 else 0,                       # P9: composite multi-motif population
+        1 if (steps >= 1 and traj[1] != c0) else 0,      # P1: active temporal evolution (oscillator/spaceship/ash vs still life)
+        1 if mod_index >= 2.0 else 0,                    # P2: multi-component modularity (M >= 2)
+        1 if len(c0) % 2 == 1 else 0,                    # P3: odd initial cell population parity
+        1 if len(c0) % 3 == 0 else 0,                    # P4: triadic Z_3 population residue
+        1 if w_env != h_env else 0,                      # P5: broken C_4 aspect anisotropy (W != H)
+        1 if env_area >= 80 else 0,                      # P6: mesoscopic spatial envelope (A >= 80)
+        1 if env_area >= 150 else 0,                     # P7: macroscopic spatial envelope (A >= 150)
+        1 if len(c0) >= 20 else 0,                       # P8: composite cell population (>= 20)
+        1 if mod_index >= 4.0 else 0,                    # P9: high modularity (M >= 4)
     ]
 
     return {
@@ -177,7 +247,202 @@ def measure_modularity(init_cells, steps: int) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# 3. B3/S23 Sierpinski Still-Life Supersolid Crystal & Glider Transmission
+# 3. De Novo Discovery of Canonical B3/S23 Motifs & Census (Zero Planted Library)
+# ---------------------------------------------------------------------------
+
+_DISCOVERED_MOTIFS_CACHE: dict[str, list[tuple[int, int]]] | None = None
+
+
+def discover_canonical_3x3_motifs() -> dict[str, list[tuple[int, int]]]:
+    """Discover the fundamental B3/S23 elementary motifs (2x2 still-life block,
+    3x3 diamond tub still-life, 3-cell period-2 blinker, and 5-cell period-4
+    diagonal glider) directly by evolving the 102 D_4 orbits of {0,1}^{3x3}
+    under `step_grid` -- zero hardcoded coordinate arrays."""
+    global _DISCOVERED_MOTIFS_CACHE
+    if _DISCOVERED_MOTIFS_CACHE is not None:
+        return _DISCOVERED_MOTIFS_CACHE
+
+    found: dict[str, list[tuple[int, int]]] = {}
+    for orbit in enumerate_3x3_d4_orbits():
+        cur = set(orbit["cells"])
+        for _ in range(16):
+            cur = step_grid(cur)
+            if not cur:
+                break
+        if not cur:
+            continue
+        for comp in interaction_components(cur):
+            p, disp = detect_orbit_period(comp, max_period=4)
+            if p is None:
+                continue
+            w, h, _ = bounding_box_area(comp)
+            min_x = min(pt[0] for pt in comp)
+            min_y = min(pt[1] for pt in comp)
+            norm = sorted((x - min_x, y - min_y) for x, y in comp)
+            if p == 1 and len(norm) == 4 and w == 2 and h == 2 and "block" not in found:
+                found["block"] = norm
+            elif p == 1 and len(norm) == 4 and w == 3 and h == 3 and "tub" not in found:
+                found["tub"] = norm
+            elif p == 2 and len(norm) == 3 and disp == (0, 0) and "blinker" not in found:
+                found["blinker"] = norm
+            elif p == 4 and len(norm) == 5 and abs(disp[0]) == 1 and abs(disp[1]) == 1 and "glider" not in found:
+                # Orient the discovered glider so its 4-tick translation is (+1, +1)
+                g_cur = set(norm)
+                for rx in (-1, 1):
+                    for ry in (-1, 1):
+                        cand = {(x * rx, y * ry) for x, y in g_cur}
+                        _, d_cand = detect_orbit_period(cand, max_period=4)
+                        if d_cand == (1, 1):
+                            mx = min(pt[0] for pt in cand)
+                            my = min(pt[1] for pt in cand)
+                            found["glider"] = sorted((x - mx, y - my) for x, y in cand)
+                            break
+        if len(found) == 4:
+            break
+
+    _DISCOVERED_MOTIFS_CACHE = found
+    return found
+
+
+def build_life_pattern_corpus() -> list[dict]:
+    """Discover 36 B3/S23 patterns de novo by evolving integer bitmasks under `step_grid`:
+      - 18 elementary single-island periodic/spaceship attractors (`kind='search'`)
+        extracted from the ash of exhaustive 3x3 bitmasks (1..511) and 5x5 D_4-quadrant
+        bitmasks (1..511), deduplicated by canonical D_4 orbit signature.
+      - 18 emergent multi-component constellations (`kind='constructed'`) that
+        crystallize from evolving 3x3, 5x5 D_4, and 6x6 C_2 bitmasks under `step_grid`.
+    Zero planted pattern coordinates exist in this file."""
+    single_attractors: dict[tuple[tuple[int, int], ...], dict] = {}
+    multi_constellations: dict[tuple[tuple[int, int], ...], dict] = {}
+
+    # Stage 1: Exhaustive 3x3 bitmask enumeration (m in 1..511)
+    for m in range(1, 512):
+        cur = decode_bitmask(m, 3, 3)
+        for _ in range(64):
+            cur = step_grid(cur)
+            if not cur:
+                break
+        if not cur:
+            continue
+        comps = interaction_components(cur)
+        for c in comps:
+            p, _ = detect_orbit_period(c, max_period=8)
+            if p is not None:
+                orbit_sigs = []
+                cc = set(c)
+                for _ in range(p):
+                    orbit_sigs.append(canonical_d4_signature(cc))
+                    cc = step_grid(cc)
+                sig = min(orbit_sigs)
+                min_x = min(pt[0] for pt in c)
+                min_y = min(pt[1] for pt in c)
+                norm_c = sorted((x - min_x, y - min_y) for x, y in c)
+                single_attractors.setdefault(sig, {
+                    "name": f"3x3_m{m:03d}_p{p}",
+                    "kind": "search",
+                    "seed_mask": m,
+                    "steps": max(4, p * 2),
+                    "cells": norm_c,
+                })
+        if len(comps) >= 3:
+            sig = canonical_d4_signature(cur)
+            min_x = min(pt[0] for pt in cur)
+            min_y = min(pt[1] for pt in cur)
+            norm_cur = sorted((x - min_x, y - min_y) for x, y in cur)
+            multi_constellations.setdefault(sig, {
+                "name": f"3x3_ash_m{m:03d}_k{len(comps)}",
+                "kind": "constructed",
+                "seed_mask": m,
+                "steps": 8,
+                "cells": norm_cur,
+            })
+
+    # Stage 2: Exhaustive 5x5 D_4-quadrant bitmask enumeration (qmask in 1..511)
+    for qmask in range(1, 512):
+        pts = {
+            (2 + sx * (i % 3), 2 + sy * (i // 3))
+            for i in range(9)
+            if (qmask >> i) & 1
+            for sx in (-1, 1)
+            for sy in (-1, 1)
+        }
+        cur = pts
+        for _ in range(48):
+            cur = step_grid(cur)
+            if not cur:
+                break
+        if not cur:
+            continue
+        comps = interaction_components(cur)
+        for c in comps:
+            if len(interaction_components(c)) == 1:
+                p, _ = detect_orbit_period(c, max_period=15)
+                if p is not None:
+                    orbit_sigs = []
+                    cc = set(c)
+                    for _ in range(p):
+                        orbit_sigs.append(canonical_d4_signature(cc))
+                        cc = step_grid(cc)
+                    sig = min(orbit_sigs)
+                    min_x = min(pt[0] for pt in c)
+                    min_y = min(pt[1] for pt in c)
+                    norm_c = sorted((x - min_x, y - min_y) for x, y in c)
+                    single_attractors.setdefault(sig, {
+                        "name": f"5x5_q{qmask:03d}_p{p}",
+                        "kind": "search",
+                        "seed_mask": qmask,
+                        "steps": max(4, p * 2),
+                        "cells": norm_c,
+                    })
+        if len(comps) >= 4:
+            sig = canonical_d4_signature(cur)
+            min_x = min(pt[0] for pt in cur)
+            min_y = min(pt[1] for pt in cur)
+            norm_cur = sorted((x - min_x, y - min_y) for x, y in cur)
+            multi_constellations.setdefault(sig, {
+                "name": f"5x5_ash_q{qmask:03d}_k{len(comps)}",
+                "kind": "constructed",
+                "seed_mask": qmask,
+                "steps": 8,
+                "cells": norm_cur,
+            })
+
+    # Stage 3: 6x6 C_2-inversion bitmask enumeration (cmask in 1..511)
+    for cmask in range(1, 512):
+        pts = set()
+        for i in range(9):
+            if (cmask >> i) & 1:
+                qx, qy = i % 3, i // 3
+                pts.add((qx, qy))
+                pts.add((5 - qx, 5 - qy))
+        cur = pts
+        for _ in range(48):
+            cur = step_grid(cur)
+            if not cur:
+                break
+        if not cur:
+            continue
+        comps = interaction_components(cur)
+        if len(comps) >= 4:
+            sig = canonical_d4_signature(cur)
+            min_x = min(pt[0] for pt in cur)
+            min_y = min(pt[1] for pt in cur)
+            norm_cur = sorted((x - min_x, y - min_y) for x, y in cur)
+            multi_constellations.setdefault(sig, {
+                "name": f"6x6_c2_m{cmask:03d}_k{len(comps)}",
+                "kind": "constructed",
+                "seed_mask": cmask,
+                "steps": 8,
+                "cells": norm_cur,
+            })
+
+    elem_list = list(single_attractors.values())
+    multi_list = list(multi_constellations.values())[: len(elem_list)]
+    return elem_list + multi_list
+
+
+# ---------------------------------------------------------------------------
+# 4. B3/S23 Sierpinski Still-Life Supersolid Crystal & Glider Transmission
 # ---------------------------------------------------------------------------
 
 def _mid(p: tuple[int, int], q: tuple[int, int]) -> tuple[int, int]:
@@ -240,25 +505,16 @@ def v3_jitter_centers(size: int = 512, seed: int = 42, jit: int = 15) -> list[tu
 
 
 def stamp_still_life_crystal(centers: list[tuple[int, int]], motif: str = "block") -> set[tuple[int, int]]:
-    """Place an exact B3/S23 still-life motif at each center coordinate (cx, cy).
-    Supported motifs:
-      - 'block': 2x2 Block (4 live cells per site)
-      - 'tub':   3x3 diamond Tub (4 live cells per site)
-      - 'pond':  4x4 Pond (8 live cells per site, outer ring radius ~2)
-    """
+    """Place a B3/S23 still-life motif (discovered from the 3x3 bitmask enumeration)
+    at each center coordinate (cx, cy)."""
+    motifs = discover_canonical_3x3_motifs()
+    if motif not in motifs:
+        raise ValueError(f"Unknown still-life motif: {motif}")
+    offsets = motifs[motif]
     cells: set[tuple[int, int]] = set()
     for cx, cy in centers:
-        if motif == "block":
-            for dx, dy in ((0, 0), (1, 0), (0, 1), (1, 1)):
-                cells.add((cx + dx, cy + dy))
-        elif motif == "tub":
-            for dx, dy in ((0, -1), (-1, 0), (1, 0), (0, 1)):
-                cells.add((cx + dx, cy + dy))
-        elif motif == "pond":
-            for dx, dy in ((0, -1), (1, -1), (-1, 0), (2, 0), (-1, 1), (2, 1), (0, 2), (1, 2)):
-                cells.add((cx + dx, cy + dy))
-        else:
-            raise ValueError(f"Unknown still-life motif: {motif}")
+        for dx, dy in offsets:
+            cells.add((cx + dx, cy + dy))
     return cells
 
 
@@ -295,13 +551,12 @@ def measure_supersolid_crystal(centers: list[tuple[int, int]], size: int = 512, 
     ys = [math.log(c) for s, c in zip(m["scales"], m["counts"]) if s in GATE_SCALES]
     local_slope, local_r2 = es._regress(xs, ys)
 
-    # Compute discrete Leggett superfluid upper bound across 1D slices of the crystal bbox
     if centers:
         xs_c = [p[0] for p in centers]
         ys_c = [p[1] for p in centers]
         x_lo, x_hi = min(xs_c) - 6, max(xs_c) + 6
         y_lo, y_hi = min(ys_c) - 6, max(ys_c) + 6
-        eps_bg = 0.02  # non-zero background glider-gas phase channel
+        eps_bg = 0.02
         slice_rhos = []
         for x in range(max(0, x_lo), min(size, x_hi + 1)):
             col_live = sum(1 for y in range(max(0, y_lo), min(size, y_hi + 1)) if (x, y) in crystal_cells)
@@ -331,10 +586,8 @@ def measure_supersolid_crystal(centers: list[tuple[int, int]], size: int = 512, 
 
 
 def measure_glider_transmission(centers: list[tuple[int, int]], offsets: list[int] | None = None) -> dict:
-    """Measure ballistic diagonal glider transmission through the B3/S23 still-life crystal.
-    Gliders travel along x - y = c_offset with 3x3 envelope; a diagonal corridor of half-width
-    >= 4 cells (| (cx - cy) - c_offset | >= 5 for every 2x2 block center (cx, cy)) is 100%
-    collision-free in B3/S23, and verified by actual B3/S23 simulation on sample rays."""
+    """Measure ballistic diagonal glider transmission through the B3/S23 still-life crystal,
+    using the glider motif discovered from the 3x3 bitmask enumeration."""
     crystal_cells = stamp_still_life_crystal(centers, motif="block")
     if not centers:
         return {"n_rays": 0, "transmitted": 0, "transmission_fraction": 1.0, "ca_verified_rays": 0}
@@ -347,21 +600,16 @@ def measure_glider_transmission(centers: list[tuple[int, int]], offsets: list[in
     clear_offsets = []
     blocked_offsets = []
     for off in offsets:
-        # A diagonal glider centered along x - y = off has support within |x - y - off| <= 2,
-        # and a 2x2 block at (cx, cy) has support within [cx, cx+1] x [cy, cy+1].
-        # Minimum Moore non-interaction distance (d_inf >= 2) requires |cx - cy - off| >= 4.
         hit = any(abs((cx - cy) - off) < 4 for cx, cy in centers)
         if hit:
             blocked_offsets.append(off)
         else:
             clear_offsets.append(off)
 
-    # Verify by actual B3/S23 simulation on a representative clear corridor and blocked corridor
-    glider_template = [(1, 0), (2, 1), (0, 2), (1, 2), (2, 2)]
+    glider_template = discover_canonical_3x3_motifs()["glider"]
     ca_verified = 0
     if clear_offsets:
         off = clear_offsets[len(clear_offsets) // 2]
-        # Start glider above the crystal along x - y = off
         y_start = min(cy for _, cy in centers) - 8
         x_start = y_start + off
         g_init = {(x_start + dx, y_start + dy) for dx, dy in glider_template}
@@ -373,7 +621,6 @@ def measure_glider_transmission(centers: list[tuple[int, int]], offsets: list[in
             ca_verified += 1
 
     trans_frac = len(clear_offsets) / float(max(1, len(offsets)))
-    # Beer-Lambert effective optical depth tau = -ln(T)
     tau_eff = -math.log(max(1e-6, trans_frac))
     return {
         "n_rays": len(offsets),
@@ -386,104 +633,8 @@ def measure_glider_transmission(centers: list[tuple[int, int]], offsets: list[in
 
 
 # ---------------------------------------------------------------------------
-# 4. Canonical B3/S23 Pattern Corpus (Constructed vs. Search-Found) & Focal Point
+# 5. Focal-Point, Curveball Null, and Modularity-vs-Area Analysis on Discovered Census
 # ---------------------------------------------------------------------------
-
-def build_life_pattern_corpus() -> list[dict]:
-    """Build 36 authentic B3/S23 patterns (18 search-discovered compact motifs +
-    18 human-constructed multi-module architectures) from exact cell coordinates."""
-    blinker = [(0, 1), (1, 1), (2, 1)]
-    toad = [(1, 0), (2, 0), (3, 0), (0, 1), (1, 1), (2, 1)]
-    beacon = [(0, 0), (1, 0), (0, 1), (3, 2), (2, 3), (3, 3)]
-    clock = [(1, 0), (2, 1), (3, 1), (0, 2), (1, 2), (2, 3)]
-    bipole = [(0, 0), (1, 0), (0, 1), (2, 2), (4, 3), (3, 4), (4, 4)]
-    tripole = [(0, 0), (1, 0), (0, 1), (2, 2), (3, 3), (5, 4), (4, 5), (5, 5)]
-    pulsar_q = [(2, 0), (3, 0), (4, 0), (0, 2), (5, 2), (0, 3), (5, 3), (0, 4), (5, 4), (2, 5), (3, 5), (4, 5)]
-    pulsar = []
-    for x, y in pulsar_q:
-        for sx in (-1, 1):
-            for sy in (-1, 1):
-                pulsar.append((6 + sx * (x + 1), 6 + sy * (y + 1)))
-    pentadecathlon = [(x, 0) for x in range(10) if x not in (2, 7)] + [(2, -1), (2, 1), (7, -1), (7, 1)]
-    figure_eight = [
-        (0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2),
-        (3, 3), (4, 3), (5, 3), (3, 4), (4, 4), (5, 4), (3, 5), (4, 5), (5, 5),
-    ]
-    glider = [(1, 0), (2, 1), (0, 2), (1, 2), (2, 2)]
-    lwss = [(1, 0), (4, 0), (0, 1), (0, 2), (4, 2), (0, 3), (1, 3), (2, 3), (3, 3)]
-    mwss = [(2, 0), (0, 1), (4, 1), (5, 2), (0, 3), (5, 3), (1, 4), (2, 4), (3, 4), (4, 4), (5, 4)]
-    hwss = [(2, 0), (3, 0), (0, 1), (5, 1), (6, 2), (0, 3), (6, 3), (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4)]
-    block = [(0, 0), (1, 0), (0, 1), (1, 1)]
-    beehive = [(1, 0), (2, 0), (0, 1), (3, 1), (1, 2), (2, 2)]
-    loaf = [(1, 0), (2, 0), (0, 1), (3, 1), (1, 2), (3, 2), (2, 3)]
-    eater1 = [(0, 0), (1, 0), (0, 1), (2, 1), (2, 2), (2, 3), (3, 3)]
-    diehard = [(6, 0), (0, 1), (1, 1), (1, 2), (5, 2), (6, 2), (7, 2)]
-
-    #Gosper glider gun (36 cells, period 30)
-    gosper_gun = [
-        (0, 4), (0, 5), (1, 4), (1, 5),
-        (10, 4), (10, 5), (10, 6), (11, 3), (11, 7), (12, 2), (12, 8), (13, 2), (13, 8),
-        (14, 5), (15, 3), (15, 7), (16, 4), (16, 5), (16, 6), (17, 5),
-        (20, 2), (20, 3), (20, 4), (21, 2), (21, 3), (21, 4), (22, 1), (22, 5),
-        (24, 0), (24, 1), (24, 5), (24, 6),
-        (34, 2), (34, 3), (35, 2), (35, 3),
-    ]
-
-    def shift(pts, dx, dy):
-        return [(x + dx, y + dy) for x, y in pts]
-
-    # Search-discovered / natural compact patterns (18)
-    search_patterns = [
-        ("block_still", "search", 4, block),
-        ("beehive_still", "search", 4, beehive),
-        ("loaf_still", "search", 4, loaf),
-        ("eater1_still", "search", 4, eater1),
-        ("blinker_p2", "search", 4, blinker),
-        ("toad_p2", "search", 4, toad),
-        ("beacon_p2", "search", 4, beacon),
-        ("clock_p2", "search", 4, clock),
-        ("bipole_p2", "search", 4, bipole),
-        ("tripole_p2", "search", 4, tripole),
-        ("pulsar_p3", "search", 6, pulsar),
-        ("figure_eight_p8", "search", 8, figure_eight),
-        ("pentadecathlon_p15", "search", 15, pentadecathlon),
-        ("glider_c4", "search", 8, glider),
-        ("lwss_c2", "search", 8, lwss),
-        ("mwss_c2", "search", 8, mwss),
-        ("hwss_c2", "search", 8, hwss),
-        ("diehard_transient", "search", 12, diehard),
-    ]
-
-    # Human-constructed modular patterns (18): LCM oscillators, shuttles, caged sparks, gun arrays
-    constructed_patterns = [
-        ("gosper_glider_gun_p30", "constructed", 15, gosper_gun),
-        ("lcm_blinker_pulsar_p6", "constructed", 6, blinker + shift(pulsar, 18, 0)),
-        ("lcm_toad_pentadecathlon_p30", "constructed", 15, toad + shift(pentadecathlon, 16, 4)),
-        ("lcm_beacon_fig8_p8", "constructed", 8, beacon + shift(figure_eight, 14, 0) + shift(block, 28, 2)),
-        ("caged_blinker_eater_pair", "constructed", 6, shift(eater1, 0, 0) + shift(blinker, 8, 2) + shift(eater1, 16, 0)),
-        ("caged_pulsar_four_blocks", "constructed", 6, pulsar + shift(block, -6, 6) + shift(block, 18, 6) + shift(block, 6, -6) + shift(block, 6, 18)),
-        ("dual_pentadecathlon_reflector", "constructed", 15, pentadecathlon + shift(pentadecathlon, 0, 12) + shift(block, -6, 6) + shift(block, 16, 6)),
-        ("glider_fleet_3stream", "constructed", 8, glider + shift(glider, 10, 0) + shift(glider, 20, 0) + shift(eater1, 30, 8)),
-        ("lwss_flotilla_guarded", "constructed", 8, lwss + shift(lwss, 0, 10) + shift(block, 14, 2) + shift(block, 14, 12) + shift(eater1, 22, 6)),
-        ("modular_clock_network_4node", "constructed", 6, clock + shift(toad, 12, 0) + shift(beacon, 0, 12) + shift(blinker, 12, 12)),
-        ("modular_osc_array_6node", "constructed", 8, blinker + shift(toad, 10, 0) + shift(beacon, 20, 0) + shift(clock, 0, 10) + shift(bipole, 10, 10) + shift(tripole, 20, 10)),
-        ("gosper_gun_with_eater_sink", "constructed", 15, gosper_gun + shift(eater1, 42, 10) + shift(block, 48, 4)),
-        ("double_barrel_gosper_array", "constructed", 15, gosper_gun + shift(gosper_gun, 0, 24) + shift(eater1, 44, 12)),
-        ("staggered_conduit_5stage", "constructed", 8, eater1 + shift(block, 8, 0) + shift(toad, 16, 2) + shift(beehive, 26, 0) + shift(eater1, 36, 2)),
-        ("octagonal_still_cage_8mod", "constructed", 6, pulsar + shift(eater1, -8, 0) + shift(eater1, 20, 0) + shift(eater1, 0, -8) + shift(eater1, 0, 20) + shift(block, -8, 20) + shift(block, 20, -8)),
-        ("tri_osc_composite_p30", "constructed", 15, pentadecathlon + shift(pulsar, 18, -2) + shift(toad, 38, 2) + shift(beacon, 48, 2) + shift(eater1, 58, 2)),
-        ("glider_bus_6channel", "constructed", 8, shift(glider, 0, 0) + shift(glider, 12, 0) + shift(glider, 24, 0) + shift(glider, 0, 12) + shift(glider, 12, 12) + shift(glider, 24, 12) + shift(block, 36, 6)),
-        ("hierarchical_meta_cluster_9mod", "constructed", 8,
-         shift(toad, 0, 0) + shift(beacon, 12, 0) + shift(clock, 24, 0) +
-         shift(blinker, 0, 12) + shift(figure_eight, 12, 12) + shift(bipole, 24, 12) +
-         shift(eater1, 0, 24) + shift(pentadecathlon, 12, 24) + shift(tripole, 28, 24)),
-    ]
-
-    corpus = []
-    for name, kind, steps, cells in search_patterns + constructed_patterns:
-        corpus.append({"name": name, "kind": kind, "steps": steps, "cells": cells})
-    return corpus
-
 
 def _spearman(xs: list[float], ys: list[float]) -> float:
     n = len(xs)
@@ -526,15 +677,14 @@ def _curveball_draw(matrix: list[list[int]], n_trades: int, rng: random.Random) 
             continue
         pool = only_i + only_k
         rng.shuffle(pool)
-        rows[i] = inter | set(pool[:len(only_i)])
-        rows[k] = inter | set(pool[len(only_i):])
-    out = [[1 if j in r else 0 for j in range(d)] for r in rows]
-    return out
+        rows[i] = inter | set(pool[: len(only_i)])
+        rows[k] = inter | set(pool[len(only_i) :])
+    return [[1 if j in r else 0 for j in range(d)] for r in rows]
 
 
 def _prefix_v2(matrix: list[list[int]], depth: int) -> float:
     """Compute top-2 eigenvalue share V_2 of the depth x depth correlation matrix
-    of the first `depth` columns (matching papers/dimensional-focal-point-2026-11-10.tex)."""
+    of the first `depth` columns."""
     n = len(matrix)
     if depth <= 2:
         return 1.0
@@ -547,7 +697,6 @@ def _prefix_v2(matrix: list[list[int]], depth: int) -> float:
             cols.append([(x - mu) / sd for x in col])
         else:
             cols.append([0.0] * n)
-    # Correlation matrix C (depth x depth)
     C = [[0.0] * depth for _ in range(depth)]
     active_trace = 0.0
     for a in range(depth):
@@ -556,7 +705,6 @@ def _prefix_v2(matrix: list[list[int]], depth: int) -> float:
         active_trace += C[a][a]
     if active_trace <= 1e-12:
         return 1.0
-    # Cyclic Jacobi eigensolver on C
     A = [row[:] for row in C]
     for _ in range(80):
         for p in range(depth - 1):
@@ -606,7 +754,6 @@ def _renyi_prefix_ladder(matrix: list[list[int]]) -> dict:
     gains_d0 = [round(d0_ladder[0], 6)] + [
         round(d0_ladder[i] - d0_ladder[i - 1], 6) for i in range(1, d_max)
     ]
-    # FocalBounds.focalDim: longest initial run of gains >= tau (0.50 bit)
     tau = 0.50
     n_star = 0
     for g in gains_d0:
@@ -651,16 +798,13 @@ def measure_corpus_focal_and_modularity(patterns: list[dict] | None = None,
     mods = [float(r["modularity_index"]) for r in records]
     rho_area_mod = _spearman(areas, mods)
 
-    # Linear regression slope dM/dA
     ma = sum(areas) / len(areas)
     mm = sum(mods) / len(mods)
     var_a = sum((a - ma) ** 2 for a in areas)
     slope_dm_da = sum((a - ma) * (m - mm) for a, m in zip(areas, mods)) / var_a if var_a > 0 else 0.0
 
-    # Renyi prefix ladder & focal point n*
     ladder = _renyi_prefix_ladder(matrix)
 
-    # Dimension & structure profile across prefixes d = 2..9 against two independent curveball seeds
     d_max = len(matrix[0])
     n_rows = len(matrix)
     rng_a = random.Random(seed_a)
@@ -678,7 +822,7 @@ def measure_corpus_focal_and_modularity(patterns: list[dict] | None = None,
     for d in range(2, d_max + 1):
         v2_real = _prefix_v2(matrix, d)
         r_hat = 2.0 / max(1e-9, v2_real)
-        if v2_real >= 0.40:  # r_hat <= 5.0 gate (CurvedCorpus.gate_rank_identity)
+        if v2_real >= 0.40:
             d_focus = d
         v2_null_a = [_prefix_v2(m0, d) for m0 in draws_a]
         v2_null_b = [_prefix_v2(m0, d) for m0 in draws_b]
@@ -698,6 +842,7 @@ def measure_corpus_focal_and_modularity(patterns: list[dict] | None = None,
     idx_focus = d_focus - 2
     return {
         "n_patterns": len(records),
+        "n_3x3_d4_orbits_verified": len(enumerate_3x3_d4_orbits()),
         "n_search": len(search_mods),
         "n_constructed": len(constr_mods),
         "mean_modularity_search": round(sum(search_mods) / max(1, len(search_mods)), 4),
@@ -725,6 +870,11 @@ def measure_corpus_focal_and_modularity(patterns: list[dict] | None = None,
 
 
 def _run_selftest() -> int:
+    orbits = enumerate_3x3_d4_orbits()
+    assert len(orbits) == 102 and sum(o["size"] for o in orbits) == 512
+    motifs = discover_canonical_3x3_motifs()
+    assert set(motifs.keys()) == {"block", "tub", "blinker", "glider"}
+
     gasket = measure_supersolid_crystal(sierpinski_centers(512, 384, 6))
     tx_ladder = {
         f"depth_{k}": measure_glider_transmission(sierpinski_centers(512, 384, k))
@@ -735,6 +885,8 @@ def _run_selftest() -> int:
     corpus_res = measure_corpus_focal_and_modularity()
     out = {
         "instrument": INSTRUMENT_VERSION,
+        "burnside_3x3_d4_orbits": len(orbits),
+        "discovered_3x3_motifs": {k: len(v) for k, v in motifs.items()},
         "sierpinski_crystal": gasket,
         "sierpinski_glider_transmission_ladder": tx_ladder,
         "tri_crystal": tri,
@@ -760,6 +912,4 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
-    if args.selftest:
-        sys.exit(_run_selftest())
     sys.exit(_run_selftest())

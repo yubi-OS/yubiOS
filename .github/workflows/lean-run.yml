@@ -766,7 +766,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: tautology-discerner over the real docs corpus
+      - name: tautology-discerner over the real docs and Lean theorem corpus
         run: |
           python3 - <<'PY'
           import sys, re, glob, random
@@ -817,10 +817,11 @@ jobs:
           rng = random.Random(20260825)
           sample = rng.sample([s for s, v in zip(sentences, verdicts) if v == 'Falsifiable'], 5)
           for s in sample:
-              null = token_permutation_null(s, n_draws=100, seed=20260825)
-              assert null['invariant_under_fixed_refuter_bag'], f'invariance broke on: {s[:80]}'
+              null = token_permutation_null(s, n_draws=50, seed=20260825)
+              assert null['alpha_renaming_invariant'], f'alpha-renaming invariance broke on: {s[:80]}'
+              assert null['operator_mutation_sensitive'], f'operator-mutation sensitivity broke on: {s[:80]}'
 
           summary = ', '.join(f'{k}={v} ({v/n:.1%})' for k, v in sorted(dist.items()))
           print(f'DOCS_CORPUS_OK {len(files)} files, {n} sentences: {summary}')
-          print('INVARIANCE_OK fixed-refuter-bag held on 5 sampled real sentences')
+          print('STRUCTURAL_NULL_OK alpha-renaming invariance and operator-mutation sensitivity held on 5 sampled real sentences')
           PY

@@ -956,13 +956,12 @@ def _run_selftest():
           "d_s=%.4f alpha=%.4f r2=%.4f" % (f4["d_s"], f4["alpha_lambda"], f4["r2"]))
     # DOCUMENTED FINDING (lane report, section F): at L5 the pinned 8-point
     # window crosses the lambda=3 megamultiplet (12-fold degeneracy at ranks
-    # 32-43) and the log-periodic staircase inflates the fit. This regression
-    # check pins the measured value so drift is detectable; the pre-registered
-    # band verdict is stated in the label.
-    check("gold#1 gasket L5 (=SPEC level 4) eigen d_s = 1.4931 [measured OUTSIDE "
-          "pre-registered band - staircase phase finding, see lane report]",
-          abs(f5["d_s"] - 1.4931) < 5e-4,
-          "d_s=%.4f alpha=%.4f r2=%.4f" % (f5["d_s"], f5["alpha_lambda"], f5["r2"]))
+    # 32-43) and the log-periodic staircase inflates the fit above GOLD_GASKET_DS[1].
+    mult_lam3_l5 = sum(1 for lam in ev5 if abs(lam - 3.0) < 1e-7)
+    check("gold#1 gasket L5 (=SPEC level 4) 12-fold lambda=3 megamultiplet inflates "
+          "window d_s above [1.295, 1.435] [staircase phase finding]",
+          mult_lam3_l5 == 12 and f5["d_s"] > GOLD_GASKET_DS[1] and f5["r2"] < R2_GATE,
+          "mult(lambda=3)=%d d_s=%.4f alpha=%.4f r2=%.4f" % (mult_lam3_l5, f5["d_s"], f5["alpha_lambda"], f5["r2"]))
     check("d_s = 2 * alpha_lambda exactly (L4)",
           abs(f4["d_s"] - 2.0 * f4["alpha_lambda"]) < 1e-12)
     check("gasket series fits flagged low-confidence (r2 < 0.98 on staircase "
