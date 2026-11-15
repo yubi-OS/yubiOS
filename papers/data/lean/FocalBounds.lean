@@ -200,10 +200,10 @@ theorem prefix_count_mono_le (codes : List (List Bool)) (d e : Nat) (h : d ≤ e
   induction e with
   | zero =>
     have hd : d = 0 := by omega
-    rw [hd]; exact Nat.le_refl _
+    rw [hd]
   | succ e ih =>
     by_cases hde : d = e + 1
-    · rw [hde]; exact Nat.le_refl _
+    · rw [hde]
     · exact Nat.le_trans (ih (by omega)) (prefix_count_mono codes e)
 
 theorem prefix_count_double (codes : List (List Bool)) (d : Nat)

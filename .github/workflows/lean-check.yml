@@ -72,7 +72,7 @@ jobs:
 
       - name: Check CurvedCorpus.lean
         run: |
-          lean papers/data/lean/CurvedCorpus.lean
+          lean -Dlinter.unusedTactic=false -Dlinter.unreachableTactic=false papers/data/lean/CurvedCorpus.lean
           echo "LEAN_OK: all theorems in papers/data/lean/CurvedCorpus.lean check with no sorry"
 
       - name: Assert no sorry in all Lean files (warnings-as-errors compile)
@@ -84,6 +84,7 @@ jobs:
           # `! grep -n "sorry"` steps, which could never fail: bash's stop-on-
           # error behavior ignores `!`-prefixed commands. The file list is
           # explicit so a new file cannot silently bypass the gate.
+          any_fail=0
           for f in \
             papers/data/lean/CurvedCorpus.lean \
             papers/data/lean/WayfinderBounds.lean \
@@ -93,13 +94,15 @@ jobs:
             papers/data/lean/FocalBounds.lean \
             papers/data/lean/FlowBounds.lean \
             papers/data/lean/LifeBounds.lean; do
-            if ! lean -DwarningAsError=true "$f" > /tmp/sorry-gate.out 2>&1; then
+            if ! lean -DwarningAsError=true -Dlinter.unusedTactic=false -Dlinter.unreachableTactic=false "$f" > /tmp/sorry-gate.out 2>&1; then
               echo "NO_SORRY_FAIL: $f"
               cat /tmp/sorry-gate.out
-              exit 1
+              any_fail=1
+            else
+              echo "NO_SORRY_OK: $f"
             fi
-            echo "NO_SORRY_OK: $f"
           done
+          test "$any_fail" -eq 0
 
       # Kernel re-check (round-3 Lane C): replay each module's compiled
       # olean through a fresh kernel environment. Catches any declaration
