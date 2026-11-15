@@ -1,3 +1,6 @@
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
+
 /-
   LifeBounds.lean
   Exact algebraic, dynamical, combinatorial, and cross-domain identities for
@@ -309,14 +312,7 @@ theorem lightcone_side_step (L0 t : Nat) :
 theorem lightcone_area_quadratic (L0 t : Int) :
     bboxArea L0 t = L0 * L0 + 2 * (L0 * (2 * t)) + (2 * t) * (2 * t) := by
   unfold bboxArea
-  have h1 : (L0 + 2 * t) * (L0 + 2 * t) =
-      L0 * L0 + L0 * (2 * t) + (L0 * (2 * t) + (2 * t) * (2 * t)) := by
-    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm (2 * t) L0]
-  rw [h1]
-  generalize L0 * L0 = x
-  generalize L0 * (2 * t) = y
-  generalize (2 * t) * (2 * t) = z
-  omega
+  ring
 
 /-- Glider gun emission hierarchy over 210*n ticks: period-30 Gosper gun emits 7*n gliders,
     2024 period-15 true-period gun emits 14*n, and period-14 interwoven stream emits 15*n. -/
@@ -358,15 +354,7 @@ theorem diehard_pentate_unfold :
     profile (r1, r2): (r1 + r2)^2 - 4*r1*r2 = (r1 - r2)^2. -/
 theorem supersolid_leggett_disc (r1 r2 : Int) :
     (r1 + r2) * (r1 + r2) - 4 * (r1 * r2) = (r1 - r2) * (r1 - r2) := by
-  have h1 : (r1 + r2) * (r1 + r2) = r1 * r1 + r1 * r2 + (r1 * r2 + r2 * r2) := by
-    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm r2 r1]
-  have h2 : (r1 - r2) * (r1 - r2) = r1 * r1 - r1 * r2 - (r1 * r2 - r2 * r2) := by
-    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, Int.mul_comm r2 r1]
-  rw [h1, h2]
-  generalize r1 * r1 = x
-  generalize r1 * r2 = y
-  generalize r2 * r2 = z
-  omega
+  ring
 
 /-- Strict Leggett bound reduction: any non-uniform crystalline modulation (r1 != r2)
     makes 4*r1*r2 strictly less than (r1 + r2)^2 (superfluid fraction f_s < 1). -/
@@ -398,15 +386,7 @@ theorem multiaxis_cardinal_from_lightcone (dx dy : Int) :
 theorem multiaxis_norm_doubling (dx dy : Int) :
     diagU dx dy * diagU dx dy + diagV dx dy * diagV dx dy = 2 * (dx * dx + dy * dy) := by
   unfold diagU diagV
-  have h1 : (dx + dy) * (dx + dy) = dx * dx + dx * dy + (dx * dy + dy * dy) := by
-    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm dy dx]
-  have h2 : (dx - dy) * (dx - dy) = dx * dx - dx * dy - (dx * dy - dy * dy) := by
-    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, Int.mul_comm dy dx]
-  rw [h1, h2]
-  generalize dx * dx = x
-  generalize dx * dy = y
-  generalize dy * dy = z
-  omega
+  ring
 
 def scaledNeff (L dt : Nat) : Nat := 4 * L + dt
 def ghShift (x0 d1 d2 : Int) : Int := x0 + d1 + d2
@@ -450,6 +430,18 @@ theorem teleological_mdl_penalty (kx0 kb t1 t2 d1 d2 : Int) (ht : t1 ≤ t2) (hd
   unfold purposeScore
   omega
 
+/-- Discrete Beer-Lambert two-layer survival expansion over common denominator d^2:
+    (d - s)^2 = d^2 - 2*d*s + s^2. -/
+theorem optics_beer_lambert_two_layer (d s : Int) :
+    (d - s) * (d - s) = d * d - 2 * d * s + s * s := by
+  ring
+
+/-- Sierpinski gasket vertex count recurrence (scaled by 2): 2*V_{k+1} = 3*(2*V_k) - 6,
+    where 2*V_k = 3^(k+1) + 3 (used in G_SCI_1 / life_supersolid.py across depths k=2..6). -/
+theorem sierpinski_vertex_recurrence (p : Int) :
+    3 * (p + 3) - 6 = 3 * p + 3 := by
+  ring
+
 #print axioms wolfram_code_224
 #print axioms life_interval_all_moore
 #print axioms life_ninesum_all_moore
@@ -492,5 +484,7 @@ theorem teleological_mdl_penalty (kx0 kb t1 t2 d1 d2 : Int) (ht : t1 ≤ t2) (hd
 #print axioms optics_goos_hanchen_additive
 #print axioms cognitive_modularity_collapse
 #print axioms teleological_mdl_penalty
+#print axioms optics_beer_lambert_two_layer
+#print axioms sierpinski_vertex_recurrence
 
 end LifeBounds

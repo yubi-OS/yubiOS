@@ -1,3 +1,6 @@
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
+
 /-
   FocalBounds.lean
   Exact counting identities behind the "dimensional focal point" of a corpus

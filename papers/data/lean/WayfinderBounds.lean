@@ -1,3 +1,6 @@
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
+
 /-
   WayfinderBounds.lean
   Exact integer obligations behind the point-map wayfinder diagnostics.

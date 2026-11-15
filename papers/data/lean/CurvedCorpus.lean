@@ -1,3 +1,6 @@
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
+
 /-
   CurvedCorpus.lean
   Machine-checked invariants for the curved-corpus program.
@@ -1036,15 +1039,7 @@ theorem acoustic_sum_rule (w : Nat → Int) (c : Int) (S : List Nat) :
     (a-b)^2 -- the algebra that opens the band gap. -/
 theorem diatomic_disc (a b : Int) :
     (a + b) * (a + b) - 4 * (a * b) = (a - b) * (a - b) := by
-  have h1 : (a + b) * (a + b) = a * a + a * b + (a * b + b * b) := by
-    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm b a]
-  have h2 : (a - b) * (a - b) = a * a - a * b - (a * b - b * b) := by
-    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, Int.mul_comm b a]
-  rw [h1, h2]
-  generalize a * a = x
-  generalize a * b = y
-  generalize b * b = z
-  omega
+  ring
 
 /-- Mass contrast opens a strictly positive squared gap. -/
 theorem gap_open_of_ne (a b : Int) (h : a ≠ b) : 0 < (a - b) * (a - b) := by

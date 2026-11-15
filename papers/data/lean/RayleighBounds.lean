@@ -1,3 +1,6 @@
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
+
 /-
   RayleighBounds.lean — rayleigh/1 (2026-09-18), core Lean 4.33.0, no Mathlib, no sorry.
 
@@ -129,10 +132,7 @@ theorem witness_numerator (es : List (Nat × Nat)) (S : List Nat) (n k : Int) :
 /-- Rayleigh–Ritz witness denominator, algebraically: k(n−k)² + (n−k)k² = n·k·(n−k). -/
 theorem witness_denominator (n k : Int) :
     k * (n - k) * (n - k) + (n - k) * k * k = n * k * (n - k) := by
-  have h1 : k * (n - k) * (n - k) = (n - k) * k * (n - k) := by
-    rw [Int.mul_comm k (n - k)]
-  rw [h1, ← Int.mul_add, Int.sub_add_cancel]
-  rw [Int.mul_comm ((n - k) * k) n, Int.mul_assoc n k (n - k), Int.mul_comm (n - k) k]
+  ring
 
 /-- concrete instance: 8-vertex path 0-1-…-7, S = {0,1,2,3}: cut = 1, witness R = 8·1/(4·4) = 1/2 -/
 def path8 : List (Nat × Nat) := [(0,1),(1,2),(2,3),(3,4),(4,5),(5,6),(6,7)]

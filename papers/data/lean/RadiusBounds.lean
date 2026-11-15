@@ -1,3 +1,6 @@
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
+
 /-
   RadiusBounds.lean
   Exact integer obligations behind the point-map radius-persistence diagnostics.

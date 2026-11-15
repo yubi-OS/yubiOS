@@ -79,7 +79,7 @@
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "—",
+      "runtime_predicate": "\u2014",
       "statement_sha256": "9e35a7a2c33519c97ea7c46925cd5fb711fa4e95ea0938c50a3bba5f4ce87367"
     },
     {
@@ -87,7 +87,7 @@
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "—",
+      "runtime_predicate": "\u2014",
       "statement_sha256": "4618f4381aebb7e423608b380d18694b54a341c47e673465623f96d5acefeee4"
     },
     {
@@ -95,7 +95,7 @@
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "—",
+      "runtime_predicate": "\u2014",
       "statement_sha256": "2780091b62d570a6410e2521371c57298f814b1d49d9e2ff8d517eb5eddfb15a"
     },
     {
@@ -103,7 +103,7 @@
       "status": "lean-proved",
       "statement": "concrete D4 instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "—",
+      "runtime_predicate": "\u2014",
       "statement_sha256": "d3fc3d811074ad147a5cd899f8949a8d219acbb73b8d9ce2f5683e7a396186ff"
     },
     {
@@ -111,7 +111,7 @@
       "status": "lean-proved",
       "statement": "concrete instance",
       "runtime_counterpart": "runtime smoke on real fixture",
-      "runtime_predicate": "—",
+      "runtime_predicate": "\u2014",
       "statement_sha256": "46cfa295ae4525c8ccc5c73ac7b4c3a9f2e6b3e1a4a0f57a8cd280fff461e22c"
     }
   ],
@@ -144,8 +144,8 @@
     "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
     "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
     "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
-    "hash": "2c28a7378299876eb6888088e82c96ba4eefcc0ea1565d0a83c72c26e5d6edd4",
-    "count": 39,
+    "hash": "8b7eb3900bcac9af7140d0a655ed8a9d9da63f5e7dda9c0797d426913217d228",
+    "count": 41,
     "decls": {
       "#print:axioms": "74e87496484f31d2fe579b8d25d18f95d427539a3ff09cbe1657519764115ffa",
       "#print:axioms#10": "7d8513c5d1bccd4f0b6e2f629507cb410dad057b3e1ae66cd292f6077d7e5a00",
@@ -171,6 +171,8 @@
       "def:scale": "cc7b769219a335bbadfb767d1d3b9539708a4144ccec62ab1df3b300838c0d2b",
       "def:z1": "02513c6d474f19353c881d8c6a51d50307c53d014616b437164897bf5e055171",
       "end:Azimuth": "feee6ed509b90580120761c1493fb0059cc3eb01e3b1aab9f2b0714ce97775da",
+      "import:Mathlib.Tactic.Linarith": "91b57c8d36c60432cf7f644333ac489c977aeaa1387883661003cf0994235bb9",
+      "import:Mathlib.Tactic.Ring": "295c104e2ca7de183f141f3b6acfe959ed40a9c52b52584e82735138a0923d51",
       "namespace:Azimuth": "4153d1f8a33432f4a295fcde4bebda9eff7224ae6c6e3d0057733f4a49817625",
       "theorem:absSq_conj": "d7cdd1a246f760f6def44bfda0dc9ad6e8b28ad6c22a1e7a06875eae8e74ee40",
       "theorem:absSq_neg": "c827471b8f04973eba755b8461cf38b455a798fc0c9e3377f050a1c1acd01ac4",
@@ -188,5 +190,7 @@
       "theorem:sq_nonneg": "5448f911d1cb6b60e9b588c8fa7f050833c582c179816e971100db0e6b5736ae"
     },
     "pinned_from_commit": "7d5ee590a55e"
-  }
+  },
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "dependencies": "Lean 4.35.0 + Mathlib v4.35.0 (rev 56a005855ea1)"
 }

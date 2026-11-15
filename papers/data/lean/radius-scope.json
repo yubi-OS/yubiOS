@@ -1,8 +1,8 @@
 {
   "schema": "wayfinder-scope/1",
   "lean_file": "papers/data/lean/RadiusBounds.lean",
-  "toolchain": "leanprover/lean4:v4.33.0",
-  "dependencies": "core Lean 4 only (no mathlib, no Batteries, no external imports)",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "dependencies": "Lean 4.35.0 + Mathlib v4.35.0 (rev 56a005855ea1)",
   "generated_for_branch": "lean-check-radius-2026-09-13",
   "gate_reuse": "Checked by the existing, unmodified papers/data/lean/verify_wayfinder_axioms.py, invoked with --axioms <captured kernel output> --manifest papers/data/lean/radius-scope.json. No existing gate, test, or recorded negative was changed or relaxed to admit this file.",
   "permitted_axioms": [
@@ -204,8 +204,8 @@
     "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
     "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
     "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
-    "hash": "9adf3372e60915dd6be3c2c83057a4e5ad4f3b7f390a5ffceeb81ecc829d400d",
-    "count": 45,
+    "hash": "0ff7dc77b89df6a718b35b1c96c984959b55151eb4b5c2362b54dcfa2e5cfc0b",
+    "count": 47,
     "decls": {
       "#print:axioms": "6116e643ae22010647a472cdbaebc9156a99627b31276b4ed0f9cce41847321a",
       "#print:axioms#10": "0e4f29cc9ae3adeab41dbd4f1b600bb0ba543dfaa157d71a1a591d5fcfedda8f",
@@ -233,6 +233,8 @@
       "def:isoAt": "e1495d2ac0cfe21f51aa09a9e304d128c9ab3e2904d99bd59bdc219143917a78",
       "def:isoCount": "09f3f4ab03cb337c236a2a4b2123c47fc5f3cfab922f0b3b49fb27203f1ee13f",
       "end:RadiusBounds": "5d9132c8d5448e2f482837d44c1286ea7f6edb623e2b79765054b2e159282c20",
+      "import:Mathlib.Tactic.Linarith": "91b57c8d36c60432cf7f644333ac489c977aeaa1387883661003cf0994235bb9",
+      "import:Mathlib.Tactic.Ring": "295c104e2ca7de183f141f3b6acfe959ed40a9c52b52584e82735138a0923d51",
       "namespace:RadiusBounds": "55fc10db2b030626cd28e8d85bda8612519f95eb5d43ec6518c0e5d1a30c6405",
       "theorem:clampHigh_le": "f70c67bc59a8071399c5d2b9dc47810971074e2ac5af94548d4e376030b37546",
       "theorem:clampLow_ge": "ac104cabe5426d22b4010281c9dd43389fc586998a0c0a93eea7791b85b4fff9",

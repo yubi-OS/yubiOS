@@ -6,7 +6,7 @@
       "name": "Rayleigh.sq_nonneg",
       "status": "lean-proved",
       "statement": "0 <= a*a for every Int a",
-      "runtime_counterpart": "float Fiedler estimate is compared against exact quotients; PSD is why xᵀLx ≥ 0",
+      "runtime_counterpart": "float Fiedler estimate is compared against exact quotients; PSD is why x\u1d40Lx \u2265 0",
       "runtime_predicate": "graphRayleigh reports nonnegative quadratic forms",
       "statement_sha256": "a15d2368ab92cca2f994461bdf6a59596e7052127d68fb087f12ee1d1e62d565"
     },
@@ -39,7 +39,7 @@
       "status": "lean-proved",
       "statement": "quad edges (x + b) = quad edges x",
       "runtime_counterpart": "witness_numerator derivation",
-      "runtime_predicate": "centering a vector does not change xᵀLx",
+      "runtime_predicate": "centering a vector does not change x\u1d40Lx",
       "statement_sha256": "5a084b3741f18fa2094816b1b2ef1bc3964061a2b78c1021b6b551f3aad00d2e"
     },
     {
@@ -47,7 +47,7 @@
       "status": "lean-proved",
       "statement": "c*a*(c*a) = c*c*(a*a)",
       "runtime_counterpart": "algebra for quad_scale",
-      "runtime_predicate": "—",
+      "runtime_predicate": "\u2014",
       "statement_sha256": "376e18f317453c34bdbcfaaa0710371bd3ff1ab43f450698f2cb0515ea881a5d"
     },
     {
@@ -55,13 +55,13 @@
       "status": "lean-proved",
       "statement": "quad edges (c*x) = c*c*quad edges x",
       "runtime_counterpart": "witness_numerator derivation",
-      "runtime_predicate": "scaling a vector scales xᵀLx by c²",
+      "runtime_predicate": "scaling a vector scales x\u1d40Lx by c\u00b2",
       "statement_sha256": "0b203f0966ea6966e51db676bd62a419cbc0568e2fc9f2d0f898491d2cb000ed"
     },
     {
       "name": "Rayleigh.ind_sq_diff",
       "status": "lean-proved",
-      "statement": "(1_S a − 1_S b)² = edgeCut S a b",
+      "statement": "(1_S a \u2212 1_S b)\u00b2 = edgeCut S a b",
       "runtime_counterpart": "cut counting in cutWitness",
       "runtime_predicate": "per-edge term of an indicator is 0 or 1",
       "statement_sha256": "7e607e576a3685f237bf28b1adf2c89e10c59002d12dd269f52031253d8e2af4"
@@ -71,7 +71,7 @@
       "status": "lean-proved",
       "statement": "quad edges (1_S) = cut edges S",
       "runtime_counterpart": "cutWitness.cut",
-      "runtime_predicate": "xᵀLx of a 0/1 indicator equals the number of cut edges",
+      "runtime_predicate": "x\u1d40Lx of a 0/1 indicator equals the number of cut edges",
       "statement_sha256": "d580d69b6115f711b12bc9b4bc1bbda3fbd406acde5492f4df0332d141373ede"
     },
     {
@@ -79,13 +79,13 @@
       "status": "lean-proved",
       "statement": "edge not touching v has edgeCut [v] = 0",
       "runtime_counterpart": "isolate handling",
-      "runtime_predicate": "—",
+      "runtime_predicate": "\u2014",
       "statement_sha256": "dedbc51dfe6ec2a55d332ead95f3813999e632624093c99fee6d3c70014d7aee"
     },
     {
       "name": "Rayleigh.cut_singleton_untouched",
       "status": "lean-proved",
-      "statement": "no edge touches v ⇒ cut edges [v] = 0",
+      "statement": "no edge touches v \u21d2 cut edges [v] = 0",
       "runtime_counterpart": "graphRayleigh.exact.isolates",
       "runtime_predicate": "an isolated vertex has no cut edges",
       "statement_sha256": "c0e058a8dde5c83975cc6afbd391763c972b8bbb753dc112757acf8c04a700f6"
@@ -93,7 +93,7 @@
     {
       "name": "Rayleigh.quad_no_incident",
       "status": "lean-proved",
-      "statement": "no edge touches v ⇒ quad edges (1_{v}) = 0 (isolated vertex indicator is in the kernel)",
+      "statement": "no edge touches v \u21d2 quad edges (1_{v}) = 0 (isolated vertex indicator is in the kernel)",
       "runtime_counterpart": "graphRayleigh.exact.nullity_identity (stated)",
       "runtime_predicate": "isolates contribute zero eigenvalues",
       "statement_sha256": "cd6979f493aa47c17ab962c0e101379e1a65dc6fabedc5e2fd8c48eb286c7d5b"
@@ -101,24 +101,24 @@
     {
       "name": "Rayleigh.witness_numerator",
       "status": "lean-proved",
-      "statement": "x = n·1_S − k·1 ⇒ quad edges x = n²·cut edges S",
+      "statement": "x = n\u00b71_S \u2212 k\u00b71 \u21d2 quad edges x = n\u00b2\u00b7cut edges S",
       "runtime_counterpart": "cutWitness.quotient numerator",
-      "runtime_predicate": "numerator of the exact rational Rayleigh–Ritz witness",
+      "runtime_predicate": "numerator of the exact rational Rayleigh\u2013Ritz witness",
       "statement_sha256": "f4105db7f30a3cec4aef4f5a781d33aa607c39686163a7ab14fe820ec9184c82"
     },
     {
       "name": "Rayleigh.witness_denominator",
       "status": "lean-proved",
-      "statement": "k(n−k)² + (n−k)k² = n·k·(n−k)",
-      "runtime_counterpart": "cutWitness.quotient denominator (‖x‖² for |S|=k)",
-      "runtime_predicate": "denominator of the exact rational Rayleigh–Ritz witness",
+      "statement": "k(n\u2212k)\u00b2 + (n\u2212k)k\u00b2 = n\u00b7k\u00b7(n\u2212k)",
+      "runtime_counterpart": "cutWitness.quotient denominator (\u2016x\u2016\u00b2 for |S|=k)",
+      "runtime_predicate": "denominator of the exact rational Rayleigh\u2013Ritz witness",
       "statement_sha256": "1103b488267d0fd6602448aaa8c091c979b8d1a27aaa8259a7ed371166822878"
     },
     {
       "name": "Rayleigh.rr_path_example",
       "status": "lean-proved",
-      "statement": "8-vertex path, S={0,1,2,3}: cut=1 and 8·1·2 = 4·(8−4) (witness 1/2)",
-      "runtime_counterpart": "test-rayleigh.mjs path-graph check (fiedler 2(1−cos π/8) ≤ 1/2)",
+      "statement": "8-vertex path, S={0,1,2,3}: cut=1 and 8\u00b71\u00b72 = 4\u00b7(8\u22124) (witness 1/2)",
+      "runtime_counterpart": "test-rayleigh.mjs path-graph check (fiedler 2(1\u2212cos \u03c0/8) \u2264 1/2)",
       "runtime_predicate": "decide instance",
       "statement_sha256": "da24cbdbee6a3888ae14ca53971d76bd3a8d9be8825de4bd6d5540c578c4afc7"
     },
@@ -157,8 +157,8 @@
     "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
     "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
     "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
-    "hash": "c0824c59ad1b0e25614cba73632e2f13a03975c4e8896362d1daaebd52c23739",
-    "count": 40,
+    "hash": "5e7a62cf1845e5d858a7fb298b5cdc01e4bd60d673336d5126c2583ab8cbca37",
+    "count": 42,
     "decls": {
       "#print:axioms": "74e87496484f31d2fe579b8d25d18f95d427539a3ff09cbe1657519764115ffa",
       "#print:axioms#10": "18a4c5d853ca98c7860b30294423cac5d3b1e26d3e25a7b06a34c90e32f929a4",
@@ -183,6 +183,8 @@
       "def:quad": "78039f49a7dfb76986338e1e420b97186e1e43b695fe4f83d925ae23c56fbdb6",
       "def:untouched": "9be50d19313b8488341ab6a9a7d4c6408c188de9a1bd426464c390a35a5e400a",
       "end:Rayleigh": "cb1631eeb35e4ed1d84b1341b7a099c96b0bca275ab321109912c861413f050f",
+      "import:Mathlib.Tactic.Linarith": "91b57c8d36c60432cf7f644333ac489c977aeaa1387883661003cf0994235bb9",
+      "import:Mathlib.Tactic.Ring": "295c104e2ca7de183f141f3b6acfe959ed40a9c52b52584e82735138a0923d51",
       "namespace:Rayleigh": "402e34afb19930b576bf86e50f4aef853506d0202ebf6f759b063b798855e202",
       "theorem:cut_singleton_untouched": "05fe48e03fb72686023d0c0dd82077fb62183726f49583e9756e5b7e4f28662b",
       "theorem:edgeCut_singleton_untouched": "6f2719e0b899a8bf4fae7ea921de9120675d31a6591a6c056d55a6a7cb9a0a54",
@@ -202,5 +204,7 @@
       "theorem:witness_numerator": "caca93220db8f9bdb45728b12d90cf0cdc8d99523c082a2ed369019c9de3ddbc"
     },
     "pinned_from_commit": "7d5ee590a55e"
-  }
+  },
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "dependencies": "Lean 4.35.0 + Mathlib v4.35.0 (rev 56a005855ea1)"
 }

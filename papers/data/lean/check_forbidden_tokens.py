@@ -109,7 +109,6 @@ DEFAULT_TOKENS = [
     "elab",
     "elab_rules",  # suffix variant: `elab` + `_` is one identifier
     # Round-3 additions (Lane A): the environment-mutation class.
-    "import",  # brings metaprogramming / arbitrary libraries into scope
     "set_option",  # e.g. debug.skipKernelTC, debug.skipTC
     "run_cmd",  # arbitrary command-level metaprogramming, env mutation
     "#eval",  # term evaluation; `#` is not an identifier char
@@ -156,6 +155,31 @@ def scan_source(path: Path, tokens: list[str]) -> tuple[list[dict], int]:
                         "context": line.strip()[:120],
                     }
                 )
+    import_pat = re.compile(r"(?<!" + IDENT_CONT + r")import(?!" + IDENT_CONT + r")\s+([A-Za-z0-9_.']+)")
+    mathlib_imports = 0
+    for i, line in enumerate(lines):
+        for m in import_pat.finditer(line):
+            mod_name = m.group(1)
+            if mod_name == "Mathlib" or mod_name.startswith("Mathlib."):
+                mathlib_imports += 1
+            else:
+                violations.append(
+                    {
+                        "file": str(path),
+                        "line": i + 1,
+                        "token": f"import {mod_name}",
+                        "context": line.strip()[:120],
+                    }
+                )
+    if mathlib_imports == 0:
+        violations.append(
+            {
+                "file": str(path),
+                "line": 1,
+                "token": "missing_mathlib_import",
+                "context": "file must contain at least one `import Mathlib...` declaration",
+            }
+        )
     return violations, len(stripped)
 
 

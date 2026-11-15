@@ -60,23 +60,21 @@ jobs:
             papers/data/lean/FlowBounds.lean \
             papers/data/lean/LifeBounds.lean
 
-      - name: Install Lean 4.33.0 (pinned SHA256 release tarball, no installer script)
+      - name: Install Lean 4.35.0 (pinned SHA256 release tarball) and fetch Mathlib v4.35.0 cache
         run: |
           set -euo pipefail
-          # Pinned toolchain: official leanprover/lean4 v4.33.0 linux release tarball.
-          # SHA256 captured 2026-10-07 from the official GitHub release asset:
-          #   https://github.com/leanprover/lean4/releases/download/v4.33.0/lean-4.33.0-linux.tar.zst
-          # Provenance note: this hash was captured in one pass from the official
-          # release; confirm it once against an independent copy of the artifact
-          # (re-download from a different network and re-hash) before relying on
-          # this pin for a security-sensitive merge.
-          expected='4b3fb03c29a1e0a253fb1d11f9bae3725f19a0dc6fc09b3ea16d2c9df3349e2c'
+          # Pinned toolchain: official leanprover/lean4 v4.35.0 linux release tarball + Mathlib v4.35.0.
+          expected='7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d'
           curl -sSfL --retry 3 -o /tmp/lean.tar.zst \
-            https://github.com/leanprover/lean4/releases/download/v4.33.0/lean-4.33.0-linux.tar.zst
+            https://github.com/leanprover/lean4/releases/download/v4.35.0/lean-4.35.0-linux.tar.zst
           echo "$expected  /tmp/lean.tar.zst" | sha256sum --check --status
           mkdir -p "$HOME/.lean-pinned"
           tar --zstd -xf /tmp/lean.tar.zst -C "$HOME/.lean-pinned"
-          echo "$HOME/.lean-pinned/lean-4.33.0-linux/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.lean-pinned/lean-4.35.0-linux/bin:$PATH"
+          echo "$HOME/.lean-pinned/lean-4.35.0-linux/bin" >> "$GITHUB_PATH"
+          cd papers/data/lean
+          lake exe cache get Mathlib.Tactic.Ring Mathlib.Tactic.Linarith
+          echo "LEAN_PATH=$(lake env printenv LEAN_PATH)" >> "$GITHUB_ENV"
 
       - name: Lean version
         run: lean --version
@@ -143,17 +141,17 @@ jobs:
               exit 1
             fi
           done
-          export LEAN_PATH="/tmp/leanchecker-oleans"
+          export LEAN_PATH="/tmp/leanchecker-oleans:${LEAN_PATH}"
           for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
-            echo "== leanchecker --fresh ${base} =="
-            if ! leanchecker --fresh "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
+            echo "== leanchecker ${base} =="
+            if ! leanchecker "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
               echo "LEANCHECKER_FAIL: ${base}" >&2
               cat "/tmp/leanchecker-${base}.out" >&2
               exit 1
             fi
             cat "/tmp/leanchecker-${base}.out"
           done
-          echo "LEANCHECKER_OK: six modules re-type-checked via fresh kernel environment replay"
+          echo "LEANCHECKER_OK: eight Mathlib-enabled modules re-type-checked via kernel replay"
 
       # Axiom coverage gate (Lane A, round 2) — runs after the pinned-tarball
       # lean install step (no elan in this workflow), so `lean` is on PATH.
@@ -222,7 +220,7 @@ jobs:
       - name: Validate scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/wayfinder-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/wayfinder-scope.json
 
       - name: Assert printed axioms match permitted manifest set
         run: |
@@ -245,7 +243,7 @@ jobs:
       - name: Validate radius scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/radius-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('RADIUS_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/radius-scope.json
 
       - name: Assert printed radius axioms match permitted manifest set
         run: |
@@ -279,7 +277,7 @@ jobs:
       - name: Validate azimuth scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/azimuth-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('AZIMUTH_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/azimuth-scope.json
 
       - name: Assert printed azimuth axioms match permitted manifest set
         run: |
@@ -291,7 +289,7 @@ jobs:
       - name: Validate rayleigh scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/rayleigh-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('RAYLEIGH_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/rayleigh-scope.json
 
       - name: Assert printed rayleigh axioms match permitted manifest set
         run: |
@@ -314,7 +312,7 @@ jobs:
       - name: Validate focal scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/focal-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('FOCAL_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/focal-scope.json
 
       - name: Assert printed focal axioms match permitted manifest set
         run: |
@@ -337,7 +335,7 @@ jobs:
       - name: Validate flow scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/flow-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('FLOW_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/flow-scope.json
 
       - name: Assert printed flow axioms match permitted manifest set
         run: |
@@ -346,7 +344,7 @@ jobs:
             --axioms /tmp/flow-axioms.txt \
             --manifest papers/data/lean/flow-scope.json
 
-      - name: Check LifeBounds.lean (kernel, pinned toolchain)
+      - name: Check LifeBounds.lean (kernel, pinned Lean 4.35.0 + Mathlib v4.35.0 toolchain)
         run: |
           set -euo pipefail
           lean papers/data/lean/LifeBounds.lean > /tmp/life-axioms.txt 2>&1 || {
@@ -357,10 +355,10 @@ jobs:
           cat /tmp/life-axioms.txt
           echo "LEAN_OK: papers/data/lean/LifeBounds.lean checks with no sorry"
 
-      - name: Validate life scope manifest is well-formed
+      - name: Verify life scope statement and command pins against LifeBounds.lean
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/life-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('LIFE_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/life-scope.json
 
       - name: Assert printed life axioms match permitted manifest set
         run: |
@@ -404,6 +402,9 @@ jobs:
       - name: Phonon follow-ups — five phonon-bridge follow-ups (disassembled from phonon-followups.yml)
         run: python3 papers/scripts/phonon_followups.py --only-5b
 
+      - name: Fractalrabbit falsification harness — synthetic curve-rsi + atom Delta >= 0 falsifier
+        run: python3 papers/data/fractalrabbit/falsification_harness.py
+
   verify-tools:
     runs-on: ubuntu-26.04
     timeout-minutes: 45
@@ -433,6 +434,7 @@ jobs:
           node tools/point-map/test-rayleigh.mjs
           node tools/point-map/test-admission.mjs
           node tools/point-map/test-azimuth.mjs
+          node tools/point-map/test-pca-convergence.mjs
 
       - name: corpus-auditor selftest
         run: python3 tools/corpus-auditor/auditor.py --selftest
@@ -470,7 +472,9 @@ jobs:
         run: python3 tools/phonon-dispersion/phonon.py --selftest
 
       - name: edge-standard selftest (taste-engine source of record)
-        run: python3 tools/edge-standard/edge_standard.py --selftest
+        run: |
+          python3 tools/edge-standard/edge_standard.py --selftest
+          python3 tools/edge-standard/falsification/gen_v2.py --selftest
 
       - name: edge-standard fixture parity (Python source of record vs JS worker port)
         run: node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
@@ -545,6 +549,12 @@ jobs:
           python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
           python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
 
+      - name: life-supersolid B3/S23 instrument selftest and dynamic falsification harness (11 gates)
+        run: |
+          set -euo pipefail
+          python3 tools/life-supersolid/life_supersolid.py --selftest
+          python3 tools/life-supersolid/falsification/harness_life.py
+
   run-real-corpus:
     runs-on: ubuntu-26.04
     timeout-minutes: 60
@@ -586,6 +596,7 @@ jobs:
           node tools/point-map/test-rayleigh.mjs
           node tools/point-map/test-admission.mjs
           node tools/point-map/test-azimuth.mjs
+          node tools/point-map/test-pca-convergence.mjs
 
       - name: corpus-auditor on real matrix (reproduce published effect)
         run: |
@@ -702,6 +713,7 @@ jobs:
       - name: edge-standard selftest and fixture parity (parity with lean-check)
         run: |
           python3 tools/edge-standard/edge_standard.py --selftest
+          python3 tools/edge-standard/falsification/gen_v2.py --selftest
           node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
 
       - name: spectral-standard selftest, parity, centroid-walk, and falsification harness (parity with lean-check)
@@ -738,6 +750,12 @@ jobs:
           set -euo pipefail
           python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
           python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
+
+      - name: life-supersolid B3/S23 instrument selftest and dynamic falsification harness (11 gates)
+        run: |
+          set -euo pipefail
+          python3 tools/life-supersolid/life_supersolid.py --selftest
+          python3 tools/life-supersolid/falsification/harness_life.py
 
   run-real-statements:
     runs-on: ubuntu-26.04
