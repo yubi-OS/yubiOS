@@ -23,6 +23,8 @@ kargs = [
   # appraisal is enforced by composefs + fs-verity).
   "ima_policy=tcb",
   "ima_hash=sha256",
+  "rd.luks=1",
+  "rd.luks.options=fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes",
   # Ensure hidraw devices are available; no module parameters needed,
   # hidraw is built-in or auto-loaded by udev.
   # fido2-device=auto is set in /etc/crypttab by yubiOS-enroll-luks,

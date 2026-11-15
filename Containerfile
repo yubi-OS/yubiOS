@@ -45,6 +45,9 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       openssh-clients \
       openssh-server \
       fido2-tools \
+      btrfs-progs \
+      diffutils \
+      python3-brotli \
       python3-pip \
       python3-devel \
       gcc \
@@ -81,6 +84,10 @@ RUN echo 'chipsec==1.13.16 --hash=sha256:63bed5ad4224402397817ea82b94c3a21736386
     chipsec_site="$(PYTHONDONTWRITEBYTECODE=1 python3 -c \
       'import sysconfig; print(sysconfig.get_path("platlib"))')" && \
     test -d "${chipsec_site}/chipsec" && \
+    mkdir -p "${chipsec_site}/chipsec/library/tpm" /var/log/chipsec && \
+    ln -sfn /var/log/chipsec "$(dirname "${chipsec_site}")/logs" && \
+    printf '%s\n' 'from chipsec.library.tpm import tpm_defines' > "${chipsec_site}/chipsec/library/tpm/__init__.py" && \
+    printf '%s\n' 'TPM1 = "1.2"' 'TPM2 = "2.0"' 'FIFO_LEGACY = "fifo_legacy"' 'FIFO = "fifo"' 'CRB = "crb"' > "${chipsec_site}/chipsec/library/tpm/tpm_defines.py" && \
     PYTHONHASHSEED=0 python3 -m compileall -f -q -j 1 \
       --invalidation-mode=checked-hash \
       "${chipsec_site}/chipsec" && \
@@ -168,6 +175,7 @@ RUN set -- /usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     if [ "$(uname -m)" != "aarch64" ]; then \
       sed -i 's/optee tpm_ftpm_tee tee_stmm_efi dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-of-dwcmshc //' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
+      sed -i 's/xhci_plat_hcd ehci_platform ohci_platform dwc3 dwc3_of_simple phy_rockchip_inno_usb2 phy_rockchip_naneng_combphy phy_rockchip_usbdp //' /usr/lib/dracut.conf.d/50-yubiOS-fido2.conf; \
     fi && \
     dracut --no-hostonly --force --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \

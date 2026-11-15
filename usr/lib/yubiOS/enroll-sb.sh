@@ -142,6 +142,10 @@ phase_enroll() {
   for v in PK KEK db; do efi-readvar -v "$v"; done
   [ "$(setup_mode)" = "0" ] || { yubiOS_log "SetupMode still 1 after PK write"; exit 1; }
   openssl x509 -in db.crt -outform DER -out "$KEYDIR/yubiOS-db.cer"
+  if [ -d "$ESP/EFI" ]; then
+    mkdir -p "$ESP/EFI/yubiOS/secureboot" 2>/dev/null || true
+    cp -f PK.auth KEK.auth db.auth db.crt "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/secureboot/" 2>/dev/null || true
+  fi
   touch "$ENROLLED_MARK"
   yubiOS_log "Keys enrolled. Next: resign the loader and UKIs before any reboot."
 }

@@ -140,6 +140,20 @@ if [[ "${do_pam:-Y}" =~ ^[Yy] ]]; then
 fi
 
 echo ""
+mkdir -p /var/lib/yubiOS
+touch /var/lib/yubiOS/.enrolled
+systemd-machine-id-setup 2>/dev/null || true
+if [ -b /dev/mapper/yubios-root ]; then
+  mkdir -p /run/yubiOS/luks-root
+  mount /dev/mapper/yubios-root /run/yubiOS/luks-root 2>/dev/null || true
+  if mountpoint -q /run/yubiOS/luks-root 2>/dev/null; then
+    mkdir -p /run/yubiOS/luks-root/var/lib/yubiOS /run/yubiOS/luks-root/etc
+    cp -a /var/lib/yubiOS/. /run/yubiOS/luks-root/var/lib/yubiOS/ 2>/dev/null || true
+    cp -a /etc/. /run/yubiOS/luks-root/etc/ 2>/dev/null || true
+    umount /run/yubiOS/luks-root 2>/dev/null || true
+  fi
+fi
+
 echo "─────────────────────────────────────────────────────────────"
 echo "Enrollment complete. Your YubiKey is now the root of trust for this system."
 echo "Enrolled user: ${ENROLL_USER}"

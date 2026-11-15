@@ -78,7 +78,7 @@ permissions:
 env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.34.0@sha256:b059f8d7226d0b326bc871af489a5dddf65e36af4d20d14251b072974d9ee87c
   TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
-  OPTEE_OS_REF: 66b755bc2a4670971b9dd456e802c2c7ea8ad87c # release-descendant ref; see PINNED.md
+  OPTEE_OS_REF: db96ae668363c3107bee1b76d7cf6960944b1ca6 # release-descendant ref; see PINNED.md
   OPTEE_FTPM_REF: b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf # release-descendant ref; see PINNED.md
   UBOOT_REF: 5c7fe6ca3b1a13458e426c7d66cd461d0d76fe83 # release-descendant ref; see PINNED.md
   EDK2_REF: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
@@ -577,9 +577,15 @@ jobs:
           CONFIG_TPM=y
           CONFIG_TPM_V2=y
           CONFIG_TPM2_FTPM_TEE=y
+          CONFIG_SUPPORT_EMMC_RPMB=y
+          CONFIG_CMD_OPTEE_RPMB=y
+          CONFIG_FIT_SIGNATURE=y
+          CONFIG_RSA=y
           CONFIG_EFI_LOADER=y
           CONFIG_EFI_MM_COMM_TEE=y
+          CONFIG_EFI_SECURE_BOOT=y
           CONFIG_EFI_TCG2_PROTOCOL=y
+          CONFIG_CMD_EFIDEBUG=y
           CONFIG_HASH=y
           CONFIG_MEASURED_BOOT=y
           CONFIG_CMD_TPM=y
@@ -630,8 +636,8 @@ jobs:
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
             CROSS_COMPILE=arm-linux-gnueabihf- \
-            CFG_RPMB_FS=y CFG_REE_FS=n CFG_EARLY_TA=y \
-            CFG_STMM_VOLATILE_STORAGE=y \
+            CFG_RPMB_FS=y CFG_REE_FS=y CFG_EARLY_TA=y \
+            CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
             CFG_TEE_CORE_LOG_LEVEL=3 CFG_TEE_TA_LOG_LEVEL=3 \
             ta_dev_kit
@@ -680,8 +686,8 @@ jobs:
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
             CROSS_COMPILE=arm-linux-gnueabihf- \
-            CFG_RPMB_FS=y CFG_REE_FS=n \
-            CFG_STMM_VOLATILE_STORAGE=y \
+            CFG_RPMB_FS=y CFG_REE_FS=y \
+            CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
             CFG_EARLY_TA=y EARLY_TA_PATHS="$FTPM_TA" \
             CFG_CORE_DYN_SHM=y \
@@ -758,9 +764,7 @@ jobs:
             fi
           else
             spd_args=()
-            if [ "$TFA_PLAT" = "rk3588" ]; then
-              spd_args=(SPD=opteed)
-            fi
+            case "$TFA_PLAT" in rk3588|rk3399|rk3568) spd_args=(SPD=opteed) ;; esac
             make -C arm-trusted-firmware -j"$(nproc)" \
               "${tfa_args[@]}" \
               "${spd_args[@]}" \
