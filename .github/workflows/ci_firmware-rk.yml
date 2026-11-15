@@ -94,18 +94,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: amd64
-            runner: ubuntu-24.04
-            docker_arch: x86_64
-            buildx_arch: linux-amd64
-            artifact_suffix: amd64
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -325,21 +320,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: amd64
-            runner: ubuntu-24.04
-            docker_arch: x86_64
-            buildx_arch: linux-amd64
-            artifact_suffix: amd64
-            board: qemu-arm64
-            board_title: QEMU ARM64 CI baseline
-            build_kind: qemu
-            uboot_defconfig: qemu_arm64_defconfig
-            optee_platform: vexpress-qemu_armv8a
-            optee_flavor: ''
-            tfa_plat: qemu
-            requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -351,21 +333,8 @@ jobs:
             optee_flavor: ''
             tfa_plat: qemu
             requires_rockchip_tpl: false
-          - arch: amd64
-            runner: ubuntu-24.04
-            docker_arch: x86_64
-            buildx_arch: linux-amd64
-            artifact_suffix: amd64
-            board: rockpro64-rk3399
-            board_title: ROCKPro64 / RK3399 supported secondary Path A
-            build_kind: rockchip
-            uboot_defconfig: rockpro64-rk3399_defconfig
-            optee_platform: rockchip
-            optee_flavor: rk3399
-            tfa_plat: rk3399
-            requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -377,21 +346,8 @@ jobs:
             optee_flavor: rk3399
             tfa_plat: rk3399
             requires_rockchip_tpl: false
-          - arch: amd64
-            runner: ubuntu-24.04
-            docker_arch: x86_64
-            buildx_arch: linux-amd64
-            artifact_suffix: amd64
-            board: pinetab2-rk3566
-            board_title: Pine64 PineTab2 / RK3566 supported secondary Path A
-            build_kind: rockchip
-            uboot_defconfig: pinetab2-rk3566_defconfig
-            optee_platform: rockchip
-            optee_flavor: rk3568
-            tfa_plat: rk3568
-            requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -403,21 +359,8 @@ jobs:
             optee_flavor: rk3568
             tfa_plat: rk3568
             requires_rockchip_tpl: false
-          - arch: amd64
-            runner: ubuntu-24.04
-            docker_arch: x86_64
-            buildx_arch: linux-amd64
-            artifact_suffix: amd64
-            board: rock5b-rk3588
-            board_title: Radxa ROCK 5B / RK3588 primary Path A
-            build_kind: rockchip
-            uboot_defconfig: rock5b-rk3588_defconfig
-            optee_platform: rockchip
-            optee_flavor: rk3588
-            tfa_plat: rk3588
-            requires_rockchip_tpl: true
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -430,7 +373,7 @@ jobs:
             tfa_plat: rk3588
             requires_rockchip_tpl: true
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -443,7 +386,7 @@ jobs:
             tfa_plat: qemu
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -456,7 +399,7 @@ jobs:
             tfa_plat: rk3399
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -469,7 +412,7 @@ jobs:
             tfa_plat: rk3568
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -1058,12 +1001,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: amd64
-            runner: ubuntu-24.04
-            docker_arch: x86_64
-            buildx_arch: linux-amd64
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-24.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
