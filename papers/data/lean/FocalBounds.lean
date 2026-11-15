@@ -190,7 +190,7 @@ theorem prefix_count_mono (codes : List (List Bool)) (d : Nat) :
     rw [List.map_map]
     apply List.map_congr_left
     intro c _
-    simp [List.take_take, Nat.min_eq_left (Nat.le_succ d)]
+    simp [List.take_take]
   unfold prefixCount
   rw [e]
   exact distinctCount_map_le _ _

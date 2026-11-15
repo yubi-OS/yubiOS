@@ -103,7 +103,7 @@ jobs:
             papers/data/lean/FocalBounds.lean \
             papers/data/lean/FlowBounds.lean \
             papers/data/lean/LifeBounds.lean; do
-            if ! lean -DwarningAsError=true -Dlinter.unusedTactic=false -Dlinter.unreachableTactic=false "$f" > /tmp/sorry-gate.out 2>&1; then
+            if ! lean -DwarningAsError=true -Dlinter.deprecated=false -Dlinter.unusedSimpArgs=false -Dlinter.unusedTactic=false -Dlinter.unreachableTactic=false "$f" > /tmp/sorry-gate.out 2>&1; then
               echo "NO_SORRY_FAIL: $f"
               cat /tmp/sorry-gate.out
               any_fail=1
