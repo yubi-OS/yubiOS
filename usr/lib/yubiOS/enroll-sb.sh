@@ -51,15 +51,29 @@ for tool in ykman openssl cert-to-efi-sig-list sign-efi-sig-list efi-updatevar e
   command -v "$tool" >/dev/null || { yubiOS_log "missing tool: $tool"; exit 1; }
 done
 
-setup_mode() {
-  # SetupMode is 1 while no PK is enrolled. The data byte follows a 4-byte attribute header.
+ensure_efivars_rw() {
   if [ "$EFIVARS" = "/sys/firmware/efi/efivars" ]; then
+    modprobe tee 2>/dev/null || true
+    modprobe optee 2>/dev/null || true
     modprobe tee_stmm_efi 2>/dev/null || true
     modprobe efivarfs 2>/dev/null || true
-    if [ -d "$EFIVARS" ] && ! mountpoint -q "$EFIVARS" 2>/dev/null; then
-      mount -t efivarfs efivarfs "$EFIVARS" 2>/dev/null || true
+    if [ -d "$EFIVARS" ]; then
+      if mountpoint -q "$EFIVARS" 2>/dev/null; then
+        mount -o remount,rw "$EFIVARS" 2>/dev/null || {
+          umount "$EFIVARS" 2>/dev/null || true
+          mount -t efivarfs -o rw efivarfs "$EFIVARS" 2>/dev/null || true
+        }
+      else
+        mount -t efivarfs -o rw efivarfs "$EFIVARS" 2>/dev/null || true
+      fi
+      chattr -i "$EFIVARS"/PK-* "$EFIVARS"/KEK-* "$EFIVARS"/db-* 2>/dev/null || true
     fi
   fi
+}
+
+setup_mode() {
+  # SetupMode is 1 while no PK is enrolled. The data byte follows a 4-byte attribute header.
+  ensure_efivars_rw
   local f="$EFIVARS/SetupMode-$GUID_GLOBAL"
   [ -r "$f" ] || { yubiOS_log "SetupMode not readable; is efivarfs mounted?" >&2; return 2; }
   od -An -t u1 -j4 -N1 "$f" | tr -d ' '
@@ -119,6 +133,7 @@ phase_enroll() {
   sign-efi-sig-list -i db.signed -t "$T" db db.esl db.auth
 
   yubiOS_log "Writing PK, KEK, db through the StMM store"
+  ensure_efivars_rw
   efi-updatevar -f PK.auth PK
   efi-updatevar -f KEK.auth KEK
   efi-updatevar -f db.auth db
