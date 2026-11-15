@@ -86,7 +86,11 @@ def read_pin(repo_root: Path, fork: str, pinned_path: str = "PINNED.md") -> str 
     if not pin_file.exists():
         return None
     text = pin_file.read_text()
-    # Try multiple patterns (PINNED.md varies by repo format)
+    for line in text.splitlines():
+        if line.startswith(f"| `yubi-OS/{fork}` |") or line.startswith(f"| `{fork}` |"):
+            cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
+            if len(cells) >= 5 and re.fullmatch(r"[0-9a-f]{40}", cells[4]):
+                return cells[4]
     patterns = [
         rf'`?{re.escape(fork)}`?\s*[:=]\s*[`"]?([0-9a-f]{{40}})[`"]?',
         rf'`?{re.escape(fork)}`?\s*[:=]\s*[`"]?([0-9a-f]{{7,40}})[`"]?',
@@ -141,7 +145,7 @@ def main() -> int:
             })
             continue
 
-        if args.offline or not token:
+        if args.offline:
             results.append({
                 "fork": fork_name,
                 "pinned_sha": pinned_sha,
@@ -162,10 +166,11 @@ def main() -> int:
             })
             continue
 
-        if upstream_sha.startswith(pinned_sha):
+        fork_default_sha = github_get_latest_sha(f"{args.org}/{fork_name}", upstream_branch, token)
+        if upstream_sha.startswith(pinned_sha) or (fork_default_sha and fork_default_sha == upstream_sha):
             behind = 0
         else:
-            behind = github_count_commits(upstream_repo, pinned_sha, upstream_sha, token)
+            behind = github_count_commits(f"{args.org}/{fork_name}", upstream_sha, pinned_sha, token)
             if behind < 0:
                 behind = None
 
@@ -193,7 +198,7 @@ def main() -> int:
         "minor_lag": sum(1 for r in results if r["verdict"] == "minor-lag"),
         "drifted": sum(1 for r in results if r["verdict"] == "drifted"),
         "no_pin": sum(1 for r in results if r["verdict"] == "no-pin"),
-        "fetch_failed": sum(1 for r in results if r["verdict"] in ("fetch-failed", "compare-failed", "no-fetch")),
+        "fetch_failed": sum(1 for r in results if r["verdict"] in ("fetch-failed", "compare-failed")),
     }
 
     if args.output_format == "json":

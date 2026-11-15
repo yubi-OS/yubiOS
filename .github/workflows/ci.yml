@@ -1,49 +1,30 @@
 name: CI
 
-# Top-level yubiOS CI orchestrator — group-routing redesign (no chain).
+# Top-level yubiOS CI orchestrator — group-routing dispatcher.
 #
-# This workflow is a simple dispatcher. When called with `group=<name>`, it
-# fires one workflow_dispatch per workflow in that group and exits. There is
-# no state machine, no callback, no chain. Each workflow runs independently.
-# Each group is a single dispatch decision; workflows within a group do not
-# depend on each other.
-#
-# Group taxonomy (each value maps to a list of workflow files):
-#   none        — no dispatch (default)
-#   firmware    — ci_firmware-rk.yml
-#   tests       — ci_test_rootless-docker.yml, ci_test_bootc-filesystem.yml,
-#                 ci_test_pq_tls_verify.yml
-#   vm-tests    — ci_test-vm.yml
-#   fetches     — fetch-dhi-manifest.yml, fetch-fedora-bootc-manifest.yml,
-#                 fetch-released-tag-ref.yml
-#   ci-builders — yubiOS-ci.yml, ci_dev_image.yml, ci_mkosi-installer.yml,
-#                 ci_build-test-fixtures.yml
-#                 (firmware is split out as its own group)
-#   forks       — ci_fork_mkosi.yml, ci_fork_bcvk.yml,
-#                 ci_fork_arm-trusted-firmware.yml, ci_fork_optee-os.yml,
-#                 ci_fork_ms-tpm-20-ref.yml, ci_fork_optee-ftpm.yml,
-#                 ci_fork_u-boot.yml, ci_fork_edk2.yml
-#   audits      — ci_token-audit.yml, ci_input-shape.yml, autoinstall-verify.yml,
-#                 ci_dispatch-reachability.yml, ci_fork-drift-detect.yml,
-#                 ci_package-floor.yml, ci_docker-purge.yml,
-#                 ci_docker-repos-ensure.yml
-#   research    — lean-check.yml, lean-run.yml, phonon-followups.yml,
-#                 zernike-caustics.yml, zernike-lens.yml, zernike-spectrum.yml
-#   all         — union of firmware, tests, vm-tests, fetches, ci-builders,
-#                 forks, audits, research (every workflow, dispatched
-#                 independently)
-#
-# Push-trigger policy (2026-07-29 redesign): all 22 sibling workflows are
-# workflow_dispatch-only. The previous path-scoped `on: push` triggers
-# (used for self-edit validation + build-artifact paths) are removed. To
-# validate a workflow edit, dispatch the relevant group manually.
-#
-# Legacy inputs removed (2026-07-29): the previous `Dev_Docker_push`,
-# `Firmware_Docker_push`, `Installer_Docker_push`, `ci_fork_run`,
-# `ci_test_run`, and `vm_image` inputs were "Legacy pass-through" flags
-# that duplicated the group routing decision. They are gone. The previous
-# internal `ci_*` callback contract is also gone: workflows do not call
-# back to ci.yml — each dispatch is independent.
+# Canonical execution sequence:
+#   1. docker  — ci_docker-purge.yml, ci_docker-repos-ensure.yml
+#   2. fetches — fetch-dhi-manifest.yml, fetch-fedora-bootc-manifest.yml,
+#                fetch-released-tag-ref.yml
+#   3. tests   — ci_test_rootless-docker.yml, ci_test_pq_tls_verify.yml,
+#                ci_test-fedora-bootc-arm64-pull.yml
+#      forks   — ci_fork_mkosi.yml, ci_fork_bcvk.yml,
+#                ci_fork_arm-trusted-firmware.yml, ci_fork_optee-os.yml,
+#                ci_fork_ms-tpm-20-ref.yml, ci_fork_optee-ftpm.yml,
+#                ci_fork_u-boot.yml, ci_fork_edk2.yml
+#   4. builds  — yubiOS-ci.yml, ci_dev_image.yml, ci_mkosi-installer.yml,
+#                ci_firmware-rk.yml, ci_build-test-fixtures.yml
+#   5. vms     — ci_test-vm.yml, ci_test-vgpu-vm.yml, ci_test_sealed-uki-vm.yml,
+#                ci_test-ftpm-tpm0.yml, ci_test-bootc-lifecycle.yml,
+#                ci_test-sysext-portable.yml, ci_test_bootc-filesystem.yml
+#   6. misc    — ci_token-audit.yml, ci_input-shape.yml,
+#                ci_dispatch-reachability.yml, ci_fork-drift-detect.yml,
+#                ci_package-floor.yml, autoinstall-verify.yml,
+#                diag_sign-matrix.yml, lean-check.yml, lean-run.yml,
+#                phonon-followups.yml, zernike-caustics.yml, zernike-lens.yml,
+#                zernike-spectrum.yml
+#   7. flash   — ci_flash-device-e2e.yml
+#   all        — union of every workflow above (42 child workflows)
 
 on:
   workflow_dispatch:
@@ -55,12 +36,17 @@ on:
         default: 'none'
         options:
         - none
-        - firmware
-        - tests
-        - vm-tests
+        - docker
         - fetches
-        - ci-builders
+        - tests
         - forks
+        - builds
+        - vms
+        - misc
+        - flash
+        - firmware
+        - ci-builders
+        - vm-tests
         - audits
         - research
         - all
@@ -75,7 +61,7 @@ on:
         required: false
         default: ''
       Docker_push:
-        description: 'Push Docker registries at the end of each builder workflow (firmware, yubiOS-ci, ci_dev_image, ci_mkosi-installer) when dispatched. No-op for non-builder workflows.'
+        description: 'Push Docker registries at the end of each builder workflow (ci_firmware-rk, yubiOS-ci, ci_dev_image, ci_mkosi-installer) when dispatched. No-op for non-builder workflows.'
         type: boolean
         required: false
         default: false
@@ -100,8 +86,6 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Group → workflow file list. Each entry is dispatched independently
-          # as its own workflow_dispatch call. No chain, no callback.
           WORKFLOWS=()
           PUSH_WORKFLOWS=()
           case "$GROUP" in
@@ -109,28 +93,35 @@ jobs:
               echo 'Group=none: no dispatch.'
               exit 0
               ;;
-            firmware)
-              WORKFLOWS=(ci_firmware-rk.yml)
-              PUSH_WORKFLOWS=(ci_firmware-rk.yml)
-              ;;
-            tests)
-              WORKFLOWS=(ci_test_rootless-docker.yml ci_test_bootc-filesystem.yml ci_test_pq_tls_verify.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test-fedora-bootc-arm64-pull.yml ci_test-ftpm-tpm0.yml diag_sign-matrix.yml)
-              ;;
-            vm-tests)
-              # Both VM e2e workflows dispatched independently:
-              # ci_test-vm.yml     — standard yubiOS VM e2e (bcvk)
-              # ci_test-vgpu-vm.yml — vGPU passthrough VM e2e (same shape)
-              WORKFLOWS=(ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml ci_flash-device-e2e.yml)
+            docker)
+              WORKFLOWS=(ci_docker-purge.yml ci_docker-repos-ensure.yml)
               ;;
             fetches)
               WORKFLOWS=(fetch-dhi-manifest.yml fetch-fedora-bootc-manifest.yml fetch-released-tag-ref.yml)
+              ;;
+            tests)
+              WORKFLOWS=(ci_test_rootless-docker.yml ci_test_pq_tls_verify.yml ci_test-fedora-bootc-arm64-pull.yml)
+              ;;
+            forks)
+              WORKFLOWS=(ci_fork_mkosi.yml ci_fork_bcvk.yml ci_fork_arm-trusted-firmware.yml ci_fork_optee-os.yml ci_fork_ms-tpm-20-ref.yml ci_fork_optee-ftpm.yml ci_fork_u-boot.yml ci_fork_edk2.yml)
+              ;;
+            builds)
+              WORKFLOWS=(yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml ci_firmware-rk.yml ci_build-test-fixtures.yml)
+              PUSH_WORKFLOWS=(yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml ci_firmware-rk.yml)
+              ;;
+            firmware)
+              WORKFLOWS=(ci_firmware-rk.yml)
+              PUSH_WORKFLOWS=(ci_firmware-rk.yml)
               ;;
             ci-builders)
               WORKFLOWS=(yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml ci_build-test-fixtures.yml)
               PUSH_WORKFLOWS=(yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml)
               ;;
-            forks)
-              WORKFLOWS=(ci_fork_mkosi.yml ci_fork_bcvk.yml ci_fork_arm-trusted-firmware.yml ci_fork_optee-os.yml ci_fork_ms-tpm-20-ref.yml ci_fork_optee-ftpm.yml ci_fork_u-boot.yml ci_fork_edk2.yml)
+            vms|vm-tests)
+              WORKFLOWS=(ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml ci_test-ftpm-tpm0.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test_bootc-filesystem.yml)
+              ;;
+            misc)
+              WORKFLOWS=(ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml autoinstall-verify.yml diag_sign-matrix.yml lean-check.yml lean-run.yml phonon-followups.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml)
               ;;
             audits)
               WORKFLOWS=(ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml ci_docker-purge.yml ci_docker-repos-ensure.yml autoinstall-verify.yml)
@@ -138,8 +129,11 @@ jobs:
             research)
               WORKFLOWS=(lean-check.yml lean-run.yml phonon-followups.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml)
               ;;
+            flash)
+              WORKFLOWS=(ci_flash-device-e2e.yml)
+              ;;
             all)
-              WORKFLOWS=(ci_firmware-rk.yml ci_test_rootless-docker.yml ci_test_bootc-filesystem.yml ci_test_pq_tls_verify.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test-fedora-bootc-arm64-pull.yml ci_test-ftpm-tpm0.yml diag_sign-matrix.yml ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml ci_flash-device-e2e.yml fetch-dhi-manifest.yml fetch-fedora-bootc-manifest.yml fetch-released-tag-ref.yml yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml ci_build-test-fixtures.yml ci_fork_mkosi.yml ci_fork_bcvk.yml ci_fork_arm-trusted-firmware.yml ci_fork_optee-os.yml ci_fork_ms-tpm-20-ref.yml ci_fork_optee-ftpm.yml ci_fork_u-boot.yml ci_fork_edk2.yml ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml lean-check.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml lean-run.yml phonon-followups.yml autoinstall-verify.yml)
+              WORKFLOWS=(ci_docker-purge.yml ci_docker-repos-ensure.yml fetch-dhi-manifest.yml fetch-fedora-bootc-manifest.yml fetch-released-tag-ref.yml ci_test_rootless-docker.yml ci_test_pq_tls_verify.yml ci_test-fedora-bootc-arm64-pull.yml ci_fork_mkosi.yml ci_fork_bcvk.yml ci_fork_arm-trusted-firmware.yml ci_fork_optee-os.yml ci_fork_ms-tpm-20-ref.yml ci_fork_optee-ftpm.yml ci_fork_u-boot.yml ci_fork_edk2.yml yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml ci_firmware-rk.yml ci_build-test-fixtures.yml ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml ci_test-ftpm-tpm0.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test_bootc-filesystem.yml ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml autoinstall-verify.yml diag_sign-matrix.yml lean-check.yml lean-run.yml phonon-followups.yml zernike-caustics.yml zernike-lens.yml zernike-spectrum.yml ci_flash-device-e2e.yml)
               PUSH_WORKFLOWS=(ci_firmware-rk.yml yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml)
               ;;
             *)
@@ -148,7 +142,6 @@ jobs:
               ;;
           esac
 
-          # Iterate and dispatch each workflow independently.
           count=0
           for wf in "${WORKFLOWS[@]}"; do
             push='false'
@@ -165,12 +158,7 @@ jobs:
             payload=$(jq -n --arg ref "$REF" --argjson inputs "$inputs_json" '{ref: $ref, inputs: $inputs}')
 
             echo "Dispatching $wf (ref=$REF, Docker_push=$push)"
-            curl -fsS -X POST \
-              -H "Authorization: Bearer ${GH_TOKEN}" \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              "https://api.github.com/repos/${REPO}/actions/workflows/${wf}/dispatches" \
-              -d "$payload"
+            curl -fsS -X POST               -H "Authorization: Bearer ${GH_TOKEN}"               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2022-11-28"               "https://api.github.com/repos/${REPO}/actions/workflows/${wf}/dispatches"               -d "$payload"
             count=$((count + 1))
           done
 

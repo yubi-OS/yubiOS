@@ -1,8 +1,14 @@
 name: DIAG - UKI signing matrix (10 variants)
 
-# Stub on main so workflow_dispatch is registered; the full matrix
-# lives on the sealed-uki-vm-lane-v2 branch. Dispatch with ref=<branch>.
-# Same pattern as ci_test_sealed-uki-vm.yml.
+# Validates the 10 UKI signing matrix variants inside 0mniteck/yubios:dev:
+#   - 5 supported positive variants (control-rsa-file, rsa2048-provider,
+#     rsa4096-provider, rsa2048-dgst-provider, rsa2048-pkeyutl-provider) MUST
+#     succeed (sign_rc=0, verify_rc=0).
+#   - 5 negative / retired-backend variants (ec-provider, rsa2048-engine,
+#     rsa2048-sbsign-engine, rsa2048-osslsigncode-pkcs11, ec-osslsigncode-pkcs11)
+#     are negative proofs on Fedora 45 / OpenSSL 3.5 (PE/COFF Authenticode
+#     rejects EC in systemd-sbsign; engine:pkcs11 is retired in favor of
+#     provider:pkcs11 per ADR-002/008) and MUST fail closed (non-zero rc).
 
 on:
   workflow_dispatch: {}
@@ -62,7 +68,9 @@ jobs:
           esac
           URI='pkcs11:token=yubiOS-ci;object=sb-key;type=private?pin-value=1234'
           SBS=/usr/lib/systemd/systemd-sbsign
-          dnf install -y --setopt=install_weak_deps=False systemd-boot-unsigned opensc softhsm pkcs11-provider sbsigntools osslsigncode openssl-pkcs11
+          if ! command -v softhsm2-util >/dev/null 2>&1; then
+            dnf install -y --setopt=install_weak_deps=False softhsm
+          fi
           rpm -q systemd softhsm pkcs11-provider osslsigncode || true
           if [ "$VARIANT" != control-rsa-file ]; then
             mkdir -p /run/hsm/tokens
@@ -72,21 +80,27 @@ jobs:
             softhsm2-util --import "$KEYP8" --token yubiOS-ci --label sb-key --id 0102 --pin 1234
             export PKCS11_PROVIDER_MODULE=/usr/lib64/libsofthsm2.so
           fi
-          cp /usr/lib/systemd/boot/efi/systemd-bootx64.efi /tmp/test.efi
+          cp /usr/lib/systemd/boot/efi/systemd-bootx64.efi /tmp/test.efi 2>/dev/null || cp /usr/lib/systemd/boot/efi/systemd-boot*.efi /tmp/test.efi
           printf 'sign me' > /tmp/data
-          rc=99; vrc=99; skip_verify=0
+          rc=99; vrc=99; skip_verify=0; expect_fail=0
           case "$VARIANT" in
             control-rsa-file)
               "$SBS" sign --private-key="$KEYFILE" --certificate="$CERT" --output=/tmp/signed.efi /tmp/test.efi; rc=$? ;;
-            rsa2048-provider|rsa4096-provider|ec-provider)
+            rsa2048-provider|rsa4096-provider)
+              "$SBS" sign --private-key-source=provider:pkcs11 --private-key="$URI" --certificate="$CERT" --output=/tmp/signed.efi /tmp/test.efi; rc=$? ;;
+            ec-provider)
+              expect_fail=1
               "$SBS" sign --private-key-source=provider:pkcs11 --private-key="$URI" --certificate="$CERT" --output=/tmp/signed.efi /tmp/test.efi; rc=$? ;;
             rsa2048-engine)
+              expect_fail=1
               export PKCS11_MODULE_PATH=/usr/lib64/libsofthsm2.so
               "$SBS" sign --private-key-source=engine:pkcs11 --private-key="$URI" --certificate="$CERT" --output=/tmp/signed.efi /tmp/test.efi; rc=$? ;;
             rsa2048-sbsign-engine)
+              expect_fail=1
               export PKCS11_MODULE_PATH=/usr/lib64/libsofthsm2.so
               sbsign --engine pkcs11 --key "$URI" --cert "$CERT" --output /tmp/signed.efi /tmp/test.efi; rc=$? ;;
             rsa2048-osslsigncode-pkcs11|ec-osslsigncode-pkcs11)
+              expect_fail=1
               osslsigncode sign -pkcs11module /usr/lib64/libsofthsm2.so -key "$URI" -certs "$CERT" -h sha256 -in /tmp/test.efi -out /tmp/signed.efi; rc=$? ;;
             rsa2048-dgst-provider)
               openssl dgst -sha256 -provider pkcs11 -provider default -sign "$URI" -out /tmp/sig /tmp/data; rc=$?; skip_verify=1
@@ -97,6 +111,11 @@ jobs:
               ls -la /tmp/sig || true ;;
             *) echo "unknown variant $VARIANT"; exit 3 ;;
           esac
+          if [ "$expect_fail" = 1 ]; then
+            echo "MATRIX_RESULT variant=$VARIANT expected_negative_rc=$rc"
+            [ "$rc" != 0 ] || { echo "unexpected success on negative variant $VARIANT"; exit 1; }
+            exit 0
+          fi
           if [ "$skip_verify" = 0 ] && [ "$rc" = 0 ]; then
             osslsigncode verify -in /tmp/signed.efi -CAfile "$CERT"; vrc=$?
           else
