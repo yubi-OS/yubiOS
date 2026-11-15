@@ -135,7 +135,7 @@ def metadata_errors(
         "yubios_commit": source,
         "source_date_epoch": epoch,
         "mkosi_seed": seed,
-        "mkosi_source": "b2b1ea6ad59621a6f955e4cbceee72580a91889a",
+        "mkosi_source": "000b5cefe2b130e928fcfe6a649b417d6f78f66d",
         "scope": SCOPE,
         "signature_boundary": SIGNATURE_BOUNDARY,
         "filesystem_boundary": FILESYSTEM_BOUNDARY,

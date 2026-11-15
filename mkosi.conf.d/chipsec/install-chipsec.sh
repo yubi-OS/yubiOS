@@ -5,7 +5,7 @@ set -euo pipefail
 
 python3 -m pip install --no-cache-dir --break-system-packages --require-hashes \
   'chipsec==1.13.16' \
-  --hash=sha256:63bed5ad4224402397817ea82b94c3a21736386a04ff778c003704bd6dfdbca3
+  --hash=sha256:63bed5ad4224402397817ea82b94c3a21736386a04ff778c003704bd6dfdbca3 # chipsec 1.13.16
 
 command -v chipsec_main.py >/dev/null
 command -v chipsec_util.py >/dev/null

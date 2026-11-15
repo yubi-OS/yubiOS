@@ -4,7 +4,7 @@
 # .github/workflows/ci_mkosi-installer.yml. This file is sourced by
 # scripts/build-local-images.sh after the pinned DHI/rootless Docker bootstrap.
 
-readonly LOCAL_MKOSI_REF='b2b1ea6ad59621a6f955e4cbceee72580a91889a'
+readonly LOCAL_MKOSI_REF='000b5cefe2b130e928fcfe6a649b417d6f78f66d' # yubios branch (v27.1 descendant)
 
 install_local_installer_dependencies() {
     local dependencies mkosi_wheel mkosi_wheel_dir

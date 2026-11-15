@@ -77,6 +77,7 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
 # ── First-boot firmware validation (ADR-024) ─────────────────────────────
 # CHIPSEC is distributed from PyPI rather than Fedora repos. Pin the source
 # release and hash so the first-boot firmware checker is reproducible.
+# chipsec==1.13.16 (sha256:63bed5ad4224402397817ea82b94c3a21736386a04ff778c003704bd6dfdbca3)
 RUN echo 'chipsec==1.13.16 --hash=sha256:63bed5ad4224402397817ea82b94c3a21736386a04ff778c003704bd6dfdbca3' \
       > /tmp/chipsec-requirements.txt && \
     PYTHONHASHSEED=0 python3 -m pip install --no-cache-dir --no-compile \

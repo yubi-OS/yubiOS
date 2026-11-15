@@ -4,14 +4,14 @@
 # paths in .github/workflows/ci_firmware-rk.yml. This file is sourced by
 # scripts/build-local-images.sh after the pinned DHI/rootless Docker bootstrap.
 
-readonly LOCAL_TFA_REF='da738d5eae93af342fdc4995dd3c05acb4c9d757'
-readonly LOCAL_OPTEE_OS_REF='0a949c7fb176914a87f69092cd3defc4dc1308b4'
-readonly LOCAL_OPTEE_FTPM_REF='5e09cdbe1bcb1bc3bcf4875ebafb4e1a1154417c'
-readonly LOCAL_UBOOT_REF='5508406582f6f7120dce0c4b3059819a41788db2'
-readonly LOCAL_EDK2_REF='b7a715f7c03c45c6b4575bf88596bfd79658b8ce'
-readonly LOCAL_EDK2_PLATFORMS_REF='cc384840c440415a091623a7658112fedc416094'
-readonly LOCAL_MS_TPM_REF='98b60a44aba79b15fcce1c0d1e46cf5918400f6a'
-readonly LOCAL_MBEDTLS_REF='068ff080b369adfac81509f9b57b2afabaf82dc5'
+readonly LOCAL_TFA_REF='da738d5eae93af342fdc4995dd3c05acb4c9d757' # v2.15.0
+readonly LOCAL_OPTEE_OS_REF='e1181e2d0e40f8550c0f8204a433eac54598d222' # yubios branch (4.11.0 descendant)
+readonly LOCAL_OPTEE_FTPM_REF='b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf' # yubios branch (4.11.0 descendant)
+readonly LOCAL_UBOOT_REF='0257c1dedf23a082cd35afdb757b2886774b091c' # yubios branch (v2026.10 descendant)
+readonly LOCAL_EDK2_REF='b7a715f7c03c45c6b4575bf88596bfd79658b8ce' # edk2-stable202602
+readonly LOCAL_EDK2_PLATFORMS_REF='cc384840c440415a091623a7658112fedc416094' # 20260316-before-platform-removals
+readonly LOCAL_MS_TPM_REF='6cb71f5798200ad27d9a09c690c6db610806d1a8' # yubios branch (v1.83r1 descendant)
+readonly LOCAL_MBEDTLS_REF='068ff080b369adfac81509f9b57b2afabaf82dc5' # mbedtls-3.6.7
 readonly LOCAL_FTPM_UUID='bc50d971-d4c9-42c4-82cb-343fb7f37896'
 readonly LOCAL_STMM_PLATFORM='Platform/StandaloneMm/PlatformStandaloneMmPkg/PlatformStandaloneMmRpmb.dsc'
 

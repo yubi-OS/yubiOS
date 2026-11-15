@@ -28,8 +28,8 @@
 set -euo pipefail
 
 readonly PASSLESS_REPO="https://github.com/pando85/passless.git"
-readonly PASSLESS_TAG="v0.20.2"
-readonly PASSLESS_COMMIT="55139d3e209c62e040806c66181b835d1375971e"
+readonly PASSLESS_TAG="v0.27.3"
+readonly PASSLESS_COMMIT="e88eb0fa2e2b685d8b25712b0ac3000c819d0687" # v0.27.3 — see PINNED.md
 readonly PASSLESS_BUILD_ROOT="/tmp/yubios-passless-build"
 
 if ! command -v dnf >/dev/null 2>&1; then
@@ -97,7 +97,7 @@ git -C "${src}" fetch --depth 1 origin "${PASSLESS_COMMIT}"
 git -C "${src}" checkout --detach FETCH_HEAD
 test "$(git -C "${src}" rev-parse HEAD)" = "${PASSLESS_COMMIT}"
 
-# passless v0.20.2 uses soft-fido2 0.17.0, whose hmac-secret makeCredential and
+# passless v0.27.3 uses soft-fido2 0.19.0, whose hmac-secret makeCredential and
 # getAssertion paths are complete, but passless advertises only credProtect in
 # GetInfo. Enable the implemented extension in this TEST-only build so systemd-
 # cryptenroll and systemd-homed can request it. Keep this exact-source assertion
@@ -109,7 +109,7 @@ sed -i 's/\.extensions(vec!\["credProtect"\.to_string()\])/.extensions(vec!["cre
     "${authenticator_rs}"
 grep -Fq '.extensions(vec!["credProtect".to_string(), "hmac-secret".to_string()])' \
     "${authenticator_rs}"
-# v0.20.2 has four authenticator builder sites. Every credProtect-only GetInfo
+# v0.27.3 has two authenticator builder sites. Every credProtect-only GetInfo
 # extension list must be patched, not just the first one the sed reached.
 if grep -Fq '.extensions(vec!["credProtect".to_string()])' "${authenticator_rs}"; then
     echo "install-swu2f-authenticator: unpatched credProtect-only GetInfo site remains" >&2
@@ -126,7 +126,7 @@ export CARGO_HOME="${cargo_home}"
 export CARGO_INCREMENTAL=0
 export RUSTFLAGS="--remap-path-prefix=${src}=/usr/src/passless --remap-path-prefix=${cargo_home}=/usr/src/cargo-home"
 
-# Vendor crates so we can also patch soft-fido2-ctap 0.17.0's GetInfo filter
+# Vendor crates so we can also patch soft-fido2-ctap 0.19.0's GetInfo filter
 # (soft-fido2-ctap/src/commands/get_info.rs:87 filters config.extensions to
 # CRED_PROTECT only unless HMAC_SECRET is included in the allowlist).
 (

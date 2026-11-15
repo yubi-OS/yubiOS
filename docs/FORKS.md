@@ -9,7 +9,7 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 1. **1:1 Default Branch Sync:** Each fork's default branch (`main` or `master`) is synced 1:1 with its upstream parent repository's default branch (`0 ahead, 0 behind`, identical tree).
 2. **`yubios` Canonical Integration Branch:** Any commits ahead of upstream live on a dedicated branch named `yubios` (rebased cleanly on top of the synced default branch). Forks with zero yubiOS-authored commits have only their 1:1 default branch.
 3. **No Unowned Upstream Branches:** All upstream topic/release/maintenance branches without yubi-OS commits have been deleted.
-4. **Synced Upstream Tags:** Upstream release and reference tags are mirrored into each fork so `PINNED.md` release commits and `fetch-released-tag-ref.yml` checks resolve directly from the fork.
+4. **Synced Upstream Tags:** Upstream release and reference tags are mirrored into each fork so `PINNED.md` release commits and `fetch-released-tag-ref.yml` checks resolve directly from the fork (`optee_os` release tags always match `optee_ftpm` at `4.11.0`).
 5. **Linear Rebase of Owned Feature Branches:** Remaining owned feature/release/artifact branches are linearly rebased onto the fresh upstream default branch (`behind_by = 0`).
 
 ---
@@ -24,14 +24,14 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 | [`yubi-OS/mkosi`](https://github.com/yubi-OS/mkosi) | [`systemd/mkosi`](https://github.com/systemd/mkosi) | `main` (`2fa9a248a2fe`) | `v27.1` (`ecf7f5702bb2`) | `000b5cefe2b1` (`+3`) | `feature/yubiOS-profile` (`+3`) |
 | [`yubi-OS/image-builder`](https://github.com/yubi-OS/image-builder) | [`osbuild/image-builder`](https://github.com/osbuild/image-builder) | `main` (`8f5e12276f11`) | `v90.0.0` (`b80d1f9416f2`) | — _(pure 1:1 mirror)_ | — |
 | [`yubi-OS/arm-trusted-firmware`](https://github.com/yubi-OS/arm-trusted-firmware) | [`ARM-software/arm-trusted-firmware`](https://github.com/ARM-software/arm-trusted-firmware) | `master` (`a881364e03b0`) | `v2.15.0` (`da738d5eae93`) | `8d96428a33f9` (`+3`) | `feat/ci` (`+3`) |
-| [`yubi-OS/optee_os`](https://github.com/yubi-OS/optee_os) | [`OP-TEE/optee_os`](https://github.com/OP-TEE/optee_os) | `master` (`5d9a256b168a`) | `20160825-for-lmg` (`5f51bfdaad90`) | `e1181e2d0e40` (`+6`) | `feat/ci` (`+1`), `feat/stmm-volatile-storage-ci-4.11` (`+6`) |
+| [`yubi-OS/optee_os`](https://github.com/yubi-OS/optee_os) | [`OP-TEE/optee_os`](https://github.com/OP-TEE/optee_os) | `master` (`5d9a256b168a`) | `4.11.0` (`f54190f22611`) | `e1181e2d0e40` (`+6`) | `feat/ci` (`+1`), `feat/stmm-volatile-storage-ci-4.11` (`+6`) |
 | [`yubi-OS/optee_ftpm`](https://github.com/yubi-OS/optee_ftpm) | [`OP-TEE/optee_ftpm`](https://github.com/OP-TEE/optee_ftpm) | `master` (`f09f4cdad210`) | `4.11.0` (`f09f4cdad210`) | `b78d47800ca1` (`+3`) | `feat/ci` (`+1`), `feat/volatile-nv-ci` (`+3`), `feat/volatile-nv-ci-4.11` (`+3`) |
 | [`yubi-OS/ms-tpm-20-ref`](https://github.com/yubi-OS/ms-tpm-20-ref) | [`microsoft/ms-tpm-20-ref`](https://github.com/microsoft/ms-tpm-20-ref) | `main` (`ee21db0a941d`) | `v1.83r1` (`ee21db0a941d`) | `6cb71f579820` (`+1`) | `feat/ci` (`+1`) |
 | [`yubi-OS/edk2-rk3588`](https://github.com/yubi-OS/edk2-rk3588) | [`edk2-porting/edk2-rk3588`](https://github.com/edk2-porting/edk2-rk3588) | `master` (`2f3f8265590f`) | `v1.1` (`6a682c0ef3ed`) | — _(pure 1:1 mirror)_ | — |
-| [`yubi-OS/edk2`](https://github.com/yubi-OS/edk2) | [`tianocore/edk2`](https://github.com/tianocore/edk2) | `master` (`8628578dacd3`) | `edk2-stable202608` (`3e72ffe8afdd`) | `77828ba8f2d0` (`+3`) | `feat/ci` (`+3`) |
+| [`yubi-OS/edk2`](https://github.com/yubi-OS/edk2) | [`tianocore/edk2`](https://github.com/tianocore/edk2) | `master` (`8628578dacd3`) | `edk2-stable202608` (`2970e5699ba6`) | `77828ba8f2d0` (`+3`) | `feat/ci` (`+3`) |
 | [`yubi-OS/edk2-platforms`](https://github.com/yubi-OS/edk2-platforms) | [`tianocore/edk2-platforms`](https://github.com/tianocore/edk2-platforms) | `master` (`4db2845d1442`) | `20260316-before-platform-removals` (`cc384840c440`) | — _(pure 1:1 mirror)_ | — |
-| [`yubi-OS/u-boot`](https://github.com/yubi-OS/u-boot) | [`u-boot/u-boot`](https://github.com/u-boot/u-boot) | `main` (`6487c50b8a40`) | `v2027.01-rc2` (`ecdcf9e365df`) | `0257c1dedf23` (`+27`) | `artifact/spi-bin` (`+10`), `feat/rk3566-open-tpl` (`+27`) |
-| [`yubi-OS/chromium`](https://github.com/yubi-OS/chromium) | [`chromium/chromium`](https://github.com/chromium/chromium) | `main` (`7c5cfc909b83`) | `pre_blink_merge` (`70aa692d68ee`) | — _(pure 1:1 mirror)_ | — |
+| [`yubi-OS/u-boot`](https://github.com/yubi-OS/u-boot) | [`u-boot/u-boot`](https://github.com/u-boot/u-boot) | `main` (`6487c50b8a40`) | `v2026.10` (`5508406582f6`) | `0257c1dedf23` (`+27`) | `artifact/spi-bin` (`+10`), `feat/rk3566-open-tpl` (`+27`) |
+| [`yubi-OS/chromium`](https://github.com/yubi-OS/chromium) | [`chromium/chromium`](https://github.com/chromium/chromium) | `main` (`7c5cfc909b83`) | `—` | — _(pure 1:1 mirror)_ | — |
 | [`yubi-OS/agent-skills`](https://github.com/yubi-OS/agent-skills) | [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) | `main` (`39b723ceebf8`) | `0.6.16` (`39b723ceebf8`) | — _(pure 1:1 mirror)_ | — |
 
 ---
@@ -375,11 +375,11 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 
 - **Upstream Parent:** [`OP-TEE/optee_os`](https://github.com/OP-TEE/optee_os)
 - **Default Branch (`master`):** `5d9a256b168a63311004f0cfbcd19b11018bf6ad` _(synced 1:1 with `OP-TEE/optee_os:master`, `0 ahead, 0 behind`)_
-- **Latest Upstream Tag:** `20160825-for-lmg` (`5f51bfdaad90f1e4c636d41e09e554ae10594a4c`)
+- **Latest Upstream Release / Tag:** `4.11.0` (`f54190f22611dd5ad5d22546fd4209aa100f56bd`)
 
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
-| `master` | `5d9a256b168a63311004f0cfbcd19b11018bf6ad` | `+0 / -0` | `0` | 1:1 mirror of upstream `OP-TEE/optee_os:master` (all unowned upstream branches removed). |
+| `master` | `5d9a256b168a63311004f0cfbcd19b11018bf6ad` | `+0 / -0` | `0` | 1:1 mirror of upstream `OP-TEE/optee_os:master` (all unowned upstream branches removed; release tags synced to match `optee_ftpm` at `4.11.0`). |
 | `yubios` | `e1181e2d0e40f8550c0f8204a433eac54598d222` | `+6 / -0` | `12` | Canonical yubiOS integration branch for OP-TEE OS: adds `CFG_STMM_VOLATILE_STORAGE` RAM-backed StandaloneMM `EFI_VARS` fallback, RK3568/RK3566 platform flavor support (OP-TEE PR #7791 + `otp.h`/`sgrf.h` flavor bridge), `PTA_CMD_GET_DEVICES` StMM PTA enumeration when `CFG_STMM_VOLATILE_STORAGE=y`, non-volatile RPMB/REE storage preference in `stmm_sp.c` before RAM fallback, and component CI. |
 | `feat/ci` | `abd6c3109884df88d0f3e238f08c5816c8a6b6bb` | `+1 / -0` | `1` | Component CI workflow (`.github/workflows/ci_test.yml`) building OP-TEE `BL32` + user-TA devkit (`vexpress-qemu_armv8a`, `CFG_RPMB_FS=y`). |
 | `feat/stmm-volatile-storage-ci-4.11` | `e1181e2d0e40f8550c0f8204a433eac54598d222` | `+6 / -0` | `12` | Tracks `yubios`: StMM non-volatile RPMB/REE + volatile RAM fallback, `PTA_CMD_GET_DEVICES` advertisement, RK3568/RK3566 platform flavor support, and CI. |
@@ -412,7 +412,7 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 
 - **Upstream Parent:** [`OP-TEE/optee_ftpm`](https://github.com/OP-TEE/optee_ftpm)
 - **Default Branch (`master`):** `f09f4cdad21028289d4e8fc573893b75f7228dc7` _(synced 1:1 with `OP-TEE/optee_ftpm:master`, `0 ahead, 0 behind`)_
-- **Latest Upstream Tag:** `4.11.0` (`f09f4cdad21028289d4e8fc573893b75f7228dc7`)
+- **Latest Upstream Release / Tag:** `4.11.0` (`f09f4cdad21028289d4e8fc573893b75f7228dc7`)
 
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
@@ -486,7 +486,7 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 
 - **Upstream Parent:** [`tianocore/edk2`](https://github.com/tianocore/edk2)
 - **Default Branch (`master`):** `8628578dacd38b327d4f9acf820c6914f4b3a48f` _(synced 1:1 with `tianocore/edk2:master`, `0 ahead, 0 behind`)_
-- **Latest Upstream Release / Tag:** `edk2-stable202608` (`3e72ffe8afdd03f1f89eba65c921cbdcb004cfee`)
+- **Latest Upstream Release / Tag:** `edk2-stable202608` (`2970e5699ba6267f3384ffab20f96647578aebc8`)
 
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
@@ -526,7 +526,7 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 
 - **Upstream Parent:** [`u-boot/u-boot`](https://github.com/u-boot/u-boot)
 - **Default Branch (`main`):** `6487c50b8a40f2668ab98a892b9300ad5c181f38` _(synced 1:1 with `u-boot/u-boot:main`, `0 ahead, 0 behind`)_
-- **Latest Upstream Tag:** `v2027.01-rc2` (`ecdcf9e365df6249a57cd8cc946e7026804ff4ae`)
+- **Latest Upstream Release / Tag:** `v2026.10` (`5508406582f6f7120dce0c4b3059819a41788db2`)
 
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
@@ -614,7 +614,7 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 
 - **Upstream Parent:** [`chromium/chromium`](https://github.com/chromium/chromium)
 - **Default Branch (`main`):** `7c5cfc909b8368336e57e900d2813d5e6502d18d` _(synced 1:1 with `chromium/chromium:main`, `0 ahead, 0 behind`)_
-- **Latest Upstream Tag:** `pre_blink_merge` (`70aa692d68ee86d365928edd160c3575fda2b453`)
+- **Latest Upstream Release / Tag:** None published upstream (rolling `main`)
 
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|

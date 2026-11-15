@@ -324,7 +324,7 @@ for variant in ("primary", "rebuild"):
                 f"yubios_commit={source}",
                 f"source_date_epoch={epoch}",
                 f"mkosi_seed={seed}",
-                "mkosi_source=b2b1ea6ad59621a6f955e4cbceee72580a91889a",
+                "mkosi_source=000b5cefe2b130e928fcfe6a649b417d6f78f66d",
                 "scope=canonical unsigned root filesystem content, initrd, and package manifest",
                 "signature_boundary=random SoftHSM certificate, signed root bootloader, UKI, ESP, and full disk wrapper",
                 "filesystem_boundary=Btrfs block metadata with random device, chunk-tree, and root UUIDs",

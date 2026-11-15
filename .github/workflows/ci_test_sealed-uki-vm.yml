@@ -50,13 +50,13 @@ jobs:
           - arch: amd64
             runner: ubuntu-26.04
             docker_arch: x86_64
-            docker_sha512: f508d7befbb25a9993b762d6b8b5e626d7382884c63d8d6f0db0bc8d7e27b6a7bcaac4f353e79fe2eeaef8233d817e430982138cf94e86aee2ca9ebb975d9323
-            rootless_sha512: 16ec64b59b207eb6d937b18fa8880dd1b345603f6a2b481d67f9f6fba9a00d19f1d09552fe5b4d75aa4b1e108854306c25519f1489a7a2972c7f94229805573c
+            docker_sha512: ff0eeb5d9994a6891b9bebe7c37c8982642da9fdc3b7f19302b3c2276b306b859d56e76f00148eeed2e36daffa576873e15276d79a61e1798e11741511c6e65e # 29.9.3 (linux/amd64)
+            rootless_sha512: 3ea734eb68ae8e74159725410072bc196251bba2f12988014193d694a8a12e4a38f448c1d980563e810cfa4c92c8e364e8aa69652eda1900f91768ea7badb693 # 29.9.3 (linux/amd64)
           - arch: arm64
             runner: ubuntu-26.04-arm
             docker_arch: aarch64
-            docker_sha512: f1dbaee45f65122a3edbf59f8f9e7ea77212a300cfabdf54beeb5a115b18536e7d846a0a0b15adffa1e5fb56a9bc7d82fba350ef662c448935d372c98996a34e
-            rootless_sha512: 20c59b7b4d680c0cd811fb17c138e5fea4cbac0528837fd9c81a8316cb151338ef8cbf5c55697228b8b32aea81f05e561693525a0cb51c8696889f011e21a07c
+            docker_sha512: 373b7542d225479e066cb540889cf24035f7909a17519845bedb93bb0b208c3bdd778af47d412de52136bf98d63ac1a5aba76e09eacd15641151c6e7f73aa198 # 29.9.3 (linux/arm64)
+            rootless_sha512: 7bab17249d06874cd5900ffc9908db692e8f158e17b03fc8afff5b9feaab5044752f7a018225695f8ca548212fa4d5095c3f15d0b06ed263f00ab4a895d6fc8a # 29.9.3 (linux/arm64)
     container:
       options: --privileged
       volumes:
@@ -96,10 +96,10 @@ jobs:
           # V79: arch-keyed static docker binaries.
           DOCKER_SHA512=${{ matrix.docker_sha512 }}
           ROOTLESS_SHA512=${{ matrix.rootless_sha512 }}
-          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.1.tgz" "$DOCKER_SHA512"
-          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.1.tgz" "$ROOTLESS_SHA512"
-          tar xzf docker-29.9.1.tgz
-          tar xzf docker-rootless-extras-29.9.1.tgz
+          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.3.tgz" "$DOCKER_SHA512"
+          wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.3.tgz" "$ROOTLESS_SHA512"
+          tar xzf docker-29.9.3.tgz
+          tar xzf docker-rootless-extras-29.9.3.tgz
           install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
