@@ -76,8 +76,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - runner: ubuntu-24.04
-            runner_name: ubuntu-24.04
+          - runner: ubuntu-26.04
+            runner_name: ubuntu-26.04
           - runner: [self-hosted, Linux, ARM64, HIGH-MEM]
             runner_name: self-hosted-linux-arm64-gpu
     runs-on: ${{ matrix.runner }}
@@ -212,7 +212,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [build-tfa]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

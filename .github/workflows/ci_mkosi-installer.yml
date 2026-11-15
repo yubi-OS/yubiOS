@@ -108,7 +108,7 @@ jobs:
         include:
           - arch: amd64
             mkosi_arch: x86-64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             docker_arch: x86_64
             buildx_arch: linux-amd64
             artifact_suffix: amd64
@@ -116,7 +116,7 @@ jobs:
             publish: true
           - arch: arm64
             mkosi_arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -124,7 +124,7 @@ jobs:
             publish: true
           - arch: arm64
             mkosi_arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -514,7 +514,7 @@ jobs:
   installer-reproducibility:
     name: Prove unsigned mkosi installer subjects (arm64)
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     defaults:
       run:
         shell: bash
@@ -585,11 +585,11 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
@@ -793,7 +793,7 @@ jobs:
     name: Merge installer multi-arch manifest
     needs: installer-publish
     if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write
@@ -942,7 +942,7 @@ jobs:
     name: Verify published image attestations + signature
     needs: merge-manifest
     if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
@@ -969,7 +969,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [build, installer-reproducibility, installer-publish, merge-manifest]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

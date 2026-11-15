@@ -87,7 +87,7 @@ permissions:
 jobs:
   dispatch:
     name: Dispatch workflows for the selected group
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Dispatch each workflow in the group independently
         env:

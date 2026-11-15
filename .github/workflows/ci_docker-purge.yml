@@ -40,7 +40,7 @@ permissions:
 jobs:
   purge:
     name: Purge Docker Hub image history (tags + images)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Report or clear tags/images
         env:

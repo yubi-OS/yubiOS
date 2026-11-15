@@ -115,7 +115,7 @@ permissions:
 jobs:
   # -- Real gate: shell syntax + shellcheck on every tests/vm script. --
   lint-vm-scripts:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       credentials:
         username: 0mniteck42
@@ -156,7 +156,7 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             qemu_pkgs: qemu-system-x86 ovmf
             primary: false
           - arch: arm64
@@ -237,7 +237,7 @@ jobs:
           sudo udevadm control --reload-rules || true
           sudo udevadm trigger --name-match=kvm || true
           ls -la /dev/kvm || true
-          # virtiofsd needs /dev/fuse; GH Actions ubuntu-24.04 runners don't
+          # virtiofsd needs /dev/fuse; GH Actions ubuntu-26.04 runners don't
           # guarantee the fuse module is loaded / device node present. A
           # missing /dev/fuse is a plausible cause of virtiofsd's silent
           # rc=2 (empty stdout+stderr+logfile) seen in prior runs -- FUSE
@@ -1270,7 +1270,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [lint-vm-scripts, vgpu-vm-e2e]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

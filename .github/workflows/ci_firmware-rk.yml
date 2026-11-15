@@ -95,12 +95,12 @@ jobs:
       matrix:
         include:
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -321,7 +321,7 @@ jobs:
       matrix:
         include:
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -334,7 +334,7 @@ jobs:
             tfa_plat: qemu
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -347,7 +347,7 @@ jobs:
             tfa_plat: rk3399
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -360,7 +360,7 @@ jobs:
             tfa_plat: rk3568
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64
@@ -373,7 +373,7 @@ jobs:
             tfa_plat: rk3588
             requires_rockchip_tpl: true
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -386,7 +386,7 @@ jobs:
             tfa_plat: qemu
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -399,7 +399,7 @@ jobs:
             tfa_plat: rk3399
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -412,7 +412,7 @@ jobs:
             tfa_plat: rk3568
             requires_rockchip_tpl: false
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
             artifact_suffix: arm64-repro
@@ -929,7 +929,7 @@ jobs:
       fail-fast: false
       matrix:
         board: [qemu-arm64, rockpro64-rk3399, pinetab2-rk3566, rock5b-rk3588]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       credentials:
         username: 0mniteck42
@@ -1002,7 +1002,7 @@ jobs:
       matrix:
         include:
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
@@ -1190,7 +1190,7 @@ jobs:
     name: Stage 4 - Publish firmware bundle (${{ matrix.board }})
     needs: qemu
     if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       options: --privileged
       volumes:
@@ -1457,7 +1457,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [stmm, optee_fip, firmware-reproducibility, qemu, firmware-publish]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

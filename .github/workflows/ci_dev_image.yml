@@ -94,11 +94,11 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
@@ -260,7 +260,7 @@ jobs:
   merge-manifest:
     needs: build
     if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write
@@ -429,7 +429,7 @@ jobs:
     name: Verify published image attestations + signature
     needs: merge-manifest
     if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
@@ -456,7 +456,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [build, merge-manifest]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

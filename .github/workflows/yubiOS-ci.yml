@@ -82,7 +82,7 @@ jobs:
   # ── Arch-neutral lint (run once on amd64; linting shell/Dockerfile text is
   #    architecture-independent, so matrixing would just burn a second runner). ──
   shellcheck:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       credentials:
         username: 0mniteck42
@@ -99,7 +99,7 @@ jobs:
             xargs -0 shellcheck --source-path=usr/lib/yubiOS --source-path=scripts
 
   hadolint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       image: docker://ghcr.io/hadolint/hadolint:v2.15.1-debian@sha256:9a3944b7fddcb947d1ffd90829ac1a6e5c30479223358f249d8b96c7d0019e27
     steps:
@@ -116,9 +116,9 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     container:
       credentials:
@@ -128,7 +128,7 @@ jobs:
     steps:
       - name: Install git for checkout and reproducibility
         run: |
-          # GitHub ubuntu-24.04 images ship git. Only touch apt when it is missing:
+          # GitHub ubuntu-26.04 images ship git. Only touch apt when it is missing:
           # the apt solver fails on the runner's perl state (exit 100).
           if ! command -v git >/dev/null 2>&1; then
             apt-get update -qq
@@ -150,9 +150,9 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     container:
       credentials:
@@ -177,11 +177,11 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
@@ -196,7 +196,7 @@ jobs:
     steps:
       - name: Install git for checkout and reproducibility
         run: |
-          # GitHub ubuntu-24.04 images ship git. Only touch apt when it is missing:
+          # GitHub ubuntu-26.04 images ship git. Only touch apt when it is missing:
           # the apt solver fails on the runner's perl state (exit 100).
           if ! command -v git >/dev/null 2>&1; then
             apt-get update -qq
@@ -352,7 +352,7 @@ jobs:
   merge-manifest:
     needs: build
     if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write
@@ -498,7 +498,7 @@ jobs:
     name: Verify published image attestations + signature
     needs: merge-manifest
     if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
@@ -525,7 +525,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [shellcheck, hadolint, unit-tests, mkosi, build, merge-manifest]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

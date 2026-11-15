@@ -48,12 +48,12 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             docker_arch: x86_64
             docker_sha512: f508d7befbb25a9993b762d6b8b5e626d7382884c63d8d6f0db0bc8d7e27b6a7bcaac4f353e79fe2eeaef8233d817e430982138cf94e86aee2ca9ebb975d9323
             rootless_sha512: 16ec64b59b207eb6d937b18fa8880dd1b345603f6a2b481d67f9f6fba9a00d19f1d09552fe5b4d75aa4b1e108854306c25519f1489a7a2972c7f94229805573c
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             docker_sha512: f1dbaee45f65122a3edbf59f8f9e7ea77212a300cfabdf54beeb5a115b18536e7d846a0a0b15adffa1e5fb56a9bc7d82fba350ef662c448935d372c98996a34e
             rootless_sha512: 20c59b7b4d680c0cd811fb17c138e5fea4cbac0528837fd9c81a8316cb151338ef8cbf5c55697228b8b32aea81f05e561693525a0cb51c8696889f011e21a07c
@@ -602,7 +602,7 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             qemu_pkg: qemu-system-x86
             fw_pkg: ovmf
             qemu_bin: qemu-system-x86_64
@@ -614,7 +614,7 @@ jobs:
             smp: "4"
             boot_timeout: "60"
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             qemu_pkg: qemu-system-arm
             fw_pkg: qemu-efi-aarch64
             qemu_bin: qemu-system-aarch64
@@ -756,7 +756,7 @@ jobs:
   # as a positive/foreign-db differential. Negative 2 deferred per user.
   negative-tamper-tests:
     name: "3 negative tamper tests -- amd64 only [Negative 3 implemented]"
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 60
     needs: [boot-secure-vm]
     container:

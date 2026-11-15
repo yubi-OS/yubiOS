@@ -8,7 +8,7 @@ name: fetch-dhi-manifest
 #
 # Runs on the BARE runner (no container): the hardened dhi base ships no curl/
 # python3, and this is just a registry HTTPS query. AGENTS.md allows container
-# absent. The host ubuntu-24.04 image has curl + python3 preinstalled.
+# absent. The host ubuntu-26.04 image has curl + python3 preinstalled.
 
 on:
   workflow_dispatch:
@@ -74,7 +74,7 @@ permissions:
 
 jobs:
   fetch:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout yubiOS for PINNED.md update
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -178,7 +178,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [fetch]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

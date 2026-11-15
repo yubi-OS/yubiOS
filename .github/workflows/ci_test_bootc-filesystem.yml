@@ -78,11 +78,11 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
             machine: x86_64
             root_type_guid: 4f68bce3-e8cd-4db1-96e7-fbcaf984b709
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
             machine: aarch64
             root_type_guid: b921b045-1df0-41c3-af44-4c6f280d3fae
     runs-on: ${{ matrix.runner }}
@@ -374,7 +374,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [install-to-filesystem]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

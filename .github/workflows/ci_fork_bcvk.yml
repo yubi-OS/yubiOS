@@ -82,9 +82,9 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     concurrency:
       group: ${{ github.workflow }}-tests-${{ matrix.arch }}-${{ github.ref }}
@@ -120,9 +120,9 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - arch: arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     # Advisory: clippy -D warnings trips on inherited upstream lint debt across the
     # fork; keep it visible but non-blocking so it doesn't red the meaningful unit
@@ -146,7 +146,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [unit-tests, clippy]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

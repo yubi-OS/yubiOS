@@ -73,7 +73,7 @@ env:
 
 jobs:
   pq-tls-verify:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       options: --privileged
       volumes:
@@ -184,7 +184,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [pq-tls-verify]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

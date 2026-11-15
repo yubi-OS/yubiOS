@@ -8,9 +8,9 @@ name: ci_fork_ms-tpm-20-ref
 # implementation that OP-TEE/optee_ftpm wraps as the fTPM Trusted Application.
 # Builds the TPMCmd autotools tree (OpenSSL libcrypto backend, TpmBigNum math)
 # for AArch64:
-#   - ubuntu-24.04      : cross-compile with the aarch64-linux-gnu toolchain
+#   - ubuntu-26.04      : cross-compile with the aarch64-linux-gnu toolchain
 #                         (+ arm64 OpenSSL dev for libcrypto.pc)
-#   - ubuntu-24.04-arm  : native aarch64 build, then smoke-start the simulator
+#   - ubuntu-26.04-arm  : native aarch64 build, then smoke-start the simulator
 # Output: bin_PROGRAMS tpm2-simulator + noinst libtpm.a / libplatform.a.
 # This is a SEPARATE workflow — it does NOT edit the upstream run-tests /
 # docker-check / docker-publish workflows. Bare runners: TPMCmd needs a full
@@ -85,10 +85,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - runner: ubuntu-24.04
-            runner_name: ubuntu-24.04
-          - runner: ubuntu-24.04-arm
-            runner_name: ubuntu-24.04-arm
+          - runner: ubuntu-26.04
+            runner_name: ubuntu-26.04
+          - runner: ubuntu-26.04-arm
+            runner_name: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
 
     steps:
@@ -183,7 +183,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [build-ms-tpm-20-ref]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write

@@ -86,7 +86,7 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - arch: arm64
             runner: [self-hosted, Linux, ARM64, HIGH-MEM]
     runs-on: ${{ matrix.runner }}
@@ -148,7 +148,7 @@ jobs:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
     needs: [build-optee]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       actions: write
