@@ -437,7 +437,9 @@ theorem cognitive_modularity_collapse (M amin A : Nat) (h1 : M * amin ≤ A) (h2
     cases m with
     | zero => omega
     | succ m' =>
-      have hmul : 2 * amin ≤ (m' + 2) * amin := Nat.mul_le_mul_right amin (by omega)
+      have hmul : (1 + 1) * amin ≤ (m' + 1 + 1) * amin :=
+        Nat.mul_le_mul_right amin (by omega)
+      have hle : 2 * amin ≤ A := Nat.le_trans hmul h1
       omega
 
 /-- Teleological MDL purpose score is monotone non-increasing in transient time and excess
