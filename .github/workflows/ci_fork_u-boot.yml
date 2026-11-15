@@ -86,8 +86,8 @@ jobs:
         include:
           - runner: ubuntu-26.04
             runner_name: ubuntu-26.04
-          - runner: [self-hosted, Linux, ARM64, HIGH-MEM]
-            runner_name: self-hosted-linux-arm64-gpu
+          - runner: ubuntu-26.04-arm
+            runner_name: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     # Bare runner: U-Boot needs a full host + AArch64 cross toolchain. The hardened
     # dhi base image omits crt*.o / libc, so a container build is not used here.

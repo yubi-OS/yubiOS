@@ -88,7 +88,7 @@ jobs:
           - arch: amd64
             runner: ubuntu-26.04
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, HIGH-MEM]
+            runner: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     concurrency:
       group: ${{ github.workflow }}-build-${{ matrix.arch }}-${{ github.ref }}
@@ -99,7 +99,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/optee_os
-          ref: b619831e8a89645b43ff7c7459265019292de50b # release-descendant ref; see PINNED.md
+          ref: 66b755bc2a4670971b9dd456e802c2c7ea8ad87c # release-descendant ref; see PINNED.md
 
       - name: Install OP-TEE build deps + cross toolchains
         run: |
