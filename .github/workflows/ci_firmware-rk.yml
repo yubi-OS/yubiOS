@@ -83,7 +83,7 @@ env:
   UBOOT_REF: 0257c1dedf23a082cd35afdb757b2886774b091c # release-descendant ref; see PINNED.md
   EDK2_REF: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
   EDK2_PLATFORMS_REF: cc384840c440415a091623a7658112fedc416094 # compatibility ref; see PINNED.md
-  MS_TPM_REF: c73d99857e5e768784c955f9d1ed1bd83b06f2bd # yubios branch (v1.83r1 descendant); see PINNED.md
+  MS_TPM_REF: 6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48 # yubios branch (v1.83r1 descendant); see PINNED.md
   FTPM_UUID: bc50d971-d4c9-42c4-82cb-343fb7f37896
   MBEDTLS_REF: 068ff080b369adfac81509f9b57b2afabaf82dc5 # mbedtls-3.6.7
 

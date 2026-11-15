@@ -96,7 +96,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
         with:
           repository: yubi-OS/ms-tpm-20-ref
-          ref: c73d99857e5e768784c955f9d1ed1bd83b06f2bd # yubios branch (v1.83r1 descendant); see PINNED.md
+          ref: 6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48 # yubios branch (v1.83r1 descendant); see PINNED.md
 
       - name: Install build dependencies
         run: |
@@ -125,7 +125,7 @@ jobs:
           Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
           EOF
             sudo apt-get update
-            sudo apt-get install -y --no-install-recommends \
+            sudo apt-get install -y --allow-downgrades --no-install-recommends \
               crossbuild-essential-arm64 libssl-dev:arm64
             echo "CONFIGURE_HOST=--host=aarch64-linux-gnu" >> "$GITHUB_ENV"
             echo "CC=aarch64-linux-gnu-gcc" >> "$GITHUB_ENV"
@@ -142,7 +142,7 @@ jobs:
           set -euxo pipefail
           cd TPMCmd
           ./bootstrap
-          ./configure ${CONFIGURE_HOST} CC="${CC}"
+          ./configure ${CONFIGURE_HOST} CC="${CC}" CFLAGS="-g -O2 -Wno-error=deprecated-declarations"
 
       - name: Build the TPM 2.0 reference (tpm2-simulator + libtpm)
         run: |

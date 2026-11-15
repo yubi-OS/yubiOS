@@ -26,7 +26,7 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 | [`yubi-OS/arm-trusted-firmware`](https://github.com/yubi-OS/arm-trusted-firmware) | [`ARM-software/arm-trusted-firmware`](https://github.com/ARM-software/arm-trusted-firmware) | `master` (`a881364e03b0`) | `v2.15.0` (`da738d5eae93`) | `8d96428a33f9` (`+3`) | `feat/ci` (`+3`) |
 | [`yubi-OS/optee_os`](https://github.com/yubi-OS/optee_os) | [`OP-TEE/optee_os`](https://github.com/OP-TEE/optee_os) | `master` (`5d9a256b168a`) | `4.11.0` (`f54190f22611`) | `e1181e2d0e40` (`+6`) | `feat/ci` (`+1`), `feat/stmm-volatile-storage-ci-4.11` (`+6`) |
 | [`yubi-OS/optee_ftpm`](https://github.com/yubi-OS/optee_ftpm) | [`OP-TEE/optee_ftpm`](https://github.com/OP-TEE/optee_ftpm) | `master` (`f09f4cdad210`) | `4.11.0` (`f09f4cdad210`) | `b78d47800ca1` (`+3`) | `feat/ci` (`+1`), `feat/volatile-nv-ci` (`+3`), `feat/volatile-nv-ci-4.11` (`+3`) |
-| [`yubi-OS/ms-tpm-20-ref`](https://github.com/yubi-OS/ms-tpm-20-ref) | [`microsoft/ms-tpm-20-ref`](https://github.com/microsoft/ms-tpm-20-ref) | `main` (`ee21db0a941d`) | `v1.83r1` (`ee21db0a941d`) | `c73d99857e5e` (`+1`) | `feat/ci` (`+1`) |
+| [`yubi-OS/ms-tpm-20-ref`](https://github.com/yubi-OS/ms-tpm-20-ref) | [`microsoft/ms-tpm-20-ref`](https://github.com/microsoft/ms-tpm-20-ref) | `main` (`ee21db0a941d`) | `v1.83r1` (`ee21db0a941d`) | `6c893ca8ebbb` (`+1`) | `feat/ci` (`+1`) |
 | [`yubi-OS/edk2-rk3588`](https://github.com/yubi-OS/edk2-rk3588) | [`edk2-porting/edk2-rk3588`](https://github.com/edk2-porting/edk2-rk3588) | `master` (`2f3f8265590f`) | `v1.1` (`6a682c0ef3ed`) | — _(pure 1:1 mirror)_ | — |
 | [`yubi-OS/edk2`](https://github.com/yubi-OS/edk2) | [`tianocore/edk2`](https://github.com/tianocore/edk2) | `master` (`8628578dacd3`) | `edk2-stable202608` (`2970e5699ba6`) | `77828ba8f2d0` (`+3`) | `feat/ci` (`+3`) |
 | [`yubi-OS/edk2-platforms`](https://github.com/yubi-OS/edk2-platforms) | [`tianocore/edk2-platforms`](https://github.com/tianocore/edk2-platforms) | `master` (`4db2845d1442`) | `20260316-before-platform-removals` (`cc384840c440`) | — _(pure 1:1 mirror)_ | — |
@@ -455,16 +455,16 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
 | `main` | `ee21db0a941decd3cac67925ea3310873af60ab3` | `+0 / -0` | `0` | 1:1 mirror of upstream `microsoft/ms-tpm-20-ref:main` (`v1.83r1`; all unowned upstream branches removed). |
-| `yubios` | `c73d99857e5e768784c955f9d1ed1bd83b06f2bd` | `+1 / -0` | `1` | Canonical yubiOS integration branch for `ms-tpm-20-ref`: adds `.github/workflows/ci_test.yml` building the TPM 2.0 reference (`tpm2-simulator` + `libtpm.a`) for AArch64 (cross + native). |
-| `feat/ci` | `c73d99857e5e768784c955f9d1ed1bd83b06f2bd` | `+1 / -0` | `1` | Component CI workflow (`.github/workflows/ci_test.yml`) for AArch64 `ms-tpm-20-ref` builds. |
+| `yubios` | `6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48` | `+1 / -0` | `1` | Canonical yubiOS integration branch for `ms-tpm-20-ref`: adds `.github/workflows/ci_test.yml` building the TPM 2.0 reference (`tpm2-simulator` + `libtpm.a`) for AArch64 (cross + native). |
+| `feat/ci` | `6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48` | `+1 / -0` | `1` | Component CI workflow (`.github/workflows/ci_test.yml`) for AArch64 `ms-tpm-20-ref` builds. |
 
-#### `yubi-OS/ms-tpm-20-ref` — `yubios` (`c73d99857e5e768784c955f9d1ed1bd83b06f2bd`, 1 commits ahead of `main`)
+#### `yubi-OS/ms-tpm-20-ref` — `yubios` (`6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48`, 1 commits ahead of `main`)
 
-- `c73d99857e5e` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
+- `6c893ca8ebbb` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
 
-#### `yubi-OS/ms-tpm-20-ref` — `feat/ci` (`c73d99857e5e768784c955f9d1ed1bd83b06f2bd`, 1 commits ahead of `main`)
+#### `yubi-OS/ms-tpm-20-ref` — `feat/ci` (`6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48`, 1 commits ahead of `main`)
 
-- `c73d99857e5e` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
+- `6c893ca8ebbb` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
 
 ---
 
