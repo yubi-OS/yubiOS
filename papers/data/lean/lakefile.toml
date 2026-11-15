@@ -1,4 +1,4 @@
-name = "yubios-lean"
+name = "YubiOSLean"
 version = "0.1.0"
 defaultTargets = ["CurvedCorpus", "WayfinderBounds", "RadiusBounds", "RayleighBounds", "AzimuthBounds", "FocalBounds", "FlowBounds", "LifeBounds"]
 

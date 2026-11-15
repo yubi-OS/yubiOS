@@ -111,6 +111,6 @@
       "configFile": "lakefile.lean"
     }
   ],
-  "name": "yubios-lean",
+  "name": "YubiOSLean",
   "lakeDir": ".lake"
 }
