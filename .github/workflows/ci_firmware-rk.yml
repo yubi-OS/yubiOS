@@ -76,14 +76,14 @@ permissions:
   actions: write
 
 env:
-  BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.34.0@sha256:b059f8d7226d0b326bc871af489a5dddf65e36af4d20d14251b072974d9ee87c
+  BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
   TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
-  OPTEE_OS_REF: db96ae668363c3107bee1b76d7cf6960944b1ca6 # release-descendant ref; see PINNED.md
+  OPTEE_OS_REF: e1181e2d0e40f8550c0f8204a433eac54598d222 # release-descendant ref; see PINNED.md
   OPTEE_FTPM_REF: b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf # release-descendant ref; see PINNED.md
-  UBOOT_REF: 5c7fe6ca3b1a13458e426c7d66cd461d0d76fe83 # release-descendant ref; see PINNED.md
+  UBOOT_REF: 0257c1dedf23a082cd35afdb757b2886774b091c # release-descendant ref; see PINNED.md
   EDK2_REF: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
   EDK2_PLATFORMS_REF: cc384840c440415a091623a7658112fedc416094 # compatibility ref; see PINNED.md
-  MS_TPM_REF: 98b60a44aba79b15fcce1c0d1e46cf5918400f6a # release ref; see PINNED.md
+  MS_TPM_REF: 6cb71f5798200ad27d9a09c690c6db610806d1a8 # yubios branch (v1.83r1 descendant); see PINNED.md
   FTPM_UUID: bc50d971-d4c9-42c4-82cb-343fb7f37896
   MBEDTLS_REF: 068ff080b369adfac81509f9b57b2afabaf82dc5 # mbedtls-3.6.7
 
@@ -112,7 +112,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     env:
       EDK2_REPO: https://github.com/yubi-OS/edk2.git
       EDK2_PLATFORMS_REPO: https://github.com/yubi-OS/edk2-platforms.git
@@ -432,7 +432,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -938,7 +938,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013
+      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -1017,7 +1017,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     env:
       BOOT_TIMEOUT: '180'
     steps:
@@ -1202,7 +1202,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013
+      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
     strategy:
       fail-fast: false
       matrix:

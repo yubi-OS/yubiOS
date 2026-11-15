@@ -93,7 +93,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/bcvk
-          ref: c29246b1a1ea0114fcb92530298a364627f0cae0 # release-descendant ref; see PINNED.md
+          ref: 85655d51f34b3fb545c66ce3c691676c809fee38 # yubios branch (v0.22.0 descendant); see PINNED.md
 
       - name: Install build deps + Rust stable
         run: |
@@ -131,7 +131,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/bcvk
-          ref: c29246b1a1ea0114fcb92530298a364627f0cae0 # release-descendant ref; see PINNED.md
+          ref: 85655d51f34b3fb545c66ce3c691676c809fee38 # yubios branch (v0.22.0 descendant); see PINNED.md
       - name: Install build deps + Rust + clippy
         run: |
           sudo apt-get update -qq

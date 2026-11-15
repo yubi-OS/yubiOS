@@ -434,7 +434,7 @@ jobs:
           # hosted runner instead of a multi-minute cargo build). The source build
           # below stays as the automatic fallback when the download or checksum
           # verify fails, or when BCVK_PIN is moved off BCVK_RELEASE_COMMIT.
-          BCVK_PIN=c9c06416c943d5ff956bc811f09aec0ce25bfdc7 # yubios v0.22.0 merge + baked CI patches (ARM64 DirectBoot SSH karg, --privileged, ed25519); see PINNED.md
+          BCVK_PIN=c9c06416c943d5ff956bc811f09aec0ce25bfdc7 # v0.22.0-yubios.1 release binary source commit (rebased yubios branch tip: 85655d51f34b3fb545c66ce3c691676c809fee38); see PINNED.md
           BCVK_RELEASE_TAG=v0.22.0-yubios.1
           BCVK_RELEASE_COMMIT=c9c06416c943d5ff956bc811f09aec0ce25bfdc7
           case "${{ matrix.arch }}" in

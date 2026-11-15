@@ -97,7 +97,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
         with:
           repository: yubi-OS/u-boot
-          ref: 5c7fe6ca3b1a13458e426c7d66cd461d0d76fe83 # release ref; see PINNED.md
+          ref: 0257c1dedf23a082cd35afdb757b2886774b091c # release ref; see PINNED.md
 
       - name: Install build dependencies
         run: |

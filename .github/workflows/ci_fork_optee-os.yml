@@ -99,7 +99,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/optee_os
-          ref: db96ae668363c3107bee1b76d7cf6960944b1ca6 # release-descendant ref; see PINNED.md
+          ref: e1181e2d0e40f8550c0f8204a433eac54598d222 # release-descendant ref; see PINNED.md
 
       - name: Install OP-TEE build deps + cross toolchains
         run: |

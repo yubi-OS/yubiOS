@@ -102,7 +102,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/edk2
-          ref: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
+          ref: 77828ba8f2d0693ccda37b88ea6281312d60df64 # yubios branch (master + StandaloneMM GCC CI); see PINNED.md
           submodules: recursive
 
       - name: Install EDK2 build deps

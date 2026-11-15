@@ -76,7 +76,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/mkosi
-          ref: b2b1ea6ad59621a6f955e4cbceee72580a91889a # release-descendant ref; see PINNED.md
+          ref: 000b5cefe2b130e928fcfe6a649b417d6f78f66d # release-descendant ref; see PINNED.md
       - name: Install mkosi
         run: |
           sudo apt-get install -y python3 python3-pip
@@ -94,7 +94,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/mkosi
-          ref: b2b1ea6ad59621a6f955e4cbceee72580a91889a # release-descendant ref; see PINNED.md
+          ref: 000b5cefe2b130e928fcfe6a649b417d6f78f66d # release-descendant ref; see PINNED.md
       - name: Install shellcheck
         run: sudo apt-get install -y shellcheck
       - name: shellcheck (yubiOS profile scripts, if present)
@@ -110,7 +110,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: yubi-OS/mkosi
-          ref: b2b1ea6ad59621a6f955e4cbceee72580a91889a # release-descendant ref; see PINNED.md
+          ref: 000b5cefe2b130e928fcfe6a649b417d6f78f66d # release-descendant ref; see PINNED.md
       - name: Install ruff
         run: pip3 install --quiet ruff
       - name: ruff format check
