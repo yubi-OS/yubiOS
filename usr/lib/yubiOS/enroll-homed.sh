@@ -3,7 +3,7 @@
 # yubiOS First-Boot User Home Enrollment via systemd-homed + YubiKey FIDO2
 #
 # Creates a FIDO2-unlocked LUKS2 home directory for the primary user inside the
-# /dev/yubios/homed (96%VG) LVM logical volume under /dev/mapper/yubios-root.
+# /dev/lvm/yubios-root (96%VG) LVM logical volume under /dev/mapper/crypt.
 #
 # Usage:
 #   yubiOS-enroll-homed [username]
@@ -28,13 +28,13 @@ if homectl inspect "$USERNAME" &>/dev/null; then
   die "Homed user '$USERNAME' already exists. Use 'homectl update $USERNAME' to modify."
 fi
 
-# Ensure the LVM homed LV (/dev/yubios/homed) is active and mounted at /var/home (/home)
-if [ -e /dev/mapper/yubios-root ]; then
-  lvm vgchange -ay yubios >/dev/null 2>&1 || true
-  if [ -b /dev/yubios/homed ]; then
+# Ensure the LVM yubios-root LV (/dev/lvm/yubios-root) under /dev/mapper/crypt is mounted at /var/home (/home)
+if [ -e /dev/mapper/crypt ]; then
+  lvm vgchange -ay lvm >/dev/null 2>&1 || true
+  if [ -b /dev/lvm/yubios-root ]; then
     mkdir -p /var/home
     if ! mountpoint -q /var/home; then
-      mount /dev/yubios/homed /var/home
+      mount /dev/lvm/yubios-root /var/home
     fi
   fi
 fi
@@ -54,7 +54,7 @@ done
 
 HOME_IMAGE_PATH="/home/${USERNAME}.home"
 log "Creating homed home for $USERNAME"
-log "  Storage : $STORAGE (LUKS2 on /dev/yubios/homed -> $HOME_IMAGE_PATH)"
+log "  Storage : $STORAGE (LUKS2 on /dev/lvm/yubios-root -> $HOME_IMAGE_PATH)"
 log "  FS      : $FS_TYPE"
 log "  Size    : $DISK_SIZE"
 log "  Groups  : $MEMBER_OF"

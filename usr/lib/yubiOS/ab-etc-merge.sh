@@ -1,12 +1,14 @@
 #!/bin/bash
 # SPDX-License-Identifier: GPL-2.0-only
-# yubiOS LVM Activation, /usr A/B 3-Way OverlayFS Mount, and homed Mount
+# yubiOS LVM Activation, /usr A/B 3-Way OverlayFS Mount, and yubios-root Mount
 #
-# Layout inside /dev/mapper/yubios-root (LVM VG 'yubios'):
-#   - /dev/yubios/usr_a (1%VG)  : mounted at /run/yubiOS/ab/usr-a (rw)
-#   - /dev/yubios/usr_b (1%VG)  : mounted at /run/yubiOS/ab/usr-b (rw)
-#   - /dev/yubios/homed (96%VG) : mounted at /var/home (rw) for systemd-homed
-#   - 2%VG unallocated at end
+# Hierarchy:
+#   - /dev/mapper/crypt (LUKS2)
+#     - LVM VG 'lvm':
+#       * /dev/lvm/usr_a       (1%VG)  : mounted at /run/yubiOS/ab/usr-a (rw)
+#       * /dev/lvm/usr_b       (1%VG)  : mounted at /run/yubiOS/ab/usr-b (rw)
+#       * /dev/lvm/yubios-root (96%VG) : mounted at /var/home (rw) for systemd-homed
+#       * 2%VG unallocated at end
 #
 # Mounts a 3-way upper/lower/work OverlayFS directly onto /usr (NOT on /):
 #   - lowerdir : /run/yubiOS/ab/usr-b/lower:/run/yubiOS/ab/usr-base
@@ -15,16 +17,16 @@
 
 set -euo pipefail
 
-if [ ! -e /dev/mapper/yubios-root ]; then
+if [ ! -e /dev/mapper/crypt ]; then
   exit 0
 fi
 
-USR_A="/dev/yubios/usr_a"
-USR_B="/dev/yubios/usr_b"
-HOMED_LV="/dev/yubios/homed"
+USR_A="/dev/lvm/usr_a"
+USR_B="/dev/lvm/usr_b"
+YUBIOS_ROOT_LV="/dev/lvm/yubios-root"
 
 for _ in $(seq 1 15); do
-  lvm vgchange -ay yubios >/dev/null 2>&1 || true
+  lvm vgchange -ay lvm >/dev/null 2>&1 || true
   udevadm settle --timeout=5 >/dev/null 2>&1 || true
   if [ -b "$USR_A" ] && [ -b "$USR_B" ]; then
     break
@@ -57,10 +59,10 @@ if [ "$(findmnt -n -o FSTYPE /usr 2>/dev/null || true)" != "overlay" ]; then
   mount -t overlay overlay     -o "lowerdir=/run/yubiOS/ab/usr-b/lower:/run/yubiOS/ab/usr-base,upperdir=/run/yubiOS/ab/usr-a/upper,workdir=/run/yubiOS/ab/usr-a/work"     /usr
 fi
 
-if [ -b "$HOMED_LV" ]; then
+if [ -b "$YUBIOS_ROOT_LV" ]; then
   mkdir -p /var/home
   if ! mountpoint -q /var/home; then
-    mount "$HOMED_LV" /var/home 2>/dev/null || true
+    mount "$YUBIOS_ROOT_LV" /var/home 2>/dev/null || true
   fi
   if [ ! -e /home ] && [ ! -L /home ]; then
     ln -s var/home /home
