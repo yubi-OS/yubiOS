@@ -154,6 +154,7 @@ COPY usr/lib/systemd/system/yubios-uki-install.service /usr/lib/systemd/system/y
 
 RUN systemctl preset-all && \
     systemctl preset yubios-uki-install.service && \
+    systemctl enable yubiOS-lvm-usr-overlay.service && \
     rm -f /etc/machine-id /var/lib/systemd/random-seed
 
 # ── PAM: initialise u2f_keys file (populated by yubiOS-enroll-pam) ───────

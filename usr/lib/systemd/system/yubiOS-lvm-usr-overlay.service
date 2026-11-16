@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: GPL-2.0-only
+[Unit]
+Description=yubiOS LVM Activation, /usr A/B 3-Way OverlayFS, and homed Mount
+DefaultDependencies=no
+After=cryptsetup.target systemd-cryptsetup@yubios\x2droot.service lvm2-monitor.service
+Before=local-fs.target systemd-homed.service yubiOS-enroll.service
+Conflicts=shutdown.target
+ConditionPathExists=/dev/mapper/yubios-root
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/yubiOS/ab-etc-merge.sh
+ExecStop=-/bin/sh -c 'umount /var/home 2>/dev/null || true; umount -l /usr 2>/dev/null || true; umount /run/yubiOS/ab/usr-base 2>/dev/null || true; umount /run/yubiOS/ab/usr-a 2>/dev/null || true; umount /run/yubiOS/ab/usr-b 2>/dev/null || true; lvm vgchange -an yubios 2>/dev/null || true'
+
+[Install]
+WantedBy=local-fs.target
