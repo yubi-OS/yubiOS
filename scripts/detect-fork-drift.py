@@ -56,7 +56,7 @@ def github_get_latest_sha(repo: str, branch: str, token: str | None) -> str | No
 
 
 def github_count_commits(repo: str, base_sha: str, head_sha: str, token: str | None) -> int:
-    """Return the number of commits between two SHAs (head - base)."""
+    """Return the number of commits head_sha is ahead of base_sha."""
     if base_sha == head_sha:
         return 0
     url = f"https://api.github.com/repos/{repo}/compare/{base_sha}...{head_sha}"
@@ -71,7 +71,7 @@ def github_count_commits(repo: str, base_sha: str, head_sha: str, token: str | N
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=20) as r:
             data = json.loads(r.read())
-            return data.get("total_commits", 0)
+            return data.get("ahead_by", data.get("total_commits", 0))
     except urllib.error.HTTPError as e:
         print(f"warn: compare {repo} HTTP {e.code}: {e.read().decode()[:200]}", file=sys.stderr)
         return -1
@@ -169,8 +169,13 @@ def main() -> int:
         fork_default_sha = github_get_latest_sha(f"{args.org}/{fork_name}", upstream_branch, token)
         if upstream_sha.startswith(pinned_sha) or (fork_default_sha and fork_default_sha == upstream_sha):
             behind = 0
+        elif fork_default_sha:
+            # Compare on upstream_repo how many commits upstream_sha is ahead of fork_default_sha
+            behind = github_count_commits(upstream_repo, fork_default_sha, upstream_sha, token)
+            if behind < 0:
+                behind = None
         else:
-            behind = github_count_commits(f"{args.org}/{fork_name}", upstream_sha, pinned_sha, token)
+            behind = github_count_commits(upstream_repo, pinned_sha, upstream_sha, token)
             if behind < 0:
                 behind = None
 
@@ -201,9 +206,23 @@ def main() -> int:
         "fetch_failed": sum(1 for r in results if r["verdict"] in ("fetch-failed", "compare-failed")),
     }
 
+    for r in results:
+        short_pinned = (r["pinned_sha"] or "?")[:8]
+        short_upstream = (r["upstream_sha"] or "?")[:8]
+        print(
+            f"{r['verdict']:14s} {r['fork']}: pinned={short_pinned}.. upstream={short_upstream}.. behind={r['behind']}",
+            file=sys.stderr if args.output_format == "json" else sys.stdout,
+        )
+    print(
+        f"Summary: {summary['drifted']} DRIFTED, {summary['minor_lag']} MINOR-LAG, "
+        f"{summary['synced']} SYNCED, {summary['fetch_failed']} FETCH-FAILED, "
+        f"{summary['no_pin']} NO-PIN across {summary['forks_total']} forks",
+        file=sys.stderr if args.output_format == "json" else sys.stdout,
+    )
+
     if args.output_format == "json":
         print(json.dumps({"results": results, "summary": summary}, indent=2))
-    else:
+    elif False:
         for r in results:
             short_pinned = (r["pinned_sha"] or "?")[:8]
             short_upstream = (r["upstream_sha"] or "?")[:8]
