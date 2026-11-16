@@ -3,13 +3,21 @@ TEMPLATE_STARTS=["This document applies least-privilege hardening","This documen
 MOJI={'â\x80\x99':'’','â\x80\x98':'‘','â\x80\x9c':'“','â\x80\x9d':'”','â\x80\x94':'—','â\x80\x93':'–','â\x80\xa6':'…','Ã©':'é','Ã¨':'è','Ã¡':'á','Ã¶':'ö','Ã¼':'ü','Ã±':'ñ','Â\xa0':' ','Â ':' ','\ufffd':''}
 def fix(text, path):
     log=[]
-    # C4a: whole file base64-encoded
+    # C7: whole file base64-encoded. Same trigger as skillcheck.sh C7 (base64 alphabet only, > 40 chars, decodes as
+    # UTF-8). The decoded payload is used whatever it is: SKILL.md bodies start with '---', but reference and script
+    # files (the bulk of the 362 committed that way) do not.
     s=text
     if re.fullmatch(r'[A-Za-z0-9+/=\s]+',s.strip()) and len(s.strip())>40:
         try:
             dec=base64.b64decode(s.strip(),validate=False).decode('utf-8')
-            if dec.startswith('---'): s=dec; log.append('C4 decoded base64-encoded file body (%d -> %d chars)'%(len(text),len(s)))
-        except Exception: pass
+        except Exception: dec=None
+        if dec is not None:
+            log.append('C7 decoded base64-encoded file body (%d -> %d chars)'%(len(text),len(dec)))
+            if not path.lower().endswith('.md'):
+                # scripts / data: return the decoded bytes verbatim. The markdown section repairs below must not
+                # run on them ('## ' lines in a script are comments, not headings to merge or drop).
+                return dec,log
+            s=dec
     # C1 mojibake
     n=0
     for a,b in MOJI.items():
@@ -29,9 +37,9 @@ def fix(text, path):
                 desc=' '.join(x for x in lines if x); block_end=dm.end()+sum(len(t)+1 for t in tail[:i])-1 if i>1 else dm.end()
             else:
                 desc=v[1:-1] if len(v)>=2 and v[0]==v[-1] and v[0] in '"\'' else v
-            newdesc=desc; moved=None
+            newdesc=desc; moved=None; stripped_brackets=False
             if '<' in newdesc or '>' in newdesc:
-                newdesc=re.sub(r'<([^<>]*)>',r'\1',newdesc).replace('<','').replace('>',''); log.append('C4 removed angle brackets from description')
+                newdesc=re.sub(r'<([^<>]*)>',r'\1',newdesc).replace('<','').replace('>',''); stripped_brackets=True; log.append('C4 removed angle brackets from description')
             if len(newdesc)>1024:
                 sents=re.split(r'(?<=[.!?])\s+',newdesc); keep=[]; total=0
                 for st in sents:
@@ -45,7 +53,7 @@ def fix(text, path):
                 fm=fm[:dm.start()]+yaml_desc+fm[block_end:]
                 if moved:
                     h1=re.search(r'^# .*$',rest,re.M)
-                    ins='\n\n## Extended description\n\nMoved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged.\n\n'+moved+'\n'
+                    ins='\n\n## Extended description\n\nMoved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-character skill-format limit; wording unchanged'+(' apart from removal of angle brackets.' if stripped_brackets else '.')+'\n\n'+moved+'\n'
                     if h1: rest=rest[:h1.end()]+ins+rest[h1.end():]
                     else: rest=ins+rest
                 s='---\n'+fm+'\n---\n'+rest

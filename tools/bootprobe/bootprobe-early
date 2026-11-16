@@ -1,12 +1,29 @@
 #!/bin/bash
 # bootprobe-early: per-boot crash-debug record (50-boot budget). Part of the laptop boot-log plan 2026-10-05.
-D=/var/lib/bootprobe
+# Writes boot-NNN.log plus two raw snapshots (boot-NNN.diskstats.early, boot-NNN.smart.early) that
+# bootprobe-finalize diffs against the end-of-boot readings.
+# BOOTPROBE_DIR / BOOTPROBE_DISKSTATS only exist so the script can be exercised off-device.
+D=${BOOTPROBE_DIR:-/var/lib/bootprobe}
+DISKSTATS=${BOOTPROBE_DISKSTATS:-/proc/diskstats}
+# one pattern for the error COUNT and the error LISTING, so the two can never disagree (BOOT-3)
+ERRRE='i/o error|blk_update|mmc[0-9].*error|nvme.*error|timeout'
 mkdir -p "$D" 2>/dev/null
 [ -f "$D/CAPTURE_DONE" ] && exit 0
 N=$(( $(cat "$D/count" 2>/dev/null || echo 0) + 1 ))
 if [ "$N" -gt 50 ]; then touch "$D/CAPTURE_DONE"; exit 0; fi
+# a previous boot can only have been unclean if a previous boot was recorded at all (BOOT-2)
+PREV="$D/boot-$(printf %03d $((N-1))).log"
+if [ "$N" -gt 1 ] && [ -e "$PREV" ]; then
+  if [ -f "$D/.prev_complete" ]; then PREV_STATE=YES; else PREV_STATE=NO; fi
+else
+  PREV_STATE="n/a (no previous captured boot)"
+fi
 echo "$N" > "$D/count"
 O="$D/boot-$(printf %03d "$N")"
+grep -E "mmcblk|nvme" "$DISKSTATS" > "$O.diskstats.early" 2>/dev/null
+if command -v nvme >/dev/null 2>&1; then
+  nvme smart-log /dev/nvme0 2>&1 | grep -iE "media_errors|percentage_used|error_log|critical_warning|num_err_log" | head -8 > "$O.smart.early"
+fi
 {
   echo "== boot $N =="
   echo "started: $(date -Is)"
@@ -14,17 +31,17 @@ O="$D/boot-$(printf %03d "$N")"
   echo "kernel: $(uname -r)"
   echo "cmdline: $(cat /proc/cmdline 2>/dev/null)"
   echo "root: $(findmnt -n -o SOURCE / 2>/dev/null)"
-  echo "prev_boot_completed: $(cat "$D/.prev_complete" 2>/dev/null || echo NO)"
+  echo "prev_boot_completed: $PREV_STATE"
   echo "-- diskstats (early: mmc+nvme) --"
-  grep -E "mmcblk|nvme" /proc/diskstats 2>/dev/null
+  cat "$O.diskstats.early"
   echo "-- dmesg error count so far --"
-  dmesg 2>/dev/null | grep -icE "i/o error|blk_update|mmc[0-9].*error|nvme.*error|timeout" || true
+  dmesg 2>/dev/null | grep -icE "$ERRRE" || true
   echo "-- dmesg errors (first 20) --"
-  dmesg 2>/dev/null | grep -iE "i/o error|blk_update|mmc[0-9].*error|nvme.*error" | head -20
+  dmesg 2>/dev/null | grep -iE "$ERRRE" | head -20
   echo "-- pstore --"
   ls /sys/fs/pstore/ 2>/dev/null | head -10
-  echo "-- nvme smart-log --"
-  if command -v nvme >/dev/null 2>&1; then nvme smart-log /dev/nvme0 2>&1 | grep -iE "media_errors|percentage_used|error_log|critical_warning|num_err_log" | head -8; else echo nvme-cli-not-installed; fi
+  echo "-- nvme smart-log (early) --"
+  if [ -f "$O.smart.early" ]; then cat "$O.smart.early"; else echo nvme-cli-not-installed; fi
 } > "$O.log" 2>&1
 rm -f "$D/.prev_complete"
 exit 0

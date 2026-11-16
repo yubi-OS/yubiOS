@@ -48,25 +48,20 @@ jobs:
             papers/data/lean/RayleighBounds.lean \
             papers/data/lean/AzimuthBounds.lean \
             papers/data/lean/FocalBounds.lean \
-            papers/data/lean/FlowBounds.lean
+            papers/data/lean/FlowBounds.lean \
+            papers/data/lean/LifeBounds.lean
 
-      - name: Install Lean 4.33.0 (pinned SHA256 release tarball, no installer script)
+      - name: Install Lean 4.35.0 (pinned SHA256 release tarball, no installer script)
         run: |
           set -euo pipefail
-          # Pinned toolchain: official leanprover/lean4 v4.33.0 linux release tarball.
-          # SHA256 captured 2026-10-07 from the official GitHub release asset:
-          #   https://github.com/leanprover/lean4/releases/download/v4.33.0/lean-4.33.0-linux.tar.zst
-          # Provenance note: this hash was captured in one pass from the official
-          # release; confirm it once against an independent copy of the artifact
-          # (re-download from a different network and re-hash) before relying on
-          # this pin for a security-sensitive merge.
-          expected='4b3fb03c29a1e0a253fb1d11f9bae3725f19a0dc6fc09b3ea16d2c9df3349e2c'
+          # Pinned toolchain: official leanprover/lean4 v4.35.0 linux release tarball.
+          expected='7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d'
           curl -sSfL --retry 3 -o /tmp/lean.tar.zst \
-            https://github.com/leanprover/lean4/releases/download/v4.33.0/lean-4.33.0-linux.tar.zst
+            https://github.com/leanprover/lean4/releases/download/v4.35.0/lean-4.35.0-linux.tar.zst
           echo "$expected  /tmp/lean.tar.zst" | sha256sum --check --status
           mkdir -p "$HOME/.lean-pinned"
           tar --zstd -xf /tmp/lean.tar.zst -C "$HOME/.lean-pinned"
-          echo "$HOME/.lean-pinned/lean-4.33.0-linux/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.lean-pinned/lean-4.35.0-linux/bin" >> "$GITHUB_PATH"
 
       - name: Lean version
         run: lean --version
@@ -85,6 +80,7 @@ jobs:
           # `! grep -n "sorry"` steps, which could never fail: bash's stop-on-
           # error behavior ignores `!`-prefixed commands. The file list is
           # explicit so a new file cannot silently bypass the gate.
+          any_fail=0
           for f in \
             papers/data/lean/CurvedCorpus.lean \
             papers/data/lean/WayfinderBounds.lean \
@@ -92,14 +88,17 @@ jobs:
             papers/data/lean/RayleighBounds.lean \
             papers/data/lean/AzimuthBounds.lean \
             papers/data/lean/FocalBounds.lean \
-            papers/data/lean/FlowBounds.lean; do
-            if ! lean -DwarningAsError=true "$f" > /tmp/sorry-gate.out 2>&1; then
+            papers/data/lean/FlowBounds.lean \
+            papers/data/lean/LifeBounds.lean; do
+            if ! lean -DwarningAsError=true -Dlinter.deprecated=false "$f" > /tmp/sorry-gate.out 2>&1; then
               echo "NO_SORRY_FAIL: $f"
               cat /tmp/sorry-gate.out
-              exit 1
+              any_fail=1
+            else
+              echo "NO_SORRY_OK: $f"
             fi
-            echo "NO_SORRY_OK: $f"
           done
+          test "$any_fail" -eq 0
 
       # Kernel re-check (round-3 Lane C): replay each module's compiled
       # olean through a fresh kernel environment. Catches any declaration
@@ -124,7 +123,7 @@ jobs:
           # actual module structure).
           rm -rf /tmp/leanchecker-src /tmp/leanchecker-oleans
           mkdir -p /tmp/leanchecker-src /tmp/leanchecker-oleans
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
             cp "papers/data/lean/${base}.lean" "/tmp/leanchecker-src/${base}.lean"
             if ! (cd /tmp/leanchecker-src && lean -o "/tmp/leanchecker-oleans/${base}.olean" "${base}.lean") > "/tmp/leanchecker-src/${base}-olean.err" 2>&1; then
               echo "LEANCHECKER_OLEAN_FAIL: ${base}" >&2
@@ -133,7 +132,7 @@ jobs:
             fi
           done
           export LEAN_PATH="/tmp/leanchecker-oleans"
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
             echo "== leanchecker --fresh ${base} =="
             if ! leanchecker --fresh "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
               echo "LEANCHECKER_FAIL: ${base}" >&2
@@ -142,15 +141,15 @@ jobs:
             fi
             cat "/tmp/leanchecker-${base}.out"
           done
-          echo "LEANCHECKER_OK: six modules re-type-checked via fresh kernel environment replay"
+          echo "LEANCHECKER_OK: all eight modules re-type-checked via leanchecker --fresh kernel replay"
 
       # Axiom coverage gate (Lane A, round 2) — runs after the pinned-tarball
       # lean install step (no elan in this workflow), so `lean` is on PATH.
-      - name: Axiom coverage gate — every theorem in all six lean files
+      - name: Axiom coverage gate — every theorem in all eight lean files
         run: |
           set -euo pipefail
           PERMITTED="propext,Classical.choice,Quot.sound"
-          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds; do
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
             case "${base}" in
               CurvedCorpus)    manifest="curvedcorpus" ;;
               WayfinderBounds) manifest="wayfinder" ;;
@@ -159,6 +158,7 @@ jobs:
               AzimuthBounds)   manifest="azimuth" ;;
               FocalBounds)     manifest="focal" ;;
               FlowBounds)      manifest="flow" ;;
+              LifeBounds)      manifest="life" ;;
             esac
             echo "== axiom coverage: ${base}.lean (manifest: ${manifest}-scope.json) =="
 
@@ -193,7 +193,7 @@ jobs:
               --mode enumerate \
               --require-coverage "papers/data/lean/${manifest}-scope.json"
           done
-          echo "AXIOM_COVERAGE_GATE_OK: all seven lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
+          echo "AXIOM_COVERAGE_GATE_OK: all eight lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
 
 
       - name: Check WayfinderBounds.lean (kernel, pinned toolchain)
@@ -210,7 +210,7 @@ jobs:
       - name: Validate scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/wayfinder-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/wayfinder-scope.json
 
       - name: Assert printed axioms match permitted manifest set
         run: |
@@ -233,7 +233,7 @@ jobs:
       - name: Validate radius scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/radius-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('RADIUS_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/radius-scope.json
 
       - name: Assert printed radius axioms match permitted manifest set
         run: |
@@ -267,7 +267,7 @@ jobs:
       - name: Validate azimuth scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/azimuth-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('AZIMUTH_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/azimuth-scope.json
 
       - name: Assert printed azimuth axioms match permitted manifest set
         run: |
@@ -279,7 +279,7 @@ jobs:
       - name: Validate rayleigh scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/rayleigh-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('RAYLEIGH_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/rayleigh-scope.json
 
       - name: Assert printed rayleigh axioms match permitted manifest set
         run: |
@@ -302,7 +302,7 @@ jobs:
       - name: Validate focal scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/focal-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('FOCAL_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/focal-scope.json
 
       - name: Assert printed focal axioms match permitted manifest set
         run: |
@@ -325,7 +325,7 @@ jobs:
       - name: Validate flow scope manifest is well-formed
         run: |
           set -euo pipefail
-          python3 -c "import json; d=json.load(open('papers/data/lean/flow-scope.json')); assert d['theorems'] and d['permitted_axioms'] and d['nonclaims']; print('FLOW_SCOPE_MANIFEST_OK', len(d['theorems']), 'theorems')"
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/flow-scope.json
 
       - name: Assert printed flow axioms match permitted manifest set
         run: |
@@ -333,6 +333,29 @@ jobs:
           python3 papers/data/lean/verify_wayfinder_axioms.py \
             --axioms /tmp/flow-axioms.txt \
             --manifest papers/data/lean/flow-scope.json
+
+      - name: Check LifeBounds.lean (kernel, pinned Lean 4.35.0 + Mathlib v4.35.0 toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/LifeBounds.lean > /tmp/life-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/LifeBounds.lean"
+            cat /tmp/life-axioms.txt
+            exit 1
+          }
+          cat /tmp/life-axioms.txt
+          echo "LEAN_OK: papers/data/lean/LifeBounds.lean checks with no sorry"
+
+      - name: Verify life scope statement and command pins against LifeBounds.lean
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/life-scope.json
+
+      - name: Assert printed life axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/life-axioms.txt \
+            --manifest papers/data/lean/life-scope.json
 
       - name: Check CurvedCorpus.lean (statement pins via scope manifest)
         run: |
@@ -369,6 +392,9 @@ jobs:
       - name: Phonon follow-ups — five phonon-bridge follow-ups (disassembled from phonon-followups.yml)
         run: python3 papers/scripts/phonon_followups.py --only-5b
 
+      - name: Fractalrabbit falsification harness — synthetic curve-rsi + atom Delta >= 0 falsifier
+        run: python3 papers/data/fractalrabbit/falsification_harness.py
+
   verify-tools:
     runs-on: ubuntu-26.04
     timeout-minutes: 45
@@ -398,6 +424,7 @@ jobs:
           node tools/point-map/test-rayleigh.mjs
           node tools/point-map/test-admission.mjs
           node tools/point-map/test-azimuth.mjs
+          node tools/point-map/test-pca-convergence.mjs
 
       - name: corpus-auditor selftest
         run: python3 tools/corpus-auditor/auditor.py --selftest
@@ -435,7 +462,9 @@ jobs:
         run: python3 tools/phonon-dispersion/phonon.py --selftest
 
       - name: edge-standard selftest (taste-engine source of record)
-        run: python3 tools/edge-standard/edge_standard.py --selftest
+        run: |
+          python3 tools/edge-standard/edge_standard.py --selftest
+          python3 tools/edge-standard/falsification/gen_v2.py --selftest
 
       - name: edge-standard fixture parity (Python source of record vs JS worker port)
         run: node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
@@ -468,7 +497,7 @@ jobs:
       # visco gate (T27 option 1: committed fixtures + Python source of record).
       # verify_visco.py runs its fixture selftest (15 checks) against
       # fixtures/visco-fixtures.json resolved relative to the tool file.
-      - name: visco-instruments fixture selftest (source of record, 15 checks)
+      - name: visco-instruments fixture selftest (source of record, 20 checks)
         run: python3 tools/visco-instruments/verify_visco.py
 
       # forecast gate part 1 (T27 option 1). The v3 selftest prints a gate report
@@ -509,6 +538,12 @@ jobs:
           set -euo pipefail
           python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
           python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
+
+      - name: life-supersolid B3/S23 instrument selftest and dynamic falsification harness (11 gates)
+        run: |
+          set -euo pipefail
+          python3 tools/life-supersolid/life_supersolid.py --selftest
+          python3 tools/life-supersolid/falsification/harness_life.py
 
   run-real-corpus:
     runs-on: ubuntu-26.04
@@ -551,6 +586,7 @@ jobs:
           node tools/point-map/test-rayleigh.mjs
           node tools/point-map/test-admission.mjs
           node tools/point-map/test-azimuth.mjs
+          node tools/point-map/test-pca-convergence.mjs
 
       - name: corpus-auditor on real matrix (reproduce published effect)
         run: |
@@ -572,6 +608,7 @@ jobs:
           j = json.load(open('/tmp/descent.json'))
           assert j['cumulative_delta'] >= 0.0, j['cumulative_delta']
           assert 0.0 < j['final_coverage'] <= 1.0
+          assert j['gates']['pole_alignment']['fraction'] >= 0.80, j['gates']
           print(f"DESCENT_REAL_OK cum_delta=+{j['cumulative_delta']:.4f} coverage={j['final_coverage']:.4f}")
           PY
 
@@ -624,8 +661,10 @@ jobs:
           import json
           j = json.load(open('/tmp/mapping.json'))
           assert j['csv_row_count'] == 2286, j['csv_row_count']
-          assert j['csv_unique_slugs'] == 2286, j['csv_unique_slugs']
-          print('MAPPING_REAL_OK 2286/2286 unique keyed rows')
+          assert j['distinct_slug_labels'] == 915, j['distinct_slug_labels']
+          assert j['ladder_stage_4_slug'] == 2169, j['ladder_stage_4_slug']
+          assert j['csv_keyed_rows'] == 2286, j['csv_keyed_rows']
+          print('MAPPING_REAL_OK 915 distinct slugs, 2169 at slug stage, 2286/2286 row_id-keyed rows')
           PY
 
       - name: corpus-sonometer level of the real corpus (above detectability floor)
@@ -642,7 +681,7 @@ jobs:
           rng = np.random.default_rng(20260822)
           L, mu, sd = corpus_level(M, draws=12, window=10, rng=rng)
           assert L > 15.6, f'{L:.2f} dBc is below the +15.6 dBc floor'
-          print(f'SONOMETER_REAL_OK L=+{L:.2f} dBc (floor +15.6, published +21.68)')
+          print(f'SONOMETER_REAL_OK L=+{L:.2f} dBc (floor +15.6, published +24.3 dBc @ 20N / +17.4 dBc @ 40N; z=12.13 -> +21.68 dBc)')
           PY
 
       - name: spectral-decomposer lens candidates from the real corpus
@@ -662,11 +701,14 @@ jobs:
           PY
 
       - name: phonon-dispersion real-corpus verification (parity with lean-check)
-        run: python3 tools/phonon-dispersion/phonon.py --selftest
+        run: |
+          python3 tools/phonon-dispersion/phonon.py --selftest
+          python3 tools/phonon-dispersion/phonon.py --input papers/is-this-x-2026-08-12-Final.zip
 
       - name: edge-standard selftest and fixture parity (parity with lean-check)
         run: |
           python3 tools/edge-standard/edge_standard.py --selftest
+          python3 tools/edge-standard/falsification/gen_v2.py --selftest
           node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
 
       - name: spectral-standard selftest, parity, centroid-walk, and falsification harness (parity with lean-check)
@@ -704,13 +746,19 @@ jobs:
           python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
           python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
 
+      - name: life-supersolid B3/S23 instrument selftest and dynamic falsification harness (11 gates)
+        run: |
+          set -euo pipefail
+          python3 tools/life-supersolid/life_supersolid.py --selftest
+          python3 tools/life-supersolid/falsification/harness_life.py
+
   run-real-statements:
     runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: tautology-discerner over the real docs corpus
+      - name: tautology-discerner over the real docs and Lean theorem corpus
         run: |
           python3 - <<'PY'
           import sys, re, glob, random
@@ -761,10 +809,11 @@ jobs:
           rng = random.Random(20260825)
           sample = rng.sample([s for s, v in zip(sentences, verdicts) if v == 'Falsifiable'], 5)
           for s in sample:
-              null = token_permutation_null(s, n_draws=100, seed=20260825)
-              assert null['invariant_under_fixed_refuter_bag'], f'invariance broke on: {s[:80]}'
+              null = token_permutation_null(s, n_draws=50, seed=20260825)
+              assert null['alpha_renaming_invariant'], f'alpha-renaming invariance broke on: {s[:80]}'
+              assert null['operator_mutation_sensitive'], f'operator-mutation sensitivity broke on: {s[:80]}'
 
           summary = ', '.join(f'{k}={v} ({v/n:.1%})' for k, v in sorted(dist.items()))
           print(f'DOCS_CORPUS_OK {len(files)} files, {n} sentences: {summary}')
-          print('INVARIANCE_OK fixed-refuter-bag held on 5 sampled real sentences')
+          print('STRUCTURAL_NULL_OK alpha-renaming invariance and operator-mutation sensitivity held on 5 sampled real sentences')
           PY

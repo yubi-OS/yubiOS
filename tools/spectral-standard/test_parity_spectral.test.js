@@ -6,11 +6,16 @@
 //   - PRNG anchors exactly (bit-identical doubles)
 //   - series counting tables to 1e-12, fitted exponents to 1e-9
 //   - walk checkpoint matrices / traces exactly, aggregates to 1e-9
+// SP-2: the final test section ("cross-language") ALSO runs the Python source
+// of record on the SAME inputs (both packs) and compares it with the JS port
+// directly, so a statistic that differs between the languages (e.g. the
+// permutation-null counting) can no longer pass unseen.
 // Run: node --test test_parity_spectral.test.js
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import {
@@ -510,4 +515,92 @@ test('empty-input failures across the instrument', () => {
   assert.throws(() => walkDimensions(null), /must come from randomWalks/);
   assert.throws(() => gasketPreGraph(0), /positive integer/);
   assert.throws(() => jacobiSymmetric([[1, 2], [3]]), /must be square/);
+});
+
+// ---------- 11. Cross-language parity: Python SoR vs JS port, same inputs ----------
+
+const packPy = JSON.parse(readFileSync(join(HERE, 'fixtures_spectral.json'), 'utf8'));
+
+function pythonSeries(request) {
+  const r = spawnSync('python3', [join(HERE, 'cross_series.py')], {
+    input: JSON.stringify(request),
+    encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
+  });
+  assert.equal(r.error, undefined, 'python3 must be runnable for the cross-language check: ' + r.error);
+  assert.equal(r.status, 0, 'cross_series.py exit status: ' + r.stderr);
+  return JSON.parse(r.stdout);
+}
+
+test('cross-language: Python SoR == JS port on every shared series input (sorted AND permuted)', () => {
+  const series = {};
+  // (a) every series / series-null input of the JS pack (spectral_fixtures.json)
+  for (const f of pack.fixtures.filter((x) => x.kind === 'series' || x.kind === 'series-null')) {
+    if (f.expected.alpha_lambda === null) continue; // degenerate plateau: JS-only null contract
+    series['jspack:' + f.id] = f.values;
+  }
+  // (b) every spectrum of the Python pack (fixtures_spectral.json)
+  series['pypack:gasket_l4'] = packPy.gasket.l4.eigenvalues;
+  series['pypack:gasket_l5'] = packPy.gasket.l5.eigenvalues;
+  series['pypack:chain64'] = packPy.lattice_counting.chain_eigenvalues;
+  series['pypack:grid8'] = packPy.lattice_counting.grid_eigenvalues;
+  series['pypack:gasket_l5_desc'] = packPy.gasket.l5.eigenvalues.slice().reverse();
+  const permute = [
+    { id: 'pypack:gasket_l5_perm12345', values: packPy.gasket.l5.eigenvalues, seed: packPy.meta.pinned.perm_seed },
+    { id: 'pypack:gasket_l5_perm7', values: packPy.gasket.l5.eigenvalues, seed: 7 },
+    { id: 'jspack:gasket_pre_l3_perm7', values: fx.gasket_pre_l3_eigs.values, seed: 7 },
+  ];
+  const py = pythonSeries({ series, permute });
+
+  // The permutation itself must be the same order in both languages: Python's
+  // Fisher-Yates(seed 7) of the JS pack's L3 spectrum IS the JS pack's permuted fixture.
+  assert.deepEqual(py.permuted['jspack:gasket_pre_l3_perm7'], fx.gasket_eigs_permuted_seed7.values,
+    'Python permutation_null(seed=7) reproduces the JS pack permutation order exactly');
+
+  const inputs = { ...series };
+  for (const p of permute) inputs[p.id] = py.permuted[p.id];
+  let compared = 0;
+  for (const [id, values] of Object.entries(inputs)) {
+    const js = seriesCountingExponent(values);
+    const p = py.fits[id];
+    assert.ok(p, 'python fit present for ' + id);
+    assert.equal(js.counts.length, p.points.length, id + ' lattice point count');
+    for (let i = 0; i < js.counts.length; i++) {
+      assert.equal(js.counts[i][0], p.points[i][0], `${id} rank ${i}`);
+      assert.ok(Math.abs(js.counts[i][1] - p.points[i][1]) <= TOL_TABLE, `${id} x at rank ${i}`);
+      assert.equal(p.points[i][2], p.points[i][0], `${id} python N_r == r (same statistic as JS N = r)`);
+    }
+    assert.ok(Math.abs(js.alpha_lambda - p.alpha_lambda) <= TOL, `${id} alpha JS ${js.alpha_lambda} vs PY ${p.alpha_lambda}`);
+    assert.ok(Math.abs(js.d_s - p.d_s) <= TOL, `${id} d_s`);
+    assert.ok(Math.abs(js.r2 - p.r2) <= TOL, `${id} r2`);
+    compared++;
+  }
+  assert.ok(compared >= 12, 'compared ' + compared + ' shared inputs');
+
+  // The Python pack records the permuted fit; JS on the same permuted order must agree with it.
+  const jsPerm = seriesCountingExponent(py.permuted['pypack:gasket_l5_perm12345']);
+  assert.ok(Math.abs(jsPerm.alpha_lambda - packPy.gasket.l5_permuted.alpha_lambda) <= TOL,
+    'JS alpha on the Python pack permutation == pack alpha_lambda');
+  assert.ok(Math.abs(jsPerm.r2 - packPy.gasket.l5_permuted.r2) <= TOL, 'JS r2 == pack r2');
+  assert.deepEqual(py.permuted['pypack:gasket_l5_perm12345'].slice(0, 10), packPy.gasket.l5_permuted.shuffled_first_10,
+    'permutation order matches the Python pack');
+});
+
+test('cross-language: both languages see the permutation null collapse by >= 0.5 in alpha', () => {
+  const sortedL5 = seriesCountingExponent(packPy.gasket.l5.eigenvalues);
+  const py = pythonSeries({ series: {}, permute: [{ id: 'p', values: packPy.gasket.l5.eigenvalues, seed: 12345 }] });
+  const jsNull = seriesCountingExponent(py.permuted.p);
+  assert.ok(Math.abs(sortedL5.alpha_lambda - packPy.gasket.l5.series.alpha_lambda) <= TOL, 'sorted JS == Python pack');
+  assert.ok(Math.abs(jsNull.alpha_lambda - sortedL5.alpha_lambda) >= 0.5, 'JS |Delta alpha| >= 0.5');
+  assert.ok(Math.abs(py.fits.p.alpha_lambda - packPy.gasket.l5.series.alpha_lambda) >= 0.5, 'Python |Delta alpha| >= 0.5');
+  assert.equal(packPy.gasket.l5_permuted.collapsed, true);
+});
+
+test('cross-language: Python pack PRNG anchors are genuine mulberry32 (JS port bit-exact)', () => {
+  for (const [seed, expected] of Object.entries(packPy.prng.mulberry32)) {
+    const rng = mulberry32(Number(seed));
+    for (let i = 0; i < expected.length; i++) {
+      assert.equal(rng(), expected[i], `seed ${seed} draw ${i}`);
+    }
+  }
 });

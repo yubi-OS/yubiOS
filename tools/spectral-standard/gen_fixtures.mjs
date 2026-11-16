@@ -293,7 +293,7 @@ function buildWalkFixture(id, adj, note, graphMeta, gold) {
             gold_alpha_msd: closedForm.alpha_msd,
             d_w_band: [2.22193, 2.42193],
             d_w_band_pass: dims.d_w !== null && Math.abs(dims.d_w - closedForm.d_w) <= 0.1,
-            alpha_band: [0.821, 0.901],
+            alpha_band: [0.82135, 0.90135],
             alpha_band_pass:
               dims.alpha_msd !== null && Math.abs(dims.alpha_msd - closedForm.alpha_msd) <= 0.04,
           }

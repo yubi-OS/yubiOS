@@ -1,8 +1,8 @@
 # gen_fixtures.py — regenerates fixtures_spectral.json from the source of record.
 # Run: python3 gen_fixtures.py   (writes fixtures_spectral.json next to itself)
-# The PRNG ground truth inside the pack was generated independently by node
-# (canonical JS mulberry32) so the pack is an independent parity anchor, not
-# a copy of the Python output.
+# The PRNG ground truth inside the pack comes from node's canonical JS
+# mulberry32 (genuine computation, not hand-typed) so the pack is an
+# independent parity anchor, not a copy of the Python output.
 
 import json
 import os
@@ -36,19 +36,26 @@ def main():
         },
     }
 
-    # PRNG truth: paste the node-generated vectors (independent of Python).
+    # PRNG truth: genuine canonical mulberry32 outputs, produced by node
+    # (bryc's JS form below, printed with JSON.stringify so every double
+    # round-trips exactly) - independent of the Python implementation:
+    #   function mulberry32(a){return function(){var t=a+=0x6D2B79F5;
+    #     t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);
+    #     return((t^t>>>14)>>>0)/4294967296;}}
+    # First 5 outputs per seed; spectral_standard.py must match to 1e-15.
     pack["prng"] = {
         "mulberry32": {
-            "0": [0.2664292086803687, 0.0003297456996142864, 0.2232720273919391,
-                  0.14620214797556365, 0.46732782291024923],
-            "1": [0.6270739406030609, 0.002735721224695444, 0.5274470399200916,
-                  0.9810509675764516, 0.9683778982378095],
-            "42": [0.6011037518959586, 0.4482905589975119, 0.8524657934345325,
-                   0.6697340413769177, 0.17481389870159328],
-            "12345": [0.9797282678286463, 0.3067522644907966, 0.4842054215613546,
-                      0.817934412547945, 0.5094283693004023],
+            "0": [0.26642920868471265, 0.0003297457005828619, 0.2232720274478197,
+                  0.1462021479383111, 0.46732782293111086],
+            "1": [0.6270739405881613, 0.002735721180215478, 0.5274470399599522,
+                  0.9810509674716741, 0.9683778982143849],
+            "42": [0.6011037519201636, 0.44829055899754167, 0.8524657934904099,
+                   0.6697340414393693, 0.17481389874592423],
+            "12345": [0.9797282677609473, 0.3067522644996643, 0.484205421525985,
+                      0.817934412509203, 0.5094283693470061],
         },
-        "note": "first 5 outputs per seed; JS must match to 1e-9 (bit-exact)",
+        "note": "first 5 outputs per seed from canonical JS mulberry32 (node, "
+                "full double precision); Python must match to 1e-15 (bit-exact)",
     }
 
     # Gasket exact spectra + series fits
@@ -72,8 +79,8 @@ def main():
         "seed": S.PERM_SEED,
         "shuffled_first_10": perm[:10],
         "alpha_lambda": fp["alpha_lambda"], "r2": fp["r2"],
-        "collapsed": (abs(fp["alpha_lambda"] - g["l5"]["series"]["alpha_lambda"]) >= 0.5)
-                      or (fp["r2"] < S.R2_GATE),
+        "delta_alpha": abs(fp["alpha_lambda"] - g["l5"]["series"]["alpha_lambda"]),
+        "collapsed": abs(fp["alpha_lambda"] - g["l5"]["series"]["alpha_lambda"]) >= 0.5,
     }
     pack["gasket"] = g
 

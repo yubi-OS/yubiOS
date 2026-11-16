@@ -2,7 +2,8 @@
  "meta": {
   "instrument": "GET /api/jev/corpus/visco/hysteresis?baseline_id=N @ https://steady-orbit.systems-a.workers.dev",
   "run_utc": "2026-10-07T04:42:40.943Z",
-  "gates_reference": "preregistration.md section 2 (H0 added via amendments 2026-10-07T04:35Z; reference corrected per amendments 2026-10-07T04:44Z)"
+  "gates_reference": "preregistration.md section 2 (H0 added via amendments 2026-10-07T04:35Z; reference corrected per amendments 2026-10-07T04:44Z)",
+  "rerun_2026_11_16": "H3 re-evaluated against the Python reference hysteresis_rollup after VIS-1/VIS-2 fixes (pending rows skipped; duplicate ids executable)"
  },
  "gates": {
   "H0_repo_fixtures": {
@@ -139,7 +140,7 @@
      "name": "pending_only",
      "pass": true,
      "threw": null,
-     "note": "pending-only ledger: no loops, zeros (amendment interpretation)"
+     "note": "pending-only ledger (prediction with realized_delta null): the row is skipped -> no loops, zeros, active_rows 0, skipped_rows 1"
     },
     {
      "name": "pending_chain_root",
@@ -162,7 +163,7 @@
     {
      "name": "duplicate_ids_throw",
      "pass": true,
-     "threw": "duplicate ids",
+     "threw": "duplicate ledger row id: 1",
      "note": "contract: duplicate ids -> throw"
     },
     {

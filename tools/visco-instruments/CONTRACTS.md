@@ -59,19 +59,32 @@ Rules:
   LOOP ordered oldest -> active. Area per loop = `sum |predicted_delta -
   realized_delta|` over the WHOLE chain (superseded attempts dissipate too);
   `mean_abs = sum_abs / len(chain)`.
-- `active_rows` = rows no other row supersedes. `n_cycles` = number of loops
+- PENDING rows (`realized_delta` null/absent, prediction only) are never
+  coerced to 0: a pending row is paired, oldest first, with the next
+  realization-only row (`predicted_delta` null) of its chain and contributes
+  `|predicted - realized_of_closer|`; an unclosed pending row contributes
+  nothing, is counted in `skipped_rows`, and a chain with no resolved
+  contribution forms no loop (`pending_only` -> zeros, `active_rows = 0`,
+  `skipped_rows = 1`).
+- `active_rows` = loops built from a row no other row supersedes that resolved
+  at least one contribution. `n_cycles` = number of loops
   (= one final outcome per cycle; a chain's replaced attempts roll into it).
   `total_mean_per_cycle = total_sum_abs / n_cycles`.
+- BRANCHING ledgers (two rows supersede the same earlier row): the first
+  active row (input order) claims the shared ancestry; later chains stop
+  before the first already-claimed ancestor, so each resolved row is in at
+  most one loop and `total_sum_abs` counts it exactly once
+  (rows `1; 2->1; 3->1`: 6.5, not 10.5).
 - Unknown supersedes id -> treated as root. Supersedes cycle (a<->b) ->
-  leftover rows become singleton loops so every input row is counted exactly
-  once. Empty ledger -> all zeros.
+  leftover rows become singleton loops so every resolved input row is counted
+  exactly once. Empty ledger -> all zeros.
 
 Return shape:
 ```json
 {"loops": [{"chain_ids": [...], "predicted": [f], "realized": [f],
             "sum_abs": f, "mean_abs": f}],
  "active_rows": int, "total_sum_abs": f, "total_mean_per_cycle": f,
- "n_cycles": int}
+ "n_cycles": int, "skipped_rows": int}
 ```
 Anchor: recorded round-3 case -> 10 singleton loops, `total_sum_abs = 102.86`
 (tol 0.05), `total_mean_per_cycle = 10.29`.

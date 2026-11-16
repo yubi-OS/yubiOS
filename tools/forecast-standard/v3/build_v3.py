@@ -61,14 +61,56 @@ s = rep(s, 'BAND_VERSION = "v2-mad-train"', 'BAND_VERSION = "v3-mad-train-zerotr
 s = rep(s,
         '# PREREG-v2 section 9 fallback (v2 failed the pass rule): not calibrated, label carries measured coverage.',
         '# PREREG-v3 section 8 fallback: not calibrated until the v3 pass rule passes.')
-s = rx(s, r'BAND_LABEL = \(.*?over-covers\."\)',
-       'BAND_LABEL = ("1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v3-mad-train-zerotrend, trend_0 = 0). "\n'
-       '              "NOT CALIBRATED: PREREG-v3 pass rule not yet evaluated.")')
+# BAND_LABEL is the SHIPPED (post-evaluation) label, identical to v3/forecast_ets.py. The module
+# the harness evaluated (sha256 6f3a2607...) carried the pre-evaluation placeholder
+# "NOT CALIBRATED: PREREG-v3 pass rule not yet evaluated." in this one string; the PREREG-v3
+# section 8 fallback then required the measured coverage to be written into the label. That
+# edit is label-only (no semantic change, see VERDICT-2026-10-09.md "Label provenance"), and it
+# now lives here so that build_v3.py output == v3/forecast_ets.py byte for byte.
+SHIPPED_BAND_LABEL = (
+    'BAND_LABEL = ("1.96 x bandSd x sqrt(j); bandSd = 1.4826 x median train |one-step residual| (v3-mad-train-zerotrend, trend_0 = 0). "\n'
+    '              "PREREG-v3 FAILED clause (i). EVAL G2 coverage: C0 95, C1 93, C2 100, C3 94, C4 98 (gate 88-98). NOT CALIBRATED.")')
+s = rx(s, r'BAND_LABEL = \(.*?over-covers\."\)', SHIPPED_BAND_LABEL)
 s = rep(s, 'trend = values[1] - values[0]', 'trend = 0.0', count=2)
 s = rep(s, 'Falsification gates (PREREG-v2 sections 7-11)',
         'Falsification gates (PREREG-v3 sections 6-7; two-sided negative controls are in harness_v3.py)')
 s = rx(s, r'    neg_hits = g2_hits\("C0", 0\.5\).*?    return gates',
        '    # Two-sided negative controls (NEG_low, NEG_high) live in harness_v3.py (PREREG-v3 section 5).\n    return gates')
+
+# FC-3: G3 also checks cross-seed sensitivity (identical seed -> bit-for-bit, different seed -> different draws
+# and forecast). Applied to the v3 module only; the v2 source stays verbatim.
+OLD_G3 = '''    y = family_series("linear-noise", FAMILY_SEED, 40)
+    s1 = json.dumps(ets_forecast(y, 5), sort_keys=True)
+    s2 = json.dumps(ets_forecast(y, 5), sort_keys=True)
+    passed = s1 == s2 and len(s1) > 0
+    gates.append({
+        "name": "G3",
+        "pass": passed,
+        "detail": "two runs, same input | bytes %d identical=%s | %s" % (len(s1), s1 == s2, "PASS" if passed else "FAIL"),
+    })
+'''
+NEW_G3 = '''    y = family_series("linear-noise", FAMILY_SEED, 40)
+    s1 = json.dumps(ets_forecast(y, 5), sort_keys=True)
+    s2 = json.dumps(ets_forecast(y, 5), sort_keys=True)
+    # FC-3: a pure function called twice on one list can never fail, so G3 also checks the seed:
+    # the identical seed regenerates the synthetic draws bit-for-bit (and reproduces the forecast
+    # bytes), while a different seed changes the draws AND the forecast. A constant or
+    # seed-ignoring generator would fail the second half.
+    y_same = family_series("linear-noise", FAMILY_SEED, 40)
+    y_other = family_series("linear-noise", FAMILY_SEED + 1, 40)
+    s_same = json.dumps(ets_forecast(y_same, 5), sort_keys=True)
+    s_other = json.dumps(ets_forecast(y_other, 5), sort_keys=True)
+    same_seed_bitwise = y_same == y and s_same == s1
+    other_seed_differs = y_other != y and s_other != s1
+    passed = s1 == s2 and len(s1) > 0 and same_seed_bitwise and other_seed_differs
+    gates.append({
+        "name": "G3",
+        "pass": passed,
+        "detail": "two runs, same input | bytes %d identical=%s | same seed bit-for-bit=%s | seed+1 changes draws and forecast=%s | %s"
+                  % (len(s1), s1 == s2, same_seed_bitwise, other_seed_differs, "PASS" if passed else "FAIL"),
+    })
+'''
+s = rep(s, OLD_G3, NEW_G3)
 
 if "trend = values[1]" in s:
     raise SystemExit("v2 initial trend still present")

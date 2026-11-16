@@ -20,6 +20,11 @@
   "slope": 1.5968,
   "tolerance": 0.002,
   "r2_min": 0.98,
+  "preregistered_band": {
+   "center": 1.585,
+   "tolerance": 0.05,
+   "source": "amendments-log-2026-10-06.md item 1 (centre 1.585 +/- 0.05, r2 >= 0.98 unchanged)"
+  },
   "evaluated_at_L": 384,
   "note": "Amended gate window {13,20,29,43,64} (2.30 octaves) replaces the ill-posed 's ~ 16-64' pre-registration; center 1.585 +/- 0.05 re-expressed at L=384 via L-convergence calibration (slope drift r/L-dependent, measured -0.099 at L=256, +0.012 at L=384)."
  },
