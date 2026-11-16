@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-03",
+  "generated": "2026-11-16",
   "source": "verify_visco.py (Python source of record, Lane A)",
   "sign_convention": "dBc improvement = MORE NEGATIVE; deltas recorded as-is (realized +0.16 means dBc moved toward the null)",
   "persistence": [
@@ -617,9 +617,10 @@
           }
         ],
         "active_rows": 10,
-        "total_sum_abs": 102.86000000000001,
-        "total_mean_per_cycle": 10.286000000000001,
-        "n_cycles": 10
+        "total_sum_abs": 102.86,
+        "total_mean_per_cycle": 10.286,
+        "n_cycles": 10,
+        "skipped_rows": 0
       }
     },
     {
@@ -709,7 +710,8 @@
         "active_rows": 3,
         "total_sum_abs": 26.1,
         "total_mean_per_cycle": 8.700000000000001,
-        "n_cycles": 3
+        "n_cycles": 3,
+        "skipped_rows": 0
       }
     }
   ],
@@ -899,14 +901,14 @@
         ]
       },
       "expected": {
-        "ke": -10.000000000000007,
+        "ke": -10.000000000000012,
         "arms": [
           {
-            "k": 1.999999999999989,
+            "k": 1.999999999999982,
             "tau": 1.0
           },
           {
-            "k": 1.0000000000000182,
+            "k": 1.0000000000000286,
             "tau": 8.0
           }
         ],
@@ -915,12 +917,12 @@
           {
             "t": 0.0,
             "value": -7.0,
-            "fitted": -7.0
+            "fitted": -7.000000000000002
           },
           {
             "t": 1.0,
             "value": -8.38174421507252,
-            "fitted": -8.381744215072516
+            "fitted": -8.381744215072514
           },
           {
             "t": 2.0,
@@ -930,7 +932,7 @@
           {
             "t": 3.0,
             "value": -9.2131365844733,
-            "fitted": -9.213136584473295
+            "fitted": -9.213136584473293
           },
           {
             "t": 4.0,
@@ -950,25 +952,25 @@
           {
             "t": 7.0,
             "value": -9.581314216390384,
-            "fitted": -9.581314216390382
+            "fitted": -9.581314216390384
           },
           {
             "t": 8.0,
             "value": -9.631449633572752,
-            "fitted": -9.631449633572752
+            "fitted": -9.631449633572753
           },
           {
             "t": 9.0,
             "value": -9.675100713033476,
-            "fitted": -9.675100713033478
+            "fitted": -9.67510071303348
           },
           {
             "t": 10.0,
             "value": -9.713404403280286,
-            "fitted": -9.713404403280288
+            "fitted": -9.71340440328029
           }
         ],
-        "sse": 1.199068575935938e-28
+        "sse": 1.798602863903907e-28
       }
     }
   ],

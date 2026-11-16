@@ -1,8 +1,5 @@
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
-
 /-
-  AzimuthBounds.lean — azimuth/1 (2026-09-19), core Lean 4.33.0, no Mathlib, no sorry.
+  AzimuthBounds.lean — azimuth/1 (2026-09-19), Lean 4.35.0 (Mathlib v4.35.0 workspace; core proofs re-checked with leanchecker --fresh; also checks in core Lean 4.33.0 at main 2efa6131), no sorry.
 
   Exact integer statements behind the wayfinder's rotation-invariant azimuth
   diagnostics. The runtime statistic is Z_m = N * |mean(exp(i*m*phi))|^2 on the
@@ -104,7 +101,13 @@ theorem absSq_sum_order (a b : Cx) : absSq (cadd a b) = absSq (cadd b a) := by
 
 theorem absSq_scale (k : Int) (z : Cx) : absSq (scale k z) = k * k * absSq z := by
   unfold absSq scale
-  ring
+  have h1 : k * z.1 * (k * z.1) = k * k * (z.1 * z.1) := by
+    rw [Int.mul_assoc k z.1 (k * z.1), Int.mul_comm z.1 (k * z.1), Int.mul_assoc k z.1 z.1,
+        ← Int.mul_assoc k k (z.1 * z.1)]
+  have h2 : k * z.2 * (k * z.2) = k * k * (z.2 * z.2) := by
+    rw [Int.mul_assoc k z.2 (k * z.2), Int.mul_comm z.2 (k * z.2), Int.mul_assoc k z.2 z.2,
+        ← Int.mul_assoc k k (z.2 * z.2)]
+  rw [h1, h2, ← Int.mul_add]
 
 /-! ## Concrete D4 instances (decide) -/
 

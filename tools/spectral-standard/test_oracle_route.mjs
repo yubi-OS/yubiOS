@@ -1,6 +1,6 @@
 import { handleOracleRequest } from "./jev-spectral.js";
-import { standardize as edgeStandardize, measure as edgeMeasure } from "./jev-edge-standard.js";
-import * as tasteMath from "./jev-taste-math.js";
+import { standardize as edgeStandardize, measure as edgeMeasure } from "../edge-standard/jev-edge-standard.js";
+import * as tasteMath from "../edge-standard/jev-taste-math.js";
 const W = 128, H = 128, R = 3;
 const gray = new Uint8Array(W * H);
 const h = 96 * Math.sqrt(3) / 2;

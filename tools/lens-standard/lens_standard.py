@@ -64,7 +64,7 @@
 #              (z' = z - t conj(z)^2, the m=2 harmonic; "trefoil-like" per the
 #              lane brief), composed with a coefficient-dependent expansive
 #              zoom floor:
-#                beta(t) = 400 |t| / (1 - 400 |t|);   z'' = (1 + beta) z'
+#                beta(t) = 460 |t| / (1 - 460 |t|);   z'' = (1 + beta) z'
 #              WHY: the shear's singular values are 1 +/- 2 t r, so sigma_min
 #              = 1 - 2|t| r < 1 — every shear flow compresses one local
 #              diagonal, and compression collides near-coincident sources into
@@ -159,7 +159,10 @@ ABERRATIONS = (
     ("trefoil", 0.0001), ("trefoil", 0.00015),
 )
 
-EST_TOL = {"astig": 5e-3, "spherical": 5e-3, "trefoil": 5e-3}
+# trefoil tolerance 5e-5 is BELOW the injected magnitudes (1e-4, 1.5e-4): an
+# estimator that returns 0 (error = the coefficient itself) fails est:trefoil.
+# (The old 5e-3 exceeded every trefoil coefficient, so the gate could not fail.)
+EST_TOL = {"astig": 5e-3, "spherical": 5e-3, "trefoil": 5e-5}
 D_BAND = 0.05                      # pre-registered known-answer band
 EST_NEWTON_STEPS = 6               # trefoil estimator (fixed count, pinned)
 EST_CORRECTOR_STEPS = 2            # predictor-corrector depth (fixed, pinned)

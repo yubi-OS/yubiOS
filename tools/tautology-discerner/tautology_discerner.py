@@ -51,6 +51,7 @@ import random
 import re
 import sys
 from dataclasses import dataclass
+from fractions import Fraction
 from typing import Dict, List, Optional, Tuple
 
 
@@ -60,11 +61,14 @@ from typing import Dict, List, Optional, Tuple
 
 @dataclass(frozen=True)
 class RelConstraint:
-    """Linear/order constraint between two terms (variable or numeric constant):
-    lhs OP rhs, where OP in {'==', '!=', '<', '<=', '>', '>='}."""
+    """Linear/order constraint `lhs OP rhs + offset`, where `lhs`/`rhs` are a
+    variable (or opaque linear-form term) or a numeric constant, `offset` is a
+    numeric constant (default 0.0), and OP in {'==', '!=', '<', '<=', '>', '>='}.
+    A non-zero offset encodes a difference-bound x - y OP c exactly."""
     lhs: str
     op: str
     rhs: str
+    offset: float = 0.0
 
     def negate(self) -> "RelConstraint":
         neg_map = {
@@ -75,10 +79,13 @@ class RelConstraint:
             ">": "<=",
             ">=": "<",
         }
-        return RelConstraint(self.lhs, neg_map[self.op], self.rhs)
+        return RelConstraint(self.lhs, neg_map[self.op], self.rhs, self.offset)
 
     def format(self) -> str:
-        return f"{self.lhs} {self.op} {self.rhs}"
+        if self.offset == 0.0:
+            return f"{self.lhs} {self.op} {self.rhs}"
+        sign = "+" if self.offset > 0 else "-"
+        return f"{self.lhs} {self.op} {self.rhs} {sign} {abs(self.offset)!r}"
 
 
 @dataclass(frozen=True)
@@ -203,6 +210,7 @@ def format_expr(expr: Expr) -> str:
 
 # ---------------------------------------------------------------------------
 # 2. Exact Difference-Bound Matrix (Floyd-Warshall) Feasibility Solver
+#    over the lexicographic tropical semiring (weight, strict_flag)
 # ---------------------------------------------------------------------------
 
 _NUM_RE = re.compile(r"^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$")
@@ -218,26 +226,85 @@ def _parse_number(s: str) -> Optional[float]:
     return None
 
 
+# A DBM bound is a pair (w, s): "x_u - x_v <= w" when s == 0 and
+# "x_u - x_v <  w" when s == 1.  Pairs form a tropical semiring under
+#   (w1, s1) (+) (w2, s2) = (w1 + w2, s1 or s2)       (path concatenation)
+#   (w1, s1) <  (w2, s2) iff w1 < w2 - TOL or (|w1 - w2| <= TOL and s1 > s2)
+# (a strict bound is tighter than a non-strict bound of equal weight).  No
+# epsilon is ever added to a weight, so arbitrarily narrow open intervals such
+# as 0 < x < 1e-9 are decided exactly.
+_PW_TOL = 1e-15
+_CYCLE_TOL = 1e-12
+_DBM_INF = 1e18
+_PW_INF = (_DBM_INF, 0)
+
+
+def _pw_add(a: Tuple[float, int], b: Tuple[float, int]) -> Tuple[float, int]:
+    return (a[0] + b[0], 1 if (a[1] or b[1]) else 0)
+
+
+def _pw_lt(a: Tuple[float, int], b: Tuple[float, int]) -> bool:
+    return a[0] < b[0] - _PW_TOL or (abs(a[0] - b[0]) <= _PW_TOL and a[1] > b[1])
+
+
+def _pw_is_inf(a: Tuple[float, int]) -> bool:
+    return a[0] >= _DBM_INF / 2
+
+
+def _dbm_close(dist: List[List[Tuple[float, int]]]) -> bool:
+    """In-place Floyd-Warshall closure. Returns True iff a negative cycle exists
+    (dist[i][i] < (0, 0), i.e. weight < 0 or a zero-weight cycle through a strict edge)."""
+    n = len(dist)
+    for k in range(n):
+        dk = dist[k]
+        for i in range(n):
+            dik = dist[i][k]
+            if _pw_is_inf(dik):
+                continue
+            di = dist[i]
+            for j in range(n):
+                dkj = dk[j]
+                if _pw_is_inf(dkj):
+                    continue
+                cand = _pw_add(dik, dkj)
+                if _pw_lt(cand, di[j]):
+                    di[j] = cand
+    for i in range(n):
+        w, s = dist[i][i]
+        if w < -_CYCLE_TOL or (abs(w) <= _CYCLE_TOL and s):
+            return True
+    return False
+
+
+_FEAS_CACHE: Dict[Tuple[RelConstraint, ...], bool] = {}
+
+
 def check_relational_feasibility(
     active_constraints: List[RelConstraint],
+    want_witness: bool = True,
 ) -> Tuple[bool, Optional[Dict[str, float]]]:
-    """Check whether a conjunction of relational constraints (x OP y, where x, y
-    are variables or numeric constants) has a real-valued solution.
+    """Check whether a conjunction of relational constraints (Term_u OP Term_v + c,
+    where each term is a variable or numeric constant) has a real-valued solution.
 
     Uses a Difference-Bound Matrix (DBM) over V = vars U {'0'} where every
-    constraint is encoded as u - v <= c (with strict inequality encoded via an
-    infinitesimal epsilon = 1e-7 so strict cycles x < y < x have negative loop
-    weight -2*eps < 0). Runs Floyd-Warshall all-pairs shortest paths:
-      - Feasibility holds iff no negative cycle exists (dist[u][u] >= 0 for all u)
-        and no "!=" constraint has both endpoints forced equal (u - v <= 0 and
-        v - u <= 0).
-      - When feasible, extracts a concrete numerical witness assignment from
-        shortest-path potentials relative to '0'.
+    constraint is encoded as x_u - x_v (<= | <) w.  Bounds are lexicographic
+    pairs (w, strict) -- see `_pw_add` / `_pw_lt` -- so a strict inequality needs no
+    epsilon: x < y < x is a zero-weight cycle through strict edges and is
+    rejected exactly, while 0 < x < 1e-9 is accepted.  Runs Floyd-Warshall
+    all-pairs shortest paths:
+      - Feasibility holds iff no negative cycle exists (dist[u][u] >= (0, 0)
+        for all u) and no "!=" constraint has both endpoints forced equal.
+      - When feasible and `want_witness`, a concrete rational-midpoint witness is
+        built variable by variable: each variable is placed at the midpoint of its
+        tightest (lo, hi) bounds relative to '0' (or one unit beyond a finite bound
+        when the other side is unbounded), pinned, and the closure is refreshed.
     """
     if not active_constraints:
         return True, {}
+    key = tuple(active_constraints)
+    if not want_witness and key in _FEAS_CACHE:
+        return _FEAS_CACHE[key], None
 
-    EPS = 1e-6
     nodes = ["__ZERO__"]
     node_idx = {"__ZERO__": 0}
 
@@ -251,160 +318,505 @@ def check_relational_feasibility(
             nodes.append(term)
         return node_idx[term], 0.0
 
-    # First register all variable nodes
     parsed_items = []
+    # neq_pairs entries: (u, off_u, v, off_v_plus_c)  meaning Term_u != x_v + off_v_plus_c
     neq_pairs: List[Tuple[int, float, int, float]] = []
     for c in active_constraints:
         u, off_u = get_node(c.lhs)
         v, off_v = get_node(c.rhs)
-        parsed_items.append((c.op, u, off_u, v, off_v))
+        parsed_items.append((c.op, u, off_u, v, off_v + c.offset))
 
     n = len(nodes)
-    INF = 1e18
-    dist = [[INF] * n for _ in range(n)]
+    dist: List[List[Tuple[float, int]]] = [[_PW_INF] * n for _ in range(n)]
     for i in range(n):
-        dist[i][i] = 0.0
+        dist[i][i] = (0.0, 0)
 
-    def add_leq(u: int, v: int, bound: float) -> None:
-        # Enforces x_u - x_v <= bound  (i.e. edge v -> u of weight bound)
-        if bound < dist[v][u]:
-            dist[v][u] = bound
+    def add_edge(u: int, v: int, bound: float, strict: int) -> None:
+        # Enforces x_u - x_v (<= | <) bound  (edge v -> u of weight (bound, strict))
+        cand = (bound, strict)
+        if _pw_lt(cand, dist[v][u]):
+            dist[v][u] = cand
 
     for op, u, off_u, v, off_v in parsed_items:
-        # Term_u = x_u + off_u, Term_v = x_v + off_v
-        # Term_u - Term_v = (x_u - x_v) + (off_u - off_v)
+        # Term_u = x_u + off_u ;  Term_v' = x_v + off_v  (offset c already folded in)
+        # Term_u - Term_v' = (x_u - x_v) + (off_u - off_v)
         delta = off_v - off_u
         if op == "<=":
-            add_leq(u, v, delta)
+            add_edge(u, v, delta, 0)
         elif op == "<":
-            add_leq(u, v, delta - EPS)
+            add_edge(u, v, delta, 1)
         elif op == ">=":
-            # Term_u >= Term_v  <=>  Term_v - Term_u <= 0  <=>  x_v - x_u <= off_u - off_v
-            add_leq(v, u, -delta)
+            add_edge(v, u, -delta, 0)
         elif op == ">":
-            add_leq(v, u, -delta - EPS)
+            add_edge(v, u, -delta, 1)
         elif op == "==":
-            add_leq(u, v, delta)
-            add_leq(v, u, -delta)
+            add_edge(u, v, delta, 0)
+            add_edge(v, u, -delta, 0)
         elif op == "!=":
             neq_pairs.append((u, off_u, v, off_v))
 
-    # Floyd-Warshall closure
-    for k in range(n):
-        dk = dist[k]
-        for i in range(n):
-            dik = dist[i][k]
-            if dik >= INF / 2:
-                continue
-            di = dist[i]
-            for j in range(n):
-                cand = dik + dk[j]
-                if cand < di[j]:
-                    di[j] = cand
+    if _dbm_close(dist):
+        _FEAS_CACHE[key] = False
+        return False, None
 
-    # Negative cycle check
-    for i in range(n):
-        if dist[i][i] < -1e-11:
-            return False, None
-
-    # Check "!=" constraints: infeasible if Term_u == Term_v is forced
+    # "!=" is violated only when Term_u == Term_v' is forced by the closure:
+    # x_u - x_v <= delta and x_v - x_u <= -delta, both non-strict.
     for u, off_u, v, off_v in neq_pairs:
         delta = off_v - off_u
-        # x_u - x_v <= dist[v][u] and x_v - x_u <= dist[u][v]
-        if dist[v][u] <= delta + 1e-11 and dist[u][v] <= -delta + 1e-11:
+        a, b = dist[v][u], dist[u][v]
+        if (
+            not _pw_is_inf(a)
+            and not _pw_is_inf(b)
+            and abs(a[0] - delta) <= _CYCLE_TOL
+            and abs(b[0] + delta) <= _CYCLE_TOL
+            and not a[1]
+            and not b[1]
+        ):
+            _FEAS_CACHE[key] = False
             return False, None
 
-    # Extract a concrete witness assignment x_i
-    # Add a virtual sourceconnected to all nodes with weight 0 to get potentials
-    pot = [0.0] * n
-    for i in range(n):
-        pot[i] = dist[0][i] if dist[0][i] < INF / 2 else 0.0
-    # Re-run Bellman-Ford relaxation from pot to satisfy all edges x_j - x_i <= dist[i][j]
-    for _ in range(n + 1):
-        for i in range(n):
-            for j in range(n):
-                if dist[i][j] < INF / 2 and pot[j] > pot[i] + dist[i][j]:
-                    pot[j] = pot[i] + dist[i][j]
-    shift = pot[0]
-    witness: Dict[str, float] = {}
+    _FEAS_CACHE[key] = True
+    if not want_witness:
+        return True, None
+
+    # ---- witness extraction: pin variables one at a time at interval midpoints ----
+    val: Dict[int, float] = {0: 0.0}
     for idx in range(1, n):
-        witness[nodes[idx]] = round(pot[idx] - shift, 6)
+        hi = dist[0][idx]       # x_idx - 0 <= hi
+        lo_b = dist[idx][0]     # 0 - x_idx <= lo_b  =>  x_idx >= -lo_b
+        has_hi = not _pw_is_inf(hi)
+        has_lo = not _pw_is_inf(lo_b)
+        lo_v = -lo_b[0] if has_lo else 0.0
+        hi_v = hi[0] if has_hi else 0.0
+        cands: List[float] = []
+        if has_lo and has_hi:
+            if abs(hi_v - lo_v) <= _PW_TOL:
+                cands = [lo_v]
+            else:
+                cands = [lo_v + f * (hi_v - lo_v) for f in (0.5, 0.25, 0.75, 0.125, 0.875, 1 / 3, 2 / 3)]
+        elif has_lo:
+            cands = [lo_v + k for k in (1.0, 2.0, 3.0, 5.0, 8.0)]
+        elif has_hi:
+            cands = [hi_v - k for k in (1.0, 2.0, 3.0, 5.0, 8.0)]
+        else:
+            cands = [0.0, 1.0, -1.0, 2.0, -2.0, 3.0, 5.0]
 
-    # Perturb slightly if a "!=" constraint happens to collide numerically
-    for u, off_u, v, off_v in neq_pairs:
-        val_u = (0.0 if u == 0 else witness[nodes[u]]) + off_u
-        val_v = (0.0 if v == 0 else witness[nodes[v]]) + off_v
-        if abs(val_u - val_v) < 1e-9:
-            if u != 0 and dist[0][u] > (pot[u] - shift) + 0.5:
-                witness[nodes[u]] = round(witness[nodes[u]] + 0.5, 6)
-            elif u != 0:
-                witness[nodes[u]] = round(witness[nodes[u]] - 0.5, 6)
-            elif v != 0:
-                witness[nodes[v]] = round(witness[nodes[v]] + 0.5, 6)
+        def collides(x: float) -> bool:
+            for u, off_u, v, off_v in neq_pairs:
+                if u == idx and v in val:
+                    if abs((x + off_u) - (val[v] + off_v)) <= 1e-12:
+                        return True
+                elif v == idx and u in val:
+                    if abs((val[u] + off_u) - (x + off_v)) <= 1e-12:
+                        return True
+                elif u == idx and v == idx:
+                    if abs(off_u - off_v) <= 1e-12:
+                        return True
+            return False
 
+        chosen = next((x for x in cands if not collides(x)), cands[0])
+        val[idx] = chosen
+        # pin x_idx = chosen (non-strict both ways) and refresh the closure
+        for (a_, b_, w_) in ((idx, 0, chosen), (0, idx, -chosen)):
+            cand = (w_, 0)
+            if _pw_lt(cand, dist[b_][a_]):
+                dist[b_][a_] = cand
+        _dbm_close(dist)
+
+    witness = {nodes[i]: float(f"{val[i]:.12g}") for i in range(1, n)}
     return True, witness
 
 
 # ---------------------------------------------------------------------------
-# 3. Self-Reference Fixed-Point Analyzer
+# 3. Self-Reference Fixed-Point Solver  v <-> f(v)
 # ---------------------------------------------------------------------------
 
+# Subject of a self-referential truth claim. Bare "I am" is only a subject when
+# its predicate is a truth predicate ("I am lying"), checked in the solver.
 _SELF_REF_SUBJ_RE = re.compile(
-    r"^\s*(?:this\s+(?:statement|sentence|proposition|claim|assertion|rule)|"
+    r"^\s*(?P<subj>this\s+(?:statement|sentence|proposition|claim|assertion|rule)|"
     r"the\s+present\s+(?:statement|sentence|claim)|"
-    r"i\s+am\s+lying|"
-    r"the\s+following\s+(?:statement|sentence)\s+is\s+(?:true|false)\s*:\s*the\s+preceding\s+(?:statement|sentence)\s+is\s+(?:true|false))",
+    r"i\s+am)\b",
+    re.IGNORECASE,
+)
+_PAIR_SELF_REF_RE = re.compile(
+    r"^\s*the\s+following\s+(?:statement|sentence)\s+is\s+(?P<a>[a-z\s']+?)\s*:\s*"
+    r"the\s+preceding\s+(?:statement|sentence)\s+is\s+(?P<b>[a-z\s']+?)\s*[.!?]?\s*$",
     re.IGNORECASE,
 )
 
+# Closed-class truth-predicate vocabulary: the polarity of a predicate applied
+# to the statement's own truth value v.  (This is grammar -- the meaning of
+# "true"/"false" -- not a lookup of sentences or verdicts.)
+_TRUTH_POS = {"true", "correct", "right", "accurate", "truthful", "valid", "honest"}
+_TRUTH_NEG = {"false", "untrue", "incorrect", "wrong", "inaccurate", "lying", "invalid", "dishonest"}
+_SR_FILLER = {
+    "is", "are", "be", "being", "am", "also", "both", "really", "simply", "just",
+    "completely", "entirely", "the", "a", "an", "itself", "exactly", "ever",
+}
+_SR_NEGATORS = {"not", "never", "no", "isn't", "aren't", "isnt", "arent", "cannot"}
 
-def solve_self_reference(sentence: str) -> Optional[Dict[str, object]]:
-    """If `sentence` is a self-referential truth-value claim, solve its boolean
-    fixed-point equation v <-> f(v) over {False, True}:
-      - Odd negation depth (f(v) = not v): 0 fixed points -> Paradox.
-      - Even negation depth (f(v) = v): 2 fixed points (unanchored) -> Undecidable.
-    """
-    s = sentence.strip()
-    if not _SELF_REF_SUBJ_RE.search(s):
-        return None
 
-    low = s.lower()
-    if "i am lying" in low:
+class _SRParseError(Exception):
+    pass
+
+
+def _sr_tokens(text: str) -> List[str]:
+    low = text.lower().replace("\u2019", "'")
+    low = re.sub(r"\btelling\s+the\s+truth\b", "true", low)
+    low = re.sub(r"\btelling\s+(?:a\s+)?(?:lie|lies)\b", "false", low)
+    low = re.sub(r"\bnot\s+telling\s+the\s+truth\b", "false", low)
+    return re.findall(r"[a-z']+|~|¬", low)
+
+
+def _sr_parse_predicate(tokens: List[str]) -> Expr:
+    """Recursive-descent parser for a boolean combination of truth predicates over
+    the single variable v (the truth value of the statement itself):
+        disj := conj ('or' conj)* | 'either' disj
+        conj := neg ('and' neg)* | 'both' conj
+        neg  := ('not' | 'never' | "isn't" | '~')* atom | 'neither' atom 'nor' atom
+        atom := truth-word
+    Raises _SRParseError when a token is neither truth vocabulary, connective nor filler."""
+    toks = [t for t in tokens if t not in _SR_FILLER]
+    pos = 0
+    v = VarExpr(Atom(name="v"))
+
+    def peek() -> Optional[str]:
+        return toks[pos] if pos < len(toks) else None
+
+    def eat() -> str:
+        nonlocal pos
+        t = toks[pos]
+        pos += 1
+        return t
+
+    def parse_disj() -> Expr:
+        if peek() == "either":
+            eat()
+        left = parse_conj()
+        while peek() == "or":
+            eat()
+            left = OrExpr(left, parse_conj())
+        return left
+
+    def parse_conj() -> Expr:
+        left = parse_neg()
+        while peek() == "and":
+            eat()
+            left = AndExpr(left, parse_neg())
+        return left
+
+    def parse_neg() -> Expr:
+        t = peek()
+        if t == "neither":
+            eat()
+            a = parse_neg()
+            if peek() != "nor":
+                raise _SRParseError("neither without nor")
+            eat()
+            b = parse_neg()
+            return AndExpr(NotExpr(a), NotExpr(b))
+        if t in _SR_NEGATORS or t in ("~", "¬"):
+            eat()
+            return NotExpr(parse_neg())
+        return parse_atom()
+
+    def parse_atom() -> Expr:
+        t = peek()
+        if t is None:
+            raise _SRParseError("unexpected end of predicate")
+        eat()
+        if t in _TRUTH_POS:
+            return v
+        if t in _TRUTH_NEG:
+            return NotExpr(v)
+        raise _SRParseError(f"non-truth token {t!r}")
+
+    expr = parse_disj()
+    if pos != len(toks):
+        raise _SRParseError("trailing tokens")
+    return expr
+
+
+def _fixed_points(fs: List[object], names: List[str]) -> List[Dict[str, bool]]:
+    """Brute-force the fixed points of the system  name_i <-> f_i(name_*)  over {False, True}."""
+    out: List[Dict[str, bool]] = []
+    for mask in range(1 << len(names)):
+        env = {nm: bool((mask >> i) & 1) for i, nm in enumerate(names)}
+        if all(eval_expr(f, env) == env[nm] for f, nm in zip(fs, names)):  # type: ignore[arg-type]
+            out.append(env)
+    return out
+
+
+def _sr_verdict(n_fp: int, fixed: List[Dict[str, bool]], detail: str) -> Dict[str, object]:
+    if n_fp == 0:
         return {
             "verdict": "Paradox",
             "fixed_points": [],
-            "reason": "self-referential truth equation v <-> ~v has 0 boolean fixed points",
-            "refuter_rule": "unsatisfiable fixed-point equation v = not v over {0, 1}",
+            "reason": f"self-referential truth equation {detail} has 0 boolean fixed points",
+            "refuter_rule": "rejected -- the fixed-point set {v in {0,1} : v == f(v)} is empty",
         }
+    if n_fp == 1:
+        only = fixed[0]
+        if all(only.values()):
+            return {
+                "verdict": "Tautology",
+                "fixed_points": [True],
+                "reason": f"self-referential truth equation {detail} has the unique fixed point v = True",
+                "refuter_rule": "none -- v = False is not a fixed point, so the statement is consistently true",
+            }
+        return {
+            "verdict": "Paradox",
+            "fixed_points": [False],
+            "reason": f"self-referential truth equation {detail} has the unique fixed point v = False",
+            "refuter_rule": "the only consistent valuation makes the statement false",
+        }
+    return {
+        "verdict": "Undecidable",
+        "fixed_points": [False, True],
+        "reason": f"self-referential truth equation {detail} has {n_fp} fixed points {{0, 1}} (underdetermined)",
+        "refuter_rule": "underdetermined -- both v=True and v=False satisfy v <-> f(v)",
+    }
 
-    # Count negation flips on truth predicate (false, untrue, lying, not, never, fails)
-    tokens = re.findall(r"[a-z]+|~|¬", low)
-    neg_tokens = {"false", "untrue", "incorrect", "wrong", "lying", "not", "never", "no", "fails", "~", "¬"}
-    truth_tokens = {"true", "false", "untrue", "correct", "incorrect", "lying", "holds", "fails"}
 
-    if not any(t in truth_tokens for t in tokens):
+def solve_self_reference(sentence: str) -> Optional[Dict[str, object]]:
+    """If `sentence` is a self-referential truth-value claim, parse its predicate into
+    a boolean function f(v) of the statement's own truth value v, and solve the
+    fixed-point equation v <-> f(v) over {False, True}:
+      - 0 fixed points (f(v) = not v)                    -> Paradox
+      - exactly 1 fixed point, v = True (f(v) = v or ~v)  -> Tautology
+      - 2 fixed points (f(v) = v)                        -> Undecidable
+    Two-sentence cycles ("The following statement is X: the preceding statement is
+    Y") are solved as the 2-variable system A <-> X(B), B <-> Y(A)."""
+    s = sentence.strip()
+
+    m_pair = _PAIR_SELF_REF_RE.match(s)
+    if m_pair:
+        try:
+            fa = _sr_parse_predicate_of(m_pair.group("a"), "B")
+            fb = _sr_parse_predicate_of(m_pair.group("b"), "A")
+        except _SRParseError:
+            return None
+        fixed = _fixed_points([fa, fb], ["A", "B"])
+        return _sr_verdict(len(fixed), fixed, "A <-> X(B), B <-> Y(A)")
+
+    m = _SELF_REF_SUBJ_RE.search(s)
+    if not m:
+        return None
+    rest = s[m.end():].strip().rstrip(".!?").strip()
+    tokens = _sr_tokens(rest)
+    has_truth_word = any(t in _TRUTH_POS or t in _TRUTH_NEG for t in tokens)
+    if m.group("subj").lower().replace(" ", "") == "iam" and not has_truth_word:
+        return None  # "I am tired" is not a self-referential truth claim
+    if not has_truth_word:
         return {
             "verdict": "Undecidable",
             "fixed_points": [False, True],
             "reason": "self-referential subject without an external observable or truth anchor",
             "refuter_rule": "bind the self-reference to a concrete external proposition P",
         }
+    try:
+        f = _sr_parse_predicate(tokens)
+    except _SRParseError:
+        return None  # mixed truth-predicate + external content: let the ordinary parser decide
+    fixed = _fixed_points([f], ["v"])
+    return _sr_verdict(len(fixed), fixed, "v <-> f(v)")
 
-    flips = sum(1 for t in tokens if t in neg_tokens)
-    fixed_points = [v for v in (False, True) if v == (flips % 2 == 0 and v or (flips % 2 == 1 and not v))]
-    if flips % 2 == 1:
-        return {
-            "verdict": "Paradox",
-            "fixed_points": [],
-            "reason": f"self-referential negation depth={flips} (v <-> ~v) has 0 boolean fixed points",
-            "refuter_rule": "rejected -- fixed-point set {v in {0,1} : v == ~v} is empty",
-        }
-    return {
-        "verdict": "Undecidable",
-        "fixed_points": [False, True],
-        "reason": f"self-referential affirmation depth={flips} (v <-> v) has 2 degenerate fixed points {{0, 1}}",
-        "refuter_rule": "underdetermined -- both v=True and v=False satisfy v <-> v",
-    }
+
+def _sr_parse_predicate_of(text: str, var_name: str) -> Expr:
+    """Parse a truth predicate whose subject is the other statement `var_name`."""
+    e = _sr_parse_predicate(_sr_tokens(text))
+    return _sr_rename_v(e, var_name)
+
+
+def _sr_rename_v(e: Expr, name: str) -> Expr:
+    if isinstance(e, VarExpr):
+        return VarExpr(Atom(name=name))
+    if isinstance(e, NotExpr):
+        return NotExpr(_sr_rename_v(e.child, name))
+    if isinstance(e, AndExpr):
+        return AndExpr(_sr_rename_v(e.left, name), _sr_rename_v(e.right, name))
+    if isinstance(e, OrExpr):
+        return OrExpr(_sr_rename_v(e.left, name), _sr_rename_v(e.right, name))
+    return e
+
+
+# ---------------------------------------------------------------------------
+# 4a. Exact affine-arithmetic layer (rational coefficients)
+# ---------------------------------------------------------------------------
+
+_AFF_TOKEN_RE = re.compile(
+    r"\s*(?:(?P<num>\d+(?:\.\d*)?(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?)|"
+    r"(?P<id>[A-Za-z_][A-Za-z0-9_]*)|(?P<op>[()+\-*/]))"
+)
+_AFF_REL_RE = re.compile(r"(==|!=|<=|>=|≤|≥|≠|=|<|>)")
+_AFF_OPS = {"==": "==", "=": "==", "!=": "!=", "≠": "!=", "<=": "<=", "≤": "<=", ">=": ">=", "≥": ">=", "<": "<", ">": ">"}
+_FLIP_OP = {"==": "==", "!=": "!=", "<": ">", ">": "<", "<=": ">=", ">=": "<="}
+
+
+class _AffineError(Exception):
+    pass
+
+
+@dataclass
+class Affine:
+    """sum_i coef[name_i] * name_i + const, with exact Fraction coefficients."""
+    coef: Dict[str, Fraction]
+    const: Fraction
+
+    @staticmethod
+    def number(c: Fraction) -> "Affine":
+        return Affine({}, c)
+
+    def add(self, other: "Affine", sign: int = 1) -> "Affine":
+        co = dict(self.coef)
+        for k, v in other.coef.items():
+            co[k] = co.get(k, Fraction(0)) + sign * v
+        return Affine({k: v for k, v in co.items() if v != 0}, self.const + sign * other.const)
+
+    def scale(self, f: Fraction) -> "Affine":
+        return Affine({k: v * f for k, v in self.coef.items() if v * f != 0}, self.const * f)
+
+
+def parse_affine(text: str) -> Tuple[Affine, bool]:
+    """Parse an affine arithmetic expression (numbers, identifiers, + - * /, parentheses,
+    implicit multiplication `3x`).  Returns (Affine, used_binary_arithmetic).
+    Raises _AffineError for anything non-affine or unparseable."""
+    text = text.strip().rstrip("%")
+    if re.search(r"[A-Za-z_][A-Za-z0-9_]*-[A-Za-z_]", text):
+        raise _AffineError("hyphenated identifier")  # `latency-ms` is a name, not a difference
+    toks: List[Tuple[str, str]] = []
+    pos = 0
+    while pos < len(text):
+        if text[pos:].strip() == "":
+            break
+        m = _AFF_TOKEN_RE.match(text, pos)
+        if not m:
+            raise _AffineError(f"bad token at {pos}")
+        kind = "num" if m.group("num") is not None else ("id" if m.group("id") else "op")
+        toks.append((kind, m.group(kind)))
+        pos = m.end()
+    if not toks:
+        raise _AffineError("empty")
+    i = 0
+    used_arith = False
+
+    def peek() -> Optional[Tuple[str, str]]:
+        return toks[i] if i < len(toks) else None
+
+    def parse_expr() -> Affine:
+        nonlocal i, used_arith
+        left = parse_term()
+        while peek() is not None and peek()[1] in ("+", "-"):  # type: ignore[index]
+            op = toks[i][1]
+            i += 1
+            used_arith = True
+            left = left.add(parse_term(), 1 if op == "+" else -1)
+        return left
+
+    def parse_term() -> Affine:
+        nonlocal i, used_arith
+        left = parse_factor()
+        while True:
+            t = peek()
+            if t is None:
+                return left
+            if t[1] in ("*", "/"):
+                i += 1
+                used_arith = True
+                right = parse_factor()
+                if t[1] == "*":
+                    if left.coef and right.coef:
+                        raise _AffineError("non-linear product")
+                    left = right.scale(left.const) if not left.coef else left.scale(right.const)
+                else:
+                    if right.coef or right.const == 0:
+                        raise _AffineError("division by non-constant or zero")
+                    left = left.scale(1 / right.const)
+            elif t[0] in ("num", "id") or t[1] == "(":
+                # implicit multiplication: `3x`, `2(x+1)`
+                used_arith = True
+                right = parse_factor()
+                if left.coef and right.coef:
+                    raise _AffineError("non-linear product")
+                left = right.scale(left.const) if not left.coef else left.scale(right.const)
+            else:
+                return left
+
+    def parse_factor() -> Affine:
+        nonlocal i
+        t = peek()
+        if t is None:
+            raise _AffineError("unexpected end")
+        if t[1] in ("+", "-"):
+            i += 1
+            inner = parse_factor()
+            return inner.scale(Fraction(1 if t[1] == "+" else -1))
+        if t[0] == "num":
+            i += 1
+            return Affine.number(Fraction(t[1]))
+        if t[0] == "id":
+            i += 1
+            return Affine({t[1].lower(): Fraction(1)}, Fraction(0))
+        if t[1] == "(":
+            i += 1
+            inner = parse_expr()
+            if peek() is None or peek()[1] != ")":  # type: ignore[index]
+                raise _AffineError("unbalanced parenthesis")
+            i += 1
+            return inner
+        raise _AffineError(f"unexpected token {t[1]!r}")
+
+    result = parse_expr()
+    if i != len(toks):
+        raise _AffineError("trailing tokens")
+    return result, used_arith
+
+
+def _fmt_num(x: Fraction) -> str:
+    return str(float(x))
+
+
+def affine_relation(clause: str) -> Optional[Tuple[str, str, str, float]]:
+    """Normalise `L OP R` with affine sides to (lhs, op, rhs, offset) meaning
+    `lhs OP rhs + offset`, or a constant truth marker ("__const__", "true"/"false", "", 0.0).
+    Returns None when the clause is not an affine relation that needs this layer
+    (no arithmetic operator and at least one variable: the ordinary path handles `x < y`)."""
+    parts = _AFF_REL_RE.split(clause)
+    if len(parts) != 3:
+        return None
+    lhs_txt, op_txt, rhs_txt = parts
+    try:
+        left, used_l = parse_affine(lhs_txt)
+        right, used_r = parse_affine(rhs_txt)
+    except (_AffineError, ValueError, ZeroDivisionError):
+        return None
+    diff = left.add(right, -1)           # diff OP 0
+    op = _AFF_OPS[op_txt]
+    if not (used_l or used_r) and (left.coef or right.coef):
+        return None
+    if not diff.coef:
+        c = diff.const
+        truth = {
+            "==": c == 0, "!=": c != 0, "<": c < 0, "<=": c <= 0, ">": c > 0, ">=": c >= 0,
+        }[op]
+        return ("__const__", "true" if truth else "false", "", 0.0)
+    names = sorted(diff.coef)
+    if len(names) == 1:
+        a = diff.coef[names[0]]
+        bound = -diff.const / a
+        return (names[0], op if a > 0 else _FLIP_OP[op], _fmt_num(bound), 0.0)
+    if len(names) == 2 and diff.coef[names[0]] == -diff.coef[names[1]]:
+        a = diff.coef[names[0]]            # a*x0 - a*x1 + c OP 0  ->  x0 OP' x1 + (-c/a)
+        return (names[0], op if a > 0 else _FLIP_OP[op], names[1], float(-diff.const / a))
+    # general linear form: keep it as one opaque term keyed by its canonical coefficients
+    a0 = diff.coef[names[0]]
+    scaled = diff.scale(1 / a0)
+    term = "+".join(
+        (n if scaled.coef[n] == 1 else f"{_fmt_num(scaled.coef[n]).rstrip('0').rstrip('.')}*{n}") for n in names
+    )
+    bound = -scaled.const
+    return (term, op if a0 > 0 else _FLIP_OP[op], _fmt_num(bound), 0.0)
 
 
 # ---------------------------------------------------------------------------
@@ -424,8 +836,8 @@ _CONCESSIVE_TRAIL_RE = re.compile(
 _REL_CLAUSE_RE = re.compile(
     r"^\s*(?:the\s+|a\s+|an\s+|every\s+|all\s+|any\s+)?([A-Za-z_][A-Za-z0-9_.\-\s]{0,35}?|[+-]?\d+(?:\.\d+)?)\s*"
     r"(==|!=|<=|>=|<|>|=|≠|≤|≥|"
-    r"is\s+strictly\s+greater\s+than|is\s+greater\s+than|is\s+more\s+than|exceeds|beats|surpasses|"
-    r"is\s+strictly\s+less\s+than|is\s+less\s+than|is\s+smaller\s+than|falls\s+below|"
+    r"is\s+strictly\s+greater\s+than|is\s+greater\s+than|is\s+more\s+than|is\s+above|is\s+over|exceeds|beats|surpasses|"
+    r"is\s+strictly\s+less\s+than|is\s+less\s+than|is\s+smaller\s+than|is\s+below|is\s+under|falls\s+below|"
     r"is\s+at\s+least|is\s+no\s+less\s+than|"
     r"is\s+at\s+most|is\s+no\s+more\s+than|does\s+not\s+exceed|"
     r"is\s+not\s+equal\s+to|differs\s+from|"
@@ -447,6 +859,8 @@ _OP_CANON = {
     "is strictly less than": "<",
     "is less than": "<",
     "is smaller than": "<",
+    "is below": "<",
+    "is under": "<",
     "falls below": "<",
     "<=": "<=",
     "≤": "<=",
@@ -457,6 +871,8 @@ _OP_CANON = {
     "is strictly greater than": ">",
     "is greater than": ">",
     "is more than": ">",
+    "is above": ">",
+    "is over": ">",
     "exceeds": ">",
     "beats": ">",
     "surpasses": ">",
@@ -523,6 +939,24 @@ def _check_reflexive_identity(clause: str) -> Optional[Tuple[str, bool]]:
     return None
 
 
+def _is_symbolic_term(term: str) -> bool:
+    """A normalised term is symbolic if it is a short identifier phrase (<= 2 tokens)."""
+    return term != "" and len(term.split("_")) <= 2
+
+
+def _rel_expr(lhs: str, op: str, rhs: str, universal_scope: bool, offset: float = 0.0) -> Expr:
+    """Build the canonical literal for `lhs OP rhs + offset`.  `!=` and `>=` are
+    expressed as Not(==) and Not(<) so that p and ~p share one underlying Atom."""
+    if op == "!=":
+        base = RelConstraint(lhs, "==", rhs, offset)
+        return NotExpr(VarExpr(Atom(name=base.format(), rel=base, is_quantitative=True, is_universal=universal_scope)))
+    if op == ">=":
+        base = RelConstraint(lhs, "<", rhs, offset)
+        return NotExpr(VarExpr(Atom(name=base.format(), rel=base, is_quantitative=True, is_universal=universal_scope)))
+    rel = RelConstraint(lhs, op, rhs, offset)
+    return VarExpr(Atom(name=rel.format(), rel=rel, is_quantitative=True, is_universal=universal_scope))
+
+
 def _parse_atomic_clause(
     clause: str,
     default_subject: Optional[str] = None,
@@ -533,6 +967,18 @@ def _parse_atomic_clause(
     s = clause.strip().strip(".!?")
     while s.startswith("(") and s.endswith(")") and _balanced_parens(s[1:-1]):
         s = s[1:-1].strip()
+
+    # 0. Exact affine arithmetic relation (`2 + 2 = 4`, `x + 1 > x`, `x + y > 3`, `2 * x = 6`):
+    #    constant relations evaluate to `0 == 0` (always true) / `0 < 0` (always false);
+    #    single-variable relations solve to `x OP c`; x - y OP c become difference bounds.
+    aff = affine_relation(s)
+    if aff is not None:
+        a_lhs, a_op, a_rhs, a_off = aff
+        if a_lhs == "__const__":
+            if a_op == "true":
+                return _rel_expr("0", "==", "0", universal_scope), None
+            return _rel_expr("0", "<", "0", universal_scope), None
+        return _rel_expr(a_lhs, a_op, a_rhs, universal_scope, a_off), a_lhs
 
     # 1. Check reflexive identity 'X is X' / 'X == X' / 'X != X'
     refl = _check_reflexive_identity(s)
@@ -557,21 +1003,11 @@ def _parse_atomic_clause(
             if (
                 _parse_number(lhs) is not None
                 or _parse_number(rhs) is not None
-                or op in ("==", "!=", "<=", ">=", "<", ">")
+                or (_is_symbolic_term(lhs) and _is_symbolic_term(rhs))
             ):
                 # Canonicalize negated relations (e.g. != -> Not(==), >= -> Not(<))
                 # so that p and ~p share the same underlying Atom!
-                if op == "!=":
-                    base_rel = RelConstraint(lhs, "==", rhs)
-                    atom = Atom(name=base_rel.format(), rel=base_rel, is_quantitative=True, is_universal=universal_scope)
-                    return NotExpr(VarExpr(atom)), lhs
-                if op == ">=":
-                    base_rel = RelConstraint(lhs, "<", rhs)
-                    atom = Atom(name=base_rel.format(), rel=base_rel, is_quantitative=True, is_universal=universal_scope)
-                    return NotExpr(VarExpr(atom)), lhs
-                rel = RelConstraint(lhs, op, rhs)
-                atom = Atom(name=rel.format(), rel=rel, is_quantitative=True, is_universal=universal_scope)
-                return VarExpr(atom), lhs
+                return _rel_expr(lhs, op, rhs, universal_scope), lhs
 
     # 3. Check inline quantitative measurement commitments in technical prose
     # e.g., "the data shows a +12.3 z deflection", "achieved 99.4% accuracy", "n = 2286 rows"
@@ -697,6 +1133,79 @@ def _split_top_level(s: str, sep_pattern: str) -> Optional[Tuple[str, str]]:
     return None
 
 
+_FORALL_RE = re.compile(
+    r"^(?:for\s+all|forall|for\s+every|∀)\s+((?:[A-Za-z_][A-Za-z0-9_]*)(?:\s*,\s*[A-Za-z_][A-Za-z0-9_]*)*)"
+    r"\s*(?:,|\s+such\s+that\s+|\s*:)\s*(.+)$",
+    re.IGNORECASE,
+)
+_EXISTS_RE = re.compile(
+    r"^(?:there\s+exists|exists|for\s+some|∃)\s+([A-Za-z0-9_,\s]+?)(?:\s+such\s+that\s+|,|\s*:\s*)(.+)$",
+    re.IGNORECASE,
+)
+_VAR_PREFIX_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)\s*(?:,\s*|\s+such\s+that\s+)(.+)$", re.IGNORECASE)
+
+
+def _split_quantifier(s: str) -> Optional[Tuple[str, "set[str]", str]]:
+    """Recognise a leading explicit quantifier.  Returns (kind, bound_vars, body) with
+    kind in {'forall', 'exists'}, or None."""
+    m = _FORALL_RE.match(s)
+    kind = "forall"
+    if m:
+        bound = {v.strip().lower() for v in m.group(1).split(",") if v.strip()}
+        body = m.group(2)
+    else:
+        m = _EXISTS_RE.match(s)
+        if not m:
+            return None
+        kind = "exists"
+        bound = {v.lower() for v in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", m.group(1))}
+        body = m.group(2)
+        # absorb further bound variables of "exists x, y such that ..."
+        while True:
+            mv = _VAR_PREFIX_RE.match(body)
+            if not mv or re.match(r"^(?:if|not|it|the|a|an)$", mv.group(1), re.IGNORECASE):
+                break
+            bound.add(mv.group(1).lower())
+            body = mv.group(2)
+    return kind, bound, body.strip()
+
+
+def _term_vars(term: str) -> "set[str]":
+    if _parse_number(term) is not None:
+        return set()
+    return {t.lower() for t in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", term)}
+
+
+def _quantifier_domain_claim(
+    kind: str, bound: "set[str]", body: Expr
+) -> Optional[Tuple[str, Dict[str, object]]]:
+    """Decide an explicit *mathematical* quantifier over the reals when the body is
+    purely relational and mentions only its bound variables (and constants).
+
+      forall x. P(x): true over R iff P holds in every feasible world (rho == 1.0).  If
+                      some feasible world falsifies P, the DBM supplies a real-valued
+                      counterexample, so the universal claim is false (Paradox).
+      exists x. P(x): true over R iff some feasible world satisfies P (a real
+                      witness exists); false iff P has no satisfying world.
+    Returns (verdict, solved) or None when the body is not a bound-variable domain claim."""
+    atoms = collect_atoms(body)
+    if not atoms or any(a.rel is None for a in atoms):
+        return None
+    free: "set[str]" = set()
+    for a in atoms:
+        free |= _term_vars(a.rel.lhs) | _term_vars(a.rel.rhs)  # type: ignore[union-attr]
+    if not free <= bound:
+        return None
+    solved = solve_formula(body)
+    if not solved.get("exact", True):
+        return None
+    sat = int(solved["satisfying_worlds"])  # type: ignore[arg-type]
+    fals = int(solved["falsifying_worlds"])  # type: ignore[arg-type]
+    if kind == "exists":
+        return ("Tautology" if sat > 0 else "Paradox"), solved
+    return ("Tautology" if fals == 0 and sat > 0 else "Paradox"), solved
+
+
 def parse_statement_ast(
     sentence: str,
     default_subject: Optional[str] = None,
@@ -707,14 +1216,18 @@ def parse_statement_ast(
     while s.startswith("(") and s.endswith(")") and _balanced_parens(s[1:-1]):
         s = s[1:-1].strip()
 
-    # Strip leading universal quantifier: "For all x, ...", "Every X is ..."
-    m_forall = re.match(
-        r"^(?:for\s+all|forall|∀)\s+([A-Za-z0-9_,\s]+?)(?:,|\s+such\s+that\s+|\s+:\s*)(.+)$",
-        s,
-        re.IGNORECASE,
-    )
-    if m_forall:
-        return parse_statement_ast(m_forall.group(2), default_subject=default_subject, universal_scope=True)
+    # Leading explicit quantifier: "For all x, ..." / "There exists x such that ..."
+    qparts = _split_quantifier(s)
+    if qparts is not None:
+        q_kind, _q_bound, q_body = qparts
+        return parse_statement_ast(
+            q_body, default_subject=default_subject, universal_scope=(q_kind == "forall" or universal_scope)
+        )
+
+    # Sentence-level negation takes the WIDEST scope: "It is not the case that A and B" = ~(A & B)
+    m_not_case = re.match(r"^it\s+is\s+not\s+the\s+case\s+that\s+(.+)$", s, re.IGNORECASE)
+    if m_not_case:
+        return NotExpr(parse_statement_ast(m_not_case.group(1), default_subject, universal_scope))
 
     # Universal subject-predicate: "Every X that is A is B" or "Every X is either A or B" or "Every X <pred>"
     m_univ_either = re.match(
@@ -857,46 +1370,103 @@ def _parse_branch_with_subject(
 # 5. Truth-Table & Difference-Bound Model-Space Evaluator
 # ---------------------------------------------------------------------------
 
-def solve_formula(expr: Expr) -> Dict[str, object]:
-    """Exhaustively evaluate `expr` over all 2^k truth assignments to its atoms,
-    filtering out assignments whose relational constraints are arithmetically
-    infeasible (via `check_relational_feasibility`)."""
+def eval3(expr: Expr, env: Dict[str, bool]) -> Optional[bool]:
+    """Kleene three-valued evaluation under a *partial* assignment (None = undetermined)."""
+    if isinstance(expr, VarExpr):
+        return env.get(expr.atom.name)
+    if isinstance(expr, NotExpr):
+        v = eval3(expr.child, env)
+        return None if v is None else (not v)
+    if isinstance(expr, AndExpr):
+        a, b = eval3(expr.left, env), eval3(expr.right, env)
+        if a is False or b is False:
+            return False
+        return True if (a is True and b is True) else None
+    if isinstance(expr, OrExpr):
+        a, b = eval3(expr.left, env), eval3(expr.right, env)
+        if a is True or b is True:
+            return True
+        return False if (a is False and b is False) else None
+    if isinstance(expr, ImpliesExpr):
+        a, b = eval3(expr.antecedent, env), eval3(expr.consequent, env)
+        if a is False or b is True:
+            return True
+        return False if (a is True and b is False) else None
+    if isinstance(expr, IffExpr):
+        a, b = eval3(expr.left, env), eval3(expr.right, env)
+        return None if (a is None or b is None) else (a == b)
+    raise ValueError(f"Unknown Expr node: {expr!r}")
+
+
+_NODE_BUDGET = 2_000_000
+
+
+def solve_formula(expr: Expr, node_budget: int = _NODE_BUDGET) -> Dict[str, object]:
+    """Count the feasible / satisfying / falsifying truth assignments of `expr` by a
+    DPLL-style recursive split on its atoms.
+
+      - Relational atoms are split first and every partial assignment is pruned as
+        soon as its relational literals are arithmetically infeasible (exact DBM).
+      - Once every relational atom is assigned, a formula whose value is already
+        determined by the partial assignment (Kleene evaluation) contributes
+        2^(#unassigned propositional atoms) worlds at once, so formulas with many
+        atoms (e.g. p0 | ... | p16 | ~p0) are counted exactly without enumerating 2^k.
+      - Every atom is always present in the witness environments, so `eval_expr`
+        can never see a missing atom, whatever k is.
+      - `node_budget` bounds the search; if it is exhausted the result carries
+        exact=False and callers must not claim a verdict from the partial counts.
+    """
     atoms = collect_atoms(expr)
     k = len(atoms)
-    if k > 16:
-        atoms = atoms[:16]
-        k = 16
+    order = [a for a in atoms if a.rel is not None] + [a for a in atoms if a.rel is None]
+    n_rel = sum(1 for a in atoms if a.rel is not None)
 
-    feasible_worlds = 0
-    satisfying_worlds = 0
-    falsifying_worlds = 0
-    first_sat_witness: Optional[Dict[str, object]] = None
-    first_fals_witness: Optional[Dict[str, object]] = None
+    counts = {"feas": 0, "sat": 0, "fals": 0}
+    witnesses: Dict[str, Optional[Dict[str, object]]] = {"sat": None, "fals": None}
+    state = {"nodes": 0, "exact": True}
+    env: Dict[str, bool] = {}
 
-    for mask in range(1 << k):
-        env: Dict[str, bool] = {}
-        active_rels: List[RelConstraint] = []
-        for idx, atom in enumerate(atoms):
-            val = bool((mask >> idx) & 1)
-            env[atom.name] = val
+    def record(truth: bool, mult: int, active: List[RelConstraint]) -> None:
+        counts["feas"] += mult
+        key = "sat" if truth else "fals"
+        counts[key] += mult
+        if witnesses[key] is None:
+            full = {a.name: env.get(a.name, False) for a in atoms}
+            _, num_w = check_relational_feasibility(list(active))
+            witnesses[key] = {"propositional": full, "numerical": num_w or {}}
+
+    def rec(i: int, active: List[RelConstraint]) -> None:
+        if not state["exact"]:
+            return
+        state["nodes"] += 1
+        if state["nodes"] > node_budget:
+            state["exact"] = False
+            return
+        val = eval3(expr, env)
+        if i >= n_rel and (val is not None):
+            record(val, 1 << (k - i), active)
+            return
+        if i >= k:  # fully assigned (val is always determined here)
+            record(bool(val), 1, active)
+            return
+        atom = order[i]
+        for b in (False, True):
+            env[atom.name] = b
+            nxt = active
             if atom.rel is not None:
-                active_rels.append(atom.rel if val else atom.rel.negate())
+                nxt = active + [atom.rel if b else atom.rel.negate()]
+                if not check_relational_feasibility(nxt, want_witness=False)[0]:
+                    continue
+            rec(i + 1, nxt)
+        env.pop(atom.name, None)
 
-        is_feas, num_witness = check_relational_feasibility(active_rels)
-        if not is_feas:
-            continue
+    if k == 0:
+        val0 = eval3(expr, {})
+        record(bool(val0), 1, [])
+    else:
+        rec(0, [])
 
-        feasible_worlds += 1
-        truth = eval_expr(expr, env)
-        if truth:
-            satisfying_worlds += 1
-            if first_sat_witness is None:
-                first_sat_witness = {"propositional": dict(env), "numerical": num_witness or {}}
-        else:
-            falsifying_worlds += 1
-            if first_fals_witness is None:
-                first_fals_witness = {"propositional": dict(env), "numerical": num_witness or {}}
-
+    feasible_worlds, satisfying_worlds, falsifying_worlds = counts["feas"], counts["sat"], counts["fals"]
     rho = (satisfying_worlds / feasible_worlds) if feasible_worlds > 0 else 0.0
     return {
         "n_atoms": k,
@@ -908,9 +1478,11 @@ def solve_formula(expr: Expr) -> Dict[str, object]:
         "satisfying_worlds": satisfying_worlds,
         "falsifying_worlds": falsifying_worlds,
         "satisfaction_ratio": round(rho, 6),
-        "sat_witness": first_sat_witness,
-        "falsifying_witness": first_fals_witness,
+        "sat_witness": witnesses["sat"],
+        "falsifying_witness": witnesses["fals"],
         "formula": format_expr(expr),
+        "exact": bool(state["exact"]),
+        "search_nodes": state["nodes"],
     }
 
 
@@ -943,12 +1515,74 @@ def classify(sentence: str) -> Dict[str, object]:
             "reason": sr["reason"],
             "refuter_rule": sr["refuter_rule"],
             "token_count": len(tokens),
-            "satisfaction_ratio": 0.0 if sr["verdict"] == "Paradox" else None,
+            "fixed_points": sr.get("fixed_points"),
+            "satisfaction_ratio": (
+                0.0 if sr["verdict"] == "Paradox" else (1.0 if sr["verdict"] == "Tautology" else None)
+            ),
         }
+
+    # Step 1b: explicit mathematical quantifiers over R ("For all x, P(x)" / "There exists x such that P(x)")
+    qparts = _split_quantifier(s.rstrip(".!?").strip())
+    if qparts is not None:
+        q_kind, q_bound, q_body = qparts
+        decided = _quantifier_domain_claim(q_kind, q_bound, parse_statement_ast(q_body))
+        if decided is not None:
+            q_verdict, q_solved = decided
+            qname = "forall" if q_kind == "forall" else "exists"
+            body_fmt = q_solved["formula"]
+            if q_verdict == "Tautology":
+                why = (
+                    f"{qname} {sorted(q_bound)}: body {body_fmt} holds in all {q_solved['satisfying_worlds']} feasible worlds"
+                    if q_kind == "forall"
+                    else f"{qname} {sorted(q_bound)}: body {body_fmt} has {q_solved['satisfying_worlds']} satisfying feasible world(s) over R"
+                )
+                return {
+                    "sentence": sentence,
+                    "verdict": "Tautology",
+                    "refuter": None,
+                    "reason": why,
+                    "refuter_rule": "none -- the quantified statement is true over the reals",
+                    "token_count": len(tokens),
+                    "satisfaction_ratio": 1.0,
+                    "formula": f"{qname} {','.join(sorted(q_bound))}. {body_fmt}",
+                }
+            fw = q_solved.get("falsifying_witness")
+            num_w = fw.get("numerical", {}) if isinstance(fw, dict) else {}
+            counter = ", ".join(f"{k}={v}" for k, v in sorted(num_w.items())) or None
+            why = (
+                f"forall {sorted(q_bound)}: body {body_fmt} fails at a real counter-model ({counter})"
+                if q_kind == "forall"
+                else f"exists {sorted(q_bound)}: body {body_fmt} has 0 satisfying feasible worlds over R"
+            )
+            return {
+                "sentence": sentence,
+                "verdict": "Paradox",
+                "refuter": counter,
+                "reason": why,
+                "refuter_rule": (
+                    f"universal claim refuted by real counter-model {{{counter}}}"
+                    if q_kind == "forall"
+                    else "existential claim has no real witness"
+                ),
+                "token_count": len(tokens),
+                "satisfaction_ratio": 0.0,
+                "formula": f"{qname} {','.join(sorted(q_bound))}. {body_fmt}",
+            }
 
     # Step 2: Parse into compositional AST & solve over feasible truth assignments
     expr = parse_statement_ast(s)
     solved = solve_formula(expr)
+    if not solved.get("exact", True):
+        return {
+            "sentence": sentence,
+            "verdict": "Undecidable",
+            "refuter": None,
+            "reason": f"model-space search budget exhausted after {solved['search_nodes']} nodes ({solved['n_atoms']} atoms); no verdict is claimed",
+            "refuter_rule": "split the statement into smaller claims",
+            "token_count": len(tokens),
+            "satisfaction_ratio": None,
+            "formula": solved["formula"],
+        }
     feas = int(solved["feasible_worlds"])  # type: ignore[arg-type]
     sat = int(solved["satisfying_worlds"])  # type: ignore[arg-type]
     fals = int(solved["falsifying_worlds"])  # type: ignore[arg-type]
@@ -1027,67 +1661,173 @@ def classify(sentence: str) -> Dict[str, object]:
 # 6. Genuine Structural Null & Perturbation Checks (Replaces Bag-of-Words Shuffle)
 # ---------------------------------------------------------------------------
 
-def alpha_rename_expr(expr: Expr, mapping: Dict[str, str]) -> Expr:
+_ALPHA_RNG = random.Random(20261115)  # default renaming stream: deterministic per process, never repeats a draw
+
+
+def alpha_rename_expr(
+    expr: Expr,
+    mapping: Dict[str, str],
+    perm_ids: Optional[List[int]] = None,
+) -> Expr:
     """Uniformly rename predicate/variable identifiers across `expr` while preserving
-    the logical connectives and relational operators (graph isomorphism of the AST)."""
+    the logical connectives, relational operators and constant offsets (graph
+    isomorphism of the AST).  The i-th distinct non-numeric term met is renamed
+    `v_<perm_ids[i % len(perm_ids)]>`, so a shuffled `perm_ids` is a random bijection
+    onto fresh symbols; with `perm_ids=None` fresh ids are drawn from a module RNG."""
+    used_ids = {int(v[2:]) for v in mapping.values() if v[:2] == "v_" and v[2:].isdigit()}
+
     def _map_term(t: str) -> str:
         if _parse_number(t) is not None:
             return t
         if t not in mapping:
-            mapping[t] = f"v_{len(mapping)}"
+            if perm_ids is not None:
+                mapping[t] = f"v_{perm_ids[len(mapping) % len(perm_ids)]}"
+            else:
+                new_id = _ALPHA_RNG.randrange(10**6)
+                while new_id in used_ids:
+                    new_id = _ALPHA_RNG.randrange(10**6)
+                used_ids.add(new_id)
+                mapping[t] = f"v_{new_id}"
         return mapping[t]
 
+    def _walk(e: Expr) -> Expr:
+        if isinstance(e, VarExpr):
+            a = e.atom
+            if a.rel is not None:
+                new_rel = RelConstraint(_map_term(a.rel.lhs), a.rel.op, _map_term(a.rel.rhs), a.rel.offset)
+                return VarExpr(Atom(name=new_rel.format(), rel=new_rel, is_quantitative=a.is_quantitative, is_universal=a.is_universal))
+            return VarExpr(Atom(name=_map_term(a.name), rel=None, is_quantitative=a.is_quantitative, is_universal=a.is_universal))
+        if isinstance(e, NotExpr):
+            return NotExpr(_walk(e.child))
+        if isinstance(e, AndExpr):
+            return AndExpr(_walk(e.left), _walk(e.right))
+        if isinstance(e, OrExpr):
+            return OrExpr(_walk(e.left), _walk(e.right))
+        if isinstance(e, ImpliesExpr):
+            return ImpliesExpr(_walk(e.antecedent), _walk(e.consequent))
+        if isinstance(e, IffExpr):
+            return IffExpr(_walk(e.left), _walk(e.right))
+        return e
+
+    return _walk(expr)
+
+
+_REL_FLIP = {"<": ">", ">": "<", "<=": ">=", ">=": "<=", "==": "!=", "!=": "=="}
+
+
+def _flip_leaf(expr: Expr, which: int, counter: List[int]) -> Expr:
+    """Flip the relational operator (> <-> <, == <-> !=, ...) of the `which`-th relational leaf."""
     if isinstance(expr, VarExpr):
-        a = expr.atom
-        if a.rel is not None:
-            new_rel = RelConstraint(_map_term(a.rel.lhs), a.rel.op, _map_term(a.rel.rhs))
-            return VarExpr(Atom(name=new_rel.format(), rel=new_rel, is_quantitative=a.is_quantitative, is_universal=a.is_universal))
-        return VarExpr(Atom(name=_map_term(a.name), rel=None, is_quantitative=a.is_quantitative, is_universal=a.is_universal))
+        if expr.atom.rel is not None:
+            idx = counter[0]
+            counter[0] += 1
+            if idx == which:
+                r = expr.atom.rel
+                new_rel = RelConstraint(r.lhs, _REL_FLIP[r.op], r.rhs, r.offset)
+                return VarExpr(Atom(name=new_rel.format(), rel=new_rel, is_quantitative=expr.atom.is_quantitative, is_universal=expr.atom.is_universal))
+        return expr
     if isinstance(expr, NotExpr):
-        return NotExpr(alpha_rename_expr(expr.child, mapping))
+        return NotExpr(_flip_leaf(expr.child, which, counter))
     if isinstance(expr, AndExpr):
-        return AndExpr(alpha_rename_expr(expr.left, mapping), alpha_rename_expr(expr.right, mapping))
+        return AndExpr(_flip_leaf(expr.left, which, counter), _flip_leaf(expr.right, which, counter))
     if isinstance(expr, OrExpr):
-        return OrExpr(alpha_rename_expr(expr.left, mapping), alpha_rename_expr(expr.right, mapping))
+        return OrExpr(_flip_leaf(expr.left, which, counter), _flip_leaf(expr.right, which, counter))
     if isinstance(expr, ImpliesExpr):
-        return ImpliesExpr(alpha_rename_expr(expr.antecedent, mapping), alpha_rename_expr(expr.consequent, mapping))
+        return ImpliesExpr(_flip_leaf(expr.antecedent, which, counter), _flip_leaf(expr.consequent, which, counter))
     if isinstance(expr, IffExpr):
-        return IffExpr(alpha_rename_expr(expr.left, mapping), alpha_rename_expr(expr.right, mapping))
+        return IffExpr(_flip_leaf(expr.left, which, counter), _flip_leaf(expr.right, which, counter))
     return expr
 
 
-def mutate_operator_expr(expr: Expr) -> Expr:
-    """Perturb the top-level logical connective or inject a complementary branch
-    so the feasible satisfaction ratio `rho` strictly changes:
-      - Or(A, B)      -> And(A, B)        (breaks excluded middle P | ~P into P & ~P)
-      - Implies(A, B) -> And(A, Not(B))   (negates implication A -> B into counterexample A & ~B)
-      - Iff(A, B)     -> And(A, Not(B))   (flips equivalence into strict counterexample)
-      - And(A, B)     -> Or(A, Not(B))    (flips conjunction into implication B -> A)
-      - Literal L     -> And(L, Not(L))   (collapses contingent literal rho=0.5 -> rho=0.0)
-    """
-    if isinstance(expr, OrExpr):
-        return AndExpr(expr.left, expr.right)
-    if isinstance(expr, ImpliesExpr):
-        return AndExpr(expr.antecedent, NotExpr(expr.consequent))
-    if isinstance(expr, IffExpr):
-        return AndExpr(expr.left, NotExpr(expr.right))
+def _negate_leaf(expr: Expr, which: int, counter: List[int]) -> Expr:
+    """Negate the `which`-th leaf (VarExpr) of `expr`."""
+    if isinstance(expr, VarExpr):
+        idx = counter[0]
+        counter[0] += 1
+        return NotExpr(expr) if idx == which else expr
+    if isinstance(expr, NotExpr):
+        return NotExpr(_negate_leaf(expr.child, which, counter))
     if isinstance(expr, AndExpr):
-        return OrExpr(expr.left, NotExpr(expr.right))
-    return AndExpr(expr, NotExpr(expr))
+        return AndExpr(_negate_leaf(expr.left, which, counter), _negate_leaf(expr.right, which, counter))
+    if isinstance(expr, OrExpr):
+        return OrExpr(_negate_leaf(expr.left, which, counter), _negate_leaf(expr.right, which, counter))
+    if isinstance(expr, ImpliesExpr):
+        return ImpliesExpr(_negate_leaf(expr.antecedent, which, counter), _negate_leaf(expr.consequent, which, counter))
+    if isinstance(expr, IffExpr):
+        return IffExpr(_negate_leaf(expr.left, which, counter), _negate_leaf(expr.right, which, counter))
+    return expr
+
+
+def mutation_candidates(expr: Expr) -> List[Expr]:
+    """Ordered single-step structural mutations of `expr`:
+      1. the top-level connective is perturbed
+           Or(A, B) -> And(A, B);  Implies(A, B) -> And(A, ~B);  Iff(A, B) -> And(A, ~B);
+           And(A, B) -> Or(A, ~B);  a literal L -> And(L, ~L)
+      2. the relational operator of one relational leaf is flipped (> <-> <, == <-> !=, <= <-> >=)
+      3. one leaf is negated
+      4. one top-level branch is negated
+      5. the whole formula is negated
+    """
+    out: List[Expr] = []
+    if isinstance(expr, OrExpr):
+        out.append(AndExpr(expr.left, expr.right))
+    elif isinstance(expr, ImpliesExpr):
+        out.append(AndExpr(expr.antecedent, NotExpr(expr.consequent)))
+    elif isinstance(expr, IffExpr):
+        out.append(AndExpr(expr.left, NotExpr(expr.right)))
+    elif isinstance(expr, AndExpr):
+        out.append(OrExpr(expr.left, NotExpr(expr.right)))
+    else:
+        out.append(AndExpr(expr, NotExpr(expr)))
+    n_rel_leaves = sum(1 for a in collect_atoms(expr) if a.rel is not None)
+    for w in range(n_rel_leaves * 4):  # leaves may repeat an atom; bounded scan
+        c = [0]
+        cand = _flip_leaf(expr, w, c)
+        if c[0] <= w:
+            break
+        out.append(cand)
+    n_leaves = _count_leaves(expr)
+    for w in range(n_leaves):
+        out.append(_negate_leaf(expr, w, [0]))
+    if isinstance(expr, (AndExpr, OrExpr, ImpliesExpr, IffExpr)):
+        out.append(type(expr)(NotExpr(node_left(expr)), node_right(expr)))
+        out.append(type(expr)(node_left(expr), NotExpr(node_right(expr))))
+    out.append(NotExpr(expr))
+    return out
+
+
+def _count_leaves(expr: Expr) -> int:
+    if isinstance(expr, VarExpr):
+        return 1
+    if isinstance(expr, NotExpr):
+        return _count_leaves(expr.child)
+    return _count_leaves(node_left(expr)) + _count_leaves(node_right(expr))
+
+
+def mutate_operator_expr(expr: Expr, base_rho: Optional[float] = None) -> Expr:
+    """Return the first structural mutation (see `mutation_candidates`) whose
+    satisfaction ratio differs from `base_rho` (computed from `expr` when omitted).
+    If no candidate changes rho the last candidate (whole negation) is returned."""
+    if base_rho is None:
+        base_rho = solve_formula(expr)["satisfaction_ratio"]  # type: ignore[assignment]
+    cands = mutation_candidates(expr)
+    for c in cands:
+        if solve_formula(c)["satisfaction_ratio"] != base_rho:
+            return c
+    return cands[-1]
 
 
 def token_permutation_null(
     sentence: str, n_draws: int = 50, seed: int = 20260825
 ) -> Dict[str, object]:
     """Structural null & sensitivity test for `sentence`:
-      1. `alpha_renaming_invariant`: Uniform alpha-renaming of bound variables/atoms
-         across `n_draws` random bijections preserves the exact truth-table
-         satisfaction ratio `rho` and verdict 100% of the time (genuine structural
-         invariance under symbol relabeling, analogous to CurvedCorpus.lean sec. 8).
-      2. `operator_mutation_changes_rho`: Flipping the top-level connective or
-         relational polarity strictly changes `rho` (proving the solver is driven by
-         logical/algebraic structure, NOT a bag-of-words lookup).
-      3. `token_scramble_distortion`: Random token permutations destroy multi-clause
+      1. `alpha_renaming_invariant`: renaming every identifier under `n_draws`
+         independent random bijections (shuffled fresh symbol ids) preserves the exact
+         satisfaction ratio `rho` 100% of the time.
+         `n_distinct_renamings` reports how many distinct renamed formulas the draws gave.
+      2. `operator_mutation_sensitive`: some single structural mutation -- connective
+         flip, relational-operator flip, leaf negation -- strictly changes `rho`.
+      3. `token_scramble_distortion`: random token permutations destroy multi-clause
          syntactic structure rather than vacuously preserving a keyword bag.
     """
     base_res = classify(sentence)
@@ -1097,18 +1837,18 @@ def token_permutation_null(
 
     rng = random.Random(seed)
     alpha_preserved = 0
+    renamed_forms = set()
+    n_terms = len(collect_atoms(expr)) * 2 + 4
     for d in range(n_draws):
-        # Generate a random symbol permutation for alpha-renaming
-        atoms = collect_atoms(expr)
-        perm_ids = list(range(len(atoms) * 2 + 4))
-        rng.shuffle(perm_ids)
+        perm_ids = rng.sample(range(10**6), n_terms)  # a random injection into fresh symbol ids
         mapping: Dict[str, str] = {}
-        renamed = alpha_rename_expr(expr, mapping)
+        renamed = alpha_rename_expr(expr, mapping, perm_ids)
+        renamed_forms.add(format_expr(renamed))
         ren_solved = solve_formula(renamed)
         if ren_solved["satisfaction_ratio"] == base_rho:
             alpha_preserved += 1
 
-    mutated = mutate_operator_expr(expr)
+    mutated = mutate_operator_expr(expr, base_rho)
     mut_solved = solve_formula(mutated)
     mut_rho = mut_solved["satisfaction_ratio"]
 
@@ -1127,7 +1867,7 @@ def token_permutation_null(
             scramble_changed += 1
 
     alpha_inv = (alpha_preserved == n_draws)
-    op_sensitive = (base_rho is None) or (mut_rho != base_rho)
+    op_sensitive = (mut_rho != base_rho)
 
     return {
         "sentence": sentence,
@@ -1138,6 +1878,7 @@ def token_permutation_null(
         "mutated_satisfaction_ratio": mut_rho,
         "n_draws": n_draws,
         "seed": seed,
+        "n_distinct_renamings": len(renamed_forms),
         "alpha_renaming_invariant": alpha_inv,
         "operator_mutation_sensitive": op_sensitive,
         "scramble_changed_structure_draws": scramble_changed,
@@ -1272,6 +2013,104 @@ def _selftest(seed: int = 20261115) -> int:
             null_ok += 1
     check("F6_ALPHA_INVARIANCE_AND_OPERATOR_SENSITIVITY", null_ok == 8, f"{null_ok}/8 statements invariant under alpha-renaming and sensitive to operator mutation")
 
+    # Family 7: exact affine arithmetic (constants evaluate; shifts cancel; scaled/multi-var stay contingent)
+    arith_ok = 0
+    for i in range(12):
+        a = rng.randint(-20, 20)
+        b = rng.randint(-20, 20)
+        k = rng.randint(2, 9)
+        c = rng.randint(1, 30)
+        schema = i % 6
+        if schema == 0:
+            s, want = f"{a} + {b} = {a + b}", "Tautology"
+        elif schema == 1:
+            s, want = f"{a} + {b} = {a + b + c}", "Paradox"
+        elif schema == 2:
+            s, want = f"v_{i} + {c} > v_{i}", "Tautology"
+        elif schema == 3:
+            s, want = f"v_{i} + {c} < v_{i}", "Paradox"
+        elif schema == 4:
+            s, want = f"{k} * v_{i} = {k * c}", "Falsifiable"
+        else:
+            s, want = f"v_{i} + w_{i} > {c}", "Falsifiable"
+        if classify(s)["verdict"] == want:
+            arith_ok += 1
+    check("F7_AFFINE_ARITHMETIC", arith_ok == 12, f"{arith_ok}/12 random affine relations decided exactly")
+
+    # Family 8: explicit quantifiers over the reals
+    q_ok = 0
+    for i in range(8):
+        a = rng.randint(1, 40)
+        b = a + rng.randint(1, 15)
+        schema = i % 4
+        if schema == 0:
+            s, want = f"There exists x such that x > {b}.", "Tautology"
+        elif schema == 1:
+            s, want = f"There exists x such that x > {b} and x < {a}.", "Paradox"
+        elif schema == 2:
+            s, want = f"For all x, if x > {b} then x > {a}.", "Tautology"
+        else:
+            s, want = f"For all x, x > {a}.", "Paradox"
+        if classify(s)["verdict"] == want:
+            q_ok += 1
+    check("F8_QUANTIFIERS_OVER_REALS", q_ok == 8, f"{q_ok}/8 random exists/forall statements decided over R")
+
+    # Family 9: more than 16 atoms (DPLL splitting; no truncation / KeyError)
+    big_ok = 0
+    for i in range(6):
+        n = rng.randint(17, 28)
+        names = [f"q{j}" for j in range(n)]
+        lit = rng.choice(names)
+        if i % 3 == 0:
+            s, want = " or ".join(names) + f" or not {lit}", "Tautology"
+        elif i % 3 == 1:
+            s, want = " and ".join(names) + f" and not {lit}", "Paradox"
+        else:
+            s, want = " and ".join(names), "Falsifiable"
+        try:
+            ok = classify(s)["verdict"] == want
+        except Exception:
+            ok = False
+        big_ok += int(ok)
+    check("F9_MORE_THAN_16_ATOMS", big_ok == 6, f"{big_ok}/6 formulas with 17-28 atoms decided without truncation")
+
+    # Family 10: strict-inequality intervals of arbitrary narrowness are feasible; empty ones are not
+    nar_ok = 0
+    for i in range(8):
+        lo = rng.uniform(-5, 5)
+        gap = 10.0 ** (-rng.randint(7, 11))
+        hi = lo + gap
+        feasible, wit = check_relational_feasibility(
+            [RelConstraint("x", ">", repr(lo)), RelConstraint("x", "<", repr(hi))]
+        )
+        empty, _ = check_relational_feasibility(
+            [RelConstraint("x", ">", repr(hi)), RelConstraint("x", "<", repr(lo))]
+        )
+        strict_pt, _ = check_relational_feasibility(
+            [RelConstraint("x", ">=", repr(lo)), RelConstraint("x", "<", repr(lo))]
+        )
+        inside = bool(wit) and lo < wit["x"] < hi
+        if feasible and inside and not empty and not strict_pt:
+            nar_ok += 1
+    check("F10_EXACT_STRICT_INEQUALITY", nar_ok == 8, f"{nar_ok}/8 open intervals of width 1e-7..1e-11 decided exactly with an interior witness")
+
+    # Family 11: compound self-reference solved as fixed points of v <-> f(v)
+    sr_ok = 0
+    for i in range(6):
+        nneg = i % 4
+        base = "not " * nneg + "true"
+        n_fp = 2 if nneg % 2 == 0 else 0
+        want = "Undecidable" if n_fp == 2 else "Paradox"
+        if i == 4:
+            s, want = "This statement is either true or false.", "Tautology"
+        elif i == 5:
+            s, want = "This statement is both true and false.", "Paradox"
+        else:
+            s = f"This statement is {base}."
+        if classify(s)["verdict"] == want:
+            sr_ok += 1
+    check("F11_SELF_REFERENCE_FIXED_POINTS", sr_ok == 6, f"{sr_ok}/6 self-referential predicates solved by fixed-point enumeration")
+
     if failures:
         print(f"SELFTEST FAILED ({len(failures)}/{total_checks} checks failed)")
         return 1
@@ -1279,9 +2118,45 @@ def _selftest(seed: int = 20261115) -> int:
     return 0
 
 
+def extract_lean_theorems(text: str) -> List[Tuple[str, str]]:
+    """Extract (name, proposition) for every `theorem`/`lemma` in Lean source `text`.
+
+    The proposition is the type after the binder list: the scanner walks from the
+    declaration name to the first top-level `:` (outside (), {}, [] binder groups) and
+    stops at the `:=` that ends the statement.  Unlike a `[^:=]+?` regex it never chokes
+    on `<=`, `≤`, `=`, `==`, nor on `:` inside binders like `(a : Int)`."""
+    out: List[Tuple[str, str]] = []
+    for m in re.finditer(r"(?m)^\s*(?:private\s+|protected\s+)?(?:theorem|lemma)\s+([A-Za-z0-9_.']+)", text):
+        i = m.end()
+        depth = 0
+        colon = -1
+        end = -1
+        n = len(text)
+        while i < n:
+            ch = text[i]
+            if ch in "({[":
+                depth += 1
+            elif ch in ")}]":
+                depth -= 1
+            elif depth == 0 and ch == ":" and text[i : i + 2] == ":=":
+                end = i
+                break
+            elif depth == 0 and ch == ":" and colon < 0:
+                colon = i
+            i += 1
+        if end < 0 or colon < 0:
+            continue
+        prop = " ".join(text[colon + 1 : end].split())
+        if prop:
+            out.append((m.group(1), prop))
+    return out
+
+
 def audit_repo_corpus(docs_glob: str = "docs/*.md", lean_glob: str = "papers/data/lean/*.lean") -> Dict[str, object]:
     """Audit real statements extracted at runtime from the repository's own
-    `docs/*.md` and `papers/data/lean/*.lean` theorem signatures."""
+    `docs/*.md` sentences and `papers/data/lean/*.lean` theorem statements.  Both are
+    classified by the solver; Lean propositions use `extract_lean_theorems` (every
+    `theorem`/`lemma`, counted whether or not its statement is relational)."""
     doc_files = sorted(glob.glob(docs_glob))
     lean_files = sorted(glob.glob(lean_glob))
 
@@ -1299,14 +2174,15 @@ def audit_repo_corpus(docs_glob: str = "docs/*.md", lean_glob: str = "papers/dat
             if 6 <= len(words) <= 60 and s[:1].isupper() and s[-1] in ".!?":
                 sentences.append(s)
 
-    # Also extract theorem inequality/implication propositions from .lean files
+    # Also extract theorem statements from .lean files
     lean_props: List[str] = []
+    n_lean_theorems = 0
     for path in lean_files:
         with open(path, encoding="utf-8") as f:
             ltext = f.read()
-        for m in re.finditer(r"theorem\s+([A-Za-z0-9_']+)[^:]*:\s*([^:=]+?)\s*:=", ltext, re.DOTALL):
-            prop = " ".join(m.group(2).split())
-            if any(op in prop for op in ("<=", ">=", "<", ">", "==", "=", "->")):
+        for _name, prop in extract_lean_theorems(ltext):
+            n_lean_theorems += 1
+            if any(op in prop for op in ("<=", ">=", "<", ">", "==", "=", "->", "≤", "≥", "≠", "→", "↔")):
                 lean_props.append(prop)
 
     counts: Dict[str, int] = {"Tautology": 0, "Falsifiable": 0, "Paradox": 0, "Undecidable": 0}
@@ -1314,12 +2190,24 @@ def audit_repo_corpus(docs_glob: str = "docs/*.md", lean_glob: str = "papers/dat
         v = str(classify(s)["verdict"])
         counts[v] = counts.get(v, 0) + 1
 
+    lean_counts: Dict[str, int] = {"Tautology": 0, "Falsifiable": 0, "Paradox": 0, "Undecidable": 0}
+    lean_errors = 0
+    for prop in lean_props:
+        try:
+            v = str(classify(prop)["verdict"])
+        except Exception:
+            lean_errors += 1
+            continue
+        lean_counts[v] = lean_counts.get(v, 0) + 1
+
     return {
         "n_doc_files": len(doc_files),
         "n_sentences": len(sentences),
         "n_lean_files": len(lean_files),
-        "n_lean_theorems_extracted": len(lean_props),
+        "n_lean_theorems_extracted": n_lean_theorems,
+        "n_lean_relational_statements_classified": len(lean_props) - lean_errors,
         "distribution": counts,
+        "lean_distribution": lean_counts,
     }
 
 

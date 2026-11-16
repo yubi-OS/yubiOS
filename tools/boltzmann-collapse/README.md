@@ -30,10 +30,14 @@ F_T(k)    =  Phi(k) - T * log C(d, k)               (free energy per shell)
 
 This is not an approximation, a mean-field truncation, or a large-\`d\`
 asymptotic -- it is an identity that follows from "the potential only sees
-\`k\`", true for every \`d\` and every \`T\`. \`collapse.py\`'s \`--verify\` /
-self-test brute-force check enumerates the full \`2^d\`-state chain
-directly and confirms the two distributions agree to float64 precision
-(< 1e-12 absolute error).
+\`k\`", true for every \`d\` and every \`T\`. \`collapse.py\`'s \`--verify\` and
+self-test **build the full \`2^d x 2^d\` single-bit-flip Metropolis kernel** for
+\`d <= 9\` (\`brute_force_chain\`), check that the closed-form microstate law satisfies detailed balance
+\`pi(x)P(x,y) = pi(y)P(y,x)\` and stationarity \`pi P = pi\`, and solve for the kernel's stationary
+law with no closed form involved, aggregated by \`k\`; it agrees with \`pi_T\` to ~1e-15. A
+non-exchangeable control potential must *fail* to collapse. \`brute_force_pi\` (all \`d <= 20\`) only
+counts microstates per shell and applies the same Boltzmann weight: it checks the binomial
+counts, not the collapse. \`--verify\` exits **1** when a check fails (it used to exit 0).
 
 ## The d+1-shell reduction
 
@@ -46,11 +50,14 @@ of the energy/entropy crossover temperature \`T_x\`. For \`d = 20\` that is
 flag reports the resulting closed-form vs brute-force speedup at each
 \`d\` from 9 to 20.
 
-\`T_x\` is where \`argmax_k pi_T(k)\` switches from the energy-dominated
-shell (\`argmin_k Phi(k)\`) to the entropy-dominated shell
-(\`argmax_k C(d,k)\`, i.e. \`k = d // 2\`) as \`T\` increases -- below
-\`T_x\` the chain concentrates near the potential's minimum, above it the
-combinatorial multiplicity of mid-range shells wins.
+\`T_x\` is the **first modal-shell transition**: the lowest \`T\` at which
+\`argmax_k pi_T(k)\` changes. On the published \`d = 9\` compass ladder that is the
+switch \`k = 9 -> k = 8\`, with closed form
+\`T_x = (Phi(8) - Phi(9)) / ln 9 = 0.0411428...\` (the published \`0.041143\`). It is **not**
+the switch to the entropy-dominated shell \`k = d // 2\`: the modal shell only reaches
+\`k = 5\` at \`T ~ 0.290\`, after further switches \`8 -> 7\` (0.072), \`7 -> 6\` (0.130) and
+\`6 -> 5\` (0.290). \`crossover()\` returns the shells on either side (\`argmax_below\`,
+\`argmax_above\`); \`first_transition_T(phi, d)\` is the closed form for the \`d -> d-1\` case.
 
 ## The T-is-a-designer-knob caveat
 
@@ -107,9 +114,10 @@ python collapse.py --selftest
 \`python collapse.py --selftest\` runs three checks:
 
 1. **Correctness.** For \`d in {5, 9, 12}\` with a random seeded \`Phi\`
-   ladder, the closed-form \`pi_T\` is asserted to equal the brute-force
-   \`2^d\`-state enumeration to within \`1e-12\` absolute error, at
-   \`T in {0.05, 0.2, 1.0, 5.0}\`.
+   ladder, the closed-form \`pi_T\` equals the popcount tally to \`1e-12\`; for
+   \`d in {5, 9}\` it additionally equals the stationary law of the real \`2^d\`-state
+   Metropolis kernel (detailed balance and \`pi P = pi\` below \`1e-12\`), at
+   \`T in {0.05, 0.2, 1.0, 5.0}\`; and a non-exchangeable potential must break the collapse.
 2. **Compass reproduction.** The measured \`Phi(k)\` ladder for \`d = 9\`
    is loaded from the in-repo bundle
    \`papers/is-this-x-2026-08-12-Final.zip\`, member
@@ -117,8 +125,9 @@ python collapse.py --selftest
    \`phi_ladder.Phi\` (cross-checked against the \`Phi(k)\` column of
    \`.../skills/curve-compass-skill/references/phi-ladder.md\`, which
    tabulates the identical ten values). \`crossover()\` is run over a
-   4001-point log-spaced grid from \`T=0.005\` to \`T=2.0\` and the result
-   is asserted within 5% of the published \`T_x = 0.041143\`. If the zip
+   4001-point log-spaced grid from \`T=0.005\` to \`T=2.0\`; the result is
+   asserted within 1e-6 of the published \`T_x = 0.041143\`, within 1e-9 of the closed form
+   \`(Phi(8)-Phi(9))/ln 9\`, and to be the \`9 -> 8\` transition. If the zip
    cannot be located on the filesystem this check is **skipped with an
    explicit warning**, not faked.
 3. **Benchmark.** Closed-form vs brute-force timings are printed for

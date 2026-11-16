@@ -3,7 +3,8 @@
 // lens inverse, determinism, handler errors. Optional: MAP598=<decoded map-598 JSON> checks the paper-4 numbers.
 import assert from "node:assert/strict"; import vm from "node:vm"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 import { ApiError } from "./lib/http.mjs";
-import { focalPointTrial, focalHandler, selfTest, validateFocalBody, assertFocalBounds, ladderGains, focalDim, prefixLadder, lensScan } from "./lib/focal-point.mjs";
+import { encodeMap, decodeMap } from "./lib/map-storage.mjs";
+import { focalPointTrial, unpackStoredMap, focalHandler, selfTest, validateFocalBody, assertFocalBounds, ladderGains, focalDim, prefixLadder, lensScan } from "./lib/focal-point.mjs";
 const __dirname=path.dirname(fileURLToPath(import.meta.url));
 function load(){const code=fs.readFileSync(path.resolve(__dirname,"pointmap.js"),"utf8");const sb={console,Math,Array,Object,JSON,Number,String,Boolean,RangeError,TypeError,Error,Set,Map,Infinity,NaN,isNaN,isFinite,BigInt,Uint8Array,Float32Array,Float64Array,TextEncoder,TextDecoder};vm.createContext(sb);vm.runInContext(code,sb);return sb.PM;}
 const PM=load(); let pass=0,fail=0; const t=async(n,f)=>{try{await f();pass++;console.log("  ok  - "+n);}catch(e){fail++;console.log("FAIL  - "+n+"\n        "+(e?.stack||e));}};
@@ -21,6 +22,18 @@ await t("trial on a real runMap output: ladder obeys prefix_count_mono/double/po
 await t("lens: served count equals the greedy packing of the stored sphere; best >= RMS-power count", ()=>{const r=focalPointTrial(m,opts);assert.equal(r.lens.available,true);assert.ok(r.lens.N_best>=r.lens.N_rms);assert.ok(r.lens.N_best>=r.lens.N_served||r.lens.scan.length===49);assert.equal(r.lens.distinct_positions,new Set(m.pts_full.map(p=>p.map(x=>Math.round(x*1e10)).join(","))).size);});
 await t("deterministic for a fixed map and seed; a different null_seed changes only the null block", ()=>{const a=focalPointTrial(m,opts),b=focalPointTrial(m,opts),c=focalPointTrial(m,{...opts,null_seed:12345});const strip=r=>JSON.stringify({...r,seconds:0});assert.equal(strip(a),strip(b));assert.deepEqual(a.ladder,c.ladder);assert.notEqual(a.null.seeds.a,c.null.seeds.a);});
 await t("certified counts are lower bounds that never exceed the class count", ()=>{const r=focalPointTrial(m,opts);if(r.certified.available){assert.ok(r.certified.classes_all_axes.every(x=>x<=r.ladder.counts.at(-1)));assert.equal(r.certified.classes_all_axes.length,r.certified.eps.length);}});
+await t("PM-2: a stored (packed margin-tuples) map JSON gives the SAME trial as the unpacked map and never throws", ()=>{
+  assert.ok(Array.isArray(m.math_diagnostics?.per_input)&&m.math_diagnostics.per_input.length===m.bits.length,"fixture map carries per_input margins");
+  const packedJson=encodeMap(m); const packed=JSON.parse(packedJson);
+  assert.equal(packed.math_diagnostics.storage_encoding,"margin-tuples/1"); assert.ok(Array.isArray(packed.math_diagnostics.per_input[0]),"per_input really is packed tuples");
+  const strip=r=>JSON.stringify({...r,seconds:0});
+  const a=focalPointTrial(m,opts); let b; assert.doesNotThrow(()=>{b=focalPointTrial(packed,opts);});
+  assert.equal(strip(b),strip(a)); assert.equal(b.certified.available,true,"certified counts computed from the unpacked stored margins");
+  assert.deepEqual(b.certified.classes_all_axes,a.certified.classes_all_axes);
+  assert.equal(strip(focalPointTrial(decodeMap(packedJson),opts)),strip(a),"decodeMap'd map still agrees");
+  const before=JSON.stringify(packed); unpackStoredMap(packed); assert.equal(JSON.stringify(packed),before,"input not mutated");
+  assert.equal(unpackStoredMap(m),m,"an unpacked map is returned as-is");
+  const asStrings={...m,bits:m.bits.map(r=>r.join(""))}; assert.equal(strip(focalPointTrial(asStrings,opts)),strip(a),"string-row bits also accepted");});
 await t("runtime Lean invariants reject impossible ladders (FocalBounds negative controls)", ()=>{
   assert.throws(()=>assertFocalBounds([2,4,9],100,ladderGains([2,4,9]),0.5,3,"forged"),/INVARIANT VIOLATED \(FocalBounds\.lean prefix_count_double\)/);
   assert.throws(()=>assertFocalBounds([2,4,3],100,ladderGains([2,4,3]),0.5,2,"forged"),/prefix_count_mono/);

@@ -39,7 +39,7 @@ HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
 
 from fractalrabbit_sim import simulate  # noqa: E402
-from ncurve_fit_pipeline import (  # noqa: E402
+from curve_fit_pipeline import (  # noqa: E402
     PRIMITIVE_NAMES, N_PRIMITIVES, build_corpus, fit_curve, SparseCellGrid,
     ideal_pole, atom_single_action, chordal_distance,
 )

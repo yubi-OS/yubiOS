@@ -447,16 +447,20 @@ test('radiusGraphDiagnostic: r = 1.5 * median NN, edges only within r, fixture p
 
 // ---------- 7. Cross-parity vs Lane D ----------
 
-test('Lane D fixture pack cross-parity (skips with a message while the file is absent)', async (t) => {
-  if (!existsSync(LANE_D_PATH)) {
-    t.skip(`Lane D fixture pack not present yet at ${LANE_D_PATH} — Lane E ran its own generator; re-run when Lane D lands`);
-    return;
-  }
+test('Lane D fixture pack cross-parity (committed fixtures_centroid.json; never skipped)', async () => {
+  assert.ok(existsSync(LANE_D_PATH), `Lane D fixture pack must be committed at ${LANE_D_PATH}`);
   const report = runLaneDVerification();
-  assert.ok(report.comparisons > 0, 'at least one comparison ran against the Lane D pack');
+  assert.ok(report.comparisons >= 10, `Lane D cross-parity ran ${report.comparisons} comparisons (expected every pack entry, >= 10)`);
   assert.deepEqual(
     report.mismatches,
     [],
     'Lane D cross-parity mismatches:\n' + report.mismatches.join('\n'),
+  );
+  // Known, reported divergences (verify_lane_d.mjs findings) are pinned so a
+  // fix - or a new divergence - changes this list on purpose, not silently.
+  assert.deepEqual(
+    report.findings.map((f) => f.split(':')[0]),
+    ['c3.42', 'c3.99', 'c3.2026', 'infra.collinear_fallback'],
+    'Lane D findings:\n' + report.findings.join('\n'),
   );
 });

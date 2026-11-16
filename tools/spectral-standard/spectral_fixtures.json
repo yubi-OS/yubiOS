@@ -2395,8 +2395,8 @@
         ],
         "d_w_band_pass": false,
         "alpha_band": [
-          0.821,
-          0.901
+          0.82135,
+          0.90135
         ],
         "alpha_band_pass": false
       }
@@ -3428,8 +3428,8 @@
         ],
         "d_w_band_pass": false,
         "alpha_band": [
-          0.821,
-          0.901
+          0.82135,
+          0.90135
         ],
         "alpha_band_pass": false
       }
@@ -4461,8 +4461,8 @@
         ],
         "d_w_band_pass": false,
         "alpha_band": [
-          0.821,
-          0.901
+          0.82135,
+          0.90135
         ],
         "alpha_band_pass": false
       }

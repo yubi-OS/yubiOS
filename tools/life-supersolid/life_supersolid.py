@@ -4,9 +4,11 @@ Glider Optics, and Wolfram (2025) Cognitive Modularity / Focal-Point Instrument.
 
 Pure Python stdlib + imports tools/edge-standard/edge_standard.py by path.
 Zero planted pattern libraries, zero hardcoded coordinate tables, and zero
-static JSON results: every motif, attractor, and multi-component constellation
-is discovered de novo by enumerating integer bitmasks and evolving Conway's
-Game of Life (B3/S23, outer-totalistic code 224) via `step_grid`.
+static JSON results: every motif, periodic attractor, and settled multi-component
+constellation is discovered de novo by enumerating integer bitmasks and evolving
+Conway's Game of Life (B3/S23, outer-totalistic code 224) via `step_grid` until each
+seed reaches a true periodic attractor (see `build_life_pattern_corpus` for the exact
+selection rule).  Glider transmission is decided by simulating the CA on every ray.
 """
 
 from __future__ import annotations
@@ -25,7 +27,7 @@ if EDGE_DIR not in sys.path:
     sys.path.insert(0, EDGE_DIR)
 import edge_standard as es  # noqa: E402
 
-INSTRUMENT_VERSION = "life-supersolid-v2.0.0"
+INSTRUMENT_VERSION = "life-supersolid-v2.1.0"
 GATE_SCALES = (13, 20, 29, 43, 64)
 MOORE_OFFSETS = (
     (-1, -1), (-1, 0), (-1, 1),
@@ -52,6 +54,37 @@ def step_grid(live_cells: set[tuple[int, int]]) -> set[tuple[int, int]]:
         if 5 <= score <= 7:
             next_live.add(cell)
     return next_live
+
+
+def verify_b3s23_rule_table() -> dict:
+    """Check `step_grid` against the exact B3/S23 local transition function on ALL
+    2 x 2^8 = 512 Moore-neighbourhood configurations (centre state c, each of the 8
+    neighbours live or dead): the centre of a one-tick evolution must be alive iff
+    (live-neighbour count s == 3) or (c == 1 and s == 2).  Any other outer-totalistic rule
+    (HighLife B36/S23, B38/S23, B3/S238, B3/S236, B35/S23, B3/S2, B3/S234, B34/S34,
+    B2/S, the identity, ...) violates at least one of the 18 (c, s) classes; non-totalistic
+    rules violate individual neighbourhoods.  Returns the mismatch census."""
+    mismatches: list[tuple[int, int, int]] = []
+    classes_seen: set[tuple[int, int]] = set()
+    for c in (0, 1):
+        for nb_mask in range(256):
+            cells = {MOORE_OFFSETS[i] for i in range(8) if (nb_mask >> i) & 1}
+            if c:
+                cells.add((0, 0))
+            s_live = bin(nb_mask).count("1")
+            classes_seen.add((c, s_live))
+            expected = (s_live == 3) or (c == 1 and s_live == 2)
+            got = (0, 0) in step_grid(set(cells))
+            if got != expected:
+                mismatches.append((c, nb_mask, s_live))
+    bad_classes = sorted({(c, sl) for c, _m, sl in mismatches})
+    return {
+        "n_configs": 512,
+        "n_classes": len(classes_seen),
+        "n_mismatches": len(mismatches),
+        "mismatching_classes": bad_classes,
+        "is_b3s23": len(mismatches) == 0 and len(classes_seen) == 18,
+    }
 
 
 def evolve_pattern(init_cells, steps: int) -> list[set[tuple[int, int]]]:
@@ -304,140 +337,156 @@ def discover_canonical_3x3_motifs() -> dict[str, list[tuple[int, int]]]:
     return found
 
 
-def build_life_pattern_corpus() -> list[dict]:
-    """Discover 36 B3/S23 patterns de novo by evolving integer bitmasks under `step_grid`:
-      - 18 elementary single-island periodic/spaceship attractors (`kind='search'`)
-        extracted from the ash of exhaustive 3x3 bitmasks (1..511) and 5x5 D_4-quadrant
-        bitmasks (1..511), deduplicated by canonical D_4 orbit signature.
-      - 18 emergent multi-component constellations (`kind='constructed'`) that
-        crystallize from evolving 3x3, 5x5 D_4, and 6x6 C_2 bitmasks under `step_grid`.
-    Zero planted pattern coordinates exist in this file."""
+_CENSUS_MAX_TICKS = 128
+_CENSUS_MAX_PERIOD = 15
+_CORPUS_CACHE: dict = {}
+
+
+def _norm_cells(cells) -> tuple[tuple[int, int], ...]:
+    """Translation-normalised sorted tuple of `cells`."""
+    mx = min(p[0] for p in cells)
+    my = min(p[1] for p in cells)
+    return tuple(sorted((x - mx, y - my) for x, y in cells))
+
+
+def _settle(seed_cells, max_ticks: int = _CENSUS_MAX_TICKS) -> tuple[set[tuple[int, int]], int, bool]:
+    """Evolve `seed_cells` under `step_grid` until the configuration dies, repeats a
+    previous configuration up to translation (a periodic / translating attractor), or
+    `max_ticks` ticks elapse.  Returns (state, ticks_used, repeated)."""
+    cur = set(seed_cells)
+    seen: dict[tuple[tuple[int, int], ...], int] = {}
+    for t in range(max_ticks + 1):
+        if not cur:
+            return cur, t, False
+        key = _norm_cells(cur)
+        if key in seen:
+            return cur, t, True
+        seen[key] = t
+        if t == max_ticks:
+            break
+        cur = step_grid(cur)
+    return cur, max_ticks, False
+
+
+def _phase_signature(cells, period: int) -> tuple[tuple[int, int], ...]:
+    """Translation- and D_4-invariant signature of a periodic object: the minimum
+    canonical signature over its `period` phases."""
+    sigs = []
+    cc = set(cells)
+    for _ in range(period):
+        sigs.append(canonical_d4_signature(cc))
+        cc = step_grid(cc)
+    return min(sigs)
+
+
+def build_life_pattern_corpus(max_per_kind: int | None = None) -> list[dict]:
+    """Discover 38 B3/S23 patterns de novo by evolving integer bitmasks under `step_grid`:
+      - All 18 elementary single-island periodic/spaceship attractors (`kind='search'`)
+        extracted from the ash of exhaustive 3x3 bitmasks (1..511, 64 ticks) and 5x5 D_4-quadrant
+        bitmasks (1..511, 48 ticks), deduplicated by canonical D_4 phase-orbit signature.
+      - All 20 emergent whole-pattern-periodic multi-component constellations (`kind='constructed'`,
+        >= 4 stationary/oscillating periodic islands) that crystallize across the 3x3, 5x5 D_4,
+        and 6x6 C_2 seed spaces, verified periodic as a whole under `detect_orbit_period`.
+    Zero planted pattern coordinates and zero arbitrary truncation exist in this file."""
     single_attractors: dict[tuple[tuple[int, int], ...], dict] = {}
     multi_constellations: dict[tuple[tuple[int, int], ...], dict] = {}
 
-    # Stage 1: Exhaustive 3x3 bitmask enumeration (m in 1..511)
-    for m in range(1, 512):
-        cur = decode_bitmask(m, 3, 3)
-        for _ in range(64):
-            cur = step_grid(cur)
-            if not cur:
-                break
-        if not cur:
-            continue
-        comps = interaction_components(cur)
-        for c in comps:
-            p, _ = detect_orbit_period(c, max_period=8)
-            if p is not None:
-                orbit_sigs = []
-                cc = set(c)
-                for _ in range(p):
-                    orbit_sigs.append(canonical_d4_signature(cc))
-                    cc = step_grid(cc)
-                sig = min(orbit_sigs)
-                min_x = min(pt[0] for pt in c)
-                min_y = min(pt[1] for pt in c)
-                norm_c = sorted((x - min_x, y - min_y) for x, y in c)
-                single_attractors.setdefault(sig, {
-                    "name": f"3x3_m{m:03d}_p{p}",
-                    "kind": "search",
-                    "seed_mask": m,
-                    "steps": max(4, p * 2),
-                    "cells": norm_c,
-                })
-        if len(comps) >= 3:
-            sig = canonical_d4_signature(cur)
-            min_x = min(pt[0] for pt in cur)
-            min_y = min(pt[1] for pt in cur)
-            norm_cur = sorted((x - min_x, y - min_y) for x, y in cur)
-            multi_constellations.setdefault(sig, {
-                "name": f"3x3_ash_m{m:03d}_k{len(comps)}",
-                "kind": "constructed",
-                "seed_mask": m,
-                "steps": 8,
-                "cells": norm_cur,
-            })
+    stages = (
+        ("3x3_m", lambda m: decode_bitmask(m, 3, 3), 64, 8),
+        (
+            "5x5_q",
+            lambda q: {
+                (2 + sx * (i % 3), 2 + sy * (i // 3))
+                for i in range(9)
+                if (q >> i) & 1
+                for sx in (-1, 1)
+                for sy in (-1, 1)
+            },
+            48,
+            15,
+        ),
+        (
+            "6x6_c2_m",
+            lambda c: {
+                (qx, qy)
+                for i in range(9)
+                if (c >> i) & 1
+                for qx, qy in ((i % 3, i // 3), (5 - (i % 3), 5 - (i // 3)))
+            },
+            48,
+            15,
+        ),
+    )
 
-    # Stage 2: Exhaustive 5x5 D_4-quadrant bitmask enumeration (qmask in 1..511)
-    for qmask in range(1, 512):
-        pts = {
-            (2 + sx * (i % 3), 2 + sy * (i // 3))
-            for i in range(9)
-            if (qmask >> i) & 1
-            for sx in (-1, 1)
-            for sy in (-1, 1)
-        }
-        cur = pts
-        for _ in range(48):
-            cur = step_grid(cur)
-            if not cur:
-                break
-        if not cur:
-            continue
-        comps = interaction_components(cur)
-        for c in comps:
-            if len(interaction_components(c)) == 1:
-                p, _ = detect_orbit_period(c, max_period=15)
-                if p is not None:
-                    orbit_sigs = []
-                    cc = set(c)
-                    for _ in range(p):
-                        orbit_sigs.append(canonical_d4_signature(cc))
-                        cc = step_grid(cc)
-                    sig = min(orbit_sigs)
-                    min_x = min(pt[0] for pt in c)
-                    min_y = min(pt[1] for pt in c)
-                    norm_c = sorted((x - min_x, y - min_y) for x, y in c)
-                    single_attractors.setdefault(sig, {
-                        "name": f"5x5_q{qmask:03d}_p{p}",
-                        "kind": "search",
-                        "seed_mask": qmask,
-                        "steps": max(4, p * 2),
-                        "cells": norm_c,
-                    })
-        if len(comps) >= 4:
-            sig = canonical_d4_signature(cur)
-            min_x = min(pt[0] for pt in cur)
-            min_y = min(pt[1] for pt in cur)
-            norm_cur = sorted((x - min_x, y - min_y) for x, y in cur)
-            multi_constellations.setdefault(sig, {
-                "name": f"5x5_ash_q{qmask:03d}_k{len(comps)}",
-                "kind": "constructed",
-                "seed_mask": qmask,
-                "steps": 8,
-                "cells": norm_cur,
-            })
-
-    # Stage 3: 6x6 C_2-inversion bitmask enumeration (cmask in 1..511)
-    for cmask in range(1, 512):
-        pts = set()
-        for i in range(9):
-            if (cmask >> i) & 1:
-                qx, qy = i % 3, i // 3
-                pts.add((qx, qy))
-                pts.add((5 - qx, 5 - qy))
-        cur = pts
-        for _ in range(48):
-            cur = step_grid(cur)
-            if not cur:
-                break
-        if not cur:
-            continue
-        comps = interaction_components(cur)
-        if len(comps) >= 4:
-            sig = canonical_d4_signature(cur)
-            min_x = min(pt[0] for pt in cur)
-            min_y = min(pt[1] for pt in cur)
-            norm_cur = sorted((x - min_x, y - min_y) for x, y in cur)
-            multi_constellations.setdefault(sig, {
-                "name": f"6x6_c2_m{cmask:03d}_k{len(comps)}",
-                "kind": "constructed",
-                "seed_mask": cmask,
-                "steps": 8,
-                "cells": norm_cur,
-            })
+    sample_ticks = (32, 48, 64, 96, 128, 160, 179)
+    for stage_name, gen_fn, single_tick, single_max_p in stages:
+        for m in range(1, 512):
+            cur = set(gen_fn(m))
+            for t in range(1, 180):
+                cur = step_grid(cur)
+                if not cur:
+                    break
+                if t == single_tick and stage_name != "6x6_c2_m":
+                    for c in interaction_components(cur):
+                        if stage_name == "5x5_q" and len(interaction_components(c)) != 1:
+                            continue
+                        p, _ = detect_orbit_period(c, max_period=single_max_p)
+                        if p is not None:
+                            orbit_sigs = []
+                            cc = set(c)
+                            for _ in range(p):
+                                orbit_sigs.append(canonical_d4_signature(cc))
+                                cc = step_grid(cc)
+                            sig = min(orbit_sigs)
+                            mx = min(pt[0] for pt in c)
+                            my = min(pt[1] for pt in c)
+                            single_attractors.setdefault(
+                                sig,
+                                {
+                                    "name": f"{stage_name}{m:03d}_p{p}",
+                                    "kind": "search",
+                                    "seed_mask": m,
+                                    "steps": max(4, p * 2),
+                                    "cells": sorted((x - mx, y - my) for x, y in c),
+                                },
+                            )
+                if t in sample_ticks:
+                    comps = interaction_components(cur)
+                    stat_comps = []
+                    for c in comps:
+                        p, disp = detect_orbit_period(c, max_period=15)
+                        if p is not None and disp == (0, 0):
+                            stat_comps.append(c)
+                    if len(stat_comps) >= 4:
+                        core = set().union(*stat_comps)
+                        p_w, disp_w = detect_orbit_period(core, max_period=15)
+                        if p_w is not None and disp_w == (0, 0):
+                            re_comps = interaction_components(core)
+                            if len(re_comps) >= 4:
+                                orbit_sigs = []
+                                cc = set(core)
+                                for _ in range(p_w):
+                                    orbit_sigs.append(canonical_d4_signature(cc))
+                                    cc = step_grid(cc)
+                                sig = min(orbit_sigs)
+                                mx = min(pt[0] for pt in core)
+                                my = min(pt[1] for pt in core)
+                                multi_constellations.setdefault(
+                                    sig,
+                                    {
+                                        "name": f"{stage_name}_ash_{m:03d}_k{len(re_comps)}_p{p_w}",
+                                        "kind": "constructed",
+                                        "seed_mask": m,
+                                        "steps": max(8, p_w * 2),
+                                        "cells": sorted((x - mx, y - my) for x, y in core),
+                                    },
+                                )
 
     elem_list = list(single_attractors.values())
-    multi_list = list(multi_constellations.values())[: len(elem_list)]
+    multi_list = list(multi_constellations.values())
+    if max_per_kind is not None:
+        elem_list = elem_list[:max_per_kind]
+        multi_list = multi_list[:max_per_kind]
     return elem_list + multi_list
 
 
@@ -585,50 +634,109 @@ def measure_supersolid_crystal(centers: list[tuple[int, int]], size: int = 512, 
     }
 
 
-def measure_glider_transmission(centers: list[tuple[int, int]], offsets: list[int] | None = None) -> dict:
-    """Measure ballistic diagonal glider transmission through the B3/S23 still-life crystal,
-    using the glider motif discovered from the 3x3 bitmask enumeration."""
+def _run_ticks_incremental(initial: set[tuple[int, int]], ticks: int) -> tuple[set[tuple[int, int]], int]:
+    """Advance `initial` by exactly `ticks` B3/S23 ticks using `step_grid`, recomputing only
+    where the previous tick changed something.
+
+    Exactness: if no cell in the 3x3 neighbourhood of x changed during tick t-1 -> t, then
+    state_{t+1}(x) = f(state_t|N(x)) = f(state_{t-1}|N(x)) = state_t(x).  So only the set
+    D = N1(changed) can differ at t+1, and D's next values depend only on live cells in
+    N2(changed).  `step_grid` is run on those live cells and its output is kept inside D;
+    every other cell is carried over.  The result is identical to `ticks` full `step_grid`
+    calls.  When nothing changes (a still life) the remaining ticks are skipped, which is also
+    exact.  Returns (state, ticks actually stepped)."""
+    state = set(initial)
+    changed = set(state)  # at t=0 every live cell is "new"
+    stepped = 0
+    for _ in range(ticks):
+        if not changed:
+            break
+        xs = [p[0] for p in changed]
+        ys = [p[1] for p in changed]
+        x0, x1, y0, y1 = min(xs) - 2, max(xs) + 2, min(ys) - 2, max(ys) + 2
+        local = {c for c in state if x0 <= c[0] <= x1 and y0 <= c[1] <= y1}
+        dil = {(x + dx, y + dy) for x, y in changed for dx in (-1, 0, 1) for dy in (-1, 0, 1)}
+        new_local = step_grid(local)
+        new_in_d = {c for c in new_local if c in dil}
+        old_in_d = {c for c in local if c in dil}
+        changed = new_in_d ^ old_in_d
+        state = (state - old_in_d) | new_in_d
+        stepped += 1
+    return state, stepped
+
+
+def measure_glider_transmission(centers: list[tuple[int, int]], offsets: list[int] | None = None,
+                                corridor: int = 16) -> dict:
+    """Measure ballistic diagonal glider transmission through the B3/S23 still-life crystal.
+
+    EVERY ray offset `off` is decided by a live B3/S23 simulation (`step_grid`), never by
+    geometry.  For the ray x - y = off the simulation keeps the crystal blocks inside the
+    active corridor |(cx - cy) - off| <= `corridor` (a glider is 3 cells wide, so blocks
+    further than 16 diagonals -- >= 11 cells -- cannot interact with it), places the glider
+    discovered from the 3x3 bitmask enumeration 8 rows above the first corridor block, and
+    advances the CA until it has travelled 8 rows past the last corridor block.  The ray
+    is `ca_transmitted` iff the final configuration equals the crystal plus the glider
+    translated exactly (+T/4, +T/4) (intact arrival, no scattering, no debris).
+
+    The geometric guess `geometric_clear` (no block centre within 4 diagonals) is recorded
+    beside it only so the two can be compared; it never enters `transmitted`.
+    """
     crystal_cells = stamp_still_life_crystal(centers, motif="block")
     if not centers:
-        return {"n_rays": 0, "transmitted": 0, "transmission_fraction": 1.0, "ca_verified_rays": 0}
+        return {"n_rays": 0, "transmitted": 0, "geometric_clear_rays": 0, "transmission_fraction": 1.0,
+                "geometric_fraction": 1.0, "ca_geometric_disagreements": 0}
 
     diffs = [cx - cy for cx, cy in centers]
     d_min, d_max = min(diffs) - 10, max(diffs) + 10
     if offsets is None:
         offsets = list(range(d_min, d_max + 1, 4))
 
-    clear_offsets = []
-    blocked_offsets = []
+    motifs = discover_canonical_3x3_motifs()
+    glider_template = motifs["glider"]
+    block_template = motifs["block"]
+    y_top = min(cy for _, cy in centers)
+
+    n_ca = 0
+    n_geom = 0
+    disagree = 0
+    ca_ticks = 0
+    ca_ticks_active = 0
     for off in offsets:
-        hit = any(abs((cx - cy) - off) < 4 for cx, cy in centers)
-        if hit:
-            blocked_offsets.append(off)
+        geom_clear = not any(abs((cx - cy) - off) < 4 for cx, cy in centers)
+        near = [(cx, cy) for cx, cy in centers if abs((cx - cy) - off) <= corridor]
+        if near:
+            y_start = min(cy for _, cy in near) - 8
+            y_end = max(cy for _, cy in near) + 8
         else:
-            clear_offsets.append(off)
+            y_start = y_top - 8
+            y_end = y_start + 16
+        ticks = 4 * (y_end - y_start + 8)
+        corridor_cells = {(cx + dx, cy + dy) for cx, cy in near for dx, dy in block_template}
+        g_init = {(y_start + off + dx, y_start + dy) for dx, dy in glider_template}
+        state, t_run = _run_ticks_incremental(corridor_cells | g_init, ticks)
+        ticks_done = ticks
+        expected = corridor_cells | {(x + ticks // 4, y + ticks // 4) for x, y in g_init}
+        ca_ok = (state == expected)
+        ca_ticks += ticks
+        ca_ticks_active += t_run
+        n_ca += int(ca_ok)
+        n_geom += int(geom_clear)
+        disagree += int(ca_ok != geom_clear)
 
-    glider_template = discover_canonical_3x3_motifs()["glider"]
-    ca_verified = 0
-    if clear_offsets:
-        off = clear_offsets[len(clear_offsets) // 2]
-        y_start = min(cy for _, cy in centers) - 8
-        x_start = y_start + off
-        g_init = {(x_start + dx, y_start + dy) for dx, dy in glider_template}
-        state = crystal_cells | g_init
-        for _ in range(16):
-            state = step_grid(state)
-        g_expected = {(x + 4, y + 4) for x, y in g_init}
-        if state == (crystal_cells | g_expected):
-            ca_verified += 1
-
-    trans_frac = len(clear_offsets) / float(max(1, len(offsets)))
+    n = len(offsets)
+    trans_frac = n_ca / float(max(1, n))
     tau_eff = -math.log(max(1e-6, trans_frac))
     return {
-        "n_rays": len(offsets),
-        "transmitted": len(clear_offsets),
-        "blocked": len(blocked_offsets),
+        "n_rays": n,
+        "transmitted": n_ca,
+        "blocked": n - n_ca,
         "transmission_fraction": round(trans_frac, 6),
         "optical_depth_tau": round(tau_eff, 6),
-        "ca_verified_clear_ray": ca_verified == 1 if clear_offsets else True,
+        "geometric_clear_rays": n_geom,
+        "geometric_fraction": round(n_geom / float(max(1, n)), 6),
+        "ca_geometric_disagreements": disagree,
+        "ca_ticks_simulated": ca_ticks,
+        "ca_ticks_stepped": ca_ticks_active,
     }
 
 
@@ -869,11 +977,20 @@ def measure_corpus_focal_and_modularity(patterns: list[dict] | None = None,
     }
 
 
+def _check(cond: bool, label: str, detail: object = "") -> None:
+    """Explicit selftest check: raises RuntimeError on failure (survives `python -O`,
+    unlike a bare `assert`)."""
+    if not cond:
+        raise RuntimeError(f"life_supersolid selftest FAILED: {label}: {detail}")
+
+
 def _run_selftest() -> int:
+    rule = verify_b3s23_rule_table()
+    _check(rule["is_b3s23"], "step_grid is exactly B3/S23 on all 512 Moore neighbourhoods", rule)
     orbits = enumerate_3x3_d4_orbits()
-    assert len(orbits) == 102 and sum(o["size"] for o in orbits) == 512
+    _check(len(orbits) == 102 and sum(o["size"] for o in orbits) == 512, "102 D4 orbits of 3x3", len(orbits))
     motifs = discover_canonical_3x3_motifs()
-    assert set(motifs.keys()) == {"block", "tub", "blinker", "glider"}
+    _check(set(motifs.keys()) == {"block", "tub", "blinker", "glider"}, "all four elementary motifs discovered", sorted(motifs))
 
     gasket = measure_supersolid_crystal(sierpinski_centers(512, 384, 6))
     tx_ladder = {
@@ -885,6 +1002,7 @@ def _run_selftest() -> int:
     corpus_res = measure_corpus_focal_and_modularity()
     out = {
         "instrument": INSTRUMENT_VERSION,
+        "rule_table": rule,
         "burnside_3x3_d4_orbits": len(orbits),
         "discovered_3x3_motifs": {k: len(v) for k, v in motifs.items()},
         "sierpinski_crystal": gasket,
@@ -895,14 +1013,19 @@ def _run_selftest() -> int:
             k: v for k, v in corpus_res.items() if k != "patterns"
         },
     }
-    assert gasket["ca_stationary"] is True and gasket["n_components_traced"] == 366
-    assert abs(gasket["D_local_13_64"] - 1.585) <= 0.05 and gasket["r2_local_13_64"] >= 0.98
-    assert tx_ladder["depth_4"]["transmission_fraction"] > 0.50
-    assert tx_ladder["depth_6"]["transmitted"] >= 5 and tx_ladder["depth_6"]["ca_verified_clear_ray"] is True
-    assert abs(out["v3_jitter_mean_D"] - tri["D_whole"]) <= 0.05
-    assert corpus_res["mean_modularity_constructed"] > 2.0 * corpus_res["mean_modularity_search"]
-    assert corpus_res["spearman_area_vs_modularity"] >= 0.60
-    assert 4 <= corpus_res["ladder"]["n_star_tau05"] <= 7 and corpus_res["delta_r_hat_at_d_focus"] > 0
+    _check(gasket["ca_stationary"] is True and gasket["n_components_traced"] == 366, "gasket crystal stationary, 366 comps", gasket["n_components_traced"])
+    _check(abs(gasket["D_local_13_64"] - 1.585) <= 0.05 and gasket["r2_local_13_64"] >= 0.98, "gasket local D", gasket["D_local_13_64"])
+    fr = [tx_ladder[f"depth_{k}"]["transmission_fraction"] for k in (2, 3, 4, 5, 6)]
+    # Thresholds are for the LIVE CA transmission fractions (every ray simulated by step_grid):
+    # measured 0.8686 / 0.6715 / 0.2628 / 0.0365 / 0.0146.
+    _check(tx_ladder["depth_2"]["transmission_fraction"] > 0.80, "depth_2 T > 0.80", fr[0])
+    _check(tx_ladder["depth_4"]["transmission_fraction"] > 0.20, "depth_4 T > 0.20", fr[2])
+    _check(tx_ladder["depth_6"]["transmitted"] >= 2 and fr[-1] > 0.01, "depth_6 transmitted >= 2 and T > 0.01", (tx_ladder["depth_6"]["transmitted"], fr[-1]))
+    _check(all(fr[i] > fr[i + 1] for i in range(len(fr) - 1)), "T monotone decreasing k=2..6", fr)
+    _check(abs(out["v3_jitter_mean_D"] - tri["D_whole"]) <= 0.05, "v3 jitter extent control", out["v3_jitter_mean_D"])
+    _check(corpus_res["mean_modularity_constructed"] > 2.0 * corpus_res["mean_modularity_search"], "M_constructed > 2 M_search", (corpus_res["mean_modularity_constructed"], corpus_res["mean_modularity_search"]))
+    _check(corpus_res["spearman_area_vs_modularity"] >= 0.75, "Spearman(A, M) >= 0.50", corpus_res["spearman_area_vs_modularity"])
+    _check(4 <= corpus_res["ladder"]["n_star_tau05"] <= 7 and corpus_res["delta_r_hat_at_d_focus"] > 0, "focal point and structure excess", corpus_res["ladder"]["n_star_tau05"])
     print(json.dumps(out, indent=2))
     print("LIFE_SUPERSOLID_SELFTEST_OK")
     return 0
@@ -912,4 +1035,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
-    sys.exit(_run_selftest())
+    try:
+        sys.exit(_run_selftest())
+    except RuntimeError as exc:
+        print(str(exc), file=sys.stderr)
+        sys.exit(1)

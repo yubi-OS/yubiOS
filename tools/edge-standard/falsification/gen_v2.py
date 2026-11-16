@@ -240,10 +240,23 @@ def _run_selftest():
               "cov=%.4f thr=%d" % (st["meta"]["achieved_coverage"], st["meta"]["chosen_threshold"]))
         if label == "gasket-v2-L384":
             slope, r2 = _local_slope(m)
-            check("gate slope gasket L=384", abs(slope - anchors["gate"]["slope"]) <= GATE_TOL
-                  and r2 >= anchors["gate"]["r2_min"],
-                  "slope=%.4f (want %.4f +/- %.4f) r2=%.6f (>= %.2f)"
-                  % (slope, anchors["gate"]["slope"], GATE_TOL, r2, anchors["gate"]["r2_min"]))
+            gate = anchors["gate"]
+            band = gate["preregistered_band"]
+            # (1) the PRE-REGISTERED gate (amendments-log item 1): the local slope
+            # over the amended window sits in 1.585 +/- 0.05 with r2 >= 0.98.
+            preregistered_band_pass = (abs(slope - band["center"]) <= band["tolerance"]
+                                       and r2 >= gate["r2_min"])
+            check("preregistered_band_pass gasket L=384", preregistered_band_pass,
+                  "slope=%.4f (preregistered %.3f +/- %.3f) r2=%.6f (>= %.2f)"
+                  % (slope, band["center"], band["tolerance"], r2, gate["r2_min"]))
+            # (2) the tight REGRESSION PIN centred on the measured slope 1.5968:
+            # catches drift inside the (wide) preregistered band; it is NOT the
+            # pre-registered gate and must not be read as "D = 1.585".
+            regression_pin_pass = (abs(slope - gate["slope"]) <= GATE_TOL
+                                   and r2 >= gate["r2_min"])
+            check("regression_pin_pass gasket L=384", regression_pin_pass,
+                  "slope=%.4f (pin %.4f +/- %.4f) r2=%.6f (>= %.2f)"
+                  % (slope, gate["slope"], GATE_TOL, r2, gate["r2_min"]))
 
     # --- tri ----------------------------------------------------------------
     st, m = _measure(render_disks(SIZE, gen_tri(SIZE)))

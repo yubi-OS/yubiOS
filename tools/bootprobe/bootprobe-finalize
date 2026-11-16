@@ -1,6 +1,9 @@
 #!/bin/bash
-# bootprobe-finalize: marks the boot complete; absence of .prev_complete on next boot = unclean previous boot.
-D=/var/lib/bootprobe
+# bootprobe-finalize: marks the boot complete; absence of .prev_complete on a LATER boot = unclean previous boot.
+# Appends the end-of-boot readings and the early->final DELTAS (diskstats counters, nvme smart-log values).
+# BOOTPROBE_DIR / BOOTPROBE_DISKSTATS only exist so the script can be exercised off-device.
+D=${BOOTPROBE_DIR:-/var/lib/bootprobe}
+DISKSTATS=${BOOTPROBE_DISKSTATS:-/proc/diskstats}
 [ -d "$D" ] || exit 0
 [ -f "$D/CAPTURE_DONE" ] && exit 0
 N=$(cat "$D/count" 2>/dev/null) || exit 0
@@ -14,7 +17,29 @@ O="$D/boot-$(printf %03d "$N")"
   echo "-- critical-chain (top) --"
   systemd-analyze critical-chain 2>/dev/null | head -12
   echo "-- diskstats (final: mmc+nvme) --"
-  grep -E "mmcblk|nvme" /proc/diskstats 2>/dev/null
+  grep -E "mmcblk|nvme" "$DISKSTATS" > "$O.diskstats.final" 2>/dev/null
+  cat "$O.diskstats.final"
+  echo "-- diskstats delta (final - early, per device) --"
+  if [ -s "$O.diskstats.early" ]; then
+    awk 'NR==FNR { for (i=4;i<=14;i++) e[$3,i]=$i; seen[$3]=1; next }
+         ($3 in seen) { printf "%s reads=%d sectors_read=%d ms_reading=%d writes=%d sectors_written=%d ms_writing=%d io_ms=%d\n",
+                        $3, $4-e[$3,4], $6-e[$3,6], $7-e[$3,7], $8-e[$3,8], $10-e[$3,10], $11-e[$3,11], $13-e[$3,13] }' \
+        "$O.diskstats.early" "$O.diskstats.final"
+  else
+    echo "no early diskstats snapshot"
+  fi
+  echo "-- nvme smart-log (final) and delta vs early --"
+  if [ -f "$O.smart.early" ] && command -v nvme >/dev/null 2>&1; then
+    nvme smart-log /dev/nvme0 2>&1 | grep -iE "media_errors|percentage_used|error_log|critical_warning|num_err_log" | head -8 > "$O.smart.final"
+    cat "$O.smart.final"
+    awk -F: 'function num(s){ gsub(/[^0-9.-]/,"",s); return s+0 }
+             function key(s){ gsub(/[ \t]+/,"",s); return s }
+             NR==FNR { e[key($1)]=num($2); next }
+             { k=key($1); if (k in e) printf "%s early=%s final=%s delta=%s\n", k, e[k], num($2), num($2)-e[k] }' \
+        "$O.smart.early" "$O.smart.final"
+  else
+    echo "no nvme smart-log snapshot (nvme-cli absent or early snapshot missing)"
+  fi
 } >> "$O.log" 2>&1
 echo 1 > "$D/.prev_complete"
 exit 0

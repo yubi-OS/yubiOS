@@ -293,11 +293,22 @@ def ets_selftest(fixtures=None, band_multiplier=1.0, band_kind="v2"):
     y = family_series("linear-noise", FAMILY_SEED, 40)
     s1 = json.dumps(ets_forecast(y, 5), sort_keys=True)
     s2 = json.dumps(ets_forecast(y, 5), sort_keys=True)
-    passed = s1 == s2 and len(s1) > 0
+    # FC-3: a pure function called twice on one list can never fail, so G3 also checks the seed:
+    # the identical seed regenerates the synthetic draws bit-for-bit (and reproduces the forecast
+    # bytes), while a different seed changes the draws AND the forecast. A constant or
+    # seed-ignoring generator would fail the second half.
+    y_same = family_series("linear-noise", FAMILY_SEED, 40)
+    y_other = family_series("linear-noise", FAMILY_SEED + 1, 40)
+    s_same = json.dumps(ets_forecast(y_same, 5), sort_keys=True)
+    s_other = json.dumps(ets_forecast(y_other, 5), sort_keys=True)
+    same_seed_bitwise = y_same == y and s_same == s1
+    other_seed_differs = y_other != y and s_other != s1
+    passed = s1 == s2 and len(s1) > 0 and same_seed_bitwise and other_seed_differs
     gates.append({
         "name": "G3",
         "pass": passed,
-        "detail": "two runs, same input | bytes %d identical=%s | %s" % (len(s1), s1 == s2, "PASS" if passed else "FAIL"),
+        "detail": "two runs, same input | bytes %d identical=%s | same seed bit-for-bit=%s | seed+1 changes draws and forecast=%s | %s"
+                  % (len(s1), s1 == s2, same_seed_bitwise, other_seed_differs, "PASS" if passed else "FAIL"),
     })
 
     r = ets_forecast([1, 2, 3, 4, 5, 6, 7], 5)

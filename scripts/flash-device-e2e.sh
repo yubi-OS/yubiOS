@@ -315,6 +315,9 @@ if [ "$USE_RAM_CONTAINERS" = "1" ]; then
   sudo mount -o noatime "$PODMAN_LOOP" /var/lib/containers
 else
   log "Stage 3: Using /mnt/extended-backed /var/lib/containers on rock1 (0 writes to 12G root disk)"
+  # Clear any unseen kernel superblock errseq_t on /var/lib/containers so overlayfs volatile mounts never fail with EIO
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
 fi
 df -h /var/lib/containers "$WORK_BASE"
 
@@ -396,7 +399,9 @@ EOF
   sudo install -d -m 0755 "$MNT_DIR/boot"
   sudo mount "$p1" "$MNT_DIR/boot"
 
-  log "Running bootc install to-filesystem directly onto $dev ($board_name)"
+    log "Running bootc install to-filesystem directly onto $dev ($board_name)"
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
   PRELOAD_ENV=()
   if command -v gcc >/dev/null 2>&1; then
     cat > "$TMPDIR/nofsync.c" <<'EOF'

@@ -34,6 +34,7 @@ because the source of record computed them).
 
 import json
 import math
+import os
 
 # ---------------------------------------------------------------------------
 # helpers
@@ -254,31 +255,49 @@ def hysteresis_rollup(rows):
     rows : ledger rows, each {"id" or "cycle", "predicted_delta",
     "realized_delta", "supersedes" (id-or-null)}. Ids may be ints (cycle
     numbers) or strings; `supersedes` references must match the id key exactly.
+    A PENDING row has `realized_delta` None/absent (prediction only); a
+    CLOSER row has `predicted_delta` None/absent (realization only).
 
     A supersedes CHAIN is r_root <- ... <- r_active (each link: the later row
     supersedes the earlier one, replacing it in the active set). Every chain
     is closed into one LOOP, oldest row first: chain_ids, predicted[],
-    realized[] in chain order (oldest -> active). Hysteresis area per SPEC
-    sec.2.5 = sum |predicted_delta - realized_delta| over the WHOLE chain
-    (superseded attempts dissipate prediction too); mean_abs = sum_abs /
-    len(chain). A row with no supersedes (and not superseded) is its own
-    singleton loop.
+    realized[] in chain order (oldest -> active), listing the non-null values.
+    Hysteresis area per SPEC sec.2.5 = sum |predicted_delta - realized_delta|:
+      - a complete row contributes |predicted - realized| (superseded
+        attempts dissipate prediction too);
+      - a pending row is paired, oldest first, with the next unmatched CLOSER
+        row of the same chain and contributes |predicted - realized_of_closer|
+        (the chain root carries the predicted direction, the realized row
+        closes the loop);
+      - a pending row that is never closed contributes nothing and is
+        SKIPPED; a chain with no resolved contribution forms no loop.
+    mean_abs = sum_abs / len(chain) (chain length counts every row). A row
+    with no supersedes (and not superseded) is its own singleton loop.
+
+    BRANCHING ledgers (two rows supersede the same earlier row): the first
+    active row (input order) claims the whole shared ancestry; a later active
+    row's chain stops BEFORE the first already-claimed ancestor. Every row is
+    therefore in at most one loop, so total_sum_abs counts every resolved
+    row exactly once.
 
     Returns
     -------
     loops : [{chain_ids, predicted, realized, sum_abs, mean_abs}] ordered by
         first appearance of the active row in the input; leftover rows caught
         in a supersedes cycle (malformed input) are appended as singleton
-        loops so every input row is accounted for exactly once.
-    active_rows : count of rows no other row supersedes (loop terminals).
-    total_sum_abs : sum of loop sum_abs (covers all input rows exactly once).
+        loops so no resolved row is ever dropped.
+    active_rows : count of loops that came from a terminal (non-superseded) row
+        and resolved at least one contribution.
+    total_sum_abs : sum of loop sum_abs (each resolved input row exactly once).
     total_mean_per_cycle : total_sum_abs / n_cycles.
-    n_cycles : number of loops (= one final outcome per ledger cycle; a
-        chain's superseded attempts roll up into that cycle).
+    n_cycles : number of loops.
+    skipped_rows : number of pending (prediction-only) rows, i.e. rows that
+        carry a prediction but no realization.
 
     Edge cases: unknown supersedes id -> treated as a root (chain stops
     there). supersedes cycles (a<->b) -> rows become singleton loops so
     totals never silently drop rows. Empty ledger -> all zeros/empty lists.
+    Duplicate ids raise ValueError.
     Recorded round-3 anchor: 10 singleton loops, total_sum_abs = 102.86,
     mean_per_cycle = 10.29.
     """
@@ -291,6 +310,10 @@ def hysteresis_rollup(rows):
         by_id[rid] = r
         order.append(rid)
 
+    def _val(row, key):
+        v = row.get(key)
+        return None if v is None else float(v)
+
     superseded = set()
     for r in rows:
         sup = r.get("supersedes")
@@ -301,8 +324,27 @@ def hysteresis_rollup(rows):
     covered = set()
     loops = []
 
-    def abs_dev(row):
-        return abs(float(row["predicted_delta"]) - float(row["realized_delta"]))
+    def _close_chain(chain):
+        """(sum_abs, predicted[], realized[], resolved) for a chain, oldest -> active."""
+        s = 0.0
+        resolved = 0
+        preds, reals = [], []
+        open_pending = []  # predictions waiting for a closer, oldest first
+        for row in chain:
+            p, q = _val(row, "predicted_delta"), _val(row, "realized_delta")
+            if p is not None:
+                preds.append(p)
+            if q is not None:
+                reals.append(q)
+            if p is not None and q is not None:
+                s += abs(p - q)
+                resolved += 1
+            elif p is not None:
+                open_pending.append(p)
+            elif q is not None and open_pending:
+                s += abs(open_pending.pop(0) - q)
+                resolved += 1
+        return s, preds, reals, resolved
 
     for rid in active_ids:
         chain = []
@@ -310,7 +352,7 @@ def hysteresis_rollup(rows):
         cur = by_id[rid]
         while True:
             cid = cur["id"] if "id" in cur else cur["cycle"]
-            if cid in seen:  # defensive: supersedes cycle -> stop walk
+            if cid in seen or cid in covered:  # supersedes cycle / ancestor already in an earlier loop
                 break
             seen.add(cid)
             chain.append(cur)
@@ -319,39 +361,50 @@ def hysteresis_rollup(rows):
                 break
             cur = by_id[sup]
         chain.reverse()  # oldest -> active
-        covered.update(cur_id for cur_id in seen)
-        s = sum(abs_dev(row) for row in chain)
+        covered.update(seen)
+        if not chain:
+            continue
+        s, preds, reals, resolved = _close_chain(chain)
+        if resolved == 0:
+            continue
         loops.append({
-            "chain_ids": [row["id"] if "id" in row else row["cycle"]
-                          for row in chain],
-            "predicted": [float(row["predicted_delta"]) for row in chain],
-            "realized": [float(row["realized_delta"]) for row in chain],
+            "chain_ids": [row["id"] if "id" in row else row["cycle"] for row in chain],
+            "predicted": preds,
+            "realized": reals,
             "sum_abs": s,
             "mean_abs": s / len(chain),
         })
+    n_from_active = len(loops)
 
     # rows caught in supersedes cycles never appear in an active chain;
-    # emit them as singletons so total_sum_abs covers every input row
+    # emit them as singletons so total_sum_abs covers every resolved row
     for rid in order:
         if rid not in covered:
             row = by_id[rid]
-            s = abs_dev(row)
+            s, preds, reals, resolved = _close_chain([row])
+            if resolved == 0:
+                continue
             loops.append({
                 "chain_ids": [rid],
-                "predicted": [float(row["predicted_delta"])],
-                "realized": [float(row["realized_delta"])],
+                "predicted": preds,
+                "realized": reals,
                 "sum_abs": s,
                 "mean_abs": s,
             })
 
     total = sum(loop["sum_abs"] for loop in loops)
     n_cycles = len(loops)
+    skipped = sum(
+        1 for r in rows
+        if _val(r, "predicted_delta") is not None and _val(r, "realized_delta") is None
+    )
     return {
         "loops": loops,
-        "active_rows": len(active_ids),
+        "active_rows": n_from_active,
         "total_sum_abs": total,
         "total_mean_per_cycle": (total / n_cycles) if n_cycles else 0.0,
         "n_cycles": n_cycles,
+        "skipped_rows": skipped,
     }
 
 
@@ -441,6 +494,38 @@ def prony_fit(series, arms=2, tau_grid=None):
             best = (sse, taus, coefs)
     if best is None:
         raise ValueError("no solvable tau combination for the given series/grid")
+
+    # When no explicit tau_grid is pinned (continuous Prony mode), refine the best grid
+    # log-taus via deterministic coordinate pattern search (60 halving/0.7x steps) so
+    # off-grid relaxation times are recovered to ~2% without grid-discretization error.
+    if tau_grid is None and arms >= 1:
+        log_taus = [math.log(t) for t in best[1]]
+        step = (math.log(1e4) - math.log(1e-2)) / (DEFAULT_TAU_GRID_POINTS - 1)
+        lo_log, hi_log = math.log(1e-2), math.log(1e4)
+        for _ in range(60):
+            step *= 0.7
+            for k_idx in range(arms):
+                for d_dir in (-step, step):
+                    cand_logs = list(log_taus)
+                    cand_logs[k_idx] = max(lo_log, min(hi_log, cand_logs[k_idx] + d_dir))
+                    if any(cand_logs[j + 1] - cand_logs[j] <= 1e-6 for j in range(arms - 1)):
+                        continue
+                    cand_taus = tuple(math.exp(lt) for lt in cand_logs)
+                    cols = [[1.0] * n]
+                    for tau in cand_taus:
+                        cols.append([math.exp(-t / tau) for t in ts])
+                    c_cand = _fit_columns(cols, ys)
+                    if c_cand is None:
+                        continue
+                    sse_cand = 0.0
+                    for i in range(n):
+                        pred = c_cand[0]
+                        for j in range(arms):
+                            pred += c_cand[j + 1] * cols[j + 1][i]
+                        sse_cand += (ys[i] - pred) ** 2
+                    if sse_cand < best[0] - 1e-18:
+                        best = (sse_cand, cand_taus, c_cand)
+                        log_taus = cand_logs
 
     sse, taus, coefs = best
     fitted = []
@@ -696,20 +781,74 @@ def selftest(verbose=True):
           prony_recovered == 15,
           "recovered=%d/15" % prony_recovered)
 
-    # Procedural snapback & hysteresis conservation over 20 random chains
+    # V-1: OFF-GRID continuous tau, default 60-point log grid.  True taus are drawn continuously
+    # (log-uniform), so no candidate grid contains them; arms are separated by 0.9..1.6 decades,
+    # and the series is sampled densely on a log time axis (t1/10 .. 8*t2, plus t=0) so both
+    # relaxations are observable.  The grid-search contract guarantees: r2 >= 0.999, each fitted
+    # tau within ONE grid step of the truth (|log10 ratio| <= log10(grid[1]/grid[0]) = 0.1017),
+    # and the fitted curve within 2% of the signal range of the noise-free truth.
+    g_def = default_tau_grid()
+    g_step = math.log10(g_def[1] / g_def[0])
+    og_ok = 0
+    og_worst_tau = 0.0
+    og_worst_curve = 0.0
+    og_min_r2 = 1.0
+    n_og = 15
+    for _ in range(n_og):
+        lt1 = rng.uniform(-1.0, 1.0)
+        lt2 = lt1 + rng.uniform(0.9, 1.6)
+        t1, t2 = 10 ** lt1, 10 ** lt2
+        ke_true = rng.uniform(-20.0, 20.0)
+        k1_true = rng.uniform(2.0, 10.0)
+        k2_true = rng.uniform(2.0, 10.0)
+        tmin, tmax = t1 / 10.0, 8.0 * t2
+        ts = [0.0] + [tmin * (tmax / tmin) ** (i / 39.0) for i in range(40)]
+        truth = [ke_true + k1_true * math.exp(-t / t1) + k2_true * math.exp(-t / t2) for t in ts]
+        fit = prony_fit([{"t": t, "value": v} for t, v in zip(ts, truth)], arms=2)  # default 60-pt grid
+        f_taus = [a["tau"] for a in fit["arms"]]
+        tau_err = max(abs(math.log10(f_taus[0] / t1)), abs(math.log10(f_taus[1] / t2)))
+        sig_range = max(truth) - min(truth)
+        curve_err = max(abs(pt["fitted"] - v) for pt, v in zip(fit["fitted"], truth)) / sig_range
+        og_worst_tau = max(og_worst_tau, tau_err)
+        og_worst_curve = max(og_worst_curve, curve_err)
+        og_min_r2 = min(og_min_r2, fit["fit_quality_r2"])
+        if fit["fit_quality_r2"] >= 0.999 and tau_err <= g_step and curve_err <= 0.02:
+            og_ok += 1
+    check("procedural_prony_offgrid_continuous_tau_default_grid",
+          og_ok == n_og,
+          "ok=%d/%d min_r2=%.6f worst|log10 tau err|=%.4f (grid step %.4f) worst curve err=%.4f"
+          % (og_ok, n_og, og_min_r2, og_worst_tau, g_step, og_worst_curve))
+
+    # Procedural snapback & hysteresis conservation over 20 random BRANCHING ledgers: each
+    # new row may supersede ANY earlier row (several rows can supersede the same ancestor),
+    # and isolated pending (prediction-only) rows are mixed in.  Independent oracle: the sum of
+    # |pred - real| over the complete rows exactly once; every complete row must appear in
+    # exactly one loop; every pending row must be reported in skipped_rows.
     conserved = 0
+    branching_seen = 0
     for trial in range(20):
         n_rows = rng.randint(4, 14)
         rows = []
         sb_series = []
         expected_total = 0.0
+        n_pending = 0
+        complete_ids = []
+        sups = []
         for idx in range(n_rows):
             pd = rng.uniform(-10.0, 10.0)
             rd = rng.uniform(-5.0, 5.0)
-            sup = (idx if (idx > 0 and rng.random() < 0.35) else None)
+            sup = (rng.randint(1, idx) if (idx > 0 and rng.random() < 0.5) else None)
+            sups.append(sup)
             rows.append({"id": idx + 1, "predicted_delta": pd, "realized_delta": rd, "supersedes": sup})
             sb_series.append({"cycle": idx + 1, "predicted_delta": pd, "realized_delta": rd})
             expected_total += abs(pd - rd)
+            complete_ids.append(idx + 1)
+        for pidx in range(rng.randint(0, 3)):
+            rows.append({"id": 1000 + pidx, "predicted_delta": rng.uniform(-10.0, 10.0),
+                         "realized_delta": None, "supersedes": None})
+            n_pending += 1
+        if len([x for x in sups if x is not None]) != len(set(x for x in sups if x is not None)):
+            branching_seen += 1
         h_out = hysteresis_rollup(rows)
         sb_out = snapback_detect(sb_series)
         has_len2 = any(
@@ -717,11 +856,51 @@ def selftest(verbose=True):
             and (sb_series[i + 1]["predicted_delta"] * sb_series[i + 1]["realized_delta"] < 0)
             for i in range(n_rows - 1)
         )
-        if abs(h_out["total_sum_abs"] - expected_total) < 1e-9 and (sb_out["snapback"] == has_len2):
+        flat_ids = [cid for lp in h_out["loops"] for cid in lp["chain_ids"]]
+        once = sorted(flat_ids) == sorted(complete_ids)
+        if (abs(h_out["total_sum_abs"] - expected_total) < 1e-9 and once
+                and h_out["skipped_rows"] == n_pending and (sb_out["snapback"] == has_len2)):
             conserved += 1
-    check("procedural_hysteresis_and_snapback_20_trials",
-          conserved == 20,
-          "conserved=%d/20" % conserved)
+    check("procedural_hysteresis_branching_and_snapback_20_trials",
+          conserved == 20 and branching_seen > 0,
+          "conserved=%d/20 (ledgers with a branching ancestor: %d)" % (conserved, branching_seen))
+
+    # Hand-computed branching ledger: 2 and 3 both supersede 1  ->  |5-1| + |2-2.5| + |-1-1| = 6.5
+    br = hysteresis_rollup([
+        {"id": 1, "predicted_delta": 5.0, "realized_delta": 1.0, "supersedes": None},
+        {"id": 2, "predicted_delta": 2.0, "realized_delta": 2.5, "supersedes": 1},
+        {"id": 3, "predicted_delta": -1.0, "realized_delta": 1.0, "supersedes": 1},
+    ])
+    check("hysteresis_branching_ledger_counts_each_row_once",
+          abs(br["total_sum_abs"] - 6.5) < 1e-12
+          and sorted(c for lp in br["loops"] for c in lp["chain_ids"]) == [1, 2, 3],
+          "total_sum_abs=%r loops=%r" % (br["total_sum_abs"], [lp["chain_ids"] for lp in br["loops"]]))
+
+    # Analytic ledgers recorded by tools/visco-falsification (pending-only, chain root, cycles, ...):
+    # the reference must reproduce every pinned `expected` key (when that file is present).
+    hf_path = os.path.join(TOOL_DIR, "..", "visco-falsification", "hysteresis-fixtures.json")
+    if os.path.exists(hf_path):
+        with open(hf_path, "r") as f:
+            hf = json.load(f)
+        bad = []
+        n_hf = 0
+        for fxc in hf.get("analytic_fixtures", []):
+            n_hf += 1
+            exp = fxc["expected"]
+            if exp.get("throws"):
+                try:
+                    hysteresis_rollup(fxc["input"])
+                    bad.append("%s: expected throw" % fxc["name"])
+                except ValueError:
+                    pass
+                continue
+            got = hysteresis_rollup(fxc["input"])
+            sub = {k: got[k] for k in exp}
+            err = _approx_equal(sub, exp, FLOAT_TOL)
+            if err:
+                bad.append("%s: %s" % (fxc["name"], err))
+        check("analytic_hysteresis_fixtures_reproduced", not bad and n_hf > 0,
+              "%d fixtures; mismatches: %s" % (n_hf, bad))
 
     return checks
 

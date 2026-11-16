@@ -83,7 +83,6 @@ CHAIN_N = 256
 EDGE_DIR_DEFAULTS = [      # searched in order for edge_standard.py (row 7 oracle path)
     os.path.join(HERE, "..", "..", "edge-standard"),           # in-repo layout
     os.path.join(HERE, ".."),                                  # module sibling
-    "/var/workspace/session/ingest-2026-10-06/yubiOS/tools/edge-standard",
 ]
 
 # Pre-registered gold bands (PREREGISTRATION §2). Never moved post-hoc.

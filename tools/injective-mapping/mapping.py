@@ -19,12 +19,17 @@ have come out otherwise, tied to an actual procedure). Subjective
 script therefore does not add one. It claims measurement + identity, and
 says exactly how far each part goes.
 
+Slug labels are NOT unique in this corpus: 915 distinct labels over 2286 rows
+(a label such as a SELF-CHANGELOG slug repeats dozens of times). The ladder's slug
+stage (coverage+corpus+cycle+slug) reaches 2169 distinct keys; only the final
+row_id stage reaches 2286, and that stage is injective by construction (row ordinal).
+
 Usage:
-    python3 mapping.py                    # run pipeline, write skill-map.csv, print report
-    python3 mapping.py --json             # same, but print a JSON summary instead of prose
+    python3 mapping.py                    # no arguments: print help, exit 2 (writes nothing)
+    python3 mapping.py --out PATH         # run pipeline, write the CSV to PATH, print report
+    python3 mapping.py --json             # report only (no CSV is written without --out)
     python3 mapping.py --selftest         # run pipeline + assertions, exit non-zero on failure
     python3 mapping.py --zip PATH         # override the corpus zip path
-    python3 mapping.py --out PATH         # override the CSV output path
 
 Dependencies: numpy only (stdlib zipfile/json/csv/argparse for the rest).
 """
@@ -50,6 +55,9 @@ JSON_MEMBER = "is-this-x-2026-08-12/data/real/per_row_coverage_v3.json"
 DEFAULT_OUT = os.path.join(HERE, "skill-map.csv")
 
 EXPECTED_ROW_COUNT = 2286
+EXPECTED_DISTINCT_SLUG_LABELS = 915    # distinct slug strings (labels repeat across rows)
+EXPECTED_LADDER_SLUG_STAGE = 2169      # (coverage, corpus, cycle, slug)
+EXPECTED_LADDER_ROWID_STAGE = 2286     # (coverage, corpus, cycle, slug, row_id): injective by construction
 
 
 # --------------------------------------------------------------------------
@@ -266,6 +274,7 @@ def run_pipeline(zip_path: str, out_path: str) -> dict:
 
     distinct_keys_final = len({(i, r.get("slug")) for i, r in enumerate(rows)})
     distinct_slug_labels = len({r["slug"] for r in rows})
+    ladder_vals = list(injectivity["ladder"].values())
 
     return {
         "row_count": len(rows),
@@ -275,8 +284,11 @@ def run_pipeline(zip_path: str, out_path: str) -> dict:
         "injectivity": injectivity,
         "csv_path": out_path,
         "csv_row_count": len(records),
-        "csv_unique_slugs": distinct_keys_final,
-        "distinct_slug_labels": distinct_slug_labels,
+        "csv_keyed_rows": distinct_keys_final,          # distinct (row_id, slug): 2286 by construction
+        "csv_unique_slugs": distinct_keys_final,        # DEPRECATED alias of csv_keyed_rows (misnomer)
+        "distinct_slug_labels": distinct_slug_labels,   # honest slug-label count (915 on the real corpus)
+        "ladder_stage_4_slug": ladder_vals[3],
+        "ladder_stage_5_row_id": ladder_vals[4],
     }
 
 
@@ -314,8 +326,15 @@ def print_report(result: dict) -> None:
     print("-- S^2 embedding --")
     print(f"PC1/PC2 eigenvalues (variance explained): {result['embedding_eigvals']}")
     print()
-    print(f"wrote {result['csv_row_count']} rows -> {result['csv_path']}")
-    print(f"unique slugs in export: {result['csv_unique_slugs']} / {result['csv_row_count']}")
+    if result.get("csv_written", True):
+        print(f"wrote {result['csv_row_count']} rows -> {result['csv_path']}")
+    else:
+        print(f"built {result['csv_row_count']} rows (no --out given: nothing written)")
+    print(f"distinct slug labels:   {result['distinct_slug_labels']} / {result['row_count']}  "
+          "(slugs are NOT unique; labels repeat)")
+    print(f"ladder stage +slug:     {result['ladder_stage_4_slug']}")
+    print(f"keyed rows (row_id):    {result['csv_keyed_rows']} / {result['csv_row_count']}  "
+          "(injective by row ordinal, not by slug)")
 
 
 def to_json_summary(result: dict) -> dict:
@@ -338,7 +357,11 @@ def to_json_summary(result: dict) -> dict:
         "embedding_eigvals": result["embedding_eigvals"],
         "csv_path": result["csv_path"],
         "csv_row_count": result["csv_row_count"],
+        "csv_keyed_rows": result["csv_keyed_rows"],
         "csv_unique_slugs": result["csv_unique_slugs"],
+        "distinct_slug_labels": result["distinct_slug_labels"],
+        "ladder_stage_4_slug": result["ladder_stage_4_slug"],
+        "ladder_stage_5_row_id": result["ladder_stage_5_row_id"],
     }
 
 
@@ -383,9 +406,36 @@ def run_selftest(zip_path: str, out_path: str, write: bool = False) -> int:
             failures.append(
                 f"csv row count {result['csv_row_count']} != expected {EXPECTED_ROW_COUNT}"
             )
-        if result["csv_unique_slugs"] != EXPECTED_ROW_COUNT:
+        if result["csv_keyed_rows"] != EXPECTED_ROW_COUNT:
             failures.append(
-                f"csv unique row keys {result['csv_unique_slugs']} != expected {EXPECTED_ROW_COUNT}"
+                f"csv keyed rows (row_id, slug) {result['csv_keyed_rows']} != expected {EXPECTED_ROW_COUNT}"
+            )
+
+        # Honest slug-label count: recomputed here from the exported CSV itself, so it can
+        # neither be satisfied by a row-index key nor drift from what the CSV contains.
+        with open(csv_a, newline="") as fh:
+            csv_slugs = [r["slug"] for r in csv.DictReader(fh)]
+        print(f"[selftest] distinct slug labels: {len(set(csv_slugs))} / {len(csv_slugs)} rows")
+        if result["distinct_slug_labels"] != len(set(csv_slugs)):
+            failures.append(
+                f"distinct_slug_labels {result['distinct_slug_labels']} != distinct slugs in the exported CSV "
+                f"{len(set(csv_slugs))}"
+            )
+        if result["distinct_slug_labels"] != EXPECTED_DISTINCT_SLUG_LABELS:
+            failures.append(
+                f"distinct slug labels {result['distinct_slug_labels']} != expected {EXPECTED_DISTINCT_SLUG_LABELS}"
+            )
+        if result["csv_keyed_rows"] != result["csv_row_count"] or \
+                result["distinct_slug_labels"] >= result["csv_keyed_rows"]:
+            failures.append("slug labels unexpectedly unique: the corpus facts this tool documents changed")
+        if result["ladder_stage_4_slug"] != EXPECTED_LADDER_SLUG_STAGE:
+            failures.append(
+                f"ladder stage coverage+corpus+cycle+slug {result['ladder_stage_4_slug']} != "
+                f"expected {EXPECTED_LADDER_SLUG_STAGE}"
+            )
+        if result["ladder_stage_5_row_id"] != EXPECTED_LADDER_ROWID_STAGE:
+            failures.append(
+                f"ladder stage +row_id {result['ladder_stage_5_row_id']} != expected {EXPECTED_LADDER_ROWID_STAGE}"
             )
 
         if not is_monotone_nondecreasing(inj["ladder"]):
@@ -432,7 +482,9 @@ def run_selftest(zip_path: str, out_path: str, write: bool = False) -> int:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--zip", default=DEFAULT_ZIP, help="path to the corpus zip archive")
-    parser.add_argument("--out", default=DEFAULT_OUT, help="path to write skill-map.csv")
+    parser.add_argument("--out", default=None,
+                        help="path to write skill-map.csv (nothing is written unless this is given; "
+                             "the tracked tools/injective-mapping/skill-map.csv is never touched implicitly)")
     parser.add_argument("--json", action="store_true", help="print a JSON summary instead of prose")
     parser.add_argument("--selftest", action="store_true", help="run self-test assertions")
     parser.add_argument(
@@ -440,12 +492,26 @@ def main(argv=None) -> int:
         help="with --selftest: write the CSV to --out (default is a throwaway temp dir "
              "so the committed skill-map.csv is not touched by test runs)",
     )
-    args = parser.parse_args(argv)
+    raw = sys.argv[1:] if argv is None else list(argv)
+    if not raw:
+        parser.print_help()
+        return 2
+    args = parser.parse_args(raw)
 
     if args.selftest:
-        return run_selftest(args.zip, args.out, write=args.write)
+        return run_selftest(args.zip, args.out or DEFAULT_OUT, write=args.write)
 
-    result = run_pipeline(args.zip, args.out)
+    if args.out:
+        result = run_pipeline(args.zip, args.out)
+        result["csv_written"] = True
+    else:
+        tmp = tempfile.mkdtemp(prefix="skill-map-")
+        try:
+            result = run_pipeline(args.zip, os.path.join(tmp, "skill-map.csv"))
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+        result["csv_path"] = None
+        result["csv_written"] = False
     if args.json:
         print(json.dumps(to_json_summary(result), indent=2))
     else:

@@ -9,7 +9,7 @@
 # PINNED.md; the FROM carries only the immutable OCI index digest so there is a
 # single source of identity (no tag+digest ambiguity for Build Policy/tooling).
 # quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261114.0)
-FROM quay.io/fedora/fedora-bootc@sha256:17227a17c0bb9222918881e27f254e219eb3808ceb4399e26322bbd2e77932bc AS rootfs
+FROM quay.io/fedora/fedora-bootc@sha256:1989dd9223dc2ef03e3be158165be13e55b5571c62e9f3c88992950cf355416d AS rootfs
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -154,6 +154,7 @@ COPY usr/lib/systemd/system/yubios-uki-install.service /usr/lib/systemd/system/y
 
 RUN systemctl preset-all && \
     systemctl preset yubios-uki-install.service && \
+    systemctl enable yubiOS-lvm-usr-overlay.service && \
     rm -f /etc/machine-id /var/lib/systemd/random-seed
 
 # ── PAM: initialise u2f_keys file (populated by yubiOS-enroll-pam) ───────

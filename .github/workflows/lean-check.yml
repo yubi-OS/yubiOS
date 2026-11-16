@@ -51,21 +51,17 @@ jobs:
             papers/data/lean/FlowBounds.lean \
             papers/data/lean/LifeBounds.lean
 
-      - name: Install Lean 4.35.0 (pinned SHA256 release tarball) and fetch Mathlib v4.35.0 cache
+      - name: Install Lean 4.35.0 (pinned SHA256 release tarball, no installer script)
         run: |
           set -euo pipefail
-          # Pinned toolchain: official leanprover/lean4 v4.35.0 linux release tarball + Mathlib v4.35.0.
+          # Pinned toolchain: official leanprover/lean4 v4.35.0 linux release tarball.
           expected='7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d'
           curl -sSfL --retry 3 -o /tmp/lean.tar.zst \
             https://github.com/leanprover/lean4/releases/download/v4.35.0/lean-4.35.0-linux.tar.zst
           echo "$expected  /tmp/lean.tar.zst" | sha256sum --check --status
           mkdir -p "$HOME/.lean-pinned"
           tar --zstd -xf /tmp/lean.tar.zst -C "$HOME/.lean-pinned"
-          export PATH="$HOME/.lean-pinned/lean-4.35.0-linux/bin:$PATH"
           echo "$HOME/.lean-pinned/lean-4.35.0-linux/bin" >> "$GITHUB_PATH"
-          cd papers/data/lean
-          lake exe cache get Mathlib.Tactic.Ring Mathlib.Tactic.Linarith
-          echo "LEAN_PATH=$(lake env printenv LEAN_PATH)" >> "$GITHUB_ENV"
 
       - name: Lean version
         run: lean --version
@@ -135,21 +131,21 @@ jobs:
               exit 1
             fi
           done
-          export LEAN_PATH="/tmp/leanchecker-oleans:${LEAN_PATH}"
+          export LEAN_PATH="/tmp/leanchecker-oleans"
           for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
-            echo "== leanchecker ${base} =="
-            if ! leanchecker "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
+            echo "== leanchecker --fresh ${base} =="
+            if ! leanchecker --fresh "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
               echo "LEANCHECKER_FAIL: ${base}" >&2
               cat "/tmp/leanchecker-${base}.out" >&2
               exit 1
             fi
             cat "/tmp/leanchecker-${base}.out"
           done
-          echo "LEANCHECKER_OK: eight Mathlib-enabled modules re-type-checked via kernel replay"
+          echo "LEANCHECKER_OK: all eight modules re-type-checked via leanchecker --fresh kernel replay"
 
       # Axiom coverage gate (Lane A, round 2) — runs after the pinned-tarball
       # lean install step (no elan in this workflow), so `lean` is on PATH.
-      - name: Axiom coverage gate — every theorem in all six lean files
+      - name: Axiom coverage gate — every theorem in all eight lean files
         run: |
           set -euo pipefail
           PERMITTED="propext,Classical.choice,Quot.sound"
@@ -197,7 +193,7 @@ jobs:
               --mode enumerate \
               --require-coverage "papers/data/lean/${manifest}-scope.json"
           done
-          echo "AXIOM_COVERAGE_GATE_OK: all seven lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
+          echo "AXIOM_COVERAGE_GATE_OK: all eight lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
 
 
       - name: Check WayfinderBounds.lean (kernel, pinned toolchain)
@@ -501,7 +497,7 @@ jobs:
       # visco gate (T27 option 1: committed fixtures + Python source of record).
       # verify_visco.py runs its fixture selftest (15 checks) against
       # fixtures/visco-fixtures.json resolved relative to the tool file.
-      - name: visco-instruments fixture selftest (source of record, 15 checks)
+      - name: visco-instruments fixture selftest (source of record, 20 checks)
         run: python3 tools/visco-instruments/verify_visco.py
 
       # forecast gate part 1 (T27 option 1). The v3 selftest prints a gate report
@@ -612,6 +608,7 @@ jobs:
           j = json.load(open('/tmp/descent.json'))
           assert j['cumulative_delta'] >= 0.0, j['cumulative_delta']
           assert 0.0 < j['final_coverage'] <= 1.0
+          assert j['gates']['pole_alignment']['fraction'] >= 0.80, j['gates']
           print(f"DESCENT_REAL_OK cum_delta=+{j['cumulative_delta']:.4f} coverage={j['final_coverage']:.4f}")
           PY
 
@@ -664,8 +661,10 @@ jobs:
           import json
           j = json.load(open('/tmp/mapping.json'))
           assert j['csv_row_count'] == 2286, j['csv_row_count']
-          assert j['csv_unique_slugs'] == 2286, j['csv_unique_slugs']
-          print('MAPPING_REAL_OK 2286/2286 unique keyed rows')
+          assert j['distinct_slug_labels'] == 915, j['distinct_slug_labels']
+          assert j['ladder_stage_4_slug'] == 2169, j['ladder_stage_4_slug']
+          assert j['csv_keyed_rows'] == 2286, j['csv_keyed_rows']
+          print('MAPPING_REAL_OK 915 distinct slugs, 2169 at slug stage, 2286/2286 row_id-keyed rows')
           PY
 
       - name: corpus-sonometer level of the real corpus (above detectability floor)
@@ -682,7 +681,7 @@ jobs:
           rng = np.random.default_rng(20260822)
           L, mu, sd = corpus_level(M, draws=12, window=10, rng=rng)
           assert L > 15.6, f'{L:.2f} dBc is below the +15.6 dBc floor'
-          print(f'SONOMETER_REAL_OK L=+{L:.2f} dBc (floor +15.6, published +21.68)')
+          print(f'SONOMETER_REAL_OK L=+{L:.2f} dBc (floor +15.6, published +24.3 dBc @ 20N / +17.4 dBc @ 40N; z=12.13 -> +21.68 dBc)')
           PY
 
       - name: spectral-decomposer lens candidates from the real corpus
@@ -702,7 +701,9 @@ jobs:
           PY
 
       - name: phonon-dispersion real-corpus verification (parity with lean-check)
-        run: python3 tools/phonon-dispersion/phonon.py --selftest
+        run: |
+          python3 tools/phonon-dispersion/phonon.py --selftest
+          python3 tools/phonon-dispersion/phonon.py --input papers/is-this-x-2026-08-12-Final.zip
 
       - name: edge-standard selftest and fixture parity (parity with lean-check)
         run: |

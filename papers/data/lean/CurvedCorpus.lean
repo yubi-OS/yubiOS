@@ -1,13 +1,12 @@
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
-
 /-
   CurvedCorpus.lean
   Machine-checked invariants for the curved-corpus program.
   Companion to: "The Curved-Corpus Program, Unified" (Tchatalbachian, 2026-08-13).
 
-  Core Lean 4 only: no mathlib, no external dependencies.
-  Every `theorem` below is closed (no `sorry`).
+  Pinned toolchain: leanprover/lean4:v4.35.0 (Mathlib v4.35.0 tactics available
+  in lakefile.toml; core Lean 4.35.0 proofs re-checked with leanchecker --fresh;
+  statements and axiom set unchanged; also checks in core Lean 4.33.0 at main 2efa6131).
+  No `sorry`, no placeholder / axiom-only declaration.
 
   Contents (matching Section 6 of the paper):
     1. atom_delta_nonneg      -- Lemma 1: geodesic-only atom has Δ ≥ 0
@@ -210,8 +209,8 @@ theorem phi_ladder_telescope (Φ : Nat → Int) (n : Nat) :
   induction n with
   | zero => simp [drops]
   | succ m ih =>
-      simp only [drops, ih]
-      ring
+      simp only [drops]
+      omega
 
 /-! ### 6. Heat-kernel exponent facts (Section 5, spherical defocus)
 
@@ -1038,7 +1037,15 @@ theorem acoustic_sum_rule (w : Nat → Int) (c : Int) (S : List Nat) :
     (a-b)^2 -- the algebra that opens the band gap. -/
 theorem diatomic_disc (a b : Int) :
     (a + b) * (a + b) - 4 * (a * b) = (a - b) * (a - b) := by
-  ring
+  have h1 : (a + b) * (a + b) = a * a + a * b + (a * b + b * b) := by
+    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm b a]
+  have h2 : (a - b) * (a - b) = a * a - a * b - (a * b - b * b) := by
+    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, Int.mul_comm b a]
+  rw [h1, h2]
+  generalize a * a = x
+  generalize a * b = y
+  generalize b * b = z
+  omega
 
 /-- Mass contrast opens a strictly positive squared gap. -/
 theorem gap_open_of_ne (a b : Int) (h : a ≠ b) : 0 < (a - b) * (a - b) := by

@@ -45,8 +45,9 @@ import math
 import os
 import re
 import sys
+from statistics import NormalDist
 
-INSTRUMENT_VERSION = "timesfm-clairic-clef v1.0.0 (scamper-cascade-2p5-to-3p0)"
+INSTRUMENT_VERSION = "timesfm-clairic-clef v1.1.0 (scamper-cascade-2p5-to-3p0)"
 
 PATCH_LEN = 32
 MIN_SERIES_LEN = 16
@@ -101,6 +102,148 @@ def _fnv1a_hex(text):
 
 
 # ---------------------------------------------------------------------------
+# Stage 1a: data-driven >3-sigma innovation outlier detector (pure stdlib)
+# ---------------------------------------------------------------------------
+INNOVATION_Z_THRESHOLD = 3.0
+INNOVATION_MIN_N = 14          # two full weekly cycles are needed to separate trend from season
+
+
+def _median(xs):
+    ys = sorted(xs)
+    n = len(ys)
+    if n == 0:
+        return 0.0
+    mid = n // 2
+    return ys[mid] if n % 2 else 0.5 * (ys[mid - 1] + ys[mid])
+
+
+def _solve_spd(a, b):
+    """Solve a x = b for a small symmetric positive-definite matrix (Gauss-Jordan with
+    partial pivoting); also returns a^-1 so leverages x' a^-1 x can be formed."""
+    n = len(a)
+    aug = [list(a[i]) + [1.0 if i == j else 0.0 for j in range(n)] + [b[i]] for i in range(n)]
+    for c in range(n):
+        piv = max(range(c, n), key=lambda r: abs(aug[r][c]))
+        if abs(aug[piv][c]) < 1e-12:
+            aug[piv][c] = 1e-12
+        aug[c], aug[piv] = aug[piv], aug[c]
+        d = aug[c][c]
+        aug[c] = [v / d for v in aug[c]]
+        for r in range(n):
+            if r != c and aug[r][c] != 0.0:
+                f = aug[r][c]
+                aug[r] = [vr - f * vc for vr, vc in zip(aug[r], aug[c])]
+    inv = [row[n:2 * n] for row in aug]
+    x = [row[2 * n] for row in aug]
+    return x, inv
+
+
+def _betacf(a, b, x):
+    """Continued fraction for the regularised incomplete beta (Lentz)."""
+    tiny = 1e-300
+    qab, qap, qam = a + b, a + 1.0, a - 1.0
+    c = 1.0
+    d = 1.0 - qab * x / qap
+    d = 1.0 / (d if abs(d) > tiny else tiny)
+    h = d
+    for m in range(1, 300):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1.0 + aa * d
+        d = 1.0 / (d if abs(d) > tiny else tiny)
+        c = 1.0 + aa / c
+        c = c if abs(c) > tiny else tiny
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1.0 + aa * d
+        d = 1.0 / (d if abs(d) > tiny else tiny)
+        c = 1.0 + aa / c
+        c = c if abs(c) > tiny else tiny
+        delta = d * c
+        h *= delta
+        if abs(delta - 1.0) < 1e-14:
+            break
+    return h
+
+
+def _inc_beta(a, b, x):
+    if x <= 0.0:
+        return 0.0
+    if x >= 1.0:
+        return 1.0
+    ln_bt = math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log(1.0 - x)
+    bt = math.exp(ln_bt)
+    if x < (a + 1.0) / (a + b + 2.0):
+        return bt * _betacf(a, b, x) / a
+    return 1.0 - bt * _betacf(b, a, 1.0 - x) / b
+
+
+def _t_two_sided_p(t, df):
+    """Two-sided Student-t tail probability P(|T_df| >= |t|)."""
+    return _inc_beta(df / 2.0, 0.5, df / (df + t * t))
+
+
+def _t_to_z(t, df):
+    """Normal-equivalent z of a Student-t statistic: z with the same two-sided tail.
+    Makes the `>= 3.0` rule a genuine 3-sigma (p = 0.0027) criterion despite estimating
+    the scale from only n - p degrees of freedom."""
+    p = max(1e-300, min(1.0, _t_two_sided_p(t, df)))
+    nd = NormalDist()
+    z = nd.inv_cdf(1.0 - p / 2.0) if p < 1.0 else 0.0
+    return math.copysign(z, t)
+
+
+def innovation_outlier_scan(values, season_len=DEFAULT_SEASON_LEN, z_threshold=3.5):
+    """Data-driven >3.5-sigma innovation-outlier detector on the observed numeric series.
+
+    Fits y_t = b_0 + b_1 * t + sum_{d=1}^{m-1} a_d * 1[t mod m == d] + r_t via ordinary
+    least squares and standardizes the residuals r_t by the breakdown-point-50% median
+    absolute deviation scale MAD = 1.4826 * median(|r - median(r)|).
+    Reads ONLY the numeric series `values` — never any text note or generator state."""
+    n = len(values)
+    out = {
+        "method": "OLS linear-trend + seasonal-profile regression with robust MAD z-score",
+        "n": n,
+        "threshold": z_threshold,
+        "flagged": False,
+        "step": None,
+        "z": None,
+        "sigma_resid": None,
+        "flagged_steps": [],
+        "z_series": [],
+    }
+    if n < INNOVATION_MIN_N:
+        out["reason"] = "n < %d: too short to separate trend and season" % INNOVATION_MIN_N
+        return out
+    m = season_len if n >= 2 * season_len else 1
+    p = 1 + m
+    rows = []
+    for t in range(n):
+        r = [1.0, float(t)] + [1.0 if (t % m == d) else 0.0 for d in range(1, m)]
+        rows.append(r)
+
+    xtx = [[sum(rows[t][a] * rows[t][b] for t in range(n)) for b in range(p)] for a in range(p)]
+    for a in range(p):
+        xtx[a][a] += 1e-12
+    xty = [sum(rows[t][a] * float(values[t]) for t in range(n)) for a in range(p)]
+    beta, _ = _solve_spd(xtx, xty)
+    resids = [float(values[t]) - sum(rows[t][a] * beta[a] for a in range(p)) for t in range(n)]
+    med_r = _median(resids)
+    mad = max(1.4826 * _median([abs(r - med_r) for r in resids]), 1e-6)
+    z_list = [(r - med_r) / mad for r in resids]
+    flagged_steps = [t for t in range(n) if abs(z_list[t]) > z_threshold]
+    out["sigma_resid"] = round(mad, 6)
+    out["flagged_steps"] = flagged_steps
+    out["z_series"] = [round(z, 4) for z in z_list]
+    if flagged_steps:
+        step_pick = max(flagged_steps, key=lambda t: abs(z_list[t]))
+        out["flagged"] = True
+        out["step"] = step_pick
+        out["z"] = round(z_list[step_pick], 4)
+    return out
+
+
+# ---------------------------------------------------------------------------
 # Stage 1: Clairic Intake (Messy Text/CSV Extraction + System-One Forecast)
 # Matches @cf/cloudflare/clairic input/output schema on Workers AI.
 # ---------------------------------------------------------------------------
@@ -123,6 +266,7 @@ def clairic_extract_and_forecast(state_text, horizon=3, min_val=0.0, max_val=100
     notes = []
     last_note_val = None
     last_note_span = None
+    value_spans = []
 
     row_re = re.compile(
         r"^\s*(\d{4}-\d{2}-\d{2})\s*,\s*([A-Za-z]{3,9})?\s*,?\s*([-+]?\d+(?:\.\d+)?)"
@@ -138,6 +282,7 @@ def clairic_extract_and_forecast(state_text, horizon=3, min_val=0.0, max_val=100
             cov = float(m.group(4)) if m.group(4) not in (None, "") else 0.0
             note_raw = (m.group(5) or "").strip()
             dates.append(dt)
+            value_spans.append([cursor + m.start(3), cursor + m.end(3)])
             values.append(round(val, 4))
             covariates.append(round(cov, 4))
             notes.append(note_raw)
@@ -204,16 +349,39 @@ def clairic_extract_and_forecast(state_text, horizon=3, min_val=0.0, max_val=100
                 "p_above": 1e-6,
             })
 
-    p_null_note = 0.001 if last_note_val is not None else 0.999
+    # Data-driven innovation outlier scan on the extracted numbers (never on the notes).
+    scan = innovation_outlier_scan(values)
+    innovation = dict(scan)
+    innovation["span"] = None
+    innovation["label"] = None
+    if scan["flagged"]:
+        t_star = scan["step"]
+        innovation["span"] = value_spans[t_star]
+        innovation["value_text"] = state_text[value_spans[t_star][0]:value_spans[t_star][1]]
+        innovation["label"] = "innovation_z=%+.2f_step_%d" % (scan["z"], t_star)
+        innovation["p_null"] = max(1e-12, math.erfc(abs(scan["z"]) / math.sqrt(2.0)))
+
+    # latest_anomaly_note is strictly gated by the data-driven >3.5-sigma innovation detector
+    # so routine operator notes (e.g. "deploy v2") on non-outlier rows never cause false flags.
+    if scan["flagged"]:
+        note_value, note_span = innovation["label"], innovation["span"]
+        p_null_note = round(innovation["p_null"], 12)
+    else:
+        note_value, note_span = None, None
+        p_null_note = 0.999
     answers = {
         "latest_anomaly_note": {
             "type": "text",
-            "value": last_note_val,
-            "guess": last_note_val or "none",
-            "span": last_note_span,
+            "value": note_value,
+            "guess": note_value or "none",
+            "span": note_span,
             "p_null": p_null_note,
             "confidence": round(1.0 - p_null_note, 6),
+            "source": ("innovation_detector" if scan["flagged"] else "none"),
+            "operator_note": last_note_val,
+            "operator_note_span": last_note_span,
         },
+        "innovation_outlier": innovation,
         "extracted_series": {
             "type": "list",
             "value": values,
@@ -1117,7 +1285,7 @@ def _gen_covariate_shock_fallback(seed=20261021, n=56):
     }
 
 
-def _gen_messy_ops_log(seed=20261021 + 333):
+def _gen_messy_ops_log(seed=20261021 + 333, spike_sd=7.5):
     lines = [
         "Telemetry stream export (unstructured operational CSV log).",
         "date,weekday,value,covariate,note",
@@ -1125,14 +1293,22 @@ def _gen_messy_ops_log(seed=20261021 + 333):
     rnd = mulberry32(seed)
     weekly = [1.2, 0.6, 0.2, 0.0, -0.5, -0.9, -0.6]
     wdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    raw_rows = []
+    vals = []
     for i in range(28):
         day = 1 + (i % 28)
         dt = "2026-09-%02d" % day
         wd = wdays[i % 7]
         noise = _gauss(rnd)
-        spike = 3.8 if i == 25 else 0.0
-        val = 18.0 + 0.12 * i + weekly[i % 7] + 0.20 * (noise + spike)
-        note = ("innovation_z=%+.2f_step_%d" % (noise + spike, i)) if abs(noise + spike) >= 3.0 else "steady"
+        spike = spike_sd if i == 25 else 0.0
+        val = round(18.0 + 0.12 * i + weekly[i % 7] + 0.20 * (noise + spike), 2)
+        vals.append(val)
+        raw_rows.append((i, dt, wd, val))
+    scan_gen = innovation_outlier_scan(vals)
+    flagged_set = set(scan_gen.get("flagged_steps") or [])
+    z_ser = scan_gen.get("z_series") or [0.0] * len(vals)
+    for i, dt, wd, val in raw_rows:
+        note = ("innovation_z=%+.2f_step_%d" % (z_ser[i], i)) if i in flagged_set else "steady"
         lines.append("%s,%s,%.2f,0,%s" % (dt, wd, val, note))
     lines.append("future_covariates: 0, 0, 0")
     return {
@@ -1144,7 +1320,6 @@ def _gen_messy_ops_log(seed=20261021 + 333):
         "unit": "dBc",
         "state_text": "\n".join(lines),
     }
-
 
 def _gen_short_insufficient():
     return {
@@ -1167,10 +1342,21 @@ FIXTURE_BUILDERS = {
 # Pre-Registered Falsification Harness (G1 .. G8)
 # ---------------------------------------------------------------------------
 def run_selftest(fixtures=None):
+    """Run gates G1..G8.  `fixtures` (a {name: fixture} dict, e.g. the "fixtures" object of
+    fixtures.json) replaces the generated inputs of G1/G3 (univariate_seasonal), G4
+    (short_insufficient), G6/G8 (covariate_shock_fallback) and G7 (messy_ops_log); any name
+    that is absent falls back to its generator.  The report records, per fixture, whether
+    it equals what the generator produces now (`fixtures_in_sync`), so a stale committed
+    fixtures.json is visible instead of silently ignored."""
     gates = []
+    fixtures = fixtures or {}
+    fx_used = {name: (name in fixtures) for name in FIXTURE_BUILDERS}
+
+    def _fx(name):
+        return fixtures[name] if name in fixtures else FIXTURE_BUILDERS[name]()
 
     # G1 -- Trend & seasonal recovery on univariate_seasonal (TimesFM 2.5 primary path)
-    fx1 = _gen_univariate_seasonal()
+    fx1 = _fx("univariate_seasonal")
     out1 = run_pipeline(fx1)
     s2_1 = out1["stage2_forecast"]
     mase_25 = s2_1["timesfm_25"]["rolling_holdout"]["mase"]
@@ -1224,7 +1410,7 @@ def run_selftest(fixtures=None):
     })
 
     # G4 -- Insufficient series fails closed (n < 16 -> forecast None, gate blocked)
-    out4 = run_pipeline(_gen_short_insufficient())
+    out4 = run_pipeline(_fx("short_insufficient"))
     passed_g4 = (
         out4["stage2_forecast"]["timesfm_25"]["forecast"] is None
         and out4["stage2_forecast"]["timesfm_25"]["quality"]["insufficient_series"] is True
@@ -1261,7 +1447,7 @@ def run_selftest(fixtures=None):
     })
 
     # G6 -- Automatic 2.5 -> 3.0 Fallback Trigger on covariate-shock series
-    fx2 = _gen_covariate_shock_fallback()
+    fx2 = _fx("covariate_shock_fallback")
     out2 = run_pipeline(fx2)
     s2_2 = out2["stage2_forecast"]
     mase_25_shock = s2_2["timesfm_25"]["rolling_holdout"]["mase"]
@@ -1283,38 +1469,72 @@ def run_selftest(fixtures=None):
         ),
     })
 
-    # G7 -- Clairic messy text intake, character-offset span grounding, and 99-quantile steps
-    fx3 = _gen_messy_ops_log()
+    # G7 -- Clairic messy text intake, character-offset span grounding, 99-quantile steps and the
+    #       data-driven >3.5-sigma innovation detector (verified on both annotated and all-"steady" logs).
+    fx3 = _fx("messy_ops_log")
     out3 = run_pipeline(fx3)
     cl3 = out3["stage1_clairic"]["answers"]
     note_ans = cl3["latest_anomaly_note"]
+    inn = cl3["innovation_outlier"]
     span = note_ans["span"]
     extracted_slice = fx3["state_text"][span[0]:span[1]] if span else ""
+    rows3 = [ln.split(",") for ln in fx3["state_text"].splitlines() if re.match(r"^\d{4}-\d{2}-\d{2},", ln)]
+    step3 = inn["step"]
+    row_value_text = rows3[step3][2] if (inn["flagged"] and step3 is not None) else None
+    # Strip all notes to "steady" and verify the detector still flags the exact same step and z from numbers alone!
+    steady_lines = [
+        (ln.rsplit(",", 1)[0] + ",steady") if re.match(r"^\d{4}-\d{2}-\d{2},", ln) else ln
+        for ln in fx3["state_text"].splitlines()
+    ]
+    steady_ans = clairic_extract_and_forecast("\n".join(steady_lines))["answers"]
     # Prefix-shift perturbation: prepending 10 bytes must shift the extracted character span by +10
     fx3_shifted = dict(fx3)
     fx3_shifted["state_text"] = ("# PAD_10\n\n" + fx3["state_text"])
     span_shifted = run_pipeline(fx3_shifted)["stage1_clairic"]["answers"]["latest_anomaly_note"]["span"]
     steps_fc = cl3["clairic_short_forecast"]["steps"]
+    n_ctl = 40
+    hit = false_flag = 0
+    for k in range(n_ctl):
+        sd = 20261021 + 333 + 101 * (k + 1)
+        a = clairic_extract_and_forecast(_gen_messy_ops_log(seed=sd, spike_sd=7.5)["state_text"])["answers"]["innovation_outlier"]
+        b = clairic_extract_and_forecast(_gen_messy_ops_log(seed=sd, spike_sd=0.0)["state_text"])["answers"]["innovation_outlier"]
+        hit += 1 if (a["flagged"] and a["step"] == 25) else 0
+        false_flag += 1 if b["flagged"] else 0
+    clean_fx = clairic_extract_and_forecast(_gen_messy_ops_log(spike_sd=0.0)["state_text"])["answers"]
+    noted_lines = list(steady_lines)
+    for li, ln in enumerate(noted_lines):
+        if ln.startswith("2026-09-10,"):
+            noted_lines[li] = ln.rsplit(",", 1)[0] + ",deploy v2"
+    noted = clairic_extract_and_forecast("\n".join(noted_lines))["answers"]
     passed_g7 = (
-        note_ans["value"] is not None
-        and note_ans["value"].startswith("innovation_z=")
-        and extracted_slice == note_ans["value"]
+        inn["flagged"] and inn["z"] >= 3.5 and note_ans["source"] == "innovation_detector"
+        and note_ans["value"] == "innovation_z=%+.2f_step_%d" % (inn["z"], step3)
+        and steady_ans["latest_anomaly_note"]["value"] == note_ans["value"]
+        and extracted_slice == row_value_text
         and span_shifted == [span[0] + 10, span[1] + 10]
         and len(cl3["extracted_series"]["value"]) == 28
         and len(steps_fc) == 3
         and len(steps_fc[0]["quantiles"]) == 99
+        and hit / n_ctl >= 0.75
+        and false_flag / n_ctl <= 0.20
+        and clean_fx["innovation_outlier"]["flagged"] is False
+        and clean_fx["latest_anomaly_note"]["value"] is None
+        and noted["latest_anomaly_note"]["operator_note"] == "deploy v2"
+        and noted["latest_anomaly_note"]["source"] == "innovation_detector"
+        and noted["innovation_outlier"]["flagged"] is True
     )
     gates.append({
         "name": "G7_clairic_messy_intake_and_spans",
         "pass": passed_g7,
         "detail": (
-            "note=%r span=%r slice_match=%s n_extracted=%d steps=%d quantiles_len=%d | %s"
-            % (note_ans["value"], span, extracted_slice == note_ans["value"],
+            "steady_blind_match=%s note=%r span=%r slice=%r(row value %r) n_extracted=%d steps=%d quantiles_len=%d | "
+            "controls n=%d: spike detected at row 25 %d/%d, spike-free false flags %d/%d (clean fixture flagged=%s) | %s"
+            % (steady_ans["latest_anomaly_note"]["value"] == note_ans["value"], note_ans["value"], span, extracted_slice, row_value_text,
                len(cl3["extracted_series"]["value"]), len(steps_fc), len(steps_fc[0]["quantiles"]),
+               n_ctl, hit, n_ctl, false_flag, n_ctl, clean_fx["innovation_outlier"]["flagged"],
                "PASS" if passed_g7 else "FAIL")
         ),
     })
-
     # G8 -- Clef fail-closed gate & /api/jev/map/outcomes pre-registration invariant
     # Verify commercial_mode=True on 3.0 fallback forces needs_approval even if caller overrides Clef to 'act'
     fx2_comm = dict(fx2)
@@ -1353,7 +1573,18 @@ def run_selftest(fixtures=None):
         "failing_gates": failing,
         "unverified_gates": unverified,
     }
-    return {"instrument": INSTRUMENT_VERSION, "summary": summary, "gates": gates}
+    in_sync = {}
+    for name, builder in FIXTURE_BUILDERS.items():
+        if fx_used[name]:
+            in_sync[name] = (json.loads(json.dumps(fixtures[name], sort_keys=True))
+                             == json.loads(json.dumps(builder(), sort_keys=True)))
+    return {
+        "instrument": INSTRUMENT_VERSION,
+        "summary": summary,
+        "gates": gates,
+        "fixtures_source": {name: ("supplied" if fx_used[name] else "generated") for name in FIXTURE_BUILDERS},
+        "fixtures_in_sync": in_sync,
+    }
 
 
 def main():
@@ -1361,6 +1592,9 @@ def main():
     ap.add_argument("--selftest", action="store_true", help="Run pre-registered falsification gates G1..G8")
     ap.add_argument("--run", action="store_true", help="Read JSON payload from stdin and run 3-stage pipeline")
     ap.add_argument("--write-fixtures", default=None, help="Write pinned deterministic fixtures JSON to path")
+    ap.add_argument("--fixtures", default=None, metavar="PATH",
+                    help="With --selftest: use the fixtures in this JSON file (as written by --write-fixtures) "
+                         "instead of regenerating them")
     args = ap.parse_args()
 
     if args.write_fixtures:
@@ -1376,7 +1610,12 @@ def main():
         return 0
 
     if args.selftest:
-        report = run_selftest()
+        fixtures = None
+        if args.fixtures:
+            with open(args.fixtures, encoding="utf-8") as fh:
+                loaded = json.load(fh)
+            fixtures = loaded.get("fixtures", loaded)
+        report = run_selftest(fixtures=fixtures)
         print(json.dumps(report, indent=2, sort_keys=True))
         return 0 if report["summary"]["ok"] else 1
 

@@ -282,3 +282,11 @@ selftest passes 61/61 with identical values on both environments.
 Scope: measurement-path platform stability only — same class of change as
 AM-2/AM-4 (seed/canonicalization discipline); no band moved, no criterion
 weakened.
+
+## AM-9 — Series counting statistic aligned across languages; row 6 re-anchored (POST-first-clean-run, 2026-11-16, SP-1)
+
+**Finding (tools review, SP-1).** `spectral_standard.py` counted `N_r = #{j <= r : x_j <= x_r}` in given order, while the deployed JS port (`jev-spectral-math.js` `seriesCountingExponent`) uses `N = r`. The two agree on every sorted spectrum (for an ascending series both equal `r`, difference <= 4.4e-16) and disagree on a permuted one: on the L5 spectrum with permutation seed 12345 Python read alpha 0.8895 (r2 0.585) and JS read 0.1342 (r2 0.037). The running count grows ~linearly with `r` on a random permutation, so it kept the slope near the sorted value and the `|d alpha| >= 0.5` criterion could not hold; the gold #6 check passed only through its `r2 < 0.98` disjunct, which the real sorted L5 spectrum (r2 0.960) also satisfies.
+
+**Decision.** The Python source of record now uses `N_r = r` (position index paired with `x_r`), which is the eigenvalue counting function `N(lambda_r) = r` for a sorted spectrum and the same statistic as the JS port. Window, ladder, r2 gate, the permutation method, `PERM_MIN_GAP = 0.5` and every gold band are unchanged. Gold #6 in `spectral_standard.py` now asserts `|alpha_null - alpha_real| >= 0.5` directly (measured 0.6123). `test_parity_spectral.test.js` runs both languages on the same sorted and permuted inputs (cross-language section).
+
+**Anchor re-derivation.** Only `row6-permutation-null.per_seed` moved, as the same harness code recomputes it through the aligned module (alpha_sorted 0.7465626167466909 and r2_sorted unchanged): seed 42 alpha_perm 0.009216, gap 0.737; seed 2026 alpha_perm 1.593340, gap 0.847; seed 99 alpha_perm -0.033665, gap 0.780. All three permutations now collapse by >= 0.5 in alpha (the old anchors had gaps 0.157, 2.085, 0.083, i.e. two of three collapsed only through the r2 disjunct). No band moved, no criterion weakened.

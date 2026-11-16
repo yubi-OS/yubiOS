@@ -8,7 +8,8 @@ Nothing was pushed to any repo; all artifacts live in `session/subagent/lane-d-c
 
 1. **Gold renders, source of record** — repo tarball (main) fetched; `gen_v2.py`
    re-run locally: **selftest 30/30 PASS** against `anchors.json` before any
-   rendering. 11 renders at 512x512 (PGMs in `renders/`, sha256s pinned):
+   rendering. 12 renders at 512x512 (PGMs in `renders/`; per-render sha256s pinned in
+   `route-requests.jsonl.gz`, computed over the raw pixel payload, not the .pgm file):
    gasket-v2-L384, tri, shuffle x5 pinned seeds, pumpkin_ring, pumpkin_field,
    plus three warped gaskets via the pinned arrangement-arm forward map
    (`ASTIG_KAPPA=0.5`, `TREFOIL_ZOOM_K=460`): astig-0.20, trefoil-1e-4,
@@ -131,8 +132,9 @@ R10 expected-gate amendment with a-priori justification; scorer schema probe)
 
 - `router-preregistration.md`, `scorer-preregistration.md`, `amendments-log.md`
 - `router-corpus-results.json`, `scorer-slice-results.json`
-- `renders/*.pgm` (11 source-of-record renders), `route_requests.jsonl`
-- `yubiOS-main/` (extracted repo sources used: gen_v2.py, edge_standard.py,
+- `renders/*.pgm` (12 source-of-record renders), `route-requests.jsonl.gz` (the 12 request
+  bodies and their sha256 over the raw pixel payload)
+- `yubiOS-main/` (NOT committed here; extracted repo sources used: gen_v2.py, edge_standard.py,
   jev-router.js, lens_standard.py, anchors.json, falsification SKILL.md, refs doc)
 
 
@@ -141,8 +143,10 @@ R10 expected-gate amendment with a-priori justification; scorer schema probe)
 - 62 docs + 3 determinism re-scores through live POST /api/jev/corpus/scorer/score
   (scorer-v2.2, deployed etag c910118b). Cost ~$0.013 (65 calls, consumed=0).
 - RECALL 33/56 planted rows at the 0.75 floor. Per-axis: calibration 6/6, recursion
-  3/3, adjacent 4/4, mode 4/4 PASS; audience 0/4 (1 evidence line on 2/4/6-item
-  sections), inputs 1/6, knowledge_sources 1/4, outputs 3/6, composition 2/3 FAIL.
+  3/3, adjacent 4/4 PASS; mode 3/4, assumption_set 4/5, lifecycle 4/5, failure_modes
+  3/5 partial; audience 0/4 (1 evidence line on 2/4/6-item sections), inputs 1/6,
+  knowledge_sources 1/4, outputs 3/6, composition 1/4 FAIL (per-axis tallies recounted from
+  `gates.json` / `scorer-full-results.json`; they sum to the 33/56 above).
   Heading-only reproves cleanly in one direction: H-outputs (6 lines), H-assumption_set
   (4), H-calibration (4) all pass while full-section F-inputs-4 found only 2 of 4.
 - COLLATERAL 65 non-planted flips (pre-registered F3 gate FAIL): cross-axis vocabulary

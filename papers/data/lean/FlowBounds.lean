@@ -1,6 +1,3 @@
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
-
 /-
   FlowBounds.lean
   Exact identities behind the flow-of-work instrument (flow/1) of the
@@ -8,9 +5,10 @@ import Mathlib.Tactic.Linarith
   a potential that bounds every run, and the backlog recursion used for the
   queue readouts.
 
-  Core Lean 4 only (pinned toolchain: leanprover/lean4:v4.33.0).
-  No mathlib, no Batteries, no external import, no `sorry`,
-  no placeholder / axiom-only declaration.
+  Pinned toolchain: leanprover/lean4:v4.35.0 (Mathlib v4.35.0 tactics available
+  in lakefile.toml; core Lean 4.35.0 proofs re-checked with leanchecker --fresh;
+  statements and axiom set unchanged; also checks in core Lean 4.33.0 at main 2efa6131).
+  No `sorry`, no placeholder / axiom-only declaration.
 
   Companion scope manifest: papers/data/lean/flow-scope.json
   Axiom gate:               papers/data/lean/verify_wayfinder_axioms.py

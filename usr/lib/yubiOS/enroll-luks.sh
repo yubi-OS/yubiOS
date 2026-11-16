@@ -1,176 +1,204 @@
 #!/bin/bash
-# SPDX-License-Identifier: LGPL-2.1-or-later
-# yubiOS LUKS2 disk encryption + A/B (/usr A + /usr B + 3-way /etc merge over /)
-# enrollment via YubiKey FIDO2.
+# SPDX-License-Identifier: GPL-2.0-only
+# yubiOS Disk Encryption Enrollment (systemd-cryptenroll --fido2-device=auto)
 #
-# Protocol: FIDO2 HMAC-secret extension via /dev/hidraw*
-# Before enrolling the YubiKey FIDO2 credential, if the disk does not yet have
-# the DPS A/B (/usr A + /usr B) + LUKS2 root (LABEL=yubiOS-luks) layout, this
-# script provisions:
-#   - yubiOS_usr_a (DPS /usr A slot, read-only verity-capable ext4)
-#   - yubiOS_usr_b (DPS /usr B slot, standby A/B slot)
-#   - yubiOS-luks  (DPS root LUKS2 container generated with an on-device key per
-#     ADR-012, initialized with the 3-way /etc + /var merge tree over /)
-# Then enrolls an offline recovery key + the YubiKey FIDO2 credential (PIN + touch),
-# wipes the temporary bootstrap keyslot, and configures /etc/crypttab + dracut so
-# every subsequent boot prompts for the YubiKey FIDO2 token in initramfs.
-#
-# Source: https://www.freedesktop.org/software/systemd/man/latest/systemd-cryptenroll.html
-# Source: https://0pointer.net/blog/fitting-everything-together.html
+# Architecture (ADR-003, ADR-012):
+#   - Creates a single LUKS2 partition (yubiOS-luks) sized to 100% of the
+#     remaining free space on the boot disk after the composefs partition (p2).
+#   - Inside the LUKS2 volume (/dev/mapper/yubios-root), initializes an LVM2
+#     Volume Group (yubios) containing:
+#       * usr_a : 1%VG  (ext4 + fs-verity, /usr slot A 3-way overlay backing)
+#       * usr_b : 1%VG  (ext4 + fs-verity, /usr slot B 3-way overlay backing)
+#       * homed : 96%VG (btrfs, mounted at /var/home for systemd-homed)
+#       * 2%VG  : left unallocated/empty at the end of the VG
+#   - Enrolls an offline recovery key plus the owner's YubiKey FIDO2 token.
 
 set -euo pipefail
-# shellcheck source=lib.sh
-source /usr/lib/yubiOS/lib.sh
 
-FIDO2_DEV=$(detect_fido2_device)
-yubiOS_log "Using FIDO2 device: $FIDO2_DEV"
+if [ "${EUID:-$(id -u)}" -ne 0 ]; then
+  echo "[yubiOS] ERROR: Must run as root (use: sudo yubiOS-enroll-luks)" >&2
+  exit 1
+fi
 
-part_dev() {
-  local disk="$1"
-  local num="$2"
-  case "$disk" in
-    *[0-9]) printf '%sp%s' "$disk" "$num" ;;
-    *)      printf '%s%s'  "$disk" "$num" ;;
-  esac
-}
-
-detect_boot_disk() {
-  local src disk mnt
-  for mnt in /sysroot /boot /; do
-    src="$(findmnt -n -o SOURCE "$mnt" 2>/dev/null | head -n1 || true)"
-    if [[ "$src" == /dev/* ]]; then
-      disk="$(lsblk -no PKNAME "$src" 2>/dev/null | head -n1 || true)"
-      if [[ -n "$disk" && -b "/dev/$disk" ]]; then
-        echo "/dev/$disk"
-        return 0
-      fi
+find_fido2_hidraw() {
+  local dev vid
+  for dev in /sys/class/hidraw/hidraw*; do
+    [ -e "$dev" ] || continue
+    if grep -qi "1050" "$dev/device/uevent" 2>/dev/null; then
+      echo "/dev/$(basename "$dev")"
+      return 0
+    fi
+    vid="$(cat "$dev/device/../../idVendor" 2>/dev/null || true)"
+    if [ "$vid" = "1050" ]; then
+      echo "/dev/$(basename "$dev")"
+      return 0
     fi
   done
   return 1
 }
 
-provision_ab_luks_layout() {
-  local disk arch usr_type root_type last_part p_usra p_usrb p_luks
-  disk="$(detect_boot_disk || true)"
-  [[ -n "$disk" && -b "$disk" ]] || yubiOS_die "Cannot determine backing boot disk to create A/B + LUKS2 partitions."
+echo "[yubiOS] Waiting for YubiKey FIDO2 interface..."
+for _ in $(seq 1 30); do
+  if FIDO2_DEV="$(find_fido2_hidraw)"; then
+    break
+  fi
+  sleep 1
+done
 
-  arch="$(uname -m)"
-  if [[ "$arch" == "aarch64" ]]; then
-    usr_type="b0e01050-ee5f-4390-949a-9101b17104e9"
-    root_type="b921b045-1df0-41c3-af44-4c6f280d3fae"
+if [ -z "${FIDO2_DEV:-}" ]; then
+  if fido2-token -L 2>/dev/null | grep -q .; then
+    FIDO2_DEV="auto"
   else
-    usr_type="8484680c-9521-48c6-9c11-b0720656f69e"
-    root_type="4f68bce3-e8cd-4db1-96e7-fbcaf984b709"
+    echo "[yubiOS] ERROR: No YubiKey FIDO2 hidraw device detected." >&2
+    exit 1
+  fi
+fi
+echo "[yubiOS] Using FIDO2 device: $FIDO2_DEV"
+
+part_dev() {
+  local disk="$1" pnum="$2"
+  case "$disk" in
+    *[0-9]) echo "${disk}p${pnum}" ;;
+    *)      echo "${disk}${pnum}" ;;
+  esac
+}
+
+ensure_luks_partition() {
+  local existing
+  existing="$(blkid -t TYPE=crypto_LUKS -o device 2>/dev/null | head -n1 || true)"
+  if [ -n "$existing" ]; then
+    if [ ! -e /dev/mapper/yubios-root ] && [ -f /run/yubiOS/luks-bootstrap.key ]; then
+      cryptsetup open --key-file=/run/yubiOS/luks-bootstrap.key "$existing" yubios-root >&2 2>/dev/null || true
+    fi
+    lvm vgchange -ay yubios >&2 2>/dev/null || true
+    echo "$existing"
+    return 0
   fi
 
-  yubiOS_log "Provisioning DPS A/B (/usr A + /usr B) + LUKS2 root partitions on $disk..."
-  last_part="$(lsblk -ln -o NAME "$disk" | wc -l)"
-  p_usra="$(part_dev "$disk" "$last_part")"
-  p_usrb="$(part_dev "$disk" "$((last_part + 1))")"
-  p_luks="$(part_dev "$disk" "$((last_part + 2))")"
+  local root_src disk root_type p_luks keyfile
+  root_src="$(findmnt -n -o SOURCE /sysroot 2>/dev/null || findmnt -n -o SOURCE /var 2>/dev/null || findmnt -n -o SOURCE / 2>/dev/null || true)"
+  disk=""
+  if [ -n "$root_src" ] && [ -b "$root_src" ]; then
+    disk="$(lsblk -no PKNAME "$root_src" 2>/dev/null | head -n1 || true)"
+    [ -n "$disk" ] && disk="/dev/$disk"
+  fi
+  if [ -z "$disk" ] || [ ! -b "$disk" ]; then
+    for cand in /dev/mmcblk1 /dev/mmcblk0 /dev/vda /dev/nvme0n1 /dev/sda; do
+      if [ -b "$cand" ]; then
+        disk="$cand"
+        break
+      fi
+    done
+  fi
+  if [ -z "$disk" ] || [ ! -b "$disk" ]; then
+    echo "[yubiOS] ERROR: Cannot determine backing disk for LUKS2 + LVM provisioning." >&2
+    exit 1
+  fi
 
-  printf "size=4G, type=%s, name=\"yubiOS_usr_a\"\nsize=4G, type=%s, name=\"yubiOS_usr_b\"\nsize=16G, type=%s, name=\"yubiOS-luks\"\n" "$usr_type" "$usr_type" "$root_type" | sfdisk --append --force "$disk"
-  partprobe "$disk" 2>/dev/null || partx --update "$disk" 2>/dev/null || true
-  udevadm settle
-  sleep 2
+  case "$(uname -m)" in
+    aarch64)
+      root_type="b921b045-1df0-41c3-af44-4c6f280d3fae"
+      ;;
+    *)
+      root_type="4f68bce3-e8cd-4db1-96e7-fbcaf984b709"
+      ;;
+  esac
 
-  [[ -b "$p_usra" && -b "$p_usrb" && -b "$p_luks" ]] || yubiOS_die "New partitions ($p_usra, $p_usrb, $p_luks) did not appear on $disk."
+  p_luks="$(part_dev "$disk" 3)"
 
-  yubiOS_log "Formatting /usr A ($p_usra) and /usr B ($p_usrb) with fs-verity support..."
-  mkfs.ext4 -F -q -O verity,^has_journal -L yubiOS_usr_a "$p_usra"
-  mkfs.ext4 -F -q -O verity,^has_journal -L yubiOS_usr_b "$p_usrb"
+  if [ ! -b "$p_luks" ]; then
+    echo "[yubiOS] Creating yubiOS-luks partition ($p_luks) sized to 100% of remaining free space on $disk..." >&2
+    printf 'type=%s, name="yubiOS-luks"\n' "$root_type" | sfdisk --append --force "$disk" >&2 || true
+    partx -u "$disk" >&2 2>/dev/null || partprobe "$disk" >&2 2>/dev/null || true
+    udevadm settle --timeout=10 || true
+  fi
 
-  mkdir -p /run/yubiOS/mnt-usra /run/yubiOS/mnt-usrb
-  mount "$p_usra" /run/yubiOS/mnt-usra
-  mkdir -p /run/yubiOS/mnt-usra/etc
-  cp -a /etc/. /run/yubiOS/mnt-usra/etc/ 2>/dev/null || true
-  umount /run/yubiOS/mnt-usra
-
-  mount "$p_usrb" /run/yubiOS/mnt-usrb
-  mkdir -p /run/yubiOS/mnt-usrb/etc
-  cp -a /etc/. /run/yubiOS/mnt-usrb/etc/ 2>/dev/null || true
-  umount /run/yubiOS/mnt-usrb
+  if [ ! -b "$p_luks" ]; then
+    echo "[yubiOS] ERROR: Failed to create partition $p_luks on $disk" >&2
+    exit 1
+  fi
 
   mkdir -p /run/yubiOS
-  umask 077
-  dd if=/dev/urandom of=/run/yubiOS/luks-bootstrap.key bs=64 count=1 status=none
+  keyfile="/run/yubiOS/luks-bootstrap.key"
+  dd if=/dev/urandom of="$keyfile" bs=64 count=1 status=none
+  chmod 0400 "$keyfile"
 
-  yubiOS_log "Formatting $p_luks as LUKS2 (on-device key generation per ADR-012)..."
-  cryptsetup luksFormat --batch-mode --type luks2 --label yubiOS-luks "$p_luks" /run/yubiOS/luks-bootstrap.key
-  cryptsetup open --key-file=/run/yubiOS/luks-bootstrap.key "$p_luks" yubios-root
-  mkfs.ext4 -F -q -O verity -L yubiOS-luks-root /dev/mapper/yubios-root
+  echo "[yubiOS] Formatting $p_luks as LUKS2 (on-device key generation per ADR-012)..." >&2
+  cryptsetup luksFormat --batch-mode --type luks2 --label yubiOS-luks "$p_luks" "$keyfile" >&2
+  cryptsetup open --key-file="$keyfile" "$p_luks" yubios-root >&2
 
-  mkdir -p /run/yubiOS/luks-root
-  mount /dev/mapper/yubios-root /run/yubiOS/luks-root
-  mkdir -p /run/yubiOS/luks-root/etc /run/yubiOS/luks-root/var /run/yubiOS/luks-root/var/lib/yubiOS/ab-merge/etc-base /run/yubiOS/luks-root/var/lib/yubiOS/ab-merge/conflicts
-  cp -a /etc/. /run/yubiOS/luks-root/etc/ 2>/dev/null || true
-  cp -a /etc/. /run/yubiOS/luks-root/var/lib/yubiOS/ab-merge/etc-base/ 2>/dev/null || true
-  cp -a /var/. /run/yubiOS/luks-root/var/ 2>/dev/null || true
-  printf 'a\n' > /run/yubiOS/luks-root/var/lib/yubiOS/ab-merge/active-slot
-  umount /run/yubiOS/luks-root
+  echo "[yubiOS] Creating LVM2 volume group 'yubios' inside /dev/mapper/yubios-root..." >&2
+  lvm pvcreate -ff -y /dev/mapper/yubios-root >&2
+  lvm vgcreate -y yubios /dev/mapper/yubios-root >&2
+
+  echo "[yubiOS] Creating LVM logical volumes: usr_a (1%VG), usr_b (1%VG), homed (96%VG), leaving 2%VG empty at end..." >&2
+  lvm lvcreate -y -l 1%VG -n usr_a yubios >&2
+  lvm lvcreate -y -l 1%VG -n usr_b yubios >&2
+  lvm lvcreate -y -l 96%VG -n homed yubios >&2
+  lvm vgchange -ay yubios >&2
+  udevadm settle --timeout=10 || true
+
+  echo "[yubiOS] Formatting /dev/yubios/usr_a and /dev/yubios/usr_b (ext4 + fs-verity)..." >&2
+  mkfs.ext4 -F -O verity,^has_journal -L yubiOS_usr_a /dev/yubios/usr_a >&2
+  mkfs.ext4 -F -O verity,^has_journal -L yubiOS_usr_b /dev/yubios/usr_b >&2
+
+  mkdir -p /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init
+  mount /dev/yubios/usr_a /run/yubiOS/usr-a-init >&2
+  mkdir -p /run/yubiOS/usr-a-init/upper /run/yubiOS/usr-a-init/lower /run/yubiOS/usr-a-init/work
+  umount /run/yubiOS/usr-a-init >&2
+
+  mount /dev/yubios/usr_b /run/yubiOS/usr-b-init >&2
+  mkdir -p /run/yubiOS/usr-b-init/upper /run/yubiOS/usr-b-init/lower /run/yubiOS/usr-b-init/work
+  umount /run/yubiOS/usr-b-init >&2
+  rmdir /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init 2>/dev/null || true
+
+  echo "[yubiOS] Formatting /dev/yubios/homed (btrfs) for systemd-homed..." >&2
+  mkfs.btrfs -f -L yubiOS_homed /dev/yubios/homed >&2
 
   echo "$p_luks"
 }
 
-LUKS_PART="${1:-$(detect_luks2_partition)}"
-if [[ -z "$LUKS_PART" ]]; then
-  provision_ab_luks_layout
-  LUKS_PART="$(detect_luks2_partition)"
+LUKS_DEV="${1:-$(ensure_luks_partition)}"
+echo "[yubiOS] LUKS2 partition: $LUKS_DEV"
+echo ""
+echo "Enrolling YubiKey FIDO2 (PIN + touch) and generating offline recovery key for $LUKS_DEV..."
+read -r -p "Continue with FIDO2 enrollment? [Y/n]: " confirm
+if [[ "${confirm:-Y}" =~ ^[Nn]$ ]]; then
+  echo "Aborted."
+  exit 1
 fi
-[[ -z "$LUKS_PART" ]] && yubiOS_die "No LUKS2 partition found. Pass device path as argument."
-yubiOS_log "LUKS2 partition: $LUKS_PART"
+
+KEYFILE_ARG=()
+if [ -f /run/yubiOS/luks-bootstrap.key ]; then
+  KEYFILE_ARG=(--unlock-key-file=/run/yubiOS/luks-bootstrap.key)
+fi
+
+if ! cryptsetup luksDump "$LUKS_DEV" 2>/dev/null | grep -q "systemd-recovery"; then
+  echo "[yubiOS] Generating offline recovery key (store this offline on paper per ADR-003):"
+  systemd-cryptenroll "${KEYFILE_ARG[@]}" --recovery-key "$LUKS_DEV"
+fi
 
 echo ""
-echo "Enrolling YubiKey FIDO2 (PIN + touch) and generating offline recovery key for $LUKS_PART..."
-read -rp "Continue with FIDO2 enrollment? [Y/n]: " confirm
-[[ "${confirm:-Y}" =~ ^[Nn] ]] && exit 0
+echo "[yubiOS] Enrolling FIDO2 (enter FIDO2 PIN and touch YubiKey when prompted)..."
+systemd-cryptenroll "${KEYFILE_ARG[@]}"   --fido2-device=auto   --fido2-with-client-pin=yes   --fido2-with-user-presence=yes   "$LUKS_DEV"
 
-UNLOCK_ARGS=()
-if [[ -f /run/yubiOS/luks-bootstrap.key ]]; then
-  UNLOCK_ARGS=(--unlock-key-file=/run/yubiOS/luks-bootstrap.key)
-  yubiOS_log "Generating offline recovery key (store this offline on paper per ADR-003):"
-  systemd-cryptenroll "${UNLOCK_ARGS[@]}" --recovery-key "$LUKS_PART" || true
+if [ -f /run/yubiOS/luks-bootstrap.key ]; then
+  systemd-cryptenroll --wipe-slot=0 "$LUKS_DEV" 2>/dev/null || true
+  rm -f /run/yubiOS/luks-bootstrap.key
 fi
 
-yubiOS_log "Enrolling FIDO2 (enter FIDO2 PIN and touch YubiKey when prompted)..."
-systemd-cryptenroll \
-  "${UNLOCK_ARGS[@]}" \
-  --fido2-device="$FIDO2_DEV" \
-  --fido2-with-client-pin=yes \
-  --fido2-with-user-presence=yes \
-  "$LUKS_PART"
-
-if [[ -f /run/yubiOS/luks-bootstrap.key ]]; then
-  systemd-cryptenroll --wipe-slot=password "$LUKS_PART" 2>/dev/null || true
-  shred -u /run/yubiOS/luks-bootstrap.key 2>/dev/null || rm -f /run/yubiOS/luks-bootstrap.key
-fi
-
-LUKS_UUID=$(cryptsetup luksUUID "$LUKS_PART")
-CRYPTTAB_LINE="yubios-root UUID=$LUKS_UUID none luks,fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes"
-
-update_crypttab_file() {
-  local f="$1"
-  touch "$f"
-  if grep -q "UUID=$LUKS_UUID" "$f" 2>/dev/null; then
-    sed -i "s|.*UUID=$LUKS_UUID.*|$CRYPTTAB_LINE|" "$f"
-  else
-    echo "$CRYPTTAB_LINE" >> "$f"
-  fi
-}
-
-yubiOS_log "Updating /etc/crypttab for dracut boot-time FIDO2 unlock..."
-update_crypttab_file /etc/crypttab
-if [[ -b /dev/mapper/yubios-root ]]; then
-  mkdir -p /run/yubiOS/luks-root
-  mount /dev/mapper/yubios-root /run/yubiOS/luks-root 2>/dev/null || true
-  if mountpoint -q /run/yubiOS/luks-root 2>/dev/null; then
-    update_crypttab_file /run/yubiOS/luks-root/etc/crypttab
-    umount /run/yubiOS/luks-root 2>/dev/null || true
-  fi
+LUKS_UUID="$(blkid -s UUID -o value "$LUKS_DEV")"
+if [ -n "$LUKS_UUID" ]; then
+  echo "[yubiOS] Updating /etc/crypttab for dracut boot-time FIDO2 unlock..."
+  touch /etc/crypttab
+  sed -i '/^yubios-root[[:space:]]/d' /etc/crypttab
+  echo "yubios-root UUID=${LUKS_UUID} none fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes,discard" >> /etc/crypttab
 fi
 
 /usr/lib/yubiOS/ab-etc-merge.sh || true
 
+mkdir -p /var/lib/yubiOS
+touch /var/lib/yubiOS/.luks-enrolled
 echo ""
-echo "FIDO2 disk encryption and A/B (/usr A + /usr B -> / 3-way merge) enrolled."
+echo "FIDO2 disk encryption and LVM (usr_a 1% + usr_b 1% -> /usr 3-way overlay, homed 96%, 2% empty) enrolled."
 echo "On next boot: dracut will prompt for your FIDO2 PIN and YubiKey touch."

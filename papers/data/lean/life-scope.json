@@ -67,7 +67,7 @@
     {
       "name": "LifeBounds.life_underpop_score",
       "status": "lean-proved",
-      "statement": "(c : Bool) (s : Nat) (h : s \u2264 1) : lifeScore c s \u2264 3",
+      "statement": "(c : Bool) (s : Nat) (h : s ≤ 1) : lifeScore c s ≤ 3",
       "runtime_counterpart": "life_supersolid.step_grid",
       "runtime_predicate": "s <= 1 -> score <= 3 (< 5, cell dies)",
       "statement_sha256": "a679e2b299179a2a9957dab259b992b25a11af0eb7c414a44c4da9a06620c915"
@@ -75,7 +75,7 @@
     {
       "name": "LifeBounds.life_overpop_score",
       "status": "lean-proved",
-      "statement": "(c : Bool) (s : Nat) (h : 4 \u2264 s) : 8 \u2264 lifeScore c s",
+      "statement": "(c : Bool) (s : Nat) (h : 4 ≤ s) : 8 ≤ lifeScore c s",
       "runtime_counterpart": "life_supersolid.step_grid",
       "runtime_predicate": "4 <= s -> score >= 8 (> 7, cell dies)",
       "statement_sha256": "85c58b3ac17385e6800840a56c610d48751dd0c8022903d427ec476ac8d0d22f"
@@ -83,7 +83,7 @@
     {
       "name": "LifeBounds.life_birth_score",
       "status": "lean-proved",
-      "statement": "(s : Nat) : (5 \u2264 lifeScore false s \u2227 lifeScore false s \u2264 7) \u2194 s = 3",
+      "statement": "(s : Nat) : (5 ≤ lifeScore false s ∧ lifeScore false s ≤ 7) ↔ s = 3",
       "runtime_counterpart": "life_supersolid.step_grid",
       "runtime_predicate": "dead cell (c=0) enters [5,7] iff s = 3",
       "statement_sha256": "1d07f7fa75f191e258c41e9043dfde6bf1a91c7cbe4d1a666d39245b386b757f"
@@ -91,7 +91,7 @@
     {
       "name": "LifeBounds.life_survival_score",
       "status": "lean-proved",
-      "statement": "(s : Nat) : (5 \u2264 lifeScore true s \u2227 lifeScore true s \u2264 7) \u2194 (s = 2 \u2228 s = 3)",
+      "statement": "(s : Nat) : (5 ≤ lifeScore true s ∧ lifeScore true s ≤ 7) ↔ (s = 2 ∨ s = 3)",
       "runtime_counterpart": "life_supersolid.step_grid",
       "runtime_predicate": "live cell (c=1) enters [5,7] iff s in {2,3}",
       "statement_sha256": "9ba0b61cdc7a2e314a689e37e950638f609c494734a2cc8d969c2a0c9c16908f"
@@ -137,6 +137,14 @@
       "statement_sha256": "13d005e6b819a05b8848bdfa67c5c21c2f9d5b00858c47dec2254cae118148b7"
     },
     {
+      "name": "LifeBounds.d4_orbits_3x3_exact_102",
+      "status": "lean-proved",
+      "statement": ": ((List.range 512).filter isD4Canon3x3).length = 102",
+      "runtime_counterpart": "harness_life.G_DYN_1_burnside_102_and_ablation",
+      "runtime_predicate": "exhaustive D4 orbit count over all 512 3x3 binary bitmasks is 102",
+      "statement_sha256": "4fbe97ac6fa44594fe0f53a52df0d20609292091273d76c00aeb057338ec2869"
+    },
+    {
       "name": "LifeBounds.vacuum_still_life",
       "status": "lean-proved",
       "statement": ": stepWindow box4 [] = []",
@@ -172,7 +180,7 @@
       "name": "LifeBounds.blinker_step1",
       "status": "lean-proved",
       "statement": ": stepWindow box5 blinkerH = blinkerV",
-      "runtime_counterpart": "harness_life.G_DYN_1_ca_ablation_response",
+      "runtime_counterpart": "harness_life.G_DYN_1_burnside_102_and_ablation",
       "runtime_predicate": "horizontal Blinker -> vertical Blinker in 1 tick",
       "statement_sha256": "62596435d7efbdb564d35750c6a96bb8a2c65cb15eba24c1086f8d5c4edc1eb7"
     },
@@ -180,7 +188,7 @@
       "name": "LifeBounds.blinker_step2",
       "status": "lean-proved",
       "statement": ": stepWindow box5 blinkerV = blinkerH",
-      "runtime_counterpart": "harness_life.G_DYN_1_ca_ablation_response",
+      "runtime_counterpart": "harness_life.G_DYN_1_burnside_102_and_ablation",
       "runtime_predicate": "vertical Blinker -> horizontal Blinker in 1 tick",
       "statement_sha256": "a85af5a3b36f3efd04a08cb31269093fa2965122a2bb204d877f8b01a0bcf1eb"
     },
@@ -201,9 +209,17 @@
       "statement_sha256": "8fa41f764488a2337b9c64803b9cecff4ea856b620df51d0addaca01ab425d54"
     },
     {
+      "name": "LifeBounds.motif_windows_contain_neighborhood",
+      "status": "lean-proved",
+      "statement": ": (windowContainsNeighborhood box4 [] && windowContainsNeighborhood box4 blockGrid && windowContainsNeighborhood box6 beehiveGrid && windowContainsNeighborhood box6 eater1Grid && windowContainsNeighborhood box5 blinkerH && windowContainsNeighborhood box5 blinkerV && windowContainsNeighborhood box6 glider0 && windowContainsNeighborhood box6 (stepN box6 1 glider0) && windowContainsNeighborhood box6 (stepN box6 2 glider0) && windowContainsNeighborhood box6 (stepN box6 3 glider0)) = true",
+      "runtime_counterpart": "life_supersolid.step_grid",
+      "runtime_predicate": "every canonical motif's 1-step Moore neighborhood is contained in its evaluation window",
+      "statement_sha256": "51dbaad84495bd8d1c55777b359e5be7d4c4685c9d1a99108c4d0130fcae8936"
+    },
+    {
       "name": "LifeBounds.mf_binomial_weights",
       "status": "lean-proved",
-      "statement": ": 56 + 28 = 84 \u2227 56 = 2 * 28",
+      "statement": ": 56 + 28 = 84 ∧ 56 = 2 * 28",
       "runtime_counterpart": "life_supersolid.step_grid",
       "runtime_predicate": "Moore binomial weights C(8,3)=56, C(8,2)=28",
       "statement_sha256": "3f9c71b8dfa6536556636f9db0784279d7f060e18855b967d8543dd5f6b1c498"
@@ -235,7 +251,7 @@
     {
       "name": "LifeBounds.mf_fixed_point_brackets",
       "status": "lean-proved",
-      "statement": ": (mfNum 190 1000 < 190 * (1000 ^ 8) \u2227 200 * (1000 ^ 8) < mfNum 200 1000) \u2227 (370 * (1000 ^ 8) < mfNum 370 1000 \u2227 mfNum 371 1000 < 371 * (1000 ^ 8))",
+      "statement": ": (mfNum 190 1000 < 190 * (1000 ^ 8) ∧ 200 * (1000 ^ 8) < mfNum 200 1000) ∧ (370 * (1000 ^ 8) < mfNum 370 1000 ∧ mfNum 371 1000 < 371 * (1000 ^ 8))",
       "runtime_counterpart": "life_supersolid.step_grid",
       "runtime_predicate": "rational brackets for unstable (~0.193) and stable (~0.370) roots",
       "statement_sha256": "67081acc29945f2f1d62093d51f2f2afb6984cbd841ee9157f0e3d1d9a2fce35"
@@ -259,7 +275,7 @@
     {
       "name": "LifeBounds.gun_emission_hierarchy",
       "status": "lean-proved",
-      "statement": "(n : Nat) : 7 * n \u2264 14 * n \u2227 14 * n \u2264 15 * n",
+      "statement": "(n : Nat) : 7 * n ≤ 14 * n ∧ 14 * n ≤ 15 * n",
       "runtime_counterpart": "life_supersolid.build_life_pattern_corpus",
       "runtime_predicate": "period-30 vs period-15 vs period-14 emission counts",
       "statement_sha256": "e3f25e3859699f8e2555b69f22ed4fc780f6f269c89b8b2f0bf20e0e5b986616"
@@ -275,7 +291,7 @@
     {
       "name": "LifeBounds.otca_metapixel_scale",
       "status": "lean-proved",
-      "statement": ": hlSide 11 = 2048 \u2227 35328 = (2 ^ 9) * 69",
+      "statement": ": hlSide 11 = 2048 ∧ 35328 = (2 ^ 9) * 69",
       "runtime_counterpart": "life_supersolid.sierpinski_centers",
       "runtime_predicate": "2^11 = 2048 metapixel scale",
       "statement_sha256": "64845ed732dba93b387cc4ccd4ef63afe049851803495d48156be7a051c3e5f8"
@@ -299,7 +315,7 @@
     {
       "name": "LifeBounds.supersolid_leggett_strict_of_modulated",
       "status": "lean-proved",
-      "statement": "(r1 r2 : Int) (h : r1 \u2260 r2) : 4 * (r1 * r2) < (r1 + r2) * (r1 + r2)",
+      "statement": "(r1 r2 : Int) (h : r1 ≠ r2) : 4 * (r1 * r2) < (r1 + r2) * (r1 + r2)",
       "runtime_counterpart": "life_supersolid.measure_supersolid_crystal / G_SCI_2",
       "runtime_predicate": "r1 != r2 -> 4*r1*r2 < (r1+r2)^2 (f_s < 1)",
       "statement_sha256": "4aafa82ac2c453539c513699651207a9af64189ce5902ca864fd0612bce2dd8d"
@@ -307,7 +323,7 @@
     {
       "name": "LifeBounds.multiaxis_cardinal_from_lightcone",
       "status": "lean-proved",
-      "statement": "(dx dy : Int) : diagU dx dy + diagV dx dy = 2 * dx \u2227 diagU dx dy - diagV dx dy = 2 * dy",
+      "statement": "(dx dy : Int) : diagU dx dy + diagV dx dy = 2 * dx ∧ diagU dx dy - diagV dx dy = 2 * dy",
       "runtime_counterpart": "life_supersolid.measure_glider_transmission",
       "runtime_predicate": "u + v = 2*dx and u - v = 2*dy D4 coordinate inversion",
       "statement_sha256": "098a37d24cb0812b0bb76ddf6c54ced4541d185b75c20b699ea863d997e19fcb"
@@ -323,7 +339,7 @@
     {
       "name": "LifeBounds.optics_neff_mono",
       "status": "lean-proved",
-      "statement": "(L dt1 dt2 : Nat) (h : dt1 \u2264 dt2) : 4 * L \u2264 scaledNeff L dt1 \u2227 scaledNeff L dt1 \u2264 scaledNeff L dt2",
+      "statement": "(L dt1 dt2 : Nat) (h : dt1 ≤ dt2) : 4 * L ≤ scaledNeff L dt1 ∧ scaledNeff L dt1 ≤ scaledNeff L dt2",
       "runtime_counterpart": "life_supersolid.measure_glider_transmission",
       "runtime_predicate": "4*L <= 4*L + dt1 <= 4*L + dt2 refractive index monotonicity",
       "statement_sha256": "67ef2c35f40a530f54e015693638aca9444808ca4deac6368dbad429f2edcc91"
@@ -339,7 +355,7 @@
     {
       "name": "LifeBounds.cognitive_modularity_collapse",
       "status": "lean-proved",
-      "statement": "(M amin A : Nat) (h1 : M * amin \u2264 A) (h2 : A < 2 * amin) : M \u2264 1",
+      "statement": "(M amin A : Nat) (h1 : M * amin ≤ A) (h2 : A < 2 * amin) : M ≤ 1",
       "runtime_counterpart": "harness_life.G_SCI_5_area_compression_modularity_collapse",
       "runtime_predicate": "M*a_min <= A and A < 2*a_min -> M <= 1",
       "statement_sha256": "fd0e949903388334d216f9cacc0efd908e63f03e297d7f4b985c9ca3ade549de"
@@ -347,7 +363,7 @@
     {
       "name": "LifeBounds.teleological_mdl_penalty",
       "status": "lean-proved",
-      "statement": "(kx0 kb t1 t2 d1 d2 : Int) (ht : t1 \u2264 t2) (hd : d1 \u2264 d2) : purposeScore kx0 kb t2 d2 \u2264 purposeScore kx0 kb t1 d1 \u2227 purposeScore kx0 kb 0 0 = kx0 - kb",
+      "statement": "(kx0 kb t1 t2 d1 d2 : Int) (ht : t1 ≤ t2) (hd : d1 ≤ d2) : purposeScore kx0 kb t2 d2 ≤ purposeScore kx0 kb t1 d1 ∧ purposeScore kx0 kb 0 0 = kx0 - kb",
       "runtime_counterpart": "life_supersolid.measure_modularity",
       "runtime_predicate": "MDL purpose score decreases in transient and debris",
       "statement_sha256": "ca1a07cd4824dafd9360130a946408f7c036f2228e16614e0f5fd9bc6cc6548a"
@@ -370,9 +386,7 @@
     }
   ],
   "nonclaims": [
-    "Finite integer and boolean identities only: nothing here proves continuum PDE existence (eGPE, Lenia), quantum phase coherence, or infinite-grid percolation limits.",
-    "The mean-field polynomial identities certify exact algebraic factorization and rational sign-change brackets at d=1000, not spatial correlation decay on Z^2.",
-    "The supersolid Leggett bound, discrete optical refractive index, and cognitive MDL / modularity theorems certify the mathematical inequalities of the mapped models, not empirical physical or psychological measurements."
+    "Finite integer and boolean identities only: nothing here proves continuum PDE existence (eGPE, Lenia), quantum phase coherence, infinite-grid percolation limits, or empirical physical/psychological measurements."
   ],
   "statement_pinning": {
     "schema": "statement-pins/1",
@@ -386,8 +400,8 @@
     "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
     "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
     "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
-    "hash": "211dc9a93756179d3e25b97ff445092848ecfb6234ed1e880bcc73a407a41e2e",
-    "count": 136,
+    "hash": "644d25173a06f76f43094e3f242eb083e656c43899cfb9ec0359f52acdc548ae",
+    "count": 144,
     "decls": {
       "#print:axioms": "37a40ced343c886b5eb8ee020f7952ab3ed5448f8609b7845faca7ee3f88bcb6",
       "#print:axioms#10": "a2b41941543c4dd7817cae9772b1302a90ba8b2abd795aead3388a7c9518f1d1",
@@ -396,38 +410,40 @@
       "#print:axioms#13": "7994f50f9ea644b8514e8eb5241d0b235969acb5eaf9f7de834bb6bed0b2fb18",
       "#print:axioms#14": "af69f48669c4517598f96e79c6c39b07cfd63b087b9a4f24e1bb036736e8e40d",
       "#print:axioms#15": "e5c43e42a0dec0a49a2129cc2cf12d2017fe51856cf58f9702b888cd78cbeb34",
-      "#print:axioms#16": "95109333d8a4983b58abc8a6fc5b9840695a5870c4c9130a6ee0d5ab99a0dbe7",
-      "#print:axioms#17": "dde2258676a217a482ad1e60b25f8f78361bda48872043b50f9540849ec88912",
-      "#print:axioms#18": "3c287fa3181809d2a9b4ac1fc8722b923da8f88619a30caf9b5ff5c722de8cba",
-      "#print:axioms#19": "303d8b18b8ca0f7ae6bae166eb1b1fda10d491f0f30c484721f82a41d6d97d17",
+      "#print:axioms#16": "66e389507f6dff2efdcccf4a1d07ef99ac7dc84e63c94108193ec29e902627dc",
+      "#print:axioms#17": "95109333d8a4983b58abc8a6fc5b9840695a5870c4c9130a6ee0d5ab99a0dbe7",
+      "#print:axioms#18": "dde2258676a217a482ad1e60b25f8f78361bda48872043b50f9540849ec88912",
+      "#print:axioms#19": "3c287fa3181809d2a9b4ac1fc8722b923da8f88619a30caf9b5ff5c722de8cba",
       "#print:axioms#2": "9110270c6134e8198da5e1c755066c6f6cc7a2ddc2088782babfd1d5cd160c8e",
-      "#print:axioms#20": "dcd7e8d921125a62683cfcd73f2bd070fcae0fce459652afb311631b0d5d139a",
-      "#print:axioms#21": "99a2dc362af9ce210232b7e5f2a3ce00ce0c3c37e5cbdbba2d3242449efed05a",
-      "#print:axioms#22": "27d0e15e607de10af01709fa934c3bc18ef22105247df2166609eaf3bd9d6c39",
-      "#print:axioms#23": "133a7231c695e1f2b607fa5a156b2a3e7746647c74ba33c1ac7481ed067f0261",
-      "#print:axioms#24": "b0017aa08e880a9eeb12ffb4e116daaa51dc2072f884ccdf8dbb7e0eaf91ea99",
-      "#print:axioms#25": "445d6315c846e39700a01cb18fe83fb50e15b19c5798c0c7156c58ea76809a4e",
-      "#print:axioms#26": "36ca5e19d401b2281951d4e816daf7325dd3382c3b77012ebb09abb4e445c0e4",
-      "#print:axioms#27": "8ac844bc4b8249438457ace46d29e423897e69464b695e393a9ee24f4549a064",
-      "#print:axioms#28": "864f136db0720e9ee1a7d379a0bf3ab6f7313a8003e9057d4f486050eb3893ca",
-      "#print:axioms#29": "259c3f9bbf8b901e7da147d620cd9a3b46d297bd0740967289d255b6cc8cf51b",
+      "#print:axioms#20": "303d8b18b8ca0f7ae6bae166eb1b1fda10d491f0f30c484721f82a41d6d97d17",
+      "#print:axioms#21": "dcd7e8d921125a62683cfcd73f2bd070fcae0fce459652afb311631b0d5d139a",
+      "#print:axioms#22": "99a2dc362af9ce210232b7e5f2a3ce00ce0c3c37e5cbdbba2d3242449efed05a",
+      "#print:axioms#23": "27d0e15e607de10af01709fa934c3bc18ef22105247df2166609eaf3bd9d6c39",
+      "#print:axioms#24": "133a7231c695e1f2b607fa5a156b2a3e7746647c74ba33c1ac7481ed067f0261",
+      "#print:axioms#25": "7b0780b499bb5ea5c43e3e18ba2b639542358fa070b06a47ee862fe8cbcc3183",
+      "#print:axioms#26": "b0017aa08e880a9eeb12ffb4e116daaa51dc2072f884ccdf8dbb7e0eaf91ea99",
+      "#print:axioms#27": "445d6315c846e39700a01cb18fe83fb50e15b19c5798c0c7156c58ea76809a4e",
+      "#print:axioms#28": "36ca5e19d401b2281951d4e816daf7325dd3382c3b77012ebb09abb4e445c0e4",
+      "#print:axioms#29": "8ac844bc4b8249438457ace46d29e423897e69464b695e393a9ee24f4549a064",
       "#print:axioms#3": "4d51cc88ade8739c5c0b7e9e5d6ccd6084f71a8cb7e81e99cbf3f1bbcd2fae69",
-      "#print:axioms#30": "e1f3420f614950040c87199d9ec069ec3c10efcca4ca7e619182a30e73d02369",
-      "#print:axioms#31": "758756603f7cac6dbe039dc326be91add6d26ef214c6d4d71fcf77bb3656e2ee",
-      "#print:axioms#32": "9b2b0b661f28284ddb533b05ecfd9f9852ae05aab0a85304c649e445f38e72c9",
-      "#print:axioms#33": "87d638870c95836e221ac65168f5a65127562ea4e6c66dbd2d66e22c5315397d",
-      "#print:axioms#34": "0c7585055425013755c4175e2b4fc06405f9aed3449c13adb35032a03b843369",
-      "#print:axioms#35": "825c29d0e1259001d498e7501d6a4150539f0301a2ee8f092eaaf0737e9dc920",
-      "#print:axioms#36": "fb969be1909464f4af72f6882284fb1f8d902264408f2c37a9cb88f979db1dad",
-      "#print:axioms#37": "3ee68b6aec383391b4e01c93fb9f4a9b03b9820e3fb64c03892b522750d699cf",
-      "#print:axioms#38": "681ac1fe75bd5caf4079c07830a3fb8a55e1f7752e564cd60d6e08675efc2d3b",
-      "#print:axioms#39": "28741c267695d120c5f0624cbfb36d7b78c1f911c641e2ded76564f0d7ab7363",
+      "#print:axioms#30": "864f136db0720e9ee1a7d379a0bf3ab6f7313a8003e9057d4f486050eb3893ca",
+      "#print:axioms#31": "259c3f9bbf8b901e7da147d620cd9a3b46d297bd0740967289d255b6cc8cf51b",
+      "#print:axioms#32": "e1f3420f614950040c87199d9ec069ec3c10efcca4ca7e619182a30e73d02369",
+      "#print:axioms#33": "758756603f7cac6dbe039dc326be91add6d26ef214c6d4d71fcf77bb3656e2ee",
+      "#print:axioms#34": "9b2b0b661f28284ddb533b05ecfd9f9852ae05aab0a85304c649e445f38e72c9",
+      "#print:axioms#35": "87d638870c95836e221ac65168f5a65127562ea4e6c66dbd2d66e22c5315397d",
+      "#print:axioms#36": "0c7585055425013755c4175e2b4fc06405f9aed3449c13adb35032a03b843369",
+      "#print:axioms#37": "825c29d0e1259001d498e7501d6a4150539f0301a2ee8f092eaaf0737e9dc920",
+      "#print:axioms#38": "fb969be1909464f4af72f6882284fb1f8d902264408f2c37a9cb88f979db1dad",
+      "#print:axioms#39": "3ee68b6aec383391b4e01c93fb9f4a9b03b9820e3fb64c03892b522750d699cf",
       "#print:axioms#4": "517c211cad74050e18db7eb62a0b438a4308ec5675ead7f7a922113406f58fca",
-      "#print:axioms#40": "deb6f23c2f876ae0d226a7c8fc9aac21d6bf24dbb27a5c7ea8078cefa86b02aa",
-      "#print:axioms#41": "6f6e677eddc34a62c50436e0ded8758d09d660ceab7dffae2c0bb64db95a0727",
-      "#print:axioms#42": "1441e7d1d208fe2dcc9e9dc31dea69a1c4294659b10404ccf44f6c88f2e26aa9",
-      "#print:axioms#43": "52944505372f3b07ab3eeb1fb3cff23b09653904f363977c28ee7d7d49f2405d",
-      "#print:axioms#44": "ee6d1d7051155f22909bc572cab7c241c5ca1bfc75007bfd489d8ac5d2fadb46",
+      "#print:axioms#40": "681ac1fe75bd5caf4079c07830a3fb8a55e1f7752e564cd60d6e08675efc2d3b",
+      "#print:axioms#41": "28741c267695d120c5f0624cbfb36d7b78c1f911c641e2ded76564f0d7ab7363",
+      "#print:axioms#42": "deb6f23c2f876ae0d226a7c8fc9aac21d6bf24dbb27a5c7ea8078cefa86b02aa",
+      "#print:axioms#43": "6f6e677eddc34a62c50436e0ded8758d09d660ceab7dffae2c0bb64db95a0727",
+      "#print:axioms#44": "1441e7d1d208fe2dcc9e9dc31dea69a1c4294659b10404ccf44f6c88f2e26aa9",
+      "#print:axioms#45": "52944505372f3b07ab3eeb1fb3cff23b09653904f363977c28ee7d7d49f2405d",
+      "#print:axioms#46": "ee6d1d7051155f22909bc572cab7c241c5ca1bfc75007bfd489d8ac5d2fadb46",
       "#print:axioms#5": "e993c90876637895740501415b1b3063393468efcc96fa01a9392910774dfb01",
       "#print:axioms#6": "831cd2616aaa10b93ceffdc4b01f17f7d1259ee23991b2dea765997f69b129da",
       "#print:axioms#7": "f55110a480aca856bb996ef31ec44258e2d793cabc753a463bcb99e1be2ae398",
@@ -439,12 +455,14 @@
       "def:bboxArea": "910aaf57ef267c38a8c74888a530ad47d08e253c5b411c2c4b8d9655719c343c",
       "def:bboxSide": "ec589fd44da59ab2cd807ff9f8c5a56a2e417b5b1766d173abd6036ca1e12e8b",
       "def:beehiveGrid": "6621e3f2d11437dd1dd648e746ea64af1e8d667d0c830596e86f6111d89ebd91",
+      "def:bitAt": "5ee08eae131d75f194e799cf24a3321b6a008c3c126221cc94955198b0bd536e",
       "def:blinkerH": "7d67477f8c8e9eb303ace20f948d0868029fdc62b249917a6d8f1eb75f673932",
       "def:blinkerV": "bfbe335d842696ea47b4ffba225ed3ca4b396ab86150df84a9af07b2d30f7e13",
       "def:blockGrid": "52c88ac09f81dd8cfb5338cb266e9bd2fa885e5067f775ea8d0500da37043126",
       "def:box4": "3cc314236a2a7ecf541c6d3e98354fa1d4be9330309cf409cefb0c1909e8aa04",
       "def:box5": "3d31e59b9d6417474e9bd79b1450484ea9c532b36d2607fcf072155d975cdfb2",
       "def:box6": "33131a3a79dbf5e722390679232b8646f0873903d5873cb5c889773db0ad85cf",
+      "def:d4Orbit3x3": "2be9ff9142c5fd6e6631f279d2eafe2ba548cedff2c8fb2166433cec023f4e32",
       "def:diagU": "9e40c74b94f1d93e70b25ad7197c22a70b7789feaa830759b485a93d8d968c5a",
       "def:diagV": "420f3e6cac241a539cfc270f0b13c2020521820d2d4c1eb356f8fb12b6262040",
       "def:eater1Grid": "331f2dbd6db8be4a0e49917a81e81716e54311f061db4cecd63aac4abbdb900e",
@@ -453,6 +471,7 @@
       "def:hlSide": "c2d9dff7cd3636050658d7e5ae07676d1bd5448e1c68e7f8ba6133b0c2f0e0b6",
       "def:hlStep": "266014050980ae0e5b931633c4781bc1dd78bd7fe290d8235bd34e794549a895",
       "def:isAlive": "5b04328f51b9d2556cc829a6efe1badf389d10589e953dd094d0f5d6520f1fa9",
+      "def:isD4Canon3x3": "bc6e56833666b20477fe37e19e026a174d7a1cd2bea5f4c03b18c61042401d7a",
       "def:lagrange2": "3222be76e864e937f99d85dd7480e0ae0ac76d52dd6a0d5d5d5711e4a848e9ac",
       "def:lagrange3": "0dc4d45870c37514b2d5fced766738286e3dd8322a3fb1a7fb74252cc5db51ea",
       "def:lifeCubic": "205c18c68911281b87743de96d6696d0121a63dd0dbf50bc632b9c7ffad32c28",
@@ -464,11 +483,13 @@
       "def:makeBox": "d224394c50b412bf28896ba0ce5d2955b153d7b8263022db62c5a78b3cacfc99",
       "def:mfLinearFactor": "8e8c058b694bd8a3e2c4ce39883a7d36e56822bb15e010793659a10407fb7b13",
       "def:mfNum": "5328dfa4f5e2b1881ac0dfdfddd942ccc3081c1f0c614d1d31ba9a3641d02a6f",
+      "def:mooreClosure": "df3ac5c696e28754ff88bd66a959c52e7c8676b3fc95219dfd090a27dbc60420",
       "def:mooreOffsets": "b40dbaca0f8ac4579a3c2b5887b9a3f6aee648750e793e6f89d97c75e43708c3",
       "def:neighborCount": "ac4a83bf5e4a4448812cbc0f8afd3e4dbab7b09aa52953602949a88149111f51",
       "def:nextCell": "aeee6efb8faba863d74205b92b588f15318b4e4bde84e821a6893056a7ecbb2f",
       "def:outerTotalisticCode": "abb36eebe258db2ba3256c8884396d520475be8986f07bd154474e838dd27729",
       "def:pentate": "147b1d8d5dc1478a5614a887f674fe991997e7b67012b8461d55eae72fb9df1c",
+      "def:perm9": "ee2d78bbf3601c2a0df9e6e0ab6432fba559f67c37303fab7c9c655054137410",
       "def:purposeScore": "f157b843741a1006e107dcd342dfc3f5c92cbb2f363b029205a9acbfd9e5718a",
       "def:rangeInt": "1e23961c70e5d5b0090617b9729e3e3c1486b3c8e5c138ea9c43598172964ae6",
       "def:scaledNeff": "da6c7030bcd08f5f9c9472e5852d2d4f1d1ae45466428364c741bf852343f06e",
@@ -477,9 +498,8 @@
       "def:tetrate": "86b545150551e26e346631a7ad5017768c2b751f773e2bc01efd25dd217edb4c",
       "def:translateGrid": "5f8b0aa9abc1268ad176699c2fbfd09260f67663007ae3bc353c8099c1619141",
       "def:validMoorePairs": "6dac55d331e042a1f386100d7f91f3af2f857181ea4c6bb4ccbdec69711de6f3",
+      "def:windowContainsNeighborhood": "ef35f4b1c6d0a891bd45b802874914a4f3c822b661d800dcf5b51d0c2ff4e10e",
       "end:LifeBounds": "691f2f04563d1e8520857f80c982393857a77166de86f498c987585b5f741a9c",
-      "import:Mathlib.Tactic.Linarith": "91b57c8d36c60432cf7f644333ac489c977aeaa1387883661003cf0994235bb9",
-      "import:Mathlib.Tactic.Ring": "295c104e2ca7de183f141f3b6acfe959ed40a9c52b52584e82735138a0923d51",
       "namespace:LifeBounds": "20d97bf3937e80095dd8a145dc872c4fd255763ce978cd925a418a02d320fede",
       "theorem:beehive_still_life": "46440c6f489c6a96c7f239aea02f6bc065450ff19cb25950bf2ac50cd4c7c1ec",
       "theorem:blinker_step1": "f61ec60bfb032bffa9a177d043d7cefd2fff740d5748c0b440038b2e97ed5edc",
@@ -488,6 +508,7 @@
       "theorem:burnside_3x3_d4_classes": "8068dd0547df524a07c48cfc1811298bc648d9501e7f149ad845a865fe0de38d",
       "theorem:burnside_3x3_d4_sum": "68f1416792511bfc87dc3041bd4de3ac988d2f46509c09c03afaa7d60e984c1e",
       "theorem:cognitive_modularity_collapse": "d1b9662842ca9542550f185f4bb12c799427bac1a0d525dd2c1f1ab5726cc23e",
+      "theorem:d4_orbits_3x3_exact_102": "141768df030dfe5070f2ac103e2a8366c7c4ab5dd7f7267e6bb8f4b819f64abc",
       "theorem:diehard_pentate_unfold": "b0099b93fb1ba78df667ce02347d51fc1e94a0db9fbf79c93740b5c049c4191a",
       "theorem:eater1_still_life": "c70af2714ee903a4c3857acda62d09710eec401269ead26252c4cf33941daf4c",
       "theorem:glider_bipartite_color_invariant": "d3c84220b75ff87fd1247b0bbad40eba8ed81a8fed54a77b63b971cd9935a875",
@@ -511,6 +532,7 @@
       "theorem:mf_fixed_point_brackets": "a68f39e6ed48dc1130c166781c15c0397b10d2f8a9e51788a5785f5165de9f99",
       "theorem:mf_overpop_full_extinct": "4a0c1112a72c50e81040f07fab337d0de0fd00822b989bc5df589269665e9592",
       "theorem:mf_vacuum_fixed_point": "9fe30eaab835a22fdcc1972d1922b9d01884a6153cc0d51068f903259477aa09",
+      "theorem:motif_windows_contain_neighborhood": "41f71dd818eb2e88bed3799440505b4480b4837dd908b8aa2a47838af8206087",
       "theorem:multiaxis_cardinal_from_lightcone": "e9d13efab2c1d9ce3b1f3cfc2db6645b7cf3a96474f394d5ffca738c4488d4f2",
       "theorem:multiaxis_norm_doubling": "e819e5c83ce5eb18d703666b80ca40ebef903dbb5359e12eea4f51c115b4b1dd",
       "theorem:optics_beer_lambert_two_layer": "04ea1760fab331de4ed7afaa98d63e007f93493c50515a038b2589166a2d7e59",

@@ -49,7 +49,7 @@ jobs:
             --org yubi-OS \
             --threshold-commits ${{ inputs.threshold_commits || '10' }} \
             --output-format json \
-            > drift-report.json
+            | tee drift-report.json
 
       - name: File issues (if drift detected)
         if: always()

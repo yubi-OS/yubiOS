@@ -1,6 +1,3 @@
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
-
 /-
   LifeBounds.lean
   Exact algebraic, dynamical, combinatorial, and cross-domain identities for
@@ -9,9 +6,10 @@ import Mathlib.Tactic.Linarith
   supersolid hydrodynamics, multi-axis fracton lattices, discrete glider
   optics, and bounded cognitive modularity.
 
-  Core Lean 4 only (pinned toolchain: leanprover/lean4:v4.33.0).
-  No mathlib, no Batteries, no external import, no `sorry`,
-  no placeholder / axiom-only declaration.
+  Pinned toolchain: leanprover/lean4:v4.35.0 (Mathlib v4.35.0 tactics available
+  in lakefile.toml; core Lean 4.35.0 proofs re-checked with leanchecker --fresh;
+  statements and axiom set unchanged; also checks in core Lean 4.33.0 at main 2efa6131).
+  No `sorry`, no placeholder / axiom-only declaration.
 
   Companion scope manifest: papers/data/lean/life-scope.json
   Axiom gate:               papers/data/lean/verify_wayfinder_axioms.py
@@ -19,7 +17,7 @@ import Mathlib.Tactic.Linarith
                              --manifest papers/data/lean/life-scope.json)
 
   ---------------------------------------------------------------------------
-  WHAT IS PROVED (40 theorems across 6 sections)
+  WHAT IS PROVED (46 theorems across 6 sections)
 
   (A) Local Transition Equations & Wolfram Code 224 (10 theorems):
       Exact equivalence over all 18 Moore neighborhood states (c in Bool,
@@ -33,13 +31,13 @@ import Mathlib.Tactic.Linarith
       Plus universal Nat bounds for underpopulation (`s <= 1`), overpopulation
       (`4 <= s`), exact birth (`s = 3`), and exact survival (`s = 2 or s = 3`).
 
-  (B) 3x3 State-Space Exhaustion & D4 Burnside Symmetry Orbit Sum (5 theorems):
+  (B) 3x3 State-Space Exhaustion & D4 Burnside Symmetry Orbit Enumeration (6 theorems):
       2^9 = 512 total 3x3 configurations; exact Burnside fixed-point sum
       512 + 2*8 + 32 + 4*64 = 816 = 8 * 102 yielding 102 D4 symmetry classes;
       Wolfram's 2025 outcome partition 79 + 17 + 6 = 102; and interaction-graph
       distance threshold d_inf <= 2 <-> d_2^2 <= 8 = (2*sqrt(2))^2.
 
-  (C) 2D Convolution & Canonical Motifs (7 theorems):
+  (C) 2D Convolution, Window Sufficiency & Canonical Motifs (8 theorems):
       Direct 2D Moore convolution over integer coordinate grids proving:
         - Vacuum (empty grid) is a fixed point (`vacuum_still_life`)
         - 2x2 Block is a period-1 still life (`block_still_life`)
@@ -64,7 +62,7 @@ import Mathlib.Tactic.Linarith
       2^11 = 2048 scale; and Knuth up-arrow tetration/pentation unfolding for
       the 2023 116x86 engineered diehard lifetime 17 ^^^ 3.
 
-  (F) Supersolid, Multi-Axis Fracton, Optics & Psychology Crossovers (7 theorems):
+  (F) Supersolid, Multi-Axis Fracton, Optics, Sierpinski & Psychology Crossovers (9 theorems):
       - Supersolid Leggett bound Cauchy-Schwarz discriminant
         (r1 + r2)^2 - 4*r1*r2 = (r1 - r2)^2 and strict superfluid reduction
         under crystalline density modulation r1 != r2;
@@ -190,6 +188,30 @@ theorem wolfram_3x3_outcome_partition : 79 + 17 + 6 = 102 := by decide
     (Chebyshev distance <= 2) is 2^2 + 2^2 = 8 = (2*sqrt(2))^2 (Wolfram 2025 Modularity section). -/
 theorem interaction_radius_sq : 2 * 2 + 2 * 2 = 8 := by decide
 
+def bitAt (m i : Nat) : Nat := (m >>> i) &&& 1
+
+def perm9 (m i0 i1 i2 i3 i4 i5 i6 i7 i8 : Nat) : Nat :=
+  (bitAt m i0) + ((bitAt m i1) <<< 1) + ((bitAt m i2) <<< 2) +
+  ((bitAt m i3) <<< 3) + ((bitAt m i4) <<< 4) + ((bitAt m i5) <<< 5) +
+  ((bitAt m i6) <<< 6) + ((bitAt m i7) <<< 7) + ((bitAt m i8) <<< 8)
+
+def d4Orbit3x3 (m : Nat) : List Nat :=
+  [ m,
+    perm9 m 6 3 0 7 4 1 8 5 2,
+    perm9 m 8 7 6 5 4 3 2 1 0,
+    perm9 m 2 5 8 1 4 7 0 3 6,
+    perm9 m 2 1 0 5 4 3 8 7 6,
+    perm9 m 6 7 8 3 4 5 0 1 2,
+    perm9 m 0 3 6 1 4 7 2 5 8,
+    perm9 m 8 5 2 7 4 1 6 3 0 ]
+
+def isD4Canon3x3 (m : Nat) : Bool :=
+  (d4Orbit3x3 m).all (fun x => decide (m ≤ x))
+
+/-- Exhaustive D4 orbit enumeration over all 512 3x3 binary bitmasks has exactly 102 canonical orbits. -/
+theorem d4_orbits_3x3_exact_102 :
+    ((List.range 512).filter isD4Canon3x3).length = 102 := by decide
+
 /-! ### C. 2D Convolution & Canonical Motifs (Still Lifes, Blinker, Glider) -/
 
 abbrev Pt := Int × Int
@@ -260,6 +282,26 @@ theorem glider_period4_translates :
 theorem glider_bipartite_color_invariant (x y : Nat) :
     ((x + 1) + (y + 1)) % 2 = (x + y) % 2 := by omega
 
+def mooreClosure (g : Grid) : Grid :=
+  g.foldr (fun p acc => (p :: mooreOffsets.map (fun d => (p.1 + d.1, p.2 + d.2))) ++ acc) []
+
+def windowContainsNeighborhood (w : List Pt) (g : Grid) : Bool :=
+  (mooreClosure g).all (fun p => isAlive w p)
+
+/-- Every canonical motif's 1-step Moore neighborhood (including all 4 glider phases)
+    lies strictly inside its evaluation window, so stepWindow equals unbounded Z^2 Life. -/
+theorem motif_windows_contain_neighborhood :
+    (windowContainsNeighborhood box4 [] &&
+     windowContainsNeighborhood box4 blockGrid &&
+     windowContainsNeighborhood box6 beehiveGrid &&
+     windowContainsNeighborhood box6 eater1Grid &&
+     windowContainsNeighborhood box5 blinkerH &&
+     windowContainsNeighborhood box5 blinkerV &&
+     windowContainsNeighborhood box6 glider0 &&
+     windowContainsNeighborhood box6 (stepN box6 1 glider0) &&
+     windowContainsNeighborhood box6 (stepN box6 2 glider0) &&
+     windowContainsNeighborhood box6 (stepN box6 3 glider0)) = true := by decide
+
 /-! ### D. Mean-Field Derrida-Stauffer Density Polynomial -/
 
 def mfLinearFactor (p d : Int) : Int :=
@@ -312,7 +354,14 @@ theorem lightcone_side_step (L0 t : Nat) :
 theorem lightcone_area_quadratic (L0 t : Int) :
     bboxArea L0 t = L0 * L0 + 2 * (L0 * (2 * t)) + (2 * t) * (2 * t) := by
   unfold bboxArea
-  ring
+  have h1 : (L0 + 2 * t) * (L0 + 2 * t) =
+      L0 * L0 + L0 * (2 * t) + (L0 * (2 * t) + (2 * t) * (2 * t)) := by
+    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm (2 * t) L0]
+  rw [h1]
+  generalize L0 * L0 = x
+  generalize L0 * (2 * t) = y
+  generalize (2 * t) * (2 * t) = z
+  omega
 
 /-- Glider gun emission hierarchy over 210*n ticks: period-30 Gosper gun emits 7*n gliders,
     2024 period-15 true-period gun emits 14*n, and period-14 interwoven stream emits 15*n. -/
@@ -354,7 +403,15 @@ theorem diehard_pentate_unfold :
     profile (r1, r2): (r1 + r2)^2 - 4*r1*r2 = (r1 - r2)^2. -/
 theorem supersolid_leggett_disc (r1 r2 : Int) :
     (r1 + r2) * (r1 + r2) - 4 * (r1 * r2) = (r1 - r2) * (r1 - r2) := by
-  ring
+  have h1 : (r1 + r2) * (r1 + r2) = r1 * r1 + r1 * r2 + (r1 * r2 + r2 * r2) := by
+    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm r2 r1]
+  have h2 : (r1 - r2) * (r1 - r2) = r1 * r1 - r1 * r2 - (r1 * r2 - r2 * r2) := by
+    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, Int.mul_comm r2 r1]
+  rw [h1, h2]
+  generalize r1 * r1 = x
+  generalize r1 * r2 = y
+  generalize r2 * r2 = z
+  omega
 
 /-- Strict Leggett bound reduction: any non-uniform crystalline modulation (r1 != r2)
     makes 4*r1*r2 strictly less than (r1 + r2)^2 (superfluid fraction f_s < 1). -/
@@ -386,7 +443,15 @@ theorem multiaxis_cardinal_from_lightcone (dx dy : Int) :
 theorem multiaxis_norm_doubling (dx dy : Int) :
     diagU dx dy * diagU dx dy + diagV dx dy * diagV dx dy = 2 * (dx * dx + dy * dy) := by
   unfold diagU diagV
-  ring
+  have h1 : (dx + dy) * (dx + dy) = dx * dx + dx * dy + (dx * dy + dy * dy) := by
+    rw [Int.add_mul, Int.mul_add, Int.mul_add, Int.mul_comm dy dx]
+  have h2 : (dx - dy) * (dx - dy) = dx * dx - dx * dy - (dx * dy - dy * dy) := by
+    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, Int.mul_comm dy dx]
+  rw [h1, h2]
+  generalize dx * dx = x
+  generalize dx * dy = y
+  generalize dy * dy = z
+  omega
 
 def scaledNeff (L dt : Nat) : Nat := 4 * L + dt
 def ghShift (x0 d1 d2 : Int) : Int := x0 + d1 + d2
@@ -434,13 +499,22 @@ theorem teleological_mdl_penalty (kx0 kb t1 t2 d1 d2 : Int) (ht : t1 ≤ t2) (hd
     (d - s)^2 = d^2 - 2*d*s + s^2. -/
 theorem optics_beer_lambert_two_layer (d s : Int) :
     (d - s) * (d - s) = d * d - 2 * d * s + s * s := by
-  ring
+  have h1 : (d - s) * (d - s) = d * d - d * s - (d * s - s * s) := by
+    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, Int.mul_comm s d]
+  have h2 : 2 * d * s = d * s + d * s := by
+    have htwo : (2 : Int) * d = d + d := by omega
+    rw [htwo, Int.add_mul]
+  rw [h1, h2]
+  generalize d * d = x
+  generalize d * s = y
+  generalize s * s = z
+  omega
 
 /-- Sierpinski gasket vertex count recurrence (scaled by 2): 2*V_{k+1} = 3*(2*V_k) - 6,
     where 2*V_k = 3^(k+1) + 3 (used in G_SCI_1 / life_supersolid.py across depths k=2..6). -/
 theorem sierpinski_vertex_recurrence (p : Int) :
     3 * (p + 3) - 6 = 3 * p + 3 := by
-  ring
+  omega
 
 #print axioms wolfram_code_224
 #print axioms life_interval_all_moore
@@ -457,6 +531,7 @@ theorem sierpinski_vertex_recurrence (p : Int) :
 #print axioms burnside_3x3_d4_classes
 #print axioms wolfram_3x3_outcome_partition
 #print axioms interaction_radius_sq
+#print axioms d4_orbits_3x3_exact_102
 #print axioms vacuum_still_life
 #print axioms block_still_life
 #print axioms beehive_still_life
@@ -465,6 +540,7 @@ theorem sierpinski_vertex_recurrence (p : Int) :
 #print axioms blinker_step2
 #print axioms glider_period4_translates
 #print axioms glider_bipartite_color_invariant
+#print axioms motif_windows_contain_neighborhood
 #print axioms mf_binomial_weights
 #print axioms mf_coeff_identity
 #print axioms mf_vacuum_fixed_point
