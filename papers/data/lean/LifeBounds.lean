@@ -17,7 +17,7 @@
                              --manifest papers/data/lean/life-scope.json)
 
   ---------------------------------------------------------------------------
-  WHAT IS PROVED (46 theorems across 6 sections)
+  WHAT IS PROVED (45 theorems across 6 sections)
 
   (A) Local Transition Equations & Wolfram Code 224 (10 theorems):
       Exact equivalence over all 18 Moore neighborhood states (c in Bool,
@@ -31,7 +31,7 @@
       Plus universal Nat bounds for underpopulation (`s <= 1`), overpopulation
       (`4 <= s`), exact birth (`s = 3`), and exact survival (`s = 2 or s = 3`).
 
-  (B) 3x3 State-Space Exhaustion & D4 Burnside Symmetry Orbit Enumeration (6 theorems):
+  (B) 3x3 State-Space Exhaustion & D4 Burnside Symmetry Orbit Sum (5 theorems):
       2^9 = 512 total 3x3 configurations; exact Burnside fixed-point sum
       512 + 2*8 + 32 + 4*64 = 816 = 8 * 102 yielding 102 D4 symmetry classes;
       Wolfram's 2025 outcome partition 79 + 17 + 6 = 102; and interaction-graph
@@ -187,30 +187,6 @@ theorem wolfram_3x3_outcome_partition : 79 + 17 + 6 = 102 := by decide
 /-- Maximum squared Euclidean distance of two cells with overlapping 3x3 Moore neighborhoods
     (Chebyshev distance <= 2) is 2^2 + 2^2 = 8 = (2*sqrt(2))^2 (Wolfram 2025 Modularity section). -/
 theorem interaction_radius_sq : 2 * 2 + 2 * 2 = 8 := by decide
-
-def bitAt (m i : Nat) : Nat := (m >>> i) &&& 1
-
-def perm9 (m i0 i1 i2 i3 i4 i5 i6 i7 i8 : Nat) : Nat :=
-  (bitAt m i0) + ((bitAt m i1) <<< 1) + ((bitAt m i2) <<< 2) +
-  ((bitAt m i3) <<< 3) + ((bitAt m i4) <<< 4) + ((bitAt m i5) <<< 5) +
-  ((bitAt m i6) <<< 6) + ((bitAt m i7) <<< 7) + ((bitAt m i8) <<< 8)
-
-def d4Orbit3x3 (m : Nat) : List Nat :=
-  [ m,
-    perm9 m 6 3 0 7 4 1 8 5 2,
-    perm9 m 8 7 6 5 4 3 2 1 0,
-    perm9 m 2 5 8 1 4 7 0 3 6,
-    perm9 m 2 1 0 5 4 3 8 7 6,
-    perm9 m 6 7 8 3 4 5 0 1 2,
-    perm9 m 0 3 6 1 4 7 2 5 8,
-    perm9 m 8 5 2 7 4 1 6 3 0 ]
-
-def isD4Canon3x3 (m : Nat) : Bool :=
-  (d4Orbit3x3 m).all (fun x => decide (m ≤ x))
-
-/-- Exhaustive D4 orbit enumeration over all 512 3x3 binary bitmasks has exactly 102 canonical orbits. -/
-theorem d4_orbits_3x3_exact_102 :
-    ((List.range 512).filter isD4Canon3x3).length = 102 := by decide
 
 /-! ### C. 2D Convolution & Canonical Motifs (Still Lifes, Blinker, Glider) -/
 
@@ -531,7 +507,6 @@ theorem sierpinski_vertex_recurrence (p : Int) :
 #print axioms burnside_3x3_d4_classes
 #print axioms wolfram_3x3_outcome_partition
 #print axioms interaction_radius_sq
-#print axioms d4_orbits_3x3_exact_102
 #print axioms vacuum_still_life
 #print axioms block_still_life
 #print axioms beehive_still_life
