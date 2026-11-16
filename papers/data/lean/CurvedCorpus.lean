@@ -209,7 +209,7 @@ theorem phi_ladder_telescope (Φ : Nat → Int) (n : Nat) :
   induction n with
   | zero => simp [drops]
   | succ m ih =>
-      simp only [drops]
+      simp [drops, ih]
       omega
 
 /-! ### 6. Heat-kernel exponent facts (Section 5, spherical defocus)
@@ -474,7 +474,7 @@ theorem trade_reversible (M : Nat → Nat → Int) (i j a b r c : Nat) :
   unfold trade tradeDelta
   by_cases h1 : r = i <;> by_cases h2 : r = j <;>
     by_cases h3 : c = a <;> by_cases h4 : c = b <;>
-      simp_all
+      simp_all <;> omega
 
 /-- (iii) Balance: for a symmetric kernel, total inflow to any state b
     equals total outflow from b, along any state enumeration. -/
@@ -644,12 +644,13 @@ theorem exists_max (π : Nat → Int) :
         intro a ha
         have hax : a = x := by simpa using ha
         rw [hax]
+        exact Int.le_refl _
       · obtain ⟨b, hbmem, hbmax⟩ := ih hxs
         by_cases hcmp : π b ≤ π x
         · refine ⟨x, by simp, ?_⟩
           intro a ha
           rcases List.mem_cons.mp ha with h | h
-          · rw [h]
+          · rw [h]; exact Int.le_refl _
           · exact Int.le_trans (hbmax a h) hcmp
         · refine ⟨b, List.mem_cons_of_mem x hbmem, ?_⟩
           intro a ha

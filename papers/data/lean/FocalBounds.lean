@@ -188,7 +188,7 @@ theorem prefix_count_mono (codes : List (List Bool)) (d : Nat) :
     rw [List.map_map]
     apply List.map_congr_left
     intro c _
-    simp [List.take_take]
+    simp [List.take_take, Nat.min_eq_left (Nat.le_succ d)]
   unfold prefixCount
   rw [e]
   exact distinctCount_map_le _ _
@@ -198,10 +198,10 @@ theorem prefix_count_mono_le (codes : List (List Bool)) (d e : Nat) (h : d ≤ e
   induction e with
   | zero =>
     have hd : d = 0 := by omega
-    rw [hd]
+    rw [hd]; exact Nat.le_refl _
   | succ e ih =>
     by_cases hde : d = e + 1
-    · rw [hde]
+    · rw [hde]; exact Nat.le_refl _
     · exact Nat.le_trans (ih (by omega)) (prefix_count_mono codes e)
 
 theorem prefix_count_double (codes : List (List Bool)) (d : Nat)
