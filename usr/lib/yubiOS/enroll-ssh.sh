@@ -15,6 +15,7 @@ set -euo pipefail
 # shellcheck source=lib.sh
 source /usr/lib/yubiOS/lib.sh
 
+export HOME="${HOME:-/root}"
 SSH_DIR="${HOME}/.ssh"
 KEY_FILE="${SSH_DIR}/id_ed25519_sk"
 mkdir -p "$SSH_DIR" && chmod 700 "$SSH_DIR"

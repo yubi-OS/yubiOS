@@ -11,7 +11,7 @@ ConditionPathExists=/dev/mapper/yubios-root
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/lib/yubiOS/ab-etc-merge.sh
-ExecStop=-/bin/sh -c 'umount /var/home 2>/dev/null || true; umount -l /usr 2>/dev/null || true; umount /run/yubiOS/ab/usr-base 2>/dev/null || true; umount /run/yubiOS/ab/usr-a 2>/dev/null || true; umount /run/yubiOS/ab/usr-b 2>/dev/null || true; lvm vgchange -an yubios 2>/dev/null || true'
+ExecStop=-/bin/sh -c 'umount /var/home 2>/dev/null || true; umount -l /usr 2>/dev/null || true; umount -l /run/yubiOS/ab/usr-base 2>/dev/null || true; umount /run/yubiOS/ab/usr-a 2>/dev/null || true; umount /run/yubiOS/ab/usr-b 2>/dev/null || true; lvm vgchange -an yubios 2>/dev/null || true'
 
 [Install]
-WantedBy=local-fs.target
+WantedBy=local-fs.target multi-user.target

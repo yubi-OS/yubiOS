@@ -19,12 +19,18 @@ if [ ! -e /dev/mapper/yubios-root ]; then
   exit 0
 fi
 
-lvm vgchange -ay yubios >/dev/null 2>&1 || true
-udevadm settle --timeout=5 >/dev/null 2>&1 || true
-
 USR_A="/dev/yubios/usr_a"
 USR_B="/dev/yubios/usr_b"
 HOMED_LV="/dev/yubios/homed"
+
+for _ in $(seq 1 15); do
+  lvm vgchange -ay yubios >/dev/null 2>&1 || true
+  udevadm settle --timeout=5 >/dev/null 2>&1 || true
+  if [ -b "$USR_A" ] && [ -b "$USR_B" ]; then
+    break
+  fi
+  sleep 1
+done
 
 if [ ! -b "$USR_A" ] || [ ! -b "$USR_B" ]; then
   exit 0

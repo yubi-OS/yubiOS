@@ -4,6 +4,7 @@
 # Guides user through: Secure Boot → Disk Encryption → Homed User → SSH → PAM
 
 set -euo pipefail
+export HOME="${HOME:-/root}"
 
 # ADR-024 / OMN-18: refuse to enroll when the first-boot CHIPSEC platform
 # check reported FAILED. yubiOS-enroll.service already gates on this via

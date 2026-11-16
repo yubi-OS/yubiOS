@@ -80,7 +80,7 @@ env:
   TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
   OPTEE_OS_REF: e1181e2d0e40f8550c0f8204a433eac54598d222 # release-descendant ref; see PINNED.md
   OPTEE_FTPM_REF: b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf # release-descendant ref; see PINNED.md
-  UBOOT_REF: 97b38f9b8fd7b11afad9327f38387577e080875e # release-descendant ref; see PINNED.md
+  UBOOT_REF: 2464673a748ce6a88ba690057d52a242fcf21c79 # release-descendant ref; see PINNED.md
   EDK2_REF: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
   EDK2_PLATFORMS_REF: cc384840c440415a091623a7658112fedc416094 # compatibility ref; see PINNED.md
   MS_TPM_REF: 6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48 # yubios branch (v1.83r1 descendant); see PINNED.md
