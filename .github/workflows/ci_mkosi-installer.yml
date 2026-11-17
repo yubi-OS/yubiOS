@@ -297,11 +297,12 @@ jobs:
       - name: Build disk image (minimal profile, PKCS#11-signed UKI)
         run: |
           set -euxo pipefail
-          rm -rf inst mkosi.output mkosi.cache mkosi.base.tar Containerfile.mkosi-base
-          # Export the base tree (including the pinned kernel-core + kernel-modules
-          # and basesystem) from the digest-pinned quay.io/fedora/fedora-bootc@sha256:...
-          # image under yubiOS.rego Build Policy so primary and rebuild never pull
-          # different kernel versions from floating Fedora mirrors.
+          rm -rf inst mkosi.output mkosi.cache mkosi.base.tar mkosi.initrd.img Containerfile.mkosi-base
+          # Export the base tree (including the pinned kernel-core + kernel-modules,
+          # initramfs.img, and basesystem) from the digest-pinned
+          # quay.io/fedora/fedora-bootc@sha256:... image under yubiOS.rego Build Policy
+          # so primary and rebuild never pull different kernel/initrd packages from
+          # floating Fedora mirrors.
           cat > Containerfile.mkosi-base <<EOF
           FROM ${FEDORA_BOOTC_IMAGE}
           RUN for p in /home /root /mnt /opt /srv /usr/local; do \
@@ -319,11 +320,15 @@ jobs:
             --output "type=tar,dest=mkosi.base.tar,rewrite-timestamp=true" \
             -f Containerfile.mkosi-base .
           rm -f Containerfile.mkosi-base
+          tar -xf mkosi.base.tar --wildcards --to-stdout 'usr/lib/modules/*/initramfs.img' > mkosi.initrd.img
+          test -s mkosi.initrd.img
           mkosi \
             --source-date-epoch "$SOURCE_DATE_EPOCH" \
             --seed "$YUBIOS_MKOSI_SEED" \
             --incremental=no \
             --skeleton-tree mkosi.base.tar \
+            --initrd "$(pwd)/mkosi.initrd.img" \
+            --kernel-modules-initrd=no \
             --distribution fedora \
             --release 45 \
             --architecture "${{ matrix.mkosi_arch }}" \
