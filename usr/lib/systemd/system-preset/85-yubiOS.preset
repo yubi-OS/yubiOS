@@ -5,3 +5,4 @@ enable yubiOS-chipsec-firstboot.service
 enable yubiOS-no-vfio-purge.service
 enable yubios-uki-install.service
 disable authselect-apply-changes.service
+enable yubiOS-uki-resign.path

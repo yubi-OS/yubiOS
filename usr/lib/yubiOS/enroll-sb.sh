@@ -177,6 +177,10 @@ phase_resign() {
     fi
     mv -f "$tmp" "$f"
   done
+  local uki_sync="${YUBIOS_UKI_SYNC_SH:-/usr/lib/yubiOS/uki/uki-sync-and-sign.sh}"
+  if [ -x "$uki_sync" ]; then
+    YUBIOS_ESP="$ESP" YUBIOS_SB_KEYDIR="$KEYDIR" YUBIOS_SB_ENROLLED_MARK="$ENROLLED_MARK"       "$uki_sync" --reason "enroll-sb-resign" --from-signed-esp --esp "$ESP" --keydir "$KEYDIR" || true
+  fi
   yubiOS_log "Resigned ${#images[@]} image(s) with the db key. Reboot is now safe."
 }
 

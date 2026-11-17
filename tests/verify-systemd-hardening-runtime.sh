@@ -73,6 +73,7 @@ BATS_SUITES=(
   test-pam-u2f-stack.bats
   test-lib.bats
   test-enroll-sb.bats
+  test-uki-sync-and-sign.bats
   test-pinned-and-floors.bats
 )
 

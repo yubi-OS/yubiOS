@@ -1,0 +1,12 @@
+[Unit]
+Description=Watch /usr/lib/modules and /boot/EFI/Linux for kernel or UKI updates (ADR-034)
+Documentation=https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md#adr-034
+After=local-fs.target yubiOS-lvm-usr-overlay.service
+
+[Path]
+PathChanged=/usr/lib/modules
+PathChanged=/boot/EFI/Linux
+Unit=yubiOS-uki-resign.service
+
+[Install]
+WantedBy=multi-user.target

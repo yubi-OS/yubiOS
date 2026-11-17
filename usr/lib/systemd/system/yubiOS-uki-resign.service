@@ -1,0 +1,15 @@
+[Unit]
+Description=yubiOS UKI Re-Sign, Local Composefs OCI Store Commit, and ESP Sync (ADR-034)
+Documentation=https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md#adr-034
+After=local-fs.target yubiOS-lvm-usr-overlay.service pcscd.service
+ConditionSecurity=measured-os
+ConditionPathExists=/var/lib/yubiOS/.sb-enrolled
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/yubiOS/uki/uki-sync-and-sign.sh --reason systemd-unit
+PrivateNetwork=yes
+ProtectHome=no
+ProtectSystem=strict
+ReadWritePaths=/boot /efi /loader /run /var/lib/yubiOS /var/home /usr/lib/modules /tmp
+RestrictFileSystems=~@network

@@ -80,3 +80,17 @@ if [ -f /usr/lib/pam.d/yubiOS-system-auth ]; then
     fi
   done
 fi
+
+# Ensure kernel-install hooks in /etc/kernel/install.d stay synced to yubiOS's
+# same-FS dracut + YubiKey UKI re-sign + local composefs OCI repository hooks (ADR-034),
+# so a package upgrade of rpm-ostree or systemd-udev in the /usr overlay cannot
+# restore the cross-device EXDEV 05-rpmostree.install scriptlet.
+if [ -d /usr/lib/kernel/install.d ]; then
+  mkdir -p /etc/kernel/install.d /var/lib/yubiOS/oci
+  for khook in 05-rpmostree.install 95-yubios-uki-resign.install; do
+    if [ -f "/usr/lib/kernel/install.d/$khook" ]; then
+      cp -f "/usr/lib/kernel/install.d/$khook" "/etc/kernel/install.d/$khook"
+      chmod 0755 "/etc/kernel/install.d/$khook"
+    fi
+  done
+fi
