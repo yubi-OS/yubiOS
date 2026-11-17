@@ -172,16 +172,17 @@ g 'set -euo pipefail
    test "$(findmnt -n -o FSTYPE "$WORK/usr-merged")" = "overlay"
    echo "Mounted 3-way overlayfs on $WORK/usr-merged (kver=$KVER)"
 
-   openssl genrsa -out "$WORK/keys/slot9a.key" 2048 2>/dev/null
-   openssl rsa -in "$WORK/keys/slot9a.key" -pubout -out "$WORK/keys/slot9a-pub.pem" 2>/dev/null
-   openssl req -new -x509 -sha256 -key "$WORK/keys/slot9a.key" -subj "/CN=YUBIOS db/" -days 365 -out "$WORK/keys/db.crt"
+   openssl genrsa -out "$WORK/slot9a.key" 2048 2>/dev/null
+   openssl rsa -in "$WORK/slot9a.key" -pubout -out "$WORK/slot9a-pub.pem" 2>/dev/null
+   openssl req -new -x509 -sha256 -key "$WORK/slot9a.key" -subj "/CN=YUBIOS db/" -days 365 -out "$WORK/keys/db.crt"
+   cp -f "$WORK/slot9a-pub.pem" "$WORK/keys/slot9a-pub.pem"
    touch "$WORK/state/.sb-enrolled"
    touch "$WORK/libykcs11.so"
 
    printf "%s\n" \
      "#!/bin/bash" \
      "[ \"\$1 \$2 \$3 \$4\" = \"piv keys export 9a\" ] || exit 3" \
-     "cp -f \"$WORK/keys/slot9a-pub.pem\" \"\$5\"" > "$WORK/bin/ykman"
+     "cp -f \"$WORK/slot9a-pub.pem\" \"\$5\"" > "$WORK/bin/ykman"
 
    printf "%s\n" \
      "#!/bin/bash" \
@@ -190,7 +191,7 @@ g 'set -euo pipefail
      "out=\"\"; prev=\"\"" \
      "for a in \"\$@\"; do [ \"\$prev\" = \"--output\" ] && out=\"\$a\"; prev=\"\$a\"; done" \
      "in_pe=\"\${!#}\"" \
-     "exec /usr/lib/systemd/systemd-sbsign sign --private-key \"$WORK/keys/slot9a.key\" --private-key-source file --certificate \"$WORK/keys/db.crt\" --certificate-source file --output \"\$out\" \"\$in_pe\"" > "$WORK/bin/systemd-sbsign"
+     "exec /usr/lib/systemd/systemd-sbsign sign --private-key \"$WORK/slot9a.key\" --private-key-source file --certificate \"$WORK/keys/db.crt\" --certificate-source file --output \"\$out\" \"\$in_pe\"" > "$WORK/bin/systemd-sbsign"
 
    printf "%s\n" \
      "#!/bin/bash" \
