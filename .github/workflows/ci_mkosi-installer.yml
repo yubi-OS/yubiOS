@@ -98,6 +98,7 @@ permissions:
 
 env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
+  FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:1989dd9223dc2ef03e3be158165be13e55b5571c62e9f3c88992950cf355416d # 45 (45.20261114.0) — see PINNED.md
 
 jobs:
   build:
@@ -296,16 +297,36 @@ jobs:
       - name: Build disk image (minimal profile, PKCS#11-signed UKI)
         run: |
           set -euxo pipefail
-          rm -rf inst mkosi.output mkosi.cache
+          rm -rf inst mkosi.output mkosi.cache mkosi.base.tar Containerfile.mkosi-base
+          # Export the base tree (including the pinned kernel-core + kernel-modules
+          # and basesystem) from the digest-pinned quay.io/fedora/fedora-bootc@sha256:...
+          # image under yubiOS.rego Build Policy so primary and rebuild never pull
+          # different kernel versions from floating Fedora mirrors.
+          cat > Containerfile.mkosi-base <<EOF
+          FROM ${FEDORA_BOOTC_IMAGE}
+          RUN for p in /home /root /mnt /opt /srv /usr/local; do \
+                if [ -L "\$p" ]; then rm -f "\$p" && mkdir -p "\$p"; fi; \
+              done && \
+              chmod 0750 /root && \
+              rm -rf /ostree /sysroot /etc/machine-id /var/lib/systemd/random-seed /var/cache/ldconfig/aux-cache
+          EOF
+          docker -H unix:///run/docker-rootless/docker.sock buildx build \
+            --builder hardened \
+            --platform "linux/${{ matrix.arch }}" \
+            --policy filename=yubiOS.rego,reset=true,strict=true \
+            --build-arg "SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH}" \
+            --output "type=tar,dest=mkosi.base.tar,rewrite-timestamp=true" \
+            -f Containerfile.mkosi-base .
+          rm -f Containerfile.mkosi-base
           mkosi \
             --source-date-epoch "$SOURCE_DATE_EPOCH" \
             --seed "$YUBIOS_MKOSI_SEED" \
             --incremental=no \
+            --base-tree mkosi.base.tar \
             --distribution fedora \
             --release 45 \
             --architecture "${{ matrix.mkosi_arch }}" \
             --profile minimal \
-            --package kernel \
             --package systemd-boot-unsigned \
             --bootable yes \
             --tools-tree-package softhsm2 \
