@@ -105,7 +105,7 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
 
 # ── Permissions for enrollment and first-boot scripts ────────────────────
 RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
-    mkdir -p /etc/kernel/install.d /var/lib/yubiOS/oci && \
+    mkdir -p /etc/kernel/install.d && \
     cp -f /usr/lib/kernel/install.d/05-rpmostree.install /etc/kernel/install.d/05-rpmostree.install && \
     cp -f /usr/lib/kernel/install.d/95-yubios-uki-resign.install /etc/kernel/install.d/95-yubios-uki-resign.install
 
