@@ -309,7 +309,7 @@ jobs:
               done && \
               mkdir -p -m 0700 /boot /efi && \
               chmod 0750 /root && \
-              rm -rf /ostree /sysroot /etc/machine-id /var/lib/systemd/random-seed /var/cache/ldconfig/aux-cache
+              rm -rf /ostree /sysroot /etc/machine-id /var/lib/systemd/random-seed /var/cache/ldconfig/aux-cache /var/lib/dnf/history.sqlite* /usr/lib/sysimage/libdnf5/transaction_history.sqlite*
           EOF
           docker -H unix:///run/docker-rootless/docker.sock buildx build \
             --builder hardened \

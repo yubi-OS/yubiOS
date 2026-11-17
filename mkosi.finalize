@@ -8,3 +8,4 @@ set -euo pipefail
 # not stable across otherwise identical package transactions, and the runtime
 # linker uses /etc/ld.so.cache rather than this auxiliary cache.
 rm -f -- "$BUILDROOT/var/cache/ldconfig/aux-cache"
+rm -f -- "$BUILDROOT"/var/lib/dnf/history.sqlite* "$BUILDROOT"/usr/lib/sysimage/libdnf5/transaction_history.sqlite*
