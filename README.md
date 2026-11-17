@@ -12,7 +12,7 @@
 [![FIDO2](https://img.shields.io/badge/FIDO2-hidraw-purple?style=flat-square)](https://fidoalliance.org)
 
 *No OEM. No trust anchors you don't control.*
-### 🦴 🚧 Work In Progress 🚧 Work In Progress 🚧 Work In Progress 🚧
+### 🦴 🚧 Work In Progress 🚧 Technical Preview 🚧 Work In Progress 🚧
 
 </div>
 
