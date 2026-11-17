@@ -74,7 +74,7 @@ trap cleanup EXIT
 log "host preflight"
 need bcvk
 bcvk ephemeral run --help 2>&1 | grep -q -- '--swtpm' || die "pinned bcvk source lacks --swtpm"
-bcvk ephemeral run --help --swu2f >/dev/null 2>&1 || bcvk ephemeral run --help 2>&1 | grep -q -- '--swu2f' || die "pinned bcvk source lacks --swu2f"
+bcvk ephemeral run --help 2>&1 | grep -q -- '--swu2f' || die "pinned bcvk source lacks --swu2f"
 
 assert_passless_only
 
@@ -92,8 +92,8 @@ if ! wait_for_bcvk_ssh "$VMID" "$SSH_WAIT_SECS"; then
   die "guest did not become reachable over ssh after ${SSH_WAIT_SECS}s"
 fi
 
-log "sync ADR-034 checkout files into guest /run/yubios-adr034-checkout"
-tar -C "$REPO_ROOT" -cf - \
+log "sync ADR-034 checkout files into guest /run/yubios-adr034-checkout (via argv base64; bcvk_ssh podman exec does not forward stdin)"
+TAR_B64="$(tar -C "$REPO_ROOT" -czf - \
   usr/lib/yubiOS/uki/uki-sync-and-sign.sh \
   usr/lib/yubiOS/uki/install-uki.sh \
   usr/lib/kernel/install.d/05-rpmostree.install \
@@ -103,7 +103,10 @@ tar -C "$REPO_ROOT" -cf - \
   usr/lib/systemd/system/yubiOS-uki-resign.path \
   usr/lib/yubiOS/enroll-sb.sh \
   usr/lib/yubiOS/ab-etc-merge.sh \
-  tests/unit/test-uki-sync-and-sign.bats | g 'mkdir -p /run/yubios-adr034-checkout && tar -C /run/yubios-adr034-checkout -xf -'
+  tests/unit/test-uki-sync-and-sign.bats | base64 -w0)"
+
+g "mkdir -p /run/yubios-adr034-checkout && printf '%s' '${TAR_B64}' | base64 -d | tar -C /run/yubios-adr034-checkout -xzf - && test -x /run/yubios-adr034-checkout/usr/lib/yubiOS/uki/uki-sync-and-sign.sh" \
+  || die "failed to unpack ADR-034 checkout files inside guest"
 
 log "1. swu2f Layer 2: start in-guest CTAP2 authenticator (passless) and verify FIDO2 + ed25519-sk"
 g 'command -v passless >/dev/null' || die "passless missing from guest image"
@@ -153,12 +156,11 @@ g 'set -euo pipefail
    mkdir -p "$WORK/esp/EFI/systemd" "$WORK/esp/EFI/BOOT" "$WORK/esp/EFI/Linux/bootc" "$WORK/esp/loader/entries"
    mkdir -p "$WORK/oci" "$WORK/keys" "$WORK/state" "$WORK/efivars" "$WORK/bin"
 
-   # Mount a real 3-way OverlayFS (matching yubiOS-lvm-usr-overlay.service) so
-   # $WORK/usr-merged/lib/modules/<kver> is an overlayfs mount separate from /tmp (tmpfs)
    cp -a /run/yubios-adr034-checkout/usr/. "$WORK/usr-base/"
    cp -f /usr/lib/yubiOS/lib.sh "$WORK/usr-base/lib/yubiOS/lib.sh"
    cp -f /usr/lib/os-release "$WORK/usr-base/lib/os-release"
-   KVER="$(basename "$(ls -d /usr/lib/modules/*/ | head -n1)")"
+   set -- /usr/lib/modules/*/
+   KVER="$(basename "$1")"
    mkdir -p "$WORK/usr-base/lib/modules/$KVER"
    cp -f "/usr/lib/modules/$KVER/vmlinuz" "$WORK/usr-base/lib/modules/$KVER/vmlinuz"
 
@@ -170,54 +172,33 @@ g 'set -euo pipefail
    test "$(findmnt -n -o FSTYPE "$WORK/usr-merged")" = "overlay"
    echo "Mounted 3-way overlayfs on $WORK/usr-merged (kver=$KVER)"
 
-   # Generate a real RSA-2048 keypair and self-signed db.crt using openssl so
-   # real systemd-sbsign and real sbverify verify genuine Authenticode PE signatures
    openssl genrsa -out "$WORK/keys/slot9a.key" 2048 2>/dev/null
    openssl rsa -in "$WORK/keys/slot9a.key" -pubout -out "$WORK/keys/slot9a-pub.pem" 2>/dev/null
    openssl req -new -x509 -sha256 -key "$WORK/keys/slot9a.key" -subj "/CN=YUBIOS db/" -days 365 -out "$WORK/keys/db.crt"
    touch "$WORK/state/.sb-enrolled"
    touch "$WORK/libykcs11.so"
 
-   # Provide a thin ykman + systemd-sbsign wrapper in $WORK/bin that delegates to
-   # the real /usr/lib/systemd/systemd-sbsign with the generated RSA-2048 key while
-   # asserting the caller passed pkcs11:id=%01;type=private and provider:pkcs11
-   cat > "$WORK/bin/ykman" <<EOF_YK
-#!/bin/bash
-[ "\$1 \$2 \$3 \$4" = "piv keys export 9a" ] || exit 3
-cp -f "$WORK/keys/slot9a-pub.pem" "\$5"
-EOF_YK
-   cat > "$WORK/bin/systemd-sbsign" <<EOF_SB
-#!/bin/bash
-echo "\$*" | grep -q "pkcs11:id=%01;type=private" || { echo "missing slot 9a URI" >&2; exit 1; }
-echo "\$*" | grep -q "provider:pkcs11" || { echo "missing provider:pkcs11" >&2; exit 1; }
-out=""
-prev=""
-for a in "\$@"; do
-  [ "\$prev" = "--output" ] && out="\$a"
-  prev="\$a"
-done
-in_pe="\${!#}"
-exec /usr/lib/systemd/systemd-sbsign sign \
-  --private-key "$WORK/keys/slot9a.key" \
-  --private-key-source file \
-  --certificate "$WORK/keys/db.crt" \
-  --certificate-source file \
-  --output "\$out" \
-  "\$in_pe"
-EOF_SB
-   # Fast deterministic dracut wrapper that writes a valid cpio initrd into the
-   # target path and verifies the target path is on the same overlayfs mount as
-   # $WORK/usr-merged/lib/modules/$KVER (never /tmp)
-   cat > "$WORK/bin/dracut" <<EOF_DR
-#!/bin/bash
-set -euo pipefail
-out="\${!#}"
-case "\$out" in
-  "$WORK/usr-merged/lib/modules/$KVER/"*) ;;
-  *) echo "FAIL: dracut output \$out is not on same FS as modules dir" >&2; exit 18 ;;
-esac
-printf "initramfs-cpio-payload-for-%s\n" "$KVER" > "\$out"
-EOF_DR
+   printf "%s\n" \
+     "#!/bin/bash" \
+     "[ \"\$1 \$2 \$3 \$4\" = \"piv keys export 9a\" ] || exit 3" \
+     "cp -f \"$WORK/keys/slot9a-pub.pem\" \"\$5\"" > "$WORK/bin/ykman"
+
+   printf "%s\n" \
+     "#!/bin/bash" \
+     "echo \"\$*\" | grep -q \"pkcs11:id=%01;type=private\" || { echo \"missing slot 9a URI\" >&2; exit 1; }" \
+     "echo \"\$*\" | grep -q \"provider:pkcs11\" || { echo \"missing provider:pkcs11\" >&2; exit 1; }" \
+     "out=\"\"; prev=\"\"" \
+     "for a in \"\$@\"; do [ \"\$prev\" = \"--output\" ] && out=\"\$a\"; prev=\"\$a\"; done" \
+     "in_pe=\"\${!#}\"" \
+     "exec /usr/lib/systemd/systemd-sbsign sign --private-key \"$WORK/keys/slot9a.key\" --private-key-source file --certificate \"$WORK/keys/db.crt\" --certificate-source file --output \"\$out\" \"\$in_pe\"" > "$WORK/bin/systemd-sbsign"
+
+   printf "%s\n" \
+     "#!/bin/bash" \
+     "set -euo pipefail" \
+     "out=\"\${!#}\"" \
+     "case \"\$out\" in \"$WORK/usr-merged/lib/modules/$KVER/\"*) ;; *) echo \"FAIL: dracut output \$out not on same FS\" >&2; exit 18 ;; esac" \
+     "printf \"initramfs-cpio-payload-for-%s\n\" \"$KVER\" > \"\$out\"" > "$WORK/bin/dracut"
+
    chmod +x "$WORK/bin/ykman" "$WORK/bin/systemd-sbsign" "$WORK/bin/dracut"
 
    export PATH="$WORK/bin:$PATH:/usr/lib/systemd"
@@ -246,36 +227,36 @@ EOF_DR
    test -f "$WORK/oci/last-deployed.json"
    test -s "$WORK/oci/composefs/bootc_composefs-${YUBIOS_COMPOSEFS_DIGEST}.efi"
    sbverify --cert "$WORK/keys/db.crt" "$WORK/oci/composefs/bootc_composefs-${YUBIOS_COMPOSEFS_DIGEST}.efi"
-   python3 - "$WORK/oci" "$KVER" "$YUBIOS_COMPOSEFS_DIGEST" <<PY
-import json, hashlib, os, sys
+   python3 -c "import json, hashlib, os, sys
 oci_dir, kver, cfs = sys.argv[1], sys.argv[2], sys.argv[3]
-layout = json.load(open(os.path.join(oci_dir, "oci-layout")))
-assert layout.get("imageLayoutVersion") == "1.0.0", layout
-idx = json.load(open(os.path.join(oci_dir, "index.json")))
-refs = {m["annotations"]["org.opencontainers.image.ref.name"]: m for m in idx["manifests"]}
-assert "yubios-local:latest" in refs, refs
-assert f"yubios-local:{kver}" in refs, refs
-assert f"yubios-uki:{cfs}" in refs, refs
-for fn in os.listdir(os.path.join(oci_dir, "blobs", "sha256")):
-    p = os.path.join(oci_dir, "blobs", "sha256", fn)
-    h = hashlib.sha256(open(p, "rb").read()).hexdigest()
-    assert h == fn, f"blob hash mismatch: {h} != {fn}"
-man_sha = refs["yubios-local:latest"]["digest"].split(":", 1)[1]
-man = json.load(open(os.path.join(oci_dir, "blobs", "sha256", man_sha)))
-assert man["annotations"]["containers.bootc"] == "1"
-assert man["annotations"]["ostree.bootable"] == "true"
-assert man["annotations"]["org.yubios.uki.kver"] == kver
-assert man["annotations"]["org.yubios.uki.composefs"] == cfs
-assert man["annotations"]["org.yubios.uki.signer"] == "piv-slot-9a"
-last = json.load(open(os.path.join(oci_dir, "last-deployed.json")))
-assert last["kver"] == kver and last["composefs_digest"] == cfs and last["signer"] == "piv-slot-9a"
-print("OCI repository verified:", len(os.listdir(os.path.join(oci_dir, "blobs", "sha256"))), "content-addressed blobs")
-PY
+layout = json.load(open(os.path.join(oci_dir, \"oci-layout\")))
+assert layout.get(\"imageLayoutVersion\") == \"1.0.0\", layout
+idx = json.load(open(os.path.join(oci_dir, \"index.json\")))
+refs = {m[\"annotations\"][\"org.opencontainers.image.ref.name\"]: m for m in idx[\"manifests\"]}
+assert \"yubios-local:latest\" in refs, refs
+assert f\"yubios-local:{kver}\" in refs, refs
+assert f\"yubios-uki:{cfs}\" in refs, refs
+for fn in os.listdir(os.path.join(oci_dir, \"blobs\", \"sha256\")):
+    p = os.path.join(oci_dir, \"blobs\", \"sha256\", fn)
+    h = hashlib.sha256(open(p, \"rb\").read()).hexdigest()
+    assert h == fn, f\"blob hash mismatch: {h} != {fn}\"
+man_sha = refs[\"yubios-local:latest\"][\"digest\"].split(\":\", 1)[1]
+man = json.load(open(os.path.join(oci_dir, \"blobs\", \"sha256\", man_sha)))
+assert man[\"annotations\"][\"containers.bootc\"] == \"1\"
+assert man[\"annotations\"][\"ostree.bootable\"] == \"true\"
+assert man[\"annotations\"][\"org.yubios.uki.kver\"] == kver
+assert man[\"annotations\"][\"org.yubios.uki.composefs\"] == cfs
+assert man[\"annotations\"][\"org.yubios.uki.signer\"] == \"piv-slot-9a\"
+last = json.load(open(os.path.join(oci_dir, \"last-deployed.json\")))
+assert last[\"kver\"] == kver and last[\"composefs_digest\"] == cfs and last[\"signer\"] == \"piv-slot-9a\"
+print(\"OCI repository verified:\", len(os.listdir(os.path.join(oci_dir, \"blobs\", \"sha256\"))), \"content-addressed blobs\")
+" "$WORK/oci" "$KVER" "$YUBIOS_COMPOSEFS_DIGEST"
 
    echo "--- Assertion 2c: 95-yubios-uki-resign.install updates UKI and BLS entry ---"
    "$WORK/usr-merged/lib/kernel/install.d/95-yubios-uki-resign.install" add "$KVER" /boot/entry "$WORK/usr-merged/lib/modules/$KVER/vmlinuz"
    grep -q "95-yubios-uki-resign:${KVER}" "$WORK/oci/last-deployed.json"
-   BLS_CONF="$(ls "$WORK/esp/loader/entries/"bootc_yubios-*-1.conf | head -n1)"
+   set -- "$WORK/esp/loader/entries/"bootc_yubios-*-1.conf
+   BLS_CONF="$1"
    test -s "$BLS_CONF"
    grep -q "uki /EFI/Linux/bootc/bootc_composefs-${YUBIOS_COMPOSEFS_DIGEST}.efi" "$BLS_CONF"
 
