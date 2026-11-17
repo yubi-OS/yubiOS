@@ -351,6 +351,7 @@ jobs:
             --sign-expected-pcr-key "$(cat mkosi.secure-boot.pkcs11-uri)" \
             --sign-expected-pcr-certificate mkosi.secure-boot.pem \
             build
+          cp -f mkosi.initrd.img mkosi.output/initrd.cpio.zst
           ls -la mkosi.output/
 
       - name: Verify UKI is signed by the PKCS#11 (SoftHSM) key
