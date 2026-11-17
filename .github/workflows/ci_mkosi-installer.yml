@@ -323,7 +323,7 @@ jobs:
             --source-date-epoch "$SOURCE_DATE_EPOCH" \
             --seed "$YUBIOS_MKOSI_SEED" \
             --incremental=no \
-            --base-tree mkosi.base.tar \
+            --skeleton-tree mkosi.base.tar \
             --distribution fedora \
             --release 45 \
             --architecture "${{ matrix.mkosi_arch }}" \
