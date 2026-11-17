@@ -307,6 +307,7 @@ jobs:
           RUN for p in /home /root /mnt /opt /srv /usr/local; do \
                 if [ -L "\$p" ]; then rm -f "\$p" && mkdir -p "\$p"; fi; \
               done && \
+              mkdir -p -m 0700 /boot /efi && \
               chmod 0750 /root && \
               rm -rf /ostree /sysroot /etc/machine-id /var/lib/systemd/random-seed /var/cache/ldconfig/aux-cache
           EOF
