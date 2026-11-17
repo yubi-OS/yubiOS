@@ -188,18 +188,18 @@ sign_and_verify_pe() {
   local signer_tag="unsigned"
   if [ -f "$KEYDIR/db.crt" ]; then
     for tool in ykman systemd-sbsign sbverify; do
-      command -v "$tool" >/dev/null 2>&1 || { yubiOS_log "missing signing tool: $tool"; return 1; }
+      command -v "$tool" >/dev/null 2>&1 || { yubiOS_log "missing signing tool: $tool" >&2; return 1; }
     done
     mkdir -p "$KEYDIR"
     if [ ! -f "$KEYDIR/slot9a-pub.pem" ]; then
       ykman piv keys export 9a "$KEYDIR/slot9a-pub.pem" >/dev/null 2>&1 || {
-        yubiOS_log "No key in PIV slot 9a; cannot sign $pe_path"
+        yubiOS_log "No key in PIV slot 9a; cannot sign $pe_path" >&2
         return 1
       }
     fi
     local tmp_signed
     tmp_signed="$(mktemp "$KEYDIR/signed-uki-XXXXXX.efi")"
-    yubiOS_log "Signing $(basename "$pe_path") with YubiKey PIV slot 9a db key ($SB_KEY_URI)"
+    yubiOS_log "Signing $(basename "$pe_path") with YubiKey PIV slot 9a db key ($SB_KEY_URI)" >&2
     systemd-sbsign sign \
       --private-key "$SB_KEY_URI" \
       --private-key-source "provider:pkcs11" \
@@ -209,16 +209,16 @@ sign_and_verify_pe() {
       "$pe_path"
     if ! sbverify --cert "$KEYDIR/db.crt" "$tmp_signed" >/dev/null; then
       rm -f "$tmp_signed"
-      yubiOS_log "Signature verification against $KEYDIR/db.crt failed for $pe_path"
+      yubiOS_log "Signature verification against $KEYDIR/db.crt failed for $pe_path" >&2
       return 1
     fi
     mv -f "$tmp_signed" "$pe_path"
     signer_tag="piv-slot-9a"
   elif [ -f "$ENROLLED_MARK" ]; then
-    yubiOS_log "System is marked enrolled ($ENROLLED_MARK) but $KEYDIR/db.crt is missing; refusing unsigned UKI update"
+    yubiOS_log "System is marked enrolled ($ENROLLED_MARK) but $KEYDIR/db.crt is missing; refusing unsigned UKI update" >&2
     return 1
   else
-    yubiOS_log "Setup mode (db.crt not enrolled yet); staging unsigned UKI in local OCI store"
+    yubiOS_log "Setup mode (db.crt not enrolled yet); staging unsigned UKI in local OCI store" >&2
   fi
   printf '%s\n' "$signer_tag"
 }

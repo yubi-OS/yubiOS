@@ -56,6 +56,11 @@ stub() {
 
 write_stubs() {
   stub ykman '[ "$1 $2 $3 $4" = "piv keys export 9a" ] || exit 3; echo "PUBKEY" > "$5"'
+  stub openssl 'if [ "$1" = pkey ]; then echo "Public-Key: (2048 bit)"; exit 0; fi; exit 0'
+  stub cert-to-efi-sig-list 'echo esl > "${!#}"'
+  stub sign-efi-sig-list 'echo sig > "${!#}"'
+  stub efi-updatevar 'exit 0'
+  stub efi-readvar 'exit 0'
   stub dracut 'out="${!#}"; echo "initramfs-for-$*" > "$out"'
   stub ukify 'out=""; prev=""; for a in "$@"; do [ "$prev" = "--output" ] && out="$a"; prev="$a"; done; echo "UKI-BUILT-$*" > "$out"'
   stub systemd-sbsign 'out=""; prev=""; for a in "$@"; do [ "$prev" = "--output" ] && out="$a"; prev="$a"; done; { cat "${!#}"; echo SIGNED-9A; } > "$out"'
