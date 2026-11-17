@@ -132,7 +132,17 @@ RUN cp /usr/lib/pam.d/yubiOS-sudo /etc/pam.d/sudo
 # on login. Homed FIDO2 handles auth for homed users; pam_u2f handles classic users.
 # suspend=1: forgets key material on system suspend.
 # Source: https://www.man7.org/linux/man-pages/man8/pam_systemd_home.8.html
-RUN cp /usr/lib/pam.d/yubiOS-system-auth /etc/pam.d/system-auth
+RUN rm -f /etc/pam.d/system-auth /etc/pam.d/password-auth && \
+    cp /usr/lib/pam.d/yubiOS-system-auth /etc/pam.d/system-auth && \
+    cp /usr/lib/pam.d/yubiOS-system-auth /etc/pam.d/password-auth && \
+    cp /usr/lib/pam.d/yubiOS-system-auth /usr/lib/pam.d/system-auth && \
+    cp /usr/lib/pam.d/yubiOS-system-auth /usr/lib/pam.d/password-auth && \
+    if [ -d /etc/authselect ]; then \
+      cp /usr/lib/pam.d/yubiOS-system-auth /etc/authselect/system-auth && \
+      cp /usr/lib/pam.d/yubiOS-system-auth /etc/authselect/password-auth; \
+    fi && \
+    ln -sf /dev/null /etc/systemd/system/authselect-apply-changes.service && \
+    ln -sf /dev/null /usr/lib/systemd/system/authselect-apply-changes.service
 
 # ── Apply systemd presets ─────────────────────────────────────────────────
 # systemctl preset-all inside a container build invokes systemd-machine-id-setup,

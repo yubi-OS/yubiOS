@@ -7,6 +7,7 @@ kargs = [
   # state/deploy/<digest>/var -> /var are writable (while composefs EROFS / and
   # /sysroot remain read-only).
   "rw",
+  "fsck.repair=yes",
   # Disable SELinux enforcing on the composefs rootfs (yubiOS enforces BPF-LSM
   # RestrictFileSystems= and systemd service sandboxing; container builds on
   # Ubuntu runners and `bootc install --disable-selinux` do not write SELinux

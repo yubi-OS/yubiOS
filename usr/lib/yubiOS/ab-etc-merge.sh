@@ -68,3 +68,15 @@ if [ -b "$YUBIOS_ROOT_LV" ]; then
     ln -s var/home /home
   fi
 fi
+
+# Ensure authselect-apply-changes cannot overwrite yubiOS PAM system-auth/password-auth
+# (which otherwise strips pam_systemd_home.so from login on tty1/kmsconvt and causes
+# user@<uid>.service's (sd-pam) helper to broadcast the YubiKey PIN prompt to serial wall).
+if [ -f /usr/lib/pam.d/yubiOS-system-auth ]; then
+  for pam_target in /etc/pam.d/system-auth /etc/pam.d/password-auth; do
+    if [ -L "$pam_target" ] || ! grep -q "pam_systemd_home.so" "$pam_target" 2>/dev/null; then
+      rm -f "$pam_target"
+      cp /usr/lib/pam.d/yubiOS-system-auth "$pam_target"
+    fi
+  done
+fi
