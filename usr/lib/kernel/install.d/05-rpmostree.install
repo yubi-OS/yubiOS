@@ -1,0 +1,48 @@
+#!/bin/bash
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# /usr/lib/kernel/install.d/05-rpmostree.install (ADR-034, OMN-191)
+#
+# Replaces fedora-bootc's stock 05-rpmostree.install, which runs dracut in /tmp
+# (tmpfs) and calls rename() across the mount boundary into /usr/lib/modules/<kver>/,
+# failing with `Invalid cross-device link (os error 18)` (`EXDEV`) when /usr is mounted
+# via the yubiOS 3-way LVM OverlayFS, and exiting 77 before any UKI re-sign hook runs.
+#
+# Behavior:
+#   - On `add <kver> <entry-dir> <kernel-image> [initrd...]`:
+#     1. Generates /usr/lib/modules/<kver>/initramfs.img into a same-filesystem
+#        temporary file (`/usr/lib/modules/<kver>/.initramfs.img.tmp.$$`) and
+#        atomically `mv -f`s it into place (zero cross-device rename).
+#     2. Invokes `/usr/lib/yubiOS/uki/uki-sync-and-sign.sh` so the updated kernel +
+#        initramfs is ukified, re-signed with the attached YubiKey PIV slot 9a db key,
+#        committed to `/var/lib/yubiOS/oci`, and deployed to the ESP.
+#   - Exits 0 so downstream kernel-install plugins (`95-yubios-uki-resign.install`)
+#     can also run cleanly.
+
+set -euo pipefail
+
+COMMAND="${1:-}"
+KERNEL_VERSION="${2:-}"
+# $3 is entry-dir, $4 is kernel-image
+KERNEL_IMAGE="${4:-}"
+
+if [ "$COMMAND" != "add" ] || [ -z "$KERNEL_VERSION" ]; then
+  exit 0
+fi
+
+MODULES_BASE="${YUBIOS_MODULES_DIR:-/usr/lib/modules}"
+MOD_DIR="$MODULES_BASE/$KERNEL_VERSION"
+if [ -d "$MOD_DIR" ] && [ -w "$MOD_DIR" ]; then
+  INITRD_OUT="$MOD_DIR/initramfs.img"
+  if command -v dracut >/dev/null 2>&1; then
+    TMP_INITRD="$MOD_DIR/.initramfs.img.tmp.$$"
+    dracut --no-hostonly --force --kver "$KERNEL_VERSION" "$TMP_INITRD"
+    mv -f "$TMP_INITRD" "$INITRD_OUT"
+  fi
+fi
+
+SYNC_SH="${YUBIOS_UKI_SYNC_SH:-/usr/lib/yubiOS/uki/uki-sync-and-sign.sh}"
+if [ -x "$SYNC_SH" ]; then
+  "$SYNC_SH" --reason "05-rpmostree:${COMMAND}:${KERNEL_VERSION}" --kver "$KERNEL_VERSION" --kernel-image "$KERNEL_IMAGE"
+fi
+
+exit 0

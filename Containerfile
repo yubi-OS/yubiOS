@@ -104,7 +104,10 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
       /etc/ssh/sshd_config.d/10-yubiOS-bcvk-root-key.conf
 
 # ── Permissions for enrollment and first-boot scripts ────────────────────
-RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh
+RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
+    mkdir -p /etc/kernel/install.d /var/lib/yubiOS/oci && \
+    cp -f /usr/lib/kernel/install.d/05-rpmostree.install /etc/kernel/install.d/05-rpmostree.install && \
+    cp -f /usr/lib/kernel/install.d/95-yubios-uki-resign.install /etc/kernel/install.d/95-yubios-uki-resign.install
 
 # ── /usr/bin symlinks for enrollment commands ────────────────────────────
 # Wrapper scripts in /usr/lib/yubiOS/ exec the real scripts.
@@ -116,6 +119,7 @@ RUN ln -sf /usr/lib/yubiOS/enroll.sh              /usr/bin/yubiOS-enroll       &
     ln -sf /usr/lib/yubiOS/enroll-pam-wrapper.sh  /usr/bin/yubiOS-enroll-pam  && \
     ln -sf /usr/lib/yubiOS/enroll-ssh-wrapper.sh  /usr/bin/yubiOS-enroll-ssh  && \
     ln -sf /usr/lib/yubiOS/enroll-homed-wrapper.sh /usr/bin/yubiOS-enroll-homed && \
+    ln -sf /usr/lib/yubiOS/uki/uki-sync-and-sign.sh /usr/bin/yubiOS-uki-sync && \
     if [ ! -e /usr/lib64/libykcs11.so ] && [ -e /usr/lib64/libykcs11.so.2 ]; then \
       ln -sf libykcs11.so.2 /usr/lib64/libykcs11.so; \
     fi
@@ -168,6 +172,7 @@ RUN systemctl preset-all && \
     mkdir -p /usr/lib/systemd/system/local-fs.target.wants /usr/lib/systemd/system/multi-user.target.wants && \
     ln -sf ../yubiOS-lvm-usr-overlay.service /usr/lib/systemd/system/local-fs.target.wants/yubiOS-lvm-usr-overlay.service && \
     ln -sf ../yubiOS-lvm-usr-overlay.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-lvm-usr-overlay.service && \
+    ln -sf ../yubiOS-uki-resign.path /usr/lib/systemd/system/multi-user.target.wants/yubiOS-uki-resign.path && \
     rm -f /etc/machine-id /var/lib/systemd/random-seed
 
 # ── PAM: initialise u2f_keys file (populated by yubiOS-enroll-pam) ───────

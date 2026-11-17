@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# /usr/lib/rpm/macros.d/macros.yubios-uki (ADR-034, OMN-191)
+%__yubios_uki_sync /usr/lib/yubiOS/uki/uki-sync-and-sign.sh

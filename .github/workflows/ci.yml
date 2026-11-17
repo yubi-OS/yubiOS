@@ -118,7 +118,7 @@ jobs:
               PUSH_WORKFLOWS=(yubiOS-ci.yml ci_dev_image.yml ci_mkosi-installer.yml)
               ;;
             vms|vm-tests)
-              WORKFLOWS=(ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml ci_test-ftpm-tpm0.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test_bootc-filesystem.yml)
+              WORKFLOWS=(ci_test-vm.yml ci_test-vgpu-vm.yml ci_test_sealed-uki-vm.yml ci_test-ftpm-tpm0.yml ci_test-bootc-lifecycle.yml ci_test-sysext-portable.yml ci_test_bootc-filesystem.yml ci_test-uki-local-oci-vm.yml ci_test-uki-local-oci-vm.yml)
               ;;
             misc)
               WORKFLOWS=(ci_token-audit.yml ci_input-shape.yml ci_dispatch-reachability.yml ci_fork-drift-detect.yml ci_package-floor.yml autoinstall-verify.yml diag_sign-matrix.yml lean-check.yml lean-run.yml)
