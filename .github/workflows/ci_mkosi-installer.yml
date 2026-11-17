@@ -98,7 +98,7 @@ permissions:
 
 env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
-  FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:1989dd9223dc2ef03e3be158165be13e55b5571c62e9f3c88992950cf355416d # 45 (45.20261114.0) — see PINNED.md
+  FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:d3f0430d6a5f0df81eaebda4d4a4ea3c3fe2524dfbc135059e7811d35902309d # 45 (45.20261114.0) — see PINNED.md
 
 jobs:
   build:
