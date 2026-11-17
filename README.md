@@ -11,7 +11,7 @@
 [![YubiKey 5](https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square)](https://www.yubico.com)
 [![FIDO2](https://img.shields.io/badge/FIDO2-hidraw-purple?style=flat-square)](https://fidoalliance.org)
 
-*No OEM. No trust anchors you don't control.*
+*No OEM. No vendors. No trust anchors you don't control.*
 ### 🦴 🚧 Work In Progress 🚧 Technical Preview 🚧 Work In Progress 🚧
 
 </div>
