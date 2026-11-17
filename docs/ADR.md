@@ -1,6 +1,6 @@
 # Architecture Decision Records - yubiOS
 
-Last reviewed: 2026-07-21
+Last reviewed: 2026-11-17
 
 ## ADR-001: YubiKey as TPM replacement
 
@@ -72,11 +72,7 @@ systemd-sbsign integrates tighter with the UKI pipeline and is now the upstream 
 **Future:** A fully hidraw-only signing path (FIDO2 HMAC-secret wrapping a
 Secure Boot key) is tracked in TODO.md. `age-plugin-fido2-hmac` is a candidate.
 
-**Consequence:** Users need `pcscd` running for PIV ops. The owner PK/KEK/db chain
-is still unenrolled on hardware: `B-OWNER-KEYS` (OMN-171) remains open until an
-attended slot `9a` ceremony runs on rock1 with the StandaloneMM enrollment step
-added to `enroll-sb.sh`. That ceremony is a Technical Preview Tier 2 gate (see
-[refs/technical-preview-entry-criteria-2026-11-12.md](../refs/technical-preview-entry-criteria-2026-11-12.md)).
+**Consequence:** Users need `pcscd` running for PIV ops. On 2026-11-17 (`fvf11-4f6f49f9.new`, `fvf12-948afc8e.new`), the attended PIV slot `9a` ceremony completed on the physical Radxa ROCK 5B (`rk3588`): `enroll-sb.sh` generated `PK`, `KEK`, and `db`, enrolled them into OP-TEE StandaloneMM (`SetupMode: 1 -> 0`), re-signed all 3 ESP EFI binaries (`systemd-bootaa64.efi`, `BOOTAA64.EFI`, and the composefs UKI), and rebooted under enforcing UEFI Secure Boot (`secureboot: Secure boot enabled`, `Kernel is locked down from EFI Secure Boot mode`), retiring `B-OWNER-KEYS` (`OMN-171` Done, `OMN-47` Done).
 
 ```bash
 ykman config usb --enable FIDO --enable CCID
@@ -586,8 +582,8 @@ ConditionSecurity=measured-os
 
 ## ADR-018: yubiOS-Owned ARM64 Secure-World Stack (TF-A + OP-TEE + fTPM)
 
-**Date:** 2026-06-24
-**Status:** Proposed - post-launch (see [FUTURE.md](FUTURE.md))
+**Date:** 2026-06-24 (amended 2026-11-17: Accepted; proven on Radxa ROCK 5B `rk3588` in `fvf11-4f6f49f9.new` / `fvf12-948afc8e.new`, Linear OMN-126 Done)
+**Status:** Accepted
 
 **Decision:** Post-launch, build the ARM64 secure-world stack: TF-A as EL3 monitor and Trusted Board Boot chain, OP-TEE as BL32, the Microsoft `ms-tpm-20-ref` fTPM as an OP-TEE Trusted Application, and U-Boot as BL33.
 
@@ -640,8 +636,8 @@ See [refs/technical-preview-entry-criteria-2026-11-12.md](../refs/technical-prev
 
 ## ADR-020: U-Boot as the ARM64 UEFI Firmware + Authenticated Variable Store (OP-TEE StandaloneMM)
 
-**Date:** 2026-06-24
-**Status:** Proposed - post-launch (see [FUTURE.md](FUTURE.md))
+**Date:** 2026-06-24 (amended 2026-11-17: Accepted; proven on Radxa ROCK 5B `rk3588` in `fvf11-4f6f49f9.new` / `fvf12-948afc8e.new`, Linear OMN-128 Done)
+**Status:** Accepted
 
 **Decision:** On ARM64, U-Boot provides the UEFI environment and chainloads the same systemd-boot + UKI artifacts that x86-64 uses. Secure Boot variables are stored through EDK2 StandaloneMM running as an OP-TEE module and backed by RPMB on production boards.
 
@@ -998,3 +994,43 @@ The closest cousin in the yubiOS repo is `drm-gpu-quota-secure-time` (per-cgroup
 ## 2026-09-18 drift check (wayfinder round 11, cycle 5)
 
 ADR.md (round-9 cycle-1 mojibake-repaired): the ADR corpus is unchanged this round; the round-8 upstream note (bootc v1.16.13) keeps ADR-032/OMN-150 option (b) viable; note additive.
+
+---
+
+## ADR-034: Local Composefs OCI Image Repository and Automatic YubiKey UKI Re-Signing on Kernel and OS Updates
+
+**Date:** 2026-11-17
+**Status:** Accepted
+**ADR:** ADR-034
+**Related:** ADR-002 (Secure Boot signing via PIV slot 9a), ADR-006 (both mkosi and bootc build paths), ADR-007 (composefs + dm-verity), ADR-008 (`systemd-sbsign`), ADR-013 (A/B updates), ADR-032 (Kernel+Rootfs Split), Linear OMN-171, OMN-191
+**Background:** Hardware bring-up and enrollment logs `fvf11-4f6f49f9.new` and `fvf12-948afc8e.new` on Radxa ROCK 5B (`rk3588`), [refs/rock5b-hardware-milestone-and-uki-local-oci-2026-11-17.md](../refs/rock5b-hardware-milestone-and-uki-local-oci-2026-11-17.md)
+
+**Context.** On 2026-11-17 (`fvf11-4f6f49f9.new` and `fvf12-948afc8e.new`), the Radxa ROCK 5B (`rk3588`) completed full 5-step physical YubiKey enrollment (`enroll-sb.sh` PIV slot `9a` `PK`/`KEK`/`db` StandaloneMM enrollment + UKI re-signing, `enroll-luks.sh` `crypt > lvm > (usr_a 1%, usr_b 1%, yubios-root 96%, 2% free)` + 3-way `/usr` OverlayFS, `enroll-homed.sh`, `enroll-ssh.sh`, `enroll-pam.sh`) and rebooted cleanly under enforcing UEFI Secure Boot (`secureboot: Secure boot enabled`, `Kernel is locked down from EFI Secure Boot mode`).
+
+Subsequent testing of a package/kernel update (`kernel-7.3.3-300.fc45.aarch64` -> `kernel-7.3.4-300.fc45.aarch64` in `fvf12-948afc8e.new` L4552-L6675) exposed two structural gaps in the day-2 upgrade lifecycle:
+
+1. **Cross-device `EXDEV` in `05-rpmostree.install` and missing UKI re-sign hook:** When `dnf`/`rpm` or `rpm-ostree` installs a new kernel while `/usr` is mounted as the 3-way OverlayFS (`lowerdir=/run/yubiOS/ab/usr-b/lower:/run/yubiOS/ab/usr-base,upperdir=/run/yubiOS/ab/usr-a/upper,workdir=/run/yubiOS/ab/usr-a/work`), upstream `/usr/lib/kernel/install.d/05-rpmostree.install` runs `dracut` in `/tmp` (`tmpfs`) and attempts an cross-filesystem `rename()` into `/usr/lib/modules/<kver>/initramfs.img`, failing with `Invalid cross-device link (os error 18)`. Furthermore, neither the `dnf`/`rpm` route nor the `rpm-ostree`/`bootc` route had a hook to rebuild the Type2 UKI (`ukify` / `bootc container ukify`) and re-sign it with the owner's attached YubiKey PIV slot `9a` `db` key (`systemd-sbsign`). Under enforcing UEFI Secure Boot (`SetupMode=0`), an unsigned or CI-signed UKI is rejected at the next boot.
+2. **No local composefs OCI image store on the machine for re-signed ukified images:** In CI (`Containerfile` stages `rootfs` -> `uki` -> `prefinal` -> `FROM scratch`), `bootc` images are sealed by computing the rootfs composefs digest (`bootc container compute-composefs-digest`), embedding `composefs=<digest>` into `/boot/EFI/Linux/<kver>.efi`, and packaging the single-layer OCI image. On the booted machine, however, `enroll-sb.sh` only signed the EFI binaries in-place on the ESP without recording or committing a local composefs OCI image containing the owner-signed UKI, and kernel/OS updates had no local OCI repository (`oci:/var/lib/yubiOS/oci`) to stage and deploy re-signed ukified images.
+
+**Decision.** yubiOS establishes a unified **on-device UKI re-sign and local composefs OCI image pipeline** (`/usr/lib/yubiOS/uki/uki-sync-and-sign.sh`, symlinked as `/usr/bin/yubiOS-uki-sync`) that is invoked both on **every kernel/initramfs/UKI update** (across both `dnf`/`rpm` and `rpm-ostree`/`bootc` routes) and during **initial `yubiOS-enroll` (`enroll-sb.sh` / `enroll.sh`)**:
+
+1. **Same-filesystem `dracut` initramfs generation in `05-rpmostree.install`:**
+   - `/usr/lib/kernel/install.d/05-rpmostree.install` (and its `/etc/kernel/install.d/05-rpmostree.install` shadow so package upgrades cannot clobber it) overrides upstream's cross-device `rename()` behavior when `/usr` is writable (3-way OverlayFS or unlocked deployment). It stages the new initramfs to a same-filesystem temporary file `/usr/lib/modules/<kver>/.initramfs.img.tmp.$$` via `dracut --no-hostonly --force --kver "<kver>"` and atomically renames it to `/usr/lib/modules/<kver>/initramfs.img`, eliminating `os error 18` (`EXDEV`).
+2. **Automatic UKI assembly and YubiKey PIV slot `9a` re-signing across both `dnf`/`rpm` and `rpm-ostree`/`bootc`:**
+   - `/usr/lib/kernel/install.d/95-yubios-uki-resign.install`, `/usr/lib/rpm/macros.d/macros.yubios-uki` (`%transfiletriggerin` on `/usr/lib/modules` and `/boot/EFI/Linux`), and `yubiOS-uki-resign.path` / `yubiOS-uki-resign.service` all converge on `/usr/lib/yubiOS/uki/uki-sync-and-sign.sh`.
+   - When invoked for a kernel version `<kver>` (or `--from-signed-esp` during `enroll-sb.sh`), `uki-sync-and-sign.sh`:
+     a. Resolves the active or staged rootfs composefs digest (`bootc container compute-composefs-digest`, `/proc/cmdline` `composefs=`, or `fsverity digest` / `sha512sum`).
+     b. Builds a Type2 UKI (`bootc container ukify` or `ukify build`) combining `/usr/lib/modules/<kver>/vmlinuz`, `/usr/lib/modules/<kver>/initramfs.img`, the kernel command line (`composefs=<digest>` + `/usr/lib/bootc/kargs.d/50-yubiOS.toml` + `/usr/lib/bootc/install/50-yubiOS.toml`), and `/usr/lib/os-release`.
+     c. Signs the resulting UKI (and `systemd-boot` loader binaries on the ESP if unsigned or updated) with the attached YubiKey PIV slot `9a` key (`pkcs11:id=%01;type=private`) via `systemd-sbsign` and verifies each signature against `/var/lib/yubiOS/secureboot/db.crt` with `sbverify`.
+3. **Local composefs OCI Image Repository (`/var/lib/yubiOS/oci`):**
+   - Mirroring the `Containerfile` `uki` -> `FROM scratch` OCI build path, `uki-sync-and-sign.sh` maintains a standard OCI Image Layout v1.0.0 repository at `/var/lib/yubiOS/oci` (persisted on `/var/home/.yubios-oci` when the LUKS2+LVM `yubios-root` volume is mounted):
+     - `oci-layout` (`{"imageLayoutVersion": "1.0.0"}`)
+     - `blobs/sha256/<digest>` storing the gzipped tar layer (`/boot/EFI/Linux/<kver>.efi` + `/boot/EFI/Linux/bootc/bootc_composefs-<composefs_digest>.efi` + `/usr/lib/yubiOS/uki/yubios.efi`), the deterministic OCI image config JSON (`Labels: {"containers.bootc": "1", "ostree.bootable": "true", "org.yubios.uki.kver": "<kver>", "org.yubios.uki.composefs": "<composefs_digest>", "org.yubios.uki.signer": "piv-slot-9a"}`), and the OCI image manifest JSON.
+     - `index.json` publishing local tags `yubios-local:latest`, `yubios-local:<kver>`, and `yubios-uki:<composefs_digest>` (consumable via `oci:/var/lib/yubiOS/oci:yubios-local:latest`).
+     - `composefs/bootc_composefs-<composefs_digest>.efi` and `last-deployed.json` recording the active signed UKI sha256, composefs digest, kernel version, and OCI manifest digest.
+4. **Unified ESP + `BLSConfig` + `bootc` Deployment at Both Enrollment and Upgrade Time:**
+   - Every run of `uki-sync-and-sign.sh` (including at the end of `enroll-sb.sh resign` / `all` during initial `yubiOS-enroll`) atomically installs the YubiKey-signed UKI to `/EFI/Linux/bootc/bootc_composefs-<composefs_digest>.efi` on the ESP, updates `/loader/entries/bootc_yubios-<version>-1.conf` (`uki /EFI/Linux/bootc/bootc_composefs-<composefs_digest>.efi`), and stages the local OCI reference in `/var/lib/yubiOS/oci`.
+
+**Consequences:**
+- Both `dnf`/`rpm` kernel updates (on the 3-way `/usr` OverlayFS) and `rpm-ostree`/`bootc` image updates share a single fail-closed UKI re-sign and local OCI store path.
+- If a kernel update runs while no YubiKey or `db.crt` is enrolled yet (pre-enrollment setup mode), `uki-sync-and-sign.sh` still builds the UKI, commits the unsigned staging artifact into `/var/lib/yubiOS/oci`, and stages it on the ESP so `yubiOS-enroll` can sign and seal it later; once `db.crt` is enrolled (`SetupMode=0` / `.sb-enrolled` present), `uki-sync-and-sign.sh` requires the YubiKey PIV slot `9a` signature and `sbverify` check to pass before replacing any signed UKI on the ESP.
