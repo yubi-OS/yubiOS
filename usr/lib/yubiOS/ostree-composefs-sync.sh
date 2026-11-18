@@ -42,6 +42,7 @@ boot_sync() {
 
   local os_version="45"
   if [ -r /etc/os-release ]; then
+    # shellcheck disable=SC1091
     os_version="$(. /etc/os-release && printf '%s' "${OSTREE_VERSION:-${VERSION_ID:-45}}")"
   fi
   local bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
