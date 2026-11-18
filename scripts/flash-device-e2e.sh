@@ -466,7 +466,7 @@ EOF
   bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
   sudo mkdir -p "$MNT_DIR/ostree/repo/objects" "$MNT_DIR/ostree/repo/refs/heads" "$MNT_DIR/ostree/repo/tmp" \
     "$MNT_DIR/ostree/deploy/default/var" "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc" \
-    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr" "$MNT_DIR/ostree/boot.1/default/${bootcsum}"
+    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr" "$MNT_DIR/ostree/boot.1.1/default/${bootcsum}"
   sudo tee "$MNT_DIR/ostree/repo/config" >/dev/null <<'EOF_REPO'
 [core]
 repo_version=1
@@ -480,16 +480,16 @@ composefs=true
 EOF_REPO
   sudo tee "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0.origin" >/dev/null <<EOF_ORIG
 [origin]
+refspec=yubios/latest
 container-image-reference=ostree-unverified-registry:${OS_IMAGE}
 EOF_ORIG
-  sudo ln -sfn "../../../deploy/default/deploy/${csum_short}.0" "$MNT_DIR/ostree/boot.1/default/${bootcsum}/0"
-  sudo ln -sfn boot.1 "$MNT_DIR/ostree/boot.1.1"
+  sudo ln -sfn "../../../deploy/default/deploy/${csum_short}.0" "$MNT_DIR/ostree/boot.1.1/default/${bootcsum}/0"
+  sudo ln -sfn boot.1.1 "$MNT_DIR/ostree/boot.1"
   {
-    printf '%s
-' "$bls_content"
-    printf 'options ostree=/ostree/boot.1/default/%s/0
-' "$bootcsum"
+    printf '%s\n' "$bls_content"
+    printf 'options ostree=/ostree/boot.1/default/%s/0\n' "$bootcsum"
   } | sudo tee "$MNT_DIR/boot/loader.1/entries/$bls_name" >/dev/null
+  sudo cp -f "$MNT_DIR/boot/loader.1/entries/$bls_name" "$MNT_DIR/boot/loader.1/entries/ostree-1.conf"
   sudo sync
   sudo umount "$MNT_DIR"
 

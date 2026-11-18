@@ -7,11 +7,17 @@
 # while keeping the vfat ESP (/dev/mmcblk1p1) and libostree's required symbolic link
 # (`/boot/loader -> loader.1`) 100% compatible:
 #   - `vfat` (required by UEFI for the ESP) cannot store symlinks (`boot/loader -> loader.1`).
-#   - `libostree` (`ostree` / `rpm-ostree`) requires `/boot/loader` to be a symbolic link.
-#   - Solution: move the `vfat` ESP mount to `/efi`, bind-mount `/sysroot/boot` (`ext4`,
-#     which holds the real `loader -> loader.1` symlink) at `/boot`, and bind-mount
-#     `/efi/EFI` onto `/boot/EFI` so both `systemd-boot`/`enroll-sb.sh` and `libostree`
-#     work seamlessly.
+#   - `systemd-gpt-auto-generator` sets up `boot.automount` (`autofs`) + `boot.mount` (`vfat`)
+#     on `/boot`, which would shadow `/sysroot/boot/loader` with a `vfat` directory.
+#   - `libostree` (`ostree` / `rpm-ostreed`) requires:
+#       1. `/boot/loader` to be a symbolic link (`loader -> loader.1`),
+#       2. `/boot/loader/entries/ostree-1.conf` with `options ostree=/ostree/boot.1/default/<bootcsum>/0`,
+#       3. `/sysroot/ostree/boot.1` to be a symbolic link to `boot.1.1` (and `boot.1.1` to be the directory),
+#       4. `/sysroot/ostree/repo` to hold a valid `<csum>.commit` object for deployment 0, and
+#       5. `/run/ostree-booted` to hold the serialized `a{sv}` GVariant with `backing-root-device-inode`.
+#   - Solution: mount the `vfat` ESP at `/run/yubiOS/efi`, runtime-mask and stop `boot.automount`
+#     and `boot.mount`, bind-mount `/sysroot/boot` (`ext4`) at `/boot`, and bind-mount
+#     `/run/yubiOS/efi/EFI` (`vfat`) at `/boot/EFI`.
 
 set -euo pipefail
 
@@ -25,119 +31,140 @@ boot_sync() {
     mount -o remount,rw /sysroot 2>/dev/null || true
   fi
 
-  local csum="40cf629c9d0745d437063c082ffe47b255f1e2e7f4b4f162ef54f32da14e794f"
-  local bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
-  if [ -r /proc/cmdline ]; then
-    local cmd_cfs
-    cmd_cfs="$(sed -nE 's/.*composefs\.digest=v[12]-sha(256|512)-[0-9]+:\??([0-9a-fA-F]{64}).*/\2/p' /proc/cmdline | head -n1 || true)"
-    [ -z "$cmd_cfs" ] && cmd_cfs="$(sed -nE 's/.*composefs=\??([0-9a-fA-F]{64}).*/\1/p' /proc/cmdline | head -n1 || true)"
-    [ -n "$cmd_cfs" ] && csum="$cmd_cfs"
+  local os_version="45"
+  if [ -r /etc/os-release ]; then
+    os_version="$(. /etc/os-release && printf '%s' "${OSTREE_VERSION:-${VERSION_ID:-45}}")"
   fi
+  local bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
 
-  local deploy_dir=""
+  mkdir -p "$sysroot/ostree/repo" "$sysroot/ostree/deploy/default/var" "$sysroot/ostree/deploy/default/deploy"
+  if [ ! -f "$sysroot/ostree/repo/config" ]; then
+    ostree --repo="$sysroot/ostree/repo" init --mode=bare
+  fi
+  ostree --repo="$sysroot/ostree/repo" config set sysroot.bootloader none
+
+  local csum=""
+  csum="$(ostree --repo="$sysroot/ostree/repo" rev-parse yubios/latest 2>/dev/null || true)"
+  if [ -z "$csum" ] || ! ostree --repo="$sysroot/ostree/repo" show "$csum" >/dev/null 2>&1; then
+    ostree --repo="$sysroot/ostree/repo" config set ex-integrity.composefs false 2>/dev/null || true
+    mkdir -p /run/yubiOS/ostree-empty-tree/usr /run/yubiOS/ostree-empty-tree/etc
+    csum="$(ostree --repo="$sysroot/ostree/repo" commit -b yubios/latest \
+      --tree=dir=/run/yubiOS/ostree-empty-tree \
+      --subject="yubiOS composefs deployment" \
+      --add-metadata-string="version=${os_version}")"
+    rm -rf /run/yubiOS/ostree-empty-tree
+  fi
+  ostree --repo="$sysroot/ostree/repo" config set ex-integrity.composefs true
+
   local cand
-  for cand in "$sysroot"/ostree/deploy/*/deploy/*.0; do
-    if [ -d "$cand" ]; then
-      deploy_dir="$cand"
-      break
+  for cand in "$sysroot"/ostree/deploy/default/deploy/*.0; do
+    [ -e "$cand" ] || continue
+    if [ "$cand" != "$sysroot/ostree/deploy/default/deploy/${csum}.0" ]; then
+      rm -rf "$cand" "${cand}.origin"
     fi
   done
 
-  if [ -z "$deploy_dir" ]; then
-    mkdir -p "$sysroot/ostree/repo/objects" "$sysroot/ostree/repo/refs/heads" "$sysroot/ostree/repo/tmp" \
-      "$sysroot/ostree/deploy/default/var" "$sysroot/ostree/deploy/default/deploy"
-    if [ ! -f "$sysroot/ostree/repo/config" ]; then
-      cat > "$sysroot/ostree/repo/config" <<'EOF_REPO'
-[core]
-repo_version=1
-mode=bare
-
-[sysroot]
-bootloader=none
-
-[ex-integrity]
-composefs=true
-EOF_REPO
-    fi
-    deploy_dir="$sysroot/ostree/deploy/default/deploy/${csum}.0"
-    mkdir -p "$deploy_dir/etc" "$deploy_dir/usr"
-    if [ ! -f "${deploy_dir}.origin" ]; then
-      cat > "${deploy_dir}.origin" <<'EOF_ORIG'
+  local deploy_dir="$sysroot/ostree/deploy/default/deploy/${csum}.0"
+  mkdir -p "$deploy_dir/etc" "$deploy_dir/usr"
+  cat > "${deploy_dir}.origin" <<EOF_ORIG
 [origin]
-container-image-reference=ostree-unverified-registry:docker.io/0mniteck/yubios:latest
+refspec=yubios/latest
 EOF_ORIG
-    fi
-    mkdir -p "$sysroot/ostree/boot.1/default/${bootcsum}"
-    ln -sfn "../../../deploy/default/deploy/${csum}.0" "$sysroot/ostree/boot.1/default/${bootcsum}/0"
-    ln -sfn boot.1 "$sysroot/ostree/boot.1.1" 2>/dev/null || true
+
+  # In libostree, ostree/boot.1 MUST be a symlink to boot.1.1, and ostree/boot.1.1 is the directory
+  if [ -d "$sysroot/ostree/boot.1" ] && [ ! -L "$sysroot/ostree/boot.1" ]; then
+    rm -rf "$sysroot/ostree/boot.1" "$sysroot/ostree/boot.1.1"
+  fi
+  if [ -L "$sysroot/ostree/boot.1.1" ]; then
+    rm -f "$sysroot/ostree/boot.1.1"
+  fi
+  mkdir -p "$sysroot/ostree/boot.1.1/default/${bootcsum}"
+  ln -sfn "../../../deploy/default/deploy/${csum}.0" "$sysroot/ostree/boot.1.1/default/${bootcsum}/0"
+  ln -sfn boot.1.1 "$sysroot/ostree/boot.1"
+
+  # Trigger boot.automount if /boot is currently an untriggered autofs mount
+  if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qx 'autofs' && ! findmnt -rn -t vfat /boot >/dev/null 2>&1; then
+    ls /boot >/dev/null 2>&1 || true
   fi
 
-  # Ensure /sysroot/boot (ext4) has `loader -> loader.1` symlink and BLS entry with `options ostree=...`
+  mkdir -p /run/yubiOS/efi
+  if findmnt -rn -t vfat /boot >/dev/null 2>&1 && ! mountpoint -q /run/yubiOS/efi; then
+    mount --bind /boot /run/yubiOS/efi 2>/dev/null || true
+  fi
+  if ! mountpoint -q /run/yubiOS/efi; then
+    local esp_src=""
+    esp_src="$(findmnt -rn -t vfat -o SOURCE /boot 2>/dev/null | head -n1 || true)"
+    if [ -z "$esp_src" ]; then
+      esp_src="$(systemctl show -p What --value boot.mount 2>/dev/null || true)"
+    fi
+    if [ -z "$esp_src" ] || [ ! -e "$esp_src" ]; then
+      if [ -b /dev/disk/by-designator/esp ]; then
+        esp_src="$(readlink -f /dev/disk/by-designator/esp)"
+      else
+        esp_src="$(blkid -t PARTTYPE=c12a7328-f81f-11d2-ba4b-00a0c93ec93b -o device 2>/dev/null | head -n1 || true)"
+      fi
+    fi
+    if [ -n "$esp_src" ] && [ -e "$esp_src" ]; then
+      mount -t vfat "$esp_src" /run/yubiOS/efi 2>/dev/null || mount "$esp_src" /run/yubiOS/efi 2>/dev/null || true
+    fi
+  fi
+
   mkdir -p "$sysroot/boot/loader.1/entries" "$sysroot/boot/EFI"
+  if [ -d "$sysroot/boot/loader" ] && [ ! -L "$sysroot/boot/loader" ]; then
+    rm -rf "$sysroot/boot/loader"
+  fi
   ln -sfn loader.1 "$sysroot/boot/loader"
 
-  # If /boot is currently the vfat ESP mount (where /boot/loader is a vfat directory, not a symlink),
-  # keep the vfat ESP mounted at /efi, copy its loader/entries/*.conf into /sysroot/boot/loader.1/entries/
-  # with `options ostree=...`, and mount /sysroot/boot at /boot with /efi/EFI bind-mounted at /boot/EFI.
-  local boot_fstype
-  boot_fstype="$(findmnt -no FSTYPE /boot 2>/dev/null || true)"
-  if [ "$boot_fstype" = "vfat" ]; then
-    local esp_src
-    esp_src="$(findmnt -no SOURCE /boot 2>/dev/null || true)"
-    mkdir -p /run/yubiOS/efi
-    if [ -n "$esp_src" ] && ! mountpoint -q /run/yubiOS/efi; then
-      mount "$esp_src" /run/yubiOS/efi 2>/dev/null || true
-    fi
-    if [ -d /boot/loader/entries ]; then
-      cp -a /boot/loader/entries/. "$sysroot/boot/loader.1/entries/" 2>/dev/null || true
-    fi
-    for econf in "$sysroot"/boot/loader.1/entries/*.conf; do
-      [ -f "$econf" ] || continue
-      if ! grep -q 'ostree=' "$econf"; then
-        printf 'options ostree=/ostree/boot.1/default/%s/0\n' "$bootcsum" >> "$econf"
+  local uki_rel="/EFI/Linux/bootc/bootc_composefs-${csum}.efi"
+  if mountpoint -q /run/yubiOS/efi && [ -d /run/yubiOS/efi/loader/entries ]; then
+    cp -a /run/yubiOS/efi/loader/entries/. "$sysroot/boot/loader.1/entries/" 2>/dev/null || true
+    local uki_line
+    uki_line="$(grep -h '^uki ' /run/yubiOS/efi/loader/entries/*.conf 2>/dev/null | head -n1 | awk '{print $2}' || true)"
+    [ -n "$uki_line" ] && uki_rel="$uki_line"
+  fi
+
+  cat > "$sysroot/boot/loader.1/entries/ostree-1.conf" <<EOF_BLS
+title yubiOS ${os_version} (bootc, uki)
+version 1
+options ostree=/ostree/boot.1/default/${bootcsum}/0
+uki ${uki_rel}
+EOF_BLS
+
+  # Runtime-mask and stop boot.automount + boot.mount so vfat never shadows /boot/loader
+  if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)$' || systemctl is-active -q boot.automount 2>/dev/null || systemctl is-active -q boot.mount 2>/dev/null; then
+    systemctl mask --runtime boot.automount boot.mount 2>/dev/null || true
+    systemctl stop boot.mount boot.automount 2>/dev/null || true
+    local _i
+    for _i in 1 2 3 4; do
+      if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)$'; then
+        umount -l /boot 2>/dev/null || true
+      else
+        break
       fi
     done
-    systemctl stop boot.automount 2>/dev/null || true
-    umount /boot 2>/dev/null || true
-    mount --bind "$sysroot/boot" /boot 2>/dev/null || true
-    if mountpoint -q /run/yubiOS/efi; then
-      mkdir -p /boot/EFI
-      mount --bind /run/yubiOS/efi/EFI /boot/EFI 2>/dev/null || true
+  fi
+
+  if ! findmnt -rn /boot >/dev/null 2>&1 || findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)$'; then
+    mount --bind "$sysroot/boot" /boot
+  fi
+  if mountpoint -q /run/yubiOS/efi && [ -d /run/yubiOS/efi/EFI ]; then
+    mkdir -p /boot/EFI
+    if ! findmnt -rn /boot/EFI >/dev/null 2>&1; then
+      mount --bind /run/yubiOS/efi/EFI /boot/EFI
     fi
   fi
 
   python3 - "$deploy_dir" <<'PY'
 import os, sys
-deploy_dir = sys.argv[1]
-st = os.stat(deploy_dir)
-try:
-    import gi
-    gi.require_version("GLib", "2.0")
-    from gi.repository import GLib
-    builder = GLib.VariantBuilder(GLib.VariantType.new("a{sv}"))
-    builder.add_value(GLib.Variant.new_dict_entry(
-        GLib.Variant.new_string("composefs"),
-        GLib.Variant.new_variant(GLib.Variant.new_boolean(True))
-    ))
-    builder.add_value(GLib.Variant.new_dict_entry(
-        GLib.Variant.new_string("composefs.verity"),
-        GLib.Variant.new_variant(GLib.Variant.new_boolean(True))
-    ))
-    devino = GLib.Variant.new_tuple([
-        GLib.Variant.new_uint64(int(st.st_dev)),
-        GLib.Variant.new_uint64(int(st.st_ino))
-    ])
-    builder.add_value(GLib.Variant.new_dict_entry(
-        GLib.Variant.new_string("backing-root-device-inode"),
-        GLib.Variant.new_variant(devino)
-    ))
-    v = builder.end()
-    data = v.get_data_as_bytes().get_data()
-    with open("/run/ostree-booted", "wb") as f:
-        f.write(data)
-except Exception:
-    with open("/run/ostree-booted", "wb") as f:
-        f.write(b"")
+from gi.repository import GLib
+st = os.stat(sys.argv[1])
+v = GLib.Variant("a{sv}", {
+    "composefs": GLib.Variant("b", True),
+    "composefs.verity": GLib.Variant("b", True),
+    "backing-root-device-inode": GLib.Variant("(tt)", (int(st.st_dev), int(st.st_ino))),
+})
+with open("/run/ostree-booted", "wb") as f:
+    f.write(v.get_data_as_bytes().get_data())
 PY
 
   if [ "$was_ro" -eq 1 ]; then

@@ -103,6 +103,7 @@ TAR_B64="$(tar -C "$REPO_ROOT" -czf - \
   usr/lib/systemd/system/yubiOS-uki-resign.path \
   usr/lib/yubiOS/enroll-sb.sh \
   usr/lib/yubiOS/ab-etc-merge.sh \
+  usr/lib/yubiOS/ostree-composefs-sync.sh \
   tests/unit/test-uki-sync-and-sign.bats | base64 -w0)"
 
 g "mkdir -p /run/yubios-adr034-checkout && printf '%s' '${TAR_B64}' | base64 -d | tar -C /run/yubios-adr034-checkout -xzf - && test -x /run/yubios-adr034-checkout/usr/lib/yubiOS/uki/uki-sync-and-sign.sh" \
@@ -282,6 +283,28 @@ print(\"OCI repository verified:\", len(os.listdir(os.path.join(oci_dir, \"blobs
    mv "$WORK/keys/db.crt.bak" "$WORK/keys/db.crt"
    sbverify --cert "$WORK/keys/db.crt" "$UKI_ESP"
    echo "Negative fail-closed check passed; signed ESP UKI preserved."
+
+   echo "--- Assertion 2f: ostree-composefs-sync.sh replaces vfat /boot with ext4 /boot/loader symlink + /boot/EFI vfat bind-mount and passes ostree admin status + rpm-ostree status ---"
+   dd if=/dev/zero of="$WORK/vfat-esp.img" bs=1M count=32 status=none
+   mkfs.vfat "$WORK/vfat-esp.img" >/dev/null
+   mkdir -p /boot /sysroot
+   ln -sfn sysroot/ostree /ostree 2>/dev/null || true
+   mount -t vfat -o loop "$WORK/vfat-esp.img" /boot
+   mkdir -p /boot/EFI/Linux/bootc /boot/loader/entries
+   cp -f "$UKI_ESP" "/boot/EFI/Linux/bootc/$(basename "$UKI_ESP")"
+   cp -f "$BLS_CONF" "/boot/loader/entries/$(basename "$BLS_CONF")"
+   mkdir -p /sysroot/ostree/boot.1/default/81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686
+   ln -sfn boot.1 /sysroot/ostree/boot.1.1
+   "$WORK/usr-merged/lib/yubiOS/ostree-composefs-sync.sh" --boot-sync
+   test -L /boot/loader
+   test -L /sysroot/ostree/boot.1
+   test -d /sysroot/ostree/boot.1.1
+   findmnt -rn -o FSTYPE /boot/EFI | grep -qx "vfat"
+   ostree admin status | grep -q "^\* default"
+   systemctl start rpm-ostreed.service
+   systemctl is-active --quiet rpm-ostreed.service
+   rpm-ostree status | grep -q "yubios/latest"
+   echo "ostree admin status + rpm-ostreed.service + rpm-ostree status verified!"
 ' || die "in-guest ADR-034 UKI re-sign + local composefs OCI store assertions failed"
 
 log "PASS: swu2f + ADR-034 kernel/package UKI re-sign hooks + local composefs OCI repository verified in VM"

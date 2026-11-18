@@ -338,6 +338,12 @@ version ${kver}
 uki /EFI/Linux/bootc/bootc_composefs-${cfs_digest}.efi
 sort-key bootc-${os_id}-1
 EOF_BLS
+  if [ -d /run/yubiOS/efi/loader/entries ] && [ "$ESP" != "/run/yubiOS/efi" ]; then
+    cp -f "$entry_conf" "/run/yubiOS/efi/loader/entries/$(basename "$entry_conf")" 2>/dev/null || true
+  fi
+  if [ -f "$ESP/loader/entries/ostree-1.conf" ]; then
+    sed -i "s|^uki .*|uki /EFI/Linux/bootc/bootc_composefs-${cfs_digest}.efi|" "$ESP/loader/entries/ostree-1.conf" 2>/dev/null || true
+  fi
 
   if [ "${YUBIOS_BOOTC_SWITCH_LOCAL_OCI:-0}" = "1" ] && command -v bootc >/dev/null 2>&1; then
     bootc switch --transport oci "$OCI_DIR:yubios-local:latest" 2>/dev/null || true

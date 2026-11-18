@@ -194,6 +194,9 @@ if [ -n "$LUKS_UUID" ]; then
 fi
 
 /usr/lib/yubiOS/ab-etc-merge.sh || true
+if [ -x /usr/lib/yubiOS/ostree-composefs-sync.sh ]; then
+  /usr/lib/yubiOS/ostree-composefs-sync.sh --boot-sync || true
+fi
 
 mkdir -p /var/lib/yubiOS
 touch /var/lib/yubiOS/.luks-enrolled
