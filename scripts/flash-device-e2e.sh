@@ -423,20 +423,14 @@ EOF
     -v /dev:/dev \
     -v "$MNT_DIR:/target" \
     "$RESOLVED_OS" \
-    bash -c '
-      set -euo pipefail
-      bootc install to-filesystem \
-        --source-imgref="containers-storage:'"${RESOLVED_OS}"'" \
-        --composefs-backend \
-        --disable-selinux \
-        --bootloader=systemd \
-        --root-mount-spec="" \
-        --skip-finalize \
-        /target
-      if [ -x /usr/lib/yubiOS/ostree-composefs-sync.sh ]; then
-        /usr/lib/yubiOS/ostree-composefs-sync.sh --provision-target /target "'"${RESOLVED_OS}"'" "'"${OS_IMAGE}"'"
-      fi
-    '
+    bootc install to-filesystem \
+      --source-imgref="containers-storage:${RESOLVED_OS}" \
+      --composefs-backend \
+      --disable-selinux \
+      --bootloader=systemd \
+      --root-mount-spec="" \
+      --skip-finalize \
+      /target
 
   entry="$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
   [ -n "$entry" ] || die "No BLS entry created under $MNT_DIR/boot/loader/entries"
@@ -459,8 +453,44 @@ EOF
     done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
   fi
 
+  # Record the BLS entry content from the vfat ESP before unmounting $MNT_DIR/boot,
+  # then initialize the ext4 /boot/loader -> loader.1 symlink and /ostree deployment
+  # skeleton on $MNT_DIR (p2 ext4) so libostree/rpm-ostree has a real symlink on ext4.
+  bls_name="$(basename "$entry")"
+  bls_content="$(sudo cat "$entry")"
   sudo sync
   sudo umount "$MNT_DIR/boot"
+  sudo mkdir -p "$MNT_DIR/boot/loader.1/entries" "$MNT_DIR/boot/EFI" "$MNT_DIR/efi"
+  sudo ln -sfn loader.1 "$MNT_DIR/boot/loader"
+  csum_short="$(printf '%s' "$cd_digest" | cut -c1-64)"
+  bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
+  sudo mkdir -p "$MNT_DIR/ostree/repo/objects" "$MNT_DIR/ostree/repo/refs/heads" "$MNT_DIR/ostree/repo/tmp" \
+    "$MNT_DIR/ostree/deploy/default/var" "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc" \
+    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr" "$MNT_DIR/ostree/boot.1/default/${bootcsum}"
+  sudo tee "$MNT_DIR/ostree/repo/config" >/dev/null <<'EOF_REPO'
+[core]
+repo_version=1
+mode=bare
+
+[sysroot]
+bootloader=none
+
+[ex-integrity]
+composefs=true
+EOF_REPO
+  sudo tee "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0.origin" >/dev/null <<EOF_ORIG
+[origin]
+container-image-reference=ostree-unverified-registry:${OS_IMAGE}
+EOF_ORIG
+  sudo ln -sfn "../../../deploy/default/deploy/${csum_short}.0" "$MNT_DIR/ostree/boot.1/default/${bootcsum}/0"
+  sudo ln -sfn boot.1 "$MNT_DIR/ostree/boot.1.1"
+  {
+    printf '%s
+' "$bls_content"
+    printf 'options ostree=/ostree/boot.1/default/%s/0
+' "$bootcsum"
+  } | sudo tee "$MNT_DIR/boot/loader.1/entries/$bls_name" >/dev/null
+  sudo sync
   sudo umount "$MNT_DIR"
 
   log "Writing $board_name u-boot-rockchip.bin directly at sector 64 of $dev"
