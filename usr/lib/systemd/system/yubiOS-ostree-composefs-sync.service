@@ -1,0 +1,14 @@
+[Unit]
+Description=yubiOS libostree + composefs Boot State Registration (https://ostreedev.github.io/ostree/composefs/)
+Documentation=https://ostreedev.github.io/ostree/composefs/
+DefaultDependencies=no
+After=local-fs.target yubiOS-lvm-usr-overlay.service
+Before=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/yubiOS/ostree-composefs-sync.sh --boot-sync
+
+[Install]
+WantedBy=multi-user.target

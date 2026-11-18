@@ -423,14 +423,20 @@ EOF
     -v /dev:/dev \
     -v "$MNT_DIR:/target" \
     "$RESOLVED_OS" \
-    bootc install to-filesystem \
-      --source-imgref="containers-storage:${RESOLVED_OS}" \
-      --composefs-backend \
-      --disable-selinux \
-      --bootloader=systemd \
-      --root-mount-spec="" \
-      --skip-finalize \
-      /target
+    bash -c '
+      set -euo pipefail
+      bootc install to-filesystem \
+        --source-imgref="containers-storage:'"${RESOLVED_OS}"'" \
+        --composefs-backend \
+        --disable-selinux \
+        --bootloader=systemd \
+        --root-mount-spec="" \
+        --skip-finalize \
+        /target
+      if [ -x /usr/lib/yubiOS/ostree-composefs-sync.sh ]; then
+        /usr/lib/yubiOS/ostree-composefs-sync.sh --provision-target /target "'"${RESOLVED_OS}"'" "'"${OS_IMAGE}"'"
+      fi
+    '
 
   entry="$(sudo find "$MNT_DIR/boot" -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
   [ -n "$entry" ] || die "No BLS entry created under $MNT_DIR/boot/loader/entries"

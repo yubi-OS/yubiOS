@@ -221,7 +221,7 @@ On first boot `yubiOS-enroll.service` runs on tty1 and walks through:
 3. SSH resident key generation through `ed25519-sk`.
 4. sudo/login registration through pam-u2f.
 
-Each step is skippable and independently re-runnable. See [ONBOARDING.md](docs/ONBOARDING.md).
+Each step is skippable and independently re-runnable. See [ONBOARDING.md](docs/ONBOARDING.md) and the full operational lifecycle guide in **[PLAYBOOK.md](docs/PLAYBOOK.md)** (live Radxa ROCK 5B hardware enrollment & Secure Boot reboot asciicast: **[https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr)**, raw log: [`refs/logs/fvf13-224bf224.new`](refs/logs/fvf13-224bf224.new)).
 
 ## Repo layout
 

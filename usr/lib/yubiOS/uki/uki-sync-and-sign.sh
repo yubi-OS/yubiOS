@@ -86,9 +86,20 @@ resolve_composefs_digest() {
     printf '%s\n' "$YUBIOS_COMPOSEFS_DIGEST"
     return 0
   fi
+  if [ -n "$uki_file" ]; then
+    local bname
+    bname="$(basename "$uki_file")"
+    case "$bname" in
+      bootc_composefs-*.efi)
+        printf '%s\n' "${bname#bootc_composefs-}" | sed 's/\.efi$//'
+        return 0
+        ;;
+    esac
+  fi
   if [ -r /proc/cmdline ]; then
     local cmd_cfs
-    cmd_cfs="$(sed -nE 's/.*composefs=([0-9a-fA-F]+).*/\1/p' /proc/cmdline | head -n1 || true)"
+    cmd_cfs="$(sed -nE 's/.*composefs\.digest=v[12]-sha(256|512)-[0-9]+:\??([0-9a-fA-F]+).*/\2/p' /proc/cmdline | head -n1 || true)"
+    [ -z "$cmd_cfs" ] && cmd_cfs="$(sed -nE 's/.*composefs=\??([0-9a-fA-F]+).*/\1/p' /proc/cmdline | head -n1 || true)"
     if [ -n "$cmd_cfs" ]; then
       printf '%s\n' "$cmd_cfs"
       return 0

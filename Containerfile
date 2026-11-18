@@ -57,7 +57,35 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       pkcs11-provider \
       sbsigntools \
       systemd-boot-unsigned \
-      systemd-ukify && \
+      systemd-ukify \
+      ostree \
+      rpm-ostree \
+      python3-gobject \
+      gdm \
+      gnome-shell \
+      gnome-session-wayland-session \
+      gnome-control-center \
+      ptyxis \
+      nautilus \
+      adwaita-icon-theme \
+      dejavu-sans-fonts \
+      liberation-fonts \
+      mesa-dri-drivers \
+      mesa-vulkan-drivers \
+      xorg-x11-server-Xwayland \
+      qt5-qtbase-gui \
+      qt6-qtbase-gui \
+      vulkan-loader \
+      cups-libs \
+      alsa-lib \
+      at-spi2-atk \
+      gtk3 \
+      gtk4 \
+      libxcb \
+      libxkbcommon \
+      nss \
+      wget \
+      xdg-utils && \
     dnf clean all && \
     rm -rf \
       /run/dnf \
@@ -95,6 +123,38 @@ RUN echo 'chipsec==1.13.16 --hash=sha256:63bed5ad4224402397817ea82b94c3a21736386
       "${chipsec_site}/chipsec" && \
     rm -rf /root/.cache /tmp/pip-* /tmp/chipsec-requirements.txt
 
+# ── Antimony Browser (yubi-OS/chromium-provenance antimony-v156.0.8078.47-r1) ──
+# Pinned in PINNED.md under "yubi-OS Release Binaries". Verify both SHA-256 and
+# SHA-512 before installing, then relocate /opt/antimony (/var/opt/antimony) to
+# /usr/lib/opt/antimony so the browser payload resides inside the immutable
+# composefs /usr tree and leaves build-time /var clean for `bootc container lint`.
+RUN case "$(uname -m)" in \
+      aarch64) \
+        ant_arch="aarch64"; \
+        ant_sha256="7921e25c1cf2a379f7be3ff96b10813704153128426b34e38696900b4a48ecef"; \
+        ant_sha512="68eb5dfb99a7fbabb1fc88b2d44d7fd48cdded36d2b04391d53e7dd0eccff8800ab0a563959237328bd0a417e642b67f90a02e8bef786f1ca6c72dff4d4855cb" ;; \
+      x86_64) \
+        ant_arch="x86_64"; \
+        ant_sha256="1e7260b6e01bfbfa77599e4a69a3a3118f826146b1e373e92adce4e756384168"; \
+        ant_sha512="0537e7279176afafd043d18123be4a15c2d18c6f9cc06296bdc42629bbe9b371247fa348d47322384731ea5a9a16e68e6e6ffec8c866d22cf2dc5fa03cca62d3" ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    ant_url="https://github.com/yubi-OS/chromium-provenance/releases/download/antimony-v156.0.8078.47-r1/antimony-stable-156.0.8078.47-1.${ant_arch}.rpm" && \
+    curl -fsSL --retry 3 --retry-delay 2 -o /tmp/antimony.rpm "${ant_url}" && \
+    echo "${ant_sha256}  /tmp/antimony.rpm" | sha256sum --check --strict && \
+    echo "${ant_sha512}  /tmp/antimony.rpm" | sha512sum --check --strict && \
+    rpm -Uvh --nodigest --nosignature /tmp/antimony.rpm && \
+    rm -f /tmp/antimony.rpm && \
+    mkdir -p /usr/lib/opt && \
+    if [ -d /var/opt/antimony ]; then \
+      mv /var/opt/antimony /usr/lib/opt/antimony; \
+    elif [ -d /opt/antimony ] && [ ! -L /opt/antimony ]; then \
+      mv /opt/antimony /usr/lib/opt/antimony; \
+    fi && \
+    ln -sf /usr/lib/opt/antimony/antimony /usr/bin/antimony && \
+    ln -sf /usr/lib/opt/antimony/antimony /usr/bin/antimony-stable && \
+    test -x /usr/lib/opt/antimony/chrome
+
 # ── Overlay yubiOS config tree ───────────────────────────────────────────
 COPY usr/ /usr/
 
@@ -105,7 +165,8 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
 
 # ── Permissions for enrollment and first-boot scripts ────────────────────
 RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
-    mkdir -p /etc/kernel/install.d && \
+    mkdir -p /etc/kernel/install.d /etc/ostree && \
+    cp -f /usr/lib/ostree/prepare-root.conf /etc/ostree/prepare-root.conf && \
     cp -f /usr/lib/kernel/install.d/05-rpmostree.install /etc/kernel/install.d/05-rpmostree.install && \
     cp -f /usr/lib/kernel/install.d/95-yubios-uki-resign.install /etc/kernel/install.d/95-yubios-uki-resign.install
 
@@ -173,6 +234,9 @@ RUN systemctl preset-all && \
     ln -sf ../yubiOS-lvm-usr-overlay.service /usr/lib/systemd/system/local-fs.target.wants/yubiOS-lvm-usr-overlay.service && \
     ln -sf ../yubiOS-lvm-usr-overlay.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-lvm-usr-overlay.service && \
     ln -sf ../yubiOS-uki-resign.path /usr/lib/systemd/system/multi-user.target.wants/yubiOS-uki-resign.path && \
+    ln -sf ../yubiOS-ostree-composefs-sync.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-ostree-composefs-sync.service && \
+    systemctl enable gdm.service && \
+    systemctl set-default graphical.target && \
     rm -f /etc/machine-id /var/lib/systemd/random-seed
 
 # ── PAM: initialise u2f_keys file (populated by yubiOS-enroll-pam) ───────
@@ -214,6 +278,10 @@ RUN set -- /usr/lib/modules/*/ && \
 # /run/systemd/resolve/stub-resolv.conf is bind-mounted by the build runtime; it is kept
 # (the bootc lint ignores it too). Everything else under /run and /tmp is removed.
 RUN rm -f /var/lib/systemd/catalog/database && \
+    rm -rf /var/cache/fontconfig /var/cache/gdm /var/cache/libX11 /var/lib/dnf /var/lib/rpm-state /var/log/gdm && \
+    find /var -xdev -mindepth 1 -type f ! -path '/var/log/chipsec*' -delete && \
+    find /var -xdev -mindepth 1 -type l -delete && \
+    python3 -c 'import os, stat; lines = ["# SPDX-License-Identifier: LGPL-2.1-or-later", "d /var/lib/yubiOS 0755 root root - -", "d /var/lib/yubiOS/oci 0755 root root - -", "d /var/opt 0755 root root - -", "L+ /var/opt/antimony - - - - /usr/lib/opt/antimony"];     [lines.append(f"d {r} {stat.S_IMODE(os.lstat(r).st_mode):04o} root root - -") for r, _, _ in os.walk("/var") if r != "/var"];     open("/usr/lib/tmpfiles.d/yubiOS-state.conf", "w").write("\n".join(sorted(set(lines))) + "\n")' && \
     find /tmp -mindepth 1 -delete && \
     find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \
     find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} +
