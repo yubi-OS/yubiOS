@@ -279,7 +279,9 @@ RUN set -- /usr/lib/modules/*/ && \
 # here, in the rootfs stage, so the UKI stage and the final stage hash the same tree.
 # /run/systemd/resolve/stub-resolv.conf is bind-mounted by the build runtime; it is kept
 # (the bootc lint ignores it too). Everything else under /run and /tmp is removed.
-RUN rm -f /var/lib/systemd/catalog/database && \
+RUN rm -f /var/lib/systemd/catalog/database \
+          /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal \
+          /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal && \
     rm -rf /var/cache/fontconfig /var/cache/gdm /var/cache/libX11 /var/lib/dnf /var/lib/rpm-state /var/log/gdm && \
     find /var -xdev -mindepth 1 -type f ! -path '/var/log/chipsec*' -delete && \
     find /var -xdev -mindepth 1 -type l -delete && \
