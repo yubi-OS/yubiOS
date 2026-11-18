@@ -141,10 +141,12 @@ RUN case "$(uname -m)" in \
     esac && \
     ant_url="https://github.com/yubi-OS/chromium-provenance/releases/download/antimony-v156.0.8078.47-r1/antimony-stable-156.0.8078.47-1.${ant_arch}.rpm" && \
     curl -fsSL --retry 3 --retry-delay 2 -o /tmp/antimony.rpm "${ant_url}" && \
-    echo "${ant_sha256}  /tmp/antimony.rpm" | sha256sum --check --strict && \
-    echo "${ant_sha512}  /tmp/antimony.rpm" | sha512sum --check --strict && \
+    printf '%s  /tmp/antimony.rpm\n' "${ant_sha256}" > /tmp/antimony.sha256 && \
+    printf '%s  /tmp/antimony.rpm\n' "${ant_sha512}" > /tmp/antimony.sha512 && \
+    sha256sum --check --strict /tmp/antimony.sha256 && \
+    sha512sum --check --strict /tmp/antimony.sha512 && \
     rpm -Uvh --nodigest --nosignature /tmp/antimony.rpm && \
-    rm -f /tmp/antimony.rpm && \
+    rm -f /tmp/antimony.rpm /tmp/antimony.sha256 /tmp/antimony.sha512 && \
     mkdir -p /usr/lib/opt && \
     if [ -d /var/opt/antimony ]; then \
       mv /var/opt/antimony /usr/lib/opt/antimony; \
