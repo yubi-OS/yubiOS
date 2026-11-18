@@ -287,8 +287,12 @@ print(\"OCI repository verified:\", len(os.listdir(os.path.join(oci_dir, \"blobs
    echo "--- Assertion 2f: ostree-composefs-sync.sh replaces vfat /boot with ext4 /boot/loader symlink + /boot/EFI vfat bind-mount and passes ostree admin status + rpm-ostree status ---"
    dd if=/dev/zero of="$WORK/vfat-esp.img" bs=1M count=32 status=none
    mkfs.vfat "$WORK/vfat-esp.img" >/dev/null
-   mkdir -p /boot /sysroot
-   ln -sfn sysroot/ostree /ostree 2>/dev/null || true
+   if ! touch /sysroot/.yubios-rw-probe 2>/dev/null; then
+     mkdir -p /run/yubiOS/ephemeral-sysroot
+     mountpoint -q /sysroot 2>/dev/null || mount --bind /run/yubiOS/ephemeral-sysroot /sysroot
+   else
+     rm -f /sysroot/.yubios-rw-probe
+   fi
    mount -t vfat -o loop "$WORK/vfat-esp.img" /boot
    mkdir -p /boot/EFI/Linux/bootc /boot/loader/entries
    cp -f "$UKI_ESP" "/boot/EFI/Linux/bootc/$(basename "$UKI_ESP")"

@@ -30,6 +30,15 @@ boot_sync() {
     was_ro=1
     mount -o remount,rw /sysroot 2>/dev/null || true
   fi
+  if ! touch "$sysroot/.yubios-rw-probe" 2>/dev/null; then
+    was_ro=0
+    mkdir -p /run/yubiOS/ephemeral-sysroot
+    if ! mountpoint -q "$sysroot" 2>/dev/null; then
+      mount --bind /run/yubiOS/ephemeral-sysroot "$sysroot" 2>/dev/null || true
+    fi
+  else
+    rm -f "$sysroot/.yubios-rw-probe" 2>/dev/null || true
+  fi
 
   local os_version="45"
   if [ -r /etc/os-release ]; then
