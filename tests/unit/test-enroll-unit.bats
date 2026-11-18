@@ -158,3 +158,30 @@ run_enroll_gate() {
   run_enroll_gate absent inline
   [ "$status" -eq 0 ]
 }
+
+# -- Dual-console (serial + HDMI tty1) and default wallpaper checks -----------
+
+@test "enroll unit orders Before gdm.service and display-manager.service so HDMI tty1 is visible during enrollment" {
+  run grep -E '^Before=.*gdm\.service.*display-manager\.service' "$UNIT"
+  [ "$status" -eq 0 ]
+}
+
+@test "enroll.sh includes dual-console PTY multiplexer for /dev/tty1 (HDMI) and serial console" {
+  run grep -q 'YUBIOS_DUAL_CONSOLE_MUX' "$ENROLL"
+  [ "$status" -eq 0 ]
+  run grep -q '/dev/tty1' "$ENROLL"
+  [ "$status" -eq 0 ]
+}
+
+@test "OS default wallpaper gschema override and background properties point to yubios-aurora-ridge-4k.jpg" {
+  local gschema="usr/share/glib-2.0/schemas/zz-yubiOS-wallpaper.gschema.override"
+  local bprop="usr/share/gnome-background-properties/yubios-wallpapers.xml"
+  [ -f "$gschema" ] || gschema="/$gschema"
+  [ -f "$bprop" ] || bprop="/$bprop"
+  [ -f "$gschema" ]
+  [ -f "$bprop" ]
+  run grep -q "file:///usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg" "$gschema"
+  [ "$status" -eq 0 ]
+  run grep -q "/usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg" "$bprop"
+  [ "$status" -eq 0 ]
+}

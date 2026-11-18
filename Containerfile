@@ -157,8 +157,32 @@ RUN case "$(uname -m)" in \
     ln -sf /usr/lib/opt/antimony/antimony /usr/bin/antimony-stable && \
     test -x /usr/lib/opt/antimony/chrome
 
+# ── yubiOS Default Wallpaper (yubi-OS/assets @ 09f209a48153c6cef4faae9b247146abce4c5441) ──
+# Pinned in PINNED.md under "External GitHub Source Refs". Verify both SHA-256 and
+# SHA-512 before installing into /usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg.
+RUN wp_commit="09f209a48153c6cef4faae9b247146abce4c5441" && \
+    wp_sha256="a700d15d5fe5b217a027c7a2b196c13f27f1aace9a675874310020ceb1d4918f" && \
+    wp_sha512="330eaf8730cb5f8d37855d1bcf4214893153b6cc8a979d873425b4c9d809ef697d59cf68ea8672d2e03c0098d0911527b4ca86d09e1b199217ac41f021cebfe3" && \
+    wp_url="https://raw.githubusercontent.com/yubi-OS/assets/${wp_commit}/wallpapers/yubios-aurora-ridge-4k.jpg" && \
+    install -d -m 0755 /usr/share/backgrounds/yubios && \
+    curl -fsSL --retry 3 --retry-delay 2 -o /tmp/yubios-aurora-ridge-4k.jpg "${wp_url}" && \
+    printf '%s  /tmp/yubios-aurora-ridge-4k.jpg\n' "${wp_sha256}" > /tmp/wp.sha256 && \
+    printf '%s  /tmp/yubios-aurora-ridge-4k.jpg\n' "${wp_sha512}" > /tmp/wp.sha512 && \
+    sha256sum --check --strict /tmp/wp.sha256 && \
+    sha512sum --check --strict /tmp/wp.sha512 && \
+    install -m 0644 /tmp/yubios-aurora-ridge-4k.jpg /usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg && \
+    rm -f /tmp/yubios-aurora-ridge-4k.jpg /tmp/wp.sha256 /tmp/wp.sha512 && \
+    test -s /usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg
+
 # ── Overlay yubiOS config tree ───────────────────────────────────────────
 COPY usr/ /usr/
+
+# ── Compile GNOME GSettings schema override & dconf default for yubiOS wallpaper ──
+RUN glib-compile-schemas /usr/share/glib-2.0/schemas && \
+    install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d && \
+    printf 'user-db:user\nsystem-db:local\n' > /etc/dconf/profile/user && \
+    cp -f /usr/lib/dconf/db/local.d/00-yubios-wallpaper /etc/dconf/db/local.d/00-yubios-wallpaper && \
+    dconf update
 
 # ── SSH: allow bcvk CI root key credentials only when present ─────────────
 RUN mkdir -p /etc/ssh/sshd_config.d && \

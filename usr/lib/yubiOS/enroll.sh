@@ -36,6 +36,149 @@ if [[ "${YUBIOS_ENROLL_GATE_ONLY:-0}" == 1 ]]; then
   exit 0
 fi
 
+# Dual-console PTY multiplexer: when yubiOS-enroll.service runs on first boot,
+# /dev/console in the Linux kernel points only to the last console= device
+# (typically serial /dev/ttyS2 on ARM64 SBCs), so user-space writes and /dev/tty
+# PIN prompts from openssl, systemd-cryptenroll, homectl, ssh-keygen, and
+# pamu2fcfg would not appear on the HDMI framebuffer console (/dev/tty1).
+# Re-exec enroll.sh inside a Python PTY multiplexer that mirrors every output
+# byte to BOTH the serial console (/dev/ttyS2 / /dev/ttyAMA0 / /dev/ttyS0) and
+# the HDMI video console (/dev/tty1) and accepts keyboard input from either.
+if [[ -z "${YUBIOS_DUAL_CONSOLE_MUX:-}" ]] && command -v python3 >/dev/null 2>&1; then
+  current_tty="$(tty 2>/dev/null || true)"
+  case "$current_tty" in
+    /dev/console|/dev/tty1|/dev/tty0|/dev/ttyS*|/dev/ttyAMA*)
+      if [[ -c /dev/tty1 ]]; then
+        chvt 1 2>/dev/null || true
+      fi
+      export YUBIOS_DUAL_CONSOLE_MUX=1
+      exec python3 - "$0" "$@" << 'PY_MUX'
+import os, pty, select, signal, subprocess, sys, termios, tty
+
+script = sys.argv[1]
+args = sys.argv[2:]
+
+candidate_ttys = []
+for dev in ("/dev/tty1", "/dev/ttyS2", "/dev/ttyAMA0", "/dev/ttyS0"):
+    if os.path.exists(dev):
+        candidate_ttys.append(dev)
+if os.path.exists("/sys/class/tty/console/active"):
+    try:
+        for name in open("/sys/class/tty/console/active", "r").read().split():
+            dev = "/dev/" + name.strip()
+            if dev == "/dev/tty0":
+                dev = "/dev/tty1"
+            if dev not in candidate_ttys and os.path.exists(dev):
+                candidate_ttys.append(dev)
+    except Exception:
+        pass
+
+fds = []
+saved_attrs = []
+for dev in candidate_ttys:
+    try:
+        fd = os.open(dev, os.O_RDWR | os.O_NOCTTY | os.O_NONBLOCK)
+        fds.append(fd)
+        try:
+            attr = termios.tcgetattr(fd)
+            saved_attrs.append((fd, attr))
+            raw = list(attr)
+            raw[0] &= ~(termios.IGNBRK | termios.BRKINT | termios.PARMRK | termios.ISTRIP | termios.INLCR | termios.IGNCR | termios.ICRNL | termios.IXON)
+            raw[1] |= (termios.OPOST | termios.ONLCR)
+            raw[2] &= ~(termios.CSIZE | termios.PARENB)
+            raw[2] |= termios.CS8
+            raw[3] &= ~(termios.ECHO | termios.ECHONL | termios.ICANON | termios.ISIG | termios.IEXTEN)
+            termios.tcsetattr(fd, termios.TCSADRAIN, raw)
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+if len(fds) < 2:
+    for fd, attr in saved_attrs:
+        try:
+            termios.tcsetattr(fd, termios.TCSADRAIN, attr)
+        except Exception:
+            pass
+    for fd in fds:
+        try:
+            os.close(fd)
+        except Exception:
+            pass
+    os.execv(script, [script] + args)
+
+master_fd, slave_fd = pty.openpty()
+
+def child_setup():
+    os.setsid()
+    try:
+        import fcntl
+        fcntl.ioctl(slave_fd, termios.TIOCSCTTY, 0)
+    except Exception:
+        pass
+
+proc = subprocess.Popen(
+    [script] + args,
+    stdin=slave_fd,
+    stdout=slave_fd,
+    stderr=slave_fd,
+    preexec_fn=child_setup,
+    close_fds=True,
+)
+os.close(slave_fd)
+
+rc = 0
+try:
+    while True:
+        rlist = [master_fd] + fds
+        try:
+            ready, _, _ = select.select(rlist, [], [], 0.2)
+        except Exception:
+            ready = []
+        if master_fd in ready:
+            try:
+                data = os.read(master_fd, 4096)
+            except OSError:
+                data = b""
+            if not data:
+                break
+            for fd in fds:
+                try:
+                    os.write(fd, data)
+                except Exception:
+                    pass
+        for fd in fds:
+            if fd in ready:
+                try:
+                    inp = os.read(fd, 1024)
+                    if inp:
+                        os.write(master_fd, inp)
+                except Exception:
+                    pass
+        if proc.poll() is not None and not ready:
+            break
+    rc = proc.wait()
+finally:
+    for fd, attr in saved_attrs:
+        try:
+            termios.tcsetattr(fd, termios.TCSADRAIN, attr)
+        except Exception:
+            pass
+    for fd in fds:
+        try:
+            os.close(fd)
+        except Exception:
+            pass
+    try:
+        os.close(master_fd)
+    except Exception:
+        pass
+sys.exit(rc)
+PY_MUX
+      ;;
+  esac
+fi
+
 # shellcheck source=lib.sh
 source /usr/lib/yubiOS/lib.sh
 
