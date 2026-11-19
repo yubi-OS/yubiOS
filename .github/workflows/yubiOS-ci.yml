@@ -181,7 +181,7 @@ jobs:
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, KVM]
+            runner: ubuntu-26.04-arm
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
