@@ -208,7 +208,7 @@ The bridge answers each POST synchronously, and the client gives up after roughl
 
 These were tried or evaluated before settling on the bridge pattern. Document why each was rejected so future sessions don't re-litigate.
 
-1. **`mcp-proxy` (sparfenyuk/mcp-proxy, PyPI)** — stdio-to-HTTP bridge for MCP servers. Rejected: **no inbound auth** on the SSE/HTTP port (anyone with the URL can call). `ALLOW_COMMANDS` is a command allowlist, not a request-auth filter. Unsuitable for hardware-attached CI runners (real YubiKey, destructive /dev/sda tests).
+1. **`mcp-proxy` (sparfenyuk/mcp-proxy, PyPI)** — stdio-to-HTTP bridge for MCP servers. Rejected: **no inbound auth** on the SSE/HTTP port (anyone with the URL can call). `ALLOW_COMMANDS` is a command allowlist, not a request-auth filter. Unsuitable for hardware-attached CI runners (real U2F/HSM, destructive /dev/sda tests).
 2. **`punkpeye/mcp-proxy` (npm)** — supports `--apiKey` X-API-Key header. Rejected: requires Node on the target, requires the user to manage the JSON spec file, and uses X-API-Key (not Bearer) which means the Sauna connection has to be re-typed with a non-standard auth scheme.
 3. **Cloudflare Tunnel + Cloudflare Access** — most "enterprise" auth (OIDC: GitHub, Google). Rejected: adds Cloudflare as a dep, requires per-call OIDC flow, setup overhead is high for what should be a 2-min local tool.
 4. **mTLS** — client cert presented by the Sauna sandbox. Rejected: Sauna sandbox has no `~/.ssh`-style cert store; provisioning client certs in the proxy auth model is awkward.

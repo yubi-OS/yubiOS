@@ -116,7 +116,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 | Control | How | Coverage |
 |---|---|---|
 | Signed cmdline blocks ACPI override | ACPI table overrides via boot parameters require modifying the signed UKI cmdline, which would break the SecureBoot signature. | **Block** |
-| **No TEE dependency** | yubiOS uses **YubiKey FIDO2** as trust anchor — no TrustZone/TEE. There is no `tz.uefisecapp` equivalent to compromise. Compromising the TEE does not unlock the LUKS2 root fs. | **Architectural immunity** |
+| **No TEE dependency** | yubiOS uses **U2F/HSM FIDO2** as trust anchor — no TrustZone/TEE. There is no `tz.uefisecapp` equivalent to compromise. Compromising the TEE does not unlock the LUKS2 root fs. | **Architectural immunity** |
 | Computrace detection | `Fv()\ComputraceAgent` in the PCR event log is detectable via `chipsec`. `ConditionSecurity=measured-os` fails if PCR state doesn’t match a clean boot. | **Detect** |
 
 **Residual risk:** Computrace/Absolute in UEFI ROM is installed below the OS. yubiOS can detect it via chipsec and refuse enrollment, but cannot remove it without reflashing firmware.
@@ -129,8 +129,8 @@ yubiOS is built on the principle that *every component must be cryptographically
 
 | Control | How | Coverage |
 |---|---|---|
-| **No passphrase to capture** | LUKS2 disk unlock uses YubiKey FIDO2 hmac-secret — no typed passphrase. The framebuffer/ttyHS path captures nothing useful because no cleartext secret is ever entered. | **Architectural immunity** |
-| systemd-homed FIDO2 | User login uses FIDO2 touch + PIN. `pam-u2f` requires physical YubiKey presence. Captured PIN without the physical token is useless. | **Render capture useless** |
+| **No passphrase to capture** | LUKS2 disk unlock uses U2F/HSM FIDO2 hmac-secret — no typed passphrase. The framebuffer/ttyHS path captures nothing useful because no cleartext secret is ever entered. | **Architectural immunity** |
+| systemd-homed FIDO2 | User login uses FIDO2 touch + PIN. `pam-u2f` requires physical U2F/HSM presence. Captured PIN without the physical token is useless. | **Render capture useless** |
 | `PrivateNetwork=yes` / `BindNetworkInterface=` | Security-critical services use private network namespaces. Cannot reach hidden radio interfaces. | **Contain** |
 | dm-verity on drivers | Modified hci_uart/btqcom drivers in /usr rejected by dm-verity. Unsigned drivers rejected by kernel lockdown. | **Block new drivers** |
 
@@ -169,7 +169,7 @@ yubiOS is built on the principle that *every component must be cryptographically
 | Journal flush / pre-pivot wipe | 2-C | Forward-secure sealing + PCR phases | 🟡 Detect |
 | NVMe / GPT-auto blocking | 2-C | DPS UUID fallback discovery | 🟢 Resilient |
 | Faux ACPI table injection | 3-A | Signed UKI cmdline | 🟢 Block |
-| TEE / tz.uefisecapp MitM | 3-A | **No TEE dependency — YubiKey FIDO2** | ✅ Immune |
+| TEE / tz.uefisecapp MitM | 3-A | **No TEE dependency — U2F/HSM FIDO2** | ✅ Immune |
 | Absolute Persistence (Computrace) | 3-A | chipsec + ConditionSecurity=measured-os | 🟡 Detect |
 | Radio that won’t power off | 3-B | PrivateNetwork= + BindNetworkInterface= | 🟡 Contain |
 | Passphrase capture via framebuffer | 3-B | **FIDO2 hmac-secret — no typed passphrase** | ✅ Immune |
@@ -232,7 +232,7 @@ flowchart TD
     M2B["🛡 dm-verity /usr\non every IO read\nModified libs → IO error"]
     M2C["🛡 dm-verity generators\nusrhash= enforced\nDPS fallback discovery"]
     M3A1["🛡 Signed cmdline blocks\nACPI table override"]
-    M3A2["✅ No TEE dependency\nYubiKey FIDO2 trust anchor\nNo tz.uefisecapp to MitM"]
+    M3A2["✅ No TEE dependency\nU2F/HSM FIDO2 trust anchor\nNo tz.uefisecapp to MitM"]
     M3A3["🔍 chipsec detects\nComputrace in PCR event log"]
     M3B1["🛡 PrivateNetwork=yes\nBindNetworkInterface="]
     M3B2["✅ No passphrase to capture\nFIDO2 hmac-secret only\npam-u2f touch required"]
@@ -279,7 +279,7 @@ This document maps the main yubiOS threat surfaces to current mitigations and op
 
 | Area | Assumption |
 |---|---|
-| Owner | The owner controls the YubiKey, recovery key, Secure Boot enrollment, and installation target |
+| Owner | The owner controls the U2F/HSM, recovery key, Secure Boot enrollment, and installation target |
 | Attacker | May control the network, registry mirror, disk at rest, or a stolen powered-off device |
 | Strong attacker | May have temporary physical access, malicious firmware supply chain influence, or compromised CI inputs |
 | Out of scope | Defeating a malicious CPU/SoC, closed-source ROM behavior, or an owner who enrolls malicious keys |
@@ -288,7 +288,7 @@ This document maps the main yubiOS threat surfaces to current mitigations and op
 
 | Threat | Mitigation | Residual risk |
 |---|---|---|
-| Disk theft | LUKS2 root/swap with FIDO2 hmac-secret, PIN, touch, and offline recovery key | An attacker with both YubiKey and PIN can unlock |
+| Disk theft | LUKS2 root/swap with FIDO2 hmac-secret, PIN, touch, and offline recovery key | An attacker with both U2F/HSM and PIN can unlock |
 | Silent disk decryption | FIDO2 physical presence and PIN | Malware running after unlock can access mounted plaintext while the session is active |
 | Mutable `/usr` tampering | composefs over erofs with dm-verity and signed UKI command line | Firmware or kernel compromise can subvert checks below Linux |
 | Malicious base image drift | Digest pins in [PINNED.md](../PINNED.md), build policy, provenance/SBOM | Pins require active refresh for security fixes |

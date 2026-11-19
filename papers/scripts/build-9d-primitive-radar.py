@@ -91,7 +91,7 @@ PRIM_LONG = {
     "continuous_adaptive": "Continuous / adaptive — runtime detection + auto-remediation (Falco, keylime)",
     "immutability": "Immutability — read-only / signed artifacts (dm-verity, composefs, sealed-uki-vm)",
     "audit_evidence": "Audit / evidence — tamper-evident trail (audit-evidence-packaging, SLSA)",
-    "cryptographic_identity": "Cryptographic identity — device- or workload-bound keys (TPM2, YubiKey FIDO2)",
+    "cryptographic_identity": "Cryptographic identity — device- or workload-bound keys (TPM2, U2F/HSM FIDO2)",
     "segmentation": "Segmentation — process / VM / network isolation (nspawn, vfio-user, ADR-031)",
 }
 

@@ -16,15 +16,15 @@ Turns a project into a story that travels. Works for technical open-source launc
 
 ## Project Context: yubios
 
-The current active project is **yubios** — a TPM-free, OEM-friendly bootable Linux OS that uses the YubiKey as the sole root of trust across the full stack: Secure Boot signing, disk encryption (LUKS via FIDO2), application auth (PAM-U2F), SSH (resident ed25519-sk keys), and user onboarding.
+The current active project is **yubios** — a TPM-free, OEM-friendly bootable Linux OS that uses the U2F/HSM as the sole root of trust across the full stack: Secure Boot signing, disk encryption (LUKS via FIDO2), application auth (PAM-U2F), SSH (resident ed25519-sk keys), and user onboarding.
 
 Repo: https://github.com/yubi-OS/yubiOS
 
-**Lead angle:** YubiKey as the only root of trust, full stack — no TPM required.
+**Lead angle:** U2F/HSM as the only root of trust, full stack — no TPM required.
 
 **Audiences:**
 1. **Technical** — Linux engineers, security researchers, homelab operators, corporate Linux admins. Channels: HN, LWN.net, r/linux, r/netsec, r/linuxhardware, Phoronix, The Register, Lobste.rs
-2. **General** — Privacy-conscious users tired of vendor lock-in, people who own YubiKeys and don't know this is possible, hardware enthusiasts. Channels: r/privacy, r/hardware, broader tech press (Ars Technica, Wired), product-focused newsletters
+2. **General** — Privacy-conscious users tired of vendor lock-in, people who own U2F/HSMs and don't know this is possible, hardware enthusiasts. Channels: r/privacy, r/hardware, broader tech press (Ars Technica, Wired), product-focused newsletters
 
 ## Project Context: Antimony (active campaign, Linux-specific audiences)
 
@@ -87,9 +87,9 @@ Do NOT cross-post to Reddit subreddits within the same hour — spacing 30-60 mi
 
 ### Technical Audience (engineers, security researchers)
 
-**Headline:** "Show HN: yubios — bootable Linux with YubiKey as the only root of trust (no TPM)"
+**Headline:** "Show HN: yubios — bootable Linux with U2F/HSM as the only root of trust (no TPM)"
 
-**Core message:** YubiKeys are ubiquitous in enterprise security. They support FIDO2/U2F, PIV/CCID, and resident keys — yet most Linux distributions still build their security model around TPM, which is OEM-controlled, opaque, and often absent on ARM hardware. yubios wires the YubiKey into every security-critical moment: Secure Boot key custody (PIV), disk unlock (FIDO2 via `systemd-cryptenroll`), app auth (pam-u2f ≥1.3.1), and SSH (resident ed25519-sk). The result is a reproducible, auditable, hardware-enforced trust chain with zero OEM dependency.
+**Core message:** U2F/HSMs are ubiquitous in enterprise security. They support FIDO2/U2F, PIV/CCID, and resident keys — yet most Linux distributions still build their security model around TPM, which is OEM-controlled, opaque, and often absent on ARM hardware. yubios wires the U2F/HSM into every security-critical moment: Secure Boot key custody (PIV), disk unlock (FIDO2 via `systemd-cryptenroll`), app auth (pam-u2f ≥1.3.1), and SSH (resident ed25519-sk). The result is a reproducible, auditable, hardware-enforced trust chain with zero OEM dependency.
 
 **Supporting points:**
 - TPM-free = works on any hardware including Surface Snapdragon ARM64
@@ -99,16 +99,16 @@ Do NOT cross-post to Reddit subreddits within the same hour — spacing 30-60 mi
 
 **Avoid:** "revolutionary," "game-changing," anything that sounds like marketing
 
-### General Audience (privacy-conscious users, YubiKey owners)
+### General Audience (privacy-conscious users, U2F/HSM owners)
 
-**Headline:** "This bootable Linux uses your YubiKey for everything — boot, encryption, login, SSH"
+**Headline:** "This bootable Linux uses your U2F/HSM for everything — boot, encryption, login, SSH"
 
-**Core message:** If you have a YubiKey, you already have better security hardware than most laptops ship with. yubios shows you how to use it for the full chain: proving your OS hasn't been tampered with, unlocking your encrypted drive, logging into apps, and keeping your SSH keys off-disk entirely. No proprietary TPM chips. No trusting your OEM. Just your YubiKey and open-source code.
+**Core message:** If you have a U2F/HSM, you already have better security hardware than most laptops ship with. yubios shows you how to use it for the full chain: proving your OS hasn't been tampered with, unlocking your encrypted drive, logging into apps, and keeping your SSH keys off-disk entirely. No proprietary TPM chips. No trusting your OEM. Just your U2F/HSM and open-source code.
 
 **Supporting points:**
 - Works on mainstream hardware (including Microsoft Surface)
 - Step-by-step onboarding — you don't need to know what FIDO2 is to start
-- Your keys never leave the YubiKey hardware
+- Your keys never leave the U2F/HSM hardware
 - Open source, auditable, community-maintained
 
 ---
@@ -118,13 +118,13 @@ Do NOT cross-post to Reddit subreddits within the same hour — spacing 30-60 mi
 ### HN "Show HN" Post
 
 ```
-Show HN: yubios – bootable Linux with YubiKey as the sole root of trust (no TPM)
+Show HN: yubios – bootable Linux with U2F/HSM as the sole root of trust (no TPM)
 
 https://github.com/yubi-OS/yubiOS
 
 Most Linux security guides still treat TPM as the hardware anchor for disk encryption and 
 Secure Boot — but TPM is OEM-controlled, absent on a lot of ARM hardware, and a black box. 
-YubiKeys are everywhere in enterprise already and support exactly what we need:
+U2F/HSMs are everywhere in enterprise already and support exactly what we need:
 
 - Secure Boot key custody: PIV/CCID interface via sbsign --engine pkcs11
 - Disk encryption: FIDO2 via systemd-cryptenroll --fido2-device=auto
@@ -141,7 +141,7 @@ Happy to answer questions about the FIDO2/PIV boundary or the ARM64 Surface supp
 ### r/netsec Post
 
 ```
-Title: yubios: TPM-free Linux using YubiKey for boot signing, disk encryption, PAM, and SSH
+Title: yubios: TPM-free Linux using U2F/HSM for boot signing, disk encryption, PAM, and SSH
 
 Full write-up: https://github.com/yubi-OS/yubiOS
 
@@ -149,8 +149,8 @@ Built this as an alternative to TPM-based disk encryption for hardware where the
 either absent (Snapdragon ARM64), vendor-locked, or not trusted (corporate MDM scenarios).
 
 The security chain:
-1. Secure Boot — YubiKey PIV slot 9c signs the UKI via sbsign --engine pkcs11
-2. LUKS2 unlock — systemd-cryptenroll --fido2-device=auto binds the disk to the YubiKey's 
+1. Secure Boot — U2F/HSM PIV slot 9c signs the UKI via sbsign --engine pkcs11
+2. LUKS2 unlock — systemd-cryptenroll --fido2-device=auto binds the disk to the U2F/HSM's 
    FIDO2 credential (not a PIN, not a passphrase)
 3. PAM auth — pam-u2f ≥1.3.1 handles sudo/polkit (version floor: CVE-2025-23013)
 4. SSH — resident ed25519-sk keys, onboarding script walks through enrollment
@@ -164,17 +164,17 @@ Questions welcome on the threat model or the ARM64 Surface hardware support.
 ### r/privacy Post
 
 ```
-Title: I built a Linux distro where your YubiKey controls everything — boot, encryption, login, SSH
+Title: I built a Linux distro where your U2F/HSM controls everything — boot, encryption, login, SSH
 
 https://github.com/yubi-OS/yubiOS
 
-If you have a YubiKey (even the basic Security Key), you have better hardware security than 
+If you have a U2F/HSM (even the basic Security Key), you have better hardware security than 
 most laptops trust. Most operating systems ignore it except for 2FA. yubios uses it for everything:
 
 🔐 Proves your OS hasn't been tampered with before it boots
 💾 Unlocks your encrypted drive (your key is the only key — no passphrase backup that can leak)
 🔑 Logs you into apps and sudo without a password
-🔒 Keeps your SSH private key inside the YubiKey hardware, never on disk
+🔒 Keeps your SSH private key inside the U2F/HSM hardware, never on disk
 
 No TPM chip required. Works on regular hardware. Open source and auditable.
 
@@ -184,19 +184,19 @@ The onboarding guide walks through it from scratch — you don't need to already
 ### Press Pitch (Phoronix / LWN / Ars)
 
 ```
-Subject: yubios: open-source bootable Linux using YubiKey as full hardware root of trust
+Subject: yubios: open-source bootable Linux using U2F/HSM as full hardware root of trust
 
 Hi [name],
 
 Quick tip — might interest your readers:
 
 yubios is a new open-source project that replaces TPM-based security in a bootable Linux 
-image with the YubiKey, covering the full chain: Secure Boot key signing (PIV/CCID), 
+image with the U2F/HSM, covering the full chain: Secure Boot key signing (PIV/CCID), 
 LUKS2 disk unlock (FIDO2 via systemd-cryptenroll), PAM authentication (pam-u2f), and 
 resident SSH keys (ed25519-sk). No OEM trust anchor required.
 
 It's relevant now because ARM64 hardware (Surface Snapdragon Elite X, etc.) often lacks 
-a usable TPM, and enterprise YubiKey deployments are ubiquitous — but most distributions 
+a usable TPM, and enterprise U2F/HSM deployments are ubiquitous — but most distributions 
 still treat these as 2FA-only devices. yubios demonstrates the full integration.
 
 GitHub: https://github.com/yubi-OS/yubiOS
@@ -325,7 +325,7 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 **Worked setup** — the flow this skill drives, using its own artifacts:
 
 - Technical** — Linux engineers, security researchers, homelab operators, corporate Linux admins. Channels: HN, LWN.net, r/linux, r/netsec, r/linuxhardware, Phoronix, The Register, Lobste.rs
-- General** — Privacy-conscious users tired of vendor lock-in, people who own YubiKeys and don't know this is possible, hardware enthusiasts. Channels: r/privacy, r/hardware, broader tech press (Ars Technica, Wired), product-focused newsletters
+- General** — Privacy-conscious users tired of vendor lock-in, people who own U2F/HSMs and don't know this is possible, hardware enthusiasts. Channels: r/privacy, r/hardware, broader tech press (Ars Technica, Wired), product-focused newsletters
 - README audit** — ensure it answers the 4 questions every first-time reader has:
 - Asset creation** (see templates below):
 

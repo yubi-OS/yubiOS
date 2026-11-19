@@ -11,7 +11,7 @@ bootloader = "systemd"
 discoverable-partitions = true
 
 # direct only: FIDO2 enrollment happens post-install via yubiOS-enroll-luks.
-# tpm2-luks excluded: we replace TPM with YubiKey FIDO2. Using tpm2-luks would
+# tpm2-luks excluded: we replace TPM with U2F/HSM FIDO2. Using tpm2-luks would
 # create a TPM dependency that defeats the TPM-free design goal.
 block = ["direct"]
 

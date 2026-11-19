@@ -24,7 +24,7 @@ Where the Duck.ai artifacts overlap the canonical docs (e.g., MVP recommendation
 
 Jenny asked Duck.ai to run SCAMPER on techno-authoritarianism and then scope it to yubiOS as a product. SCAMPER was the right ideation lens here because the threat surface is broad (opaque permissions, persistent logs, hidden admin powers, weak appeal mechanisms) — Substitute/Combine/Adapt/Modify/Put-to-other-use/Eliminate/Reverse covers most of the levers a governance-first OS can pull.
 
-yubiOS's existing design story already maps onto several of these levers: governance-first image mode (bootc), owner-held YubiKey credentials, signed audit trails via `audit-evidence-packaging`, runtime attestation via `runtime-attestation-keylime`, minimal-permission defaults via `least-privilege-pod-security-standards`. The Duck.ai thread's value-add is making that story legible to a non-builder audience (investors, civil-society partners, NGO evaluators) by re-phrasing the technical primitives as product features.
+yubiOS's existing design story already maps onto several of these levers: governance-first image mode (bootc), owner-held U2F/HSM credentials, signed audit trails via `audit-evidence-packaging`, runtime attestation via `runtime-attestation-keylime`, minimal-permission defaults via `least-privilege-pod-security-standards`. The Duck.ai thread's value-add is making that story legible to a non-builder audience (investors, civil-society partners, NGO evaluators) by re-phrasing the technical primitives as product features.
 
 ## 2. SCAMPER Mind Map (7 buckets, ~4 each)
 
@@ -76,7 +76,7 @@ Duck.ai's full mind map, preserved verbatim:
 
 Duck.ai's ranked shortlist, preserved with the rationale Duck.ai gave:
 
-1. **User-owned identity and permissions** — best leverage against centralized control. Makes coercive access harder and consent more meaningful. yubiOS already implements part of this: owner-held YubiKey (FIDO2 + PIV + LUKS2), homectl-managed users, and no implicit trust of rootless host credentials. What's missing on the product side: a first-class UX where the user sees *who can act as them* across devices and services, not just per-host.
+1. **User-owned identity and permissions** — best leverage against centralized control. Makes coercive access harder and consent more meaningful. yubiOS already implements part of this: owner-held U2F/HSM (FIDO2 + PIV + LUKS2), homectl-managed users, and no implicit trust of rootless host credentials. What's missing on the product side: a first-class UX where the user sees *who can act as them* across devices and services, not just per-host.
 
 2. **Transparent audit-and-appeal layer** — strong for accountability. Works especially well if yubiOS governs sensitive workflows or institutional use. yubiOS already has the substrate (`audit-evidence-packaging`, signed auditd trails, Rekor v2 transparency log via `sigstore-rekor-v2`). What's missing: a user-facing surface where a non-expert can read, dispute, and export their own audit history without grep-ing journalctl.
 
@@ -189,9 +189,9 @@ Duck.ai's restrained memo, preserved with structure:
 
 **Local-first storage with federated sync** — substrate exists (bootc image mode, composefs). What's missing is the *default-on* policy: keeping data on-device unless the user opts in. Current defaults still require the user to know to flip this.
 
-**User-owned identity** — substrate exists (YubiKey FIDO2/PIV/LUKS2, homectl). What's missing is the cross-device "who can act as me" view, which the existing implementation does not surface.
+**User-owned identity** — substrate exists (U2F/HSM FIDO2/PIV/LUKS2, homectl). What's missing is the cross-device "who can act as me" view, which the existing implementation does not surface.
 
-**MVP gap.** Duck.ai's MVP = permission dashboard + audit layer + admin-expiration controls. Canonical yubiOS readiness per `refs/first-90-days-2026-07-28.md` (OMN-76) and the live `BLOCKERS.md` is not yet at MVP for any of these three surfaces — the **paid pilot per OMN-67 is gated on Gate 1 (B-VM-CTAP2 + physical-YubiKey demo)**, which means the Duck.ai MVP framing is *aspirational* for yubiOS today, not a description of what ships.
+**MVP gap.** Duck.ai's MVP = permission dashboard + audit layer + admin-expiration controls. Canonical yubiOS readiness per `refs/first-90-days-2026-07-28.md` (OMN-76) and the live `BLOCKERS.md` is not yet at MVP for any of these three surfaces — the **paid pilot per OMN-67 is gated on Gate 1 (B-VM-CTAP2 + physical-U2F/HSM demo)**, which means the Duck.ai MVP framing is *aspirational* for yubiOS today, not a description of what ships.
 
 **Overlap with existing canonical docs.** Duck.ai's positioning overlaps but does NOT replace the canonical commercialization plan in `refs/days-0-30-…`, `days-31-60-…`, `days-61-90-…`, `first-90-days-2026-07-28.md`, `offer-pricing-architecture-2026-07-25.md`, or `external-benchmarks-sources-2026-07-26.md`. The Duck.ai artifacts are useful for (a) the SCAMPER mind map itself (not on `refs/`), (b) the four-strongest-suggestions ranking (not on `refs/`), and (c) the SCAMPER-swap-round exercise (not on `refs/`). Use the canonical docs for all commercial claims, pricing hypotheses, and external market sizing.
 
@@ -224,7 +224,7 @@ Duck.ai's restrained memo, preserved with structure:
 ## Blockers
 
 - **None for this file's publication** — it is an ideation artifact, not a positioning claim, and it defers to canonical docs everywhere it could conflict.
-- **Downstream blocker (not for this PR):** before any of the Duck.ai language is lifted into public materials, the canonical docs must agree it's defensible. The Gate 1 dependency on B-VM-CTAP2 + physical-YubiKey demo (per `refs/first-90-days-2026-07-28.md` and live `BLOCKERS.md`) currently gates the paid pilot per OMN-67 — and therefore the MVP framing in §4.
+- **Downstream blocker (not for this PR):** before any of the Duck.ai language is lifted into public materials, the canonical docs must agree it's defensible. The Gate 1 dependency on B-VM-CTAP2 + physical-U2F/HSM demo (per `refs/first-90-days-2026-07-28.md` and live `BLOCKERS.md`) currently gates the paid pilot per OMN-67 — and therefore the MVP framing in §4.
 
 ---
 
@@ -241,7 +241,7 @@ This artifact is intentionally framed as a Duck.ai ideation capture, not a canon
 
 - **No release tag.** This file is a `discussion-tasks-2026-08-07` branch draft, not a published spec. Treat all market sizing as directional until re-anchored to `refs/external-benchmarks-sources-2026-07-26.md` (OMN-80).
 - **Duck.ai sizing not yet re-anchored.** $18B-$25B TAM proxy, $28.1B-by-2031 and $44.7B-by-2033 forecasts, and the $17.8B-$24.9B 2026 range are Duck.ai paraphrases, not pinned to specific Gartner / IDC / Frost reports. **Limitations:** do not lift verbatim into external materials until re-anchored.
-- **MVP framing is aspirational.** Paid pilot per OMN-67 is **PENDING** Gate 1 (B-VM-CTAP2 RESOLVED 2026-07-25, plus reproducible physical-YubiKey demo not yet shipped). The Duck.ai MVP describes what would be built, not what is built.
+- **MVP framing is aspirational.** Paid pilot per OMN-67 is **PENDING** Gate 1 (B-VM-CTAP2 RESOLVED 2026-07-25, plus reproducible physical-U2F/HSM demo not yet shipped). The Duck.ai MVP describes what would be built, not what is built.
 - **Not yet filed as OMN tickets.** The 4 strongest suggestions still live in this `refs/` note; no durable OMN tickets yet. Filing is the first next step in section 9.
 - **No external validation yet.** Duck.ai's 24-hour test and SCAMPER swap-round (both section 8) are **not yet** performed.
 - **~3-week drift risk.** Canonical docs will move; mark stale after ~3 weeks if not re-reviewed against `BLOCKERS.md` and `docs/MILESTONE.md`.

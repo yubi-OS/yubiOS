@@ -59,7 +59,7 @@ primitive spine. Primitive order matches the corpus JSON `primitives` array.
 | p4 | `continuous_adaptive` | Continuous / adaptive — runtime detection + auto-remediation (Falco, keylime) |
 | p5 | `immutability` | Immutability — read-only / signed artifacts (dm-verity, composefs, sealed-uki-vm) |
 | p6 | `audit_evidence` | Audit / evidence — tamper-evident trail (audit-evidence-packaging, SLSA) |
-| p7 | `cryptographic_identity` | Cryptographic identity — device- or workload-bound keys (TPM2, YubiKey FIDO2) |
+| p7 | `cryptographic_identity` | Cryptographic identity — device- or workload-bound keys (TPM2, U2F/HSM FIDO2) |
 | p8 | `segmentation` | Segmentation — process / VM / network isolation (nspawn, vfio-user, ADR-031) |
 
 **Mapping (corpus → radar axes):** the radar axis at position 0 corresponds to

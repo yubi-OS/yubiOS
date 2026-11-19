@@ -5,11 +5,11 @@
 
 # SER Alignment for yubiOS
 
-yubiOS follows the SER framework by making ownership explicit, keeping operational artifacts time-bounded, and preserving enough immutable evidence to reproduce and audit outcomes later. The project’s core design is a FIDO2-first immutable OS where the owner’s YubiKey is the user-facing identity, unlock, and authorization boundary, and where the build/install flow is centered on pinned images, signed artifacts, and reproducible CI evidence. <citation src="2,3"></citation>
+yubiOS follows the SER framework by making ownership explicit, keeping operational artifacts time-bounded, and preserving enough immutable evidence to reproduce and audit outcomes later. The project’s core design is a FIDO2-first immutable OS where the owner’s U2F/HSM is the user-facing identity, unlock, and authorization boundary, and where the build/install flow is centered on pinned images, signed artifacts, and reproducible CI evidence. <citation src="2,3"></citation>
 
 ## Sovereignty
 
-The sovereignty goal maps directly to yubiOS’s trust model: the owner controls Secure Boot signing, disk unlock, SSH resident keys, PAM login, and app 2FA through the YubiKey. The repo also treats the YubiKey as the root-of-trust boundary rather than OEM firmware or other external trust anchors. This is consistent with SER’s owner-centric control principle. <citation src="2,3"></citation>
+The sovereignty goal maps directly to yubiOS’s trust model: the owner controls Secure Boot signing, disk unlock, SSH resident keys, PAM login, and app 2FA through the U2F/HSM. The repo also treats the U2F/HSM as the root-of-trust boundary rather than OEM firmware or other external trust anchors. This is consistent with SER’s owner-centric control principle. <citation src="2,3"></citation>
 
 ## Ephemerality
 
@@ -27,7 +27,7 @@ Intended to be an open framework / open service model
 
 | SER principle | yubiOS implementation |
 |---|---|
-| Owner-centric control | YubiKey as the authorization boundary for signing, unlock, SSH, PAM, and 2FA |
+| Owner-centric control | U2F/HSM as the authorization boundary for signing, unlock, SSH, PAM, and 2FA |
 | Time-bounded retention | Experimental artifacts, disposable validation flows, dated refs, and clear separation of current vs historical notes |
 | Immutable provenance | Pinned digests, CI evidence, ADRs, and research notes tied to concrete build/install outcomes |
 | Deterministic execution | Bootc-based delivery, pinned build inputs, reproducibility checks, and controlled install paths |

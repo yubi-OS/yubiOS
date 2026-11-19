@@ -64,7 +64,7 @@ container can still be badly isolated; an isolated container can still run as ro
   (`refs/adjacent-problems-verification-chain-2026-09-01.md`). Relation: *intersection*.
 - **Container isolation** (`refs/adjacent-problems-container-isolation-2026-09-01.md`).
   Relation: *boundary family*, see above.
-- **YubiKey boot unlock without root**: `systemd-cryptenroll --fido2-device` runs as root at
+- **U2F/HSM boot unlock without root**: `systemd-cryptenroll --fido2-device` runs as root at
   enrol time only; unlock at boot happens in the initrd before any unprivileged user exists.
   Relation: *analogy* (privilege confined to a moment, not a lifetime).
 - **Runtime monitoring of privilege use** is a sibling problem this file does not solve;
@@ -80,7 +80,7 @@ Rootless buildx would be abandoned only if a required BuildKit feature had no ro
 
 Coverage over the learned primitives of the yubiOS corpus: verification chain (builder link),
 rootless privilege and capabilities (focal), corpus/curve (this note occupies a sparse cell
-on the fitted curve), YubiKey boot (the enrol-time exception), container isolation (the
+on the fitted curve), U2F/HSM boot (the enrol-time exception), container isolation (the
 boundary family). Omitted clusters are omitted on purpose.
 ## 2026-09-18 drift check (wayfinder round 8, cycle 75)
 

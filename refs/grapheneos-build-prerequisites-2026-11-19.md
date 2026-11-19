@@ -20,9 +20,9 @@
 3. **`/mnt/extended` Workspace Layout & Hardware I/O Protection**:
    - Root `/` has ~67 GB free, whereas a GrapheneOS 17 checkout + build requires ~285 GiB (shallow `-c --depth=1`) to ~440 GiB (full). All trees (`workspace/`, `out/`, `ccache/`, `vendor_cache/`, `releases/`, `sdk/`, `kernels/`, `vanadium/`) reside under `/mnt/extended/grapheneos/`.
    - Every heavy sync and compile step is wrapped in `nice -n 19 ionice -c3` with bounded concurrency (`repo sync -j4`, `m -j8 -l10`), preceded by a mandatory host `uptime` and top-CPU process check (`ps --sort=-pcpu`).
-4. **Signing, Updater Safety & YubiKey Root-of-Trust Integration**:
+4. **Signing, Updater Safety & U2F/HSM Root-of-Trust Integration**:
    - `OFFICIAL_BUILD=true` requires overriding `packages/apps/Updater/res/values/config.xml` away from `https://releases.grapheneos.org/` to `https://ota.yubios.org/` before building to prevent an infinite signature-verification failure loop.
-   - Release signing (`9` APK/APEX keys + `avb.pem` 4096-bit RSA + `id_ed25519` OpenSSH key) runs exclusively inside `/dev/shm` `tmpfs` with swap disabled (`swapoff -a`), and bridges to yubiOS's hardware root of trust via YubiKey PIV `slot 9c` (`avbtool --signing_helper` + `apksigner --ks-type PKCS11`) or attended FIDO2 `hmac-secret` key unsealing.
+   - Release signing (`9` APK/APEX keys + `avb.pem` 4096-bit RSA + `id_ed25519` OpenSSH key) runs exclusively inside `/dev/shm` `tmpfs` with swap disabled (`swapoff -a`), and bridges to yubiOS's hardware root of trust via U2F/HSM PIV `slot 9c` (`avbtool --signing_helper` + `apksigner --ks-type PKCS11`) or attended FIDO2 `hmac-secret` key unsealing.
 
 ---
 
@@ -1352,11 +1352,11 @@ jobs:
 
 ---
 
-# Stream 4 Deep-Research Report: Release Signing Keys, AVB Verified Boot, OTA Update Server, Reproducibility & yubi-OS YubiKey Root-of-Trust Integration
+# Stream 4 Deep-Research Report: Release Signing Keys, AVB Verified Boot, OTA Update Server, Reproducibility & yubi-OS U2F/HSM Root-of-Trust Integration
 
 **Target System:** GrapheneOS (`https://grapheneos.org/build`) on `yubi-OS/grapheneOS`  
 **Execution Environment:** Self-hosted `ubuntu` CI runner (`/mnt/extended`)  
-**Core Identity Contract:** yubiOS Root-of-Trust ("The YubiKey is the sole, un-exportable root of trust")  
+**Core Identity Contract:** yubiOS Root-of-Trust ("The U2F/HSM is the sole, un-exportable root of trust")  
 **Date:** November 19, 2026  
 
 ---
@@ -1368,7 +1368,7 @@ Stream 4 establishes the cryptographic and distribution boundary for `yubi-OS/gr
 2. An isolated, zero-footprint memory environment during key unsealing (`tmpfs` / `/dev/shm`, disabled swap) to prevent persistent disk leakage.
 3. Strict decoupling from official upstream infrastructure (`packages/apps/Updater` configuration and certificate pinning override) to avert destructive client-side infinite verification loops.
 4. Deterministic, bit-for-bit reproducibility anchored by timestamp and incremental version pinning, verified via `diffoscope` and attested via SLSA / Sigstore / cosign.
-5. Direct integration with yubiOS's primary architectural thesis: anchoring release signing and attestation directly to hardware security tokens (YubiKey PIV and FIDO2/WebAuthn), bridging GrapheneOS's remote hardware attestation (`Auditor`) into the yubiOS ecosystem.
+5. Direct integration with yubiOS's primary architectural thesis: anchoring release signing and attestation directly to hardware security tokens (U2F/HSM PIV and FIDO2/WebAuthn), bridging GrapheneOS's remote hardware attestation (`Auditor`) into the yubiOS ecosystem.
 
 ---
 
@@ -1629,14 +1629,14 @@ Following yubiOS's `slsa-provenance` and `sigstore-rekor-v2` skills:
    }
    ```
 2. **Signing & Transparency Log Rekor Anchor:**
-   - The provenance statement is signed using Cosign via the runner's OIDC token or a YubiKey PIV key.
+   - The provenance statement is signed using Cosign via the runner's OIDC token or a U2F/HSM PIV key.
    - The signed bundle is submitted to Sigstore / Rekor v2 tiles to prove timestamp, runner identity, and immutability.
 
 ---
 
-## 4. yubi-OS Architectural Bridge: YubiKey Root of Trust for GrapheneOS
+## 4. yubi-OS Architectural Bridge: U2F/HSM Root of Trust for GrapheneOS
 
-The defining mandate of yubiOS is: **"The YubiKey is the sole, un-exportable root of trust."** Integrating GrapheneOS into this ecosystem replaces software-held private keys with hardware-enforced primitives across two domains: release signing and device attestation.
+The defining mandate of yubiOS is: **"The U2F/HSM is the sole, un-exportable root of trust."** Integrating GrapheneOS into this ecosystem replaces software-held private keys with hardware-enforced primitives across two domains: release signing and device attestation.
 
 ```
 +-----------------------------------------------------------------------------------+
@@ -1646,7 +1646,7 @@ The defining mandate of yubiOS is: **"The YubiKey is the sole, un-exportable roo
   [Release Signing Plane]                             [Device Attestation Plane]
              |                                                  |
      +-------v--------+                                 +-------v--------+
-     |   YubiKey 5    |                                 |   YubiKey 5    |
+     |   U2F/HSM 5    |                                 |   U2F/HSM 5    |
      |   PIV Applet   |                                 | FIDO2 WebAuthn |
      +-------+--------+                                 +-------+--------+
              |                                                  |
@@ -1656,7 +1656,7 @@ The defining mandate of yubiOS is: **"The YubiKey is the sole, un-exportable roo
   | avbtool / apksigner Integration  |                 | GrapheneOS Auditor Server  |
   |  - avbtool --signing_helper      |                 |  - StrongBox / TEE quotes  |
   |  - apksigner PKCS11 provider     |                 |  - verifiedBootKey pinned  |
-  |  OR                              |                 |  - YubiKey admin root      |
+  |  OR                              |                 |  - U2F/HSM admin root      |
   | fido2-assert hmac-secret unseal  |                 +----------------------------+
   +----------------------------------+
 ```
@@ -1667,7 +1667,7 @@ Standard AOSP scripts expect private keys on the local filesystem. yubiOS provid
 
 #### Approach A: Direct PKCS#11 Hardware Signing (Slot 9c & Retired Slots)
 
-In this pattern, the private keys are generated directly inside the YubiKey's Secure Element (or imported during a formal key ceremony) and flagged as un-exportable.
+In this pattern, the private keys are generated directly inside the U2F/HSM's Secure Element (or imported during a formal key ceremony) and flagged as un-exportable.
 - **PIV Slot Assignment:**
   - `Slot 9c` (Digital Signature): Dedicated to the AVB Root Key (`avb.pem` RSA-4096 or RSA-2048).
   - `Slots 82–8a` (Retired Key Slots 1–9): Assigned to the 9 APK signing keys (`releasekey`, `platform`, `shared`, etc.).
@@ -1678,17 +1678,17 @@ In this pattern, the private keys are generated directly inside the YubiKey's Se
                        stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   (pout, perr) = p.communicate(padding_and_hash)
   ```
-  We implement a wrapper script `yubikey-avb-signer.sh`:
+  We implement a wrapper script `u2f-hsm-avb-signer.sh`:
   ```bash
   #!/usr/bin/env bash
-  # yubikey-avb-signer.sh: Signs AVB SHA256 digest using YubiKey PIV Slot 9c
+  # u2f-hsm-avb-signer.sh: Signs AVB SHA256 digest using U2F/HSM PIV Slot 9c
   ALGORITHM="$1"
   KEY_HINT="$2"
   DATA_TO_SIGN=$(cat) # Reads padded hash from stdin
 
   # Execute raw signature over OpenSC PKCS#11 engine via pkcs11-tool
   pkcs11-tool --module /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so \
-              --login --pin "$YUBIKEY_PIN" \
+              --login --pin "$U2F_HSM_PIN" \
               --sign --id 02 \
               --mechanism RSA-PKCS \
               --input-file <(echo -n "$DATA_TO_SIGN")
@@ -1697,35 +1697,35 @@ In this pattern, the private keys are generated directly inside the YubiKey's Se
   ```bash
   sign_target_files_apks \
       --avb_vbmeta_key "$PUB_KEY_DIR/avb_pub.pem" \
-      --avb_vbmeta_signing_helper /usr/local/bin/yubikey-avb-signer.sh \
+      --avb_vbmeta_signing_helper /usr/local/bin/u2f-hsm-avb-signer.sh \
       ...
   ```
 - **APK Signing via `apksigner` PKCS#11 Keystore:**
   `apksigner` natively supports SunPKCS11 provider configurations:
   ```bash
-  # pkcs11_yubikey.cfg
-  name = YubiKey
+  # pkcs11_u2f_hsm.cfg
+  name = U2F/HSM
   library = /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so
   slotListIndex = 0
   ```
   Signing command:
   ```bash
   apksigner sign --provider-class sun.security.pkcs11.SunPKCS11 \
-                 --provider-arg pkcs11_yubikey.cfg \
+                 --provider-arg pkcs11_u2f_hsm.cfg \
                  --ks NONE \
                  --ks-type PKCS11 \
                  --ks-key-alias "Certificate for Digital Signature" \
                  target.apk
   ```
 
-#### Approach B: YubiKey FIDO2 `hmac-secret` Passphrase Unsealing (Attended CI Release)
+#### Approach B: U2F/HSM FIDO2 `hmac-secret` Passphrase Unsealing (Attended CI Release)
 
 Because batch-signing dozens of APEXes and APKs through hardware token smart-card interfaces can incur USB transfer latency, yubiOS introduces the **FIDO2 HMAC-Secret Key-Wrapping Pattern** (matching yubiOS's LUKS2 and `systemd-homed` enrollment standard):
 1. The 9 APK keys and `avb.pem` are encrypted with an ultra-high-entropy master passphrase ($S$).
-2. $S$ is sealed using the YubiKey's FIDO2 `hmac-secret` extension (`fido2-assert -m`).
-3. During attended release builds on the CI runner, the operator connects their YubiKey:
+2. $S$ is sealed using the U2F/HSM's FIDO2 `hmac-secret` extension (`fido2-assert -m`).
+3. During attended release builds on the CI runner, the operator connects their U2F/HSM:
    ```bash
-   # Derive unseal key from YubiKey physical presence + touch
+   # Derive unseal key from U2F/HSM physical presence + touch
    UNSEAL_KEY=$(fido2-assert -G -h -i "$SALT_FILE" "$CRED_ID" /dev/hidrawX)
    PASSPHRASE=$(openssl enc -d -aes-256-gcm -in sealed_passphrase.enc -K "$UNSEAL_KEY" ...)
    
@@ -1734,11 +1734,11 @@ Because batch-signing dozens of APEXes and APKs through hardware token smart-car
    ```
 4. Signing proceeds in volatile RAM at full NVMe/CPU speeds.
 5. `/dev/shm` is scrubbed and unmounted immediately upon completion.
-6. The private keys remain cryptographically inert at rest unless unlocked by physical touch on the YubiKey.
+6. The private keys remain cryptographically inert at rest unless unlocked by physical touch on the U2F/HSM.
 
 ---
 
-### 4.2 Hardware Attestation Verification via GrapheneOS `Auditor` & YubiKey
+### 4.2 Hardware Attestation Verification via GrapheneOS `Auditor` & U2F/HSM
 
 GrapheneOS features an industry-leading hardware-based attestation system composed of:
 1. **Audited Device (Client):** Uses the Pixel's Titan M2 hardware security module / StrongBox Keymaster to generate an asymmetric key pair attested by Google's hardware root certificate.
@@ -1771,8 +1771,8 @@ When `yubi-OS/grapheneOS` builds with custom AVB keys:
    - Update `app/src/main/res/values/strings.xml` to declare the OS identity.
 3. Deploy a private Attestation Server instance on Steady Orbit / Cloudflare Workers:
    - When the enrolled device periodically attests its hardware state to the server, the server validates that the running operating system is cryptographically signed by the yubi-OS AVB key.
-4. **YubiKey Admin Authorization:**
-   - Management access to the Attestation Server dashboard (viewing device fleets, attestation status, and health telemetry) requires FIDO2 WebAuthn authentication using the operator's physical YubiKey.
+4. **U2F/HSM Admin Authorization:**
+   - Management access to the Attestation Server dashboard (viewing device fleets, attestation status, and health telemetry) requires FIDO2 WebAuthn authentication using the operator's physical U2F/HSM.
    - If an attestation challenge fails (indicating an unauthorized OS flash, modified bootloader, or tampered system partition), the server triggers an automated revocation event, terminating device access to yubiOS internal services and Tailscale gateways.
 
 ---
@@ -1786,7 +1786,7 @@ When `yubi-OS/grapheneOS` builds with custom AVB keys:
 | **Phase 4.3** | Memory-Safe CI Pipeline | Configure self-hosted GitHub Actions workflow on `ubuntu`: allocate `tmpfs` under `/dev/shm`, execute `sudo swapoff -a`, run `finalize.sh` and `generate-release.sh`. |
 | **Phase 4.4** | Edge OTA Server Deployment | Deploy Cloudflare Worker + R2 bucket; configure range requests, static channel pointers (`<device>-stable`), and Ed25519 signature serving. |
 | **Phase 4.5** | Reproducibility & SLSA Gate | Implement `reproducible-check.sh`: verify bit-for-bit parity against pinned `BUILD_DATETIME` and `BUILD_NUMBER`; sign provenance with Cosign. |
-| **Phase 4.6** | YubiKey Root-of-Trust Bridge | Implement `avbtool --signing_helper` OpenSC wrapper for PIV Slot 9c and FIDO2 `hmac-secret` attended unsealing; register `avb_pkmd.bin` fingerprint in custom `Auditor`. |
+| **Phase 4.6** | U2F/HSM Root-of-Trust Bridge | Implement `avbtool --signing_helper` OpenSC wrapper for PIV Slot 9c and FIDO2 `hmac-secret` attended unsealing; register `avb_pkmd.bin` fingerprint in custom `Auditor`. |
 
 ---
 

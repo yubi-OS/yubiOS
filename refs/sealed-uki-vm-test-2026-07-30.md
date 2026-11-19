@@ -11,7 +11,7 @@ unsealed BLS deployment** end-to-end (strict fs-verity composefs repo, BLS
 entries with `composefs=<sha512>` digest binding, EROFS metadata, fs-verity
 tamper rejection). It does **not** prove the sealed-UKI flow: signed UKI build,
 Secure Boot ROTPK chain, PCR measurement at install, dm-verity root hash in
-UKI cmdline, sealed LUKS2 with PCR-measured YubiKey unlock.
+UKI cmdline, sealed LUKS2 with PCR-measured U2F/HSM unlock.
 
 This doc scopes the missing Secure Boot VM lane (the lane the workflow itself
 carves out: *a separate Secure Boot VM lane is required to prove sealing*) and
@@ -22,7 +22,7 @@ fresh GitHub-hosted QEMU.
 
 1. **Signed UKI build.** `mkosi ... Format=ukify` (or `bootc container ukify`)
    with `SecureBootKey=pkcs11:token=yubiOS-ci;object=sb-key;type=private` per the
-   `mkosi-image-builder` skill. SoftHSM emulates PIV slot 9c (no real YubiKey on
+   `mkosi-image-builder` skill. SoftHSM emulates PIV slot 9c (no real U2F/HSM on
    CI). Sign via `systemd-sbsign` (ADR-008) using the engine backend, NOT the
    legacy `sbsigntools`.
 
@@ -72,7 +72,7 @@ fresh GitHub-hosted QEMU.
   This VM lane proves the *primitive* (signed UKI + ROTPK + dm-verity +
   sealed LUKS works in a QEMU Secure Boot VM) but does NOT prove the
   yubios install-time wiring. The two need to land separately.
-- **Real YubiKey PIV 9c in CI.** Out of scope. SoftHSM fallback per the
+- **Real U2F/HSM PIV 9c in CI.** Out of scope. SoftHSM fallback per the
   `mkosi-image-builder` skill is the CI primitive.
 - **ARM64 Secure Boot on RK3588.** Out of scope for this lane. The
   `arm-trusted-firmware-optee` + `ftpm-optee-tpm` skills cover the firmware

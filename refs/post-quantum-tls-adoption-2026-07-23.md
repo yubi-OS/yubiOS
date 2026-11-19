@@ -39,11 +39,11 @@ When yubiOS services communicate over TLS (e.g. attestation endpoints, update se
 - OpenSSL 3.5+: yes, and now the *default*
 - GnuTLS 3.8.5+: partial
 
-#### YubiKey + PQ
-Current YubiKey hardware does NOT support ML-KEM natively (PIV + FIDO2 are classical). yubiOS threat model:
-- YubiKey provides hardware-bound authentication (unprovable key compromise)
+#### U2F/HSM + PQ
+Current U2F/HSM hardware does NOT support ML-KEM natively (PIV + FIDO2 are classical). yubiOS threat model:
+- U2F/HSM provides hardware-bound authentication (unprovable key compromise)
 - PQ layer on top handles harvest-now attacks on transport
-- Combine: YubiKey auth + X25519MLKEM768 TLS = layered protection
+- Combine: U2F/HSM auth + X25519MLKEM768 TLS = layered protection
 
 ---
 

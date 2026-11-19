@@ -4,7 +4,7 @@
 #
 # Late kernel-install hook for both dnf/rpm and rpm-ostree kernel updates.
 # Ensures that after all initramfs/UKI generators have run, the target kernel's
-# UKI is assembled, signed with the attached YubiKey PIV slot 9a db key,
+# UKI is assembled, signed with the attached U2F/HSM PIV slot 9a db key,
 # committed to the local composefs OCI repository (/var/lib/yubiOS/oci), and
 # deployed to the ESP (/EFI/Linux/bootc/bootc_composefs-<digest>.efi).
 

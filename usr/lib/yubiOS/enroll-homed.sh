@@ -1,6 +1,6 @@
 #!/bin/bash
 # SPDX-License-Identifier: GPL-2.0-only
-# yubiOS First-Boot User Home Enrollment via systemd-homed + YubiKey FIDO2
+# yubiOS First-Boot User Home Enrollment via systemd-homed + U2F/HSM FIDO2
 #
 # Creates a FIDO2-unlocked LUKS2 home directory for the primary user inside the
 # /dev/lvm/yubios-root (96%VG) LVM logical volume under /dev/mapper/crypt.
@@ -39,10 +39,10 @@ if [ -e /dev/mapper/crypt ]; then
   fi
 fi
 
-log "Waiting for YubiKey... (plug it in now)"
+log "Waiting for U2F/HSM... (plug it in now)"
 for _ in $(seq 1 30); do
   if ykman list 2>/dev/null | grep -q .; then
-    log "YubiKey detected."
+    log "U2F/HSM detected."
     break
   fi
   if fido2-token -L 2>/dev/null | grep -q .; then

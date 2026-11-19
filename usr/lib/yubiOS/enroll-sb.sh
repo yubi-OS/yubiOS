@@ -3,7 +3,7 @@
 # yubiOS owner Secure Boot enrollment and signing, run on the booted board.
 #
 # Phases:
-#   enroll : only in setup mode. Makes PK, KEK, db from the YubiKey PIV slot 9a
+#   enroll : only in setup mode. Makes PK, KEK, db from the U2F/HSM PIV slot 9a
 #            key (signing only, SIGN.md steps 1-3), writes PK, KEK, db through the
 #            StMM variable store with efi-updatevar, then verifies them.
 #   resign : signs the systemd-boot loader and every UKI on the ESP with the db
@@ -18,7 +18,7 @@
 
 set -euo pipefail
 # Paths default to production; YUBIOS_* overrides exist so tests/unit/test-enroll-sb.bats
-# can run unprivileged without a YubiKey or a mounted efivarfs.
+# can run unprivileged without a U2F/HSM or a mounted efivarfs.
 # shellcheck source=usr/lib/yubiOS/lib.sh
 source "${YUBIOS_LIB_SH:-/usr/lib/yubiOS/lib.sh}"
 export PATH="$PATH:/usr/lib/systemd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

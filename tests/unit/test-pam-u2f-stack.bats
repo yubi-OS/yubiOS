@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 # Static tests for the pam-u2f auth path in the shipped PAM stacks (no hardware).
-# Asserts the YubiKey touch is REQUIRED (not sufficient) on both system-auth and sudo,
+# Asserts the U2F/HSM touch is REQUIRED (not sufficient) on both system-auth and sudo,
 # uses the central authfile, and that the version floor matches the CVE fix.
 # Run: bats tests/unit/test-pam-u2f-stack.bats
 

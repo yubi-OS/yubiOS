@@ -21,7 +21,7 @@ chipsec_gate() {
   [[ -r "$f" ]] || return 0
   case "$(sed -n 's/^RESULT=//p' "$f" | tail -n 1 | tr -d '[:space:]')" in
     FAILED)
-      echo "FAIL: CHIPSEC first-boot platform check reported FAILED; blocking YubiKey enrollment per ADR-024." >&2
+      echo "FAIL: CHIPSEC first-boot platform check reported FAILED; blocking U2F/HSM enrollment per ADR-024." >&2
       return 1 ;;
     WARN)
       echo "WARN: CHIPSEC first-boot platform check reported WARN; proceeding with enrollment (review journal for firmware warnings)." >&2 ;;
@@ -200,20 +200,20 @@ __/\\\________/\\\________________/\\\____________________/\\\\\__________/\\\\\
 BRUCE_BANNER
 
 echo ""
-echo "This wizard will enroll your YubiKey as the root of trust for:"
+echo "This wizard will enroll your U2F/HSM as the root of trust for:"
 echo "  1. Secure Boot signing (PIV slot 9a, CCID interface)"
 echo "  2. Disk encryption unlock (FIDO2 HMAC-secret, hidraw)"
 echo "  3. User home directory (systemd-homed LUKS2 + FIDO2, default user: yubios)"
 echo "  4. SSH keys (ed25519-sk resident key, hidraw)"
 echo "  5. sudo / login auth (U2F pam_u2f, hidraw)"
 echo ""
-echo "YubiKey firmware >= 5.2.3 required for ed25519-sk."
+echo "U2F/HSM firmware >= 5.2.3 required for ed25519-sk."
 echo ""
 
-wait_for_yubikey
+wait_for_u2f_hsm
 
 echo ""
-echo "YubiKey detected. Confirm FIDO2 PIN is set before continuing."
+echo "U2F/HSM detected. Confirm FIDO2 PIN is set before continuing."
 echo "  If not: run \"ykman fido access change-pin\" in another terminal."
 read -rp "Press Enter when ready, or Ctrl-C to abort..."
 
@@ -252,7 +252,7 @@ run_step_with_retry() {
 
 echo ""
 echo "─── Step 1/5: Secure Boot Signing ───"
-echo "Uses YubiKey PIV slot 9a. Requires PIV PIN (default: 123456)."
+echo "Uses U2F/HSM PIV slot 9a. Requires PIV PIN (default: 123456)."
 read -rp "Enroll Secure Boot key? [Y/n]: " do_sb
 if [[ "${do_sb:-Y}" =~ ^[Yy] ]]; then
   run_step_with_retry "Secure Boot Signing" /usr/lib/yubiOS/enroll-sb.sh
@@ -260,7 +260,7 @@ fi
 
 echo ""
 echo "─── Step 2/5: Disk Encryption (FIDO2 hidraw) ───"
-echo "Enrolls YubiKey FIDO2 as LUKS2 unlock key. Touch + PIN required at boot."
+echo "Enrolls U2F/HSM FIDO2 as LUKS2 unlock key. Touch + PIN required at boot."
 read -rp "Enroll disk encryption? [Y/n]: " do_luks
 if [[ "${do_luks:-Y}" =~ ^[Yy] ]]; then
   run_step_with_retry "Disk Encryption" /usr/lib/yubiOS/enroll-luks.sh
@@ -268,7 +268,7 @@ fi
 
 echo ""
 echo "─── Step 3/5: User Home Directory (systemd-homed FIDO2) ───"
-echo "Creates LUKS2-encrypted home for '${ENROLL_USER}' unlocked by YubiKey FIDO2."
+echo "Creates LUKS2-encrypted home for '${ENROLL_USER}' unlocked by U2F/HSM FIDO2."
 read -rp "Create FIDO2 homed user '${ENROLL_USER}'? [Y/n]: " do_homed
 if [[ "${do_homed:-Y}" =~ ^[Yy] ]]; then
   run_step_with_retry "User Home Directory" /usr/lib/yubiOS/enroll-homed.sh "$ENROLL_USER"
@@ -276,7 +276,7 @@ fi
 
 echo ""
 echo "─── Step 4/5: SSH Key (ed25519-sk resident) ───"
-echo "Private key stays on YubiKey. Touch + PIN required per connection."
+echo "Private key stays on U2F/HSM. Touch + PIN required per connection."
 read -rp "Generate SSH key? [Y/n]: " do_ssh
 if [[ "${do_ssh:-Y}" =~ ^[Yy] ]]; then
   run_step_with_retry "SSH Key" /usr/lib/yubiOS/enroll-ssh.sh
@@ -284,7 +284,7 @@ fi
 
 echo ""
 echo "─── Step 5/5: sudo / Login Auth (U2F pam-u2f) ───"
-echo "Adds YubiKey touch requirement to sudo for '${ENROLL_USER}' (and root)."
+echo "Adds U2F/HSM touch requirement to sudo for '${ENROLL_USER}' (and root)."
 read -rp "Enroll PAM U2F? [Y/n]: " do_pam
 if [[ "${do_pam:-Y}" =~ ^[Yy] ]]; then
   run_step_with_retry "PAM U2F" /usr/lib/yubiOS/enroll-pam.sh "$ENROLL_USER"
@@ -306,11 +306,11 @@ if [ -b /dev/mapper/yubios-root ]; then
 fi
 
 echo "─────────────────────────────────────────────────────────────"
-echo "Enrollment complete. Your YubiKey is now the root of trust for this system."
+echo "Enrollment complete. Your U2F/HSM is now the root of trust for this system."
 echo "Enrolled user: ${ENROLL_USER}"
 echo ""
-echo "IMPORTANT: Enroll a BACKUP YubiKey now while you still have access."
-echo "  Run: yubiOS-enroll-luks   (for second YubiKey disk unlock)"
-echo "  Run: yubiOS-enroll-pam    (for second YubiKey sudo auth)"
+echo "IMPORTANT: Enroll a BACKUP U2F/HSM now while you still have access."
+echo "  Run: yubiOS-enroll-luks   (for second U2F/HSM disk unlock)"
+echo "  Run: yubiOS-enroll-pam    (for second U2F/HSM sudo auth)"
 echo ""
-echo "See ONBOARDING.md for recovery procedures if your YubiKey is lost."
+echo "See ONBOARDING.md for recovery procedures if your U2F/HSM is lost."

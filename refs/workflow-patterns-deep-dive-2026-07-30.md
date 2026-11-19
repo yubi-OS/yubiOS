@@ -140,7 +140,7 @@ sbverify --cert mkosi.secure-boot.pem "$uki"
 ```ini
 [Validation]
 # SecureBoot=yes: UKIs signed at build time via systemd-sbsign (ADR-008).
-# YubiKey PIV (slot 9c, PKCS#11) signing: run yubiOS-enroll-sb post-install.
+# U2F/HSM PIV (slot 9c, PKCS#11) signing: run yubiOS-enroll-sb post-install.
 SecureBoot=yes
 SignExpectedPcr=no
 ```

@@ -3,7 +3,7 @@
 #
 # Build & install the `passless` software CTAP2 FIDO2 authenticator into the
 # yubiOS TEST image (swu2f Layer 2 — see bcvk docs/swu2f.md). TEST-ONLY: the
-# production trust anchor stays the YubiKey FIDO2 device (ADR-003). passless is
+# production trust anchor stays the U2F/HSM FIDO2 device (ADR-003). passless is
 # never installed into a production profile.
 #
 # Why passless:

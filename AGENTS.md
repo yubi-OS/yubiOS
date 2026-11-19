@@ -15,7 +15,7 @@ Warning: rate-limit GitHub API calls to avoid lockout. Batch independent reads, 
 
 Primary repo: https://github.com/yubi-OS/yubiOS
 
-FIDO2-first immutable OS: YubiKey as root of trust for Secure Boot, disk encryption, SSH, and PAM. The design avoids mandatory TPM, OEM, or distribution-controlled trust anchors.
+FIDO2-first immutable OS: U2F/HSM as root of trust for Secure Boot, disk encryption, SSH, and PAM. The design avoids mandatory TPM, OEM, or distribution-controlled trust anchors.
 
 ## Hands-off repos
 

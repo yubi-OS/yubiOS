@@ -1,22 +1,22 @@
-# udev rules for YubiKey FIDO2 (hidraw) and PIV (CCID) access in yubiOS
+# udev rules for U2F/HSM FIDO2 (hidraw) and PIV (CCID) access in yubiOS
 #
 # TAG+="uaccess" grants the logged-in seat user read/write without sudo.
 # This is the modern approach (replaces group-based access).
 # Source: systemd-udev seat access https://www.freedesktop.org/wiki/Software/systemd/udev/
 #
 # Yubico USB Vendor ID: 0x1050
-# Product IDs covered: YubiKey 5 NFC (0x0407), YubiKey 5C (0x0406), Security Key (0x0120)
+# Product IDs covered: U2F/HSM 5 NFC (0x0407), U2F/HSM 5C (0x0406), Security Key (0x0120)
 # and the generic FIDO HID class that covers all models.
 
-# YubiKey FIDO2 / U2F (HID — /dev/hidraw*)
+# U2F/HSM FIDO2 / U2F (HID — /dev/hidraw*)
 SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", TAG+="uaccess", GROUP="plugdev", MODE="0660"
 
-# YubiKey CCID / PIV (USB smartcard — for sbsign/pcscd)
+# U2F/HSM CCID / PIV (USB smartcard — for sbsign/pcscd)
 SUBSYSTEM=="usb", ATTRS{idVendor}=="1050", TAG+="uaccess"
 
-# Allow uinput for YubiKey OTP (keyboard emulation)
+# Allow uinput for U2F/HSM OTP (keyboard emulation)
 SUBSYSTEM=="input", ATTRS{idVendor}=="1050", TAG+="uaccess"
 
-# Wake on YubiKey insert/remove for enrollment service trigger
+# Wake on U2F/HSM insert/remove for enrollment service trigger
 ACTION=="add", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", \
   TAG+="systemd", ENV{SYSTEMD_WANTS}+="yubiOS-enroll.service"

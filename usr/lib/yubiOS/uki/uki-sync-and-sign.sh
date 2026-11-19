@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 # /usr/lib/yubiOS/uki/uki-sync-and-sign.sh (ADR-034, OMN-191)
 #
-# Unified on-device UKI assembly, YubiKey PIV slot 9a re-signing, local composefs
+# Unified on-device UKI assembly, U2F/HSM PIV slot 9a re-signing, local composefs
 # OCI image repository commit (/var/lib/yubiOS/oci), and ESP + Type2 BLSConfig
 # deployment for:
 #   1. dnf / rpm kernel & initramfs updates (via 05-rpmostree.install,
@@ -214,7 +214,7 @@ sign_and_verify_pe() {
     fi
     local tmp_signed
     tmp_signed="$(mktemp "$KEYDIR/signed-uki-XXXXXX.efi")"
-    yubiOS_log "Signing $(basename "$pe_path") with YubiKey PIV slot 9a db key ($SB_KEY_URI)" >&2
+    yubiOS_log "Signing $(basename "$pe_path") with U2F/HSM PIV slot 9a db key ($SB_KEY_URI)" >&2
     systemd-sbsign sign \
       --private-key "$SB_KEY_URI" \
       --private-key-source "provider:pkcs11" \

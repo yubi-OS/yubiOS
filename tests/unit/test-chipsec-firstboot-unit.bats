@@ -214,7 +214,7 @@ run_gate_with() {
 
 @test "enrollment gate is shipped executable-ready with the documented contract" {
   [ -f "$GATE" ]
-  run grep -F 'blocking YubiKey enrollment per ADR-024.' "$GATE"
+  run grep -F 'blocking U2F/HSM enrollment per ADR-024.' "$GATE"
   [ "$status" -eq 0 ]
 }
 
@@ -232,7 +232,7 @@ run_gate_with() {
 @test "gate: RESULT=FAILED exits 1 with the block message" {
   run_gate_with FAILED
   [ "$status" -eq 1 ]
-  [[ "$output" == *"FAIL: CHIPSEC first-boot platform check reported FAILED; blocking YubiKey enrollment per ADR-024."* ]]
+  [[ "$output" == *"FAIL: CHIPSEC first-boot platform check reported FAILED; blocking U2F/HSM enrollment per ADR-024."* ]]
 }
 
 @test "gate: absent status file (VM / ARM64 skip) exits 0" {

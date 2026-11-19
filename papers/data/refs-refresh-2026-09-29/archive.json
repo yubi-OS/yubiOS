@@ -92,7 +92,7 @@
   },
   {
    "file": "adjacent-problems-fido2-secure-boot-2026-09-01.md",
-   "title": "Adjacent problems: YubiKey FIDO2 at the boot boundary",
+   "title": "Adjacent problems: U2F/HSM FIDO2 at the boot boundary",
    "size_bytes": 5024,
    "age_days": 28,
    "has_verification": false,
@@ -2720,7 +2720,7 @@
   },
   {
    "file": "yubikey-hw-validation-scenarios-2026-07-25.md",
-   "title": "Minimum real-hardware YubiKey validation scenarios",
+   "title": "Minimum real-hardware U2F/HSM validation scenarios",
    "size_bytes": 8520,
    "age_days": 66,
    "has_verification": false,

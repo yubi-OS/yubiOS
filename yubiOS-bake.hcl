@@ -403,10 +403,10 @@ target "yubios-uki" {
   platforms   = [PLATFORM]
   labels = {
     "org.opencontainers.image.title"       = "yubiOS signed UKI"
-    "org.opencontainers.image.description" = "PKCS#11-signed UKI (kernel side of ADR-032 kernel+rootfs split). Built via mkosi --secure-boot-sign-tool systemd-sbsign against the YubiKey PIV slot 9a anchor (mocked with SoftHSM in CI; production uses the real YubiKey, ADR-002/ADR-008)."
+    "org.opencontainers.image.description" = "PKCS#11-signed UKI (kernel side of ADR-032 kernel+rootfs split). Built via mkosi --secure-boot-sign-tool systemd-sbsign against the U2F/HSM PIV slot 9a anchor (mocked with SoftHSM in CI; production uses the real U2F/HSM, ADR-002/ADR-008)."
     "io.yubios.artifact.role"               = "uki-kernel"
     "io.yubios.uki.sign-tool"               = "systemd-sbsign"
-    "io.yubios.uki.pkcs11"                  = "provider:pkcs11 against SoftHSM (CI) / YubiKey PIV slot 9a (production)"
+    "io.yubios.uki.pkcs11"                  = "provider:pkcs11 against SoftHSM (CI) / U2F/HSM PIV slot 9a (production)"
     "io.yubios.adr"                         = "ADR-032"
   }
   tags = PUSH ? [

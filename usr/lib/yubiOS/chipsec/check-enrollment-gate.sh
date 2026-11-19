@@ -44,7 +44,7 @@ result="$(sed -n 's/^RESULT=//p' "$status_file" | tail -n 1 | tr -d '[:space:]')
 
 case "$result" in
   FAILED)
-    note "FAIL: CHIPSEC first-boot platform check reported FAILED; blocking YubiKey enrollment per ADR-024."
+    note "FAIL: CHIPSEC first-boot platform check reported FAILED; blocking U2F/HSM enrollment per ADR-024."
     note "      status: $status_file -- review: journalctl -t yubiOS-chipsec"
     exit 1
     ;;

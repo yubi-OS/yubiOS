@@ -134,7 +134,7 @@ run_enroll_gate() {
 @test "enroll.sh: RESULT=FAILED blocks enrollment (exit 1)" {
   run_enroll_gate FAILED
   [ "$status" -eq 1 ]
-  [[ "$output" == *"FAIL: CHIPSEC first-boot platform check reported FAILED; blocking YubiKey enrollment per ADR-024."* ]]
+  [[ "$output" == *"FAIL: CHIPSEC first-boot platform check reported FAILED; blocking U2F/HSM enrollment per ADR-024."* ]]
 }
 
 @test "enroll.sh: absent status file (VM / ARM64) proceeds (exit 0)" {
@@ -145,7 +145,7 @@ run_enroll_gate() {
 @test "enroll.sh: inline fallback still blocks on FAILED when the helper is missing" {
   run_enroll_gate FAILED inline
   [ "$status" -eq 1 ]
-  [[ "$output" == *"blocking YubiKey enrollment per ADR-024."* ]]
+  [[ "$output" == *"blocking U2F/HSM enrollment per ADR-024."* ]]
 }
 
 @test "enroll.sh: inline fallback warns and proceeds on WARN" {

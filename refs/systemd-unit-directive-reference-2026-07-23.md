@@ -201,7 +201,7 @@ For type-wide drops: `/etc/systemd/system/service.d/99-sandbox.conf` applies to 
 
 ```ini
 [Service]
-LoadCredential=fido2-token:/etc/yubikey/slot-config
+LoadCredential=fido2-token:/etc/u2f-hsm/slot-config
 LoadCredentialEncrypted=api-key:/etc/credentials/api.cred
 SetCredential=mode:production
 ```
@@ -212,10 +212,10 @@ Access via `$CREDENTIALS_DIRECTORY/fido2-token`.
 
 ## yubiOS-specific Patterns
 
-### YubiKey auth service unit
+### U2F/HSM auth service unit
 ```ini
 [Unit]
-Description=YubiKey FIDO2 Enrollment Service
+Description=U2F/HSM FIDO2 Enrollment Service
 After=systemd-udevd.service
 Requires=systemd-udevd.service
 
@@ -239,7 +239,7 @@ WantedBy=multi-user.target
 
 ### systemd-homed drop-in (FIDO2 enrollment)
 ```ini
-# /etc/systemd/system/systemd-homed.service.d/99-yubikey.conf
+# /etc/systemd/system/systemd-homed.service.d/99-u2f-hsm.conf
 [Service]
 PrivateDevices=no
 BindReadOnlyPaths=/dev/hidraw0 /dev/hidraw1 /dev/hidraw2

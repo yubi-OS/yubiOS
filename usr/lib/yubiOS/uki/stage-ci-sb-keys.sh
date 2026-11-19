@@ -4,9 +4,9 @@
 #
 # Stages the initial Secure Boot key hierarchy (PK, KEK, db: .crt, .esl, .auth,
 # and yubiOS-db.cer) using the exact PKCS#11 flow from usr/lib/yubiOS/enroll-sb.sh:
-#   1. If a physical YubiKey (USB VID 1050) is present, uses YubiKey PIV slot 9a
+#   1. If a physical U2F/HSM (USB VID 1050) is present, uses U2F/HSM PIV slot 9a
 #      via libykcs11.so + openssl pkcs11 provider + efitools.
-#   2. If no physical YubiKey is attached, opts for the swu2f path (/dev/uhid
+#   2. If no physical U2F/HSM is attached, opts for the swu2f path (/dev/uhid
 #      passless authenticator + SoftHSM2 PKCS#11 slot 9a/01 token) and runs the
 #      exact same enroll-sb.sh openssl -provider pkcs11 + efitools commands.
 #   3. Stages the resulting files into the enroll-sb.sh locations:
@@ -58,7 +58,7 @@ sync_host_dev() {
 
 sync_host_dev
 
-has_physical_yubikey() {
+has_physical_u2f_hsm() {
   local d
   for d in /sys/bus/usb/devices/*/idVendor; do
     [ -r "$d" ] || continue
@@ -69,7 +69,7 @@ has_physical_yubikey() {
   if command -v lsusb >/dev/null 2>&1 && lsusb 2>/dev/null | grep -qi '1050:'; then
     return 0
   fi
-  if command -v ykman >/dev/null 2>&1 && ykman list 2>/dev/null | grep -qi yubikey; then
+  if command -v ykman >/dev/null 2>&1 && ykman list 2>/dev/null | grep -qi 'U2F/HSM\|fido\|piv'; then
     return 0
   fi
   return 1
@@ -194,8 +194,8 @@ EOF
   )
 }
 
-stage_via_yubikey() {
-  echo "[stage-ci-sb-keys] Physical YubiKey (1050:*) detected; using hardware PIV slot 9a"
+stage_via_u2f_hsm() {
+  echo "[stage-ci-sb-keys] Physical U2F/HSM (1050:*) detected; using hardware PIV slot 9a"
   if [ ! -S /run/pcscd/pcscd.comm ]; then
     pcscd 2>/dev/null || true
     sleep 1
@@ -214,7 +214,7 @@ stage_via_yubikey() {
 }
 
 stage_via_swu2f() {
-  echo "[stage-ci-sb-keys] No physical YubiKey attached; opting for swu2f + SoftHSM PKCS#11 slot 9a fallback"
+  echo "[stage-ci-sb-keys] No physical U2F/HSM attached; opting for swu2f + SoftHSM PKCS#11 slot 9a fallback"
   local passless_pid=""
   if command -v passless >/dev/null 2>&1 && [ -e /dev/uhid ]; then
     mkdir -p "$WORK_DIR/passless/storage" "$WORK_DIR/passless/config"
@@ -259,8 +259,8 @@ EOF
   return "$rc"
 }
 
-if has_physical_yubikey && stage_via_yubikey; then
-  echo "[stage-ci-sb-keys] Staged Secure Boot keys via physical YubiKey PIV slot 9a"
+if has_physical_u2f_hsm && stage_via_u2f_hsm; then
+  echo "[stage-ci-sb-keys] Staged Secure Boot keys via physical U2F/HSM PIV slot 9a"
 else
   stage_via_swu2f
   echo "[stage-ci-sb-keys] Staged Secure Boot keys via swu2f + SoftHSM PKCS#11 fallback"

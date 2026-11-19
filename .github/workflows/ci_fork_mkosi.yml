@@ -81,7 +81,7 @@ jobs:
         run: |
           sudo apt-get install -y python3 python3-pip
           pip3 install --quiet .
-      # Parses conf files without needing a YubiKey or real build
+      # Parses conf files without needing a U2F/HSM or real build
       - name: Profile syntax (yubios)
         run: mkosi --profile yubios summary || true
       - name: Profile syntax (yubiOS)

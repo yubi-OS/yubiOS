@@ -34,7 +34,7 @@ L4a -- verification-chain
 ## Focal problem
 
 Every stage of a yubiOS boot must be able to prove, to the next stage, that what it is about
-to run was signed by a key the owner controls. The chain is: YubiKey PIV slot 9c signs the UKI
+to run was signed by a key the owner controls. The chain is: U2F/HSM PIV slot 9c signs the UKI
 (`sbsign` through PKCS#11) -> UEFI Secure Boot verifies the UKI signature -> the UKI's
 embedded cmdline pins the dm-verity root hash -> the kernel refuses a `/usr` whose Merkle tree
 does not match -> composefs carries the signed digest list into the runtime image -> the OPA
@@ -47,7 +47,7 @@ Family: **OS trust anchoring**. Its boundaries with adjacent families:
 
 | Family | Question it answers | yubiOS position |
 |---|---|---|
-| Trust anchoring | Who is allowed to sign what runs? | Owner-held YubiKey, no OEM key |
+| Trust anchoring | Who is allowed to sign what runs? | Owner-held U2F/HSM, no OEM key |
 | Boot integrity (measured boot) | What actually ran, recorded where? | Deferred; fTPM on ARM64 is post-launch (ADR-018/019/020) |
 | Encrypted boot | Can the disk be read without the owner? | LUKS2 + FIDO2 via systemd-cryptenroll; a sibling, not this family |
 | Reproducible boot | Would a second build produce identical bytes? | `scripts/verify-reproducible-*` covers the unsigned subject only |
@@ -90,7 +90,7 @@ hardware. Neither is on the roadmap; both are recorded so the decision can be re
 
 Within the yubiOS corpus this file is intended to land in a sparse cell of the fitted curve,
 alongside the rejected-models note. Its coverage over the learned primitives is: verification
-chain yes, rootless privilege yes (the builder link), corpus/curve yes (this section), YubiKey
+chain yes, rootless privilege yes (the builder link), corpus/curve yes (this section), U2F/HSM
 boot yes, container isolation yes; it deliberately says nothing about the two omitted
 clusters so that the file occupies the target pattern and not the existing pole.
 

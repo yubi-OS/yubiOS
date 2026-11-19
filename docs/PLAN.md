@@ -35,7 +35,7 @@ The base-case planning model reaches approximately **$350,000, $1.2 million, and
 
 - A production-supported release.
 - A completed real-board ARM64 Path A proof.
-- Production confidence from physical-YubiKey end-to-end validation.
+- Production confidence from physical-U2F/HSM end-to-end validation.
 - A published supported-hardware matrix and lifecycle commitment.
 - Audited security, compliance certification, a staffed SLA, or a 24x7 response function.
 - Disclosed paying customers, recurring revenue, renewals, customer ROI measurements, or a qualified sales pipeline.
@@ -142,7 +142,7 @@ Allowed: public development, grants, sponsored research with public deliverables
 Required before leaving Gate 0:
 
 - Resolve the active VM, real-FIDO2, runtime-hardening, pin-refresh, and release-evidence blockers relevant to the pilot platform.
-- Obtain trademark/name clearance and explicitly address possible confusion with YubiKey/Yubico.
+- Obtain trademark/name clearance and explicitly address possible confusion with U2F/HSM/Yubico.
 - Review LGPL-2.1 suitability, copyright provenance, third-party redistribution duties, and cryptography/export requirements with qualified counsel.
 - Publish the operating covenant, support boundaries, privacy position, contribution policy, and commercial conflict policy.
 - Define one bounded pilot platform rather than promising the full future hardware matrix.
@@ -151,7 +151,7 @@ Required before leaving Gate 0:
 
 Required evidence:
 
-- A repeatable physical-YubiKey enrollment, unlock, signing, SSH/PAM, loss, replacement, and recovery demonstration on disposable hardware.
+- A repeatable physical-U2F/HSM enrollment, unlock, signing, SSH/PAM, loss, replacement, and recovery demonstration on disposable hardware.
 - Green update/rollback and VM evidence for the chosen pilot image.
 - Reproducible release identifiers, signed verification material, SBOM, provenance, and production/dev separation.
 - One published recovery exercise and one externally reviewed threat/control correction.
@@ -337,7 +337,7 @@ Initially, one operating company may hold contracts, employ maintainers, and fun
 
 Legal review must cover:
 
-- The yubiOS name and possible YubiKey/Yubico trademark or affiliation confusion.
+- The yubiOS name and possible U2F/HSM/Yubico trademark or affiliation confusion.
 - Whether LGPL-2.1 is the intended and correctly applied license for the full distribution, plus all third-party notices and source-offer duties.
 - Contributor provenance, DCO policy, employer IP, patents, and trademark rules.
 - Product warranties, limitation of liability, support SLAs, cyber/E&O insurance, and hardware damage or lockout risk.
@@ -380,7 +380,7 @@ Do not publish vanity metrics without the decision they inform.
 ### Days 31–60: prove the narrow product
 
 - Retire or reclassify the VM, physical-token, runtime-hardening, and release blockers for one pilot platform.
-- Publish a reproducible physical-YubiKey and recovery demonstration with exact evidence and limits.
+- Publish a reproducible physical-U2F/HSM and recovery demonstration with exact evidence and limits.
 - Recruit two design partners matching the initial customer profile.
 - Price the pilot; do not default to unpaid custom engineering.
 - Establish vulnerability triage, release severity, escalation, backup, and incident communications exercises.

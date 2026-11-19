@@ -372,7 +372,7 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
-This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey) integration is referenced.
+This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / U2F/HSM / ssh-key / hmac-secret / passkey) integration is referenced.
 
 The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity` primitive gap.
 

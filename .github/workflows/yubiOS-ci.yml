@@ -344,7 +344,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
         run: echo "${{ secrets.DOCKER }}" | docker -H unix:///run/docker-rootless/docker.sock login -u 0mniteck42 --password-stdin
 
-      - name: Stage initial Secure Boot keys inside final rootless layer (physical YubiKey on rock1 or swu2f fallback)
+      - name: Stage initial Secure Boot keys inside final rootless layer (physical U2F/HSM on rock1 or swu2f fallback)
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER }}
         run: |

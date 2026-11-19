@@ -4,7 +4,7 @@
 # and test-fido2-enrollment.sh). Published as 0mniteck/yubios:dev / :dev-<sha>
 # (ADR-026) — a distinct tag namespace from :latest, never the same artifact.
 #
-# TEST-ONLY. The production trust anchor stays the YubiKey FIDO2 device
+# TEST-ONLY. The production trust anchor stays the U2F/HSM FIDO2 device
 # (ADR-003). passless is never present in a production image — this
 # Containerfile is the ONLY place it gets installed, and it is never referenced
 # by yubiOS-ci.yml's build/push path.

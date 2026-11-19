@@ -3,7 +3,7 @@
 # Run from the repo root or from / inside the image: bats tests/unit/test-enroll-sb.bats
 # shellcheck disable=SC2016  # single-quoted stub bodies and grep patterns are literal by design
 # Hermetic: every hardware/firmware tool is a PATH stub, efivarfs is a temp dir,
-# and KEYDIR/ENROLLED_MARK/ESP live under $BATS_TEST_TMPDIR. No root, no YubiKey.
+# and KEYDIR/ENROLLED_MARK/ESP live under $BATS_TEST_TMPDIR. No root, no U2F/HSM.
 
 bats_require_minimum_version 1.5.0
 

@@ -46,7 +46,7 @@ Three sub-gates, each required:
 
 - **Gate 1.5a — Security audit gate:** an independent security review of the supported release and management plane, OR a documented self-audit with named independent reviewer (third-party consultancy or qualified external individual). Not a full SOC2/ISO27001 certification; an evidence-grade review against the yubiOS threat model (`docs/THREAT_MODEL.md`) with a published report or summary, captured before any paid pilot SOW is signed. **Rationale (per stress-test 2026-07-28):** enterprise buyers in target segments routinely require third-party review before signing pilot agreements. Without it, design-partner recruitment may stall on procurement, not engineering. The trust thesis ("FIDO2-first, immutable, signed UKIs, verified /usr") demands external evidence before paid pilots.
 - **Gate 1.5b — Pricing-validity gate:** at least two of three priced proposals received at the documented list price (or above) for the Assured Fleet subscription tier ($600/node/year, $25k annual minimum) or above, per `docs/PLAN.md` §4. A priced proposal is a written, addressed response from a qualified buyer who has reviewed the SOW and the offer catalog. **Rationale:** the entire `docs/PLAN.md` §6 financial model assumes these prices hold. The first priced proposal that requires a >40% discount invalidates the financial model. Without this gate, paid pilots that close at steep discounts distort the model silently.
-- **Gate 1.5c — B-REAL-FIDO2 hardware evidence:** a documented sacrificial hardware run on real YubiKey + ROCK 5B/RockPro64 (or equivalent) executing OMN-63's 12 scenarios end-to-end. Captured in a `refs/vm-e2e-run-<id>.md` evidence file with full chain logs. **Rationale:** B-VM-CTAP2 closing 2026-07-25 retired the software-validation gate. The remaining production-confidence gap is hardware-validated FIDO2 — running a paid pilot without it would mean the pilot customer is the de-facto hardware-validation guinea pig.
+- **Gate 1.5c — B-REAL-FIDO2 hardware evidence:** a documented sacrificial hardware run on real U2F/HSM + ROCK 5B/RockPro64 (or equivalent) executing OMN-63's 12 scenarios end-to-end. Captured in a `refs/vm-e2e-run-<id>.md` evidence file with full chain logs. **Rationale:** B-VM-CTAP2 closing 2026-07-25 retired the software-validation gate. The remaining production-confidence gap is hardware-validated FIDO2 — running a paid pilot without it would mean the pilot customer is the de-facto hardware-validation guinea pig.
 
 - Allowed commercial activity: signing a paid pilot SOW, scoped strictly to the platforms and configurations actually evidenced. Not allowed: signing for production-readiness claims, signing for ARM64 hardware-root claims without separate Gate 1.5c evidence, signing without Gate 1.5a/b cleared.
 
@@ -65,8 +65,8 @@ Three sub-gates, each required:
 
 ### Gate 3: General availability claims
 
-- Criteria: physical-YubiKey production-confidence evidence exists (B-REAL-FIDO2); the boot chain is sealed, not just fs-verity on a mutable anchor (B-BOOTC-SEAL fully resolved, not just reclassified); any hardware platform claimed as production (e.g. ARM64) has real-board evidence (B-ARM64-PATHA); at least one completed paid pilot with a readout (OMN-67) informs the claim; **Gate 2.5 (reference-customer) cleared**.
-- Evidence required to move from Gate 2 to Gate 3: a real-hardware YubiKey validation run per refs/days-31-60-narrow-product-2026-07-25.md's demo spec; a sealed/signed UKI boot chain per refs/bootc-composefs-sealed-flow-2026-07-22.md; for any hardware platform beyond the pilot platform, board-level evidence per refs/arm64-rk-board-status-2026-07-17.md; a completed OMN-67 pilot readout with a day-90 decision recorded; **a signed case-study agreement from the pilot customer**.
+- Criteria: physical-U2F/HSM production-confidence evidence exists (B-REAL-FIDO2); the boot chain is sealed, not just fs-verity on a mutable anchor (B-BOOTC-SEAL fully resolved, not just reclassified); any hardware platform claimed as production (e.g. ARM64) has real-board evidence (B-ARM64-PATHA); at least one completed paid pilot with a readout (OMN-67) informs the claim; **Gate 2.5 (reference-customer) cleared**.
+- Evidence required to move from Gate 2 to Gate 3: a real-hardware U2F/HSM validation run per refs/days-31-60-narrow-product-2026-07-25.md's demo spec; a sealed/signed UKI boot chain per refs/bootc-composefs-sealed-flow-2026-07-22.md; for any hardware platform beyond the pilot platform, board-level evidence per refs/arm64-rk-board-status-2026-07-17.md; a completed OMN-67 pilot readout with a day-90 decision recorded; **a signed case-study agreement from the pilot customer**.
 - Allowed commercial activity: general sales conversations and production claims, scoped strictly to the platforms and configurations actually evidenced.
 - **Status:** not met, and not reachable until Gate 2 (and Gate 2.5) close.
 
@@ -78,7 +78,7 @@ Three sub-gates, each required:
 | Gate 1 -> Gate 1.5 | All of Gate 1 + security audit report + ≥2 of 3 priced proposals at list + B-REAL-FIDO2 hardware evidence | Security audit: not started. Priced proposals: 0 of 3. Hardware evidence: not started. |
 | Gate 1.5 -> Gate 2 | B-HARDENING-RUNTIME runtime-proven, B-BOOTC-SEAL reclassified or resolved, 2 design partners, priced SOW | B-HARDENING-RUNTIME: open. B-BOOTC-SEAL: in flight (OMN-51). Design partners: not sourced. Priced SOW: not drafted. |
 | Gate 2 -> Gate 2.5 | Completed paid pilot readout + signed case-study agreement | Not started (depends on Gate 2). |
-| Gate 2.5 -> Gate 3 | Physical-YubiKey evidence, sealed UKI, ARM64 board evidence (if claimed), completed pilot readout, signed case-study | None of these exist yet; this doc only specifies what is needed. |
+| Gate 2.5 -> Gate 3 | Physical-U2F/HSM evidence, sealed UKI, ARM64 board evidence (if claimed), completed pilot readout, signed case-study | None of these exist yet; this doc only specifies what is needed. |
 
 ## Proof-first sales motion: public proof to annual assurance
 
@@ -141,7 +141,7 @@ The Gate 1 definition and its blocker dependencies were re-checked 52 days after
   drift check found two rows whose retirement conditions were met and unreflected (see
   `refs/blockers-drift-check-2026-09-18.md`). A fresh BLOCKERS.md review is the next step the
   gate discipline itself prescribes.
-- Gate evidence state: the physical-YubiKey leg has one closed proof point (OMN-42/89, rock1
+- Gate evidence state: the physical-U2F/HSM leg has one closed proof point (OMN-42/89, rock1
   hardware leg) since this doc's review; the ARM64 Path A board gate remains open. The
   channel-coverage skeleton in the outreach section remains unfilled (its unfilled markers
   were made explicit in round 7, cycle 98 — no plans were invented then or now).

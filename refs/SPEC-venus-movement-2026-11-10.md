@@ -6,7 +6,7 @@ Deploy the operational control plane, normative SER Charter, 30-Day Executive La
 ### Core Invariants
 1. **Federation over Centralization:** No central land compound, no single point of leadership failure. The unit of the movement is the Dunbar-bounded Sovereign Cell (5 to 50 builders, hard mitosis cap 150).
 2. **SER Enforcement (`docs/SER.md`):**
-   - *Sovereignty:* Owner-held hardware keys (YubiKey FIDO2 / PIV slot 9c) gate administrative signing, node unlock, and quorum (2-of-3 routine, 3-of-5 constitutional).
+   - *Sovereignty:* Owner-held hardware keys (U2F/HSM FIDO2 / PIV slot 9c) gate administrative signing, node unlock, and quorum (2-of-3 routine, 3-of-5 constitutional).
    - *Ephemerality:* Operational telemetry expires on a deterministic TTL (14d logs, 90d transactional cache); zero third-party trackers, cookies, or central PII databases.
    - *Reproducibility:* Every hardware node, OS image (`bootc` + `dm-verity`), and ledger state builds deterministically from digest-pinned manifests with SLSA L3 / in-toto evidence bundles.
 3. **30-Day Executive Compression (Nov 10 to Dec 10, 2026):** 4 weekly waves gated by 4 binary Stage-Gates (Gate 0: Nov 12; Gate 1: Nov 16; Gate 2: Nov 26; Gate 3: Dec 10).

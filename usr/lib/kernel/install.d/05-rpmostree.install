@@ -13,7 +13,7 @@
 #        temporary file (`/usr/lib/modules/<kver>/.initramfs.img.tmp.$$`) and
 #        atomically `mv -f`s it into place (zero cross-device rename).
 #     2. Invokes `/usr/lib/yubiOS/uki/uki-sync-and-sign.sh` so the updated kernel +
-#        initramfs is ukified, re-signed with the attached YubiKey PIV slot 9a db key,
+#        initramfs is ukified, re-signed with the attached U2F/HSM PIV slot 9a db key,
 #        committed to `/var/lib/yubiOS/oci`, and deployed to the ESP.
 #   - Exits 0 so downstream kernel-install plugins (`95-yubios-uki-resign.install`)
 #     can also run cleanly.

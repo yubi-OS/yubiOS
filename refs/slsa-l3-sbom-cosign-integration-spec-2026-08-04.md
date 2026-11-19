@@ -847,7 +847,7 @@ This is the canonical L3 builder. Per `slsa-provenance` skill line 28: "They run
 **Pros:**
 - Strongest isolation model. The tenant cannot tamper with the build even if they have root on the host.
 - Future-proof: as more confidential compute becomes available on commodity cloud (Azure Confidential VMs, GCP Confidential VMs, AWS Graviton with CCA), this option scales.
-- Aligns with the yubiOS posture (UKI signed by YubiKey PIV 9c, dm-verity on /usr, fTPM for measured boot — confidential compute is the same posture for builds).
+- Aligns with the yubiOS posture (UKI signed by U2F/HSM PIV 9c, dm-verity on /usr, fTPM for measured boot — confidential compute is the same posture for builds).
 
 **Cons:**
 - Confidential Containers tooling is newer; some upstream pieces (e.g., `confidentialcontainers.org` v0.x) are still stabilizing.

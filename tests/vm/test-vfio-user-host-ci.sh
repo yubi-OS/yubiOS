@@ -9,7 +9,7 @@
 # DMA_MAP), and the protocol spec states client and server must not trust each
 # other. That is a boundary we can actually enforce and test, unlike vfio-pci
 # passthrough which needs a real IOMMU and hands a DMA-capable peer the same
-# memory a YubiKey-unlocked LUKS2 volume key lives in.
+# memory a U2F/HSM-unlocked LUKS2 volume key lives in.
 #
 # Upstream state: the vfio-user CLIENT landed in QEMU 10.1 as `vfio-user-pci`,
 # configured with

@@ -19,7 +19,7 @@ An AI resilient system is one where a poisoned contribution, wherever it came fr
 
 ## Security should be the default — for everyone.
 
-Hardware roots of trust have historically been a luxury: TPMs, HSMs, and vendor secure enclaves sit behind enterprise contracts, OEM partnerships, or price points most individuals never clear. yubiOS's bet is that a $25–$70 YubiKey is a better root of trust than a TPM most people will never own, control, or even know is there.
+Hardware roots of trust have historically been a luxury: TPMs, HSMs, and vendor secure enclaves sit behind enterprise contracts, OEM partnerships, or price points most individuals never clear. yubiOS's bet is that a $25–$70 U2F/HSM is a better root of trust than a TPM most people will never own, control, or even know is there.
 
 That's the default we're building toward: not "security for people who can afford a security team," but security that ships in the box, requires no vendor relationship, and works the same for a solo developer as it would for a fleet. If an architecture decision would make yubiOS's trust model depend on scale, budget, or enterprise tooling to reach an individual owner, that's a signal to reconsider it — the same standard MISSION.md already applies to convenience features that would weaken a trust boundary.
 
@@ -46,7 +46,7 @@ ARM64 is the primary platform because it is where yubiOS can realistically own t
 ## Non-Negotiables
 
 - Owner-held keys come first. A vendor or OEM key must not be the mandatory trust anchor for owner workflows.
-- Physical presence matters. Disk unlock, login, and administrative identity should require the YubiKey, PIN, touch, or a documented recovery path.
+- Physical presence matters. Disk unlock, login, and administrative identity should require the U2F/HSM, PIN, touch, or a documented recovery path.
 - Immutable means auditable. `/usr` is verified; mutable state is explicit.
 - Test-only tools must never quietly ship in production artifacts.
 - Every security exception must be narrow, documented, and removable.
@@ -54,7 +54,7 @@ ARM64 is the primary platform because it is where yubiOS can realistically own t
 
 ## What Success Looks Like
 
-- A user can install yubiOS, enroll their YubiKey and recovery material, and update the OS without re-enrolling disk unlock secrets.
+- A user can install yubiOS, enroll their U2F/HSM and recovery material, and update the OS without re-enrolling disk unlock secrets.
 - A maintainer can point to the exact base image, tool pins, workflow evidence, and upstream references behind a release.
 - ARM64 Path A hardware can prove the owner-controlled secure-world chain on real boards, not just in diagrams.
 - x86-64 remains useful and supported without pretending it delivers the same owner-owned hardware root.

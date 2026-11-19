@@ -13,7 +13,7 @@ The minimum pass is: **the operator can independently verify the image source, t
 
 ## 1. Background
 
-yubiOS makes strong design claims: FIDO2-first immutable OS, owner-held YubiKey, bootc-delivered container images, SLSA provenance, SBOM attestations, and first-boot enrollment via `yubiOS-enroll.service`. The trust-proof checklist tests each claim directly against the running system, not against documentation. The playbook is for a **human operator on disposable hardware**, not for CI — CI already has the equivalent gates (`ci_test-bootc-lifecycle.yml`, `ci_test-fedora-bootc-arm64-pull.yml`, `ci_test_bootc-filesystem.yml` per the repo tree). This note therefore is the **operator-side counterpart** to CI: a worksheet an auditor, a field tester, or a deployer can carry onto a laptop and tick boxes against.
+yubiOS makes strong design claims: FIDO2-first immutable OS, owner-held U2F/HSM, bootc-delivered container images, SLSA provenance, SBOM attestations, and first-boot enrollment via `yubiOS-enroll.service`. The trust-proof checklist tests each claim directly against the running system, not against documentation. The playbook is for a **human operator on disposable hardware**, not for CI — CI already has the equivalent gates (`ci_test-bootc-lifecycle.yml`, `ci_test-fedora-bootc-arm64-pull.yml`, `ci_test_bootc-filesystem.yml` per the repo tree). This note therefore is the **operator-side counterpart** to CI: a worksheet an auditor, a field tester, or a deployer can carry onto a laptop and tick boxes against.
 
 The artifacts are **deliberately human-readable**, not test scripts. They are evidence-packaging primitives (per the `audit-evidence-packaging` skill) at the worksheet level — a signed, dated, signed-off artifact that a third party (HITRUST auditor, CISA reviewer, internal security team) can later inspect.
 
@@ -25,7 +25,7 @@ The artifacts are **deliberately human-readable**, not test scripts. They are ev
 | 2 | Artifact pinning | The running image's digest matches the one in `PINNED.md` exactly. |
 | 3 | Boot integrity | Secure Boot verifies a signed UKI; modified boot artifacts fail to boot. |
 | 4 | Storage integrity | Root filesystem is immutable or measured; rootfs state matches the expected booted image. |
-| 5 | Key ownership | Enrolled keys are physically held on the user's YubiKey, not vendor-held. |
+| 5 | Key ownership | Enrolled keys are physically held on the user's U2F/HSM, not vendor-held. |
 | 6 | Enrollment audit | First-boot enrollment log names every enrolled function (PIV, FIDO2 unlock, SSH, PAM). |
 | 7 | Recovery path | Lost-key recovery is documented, tested on disposable hardware, and works without vendor intervention. |
 | 8 | Rollback safety | Upgrade + rollback preserve or explicitly update trust state; no silent drift. |
@@ -57,8 +57,8 @@ You pass only if you can independently verify:
 ### 1) Prep
 
 **Hardware.** Use one of: a disposable VM, a spare disk, or a spare machine.
-**You need.** A YubiKey you physically control; the yubiOS image reference; access to host firmware / boot menu; a way to inspect logs after boot.
-**Record before starting.** A worksheet with: date, machine model, architecture (`x86-64` or `arm64`), expected image digest, expected source ref / commit, expected attestation reference, YubiKey serial, recovery method.
+**You need.** A U2F/HSM you physically control; the yubiOS image reference; access to host firmware / boot menu; a way to inspect logs after boot.
+**Record before starting.** A worksheet with: date, machine model, architecture (`x86-64` or `arm64`), expected image digest, expected source ref / commit, expected attestation reference, U2F/HSM serial, recovery method.
 
 ### 2) Build provenance
 - **Goal.** Verify the image came from the right source and was built the right way.
@@ -86,7 +86,7 @@ You pass only if you can independently verify:
 
 ### 6) Key ownership
 - **Goal.** Prove the keys are yours, physically.
-- **Checks.** Identify every enrolled key. Confirm each key is on your YubiKey, not vendor-held. Confirm no vendor backdoor or shared key material exists. Confirm you can remove the device and lose access as expected.
+- **Checks.** Identify every enrolled key. Confirm each key is on your U2F/HSM, not vendor-held. Confirm no vendor backdoor or shared key material exists. Confirm you can remove the device and lose access as expected.
 - **Pass if.** The enrolled keys are physically in your control.
 - **Fail if.** Any critical secret is vendor-held; ownership is ambiguous.
 
@@ -99,7 +99,7 @@ You pass only if you can independently verify:
 
 ### 8) Recovery path
 - **Goal.** Prove you can recover without vendor intervention.
-- **Checks.** Simulate loss of the primary YubiKey. Attempt recovery using the documented path. Verify recovery works on a disposable install first. Confirm the recovery method is documented and repeatable.
+- **Checks.** Simulate loss of the primary U2F/HSM. Attempt recovery using the documented path. Verify recovery works on a disposable install first. Confirm the recovery method is documented and repeatable.
 - **Pass if.** Recovery works; recovery is documented; recovery does not require a vendor handoff.
 - **Fail if.** Recovery is ad hoc; recovery depends on undocumented steps; recovery cannot be tested safely.
 
@@ -173,7 +173,7 @@ Name: _________________  Date: _____________  Host: ____________  Arch: ☐ x86-
    ☐ No silent rewrite of trusted root
 
 5) Key ownership
-   ☐ YubiKey serial recorded: ____________________
+   ☐ U2F/HSM serial recorded: ____________________
    ☐ Critical keys are physically held by user
    ☐ No vendor-held secret required
    ☐ Device removal behaves as expected
@@ -285,7 +285,7 @@ Verified at the time of writing on `main` (SHA `b1383b96d0ca1d2babd1a756db86ad29
 
 1. **Printable PDF version** of the one-page checklist. Generate with `pandoc -s refs/yubios-trust-proof-playbook-checklist-2026-08-07.md -o yubios-trust-proof-checklist.pdf --pdf-engine=wkhtmltopdf` for an A4 printout an operator can sign and file. Two copies: one filed with the operator's record, one filed with `audit-evidence-packaging`'s evidence bundle.
 2. **OMN ticket linking the checklist to a release gate.** The ticket is the process step that requires the signed worksheet before a yubiOS build is declared field-ready.
-3. **Automate the 24-hour test plan** as `tests/vm/test-trust-proof.sh` — a single shell script that runs the four phases (baseline → intentional failures → recovery → upgrade+rollback) on a `bcvk`-provisioned VM. The CI equivalent of the operator one-pager. Per `bcvk-virtualization` skill, `bcvk` already provides ephemeral VM + USB YubiKey passthrough; this script would extend that to the trust-proof 24-hour cycle.
+3. **Automate the 24-hour test plan** as `tests/vm/test-trust-proof.sh` — a single shell script that runs the four phases (baseline → intentional failures → recovery → upgrade+rollback) on a `bcvk`-provisioned VM. The CI equivalent of the operator one-pager. Per `bcvk-virtualization` skill, `bcvk` already provides ephemeral VM + USB U2F/HSM passthrough; this script would extend that to the trust-proof 24-hour cycle.
 4. **Map each checkbox to an existing test** — many of the boxes already have CI coverage; the worksheet is the manual cross-check, not a redundant test. Build a cross-ref table: checkbox → test file → expected CI signal.
 
 ## Sources

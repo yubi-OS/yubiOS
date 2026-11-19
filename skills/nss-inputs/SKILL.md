@@ -215,7 +215,7 @@ Failure: exit code 2 on validation error; the offending name is logged but the v
 # Inputs (workflow_call inputs):
 #   allow_real_u2f: boolean, default false. When true, the workflow sets ALLOW_REAL_U2F=1
 #                   in the test step env (sudo's env forwarding is explicit-only, so this
-#                   matters). Required: a physical YubiKey on the runner for destructive tests.
+#                   matters). Required: a physical U2F/HSM on the runner for destructive tests.
 #   digest:         string, default empty. A sha256 quay.io digest to pin the base image.
 #                   When empty, the workflow resolves the latest fedora-bootc:45 digest.
 #   group:          string, default "build". One of {build, fetches, smoke, dispatch-reachability}.

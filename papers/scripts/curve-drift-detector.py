@@ -107,7 +107,7 @@ PRIM_KEYWORDS: Dict[str, List[str]] = {
     ],
     "trust_chain": [
         "trust", "chain", "root of trust", "chain of trust",
-        "verified boot", "secure boot", "rot", "tpm", "yubikey", "key",
+        "verified boot", "secure boot", "rot", "tpm", "U2F/HSM", "key",
         "signature", "signed", "gpg", "branch protection",
     ],
     "least_privilege": [

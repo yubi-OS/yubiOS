@@ -3,7 +3,7 @@
 #
 # Clean direct-to-SD provisioning pipeline for yubiOS on the rock1 self-hosted
 # ARM64 runner (or ubuntu HIGH-MEM runner) with SD card slot (/dev/mmcblk1)
-# and physical YubiKey PIV slot 9a signing.
+# and physical U2F/HSM PIV slot 9a signing.
 #
 # All OS/initramfs/systemd/enrollment configurations live inside the built OCI
 # image (Containerfile / Containerfile.dev / usr/). This script never mutates
@@ -11,7 +11,7 @@
 #   1. Pulls the published $OS_IMAGE and board firmware bundle
 #   2. Wipes & partitions $SD_DEVICE (GPT @ sector 32768: p1 ESP, p2 yubiOS-root)
 #   3. Runs `bootc install to-filesystem --composefs-backend` from $OS_IMAGE
-#   4. Signs the installed EFI loaders & UKI on the ESP with YubiKey PIV slot 9a
+#   4. Signs the installed EFI loaders & UKI on the ESP with U2F/HSM PIV slot 9a
 #   5. Writes board `u-boot-rockchip.bin` at sector 64 of $SD_DEVICE
 
 set -euo pipefail
@@ -20,7 +20,7 @@ BOARD="${FLASH_BOARD:-rock5b-rk3588}"
 SD_DEVICE="${FLASH_SD_DEVICE:-/dev/mmcblk1}"
 OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
 SIGNKEY="${FLASH_SIGNKEY:-test}"
-SIGN_WITH_YUBIKEY="${FLASH_SIGN_WITH_YUBIKEY:-true}"
+SIGN_WITH_U2F_HSM="${FLASH_SIGN_WITH_U2F_HSM:-true}"
 PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
 # RUN_POST_VM="${FLASH_RUN_POST_VM:-false}"
 
@@ -133,7 +133,7 @@ part_dev() {
 }
 
 # ---------------------------------------------------------------------------
-# Stage 2: YubiKey PIV Slot 9a Key & PK/KEK/db Auth Bundle Preparation
+# Stage 2: U2F/HSM PIV Slot 9a Key & PK/KEK/db Auth Bundle Preparation
 # ---------------------------------------------------------------------------
 log "Stage 2: PIV slot 9a & Secure Boot PK/KEK/db preparation (SIGNKEY=$SIGNKEY, touch=$PIV_TOUCH_POLICY)"
 
@@ -148,9 +148,9 @@ for c in /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib64/libykcs11.so /usr/li
   if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
 done
 
-if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
+if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
   if lsusb | grep -qi '1050:' && [ -n "$PKCS11_LIB" ]; then
-    SIGN_MODE="yubikey"
+    SIGN_MODE="u2f_hsm"
     export PKCS11_MODULE_PATH="$PKCS11_LIB"
     export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
     sudo systemctl start pcscd.socket pcscd.service 2>/dev/null || true
@@ -176,14 +176,14 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
       fi
     fi
     if [ "$need_mint" -eq 1 ]; then
-      log "Generating RSA-2048 key in PIV slot 9a on physical YubiKey (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
+      log "Generating RSA-2048 key in PIV slot 9a on physical U2F/HSM (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
       sudo ykman piv keys generate \
         -a RSA2048 \
         -m "$PIV_MGMT_KEY" \
         --pin-policy ONCE \
         --touch-policy "${PIV_TOUCH_POLICY^^}" \
         9a - | tee "$KEY_DIR/slot9a-pub.pem" >/dev/null
-      log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
+      log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical U2F/HSM"
       # shellcheck disable=SC2024
       sudo ykman piv certificates generate \
         -m "$PIV_MGMT_KEY" \
@@ -224,7 +224,7 @@ EOF
     for var in PK KEK db; do
       sign-efi-sig-list -c "$KEY_DIR/PK.crt" -t "$T" -o "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.forsig"
       if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-        echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey now <<<"
+        echo ">>> [U2F/HSM TOUCH] Signing ${var}.auth via PIV slot 9a — touch your U2F/HSM now <<<"
       fi
       if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
         -provider "$PKCS11_PROV" -provider default \
@@ -247,7 +247,7 @@ EOF
     ls -la "$KEY_DIR"
   elif [ "$SIGNKEY" = "test" ]; then
     SIGN_MODE="soft_test"
-    log "No physical YubiKey on USB; SIGNKEY=test -> minting ephemeral RSA-2048 Slot 9a test key ($CN_LABEL)"
+    log "No physical U2F/HSM on USB; SIGNKEY=test -> minting ephemeral RSA-2048 Slot 9a test key ($CN_LABEL)"
     openssl req -x509 -newkey rsa:2048 -nodes \
       -keyout "$KEY_DIR/db.key" \
       -out "$KEY_DIR/db.crt" \
@@ -267,7 +267,7 @@ EOF
     done
     ls -la "$KEY_DIR"
   else
-    die "SIGNKEY=production requires a physical YubiKey (1050:*) attached on USB"
+    die "SIGNKEY=production requires a physical U2F/HSM (1050:*) attached on USB"
   fi
 fi
 
@@ -279,9 +279,9 @@ sign_efi_binary() {
   sudo cp -f "$efi_path" "$tmp_in"
   sudo chown "$(id -u):$(id -g)" "$tmp_in"
 
-  if [ "$SIGN_MODE" = "yubikey" ]; then
+  if [ "$SIGN_MODE" = "u2f_hsm" ]; then
     if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-      echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_path") <<<"
+      echo ">>> [U2F/HSM TOUCH] Touch U2F/HSM to sign $(basename "$efi_path") <<<"
     fi
     sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
       --engine pkcs11 \
@@ -464,7 +464,7 @@ EOF
     sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip-spi.bin"
   fi
 
-  if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
+  if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
     log "Signing installed EFI loaders & UKIs on $p1 (mode=$SIGN_MODE, SIGNKEY=$SIGNKEY)"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/secureboot/"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/keys/"

@@ -35,7 +35,7 @@ The strategy was:
 
 | Skill | Primitives | Stream source | Trigger rationale |
 |---|---|---|---|
-| `yubikey-operations` | P8/P2/P1/P7 | S1 #1 | Project namesake gap (zero skills dedicated to YubiKey) |
+| `yubikey-operations` | P8/P2/P1/P7 | S1 #1 | Project namesake gap (zero skills dedicated to U2F/HSM) |
 | `dm-verity-and-integrity` | P6/P1/P5/P10 | S1 #2 | Load-bearing `/usr` invariant, was inline in 2 skills |
 | `nspawn-containers` | P9/P3/P6/P4 | S1 #3 | Segmentation gap, ADR-031 vfio-user connection |
 | `sigstore-rekor-v2` | P1/P7 | S3 top | Rekor v2 GA, complements `slsa-provenance` |

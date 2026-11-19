@@ -18,7 +18,7 @@
     "continuous_adaptive": "Continuous / adaptive \u2014 runtime detection + auto-remediation (Falco, keylime)",
     "immutability": "Immutability \u2014 read-only / signed artifacts (dm-verity, composefs, sealed-uki-vm)",
     "audit_evidence": "Audit / evidence \u2014 tamper-evident trail (audit-evidence-packaging, SLSA)",
-    "cryptographic_identity": "Cryptographic identity \u2014 device- or workload-bound keys (TPM2, YubiKey FIDO2)",
+    "cryptographic_identity": "Cryptographic identity \u2014 device- or workload-bound keys (TPM2, U2F/HSM FIDO2)",
     "segmentation": "Segmentation \u2014 process / VM / network isolation (nspawn, vfio-user, ADR-031)"
   },
   "corpus_origin": "real",

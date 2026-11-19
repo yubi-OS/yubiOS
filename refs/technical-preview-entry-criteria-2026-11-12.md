@@ -42,16 +42,16 @@ Each gate must stay green on the tagging commit. A regression in any Tier 1 lane
 
 ## Gate Tier 2 — Attended Hardware Gates Required Before Tagging `v0.8.92`
 
-Each Tier 2 gate needs one attended session and a retained evidence artifact (UART/console log, command transcript, public-material-only outputs) linked from a dated `refs/` note. Only public key material leaves the YubiKey.
+Each Tier 2 gate needs one attended session and a retained evidence artifact (UART/console log, command transcript, public-material-only outputs) linked from a dated `refs/` note. Only public key material leaves the U2F/HSM.
 
 ### 2.1 `B-OWNER-KEYS` (OMN-171): owner Secure Boot ceremony on PIV slot `9a`
 
-- **Pre-work:** add the StandaloneMM enrollment step to `usr/lib/yubiOS/enroll-sb.sh` (PR #318 rewrote it for slot `9a` signing on 2026-10-17; it has never run on a YubiKey).
-- **Ceremony:** attach the owner YubiKey to `rock1`; owner enters PIN and touches for each signature. Mint or confirm the RSA-2048 slot `9a` key, build PK/KEK/db in setup mode, enroll through StandaloneMM, verify each signature against `db.crt`.
+- **Pre-work:** add the StandaloneMM enrollment step to `usr/lib/yubiOS/enroll-sb.sh` (PR #318 rewrote it for slot `9a` signing on 2026-10-17; it has never run on a U2F/HSM).
+- **Ceremony:** attach the owner U2F/HSM to `rock1`; owner enters PIN and touches for each signature. Mint or confirm the RSA-2048 slot `9a` key, build PK/KEK/db in setup mode, enroll through StandaloneMM, verify each signature against `db.crt`.
 - **Pass criteria:** `enroll-sb.sh enroll` exits 0; PK/KEK/db certificates and the signed UKI verify against `db.crt`; the transcript shows slot `9a`, PIN policy ALWAYS, touch policy ALWAYS.
 - **Doc follow-up:** ADR-002 already names slot `9a` (amended 2026-11-12); move `B-OWNER-KEYS` to "Not Current Blockers" once the evidence lands.
 
-### 2.2 `B-REAL-FIDO2`: attended physical-YubiKey session on `rock1`
+### 2.2 `B-REAL-FIDO2`: attended physical-U2F/HSM session on `rock1`
 
 - **Builds on:** the 2026-08-01 physical LUKS2 FIDO2 enroll + unlock pass (slot 2, issue #20 closed).
 - **Must capture, with retained logs, in one session:** `systemd-homed` FIDO2 home create + unlock; PAM user-presence (`pam-u2f`); resident `ed25519-sk` SSH key generate + login; recovery path (recovery key / second token); failure handling (wrong token, no touch, removed token).

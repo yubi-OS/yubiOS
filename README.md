@@ -8,7 +8,7 @@
 
 [![License: LGPL-2.1](https://img.shields.io/badge/license-LGPL--2.1-magenta?style=flat-square)](LICENSE)
 [![Status: Groundwork](https://img.shields.io/badge/status-groundwork-blueviolet?style=flat-square)](docs/TODO.md)
-[![YubiKey 5](https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square)](https://www.yubico.com)
+[![U2F/HSM 5](https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square)](https://www.yubico.com)
 [![FIDO2](https://img.shields.io/badge/FIDO2-hidraw-purple?style=flat-square)](https://fidoalliance.org)
 
 *No OEM. No vendors. No trust anchors you don't control.*
@@ -20,14 +20,14 @@
 
 ## What it is
 
-yubiOS is an immutable, bootc-delivered Linux OS that treats the owner's YubiKey as the user-facing identity, unlock, and authorization boundary. It combines:
+yubiOS is an immutable, bootc-delivered Linux OS that treats the owner's U2F/HSM as the user-facing identity, unlock, and authorization boundary. It combines:
 
 | Layer | Inspiration | What it gives us |
 |---|---|---|
 | particleos ethos | [systemd/particleos](https://github.com/systemd/particleos) | Immutable `/usr`, UKIs, dm-verity, composefs, systemd-boot |
 | bootc design | [bootc-dev/bootc](https://github.com/bootc-dev/bootc) | OCI image as OS delivery unit, day-2 upgrades via registry pull |
 | systemd image model | [Fitting Everything Together](https://0pointer.net/blog/fitting-everything-together.html) | DPS partitions, systemd-repart first boot, A/B sysupdate, systemd-homed |
-| YubiKey owner-control plane | FIDO2 / PIV / OATH | Owner-held authorization for signing, unlock, SSH, PAM, and app 2FA |
+| U2F/HSM owner-control plane | FIDO2 / PIV / OATH | Owner-held authorization for signing, unlock, SSH, PAM, and app 2FA |
 
 ARM64 is the primary target platform because it is where yubiOS can work toward owning the firmware stack below the UKI through TF-A, OP-TEE, fTPM, and U-Boot. x86-64 remains fully supported above the UKI, but its firmware and optional TPM are platform/OEM trust anchors.
 
@@ -39,7 +39,7 @@ ParticleOS, and Ubuntu Core — founded [Amutable](https://amutable.com) with th
 > *“Deliver determinism and verifiable integrity to Linux workloads everywhere.”*
 
 yubiOS is independently building toward the same architecture, with one additional constraint:
-the owner-facing authority should live with the machine owner. A YubiKey provides the signing,
+the owner-facing authority should live with the machine owner. A U2F/HSM provides the signing,
 unlock, SSH, PAM, and application-2FA boundary, while TPM/fTPM measurement and firmware
 state remain separate platform-integrity signals where they are useful. The "Fitting Everything
 Together" essay at [0pointer.net](https://0pointer.net/blog/fitting-everything-together.html) is the
@@ -51,7 +51,7 @@ A/B sysupdate, systemd-homed per-user encryption, and UKI + dm-verity trust chai
 ## Trust chain
 
 ```text
-YubiKey 5
+U2F/HSM 5
 - PIV slot 9c via CCID: Secure Boot / UKI signing with systemd-sbsign + PKCS#11
 - FIDO2 hmac-secret via hidraw: LUKS2 root and systemd-homed unlock
 - FIDO2 ed25519-sk via hidraw: SSH resident keys
@@ -271,7 +271,7 @@ yubiOS/
 
 | Component | Minimum |
 |---|---|
-| YubiKey firmware | 5.2.3 for ed25519-sk |
+| U2F/HSM firmware | 5.2.3 for ed25519-sk |
 | systemd | 261 for current measured-boot gates and v261 research targets |
 | OpenSSH | 8.2 for FIDO2 key types |
 | pam-u2f | 1.3.1 for CVE-2025-23013 fix |
@@ -281,14 +281,14 @@ yubiOS/
 graph TD
     BASE["quay.io/fedora/fedora-bootc:45\n@sha256 (pinned base — ADR-015)\ndigest in PINNED.md"]
     CF["Containerfile + yubiOS-bake.hcl\nrootless docker buildx bake\nyubiOS.rego strict policy"]
-    MKOSI["mkosi --profile yubios\nUKI + dm-verity, signed via\nYubiKey PIV slot 9c (PKCS#11)"]
+    MKOSI["mkosi --profile yubios\nUKI + dm-verity, signed via\nU2F/HSM PIV slot 9c (PKCS#11)"]
     OCI["multi-arch OCI image\nlinux/amd64 + linux/arm64"]
     CI["yubiOS-ci.yml . merge-manifest\nSLSA provenance + SBOM attested"]
     REG["docker.io/0mniteck/yubios:latest\n+ immutable :&lt;commit-sha&gt; per build"]
     INSTALL["bootc install to-filesystem\n(externally prepared /mnt)"]
     UPGRADE["bootc switch + upgrade\nday-2 atomic update"]
-    BCVK["bcvk\nephemeral VM / native-to-disk\n(test loop, USB YubiKey passthrough)"]
-    ENROLL["first boot\nyubiOS-enroll.service\nYubiKey tap"]
+    BCVK["bcvk\nephemeral VM / native-to-disk\n(test loop, USB U2F/HSM passthrough)"]
+    ENROLL["first boot\nyubiOS-enroll.service\nU2F/HSM tap"]
     PIV["PIV slot 9c (CCID)\nSecure Boot signing\n(systemd-sbsign / PKCS#11)"]
     FIDO["FIDO2 (hidraw)\nLUKS2 disk unlock\nSSH ed25519-sk, pam-u2f"]
     HOMED["systemd-homed\nLUKS2 /home\nSLOT 0 FIDO2 unlock\nSLOT 1 recovery key"]

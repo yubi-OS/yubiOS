@@ -139,7 +139,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
 
-      - name: Exercise rootless Docker bootstrap and YubiKey/swu2f passthrough into final rootless layer (${{ matrix.arch }})
+      - name: Exercise rootless Docker bootstrap and U2F/HSM/swu2f passthrough into final rootless layer (${{ matrix.arch }})
         run: |
           set -eu
           apt-get update -qq

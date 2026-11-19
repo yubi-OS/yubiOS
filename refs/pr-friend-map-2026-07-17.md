@@ -32,7 +32,7 @@ The right first move is relationship-led technical participation:
 - Link every ask to the current evidence, blockers, and limitations.
 - Route general curiosity to yubiOS Discussions instead of scattering support across unrelated venues.
 
-The campaign can safely pull owned-channel and upstream-participation knobs now. Earned media, Show HN, and broader launch language should wait for the physical-YubiKey and real-hardware evidence gates in [PR.md](../docs/PR.md).
+The campaign can safely pull owned-channel and upstream-participation knobs now. Earned media, Show HN, and broader launch language should wait for the physical-U2F/HSM and real-hardware evidence gates in [PR.md](../docs/PR.md).
 
 ## Current readiness snapshot
 
@@ -40,7 +40,7 @@ The campaign can safely pull owned-channel and upstream-participation knobs now.
 |---|---|---|
 | Campaign story | Ready for build-in-public framing | Use the identity-root/platform-root distinction from [PR.md](../docs/PR.md). |
 | Production claim | Not ready | Keep "groundwork", "experimental", and "technical preview" language. |
-| Physical YubiKey proof | Still a gate | Ask practitioners to review the flow before presenting it as proven production confidence. |
+| Physical U2F/HSM proof | Still a gate | Ask practitioners to review the flow before presenting it as proven production confidence. |
 | ARM64 Path A | Still a gate | Ask board and firmware people for help selecting and validating the first real-board proof. |
 | Public security intake | Needs hardening | Replace placeholder policy and add role-based/contact guidance before driving traffic. |
 | README claims | Needs qualification | Avoid unqualified "No TPM", "No OEM", "sole root", and "at every layer" phrasing. |
@@ -65,7 +65,7 @@ The campaign can safely pull owned-channel and upstream-participation knobs now.
 |---:|---|---|---|---|---|
 | 1 | bootc-dev / Fedora bootc | bootc is the delivery model and a natural reviewer for image-based OS assumptions. | Document yubiOS findings around production/dev tag separation, composefs/UKI behavior, or bootc install UX. | "Does this bootc usage or failure mode look upstream-relevant?" | Current evidence page and README claim cleanup. |
 | 1 | Fedora Atomic / sealed-image community | Fedora sealed images make verified bootable containers legible and already model test-image warnings. | Share testing notes that help bootc, composefs, or UKI users beyond yubiOS. | "What should yubiOS copy from your test-image warning and feedback routing model?" | Security policy and destructive-install warnings. |
-| 1 | YubiKey / FIDO2 practitioners | They can catch mistakes in PIV, FIDO2 `hmac-secret`, resident-key, and recovery assumptions. | Publish a precise enrollment/recovery flow and invite correction. | "Which part of this token ceremony is unsafe, too vague, or hard to recover from?" | Physical-token test plan with non-production label. |
+| 1 | U2F/HSM / FIDO2 practitioners | They can catch mistakes in PIV, FIDO2 `hmac-secret`, resident-key, and recovery assumptions. | Publish a precise enrollment/recovery flow and invite correction. | "Which part of this token ceremony is unsafe, too vague, or hard to recover from?" | Physical-token test plan with non-production label. |
 | 1 | systemd / homed / cryptenroll users | yubiOS leans heavily on systemd's modern image, homed, and credential model. | Send focused bug reports or docs PRs when yubiOS uncovers reproducible behavior. | "Is this the intended boundary between FIDO2 unlock and measured boot?" | Repro steps and current systemd version evidence. |
 | 1 | ARM64 firmware and board communities | Path A needs real-board help for TF-A, OP-TEE, RPMB, fTPM, U-Boot UEFI, and signed UKI proof. | Publish a board-specific Path A checklist for ROCK 5B / RK3588 and ROCKPro64 / RK3399. | "Can you review the provisioning sequence and recovery failure modes?" | Sacrificial-board rehearsal plan. |
 | 2 | OpenSSF / supply-chain security | yubiOS has a strong supply-chain story if it stays evidence-bounded. | Offer a case-study style note on pins, build policy, SBOM/provenance, and AI-era review limits. | "Which controls are useful to generalize, and which are yubiOS-specific?" | Claim ledger and current artifact verification. |
@@ -94,7 +94,7 @@ Title: Help review the yubiOS trust boundary before we amplify it
 
 Body:
 
-> yubiOS is pre-launch and we are deliberately staying in build-in-public mode. The question we want reviewed is not "is this ready?" but "is this trust boundary described correctly?" The current model treats the owner-held YubiKey as the human-presence and identity gate for signing, unlock, SSH, and PAM, while platform measurement remains a separate integrity signal. Current blockers and evidence are linked in PR.md, TODO.md, and BLOCKERS.md. If you work on bootc, systemd, FIDO2/PIV, firmware, or supply-chain verification, we would value specific corrections, missing failure modes, and test cases.
+> yubiOS is pre-launch and we are deliberately staying in build-in-public mode. The question we want reviewed is not "is this ready?" but "is this trust boundary described correctly?" The current model treats the owner-held U2F/HSM as the human-presence and identity gate for signing, unlock, SSH, and PAM, while platform measurement remains a separate integrity signal. Current blockers and evidence are linked in PR.md, TODO.md, and BLOCKERS.md. If you work on bootc, systemd, FIDO2/PIV, firmware, or supply-chain verification, we would value specific corrections, missing failure modes, and test cases.
 
 ### Upstream/community note
 

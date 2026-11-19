@@ -25,7 +25,7 @@ This skill is derived from the 103-document Clef-weighted corpus at `yubi-OS/kno
 ## When NOT to Use
 
 - **Compiling OP-TEE `optee_ftpm` or debugging SMC/RPMB early-boot handoff:** route to `ftpm-optee-tpm` and `arm-trusted-firmware-optee`.
-- **Enrolling YubiKey FIDO2/PIV tokens for LUKS2 unlock, SSH, PAM, or UKI Secure Boot signing:** route to `yubikey-operations` (in yubiOS, YubiKey holds user identity and owner Secure Boot keys on PIV slot 9a, while the TPM/fTPM measures platform state).
+- **Enrolling U2F/HSM FIDO2/PIV tokens for LUKS2 unlock, SSH, PAM, or UKI Secure Boot signing:** route to `yubikey-operations` (in yubiOS, U2F/HSM holds user identity and owner Secure Boot keys on PIV slot 9a, while the TPM/fTPM measures platform state).
 - **High-level Keylime registrar/verifier orchestration or Rekor v2 transparency-log bundling:** route to `runtime-attestation-keylime`, `audit-evidence-packaging`, and `sigstore-rekor-v2` (which invoke `tpm2-tools` under the hood).
 
 ## Architecture, Multiplexed Dispatch & TCTI Selection
@@ -233,7 +233,7 @@ tpm2_checkquote -u /tmp/ak.pub -m /tmp/quote.msg -s /tmp/quote.sig -f /tmp/quote
 Using `tpm2_policyauthorize` (instead of raw `tpm2_policypcr` alone) lets yubiOS `bootc upgrade` sign a new PCR digest when the UKI updates without re-sealing the secret:
 
 ```bash
-# 1. Generate an external policy-signing keypair (or use YubiKey PIV public key)
+# 1. Generate an external policy-signing keypair (or use U2F/HSM PIV public key)
 openssl genrsa -out /tmp/pol_ authority.pem 2048
 openssl rsa -in /tmp/pol_authority.pem -pubout -out /tmp/pol_authority.pub
 tpm2_loadexternal -C o -G rsa -u /tmp/pol_authority.pub -c /tmp/pol_signer.ctx -n /tmp/pol_signer.name
@@ -287,7 +287,7 @@ tpm2_nvread 0x01000010 -C o | xxd -p
 - **`arm-trusted-firmware-optee`** - manages TF-A BL2/BL31/BL32 measured-boot event log handoff into U-Boot and Linux where `tpm2_eventlog` and `tpm2_pcrread` inspect it.
 - **`runtime-attestation-keylime`** - consumes EK/AK certificates and `tpm2_quote` / `tpm2_checkquote` outputs for continuous node attestation.
 - **`audit-evidence-packaging`** - packages `tpm2_quote`, `tpm2_certify`, `tpm2_gettime`, and `tpm2_eventlog` outputs into Rekor v2 transparency-anchored audit bundles.
-- **`yubikey-operations`** - complements `tpm2-tools`: YubiKey PIV slot 9a and FIDO2 handle owner Secure Boot signing and user-present LUKS2/SSH/homed unlock, while `tpm2-tools` manages platform PCR measurement and fTPM attestation.
+- **`yubikey-operations`** - complements `tpm2-tools`: U2F/HSM PIV slot 9a and FIDO2 handle owner Secure Boot signing and user-present LUKS2/SSH/homed unlock, while `tpm2-tools` manages platform PCR measurement and fTPM attestation.
 - **`corpus-recall`** - retrieves any of the 103 per-subcommand deep-dive docs from `yubi-OS/knowledge` (`knowledge/tpm2-tools/<NN>-<slug>.md`).
 
 ## Examples
@@ -300,7 +300,7 @@ tpm2_nvread 0x01000010 -C o | xxd -p
 
 **In-repo touchpoints** - sections and workflows this skill owns or extends: `tests/vm/test-ftpm-ci.sh`, `tests/vm/test-luks-fido2-ci.sh`, `.github/workflows/ci_test-vm.yml`, `yubi-OS/knowledge/knowledge/tpm2-tools/001-tpm2.md`..`103-tpm2-zgen2phase.md`, and `refs/tpm2-tools-2026-11-15.md`.
 
-**Boundary case** - when a request asks to enroll a YubiKey FIDO2 token into LUKS2 or systemd-homed without TPM PCR/quote/NV operations, route to `yubikey-operations` and `systemd-homed` instead of `tpm2-tools`.
+**Boundary case** - when a request asks to enroll a U2F/HSM FIDO2 token into LUKS2 or systemd-homed without TPM PCR/quote/NV operations, route to `yubikey-operations` and `systemd-homed` instead of `tpm2-tools`.
 
 ## Guidelines
 

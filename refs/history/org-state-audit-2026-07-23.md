@@ -13,7 +13,7 @@ Reused the existing empty template — **`[TEMPLATE] yubiOS Roadmap` (org projec
 ## Live repo state (yubi-OS/yubiOS, main)
 - CI: all 20 registered workflows green as of the last ~20 runs (05:20–05:37 UTC 07-23).
 - Open PRs: **0**. Merged PRs total 64+ (14 in the last 7 days, 56 in the last 30).
-- Open issues: **5** — #87 (OpenWrt deception LAN, post-launch), #25 (swu2f CTAP2 enumeration — this is actually the live critical-path item despite its "post-launch" label, see below), #24 (CHIPSEC portable image, post-launch), #20 (LUKS2 FIDO2 e2e w/ YubiKey, Phase 0), #9 (physical YubiKey USB passthrough, Phase 0).
+- Open issues: **5** — #87 (OpenWrt deception LAN, post-launch), #25 (swu2f CTAP2 enumeration — this is actually the live critical-path item despite its "post-launch" label, see below), #24 (CHIPSEC portable image, post-launch), #20 (LUKS2 FIDO2 e2e w/ U2F/HSM, Phase 0), #9 (physical U2F/HSM USB passthrough, Phase 0).
 - `BLOCKERS.md` / `TODO.md` on `main` are both current (last reviewed 2026-07-22) and **far ahead** of the cached copies in `knowledge/BLOCKERS.cache.md` / `knowledge/TODO.md` (those are from June 26 / July 7). Treat the live repo files as the source of truth; the knowledge cache is stale.
 
 ## Active blockers (from live BLOCKERS.md, 8 total)
@@ -25,7 +25,7 @@ Reused the existing empty template — **`[TEMPLATE] yubiOS Roadmap` (org projec
 | B-QEMU-ZBOOT | External dependency | Waiting on runner QEMU to ship upstream zstd EFI zboot |
 | B-PINS | Process discipline | Keep `PINNED.md` current on every digest bump |
 | B-HARDENING-RUNTIME | Software (agent-closable) | Static audit done; needs a live Bats + `systemd-analyze verify` run |
-| B-REAL-FIDO2 | Hardware | Needs a physical YubiKey; gated behind B-VM-CTAP2 closing first |
+| B-REAL-FIDO2 | Hardware | Needs a physical U2F/HSM; gated behind B-VM-CTAP2 closing first |
 | B-BOOTC-SEAL | External dependency | Needs a bootc base with v1.16.4-equivalent split/ukify upstream |
 
 ## Other org repos
@@ -40,7 +40,7 @@ Raw velocity is fast (14 merged PRs/week on `yubiOS` main) but is dominated by d
 **Software-only, agent-closable at current pace (days, not weeks):** B-VM-CTAP2, B-HARDENING-RUNTIME, B-PINS (ongoing discipline). At the observed ~2 merged-PR/day pace on this class of work, these look closable within **1–2 weeks** if prioritized next.
 
 **Gated on something outside agent control — no honest ETA possible:**
-- B-ARM64-PATHA / B-RK3588-TPL / B-REAL-FIDO2 — all need physical hardware (YubiKey, ROCK 5B, ROCKPro64) in hand plus, for RK3588, a licensed DDR/TPL blob. I don't know your hardware/procurement status, so I'm not going to fabricate a date.
+- B-ARM64-PATHA / B-RK3588-TPL / B-REAL-FIDO2 — all need physical hardware (U2F/HSM, ROCK 5B, ROCKPro64) in hand plus, for RK3588, a licensed DDR/TPL blob. I don't know your hardware/procurement status, so I'm not going to fabricate a date.
 - B-BOOTC-SEAL — needs upstream `bootc` to ship v1.16.4-equivalent split/ukify. That's an upstream release, not something velocity here affects.
 - B-QEMU-ZBOOT — needs a GitHub-runner-side QEMU image refresh, also outside our control.
 

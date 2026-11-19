@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: LGPL-2.1-or-later
 # yubiOS TOTP enrollment via ykman oath
-# Stores TOTP secret in YubiKey OATH applet (hidraw).
+# Stores TOTP secret in U2F/HSM OATH applet (hidraw).
 # Usage: yubiOS-enroll-totp <name> <secret-uri>
 #   e.g: yubiOS-enroll-totp "GitHub" "otpauth://totp/..."
 # Source: https://docs.yubico.com/software/yubikey-manager/yubikey-manager-manual.html
@@ -9,7 +9,7 @@ set -euo pipefail
 # shellcheck source=lib.sh
 source /usr/lib/yubiOS/lib.sh
 
-wait_for_yubikey
+wait_for_u2f_hsm
 
 ACCOUNT="${1:-}"
 URI="${2:-}"

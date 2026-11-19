@@ -120,7 +120,7 @@ mkdir -p "$WORKDIR/bin"
 cat > "$WORKDIR/bin/pkcs11-tool" <<'EOF'
 #!/usr/bin/env bash
 if [[ "$*" == *"--list-slots"* ]]; then
-  echo "Slot 0 (0x0): Yubico YubiKey PIV"
+  echo "Slot 0 (0x0): Yubico U2F/HSM PIV"
   exit 0
 fi
 if [[ "$*" == *"--list-objects"* ]]; then
@@ -142,7 +142,7 @@ echo -n "  3/3 Corrupt / missing Secure Boot certificate fails closed... "
 cat > "$WORKDIR/bin/pkcs11-tool" <<'EOF'
 #!/usr/bin/env bash
 if [[ "$*" == *"--list-slots"* ]]; then
-  echo "Slot 0 (0x0): Yubico YubiKey PIV"
+  echo "Slot 0 (0x0): Yubico U2F/HSM PIV"
   exit 0
 fi
 if [[ "$*" == *"--list-objects"* ]]; then

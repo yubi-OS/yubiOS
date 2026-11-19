@@ -35,7 +35,7 @@ find_fido2_hidraw() {
   return 1
 }
 
-echo "[yubiOS] Waiting for YubiKey FIDO2 interface..."
+echo "[yubiOS] Waiting for U2F/HSM FIDO2 interface..."
 for _ in $(seq 1 30); do
   if FIDO2_DEV="$(find_fido2_hidraw)"; then
     break
@@ -47,7 +47,7 @@ if [ -z "${FIDO2_DEV:-}" ]; then
   if fido2-token -L 2>/dev/null | grep -q .; then
     FIDO2_DEV="auto"
   else
-    echo "[yubiOS] ERROR: No YubiKey FIDO2 hidraw device detected." >&2
+    echo "[yubiOS] ERROR: No U2F/HSM FIDO2 hidraw device detected." >&2
     exit 1
   fi
 fi
@@ -159,7 +159,7 @@ ensure_luks_partition() {
 LUKS_DEV="${1:-$(ensure_luks_partition)}"
 echo "[yubiOS] LUKS2 partition: $LUKS_DEV"
 echo ""
-echo "Enrolling YubiKey FIDO2 (PIN + touch) and generating offline recovery key for $LUKS_DEV..."
+echo "Enrolling U2F/HSM FIDO2 (PIN + touch) and generating offline recovery key for $LUKS_DEV..."
 read -r -p "Continue with FIDO2 enrollment? [Y/n]: " confirm
 if [[ "${confirm:-Y}" =~ ^[Nn]$ ]]; then
   echo "Aborted."
@@ -177,7 +177,7 @@ if ! cryptsetup luksDump "$LUKS_DEV" 2>/dev/null | grep -q "systemd-recovery"; t
 fi
 
 echo ""
-echo "[yubiOS] Enrolling FIDO2 (enter FIDO2 PIN and touch YubiKey when prompted)..."
+echo "[yubiOS] Enrolling FIDO2 (enter FIDO2 PIN and touch U2F/HSM when prompted)..."
 systemd-cryptenroll "${KEYFILE_ARG[@]}"   --fido2-device=auto   --fido2-with-client-pin=yes   --fido2-with-user-presence=yes   "$LUKS_DEV"
 
 if [ -f /run/yubiOS/luks-bootstrap.key ]; then
@@ -202,4 +202,4 @@ mkdir -p /var/lib/yubiOS
 touch /var/lib/yubiOS/.luks-enrolled
 echo ""
 echo "FIDO2 disk encryption enrolled: crypt > lvm > (usr_a 1%, usr_b 1% -> /usr 3-way overlay, yubios-root 96%, 2% empty)."
-echo "On next boot: dracut will prompt for your FIDO2 PIN and YubiKey touch."
+echo "On next boot: dracut will prompt for your FIDO2 PIN and U2F/HSM touch."

@@ -20,7 +20,7 @@ on:
         default: 'docker.io/0mniteck/yubios:dev'
         type: string
       allow_real_u2f:
-        description: 'Pass ALLOW_REAL_U2F=1 to tests/vm/test-uki-local-oci-ci.sh (default true so rock1 runs cleanly when a physical YubiKey is attached).'
+        description: 'Pass ALLOW_REAL_U2F=1 to tests/vm/test-uki-local-oci-ci.sh (default true so rock1 runs cleanly when a physical U2F/HSM is attached).'
         required: false
         default: true
         type: boolean

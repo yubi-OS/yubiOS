@@ -20,7 +20,7 @@ SIGNED="$(mktemp /dev/shm/yubiOS-signed-XXXXXX.efi)"
 # SC2064: single quotes so vars expand at signal time, not at trap registration
 trap 'shred -u "$TMP_KEY" 2>/dev/null || rm -f "$TMP_KEY"; rm -f "$SIGNED"' EXIT
 
-yubiOS_log "Decrypting signing key (touch YubiKey)..."
+yubiOS_log "Decrypting signing key (touch U2F/HSM)..."
 age -d -o "$TMP_KEY" "$ENC_KEY"
 
 yubiOS_log "Signing $EFI..."

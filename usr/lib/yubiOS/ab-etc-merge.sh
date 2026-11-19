@@ -71,7 +71,7 @@ fi
 
 # Ensure authselect-apply-changes cannot overwrite yubiOS PAM system-auth/password-auth
 # (which otherwise strips pam_systemd_home.so from login on tty1/kmsconvt and causes
-# user@<uid>.service's (sd-pam) helper to broadcast the YubiKey PIN prompt to serial wall).
+# user@<uid>.service's (sd-pam) helper to broadcast the U2F/HSM PIN prompt to serial wall).
 if [ -f /usr/lib/pam.d/yubiOS-system-auth ]; then
   for pam_target in /etc/pam.d/system-auth /etc/pam.d/password-auth; do
     if [ -L "$pam_target" ] || ! grep -q "pam_systemd_home.so" "$pam_target" 2>/dev/null; then
@@ -82,7 +82,7 @@ if [ -f /usr/lib/pam.d/yubiOS-system-auth ]; then
 fi
 
 # Ensure kernel-install hooks in /etc/kernel/install.d stay synced to yubiOS's
-# same-FS dracut + YubiKey UKI re-sign + local composefs OCI repository hooks (ADR-034),
+# same-FS dracut + U2F/HSM UKI re-sign + local composefs OCI repository hooks (ADR-034),
 # so a package upgrade of rpm-ostree or systemd-udev in the /usr overlay cannot
 # restore the cross-device EXDEV 05-rpmostree.install scriptlet.
 if [ -d /usr/lib/kernel/install.d ]; then

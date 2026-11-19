@@ -1,17 +1,17 @@
 #!/bin/bash
 # SPDX-License-Identifier: LGPL-2.1-or-later
-# yubiOS backup YubiKey enrollment
-# Enrolls a second YubiKey for all active trust anchors.
+# yubiOS backup U2F/HSM enrollment
+# Enrolls a second U2F/HSM for all active trust anchors.
 # Run after primary enrollment. Both keys will unlock the system.
 set -euo pipefail
 # shellcheck source=lib.sh
 source /usr/lib/yubiOS/lib.sh
 
-yubiOS_log "Backup YubiKey enrollment"
-yubiOS_log "Insert your BACKUP YubiKey and press Enter."
+yubiOS_log "Backup U2F/HSM enrollment"
+yubiOS_log "Insert your BACKUP U2F/HSM and press Enter."
 read -rp ""
 
-wait_for_yubikey
+wait_for_u2f_hsm
 
 yubiOS_log "Enrolling backup: LUKS2 FIDO2"
 LUKS_PART="${1:-$(detect_luks2_partition)}"
@@ -30,4 +30,4 @@ pamu2fcfg -u "$TARGET_USER" -N >> /etc/yubico/u2f_keys
 yubiOS_log "Backup PAM U2F enrolled."
 
 echo ""
-echo "Backup YubiKey enrolled. Test sudo with the backup key."
+echo "Backup U2F/HSM enrolled. Test sudo with the backup key."

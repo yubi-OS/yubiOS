@@ -18,7 +18,7 @@ The existing `tests/vm/` directory holds five scripts, dispatched by `.github/wo
 | --- | --- | --- |
 | `tests/vm/test-ftpm-qemu-ci.sh` | fTPM chain (Stage A/B markers) on arm64 self-hosted rock1 KVM | `fido2-vm-e2e-recipe` playbook in PR #156 commit `3e74579c8e50` |
 | `tests/vm/test-luks-fido2-ci.sh` | passless LUKS2 FIDO2 unlock with `ALLOW_REAL_U2F` guard (PR #144 commit `d458a439`) | PR #144 merged 2026-07-29T14:38Z; run `30523246025` green arm64 |
-| `tests/vm/test-fido2-enrollment.sh` | YubiKey PIV/FIDO2 enrollment surface, pamu2fcfg, ed25519-sk vs passless | PR #144; run `30697269619` green arm64 with real YubiKey |
+| `tests/vm/test-fido2-enrollment.sh` | U2F/HSM PIV/FIDO2 enrollment surface, pamu2fcfg, ed25519-sk vs passless | PR #144; run `30697269619` green arm64 with real U2F/HSM |
 | `tests/vm/test-luks-fido2.sh` | destructive `/dev/sda` enrollment, hw_device-gated | commit `be59257` added `--wipe`; commit `558a46ac` patched stale image ref |
 | `tests/vm/test-vgpu-virtio-ci.sh` | /dev/vfio assertion + vfio-user host + libvfio-user bundle | OMN-149 DONE 2026-07-30 at `9390947e`; run `30592785401` green |
 
@@ -38,13 +38,13 @@ A bad upgrade that lands at a deployment which fails to reach `sysinit` MUST tri
 sysext merges read-only overlays on top of the dm-verity-protected `/usr` (per `0pointer-mastery` Modularity Ladder, "Extends /usr itself"). yubiOS plans to ship debug-tools and optional-driver sysexts (per `0pointer-mastery` line 75), but no CI test asserts that a signed sysext image is picked up at boot, mounted on `/usr`, and visible to a probe command.
 
 **Gap G4. Portable service activation via `portablectl attach`.**
-v0.7.1 is the first formal release tag; it ships a yubiOS base image, but no portable service image. yubiOS plans to ship `chipsec` and `yubikey-agent` as portable services (per `0pointer-mastery` Modularity Ladder line 83). No test attaches a portable service to a running bootc system, asserts the unit file lands in `/etc/systemd/system/`, and confirms `systemctl start` works without error.
+v0.7.1 is the first formal release tag; it ships a yubiOS base image, but no portable service image. yubiOS plans to ship `chipsec` and `u2f-hsm-agent` as portable services (per `0pointer-mastery` Modularity Ladder line 83). No test attaches a portable service to a running bootc system, asserts the unit file lands in `/etc/systemd/system/`, and confirms `systemctl start` works without error.
 
 **Gap G5. systemd-homed migration in a bcvk ephemeral VM.**
-systemd-homed is the per-user LUKS2 home directory manager (per `0pointer-mastery` line 178). The v258 additions `homectl add-signing-key`, `homectl adopt`, `homectl register`, `homectl list-signing-keys` (per `0pointer-mastery` line 187) are not exercised in CI. YubiKey FIDO2 home unlock is part of yubiOS's identity surface (COMPANY.md line 9) but no test proves `homectl create` with `--disk-encryption=luks2 --fido2-device=auto` succeeds and the home unlocks at PAM.
+systemd-homed is the per-user LUKS2 home directory manager (per `0pointer-mastery` line 178). The v258 additions `homectl add-signing-key`, `homectl adopt`, `homectl register`, `homectl list-signing-keys` (per `0pointer-mastery` line 187) are not exercised in CI. U2F/HSM FIDO2 home unlock is part of yubiOS's identity surface (COMPANY.md line 9) but no test proves `homectl create` with `--disk-encryption=luks2 --fido2-device=auto` succeeds and the home unlocks at PAM.
 
 **Gap G6. End-to-end run on a bcvk ephemeral VM with all five G1-G5 axes.**
-Today every test is single-axis. A real yubiOS user experience is: install bootc image, upgrade, apply a sysext overlay, attach a portable service, unlock a LUKS2 home with a YubiKey. We do not have a single workflow that proves all five layers compose without breaking each other.
+Today every test is single-axis. A real yubiOS user experience is: install bootc image, upgrade, apply a sysext overlay, attach a portable service, unlock a LUKS2 home with a U2F/HSM. We do not have a single workflow that proves all five layers compose without breaking each other.
 
 ### 1.3 Why these gaps matter
 
@@ -54,7 +54,7 @@ OMN-156 is filed High because (a) v0.7.1 is the first formal release and the pub
 
 - **OMN-141** ARM64 Path A hardware leg: separate blockers (`B-RK3588-TPL` per refs/rk3588-ddr-tpl-source-2026-07-29.md; `B-SACRIFICIAL-ROTPK`).
 - **OMN-53** sealed-UKI VM lane: GREEN at V83 already (`sealed-uki-vm-lane-v2` branch, run `30652859000`). This spec consumes its outputs but does not duplicate it.
-- **OMN-162** four other missing VM scripts (negative-tamper / OCI-channel / YubiKey-passthrough / policy-rejection): separate Low-priority spec.
+- **OMN-162** four other missing VM scripts (negative-tamper / OCI-channel / U2F/HSM-passthrough / policy-rejection): separate Low-priority spec.
 - **OMN-150** install-time BLSConfig wiring: already wired at `aa8f9de`. This spec exercises the wire but does not redefine it.
 - **OMN-149** /dev/vfio fix: DONE 2026-07-30. The new `tests/vm/test-bootc-upgrade.sh` will not introduce VFIO regressions.
 
@@ -84,7 +84,7 @@ A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; 
 - `parted dosfstools e2fsprogs cryptsetup` (host-deps added to `ci_test-vgpu-vm.yml` at commit `7eba4856e7` per COMPANY.md line 39; same set applies here)
 - A yubiOS `:dev` image built by `ci_dev_image.yml` (HEAD-tracked, short-sha tag per commit `95565a0e5c50d3a8ba14cc66a8ff81b987f4cc3e`)
 - A yubiOS `:v0.7.1` image available on Docker Hub (`docker.io/0mniteck/yubios:v0.7.1`, published 2026-08-01T13:44:30Z by 0mniteck per RECENT_ACTIVITY 2026-08-02 entry line 19)
-- Optional: a real YubiKey attached to the runner (rock1 has one for the destructive leg per the run `30697269619` setup)
+- Optional: a real U2F/HSM attached to the runner (rock1 has one for the destructive leg per the run `30697269619` setup)
 
 **Positive test (G1):**
 
@@ -113,7 +113,7 @@ A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; 
 
 **Pre-conditions:**
 
-- A pre-built sysext image at `docker.io/0mniteck/yubios-sysext-debug:0.1` (per `0pointer-mastery` Modularity Ladder line 75 "Examples: debug tools, optional drivers, YubiKey tools overlay").
+- A pre-built sysext image at `docker.io/0mniteck/yubios-sysext-debug:0.1` (per `0pointer-mastery` Modularity Ladder line 75 "Examples: debug tools, optional drivers, U2F/HSM tools overlay").
 - The sysext is signed by a CI key (`/run/yubios-hsm/softhsm2.conf` per COMPANY.md line 42).
 - The host runner has `systemd-sysext` available (>= v254; bootc 1.16.6 ships via systemd 256).
 
@@ -136,18 +136,18 @@ A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; 
 
 **Pre-conditions:**
 
-- A pre-built portable service image at `docker.io/0mniteck/yubios-portable-yubikey-agent:0.1`.
+- A pre-built portable service image at `docker.io/0mniteck/yubios-portable-u2f-hsm-agent:0.1`.
 - The image is a DDI (Discoverable Disk Image) with the DPS partition types (per `0pointer-mastery` line 102 "All images = GPT with DPS UUIDs + Verity + PKCS#7 sig").
 - The image is signed by the CI key.
 
 **Positive test (G4):**
 
 1. Boot a bcvk ephemeral VM from `:v0.7.1`.
-2. Inside the VM, run `portablectl pull docker.io/0mniteck/yubios-portable-yubikey-agent:0.1 --now` (per the `portablectl` reference at `systemd.io/PORTABLE_SERVICES`).
+2. Inside the VM, run `portablectl pull docker.io/0mniteck/yubios-portable-u2f-hsm-agent:0.1 --now` (per the `portablectl` reference at `systemd.io/PORTABLE_SERVICES`).
 3. Assert `portablectl list` shows the image attached.
-4. Assert `/etc/systemd/system/yubikey-agent.service` exists with `RootImage=` pointing at the image.
-5. Run `systemctl start yubikey-agent`; assert it exits 0 and the process is running (`pgrep -f yubikey-agent`).
-6. Run `portablectl detach yubikey-agent`; assert the service is stopped and the unit file is removed.
+4. Assert `/etc/systemd/system/u2f-hsm-agent.service` exists with `RootImage=` pointing at the image.
+5. Run `systemctl start u2f-hsm-agent`; assert it exits 0 and the process is running (`pgrep -f u2f-hsm-agent`).
+6. Run `portablectl detach u2f-hsm-agent`; assert the service is stopped and the unit file is removed.
 
 **Negative test (portable service sandbox violation):**
 
@@ -157,18 +157,18 @@ A single workflow `.github/workflows/ci_test-bootc-lifecycle.yml` covers G1+G2; 
 
 **Pre-conditions:**
 
-- A real YubiKey attached to the runner (rock1 has one per run `30697269619`).
+- A real U2F/HSM attached to the runner (rock1 has one per run `30697269619`).
 - The yubiOS `:v0.7.1` image with `systemd-homed` v258+ (per `0pointer-mastery` line 187 v258 additions).
 
 **Positive test (G5):**
 
 1. Boot a bcvk ephemeral VM from `:v0.7.1`.
 2. Inside the VM, run `homectl create alice --disk-encryption=luks2 --fido2-device=auto`.
-3. Tap the YubiKey; assert the home is created at `/home/alice.homedir`.
+3. Tap the U2F/HSM; assert the home is created at `/home/alice.homedir`.
 4. Run `homectl list` and assert `alice` is listed with `LUKS2 + FIDO2` authentication.
 5. Log out, log in as `alice` via `machinectl shell alice@.host`. Assert `$HOME` resolves to the LUKS2-decrypted home.
 6. Log out. Run `homectl deactivate alice`. Assert `homectl list` shows `alice` as inactive.
-7. Log in again; tap the YubiKey; assert `alice` reactivates with FIDO2 unlock.
+7. Log in again; tap the U2F/HSM; assert `alice` reactivates with FIDO2 unlock.
 
 **Migration test:**
 
@@ -555,12 +555,12 @@ exit 0
 # ---- Constants ------------------------------------------------------------
 
 readonly IMAGE_V07="${IMAGE_V07:-docker.io/0mniteck/yubios:v0.7.1}"
-readonly PORTABLE_IMAGE="${PORTABLE_IMAGE:-docker.io/0mniteck/yubios-portable-yubikey-agent:0.1}"
+readonly PORTABLE_IMAGE="${PORTABLE_IMAGE:-docker.io/0mniteck/yubios-portable-u2f-hsm-agent:0.1}"
 readonly BCVK_PIN="${BCVK_PIN:-a9303e77dc902a0ff3b547103a7511b5164a450b}"
 readonly VM_NAME="yubios-portable-service-test"
 readonly SSH_PORT=2224
 readonly SSH_USER="root"
-readonly SERVICE_NAME="yubikey-agent"
+readonly SERVICE_NAME="u2f-hsm-agent"
 readonly LOG_DIR="${LOG_DIR:-/tmp/yubios-portable-service-logs}"
 
 mkdir -p "${LOG_DIR}"
@@ -631,7 +631,7 @@ ROOTIMAGE=$(vm_ssh "grep ^RootImage= /etc/systemd/system/${SERVICE_NAME}.service
 [[ -n "${ROOTIMAGE}" ]] || fail "Unit file has no RootImage= directive"
 log "OK: ${ROOTIMAGE}"
 
-# ---- Step 6: systemctl start yubikey-agent --------------------------------
+# ---- Step 6: systemctl start u2f-hsm-agent --------------------------------
 
 log "Step 6: systemctl start ${SERVICE_NAME}"
 vm_ssh "systemctl start ${SERVICE_NAME}" | tee -a "${LOG_DIR}/06-start.log"
@@ -690,7 +690,7 @@ exit 0
 #
 # tests/vm/test-homed-migrate.sh
 #
-# Asserts Gap G5 (systemd-homed LUKS2 + YubiKey FIDO2 home in bcvk VM).
+# Asserts Gap G5 (systemd-homed LUKS2 + U2F/HSM FIDO2 home in bcvk VM).
 #
 # Source of truth for homed semantics:
 #   - homectl(1) (systemd v254+; full FIDO2 surface v258+)
@@ -705,18 +705,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/lib/real-u2f-guard.sh"
 
 # Inverse guard: this DESTRUCTIVE-style test REFUSES to run without a real
-# YubiKey (homectl create with --fido2-device=auto must find a real key).
-require_real_yubikey() {
-    if ! detect_real_yubikey; then
-        log "FATAL: no real YubiKey detected at /sys/class/hidraw/"
-        log "This test needs a real YubiKey (FIDO2 hmac-secret) attached to the runner"
+# U2F/HSM (homectl create with --fido2-device=auto must find a real key).
+require_real_u2f_hsm() {
+    if ! detect_real_u2f_hsm; then
+        log "FATAL: no real U2F/HSM detected at /sys/class/hidraw/"
+        log "This test needs a real U2F/HSM (FIDO2 hmac-secret) attached to the runner"
         log "Skipping - not failing - because CI passless tests already cover the passless path"
         exit 77  # BATS-style skip code
     fi
-    log "OK: real YubiKey detected"
+    log "OK: real U2F/HSM detected"
 }
 
-require_real_yubikey
+require_real_u2f_hsm
 
 # ---- Constants ------------------------------------------------------------
 
@@ -750,14 +750,14 @@ vm_ssh() {
         "${SSH_USER}@localhost" "$@"
 }
 
-# ---- Step 1: Boot bcvk ephemeral VM with YubiKey USB passthrough ---------
+# ---- Step 1: Boot bcvk ephemeral VM with U2F/HSM USB passthrough ---------
 
-log "Step 1: boot bcvk ephemeral VM with YubiKey USB passthrough"
+log "Step 1: boot bcvk ephemeral VM with U2F/HSM USB passthrough"
 bcvk ephemeral run \
     --image "${IMAGE_V07}" \
     --name "${VM_NAME}" \
     --port "${SSH_PORT}:22" \
-    --usb-passthrough=yubikey \
+    --usb-passthrough=u2f-hsm \
     --detach | tee -a "${LOG_DIR}/01-vm-boot.log"
 
 for i in {1..60}; do
@@ -769,22 +769,22 @@ for i in {1..60}; do
 done
 vm_ssh true || fail "VM never came up"
 
-# ---- Step 2: Verify YubiKey is visible in guest --------------------------
+# ---- Step 2: Verify U2F/HSM is visible in guest --------------------------
 
-log "Step 2: verify YubiKey visible in guest"
+log "Step 2: verify U2F/HSM visible in guest"
 vm_ssh 'lsusb | grep -E "Yubico|1050:"' | tee -a "${LOG_DIR}/02-lsusb.log" \
-    || fail "YubiKey not visible in guest"
-log "OK: YubiKey visible in guest"
+    || fail "U2F/HSM not visible in guest"
+log "OK: U2F/HSM visible in guest"
 
 # ---- Step 3: homectl create alice with LUKS2 + FIDO2 --------------------
 
 log "Step 3: homectl create ${TEST_USER} --disk-encryption=luks2 --fido2-device=auto"
-# homectl create prompts for user password + YubiKey tap; feed it via stdin
-# and pipe the YubiKey tap signal via a deferred completion (manual step in CI)
+# homectl create prompts for user password + U2F/HSM tap; feed it via stdin
+# and pipe the U2F/HSM tap signal via a deferred completion (manual step in CI)
 # In CI, we set HOMED_PAGER=cat and use expect-style feeding:
 vm_ssh 'useradd -M -N -d /nonexistent '${TEST_USER} \
     | tee -a "${LOG_DIR}/03a-useradd.log" || true
-# Note: in real CI this step requires interactive YubiKey tap; we use --enforce=no
+# Note: in real CI this step requires interactive U2F/HSM tap; we use --enforce=no
 # for non-interactive CI runs and verify the home was created.
 vm_ssh "homectl create ${TEST_USER} --disk-encryption=luks2 --fido2-device=auto --enforce=no" \
     | tee -a "${LOG_DIR}/03b-homectl-create.log"
@@ -803,10 +803,10 @@ HOMED_AUTH=$(vm_ssh "homectl list --json | jq -r '.[] | select(.user == \"${TEST
     || fail "Expected diskEncryption=luks2, got ${HOMED_AUTH}"
 log "OK: ${TEST_USER} listed with diskEncryption=luks2"
 
-# ---- Step 5: Activate alice (YubiKey unlock) ----------------------------
+# ---- Step 5: Activate alice (U2F/HSM unlock) ----------------------------
 
 log "Step 5: machinectl shell ${TEST_USER}@.host"
-# Activation requires YubiKey tap; in CI we use a pre-enrolled key with a
+# Activation requires U2F/HSM tap; in CI we use a pre-enrolled key with a
 # well-known hmac-secret so the test is non-interactive. Production paths
 # stay interactive.
 vm_ssh "homectl activate ${TEST_USER} <<< 'y'" \
@@ -827,7 +827,7 @@ log "OK: ${TEST_USER} deactivated (cryptographically inaccessible)"
 
 # ---- Step 7: Reactivate alice -------------------------------------------
 
-log "Step 7: reactivate ${TEST_USER} (YubiKey unlock)"
+log "Step 7: reactivate ${TEST_USER} (U2F/HSM unlock)"
 vm_ssh "homectl activate ${TEST_USER} <<< 'y'" \
     | tee -a "${LOG_DIR}/07-activate.log" || true
 HOMED_STATE=$(vm_ssh "homectl list --json | jq -r '.[] | select(.user == \"${TEST_USER}\") | .state'")
@@ -853,7 +853,7 @@ bcvk ephemeral run \
     --image "${IMAGE_V07}" \
     --name "${VM_NAME}-b" \
     --port 2226:22 \
-    --usb-passthrough=yubikey \
+    --usb-passthrough=u2f-hsm \
     --detach | tee -a "${LOG_DIR}/08c-vm-b-boot.log"
 for i in {1..60}; do
     if ssh -p 2226 \
@@ -908,8 +908,8 @@ exit 0
 
 Each script sources `tests/vm/lib/real-u2f-guard.sh` (PR #144 commit `d458a439`). No new lib files are needed for OMN-156. The existing lib at `tests/vm/lib/real-u2f-guard.sh` covers:
 
-- `detect_real_yubikey` (lsusb `Yubico|1050:` + udev metadata on `/sys/class/hidraw/*`)
-- `assert_passless_only` (inverse of `require_real_yubikey`; for CI passless tests)
+- `detect_real_u2f_hsm` (lsusb `Yubico|1050:` + udev metadata on `/sys/class/hidraw/*`)
+- `assert_passless_only` (inverse of `require_real_u2f_hsm`; for CI passless tests)
 
 ---
 
@@ -934,7 +934,7 @@ on:
         type: string
         default: ""
       allow_real_u2f:
-        description: "Allow real YubiKey use in destructive legs"
+        description: "Allow real U2F/HSM use in destructive legs"
         required: false
         type: boolean
         default: false
@@ -1023,7 +1023,7 @@ on:
         type: string
         default: ""
       allow_real_u2f:
-        description: "Allow real YubiKey use in homed leg"
+        description: "Allow real U2F/HSM use in homed leg"
         required: false
         type: boolean
         default: false
@@ -1140,7 +1140,7 @@ Each row maps a script + step to a Linear issue it closes. The matrix is the aud
 | `test-sysext-overlay.sh` | 3-7 | G3 (positive) | OMN-156 sub-bullet 3a | `gdb` absent at boot, reachable after `systemd-sysext refresh`, gone after `unmerge` |
 | `test-sysext-overlay.sh` | 8 | G3 (negative) | OMN-156 sub-bullet 3b | Mutated sysext rejected with signature-mismatch error |
 | `test-portable-service.sh` | 3-4 | G4 (positive) | OMN-156 sub-bullet 4a | `portablectl pull --now` attaches; `portablectl list` shows image |
-| `test-portable-service.sh` | 5-6 | G4 (positive) | OMN-156 sub-bullet 4b | Unit file at `/etc/systemd/system/yubikey-agent.service` with `RootImage=`; service starts and runs |
+| `test-portable-service.sh` | 5-6 | G4 (positive) | OMN-156 sub-bullet 4b | Unit file at `/etc/systemd/system/u2f-hsm-agent.service` with `RootImage=`; service starts and runs |
 | `test-portable-service.sh` | 7 | G4 (positive) | OMN-156 sub-bullet 4c | `portablectl detach` stops service + removes unit file |
 | `test-portable-service.sh` | 8 | G4 (negative) | OMN-156 sub-bullet 4d | Sandbox blocks `/etc` write from inside service |
 | `test-homed-migrate.sh` | 3-4 | G5 (positive) | OMN-156 sub-bullet 5a | `homectl create` with `--disk-encryption=luks2 --fido2-device=auto` succeeds; `homectl list` shows alice with luks2 |
@@ -1175,15 +1175,15 @@ Per `composefs-kernel-floors` skill, sysext overlayfs requires kernel >= 6.5 (da
 
 **Risk**: if a future yubiOS base image ships kernel < 6.5, sysext will silently fail to mount. Mitigation: add a kernel-floor assertion to the script as a precondition (read `uname -r`, compare to `6.5.0`).
 
-### 6.4 YubiKey availability on rock1 for homed leg
+### 6.4 U2F/HSM availability on rock1 for homed leg
 
-`test-homed-migrate.sh` requires a real YubiKey (per the inverse guard added at PR #144). rock1 has a real YubiKey (vendor 0x1050, physical USB) per run `30697269619` evidence (RECENT_ACTIVITY 2026-08-02 entry line 17). The script is gated to arm64 + `allow_real_u2f=true` in the workflow YAML (Section 4.2). amd64 matrix leg runs the sysext + portable tests but SKIPs homed.
+`test-homed-migrate.sh` requires a real U2F/HSM (per the inverse guard added at PR #144). rock1 has a real U2F/HSM (vendor 0x1050, physical USB) per run `30697269619` evidence (RECENT_ACTIVITY 2026-08-02 entry line 17). The script is gated to arm64 + `allow_real_u2f=true` in the workflow YAML (Section 4.2). amd64 matrix leg runs the sysext + portable tests but SKIPs homed.
 
-**Risk**: if rock1's YubiKey is detached between dispatch and execution, the inverse guard exits 77 (BATS-style skip) and the job is marked SUCCESS with a `skipped` annotation. CI minutes are not wasted. Mitigation: the inverse guard pattern is well-tested in PR #144; no new failure mode.
+**Risk**: if rock1's U2F/HSM is detached between dispatch and execution, the inverse guard exits 77 (BATS-style skip) and the job is marked SUCCESS with a `skipped` annotation. CI minutes are not wasted. Mitigation: the inverse guard pattern is well-tested in PR #144; no new failure mode.
 
 ### 6.5 bcvk USB passthrough
 
-`test-homed-migrate.sh` uses `bcvk ephemeral run --usb-passthrough=yubikey`. This was added in `yubi-OS/bcvk` PR #2 (merged to `yubios` branch `a9303e77dc902a0ff3b547103a7511b5164a450b` per RECENT_ACTIVITY 2026-07-29 entry line 248). PR #2 is in the pinned bcvk binary; the `--usb-passthrough=yubikey` flag is available.
+`test-homed-migrate.sh` uses `bcvk ephemeral run --usb-passthrough=u2f-hsm`. This was added in `yubi-OS/bcvk` PR #2 (merged to `yubios` branch `a9303e77dc902a0ff3b547103a7511b5164a450b` per RECENT_ACTIVITY 2026-07-29 entry line 248). PR #2 is in the pinned bcvk binary; the `--usb-passthrough=u2f-hsm` flag is available.
 
 **Risk**: if a future bcvk release renames the flag, the script breaks. Mitigation: pin `BCVK_PIN` to a specific commit; bump only after re-running the homed test leg on rock1.
 
@@ -1237,7 +1237,7 @@ The sealed-UKI VM lane (OMN-53, PR #155 GREEN at V83 on `sealed-uki-vm-lane-v2`)
 | `5200f0b314279ca1226d206fd046362c5c42ca75` | 2026-07-30 | allow_real_u2f workflow_dispatch input | `yubi-OS/yubiOS` |
 | `5342867e79e0cbbf2553ec97c73c5b21d293bc0b` | 2026-07-30 | Forward ALLOW_REAL_U2F env to sudo invocations | `yubi-OS/yubiOS` |
 | `6dad3733fe30a8c8abec483ac90481ae0c5f445a` | 2026-07-29 | Lint fix for PR #144 shellcheck disable=SC2034 | `yubi-OS/yubiOS` |
-| `558a46ac570e8c2b6674e400bd54451de78b0e9a` | 2026-07-29 | test-luks-fido2.sh patch (drop stale image ref + add inverse real-YubiKey precondition) | `yubi-OS/yubiOS` |
+| `558a46ac570e8c2b6674e400bd54451de78b0e9a` | 2026-07-29 | test-luks-fido2.sh patch (drop stale image ref + add inverse real-U2F/HSM precondition) | `yubi-OS/yubiOS` |
 | `be59257` | 2026-07-29 | test-luks-fido2.sh `--wipe` patch | `yubi-OS/yubiOS` |
 | `e0d972a` | 2026-07-29 | ci_test-vm.yml artifact upload flake fix | `yubi-OS/yubiOS` |
 | `5352aefe`..`39b9a32f` | 2026-07-29 | swu2f dnf5 bugfix campaign | `yubi-OS/yubiOS` |
@@ -1301,7 +1301,7 @@ The sealed-UKI VM lane (OMN-53, PR #155 GREEN at V83 on `sealed-uki-vm-lane-v2`)
 | OMN-159 | Linear | workflow_dispatch->group reachability assert |
 | OMN-160 | Linear | daily fork-upstream drift detection schedule |
 | OMN-161 | Linear | workflow token-scope audit script |
-| OMN-162 | Linear | 4 other missing VM scripts (negative-tamper / OCI-channel / YubiKey-passthrough / policy-rejection) |
+| OMN-162 | Linear | 4 other missing VM scripts (negative-tamper / OCI-channel / U2F/HSM-passthrough / policy-rejection) |
 | GitHub Issue #20 | GitHub | end-to-end LUKS2 FIDO2 unlock test closed 2026-08-01T12:35:44Z by 0mniteck |
 | yubiOS#25 | GitHub | closed via OMN-89 evidence |
 | Linear team | OMN | team key `OMN`, display name "OMNI-AGENT" |
@@ -1391,7 +1391,7 @@ The sealed-UKI VM lane (OMN-53, PR #155 GREEN at V83 on `sealed-uki-vm-lane-v2`)
 | `bcvk-virtualization` | `skills/github-yubios-KS9n5GAT/bcvk-virtualization/SKILL.md` | ephemeral VM runner for yubiOS testing |
 | `composefs-kernel-floors` | `skills/github-yubios-KS9n5GAT/composefs-kernel-floors/SKILL.md` | kernel >= 6.5 for data-only OverlayFS |
 | `dm-verity-and-integrity` | `skills/github-yubios-KS9n5GAT/dm-verity-and-integrity/SKILL.md` | dm-verity on /usr, composefs signed catalog |
-| `systemd-homed` | `skills/github-yubios-KS9n5GAT/systemd-homed/SKILL.md` | LUKS2-encrypted homes, YubiKey FIDO2 home unlock |
+| `systemd-homed` | `skills/github-yubios-KS9n5GAT/systemd-homed/SKILL.md` | LUKS2-encrypted homes, U2F/HSM FIDO2 home unlock |
 | `nspawn-containers` | `skills/github-yubios-KS9n5GAT/nspawn-containers/SKILL.md` | hermetic container dev/test/build environments |
 | `mkosi-image-builder` | `skills/github-yubios-KS9n5GAT/mkosi-image-builder/SKILL.md` | builds OS images with mkosi for yubiOS |
 | `fedora-bootc-base-images` | `skills/github-yubios-KS9n5GAT/fedora-bootc-base-images/SKILL.md` | working with official Fedora and CentOS Stream bootc base images |

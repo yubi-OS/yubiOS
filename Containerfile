@@ -15,11 +15,11 @@ FROM quay.io/fedora/fedora-bootc@sha256:990ebc2678ff3dbca3f0143c8d5f1a150a2fb0c4
 # makes the same canonical epoch visible to package/build tools in RUN steps.
 ARG SOURCE_DATE_EPOCH
 
-# ── YubiKey and FIDO2 stack ──────────────────────────────────────────────
+# ── U2F/HSM and FIDO2 stack ──────────────────────────────────────────────
 # libfido2:       FIDO2/CTAP2 library; used by systemd-cryptenroll, OpenSSH, pam-u2f
 # yubikey-manager: ykman CLI for PIV, FIDO2, OATH management
 # yubico-piv-tool: PIV operations for Secure Boot signing (slot 9c)
-# opensc:          PKCS#11 middleware; systemd-sbsign uses this to talk to YubiKey PIV
+# opensc:          PKCS#11 middleware; systemd-sbsign uses this to talk to U2F/HSM PIV
 # pam-u2f:         PAM module for FIDO2/U2F; requires >= 1.3.1 (CVE-2025-23013)
 #                  Source: https://www.yubico.com/support/security-advisories/ysa-2025-01/
 # pcsc-lite:       PC/SC daemon; needed for PIV/CCID interface
@@ -250,7 +250,7 @@ RUN ln -sf /usr/lib/yubiOS/enroll.sh              /usr/bin/yubiOS-enroll       &
 
 # ── Wire PAM: yubiOS-sudo config → /etc/pam.d/sudo ──────────────────────
 # Replaces Fedora's stock sudo PAM with yubiOS policy:
-#   auth required pam_u2f.so  (YubiKey touch ALWAYS needed, not optional)
+#   auth required pam_u2f.so  (U2F/HSM touch ALWAYS needed, not optional)
 # Recovery if locked out: boot with rd.break, remount rw, comment out pam_u2f
 # Source: https://github.com/Yubico/pam-u2f
 RUN cp /usr/lib/pam.d/yubiOS-sudo /etc/pam.d/sudo

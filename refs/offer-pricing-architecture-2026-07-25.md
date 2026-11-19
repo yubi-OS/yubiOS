@@ -16,8 +16,8 @@ or comparable-company data this session actually fetched.
 
 | Offer | Type | What it is | Covenant check |
 |---|---|---|---|
-| O1: Managed fleet enrollment | Recurring (subscription) | Onboarding + ongoing enrollment/rotation of YubiKeys across a fleet (PIV, FIDO2, LUKS2) via a hosted dashboard | Allowed — dashboard is convenience; `homectl`/`bootc`/API access to the same enrollment state stays unpaywalled per covenant §2 |
-| O2: Hardware bundles | Non-recurring | Pre-flashed device + enrolled YubiKey shipped as a unit | Allowed — sells hardware, not trust-chain access |
+| O1: Managed fleet enrollment | Recurring (subscription) | Onboarding + ongoing enrollment/rotation of U2F/HSMs across a fleet (PIV, FIDO2, LUKS2) via a hosted dashboard | Allowed — dashboard is convenience; `homectl`/`bootc`/API access to the same enrollment state stays unpaywalled per covenant §2 |
+| O2: Hardware bundles | Non-recurring | Pre-flashed device + enrolled U2F/HSM shipped as a unit | Allowed — sells hardware, not trust-chain access |
 | O3: Support contracts / SLAs | Recurring | Response-time-bound support for production yubiOS fleets | Allowed — security fixes still ship to everyone simultaneously per covenant §3 Disclosure; SLA buys *response time*, not the fix itself |
 | O4: Managed CI / build infrastructure | Recurring | Hosted mkosi/bcvk build pipeline with PIV signing, so customers don't run their own signing infra | Allowed, with care — the customer's own PIV key material must stay customer-held per covenant §2 ("no feature that requires surrendering key material... as a condition of paying") |
 | O5: Integration consulting | Non-recurring (project) | Scoped engagement: port yubiOS to a customer's hardware, wire ARM64 fTPM stack, etc. | Allowed |
@@ -40,7 +40,7 @@ pulpit's doctrine rules out ("never invent a fact").
 | Offer | Pricing shape hypothesis | What would validate/invalidate it |
 |---|---|---|
 | O1 Managed enrollment | Per-seat or per-device recurring fee, tiered by fleet size | A design partner willing to pay list price for a 10–50 device pilot, without a discount that erases the tier logic |
-| O2 Hardware bundles | Cost-plus on top of the ~$25–70 YubiKey unit cost cited in MISSION.md, plus device cost and a margin for pre-flash/enrollment labor | Whether customers prefer buying a bundle vs. buying a bare YubiKey + self-flashing (a real substitution test, not a survey answer) |
+| O2 Hardware bundles | Cost-plus on top of the ~$25–70 U2F/HSM unit cost cited in MISSION.md, plus device cost and a margin for pre-flash/enrollment labor | Whether customers prefer buying a bundle vs. buying a bare U2F/HSM + self-flashing (a real substitution test, not a survey answer) |
 | O3 Support/SLA | Percentage-of-deployment-value or flat recurring tier by response-time SLA | Whether a prospect will sign before a P1 incident happens, not just after one |
 | O4 Managed CI | Recurring, scaled by build volume/concurrency | Whether customers trust a hosted signing pipeline enough to route real releases through it in the pilot, not just test builds |
 | O5 Consulting | Time-and-materials or fixed-scope project fee | Whether a scoped SOW actually closes, vs. staying a "let's talk" conversation indefinitely |

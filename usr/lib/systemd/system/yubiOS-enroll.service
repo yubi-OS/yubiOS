@@ -1,9 +1,9 @@
 # yubiOS first-boot enrollment wizard
-# Waits for a YubiKey to be detected, then prompts the user to enroll.
+# Waits for a U2F/HSM to be detected, then prompts the user to enroll.
 # Runs once (ConditionFirstBoot=yes) and marks itself complete.
 
 [Unit]
-Description=yubiOS YubiKey Enrollment Wizard (First Boot)
+Description=yubiOS U2F/HSM Enrollment Wizard (First Boot)
 After=local-fs.target systemd-logind.service systemd-user-sessions.service network.target sshd.service
 Wants=pcscd.service getty-pre.target
 After=pcscd.service

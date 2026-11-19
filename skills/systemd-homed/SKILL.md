@@ -1,6 +1,6 @@
 ---
 name: systemd-homed
-description: "Creates, manages, and migrates systemd-homed home directories for yubiOS. Use when creating LUKS2-encrypted homes, enrolling YubiKey FIDO2 or PKCS#11/PIV authentication, configuring PAM for homed users, managing home migration between machines, or wiring suspend/resume key protection. Triggers on: systemd-homed, homectl, home directory encryption, FIDO2 home, YubiKey home unlock, pam_systemd_home, portable home, LUKS2 home."
+description: "Creates, manages, and migrates systemd-homed home directories for yubiOS. Use when creating LUKS2-encrypted homes, enrolling U2F/HSM FIDO2 or PKCS#11/PIV authentication, configuring PAM for homed users, managing home migration between machines, or wiring suspend/resume key protection. Triggers on: systemd-homed, homectl, home directory encryption, FIDO2 home, U2F/HSM home unlock, pam_systemd_home, portable home, LUKS2 home."
 ---
 
 # systemd-homed
@@ -11,8 +11,8 @@ systemd-homed manages portable, self-contained home directories — each home
 embeds the user's full JSON record in its own LUKS2 volume. Account and home
 directory are the same object. No `/etc/passwd`; users synthesized via NSS.
 
-**yubiOS use case**: LUKS2 home + YubiKey FIDO2 unlock. Key material lives
-on the YubiKey; the host stores only a random salt. No YubiKey → no login.
+**yubiOS use case**: LUKS2 home + U2F/HSM FIDO2 unlock. Key material lives
+on the U2F/HSM; the host stores only a random salt. No U2F/HSM → no login.
 
 ---
 
@@ -49,7 +49,7 @@ homectl update jenny --recovery-key=
 
 ---
 
-## PKCS#11 / PIV (YubiKey slot 9c)
+## PKCS#11 / PIV (U2F/HSM slot 9c)
 
 ```bash
 # List available PIV tokens
@@ -64,7 +64,7 @@ homectl create jenny \
 ```
 
 PIV advantage: token identity visible before auth — can determine login
-username from plugged-in YubiKey. FIDO2 cannot do this.
+username from plugged-in U2F/HSM. FIDO2 cannot do this.
 
 ---
 
@@ -224,7 +224,7 @@ Concrete implications for systemd homed: any change to the skill should be revie
 
 This skill — **LUKS2 home, FIDO2 unlock, PKCS#11, portable home** — sits in a domain that strengthens the yubiOS trust chain from LUKS2 home, FIDO2 unlock, PKCS#11, portable home. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new); this skill's fit coordinate was (u=0.651, v=0.002), PC1+PC2 = 0.4615, holdout R² = +0.2244.
 
-For systemd-homed, the trust chain primitive applies as follows: this skill is the home-directory trust-chain anchor; YubiKey FIDO2 unlock binds the user identity to the home. The trust chain for yubiOS runs YubiKey → fTPM (per `yubikey-operations` and `ftpm-optee-tpm`) → UKI PCR 11 → dm-verity root hash (per `dm-verity-and-integrity`) → bootc image digest (per `bootc-images`) → SLSA L3 attestation (per `slsa-provenance` + `sigstore-rekor-v2`); this skill is one contributor in that chain.
+For systemd-homed, the trust chain primitive applies as follows: this skill is the home-directory trust-chain anchor; U2F/HSM FIDO2 unlock binds the user identity to the home. The trust chain for yubiOS runs U2F/HSM → fTPM (per `yubikey-operations` and `ftpm-optee-tpm`) → UKI PCR 11 → dm-verity root hash (per `dm-verity-and-integrity`) → bootc image digest (per `bootc-images`) → SLSA L3 attestation (per `slsa-provenance` + `sigstore-rekor-v2`); this skill is one contributor in that chain.
 
 Concrete implications for systemd-homed: any change should be reviewed for impact on trust-chain integrity; gaps in the trust chain attributable to this skill are tracked in the cycle-5 run log at `refs/curve-guided-rsi-v2-cycle5-deep-research-2026-08-04.md`.
 
@@ -269,7 +269,7 @@ The audit-trail entry: 2026-08-06 cycle 7 RSI — no movable primitive gap to cl
 
 - cycle 5 RSI**: closed `segmentation` primitive gap (corpus-wide count 22→23/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
 
-**In-repo touchpoints** — sections this skill owns or extends: Overview, Create a LUKS2 Home with FIDO2, Enroll FIDO2 on an Existing Home, PKCS#11 / PIV (YubiKey slot 9c).
+**In-repo touchpoints** — sections this skill owns or extends: Overview, Create a LUKS2 Home with FIDO2, Enroll FIDO2 on an Existing Home, PKCS#11 / PIV (U2F/HSM slot 9c).
 
 **Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
 ## Guidelines

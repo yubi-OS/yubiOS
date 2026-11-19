@@ -60,7 +60,7 @@ homectl create jenny \
   --fido2-with-client-pin=yes \
   --fido2-with-user-presence=yes
 
-# PKCS#11 / YubiKey PIV
+# PKCS#11 / U2F/HSM PIV
 homectl create jenny \
   --storage=luks \
   --pkcs11-token-uri=auto
@@ -148,13 +148,13 @@ homectl activate jenny
 
 ---
 
-## Authentication: FIDO2 with YubiKey (yubiOS primary path)
+## Authentication: FIDO2 with U2F/HSM (yubiOS primary path)
 
-FIDO2 uses the **hmac-secret** extension. YubiKey generates an HMAC of a
+FIDO2 uses the **hmac-secret** extension. U2F/HSM generates an HMAC of a
 random salt stored in the user record — the result unlocks the LUKS volume.
 
 ```bash
-# Enroll FIDO2 (requires YubiKey plugged in)
+# Enroll FIDO2 (requires U2F/HSM plugged in)
 homectl create jenny \
   --fido2-device=auto \              # auto-detect /dev/hidraw*
   --fido2-with-client-pin=yes \      # require FIDO2 PIN at every login
@@ -190,7 +190,7 @@ homectl create jenny \
 ```
 
 PIV advantage: token identity visible before auth → can determine username
-from plugged-in YubiKey. FIDO2 doesn't allow this.
+from plugged-in U2F/HSM. FIDO2 doesn't allow this.
 
 ---
 
@@ -291,7 +291,7 @@ All PEM format. Records are signed with Ed25519.
 ## v261 Updates (2026-07-23 refresh)
 
 - **New**: `homectl --birth-date=YYYY-MM-DD` sets the JSON user record's new optional `birthDate` field (ISO 8601 calendar date, earliest representable year 1900; empty string resets/unsets). Added in v261. Cosmetic for yubiOS today, no action needed.
-- **Still open, no movement**: systemd issue **#28893** ("Allow multiple FIDO2 devices for a given home directory w/ systemd-homed") remains open since 2023 with no merged fix or maintainer commitment as of this refresh. **This is the concrete upstream limitation behind yubiOS's "only one FIDO2 device per home at a time" note below** — still true, still worth documenting as a known constraint for yubiOS's backup-YubiKey enrollment story (yubiOS's own `yubiOS-enroll-backup` script works around this at the LUKS2/cryptenroll layer, not at the homed layer — verify that workaround still applies if homed-based homes are ever adopted for interactive users).
+- **Still open, no movement**: systemd issue **#28893** ("Allow multiple FIDO2 devices for a given home directory w/ systemd-homed") remains open since 2023 with no merged fix or maintainer commitment as of this refresh. **This is the concrete upstream limitation behind yubiOS's "only one FIDO2 device per home at a time" note below** — still true, still worth documenting as a known constraint for yubiOS's backup-U2F/HSM enrollment story (yubiOS's own `yubiOS-enroll-backup` script works around this at the LUKS2/cryptenroll layer, not at the homed layer — verify that workaround still applies if homed-based homes are ever adopted for interactive users).
 
 Sources: https://github.com/systemd/systemd/releases/tag/v261, https://github.com/systemd/systemd/issues/28893, https://man7.org/linux/man-pages/man1/homectl.1.html, https://systemd.io/USER_RECORD/
 
