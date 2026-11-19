@@ -41,7 +41,7 @@ Per the standing rule in `yubi-OS/assets/OS first-looks/README.md` (*"Any produc
 - **Fork repository:** `yubi-OS/gnome-control-center` (forked from `GNOME/gnome-control-center`).
 - **Default branch (`main`):** `579424e8e19c73548f91d66519413f9a9ca57c6a` (synced 1:1 with upstream `main`, `0 ahead, 0 behind`; all 464 unowned upstream branches purged).
 - **Upstream release anchor (`51.1`):** `348dd99d9f3a51a39fe9c60c967a6aabaeb34813` (matches Fedora 45's `gnome-control-center-0:51.1-1.fc45`).
-- **Integration branch (`yubios`):** `65ef58fb370408fe7f6c5459c58f0f77eea3f2ba` (`+4` commits ahead of `main`, merging `51.1` so both `main` and `51.1` are ancestors for `fetch-released-tag-ref.yml` and `ci_fork-drift-detect.yml`).
+- **Integration branch (`yubios`):** `20beaf3169dedf43b23222a1f1f4068bdba1e553` (`+4` commits ahead of `main`, merging `51.1` so both `main` and `51.1` are ancestors for `fetch-released-tag-ref.yml` and `ci_fork-drift-detect.yml`).
 - **Hermetic subprojects:** `subprojects/gvc` (`GNOME/libgnome-volume-control@d2442f455844e5292cb4a74ffc66ecc8d7595a9f`) and `subprojects/libgxdp` (`GNOME/libgxdp@df896e3412b749947bc6f62a91a1aac8e6b6d19b`) are vendored directly in the `yubios` tree so `rpmbuild` runs inside the container without external GitLab subproject clones.
 
 ### 3.2 Multi-Arch Fedora 45 RPM Build (`ci_fork_gnome-control-center.yml`)

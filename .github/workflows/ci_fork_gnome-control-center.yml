@@ -106,7 +106,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: yubi-OS/gnome-control-center
-          ref: 65ef58fb370408fe7f6c5459c58f0f77eea3f2ba # yubios branch (51.1 descendant); see PINNED.md
+          ref: 20beaf3169dedf43b23222a1f1f4068bdba1e553 # yubios branch (51.1 descendant); see PINNED.md
 
       - name: Install podman on runner
         run: |
