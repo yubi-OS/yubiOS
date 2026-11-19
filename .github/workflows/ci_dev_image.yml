@@ -29,6 +29,11 @@ on:
         type: boolean
         required: true
         description: Push dev/test image to Docker Hub (multi-arch manifest)?
+      merge_only_sha:
+        default: ''
+        type: string
+        required: false
+        description: 'Optional: merge existing per-arch dev-<sha>-amd64/arm64 images without rebuilding'
       ci_callback:
         description: 'Internal: call back to ci.yml when this workflow finishes.'
         required: false
@@ -89,6 +94,7 @@ env:
 
 jobs:
   build:
+    if: inputs.merge_only_sha == ''
     strategy:
       fail-fast: false
       matrix:
@@ -126,10 +132,17 @@ jobs:
 
       - name: Install docker CLI + buildx (${{ matrix.arch }})
         run: |
-          apt-get update -qq
-          apt-get install -y -qq --no-install-recommends \
+          apt-get update -qq || true
+          if ! apt-get install -y -qq --no-install-recommends \
             git curl iproute2 iptables jq nftables passwd procps python3 util-linux \
-            uidmap slirp4netns fuse-overlayfs
+            uidmap slirp4netns fuse-overlayfs; then
+            rm -f /etc/apt/sources.list.d/* /etc/apt/sources.list
+            printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list
+            apt-get update -qq
+            apt-get install -y -qq --no-install-recommends \
+              git curl iproute2 iptables jq nftables passwd procps python3 util-linux \
+              uidmap slirp4netns fuse-overlayfs
+          fi
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.3.tgz"
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.${{ matrix.buildx_arch }}"
@@ -259,7 +272,7 @@ jobs:
 
   merge-manifest:
     needs: build
-    if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
+    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.Docker_push == true && (needs.build.result == 'success' || inputs.merge_only_sha != '') }}
     runs-on: ubuntu-26.04
     permissions:
       contents: read
@@ -281,10 +294,17 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
       - name: Install docker CLI + buildx
         run: |
-          apt-get update -qq
-          apt-get install -y -qq --no-install-recommends \
+          apt-get update -qq || true
+          if ! apt-get install -y -qq --no-install-recommends \
             git curl iproute2 iptables jq nftables passwd procps util-linux \
-            uidmap slirp4netns fuse-overlayfs
+            uidmap slirp4netns fuse-overlayfs; then
+            rm -f /etc/apt/sources.list.d/* /etc/apt/sources.list
+            printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list
+            apt-get update -qq
+            apt-get install -y -qq --no-install-recommends \
+              git curl iproute2 iptables jq nftables passwd procps util-linux \
+              uidmap slirp4netns fuse-overlayfs
+          fi
           wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-29.9.3.tgz"
           wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.linux-amd64"
@@ -375,13 +395,19 @@ jobs:
         # d2646452 dispatched `dev-d2646452` (short) but the workflow only
         # pushed `dev-d264645271cdc...` (full) -- "manifest unknown".
         run: |
+          SRC_SHA="${{ inputs.merge_only_sha != '' && inputs.merge_only_sha || github.sha }}"
           DEV_SHORT_SHA_TAG="0mniteck/yubios:dev-${GITHUB_SHA:0:8}"
+          EXTRA_SRC_TAGS=()
+          if [ "$SRC_SHA" != "$GITHUB_SHA" ]; then
+            EXTRA_SRC_TAGS=(-t "0mniteck/yubios:dev-${SRC_SHA}" -t "0mniteck/yubios:dev-${SRC_SHA:0:8}")
+          fi
           docker -H unix:///run/docker-rootless/docker.sock buildx imagetools create \
             -t "$DEV_SHA_TAG" \
             -t "$DEV_FLOATING_TAG" \
             -t "$DEV_SHORT_SHA_TAG" \
-            "0mniteck/yubios:dev-${{ github.sha }}-amd64" \
-            "0mniteck/yubios:dev-${{ github.sha }}-arm64"
+            "${EXTRA_SRC_TAGS[@]}" \
+            "0mniteck/yubios:dev-${SRC_SHA}-amd64" \
+            "0mniteck/yubios:dev-${SRC_SHA}-arm64"
 
       - name: Verify manifest list
         run: docker -H unix:///run/docker-rootless/docker.sock buildx imagetools inspect "$DEV_SHA_TAG"
