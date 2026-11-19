@@ -88,52 +88,22 @@ env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
 
 jobs:
-  stage-sb-keys:
-    name: Stage initial Secure Boot keys on rock1 (YubiKey or swu2f fallback)
-    runs-on: [self-hosted, Linux, ARM64, KVM]
-    steps:
-      - name: Reclaim workspace before checkout
-        run: sudo chown -R "$(id -u):$(id -g)" "$GITHUB_WORKSPACE" || true
-
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
-
-      - name: Resolve reproducible build environment
-        env:
-          ARCH: arm64
-        run: scripts/lib/reproducible-build.sh . "$GITHUB_SHA" "$ARCH" "$GITHUB_ENV"
-
-      - name: Stage initial Secure Boot keys (physical YubiKey on rock1 or swu2f fallback)
-        run: |
-          chmod +x usr/lib/yubiOS/uki/stage-ci-sb-keys.sh
-          sudo env SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh .
-          sudo chown -R "$(id -u):$(id -g)" usr/lib/yubiOS/secureboot repro-evidence
-
-      - name: Upload staged Secure Boot keys artifact
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
-        with:
-          name: initial-dev-sb-keys-${{ github.sha }}
-          path: usr/lib/yubiOS/secureboot/
-          if-no-files-found: error
-          retention-days: 30
-
   build:
-    needs: [stage-sb-keys]
     strategy:
       fail-fast: false
       matrix:
         include:
           - arch: amd64
-            runner: ubuntu-26.04
+            runner: [ubuntu-26.04]
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
-            runner: ubuntu-26.04-arm
+            runner: [self-hosted, Linux, ARM64, KVM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
     container:
-      options: --privileged
+      options: --privileged --pid=host --ipc=host --security-opt label=type:unconfined_t -v /dev:/dev
       volumes:
         - /mnt:/mnt
       credentials:
@@ -252,23 +222,12 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
         run: echo "${{ secrets.DOCKER }}" | docker -H unix:///run/docker-rootless/docker.sock login -u 0mniteck42 --password-stdin
 
-      - name: Download staged Secure Boot keys from rock1
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
-        with:
-          name: initial-dev-sb-keys-${{ github.sha }}
-          path: usr/lib/yubiOS/secureboot
-
-      - name: Normalize staged Secure Boot key timestamps and copy to repro-evidence
+      - name: Stage initial Secure Boot keys (physical YubiKey on rock1 or swu2f fallback)
         run: |
-          mkdir -p repro-evidence/secureboot repro-evidence/EFI/yubiOS/secureboot repro-evidence/EFI/yubiOS/keys
-          for fn in usr/lib/yubiOS/secureboot/*; do
-            chmod 0644 "$fn"
-            touch -h -d "@${SOURCE_DATE_EPOCH}" "$fn"
-            cp -p "$fn" repro-evidence/secureboot/
-            cp -p "$fn" repro-evidence/EFI/yubiOS/secureboot/
-            cp -p "$fn" repro-evidence/EFI/yubiOS/keys/
-          done
-          touch -h -d "@${SOURCE_DATE_EPOCH}" usr/lib/yubiOS/secureboot
+          apt-get install -y -qq --no-install-recommends efitools openssl pcscd yubikey-manager libykcs11-1 fido2-tools softhsm2 2>/dev/null || \
+            apt-get install -y -qq --no-install-recommends efitools openssl
+          chmod +x usr/lib/yubiOS/uki/stage-ci-sb-keys.sh
+          SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh .
 
       - name: Build and verify dev/test image (${{ matrix.arch }})
         env:
@@ -286,7 +245,12 @@ jobs:
         if: matrix.arch == 'arm64'
         env:
           REPRO_REPORT: repro-evidence/dev-arm64.json
-        run: scripts/verify-reproducible-images.sh dev
+        run: |
+          if [ -d /mnt/extended ]; then
+            mkdir -p /mnt/extended/tmp
+            export TMPDIR=/mnt/extended/tmp
+          fi
+          scripts/verify-reproducible-images.sh dev
 
       - name: Retain dev reproducibility evidence and initial Secure Boot keys
         if: matrix.arch == 'arm64'
