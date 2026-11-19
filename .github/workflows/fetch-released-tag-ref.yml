@@ -94,7 +94,452 @@ jobs:
             'arm-trusted-firmware|ARM-software/arm-trusted-firmware|^v[0-9]+\.[0-9]+(\.[0-9]+)?$'
             'bcvk|bootc-dev/bcvk|^v[0-9]+\.[0-9]+\.[0-9]+$'
             'edk2|tianocore/edk2|^edk2-stable202602(\.[0-9]+)?$'
-            'edk2-platforms|tianocore/edk2-platforms|^[0-9]{6,8}-before-platform-removals$'
+            'edk2-platforms|tianocore/edk2-platforms|^[0-9]{6,8}-before-platform-removals            'mkosi|systemd/mkosi|^v[0-9]+(\.[0-9]+){0,2}$'
+            'optee_ftpm|OP-TEE/optee_ftpm|^[0-9]+\.[0-9]+\.[0-9]+$'
+            'optee_os|OP-TEE/optee_os|^[0-9]+\.[0-9]+\.[0-9]+$'
+            'u-boot|u-boot/u-boot|^v[0-9]{4}\.[0-9]{2}(\.[0-9]+)?$'
+          )
+
+          resolve_tag_commit() {
+            repo_url=$1
+            tag=$2
+            refs=$(git ls-remote --tags "$repo_url" \
+              "refs/tags/${tag}" "refs/tags/${tag}^{}")
+            commit=$(printf '%s\n' "$refs" | awk '$2 ~ /\^\{\}$/ {print $1; exit}')
+            if [ -z "$commit" ]; then
+              commit=$(printf '%s\n' "$refs" | awk 'NR == 1 {print $1}')
+            fi
+            printf '%s\n' "$commit"
+          }
+
+          pins_tsv="${RUNNER_TEMP}/yubios-release-pins.tsv"
+          : > "$pins_tsv"
+
+          for spec in "${fork_specs[@]}"; do
+            IFS='|' read -r fork upstream tag_pattern <<<"$spec"
+            upstream_url="https://github.com/${upstream}.git"
+            fork_full="yubi-OS/${fork}"
+            fork_url="https://github.com/${fork_full}.git"
+
+            tag=$(git ls-remote --tags --refs "$upstream_url" \
+              | awk '{sub("refs/tags/", "", $2); print $2}' \
+              | grep -E "$tag_pattern" \
+              | LC_ALL=C sort -V \
+              | tail -n 1 || true)
+            if [ -z "$tag" ]; then
+              echo "::error::No stable upstream tag matched ${upstream} (${tag_pattern})."
+              exit 1
+            fi
+
+            commit=$(resolve_tag_commit "$upstream_url" "$tag")
+            if ! [[ "$commit" =~ ^[0-9a-f]{40}$ ]]; then
+              echo "::error::Could not peel ${upstream}@${tag} to a commit SHA."
+              exit 1
+            fi
+
+            read -r old_release approved_commit < <(python3 - "$fork_full" <<'PY'
+          import pathlib
+          import sys
+
+          fork = sys.argv[1]
+          for line in pathlib.Path('PINNED.md').read_text().splitlines():
+              if not line.startswith(f'| `{fork}` |'):
+                  continue
+              cells = [cell.strip().strip('`') for cell in line.split('|')[1:-1]]
+              print(cells[3], cells[4])
+              break
+          else:
+              raise SystemExit(f'Could not find the PINNED.md fork row for {fork}')
+          PY
+            )
+            if ! [[ "$old_release" =~ ^[0-9a-f]{40}$ && "$approved_commit" =~ ^[0-9a-f]{40}$ ]]; then
+              echo "::error::Invalid PINNED.md commits for ${fork_full}."
+              exit 1
+            fi
+
+            # Fetch by exact object ID from the fork, not from upstream. This
+            # proves the commit and its tree survived fork recreation even when
+            # GitHub did not copy the upstream tag ref itself.
+            probe=$(mktemp -d "${RUNNER_TEMP}/fork-ref-${fork}.XXXXXX")
+            git -C "$probe" init -q
+            git -C "$probe" fetch -q --depth=1 "$fork_url" "$commit"
+            test "$(git -C "$probe" rev-parse FETCH_HEAD)" = "$commit"
+            git -C "$probe" cat-file -e "${commit}^{tree}"
+
+            approved_probe=$(mktemp -d "${RUNNER_TEMP}/approved-ref-${fork}.XXXXXX")
+            git -C "$approved_probe" init -q
+            git -C "$approved_probe" fetch -q --depth=1 "$fork_url" "$approved_commit"
+            test "$(git -C "$approved_probe" rev-parse FETCH_HEAD)" = "$approved_commit"
+            git -C "$approved_probe" cat-file -e "${approved_commit}^{tree}"
+
+            if [ "$approved_commit" != "$old_release" ]; then
+              compare_status=$(curl -fsSL \
+                -H "Authorization: Bearer ${GH_TOKEN}" \
+                -H 'Accept: application/vnd.github+json' \
+                -H 'X-GitHub-Api-Version: 2022-11-28' \
+                "https://api.github.com/repos/${fork_full}/compare/${commit}...${approved_commit}" \
+                | jq -r '.status')
+              if [ "$compare_status" != 'ahead' ] && [ "$compare_status" != 'identical' ]; then
+                echo "::error::${fork_full}@${approved_commit} does not contain current release ${tag}@${commit} (status: ${compare_status}). Rebase the yubiOS extension before refreshing this pin."
+                exit 1
+              fi
+            fi
+
+            fork_tag_commit=$(resolve_tag_commit "$fork_url" "$tag")
+            if [ -n "$fork_tag_commit" ] && [ "$fork_tag_commit" != "$commit" ]; then
+              echo "::error::${fork_full}@${tag} (${fork_tag_commit}) differs from upstream (${commit})."
+              exit 1
+            fi
+
+            printf '%s\t%s\t%s\t%s\n' "$fork_full" "$upstream" "$tag" "$commit" >> "$pins_tsv"
+            echo "${fork_full}: ${tag} -> ${commit}; approved source ${approved_commit} (fork objects verified)"
+          done
+
+          python3 - "$pins_tsv" <<'PY'
+          import datetime
+          import pathlib
+          import re
+          import sys
+
+          pins_tsv = pathlib.Path(sys.argv[1])
+          rows = [line.split('\t') for line in pins_tsv.read_text().splitlines()]
+          pinned = pathlib.Path('PINNED.md')
+          pinned_text = pinned.read_text()
+          replacements = {}
+          changed = False
+
+          for fork, upstream, tag, new_commit in rows:
+              row_re = re.compile(
+                  rf'^(\| `{re.escape(fork)}` \| `{re.escape(upstream)}` \| `)'
+                  rf'([^`]+)(` \| `)([0-9a-f]{{40}})(` \| `)'
+                  rf'([0-9a-f]{{40}})(` \| .*)$',
+                  re.MULTILINE,
+              )
+              match = row_re.search(pinned_text)
+              if not match:
+                  raise SystemExit(f'Could not find the PINNED.md fork row for {fork}')
+              old_release = match.group(4)
+              old_source = match.group(6)
+              new_source = new_commit if old_source == old_release else old_source
+              if old_source == old_release:
+                  replacements[old_source] = new_source
+              if match.group(2) != tag or old_release != new_commit or old_source != new_source:
+                  changed = True
+              pinned_text = row_re.sub(
+                  lambda m: (
+                      f'{m.group(1)}{tag}{m.group(3)}{new_commit}'
+                      f'{m.group(5)}{new_source}{m.group(7)}'
+                  ),
+                  pinned_text,
+                  count=1,
+              )
+
+          if changed:
+              today = datetime.date.today().isoformat()
+              pinned_text = re.sub(
+                  r'_Last reviewed: \d{4}-\d{2}-\d{2}[^_]*_',
+                  f'_Last reviewed: {today} during the upstream release-ref audit._',
+                  pinned_text,
+                  count=1,
+              )
+          pinned.write_text(pinned_text)
+
+          for path in pathlib.Path('.').rglob('*'):
+              if not path.is_file() or '.git' in path.parts or path == pinned:
+                  continue
+              try:
+                  data = path.read_text()
+              except UnicodeDecodeError:
+                  continue
+              updated = data
+              for old, new in replacements.items():
+                  updated = updated.replace(old, new)
+              if updated != data:
+                  path.write_text(updated)
+                  print(f'updated {path}')
+          PY
+
+          if git diff --quiet; then
+            echo 'PINNED.md and all yubi-OS fork refs are already current.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add -A
+            git commit -m 'Refresh pinned yubi-OS release refs'
+            git push
+          fi
+
+  ci-callback:
+    name: Callback to ci.yml orchestrator
+    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
+    needs: [fetch-release-refs]
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Report current state to ci.yml
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW || github.token }}
+          REPO: ${{ github.repository }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          REF: ${{ inputs.ci_chain_ref != '' && inputs.ci_chain_ref || github.ref_name }}
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          CI_REASON: ${{ inputs.ci_reason }}
+          CI_DOCKER_PUSH: ${{ inputs.ci_Docker_push }}
+          CI_DEV_DOCKER_PUSH: ${{ inputs.ci_Dev_Docker_push }}
+          CI_FIRMWARE_DOCKER_PUSH: ${{ inputs.ci_Firmware_Docker_push }}
+          CI_INSTALLER_DOCKER_PUSH: ${{ inputs.ci_Installer_Docker_push }}
+          CI_FORK_RUN: ${{ inputs.ci_fork_run }}
+          CI_TEST_RUN: ${{ inputs.ci_test_run }}
+          CI_VM_IMAGE: ${{ inputs.ci_vm_image }}
+        run: |
+          set -euo pipefail
+          conclusion=$(jq -r 'if any(to_entries[]; .value.result == "failure" or .value.result == "cancelled") then "failure" else "success" end' <<<"$NEEDS_JSON")
+          payload=$(jq -n \
+            --arg ref "$REF" \
+            --arg state "$WORKFLOW_NAME" \
+            --arg completed_conclusion "$conclusion" \
+            --arg reason "$CI_REASON" \
+            --arg Docker_push "$CI_DOCKER_PUSH" \
+            --arg Dev_Docker_push "$CI_DEV_DOCKER_PUSH" \
+            --arg Firmware_Docker_push "$CI_FIRMWARE_DOCKER_PUSH" \
+            --arg Installer_Docker_push "$CI_INSTALLER_DOCKER_PUSH" \
+            --arg ci_fork_run "$CI_FORK_RUN" \
+            --arg ci_test_run "$CI_TEST_RUN" \
+            --arg vm_image "$CI_VM_IMAGE" \
+            '{ref: $ref, inputs: {state: $state, completed_conclusion: $completed_conclusion, reason: $reason, target_ref: $ref, Docker_push: $Docker_push, Dev_Docker_push: $Dev_Docker_push, Firmware_Docker_push: $Firmware_Docker_push, Installer_Docker_push: $Installer_Docker_push, ci_fork_run: $ci_fork_run, ci_test_run: $ci_test_run, vm_image: $vm_image}}')
+          curl -fsS -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${REPO}/actions/workflows/ci.yml/dispatches" \
+            -d "$payload"
+          echo "Reported ${WORKFLOW_NAME} as ${conclusion} to ci.yml."
+
+            'gnome-control-center|GNOME/gnome-control-center|^51\.[0-9]+(\.[0-9]+)?            'mkosi|systemd/mkosi|^v[0-9]+(\.[0-9]+){0,2}$'
+            'optee_ftpm|OP-TEE/optee_ftpm|^[0-9]+\.[0-9]+\.[0-9]+$'
+            'optee_os|OP-TEE/optee_os|^[0-9]+\.[0-9]+\.[0-9]+$'
+            'u-boot|u-boot/u-boot|^v[0-9]{4}\.[0-9]{2}(\.[0-9]+)?$'
+          )
+
+          resolve_tag_commit() {
+            repo_url=$1
+            tag=$2
+            refs=$(git ls-remote --tags "$repo_url" \
+              "refs/tags/${tag}" "refs/tags/${tag}^{}")
+            commit=$(printf '%s\n' "$refs" | awk '$2 ~ /\^\{\}$/ {print $1; exit}')
+            if [ -z "$commit" ]; then
+              commit=$(printf '%s\n' "$refs" | awk 'NR == 1 {print $1}')
+            fi
+            printf '%s\n' "$commit"
+          }
+
+          pins_tsv="${RUNNER_TEMP}/yubios-release-pins.tsv"
+          : > "$pins_tsv"
+
+          for spec in "${fork_specs[@]}"; do
+            IFS='|' read -r fork upstream tag_pattern <<<"$spec"
+            upstream_url="https://github.com/${upstream}.git"
+            fork_full="yubi-OS/${fork}"
+            fork_url="https://github.com/${fork_full}.git"
+
+            tag=$(git ls-remote --tags --refs "$upstream_url" \
+              | awk '{sub("refs/tags/", "", $2); print $2}' \
+              | grep -E "$tag_pattern" \
+              | LC_ALL=C sort -V \
+              | tail -n 1 || true)
+            if [ -z "$tag" ]; then
+              echo "::error::No stable upstream tag matched ${upstream} (${tag_pattern})."
+              exit 1
+            fi
+
+            commit=$(resolve_tag_commit "$upstream_url" "$tag")
+            if ! [[ "$commit" =~ ^[0-9a-f]{40}$ ]]; then
+              echo "::error::Could not peel ${upstream}@${tag} to a commit SHA."
+              exit 1
+            fi
+
+            read -r old_release approved_commit < <(python3 - "$fork_full" <<'PY'
+          import pathlib
+          import sys
+
+          fork = sys.argv[1]
+          for line in pathlib.Path('PINNED.md').read_text().splitlines():
+              if not line.startswith(f'| `{fork}` |'):
+                  continue
+              cells = [cell.strip().strip('`') for cell in line.split('|')[1:-1]]
+              print(cells[3], cells[4])
+              break
+          else:
+              raise SystemExit(f'Could not find the PINNED.md fork row for {fork}')
+          PY
+            )
+            if ! [[ "$old_release" =~ ^[0-9a-f]{40}$ && "$approved_commit" =~ ^[0-9a-f]{40}$ ]]; then
+              echo "::error::Invalid PINNED.md commits for ${fork_full}."
+              exit 1
+            fi
+
+            # Fetch by exact object ID from the fork, not from upstream. This
+            # proves the commit and its tree survived fork recreation even when
+            # GitHub did not copy the upstream tag ref itself.
+            probe=$(mktemp -d "${RUNNER_TEMP}/fork-ref-${fork}.XXXXXX")
+            git -C "$probe" init -q
+            git -C "$probe" fetch -q --depth=1 "$fork_url" "$commit"
+            test "$(git -C "$probe" rev-parse FETCH_HEAD)" = "$commit"
+            git -C "$probe" cat-file -e "${commit}^{tree}"
+
+            approved_probe=$(mktemp -d "${RUNNER_TEMP}/approved-ref-${fork}.XXXXXX")
+            git -C "$approved_probe" init -q
+            git -C "$approved_probe" fetch -q --depth=1 "$fork_url" "$approved_commit"
+            test "$(git -C "$approved_probe" rev-parse FETCH_HEAD)" = "$approved_commit"
+            git -C "$approved_probe" cat-file -e "${approved_commit}^{tree}"
+
+            if [ "$approved_commit" != "$old_release" ]; then
+              compare_status=$(curl -fsSL \
+                -H "Authorization: Bearer ${GH_TOKEN}" \
+                -H 'Accept: application/vnd.github+json' \
+                -H 'X-GitHub-Api-Version: 2022-11-28' \
+                "https://api.github.com/repos/${fork_full}/compare/${commit}...${approved_commit}" \
+                | jq -r '.status')
+              if [ "$compare_status" != 'ahead' ] && [ "$compare_status" != 'identical' ]; then
+                echo "::error::${fork_full}@${approved_commit} does not contain current release ${tag}@${commit} (status: ${compare_status}). Rebase the yubiOS extension before refreshing this pin."
+                exit 1
+              fi
+            fi
+
+            fork_tag_commit=$(resolve_tag_commit "$fork_url" "$tag")
+            if [ -n "$fork_tag_commit" ] && [ "$fork_tag_commit" != "$commit" ]; then
+              echo "::error::${fork_full}@${tag} (${fork_tag_commit}) differs from upstream (${commit})."
+              exit 1
+            fi
+
+            printf '%s\t%s\t%s\t%s\n' "$fork_full" "$upstream" "$tag" "$commit" >> "$pins_tsv"
+            echo "${fork_full}: ${tag} -> ${commit}; approved source ${approved_commit} (fork objects verified)"
+          done
+
+          python3 - "$pins_tsv" <<'PY'
+          import datetime
+          import pathlib
+          import re
+          import sys
+
+          pins_tsv = pathlib.Path(sys.argv[1])
+          rows = [line.split('\t') for line in pins_tsv.read_text().splitlines()]
+          pinned = pathlib.Path('PINNED.md')
+          pinned_text = pinned.read_text()
+          replacements = {}
+          changed = False
+
+          for fork, upstream, tag, new_commit in rows:
+              row_re = re.compile(
+                  rf'^(\| `{re.escape(fork)}` \| `{re.escape(upstream)}` \| `)'
+                  rf'([^`]+)(` \| `)([0-9a-f]{{40}})(` \| `)'
+                  rf'([0-9a-f]{{40}})(` \| .*)$',
+                  re.MULTILINE,
+              )
+              match = row_re.search(pinned_text)
+              if not match:
+                  raise SystemExit(f'Could not find the PINNED.md fork row for {fork}')
+              old_release = match.group(4)
+              old_source = match.group(6)
+              new_source = new_commit if old_source == old_release else old_source
+              if old_source == old_release:
+                  replacements[old_source] = new_source
+              if match.group(2) != tag or old_release != new_commit or old_source != new_source:
+                  changed = True
+              pinned_text = row_re.sub(
+                  lambda m: (
+                      f'{m.group(1)}{tag}{m.group(3)}{new_commit}'
+                      f'{m.group(5)}{new_source}{m.group(7)}'
+                  ),
+                  pinned_text,
+                  count=1,
+              )
+
+          if changed:
+              today = datetime.date.today().isoformat()
+              pinned_text = re.sub(
+                  r'_Last reviewed: \d{4}-\d{2}-\d{2}[^_]*_',
+                  f'_Last reviewed: {today} during the upstream release-ref audit._',
+                  pinned_text,
+                  count=1,
+              )
+          pinned.write_text(pinned_text)
+
+          for path in pathlib.Path('.').rglob('*'):
+              if not path.is_file() or '.git' in path.parts or path == pinned:
+                  continue
+              try:
+                  data = path.read_text()
+              except UnicodeDecodeError:
+                  continue
+              updated = data
+              for old, new in replacements.items():
+                  updated = updated.replace(old, new)
+              if updated != data:
+                  path.write_text(updated)
+                  print(f'updated {path}')
+          PY
+
+          if git diff --quiet; then
+            echo 'PINNED.md and all yubi-OS fork refs are already current.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add -A
+            git commit -m 'Refresh pinned yubi-OS release refs'
+            git push
+          fi
+
+  ci-callback:
+    name: Callback to ci.yml orchestrator
+    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
+    needs: [fetch-release-refs]
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Report current state to ci.yml
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW || github.token }}
+          REPO: ${{ github.repository }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          REF: ${{ inputs.ci_chain_ref != '' && inputs.ci_chain_ref || github.ref_name }}
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          CI_REASON: ${{ inputs.ci_reason }}
+          CI_DOCKER_PUSH: ${{ inputs.ci_Docker_push }}
+          CI_DEV_DOCKER_PUSH: ${{ inputs.ci_Dev_Docker_push }}
+          CI_FIRMWARE_DOCKER_PUSH: ${{ inputs.ci_Firmware_Docker_push }}
+          CI_INSTALLER_DOCKER_PUSH: ${{ inputs.ci_Installer_Docker_push }}
+          CI_FORK_RUN: ${{ inputs.ci_fork_run }}
+          CI_TEST_RUN: ${{ inputs.ci_test_run }}
+          CI_VM_IMAGE: ${{ inputs.ci_vm_image }}
+        run: |
+          set -euo pipefail
+          conclusion=$(jq -r 'if any(to_entries[]; .value.result == "failure" or .value.result == "cancelled") then "failure" else "success" end' <<<"$NEEDS_JSON")
+          payload=$(jq -n \
+            --arg ref "$REF" \
+            --arg state "$WORKFLOW_NAME" \
+            --arg completed_conclusion "$conclusion" \
+            --arg reason "$CI_REASON" \
+            --arg Docker_push "$CI_DOCKER_PUSH" \
+            --arg Dev_Docker_push "$CI_DEV_DOCKER_PUSH" \
+            --arg Firmware_Docker_push "$CI_FIRMWARE_DOCKER_PUSH" \
+            --arg Installer_Docker_push "$CI_INSTALLER_DOCKER_PUSH" \
+            --arg ci_fork_run "$CI_FORK_RUN" \
+            --arg ci_test_run "$CI_TEST_RUN" \
+            --arg vm_image "$CI_VM_IMAGE" \
+            '{ref: $ref, inputs: {state: $state, completed_conclusion: $completed_conclusion, reason: $reason, target_ref: $ref, Docker_push: $Docker_push, Dev_Docker_push: $Dev_Docker_push, Firmware_Docker_push: $Firmware_Docker_push, Installer_Docker_push: $Installer_Docker_push, ci_fork_run: $ci_fork_run, ci_test_run: $ci_test_run, vm_image: $vm_image}}')
+          curl -fsS -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${REPO}/actions/workflows/ci.yml/dispatches" \
+            -d "$payload"
+          echo "Reported ${WORKFLOW_NAME} as ${conclusion} to ci.yml."
+
             'mkosi|systemd/mkosi|^v[0-9]+(\.[0-9]+){0,2}$'
             'optee_ftpm|OP-TEE/optee_ftpm|^[0-9]+\.[0-9]+\.[0-9]+$'
             'optee_os|OP-TEE/optee_os|^[0-9]+\.[0-9]+\.[0-9]+$'

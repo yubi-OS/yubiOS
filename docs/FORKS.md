@@ -14,7 +14,7 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 
 ---
 
-## Summary Matrix (All 15 Forks)
+## Summary Matrix (All 16 Forks)
 
 | Fork Repository | Upstream Parent | Default Branch (1:1 SHA) | Latest Upstream Release / Tag | `yubios` Branch SHA (`Ahead`) | Other Owned Branches |
 |---|---|---|---|---|---|
@@ -33,6 +33,7 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 | [`yubi-OS/u-boot`](https://github.com/yubi-OS/u-boot) | [`u-boot/u-boot`](https://github.com/u-boot/u-boot) | `main` (`6487c50b8a40`) | `v2026.10` (`5508406582f6`) | `0257c1dedf23` (`+27`) | `artifact/spi-bin` (`+10`), `feat/rk3566-open-tpl` (`+27`) |
 | [`yubi-OS/chromium`](https://github.com/yubi-OS/chromium) | [`chromium/chromium`](https://github.com/chromium/chromium) | `main` (`7c5cfc909b83`) | `—` | — _(pure 1:1 mirror)_ | — |
 | [`yubi-OS/agent-skills`](https://github.com/yubi-OS/agent-skills) | [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) | `main` (`39b723ceebf8`) | `0.6.16` (`39b723ceebf8`) | — _(pure 1:1 mirror)_ | — |
+| [`yubi-OS/gnome-control-center`](https://github.com/yubi-OS/gnome-control-center) | [`GNOME/gnome-control-center`](https://github.com/GNOME/gnome-control-center) | `main` (`579424e8e19c`) | `51.1` (`348dd99d9f3a`) | `f25a4d7da033` (`+4`) | `feat/ci` (`+4`), `release/v51.1-yubios.1` (`+4`) |
 
 ---
 
@@ -637,3 +638,24 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstream mirror._
 
 ---
+
+
+### 16. `yubi-OS/gnome-control-center`
+
+- **Upstream Parent:** [`GNOME/gnome-control-center`](https://github.com/GNOME/gnome-control-center)
+- **Default Branch (`main`):** `579424e8e19c73548f91d66519413f9a9ca57c6a` _(synced 1:1 with `GNOME/gnome-control-center:main`, `0 ahead, 0 behind`)_
+- **Latest Upstream Release / Tag:** `51.1` (`348dd99d9f3a51a39fe9c60c967a6aabaeb34813`)
+
+| Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
+|---|---|---|---|---|
+| `main` | `579424e8e19c73548f91d66519413f9a9ca57c6a` | `+0 / -0` | `0` | 1:1 mirror of upstream `GNOME/gnome-control-center:main`. |
+| `yubios` | `f25a4d7da0337679a0c79eebb947d4e572818158` | `+4 / -0` | `77` | Canonical yubiOS integration branch for GNOME Settings: anchors upstream `51.1`, vendors pinned `gvc` (`d2442f455844`) and `libgxdp` (`df896e3412b7`) subprojects for hermetic offline Meson builds, adds `panels/system-trust/` (`CcSystemTrustPanel`: Firmware, Boot image, Owner key cards + Cairo connectors + evidence-bounded Details drawer), updates sidebar ordering and `yubiOS` header emblem, and adds Fedora 45 RPM spec + `yubios-release.yml`. |
+| `feat/ci` | `f25a4d7da0337679a0c79eebb947d4e572818158` | `+4 / -0` | `77` | Tracks `yubios` for multi-arch Fedora 45 RPM component CI (`ci_fork_gnome-control-center.yml`). |
+| `release/v51.1-yubios.1` | `f25a4d7da0337679a0c79eebb947d4e572818158` | `+4 / -0` | `77` | Release branch tracking `yubios` on Fedora 45 `gnome-control-center-51.1-2.yubios.fc45`. |
+
+#### `yubi-OS/gnome-control-center` — `yubios` (`f25a4d7da0337679a0c79eebb947d4e572818158`, 4 commits ahead of `main`)
+
+- `187ecb2d24a6` (`foil-copy-overrate`): chore(yubios): anchor GNOME 51.1 release commit into yubios integration branch
+- `75d8e0ed1a79` (`foil-copy-overrate`): chore(subprojects): vendor pinned gvc (d2442f455844) and libgxdp (df896e3412b7) for hermetic RPM builds
+- `5e1b5c125aa4` (`foil-copy-overrate`): feat(system-trust): add yubiOS System Trust panel, sidebar ordering, header branding, and Fedora 45 RPM spec
+- `f25a4d7da033` (`foil-copy-overrate`): ci(release): add Fedora 45 multi-arch RPM build & release workflow + RELEASING.md
