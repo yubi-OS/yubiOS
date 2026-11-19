@@ -84,6 +84,11 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       libxcb \
       libxkbcommon \
       nss \
+      python3-pillow \
+      plymouth \
+      plymouth-system-theme \
+      plymouth-theme-spinner \
+      plymouth-plugin-two-step \
       wget \
       xdg-utils && \
     dnf clean all && \
@@ -172,7 +177,23 @@ RUN wp_commit="09f209a48153c6cef4faae9b247146abce4c5441" && \
     sha512sum --check --strict /tmp/wp.sha512 && \
     install -m 0644 /tmp/yubios-aurora-ridge-4k.jpg /usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg && \
     rm -f /tmp/yubios-aurora-ridge-4k.jpg /tmp/wp.sha256 /tmp/wp.sha512 && \
-    test -s /usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg
+    test -s /usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg && \
+    logo_sha256="351fc8cbeead6060506938dd5a3cae2c18f96878e6b04fd7d89f5f370e65ad15" && \
+    logo_sha512="5697513b6022af7cbeacd85d9eb2eaf404918922d357a68bd6189f0231cf8f035509cf2ec8907403b6e58061d26d5f760fd4787871751205c833fc528cc2141d" && \
+    logo_url="https://raw.githubusercontent.com/yubi-OS/assets/${wp_commit}/new_logo/yubios-owner-orbit-2048.png" && \
+    curl -fsSL --retry 3 --retry-delay 2 -o /tmp/yubios-owner-orbit-2048.png "${logo_url}" && \
+    printf '%s  /tmp/yubios-owner-orbit-2048.png\n' "${logo_sha256}" > /tmp/logo.sha256 && \
+    printf '%s  /tmp/yubios-owner-orbit-2048.png\n' "${logo_sha512}" > /tmp/logo.sha512 && \
+    sha256sum --check --strict /tmp/logo.sha256 && \
+    sha512sum --check --strict /tmp/logo.sha512 && \
+    install -d -m 0755 /usr/share/yubiOS/splash /usr/share/plymouth/themes/spinner /usr/share/pixmaps /etc/plymouth && \
+    python3 -c 'from PIL import Image; im = Image.open("/tmp/yubios-owner-orbit-2048.png").convert("RGB"); im.resize((512, 512), Image.Resampling.BOX).save("/usr/share/yubiOS/splash/yubios-owner-orbit.bmp", format="BMP"); im.resize((512, 512), Image.Resampling.BOX).save("/usr/share/pixmaps/yubios-logo.png", format="PNG"); im.resize((256, 256), Image.Resampling.BOX).save("/usr/share/plymouth/themes/spinner/header-image.png", format="PNG"); im.resize((128, 128), Image.Resampling.BOX).save("/usr/share/plymouth/themes/spinner/watermark.png", format="PNG"); im.resize((256, 256), Image.Resampling.BOX).save("/usr/share/pixmaps/fedora-logo-small.png", format="PNG"); im.resize((256, 256), Image.Resampling.BOX).save("/usr/share/pixmaps/system-logo-white.png", format="PNG")' && \
+    printf '[Daemon]\nTheme=spinner\nShowDelay=0\nDeviceTimeout=8\n' > /etc/plymouth/plymouthd.conf && \
+    printf '[Daemon]\nTheme=spinner\nShowDelay=0\nDeviceTimeout=8\n' > /usr/share/plymouth/plymouthd.defaults && \
+    rm -f /tmp/yubios-owner-orbit-2048.png /tmp/logo.sha256 /tmp/logo.sha512 && \
+    test -s /usr/share/yubiOS/splash/yubios-owner-orbit.bmp && \
+    test -s /usr/share/plymouth/themes/spinner/header-image.png && \
+    test -s /usr/share/plymouth/themes/spinner/watermark.png
 
 # ── Overlay yubiOS config tree ───────────────────────────────────────────
 COPY usr/ /usr/
@@ -261,6 +282,8 @@ RUN systemctl preset-all && \
     ln -sf ../yubiOS-lvm-usr-overlay.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-lvm-usr-overlay.service && \
     ln -sf ../yubiOS-uki-resign.path /usr/lib/systemd/system/multi-user.target.wants/yubiOS-uki-resign.path && \
     ln -sf ../yubiOS-ostree-composefs-sync.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-ostree-composefs-sync.service && \
+    ln -sf /dev/null /etc/systemd/system/boot.automount && \
+    ln -sf /dev/null /usr/lib/systemd/system/boot.automount && \
     systemctl enable gdm.service && \
     systemctl set-default graphical.target && \
     rm -f /etc/machine-id /var/lib/systemd/random-seed
@@ -351,7 +374,7 @@ FROM rootfs AS uki
 RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     mkdir -p /out && \
-    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
+    bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi"
 
 # Reproducibility diagnostic (remove once the UKI is proven deterministic): print the composefs
 # digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.

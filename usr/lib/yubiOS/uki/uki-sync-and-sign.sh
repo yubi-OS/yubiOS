@@ -167,8 +167,11 @@ build_uki_for_kver() {
 
   ensure_initramfs_same_fs "$kver"
 
+  local splash_bmp="${YUBIOS_SPLASH_BMP:-/usr/share/yubiOS/splash/yubios-owner-orbit.bmp}"
   if [ -n "${YUBIOS_ROOTFS_FOR_UKIFY:-}" ] && [ -d "${YUBIOS_ROOTFS_FOR_UKIFY}" ] && command -v bootc >/dev/null 2>&1; then
-    if bootc container ukify --rootfs "${YUBIOS_ROOTFS_FOR_UKIFY}" -- --output "$out_uki" 2>/dev/null; then
+    local -a extra_ukify=()
+    [ -f "$splash_bmp" ] && extra_ukify+=(--splash "$splash_bmp")
+    if bootc container ukify --rootfs "${YUBIOS_ROOTFS_FOR_UKIFY}" -- "${extra_ukify[@]}" --output "$out_uki" 2>/dev/null; then
       return 0
     fi
   fi
@@ -178,6 +181,7 @@ build_uki_for_kver() {
     kargs="$(collect_kargs "$cfs_digest")"
     local -a ukify_args=(build --linux "$vmlinuz" --initrd "$initrd" --cmdline "$kargs" --uname "$kver" --output "$out_uki")
     [ -f "$OS_RELEASE" ] && ukify_args+=(--os-release "@$OS_RELEASE")
+    [ -f "$splash_bmp" ] && ukify_args+=(--splash "$splash_bmp")
     ukify "${ukify_args[@]}"
     return 0
   fi

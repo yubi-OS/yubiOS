@@ -468,7 +468,8 @@ EOF
     "$MNT_DIR/ostree/repo/refs/mirrors" "$MNT_DIR/ostree/repo/state" "$MNT_DIR/ostree/repo/tmp/cache" \
     "$MNT_DIR/ostree/repo/extensions" "$MNT_DIR/ostree/deploy/default/var" \
     "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc" \
-    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr" "$MNT_DIR/ostree/boot.1.1/default/${bootcsum}"
+    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr/lib" "$MNT_DIR/ostree/boot.1.1/default/${bootcsum}"
+  sudo podman run --rm --entrypoint /bin/cat "$RESOLVED_OS" /usr/lib/os-release | sudo tee "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr/lib/os-release" "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc/os-release" >/dev/null || true
   sudo tee "$MNT_DIR/ostree/repo/config" >/dev/null <<'EOF_REPO'
 [core]
 repo_version=1

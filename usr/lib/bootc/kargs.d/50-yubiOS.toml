@@ -31,4 +31,5 @@ kargs = [
   # fido2-device=auto is set in /etc/crypttab by yubiOS-enroll-luks,
   # not as a global karg, to avoid affecting non-encrypted partitions.
   "audit=0",
+  "splash",
 ]

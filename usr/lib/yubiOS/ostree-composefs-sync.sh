@@ -66,7 +66,14 @@ boot_sync() {
   csum="$(ostree --repo="$sysroot/ostree/repo" rev-parse yubios/latest 2>/dev/null || true)"
   if [ -z "$csum" ] || ! ostree --repo="$sysroot/ostree/repo" show "$csum" >/dev/null 2>&1; then
     ostree --repo="$sysroot/ostree/repo" config set ex-integrity.composefs false 2>/dev/null || true
-    mkdir -p /run/yubiOS/ostree-empty-tree/usr /run/yubiOS/ostree-empty-tree/etc
+    mkdir -p /run/yubiOS/ostree-empty-tree/usr/lib /run/yubiOS/ostree-empty-tree/etc
+    if [ -f /usr/lib/os-release ]; then
+      cp -f /usr/lib/os-release /run/yubiOS/ostree-empty-tree/usr/lib/os-release
+      cp -f /usr/lib/os-release /run/yubiOS/ostree-empty-tree/etc/os-release
+    elif [ -f /etc/os-release ]; then
+      cp -f /etc/os-release /run/yubiOS/ostree-empty-tree/usr/lib/os-release
+      cp -f /etc/os-release /run/yubiOS/ostree-empty-tree/etc/os-release
+    fi
     csum="$(ostree --repo="$sysroot/ostree/repo" commit -b yubios/latest \
       --tree=dir=/run/yubiOS/ostree-empty-tree \
       --subject="yubiOS composefs deployment" \
@@ -84,7 +91,26 @@ boot_sync() {
   done
 
   local deploy_dir="$sysroot/ostree/deploy/default/deploy/${csum}.0"
-  mkdir -p "$deploy_dir/etc" "$deploy_dir/usr"
+  mkdir -p "$deploy_dir/etc" "$deploy_dir/usr/lib" "$deploy_dir/usr/share/rpm" "$deploy_dir/usr/lib/sysimage"
+  if [ -f /usr/lib/os-release ]; then
+    cp -f /usr/lib/os-release "$deploy_dir/usr/lib/os-release"
+    cp -f /usr/lib/os-release "$deploy_dir/etc/os-release"
+  elif [ -f /etc/os-release ]; then
+    cp -f /etc/os-release "$deploy_dir/usr/lib/os-release"
+    cp -f /etc/os-release "$deploy_dir/etc/os-release"
+  fi
+  if [ -d /etc/yum.repos.d ]; then
+    mkdir -p "$deploy_dir/etc/yum.repos.d"
+    cp -a /etc/yum.repos.d/. "$deploy_dir/etc/yum.repos.d/" 2>/dev/null || true
+  fi
+  if [ -d /etc/pki ]; then
+    mkdir -p "$deploy_dir/etc/pki"
+    cp -a /etc/pki/. "$deploy_dir/etc/pki/" 2>/dev/null || true
+  fi
+  if [ -f /usr/share/rpm/rpmdb.sqlite ] && [ ! -f "$deploy_dir/usr/share/rpm/rpmdb.sqlite" ]; then
+    cp -f /usr/share/rpm/rpmdb.sqlite "$deploy_dir/usr/share/rpm/rpmdb.sqlite" 2>/dev/null || true
+  fi
+  ln -sfn ../../share/rpm "$deploy_dir/usr/lib/sysimage/rpm" 2>/dev/null || true
   cat > "${deploy_dir}.origin" <<EOF_ORIG
 [origin]
 refspec=yubios/latest
@@ -149,29 +175,98 @@ options ostree=/ostree/boot.1/default/${bootcsum}/0
 uki ${uki_rel}
 EOF_BLS
 
-  # Runtime-mask and stop boot.automount + boot.mount so vfat never shadows /boot/loader
-  if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)$' || systemctl is-active -q boot.automount 2>/dev/null || systemctl is-active -q boot.mount 2>/dev/null; then
-    systemctl mask --runtime boot.automount boot.mount 2>/dev/null || true
+  # Stop boot.mount and boot.automount BEFORE masking boot.automount so systemd
+  # never marks boot.automount as 'failed (Result: resources)' for abandoning an active mount,
+  # then unmount any vfat/autofs layers on /boot and reset-failed.
+  if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)
+
+  python3 - "$deploy_dir" <<'PY'
+import os, sys
+from gi.repository import GLib
+st = os.stat(sys.argv[1])
+v = GLib.Variant("a{sv}", {
+    "composefs": GLib.Variant("b", True),
+    "composefs.verity": GLib.Variant("b", True),
+    "backing-root-device-inode": GLib.Variant("(tt)", (int(st.st_dev), int(st.st_ino))),
+})
+with open("/run/ostree-booted", "wb") as f:
+    f.write(v.get_data_as_bytes().get_data())
+PY
+
+  if [ "$was_ro" -eq 1 ]; then
+    mount -o remount,ro /sysroot 2>/dev/null || true
+  fi
+}
+
+boot_sync
+ || systemctl is-active -q boot.automount 2>/dev/null || systemctl is-active -q boot.mount 2>/dev/null; then
     systemctl stop boot.mount boot.automount 2>/dev/null || true
     local _i
     for _i in 1 2 3 4; do
-      if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)$'; then
+      if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)
+
+  python3 - "$deploy_dir" <<'PY'
+import os, sys
+from gi.repository import GLib
+st = os.stat(sys.argv[1])
+v = GLib.Variant("a{sv}", {
+    "composefs": GLib.Variant("b", True),
+    "composefs.verity": GLib.Variant("b", True),
+    "backing-root-device-inode": GLib.Variant("(tt)", (int(st.st_dev), int(st.st_ino))),
+})
+with open("/run/ostree-booted", "wb") as f:
+    f.write(v.get_data_as_bytes().get_data())
+PY
+
+  if [ "$was_ro" -eq 1 ]; then
+    mount -o remount,ro /sysroot 2>/dev/null || true
+  fi
+}
+
+boot_sync
+; then
         umount -l /boot 2>/dev/null || true
       else
         break
       fi
     done
+    systemctl mask --runtime boot.automount 2>/dev/null || true
+    systemctl reset-failed boot.automount boot.mount 2>/dev/null || true
   fi
 
-  if ! findmnt -rn /boot >/dev/null 2>&1 || findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)$'; then
+  if ! findmnt -rn /boot >/dev/null 2>&1 || findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)
+
+  python3 - "$deploy_dir" <<'PY'
+import os, sys
+from gi.repository import GLib
+st = os.stat(sys.argv[1])
+v = GLib.Variant("a{sv}", {
+    "composefs": GLib.Variant("b", True),
+    "composefs.verity": GLib.Variant("b", True),
+    "backing-root-device-inode": GLib.Variant("(tt)", (int(st.st_dev), int(st.st_ino))),
+})
+with open("/run/ostree-booted", "wb") as f:
+    f.write(v.get_data_as_bytes().get_data())
+PY
+
+  if [ "$was_ro" -eq 1 ]; then
+    mount -o remount,ro /sysroot 2>/dev/null || true
+  fi
+}
+
+boot_sync
+; then
     mount --bind "$sysroot/boot" /boot
+    mount --make-private /boot 2>/dev/null || true
   fi
   if mountpoint -q /run/yubiOS/efi && [ -d /run/yubiOS/efi/EFI ]; then
     mkdir -p /boot/EFI
     if ! findmnt -rn /boot/EFI >/dev/null 2>&1; then
       mount --bind /run/yubiOS/efi/EFI /boot/EFI
+      mount --make-private /boot/EFI 2>/dev/null || true
     fi
   fi
+  systemctl reset-failed boot.automount boot.mount 2>/dev/null || true
 
   python3 - "$deploy_dir" <<'PY'
 import os, sys

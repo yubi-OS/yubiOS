@@ -156,7 +156,7 @@ FROM rootfs AS uki
 RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     mkdir -p /out && \
-    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
+    bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi"
 
 FROM rootfs AS prefinal
 COPY --from=uki /out/ /boot/EFI/Linux/

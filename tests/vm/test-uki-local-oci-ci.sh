@@ -297,6 +297,9 @@ print(\"OCI repository verified:\", len(os.listdir(os.path.join(oci_dir, \"blobs
    mkdir -p /boot/EFI/Linux/bootc /boot/loader/entries
    cp -f "$UKI_ESP" "/boot/EFI/Linux/bootc/$(basename "$UKI_ESP")"
    cp -f "$BLS_CONF" "/boot/loader/entries/$(basename "$BLS_CONF")"
+   umount -l /boot/EFI 2>/dev/null || true
+   umount -l /boot 2>/dev/null || true
+   umount -l /run/yubiOS/efi 2>/dev/null || true
    mkdir -p /sysroot/ostree/repo/objects /sysroot/ostree/repo/refs/heads /sysroot/ostree/repo/tmp
    printf "[core]\nrepo_version=1\nmode=bare\n" > /sysroot/ostree/repo/config
    mkdir -p /sysroot/ostree/boot.1/default/81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686
@@ -306,6 +309,10 @@ print(\"OCI repository verified:\", len(os.listdir(os.path.join(oci_dir, \"blobs
    test -L /boot/loader
    test -L /sysroot/ostree/boot.1
    test -d /sysroot/ostree/boot.1.1
+   set -- /sysroot/ostree/deploy/default/deploy/*.0
+   test -f "$1/usr/lib/os-release"
+   test -f "$1/etc/os-release"
+   ! systemctl is-failed --quiet boot.automount
    findmnt -rn -o FSTYPE /boot/EFI | grep -qx "vfat"
    ostree admin status | grep -q "^\* default"
    systemctl start rpm-ostreed.service

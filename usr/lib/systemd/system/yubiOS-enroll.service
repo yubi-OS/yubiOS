@@ -38,6 +38,7 @@ StandardError=tty
 ExecCondition=/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh
 # Settle delay so late kernel/NIC link messages finish printing before the
 # wizard clears the console and reads stdin.
+ExecStartPre=-/usr/bin/plymouth quit
 ExecStartPre=/bin/sleep 5
 ExecStart=/usr/lib/yubiOS/enroll.sh
 ExecStartPost=/bin/mkdir -p /var/lib/yubiOS
