@@ -231,7 +231,7 @@ stage_via_swu2f() {
 
   local softhsm_lib
   softhsm_lib="$(find_softhsm2)" || {
-    [ -n "$passless_pid" ] && kill "$passless_pid" 2>/dev/null || true
+    if [ -n "$passless_pid" ]; then kill "$passless_pid" 2>/dev/null || true; fi
     echo "ERROR: libsofthsm2.so not found for swu2f PKCS#11 fallback" >&2
     return 1
   }
@@ -255,7 +255,7 @@ EOF
 
   enroll_sb_pkcs11_ceremony "$softhsm_lib" "pkcs11:token=yubiOS-ci;id=%01;type=private?pin-value=${PIV_PIN}"
   local rc=$?
-  [ -n "$passless_pid" ] && kill "$passless_pid" 2>/dev/null || true
+  if [ -n "$passless_pid" ]; then kill "$passless_pid" 2>/dev/null || true; fi
   return "$rc"
 }
 
