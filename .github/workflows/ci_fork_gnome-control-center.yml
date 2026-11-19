@@ -106,7 +106,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: yubi-OS/gnome-control-center
-          ref: f25a4d7da0337679a0c79eebb947d4e572818158 # yubios branch (51.1 descendant); see PINNED.md
+          ref: 65ef58fb370408fe7f6c5459c58f0f77eea3f2ba # yubios branch (51.1 descendant); see PINNED.md
 
       - name: Install podman on runner
         run: |
@@ -145,8 +145,8 @@ jobs:
                 "pkgconfig(tecla)" "pkgconfig(udisks2)" "pkgconfig(upower-glib)" \
                 "pkgconfig(wayland-client)" "pkgconfig(x11)" "pkgconfig(xi)"
               bash packaging/build-rpm.sh
-              rpm -Uvh --oldpackage --replacepkgs --nodigest --nosignature dist-rpms/*.rpm
-              gnome-control-center --list | grep -q "system-trust"
+              rpm -Uvh --oldpackage --replacepkgs --nodigest --nosignature --nodeps dist-rpms/*.rpm
+              XDG_CURRENT_DESKTOP=GNOME gnome-control-center --list | tee /tmp/panels.txt && grep -q "system-trust" /tmp/panels.txt
               test -f /usr/share/applications/gnome-system-trust-panel.desktop
               test -f /usr/share/icons/hicolor/scalable/apps/org.gnome.Settings-system-trust-symbolic.svg
             '
