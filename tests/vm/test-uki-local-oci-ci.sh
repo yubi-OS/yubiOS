@@ -297,9 +297,12 @@ print(\"OCI repository verified:\", len(os.listdir(os.path.join(oci_dir, \"blobs
    mkdir -p /boot/EFI/Linux/bootc /boot/loader/entries
    cp -f "$UKI_ESP" "/boot/EFI/Linux/bootc/$(basename "$UKI_ESP")"
    cp -f "$BLS_CONF" "/boot/loader/entries/$(basename "$BLS_CONF")"
+   mkdir -p /sysroot/ostree/repo/objects /sysroot/ostree/repo/refs/heads /sysroot/ostree/repo/tmp
+   printf "[core]\nrepo_version=1\nmode=bare\n" > /sysroot/ostree/repo/config
    mkdir -p /sysroot/ostree/boot.1/default/81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686
    ln -sfn boot.1 /sysroot/ostree/boot.1.1
    "$WORK/usr-merged/lib/yubiOS/ostree-composefs-sync.sh" --boot-sync
+   test -d /sysroot/ostree/repo/refs/remotes
    test -L /boot/loader
    test -L /sysroot/ostree/boot.1
    test -d /sysroot/ostree/boot.1.1

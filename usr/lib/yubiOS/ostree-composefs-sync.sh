@@ -47,7 +47,16 @@ boot_sync() {
   fi
   local bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
 
-  mkdir -p "$sysroot/ostree/repo" "$sysroot/ostree/deploy/default/var" "$sysroot/ostree/deploy/default/deploy"
+  mkdir -p \
+    "$sysroot/ostree/repo/objects" \
+    "$sysroot/ostree/repo/refs/heads" \
+    "$sysroot/ostree/repo/refs/remotes" \
+    "$sysroot/ostree/repo/refs/mirrors" \
+    "$sysroot/ostree/repo/state" \
+    "$sysroot/ostree/repo/tmp/cache" \
+    "$sysroot/ostree/repo/extensions" \
+    "$sysroot/ostree/deploy/default/var" \
+    "$sysroot/ostree/deploy/default/deploy"
   if [ ! -f "$sysroot/ostree/repo/config" ]; then
     ostree --repo="$sysroot/ostree/repo" init --mode=bare
   fi

@@ -464,8 +464,10 @@ EOF
   sudo ln -sfn loader.1 "$MNT_DIR/boot/loader"
   csum_short="$(printf '%s' "$cd_digest" | cut -c1-64)"
   bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
-  sudo mkdir -p "$MNT_DIR/ostree/repo/objects" "$MNT_DIR/ostree/repo/refs/heads" "$MNT_DIR/ostree/repo/tmp" \
-    "$MNT_DIR/ostree/deploy/default/var" "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc" \
+  sudo mkdir -p "$MNT_DIR/ostree/repo/objects" "$MNT_DIR/ostree/repo/refs/heads" "$MNT_DIR/ostree/repo/refs/remotes" \
+    "$MNT_DIR/ostree/repo/refs/mirrors" "$MNT_DIR/ostree/repo/state" "$MNT_DIR/ostree/repo/tmp/cache" \
+    "$MNT_DIR/ostree/repo/extensions" "$MNT_DIR/ostree/deploy/default/var" \
+    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc" \
     "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr" "$MNT_DIR/ostree/boot.1.1/default/${bootcsum}"
   sudo tee "$MNT_DIR/ostree/repo/config" >/dev/null <<'EOF_REPO'
 [core]
