@@ -13,11 +13,10 @@
 #       1. `/boot/loader` to be a symbolic link (`loader -> loader.1`),
 #       2. `/boot/loader/entries/ostree-1.conf` with `options ostree=/ostree/boot.1/default/<bootcsum>/0`,
 #       3. `/sysroot/ostree/boot.1` to be a symbolic link to `boot.1.1` (and `boot.1.1` to be the directory),
-#       4. `/sysroot/ostree/repo` to hold a valid `<csum>.commit` object for deployment 0, and
-#       5. `/run/ostree-booted` to hold the serialized `a{sv}` GVariant with `backing-root-device-inode`.
-#   - Solution: mount the `vfat` ESP at `/run/yubiOS/efi`, runtime-mask and stop `boot.automount`
-#     and `boot.mount`, bind-mount `/sysroot/boot` (`ext4`) at `/boot`, and bind-mount
-#     `/run/yubiOS/efi/EFI` (`vfat`) at `/boot/EFI`.
+#       4. `/sysroot/ostree/repo` to hold a valid `<csum>.commit` object for deployment 0,
+#       5. `/sysroot/ostree/deploy/default/deploy/<csum>.0` to hold `usr/lib/os-release`,
+#          `etc/os-release`, `etc/yum.repos.d`, `etc/pki`, and `usr/share/rpm/rpmdb.sqlite`, and
+#       6. `/run/ostree-booted` to hold the serialized `a{sv}` GVariant with `backing-root-device-inode`.
 
 set -euo pipefail
 
@@ -178,53 +177,14 @@ EOF_BLS
   # Stop boot.mount and boot.automount BEFORE masking boot.automount so systemd
   # never marks boot.automount as 'failed (Result: resources)' for abandoning an active mount,
   # then unmount any vfat/autofs layers on /boot and reset-failed.
-  if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)
-
-  python3 - "$deploy_dir" <<'PY'
-import os, sys
-from gi.repository import GLib
-st = os.stat(sys.argv[1])
-v = GLib.Variant("a{sv}", {
-    "composefs": GLib.Variant("b", True),
-    "composefs.verity": GLib.Variant("b", True),
-    "backing-root-device-inode": GLib.Variant("(tt)", (int(st.st_dev), int(st.st_ino))),
-})
-with open("/run/ostree-booted", "wb") as f:
-    f.write(v.get_data_as_bytes().get_data())
-PY
-
-  if [ "$was_ro" -eq 1 ]; then
-    mount -o remount,ro /sysroot 2>/dev/null || true
-  fi
-}
-
-boot_sync
- || systemctl is-active -q boot.automount 2>/dev/null || systemctl is-active -q boot.mount 2>/dev/null; then
+  local boot_fstypes
+  boot_fstypes="$(findmnt -rn -o FSTYPE /boot 2>/dev/null || true)"
+  if printf '%s\n' "$boot_fstypes" | grep -qx -e vfat -e autofs || systemctl is-active -q boot.automount 2>/dev/null || systemctl is-active -q boot.mount 2>/dev/null; then
     systemctl stop boot.mount boot.automount 2>/dev/null || true
     local _i
     for _i in 1 2 3 4; do
-      if findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)
-
-  python3 - "$deploy_dir" <<'PY'
-import os, sys
-from gi.repository import GLib
-st = os.stat(sys.argv[1])
-v = GLib.Variant("a{sv}", {
-    "composefs": GLib.Variant("b", True),
-    "composefs.verity": GLib.Variant("b", True),
-    "backing-root-device-inode": GLib.Variant("(tt)", (int(st.st_dev), int(st.st_ino))),
-})
-with open("/run/ostree-booted", "wb") as f:
-    f.write(v.get_data_as_bytes().get_data())
-PY
-
-  if [ "$was_ro" -eq 1 ]; then
-    mount -o remount,ro /sysroot 2>/dev/null || true
-  fi
-}
-
-boot_sync
-; then
+      boot_fstypes="$(findmnt -rn -o FSTYPE /boot 2>/dev/null || true)"
+      if printf '%s\n' "$boot_fstypes" | grep -qx -e vfat -e autofs; then
         umount -l /boot 2>/dev/null || true
       else
         break
@@ -234,28 +194,8 @@ boot_sync
     systemctl reset-failed boot.automount boot.mount 2>/dev/null || true
   fi
 
-  if ! findmnt -rn /boot >/dev/null 2>&1 || findmnt -rn -o FSTYPE /boot 2>/dev/null | grep -qE '^(vfat|autofs)
-
-  python3 - "$deploy_dir" <<'PY'
-import os, sys
-from gi.repository import GLib
-st = os.stat(sys.argv[1])
-v = GLib.Variant("a{sv}", {
-    "composefs": GLib.Variant("b", True),
-    "composefs.verity": GLib.Variant("b", True),
-    "backing-root-device-inode": GLib.Variant("(tt)", (int(st.st_dev), int(st.st_ino))),
-})
-with open("/run/ostree-booted", "wb") as f:
-    f.write(v.get_data_as_bytes().get_data())
-PY
-
-  if [ "$was_ro" -eq 1 ]; then
-    mount -o remount,ro /sysroot 2>/dev/null || true
-  fi
-}
-
-boot_sync
-; then
+  boot_fstypes="$(findmnt -rn -o FSTYPE /boot 2>/dev/null || true)"
+  if ! findmnt -rn /boot >/dev/null 2>&1 || printf '%s\n' "$boot_fstypes" | grep -qx -e vfat -e autofs; then
     mount --bind "$sysroot/boot" /boot
     mount --make-private /boot 2>/dev/null || true
   fi
