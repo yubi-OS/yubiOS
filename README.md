@@ -63,6 +63,16 @@ Secure Boot signing uses PIV/CCID, not hidraw. Full rationale: [ADR-002](docs/AD
 
 ## Get yubiOS
 
+<div align="center">
+
+<a href="TECHNICAL_PREVIEW.md">
+  <img src="https://raw.githubusercontent.com/yubi-OS/assets/main/ads/yubiOS_Technical_Preview.jpg" alt="yubiOS Technical Preview — Assume Nothing. Prove Everything." width="92%" style="border-radius:12px;"/>
+</a>
+
+**[**Technical Preview Quick Start (Fork -> Deploy -> Flash -> Enroll)**](TECHNICAL_PREVIEW.md) · [**Operational Playbook**](PLAYBOOK.md) · [**Live Hardware Asciicast Demo**](https://asciinema.org/a/y9sHQPQTIbTWNIyr)**
+
+</div>
+
 yubiOS currently publishes a pre-launch multi-arch [bootc](https://github.com/bootc-dev/bootc) OCI image on Docker Hub:
 
 ```sh
