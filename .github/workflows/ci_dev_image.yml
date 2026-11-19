@@ -132,11 +132,16 @@ jobs:
 
       - name: Install docker CLI + buildx (${{ matrix.arch }})
         run: |
-          printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list.d/debian-fallback.list
-          apt-get update -qq || true
-          apt-get install -y -qq --allow-downgrades --no-install-recommends \
+          apt-get update -qq
+          if ! apt-get install -y -qq --no-install-recommends \
             curl iproute2 iptables jq nftables passwd procps python3 util-linux \
-            uidmap slirp4netns fuse-overlayfs
+            uidmap slirp4netns fuse-overlayfs; then
+            rm -f /etc/apt/sources.list.d/*dhi* /etc/apt/preferences.d/*dhi*
+            apt-get update -qq
+            apt-get install -y -qq --allow-downgrades --no-install-recommends \
+              curl iproute2 iptables jq nftables passwd procps python3 util-linux \
+              uidmap slirp4netns fuse-overlayfs
+          fi
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.3.tgz"
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.${{ matrix.buildx_arch }}"
@@ -288,9 +293,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
       - name: Install docker CLI + buildx
         run: |
-          printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list.d/debian-fallback.list
-          apt-get update -qq || true
-          apt-get install -y -qq --allow-downgrades --no-install-recommends curl jq ca-certificates
+          apt-get update -qq
+          if ! apt-get install -y -qq --no-install-recommends curl jq ca-certificates; then
+            rm -f /etc/apt/sources.list.d/*dhi* /etc/apt/preferences.d/*dhi*
+            apt-get update -qq
+            apt-get install -y -qq --allow-downgrades --no-install-recommends curl jq ca-certificates
+          fi
           wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.linux-amd64"
           printf '%s  %s\n' 'ff0eeb5d9994a6891b9bebe7c37c8982642da9fdc3b7f19302b3c2276b306b859d56e76f00148eeed2e36daffa576873e15276d79a61e1798e11741511c6e65e' docker-29.9.3.tgz | sha512sum --check --strict
