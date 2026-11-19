@@ -202,7 +202,8 @@ jobs:
             fi
             nsenter --net=/proc/1/ns/net -- apt-get update -qq
             nsenter --net=/proc/1/ns/net -- apt-get install -y -qq --no-install-recommends \
-              git curl iproute2 procps slirp4netns util-linux
+              git curl iproute2 iptables mount nftables passwd procps util-linux \
+              uidmap slirp4netns fuse-overlayfs
             SELF_NET="$(readlink /proc/self/ns/net)"
             CONT_PID="$$"
             for p in /proc/[0-9]*; do
@@ -224,7 +225,9 @@ jobs:
               fi
               sleep 0.2
             done
+            ip addr show dev tap0 || { cat "${RUNNER_TEMP}/outer-slirp4netns.log" || true; exit 1; }
             printf 'nameserver 10.0.2.3\n' > /etc/resolv.conf
+            curl -fsSI --max-time 10 https://github.com >/dev/null
           fi
           if ! command -v git >/dev/null 2>&1; then
             apt-get update -qq
