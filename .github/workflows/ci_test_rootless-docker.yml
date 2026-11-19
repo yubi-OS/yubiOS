@@ -109,16 +109,27 @@ jobs:
             git curl iproute2 iptables nftables passwd procps util-linux \
             uidmap slirp4netns fuse-overlayfs
           if ! curl -fsSI --max-time 5 https://deb.debian.org >/dev/null 2>&1 && [ -e /proc/1/ns/net ]; then
-            CONT_PID="$$"
+            CONT_PID="$"
+            for p in /proc/[0-9]*/ns/net; do
+              if [ "$p" -ef /proc/self/ns/net ]; then
+                cand="${p#/proc/}"
+                cand="${cand%/ns/net}"
+                if [ "$cand" != "$" ]; then
+                  CONT_PID="$cand"
+                  break
+                fi
+              fi
+            done
             ip link del eth0 2>/dev/null || true
-            nsenter --net=/proc/1/ns/net -- slirp4netns --configure --mtu=65520 --disable-host-loopback "$CONT_PID" tap0 > "${RUNNER_TEMP}/outer-slirp4netns.log" 2>&1 &
-            for _ in $(seq 1 30); do
+            setsid nsenter --net=/proc/1/ns/net -- slirp4netns --configure --mtu=65520 --disable-host-loopback "$CONT_PID" tap0 </dev/null > "${RUNNER_TEMP}/outer-slirp4netns.log" 2>&1 &
+            for _ in $(seq 1 50); do
               if ip addr show dev tap0 2>/dev/null | grep -q 'inet '; then
                 break
               fi
               sleep 0.2
             done
             printf 'nameserver 10.0.2.3\n' > /etc/resolv.conf
+            curl -fsSI --max-time 10 https://github.com >/dev/null
           fi
 
       - name: Checkout
@@ -129,11 +140,8 @@ jobs:
           set -eu
           apt-get update -qq
           apt-get install -y -qq --no-install-recommends \
-            efitools openssl opensc pcscd softhsm2 libSSL-dev pkcs11-provider \
-            yubikey-manager libykcs11-1 fido2-tools libfido2-1 usbutils 2>/dev/null || \
-          apt-get install -y -qq --no-install-recommends \
             efitools openssl opensc pcscd softhsm2 pkcs11-provider \
-            yubikey-manager libykcs11-1 fido2-tools usbutils
+            yubikey-manager ykcs11 fido2-tools usbutils
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.3.tgz"
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.${{ matrix.buildx_arch }}"
@@ -280,7 +288,7 @@ jobs:
               apt-get update -qq
               apt-get install -y -qq --no-install-recommends \
                 efitools openssl opensc pcscd softhsm2 pkcs11-provider \
-                yubikey-manager libykcs11-1 fido2-tools usbutils
+                yubikey-manager ykcs11 fido2-tools usbutils
               echo "=== Inside final rootless container layer ==="
               ls -la /host-dev/uhid /host-dev/bus/usb 2>/dev/null || true
               SOURCE_DATE_EPOCH=1700000000 ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /work
