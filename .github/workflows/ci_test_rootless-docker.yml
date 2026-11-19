@@ -72,12 +72,12 @@ jobs:
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
-            runner: ubuntu-26.04-arm
+            runner: [self-hosted, Linux, ARM64, KVM]
             docker_arch: aarch64
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
     container:
-      options: --privileged
+      options: --privileged --pid=host --ipc=host --security-opt label=type:unconfined_t -v /dev:/dev
       volumes:
         - /mnt:/mnt
       credentials:
@@ -85,13 +85,55 @@ jobs:
         password: ${{ secrets.DOCKER }}
       image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
     steps:
-      - name: Exercise rootless Docker bootstrap (${{ matrix.arch }})
+      - name: Bridge outer container network via slirp4netns on self-hosted rock1 and install git
+        run: |
+          set -eu
+          # On self-hosted rock1, ufw blocks Docker's github_network_* bridge DNS/forwarding.
+          # Because the outer DHI container has --privileged --pid=host, /proc/1/ns/net is
+          # the host network namespace. Use nsenter --net=/proc/1/ns/net to install git +
+          # slirp4netns, then attach slirp4netns to this container's network namespace so
+          # every subsequent step (including actions/checkout and rootless Docker) has
+          # unblocked userspace networking without touching host firewall rules.
+          run_host_net() {
+            if [ -e /proc/1/ns/net ]; then
+              if [ -f /proc/1/root/run/systemd/resolve/resolv.conf ]; then
+                cp -f /proc/1/root/run/systemd/resolve/resolv.conf /etc/resolv.conf 2>/dev/null || true
+              fi
+              nsenter --net=/proc/1/ns/net -- "$@"
+            else
+              "$@"
+            fi
+          }
+          run_host_net apt-get update -qq
+          run_host_net apt-get install -y -qq --no-install-recommends \
+            git curl iproute2 iptables nftables passwd procps util-linux \
+            uidmap slirp4netns fuse-overlayfs
+          if ! curl -fsSI --max-time 5 https://deb.debian.org >/dev/null 2>&1 && [ -e /proc/1/ns/net ]; then
+            CONT_PID="$$"
+            ip link del eth0 2>/dev/null || true
+            nsenter --net=/proc/1/ns/net -- slirp4netns --configure --mtu=65520 --disable-host-loopback "$CONT_PID" tap0 > "${RUNNER_TEMP}/outer-slirp4netns.log" 2>&1 &
+            for _ in $(seq 1 30); do
+              if ip addr show dev tap0 2>/dev/null | grep -q 'inet '; then
+                break
+              fi
+              sleep 0.2
+            done
+            printf 'nameserver 10.0.2.3\n' > /etc/resolv.conf
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
+
+      - name: Exercise rootless Docker bootstrap and YubiKey/swu2f passthrough into final rootless layer (${{ matrix.arch }})
         run: |
           set -eu
           apt-get update -qq
           apt-get install -y -qq --no-install-recommends \
-            curl iproute2 iptables nftables passwd procps util-linux \
-            uidmap slirp4netns fuse-overlayfs
+            efitools openssl opensc pcscd softhsm2 libSSL-dev pkcs11-provider \
+            yubikey-manager libykcs11-1 fido2-tools libfido2-1 usbutils 2>/dev/null || \
+          apt-get install -y -qq --no-install-recommends \
+            efitools openssl opensc pcscd softhsm2 pkcs11-provider \
+            yubikey-manager libykcs11-1 fido2-tools usbutils
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.3.tgz"
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.${{ matrix.buildx_arch }}"
@@ -121,7 +163,12 @@ jobs:
           ROOTLESS_USER=docker-rootless
           ROOTLESS_RUNTIME_DIR=/run/docker-rootless
           ROOTLESS_SOCKET="${ROOTLESS_RUNTIME_DIR}/docker.sock"
-          ROOTLESS_DATA_DIR="$(mktemp -d /mnt/docker-rootless.XXXXXX)"
+          if [ -d /mnt/extended ]; then
+            rm -rf /mnt/extended/docker-rootless.* 2>/dev/null || true
+            ROOTLESS_DATA_DIR="$(mktemp -d /mnt/extended/docker-rootless.XXXXXX)"
+          else
+            ROOTLESS_DATA_DIR="$(mktemp -d /mnt/docker-rootless.XXXXXX)"
+          fi
 
           mkdir -p "$DOCKER_TOOLS_DIR/bin" "$DOCKER_TOOLS_DIR/config/cli-plugins"
           install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
@@ -129,6 +176,7 @@ jobs:
           install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 "buildx-v0.39.0.${{ matrix.buildx_arch }}" \
             "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
+          rm -rf docker docker-rootless-extras docker-29.9.3.tgz docker-rootless-extras-29.9.3.tgz "buildx-v0.39.0.${{ matrix.buildx_arch }}"
 
           useradd --create-home --shell /bin/sh "$ROOTLESS_USER"
           printf '%s\n' "${ROOTLESS_USER}:100000:65536" > /etc/subuid
@@ -137,14 +185,22 @@ jobs:
           chown "$ROOTLESS_USER:$ROOTLESS_USER" "$ROOTLESS_DATA_DIR"
           chmod 0700 "$ROOTLESS_DATA_DIR"
 
-          # Ubuntu 24.04 hosted runners restrict unprivileged user namespaces.
-          # The outer job container is privileged and the runner is ephemeral.
+          # Prepare device and pcscd permissions before rootlesskit (--copy-up=/run) starts
+          # so /dev/uhid, /dev/hidraw*, /dev/bus/usb, and /run/pcscd traverse into the
+          # rootless daemon and into the final rootless container layer.
+          install -d -m 0777 /run/pcscd /run/yubios-hsm
+          chmod a+rw /dev/uhid /dev/hidraw* 2>/dev/null || true
+          chmod -R a+rw /dev/bus/usb 2>/dev/null || true
+          if lsusb 2>/dev/null | grep -qi '1050:'; then
+            pcscd 2>/dev/null || true
+            sleep 1
+            chmod 0666 /run/pcscd/pcscd.comm 2>/dev/null || true
+          fi
+
           if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
             sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
           fi
 
-          # DHI intentionally lacks a complete PAM login stack. Record the
-          # original failure without making the diagnostic depend on PAM.
           if runuser -u "$ROOTLESS_USER" -- id; then
             echo 'runuser unexpectedly succeeded'
           else
@@ -193,13 +249,47 @@ jobs:
             --driver-opt "image=${BUILDKIT_IMAGE}" --use || true
           docker buildx inspect hardened
 
-      - name: Verify rootless Docker across the step boundary (${{ matrix.arch }})
+      - name: Verify rootless Docker across the step boundary and stage Secure Boot keys inside final rootless layer (${{ matrix.arch }})
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER }}
         run: |
           set -eu
           docker -H unix:///run/docker-rootless/docker.sock info \
             --format '{{json .SecurityOptions}}' | tee /tmp/docker-security-options
           grep -q 'name=rootless' /tmp/docker-security-options
           docker -H unix:///run/docker-rootless/docker.sock buildx inspect hardened
+
+          if [ -n "${DOCKER_PASSWORD:-}" ]; then
+            printf '%s' "$DOCKER_PASSWORD" | docker -H unix:///run/docker-rootless/docker.sock login dhi.io -u 0mniteck42 --password-stdin
+          fi
+
+          chmod +x usr/lib/yubiOS/uki/stage-ci-sb-keys.sh
+          chmod -R a+rwX "$PWD"
+          docker -H unix:///run/docker-rootless/docker.sock run --rm \
+            --privileged \
+            --security-opt label=disable \
+            -v /dev:/host-dev \
+            -v /sys:/sys:ro \
+            -v /run/pcscd:/run/pcscd \
+            -v /run/yubios-hsm:/run/yubios-hsm \
+            -v "$PWD:/work" \
+            -w /work \
+            "dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013" \
+            bash -c '
+              set -euo pipefail
+              apt-get update -qq
+              apt-get install -y -qq --no-install-recommends \
+                efitools openssl opensc pcscd softhsm2 pkcs11-provider \
+                yubikey-manager libykcs11-1 fido2-tools usbutils
+              echo "=== Inside final rootless container layer ==="
+              ls -la /host-dev/uhid /host-dev/bus/usb 2>/dev/null || true
+              SOURCE_DATE_EPOCH=1700000000 ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /work
+            '
+          test -s usr/lib/yubiOS/secureboot/PK.auth
+          test -s usr/lib/yubiOS/secureboot/KEK.auth
+          test -s usr/lib/yubiOS/secureboot/db.auth
+          test -s usr/lib/yubiOS/secureboot/yubiOS-db.cer
+          ls -la usr/lib/yubiOS/secureboot/
 
   ci-callback:
     name: Callback to ci.yml orchestrator
