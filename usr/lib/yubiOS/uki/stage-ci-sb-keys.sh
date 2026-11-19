@@ -108,7 +108,7 @@ stage_via_yubikey() {
     cert-to-efi-sig-list -g "$OWNER_GUID" "$WORK_DIR/${var}.crt" "$WORK_DIR/${var}.esl"
     sign-efi-sig-list -c "$WORK_DIR/PK.crt" -t "$T_STR" -o "$var" "$WORK_DIR/${var}.esl" "$WORK_DIR/${var}.forsig"
     PKCS11_MODULE_PATH="$pkcs11_lib" PKCS11_PROVIDER_MODULE="$pkcs11_lib" \
-      openssl smime -sign -binary -provider pkcs11 -provider default \
+      timeout 15 openssl smime -sign -binary -provider pkcs11 -provider default \
       -in "$WORK_DIR/${var}.forsig" -out "$WORK_DIR/${var}.signed" \
       -signer "$WORK_DIR/PK.crt" -inkey "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
       -outform DER -md sha256 >/dev/null 2>&1 || return 1
