@@ -424,7 +424,7 @@ target "pq-tls-verify" {
   context     = "."
   dockerfile-inline = <<-DOCKERFILE
     # dhi.io/debian-base:trixie-debian13-dev
-    FROM dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013
+    FROM dhi.io/debian-base@sha256:ac54666cad73016059945e22a9d460cd0a60d869a8a92a8f5c367517eb778531
     SHELL ["/bin/bash", "-c"]
     RUN <<'VERIFY'
     set -euo pipefail

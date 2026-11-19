@@ -113,7 +113,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev INDEX (manifest list)
+      image: docker://dhi.io/debian-base@sha256:ac54666cad73016059945e22a9d460cd0a60d869a8a92a8f5c367517eb778531 # trixie-debian13-dev INDEX (manifest list)
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
