@@ -37,8 +37,6 @@ T_STR="$(date -u -d "@${EPOCH}" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y
 WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "$WORK_DIR"' EXIT
 
-# Sync dynamic /host-dev/hidraw* and /host-dev/uhid nodes into /dev when running
-# inside a rootless container with -v /dev:/host-dev.
 sync_host_dev() {
   if [ -d /host-dev ]; then
     if [ -e /host-dev/uhid ] && [ ! -e /dev/uhid ]; then
@@ -62,9 +60,9 @@ sync_host_dev
 
 has_physical_yubikey() {
   local d
-  for d in /sys/bus/usb/devices/*/idVendor /host-dev/bus/usb/*/*; do
+  for d in /sys/bus/usb/devices/*/idVendor; do
     [ -r "$d" ] || continue
-    if [ "$(basename "$d")" = "idVendor" ] && [ "$(cat "$d" 2>/dev/null || true)" = "1050" ]; then
+    if [ "$(cat "$d" 2>/dev/null || true)" = "1050" ]; then
       return 0
     fi
   done
@@ -110,12 +108,58 @@ find_softhsm2() {
   return 1
 }
 
+find_pkcs11_ossl_module() {
+  local cand
+  for cand in \
+    /usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11.so \
+    /usr/lib/x86_64-linux-gnu/ossl-modules/pkcs11.so \
+    /usr/lib64/ossl-modules/pkcs11.so \
+    /usr/lib/ossl-modules/pkcs11.so; do
+    if [ -e "$cand" ]; then
+      printf '%s\n' "$cand"
+      return 0
+    fi
+  done
+  return 1
+}
+
 # Exact enroll-sb.sh PKCS#11 enrollment ceremony (PK, KEK, db) against PKCS11_LIB + SB_KEY_URI
 enroll_sb_pkcs11_ceremony() {
   local pkcs11_lib="$1"
   local sb_key_uri="$2"
   export PKCS11_MODULE_PATH="$pkcs11_lib"
   export PKCS11_PROVIDER_MODULE="$pkcs11_lib"
+
+  local ossl_mod
+  if ossl_mod="$(find_pkcs11_ossl_module)"; then
+    cat > "$WORK_DIR/openssl-pkcs11.cnf" <<EOF
+openssl_conf = openssl_init
+
+[openssl_init]
+providers = provider_sect
+
+[provider_sect]
+default = default_sect
+pkcs11 = pkcs11_sect
+
+[default_sect]
+activate = 1
+
+[pkcs11_sect]
+module = $ossl_mod
+pkcs11-module-path = $pkcs11_lib
+pkcs11-module-quirks = no-deinit no-operation-state
+activate = 1
+
+[req]
+distinguished_name = req_dn
+prompt = no
+
+[req_dn]
+CN = ${CN_PREFIX}
+EOF
+    export OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf"
+  fi
 
   (
     cd "$WORK_DIR"
@@ -192,6 +236,8 @@ stage_via_swu2f() {
     return 1
   }
 
+  # Initialize SoftHSM token using the canonical ci_mkosi-installer.yml / ci_test_sealed-uki-vm.yml
+  # softhsm2-util --import pattern so both CKO_PRIVATE_KEY and CKO_PUBLIC_KEY carry full attributes.
   mkdir -p "$WORK_DIR/softhsm/tokens"
   cat > "$WORK_DIR/softhsm/softhsm2.conf" <<EOF
 directories.tokendir = $WORK_DIR/softhsm/tokens
@@ -200,9 +246,12 @@ log.level = ERROR
 EOF
   export SOFTHSM2_CONF="$WORK_DIR/softhsm/softhsm2.conf"
 
+  openssl genrsa -out "$WORK_DIR/slot9a.key" 2048 >/dev/null 2>&1
+  openssl pkcs8 -topk8 -nocrypt -in "$WORK_DIR/slot9a.key" -out "$WORK_DIR/slot9a.p8"
+  rm -f "$WORK_DIR/slot9a.key"
   softhsm2-util --init-token --free --label yubiOS-ci --pin "$PIV_PIN" --so-pin "$PIV_PIN" >/dev/null
-  pkcs11-tool --module "$softhsm_lib" --token-label yubiOS-ci --login --pin "$PIV_PIN" \
-    --keypairgen --key-type rsa:2048 --id 01 --label "PIV AUTH key" >/dev/null
+  softhsm2-util --import "$WORK_DIR/slot9a.p8" --token yubiOS-ci --label "PIV AUTH key" --id 01 --pin "$PIV_PIN" >/dev/null
+  rm -f "$WORK_DIR/slot9a.p8"
 
   enroll_sb_pkcs11_ceremony "$softhsm_lib" "pkcs11:token=yubiOS-ci;id=%01;type=private?pin-value=${PIV_PIN}"
   local rc=$?
