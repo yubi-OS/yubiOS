@@ -220,7 +220,7 @@ case "$PHASE" in
   resign)   phase_resign ;;
   prebuilt) phase_prebuilt ;;
   all)      phase_enroll; phase_resign ;;
-  *)        echo "usage: enroll-sb.sh [enroll|resign|prebuilt|all]"; exit 2 ;;
+  *)        echo "usage: enroll-sb.sh [enroll|resign|all] (or prebuilt)"; exit 2 ;;
 esac
 
 echo "Done. Do not reboot until resign reports success. The next boot enforces Secure Boot."
