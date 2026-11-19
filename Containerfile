@@ -30,7 +30,7 @@ ARG SOURCE_DATE_EPOCH
 # those caches while retaining the installed RPM and runtime linker databases.
 RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       --setopt=metadata_expire=never \
-      --setopt=updates-testing.excludepkgs=kernel-headers,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip \
+      --setopt=updates-testing.excludepkgs=kernel-headers,libXfont2,libcue,libfontenc,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip,taglib \
       install \
       libfido2 \
       yubikey-manager \
