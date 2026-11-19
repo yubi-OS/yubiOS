@@ -109,25 +109,29 @@ jobs:
             git curl iproute2 iptables nftables passwd procps util-linux \
             uidmap slirp4netns fuse-overlayfs
           if ! curl -fsSI --max-time 5 https://deb.debian.org >/dev/null 2>&1 && [ -e /proc/1/ns/net ]; then
-            CONT_PID="$"
-            for p in /proc/[0-9]*/ns/net; do
-              if [ "$p" -ef /proc/self/ns/net ]; then
-                cand="${p#/proc/}"
-                cand="${cand%/ns/net}"
-                if [ "$cand" != "$" ]; then
-                  CONT_PID="$cand"
-                  break
-                fi
+            SELF_NET="$(readlink /proc/self/ns/net)"
+            CONT_PID="$$"
+            for p in /proc/[0-9]*; do
+              pid="${p#/proc/}"
+              if [ "$(cat "$p/comm" 2>/dev/null || true)" = "tail" ] && [ "$(readlink "$p/ns/net" 2>/dev/null || true)" = "$SELF_NET" ]; then
+                CONT_PID="$pid"
+                break
               fi
             done
+            echo "Attaching slirp4netns to container init PID $CONT_PID (netns $SELF_NET)"
+            cp -f /proc/1/root/run/systemd/resolve/resolv.conf /tmp/upstream-resolv.conf 2>/dev/null || printf 'nameserver 1.1.1.1\n' > /tmp/upstream-resolv.conf
             ip link del eth0 2>/dev/null || true
-            setsid nsenter --net=/proc/1/ns/net -- slirp4netns --configure --mtu=65520 --disable-host-loopback "$CONT_PID" tap0 </dev/null > "${RUNNER_TEMP}/outer-slirp4netns.log" 2>&1 &
+            setsid unshare -m sh -c '
+              mount --bind /tmp/upstream-resolv.conf /etc/resolv.conf
+              exec nsenter --net=/proc/1/ns/net -- slirp4netns --configure --mtu=65520 --disable-host-loopback "'"$CONT_PID"'" tap0
+            ' </dev/null > "${RUNNER_TEMP}/outer-slirp4netns.log" 2>&1 &
             for _ in $(seq 1 50); do
               if ip addr show dev tap0 2>/dev/null | grep -q 'inet '; then
                 break
               fi
               sleep 0.2
             done
+            ip addr show dev tap0 || { cat "${RUNNER_TEMP}/outer-slirp4netns.log" || true; exit 1; }
             printf 'nameserver 10.0.2.3\n' > /etc/resolv.conf
             curl -fsSI --max-time 10 https://github.com >/dev/null
           fi
