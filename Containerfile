@@ -78,6 +78,9 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       vulkan-loader \
       cups-libs \
       alsa-lib \
+      alsa-ucm \
+      alsa-utils \
+      pipewire-alsa \
       at-spi2-atk \
       gtk3 \
       gtk4 \
@@ -198,11 +201,16 @@ RUN wp_commit="09f209a48153c6cef4faae9b247146abce4c5441" && \
 # ── Overlay yubiOS config tree ───────────────────────────────────────────
 COPY usr/ /usr/
 
-# ── Compile GNOME GSettings schema override & dconf default for yubiOS wallpaper ──
+# ── Compile GNOME GSettings schema override, GDM dconf profile, & PM/audio configs ──
 RUN glib-compile-schemas /usr/share/glib-2.0/schemas && \
-    install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d && \
+    install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d /etc/dconf/db/gdm.d /etc/systemd/sleep.conf.d /etc/systemd/logind.conf.d /etc/wireplumber/wireplumber.conf.d && \
     printf 'user-db:user\nsystem-db:local\n' > /etc/dconf/profile/user && \
+    printf 'user-db:user\nsystem-db:gdm\nsystem-db:local\n' > /etc/dconf/profile/gdm && \
     cp -f /usr/lib/dconf/db/local.d/00-yubios-wallpaper /etc/dconf/db/local.d/00-yubios-wallpaper && \
+    cp -f /usr/lib/dconf/db/local.d/00-yubios-wallpaper /etc/dconf/db/gdm.d/00-yubios-wallpaper && \
+    cp -f /usr/lib/systemd/sleep.conf.d/yubiOS-no-sleep.conf /etc/systemd/sleep.conf.d/yubiOS-no-sleep.conf && \
+    cp -f /usr/lib/systemd/logind.conf.d/yubiOS-no-sleep.conf /etc/systemd/logind.conf.d/yubiOS-no-sleep.conf && \
+    cp -f /usr/share/wireplumber/wireplumber.conf.d/50-yubios-rk3588-hdmi-audio.conf /etc/wireplumber/wireplumber.conf.d/50-yubios-rk3588-hdmi-audio.conf && \
     dconf update
 
 # ── SSH: allow bcvk CI root key credentials only when present ─────────────
@@ -292,6 +300,10 @@ RUN systemctl preset-all && \
     ln -sf ../yubiOS-ostree-composefs-sync.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-ostree-composefs-sync.service && \
     ln -sf /dev/null /etc/systemd/system/boot.automount && \
     ln -sf /dev/null /usr/lib/systemd/system/boot.automount && \
+    for u in sleep.target suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target systemd-suspend.service systemd-hibernate.service systemd-hybrid-sleep.service systemd-suspend-then-hibernate.service; do \
+      ln -sf /dev/null "/etc/systemd/system/$u"; \
+      ln -sf /dev/null "/usr/lib/systemd/system/$u"; \
+    done && \
     systemctl enable gdm.service && \
     systemctl set-default graphical.target && \
     rm -f /etc/machine-id /var/lib/systemd/random-seed
@@ -317,7 +329,7 @@ RUN set -- /usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     if [ "$(uname -m)" != "aarch64" ]; then \
       sed -i 's/optee tpm_ftpm_tee tee_stmm_efi dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-of-dwcmshc //' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
-      sed -i 's/xhci_plat_hcd ehci_platform ohci_platform dwc3 dwc3_of_simple phy_rockchip_inno_usb2 phy_rockchip_naneng_combphy phy_rockchip_usbdp //' /usr/lib/dracut.conf.d/50-yubiOS-fido2.conf; \
+      sed -i 's/xhci_plat_hcd ehci_platform ohci_platform dwc3 dwc3_of_simple phy_rockchip_inno_usb2 phy_rockchip_naneng_combphy phy_rockchip_usbdp rockchipdrm dw_hdmi_qp phy_rockchip_samsung_hdptx analogix_dp //' /usr/lib/dracut.conf.d/50-yubiOS-fido2.conf; \
     fi && \
     dracut --no-hostonly --force --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \

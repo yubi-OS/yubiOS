@@ -94,7 +94,7 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: [ubuntu-26.04]
+            runner: ubuntu-26.04
             docker_arch: x86_64
             buildx_arch: linux-amd64
           - arch: arm64
@@ -113,6 +113,36 @@ jobs:
     steps:
       - name: Install git for checkout and reproducibility
         run: |
+          if ! curl -fsSI --max-time 5 https://deb.debian.org >/dev/null 2>&1 && [ -e /proc/1/ns/net ]; then
+            if [ -f /proc/1/root/run/systemd/resolve/resolv.conf ]; then
+              cp -f /proc/1/root/run/systemd/resolve/resolv.conf /etc/resolv.conf 2>/dev/null || true
+            fi
+            nsenter --net=/proc/1/ns/net -- apt-get update -qq
+            nsenter --net=/proc/1/ns/net -- apt-get install -y -qq --no-install-recommends \
+              git curl iproute2 procps slirp4netns util-linux
+            SELF_NET="$(readlink /proc/self/ns/net)"
+            CONT_PID="$$"
+            for p in /proc/[0-9]*; do
+              pid="${p#/proc/}"
+              if [ "$(cat "$p/comm" 2>/dev/null || true)" = "tail" ] && [ "$(readlink "$p/ns/net" 2>/dev/null || true)" = "$SELF_NET" ]; then
+                CONT_PID="$pid"
+                break
+              fi
+            done
+            cp -f /proc/1/root/run/systemd/resolve/resolv.conf /tmp/upstream-resolv.conf 2>/dev/null || printf 'nameserver 1.1.1.1\n' > /tmp/upstream-resolv.conf
+            ip link del eth0 2>/dev/null || true
+            setsid unshare -m sh -c '
+              mount --bind /tmp/upstream-resolv.conf /etc/resolv.conf
+              exec nsenter --net=/proc/1/ns/net -- slirp4netns --configure --mtu=65520 --disable-host-loopback "'"$CONT_PID"'" tap0
+            ' </dev/null > "${RUNNER_TEMP}/outer-slirp4netns.log" 2>&1 &
+            for _ in $(seq 1 50); do
+              if ip addr show dev tap0 2>/dev/null | grep -q 'inet '; then
+                break
+              fi
+              sleep 0.2
+            done
+            printf 'nameserver 10.0.2.3\n' > /etc/resolv.conf
+          fi
           apt-get update -qq
           apt-get install -y -qq --no-install-recommends git
 
@@ -175,6 +205,10 @@ jobs:
           install -d -m 0700 -o "$ROOTLESS_USER" -g "$ROOTLESS_USER" "$ROOTLESS_RUNTIME_DIR"
           chown "$ROOTLESS_USER:$ROOTLESS_USER" "$ROOTLESS_DATA_DIR"
           chmod 0700 "$ROOTLESS_DATA_DIR"
+          install -d -m 0777 /run/pcscd /run/yubios-hsm
+          chmod a+rw /dev/uhid /dev/hidraw* 2>/dev/null || true
+          chmod -R a+rw /dev/bus/usb 2>/dev/null || true
+          rm -rf docker docker-rootless-extras docker-29.9.3.tgz docker-rootless-extras-29.9.3.tgz "buildx-v0.39.0.${{ matrix.buildx_arch }}"
           # RootlessKit needs unprivileged user namespaces on Ubuntu 24.04.
           if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
             sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
@@ -222,12 +256,35 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
         run: echo "${{ secrets.DOCKER }}" | docker -H unix:///run/docker-rootless/docker.sock login -u 0mniteck42 --password-stdin
 
-      - name: Stage initial Secure Boot keys (physical YubiKey on rock1 or swu2f fallback)
+      - name: Stage initial Secure Boot keys inside final rootless layer (physical YubiKey on rock1 or swu2f fallback)
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER }}
         run: |
-          apt-get install -y -qq --no-install-recommends efitools openssl pcscd yubikey-manager libykcs11-1 fido2-tools softhsm2 2>/dev/null || \
-            apt-get install -y -qq --no-install-recommends efitools openssl
+          if [ -n "${DOCKER_PASSWORD:-}" ]; then
+            printf '%s' "$DOCKER_PASSWORD" | docker -H unix:///run/docker-rootless/docker.sock login dhi.io -u 0mniteck42 --password-stdin
+          fi
           chmod +x usr/lib/yubiOS/uki/stage-ci-sb-keys.sh
-          SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh .
+          chmod -R a+rwX "$PWD"
+          docker -H unix:///run/docker-rootless/docker.sock run --rm \
+            --privileged \
+            --security-opt label=disable \
+            -v /dev:/host-dev \
+            -v /sys:/sys:ro \
+            -v /run/pcscd:/run/pcscd \
+            -v /run/yubios-hsm:/run/yubios-hsm \
+            -v "$PWD:/work" \
+            -w /work \
+            "dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013" \
+            bash -c '
+              set -euo pipefail
+              apt-get update -qq
+              apt-get install -y -qq --no-install-recommends \
+                efitools openssl opensc pcscd softhsm2 pkcs11-provider \
+                yubikey-manager ykcs11 fido2-tools usbutils
+              SOURCE_DATE_EPOCH="'"${SOURCE_DATE_EPOCH}"'" ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /work
+            '
+          chown -R 0:0 usr/lib/yubiOS/secureboot repro-evidence
+          find usr/lib/yubiOS/secureboot repro-evidence -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} +
 
       - name: Build and verify dev/test image (${{ matrix.arch }})
         env:

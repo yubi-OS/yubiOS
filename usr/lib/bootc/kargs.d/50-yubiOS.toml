@@ -32,4 +32,6 @@ kargs = [
   # not as a global karg, to avoid affecting non-encrypted partitions.
   "audit=0",
   "splash",
+  "quiet",
+  "no_console_suspend",
 ]
