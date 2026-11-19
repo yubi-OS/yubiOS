@@ -227,7 +227,7 @@ apalache-mc check --init=IndInv --inv=IndInv --length=1 specs/tla/YubiOSBootEnro
 ```bash
 # Check negated reachability predicate NotGoal_EditThenAddSecondFile (exits 12 with witness JSON)
 java -cp tools/tla2tools.jar tlc2.TLC \
-  -dumpTrace json session/witness-edit-add.json \
+  -dumpTrace json /tmp/tlc-witness-edit-add.json \
   -config specs/tla/Witness_EditThenAdd.cfg \
   specs/tla/JevWorkbenchSpec.tla || test $? -eq 12
 ```
