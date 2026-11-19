@@ -143,8 +143,9 @@ phase_enroll() {
   [ "$(setup_mode)" = "0" ] || { yubiOS_log "SetupMode still 1 after PK write"; exit 1; }
   openssl x509 -in db.crt -outform DER -out "$KEYDIR/yubiOS-db.cer"
   if [ -d "$ESP/EFI" ]; then
-    mkdir -p "$ESP/EFI/yubiOS/secureboot" 2>/dev/null || true
-    cp -f PK.auth KEK.auth db.auth db.crt "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/secureboot/" 2>/dev/null || true
+    mkdir -p "$ESP/EFI/yubiOS/secureboot" "$ESP/EFI/yubiOS/keys" 2>/dev/null || true
+    cp -f PK.auth KEK.auth db.auth PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/secureboot/" 2>/dev/null || true
+    cp -f PK.auth KEK.auth db.auth PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/keys/" 2>/dev/null || true
   fi
   touch "$ENROLLED_MARK"
   yubiOS_log "Keys enrolled. Next: resign the loader and UKIs before any reboot."
@@ -184,11 +185,42 @@ phase_resign() {
   yubiOS_log "Resigned ${#images[@]} image(s) with the db key. Reboot is now safe."
 }
 
+phase_prebuilt() {
+  local sm
+  sm="$(setup_mode)" || exit 1
+  if [ "$sm" != "1" ]; then
+    yubiOS_log "Not in setup mode (SetupMode=$sm). Refusing to write keys."
+    exit 1
+  fi
+  local src_dir=""
+  for cand in "$ESP/EFI/yubiOS/secureboot" "$ESP/EFI/yubiOS/keys" "/usr/lib/yubiOS/secureboot" "$KEYDIR"; do
+    if [ -f "$cand/PK.auth" ] && [ -f "$cand/KEK.auth" ] && [ -f "$cand/db.auth" ]; then
+      src_dir="$cand"
+      break
+    fi
+  done
+  [ -n "$src_dir" ] || { yubiOS_log "No prebuilt PK.auth/KEK.auth/db.auth found under $ESP/EFI/yubiOS/{secureboot,keys} or /usr/lib/yubiOS/secureboot"; exit 1; }
+  install -d -m 0700 "$KEYDIR"
+  if [ "$src_dir" != "$KEYDIR" ]; then
+    cp -f "$src_dir"/* "$KEYDIR/" 2>/dev/null || true
+  fi
+  yubiOS_log "Writing prebuilt PK, KEK, db from $src_dir through the StMM store"
+  ensure_efivars_rw
+  efi-updatevar -f "$src_dir/PK.auth" PK
+  efi-updatevar -f "$src_dir/KEK.auth" KEK
+  efi-updatevar -f "$src_dir/db.auth" db
+  for v in PK KEK db; do efi-readvar -v "$v"; done
+  [ "$(setup_mode)" = "0" ] || { yubiOS_log "SetupMode still 1 after PK write"; exit 1; }
+  touch "$ENROLLED_MARK"
+  yubiOS_log "Prebuilt Secure Boot keys enrolled (SetupMode=0)."
+}
+
 case "$PHASE" in
-  enroll) phase_enroll ;;
-  resign) phase_resign ;;
-  all)    phase_enroll; phase_resign ;;
-  *)      echo "usage: enroll-sb.sh [enroll|resign|all]"; exit 2 ;;
+  enroll)   phase_enroll ;;
+  resign)   phase_resign ;;
+  prebuilt) phase_prebuilt ;;
+  all)      phase_enroll; phase_resign ;;
+  *)        echo "usage: enroll-sb.sh [enroll|resign|prebuilt|all]"; exit 2 ;;
 esac
 
 echo "Done. Do not reboot until resign reports success. The next boot enforces Secure Boot."

@@ -350,6 +350,12 @@ pull_board_firmware() {
   [ "$magic" = "524b4e53" ] || die "$bin does not start with RKNS magic (got $magic)"
   sha256sum "$bin" | tee "$FW_DIR/$b/u-boot-rockchip.bin.sha256"
   cp -f "$bin" "$FW_DIR/$b/u-boot-rockchip.bin"
+  local spi_bin="$FW_DIR/$b/firmware/u-boot-rockchip-spi.bin"
+  [ -f "$spi_bin" ] || spi_bin="$(find "$FW_DIR/$b" -name 'u-boot-rockchip-spi.bin' | head -n1 || true)"
+  if [ -n "$spi_bin" ] && [ -f "$spi_bin" ]; then
+    sha256sum "$spi_bin" | tee "$FW_DIR/$b/u-boot-rockchip-spi.bin.sha256"
+    cp -f "$spi_bin" "$FW_DIR/$b/u-boot-rockchip-spi.bin"
+  fi
   ls -la "$FW_DIR/$b/firmware/" 2>/dev/null || ls -la "$FW_DIR/$b/"
 }
 
@@ -443,9 +449,24 @@ EOF
   [ -n "$cd_digest" ] || die "Could not extract composefs digest from installed UKI/BLS entry"
   echo "Verified installed composefs digest: $cd_digest"
 
+  # Deploy the image's baked-in Secure Boot keys (/usr/lib/yubiOS/secureboot)
+  # to both /boot/EFI/yubiOS/secureboot and /boot/EFI/yubiOS/keys after bootc install
+  # (same as enroll-sb.sh), and save u-boot-rockchip.bin + u-boot-rockchip-spi.bin to /boot.
+  sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/secureboot" "$MNT_DIR/boot/EFI/yubiOS/keys" "$MNT_DIR/boot/EFI/yubiOS/firmware"
+  sudo podman run --rm --entrypoint /bin/sh "$RESOLVED_OS" -c 'if [ -d /usr/lib/yubiOS/secureboot ]; then tar -C /usr/lib/yubiOS/secureboot -cf - .; fi' \
+    | sudo tar -C "$MNT_DIR/boot/EFI/yubiOS/secureboot" -xf - 2>/dev/null || true
+  sudo cp -f "$MNT_DIR/boot/EFI/yubiOS/secureboot/"* "$MNT_DIR/boot/EFI/yubiOS/keys/" 2>/dev/null || true
+
+  sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
+  sudo cp -f "$fw_bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip.bin"
+  if [ -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" ]; then
+    sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/u-boot-rockchip-spi.bin"
+    sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip-spi.bin"
+  fi
+
   if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
     log "Signing installed EFI loaders & UKIs on $p1 (mode=$SIGN_MODE, SIGNKEY=$SIGNKEY)"
-    sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/keys"
+    sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/secureboot/"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/keys/"
     while IFS= read -r -d '' efi_file; do
       echo "Signing $efi_file..."
@@ -461,6 +482,10 @@ EOF
   sudo sync
   sudo umount "$MNT_DIR/boot"
   sudo mkdir -p "$MNT_DIR/boot/loader.1/entries" "$MNT_DIR/boot/EFI" "$MNT_DIR/efi"
+  sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
+  if [ -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" ]; then
+    sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/u-boot-rockchip-spi.bin"
+  fi
   sudo ln -sfn loader.1 "$MNT_DIR/boot/loader"
   csum_short="$(printf '%s' "$cd_digest" | cut -c1-64)"
   bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"

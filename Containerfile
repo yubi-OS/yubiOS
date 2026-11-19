@@ -210,9 +210,17 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
     cp /usr/lib/yubiOS/sshd_config.d/10-yubiOS-bcvk-root-key.conf \
       /etc/ssh/sshd_config.d/10-yubiOS-bcvk-root-key.conf
 
-# ── Permissions for enrollment and first-boot scripts ────────────────────
+# ── Permissions for enrollment and first-boot scripts + staged Secure Boot keys ──
 RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
-    mkdir -p /etc/kernel/install.d /etc/ostree && \
+    mkdir -p /etc/kernel/install.d /etc/ostree /usr/lib/yubiOS/secureboot /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
+    if [ ! -f /usr/lib/yubiOS/secureboot/PK.auth ]; then \
+      SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
+    fi && \
+    cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ && \
+    cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ && \
+    test -s /usr/lib/yubiOS/secureboot/PK.auth && \
+    test -s /boot/EFI/yubiOS/secureboot/PK.auth && \
+    test -s /boot/EFI/yubiOS/keys/PK.auth && \
     cp -f /usr/lib/ostree/prepare-root.conf /etc/ostree/prepare-root.conf && \
     cp -f /usr/lib/kernel/install.d/05-rpmostree.install /etc/kernel/install.d/05-rpmostree.install && \
     cp -f /usr/lib/kernel/install.d/95-yubios-uki-resign.install /etc/kernel/install.d/95-yubios-uki-resign.install
@@ -400,7 +408,7 @@ RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
 # for the final image differs from the digest embedded in the UKI (computed on the rootfs
 # stage). Re-pin them as the last step so the two digests agree.
 ARG SOURCE_DATE_EPOCH
-RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT /boot/EFI/yubiOS /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys
 
 # Single-layer shipped image. The composefs digest the installer checks is computed from the
 # image layers, while the UKI embeds the merged-filesystem digest. One layer makes the two agree

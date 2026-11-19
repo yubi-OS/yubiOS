@@ -147,7 +147,11 @@ RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
     ! test -e /var/lib/systemd/random-seed
 
 RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump && \
-    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd
+    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
+    if [ -d /usr/lib/yubiOS/secureboot ]; then \
+      cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ 2>/dev/null || true; \
+      cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ 2>/dev/null || true; \
+    fi
 
 RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /
@@ -162,7 +166,7 @@ FROM rootfs AS prefinal
 COPY --from=uki /out/ /boot/EFI/Linux/
 RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
 ARG SOURCE_DATE_EPOCH
-RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
+RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT /boot/EFI/yubiOS /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys
 
 FROM scratch
 # hadolint ignore=DL3067

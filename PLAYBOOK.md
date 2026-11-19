@@ -23,9 +23,13 @@
    gh repo fork yubi-OS/yubiOS --clone=true
    cd yubiOS
    ```
-2. **Build & Publish via CI (or Pull Pre-Built):**
+2. **Build & Publish Firmware + OS Images via CI (or Pull Pre-Built):**
    ```bash
-   # Trigger full rootless BuildKit two-build reproducible CI on your fork:
+   # Build & push ARM64 board firmware (u-boot-rockchip.bin + u-boot-rockchip-spi.bin -> :firmware-<board>):
+   gh workflow run ci_firmware-rk.yml -f Docker_push=true
+
+   # Build & push production (:latest) and dev (:dev) OS images on rock1 (using the physical
+   # YubiKey or swu2f fallback to stage initial Secure Boot keys into the image and workflow artifact):
    gh workflow run yubiOS-ci.yml -f Docker_push=true
    gh workflow run ci_dev_image.yml -f Docker_push=true
 

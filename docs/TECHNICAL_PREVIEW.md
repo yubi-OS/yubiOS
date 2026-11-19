@@ -93,21 +93,42 @@ docker pull docker.io/0mniteck/yubios:latest
 IMAGE_REF=docker.io/0mniteck/yubios:latest bash tests/verify-oci-attestations.sh
 ```
 
-### Option 2B: Build & Publish via GitHub Actions on Your Fork
+### Option 2B: Build & Publish Firmware + OS Images via GitHub Actions on Your Fork
 
-Trigger the rootless BuildKit CI pipelines directly from the **Actions** tab or via `gh`:
+Trigger the rootless BuildKit CI pipelines for both the **ARM64 board firmware** (`ci_firmware-rk.yml`) and the **OS images** (`yubiOS-ci.yml` and `ci_dev_image.yml`) directly from the **Actions** tab or via `gh`:
 
 ```bash
 # 1. Refresh upstream Fedora bootc & DHI base digests (if needed)
 gh workflow run fetch-fedora-bootc-manifest.yml
 gh workflow run fetch-dhi-manifest.yml
 
-# 2. Build & push the production image (:latest and :<sha>)
+# 2. Build & push the ARM64 Secure World + U-Boot UEFI firmware bundles
+#    (TF-A BL31 v2.15.0 + OP-TEE 4.11 fTPM/StandaloneMM + EDK2 StMM + U-Boot UEFI BL33)
+#    Publishes docker.io/0mniteck/yubios:firmware-{rock5b-rk3588,rockpro64-rk3399,pinetab2-rk3566,qemu-arm64}
+#    containing u-boot-rockchip.bin and u-boot-rockchip-spi.bin
+gh workflow run ci_firmware-rk.yml -f Docker_push=true
+
+# 3. Build & push the production OS image (:latest and :<sha>)
+#    The arm64 leg runs on rock1 using the attached physical YubiKey (or opts for the
+#    swu2f path if no YubiKey is attached) to stage the initial Secure Boot keys into
+#     the image and export them in reproducibility-production-arm64-<sha>
 gh workflow run yubiOS-ci.yml -f Docker_push=true
 
-# 3. Build & push the dev/test image (:dev and :dev-<sha>)
+# 4. Build & push the dev/test OS image (:dev and :dev-<sha>)
+#    Also stages initial Secure Boot keys via rock1's YubiKey (or swu2f fallback)
+#    and exports them in reproducibility-dev-arm64-<sha>
 gh workflow run ci_dev_image.yml -f Docker_push=true
 ```
+
+#### Initial Secure Boot Keys & Firmware Binaries on `/boot`
+
+- **Hardware YubiKey on `rock1` (with `swu2f` Fallback):** During `yubiOS-ci.yml` and `ci_dev_image.yml`, `usr/lib/yubiOS/uki/stage-ci-sb-keys.sh` runs on `rock1` and uses the attached physical YubiKey PIV slot `9a` (or opts for the `swu2f` path when no physical YubiKey is present) to stage `PK.{crt,esl,auth}`, `KEK.{crt,esl,auth}`, `db.{crt,esl,auth}`, and `yubiOS-db.cer`.
+- **Included in the Image & Workflow Artifact Export:**
+  - Baked into the OCI image at `/usr/lib/yubiOS/secureboot/`, `/boot/EFI/yubiOS/secureboot/`, and `/boot/EFI/yubiOS/keys/`.
+  - Saved in the workflow artifact (`reproducibility-production-arm64-<sha>` and `reproducibility-dev-arm64-<sha>`) under `secureboot/` and `EFI/yubiOS/{secureboot,keys}/`.
+- **Deployed to `/boot` After `bootc install`:**
+  - `scripts/flash-device-e2e.sh` and `yubiOS-ostree-composefs-sync.service` deploy the Secure Boot keys to both `/boot/EFI/yubiOS/secureboot/` and `/boot/EFI/yubiOS/keys/` (matching `enroll-sb.sh`, so Secure Boot can be enrolled before first boot or via `yubiOS-enroll-sb prebuilt`).
+  - `scripts/flash-device-e2e.sh` also saves `/boot/u-boot-rockchip.bin` and `/boot/u-boot-rockchip-spi.bin` (plus `/boot/EFI/yubiOS/firmware/`) directly onto `/boot`.
 
 Every CI build enforces:
 - **OPA/Rego Build Policy (`yubiOS.rego`):** Rejects any unpinned or floating base image before a single layer executes.
