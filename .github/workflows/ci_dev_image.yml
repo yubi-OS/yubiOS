@@ -132,17 +132,11 @@ jobs:
 
       - name: Install docker CLI + buildx (${{ matrix.arch }})
         run: |
+          printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list.d/debian-fallback.list
           apt-get update -qq || true
-          if ! apt-get install -y -qq --no-install-recommends \
-            git curl iproute2 iptables jq nftables passwd procps python3 util-linux \
-            uidmap slirp4netns fuse-overlayfs; then
-            rm -f /etc/apt/sources.list.d/* /etc/apt/sources.list
-            printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list
-            apt-get update -qq
-            apt-get install -y -qq --no-install-recommends \
-              git curl iproute2 iptables jq nftables passwd procps python3 util-linux \
-              uidmap slirp4netns fuse-overlayfs
-          fi
+          apt-get install -y -qq --allow-downgrades --no-install-recommends \
+            curl iproute2 iptables jq nftables passwd procps python3 util-linux \
+            uidmap slirp4netns fuse-overlayfs
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-29.9.3.tgz"
           wcurl "https://download.docker.com/linux/static/stable/${{ matrix.docker_arch }}/docker-rootless-extras-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.${{ matrix.buildx_arch }}"
@@ -221,7 +215,7 @@ jobs:
             cat "${RUNNER_TEMP}/dockerd-rootless.log"
             exit 1
           fi
-          docker -H unix:///run/docker-rootless/docker.sock buildx create --name hardened \
+          docker buildx create --name hardened \
             --driver docker-container \
             --driver-opt "image=${BUILDKIT_IMAGE}" \
             --use || true
@@ -237,7 +231,7 @@ jobs:
           GIT_SHA: ${{ github.sha }}
           PUSH: 'false'
         run: |
-          docker -H unix:///run/docker-rootless/docker.sock buildx bake \
+          docker buildx bake \
             --builder hardened \
             --file yubiOS-bake.hcl \
             yubios-dev-ci
@@ -265,7 +259,7 @@ jobs:
           GIT_SHA: ${{ github.sha }}
           PUSH: 'true'
         run: |
-          docker -H unix:///run/docker-rootless/docker.sock buildx bake \
+          docker buildx bake \
             --builder hardened \
             --file yubiOS-bake.hcl \
             yubios-dev
@@ -294,86 +288,23 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
       - name: Install docker CLI + buildx
         run: |
+          printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list.d/debian-fallback.list
           apt-get update -qq || true
-          if ! apt-get install -y -qq --no-install-recommends \
-            git curl iproute2 iptables jq nftables passwd procps util-linux \
-            uidmap slirp4netns fuse-overlayfs; then
-            rm -f /etc/apt/sources.list.d/* /etc/apt/sources.list
-            printf 'deb [trusted=yes] http://deb.debian.org/debian trixie main\n' > /etc/apt/sources.list
-            apt-get update -qq
-            apt-get install -y -qq --no-install-recommends \
-              git curl iproute2 iptables jq nftables passwd procps util-linux \
-              uidmap slirp4netns fuse-overlayfs
-          fi
+          apt-get install -y -qq --allow-downgrades --no-install-recommends curl jq ca-certificates
           wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-29.9.3.tgz"
-          wcurl "https://download.docker.com/linux/static/stable/x86_64/docker-rootless-extras-29.9.3.tgz"
           wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.linux-amd64"
           printf '%s  %s\n' 'ff0eeb5d9994a6891b9bebe7c37c8982642da9fdc3b7f19302b3c2276b306b859d56e76f00148eeed2e36daffa576873e15276d79a61e1798e11741511c6e65e' docker-29.9.3.tgz | sha512sum --check --strict
-          printf '%s  %s\n' '3ea734eb68ae8e74159725410072bc196251bba2f12988014193d694a8a12e4a38f448c1d980563e810cfa4c92c8e364e8aa69652eda1900f91768ea7badb693' docker-rootless-extras-29.9.3.tgz | sha512sum --check --strict
           printf '%s  %s\n' '9c3a17f0b782cfcc12b883546ed4efe684900f2139bee2ca369518aea35ea36a44201f9669f0eab43fca926926d90e11bf8cabf4a87653ad7aff50c5dba80fa6' buildx-v0.39.0.linux-amd64 | sha512sum --check --strict
           tar xzf docker-29.9.3.tgz
-          tar xzf docker-rootless-extras-29.9.3.tgz
           DOCKER_TOOLS_DIR="${RUNNER_TEMP}/docker-tools"
-          ROOTLESS_USER=docker-rootless
-          ROOTLESS_RUNTIME_DIR=/run/docker-rootless
-          ROOTLESS_SOCKET="${ROOTLESS_RUNTIME_DIR}/docker.sock"
-          ROOTLESS_DATA_DIR="$(mktemp -d /mnt/docker-rootless.XXXXXX)"
           mkdir -p "$DOCKER_TOOLS_DIR/bin" "$DOCKER_TOOLS_DIR/config/cli-plugins"
           install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
-          install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
-          install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 buildx-v0.39.0.linux-amd64 "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
-          useradd --create-home --shell /bin/sh "$ROOTLESS_USER"
-          printf '%s\n' "${ROOTLESS_USER}:100000:65536" > /etc/subuid
-          printf '%s\n' "${ROOTLESS_USER}:100000:65536" > /etc/subgid
-          install -d -m 0700 -o "$ROOTLESS_USER" -g "$ROOTLESS_USER" "$ROOTLESS_RUNTIME_DIR"
-          chown "$ROOTLESS_USER:$ROOTLESS_USER" "$ROOTLESS_DATA_DIR"
-          chmod 0700 "$ROOTLESS_DATA_DIR"
-          # RootlessKit needs unprivileged user namespaces on Ubuntu 24.04.
-          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
-            sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-          fi
           echo "$DOCKER_TOOLS_DIR/bin" >> "$GITHUB_PATH"
           echo "DOCKER_CONFIG=$DOCKER_TOOLS_DIR/config" >> "$GITHUB_ENV"
-          export PATH="$DOCKER_TOOLS_DIR/bin:$PATH"
-          export DOCKER_CONFIG="$DOCKER_TOOLS_DIR/config"
-          export DOCKER_HOST="unix://${ROOTLESS_SOCKET}"
-          setpriv \
-            --reuid="$ROOTLESS_USER" \
-            --regid="$ROOTLESS_USER" \
-            --init-groups \
-            env \
-              HOME="/home/${ROOTLESS_USER}" \
-              USER="$ROOTLESS_USER" \
-              LOGNAME="$ROOTLESS_USER" \
-              XDG_RUNTIME_DIR="$ROOTLESS_RUNTIME_DIR" \
-              PATH="$DOCKER_TOOLS_DIR/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
-              DOCKERD_ROOTLESS_ROOTLESSKIT_NET=slirp4netns \
-              dockerd-rootless.sh \
-                --data-root="$ROOTLESS_DATA_DIR" \
-                --storage-driver=fuse-overlayfs \
-                -H "unix://${ROOTLESS_SOCKET}" \
-            > "${RUNNER_TEMP}/dockerd-rootless.log" 2>&1 &
-          ROOTLESS_DOCKER_PID=$!
-          for i in $(seq 1 60); do
-            docker -H "unix://${ROOTLESS_SOCKET}" info >/dev/null 2>&1 && break
-            if ! kill -0 "$ROOTLESS_DOCKER_PID" 2>/dev/null; then
-              cat "${RUNNER_TEMP}/dockerd-rootless.log"
-              exit 1
-            fi
-            sleep 1
-          done
-          if ! docker -H "unix://${ROOTLESS_SOCKET}" info >/dev/null 2>&1; then
-            cat "${RUNNER_TEMP}/dockerd-rootless.log"
-            exit 1
-          fi
-          docker -H unix:///run/docker-rootless/docker.sock buildx create --name hardened \
-            --driver docker-container \
-            --driver-opt "image=${BUILDKIT_IMAGE}" \
-            --use || true
 
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER }}" | docker -H unix:///run/docker-rootless/docker.sock login -u 0mniteck42 --password-stdin
+        run: echo "${{ secrets.DOCKER }}" | docker login -u 0mniteck42 --password-stdin
 
       - name: Guard dev/test manifest tags
         run: |
@@ -401,7 +332,7 @@ jobs:
           if [ "$SRC_SHA" != "$GITHUB_SHA" ]; then
             EXTRA_SRC_TAGS=(-t "0mniteck/yubios:dev-${SRC_SHA}" -t "0mniteck/yubios:dev-${SRC_SHA:0:8}")
           fi
-          docker -H unix:///run/docker-rootless/docker.sock buildx imagetools create \
+          docker buildx imagetools create \
             -t "$DEV_SHA_TAG" \
             -t "$DEV_FLOATING_TAG" \
             -t "$DEV_SHORT_SHA_TAG" \
@@ -410,7 +341,7 @@ jobs:
             "0mniteck/yubios:dev-${SRC_SHA}-arm64"
 
       - name: Verify manifest list
-        run: docker -H unix:///run/docker-rootless/docker.sock buildx imagetools inspect "$DEV_SHA_TAG"
+        run: docker buildx imagetools inspect "$DEV_SHA_TAG"
 
       - name: Install cosign v3.1.4
         run: |
@@ -425,10 +356,10 @@ jobs:
           IMAGE_TAG: 0mniteck/yubios:dev-${{ github.sha }}
         run: |
           set -euo pipefail
-          DIGEST=$(docker -H unix:///run/docker-rootless/docker.sock buildx imagetools inspect "$IMAGE_TAG" --format '{{.Manifest.Digest}}')
+          DIGEST=$(docker buildx imagetools inspect "$IMAGE_TAG" --format '{{.Manifest.Digest}}')
           echo "DIGEST=$DIGEST" >> "$GITHUB_OUTPUT"
-          docker -H unix:///run/docker-rootless/docker.sock buildx imagetools inspect "$IMAGE_TAG" --format '{{json .SBOM}}' > sbom.json
-          docker -H unix:///run/docker-rootless/docker.sock buildx imagetools inspect "$IMAGE_TAG" --format '{{json .Provenance}}' > provenance.json
+          docker buildx imagetools inspect "$IMAGE_TAG" --format '{{json .SBOM}}' > sbom.json
+          docker buildx imagetools inspect "$IMAGE_TAG" --format '{{json .Provenance}}' > provenance.json
           test -s sbom.json
           test -s provenance.json
           jq -e . sbom.json
