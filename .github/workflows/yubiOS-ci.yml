@@ -196,7 +196,7 @@ jobs:
     steps:
       - name: Install git for checkout and reproducibility
         run: |
-          if [ "$(uname -m)" = "aarch64" ] && [ -e /proc/1/ns/net ]; then
+          if [ "$(uname -m)" = "aarch64" ] && [ -e /proc/1/ns/net ] && ! apt-get update -qq 2>/dev/null; then
             if [ -f /proc/1/root/run/systemd/resolve/resolv.conf ]; then
               cp -f /proc/1/root/run/systemd/resolve/resolv.conf /etc/resolv.conf 2>/dev/null || true
             fi
