@@ -140,15 +140,16 @@ jobs:
           WORK="$(mktemp -d /mnt/matrix-work.XXXXXX)"
           trap 'umount -R "$WORK/mnt" 2>/dev/null || true; rm -rf "$WORK"' EXIT
 
-          python3 - "$VARIANT" "$FEDORA_BOOTC_IMAGE" "$WORK/Containerfile.variant" <<'PY'
+          python3 - "$VARIANT" "$FEDORA_BOOTC_IMAGE" "$WORK/Containerfile.variant" "$WORK/Containerfile.diag" <<'PY'
           import pathlib, sys
-          v, base, out = sys.argv[1:4]
-          sde = "${SOURCE_DATE_EPOCH}"
+          v, base, out, diag_out = sys.argv[1:5]
+          sde = "1700000000"
           kver = "${kver}"
 
           common_header = (
               f"FROM {base} AS base_stage\n"
               "ARG SOURCE_DATE_EPOCH=1700000000\n"
+              "ENV SOURCE_DATE_EPOCH=1700000000\n"
               "RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False --setopt=metadata_expire=never install systemd-ukify systemd-boot-unsigned && \\\n"
               "    dnf clean all && \\\n"
               "    rm -rf /run/dnf /var/cache/dnf /var/cache/ldconfig/aux-cache /var/cache/libdnf5 /var/log/dnf* /var/log/hawkey.log /var/log/libdnf* /var/lib/dnf/repos /var/lib/dnf/system-repo.lock /usr/lib/sysimage/libdnf5/transaction_history.sqlite* /var/lib/systemd/catalog/database /etc/machine-id /var/lib/systemd/random-seed && \\\n"
@@ -181,28 +182,39 @@ jobs:
           repin_boot_uki_only = f"RUN touch -h -d '@{sde}' / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/Linux/*.efi\n"
 
           if v == "V1":
-              df = common_header + "FROM base_stage AS rootfs\n" + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = common_header + "FROM base_stage AS rootfs\n" + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
           elif v == "V2":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
           elif v == "V3":
-              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V4":
-              df = common_header + "FROM base_stage AS rootfs\n" + touch_modified_only + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = common_header + "FROM base_stage AS rootfs\n" + touch_modified_only + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
           elif v == "V5":
-              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_modified_only + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_modified_only + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V6":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_modified_only + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_modified_only + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
           elif v == "V7":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V8":
-              df = common_header + "FROM base_stage AS rootfs_prep\n" + strip_ostree + stage_sdboot + touch_all + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = common_header + "FROM base_stage AS rootfs_prep\n" + strip_ostree + stage_sdboot + touch_all + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V9":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + "RUN ostree container commit || true\n" + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + "RUN ostree container commit || true\n" + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V10":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS prefinal\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only + "FROM scratch\nCOPY --from=prefinal / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n"
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS prefinal\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only + "FROM scratch AS final_stage\nCOPY --from=prefinal / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n"
           else:
               raise SystemExit(f"Unknown variant {v}")
           pathlib.Path(out).write_text(df)
+          diag_df = (
+              df + "\n"
+              "FROM base_stage AS diag_compute\n"
+              "RUN --mount=type=bind,from=rootfs,target=/target bootc container compute-composefs-digest /target > /rootfs_digest.txt\n"
+              "RUN --mount=type=bind,from=final_stage,target=/target bootc container compute-composefs-digest /target > /final_tree_digest.txt\n"
+              "FROM scratch AS diag_export\n"
+              "COPY --from=diag_compute /rootfs_digest.txt /rootfs_digest.txt\n"
+              "COPY --from=diag_compute /final_tree_digest.txt /final_tree_digest.txt\n"
+              "COPY --from=uki /out/ /uki/\n"
+          )
+          pathlib.Path(diag_out).write_text(diag_df)
           PY
 
           cat "$WORK/Containerfile.variant"
@@ -230,11 +242,21 @@ jobs:
             tar -xf "$out_dir/image.tar" -C "$out_dir/layout"
             rm -f "$out_dir/image.tar"
             if [ "$run" = "a" ]; then
+              mkdir -p "$WORK/diag" "$WORK/ExportRoot"
               BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx build \
                 --builder "$bname" \
                 --platform linux/arm64 \
                 --build-arg SOURCE_DATE_EPOCH=1700000000 \
-                --output "type=docker,name=matrix-test:${VARIANT},rewrite-timestamp=${REWRITE_TS}" \
+                --target diag_export \
+                --output "type=local,dest=$WORK/diag" \
+                -f "$WORK/Containerfile.diag" \
+                "$WORK"
+              BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx build \
+                --builder "$bname" \
+                --platform linux/arm64 \
+                --build-arg SOURCE_DATE_EPOCH=1700000000 \
+                --target final_stage \
+                --output "type=local,dest=$WORK/ExportRoot" \
                 -f "$WORK/Containerfile.variant" \
                 "$WORK"
             fi
@@ -257,18 +279,13 @@ jobs:
           PY
           )"
 
-          CID="$(docker create "matrix-test:${VARIANT}")"
-          mkdir -p "$WORK/ExportRoot"
-          docker export "$CID" | tar -x -C "$WORK/ExportRoot"
-          docker rm -f "$CID" >/dev/null
-
-          UKI_FILE="$(find "$WORK/ExportRoot/boot/EFI/Linux" -name '*.efi' | head -n1)"
+          UKI_FILE="$(find "$WORK/diag/uki" -name '*.efi' | head -n1)"
           UKI_CMDLINE="$(python3 scripts/extract_uki_cmdline.py "$UKI_FILE")"
           UKI_DIGEST="$(grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' <<<"$UKI_CMDLINE" | head -1 | sed -E 's/^.*[:=]\??//')"
+          ROOTFS_TREE_DIGEST="$(tr -d '\r\n' < "$WORK/diag/rootfs_digest.txt")"
+          FINAL_TREE_DIGEST="$(tr -d '\r\n' < "$WORK/diag/final_tree_digest.txt")"
 
-          FINAL_TREE_DIGEST="$(docker run --rm --privileged "matrix-test:${VARIANT}" sh -c 'mkdir -p /target && mount --bind / /target && bootc container compute-composefs-digest /target' | tail -n1 | tr -d '\r\n')"
-
-          # Also run actual bootc install to-filesystem --composefs-backend from the OCI layout to see what composefs image digest bootc writes from the OCI layers!
+          # Run actual bootc install to-filesystem --composefs-backend from the OCI layout in a privileged chroot
           truncate -s 6G "$WORK/disk.raw"
           LOOP="$(losetup --find --show --partscan "$WORK/disk.raw")"
           printf 'label: gpt\nsize=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name=ESP\ntype=b921b045-1df0-41c3-af44-4c6f280d3fae, name=root\n' | sfdisk "$LOOP"
@@ -279,10 +296,28 @@ jobs:
           mount "${LOOP}p2" "$WORK/mnt"
           mkdir -p "$WORK/mnt/boot"
           mount "${LOOP}p1" "$WORK/mnt/boot"
+
+          mkdir -p "$WORK/ExportRoot/proc" "$WORK/ExportRoot/sys" "$WORK/ExportRoot/dev" "$WORK/ExportRoot/run" "$WORK/ExportRoot/tmp" "$WORK/ExportRoot/var/tmp" "$WORK/ExportRoot/oci" "$WORK/ExportRoot/target"
+          mount --bind /proc "$WORK/ExportRoot/proc"
+          mount --bind /sys "$WORK/ExportRoot/sys"
+          mount --bind /dev "$WORK/ExportRoot/dev"
+          mount -t tmpfs tmpfs "$WORK/ExportRoot/run"
+          mount -t tmpfs tmpfs "$WORK/ExportRoot/tmp"
+          mount -t tmpfs tmpfs "$WORK/ExportRoot/var/tmp"
+          touch "$WORK/ExportRoot/run/.containerenv"
+          mount --bind "$WORK/oci-a/layout" "$WORK/ExportRoot/oci"
+          mount --bind "$WORK/mnt" "$WORK/ExportRoot/target"
+
           INSTALL_RC=0
-          docker run --rm --privileged --pid=host -v /dev:/dev -v "$WORK/oci-a/layout:/oci:ro" -v "$WORK/mnt:/target" "matrix-test:${VARIANT}" \
-            bootc install to-filesystem --source-imgref="oci:/oci" --composefs-backend --disable-selinux --bootloader=systemd --root-mount-spec="" --skip-finalize /target || INSTALL_RC=$?
+          chroot "$WORK/ExportRoot" env container=oci PATH=/usr/sbin:/usr/bin:/sbin:/bin TMPDIR=/var/tmp \
+            bootc install to-filesystem --source-imgref="oci:/oci" --composefs-backend --disable-selinux --bootloader=systemd --root-mount-spec="" --skip-finalize /target >"$WORK/install.log" 2>&1 || INSTALL_RC=$?
+          cat "$WORK/install.log" || true
+
           INSTALLED_COMPOSEFS="$(ls -1 "$WORK/mnt/composefs/images" 2>/dev/null | head -n1 || true)"
+          if [ -z "$INSTALLED_COMPOSEFS" ]; then
+            INSTALLED_COMPOSEFS="$(grep -oE '[0-9a-f]{64}' "$WORK/install.log" | tail -n1 || true)"
+          fi
+          umount -R "$WORK/ExportRoot/target" "$WORK/ExportRoot/oci" "$WORK/ExportRoot/var/tmp" "$WORK/ExportRoot/tmp" "$WORK/ExportRoot/run" "$WORK/ExportRoot/dev" "$WORK/ExportRoot/sys" "$WORK/ExportRoot/proc" 2>/dev/null || true
           umount -R "$WORK/mnt" 2>/dev/null || true
           losetup -d "$LOOP" 2>/dev/null || true
 
@@ -298,6 +333,7 @@ jobs:
           echo "=== [Path ${VARIANT}: ${LABEL}] Results ==="
           echo "Layer Count:              ${LAYER_COUNT}"
           echo "Gate 1 (2-Build OCI):     ${GATE1}"
+          echo "Rootfs Stage Digest:      ${ROOTFS_TREE_DIGEST}"
           echo "UKI Cmdline Digest:       ${UKI_DIGEST}"
           echo "Final Tree Digest:        ${FINAL_TREE_DIGEST} (${GATE2_TREE})"
           echo "OCI Install Digest:       ${INSTALLED_COMPOSEFS:-none} (install_rc=${INSTALL_RC}, ${GATE2_OCI_INSTALL})"
@@ -308,6 +344,7 @@ jobs:
             echo "- **Gate 1 (Two-Build OCI Reproducibility):** **${GATE1}**"
             echo "- **Gate 2A (UKI vs Final Merged Tree Composefs):** **${GATE2_TREE}**"
             echo "- **Gate 2B (UKI vs OCI Layer `bootc install` Composefs):** **${GATE2_OCI_INSTALL}** (rc=${INSTALL_RC})"
+            echo "  - Rootfs Stage Digest:  \`${ROOTFS_TREE_DIGEST}\`"
             echo "  - UKI `.cmdline`:       \`${UKI_DIGEST}\`"
             echo "  - Final Tree Digest:    \`${FINAL_TREE_DIGEST}\`"
             echo "  - OCI Installed Digest: \`${INSTALLED_COMPOSEFS:-none}\`"
