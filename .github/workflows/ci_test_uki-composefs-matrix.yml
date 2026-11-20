@@ -1,0 +1,316 @@
+name: "TEST - UKI & Sealed Composefs Reproducibility Matrix (10 Paths)"
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for running the 10-path UKI composefs matrix"
+        required: false
+        default: "Evaluate 10 paths for UKI + sealed composefs reproducibility without FROM scratch"
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
+  FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:990ebc2678ff3dbca3f0143c8d5f1a150a2fb0c418888a3bdf218aea109fc1d2 # 45 (45.20261114.0)
+
+jobs:
+  uki-composefs-matrix:
+    name: "Path ${{ matrix.id }}: ${{ matrix.label }}"
+    runs-on: ubuntu-26.04-arm
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: V1
+            label: "Multi-layer FROM rootfs + re-pin /boot mtimes"
+          - id: V2
+            label: "Multi-layer FROM rootfs + strip /sysroot/ostree/repo hardlinks"
+          - id: V3
+            label: "Multi-layer FROM rootfs + stage systemd-boot before ukify"
+          - id: V4
+            label: "Multi-layer FROM rootfs + touch only modified paths (no base copy-up)"
+          - id: V5
+            label: "Multi-layer FROM rootfs + BuildKit rewrite-timestamp=true"
+          - id: V6
+            label: "Multi-layer FROM rootfs + strip /sysroot/ostree + touch only modified paths"
+          - id: V7
+            label: "Multi-layer FROM rootfs + strip /sysroot/ostree + stage systemd-boot before ukify"
+          - id: V8
+            label: "2-layer image (squashed rootfs base + tiny UKI top layer)"
+          - id: V9
+            label: "Multi-layer FROM rootfs + ostree container commit before ukify"
+          - id: V10
+            label: "Control baseline: Single-layer FROM scratch + strip /sysroot/ostree"
+    container:
+      options: --privileged -v /dev:/dev
+      volumes:
+        - /mnt:/mnt
+      credentials:
+        username: 0mniteck42
+        password: ${{ secrets.DOCKER }}
+      image: docker://dhi.io/debian-base@sha256:b3e1b7a538641ce89aa5a9ce0bc980da5bb033e4c94b3e5d7cf6eb8bd2f2011a # trixie-debian13-dev
+    steps:
+      - name: Install git and checkout
+        run: |
+          if ! command -v git >/dev/null 2>&1; then
+            apt-get update -qq
+            apt-get install -y -qq --no-install-recommends git
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install rootless Docker + Buildx + inspection tools
+        run: |
+          set -euo pipefail
+          apt-get update -qq
+          apt-get install -y -qq --no-install-recommends \
+            binutils curl dosfstools e2fsprogs fdisk iproute2 iptables jq mount nftables \
+            openssl passwd procps python3 slirp4netns uidmap util-linux fuse-overlayfs zstd
+          wcurl "https://download.docker.com/linux/static/stable/aarch64/docker-29.9.3.tgz"
+          wcurl "https://download.docker.com/linux/static/stable/aarch64/docker-rootless-extras-29.9.3.tgz"
+          wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.linux-arm64"
+          printf "%s  %s\n" "373b7542d225479e066cb540889cf24035f7909a17519845bedb93bb0b208c3bdd778af47d412de52136bf98d63ac1a5aba76e09eacd15641151c6e7f73aa198" docker-29.9.3.tgz | sha512sum --check --strict
+          printf "%s  %s\n" "7bab17249d06874cd5900ffc9908db692e8f158e17b03fc8afff5b9feaab5044752f7a018225695f8ca548212fa4d5095c3f15d0b06ed263f00ab4a895d6fc8a" docker-rootless-extras-29.9.3.tgz | sha512sum --check --strict
+          printf "%s  %s\n" "810c87058af0abb1205366d85ac47c3b1111676f7ae411fba19d3fe49a13a0695fe0d8bb03cdbd097132507eec19c7aecf4189e3ca30cab0e4a2a3b92ce8ad2b" buildx-v0.39.0.linux-arm64 | sha512sum --check --strict
+          tar xzf docker-29.9.3.tgz
+          tar xzf docker-rootless-extras-29.9.3.tgz
+          DOCKER_TOOLS_DIR="${RUNNER_TEMP}/docker-tools"
+          ROOTLESS_USER=docker-rootless
+          ROOTLESS_RUNTIME_DIR=/run/docker-rootless
+          ROOTLESS_SOCKET="${ROOTLESS_RUNTIME_DIR}/docker.sock"
+          ROOTLESS_DATA_DIR="$(mktemp -d /mnt/docker-rootless.XXXXXX)"
+          mkdir -p "$DOCKER_TOOLS_DIR/bin" "$DOCKER_TOOLS_DIR/config/cli-plugins"
+          install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
+          install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
+          install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
+          install -m 0755 buildx-v0.39.0.linux-arm64 "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
+          rm -rf docker docker-rootless-extras docker-29.9.3.tgz docker-rootless-extras-29.9.3.tgz buildx-v0.39.0.linux-arm64
+          useradd --create-home --shell /bin/sh "$ROOTLESS_USER"
+          printf "%s\n" "${ROOTLESS_USER}:100000:65536" > /etc/subuid
+          printf "%s\n" "${ROOTLESS_USER}:100000:65536" > /etc/subgid
+          install -d -m 0700 -o "$ROOTLESS_USER" -g "$ROOTLESS_USER" "$ROOTLESS_RUNTIME_DIR"
+          chown "$ROOTLESS_USER:$ROOTLESS_USER" "$ROOTLESS_DATA_DIR"
+          chmod 0700 "$ROOTLESS_DATA_DIR"
+          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
+          echo "$DOCKER_TOOLS_DIR/bin" >> "$GITHUB_PATH"
+          echo "DOCKER_CONFIG=$DOCKER_TOOLS_DIR/config" >> "$GITHUB_ENV"
+          export PATH="$DOCKER_TOOLS_DIR/bin:$PATH"
+          export DOCKER_CONFIG="$DOCKER_TOOLS_DIR/config"
+          export DOCKER_HOST="unix://${ROOTLESS_SOCKET}"
+          setpriv \
+            --reuid="$ROOTLESS_USER" \
+            --regid="$ROOTLESS_USER" \
+            --init-groups \
+            env \
+              HOME="/home/${ROOTLESS_USER}" \
+              USER="$ROOTLESS_USER" \
+              LOGNAME="$ROOTLESS_USER" \
+              XDG_RUNTIME_DIR="$ROOTLESS_RUNTIME_DIR" \
+              PATH="$DOCKER_TOOLS_DIR/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+              DOCKERD_ROOTLESS_ROOTLESSKIT_NET=slirp4netns \
+              dockerd-rootless.sh \
+                --data-root="$ROOTLESS_DATA_DIR" \
+                --storage-driver=fuse-overlayfs \
+                -H "unix://${ROOTLESS_SOCKET}" \
+            > "${RUNNER_TEMP}/dockerd-rootless.log" 2>&1 &
+          ROOTLESS_DOCKER_PID=$!
+          for _ in $(seq 1 60); do
+            docker -H "unix://${ROOTLESS_SOCKET}" info >/dev/null 2>&1 && break
+            if ! kill -0 "$ROOTLESS_DOCKER_PID" 2>/dev/null; then
+              cat "${RUNNER_TEMP}/dockerd-rootless.log"
+              exit 1
+            fi
+            sleep 1
+          done
+
+      - name: "Run Path ${{ matrix.id }} (${{ matrix.label }}): Gate 1 (Two-Build Reproducibility) & Gate 2 (UKI vs OCI Composefs Digest Match)"
+        env:
+          VARIANT: ${{ matrix.id }}
+          LABEL: ${{ matrix.label }}
+          SOURCE_DATE_EPOCH: "1700000000"
+        run: |
+          set -euo pipefail
+          export DOCKER_HOST="unix:///run/docker-rootless/docker.sock"
+          WORK="$(mktemp -d /mnt/matrix-work.XXXXXX)"
+          trap 'umount -R "$WORK/mnt" 2>/dev/null || true; rm -rf "$WORK"' EXIT
+
+          python3 - "$VARIANT" "$FEDORA_BOOTC_IMAGE" "$WORK/Containerfile.variant" <<'PY'
+          import pathlib, sys
+          v, base, out = sys.argv[1:4]
+          sde = "${SOURCE_DATE_EPOCH}"
+          kver = "${kver}"
+
+          common_header = (
+              f"FROM {base} AS base_stage\n"
+              "ARG SOURCE_DATE_EPOCH=1700000000\n"
+              "RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False --setopt=metadata_expire=never install systemd-ukify systemd-boot-unsigned && \\\n"
+              "    dnf clean all && \\\n"
+              "    rm -rf /run/dnf /var/cache/dnf /var/cache/ldconfig/aux-cache /var/cache/libdnf5 /var/log/dnf* /var/log/hawkey.log /var/log/libdnf* /var/lib/dnf/repos /var/lib/dnf/system-repo.lock /usr/lib/sysimage/libdnf5/transaction_history.sqlite* /var/lib/systemd/catalog/database /etc/machine-id /var/lib/systemd/random-seed && \\\n"
+              "    find /tmp -mindepth 1 -delete && \\\n"
+              "    find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \\\n"
+              "    find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} + && \\\n"
+              "    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /etc/yubios && \\\n"
+              f"    printf 'VARIANT=%s\\n' '{v}' > /etc/yubios/variant.conf\n"
+          )
+          strip_ostree = "RUN rm -rf /sysroot/ostree /ostree && mkdir -p /sysroot\n"
+          stage_sdboot = (
+              "RUN mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \\\n"
+              "    cp /usr/lib/systemd/boot/efi/systemd-bootaa64.efi /boot/EFI/systemd/systemd-bootaa64.efi && \\\n"
+              "    cp /usr/lib/systemd/boot/efi/systemd-bootaa64.efi /boot/EFI/BOOT/BOOTAA64.EFI\n"
+          )
+          touch_all = (
+              f"RUN find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o -exec touch -h -d '@{sde}' {{}} + && touch -h -d '@{sde}' /\n"
+          )
+          touch_modified_only = (
+              f"RUN for p in / /etc /etc/yubios /etc/yubios/variant.conf /var /run /tmp /boot /boot/EFI /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /usr /usr/bin /usr/lib /usr/lib/systemd /usr/lib/systemd/boot /usr/lib/systemd/boot/efi /sysroot; do [ -e \"$p\" ] && touch -h -d '@{sde}' \"$p\" || true; done\n"
+          )
+          uki_stage = (
+              "FROM rootfs AS uki\n"
+              "RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \\\n"
+              f"    kver=\"$(basename \"$1\")\" && \\\n"
+              "    mkdir -p /out && \\\n"
+              f"    bootc container ukify --rootfs /target -- --output \"/out/{kver}.efi\"\n"
+          )
+          repin_boot_full = f"RUN touch -h -d '@{sde}' / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT /boot/EFI/Linux/*.efi /boot/EFI/systemd/*.efi /boot/EFI/BOOT/*.EFI\n"
+          repin_boot_uki_only = f"RUN touch -h -d '@{sde}' / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/Linux/*.efi\n"
+
+          if v == "V1":
+              df = common_header + "FROM base_stage AS rootfs\n" + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+          elif v == "V2":
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+          elif v == "V3":
+              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+          elif v == "V4":
+              df = common_header + "FROM base_stage AS rootfs\n" + touch_modified_only + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+          elif v == "V5":
+              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_modified_only + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+          elif v == "V6":
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_modified_only + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+          elif v == "V7":
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+          elif v == "V8":
+              df = common_header + "FROM base_stage AS rootfs_prep\n" + strip_ostree + stage_sdboot + touch_all + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+          elif v == "V9":
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + "RUN ostree container commit || true\n" + touch_all + uki_stage + "FROM rootfs\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+          elif v == "V10":
+              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS prefinal\nARG SOURCE_DATE_EPOCH=1700000000\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only + "FROM scratch\nCOPY --from=prefinal / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n"
+          else:
+              raise SystemExit(f"Unknown variant {v}")
+          pathlib.Path(out).write_text(df)
+          PY
+
+          cat "$WORK/Containerfile.variant"
+
+          REWRITE_TS="false"
+          if [ "$VARIANT" = "V5" ]; then
+            REWRITE_TS="true"
+          fi
+
+          for run in a b; do
+            bname="matrix-${VARIANT}-${run}"
+            out_dir="$WORK/oci-${run}"
+            mkdir -p "$out_dir"
+            docker buildx create --name "$bname" --driver docker-container --driver-opt "image=${BUILDKIT_IMAGE}" --use || true
+            docker buildx inspect "$bname" --bootstrap
+            BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx build \
+              --builder "$bname" \
+              --platform linux/arm64 \
+              --no-cache \
+              --build-arg SOURCE_DATE_EPOCH=1700000000 \
+              --output "type=oci,dest=${out_dir}/image.tar,rewrite-timestamp=${REWRITE_TS}" \
+              -f "$WORK/Containerfile.variant" \
+              "$WORK"
+            mkdir -p "$out_dir/layout"
+            tar -xf "$out_dir/image.tar" -C "$out_dir/layout"
+            rm -f "$out_dir/image.tar"
+            if [ "$run" = "a" ]; then
+              BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx build \
+                --builder "$bname" \
+                --platform linux/arm64 \
+                --build-arg SOURCE_DATE_EPOCH=1700000000 \
+                --output "type=docker,name=matrix-test:${VARIANT},rewrite-timestamp=${REWRITE_TS}" \
+                -f "$WORK/Containerfile.variant" \
+                "$WORK"
+            fi
+            docker buildx rm --force "$bname"
+            ( cd "$out_dir/layout" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0r sha256sum ) > "$WORK/${run}.sums"
+          done
+
+          GATE1="FAIL"
+          if diff -u "$WORK/a.sums" "$WORK/b.sums"; then
+            GATE1="PASS"
+          else
+            python3 scripts/lib/diagnose-oci-layout.py "$WORK/oci-a/layout" "$WORK/oci-b/layout" || true
+          fi
+
+          LAYER_COUNT="$(python3 - "$WORK/oci-a/layout" <<'PY'
+          import json, pathlib, runpy, sys
+          ns = runpy.run_path("scripts/lib/diagnose-oci-layout.py")
+          _, manifest, _ = ns["resolve_image"](pathlib.Path(sys.argv[1]))
+          print(len(manifest.get("layers", [])))
+          PY
+          )"
+
+          CID="$(docker create "matrix-test:${VARIANT}")"
+          mkdir -p "$WORK/ExportRoot"
+          docker export "$CID" | tar -x -C "$WORK/ExportRoot"
+          docker rm -f "$CID" >/dev/null
+
+          UKI_FILE="$(find "$WORK/ExportRoot/boot/EFI/Linux" -name '*.efi' | head -n1)"
+          UKI_CMDLINE="$(python3 scripts/extract_uki_cmdline.py "$UKI_FILE")"
+          UKI_DIGEST="$(grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' <<<"$UKI_CMDLINE" | head -1 | sed -E 's/^.*[:=]\??//')"
+
+          FINAL_TREE_DIGEST="$(docker run --rm --privileged "matrix-test:${VARIANT}" sh -c 'mkdir -p /target && mount --bind / /target && bootc container compute-composefs-digest /target' | tail -n1 | tr -d '\r\n')"
+
+          # Also run actual bootc install to-filesystem --composefs-backend from the OCI layout to see what composefs image digest bootc writes from the OCI layers!
+          truncate -s 6G "$WORK/disk.raw"
+          LOOP="$(losetup --find --show --partscan "$WORK/disk.raw")"
+          printf 'label: gpt\nsize=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name=ESP\ntype=b921b045-1df0-41c3-af44-4c6f280d3fae, name=root\n' | sfdisk "$LOOP"
+          partx --update "$LOOP" || true
+          mkfs.vfat -F 32 "${LOOP}p1"
+          mkfs.ext4 -F -O verity,^has_journal "${LOOP}p2"
+          mkdir -p "$WORK/mnt"
+          mount "${LOOP}p2" "$WORK/mnt"
+          mkdir -p "$WORK/mnt/boot"
+          mount "${LOOP}p1" "$WORK/mnt/boot"
+          INSTALL_RC=0
+          docker run --rm --privileged --pid=host -v /dev:/dev -v "$WORK/oci-a/layout:/oci:ro" -v "$WORK/mnt:/target" "matrix-test:${VARIANT}" \
+            bootc install to-filesystem --source-imgref="oci:/oci" --composefs-backend --disable-selinux --bootloader=systemd --root-mount-spec="" --skip-finalize /target || INSTALL_RC=$?
+          INSTALLED_COMPOSEFS="$(ls -1 "$WORK/mnt/composefs/images" 2>/dev/null | head -n1 || true)"
+          umount -R "$WORK/mnt" 2>/dev/null || true
+          losetup -d "$LOOP" 2>/dev/null || true
+
+          GATE2_TREE="FAIL"
+          if [ -n "$UKI_DIGEST" ] && [ "$UKI_DIGEST" = "$FINAL_TREE_DIGEST" ]; then
+            GATE2_TREE="PASS"
+          fi
+          GATE2_OCI_INSTALL="FAIL"
+          if [ "$INSTALL_RC" -eq 0 ] && [ -n "$UKI_DIGEST" ] && [ "$UKI_DIGEST" = "$INSTALLED_COMPOSEFS" ]; then
+            GATE2_OCI_INSTALL="PASS"
+          fi
+
+          echo "=== [Path ${VARIANT}: ${LABEL}] Results ==="
+          echo "Layer Count:              ${LAYER_COUNT}"
+          echo "Gate 1 (2-Build OCI):     ${GATE1}"
+          echo "UKI Cmdline Digest:       ${UKI_DIGEST}"
+          echo "Final Tree Digest:        ${FINAL_TREE_DIGEST} (${GATE2_TREE})"
+          echo "OCI Install Digest:       ${INSTALLED_COMPOSEFS:-none} (install_rc=${INSTALL_RC}, ${GATE2_OCI_INSTALL})"
+
+          {
+            echo "### Path ${VARIANT}: ${LABEL}"
+            echo "- **Layer Count:** \`${LAYER_COUNT}\`"
+            echo "- **Gate 1 (Two-Build OCI Reproducibility):** **${GATE1}**"
+            echo "- **Gate 2A (UKI vs Final Merged Tree Composefs):** **${GATE2_TREE}**"
+            echo "- **Gate 2B (UKI vs OCI Layer `bootc install` Composefs):** **${GATE2_OCI_INSTALL}** (rc=${INSTALL_RC})"
+            echo "  - UKI `.cmdline`:       \`${UKI_DIGEST}\`"
+            echo "  - Final Tree Digest:    \`${FINAL_TREE_DIGEST}\`"
+            echo "  - OCI Installed Digest: \`${INSTALLED_COMPOSEFS:-none}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          [ "$GATE1" = "PASS" ] && [ "$GATE2_OCI_INSTALL" = "PASS" ]

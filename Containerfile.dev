@@ -135,7 +135,8 @@ RUN install -d /usr/lib/systemd/system/multi-user.target.wants && \
 # dev rootfs, normalize mtimes to SOURCE_DATE_EPOCH, rebuild the UKI against this
 # rootfs, re-pin mtimes in prefinal, and squash into a single FROM scratch layer so
 # the layer-computed composefs digest and the UKI's embedded composefs= digest match.
-RUN rm -f /var/lib/systemd/catalog/database \
+RUN rm -rf /sysroot/ostree /ostree && mkdir -p /sysroot && \
+    rm -f /var/lib/systemd/catalog/database \
           /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal \
           /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal && \
     find /tmp -mindepth 1 -delete && \

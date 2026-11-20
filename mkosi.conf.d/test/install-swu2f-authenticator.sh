@@ -154,6 +154,7 @@ PY
     # `cargo install --debug` => debug profile (debug_assertions on) => the
     # PASSLESS_E2E_AUTO_ACCEPT_UV path compiles in. --root /usr installs to /usr/bin.
     cargo install --debug --locked --offline --path cmd/passless --root /usr
+    strip --strip-debug /usr/bin/passless /usr/bin/passless-git-sync 2>/dev/null || true
 )
 
 # Ship the upstream integration bits verbatim (sysusers creates the `fido` group,
