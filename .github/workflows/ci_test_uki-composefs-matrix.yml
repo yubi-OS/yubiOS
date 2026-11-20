@@ -20,6 +20,7 @@ jobs:
   uki-composefs-matrix:
     name: "Path ${{ matrix.id }}: ${{ matrix.label }}"
     runs-on: ubuntu-26.04-arm
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
@@ -44,90 +45,16 @@ jobs:
             label: "Multi-layer FROM rootfs + ostree container commit before ukify"
           - id: V10
             label: "Control baseline: Single-layer FROM scratch + strip /sysroot/ostree"
-    container:
-      options: --privileged -v /dev:/dev
-      volumes:
-        - /mnt:/mnt
-      credentials:
-        username: 0mniteck42
-        password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:ac54666cad73016059945e22a9d460cd0a60d869a8a92a8f5c367517eb778531 # trixie-debian13-dev
     steps:
-      - name: Install git and checkout
-        run: |
-          if ! command -v git >/dev/null 2>&1; then
-            apt-get update -qq
-            apt-get install -y -qq --no-install-recommends git
-          fi
-
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Install rootless Docker + Buildx + inspection tools
+      - name: Install inspection and filesystem tools
         run: |
           set -euo pipefail
-          apt-get update -qq
-          apt-get install -y -qq --no-install-recommends \
-            binutils curl dosfstools e2fsprogs fdisk iproute2 iptables jq mount nftables \
-            openssl passwd procps python3 slirp4netns uidmap util-linux fuse-overlayfs zstd
-          wcurl "https://download.docker.com/linux/static/stable/aarch64/docker-29.9.3.tgz"
-          wcurl "https://download.docker.com/linux/static/stable/aarch64/docker-rootless-extras-29.9.3.tgz"
-          wcurl "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.linux-arm64"
-          printf "%s  %s\n" "373b7542d225479e066cb540889cf24035f7909a17519845bedb93bb0b208c3bdd778af47d412de52136bf98d63ac1a5aba76e09eacd15641151c6e7f73aa198" docker-29.9.3.tgz | sha512sum --check --strict
-          printf "%s  %s\n" "7bab17249d06874cd5900ffc9908db692e8f158e17b03fc8afff5b9feaab5044752f7a018225695f8ca548212fa4d5095c3f15d0b06ed263f00ab4a895d6fc8a" docker-rootless-extras-29.9.3.tgz | sha512sum --check --strict
-          printf "%s  %s\n" "810c87058af0abb1205366d85ac47c3b1111676f7ae411fba19d3fe49a13a0695fe0d8bb03cdbd097132507eec19c7aecf4189e3ca30cab0e4a2a3b92ce8ad2b" buildx-v0.39.0.linux-arm64 | sha512sum --check --strict
-          tar xzf docker-29.9.3.tgz
-          tar xzf docker-rootless-extras-29.9.3.tgz
-          DOCKER_TOOLS_DIR="${RUNNER_TEMP}/docker-tools"
-          ROOTLESS_USER=docker-rootless
-          ROOTLESS_RUNTIME_DIR=/run/docker-rootless
-          ROOTLESS_SOCKET="${ROOTLESS_RUNTIME_DIR}/docker.sock"
-          ROOTLESS_DATA_DIR="$(mktemp -d /mnt/docker-rootless.XXXXXX)"
-          mkdir -p "$DOCKER_TOOLS_DIR/bin" "$DOCKER_TOOLS_DIR/config/cli-plugins"
-          install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
-          install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
-          install -m 0755 docker-rootless-extras/rootlesskit "$DOCKER_TOOLS_DIR/bin/"
-          install -m 0755 buildx-v0.39.0.linux-arm64 "$DOCKER_TOOLS_DIR/config/cli-plugins/docker-buildx"
-          rm -rf docker docker-rootless-extras docker-29.9.3.tgz docker-rootless-extras-29.9.3.tgz buildx-v0.39.0.linux-arm64
-          useradd --create-home --shell /bin/sh "$ROOTLESS_USER"
-          printf "%s\n" "${ROOTLESS_USER}:100000:65536" > /etc/subuid
-          printf "%s\n" "${ROOTLESS_USER}:100000:65536" > /etc/subgid
-          install -d -m 0700 -o "$ROOTLESS_USER" -g "$ROOTLESS_USER" "$ROOTLESS_RUNTIME_DIR"
-          chown "$ROOTLESS_USER:$ROOTLESS_USER" "$ROOTLESS_DATA_DIR"
-          chmod 0700 "$ROOTLESS_DATA_DIR"
-          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
-            sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-          fi
-          echo "$DOCKER_TOOLS_DIR/bin" >> "$GITHUB_PATH"
-          echo "DOCKER_CONFIG=$DOCKER_TOOLS_DIR/config" >> "$GITHUB_ENV"
-          export PATH="$DOCKER_TOOLS_DIR/bin:$PATH"
-          export DOCKER_CONFIG="$DOCKER_TOOLS_DIR/config"
-          export DOCKER_HOST="unix://${ROOTLESS_SOCKET}"
-          setpriv \
-            --reuid="$ROOTLESS_USER" \
-            --regid="$ROOTLESS_USER" \
-            --init-groups \
-            env \
-              HOME="/home/${ROOTLESS_USER}" \
-              USER="$ROOTLESS_USER" \
-              LOGNAME="$ROOTLESS_USER" \
-              XDG_RUNTIME_DIR="$ROOTLESS_RUNTIME_DIR" \
-              PATH="$DOCKER_TOOLS_DIR/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
-              DOCKERD_ROOTLESS_ROOTLESSKIT_NET=slirp4netns \
-              dockerd-rootless.sh \
-                --data-root="$ROOTLESS_DATA_DIR" \
-                --storage-driver=fuse-overlayfs \
-                -H "unix://${ROOTLESS_SOCKET}" \
-            > "${RUNNER_TEMP}/dockerd-rootless.log" 2>&1 &
-          ROOTLESS_DOCKER_PID=$!
-          for _ in $(seq 1 60); do
-            docker -H "unix://${ROOTLESS_SOCKET}" info >/dev/null 2>&1 && break
-            if ! kill -0 "$ROOTLESS_DOCKER_PID" 2>/dev/null; then
-              cat "${RUNNER_TEMP}/dockerd-rootless.log"
-              exit 1
-            fi
-            sleep 1
-          done
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            binutils curl dosfstools e2fsprogs erofs-utils fdisk fsverity jq python3 util-linux zstd
 
       - name: "Run Path ${{ matrix.id }} (${{ matrix.label }}): Gate 1 (Two-Build Reproducibility) & Gate 2 (UKI vs OCI Composefs Digest Match)"
         env:
@@ -136,9 +63,9 @@ jobs:
           SOURCE_DATE_EPOCH: "1700000000"
         run: |
           set -euo pipefail
-          export DOCKER_HOST="unix:///run/docker-rootless/docker.sock"
-          WORK="$(mktemp -d /mnt/matrix-work.XXXXXX)"
-          trap 'umount -R "$WORK/mnt" 2>/dev/null || true; rm -rf "$WORK"' EXIT
+          WORK="$(mktemp -d "${RUNNER_TEMP}/matrix-work.XXXXXX")"
+          chmod 0755 "$WORK"
+          trap 'mountpoint -q /mnt/boot && sudo umount /mnt/boot || true; mountpoint -q /mnt && sudo umount /mnt || true; [ -n "${LOOP:-}" ] && sudo losetup -d "$LOOP" 2>/dev/null || true; sudo rm -rf "$WORK"' EXIT
 
           python3 - "$VARIANT" "$FEDORA_BOOTC_IMAGE" "$WORK/Containerfile.variant" "$WORK/Containerfile.diag" <<'PY'
           import pathlib, sys
@@ -242,7 +169,7 @@ jobs:
             tar -xf "$out_dir/image.tar" -C "$out_dir/layout"
             rm -f "$out_dir/image.tar"
             if [ "$run" = "a" ]; then
-              mkdir -p "$WORK/diag" "$WORK/ExportRoot"
+              mkdir -p "$WORK/diag"
               BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx build \
                 --builder "$bname" \
                 --platform linux/arm64 \
@@ -256,7 +183,7 @@ jobs:
                 --platform linux/arm64 \
                 --build-arg SOURCE_DATE_EPOCH=1700000000 \
                 --target final_stage \
-                --output "type=local,dest=$WORK/ExportRoot" \
+                --output "type=docker,name=matrix-test:${VARIANT},rewrite-timestamp=${REWRITE_TS}" \
                 -f "$WORK/Containerfile.variant" \
                 "$WORK"
             fi
@@ -285,41 +212,45 @@ jobs:
           ROOTFS_TREE_DIGEST="$(tr -d '\r\n' < "$WORK/diag/rootfs_digest.txt")"
           FINAL_TREE_DIGEST="$(tr -d '\r\n' < "$WORK/diag/final_tree_digest.txt")"
 
-          # Run actual bootc install to-filesystem --composefs-backend from the OCI layout in a privileged chroot
-          truncate -s 6G "$WORK/disk.raw"
-          LOOP="$(losetup --find --show --partscan "$WORK/disk.raw")"
-          printf 'label: gpt\nsize=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name=ESP\ntype=b921b045-1df0-41c3-af44-4c6f280d3fae, name=root\n' | sfdisk "$LOOP"
-          partx --update "$LOOP" || true
-          mkfs.vfat -F 32 "${LOOP}p1"
-          mkfs.ext4 -F -O verity,^has_journal "${LOOP}p2"
-          mkdir -p "$WORK/mnt"
-          mount "${LOOP}p2" "$WORK/mnt"
-          mkdir -p "$WORK/mnt/boot"
-          mount "${LOOP}p1" "$WORK/mnt/boot"
-
-          mkdir -p "$WORK/ExportRoot/proc" "$WORK/ExportRoot/sys" "$WORK/ExportRoot/dev" "$WORK/ExportRoot/run" "$WORK/ExportRoot/tmp" "$WORK/ExportRoot/var/tmp" "$WORK/ExportRoot/oci" "$WORK/ExportRoot/target"
-          mount --bind /proc "$WORK/ExportRoot/proc"
-          mount --bind /sys "$WORK/ExportRoot/sys"
-          mount --bind /dev "$WORK/ExportRoot/dev"
-          mount -t tmpfs tmpfs "$WORK/ExportRoot/run"
-          mount -t tmpfs tmpfs "$WORK/ExportRoot/tmp"
-          mount -t tmpfs tmpfs "$WORK/ExportRoot/var/tmp"
-          touch "$WORK/ExportRoot/run/.containerenv"
-          mount --bind "$WORK/oci-a/layout" "$WORK/ExportRoot/oci"
-          mount --bind "$WORK/mnt" "$WORK/ExportRoot/target"
+          # Run actual bootc install to-filesystem --composefs-backend from the OCI layout using ci_test_bootc-filesystem.yml pattern
+          truncate -s 8G "$WORK/disk.raw"
+          LOOP="$(sudo losetup --find --show --partscan "$WORK/disk.raw")"
+          printf 'label: gpt\nsize=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name=ESP\ntype=b921b045-1df0-41c3-af44-4c6f280d3fae, name=yubiOS-root\n' | sudo sfdisk "$LOOP"
+          sudo partx --update "$LOOP" || true
+          sudo udevadm settle
+          sudo mkfs.vfat -F 32 -n EFI "${LOOP}p1"
+          sudo mkfs.ext4 -F -O verity -L yubiOS-root "${LOOP}p2"
+          sudo mount "${LOOP}p2" /mnt
+          sudo install -d -m 0755 /mnt/boot
+          sudo mount "${LOOP}p1" /mnt/boot
+          sudo install -d -m 0755 /var/lib/containers
+          chmod -R a+rX "$WORK"
 
           INSTALL_RC=0
-          chroot "$WORK/ExportRoot" env container=oci PATH=/usr/sbin:/usr/bin:/sbin:/bin TMPDIR=/var/tmp \
-            bootc install to-filesystem --source-imgref="oci:/oci" --composefs-backend --disable-selinux --bootloader=systemd --root-mount-spec="" --skip-finalize /target >"$WORK/install.log" 2>&1 || INSTALL_RC=$?
+          sudo docker run --rm --privileged --pid=host --ipc=host \
+            --security-opt label=type:unconfined_t \
+            -v /var/lib/containers:/var/lib/containers \
+            -v /dev:/dev \
+            -v /:/run/host \
+            "matrix-test:${VARIANT}" \
+            bootc install to-filesystem \
+              --source-imgref="oci:/run/host${WORK}/oci-a/layout" \
+              --composefs-backend \
+              --disable-selinux \
+              --bootloader=systemd \
+              --root-mount-spec="" \
+              --skip-finalize \
+              /run/host/mnt/ >"$WORK/install.log" 2>&1 || INSTALL_RC=$?
           cat "$WORK/install.log" || true
 
-          INSTALLED_COMPOSEFS="$(ls -1 "$WORK/mnt/composefs/images" 2>/dev/null | head -n1 || true)"
+          INSTALLED_COMPOSEFS="$(sudo ls -1 /mnt/composefs/images 2>/dev/null | head -n1 || true)"
           if [ -z "$INSTALLED_COMPOSEFS" ]; then
-            INSTALLED_COMPOSEFS="$(grep -oE '[0-9a-f]{64}' "$WORK/install.log" | tail -n1 || true)"
+            INSTALLED_COMPOSEFS="$(grep -oE '[0-9a-f]{128}' "$WORK/install.log" | tail -n1 || true)"
           fi
-          umount -R "$WORK/ExportRoot/target" "$WORK/ExportRoot/oci" "$WORK/ExportRoot/var/tmp" "$WORK/ExportRoot/tmp" "$WORK/ExportRoot/run" "$WORK/ExportRoot/dev" "$WORK/ExportRoot/sys" "$WORK/ExportRoot/proc" 2>/dev/null || true
-          umount -R "$WORK/mnt" 2>/dev/null || true
-          losetup -d "$LOOP" 2>/dev/null || true
+          sudo umount /mnt/boot 2>/dev/null || true
+          sudo umount /mnt 2>/dev/null || true
+          sudo losetup -d "$LOOP" 2>/dev/null || true
+          LOOP=""
 
           GATE2_TREE="FAIL"
           if [ -n "$UKI_DIGEST" ] && [ "$UKI_DIGEST" = "$FINAL_TREE_DIGEST" ]; then
