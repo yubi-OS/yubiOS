@@ -26,19 +26,19 @@ jobs:
       matrix:
         include:
           - id: V1
-            label: "70-layer FROM fedora-bootc + single RUN + touch all dirs & modified files"
+            label: "68-layer FROM fedora-bootc + strip /sysroot/ostree + touch dirs & modified files to @0 (ostree epoch)"
           - id: V2
-            label: "70-layer FROM fedora-bootc + single RUN + touch only modified files & ancestor dirs"
+            label: "68-layer FROM fedora-bootc (keep ostree) + touch dirs & modified files to @0 (ostree epoch)"
           - id: V3
-            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch modified & ancestors"
+            label: "68-layer FROM fedora-bootc + strip /sysroot/ostree + SDE=0 + touch dirs & modified to @0"
           - id: V4
-            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch all dirs & modified files"
+            label: "68-layer FROM fedora-bootc + strip /sysroot/ostree + SDE=0 + rewrite-timestamp=true"
           - id: V5
-            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + rewrite-timestamp=true"
+            label: "68-layer FROM fedora-bootc + strip /sysroot/ostree + touch_all to @0"
           - id: V6
-            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch_all + rewrite-timestamp=true"
+            label: "68-layer FROM fedora-bootc + strip /sysroot/ostree + force dir copy-up (chmod toggle) + @1700000000"
           - id: V7
-            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch_all in single RUN"
+            label: "Upstream bootc pattern: split-kernel-and-rootfs + flattened rootfs + multi-layer UKI"
           - id: V8
             label: "2-layer image (squashed rootfs base + COPY-only UKI top layer, no FROM scratch final)"
           - id: V9
@@ -70,7 +70,7 @@ jobs:
           python3 - "$VARIANT" "$FEDORA_BOOTC_IMAGE" "$WORK/Containerfile.variant" "$WORK/Containerfile.diag" <<'PY'
           import pathlib, sys
           v, base, out, diag_out = sys.argv[1:5]
-          sde = "1700000000"
+          sde = "0" if v in ("V1", "V2", "V3", "V4", "V5") else "1700000000"
           kver = "${kver}"
 
           dnf_and_clean = (
@@ -97,14 +97,14 @@ jobs:
           touch_dirs_and_newer_inline = (
               " && \\\n"
               f"    find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o \\( -type d -o -newer /tmp/.ts_marker \\) -exec touch -h -d '@{sde}' {{}} + && \\\n"
-              f"    rm -f /tmp/.ts_marker && touch -h -d '@{sde}' / /tmp\n"
+              f"    rm -f /tmp/.ts_marker && touch -h -d '@{sde}' / /tmp /usr /etc /var /boot /sysroot /run\n"
           )
 
-          touch_newer_and_ancestors_inline = (
+          force_dir_copyup_inline = (
               " && \\\n"
-              "    find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o -newer /tmp/.ts_marker -print > /tmp/.touched_list && \\\n"
-              "    python3 -c 'import os; sde=1700000000; ps={\"/\",\"/tmp\",\"/run\",\"/var\",\"/etc\",\"/boot\",\"/usr\",\"/sysroot\"}; [ps.add(l.strip()) for l in open(\"/tmp/.touched_list\") if l.strip()]; [ps.add(os.path.dirname(x)) for _ in range(12) for x in list(ps) if x and x != \"/\"]; [os.utime(x,(sde,sde),follow_symlinks=False) for x in sorted(ps,key=len,reverse=True) if os.path.lexists(x)]' && \\\n"
-              f"    rm -f /tmp/.ts_marker /tmp/.touched_list && touch -h -d '@{sde}' / /tmp\n"
+              "    python3 -c 'import os, stat; skip={\"/proc\",\"/sys\",\"/dev\"}; [os.chmod(p, stat.S_IMODE(os.lstat(p).st_mode)) for r,ds,_ in os.walk(\"/\") if not any(r==s or r.startswith(s+\"/\") for s in skip) for p in [os.path.join(r,d) for d in ds] if p not in skip and not os.path.islink(p)]' && \\\n"
+              f"    find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o \\( -type d -o -newer /tmp/.ts_marker \\) -exec touch -h -d '@{sde}' {{}} + && \\\n"
+              f"    rm -f /tmp/.ts_marker && touch -h -d '@{sde}' / /tmp /usr /etc /var /boot /sysroot /run\n"
           )
 
           uki_stage = (
@@ -120,25 +120,40 @@ jobs:
 
           hdr = (
               f"FROM {base} AS rootfs\n"
-              "ARG SOURCE_DATE_EPOCH=1700000000\n"
-              "ENV SOURCE_DATE_EPOCH=1700000000\n"
+              f"ARG SOURCE_DATE_EPOCH={sde}\n"
+              f"ENV SOURCE_DATE_EPOCH={sde}\n"
               "RUN " + dnf_and_clean
           )
 
           if v == "V1":
-              df = hdr + touch_dirs_and_newer_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + strip_ostree_inline + touch_dirs_and_newer_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V2":
-              df = hdr + touch_newer_and_ancestors_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + touch_dirs_and_newer_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V3":
-              df = hdr + strip_ostree_inline + touch_newer_and_ancestors_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + strip_ostree_inline + touch_dirs_and_newer_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n"
           elif v == "V4":
               df = hdr + strip_ostree_inline + touch_dirs_and_newer_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V5":
-              df = hdr + strip_ostree_inline + touch_newer_and_ancestors_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + strip_ostree_inline + touch_all_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V6":
-              df = hdr + strip_ostree_inline + touch_all_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + strip_ostree_inline + force_dir_copyup_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V7":
-              df = hdr + strip_ostree_inline + touch_all_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              prep = (
+                  f"FROM {base} AS rootfs_prep\n"
+                  f"ARG SOURCE_DATE_EPOCH={sde}\n"
+                  f"ENV SOURCE_DATE_EPOCH={sde}\n"
+                  "RUN " + dnf_and_clean + strip_ostree_inline + " && \\\n"
+                  "    mkdir -p /boot/.kernel && bootc container split-kernel-and-rootfs --rootfs / --output /boot/.kernel" + touch_all_inline
+              )
+              uki_split = (
+                  "FROM rootfs_prep AS uki\n"
+                  "RUN --mount=type=bind,from=rootfs,target=/target set -- /target/boot/.kernel/*/ && \\\n"
+                  f"    kver=\"$(basename \"$1\")\" && \\\n"
+                  "    mkdir -p /out && \\\n"
+                  f"    bootc container ukify --rootfs /target --kernel-dir \"/target/boot/.kernel/{kver}\" -- --output \"/out/{kver}.efi\" && \\\n"
+                  f"    touch -h -d '@{sde}' /out \"/out/{kver}.efi\"\n"
+              )
+              df = prep + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_split + "FROM rootfs AS final_stage\nRUN rm -rf /boot/.kernel && touch -h -d '@1700000000' / /boot\nCOPY --from=uki /out/ /boot/EFI/Linux/\n"
           elif v == "V8":
               prep = f"FROM {base} AS rootfs_prep\nARG SOURCE_DATE_EPOCH=1700000000\nENV SOURCE_DATE_EPOCH=1700000000\nRUN " + dnf_and_clean + strip_ostree_inline + touch_all_inline
               df = prep + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n"
@@ -150,13 +165,15 @@ jobs:
           else:
               raise SystemExit(f"Unknown variant {v}")
           pathlib.Path(out).write_text(df)
+          diag_stage_base = "rootfs_prep" if v == "V7" else "rootfs"
           diag_df = (
               df + "\n"
-              "FROM rootfs AS diag_compute\n"
-              "RUN --mount=type=bind,from=rootfs,target=/target bootc container compute-composefs-digest /target > /rootfs_digest.txt\n"
+              f"FROM {diag_stage_base} AS diag_compute\n"
+              "RUN --mount=type=bind,from=rootfs,target=/target bootc container compute-composefs-digest --write-dumpfile-to /rootfs.dump /target > /rootfs_digest.txt\n"
               "RUN --mount=type=bind,from=final_stage,target=/target bootc container compute-composefs-digest /target > /final_tree_digest.txt\n"
               "FROM scratch AS diag_export\n"
               "COPY --from=diag_compute /rootfs_digest.txt /rootfs_digest.txt\n"
+              "COPY --from=diag_compute /rootfs.dump /rootfs.dump\n"
               "COPY --from=diag_compute /final_tree_digest.txt /final_tree_digest.txt\n"
               "COPY --from=uki /out/ /uki/\n"
           )
@@ -165,8 +182,12 @@ jobs:
 
           cat "$WORK/Containerfile.variant"
 
+          SDE_ARG="1700000000"
+          if [ "$VARIANT" = "V3" ] || [ "$VARIANT" = "V4" ]; then
+            SDE_ARG="0"
+          fi
           REWRITE_TS="false"
-          if [ "$VARIANT" = "V5" ] || [ "$VARIANT" = "V6" ]; then
+          if [ "$VARIANT" = "V4" ]; then
             REWRITE_TS="true"
           fi
 
@@ -180,7 +201,7 @@ jobs:
               --builder "$bname" \
               --platform linux/arm64 \
               --no-cache \
-              --build-arg SOURCE_DATE_EPOCH=1700000000 \
+              --build-arg "SOURCE_DATE_EPOCH=${SDE_ARG}" \
               --output "type=oci,dest=${out_dir}/image.tar,rewrite-timestamp=${REWRITE_TS}" \
               -f "$WORK/Containerfile.variant" \
               "$WORK"
@@ -192,7 +213,7 @@ jobs:
               BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx build \
                 --builder "$bname" \
                 --platform linux/arm64 \
-                --build-arg SOURCE_DATE_EPOCH=1700000000 \
+                --build-arg "SOURCE_DATE_EPOCH=${SDE_ARG}" \
                 --target diag_export \
                 --output "type=local,dest=$WORK/diag" \
                 -f "$WORK/Containerfile.diag" \
@@ -200,7 +221,7 @@ jobs:
               BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx build \
                 --builder "$bname" \
                 --platform linux/arm64 \
-                --build-arg SOURCE_DATE_EPOCH=1700000000 \
+                --build-arg "SOURCE_DATE_EPOCH=${SDE_ARG}" \
                 --target final_stage \
                 --output "type=docker,name=matrix-test:${VARIANT},rewrite-timestamp=${REWRITE_TS}" \
                 -f "$WORK/Containerfile.variant" \
@@ -261,7 +282,12 @@ jobs:
               /run/host/mnt/ >"$WORK/install.log" 2>&1 || INSTALL_RC=$?
           cat "$WORK/install.log" || true
 
-          INSTALLED_COMPOSEFS="$(sudo ls -1 /mnt/composefs/images 2>/dev/null | head -n1 || true)"
+          ALL_INSTALLED_IMAGES="$(sudo ls -1 /mnt/composefs/images 2>/dev/null | tr '\n' ',' | sed 's/,$//' || true)"
+          if [ -n "$UKI_DIGEST" ] && sudo test -L "/mnt/composefs/images/${UKI_DIGEST}"; then
+            INSTALLED_COMPOSEFS="$UKI_DIGEST"
+          else
+            INSTALLED_COMPOSEFS="$(sudo ls -1 /mnt/composefs/images 2>/dev/null | head -n1 || true)"
+          fi
           if [ -z "$INSTALLED_COMPOSEFS" ]; then
             INSTALLED_COMPOSEFS="$(grep -oE '[0-9a-f]{128}' "$WORK/install.log" | tail -n1 || true)"
           fi
@@ -277,36 +303,12 @@ jobs:
             if sudo test -f "$OBJ_FILE"; then
               sudo mkdir -p /mnt/erofs_view
               if sudo mount -t erofs -o loop,ro "$OBJ_FILE" /mnt/erofs_view 2>/dev/null; then
-                echo "=== [Diag: Comparing installed EROFS vs container rootfs] ==="
-                sudo docker run --rm --privileged -v /mnt/erofs_view:/erofs_view:ro "matrix-test:${VARIANT}" python3 -c '
-          import os, stat
-          skip = {"/proc", "/sys", "/dev", "/etc/hosts", "/etc/resolv.conf", "/etc/hostname", "/run/systemd/resolve", "/erofs_view"}
-          def snap(base):
-            out = {}
-            for r, ds, fs in os.walk(base, topdown=True):
-              rel_r = "/" + os.path.relpath(r, base) if r != base else "/"
-              if rel_r in skip:
-                ds[:] = []
-                continue
-              ds[:] = [d for d in ds if (rel_r.rstrip("/") + "/" + d) not in skip]
-              for p in [rel_r] + [rel_r.rstrip("/") + "/" + x for x in ds + fs]:
-                if p in out or p in skip: continue
-                try:
-                  st = os.lstat(base.rstrip("/") + p if p != "/" else base)
-                  out[p] = (stat.S_IFMT(st.st_mode), st.st_mode & 0o7777, st.st_uid, st.st_gid, int(st.st_mtime), st.st_size if stat.S_ISREG(st.st_mode) else 0)
-                except FileNotFoundError:
-                  pass
-            return out
-          a = snap("/erofs_view")
-          b = snap("/")
-          diffs = []
-          for k in sorted(set(a) | set(b)):
-            if a.get(k) != b.get(k):
-              diffs.append((k, a.get(k), b.get(k)))
-          print(f"Total EROFS vs RootFS metadata diffs: {len(diffs)}")
-          for k, va, vb in diffs[:40]:
-            print(f"  {k}: erofs={va} vs rootfs={vb}")
-          ' || true
+                echo "=== [Diag: Composefs Dumpfile Diff (rootfs.dump vs installed EROFS)] ==="
+                sudo docker run --rm --privileged -v /mnt/erofs_view:/erofs_view:ro -v "$WORK:/work" "matrix-test:${VARIANT}" \
+                  bootc container compute-composefs-digest --write-dumpfile-to /work/erofs.dump /erofs_view || true
+                if [ -f "$WORK/diag/rootfs.dump" ] && [ -f "$WORK/erofs.dump" ]; then
+                  diff -u "$WORK/diag/rootfs.dump" "$WORK/erofs.dump" | head -n 120 || true
+                fi
                 sudo umount /mnt/erofs_view 2>/dev/null || true
               fi
             fi
@@ -322,7 +324,7 @@ jobs:
             GATE2_TREE="PASS"
           fi
           GATE2_OCI_INSTALL="FAIL"
-          if [ "$INSTALL_RC" -eq 0 ] && [ -n "$UKI_DIGEST" ] && { [ "$UKI_DIGEST" = "$INSTALLED_COMPOSEFS" ] || [ "$BLS_UKI_REL" = "/EFI/Linux/bootc/bootc_composefs-${UKI_DIGEST}.efi" ]; }; then
+          if [ "$INSTALL_RC" -eq 0 ] && [ -n "$UKI_DIGEST" ] && [ "$UKI_DIGEST" = "$INSTALLED_COMPOSEFS" ] && [ "$BLS_UKI_REL" = "/EFI/Linux/bootc/bootc_composefs-${UKI_DIGEST}.efi" ]; then
             GATE2_OCI_INSTALL="PASS"
           fi
 
@@ -332,7 +334,7 @@ jobs:
           echo "Rootfs Stage Digest:      ${ROOTFS_TREE_DIGEST}"
           echo "UKI Cmdline Digest:       ${UKI_DIGEST}"
           echo "Final Tree Digest:        ${FINAL_TREE_DIGEST} (${GATE2_TREE})"
-          echo "OCI Install Digest:       ${INSTALLED_COMPOSEFS:-none} (bls=${BLS_UKI_REL:-none}, install_rc=${INSTALL_RC}, ${GATE2_OCI_INSTALL})"
+          echo "OCI Install Digest:       ${INSTALLED_COMPOSEFS:-none} (all=[${ALL_INSTALLED_IMAGES:-none}], bls=${BLS_UKI_REL:-none}, install_rc=${INSTALL_RC}, ${GATE2_OCI_INSTALL})"
 
           {
             echo "### Path ${VARIANT}: ${LABEL}"
