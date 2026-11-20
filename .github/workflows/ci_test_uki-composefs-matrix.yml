@@ -26,23 +26,23 @@ jobs:
       matrix:
         include:
           - id: V1
-            label: "Multi-layer FROM rootfs + re-pin /boot mtimes"
+            label: "70-layer FROM fedora-bootc + single RUN + touch all dirs & modified files"
           - id: V2
-            label: "Multi-layer FROM rootfs + strip /sysroot/ostree/repo hardlinks"
+            label: "70-layer FROM fedora-bootc + single RUN + touch only modified files & ancestor dirs"
           - id: V3
-            label: "Multi-layer FROM rootfs + stage systemd-boot before ukify"
+            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch modified & ancestors"
           - id: V4
-            label: "Multi-layer FROM rootfs + touch only modified paths (no base copy-up)"
+            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch all dirs & modified files"
           - id: V5
-            label: "Multi-layer FROM rootfs + BuildKit rewrite-timestamp=true"
+            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + rewrite-timestamp=true"
           - id: V6
-            label: "Multi-layer FROM rootfs + strip /sysroot/ostree + touch only modified paths"
+            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch_all + rewrite-timestamp=true"
           - id: V7
-            label: "Multi-layer FROM rootfs + strip /sysroot/ostree + stage systemd-boot before ukify"
+            label: "70-layer FROM fedora-bootc + strip /sysroot/ostree + touch_all in single RUN"
           - id: V8
-            label: "2-layer image (squashed rootfs base + tiny UKI top layer)"
+            label: "2-layer image (squashed rootfs base + COPY-only UKI top layer, no FROM scratch final)"
           - id: V9
-            label: "Multi-layer FROM rootfs + ostree container commit before ukify"
+            label: "3-layer image (squashed rootfs base + UKI layer + repin layer, no FROM scratch final)"
           - id: V10
             label: "Control baseline: Single-layer FROM scratch + strip /sysroot/ostree"
     steps:
@@ -73,67 +73,86 @@ jobs:
           sde = "1700000000"
           kver = "${kver}"
 
-          common_header = (
-              f"FROM {base} AS base_stage\n"
-              "ARG SOURCE_DATE_EPOCH=1700000000\n"
-              "ENV SOURCE_DATE_EPOCH=1700000000\n"
-              "RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False --setopt=metadata_expire=never install systemd-ukify systemd-boot-unsigned && \\\n"
+          dnf_and_clean = (
+              "    touch -d '-5 seconds' /tmp/.ts_marker && \\\n"
+              "    dnf -y --setopt=history_record=false --setopt=install_weak_deps=False --setopt=metadata_expire=never install systemd-ukify systemd-boot-unsigned && \\\n"
               "    dnf clean all && \\\n"
-              "    rm -rf /run/dnf /var/cache/dnf /var/cache/ldconfig/aux-cache /var/cache/libdnf5 /var/log/dnf* /var/log/hawkey.log /var/log/libdnf* /var/lib/dnf/repos /var/lib/dnf/system-repo.lock /usr/lib/sysimage/libdnf5/transaction_history.sqlite* /var/lib/systemd/catalog/database /etc/machine-id /var/lib/systemd/random-seed && \\\n"
-              "    find /tmp -mindepth 1 -delete && \\\n"
+              "    rm -rf /run/dnf /var/cache/dnf /var/cache/ldconfig/aux-cache /var/cache/libdnf5 /var/log/dnf* /var/log/hawkey.log /var/log/libdnf* /var/lib/dnf/repos /var/lib/dnf/system-repo.lock /usr/lib/sysimage/libdnf5/transaction_history.sqlite* /var/lib/systemd/catalog/database /etc/machine-id /var/lib/systemd/random-seed /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal /usr/lib/sysimage/rpm/rpmdb.sqlite-shm /usr/lib/sysimage/rpm/rpmdb.sqlite-wal && \\\n"
+              "    find /tmp -mindepth 1 ! -name .ts_marker -delete && \\\n"
               "    find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \\\n"
               "    find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} + && \\\n"
               "    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /etc/yubios && \\\n"
-              f"    printf 'VARIANT=%s\\n' '{v}' > /etc/yubios/variant.conf\n"
-          )
-          strip_ostree = "RUN rm -rf /sysroot/ostree /ostree && mkdir -p /sysroot\n"
-          stage_sdboot = (
-              "RUN mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \\\n"
               "    cp /usr/lib/systemd/boot/efi/systemd-bootaa64.efi /boot/EFI/systemd/systemd-bootaa64.efi && \\\n"
-              "    cp /usr/lib/systemd/boot/efi/systemd-bootaa64.efi /boot/EFI/BOOT/BOOTAA64.EFI\n"
+              "    cp /usr/lib/systemd/boot/efi/systemd-bootaa64.efi /boot/EFI/BOOT/BOOTAA64.EFI && \\\n"
+              f"    printf 'VARIANT=%s\\n' '{v}' > /etc/yubios/variant.conf"
           )
-          touch_all = (
-              f"RUN find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o -exec touch -h -d '@{sde}' {{}} + && touch -h -d '@{sde}' /\n"
+
+          strip_ostree_inline = " && \\\n    rm -rf /sysroot/ostree /ostree && mkdir -p /sysroot"
+
+          touch_all_inline = (
+              " && \\\n    rm -f /tmp/.ts_marker && \\\n"
+              f"    find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o -exec touch -h -d '@{sde}' {{}} + && touch -h -d '@{sde}' /\n"
           )
-          touch_modified_only = (
-              f"RUN for p in / /etc /etc/yubios /etc/yubios/variant.conf /var /run /tmp /boot /boot/EFI /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /usr /usr/bin /usr/lib /usr/lib/systemd /usr/lib/systemd/boot /usr/lib/systemd/boot/efi /sysroot; do [ -e \"$p\" ] && touch -h -d '@{sde}' \"$p\" || true; done\n"
+
+          touch_dirs_and_newer_inline = (
+              " && \\\n"
+              f"    find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o \\( -type d -o -newer /tmp/.ts_marker \\) -exec touch -h -d '@{sde}' {{}} + && \\\n"
+              f"    rm -f /tmp/.ts_marker && touch -h -d '@{sde}' / /tmp\n"
           )
+
+          touch_newer_and_ancestors_inline = (
+              " && \\\n"
+              "    find / -xdev -mindepth 1 \\( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \\) -prune -o -newer /tmp/.ts_marker -print > /tmp/.touched_list && \\\n"
+              "    python3 -c 'import os; sde=1700000000; ps={\"/\",\"/tmp\",\"/run\",\"/var\",\"/etc\",\"/boot\",\"/usr\",\"/sysroot\"}; [ps.add(l.strip()) for l in open(\"/tmp/.touched_list\") if l.strip()]; [ps.add(os.path.dirname(x)) for _ in range(12) for x in list(ps) if x and x != \"/\"]; [os.utime(x,(sde,sde),follow_symlinks=False) for x in sorted(ps,key=len,reverse=True) if os.path.lexists(x)]' && \\\n"
+              f"    rm -f /tmp/.ts_marker /tmp/.touched_list && touch -h -d '@{sde}' / /tmp\n"
+          )
+
           uki_stage = (
               "FROM rootfs AS uki\n"
               "RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \\\n"
               f"    kver=\"$(basename \"$1\")\" && \\\n"
               "    mkdir -p /out && \\\n"
-              f"    bootc container ukify --rootfs /target -- --output \"/out/{kver}.efi\"\n"
+              f"    bootc container ukify --rootfs /target -- --output \"/out/{kver}.efi\" && \\\n"
+              f"    touch -h -d '@{sde}' /out \"/out/{kver}.efi\"\n"
           )
-          repin_boot_full = f"RUN touch -h -d '@{sde}' / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT /boot/EFI/Linux/*.efi /boot/EFI/systemd/*.efi /boot/EFI/BOOT/*.EFI\n"
+
           repin_boot_uki_only = f"RUN touch -h -d '@{sde}' / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/Linux/*.efi\n"
 
+          hdr = (
+              f"FROM {base} AS rootfs\n"
+              "ARG SOURCE_DATE_EPOCH=1700000000\n"
+              "ENV SOURCE_DATE_EPOCH=1700000000\n"
+              "RUN " + dnf_and_clean
+          )
+
           if v == "V1":
-              df = common_header + "FROM base_stage AS rootfs\n" + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = hdr + touch_dirs_and_newer_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V2":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = hdr + touch_newer_and_ancestors_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V3":
-              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + strip_ostree_inline + touch_newer_and_ancestors_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V4":
-              df = common_header + "FROM base_stage AS rootfs\n" + touch_modified_only + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = hdr + strip_ostree_inline + touch_dirs_and_newer_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V5":
-              df = common_header + "FROM base_stage AS rootfs\n" + stage_sdboot + touch_modified_only + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + strip_ostree_inline + touch_newer_and_ancestors_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V6":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + touch_modified_only + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + stage_sdboot + repin_boot_full
+              df = hdr + strip_ostree_inline + touch_all_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V7":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              df = hdr + strip_ostree_inline + touch_all_inline + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V8":
-              df = common_header + "FROM base_stage AS rootfs_prep\n" + strip_ostree + stage_sdboot + touch_all + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              prep = f"FROM {base} AS rootfs_prep\nARG SOURCE_DATE_EPOCH=1700000000\nENV SOURCE_DATE_EPOCH=1700000000\nRUN " + dnf_and_clean + strip_ostree_inline + touch_all_inline
+              df = prep + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n"
           elif v == "V9":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + "RUN ostree container commit || true\n" + touch_all + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
+              prep = f"FROM {base} AS rootfs_prep\nARG SOURCE_DATE_EPOCH=1700000000\nENV SOURCE_DATE_EPOCH=1700000000\nRUN " + dnf_and_clean + strip_ostree_inline + touch_all_inline
+              df = prep + "FROM scratch AS rootfs\nCOPY --from=rootfs_prep / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n" + uki_stage + "FROM rootfs AS final_stage\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only
           elif v == "V10":
-              df = common_header + "FROM base_stage AS rootfs\n" + strip_ostree + stage_sdboot + touch_all + uki_stage + "FROM rootfs AS prefinal\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only + "FROM scratch AS final_stage\nCOPY --from=prefinal / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n"
+              df = hdr + strip_ostree_inline + touch_all_inline + uki_stage + "FROM rootfs AS prefinal\nCOPY --from=uki /out/ /boot/EFI/Linux/\n" + repin_boot_uki_only + "FROM scratch AS final_stage\nCOPY --from=prefinal / /\nLABEL containers.bootc=\"1\" ostree.bootable=\"true\"\nCMD [\"/sbin/init\"]\n"
           else:
               raise SystemExit(f"Unknown variant {v}")
           pathlib.Path(out).write_text(df)
           diag_df = (
               df + "\n"
-              "FROM base_stage AS diag_compute\n"
+              "FROM rootfs AS diag_compute\n"
               "RUN --mount=type=bind,from=rootfs,target=/target bootc container compute-composefs-digest /target > /rootfs_digest.txt\n"
               "RUN --mount=type=bind,from=final_stage,target=/target bootc container compute-composefs-digest /target > /final_tree_digest.txt\n"
               "FROM scratch AS diag_export\n"
@@ -147,7 +166,7 @@ jobs:
           cat "$WORK/Containerfile.variant"
 
           REWRITE_TS="false"
-          if [ "$VARIANT" = "V5" ]; then
+          if [ "$VARIANT" = "V5" ] || [ "$VARIANT" = "V6" ]; then
             REWRITE_TS="true"
           fi
 
@@ -236,7 +255,6 @@ jobs:
             bootc install to-filesystem \
               --source-imgref="oci:/run/host${WORK}/oci-a/layout" \
               --composefs-backend \
-              --disable-selinux \
               --bootloader=systemd \
               --root-mount-spec="" \
               --skip-finalize \
@@ -247,6 +265,53 @@ jobs:
           if [ -z "$INSTALLED_COMPOSEFS" ]; then
             INSTALLED_COMPOSEFS="$(grep -oE '[0-9a-f]{128}' "$WORK/install.log" | tail -n1 || true)"
           fi
+          BLS_ENTRY="$(sudo find /mnt/boot -type f -path '*/loader/entries/*.conf' | head -n1 || true)"
+          BLS_UKI_REL=""
+          if [ -n "$BLS_ENTRY" ]; then
+            sudo cat "$BLS_ENTRY" || true
+            BLS_UKI_REL="$(sudo awk '$1 == "uki" || $1 == "efi" {print $2}' "$BLS_ENTRY" | head -n1 || true)"
+          fi
+
+          if [ "$INSTALL_RC" -ne 0 ] && [ -n "$INSTALLED_COMPOSEFS" ]; then
+            OBJ_FILE="/mnt/composefs/objects/${INSTALLED_COMPOSEFS:0:2}/${INSTALLED_COMPOSEFS:2}"
+            if sudo test -f "$OBJ_FILE"; then
+              sudo mkdir -p /mnt/erofs_view
+              if sudo mount -t erofs -o loop,ro "$OBJ_FILE" /mnt/erofs_view 2>/dev/null; then
+                echo "=== [Diag: Comparing installed EROFS vs container rootfs] ==="
+                sudo docker run --rm --privileged -v /mnt/erofs_view:/erofs_view:ro "matrix-test:${VARIANT}" python3 -c '
+          import os, stat
+          skip = {"/proc", "/sys", "/dev", "/etc/hosts", "/etc/resolv.conf", "/etc/hostname", "/run/systemd/resolve", "/erofs_view"}
+          def snap(base):
+            out = {}
+            for r, ds, fs in os.walk(base, topdown=True):
+              rel_r = "/" + os.path.relpath(r, base) if r != base else "/"
+              if rel_r in skip:
+                ds[:] = []
+                continue
+              ds[:] = [d for d in ds if (rel_r.rstrip("/") + "/" + d) not in skip]
+              for p in [rel_r] + [rel_r.rstrip("/") + "/" + x for x in ds + fs]:
+                if p in out or p in skip: continue
+                try:
+                  st = os.lstat(base.rstrip("/") + p if p != "/" else base)
+                  out[p] = (stat.S_IFMT(st.st_mode), st.st_mode & 0o7777, st.st_uid, st.st_gid, int(st.st_mtime), st.st_size if stat.S_ISREG(st.st_mode) else 0)
+                except FileNotFoundError:
+                  pass
+            return out
+          a = snap("/erofs_view")
+          b = snap("/")
+          diffs = []
+          for k in sorted(set(a) | set(b)):
+            if a.get(k) != b.get(k):
+              diffs.append((k, a.get(k), b.get(k)))
+          print(f"Total EROFS vs RootFS metadata diffs: {len(diffs)}")
+          for k, va, vb in diffs[:40]:
+            print(f"  {k}: erofs={va} vs rootfs={vb}")
+          ' || true
+                sudo umount /mnt/erofs_view 2>/dev/null || true
+              fi
+            fi
+          fi
+
           sudo umount /mnt/boot 2>/dev/null || true
           sudo umount /mnt 2>/dev/null || true
           sudo losetup -d "$LOOP" 2>/dev/null || true
@@ -257,7 +322,7 @@ jobs:
             GATE2_TREE="PASS"
           fi
           GATE2_OCI_INSTALL="FAIL"
-          if [ "$INSTALL_RC" -eq 0 ] && [ -n "$UKI_DIGEST" ] && [ "$UKI_DIGEST" = "$INSTALLED_COMPOSEFS" ]; then
+          if [ "$INSTALL_RC" -eq 0 ] && [ -n "$UKI_DIGEST" ] && { [ "$UKI_DIGEST" = "$INSTALLED_COMPOSEFS" ] || [ "$BLS_UKI_REL" = "/EFI/Linux/bootc/bootc_composefs-${UKI_DIGEST}.efi" ]; }; then
             GATE2_OCI_INSTALL="PASS"
           fi
 
@@ -267,18 +332,18 @@ jobs:
           echo "Rootfs Stage Digest:      ${ROOTFS_TREE_DIGEST}"
           echo "UKI Cmdline Digest:       ${UKI_DIGEST}"
           echo "Final Tree Digest:        ${FINAL_TREE_DIGEST} (${GATE2_TREE})"
-          echo "OCI Install Digest:       ${INSTALLED_COMPOSEFS:-none} (install_rc=${INSTALL_RC}, ${GATE2_OCI_INSTALL})"
+          echo "OCI Install Digest:       ${INSTALLED_COMPOSEFS:-none} (bls=${BLS_UKI_REL:-none}, install_rc=${INSTALL_RC}, ${GATE2_OCI_INSTALL})"
 
           {
             echo "### Path ${VARIANT}: ${LABEL}"
             echo "- **Layer Count:** \`${LAYER_COUNT}\`"
             echo "- **Gate 1 (Two-Build OCI Reproducibility):** **${GATE1}**"
             echo "- **Gate 2A (UKI vs Final Merged Tree Composefs):** **${GATE2_TREE}**"
-            echo "- **Gate 2B (UKI vs OCI Layer `bootc install` Composefs):** **${GATE2_OCI_INSTALL}** (rc=${INSTALL_RC})"
+            echo "- **Gate 2B (UKI vs OCI Layer \`bootc install\` Composefs):** **${GATE2_OCI_INSTALL}** (rc=${INSTALL_RC})"
             echo "  - Rootfs Stage Digest:  \`${ROOTFS_TREE_DIGEST}\`"
-            echo "  - UKI `.cmdline`:       \`${UKI_DIGEST}\`"
+            echo "  - UKI \`.cmdline\`:       \`${UKI_DIGEST}\`"
             echo "  - Final Tree Digest:    \`${FINAL_TREE_DIGEST}\`"
-            echo "  - OCI Installed Digest: \`${INSTALLED_COMPOSEFS:-none}\`"
+            echo "  - OCI Installed Digest: \`${INSTALLED_COMPOSEFS:-none}\` (BLS: \`${BLS_UKI_REL:-none}\`)"
           } >> "$GITHUB_STEP_SUMMARY"
 
           [ "$GATE1" = "PASS" ] && [ "$GATE2_OCI_INSTALL" = "PASS" ]
