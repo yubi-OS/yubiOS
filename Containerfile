@@ -9,7 +9,7 @@
 # PINNED.md; the FROM carries only the immutable OCI index digest so there is a
 # single source of identity (no tag+digest ambiguity for Build Policy/tooling).
 # quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261114.0)
-FROM quay.io/fedora/fedora-bootc@sha256:990ebc2678ff3dbca3f0143c8d5f1a150a2fb0c418888a3bdf218aea109fc1d2 AS rootfs
+FROM quay.io/fedora/fedora-bootc@sha256:990ebc2678ff3dbca3f0143c8d5f1a150a2fb0c418888a3bdf218aea109fc1d2 AS rootfs_prep
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -366,16 +366,35 @@ RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
     ! test -e /etc/machine-id && \
     ! test -e /var/lib/systemd/random-seed
 
-# The final stage creates the EFI directories with mkdir, and the composefs digest covers
-# directory entries. Create them here too, so the UKI (built from this stage) and the shipped
-# image carry the same directory set before the mtime normalisation below.
-RUN mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd
+# Stage systemd-boot and the EFI directory skeleton in rootfs_prep before mtime
+# normalization so the flattened rootfs base layer (layer[0]) already carries
+# them and the final stage only needs to overlay the UKI in layer[1] (Path V8).
+RUN case "$(uname -m)" in \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI" && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
 
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
 RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /
+
+# Flatten fedora-bootc's 65 rpm-ostree splitstream layers into a canonical base
+# rootfs layer (layer[0]) before ukify so overlayfs (/target) and composefs-rs's
+# OCI tar-stream merger agree on all directory mtimes and hardlinks
+# (containers/composefs-rs#132, verified by ci_test_uki-composefs-matrix.yml Path V8).
+FROM scratch AS rootfs
+# hadolint ignore=DL3067
+COPY --from=rootfs_prep / /
+LABEL containers.bootc="1" ostree.bootable="true"
+CMD ["/sbin/init"]
 
 # ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
 # efitools, pkcs11-provider, sbsigntools: owner signing tools for enroll-sb.sh
@@ -386,49 +405,20 @@ RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path
 # of a BLS kernel entry. bootc container ukify refuses the active root
 # ("Cannot operate on active root filesystem"), so the UKI is built from a
 # read-only bind mount of the rootfs stage, as in bootc's sealed-image recipe.
-# The composefs digest is taken before the UKI and the bootloader files are
-# written. The UKI is unsigned here: the owner signs the loader and the UKI with
-# the PIV slot 9a db key on the board (enroll-sb.sh resign). sd-stub measures the
-# UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
-# checks. Secure Boot is not part of that check.
+# Pin /out and /out/${kver}.efi mtimes to SOURCE_DATE_EPOCH so the COPY-only
+# top layer (layer[1]) is deterministic without a final FROM scratch squash.
 FROM rootfs AS uki
+ARG SOURCE_DATE_EPOCH
 RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     mkdir -p /out && \
-    bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi"
+    bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
 
-# Reproducibility diagnostic (remove once the UKI is proven deterministic): print the composefs
-# digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
+# Reproducibility diagnostic: print the composefs digest bootc embeds in the UKI and the UKI's sha256.
 RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
 
-FROM rootfs AS prefinal
+# 2-layer shipped image (Path V8): layer[0] is the flattened rootfs base,
+# layer[1] is the sealed UKI under /boot/EFI/Linux/.
+FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
-RUN case "$(uname -m)" in \
-      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
-      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
-      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
-    esac && \
-    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
-    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
-    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
-
-# Shipped-image assert: machine-id and random-seed must be absent (see the rootfs stage).
-RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
-
-# Final-stage mtime pin (composefs digest). The rootfs stage normalizes mtimes to
-# SOURCE_DATE_EPOCH, but the writes in this stage leave build-time mtimes on /, /run and
-# /boot. bootc hashes those into the composefs digest, so the digest the installer computes
-# for the final image differs from the digest embedded in the UKI (computed on the rootfs
-# stage). Re-pin them as the last step so the two digests agree.
-ARG SOURCE_DATE_EPOCH
-RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT /boot/EFI/yubiOS /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys
-
-# Single-layer shipped image. The composefs digest the installer checks is computed from the
-# image layers, while the UKI embeds the merged-filesystem digest. One layer makes the two agree
-# (rehearsal on the diagnostic single-layer image returned INSTALL_RC=0). Base labels and the
-# command are restored here because a scratch stage starts with no config.
-FROM scratch
-# hadolint ignore=DL3067
-COPY --from=prefinal / /
-LABEL containers.bootc="1" ostree.bootable="true"
-CMD ["/sbin/init"]
