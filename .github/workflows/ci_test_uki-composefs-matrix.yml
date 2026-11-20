@@ -51,7 +51,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:b3e1b7a538641ce89aa5a9ce0bc980da5bb033e4c94b3e5d7cf6eb8bd2f2011a # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:ac54666cad73016059945e22a9d460cd0a60d869a8a92a8f5c367517eb778531 # trixie-debian13-dev
     steps:
       - name: Install git and checkout
         run: |
