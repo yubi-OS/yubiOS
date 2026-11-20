@@ -135,7 +135,7 @@ RUN install -d /usr/lib/systemd/system/multi-user.target.wants && \
 # dev rootfs, normalize mtimes to SOURCE_DATE_EPOCH, flatten rootfs_prep into the
 # canonical base layer (layer[0]), rebuild the UKI against rootfs with /out mtimes
 # pinned, and overlay the UKI in layer[1] without a final FROM scratch squash.
-RUN rm -rf /sysroot/ostree /ostree && mkdir -p /sysroot && \
+RUN rm -rf /sysroot/ostree && mkdir -p /sysroot/ostree && ln -sfn sysroot/ostree /ostree && \
     rm -f /var/lib/systemd/catalog/database \
           /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal \
           /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal && \

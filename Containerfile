@@ -349,8 +349,9 @@ RUN set -- /usr/lib/modules/*/ && \
 RUN rm -f /var/lib/systemd/catalog/database \
           /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal \
           /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal && \
-    rm -rf /sysroot/ostree /ostree /var/cache/fontconfig /var/cache/gdm /var/cache/libX11 /var/lib/dnf /var/lib/rpm-state /var/log/gdm && \
-    mkdir -p /sysroot && \
+    rm -rf /sysroot/ostree /var/cache/fontconfig /var/cache/gdm /var/cache/libX11 /var/lib/dnf /var/lib/rpm-state /var/log/gdm && \
+    mkdir -p /sysroot/ostree && \
+    ln -sfn sysroot/ostree /ostree && \
     find /var -xdev -mindepth 1 -type f ! -path '/var/log/chipsec*' -delete && \
     find /var -xdev -mindepth 1 -type l -delete && \
     python3 -c 'import os, stat; lines = ["# SPDX-License-Identifier: LGPL-2.1-or-later", "d /var/lib/yubiOS 0755 root root - -", "d /var/lib/yubiOS/oci 0755 root root - -", "d /var/opt 0755 root root - -", "L+ /var/opt/antimony - - - - /usr/lib/opt/antimony"];     [lines.append(f"d {r} {stat.S_IMODE(os.lstat(r).st_mode):04o} root root - -") for r, _, _ in os.walk("/var") if r != "/var"];     open("/usr/lib/tmpfiles.d/yubiOS-state.conf", "w").write("\n".join(sorted(set(lines))) + "\n")' && \
