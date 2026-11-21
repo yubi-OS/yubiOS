@@ -199,9 +199,8 @@ if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
     cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
     openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
 
-    NOW_EPOCH="$(date -u +%s)"
-    T="$(date -u -d "@$(( NOW_EPOCH - 120 ))" '+%Y-%m-%d %H:%M:%S')"
-    T_NULL="$(date -u -d "@$(( NOW_EPOCH - 60 ))" '+%Y-%m-%d %H:%M:%S')"
+    T="2026-01-01 00:00:00"
+    T_NULL="2026-01-01 00:01:00"
     for var in PK KEK db; do
       cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
     done
@@ -284,9 +283,8 @@ EOF
     cp -f "$KEY_DIR/db.key" "$KEY_DIR/PK.key"
     cp -f "$KEY_DIR/db.key" "$KEY_DIR/KEK.key"
     openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
-    NOW_EPOCH="$(date -u +%s)"
-    T="$(date -u -d "@$(( NOW_EPOCH - 120 ))" '+%Y-%m-%d %H:%M:%S')"
-    T_NULL="$(date -u -d "@$(( NOW_EPOCH - 60 ))" '+%Y-%m-%d %H:%M:%S')"
+    T="2026-01-01 00:00:00"
+    T_NULL="2026-01-01 00:01:00"
     for var in PK KEK db; do
       cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
       sign-efi-sig-list -g "$OWNER_GUID" -t "$T" -k "$KEY_DIR/PK.key" -c "$KEY_DIR/PK.crt" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"

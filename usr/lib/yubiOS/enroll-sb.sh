@@ -52,7 +52,7 @@ fi
 [ -n "$PKCS11_LIB" ] || { echo "libykcs11 not found; set YUBIOS_PKCS11_LIB" >&2; exit 1; }
 export PKCS11_MODULE_PATH="$PKCS11_LIB"
 export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
-T="$(date -u '+%Y-%m-%d %H:%M:%S')"
+T="$(date -u -d '+1 day' '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d %H:%M:%S')"
 
 for tool in ykman openssl cert-to-efi-sig-list sign-efi-sig-list efi-updatevar efi-readvar systemd-sbsign sbverify; do
   command -v "$tool" >/dev/null || { yubiOS_log "missing tool: $tool"; exit 1; }
@@ -120,6 +120,22 @@ phase_enroll() {
       if efi-updatevar -f "$pk_null" PK; then
         sm="$(setup_mode)" || exit 1
       fi
+    fi
+    if [ "$sm" != "1" ] && [ -f "$KEYDIR/PK.crt" ]; then
+      yubiOS_log "SetupMode=$sm: signing blank ESL with $KEYDIR/PK.crt (slot 9a) to clear partial PK and enter SetupMode=1"
+      : > "$KEYDIR/null.esl"
+      sign-efi-sig-list -c "$KEYDIR/PK.crt" -t "$T" -o PK "$KEYDIR/null.esl" "$KEYDIR/PK_owner_null.forsig"
+      if openssl smime -sign -binary -provider pkcs11 -provider default \
+        -in "$KEYDIR/PK_owner_null.forsig" -out "$KEYDIR/PK_owner_null.signed" \
+        -signer "$KEYDIR/PK.crt" -inkey "$SB_KEY_URI" -outform DER -md sha256; then
+        sign-efi-sig-list -i "$KEYDIR/PK_owner_null.signed" -t "$T" PK "$KEYDIR/null.esl" "$KEYDIR/PK_owner_null.auth"
+        ensure_efivars_rw
+        if efi-updatevar -f "$KEYDIR/PK_owner_null.auth" PK; then
+          sm="$(setup_mode)" || exit 1
+          T="$(date -u -d '+1 day +1 minute' '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d %H:%M:%S')"
+        fi
+      fi
+      rm -f "$KEYDIR/PK_owner_null.forsig" "$KEYDIR/PK_owner_null.signed" "$KEYDIR/PK_owner_null.auth" 2>/dev/null || true
     fi
   fi
   if [ "$sm" != "1" ]; then

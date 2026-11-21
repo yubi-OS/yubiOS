@@ -32,10 +32,8 @@ PIV_PIN="${YUBIOS_PIV_PIN:-123456}"
 PIV_MGM_KEY="010203040506070801020304050607080102030405060708"
 CN_PREFIX="${YUBIOS_CN_PREFIX:-YUBIOS}"
 DAYS=1826
-INIT_EPOCH=$(( EPOCH - 120 ))
-NULL_EPOCH=$(( EPOCH - 60 ))
-T_STR="$(date -u -d "@${INIT_EPOCH}" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d 00:00:00')"
-T_NULL_STR="$(date -u -d "@${NULL_EPOCH}" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d 00:01:00')"
+T_STR="2026-01-01 00:00:00"
+T_NULL_STR="2026-01-01 00:01:00"
 
 WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "$WORK_DIR"' EXIT
