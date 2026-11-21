@@ -20,6 +20,11 @@ on:
         type: boolean
         required: false
         default: false
+      burn_otp_fuses:
+        description: 'Disable OP-TEE CFG_RK_SECURE_BOOT_SIMULATION to burn OTP fuses on hardware? (IRREVERSIBLE — keep false unless rehearsing on a sacrificial board)'
+        type: boolean
+        required: false
+        default: false
       ci_callback:
         description: 'Internal: call back to ci.yml when this workflow finishes.'
         required: false
@@ -547,6 +552,7 @@ jobs:
             python3-pyelftools python3-cryptography python3-setuptools \
             device-tree-compiler \
             openssl libssl-dev libgnutls28-dev \
+            softhsm2 opensc libengine-pkcs11-openssl \
             bison flex bc \
             uuid-dev iasl nasm swig \
             git ca-certificates || true
@@ -616,6 +622,26 @@ jobs:
           echo "STMM_FD=$GITHUB_WORKSPACE/BL32_AP_MM.fd" >> "$GITHUB_ENV"
           ls -l "$GITHUB_WORKSPACE/BL32_AP_MM.fd"
 
+      - name: Stage firmware signing keys (physical U2F/HSM slot 9a or swu2f + SoftHSM2 fallback)
+        env:
+          BURN_OTP_FUSES: ${{ inputs.burn_otp_fuses }}
+        run: |
+          set -euxo pipefail
+          chmod +x scripts/lib/stage-firmware-pkcs11-keys.sh
+          scripts/lib/stage-firmware-pkcs11-keys.sh "$GITHUB_WORKSPACE/fw-keys"
+          test -s "$GITHUB_WORKSPACE/fw-keys/slot9a-pub.pem"
+          test -s "$GITHUB_WORKSPACE/fw-keys/ta-sign-key.pem"
+          test -s "$GITHUB_WORKSPACE/fw-keys/rotpk_sha256.hex"
+          test -x "$GITHUB_WORKSPACE/fw-keys/pkcs11-sign-encrypt.sh"
+          echo "FW_KEY_DIR=$GITHUB_WORKSPACE/fw-keys" >> "$GITHUB_ENV"
+          echo "FW_KEY_SOURCE=$(cat "$GITHUB_WORKSPACE/fw-keys/key-source.txt")" >> "$GITHUB_ENV"
+          echo "FW_ROTPK_SHA256=$(cat "$GITHUB_WORKSPACE/fw-keys/rotpk_sha256.hex")" >> "$GITHUB_ENV"
+          if [ "${BURN_OTP_FUSES:-false}" = "true" ]; then
+            echo "OTP_FUSE_SIMULATION=n" >> "$GITHUB_ENV"
+          else
+            echo "OTP_FUSE_SIMULATION=y" >> "$GITHUB_ENV"
+          fi
+
       - name: Build OP-TEE TA dev kit
         env:
           OPTEE_PLATFORM: ${{ matrix.optee_platform }}
@@ -632,10 +658,20 @@ jobs:
           if [ -n "$OPTEE_FLAVOR" ]; then
             optee_args+=(PLATFORM_FLAVOR="$OPTEE_FLAVOR")
           fi
+          if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
+            optee_args+=(
+              CFG_ROCKCHIP_OTP=y
+              CFG_RK_SECURE_BOOT=y
+              CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
+            )
+          fi
           make -C optee_os -j"$(nproc)" \
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
             CROSS_COMPILE=arm-linux-gnueabihf- \
+            TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
+            TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
+            CFG_REE_FS_TA=n CFG_INSECURE=n \
             CFG_RPMB_FS=y CFG_REE_FS=y CFG_EARLY_TA=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -659,9 +695,13 @@ jobs:
           git -C ms-tpm-20-ref fetch -q --depth=1 origin "$MS_TPM_REF"
           git -C ms-tpm-20-ref checkout --detach FETCH_HEAD
           test "$(git -C ms-tpm-20-ref rev-parse HEAD)" = "$MS_TPM_REF"
+          YUBIOS_REAL_SIGN_ENC="$TA_DEV_KIT_DIR/scripts/sign_encrypt.py" \
           make -C optee_ftpm -j"$(nproc)" \
             CFG_FTPM_VOLATILE_NV=y \
             TA_DEV_KIT_DIR="$TA_DEV_KIT_DIR" \
+            TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
+            TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
+            SIGN_ENC="$FW_KEY_DIR/pkcs11-sign-encrypt.sh" \
             CFG_MS_TPM_20_REF="$GITHUB_WORKSPACE/ms-tpm-20-ref" \
             CROSS_COMPILE_ta_arm64=aarch64-linux-gnu- \
             CFG_ARM64_ta_arm64=y
@@ -680,12 +720,23 @@ jobs:
             optee_args+=(PLATFORM_FLAVOR="$OPTEE_FLAVOR")
           fi
           if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
-            optee_args+=(CFG_DRAM_BASE=0x40000000 CFG_DRAM_SIZE=0xb0000000 CFG_NSEC_DDR_1_BASE=0x100000000 CFG_NSEC_DDR_1_SIZE=0x2fc000000)
+            optee_args+=(
+              CFG_DRAM_BASE=0x40000000
+              CFG_DRAM_SIZE=0xb0000000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x2fc000000
+              CFG_ROCKCHIP_OTP=y
+              CFG_RK_SECURE_BOOT=y
+              CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
+            )
           fi
           make -C optee_os -j"$(nproc)" \
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
             CROSS_COMPILE=arm-linux-gnueabihf- \
+            TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
+            TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
+            CFG_REE_FS_TA=n CFG_INSECURE=n \
             CFG_RPMB_FS=y CFG_REE_FS=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -745,13 +796,26 @@ jobs:
             git -C mbedtls remote add origin https://github.com/Mbed-TLS/mbedtls
             git -C mbedtls fetch --depth 1 origin "$MBEDTLS_REF"
             git -C mbedtls checkout --detach FETCH_HEAD
+            tfa_key_arg="$FW_KEY_DIR/ta-sign-key.pem"
+            if [ "$FW_KEY_SOURCE" = "u2f_hsm_slot9a" ] && [ -f "$FW_KEY_DIR/openssl-pkcs11-engine.cnf" ]; then
+              export OPENSSL_CONF="$FW_KEY_DIR/openssl-pkcs11-engine.cnf"
+              export PKCS11_PIN="${YUBIOS_PIV_PIN:-123456}"
+              tfa_key_arg="pkcs11:id=%01;type=private"
+            fi
             make -C arm-trusted-firmware -j"$(nproc)" \
               "${tfa_args[@]}" \
               SPD=opteed \
               BL32="$BL32_HDR" BL32_EXTRA1="$BL32_PAGER" BL32_EXTRA2="$BL32_PAGEABLE" \
               BL32_RAM_LOCATION=tdram \
               BL33="$BL33_BIN" \
-              TRUSTED_BOARD_BOOT=1 GENERATE_COT=1 CREATE_KEYS=1 \
+              TRUSTED_BOARD_BOOT=1 GENERATE_COT=1 \
+              ROT_KEY="$tfa_key_arg" \
+              TRUSTED_WORLD_KEY="$tfa_key_arg" \
+              NON_TRUSTED_WORLD_KEY="$tfa_key_arg" \
+              SCP_BL2_KEY="$tfa_key_arg" \
+              BL31_KEY="$tfa_key_arg" \
+              BL32_KEY="$tfa_key_arg" \
+              BL33_KEY="$tfa_key_arg" \
               MBEDTLS_DIR="$GITHUB_WORKSPACE/mbedtls" \
               DEBUG=1 \
               all fip
@@ -890,6 +954,11 @@ jobs:
             echo "edk2_platforms_ref=${EDK2_PLATFORMS_REF}"
             echo "ms_tpm_ref=${MS_TPM_REF}"
             echo "ftpm_uuid=${FTPM_UUID}"
+            echo "key_source=${FW_KEY_SOURCE:-swu2f_softhsm2_slot9a}"
+            echo "rotpk_sha256=${FW_ROTPK_SHA256:-}"
+            echo "optee_cfg_insecure=n"
+            echo "optee_cfg_ree_fs_ta=n"
+            echo "otp_fuse_simulation=${OTP_FUSE_SIMULATION:-y}"
             if [ "$BUILD_KIND" = "qemu" ]; then
               echo "signature_envelope=TF-A CREATE_KEYS=1; excluded from byte-for-byte proof"
             fi
