@@ -32,7 +32,10 @@ PIV_PIN="${YUBIOS_PIV_PIN:-123456}"
 PIV_MGM_KEY="010203040506070801020304050607080102030405060708"
 CN_PREFIX="${YUBIOS_CN_PREFIX:-YUBIOS}"
 DAYS=1826
-T_STR="$(date -u -d "@${EPOCH}" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d 00:00:00')"
+INIT_EPOCH=$(( EPOCH - 120 ))
+NULL_EPOCH=$(( EPOCH - 60 ))
+T_STR="$(date -u -d "@${INIT_EPOCH}" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d 00:00:00')"
+T_NULL_STR="$(date -u -d "@${NULL_EPOCH}" '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d 00:01:00')"
 
 WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "$WORK_DIR"' EXIT
@@ -172,6 +175,13 @@ EOF
       -signer PK.crt -inkey "$sb_key_uri" -outform DER -md sha256
     sign-efi-sig-list -i PK.signed -t "$T_STR" PK PK.esl PK.auth
 
+    echo "[stage-ci-sb-keys] PK_null: pre-signed blank ESL (null.esl) for SetupMode 0->1 unlock"
+    : > null.esl
+    sign-efi-sig-list -c PK.crt -t "$T_NULL_STR" -o PK null.esl PK_null.forsig
+    openssl smime -sign -binary -provider pkcs11 -provider default -in PK_null.forsig -out PK_null.signed \
+      -signer PK.crt -inkey "$sb_key_uri" -outform DER -md sha256
+    sign-efi-sig-list -i PK_null.signed -t "$T_NULL_STR" PK null.esl PK_null.auth
+
     echo "[stage-ci-sb-keys] KEK: certificate signed by PK via PKCS#11"
     openssl req -x509 -sha256 -provider pkcs11 -provider default -key "$sb_key_uri" \
       -subj "/CN=${CN_PREFIX} KEK/" -out KEK.crt -nodes -days "$DAYS"
@@ -271,7 +281,7 @@ for target_dir in \
   "repro-evidence/secureboot" \
   "repro-evidence/EFI/yubiOS/secureboot"; do
   mkdir -p "$target_dir"
-  for fn in PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl PK.auth KEK.auth db.auth yubiOS-db.cer; do
+  for fn in PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl null.esl PK.auth PK_null.auth KEK.auth db.auth yubiOS-db.cer; do
     cp -f "$WORK_DIR/$fn" "$target_dir/$fn"
     chmod 0644 "$target_dir/$fn"
     touch -h -d "@${EPOCH}" "$target_dir/$fn"

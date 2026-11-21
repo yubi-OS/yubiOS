@@ -199,7 +199,9 @@ if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
     cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
     openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
 
-    T="$(date -u '+%Y-%m-%d %H:%M:%S')"
+    NOW_EPOCH="$(date -u +%s)"
+    T="$(date -u -d "@$(( NOW_EPOCH - 120 ))" '+%Y-%m-%d %H:%M:%S')"
+    T_NULL="$(date -u -d "@$(( NOW_EPOCH - 60 ))" '+%Y-%m-%d %H:%M:%S')"
     for var in PK KEK db; do
       cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
     done
@@ -244,6 +246,28 @@ EOF
       sudo chown "$(id -u):$(id -g)" "$KEY_DIR/${var}.signed"
       sign-efi-sig-list -i "$KEY_DIR/${var}.signed" -t "$T" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
     done
+    : > "$KEY_DIR/null.esl"
+    sign-efi-sig-list -c "$KEY_DIR/PK.crt" -t "$T_NULL" -o PK "$KEY_DIR/null.esl" "$KEY_DIR/PK_null.forsig"
+    if [ "$PIV_TOUCH_POLICY" != "never" ]; then
+      echo ">>> [U2F/HSM TOUCH] Signing PK_null.auth (blank ESL unlock) via PIV slot 9a — touch your U2F/HSM now <<<"
+    fi
+    if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
+      -provider "$PKCS11_PROV" -provider default \
+      -in "$KEY_DIR/PK_null.forsig" \
+      -out "$KEY_DIR/PK_null.signed" \
+      -signer "$KEY_DIR/PK.crt" \
+      -inkey "$SB_KEY_URI" \
+      -outform DER -md sha256; then
+      sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" openssl smime -sign -binary \
+        -engine pkcs11 -keyform engine \
+        -in "$KEY_DIR/PK_null.forsig" \
+        -out "$KEY_DIR/PK_null.signed" \
+        -signer "$KEY_DIR/PK.crt" \
+        -inkey "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
+        -outform DER -md sha256
+    fi
+    sudo chown "$(id -u):$(id -g)" "$KEY_DIR/PK_null.signed"
+    sign-efi-sig-list -i "$KEY_DIR/PK_null.signed" -t "$T_NULL" PK "$KEY_DIR/null.esl" "$KEY_DIR/PK_null.auth"
     ls -la "$KEY_DIR"
   elif [ "$SIGNKEY" = "test" ]; then
     SIGN_MODE="soft_test"
@@ -260,11 +284,15 @@ EOF
     cp -f "$KEY_DIR/db.key" "$KEY_DIR/PK.key"
     cp -f "$KEY_DIR/db.key" "$KEY_DIR/KEK.key"
     openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
-    T="$(date -u '+%Y-%m-%d %H:%M:%S')"
+    NOW_EPOCH="$(date -u +%s)"
+    T="$(date -u -d "@$(( NOW_EPOCH - 120 ))" '+%Y-%m-%d %H:%M:%S')"
+    T_NULL="$(date -u -d "@$(( NOW_EPOCH - 60 ))" '+%Y-%m-%d %H:%M:%S')"
     for var in PK KEK db; do
       cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
       sign-efi-sig-list -g "$OWNER_GUID" -t "$T" -k "$KEY_DIR/PK.key" -c "$KEY_DIR/PK.crt" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
     done
+    : > "$KEY_DIR/null.esl"
+    sign-efi-sig-list -g "$OWNER_GUID" -t "$T_NULL" -k "$KEY_DIR/PK.key" -c "$KEY_DIR/PK.crt" PK "$KEY_DIR/null.esl" "$KEY_DIR/PK_null.auth"
     ls -la "$KEY_DIR"
   else
     die "SIGNKEY=production requires a physical U2F/HSM (1050:*) attached on USB"

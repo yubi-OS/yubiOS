@@ -29,6 +29,13 @@ for _esp_cand in "$ESP" /boot/efi /boot; do
   if [ -d "$_esp_cand/EFI" ]; then ESP="$_esp_cand"; break; fi
 done
 KEYDIR="${YUBIOS_SB_KEYDIR:-/var/lib/yubiOS/secureboot}"
+if [ -n "${YUBIOS_SYSTEM_SB_KEYDIR:-}" ]; then
+  SYSTEM_KEYDIR="$YUBIOS_SYSTEM_SB_KEYDIR"
+elif [ -n "${YUBIOS_SB_KEYDIR:-}" ]; then
+  SYSTEM_KEYDIR="$YUBIOS_SB_KEYDIR"
+else
+  SYSTEM_KEYDIR="/usr/lib/yubiOS/secureboot"
+fi
 ENROLLED_MARK="${YUBIOS_SB_ENROLLED_MARK:-/var/lib/yubiOS/.sb-enrolled}"
 SB_KEY_URI="pkcs11:id=%01;type=private"
 OWNER_GUID="${YUBIOS_OWNER_GUID:-1404b45e-798b-4249-b5cd-b7f961b44894}"
@@ -45,7 +52,7 @@ fi
 [ -n "$PKCS11_LIB" ] || { echo "libykcs11 not found; set YUBIOS_PKCS11_LIB" >&2; exit 1; }
 export PKCS11_MODULE_PATH="$PKCS11_LIB"
 export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
-T="$(date +%Y-%m-%d) 00:00:00"
+T="$(date -u '+%Y-%m-%d %H:%M:%S')"
 
 for tool in ykman openssl cert-to-efi-sig-list sign-efi-sig-list efi-updatevar efi-readvar systemd-sbsign sbverify; do
   command -v "$tool" >/dev/null || { yubiOS_log "missing tool: $tool"; exit 1; }
@@ -94,6 +101,27 @@ require_slot_9a() {
 phase_enroll() {
   local sm
   sm="$(setup_mode)" || exit 1
+  if [ "$sm" != "1" ] && [ ! -f "$ENROLLED_MARK" ]; then
+    local pk_null=""
+    local cand
+    for cand in \
+      "$ESP/EFI/yubiOS/keys/PK_null.auth" \
+      "$ESP/EFI/yubiOS/secureboot/PK_null.auth" \
+      "$KEYDIR/PK_null.auth" \
+      "$SYSTEM_KEYDIR/PK_null.auth"; do
+      if [ -f "$cand" ]; then
+        pk_null="$cand"
+        break
+      fi
+    done
+    if [ -n "$pk_null" ]; then
+      yubiOS_log "SetupMode=$sm: applying initial $pk_null to clear PK and enter SetupMode=1"
+      ensure_efivars_rw
+      if efi-updatevar -f "$pk_null" PK; then
+        sm="$(setup_mode)" || exit 1
+      fi
+    fi
+  fi
   if [ "$sm" != "1" ]; then
     yubiOS_log "Not in setup mode (SetupMode=$sm). Refusing to write keys."
     exit 1
@@ -142,8 +170,11 @@ phase_enroll() {
   for v in PK KEK db; do efi-readvar -v "$v"; done
   [ "$(setup_mode)" = "0" ] || { yubiOS_log "SetupMode still 1 after PK write"; exit 1; }
   openssl x509 -in db.crt -outform DER -out "$KEYDIR/yubiOS-db.cer"
+  rm -f "$KEYDIR/PK_null.auth" "$KEYDIR/null.esl" 2>/dev/null || true
   if [ -d "$ESP/EFI" ]; then
     mkdir -p "$ESP/EFI/yubiOS/secureboot" "$ESP/EFI/yubiOS/keys" 2>/dev/null || true
+    rm -f "$ESP/EFI/yubiOS/secureboot/PK_null.auth" "$ESP/EFI/yubiOS/secureboot/null.esl" \
+          "$ESP/EFI/yubiOS/keys/PK_null.auth" "$ESP/EFI/yubiOS/keys/null.esl" 2>/dev/null || true
     cp -f PK.auth KEK.auth db.auth PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/secureboot/" 2>/dev/null || true
     cp -f PK.auth KEK.auth db.auth PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/keys/" 2>/dev/null || true
   fi

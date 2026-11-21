@@ -65,9 +65,14 @@ for a in "$@"; do [ "$prev" = "-out" ] && out="$a"; prev="$a"; done
 exit 0'
   stub cert-to-efi-sig-list 'echo esl > "${!#}"'
   stub sign-efi-sig-list 'echo sig > "${!#}"'
-  # Writing PK leaves setup mode, as real firmware does.
+  # Writing PK_null.auth enters setup mode (1); writing PK.auth leaves setup mode (0).
   stub efi-updatevar '[ -n "${STUB_UPDATEVAR_FAIL:-}" ] && exit 1
-if [ "${!#}" = PK ] && [ -z "${STUB_PK_NO_FLIP:-}" ]; then printf "\007\000\000\000\000" > "$SETUPMODE_FILE"; fi
+if [ "${!#}" = PK ] && [ -z "${STUB_PK_NO_FLIP:-}" ]; then
+  case "$*" in
+    *PK_null.auth*) printf "\007\000\000\000\001" > "$SETUPMODE_FILE" ;;
+    *)              printf "\007\000\000\000\000" > "$SETUPMODE_FILE" ;;
+  esac
+fi
 exit 0'
   stub efi-readvar 'echo "Variable $2, length 1000"'
   stub systemd-sbsign 'out=""; prev=""
@@ -146,6 +151,21 @@ make_db_crt() {
   [[ "$output" == *"Not in setup mode (SetupMode=0). Refusing to write keys."* ]]
   run ! grep -q '^efi-updatevar' "$STUB_LOG"
   run ! grep -q '^ykman' "$STUB_LOG"
+}
+
+@test "enroll in SetupMode=0 clears initial PK via PK_null.auth then enrolls owner keys" {
+  set_setup_mode 0
+  mkdir -p "$YUBIOS_ESP/EFI/yubiOS/keys" "$YUBIOS_ESP/EFI/yubiOS/secureboot"
+  echo nullauth > "$YUBIOS_ESP/EFI/yubiOS/keys/PK_null.auth"
+  echo nullauth > "$YUBIOS_ESP/EFI/yubiOS/secureboot/PK_null.auth"
+  run "$SB_SH" enroll
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"applying initial"* ]]
+  [[ "$output" == *"Keys enrolled. Next: resign the loader and UKIs before any reboot."* ]]
+  [ -f "$YUBIOS_SB_ENROLLED_MARK" ]
+  [ ! -e "$YUBIOS_ESP/EFI/yubiOS/keys/PK_null.auth" ]
+  [ ! -e "$YUBIOS_ESP/EFI/yubiOS/secureboot/PK_null.auth" ]
+  [ "$(od -An -t u1 -j4 -N1 "$SETUPMODE_FILE" | tr -d ' ')" = 0 ]
 }
 
 @test "enroll refuses when SetupMode is unreadable" {
