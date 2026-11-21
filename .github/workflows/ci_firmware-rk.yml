@@ -659,19 +659,24 @@ jobs:
             optee_args+=(PLATFORM_FLAVOR="$OPTEE_FLAVOR")
           fi
           if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
+            optee_cfg_insecure=n
             optee_args+=(
               CFG_ROCKCHIP_OTP=y
               CFG_RK_SECURE_BOOT=y
               CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
             )
+          else
+            optee_cfg_insecure=y
           fi
+          echo "OPTEE_CFG_INSECURE=$optee_cfg_insecure" >> "$GITHUB_ENV"
           make -C optee_os -j"$(nproc)" \
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
             CROSS_COMPILE=arm-linux-gnueabihf- \
             TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
             TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
-            CFG_REE_FS_TA=n CFG_INSECURE=n \
+            CFG_REE_FS_TA=n CFG_SECSTOR_TA=n CFG_SECSTOR_TA_MGMT_PTA=n \
+            CFG_INSECURE="$optee_cfg_insecure" \
             CFG_RPMB_FS=y CFG_REE_FS=y CFG_EARLY_TA=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -736,7 +741,8 @@ jobs:
             CROSS_COMPILE=arm-linux-gnueabihf- \
             TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
             TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
-            CFG_REE_FS_TA=n CFG_INSECURE=n \
+            CFG_REE_FS_TA=n CFG_SECSTOR_TA=n CFG_SECSTOR_TA_MGMT_PTA=n \
+            CFG_INSECURE="${OPTEE_CFG_INSECURE:-y}" \
             CFG_RPMB_FS=y CFG_REE_FS=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -956,8 +962,9 @@ jobs:
             echo "ftpm_uuid=${FTPM_UUID}"
             echo "key_source=${FW_KEY_SOURCE:-swu2f_softhsm2_slot9a}"
             echo "rotpk_sha256=${FW_ROTPK_SHA256:-}"
-            echo "optee_cfg_insecure=n"
+            echo "optee_cfg_insecure=${OPTEE_CFG_INSECURE:-y}"
             echo "optee_cfg_ree_fs_ta=n"
+            echo "optee_cfg_secstor_ta=n"
             echo "otp_fuse_simulation=${OTP_FUSE_SIMULATION:-y}"
             if [ "$BUILD_KIND" = "qemu" ]; then
               echo "signature_envelope=TF-A CREATE_KEYS=1; excluded from byte-for-byte proof"
