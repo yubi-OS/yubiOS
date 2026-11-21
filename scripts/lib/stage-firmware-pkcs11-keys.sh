@@ -184,7 +184,8 @@ def stream_bits(label: bytes, bits: int) -> int:
         buf.extend(hashlib.sha256(seed + b":" + label + b":" + str(ctr).encode()).digest())
         ctr += 1
     val = int.from_bytes(buf[:need], "big")
-    val |= (1 << (bits - 1)) | 1
+    val &= (1 << bits) - 1
+    val |= (3 << (bits - 2)) | 1
     return val
 
 def is_probable_prime(n: int) -> bool:
@@ -213,10 +214,12 @@ def is_probable_prime(n: int) -> bool:
 
 def derive_prime(label: bytes, bits: int = 1024, e: int = 65537) -> int:
     cand = stream_bits(label, bits)
-    while True:
+    limit = 1 << bits
+    while cand < limit:
         if (cand - 1) % e != 0 and is_probable_prime(cand):
             return cand
         cand += 2
+    raise RuntimeError("prime search exceeded bit bound")
 
 e = 65537
 p = derive_prime(b"prime-p", 1024, e)
@@ -227,6 +230,7 @@ if p < q:
     p, q = q, p
 
 n = p * q
+assert n.bit_length() == 2048, f"Expected 2048-bit modulus, got {n.bit_length()}"
 d = rsa.rsa_recover_private_exponent(e, p, q)
 dmp1 = rsa.rsa_crt_dmp1(d, p)
 dmq1 = rsa.rsa_crt_dmq1(d, q)
