@@ -405,9 +405,13 @@ EOF
   sudo install -d -m 0755 "$MNT_DIR/boot"
   sudo mount "$p1" "$MNT_DIR/boot"
 
-    log "Running bootc install to-filesystem directly onto $dev ($board_name)"
+  log "Running bootc install to-filesystem directly onto $dev ($board_name)"
   sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
   sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
+  # Cap dirty-page accumulation so the kernel streams writes smoothly to the SD card
+  # instead of buffering ~800 MiB of unwritten extents and stalling the SDXC controller
+  # during FS_IOC_ENABLE_VERITY (which caused mmc1 card drop / EIO on SN128 119G).
+  sudo sysctl -w vm.dirty_background_bytes=16777216 vm.dirty_bytes=67108864 >/dev/null 2>&1 || true
   PRELOAD_ENV=()
   if command -v gcc >/dev/null 2>&1; then
     cat > "$TMPDIR/nofsync.c" <<'EOF'
@@ -425,11 +429,13 @@ EOF
     -v /var/lib/containers:/var/lib/containers \
     -v "$TMPDIR:/var/tmp" \
     -e TMPDIR=/var/tmp \
+    -e TOKIO_WORKER_THREADS=1 \
+    -e RAYON_NUM_THREADS=1 \
     "${PRELOAD_ENV[@]}" \
     -v /dev:/dev \
     -v "$MNT_DIR:/target" \
     "$RESOLVED_OS" \
-    bootc install to-filesystem \
+    taskset -c 0 bootc install to-filesystem \
       --source-imgref="containers-storage:${RESOLVED_OS}" \
       --composefs-backend \
       --disable-selinux \
