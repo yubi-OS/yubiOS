@@ -176,11 +176,13 @@ phase_enroll() {
     -signer KEK.crt -inkey "$SB_KEY_URI" -outform DER -md sha256
   sign-efi-sig-list -i db.signed -t "$T" db db.esl db.auth
 
-  yubiOS_log "Writing PK, KEK, db through the StMM store"
+  yubiOS_log "Writing db, KEK, PK through the StMM store (PK last to lock User Mode)"
+  ensure_efivars_rw
+  efi-updatevar -f db.auth db
+  ensure_efivars_rw
+  efi-updatevar -f KEK.auth KEK
   ensure_efivars_rw
   efi-updatevar -f PK.auth PK
-  efi-updatevar -f KEK.auth KEK
-  efi-updatevar -f db.auth db
 
   yubiOS_log "Verifying enrolled variables"
   for v in PK KEK db; do efi-readvar -v "$v"; done
@@ -251,11 +253,13 @@ phase_prebuilt() {
   if [ "$src_dir" != "$KEYDIR" ]; then
     cp -f "$src_dir"/* "$KEYDIR/" 2>/dev/null || true
   fi
-  yubiOS_log "Writing prebuilt PK, KEK, db from $src_dir through the StMM store"
+  yubiOS_log "Writing prebuilt db, KEK, PK from $src_dir through the StMM store"
+  ensure_efivars_rw
+  efi-updatevar -f "$src_dir/db.auth" db
+  ensure_efivars_rw
+  efi-updatevar -f "$src_dir/KEK.auth" KEK
   ensure_efivars_rw
   efi-updatevar -f "$src_dir/PK.auth" PK
-  efi-updatevar -f "$src_dir/KEK.auth" KEK
-  efi-updatevar -f "$src_dir/db.auth" db
   for v in PK KEK db; do efi-readvar -v "$v"; done
   [ "$(setup_mode)" = "0" ] || { yubiOS_log "SetupMode still 1 after PK write"; exit 1; }
   touch "$ENROLLED_MARK"

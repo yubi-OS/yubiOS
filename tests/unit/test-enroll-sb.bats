@@ -229,9 +229,9 @@ make_db_crt() {
   [ -f "$YUBIOS_SB_KEYDIR/yubiOS-db.cer" ]
   [ -f "$YUBIOS_SB_ENROLLED_MARK" ]
   run grep '^efi-updatevar' "$STUB_LOG"
-  [ "${lines[0]}" = "efi-updatevar -f PK.auth PK" ]
+  [ "${lines[0]}" = "efi-updatevar -f db.auth db" ]
   [ "${lines[1]}" = "efi-updatevar -f KEK.auth KEK" ]
-  [ "${lines[2]}" = "efi-updatevar -f db.auth db" ]
+  [ "${lines[2]}" = "efi-updatevar -f PK.auth PK" ]
   [ "${#lines[@]}" -eq 3 ]
   run grep -c '^efi-readvar -v' "$STUB_LOG"
   [ "$output" -eq 3 ]
