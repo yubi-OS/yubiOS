@@ -95,6 +95,7 @@ jobs:
             'bcvk|bootc-dev/bcvk|^v[0-9]+\.[0-9]+\.[0-9]+$'
             'edk2|tianocore/edk2|^edk2-stable202602(\.[0-9]+)?$'
             'edk2-platforms|tianocore/edk2-platforms|^[0-9]{6,8}-before-platform-removals$'
+            'gnome-control-center|GNOME/gnome-control-center|^51\.[0-9]+(\.[0-9]+)?$'
             'mkosi|systemd/mkosi|^v[0-9]+(\.[0-9]+){0,2}$'
             'optee_ftpm|OP-TEE/optee_ftpm|^[0-9]+\.[0-9]+\.[0-9]+$'
             'optee_os|OP-TEE/optee_os|^[0-9]+\.[0-9]+\.[0-9]+$'
