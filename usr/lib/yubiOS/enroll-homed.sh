@@ -12,23 +12,16 @@ set -euo pipefail
 
 USERNAME="${1:-yubios}"
 STORAGE="luks"
-FS_TYPE="btrfs"
-DISK_SIZE="${YUBIOS_HOMED_SIZE:-95%}"
+FS_TYPE="${YUBIOS_HOMED_FS:-ext4}"
+DISK_SIZE="${YUBIOS_HOMED_SIZE:-80%}"
 MEMBER_OF="wheel"
 
 log() { echo "[yubiOS] $*"; }
 die() { echo "[yubiOS] ERROR: $*" >&2; exit 1; }
 
-if ! systemctl is-active --quiet systemd-homed.service; then
-  log "Starting systemd-homed.service..."
-  systemctl start systemd-homed.service
-fi
-
-if homectl inspect "$USERNAME" &>/dev/null; then
-  die "Homed user '$USERNAME' already exists. Use 'homectl update $USERNAME' to modify."
-fi
-
 # Ensure the LVM yubios-root LV (/dev/lvm/yubios-root) under /dev/mapper/crypt is mounted at /var/home (/home)
+# BEFORE starting or querying systemd-homed so systemd-homed computes Disk Ceiling from the 96%VG volume
+# rather than the 8 GiB root partition.
 if [ -e /dev/mapper/crypt ]; then
   lvm vgchange -ay lvm >/dev/null 2>&1 || true
   if [ -b /dev/lvm/yubios-root ]; then
@@ -36,7 +29,21 @@ if [ -e /dev/mapper/crypt ]; then
     if ! mountpoint -q /var/home; then
       mount /dev/lvm/yubios-root /var/home
     fi
+    if [ ! -e /home ] && [ ! -L /home ]; then
+      ln -s var/home /home
+    fi
   fi
+fi
+
+if ! systemctl is-active --quiet systemd-homed.service; then
+  log "Starting systemd-homed.service..."
+  systemctl start systemd-homed.service
+else
+  systemctl restart systemd-homed.service 2>/dev/null || true
+fi
+
+if homectl inspect "$USERNAME" &>/dev/null; then
+  die "Homed user '$USERNAME' already exists. Use 'homectl update $USERNAME' to modify."
 fi
 
 log "Waiting for U2F/HSM... (plug it in now)"
@@ -55,7 +62,7 @@ done
 HOME_IMAGE_PATH="/home/${USERNAME}.home"
 log "Creating homed home for $USERNAME"
 log "  Storage : $STORAGE (LUKS2 on /dev/lvm/yubios-root -> $HOME_IMAGE_PATH)"
-log "  FS      : $FS_TYPE"
+log "  FS      : $FS_TYPE (online discard=yes, offline discard=no, auto-resize=off)"
 log "  Size    : $DISK_SIZE"
 log "  Groups  : $MEMBER_OF"
 log ""
@@ -67,10 +74,24 @@ if [[ "${confirm:-Y}" =~ ^[Nn]$ ]]; then
   die "Aborted by user."
 fi
 
-homectl create "$USERNAME"   --storage="$STORAGE"   --image-path="$HOME_IMAGE_PATH"   --fs-type="$FS_TYPE"   --disk-size="$DISK_SIZE"   --member-of="$MEMBER_OF"   --recovery-key=yes   --fido2-device=auto   --fido2-with-client-pin=yes   --fido2-with-user-presence=yes
+homectl create "$USERNAME" \
+  --storage="$STORAGE" \
+  --image-path="$HOME_IMAGE_PATH" \
+  --fs-type="$FS_TYPE" \
+  --disk-size="$DISK_SIZE" \
+  --luks-discard=yes \
+  --luks-offline-discard=no \
+  --auto-resize-mode=off \
+  --luks-pbkdf-time-cost=1s \
+  --luks-pbkdf-memory-cost=256M \
+  --member-of="$MEMBER_OF" \
+  --recovery-key=yes \
+  --fido2-device=auto \
+  --fido2-with-client-pin=yes \
+  --fido2-with-user-presence=yes
 
 log "Verifying enrollment..."
-homectl inspect "$USERNAME"
+homectl inspect "$USERNAME" --no-pager
 
 mkdir -p /var/lib/yubiOS
 touch /var/lib/yubiOS/.homed-enrolled

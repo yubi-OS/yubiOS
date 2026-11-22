@@ -150,8 +150,8 @@ ensure_luks_partition() {
   umount /run/yubiOS/usr-b-init >&2
   rmdir /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init 2>/dev/null || true
 
-  echo "[yubiOS] Formatting /dev/lvm/yubios-root (btrfs)..." >&2
-  mkfs.btrfs -f -L yubios-root /dev/lvm/yubios-root >&2
+  echo "[yubiOS] Formatting /dev/lvm/yubios-root (ext4)..." >&2
+  mkfs.ext4 -F -L yubios-root /dev/lvm/yubios-root >&2
 
   echo "$p_luks"
 }

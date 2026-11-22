@@ -15,7 +15,7 @@ kargs = [
   # and systemd-homed at boot).
   "selinux=0",
   # Preload OP-TEE and fTPM drivers as early as possible in initramfs.
-  "rd.driver.pre=tee,optee,tpm_ftpm_tee",
+  "rd.driver.pre=tee,optee,tpm_ftpm_tee,rockchipdrm,dw_hdmi_qp,phy_rockchip_samsung_hdptx,analogix_dp",
   # Force kernel IMA TCB measurement policy on with SHA-256 digests from early
   # boot (even when kernel init_ima runs before modular optee/tpm_ftpm_tee load
   # and enters TPM-bypass mode, IMA still hashes and records all executed
@@ -33,5 +33,6 @@ kargs = [
   "audit=0",
   "splash",
   "quiet",
+  "plymouth.ignore-serial-consoles",
   "no_console_suspend",
 ]

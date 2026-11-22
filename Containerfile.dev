@@ -125,7 +125,11 @@ RUN test -s /usr/lib/systemd/system/serial-getty@.service.d/10-yubiOS-test-autol
 # belt-and-suspenders. Wire its multi-user.target.wants/ symlink here
 # using the same pattern as the getty.target.wants links above. See
 # refs/vgpu-vfio-user-trust-boundary-2026-07-25.md.
-RUN install -d /usr/lib/systemd/system/multi-user.target.wants && \
+RUN ln -sf /dev/null /etc/systemd/system/geoclue.service && \
+    ln -sf /dev/null /usr/lib/systemd/system/geoclue.service && \
+    ln -sf /dev/null /etc/systemd/system/bootloader-update.service && \
+    rm -f /usr/share/dbus-1/system-services/org.freedesktop.GeoClue2.service /usr/lib/systemd/system/multi-user.target.wants/bootloader-update.service /etc/systemd/system/multi-user.target.wants/bootloader-update.service && \
+    install -d /usr/lib/systemd/system/multi-user.target.wants && \
     ln -sf ../yubiOS-no-vfio-purge.service \
       /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service && \
     test -L /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service

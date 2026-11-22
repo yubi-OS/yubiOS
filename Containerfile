@@ -92,6 +92,7 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       plymouth-system-theme \
       plymouth-theme-spinner \
       plymouth-plugin-two-step \
+      plymouth-plugin-label \
       wget \
       xdg-utils && \
     dnf clean all && \
@@ -300,6 +301,10 @@ RUN systemctl preset-all && \
     ln -sf ../yubiOS-ostree-composefs-sync.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-ostree-composefs-sync.service && \
     ln -sf /dev/null /etc/systemd/system/boot.automount && \
     ln -sf /dev/null /usr/lib/systemd/system/boot.automount && \
+    ln -sf /dev/null /etc/systemd/system/geoclue.service && \
+    ln -sf /dev/null /usr/lib/systemd/system/geoclue.service && \
+    ln -sf /dev/null /etc/systemd/system/bootloader-update.service && \
+    rm -f /usr/share/dbus-1/system-services/org.freedesktop.GeoClue2.service /usr/lib/systemd/system/multi-user.target.wants/bootloader-update.service /etc/systemd/system/multi-user.target.wants/bootloader-update.service && \
     for u in sleep.target suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target systemd-suspend.service systemd-hibernate.service systemd-hybrid-sleep.service systemd-suspend-then-hibernate.service; do \
       ln -sf /dev/null "/etc/systemd/system/$u"; \
       ln -sf /dev/null "/usr/lib/systemd/system/$u"; \
