@@ -20,7 +20,7 @@ BOARD="${FLASH_BOARD:-rock5b-rk3588}"
 SD_DEVICE="${FLASH_SD_DEVICE:-/dev/mmcblk1}"
 OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
 SIGNKEY="${FLASH_SIGNKEY:-test}"
-SIGN_WITH_U2F_HSM="${FLASH_SIGN_WITH_U2F_HSM:-true}"
+SIGN_WITH_U2F_HSM="${FLASH_SIGN_WITH_U2F_HSM:-false}"
 PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
 # RUN_POST_VM="${FLASH_RUN_POST_VM:-false}"
 
@@ -341,6 +341,18 @@ if [ "$USE_RAM_CONTAINERS" = "1" ]; then
   sudo mount -o noatime "$PODMAN_LOOP" /var/lib/containers
 else
   log "Stage 3: Using /mnt/extended-backed /var/lib/containers on rock1 (0 writes to 12G root disk)"
+  if [ "$(findmnt -no TARGET -T /var/lib/containers 2>/dev/null || true)" = "/" ] && [ -d /mnt/extended/containers ]; then
+    log "Restoring /mnt/extended/containers -> /var/lib/containers bind mount after host reboot"
+    sudo rm -rf /var/lib/containers/storage/overlay* /var/lib/containers/storage/tmp* 2>/dev/null || true
+    sudo mkdir -p /var/lib/containers
+    sudo mount --bind /mnt/extended/containers /var/lib/containers
+  fi
+  if [ "$(findmnt -no TARGET -T /var/tmp 2>/dev/null || true)" = "/" ] && [ -d /mnt/extended/var-tmp ]; then
+    log "Restoring /mnt/extended/var-tmp -> /var/tmp bind mount after host reboot"
+    sudo rm -rf /var/tmp/yubios-flash-e2e* 2>/dev/null || true
+    sudo mount --bind /mnt/extended/var-tmp /var/tmp
+    mkdir -p "$WORK_DIR" "$TMPDIR" "$KEY_DIR" "$FW_DIR"
+  fi
   # Clear any unseen kernel superblock errseq_t on /var/lib/containers so overlayfs volatile mounts never fail with EIO
   sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
   sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
@@ -490,6 +502,7 @@ EOF
   sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/secureboot" "$MNT_DIR/boot/EFI/yubiOS/keys" "$MNT_DIR/boot/EFI/yubiOS/firmware"
   sudo podman run --rm --entrypoint /bin/sh "$RESOLVED_OS" -c 'if [ -d /usr/lib/yubiOS/secureboot ]; then tar -C /usr/lib/yubiOS/secureboot -cf - .; fi' \
     | sudo tar -C "$MNT_DIR/boot/EFI/yubiOS/secureboot" -xf - 2>/dev/null || true
+  sudo rm -f "$MNT_DIR/boot/EFI/yubiOS/secureboot/ci-sb-db.key" 2>/dev/null || true
   sudo cp -f "$MNT_DIR/boot/EFI/yubiOS/secureboot/"* "$MNT_DIR/boot/EFI/yubiOS/keys/" 2>/dev/null || true
 
   sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
@@ -506,6 +519,12 @@ EOF
     while IFS= read -r -d '' efi_file; do
       echo "Signing $efi_file..."
       sign_efi_binary "$efi_file"
+    done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
+  else
+    log "Verifying CI-signed EFI loaders & UKIs on $p1 against image db.crt"
+    while IFS= read -r -d '' efi_file; do
+      echo "Verifying CI signature on $efi_file..."
+      sudo sbverify --cert "$MNT_DIR/boot/EFI/yubiOS/secureboot/db.crt" "$efi_file"
     done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
   fi
 

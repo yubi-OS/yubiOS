@@ -227,6 +227,7 @@ RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/u
     fi && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ && \
+    rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key && \
     test -s /usr/lib/yubiOS/secureboot/PK.auth && \
     test -s /boot/EFI/yubiOS/secureboot/PK.auth && \
     test -s /boot/EFI/yubiOS/keys/PK.auth && \
@@ -388,6 +389,14 @@ RUN case "$(uname -m)" in \
       *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
     esac && \
     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
+    if [ -f /usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /usr/lib/yubiOS/secureboot/db.crt ]; then \
+      sbsign --key /usr/lib/yubiOS/secureboot/ci-sb-db.key --cert /usr/lib/yubiOS/secureboot/db.crt \
+        --output "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
+        "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
+      mv -f "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
+        "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
+      sbverify --cert /usr/lib/yubiOS/secureboot/db.crt "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi"; \
+    fi && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI" && \
     ! test -e /etc/machine-id && \
@@ -426,6 +435,12 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     kver="$(basename "$1")" && \
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
+    if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then \
+      sbsign --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key --cert /target/usr/lib/yubiOS/secureboot/db.crt \
+        --output "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi"; \
+    fi && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
 
 # Reproducibility diagnostic: print the composefs digest bootc embeds in the UKI and the UKI's sha256.

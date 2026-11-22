@@ -156,6 +156,7 @@ RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump && \
     if [ -d /usr/lib/yubiOS/secureboot ]; then \
       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ 2>/dev/null || true; \
       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ 2>/dev/null || true; \
+      rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key; \
     fi
 
 RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
@@ -175,6 +176,12 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     kver="$(basename "$1")" && \
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
+    if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then \
+      sbsign --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key --cert /target/usr/lib/yubiOS/secureboot/db.crt \
+        --output "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi"; \
+    fi && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
 
 FROM rootfs

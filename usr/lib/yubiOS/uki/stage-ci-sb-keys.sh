@@ -256,6 +256,7 @@ EOF
 
   openssl genrsa -out "$WORK_DIR/slot9a.key" 2048 >/dev/null 2>&1
   openssl pkcs8 -topk8 -nocrypt -in "$WORK_DIR/slot9a.key" -out "$WORK_DIR/slot9a.p8"
+  cp -f "$WORK_DIR/slot9a.p8" "$WORK_DIR/ci-sb-db.key"
   rm -f "$WORK_DIR/slot9a.key"
   softhsm2-util --init-token --free --label yubiOS-ci --pin "$PIV_PIN" --so-pin "$PIV_PIN" >/dev/null
   softhsm2-util --import "$WORK_DIR/slot9a.p8" --token yubiOS-ci --label "PIV AUTH key" --id 01 --pin "$PIV_PIN" >/dev/null
@@ -284,6 +285,11 @@ for target_dir in \
     chmod 0644 "$target_dir/$fn"
     touch -h -d "@${EPOCH}" "$target_dir/$fn"
   done
+  if [ "$target_dir" = "usr/lib/yubiOS/secureboot" ] && [ -f "$WORK_DIR/ci-sb-db.key" ]; then
+    cp -f "$WORK_DIR/ci-sb-db.key" "$target_dir/ci-sb-db.key"
+    chmod 0600 "$target_dir/ci-sb-db.key"
+    touch -h -d "@${EPOCH}" "$target_dir/ci-sb-db.key"
+  fi
   touch -h -d "@${EPOCH}" "$target_dir"
 done
 
