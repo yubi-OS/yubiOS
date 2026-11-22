@@ -93,7 +93,7 @@ EOF
 RUN install -Dm644 /dev/stdin /usr/lib/systemd/system/serial-getty@.service.d/10-yubiOS-test-autologin.conf <<'EOF'
 [Service]
 ExecStart=
-ExecStart=-/sbin/agetty -o '-p -f -- \\u' --autologin root --keep-baud 1500000,115200,57600,38400,9600 - $TERM
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --autologin root --keep-baud 115200,57600,38400,9600 - $TERM
 EOF
 
 RUN install -Dm644 /dev/stdin /usr/lib/systemd/system/getty@.service.d/10-yubiOS-test-autologin.conf <<'EOF'
