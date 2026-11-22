@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: LGPL-2.1-or-later
 # OMN-203 Work Package 2 -- GlobalPlatform TEE Protection Profile (TEE PP,
 # Common Criteria EAL2+ augmented with AVA_VAN_AP.3) & OP-TEE Conformance Suite.
 #
@@ -11,16 +12,20 @@
 #     AVA_VAN_AP.3 negative/positive conformance checks using real computation
 #     (64-bit SMC shared-memory interval arithmetic against the 0x30000000..0x323fffff
 #     carveout, JEDEC eMMC RPMB 512-byte frame HMAC-SHA256 & monotonic counter
-#     anti-replay verification, and RSA-2048 SHA-256 StandaloneMM authenticated
-#     UEFI variable signature & timestamp anti-rollback verification, plus
-#     hardware UART log invariant checks against refs/logs/fvf13-224bf224.new).
+#     anti-replay verification, RSA-2048 SHA-256 StandaloneMM authenticated
+#     UEFI variable signature & timestamp anti-rollback verification, hardware
+#     UART log invariant checks, and firmware binary UUID audit positive/negative
+#     self-tests confirming payloads > 64 KiB without the fTPM TA UUID are rejected).
 #
-#   Default (no flags, or --firmware-audit):
-#     Runs --self-test first, then inspects the published yubiOS ARM64 firmware
-#     bundle (FIRMWARE_IMAGE, default docker.io/0mniteck/yubios:firmware-qemu-arm64)
-#     for the embedded fTPM Early TA UUID (bc50d971-d4c9-42c4-82cb-343fb7f37896),
-#     TF-A BL31 + OP-TEE 4.11 + StandaloneMM symbols, and optionally boots Stage A
-#     under QEMU virt,secure=on when RUN_QEMU_STAGE_A=1.
+#   --audit-firmware-dir DIR
+#     Audits an extracted firmware directory for positive binary evidence of the
+#     fTPM Early TA UUID (bc50d971-d4c9-42c4-82cb-343fb7f37896) and OP-TEE/BL31
+#     secure-world markers, failing closed (exit 1) if the TA UUID is absent.
+#
+#   Default (no flags):
+#     Runs --self-test first, then pulls/extracts FIRMWARE_IMAGE and runs
+#     audit_firmware_dir against /firmware, and optionally invokes test-ftpm-qemu-ci.sh
+#     when RUN_QEMU_STAGE_A=1.
 #
 # Exit codes: 0 = pass, 77 = explicit loud SKIP, 1 = failure.
 set -euo pipefail
@@ -28,6 +33,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/../.." && pwd)"
 SELF_TEST_ONLY=0
+AUDIT_FW_DIR=""
 FIRMWARE_IMAGE="${FIRMWARE_IMAGE:-docker.io/0mniteck/yubios:firmware-qemu-arm64}"
 FTPM_UUID="${FTPM_UUID:-bc50d971-d4c9-42c4-82cb-343fb7f37896}"
 RUN_QEMU_STAGE_A="${RUN_QEMU_STAGE_A:-0}"
@@ -37,6 +43,10 @@ while [[ $# -gt 0 ]]; do
     --self-test)
       SELF_TEST_ONLY=1
       shift
+      ;;
+    --audit-firmware-dir)
+      AUDIT_FW_DIR="$2"
+      shift 2
       ;;
     --repo-root)
       REPO_ROOT="$2"
@@ -61,6 +71,70 @@ need() { command -v "$1" >/dev/null 2>&1 || die "missing required tool: $1"; }
 need python3
 need openssl
 
+audit_firmware_dir() {
+  local fw_dir="$1"
+  local uuid_str="$2"
+  python3 - "$fw_dir" "$uuid_str" <<'PY'
+import sys
+import uuid
+from pathlib import Path
+
+fw_dir = Path(sys.argv[1])
+ftpm_uuid_str = sys.argv[2].strip().lower()
+u = uuid.UUID(ftpm_uuid_str)
+# OP-TEE stores early TA UUIDs either in RFC 4122 big-endian bytes, mixed-endian bytes_le, or ASCII string
+patterns = [
+    ("rfc4122-be", u.bytes),
+    ("mixed-endian-le", u.bytes_le),
+    ("ascii", ftpm_uuid_str.encode("ascii")),
+]
+
+if not fw_dir.is_dir():
+    print(f"FAIL: firmware directory {fw_dir} does not exist", file=sys.stderr)
+    sys.exit(1)
+
+bins = [p for p in sorted(fw_dir.iterdir()) if p.is_file() and p.stat().st_size > 0]
+if not bins:
+    print(f"FAIL: no non-empty firmware binaries found in {fw_dir}", file=sys.stderr)
+    sys.exit(1)
+
+found_uuid_in = []
+found_optee_marker = False
+for b in bins:
+    data = b.read_bytes()
+    if b"OP-TEE" in data or b"BL31" in data or b"optee" in data.lower():
+        found_optee_marker = True
+    for encoding_name, pat in patterns:
+        if pat in data:
+            found_uuid_in.append((b.name, encoding_name, len(data)))
+            break
+
+if not found_uuid_in:
+    total_bytes = sum(p.stat().st_size for p in bins)
+    print(
+        f"FAIL: fTPM Early TA UUID ({ftpm_uuid_str}) not found in any firmware binary under {fw_dir} "
+        f"(inspected {[p.name for p in bins]}, {total_bytes} bytes total; payload size alone is never sufficient)",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+if not found_optee_marker:
+    print(
+        f"FAIL: fTPM Early TA UUID found, but no OP-TEE/BL31 secure-world marker present in {fw_dir}",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+for bname, enc, sz in found_uuid_in:
+    print(f"PASS: found fTPM Early TA UUID ({ftpm_uuid_str}, encoding={enc}) inside {bname} ({sz} bytes)")
+PY
+}
+
+if [[ -n "$AUDIT_FW_DIR" ]]; then
+  audit_firmware_dir "$AUDIT_FW_DIR" "$FTPM_UUID"
+  exit 0
+fi
+
 run_self_test() {
   log "OMN-203 Stage 0: GlobalPlatform TEE PP (EAL2+ / AVA_VAN_AP.3) Conformance Self-Test"
   python3 - "$REPO_ROOT" "$FTPM_UUID" <<'PY'
@@ -71,6 +145,7 @@ import struct
 import subprocess
 import sys
 import tempfile
+import uuid
 from pathlib import Path
 
 repo_root = Path(sys.argv[1])
@@ -80,9 +155,6 @@ ftpm_uuid = sys.argv[2].lower()
 # Leg 1: FDP_IFC.1 / FDP_IFF.1 & AVA_VAN_AP.3 -- OP-TEE SMC Shared-Memory
 #        Carveout Bounds & Confused-Deputy Aliasing Verifier
 # ---------------------------------------------------------------------------
-# Matches yubiOS RK3588 /reserved-memory optee@30000000 (0x30000000..0x323fffff,
-# 36,864 KiB no-map reserved DRAM; see yubi-OS/u-boot commit 35bcbd9b9d28 and
-# refs/logs/fvf13-224bf224.new L0094).
 SECURE_DRAM_BASE = 0x30000000
 SECURE_DRAM_SIZE = 36864 * 1024  # 0x02400000 (36,864 KiB)
 SECURE_DRAM_END  = SECURE_DRAM_BASE + SECURE_DRAM_SIZE  # 0x32400000 (exclusive)
@@ -95,13 +167,11 @@ def core_mmu_is_ns_ddr(paddr: int, size: int) -> bool:
     end = paddr + size
     if end > DRAM_MAX or end <= paddr:
         return False
-    # Disjoint from [SECURE_DRAM_BASE, SECURE_DRAM_END)
     if paddr < SECURE_DRAM_END and end > SECURE_DRAM_BASE:
         return False
     return True
 
 def validate_smc_shm_pair(in_paddr: int, in_size: int, out_paddr: int, out_size: int) -> bool:
-    """Validates both SMC shared-memory buffers lie in NS DDR and do not alias each other."""
     if not core_mmu_is_ns_ddr(in_paddr, in_size):
         return False
     if not core_mmu_is_ns_ddr(out_paddr, out_size):
@@ -112,13 +182,11 @@ def validate_smc_shm_pair(in_paddr: int, in_size: int, out_paddr: int, out_size:
         return False
     return True
 
-# Positive cases: normal-world DRAM below and above the OP-TEE carveout
 assert core_mmu_is_ns_ddr(0x10000000, 0x4000), "NS buffer below carveout must pass"
 assert core_mmu_is_ns_ddr(0x32400000, 0x10000), "NS buffer immediately above carveout must pass"
 assert core_mmu_is_ns_ddr(0x2FFFF000, 0x1000), "NS buffer abutting lower carveout edge must pass"
 assert validate_smc_shm_pair(0x10000000, 0x1000, 0x10002000, 0x1000), "Disjoint NS buffers must pass"
 
-# Negative AVA_VAN_AP.3 attack vectors:
 assert not core_mmu_is_ns_ddr(0x30000000, 0x1000), "Exact S-EL1 base must be rejected"
 assert not core_mmu_is_ns_ddr(0x31200000, 0x4096), "Interior S-EL1/S-EL0 RAM must be rejected"
 assert not core_mmu_is_ns_ddr(0x2FFFF000, 0x2000), "Lower-boundary straddle into S-EL1 must be rejected"
@@ -134,7 +202,6 @@ print("PASS [Leg 1 / FDP_IFC.1 + AVA_VAN_AP.3]: OP-TEE SMC shared-memory bounds 
 #        Frame HMAC-SHA256 & Monotonic Write-Counter Anti-Replay Verifier
 # ---------------------------------------------------------------------------
 RPMB_REQ_AUTH_WRITE = 0x0001
-RPMB_RESP_AUTH_WRITE = 0x0100
 RPMB_OK = 0x0000
 RPMB_ERR_GENERAL = 0x0001
 RPMB_ERR_AUTH = 0x0002
@@ -185,22 +252,18 @@ valid_frame = pack_rpmb_frame(rpmb_key, stmm_pk_payload, nonce_42, 42, 0x0010, 1
 assert ctrl.process_authenticated_write(valid_frame, nonce_42) == RPMB_OK, "Valid RPMB frame must succeed"
 assert ctrl.write_counter == 43, "Monotonic write_counter must increment to 43"
 
-# Attack 2a: Replay the exact valid frame after write_counter advanced to 43
 nonce_43 = os.urandom(16)
 replayed_old_counter = pack_rpmb_frame(rpmb_key, stmm_pk_payload, nonce_43, 42, 0x0010, 1, 0, RPMB_REQ_AUTH_WRITE)
 assert ctrl.process_authenticated_write(replayed_old_counter, nonce_43) == RPMB_ERR_COUNTER, "Stale write_counter replay must fail"
 
-# Attack 2b: Bit-flip in the 256-byte StandaloneMM PK payload without MAC recomputation
 frame_43 = bytearray(pack_rpmb_frame(rpmb_key, stmm_pk_payload, nonce_43, 43, 0x0010, 1, 0, RPMB_REQ_AUTH_WRITE))
 frame_43[240] ^= 0x01
 assert ctrl.process_authenticated_write(bytes(frame_43), nonce_43) == RPMB_ERR_AUTH, "Bit-flipped RPMB data must fail HMAC"
 
-# Attack 2c: Compromised normal-world tee-supplicant substitutes freshness nonce
 other_nonce = os.urandom(16)
 frame_43_valid = pack_rpmb_frame(rpmb_key, stmm_pk_payload, nonce_43, 43, 0x0010, 1, 0, RPMB_REQ_AUTH_WRITE)
 assert ctrl.process_authenticated_write(frame_43_valid, other_nonce) == RPMB_ERR_NONCE, "Mismatched nonce must fail"
 
-# Attack 2d: Frame signed by wrong HUK-derived key
 forged_frame = pack_rpmb_frame(wrong_key, stmm_pk_payload, nonce_43, 43, 0x0010, 1, 0, RPMB_REQ_AUTH_WRITE)
 assert ctrl.process_authenticated_write(forged_frame, nonce_43) == RPMB_ERR_AUTH, "Forged RPMB key must fail"
 print("PASS [Leg 2 / FDP_SDI.2 + FRP_rol.1]: JEDEC eMMC RPMB HMAC-SHA256 & monotonic counter anti-replay verified")
@@ -220,7 +283,6 @@ with tempfile.TemporaryDirectory() as td:
     subprocess.run(["openssl", "genrsa", "-out", str(atk_priv), "2048"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def sign_auth_var(priv_pem: Path, var_name: str, timestamp_epoch: int, uki_digest: bytes) -> tuple[bytes, bytes]:
-        # Serializes (VarName || Attributes=0x27 || Timestamp || Payload)
         blob = struct.pack(">16sIQ32s", var_name.encode("utf-8")[:16].ljust(16, b"\x00"), 0x27, timestamp_epoch, uki_digest)
         msg_f = td_path / "msg.bin"
         sig_f = td_path / "sig.bin"
@@ -249,14 +311,10 @@ with tempfile.TemporaryDirectory() as td:
     blob1, sig1 = sign_auth_var(owner_priv, "db", 1795000000, uki_hash_v1)
     assert verify_auth_var(owner_pub, blob1, sig1, 0), "Owner PIV Slot 9a signed db update must pass"
 
-    # Attack 3a: Attacker-signed SetVariable(db) in SetupMode=0
     atk_blob, atk_sig = sign_auth_var(atk_priv, "db", 1795000100, uki_hash_v2)
     assert not verify_auth_var(owner_pub, atk_blob, atk_sig, 1795000000), "Attacker-signed db update must be rejected"
-
-    # Attack 3b: Timestamp rollback / replay of blob1 when stored timestamp is 1795000000
     assert not verify_auth_var(owner_pub, blob1, sig1, 1795000000), "Timestamp replay/rollback must be rejected"
 
-    # Attack 3c: Tampered UKI digest inside signed blob
     tampered_blob = bytearray(blob1)
     tampered_blob[-1] ^= 0xFF
     assert not verify_auth_var(owner_pub, bytes(tampered_blob), sig1, 0), "Tampered UKI digest must fail RSA-2048 verification"
@@ -280,6 +338,68 @@ if hw_log.is_file():
         assert marker in hw_txt, f"Missing hardware marker '{marker}' in {hw_log.name}"
     print(f"PASS [Leg 4b]: Hardware UART log {hw_log.name} markers verified against TOE boundary")
 PY
+
+  # Leg 5: Verify strict firmware binary TA UUID auditor rejects >64 KiB payloads lacking the fTPM TA UUID
+  # and accepts payloads containing the fTPM Early TA UUID + OP-TEE marker.
+  local tmp_fw
+  tmp_fw="$(mktemp -d)"
+  python3 - "$tmp_fw" "$FTPM_UUID" <<'PY'
+import os, sys, uuid
+from pathlib import Path
+base = Path(sys.argv[1])
+u = uuid.UUID(sys.argv[2])
+bad_dir = base / "bad_fw"
+good_dir = base / "good_fw"
+bad_dir.mkdir(parents=True)
+good_dir.mkdir(parents=True)
+# 128 KiB payload WITH OP-TEE/U-Boot strings but WITHOUT the fTPM TA UUID -> MUST FAIL
+(bad_dir / "flash.bin").write_bytes(b"OP-TEE BL31 U-Boot " + os.urandom(131072))
+# Payload WITH OP-TEE marker + fTPM Early TA UUID -> MUST PASS
+(good_dir / "flash.bin").write_bytes(b"OP-TEE BL31 " + u.bytes_le + os.urandom(4096))
+PY
+  if audit_firmware_dir "${tmp_fw}/bad_fw" "$FTPM_UUID" >/dev/null 2>&1; then
+    rm -rf "$tmp_fw"
+    die "Leg 5 negative check failed: firmware auditor accepted >64 KiB payload without fTPM Early TA UUID"
+  fi
+  audit_firmware_dir "${tmp_fw}/good_fw" "$FTPM_UUID"
+  rm -rf "$tmp_fw"
+  echo "PASS [Leg 5]: Firmware binary auditor rejects >64 KiB payloads without fTPM TA UUID and verifies positive TA UUID match"
+
+  # Leg 6: Verify verify-gp-tee-xtest-guest.sh exits 77 (SKIP, never PASS) when xtest is absent
+  local tmp_guest
+  tmp_guest="$(mktemp -d)"
+  mkdir -p "${tmp_guest}/bin"
+  cat <<'EOF_DMESG' > "${tmp_guest}/bin/dmesg"
+#!/usr/bin/env bash
+echo "optee: initialized driver"
+EOF_DMESG
+  cat <<'EOF_TPM2' > "${tmp_guest}/bin/tpm2_startup"
+#!/usr/bin/env bash
+exit 0
+EOF_TPM2
+  cp "${tmp_guest}/bin/tpm2_startup" "${tmp_guest}/bin/tpm2_selftest"
+  cp "${tmp_guest}/bin/tpm2_startup" "${tmp_guest}/bin/tpm2_getcap"
+  cat <<'EOF_PCRREAD' > "${tmp_guest}/bin/tpm2_pcrread"
+#!/usr/bin/env bash
+if [[ -f "${TMP_PCR_STATE:-/nonexistent}" ]]; then
+  echo "  16 : 1111111111111111111111111111111111111111111111111111111111111111"
+else
+  echo "  16 : 0000000000000000000000000000000000000000000000000000000000000000"
+fi
+EOF_PCRREAD
+  cat <<'EOF_PCREXT' > "${tmp_guest}/bin/tpm2_pcrextend"
+#!/usr/bin/env bash
+touch "$TMP_PCR_STATE"
+EOF_PCREXT
+  chmod +x "${tmp_guest}/bin/"*
+  local guest_rc=0
+  local guest_out=""
+  guest_out="$(PATH="${tmp_guest}/bin:/usr/bin:/bin" TMP_PCR_STATE="${tmp_guest}/pcr_extended" YUBIOS_GUEST_SKIP_CHARDEV_CHECK=1 YUBIOS_FORCE_NO_XTEST=1 bash "${SCRIPT_DIR}/verify-gp-tee-xtest-guest.sh" 2>&1)" || guest_rc=$?
+  rm -rf "$tmp_guest"
+  [[ "$guest_rc" -eq 77 ]] || die "Expected verify-gp-tee-xtest-guest.sh to exit 77 when xtest is absent, got rc=${guest_rc}"
+  [[ "$guest_out" != *"=== PASS:"* ]] || die "verify-gp-tee-xtest-guest.sh printed final PASS when xtest was missing"
+  echo "PASS [Leg 6]: verify-gp-tee-xtest-guest.sh exits 77 (SKIP) and never prints PASS when xtest is missing"
+
   echo "PASS: all 4 GlobalPlatform TEE PP (EAL2+ / AVA_VAN_AP.3) conformance self-test legs verified"
 }
 
@@ -318,35 +438,7 @@ podman cp "${CID}:/firmware/." "${WORK}/fw/" || { skip "no /firmware directory i
 podman rm -f "$CID" >/dev/null 2>&1 || true
 CID=""
 
-python3 - "${WORK}/fw" "$FTPM_UUID" <<'PY'
-import sys
-import uuid
-from pathlib import Path
-
-fw_dir = Path(sys.argv[1])
-ftpm_uuid_str = sys.argv[2]
-u = uuid.UUID(ftpm_uuid_str)
-# OP-TEE stores early TA UUIDs either in RFC 4122 big-endian bytes, mixed-endian bytes_le, or ASCII string
-patterns = [u.bytes, u.bytes_le, ftpm_uuid_str.encode("ascii")]
-
-bins = [p for p in fw_dir.iterdir() if p.is_file() and p.stat().st_size > 0]
-assert bins, f"No non-empty firmware binaries found in {fw_dir}"
-
-found_uuid = False
-for b in bins:
-    data = b.read_bytes()
-    for pat in patterns:
-        if pat in data:
-            found_uuid = True
-            print(f"PASS: found fTPM Early TA UUID ({ftpm_uuid_str}) inside {b.name} ({len(data)} bytes)")
-            break
-
-if not found_uuid:
-    # Also check for OP-TEE / BL31 / U-Boot header signatures across flash.bin / fip.bin
-    combined = b"".join(p.read_bytes() for p in bins)
-    assert b"OP-TEE" in combined or b"U-Boot" in combined or len(combined) > 65536, "Invalid firmware payload"
-    print(f"PASS: verified non-empty firmware payload across {[p.name for p in bins]} ({len(combined)} bytes total)")
-PY
+audit_firmware_dir "${WORK}/fw" "$FTPM_UUID"
 
 if [[ "$RUN_QEMU_STAGE_A" == "1" ]] && [[ -x "${SCRIPT_DIR}/test-ftpm-qemu-ci.sh" ]]; then
   log "OMN-203 Stage 2: Delegating live QEMU virt,secure=on boot verification to test-ftpm-qemu-ci.sh"
