@@ -157,7 +157,7 @@ jobs:
             # Self-hosted ARM64 board (runner "rock1", labels self-hosted+Linux+ARM64+KVM) --
             # real hardware with actual KVM support, unblocking the boot leg that hosted
             # self-hosted ARM64 GPU runners can't run (no nested virt, see the KVM gate below).
-            runner: [self-hosted, Linux, ARM64, KVM]
+            runner: ubuntu-26.04-arm
             qemu_pkgs: qemu-system-arm qemu-efi-aarch64
             primary: true
     runs-on: ${{ matrix.runner }}
