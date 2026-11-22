@@ -177,7 +177,11 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
     if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then \
-      sbsign --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key --cert /target/usr/lib/yubiOS/secureboot/db.crt \
+      SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" /usr/lib/systemd/systemd-sbsign sign \
+        --private-key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key \
+        --private-key-source file \
+        --certificate /target/usr/lib/yubiOS/secureboot/db.crt \
+        --certificate-source file \
         --output "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
       mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
       sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi"; \
