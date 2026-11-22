@@ -11,6 +11,8 @@ Exposes:
 """
 
 import argparse
+import hashlib
+import json
 import os
 import signal
 import socket
@@ -18,7 +20,6 @@ import socketserver
 import struct
 import sys
 import threading
-import json
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -72,7 +73,6 @@ def sd_notify(state: str) -> None:
 
 
 def get_peer_cred(conn: socket.socket) -> dict:
-    # Linux SO_PEERCRED = 17, struct ucred { pid_t pid; uid_t uid; gid_t gid; }
     try:
         SO_PEERCRED = getattr(socket, "SO_PEERCRED", 17)
         raw = conn.getsockopt(socket.SOL_SOCKET, SO_PEERCRED, struct.calcsize("3i"))
@@ -190,8 +190,6 @@ class AttestRPCDispatcher:
             responder_nonce = params["responder_nonce"]
             peer_binding = hashlib.sha256(
                 f"mutual-v1|{caller_nonce}|{responder_nonce}|{pin['remote_challenge_index']}|{pin['local_challenge_index']}".encode("utf-8")
-            ).hexdigest() if "hashlib" in globals() else __import__("hashlib").sha256(
-                f"mutual-v1|{caller_nonce}|{responder_nonce}|{pin['remote_challenge_index']}|{pin['local_challenge_index']}".encode("utf-8")
             ).hexdigest()
 
             verify_caller = self.core.verify_and_pin_bundle(
@@ -263,7 +261,14 @@ def main() -> int:
     parser.add_argument("--host-id", default=None)
     parser.add_argument("--tpm-mode", default="auto", choices=["auto", "tpm2", "sim"])
     parser.add_argument("--piv-slot", default="9a")
+    parser.add_argument(
+        "--piv-mode",
+        default=os.environ.get("YUBIOS_ATTEST_PIV_MODE", "pkcs11"),
+        choices=["pkcs11", "sim"],
+        help="PIV signing mode: 'pkcs11' requires hardware YubiKey token; 'sim' is explicit test-only mode",
+    )
     parser.add_argument("--os-version", default="45.20261114.0")
+    parser.add_argument("--sysroot", default=os.environ.get("YUBIOS_ATTEST_SYSROOT", "/"))
     args = parser.parse_args()
 
     run_dir = Path(args.run_dir)
@@ -278,7 +283,9 @@ def main() -> int:
         host_id=args.host_id,
         tpm_mode=args.tpm_mode,
         piv_slot=args.piv_slot,
+        piv_mode=args.piv_mode,
         os_version=args.os_version,
+        sysroot=Path(args.sysroot),
     )
     dispatcher = AttestRPCDispatcher(core)
     server = ThreadedUnixStreamServer(str(sock_path), make_handler(dispatcher))
@@ -294,7 +301,7 @@ def main() -> int:
     signal.signal(signal.SIGTERM, _sig_handler)
     signal.signal(signal.SIGINT, _sig_handler)
 
-    sd_notify(f"READY=1\nSTATUS=yubiOS-attestd active on {sock_path} (mode={core.tpm.mode})")
+    sd_notify(f"READY=1\nSTATUS=yubiOS-attestd active on {sock_path} (tpm={core.tpm.mode}, piv={core.yk.piv_mode})")
 
     def _watchdog_loop():
         while not stop_event.wait(10.0):

@@ -8,9 +8,9 @@ Combines:
    (EK/AK provisioning, MakeCredential/ActivateCredential residency proof,
    TPMS_ATTEST PCR quotes over sha256:0,1,2,4,7,11,14,15, TCG eventlog digest,
    and monotonic clock/NV counter anti-rollback).
-2. Owner StrongBox: YubiKey PIV (slot 9a/9c X.509 signing + hardware attestation)
-   and OpenSSH ssh-agent hardware-backed signing (ssh-keygen -Y sign/verify
-   with domain namespace 'yubios-attest-v1').
+2. Owner StrongBox: YubiKey PIV (slot 9a/9c hardware PKCS#11 signing; software keys
+   strictly gated behind explicit --piv-mode sim test mode) and OpenSSH ssh-agent
+   hardware-backed signing (ssh-keygen -Y sign/verify with domain namespace 'yubios-attest-v1').
 3. GrapheneOS Auditor-style TOFU pairing with a Single-Use Pairing Code
    (120-bit Crockford Base32 token, 5-minute TTL, burned on first use, HKDF
    transcript MAC) and per-peer 32-byte challenge_index persistent key binding.
@@ -49,6 +49,24 @@ OS_FLAG_YUBIKEY_PIV_PRESENT = 1 << 3
 OS_FLAG_SSH_AGENT_SK_PRESENT = 1 << 4
 OS_FLAG_CHIPSEC_PASSED = 1 << 5
 OS_FLAG_NO_VFIO_ENFORCED = 1 << 6
+
+PIV_SLOT_PKCS11_IDS = {
+    "9a": "01",
+    "9e": "04",
+    "9c": "02",
+    "9d": "03",
+}
+
+DEFAULT_PKCS11_MODULES = (
+    "/usr/lib64/libykcs11.so",
+    "/usr/lib/x86_64-linux-gnu/libykcs11.so",
+    "/usr/lib/aarch64-linux-gnu/libykcs11.so",
+    "/usr/lib64/pkcs11/libykcs11.so",
+    "/usr/lib/pkcs11/libykcs11.so",
+    "/usr/lib64/p11-kit-proxy.so",
+    "/usr/lib/x86_64-linux-gnu/p11-kit-proxy.so",
+    "/usr/lib/aarch64-linux-gnu/p11-kit-proxy.so",
+)
 
 
 def hkdf_sha256(ikm: bytes, salt: bytes, info: bytes, length: int = 32) -> bytes:
@@ -116,7 +134,6 @@ def pack_tpms_attest(
     buf += struct.pack(">H", len(extra_data)) + extra_data
     buf += struct.pack(">QIIB", clock_ms, reset_count, restart_count, safe & 0xFF)
     buf += struct.pack(">Q", firmware_version)
-    # TPMS_QUOTE_INFO: TPML_PCR_SELECTION (count=1, alg=TPM_ALG_SHA256=0x000b, sizeofSelect=3, bitmap)
     bitmap = bytearray(3)
     for idx in pcr_indices:
         if 0 <= idx < 24:
@@ -276,7 +293,6 @@ class TPM2Engine:
                     ["openssl", "rsa", "-pubin", "-in", str(self.ak_pub_pem), "-outform", "DER"],
                     check=True, capture_output=True
                 ).stdout
-                # TPM2B_NAME: 2-byte alg (0x000b = SHA256) + 32-byte digest
                 ak_name = b"\x00\x0b" + hashlib.sha256(ak_der).digest()
                 self.ak_name_file.write_bytes(ak_name)
 
@@ -387,7 +403,6 @@ class TPM2Engine:
                 )
                 return secret_bytes.hex(), base64.b64encode(out_f.read_bytes()).decode("ascii")
 
-        # OAEP RSA encryption bound to peer_ak_name_hex via label digest
         with tempfile.TemporaryDirectory() as td:
             ek_f = Path(td) / "peer_ek.pem"
             in_f = Path(td) / "in.bin"
@@ -553,7 +568,6 @@ class TPM2Engine:
         tpms_bytes = base64.b64decode(tpms_attest_b64)
         sig_bytes = base64.b64decode(quote_sig_b64)
 
-        # 1. Verify RSA-SHA256 signature over TPMS_ATTEST using OpenSSL
         with tempfile.TemporaryDirectory() as td:
             pub_f = Path(td) / "ak_pub.pem"
             msg_f = Path(td) / "quote.msg"
@@ -573,7 +587,6 @@ class TPM2Engine:
             if res.returncode != 0:
                 raise ValueError(f"TPM2 quote signature verification failed: {res.stderr.strip()}")
 
-        # 2. Parse binary TPMS_ATTEST structure & verify magic, extraData, and PCR digest
         parsed = unpack_tpms_attest(tpms_bytes)
         expected_extra = compute_extra_data(
             expected_challenge_hex, expected_challenge_index_hex, expected_peer_binding_hex
@@ -596,30 +609,80 @@ class YubiKeyStrongBox:
     """
     Handles YubiKey PIV local attestation co-signing (slot 9a/9c) and
     SSH-agent hardware key signing/verification (ssh-keygen -Y sign/verify).
+
+    Security invariant:
+    - In production mode (`piv_mode == "pkcs11"`, the default), NEVER generate a
+      local software EC private key (`piv_9a_key.pem`). PIV signing uses the
+      physical YubiKey token's slot via PKCS#11 (`libykcs11.so` / `pkcs11-tool` /
+      OpenSSL PKCS#11 provider/engine) and fails closed if the token is absent.
+    - Software simulation keys are created and used ONLY when `piv_mode == "sim"`
+      is explicitly passed for hermetic unit/CI tests, and bundles signed in `sim`
+      mode are tagged `"piv_mode": "sim"` and rejected by production verifiers.
     """
 
-    def __init__(self, state_dir: Path, piv_slot: str = "9a"):
+    def __init__(self, state_dir: Path, piv_slot: str = "9a", piv_mode: Optional[str] = None):
         self.state_dir = Path(state_dir)
         self.piv_dir = self.state_dir / "yubikey_piv"
         self.piv_dir.mkdir(parents=True, exist_ok=True)
-        self.piv_slot = piv_slot
-        self._ensure_piv_material()
-
-    def _ensure_piv_material(self) -> None:
-        self.piv_priv = self.piv_dir / f"piv_{self.piv_slot}_key.pem"
+        self.piv_slot = piv_slot.lower()
+        resolved_mode = (piv_mode or os.environ.get("YUBIOS_ATTEST_PIV_MODE", "pkcs11")).strip().lower()
+        if resolved_mode not in ("pkcs11", "sim"):
+            raise ValueError(f"Invalid piv_mode '{resolved_mode}': expected 'pkcs11' or 'sim'")
+        self.piv_mode = resolved_mode
+        self.piv_priv = self.piv_dir / f"piv_{self.piv_slot}_sim_key.pem"
         self.piv_pub = self.piv_dir / f"piv_{self.piv_slot}_pub.pem"
         self.piv_cert = self.piv_dir / f"piv_{self.piv_slot}_cert.pem"
+        self._ensure_piv_material()
 
-        if shutil.which("ykman") and not self.piv_cert.exists():
-            try:
-                subprocess.run(
-                    ["ykman", "piv", "export-cert", self.piv_slot, str(self.piv_cert)],
-                    check=True, capture_output=True, timeout=5,
-                )
-            except Exception:
-                pass
+    @staticmethod
+    def _find_pkcs11_module() -> Optional[str]:
+        env_mod = os.environ.get("YUBIOS_PKCS11_MODULE") or os.environ.get("PKCS11_MODULE_PATH")
+        if env_mod and os.path.exists(env_mod):
+            return env_mod
+        for candidate in DEFAULT_PKCS11_MODULES:
+            if os.path.exists(candidate):
+                return candidate
+        return None
 
-        if not self.piv_pub.exists():
+    def _export_hardware_cert_and_pubkey(self) -> bool:
+        """
+        Export the certificate from the physical YubiKey PIV slot (or read the
+        enrolled /var/lib/yubiOS/secureboot/db.crt when slot 9a is enrolled) and
+        extract its public key without ever creating a software private key.
+        """
+        if not self.piv_cert.exists() and shutil.which("ykman"):
+            for subcmd in (
+                ["ykman", "piv", "certificates", "export", self.piv_slot, str(self.piv_cert)],
+                ["ykman", "piv", "export-cert", self.piv_slot, str(self.piv_cert)],
+            ):
+                try:
+                    res = subprocess.run(subcmd, capture_output=True, text=True, timeout=5)
+                    if res.returncode == 0 and self.piv_cert.exists() and self.piv_cert.stat().st_size > 0:
+                        break
+                except Exception:
+                    pass
+
+        if self.piv_cert.exists() and self.piv_cert.stat().st_size > 0 and not self.piv_pub.exists():
+            res = subprocess.run(
+                ["openssl", "x509", "-in", str(self.piv_cert), "-pubkey", "-noout", "-out", str(self.piv_pub)],
+                capture_output=True, text=True,
+            )
+            if res.returncode != 0:
+                self.piv_pub.unlink(missing_ok=True)
+                return False
+
+        return self.piv_cert.exists() and self.piv_pub.exists()
+
+    def _ensure_piv_material(self) -> None:
+        if self.piv_mode == "pkcs11":
+            # Production hardware mode: never generate a software private key!
+            if self.piv_priv.exists():
+                self.piv_priv.unlink(missing_ok=True)
+            self._export_hardware_cert_and_pubkey()
+            return
+
+        # Explicit test simulation mode (piv_mode == "sim") ONLY:
+        if not self.piv_pub.exists() or not self.piv_priv.exists() or not self.piv_cert.exists():
             subprocess.run(
                 ["openssl", "ecparam", "-name", "prime256v1", "-genkey", "-noout", "-out", str(self.piv_priv)],
                 check=True, capture_output=True,
@@ -630,7 +693,11 @@ class YubiKeyStrongBox:
                 check=True, capture_output=True,
             )
             cnf_f = self.piv_dir / "openssl_piv.cnf"
-            cnf_f.write_text("[req]\ndistinguished_name=dn\nprompt=no\n[dn]\nCN=yubiOS-PIV-Slot-" + self.piv_slot + "\nO=yubi-OS\n")
+            cnf_f.write_text(
+                "[req]\ndistinguished_name=dn\nprompt=no\n[dn]\nCN=yubiOS-PIV-Sim-Slot-"
+                + self.piv_slot
+                + "\nO=yubi-OS-Test\n"
+            )
             subprocess.run(
                 [
                     "openssl", "req", "-new", "-x509",
@@ -642,20 +709,106 @@ class YubiKeyStrongBox:
                 check=True, capture_output=True,
             )
 
-    def sign_piv(self, payload_bytes: bytes) -> Dict[str, str]:
+    def is_piv_available(self) -> bool:
+        if self.piv_mode == "pkcs11":
+            mod = self._find_pkcs11_module()
+            if not mod:
+                return False
+            return self._export_hardware_cert_and_pubkey()
+        return self.piv_cert.exists() and self.piv_pub.exists() and self.piv_priv.exists()
+
+    def get_piv_fingerprint_sha256(self) -> Optional[str]:
+        if self.piv_pub.exists() and self.piv_pub.stat().st_size > 0:
+            return hashlib.sha256(self.piv_pub.read_bytes()).hexdigest()
+        return None
+
+    def _sign_piv_pkcs11(self, payload_bytes: bytes) -> bytes:
+        if not self._export_hardware_cert_and_pubkey():
+            raise RuntimeError(
+                f"Hardware YubiKey PIV certificate for slot {self.piv_slot} not present; "
+                "cannot sign in production piv_mode=pkcs11"
+            )
+        pkcs11_mod = self._find_pkcs11_module()
+        if not pkcs11_mod:
+            raise RuntimeError(
+                "No YubiKey PKCS#11 module (libykcs11.so / YUBIOS_PKCS11_MODULE) found for hardware PIV signing"
+            )
+        slot_id = PIV_SLOT_PKCS11_IDS.get(self.piv_slot, "01")
+        pin = os.environ.get("YUBIOS_PIV_PIN")
+        pkcs11_uri = f"pkcs11:id=%{slot_id};type=private"
+        if pin:
+            pkcs11_uri += f"?pin-value={pin}"
+
         with tempfile.TemporaryDirectory() as td:
             in_f = Path(td) / "payload.bin"
             sig_f = Path(td) / "payload.sig"
             in_f.write_bytes(payload_bytes)
-            subprocess.run(
-                ["openssl", "dgst", "-sha256", "-sign", str(self.piv_priv), "-out", str(sig_f), str(in_f)],
-                check=True, capture_output=True,
-            )
-            sig_b64 = base64.b64encode(sig_f.read_bytes()).decode("ascii")
+
+            # Path A: pkcs11-tool with ECDSA-SHA256
+            if shutil.which("pkcs11-tool"):
+                cmd = [
+                    "pkcs11-tool",
+                    "--module", pkcs11_mod,
+                    "--sign",
+                    "--id", slot_id,
+                    "--mechanism", "ECDSA-SHA256",
+                    "--signature-format", "openssl",
+                    "-i", str(in_f),
+                    "-o", str(sig_f),
+                ]
+                if pin:
+                    cmd.extend(["--pin", pin])
+                res = subprocess.run(cmd, capture_output=True, text=True)
+                if res.returncode == 0 and sig_f.exists() and sig_f.stat().st_size > 0:
+                    return sig_f.read_bytes()
+
+            # Path B: OpenSSL PKCS#11 engine/provider
+            env = os.environ.copy()
+            env["PKCS11_MODULE_PATH"] = pkcs11_mod
+            for ossl_cmd in (
+                [
+                    "openssl", "dgst", "-sha256",
+                    "-provider", "pkcs11", "-provider", "default",
+                    "-sign", pkcs11_uri,
+                    "-out", str(sig_f),
+                    str(in_f),
+                ],
+                [
+                    "openssl", "dgst", "-sha256",
+                    "-engine", "pkcs11", "-keyform", "engine",
+                    "-sign", pkcs11_uri,
+                    "-out", str(sig_f),
+                    str(in_f),
+                ],
+            ):
+                res = subprocess.run(ossl_cmd, env=env, capture_output=True, text=True)
+                if res.returncode == 0 and sig_f.exists() and sig_f.stat().st_size > 0:
+                    return sig_f.read_bytes()
+
+        raise RuntimeError(
+            f"Hardware YubiKey PIV signing via PKCS#11 slot {self.piv_slot} (id=%{slot_id}) failed"
+        )
+
+    def sign_piv(self, payload_bytes: bytes) -> Dict[str, str]:
+        if self.piv_mode == "pkcs11":
+            sig_bytes = self._sign_piv_pkcs11(payload_bytes)
+        else:
+            with tempfile.TemporaryDirectory() as td:
+                in_f = Path(td) / "payload.bin"
+                sig_f = Path(td) / "payload.sig"
+                in_f.write_bytes(payload_bytes)
+                subprocess.run(
+                    ["openssl", "dgst", "-sha256", "-sign", str(self.piv_priv), "-out", str(sig_f), str(in_f)],
+                    check=True, capture_output=True,
+                )
+                sig_bytes = sig_f.read_bytes()
+
+        sig_b64 = base64.b64encode(sig_bytes).decode("ascii")
         cert_pem = self.piv_cert.read_text()
         pub_pem = self.piv_pub.read_text()
         return {
             "slot": self.piv_slot,
+            "piv_mode": self.piv_mode,
             "alg": "ECDSA-P256-SHA256",
             "piv_pub_pem": pub_pem,
             "piv_cert_pem": cert_pem,
@@ -664,7 +817,12 @@ class YubiKeyStrongBox:
         }
 
     @staticmethod
-    def verify_piv(payload_bytes: bytes, piv_block: Dict[str, str]) -> bool:
+    def verify_piv(payload_bytes: bytes, piv_block: Dict[str, str], allow_sim_piv: bool = False) -> bool:
+        block_mode = piv_block.get("piv_mode", "pkcs11")
+        if block_mode == "sim" and not allow_sim_piv:
+            raise ValueError(
+                "YubiKey PIV verification rejected simulated software key signature (piv_mode=sim) in production mode"
+            )
         pub_pem = piv_block["piv_pub_pem"]
         sig_bytes = base64.b64decode(piv_block["signature_b64"])
         with tempfile.TemporaryDirectory() as td:
@@ -686,17 +844,19 @@ class YubiKeyStrongBox:
         env = os.environ.copy()
         if auth_sock:
             env["SSH_AUTH_SOCK"] = auth_sock
-        if not env.get("SSH_AUTH_SOCK"):
-            return None
-        res = subprocess.run(["ssh-add", "-L"], env=env, capture_output=True, text=True)
-        if res.returncode != 0 or not res.stdout.strip():
-            return None
-        lines = [ln.strip() for ln in res.stdout.splitlines() if ln.strip()]
-        # Prefer hardware-backed sk- keys or PIV keys first
-        for ln in lines:
-            if "sk-" in ln or "piv" in ln.lower() or "yubi" in ln.lower():
-                return ln
-        return lines[0]
+        if env.get("SSH_AUTH_SOCK"):
+            res = subprocess.run(["ssh-add", "-L"], env=env, capture_output=True, text=True)
+            if res.returncode == 0 and res.stdout.strip():
+                lines = [ln.strip() for ln in res.stdout.splitlines() if ln.strip()]
+                for ln in lines:
+                    if "sk-" in ln or "piv" in ln.lower() or "yubi" in ln.lower():
+                        return ln
+                return lines[0]
+        if self.piv_mode == "sim":
+            test_key = env.get("YUBIOS_ATTEST_TEST_SSH_KEY")
+            if test_key and Path(test_key + ".pub").exists():
+                return Path(test_key + ".pub").read_text().strip()
+        return None
 
     def sign_ssh_agent(self, payload_bytes: bytes, principal: str, auth_sock: Optional[str] = None) -> Dict[str, str]:
         pubkey = self.get_ssh_agent_pubkey(auth_sock)
@@ -710,10 +870,13 @@ class YubiKeyStrongBox:
             msg_f = Path(td) / "message.bin"
             pub_f.write_text(pubkey + "\n")
             msg_f.write_bytes(payload_bytes)
+            sign_key_arg = str(pub_f)
+            if not env.get("SSH_AUTH_SOCK") and self.piv_mode == "sim" and env.get("YUBIOS_ATTEST_TEST_SSH_KEY"):
+                sign_key_arg = env["YUBIOS_ATTEST_TEST_SSH_KEY"]
             subprocess.run(
                 [
                     "ssh-keygen", "-Y", "sign",
-                    "-f", str(pub_f),
+                    "-f", sign_key_arg,
                     "-n", PROTOCOL_NAMESPACE,
                     str(msg_f),
                 ],
@@ -752,7 +915,9 @@ class YubiKeyStrongBox:
                 capture_output=True,
             )
             if res.returncode != 0:
-                raise ValueError(f"SSH-agent YubiKey signature verification failed: {res.stderr.decode('utf-8', 'replace').strip()}")
+                raise ValueError(
+                    f"SSH-agent YubiKey signature verification failed: {res.stderr.decode('utf-8', 'replace').strip()}"
+                )
         return True
 
 
@@ -761,7 +926,7 @@ class AttestDaemonCore:
     Core stateful engine running inside yubiOS-attestd.
     Manages:
     - TPM2Engine (/dev/tpmrm0 or simulator)
-    - YubiKeyStrongBox (PIV slot 9a/9c + SSH_AUTH_SOCK)
+    - YubiKeyStrongBox (PIV slot 9a/9c via PKCS#11 + SSH_AUTH_SOCK)
     - Single-use pairing codes (/run/yubiOS-attest/pairings/)
     - Pinned peer profiles (/var/lib/yubiOS-attest/peers/)
     """
@@ -773,7 +938,9 @@ class AttestDaemonCore:
         host_id: Optional[str] = None,
         tpm_mode: str = "auto",
         piv_slot: str = "9a",
+        piv_mode: Optional[str] = None,
         os_version: str = "45.20261114.0",
+        sysroot: Optional[Path] = None,
     ):
         self.state_dir = Path(state_dir)
         self.run_dir = Path(run_dir)
@@ -784,18 +951,117 @@ class AttestDaemonCore:
             d.mkdir(parents=True, exist_ok=True)
         self.host_id = host_id or socket.gethostname()
         self.os_version = os_version
+        self.sysroot = Path(sysroot or os.environ.get("YUBIOS_ATTEST_SYSROOT", "/"))
         self.tpm = TPM2Engine(self.state_dir, mode=tpm_mode)
-        self.yk = YubiKeyStrongBox(self.state_dir, piv_slot=piv_slot)
+        self.yk = YubiKeyStrongBox(self.state_dir, piv_slot=piv_slot, piv_mode=piv_mode)
         self._lock = threading.Lock()
 
+    def _read_efivar_byte(self, prefix: str) -> Optional[int]:
+        efivars_dir = self.sysroot / "sys/firmware/efi/efivars"
+        if not efivars_dir.is_dir():
+            return None
+        for entry in sorted(efivars_dir.iterdir()):
+            if entry.name.startswith(prefix):
+                try:
+                    raw = entry.read_bytes()
+                    if len(raw) >= 5:
+                        return raw[4]
+                except Exception:
+                    return None
+        return None
+
+    def _is_composefs_root_mounted(self) -> bool:
+        cmdline_path = self.sysroot / "proc/cmdline"
+        mounts_path = self.sysroot / "proc/mounts"
+        if not cmdline_path.is_file() or not mounts_path.is_file():
+            return False
+        try:
+            cmdline = cmdline_path.read_text(errors="replace")
+            mounts = mounts_path.read_text(errors="replace")
+        except Exception:
+            return False
+
+        has_composefs_karg = False
+        for tok in cmdline.split():
+            if tok.startswith("composefs=") and len(tok.split("=", 1)[1].strip()) > 0:
+                has_composefs_karg = True
+                break
+        if not has_composefs_karg:
+            return False
+
+        for line in mounts.splitlines():
+            parts = line.split()
+            if len(parts) >= 4:
+                src, mnt, fstype, opts = parts[0], parts[1], parts[2], parts[3]
+                if mnt in ("/", "/sysroot"):
+                    if fstype == "composefs" or "composefs" in src or "verity" in opts:
+                        return True
+        return False
+
+    def _is_chipsec_passed(self) -> bool:
+        for rel in (
+            "run/yubiOS/chipsec.status",
+            "run/yubiOS/chipsec-firstboot.status",
+            "var/lib/yubiOS/chipsec-firstboot.status",
+        ):
+            p = self.sysroot / rel
+            if p.is_file():
+                try:
+                    txt = p.read_text(errors="replace")
+                except Exception:
+                    return False
+                if ("PASSED" in txt or "RESULT=PASS" in txt) and "FAILED" not in txt:
+                    return True
+                return False
+        return False
+
     def get_os_enforced_flags(self, auth_sock: Optional[str] = None) -> int:
-        flags = OS_FLAG_MEASURED_OS | OS_FLAG_SECURE_BOOT_ENFORCED | OS_FLAG_DM_VERITY_ACTIVE | OS_FLAG_NO_VFIO_ENFORCED
-        if self.yk.piv_cert.exists():
+        """
+        Derive every reported OS enforcement bit strictly from observed runtime state
+        under `self.sysroot`. No flag is set unconditionally, and an absent CHIPSEC
+        status file never marks `OS_FLAG_CHIPSEC_PASSED`.
+        """
+        flags = 0
+
+        # 1. OS_FLAG_MEASURED_OS: observed TCG binary eventlog or systemd-stub measured-os efivar
+        eventlog = self.sysroot / "sys/kernel/security/tpm0/binary_bios_measurements"
+        stub_pcr = self._read_efivar_byte("StubPcrKernelImage-")
+        try:
+            has_eventlog = eventlog.is_file() and eventlog.stat().st_size > 0
+        except Exception:
+            has_eventlog = False
+        if has_eventlog or (stub_pcr is not None and stub_pcr != 0):
+            flags |= OS_FLAG_MEASURED_OS
+
+        # 2. OS_FLAG_SECURE_BOOT_ENFORCED: observed SecureBoot==1 AND SetupMode==0
+        sb_byte = self._read_efivar_byte("SecureBoot-")
+        setup_byte = self._read_efivar_byte("SetupMode-")
+        if sb_byte == 1 and setup_byte == 0:
+            flags |= OS_FLAG_SECURE_BOOT_ENFORCED
+
+        # 3. OS_FLAG_DM_VERITY_ACTIVE: observed composefs= kernel arg AND mounted composefs/verity root
+        if self._is_composefs_root_mounted():
+            flags |= OS_FLAG_DM_VERITY_ACTIVE
+
+        # 4. OS_FLAG_YUBIKEY_PIV_PRESENT: observed PIV certificate/token availability
+        if self.yk.is_piv_available():
             flags |= OS_FLAG_YUBIKEY_PIV_PRESENT
+
+        # 5. OS_FLAG_SSH_AGENT_SK_PRESENT: observed SSH key in SSH_AUTH_SOCK
         if self.yk.get_ssh_agent_pubkey(auth_sock):
             flags |= OS_FLAG_SSH_AGENT_SK_PRESENT
-        if not Path("/run/yubiOS/chipsec.status").exists() or "FAILED" not in Path("/run/yubiOS/chipsec.status").read_text():
+
+        # 6. OS_FLAG_CHIPSEC_PASSED: observed chipsec status file with PASSED and no FAILED
+        if self._is_chipsec_passed():
             flags |= OS_FLAG_CHIPSEC_PASSED
+
+        # 7. OS_FLAG_NO_VFIO_ENFORCED: observed proc/modules or sys/module tree with no /dev/vfio/vfio or vfio module loaded
+        has_kernel_view = (self.sysroot / "proc/modules").is_file() or (self.sysroot / "sys/module").is_dir()
+        vfio_dev = (self.sysroot / "dev/vfio/vfio").exists()
+        vfio_mod = (self.sysroot / "sys/module/vfio").exists()
+        if has_kernel_view and not vfio_dev and not vfio_mod:
+            flags |= OS_FLAG_NO_VFIO_ENFORCED
+
         return flags
 
     def get_status(self, auth_sock: Optional[str] = None) -> Dict[str, Any]:
@@ -809,13 +1075,15 @@ class AttestDaemonCore:
             "protocol_version": PROTOCOL_VERSION,
             "os_version": self.os_version,
             "tcti_mode": pub["tcti_mode"],
+            "piv_mode": self.yk.piv_mode,
             "ek_fingerprint_sha256": pub["ek_fingerprint_sha256"],
             "ak_fingerprint_sha256": pub["ak_fingerprint_sha256"],
             "ak_name_hex": pub["ak_name_hex"],
             "pcr_sha256": pcrs,
             "pcr_composite_sha256": compute_pcr_composite_digest(pcrs, DEFAULT_PCR_LIST).hex(),
             "piv_slot": self.yk.piv_slot,
-            "piv_fingerprint_sha256": hashlib.sha256(self.yk.piv_pub.read_bytes()).hexdigest(),
+            "piv_available": self.yk.is_piv_available(),
+            "piv_fingerprint_sha256": self.yk.get_piv_fingerprint_sha256(),
             "ssh_agent_key_present": ssh_pub is not None,
             "ssh_agent_pubkey": ssh_pub,
             "os_enforced_flags": self.get_os_enforced_flags(auth_sock),
@@ -859,7 +1127,6 @@ class AttestDaemonCore:
         if not pfile.exists():
             raise ValueError("Invalid or unknown single-use pairing code")
         rec = json.loads(pfile.read_text())
-        # Immediately burn before any further checks (single-attempt semantics)
         if rec.get("consumed"):
             pfile.unlink(missing_ok=True)
             raise ValueError("Single-use pairing code was already consumed")
@@ -908,12 +1175,6 @@ class AttestDaemonCore:
         }
 
     def pair_begin_responder(self, code: str, initiator_hello: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Responder step 1 of single-use pairing:
-        - Burns the single-use pairing code.
-        - Generates a MakeCredential blob encrypted to Initiator's (ek_pub, ak_name).
-        - Returns Responder's hello (with challenge_index_B, nonce_B, EK/AK) + MakeCredential blob.
-        """
         with self._lock:
             rec = self._consume_pairing_code(code)
             resp_hello = self.build_hello(challenge_index=rec["challenge_index_local"])
@@ -1025,7 +1286,11 @@ class AttestDaemonCore:
         canonical_bytes = self._bundle_signing_bytes(bundle)
         piv_verified = False
         if bundle.get("piv_attestation"):
-            YubiKeyStrongBox.verify_piv(canonical_bytes, bundle["piv_attestation"])
+            YubiKeyStrongBox.verify_piv(
+                canonical_bytes,
+                bundle["piv_attestation"],
+                allow_sim_piv=(self.yk.piv_mode == "sim"),
+            )
             piv_verified = True
         elif require_piv:
             raise ValueError("Missing required YubiKey PIV co-signature")
@@ -1084,7 +1349,6 @@ class AttestDaemonCore:
         if not hmac.compare_digest(pin["remote_challenge_index"], expected_challenge_index_hex.lower()):
             raise ValueError("Challenge index mismatch against pinned peer record")
 
-        # Enforce measured-boot PCR 0, 4, 7, 11 continuity
         for critical_pcr in ("0", "4", "7", "11"):
             if pin["pinned_pcr_sha256"].get(critical_pcr) != q["pcr_sha256"].get(critical_pcr):
                 raise ValueError(
@@ -1092,7 +1356,6 @@ class AttestDaemonCore:
                     f"pinned={pin['pinned_pcr_sha256'].get(critical_pcr)} vs quote={q['pcr_sha256'].get(critical_pcr)}"
                 )
 
-        # Enforce strict anti-rollback on monotonic counter, TPM clock, and OS version
         if q["nv_counter"] < pin["last_nv_counter"]:
             raise ValueError(
                 f"TPM NV monotonic counter rollback detected: {q['nv_counter']} < {pin['last_nv_counter']}"
@@ -1136,14 +1399,6 @@ class AttestDaemonCore:
         bundle_from_a: Dict[str, Any],
         auth_sock: Optional[str] = None,
     ) -> Dict[str, Any]:
-        """
-        Responder step 2 of single-use pairing:
-        - Verifies Initiator recovered the MakeCredential secret (proving Initiator's AK is on Initiator's fTPM).
-        - Verifies the HKDF pairing MAC derived from the single-use code.
-        - Activates Initiator's MakeCredential blob on Responder's fTPM.
-        - Verifies and pins Initiator's attestation bundle (fTPM quote + YubiKey SSH-agent + PIV).
-        - Produces Responder's signed attestation bundle bound to the mutual transcript.
-        """
         with self._lock:
             sfile = self.challenges_dir / f"pair_{session_id}.json"
             if not sfile.exists():

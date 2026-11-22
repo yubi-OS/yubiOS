@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 """
 End-to-end verification suite for yubiOS-attest (library, systemd/D-Bus daemon,
-CLI client, single-use pairing code, SSH-agent StrongBox signing, and anti-rollback).
+CLI client, single-use pairing code, hardware PKCS#11 vs test sim PIV policy,
+observed runtime enforcement flags, SSH-agent StrongBox signing, and anti-rollback).
 """
 
 import json
@@ -16,7 +17,7 @@ import time
 import unittest
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 ATTEST_DIR = ROOT_DIR / "usr/lib/yubiOS/attest"
 DAEMON_BIN = ATTEST_DIR / "yubios-attestd"
 CLI_BIN = ATTEST_DIR / "yubios-attest-cli"
@@ -30,21 +31,49 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp_root = Path(tempfile.mkdtemp(prefix="yubios-attest-e2e-"))
         cls.env = os.environ.copy()
-
-        # Start an ephemeral ssh-agent and load an Ed25519 key simulating the operator's YubiKey
-        agent_out = subprocess.run(["ssh-agent", "-s"], check=True, capture_output=True, text=True).stdout
-        for line in agent_out.splitlines():
-            if line.startswith("SSH_AUTH_SOCK="):
-                cls.env["SSH_AUTH_SOCK"] = line.split("=", 1)[1].split(";", 1)[0]
-            elif line.startswith("SSH_AGENT_PID="):
-                cls.env["SSH_AGENT_PID"] = line.split("=", 1)[1].split(";", 1)[0]
+        cls.env["YUBIOS_ATTEST_PIV_MODE"] = "sim"
 
         cls.ssh_key = cls.tmp_root / "id_yubico_ed25519_sk"
         subprocess.run(
             ["ssh-keygen", "-t", "ed25519", "-N", "", "-C", "yubikey-piv-9a@yubiOS", "-f", str(cls.ssh_key)],
             check=True, capture_output=True,
         )
-        subprocess.run(["ssh-add", str(cls.ssh_key)], env=cls.env, check=True, capture_output=True)
+        cls.env["YUBIOS_ATTEST_TEST_SSH_KEY"] = str(cls.ssh_key)
+
+        # Start an ephemeral ssh-agent when Unix socket creation is permitted in this environment
+        try:
+            agent_sock = cls.tmp_root / "ssh_agent.sock"
+            agent_res = subprocess.run(
+                ["ssh-agent", "-a", str(agent_sock), "-s"],
+                check=True, capture_output=True, text=True,
+            )
+            for line in agent_res.stdout.splitlines():
+                if line.startswith("SSH_AUTH_SOCK="):
+                    cls.env["SSH_AUTH_SOCK"] = line.split("=", 1)[1].split(";", 1)[0]
+                elif line.startswith("SSH_AGENT_PID="):
+                    cls.env["SSH_AGENT_PID"] = line.split("=", 1)[1].split(";", 1)[0]
+            subprocess.run(["ssh-add", str(cls.ssh_key)], env=cls.env, check=True, capture_output=True)
+        except Exception:
+            cls.env.pop("SSH_AUTH_SOCK", None)
+
+        # Build a synthetic observed runtime sysroot for the test daemons
+        cls.sysroot = cls.tmp_root / "sysroot"
+        (cls.sysroot / "sys/kernel/security/tpm0").mkdir(parents=True, exist_ok=True)
+        (cls.sysroot / "sys/kernel/security/tpm0/binary_bios_measurements").write_bytes(b"\x00\x01\x02\x03TCG_EVENTLOG")
+        (cls.sysroot / "sys/firmware/efi/efivars").mkdir(parents=True, exist_ok=True)
+        (cls.sysroot / "sys/firmware/efi/efivars/SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c").write_bytes(
+            b"\x06\x00\x00\x00\x01"
+        )
+        (cls.sysroot / "sys/firmware/efi/efivars/SetupMode-8be4df61-93ca-11d2-aa0d-00e098032b8c").write_bytes(
+            b"\x06\x00\x00\x00\x00"
+        )
+        (cls.sysroot / "proc").mkdir(parents=True, exist_ok=True)
+        (cls.sysroot / "proc/cmdline").write_text("root=LABEL=yubios-root ro composefs=8f4e2b9a1c3d5e7f\n")
+        (cls.sysroot / "proc/mounts").write_text("composefs / composefs ro,relatime,verity 0 0\n")
+        (cls.sysroot / "proc/modules").write_text("tpm_ftpm_tee 16384 0 - Live 0x0000000000000000\n")
+        (cls.sysroot / "run/yubiOS").mkdir(parents=True, exist_ok=True)
+        (cls.sysroot / "run/yubiOS/chipsec.status").write_text("RESULT=PASSED\n")
+        cls.env["YUBIOS_ATTEST_SYSROOT"] = str(cls.sysroot)
 
         # Create a notify socket to test systemd Type=notify READY=1 signaling
         cls.notify_sock_path = cls.tmp_root / "sd_notify.sock"
@@ -70,6 +99,9 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
                 "--state-dir", str(cls.alpha_state),
                 "--run-dir", str(cls.alpha_run),
                 "--host-id", "yubios-host-alpha",
+                "--tpm-mode", "sim",
+                "--piv-mode", "sim",
+                "--sysroot", str(cls.sysroot),
                 "--os-version", "45.20261114.0",
             ],
             env=env_alpha,
@@ -80,12 +112,14 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
                 "--state-dir", str(cls.beta_state),
                 "--run-dir", str(cls.beta_run),
                 "--host-id", "yubios-host-beta",
+                "--tpm-mode", "sim",
+                "--piv-mode", "sim",
+                "--sysroot", str(cls.sysroot),
                 "--os-version", "45.20261114.0",
             ],
             env=cls.env,
         )
 
-        # Wait for READY=1 on sd_notify and sockets to appear
         ready_msg = cls.notify_sock.recv(1024).decode("utf-8")
         assert "READY=1" in ready_msg, f"Expected READY=1 from sd_notify, got {ready_msg}"
 
@@ -96,11 +130,9 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
                 time.sleep(0.1)
             assert sock.exists(), f"Daemon socket {sock} did not appear"
 
-        # Create a mock ssh wrapper script that invokes stdio-peer on host-beta (simulating `ssh host-beta yubiOS-attest stdio-peer`)
         cls.mock_ssh = cls.tmp_root / "mock-ssh"
         cls.mock_ssh.write_text(
             f"""#!/usr/bin/env bash
-# Verify that the client passed -o ForwardAgent=no so SSH_AUTH_SOCK is never leaked to the remote peer!
 if [[ "$*" != *"ForwardAgent=no"* ]]; then
   echo "SECURITY FAIL: ForwardAgent=no missing from ssh invocation: $*" >&2
   exit 99
@@ -138,7 +170,6 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
         return json.loads(res.stdout)
 
     def test_01_dbus_introspect_and_status(self):
-        # Verify D-Bus Introspectable XML and SO_PEERCRED UID/GID inspection
         req = {"jsonrpc": "2.0", "id": 1, "method": "org.freedesktop.DBus.Introspectable.Introspect", "params": {}}
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
             s.connect(str(self.alpha_sock))
@@ -150,6 +181,7 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
 
         st = self._run_cli(self.alpha_sock, ["status"])
         self.assertEqual(st["host_id"], "yubios-host-alpha")
+        self.assertEqual(st["piv_mode"], "sim")
         self.assertTrue(st["ssh_agent_key_present"])
         self.assertEqual(len(st["pcr_sha256"]), 8)
 
@@ -163,12 +195,10 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
         self.assertEqual(res["verification"]["tpms_attest"]["magic"], 0xFF544347)
 
     def test_03_single_use_pairing_and_replay_rejection(self):
-        # 1. Host Beta initializes a single-use pairing code for Host Alpha
         pair_init = self._run_cli(self.beta_sock, ["pair-init", "--peer", "yubios-host-alpha"])
         code = pair_init["pairing_code"]
         self.assertTrue(code.startswith("YUBI-"))
 
-        # 2. Host Alpha pairs with Host Beta over the SSH stdio-peer transport (using mock_ssh)
         pair_res = self._run_cli(
             self.alpha_sock,
             [
@@ -186,7 +216,6 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
         self.assertEqual(pair_res["initiator_verified_responder"]["status"], "PAIRED_AND_PINNED")
         self.assertTrue(pair_res["initiator_verified_responder"]["piv_verified"])
 
-        # 3. Attempting to reuse the same single-use pairing code MUST fail closed
         with self.assertRaises(RuntimeError) as ctx:
             self._run_cli(
                 self.alpha_sock,
@@ -201,7 +230,6 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
         self.assertIn("Invalid or unknown single-use pairing code", str(ctx.exception))
 
     def test_04_mutual_verify_and_tamper_rollback_detection(self):
-        # 1. Run mutual verification between already-paired Host Alpha and Host Beta
         ver1 = self._run_cli(
             self.alpha_sock,
             [
@@ -215,7 +243,6 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
         self.assertEqual(ver1["responder_verified_initiator"]["audit_count"], 2)
         self.assertEqual(ver1["initiator_verified_responder"]["audit_count"], 2)
 
-        # 2. Simulate OS version rollback on Host Beta's pinned state -> must fail closed
         beta_pin_on_alpha = self.alpha_state / "peers/yubios-host-beta.json"
         pin_data = json.loads(beta_pin_on_alpha.read_text())
         orig_ver = pin_data["pinned_os_version"]
@@ -237,7 +264,6 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
             pin_data["pinned_os_version"] = orig_ver
             beta_pin_on_alpha.write_text(json.dumps(pin_data, indent=2))
 
-        # 3. Simulate UKI PCR 11 measurement tamper on Host Beta -> must fail closed
         beta_pcr_file = self.beta_state / "tpm_pcr_state.json"
         beta_pcrs = json.loads(beta_pcr_file.read_text())
         orig_pcr11 = beta_pcrs["11"]
@@ -281,9 +307,72 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
             self.assertIn(d, svc_txt, f"Missing hardening directive: {d}")
         self.assertIn("ConditionSecurity=measured-os", sock_txt)
         self.assertIn("PassCredentials=yes", sock_txt)
-
-        # Verify lex-sort rule from RULES.md: 'yubiOS-attest.conf' sorts after 'static-nodes-permissions.conf'
         self.assertGreater("yubiOS-attest.conf", "static-nodes-permissions.conf")
+
+    def test_06_production_piv_rejects_software_keys_and_sim_bundles(self):
+        prod_dir = self.tmp_root / "prod_piv_state"
+        yk_prod = ya.YubiKeyStrongBox(prod_dir, piv_slot="9a", piv_mode="pkcs11")
+        # Production mode must NEVER generate a local software EC private key
+        self.assertFalse(yk_prod.piv_priv.exists())
+        with self.assertRaises(RuntimeError) as ctx:
+            yk_prod.sign_piv(b"test-payload")
+        self.assertIn("pkcs11", str(ctx.exception).lower())
+
+        # Simulated PIV block must be rejected when allow_sim_piv=False (production verifier)
+        sim_dir = self.tmp_root / "sim_piv_state"
+        yk_sim = ya.YubiKeyStrongBox(sim_dir, piv_slot="9a", piv_mode="sim")
+        sim_block = yk_sim.sign_piv(b"test-payload")
+        self.assertEqual(sim_block["piv_mode"], "sim")
+        self.assertTrue(ya.YubiKeyStrongBox.verify_piv(b"test-payload", sim_block, allow_sim_piv=True))
+        with self.assertRaises(ValueError) as vctx:
+            ya.YubiKeyStrongBox.verify_piv(b"test-payload", sim_block, allow_sim_piv=False)
+        self.assertIn("piv_mode=sim", str(vctx.exception))
+
+    def test_07_observed_os_enforced_flags_require_runtime_evidence(self):
+        empty_sysroot = self.tmp_root / "empty_sysroot"
+        empty_sysroot.mkdir(parents=True, exist_ok=True)
+        core = ya.AttestDaemonCore(
+            state_dir=self.tmp_root / "flags_state",
+            run_dir=self.tmp_root / "flags_run",
+            host_id="flags-test",
+            tpm_mode="sim",
+            piv_mode="pkcs11",
+            sysroot=empty_sysroot,
+        )
+        # On an empty sysroot (including absent chipsec.status), NO platform enforcement flag may be set
+        flags_empty = core.get_os_enforced_flags(auth_sock="")
+        self.assertEqual(flags_empty & ya.OS_FLAG_MEASURED_OS, 0)
+        self.assertEqual(flags_empty & ya.OS_FLAG_SECURE_BOOT_ENFORCED, 0)
+        self.assertEqual(flags_empty & ya.OS_FLAG_DM_VERITY_ACTIVE, 0)
+        self.assertEqual(flags_empty & ya.OS_FLAG_CHIPSEC_PASSED, 0)
+        self.assertEqual(flags_empty & ya.OS_FLAG_NO_VFIO_ENFORCED, 0)
+
+        # Populate SecureBoot=1 without SetupMode -> must STILL be 0 (SetupMode unreadable)
+        efivars = empty_sysroot / "sys/firmware/efi/efivars"
+        efivars.mkdir(parents=True, exist_ok=True)
+        (efivars / "SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c").write_bytes(b"\x06\x00\x00\x00\x01")
+        self.assertEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_SECURE_BOOT_ENFORCED, 0)
+
+        # Populate SetupMode=0 -> now SECURE_BOOT_ENFORCED becomes 1
+        (efivars / "SetupMode-8be4df61-93ca-11d2-aa0d-00e098032b8c").write_bytes(b"\x06\x00\x00\x00\x00")
+        self.assertNotEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_SECURE_BOOT_ENFORCED, 0)
+
+        # Populate composefs= in /proc/cmdline WITHOUT a mounted composefs root in /proc/mounts -> must be 0
+        (empty_sysroot / "proc").mkdir(parents=True, exist_ok=True)
+        (empty_sysroot / "proc/cmdline").write_text("composefs=deadbeef1234\n")
+        (empty_sysroot / "proc/mounts").write_text("/dev/sda2 / ext4 rw,relatime 0 0\n")
+        self.assertEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_DM_VERITY_ACTIVE, 0)
+
+        # Mount composefs on / -> now DM_VERITY_ACTIVE becomes 1
+        (empty_sysroot / "proc/mounts").write_text("composefs / composefs ro,relatime,verity 0 0\n")
+        self.assertNotEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_DM_VERITY_ACTIVE, 0)
+
+        # Populate chipsec.status with FAILED -> must be 0; with PASSED -> becomes 1
+        (empty_sysroot / "run/yubiOS").mkdir(parents=True, exist_ok=True)
+        (empty_sysroot / "run/yubiOS/chipsec.status").write_text("RESULT=FAILED\n")
+        self.assertEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_CHIPSEC_PASSED, 0)
+        (empty_sysroot / "run/yubiOS/chipsec.status").write_text("RESULT=PASSED\n")
+        self.assertNotEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_CHIPSEC_PASSED, 0)
 
 
 if __name__ == "__main__":
