@@ -317,8 +317,9 @@ RUN systemctl preset-all && \
 RUN mkdir -p /etc/yubico && touch /etc/yubico/u2f_keys && chmod 600 /etc/yubico/u2f_keys
 
 # ── Serial Console: default to 115200 baud across all boards & DTBs ──────
+# hadolint ignore=SC2016
 RUN install -d -m 0755 /usr/lib/systemd/system/serial-getty@.service.d && \
-    printf '[Service]\nExecStart=\nExecStart=-/sbin/agetty -o '\''-p -- \\\\u'\'' --keep-baud 115200,57600,38400,9600 - $TERM\n' \
+    printf "[Service]\nExecStart=\nExecStart=-/sbin/agetty -o '-p -- \\\\\\\\u' --keep-baud 115200,57600,38400,9600 - \$TERM\n" \
       > /usr/lib/systemd/system/serial-getty@.service.d/05-yubiOS-baud.conf && \
     python3 -c 'import glob; [open(p, "wb").write(d.replace(b"serial2:1500000n8\x00", b"serial2:115200n8\x00\x00")) for p in glob.glob("/usr/lib/modules/*/dtb/rockchip/*.dtb") for d in [open(p, "rb").read()] if b"serial2:1500000n8\x00" in d]'
 
