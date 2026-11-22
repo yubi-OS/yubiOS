@@ -1,11 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # SPDX-License-Identifier: LGPL-2.1-or-later
 # yubiOS System Trust evidence probe for GNOME Settings (CcSystemTrustPanel) and CLI.
 # Evaluates the three yubiOS trust boundaries from live kernel/filesystem state:
 #   1. Firmware   — UEFI SecureBoot/SetupMode efivars, CHIPSEC first-boot status, TPM/fTPM
-#   2. Boot image — UKI StubPcrKernelImage efivar, composefs digest, ostree immutable root
+#   2. Boot image — UKI StubPcrKernelImage efivar, composefs digest, AND mounted composefs root in /proc/mounts
 #   3. Owner key  — /var/lib/yubiOS/.enrolled, PIV slot 9a cert, PAM U2F keys, FIDO2 token
-# Never claims "Verified" without concrete runtime evidence (OS first-looks contract).
+# Never claims "Verified" without complete observed runtime evidence, and reports
+# unreadable/missing values as "unknown" (never defaulting SetupMode=0 or SecureBoot=0).
 
 set -euo pipefail
 
@@ -14,7 +15,8 @@ sys_path() {
   local rel="${1#/}"
   if [[ "$SYSROOT" == "/" ]]; then
     printf '/%s\n' "$rel"
-  else
+  fi
+  if [[ "$SYSROOT" != "/" ]]; then
     printf '%s/%s\n' "${SYSROOT%/}" "$rel"
   fi
 }
@@ -62,19 +64,19 @@ fi
 if [[ "$chipsec_result" == "FAILED" ]]; then
   fw_status="Failed"
   fw_class="failed"
-  fw_details+=("CHIPSEC=FAILED")
-elif [[ "$sb_byte" == "1" && ( -z "$setup_byte" || "$setup_byte" == "0" ) ]]; then
+  fw_details+=("CHIPSEC=FAILED" "SecureBoot=${sb_byte:-unknown}" "SetupMode=${setup_byte:-unknown}")
+elif [[ "$sb_byte" == "1" && "$setup_byte" == "0" ]]; then
   fw_status="Verified"
   fw_class="verified"
   fw_details+=("SecureBoot=1" "SetupMode=0")
 elif [[ "$setup_byte" == "1" ]]; then
   fw_status="Setup Mode"
   fw_class="warning"
-  fw_details+=("SetupMode=1")
+  fw_details+=("SecureBoot=${sb_byte:-unknown}" "SetupMode=1")
 else
   fw_status="Unverified"
   fw_class="warning"
-  fw_details+=("SecureBoot=${sb_byte:-0}")
+  fw_details+=("SecureBoot=${sb_byte:-unknown}" "SetupMode=${setup_byte:-unknown}")
 fi
 
 if [[ -n "$chipsec_result" && "$chipsec_result" != "FAILED" ]]; then
@@ -96,6 +98,21 @@ if [[ -r "$cmdline_file" ]]; then
   composefs_digest="$(sed -n 's/.*composefs=\([^[:space:]]*\).*/\1/p' "$cmdline_file" | head -n 1)"
 fi
 
+mounts_file="$(sys_path /proc/mounts)"
+root_fstype=""
+composefs_mounted=0
+if [[ -r "$mounts_file" ]]; then
+  while read -r m_src m_target m_fstype m_opts _rest; do
+    if [[ "$m_target" == "/" || "$m_target" == "/sysroot" ]]; then
+      root_fstype="$m_fstype"
+      if [[ "$m_fstype" == "composefs" || "$m_src" == *"composefs"* || "$m_opts" == *"verity"* ]]; then
+        composefs_mounted=1
+        break
+      fi
+    fi
+  done < "$mounts_file"
+fi
+
 stub_pcr=""
 if stub_pcr="$(read_efivar_byte "StubPcrKernelImage-")"; then
   :
@@ -106,21 +123,31 @@ if [[ -e "$(sys_path /run/ostree-booted)" ]]; then
   ostree_booted=1
 fi
 
-if [[ -n "$composefs_digest" ]]; then
+if [[ -n "$composefs_digest" && "$composefs_mounted" -eq 1 ]]; then
   boot_status="Verified"
   boot_class="verified"
   short_digest="${composefs_digest:0:16}"
-  boot_details+=("composefs=${short_digest}...")
-  [[ -n "$stub_pcr" ]] && boot_details+=("UKI-PCR11=measured")
+  boot_details+=("composefs=${short_digest}..." "root-mount=composefs")
+  [[ -n "$stub_pcr" && "$stub_pcr" != "0" ]] && boot_details+=("UKI-PCR11=measured")
   [[ "$ostree_booted" -eq 1 ]] && boot_details+=("ostree=booted")
-elif [[ "$ostree_booted" -eq 1 && -n "$stub_pcr" ]]; then
+elif [[ "$ostree_booted" -eq 1 && -n "$stub_pcr" && "$stub_pcr" != "0" && "$composefs_mounted" -eq 1 ]]; then
   boot_status="Verified"
   boot_class="verified"
-  boot_details+=("UKI-PCR11=measured" "ostree=booted")
+  boot_details+=("root-mount=composefs" "UKI-PCR11=measured" "ostree=booted")
+elif [[ -n "$composefs_digest" || "$ostree_booted" -eq 1 ]]; then
+  boot_status="Unverified"
+  boot_class="warning"
+  if [[ -n "$composefs_digest" ]]; then
+    boot_details+=("composefs=${composefs_digest:0:16}...")
+  else
+    boot_details+=("composefs=none")
+  fi
+  boot_details+=("root-mount=${root_fstype:-unknown}")
+  [[ "$ostree_booted" -eq 1 ]] && boot_details+=("ostree=booted")
 else
   boot_status="Unmeasured"
   boot_class="warning"
-  boot_details+=("composefs=none")
+  boot_details+=("composefs=none" "root-mount=${root_fstype:-unknown}")
 fi
 boot_detail_str="${boot_details[*]}"
 
