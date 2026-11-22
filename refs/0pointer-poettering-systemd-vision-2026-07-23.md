@@ -40,7 +40,7 @@ Source: https://0pointer.net/blog/fitting-everything-together.html
 ### Design Goals (directly applicable, still current)
 1. **Image-based over package-based** — reproducible, immutable, cattle not pets
 2. **Trust chain from boot loader to apps** — all code cryptographically validated before execution
-3. **Offline security** — data encrypted at rest, TPM2-bound (yubiOS: YubiKey-bound)
+3. **Offline security** — data encrypted at rest, TPM2-bound (yubiOS: U2F/HSM-bound)
 4. **Cryptographic measurement everywhere** — remote attestation
 5. **Self-updating** — A/B atomic upgrades via systemd-sysupdate
 6. **Robust against power loss** — A/B partition scheme
@@ -55,7 +55,7 @@ Source: https://0pointer.net/blog/fitting-everything-together.html
 - **systemd-boot** picks newest by version sort
 - `usrhash=` kernel parameter → dm-verity root hash in signed cmdline
 - **systemd-repart** creates root fs on first boot, encrypts, enrolls TPM2 key
-- yubiOS delta: replace TPM2 enrollment with YubiKey FIDO2 via systemd-cryptenroll
+- yubiOS delta: replace TPM2 enrollment with U2F/HSM FIDO2 via systemd-cryptenroll
 
 ### Modularity Layers (unchanged)
 | Layer | Tool | Trust |
@@ -66,7 +66,7 @@ Source: https://0pointer.net/blog/fitting-everything-together.html
 
 ### Key Insight for yubiOS (still holds)
 The entire stack is already designed for hardware root-of-trust. The only yubiOS delta is:
-- Replace TPM2 with YubiKey everywhere `systemd-cryptenroll` is called
+- Replace TPM2 with U2F/HSM everywhere `systemd-cryptenroll` is called
 - The rest (UKI signing, dm-verity, systemd-sysext, systemd-repart) is upstream
 
 ---
@@ -161,7 +161,7 @@ mkosi -f build # force rebuild
 
 ## Key Directives Quick Reference (yubiOS service hardening, unchanged)
 
-### For YubiKey-auth services
+### For U2F/HSM-auth services
 ```ini
 [Service]
 Type=notify

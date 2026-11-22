@@ -9,7 +9,7 @@ description: "Writes hardened systemd service units for yubiOS. Use when creatin
 
 systemd has comprehensive built-in sandboxing. No AppArmor/SELinux policy needed for most services — the directives alone can drop the security exposure score well below 4.
 
-**yubiOS context**: all services must be hardened. PAM uses pam-u2f for FIDO2 second factor. systemd-homed can use YubiKey FIDO2 for home directory encryption.
+**yubiOS context**: all services must be hardened. PAM uses pam-u2f for FIDO2 second factor. systemd-homed can use U2F/HSM FIDO2 for home directory encryption.
 
 ---
 
@@ -163,7 +163,7 @@ pam-u2f provides U2F/FIDO2 second factor for any PAM-aware service.
 # Install
 apt-get install libpam-u2f
 
-# Register YubiKey for a user (touch when prompted)
+# Register U2F/HSM for a user (touch when prompted)
 mkdir -p ~/.config/Yubico
 pamu2fcfg -o pam://yubiOS > ~/.config/Yubico/u2f_keys
 
@@ -185,7 +185,7 @@ auth required pam_u2f.so authfile=/etc/security/u2f_keys
 
 ---
 
-## systemd-homed + FIDO2 (YubiKey home encryption)
+## systemd-homed + FIDO2 (U2F/HSM home encryption)
 
 ```bash
 # Create home encrypted with FIDO2
@@ -197,7 +197,7 @@ homectl create --storage=luks \
 # Add FIDO2 to existing home
 homectl authenticate --fido2-device=auto username
 
-# Add second YubiKey (run again)
+# Add second U2F/HSM (run again)
 homectl authenticate --fido2-device=auto username
 ```
 

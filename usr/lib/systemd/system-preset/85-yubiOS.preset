@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: GPL-2.0-only
+enable yubiOS-lvm-usr-overlay.service
+enable yubiOS-enroll.service
+enable yubiOS-chipsec-firstboot.service
+enable yubiOS-no-vfio-purge.service
+enable yubios-uki-install.service
+disable authselect-apply-changes.service
+disable bootloader-update.service
+disable geoclue.service
+enable yubiOS-uki-resign.path
+enable yubiOS-ostree-composefs-sync.service
+enable gdm.service

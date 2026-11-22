@@ -1,36 +1,564 @@
 name: lean-run
 
-# Real-data companion to lean-check.yml. Where lean-check proves the
-# identities (Lean, no sorry) and runs each tool's --selftest on planted
-# synthetic matrices, lean-run applies the ACTUAL evidence bundle
-# (papers/is-this-x-2026-08-12-Final.zip, the 2286x9 corpus) and real
-# statement data, and asserts the published numbers reproduce:
-#   v2_real = 0.7235293731 (1e-6), z > 6 (published +12.13),
-#   corpus level > +15.6 dBc floor, Delta >= 0 on real descent,
-#   Zernike admission non-empty, injectivity 2286/2286.
-# Every command here was verified locally against the shipped bundle
-# before this workflow landed (input-shape doctrine).
+# Real-data companion to lean-check.yml with 1:1 tool and measurement parity.
+# Where lean-check proves the formal identities (Lean 4.33.0, no sorry, kernel
+# replay, axiom coverage) and runs each tool's synthetic --selftest, lean-run
+# executes the full measurement suite (verify_claims, verify_rayleigh_claims,
+# Zernike caustics, Zernike Gap D lens, Phonon bridge follow-ups), applies the
+# ACTUAL evidence bundle (papers/is-this-x-2026-08-12-Final.zip, the 2286x9
+# corpus) and committed real-data fixtures across all 17 tools, and runs
+# tautology-discerner over the live docs/*.md statement corpus.
 
 on:
   push:
     branches: ['main', 'lean-check-*']
     paths:
       - 'papers/data/lean/**'
+      - 'papers/scripts/**'
       - 'tools/**'
+      - '.github/workflows/lean-check.yml'
       - '.github/workflows/lean-run.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
       reason:
         description: 'Why this run is being fired'
         required: false
         default: 'manual real-data run'
+        type: string
 
 jobs:
+  check:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      # Forbidden-token stopgap (round-2 Lane C, expanded round-3 Lane A) —
+      # source-side complement to the kernel-side axiom coverage gate below.
+      # Fails if any of the six lean sources uses axiom, native_decide,
+      # macro[_rules], syntax, elab[_rules], import, set_option, run_cmd,
+      # #eval, attribute, notation, or infix[lr] OUTSIDE comments and string
+      # literals (whole-word, identifier-boundary-aware match; comments
+      # stripped with the exact same nesting-aware stripper as
+      # check_lean_axioms.py, which this script imports from its own
+      # directory). No Lean toolchain needed. The round-3 additions close
+      # the reviewer's meta-route mutation (import Lean + skipKernelTC +
+      # run_cmd environment mutation), which is additionally belt-and-braced
+      # by the leanchecker kernel re-check below.
+      - name: Forbidden-token gate — no axiom/native_decide/macro[_rules]/syntax/elab[_rules]/import/set_option/run_cmd/#eval/attribute/notation/infix[lr] outside comments
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/check_forbidden_tokens.py \
+            papers/data/lean/CurvedCorpus.lean \
+            papers/data/lean/WayfinderBounds.lean \
+            papers/data/lean/RadiusBounds.lean \
+            papers/data/lean/RayleighBounds.lean \
+            papers/data/lean/AzimuthBounds.lean \
+            papers/data/lean/FocalBounds.lean \
+            papers/data/lean/FlowBounds.lean \
+            papers/data/lean/LifeBounds.lean
+
+      - name: Install Lean 4.35.0 (pinned SHA256 release tarball, no installer script)
+        run: |
+          set -euo pipefail
+          # Pinned toolchain: official leanprover/lean4 v4.35.0 linux release tarball.
+          expected='7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d'
+          curl -sSfL --retry 3 -o /tmp/lean.tar.zst \
+            https://github.com/leanprover/lean4/releases/download/v4.35.0/lean-4.35.0-linux.tar.zst
+          echo "$expected  /tmp/lean.tar.zst" | sha256sum --check --status
+          mkdir -p "$HOME/.lean-pinned"
+          tar --zstd -xf /tmp/lean.tar.zst -C "$HOME/.lean-pinned"
+          echo "$HOME/.lean-pinned/lean-4.35.0-linux/bin" >> "$GITHUB_PATH"
+
+      - name: Lean version
+        run: lean --version
+
+      - name: Check CurvedCorpus.lean
+        run: |
+          lean papers/data/lean/CurvedCorpus.lean
+          echo "LEAN_OK: all theorems in papers/data/lean/CurvedCorpus.lean check with no sorry"
+
+      - name: Assert no sorry in all Lean files (warnings-as-errors compile)
+        run: |
+          set -euo pipefail
+          # A file containing `sorry` fails to compile under -DwarningAsError=true
+          # (the declarationUsesSorry warning is promoted to an error), while a
+          # clean file passes. This replaces the former per-file
+          # `! grep -n "sorry"` steps, which could never fail: bash's stop-on-
+          # error behavior ignores `!`-prefixed commands. The file list is
+          # explicit so a new file cannot silently bypass the gate.
+          any_fail=0
+          for f in \
+            papers/data/lean/CurvedCorpus.lean \
+            papers/data/lean/WayfinderBounds.lean \
+            papers/data/lean/RadiusBounds.lean \
+            papers/data/lean/RayleighBounds.lean \
+            papers/data/lean/AzimuthBounds.lean \
+            papers/data/lean/FocalBounds.lean \
+            papers/data/lean/FlowBounds.lean \
+            papers/data/lean/LifeBounds.lean; do
+            if ! lean -DwarningAsError=true -Dlinter.deprecated=false "$f" > /tmp/sorry-gate.out 2>&1; then
+              echo "NO_SORRY_FAIL: $f"
+              cat /tmp/sorry-gate.out
+              any_fail=1
+            else
+              echo "NO_SORRY_OK: $f"
+            fi
+          done
+          test "$any_fail" -eq 0
+
+      # Kernel re-check (round-3 Lane C): replay each module's compiled
+      # olean through a fresh kernel environment. Catches any declaration
+      # that bypassed kernel type-checking (e.g. debug.skipKernelTC +
+      # run_cmd environment mutation). leanchecker ships inside the pinned
+      # lean-4.33.0 toolchain (>= v4.28.0) — zero new artifacts, zero new
+      # pins; the `command -v` guard makes a toolchain without it fail
+      # loudly rather than skip. Same-kernel caveat (Lane C notes): this is
+      # the SAME kernel implementation in a fresh process, not an
+      # independent verifier. The meta-route mutation class is additionally
+      # stopped at the source-side forbidden-token gate above.
+      - name: Kernel re-check (leanchecker) over compiled modules
+        run: |
+          set -euo pipefail
+          command -v leanchecker >/dev/null || {
+            echo "LEANCHECKER_MISSING: leanchecker not found in the pinned lean-4.33.0 toolchain (expected since v4.28.0)" >&2
+            exit 1
+          }
+          # Compile the six files to oleans from a flat source dir so the
+          # module name is unambiguously the file basename (the files import
+          # nothing beyond the Lean prelude, so a flat layout matches their
+          # actual module structure).
+          rm -rf /tmp/leanchecker-src /tmp/leanchecker-oleans
+          mkdir -p /tmp/leanchecker-src /tmp/leanchecker-oleans
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
+            cp "papers/data/lean/${base}.lean" "/tmp/leanchecker-src/${base}.lean"
+            if ! (cd /tmp/leanchecker-src && lean -o "/tmp/leanchecker-oleans/${base}.olean" "${base}.lean") > "/tmp/leanchecker-src/${base}-olean.err" 2>&1; then
+              echo "LEANCHECKER_OLEAN_FAIL: ${base}" >&2
+              cat "/tmp/leanchecker-src/${base}-olean.err" >&2
+              exit 1
+            fi
+          done
+          export LEAN_PATH="/tmp/leanchecker-oleans"
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
+            echo "== leanchecker --fresh ${base} =="
+            if ! leanchecker --fresh "${base}" > "/tmp/leanchecker-${base}.out" 2>&1; then
+              echo "LEANCHECKER_FAIL: ${base}" >&2
+              cat "/tmp/leanchecker-${base}.out" >&2
+              exit 1
+            fi
+            cat "/tmp/leanchecker-${base}.out"
+          done
+          echo "LEANCHECKER_OK: all eight modules re-type-checked via leanchecker --fresh kernel replay"
+
+      # Axiom coverage gate (Lane A, round 2) — runs after the pinned-tarball
+      # lean install step (no elan in this workflow), so `lean` is on PATH.
+      - name: Axiom coverage gate — every theorem in all eight lean files
+        run: |
+          set -euo pipefail
+          PERMITTED="propext,Classical.choice,Quot.sound"
+          for base in CurvedCorpus WayfinderBounds RadiusBounds RayleighBounds AzimuthBounds FocalBounds FlowBounds LifeBounds; do
+            case "${base}" in
+              CurvedCorpus)    manifest="curvedcorpus" ;;
+              WayfinderBounds) manifest="wayfinder" ;;
+              RadiusBounds)    manifest="radius" ;;
+              RayleighBounds)  manifest="rayleigh" ;;
+              AzimuthBounds)   manifest="azimuth" ;;
+              FocalBounds)     manifest="focal" ;;
+              FlowBounds)      manifest="flow" ;;
+              LifeBounds)      manifest="life" ;;
+            esac
+            echo "== axiom coverage: ${base}.lean (manifest: ${manifest}-scope.json) =="
+
+            # 1. Generate the probe: source text + the Lean environment-walking
+            #    enumeration block. Lean itself lists every theorem constant of
+            #    the current module — no regex extraction feeds the probe.
+            python3 papers/data/lean/check_lean_axioms.py --gen \
+              --source "papers/data/lean/${base}.lean" \
+              --out "/tmp/${base}-probe.lean"
+
+            # 2. Compile the probe with the pinned toolchain; capture stdout+stderr.
+            #    LOUD BY DESIGN: if the run_cmd block hits an API mismatch in the
+            #    pinned 4.33.0 toolchain, this compile fails and CI stops here.
+            lean "/tmp/${base}-probe.lean" > "/tmp/${base}-axioms.txt" 2>&1 || {
+              echo "LEAN_FAIL: ${base} probe failed to compile (enumeration block API mismatch?)"
+              cat "/tmp/${base}-axioms.txt"
+              exit 1
+            }
+
+            # 3. Gate (enumerate mode): parse AXIOM_LINE lines, then
+            #    - every Lean-listed theorem has an axiom line;
+            #    - every axiom set within PERMITTED (sorryAx and Lean.ofReduceBool
+            #      from native_decide fail);
+            #    - CROSS-CHECK: regex-extracted source names ⊆ Lean-listed names
+            #      (both lists printed on any divergence);
+            #    - COVERAGE: every Lean-listed name appears in the scope manifest.
+            #    Exit 1 on any violation.
+            python3 papers/data/lean/check_lean_axioms.py \
+              --source "papers/data/lean/${base}.lean" \
+              --axioms "/tmp/${base}-axioms.txt" \
+              --permitted "${PERMITTED}" \
+              --mode enumerate \
+              --require-coverage "papers/data/lean/${manifest}-scope.json"
+          done
+          echo "AXIOM_COVERAGE_GATE_OK: all eight lean files gated via Lean-side enumeration, every theorem checked, manifest coverage enforced"
+
+
+      - name: Check WayfinderBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/WayfinderBounds.lean > /tmp/wayfinder-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/WayfinderBounds.lean"
+            cat /tmp/wayfinder-axioms.txt
+            exit 1
+          }
+          cat /tmp/wayfinder-axioms.txt
+          echo "LEAN_OK: papers/data/lean/WayfinderBounds.lean checks with no sorry"
+
+      - name: Validate scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/wayfinder-scope.json
+
+      - name: Assert printed axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/wayfinder-axioms.txt \
+            --manifest papers/data/lean/wayfinder-scope.json
+
+      - name: Check RadiusBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/RadiusBounds.lean > /tmp/radius-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/RadiusBounds.lean"
+            cat /tmp/radius-axioms.txt
+            exit 1
+          }
+          cat /tmp/radius-axioms.txt
+          echo "LEAN_OK: papers/data/lean/RadiusBounds.lean checks with no sorry"
+
+      - name: Validate radius scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/radius-scope.json
+
+      - name: Assert printed radius axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/radius-axioms.txt \
+            --manifest papers/data/lean/radius-scope.json
+
+      - name: Check RayleighBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/RayleighBounds.lean > /tmp/rayleigh-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/RayleighBounds.lean"
+            cat /tmp/rayleigh-axioms.txt
+            exit 1
+          }
+          cat /tmp/rayleigh-axioms.txt
+          echo "LEAN_OK: papers/data/lean/RayleighBounds.lean checks with no sorry"
+
+      - name: Check AzimuthBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/AzimuthBounds.lean > /tmp/azimuth-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/AzimuthBounds.lean"
+            cat /tmp/azimuth-axioms.txt
+            exit 1
+          }
+          cat /tmp/azimuth-axioms.txt
+          echo "LEAN_OK: papers/data/lean/AzimuthBounds.lean checks with no sorry"
+
+      - name: Validate azimuth scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/azimuth-scope.json
+
+      - name: Assert printed azimuth axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/azimuth-axioms.txt \
+            --manifest papers/data/lean/azimuth-scope.json
+
+      - name: Validate rayleigh scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/rayleigh-scope.json
+
+      - name: Assert printed rayleigh axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/rayleigh-axioms.txt \
+            --manifest papers/data/lean/rayleigh-scope.json
+
+      - name: Check FocalBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/FocalBounds.lean > /tmp/focal-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/FocalBounds.lean"
+            cat /tmp/focal-axioms.txt
+            exit 1
+          }
+          cat /tmp/focal-axioms.txt
+          echo "LEAN_OK: papers/data/lean/FocalBounds.lean checks with no sorry"
+
+      - name: Validate focal scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/focal-scope.json
+
+      - name: Assert printed focal axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/focal-axioms.txt \
+            --manifest papers/data/lean/focal-scope.json
+
+      - name: Check FlowBounds.lean (kernel, pinned toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/FlowBounds.lean > /tmp/flow-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/FlowBounds.lean"
+            cat /tmp/flow-axioms.txt
+            exit 1
+          }
+          cat /tmp/flow-axioms.txt
+          echo "LEAN_OK: papers/data/lean/FlowBounds.lean checks with no sorry"
+
+      - name: Validate flow scope manifest is well-formed
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/flow-scope.json
+
+      - name: Assert printed flow axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/flow-axioms.txt \
+            --manifest papers/data/lean/flow-scope.json
+
+      - name: Check LifeBounds.lean (kernel, pinned Lean 4.35.0 + Mathlib v4.35.0 toolchain)
+        run: |
+          set -euo pipefail
+          lean papers/data/lean/LifeBounds.lean > /tmp/life-axioms.txt 2>&1 || {
+            echo "LEAN_FAIL: papers/data/lean/LifeBounds.lean"
+            cat /tmp/life-axioms.txt
+            exit 1
+          }
+          cat /tmp/life-axioms.txt
+          echo "LEAN_OK: papers/data/lean/LifeBounds.lean checks with no sorry"
+
+      - name: Verify life scope statement and command pins against LifeBounds.lean
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/pin_statements.py check papers/data/lean/life-scope.json
+
+      - name: Assert printed life axioms match permitted manifest set
+        run: |
+          set -euo pipefail
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/life-axioms.txt \
+            --manifest papers/data/lean/life-scope.json
+
+      - name: Check CurvedCorpus.lean (statement pins via scope manifest)
+        run: |
+          set -euo pipefail
+          # Reuses /tmp/CurvedCorpus-axioms.txt produced by the axiom-coverage
+          # gate step earlier in this job (probe compile of the full source +
+          # one #print axioms per theorem). 90 theorem statement pins checked.
+          test -s /tmp/CurvedCorpus-axioms.txt
+          python3 papers/data/lean/verify_wayfinder_axioms.py \
+            --axioms /tmp/CurvedCorpus-axioms.txt \
+            --manifest papers/data/lean/curvedcorpus-scope.json
+
+  verify-measurements:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Install numpy
+        run: python3 -m pip install --quiet numpy
+
+      - name: Resolve measurement-side claims
+        run: python3 papers/data/lean/verify_claims.py
+
+      - name: Resolve rayleigh/1 measurement-side claims (exact components/nullity, witness bound, indicator=cut)
+        run: python3 papers/data/lean/verify_rayleigh_claims.py
+
+      - name: Zernike caustics — F4 caustic classification (disassembled from zernike-caustics.yml)
+        run: python3 papers/scripts/f4_caustic_classify.py --mode classify
+
+      - name: Zernike lens — Slot 1 aberrated Gap D lens (disassembled from zernike-lens.yml)
+        run: python3 papers/scripts/gapD_zernike_lens.py --seed 20260824
+
+      - name: Phonon follow-ups — five phonon-bridge follow-ups (disassembled from phonon-followups.yml)
+        run: python3 papers/scripts/phonon_followups.py --only-5b
+
+      - name: Fractalrabbit falsification harness — synthetic curve-rsi + atom Delta >= 0 falsifier
+        run: python3 papers/data/fractalrabbit/falsification_harness.py
+
+  verify-tools:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Install numpy
+        run: python3 -m pip install --quiet numpy
+
+      - name: point-map numerical, API and archive regressions
+        run: |
+          node --version
+          node tools/point-map/test-pointmap.js
+          node tools/point-map/test-api.mjs
+          node --test tools/point-map/test-tar.mjs
+          node tools/point-map/test-math.mjs
+          node tools/point-map/test-preview.mjs
+          node tools/point-map/test-storage.mjs
+          node tools/point-map/test-radius.mjs
+          node tools/point-map/test-radius-extra.mjs
+          node tools/point-map/test-limits.mjs
+          node tools/point-map/test-focal-point.mjs
+          node tools/point-map/test-dimension-structure.mjs
+          node tools/point-map/test-control-outcomes.mjs
+          node tools/point-map/test-axis-consistency.mjs
+          node tools/point-map/test-placement.mjs
+          node tools/point-map/test-rayleigh.mjs
+          node tools/point-map/test-admission.mjs
+          node tools/point-map/test-azimuth.mjs
+          node tools/point-map/test-pca-convergence.mjs
+
+      - name: corpus-auditor selftest
+        run: python3 tools/corpus-auditor/auditor.py --selftest
+
+      - name: rsi-descent selftest
+        run: python3 tools/rsi-descent/rsi_descent.py --selftest
+
+      - name: boltzmann-collapse selftest
+        run: python3 tools/boltzmann-collapse/collapse.py --selftest
+
+      - name: spectral-defocus selftest
+        run: python3 tools/spectral-defocus/defocus.py --selftest
+
+      - name: spectral-defocus atomicity admission (asserts recorded negative)
+        run: python3 tools/spectral-defocus/defocus.py --admit-null --n-null 50
+
+      - name: zernike-spectrum selftest (disassembled from zernike-spectrum.yml)
+        run: python3 tools/zernike-spectrum/zernike.py --selftest
+
+      - name: zernike-spectrum corpus spectrum + admission test (disassembled from zernike-spectrum.yml)
+        run: python3 tools/zernike-spectrum/zernike.py --corpus --zip-path papers/is-this-x-2026-08-12-Final.zip --n-null 10 --trades-per-row 20 --out /tmp/zernike-check.json
+
+      - name: injective-mapping selftest
+        run: python3 tools/injective-mapping/mapping.py --selftest
+
+      - name: corpus-sonometer selftest
+        run: python3 tools/corpus-sonometer/sonometer.py --selftest
+      - name: tautology-discerner selftest
+        run: python3 tools/tautology-discerner/tautology_discerner.py --selftest
+
+      - name: spectral-decomposer selftest
+        run: python3 tools/spectral-decomposer/spectral_decomposer.py --selftest
+
+      - name: phonon-dispersion selftest
+        run: python3 tools/phonon-dispersion/phonon.py --selftest
+
+      - name: edge-standard selftest (taste-engine source of record)
+        run: |
+          python3 tools/edge-standard/edge_standard.py --selftest
+          python3 tools/edge-standard/falsification/gen_v2.py --selftest
+
+      - name: edge-standard fixture parity (Python source of record vs JS worker port)
+        run: node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
+
+      - name: spectral-standard selftest (42 gold checks, pure stdlib)
+        run: python3 tools/spectral-standard/spectral_standard.py --selftest
+
+      - name: spectral-standard fixture parity (Python source of record vs JS worker port)
+        run: node --test tools/spectral-standard/test_parity_spectral.test.js
+
+      - name: spectral-standard centroid-walk parity (Lane E pack, euclidean post-P4)
+        run: node --test tools/spectral-standard/test_centroid_parity.test.js
+
+      - name: spectral-standard falsification harness selftest (61 anchored checks, caller-side adapter)
+        run: |
+          PYTHONPATH=tools/spectral-standard \
+            python3 tools/spectral-standard/falsification/harness_spectral.py \
+            --module tools/spectral-standard/falsification/harness_adapter.py \
+            --selftest
+
+      - name: lens-standard selftest (46 gold checks, powered lens correct loop)
+        run: python3 tools/lens-standard/lens_standard.py --selftest
+
+      - name: lens-standard falsification harness selftest (75 gated checks + anchors)
+        run: python3 tools/lens-standard/falsification/harness_lens.py --selftest
+
+      - name: lens-standard fixture parity (Python source of record vs JS worker port)
+        run: node --test tools/lens-standard/test_parity_lens.test.js
+
+      # visco gate (T27 option 1: committed fixtures + Python source of record).
+      # verify_visco.py runs its fixture selftest (15 checks) against
+      # fixtures/visco-fixtures.json resolved relative to the tool file.
+      - name: visco-instruments fixture selftest (source of record, 20 checks)
+        run: python3 tools/visco-instruments/verify_visco.py
+
+      # forecast gate part 1 (T27 option 1). The v3 selftest prints a gate report
+      # and exits 0 regardless of gate outcomes, so the step pins the recorded
+      # honest state (G2 band-coverage ships failing, G5 unverified; see
+      # tools/forecast-standard/v3/results/VERDICT-2026-10-09.md). Update the pin
+      # deliberately when a version passes its gates.
+      - name: forecast-standard v3 selftest (pinned honest gate state)
+        run: |
+          set -euo pipefail
+          python3 tools/forecast-standard/v3/forecast_ets.py --selftest > /tmp/forecast-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/forecast-selftest.json')); expected={'ok': False, 'failing_gates': ['G2'], 'unverified_gates': ['G5']}; assert d['summary'] == expected, 'forecast gate report drifted: %s' % d['summary']; print('FORECAST_SELFTEST_OK (pinned: G2 failing, G5 unverified)')"
+
+      # forecast gate part 2: harness validate re-runs the committed v1 and v2
+      # modules over the recorded corpora and asserts the recorded hit counts
+      # reproduce (~4s locally). The harness records but does not assert, so the
+      # step asserts both reproduced flags itself.
+      - name: forecast-standard harness validate (recorded-count reproduction, v1+v2)
+        run: |
+          set -euo pipefail
+          python3 tools/forecast-standard/v3/harness_v3.py validate /tmp/forecast-validate.json \
+            --v1 tools/forecast-standard/forecast_ets.py \
+            --v2 tools/forecast-standard/v2/forecast_ets.py
+          python3 -c "import json; d=json.load(open('/tmp/forecast-validate.json')); bad=[k for k,v in d['versions'].items() if not v['reproduced']]; assert not bad, 'recorded counts not reproduced for: %s' % bad; print('FORECAST_VALIDATE_OK', {k: v['reproduced'] for k, v in d['versions'].items()})"
+
+      # Taste-math gate (BLOCKED on artifacts; T27 gate-audit.md section 4).
+      # jev-taste-math.js is committed at tools/edge-standard/ but has no committed
+      # test file and no Python source of record for the 8-axis taste math. Enable
+      # once tools/ carries the Python SoR + taste-axis fixture pack + parity test,
+      # mirroring the edge-standard pattern:
+      # - name: taste-standard selftest (8-axis source of record)
+      #   run: python3 tools/taste-standard/taste_standard.py --selftest
+      # - name: taste-standard fixture parity (Python source of record vs JS port)
+      #   run: node --test tools/taste-standard/test_parity_taste.test.js
+
+      - name: timesfm-clairic-clef cascade selftest (8 pre-registered gates G1..G8)
+        run: |
+          set -euo pipefail
+          python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
+
+      - name: life-supersolid B3/S23 instrument selftest and dynamic falsification harness (11 gates)
+        run: |
+          set -euo pipefail
+          python3 tools/life-supersolid/life_supersolid.py --selftest
+          python3 tools/life-supersolid/falsification/harness_life.py
+
   run-real-corpus:
     runs-on: ubuntu-26.04
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install numpy
         run: python3 -m pip install --quiet numpy
@@ -46,6 +574,28 @@ jobs:
           open('/tmp/per_row_coverage_v3.json', 'w').write(json.dumps(j))
           print('EXTRACT_OK 2286x9')
           PY
+
+      - name: point-map numerical, API and archive regressions (parity with lean-check)
+        run: |
+          node --version
+          node tools/point-map/test-pointmap.js
+          node tools/point-map/test-api.mjs
+          node --test tools/point-map/test-tar.mjs
+          node tools/point-map/test-math.mjs
+          node tools/point-map/test-preview.mjs
+          node tools/point-map/test-storage.mjs
+          node tools/point-map/test-radius.mjs
+          node tools/point-map/test-radius-extra.mjs
+          node tools/point-map/test-limits.mjs
+          node tools/point-map/test-focal-point.mjs
+          node tools/point-map/test-dimension-structure.mjs
+          node tools/point-map/test-control-outcomes.mjs
+          node tools/point-map/test-axis-consistency.mjs
+          node tools/point-map/test-placement.mjs
+          node tools/point-map/test-rayleigh.mjs
+          node tools/point-map/test-admission.mjs
+          node tools/point-map/test-azimuth.mjs
+          node tools/point-map/test-pca-convergence.mjs
 
       - name: corpus-auditor on real matrix (reproduce published effect)
         run: |
@@ -67,7 +617,29 @@ jobs:
           j = json.load(open('/tmp/descent.json'))
           assert j['cumulative_delta'] >= 0.0, j['cumulative_delta']
           assert 0.0 < j['final_coverage'] <= 1.0
+          assert j['gates']['pole_alignment']['fraction'] >= 0.80, j['gates']
           print(f"DESCENT_REAL_OK cum_delta=+{j['cumulative_delta']:.4f} coverage={j['final_coverage']:.4f}")
+          PY
+
+      - name: boltzmann-collapse on real empirical Phi(k) ladder (parity with lean-check)
+        run: |
+          python3 - <<'PY'
+          import json, math, subprocess
+          j = json.load(open('/tmp/per_row_coverage_v3.json'))
+          counts = [0] * 10
+          for r in j['rows']:
+              k = sum(int(x) for x in r['covered'])
+              counts[k] += 1
+          n = len(j['rows'])
+          phi = [-math.log((c + 0.5) / (n + 5.0)) for c in counts]
+          phi_arg = ','.join(f'{v:.8f}' for v in phi)
+          out = subprocess.check_output([
+              'python3', 'tools/boltzmann-collapse/collapse.py',
+              '--phi', phi_arg, '--d', '9', '--T', '0.041143', '--verify', '--json'
+          ], text=True)
+          res = json.loads(out)
+          assert res['verify']['passed'] is True and res['verify']['max_abs_err'] < 1e-9, res
+          print(f"BOLTZMANN_REAL_OK log_Z={res['log_Z']:.6f} max_abs_err={res['verify']['max_abs_err']:.2e}")
           PY
 
       - name: spectral-defocus real-corpus leg
@@ -82,7 +654,7 @@ jobs:
 
       - name: zernike-spectrum corpus admission (non-degenerate coordinates exist)
         run: |
-          python3 tools/zernike-spectrum/zernike.py --corpus --zip-path papers/is-this-x-2026-08-12-Final.zip --n-null 10 --out /tmp/zernike.json > /tmp/zernike.log
+          python3 tools/zernike-spectrum/zernike.py --corpus --zip-path papers/is-this-x-2026-08-12-Final.zip --n-null 30 --trades-per-row 20 --out /tmp/zernike.json > /tmp/zernike.log
           python3 - <<'PY'
           import json
           j = json.load(open('/tmp/zernike.json'))
@@ -98,8 +670,10 @@ jobs:
           import json
           j = json.load(open('/tmp/mapping.json'))
           assert j['csv_row_count'] == 2286, j['csv_row_count']
-          assert j['csv_unique_slugs'] == 2286, j['csv_unique_slugs']
-          print('MAPPING_REAL_OK 2286/2286 unique keyed rows')
+          assert j['distinct_slug_labels'] == 915, j['distinct_slug_labels']
+          assert j['ladder_stage_4_slug'] == 2169, j['ladder_stage_4_slug']
+          assert j['csv_keyed_rows'] == 2286, j['csv_keyed_rows']
+          print('MAPPING_REAL_OK 915 distinct slugs, 2169 at slug stage, 2286/2286 row_id-keyed rows')
           PY
 
       - name: corpus-sonometer level of the real corpus (above detectability floor)
@@ -116,7 +690,7 @@ jobs:
           rng = np.random.default_rng(20260822)
           L, mu, sd = corpus_level(M, draws=12, window=10, rng=rng)
           assert L > 15.6, f'{L:.2f} dBc is below the +15.6 dBc floor'
-          print(f'SONOMETER_REAL_OK L=+{L:.2f} dBc (floor +15.6, published +21.68)')
+          print(f'SONOMETER_REAL_OK L=+{L:.2f} dBc (floor +15.6, published +24.3 dBc @ 20N / +17.4 dBc @ 40N; z=12.13 -> +21.68 dBc)')
           PY
 
       - name: spectral-decomposer lens candidates from the real corpus
@@ -135,25 +709,65 @@ jobs:
           print(f"DECOMPOSER_REAL_OK {len(cands)} candidates, verdicts={[c['verdict'] for c in cands]}")
           PY
 
+      - name: phonon-dispersion real-corpus verification (parity with lean-check)
+        run: |
+          python3 tools/phonon-dispersion/phonon.py --selftest
+          python3 tools/phonon-dispersion/phonon.py --input papers/is-this-x-2026-08-12-Final.zip
+
+      - name: edge-standard selftest and fixture parity (parity with lean-check)
+        run: |
+          python3 tools/edge-standard/edge_standard.py --selftest
+          python3 tools/edge-standard/falsification/gen_v2.py --selftest
+          node --test tools/edge-standard/test_parity_edge.test.js tools/edge-standard/test_e2e_edge.test.js
+
+      - name: spectral-standard selftest, parity, centroid-walk, and falsification harness (parity with lean-check)
+        run: |
+          python3 tools/spectral-standard/spectral_standard.py --selftest
+          node --test tools/spectral-standard/test_parity_spectral.test.js
+          node --test tools/spectral-standard/test_centroid_parity.test.js
+          PYTHONPATH=tools/spectral-standard \
+            python3 tools/spectral-standard/falsification/harness_spectral.py \
+            --module tools/spectral-standard/falsification/harness_adapter.py \
+            --selftest
+
+      - name: lens-standard selftest, falsification harness, and fixture parity (parity with lean-check)
+        run: |
+          python3 tools/lens-standard/lens_standard.py --selftest
+          python3 tools/lens-standard/falsification/harness_lens.py --selftest
+          node --test tools/lens-standard/test_parity_lens.test.js
+
+      - name: visco-instruments fixture verification (parity with lean-check)
+        run: python3 tools/visco-instruments/verify_visco.py
+
+      - name: forecast-standard v3 selftest and recorded-corpus reproduction (parity with lean-check)
+        run: |
+          set -euo pipefail
+          python3 tools/forecast-standard/v3/forecast_ets.py --selftest > /tmp/forecast-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/forecast-selftest.json')); expected={'ok': False, 'failing_gates': ['G2'], 'unverified_gates': ['G5']}; assert d['summary'] == expected, 'forecast gate report drifted: %s' % d['summary']; print('FORECAST_SELFTEST_OK')"
+          python3 tools/forecast-standard/v3/harness_v3.py validate /tmp/forecast-validate.json \
+            --v1 tools/forecast-standard/forecast_ets.py \
+            --v2 tools/forecast-standard/v2/forecast_ets.py
+          python3 -c "import json; d=json.load(open('/tmp/forecast-validate.json')); bad=[k for k,v in d['versions'].items() if not v['reproduced']]; assert not bad, 'recorded counts not reproduced for: %s' % bad; print('FORECAST_VALIDATE_OK', {k: v['reproduced'] for k, v in d['versions'].items()})"
+
+      - name: timesfm-clairic-clef cascade verification (parity with lean-check)
+        run: |
+          set -euo pipefail
+          python3 tools/timesfm-clairic-clef/timesfm_clairic_clef.py --selftest > /tmp/timesfm-clairic-clef-selftest.json
+          python3 -c "import json; d=json.load(open('/tmp/timesfm-clairic-clef-selftest.json')); assert d['summary']['ok'] is True and d['summary']['passing_gates'] == 8 and d['summary']['total_gates'] == 8, 'timesfm-clairic-clef selftest failed: %s' % d['summary']; print('TIMESFM_CLAIRIC_CLEF_SELFTEST_OK (8/8 gates pass)')"
+
+      - name: life-supersolid B3/S23 instrument selftest and dynamic falsification harness (11 gates)
+        run: |
+          set -euo pipefail
+          python3 tools/life-supersolid/life_supersolid.py --selftest
+          python3 tools/life-supersolid/falsification/harness_life.py
+
   run-real-statements:
     runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: tautology-discerner over the real docs corpus
-        # Sources sentences from the repo's own docs/ dir at runtime --
-        # no committed expected-verdict file, so the test cannot be
-        # satisfied by the classifier agreeing with its own output.
-        # The assertions are falsifiable claims about the docs corpus:
-        #   - the 21 docs files yield a substantial prose corpus (>= 500 sentences)
-        #   - engineering docs are claim-heavy (Falsifiable share >= 30%)
-        #   - but not everything is a claim (share <= 90%; if the refuter
-        #     lexicon ever degenerates to matching any sentence, this trips)
-        #   - the docs contain no liar-paradoxes (zero Paradox verdicts)
-        #   - verdicts are deterministic across two passes
-        #   - the fixed-refuter-bag invariance (Lean sec. 8 analogue) holds
-        #     on a seeded sample of real sentences
+      - name: tautology-discerner over the real docs and Lean theorem corpus
         run: |
           python3 - <<'PY'
           import sys, re, glob, random
@@ -204,10 +818,11 @@ jobs:
           rng = random.Random(20260825)
           sample = rng.sample([s for s, v in zip(sentences, verdicts) if v == 'Falsifiable'], 5)
           for s in sample:
-              null = token_permutation_null(s, n_draws=100, seed=20260825)
-              assert null['invariant_under_fixed_refuter_bag'], f'invariance broke on: {s[:80]}'
+              null = token_permutation_null(s, n_draws=50, seed=20260825)
+              assert null['alpha_renaming_invariant'], f'alpha-renaming invariance broke on: {s[:80]}'
+              assert null['operator_mutation_sensitive'], f'operator-mutation sensitivity broke on: {s[:80]}'
 
           summary = ', '.join(f'{k}={v} ({v/n:.1%})' for k, v in sorted(dist.items()))
           print(f'DOCS_CORPUS_OK {len(files)} files, {n} sentences: {summary}')
-          print('INVARIANCE_OK fixed-refuter-bag held on 5 sampled real sentences')
+          print('STRUCTURAL_NULL_OK alpha-renaming invariance and operator-mutation sensitivity held on 5 sampled real sentences')
           PY

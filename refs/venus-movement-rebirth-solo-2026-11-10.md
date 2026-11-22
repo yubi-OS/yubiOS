@@ -27,7 +27,7 @@ Build order: `venus-charter-ser` -> `venus-pilot-tech`, `venus-pilot-fin`, `venu
 We reject both the historical 40-year "build one multi-billion-dollar circular city first" bottleneck and the post-2017 "Venus Arantas" centralized survivalist compound in Peru. We also reject the 12-month planning horizon suggested in conventional consulting outlines: a 12-month timeline before public launch invites committee drift, ideological bikeshedding, and zero shipped hardware or code.
 
 Instead, we execute **V6 (30-Day Proof-First Federated Cell Protocol + SER Hardware/Ledger Kit)**. In 30 days (Nov 10 to Dec 10, 2026), the movement launches as an executable protocol and live federation hub (`https://venus.systems-a.workers.dev`) backed by three bounded, falsifiable 30-day micro-pilots:
-1. **Technology (`VENUS-TECH-01`):** A $485 reproducible solar/LiFePO4 ARM64 micro-node running an immutable `dm-verity` Linux image unlocked by an owner-held YubiKey (FIDO2/PIV) and routing local telemetry over 915MHz LoRa/Meshtastic.
+1. **Technology (`VENUS-TECH-01`):** A $485 reproducible solar/LiFePO4 ARM64 micro-node running an immutable `dm-verity` Linux image unlocked by an owner-held U2F/HSM (FIDO2/PIV) and routing local telemetry over 915MHz LoRa/Meshtastic.
 2. **Finance (`VENUS-FIN-01`):** A 10-participant, zero-token, zero-interest mutual-credit clearing pool (capped at +/-500 ACU, strict $\sum B_i = 0$ conservation) with an audited Day-28 clean-exit settlement drill.
 3. **Resource Access & Mobility (`VENUS-RES-01`):** A 15-asset local hardware/compute commons measured by real utilization (UR, MWT, MTTR, CPUDI) paired with a lawful Visiting Builder Pass using pairwise OIDC/FIDO2 subject identifiers (`SD-JWT`) so members verify standing across chapters without a central surveillance database.
 
@@ -36,7 +36,7 @@ Every claim is bound by a public Claim Ledger (`yubi-OS/knowledge/docs/pr/04-cla
 ## Key Assumptions to Validate
 - [ ] **A1 (30-Day Compression Feasibility):** Three seed pilots can freeze Day-0 baselines by Day 7 and produce audit-grade telemetry + at least one documented failure log by Day 17 without requiring real-estate acquisition. *Test:* Gate 1 (Nov 16) and Gate 2 (Nov 26) binary artifact checks on `venus.systems-a.workers.dev/api/gates`.
 - [ ] **A2 (Zero-Token Mutual Credit Velocity):** A 10-member local clearing circle will execute >=25 bilateral exchanges (>=1,500 ACU volume) in 21 days without speculative tokens or fiat convertibility. *Test:* Hash-chained ledger verification on `/api/ledger/verify` and Day-28 clean-exit drill.
-- [ ] **A3 (SER Fork/Exit Credibility):** Grounding chapter governance in owner-held YubiKey multi-key quorum (2-of-3 routine, 3-of-5 constitutional) and CC0/copyleft BOMs eliminates the post-2017 leadership-capture failure mode. *Test:* Third-party replication + simulated chapter fork drill in Week 3.
+- [ ] **A3 (SER Fork/Exit Credibility):** Grounding chapter governance in owner-held U2F/HSM multi-key quorum (2-of-3 routine, 3-of-5 constitutional) and CC0/copyleft BOMs eliminates the post-2017 leadership-capture failure mode. *Test:* Third-party replication + simulated chapter fork drill in Week 3.
 
 ## MVP Scope (30-Day Window: Nov 10 to Dec 10, 2026)
 - Normative Founding Charter (`VENUS-SER-CHARTER-2026-V1`) + 5-Pillar to 10-Primitive mapping table.

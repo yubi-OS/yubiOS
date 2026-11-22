@@ -328,7 +328,7 @@ In yubiOS's 10-primitive model (`internal-big-picture`), composition sits alongs
 - **least-privilege**: which capability / sandbox / ProtectSystem directive gates this file's composition?
 - **segmentation**: which namespace / nspawn / cgroup boundary isolates this file's composition?
 - **supply chain**: which fork / upstream / SBOM edge traces this file's provenance?
-- **cryptographic identity**: which FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey edge authenticates this file's composition?
+- **cryptographic identity**: which FIDO2 / PIV / U2F/HSM / ssh-key / hmac-secret / passkey edge authenticates this file's composition?
 
 ## yubiOS-specific composition patterns
 

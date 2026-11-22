@@ -1,10 +1,11 @@
 {
  "meta": {
   "instrument": "GET /api/jev/corpus/visco/hysteresis?baseline_id=N",
-  "reference_source": "tools/visco-instruments/CONTRACTS.md section 2 hysteresis_rollup (fetched from yubi-OS/yubiOS main raw, 2026-10-07); corrected to the documented per-row rule after the frozen fixture falsified the initial implementation (amendments 2026-10-07T04:44Z)",
+  "reference_source": "tools/visco-instruments/CONTRACTS.md section 2 hysteresis_rollup (fetched from yubi-OS/yubiOS main raw, 2026-10-07); corrected to the documented per-row rule after the frozen fixture falsified the initial implementation (amendments 2026-10-07T04:44Z); re-run 2026-11-16 against the Python reference tools/visco-instruments/verify_visco.py hysteresis_rollup (pending rows skipped, branching ancestors counted once; duplicate_ids_throw input is now an executable duplicate-id array; pending_only expects active_rows 0 / skipped_rows 1)",
   "prereg": "preregistration.md",
   "amendments": "amendments.md",
-  "generated_utc": "2026-10-07T04:42:39.982Z"
+  "generated_utc": "2026-10-07T04:42:39.982Z",
+  "updated_utc": "2026-11-16"
  },
  "repo_fixtures_used": [
   "round3_recorded",
@@ -127,13 +128,13 @@
        "c3"
       ],
       "predicted": [
-       10,
-       8,
-       6
+       10.0,
+       8.0,
+       6.0
       ],
       "realized": [
-       2,
-       -1,
+       2.0,
+       -1.0,
        0.5
       ],
       "sum_abs": 22.5,
@@ -216,11 +217,11 @@
        "m2"
       ],
       "predicted": [
-       4,
-       3
+       4.0,
+       3.0
       ],
       "realized": [
-       1,
+       1.0,
        -0.5
       ],
       "sum_abs": 6.5,
@@ -231,7 +232,7 @@
        "m3"
       ],
       "predicted": [
-       2
+       2.0
       ],
       "realized": [
        0.25
@@ -251,7 +252,7 @@
   },
   {
    "name": "pending_only",
-   "note": "pending-only ledger: no loops, zeros (amendment interpretation)",
+   "note": "pending-only ledger (prediction with realized_delta null): the row is skipped -> no loops, zeros, active_rows 0, skipped_rows 1",
    "input": [
     {
      "id": "p1",
@@ -262,15 +263,16 @@
    ],
    "expected": {
     "loops": [],
-    "active_rows": 1,
+    "active_rows": 0,
     "total_sum_abs": 0,
-    "n_cycles": 0
+    "n_cycles": 0,
+    "skipped_rows": 1
    },
    "computed": {
     "loops": [],
-    "active_rows": 1,
+    "active_rows": 0,
     "total_sum_abs": 0,
-    "total_mean_per_cycle": 0,
+    "total_mean_per_cycle": 0.0,
     "n_cycles": 0,
     "skipped_rows": 1
    },
@@ -323,7 +325,7 @@
        "q2"
       ],
       "predicted": [
-       7
+       7.0
       ],
       "realized": [
        -0.4
@@ -397,20 +399,20 @@
        "a"
       ],
       "predicted": [
-       5
+       5.0
       ],
       "realized": [
-       1
+       1.0
       ],
-      "sum_abs": 4,
-      "mean_abs": 4
+      "sum_abs": 4.0,
+      "mean_abs": 4.0
      },
      {
       "chain_ids": [
        "b"
       ],
       "predicted": [
-       2
+       2.0
       ],
       "realized": [
        0.5
@@ -464,18 +466,18 @@
        "u1"
       ],
       "predicted": [
-       6
+       6.0
       ],
       "realized": [
-       2
+       2.0
       ],
-      "sum_abs": 4,
-      "mean_abs": 4
+      "sum_abs": 4.0,
+      "mean_abs": 4.0
      }
     ],
     "active_rows": 1,
-    "total_sum_abs": 4,
-    "total_mean_per_cycle": 4,
+    "total_sum_abs": 4.0,
+    "total_mean_per_cycle": 4.0,
     "n_cycles": 1,
     "skipped_rows": 0
    },
@@ -485,11 +487,22 @@
   {
    "name": "duplicate_ids_throw",
    "note": "contract: duplicate ids -> throw",
-   "input": "two rows with id 1",
+   "input": [
+    {
+     "id": 1,
+     "predicted_delta": 1.0,
+     "realized_delta": 0.5
+    },
+    {
+     "id": 1,
+     "predicted_delta": 2.0,
+     "realized_delta": 1.0
+    }
+   ],
    "expected": {
     "throws": true
    },
-   "threw": "duplicate ids",
+   "threw": "duplicate ledger row id: 1",
    "pass": true
   },
   {
@@ -507,7 +520,7 @@
     "loops": [],
     "active_rows": 0,
     "total_sum_abs": 0,
-    "total_mean_per_cycle": 0,
+    "total_mean_per_cycle": 0.0,
     "n_cycles": 0,
     "skipped_rows": 0
    },

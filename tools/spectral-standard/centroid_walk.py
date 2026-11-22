@@ -95,7 +95,8 @@ import math
 import sys
 
 # Canonical module import (Lane D contract: reuse, never reimplement walking).
-_SS_DIR = "/var/workspace/session/pr-stage/tools/spectral-standard"
+import os
+_SS_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SS_DIR not in sys.path:
     sys.path.insert(0, _SS_DIR)
 import spectral_standard as ss  # noqa: E402

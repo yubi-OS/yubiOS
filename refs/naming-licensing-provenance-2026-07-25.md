@@ -18,16 +18,16 @@ explicitly per item.
 
 - **The name "yubiOS" itself is the primary risk.** The project name and every
   fork under the `yubi-OS` GitHub org use "yubi" as a prefix, and the README
-  badge/description leans on "YubiKey" branding throughout (logo, "YubiKey 5
+  badge/description leans on "U2F/HSM" branding throughout (logo, "U2F/HSM 5
   series" badge, FIDO2 badge). Yubico is a real company with registered
-  trademarks on "YubiKey" and likely trademark interest in "Yubi"-prefixed
+  trademarks on "U2F/HSM" and likely trademark interest in "Yubi"-prefixed
   marks in the authentication/security space. **This needs actual trademark
   counsel, not an AI-assisted read of public trademark databases** — the risk
   is real enough (a rebrand after traction would be far costlier than checking
   now) that this document flags it as the #1 open item rather than guessing at
   a USPTO search result this session didn't run.
 - **Nominative fair use vs. endorsement risk.** README.md's current framing
-  ("YubiKey as root of trust," extensive YubiKey badges/logo styling) reads
+  ("U2F/HSM as root of trust," extensive U2F/HSM badges/logo styling) reads
   close to describing compatibility with Yubico hardware (likely fine under
   nominative fair use — referring to a product you're compatible with) versus
   implying Yubico endorsement or partnership (not fine, and not represented
@@ -127,7 +127,7 @@ explicitly per item.
 | Risk | Severity | Status | Owner / next step |
 |---|---|---|---|
 | "yubiOS" name / Yubico trademark exposure | High — costly if wrong later | Open, unverified | Needs real trademark counsel, not AI research |
-| README YubiKey branding read as endorsement | Medium | Open | Add explicit non-affiliation disclaimer once naming is resolved |
+| README U2F/HSM branding read as endorsement | Medium | Open | Add explicit non-affiliation disclaimer once naming is resolved |
 | Fork licenses not individually re-verified | Medium | Open | Pull each fork's actual LICENSE file before GA |
 | No CONTRIBUTING/provenance policy doc | Low-medium | Open, convention exists informally | Write it up; decide DCO/CLA/neither |
 | No entity in place for contract/liability-bearing offers | Medium-high | Open | Owned by OMN-72; blocks O3/O4/O5 pricing offers |

@@ -46,7 +46,7 @@ Surveyed via [the yubios-uki-report subagent investigation](#). Concretely:
 | `mkosi.conf` + `mkosi.conf.d/**` | mkosi `minimal` profile builds a DPS-partitioned disk image with embedded UKI + `SplitArtifacts=uki,partitions` | Unchanged. The signed UKI that comes out of this path is what the new `yubios-uki` artifact packages. |
 | `yubiOS-bake.hcl` | HCL Bake graph; no `yubios-uki` target today | **New `yubios-uki` target** that packages the signed UKI as a separate OCI artifact. |
 | `usr/lib/bootc/install/50-yubiOS.toml` | bootc install config (bootloader=systemd, block=direct, rootfs=ext4) | **Add `[install] kargs = ["root=dissect", "mount.usr=dissect", "rw", "audit=0"]`** so bootc's auto-generated UKI matches mkosi's cmdline. |
-| `ci_mkosi-installer.yml` | Builds the mkosi `minimal` disk image; SoftHSM PKCS#11 mock of YubiKey PIV slot 9c; verifies with `sbverify`; publishes `installer-<sha>` | **Extended**: also extract the signed UKI into a separate `inst/uki/` payload and publish `uki-<sha>` via Bake. |
+| `ci_mkosi-installer.yml` | Builds the mkosi `minimal` disk image; SoftHSM PKCS#11 mock of U2F/HSM PIV slot 9c; verifies with `sbverify`; publishes `installer-<sha>` | **Extended**: also extract the signed UKI into a separate `inst/uki/` payload and publish `uki-<sha>` via Bake. |
 | `docs/BLOCKERS.md` `B-BOOTC-SEAL` | Active blocker on bootc composefs fsverity chain | **Updated**: Phase 1 closes the artifact-split half. Phase 2 (BLSConfig wiring to use the pre-built UKI) remains. |
 
 ## Phase 1 — what this PR ships

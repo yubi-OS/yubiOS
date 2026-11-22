@@ -1,8 +1,8 @@
 {
   "schema": "wayfinder-scope/1",
   "lean_file": "papers/data/lean/FocalBounds.lean",
-  "toolchain": "leanprover/lean4:v4.33.0",
-  "dependencies": "core Lean 4 only (no mathlib, no Batteries, no external imports)",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "dependencies": "Lean 4.35.0 + Mathlib v4.35.0 (rev 56a005855ea1)",
   "generated_for_branch": "lean-check-focal (local, unpushed; base commit 7d095ae2)",
   "gate_reuse": "Checked by the existing, unmodified papers/data/lean/verify_wayfinder_axioms.py, invoked with --axioms <captured kernel output> --manifest papers/data/lean/focal-scope.json, and by the unmodified check_forbidden_tokens.py, check_lean_axioms.py (enumerate mode, --require-coverage) and leanchecker --fresh replay. No existing gate, test, or recorded negative was changed or relaxed to admit this file.",
   "permitted_axioms": [

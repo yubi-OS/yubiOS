@@ -1,95 +1,96 @@
 #!/bin/bash
-# SPDX-License-Identifier: LGPL-2.1-or-later
-# yubiOS A/B /usr (usr-a + usr-b) + LUKS2 / 3-way merge helper.
+# SPDX-License-Identifier: GPL-2.0-only
+# yubiOS LVM Activation, /usr A/B 3-Way OverlayFS Mount, and yubios-root Mount
 #
-# Architecture (docs/SPEC.md s4.2-4.3, ADR-003/006/007/010/012/013, 0pointer-mastery):
-#   - /usr A (LABEL=yubiOS_usr_a) and /usr B (LABEL=yubiOS_usr_b) are the two
-#     read-only A/B OS image slots.
-#   - /dev/mapper/yubios-root (unlocked from LABEL=yubiOS-luks via YubiKey FIDO2
-#     in dracut initramfs) holds the persistent encrypted state:
-#       * /etc (reconciled via 3-way merge of old-slot /usr/etc base, new-slot
-#         /usr/etc target, and local /etc modifications),
-#       * /var (persistent state across A/B switches),
-#       * /var/lib/yubiOS/ab-merge/ (active slot tracker + baseline snapshots).
+# Hierarchy:
+#   - /dev/mapper/crypt (LUKS2)
+#     - LVM VG 'lvm':
+#       * /dev/lvm/usr_a       (1%VG)  : mounted at /run/yubiOS/ab/usr-a (rw)
+#       * /dev/lvm/usr_b       (1%VG)  : mounted at /run/yubiOS/ab/usr-b (rw)
+#       * /dev/lvm/yubios-root (96%VG) : mounted at /var/home (rw) for systemd-homed
+#       * 2%VG unallocated at end
+#
+# Mounts a 3-way upper/lower/work OverlayFS directly onto /usr (NOT on /):
+#   - lowerdir : /run/yubiOS/ab/usr-b/lower:/run/yubiOS/ab/usr-base
+#   - upperdir : /run/yubiOS/ab/usr-a/upper
+#   - workdir  : /run/yubiOS/ab/usr-a/work
+
 set -euo pipefail
 
-AB_ROOT="/run/yubiOS/ab"
-LUKS_MAPPER="/dev/mapper/yubios-root"
-LUKS_MNT="/run/yubiOS/luks-root"
-
-mkdir -p "$AB_ROOT/usr-a" "$AB_ROOT/usr-b" "$LUKS_MNT"
-
-if [ -b /dev/disk/by-label/yubiOS_usr_a ] && ! mountpoint -q "$AB_ROOT/usr-a" 2>/dev/null; then
-  mount -o ro /dev/disk/by-label/yubiOS_usr_a "$AB_ROOT/usr-a" 2>/dev/null || true
-fi
-if [ -b /dev/disk/by-label/yubiOS_usr_b ] && ! mountpoint -q "$AB_ROOT/usr-b" 2>/dev/null; then
-  mount -o ro /dev/disk/by-label/yubiOS_usr_b "$AB_ROOT/usr-b" 2>/dev/null || true
+if [ ! -e /dev/mapper/crypt ]; then
+  exit 0
 fi
 
-if [ ! -b "$LUKS_MAPPER" ] && [ -b /dev/disk/by-label/yubiOS-luks ]; then
-  /usr/lib/systemd/systemd-cryptsetup attach yubios-root /dev/disk/by-label/yubiOS-luks none fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes || true
-fi
+USR_A="/dev/lvm/usr_a"
+USR_B="/dev/lvm/usr_b"
+YUBIOS_ROOT_LV="/dev/lvm/yubios-root"
 
-if [ -b "$LUKS_MAPPER" ]; then
-  if ! mountpoint -q "$LUKS_MNT" 2>/dev/null; then
-    mount "$LUKS_MAPPER" "$LUKS_MNT" 2>/dev/null || true
+for _ in $(seq 1 15); do
+  lvm vgchange -ay lvm >/dev/null 2>&1 || true
+  udevadm settle --timeout=5 >/dev/null 2>&1 || true
+  if [ -b "$USR_A" ] && [ -b "$USR_B" ]; then
+    break
   fi
-  if mountpoint -q "$LUKS_MNT" 2>/dev/null; then
-    mkdir -p "$LUKS_MNT/etc" "$LUKS_MNT/var" "$LUKS_MNT/var/lib/yubiOS/ab-merge/etc-base" "$LUKS_MNT/var/lib/yubiOS/ab-merge/conflicts"
-    ACTIVE_SLOT="a"
-    if [ -f "$LUKS_MNT/var/lib/yubiOS/ab-merge/active-slot" ]; then
-      ACTIVE_SLOT="$(cat "$LUKS_MNT/var/lib/yubiOS/ab-merge/active-slot")"
-    fi
-    VENDOR_ETC="/usr/etc"
-    [ -d "$VENDOR_ETC" ] || VENDOR_ETC="/etc"
-    if [ "$ACTIVE_SLOT" = "b" ] && [ -d "$AB_ROOT/usr-b/etc" ]; then
-      VENDOR_ETC="$AB_ROOT/usr-b/etc"
-    elif [ -d "$AB_ROOT/usr-a/etc" ]; then
-      VENDOR_ETC="$AB_ROOT/usr-a/etc"
-    fi
-    BASE_ETC="$LUKS_MNT/var/lib/yubiOS/ab-merge/etc-base"
-    LOCAL_ETC="$LUKS_MNT/etc"
+  sleep 1
+done
 
-    python3 - "$BASE_ETC" "$VENDOR_ETC" "$LOCAL_ETC" "$LUKS_MNT/var/lib/yubiOS/ab-merge/conflicts" <<'PYEOF'
-import os, sys, shutil, filecmp, subprocess
+if [ ! -b "$USR_A" ] || [ ! -b "$USR_B" ]; then
+  exit 0
+fi
 
-base_dir, new_dir, local_dir, conflict_dir = sys.argv[1:5]
+mkdir -p /run/yubiOS/ab/usr-a /run/yubiOS/ab/usr-b /run/yubiOS/ab/usr-base
 
-if not os.listdir(local_dir):
-    shutil.copytree(new_dir, local_dir, symlinks=True, dirs_exist_ok=True)
-if not os.listdir(base_dir):
-    shutil.copytree(new_dir, base_dir, symlinks=True, dirs_exist_ok=True)
+if ! mountpoint -q /run/yubiOS/ab/usr-a; then
+  mount -o rw "$USR_A" /run/yubiOS/ab/usr-a 2>/dev/null || exit 0
+fi
 
-for root, dirs, files in os.walk(new_dir):
-    rel = os.path.relpath(root, new_dir)
-    b_root = os.path.join(base_dir, rel) if rel != "." else base_dir
-    l_root = os.path.join(local_dir, rel) if rel != "." else local_dir
-    os.makedirs(l_root, exist_ok=True)
-    for fn in files:
-        n_path = os.path.join(root, fn)
-        b_path = os.path.join(b_root, fn)
-        l_path = os.path.join(l_root, fn)
-        if os.path.islink(n_path):
-            if not os.path.lexists(l_path):
-                os.symlink(os.readlink(n_path), l_path)
-            continue
-        if not os.path.exists(l_path):
-            shutil.copy2(n_path, l_path)
-        elif os.path.exists(b_path) and not os.path.islink(l_path):
-            if filecmp.cmp(b_path, l_path, shallow=False):
-                if not filecmp.cmp(b_path, n_path, shallow=False):
-                    shutil.copy2(n_path, l_path)
-            elif not filecmp.cmp(b_path, n_path, shallow=False) and not filecmp.cmp(l_path, n_path, shallow=False):
-                r = subprocess.run(["diff3", "-m", l_path, b_path, n_path], capture_output=True)
-                if r.returncode == 0:
-                    with open(l_path, "wb") as wf:
-                        wf.write(r.stdout)
-                else:
-                    c_out = os.path.join(conflict_dir, rel.replace("/", "_") + "_" + fn)
-                    shutil.copy2(l_path, c_out)
+if ! mountpoint -q /run/yubiOS/ab/usr-b; then
+  mount -o rw "$USR_B" /run/yubiOS/ab/usr-b 2>/dev/null || exit 0
+fi
 
-shutil.rmtree(base_dir, ignore_errors=True)
-shutil.copytree(new_dir, base_dir, symlinks=True, dirs_exist_ok=True)
-PYEOF
+mkdir -p /run/yubiOS/ab/usr-a/upper /run/yubiOS/ab/usr-a/lower /run/yubiOS/ab/usr-a/work
+mkdir -p /run/yubiOS/ab/usr-b/upper /run/yubiOS/ab/usr-b/lower /run/yubiOS/ab/usr-b/work
+
+if [ "$(findmnt -n -o FSTYPE /usr 2>/dev/null || true)" != "overlay" ]; then
+  if ! mountpoint -q /run/yubiOS/ab/usr-base; then
+    mount --bind /usr /run/yubiOS/ab/usr-base
+    mount -o remount,ro,bind /run/yubiOS/ab/usr-base 2>/dev/null || true
   fi
+  mount -t overlay overlay     -o "lowerdir=/run/yubiOS/ab/usr-b/lower:/run/yubiOS/ab/usr-base,upperdir=/run/yubiOS/ab/usr-a/upper,workdir=/run/yubiOS/ab/usr-a/work"     /usr
+fi
+
+if [ -b "$YUBIOS_ROOT_LV" ]; then
+  mkdir -p /var/home
+  if ! mountpoint -q /var/home; then
+    mount "$YUBIOS_ROOT_LV" /var/home 2>/dev/null || true
+  fi
+  if [ ! -e /home ] && [ ! -L /home ]; then
+    ln -s var/home /home
+  fi
+fi
+
+# Ensure authselect-apply-changes cannot overwrite yubiOS PAM system-auth/password-auth
+# (which otherwise strips pam_systemd_home.so from login on tty1/kmsconvt and causes
+# user@<uid>.service's (sd-pam) helper to broadcast the U2F/HSM PIN prompt to serial wall).
+if [ -f /usr/lib/pam.d/yubiOS-system-auth ]; then
+  for pam_target in /etc/pam.d/system-auth /etc/pam.d/password-auth; do
+    if [ -L "$pam_target" ] || ! grep -q "pam_systemd_home.so" "$pam_target" 2>/dev/null; then
+      rm -f "$pam_target"
+      cp /usr/lib/pam.d/yubiOS-system-auth "$pam_target"
+    fi
+  done
+fi
+
+# Ensure kernel-install hooks in /etc/kernel/install.d stay synced to yubiOS's
+# same-FS dracut + U2F/HSM UKI re-sign + local composefs OCI repository hooks (ADR-034),
+# so a package upgrade of rpm-ostree or systemd-udev in the /usr overlay cannot
+# restore the cross-device EXDEV 05-rpmostree.install scriptlet.
+if [ -d /usr/lib/kernel/install.d ]; then
+  mkdir -p /etc/kernel/install.d /var/lib/yubiOS/oci
+  for khook in 05-rpmostree.install 95-yubios-uki-resign.install; do
+    if [ -f "/usr/lib/kernel/install.d/$khook" ]; then
+      cp -f "/usr/lib/kernel/install.d/$khook" "/etc/kernel/install.d/$khook"
+      chmod 0755 "/etc/kernel/install.d/$khook"
+    fi
+  done
 fi

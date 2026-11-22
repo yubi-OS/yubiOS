@@ -1,6 +1,6 @@
 ---
 name: bcvk-virtualization
-description: "Uses bcvk (bootc virtualization kit) for ephemeral VM testing, disk image creation, and hardware-in-the-loop testing of yubiOS. Use when running a bootc image as a VM, flashing to disk, testing FIDO2 enrollment in a VM, adding YubiKey USB passthrough to QEMU, or writing bcvk-based CI workflows. Triggers on: bcvk, ephemeral VM, bootc VM, bootc install, native-to-disk, virtiofs, QEMU YubiKey."
+description: "Uses bcvk (bootc virtualization kit) for ephemeral VM testing, disk image creation, and hardware-in-the-loop testing of yubiOS. Use when running a bootc image as a VM, flashing to disk, testing FIDO2 enrollment in a VM, adding U2F/HSM USB passthrough to QEMU, or writing bcvk-based CI workflows. Triggers on: bcvk, ephemeral VM, bootc VM, bootc install, native-to-disk, virtiofs, QEMU U2F/HSM."
 ---
 
 # bcvk Virtualization
@@ -104,12 +104,12 @@ bcvk libvirt start yubiOS-dev
 
 ---
 
-## YubiKey USB Passthrough (FIDO2 in VMs)
+## U2F/HSM USB Passthrough (FIDO2 in VMs)
 
 QEMU supports FIDO2/U2F passthrough via the `u2f-passthru` device. bcvk doesn't wire this automatically — pass extra QEMU args.
 
 ```bash
-# Find YubiKey hidraw device
+# Find U2F/HSM hidraw device
 ls /dev/hidraw*
 udevadm info /dev/hidraw0 | grep -i yubico
 
@@ -124,7 +124,7 @@ For libvirt, add a USB hostdev to the domain XML:
 <hostdev mode='subsystem' type='usb' managed='yes'>
   <source>
     <vendor id='0x1050'/>   <!-- Yubico -->
-    <product id='0x0407'/>  <!-- YubiKey 5 -->
+    <product id='0x0407'/>  <!-- U2F/HSM 5 -->
   </source>
 </hostdev>
 ```

@@ -88,7 +88,7 @@ QemuHeadless=yes
 
 ---
 
-## PIV/PKCS11 UKI Signing (yubiOS YubiKey path)
+## PIV/PKCS11 UKI Signing (yubiOS U2F/HSM path)
 
 mkosi v26+ supports signing via PKCS11 through systemd-sbsign's engine/provider backends.
 
@@ -101,9 +101,9 @@ SecureBootKeySource=engine:pkcs11
 SecureBootCertificate=mkosi.secure-boot.crt
 ```
 
-For YubiKey PIV slot 9c:
+For U2F/HSM PIV slot 9c:
 ```bash
-# Init key on YubiKey (PIV slot 9c = signing)
+# Init key on U2F/HSM (PIV slot 9c = signing)
 yubico-piv-tool -a generate -s 9c -A ECCP256
 yubico-piv-tool -a selfsign-certificate -s 9c -S "/CN=yubiOS Secure Boot/"
 yubico-piv-tool -a import-certificate -s 9c -i cert.pem
@@ -285,7 +285,7 @@ Coverage note (2026-09-17): the yubiOS primitive-coverage template paragraph for
 
 - cycle 5 RSI**: closed `declarative policy` primitive gap (corpus-wide count 27→28/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
 
-**In-repo touchpoints** — sections this skill owns or extends: Overview, Key Commands, mkosi.conf Reference, PIV/PKCS11 UKI Signing (yubiOS YubiKey path).
+**In-repo touchpoints** — sections this skill owns or extends: Overview, Key Commands, mkosi.conf Reference, PIV/PKCS11 UKI Signing (yubiOS U2F/HSM path).
 
 **Boundary case** — when the request only names a trigger without the artifact it acts on, route to the owning surface instead of improvising here.
 ## Guidelines

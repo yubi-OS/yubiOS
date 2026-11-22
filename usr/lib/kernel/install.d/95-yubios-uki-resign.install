@@ -1,0 +1,28 @@
+#!/bin/bash
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# /usr/lib/kernel/install.d/95-yubios-uki-resign.install (ADR-034, OMN-191)
+#
+# Late kernel-install hook for both dnf/rpm and rpm-ostree kernel updates.
+# Ensures that after all initramfs/UKI generators have run, the target kernel's
+# UKI is assembled, signed with the attached U2F/HSM PIV slot 9a db key,
+# committed to the local composefs OCI repository (/var/lib/yubiOS/oci), and
+# deployed to the ESP (/EFI/Linux/bootc/bootc_composefs-<digest>.efi).
+
+set -euo pipefail
+
+COMMAND="${1:-}"
+KERNEL_VERSION="${2:-}"
+KERNEL_IMAGE="${4:-}"
+
+case "$COMMAND" in
+  add)
+    SYNC_SH="${YUBIOS_UKI_SYNC_SH:-/usr/lib/yubiOS/uki/uki-sync-and-sign.sh}"
+    if [ -x "$SYNC_SH" ]; then
+      "$SYNC_SH" --reason "95-yubios-uki-resign:${KERNEL_VERSION}" --kver "$KERNEL_VERSION" --kernel-image "$KERNEL_IMAGE"
+    fi
+    ;;
+  *)
+    ;;
+esac
+
+exit 0

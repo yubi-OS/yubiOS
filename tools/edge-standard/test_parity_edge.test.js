@@ -20,6 +20,7 @@ import {
   standardize,
   measure,
 } from './jev-edge-standard.js';
+import { scaleCoherence, COHERENCE_SOLID_INK, COHERENCE_NEAR_EMPTY_INK } from './jev-taste-math.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const pack = JSON.parse(readFileSync(join(HERE, 'edge_fixtures.json'), 'utf8'));
@@ -93,4 +94,64 @@ test('pack normalization pair: f1_disk vs f2_disk_dim', () => {
   assert.ok(
     Math.abs(f1.expected.achieved_coverage - f2.expected.achieved_coverage) <= TOL
   );
+});
+
+// ---------- ED-3: taste-math T11 degenerate-input guards (the deployed v386 behavior) ----------
+// scaleCoherence is only defined when the box-count series varies across the scale
+// window. Degenerate inputs must return coherence null + a reason, never a "satisfied" 1.
+
+function blankGrid(n) {
+  return Array.from({ length: n }, () => new Array(n).fill(0));
+}
+
+test('T11 degenerate input: a single dot is near_empty -> coherence null (was scored 1 before T11)', () => {
+  const g = blankGrid(256);
+  g[100][100] = 1;
+  const r = scaleCoherence(g);
+  assert.equal(r.coherence, null);
+  assert.equal(r.degenerate, true);
+  assert.equal(r.reason, 'near_empty');
+  assert.equal(r.d_low, null);
+  assert.equal(r.d_high, null);
+});
+
+test('T11 degenerate input: a solid field is solid_field -> coherence null (was scored 0.763 before T11)', () => {
+  const g = Array.from({ length: 256 }, () => new Array(256).fill(1));
+  const r = scaleCoherence(g);
+  assert.equal(r.coherence, null);
+  assert.equal(r.degenerate, true);
+  assert.equal(r.reason, 'solid_field');
+});
+
+test('T11 degenerate input: all-zero grid still throws EMPTY_EDGE_MAP (a fail, not a null)', () => {
+  assert.throws(() => scaleCoherence(blankGrid(64)), (e) => e.message === 'empty edge map' && e.code === 'EMPTY_EDGE_MAP');
+});
+
+test('T11 thresholds: near-empty/solid cut-offs are the documented 1% / 99% of the grid', () => {
+  assert.equal(COHERENCE_NEAR_EMPTY_INK, 0.01);
+  assert.equal(COHERENCE_SOLID_INK, 0.99);
+  const n = 256;
+  const total = n * n;
+  // just above 1% ink (a filled block) is NOT flagged near_empty / solid_field
+  const g = blankGrid(n);
+  const side = Math.ceil(Math.sqrt(total * 0.02));
+  for (let y = 0; y < side; y++) for (let x = 0; x < side; x++) g[y][x] = 1;
+  const r = scaleCoherence(g);
+  assert.notEqual(r.reason, 'near_empty');
+  assert.notEqual(r.reason, 'solid_field');
+});
+
+test('T11 non-degenerate: the traced fixture grids keep a numeric coherence in [0,1]', () => {
+  let checked = 0;
+  for (const fx of pack.fixtures) {
+    const gray = new Uint8Array(Buffer.from(fx.gray_b64, 'base64'));
+    const st = standardize(gray, fx.w, fx.h);
+    if (!st || !st.grid) continue;
+    const r = scaleCoherence(st.grid);
+    assert.notEqual(r.degenerate, true, fx.id + ' is a legitimate traced boundary grid');
+    assert.equal(typeof r.coherence, 'number', fx.id + ' coherence numeric');
+    assert.ok(r.coherence >= 0 && r.coherence <= 1, fx.id + ' coherence in [0,1]: ' + r.coherence);
+    checked++;
+  }
+  assert.ok(checked >= 4, 'checked ' + checked + ' fixture grids');
 });

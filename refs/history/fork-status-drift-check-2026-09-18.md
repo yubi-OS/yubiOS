@@ -15,7 +15,7 @@ the GitHub API on `yubi-OS/*` forks and their upstreams.
 ## What this record does not claim
 
 The doc's central claims (mkosi v27 PKCS#11 signing parity with yubiOS's sbsign path; bcvk
-upstream still lacking YubiKey USB passthrough) were not re-derived from upstream sources this
+upstream still lacking U2F/HSM USB passthrough) were not re-derived from upstream sources this
 pass — only the fork HEAD positions were read. The bcvk fork's 2026-08-24 advance is a real
 unverified delta: if it absorbed upstream work, the org's patch series may need a rebase check;
 if it is org-side work, the fork is carrying it locally as before. Either way the fork-status

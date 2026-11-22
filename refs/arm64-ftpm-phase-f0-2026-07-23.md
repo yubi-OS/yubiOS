@@ -1,6 +1,6 @@
 _Refreshed: 2026-07-23 (renamed from refs/arm64-ftpm-phase-f0.md, no date suffix previously)_
 
-Status check 2026-07-23: Phase F0 (QEMU bring-up) work is superseded in practice by the live ARM64 Phase F integration described in TODO.md's "ARM64 Phase F — fork-CI + integration" section — all component CIs (C1-C6, R1, V1) are green, and INT integration CI is fully restored per the 2026-07-07 root-cause fix (CFG_STMM_VOLATILE_STORAGE). This file's original Phase F0 QEMU-only scope has been absorbed into that broader, now-working pipeline. Kept as historical design rationale for PCR conventions and the fTPM-vs-YubiKey trust split, which remain accurate and unchanged.
+Status check 2026-07-23: Phase F0 (QEMU bring-up) work is superseded in practice by the live ARM64 Phase F integration described in TODO.md's "ARM64 Phase F — fork-CI + integration" section — all component CIs (C1-C6, R1, V1) are green, and INT integration CI is fully restored per the 2026-07-07 root-cause fix (CFG_STMM_VOLATILE_STORAGE). This file's original Phase F0 QEMU-only scope has been absorbed into that broader, now-working pipeline. Kept as historical design rationale for PCR conventions and the fTPM-vs-U2F/HSM trust split, which remain accurate and unchanged.
 
 # Phase F0: QEMU ARM64 bring-up (ADR-018)
 
@@ -45,9 +45,9 @@ The fTPM is built as an Early TA so U-Boot and Linux can use TPM services before
 
 `build-arm64-ftpm-qemu.sh` boots QEMU `virt`; inside the guest, `verify-tpm0-pcr-extend.sh` prints `PASS`. This remains human-gated until the firmware path is stable enough to promote.
 
-## fTPM vs YubiKey
+## fTPM vs U2F/HSM
 
-The fTPM is for platform integrity, measured boot, and attestation. The YubiKey remains the disk-unlock root through FIDO2 hmac-secret and LUKS2 (ADR-003). If the fTPM becomes the sole unlock gate, yubiOS has recreated the on-device trust anchor it exists to avoid.
+The fTPM is for platform integrity, measured boot, and attestation. The U2F/HSM remains the disk-unlock root through FIDO2 hmac-secret and LUKS2 (ADR-003). If the fTPM becomes the sole unlock gate, yubiOS has recreated the on-device trust anchor it exists to avoid.
 
 
 ## Trust chain coverage

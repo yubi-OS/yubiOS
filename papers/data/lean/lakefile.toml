@@ -1,0 +1,32 @@
+name = "YubiOSLean"
+version = "0.1.0"
+defaultTargets = ["CurvedCorpus", "WayfinderBounds", "RadiusBounds", "RayleighBounds", "AzimuthBounds", "FocalBounds", "FlowBounds", "LifeBounds"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.35.0"
+
+[[lean_lib]]
+name = "CurvedCorpus"
+
+[[lean_lib]]
+name = "WayfinderBounds"
+
+[[lean_lib]]
+name = "RadiusBounds"
+
+[[lean_lib]]
+name = "RayleighBounds"
+
+[[lean_lib]]
+name = "AzimuthBounds"
+
+[[lean_lib]]
+name = "FocalBounds"
+
+[[lean_lib]]
+name = "FlowBounds"
+
+[[lean_lib]]
+name = "LifeBounds"

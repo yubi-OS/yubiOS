@@ -9,7 +9,7 @@ name: yubiOS CI
 # DEPLOY PRE-REQ: the `container.image` below must be the dhi.io/debian-base
 # *manifest-list (index)* digest, NOT a single-arch digest. A single-arch (amd64)
 # digest will FAIL to pull on ARM64 runners. Run the updated fetch-dhi-manifest
-# workflow (it now requests the OCI index media type) to get f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013,
+# workflow (it now requests the OCI index media type) to get 1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d,
 # then replace the placeholder below. The index auto-resolves per runner arch.
 
 on:
@@ -87,7 +87,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev INDEX (manifest list)
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev INDEX (manifest list)
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -124,7 +124,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -158,7 +158,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -186,18 +186,49 @@ jobs:
             buildx_arch: linux-arm64
     runs-on: ${{ matrix.runner }}
     container:
-      options: --privileged
+      options: --privileged --pid=host --ipc=host --security-opt label=type:unconfined_t -v /dev:/dev
       volumes:
         - /mnt:/mnt
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
-          # GitHub ubuntu-26.04 images ship git. Only touch apt when it is missing:
-          # the apt solver fails on the runner's perl state (exit 100).
+          if [ "$(uname -m)" = "aarch64" ] && [ -e /proc/1/ns/net ] && ! apt-get update -qq 2>/dev/null; then
+            if [ -f /proc/1/root/run/systemd/resolve/resolv.conf ]; then
+              cp -f /proc/1/root/run/systemd/resolve/resolv.conf /etc/resolv.conf 2>/dev/null || true
+            fi
+            nsenter --net=/proc/1/ns/net -- apt-get update -qq
+            nsenter --net=/proc/1/ns/net -- apt-get install -y -qq --no-install-recommends \
+              git curl iproute2 iptables mount nftables passwd procps util-linux \
+              uidmap slirp4netns fuse-overlayfs
+            SELF_NET="$(readlink /proc/self/ns/net)"
+            CONT_PID="$$"
+            for p in /proc/[0-9]*; do
+              pid="${p#/proc/}"
+              if [ "$(cat "$p/comm" 2>/dev/null || true)" = "tail" ] && [ "$(readlink "$p/ns/net" 2>/dev/null || true)" = "$SELF_NET" ]; then
+                CONT_PID="$pid"
+                break
+              fi
+            done
+            cp -f /proc/1/root/run/systemd/resolve/resolv.conf /tmp/upstream-resolv.conf 2>/dev/null || printf 'nameserver 1.1.1.1\n' > /tmp/upstream-resolv.conf
+            ip link del eth0 2>/dev/null || true
+            setsid unshare -m sh -c '
+              mount --bind /tmp/upstream-resolv.conf /etc/resolv.conf
+              exec nsenter --net=/proc/1/ns/net -- slirp4netns --configure --mtu=65520 --disable-host-loopback "'"$CONT_PID"'" tap0
+            ' </dev/null > "${RUNNER_TEMP}/outer-slirp4netns.log" 2>&1 &
+            for _ in $(seq 1 50); do
+              if ip addr show dev tap0 2>/dev/null | grep -q 'inet '; then
+                break
+              fi
+              sleep 0.2
+            done
+            ip addr show dev tap0 || { cat "${RUNNER_TEMP}/outer-slirp4netns.log" || true; exit 1; }
+            printf 'nameserver 10.0.2.3\n' > /etc/resolv.conf
+            curl -fsSI --max-time 10 https://github.com >/dev/null
+          fi
           if ! command -v git >/dev/null 2>&1; then
             apt-get update -qq
             apt-get install -y -qq --no-install-recommends git
@@ -245,7 +276,12 @@ jobs:
           ROOTLESS_USER=docker-rootless
           ROOTLESS_RUNTIME_DIR=/run/docker-rootless
           ROOTLESS_SOCKET="${ROOTLESS_RUNTIME_DIR}/docker.sock"
-          ROOTLESS_DATA_DIR="$(mktemp -d /mnt/docker-rootless.XXXXXX)"
+          if [ -d /mnt/extended ]; then
+            rm -rf /mnt/extended/docker-rootless.* 2>/dev/null || true
+            ROOTLESS_DATA_DIR="$(mktemp -d /mnt/extended/docker-rootless.XXXXXX)"
+          else
+            ROOTLESS_DATA_DIR="$(mktemp -d /mnt/docker-rootless.XXXXXX)"
+          fi
           mkdir -p "$DOCKER_TOOLS_DIR/bin" "$DOCKER_TOOLS_DIR/config/cli-plugins"
           install -m 0755 docker/* "$DOCKER_TOOLS_DIR/bin/"
           install -m 0755 docker-rootless-extras/dockerd-rootless.sh "$DOCKER_TOOLS_DIR/bin/"
@@ -257,6 +293,10 @@ jobs:
           install -d -m 0700 -o "$ROOTLESS_USER" -g "$ROOTLESS_USER" "$ROOTLESS_RUNTIME_DIR"
           chown "$ROOTLESS_USER:$ROOTLESS_USER" "$ROOTLESS_DATA_DIR"
           chmod 0700 "$ROOTLESS_DATA_DIR"
+          install -d -m 0777 /run/pcscd /run/yubios-hsm
+          chmod a+rw /dev/uhid /dev/hidraw* 2>/dev/null || true
+          chmod -R a+rw /dev/bus/usb 2>/dev/null || true
+          rm -rf docker docker-rootless-extras docker-29.9.3.tgz docker-rootless-extras-29.9.3.tgz "buildx-v0.39.0.${{ matrix.buildx_arch }}"
           # RootlessKit needs unprivileged user namespaces on Ubuntu 24.04.
           if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
             sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
@@ -304,6 +344,36 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.Docker_push == true
         run: echo "${{ secrets.DOCKER }}" | docker -H unix:///run/docker-rootless/docker.sock login -u 0mniteck42 --password-stdin
 
+      - name: Stage initial Secure Boot keys inside final rootless layer (physical U2F/HSM on rock1 or swu2f fallback)
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER }}
+        run: |
+          if [ -n "${DOCKER_PASSWORD:-}" ]; then
+            printf '%s' "$DOCKER_PASSWORD" | docker -H unix:///run/docker-rootless/docker.sock login dhi.io -u 0mniteck42 --password-stdin
+          fi
+          chmod +x usr/lib/yubiOS/uki/stage-ci-sb-keys.sh
+          chmod -R a+rwX "$PWD"
+          docker -H unix:///run/docker-rootless/docker.sock run --rm \
+            --privileged \
+            --security-opt label=disable \
+            -v /dev:/host-dev \
+            -v /sys:/sys:ro \
+            -v /run/pcscd:/run/pcscd \
+            -v /run/yubios-hsm:/run/yubios-hsm \
+            -v "$PWD:/work" \
+            -w /work \
+            "dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d" \
+            bash -c '
+              set -euo pipefail
+              apt-get update -qq
+              apt-get install -y -qq --no-install-recommends \
+                efitools openssl opensc pcscd softhsm2 pkcs11-provider \
+                yubikey-manager ykcs11 fido2-tools usbutils
+              SOURCE_DATE_EPOCH="'"${SOURCE_DATE_EPOCH}"'" ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /work
+            '
+          chown -R 0:0 usr/lib/yubiOS/secureboot repro-evidence
+          find usr/lib/yubiOS/secureboot repro-evidence -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} +
+
       - name: Build OCI image (${{ matrix.arch }})
         env:
           ARCH: ${{ matrix.arch }}
@@ -321,14 +391,22 @@ jobs:
         if: matrix.arch == 'arm64'
         env:
           REPRO_REPORT: repro-evidence/production-arm64.json
-        run: scripts/verify-reproducible-images.sh production
+        run: |
+          if [ -d /mnt/extended ]; then
+            mkdir -p /mnt/extended/tmp
+            export TMPDIR=/mnt/extended/tmp
+          fi
+          scripts/verify-reproducible-images.sh production
 
-      - name: Retain production reproducibility evidence
+      - name: Retain production reproducibility evidence and initial Secure Boot keys
         if: matrix.arch == 'arm64'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 — see PINNED.md
         with:
           name: reproducibility-production-arm64-${{ github.sha }}
-          path: repro-evidence/production-arm64.json
+          path: |
+            repro-evidence/production-arm64.json
+            repro-evidence/secureboot/
+            repro-evidence/EFI/
           if-no-files-found: error
           retention-days: 30
 
@@ -364,7 +442,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md

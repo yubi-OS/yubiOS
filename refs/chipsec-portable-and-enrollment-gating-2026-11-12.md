@@ -30,7 +30,7 @@ produces `mkosi.output/yubios-chipsec-portable.raw`:
 - `Verity=signed`: the root partition is paired with `root-verity` (dm-verity
   Merkle tree) and `root-verity-sig` (PKCS#7 signature over the root hash).
   The key pair defaults to the SecureBoot pair (`mkosi.key`/`mkosi.crt`).
-  For the owner-held YubiKey PIV slot 9c key, set `VerityKeySource=engine:pkcs11`
+  For the owner-held U2F/HSM PIV slot 9c key, set `VerityKeySource=engine:pkcs11`
   and pass the `pkcs11:` URI as `VerityKey=`.
 - The profile is gated by `[Match] Profile=chipsec-portable`, so the default
   and other profiles' image build is unchanged.
@@ -143,7 +143,7 @@ measured-os, not first boot) never cancels enrollment.
 
 | Status | Message | Exit | Effect |
 |---|---|---|---|
-| `RESULT=FAILED` | `FAIL: CHIPSEC first-boot platform check reported FAILED; blocking YubiKey enrollment per ADR-024.` | 1 | `ExecCondition=` skips the unit; `ExecStartPost=` never writes `.enrolled`, so enrollment stays pending |
+| `RESULT=FAILED` | `FAIL: CHIPSEC first-boot platform check reported FAILED; blocking U2F/HSM enrollment per ADR-024.` | 1 | `ExecCondition=` skips the unit; `ExecStartPost=` never writes `.enrolled`, so enrollment stays pending |
 | `RESULT=WARN` | `WARN: CHIPSEC first-boot platform check reported WARN; proceeding with enrollment (review journal for firmware warnings).` | 0 | enrollment runs |
 | `RESULT=PASS` | `PASS: ...` | 0 | enrollment runs |
 | no file | `INFO: ...` | 0 | enrollment runs |
@@ -178,4 +178,4 @@ override, remove the status files and run `yubiOS-enroll` manually.
   (ADR-024 status: post-launch).
 - Building the `.raw` in CI needs the verity signing key, so no workflow
   builds it yet. Next step: a `ci_build-chipsec-portable.yml` lane with the
-  key held in a GitHub environment secret, or YubiKey PKCS#11 on the rock1 runner.
+  key held in a GitHub environment secret, or U2F/HSM PKCS#11 on the rock1 runner.

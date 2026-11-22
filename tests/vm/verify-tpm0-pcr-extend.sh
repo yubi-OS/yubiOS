@@ -3,7 +3,7 @@
 # Proves: (1) the fTPM TA is registered and /dev/tpm0 + /dev/tpmrm0 exist,
 #         (2) the TPM responds to TPM2_Startup,
 #         (3) a PCR extend changes a PCR value (measured-boot primitive works).
-# No YubiKey here: this validates the platform-integrity TPM, not user identity.
+# No U2F/HSM here: this validates the platform-integrity TPM, not user identity.
 set -euo pipefail
 
 FTPM_UUID="bc50d971-d4c9-42c4-82cb-343fb7f37896"

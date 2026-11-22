@@ -6,7 +6,7 @@ description: >-
   chain, Discoverable Partitions Specification, LUKS2 hardware unlock (FIDO2/TPM2/PKCS#11),
   factory reset + stateless systems, dynamic users, portable services, developer workflow (sysext
   + nspawn off host /usr), systemd v256–v260 feature landscape, mkosi, casync, Amutable (2026
-  company), and how everything maps to yubiOS (YubiKey replaces TPM2 for secrets).
+  company), and how everything maps to yubiOS (U2F/HSM replaces TPM2 for secrets).
 ---
 
 # 0pointer Mastery — Systemd Ecosystem & yubiOS Big Picture
@@ -18,7 +18,7 @@ Moved out of the frontmatter on 2026-09-17 so `description` fits the 1,024-chara
 Use when: - Designing or reviewing yubiOS architecture decisions - Deciding which modularity mechanism to use (sysext vs portable service vs nspawn) - Understanding PCR assignments, UKI sections, boot phases, or rollback protection - Explaining why a specific systemd component was chosen over an alternative - Auditing whether a yubiOS design goal is met - Questions about LUKS2 hardware unlock mechanics (FIDO2, TPM2, PKCS#11) - Understanding DPS partition types, systemd-dissect, systemd-repart - Developer workflow: testing builds with sysext, running nspawn off host /usr - Dynamic users, StateDirectory, portable services, portablectl - Researching systemd v256–v260 features relevant to yubiOS - Any "big picture", "why does this work this way", or "what would Lennart do" question Trigger phrases: "0pointer vision", "fitting everything together", "hermetic /usr", "trust chain", "PCR", "UKI", "boot phases", "FIDO2 unlock", "DPS", "discoverable partitions", "portable service", "sysext", "dynamic user", "factory reset", "stateless system", "Amutable", "architecture decision", "image-based OS", "big picture", "what would Lennart do", "why use X instead of Y".
 
 
-Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS implements it with YubiKey as hardware root of trust instead of TPM2.
+Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS implements it with U2F/HSM as hardware root of trust instead of TPM2.
 
 **Blog**: https://0pointer.net/blog/ | **Amutable**: https://amutable.com/
 **Deep knowledge**: `yubi-OS/knowledge/knowledge/0pointer/` (numbered-doc corpus minted from the former `documents/github-yubios-KS9n5GAT/knowledge/deep-research/0pointer-knowledge.md` — session artifact, not repo-truth)
@@ -34,7 +34,7 @@ Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS impl
 ## How to Use This Skill
 
 1. Locate the question in the layers below — every yubiOS design fits one layer
-2. Apply the trust chain rule: every layer must be cryptographically validated; TPM2 → YubiKey for secrets
+2. Apply the trust chain rule: every layer must be cryptographically validated; TPM2 → U2F/HSM for secrets
 3. Check the recent systemd version table for new mechanisms that supersede old patterns
 4. The yubiOS delta is almost always just one thing: `--fido2-device=auto` instead of `--tpm2-device=auto`
 
@@ -45,8 +45,8 @@ Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS impl
 | # | Goal | yubiOS implementation |
 |---|---|---|
 | 1 | Image-based, not package-based | bootc OCI images + mkosi disk images |
-| 2 | Trust chain from firmware to apps | UEFI SecureBoot → UKI (signed by YubiKey PIV slot 9c) → dm-verity |
-| 3 | Offline security (evil maid) | LUKS2 + **YubiKey FIDO2** (not TPM2) |
+| 2 | Trust chain from firmware to apps | UEFI SecureBoot → UKI (signed by U2F/HSM PIV slot 9c) → dm-verity |
+| 3 | Offline security (evil maid) | LUKS2 + **U2F/HSM FIDO2** (not TPM2) |
 | 4 | Cryptographic measurement | NvPCR, IMA, dm-verity Merkle tree, boot phase words |
 | 5 | Self-descriptive (DPS) | Discoverable Partitions Specification GPT UUIDs |
 | 6 | Self-updating | systemd-sysupdate A/B + bootc upgrade |
@@ -56,7 +56,7 @@ Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS impl
 | 10 | Adaptive (bare metal/VM/container) | systemd-repart first-boot; nspawn; PKCS#7 in GPT for container validation |
 | 11 | No installer, live image | dd to disk; systemd-repart creates root on first boot |
 | 12 | Minimal shipped image | Ship ESP + `/usr` A only; root + `/usr` B created first boot |
-| 13 | Local key generation | systemd-repart generates LUKS key on-device; YubiKey enrolled on first boot |
+| 13 | Local key generation | systemd-repart generates LUKS key on-device; U2F/HSM enrolled on first boot |
 | 14 | Democratic/hackable | Local sysext keys + custom SecureBoot enrollment via systemd-sbsign |
 | 15 | Modular | sysext / portable services / nspawn (see ladder below) |
 | 16 | Uniform format | All images = GPT with DPS UUIDs + Verity + PKCS#7 |
@@ -71,7 +71,7 @@ Q: What are you adding to the system?
 │
 ├── Extends /usr itself (same namespace, same creds, shares host libs)
 │   → systemd-sysext
-│   Examples: debug tools, optional drivers, YubiKey tools overlay
+│   Examples: debug tools, optional drivers, U2F/HSM tools overlay
 │   Trust: Verity + PKCS#7 signed; merged via read-only overlayfs on /usr
 │   Note: sysext images ≠ packaging. No dependency language. Coarse-grained.
 │         Must be built in lockstep with host OS (file deps must match).
@@ -79,7 +79,7 @@ Q: What are you adding to the system?
 │
 ├── Isolated system service (own root, own namespace, IPC to host)
 │   → Portable Service (RootImage=)
-│   Examples: chipsec, vpn service, yubikey-agent, any privileged daemon
+│   Examples: chipsec, vpn service, u2f-hsm-agent, any privileged daemon
 │   Trust: Verity + PKCS#7 signed GPT image; sandboxing is opt-OUT
 │   Profiles: default, strict, nonetwork, trusted (selected at attach time)
 │   Commands: portablectl attach/detach; unit files copied to /etc/systemd/system/
@@ -114,22 +114,22 @@ UEFI firmware
                  │
                  ├─ [boot phase: initrd-enter measured into PCR 11]
                  ├─ initrd discovers sysext images → Verity + IMA validate them (PCR 13)
-                 ├─ decrypts system credentials (PCR 12-bound or YubiKey FIDO2)
+                 ├─ decrypts system credentials (PCR 12-bound or U2F/HSM FIDO2)
                  ├─ mounts /usr via dm-verity (usrhash= in cmdline → finds partition by UUID)
                  ├─ [boot phase: initrd-leave measured into PCR 11]
-                 ├─ unlocks root fs (LUKS2 + YubiKey FIDO2 via cryptenroll)
+                 ├─ unlocks root fs (LUKS2 + U2F/HSM FIDO2 via cryptenroll)
                  │    → measures root volume key into PCR 15
                  └─ [boot phase: sysinit → complete measured into PCR 11]
                       └─ systemd-homed unlocks per-user homes
-                           (LUKS2 per-user + YubiKey FIDO2 per user)
+                           (LUKS2 per-user + U2F/HSM FIDO2 per user)
 ```
 
-**TPM vs YubiKey**: Standard design uses TPM2 for secrets (soldered chip, no physical presence). yubiOS uses YubiKey (portable, requires possession, supports FIDO2 not just PCR hashes). PCR rollback counters can still live in TPM NV if hardware TPM exists — that doesn't conflict.
+**TPM vs U2F/HSM**: Standard design uses TPM2 for secrets (soldered chip, no physical presence). yubiOS uses U2F/HSM (portable, requires possession, supports FIDO2 not just PCR hashes). PCR rollback counters can still live in TPM NV if hardware TPM exists — that doesn't conflict.
 
 **Key PCR rules**:
 - Secrets bound to PCR 11 → only accessible with the specific signed UKI
 - Root fs DEK bound to PCR 11 + phase word "initrd-enter" → inaccessible after initrd transitions to root fs
-- YubiKey FIDO2 replaces PCR-hash binding for secrets → survives updates without re-enrollment
+- U2F/HSM FIDO2 replaces PCR-hash binding for secrets → survives updates without re-enrollment
 
 ---
 
@@ -146,9 +146,9 @@ UEFI firmware
 ### After first boot (systemd-repart adds)
 ```
 (5-7) /usr B  — empty (_empty label) + verity + sig — filled by first update
-(8)   root fs — LUKS2, YubiKey FIDO2 enrolled, btrfs, sized to disk
+(8)   root fs — LUKS2, U2F/HSM FIDO2 enrolled, btrfs, sized to disk
 (9)   home fs — integrity-protected (homed encrypts per-user)
-(10)  swap    — encrypted (YubiKey bound or random key)
+(10)  swap    — encrypted (U2F/HSM bound or random key)
 ```
 
 ### File system choices
@@ -157,7 +157,7 @@ UEFI firmware
 - home (homed): **btrfs** (homed requires btrfs for LUKS2 resize operations)
 
 ### Factory reset
-Partitions 8+9+10 deleted → systemd-repart recreates with fresh YubiKey enrollment.
+Partitions 8+9+10 deleted → systemd-repart recreates with fresh U2F/HSM enrollment.
 
 ---
 
@@ -179,9 +179,9 @@ systemd-sysupdate downloads 4 files per update:
 
 Per-user encrypted homes separate user data from system-wide FDE:
 - Each user's LUKS2 volume in `/home/user.homedir`
-- Unlock key = YubiKey FIDO2 (not system key)
+- Unlock key = U2F/HSM FIDO2 (not system key)
 - Suspend: `homectl deactivate` flushes key from memory → cryptographically inaccessible during suspend
-- Resume: re-authenticate via YubiKey → key restored
+- Resume: re-authenticate via U2F/HSM → key restored
 - UID: assigned dynamically at login, uidmap-mounted — portable across machines
 
 v258 additions: `homectl add-signing-key`, `homectl adopt`, `homectl register`, `homectl list-signing-keys`
@@ -200,8 +200,8 @@ v258 additions: `homectl add-signing-key`, `homectl adopt`, `homectl register`, 
 
 **Immediate action items**:
 1. Switch UKI signing from sbsigntools → `systemd-sbsign` (v257)
-2. Use `homectl add-signing-key` for YubiKey FIDO2 signing key management (v258)
-3. Add `RefreshOnReload=yes` on YubiKey auth services (re-reads credentials on `systemctl reload`)
+2. Use `homectl add-signing-key` for U2F/HSM FIDO2 signing key management (v258)
+3. Add `RefreshOnReload=yes` on U2F/HSM auth services (re-reads credentials on `systemctl reload`)
 4. Evaluate `RootMStack=` for chipsec portable service
 
 ---
@@ -218,7 +218,7 @@ Installers generate crypto keys before first boot (key leaves factory). systemd-
 `/usr` is dm-verity protected — writing to it breaks the Merkle tree. sysext overlays via overlayfs on top of the verified base. Base stays validated; extension validated separately via PKCS#7. Both immutable and modular simultaneously.
 
 **Why FIDO2 over TPM2 for secrets?**
-TPM2 is soldered to the board — no physical possession required (attacker with your machine also has your TPM). YubiKey is portable — requires physical possession. FIDO2 hmac-secret extension provides equivalent sealing without requiring hardware attestation of PCR values. Survives OS updates without re-enrollment. Not OEM-dependent.
+TPM2 is soldered to the board — no physical possession required (attacker with your machine also has your TPM). U2F/HSM is portable — requires physical possession. FIDO2 hmac-secret extension provides equivalent sealing without requiring hardware attestation of PCR values. Survives OS updates without re-enrollment. Not OEM-dependent.
 
 **Why Discoverable Partitions?**
 `/etc/fstab` stores the root fs location *inside* the root fs — circular dependency. DPS embeds all mount information *in the partition table*, which any tool can read before mounting anything. Result: the same disk image boots on bare metal, in a VM, in a container, and via `systemd-nspawn` with zero configuration change.
@@ -261,7 +261,7 @@ Direct alignment with yubiOS. Monitor https://amutable.com/ for reference implem
 
 ## Audit/Evidence coverage for 0pointer mastery (curve-guided-rsi cycle-4 substantive edit)
 
-This skill — **Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS implements it with YubiKey as hardware root of trust instead of TPM2** — sits in a domain that benefits from explicit audit evidence (logs, journal, SBOM, SLSA provenance, attestation, rekor, cosign, per-step log artifacts) coverage. Even when the skill's primary job is not the audit/evidence primitive itself, downstream consumers (CI gates, audit pipelines, runtime monitors) expect every skill to declare its position on the primitive so the curve-guided corpus audit can place it on the primitive-coverage map.
+This skill — **Deep knowledge of Lennart Poettering's image-based OS vision and how yubiOS implements it with U2F/HSM as hardware root of trust instead of TPM2** — sits in a domain that benefits from explicit audit evidence (logs, journal, SBOM, SLSA provenance, attestation, rekor, cosign, per-step log artifacts) coverage. Even when the skill's primary job is not the audit/evidence primitive itself, downstream consumers (CI gates, audit pipelines, runtime monitors) expect every skill to declare its position on the primitive so the curve-guided corpus audit can place it on the primitive-coverage map.
 
 For 0pointer mastery, the audit/evidence primitive applies as follows: the skill's outputs (artifacts, scripts, patterns) feed into the audit/evidence layer of the yubiOS pipeline, and consumers that reason about audit/evidence coverage (curve-guided-rsi's sparse-cell detector, the security-and-hardening review, the audit-evidence rollup) can credit this skill's contribution. The reference implementation in `internal-big-picture` documents the full audit/evidence primitive and how it composes with the other nine primitives; this skill is one contributor in that 10-primitive model.
 

@@ -36,13 +36,13 @@ The following 11 engineering gates are already on file as PASS or with concrete 
 |---|------|--------|----------|-----|
 | E-1 | dm-verity refuses tampered composefs reference (Negative 2) | PASS | run 30592785401 at `:dev-7eba4856`; the 5-layer /dev/vfio fix also closed | OMN-149 Done 2026-07-30 |
 | E-2 | sealed-UKI Secure Boot VM lane | PASS | run 30652859000 at V83 (commit `1d0666d7`); all 5 matrix jobs pass on amd64+arm64; differential arm64 SB proof (our-cert-pass + foreign-cert-refuse) under TCG emulation with AAVMF_CODE.secboot.fd | OMN-53 Done 2026-07-31 |
-| E-3 | LUKS2 FIDO2 unlock on production arm64 guest | PASS | run 30697269619 / job 91362188919 at HEAD `b7f9d467` on rock1 self-hosted ARM64 KVM; real YubiKey USB vendor 0x1050 against `/dev/sda`, GPT partitioning + bootc install + LUKS2 FIDO2 enroll slot 2 + systemd-homed FIDO2 create | OMN-48 Done (via OMN-89 hardware-leg proof) |
+| E-3 | LUKS2 FIDO2 unlock on production arm64 guest | PASS | run 30697269619 / job 91362188919 at HEAD `b7f9d467` on rock1 self-hosted ARM64 KVM; real U2F/HSM USB vendor 0x1050 against `/dev/sda`, GPT partitioning + bootc install + LUKS2 FIDO2 enroll slot 2 + systemd-homed FIDO2 create | OMN-48 Done (via OMN-89 hardware-leg proof) |
 | E-4 | Issue #20 end-to-end LUKS2 FIDO2 unlock test | PASS | closed 2026-08-01T12:35:44Z by 0mniteck with rock1 hardware-leg PASS evidence | Issue #20 closed 2026-08-01 |
 | E-5 | v0.7.1 first formal release tag | PASS | v0.7.1 published 2026-08-01T13:44:30Z by 0mniteck; first "v" tag, full changelog spanning PRs #8–#156 across the 7-day cluster | ReleaseEvent v0.7.1 |
 | E-6 | playbooks/ seeded (7 playbooks + 1 README + 1 refs/testing-production-gaps) | PASS | PR #156 merged 2026-08-01T11:01:21Z by foil-copy-overrate; 7 playbooks + gap analysis | OMN-152 Done 2026-08-01 |
 | E-7 | ARM64 Path A dev image bootupd fix | PASS | commit `f58d6c14` (Containerfile.dev bootupd install); commit `b8ba8574` (additional Containerfile.dev fix) | OMN-95 closed earlier |
 | E-8 | ARM64 fTPM Stage B (tpm2 init/startup/self_test → YUBIOS_TPM_OK) | PASS | ci_test-int.yml run 28894256274 fully green both arches; TF-A → OP-TEE → U-Boot boot chain with fTPM Early TA embedded, probed, and functional in QEMU | OMN-96 closed earlier |
-| E-9 | BCVK USB YubiKey passthrough for ephemeral VMs | PASS | PR #1+#2+#7+#8 merged into `yubios` branch at `a9303e77dc902a0ff3b547103a7511b5164a450b`; ephemeral VMs covered | OMN-99 Done 2026-07-30 (the destructive-test gap analysis on 2026-07-29 documents native-to-disk as a remaining gap) |
+| E-9 | BCVK USB U2F/HSM passthrough for ephemeral VMs | PASS | PR #1+#2+#7+#8 merged into `yubios` branch at `a9303e77dc902a0ff3b547103a7511b5164a450b`; ephemeral VMs covered | OMN-99 Done 2026-07-30 (the destructive-test gap analysis on 2026-07-29 documents native-to-disk as a remaining gap) |
 | E-10 | libvfio-user bundle-vs-per-runner decision | PASS | PR #152 merged 2026-07-30T09:43:52Z; V4 GHA cache as near-term step before V1 OCI artifact two-step ordering | OMN-100 Done 2026-07-30 |
 | E-11 | ci.yml group-routing redesign (single `group` input, 22 sibling workflows dispatch-only) | PASS | PR #145 (commit `9d6ec85d`) merged 2026-07-29T18:10:53Z | OMN-148 Done 2026-07-29 |
 
@@ -198,7 +198,7 @@ The 3 missing gates are NOT automatable from the agent's side. They require Jenn
 | E-6 | playbooks/ operational runbooks | PASS | 2026-08-01 | PR #156 merged | foil-copy-overrate |
 | E-7 | ARM64 Path A dev image bootupd fix | PASS | 2026-07-29 | commits `f58d6c14` + `b8ba8574` | foil-copy-overrate |
 | E-8 | ARM64 fTPM Stage B | PASS | 2026-07-07 | run 28894256274 | foil-copy-overrate |
-| E-9 | BCVK USB YubiKey passthrough | PASS | 2026-07-30 | bcvk@`a9303e77dc90` | 0mniteck |
+| E-9 | BCVK USB U2F/HSM passthrough | PASS | 2026-07-30 | bcvk@`a9303e77dc90` | 0mniteck |
 | E-10 | libvfio-user bundle-vs-per-runner decision | PASS | 2026-07-30 | PR #152 merged | foil-copy-overrate |
 | E-11 | ci.yml group-routing redesign | PASS | 2026-07-29 | PR #145 merged | foil-copy-overrate |
 | 1.5a | Security audit (third-party) | **OPEN** | 2026-09-13 | refs/security-audit-report-2026-XX-XX.md | Jenny (engagement) + Sauna (filing) |
@@ -268,7 +268,7 @@ reference-customer) were re-checked at the corpus level, 45 days after authoring
   Gates project) has **passed** — 5 days before this read. The gates themselves show no
   landed-evidence change in the round's records: the releases train continued (v0.8.8,
   2026-09-09) without the three gates being recorded as closed in any refs/ doc this round.
-- The engineering-side context the checklist tracked is mixed: the physical-YubiKey hardware
+- The engineering-side context the checklist tracked is mixed: the physical-U2F/HSM hardware
   proof point exists (OMN-42/89 closed, rock1 hardware leg), while ARM64 Path A
   (`B-ARM64-PATHA`) remains the open board-evidence gate.
 - The checklist's own status line ("Draft for PR") is stale: the checklist is a merged corpus

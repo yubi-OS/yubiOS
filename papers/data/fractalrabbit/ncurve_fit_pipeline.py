@@ -22,7 +22,30 @@ from dataclasses import dataclass, field
 from typing import List, Tuple
 
 import numpy as np
-from sklearn.decomposition import PCA
+try:
+    from sklearn.decomposition import PCA
+except ImportError:
+    class PCA:  # type: ignore[no-redef]
+        def __init__(self, n_components: int = 2, random_state: int | None = None):
+            self.n_components = n_components
+            self.components_: np.ndarray = np.empty((0, 0))
+            self.explained_variance_ratio_: np.ndarray = np.empty(0)
+            self._mean: np.ndarray = np.empty(0)
+
+        def fit_transform(self, X: np.ndarray) -> np.ndarray:
+            X = np.asarray(X, dtype=float)
+            self._mean = X.mean(axis=0)
+            Xc = X - self._mean
+            U, S, Vt = np.linalg.svd(Xc, full_matrices=False)
+            var = (S ** 2) / max(1, len(X) - 1)
+            tot = var.sum()
+            self.components_ = Vt[: self.n_components]
+            self.explained_variance_ratio_ = var[: self.n_components] / tot if tot > 0 else np.zeros(self.n_components)
+            return Xc @ self.components_.T
+
+        def transform(self, X: np.ndarray) -> np.ndarray:
+            X = np.asarray(X, dtype=float)
+            return (X - self._mean) @ self.components_.T
 
 
 # ---------------------------------------------------------------------------

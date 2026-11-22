@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
-# tests/vm/test-bcvk-passthrough.sh -- YubiKey USB passthrough (VID 0x1050)
+# tests/vm/test-bcvk-passthrough.sh -- U2F/HSM USB passthrough (VID 0x1050)
 # verification for bcvk / QEMU ephemeral VMs (OMN-162 / OMN-141).
 #
 # Modes:
 #   --verify-args     Validate QEMU XHCI + usb-host VID 0x1050 passthrough argument
 #                     construction and host detection helper without booting a VM.
-#   default (live)    Requires a physical YubiKey (VID 0x1050) attached to the host
+#   default (live)    Requires a physical U2F/HSM (VID 0x1050) attached to the host
 #                     AND YUBIOS_PASSTHROUGH_HW=1. When absent in unattended CI,
 #                     exits 77 (SKIP contract) so CI distinguishes hardware-absent
 #                     skip from failure.
@@ -58,17 +58,17 @@ if [[ "$QEMU_USB_ARGS" != *"qemu-xhci"* ]] || [[ "$QEMU_USB_ARGS" != *"vendorid=
 fi
 
 if [[ "$VERIFY_ARGS_ONLY" -eq 1 ]]; then
-  echo "=== PASS: QEMU YubiKey USB passthrough (VID 0x1050) args & helpers verified ==="
+  echo "=== PASS: QEMU U2F/HSM USB passthrough (VID 0x1050) args & helpers verified ==="
   exit 0
 fi
 
-if ! detect_real_yubikey; then
-  echo "SKIP (rc=77): no physical YubiKey (VID 1050) detected on host; hardware passthrough gated on OMN-141." >&2
+if ! detect_real_u2f_hsm; then
+  echo "SKIP (rc=77): no physical U2F/HSM (VID 1050) detected on host; hardware passthrough gated on OMN-141." >&2
   exit 77
 fi
 
 if [[ "${YUBIOS_PASSTHROUGH_HW:-0}" != "1" ]]; then
-  echo "SKIP (rc=77): physical YubiKey detected, but YUBIOS_PASSTHROUGH_HW=1 not set (attended hardware gate OMN-141)." >&2
+  echo "SKIP (rc=77): physical U2F/HSM detected, but YUBIOS_PASSTHROUGH_HW=1 not set (attended hardware gate OMN-141)." >&2
   exit 77
 fi
 
@@ -94,4 +94,4 @@ g "lsusb | grep -Ei '1050:|Yubico'"
 echo "--- Asserting fido2-token -L sees the passed-through hardware FIDO2 device ---"
 g "test -n \"\$(fido2-token -L)\""
 
-echo "=== PASS: physical YubiKey USB passthrough verified inside bcvk guest ==="
+echo "=== PASS: physical U2F/HSM USB passthrough verified inside bcvk guest ==="

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Validates systemd-sbsign + libykcs11 PKCS#11 URI for ECC slot 9c (ADR-008).
-# Run with YubiKey inserted after running yubiOS-enroll-sb.
+# Run with U2F/HSM inserted after running yubiOS-enroll-sb.
 # Verifies: module loads, key accessible, cert matches, test sign succeeds.
 set -euo pipefail
 
@@ -30,7 +30,7 @@ echo -n "3/5 Certificate at $CERT_PEM... "
 # write to a separate output file.
 TMP_SIGNED="$(mktemp /tmp/yubiOS-test-signed.XXXXXX.efi)"
 trap 'rm -f "$TMP_SIGNED"' EXIT
-echo -n "4/5 Test signing $TEST_EFI with systemd-sbsign (touch YubiKey)... "
+echo -n "4/5 Test signing $TEST_EFI with systemd-sbsign (touch U2F/HSM)... "
 PKCS11_MODULE_PATH="$PKCS11_LIB" systemd-sbsign sign \
   --private-key "pkcs11:manufacturer=piv_II;id=%9c;type=private" \
   --private-key-source "engine:pkcs11" \

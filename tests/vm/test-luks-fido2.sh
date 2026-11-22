@@ -1,7 +1,7 @@
 #!/bin/bash
-# End-to-end LUKS2 FIDO2 unlock test using bootc install to-filesystem + a host-attached YubiKey.
+# End-to-end LUKS2 FIDO2 unlock test using bootc install to-filesystem + a host-attached U2F/HSM.
 # Requires: podman, parted, dosfstools, e2fsprogs, cryptsetup, systemd-cryptenroll,
-# a physical YubiKey visible to the HOST's /dev/hidraw* (so systemd-cryptenroll can prompt
+# a physical U2F/HSM visible to the HOST's /dev/hidraw* (so systemd-cryptenroll can prompt
 # for a tap), and a spare block device.
 # Usage: sudo ./tests/vm/test-luks-fido2.sh /dev/sdX <yubiOS-image:tag>
 #
@@ -133,7 +133,7 @@ echo -n "$PASS" | cryptsetup open "$LUKS_PART" yubiOS-test --batch-mode
 cryptsetup status yubiOS-test
 cryptsetup close yubiOS-test
 
-# Step 6.5 (NEW): real-YubiKey precondition for the FIDO2 enrollment in step 7.
+# Step 6.5 (NEW): real-U2F/HSM precondition for the FIDO2 enrollment in step 7.
 # systemd-cryptenroll --fido2-device=auto picks the FIRST HID FIDO2 device it
 # enumerates. If the host has no real Yubico (VID 1050) device, --auto finds
 # nothing and the enrollment silently exits without prompting -- exactly the
@@ -149,22 +149,22 @@ if [[ -d /sys/class/hidraw ]]; then
     if command -v udevadm >/dev/null 2>&1; then
       if udevadm info "$d" 2>/dev/null | grep -Eiq 'ID_VENDOR=Yubico|ID_VENDOR_ID=1050'; then
         real_key_seen=1
-        echo "OK: real YubiKey on $d (will be used by step 7)"
+        echo "OK: real U2F/HSM on $d (will be used by step 7)"
         break
       fi
     fi
   done
 fi
 if [[ "$real_key_seen" -ne 1 ]]; then
-  echo "FAIL: no real YubiKey visible to the HOST's HID bus." >&2
+  echo "FAIL: no real U2F/HSM visible to the HOST's HID bus." >&2
   echo "" >&2
   echo "Step 7 calls systemd-cryptenroll --fido2-device=auto --fido2-with-user-presence=yes" >&2
   echo "against $LUKS_PART. With no real Yubico (VID 1050) device on /dev/hidraw*, --auto" >&2
   echo "finds nothing and the enrollment exits silently without ever prompting for a tap." >&2
   echo "" >&2
   echo "Remedies (pick one):" >&2
-  echo "  1. Plug in a YubiKey and re-run (preferred)." >&2
-  echo "  2. Run on a host that already has a YubiKey attached." >&2
+  echo "  1. Plug in a U2F/HSM and re-run (preferred)." >&2
+  echo "  2. Run on a host that already has a U2F/HSM attached." >&2
   exit 1
 fi
 
@@ -188,9 +188,9 @@ fi
 #      TMP_PASS unlocks the new slot cryptenroll just added, which
 #      cryptenroll can read non-interactively.
 #   5. systemd-cryptenroll -- --fido2-with-client-pin=no so the FIDO2
-#      enrollment skips the PIN prompt and only requires YubiKey touch.
+#      enrollment skips the PIN prompt and only requires U2F/HSM touch.
 #   6. Cleanup EXISTING_PASSFILE + TMP_PASSFILE, propagate exit code.
-# Only YubiKey touch is interactive (physical operator action).
+# Only U2F/HSM touch is interactive (physical operator action).
 TMP_PASS="yubios-fido-temp-$(date +%s%N | sha256sum | head -c 16)"
 EXISTING_PASSFILE=$(mktemp /tmp/yubios-luks-existing-pass.XXXXXX)
 TMP_PASSFILE=$(mktemp /tmp/yubios-luks-temp-pass.XXXXXX)
@@ -205,7 +205,7 @@ cryptsetup luksAddKey "$LUKS_PART" \
 LUKSADDKEY_RC=$?
 [ "$LUKSADDKEY_RC" -eq 0 ] || { rm -f "$EXISTING_PASSFILE" "$TMP_PASSFILE"; exit "$LUKSADDKEY_RC"; }
 # Now systemd-cryptenroll uses TMP_PASS to unlock (new slot, no prompt expected)
-echo "7/7 Enrolling FIDO2 (touch YubiKey when prompted)"
+echo "7/7 Enrolling FIDO2 (touch U2F/HSM when prompted)"
 systemd-cryptenroll \
   --fido2-device=auto \
   --fido2-with-client-pin=no \

@@ -14,7 +14,7 @@ different failure mode of a fractal-dimension measure:
 
 | class | design | what it tests |
 |---|---|---|
-| `gasket-v2-L384` | Sierpinski droplet lattice, 6 depths, 366 uniform r=3 droplets, L=384 | the primary gate: self-similar D ≈ log3/log2 ≈ 1.585 with a clean local slope |
+| `gasket-v2-L384` | Sierpinski droplet lattice, 6 depths, 366 uniform r=3 droplets, L=384 | the primary gate: local slope over {13,20,29,43,64} inside the pre-registered 1.585 ± 0.05 band (`preregistered_band_pass`), plus a tight regression pin on the measured 1.5968 ± 0.002 (`regression_pin_pass`); whole-window D 1.5589 is a diagnostic |
 | `gasket-v2-L256` | same generator at L=256 | L-convergence pair — pins the r/L render bias (−0.099) that re-expresses the gate center |
 | `tri` | 19-droplet triangular patch (a=52, dy=45, r=16) | order-vs-disorder discriminator (measured Δ0.23 over shuffle, not the predicted near-degeneracy) |
 | `shuffle` ×5 seeds | 19 droplets, rejection sampling, min sep 40, margin 64, `random.Random(seed)` for seeds [42, 1337, 2026, 7, 99] | the disorder control; per-seed D regression |
@@ -45,7 +45,15 @@ Machine-readable in [`anchors.json`](anchors.json); whole-window D tolerance
 
 Gate (amended pre-v2, logged in
 [amendments-log-2026-10-06.md](amendments-log-2026-10-06.md)): local slope
-over scales {13, 20, 29, 43, 64} at L=384 within 1.5968 ± 0.002, r² ≥ 0.98.
+over scales {13, 20, 29, 43, 64} at L=384, r² ≥ 0.98. Two separately-labelled
+assertions are made on it:
+
+- `preregistered_band_pass` — the PRE-REGISTERED gate: slope within
+  **1.585 ± 0.05** (amendment 1; centre `log3/log2`).
+- `regression_pin_pass` — a REGRESSION PIN, not the pre-registered gate: slope
+  within **1.5968 ± 0.002**, the value measured in the validated v2 run. It
+  detects drift inside the wide pre-registered band; passing it says nothing
+  more about self-similarity than the band does.
 
 Beyond the anchors, the selftest asserts the two silent-failure guards from
 the run lessons: non-empty mask on every render (lesson 3 — binary renders
@@ -65,8 +73,7 @@ Pure stdlib, no environment access, deterministic. Regenerates every class at
 directory, and prints PASS/FAIL per check. Exit 0 = all anchors reproduce,
 exit 1 = any drift. Runtime ≈ 3 s.
 
-Wired into CI as one `verify-tools` step in `.github/workflows/lean-check.yml`
-(see the proposed diff in `lean-check-diff.md`).
+Wired into CI as one `verify-tools` step in `.github/workflows/lean-check.yml`.
 
 ## Canonical record
 

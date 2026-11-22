@@ -3,7 +3,7 @@
 #
 # Clean direct-to-SD provisioning pipeline for yubiOS on the rock1 self-hosted
 # ARM64 runner (or ubuntu HIGH-MEM runner) with SD card slot (/dev/mmcblk1)
-# and physical YubiKey PIV slot 9a signing.
+# and physical U2F/HSM PIV slot 9a signing.
 #
 # All OS/initramfs/systemd/enrollment configurations live inside the built OCI
 # image (Containerfile / Containerfile.dev / usr/). This script never mutates
@@ -11,7 +11,7 @@
 #   1. Pulls the published $OS_IMAGE and board firmware bundle
 #   2. Wipes & partitions $SD_DEVICE (GPT @ sector 32768: p1 ESP, p2 yubiOS-root)
 #   3. Runs `bootc install to-filesystem --composefs-backend` from $OS_IMAGE
-#   4. Signs the installed EFI loaders & UKI on the ESP with YubiKey PIV slot 9a
+#   4. Signs the installed EFI loaders & UKI on the ESP with U2F/HSM PIV slot 9a
 #   5. Writes board `u-boot-rockchip.bin` at sector 64 of $SD_DEVICE
 
 set -euo pipefail
@@ -20,7 +20,7 @@ BOARD="${FLASH_BOARD:-rock5b-rk3588}"
 SD_DEVICE="${FLASH_SD_DEVICE:-/dev/mmcblk1}"
 OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
 SIGNKEY="${FLASH_SIGNKEY:-test}"
-SIGN_WITH_YUBIKEY="${FLASH_SIGN_WITH_YUBIKEY:-true}"
+SIGN_WITH_U2F_HSM="${FLASH_SIGN_WITH_U2F_HSM:-true}"
 PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
 # RUN_POST_VM="${FLASH_RUN_POST_VM:-false}"
 
@@ -133,7 +133,7 @@ part_dev() {
 }
 
 # ---------------------------------------------------------------------------
-# Stage 2: YubiKey PIV Slot 9a Key & PK/KEK/db Auth Bundle Preparation
+# Stage 2: U2F/HSM PIV Slot 9a Key & PK/KEK/db Auth Bundle Preparation
 # ---------------------------------------------------------------------------
 log "Stage 2: PIV slot 9a & Secure Boot PK/KEK/db preparation (SIGNKEY=$SIGNKEY, touch=$PIV_TOUCH_POLICY)"
 
@@ -148,9 +148,9 @@ for c in /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib64/libykcs11.so /usr/li
   if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
 done
 
-if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
+if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
   if lsusb | grep -qi '1050:' && [ -n "$PKCS11_LIB" ]; then
-    SIGN_MODE="yubikey"
+    SIGN_MODE="u2f_hsm"
     export PKCS11_MODULE_PATH="$PKCS11_LIB"
     export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
     sudo systemctl start pcscd.socket pcscd.service 2>/dev/null || true
@@ -176,14 +176,14 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
       fi
     fi
     if [ "$need_mint" -eq 1 ]; then
-      log "Generating RSA-2048 key in PIV slot 9a on physical YubiKey (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
+      log "Generating RSA-2048 key in PIV slot 9a on physical U2F/HSM (SIGNKEY=$SIGNKEY, pin-policy=ONCE, touch-policy=${PIV_TOUCH_POLICY^^})"
       sudo ykman piv keys generate \
         -a RSA2048 \
         -m "$PIV_MGMT_KEY" \
         --pin-policy ONCE \
         --touch-policy "${PIV_TOUCH_POLICY^^}" \
         9a - | tee "$KEY_DIR/slot9a-pub.pem" >/dev/null
-      log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical YubiKey"
+      log "Generating self-signed slot 9a X.509 certificate ($CN_LABEL) on physical U2F/HSM"
       # shellcheck disable=SC2024
       sudo ykman piv certificates generate \
         -m "$PIV_MGMT_KEY" \
@@ -199,7 +199,8 @@ if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
     cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
     openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
 
-    T="$(date -u '+%Y-%m-%d %H:%M:%S')"
+    T="2026-01-01 00:00:00"
+    T_NULL="2026-01-01 00:01:00"
     for var in PK KEK db; do
       cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
     done
@@ -224,7 +225,7 @@ EOF
     for var in PK KEK db; do
       sign-efi-sig-list -c "$KEY_DIR/PK.crt" -t "$T" -o "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.forsig"
       if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-        echo ">>> [YUBIKEY TOUCH] Signing ${var}.auth via PIV slot 9a — touch your YubiKey now <<<"
+        echo ">>> [U2F/HSM TOUCH] Signing ${var}.auth via PIV slot 9a — touch your U2F/HSM now <<<"
       fi
       if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
         -provider "$PKCS11_PROV" -provider default \
@@ -244,10 +245,32 @@ EOF
       sudo chown "$(id -u):$(id -g)" "$KEY_DIR/${var}.signed"
       sign-efi-sig-list -i "$KEY_DIR/${var}.signed" -t "$T" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
     done
+    : > "$KEY_DIR/null.esl"
+    sign-efi-sig-list -c "$KEY_DIR/PK.crt" -t "$T_NULL" -o PK "$KEY_DIR/null.esl" "$KEY_DIR/PK_null.forsig"
+    if [ "$PIV_TOUCH_POLICY" != "never" ]; then
+      echo ">>> [U2F/HSM TOUCH] Signing PK_null.auth (blank ESL unlock) via PIV slot 9a — touch your U2F/HSM now <<<"
+    fi
+    if ! sudo env PKCS11_MODULE_PATH="$PKCS11_LIB" PKCS11_PROVIDER_MODULE="$PKCS11_LIB" openssl smime -sign -binary \
+      -provider "$PKCS11_PROV" -provider default \
+      -in "$KEY_DIR/PK_null.forsig" \
+      -out "$KEY_DIR/PK_null.signed" \
+      -signer "$KEY_DIR/PK.crt" \
+      -inkey "$SB_KEY_URI" \
+      -outform DER -md sha256; then
+      sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" openssl smime -sign -binary \
+        -engine pkcs11 -keyform engine \
+        -in "$KEY_DIR/PK_null.forsig" \
+        -out "$KEY_DIR/PK_null.signed" \
+        -signer "$KEY_DIR/PK.crt" \
+        -inkey "pkcs11:id=%01;type=private?pin-value=${PIV_PIN}" \
+        -outform DER -md sha256
+    fi
+    sudo chown "$(id -u):$(id -g)" "$KEY_DIR/PK_null.signed"
+    sign-efi-sig-list -i "$KEY_DIR/PK_null.signed" -t "$T_NULL" PK "$KEY_DIR/null.esl" "$KEY_DIR/PK_null.auth"
     ls -la "$KEY_DIR"
   elif [ "$SIGNKEY" = "test" ]; then
     SIGN_MODE="soft_test"
-    log "No physical YubiKey on USB; SIGNKEY=test -> minting ephemeral RSA-2048 Slot 9a test key ($CN_LABEL)"
+    log "No physical U2F/HSM on USB; SIGNKEY=test -> minting ephemeral RSA-2048 Slot 9a test key ($CN_LABEL)"
     openssl req -x509 -newkey rsa:2048 -nodes \
       -keyout "$KEY_DIR/db.key" \
       -out "$KEY_DIR/db.crt" \
@@ -260,14 +283,17 @@ EOF
     cp -f "$KEY_DIR/db.key" "$KEY_DIR/PK.key"
     cp -f "$KEY_DIR/db.key" "$KEY_DIR/KEK.key"
     openssl x509 -in "$KEY_DIR/db.crt" -outform DER -out "$KEY_DIR/yubiOS-db.cer"
-    T="$(date -u '+%Y-%m-%d %H:%M:%S')"
+    T="2026-01-01 00:00:00"
+    T_NULL="2026-01-01 00:01:00"
     for var in PK KEK db; do
       cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
       sign-efi-sig-list -g "$OWNER_GUID" -t "$T" -k "$KEY_DIR/PK.key" -c "$KEY_DIR/PK.crt" "$var" "$KEY_DIR/${var}.esl" "$KEY_DIR/${var}.auth"
     done
+    : > "$KEY_DIR/null.esl"
+    sign-efi-sig-list -g "$OWNER_GUID" -t "$T_NULL" -k "$KEY_DIR/PK.key" -c "$KEY_DIR/PK.crt" PK "$KEY_DIR/null.esl" "$KEY_DIR/PK_null.auth"
     ls -la "$KEY_DIR"
   else
-    die "SIGNKEY=production requires a physical YubiKey (1050:*) attached on USB"
+    die "SIGNKEY=production requires a physical U2F/HSM (1050:*) attached on USB"
   fi
 fi
 
@@ -279,9 +305,9 @@ sign_efi_binary() {
   sudo cp -f "$efi_path" "$tmp_in"
   sudo chown "$(id -u):$(id -g)" "$tmp_in"
 
-  if [ "$SIGN_MODE" = "yubikey" ]; then
+  if [ "$SIGN_MODE" = "u2f_hsm" ]; then
     if [ "$PIV_TOUCH_POLICY" != "never" ]; then
-      echo ">>> [YUBIKEY TOUCH] Touch YubiKey to sign $(basename "$efi_path") <<<"
+      echo ">>> [U2F/HSM TOUCH] Touch U2F/HSM to sign $(basename "$efi_path") <<<"
     fi
     sudo env OPENSSL_CONF="$WORK_DIR/openssl-pkcs11.cnf" PKCS11_MODULE_PATH="$PKCS11_LIB" sbsign \
       --engine pkcs11 \
@@ -315,6 +341,9 @@ if [ "$USE_RAM_CONTAINERS" = "1" ]; then
   sudo mount -o noatime "$PODMAN_LOOP" /var/lib/containers
 else
   log "Stage 3: Using /mnt/extended-backed /var/lib/containers on rock1 (0 writes to 12G root disk)"
+  # Clear any unseen kernel superblock errseq_t on /var/lib/containers so overlayfs volatile mounts never fail with EIO
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
 fi
 df -h /var/lib/containers "$WORK_BASE"
 
@@ -347,6 +376,12 @@ pull_board_firmware() {
   [ "$magic" = "524b4e53" ] || die "$bin does not start with RKNS magic (got $magic)"
   sha256sum "$bin" | tee "$FW_DIR/$b/u-boot-rockchip.bin.sha256"
   cp -f "$bin" "$FW_DIR/$b/u-boot-rockchip.bin"
+  local spi_bin="$FW_DIR/$b/firmware/u-boot-rockchip-spi.bin"
+  [ -f "$spi_bin" ] || spi_bin="$(find "$FW_DIR/$b" -name 'u-boot-rockchip-spi.bin' | head -n1 || true)"
+  if [ -n "$spi_bin" ] && [ -f "$spi_bin" ]; then
+    sha256sum "$spi_bin" | tee "$FW_DIR/$b/u-boot-rockchip-spi.bin.sha256"
+    cp -f "$spi_bin" "$FW_DIR/$b/u-boot-rockchip-spi.bin"
+  fi
   ls -la "$FW_DIR/$b/firmware/" 2>/dev/null || ls -la "$FW_DIR/$b/"
 }
 
@@ -397,6 +432,12 @@ EOF
   sudo mount "$p1" "$MNT_DIR/boot"
 
   log "Running bootc install to-filesystem directly onto $dev ($board_name)"
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
+  sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
+  # Cap dirty-page accumulation so the kernel streams writes smoothly to the SD card
+  # instead of buffering ~800 MiB of unwritten extents and stalling the SDXC controller
+  # during FS_IOC_ENABLE_VERITY (which caused mmc1 card drop / EIO on SN128 119G).
+  sudo sysctl -w vm.dirty_background_bytes=16777216 vm.dirty_bytes=67108864 >/dev/null 2>&1 || true
   PRELOAD_ENV=()
   if command -v gcc >/dev/null 2>&1; then
     cat > "$TMPDIR/nofsync.c" <<'EOF'
@@ -414,11 +455,13 @@ EOF
     -v /var/lib/containers:/var/lib/containers \
     -v "$TMPDIR:/var/tmp" \
     -e TMPDIR=/var/tmp \
+    -e TOKIO_WORKER_THREADS=1 \
+    -e RAYON_NUM_THREADS=1 \
     "${PRELOAD_ENV[@]}" \
     -v /dev:/dev \
     -v "$MNT_DIR:/target" \
     "$RESOLVED_OS" \
-    bootc install to-filesystem \
+    taskset -c 0 bootc install to-filesystem \
       --source-imgref="containers-storage:${RESOLVED_OS}" \
       --composefs-backend \
       --disable-selinux \
@@ -438,9 +481,24 @@ EOF
   [ -n "$cd_digest" ] || die "Could not extract composefs digest from installed UKI/BLS entry"
   echo "Verified installed composefs digest: $cd_digest"
 
-  if [ "$SIGN_WITH_YUBIKEY" = "true" ]; then
+  # Deploy the image's baked-in Secure Boot keys (/usr/lib/yubiOS/secureboot)
+  # to both /boot/EFI/yubiOS/secureboot and /boot/EFI/yubiOS/keys after bootc install
+  # (same as enroll-sb.sh), and save u-boot-rockchip.bin + u-boot-rockchip-spi.bin to /boot.
+  sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/secureboot" "$MNT_DIR/boot/EFI/yubiOS/keys" "$MNT_DIR/boot/EFI/yubiOS/firmware"
+  sudo podman run --rm --entrypoint /bin/sh "$RESOLVED_OS" -c 'if [ -d /usr/lib/yubiOS/secureboot ]; then tar -C /usr/lib/yubiOS/secureboot -cf - .; fi' \
+    | sudo tar -C "$MNT_DIR/boot/EFI/yubiOS/secureboot" -xf - 2>/dev/null || true
+  sudo cp -f "$MNT_DIR/boot/EFI/yubiOS/secureboot/"* "$MNT_DIR/boot/EFI/yubiOS/keys/" 2>/dev/null || true
+
+  sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
+  sudo cp -f "$fw_bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip.bin"
+  if [ -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" ]; then
+    sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/u-boot-rockchip-spi.bin"
+    sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip-spi.bin"
+  fi
+
+  if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
     log "Signing installed EFI loaders & UKIs on $p1 (mode=$SIGN_MODE, SIGNKEY=$SIGNKEY)"
-    sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/keys"
+    sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/secureboot/"
     sudo cp -f "$KEY_DIR"/*.auth "$KEY_DIR"/*.crt "$KEY_DIR"/*.cer "$KEY_DIR"/*.esl "$MNT_DIR/boot/EFI/yubiOS/keys/"
     while IFS= read -r -d '' efi_file; do
       echo "Signing $efi_file..."
@@ -448,8 +506,51 @@ EOF
     done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
   fi
 
+  # Record the BLS entry content from the vfat ESP before unmounting $MNT_DIR/boot,
+  # then initialize the ext4 /boot/loader -> loader.1 symlink and /ostree deployment
+  # skeleton on $MNT_DIR (p2 ext4) so libostree/rpm-ostree has a real symlink on ext4.
+  bls_name="$(basename "$entry")"
+  bls_content="$(sudo cat "$entry")"
   sudo sync
   sudo umount "$MNT_DIR/boot"
+  sudo mkdir -p "$MNT_DIR/boot/loader.1/entries" "$MNT_DIR/boot/EFI" "$MNT_DIR/efi"
+  sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
+  if [ -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" ]; then
+    sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/u-boot-rockchip-spi.bin"
+  fi
+  sudo ln -sfn loader.1 "$MNT_DIR/boot/loader"
+  csum_short="$(printf '%s' "$cd_digest" | cut -c1-64)"
+  bootcsum="81203731b9d52c596bd97690fadbbbc715d10055bd98f0599cc68550edf1b686"
+  sudo mkdir -p "$MNT_DIR/ostree/repo/objects" "$MNT_DIR/ostree/repo/refs/heads" "$MNT_DIR/ostree/repo/refs/remotes" \
+    "$MNT_DIR/ostree/repo/refs/mirrors" "$MNT_DIR/ostree/repo/state" "$MNT_DIR/ostree/repo/tmp/cache" \
+    "$MNT_DIR/ostree/repo/extensions" "$MNT_DIR/ostree/deploy/default/var" \
+    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc" \
+    "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr/lib" "$MNT_DIR/ostree/boot.1.1/default/${bootcsum}"
+  sudo podman run --rm --entrypoint /bin/cat "$RESOLVED_OS" /usr/lib/os-release | sudo tee "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/usr/lib/os-release" "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0/etc/os-release" >/dev/null || true
+  sudo tee "$MNT_DIR/ostree/repo/config" >/dev/null <<'EOF_REPO'
+[core]
+repo_version=1
+mode=bare
+
+[sysroot]
+bootloader=none
+
+[ex-integrity]
+composefs=true
+EOF_REPO
+  sudo tee "$MNT_DIR/ostree/deploy/default/deploy/${csum_short}.0.origin" >/dev/null <<EOF_ORIG
+[origin]
+refspec=yubios/latest
+container-image-reference=ostree-unverified-registry:${OS_IMAGE}
+EOF_ORIG
+  sudo ln -sfn "../../../deploy/default/deploy/${csum_short}.0" "$MNT_DIR/ostree/boot.1.1/default/${bootcsum}/0"
+  sudo ln -sfn boot.1.1 "$MNT_DIR/ostree/boot.1"
+  {
+    printf '%s\n' "$bls_content"
+    printf 'options ostree=/ostree/boot.1/default/%s/0\n' "$bootcsum"
+  } | sudo tee "$MNT_DIR/boot/loader.1/entries/$bls_name" >/dev/null
+  sudo cp -f "$MNT_DIR/boot/loader.1/entries/$bls_name" "$MNT_DIR/boot/loader.1/entries/ostree-1.conf"
+  sudo sync
   sudo umount "$MNT_DIR"
 
   log "Writing $board_name u-boot-rockchip.bin directly at sector 64 of $dev"

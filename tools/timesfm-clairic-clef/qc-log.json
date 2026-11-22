@@ -43,41 +43,35 @@
   "live_e2e_verification": {
     "clairic_extracted_count": 28,
     "clairic_extracted_note": {
-      "confidence": 0.802111029624939,
-      "guess": "sermon S5 W8 deploy",
-      "p_null": 4.466527025215328e-05,
+      "confidence": 0.999998,
+      "guess": "innovation_z=+4.74_step_25",
+      "p_null": 2.135074e-06,
+      "provenance": "deterministic_schema_kernel (innovation_outlier_scan) on the regenerated messy_ops_log fixture; every CSV note is 'steady'",
+      "source": "innovation_detector",
       "span": [
-        874,
-        893
+        859,
+        864
       ],
       "type": "text",
-      "value": "sermon S5 W8 deploy"
+      "value": "innovation_z=+4.74_step_25",
+      "value_text": "22.00"
     },
     "clairic_forecast_3d": {
       "p10": [
-        21.9,
-        21.3,
-        21.1
+        20.23,
+        20.12,
+        20.03
       ],
       "p90": [
-        23.8,
-        23.5,
-        23.5
+        21.15,
+        21.43,
+        21.63
       ],
       "value": [
-        22.8,
-        22.4,
-        22.3
+        20.69,
+        20.77,
+        20.83
       ]
-    },
-    "clairic_status": 200,
-    "clairic_usage": {
-      "image_tokens": 0,
-      "input_tokens": 2490,
-      "output_tokens": 0,
-      "passes": 2,
-      "schema_tokens": 1110,
-      "state_tokens": 690
     },
     "clef_25_primary_decision": {
       "answers": {
@@ -183,6 +177,7 @@
       },
       "picp_80_25": 1
     },
+    "provenance_note": "2026-11-16: the Clairic fields above were regenerated from the deterministic schema kernel on the current fixtures.json (the 2026-10-21 live Workers AI extraction targeted a superseded fixture that planted an operator note and is not reproduced here; its status/usage fields were removed). The clef_*_decision blocks are the recorded live /api/decide responses of 2026-10-21, kept as history; they are not the output of the current softmax utility.",
     "verified_at": "2026-10-21T10:02:00Z"
   },
   "preflight": {
@@ -193,6 +188,7 @@
     "workers_ai_clef_id": "87f39d62-116c-4b26-b2cd-562a9ba01f2f"
   },
   "program": "timesfm-clairic-clef",
+  "regenerated": "2026-11-16",
   "stream1_clairic_clef_weights": {
     "blog_cloudflare_clairic": 0.9714,
     "blog_cloudflare_clef": 0.9566,

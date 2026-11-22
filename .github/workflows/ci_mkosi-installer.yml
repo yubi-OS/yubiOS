@@ -4,7 +4,7 @@ name: yubiOS mkosi-installer
 #
 # Builds the full DPS-partitioned disk image + UKI from the repo's mkosi.conf
 # (minimal profile) with Secure Boot signing driven through PKCS#11 — a SoftHSM
-# token stands in for YubiKey PIV slot 9c, exercising the exact
+# token stands in for U2F/HSM PIV slot 9c, exercising the exact
 # SecureBootKeySource=provider:pkcs11 + systemd-sbsign path the yubiOS profile
 # (yubi-OS/mkosi#2) uses on real hardware. The signed UKI is verified against
 # the mock cert with sbverify before anything is published.
@@ -98,6 +98,7 @@ permissions:
 
 env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
+  FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:881c4dd0acb6cc416d5fd484582b79b110eed31e4c971b1fc7d2990be2b18970 # 45 (45.20261114.0) — see PINNED.md
 
 jobs:
   build:
@@ -141,7 +142,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -271,7 +272,7 @@ jobs:
           # AppArmor; the privileged DHI job container can relax it for mkosi.
           sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
 
-      - name: SoftHSM token in /run — mock of YubiKey PIV slot 9c
+      - name: SoftHSM token in /run — mock of U2F/HSM PIV slot 9c
         run: |
           set -euxo pipefail
           # /run is bind-mounted into mkosi's signing sandbox at the same
@@ -296,16 +297,42 @@ jobs:
       - name: Build disk image (minimal profile, PKCS#11-signed UKI)
         run: |
           set -euxo pipefail
-          rm -rf inst mkosi.output mkosi.cache
+          rm -rf inst mkosi.output mkosi.cache mkosi.base.tar mkosi.initrd.img Containerfile.mkosi-base
+          # Export the base tree (including the pinned kernel-core + kernel-modules,
+          # initramfs.img, and basesystem) from the digest-pinned
+          # quay.io/fedora/fedora-bootc@sha256:... image under yubiOS.rego Build Policy
+          # so primary and rebuild never pull different kernel/initrd packages from
+          # floating Fedora mirrors.
+          cat > Containerfile.mkosi-base <<EOF
+          FROM ${FEDORA_BOOTC_IMAGE}
+          RUN for p in /home /root /mnt /opt /srv /usr/local; do \
+                if [ -L "\$p" ]; then rm -f "\$p" && mkdir -p "\$p"; fi; \
+              done && \
+              mkdir -p -m 0700 /boot /efi && \
+              chmod 0750 /root && \
+              rm -rf /ostree /sysroot /etc/machine-id /var/lib/systemd/random-seed /var/cache/ldconfig/aux-cache /var/lib/dnf/history.sqlite* /usr/lib/sysimage/libdnf5/transaction_history.sqlite*
+          EOF
+          docker -H unix:///run/docker-rootless/docker.sock buildx build \
+            --builder hardened \
+            --platform "linux/${{ matrix.arch }}" \
+            --policy filename=yubiOS.rego,reset=true,strict=true \
+            --build-arg "SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH}" \
+            --output "type=tar,dest=mkosi.base.tar,rewrite-timestamp=true" \
+            -f Containerfile.mkosi-base .
+          rm -f Containerfile.mkosi-base
+          tar -xf mkosi.base.tar --wildcards --to-stdout 'usr/lib/modules/*/initramfs.img' > mkosi.initrd.img
+          test -s mkosi.initrd.img
           mkosi \
             --source-date-epoch "$SOURCE_DATE_EPOCH" \
             --seed "$YUBIOS_MKOSI_SEED" \
             --incremental=no \
+            --skeleton-tree mkosi.base.tar \
+            --initrd "$(pwd)/mkosi.initrd.img" \
+            --kernel-modules-initrd=no \
             --distribution fedora \
             --release 45 \
             --architecture "${{ matrix.mkosi_arch }}" \
             --profile minimal \
-            --package kernel \
             --package systemd-boot-unsigned \
             --bootable yes \
             --tools-tree-package softhsm2 \
@@ -324,6 +351,7 @@ jobs:
             --sign-expected-pcr-key "$(cat mkosi.secure-boot.pkcs11-uri)" \
             --sign-expected-pcr-certificate mkosi.secure-boot.pem \
             build
+          cp -f mkosi.initrd.img mkosi.output/initrd.cpio.zst
           ls -la mkosi.output/
 
       - name: Verify UKI is signed by the PKCS#11 (SoftHSM) key
@@ -357,8 +385,8 @@ jobs:
             echo "mkosi_source=https://github.com/yubi-OS/mkosi@000b5cefe2b130e928fcfe6a649b417d6f78f66d (approved source; release provenance in PINNED.md)"
             echo "signing=UKI signed via SecureBootKeySource=provider:pkcs11 + systemd-sbsign"
             echo "signature_envelope=random non-production SoftHSM key; excluded from byte-for-byte proof"
-            echo "NOTE: Signing key is a SoftHSM mock of YubiKey PIV slot 9c."
-            echo "Production images are signed with the real YubiKey (ADR-008); this"
+            echo "NOTE: Signing key is a SoftHSM mock of U2F/HSM PIV slot 9c."
+            echo "Production images are signed with the real U2F/HSM (ADR-008); this"
             echo "image validates the build + PKCS#11 signing path, not a production key."
             echo "Install flow (ADR-022): write this image to disk, boot; the installed"
             echo "system tracks 0mniteck/yubios:latest via bootc. ARM64 targets flash"
@@ -466,8 +494,8 @@ jobs:
             echo "mkosi_source=https://github.com/yubi-OS/mkosi@000b5cefe2b130e928fcfe6a649b417d6f78f66d (approved source; release provenance in PINNED.md)"
             echo "signing=UKI signed via SecureBootKeySource=provider:pkcs11 + systemd-sbsign"
             echo "signature_envelope=random non-production SoftHSM key; excluded from byte-for-byte proof"
-            echo "NOTE: Signing key is a SoftHSM mock of YubiKey PIV slot 9c."
-            echo "Production images are signed with the real YubiKey (ADR-008); this"
+            echo "NOTE: Signing key is a SoftHSM mock of U2F/HSM PIV slot 9c."
+            echo "Production images are signed with the real U2F/HSM (ADR-008); this"
             echo "image validates the build + PKCS#11 signing path, not a production key."
             echo "Install flow (ADR-022 / ADR-032): pull this artifact, mount the ESP,"
             echo "copy yubios.efi to /EFI/Linux/bootc/bootc_composefs-<digest>.efi at"
@@ -522,7 +550,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev
     steps:
 
       - name: Install git for checkout and reproducibility
@@ -603,7 +631,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -808,7 +836,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md

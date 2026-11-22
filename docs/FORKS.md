@@ -20,13 +20,13 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 |---|---|---|---|---|---|
 | [`yubi-OS/particleos`](https://github.com/yubi-OS/particleos) | [`systemd/particleos`](https://github.com/systemd/particleos) | `main` (`b605add797ba`) | `—` | `72debb729f5d` (`+17`) | `feature/surface-arm64-audio` (`+17`), `feature/surface-arm64-snapdragon` (`+15`), `feature/surface-uefi` (`+9`) |
 | [`yubi-OS/bootc`](https://github.com/yubi-OS/bootc) | [`bootc-dev/bootc`](https://github.com/bootc-dev/bootc) | `main` (`0c5dd0649787`) | `v1.17.4` (`7cde7bbe233e`) | `4519e4024f65` (`+18`) | `feature/surface-arm64-audio` (`+18`), `feature/surface-arm64-snapdragon` (`+14`), `feature/surface-arm64-usb4` (`+18`), `feature/surface-x86-uefi` (`+8`) |
-| [`yubi-OS/bcvk`](https://github.com/yubi-OS/bcvk) | [`bootc-dev/bcvk`](https://github.com/bootc-dev/bcvk) | `main` (`a3e2327d9ce3`) | `v0.22.0` (`2a0176b11751`) | `35a65a76c9e6` (`+8`) | `feat/ci` (`+3`), `feat/extra-qemu-arg` (`+7`), `feat/swtpm-ci` (`+3`), `feature/native-to-disk` (`+2`), `feature/yubikey-usb-passthrough` (`+2`), `release/v0.22.0-yubios.1` (`+8`) |
+| [`yubi-OS/bcvk`](https://github.com/yubi-OS/bcvk) | [`bootc-dev/bcvk`](https://github.com/bootc-dev/bcvk) | `main` (`a3e2327d9ce3`) | `v0.22.0` (`2a0176b11751`) | `35a65a76c9e6` (`+8`) | `feat/ci` (`+3`), `feat/extra-qemu-arg` (`+7`), `feat/swtpm-ci` (`+3`), `feature/native-to-disk` (`+2`), `feature/u2f-hsm-usb-passthrough` (`+2`), `release/v0.22.0-yubios.1` (`+8`) |
 | [`yubi-OS/mkosi`](https://github.com/yubi-OS/mkosi) | [`systemd/mkosi`](https://github.com/systemd/mkosi) | `main` (`2fa9a248a2fe`) | `v27.1` (`ecf7f5702bb2`) | `000b5cefe2b1` (`+3`) | `feature/yubiOS-profile` (`+3`) |
 | [`yubi-OS/image-builder`](https://github.com/yubi-OS/image-builder) | [`osbuild/image-builder`](https://github.com/osbuild/image-builder) | `main` (`8f5e12276f11`) | `v90.0.0` (`b80d1f9416f2`) | — _(pure 1:1 mirror)_ | — |
 | [`yubi-OS/arm-trusted-firmware`](https://github.com/yubi-OS/arm-trusted-firmware) | [`ARM-software/arm-trusted-firmware`](https://github.com/ARM-software/arm-trusted-firmware) | `master` (`a881364e03b0`) | `v2.15.0` (`da738d5eae93`) | `8d96428a33f9` (`+3`) | `feat/ci` (`+3`) |
 | [`yubi-OS/optee_os`](https://github.com/yubi-OS/optee_os) | [`OP-TEE/optee_os`](https://github.com/OP-TEE/optee_os) | `master` (`5d9a256b168a`) | `4.11.0` (`f54190f22611`) | `e1181e2d0e40` (`+6`) | `feat/ci` (`+1`), `feat/stmm-volatile-storage-ci-4.11` (`+6`) |
 | [`yubi-OS/optee_ftpm`](https://github.com/yubi-OS/optee_ftpm) | [`OP-TEE/optee_ftpm`](https://github.com/OP-TEE/optee_ftpm) | `master` (`f09f4cdad210`) | `4.11.0` (`f09f4cdad210`) | `b78d47800ca1` (`+3`) | `feat/ci` (`+1`), `feat/volatile-nv-ci` (`+3`), `feat/volatile-nv-ci-4.11` (`+3`) |
-| [`yubi-OS/ms-tpm-20-ref`](https://github.com/yubi-OS/ms-tpm-20-ref) | [`microsoft/ms-tpm-20-ref`](https://github.com/microsoft/ms-tpm-20-ref) | `main` (`ee21db0a941d`) | `v1.83r1` (`ee21db0a941d`) | `c73d99857e5e` (`+1`) | `feat/ci` (`+1`) |
+| [`yubi-OS/ms-tpm-20-ref`](https://github.com/yubi-OS/ms-tpm-20-ref) | [`microsoft/ms-tpm-20-ref`](https://github.com/microsoft/ms-tpm-20-ref) | `main` (`ee21db0a941d`) | `v1.83r1` (`ee21db0a941d`) | `6c893ca8ebbb` (`+1`) | `feat/ci` (`+1`) |
 | [`yubi-OS/edk2-rk3588`](https://github.com/yubi-OS/edk2-rk3588) | [`edk2-porting/edk2-rk3588`](https://github.com/edk2-porting/edk2-rk3588) | `master` (`2f3f8265590f`) | `v1.1` (`6a682c0ef3ed`) | — _(pure 1:1 mirror)_ | — |
 | [`yubi-OS/edk2`](https://github.com/yubi-OS/edk2) | [`tianocore/edk2`](https://github.com/tianocore/edk2) | `master` (`8628578dacd3`) | `edk2-stable202608` (`2970e5699ba6`) | `77828ba8f2d0` (`+3`) | `feat/ci` (`+3`) |
 | [`yubi-OS/edk2-platforms`](https://github.com/yubi-OS/edk2-platforms) | [`tianocore/edk2-platforms`](https://github.com/tianocore/edk2-platforms) | `master` (`4db2845d1442`) | `20260316-before-platform-removals` (`cc384840c440`) | — _(pure 1:1 mirror)_ | — |
@@ -241,19 +241,19 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
 | `main` | `a3e2327d9ce3448242cbb62cbdf20ef47a534752` | `+0 / -0` | `0` | 1:1 mirror of upstream `bootc-dev/bcvk:main`. |
-| `yubios` | `35a65a76c9e6aa97b2649e2d19d8354a34099924` | `+8 / -0` | `20` | Canonical yubiOS integration branch for bcvk: integrates `native-to-disk` direct block-device installer, `--yubikey` USB passthrough, `--swtpm` software TPM 2.0, `--swu2f` in-guest `/dev/uhid` FIDO2/U2F authenticator, virtiofsd disk logging + host-side rbind chroot entrypoint + ARM64 DirectBoot `tmpfiles.extra` SSH credential helper, `--extra-qemu-arg` CLI option, and `.github/workflows/yubios-release.yml` + `RELEASING.md`. |
+| `yubios` | `35a65a76c9e6aa97b2649e2d19d8354a34099924` | `+8 / -0` | `20` | Canonical yubiOS integration branch for bcvk: integrates `native-to-disk` direct block-device installer, `--u2f-hsm` USB passthrough, `--swtpm` software TPM 2.0, `--swu2f` in-guest `/dev/uhid` FIDO2/U2F authenticator, virtiofsd disk logging + host-side rbind chroot entrypoint + ARM64 DirectBoot `tmpfiles.extra` SSH credential helper, `--extra-qemu-arg` CLI option, and `.github/workflows/yubios-release.yml` + `RELEASING.md`. |
 | `feat/ci` | `53876ad8654deaaca75517b3a245cc07f3b94b0a` | `+3 / -0` | `1` | Multi-arch native Rust unit test + advisory clippy CI workflow (`.github/workflows/ci_test.yml`) on bare amd64 and arm64 runners. |
-| `feat/extra-qemu-arg` | `fe4138cf76ae3667ff40b40a8519d5264b639852` | `+7 / -0` | `18` | Adds `--extra-qemu-arg` CLI option and `QemuConfig` field (plus unified yubiOS CLI wiring for `native-to-disk`, `--yubikey`, `--swtpm`, `--swu2f`). |
+| `feat/extra-qemu-arg` | `fe4138cf76ae3667ff40b40a8519d5264b639852` | `+7 / -0` | `18` | Adds `--extra-qemu-arg` CLI option and `QemuConfig` field (plus unified yubiOS CLI wiring for `native-to-disk`, `--u2f-hsm`, `--swtpm`, `--swu2f`). |
 | `feat/swtpm-ci` | `92976ac118552053150c8c10a7c3c4f752acd59b` | `+3 / -0` | `9` | Adds `--swtpm` software TPM 2.0 and `--swu2f` in-guest `/dev/uhid` FIDO2 authenticator support for ephemeral CI VMs, plus virtiofsd startup error logging and AppArmor confinement fixes. |
 | `feature/native-to-disk` | `34769eab5dce74c977b9774566433bd20ccf09eb` | `+2 / -0` | `2` | Adds `bcvk native-to-disk` subcommand (`native_to_disk.rs`) for direct block-device installation via privileged Podman without QEMU. |
-| `feature/yubikey-usb-passthrough` | `f7a1cac93fbb7f75f7415e4811097080d439cd28` | `+2 / -0` | `5` | Adds YubiKey sysfs detection (`usb_passthrough.rs`), QEMU `usb-host` passthrough args, and `--yubikey` CLI flag for ephemeral VMs. |
+| `feature/u2f-hsm-usb-passthrough` | `f7a1cac93fbb7f75f7415e4811097080d439cd28` | `+2 / -0` | `5` | Adds U2F/HSM sysfs detection (`usb_passthrough.rs`), QEMU `usb-host` passthrough args, and `--u2f-hsm` CLI flag for ephemeral VMs. |
 | `release/v0.22.0-yubios.1` | `35a65a76c9e6aa97b2649e2d19d8354a34099924` | `+8 / -0` | `20` | Release branch tracking `yubios` on top of upstream `v0.22.0` / `main` for building and publishing `bcvk-amd64` and `bcvk-arm64` release binaries. |
 
 #### `yubi-OS/bcvk` — `yubios` (`35a65a76c9e6aa97b2649e2d19d8354a34099924`, 8 commits ahead of `main`)
 
 - `76313c3337f1` (`corning-croak-cable`): feat(native-to-disk): add native block-device installer
 - `34769eab5dce` (`corning-croak-cable`): feat(native-to-disk): wire native-to-disk subcommand into CLI
-- `bc6612067043` (`corning-croak-cable`): feat(usb-passthrough): YubiKey sysfs detection + QEMU usb-host args and docs
+- `bc6612067043` (`corning-croak-cable`): feat(usb-passthrough): U2F/HSM sysfs detection + QEMU usb-host args and docs
 - `aa892f626ce4` (`foil-copy-overrate`): feat(swtpm): software TPM 2.0 for ephemeral CI VMs (--swtpm)
 - `c9691e2c407d` (`foil-copy-overrate`): feat(swu2f): in-guest /dev/uhid software FIDO2/U2F authenticator for CI VMs (--swu2f)
 - `fd80f2c789ab` (`foil-copy-overrate`): fix(qemu,ephemeral): virtiofsd disk logging, host-side rbind chroot entrypoint, and credential helpers
@@ -270,7 +270,7 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 
 - `76313c3337f1` (`corning-croak-cable`): feat(native-to-disk): add native block-device installer
 - `34769eab5dce` (`corning-croak-cable`): feat(native-to-disk): wire native-to-disk subcommand into CLI
-- `bc6612067043` (`corning-croak-cable`): feat(usb-passthrough): YubiKey sysfs detection + QEMU usb-host args and docs
+- `bc6612067043` (`corning-croak-cable`): feat(usb-passthrough): U2F/HSM sysfs detection + QEMU usb-host args and docs
 - `aa892f626ce4` (`foil-copy-overrate`): feat(swtpm): software TPM 2.0 for ephemeral CI VMs (--swtpm)
 - `c9691e2c407d` (`foil-copy-overrate`): feat(swu2f): in-guest /dev/uhid software FIDO2/U2F authenticator for CI VMs (--swu2f)
 - `fd80f2c789ab` (`foil-copy-overrate`): fix(qemu,ephemeral): virtiofsd disk logging, host-side rbind chroot entrypoint, and credential helpers
@@ -287,16 +287,16 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 - `76313c3337f1` (`corning-croak-cable`): feat(native-to-disk): add native block-device installer
 - `34769eab5dce` (`corning-croak-cable`): feat(native-to-disk): wire native-to-disk subcommand into CLI
 
-#### `yubi-OS/bcvk` — `feature/yubikey-usb-passthrough` (`f7a1cac93fbb7f75f7415e4811097080d439cd28`, 2 commits ahead of `main`)
+#### `yubi-OS/bcvk` — `feature/u2f-hsm-usb-passthrough` (`f7a1cac93fbb7f75f7415e4811097080d439cd28`, 2 commits ahead of `main`)
 
-- `f25119ac64fc` (`corning-croak-cable`): feat(usb-passthrough): YubiKey sysfs detection + QEMU usb-host args and docs
-- `f7a1cac93fbb` (`foil-copy-overrate`): feat(usb-passthrough): wire usb_passthrough into bcvk-qemu and --yubikey CLI flag
+- `f25119ac64fc` (`corning-croak-cable`): feat(usb-passthrough): U2F/HSM sysfs detection + QEMU usb-host args and docs
+- `f7a1cac93fbb` (`foil-copy-overrate`): feat(usb-passthrough): wire usb_passthrough into bcvk-qemu and --u2f-hsm CLI flag
 
 #### `yubi-OS/bcvk` — `release/v0.22.0-yubios.1` (`35a65a76c9e6aa97b2649e2d19d8354a34099924`, 8 commits ahead of `main`)
 
 - `76313c3337f1` (`corning-croak-cable`): feat(native-to-disk): add native block-device installer
 - `34769eab5dce` (`corning-croak-cable`): feat(native-to-disk): wire native-to-disk subcommand into CLI
-- `bc6612067043` (`corning-croak-cable`): feat(usb-passthrough): YubiKey sysfs detection + QEMU usb-host args and docs
+- `bc6612067043` (`corning-croak-cable`): feat(usb-passthrough): U2F/HSM sysfs detection + QEMU usb-host args and docs
 - `aa892f626ce4` (`foil-copy-overrate`): feat(swtpm): software TPM 2.0 for ephemeral CI VMs (--swtpm)
 - `c9691e2c407d` (`foil-copy-overrate`): feat(swu2f): in-guest /dev/uhid software FIDO2/U2F authenticator for CI VMs (--swu2f)
 - `fd80f2c789ab` (`foil-copy-overrate`): fix(qemu,ephemeral): virtiofsd disk logging, host-side rbind chroot entrypoint, and credential helpers
@@ -314,7 +314,7 @@ Every fork repository in the `yubi-OS` GitHub organization follows five invarian
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
 | `main` | `2fa9a248a2fecebb0dd64a34c0fecdc5ca8335b9` | `+0 / -0` | `0` | 1:1 mirror of upstream `systemd/mkosi:main`. |
-| `yubios` | `000b5cefe2b130e928fcfe6a649b417d6f78f66d` | `+3 / -0` | `4` | Canonical yubiOS integration branch for mkosi: adds the `yubiOS` mkosi build profile with YubiKey PIV signing + FIDO2 enrollment and repo-agnostic CI validation (`mkosi summary`, `shellcheck`, `ruff`). |
+| `yubios` | `000b5cefe2b130e928fcfe6a649b417d6f78f66d` | `+3 / -0` | `4` | Canonical yubiOS integration branch for mkosi: adds the `yubiOS` mkosi build profile with U2F/HSM PIV signing + FIDO2 enrollment and repo-agnostic CI validation (`mkosi summary`, `shellcheck`, `ruff`). |
 | `feature/yubiOS-profile` | `000b5cefe2b130e928fcfe6a649b417d6f78f66d` | `+3 / -0` | `4` | Adds the `yubiOS` mkosi build profile with PIV signing + FIDO2 enrollment and profile validation CI. |
 
 #### `yubi-OS/mkosi` — `yubios` (`000b5cefe2b130e928fcfe6a649b417d6f78f66d`, 3 commits ahead of `main`)
@@ -455,16 +455,16 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
 | `main` | `ee21db0a941decd3cac67925ea3310873af60ab3` | `+0 / -0` | `0` | 1:1 mirror of upstream `microsoft/ms-tpm-20-ref:main` (`v1.83r1`; all unowned upstream branches removed). |
-| `yubios` | `c73d99857e5e768784c955f9d1ed1bd83b06f2bd` | `+1 / -0` | `1` | Canonical yubiOS integration branch for `ms-tpm-20-ref`: adds `.github/workflows/ci_test.yml` building the TPM 2.0 reference (`tpm2-simulator` + `libtpm.a`) for AArch64 (cross + native). |
-| `feat/ci` | `c73d99857e5e768784c955f9d1ed1bd83b06f2bd` | `+1 / -0` | `1` | Component CI workflow (`.github/workflows/ci_test.yml`) for AArch64 `ms-tpm-20-ref` builds. |
+| `yubios` | `6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48` | `+1 / -0` | `1` | Canonical yubiOS integration branch for `ms-tpm-20-ref`: adds `.github/workflows/ci_test.yml` building the TPM 2.0 reference (`tpm2-simulator` + `libtpm.a`) for AArch64 (cross + native). |
+| `feat/ci` | `6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48` | `+1 / -0` | `1` | Component CI workflow (`.github/workflows/ci_test.yml`) for AArch64 `ms-tpm-20-ref` builds. |
 
-#### `yubi-OS/ms-tpm-20-ref` — `yubios` (`c73d99857e5e768784c955f9d1ed1bd83b06f2bd`, 1 commits ahead of `main`)
+#### `yubi-OS/ms-tpm-20-ref` — `yubios` (`6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48`, 1 commits ahead of `main`)
 
-- `c73d99857e5e` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
+- `6c893ca8ebbb` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
 
-#### `yubi-OS/ms-tpm-20-ref` — `feat/ci` (`c73d99857e5e768784c955f9d1ed1bd83b06f2bd`, 1 commits ahead of `main`)
+#### `yubi-OS/ms-tpm-20-ref` — `feat/ci` (`6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48`, 1 commits ahead of `main`)
 
-- `c73d99857e5e` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
+- `6c893ca8ebbb` (`foil-copy-overrate`): ci(#35 C4): add ci_test.yml building ms-tpm-20-ref TPM 2.0 reference for aarch64 (cross + native)
 
 ---
 

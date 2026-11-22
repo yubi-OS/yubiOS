@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+  <wallpaper deleted="false">
+    <name>yubiOS Aurora Ridge (4K)</name>
+    <filename>/usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0b0f1a</pcolor>
+    <scolor>#1b2438</scolor>
+  </wallpaper>
+</wallpapers>

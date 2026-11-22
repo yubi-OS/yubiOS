@@ -78,7 +78,7 @@ Concrete implications for linkedin browser outreach: any change to the skill sho
 
 This skill — **live browser, candidate outreach, draft-then-approve** — sits in a domain that strengthens the yubiOS trust chain from live browser, candidate outreach, draft-then-approve. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new); this skill's fit coordinate was (u=0.803, v=0.096), PC1+PC2 = 0.4615, holdout R² = +0.2244.
 
-For LinkedIn browser outreach, the trust chain primitive applies as follows: this skill contributes to the trust-chain at the LinkedIn outreach boundary; ToS-aware rate limiting is the safety layer. The trust chain for yubiOS runs YubiKey → fTPM (per `yubikey-operations` and `ftpm-optee-tpm`) → UKI PCR 11 → dm-verity root hash (per `dm-verity-and-integrity`) → bootc image digest (per `bootc-images`) → SLSA L3 attestation (per `slsa-provenance` + `sigstore-rekor-v2`); this skill is one contributor in that chain.
+For LinkedIn browser outreach, the trust chain primitive applies as follows: this skill contributes to the trust-chain at the LinkedIn outreach boundary; ToS-aware rate limiting is the safety layer. The trust chain for yubiOS runs U2F/HSM → fTPM (per `yubikey-operations` and `ftpm-optee-tpm`) → UKI PCR 11 → dm-verity root hash (per `dm-verity-and-integrity`) → bootc image digest (per `bootc-images`) → SLSA L3 attestation (per `slsa-provenance` + `sigstore-rekor-v2`); this skill is one contributor in that chain.
 
 Concrete implications for LinkedIn browser outreach: any change should be reviewed for impact on trust-chain integrity; gaps in the trust chain attributable to this skill are tracked in the cycle-5 run log at `refs/curve-guided-rsi-v2-cycle5-deep-research-2026-08-04.md`.
 

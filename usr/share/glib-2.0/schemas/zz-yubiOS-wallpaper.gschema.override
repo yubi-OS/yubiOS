@@ -1,0 +1,21 @@
+[org.gnome.desktop.background]
+picture-uri='file:///usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg'
+picture-uri-dark='file:///usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg'
+picture-options='zoom'
+
+[org.gnome.desktop.screensaver]
+picture-uri='file:///usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg'
+picture-options='zoom'
+idle-activation-enabled=false
+lock-enabled=false
+
+[org.gnome.desktop.session]
+idle-delay=uint32 0
+
+[org.gnome.settings-daemon.plugins.power]
+sleep-inactive-ac-type='nothing'
+sleep-inactive-ac-timeout=0
+sleep-inactive-battery-type='nothing'
+sleep-inactive-battery-timeout=0
+idle-dim=false
+power-button-action='nothing'

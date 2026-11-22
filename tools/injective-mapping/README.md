@@ -2,6 +2,12 @@
 
 ## What this is
 
+> **Slug labels are not unique.** 2286 items carry only **915 distinct slug labels**
+> (232 labels repeat across 1603 rows; one SELF-CHANGELOG slug appears 34 times).
+> The ladder reaches **2169** distinct keys at `(bits, corpus, cycle, slug)` and **2286**
+> only at `(bits, corpus, cycle, slug, row_id)`, where the row ordinal makes it injective by
+> construction (as `papers/README.md:145` already states).
+
 The corpus `papers/is-this-x-2026-08-12-Final.zip` →
 `is-this-x-2026-08-12/data/real/per_row_coverage_v3.json` holds 2286 items
 (skills, docs, refs, self), each with a 9-bit coverage vector over the
@@ -19,16 +25,19 @@ directory:
 1. reports that collision structure explicitly,
 2. builds honest, provenance-clear measurement coordinates per item,
 3. proves those coordinates cannot be injective on their own (pigeonhole),
-4. achieves full injectivity the only honest way: by keying on identity
-   (slug), and
-5. exports `skill-map.csv` — one unique row per item, the "spreadsheet".
+4. reaches full injectivity only by keying on the row ordinal (slug labels
+   collide), and
+5. exports `skill-map.csv` — one row per item, the "spreadsheet".
 
 ## Epistemics (read this before trusting the CSV)
 
-**The mapping is 1-to-1 as a keyed record.** Every row in `skill-map.csv`
-is keyed on `slug`, and slugs are unique in the corpus, so the export is
-injective: 2286 items in, 2286 unique rows out. That injectivity comes
-from identity, not from anything the measurement columns discovered.
+**The mapping is 1-to-1 only as a row-ordinal-keyed record.** Slug labels are
+*not* unique (915 distinct over 2286 rows), so the key that separates every row
+is `(row_id, slug)`: 2286 items in, 2286 keyed rows out (`csv_keyed_rows`). That
+injectivity comes from the row ordinal, not from the slug and not from anything
+the measurement columns discovered. The JSON field `csv_unique_slugs` is a
+deprecated alias of `csv_keyed_rows` (a misnomer kept only so older CI steps
+still parse); read `distinct_slug_labels` for the number of distinct slugs.
 
 **The measurement subspace is many-to-one.** The 9 coverage bits (and
 every quantity derived purely from them — `k`, the S² position, the
@@ -71,12 +80,15 @@ Distinct keys out of 2286, adding one field at a time:
 | coverage (9 bits) alone       | 176           |
 | + corpus                      | 252           |
 | + cycle                       | 318           |
-| + slug (identity)             | 2286          |
+| + slug                        | 2169          |
+| + row_id (row ordinal)        | 2286          |
 
 Monotone non-decreasing by construction (each stage only adds
-discriminating power); the self-test asserts this. Slug is not merely
-"the biggest jump" — it is the only field guaranteed unique per item, so
-it is the only stage that reaches 2286/2286.
+discriminating power); the self-test asserts this. Slug is the biggest jump
+but does not reach 2286: 117 rows still share all of (coverage, corpus,
+cycle, slug) with another row. Only the row ordinal, injective by
+construction, reaches 2286/2286. JSON fields: `distinct_slug_labels` (915),
+`ladder_stage_4_slug` (2169), `ladder_stage_5_row_id` (2286), `csv_keyed_rows` (2286).
 
 ### The pigeonhole argument (measurement alone cannot be injective)
 
@@ -121,11 +133,15 @@ can filter/sort by "how many other items share my exact coverage
 ## Usage
 
 ```
-python3 tools/injective-mapping/mapping.py                # run + write CSV + prose report
-python3 tools/injective-mapping/mapping.py --json          # same, JSON summary
-python3 tools/injective-mapping/mapping.py --selftest       # run + assertions in a TEMP dir, exit 0/1
-python3 tools/injective-mapping/mapping.py --selftest --write  # selftest that also writes --out
+python3 tools/injective-mapping/mapping.py                          # no arguments: prints help, exit 2, writes NOTHING
+python3 tools/injective-mapping/mapping.py --out PATH               # run + write the CSV to PATH + prose report
+python3 tools/injective-mapping/mapping.py --json                   # JSON summary; no CSV is written unless --out is given
+python3 tools/injective-mapping/mapping.py --selftest               # run + assertions in a TEMP dir, exit 0/1
+python3 tools/injective-mapping/mapping.py --selftest --write       # selftest that also writes the tracked skill-map.csv
 ```
+
+The tracked `skill-map.csv` is only rewritten when asked for (`--out` or
+`--selftest --write`); a bare invocation no longer overwrites it.
 
 Dependencies: `numpy` only. Reads the zip already committed at
 `papers/is-this-x-2026-08-12-Final.zip`; no network access required.
@@ -163,9 +179,11 @@ directory — pass `--write` to write the committed path):
 
 - row count == 2286
 - 100 < distinct coverage vectors < 400 (prints the actual count; expect ≈176)
-- the exported CSV has exactly 2286 rows with 2286 unique `slug` values
-- the injectivity ladder is monotone non-decreasing and its final stage
-  (coverage+corpus+cycle+slug) equals 2286
+- the exported CSV has exactly 2286 rows keyed on `(row_id, slug)` (`csv_keyed_rows`)
+- `distinct_slug_labels` equals the slug count recomputed from the exported CSV and 915, and is
+  strictly below the keyed-row count (slugs are not unique); a row-index key cannot satisfy it
+- the injectivity ladder is monotone non-decreasing, its slug stage equals 2169 and its final
+  row_id stage equals 2286
 - two consecutive pipeline runs produce byte-identical CSVs (determinism)
 
 ## Limitations
@@ -187,12 +205,13 @@ directory — pass `--write` to write the committed path):
 ## Reality check (first canonical run, 2026-08-22)
 
 CI's first true execution of `--selftest` falsified an assumption this README
-originally made: **slug labels are not unique either** -- the real corpus has
-only 2169 distinct slugs across 2286 rows (117 duplicate labels, concentrated
-in `self`-corpus changelog rows). So even the identity *label* collides; the
-only injective key available without invention is the **row ordinal**. The
-ladder now ends at `coverage+corpus+cycle+slug+row_id = 2286/2286`, and the
-tool reports distinct slug labels separately instead of asserting on them.
+originally made: **slug labels are not unique either**. (An earlier version of
+this note said "2169 distinct slugs"; 2169 is the ladder stage
+`(coverage, corpus, cycle, slug)`. The number of distinct slug *labels* is **915**,
+concentrated in `self`-corpus changelog rows.) So even the identity *label*
+collides; the only injective key available without invention is the **row
+ordinal**. The ladder ends at `coverage+corpus+cycle+slug+row_id = 2286/2286`, and
+the tool reports **and asserts** `distinct_slug_labels = 915` beside the keyed-row count.
 This sharpens the deliverable's point: identity, not measurement, is what
 makes the mapping 1-to-1 -- and in this corpus even identity labels needed
 the ordinal to disambiguate.

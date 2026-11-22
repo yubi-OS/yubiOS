@@ -4,9 +4,10 @@
   point map: how many items stay distinguishable when each item code is
   truncated to its first d bits.
 
-  Core Lean 4 only (pinned toolchain: leanprover/lean4:v4.33.0).
-  No mathlib, no Batteries, no external import, no `sorry`,
-  no placeholder / axiom-only declaration.
+  Pinned toolchain: leanprover/lean4:v4.35.0 (Mathlib v4.35.0 tactics available
+  in lakefile.toml; core Lean 4.35.0 proofs re-checked with leanchecker --fresh;
+  statements and axiom set unchanged; also checks in core Lean 4.33.0 at main 2efa6131).
+  No `sorry`, no placeholder / axiom-only declaration.
 
   Companion scope manifest: papers/data/lean/focal-scope.json
   Axiom gate:               papers/data/lean/verify_wayfinder_axioms.py

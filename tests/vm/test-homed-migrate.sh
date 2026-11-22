@@ -2,7 +2,7 @@
 # test-homed-migrate.sh — systemd-homed migration test for yubiOS (OMN-156).
 #
 # Verifies a systemd-homed home directory can be created with FIDO2 unlock
-# (using a real YubiKey or passless CTAP2) and then unlocked after a
+# (using a real U2F/HSM or passless CTAP2) and then unlocked after a
 # simulated re-deployment.
 #
 # Usage:
@@ -19,7 +19,7 @@ Usage: bash $0 [--hw-device /dev/sda] [--allow-real-u2f 0|1]
 
 Options:
   --hw-device       Optional hardware device for destructive install
-  --allow-real-u2f  Set to 1 if host has a real YubiKey
+  --allow-real-u2f  Set to 1 if host has a real U2F/HSM
   --help            Print this help
 EOF
 }
@@ -103,5 +103,5 @@ sudo env "PATH=$PATH:/usr/sbin:/sbin" bcvk ephemeral exec "$VMID" -- \
 }
 
 echo
-echo "Summary: 8/8 PASS (smoke test; real home enrollment requires YubiKey + --allow-real-u2f=1)"
+echo "Summary: 8/8 PASS (smoke test; real home enrollment requires U2F/HSM + --allow-real-u2f=1)"
 exit 0

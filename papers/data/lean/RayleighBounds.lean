@@ -1,5 +1,5 @@
 /-
-  RayleighBounds.lean — rayleigh/1 (2026-09-18), core Lean 4.33.0, no Mathlib, no sorry.
+  RayleighBounds.lean — rayleigh/1 (2026-09-18), Lean 4.35.0 (Mathlib v4.35.0 workspace; core proofs re-checked with leanchecker --fresh; also checks in core Lean 4.33.0 at main 2efa6131), no sorry.
 
   Exact integer statements behind the wayfinder's Rayleigh diagnostics on the
   isolation graph (points adjacent when chord < 0.095). A graph is an edge list

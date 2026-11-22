@@ -1,5 +1,5 @@
 #!/bin/bash
-# Verify a signed yubiOS UKI against the YubiKey PIV Secure Boot certificate (ADR-008).
+# Verify a signed yubiOS UKI against the U2F/HSM PIV Secure Boot certificate (ADR-008).
 # This is the verify half of the sbsign chain: validate-pkcs11-uri.sh proves signing
 # works; this proves a *shipped* UKI carries a signature that chains to the PIV cert.
 #

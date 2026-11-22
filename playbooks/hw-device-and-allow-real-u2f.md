@@ -2,7 +2,7 @@
 
 ## Context
 
-Apply when dispatching `ci_test-vm.yml` or `ci_test-vgpu-vm.yml`, especially self-mode against the arm64 self-hosted `rock1` runner. These are the only two workflows in the fleet whose dispatch body can **physically wipe a runner disk** (`hw_device`) and the only two that can **silently mask a regression** behind a real YubiKey (`allow_real_u2f`).
+Apply when dispatching `ci_test-vm.yml` or `ci_test-vgpu-vm.yml`, especially self-mode against the arm64 self-hosted `rock1` runner. These are the only two workflows in the fleet whose dispatch body can **physically wipe a runner disk** (`hw_device`) and the only two that can **silently mask a regression** behind a real U2F/HSM (`allow_real_u2f`).
 
 - `hw_device` — DESTRUCTIVE. Names a spare block device for the hardware install leg. Empty ⇒ leg skipped.
 - `allow_real_u2f` — safety opt-in, required when a physical Yubico device is on the host.

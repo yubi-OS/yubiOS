@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 # Unit tests for usr/lib/yubiOS/lib.sh
 # Run: bats tests/unit/test-lib.bats
-# Mocks all hardware; no YubiKey required.
+# Mocks all hardware; no U2F/HSM required.
 
 FIXTURES="$(dirname "$BATS_TEST_FILENAME")/../fixtures"
 
@@ -23,7 +23,7 @@ teardown() {
 # ── detect_fido2_device ────────────────────────────────────────────────────
 
 @test "detect_fido2_device returns hidraw path when device present" {
-  fido2-token() { echo "/dev/hidraw0: Yubico YubiKey FIDO+CCID"; }
+  fido2-token() { echo "/dev/hidraw0: Yubico U2F/HSM FIDO+CCID"; }
   export -f fido2-token
   run detect_fido2_device
   [ "$status" -eq 0 ]
@@ -90,12 +90,12 @@ teardown() {
   [ -z "$output" ]
 }
 
-# ── wait_for_yubikey ──────────────────────────────────────────────────────
+# ── wait_for_u2f_hsm ──────────────────────────────────────────────────────
 
-@test "wait_for_yubikey succeeds immediately when key present" {
-  fido2-token() { echo "/dev/hidraw0: YubiKey"; }
+@test "wait_for_u2f_hsm succeeds immediately when key present" {
+  fido2-token() { echo "/dev/hidraw0: U2F/HSM"; }
   export -f fido2-token
-  run wait_for_yubikey
+  run wait_for_u2f_hsm
   [ "$status" -eq 0 ]
 }
 

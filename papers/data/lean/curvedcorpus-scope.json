@@ -1,8 +1,8 @@
 {
   "schema": "wayfinder-scope/1",
   "lean_file": "papers/data/lean/CurvedCorpus.lean",
-  "toolchain": "leanprover/lean4:v4.33.0",
-  "dependencies": [],
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "dependencies": "Lean 4.35.0 + Mathlib v4.35.0 (rev 56a005855ea1)",
   "generated_for_branch": "lean-check-corpus-manifest-2026-10-07",
   "permitted_axioms": [
     "propext",

@@ -188,5 +188,7 @@
       "theorem:sq_nonneg": "5448f911d1cb6b60e9b588c8fa7f050833c582c179816e971100db0e6b5736ae"
     },
     "pinned_from_commit": "7d5ee590a55e"
-  }
+  },
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "dependencies": "Lean 4.35.0 + Mathlib v4.35.0 (rev 56a005855ea1)"
 }

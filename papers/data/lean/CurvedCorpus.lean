@@ -3,8 +3,10 @@
   Machine-checked invariants for the curved-corpus program.
   Companion to: "The Curved-Corpus Program, Unified" (Tchatalbachian, 2026-08-13).
 
-  Core Lean 4 only: no mathlib, no external dependencies.
-  Every `theorem` below is closed (no `sorry`).
+  Pinned toolchain: leanprover/lean4:v4.35.0 (Mathlib v4.35.0 tactics available
+  in lakefile.toml; core Lean 4.35.0 proofs re-checked with leanchecker --fresh;
+  statements and axiom set unchanged; also checks in core Lean 4.33.0 at main 2efa6131).
+  No `sorry`, no placeholder / axiom-only declaration.
 
   Contents (matching Section 6 of the paper):
     1. atom_delta_nonneg      -- Lemma 1: geodesic-only atom has Δ ≥ 0

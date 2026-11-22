@@ -39,7 +39,7 @@ MISSION.md's "control wins over convenience" stance, anything sold sits *around*
 trust chain, never *inside* it:
 
 - **Allowed:** managed fleet provisioning/enrollment services, hardware bundles
-  (YubiKey + pre-flashed device), support contracts and SLAs, hosted build/CI
+  (U2F/HSM + pre-flashed device), support contracts and SLAs, hosted build/CI
   infrastructure, integration consulting, training.
 - **Allowed:** paid features that are pure convenience and ship with a documented,
   owner-auditable equivalent path that doesn't require payment (e.g., a hosted
@@ -47,7 +47,7 @@ trust chain, never *inside* it:
   paywalled).
 - **Not allowed:** selling access to a trust boundary itself — no paid tier that
   unlocks a stronger or different Secure Boot / disk-encryption / signing path than
-  the free one. No "enterprise" trust anchor that bypasses the YubiKey-as-root
+  the free one. No "enterprise" trust anchor that bypasses the U2F/HSM-as-root
   model. No feature that requires surrendering key material (ROTPK, LUKS keys,
   FIDO2 credentials) to yubiOS or a yubiOS-operated service as a condition of
   paying.

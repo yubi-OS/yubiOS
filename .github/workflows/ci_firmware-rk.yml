@@ -20,6 +20,11 @@ on:
         type: boolean
         required: false
         default: false
+      burn_otp_fuses:
+        description: 'Disable OP-TEE CFG_RK_SECURE_BOOT_SIMULATION to burn OTP fuses on hardware? (IRREVERSIBLE — keep false unless rehearsing on a sacrificial board)'
+        type: boolean
+        required: false
+        default: false
       ci_callback:
         description: 'Internal: call back to ci.yml when this workflow finishes.'
         required: false
@@ -80,10 +85,10 @@ env:
   TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
   OPTEE_OS_REF: e1181e2d0e40f8550c0f8204a433eac54598d222 # release-descendant ref; see PINNED.md
   OPTEE_FTPM_REF: b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf # release-descendant ref; see PINNED.md
-  UBOOT_REF: 0257c1dedf23a082cd35afdb757b2886774b091c # release-descendant ref; see PINNED.md
+  UBOOT_REF: 7bf455d421600491c0105319de2a6bbaeb9b4484 # release-descendant ref; see PINNED.md
   EDK2_REF: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
   EDK2_PLATFORMS_REF: cc384840c440415a091623a7658112fedc416094 # compatibility ref; see PINNED.md
-  MS_TPM_REF: c73d99857e5e768784c955f9d1ed1bd83b06f2bd # yubios branch (v1.83r1 descendant); see PINNED.md
+  MS_TPM_REF: 6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48 # yubios branch (v1.83r1 descendant); see PINNED.md
   FTPM_UUID: bc50d971-d4c9-42c4-82cb-343fb7f37896
   MBEDTLS_REF: 068ff080b369adfac81509f9b57b2afabaf82dc5 # mbedtls-3.6.7
 
@@ -112,7 +117,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     env:
       EDK2_REPO: https://github.com/yubi-OS/edk2.git
       EDK2_PLATFORMS_REPO: https://github.com/yubi-OS/edk2-platforms.git
@@ -432,7 +437,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -547,6 +552,7 @@ jobs:
             python3-pyelftools python3-cryptography python3-setuptools \
             device-tree-compiler \
             openssl libssl-dev libgnutls28-dev \
+            softhsm2 opensc libengine-pkcs11-openssl \
             bison flex bc \
             uuid-dev iasl nasm swig \
             git ca-certificates || true
@@ -616,6 +622,26 @@ jobs:
           echo "STMM_FD=$GITHUB_WORKSPACE/BL32_AP_MM.fd" >> "$GITHUB_ENV"
           ls -l "$GITHUB_WORKSPACE/BL32_AP_MM.fd"
 
+      - name: Stage firmware signing keys (physical U2F/HSM slot 9a or swu2f + SoftHSM2 fallback)
+        env:
+          BURN_OTP_FUSES: ${{ inputs.burn_otp_fuses }}
+        run: |
+          set -euxo pipefail
+          chmod +x scripts/lib/stage-firmware-pkcs11-keys.sh
+          scripts/lib/stage-firmware-pkcs11-keys.sh "$GITHUB_WORKSPACE/fw-keys"
+          test -s "$GITHUB_WORKSPACE/fw-keys/slot9a-pub.pem"
+          test -s "$GITHUB_WORKSPACE/fw-keys/ta-sign-key.pem"
+          test -s "$GITHUB_WORKSPACE/fw-keys/rotpk_sha256.hex"
+          test -x "$GITHUB_WORKSPACE/fw-keys/pkcs11-sign-encrypt.sh"
+          echo "FW_KEY_DIR=$GITHUB_WORKSPACE/fw-keys" >> "$GITHUB_ENV"
+          echo "FW_KEY_SOURCE=$(cat "$GITHUB_WORKSPACE/fw-keys/key-source.txt")" >> "$GITHUB_ENV"
+          echo "FW_ROTPK_SHA256=$(cat "$GITHUB_WORKSPACE/fw-keys/rotpk_sha256.hex")" >> "$GITHUB_ENV"
+          if [ "${BURN_OTP_FUSES:-false}" = "true" ]; then
+            echo "OTP_FUSE_SIMULATION=n" >> "$GITHUB_ENV"
+          else
+            echo "OTP_FUSE_SIMULATION=y" >> "$GITHUB_ENV"
+          fi
+
       - name: Build OP-TEE TA dev kit
         env:
           OPTEE_PLATFORM: ${{ matrix.optee_platform }}
@@ -632,10 +658,25 @@ jobs:
           if [ -n "$OPTEE_FLAVOR" ]; then
             optee_args+=(PLATFORM_FLAVOR="$OPTEE_FLAVOR")
           fi
+          if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
+            optee_cfg_insecure=n
+            optee_args+=(
+              CFG_ROCKCHIP_OTP=y
+              CFG_RK_SECURE_BOOT=y
+              CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
+            )
+          else
+            optee_cfg_insecure=y
+          fi
+          echo "OPTEE_CFG_INSECURE=$optee_cfg_insecure" >> "$GITHUB_ENV"
           make -C optee_os -j"$(nproc)" \
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
             CROSS_COMPILE=arm-linux-gnueabihf- \
+            TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
+            TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
+            CFG_REE_FS_TA=n CFG_SECSTOR_TA=n CFG_SECSTOR_TA_MGMT_PTA=n \
+            CFG_INSECURE="$optee_cfg_insecure" \
             CFG_RPMB_FS=y CFG_REE_FS=y CFG_EARLY_TA=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -659,9 +700,13 @@ jobs:
           git -C ms-tpm-20-ref fetch -q --depth=1 origin "$MS_TPM_REF"
           git -C ms-tpm-20-ref checkout --detach FETCH_HEAD
           test "$(git -C ms-tpm-20-ref rev-parse HEAD)" = "$MS_TPM_REF"
+          YUBIOS_REAL_SIGN_ENC="$TA_DEV_KIT_DIR/scripts/sign_encrypt.py" \
           make -C optee_ftpm -j"$(nproc)" \
             CFG_FTPM_VOLATILE_NV=y \
             TA_DEV_KIT_DIR="$TA_DEV_KIT_DIR" \
+            TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
+            TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
+            SIGN_ENC="$FW_KEY_DIR/pkcs11-sign-encrypt.sh" \
             CFG_MS_TPM_20_REF="$GITHUB_WORKSPACE/ms-tpm-20-ref" \
             CROSS_COMPILE_ta_arm64=aarch64-linux-gnu- \
             CFG_ARM64_ta_arm64=y
@@ -680,12 +725,24 @@ jobs:
             optee_args+=(PLATFORM_FLAVOR="$OPTEE_FLAVOR")
           fi
           if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
-            optee_args+=(CFG_DRAM_BASE=0x40000000 CFG_DRAM_SIZE=0xb0000000 CFG_NSEC_DDR_1_BASE=0x100000000 CFG_NSEC_DDR_1_SIZE=0x2fc000000)
+            optee_args+=(
+              CFG_DRAM_BASE=0x40000000
+              CFG_DRAM_SIZE=0xb0000000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x2fc000000
+              CFG_ROCKCHIP_OTP=y
+              CFG_RK_SECURE_BOOT=y
+              CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
+            )
           fi
           make -C optee_os -j"$(nproc)" \
             "${optee_args[@]}" \
             CROSS_COMPILE64=aarch64-linux-gnu- \
             CROSS_COMPILE=arm-linux-gnueabihf- \
+            TA_PUBLIC_KEY="$FW_KEY_DIR/slot9a-pub.pem" \
+            TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
+            CFG_REE_FS_TA=n CFG_SECSTOR_TA=n CFG_SECSTOR_TA_MGMT_PTA=n \
+            CFG_INSECURE="${OPTEE_CFG_INSECURE:-y}" \
             CFG_RPMB_FS=y CFG_REE_FS=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -745,13 +802,26 @@ jobs:
             git -C mbedtls remote add origin https://github.com/Mbed-TLS/mbedtls
             git -C mbedtls fetch --depth 1 origin "$MBEDTLS_REF"
             git -C mbedtls checkout --detach FETCH_HEAD
+            tfa_key_arg="$FW_KEY_DIR/ta-sign-key.pem"
+            if [ "$FW_KEY_SOURCE" = "u2f_hsm_slot9a" ] && [ -f "$FW_KEY_DIR/openssl-pkcs11-engine.cnf" ]; then
+              export OPENSSL_CONF="$FW_KEY_DIR/openssl-pkcs11-engine.cnf"
+              export PKCS11_PIN="${YUBIOS_PIV_PIN:-123456}"
+              tfa_key_arg="pkcs11:id=%01;type=private"
+            fi
             make -C arm-trusted-firmware -j"$(nproc)" \
               "${tfa_args[@]}" \
               SPD=opteed \
               BL32="$BL32_HDR" BL32_EXTRA1="$BL32_PAGER" BL32_EXTRA2="$BL32_PAGEABLE" \
               BL32_RAM_LOCATION=tdram \
               BL33="$BL33_BIN" \
-              TRUSTED_BOARD_BOOT=1 GENERATE_COT=1 CREATE_KEYS=1 \
+              TRUSTED_BOARD_BOOT=1 GENERATE_COT=1 \
+              ROT_KEY="$tfa_key_arg" \
+              TRUSTED_WORLD_KEY="$tfa_key_arg" \
+              NON_TRUSTED_WORLD_KEY="$tfa_key_arg" \
+              SCP_BL2_KEY="$tfa_key_arg" \
+              BL31_KEY="$tfa_key_arg" \
+              BL32_KEY="$tfa_key_arg" \
+              BL33_KEY="$tfa_key_arg" \
               MBEDTLS_DIR="$GITHUB_WORKSPACE/mbedtls" \
               DEBUG=1 \
               all fip
@@ -890,6 +960,12 @@ jobs:
             echo "edk2_platforms_ref=${EDK2_PLATFORMS_REF}"
             echo "ms_tpm_ref=${MS_TPM_REF}"
             echo "ftpm_uuid=${FTPM_UUID}"
+            echo "key_source=${FW_KEY_SOURCE:-swu2f_softhsm2_slot9a}"
+            echo "rotpk_sha256=${FW_ROTPK_SHA256:-}"
+            echo "optee_cfg_insecure=${OPTEE_CFG_INSECURE:-y}"
+            echo "optee_cfg_ree_fs_ta=n"
+            echo "optee_cfg_secstor_ta=n"
+            echo "otp_fuse_simulation=${OTP_FUSE_SIMULATION:-y}"
             if [ "$BUILD_KIND" = "qemu" ]; then
               echo "signature_envelope=TF-A CREATE_KEYS=1; excluded from byte-for-byte proof"
             fi
@@ -938,7 +1014,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -1017,7 +1093,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     env:
       BOOT_TIMEOUT: '180'
     steps:
@@ -1202,7 +1278,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev
     strategy:
       fail-fast: false
       matrix:

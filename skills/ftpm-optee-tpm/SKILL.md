@@ -7,9 +7,9 @@ description: >-
   vs dynamic-TA decision, RPMB-backed NV storage, the RPMB-before-supplicant
   bootstrap hazard, the U-Boot tpm2_ftpm_tee driver, the Linux tpm_ftpm_tee
   driver, measured-boot event log handoff, IMA probe ordering, and how the fTPM
-  (platform integrity) stays complementary to the YubiKey (user identity / disk
+  (platform integrity) stays complementary to the U2F/HSM (user identity / disk
   unlock). Use when building or debugging the fTPM TA, wiring it to U-Boot or
-  Linux, or deciding the fTPM-vs-YubiKey split. Pairs with
+  Linux, or deciding the fTPM-vs-U2F/HSM split. Pairs with
   `arm-trusted-firmware-optee` for the TF-A/OP-TEE/U-Boot firmware stack.
   Triggers on: fTPM, firmware TPM, ms-tpm-20-ref, optee_ftpm, OP-TEE TA, Early
   TA, RPMB, tpm_ftpm_tee, tpm2_ftpm_tee, vTPM, TPM 2.0 on ARM, measured boot
@@ -130,15 +130,15 @@ CONFIG_TCG_FTPM_TEE=m     # drivers/char/tpm/tpm_ftpm_tee.c (Microsoft)
 
 Seal to PCR 0/1/7 for "is this the firmware+policy we signed".
 
-## fTPM vs YubiKey — keep them complementary
+## fTPM vs U2F/HSM — keep them complementary
 
-| | fTPM (in OP-TEE) | YubiKey 5 |
+| | fTPM (in OP-TEE) | U2F/HSM 5 |
 |---|---|---|
 | Job | Platform integrity, PCR measurement, attestation, optional seal | User identity, secret unlock, signing |
 | Location | On-device, secure world | External hardware, off-device |
 | yubiOS use | Measured boot + attestation root on ARM64; bind `ConditionSecurity=measured-os` | Primary RoT, unchanged — FIDO2 hmac-secret unlocks LUKS2 (ADR-003) |
 
-**Rule:** the YubiKey stays the disk-unlock path. The fTPM seal, if used, is an
+**Rule:** the U2F/HSM stays the disk-unlock path. The fTPM seal, if used, is an
 additive attestation/fallback bound to PCRs — never the sole gate. If the fTPM
 becomes the only unlock, yubiOS has reintroduced exactly the on-device,
 vendor-shaped trust anchor it exists to remove.

@@ -1,8 +1,8 @@
 # Architecture Decision Records - yubiOS
 
-Last reviewed: 2026-07-21
+Last reviewed: 2026-11-17
 
-## ADR-001: YubiKey as TPM replacement
+## ADR-001: U2F/HSM as TPM replacement
 
 **Status:** Accepted
 
@@ -10,7 +10,7 @@ Last reviewed: 2026-07-21
 TPMs are OEM-controlled, soldered to specific motherboards, and can be provisioned
 with vendor keys the user never sees.
 
-**Decision:** Use the YubiKey 5 series as the sole trust anchor.
+**Decision:** Use the U2F/HSM 5 series as the sole trust anchor.
 
 **Rationale:**
 - Hardware-bound key material that travels with the user, not the board
@@ -19,8 +19,8 @@ with vendor keys the user never sees.
 - User-generated keys: no OEM or manufacturer trust chain
 
 **Trade-offs:**
-- Lost YubiKey = locked out without recovery key; document recovery in ONBOARDING.md
-- Single point of failure; recommend enrolling a backup YubiKey
+- Lost U2F/HSM = locked out without recovery key; document recovery in ONBOARDING.md
+- Single point of failure; recommend enrolling a backup U2F/HSM
 - FIDO2 credentials are device-bound; cannot be backed up cryptographically
 
 ---
@@ -29,11 +29,11 @@ with vendor keys the user never sees.
 
 **Status:** Accepted (amended 2026-10-11 / 2026-10-17 / 2026-11-12: PIV slot `9a`)
 
-**Context:** The user wants YubiKey /dev/hidraw* interfaces throughout.
+**Context:** The user wants U2F/HSM /dev/hidraw* interfaces throughout.
 Secure Boot UKI signing requires an asymmetric signing operation with a
 certificate that can be enrolled in the UEFI Secure Boot `db`.
 
-**Decision:** Use YubiKey PIV slot `9a` (PIV Authentication) via PKCS#11 for the
+**Decision:** Use U2F/HSM PIV slot `9a` (PIV Authentication) via PKCS#11 for the
 owner Secure Boot chain: the self-signed `PK`, the `KEK` and `db` certificates, and
 UKI signing all come from the slot `9a` key (RSA-2048, PIN policy ALWAYS, touch
 policy ALWAYS). Interface: CCID (USB smartcard), not hidraw. The slot is used for
@@ -72,11 +72,7 @@ systemd-sbsign integrates tighter with the UKI pipeline and is now the upstream 
 **Future:** A fully hidraw-only signing path (FIDO2 HMAC-secret wrapping a
 Secure Boot key) is tracked in TODO.md. `age-plugin-fido2-hmac` is a candidate.
 
-**Consequence:** Users need `pcscd` running for PIV ops. The owner PK/KEK/db chain
-is still unenrolled on hardware: `B-OWNER-KEYS` (OMN-171) remains open until an
-attended slot `9a` ceremony runs on rock1 with the StandaloneMM enrollment step
-added to `enroll-sb.sh`. That ceremony is a Technical Preview Tier 2 gate (see
-[refs/technical-preview-entry-criteria-2026-11-12.md](../refs/technical-preview-entry-criteria-2026-11-12.md)).
+**Consequence:** Users need `pcscd` running for PIV ops. On 2026-11-17 (`fvf11-4f6f49f9.new`, `fvf12-948afc8e.new`), the attended PIV slot `9a` ceremony completed on the physical Radxa ROCK 5B (`rk3588`): `enroll-sb.sh` generated `PK`, `KEK`, and `db`, enrolled them into OP-TEE StandaloneMM (`SetupMode: 1 -> 0`), re-signed all 3 ESP EFI binaries (`systemd-bootaa64.efi`, `BOOTAA64.EFI`, and the composefs UKI), and rebooted under enforcing UEFI Secure Boot (`secureboot: Secure boot enabled`, `Kernel is locked down from EFI Secure Boot mode`), retiring `B-OWNER-KEYS` (`OMN-171` Done, `OMN-47` Done).
 
 ```bash
 ykman config usb --enable FIDO --enable CCID
@@ -108,7 +104,7 @@ No TPM slot is enrolled.
 
 **Rationale:**
 - FIDO2 credential (HMAC-secret extension) stored in LUKS2 token header -- no TPM needed
-- Disk unlockable on any machine with the YubiKey (TPM-bound disks are board-locked)
+- Disk unlockable on any machine with the U2F/HSM (TPM-bound disks are board-locked)
 - Touch required at every boot -- prevents silent decryption
 - FIDO2 enrollment does NOT bind to PCR hash values, so OS updates never require
   re-enrollment (unlike TPM2 PCR-hash policies which break on every kernel/initrd change)
@@ -120,7 +116,7 @@ No TPM slot is enrolled.
 Requires FIDO2 PIN + touch at boot. Strongest available option without biometrics.
 
 **Recovery key:** `systemd-cryptenroll --recovery-key` MUST be enrolled alongside
-FIDO2. This is the only escape hatch if the YubiKey is lost or damaged.
+FIDO2. This is the only escape hatch if the U2F/HSM is lost or damaged.
 Print the recovery key and store it physically offline.
 
 **Boot phase binding (TPM-present systems only):** On hardware with a TPM (or the
@@ -129,7 +125,7 @@ word `initrd-enter`; once `initrd-leave` is measured it can no longer be unseale
 userspace, protecting against post-boot extraction. On the no-TPM configuration this
 layer does not apply: FIDO2 hmac-secret has no PCR-sealing mechanism, and the
 post-boot guarantee rests on the key never being stored at rest (it is derived per-boot
-from the YubiKey with PIN + touch). This is consistent with the no-PCR-binding rationale
+from the U2F/HSM with PIN + touch). This is consistent with the no-PCR-binding rationale
 above, which concerns PCR *hash* policies; phase-word sealing is a separate, optional,
 TPM-dependent layer.
 
@@ -139,7 +135,7 @@ This ships in `usr/lib/dracut.conf.d/50-yubiOS-fido2.conf`.
 
 **Amendment (2026-07-28):** Reviewed against today's `docs/BLOCKERS.md` — no blocking
 blockers retired today affect this ADR. The 2026-07-11 v261 review note above remains
-accurate: no FIDO2/YubiKey regressions from v257 → v261 affect the
+accurate: no FIDO2/U2F/HSM regressions from v257 → v261 affect the
 `systemd-cryptenroll --fido2-device=auto` / `--fido2-with-client-pin=yes` paths used by
 this ADR. This PR completes the v257→v261 doc-sync flagged in `RECENT_ACTIVITY.md`
 (2026-07-08 entry).
@@ -154,14 +150,14 @@ this ADR. This PR completes the v257→v261 doc-sync flagged in `RECENT_ACTIVITY
 **Decision:** SSH uses `ed25519-sk` with `-O resident` (discoverable credentials).
 
 **Rationale:**
-- Private key never leaves YubiKey; only a credential ID + public key stub on disk
-- `-O resident` stores the key in YubiKey internal FIDO2 storage (limited slots)
-- `ssh-keygen -K` can regenerate the stub on a new machine from the YubiKey alone
+- Private key never leaves U2F/HSM; only a credential ID + public key stub on disk
+- `-O resident` stores the key in U2F/HSM internal FIDO2 storage (limited slots)
+- `ssh-keygen -K` can regenerate the stub on a new machine from the U2F/HSM alone
 - `-O verify-required` forces FIDO2 PIN on every SSH use (stronger than touch-only)
 - Source: https://www.openssh.com/txt/release-8.2 (OpenSSH 8.2 FIDO2 support)
 - Source: libfido2 v1.16.0, hidraw communication verified
 
-**Requires:** OpenSSH >= 8.2, libfido2 >= 1.10, YubiKey firmware >= 5.2.3 for ed25519-sk
+**Requires:** OpenSSH >= 8.2, libfido2 >= 1.10, U2F/HSM firmware >= 5.2.3 for ed25519-sk
 
 ---
 
@@ -174,10 +170,10 @@ this ADR. This PR completes the v257→v261 doc-sync flagged in `RECENT_ACTIVITY
 **Rationale:**
 - CVE-2025-23013: partial authentication bypass in pam-u2f < 1.3.1
 - Source: https://www.yubico.com/support/security-advisories/ysa-2025-01/
-- `auth required pam_u2f.so` (not `sufficient`) -- YubiKey touch always needed
+- `auth required pam_u2f.so` (not `sufficient`) -- U2F/HSM touch always needed
 - `authfile=/etc/yubico/u2f_keys` centralises enrolled keys for easier audit
 
-**Recovery:** If YubiKey is lost, boot to emergency shell (add `rd.break` karg),
+**Recovery:** If U2F/HSM is lost, boot to emergency shell (add `rd.break` karg),
 mount rootfs, comment out pam_u2f line in /etc/pam.d/sudo.
 
 ---
@@ -235,7 +231,7 @@ read-only root filesystem, following the particleos pattern.
 **Rationale:**
 - `systemd-sbsign` is maintained inside the systemd tree -- same release cycle, same
   PKCS#11 integration, co-developed with `ukify` and the unified kernel image pipeline
-- Supports `--key pkcs11:slot=0;id=02` (YubiKey PIV slot 9c) natively
+- Supports `--key pkcs11:slot=0;id=02` (U2F/HSM PIV slot 9c) natively
 - Generates and verifies PCR 11 signatures in one step (`--pcr-private-key` /
   `--pcr-public-key`) alongside the SecureBoot signature -- no separate invocations
 - Upstream mkosi switched its signing backend to `systemd-sbsign` in v25+
@@ -258,13 +254,13 @@ This means all users share one encryption key; any system compromise exposes all
 and data is readable whenever the system is unlocked -- including during suspend.
 
 **Decision:** Use systemd-homed for all user home directories. Each home is an independent
-LUKS2-encrypted volume unlocked by the user's own YubiKey FIDO2 credential.
+LUKS2-encrypted volume unlocked by the user's own U2F/HSM FIDO2 credential.
 
 **Rationale:**
 - Per-user encryption: user data cryptographically inaccessible even when system is running
   but the user is not logged in
 - Suspend security: homed locks (flushes LUKS2 keys) before system suspend; resumes only
-  after YubiKey re-authentication -- key never sits in RAM during suspend
+  after U2F/HSM re-authentication -- key never sits in RAM during suspend
 - Portable homes: LUKS2 volume is a self-contained file; can migrate between machines with
   `homectl adopt` without re-encryption
 - Dynamic UID assignment at login via uidmap mounts -- no fixed UID conflicts across machines
@@ -273,7 +269,7 @@ LUKS2-encrypted volume unlocked by the user's own YubiKey FIDO2 credential.
 
 **Implementation:**
 - `homectl create --fido2-device=auto <user>` at first boot (enrollment wizard step)
-- Backup token: `homectl update --fido2-device=auto <user>` for second YubiKey
+- Backup token: `homectl update --fido2-device=auto <user>` for second U2F/HSM
 - Signing key management (v258+): `homectl add-signing-key <user>` for portable home
   migration between machines
 - btrfs is required for the home volume filesystem (online resize support)
@@ -322,7 +318,7 @@ handle all mount discovery at boot.
 
 ```text
 (5-7) /usr B + verity + sig  - initially _empty, filled on first update
-(8)   root fs                - LUKS2 btrfs, YubiKey FIDO2 enrolled
+(8)   root fs                - LUKS2 btrfs, U2F/HSM FIDO2 enrolled
 (9)   home fs                - integrity-protected, systemd-homed per-user LUKS2
 (10)  swap                   - encrypted
 ```
@@ -345,7 +341,7 @@ to TPM PCR hash values. Updates require zero re-enrollment.
 - FIDO2 HMAC-secret produces a deterministic key from (credential_id, salt, PIN) --
   this key is independent of what OS or kernel version is running
 - Updating the UKI, rebuilding the initrd, or changing kernel args has no effect on
-  the LUKS2 token -- it will still unlock on next boot with the same YubiKey + PIN
+  the LUKS2 token -- it will still unlock on next boot with the same U2F/HSM + PIN
 - Contrast with TPM2 PCR policies: PCR 11 changes on every UKI rebuild (different hash);
   the enrolled DEK is inaccessible unless the PCR policy is updated ahead of each update
 - The signed PCR policy approach (Brave New Trusted Boot World, 2022) does solve the
@@ -355,8 +351,8 @@ to TPM PCR hash values. Updates require zero re-enrollment.
 - Source: https://0pointer.net/blog/brave-new-trusted-boot-world.html
 
 **Trade-off:** FIDO2 does not verify *which OS* is running before releasing the key --
-the disk will unlock if the correct YubiKey is present regardless of the boot environment.
-This is a conscious trade-off: the YubiKey's physical possession requirement provides the
+the disk will unlock if the correct U2F/HSM is present regardless of the boot environment.
+This is a conscious trade-off: the U2F/HSM's physical possession requirement provides the
 equivalent protection, and it avoids OEM/distribution trust dependencies.
 
 ---
@@ -390,7 +386,7 @@ never leaves it.
 **Implementation:**
 - `usr/lib/repart/` directory contains partition definitions
 - `bootc/install/` config passes `--repart-offline` to systemd-repart
-- YubiKey FIDO2 enrollment runs from the `yubiOS-enroll.service` on first console login
+- U2F/HSM FIDO2 enrollment runs from the `yubiOS-enroll.service` on first console login
   after repart creates the LUKS2 volume
 
 ---
@@ -503,7 +499,7 @@ mutable tag that silently pulls different content on each build.
 
 **yubiOS action (CI):**
 - Use TPM emulation to exercise measured-boot paths in CI without physical hardware.
-- yubiOS itself still uses YubiKey FIDO2 for secrets (ADR-003 unchanged).
+- yubiOS itself still uses U2F/HSM FIDO2 for secrets (ADR-003 unchanged).
 - bcvk DirectBoot cannot rely on an in-guest service for `/dev/tpm0`; the shipped route is host-side QEMU vTPM attachment through `swtpm`, `-tpmdev emulator`, and architecture-aware `tpm-tis`/`tpm-crb` devices.
 
 **Source:** https://github.com/systemd/systemd/releases/tag/v261
@@ -586,12 +582,12 @@ ConditionSecurity=measured-os
 
 ## ADR-018: yubiOS-Owned ARM64 Secure-World Stack (TF-A + OP-TEE + fTPM)
 
-**Date:** 2026-06-24
-**Status:** Proposed - post-launch (see [FUTURE.md](FUTURE.md))
+**Date:** 2026-06-24 (amended 2026-11-17: Accepted; proven on Radxa ROCK 5B `rk3588` in `fvf11-4f6f49f9.new` / `fvf12-948afc8e.new`, Linear OMN-126 Done)
+**Status:** Accepted
 
 **Decision:** Post-launch, build the ARM64 secure-world stack: TF-A as EL3 monitor and Trusted Board Boot chain, OP-TEE as BL32, the Microsoft `ms-tpm-20-ref` fTPM as an OP-TEE Trusted Application, and U-Boot as BL33.
 
-**fTPM vs YubiKey:** The fTPM is the platform-integrity root; the YubiKey stays the user-identity root and primary disk-unlock path. The fTPM must never become the sole disk-unlock gate.
+**fTPM vs U2F/HSM:** The fTPM is the platform-integrity root; the U2F/HSM stays the user-identity root and primary disk-unlock path. The fTPM must never become the sole disk-unlock gate.
 
 **Consequences:** Per-SoC TF-A bring-up is significant. Prove on QEMU first, then on selected boards, before claiming production Path A hardware support.
 
@@ -640,8 +636,8 @@ See [refs/technical-preview-entry-criteria-2026-11-12.md](../refs/technical-prev
 
 ## ADR-020: U-Boot as the ARM64 UEFI Firmware + Authenticated Variable Store (OP-TEE StandaloneMM)
 
-**Date:** 2026-06-24
-**Status:** Proposed - post-launch (see [FUTURE.md](FUTURE.md))
+**Date:** 2026-06-24 (amended 2026-11-17: Accepted; proven on Radxa ROCK 5B `rk3588` in `fvf11-4f6f49f9.new` / `fvf12-948afc8e.new`, Linear OMN-128 Done)
+**Status:** Accepted
 
 **Decision:** On ARM64, U-Boot provides the UEFI environment and chainloads the same systemd-boot + UKI artifacts that x86-64 uses. Secure Boot variables are stored through EDK2 StandaloneMM running as an OP-TEE module and backed by RPMB on production boards.
 
@@ -702,7 +698,7 @@ See [refs/technical-preview-entry-criteria-2026-11-12.md](../refs/technical-prev
 
 **Security exception:** CHIPSEC needs raw hardware access. This exception is scoped to the one-shot service and must not become a persistent base-system privilege.
 
-**Amendment (2026-11-12, OMN-18):** Completed the portable-service packaging and enrollment-result gating: `mkosi.conf.d/chipsec-portable/mkosi.conf` + `usr/lib/yubiOS/chipsec/build-portable-image.sh` build the `Format=portable` `Verity=signed` GPT `.raw` image (`yubios-chipsec-portable`), `usr/lib/yubiOS/chipsec/yubiOS-chipsec-portable.conf` provides the opt-in `RootImage=/var/lib/portables/yubios-chipsec.raw` (`RootImagePolicy=root=signed:usr=signed+absent:=absent`) drop-in, `usr/lib/yubiOS/chipsec/run-firstboot-check.sh` writes `/run/yubiOS/chipsec-firstboot.status` and `/var/lib/yubiOS/chipsec-firstboot.status` (`RESULT=PASS|WARN|FAILED`) and exits `1` on `FAILED`, and `yubiOS-enroll.service` (`After=yubiOS-chipsec-firstboot.service`, `ExecCondition=/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh`) plus `usr/lib/yubiOS/enroll.sh` refuse YubiKey provisioning when `RESULT=FAILED` while logging a warning and continuing on `RESULT=WARN`. See [refs/chipsec-portable-and-enrollment-gating-2026-11-12.md](../refs/chipsec-portable-and-enrollment-gating-2026-11-12.md).
+**Amendment (2026-11-12, OMN-18):** Completed the portable-service packaging and enrollment-result gating: `mkosi.conf.d/chipsec-portable/mkosi.conf` + `usr/lib/yubiOS/chipsec/build-portable-image.sh` build the `Format=portable` `Verity=signed` GPT `.raw` image (`yubios-chipsec-portable`), `usr/lib/yubiOS/chipsec/yubiOS-chipsec-portable.conf` provides the opt-in `RootImage=/var/lib/portables/yubios-chipsec.raw` (`RootImagePolicy=root=signed:usr=signed+absent:=absent`) drop-in, `usr/lib/yubiOS/chipsec/run-firstboot-check.sh` writes `/run/yubiOS/chipsec-firstboot.status` and `/var/lib/yubiOS/chipsec-firstboot.status` (`RESULT=PASS|WARN|FAILED`) and exits `1` on `FAILED`, and `yubiOS-enroll.service` (`After=yubiOS-chipsec-firstboot.service`, `ExecCondition=/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh`) plus `usr/lib/yubiOS/enroll.sh` refuse U2F/HSM provisioning when `RESULT=FAILED` while logging a warning and continuing on `RESULT=WARN`. See [refs/chipsec-portable-and-enrollment-gating-2026-11-12.md](../refs/chipsec-portable-and-enrollment-gating-2026-11-12.md).
 
 ---
 
@@ -858,7 +854,7 @@ flowchart TD
 **Date:** 2026-07-25
 **Status:** Accepted -- default/vfio-user posture proven in CI; IOMMU passthrough access gate is an accepted design, hardware enforcement is post-launch (see [FUTURE.md](FUTURE.md))
 
-**Context:** A GPU is the largest DMA-capable, firmware-carrying peripheral in the machine, and it sits inside the same memory domain that YubiKey-unsealed secrets (LUKS2 volume keys, homed keys) are decrypted into (ADR-001, ADR-003, ADR-009). The base OS's bootc/OCI images are launched as VM guests through libvirt-class hypervisor tooling (bcvk today, virt-manager/libvirt XML `<hostdev>` PCI assignment in the wild) via one of three architectures: emulated `virtio-gpu`, kernel `vfio-pci` passthrough, or a userspace `vfio-user` device server. Only the first and third are honestly testable in CI without real IOMMU hardware. `vfio-pci` passthrough without a working, isolated IOMMU group is a key-extraction primitive: an untranslated DMA-capable device can read an unsealed volume key straight out of guest RAM. Full analysis: [refs/vgpu-vfio-user-trust-boundary-2026-07-25.md](../refs/vgpu-vfio-user-trust-boundary-2026-07-25.md).
+**Context:** A GPU is the largest DMA-capable, firmware-carrying peripheral in the machine, and it sits inside the same memory domain that U2F/HSM-unsealed secrets (LUKS2 volume keys, homed keys) are decrypted into (ADR-001, ADR-003, ADR-009). The base OS's bootc/OCI images are launched as VM guests through libvirt-class hypervisor tooling (bcvk today, virt-manager/libvirt XML `<hostdev>` PCI assignment in the wild) via one of three architectures: emulated `virtio-gpu`, kernel `vfio-pci` passthrough, or a userspace `vfio-user` device server. Only the first and third are honestly testable in CI without real IOMMU hardware. `vfio-pci` passthrough without a working, isolated IOMMU group is a key-extraction primitive: an untranslated DMA-capable device can read an unsealed volume key straight out of guest RAM. Full analysis: [refs/vgpu-vfio-user-trust-boundary-2026-07-25.md](../refs/vgpu-vfio-user-trust-boundary-2026-07-25.md).
 
 **Decision:**
 
@@ -868,7 +864,7 @@ flowchart TD
 4. Userspace device models (the CI-testable, no-IOMMU-required path) use **vfio-user**: unprivileged process, `0600` socket owned by the VMM user, mutual distrust per spec. Never expose a vfio-user socket beyond a single host namespace until the protocol has authentication.
 5. **No trust-boundary component may consume GPU state.** Adding or removing a GPU (virtio-gpu or a gated passthrough device) must be a no-op for Secure Boot, LUKS2 FIDO2 unlock (ADR-003), homed (ADR-009), pam-u2f (ADR-005), and fTPM PCR behaviour.
 6. GPU resource quota/lockout (Frost/Panfrost, see [FUTURE.md](FUTURE.md) Milestone Frost) is a separate concern from this access gate and makes no claims here about per-cgroup enforcement.
-7. **Boot-time image attestation gates libvirt launches.** Before any libvirt-class launcher (bcvk, virt-manager, or any `<hostdev>` PCI-assignment path) may attach a PCI GPU -- through any of the three architectures in rules 1-5 (virtio-gpu, vfio-user, vfio-pci) -- to a yubiOS guest, the gate must also confirm: (a) the bootc OCI image digest matches a pinned reference digest in the launcher's reference value store, AND (b) the SLSA provenance attestation attached to that image verifies against the expected builder-id. **Enforcement is software-only -- no TEE required.** The builder-id reference is operator-set today (same trust model as rule 2's operator-set passthrough policy); a future iteration may anchor the builder-id to a hardware root of trust (fTPM PCR or YubiKey attestation). The existing `ci_test-vgpu-vm.yml` matrix extends with a `YUBIOS_ATTESTED=1` leg to prove the gate end to end.
+7. **Boot-time image attestation gates libvirt launches.** Before any libvirt-class launcher (bcvk, virt-manager, or any `<hostdev>` PCI-assignment path) may attach a PCI GPU -- through any of the three architectures in rules 1-5 (virtio-gpu, vfio-user, vfio-pci) -- to a yubiOS guest, the gate must also confirm: (a) the bootc OCI image digest matches a pinned reference digest in the launcher's reference value store, AND (b) the SLSA provenance attestation attached to that image verifies against the expected builder-id. **Enforcement is software-only -- no TEE required.** The builder-id reference is operator-set today (same trust model as rule 2's operator-set passthrough policy); a future iteration may anchor the builder-id to a hardware root of trust (fTPM PCR or U2F/HSM attestation). The existing `ci_test-vgpu-vm.yml` matrix extends with a `YUBIOS_ATTESTED=1` leg to prove the gate end to end.
 
 **Evidence landed with this decision:**
 
@@ -916,7 +912,7 @@ The split matters because:
 
 **Decision.** yubiOS adopts the **kernel+rootfs split as a first-class principle**. Specifically:
 
-1. **The kernel (UKI) is a separately-published OCI artifact** at `docker.io/0mniteck/yubios:uki-<sha>-<arch>`, alongside the bootc OS image (`latest`, `<sha>`). The UKI is built once, signed once via `systemd-sbsign` + PKCS#11 against YubiKey PIV slot 9c (ADR-008), and published per ADR-022's per-artifact tag scheme.
+1. **The kernel (UKI) is a separately-published OCI artifact** at `docker.io/0mniteck/yubios:uki-<sha>-<arch>`, alongside the bootc OS image (`latest`, `<sha>`). The UKI is built once, signed once via `systemd-sbsign` + PKCS#11 against U2F/HSM PIV slot 9c (ADR-008), and published per ADR-022's per-artifact tag scheme.
 2. **The bootc OCI image is the rootfs.** Its `/usr/` is composed of composefs EROFS + fsverity (ADR-007). The image's `containers.bootc` label is unchanged; the image is installed via `bootc install to-filesystem` with the standard yubiOS install config (`usr/lib/bootc/install/50-yubiOS.toml`).
 3. **Both paths (mkosi, bootc) agree on the cmdline.** The bootc install config sets `[install] kargs = ["root=dissect", "mount.usr=dissect", "rw", "audit=0"]` (added by this ADR), matching `mkosi.conf`'s `[Content] KernelCommandLine`. bootc embeds these in the `.cmdline` PE section of its auto-generated UKI at install time, so the two paths produce byte-identical kernel cmdlines at runtime (per ADR-006's "both paths behave identically at runtime" principle).
 4. **A BLSConfig drop-in for the pre-built UKI is staged as Phase 2.** The signed `yubios.efi` lands inside the `0mniteck/yubios:uki-<sha>` artifact; `usr/lib/yubiOS/uki/install-uki.sh` (shipped now, not yet wired) documents the install-time copy path: write the UKI to the ESP at `/EFI/Linux/bootc/bootc_composefs-<digest>.efi` (bootc 1.16.3 hard-coded path per `crates/lib/src/bootc_composefs/boot.rs`), write a BLS `.conf` containing `uki /EFI/Linux/bootc/bootc_composefs-<digest>.efi` (v1.16.3 BLSConfig key per PR #2269). The wiring is Phase 2 because bootc 1.16.3 has no project-authored BLSConfig drop-in intake; the intake mechanism is one of the follow-ups listed below.
@@ -998,3 +994,43 @@ The closest cousin in the yubiOS repo is `drm-gpu-quota-secure-time` (per-cgroup
 ## 2026-09-18 drift check (wayfinder round 11, cycle 5)
 
 ADR.md (round-9 cycle-1 mojibake-repaired): the ADR corpus is unchanged this round; the round-8 upstream note (bootc v1.16.13) keeps ADR-032/OMN-150 option (b) viable; note additive.
+
+---
+
+## ADR-034: Local Composefs OCI Image Repository and Automatic U2F/HSM UKI Re-Signing on Kernel and OS Updates
+
+**Date:** 2026-11-17
+**Status:** Accepted
+**ADR:** ADR-034
+**Related:** ADR-002 (Secure Boot signing via PIV slot 9a), ADR-006 (both mkosi and bootc build paths), ADR-007 (composefs + dm-verity), ADR-008 (`systemd-sbsign`), ADR-013 (A/B updates), ADR-032 (Kernel+Rootfs Split), Linear OMN-171, OMN-191
+**Background:** Hardware bring-up and enrollment logs `fvf11-4f6f49f9.new` and `fvf12-948afc8e.new` on Radxa ROCK 5B (`rk3588`), [refs/rock5b-hardware-milestone-and-uki-local-oci-2026-11-17.md](../refs/rock5b-hardware-milestone-and-uki-local-oci-2026-11-17.md)
+
+**Context.** On 2026-11-17 (`fvf11-4f6f49f9.new` and `fvf12-948afc8e.new`), the Radxa ROCK 5B (`rk3588`) completed full 5-step physical U2F/HSM enrollment (`enroll-sb.sh` PIV slot `9a` `PK`/`KEK`/`db` StandaloneMM enrollment + UKI re-signing, `enroll-luks.sh` `crypt > lvm > (usr_a 1%, usr_b 1%, yubios-root 96%, 2% free)` + 3-way `/usr` OverlayFS, `enroll-homed.sh`, `enroll-ssh.sh`, `enroll-pam.sh`) and rebooted cleanly under enforcing UEFI Secure Boot (`secureboot: Secure boot enabled`, `Kernel is locked down from EFI Secure Boot mode`).
+
+Subsequent testing of a package/kernel update (`kernel-7.3.3-300.fc45.aarch64` -> `kernel-7.3.4-300.fc45.aarch64` in `fvf12-948afc8e.new` L4552-L6675) exposed two structural gaps in the day-2 upgrade lifecycle:
+
+1. **Cross-device `EXDEV` in `05-rpmostree.install` and missing UKI re-sign hook:** When `dnf`/`rpm` or `rpm-ostree` installs a new kernel while `/usr` is mounted as the 3-way OverlayFS (`lowerdir=/run/yubiOS/ab/usr-b/lower:/run/yubiOS/ab/usr-base,upperdir=/run/yubiOS/ab/usr-a/upper,workdir=/run/yubiOS/ab/usr-a/work`), upstream `/usr/lib/kernel/install.d/05-rpmostree.install` runs `dracut` in `/tmp` (`tmpfs`) and attempts an cross-filesystem `rename()` into `/usr/lib/modules/<kver>/initramfs.img`, failing with `Invalid cross-device link (os error 18)`. Furthermore, neither the `dnf`/`rpm` route nor the `rpm-ostree`/`bootc` route had a hook to rebuild the Type2 UKI (`ukify` / `bootc container ukify`) and re-sign it with the owner's attached U2F/HSM PIV slot `9a` `db` key (`systemd-sbsign`). Under enforcing UEFI Secure Boot (`SetupMode=0`), an unsigned or CI-signed UKI is rejected at the next boot.
+2. **No local composefs OCI image store on the machine for re-signed ukified images:** In CI (`Containerfile` stages `rootfs` -> `uki` -> `prefinal` -> `FROM scratch`), `bootc` images are sealed by computing the rootfs composefs digest (`bootc container compute-composefs-digest`), embedding `composefs=<digest>` into `/boot/EFI/Linux/<kver>.efi`, and packaging the single-layer OCI image. On the booted machine, however, `enroll-sb.sh` only signed the EFI binaries in-place on the ESP without recording or committing a local composefs OCI image containing the owner-signed UKI, and kernel/OS updates had no local OCI repository (`oci:/var/lib/yubiOS/oci`) to stage and deploy re-signed ukified images.
+
+**Decision.** yubiOS establishes a unified **on-device UKI re-sign and local composefs OCI image pipeline** (`/usr/lib/yubiOS/uki/uki-sync-and-sign.sh`, symlinked as `/usr/bin/yubiOS-uki-sync`) that is invoked both on **every kernel/initramfs/UKI update** (across both `dnf`/`rpm` and `rpm-ostree`/`bootc` routes) and during **initial `yubiOS-enroll` (`enroll-sb.sh` / `enroll.sh`)**:
+
+1. **Same-filesystem `dracut` initramfs generation in `05-rpmostree.install`:**
+   - `/usr/lib/kernel/install.d/05-rpmostree.install` (and its `/etc/kernel/install.d/05-rpmostree.install` shadow so package upgrades cannot clobber it) overrides upstream's cross-device `rename()` behavior when `/usr` is writable (3-way OverlayFS or unlocked deployment). It stages the new initramfs to a same-filesystem temporary file `/usr/lib/modules/<kver>/.initramfs.img.tmp.$$` via `dracut --no-hostonly --force --kver "<kver>"` and atomically renames it to `/usr/lib/modules/<kver>/initramfs.img`, eliminating `os error 18` (`EXDEV`).
+2. **Automatic UKI assembly and U2F/HSM PIV slot `9a` re-signing across both `dnf`/`rpm` and `rpm-ostree`/`bootc`:**
+   - `/usr/lib/kernel/install.d/95-yubios-uki-resign.install`, `/usr/lib/rpm/macros.d/macros.yubios-uki` (`%transfiletriggerin` on `/usr/lib/modules` and `/boot/EFI/Linux`), and `yubiOS-uki-resign.path` / `yubiOS-uki-resign.service` all converge on `/usr/lib/yubiOS/uki/uki-sync-and-sign.sh`.
+   - When invoked for a kernel version `<kver>` (or `--from-signed-esp` during `enroll-sb.sh`), `uki-sync-and-sign.sh`:
+     a. Resolves the active or staged rootfs composefs digest (`bootc container compute-composefs-digest`, `/proc/cmdline` `composefs=`, or `fsverity digest` / `sha512sum`).
+     b. Builds a Type2 UKI (`bootc container ukify` or `ukify build`) combining `/usr/lib/modules/<kver>/vmlinuz`, `/usr/lib/modules/<kver>/initramfs.img`, the kernel command line (`composefs=<digest>` + `/usr/lib/bootc/kargs.d/50-yubiOS.toml` + `/usr/lib/bootc/install/50-yubiOS.toml`), and `/usr/lib/os-release`.
+     c. Signs the resulting UKI (and `systemd-boot` loader binaries on the ESP if unsigned or updated) with the attached U2F/HSM PIV slot `9a` key (`pkcs11:id=%01;type=private`) via `systemd-sbsign` and verifies each signature against `/var/lib/yubiOS/secureboot/db.crt` with `sbverify`.
+3. **Local composefs OCI Image Repository (`/var/lib/yubiOS/oci`):**
+   - Mirroring the `Containerfile` `uki` -> `FROM scratch` OCI build path, `uki-sync-and-sign.sh` maintains a standard OCI Image Layout v1.0.0 repository at `/var/lib/yubiOS/oci` (persisted on `/var/home/.yubios-oci` when the LUKS2+LVM `yubios-root` volume is mounted):
+     - `oci-layout` (`{"imageLayoutVersion": "1.0.0"}`)
+     - `blobs/sha256/<digest>` storing the gzipped tar layer (`/boot/EFI/Linux/<kver>.efi` + `/boot/EFI/Linux/bootc/bootc_composefs-<composefs_digest>.efi` + `/usr/lib/yubiOS/uki/yubios.efi`), the deterministic OCI image config JSON (`Labels: {"containers.bootc": "1", "ostree.bootable": "true", "org.yubios.uki.kver": "<kver>", "org.yubios.uki.composefs": "<composefs_digest>", "org.yubios.uki.signer": "piv-slot-9a"}`), and the OCI image manifest JSON.
+     - `index.json` publishing local tags `yubios-local:latest`, `yubios-local:<kver>`, and `yubios-uki:<composefs_digest>` (consumable via `oci:/var/lib/yubiOS/oci:yubios-local:latest`).
+     - `composefs/bootc_composefs-<composefs_digest>.efi` and `last-deployed.json` recording the active signed UKI sha256, composefs digest, kernel version, and OCI manifest digest.
+4. **Unified ESP + `BLSConfig` + `bootc` Deployment at Both Enrollment and Upgrade Time:**
+   - Every run of `uki-sync-and-sign.sh` (including at the end of `enroll-sb.sh resign` / `all` during initial `yubiOS-enroll`) atomically installs the U2F/HSM-signed UKI to `/EFI/Linux/bootc/bootc_composefs-<composefs_digest>.efi` on the ESP, updates `/loader/entries/bootc_yubios-<version>-1.conf` (`uki /EFI/Linux/bootc/bootc_composefs-<composefs_digest>.efi`), and stages the local OCI reference in `/var/lib/yubiOS/oci`.
+
+**Consequences:**
+- Both `dnf`/`rpm` kernel updates (on the 3-way `/usr` OverlayFS) and `rpm-ostree`/`bootc` image updates share a single fail-closed UKI re-sign and local OCI store path.
+- If a kernel update runs while no U2F/HSM or `db.crt` is enrolled yet (pre-enrollment setup mode), `uki-sync-and-sign.sh` still builds the UKI, commits the unsigned staging artifact into `/var/lib/yubiOS/oci`, and stages it on the ESP so `yubiOS-enroll` can sign and seal it later; once `db.crt` is enrolled (`SetupMode=0` / `.sb-enrolled` present), `uki-sync-and-sign.sh` requires the U2F/HSM PIV slot `9a` signature and `sbverify` check to pass before replacing any signed UKI on the ESP.

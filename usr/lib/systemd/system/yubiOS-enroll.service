@@ -1,16 +1,16 @@
 # yubiOS first-boot enrollment wizard
-# Waits for a YubiKey to be detected, then prompts the user to enroll.
+# Waits for a U2F/HSM to be detected, then prompts the user to enroll.
 # Runs once (ConditionFirstBoot=yes) and marks itself complete.
 
 [Unit]
-Description=yubiOS YubiKey Enrollment Wizard (First Boot)
+Description=yubiOS U2F/HSM Enrollment Wizard (First Boot)
 After=local-fs.target systemd-logind.service systemd-user-sessions.service network.target sshd.service
 Wants=pcscd.service getty-pre.target
 After=pcscd.service
 # Order before getty-pre.target and all console/serial gettys so agetty does not
 # start on /dev/console (/dev/ttyS2 or /dev/tty1) mid-wizard, call vhangup()
 # (SIGHUP), or steal input from enroll.sh. Once enroll.sh finishes, getty starts.
-Before=getty-pre.target getty.target serial-getty@ttyS2.service serial-getty@ttyAMA0.service serial-getty@ttyS0.service getty@tty1.service kmsconvt@tty1.service
+Before=getty-pre.target getty.target serial-getty@ttyS2.service serial-getty@ttyAMA0.service serial-getty@ttyS0.service getty@tty1.service kmsconvt@tty1.service gdm.service display-manager.service plymouth-quit-wait.service
 # ADR-024 / OMN-18: run the first-boot CHIPSEC platform check first and gate
 # enrollment on its result. Wants= (not Requires=) so a skipped or failed
 # CHIPSEC unit never takes enrollment down with it; the gate below decides.
@@ -38,6 +38,7 @@ StandardError=tty
 ExecCondition=/usr/lib/yubiOS/chipsec/check-enrollment-gate.sh
 # Settle delay so late kernel/NIC link messages finish printing before the
 # wizard clears the console and reads stdin.
+ExecStartPre=-/usr/bin/plymouth quit
 ExecStartPre=/bin/sleep 5
 ExecStart=/usr/lib/yubiOS/enroll.sh
 ExecStartPost=/bin/mkdir -p /var/lib/yubiOS

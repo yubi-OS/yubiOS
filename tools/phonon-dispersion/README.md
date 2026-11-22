@@ -19,11 +19,15 @@ Pure stdlib, no numpy.
    Lean twin is `klemens_condition`).
 3. **Acoustic sum rule, exactly** — the Hamming-graph H(d,2) Laplacian applied
    to every character `χ_r(a) = (−1)^{r·a}` gives `2·wt(r)·χ_r` in exact
-   integer arithmetic (d = 4, all 16 characters); the `j = 0` all-ones mode is
-   annihilated — the discrete twin of the program's conserved `ℓ = 0` mode.
-4. **Level-penalty comparison** — S² eigenvalues `ℓ(ℓ+1)` (energy rate
-   `2ℓ(ℓ+1)`) vs the Hamming ladder's linear `2j`: quadratic dominates beyond
-   the shared zero mode.
+   integer arithmetic (d = 4, all 16 characters). The zero mode is tested
+   separately: `L·1 = 0`, the exact rational rank of `L` is `2^d − 1` (so 0 is a
+   *simple* eigenvalue, d = 1..4), and only `wt(r) = 0` is annihilated — the
+   discrete twin of the program's conserved `ℓ = 0` mode.
+4. **Level-penalty comparison** — the S² eigenvalues `ℓ(ℓ+1)` are *measured* from
+   the Legendre ODE (`d/dx[(1−x²)P_ℓ'] = −λP_ℓ`, central difference, ℓ = 1..8) rather
+   than compared with their own definition; the Hamming ladder `2j` is read off the
+   Q_9 characters; the quadratic rate `2ℓ(ℓ+1)` dominates the linear `2j` beyond the
+   shared zero mode.
 5. **Gaunt selection rules, three routes** — the S² momentum-conservation
    analogue (triangle `|ℓ₁−ℓ₂| ≤ ℓ₃ ≤ ℓ₁+ℓ₂` + even parity) verified by
    (a) direct enumeration at L = 3 (64 triads → 34 triangle → 23 allowed,
@@ -34,6 +38,21 @@ Pure stdlib, no numpy.
    stationary law `π_T(k) ∝ C(9,k)e^{−εk/T}` **is** `Binomial(9, p)` with the
    FD per-primitive occupancy `p = 1/(1+e^{ε/T})`, to machine precision
    (0 new parameters; the Bose–Einstein reading is excluded — see the refs doc).
+
+## Real-corpus verification (`--input`)
+
+```
+python3 tools/phonon-dispersion/phonon.py --input papers/is-this-x-2026-08-12-Final.zip
+```
+
+Loads the real 2286 x 9 coverage matrix as points of the hypercube Q_9 and checks, exactly: the
+empirical pairwise Hamming-distance histogram (direct popcount over all 5,225,796 ordered pairs) equals
+the Walsh/Krawtchouk route `B_j = 2^-d Σ_r F(r)² K_j(wt r)` (exact integers); the column identity
+`Σ_pairs d_H = Σ_c n1_c n0_c`; zero-distance pairs = collision structure (176 distinct vectors);
+Walsh weight-1 coefficients = column means; Walsh Parseval; and the graph-Laplacian Rayleigh quotient of the
+empirical density by two routes (edge sum vs `Σ 2 wt(r) |F(r)|²`; real corpus R = 8.2421, mean Hamming
+distance 4.1972). Exits nonzero on any mismatch. (The CI step named "phonon-dispersion real-corpus
+verification" runs `--selftest` only; call `--input` to touch corpus data.)
 
 ## Other modes
 

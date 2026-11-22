@@ -16,7 +16,7 @@ already drafted in [refs/pilot-collateral-roi-baseline-2026-07-25.md](pilot-coll
 ## 1. Initial target segments
 
 Selected against MISSION.md's own stated bet ("security should be the
-default — for everyone," "a $25–70 YubiKey is a better root of trust than a
+default — for everyone," "a $25–70 U2F/HSM is a better root of trust than a
 TPM most people will never own, control, or even know is there") and the
 ARM64-primary platform stance in README.md, not against market-sizing data
 this session doesn't have:
@@ -61,7 +61,7 @@ whether they have any technical staff at all.
 
 | Segment | Next-best alternative | Why yubiOS wins (or the honest risk that it might not) |
 |---|---|---|
-| S1 | Passphrase-only disk encryption, or a laptop's built-in TPM alone | A $25–70 YubiKey the owner physically controls beats a TPM the owner "will never own, control, or even know is there" (MISSION.md) — but only if yubiOS's own onboarding is genuinely simpler than "just use FileVault/BitLocker," which isn't proven yet. |
+| S1 | Passphrase-only disk encryption, or a laptop's built-in TPM alone | A $25–70 U2F/HSM the owner physically controls beats a TPM the owner "will never own, control, or even know is there" (MISSION.md) — but only if yubiOS's own onboarding is genuinely simpler than "just use FileVault/BitLocker," which isn't proven yet. |
 | S2 | Enterprise MDM/security vendor (Okta, enterprise HSM platforms) | Lower cost, fully auditable open trust chain (LGPL-2.1, public ADRs) vs. closed vendor black-box — but vendor platforms have mature fleet tooling yubiOS's O1 offer doesn't yet have evidenced at scale (per OMN-63's still-open real-hardware validation). |
 | S3 | Doing nothing (accepting risk) or an underfunded partial solution | yubiOS's price point (hardware cost, not enterprise contract cost) is the actual argument — but this only wins if O7's grant/funding mechanism (OMN-86) actually materializes; without funding, "cheaper" doesn't help an org with zero discretionary security budget. |
 | S4 | OEM-provided closed secure-boot stack | Owner/builder controls the full ARM64 firmware trust chain instead of trusting a SoC vendor's opaque implementation — real technical differentiation, but requires the ARM64 Path A board rehearsal (B-ARM64-PATHA) to actually close before this claim has hardware evidence behind it. |

@@ -1,0 +1,305 @@
+name: "yubiOS UKI Re-Sign & Local Composefs OCI VM e2e (ADR-034, swu2f)"
+
+# Exercises ADR-034 (Linear OMN-191) end-to-end:
+#   1. lint-and-unit: shellcheck + bash -n + Bats unit tests (test-uki-sync-and-sign.bats,
+#      test-enroll-sb.bats) + assert-dispatch-reachable.py inside the pinned DHI container.
+#   2. vm-uki-local-oci-e2e: boots the yubiOS dev/test image in a bcvk ephemeral VM
+#      with `--swtpm --swu2f` on the self-hosted ARM64 KVM runner (rock1), starts the
+#      in-guest passless swu2f CTAP2 authenticator, mounts a real 3-way OverlayFS on
+#      /usr alongside tmpfs /tmp, and runs tests/vm/test-uki-local-oci-ci.sh (real
+#      ukify + real systemd-sbsign + real sbverify + local composefs OCI Image Layout
+#      v1.0.0 repository /var/lib/yubiOS/oci + 05-rpmostree.install +
+#      95-yubios-uki-resign.install + enroll-sb.sh resign + negative fail-closed check).
+
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'Pullable yubiOS OCI image ref to boot for the swu2f VM e2e.'
+        required: true
+        default: 'docker.io/0mniteck/yubios:dev'
+        type: string
+      allow_real_u2f:
+        description: 'Pass ALLOW_REAL_U2F=1 to tests/vm/test-uki-local-oci-ci.sh (default true so rock1 runs cleanly when a physical U2F/HSM is attached).'
+        required: false
+        default: true
+        type: boolean
+      ci_callback:
+        description: 'Internal: call back to ci.yml when this workflow finishes.'
+        required: false
+        default: false
+        type: boolean
+      ci_chain_ref:
+        description: 'Internal: ref carried by the ci.yml orchestrator.'
+        required: false
+        default: ''
+        type: string
+      ci_reason:
+        description: 'Internal: original ci.yml orchestrator reason.'
+        required: false
+        default: 'manual'
+        type: string
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  lint-and-unit:
+    runs-on: ubuntu-26.04
+    container:
+      credentials:
+        username: 0mniteck42
+        password: ${{ secrets.DOCKER }}
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev INDEX (manifest list)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
+
+      - name: "Lint ADR-034 scripts and run Bats unit suites + reachability check"
+        run: |
+          set -euo pipefail
+          apt-get update -qq
+          apt-get install -y -qq --no-install-recommends shellcheck bash bats python3 python3-yaml openssl
+          for s in \
+            usr/lib/yubiOS/uki/uki-sync-and-sign.sh \
+            usr/lib/yubiOS/uki/install-uki.sh \
+            usr/lib/kernel/install.d/05-rpmostree.install \
+            usr/lib/kernel/install.d/95-yubios-uki-resign.install \
+            usr/lib/yubiOS/enroll-sb.sh \
+            usr/lib/yubiOS/ab-etc-merge.sh \
+            tests/vm/test-uki-local-oci-ci.sh; do
+            echo "== $s =="
+            bash -n "$s"
+            shellcheck -S warning "$s"
+          done
+          ./tests/vm/test-uki-local-oci-ci.sh --self-test
+          bats --tap tests/unit/test-enroll-sb.bats tests/unit/test-uki-sync-and-sign.bats
+          python3 scripts/assert-dispatch-reachable.py --repo-root .
+
+  vm-uki-local-oci-e2e:
+    needs: lint-and-unit
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-26.04
+            qemu_pkgs: qemu-system-x86 ovmf
+            primary: false
+          - arch: arm64
+            runner: [self-hosted, Linux, ARM64, KVM]
+            qemu_pkgs: qemu-system-arm qemu-efi-aarch64
+            primary: true
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Reclaim workspace before checkout
+        run: |
+          sudo rm -rf "$GITHUB_WORKSPACE"
+          mkdir -p "$GITHUB_WORKSPACE"
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
+
+      - name: Free disk space and bind-mount /mnt/extended on rock1
+        if: matrix.arch == 'arm64'
+        run: |
+          df -h "$PWD" / /mnt/extended || true
+          if mountpoint -q /mnt/extended && ! mountpoint -q /var/lib/containers; then
+            sudo mkdir -p /mnt/extended/containers /var/lib/containers
+            sudo mount --bind /mnt/extended/containers /var/lib/containers
+          fi
+          if mountpoint -q /mnt/extended && ! mountpoint -q /var/tmp; then
+            sudo rm -rf /var/tmp/container_images_storage* /var/tmp/pipeDir* 2>/dev/null || true
+            sudo mkdir -p /mnt/extended/var-tmp /var/tmp
+            sudo chmod 1777 /mnt/extended/var-tmp
+            sudo mount --bind /mnt/extended/var-tmp /var/tmp
+          fi
+          sudo podman ps -aq | xargs -r sudo podman rm -f -t 0 || true
+          sudo podman image prune -f || true
+          df -h "$PWD" / /var/tmp /var/lib/containers || true
+
+      - name: "Install host deps (swtpm + qemu + fido2 + cryptsetup)"
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            swtpm swtpm-tools qemu-utils ${{ matrix.qemu_pkgs }} \
+            fido2-tools cryptsetup-bin git build-essential pkg-config libssl-dev virtiofsd \
+            apparmor-utils util-linux
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules || true
+          sudo udevadm trigger --name-match=kvm || true
+          sudo modprobe fuse || true
+          sudo mkdir -p /dev
+          [ -e /dev/fuse ] || sudo mknod /dev/fuse c 10 229 || true
+          sudo chmod 666 /dev/fuse || true
+
+      - name: Install zstd-capable QEMU for ARM64 DirectBoot
+        id: qemu-zstd
+        if: matrix.arch == 'arm64'
+        env:
+          QEMU_ZSTD_COMMIT: 005c61c0ef6f6ae615283440b4bb7be51b2c6ddd # qemu/qemu v11.1.3, see PINNED.md
+          QEMU_ZSTD_VERSION: '11.1.3'
+        run: |
+          set -euo pipefail
+          QEMU_PREFIX="/opt/qemu-zstd/${QEMU_ZSTD_COMMIT}"
+          PINNED_QEMU="${QEMU_PREFIX}/bin/qemu-system-aarch64"
+          if [ ! -x "${PINNED_QEMU}" ]; then
+            echo "::error::Pinned zstd QEMU expected at ${PINNED_QEMU} on rock1"
+            exit 1
+          fi
+          sudo mkdir -p "${QEMU_PREFIX}/bcvk-bin"
+          printf '%s\n' \
+            '#!/usr/bin/env bash' \
+            'exec /run/host-mounts/host-lib/ld-linux-aarch64.so.1 --library-path /run/host-mounts/qemu-zstd/lib:/run/host-mounts/host-lib:/run/host-mounts/host-usrlib /run/host-mounts/qemu-zstd/bin/qemu-system-aarch64 -L /run/host-mounts/qemu-zstd/share/qemu "$@"' | sudo tee "${QEMU_PREFIX}/bcvk-bin/qemu-system-aarch64" >/dev/null
+          sudo chmod 0755 "${QEMU_PREFIX}/bcvk-bin/qemu-system-aarch64"
+          echo "${QEMU_PREFIX}/bin" >> "$GITHUB_PATH"
+          echo "qemu_prefix=${QEMU_PREFIX}" >> "$GITHUB_OUTPUT"
+
+      - name: "Install bcvk @ pinned release (v0.22.0-yubios.1)"
+        id: bcvk
+        run: |
+          set -euo pipefail
+          BCVK_PIN=c9c06416c943d5ff956bc811f09aec0ce25bfdc7
+          BCVK_RELEASE_TAG=v0.22.0-yubios.1
+          case "${{ matrix.arch }}" in
+            amd64)
+              BCVK_SHA256=0d87d074ccf43a559aa1cefc2c12eed049bbf547cd9da7212ea971395939ef36
+              BCVK_SHA512=b24091a828373ac7fb214626596fac39b88b115f3be34b441800099e3e5965be5b60964e5393675d7a65732ddd4a7bea8ddd198396eb308d2e90108af2e088a6 ;;
+            arm64)
+              BCVK_SHA256=c6c0ce386b3203ae10829060455754244336301ea256357c49cc6abe4731e1fe
+              BCVK_SHA512=a4c1c31eb31302f0eaf0c7e403868d348488652c165531903e74960ea7fff6fd78936f776516461f17ac452a75a78daf26196a13a4f3803203cfc6c14cf23d43 ;;
+          esac
+          BCVK_PREFIX="/opt/bcvk/${BCVK_PIN}"
+          if [ ! -x "${BCVK_PREFIX}/bin/bcvk" ]; then
+            BCVK_DL="$(mktemp -d)"
+            curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 10 -o "$BCVK_DL/bcvk" \
+              "https://github.com/yubi-OS/bcvk/releases/download/${BCVK_RELEASE_TAG}/bcvk-${{ matrix.arch }}"
+            echo "${BCVK_SHA256}  ${BCVK_DL}/bcvk" | sha256sum --check --strict
+            echo "${BCVK_SHA512}  ${BCVK_DL}/bcvk" | sha512sum --check --strict
+            sudo mkdir -p "${BCVK_PREFIX}/bin"
+            sudo install -m 0755 "$BCVK_DL/bcvk" "${BCVK_PREFIX}/bin/bcvk"
+            rm -rf "$BCVK_DL"
+          fi
+          echo "${BCVK_PREFIX}/bin" >> "$GITHUB_PATH"
+          echo "skip=0" >> "$GITHUB_OUTPUT"
+
+      - name: Gate on KVM
+        id: kvm
+        run: |
+          if [ -e /dev/kvm ]; then
+            echo "kvm=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "kvm=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: "Gate amd64 boot leg on platform-priority policy (ADR-023: ARM64 is primary)"
+        id: policy
+        run: |
+          if [ "${{ matrix.primary }}" = "true" ]; then
+            echo "boot=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "boot=0" >> "$GITHUB_OUTPUT"
+            echo "### vm-uki-local-oci-e2e (${{ matrix.arch }}) -- SKIP: secondary platform per ADR-023" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Pull yubiOS image into podman storage
+        if: steps.bcvk.outputs.skip == '0' && steps.kvm.outputs.kvm == '1' && steps.policy.outputs.boot == '1'
+        run: |
+          set -euo pipefail
+          TARGET_IMAGE="${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}"
+          REMOTE_DIGEST="$(python3 - "$TARGET_IMAGE" <<'PY'
+          import json, sys, urllib.request
+          ref = sys.argv[1]
+          if "@sha256:" in ref:
+              print("sha256:" + ref.split("@sha256:", 1)[1])
+              sys.exit(0)
+          clean = ref
+          for pfx in ("docker.io/", "index.docker.io/"):
+              if clean.startswith(pfx):
+                  clean = clean[len(pfx):]
+          repo, tag = (clean.split(":", 1) + ["latest"])[:2]
+          if "/" not in repo:
+              repo = "library/" + repo
+          try:
+              tok_url = f"https://auth.docker.io/token?service=registry.docker.io&scope=repository:{repo}:pull"
+              tok = json.loads(urllib.request.urlopen(tok_url, timeout=15).read().decode())["token"]
+              req = urllib.request.Request(
+                  f"https://registry-1.docker.io/v2/{repo}/manifests/{tag}",
+                  headers={
+                      "Authorization": f"Bearer {tok}",
+                      "Accept": "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json",
+                  },
+                  method="HEAD",
+              )
+              with urllib.request.urlopen(req, timeout=15) as r:
+                  print(r.headers.get("Docker-Content-Digest", "").strip())
+          except Exception:
+              print("")
+          PY
+          )"
+          LOCAL_DIGESTS="$(sudo podman image inspect "$TARGET_IMAGE" --format '{{range .RepoDigests}}{{.}} {{end}}' 2>/dev/null || true)"
+          if [ -n "$REMOTE_DIGEST" ] && [ -n "$LOCAL_DIGESTS" ] && grep -Fq "$REMOTE_DIGEST" <<<"$LOCAL_DIGESTS"; then
+            echo "Cache HIT: $TARGET_IMAGE already cached in podman at $REMOTE_DIGEST"
+          else
+            sudo podman image prune -af || true
+            sudo podman pull "$TARGET_IMAGE"
+          fi
+
+      - name: Relax AppArmor profiles for bcvk VM boot
+        if: matrix.arch == 'arm64' && steps.bcvk.outputs.skip == '0' && steps.kvm.outputs.kvm == '1' && steps.policy.outputs.boot == '1'
+        run: |
+          set -euo pipefail
+          aa_complain="$(command -v aa-complain || echo /usr/sbin/aa-complain)"
+          aa_status="$(command -v aa-status || echo /usr/sbin/aa-status)"
+          for profile in unpriv_bwrap swtpm; do
+            if sudo "$aa_status" 2>/dev/null | grep -Fxq "   $profile"; then
+              sudo "$aa_complain" "$profile"
+            fi
+          done
+
+      - name: "Run tests/vm/test-uki-local-oci-ci.sh (ADR-034 UKI re-sign + local composefs OCI store in swu2f VM)"
+        if: steps.bcvk.outputs.skip == '0' && steps.kvm.outputs.kvm == '1' && steps.policy.outputs.boot == '1'
+        timeout-minutes: 20
+        env:
+          YUBIOS_IMAGE: ${{ inputs.image || 'docker.io/0mniteck/yubios:dev' }}
+          YUBIOS_SSH_WAIT_SECS: '900'
+          ALLOW_REAL_U2F: ${{ inputs.allow_real_u2f && '1' || '0' }}
+          BCVK_EPHEMERAL_EXTRA_ARGS: >-
+            ${{ matrix.arch == 'arm64' && format('--ro-bind {0}:qemu-zstd --ro-bind /lib/aarch64-linux-gnu:host-lib --ro-bind /usr/lib/aarch64-linux-gnu:host-usrlib --env PATH=/run/host-mounts/qemu-zstd/bcvk-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --log-dir=journal,console=/tmp/yubios-uki-oci-vm-logs', steps.qemu-zstd.outputs.qemu_prefix) || '' }}
+        run: |
+          chmod +x tests/vm/test-uki-local-oci-ci.sh
+          sudo rm -rf /tmp/yubios-uki-oci-vm-logs
+          sudo mkdir -p /tmp/yubios-uki-oci-vm-logs
+          sudo chmod 0777 /tmp/yubios-uki-oci-vm-logs
+          set +e
+          sudo env "PATH=$PATH:/usr/sbin:/sbin" \
+            "YUBIOS_IMAGE=${YUBIOS_IMAGE}" \
+            "BCVK_EPHEMERAL_EXTRA_ARGS=${BCVK_EPHEMERAL_EXTRA_ARGS:-}" \
+            "YUBIOS_SSH_WAIT_SECS=${YUBIOS_SSH_WAIT_SECS}" \
+            "ALLOW_REAL_U2F=${ALLOW_REAL_U2F}" \
+            bash tests/vm/test-uki-local-oci-ci.sh
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            sudo tail -200 /tmp/yubios-uki-oci-vm-logs/console.txt || true
+            sudo tail -200 /tmp/yubios-uki-oci-vm-logs/journal.json || true
+          fi
+          if [ "$rc" -eq 77 ]; then
+            echo "::warning::SKIP: bcvk cannot DirectBoot the ARM64 zstd EFI zboot kernel in this image"
+            exit 0
+          fi
+          [ "$rc" -eq 0 ] || exit "$rc"
+          echo "### vm-uki-local-oci-e2e (${{ matrix.arch }}) -- PASS: ADR-034 UKI re-sign hooks & local composefs OCI repository verified in swu2f VM" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Free disk space (post-run)
+        if: always()
+        run: |
+          aa_enforce="$(command -v aa-enforce || echo /usr/sbin/aa-enforce)"
+          if [ -x "$aa_enforce" ]; then
+            for profile in unpriv_bwrap swtpm; do
+              sudo "$aa_enforce" "$profile" || true
+            done
+          fi
+          sudo podman ps -aq | xargs -r sudo podman rm -f || true
+          sudo podman image prune -f || true

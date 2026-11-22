@@ -312,7 +312,7 @@ Failure: the script never mutates state on a non-zero exit; the input file is le
 #     - the unit is enabled via systemctl enable yubiOS-enroll.service
 #   runtime invariant:
 #     - the TPM device is present at /dev/tpm0 OR /dev/tpmrm0
-#     - a YubiKey or compatible FIDO2 authenticator is plugged in at enrollment time
+#     - a U2F/HSM or compatible FIDO2 authenticator is plugged in at enrollment time
 #   environment:
 #     - kernel >= 5.15 (TPM 2.0, hmac-secret, cgroup v2)
 #     - systemd >= 250 (systemd-cryptenroll, systemd-cryptsetup)

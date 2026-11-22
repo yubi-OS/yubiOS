@@ -287,6 +287,36 @@ def selftest(seed=DEFAULT_SEED, n_quad=400000):
             "expected R_2^0=2r^2-1, R_3^1=3r^3-2r, R_4^0=6r^4-6r^2+1; got " + "; ".join(bits),
             failures)
 
+    # (e) admission on synthetic data with a known answer: a planted cos(2 theta) mode (j=6) must be
+    # admitted with a large POSITIVE z; a matched null-like point set and the other modes must not be;
+    # and the sign of z is exercised (negated z must not admit).
+    rng_e = np.random.default_rng(seed + 2)
+    n_pts, n_null_e = 4000, 30
+
+    def _uniform_disk(k):
+        rr = np.sqrt(rng_e.random(k))
+        tt = rng_e.random(k) * 2.0 * math.pi
+        return np.stack([rr * np.cos(tt), rr * np.sin(tt)], axis=1)
+
+    null_sh = np.zeros((n_null_e, N_BASIS))
+    for i in range(n_null_e):
+        null_sh[i] = zernike_spectrum(_uniform_disk(n_pts))[1]
+    th_e = rng_e.normal(0.0, 0.25, n_pts) + math.pi * rng_e.integers(0, 2, n_pts)
+    rho_e = np.sqrt(rng_e.random(n_pts))
+    planted = np.stack([rho_e * np.cos(th_e), rho_e * np.sin(th_e)], axis=1)
+    coords_p = admission_coordinates(zernike_spectrum(planted)[1], null_sh)
+    coords_q = admission_coordinates(zernike_spectrum(_uniform_disk(n_pts))[1], null_sh)
+    by_j = {c["j"]: c for c in coords_p}
+    adm_p = [c["j"] for c in coords_p if c["admitted"]]
+    z6 = by_j[6]["z"]
+    ok_e = (6 in adm_p and z6 is not None and z6 > 2 * ADMISSION_Z
+            and not any(c["admitted"] for c in coords_q)
+            and by_j[7]["z"] is not None and by_j[7]["z"] < ADMISSION_Z)
+    _report("SELFTEST_E_ADMISSION_PLANTED_MODE", ok_e,
+            "planted j=6: z=%s admitted=%s (need z>%.0f); admitted set %s; null-like set admitted %s"
+            % ("n/a" if z6 is None else "%+.1f" % z6, 6 in adm_p, 2 * ADMISSION_Z, adm_p,
+               [c["j"] for c in coords_q if c["admitted"]]), failures)
+
     if failures:
         print("SELFTEST: FAIL (%s)" % ", ".join(failures), flush=True)
         return 1
@@ -297,23 +327,9 @@ def selftest(seed=DEFAULT_SEED, n_quad=400000):
 # ---------------------------------------------------------------------------
 # Corpus mode
 # ---------------------------------------------------------------------------
-def run_corpus(zip_path, n_null, trades_per_row, seed):
-    M = load_real_matrix(zip_path=zip_path)
-    n_rows = M.shape[0]
-
-    uv_real, info_real = matrix_to_disk(M)
-    a_real, s_real, e_real = zernike_spectrum(uv_real)
-
-    rng = np.random.default_rng(seed)
-    null_shares = np.zeros((n_null, N_BASIS))
-    null_energy = np.zeros(n_null)
-    for i in range(n_null):
-        Mn = curveball(M, trades_per_row * n_rows, rng)
-        uv_n, _ = matrix_to_disk(Mn)
-        _a_n, s_n, e_n = zernike_spectrum(uv_n)
-        null_shares[i] = s_n
-        null_energy[i] = e_n
-
+def admission_coordinates(s_real, null_shares):
+    """Per-coordinate admission test: z of the real share against the null shares, admitted iff the
+    null is non-degenerate and z > ADMISSION_Z (one-sided, positive excess only)."""
     coords = []
     for j in range(2, N_BASIS + 1):
         col = null_shares[:, j - 1]
@@ -331,6 +347,27 @@ def run_corpus(zip_path, n_null, trades_per_row, seed):
             "null_mean": mu, "null_sd": sd, "z": z,
             "null_degenerate": degenerate, "admitted": bool(admitted),
         })
+    return coords
+
+
+def run_corpus(zip_path, n_null, trades_per_row, seed):
+    M = load_real_matrix(zip_path=zip_path)
+    n_rows = M.shape[0]
+
+    uv_real, info_real = matrix_to_disk(M)
+    a_real, s_real, e_real = zernike_spectrum(uv_real)
+
+    rng = np.random.default_rng(seed)
+    null_shares = np.zeros((n_null, N_BASIS))
+    null_energy = np.zeros(n_null)
+    for i in range(n_null):
+        Mn = curveball(M, trades_per_row * n_rows, rng)
+        uv_n, _ = matrix_to_disk(Mn)
+        _a_n, s_n, e_n = zernike_spectrum(uv_n)
+        null_shares[i] = s_n
+        null_energy[i] = e_n
+
+    coords = admission_coordinates(s_real, null_shares)
 
     e_mu = float(null_energy.mean())
     e_sd = float(null_energy.std(ddof=1))

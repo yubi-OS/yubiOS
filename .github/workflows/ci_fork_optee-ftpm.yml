@@ -90,7 +90,7 @@ env:
   OPTEE_OS_REPO: https://github.com/yubi-OS/optee_os
   OPTEE_OS_REF: e1181e2d0e40f8550c0f8204a433eac54598d222 # release-descendant ref; see PINNED.md
   MS_TPM_REPO: https://github.com/yubi-OS/ms-tpm-20-ref
-  MS_TPM_REF: c73d99857e5e768784c955f9d1ed1bd83b06f2bd # yubios branch (v1.83r1 descendant); see PINNED.md
+  MS_TPM_REF: 6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48 # yubios branch (v1.83r1 descendant); see PINNED.md
   OPTEE_PLATFORM: vexpress-qemu_armv8a
 
 jobs:

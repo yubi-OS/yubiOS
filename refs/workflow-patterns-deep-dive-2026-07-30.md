@@ -13,7 +13,7 @@ container:
   credentials:
     username: 0mniteck42
     password: ${{ secrets.DOCKER }}
-  image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013
+  image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d
 ```
 `ci_test_sealed-uki-vm.yml` (Jenny current focus, PR #155) lacks this block entirely — that is the security architecture gap driving the v2/v3/v4 fix series on `sealed-uki-vm-lane-v2`.
 
@@ -47,7 +47,7 @@ container:
   credentials:
     username: 0mniteck42
     password: ${{ secrets.DOCKER }}
-  image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013
+  image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d
 ```
 
 **dind usage in 14 jobs:**
@@ -140,7 +140,7 @@ sbverify --cert mkosi.secure-boot.pem "$uki"
 ```ini
 [Validation]
 # SecureBoot=yes: UKIs signed at build time via systemd-sbsign (ADR-008).
-# YubiKey PIV (slot 9c, PKCS#11) signing: run yubiOS-enroll-sb post-install.
+# U2F/HSM PIV (slot 9c, PKCS#11) signing: run yubiOS-enroll-sb post-install.
 SecureBoot=yes
 SignExpectedPcr=no
 ```

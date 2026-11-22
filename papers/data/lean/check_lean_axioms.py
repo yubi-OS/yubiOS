@@ -391,13 +391,15 @@ def _axiom_set_problems(
 
 _AUTOGEN_SUFFIX_RE = re.compile(
     # Lean auto-generates theorems for every def/structure/inductive (and for
-    # tactic proofs): equational lemmas (eq_N, eq_def), structure machinery
-    # (mk.inj / mk.injEq / mk.sizeOf_spec / inj / injEq / sizeOf_spec),
-    # inductive recursors (brecOn / brecBelow / below / rec / recOn /
-    # casesOn / noConfusion / noConfusionType) and tactic auxiliaries
-    # (_proof_N[_N]). The FIRST CI run of the enumerate gate measured
-    # 188 enumerated constants vs 90 manifest entries on CurvedCorpus.lean.
-    r"^(?:_proof_\d+(?:_\d+)*|eq_\d+|eq_def|eq_self|eq_iff|inj|injEq|"
+    # tactic proofs including Mathlib ring/linarith in Lean 4.35.0): equational
+    # lemmas (eq_N, eq_def), structure machinery (mk.inj / mk.injEq /
+    # mk.sizeOf_spec / inj / injEq / sizeOf_spec), inductive recursors
+    # (brecOn / brecBelow / below / rec / recOn / casesOn / noConfusion /
+    # noConfusionType) and compiler/tactic auxiliaries (_proof_*, _simp_*,
+    # _rfl_*, _cstage*, _aux*, _sunfold*, _unfold*, match_*, splitter*).
+    r"^(?:_proof_\d+(?:_\d+)*|_simp_\d+(?:_\d+)*|_rfl_\d+(?:_\d+)*|"
+    r"_cstage\d+(?:_\d+)*|_aux\w*|_sunfold\w*|_unfold\w*|match_\d+\w*|"
+    r"splitter\w*|eq_\d+|eq_def|eq_self|eq_iff|inj|injEq|"
     r"sizeOf_spec|sizeOf|brecOn|brecBelow|below|rec|recOn|casesOn|"
     r"noConfusion|noConfusionType)$"
 )

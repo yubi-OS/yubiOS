@@ -88,7 +88,7 @@ Each pilot is bounded to an achievable, falsifiable 30-day operational test. No 
 Decentralized physical communities collapse when their digital infrastructure depends entirely on proprietary cloud backbones, centralized grid power, or unverified commercial operating systems. To achieve operational sovereignty, local cells require a ruggedized, off-grid-capable edge computing and communication node that can run local services, log environmental and resource telemetry, communicate without cellular towers, and prove its software integrity from hardware boot.
 
 #### 2. Smallest Falsifiable 30-Day Test
-Deploy a single outdoor or semi-conditioned micro-node powered by a dedicated 100W solar panel and a 500Wh LiFePO4 battery pack. The node consists of an ARM64 single-board computer (Radxa ROCK 5B or Raspberry Pi 5) paired with a Heltec V3 ESP32 LoRa/Meshtastic radio transceiver. The node boots a minimal, immutable Linux operating system with `dm-verity`-enforced read-only root, requiring a physical YubiKey (FIDO2/U2F) for local administrative unlock. It must maintain local telemetry logging and Meshtastic packet routing over a continuous 14-day test window, surviving at least one deliberate 48-hour continuous grid disconnect drill.
+Deploy a single outdoor or semi-conditioned micro-node powered by a dedicated 100W solar panel and a 500Wh LiFePO4 battery pack. The node consists of an ARM64 single-board computer (Radxa ROCK 5B or Raspberry Pi 5) paired with a Heltec V3 ESP32 LoRa/Meshtastic radio transceiver. The node boots a minimal, immutable Linux operating system with `dm-verity`-enforced read-only root, requiring a physical U2F/HSM (FIDO2/U2F) for local administrative unlock. It must maintain local telemetry logging and Meshtastic packet routing over a continuous 14-day test window, surviving at least one deliberate 48-hour continuous grid disconnect drill.
 
 #### 3. Local Owner Role
 - **Designation:** Cell Infrastructure Lead (Lead Systems Engineer).
@@ -112,7 +112,7 @@ Deploy a single outdoor or semi-conditioned micro-node powered by a dedicated 10
 - **Hardware Cost:** Undocumented or enterprise-grade ($2,500+ industrial server).
 
 #### 6. Target Metric (Day 30: Dec 10, 2026)
-- **System Integrity:** 100% of boot cycles verified via `dm-verity` root hash; YubiKey FIDO2 required for SSH/console access; zero unpinned packages.
+- **System Integrity:** 100% of boot cycles verified via `dm-verity` root hash; U2F/HSM FIDO2 required for SSH/console access; zero unpinned packages.
 - **Power Uptime:** Greater than or equal to 99.2% node availability over 14 consecutive days of solar/battery operation, logging continuous watt-hour consumption (average draw at or below 7.8W).
 - **Mesh Telemetry:** Successful broadcast of 1,000+ telemetry packets over LoRa at 915MHz to neighboring test nodes within a 3km radius without commercial internet.
 - **Cost-Per-Watt-Hour:** Documented total hardware expenditure under $1.00 per Wh of battery storage capacity.
@@ -146,7 +146,7 @@ Establish a closed mutual-credit accounting pool of 10 qualified participants (l
 
 #### 4. Open Budget (Total: $0.00 Capital Cost / $120.00 Admin Pool)
 - **Software Infrastructure:** $0.00 (Open-source Git-backed ledger script, Python CLI, and public GitHub repository).
-- **Hardware Requirements:** $0.00 (Existing laptops and phones used by members; PGP/SSH keys generated on existing hardware or YubiKeys).
+- **Hardware Requirements:** $0.00 (Existing laptops and phones used by members; PGP/SSH keys generated on existing hardware or U2F/HSMs).
 - **Emergency Reserve Pool:** $120.00 USD (Dedicated cash escrow for printed ledger audit copies, domain routing, and notary verification if legally requested).
 - **Speculative Capital:** Strictly $0.00. No tokens, no ICO, no liquidity pools, no staking yields.
 
@@ -261,7 +261,7 @@ Jacque Fresco spent decades advocating for a Resource-Based Economy, but the his
 We are launching a practical, decentralized reboot focused on small, autonomous, verifiable community cells rather than a central compound.
 
 We run on the SER operating framework (Sovereignty, Ephemerality, Reproducibility for All):
-- Sovereignty: The owner controls the trust boundary via physical hardware keys (YubiKey/FIDO2). No central cloud or authority holds master credentials.
+- Sovereignty: The owner controls the trust boundary via physical hardware keys (U2F/HSM/FIDO2). No central cloud or authority holds master credentials.
 - Ephemerality: Telemetry and operational data are time-bounded; personal data is never retained in public ledgers.
 - Reproducibility: Build inputs, OS images, and ledger states are digest-pinned, open source, and cryptographically auditable.
 
@@ -293,7 +293,7 @@ Background:
 The original Venus Project proposed automated, resource-based economic organization, but remained an ideological architectural concept. This implementation reframes the problem around distributed systems engineering: how to build autonomous local groups that can exchange resources, verify computing infrastructure without centralized cloud roots, and maintain bilateral mobility.
 
 Key Technical Implementations:
-1. Root of Trust: Replaces OEM/TPM trust anchors with user-held FIDO2 credentials (YubiKey) for full-disk LUKS2 unlock, SSH resident keys, and administrative authorization (ADR-002).
+1. Root of Trust: Replaces OEM/TPM trust anchors with user-held FIDO2 credentials (U2F/HSM) for full-disk LUKS2 unlock, SSH resident keys, and administrative authorization (ADR-002).
 2. Immutable Host OS: Employs bootable OCI container images (bootc) with read-only /usr protected by dm-verity Merkle-tree root hash verification.
 3. Offline Mesh Telemetry: Out-of-band telemetry logging across low-power ESP32-S3 / SX1262 LoRa nodes running Meshtastic firmware.
 4. Non-Speculative Accounting: Mutual-credit clearing engine ensuring mathematical zero-sum balance conservation across all transaction blocks without tokens or blockchain overhead.
@@ -319,7 +319,7 @@ Hardware Bill of Materials ($485 total):
 - 100W Monocrystalline solar panel + 10A MPPT charge controller (RS485 logging)
 - 12V 42Ah LiFePO4 battery pack (537Wh)
 - Heltec V3 LoRa module (915MHz) for Meshtastic packet routing
-- YubiKey 5C NFC for physical FIDO2 console authentication
+- U2F/HSM 5C NFC for physical FIDO2 console authentication
 
 Software Stack:
 - Image-based Linux built via mkosi with systemd-cryptenroll and dm-verity
@@ -387,7 +387,7 @@ Quick tip that may interest your readers: Today marks the launch of Venus Rebirt
 
 #### Q4: What does the SER Framework mean in practice?
 **Answer:** SER stands for Sovereignty, Ephemerality, and Reproducibility for All:
-- **Sovereignty:** Operational and cryptographic control remains with the machine owner or local group via physical hardware tokens (like YubiKeys). There is no centralized vendor master key or administrative backdoor.
+- **Sovereignty:** Operational and cryptographic control remains with the machine owner or local group via physical hardware tokens (like U2F/HSMs). There is no centralized vendor master key or administrative backdoor.
 - **Ephemerality:** Systems minimize long-term data collection. Telemetry is time-bounded, disposable test environments are cleaned up automatically, and personal surveillance is strictly barred.
 - **Reproducibility:** Every build, software image, hardware BOM, and governance decision is recorded with cryptographic hashes, allowing any community worldwide to independently replicate our results.
 

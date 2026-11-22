@@ -5,7 +5,7 @@ _Refreshed: 2026-07-23 (supersedes refs/archive-mkosi-bcvk-plan.md, originally u
 
 **mkosi PKCS#11 UKI signing: confirmed supported upstream, and already implemented in yubiOS.** mkosi is currently at **v27.1** (2026-09-29 refresh: v27 was published 2026-08-27 and v27.1 on 2026-09-28, both after this doc's original date; no v28 exists as of this refresh. See the Refresh: 2026-09-29 section) and supports PKCS#11-backed Secure Boot signing via `SecureBootKeySource=engine:pkcs11` and provider-based key sources (`provider:pkcs11`), covering Secure Boot signing, verity signing, and expected-PCR signing. `systemd-sbsign` is the preferred tool (`sbsign` fallback). **This matches what yubiOS already shipped**: refs/sbsign-pkcs11-validate.md and the merged PR #29 (sbsign-migration) + PR #32 (PKCS#11 URI validation) already implement exactly this path. No gap here — upstream and yubiOS are aligned.
 
-**bcvk YubiKey USB passthrough: still NOT implemented upstream** (re-confirmed through v0.19.0, 2026-08-24: its changelog adds no USB device support of any kind, see Refresh: 2026-09-29), confirming this remains yubiOS-fork-only work. Current bcvk release (**v0.19.0**, 2026-08-24; prior v0.18.0, 2026-07-02) adds libvirt virtiofsd passthrough (#302), KVM group permission propagation for ephemeral run (#301), an ephemeral run status-monitor timeout (#300), and a run-ssh readiness change (#310) — still no USB passthrough. A bcvk issue (#214, about apple/container support) references missing support for passing **additional block devices**, not USB devices specifically. **This confirms yubi-OS/bcvk PR #2 ("feat(usb-passthrough): YubiKey USB passthrough for ephemeral VMs") is still necessary fork-only work** — consistent with its current "parked" status (per 2026-07-23 org audit) rather than something upstream will solve for yubiOS.
+**bcvk U2F/HSM USB passthrough: still NOT implemented upstream** (re-confirmed through v0.19.0, 2026-08-24: its changelog adds no USB device support of any kind, see Refresh: 2026-09-29), confirming this remains yubiOS-fork-only work. Current bcvk release (**v0.19.0**, 2026-08-24; prior v0.18.0, 2026-07-02) adds libvirt virtiofsd passthrough (#302), KVM group permission propagation for ephemeral run (#301), an ephemeral run status-monitor timeout (#300), and a run-ssh readiness change (#310) — still no USB passthrough. A bcvk issue (#214, about apple/container support) references missing support for passing **additional block devices**, not USB devices specifically. **This confirms yubi-OS/bcvk PR #2 ("feat(usb-passthrough): U2F/HSM USB passthrough for ephemeral VMs") is still necessary fork-only work** — consistent with its current "parked" status (per 2026-07-23 org audit) rather than something upstream will solve for yubiOS.
 
 **bcvk `to-disk` / native-to-disk: confirmed standard, stable feature** — installs a container image to a persistent disk image via an ephemeral VM. Matches the existing yubiOS usage pattern below.
 
@@ -15,7 +15,7 @@ _Refreshed: 2026-07-23 (supersedes refs/archive-mkosi-bcvk-plan.md, originally u
 
 ## Context
 
-These two forks are **build + test infrastructure** for yubiOS — the FIDO2-first immutable OS where a YubiKey replaces the TPM at every trust boundary.
+These two forks are **build + test infrastructure** for yubiOS — the FIDO2-first immutable OS where a U2F/HSM replaces the TPM at every trust boundary.
 
 | Fork | Upstream | Role in yubiOS |
 |------|----------|----------------|
@@ -27,10 +27,10 @@ These two forks are **build + test infrastructure** for yubiOS — the FIDO2-fir
 ### What yubiOS needed from this fork (status: PIV/PKCS11 signing now confirmed live, see update above)
 
 #### 1. PIV/PKCS11 UKI signing — **DONE**, matches upstream capability
-The yubiOS trust chain uses YubiKey PIV slot 9c (CCID) for Secure Boot signing via `systemd-sbsign` + PKCS#11, exactly as upstream mkosi now documents.
+The yubiOS trust chain uses U2F/HSM PIV slot 9c (CCID) for Secure Boot signing via `systemd-sbsign` + PKCS#11, exactly as upstream mkosi now documents.
 
 #### 2. FIDO2 enrollment hook
-After image construction, an optional enrollment script sets up `systemd-cryptenroll --fido2-device=auto` binding so first boot prompts for YubiKey tap to seal the LUKS slot.
+After image construction, an optional enrollment script sets up `systemd-cryptenroll --fido2-device=auto` binding so first boot prompts for U2F/HSM tap to seal the LUKS slot.
 
 #### 3. yubiOS mkosi.conf.d profile
 A `mkosi.conf.d/yubiOS/` directory setting `Bootloader=uki`, `SecureBootKey=` pointing to PIV slot, `Packages=` list (`pam-u2f`, `yubikey-manager`, `libfido2`, `opensc`), `KernelCommandLine=` with `rd.luks.options=fido2-device=auto`.
@@ -49,15 +49,15 @@ The native path (privileged podman container calling `bootc install to-disk` dir
 | Build a disk image file for cloud/VM import | `bcvk to-disk` |
 | Dev testing in ephemeral QEMU VM | `bcvk ephemeral run` |
 
-### YubiKey USB passthrough — confirmed fork-only, still open
+### U2F/HSM USB passthrough — confirmed fork-only, still open
 
-Still tracked as yubiOS's own PR #2 on `yubi-OS/bcvk` (`feature/yubikey-usb-passthrough`), currently **parked** per Jenny's 2026-07-23 org-state decision. No upstream movement expected — revisit if/when hardware-in-the-loop CTAP2 testing (B-VM-CTAP2 / B-REAL-FIDO2) becomes the active priority.
+Still tracked as yubiOS's own PR #2 on `yubi-OS/bcvk` (`feature/u2f-hsm-usb-passthrough`), currently **parked** per Jenny's 2026-07-23 org-state decision. No upstream movement expected — revisit if/when hardware-in-the-loop CTAP2 testing (B-VM-CTAP2 / B-REAL-FIDO2) becomes the active priority.
 
 ---
 
 ## Priority order (updated)
 
-1. ~~bcvk: YubiKey USB passthrough~~ — parked, not currently prioritized
+1. ~~bcvk: U2F/HSM USB passthrough~~ — parked, not currently prioritized
 2. ~~mkosi: yubiOS mkosi.conf.d profile~~ — done
 3. ~~mkosi: PIV/PKCS11 UKI signing~~ — done, matches upstream
 4. Current focus per live BLOCKERS.md: B-VM-CTAP2 (software CTAP2 enumeration fix), B-HARDENING-RUNTIME, B-BOOTC-SEAL — see refs/org-state-audit-2026-07-23.md

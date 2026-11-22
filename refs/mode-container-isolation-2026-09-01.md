@@ -47,12 +47,12 @@ Rootless is the constant across the container and nspawn rows (user namespaces,
 Seccomp is applied per row: podman's default profile, nspawn's `--system-call-filter=`,
 the unit's `SystemCallFilter=@system-service`. A Linux boundary without a stated mode is
 a boundary whose cleanup nobody owns. Measurement daemons (Falco, Tetragon) run in the
-persistent row and observe the other four; the YubiKey never enters any of them, which is
+persistent row and observe the other four; the U2F/HSM never enters any of them, which is
 the boot file's point.
 
 ## Placement
 
 Coverage: continuous attestation and measurement (the observers), rootless privilege and
-capabilities (the constant), YubiKey FIDO2 boot (excluded from every boundary by design),
+capabilities (the constant), U2F/HSM FIDO2 boot (excluded from every boundary by design),
 container isolation and seccomp (focal). Omitted clusters omitted so the file lands in cell
 z1/phi2.

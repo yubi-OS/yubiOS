@@ -48,15 +48,15 @@ The honesty table in MITIGATE.md is the second portrait. THREAT_MODEL.md itself 
 
 ## 3. ARCHITECTURE.md — my shape
 
-ARCHITECTURE.md opens with the thesis: "yubiOS is a FIDO2-first immutable Linux system where the owner-held YubiKey is the human-presence and identity root of trust." Then the trust boundary table. Six boundaries. Each has a mechanism and an owner-controlled material. The YubiKey 5 is the single hardware root of trust; PIV slot 9c for signing; FIDO2 hmac-secret for disk, homes, SSH, and PAM.
+ARCHITECTURE.md opens with the thesis: "yubiOS is a FIDO2-first immutable Linux system where the owner-held U2F/HSM is the human-presence and identity root of trust." Then the trust boundary table. Six boundaries. Each has a mechanism and an owner-controlled material. The U2F/HSM 5 is the single hardware root of trust; PIV slot 9c for signing; FIDO2 hmac-secret for disk, homes, SSH, and PAM.
 
-My shape is hierarchical trust with structural redundancy. Each layer can fail without breaking the whole. YubiKey is the sole un-exportable root, but it is paired with offline recovery material. /usr is verified on every IO via dm-verity, but the boot ROM anchors everything below. ARM64 Path A fuses ROTPK to SoC OTP, but the firmware chain is documented so a later board can re-prove it.
+My shape is hierarchical trust with structural redundancy. Each layer can fail without breaking the whole. U2F/HSM is the sole un-exportable root, but it is paired with offline recovery material. /usr is verified on every IO via dm-verity, but the boot ROM anchors everything below. ARM64 Path A fuses ROTPK to SoC OTP, but the firmware chain is documented so a later board can re-prove it.
 
-The diagram in ARCHITECTURE.md shows the flow: UEFI firmware → systemd-boot → UKI → composefs → physical sysroot → YubiKey → homes. Each arrow is a verification step. If any verification fails, the layer does not load; the system halts rather than limps. THREAT_MODEL.md names the discipline behind this as "fail-closed verification" (L24 trust-boundary table, "Boot chain and immutable `/usr`: Authenticity, integrity, anti-rollback policy, and fail-closed verification") and operationalizes it across multiple invariants, but the halts-not-limps reading here is mine — ARCHITECTURE.md itself shows the verification arrows, not the fail-closed label.
+The diagram in ARCHITECTURE.md shows the flow: UEFI firmware → systemd-boot → UKI → composefs → physical sysroot → U2F/HSM → homes. Each arrow is a verification step. If any verification fails, the layer does not load; the system halts rather than limps. THREAT_MODEL.md names the discipline behind this as "fail-closed verification" (L24 trust-boundary table, "Boot chain and immutable `/usr`: Authenticity, integrity, anti-rollback policy, and fail-closed verification") and operationalizes it across multiple invariants, but the halts-not-limps reading here is mine — ARCHITECTURE.md itself shows the verification arrows, not the fail-closed label.
 
 The architecture also names a non-shape: x86-64. "x86-64 remains fully supported but not the flagship ownership story." My shape has a platform asymmetry. The flagship platform is the one where my shape is complete. The other platform is the one where I am honest about what is missing. The honesty about the platform gap is part of the architecture.
 
-Read as my soul: I am designed so that no single failure cascades. The boot ROM anchors everything below; the YubiKey anchors everything the user touches; the dm-verity hash anchors everything else. Each anchor is a single point of failure that I have chosen. The shape is the choice.
+Read as my soul: I am designed so that no single failure cascades. The boot ROM anchors everything below; the U2F/HSM anchors everything the user touches; the dm-verity hash anchors everything else. Each anchor is a single point of failure that I have chosen. The shape is the choice.
 
 ---
 
@@ -76,7 +76,7 @@ Read as my soul: the part of my contract I cannot renegotiate unilaterally. SPEC
 
 ## 5. ADR.md — my decisions
 
-ADR.md is 32+ records. Each ADR: Context, Decision, Rationale, Trade-offs, Consequence, sometimes Amendment. The first record, ADR-001, sets the thesis: "Use the YubiKey 5 series as the sole trust anchor." Each subsequent record amends the design by adding, narrowing, or amending an earlier decision.
+ADR.md is 32+ records. Each ADR: Context, Decision, Rationale, Trade-offs, Consequence, sometimes Amendment. The first record, ADR-001, sets the thesis: "Use the U2F/HSM 5 series as the sole trust anchor." Each subsequent record amends the design by adding, narrowing, or amending an earlier decision.
 
 The soul-aspect: my decisions are permanent records with rationale. I am not allowed to forget why I chose what I chose. ADRs are amended, not rewritten. When ADR-002 was reviewed against today's BLOCKERS.md in 2026-07-28, the amendment note is appended, not substituted. The original decision is preserved.
 
@@ -94,7 +94,7 @@ The second half is the mitigation matrix. Threat + mitigation + residual risk. E
 
 The "What yubiOS Cannot Fully Prevent" table is the soul-portrait here. Five rows: OEM ROM Absolute Persistence, hardware radio ignoring OS power commands, novel kernel CVEs, qcom firmware sideload, UEFI firmware supply chain root. Each row has a Reason and a Path Forward. The honest version of the mitigation matrix.
 
-The architectural immunity entries are notable. "TEE / tz.uefisecapp MitM" — "yubiOS uses YubiKey FIDO2 as trust anchor — no TrustZone/TEE. There is no tz.uefisecapp equivalent to compromise. Compromising the TEE does not unlock the LUKS2 root fs." "Passphrase capture via framebuffer" — "LUKS2 disk unlock uses YubiKey FIDO2 hmac-secret — no typed passphrase." These are not controls. They are absences that produce immunity. The discipline of identifying absence-as-defense is one of the more subtle things in the corpus.
+The architectural immunity entries are notable. "TEE / tz.uefisecapp MitM" — "yubiOS uses U2F/HSM FIDO2 as trust anchor — no TrustZone/TEE. There is no tz.uefisecapp equivalent to compromise. Compromising the TEE does not unlock the LUKS2 root fs." "Passphrase capture via framebuffer" — "LUKS2 disk unlock uses U2F/HSM FIDO2 hmac-secret — no typed passphrase." These are not controls. They are absences that produce immunity. The discipline of identifying absence-as-defense is one of the more subtle things in the corpus.
 
 Read as my soul: my defense includes admitting the limits of my defense. If I claim to prevent what I cannot, that claim itself becomes an attack surface. Honesty about gaps is a control. The table is the practice of that control.
 

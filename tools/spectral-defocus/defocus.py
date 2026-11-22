@@ -587,9 +587,13 @@ def run_selftest(real_corpus: bool, zip_path: str = REAL_CORPUS_ZIP):
             report["leg2_real_corpus"] = real_results
             overall_ok = overall_ok and real_results["atomic_pass"]
         except FileNotFoundError as e:
-            report["leg2_real_corpus"] = {"error": f"not executed: {e}"}
-        except Exception as e:  # pragma: no cover - defensive
-            report["leg2_real_corpus"] = {"error": f"not executed: {type(e).__name__}: {e}"}
+            # --real-corpus was explicitly requested: a missing corpus is a FAILURE, never a silent pass
+            report["leg2_real_corpus"] = {"error": f"FAILED, real-corpus leg could not run: {e}", "executed": False}
+            overall_ok = False
+        except Exception as e:  # any other failure of the requested leg is also a failure
+            report["leg2_real_corpus"] = {"error": f"FAILED, real-corpus leg could not run: {type(e).__name__}: {e}",
+                                          "executed": False}
+            overall_ok = False
 
     report["overall_passed"] = overall_ok
     return overall_ok, report
@@ -630,7 +634,7 @@ def main(argv=None):
         if "leg2_real_corpus" in report:
             leg2 = report["leg2_real_corpus"]
             if "error" in leg2:
-                print(f"Leg 2 (real corpus): NOT EXECUTED ({leg2['error']})")
+                print(f"Leg 2 (real corpus): {leg2['error']}")
             else:
                 print(f"Leg 2 (real corpus): rows={leg2['n_rows']} unique={leg2['n_unique_rows']}")
                 print(f"  A_1(t) before smoothing = {leg2['A1_before']:.4f} (pass>0.3: {leg2['atomic_pass']})")
@@ -638,6 +642,8 @@ def main(argv=None):
                       f"(pass<=half: {leg2['deatomize_pass']})")
         print(f"Overall: {'PASS' if ok else 'FAIL'}")
 
+    if args.real_corpus and "error" in report.get("leg2_real_corpus", {}):
+        return 1
     return 0 if ok else 2
 
 

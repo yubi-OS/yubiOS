@@ -4,7 +4,7 @@
 # and test-fido2-enrollment.sh). Published as 0mniteck/yubios:dev / :dev-<sha>
 # (ADR-026) — a distinct tag namespace from :latest, never the same artifact.
 #
-# TEST-ONLY. The production trust anchor stays the YubiKey FIDO2 device
+# TEST-ONLY. The production trust anchor stays the U2F/HSM FIDO2 device
 # (ADR-003). passless is never present in a production image — this
 # Containerfile is the ONLY place it gets installed, and it is never referenced
 # by yubiOS-ci.yml's build/push path.
@@ -21,7 +21,7 @@
 #     --build-context yubios-base=docker-image://<pinned-yubios-ref> .
 
 ARG BASE_IMAGE=yubios-base
-FROM ${BASE_IMAGE} AS rootfs
+FROM ${BASE_IMAGE} AS rootfs_prep
 
 ARG SOURCE_DATE_EPOCH
 
@@ -125,17 +125,24 @@ RUN test -s /usr/lib/systemd/system/serial-getty@.service.d/10-yubiOS-test-autol
 # belt-and-suspenders. Wire its multi-user.target.wants/ symlink here
 # using the same pattern as the getty.target.wants links above. See
 # refs/vgpu-vfio-user-trust-boundary-2026-07-25.md.
-RUN install -d /usr/lib/systemd/system/multi-user.target.wants && \
+RUN ln -sf /dev/null /etc/systemd/system/geoclue.service && \
+    ln -sf /dev/null /usr/lib/systemd/system/geoclue.service && \
+    ln -sf /dev/null /etc/systemd/system/bootloader-update.service && \
+    rm -f /usr/share/dbus-1/system-services/org.freedesktop.GeoClue2.service /usr/lib/systemd/system/multi-user.target.wants/bootloader-update.service /etc/systemd/system/multi-user.target.wants/bootloader-update.service && \
+    install -d /usr/lib/systemd/system/multi-user.target.wants && \
     ln -sf ../yubiOS-no-vfio-purge.service \
       /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service && \
     test -L /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service
 
-# ── Composefs digest pinning & single-layer UKI parity (d4b95e208f / 6414edfee4) ──
+# ── Composefs digest pinning & 2-layer UKI parity (Path V8) ──
 # Clean build leftovers, remove the base image's pre-built UKI so ukify hashes this
-# dev rootfs, normalize mtimes to SOURCE_DATE_EPOCH, rebuild the UKI against this
-# rootfs, re-pin mtimes in prefinal, and squash into a single FROM scratch layer so
-# the layer-computed composefs digest and the UKI's embedded composefs= digest match.
-RUN rm -f /var/lib/systemd/catalog/database && \
+# dev rootfs, normalize mtimes to SOURCE_DATE_EPOCH, flatten rootfs_prep into the
+# canonical base layer (layer[0]), rebuild the UKI against rootfs with /out mtimes
+# pinned, and overlay the UKI in layer[1] without a final FROM scratch squash.
+RUN rm -rf /sysroot/ostree && mkdir -p /sysroot/ostree && ln -sfn sysroot/ostree /ostree && \
+    rm -f /var/lib/systemd/catalog/database \
+          /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal \
+          /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal && \
     find /tmp -mindepth 1 -delete && \
     find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + && \
     find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} +
@@ -145,27 +152,30 @@ RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
     ! test -e /var/lib/systemd/random-seed
 
 RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump && \
-    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd
+    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
+    if [ -d /usr/lib/yubiOS/secureboot ]; then \
+      cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ 2>/dev/null || true; \
+      cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ 2>/dev/null || true; \
+    fi
 
 RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /
 
-FROM rootfs AS uki
-RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
-    kver="$(basename "$1")" && \
-    mkdir -p /out && \
-    bootc container ukify --rootfs /target -- --output "/out/${kver}.efi"
-
-FROM rootfs AS prefinal
-COPY --from=uki /out/ /boot/EFI/Linux/
-RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
-ARG SOURCE_DATE_EPOCH
-RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
-
-FROM scratch
+FROM scratch AS rootfs
 # hadolint ignore=DL3067
-COPY --from=prefinal / /
+COPY --from=rootfs_prep / /
 LABEL containers.bootc="1" ostree.bootable="true"
 LABEL yubiOS.image.kind="dev-test"
 LABEL yubiOS.image.warning="TEST-ONLY: ships the passless swu2f software FIDO2 authenticator AND serial/tty root autologin (local-access bypass of pam_u2f). Never use in production. See ADR-003, ADR-026."
 CMD ["/sbin/init"]
+
+FROM rootfs AS uki
+ARG SOURCE_DATE_EPOCH
+RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
+    kver="$(basename "$1")" && \
+    mkdir -p /out && \
+    bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
+
+FROM rootfs
+COPY --from=uki /out/ /boot/EFI/Linux/

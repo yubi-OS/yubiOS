@@ -71,7 +71,7 @@ default yubiOS image exposes at all -- the attack-surface question that has to
 be settled before a lockout policy is meaningful. Full analysis and rules
 (ADR-031): [refs/vgpu-vfio-user-trust-boundary-2026-07-25.md](../refs/vgpu-vfio-user-trust-boundary-2026-07-25.md).
 
-Headline rule: a GPU sits inside the memory domain a YubiKey unseals secrets
+Headline rule: a GPU sits inside the memory domain a U2F/HSM unseals secrets
 into, so unmitigated `vfio-pci` passthrough is a key-extraction primitive.
 Default images ship `virtio-gpu` only; passthrough is opt-in, IOMMU-gated,
 and policy-gated, never a default. Userspace device models use vfio-user
@@ -125,7 +125,7 @@ Research shape:
 - Support multi-host deception through loopback aliases, WireGuard-only decoy address pools, or nftables DNAT to lightweight responders.
 - Evaluate an `endlessh`-style banner tarpit for delay, plus a higher-interaction honeypot mode only when storage, CPU, and legal/logging policy are explicit.
 - Notify through syslog/ubus plus owner-selected channels such as ntfy, Gotify, Matrix, email, or a webhook, with rate limits and deduplication.
-- Keep real host discovery dependent on known WireGuard peer identity, SSH host-key verification, and yubiOS/YubiKey controls. Deception is detection and delay, not primary authentication.
+- Keep real host discovery dependent on known WireGuard peer identity, SSH host-key verification, and yubiOS/U2F/HSM controls. Deception is detection and delay, not primary authentication.
 
 Safety constraints:
 

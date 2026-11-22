@@ -21,7 +21,7 @@ tooling, and each maps to an existing repo artifact:
 
 | Metric | Source | Decision it drives |
 |---|---|---|
-| Open BLOCKERS.md count, by ID | `BLOCKERS.md` "Active Blockers" table (currently 8 entries as of 2026-07-22 per that file) | Whether a given production claim (e.g. real-hardware YubiKey validation, ARM64 board readiness) can be made yet. A blocker closing is the trigger to promote a claim from "research/design" to "production," per roadmap-promotion-gates. |
+| Open BLOCKERS.md count, by ID | `BLOCKERS.md` "Active Blockers" table (currently 8 entries as of 2026-07-22 per that file) | Whether a given production claim (e.g. real-hardware U2F/HSM validation, ARM64 board readiness) can be made yet. A blocker closing is the trigger to promote a claim from "research/design" to "production," per roadmap-promotion-gates. |
 | CI lane pass/fail per architecture (amd64, arm64) | GitHub Actions run status for `yubiOS-ci.yml` | Whether a release/publish job should run `merge-manifest` (per PROJECT_RULES.md's Docker Hub publish description) — a red lane blocks publish, it's not just a dashboard color. |
 | MITIGATE.md "what we cannot fully prevent" table size/content | `MITIGATE.md` | Whether a new feature proposal needs its own mitigation entry before shipping (MISSION.md: publish gaps honestly) — growth in this table without a corresponding ADR is a signal to slow down, not hide it. |
 | ADR count and cadence | `ADR.md` | Whether architecture decisions are actually being recorded at decision time (covenant §3 Roadmap control) vs. decided informally — a long gap between real changes and new ADRs is the trigger to audit for undocumented decisions. |

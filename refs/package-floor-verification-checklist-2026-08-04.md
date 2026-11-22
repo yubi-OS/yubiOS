@@ -72,7 +72,7 @@ yubios targets ≥v1.16.6 (current `bootc 1.16.6` per `0pointer-mastery` skill n
 | mkosi | ≥v25 (MinimumVersion=26~devel per `mkosi.conf`) | PIV slot 9c signing pattern, systemd-sysext integration |
 | podman | ≥v4.5 | rootless container builds via `rootless-container-builds` skill |
 | OPA/Rego Build Policy | ≥buildx v0.16 (the `--policy` flag landed in v0.16) | `yubiOS.rego` Build Policy |
-| SoftHSM (CI substitute for YubiKey PIV slot 9c) | ≥v2.6 | canonical PKCS#11 signing pattern; cross-version trap at v2.6 → v2.7 (commit `a50ecac42cc0` documented in `refs/sbsign-pkcs11-validate-2026-07-23.md`) |
+| SoftHSM (CI substitute for U2F/HSM PIV slot 9c) | ≥v2.6 | canonical PKCS#11 signing pattern; cross-version trap at v2.6 → v2.7 (commit `a50ecac42cc0` documented in `refs/sbsign-pkcs11-validate-2026-07-23.md`) |
 | sbsign + libykcs11 | ≥systemd v252-era (signed UKI build) | PR #32 merged |
 
 ## 3. Pre-bump verification (BEFORE updating PINNED.md)

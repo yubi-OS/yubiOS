@@ -9,7 +9,7 @@ Define the second 30-day phase: narrow the claim to one pilot platform, retire o
 ## Scope (from OMN-66)
 
 - Retire or reclassify the VM, physical-token, runtime-hardening, and release blockers for one pilot platform.
-- Publish a reproducible physical-YubiKey and recovery demonstration with exact evidence and limits.
+- Publish a reproducible physical-U2F/HSM and recovery demonstration with exact evidence and limits.
 - Recruit two design partners matching the initial customer profile.
 - Price the pilot; do not default to unpaid custom engineering.
 - Establish vulnerability triage, release severity, escalation, backup, and incident communications exercises.
@@ -23,20 +23,20 @@ x86_64 / VM-validated path, not ARM64 hardware. Per BLOCKERS.md, ARM64 (B-ARM64-
 | ID | Current state (BLOCKERS.md, 2026-07-22) | Action for the pilot narrowing |
 |---|---|---|
 | B-VM-CTAP2 | Run 29872832727 reached the ARM64 guest and ran enrollment-surface checks, but no FIDO2 token enumerated; LUKS2 FIDO2, homed, and ed25519-sk skip as a result. | Must fix before pilot claim: repair the bcvk/swu2f device path, assert token discovery before token-dependent tests, keep logs proving each op ran. This is the hardest blocker on the pilot critical path. |
-| B-REAL-FIDO2 | SoftHSM and swu2f exercise interfaces; no physical-YubiKey run yet validates unlock, homed, resident SSH, PAM presence, PIV signing, recovery, failure handling. | Reclassify from blocked-on-VM-software-gap to gated-on-B-VM-CTAP2-closing-first; sequence the physical-hardware demo right after B-VM-CTAP2 goes green. |
+| B-REAL-FIDO2 | SoftHSM and swu2f exercise interfaces; no physical-U2F/HSM run yet validates unlock, homed, resident SSH, PAM presence, PIV signing, recovery, failure handling. | Reclassify from blocked-on-VM-software-gap to gated-on-B-VM-CTAP2-closing-first; sequence the physical-hardware demo right after B-VM-CTAP2 goes green. |
 | B-HARDENING-RUNTIME | Static audit complete ([refs/systemd-hardening-audit-2026-07-17.md](systemd-hardening-audit-2026-07-17.md)); runtime Bats checks and systemd-analyze verify not yet run against a target image. | Run before pilot: execute the Bats suite and systemd-analyze verify on the actual pilot image, not just statically. Do not claim RestrictFileSystemAccess= enforcement until this runs. |
 | B-BOOTC-SEAL | Pinned bootc 1.16.3 lacks container split-kernel-and-rootfs; strict fs-verity is proven through a mutable BLS digest anchor, not a sealed/signed UKI. | Reclassify as a release blocker, not a pilot blocker: the pilot can ship with the current mutable-anchor fs-verity story documented as a known limit, while the sealed-UKI work continues on its own track ([refs/bootc-composefs-sealed-flow-2026-07-22.md](bootc-composefs-sealed-flow-2026-07-22.md)). |
 | B-RK3588-TPL, B-ARM64-PATHA | ARM64 hardware not production. | Out of scope for this pilot platform choice, explicitly excluded, not silently dropped. |
 | B-QEMU-ZBOOT, B-PINS | Contained workarounds, not open failures. | No action needed for pilot; keep the workaround explicit and PINNED.md current. |
 
-## Physical-YubiKey and recovery demonstration
+## Physical-U2F/HSM and recovery demonstration
 
 Cannot be executed by this agent (no physical hardware access). This section specifies what reproducible means so the demo is falsifiable, not a claim:
 
 - Preconditions: B-VM-CTAP2 closed (software coverage proven) before attempting the hardware run, per BLOCKERS.md and B-REAL-FIDO2 sequencing.
-- Evidence to capture per run: exact YubiKey model and firmware, host OS build (git SHA plus image digest), each operation command and full output (enroll, LUKS2 unlock, systemd-homed login, PAM presence check, PIV signing, recovery-path exercise, one deliberate failure case such as wrong key or unplugged key).
-- Limits to state explicitly: a single YubiKey model and firmware tested is not a hardware compatibility matrix; a lab bench run is not a fleet-scale reliability claim; recovery tested once is not a statistically validated recovery rate.
-- Owner: needs a human with physical YubiKey and target hardware; flagged as an open item below.
+- Evidence to capture per run: exact U2F/HSM model and firmware, host OS build (git SHA plus image digest), each operation command and full output (enroll, LUKS2 unlock, systemd-homed login, PAM presence check, PIV signing, recovery-path exercise, one deliberate failure case such as wrong key or unplugged key).
+- Limits to state explicitly: a single U2F/HSM model and firmware tested is not a hardware compatibility matrix; a lab bench run is not a fleet-scale reliability claim; recovery tested once is not a statistically validated recovery rate.
+- Owner: needs a human with physical U2F/HSM and target hardware; flagged as an open item below.
 
 ## Design partner recruitment
 
@@ -61,7 +61,7 @@ Cannot be executed by this agent (no physical hardware access). This section spe
 ## Exit criteria
 
 - [ ] B-VM-CTAP2 closed with logged evidence of FIDO2 token enumeration in the VM lane.
-- [ ] Physical-YubiKey demonstration run and documented (or explicitly still pending, with owner named).
+- [ ] Physical-U2F/HSM demonstration run and documented (or explicitly still pending, with owner named).
 - [ ] B-HARDENING-RUNTIME runtime checks executed against the pilot image.
 - [ ] B-BOOTC-SEAL explicitly reclassified as release-track, not pilot-blocking, with the limit documented.
 - [ ] 2 design partners recruited.
@@ -78,7 +78,7 @@ Primary sequence (from OMN-66): OMN-73 (readiness gates and go-to-market) -> OMN
 ## Open questions
 
 - Design partner candidate list is not sourced (same gap noted in the OMN-65 draft).
-- Physical-YubiKey demonstration needs a human with hardware access; not executable from this session.
+- Physical-U2F/HSM demonstration needs a human with hardware access; not executable from this session.
 - Exact pilot price is deferred to OMN-71/OMN-78, intentionally not duplicated here.
 
 

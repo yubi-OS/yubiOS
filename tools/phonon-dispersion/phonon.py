@@ -13,6 +13,12 @@ ideal two-state gas") must first pass its own curveball admission null.
 
 Modes:
   --selftest            run all exact checks (CI gate; exits nonzero on any FAIL)
+  --input PATH          verify the Q_9 Hamming geometry of a REAL corpus matrix (is-this-x zip,
+                        per_row_coverage JSON, or 0/1 CSV): empirical pairwise Hamming-distance
+                        distribution (direct popcount over all pairs vs the Walsh/Krawtchouk route),
+                        column-pair identity, Walsh weight-1 coefficients vs column means, and the
+                        graph-Laplacian Rayleigh quotient of the empirical density (edge sum vs
+                        spectral sum). Exits nonzero on any mismatch.
   --dispersion M1 M2    print the diatomic two-branch dispersion table
   --gaunt L             print Gaunt triangle+parity triad counts for l <= L
   --fd EPS T            compare pi_T(k) at linear Phi(k)=EPS*k with Binomial(9,p)
@@ -20,8 +26,11 @@ Modes:
 Verified sources for every closed form are cited in the refs/ bridge doc.
 """
 
+import json
 import math
 import sys
+import zipfile
+from fractions import Fraction
 from functools import lru_cache
 
 D_PRIMITIVES = 9  # the program's primitive count (coverage shells k = 0..9)
@@ -83,6 +92,58 @@ def hamming_laplacian_check(d):
             if acc != 2 * wt * chi_a:
                 return False
     return True
+
+
+def hamming_zero_mode_check(d):
+    """Zero mode of L = D - A on Q_d, tested three independent ways: (a) L applied to the all-ones
+    function vanishes at every vertex; (b) the nullspace is exactly one-dimensional (exact integer rank of
+    L over the rationals is 2^d - 1, so 0 is a SIMPLE eigenvalue: the graph is connected); (c) no other
+    character is annihilated (only wt(r) = 0 gives eigenvalue 0). Returns True/False."""
+    n = 1 << d
+    for a in range(n):
+        if d * 1 - sum(1 for i in range(d)) != 0:
+            return False
+    Lm = [[Fraction(0)] * n for _ in range(n)]
+    for a in range(n):
+        Lm[a][a] = Fraction(d)
+        for i in range(d):
+            Lm[a][a ^ (1 << i)] -= 1
+    if any(sum(row) != 0 for row in Lm):
+        return False
+    rank = 0
+    rows = [r[:] for r in Lm]
+    for c in range(n):
+        piv = next((r for r in range(rank, n) if rows[r][c] != 0), None)
+        if piv is None:
+            continue
+        rows[rank], rows[piv] = rows[piv], rows[rank]
+        for r in range(n):
+            if r != rank and rows[r][c] != 0:
+                f = rows[r][c] / rows[rank][c]
+                rows[r] = [x - f * y for x, y in zip(rows[r], rows[rank])]
+        rank += 1
+    if rank != n - 1:
+        return False
+    return all((hamming_char_eigenvalue(d, r) == 0) == (r == 0) for r in range(n))
+
+
+def hamming_char_eigenvalue(d, r):
+    """Eigenvalue of L = D - A on the character chi_r read off at vertex 0: (L chi_r)(0) / chi_r(0)."""
+    acc = d  # chi_r(0) = 1
+    for i in range(d):
+        acc -= -1 if bin(r & (1 << i)).count("1") % 2 else 1
+    return acc
+
+
+def sphere_eigen_measured(l, x):
+    """Laplace-Beltrami eigenvalue of Y_l0 = P_l(x) from the Legendre ODE, measured not assumed:
+    d/dx[(1-x^2) P_l'] = -lambda P_l with (1-x^2) P_l' = l (P_{l-1} - x P_l) exact by recurrence and the
+    outer derivative a central difference. Returns lambda = -g'(x) / P_l(x)."""
+    h = 1e-5
+
+    def g(t):
+        return l * (legendre(l - 1, t) - t * legendre(l, t))
+    return -(g(x + h) - g(x - h)) / (2.0 * h) / legendre(l, x)
 
 
 def sphere_eigen(l):
@@ -206,13 +267,28 @@ def selftest():
     # 3. Acoustic sum rule / zero mode: Hamming Laplacian on characters, exact.
     check("hamming_laplacian_spectrum_d4", hamming_laplacian_check(4),
           "L chi_r = 2*wt(r) chi_r for all 16 characters of Q_4")
-    check("hamming_zero_mode", hamming_laplacian_check(1), "j=0 all-ones annihilated")
+    check("hamming_zero_mode", all(hamming_zero_mode_check(d) for d in (1, 2, 3, 4)),
+          "L*1 = 0, nullspace exactly span(1) (exact rank 2^d-1), only wt(r)=0 annihilated; d=1..4")
 
     # 4. S^2 spectrum vs Hamming: quadratic vs linear level penalty.
-    tbl_ok = all(sphere_eigen(l) == (l * (l + 1), 2 * l * (l + 1)) for l in range(9))
-    dom_ok = all(2 * l * (l + 1) > 2 * l for l in range(1, 9))
-    check("sphere_eigenvalues", tbl_ok, "lambda(l)=l(l+1), rate 2l(l+1), l=0..8")
-    check("quadratic_dominates_hamming", dom_ok, "2l(l+1) > 2l for l>=1; equal at l=0")
+    worst_sph = 0.0
+    tbl_ok = True
+    for l in range(1, 9):
+        for x in (0.15, 0.31, 0.47, -0.22, -0.58):
+            if abs(legendre(l, x)) < 0.05:
+                continue
+            lam = sphere_eigen_measured(l, x)
+            worst_sph = max(worst_sph, abs(lam - sphere_eigen(l)[0]) / (1.0 + l * (l + 1)))
+            tbl_ok &= abs(lam - sphere_eigen(l)[0]) < 1e-4 * (1.0 + l * (l + 1))
+            tbl_ok &= sphere_eigen(l)[1] == 2 * sphere_eigen(l)[0]
+    tbl_ok &= sphere_eigen(0) == (0, 0)
+    check("sphere_eigenvalues", tbl_ok,
+          f"lambda(l)=l(l+1) measured from the Legendre ODE, l=1..8, worst rel dev {worst_sph:.1e}; rate = 2*lambda")
+    ham_rates = [hamming_char_eigenvalue(9, (1 << j) - 1) for j in range(10)]   # eigenvalue 2j on wt-j characters
+    dom_ok = (ham_rates == [2 * j for j in range(10)]
+              and all(sphere_eigen(l)[1] > ham_rates[l] for l in range(1, 9)) and sphere_eigen(0)[1] == ham_rates[0])
+    check("quadratic_dominates_hamming", dom_ok,
+          f"Q_9 character eigenvalues {ham_rates[:5]}...; sphere rate 2l(l+1) > Hamming 2j for l=j>=1; equal at 0")
 
     # 5. Gaunt selection rules: counts + two-route verification.
     tot, tri, allowed = gaunt_counts(3)
@@ -248,11 +324,124 @@ def selftest():
     return 0 if ok_all else 1
 
 
+# ------------------------------------------------------ real-corpus Q_9 geometry
+
+def load_rows_as_masks(path):
+    """Corpus rows as d-bit integers (bit c = coverage of primitive c). Returns (masks, d)."""
+    if path.endswith(".zip"):
+        with zipfile.ZipFile(path) as z:
+            j = json.load(z.open("is-this-x-2026-08-12/data/real/per_row_coverage_v3.json"))
+        rows = [r["covered"] for r in j["rows"]]
+    elif path.endswith(".json"):
+        j = json.load(open(path))
+        rows = [r["covered"] for r in j["rows"]] if isinstance(j, dict) and "rows" in j else j
+    else:
+        rows = [[int(v) for v in line.split(",")] for line in open(path) if line.strip()]
+    d = len(rows[0])
+    if any(len(r) != d or any(int(v) not in (0, 1) for v in r) for r in rows):
+        raise ValueError("matrix is not rectangular 0/1")
+    return [sum(int(v) << c for c, v in enumerate(r)) for r in rows], d
+
+
+def walsh_hadamard(f):
+    """Unnormalised fast Walsh-Hadamard transform: F(r) = sum_x f(x) (-1)^{r.x}."""
+    a = list(f)
+    h = 1
+    while h < len(a):
+        for i in range(0, len(a), 2 * h):
+            for j in range(i, i + h):
+                a[j], a[j + h] = a[j] + a[j + h], a[j] - a[j + h]
+        h *= 2
+    return a
+
+
+def krawtchouk(d, j, i):
+    """K_j(i) = sum_s (-1)^s C(i,s) C(d-i, j-s)."""
+    return sum(((-1) ** s) * binom(i, s) * binom(d - i, j - s) for s in range(0, j + 1) if s <= i and j - s <= d - i)
+
+
+def verify_corpus_geometry(path, verbose=True):
+    masks, d = load_rows_as_masks(path)
+    n = len(masks)
+    N = 1 << d
+    ok_all = True
+
+    def check(name, ok, detail=""):
+        nonlocal ok_all
+        ok_all &= bool(ok)
+        if verbose:
+            print(("PASS" if ok else "FAIL") + f" {name}" + (f" -- {detail}" if detail else ""))
+
+    check("matrix_shape", n >= 2 and d == D_PRIMITIVES, f"{n} rows x {d} primitives")
+
+    # (1) direct all-pairs Hamming histogram (ordered pairs incl. i = j)
+    direct = [0] * (d + 1)
+    for a in masks:
+        for b in masks:
+            direct[bin(a ^ b).count("1")] += 1
+    check("pair_count", sum(direct) == n * n, f"{sum(direct)} ordered pairs")
+
+    # (2) column identity: sum over unordered pairs of d_H = sum_c n1_c * n0_c
+    n1 = [sum((m >> c) & 1 for m in masks) for c in range(d)]
+    pair_sum = sum(j * direct[j] for j in range(d + 1)) // 2
+    col_sum = sum(n1[c] * (n - n1[c]) for c in range(d))
+    check("column_pair_identity", pair_sum == col_sum, f"sum d_H over pairs {pair_sum} == sum_c n1*n0 {col_sum}")
+
+    # (3) zero-distance pairs = collisions: sum over distinct vectors of m_v^2 (ordered, incl. i = j)
+    mult = {}
+    for m in masks:
+        mult[m] = mult.get(m, 0) + 1
+    check("zero_distance_is_collision_structure", direct[0] == sum(v * v for v in mult.values()),
+          f"{len(mult)} distinct vectors, {direct[0]} ordered zero-distance pairs")
+
+    # (4) Walsh route: direct characters from the rows vs WHT of the histogram
+    hist = [0] * N
+    for m in masks:
+        hist[m] += 1
+    F = walsh_hadamard(hist)            # F(r) = sum_rows (-1)^{r.x}
+    spot = [0, 1, 3, 5, N - 1, 137 % N]
+    direct_char = {r: sum(-1 if bin(r & m).count("1") % 2 else 1 for m in masks) for r in spot}
+    check("walsh_matches_direct_characters", all(F[r] == direct_char[r] for r in spot), f"r in {spot}")
+    check("walsh_weight1_is_column_mean", all(F[1 << c] == n - 2 * n1[c] for c in range(d)),
+          "F(e_c) = n - 2 n1_c for all columns")
+    check("walsh_parseval", sum(f * f for f in F) == N * sum(h * h for h in hist), "sum F^2 = 2^d sum hist^2")
+
+    # (5) distance distribution via Krawtchouk: B_j = (1/2^d) sum_r F(r)^2 K_j(wt r)
+    wt = [bin(r).count("1") for r in range(N)]
+    kraw = [sum(F[r] * F[r] * krawtchouk(d, j, wt[r]) for r in range(N)) for j in range(d + 1)]
+    check("distance_distribution_krawtchouk", all(kraw[j] == N * direct[j] for j in range(d + 1)),
+          "direct pairwise histogram == Walsh/Krawtchouk route, exact integers")
+
+    # (6) Laplacian Rayleigh quotient of the empirical density f = hist / n on Q_d, two routes
+    f = [h / n for h in hist]
+    edge = sum((f[x] - f[x ^ (1 << c)]) ** 2 for x in range(N) for c in range(d) if x < (x ^ (1 << c)))
+    ff = sum(v * v for v in f)
+    rq_graph = edge / ff
+    Ff = [v / n for v in F]
+    rq_spec = sum(2 * wt[r] * Ff[r] ** 2 for r in range(N)) / sum(Ff[r] ** 2 for r in range(N))
+    check("rayleigh_quotient_graph_vs_spectral", abs(rq_graph - rq_spec) < 1e-9 * max(1.0, rq_graph),
+          f"R = {rq_graph:.9f} (edge sum) vs {rq_spec:.9f} (sum 2wt|F|^2); bounds 0 <= R <= 2d = {2 * d}")
+    check("rayleigh_quotient_in_spectrum_range", 0.0 < rq_graph < 2 * d)
+    mean_d = sum(j * direct[j] for j in range(d + 1)) / (n * n)
+    if verbose:
+        print("INFO distance histogram (ordered pairs):", direct)
+        print(f"INFO mean Hamming distance {mean_d:.6f}; Rayleigh quotient {rq_graph:.6f}; "
+              f"distinct vectors {len(mult)} of {N}")
+        print("REAL-CORPUS Q_9 VERIFICATION: " + ("ALL PASS" if ok_all else "FAILURES PRESENT"))
+    return 0 if ok_all else 1
+
+
 # --------------------------------------------------------------------- CLI
 
 def main(argv):
     if "--selftest" in argv:
         return selftest()
+    if "--input" in argv:
+        i = argv.index("--input")
+        if i + 1 >= len(argv):
+            print("--input needs a PATH", file=sys.stderr)
+            return 2
+        return verify_corpus_geometry(argv[i + 1])
     if "--dispersion" in argv:
         i = argv.index("--dispersion")
         m1, m2 = float(argv[i + 1]), float(argv[i + 2])

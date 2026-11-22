@@ -2,14 +2,14 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
 # tests/vm/lib/real-u2f-guard.sh -- fail-loudly guard for swu2f (passless)
-# CI tests when a real YubiKey is attached to the host.
+# CI tests when a real U2F/HSM is attached to the host.
 #
 # Background: the passless in-guest authenticator (swu2f Layer 2, CTAP2
 # hmac-secret) is the SOFTWARE fallback used by yubiOS CI because no
-# physical YubiKey is present. Production trust stays on the physical
-# YubiKey (ADR-003/ADR-004); swu2f is TEST-ONLY.
+# physical U2F/HSM is present. Production trust stays on the physical
+# U2F/HSM (ADR-003/ADR-004); swu2f is TEST-ONLY.
 #
-# Problem: when a real YubiKey is plugged into the same host that runs
+# Problem: when a real U2F/HSM is plugged into the same host that runs
 # this script, the in-guest FIDO2 assertions can silently exercise the
 # REAL key instead of passless:
 #   - QEMU u2f-emulated and passless both attach to /dev/uhid; an
@@ -29,14 +29,14 @@
 #     themselves; the lib only reads ALLOW_REAL_U2F).
 #
 # Public API:
-#   detect_real_yubikey
+#   detect_real_u2f_hsm
 #     Returns 0 if a real Yubico USB device is visible on the host.
 #     Detects via lsusb (1050: VID or "Yubico" string) and/or via udev
 #     metadata on /sys/class/hidraw/* (ID_VENDOR=Yubico or
 #     ID_VENDOR_ID=1050).
 #
 #   assert_passless_only
-#     die()s with a remediation message if a real YubiKey is visible
+#     die()s with a remediation message if a real U2F/HSM is visible
 #     AND ALLOW_REAL_U2F is not 1. Run BEFORE bcvk ephemeral run so the
 #     operator sees the failure in seconds rather than after a 5+ minute
 #     boot.
@@ -49,7 +49,7 @@ ALLOW_REAL_U2F="${ALLOW_REAL_U2F:-0}"
 # the probes below counting as a hit is sufficient. False positives
 # (e.g. an emulated Yubico device) should be ruled out via
 # ALLOW_REAL_U2F=1 when intentional.
-detect_real_yubikey() {
+detect_real_u2f_hsm() {
   if command -v lsusb >/dev/null 2>&1; then
     if lsusb 2>/dev/null | grep -Eiq 'id 1050:|yubico'; then
       echo "lsusb reports a Yubico (VID 1050) device" >&2
@@ -71,19 +71,19 @@ detect_real_yubikey() {
   return 1
 }
 
-# die loudly if a real YubiKey is visible AND ALLOW_REAL_U2F was NOT set
+# die loudly if a real U2F/HSM is visible AND ALLOW_REAL_U2F was NOT set
 # to 1. Call this BEFORE bcvk ephemeral run so the guard fails fast.
 assert_passless_only() {
   if [[ "${ALLOW_REAL_U2F}" == "1" ]]; then
-    echo "WARN: ALLOW_REAL_U2F=1 set; skipping real-YubiKey guard." >&2
+    echo "WARN: ALLOW_REAL_U2F=1 set; skipping real-U2F/HSM guard." >&2
     return 0
   fi
-  if detect_real_yubikey; then
+  if detect_real_u2f_hsm; then
     cat >&2 <<'EOF'
-FAIL: real YubiKey detected on this host.
+FAIL: real U2F/HSM detected on this host.
 
 This test exercises the swu2f Layer 2 (passless) fallback, which is
-TEST-ONLY (ADR-003). A real YubiKey on the host means a passthrough
+TEST-ONLY (ADR-003). A real U2F/HSM on the host means a passthrough
 regression would be silently masked by the in-guest software
 authenticator rather than failing loud:
 
@@ -95,7 +95,7 @@ authenticator rather than failing loud:
     host passthrough) can be selected over passless.
 
 Remedies (pick one):
-  1. Unplug the YubiKey and re-run (preferred).
+  1. Unplug the U2F/HSM and re-run (preferred).
   2. Set ALLOW_REAL_U2F=1 (env) or pass --allow-real-u2f (argv) if you
      understand the failure-mode trade-off (passthrough breakage will
      not be detected by this test run).

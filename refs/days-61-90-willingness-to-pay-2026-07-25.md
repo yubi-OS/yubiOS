@@ -17,7 +17,7 @@ Define the third 30-day phase: run one paid pilot, measure it honestly, and prod
 
 OMN-67 makes the paid pilot conditional on Gate 1. Gate definitions live in OMN-73 (Readiness gates and go-to-market), which has not landed a drafted PR in this pass; carried as an open question below rather than guessed at here. Do not run a paid pilot before OMN-73 lands and Gate 1 is confirmed met. This doc assumes Gate 1 passes and specifies what happens next; it does not certify the gate.
 
-What this doc can ground today from the days 31-60 plan (OMN-66, PR 105): the pilot platform is x86_64/VM, ARM64 is explicitly out of scope, and the pilot cannot start before B-VM-CTAP2 closes and the physical-YubiKey demonstration runs, since those are exit criteria of the prior phase.
+What this doc can ground today from the days 31-60 plan (OMN-66, PR 105): the pilot platform is x86_64/VM, ARM64 is explicitly out of scope, and the pilot cannot start before B-VM-CTAP2 closes and the physical-U2F/HSM demonstration runs, since those are exit criteria of the prior phase.
 
 ## Paid pilot design (25-50 nodes, disposable or non-critical systems)
 
@@ -34,7 +34,7 @@ Each metric needs a concrete instrument, not just a name, so day-90 numbers are 
 - Operator training: hours spent, number of operators trained, and a post-training competency check (can the operator unlock or recover a node unaided). Source: training session log plus a pass or fail checklist.
 - Update and rollback success: number of upgrade and rollback attempts, success rate, and time to recover on failure. Source: bootc logs from pilot nodes.
 - Evidence preparation: time spent assembling the evidence bundle (BLOCKERS.md-style honesty about what was proven versus assumed) for the customer readout. Source: a time log kept during readout drafting.
-- Recovery time: time to recover from a lost or broken YubiKey using the systemd-homed and FIDO2 recovery path validated in days 31-60. Source: a timed recovery drill, at least one per pilot.
+- Recovery time: time to recover from a lost or broken U2F/HSM using the systemd-homed and FIDO2 recovery path validated in days 31-60. Source: a timed recovery drill, at least one per pilot.
 - Support load: number of support tickets or questions raised by the pilot operator, categorized by root cause. Source: the support channel log.
 
 ## Readouts

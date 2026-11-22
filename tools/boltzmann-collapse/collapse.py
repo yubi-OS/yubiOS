@@ -17,8 +17,16 @@ with a closed-form equilibrium:
     F_T(k)    =  Phi(k) - T * log C(d, k)                  (free energy)
     Z_T       =  sum_k C(d, k) * exp(-Phi(k) / T)          (partition fn)
 
-This module implements that closed form plus a brute-force cross-check
-that enumerates all 2^d microstates directly (guarded to d <= 20).
+This module implements that closed form plus two cross-checks:
+
+  * brute_force_chain (d <= 9): builds the full 2^d x 2^d single-bit-flip Metropolis
+    transition matrix P(x -> y) over the microstates, checks that the closed-form
+    microstate law satisfies detailed balance pi(x)P(x,y) = pi(y)P(y,x) and
+    stationarity pi P = pi, and solves for the stationary law of P from the kernel
+    alone (no closed form used), aggregated by k. This is the check that can fail.
+  * brute_force_pi (d <= 20): a multiplicity tally. It counts microstates per shell
+    and applies the same Boltzmann weight, so it only verifies the binomial counts
+    C(d,k); it does NOT test the collapse claim.
 
 Numerical stability: all of pi_T / free_energy / partition are computed in
 log-space with a log-sum-exp reduction, so they are stable even when Phi/T
@@ -93,16 +101,24 @@ def free_energy(phi, d, T):
 
 def crossover(phi, d, T_grid):
     """
-    Find T_x, the temperature where argmax_k pi_T(k) switches between the
-    energy-dominated shell (argmin Phi, typically k=d for a monotone
-    decreasing ladder) and the entropy-dominated shell (argmax C(d,k),
-    i.e. k = d//2 for the central binomial coefficient).
+    Find T_x, the temperature of the FIRST modal-shell transition: the lowest T
+    in T_grid at which argmax_k pi_T(k) changes. For a monotone decreasing ladder
+    with its minimum at k = d this is the switch k = d -> k = d-1, which has the
+    closed form
 
-    Method: scan T_grid (strictly increasing) for the point where
+        T_x = (Phi(d-1) - Phi(d)) / ln d          (see first_transition_T).
+
+    It is NOT the switch to the entropy-dominated shell (argmax C(d,k), k = d//2):
+    on the published d=9 compass ladder the modal shell only reaches k = 5 at
+    T ~ 0.290, after further switches 8->7 (0.072), 7->6 (0.130) and 6->5 (0.290).
+    `energy_shell` and `entropy_shell` in the result name argmin Phi and argmax C(d,k)
+    for reference only; `argmax_below` / `argmax_above` are the shells this T_x separates.
+
+    Method: scan T_grid (strictly increasing) for the first point where
     argmax_k pi_T(k) changes, then refine by bisection between the
     bracketing grid points using the same argmax-switch criterion.
 
-    Returns a dict with T_x plus the two competing shells.
+    Returns a dict with T_x plus the shells on either side of it.
     """
     phi = np.asarray(phi, dtype=np.float64)
     T_grid = np.asarray(T_grid, dtype=np.float64)
@@ -157,13 +173,90 @@ def crossover(phi, d, T_grid):
     }
 
 
+def first_transition_T(phi, d):
+    """Closed form of the first modal transition k = d -> k = d-1 when Phi is minimal at k = d:
+    pi_T(d) = pi_T(d-1)  <=>  exp(-Phi(d)/T) = d exp(-Phi(d-1)/T)  <=>  T = (Phi(d-1) - Phi(d)) / ln d."""
+    phi = np.asarray(phi, dtype=np.float64)
+    return float((phi[d - 1] - phi[d]) / np.log(d))
+
+
+def brute_force_chain(phi, d, T, phi_micro=None):
+    """Build the 2^d x 2^d single-bit-flip Metropolis kernel over the microstates (uniform proposal 1/d,
+    accept min(1, exp(-dPhi/T))) and test the collapse claim against it. d <= 9.
+
+    phi_micro: optional length-2^d microstate potential (default Phi(popcount(x))); a non-exchangeable one
+    is used by the selftest as a negative control.
+
+    Returns a dict with
+      detailed_balance_residual   max |pi(x)P(x,y) - pi(y)P(y,x)| / max pi, pi = closed-form microstate law
+      stationarity_residual       max |(pi P)(y) - pi(y)| / max pi
+      power_iteration_residual    max |pi P^50 - pi| / max pi
+      pi_k_from_kernel            stationary law solved from P ALONE (linear solve), aggregated by k
+      max_abs_err                 max_k |pi_k_from_kernel - pi_T(k)| (closed form)
+    """
+    if d > 9:
+        raise ValueError(f"brute_force_chain: d={d} > 9 (dense 2^d x 2^d kernel)")
+    phi = np.asarray(phi, dtype=np.float64)
+    if phi.shape[0] != d + 1:
+        raise ValueError(f"phi must have length d+1={d + 1}, got {phi.shape[0]}")
+    N = 1 << d
+    idx = np.arange(N)
+    k_of = np.array([bin(x).count("1") for x in range(N)])
+    phi_x = phi[k_of] if phi_micro is None else np.asarray(phi_micro, dtype=np.float64)
+    P = np.zeros((N, N))
+    for b in range(d):
+        y = idx ^ (1 << b)
+        dphi = (phi_x[y] - phi_x) / T
+        acc = np.exp(-np.maximum(dphi, 0.0))
+        P[idx, y] += acc / d
+    P[idx, idx] = 1.0 - P.sum(axis=1)
+    if P.min() < -1e-15:
+        raise RuntimeError("Metropolis kernel has a negative entry")
+
+    # closed-form microstate law (Phi depends on k only)
+    logw = -phi_x / T
+    pi_x = np.exp(logw - _logsumexp(logw))
+    flux = pi_x[:, None] * P
+    scale = float(pi_x.max())
+    db = float(np.max(np.abs(flux - flux.T))) / scale
+    st = float(np.max(np.abs(pi_x @ P - pi_x))) / scale
+    v = pi_x.copy()
+    for _ in range(50):
+        v = v @ P
+    pw = float(np.max(np.abs(v - pi_x))) / scale
+
+    # stationary law from the kernel alone via Grassmann-Taksar-Heyman (GTH)
+    # subtraction-free Markov state elimination (machine-precision across all T):
+    Q = P.copy()
+    for n_idx in range(N - 1, 0, -1):
+        s_n = float(np.sum(Q[n_idx, :n_idx]))
+        if s_n > 0.0:
+            Q[:n_idx, n_idx] /= s_n
+            Q[:n_idx, :n_idx] += np.outer(Q[:n_idx, n_idx], Q[n_idx, :n_idx])
+    pi_solved = np.zeros(N, dtype=np.float64)
+    pi_solved[0] = 1.0
+    for j_idx in range(1, N):
+        pi_solved[j_idx] = float(np.dot(pi_solved[:j_idx], Q[:j_idx, j_idx]))
+    pi_solved /= float(np.sum(pi_solved))
+    pi_k = np.array([pi_solved[k_of == k].sum() for k in range(d + 1)])
+    closed = pi_T(phi, d, T)
+    return {
+        "d": d, "T": float(T), "n_states": int(N),
+        "detailed_balance_residual": db,
+        "stationarity_residual": st,
+        "power_iteration_residual": pw,
+        "pi_k_from_kernel": pi_k,
+        "max_abs_err": float(np.max(np.abs(pi_k - closed))),
+    }
+
+
 def brute_force_pi(phi, d, T):
     """
-    Enumerate all 2^d coverage states c in {0,1}^d directly, weight each
-    by exp(-Phi(k(c))/T) with k(c) = sum(c), and aggregate the mass per
-    k-shell before normalizing. This is the ground truth the closed form
-    is checked against -- it does not assume exchangeability, it just
-    happens to reproduce it because Phi only depends on k.
+    Multiplicity tally: enumerate all 2^d coverage states c in {0,1}^d, count
+    them per k-shell, weight each shell by exp(-Phi(k)/T) and normalise. This
+    checks the binomial counts C(d,k) only; it applies the same Boltzmann weight as
+    the closed form and builds no chain, so it is NOT evidence for the collapse.
+    Use brute_force_chain (d <= 9) for that.
 
     Guarded to d <= 20 (2^20 = 1,048,576 states) to keep runtime bounded.
     For d <= 16 states are materialized bit by bit (true enumeration). For
@@ -219,7 +312,9 @@ def _load_measured_phi_ladder():
                       "is-this-x-2026-08-12-Final.zip")
     )
     candidates += glob.glob("papers/is-this-x-2026-08-12-Final.zip")
-    candidates += glob.glob("/var/workspace/**/papers/is-this-x-2026-08-12-Final.zip", recursive=True)
+    if not any(os.path.exists(p) for p in candidates):
+        # last resort only: a recursive walk of /var/workspace is minutes slow on a large tree
+        candidates += glob.glob("/var/workspace/**/papers/is-this-x-2026-08-12-Final.zip", recursive=True)
 
     for path in candidates:
         if not os.path.exists(path):
@@ -260,6 +355,36 @@ def selftest(verbose=True):
                 print(f"[{status}] correctness d={d} T={T}: max|closed-brute|={max_abs_err:.3e}")
             report["ok"] = report["ok"] and passed
 
+    for d in (5, 9):
+        phi = _rng_phi_ladder(d, seed=1000 + d)
+        for T in (0.05, 0.2, 1.0, 5.0):
+            ch = brute_force_chain(phi, d, T)
+            passed = (ch["max_abs_err"] < 1e-9 and ch["detailed_balance_residual"] < 1e-12
+                      and ch["stationarity_residual"] < 1e-12 and ch["power_iteration_residual"] < 1e-12)
+            report["correctness"].append({"d": d, "T": T, "kind": "chain",
+                                          "max_abs_err": ch["max_abs_err"],
+                                          "detailed_balance_residual": ch["detailed_balance_residual"],
+                                          "stationarity_residual": ch["stationarity_residual"],
+                                          "passed": passed})
+            if verbose:
+                print(f"[{'PASS' if passed else 'FAIL'}] chain d={d} T={T}: stationary-vs-closed "
+                      f"{ch['max_abs_err']:.3e}, detailed-balance {ch['detailed_balance_residual']:.1e}, "
+                      f"pi P = pi {ch['stationarity_residual']:.1e}")
+            report["ok"] = report["ok"] and passed
+
+    # negative control: a NON-exchangeable potential must NOT collapse onto the closed form
+    d = 5
+    phi = _rng_phi_ladder(d, seed=1005)
+    bump = np.array([0.5 * (x & 1) for x in range(1 << d)])
+    ctrl = brute_force_chain(phi, d, 0.3, phi_micro=phi[[bin(x).count("1") for x in range(1 << d)]] + bump)
+    passed = ctrl["max_abs_err"] > 1e-3
+    report["correctness"].append({"d": d, "T": 0.3, "kind": "non-exchangeable-control",
+                                  "max_abs_err": ctrl["max_abs_err"], "passed": passed})
+    if verbose:
+        print(f"[{'PASS' if passed else 'FAIL'}] non-exchangeable control must break the collapse: "
+              f"{ctrl['max_abs_err']:.3e} (> 1e-3)")
+    report["ok"] = report["ok"] and passed
+
     phi9, T_x_published, note = _load_measured_phi_ladder()
     if phi9 is None:
         report["compass_reproduction"] = {"skipped": True, "reason": note}
@@ -271,8 +396,13 @@ def selftest(verbose=True):
         result = crossover(phi9, d, T_grid)
         T_x_computed = result["T_x"]
         rel_err = abs(T_x_computed - T_x_published) / T_x_published
-        passed = rel_err < 0.05
+        T_x_closed = first_transition_T(phi9, d)
+        rel_closed = abs(T_x_computed - T_x_closed) / T_x_closed
+        passed = (rel_err < 1e-6 and rel_closed < 1e-9
+                  and result["argmax_below"] == d and result["argmax_above"] == d - 1)
         report["compass_reproduction"] = {
+            "T_x_closed_form": T_x_closed, "rel_err_vs_closed_form": rel_closed,
+            "first_transition": [result["argmax_below"], result["argmax_above"]],
             "skipped": False,
             "phi_source": note,
             "T_x_computed": T_x_computed,
@@ -282,8 +412,10 @@ def selftest(verbose=True):
         }
         if verbose:
             status = "PASS" if passed else "FAIL"
-            print(f"[{status}] compass T_x reproduction: computed={T_x_computed:.6f} "
-                  f"published={T_x_published:.6f} rel_err={rel_err:.4%}")
+            print(f"[{status}] compass T_x reproduction (first modal transition "
+                  f"{result['argmax_below']}->{result['argmax_above']}): computed={T_x_computed:.9f} "
+                  f"closed form (Phi(8)-Phi(9))/ln 9={T_x_closed:.9f} published={T_x_published:.9f} "
+                  f"rel_err={rel_err:.2e}")
         report["ok"] = report["ok"] and passed
 
     d = 16
@@ -330,6 +462,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     out = {}
+    verify_failed = False
 
     if args.selftest:
         out["selftest"] = selftest(verbose=not args.json)
@@ -395,16 +528,36 @@ def main(argv=None):
                 out["verify"] = {"skipped": True, "reason": "d > 20"}
             else:
                 brute = brute_force_pi(phi, d, args.T)
-                max_abs_err = float(np.max(np.abs(pi - brute)))
-                out["verify"] = {"max_abs_err": max_abs_err, "passed": max_abs_err < 1e-9}
+                tally_err = float(np.max(np.abs(pi - brute)))
+                v = {"max_abs_err": tally_err, "popcount_tally_max_abs_err": tally_err}
+                passed = tally_err < 1e-9
+                if d <= 9:
+                    ch = brute_force_chain(phi, d, args.T)
+                    v["chain"] = {k_: (float(x) if not isinstance(x, (int, np.ndarray)) else x)
+                                  for k_, x in ch.items() if k_ != "pi_k_from_kernel"}
+                    v["chain"]["pi_k_from_kernel"] = ch["pi_k_from_kernel"].tolist()
+                    v["max_abs_err"] = max(tally_err, ch["max_abs_err"])
+                    passed = (passed and ch["max_abs_err"] < 1e-9 and ch["detailed_balance_residual"] < 1e-12
+                              and ch["stationarity_residual"] < 1e-12)
+                else:
+                    v["chain"] = {"skipped": True, "reason": "d > 9: dense 2^d x 2^d kernel not built; "
+                                  "only the popcount tally ran, which does not test the collapse"}
+                v["passed"] = bool(passed)
+                out["verify"] = v
+                verify_failed = not passed
                 if not args.json:
-                    status = "PASS" if max_abs_err < 1e-9 else "FAIL"
-                    print(f"[{status}] verify: max|closed-brute| = {max_abs_err:.3e}")
+                    print(f"[{'PASS' if passed else 'FAIL'}] verify: popcount tally max|closed-brute| = {tally_err:.3e}")
+                    if d <= 9:
+                        print(f"       chain: stationary-from-kernel err {v['chain']['max_abs_err']:.3e}, "
+                              f"detailed balance {v['chain']['detailed_balance_residual']:.1e}, "
+                              f"pi P = pi {v['chain']['stationarity_residual']:.1e}")
+                    else:
+                        print(f"       chain check skipped ({v['chain']['reason']})")
 
     if args.json:
         print(json.dumps(out, indent=2))
 
-    return 0
+    return 1 if verify_failed else 0
 
 
 if __name__ == "__main__":

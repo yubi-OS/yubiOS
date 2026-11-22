@@ -82,4 +82,7 @@ install -m 0600 "${UKI_SRC}" "${TARGET}"
     printf 'sort-key bootc-%s-%s\n' "${OS_ID}" "${PRIORITY}"
 } > "${ENTRY}"
 
+if [ -x /usr/lib/yubiOS/uki/uki-sync-and-sign.sh ] && [ "${YUBIOS_SKIP_OCI_COMMIT:-0}" != "1" ]; then
+    YUBIOS_ESP="${ESP_MNT}" /usr/lib/yubiOS/uki/uki-sync-and-sign.sh --reason "install-uki" --from-signed-esp --esp "${ESP_MNT}" || true
+fi
 echo "::uki-install:: wrote ${TARGET} and ${ENTRY}"

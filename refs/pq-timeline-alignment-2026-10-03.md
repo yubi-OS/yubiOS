@@ -9,7 +9,7 @@ Date: 2026-10-03. Family: readiness-record. Joins the PQ family via
 The PQ-TLS adoption doc tracks three independent timelines that must converge for yubiOS to
 ship a PQ-secure product: (1) the transport timeline (Go toolchain reaches 1.26, PQ hybrid
 groups become default, X25519MLKEM768 is deployed); (2) the signature timeline (ML-DSA / FIPS
-204 tooling becomes available in cosign, Sigstore, and the YubiKey PIV applet); (3) the
+204 tooling becomes available in cosign, Sigstore, and the U2F/HSM PIV applet); (3) the
 verification timeline (slsa-verifier and cosign verify support PQ signature algorithms).
 
 Timeline 1 is the furthest along: Cloudflare has full PQ deployment, OpenSSL 3.5 has native

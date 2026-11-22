@@ -27,7 +27,7 @@ Codify a reusable pattern for Sauna → remote-CLI access that:
 - Lives entirely in user infrastructure (Tailscale Funnel + 50-LOC Python stdlib server) — no new SaaS dep, no third-party auth provider.
 - Auto-injects Bearer via the Sauna `connect_account` proxy so the agent's call shape stays a clean `curl POST /run`.
 
-The chosen shape is the **bridge, not the proxy.** mcp-proxy (sparfenyuk, the obvious "right" tool for this in the MCP ecosystem) was tried first and rejected — it has **no inbound auth** on its HTTP port, and `ALLOW_COMMANDS` is a command allowlist, not a request-auth filter. With rock1 holding a real YubiKey and running destructive /dev/sda tests, that's a non-starter.
+The chosen shape is the **bridge, not the proxy.** mcp-proxy (sparfenyuk, the obvious "right" tool for this in the MCP ecosystem) was tried first and rejected — it has **no inbound auth** on its HTTP port, and `ALLOW_COMMANDS` is a command allowlist, not a request-auth filter. With rock1 holding a real U2F/HSM and running destructive /dev/sda tests, that's a non-starter.
 
 The 50-LOC Python bridge (`session/rock1-shell-server.py`) is the bare minimum: `http.server.BaseHTTPRequestHandler` + `hmac.compare_digest` + `subprocess.run(cmd, shell=False)`. ~50 LOC. No `pip install`. No Node. No MCP framework. The argv shape is enforced by the bridge code itself — even if a caller crafts `["bash"]`, that's still argv to bash, not `bash -c "$string"`.
 

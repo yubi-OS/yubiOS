@@ -3,8 +3,8 @@
 #
 # Drives `bcvk ephemeral run` with the software TPM (--swtpm) and software U2F/FIDO2
 # (--swu2f) devices, then runs assertions inside the guest over SSH. This is the
-# hardware-free sibling of tests/vm/test-luks-fido2.sh (which needs a real YubiKey +
-# native-to-disk). yubiOS production trust anchor is still the YubiKey FIDO2 device
+# hardware-free sibling of tests/vm/test-luks-fido2.sh (which needs a real U2F/HSM +
+# native-to-disk). yubiOS production trust anchor is still the U2F/HSM FIDO2 device
 # (ADR-003); swtpm/swu2f are TEST-ONLY.
 #
 # Closes #20 (test spec). Relates to #33, #9. yubiOS#25 (swu2f), yubi-OS/bcvk#3 (swtpm).
@@ -33,8 +33,8 @@
 # the CTAP2 hmac-secret token, LUKS2 enrollment/unlock, and homed enrollment all
 # execute. Production images remain intentionally incompatible with this test.
 #
-# === Real-YubiKey guard ===
-# Sourced from tests/vm/lib/real-u2f-guard.sh. If a real YubiKey is detected on
+# === Real-U2F/HSM guard ===
+# Sourced from tests/vm/lib/real-u2f-guard.sh. If a real U2F/HSM is detected on
 # the host before bcvk ephemeral run, the script exits 1 with a remediation
 # message. The reasoning: when a host-attached real key is visible, in-guest
 # FIDO2 assertions can silently exercise the real key instead of passless,
@@ -46,7 +46,7 @@ VMID=""
 SSH_WAIT_SECS="${YUBIOS_SSH_WAIT_SECS:-300}"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
-# Optional opt-out for the real-YubiKey guard: --allow-real-u2f as first argv.
+# Optional opt-out for the real-U2F/HSM guard: --allow-real-u2f as first argv.
 # shellcheck disable=SC2034 # ALLOW_REAL_U2F is read by assert_passless_only in tests/vm/lib/real-u2f-guard.sh
 if [[ "${1:-}" == "--allow-real-u2f" ]]; then
   # shellcheck disable=SC2034 # read by assert_passless_only in tests/vm/lib/real-u2f-guard.sh
@@ -88,7 +88,7 @@ bcvk ephemeral run --help 2>&1 | grep -q -- '--swtpm' || die "pinned bcvk source
 bcvk ephemeral run --help 2>&1 | grep -q -- '--swu2f' || die "pinned bcvk source lacks --swu2f"
 command -v swtpm  >/dev/null 2>&1 || skip "host swtpm not found; --swtpm may fail to attach a vTPM"
 
-# Real-YubiKey guard: fail fast before bcvk boots a 5+ minute VM. See
+# Real-U2F/HSM guard: fail fast before bcvk boots a 5+ minute VM. See
 # tests/vm/lib/real-u2f-guard.sh for the rationale. Override via
 # ALLOW_REAL_U2F=1 or --allow-real-u2f.
 assert_passless_only

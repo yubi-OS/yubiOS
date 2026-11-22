@@ -8,7 +8,7 @@
 
 ## TL;DR
 
-`edgelesssys/reproducible-mkosi` is a **2023-era demo** of bit-for-bit reproducible OS image builds via `systemd/mkosi` + Nix-pinned toolchain, supporting Fedora 38 / Ubuntu 22.04 (UKI + dm-verity). The repo has been **frozen since 2024-02-07** (over 30 months). Edgeless confirmed in May 2026 (issue #13) that **the repo is not what their production uses**: Constellation used a separate lockfile-based pipeline, and their current product Contrast moved on to full NixOS images. The repo has very low adoption (37 stars, 2 forks, 12 closed PRs from one author). **It's useful as a reference catalogue of reproducibility techniques — not as code to depend on.** The highest-value item for yubiOS is the **`diffimage.sh` two-build verifier** pattern (single highest-leverage borrow); the design philosophy ("reproducibility as a substitute for trust in the signer") is **complementary** to yubiOS's YubiKey-PIV hardware anchor, not a competing approach — combining them yields a fully attestable pipeline.
+`edgelesssys/reproducible-mkosi` is a **2023-era demo** of bit-for-bit reproducible OS image builds via `systemd/mkosi` + Nix-pinned toolchain, supporting Fedora 38 / Ubuntu 22.04 (UKI + dm-verity). The repo has been **frozen since 2024-02-07** (over 30 months). Edgeless confirmed in May 2026 (issue #13) that **the repo is not what their production uses**: Constellation used a separate lockfile-based pipeline, and their current product Contrast moved on to full NixOS images. The repo has very low adoption (37 stars, 2 forks, 12 closed PRs from one author). **It's useful as a reference catalogue of reproducibility techniques — not as code to depend on.** The highest-value item for yubiOS is the **`diffimage.sh` two-build verifier** pattern (single highest-leverage borrow); the design philosophy ("reproducibility as a substitute for trust in the signer") is **complementary** to yubiOS's U2F/HSM-PIV hardware anchor, not a competing approach — combining them yields a fully attestable pipeline.
 
 ---
 
@@ -151,7 +151,7 @@ GitHub code search across the entire `edgelesssys` org for `"reproducible-mkosi"
 | Nix-pinned toolchain (flake.nix) | ✅ | ❌ (Debian + apt) | **yubiOS gap** |
 | UKI output | ✅ | ✅ | none |
 | dm-verity (`Verity=yes`, roothash in UKI cmdline) | ✅ | ✅ | none |
-| SecureBoot signing | implicit via mkosi upstream | ✅ YubiKey PIV slot 9c / PKCS11 | **yubiOS stronger** |
+| SecureBoot signing | implicit via mkosi upstream | ✅ U2F/HSM PIV slot 9c / PKCS11 | **yubiOS stronger** |
 | OCI image output (`Format=oci`) | ❌ (not set) | ✅ | yubiOS ahead |
 | bootc consumer (`bootc install/upgrade`) | ❌ (separate Constellation pipeline) | ✅ | yubiOS ahead |
 | bcvk ephemeral VM test | ❌ | ✅ | yubiOS ahead |
@@ -165,7 +165,7 @@ GitHub code search across the entire `edgelesssys` org for `"reproducible-mkosi"
 | in-toto / SLSA attestations | ✅ (`cosign attach attestation` + sigstore/Rekor) | not surfaced in skill | **yubiOS gap** |
 | Signed SBOM attached to ghcr.io image | ✅ (Syft + cosign) | not surfaced in skill | **yubiOS gap** |
 | Roothash → PCR extension at boot | ❌ (not in this repo) | ✅ | yubiOS ahead |
-| YubiKey PIV hardware anchor for signing key | ❌ | ✅ slot 9c, SoftHSM CI fallback | **yubiOS stronger** |
+| U2F/HSM PIV hardware anchor for signing key | ❌ | ✅ slot 9c, SoftHSM CI fallback | **yubiOS stronger** |
 
 ### Reproducibility techniques Edgeless uses that yubiOS does not
 
@@ -185,7 +185,7 @@ GitHub code search across the entire `edgelesssys` org for `"reproducible-mkosi"
 
 > "Container signing is not enough regarding remote attestation in confidential computing. It would still mean trusting the signing party. The semantic attestation requires that the container is also built reproducibly. That way we can actually verify the containers based on the sources."
 
-**yubiOS's model.** Hardware-anchored signing via YubiKey PIV slot 9c (non-exportable ECCP256) → PKCS11 → systemd-sbsign → mkosi. Private key never leaves the YubiKey. CI uses SoftHSM as a stand-in.
+**yubiOS's model.** Hardware-anchored signing via U2F/HSM PIV slot 9c (non-exportable ECCP256) → PKCS11 → systemd-sbsign → mkosi. Private key never leaves the U2F/HSM. CI uses SoftHSM as a stand-in.
 
 **Honest comparison:**
 - **yubiOS is strictly stronger** on "did this exact artifact come from a party I trust?" — a compromised CI cannot silently re-sign.
@@ -210,16 +210,16 @@ GitHub code search across the entire `edgelesssys` org for `"reproducible-mkosi"
 
 **Do not borrow**
 9. **Bazel layer** — Constellation uses Bazel for their own services; yubiOS consumes distro packages, Bazel is dead weight.
-10. **Bit-for-bit reproducibility as the *only* trust root** — yubiOS's YubiKey anchor is a real advantage. Don't abandon it; complement it.
+10. **Bit-for-bit reproducibility as the *only* trust root** — yubiOS's U2F/HSM anchor is a real advantage. Don't abandon it; complement it.
 11. **The exact Nix dependency** — pin only if reproducibility gains outweigh onboarding friction.
 
 ### What yubiOS already does better
 
-- **Hardware-anchored signing** (YubiKey PIV slot 9c, non-exportable). Edgeless's `reproducible-mkosi` has no hardware anchor.
+- **Hardware-anchored signing** (U2F/HSM PIV slot 9c, non-exportable). Edgeless's `reproducible-mkosi` has no hardware anchor.
 - **OCI image + bootc integration** — `Format=oci` + `bootc install/upgrade` is a cleaner image-mode flow.
-- **bcvk ephemeral VM testing** with USB passthrough — yubiOS can boot a built image in QEMU and plug in a real YubiKey. Edgeless's daily CI runs `diffimage` but does not appear to boot the resulting image.
+- **bcvk ephemeral VM testing** with USB passthrough — yubiOS can boot a built image in QEMU and plug in a real U2F/HSM. Edgeless's daily CI runs `diffimage` but does not appear to boot the resulting image.
 - **Explicit `FinalizeScripts` hooks** — yubiOS's skill documents FIDO2 enrollment, SBOM generation, factory defaults.
-- **SoftHSM CI fallback** — yubiOS explicitly documents how to keep CI building signed images without the real YubiKey. Edgeless's e2e.yml runs without signing keys at all.
+- **SoftHSM CI fallback** — yubiOS explicitly documents how to keep CI building signed images without the real U2F/HSM. Edgeless's e2e.yml runs without signing keys at all.
 - **DPS-aware partition UUIDs in the boot chain** — yubiOS uses UKI cmdline with `roothash=<hash>` and inherits systemd-dissect's DPS-aware tooling deliberately as part of the measured-boot story.
 
 ---

@@ -16,7 +16,7 @@ Date: 2026-10-07 (UTC). Executor: steady-orbit worker endpoints, live, via the "
 
 Artifacts: `snapback-corpus.json` (843 cases, seeds + expected pinned), `snapback-results.json` (852 per-case records + gates).
 
-Corpus: A aligned-meaningful ×12, B aligned-negative ×4, C inverted-halt ×10, D isolated-inversion ×8, E zero-no-flip ×6, F recorded round-3 series (source-of-record fixture) ×1, F2 clean-single-inversion fixture ×1, F3 prereg fallback ×1, G ledger-path ×4, N noisy tiers 4×200 = 800. Deterministic LCG generators (`0xC0FFEE ^ case_index`), magnitudes ∈ [0.5, 5.5], n ≤ 10; per-case SHA-256 of the canonical series recorded for corpus↔runner parity.
+Corpus: A aligned-meaningful ×12, B aligned-negative ×4, C inverted-halt ×10, D isolated-inversion ×8, E zero-no-flip ×6, F recorded round-3 series (source-of-record fixture) ×1, F2 clean-single-inversion fixture ×1, F3 prereg fallback ×1, N noisy tiers 4×200 = 800 (= 843 corpus cases; the 4 G ledger-path anchors 565/566/569/99999 are NOT corpus cases: they are runner records, so `snapback-results.json` holds 852 = 843 + 4 G + 5 DET re-posts). Deterministic LCG generators (`0xC0FFEE ^ case_index`), generated-case magnitudes ∈ [0.5, 5.0] (as pre-registered; the recorded fixtures F/F2/F3 are copied verbatim and carry values 0.00–11.5 outside that range), n ≤ 10; per-case SHA-256 of the canonical series recorded for corpus↔runner parity.
 
 | gate | result | detail |
 |---|---|---|
@@ -67,7 +67,7 @@ Artifacts: `hysteresis-fixtures.json`, `hysteresis-results.json`.
 ## 7. File inventory (session/subagent/lane-c-visco/)
 
 - `preregistration.md` — pre-registered parameters, classes, gates
-- `amendments.md` — 4 dated entries, all pre-gate, with justifications
+- `amendments.md` — 5 dated entries (04:35Z ×3, 04:40Z, 04:44Z), all pre-gate, with justifications
 - `probes.json` — full schema-discovery log (both endpoints, pre-prereg)
 - `snapback-corpus.json` — 843 cases + SHA digests + pinned expected values
 - `snapback-results.json` — 852 per-case records + gate verdicts (852/852 pass)
@@ -79,3 +79,10 @@ Artifacts: `hysteresis-fixtures.json`, `hysteresis-results.json`.
 1. Ship the corpus + fixtures + record into the repo (suggest `tools/visco-instruments/fixtures/` for the harness JSONs and `refs/` for this record), closing items 5 and 6 of the falsification-harness build order.
 2. Consider wiring the 843-case snapback corpus + H0/H1 into `/api/jev/corpus/selftest` as committed regression anchors (the pattern the other instruments use).
 3. File the two contract observations (lenient snapback validation; `loops[].chain_ids` active-only shape) for a future CONTRACTS.md clarification.
+
+## 8. Re-run 2026-11-16 (post-review fixes VIS-1..VIS-3)
+
+- **VIS-1** — `hysteresis-fixtures.json` `pending_only`: a ledger row with `realized_delta: null` is a PENDING row. The Python reference (`tools/visco-instruments/verify_visco.py` `hysteresis_rollup`) now skips pending rows instead of coercing `null` to 0: `pending_only` returns `loops: []`, `total_sum_abs = 0`, `n_cycles = 0`, `active_rows = 0`, `skipped_rows = 1` (so `active_rows + skipped_rows = ledger rows`). The fixture now pins `active_rows: 0, skipped_rows: 1`. `verify_visco.py --selftest` consumes this file (`analytic_hysteresis_fixtures_reproduced`), so it is no longer self-referential. The deployed v386 `hysteresisRollup` (`Number(null) = 0`, returns 5.0/1) still has to be ported to the same rule; that is outside this directory.
+- **VIS-2** — `duplicate_ids_throw`: the input is now an executable array of two rows with the same id (`[{"id": 1, ...}, {"id": 1, ...}]`); the reference raises `ValueError("duplicate ledger row id: 1")`.
+- **VIS-3** — corpus bookkeeping in sections 2 and 7 corrected (843 corpus cases without G; magnitudes as pre-registered; 5 amendment entries).
+- **Branching ledgers** (V-2): when two rows supersede the same earlier row the shared ancestry is claimed by the first active row only, so each resolved row is in exactly one loop (hand check: rows 1; 2->1; 3->1 give 6.5, previously 10.5).

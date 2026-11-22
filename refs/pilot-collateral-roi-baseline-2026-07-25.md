@@ -29,7 +29,7 @@ Fleet size: [pilot-scale, e.g. 10–50 devices per OMN-71's O1 pricing
 Scope:
 - What yubiOS will do: [enrollment/rotation for O1, or defined SLA response
   windows for O3 — fill in against the specific offer selected]
-- What the customer provides: [hardware, YubiKeys, environment access,
+- What the customer provides: [hardware, U2F/HSMs, environment access,
   a named point of contact]
 - Explicit readiness-gate dependency: this pilot cannot start selling O1
   until the OMN-63 real-hardware validation scenarios (PR #104) most
@@ -89,7 +89,7 @@ pilot has run yet to produce real inputs:
 
 | Line item | Baseline (pre-yubiOS) | With yubiOS pilot offer | Source of the number |
 |---|---|---|---|
-| Cost of current root-of-trust approach (TPM/OEM/none) | [customer-provided] | N/A — YubiKey hardware cost only (~$25–70/device per MISSION.md) | Customer discovery interview |
+| Cost of current root-of-trust approach (TPM/OEM/none) | [customer-provided] | N/A — U2F/HSM hardware cost only (~$25–70/device per MISSION.md) | Customer discovery interview |
 | Incident response time for a lost/compromised credential | [customer-provided] | [pilot-measured, per O3 SLA terms if applicable] | Pilot SLA logs |
 | Time to onboard/enroll a new device | [customer-provided] | [pilot-measured, per O1 enrollment logs] | Pilot enrollment logs |
 | Audit/compliance evidence burden (time to produce proof of a trust-chain control) | [customer-provided] | [pilot-measured — e.g. time to pull an ADR + attestation vs. an opaque vendor claim] | Pilot + ADR.md/PINNED.md as evidence sources |

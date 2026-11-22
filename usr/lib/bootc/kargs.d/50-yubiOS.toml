@@ -7,6 +7,7 @@ kargs = [
   # state/deploy/<digest>/var -> /var are writable (while composefs EROFS / and
   # /sysroot remain read-only).
   "rw",
+  "fsck.repair=yes",
   # Disable SELinux enforcing on the composefs rootfs (yubiOS enforces BPF-LSM
   # RestrictFileSystems= and systemd service sandboxing; container builds on
   # Ubuntu runners and `bootc install --disable-selinux` do not write SELinux
@@ -14,7 +15,7 @@ kargs = [
   # and systemd-homed at boot).
   "selinux=0",
   # Preload OP-TEE and fTPM drivers as early as possible in initramfs.
-  "rd.driver.pre=tee,optee,tpm_ftpm_tee",
+  "rd.driver.pre=tee,optee,tpm_ftpm_tee,rockchipdrm,dw_hdmi_qp,phy_rockchip_samsung_hdptx,analogix_dp",
   # Force kernel IMA TCB measurement policy on with SHA-256 digests from early
   # boot (even when kernel init_ima runs before modular optee/tpm_ftpm_tee load
   # and enters TPM-bypass mode, IMA still hashes and records all executed
@@ -30,4 +31,7 @@ kargs = [
   # fido2-device=auto is set in /etc/crypttab by yubiOS-enroll-luks,
   # not as a global karg, to avoid affecting non-encrypted partitions.
   "audit=0",
+  "splash",
+  "quiet",
+  "no_console_suspend",
 ]

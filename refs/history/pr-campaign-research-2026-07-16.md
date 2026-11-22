@@ -21,7 +21,7 @@ The current campaign mode must be build in public:
 
 - `SPEC.md` labels the project pre-launch.
 - `README.md` labels it groundwork and work in progress.
-- `BLOCKERS.md` keeps physical-YubiKey production confidence and real-board ARM64 Path A evidence open.
+- `BLOCKERS.md` keeps physical-U2F/HSM production confidence and real-board ARM64 Path A evidence open.
 - The recorded VM run reached an ARM64 Fedora guest but did not complete the enrollment proof in that run.
 - Test-only software authenticators provide functional coverage but are not equivalent to physical hardware.
 
@@ -30,7 +30,7 @@ The current campaign mode must be build in public:
 | Finding | Campaign impact |
 |---|---|
 | The README displays an LGPL-2.1 badge and links `LICENSE`, but the repository has no license file. | Treat as a stop gate for proactive amplification. |
-| YubiKey and Yubico are registered Yubico trademarks, and the project name uses the `yubi` stem. | Obtain a name/trademark review, use an independence notice, and avoid implied endorsement. |
+| U2F/HSM and Yubico are registered Yubico trademarks, and the project name uses the `yubi` stem. | Obtain a name/trademark review, use an independence notice, and avoid implied endorsement. |
 | `MAINTAINER.md` contains personal contact details. | Replace unnecessary personal data with monitored role-based press, security, and maintainer contacts before increasing discovery. |
 | No root-level license, security policy, contribution guide, or code-of-conduct file was found. | Establish basic trust and contributor infrastructure before a recruitment campaign. |
 | Some public language says “No TPM,” “sole trust anchor,” or “at every layer.” | Use the evidence-backed identity/platform split and maintain a formal claim ledger. |
@@ -47,7 +47,7 @@ These are communications-readiness findings, not legal conclusions or a security
 | Adjacent security systems | Qubes emphasizes compartmentalization, secureblue hardened Fedora Atomic images, and Talos immutable Kubernetes nodes. | Compare jobs and trust models without adversarial “better than” language. |
 | Supply chain | SLSA v1.2 defines provenance and graduated supply-chain controls. | Describe provenance as evidence of origin/process, not proof that code is benign; do not claim a SLSA level without an audit. |
 | Secure by design | CISA encourages public evidence and security-by-default practices. | Make transparency, recovery, and shifting burden away from owners supporting themes. |
-| Trademark | Yubico publishes brand assets and identifies YubiKey/Yubico as registered marks. | Use conservative brand treatment and an independence statement. |
+| Trademark | Yubico publishes brand assets and identifies U2F/HSM/Yubico as registered marks. | Use conservative brand treatment and an independence statement. |
 | Editorial fit | LWN, Phoronix, The Register, and The New Stack each publish current contact or contribution guidance. | Target a few outlets only after the proof appropriate to their remit exists. |
 | Community | OpenSSF invites multiple forms of community contribution; Hacker News prioritizes intellectually interesting primary work. | Participate with evidence and lessons, not a generic press release. |
 

@@ -34,7 +34,7 @@ export function decodeBitmap(b64) {
     }
     grid.push(cells);
   }
-  if (grid.length === 0) throw new Error('empty edge map');
+  if (grid.length === 0) throw emptyEdgeMap();
   return grid;
 }
 
@@ -115,6 +115,16 @@ function logScales(minBox, maxBox, nScales) {
   return out;
 }
 
+// T11 degenerate-input rule for scale coherence. Coherence is only defined when the
+// box-count series varies across the scale window. These inputs are NOT APPLICABLE:
+// coherence is null with a reason and is never reported as satisfied.
+//   solid_field    ink >= COHERENCE_SOLID_INK of the grid (every box occupied)
+//   near_empty     ink <  COHERENCE_NEAR_EMPTY_INK of the grid (too little ink)
+//   zero_variance  box count constant within either half of the scale window
+// An all-zero grid still throws EMPTY_EDGE_MAP (a fail, 422 in routes), as before.
+export const COHERENCE_SOLID_INK = 0.99;
+export const COHERENCE_NEAR_EMPTY_INK = 0.01;
+
 /** Least squares y = a + b x; returns {slope, r2} (r2 = correlation^2). */
 function regress(xs, ys) {
   const n = xs.length;
@@ -137,7 +147,7 @@ function regress(xs, ys) {
  * Empty grid (no ink) throws Error("empty edge map").
  */
 export function boxCountingDim(grid, minBox = 2, maxBox = 64, nScales = 8) {
-  if (inkCount(grid) === 0) throw new Error('empty edge map');
+  if (inkCount(grid) === 0) throw emptyEdgeMap();
   const scales = logScales(minBox, maxBox, nScales);
   const counts = [];
   for (const s of scales) counts.push(countBoxes(grid, s));
@@ -196,12 +206,23 @@ export function mirrorSymmetryScore(grid) {
  * 0..3, d_high = slope over scales 4..7). coherence = 1 - |d_low - d_high|.
  */
 export function scaleCoherence(grid, minBox = 4, maxBox = 64) {
-  if (inkCount(grid) === 0) throw new Error('empty edge map');
+  const ink = inkCount(grid);
+  if (ink === 0) throw emptyEdgeMap();
+  const notApplicable = (reason) => ({ d_low: null, d_high: null, coherence: null, reason, degenerate: true });
+  // Solid-field guard: on a (near-)full bitmap every box is occupied, so the
+  // fine/coarse slopes measure partial-box quantization, not structure.
+  if (ink >= COHERENCE_SOLID_INK * grid.length * grid[0].length) return notApplicable('solid_field');
+  if (ink < COHERENCE_NEAR_EMPTY_INK * grid.length * grid[0].length) return notApplicable('near_empty');
   const scales = logScales(minBox, maxBox, 8);
   const counts = scales.map((s) => countBoxes(grid, s));
   const xs = scales.map((s) => Math.log(1 / s));
   const ys = counts.map((c) => Math.log(c));
   const half = Math.floor(scales.length / 2);
+  // Zero-variance: a constant box count in either half has no slope. The regression
+  // would return slope 0 and read as perfect self-similarity (a single dot scored
+  // coherence 1 before T11).
+  const constant = (a) => a.every((v) => v === a[0]);
+  if (constant(counts.slice(0, half)) || constant(counts.slice(half))) return notApplicable('zero_variance');
   const d_low = regress(xs.slice(0, half), ys.slice(0, half)).slope;
   const d_high = regress(xs.slice(half), ys.slice(half)).slope;
   return { d_low, d_high, coherence: 1 - Math.abs(d_low - d_high) };
@@ -358,4 +379,11 @@ export function applyHysteresis(probs, hysteresis) {
     }
   }
   return { rows, verdicts };
+}
+
+// Coded so routes map an empty edge map to 422 EMPTY_EDGE_MAP (not an unhandled 500).
+function emptyEdgeMap() {
+  const e = new Error('empty edge map');
+  e.code = 'EMPTY_EDGE_MAP';
+  return e;
 }

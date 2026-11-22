@@ -523,8 +523,37 @@ function rowsFromBits(bits, D) {
   return rows;
 }
 
+// PM-2: a map read straight from storage (encodeMap's "margin-tuples/1" form, or
+// any per_input given as [index, name, [[axis, signed_margin, distance_to_threshold,
+// perturbation_bound, bit, status], ...]] tuples; bits possibly as "0101" strings)
+// is unpacked here so the trial never throws a TypeError on a stored map JSON.
+// Already-unpacked maps are returned unchanged (same object). Never mutates the input.
+const PACKED_MARGIN_FIELDS = ["axis", "signed_margin", "distance_to_threshold", "perturbation_bound", "bit", "status"];
+export function unpackStoredMap(map) {
+  if (!map || typeof map !== "object") return map;
+  let out = map;
+  if (Array.isArray(map.bits) && map.bits.length && typeof map.bits[0] === "string") {
+    out = { ...out, bits: map.bits.map((row) => Array.from(row, (c) => (c === "1" ? 1 : c === "0" ? 0 : c))) };
+  }
+  const md = out.math_diagnostics;
+  if (md && Array.isArray(md.per_input) && md.per_input.length && Array.isArray(md.per_input[0])) {
+    const { storage_encoding, ...rest } = md;
+    const per_input = md.per_input.map((r) => ({
+      index: r[0],
+      name: r[1],
+      margins: r[2].map((t) => (Array.isArray(t) ? Object.fromEntries(PACKED_MARGIN_FIELDS.map((k, i) => [k, t[i]])) : t)),
+    }));
+    out = { ...out, math_diagnostics: { ...rest, per_input } };
+  } else if (md && md.storage_encoding) {
+    const { storage_encoding, ...rest } = md;
+    out = { ...out, math_diagnostics: rest };
+  }
+  return out;
+}
+
 export function focalPointTrial(map, opts = {}) {
   const t0 = Date.now();
+  map = unpackStoredMap(map);
   if (!map || !map.frame || !Array.isArray(map.bits) || !map.bits.length) {
     throw new TrialError(409, "legacy map has no frozen frame/bits; create a new baseline");
   }

@@ -29,7 +29,7 @@ The original idea was to enable `systemd-tpm2-swtpm.service` in the guest. In pr
 
 - bcvk branch exposes `--swtpm` and `--swu2f` for yubiOS CI.
 - yubiOS VM tests can observe `/dev/tpm0` and run measured-boot checks without a physical TPM.
-- Physical hardware remains required for final YubiKey passthrough confidence.
+- Physical hardware remains required for final U2F/HSM passthrough confidence.
 
 
 ## Attestation coverage

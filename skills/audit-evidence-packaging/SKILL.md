@@ -1,9 +1,9 @@
 ---
 name: audit-evidence-packaging
-description: "Build cryptographically-signed evidence bundles for any system: collect logs, metrics, events into a versioned hash-chained archive, generate a TPM2 or YubiKey attestation quote that signs the bundle's Merkle root, attach a transparency-log entry (Rekor v2 / Sigstore) for the bundle, and expose a verifier that downstream auditors (HITRUST assessors, CISA reviewers, Chronicle UDM consumers) can re-run independently. Use when packaging audit evidence for an external reviewer, generating a remote attestation quote over a set of logs, building a tamper-evident log archive, wiring transparency-log attestation into a CI/CD pipeline, or designing a FedRAMP / HITRUST evidence collection strategy. Triggers on: evidence bundle, audit bundle, attestation quote, TPM2 quote, transparency log, Merkle root signing, hash-chained archive, evidence packaging, audit verifier, in-toto attestation, SLSA provenance bundle, sigstore bundle, rekor v2, Chronicle UDM, HITRUST evidence."
+description: "Build cryptographically-signed evidence bundles for any system: collect logs, metrics, events into a versioned hash-chained archive, generate a TPM2 or U2F/HSM attestation quote that signs the bundle's Merkle root, attach a transparency-log entry (Rekor v2 / Sigstore) for the bundle, and expose a verifier that downstream auditors (HITRUST assessors, CISA reviewers, Chronicle UDM consumers) can re-run independently. Use when packaging audit evidence for an external reviewer, generating a remote attestation quote over a set of logs, building a tamper-evident log archive, wiring transparency-log attestation into a CI/CD pipeline, or designing a FedRAMP / HITRUST evidence collection strategy. Triggers on: evidence bundle, audit bundle, attestation quote, TPM2 quote, transparency log, Merkle root signing, hash-chained archive, evidence packaging, audit verifier, in-toto attestation, SLSA provenance bundle, sigstore bundle, rekor v2, Chronicle UDM, HITRUST evidence."
 license: "MIT"
 metadata:
-  short-description: "Cryptographically-signed evidence bundles: hash-chained archive + TPM/YubiKey attestation quote + transparency log entry"
+  short-description: "Cryptographically-signed evidence bundles: hash-chained archive + TPM/U2F/HSM attestation quote + transparency log entry"
 ---
 # Audit Evidence Packaging
 
@@ -12,7 +12,7 @@ metadata:
 An **evidence bundle** is the load-bearing artifact for any external audit (HITRUST, CISA, FedRAMP, internal SOC2). It is a cryptographically-signed collection of logs, metrics, events, and configuration snapshots that:
 
 1. Is **tamper-evident** — any modification to any artifact in the bundle invalidates the bundle's Merkle root signature.
-2. Is **attestable** — a TPM2 or YubiKey attestation quote signs the bundle's Merkle root, binding it to the platform's identity.
+2. Is **attestable** — a TPM2 or U2F/HSM attestation quote signs the bundle's Merkle root, binding it to the platform's identity.
 3. Is **transparent** — the bundle's attestation is published to a transparency log (Rekor v2), making the attestation publicly verifiable.
 4. Is **independently verifiable** — an auditor can re-run the verification path on their own infrastructure without trusting the bundle producer.
 
@@ -34,7 +34,7 @@ Use when:
 Do NOT use when:
 
 - The evidence is ephemeral (logs that can be discarded after a few days) — use the regular log pipeline instead
-- The system has no TPM2 / YubiKey for the attestation quote (the bundle can be hash-chained without an attestation quote, but loses the platform-identity binding)
+- The system has no TPM2 / U2F/HSM for the attestation quote (the bundle can be hash-chained without an attestation quote, but loses the platform-identity binding)
 - The auditor doesn't accept transparency-log attestation (rare; most modern audit frameworks accept it as "strong evidence")
 - The bundle would be larger than 100 MB (split into per-day bundles; see `## Bundling strategy`)
 
@@ -51,7 +51,7 @@ evidence-bundle-2026-08-04-yubiOS-prod/
 │   ├── pcr-quote.bin                # TPM2 PCR quote over PCRs 0,1,2,3,4,5,10,11
 │   └── policy-snapshot.json         # IMA policy + dm-verity root hash + composefs catalog
 ├── attestation/
-│   ├── pcr-quote-signature.pem      # YubiKey PIV slot 9c signature over the Merkle root
+│   ├── pcr-quote-signature.pem      # U2F/HSM PIV slot 9c signature over the Merkle root
 │   └── rekor-tile-entry.json        # Rekor v2 tile entry for the bundle
 ├── verifier/
 │   ├── verify.sh                    # Re-runs the full verification path
@@ -70,7 +70,7 @@ yubiOS uses a small CLI tool (`evidence-bundle`) to generate bundles:
 evidence-bundle create \
     --predicate-type=https://yubiOS/evidence-bundle/v1 \
     --artifacts=boot.log:audit.log:ima-measurement-list:pcr-quote.bin:policy-snapshot.json \
-    --attestation-key=yubikey-piv-slot-9c \
+    --attestation-key=u2f-hsm-piv-slot-9c \
     --tlog-upload=rekor-v2 \
     --output=evidence-bundle-2026-08-04-yubiOS-prod
 ```
@@ -81,7 +81,7 @@ The tool:
 2. Builds a Merkle tree over the hashes
 3. Writes `merkle-root.txt`
 4. Generates a TPM2 PCR quote over the relevant PCRs (0-7 for boot, 10 for IMA, 11 for UKI)
-5. Signs the Merkle root with YubiKey PIV slot 9c
+5. Signs the Merkle root with U2F/HSM PIV slot 9c
 6. Publishes an in-toto Statement v1 envelope to Rekor v2
 7. Writes the `verifier/` directory with a re-runnable verification script
 
@@ -97,7 +97,7 @@ This re-runs the full verification path:
 
 1. Hash each artifact and recompute the Merkle root
 2. Verify the Merkle root matches `merkle-root.txt`
-3. Verify the YubiKey signature over the Merkle root (using the public key from the yubiOS build-time signing cert)
+3. Verify the U2F/HSM signature over the Merkle root (using the public key from the yubiOS build-time signing cert)
 4. Verify the Rekor v2 tile entry's inclusion proof (using TUF-discovered endpoint)
 5. Verify the TPM2 PCR quote's signature against the platform's TPM2 attestation key
 6. Verify the PCR quote's PCR values match the IMA measurement list's claimed PCR 10 value
@@ -131,7 +131,7 @@ The weekly bundle's Merkle root is what long-term auditors verify; daily bundles
 - yubiOS skill `sigstore-rekor-v2` (the transparency log for evidence bundles)
 - yubiOS skill `slsa-provenance` (the in-toto envelope format this skill extends)
 - yubiOS skill `ftpm-optee-tpm` (the platform identity for the TPM2 attestation quote)
-- yubiOS skill `yubikey-operations` (the YubiKey identity for the platform-attestation signature)
+- yubiOS skill `yubikey-operations` (the U2F/HSM identity for the platform-attestation signature)
 - yubiOS skill `chronicle-yara-l-detection` (downstream consumer of evidence bundles)
 
 ## Changelog
@@ -145,9 +145,9 @@ The weekly bundle's Merkle root is what long-term auditors verify; daily bundles
 
 ## Attestation coverage for audit evidence packaging (curve-guided-rsi cycle-5 substantive edit)
 
-This skill — **evidence bundle, Merkle root, YubiKey signature, Rekor v2 tile, TPM2 PCR quote** — contributes to yubiOS's attestation layer by anchoring evidence bundle, Merkle root, YubiKey signature, Rekor v2 tile, TPM2 PCR quote in the verifiable evidence chain. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new from deep-research: `yubikey-operations`, `dm-verity-and-integrity`, `nspawn-containers`, `sigstore-rekor-v2`, `composefs-kernel-floors`, `audit-evidence-packaging`); this skill's fit coordinate was (u=0.017, v=0.337), PC1+PC2 = 0.4615, holdout R² = +0.2244.
+This skill — **evidence bundle, Merkle root, U2F/HSM signature, Rekor v2 tile, TPM2 PCR quote** — contributes to yubiOS's attestation layer by anchoring evidence bundle, Merkle root, U2F/HSM signature, Rekor v2 tile, TPM2 PCR quote in the verifiable evidence chain. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new from deep-research: `yubikey-operations`, `dm-verity-and-integrity`, `nspawn-containers`, `sigstore-rekor-v2`, `composefs-kernel-floors`, `audit-evidence-packaging`); this skill's fit coordinate was (u=0.017, v=0.337), PC1+PC2 = 0.4615, holdout R² = +0.2244.
 
-For audit evidence packaging, the attestation primitive applies as follows: this skill is the evidence-bundle format referenced by SLSA L3 (per `slsa-provenance`) and HITRUST/CISA audits; the bundle is attestable via the TPM2 quote + YubiKey signature + Rekor v2 tile. Downstream consumers that reason about attestation coverage — the yubiOS CI attestations gate (Rekor v2 per `sigstore-rekor-v2`), the audit-evidence rollup (`audit-evidence-packaging`), the `internal-big-picture` 10-primitive map — credit this skill's contribution. The reference implementation in `internal-big-picture` documents the full attestation primitive and how it composes with the other nine primitives; this skill is one contributor in that 10-primitive model.
+For audit evidence packaging, the attestation primitive applies as follows: this skill is the evidence-bundle format referenced by SLSA L3 (per `slsa-provenance`) and HITRUST/CISA audits; the bundle is attestable via the TPM2 quote + U2F/HSM signature + Rekor v2 tile. Downstream consumers that reason about attestation coverage — the yubiOS CI attestations gate (Rekor v2 per `sigstore-rekor-v2`), the audit-evidence rollup (`audit-evidence-packaging`), the `internal-big-picture` 10-primitive map — credit this skill's contribution. The reference implementation in `internal-big-picture` documents the full attestation primitive and how it composes with the other nine primitives; this skill is one contributor in that 10-primitive model.
 
 Concrete implications for audit evidence packaging: any change should be reviewed for impact on attestation coverage; gaps in attestation that are attributable to this skill are tracked in the cycle-5 run log at `refs/curve-guided-rsi-v2-cycle5-deep-research-2026-08-04.md` on `yubi-OS/yubiOS`.
 - 2026-08-06 cycle-4 corpus audit: this skill was part of the matched-parameter ablation corpus (cycle-4, single full-corpus run on all 70 skills in the yubiOS software-skill corpus). The hyperspherical-harmonic-curve variant scored R^2 = +0.222 on the full 70-skill holdout vs the flat Fourier baseline's R^2 = -1.120 (matched-parameter ablation delta = +1.342, fewer parameters: 6,534 vs 9,984). On the 49-skill alphabetical-first-half split, the variant scored R^2 = +0.618 vs the baseline's R^2 = -0.359 (delta = +0.977). The result is a single full-corpus run with no error bars; a multi-seed re-run is the obvious next step. See papers/learned-latent-curves-2026-08-05.pdf and refs/cycle4-results-2026-08-06.md for the full result. Single intent: acknowledge corpus membership.

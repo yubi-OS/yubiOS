@@ -8,7 +8,7 @@ setup() {
   systemd-cryptenroll() { echo "mock: enrolled FIDO2"; return 0; }
   cryptsetup()          { echo "abc-def-123"; }  # luksUUID
   dracut()              { echo "mock dracut"; return 0; }
-  fido2-token()         { echo "/dev/hidraw0: YubiKey"; }
+  fido2-token()         { echo "/dev/hidraw0: U2F/HSM"; }
   export -f systemd-cryptenroll cryptsetup dracut fido2-token
 }
 

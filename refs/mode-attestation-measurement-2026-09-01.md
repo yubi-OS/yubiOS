@@ -47,7 +47,7 @@ Every row above therefore names the exit contract and the idempotency answer exp
 ## Interactive vs non-interactive
 
 Nothing in this table prompts a human. The single interactive moment in yubiOS is the
-YubiKey touch during FIDO2 unlock, which belongs to the boot-unlock file, not to
+U2F/HSM touch during FIDO2 unlock, which belongs to the boot-unlock file, not to
 attestation. In CI, the same steps run under `set +e ... rc=$? ... set -e` so the
 rc=77 SKIP contract survives; that is the batch mode of the same one-shots.
 
@@ -62,6 +62,6 @@ process; neither one alone is the answer.
 ## Placement
 
 Coverage over the learned basis for this cell: continuous attestation and measurement yes,
-rootless privilege and capabilities yes, YubiKey FIDO2 boot yes (the one interactive mode),
+rootless privilege and capabilities yes, U2F/HSM FIDO2 boot yes (the one interactive mode),
 container isolation and seccomp yes. The three omitted clusters are omitted on purpose so
 that the file lands in the target cell.

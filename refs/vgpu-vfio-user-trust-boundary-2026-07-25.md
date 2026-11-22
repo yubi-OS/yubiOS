@@ -46,7 +46,7 @@ workaround, so that device model is available there.
 
 ## 1. Where a GPU sits relative to the yubiOS trust boundaries
 
-yubiOS anchors every boundary in a YubiKey (ADR-003): UKI signing via PIV 9c,
+yubiOS anchors every boundary in a U2F/HSM (ADR-003): UKI signing via PIV 9c,
 LUKS2 unlock via FIDO2 `hmac-secret`, SSH/PAM, homed. The fTPM (OP-TEE,
 ms-tpm-20-ref) covers platform measurement. A GPU touches none of those
 directly, and that is exactly the problem: it is the largest DMA-capable,
@@ -64,7 +64,7 @@ Three distinct architectures, three different boundaries:
 The consequences for yubiOS:
 
 1. **Passthrough without a working IOMMU is a key-extraction primitive.** A LUKS2
-   volume key, once unsealed by the YubiKey, lives in kernel memory. A
+   volume key, once unsealed by the U2F/HSM, lives in kernel memory. A
    DMA-capable device that is not translated can read it. "No TPM, no OEM, no
    trust anchors you don't control" does not survive a peripheral that can read
    RAM out from under the unlock. So: no passthrough unless the IOMMU is present,

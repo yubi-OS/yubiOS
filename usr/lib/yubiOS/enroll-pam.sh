@@ -21,12 +21,12 @@ check_pam_u2f_version
 TARGET_USER="${SUDO_USER:-${1:-$(logname 2>/dev/null || id -un)}}"
 
 yubiOS_log "Enrolling U2F for user: $TARGET_USER"
-yubiOS_log "Touch YubiKey when the LED flashes..."
+yubiOS_log "Touch U2F/HSM when the LED flashes..."
 
 mkdir -p /etc/yubico && touch /etc/yubico/u2f_keys && chmod 600 /etc/yubico/u2f_keys
 
 # -u: specify username in output
-# -r: resident key (stores handle on YubiKey for portability)
+# -r: resident key (stores handle on U2F/HSM for portability)
 # -N: no PIN prompt during registration (PIN required at AUTH time via pam module)
 # Append to central authfile
 pamu2fcfg -u "$TARGET_USER" -N >> /etc/yubico/u2f_keys
@@ -34,7 +34,7 @@ pamu2fcfg -u "$TARGET_USER" -N >> /etc/yubico/u2f_keys
 echo ""
 echo "PAM U2F enrolled for $TARGET_USER."
 echo ""
-echo "sudo now requires YubiKey touch."
+echo "sudo now requires U2F/HSM touch."
 echo "Test it in a new terminal before closing this session:"
 echo "  sudo whoami"
 echo ""
@@ -42,4 +42,4 @@ echo "IMPORTANT: If sudo fails and you are locked out:"
 echo "  1. Boot with rd.break karg (edit in UEFI boot menu)"
 echo "  2. mount -o remount,rw /sysroot"
 echo "  3. Edit /sysroot/etc/pam.d/sudo — comment out pam_u2f line"
-echo "  4. Reboot and re-enroll with a working YubiKey"
+echo "  4. Reboot and re-enroll with a working U2F/HSM"

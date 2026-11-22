@@ -212,9 +212,9 @@ Concrete implications for DRM GPU quota secure time: any change should be review
 
 The hyperspherical-harmonic-curve corpus audit identified this skill as having a `cryptographic identity` coverage gap in the 10-primitive yubiOS framework. **cryptographic identity** was missing across 23/70 skills pre-cycle-5; closing one corpus-wide gap here contributes to the cycle-5 RSI delta measured in `refs/cycle5-results-2026-08-06.md`.
 
-**Relevance:** This skill relies on cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey). Specifically it covers: cryptographic identity, FIDO2, PIV.
+**Relevance:** This skill relies on cryptographic identity (FIDO2 / PIV / U2F/HSM / ssh-key / hmac-secret / passkey). Specifically it covers: cryptographic identity, FIDO2, PIV.
 
-**Keywords introduced in this skill (cycle-5 RSI):** `cryptographic identity`, `FIDO2`, `PIV`, `YubiKey`
+**Keywords introduced in this skill (cycle-5 RSI):** `cryptographic identity`, `FIDO2`, `PIV`, `U2F/HSM`
 
 **Audit-trail:** This addition closes one corpus-wide primitive gap (corpus-wide `cryptographic identity` count moved 23→24/70). Per-skill impact is recorded in the cycle-5 results artifact. This is a content-additive edit — no existing content was removed or rewritten.
 

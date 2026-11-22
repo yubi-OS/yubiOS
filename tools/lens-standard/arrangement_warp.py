@@ -14,9 +14,13 @@ Conventions (pinned, matching the C-gold anchors): walk = centroid-Delaunay,
 Euclidean MSD, W=4096, K=4, spread starts, seed 42, the pinned ladder x4.
 """
 import sys, json, math
+from pathlib import Path
 
-sys.path.insert(0, "/var/workspace/session/pr-stage/tools/lens-standard")
-sys.path.insert(0, "/var/workspace/session/pr-stage/tools/spectral-standard")
+_HERE = Path(__file__).resolve().parent
+# repo-relative: this directory (lens_standard) and the sibling spectral-standard
+# tool (centroid_walk / spectral_standard).
+sys.path.insert(0, str(_HERE))
+sys.path.insert(0, str(_HERE.parent / "spectral-standard"))
 
 import lens_standard as ls
 import centroid_walk as cw
@@ -64,30 +68,87 @@ def walk_dw(centroids):
                                  start_rule="spread")
 
 
-def run_arm(disks, mode, coef, d_ref, d_w_ref, ty=0.0):
+def run_arm(disks, mode, coef, d_ref, d_w_ref, ty=0.0, family="gasket", pixel_rows=None):
+    """One arrangement arm. For modes with a Lane-F pixel counterpart
+    (astig, spherical) on the gasket family also runs the pixel-warp arm on the
+    same render and reports dD_pixel and the A2 ratio dD_arrangement /
+    dD_pixel (both rounded first, as in the committed table); trefoil and the
+    tri family report null there (the pre-registered A2 ratio gate is defined
+    on the gasket's astig/spherical arms only)."""
     warped, dropped = arrangement_warp(disks, mode, coef, ty)
     cents = [(x, y) for (x, y, r) in warped]
     d_arr = measure_d(to_rows(warped))
     w = walk_dw(cents)
-    return {"mode": mode, "coef": coef, "dropped": dropped, "n_kept": len(warped),
+    d_arr_delta = round(d_arr - d_ref, 4)
+    # d_w differences are only reported when both walks pass the r2 gate
+    walk_ok = (w["d_w"] is not None and w["d_w_r2"] >= cw.R2_GATE
+               and d_w_ref is not None)
+    dd_pixel = None
+    ratio = None
+    if pixel_rows is not None and family == "gasket" and mode in ("astig", "spherical"):
+        pix = ls.warp_mask(pixel_rows, mode, coef)
+        dd_pixel = round(measure_d(pix) - measure_d(pixel_rows), 3)
+        ratio = round(d_arr_delta / dd_pixel, 3) if dd_pixel else None
+    return {"family": family, "mode": mode, "coef": coef, "dropped": dropped,
+            "n_kept": len(warped),
             "D_arrangement": round(d_arr, 4),
-            "dD_arrangement": round(d_arr - d_ref, 4),
+            "dD_arrangement": d_arr_delta,
             "d_w": round(w["d_w"], 4), "d_w_r2": round(w["d_w_r2"], 5),
-            "dD_w": round(w["d_w"] - d_w_ref, 4)}
+            "dD_w": round(w["d_w"] - d_w_ref, 4) if walk_ok else None,
+            "dD_pixel": dd_pixel, "ratio": ratio}
+
+
+ARMS = (
+    ("gasket", "astig", 0.1), ("gasket", "astig", 0.2),
+    ("gasket", "trefoil", 1e-4), ("gasket", "trefoil", 1.5e-4),
+    ("gasket", "spherical", 0.06),
+    ("tri", "astig", 0.1), ("tri", "astig", 0.2),
+)
+
+
+def run_all():
+    """Every arm of falsification/arrangement_results.json (gasket + tri)."""
+    out = {}
+    fam = {"gasket": ls.gen_gasket(SIZE), "tri": ls.gen_tri(SIZE)}
+    ref = {}
+    for name, disks in fam.items():
+        rows = to_rows(disks)
+        ref[name] = (rows, measure_d(rows), walk_dw([(x, y) for (x, y, r) in disks]))
+    for family, mode, coef in ARMS:
+        rows, d_ref, w_ref = ref[family]
+        # a clean walk is a valid d_w reference only past the r2 gate
+        dw_ref = w_ref["d_w"] if w_ref["d_w_r2"] >= cw.R2_GATE else None
+        out["%s_%s_%s" % (family, mode, coef)] = run_arm(
+            fam[family], mode, coef, d_ref, dw_ref, family=family, pixel_rows=rows)
+    return out, {k: {"D": round(v[1], 4), "d_w": round(v[2]["d_w"], 6),
+                      "d_w_r2": round(v[2]["d_w_r2"], 5)} for k, v in ref.items()}
 
 
 def main():
-    gasket = ls.gen_gasket(SIZE)
-    cents = [(x, y) for (x, y, r) in gasket]
-    d_ref = measure_d(to_rows(gasket))
-    w_ref = walk_dw(cents)
-    out = {"clean": {"D": round(d_ref, 4), "d_w": round(w_ref["d_w"], 6),
-                     "d_w_r2": round(w_ref["d_w_r2"], 5)}}
-    for mode, coef in (("astig", 0.1), ("astig", 0.2),
-                       ("trefoil", 1e-4), ("trefoil", 1.5e-4),
-                       ("spherical", 0.06)):
-        out["%s_%s" % (mode, coef)] = run_arm(gasket, mode, coef, d_ref, w_ref["d_w"])
-    print(json.dumps(out, indent=1))
+    out, clean = run_all()
+    if "--check" in sys.argv:
+        committed = json.loads((_HERE / "falsification" / "arrangement_results.json").read_text())
+        bad = []
+        for k, exp in committed.items():
+            got = out.get(k)
+            # `ratio` is derived from already-rounded dD values; the committed
+            # spherical 0.06 ratio 1.091 is 0.0262/0.024 = 1.0917 truncated
+            # (recomputes to 1.092 when rounded), so it is compared to 2e-3.
+            same = got is not None and all(
+                (abs(got[f] - exp[f]) <= 2e-3 if f == "ratio" and exp[f] is not None and got[f] is not None
+                 else got[f] == exp[f]) for f in exp)
+            if not same:
+                bad.append((k, got, exp))
+        print("clean refs:", json.dumps(clean))
+        for k in committed:
+            print("%s %s" % ("OK  " if k not in [b[0] for b in bad] else "FAIL", k))
+        for k, got, exp in bad:
+            print("  got", got)
+            print("  exp", exp)
+        print("arrangement_warp --check: %d/%d committed entries reproduced"
+              % (len(committed) - len(bad), len(committed)))
+        sys.exit(1 if bad else 0)
+    print(json.dumps({"clean": clean, **out}, indent=1))
 
 
 if __name__ == "__main__":

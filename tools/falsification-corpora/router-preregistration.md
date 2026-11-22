@@ -9,7 +9,9 @@ band selection AND gate outcome per gold family (refs/falsification-harness-cove
 
 - Render generator: `tools/edge-standard/falsification/gen_v2.py` (source of record,
   selftest 30/30 PASS re-run locally 2026-10-06 before generation). Canvas 512x512,
-  raw 8-bit gray, row-major. Per-render sha256 pinned in `corpus/renders.json`.
+  raw 8-bit gray, row-major. Per-render sha256 pinned in
+  `route-requests.jsonl.gz` (the sha256 is over the raw pixel payload that is base64-encoded into the request,
+  not over the .pgm file, which adds a header).
 - Warp variants: arrangement arm (source of record
   `tools/lens-standard/arrangement_warp.py`): disk centers warped through
   `lens_standard._forward_point`, radii kept, pristine re-render, off-canvas drops counted.
@@ -35,7 +37,7 @@ band selection AND gate outcome per gold family (refs/falsification-harness-cove
 
 ## 2. Predicted per-family outcomes (pinned before measurement)
 
-| # | family (render sha in corpus/renders.json) | expected D (anchors.json) | declared lens_family | expected band (final) | expected gate outcome |
+| # | family (render sha in route-requests.jsonl.gz) | expected D (anchors.json) | declared lens_family | expected band (final) | expected gate outcome |
 |---|---|---|---|---|---|
 | R1 | gasket-v2-L384 (clean) | 1.5589 +/- 0.010 | gasket-v2-L384 | hierarchy-image | allowed (corrected-hierarchy must NOT fire: detect_score 0/0/0) |
 | R2 | tri | 1.2636 +/- 0.010 | none | ordered-image | allowed |
