@@ -10,7 +10,9 @@ setup() {
     tests/vm/test-secure-boot-tamper.sh \
     tests/vm/test-oci-tag-channel.sh \
     tests/vm/test-bcvk-passthrough.sh \
-    tests/vm/test-policy-rejection.sh; do
+    tests/vm/test-policy-rejection.sh \
+    tests/vm/test-gp-tee-pp-conformance-ci.sh \
+    tests/vm/verify-gp-tee-xtest-guest.sh; do
     [ -x "${REPO_ROOT}/${s}" ]
     run bash -n "${REPO_ROOT}/${s}"
     [ "$status" -eq 0 ]
@@ -42,4 +44,10 @@ setup() {
   run "${REPO_ROOT}/tests/vm/test-policy-rejection.sh" --repo-root "$REPO_ROOT"
   [ "$status" -eq 0 ]
   [[ "$output" == *"PASS: yubiOS.rego build policy and PKCS#11 URI negative rejections verified"* ]]
+}
+
+@test "test-gp-tee-pp-conformance-ci.sh verifies GlobalPlatform TEE PP (EAL2+ / AVA_VAN_AP.3) SMC, RPMB, and StandaloneMM boundaries" {
+  run "${REPO_ROOT}/tests/vm/test-gp-tee-pp-conformance-ci.sh" --self-test --repo-root "$REPO_ROOT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"PASS: all 4 GlobalPlatform TEE PP (EAL2+ / AVA_VAN_AP.3) conformance self-test legs verified"* ]]
 }
