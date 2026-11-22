@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: LGPL-2.1-or-later
 """
-yubios-attest-cli - Client & Mutual Remote Attestation CLI for yubiOS-attestd.
+yubios-attest-cli - Client, Mutual & Cloud-Quorum Remote Attestation CLI for yubiOS-attestd.
 
 Supports:
 - status: Query local yubiOS-attestd over /run/yubiOS-attest/attest.sock (or D-Bus).
 - local-attest: Produce & verify a local fTPM + measured-boot + YubiKey PIV/SSH-agent bundle.
 - pair-init: Generate a GrapheneOS-Auditor-style Single-Use Pairing Code (YUBI-XXXX-...) + challenge_index.
-- pair-ssh: Execute mutual StrongBox TOFU pairing (MakeCredential/ActivateCredential + fTPM Quote +
-  YubiKey PIV + SSH-agent signature) between two yubiOS hosts over SSH stdio or peer socket.
-- mutual-verify: Execute mutual hardware attestation between already-paired yubiOS hosts,
-  enforcing PCR 0/4/7/11 continuity, monotonic counter/clock anti-rollback, and YubiKey co-signing.
+- pair-ssh: Execute mutual StrongBox TOFU pairing between two yubiOS hosts over SSH stdio or peer socket.
+- mutual-verify: Execute mutual hardware attestation between already-paired yubiOS hosts.
+- pair-cloud-quorum: Pair a 2-node Local StrongBox Pair with a Cloud Assured Node (vTPM).
+- verify-cloud-quorum: Mutually attest a 2-node Local StrongBox Pair and a paired Cloud Assured Node
+  using an unexpired, single-use challenge_id issued for that specific pair.
 - stdio-peer: Framed JSON-RPC bridge invoked on the remote host over SSH without exposing raw SSH_AUTH_SOCK.
 """
 
@@ -23,13 +24,13 @@ import socket
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Dict, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from yubios_attest import AttestDaemonCore
 
 
-def rpc_call_unix(sock_path: str, method: str, params: Optional[ Dict[str, Any] ] = None) -> Dict[str, Any]:
+def rpc_call_unix(sock_path: str, method: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     req = {"jsonrpc": "2.0", "id": 1, "method": method, "params": params or {}}
     with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
         s.settimeout(30.0)
@@ -48,21 +49,12 @@ def rpc_call_unix(sock_path: str, method: str, params: Optional[ Dict[str, Any] 
 
 
 class RemotePeerTransport:
-    """
-    Communicates with a remote yubiOS host's yubiOS-attestd either:
-    1. Over an established SSH connection running `yubiOS-attest stdio-peer` (`--ssh-target user@hostB`), or
-    2. Directly to a peer Unix domain socket (`--peer-sock /path/to/hostB.sock`) for local multi-daemon testing.
-    Notice that SSH_AUTH_SOCK is kept on the initiating host and never forwarded into an unverified remote peer.
-    """
-
     def __init__(self, ssh_target: Optional[str] = None, peer_sock: Optional[str] = None, ssh_cmd: str = "ssh"):
         self.ssh_target = ssh_target
         self.peer_sock = peer_sock
         self.ssh_cmd = ssh_cmd
         self.proc: Optional[subprocess.Popen] = None
         if self.ssh_target:
-            # Disable ForwardAgent on the attestation transport channel itself so an unverified
-            # remote host cannot abuse SSH_AUTH_SOCK before mutual attestation completes.
             argv = self.ssh_cmd.split() + ["-o", "ForwardAgent=no", self.ssh_target, "yubiOS-attest", "stdio-peer"]
             self.proc = subprocess.Popen(
                 argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
@@ -168,7 +160,6 @@ def cmd_pair_ssh(args: argparse.Namespace) -> int:
 
     peer = RemotePeerTransport(ssh_target=args.ssh_target, peer_sock=args.peer_sock, ssh_cmd=args.ssh_cmd)
     try:
-        # Phase 1: Send single-use pairing code + Initiator hello -> receive Responder hello + MakeCredential blob for A
         begin_res = peer.call(
             "org.yubios.Attest1.PairBeginResponder",
             {"pairing_code": args.code, "initiator_hello": init_hello},
@@ -177,8 +168,6 @@ def cmd_pair_ssh(args: argparse.Namespace) -> int:
         resp_hello = begin_res["responder_hello"]
         cred_blob_for_a = begin_res["cred_blob_for_initiator_b64"]
 
-        # Phase 2: Initiator activates Responder's MakeCredential blob on local fTPM,
-        # and creates a MakeCredential challenge encrypted to Responder's (ek_pub, ak_name)
         act_a = rpc_call_unix(
             args.socket,
             "org.yubios.Attest1.ActivateCredential",
@@ -210,7 +199,6 @@ def cmd_pair_ssh(args: argparse.Namespace) -> int:
             f"{pair_mac}|{recovered_secret_a}|{expected_secret_from_b}".encode("utf-8")
         ).hexdigest()
 
-        # Initiator builds its signed attestation bundle (fTPM quote + YubiKey PIV + SSH-agent signature)
         bundle_a = rpc_call_unix(
             args.socket,
             "org.yubios.Attest1.LocalAttest",
@@ -224,7 +212,6 @@ def cmd_pair_ssh(args: argparse.Namespace) -> int:
             },
         )["bundle"]
 
-        # Phase 3: Send Finalize to Responder -> Responder verifies A, activates B's credential, pins A, and returns B's bundle
         fin_res = peer.call(
             "org.yubios.Attest1.PairFinalizeResponder",
             {
@@ -239,7 +226,6 @@ def cmd_pair_ssh(args: argparse.Namespace) -> int:
         if not hmac.compare_digest(fin_res["recovered_secret_from_b_hex"].lower(), expected_secret_from_b.lower()):
             raise RuntimeError("Responder failed MakeCredential/ActivateCredential fTPM residency challenge!")
 
-        # Initiator verifies and pins Responder's bundle locally
         verify_b = rpc_call_unix(
             args.socket,
             "org.yubios.Attest1.VerifyAndPin",
@@ -343,8 +329,271 @@ def cmd_mutual_verify(args: argparse.Namespace) -> int:
         peer.close()
 
 
+def cmd_pair_cloud_quorum(args: argparse.Namespace) -> int:
+    auth_sock = os.environ.get("SSH_AUTH_SOCK")
+    partner = RemotePeerTransport(ssh_target=args.partner_ssh, peer_sock=args.partner_sock, ssh_cmd=args.ssh_cmd)
+    cloud = RemotePeerTransport(ssh_target=args.cloud_ssh, peer_sock=args.cloud_sock, ssh_cmd=args.ssh_cmd)
+    try:
+        hello_a = rpc_call_unix(args.socket, "org.yubios.Attest1.BuildHello", {})["hello"]
+        hello_b = partner.call("org.yubios.Attest1.BuildHello", {})["hello"]
+
+        pin_b_on_a = rpc_call_unix(args.socket, "org.yubios.Attest1.GetPeerPin", {"peer_id": hello_b["host_id"]})["pin"]
+        pin_a_on_b = partner.call("org.yubios.Attest1.GetPeerPin", {"peer_id": hello_a["host_id"]})["pin"]
+        mutual_binding_ab = hashlib.sha256(
+            f"{pin_b_on_a['pinned_ak_fingerprint_sha256']}|{pin_a_on_b['pinned_ak_fingerprint_sha256']}|{pin_b_on_a['remote_challenge_index']}".encode("utf-8")
+        ).hexdigest()
+
+        begin_res = cloud.call(
+            "org.yubios.Attest1.PairCloudQuorumBegin",
+            {"pairing_code": args.code, "node_a_hello": hello_a, "node_b_hello": hello_b},
+        )
+        session_id = begin_res["session_id"]
+        cloud_hello = begin_res["cloud_hello"]
+
+        rec_a = rpc_call_unix(
+            args.socket,
+            "org.yubios.Attest1.ActivateCredential",
+            {"cred_blob_b64": begin_res["cred_blob_for_a_b64"]},
+        )["recovered_secret_hex"]
+        rec_b = partner.call(
+            "org.yubios.Attest1.ActivateCredential",
+            {"cred_blob_b64": begin_res["cred_blob_for_b_b64"]},
+        )["recovered_secret_hex"]
+
+        mk_cloud = rpc_call_unix(
+            args.socket,
+            "org.yubios.Attest1.MakeCredential",
+            {
+                "peer_ek_pub_pem": cloud_hello["ek_pub_pem"],
+                "peer_ak_name_hex": cloud_hello["ak_name_hex"],
+            },
+        )
+        expected_secret_cloud = mk_cloud["secret_hex"]
+        cred_blob_for_cloud = mk_cloud["cred_blob_b64"]
+
+        quorum_mac = AttestDaemonCore.compute_quorum_mac(
+            args.code,
+            hello_a["host_id"],
+            hello_b["host_id"],
+            cloud_hello["host_id"],
+            hello_a["challenge_index"],
+            hello_b["challenge_index"],
+            cloud_hello["challenge_index"],
+            hello_a["ek_fingerprint_sha256"],
+            hello_b["ek_fingerprint_sha256"],
+            cloud_hello["ek_fingerprint_sha256"],
+        )
+        peer_binding = hashlib.sha256(
+            f"quorum-v1|{quorum_mac}|{rec_a}|{rec_b}|{expected_secret_cloud}|{mutual_binding_ab}".encode("utf-8")
+        ).hexdigest()
+
+        bundle_a = rpc_call_unix(
+            args.socket,
+            "org.yubios.Attest1.LocalAttest",
+            {
+                "challenge_hex": cloud_hello["nonce"],
+                "challenge_index_hex": hello_a["challenge_index"],
+                "peer_binding_hex": peer_binding,
+                "include_piv": True,
+                "include_ssh_agent": bool(auth_sock),
+                "auth_sock": auth_sock,
+            },
+        )["bundle"]
+
+        bundle_b = partner.call(
+            "org.yubios.Attest1.LocalAttest",
+            {
+                "challenge_hex": cloud_hello["nonce"],
+                "challenge_index_hex": hello_b["challenge_index"],
+                "peer_binding_hex": peer_binding,
+                "include_piv": True,
+                "include_ssh_agent": False,
+            },
+        )["bundle"]
+
+        fin_res = cloud.call(
+            "org.yubios.Attest1.PairCloudQuorumFinalize",
+            {
+                "session_id": session_id,
+                "recovered_secret_from_a_hex": rec_a,
+                "recovered_secret_from_b_hex": rec_b,
+                "cred_blob_for_cloud_b64": cred_blob_for_cloud,
+                "quorum_mac_hex": quorum_mac,
+                "bundle_from_a": bundle_a,
+                "bundle_from_b": bundle_b,
+                "mutual_pair_binding_ab_hex": mutual_binding_ab,
+            },
+        )
+
+        if not hmac.compare_digest(fin_res["recovered_secret_from_cloud_hex"].lower(), expected_secret_cloud.lower()):
+            raise RuntimeError("Cloud Assured Node failed MakeCredential/ActivateCredential vTPM residency challenge!")
+
+        pair_challenge = hashlib.sha256(f"{hello_a['nonce']}|{hello_b['nonce']}".encode("utf-8")).hexdigest()
+        cloud_peer_id = args.cloud_peer or cloud_hello["host_id"]
+
+        verify_cloud_on_a = rpc_call_unix(
+            args.socket,
+            "org.yubios.Attest1.VerifyAndPin",
+            {
+                "bundle": fin_res["cloud_bundle"],
+                "expected_challenge_hex": pair_challenge,
+                "expected_challenge_index_hex": cloud_hello["challenge_index"],
+                "expected_peer_binding_hex": peer_binding,
+                "peer_id": cloud_peer_id,
+                "allow_tofu": True,
+                "require_piv": False,
+                "require_ssh_agent": False,
+                "local_challenge_index_for_peer": hello_a["challenge_index"],
+            },
+        )
+        verify_cloud_on_b = partner.call(
+            "org.yubios.Attest1.VerifyAndPin",
+            {
+                "bundle": fin_res["cloud_bundle"],
+                "expected_challenge_hex": pair_challenge,
+                "expected_challenge_index_hex": cloud_hello["challenge_index"],
+                "expected_peer_binding_hex": peer_binding,
+                "peer_id": cloud_peer_id,
+                "allow_tofu": True,
+                "require_piv": False,
+                "require_ssh_agent": False,
+                "local_challenge_index_for_peer": hello_b["challenge_index"],
+            },
+        )
+
+        out = {
+            "ok": True,
+            "cloud_quorum_pairing": "ESTABLISHED",
+            "local_strongbox_pair": [hello_a["host_id"], hello_b["host_id"]],
+            "cloud_host_id": fin_res["cloud_host_id"],
+            "cloud_node_role": fin_res["cloud_node_role"],
+            "cloud_arch": fin_res["cloud_arch"],
+            "peer_binding_hex": peer_binding,
+            "cloud_verified_node_a": fin_res["verified_node_a"],
+            "cloud_verified_node_b": fin_res["verified_node_b"],
+            "node_a_verified_cloud_vtpm": verify_cloud_on_a,
+            "node_b_verified_cloud_vtpm": verify_cloud_on_b,
+        }
+        print(json.dumps(out, indent=2))
+        return 0
+    finally:
+        partner.close()
+        cloud.close()
+
+
+def cmd_verify_cloud_quorum(args: argparse.Namespace) -> int:
+    auth_sock = os.environ.get("SSH_AUTH_SOCK")
+    partner = RemotePeerTransport(ssh_target=args.partner_ssh, peer_sock=args.partner_sock, ssh_cmd=args.ssh_cmd)
+    cloud = RemotePeerTransport(ssh_target=args.cloud_ssh, peer_sock=args.cloud_sock, ssh_cmd=args.ssh_cmd)
+    try:
+        chal_a = rpc_call_unix(args.socket, "org.yubios.Attest1.IssueMutualChallenge", {"peer_id": args.cloud_peer})
+        chal_b = partner.call("org.yubios.Attest1.IssueMutualChallenge", {"peer_id": args.cloud_peer})
+        cloud_chal = cloud.call(
+            "org.yubios.Attest1.IssueCloudQuorumChallenge",
+            {"node_a_id": chal_a["host_id"], "node_b_id": chal_b["host_id"]},
+        )
+
+        challenge_id = cloud_chal["challenge_id"]
+        nonce_a = chal_a["nonce"]
+        nonce_b = chal_b["nonce"]
+        cloud_nonce = cloud_chal["cloud_nonce"]
+        c_idx_a = chal_a["local_challenge_index"]
+        c_idx_b = chal_b["local_challenge_index"]
+        c_idx_cloud = cloud_chal["cloud_challenge_index"]
+
+        peer_binding = hashlib.sha256(
+            f"cloud-quorum-verify-v1|{nonce_a}|{nonce_b}|{cloud_nonce}|{c_idx_a}|{c_idx_b}|{c_idx_cloud}".encode("utf-8")
+        ).hexdigest()
+
+        bundle_a = rpc_call_unix(
+            args.socket,
+            "org.yubios.Attest1.LocalAttest",
+            {
+                "challenge_hex": cloud_nonce,
+                "challenge_index_hex": c_idx_a,
+                "peer_binding_hex": peer_binding,
+                "include_piv": True,
+                "include_ssh_agent": bool(auth_sock),
+                "auth_sock": auth_sock,
+            },
+        )["bundle"]
+
+        bundle_b = partner.call(
+            "org.yubios.Attest1.LocalAttest",
+            {
+                "challenge_hex": cloud_nonce,
+                "challenge_index_hex": c_idx_b,
+                "peer_binding_hex": peer_binding,
+                "include_piv": True,
+                "include_ssh_agent": False,
+            },
+        )["bundle"]
+
+        resp = cloud.call(
+            "org.yubios.Attest1.RespondCloudQuorumChallenge",
+            {
+                "challenge_id": challenge_id,
+                "node_a_id": chal_a["host_id"],
+                "node_b_id": chal_b["host_id"],
+                "nonce_a": nonce_a,
+                "nonce_b": nonce_b,
+                "cloud_nonce": cloud_nonce,
+                "bundle_a": bundle_a,
+                "bundle_b": bundle_b,
+            },
+        )
+
+        pair_challenge = hashlib.sha256(f"{nonce_a}|{nonce_b}".encode("utf-8")).hexdigest()
+        verify_cloud_on_a = rpc_call_unix(
+            args.socket,
+            "org.yubios.Attest1.VerifyAndPin",
+            {
+                "bundle": resp["cloud_bundle"],
+                "expected_challenge_hex": pair_challenge,
+                "expected_challenge_index_hex": c_idx_cloud,
+                "expected_peer_binding_hex": peer_binding,
+                "peer_id": args.cloud_peer,
+                "allow_tofu": False,
+                "require_piv": False,
+                "require_ssh_agent": False,
+            },
+        )
+        verify_cloud_on_b = partner.call(
+            "org.yubios.Attest1.VerifyAndPin",
+            {
+                "bundle": resp["cloud_bundle"],
+                "expected_challenge_hex": pair_challenge,
+                "expected_challenge_index_hex": c_idx_cloud,
+                "expected_peer_binding_hex": peer_binding,
+                "peer_id": args.cloud_peer,
+                "allow_tofu": False,
+                "require_piv": False,
+                "require_ssh_agent": False,
+            },
+        )
+
+        out = {
+            "ok": True,
+            "cloud_quorum_attestation": "VERIFIED",
+            "challenge_id": challenge_id,
+            "cloud_host_id": resp["cloud_host_id"],
+            "cloud_arch": resp["cloud_arch"],
+            "quorum_audit_count": resp["quorum_audit_count"],
+            "peer_binding_hex": peer_binding,
+            "cloud_verified_node_a": resp["verified_node_a"],
+            "cloud_verified_node_b": resp["verified_node_b"],
+            "node_a_verified_cloud_vtpm": verify_cloud_on_a,
+            "node_b_verified_cloud_vtpm": verify_cloud_on_b,
+        }
+        print(json.dumps(out, indent=2))
+        return 0
+    finally:
+        partner.close()
+        cloud.close()
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="yubiOS Local & Mutual StrongBox Attestation CLI")
+    parser = argparse.ArgumentParser(description="yubiOS Local, Mutual & Cloud-Quorum StrongBox Attestation CLI")
     parser.add_argument(
         "--socket",
         default=os.environ.get("YUBIOS_ATTEST_SOCK", "/run/yubiOS-attest/attest.sock"),
@@ -377,6 +626,23 @@ def main() -> int:
     p_mut.add_argument("--peer-sock", default=None, help="Direct peer socket path (for local/VM testing)")
     p_mut.add_argument("--ssh-cmd", default="ssh", help="SSH binary/command")
 
+    p_pcq = sub.add_parser("pair-cloud-quorum", help="Pair a 2-node Local StrongBox Pair with a Cloud Assured Node (vTPM)")
+    p_pcq.add_argument("--code", required=True, help="Single-use pairing code from Cloud Assured Node")
+    p_pcq.add_argument("--cloud-peer", default=None, help="Cloud peer identifier")
+    p_pcq.add_argument("--partner-sock", default=None, help="Partner Local StrongBox Node socket")
+    p_pcq.add_argument("--partner-ssh", default=None, help="Partner Local StrongBox Node SSH target")
+    p_pcq.add_argument("--cloud-sock", default=None, help="Cloud Assured Node socket")
+    p_pcq.add_argument("--cloud-ssh", default=None, help="Cloud Assured Node SSH target")
+    p_pcq.add_argument("--ssh-cmd", default="ssh", help="SSH binary/command")
+
+    p_vcq = sub.add_parser("verify-cloud-quorum", help="Mutually attest a 2-node Local StrongBox Pair and a paired Cloud Assured Node")
+    p_vcq.add_argument("--cloud-peer", required=True, help="Paired Cloud Assured Node identifier")
+    p_vcq.add_argument("--partner-sock", default=None, help="Partner Local StrongBox Node socket")
+    p_vcq.add_argument("--partner-ssh", default=None, help="Partner Local StrongBox Node SSH target")
+    p_vcq.add_argument("--cloud-sock", default=None, help="Cloud Assured Node socket")
+    p_vcq.add_argument("--cloud-ssh", default=None, help="Cloud Assured Node SSH target")
+    p_vcq.add_argument("--ssh-cmd", default="ssh", help="SSH binary/command")
+
     args = parser.parse_args()
     dispatch = {
         "status": cmd_status,
@@ -385,6 +651,8 @@ def main() -> int:
         "pair-init": cmd_pair_init,
         "pair-ssh": cmd_pair_ssh,
         "mutual-verify": cmd_mutual_verify,
+        "pair-cloud-quorum": cmd_pair_cloud_quorum,
+        "verify-cloud-quorum": cmd_verify_cloud_quorum,
     }
     return dispatch[args.cmd](args)
 

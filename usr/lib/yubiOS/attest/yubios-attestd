@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: LGPL-2.1-or-later
 """
-yubios-attestd - Hardened systemd service daemon for yubiOS Local & Mutual Remote Attestation.
+yubios-attestd - Hardened systemd service daemon for yubiOS Local, Mutual & Cloud-Quorum Remote Attestation.
 
 Exposes:
 - Unix domain socket RPC (/run/yubiOS-attest/attest.sock, or systemd socket activation FD 3)
@@ -54,6 +54,22 @@ DBUS_INTROSPECT_XML = """<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object
       <arg name="request_json" type="s" direction="in"/>
       <arg name="response_json" type="s" direction="out"/>
     </method>
+    <method name="PairCloudQuorumBegin">
+      <arg name="request_json" type="s" direction="in"/>
+      <arg name="response_json" type="s" direction="out"/>
+    </method>
+    <method name="PairCloudQuorumFinalize">
+      <arg name="request_json" type="s" direction="in"/>
+      <arg name="response_json" type="s" direction="out"/>
+    </method>
+    <method name="IssueCloudQuorumChallenge">
+      <arg name="request_json" type="s" direction="in"/>
+      <arg name="response_json" type="s" direction="out"/>
+    </method>
+    <method name="RespondCloudQuorumChallenge">
+      <arg name="request_json" type="s" direction="in"/>
+      <arg name="response_json" type="s" direction="out"/>
+    </method>
   </interface>
 </node>
 """
@@ -86,6 +102,13 @@ class AttestRPCDispatcher:
     def __init__(self, core: AttestDaemonCore):
         self.core = core
 
+    def _reject_if_quorum_required(self, method: str) -> None:
+        if self.core.require_pair_quorum:
+            raise ValueError(
+                f"Cloud Assured Node enforces 2-of-2 Local StrongBox Pair quorum "
+                f"(YUBIOS_ATTEST_REQUIRE_PAIR_QUORUM=1); single-peer RPC '{method}' is disabled"
+            )
+
     def dispatch(self, req: dict, peer_cred: dict) -> dict:
         method = req.get("method", "")
         params = req.get("params") or {}
@@ -109,7 +132,8 @@ class AttestRPCDispatcher:
             challenge_hex = params.get("challenge_hex") or self.core.tpm.get_random_hex(32)
             challenge_index_hex = params.get("challenge_index_hex") or self.core.tpm.get_random_hex(32)
             peer_binding_hex = params.get("peer_binding_hex", "")
-            include_piv = bool(params.get("include_piv", True))
+            default_piv = self.core.node_role != "cloud-vtpm"
+            include_piv = bool(params.get("include_piv", default_piv))
             include_ssh = bool(params.get("include_ssh_agent", False))
             bundle = self.core.create_attestation_bundle(
                 challenge_hex=challenge_hex,
@@ -122,8 +146,17 @@ class AttestRPCDispatcher:
             return {"ok": True, "bundle": bundle}
 
         if method in ("org.yubios.Attest1.VerifyAndPin", "VerifyAndPin"):
+            bundle = params["bundle"]
+            target_peer = params.get("peer_id") or bundle.get("host_id")
+            if self.core.require_pair_quorum:
+                is_local_self = (
+                    target_peer == f"local-{self.core.host_id}"
+                    and bundle.get("host_id") == self.core.host_id
+                )
+                if not is_local_self:
+                    self._reject_if_quorum_required("VerifyAndPin")
             return self.core.verify_and_pin_bundle(
-                bundle=params["bundle"],
+                bundle=bundle,
                 expected_challenge_hex=params["expected_challenge_hex"],
                 expected_challenge_index_hex=params["expected_challenge_index_hex"],
                 expected_peer_binding_hex=params.get("expected_peer_binding_hex", ""),
@@ -141,12 +174,14 @@ class AttestRPCDispatcher:
             )
 
         if method in ("org.yubios.Attest1.PairBeginResponder", "PairBeginResponder"):
+            self._reject_if_quorum_required("PairBeginResponder")
             return self.core.pair_begin_responder(
                 code=params["pairing_code"],
                 initiator_hello=params["initiator_hello"],
             )
 
         if method in ("org.yubios.Attest1.PairFinalizeResponder", "PairFinalizeResponder"):
+            self._reject_if_quorum_required("PairFinalizeResponder")
             return self.core.pair_finalize_responder(
                 session_id=params["session_id"],
                 recovered_secret_from_a_hex=params["recovered_secret_from_a_hex"],
@@ -170,6 +205,7 @@ class AttestRPCDispatcher:
             return {"ok": True, "pin": self.core.get_peer_pin(params["peer_id"])}
 
         if method in ("org.yubios.Attest1.IssueMutualChallenge", "IssueMutualChallenge"):
+            self._reject_if_quorum_required("IssueMutualChallenge")
             peer_id = params["peer_id"]
             pin = self.core.get_peer_pin(peer_id)
             nonce = self.core.tpm.get_random_hex(32)
@@ -183,6 +219,7 @@ class AttestRPCDispatcher:
             }
 
         if method in ("org.yubios.Attest1.RespondMutualChallenge", "RespondMutualChallenge"):
+            self._reject_if_quorum_required("RespondMutualChallenge")
             peer_id = params["peer_id"]
             pin = self.core.get_peer_pin(peer_id)
             caller_nonce = params["caller_nonce"]
@@ -218,6 +255,44 @@ class AttestRPCDispatcher:
                 "caller_verification": verify_caller,
                 "responder_bundle": resp_bundle,
             }
+
+        if method in ("org.yubios.Attest1.PairCloudQuorumBegin", "PairCloudQuorumBegin"):
+            return self.core.pair_cloud_quorum_begin(
+                code=params["pairing_code"],
+                node_a_hello=params["node_a_hello"],
+                node_b_hello=params["node_b_hello"],
+            )
+
+        if method in ("org.yubios.Attest1.PairCloudQuorumFinalize", "PairCloudQuorumFinalize"):
+            return self.core.pair_cloud_quorum_finalize(
+                session_id=params["session_id"],
+                recovered_secret_from_a_hex=params["recovered_secret_from_a_hex"],
+                recovered_secret_from_b_hex=params["recovered_secret_from_b_hex"],
+                cred_blob_for_cloud_b64=params["cred_blob_for_cloud_b64"],
+                quorum_mac_hex=params["quorum_mac_hex"],
+                bundle_from_a=params["bundle_from_a"],
+                bundle_from_b=params["bundle_from_b"],
+                mutual_pair_binding_ab_hex=params["mutual_pair_binding_ab_hex"],
+            )
+
+        if method in ("org.yubios.Attest1.IssueCloudQuorumChallenge", "IssueCloudQuorumChallenge"):
+            return self.core.issue_cloud_quorum_challenge(
+                node_a_id=params["node_a_id"],
+                node_b_id=params["node_b_id"],
+                ttl_sec=int(params.get("ttl_sec", 120)),
+            )
+
+        if method in ("org.yubios.Attest1.RespondCloudQuorumChallenge", "RespondCloudQuorumChallenge"):
+            return self.core.respond_cloud_quorum_challenge(
+                challenge_id=params.get("challenge_id", ""),
+                node_a_id=params["node_a_id"],
+                node_b_id=params["node_b_id"],
+                nonce_a=params["nonce_a"],
+                nonce_b=params["nonce_b"],
+                bundle_a=params["bundle_a"],
+                bundle_b=params["bundle_b"],
+                cloud_nonce=params.get("cloud_nonce"),
+            )
 
         raise ValueError(f"Unknown RPC method: {method}")
 
@@ -268,6 +343,13 @@ def main() -> int:
         help="PIV signing mode: 'pkcs11' requires hardware YubiKey token; 'sim' is explicit test-only mode",
     )
     parser.add_argument("--os-version", default="45.20261114.0")
+    parser.add_argument("--node-role", default=None, choices=["strongbox", "cloud-vtpm"])
+    parser.add_argument(
+        "--require-pair-quorum",
+        action="store_true",
+        default=None,
+        help="Require 2-of-2 Local StrongBox Pair quorum and disable single-peer pairing/pinning RPCs",
+    )
     parser.add_argument("--sysroot", default=os.environ.get("YUBIOS_ATTEST_SYSROOT", "/"))
     args = parser.parse_args()
 
@@ -285,6 +367,8 @@ def main() -> int:
         piv_slot=args.piv_slot,
         piv_mode=args.piv_mode,
         os_version=args.os_version,
+        node_role=args.node_role,
+        require_pair_quorum=args.require_pair_quorum,
         sysroot=Path(args.sysroot),
     )
     dispatcher = AttestRPCDispatcher(core)
@@ -301,7 +385,10 @@ def main() -> int:
     signal.signal(signal.SIGTERM, _sig_handler)
     signal.signal(signal.SIGINT, _sig_handler)
 
-    sd_notify(f"READY=1\nSTATUS=yubiOS-attestd active on {sock_path} (tpm={core.tpm.mode}, piv={core.yk.piv_mode})")
+    sd_notify(
+        f"READY=1\nSTATUS=yubiOS-attestd active on {sock_path} "
+        f"(role={core.node_role}, quorum={core.require_pair_quorum}, tpm={core.tpm.mode}, piv={core.yk.piv_mode})"
+    )
 
     def _watchdog_loop():
         while not stop_event.wait(10.0):
