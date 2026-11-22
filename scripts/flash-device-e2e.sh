@@ -373,7 +373,10 @@ pull_board_firmware() {
   [ -f "$bin" ] || die "u-boot-rockchip.bin missing in $fw_resolved"
   local magic
   magic="$(xxd -p -l 4 "$bin")"
-  [ "$magic" = "524b4e53" ] || die "$bin does not start with RKNS magic (got $magic)"
+  case "$magic" in
+    524b4e53|3b8cdcfc) ;;
+    *) die "$bin does not start with Rockchip BootROM magic RKNS/524b4e53 or RK3399-RC4/3b8cdcfc (got $magic)" ;;
+  esac
   sha256sum "$bin" | tee "$FW_DIR/$b/u-boot-rockchip.bin.sha256"
   cp -f "$bin" "$FW_DIR/$b/u-boot-rockchip.bin"
   local spi_bin="$FW_DIR/$b/firmware/u-boot-rockchip-spi.bin"
