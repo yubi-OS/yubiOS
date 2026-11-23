@@ -12,7 +12,8 @@ setup() {
     tests/vm/test-bcvk-passthrough.sh \
     tests/vm/test-policy-rejection.sh \
     tests/vm/test-gp-tee-pp-conformance-ci.sh \
-    tests/vm/verify-gp-tee-xtest-guest.sh; do
+    tests/vm/verify-gp-tee-xtest-guest.sh \
+    tests/vm/test-x86_64-setup-mode-e2e-ci.sh; do
     [ -x "${REPO_ROOT}/${s}" ]
     run bash -n "${REPO_ROOT}/${s}"
     [ "$status" -eq 0 ]
@@ -50,4 +51,10 @@ setup() {
   run "${REPO_ROOT}/tests/vm/test-gp-tee-pp-conformance-ci.sh" --self-test --repo-root "$REPO_ROOT"
   [ "$status" -eq 0 ]
   [[ "$output" == *"PASS: all 4 GlobalPlatform TEE PP (EAL2+ / AVA_VAN_AP.3) conformance self-test legs verified"* ]]
+}
+
+@test "test-x86_64-setup-mode-e2e-ci.sh verifies x86_64 UEFI SetupMode=1 flash, enroll-sb, and amd64 local OCI commit" {
+  run "${REPO_ROOT}/tests/vm/test-x86_64-setup-mode-e2e-ci.sh" --self-test --repo-root "$REPO_ROOT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"PASS: all 3 x86_64 UEFI Setup-Mode flash, enroll, sign & local-OCI legs verified"* ]]
 }

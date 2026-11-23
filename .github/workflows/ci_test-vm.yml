@@ -133,12 +133,13 @@ jobs:
         run: |
           set -euo pipefail
           apt-get install -y -qq --no-install-recommends python3 openssl
-          chmod +x tests/vm/test-secure-boot-tamper.sh tests/vm/test-oci-tag-channel.sh tests/vm/test-bcvk-passthrough.sh tests/vm/test-policy-rejection.sh tests/vm/test-gp-tee-pp-conformance-ci.sh tests/vm/verify-gp-tee-xtest-guest.sh
+          chmod +x tests/vm/test-secure-boot-tamper.sh tests/vm/test-oci-tag-channel.sh tests/vm/test-bcvk-passthrough.sh tests/vm/test-policy-rejection.sh tests/vm/test-gp-tee-pp-conformance-ci.sh tests/vm/verify-gp-tee-xtest-guest.sh tests/vm/test-x86_64-setup-mode-e2e-ci.sh
           ./tests/vm/test-secure-boot-tamper.sh --self-test
           ./tests/vm/test-oci-tag-channel.sh --self-test
           ./tests/vm/test-bcvk-passthrough.sh --verify-args
           ./tests/vm/test-policy-rejection.sh
           ./tests/vm/test-gp-tee-pp-conformance-ci.sh --self-test
+          ./tests/vm/test-x86_64-setup-mode-e2e-ci.sh --self-test
 
   # -- VM e2e: native matrix, bare runner (full host toolchain: cargo + qemu + --
   #    KVM). Hardened dhi base omits crt*.o/libc, so bcvk's cargo build needs the
@@ -157,7 +158,7 @@ jobs:
             # Self-hosted ARM64 board (runner "rock1", labels self-hosted+Linux+ARM64+KVM) --
             # real hardware with actual KVM support, unblocking the boot leg that hosted
             # self-hosted ARM64 GPU runners can't run (no nested virt, see the KVM gate below).
-            runner: ubuntu-26.04-arm
+            runner: [self-hosted, Linux, ARM64, KVM]
             qemu_pkgs: qemu-system-arm qemu-efi-aarch64
             primary: true
     runs-on: ${{ matrix.runner }}
