@@ -40,3 +40,6 @@ forks:
   - fork: image-builder
     upstream: osbuild/image-builder
     upstream_branch: main
+  - fork: gnome-control-center
+    upstream: GNOME/gnome-control-center
+    upstream_branch: main

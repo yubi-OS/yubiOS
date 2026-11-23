@@ -1,0 +1,80 @@
+From 57380237cf1adf7cc4a5296f4ace1584478369bd Mon Sep 17 00:00:00 2001
+From: yubiOS CI <ci@yubi-os.invalid>
+Date: Sat, 10 Oct 2026 00:00:00 +0000
+Subject: [PATCH] rockpro64, pinetab2: add OP-TEE firmware and reserved-memory
+ nodes to U-Boot DT
+
+Without the /firmware/optee node U-Boot binds no TEE device (Unable to
+open OP-TEE session, err=-19), so the fTPM, StMM and UEFI init fail on
+Pine64 RockPro64 (RK3399) and PineTab2 (RK3566). Reserve TZDRAM+SHMEM at
+0x30000000..0x32400000 under /reserved-memory matching rk3588-base.dtsi.
+---
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 23 +++++++++++++++++++++++
+ arch/arm/dts/rk3566-pinetab2-u-boot.dtsi  | 23 +++++++++++++++++++++++
+ 2 files changed, 46 insertions(+)
+
+diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+index cd84269..d72d569 100644
+--- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+@@ -68,3 +68,26 @@
+ &vdd_log {
+ 	regulator-init-microvolt = <950000>;
+ };
++
++/* yubiOS: OP-TEE reserved-memory and firmware node. Without this U-Boot
++ * binds no TEE device (Unable to open OP-TEE session, err=-19), so fTPM,
++ * StMM and UEFI init fail on hardware. */
++/ {
++	reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		optee_ram: optee@30000000 {
++			reg = <0x0 0x30000000 0x0 0x02400000>;
++			no-map;
++		};
++	};
++
++	firmware {
++		optee {
++			compatible = "linaro,optee-tz";
++			method = "smc";
++		};
++	};
++};
+diff --git a/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi b/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
+index eb18008..5c4659a 100644
+--- a/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
++++ b/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
+@@ -51,3 +51,26 @@
+ &vcc3v3_sd {
+ 	bootph-pre-ram;
+ };
++
++/* yubiOS: OP-TEE reserved-memory and firmware node. Without this U-Boot
++ * binds no TEE device (Unable to open OP-TEE session, err=-19), so fTPM,
++ * StMM and UEFI init fail on hardware. */
++/ {
++	reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		optee_ram: optee@30000000 {
++			reg = <0x0 0x30000000 0x0 0x02400000>;
++			no-map;
++		};
++	};
++
++	firmware {
++		optee {
++			compatible = "linaro,optee-tz";
++			method = "smc";
++		};
++	};
++};
+-- 
+2.50.1
+

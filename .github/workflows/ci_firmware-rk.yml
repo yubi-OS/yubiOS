@@ -83,9 +83,9 @@ permissions:
 env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
   TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
-  OPTEE_OS_REF: e1181e2d0e40f8550c0f8204a433eac54598d222 # release-descendant ref; see PINNED.md
+  OPTEE_OS_REF: 462e8e6793b988c5b3d2b815b17d091012ceffd7 # release-descendant ref; see PINNED.md
   OPTEE_FTPM_REF: b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf # release-descendant ref; see PINNED.md
-  UBOOT_REF: 7bf455d421600491c0105319de2a6bbaeb9b4484 # release-descendant ref; see PINNED.md
+  UBOOT_REF: 8e7b49c78689957d3ee8eb217d7bdadad3026bd9 # release-descendant ref; see PINNED.md
   EDK2_REF: b7a715f7c03c45c6b4575bf88596bfd79658b8ce # compatible release ref; see PINNED.md
   EDK2_PLATFORMS_REF: cc384840c440415a091623a7658112fedc416094 # compatibility ref; see PINNED.md
   MS_TPM_REF: 6c893ca8ebbbcb55ba788d8f289a5d4e64bc0d48 # yubios branch (v1.83r1 descendant); see PINNED.md
@@ -595,6 +595,7 @@ jobs:
           CONFIG_HASH=y
           CONFIG_MEASURED_BOOT=y
           CONFIG_CMD_TPM=y
+          CONFIG_BAUDRATE=115200
           CONFIG_BOOTDELAY=1
           CONFIG_BOOTCOMMAND="tpm2 init && tpm2 startup TPM2_SU_CLEAR && tpm2 self_test full && echo YUBIOS_TPM_OK; bootefi bootmgr"
           # CONFIG_UNIT_TEST is not set
@@ -661,9 +662,27 @@ jobs:
           if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
             optee_cfg_insecure=n
             optee_args+=(
+              CFG_DRAM_BASE=0x40000000
+              CFG_DRAM_SIZE=0xb0000000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x2fc000000
               CFG_ROCKCHIP_OTP=y
               CFG_RK_SECURE_BOOT=y
               CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
+            )
+          elif [ "$OPTEE_FLAVOR" = "rk3399" ]; then
+            optee_cfg_insecure=y
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xf7e00000
+            )
+          elif [ "$OPTEE_FLAVOR" = "rk3568" ]; then
+            optee_cfg_insecure=y
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xefe00000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x100000000
             )
           else
             optee_cfg_insecure=y
@@ -677,6 +696,7 @@ jobs:
             TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
             CFG_REE_FS_TA=n CFG_SECSTOR_TA=n CFG_SECSTOR_TA_MGMT_PTA=n \
             CFG_INSECURE="$optee_cfg_insecure" \
+            CFG_EARLY_CONSOLE_BAUDRATE=115200 \
             CFG_RPMB_FS=y CFG_REE_FS=y CFG_EARLY_TA=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -734,6 +754,18 @@ jobs:
               CFG_RK_SECURE_BOOT=y
               CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
             )
+          elif [ "$OPTEE_FLAVOR" = "rk3399" ]; then
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xf7e00000
+            )
+          elif [ "$OPTEE_FLAVOR" = "rk3568" ]; then
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xefe00000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x100000000
+            )
           fi
           make -C optee_os -j"$(nproc)" \
             "${optee_args[@]}" \
@@ -743,6 +775,7 @@ jobs:
             TA_SIGN_KEY="$FW_KEY_DIR/ta-sign-key.pem" \
             CFG_REE_FS_TA=n CFG_SECSTOR_TA=n CFG_SECSTOR_TA_MGMT_PTA=n \
             CFG_INSECURE="${OPTEE_CFG_INSECURE:-y}" \
+            CFG_EARLY_CONSOLE_BAUDRATE=115200 \
             CFG_RPMB_FS=y CFG_REE_FS=y \
             CFG_STMM_VOLATILE_STORAGE=y CFG_STMM_HEAP_PAGE_COUNT=800 \
             CFG_CORE_HEAP_SIZE=524288 CFG_TEE_RAM_VA_SIZE=0x00400000 \
@@ -774,6 +807,13 @@ jobs:
           git -C arm-trusted-firmware fetch -q --depth=1 origin "$TFA_REF"
           git -C arm-trusted-firmware checkout --detach FETCH_HEAD
           test "$(git -C arm-trusted-firmware rev-parse HEAD)" = "$TFA_REF"
+          for rk_hdr in \
+            arm-trusted-firmware/plat/rockchip/rk3588/rk3588_def.h \
+            arm-trusted-firmware/plat/rockchip/rk3399/rk3399_def.h \
+            arm-trusted-firmware/plat/rockchip/rk3568/rk3568_def.h; do
+            sed -i -E 's/(#define[[:space:]]+(RK_DBG_UART_BAUDRATE|RK3399_BAUDRATE|FPGA_BAUDRATE)[[:space:]]+)1500000/\1115200/' "$rk_hdr"
+            grep -Eq '#define[[:space:]]+(RK_DBG_UART_BAUDRATE|RK3399_BAUDRATE|FPGA_BAUDRATE)[[:space:]]+115200' "$rk_hdr"
+          done
           if [ "$TFA_PLAT" = "rk3399" ]; then
             m0_makefile=arm-trusted-firmware/plat/rockchip/rk3399/drivers/m0/Makefile
             sed -i 's/-Wall -O3 -nostdlib/-Wall -Os -nostdlib/' "$m0_makefile"
@@ -886,6 +926,26 @@ jobs:
           test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
           echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
 
+      - name: Apply pinned rockpro64/pinetab2 OP-TEE patch to U-Boot as a commit (fail closed, clean tree)
+        if: matrix.build_kind == 'rockchip' && (matrix.board == 'rockpro64-rk3399' || matrix.board == 'pinetab2-rk3566')
+        env:
+          RK_OPTEE_PATCH_SRC: firmware/u-boot/0002-rockpro64-pinetab2-add-optee-firmware-node.patch
+          RK_OPTEE_PATCH_SHA256: 85084a348cff9665f6922eccf745f21f426f42c30236b31ed7f5cae6bdd5c709
+          GIT_COMMITTER_NAME: yubiOS CI
+          GIT_COMMITTER_EMAIL: ci@yubi-os.invalid
+          GIT_COMMITTER_DATE: 2026-10-10T00:00:00Z
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' "$RK_OPTEE_PATCH_SHA256" "$RK_OPTEE_PATCH_SRC" | sha256sum --check --strict
+          test "$(git -C u-boot rev-parse HEAD)" = "$UBOOT_REF"
+          if grep -q 'linaro,optee-tz' u-boot/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi u-boot/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi; then
+            echo "::error::rockpro64/pinetab2 U-Boot dtsi already has an OP-TEE node; refusing to apply twice"
+            exit 1
+          fi
+          git -C u-boot am --quiet "$GITHUB_WORKSPACE/$RK_OPTEE_PATCH_SRC"
+          test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
+          echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
+
       - name: Build Rockchip U-Boot board image
         if: matrix.build_kind == 'rockchip'
         env:
@@ -901,6 +961,8 @@ jobs:
             u-boot/.config | tee u-boot-config-summary.txt
           make -C u-boot -j"$(nproc)" CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm u-boot.bin
           test -s u-boot/u-boot.bin
+          fdtget u-boot/dts/dt.dtb /firmware/optee compatible | grep -qx 'linaro,optee-tz'
+          fdtget -l u-boot/dts/dt.dtb /reserved-memory | grep -qx 'optee@30000000'
           build_args=(BL31="$BL31_BIN" TEE="$TEE_BIN")
           if [ "$REQUIRES_ROCKCHIP_TPL" = "true" ]; then
             if [ -z "${ROCKCHIP_TPL:-}" ]; then
