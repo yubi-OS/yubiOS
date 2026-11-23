@@ -271,12 +271,19 @@ EOF
   elif [ "$SIGNKEY" = "test" ]; then
     SIGN_MODE="soft_test"
     log "No physical U2F/HSM on USB; SIGNKEY=test -> minting ephemeral RSA-2048 Slot 9a test key ($CN_LABEL)"
-    openssl req -x509 -newkey rsa:2048 -nodes \
+    if ! openssl req -x509 -newkey rsa:2048 -nodes \
       -keyout "$KEY_DIR/db.key" \
       -out "$KEY_DIR/db.crt" \
       -subj "/CN=${CN_LABEL}" \
-      -days 1826 \
-      -sha256
+      -not_before 20250101000000Z -not_after 20360101000000Z \
+      -sha256; then
+      openssl req -x509 -newkey rsa:2048 -nodes \
+        -keyout "$KEY_DIR/db.key" \
+        -out "$KEY_DIR/db.crt" \
+        -subj "/CN=${CN_LABEL}" \
+        -days 1826 \
+        -sha256
+    fi
     openssl x509 -in "$KEY_DIR/db.crt" -noout -subject -issuer -dates -fingerprint -sha256
     cp -f "$KEY_DIR/db.crt" "$KEY_DIR/PK.crt"
     cp -f "$KEY_DIR/db.crt" "$KEY_DIR/KEK.crt"
@@ -501,9 +508,12 @@ EOF
   # (same as enroll-sb.sh), and save u-boot-rockchip.bin + u-boot-rockchip-spi.bin to /boot.
   sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/secureboot" "$MNT_DIR/boot/EFI/yubiOS/keys" "$MNT_DIR/boot/EFI/yubiOS/firmware"
   sudo podman run --rm --entrypoint /bin/sh "$RESOLVED_OS" -c 'if [ -d /usr/lib/yubiOS/secureboot ]; then tar -C /usr/lib/yubiOS/secureboot -cf - .; fi' \
-    | sudo tar -C "$MNT_DIR/boot/EFI/yubiOS/secureboot" -xf - 2>/dev/null || true
+    | sudo tar -C "$MNT_DIR/boot/EFI/yubiOS/secureboot" --no-same-owner --no-same-permissions -xf -
   sudo rm -f "$MNT_DIR/boot/EFI/yubiOS/secureboot/ci-sb-db.key" 2>/dev/null || true
-  sudo cp -f "$MNT_DIR/boot/EFI/yubiOS/secureboot/"* "$MNT_DIR/boot/EFI/yubiOS/keys/" 2>/dev/null || true
+  sudo cp -f "$MNT_DIR/boot/EFI/yubiOS/secureboot/"* "$MNT_DIR/boot/EFI/yubiOS/keys/"
+  sudo test -s "$MNT_DIR/boot/EFI/yubiOS/secureboot/PK.auth" || die "PK.auth missing on ESP"
+  sudo test -s "$MNT_DIR/boot/EFI/yubiOS/secureboot/PK_null.auth" || die "PK_null.auth missing on ESP"
+  sudo test -s "$MNT_DIR/boot/EFI/yubiOS/keys/PK_null.auth" || die "keys/PK_null.auth missing on ESP"
 
   sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
   sudo cp -f "$fw_bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip.bin"

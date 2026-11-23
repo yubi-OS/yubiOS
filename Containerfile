@@ -222,15 +222,21 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
 # ── Permissions for enrollment and first-boot scripts + staged Secure Boot keys ──
 RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
     mkdir -p /etc/kernel/install.d /etc/ostree /usr/lib/yubiOS/secureboot /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
+    printf '#include <time.h>\ntime_t time(time_t *t){time_t v=1767225600;if(t)*t=v;return v;}\n' > /tmp/faketime_sb.c && \
+    gcc -shared -fPIC -O2 /tmp/faketime_sb.c -o /usr/lib/yubiOS/uki/libfaketime_sb.so && \
+    rm -f /tmp/faketime_sb.c && \
     if [ ! -f /usr/lib/yubiOS/secureboot/PK.auth ]; then \
-      SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
+      LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
     fi && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ && \
     rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key && \
     test -s /usr/lib/yubiOS/secureboot/PK.auth && \
+    test -s /usr/lib/yubiOS/secureboot/PK_null.auth && \
     test -s /boot/EFI/yubiOS/secureboot/PK.auth && \
+    test -s /boot/EFI/yubiOS/secureboot/PK_null.auth && \
     test -s /boot/EFI/yubiOS/keys/PK.auth && \
+    test -s /boot/EFI/yubiOS/keys/PK_null.auth && \
     cp -f /usr/lib/ostree/prepare-root.conf /etc/ostree/prepare-root.conf && \
     cp -f /usr/lib/kernel/install.d/05-rpmostree.install /etc/kernel/install.d/05-rpmostree.install && \
     cp -f /usr/lib/kernel/install.d/95-yubios-uki-resign.install /etc/kernel/install.d/95-yubios-uki-resign.install
@@ -390,11 +396,9 @@ RUN case "$(uname -m)" in \
     esac && \
     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
     if [ -f /usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /usr/lib/yubiOS/secureboot/db.crt ]; then \
-      SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" /usr/lib/systemd/systemd-sbsign sign \
-        --private-key /usr/lib/yubiOS/secureboot/ci-sb-db.key \
-        --private-key-source file \
-        --certificate /usr/lib/yubiOS/secureboot/db.crt \
-        --certificate-source file \
+      LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign \
+        --key /usr/lib/yubiOS/secureboot/ci-sb-db.key \
+        --cert /usr/lib/yubiOS/secureboot/db.crt \
         --output "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
         "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
       mv -f "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
@@ -440,11 +444,9 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
     if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then \
-      SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" /usr/lib/systemd/systemd-sbsign sign \
-        --private-key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key \
-        --private-key-source file \
-        --certificate /target/usr/lib/yubiOS/secureboot/db.crt \
-        --certificate-source file \
+      LD_PRELOAD=/target/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign \
+        --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key \
+        --cert /target/usr/lib/yubiOS/secureboot/db.crt \
         --output "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
       mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
       sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi"; \
