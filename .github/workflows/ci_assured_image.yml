@@ -116,7 +116,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:3a0f849e7ecad5433a8a517e4606794dc65941b275177c7f44002c3fc322d7a8 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -284,7 +284,7 @@ jobs:
             -v /run/yubios-hsm:/run/yubios-hsm \
             -v "$PWD:/work" \
             -w /work \
-            "dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d" \
+            "dhi.io/debian-base@sha256:3a0f849e7ecad5433a8a517e4606794dc65941b275177c7f44002c3fc322d7a8" \
             bash -c '
               set -euo pipefail
               apt-get update -qq
@@ -362,7 +362,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:3a0f849e7ecad5433a8a517e4606794dc65941b275177c7f44002c3fc322d7a8 # trixie-debian13-dev
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md

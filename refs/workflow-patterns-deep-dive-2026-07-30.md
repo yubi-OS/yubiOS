@@ -13,7 +13,7 @@ container:
   credentials:
     username: 0mniteck42
     password: ${{ secrets.DOCKER }}
-  image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d
+  image: docker://dhi.io/debian-base@sha256:3a0f849e7ecad5433a8a517e4606794dc65941b275177c7f44002c3fc322d7a8
 ```
 `ci_test_sealed-uki-vm.yml` (Jenny current focus, PR #155) lacks this block entirely — that is the security architecture gap driving the v2/v3/v4 fix series on `sealed-uki-vm-lane-v2`.
 
@@ -47,7 +47,7 @@ container:
   credentials:
     username: 0mniteck42
     password: ${{ secrets.DOCKER }}
-  image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d
+  image: docker://dhi.io/debian-base@sha256:3a0f849e7ecad5433a8a517e4606794dc65941b275177c7f44002c3fc322d7a8
 ```
 
 **dind usage in 14 jobs:**

@@ -4,7 +4,7 @@ set -euo pipefail
 
 # Keep these immutable inputs synchronized with PINNED.md and the image
 # workflows dispatched by .github/workflows/ci.yml.
-readonly DHI_IMAGE='dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d' # trixie-debian13-dev
+readonly DHI_IMAGE='dhi.io/debian-base@sha256:3a0f849e7ecad5433a8a517e4606794dc65941b275177c7f44002c3fc322d7a8' # trixie-debian13-dev
 readonly DOCKER_VERSION='29.9.3'
 readonly BUILDX_VERSION='0.39.0'
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
