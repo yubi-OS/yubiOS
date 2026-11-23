@@ -13,7 +13,7 @@ die() {
 }
 
 usage() {
-    printf 'Usage: %s production|dev\n' "$0"
+    printf 'Usage: %s production|dev|assured\n' "$0"
 }
 
 cleanup() {
@@ -35,8 +35,9 @@ cleanup() {
 case "${1:-}" in
     production) bake_target=yubios-repro ;;
     dev) bake_target=yubios-dev-repro ;;
+    assured) bake_target=yubios-assured-repro ;;
     -h|--help) usage; exit 0 ;;
-    *) usage >&2; die 'select production or dev' ;;
+    *) usage >&2; die 'select production, dev, or assured' ;;
 esac
 
 command -v docker >/dev/null 2>&1 || die 'docker is required'

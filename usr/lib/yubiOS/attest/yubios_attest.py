@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: LGPL-2.1-or-later
 """
-yubios_attest.py - yubiOS Local & Mutual StrongBox Remote Attestation Library.
+yubios_attest.py - yubiOS Local, Mutual & Cloud-Quorum StrongBox Remote Attestation Library.
 
 Combines:
-1. Platform StrongBox: TPM 2.0 / ARM64 OP-TEE fTPM (/dev/tpmrm0) via tpm2-tools
+1. Platform StrongBox: TPM 2.0 / ARM64 OP-TEE fTPM / Cloud Shielded vTPM (/dev/tpmrm0) via tpm2-tools
    (EK/AK provisioning, MakeCredential/ActivateCredential residency proof,
    TPMS_ATTEST PCR quotes over sha256:0,1,2,4,7,11,14,15, TCG eventlog digest,
    and monotonic clock/NV counter anti-rollback).
@@ -14,6 +14,10 @@ Combines:
 3. GrapheneOS Auditor-style TOFU pairing with a Single-Use Pairing Code
    (120-bit Crockford Base32 token, 5-minute TTL, burned on first use, HKDF
    transcript MAC) and per-peer 32-byte challenge_index persistent key binding.
+4. Cloud Assured Node Triadic Quorum (node_role='cloud-vtpm', require_pair_quorum=True):
+   Enforces 2-of-2 Local StrongBox Pair quorum at the daemon (disabling single-peer
+   pairing/pinning) and requires an unexpired, single-use challenge issued for that
+   specific pair before recording any quorum verification.
 """
 
 import base64
@@ -21,6 +25,7 @@ import hashlib
 import hmac
 import json
 import os
+import platform
 import secrets
 import shutil
 import socket
@@ -38,6 +43,7 @@ TPM_GENERATED_VALUE = 0xFF544347  # 'TCG' magic in TPMS_ATTEST
 TPM_ST_ATTEST_QUOTE = 0x8018
 DEFAULT_PCR_LIST = [0, 1, 2, 4, 7, 11, 14, 15]
 PAIRING_TTL_SECONDS = 300
+QUORUM_CHALLENGE_TTL_SECONDS = 120
 CLOCK_SKEW_MS = 5 * 60 * 1000
 CROCKFORD_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 
@@ -384,10 +390,6 @@ class TPM2Engine:
         }
 
     def make_credential(self, peer_ek_pub_pem: str, peer_ak_name_hex: str) -> Tuple[str, str]:
-        """
-        Verifier-side MakeCredential: generates a 32-byte secret bound to the peer's
-        (ek_pub, ak_name) so only a TPM holding that EK private key and loaded AK can recover it.
-        """
         secret_bytes = secrets.token_bytes(32)
         if self.mode == "tpm2" and shutil.which("tpm2_makecredential"):
             with tempfile.TemporaryDirectory() as td:
@@ -423,10 +425,6 @@ class TPM2Engine:
             return secret_bytes.hex(), base64.b64encode(out_f.read_bytes()).decode("ascii")
 
     def activate_credential(self, cred_blob_b64: str) -> str:
-        """
-        Attester-side ActivateCredential: recovers the 32-byte secret inside the TPM
-        by proving AK is resident under this TPM's EK.
-        """
         blob = base64.b64decode(cred_blob_b64)
         if self.mode == "tpm2" and (self.keys_dir / "ek.ctx").exists():
             with tempfile.TemporaryDirectory() as td:
@@ -645,11 +643,6 @@ class YubiKeyStrongBox:
         return None
 
     def _export_hardware_cert_and_pubkey(self) -> bool:
-        """
-        Export the certificate from the physical YubiKey PIV slot (or read the
-        enrolled /var/lib/yubiOS/secureboot/db.crt when slot 9a is enrolled) and
-        extract its public key without ever creating a software private key.
-        """
         if not self.piv_cert.exists() and shutil.which("ykman"):
             for subcmd in (
                 ["ykman", "piv", "certificates", "export", self.piv_slot, str(self.piv_cert)],
@@ -675,13 +668,11 @@ class YubiKeyStrongBox:
 
     def _ensure_piv_material(self) -> None:
         if self.piv_mode == "pkcs11":
-            # Production hardware mode: never generate a software private key!
             if self.piv_priv.exists():
                 self.piv_priv.unlink(missing_ok=True)
             self._export_hardware_cert_and_pubkey()
             return
 
-        # Explicit test simulation mode (piv_mode == "sim") ONLY:
         if not self.piv_pub.exists() or not self.piv_priv.exists() or not self.piv_cert.exists():
             subprocess.run(
                 ["openssl", "ecparam", "-name", "prime256v1", "-genkey", "-noout", "-out", str(self.piv_priv)],
@@ -744,7 +735,6 @@ class YubiKeyStrongBox:
             sig_f = Path(td) / "payload.sig"
             in_f.write_bytes(payload_bytes)
 
-            # Path A: pkcs11-tool with ECDSA-SHA256
             if shutil.which("pkcs11-tool"):
                 cmd = [
                     "pkcs11-tool",
@@ -762,7 +752,6 @@ class YubiKeyStrongBox:
                 if res.returncode == 0 and sig_f.exists() and sig_f.stat().st_size > 0:
                     return sig_f.read_bytes()
 
-            # Path B: OpenSSL PKCS#11 engine/provider
             env = os.environ.copy()
             env["PKCS11_MODULE_PATH"] = pkcs11_mod
             for ossl_cmd in (
@@ -929,6 +918,8 @@ class AttestDaemonCore:
     - YubiKeyStrongBox (PIV slot 9a/9c via PKCS#11 + SSH_AUTH_SOCK)
     - Single-use pairing codes (/run/yubiOS-attest/pairings/)
     - Pinned peer profiles (/var/lib/yubiOS-attest/peers/)
+    - Cloud Assured Node 2-of-2 Local StrongBox Pair quorum enforcement &
+      single-use quorum challenges (/run/yubiOS-attest/challenges/qverify_*.json)
     """
 
     def __init__(
@@ -940,6 +931,8 @@ class AttestDaemonCore:
         piv_slot: str = "9a",
         piv_mode: Optional[str] = None,
         os_version: str = "45.20261114.0",
+        node_role: Optional[str] = None,
+        require_pair_quorum: Optional[bool] = None,
         sysroot: Optional[Path] = None,
     ):
         self.state_dir = Path(state_dir)
@@ -951,6 +944,20 @@ class AttestDaemonCore:
             d.mkdir(parents=True, exist_ok=True)
         self.host_id = host_id or socket.gethostname()
         self.os_version = os_version
+        self.node_role = node_role or os.environ.get("YUBIOS_NODE_ROLE", "strongbox")
+        env_quorum = os.environ.get("YUBIOS_ATTEST_REQUIRE_PAIR_QUORUM")
+        if require_pair_quorum is not None:
+            self.require_pair_quorum = bool(require_pair_quorum)
+        elif env_quorum is not None and env_quorum.strip() != "":
+            self.require_pair_quorum = env_quorum.strip().lower() in ("1", "true", "yes")
+        else:
+            self.require_pair_quorum = self.node_role == "cloud-vtpm"
+        raw_arch = os.environ.get("YUBIOS_ARCH") or platform.machine()
+        self.arch = (
+            "amd64"
+            if raw_arch in ("x86_64", "amd64")
+            else ("arm64" if raw_arch in ("aarch64", "arm64") else raw_arch)
+        )
         self.sysroot = Path(sysroot or os.environ.get("YUBIOS_ATTEST_SYSROOT", "/"))
         self.tpm = TPM2Engine(self.state_dir, mode=tpm_mode)
         self.yk = YubiKeyStrongBox(self.state_dir, piv_slot=piv_slot, piv_mode=piv_mode)
@@ -1016,14 +1023,8 @@ class AttestDaemonCore:
         return False
 
     def get_os_enforced_flags(self, auth_sock: Optional[str] = None) -> int:
-        """
-        Derive every reported OS enforcement bit strictly from observed runtime state
-        under `self.sysroot`. No flag is set unconditionally, and an absent CHIPSEC
-        status file never marks `OS_FLAG_CHIPSEC_PASSED`.
-        """
         flags = 0
 
-        # 1. OS_FLAG_MEASURED_OS: observed TCG binary eventlog or systemd-stub measured-os efivar
         eventlog = self.sysroot / "sys/kernel/security/tpm0/binary_bios_measurements"
         stub_pcr = self._read_efivar_byte("StubPcrKernelImage-")
         try:
@@ -1033,29 +1034,23 @@ class AttestDaemonCore:
         if has_eventlog or (stub_pcr is not None and stub_pcr != 0):
             flags |= OS_FLAG_MEASURED_OS
 
-        # 2. OS_FLAG_SECURE_BOOT_ENFORCED: observed SecureBoot==1 AND SetupMode==0
         sb_byte = self._read_efivar_byte("SecureBoot-")
         setup_byte = self._read_efivar_byte("SetupMode-")
         if sb_byte == 1 and setup_byte == 0:
             flags |= OS_FLAG_SECURE_BOOT_ENFORCED
 
-        # 3. OS_FLAG_DM_VERITY_ACTIVE: observed composefs= kernel arg AND mounted composefs/verity root
         if self._is_composefs_root_mounted():
             flags |= OS_FLAG_DM_VERITY_ACTIVE
 
-        # 4. OS_FLAG_YUBIKEY_PIV_PRESENT: observed PIV certificate/token availability
         if self.yk.is_piv_available():
             flags |= OS_FLAG_YUBIKEY_PIV_PRESENT
 
-        # 5. OS_FLAG_SSH_AGENT_SK_PRESENT: observed SSH key in SSH_AUTH_SOCK
         if self.yk.get_ssh_agent_pubkey(auth_sock):
             flags |= OS_FLAG_SSH_AGENT_SK_PRESENT
 
-        # 6. OS_FLAG_CHIPSEC_PASSED: observed chipsec status file with PASSED and no FAILED
         if self._is_chipsec_passed():
             flags |= OS_FLAG_CHIPSEC_PASSED
 
-        # 7. OS_FLAG_NO_VFIO_ENFORCED: observed proc/modules or sys/module tree with no /dev/vfio/vfio or vfio module loaded
         has_kernel_view = (self.sysroot / "proc/modules").is_file() or (self.sysroot / "sys/module").is_dir()
         vfio_dev = (self.sysroot / "dev/vfio/vfio").exists()
         vfio_mod = (self.sysroot / "sys/module/vfio").exists()
@@ -1072,6 +1067,9 @@ class AttestDaemonCore:
         return {
             "ok": True,
             "host_id": self.host_id,
+            "node_role": self.node_role,
+            "require_pair_quorum": self.require_pair_quorum,
+            "arch": self.arch,
             "protocol_version": PROTOCOL_VERSION,
             "os_version": self.os_version,
             "tcti_mode": pub["tcti_mode"],
@@ -1092,7 +1090,7 @@ class AttestDaemonCore:
 
     def pair_init(self, peer_id: str, ttl_sec: int = PAIRING_TTL_SECONDS) -> Dict[str, Any]:
         with self._lock:
-            raw_token = bytes.fromhex(self.tpm.get_random_hex(15))  # 120 bits -> 24 Crockford chars
+            raw_token = bytes.fromhex(self.tpm.get_random_hex(15))
             code = encode_crockford(raw_token)
             norm = normalize_pairing_code(code)
             code_id = hashlib.sha256(norm.encode("ascii")).hexdigest()[:16]
@@ -1164,6 +1162,8 @@ class AttestDaemonCore:
         return {
             "protocol_version": PROTOCOL_VERSION,
             "host_id": self.host_id,
+            "node_role": self.node_role,
+            "arch": self.arch,
             "os_version": self.os_version,
             "challenge_index": c_idx,
             "nonce": nonce,
@@ -1175,6 +1175,11 @@ class AttestDaemonCore:
         }
 
     def pair_begin_responder(self, code: str, initiator_hello: Dict[str, Any]) -> Dict[str, Any]:
+        if self.require_pair_quorum:
+            raise ValueError(
+                "Cloud Assured Node enforces 2-of-2 Local StrongBox Pair quorum "
+                "(YUBIOS_ATTEST_REQUIRE_PAIR_QUORUM=1); single-peer pairing is disabled"
+            )
         with self._lock:
             rec = self._consume_pairing_code(code)
             resp_hello = self.build_hello(challenge_index=rec["challenge_index_local"])
@@ -1368,6 +1373,10 @@ class AttestDaemonCore:
             raise ValueError(
                 f"OS version downgrade detected: {bundle['os_version']} < {pin['pinned_os_version']}"
             )
+        if require_piv and pin.get("pinned_piv_fingerprint_sha256"):
+            got_piv = bundle.get("piv_attestation", {}).get("piv_fingerprint_sha256", "")
+            if not hmac.compare_digest(got_piv, pin["pinned_piv_fingerprint_sha256"]):
+                raise ValueError("Pinned YubiKey PIV hardware strongbox key mismatch")
         if require_ssh_agent and pin.get("pinned_ssh_pubkey"):
             got_ssh = bundle.get("ssh_agent_attestation", {}).get("ssh_pubkey", "").strip()
             if got_ssh != pin["pinned_ssh_pubkey"].strip():
@@ -1399,6 +1408,11 @@ class AttestDaemonCore:
         bundle_from_a: Dict[str, Any],
         auth_sock: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if self.require_pair_quorum:
+            raise ValueError(
+                "Cloud Assured Node enforces 2-of-2 Local StrongBox Pair quorum "
+                "(YUBIOS_ATTEST_REQUIRE_PAIR_QUORUM=1); single-peer pairing is disabled"
+            )
         with self._lock:
             sfile = self.challenges_dir / f"pair_{session_id}.json"
             if not sfile.exists():
@@ -1463,3 +1477,331 @@ class AttestDaemonCore:
         if not pfile.exists():
             raise ValueError(f"Peer '{peer_id}' is not paired")
         return json.loads(pfile.read_text())
+
+    @staticmethod
+    def compute_quorum_mac(
+        code: str,
+        node_a_id: str,
+        node_b_id: str,
+        cloud_id: str,
+        c_idx_a: str,
+        c_idx_b: str,
+        c_idx_cloud: str,
+        ek_fp_a: str,
+        ek_fp_b: str,
+        ek_fp_cloud: str,
+    ) -> str:
+        norm = normalize_pairing_code(code).encode("ascii")
+        transcript = (
+            f"{node_a_id}|{node_b_id}|{cloud_id}|{c_idx_a}|{c_idx_b}|{c_idx_cloud}|{ek_fp_a}|{ek_fp_b}|{ek_fp_cloud}"
+        ).encode("utf-8")
+        key = hkdf_sha256(norm, b"yubios-cloud-quorum-salt-v1", b"yubios-cloud-quorum-mac-v1", 32)
+        return hmac.new(key, transcript, hashlib.sha256).hexdigest()
+
+    def pair_cloud_quorum_begin(
+        self,
+        code: str,
+        node_a_hello: Dict[str, Any],
+        node_b_hello: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        with self._lock:
+            rec = self._consume_pairing_code(code)
+            if node_a_hello["host_id"] == node_b_hello["host_id"]:
+                raise ValueError("Local StrongBox Pair must consist of two distinct host_ids")
+            if hmac.compare_digest(
+                node_a_hello["ek_fingerprint_sha256"], node_b_hello["ek_fingerprint_sha256"]
+            ):
+                raise ValueError("Local StrongBox Pair must have two distinct TPM Endorsement Keys")
+
+            cloud_hello = self.build_hello(challenge_index=rec["challenge_index_local"])
+            secret_for_a, cred_blob_for_a = self.tpm.make_credential(
+                node_a_hello["ek_pub_pem"], node_a_hello["ak_name_hex"]
+            )
+            secret_for_b, cred_blob_for_b = self.tpm.make_credential(
+                node_b_hello["ek_pub_pem"], node_b_hello["ak_name_hex"]
+            )
+            session_id = secrets.token_hex(16)
+            st = {
+                "session_id": session_id,
+                "code_norm": normalize_pairing_code(code),
+                "node_a_hello": node_a_hello,
+                "node_b_hello": node_b_hello,
+                "cloud_hello": cloud_hello,
+                "expected_secret_from_a": secret_for_a,
+                "expected_secret_from_b": secret_for_b,
+                "created_at": int(time.time()),
+            }
+            (self.challenges_dir / f"quorum_{session_id}.json").write_text(json.dumps(st, indent=2))
+            return {
+                "ok": True,
+                "session_id": session_id,
+                "cloud_hello": cloud_hello,
+                "cred_blob_for_a_b64": cred_blob_for_a,
+                "cred_blob_for_b_b64": cred_blob_for_b,
+            }
+
+    def pair_cloud_quorum_finalize(
+        self,
+        session_id: str,
+        recovered_secret_from_a_hex: str,
+        recovered_secret_from_b_hex: str,
+        cred_blob_for_cloud_b64: str,
+        quorum_mac_hex: str,
+        bundle_from_a: Dict[str, Any],
+        bundle_from_b: Dict[str, Any],
+        mutual_pair_binding_ab_hex: str,
+    ) -> Dict[str, Any]:
+        with self._lock:
+            sfile = self.challenges_dir / f"quorum_{session_id}.json"
+            if not sfile.exists():
+                raise ValueError("Unknown or expired cloud quorum pairing session_id")
+            st = json.loads(sfile.read_text())
+            sfile.unlink(missing_ok=True)
+
+            if not hmac.compare_digest(st["expected_secret_from_a"], recovered_secret_from_a_hex.lower()):
+                raise ValueError("Local Node A failed MakeCredential/ActivateCredential TPM residency challenge")
+            if not hmac.compare_digest(st["expected_secret_from_b"], recovered_secret_from_b_hex.lower()):
+                raise ValueError("Local Node B failed MakeCredential/ActivateCredential TPM residency challenge")
+
+            ha = st["node_a_hello"]
+            hb = st["node_b_hello"]
+            hc = st["cloud_hello"]
+            expected_mac = self.compute_quorum_mac(
+                st["code_norm"],
+                ha["host_id"],
+                hb["host_id"],
+                hc["host_id"],
+                ha["challenge_index"],
+                hb["challenge_index"],
+                hc["challenge_index"],
+                ha["ek_fingerprint_sha256"],
+                hb["ek_fingerprint_sha256"],
+                hc["ek_fingerprint_sha256"],
+            )
+            if not hmac.compare_digest(expected_mac, quorum_mac_hex.lower()):
+                raise ValueError("Cloud quorum transcript MAC verification failed")
+
+            piv_a = bundle_from_a.get("piv_attestation") or {}
+            piv_b = bundle_from_b.get("piv_attestation") or {}
+            if not piv_a.get("piv_fingerprint_sha256") or not piv_b.get("piv_fingerprint_sha256"):
+                raise ValueError("Both nodes in the Local StrongBox Pair must provide YubiKey PIV signatures")
+            if hmac.compare_digest(piv_a["piv_fingerprint_sha256"], piv_b["piv_fingerprint_sha256"]):
+                raise ValueError("Distinct hardware strongbox keys required across the 2-node Local Pair")
+
+            if not mutual_pair_binding_ab_hex or len(mutual_pair_binding_ab_hex) < 32:
+                raise ValueError("Missing mutual local pair binding proof between Node A and Node B")
+
+            recovered_secret_cloud = self.tpm.activate_credential(cred_blob_for_cloud_b64)
+            peer_binding = hashlib.sha256(
+                f"quorum-v1|{expected_mac}|{st['expected_secret_from_a']}|{st['expected_secret_from_b']}|{recovered_secret_cloud}|{mutual_pair_binding_ab_hex}".encode("utf-8")
+            ).hexdigest()
+
+            verify_a = self.verify_and_pin_bundle(
+                bundle=bundle_from_a,
+                expected_challenge_hex=hc["nonce"],
+                expected_challenge_index_hex=ha["challenge_index"],
+                expected_peer_binding_hex=peer_binding,
+                peer_id=ha["host_id"],
+                allow_tofu=True,
+                require_piv=True,
+                require_ssh_agent=bool(bundle_from_a.get("ssh_agent_attestation")),
+                local_challenge_index_for_peer=hc["challenge_index"],
+            )
+            verify_b = self.verify_and_pin_bundle(
+                bundle=bundle_from_b,
+                expected_challenge_hex=hc["nonce"],
+                expected_challenge_index_hex=hb["challenge_index"],
+                expected_peer_binding_hex=peer_binding,
+                peer_id=hb["host_id"],
+                allow_tofu=True,
+                require_piv=True,
+                require_ssh_agent=bool(bundle_from_b.get("ssh_agent_attestation")),
+                local_challenge_index_for_peer=hc["challenge_index"],
+            )
+
+            quorum_rec = {
+                "quorum_id": f"{ha['host_id']}+{hb['host_id']}",
+                "node_a_id": ha["host_id"],
+                "node_b_id": hb["host_id"],
+                "piv_fp_a": piv_a["piv_fingerprint_sha256"],
+                "piv_fp_b": piv_b["piv_fingerprint_sha256"],
+                "mutual_pair_binding_ab_hex": mutual_pair_binding_ab_hex,
+                "cloud_challenge_index": hc["challenge_index"],
+                "paired_at": int(time.time()),
+                "audit_count": 1,
+            }
+            (self.peers_dir / f"quorum_{ha['host_id']}__{hb['host_id']}.json").write_text(
+                json.dumps(quorum_rec, indent=2)
+            )
+
+            pair_challenge = hashlib.sha256(
+                f"{ha['nonce']}|{hb['nonce']}".encode("utf-8")
+            ).hexdigest()
+            cloud_bundle = self.create_attestation_bundle(
+                challenge_hex=pair_challenge,
+                challenge_index_hex=hc["challenge_index"],
+                peer_binding_hex=peer_binding,
+                include_piv=(self.node_role != "cloud-vtpm"),
+                include_ssh_agent=False,
+            )
+
+            return {
+                "ok": True,
+                "cloud_host_id": self.host_id,
+                "cloud_node_role": self.node_role,
+                "cloud_arch": self.arch,
+                "recovered_secret_from_cloud_hex": recovered_secret_cloud,
+                "peer_binding_hex": peer_binding,
+                "verified_node_a": verify_a,
+                "verified_node_b": verify_b,
+                "cloud_bundle": cloud_bundle,
+            }
+
+    def issue_cloud_quorum_challenge(
+        self,
+        node_a_id: str,
+        node_b_id: str,
+        ttl_sec: int = QUORUM_CHALLENGE_TTL_SECONDS,
+    ) -> Dict[str, Any]:
+        """
+        Issue and persist an unexpired, single-use challenge bound to the specific
+        2-node Local StrongBox Pair `(node_a_id, node_b_id)`.
+        """
+        with self._lock:
+            qfile = self.peers_dir / f"quorum_{node_a_id}__{node_b_id}.json"
+            if not qfile.exists():
+                raise ValueError(f"Local StrongBox Pair '{node_a_id}+{node_b_id}' is not paired with this Cloud Node")
+            qrec = json.loads(qfile.read_text())
+            pin_a = self.get_peer_pin(node_a_id)
+            pin_b = self.get_peer_pin(node_b_id)
+            challenge_id = secrets.token_hex(16)
+            cloud_nonce = self.tpm.get_random_hex(32)
+            now = int(time.time())
+            crec = {
+                "challenge_id": challenge_id,
+                "node_a_id": node_a_id,
+                "node_b_id": node_b_id,
+                "cloud_nonce": cloud_nonce,
+                "created_at": now,
+                "expires_at": now + ttl_sec,
+                "consumed": False,
+            }
+            cfile = self.challenges_dir / f"qverify_{challenge_id}.json"
+            cfile.write_text(json.dumps(crec, indent=2))
+            os.chmod(cfile, 0o600)
+            return {
+                "ok": True,
+                "challenge_id": challenge_id,
+                "cloud_host_id": self.host_id,
+                "cloud_node_role": self.node_role,
+                "cloud_arch": self.arch,
+                "cloud_nonce": cloud_nonce,
+                "expires_at": crec["expires_at"],
+                "cloud_challenge_index": qrec["cloud_challenge_index"],
+                "expected_c_idx_a": pin_a["remote_challenge_index"],
+                "expected_c_idx_b": pin_b["remote_challenge_index"],
+            }
+
+    def respond_cloud_quorum_challenge(
+        self,
+        challenge_id: str,
+        node_a_id: str,
+        node_b_id: str,
+        nonce_a: str,
+        nonce_b: str,
+        bundle_a: Dict[str, Any],
+        bundle_b: Dict[str, Any],
+        cloud_nonce: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Verify a 2-node Local StrongBox Pair quorum response against a stored,
+        unexpired, single-use challenge (`challenge_id`) issued for `(node_a_id, node_b_id)`.
+        """
+        with self._lock:
+            if not challenge_id or not isinstance(challenge_id, str):
+                raise ValueError("Missing required single-use quorum challenge_id")
+            safe_cid = "".join(ch for ch in challenge_id.strip().lower() if ch in "0123456789abcdef")
+            if not safe_cid or safe_cid != challenge_id.strip().lower():
+                raise ValueError("Invalid quorum challenge_id format")
+
+            cfile = self.challenges_dir / f"qverify_{safe_cid}.json"
+            if not cfile.exists():
+                raise ValueError("Unknown, expired, or already-consumed cloud quorum challenge_id")
+            crec = json.loads(cfile.read_text())
+            # Burn immediately before verification (strict single-attempt / single-use semantics)
+            cfile.unlink(missing_ok=True)
+            if crec.get("consumed"):
+                raise ValueError("Cloud quorum challenge_id was already consumed")
+
+            now = int(time.time())
+            if now > crec["expires_at"]:
+                raise ValueError("Cloud quorum challenge_id has expired")
+            if crec["node_a_id"] != node_a_id or crec["node_b_id"] != node_b_id:
+                raise ValueError(
+                    f"Cloud quorum challenge_id was issued for '{crec['node_a_id']}+{crec['node_b_id']}', "
+                    f"not '{node_a_id}+{node_b_id}'"
+                )
+            stored_cloud_nonce = crec["cloud_nonce"]
+            if cloud_nonce is not None and not hmac.compare_digest(stored_cloud_nonce, cloud_nonce.lower()):
+                raise ValueError("Caller cloud_nonce does not match stored single-use quorum challenge")
+
+            qfile = self.peers_dir / f"quorum_{node_a_id}__{node_b_id}.json"
+            if not qfile.exists():
+                raise ValueError(f"Local StrongBox Pair '{node_a_id}+{node_b_id}' is not paired with this Cloud Node")
+            qrec = json.loads(qfile.read_text())
+            pin_a = self.get_peer_pin(node_a_id)
+            pin_b = self.get_peer_pin(node_b_id)
+
+            piv_a = (bundle_a.get("piv_attestation") or {}).get("piv_fingerprint_sha256", "")
+            piv_b = (bundle_b.get("piv_attestation") or {}).get("piv_fingerprint_sha256", "")
+            if not hmac.compare_digest(piv_a, qrec["piv_fp_a"]) or not hmac.compare_digest(piv_b, qrec["piv_fp_b"]):
+                raise ValueError("Local StrongBox Pair YubiKey PIV fingerprints do not match pinned quorum record")
+
+            peer_binding = hashlib.sha256(
+                f"cloud-quorum-verify-v1|{nonce_a}|{nonce_b}|{stored_cloud_nonce}|{pin_a['remote_challenge_index']}|{pin_b['remote_challenge_index']}|{qrec['cloud_challenge_index']}".encode("utf-8")
+            ).hexdigest()
+
+            ver_a = self.verify_and_pin_bundle(
+                bundle=bundle_a,
+                expected_challenge_hex=stored_cloud_nonce,
+                expected_challenge_index_hex=pin_a["remote_challenge_index"],
+                expected_peer_binding_hex=peer_binding,
+                peer_id=node_a_id,
+                allow_tofu=False,
+                require_piv=True,
+                require_ssh_agent=bool(bundle_a.get("ssh_agent_attestation")),
+            )
+            ver_b = self.verify_and_pin_bundle(
+                bundle=bundle_b,
+                expected_challenge_hex=stored_cloud_nonce,
+                expected_challenge_index_hex=pin_b["remote_challenge_index"],
+                expected_peer_binding_hex=peer_binding,
+                peer_id=node_b_id,
+                allow_tofu=False,
+                require_piv=True,
+                require_ssh_agent=bool(bundle_b.get("ssh_agent_attestation")),
+            )
+
+            qrec["audit_count"] = qrec.get("audit_count", 1) + 1
+            qfile.write_text(json.dumps(qrec, indent=2))
+
+            pair_challenge = hashlib.sha256(f"{nonce_a}|{nonce_b}".encode("utf-8")).hexdigest()
+            cloud_bundle = self.create_attestation_bundle(
+                challenge_hex=pair_challenge,
+                challenge_index_hex=qrec["cloud_challenge_index"],
+                peer_binding_hex=peer_binding,
+                include_piv=(self.node_role != "cloud-vtpm"),
+                include_ssh_agent=False,
+            )
+            return {
+                "ok": True,
+                "challenge_id": safe_cid,
+                "cloud_host_id": self.host_id,
+                "cloud_node_role": self.node_role,
+                "cloud_arch": self.arch,
+                "peer_binding_hex": peer_binding,
+                "verified_node_a": ver_a,
+                "verified_node_b": ver_b,
+                "quorum_audit_count": qrec["audit_count"],
+                "cloud_bundle": cloud_bundle,
+            }

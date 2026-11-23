@@ -3,7 +3,8 @@
 """
 End-to-end verification suite for yubiOS-attest (library, systemd/D-Bus daemon,
 CLI client, single-use pairing code, hardware PKCS#11 vs test sim PIV policy,
-observed runtime enforcement flags, SSH-agent StrongBox signing, and anti-rollback).
+observed runtime enforcement flags, Cloud Assured Node 2-node quorum enforcement,
+and single-use quorum challenge anti-replay).
 """
 
 import json
@@ -40,7 +41,6 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
         )
         cls.env["YUBIOS_ATTEST_TEST_SSH_KEY"] = str(cls.ssh_key)
 
-        # Start an ephemeral ssh-agent when Unix socket creation is permitted in this environment
         try:
             agent_sock = cls.tmp_root / "ssh_agent.sock"
             agent_res = subprocess.run(
@@ -56,7 +56,6 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
         except Exception:
             cls.env.pop("SSH_AUTH_SOCK", None)
 
-        # Build a synthetic observed runtime sysroot for the test daemons
         cls.sysroot = cls.tmp_root / "sysroot"
         (cls.sysroot / "sys/kernel/security/tpm0").mkdir(parents=True, exist_ok=True)
         (cls.sysroot / "sys/kernel/security/tpm0/binary_bios_measurements").write_bytes(b"\x00\x01\x02\x03TCG_EVENTLOG")
@@ -75,13 +74,11 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
         (cls.sysroot / "run/yubiOS/chipsec.status").write_text("RESULT=PASSED\n")
         cls.env["YUBIOS_ATTEST_SYSROOT"] = str(cls.sysroot)
 
-        # Create a notify socket to test systemd Type=notify READY=1 signaling
         cls.notify_sock_path = cls.tmp_root / "sd_notify.sock"
         cls.notify_sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
         cls.notify_sock.bind(str(cls.notify_sock_path))
         cls.notify_sock.settimeout(5.0)
 
-        # Launch two yubios-attestd instances: host-alpha and host-beta
         cls.alpha_state = cls.tmp_root / "alpha_state"
         cls.alpha_run = cls.tmp_root / "alpha_run"
         cls.alpha_sock = cls.alpha_run / "attest.sock"
@@ -90,8 +87,17 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
         cls.beta_run = cls.tmp_root / "beta_run"
         cls.beta_sock = cls.beta_run / "attest.sock"
 
+        cls.cloud_state = cls.tmp_root / "cloud_state"
+        cls.cloud_run = cls.tmp_root / "cloud_run"
+        cls.cloud_sock = cls.cloud_run / "attest.sock"
+
         env_alpha = cls.env.copy()
         env_alpha["NOTIFY_SOCKET"] = str(cls.notify_sock_path)
+
+        env_cloud = cls.env.copy()
+        env_cloud["YUBIOS_NODE_ROLE"] = "cloud-vtpm"
+        env_cloud["YUBIOS_ATTEST_REQUIRE_PAIR_QUORUM"] = "1"
+        env_cloud["YUBIOS_ARCH"] = "arm64"
 
         cls.proc_alpha = subprocess.Popen(
             [
@@ -119,11 +125,26 @@ class TestYubiOSAttestEndToEnd(unittest.TestCase):
             ],
             env=cls.env,
         )
+        cls.proc_cloud = subprocess.Popen(
+            [
+                sys.executable, str(DAEMON_BIN),
+                "--state-dir", str(cls.cloud_state),
+                "--run-dir", str(cls.cloud_run),
+                "--host-id", "yubios-cloud-gcp-c4a-01",
+                "--node-role", "cloud-vtpm",
+                "--require-pair-quorum",
+                "--tpm-mode", "sim",
+                "--piv-mode", "sim",
+                "--sysroot", str(cls.sysroot),
+                "--os-version", "45.20261114.0",
+            ],
+            env=env_cloud,
+        )
 
         ready_msg = cls.notify_sock.recv(1024).decode("utf-8")
         assert "READY=1" in ready_msg, f"Expected READY=1 from sd_notify, got {ready_msg}"
 
-        for sock in (cls.alpha_sock, cls.beta_sock):
+        for sock in (cls.alpha_sock, cls.beta_sock, cls.cloud_sock):
             for _ in range(50):
                 if sock.exists():
                     break
@@ -145,7 +166,11 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
 
     @classmethod
     def tearDownClass(cls):
-        for p in (getattr(cls, "proc_alpha", None), getattr(cls, "proc_beta", None)):
+        for p in (
+            getattr(cls, "proc_alpha", None),
+            getattr(cls, "proc_beta", None),
+            getattr(cls, "proc_cloud", None),
+        ):
             if p:
                 p.terminate()
                 try:
@@ -169,12 +194,15 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
             raise RuntimeError(f"CLI {args} failed ({res.returncode}): {res.stderr}\n{res.stdout}")
         return json.loads(res.stdout)
 
-    def test_01_dbus_introspect_and_status(self):
-        req = {"jsonrpc": "2.0", "id": 1, "method": "org.freedesktop.DBus.Introspectable.Introspect", "params": {}}
+    def _rpc_raw(self, sock: Path, method: str, params: dict) -> dict:
+        req = {"jsonrpc": "2.0", "id": 1, "method": method, "params": params}
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
-            s.connect(str(self.alpha_sock))
+            s.connect(str(sock))
             s.sendall((json.dumps(req) + "\n").encode("utf-8"))
-            resp = json.loads(s.recv(65536).decode("utf-8"))["result"]
+            return json.loads(s.recv(65536).decode("utf-8"))
+
+    def test_01_dbus_introspect_and_status(self):
+        resp = self._rpc_raw(self.alpha_sock, "org.freedesktop.DBus.Introspectable.Introspect", {})["result"]
         self.assertTrue(resp["ok"])
         self.assertIn("org.yubios.Attest1", resp["xml"])
         self.assertEqual(resp["peer_cred"]["uid"], os.getuid())
@@ -312,13 +340,11 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
     def test_06_production_piv_rejects_software_keys_and_sim_bundles(self):
         prod_dir = self.tmp_root / "prod_piv_state"
         yk_prod = ya.YubiKeyStrongBox(prod_dir, piv_slot="9a", piv_mode="pkcs11")
-        # Production mode must NEVER generate a local software EC private key
         self.assertFalse(yk_prod.piv_priv.exists())
         with self.assertRaises(RuntimeError) as ctx:
             yk_prod.sign_piv(b"test-payload")
         self.assertIn("pkcs11", str(ctx.exception).lower())
 
-        # Simulated PIV block must be rejected when allow_sim_piv=False (production verifier)
         sim_dir = self.tmp_root / "sim_piv_state"
         yk_sim = ya.YubiKeyStrongBox(sim_dir, piv_slot="9a", piv_mode="sim")
         sim_block = yk_sim.sign_piv(b"test-payload")
@@ -339,7 +365,6 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
             piv_mode="pkcs11",
             sysroot=empty_sysroot,
         )
-        # On an empty sysroot (including absent chipsec.status), NO platform enforcement flag may be set
         flags_empty = core.get_os_enforced_flags(auth_sock="")
         self.assertEqual(flags_empty & ya.OS_FLAG_MEASURED_OS, 0)
         self.assertEqual(flags_empty & ya.OS_FLAG_SECURE_BOOT_ENFORCED, 0)
@@ -347,32 +372,165 @@ exec "{sys.executable}" "{CLI_BIN}" --socket "{cls.beta_sock}" stdio-peer
         self.assertEqual(flags_empty & ya.OS_FLAG_CHIPSEC_PASSED, 0)
         self.assertEqual(flags_empty & ya.OS_FLAG_NO_VFIO_ENFORCED, 0)
 
-        # Populate SecureBoot=1 without SetupMode -> must STILL be 0 (SetupMode unreadable)
         efivars = empty_sysroot / "sys/firmware/efi/efivars"
         efivars.mkdir(parents=True, exist_ok=True)
         (efivars / "SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c").write_bytes(b"\x06\x00\x00\x00\x01")
         self.assertEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_SECURE_BOOT_ENFORCED, 0)
-
-        # Populate SetupMode=0 -> now SECURE_BOOT_ENFORCED becomes 1
         (efivars / "SetupMode-8be4df61-93ca-11d2-aa0d-00e098032b8c").write_bytes(b"\x06\x00\x00\x00\x00")
         self.assertNotEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_SECURE_BOOT_ENFORCED, 0)
 
-        # Populate composefs= in /proc/cmdline WITHOUT a mounted composefs root in /proc/mounts -> must be 0
         (empty_sysroot / "proc").mkdir(parents=True, exist_ok=True)
         (empty_sysroot / "proc/cmdline").write_text("composefs=deadbeef1234\n")
         (empty_sysroot / "proc/mounts").write_text("/dev/sda2 / ext4 rw,relatime 0 0\n")
         self.assertEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_DM_VERITY_ACTIVE, 0)
-
-        # Mount composefs on / -> now DM_VERITY_ACTIVE becomes 1
         (empty_sysroot / "proc/mounts").write_text("composefs / composefs ro,relatime,verity 0 0\n")
         self.assertNotEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_DM_VERITY_ACTIVE, 0)
 
-        # Populate chipsec.status with FAILED -> must be 0; with PASSED -> becomes 1
         (empty_sysroot / "run/yubiOS").mkdir(parents=True, exist_ok=True)
         (empty_sysroot / "run/yubiOS/chipsec.status").write_text("RESULT=FAILED\n")
         self.assertEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_CHIPSEC_PASSED, 0)
         (empty_sysroot / "run/yubiOS/chipsec.status").write_text("RESULT=PASSED\n")
         self.assertNotEqual(core.get_os_enforced_flags(auth_sock="") & ya.OS_FLAG_CHIPSEC_PASSED, 0)
+
+    def test_08_cloud_vtpm_to_local_strongbox_pair_quorum_attestation(self):
+        cloud_st = self._run_cli(self.cloud_sock, ["status"])
+        self.assertEqual(cloud_st["host_id"], "yubios-cloud-gcp-c4a-01")
+        self.assertEqual(cloud_st["node_role"], "cloud-vtpm")
+        self.assertTrue(cloud_st["require_pair_quorum"])
+        self.assertEqual(cloud_st["arch"], "arm64")
+
+        # 1. Verify single-peer pairing (pair-ssh / PairBeginResponder) is rejected on the Cloud Assured Node
+        c_single = self._run_cli(self.cloud_sock, ["pair-init", "--peer", "yubios-host-alpha"])
+        with self.assertRaises(RuntimeError) as sctx:
+            self._run_cli(
+                self.alpha_sock,
+                [
+                    "pair-ssh",
+                    "--peer", "yubios-cloud-gcp-c4a-01",
+                    "--code", c_single["pairing_code"],
+                    "--peer-sock", str(self.cloud_sock),
+                ],
+            )
+        self.assertIn("2-of-2 Local StrongBox Pair quorum", str(sctx.exception))
+
+        # 2. Cloud Node issues a single-use pairing code for the 2-node Local StrongBox Pair (alpha + beta)
+        c_init = self._run_cli(self.cloud_sock, ["pair-init", "--peer", "yubios-host-alpha+yubios-host-beta"])
+        code = c_init["pairing_code"]
+
+        pair_res = self._run_cli(
+            self.alpha_sock,
+            [
+                "pair-cloud-quorum",
+                "--code", code,
+                "--cloud-peer", "yubios-cloud-gcp-c4a-01",
+                "--partner-sock", str(self.beta_sock),
+                "--cloud-sock", str(self.cloud_sock),
+            ],
+        )
+        self.assertEqual(pair_res["cloud_quorum_pairing"], "ESTABLISHED")
+        self.assertEqual(pair_res["cloud_node_role"], "cloud-vtpm")
+        self.assertTrue(pair_res["cloud_verified_node_a"]["piv_verified"])
+        self.assertTrue(pair_res["cloud_verified_node_b"]["piv_verified"])
+        self.assertEqual(pair_res["node_a_verified_cloud_vtpm"]["status"], "PAIRED_AND_PINNED")
+        self.assertEqual(pair_res["node_b_verified_cloud_vtpm"]["status"], "PAIRED_AND_PINNED")
+
+        # 3. Run continuous triadic verification (verify-cloud-quorum): Local StrongBox Pair <-> Cloud vTPM
+        ver_res = self._run_cli(
+            self.alpha_sock,
+            [
+                "verify-cloud-quorum",
+                "--cloud-peer", "yubios-cloud-gcp-c4a-01",
+                "--partner-sock", str(self.beta_sock),
+                "--cloud-sock", str(self.cloud_sock),
+            ],
+        )
+        self.assertEqual(ver_res["cloud_quorum_attestation"], "VERIFIED")
+        self.assertTrue(len(ver_res["challenge_id"]) == 32)
+        self.assertEqual(ver_res["quorum_audit_count"], 2)
+        self.assertEqual(ver_res["node_a_verified_cloud_vtpm"]["status"], "VERIFIED_AGAINST_PIN")
+        self.assertEqual(ver_res["node_b_verified_cloud_vtpm"]["status"], "VERIFIED_AGAINST_PIN")
+
+        # 4. Verify single-use quorum challenge enforcement:
+        #    (a) Forged/unissued challenge_id must fail closed
+        forged_resp = self._rpc_raw(
+            self.cloud_sock,
+            "org.yubios.Attest1.RespondCloudQuorumChallenge",
+            {
+                "challenge_id": "00" * 16,
+                "node_a_id": "yubios-host-alpha",
+                "node_b_id": "yubios-host-beta",
+                "nonce_a": "aa" * 32,
+                "nonce_b": "bb" * 32,
+                "cloud_nonce": "cc" * 32,
+                "bundle_a": {},
+                "bundle_b": {},
+            },
+        )
+        self.assertIn("error", forged_resp)
+        self.assertIn("Unknown, expired, or already-consumed", forged_resp["error"]["message"])
+
+        #    (b) Issued challenge_id is burned on first use; a second attempt or wrong pair fails closed
+        issued = self._rpc_raw(
+            self.cloud_sock,
+            "org.yubios.Attest1.IssueCloudQuorumChallenge",
+            {"node_a_id": "yubios-host-alpha", "node_b_id": "yubios-host-beta"},
+        )["result"]
+        wrong_pair_resp = self._rpc_raw(
+            self.cloud_sock,
+            "org.yubios.Attest1.RespondCloudQuorumChallenge",
+            {
+                "challenge_id": issued["challenge_id"],
+                "node_a_id": "yubios-host-beta",
+                "node_b_id": "yubios-host-alpha",
+                "nonce_a": "aa" * 32,
+                "nonce_b": "bb" * 32,
+                "cloud_nonce": issued["cloud_nonce"],
+                "bundle_a": {},
+                "bundle_b": {},
+            },
+        )
+        self.assertIn("error", wrong_pair_resp)
+        self.assertIn("was issued for", wrong_pair_resp["error"]["message"])
+
+        #    (c) Replaying the same challenge_id after that failed attempt also fails closed (single-use burn)
+        replay_resp = self._rpc_raw(
+            self.cloud_sock,
+            "org.yubios.Attest1.RespondCloudQuorumChallenge",
+            {
+                "challenge_id": issued["challenge_id"],
+                "node_a_id": "yubios-host-alpha",
+                "node_b_id": "yubios-host-beta",
+                "nonce_a": "aa" * 32,
+                "nonce_b": "bb" * 32,
+                "cloud_nonce": issued["cloud_nonce"],
+                "bundle_a": {},
+                "bundle_b": {},
+            },
+        )
+        self.assertIn("error", replay_resp)
+        self.assertIn("Unknown, expired, or already-consumed", replay_resp["error"]["message"])
+
+        # 5. Negative test: Tampering with the Cloud Node's vTPM PCR 11 (UKI digest) MUST fail closed on the Local Pair
+        cloud_pcr_file = self.cloud_state / "tpm_pcr_state.json"
+        cloud_pcrs = json.loads(cloud_pcr_file.read_text())
+        orig_pcr11 = cloud_pcrs["11"]
+        cloud_pcrs["11"] = "cafebabe" * 8
+        cloud_pcr_file.write_text(json.dumps(cloud_pcrs, indent=2))
+        try:
+            with self.assertRaises(RuntimeError) as ctx:
+                self._run_cli(
+                    self.alpha_sock,
+                    [
+                        "verify-cloud-quorum",
+                        "--cloud-peer", "yubios-cloud-gcp-c4a-01",
+                        "--partner-sock", str(self.beta_sock),
+                        "--cloud-sock", str(self.cloud_sock),
+                    ],
+                )
+            self.assertIn("Measured-boot PCR 11 drift detected", str(ctx.exception))
+        finally:
+            cloud_pcrs["11"] = orig_pcr11
+            cloud_pcr_file.write_text(json.dumps(cloud_pcrs, indent=2))
 
 
 if __name__ == "__main__":

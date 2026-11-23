@@ -28,6 +28,7 @@ using a rootless Docker-in-Docker daemon and the hardened Buildx Bake builder.
   images                       Build production and TEST-only dev images.
   production                   Build the production image and smoke test.
   dev                          Build the TEST-only swu2f image and smoke test.
+  assured                      Build the Cloud Assured Node image and smoke test.
   installer                    Build and package the native mkosi installer.
   firmware                     Build, verify, and package all firmware boards.
   firmware-qemu-arm64          Build only the QEMU ARM64 firmware path.
@@ -35,6 +36,7 @@ using a rootless Docker-in-Docker daemon and the hardened Buildx Bake builder.
   firmware-rock5b-rk3588       Build only the ROCK 5B/RK3588 firmware path.
   repro-production             Prove two clean production OCI layouts match.
   repro-dev                    Prove two clean TEST-only dev OCI layouts match.
+  repro-assured                Prove two clean Cloud Assured Node OCI layouts match.
 
 Set LOCAL_TAG to change the local tag prefix (default: local). For example,
 LOCAL_TAG=review scripts/build-local-images.sh production creates
@@ -51,7 +53,7 @@ die() {
 
 resolve_mode() {
     case "${1:-all}" in
-        all|images|production|dev|installer|firmware|firmware-qemu-arm64|firmware-rockpro64-rk3399|firmware-rock5b-rk3588|repro-production|repro-dev)
+        all|images|production|dev|assured|installer|firmware|firmware-qemu-arm64|firmware-rockpro64-rk3399|firmware-rock5b-rk3588|repro-production|repro-dev|repro-assured)
             MODE=${1:-all}
             ;;
         -h|--help)
@@ -85,9 +87,10 @@ build_local_core_images() {
 
     case "$selection" in
         images)
-            bake_targets=(yubios-ci yubios-dev-ci)
+            bake_targets=(yubios-ci yubios-dev-ci yubios-assured-ci)
             append_image_tag "yubios:${LOCAL_TAG}"
             append_image_tag "yubios:${LOCAL_TAG}-dev"
+            append_image_tag "yubios:${LOCAL_TAG}-assured"
             ;;
         production)
             bake_targets=(yubios-ci)
@@ -96,6 +99,10 @@ build_local_core_images() {
         dev)
             bake_targets=(yubios-dev-ci)
             append_image_tag "yubios:${LOCAL_TAG}-dev"
+            ;;
+        assured)
+            bake_targets=(yubios-assured-ci)
+            append_image_tag "yubios:${LOCAL_TAG}-assured"
             ;;
         *)
             die "unknown core image selection: $selection"
@@ -118,7 +125,7 @@ run_selected_builds() {
             build_local_core_images images
             build_local_installer
             ;;
-        images|production|dev)
+        images|production|dev|assured)
             build_local_core_images "$1"
             ;;
         installer)
@@ -143,6 +150,10 @@ run_selected_builds() {
         repro-dev)
             REPRO_REPORT="/output/reproducibility-dev-${ARCH}.json" \
                 /workspace/scripts/verify-reproducible-images.sh dev
+            ;;
+        repro-assured)
+            REPRO_REPORT="/output/reproducibility-assured-${ARCH}.json" \
+                /workspace/scripts/verify-reproducible-images.sh assured
             ;;
     esac
 }
@@ -294,7 +305,7 @@ run_inside_dhi() {
     ARTIFACT_REPO=
     run_selected_builds "$mode"
 
-    if [[ "$mode" == repro-production || "$mode" == repro-dev ]]; then
+    if [[ "$mode" == repro-production || "$mode" == repro-dev || "$mode" == repro-assured ]]; then
         compgen -G '/output/reproducibility-*.json' >/dev/null || \
             die 'the reproducibility proof produced no evidence report'
         return
@@ -363,7 +374,7 @@ run_on_host() {
         /bin/bash /workspace/scripts/build-local-images.sh "$mode")
     docker "${docker_args[@]}"
 
-    if [[ "$mode" == repro-production || "$mode" == repro-dev ]]; then
+    if [[ "$mode" == repro-production || "$mode" == repro-dev || "$mode" == repro-assured ]]; then
         mkdir -p "$repo_root/repro-evidence"
         cp -- "$output_dir"/reproducibility-*.json "$repo_root/repro-evidence/"
         printf '\nReproducibility evidence:\n'

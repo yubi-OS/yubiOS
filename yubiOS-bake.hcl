@@ -325,6 +325,57 @@ target "yubios-dev-repro" {
   tags        = []
 }
 
+target "yubios-assured" {
+  inherits    = ["_policy", "_source-metadata", "_reproducible", "_image-export"]
+  description = "Build the multi-arch (amd64 + arm64) Cloud Assured Node image (vTPM + Local StrongBox Pair quorum)."
+  context     = "."
+  contexts = {
+    yubios-base = "target:_yubios-base"
+  }
+  dockerfile = "Containerfile.assured"
+  platforms  = [PLATFORM]
+  tags = PUSH ? [
+    ref("assured-${GIT_SHA}-${ARCH}"),
+  ] : concat(
+    ["yubios:assured-${ARCH}"],
+    LOCAL_TAG != "" ? ["yubios:${LOCAL_TAG}-assured"] : [],
+  )
+}
+
+target "yubios-assured-smoke" {
+  inherits    = ["_policy", "_reproducible"]
+  description = "Verify Cloud Assured Node image carries yubiOS-attestd, cloud-vtpm role, and zero dev/passless bypasses."
+  context     = "."
+  contexts = {
+    yubios-assured-base = "target:yubios-assured"
+  }
+  dockerfile-inline = <<-DOCKERFILE
+    FROM yubios-assured-base
+    RUN test -x /usr/bin/yubiOS-attest && \
+        test -x /usr/lib/yubiOS/attest/yubios-attestd && \
+        test -x /usr/lib/yubiOS/attest/yubios-attest-cli && \
+        test -f /usr/lib/yubiOS/assured-node-cloud.env && \
+        grep -q 'YUBIOS_NODE_ROLE=cloud-vtpm' /usr/lib/yubiOS/assured-node-cloud.env && \
+        ! command -v passless && \
+        ! test -e /usr/lib/systemd/system/serial-getty@.service.d/10-yubiOS-test-autologin.conf && \
+        python3 /usr/lib/yubiOS/attest/yubios-attest-cli --help >/dev/null
+  DOCKERFILE
+  platforms = [PLATFORM]
+  output    = [{ type = "cacheonly" }]
+}
+
+group "yubios-assured-ci" {
+  description = "Build and smoke-test the multi-arch Cloud Assured Node image."
+  targets     = ["yubios-assured", "yubios-assured-smoke"]
+}
+
+target "yubios-assured-repro" {
+  inherits    = ["yubios-assured", "_repro-export"]
+  description = "Export Cloud Assured Node yubiOS image as a canonical OCI layout for two-build comparison."
+  tags        = []
+}
+
+
 target "firmware" {
   inherits    = ["_policy", "_source-metadata", "_reproducible", "_image-export"]
   description = "Package one prepared ARM64 board firmware payload as an OCI image."

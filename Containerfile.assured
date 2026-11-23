@@ -1,0 +1,91 @@
+# yubiOS ASSURED CLOUD NODE image — 3rd main Buildx Bake path alongside
+# production (Containerfile -> :latest) and dev/test (Containerfile.dev -> :dev).
+# Published as 0mniteck/yubios:assured / :assured-<sha> across both
+# linux/amd64 (GCP N2D/C3/C4 AMD64 Shielded vTPM, AWS NitroTPM, Azure Trusted Launch)
+# and linux/arm64 (GCP C4A Axion / T2A Ampere Arm64 Shielded vTPM, AWS Graviton NitroTPM).
+#
+# Purpose:
+#   Run a headless, immutable composefs (verity=require) yubiOS cloud node whose
+#   hardware root of trust is the cloud hypervisor's Shielded vTPM (/dev/tpm0 +
+#   /dev/tpmrm0 via tpm_crb / tpm_tis + UEFI TCG2 event log), and bridge it via
+#   yubiOS-attestd (--node-role cloud-vtpm) to an Assured Local Node Pair running
+#   together with physical U2F/HSM hardware strongboxes (PR #330 triadic quorum).
+#
+# Security invariants:
+#   - NEVER ships passless (swu2f) or console root autologin (strictly isolated from :dev).
+#   - Boots headless into multi-user.target (masks gdm.service).
+#   - Enables yubiOS-attestd.socket and yubiOS-attestd.service in cloud-vtpm mode,
+#     requiring a 2-of-2 mutually paired Local Hardware Strongbox Pair quorum
+#     (two distinct physical YubiKey PIV slot 9a + TPM quotes) to pair and authorize.
+
+ARG BASE_IMAGE=yubios-base
+FROM ${BASE_IMAGE} AS rootfs_prep
+
+ARG SOURCE_DATE_EPOCH
+
+# Install yubiOS-attestd, CLI, D-Bus policy, sysusers, tmpfiles, and systemd units
+COPY usr/bin/yubiOS-attest /usr/bin/yubiOS-attest
+COPY usr/lib/yubiOS/attest/ /usr/lib/yubiOS/attest/
+COPY usr/lib/systemd/system/yubiOS-attestd.service /usr/lib/systemd/system/yubiOS-attestd.service
+COPY usr/lib/systemd/system/yubiOS-attestd.socket /usr/lib/systemd/system/yubiOS-attestd.socket
+COPY usr/lib/sysusers.d/yubiOS-attest.conf /usr/lib/sysusers.d/yubiOS-attest.conf
+COPY usr/lib/tmpfiles.d/yubiOS-attest.conf /usr/lib/tmpfiles.d/yubiOS-attest.conf
+COPY usr/share/dbus-1/system.d/org.yubios.Attest1.conf /usr/share/dbus-1/system.d/org.yubios.Attest1.conf
+COPY usr/lib/dracut.conf.d/54-yubiOS-assured-cloud-tpm.conf /usr/lib/dracut.conf.d/54-yubiOS-assured-cloud-tpm.conf
+COPY usr/lib/modules-load.d/yubiOS-assured-cloud-tpm.conf /usr/lib/modules-load.d/yubiOS-assured-cloud-tpm.conf
+
+RUN chmod 0755 /usr/bin/yubiOS-attest                /usr/lib/yubiOS/attest/yubios-attest-cli                /usr/lib/yubiOS/attest/yubios-attestd                /usr/lib/yubiOS/attest/yubios_attest.py
+
+# Configure composefs root verification & cloud-vtpm role for yubiOS-attestd
+RUN install -Dm644 /dev/stdin /usr/lib/ostree/prepare-root.conf <<'EOF'
+[composefs]
+enabled = true
+EOF
+
+RUN install -Dm644 /dev/stdin /usr/lib/yubiOS/assured-node-cloud.env <<'EOF'
+YUBIOS_NODE_ROLE=cloud-vtpm
+YUBIOS_ATTEST_REQUIRE_PAIR_QUORUM=1
+YUBIOS_CLOUD_ARCHITECTURES=amd64,arm64
+EOF
+
+RUN install -Dm644 /dev/stdin /usr/lib/systemd/system/yubiOS-attestd.service.d/10-yubiOS-assured-cloud.conf <<'EOF'
+[Unit]
+# Cloud Shielded VMs (GCP C4A/T2A arm64 & N2D/C3 amd64) expose vTPM (/dev/tpmrm0)
+# even before UKI PCR 11 measured-os conditional flags are populated by local enrollment.
+ConditionSecurity=
+
+[Service]
+EnvironmentFile=-/usr/lib/yubiOS/assured-node-cloud.env
+ExecStart=
+ExecStart=/usr/bin/python3 /usr/lib/yubiOS/attest/yubios-attestd --state-dir /var/lib/yubiOS-attest --run-dir /run/yubiOS-attest --node-role cloud-vtpm
+EOF
+
+RUN install -Dm644 /dev/stdin /usr/lib/systemd/system/yubiOS-attestd.socket.d/10-yubiOS-assured-cloud.conf <<'EOF'
+[Unit]
+ConditionSecurity=
+EOF
+
+# Headless multi-user target for Cloud Assured Nodes (mask gdm/geoclue, enable attestd + sshd + no-vfio)
+RUN ln -sf multi-user.target /usr/lib/systemd/system/default.target &&     ln -sf /dev/null /etc/systemd/system/gdm.service &&     ln -sf /dev/null /etc/systemd/system/geoclue.service &&     ln -sf /dev/null /usr/lib/systemd/system/geoclue.service &&     ln -sf /dev/null /etc/systemd/system/bootloader-update.service &&     rm -f /usr/share/dbus-1/system-services/org.freedesktop.GeoClue2.service           /usr/lib/systemd/system/multi-user.target.wants/bootloader-update.service           /etc/systemd/system/multi-user.target.wants/bootloader-update.service &&     install -d /usr/lib/systemd/system/multi-user.target.wants /usr/lib/systemd/system/sockets.target.wants &&     ln -sf ../yubiOS-no-vfio-purge.service       /usr/lib/systemd/system/multi-user.target.wants/yubiOS-no-vfio-purge.service &&     ln -sf ../yubiOS-attestd.service       /usr/lib/systemd/system/multi-user.target.wants/yubiOS-attestd.service &&     ln -sf ../yubiOS-attestd.socket       /usr/lib/systemd/system/sockets.target.wants/yubiOS-attestd.socket &&     ! command -v passless &&     ! test -e /usr/lib/systemd/system/serial-getty@.service.d/10-yubiOS-test-autologin.conf
+
+# Clean build leftovers & rebuild UKI with cloud vTPM + composefs kargs at SOURCE_DATE_EPOCH
+RUN rm -rf /sysroot/ostree && mkdir -p /sysroot/ostree && ln -sfn sysroot/ostree /ostree &&     rm -f /var/lib/systemd/catalog/database           /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal           /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal &&     find /tmp -mindepth 1 -delete &&     find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + &&     find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} + &&     rm -f /etc/machine-id /var/lib/systemd/random-seed &&     ! test -e /etc/machine-id &&     ! test -e /var/lib/systemd/random-seed
+
+RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump &&     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys &&     if [ -d /usr/lib/yubiOS/secureboot ]; then       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ &&       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ &&       rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key &&       test -s /boot/EFI/yubiOS/secureboot/PK.auth &&       test -s /boot/EFI/yubiOS/secureboot/PK_null.auth &&       test -s /boot/EFI/yubiOS/keys/PK.auth &&       test -s /boot/EFI/yubiOS/keys/PK_null.auth;     fi
+
+RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + &&     touch -h -d "@${SOURCE_DATE_EPOCH}" /
+
+FROM scratch AS rootfs
+# hadolint ignore=DL3067
+COPY --from=rootfs_prep / /
+LABEL containers.bootc="1" ostree.bootable="true"
+LABEL yubiOS.image.kind="assured-cloud-node"
+LABEL yubiOS.image.description="Multi-arch (amd64 + arm64) Cloud Assured Node image with vTPM remote attestation bridged to a 2-node Local Hardware StrongBox Pair."
+CMD ["/sbin/init"]
+
+FROM rootfs AS uki
+ARG SOURCE_DATE_EPOCH
+RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ &&     kver="$(basename "$1")" &&     mkdir -p /out &&     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" &&     if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then       LD_PRELOAD=/target/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign         --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key         --cert /target/usr/lib/yubiOS/secureboot/db.crt         --output "/out/${kver}.efi.signed" "/out/${kver}.efi" &&       mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" &&       sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi";     fi &&     touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
+
+FROM rootfs
+COPY --from=uki /out/ /boot/EFI/Linux/
