@@ -961,8 +961,8 @@ jobs:
             u-boot/.config | tee u-boot-config-summary.txt
           make -C u-boot -j"$(nproc)" CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm u-boot.bin
           test -s u-boot/u-boot.bin
-          fdtget u-boot/u-boot.dtb /firmware/optee compatible | grep -qx 'linaro,optee-tz'
-          fdtget -l u-boot/u-boot.dtb /reserved-memory | grep -qx 'optee@30000000'
+          fdtget u-boot/dts/dt.dtb /firmware/optee compatible | grep -qx 'linaro,optee-tz'
+          fdtget -l u-boot/dts/dt.dtb /reserved-memory | grep -qx 'optee@30000000'
           build_args=(BL31="$BL31_BIN" TEE="$TEE_BIN")
           if [ "$REQUIRES_ROCKCHIP_TPL" = "true" ]; then
             if [ -z "${ROCKCHIP_TPL:-}" ]; then
