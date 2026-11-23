@@ -26,7 +26,7 @@ on:
       release_tag:
         description: 'Release tag on yubi-OS/gnome-control-center when publish_release=true'
         required: false
-        default: 'v51.1-yubios.1'
+        default: 'v51.2.1-yubios.1'
         type: string
       ci_callback:
         description: 'Internal: call back to ci.yml when this workflow finishes.'
@@ -106,7 +106,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: yubi-OS/gnome-control-center
-          ref: 20beaf3169dedf43b23222a1f1f4068bdba1e553 # yubios branch (51.1 descendant); see PINNED.md
+          ref: f7b417e09575b0939aac7a5163829bcc9140c573 # yubios branch (51.2.1 descendant); see PINNED.md
 
       - name: Install podman on runner
         run: |
