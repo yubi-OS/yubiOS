@@ -675,6 +675,7 @@ jobs:
             optee_args+=(
               CFG_DRAM_BASE=0x00200000
               CFG_DRAM_SIZE=0xf7e00000
+              CFG_8250_UART_FLUSH_TIMEOUT=y
             )
           elif [ "$OPTEE_FLAVOR" = "rk3568" ]; then
             optee_cfg_insecure=y
@@ -758,6 +759,7 @@ jobs:
             optee_args+=(
               CFG_DRAM_BASE=0x00200000
               CFG_DRAM_SIZE=0xf7e00000
+              CFG_8250_UART_FLUSH_TIMEOUT=y
             )
           elif [ "$OPTEE_FLAVOR" = "rk3568" ]; then
             optee_args+=(
@@ -946,6 +948,27 @@ jobs:
           test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
           echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
 
+      - name: Apply pinned rockpro64 VOP OS-handoff teardown patch to U-Boot as a commit (fail closed, clean tree)
+        if: matrix.build_kind == 'rockchip' && matrix.board == 'rockpro64-rk3399'
+        env:
+          RK_VOP_PATCH_SRC: firmware/u-boot/0003-rockchip-vop-os-prepare-teardown.patch
+          RK_VOP_PATCH_SHA256: 88efa405fb1736fead1d0737c03f5c817f9fe22db39a057c87b3a319b6cbda86
+          GIT_COMMITTER_NAME: yubiOS CI
+          GIT_COMMITTER_EMAIL: ci@yubi-os.invalid
+          GIT_COMMITTER_DATE: 2026-10-10T00:00:00Z
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' "$RK_VOP_PATCH_SHA256" "$RK_VOP_PATCH_SRC" | sha256sum --check --strict
+          if grep -q 'DM_FLAG_OS_PREPARE' u-boot/drivers/video/rockchip/rk3399_vop.c; then
+            echo "::error::rk3399_vop already sets DM_FLAG_OS_PREPARE; refusing to apply 0003 twice"
+            exit 1
+          fi
+          git -C u-boot am --quiet "$GITHUB_WORKSPACE/$RK_VOP_PATCH_SRC"
+          test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
+          grep -q 'DM_FLAG_OS_PREPARE' u-boot/drivers/video/rockchip/rk3399_vop.c
+          grep -q 'DM_FLAG_OS_PREPARE' u-boot/drivers/video/rockchip/rk3288_vop.c
+          echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
+
       - name: Build Rockchip U-Boot board image
         if: matrix.build_kind == 'rockchip'
         env:
@@ -956,7 +979,21 @@ jobs:
           set -euxo pipefail
           make -C u-boot CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm "$UBOOT_DEFCONFIG"
           ./u-boot/scripts/kconfig/merge_config.sh -m -O u-boot u-boot/.config u-boot/yubios_ftpm.config
+          if [ "$BOARD" = "rockpro64-rk3399" ]; then
+            # Serial-only U-Boot like rock5b-rk3588: no VOP scanout, no vidconsole
+            # framebuffer handed to Linux (simplefb/simpledrm), no usbkbd stdin.
+            ./u-boot/scripts/config --file u-boot/.config \
+              -d VIDEO -d DISPLAY -d VIDEO_ROCKCHIP \
+              -d DISPLAY_ROCKCHIP_HDMI -d DISPLAY_ROCKCHIP_EDP \
+              -d USB_KEYBOARD
+          fi
           make -C u-boot CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm olddefconfig
+          if [ "$BOARD" = "rockpro64-rk3399" ]; then
+            if grep -E '^CONFIG_(VIDEO|DISPLAY|VIDEO_ROCKCHIP|DISPLAY_ROCKCHIP_HDMI|DISPLAY_ROCKCHIP_EDP|USB_KEYBOARD|CONSOLE_MUX)=y' u-boot/.config; then
+              echo "::error::rockpro64-rk3399 U-Boot must be serial-only (video/display/usbkbd still enabled after olddefconfig)"
+              exit 1
+            fi
+          fi
           grep -E 'CONFIG_ROCKCHIP_RK(3399|3568|3588)=y|CONFIG_ROCKCHIP_EXTERNAL_TPL=y|CONFIG_TPL=y|CONFIG_RAM_ROCKCHIP_LPDDR4=y|CONFIG_SPL_ATF=y|CONFIG_TPM2_FTPM_TEE=y' \
             u-boot/.config | tee u-boot-config-summary.txt
           make -C u-boot -j"$(nproc)" CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm u-boot.bin

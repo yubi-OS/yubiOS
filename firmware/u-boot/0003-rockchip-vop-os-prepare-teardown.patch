@@ -1,0 +1,141 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: yubiOS CI <ci@yubi-os.invalid>
+Date: Sat, 10 Oct 2026 00:00:00 +0000
+Subject: [PATCH] video: rockchip: vop: stop scanout on OS handoff
+ (DM_FLAG_OS_PREPARE)
+
+rk3399_vop has no .remove callback, and rk3288_vop has one but lacks
+DM_FLAG_OS_PREPARE, so dm_remove_devices_active() (bootm_final() and
+EFI ExitBootServices()) never calls it. The VOP therefore keeps
+scanning out the U-Boot framebuffer into Linux, which reuses that
+memory.
+
+Move the standby remove into rk_vop.c as rk_vop_remove(), make it also
+disable window 0 and latch the change with reg_cfg_done, skip it when
+the registers were never mapped, and wire it up with
+DM_FLAG_OS_PREPARE in both rk3288_vop and rk3399_vop.
+---
+ drivers/video/rockchip/rk3288_vop.c | 16 ++--------------
+ drivers/video/rockchip/rk3399_vop.c |  2 ++
+ drivers/video/rockchip/rk_vop.c     | 28 ++++++++++++++++++++++++++++
+ drivers/video/rockchip/rk_vop.h     | 13 +++++++++++++
+ 4 files changed, 45 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/video/rockchip/rk3288_vop.c b/drivers/video/rockchip/rk3288_vop.c
+index 282831e..31c56f6 100644
+--- a/drivers/video/rockchip/rk3288_vop.c
++++ b/drivers/video/rockchip/rk3288_vop.c
+@@ -69,19 +69,6 @@ static int rk3288_vop_probe(struct udevice *dev)
+ 	return rk_vop_probe(dev);
+ }
+ 
+-static int rk_vop_remove(struct udevice *dev)
+-{
+-	struct rk_vop_priv *priv = dev_get_priv(dev);
+-        struct rk3288_vop *regs = priv->regs;
+-
+-	setbits_le32(&regs->sys_ctrl, V_STANDBY_EN(1));
+-
+-	/* wait frame complete (60Hz) to enter standby */
+-	mdelay(17);
+-
+-	return 0;
+-}
+-
+ struct rkvop_driverdata rk3288_driverdata = {
+ 	.features = VOP_FEATURE_OUTPUT_10BIT,
+ 	.set_pin_polarity = rk3288_set_pin_polarity,
+@@ -103,6 +90,7 @@ U_BOOT_DRIVER(rockchip_rk3288_vop) = {
+ 	.ops	= &rk3288_vop_ops,
+ 	.bind	= rk_vop_bind,
+ 	.probe	= rk3288_vop_probe,
+-        .remove = rk_vop_remove,
++	.remove	= rk_vop_remove,
+ 	.priv_auto	= sizeof(struct rk_vop_priv),
++	.flags	= DM_FLAG_OS_PREPARE,
+ };
+diff --git a/drivers/video/rockchip/rk3399_vop.c b/drivers/video/rockchip/rk3399_vop.c
+index 17e1601..dd67791 100644
+--- a/drivers/video/rockchip/rk3399_vop.c
++++ b/drivers/video/rockchip/rk3399_vop.c
+@@ -98,5 +98,7 @@ U_BOOT_DRIVER(rk3399_vop) = {
+ 	.ops	= &rk3399_vop_ops,
+ 	.bind	= rk_vop_bind,
+ 	.probe	= rk3399_vop_probe,
++	.remove	= rk_vop_remove,
+ 	.priv_auto	= sizeof(struct rk_vop_priv),
++	.flags	= DM_FLAG_OS_PREPARE,
+ };
+diff --git a/drivers/video/rockchip/rk_vop.c b/drivers/video/rockchip/rk_vop.c
+index 17dfe62..10e69ee 100644
+--- a/drivers/video/rockchip/rk_vop.c
++++ b/drivers/video/rockchip/rk_vop.c
+@@ -25,6 +25,7 @@
+ #include <efi.h>
+ #include <efi_loader.h>
+ #include <linux/bitops.h>
++#include <linux/delay.h>
+ #include <linux/err.h>
+ #include <power/regulator.h>
+ #include "rk_vop.h"
+@@ -483,6 +484,33 @@ int rk_vop_probe(struct udevice *dev)
+ 	return ret;
+ }
+ 
++int rk_vop_remove(struct udevice *dev)
++{
++	struct rk_vop_priv *priv = dev_get_priv(dev);
++	struct rk3288_vop *regs = priv->regs;
++	struct rk3288_vop *win_regs;
++
++	/* Probe bails out before relocation without mapping the registers */
++	if (!regs)
++		return 0;
++
++	win_regs = priv->regs + priv->win_offset;
++
++	/*
++	 * Stop scanning out the U-Boot framebuffer before the OS takes over:
++	 * disable window 0, latch it with reg_cfg_done, then put the VOP into
++	 * standby so it no longer reads memory the OS is about to reuse.
++	 */
++	clrbits_le32(&win_regs->win0_ctrl0, M_WIN0_EN);
++	writel(0x01, &regs->reg_cfg_done);
++	setbits_le32(&regs->sys_ctrl, V_STANDBY_EN(1));
++
++	/* wait frame complete (60Hz) to enter standby */
++	mdelay(17);
++
++	return 0;
++}
++
+ int rk_vop_bind(struct udevice *dev)
+ {
+ 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
+diff --git a/drivers/video/rockchip/rk_vop.h b/drivers/video/rockchip/rk_vop.h
+index eba68d8..bfb665b 100644
+--- a/drivers/video/rockchip/rk_vop.h
++++ b/drivers/video/rockchip/rk_vop.h
+@@ -52,6 +52,19 @@ int rk_vop_probe(struct udevice *dev);
+  */
+ int rk_vop_bind(struct udevice *dev);
+ 
++/**
++ * rk_vop_remove() - common remove implementation
++ *
++ * Disables window 0 and puts the VOP into standby so that scanout of the
++ * U-Boot framebuffer stops before the OS is started. Drivers using this
++ * must set DM_FLAG_OS_PREPARE so that dm_remove_devices_active() calls it
++ * from bootm_final() and from EFI ExitBootServices().
++ *
++ * @dev:	device
++ * Return: 0 (always OK)
++ */
++int rk_vop_remove(struct udevice *dev);
++
+ /**
+  * rk_vop_probe_regulators() - probe (autoset + enable) regulators
+  *
+-- 
+2.50.1
+
