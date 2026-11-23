@@ -1,0 +1,208 @@
+# Component CI for the yubi-OS/gnome-control-center fork.
+# Builds multi-arch Fedora 45 RPMs (x86_64 + aarch64) with the native yubiOS
+# System Trust panel (CcSystemTrustPanel) inside the digest-pinned Fedora 45
+# bootc base image and verifies panel registration + desktop/icon assets.
+name: ci_fork_gnome-control-center
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/ci_fork_gnome-control-center.yml'
+      - 'PINNED.md'
+      - 'usr/lib/yubiOS/system-trust-status.sh'
+      - 'refs/gnome-settings-system-trust-2026-11-19.md'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why are you running this manually?'
+        required: false
+        default: 'manual'
+      publish_release:
+        description: 'Publish built RPMs to yubi-OS/gnome-control-center GitHub Releases'
+        required: false
+        default: false
+        type: boolean
+      release_tag:
+        description: 'Release tag on yubi-OS/gnome-control-center when publish_release=true'
+        required: false
+        default: 'v51.1-yubios.1'
+        type: string
+      ci_callback:
+        description: 'Internal: call back to ci.yml when this workflow finishes.'
+        required: false
+        default: false
+        type: boolean
+      ci_chain_ref:
+        description: 'Internal: ref carried by the ci.yml orchestrator.'
+        required: false
+        default: ''
+        type: string
+      ci_reason:
+        description: 'Internal: original ci.yml orchestrator reason.'
+        required: false
+        default: 'manual'
+        type: string
+      ci_Docker_push:
+        description: 'Internal: production image push flag carried by ci.yml.'
+        required: false
+        default: false
+        type: boolean
+      ci_Dev_Docker_push:
+        description: 'Internal: dev image push flag carried by ci.yml.'
+        required: false
+        default: false
+        type: boolean
+      ci_Firmware_Docker_push:
+        description: 'Internal: firmware artifact push flag carried by ci.yml.'
+        required: false
+        default: false
+        type: boolean
+      ci_Installer_Docker_push:
+        description: 'Internal: installer artifact push flag carried by ci.yml.'
+        required: false
+        default: false
+        type: boolean
+      ci_fork_run:
+        description: 'Internal: fork workflow flag carried by ci.yml.'
+        required: false
+        default: false
+        type: boolean
+      ci_test_run:
+        description: 'Internal: TEST workflow flag carried by ci.yml.'
+        required: false
+        default: false
+        type: boolean
+      ci_vm_image:
+        description: 'Internal: VM image ref carried by ci.yml.'
+        required: false
+        default: 'docker.io/0mniteck/yubios:dev'
+        type: string
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  build-rpm:
+    name: Build & verify RPM (${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            rpm_arch: x86_64
+            runner: ubuntu-26.04
+          - arch: arm64
+            rpm_arch: aarch64
+            runner: ubuntu-26.04-arm
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    concurrency:
+      group: ${{ github.workflow }}-rpm-${{ matrix.arch }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout yubi-OS/gnome-control-center
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: yubi-OS/gnome-control-center
+          ref: 20beaf3169dedf43b23222a1f1f4068bdba1e553 # yubios branch (51.1 descendant); see PINNED.md
+
+      - name: Install podman on runner
+        run: |
+          if ! command -v podman >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq podman
+          fi
+
+      - name: Build RPMs and verify System Trust panel inside pinned Fedora 45 bootc container
+        env:
+          FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:990ebc2678ff3dbca3f0143c8d5f1a150a2fb0c418888a3bdf218aea109fc1d2 # 45 (45.20261114.0)
+        run: |
+          set -euo pipefail
+          sudo podman run --rm \
+            -v "$PWD:/work:Z" \
+            -w /work \
+            "$FEDORA_BOOTC_IMAGE" \
+            bash -euxc '
+              dnf -y --setopt=install_weak_deps=False install \
+                rpm-build dnf-plugins-core tar gzip findutils \
+                blueprint-compiler chrpath desktop-file-utils docbook-style-xsl \
+                gcc gettext itstool libappstream-glib libxslt meson ninja-build \
+                "pkgconfig(accountsservice)" "pkgconfig(colord)" "pkgconfig(colord-gtk4)" \
+                "pkgconfig(cups)" "pkgconfig(epoxy)" "pkgconfig(fontconfig)" \
+                "pkgconfig(gcr-4)" "pkgconfig(gdk-pixbuf-2.0)" "pkgconfig(gio-2.0)" \
+                "pkgconfig(glib-2.0)" "pkgconfig(gnome-bg-4)" "pkgconfig(gnome-bluetooth-ui-3.0)" \
+                "pkgconfig(gnome-desktop-4)" "pkgconfig(gnome-qr-gtk-4)" \
+                "pkgconfig(gnome-settings-daemon)" "pkgconfig(goa-1.0)" "pkgconfig(goa-backend-1.0)" \
+                "pkgconfig(gsettings-desktop-schemas)" "pkgconfig(gsound)" "pkgconfig(gtk4)" \
+                "pkgconfig(gudev-1.0)" "pkgconfig(ibus-1.0)" "pkgconfig(json-glib-1.0)" \
+                "pkgconfig(libadwaita-1)" "pkgconfig(libgtop-2.0)" "pkgconfig(libnm)" \
+                "pkgconfig(libnma-gtk4)" "pkgconfig(libpulse)" "pkgconfig(libpulse-mainloop-glib)" \
+                "pkgconfig(libsecret-1)" "pkgconfig(libsoup-3.0)" "pkgconfig(libwacom)" \
+                "pkgconfig(libxml-2.0)" "pkgconfig(malcontent-0)" "pkgconfig(mm-glib)" \
+                "pkgconfig(polkit-gobject-1)" "pkgconfig(pwquality)" "pkgconfig(smbclient)" \
+                "pkgconfig(tecla)" "pkgconfig(udisks2)" "pkgconfig(upower-glib)" \
+                "pkgconfig(wayland-client)" "pkgconfig(x11)" "pkgconfig(xi)"
+              bash packaging/build-rpm.sh
+              rpm -Uvh --oldpackage --replacepkgs --nodigest --nosignature --nodeps dist-rpms/*.rpm
+              XDG_CURRENT_DESKTOP=GNOME gnome-control-center --list | tee /tmp/panels.txt && grep -q "system-trust" /tmp/panels.txt
+              test -f /usr/share/applications/gnome-system-trust-panel.desktop
+              test -f /usr/share/icons/hicolor/scalable/apps/org.gnome.Settings-system-trust-symbolic.svg
+            '
+
+      - name: Upload built RPMs (${{ matrix.arch }})
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gnome-control-center-rpms-${{ matrix.arch }}
+          path: dist-rpms/*.rpm
+          retention-days: 30
+          if-no-files-found: error
+
+  ci-callback:
+    name: Callback to ci.yml orchestrator
+    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
+    needs: [build-rpm]
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Report current state to ci.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          REF: ${{ inputs.ci_chain_ref != '' && inputs.ci_chain_ref || github.ref_name }}
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          CI_REASON: ${{ inputs.ci_reason }}
+          CI_DOCKER_PUSH: ${{ inputs.ci_Docker_push }}
+          CI_DEV_DOCKER_PUSH: ${{ inputs.ci_Dev_Docker_push }}
+          CI_FIRMWARE_DOCKER_PUSH: ${{ inputs.ci_Firmware_Docker_push }}
+          CI_INSTALLER_DOCKER_PUSH: ${{ inputs.ci_Installer_Docker_push }}
+          CI_FORK_RUN: ${{ inputs.ci_fork_run }}
+          CI_TEST_RUN: ${{ inputs.ci_test_run }}
+          CI_VM_IMAGE: ${{ inputs.ci_vm_image }}
+        run: |
+          set -euo pipefail
+          conclusion=$(jq -r 'if .["build-rpm"].result == "failure" or .["build-rpm"].result == "cancelled" then "failure" else "success" end' <<<"$NEEDS_JSON")
+          payload=$(jq -n \
+            --arg ref "$REF" \
+            --arg state "$WORKFLOW_NAME" \
+            --arg completed_conclusion "$conclusion" \
+            --arg reason "$CI_REASON" \
+            --arg Docker_push "$CI_DOCKER_PUSH" \
+            --arg Dev_Docker_push "$CI_DEV_DOCKER_PUSH" \
+            --arg Firmware_Docker_push "$CI_FIRMWARE_DOCKER_PUSH" \
+            --arg Installer_Docker_push "$CI_INSTALLER_DOCKER_PUSH" \
+            --arg ci_fork_run "$CI_FORK_RUN" \
+            --arg ci_test_run "$CI_TEST_RUN" \
+            --arg vm_image "$CI_VM_IMAGE" \
+            '{ref: $ref, inputs: {state: $state, completed_conclusion: $completed_conclusion, reason: $reason, target_ref: $ref, Docker_push: $Docker_push, Dev_Docker_push: $Dev_Docker_push, Firmware_Docker_push: $Firmware_Docker_push, Installer_Docker_push: $Installer_Docker_push, ci_fork_run: $ci_fork_run, ci_test_run: $ci_test_run, vm_image: $vm_image}}')
+          curl -fsS -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPO}/actions/workflows/ci.yml/dispatches" \
+            -d "$payload"
+          echo "Reported ${WORKFLOW_NAME} as ${conclusion} to ci.yml."
