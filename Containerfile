@@ -290,6 +290,7 @@ RUN ln -sf /usr/lib/yubiOS/enroll.sh              /usr/bin/yubiOS-enroll       &
     ln -sf /usr/lib/yubiOS/enroll-ssh-wrapper.sh  /usr/bin/yubiOS-enroll-ssh  && \
     ln -sf /usr/lib/yubiOS/enroll-homed-wrapper.sh /usr/bin/yubiOS-enroll-homed && \
     ln -sf /usr/lib/yubiOS/uki/uki-sync-and-sign.sh /usr/bin/yubiOS-uki-sync && \
+    ln -sf /usr/lib/yubiOS/system-trust-status.sh   /usr/bin/yubiOS-trust-status && \
     if [ ! -e /usr/lib64/libykcs11.so ] && [ -e /usr/lib64/libykcs11.so.2 ]; then \
       ln -sf libykcs11.so.2 /usr/lib64/libykcs11.so; \
     fi
