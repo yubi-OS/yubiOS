@@ -124,7 +124,9 @@ if [ "${1:-}" = "--print-sfdisk-layout" ]; then
 fi
 
 if [ "${1:-}" = "--verify-esp-arch" ]; then
-  [ -n "${2:-}" ] && [ -n "${3:-}" ] || die "--verify-esp-arch requires <esp_dir> <board> [uki_path]"
+  if [ -z "${2:-}" ] || [ -z "${3:-}" ]; then
+    die "--verify-esp-arch requires <esp_dir> <board> [uki_path]"
+  fi
   verify_esp_loader_arch "$2" "$3" "${4:-}"
   exit 0
 fi
