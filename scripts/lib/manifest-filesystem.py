@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Emit a canonical JSON-lines manifest for a mounted filesystem tree."""
+"""Emit a canonical JSON-lines or UAPI.16 JSON-SEQ manifest for a mounted filesystem tree."""
 
 from __future__ import annotations
 
@@ -12,6 +12,20 @@ import os
 from pathlib import Path, PurePosixPath
 import stat
 import sys
+
+
+UAPI16_MEDIA_TYPE = "application/vnd.uapi.16.manifest"
+UAPI16_RS = "\x1e"
+
+UAPI16_TYPE_MAP = {
+    "file": "reg",
+    "directory": "dir",
+    "symlink": "lnk",
+    "char-device": "chr",
+    "block-device": "blk",
+    "fifo": "fifo",
+    "socket": "sock",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -27,6 +41,12 @@ def parse_args() -> argparse.Namespace:
             "retain a regular file's path and metadata while declaring its "
             "signature-bearing content outside the equality subject"
         ),
+    )
+    parser.add_argument(
+        "--format",
+        choices=("yubios", "uapi16"),
+        default="yubios",
+        help="manifest output format: 'yubios' (default JSONL) or 'uapi16' (RFC 7464 JSON-SEQ)",
     )
     parser.add_argument("root", type=Path)
     return parser.parse_args()
@@ -102,6 +122,58 @@ def normalize_content_exclusions(values: list[str]) -> set[str]:
     return exclusions
 
 
+def emit_uapi16(
+    entries: list[tuple[str, Path, os.stat_result]],
+    content_exclusions: set[str],
+    hardlink_tokens: dict[tuple[int, int], int],
+    digest_cache: dict[tuple[int, int], str],
+) -> int:
+    for relative, path, status in entries:
+        kind = file_type(status.st_mode)
+        uapi_type = UAPI16_TYPE_MAP.get(kind, "reg")
+        record: dict[str, object] = {
+            "type": uapi_type,
+            "mode": stat.S_IMODE(status.st_mode),
+            "uid": status.st_uid,
+            "gid": status.st_gid,
+            "mTimeNSec": status.st_mtime_ns,
+        }
+        if relative == ".":
+            record["mediaType"] = UAPI16_MEDIA_TYPE
+        else:
+            record["name"] = relative
+        xattrs = read_xattrs(path)
+        if xattrs:
+            record["extendedAttributes"] = {
+                k: {"base64": v} for k, v in xattrs.items()
+            }
+        if kind == "file":
+            identity = (status.st_dev, status.st_ino)
+            record["size"] = status.st_size
+            token = hardlink_tokens.get(identity)
+            if token is not None:
+                record["inodeToken"] = token
+            if relative not in content_exclusions:
+                digest = digest_cache.get(identity)
+                if digest is None:
+                    digest = sha256(path)
+                    digest_cache[identity] = digest
+                record["sha256"] = digest
+                record["contents"] = [{"file": relative}]
+        elif kind == "symlink":
+            target_bytes = os.readlink(path).encode("utf-8", errors="surrogateescape")
+            record["contents"] = [
+                {"literal": base64.b64encode(target_bytes).decode("ascii")}
+            ]
+        elif kind in {"char-device", "block-device"}:
+            record["major"] = os.major(status.st_rdev)
+            record["minor"] = os.minor(status.st_rdev)
+        sys.stdout.write(
+            f"{UAPI16_RS}{json.dumps(record, sort_keys=True, separators=(',', ':'))}\n"
+        )
+    return 0
+
+
 def main() -> int:
     args = parse_args()
     root = args.root.resolve()
@@ -126,7 +198,16 @@ def main() -> int:
         identity: sorted(paths, key=os.fsencode)[0]
         for identity, paths in hardlinks.items()
     }
+    hardlink_tokens = {
+        identity: idx + 1
+        for idx, (identity, _first) in enumerate(
+            sorted(hardlink_first.items(), key=lambda kv: os.fsencode(kv[1]))
+        )
+    }
     digest_cache: dict[tuple[int, int], str] = {}
+
+    if args.format == "uapi16":
+        return emit_uapi16(entries, content_exclusions, hardlink_tokens, digest_cache)
 
     print(
         json.dumps(

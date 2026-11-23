@@ -43,3 +43,15 @@ setup() {
   [ "$status" -eq 0 ]
   [[ "$output" == *"PASS: yubiOS.rego build policy and PKCS#11 URI negative rejections verified"* ]]
 }
+
+@test "verify-tpm0-pcr-extend.sh --self-test verifies TPM2_ReadClock monotonicity and rejects stalled/unsafe clock" {
+  run "${REPO_ROOT}/tests/vm/verify-tpm0-pcr-extend.sh" --self-test
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"PASS: verify-tpm0-pcr-extend.sh TPM2_ReadClock self-test verified"* ]]
+}
+
+@test "YubiOSEnrollAttest protection-switch model and io.yubios.Attest Varlink/WIMSE self-test pass" {
+  run python3 "${REPO_ROOT}/tools/yubios-attest/varlink_wimse.py" --self-test
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"PASS: YubiOSEnrollAttest 5-switch model"* ]]
+}
