@@ -185,3 +185,20 @@ run_enroll_gate() {
   run grep -q "/usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg" "$bprop"
   [ "$status" -eq 0 ]
 }
+
+@test "enroll-homed.sh and ab-etc-merge.sh configure fast activation (noinit_itable, nodiscard, broken_system_clock, gdm drop-in)" {
+  local homed="usr/lib/yubiOS/enroll-homed.sh"
+  local merge="usr/lib/yubiOS/ab-etc-merge.sh"
+  local dconf="usr/lib/dconf/db/local.d/00-yubios-wallpaper"
+  [ -f "$homed" ] || homed="/$homed"
+  [ -f "$merge" ] || merge="/$merge"
+  [ -f "$dconf" ] || dconf="/$dconf"
+  run grep -q "SYSTEMD_HOME_MOUNT_OPTIONS_EXT4=.*noinit_itable" "$homed"
+  [ "$status" -eq 0 ]
+  run grep -q "luks-extra-mount-options=noatime,nodiscard,noinit_itable" "$homed"
+  [ "$status" -eq 0 ]
+  run grep -q "broken_system_clock = true" "$merge"
+  [ "$status" -eq 0 ]
+  run grep -q "enable-smartcard-authentication=false" "$dconf"
+  [ "$status" -eq 0 ]
+}

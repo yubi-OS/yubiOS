@@ -151,7 +151,7 @@ ensure_luks_partition() {
   rmdir /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init 2>/dev/null || true
 
   echo "[yubiOS] Formatting /dev/lvm/yubios-root (ext4)..." >&2
-  mkfs.ext4 -F -E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1 -L yubios-root /dev/lvm/yubios-root >&2
+  mkfs.ext4 -F -J size=64 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1 -L yubios-root /dev/lvm/yubios-root >&2
 
   echo "$p_luks"
 }

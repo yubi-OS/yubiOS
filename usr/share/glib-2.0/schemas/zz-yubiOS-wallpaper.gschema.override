@@ -19,3 +19,7 @@ sleep-inactive-battery-type='nothing'
 sleep-inactive-battery-timeout=0
 idle-dim=false
 power-button-action='nothing'
+
+[org.gnome.login-screen]
+enable-smartcard-authentication=false
+enable-fingerprint-authentication=false

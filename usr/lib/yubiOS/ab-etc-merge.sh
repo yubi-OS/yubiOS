@@ -62,19 +62,45 @@ fi
 if [ -b "$YUBIOS_ROOT_LV" ]; then
   mkdir -p /var/home
   if ! mountpoint -q /var/home; then
-    mount "$YUBIOS_ROOT_LV" /var/home 2>/dev/null || true
+    mount -o noatime,nodiscard,noinit_itable "$YUBIOS_ROOT_LV" /var/home 2>/dev/null \
+      || mount "$YUBIOS_ROOT_LV" /var/home 2>/dev/null || true
   fi
   if [ ! -e /home ] && [ ! -L /home ]; then
     ln -s var/home /home
   fi
 fi
 
+# Prevent RTC-less cold-boot clock skew (e.g. ROCK 5B resetting to TIME_EPOCH 00:00:00 UTC)
+# from placing /var/home/*.home superblocks or homed identity records in the "future", which
+# otherwise forces e2fsck inside systemd-homework activate to scan the full 164 GiB home image.
+printf '[options]\nbroken_system_clock = true\n' > /etc/e2fsck.conf 2>/dev/null || true
+max_ts=0
+for ref_path in /var/home /var/home/*.home /var/lib/systemd/home/*.identity; do
+  [ -e "$ref_path" ] || continue
+  ts="$(stat -c %Y "$ref_path" 2>/dev/null || echo 0)"
+  if [ "${ts:-0}" -gt "$max_ts" ] 2>/dev/null; then
+    max_ts="$ts"
+  fi
+done
+now_ts="$(date +%s 2>/dev/null || echo 0)"
+if [ "$max_ts" -gt 0 ] && [ "$now_ts" -le "$max_ts" ] 2>/dev/null; then
+  date -s "@$((max_ts + 1))" >/dev/null 2>&1 || true
+fi
+
+for unit_dropin in systemd-homed.service.d gdm.service.d; do
+  if [ -f "/usr/lib/systemd/system/${unit_dropin}/yubiOS-homed.conf" ]; then
+    mkdir -p "/etc/systemd/system/${unit_dropin}"
+    cp -f "/usr/lib/systemd/system/${unit_dropin}/yubiOS-homed.conf" \
+      "/etc/systemd/system/${unit_dropin}/yubiOS-homed.conf"
+  fi
+done
+
 # Ensure authselect-apply-changes cannot overwrite yubiOS PAM system-auth/password-auth
 # (which otherwise strips pam_systemd_home.so from login on tty1/kmsconvt and causes
 # user@<uid>.service's (sd-pam) helper to broadcast the U2F/HSM PIN prompt to serial wall).
 if [ -f /usr/lib/pam.d/yubiOS-system-auth ]; then
   for pam_target in /etc/pam.d/system-auth /etc/pam.d/password-auth; do
-    if [ -L "$pam_target" ] || ! grep -q "pam_systemd_home.so" "$pam_target" 2>/dev/null; then
+    if [ -L "$pam_target" ] || ! cmp -s /usr/lib/pam.d/yubiOS-system-auth "$pam_target" 2>/dev/null; then
       rm -f "$pam_target"
       cp /usr/lib/pam.d/yubiOS-system-auth "$pam_target"
     fi
