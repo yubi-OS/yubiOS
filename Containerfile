@@ -229,6 +229,7 @@ RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/u
       '#define _GNU_SOURCE' \
       '#include <dlfcn.h>' \
       '#include <errno.h>' \
+      '#include <stddef.h>' \
       '#include <stdint.h>' \
       '#include <stdarg.h>' \
       '#include <sys/types.h>' \

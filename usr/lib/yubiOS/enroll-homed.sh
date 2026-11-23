@@ -49,6 +49,7 @@ if [ ! -s "$FAST_HOMED_SO" ] && command -v gcc >/dev/null 2>&1; then
 #define _GNU_SOURCE
 #include <dlfcn.h>
 #include <errno.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -109,7 +110,9 @@ if [ -e "/dev/mapper/home-${USERNAME}" ]; then
   cryptsetup close "home-${USERNAME}" 2>/dev/null || true
 fi
 while IFS=: read -r loop_dev _; do
-  [ -n "$loop_dev" ] && losetup -d "$loop_dev" 2>/dev/null || true
+  if [ -n "$loop_dev" ]; then
+    losetup -d "$loop_dev" 2>/dev/null || true
+  fi
 done < <(losetup -a 2>/dev/null | grep -E "/(var/)?home/(\.#homework|${USERNAME}\.home)" || true)
 rm -f /var/home/.#homework* "/var/home/${USERNAME}.home" "/home/${USERNAME}.home" 2>/dev/null || true
 
