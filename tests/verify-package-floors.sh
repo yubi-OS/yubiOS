@@ -106,6 +106,9 @@ check_uapi6_dropin_order() {
     assert_lex_before "usr/lib/dracut.conf.d" "50-yubiOS-fido2.conf" "51-yubiOS-composefs.conf"
     assert_lex_before "usr/lib/dracut.conf.d" "51-yubiOS-composefs.conf" "52-yubiOS-no-vfio.conf"
     assert_lex_before "usr/lib/dracut.conf.d" "52-yubiOS-no-vfio.conf" "53-yubiOS-optee-ftpm.conf"
+    if [ -f "$dracut_dir/54-yubiOS-assured-cloud-tpm.conf" ]; then
+      assert_lex_before "usr/lib/dracut.conf.d" "53-yubiOS-optee-ftpm.conf" "54-yubiOS-assured-cloud-tpm.conf"
+    fi
   fi
 
   log "PASS: UAPI.6 drop-in lexicographic ordering invariants verified (OMN-149 / sd-conf)"

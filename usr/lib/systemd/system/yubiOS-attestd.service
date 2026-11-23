@@ -1,0 +1,76 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+[Unit]
+Description=yubiOS Local & Mutual StrongBox Remote Attestation Daemon (fTPM + YubiKey PIV/SSH)
+Documentation=https://github.com/yubi-OS/yubiOS/blob/main/refs/yubios-mutual-attestation-2026-11-15.md
+After=local-fs.target systemd-tmpfiles-setup.service pcscd.service
+Wants=pcscd.service yubiOS-attestd.socket
+ConditionSecurity=measured-os
+
+[Service]
+Type=notify
+NotifyAccess=main
+ExecStart=/usr/bin/python3 /usr/lib/yubiOS/attest/yubios-attestd --state-dir /var/lib/yubiOS-attest --run-dir /run/yubiOS-attest
+Restart=on-failure
+RestartSec=3s
+WatchdogSec=30s
+
+# Service identity & TPM resource manager group
+User=yubios-attest
+Group=yubios-attest
+SupplementaryGroups=tss
+
+# State & runtime directories
+StateDirectory=yubiOS-attest
+StateDirectoryMode=0700
+RuntimeDirectory=yubiOS-attest
+RuntimeDirectoryMode=0750
+RuntimeDirectoryPreserve=yes
+
+# Filesystem sandboxing (per systemd-hardening skill, target exposure < 2.5)
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/yubiOS-attest /run/yubiOS-attest
+RestrictFileSystems=~@network
+
+# Device policy: allow only in-kernel TPM resource manager (/dev/tpmrm0) and PC/SC socket
+PrivateDevices=no
+DevicePolicy=closed
+DeviceAllow=/dev/tpmrm0 rw
+DeviceAllow=/dev/urandom r
+DeviceAllow=/dev/null rw
+
+# Privilege & capability lockdown
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictSUIDSGID=yes
+RemoveIPC=yes
+
+# Kernel & namespace lockdown
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ ProtectProc=invisible
+ProcSubset=pid
+RestrictNamespaces=yes
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+
+# Network lockdown: daemon speaks only local AF_UNIX socket / D-Bus; SSH transport runs in client
+RestrictAddressFamilies=AF_UNIX
+IPAddressDeny=any
+
+# Seccomp syscall filter
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@mount @reboot @swap @clock @module @raw-io @debug @obsolete
+SystemCallErrorNumber=EPERM
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

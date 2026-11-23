@@ -54,7 +54,7 @@ done
 
 PKCS11_LIB="${YUBIOS_PKCS11_LIB:-}"
 if [ -z "$PKCS11_LIB" ] || [ ! -e "$PKCS11_LIB" ]; then
-  for c in /usr/lib64/libykcs11.so /usr/lib64/libykcs11.so.2 /usr/lib/libykcs11.so /usr/lib/aarch64-linux-gnu/libykcs11.so; do
+  for c in /usr/lib64/libykcs11.so /usr/lib64/libykcs11.so.2 /usr/lib/libykcs11.so /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib/x86_64-linux-gnu/libykcs11.so; do
     if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
   done
 fi
@@ -153,7 +153,11 @@ ensure_initramfs_same_fs() {
 
 collect_kargs() {
   local cfs_digest="$1"
-  local kargs="composefs=${cfs_digest} root=dissect mount.usr=dissect rw fsck.repair=yes selinux=0 rd.driver.pre=tee,optee,tpm_ftpm_tee,rockchipdrm,dw_hdmi_qp,phy_rockchip_samsung_hdptx,analogix_dp ima_policy=tcb ima_hash=sha256 rd.luks=1 rd.luks.options=fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes audit=0 splash quiet plymouth.ignore-serial-consoles no_console_suspend"
+  local pre_drivers="tee,optee,tpm_ftpm_tee,rockchipdrm,dw_hdmi_qp,phy_rockchip_samsung_hdptx,analogix_dp"
+  if [ "$(uname -m)" = "x86_64" ]; then
+    pre_drivers="tpm_tis,tpm_crb"
+  fi
+  local kargs="composefs=${cfs_digest} root=dissect mount.usr=dissect rw fsck.repair=yes selinux=0 rd.driver.pre=${pre_drivers} ima_policy=tcb ima_hash=sha256 rd.luks=1 rd.luks.options=fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes audit=0 splash quiet plymouth.ignore-serial-consoles no_console_suspend"
   printf '%s\n' "$kargs"
 }
 

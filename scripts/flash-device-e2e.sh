@@ -1,20 +1,133 @@
 #!/usr/bin/env bash
 # scripts/flash-device-e2e.sh
 #
-# Clean direct-to-SD provisioning pipeline for yubiOS on the rock1 self-hosted
-# ARM64 runner (or ubuntu HIGH-MEM runner) with SD card slot (/dev/mmcblk1)
+# Clean direct-to-SD/USB provisioning pipeline for yubiOS on the rock1 self-hosted
+# ARM64 runner or x86_64 runner with removable block device (/dev/mmcblk1 or USB)
 # and physical U2F/HSM PIV slot 9a signing.
 #
 # All OS/initramfs/systemd/enrollment configurations live inside the built OCI
 # image (Containerfile / Containerfile.dev / usr/). This script never mutates
 # the installed composefs rootfs, /etc, or UKI contents — it only:
-#   1. Pulls the published $OS_IMAGE and board firmware bundle
-#   2. Wipes & partitions $SD_DEVICE (GPT @ sector 32768: p1 ESP, p2 yubiOS-root)
-#   3. Runs `bootc install to-filesystem --composefs-backend` from $OS_IMAGE
-#   4. Signs the installed EFI loaders & UKI on the ESP with U2F/HSM PIV slot 9a
-#   5. Writes board `u-boot-rockchip.bin` at sector 64 of $SD_DEVICE
+#   1. Resolves & validates the target board architecture and UAPI DPS GPT root GUID
+#   2. Pulls $OS_IMAGE with --arch $TARGET_OCI_ARCH and validates .Architecture BEFORE touching $SD_DEVICE
+#   3. Wipes & partitions $SD_DEVICE (GPT @ sector 32768: p1 ESP, p2 yubiOS-root with arch-matched DPS GUID)
+#   4. Runs `bootc install to-filesystem --composefs-backend` from $OS_IMAGE
+#   5. Verifies the installed ESP contains the target-architecture EFI loader & UKI (PE Machine 0x8664 vs 0xaa64)
+#   6. Signs the installed EFI loaders & UKI on the ESP with U2F/HSM PIV slot 9a
+#   7. Writes board `u-boot-rockchip.bin` at sector 64 of $SD_DEVICE (Rockchip ARM64 boards only)
 
 set -euo pipefail
+
+log()  { printf '\n=== [flash-e2e %s] %s ===\n' "$(date -u +%H:%M:%S)" "$*"; }
+warn() { printf '::warning::[flash-e2e] %s\n' "$*"; }
+die()  { printf '::error::[flash-e2e] %s\n' "$*" >&2; exit 1; }
+
+# ---------------------------------------------------------------------------
+# Target Board Architecture & UAPI Group Discoverable Partitions Spec (DPS)
+# ---------------------------------------------------------------------------
+# Per UAPI Group Discoverable Partitions Specification:
+#   - EFI System Partition (ESP): c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+#   - Root Partition (x86-64):    4f68bce3-e8cd-4db1-96e7-fbcaf984b709 (SD_GPT_ROOT_X86_64)
+#   - Root Partition (ARM64):     b921b045-1df0-41c3-af44-4c6f280d3fae (SD_GPT_ROOT_ARM64)
+resolve_board_target_spec() {
+  local board_name="$1"
+  case "$board_name" in
+    x86_64-uefi|amd64-uefi)
+      TARGET_OCI_ARCH="amd64"
+      TARGET_UNAME_M="x86_64"
+      DPS_ROOT_PART_UUID="4f68bce3-e8cd-4db1-96e7-fbcaf984b709"
+      EXPECTED_EFI_BOOT_LOADER="EFI/BOOT/BOOTX64.EFI"
+      EXPECTED_SDBOOT_LOADER="EFI/systemd/systemd-bootx64.efi"
+      EXPECTED_PE_MACHINE_HEX="0x8664"
+      NEEDS_ROCKCHIP_SPL="0"
+      ;;
+    rock5b-rk3588|rockpro64-rk3399|pinetab2-rk3566)
+      TARGET_OCI_ARCH="arm64"
+      TARGET_UNAME_M="aarch64"
+      DPS_ROOT_PART_UUID="b921b045-1df0-41c3-af44-4c6f280d3fae"
+      EXPECTED_EFI_BOOT_LOADER="EFI/BOOT/BOOTAA64.EFI"
+      EXPECTED_SDBOOT_LOADER="EFI/systemd/systemd-bootaa64.efi"
+      EXPECTED_PE_MACHINE_HEX="0xaa64"
+      NEEDS_ROCKCHIP_SPL="1"
+      ;;
+    *)
+      die "Unsupported FLASH_BOARD '$board_name' (expected rock5b-rk3588, rockpro64-rk3399, pinetab2-rk3566, or x86_64-uefi)"
+      ;;
+  esac
+}
+
+render_sfdisk_layout() {
+  local board_name="$1"
+  resolve_board_target_spec "$board_name"
+  cat <<EOF
+label: gpt
+first-lba: 32768
+start=32768, size=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name="ESP"
+size=8G, type=${DPS_ROOT_PART_UUID}, name="yubiOS-root"
+EOF
+}
+
+verify_esp_loader_arch() {
+  local esp_dir="$1"
+  local board_name="$2"
+  local uki_path="${3:-}"
+  resolve_board_target_spec "$board_name"
+
+  local boot_loader="${esp_dir}/${EXPECTED_EFI_BOOT_LOADER}"
+  local sdboot_loader="${esp_dir}/${EXPECTED_SDBOOT_LOADER}"
+  [ -f "$boot_loader" ] || die "ESP missing required ${TARGET_UNAME_M} fallback loader: ${boot_loader}"
+  [ -f "$sdboot_loader" ] || die "ESP missing required ${TARGET_UNAME_M} systemd-boot loader: ${sdboot_loader}"
+
+  python3 - "$EXPECTED_PE_MACHINE_HEX" "$boot_loader" "$sdboot_loader" ${uki_path:+"$uki_path"} <<'PY'
+import struct
+import sys
+from pathlib import Path
+
+want_machine = int(sys.argv[1], 16)
+for p_str in sys.argv[2:]:
+    p = Path(p_str)
+    if not p.is_file():
+        print(f"FAIL: missing EFI binary {p}", file=sys.stderr)
+        sys.exit(1)
+    raw = p.read_bytes()
+    if len(raw) < 128 or raw[:2] != b"MZ":
+        print(f"FAIL: {p} is not a valid MZ/PE binary", file=sys.stderr)
+        sys.exit(1)
+    pe_off = struct.unpack_from("<I", raw, 60)[0]
+    if pe_off + 6 > len(raw) or raw[pe_off : pe_off + 4] != b"PE\x00\x00":
+        print(f"FAIL: {p} missing PE\\0\\0 signature at offset {pe_off}", file=sys.stderr)
+        sys.exit(1)
+    (got_machine,) = struct.unpack_from("<H", raw, pe_off + 4)
+    if got_machine != want_machine:
+        print(
+            f"FAIL: PE COFF Machine mismatch in {p.name}: got 0x{got_machine:04x}, expected 0x{want_machine:04x}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    print(f"Verified PE32+ architecture for {p.name}: Machine=0x{got_machine:04x}")
+PY
+}
+
+# Handle non-destructive inspection / self-test modes before touching host state
+if [ "${1:-}" = "--print-board-config" ]; then
+  [ -n "${2:-}" ] || die "--print-board-config requires a board name"
+  resolve_board_target_spec "$2"
+  printf 'BOARD=%s\nTARGET_OCI_ARCH=%s\nTARGET_UNAME_M=%s\nDPS_ROOT_PART_UUID=%s\nEXPECTED_EFI_BOOT_LOADER=%s\nEXPECTED_SDBOOT_LOADER=%s\nEXPECTED_PE_MACHINE_HEX=%s\nNEEDS_ROCKCHIP_SPL=%s\n' \
+    "$2" "$TARGET_OCI_ARCH" "$TARGET_UNAME_M" "$DPS_ROOT_PART_UUID" "$EXPECTED_EFI_BOOT_LOADER" "$EXPECTED_SDBOOT_LOADER" "$EXPECTED_PE_MACHINE_HEX" "$NEEDS_ROCKCHIP_SPL"
+  exit 0
+fi
+
+if [ "${1:-}" = "--print-sfdisk-layout" ]; then
+  [ -n "${2:-}" ] || die "--print-sfdisk-layout requires a board name"
+  render_sfdisk_layout "$2"
+  exit 0
+fi
+
+if [ "${1:-}" = "--verify-esp-arch" ]; then
+  [ -n "${2:-}" ] && [ -n "${3:-}" ] || die "--verify-esp-arch requires <esp_dir> <board> [uki_path]"
+  verify_esp_loader_arch "$2" "$3" "${4:-}"
+  exit 0
+fi
 
 BOARD="${FLASH_BOARD:-rock5b-rk3588}"
 SD_DEVICE="${FLASH_SD_DEVICE:-/dev/mmcblk1}"
@@ -22,7 +135,13 @@ OS_IMAGE="${FLASH_OS_IMAGE:-docker.io/0mniteck/yubios:dev}"
 SIGNKEY="${FLASH_SIGNKEY:-test}"
 SIGN_WITH_U2F_HSM="${FLASH_SIGN_WITH_U2F_HSM:-false}"
 PIV_TOUCH_OVERRIDE="${FLASH_PIV_TOUCH_POLICY:-auto}"
-# RUN_POST_VM="${FLASH_RUN_POST_VM:-false}"
+
+resolve_board_target_spec "$BOARD"
+
+HOST_UNAME_M="${FLASH_HOST_UNAME_OVERRIDE:-$(uname -m)}"
+if [ "$HOST_UNAME_M" != "$TARGET_UNAME_M" ]; then
+  die "REFUSING: BOARD=$BOARD targets $TARGET_UNAME_M ($TARGET_OCI_ARCH), but runner host architecture is $HOST_UNAME_M"
+fi
 
 if [ "$PIV_TOUCH_OVERRIDE" = "auto" ] || [ -z "$PIV_TOUCH_OVERRIDE" ]; then
   if [ "$SIGNKEY" = "test" ]; then
@@ -53,10 +172,6 @@ SIGN_MODE="none"
 
 THROTTLE=(nice -n 19 ionice -c2 -n7)
 
-log()  { printf '\n=== [flash-e2e %s] %s ===\n' "$(date -u +%H:%M:%S)" "$*"; }
-warn() { printf '::warning::[flash-e2e] %s\n' "$*"; }
-die()  { printf '::error::[flash-e2e] %s\n' "$*" >&2; exit 1; }
-
 cleanup() {
   set +e
   sudo umount -R "$MNT_DIR" 2>/dev/null || true
@@ -73,7 +188,7 @@ trap cleanup EXIT
 sudo rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR" "$TMPDIR" "$KEY_DIR" "$FW_DIR"
 
-log "Configuration: BOARD=$BOARD SD_DEVICE=$SD_DEVICE SIGNKEY=$SIGNKEY PIV_TOUCH_POLICY=$PIV_TOUCH_POLICY OS_IMAGE=$OS_IMAGE WORK_DIR=$WORK_DIR"
+log "Configuration: BOARD=$BOARD TARGET_OCI_ARCH=$TARGET_OCI_ARCH DPS_ROOT_PART_UUID=$DPS_ROOT_PART_UUID SD_DEVICE=$SD_DEVICE SIGNKEY=$SIGNKEY PIV_TOUCH_POLICY=$PIV_TOUCH_POLICY OS_IMAGE=$OS_IMAGE WORK_DIR=$WORK_DIR"
 
 # ---------------------------------------------------------------------------
 # Stage 1: Preflight & host safety guards
@@ -144,7 +259,7 @@ CN_LABEL="YUBIOS Owner Slot 9a"
 [ "$SIGNKEY" = "test" ] && CN_LABEL="YUBIOS Test Slot 9a"
 
 PKCS11_LIB=""
-for c in /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib64/libykcs11.so /usr/lib/libykcs11.so; do
+for c in /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib/x86_64-linux-gnu/libykcs11.so /usr/lib64/libykcs11.so /usr/lib/libykcs11.so; do
   if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
 done
 
@@ -205,8 +320,15 @@ if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
       cert-to-efi-sig-list -g "$OWNER_GUID" "$KEY_DIR/${var}.crt" "$KEY_DIR/${var}.esl"
     done
 
-    PKCS11_PROV="/usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so"
-    [ -e "$PKCS11_PROV" ] || PKCS11_PROV="pkcs11"
+    PKCS11_PROV=""
+    for p in /usr/lib/aarch64-linux-gnu/ossl-modules/pkcs11prov.so /usr/lib/x86_64-linux-gnu/ossl-modules/pkcs11prov.so /usr/lib64/ossl-modules/pkcs11prov.so; do
+      if [ -e "$p" ]; then PKCS11_PROV="$p"; break; fi
+    done
+    [ -n "$PKCS11_PROV" ] || PKCS11_PROV="pkcs11"
+    PKCS11_ENGINE="/usr/lib/aarch64-linux-gnu/engines-3/pkcs11.so"
+    for e in /usr/lib/aarch64-linux-gnu/engines-3/pkcs11.so /usr/lib/x86_64-linux-gnu/engines-3/pkcs11.so /usr/lib64/engines-3/pkcs11.so; do
+      if [ -e "$e" ]; then PKCS11_ENGINE="$e"; break; fi
+    done
     cat > "$WORK_DIR/openssl-pkcs11.cnf" <<EOF
 openssl_conf = openssl_init
 [openssl_init]
@@ -215,7 +337,7 @@ engines = engine_section
 pkcs11 = pkcs11_section
 [pkcs11_section]
 engine_id = pkcs11
-dynamic_path = /usr/lib/aarch64-linux-gnu/engines-3/pkcs11.so
+dynamic_path = ${PKCS11_ENGINE}
 MODULE_PATH = ${PKCS11_LIB}
 PIN = ${PIV_PIN}
 init = 0
@@ -336,7 +458,7 @@ sign_efi_binary() {
 }
 
 # ---------------------------------------------------------------------------
-# Stage 3: Prepare Container Storage & Pull Images
+# Stage 3: Prepare Container Storage & Pull Target-Architecture Images
 # ---------------------------------------------------------------------------
 if [ "$USE_RAM_CONTAINERS" = "1" ]; then
   log "Stage 3: Mounting 12 GiB ext4-in-RAM (/dev/shm) onto /var/lib/containers"
@@ -370,10 +492,13 @@ if [ -n "${DOCKER_PASSWORD:-}" ]; then
   printf '%s' "$DOCKER_PASSWORD" | sudo podman login --username 0mniteck42 --password-stdin docker.io
 fi
 
-log "Stage 3b: Pulling $OS_IMAGE and firmware-$BOARD"
-sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull "$OS_IMAGE"
+log "Stage 3b: Pulling $OS_IMAGE for target architecture --arch $TARGET_OCI_ARCH (BEFORE wiping $SD_DEVICE)"
+sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull --arch "$TARGET_OCI_ARCH" "$OS_IMAGE"
 RESOLVED_OS="$(sudo podman image inspect "$OS_IMAGE" --format '{{ index .RepoDigests 0 }}')"
-echo "Resolved OS image: $RESOLVED_OS"
+PULLED_OCI_ARCH="$(sudo podman image inspect "$OS_IMAGE" --format '{{.Architecture}}')"
+echo "Resolved OS image: $RESOLVED_OS (Architecture=$PULLED_OCI_ARCH, expected=$TARGET_OCI_ARCH)"
+[ "$PULLED_OCI_ARCH" = "$TARGET_OCI_ARCH" ] \
+  || die "REFUSING to wipe $SD_DEVICE: pulled $OS_IMAGE has Architecture=$PULLED_OCI_ARCH, expected $TARGET_OCI_ARCH for BOARD=$BOARD"
 
 pull_board_firmware() {
   local b="$1"
@@ -392,10 +517,7 @@ pull_board_firmware() {
   [ -f "$bin" ] || die "u-boot-rockchip.bin missing in $fw_resolved"
   local magic
   magic="$(xxd -p -l 4 "$bin")"
-  case "$magic" in
-    524b4e53|3b8cdcfc) ;;
-    *) die "$bin does not start with Rockchip BootROM magic RKNS/524b4e53 or RK3399-RC4/3b8cdcfc (got $magic)" ;;
-  esac
+  [ "$magic" = "524b4e53" ] || die "$bin does not start with RKNS magic (got $magic)"
   sha256sum "$bin" | tee "$FW_DIR/$b/u-boot-rockchip.bin.sha256"
   cp -f "$bin" "$FW_DIR/$b/u-boot-rockchip.bin"
   local spi_bin="$FW_DIR/$b/firmware/u-boot-rockchip-spi.bin"
@@ -407,10 +529,14 @@ pull_board_firmware() {
   ls -la "$FW_DIR/$b/firmware/" 2>/dev/null || ls -la "$FW_DIR/$b/"
 }
 
-pull_board_firmware "$BOARD"
+if [ "$NEEDS_ROCKCHIP_SPL" = "0" ]; then
+  log "BOARD=$BOARD uses standard ${TARGET_UNAME_M} UEFI boot from ESP (/${EXPECTED_EFI_BOOT_LOADER}); skipping Rockchip firmware-rk pull"
+else
+  pull_board_firmware "$BOARD"
+fi
 
 # ---------------------------------------------------------------------------
-# Stage 4: Partition, Install, Sign EFI Binaries & Write U-Boot on $SD_DEVICE
+# Stage 4: Partition, Install, Verify ESP Arch, Sign EFI Binaries & Write SPL
 # ---------------------------------------------------------------------------
 provision_sd_directly() {
   local dev="$1"
@@ -420,10 +546,10 @@ provision_sd_directly() {
   p1="$(part_dev "$dev" 1)"
   p2="$(part_dev "$dev" 2)"
 
-  log "Stage 4: Partitioning & provisioning $dev ($board_name) directly from $RESOLVED_OS"
+  resolve_board_target_spec "$board_name"
+  log "Stage 4: Partitioning & provisioning $dev ($board_name, arch=$TARGET_OCI_ARCH, DPS root GUID=$DPS_ROOT_PART_UUID) directly from $RESOLVED_OS"
   guard_block_device "$dev"
 
-  # Ensure no leftover container or mount from a prior canceled run holds $dev
   sudo podman rm -f yubios-bootc-install 2>/dev/null || true
   for cid in $(sudo podman ps -aq 2>/dev/null || true); do
     sudo podman rm -f "$cid" 2>/dev/null || true
@@ -434,12 +560,7 @@ provision_sd_directly() {
   sudo dd if=/dev/zero of="$dev" bs=1M count=16 conv=fsync status=none 2>/dev/null || true
   sudo partprobe "$dev" 2>/dev/null || true
   sudo udevadm settle
-  sudo sfdisk --wipe always "$dev" <<'EOF'
-label: gpt
-first-lba: 32768
-start=32768, size=512M, type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b, name="ESP"
-size=8G, type=b921b045-1df0-41c3-af44-4c6f280d3fae, name="yubiOS-root"
-EOF
+  render_sfdisk_layout "$board_name" | sudo sfdisk --wipe always "$dev"
   sudo partprobe "$dev" 2>/dev/null || sudo partx --update "$dev" 2>/dev/null || true
   sudo udevadm settle
   sleep 2
@@ -456,9 +577,6 @@ EOF
   log "Running bootc install to-filesystem directly onto $dev ($board_name)"
   sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
   sudo sync -f /var/lib/containers/storage/overlay /var/lib/containers /mnt/extended 2>/dev/null || true
-  # Cap dirty-page accumulation so the kernel streams writes smoothly to the SD card
-  # instead of buffering ~800 MiB of unwritten extents and stalling the SDXC controller
-  # during FS_IOC_ENABLE_VERITY (which caused mmc1 card drop / EIO on SN128 119G).
   sudo sysctl -w vm.dirty_background_bytes=16777216 vm.dirty_bytes=67108864 >/dev/null 2>&1 || true
   PRELOAD_ENV=()
   if command -v gcc >/dev/null 2>&1; then
@@ -497,15 +615,16 @@ EOF
   sudo cat "$entry"
   uki_rel="$(sudo awk '$1 == "uki" || $1 == "efi" {sub(/^(uki|efi)[[:space:]]+/, ""); print}' "$entry" | head -n1 || true)"
   [ -n "$uki_rel" ] || die "No uki/efi path found in $entry"
+
+  log "Verifying installed ESP loaders & UKI match target architecture ($TARGET_UNAME_M / PE Machine $EXPECTED_PE_MACHINE_HEX)"
+  verify_esp_loader_arch "$MNT_DIR/boot" "$board_name" "$MNT_DIR/boot${uki_rel}"
+
   installed_cmdline="$(python3 scripts/extract_uki_cmdline.py "$MNT_DIR/boot${uki_rel}" | tr -d '\0\r\n' || true)"
   echo "Installed UKI cmdline: $installed_cmdline"
   cd_digest="$(printf '%s' "$installed_cmdline" | grep -oE 'composefs(\.digest=v[12]-sha(256|512)-[0-9]+:|=)\??[0-9a-f]{64,128}' | head -1 | sed -E 's/^.*[:=]\??//' || true)"
   [ -n "$cd_digest" ] || die "Could not extract composefs digest from installed UKI/BLS entry"
   echo "Verified installed composefs digest: $cd_digest"
 
-  # Deploy the image's baked-in Secure Boot keys (/usr/lib/yubiOS/secureboot)
-  # to both /boot/EFI/yubiOS/secureboot and /boot/EFI/yubiOS/keys after bootc install
-  # (same as enroll-sb.sh), and save u-boot-rockchip.bin + u-boot-rockchip-spi.bin to /boot.
   sudo mkdir -p "$MNT_DIR/boot/EFI/yubiOS/secureboot" "$MNT_DIR/boot/EFI/yubiOS/keys" "$MNT_DIR/boot/EFI/yubiOS/firmware"
   sudo podman run --rm --entrypoint /bin/sh "$RESOLVED_OS" -c 'if [ -d /usr/lib/yubiOS/secureboot ]; then tar -C /usr/lib/yubiOS/secureboot -cf - .; fi' \
     | sudo tar -C "$MNT_DIR/boot/EFI/yubiOS/secureboot" --no-same-owner --no-same-permissions -xf -
@@ -515,8 +634,10 @@ EOF
   sudo test -s "$MNT_DIR/boot/EFI/yubiOS/secureboot/PK_null.auth" || die "PK_null.auth missing on ESP"
   sudo test -s "$MNT_DIR/boot/EFI/yubiOS/keys/PK_null.auth" || die "keys/PK_null.auth missing on ESP"
 
-  sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
-  sudo cp -f "$fw_bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip.bin"
+  if [ -f "$fw_bin" ]; then
+    sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
+    sudo cp -f "$fw_bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip.bin"
+  fi
   if [ -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" ]; then
     sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/u-boot-rockchip-spi.bin"
     sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip-spi.bin"
@@ -538,15 +659,14 @@ EOF
     done < <(sudo find "$MNT_DIR/boot/EFI" -type f \( -iname '*.efi' \) -print0)
   fi
 
-  # Record the BLS entry content from the vfat ESP before unmounting $MNT_DIR/boot,
-  # then initialize the ext4 /boot/loader -> loader.1 symlink and /ostree deployment
-  # skeleton on $MNT_DIR (p2 ext4) so libostree/rpm-ostree has a real symlink on ext4.
   bls_name="$(basename "$entry")"
   bls_content="$(sudo cat "$entry")"
   sudo sync
   sudo umount "$MNT_DIR/boot"
   sudo mkdir -p "$MNT_DIR/boot/loader.1/entries" "$MNT_DIR/boot/EFI" "$MNT_DIR/efi"
-  sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
+  if [ -f "$fw_bin" ]; then
+    sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
+  fi
   if [ -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" ]; then
     sudo cp -f "$FW_DIR/$board_name/u-boot-rockchip-spi.bin" "$MNT_DIR/boot/u-boot-rockchip-spi.bin"
   fi
@@ -585,17 +705,22 @@ EOF_ORIG
   sudo sync
   sudo umount "$MNT_DIR"
 
-  log "Writing $board_name u-boot-rockchip.bin directly at sector 64 of $dev"
-  local bytes cnt want_sha got_sha
-  bytes="$(stat -c '%s' "$fw_bin")"
-  cnt=$(( (bytes + 511) / 512 ))
-  want_sha="$(sha256sum "$fw_bin" | awk '{print $1}')"
-  sudo "${THROTTLE[@]}" dd if="$fw_bin" of="$dev" bs=512 seek=64 conv=notrunc,fsync status=none
-  got_sha="$(sudo dd if="$dev" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
-  echo "SD card ($dev) sector-64 firmware sha256: want=$want_sha got=$got_sha"
-  [ "$want_sha" = "$got_sha" ] || die "SD card sector-64 readback sha256 mismatch on $dev!"
-  lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,UUID "$dev"
-  log "PASS: $dev ($board_name) provisioned directly and verified ($got_sha)"
+  if [ "$NEEDS_ROCKCHIP_SPL" = "0" ]; then
+    lsblk -o NAME,SIZE,TYPE,PARTTYPE,FSTYPE,LABEL,UUID "$dev"
+    log "PASS: $dev ($board_name) provisioned for ${TARGET_UNAME_M} UEFI Setup-Mode boot (DPS root GUID=${DPS_ROOT_PART_UUID}, loader=${EXPECTED_EFI_BOOT_LOADER})"
+  else
+    log "Writing $board_name u-boot-rockchip.bin directly at sector 64 of $dev"
+    local bytes cnt want_sha got_sha
+    bytes="$(stat -c '%s' "$fw_bin")"
+    cnt=$(( (bytes + 511) / 512 ))
+    want_sha="$(sha256sum "$fw_bin" | awk '{print $1}')"
+    sudo "${THROTTLE[@]}" dd if="$fw_bin" of="$dev" bs=512 seek=64 conv=notrunc,fsync status=none
+    got_sha="$(sudo dd if="$dev" bs=512 skip=64 count="$cnt" status=none | head -c "$bytes" | sha256sum | awk '{print $1}')"
+    echo "SD card ($dev) sector-64 firmware sha256: want=$want_sha got=$got_sha"
+    [ "$want_sha" = "$got_sha" ] || die "SD card sector-64 readback sha256 mismatch on $dev!"
+    lsblk -o NAME,SIZE,TYPE,PARTTYPE,FSTYPE,LABEL,UUID "$dev"
+    log "PASS: $dev ($board_name) provisioned directly and verified ($got_sha)"
+  fi
 }
 
 provision_sd_directly "$SD_DEVICE" "$BOARD"
@@ -608,12 +733,5 @@ if [ -n "${PODMAN_LOOP:-}" ]; then
   PODMAN_LOOP=""
 fi
 sudo rm -f "$PODMAN_RAM_IMG"
-
-# ---------------------------------------------------------------------------
-# Stage 5: Post-SD-install VM Boot & Enrollment Flow Execution
-# ---------------------------------------------------------------------------
-# Commented out per hardware bring-up directive: first-boot Secure Boot key
-# enrollment writes to the board's StandaloneMM/OP-TEE variable store, which
-# is not present in a generic QEMU VM.
 
 log "COMPLETE: flash-device-e2e ($BOARD -> $SD_DEVICE) finished successfully."
