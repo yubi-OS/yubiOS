@@ -517,9 +517,22 @@ pull_board_firmware() {
   local bin="$FW_DIR/$b/firmware/u-boot-rockchip.bin"
   [ -f "$bin" ] || bin="$(find "$FW_DIR/$b" -name 'u-boot-rockchip.bin' | head -n1)"
   [ -f "$bin" ] || die "u-boot-rockchip.bin missing in $fw_resolved"
-  local magic
+  # Rockchip idbloader header magic differs by SoC generation:
+  #   - RK3568/RK3566/RK3588 (mkimage rksd header v2): plaintext "RKNS" = 524b4e53
+  #   - RK3399 (legacy header v1, 0x0FF0AA55 RC4-encrypted with the Rockchip
+  #     boot-ROM key, which is what mkimage -T rksd emits for rk3399): 3b8cdcfc
+  local magic expected_magic expected_desc
+  case "$b" in
+    rockpro64-rk3399)
+      expected_magic="3b8cdcfc"; expected_desc="RK3399 RC4-encrypted v1 idbloader header (0x0FF0AA55)" ;;
+    rock5b-rk3588|pinetab2-rk3566)
+      expected_magic="524b4e53"; expected_desc="RKNS v2 idbloader header" ;;
+    *)
+      die "No Rockchip idbloader magic known for board '$b'" ;;
+  esac
   magic="$(xxd -p -l 4 "$bin")"
-  [ "$magic" = "524b4e53" ] || die "$bin does not start with RKNS magic (got $magic)"
+  [ "$magic" = "$expected_magic" ] || die "$bin does not start with $expected_desc magic $expected_magic (got $magic)"
+  echo "Verified $b idbloader magic: $magic ($expected_desc)"
   sha256sum "$bin" | tee "$FW_DIR/$b/u-boot-rockchip.bin.sha256"
   cp -f "$bin" "$FW_DIR/$b/u-boot-rockchip.bin"
   local spi_bin="$FW_DIR/$b/firmware/u-boot-rockchip-spi.bin"
