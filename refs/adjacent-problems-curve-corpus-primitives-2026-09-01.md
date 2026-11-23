@@ -64,7 +64,7 @@ Y): a checklist is one axis; the curve is the joint distribution of all axes.
 
 ## Related problems
 
-- **Verification chain** and **YubiKey boot** documents dominate the yubiOS pole; the pole's
+- **Verification chain** and **U2F/HSM boot** documents dominate the yubiOS pole; the pole's
   sector is Failure modes. Relation: *the object this method audits*.
 - **Rootless privilege** and **container isolation** are the primitives most often *absent*
   from the sparse cells. Relation: *what the sparse cells are missing*.
@@ -82,7 +82,7 @@ the matched-parameter ablation went negative on the holdout across three seeds.
 ## Curve placement
 
 Coverage: verification chain (the audited object), rootless privilege and capabilities (the
-absent primitives), corpus/curve/sparse (focal), YubiKey boot (pole neighbourhood),
+absent primitives), corpus/curve/sparse (focal), U2F/HSM boot (pole neighbourhood),
 container isolation (absent primitives). Omitted clusters omitted by design.
 
 ## 2026-09-18 drift check (wayfinder round 8, cycle 54)

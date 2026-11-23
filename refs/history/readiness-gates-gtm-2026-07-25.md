@@ -43,8 +43,8 @@ Define Gate 0 through Gate 3, the evidence required to move between them, what c
 
 ### Gate 3: General availability claims
 
-- Criteria: physical-YubiKey production-confidence evidence exists (B-REAL-FIDO2); the boot chain is sealed, not just fs-verity on a mutable anchor (B-BOOTC-SEAL fully resolved, not just reclassified); any hardware platform claimed as production (e.g. ARM64) has real-board evidence (B-ARM64-PATHA); at least one completed paid pilot with a readout (OMN-67) informs the claim.
-- Evidence required to move from Gate 2 to Gate 3: a real-hardware YubiKey validation run per refs/days-31-60-narrow-product-2026-07-25.md’s demo spec; a sealed/signed UKI boot chain per refs/bootc-composefs-sealed-flow-2026-07-22.md; for any hardware platform beyond the pilot platform, board-level evidence per refs/arm64-rk-board-status-2026-07-17.md; a completed OMN-67 pilot readout with a day-90 decision recorded.
+- Criteria: physical-U2F/HSM production-confidence evidence exists (B-REAL-FIDO2); the boot chain is sealed, not just fs-verity on a mutable anchor (B-BOOTC-SEAL fully resolved, not just reclassified); any hardware platform claimed as production (e.g. ARM64) has real-board evidence (B-ARM64-PATHA); at least one completed paid pilot with a readout (OMN-67) informs the claim.
+- Evidence required to move from Gate 2 to Gate 3: a real-hardware U2F/HSM validation run per refs/days-31-60-narrow-product-2026-07-25.md’s demo spec; a sealed/signed UKI boot chain per refs/bootc-composefs-sealed-flow-2026-07-22.md; for any hardware platform beyond the pilot platform, board-level evidence per refs/arm64-rk-board-status-2026-07-17.md; a completed OMN-67 pilot readout with a day-90 decision recorded.
 - Allowed commercial activity: general sales conversations and production claims, scoped strictly to the platforms and configurations actually evidenced. A claim about x86_64/VM-validated deployments does not extend to ARM64 hardware unless ARM64’s own Gate 3 evidence separately exists.
 - Status: not met, and not reachable until Gate 2 closes.
 
@@ -54,7 +54,7 @@ Define Gate 0 through Gate 3, the evidence required to move between them, what c
 |---|---|---|
 | Gate 0 -> Gate 1 | Evidence boundary doc, legal/naming review opened, covenant drafted, Technical Preview criteria defined | Evidence boundary and naming/legal review: yes (PR #103, #114). Covenant and TP criteria: not yet. |
 | Gate 1 -> Gate 2 | B-VM-CTAP2 closed, B-HARDENING-RUNTIME runtime-proven, B-BOOTC-SEAL reclassified, 2 design partners, priced SOW | Blocker retirement plan drafted (PR #105); actual blocker closures: not yet. Design partners and signed SOW: not yet. |
-| Gate 2 -> Gate 3 | Physical-YubiKey evidence, sealed UKI, ARM64 board evidence (if claimed), completed pilot readout | None of these exist yet; this doc only specifies what is needed. |
+| Gate 2 -> Gate 3 | Physical-U2F/HSM evidence, sealed UKI, ARM64 board evidence (if claimed), completed pilot readout | None of these exist yet; this doc only specifies what is needed. |
 
 ## Proof-first sales motion: public proof to annual assurance
 

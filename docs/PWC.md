@@ -58,7 +58,7 @@ Each of these removed a watcher and kept the property. That is the doctrine in o
 
 PWC dissolves the controller only where the controller would be a program. It never dissolves the owner.
 
-- **Physical presence.** Disk unlock, login, and administrative identity require the YubiKey, its PIN, or its touch (ADR-003). The touch is a controller that no software can impersonate, and it is deliberately kept out of the program.
+- **Physical presence.** Disk unlock, login, and administrative identity require the U2F/HSM, its PIN, or its touch (ADR-003). The touch is a controller that no software can impersonate, and it is deliberately kept out of the program.
 - **Irreversible operations.** Fuse burns, RPMB key writes, Secure Boot key enrollment: documented, rehearsed on sacrificial hardware, never automated past a human gate ([MISSION.md](MISSION.md)). These are PAC with a human as the controller, on purpose.
 - **Recovery.** The recovery path is the designed exception to every controller-free mechanism, and it is held offline and separated from the credentials it recovers.
 - **The firmware below the OS.** On x86-64, and today on most of ARM64, the lower firmware layers remain OEM-controlled: PAC we do not own and cannot dissolve. [MITIGATE.md](MITIGATE.md) names this honestly rather than pretending otherwise.

@@ -9,7 +9,7 @@ name: yubiOS VM e2e (tests/vm)
 #     LUKS2-FIDO2 + homed-FIDO2 legs SKIP (not fail) unless a CTAP2 hmac-secret
 #     authenticator (swu2f Layer 2, shipped only in the mkosi --profile test
 #     image) is present.
-#   * test-luks-fido2.sh     -- hardware e2e: needs a PHYSICAL YubiKey + a spare
+#   * test-luks-fido2.sh     -- hardware e2e: needs a PHYSICAL U2F/HSM + a spare
 #     block device + root. Never executed in CI (it flashes a disk); lint-only.
 #
 # Honest CI contract: this workflow lints both scripts for real, provisions and
@@ -26,12 +26,12 @@ on:
         default: 'docker.io/0mniteck/yubios:dev'
         type: string
       hw_device:
-        description: 'DESTRUCTIVE: spare block device path (e.g. /dev/sdb) on the self-hosted rock1 runner for the physical-YubiKey hardware test (tests/vm/test-luks-fido2.sh). Wipes this device. Leave blank (default) to skip -- this never runs on push, only on an explicit dispatch with this set.'
+        description: 'DESTRUCTIVE: spare block device path (e.g. /dev/sdb) on the self-hosted rock1 runner for the physical-U2F/HSM hardware test (tests/vm/test-luks-fido2.sh). Wipes this device. Leave blank (default) to skip -- this never runs on push, only on an explicit dispatch with this set.'
         required: false
         default: ''
         type: string
       hw_image:
-        description: 'yubiOS OCI image ref for the hardware YubiKey passthrough test (defaults to the same image input above).'
+        description: 'yubiOS OCI image ref for the hardware U2F/HSM passthrough test (defaults to the same image input above).'
         required: false
         default: ''
         type: string
@@ -96,7 +96,7 @@ on:
         default: 'docker.io/0mniteck/yubios:dev'
         type: string
       allow_real_u2f:
-        description: 'Pass ALLOW_REAL_U2F=1 to the passless CI tests (test-luks-fido2-ci.sh, test-fido2-enrollment.sh). Required on the arm64 self-hosted rock1 runner because that runner has a physical YubiKey attached for the DESTRUCTIVE test (tests/vm/test-luks-fido2.sh). PR #144 real-U2F guard correctly refuses to silently run passless tests when a real key is on the host (otherwise a passless regression would be masked by the in-guest software authenticator losing the enumeration race to the real key) -- so CI must explicitly opt in. Default false; set true on any dispatch that runs on rock1.'
+        description: 'Pass ALLOW_REAL_U2F=1 to the passless CI tests (test-luks-fido2-ci.sh, test-fido2-enrollment.sh). Required on the arm64 self-hosted rock1 runner because that runner has a physical U2F/HSM attached for the DESTRUCTIVE test (tests/vm/test-luks-fido2.sh). PR #144 real-U2F guard correctly refuses to silently run passless tests when a real key is on the host (otherwise a passless regression would be masked by the in-guest software authenticator losing the enumeration race to the real key) -- so CI must explicitly opt in. Default false; set true on any dispatch that runs on rock1.'
         required: false
         default: false
         type: boolean
@@ -113,7 +113,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013 # trixie-debian13-dev INDEX (manifest list)
+      image: docker://dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d # trixie-debian13-dev INDEX (manifest list)
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -670,33 +670,33 @@ jobs:
           fi
           echo "### vm-e2e (arm64) -- INFO: AppArmor profiles relaxed for bcvk VM boot (unpriv_bwrap + swtpm when loaded)" >> "$GITHUB_STEP_SUMMARY"
 
-      # -- Hardware YubiKey passthrough legs (yubiOS#9, yubiOS#20). --
+      # -- Hardware U2F/HSM passthrough legs (yubiOS#9, yubiOS#20). --
       # Deliberately steps INSIDE vm-e2e rather than a separate job: they share this
       # job's bcvk build, image pull, and AppArmor setup on the self-hosted rock1
       # runner instead of paying for all of it twice.
       #
-      # tests/vm/test-luks-fido2.sh needs a PHYSICAL YubiKey + a spare block device +
+      # tests/vm/test-luks-fido2.sh needs a PHYSICAL U2F/HSM + a spare block device +
       # root: it flashes the device via `bcvk native-to-disk`, then enrolls LUKS2
-      # against a real YubiKey tap. Different mechanism from the swu2f software
+      # against a real U2F/HSM tap. Different mechanism from the swu2f software
       # authenticator legs below (no VM, no QEMU USB passthrough).
       #
       # DESTRUCTIVE, so gated on an explicit workflow_dispatch with a non-empty
       # hw_device; on any normal run all three steps skip.
-      - name: Precondition -- physical YubiKey attached (USB vendor 0x1050)
-        id: yubikey
+      - name: Precondition -- physical U2F/HSM attached (USB vendor 0x1050)
+        id: u2f_hsm
         if: github.event_name == 'workflow_dispatch' && inputs.hw_device != ''
         run: |
           if lsusb 2>/dev/null | grep -qi '1050:'; then
             echo "present=1" >> "$GITHUB_OUTPUT"
           else
             echo "present=0" >> "$GITHUB_OUTPUT"
-            echo "::warning::SKIP: no physical YubiKey detected on this runner (lsusb has no vendor 1050 device)."
-            echo "### vm-e2e (${{ matrix.arch }}) -- SKIP: hardware leg, no physical YubiKey attached to this runner" >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::SKIP: no physical U2F/HSM detected on this runner (lsusb has no vendor 1050 device)."
+            echo "### vm-e2e (${{ matrix.arch }}) -- SKIP: hardware leg, no physical U2F/HSM attached to this runner" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Precondition -- target device is a block device and not the runner's root disk
         id: device
-        if: github.event_name == 'workflow_dispatch' && inputs.hw_device != '' && steps.yubikey.outputs.present == '1'
+        if: github.event_name == 'workflow_dispatch' && inputs.hw_device != '' && steps.u2f_hsm.outputs.present == '1'
         env:
           HW_DEVICE: ${{ inputs.hw_device }}
         run: |
@@ -828,14 +828,14 @@ jobs:
           retention-days: 7
 
       - name: Run tests/vm/test-luks-fido2.sh (DESTRUCTIVE -- wipes ${{ inputs.hw_device }})
-        if: github.event_name == 'workflow_dispatch' && inputs.hw_device != '' && steps.yubikey.outputs.present == '1' && steps.device.outputs.ok == '1'
+        if: github.event_name == 'workflow_dispatch' && inputs.hw_device != '' && steps.u2f_hsm.outputs.present == '1' && steps.device.outputs.ok == '1'
         timeout-minutes: 10
         env:
           HW_DEVICE: ${{ inputs.hw_device }}
           HW_IMAGE: ${{ inputs.hw_image != '' && inputs.hw_image || (inputs.image || 'docker.io/0mniteck/yubios:dev') }}
         run: |
           chmod +x tests/vm/test-luks-fido2.sh
-          echo "Running test-luks-fido2.sh against $HW_DEVICE with image $HW_IMAGE (physical YubiKey required -- touch when prompted)"
+          echo "Running test-luks-fido2.sh against $HW_DEVICE with image $HW_IMAGE (physical U2F/HSM required -- touch when prompted)"
           set +e
           sudo env "PATH=$PATH:/usr/sbin:/sbin" bash tests/vm/test-luks-fido2.sh "$HW_DEVICE" "$HW_IMAGE"
           rc=$?
@@ -953,7 +953,7 @@ jobs:
 
       - name: Note hardware-only variant (runs above when dispatched with hw_device, else lint-only)
         run: |
-          echo "### vm-e2e (${{ matrix.arch }}) -- INFO: tests/vm/test-luks-fido2.sh needs a physical YubiKey + spare block device + root; the hardware leg above runs it for real when dispatched with hw_device set, otherwise it is lint-only (yubiOS#9, yubiOS#20)." >> "$GITHUB_STEP_SUMMARY"
+          echo "### vm-e2e (${{ matrix.arch }}) -- INFO: tests/vm/test-luks-fido2.sh needs a physical U2F/HSM + spare block device + root; the hardware leg above runs it for real when dispatched with hw_device set, otherwise it is lint-only (yubiOS#9, yubiOS#20)." >> "$GITHUB_STEP_SUMMARY"
 
   ci-callback:
     name: Callback to ci.yml orchestrator

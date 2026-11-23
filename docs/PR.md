@@ -20,7 +20,7 @@ The campaign thesis is:
 
 The public story is not “a more secure Linux distribution.” That category is crowded and difficult to prove. The sharper story is that yubiOS separates two questions that conventional systems often blur:
 
-1. **Is the authorized owner present?** An owner-held YubiKey gates signing, unlock, SSH, and privileged local identity.
+1. **Is the authorized owner present?** An owner-held U2F/HSM gates signing, unlock, SSH, and privileged local identity.
 2. **Did the expected platform boot?** Signed boot artifacts, verified operating-system content, and platform measurement answer this separately.
 
 This distinction is both technically honest and memorable. It also prevents the current “No TPM” shorthand from becoming a misleading claim: yubiOS avoids a **mandatory TPM as the owner-facing unlock and identity gate**, while still using TPM/fTPM measurement where it adds platform evidence.
@@ -35,7 +35,7 @@ Within 90 days of the first campaign wave, aim to achieve:
 - 2 real-hardware collaborators, including at least 1 candidate for the RK3588 Path A proof.
 - 3 substantive independent technical discussions, articles, podcasts, or community presentations.
 - 5 actionable external findings or questions triaged in public, with outcomes linked to the repository.
-- 1 repeatable physical-YubiKey demonstration whose commands, logs, hardware, and limitations are published.
+- 1 repeatable physical-U2F/HSM demonstration whose commands, logs, hardware, and limitations are published.
 - 0 uncorrected production-readiness claims, false affiliations, or test-versus-production artifact ambiguities.
 
 Treat stars, impressions, and page views as diagnostic signals rather than the primary goal.
@@ -46,7 +46,7 @@ Treat stars, impressions, and page views as diagnostic signals rather than the p
 
 The repository describes a coherent and differentiated design:
 
-- A FIDO2-first, image-based Linux system with the YubiKey as the **owner-facing human-presence and identity root**.
+- A FIDO2-first, image-based Linux system with the U2F/HSM as the **owner-facing human-presence and identity root**.
 - PIV/PKCS#11 for owner-controlled Secure Boot signing; FIDO2 `hmac-secret` for LUKS2 and home unlock; resident FIDO2 credentials for SSH; and pam-u2f for login and `sudo`.
 - A read-only, verified `/usr`, signed unified kernel images, bootc/OCI delivery, digest-pinned inputs, build policy, provenance, SBOMs, and A/B recovery.
 - ARM64 as the primary platform because it offers a plausible path to an owner-provisioned chain below the UKI; x86-64 remains supported above OEM firmware.
@@ -88,7 +88,7 @@ Never claim “first,” “only,” or “most secure.” The defensible langua
 |---:|---|---|---|
 | 1 | Linux boot, systemd, bootc, storage, and security engineers | Correct composition, reproducibility, failure behavior | Review the architecture, reproduce a proof, file precise issues |
 | 1 | ARM64 firmware, TF-A, OP-TEE, U-Boot, and board engineers | Real-board feasibility, fuse/RPMB evidence, recovery | Help select and validate the first Path A board |
-| 1 | YubiKey, FIDO2, PIV, and local-auth practitioners | Interface correctness, token policy, recovery, human presence | Review enrollment and hardware-in-the-loop flows |
+| 1 | U2F/HSM, FIDO2, PIV, and local-auth practitioners | Interface correctness, token policy, recovery, human presence | Review enrollment and hardware-in-the-loop flows |
 | 2 | Open-source supply-chain practitioners | Pins, policy, provenance, SBOM verification, release separation | Audit the release path and contribute verification |
 | 2 | Security-conscious owner-operators and homelab builders | Control, recoverability, transparent limits | Join a clearly labeled technical preview |
 | 3 | Security and Linux press | A timely, evidenced change in how system trust is framed | Cover a milestone, not a promise |
@@ -119,7 +119,7 @@ Never claim “first,” “only,” or “most secure.” The defensible langua
 Use the level appropriate to the audience:
 
 1. **Human:** “Your machine should ask for a key you control before it unlocks or accepts privileged identity.”
-2. **Product:** “yubiOS uses an owner-held YubiKey across Secure Boot signing, disk and home unlock, SSH, and PAM.”
+2. **Product:** “yubiOS uses an owner-held U2F/HSM across Secure Boot signing, disk and home unlock, SSH, and PAM.”
 3. **Technical:** “PIV signs the UKI; FIDO2 `hmac-secret` gates LUKS2 without PCR-hash update lock-in; verified `/usr` and signed image delivery protect the operating-system content.”
 4. **Platform:** “ARM64 Path A aims to extend owner control below the UKI through TF-A, OP-TEE, RPMB-backed state, fTPM measurement, and U-Boot; that path is not production-proven yet.”
 5. **Social:** “Security defaults should not require an enterprise contract or an invisible vendor-controlled trust anchor.”
@@ -132,15 +132,15 @@ Use the level appropriate to the audience:
 
 **30 words**
 
-> yubiOS is an experimental, image-based Linux system that uses an owner-held YubiKey for signing, unlock, SSH, and local authentication while keeping platform measurement a separate, explicit trust boundary.
+> yubiOS is an experimental, image-based Linux system that uses an owner-held U2F/HSM for signing, unlock, SSH, and local authentication while keeping platform measurement a separate, explicit trust boundary.
 
 **Boilerplate**
 
-> yubiOS is an independent open-source project building a FIDO2-first, image-based Linux operating system around owner-held trust. A YubiKey provides the owner-facing signing, unlock, SSH, and local-authentication boundary; signed boot artifacts, verified operating-system content, pinned build inputs, and auditable release metadata protect the system around it. ARM64 is the primary long-term platform for an owner-provisioned chain below the unified kernel image, while x86-64 remains supported above OEM firmware. yubiOS is pre-launch and publishes its decisions, evidence, blockers, and residual risks in the open.
+> yubiOS is an independent open-source project building a FIDO2-first, image-based Linux operating system around owner-held trust. A U2F/HSM provides the owner-facing signing, unlock, SSH, and local-authentication boundary; signed boot artifacts, verified operating-system content, pinned build inputs, and auditable release metadata protect the system around it. ARM64 is the primary long-term platform for an owner-provisioned chain below the unified kernel image, while x86-64 remains supported above OEM firmware. yubiOS is pre-launch and publishes its decisions, evidence, blockers, and residual risks in the open.
 
 **Independence line**
 
-> yubiOS is an independent community project. It is not affiliated with, sponsored by, or endorsed by Yubico. YubiKey and Yubico are registered trademarks of Yubico AB.
+> yubiOS is an independent community project. It is not affiliated with, sponsored by, or endorsed by Yubico. U2F/HSM and Yubico are registered trademarks of Yubico AB.
 
 Use Yubico’s [official brand assets and usage guidance](https://brandfolder.yubico.com/yubico/public) only after a name and trademark review. Do not imply a partnership, certification, compatibility endorsement, or review-unit relationship.
 
@@ -151,15 +151,15 @@ Every public claim must have an owner, evidence link, review date, and maturity 
 | Topic | Approved wording now | Evidence | Do not say yet |
 |---|---|---|---|
 | Status | “Pre-launch,” “experimental,” “groundwork,” “technical preview” | [README.md](../README.md), [TODO.md]— (unfilled), [BLOCKERS.md](BLOCKERS.md) | “Production-ready,” “GA,” “safe for daily use” |
-| YubiKey role | “Owner-facing human-presence and identity root” | [SPEC.md](SPEC.md), [ARCHITECTURE.md](ARCHITECTURE.md), [THREAT_MODEL.md](THREAT_MODEL.md) | “The only root of trust at every layer” |
+| U2F/HSM role | “Owner-facing human-presence and identity root” | [SPEC.md](SPEC.md), [ARCHITECTURE.md](ARCHITECTURE.md), [THREAT_MODEL.md](THREAT_MODEL.md) | “The only root of trust at every layer” |
 | TPM stance | “No mandatory TPM for owner-facing disk unlock or identity workflows” | [ADR-003](ADR.md#adr-003-luks2--fido2-via-systemd-cryptenroll-no-tpm), [SPEC.md](SPEC.md) | Unqualified “No TPM” or “replaces every TPM function” |
-| Secure Boot | “Designed to sign UKIs through YubiKey PIV slot 9c using PKCS#11” | [ADR-002](ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw), [sbsign validation note](../refs/sbsign-pkcs11-validate-2026-07-23.md) | “FIDO2 signs Secure Boot artifacts” or “production signing fully proven” |
+| Secure Boot | “Designed to sign UKIs through U2F/HSM PIV slot 9c using PKCS#11” | [ADR-002](ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw), [sbsign validation note](../refs/sbsign-pkcs11-validate-2026-07-23.md) | “FIDO2 signs Secure Boot artifacts” or “production signing fully proven” |
 | FIDO2 unlock | “Designed around FIDO2 `hmac-secret`, PIN, touch, and an offline recovery key” | [ADR-003](ADR.md#adr-003-luks2--fido2-via-systemd-cryptenroll-no-tpm), [LUKS/FIDO2 test note](../refs/luks-fido2-e2e-test-2026-07-23.md) | “Production hardware flow fully validated” until physical evidence exists |
 | Immutable OS | “`/usr` is intended to be read-only and verified through composefs/erofs and dm-verity” | [SPEC.md](SPEC.md), [ARCHITECTURE.md](ARCHITECTURE.md) | “The whole system is immutable” or “runtime compromise is impossible” |
 | ARM64 | “Primary target and planned owner-owned platform-root path” | [ADR-023](ADR.md#adr-023-arm64-as-primary-target-platform), [board status](../refs/arm64-path-a-b-board-status-2026-07-23.md) | “Production Path A is proven” |
 | x86-64 | “Supported above the UKI; OEM firmware remains below the owner-controlled boundary” | [SPEC.md](SPEC.md), [THREAT_MODEL.md](THREAT_MODEL.md) | “No OEM trust on x86-64” |
 | VM evidence | “The recorded ARM64 lane reached a Fedora guest; enrollment proof remained gated by a guest failure in that run” | [VM evidence](../refs/vm-e2e-run-29525332901.md) | “ARM64 end-to-end CI is green” without a newer verified run |
-| Software authenticators | “TEST-only regression tools isolated to `dev` tags” | [ADR-026](ADR.md#adr-026-devdev-sha-test-image-tag-swu2f-enabled-on-0mniteckyubios), [CI_MAP.md](CI_MAP.md) | “Equivalent to a physical YubiKey” |
+| Software authenticators | “TEST-only regression tools isolated to `dev` tags” | [ADR-026](ADR.md#adr-026-devdev-sha-test-image-tag-swu2f-enabled-on-0mniteckyubios), [CI_MAP.md](CI_MAP.md) | “Equivalent to a physical U2F/HSM” |
 | Supply chain | “Builds are designed to use digest-pinned inputs, policy gates, provenance, and SBOM attestations” | [PINNED.md](../PINNED.md), [CI_MAP.md](CI_MAP.md), [MISSION.md](MISSION.md) | A SLSA level unless independently verified against the current specification |
 | PQ TLS | “Current dependency floors are intended to preserve hybrid ML-KEM defaults, with CI drift checks” | [ADR-025](ADR.md#adr-025-post-quantum-hybrid-tls-x25519mlkem768-for-updateattestation-endpoints), [TODO.md]— (unfilled) | “Post-quantum secure” as a whole-product guarantee |
 | Firmware inspection | “One-shot, warning-oriented first-boot inspection” | [ADR-024](ADR.md#adr-024-chipsec-first-boot-firmware-validation-as-a-portable-service), [MITIGATE.md](MITIGATE.md) | “CHIPSEC proves firmware is clean” |
@@ -191,11 +191,11 @@ Required evidence:
 
 Allowed language: “building,” “technical preview,” “seeking reviewers,” and “here is what is proven today.”
 
-### Gate 2: physical-YubiKey technical preview
+### Gate 2: physical-U2F/HSM technical preview
 
 Required evidence:
 
-- Physical YubiKey enrollment and unlock on named hardware.
+- Physical U2F/HSM enrollment and unlock on named hardware.
 - PIV-backed signing and independent signature verification.
 - Lost-token and recovery-key rehearsal.
 - Repeatable commands, logs, versions, and video from a clean install.
@@ -257,7 +257,7 @@ Trigger: Gate 2 passes.
 
 Theme: **“One key, four owner workflows, one reproducible proof.”**
 
-Package the physical-YubiKey demo as:
+Package the physical-U2F/HSM demo as:
 
 - A concise announcement with tested hardware and versions.
 - A raw evidence bundle: logs, commands, signatures, digests, recovery outcome, and known gaps.
@@ -335,13 +335,13 @@ Do not buy a mass press-release wire for the first campaign. The audience is nar
 
 **Subject:** Evidence, not a launch claim: using one owner-held key across Linux signing and unlock
 
-> yubiOS is an independent, pre-launch Linux project exploring a specific trust model: a YubiKey is the owner-facing gate for UKI signing, LUKS2 and home unlock, SSH, and PAM, while platform measurement remains a separate root with explicitly bounded guarantees. We have now reproduced **[milestone]** on **[named hardware]** and published the commands, logs, signatures, artifact digests, recovery result, threat model, and gaps at **[evidence URL]**. The interesting part is not another immutable distribution; it is the attempt to move owner authority out of an invisible board-bound root without pretending firmware or active-session risks disappear. If this fits your Linux/security coverage, we can provide a live demo and answer technical questions on the record.
+> yubiOS is an independent, pre-launch Linux project exploring a specific trust model: a U2F/HSM is the owner-facing gate for UKI signing, LUKS2 and home unlock, SSH, and PAM, while platform measurement remains a separate root with explicitly bounded guarantees. We have now reproduced **[milestone]** on **[named hardware]** and published the commands, logs, signatures, artifact digests, recovery result, threat model, and gaps at **[evidence URL]**. The interesting part is not another immutable distribution; it is the attempt to move owner authority out of an invisible board-bound root without pretending firmware or active-session risks disappear. If this fits your Linux/security coverage, we can provide a live demo and answer technical questions on the record.
 
 Personalize the first two sentences for the recipient’s recent work. Never attach an unsolicited binary or write “just following up” more than once.
 
 ### Community post
 
-**Suggested title:** Show HN: yubiOS—an experimental Linux trust chain built around an owner-held YubiKey
+**Suggested title:** Show HN: yubiOS—an experimental Linux trust chain built around an owner-held U2F/HSM
 
 > We are building yubiOS to test a narrow idea: the credential that authorizes owner actions should live with the owner, while platform integrity should be measured and described separately. PIV signs the UKI; FIDO2 `hmac-secret` gates disk and home unlock; resident FIDO2 credentials cover SSH; pam-u2f covers local privilege. The OS side is image-based and intended to verify `/usr`. This is not production-ready, not affiliated with Yubico, and not a claim that firmware or runtime compromise disappears. Here is the current proof, the failed assumptions, and the blocker list: **[URL]**. We especially want review from **[two specific expertise areas]**.
 
@@ -349,11 +349,11 @@ Personalize the first two sentences for the recipient’s recent work. Never att
 
 **Why not use a TPM?**
 
-The project does use TPM/fTPM measurement where it is useful. It avoids making a board-bound TPM the sole owner-facing disk-unlock or identity gate. The YubiKey answers whether the owner is present; platform measurement answers what booted.
+The project does use TPM/fTPM measurement where it is useful. It avoids making a board-bound TPM the sole owner-facing disk-unlock or identity gate. The U2F/HSM answers whether the owner is present; platform measurement answers what booted.
 
 **Is yubiOS affiliated with Yubico?**
 
-No. It is an independent open-source project. YubiKey and Yubico are Yubico trademarks. Do not suggest endorsement or certification.
+No. It is an independent open-source project. U2F/HSM and Yubico are Yubico trademarks. Do not suggest endorsement or certification.
 
 **Is it production-ready?**
 
@@ -363,7 +363,7 @@ No. Use the current gate label and link the blocker register. State exactly whic
 
 Recovery material and backup-token enrollment are mandatory parts of the design. A campaign demo must show recovery, not merely describe it.
 
-**Does a YubiKey prove that a safe OS requested the unlock secret?**
+**Does a U2F/HSM prove that a safe OS requested the unlock secret?**
 
 No. FIDO2 possession and interaction do not attest the requesting OS. That is why the enforced boot chain and honest firmware boundary matter.
 
@@ -509,7 +509,7 @@ Prefer these primary or first-party sources when refreshing the campaign:
 
 ### Technical and category sources
 
-- [YubiKey 5 FIDO documentation](https://docs.yubico.com/hardware/yubikey/yk-tech-manual/yk5-apps-fido.html)
+- [U2F/HSM 5 FIDO documentation](https://docs.yubico.com/hardware/yubikey/yk-tech-manual/yk5-apps-fido.html)
 - [Yubico official brand assets](https://brandfolder.yubico.com/yubico/public)
 - [Yubico trademark notice](https://docs.yubico.com/hardware/yubikey/yk-tech-manual/copyright.html)
 - [bootc upstream](https://github.com/bootc-dev/bootc)

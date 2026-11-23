@@ -168,7 +168,7 @@ whether you can burn the ROTPK hash into SoC OTP/eFuse.
 - **Path B — no fuses / vendor-locked / not burned (measured + attested):** no
   hardware rejection. Software RoT via U-Boot FIT verified boot (public key in the
   U-Boot control DTB) plus measured boot into the fTPM; trust is decided *after*
-  boot by local/remote attestation and fTPM/YubiKey secret release. A compromised
+  boot by local/remote attestation and fTPM/U2F/HSM secret release. A compromised
   stage still executes long enough to measure itself — this is evidence + sealing,
   not enforcement. Use for dev boards and early bring-up.
 
@@ -193,7 +193,7 @@ regions. Prefer this on new ports.
 
 - The fTPM gives ARM64 a measured-boot PCR set + local attestation root that no
   vendor controls. Bind `ConditionSecurity=measured-os` (ADR-016) to it.
-- The **YubiKey stays the primary RoT**: FIDO2 hmac-secret still unlocks LUKS2
+- The **U2F/HSM stays the primary RoT**: FIDO2 hmac-secret still unlocks LUKS2
   (ADR-003). The fTPM measures and attests; it must never become the sole disk
   unlock gate, or yubiOS has re-created an on-device, vendor-shaped trust anchor.
 - Pick ONE board and go deep first — TF-A is per-SoC. Prefer non-Qualcomm ARM64
@@ -265,7 +265,7 @@ All OTP writes are **0 → 1 only. Irreversible.**
 ### Bricking risks
 
 - Burn OTP + lose private key = permanent brick. Keep the signing key offline, multiple
-  air-gapped backups. Consider a YubiKey PIV slot.
+  air-gapped backups. Consider a U2F/HSM PIV slot.
 - Set `revoke_devkey` with a corrupt `boot.img` = no recovery path.
 - Never set `revoke_devkey` until the signed-image boot is proven on a sacrificial board.
 
@@ -317,7 +317,7 @@ Concrete implications for arm trusted firmware optee: any change to the skill sh
 
 This skill — **BL31/BL32/BL33, FIP, ROTPK chain, OP-TEE secure world** — sits in a domain that strengthens the yubiOS trust chain from BL31/BL32/BL33, FIP, ROTPK chain, OP-TEE secure world. Cycle-5 of `curve-guided-rsi` was run on the expanded 69-skill corpus (63 existing + 6 new); this skill's fit coordinate was (u=0.419, v=0.102), PC1+PC2 = 0.4615, holdout R² = +0.2244.
 
-For ARM Trusted Firmware / OP-TEE, the trust chain primitive applies as follows: this skill is the ARM64 firmware-stage trust chain; the YubiKey layer (per `yubikey-operations`) builds on this foundation. The trust chain for yubiOS runs YubiKey → fTPM (per `yubikey-operations` and `ftpm-optee-tpm`) → UKI PCR 11 → dm-verity root hash (per `dm-verity-and-integrity`) → bootc image digest (per `bootc-images`) → SLSA L3 attestation (per `slsa-provenance` + `sigstore-rekor-v2`); this skill is one contributor in that chain.
+For ARM Trusted Firmware / OP-TEE, the trust chain primitive applies as follows: this skill is the ARM64 firmware-stage trust chain; the U2F/HSM layer (per `yubikey-operations`) builds on this foundation. The trust chain for yubiOS runs U2F/HSM → fTPM (per `yubikey-operations` and `ftpm-optee-tpm`) → UKI PCR 11 → dm-verity root hash (per `dm-verity-and-integrity`) → bootc image digest (per `bootc-images`) → SLSA L3 attestation (per `slsa-provenance` + `sigstore-rekor-v2`); this skill is one contributor in that chain.
 
 Concrete implications for ARM Trusted Firmware / OP-TEE: any change should be reviewed for impact on trust-chain integrity; gaps in the trust chain attributable to this skill are tracked in the cycle-5 run log at `refs/curve-guided-rsi-v2-cycle5-deep-research-2026-08-04.md`.
 

@@ -117,8 +117,8 @@ build_local_installer() {
         printf 'mkosi_source=https://github.com/yubi-OS/mkosi@%s (approved source; release provenance in PINNED.md)\n' "$LOCAL_MKOSI_REF"
         printf '%s\n' 'signing=UKI signed via SecureBootKeySource=provider:pkcs11 + systemd-sbsign'
         printf '%s\n' 'signature_envelope=random non-production SoftHSM key; excluded from byte-for-byte proof'
-        printf '%s\n' 'NOTE: Signing key is a SoftHSM mock of YubiKey PIV slot 9c.'
-        printf '%s\n' 'Production images are signed with the real YubiKey (ADR-008); this'
+        printf '%s\n' 'NOTE: Signing key is a SoftHSM mock of U2F/HSM PIV slot 9c.'
+        printf '%s\n' 'Production images are signed with the real U2F/HSM (ADR-008); this'
         printf '%s\n' 'image validates the build + PKCS#11 signing path, not a production key.'
         printf '%s\n' 'Install flow (ADR-022): write this image to disk, boot; the installed'
         printf '%s\n' 'system tracks 0mniteck/yubios:latest via bootc. ARM64 targets flash'

@@ -26,7 +26,7 @@ L1c -- fido2-boot-unlock-mode
 
 | Boundary | Mode | Timeout | Fallback | Unattended reboot |
 |---|---|---|---|---|
-| LUKS2 root unlock (`systemd-cryptsetup`, initrd) | interactive: touch the YubiKey | `fido2-device` token retries then falls to passphrase prompt | passphrase (documented recovery) | waits forever; by design there is no network or TPM path |
+| LUKS2 root unlock (`systemd-cryptsetup`, initrd) | interactive: touch the U2F/HSM | `fido2-device` token retries then falls to passphrase prompt | passphrase (documented recovery) | waits forever; by design there is no network or TPM path |
 | `systemd-homed` home unlock | interactive at login | homed's own prompt loop | passphrase if enrolled | home stays locked; system services unaffected |
 | `pam-u2f` login gate | interactive | PAM module timeout | second enrolled key, then denial | n/a |
 | CI end-to-end (`bcvk` VM) | non-interactive | software authenticator answers instantly | none; failure is a test failure | n/a; test is one-shot |
@@ -42,7 +42,7 @@ enrolled method has failed; a single method failing is a log line, not an exit.
 ## Why this is the interactive exception
 
 Every other boot-time control in yubiOS runs as a one-shot or a daemon with no human in
-the loop (see the attestation and measurement mode file). The YubiKey touch is the single
+the loop (see the attestation and measurement mode file). The U2F/HSM touch is the single
 place where boot waits for a person. That is the product decision: a machine that cannot
 be unlocked remotely cannot be unlocked by an attacker remotely either. The rootless,
 capability-bounded services that start afterwards never see the key; the Linux container
@@ -51,5 +51,5 @@ and seccomp isolation applied to them is what keeps the key's job to the boot bo
 ## Placement
 
 Coverage: continuous attestation and measurement (the daemons that follow unlock), rootless
-privilege and capabilities (post-unlock services), YubiKey FIDO2 boot (focal), container
+privilege and capabilities (post-unlock services), U2F/HSM FIDO2 boot (focal), container
 isolation and seccomp (post-unlock boundary). Omitted clusters omitted by design.

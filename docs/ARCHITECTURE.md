@@ -7,7 +7,7 @@ This document describes the current yubiOS architecture at the level needed for 
 
 ## Thesis
 
-yubiOS is a FIDO2-first immutable Linux system where the owner-held YubiKey is the human-presence and identity root of trust. The platform root is intentionally separate: on ARM64, the long-term production path is an owner-provisioned TF-A + OP-TEE + fTPM stack; on x86-64, the platform firmware and TPM remain OEM-supplied, so x86-64 is fully supported but not the flagship ownership story.
+yubiOS is a FIDO2-first immutable Linux system where the owner-held U2F/HSM is the human-presence and identity root of trust. The platform root is intentionally separate: on ARM64, the long-term production path is an owner-provisioned TF-A + OP-TEE + fTPM stack; on x86-64, the platform firmware and TPM remain OEM-supplied, so x86-64 is fully supported but not the flagship ownership story.
 
 ## Target Platforms
 
@@ -21,16 +21,16 @@ yubiOS is a FIDO2-first immutable Linux system where the owner-held YubiKey is t
 
 | Boundary | Mechanism | Owner-controlled material | Notes |
 |---|---|---|---|
-| Secure Boot / UKI signing | `systemd-sbsign` via YubiKey PIV slot 9c | PIV private key and enrolled certificate | Requires CCID/pcscd; not a FIDO2/hidraw operation |
+| Secure Boot / UKI signing | `systemd-sbsign` via U2F/HSM PIV slot 9c | PIV private key and enrolled certificate | Requires CCID/pcscd; not a FIDO2/hidraw operation |
 | Disk unlock | LUKS2 + `systemd-cryptenroll --fido2-device=auto --fido2-with-client-pin=yes` | FIDO2 hmac-secret credential plus recovery key | No TPM slot is enrolled as the sole unlock gate |
 | User homes | `systemd-homed` LUKS2 + FIDO2 | Per-user FIDO2 credential | Enables per-user cryptographic lock and portable homes |
 | SSH | OpenSSH `ed25519-sk` resident keys | FIDO2 resident key | PIN verification is expected for administrative use |
 | Login / sudo | pam-u2f >= 1.3.1 | FIDO2/U2F credential | `required`, not `sufficient`, so touch remains mandatory |
-| Platform measurement | TPM/fTPM PCRs and `ConditionSecurity=measured-os` | ARM64 fTPM owned by yubiOS on Path A | Measurement is complementary to YubiKey possession, not a replacement |
+| Platform measurement | TPM/fTPM PCRs and `ConditionSecurity=measured-os` | ARM64 fTPM owned by yubiOS on Path A | Measurement is complementary to U2F/HSM possession, not a replacement |
 
 ```mermaid
 graph LR
-    YK["🔑 YubiKey 5\nSingle hardware root of trust"]
+    YK["🔑 U2F/HSM 5\nSingle hardware root of trust"]
 
     subgraph CCID["CCID interface (USB smartcard)"]
         PIV["PIV slot 9c\nEC P-256 keypair\nsystemd-sbsign --key pkcs11:..."]
@@ -70,7 +70,7 @@ graph TD
     CFS["🔒 composefs deployment\nEROFS metadata + fs-verity objects\n/etc + /var from writable /state"]
     BACKING["🔐 physical sysroot\next4/Btrfs with fs-verity\noptionally inside LUKS2"]
     HOMED["🏠 systemd-homed\nper-user LUKS2 btrfs\nFIDO2 per user"]
-    YK["🔑 YubiKey 5\nPhysical possession required"]
+    YK["🔑 U2F/HSM 5\nPhysical possession required"]
     PCR["PCR 11 (TPM/fTPM, if present)\nboot phases measured\ninitrd-enter to complete"]
 
     FW ---|validates + measures| SDB
@@ -106,7 +106,7 @@ a traditional BLS entry and is therefore still an unsealed boot proof.
 6. In the sealed bootc target, the signed UKI binds the composefs digest and
    the bootc initramfs assembles the verified root from EROFS metadata and
    fs-verity objects. The separate mkosi path retains its dm-verity model.
-7. Root, swap, and user homes unlock through YubiKey FIDO2 plus recovery material.
+7. Root, swap, and user homes unlock through U2F/HSM FIDO2 plus recovery material.
 
 ```mermaid
 graph TD
@@ -120,7 +120,7 @@ graph TD
     UBOOT["BL33 U-Boot\nEFI_LOADER = UEFI firmware"]
     SDB["systemd-boot → UKI\nsame artifacts as x86-64"]
     LINUX["Linux\ntpm_ftpm_tee + IMA"]
-    YK["🔑 YubiKey 5\nFIDO2 LUKS2 unlock"]
+    YK["🔑 U2F/HSM 5\nFIDO2 LUKS2 unlock"]
 
     ROTPK -.->|Path A anchors| BL1
     BL1 -->|measures| BL2
@@ -150,7 +150,7 @@ graph TD
     A --> AT["Targets: RK3588 (Orange Pi 5, Rock 5B),\nRK3399 (RockPro64), Ampere"]
     B --> BT["Targets: dev boards, early bring-up,\nRPi 5 (VideoCore closes owner RoT)"]
 
-    A --> SEAL["fTPM PCRs + YubiKey\nrelease secrets / gate access"]
+    A --> SEAL["fTPM PCRs + U2F/HSM\nrelease secrets / gate access"]
     B --> SEAL
 
     style A fill:#0d6e0d,color:#fff
@@ -317,9 +317,9 @@ graph LR
 
     REG -->|bcvk native-to-disk\nno QEMU| HW["💽 Physical disk\n/dev/nvme0n1"]
     REG -->|bcvk to-disk\nQEMU VM| IMG["📁 qcow2 image\nfor cloud/VM"]
-    REG -->|bcvk ephemeral run\nYubiKey passthrough| VM["🖥 Ephemeral VM\nCI / dev loop"]
+    REG -->|bcvk ephemeral run\nU2F/HSM passthrough| VM["🖥 Ephemeral VM\nCI / dev loop"]
 
-    HW -->|first boot| ENROLL["yubiOS-enroll.service\nConditionSecurity=measured-os\nYubiKey tap"]
+    HW -->|first boot| ENROLL["yubiOS-enroll.service\nConditionSecurity=measured-os\nU2F/HSM tap"]
 
     style REGO fill:#8b0000,color:#fff
     style HW fill:#0d6e0d,color:#fff
@@ -395,7 +395,7 @@ The 2026-07-11 research cycle found one important wording bug: `RestrictFileSyst
 | Service | Gate | Notes |
 |---|---|---|
 | `yubiOS-chipsec-firstboot.service` | `ConditionSecurity=measured-os`, `ConditionFirstBoot=yes` | One-shot firmware validation; raw hardware access is explicitly scoped |
-| `yubiOS-enroll.service` | Measured boot expected | Enrolls owner YubiKey and recovery material after first boot |
+| `yubiOS-enroll.service` | Measured boot expected | Enrolls owner U2F/HSM and recovery material after first boot |
 | repart / install flow | DPS and systemd-repart | No traditional `/etc/fstab` installer model |
 
 ```mermaid
@@ -404,9 +404,9 @@ graph TD
 you adding?}
 
     Q -->|Extends /usr itself
-same namespace| SE["systemd-sysext\n\nExamples: debug tools, drivers\nYubiKey tools overlay\n\nTrust: Verity + PKCS#7\nread-only overlayfs on /usr"]
+same namespace| SE["systemd-sysext\n\nExamples: debug tools, drivers\nU2F/HSM tools overlay\n\nTrust: Verity + PKCS#7\nread-only overlayfs on /usr"]
     Q -->|Isolated system service
-own root + namespace| PS["Portable Service\nRootImage=\n\nExamples: chipsec, yubikey-agent\n\nTrust: Verity + PKCS#7 GPT image\nsandboxing opt-OUT"]
+own root + namespace| PS["Portable Service\nRootImage=\n\nExamples: chipsec, u2f-hsm-agent\n\nTrust: Verity + PKCS#7 GPT image\nsandboxing opt-OUT"]
     Q -->|Full secondary OS
 legacy packages| NS["systemd-nspawn\n\nExamples: Debian dev container\nRPM compat layer\n\nTrust: same PKCS#7 Verity"]
     Q -->|End-user app| FL["flatpak / OCI\n\nWeakest trust\nno Verity attestation"]
@@ -438,7 +438,7 @@ The current evidence notes are [refs/bootc-composefs-sealed-flow-2026-07-22.md](
 
 yubiOS adopts the kernel+rootfs split as a first-class principle (ADR-032). The kernel (signed UKI) is published as a separate OCI artifact at `docker.io/0mniteck/yubios:uki-<sha>-<arch>`, alongside the bootc OS image (`latest`, `<sha>`) which carries the rootfs. The split is grounded in three pre-existing ADRs (006, 013, 022) and motivated by A/B-update granularity (only the rootfs or only the kernel moves per update), sharper reproducibility (each artifact independently pinable and attestable), and the bootc composefs fsverity chain's path to a sealed anchor (the BLS digest anchor must stay stable across rootfs-only changes).
 
-The mkosi path produces the signed UKI as a side artifact of `mkosi build` via `--secure-boot-sign-tool systemd-sbsign` (ADR-008), anchored to the YubiKey PIV slot 9c via PKCS#11 (`provider:pkcs11`). The bootc install config `usr/lib/bootc/install/50-yubiOS.toml` now sets `[install] kargs` so bootc's auto-generated UKI uses the yubiOS standard cmdline (`root=dissect mount.usr=dissect rw audit=0`), matching the mkosi path per ADR-006's "both paths behave identically at runtime" principle.
+The mkosi path produces the signed UKI as a side artifact of `mkosi build` via `--secure-boot-sign-tool systemd-sbsign` (ADR-008), anchored to the U2F/HSM PIV slot 9c via PKCS#11 (`provider:pkcs11`). The bootc install config `usr/lib/bootc/install/50-yubiOS.toml` now sets `[install] kargs` so bootc's auto-generated UKI uses the yubiOS standard cmdline (`root=dissect mount.usr=dissect rw audit=0`), matching the mkosi path per ADR-006's "both paths behave identically at runtime" principle.
 
 The install-time BLSConfig wiring to use the pre-built UKI (the v1.16.3 `uki` key per PR [bootc-dev/bootc#2269](https://github.com/bootc-dev/bootc/pull/2269)) is staged as Phase 2 because bootc 1.16.3 has no project-authored BLSConfig drop-in intake. The `usr/lib/yubiOS/uki/install-uki.sh` script in this repo documents the install-time copy path (write the UKI to `/EFI/Linux/bootc/bootc_composefs-<digest>.efi` and a BLS `.conf` with the `uki` key) for the follow-up that wires it into either a bootc install hook or a first-boot systemd unit.
 

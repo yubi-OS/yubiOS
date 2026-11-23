@@ -3,7 +3,7 @@
     {
       "path": "0pointer-mastery/SKILL.md",
       "name": "0pointer-mastery",
-      "description": "Mastery and big picture skill for the Lennart Poettering / systemd ecosystem. Covers the full blog canon: \"Fitting Everything Together\" OS architecture vision, UKI/PCR/TPM trusted boot chain, Discoverable Partitions Specification, LUKS2 hardware unlock (FIDO2/TPM2/PKCS#11), factory reset + stateless systems, dynamic users, portable services, developer workflow (sysext + nspawn off host /usr), systemd v256–v260 feature landscape, mkosi, casync, Amutable (2026 company), and how everything maps to yubiOS (YubiKey replaces TPM2 for secrets)."
+      "description": "Mastery and big picture skill for the Lennart Poettering / systemd ecosystem. Covers the full blog canon: \"Fitting Everything Together\" OS architecture vision, UKI/PCR/TPM trusted boot chain, Discoverable Partitions Specification, LUKS2 hardware unlock (FIDO2/TPM2/PKCS#11), factory reset + stateless systems, dynamic users, portable services, developer workflow (sysext + nspawn off host /usr), systemd v256–v260 feature landscape, mkosi, casync, Amutable (2026 company), and how everything maps to yubiOS (U2F/HSM replaces TPM2 for secrets)."
     },
     {
       "path": "agents-sdk/SKILL.md",
@@ -30,10 +30,10 @@
     {
       "path": "audit-evidence-packaging/SKILL.md",
       "name": "audit-evidence-packaging",
-      "description": "Build cryptographically-signed evidence bundles for any system: collect logs, metrics, events into a versioned hash-chained archive, generate a TPM2 or YubiKey attestation quote that signs the bundle's Merkle root, attach a transparency-log entry (Rekor v2 / Sigstore) for the bundle, and expose a verifier that downstream auditors (HITRUST assessors, CISA reviewers, Chronicle UDM consumers) can re-run independently. Use when packaging audit evidence for an external reviewer, generating a remote attestation quote over a set of logs, building a tamper-evident log archive, wiring transparency-log attestation into a CI/CD pipeline, or designing a FedRAMP / HITRUST evidence collection strategy. Triggers on: evidence bundle, audit bundle, attestation quote, TPM2 quote, transparency log, Merkle root signing, hash-chained archive, evidence packaging, audit verifier, in-toto attestation, SLSA provenance bundle, sigstore bundle, rekor v2, Chronicle UDM, HITRUST evidence.",
+      "description": "Build cryptographically-signed evidence bundles for any system: collect logs, metrics, events into a versioned hash-chained archive, generate a TPM2 or U2F/HSM attestation quote that signs the bundle's Merkle root, attach a transparency-log entry (Rekor v2 / Sigstore) for the bundle, and expose a verifier that downstream auditors (HITRUST assessors, CISA reviewers, Chronicle UDM consumers) can re-run independently. Use when packaging audit evidence for an external reviewer, generating a remote attestation quote over a set of logs, building a tamper-evident log archive, wiring transparency-log attestation into a CI/CD pipeline, or designing a FedRAMP / HITRUST evidence collection strategy. Triggers on: evidence bundle, audit bundle, attestation quote, TPM2 quote, transparency log, Merkle root signing, hash-chained archive, evidence packaging, audit verifier, in-toto attestation, SLSA provenance bundle, sigstore bundle, rekor v2, Chronicle UDM, HITRUST evidence.",
       "license": "MIT",
       "metadata": {
-        "short-description": "Cryptographically-signed evidence bundles: hash-chained archive + TPM/YubiKey attestation quote + transparency log entry"
+        "short-description": "Cryptographically-signed evidence bundles: hash-chained archive + TPM/U2F/HSM attestation quote + transparency log entry"
       }
     },
     {
@@ -44,7 +44,7 @@
     {
       "path": "bcvk-virtualization/SKILL.md",
       "name": "bcvk-virtualization",
-      "description": "Uses bcvk (bootc virtualization kit) for ephemeral VM testing, disk image creation, and hardware-in-the-loop testing of yubiOS. Use when running a bootc image as a VM, flashing to disk, testing FIDO2 enrollment in a VM, adding YubiKey USB passthrough to QEMU, or writing bcvk-based CI workflows. Triggers on: bcvk, ephemeral VM, bootc VM, bootc install, native-to-disk, virtiofs, QEMU YubiKey."
+      "description": "Uses bcvk (bootc virtualization kit) for ephemeral VM testing, disk image creation, and hardware-in-the-loop testing of yubiOS. Use when running a bootc image as a VM, flashing to disk, testing FIDO2 enrollment in a VM, adding U2F/HSM USB passthrough to QEMU, or writing bcvk-based CI workflows. Triggers on: bcvk, ephemeral VM, bootc VM, bootc install, native-to-disk, virtiofs, QEMU U2F/HSM."
     },
     {
       "path": "bootc-images/SKILL.md",
@@ -290,7 +290,7 @@
     {
       "path": "ftpm-optee-tpm/SKILL.md",
       "name": "ftpm-optee-tpm",
-      "description": "Build and integrate a firmware TPM 2.0 for yubiOS on ARM64: the Microsoft ms-tpm-20-ref reference implementation running as an OP-TEE Trusted Application via OP-TEE/optee_ftpm. Covers building the fTPM TA, the Early-TA vs dynamic-TA decision, RPMB-backed NV storage, the RPMB-before-supplicant bootstrap hazard, the U-Boot tpm2_ftpm_tee driver, the Linux tpm_ftpm_tee driver, measured-boot event log handoff, IMA probe ordering, and how the fTPM (platform integrity) stays complementary to the YubiKey (user identity / disk unlock). Use when building or debugging the fTPM TA, wiring it to U-Boot or Linux, or deciding the fTPM-vs-YubiKey split. Pairs with `arm-trusted-firmware-optee` for the TF-A/OP-TEE/U-Boot firmware stack. Triggers on: fTPM, firmware TPM, ms-tpm-20-ref, optee_ftpm, OP-TEE TA, Early TA, RPMB, tpm_ftpm_tee, tpm2_ftpm_tee, vTPM, TPM 2.0 on ARM, measured boot PCR, IMA fTPM, tee-supplicant."
+      "description": "Build and integrate a firmware TPM 2.0 for yubiOS on ARM64: the Microsoft ms-tpm-20-ref reference implementation running as an OP-TEE Trusted Application via OP-TEE/optee_ftpm. Covers building the fTPM TA, the Early-TA vs dynamic-TA decision, RPMB-backed NV storage, the RPMB-before-supplicant bootstrap hazard, the U-Boot tpm2_ftpm_tee driver, the Linux tpm_ftpm_tee driver, measured-boot event log handoff, IMA probe ordering, and how the fTPM (platform integrity) stays complementary to the U2F/HSM (user identity / disk unlock). Use when building or debugging the fTPM TA, wiring it to U-Boot or Linux, or deciding the fTPM-vs-U2F/HSM split. Pairs with `arm-trusted-firmware-optee` for the TF-A/OP-TEE/U-Boot firmware stack. Triggers on: fTPM, firmware TPM, ms-tpm-20-ref, optee_ftpm, OP-TEE TA, Early TA, RPMB, tpm_ftpm_tee, tpm2_ftpm_tee, vTPM, TPM 2.0 on ARM, measured boot PCR, IMA fTPM, tee-supplicant."
     },
     {
       "path": "git-workflow-and-versioning/SKILL.md",
@@ -759,7 +759,7 @@
     {
       "path": "systemd-homed/SKILL.md",
       "name": "systemd-homed",
-      "description": "Creates, manages, and migrates systemd-homed home directories for yubiOS. Use when creating LUKS2-encrypted homes, enrolling YubiKey FIDO2 or PKCS#11/PIV authentication, configuring PAM for homed users, managing home migration between machines, or wiring suspend/resume key protection. Triggers on: systemd-homed, homectl, home directory encryption, FIDO2 home, YubiKey home unlock, pam_systemd_home, portable home, LUKS2 home."
+      "description": "Creates, manages, and migrates systemd-homed home directories for yubiOS. Use when creating LUKS2-encrypted homes, enrolling U2F/HSM FIDO2 or PKCS#11/PIV authentication, configuring PAM for homed users, managing home migration between machines, or wiring suspend/resume key protection. Triggers on: systemd-homed, homectl, home directory encryption, FIDO2 home, U2F/HSM home unlock, pam_systemd_home, portable home, LUKS2 home."
     },
     {
       "path": "tailscale-connection/SKILL.md",
@@ -846,7 +846,7 @@
     {
       "path": "yubikey-operations/SKILL.md",
       "name": "yubikey-operations",
-      "description": "YubiKey-specific identity operations for yubiOS: FIDO2 enrollment (hmac-secret, passkey, PRF extension), PIV slot management (9c signing, 9a auth, 82-95 retired), ssh-key provisioning from PIV and FIDO2 (ed25519-sk, ecdsa-sk), attestation certificate extraction (FIDO2 cert from slot 9c + FIDO2 device cert via credential management), multi-key quorum patterns for owner-held root-of-trust, and the yubiOS backup/restore discipline (export-attestation-cert + paperkey-style split-knowledge). Use when enrolling a YubiKey, signing with PIV slot 9c, deriving ssh keys from FIDO2 hmac-secret, designing multi-key quorum for owner-held root-of-trust, or auditing a YubiKey ceremony. Triggers on: YubiKey, FIDO2 enrollment, PIV, slot 9c, hmac-secret, passkey, attestation certificate, ssh-key from YubiKey, YKCS11, multi-key quorum, owner-held key, FIDO2 PRF, ed25519-sk, ecdsa-sk, webauthn.",
+      "description": "U2F/HSM-specific identity operations for yubiOS: FIDO2 enrollment (hmac-secret, passkey, PRF extension), PIV slot management (9c signing, 9a auth, 82-95 retired), ssh-key provisioning from PIV and FIDO2 (ed25519-sk, ecdsa-sk), attestation certificate extraction (FIDO2 cert from slot 9c + FIDO2 device cert via credential management), multi-key quorum patterns for owner-held root-of-trust, and the yubiOS backup/restore discipline (export-attestation-cert + paperkey-style split-knowledge). Use when enrolling a U2F/HSM, signing with PIV slot 9c, deriving ssh keys from FIDO2 hmac-secret, designing multi-key quorum for owner-held root-of-trust, or auditing a U2F/HSM ceremony. Triggers on: U2F/HSM, FIDO2 enrollment, PIV, slot 9c, hmac-secret, passkey, attestation certificate, ssh-key from U2F/HSM, YKCS11, multi-key quorum, owner-held key, FIDO2 PRF, ed25519-sk, ecdsa-sk, webauthn.",
       "license": "MIT",
       "metadata": {
         "user": {
@@ -854,7 +854,7 @@
           "email": "foil-copy-overrate@duck.com",
           "name": "Ermine Daughtry"
         },
-        "short-description": "YubiKey identity root: PIV/FIDO2 enrollment, slot mgmt, ssh-key derivation, multi-key quorum, attestation cert extraction"
+        "short-description": "U2F/HSM identity root: PIV/FIDO2 enrollment, slot mgmt, ssh-key derivation, multi-key quorum, attestation cert extraction"
       }
     }
   ]

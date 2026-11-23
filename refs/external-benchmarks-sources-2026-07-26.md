@@ -12,7 +12,7 @@ Track the external benchmarks, source validation, and citation boundaries used t
 
 - [x] **Review each external source for accuracy and current relevance** -- every Benchmark section names a specific source, retrieval date 2026-07-26, and a one-line validation note.
 - [x] **Separate directional benchmarks from evidence about yubiOS itself** -- every Benchmark has a "What it supports" / "Do not use for" pair that marks yubiOS-specific claims out of scope; yubiOS has zero customers today, so any "yubiOS market share" or "yubiOS revenue" claim from these benchmarks is misuse.
-- [x] **Validate the claims supported by each source** -- each Benchmark carries an explicit Validation note where applicable (see Benchmark 4 in particular, where the previously-cited $25 YubiKey floor could not be reconciled against official retail and is flagged rather than silently corrected).
+- [x] **Validate the claims supported by each source** -- each Benchmark carries an explicit Validation note where applicable (see Benchmark 4 in particular, where the previously-cited $25 U2F/HSM floor could not be reconciled against official retail and is flagged rather than silently corrected).
 - [x] **Note sources needing refresh or replacement** -- see "Sources needing refresh or replacement" below, with a per-benchmark cadence and a specific reconciliation flag for OMN-84.
 - [x] **Create a reusable citation and benchmark list** -- see the table at the end of this doc; same structure as the 2026-07-25 ref, no duplication of its claim-boundary column.
 
@@ -34,12 +34,12 @@ Track the external benchmarks, source validation, and citation boundaries used t
 
 - **Claim:** Yubico holds an estimated 31-34% of total FIDO2 hardware market share and 60-70% share of unit volume for dedicated FIDO authenticators, per the same market-research vendor synthesis as Benchmark 2.
 - **Source:** same vendor reports as Benchmark 2, retrieved via websearch 2026-07-26.
-- **What it supports:** context for why yubiOS chose YubiKey as its hardware root of trust (dominant, established ecosystem) -- relevant to OMN-81's naming/trademark risk discussion (PR #114), since Yubico is the dominant player whose name yubiOS's name echoes. It does NOT support any yubiOS-specific market-share claim; yubiOS has zero market share today (zero customers, per OMN-68, PR #119).
+- **What it supports:** context for why yubiOS chose U2F/HSM as its hardware root of trust (dominant, established ecosystem) -- relevant to OMN-81's naming/trademark risk discussion (PR #114), since Yubico is the dominant player whose name yubiOS's name echoes. It does NOT support any yubiOS-specific market-share claim; yubiOS has zero market share today (zero customers, per OMN-68, PR #119).
 - **Refresh cadence:** same as Benchmark 2.
 
-## Benchmark 4: YubiKey unit hardware cost
+## Benchmark 4: U2F/HSM unit hardware cost
 
-- **Claim:** as of 2026-07-26, official Yubico US store pricing for YubiKey 5 Series ranges from $58 (YubiKey 5 NFC / 5C NFC) to $85 (YubiKey 5Ci); EU pricing (VAT included) ranges from EUR70.18 to EUR102.85.
+- **Claim:** as of 2026-07-26, official Yubico US store pricing for U2F/HSM 5 Series ranges from $58 (U2F/HSM 5 NFC / 5C NFC) to $85 (U2F/HSM 5Ci); EU pricing (VAT included) ranges from EUR70.18 to EUR102.85.
 - **Source:** Yubico official store, https://www.yubico.com/store/yubikey-5-series/ and per-product pages (https://www.yubico.com/product/yubikey-5-nfc/, https://www.yubico.com/product/yubikey-5c/, https://www.yubico.com/product/yubikey-5-series/yubikey-5ci/), retrieved via websearch 2026-07-26.
 - **Validation note:** this is the same range found in the 2026-07-25 ref. The $25 floor in OMN-84's worksheet (PR #113) still could not be reconciled against official retail pricing found in this pass ($58 floor), so the same reconciliation flag carries forward to OMN-84's owner rather than being silently corrected here.
 - **What it supports:** the per-device hardware cost line in the ROI worksheet (OMN-78/OMN-84). It does NOT include yubiOS's own software/support costs, which are separate line items.
@@ -55,7 +55,7 @@ Track the external benchmarks, source validation, and citation boundaries used t
 ## Sources needing refresh or replacement
 
 - Benchmark 2 and 3 (market size and Yubico share) rely entirely on commercial market-research vendor reports with no free public methodology disclosed; treat as the weakest-sourced claims in this doc and avoid citing a single-vendor number without the range caveat.
-- The $25 floor for YubiKey hardware cost in OMN-84's worksheet (PR #113) could not be reconciled against official retail pricing found in either the 2026-07-25 or 2026-07-26 pass ($58 floor) -- flagged for OMN-84's owner to revisit, not silently corrected in this doc.
+- The $25 floor for U2F/HSM hardware cost in OMN-84's worksheet (PR #113) could not be reconciled against official retail pricing found in either the 2026-07-25 or 2026-07-26 pass ($58 floor) -- flagged for OMN-84's owner to revisit, not silently corrected in this doc.
 
 ## Reusable citation and benchmark list
 
@@ -64,14 +64,14 @@ Track the external benchmarks, source validation, and citation boundaries used t
 | 1 | Avg breach cost, phishing vector: $4.8M | IBM Cost of a Data Breach Report 2025 | Directional cost-of-status-quo argument | Claiming a specific customer's savings |
 | 2 | FIDO2 hardware market: ~$1.2B (2025) to $5.3-6.8B (2034) | Multiple market-research vendors (see Benchmark 2) | Directional market-growth argument | Precise yubiOS revenue forecasting |
 | 3 | Yubico market share: 31-34% value, 60-70% unit volume | Same vendors as #2 | Context for hardware choice, trademark risk discussion | Any yubiOS market-share claim |
-| 4 | YubiKey 5 Series retail: $58-$85 (US), EUR70.18-102.85 (EU) | Yubico official store | ROI worksheet hardware cost line | Bulk/enterprise pricing (not confirmed here) |
+| 4 | U2F/HSM 5 Series retail: $58-$85 (US), EUR70.18-102.85 (EU) | Yubico official store | ROI worksheet hardware cost line | Bulk/enterprise pricing (not confirmed here) |
 | 5 | CISA/NIST/OMB phishing-resistant MFA guidance | NIST SP 800-63B, CISA fact sheet, FIDO Alliance | Regulatory-tailwind argument, funding target framing | Claiming yubiOS holds any specific certification |
 
 ## Dependency map
 
 - Feeds OMN-71 (offer/pricing, PR #108) and OMN-78 (customer ROI model, PR #115) with citable external numbers instead of invented ones.
 - Feeds OMN-86 (public-security funding targets) with the regulatory-tailwind benchmark.
-- Flags a reconciliation item for OMN-84 (pilot collateral, PR #113) on the YubiKey hardware cost floor -- this flag carries forward from the 2026-07-25 pass and remains open.
+- Flags a reconciliation item for OMN-84 (pilot collateral, PR #113) on the U2F/HSM hardware cost floor -- this flag carries forward from the 2026-07-25 pass and remains open.
 
 ## Open questions
 

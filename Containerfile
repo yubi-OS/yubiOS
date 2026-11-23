@@ -9,17 +9,17 @@
 # PINNED.md; the FROM carries only the immutable OCI index digest so there is a
 # single source of identity (no tag+digest ambiguity for Build Policy/tooling).
 # quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261114.0)
-FROM quay.io/fedora/fedora-bootc@sha256:990ebc2678ff3dbca3f0143c8d5f1a150a2fb0c418888a3bdf218aea109fc1d2 AS rootfs
+FROM quay.io/fedora/fedora-bootc@sha256:f387c5f622d2f095e23b1587c97a4d4659231df6c8a649329839a9336a99c5e4 AS rootfs_prep
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
 ARG SOURCE_DATE_EPOCH
 
-# ── YubiKey and FIDO2 stack ──────────────────────────────────────────────
+# ── U2F/HSM and FIDO2 stack ──────────────────────────────────────────────
 # libfido2:       FIDO2/CTAP2 library; used by systemd-cryptenroll, OpenSSH, pam-u2f
 # yubikey-manager: ykman CLI for PIV, FIDO2, OATH management
 # yubico-piv-tool: PIV operations for Secure Boot signing (slot 9c)
-# opensc:          PKCS#11 middleware; systemd-sbsign uses this to talk to YubiKey PIV
+# opensc:          PKCS#11 middleware; systemd-sbsign uses this to talk to U2F/HSM PIV
 # pam-u2f:         PAM module for FIDO2/U2F; requires >= 1.3.1 (CVE-2025-23013)
 #                  Source: https://www.yubico.com/support/security-advisories/ysa-2025-01/
 # pcsc-lite:       PC/SC daemon; needed for PIV/CCID interface
@@ -30,7 +30,7 @@ ARG SOURCE_DATE_EPOCH
 # those caches while retaining the installed RPM and runtime linker databases.
 RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       --setopt=metadata_expire=never \
-      --setopt=updates-testing.excludepkgs=kernel-headers,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip \
+      --setopt=updates-testing.excludepkgs=kernel-headers,libXfont2,libcue,libfontenc,parted,pcsc-lite,pcsc-lite-ccid,pcsc-lite-libs,python3-devel,python3-keyring,python3-pip,taglib \
       install \
       libfido2 \
       yubikey-manager \
@@ -78,6 +78,9 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       vulkan-loader \
       cups-libs \
       alsa-lib \
+      alsa-ucm \
+      alsa-utils \
+      pipewire-alsa \
       at-spi2-atk \
       gtk3 \
       gtk4 \
@@ -89,6 +92,7 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       plymouth-system-theme \
       plymouth-theme-spinner \
       plymouth-plugin-two-step \
+      plymouth-plugin-label \
       wget \
       xdg-utils && \
     dnf clean all && \
@@ -198,11 +202,16 @@ RUN wp_commit="09f209a48153c6cef4faae9b247146abce4c5441" && \
 # ── Overlay yubiOS config tree ───────────────────────────────────────────
 COPY usr/ /usr/
 
-# ── Compile GNOME GSettings schema override & dconf default for yubiOS wallpaper ──
+# ── Compile GNOME GSettings schema override, GDM dconf profile, & PM/audio configs ──
 RUN glib-compile-schemas /usr/share/glib-2.0/schemas && \
-    install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d && \
+    install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d /etc/dconf/db/gdm.d /etc/systemd/sleep.conf.d /etc/systemd/logind.conf.d /etc/wireplumber/wireplumber.conf.d && \
     printf 'user-db:user\nsystem-db:local\n' > /etc/dconf/profile/user && \
+    printf 'user-db:user\nsystem-db:gdm\nsystem-db:local\n' > /etc/dconf/profile/gdm && \
     cp -f /usr/lib/dconf/db/local.d/00-yubios-wallpaper /etc/dconf/db/local.d/00-yubios-wallpaper && \
+    cp -f /usr/lib/dconf/db/local.d/00-yubios-wallpaper /etc/dconf/db/gdm.d/00-yubios-wallpaper && \
+    cp -f /usr/lib/systemd/sleep.conf.d/yubiOS-no-sleep.conf /etc/systemd/sleep.conf.d/yubiOS-no-sleep.conf && \
+    cp -f /usr/lib/systemd/logind.conf.d/yubiOS-no-sleep.conf /etc/systemd/logind.conf.d/yubiOS-no-sleep.conf && \
+    cp -f /usr/share/wireplumber/wireplumber.conf.d/50-yubios-rk3588-hdmi-audio.conf /etc/wireplumber/wireplumber.conf.d/50-yubios-rk3588-hdmi-audio.conf && \
     dconf update
 
 # ── SSH: allow bcvk CI root key credentials only when present ─────────────
@@ -210,9 +219,62 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
     cp /usr/lib/yubiOS/sshd_config.d/10-yubiOS-bcvk-root-key.conf \
       /etc/ssh/sshd_config.d/10-yubiOS-bcvk-root-key.conf
 
-# ── Permissions for enrollment and first-boot scripts ────────────────────
+# ── Permissions for enrollment and first-boot scripts + staged Secure Boot keys ──
 RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
-    mkdir -p /etc/kernel/install.d /etc/ostree && \
+    mkdir -p /etc/kernel/install.d /etc/ostree /usr/lib/yubiOS/secureboot /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
+    printf '#include <time.h>\ntime_t time(time_t *t){time_t v=1767225600;if(t)*t=v;return v;}\n' > /tmp/faketime_sb.c && \
+    gcc -shared -fPIC -O2 /tmp/faketime_sb.c -o /usr/lib/yubiOS/uki/libfaketime_sb.so && \
+    rm -f /tmp/faketime_sb.c && \
+    printf '%s\n' \
+      '#define _GNU_SOURCE' \
+      '#include <dlfcn.h>' \
+      '#include <errno.h>' \
+      '#include <stddef.h>' \
+      '#include <stdint.h>' \
+      '#include <stdarg.h>' \
+      '#include <sys/types.h>' \
+      '#include <linux/fs.h>' \
+      'int ioctl(int fd, unsigned long request, ...) {' \
+      '    static int (*real_ioctl)(int, unsigned long, void *) = NULL;' \
+      '    if (!real_ioctl) real_ioctl = dlsym(RTLD_NEXT, "ioctl");' \
+      '    va_list ap; va_start(ap, request); void *arg = va_arg(ap, void *); va_end(ap);' \
+      '    if (request == FITRIM) return 0;' \
+      '    return real_ioctl(fd, request, arg);' \
+      '}' \
+      'int fallocate(int fd, int mode, off_t offset, off_t len) {' \
+      '    static int (*real_fallocate)(int, int, off_t, off_t) = NULL;' \
+      '    if (!real_fallocate) real_fallocate = dlsym(RTLD_NEXT, "fallocate");' \
+      '    if (len > (off_t)(64ULL << 20)) { errno = EOPNOTSUPP; return -1; }' \
+      '    return real_fallocate(fd, mode, offset, len);' \
+      '}' \
+      'int fallocate64(int fd, int mode, off64_t offset, off64_t len) {' \
+      '    return fallocate(fd, mode, (off_t)offset, (off_t)len);' \
+      '}' \
+      'int sd_bus_call(void *bus, void *m, uint64_t usec, void *ret_error, void *reply) {' \
+      '    static int (*real_sd_bus_call)(void *, void *, uint64_t, void *, void *) = NULL;' \
+      '    if (!real_sd_bus_call) real_sd_bus_call = dlsym(RTLD_NEXT, "sd_bus_call");' \
+      '    if (usec > 0 && usec < 600000000ULL) usec = 600000000ULL;' \
+      '    return real_sd_bus_call(bus, m, usec, ret_error, reply);' \
+      '}' > /tmp/fast_homed.c && \
+    gcc -shared -fPIC -O2 /tmp/fast_homed.c -o /usr/lib/yubiOS/uki/libfast_homed.so -ldl && \
+    rm -f /tmp/fast_homed.c && \
+    install -d -m 0755 /usr/lib/systemd/system/systemd-homed.service.d /etc/systemd/system/systemd-homed.service.d && \
+    printf '[Service]\nEnvironment="SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1"\nEnvironment="SYSTEMD_BUS_TIMEOUT=600s"\nEnvironment="LD_PRELOAD=/usr/lib/yubiOS/uki/libfast_homed.so"\n' \
+      > /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
+    cp -f /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf \
+      /etc/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
+    if [ ! -f /usr/lib/yubiOS/secureboot/PK.auth ]; then \
+      LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
+    fi && \
+    cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ && \
+    cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ && \
+    rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key && \
+    test -s /usr/lib/yubiOS/secureboot/PK.auth && \
+    test -s /usr/lib/yubiOS/secureboot/PK_null.auth && \
+    test -s /boot/EFI/yubiOS/secureboot/PK.auth && \
+    test -s /boot/EFI/yubiOS/secureboot/PK_null.auth && \
+    test -s /boot/EFI/yubiOS/keys/PK.auth && \
+    test -s /boot/EFI/yubiOS/keys/PK_null.auth && \
     cp -f /usr/lib/ostree/prepare-root.conf /etc/ostree/prepare-root.conf && \
     cp -f /usr/lib/kernel/install.d/05-rpmostree.install /etc/kernel/install.d/05-rpmostree.install && \
     cp -f /usr/lib/kernel/install.d/95-yubios-uki-resign.install /etc/kernel/install.d/95-yubios-uki-resign.install
@@ -235,7 +297,7 @@ RUN ln -sf /usr/lib/yubiOS/enroll.sh              /usr/bin/yubiOS-enroll       &
 
 # ── Wire PAM: yubiOS-sudo config → /etc/pam.d/sudo ──────────────────────
 # Replaces Fedora's stock sudo PAM with yubiOS policy:
-#   auth required pam_u2f.so  (YubiKey touch ALWAYS needed, not optional)
+#   auth required pam_u2f.so  (U2F/HSM touch ALWAYS needed, not optional)
 # Recovery if locked out: boot with rd.break, remount rw, comment out pam_u2f
 # Source: https://github.com/Yubico/pam-u2f
 RUN cp /usr/lib/pam.d/yubiOS-sudo /etc/pam.d/sudo
@@ -285,12 +347,27 @@ RUN systemctl preset-all && \
     ln -sf ../yubiOS-ostree-composefs-sync.service /usr/lib/systemd/system/multi-user.target.wants/yubiOS-ostree-composefs-sync.service && \
     ln -sf /dev/null /etc/systemd/system/boot.automount && \
     ln -sf /dev/null /usr/lib/systemd/system/boot.automount && \
+    ln -sf /dev/null /etc/systemd/system/geoclue.service && \
+    ln -sf /dev/null /usr/lib/systemd/system/geoclue.service && \
+    ln -sf /dev/null /etc/systemd/system/bootloader-update.service && \
+    rm -f /usr/share/dbus-1/system-services/org.freedesktop.GeoClue2.service /usr/lib/systemd/system/multi-user.target.wants/bootloader-update.service /etc/systemd/system/multi-user.target.wants/bootloader-update.service && \
+    for u in sleep.target suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target systemd-suspend.service systemd-hibernate.service systemd-hybrid-sleep.service systemd-suspend-then-hibernate.service; do \
+      ln -sf /dev/null "/etc/systemd/system/$u"; \
+      ln -sf /dev/null "/usr/lib/systemd/system/$u"; \
+    done && \
     systemctl enable gdm.service && \
     systemctl set-default graphical.target && \
     rm -f /etc/machine-id /var/lib/systemd/random-seed
 
 # ── PAM: initialise u2f_keys file (populated by yubiOS-enroll-pam) ───────
 RUN mkdir -p /etc/yubico && touch /etc/yubico/u2f_keys && chmod 600 /etc/yubico/u2f_keys
+
+# ── Serial Console: default to 115200 baud across all boards & DTBs ──────
+# hadolint ignore=SC2016
+RUN install -d -m 0755 /usr/lib/systemd/system/serial-getty@.service.d && \
+    printf "[Service]\nExecStart=\nExecStart=-/sbin/agetty -o '-p -- \\\\\\\\u' --keep-baud 115200,57600,38400,9600 - \$TERM\n" \
+      > /usr/lib/systemd/system/serial-getty@.service.d/05-yubiOS-baud.conf && \
+    python3 -c 'import glob; [open(p, "wb").write(d.replace(b"serial2:1500000n8\x00", b"serial2:115200n8\x00\x00")) for p in glob.glob("/usr/lib/modules/*/dtb/rockchip/*.dtb") for d in [open(p, "rb").read()] if b"serial2:1500000n8\x00" in d]'
 
 # ── Regenerate the shipped initramfs so usr/lib/dracut.conf.d/* actually applies ──
 # COPY usr/ above lands dracut.conf.d fragments (fido2, composefs, and the
@@ -310,7 +387,7 @@ RUN set -- /usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     if [ "$(uname -m)" != "aarch64" ]; then \
       sed -i 's/optee tpm_ftpm_tee tee_stmm_efi dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-of-dwcmshc //' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
-      sed -i 's/xhci_plat_hcd ehci_platform ohci_platform dwc3 dwc3_of_simple phy_rockchip_inno_usb2 phy_rockchip_naneng_combphy phy_rockchip_usbdp //' /usr/lib/dracut.conf.d/50-yubiOS-fido2.conf; \
+      sed -i 's/xhci_plat_hcd ehci_platform ohci_platform dwc3 dwc3_of_simple phy_rockchip_inno_usb2 phy_rockchip_naneng_combphy phy_rockchip_usbdp rockchipdrm dw_hdmi_qp phy_rockchip_samsung_hdptx analogix_dp //' /usr/lib/dracut.conf.d/50-yubiOS-fido2.conf; \
     fi && \
     dracut --no-hostonly --force --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \
@@ -330,7 +407,9 @@ RUN set -- /usr/lib/modules/*/ && \
 RUN rm -f /var/lib/systemd/catalog/database \
           /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal \
           /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal && \
-    rm -rf /var/cache/fontconfig /var/cache/gdm /var/cache/libX11 /var/lib/dnf /var/lib/rpm-state /var/log/gdm && \
+    rm -rf /sysroot/ostree /var/cache/fontconfig /var/cache/gdm /var/cache/libX11 /var/lib/dnf /var/lib/rpm-state /var/log/gdm && \
+    mkdir -p /sysroot/ostree && \
+    ln -sfn sysroot/ostree /ostree && \
     find /var -xdev -mindepth 1 -type f ! -path '/var/log/chipsec*' -delete && \
     find /var -xdev -mindepth 1 -type l -delete && \
     python3 -c 'import os, stat; lines = ["# SPDX-License-Identifier: LGPL-2.1-or-later", "d /var/lib/yubiOS 0755 root root - -", "d /var/lib/yubiOS/oci 0755 root root - -", "d /var/opt 0755 root root - -", "L+ /var/opt/antimony - - - - /usr/lib/opt/antimony"];     [lines.append(f"d {r} {stat.S_IMODE(os.lstat(r).st_mode):04o} root root - -") for r, _, _ in os.walk("/var") if r != "/var"];     open("/usr/lib/tmpfiles.d/yubiOS-state.conf", "w").write("\n".join(sorted(set(lines))) + "\n")' && \
@@ -346,16 +425,45 @@ RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
     ! test -e /etc/machine-id && \
     ! test -e /var/lib/systemd/random-seed
 
-# The final stage creates the EFI directories with mkdir, and the composefs digest covers
-# directory entries. Create them here too, so the UKI (built from this stage) and the shipped
-# image carry the same directory set before the mtime normalisation below.
-RUN mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd
+# Stage systemd-boot and the EFI directory skeleton in rootfs_prep before mtime
+# normalization so the flattened rootfs base layer (layer[0]) already carries
+# them and the final stage only needs to overlay the UKI in layer[1] (Path V8).
+RUN case "$(uname -m)" in \
+      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
+      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
+    if [ -f /usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /usr/lib/yubiOS/secureboot/db.crt ]; then \
+      LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign \
+        --key /usr/lib/yubiOS/secureboot/ci-sb-db.key \
+        --cert /usr/lib/yubiOS/secureboot/db.crt \
+        --output "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
+        "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
+      mv -f "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
+        "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
+      sbverify --cert /usr/lib/yubiOS/secureboot/db.crt "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi"; \
+    fi && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
+    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI" && \
+    ! test -e /etc/machine-id && \
+    ! test -e /var/lib/systemd/random-seed
 
 # Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
 # digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
 # so two clean builds of the same sources embed the same digest.
 RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /
+
+# Flatten fedora-bootc's 65 rpm-ostree splitstream layers into a canonical base
+# rootfs layer (layer[0]) before ukify so overlayfs (/target) and composefs-rs's
+# OCI tar-stream merger agree on all directory mtimes and hardlinks
+# (containers/composefs-rs#132, verified by ci_test_uki-composefs-matrix.yml Path V8).
+FROM scratch AS rootfs
+# hadolint ignore=DL3067
+COPY --from=rootfs_prep / /
+LABEL containers.bootc="1" ostree.bootable="true"
+CMD ["/sbin/init"]
 
 # ── Sealed UKI boot path (bootc UKI install, ADR-032) ───────────────────────
 # efitools, pkcs11-provider, sbsigntools: owner signing tools for enroll-sb.sh
@@ -366,49 +474,28 @@ RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path
 # of a BLS kernel entry. bootc container ukify refuses the active root
 # ("Cannot operate on active root filesystem"), so the UKI is built from a
 # read-only bind mount of the rootfs stage, as in bootc's sealed-image recipe.
-# The composefs digest is taken before the UKI and the bootloader files are
-# written. The UKI is unsigned here: the owner signs the loader and the UKI with
-# the PIV slot 9a db key on the board (enroll-sb.sh resign). sd-stub measures the
-# UKI into PCR 11 and sets StubPcrKernelImage, which ConditionSecurity=measured-os
-# checks. Secure Boot is not part of that check.
+# Pin /out and /out/${kver}.efi mtimes to SOURCE_DATE_EPOCH so the COPY-only
+# top layer (layer[1]) is deterministic without a final FROM scratch squash.
 FROM rootfs AS uki
+ARG SOURCE_DATE_EPOCH
 RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     mkdir -p /out && \
-    bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi"
+    bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
+    if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then \
+      LD_PRELOAD=/target/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign \
+        --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key \
+        --cert /target/usr/lib/yubiOS/secureboot/db.crt \
+        --output "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi"; \
+    fi && \
+    touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
 
-# Reproducibility diagnostic (remove once the UKI is proven deterministic): print the composefs
-# digest bootc embeds in the UKI and the UKI's sha256, to compare across isolated builds.
+# Reproducibility diagnostic: print the composefs digest bootc embeds in the UKI and the UKI's sha256.
 RUN --mount=type=bind,from=rootfs,target=/target echo "UKIDIAG composefs=$(bootc container compute-composefs-digest /target)" ; echo "UKIDIAG uki_sha256=$(sha256sum /out/*.efi)" ; true
 
-FROM rootfs AS prefinal
+# 2-layer shipped image (Path V8): layer[0] is the flattened rootfs base,
+# layer[1] is the sealed UKI under /boot/EFI/Linux/.
+FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/
-RUN case "$(uname -m)" in \
-      aarch64) efi_arch=aa64; efi_upper=AA64 ;; \
-      x86_64)  efi_arch=x64; efi_upper=X64 ;; \
-      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
-    esac && \
-    mkdir -p /boot/EFI/BOOT /boot/EFI/systemd && \
-    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
-    cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI"
-
-# Shipped-image assert: machine-id and random-seed must be absent (see the rootfs stage).
-RUN ! test -e /etc/machine-id && ! test -e /var/lib/systemd/random-seed
-
-# Final-stage mtime pin (composefs digest). The rootfs stage normalizes mtimes to
-# SOURCE_DATE_EPOCH, but the writes in this stage leave build-time mtimes on /, /run and
-# /boot. bootc hashes those into the composefs digest, so the digest the installer computes
-# for the final image differs from the digest embedded in the UKI (computed on the rootfs
-# stage). Re-pin them as the last step so the two digests agree.
-ARG SOURCE_DATE_EPOCH
-RUN touch -h -d "@${SOURCE_DATE_EPOCH}" / /run /boot /boot/EFI /boot/EFI/Linux /boot/EFI/systemd /boot/EFI/BOOT
-
-# Single-layer shipped image. The composefs digest the installer checks is computed from the
-# image layers, while the UKI embeds the merged-filesystem digest. One layer makes the two agree
-# (rehearsal on the diagnostic single-layer image returned INSTALL_RC=0). Base labels and the
-# command are restored here because a scratch stage starts with no config.
-FROM scratch
-# hadolint ignore=DL3067
-COPY --from=prefinal / /
-LABEL containers.bootc="1" ostree.bootable="true"
-CMD ["/sbin/init"]

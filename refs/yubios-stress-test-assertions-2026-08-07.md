@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-yubiOS makes a coherent design story (UKI + bootc + composefs + FIDO2 + YubiKey), but most of it is **goal**, not demonstrated security outcome. The repo labels itself "groundwork / work in progress," ships no production-supported release, and warns the install path can destroy data. The right posture is **adversarial validation**, not trust. Eight stress tests below, each with a falsifiable pass criterion; the universal pass rule is "every test fails closed or recovers cleanly." Confidence: high that the architecture is sound, low that the story is realized on real hardware.
+yubiOS makes a coherent design story (UKI + bootc + composefs + FIDO2 + U2F/HSM), but most of it is **goal**, not demonstrated security outcome. The repo labels itself "groundwork / work in progress," ships no production-supported release, and warns the install path can destroy data. The right posture is **adversarial validation**, not trust. Eight stress tests below, each with a falsifiable pass criterion; the universal pass rule is "every test fails closed or recovers cleanly." Confidence: high that the architecture is sound, low that the story is realized on real hardware.
 
 ## 1. What looks solid (cross-checked against repo state)
 
@@ -35,7 +35,7 @@ Each test = one falsifiable pass criterion. Pass rule: every test fails closed *
 **Owned by.** `ci_test_sealed-uki-vm.yml` (52,561 bytes — the closest existing harness) + `tests/vm/test-luks-fido2-ci.sh`. Cross-ref: prior research at `documents/github-yubios-KS9n5GAT/sealed-uki-vm-prior-research-report-2026-07-31.md` documents the boot-chain verification stack.
 
 ### 2. Key-loss recovery test
-**Description.** After a clean first-boot enrollment, remove the YubiKey. Try: `cryptsetup open` (disk unlock), `ssh user@host` (SSH FIDO2 resident key), `sudo` and login PAM, recovery-enrollment with a spare key.
+**Description.** After a clean first-boot enrollment, remove the U2F/HSM. Try: `cryptsetup open` (disk unlock), `ssh user@host` (SSH FIDO2 resident key), `sudo` and login PAM, recovery-enrollment with a spare key.
 **Pass criterion.** Every path either (a) refuses to proceed without a token AND offers a documented recovery path (no vendor call), or (b) succeeds cleanly with a pre-enrolled backup. Single unrecoverable token = fail.
 **Owned by.** `tests/unit/test-enroll-luks.bats` (1,238 bytes), `test-enroll-ssh.bats`, `test-enroll-pam.bats`. **Gap:** no `tests/vm/test-key-loss-recovery.sh` exists in the `tests/vm/` listing.
 
@@ -94,15 +94,15 @@ Recent workflow run history was not surfaced via this fetch (the `actions/runs` 
 
 ### One-day prototype
 
-Pick the disk-unlock path and attack it with three cases — correct YubiKey, missing YubiKey, cloned-but-untrusted artifact. If any case produces ambiguous recovery behavior, that's the first red flag. Build on top of `tests/vm/test-luks-fido2.sh` and `tests/vm/bcvk-ssh-lib.sh` — both already exist; the prototype is a stress harness, not a new test.
+Pick the disk-unlock path and attack it with three cases — correct U2F/HSM, missing U2F/HSM, cloned-but-untrusted artifact. If any case produces ambiguous recovery behavior, that's the first red flag. Build on top of `tests/vm/test-luks-fido2.sh` and `tests/vm/bcvk-ssh-lib.sh` — both already exist; the prototype is a stress harness, not a new test.
 
 ### SCAMPER exercise on the trust model
 
 | SCAMPER | Question |
 |---|---|
-| **Substitute** | What if the YubiKey is absent? — `tests/unit/test-enroll-luks.bats` does not exercise this path. |
+| **Substitute** | What if the U2F/HSM is absent? — `tests/unit/test-enroll-luks.bats` does not exercise this path. |
 | **Combine** | What if boot verification and enrollment are one step? — would shorten the trust chain but raise the bar for recoverable installs. |
-| **Adapt** | What if recovery uses a second independent root (e.g., a paper backup + a second YubiKey in escrow)? — the "Each step skippable" claim hints at this but does not enforce it. |
+| **Adapt** | What if recovery uses a second independent root (e.g., a paper backup + a second U2F/HSM in escrow)? — the "Each step skippable" claim hints at this but does not enforce it. |
 | **Modify** | What if x86-64 is treated as "hostile by default" (TPM always required, firmware treated as untrusted)? — closes the firmware/TPM loophole at the cost of dropping older x86-64 boards. |
 | **Eliminate** | Which enrollment step can be removed without breaking safety? — `pam-u2f` is the strongest candidate; SSH resident keys could collapse into a single `ed25519-sk`. |
 | **Reverse** | What if the OS must prove trust to the user, not vice versa? — i.e., the OS publishes a signed health-status bundle the user can verify before unlock. |

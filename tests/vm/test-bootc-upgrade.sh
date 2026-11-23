@@ -8,7 +8,7 @@
 #   - sudo env PATH=$PATH:/usr/sbin:/sbin wrapping for podman/bcvk
 #   - --composefs-backend on any bootc install to-filesystem
 #   - /target/boot mount point (NOT /target/boot/efi) per OMN-149 fix
-#   - allow_real_u2f passed through if host has a real YubiKey
+#   - allow_real_u2f passed through if host has a real U2F/HSM
 #
 # Usage:
 #   bash tests/vm/test-bootc-upgrade.sh \
@@ -30,7 +30,7 @@ Options:
   --from-image      OCI image ref for the lower (current) version
   --to-image        OCI image ref for the higher (target) version
   --hw-device       Optional hardware device for destructive install
-  --allow-real-u2f  Set to 1 if host has a real YubiKey (real-U2F guard opt-in)
+  --allow-real-u2f  Set to 1 if host has a real U2F/HSM (real-U2F guard opt-in)
   --help            Print this help
 EOF
 }

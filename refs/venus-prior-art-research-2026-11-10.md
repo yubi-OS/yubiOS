@@ -17,7 +17,7 @@ For over four decades, The Venus Project (TVP), founded by industrial designer a
 
 Following Fresco's death on May 18, 2017, the organization suffered profound organizational ossification and ideological drift. By 2024, leadership pivoted away from open systems cybernetics toward 'Venus Arantas' (Venus Landfall) in Peru. Documented extensively by former movement advocates at Designing the Future (https://www.designing-the-future.org), this pivot devolved into non-disclosure agreements, survivalist retreatism, and top-down isolationism.
 
-The rebirth thesis hosted at venus.systems-a.workers.dev discards the monolithic city fantasy. It operationalizes Fresco's core objective (access over property, dynamic equilibrium, automated production, and cybernetic allocation) through federated localist cells ('the prototype is the network of capable communities'). Crucially, it secures these cells against central capture using Shant Tchatalbachian's SER Framework (Sovereignty, Ephemerality, Reproducibility). By grounding local cells in owner-controlled cryptographic identity (YubiKey/FIDO2 hardware roots), reproducible physical bills of materials (BOMs), zero-cost node fork/exit, and lawful mobility pathways, the architecture solves the structural failure modes that doomed both original utopian communes and post-2017 TVP.
+The rebirth thesis hosted at venus.systems-a.workers.dev discards the monolithic city fantasy. It operationalizes Fresco's core objective (access over property, dynamic equilibrium, automated production, and cybernetic allocation) through federated localist cells ('the prototype is the network of capable communities'). Crucially, it secures these cells against central capture using Shant Tchatalbachian's SER Framework (Sovereignty, Ephemerality, Reproducibility). By grounding local cells in owner-controlled cryptographic identity (U2F/HSM/FIDO2 hardware roots), reproducible physical bills of materials (BOMs), zero-cost node fork/exit, and lawful mobility pathways, the architecture solves the structural failure modes that doomed both original utopian communes and post-2017 TVP.
 
 ---
 
@@ -78,7 +78,7 @@ The Swiss WIR (founded 1934) and Sardex in Sardinia (founded 2010) prove that co
 The rebirth of The Venus Project replaces the monolithic circular city with a reproducible, federated node architecture. A Venus Node is not an isolated retreat; it is a modular, high-technology municipal cell operating under the SER Framework (Sovereignty, Ephemerality, Reproducibility).
 
 ### Pillar 1: Technology (Sovereign, Immutable, Local-First Infrastructure)
-- Sovereignty: The root of trust rests in physical hardware tokens (YubiKey/FIDO2 keys) owned by individual participants, not in platform accounts, cloud identity providers, or central servers. System access, administrative signing, and data decryption require user-held physical cryptographic challenge-response.
+- Sovereignty: The root of trust rests in physical hardware tokens (U2F/HSM/FIDO2 keys) owned by individual participants, not in platform accounts, cloud identity providers, or central servers. System access, administrative signing, and data decryption require user-held physical cryptographic challenge-response.
 - Ephemerality: Operational nodes run stateless, immutable operating environments (such as yubiOS with bootc container-based immutable root filesystems and dm-verity integrity). Application runtime states are disposable; operational drift is eliminated by resetting to signed baseline images upon reboot.
 - Reproducibility: Tooling manifests, node configurations, industrial PLC automation scripts, and sensor networks are defined as declarative code repositories with cryptographically pinned image digests and SLSA Level 3 build attestations.
 
@@ -116,7 +116,7 @@ We adapt the patent-law Graham v. John Deere framework (35 U.S.C. 103) for archi
 
 | Layer | Functional Definition | Prior Art Coverage | The Venus Rebirth (SER-Aligned) Contribution |
 |---|---|---|---|
-| Mechanism | What the physical and computational system does | TVP: Central mainframe, circular concentric zoning, sensor feedback.<br>Fab Labs: CNC digital fabrication.<br>Sardex: Mutual credit clearing database. | Novel Synthesis: Distributed containerized node infrastructure (bootc, dm-verity) running local-first CRDT resource ledgers verified through hardware-token challenge-response (YubiKey/FIDO2) and reproducible hardware BOMs. |
+| Mechanism | What the physical and computational system does | TVP: Central mainframe, circular concentric zoning, sensor feedback.<br>Fab Labs: CNC digital fabrication.<br>Sardex: Mutual credit clearing database. | Novel Synthesis: Distributed containerized node infrastructure (bootc, dm-verity) running local-first CRDT resource ledgers verified through hardware-token challenge-response (U2F/HSM/FIDO2) and reproducible hardware BOMs. |
 | Trigger | What initiates system state transitions and allocation | TVP: Central computer processing municipal demand.<br>Sardex: Human business invoice matching.<br>Traditional Co-op: Majority vote in annual assembly. | Novel Deterministic Triggers: Environmental telemetry thresholds (e.g., aquifer depletion, kilowatt-hour surplus) combined with multi-signature cryptographic quorum over immutable ledger entries, executing automated inventory rebalancing without political intervention. |
 | Policy | What system actions occur in response to triggers | TVP: Universal free access within a single closed city.<br>OSE: Voluntary open-source publishing.<br>Communes: Informal collective consensus. | Novel Structural Policy: Zero-cost node forkability and cryptographic portability under the SER framework; automated revocation of misbehaving node federation credentials via transparency log proofs; auditable exit rights. |
 
@@ -145,14 +145,14 @@ A person having ordinary skill in the art would be a systems engineer or compute
 
 ### 5.4 Anticipated KSR Obviousness Rejections (Section 103) & Rebuttals
 
-1. Rejection under KSR Rationale (A): 'Combining known elements of cybernetic resource accounting (Fresco) with known hardware authentication (YubiKey/FIDO2) and known mutual credit (Sardex) to yield predictable results.'
+1. Rejection under KSR Rationale (A): 'Combining known elements of cybernetic resource accounting (Fresco) with known hardware authentication (U2F/HSM/FIDO2) and known mutual credit (Sardex) to yield predictable results.'
    - Rebuttal: The combination is non-obvious because prior art in cybernetic cities explicitly taught away from localist federation and user-level cryptographic partitioning. Fresco insisted that cybernetic management required comprehensive global control and unified central data collection. Introducing localized cryptographic exit rights and zero-cost forkability directly contradicts the centralist dogma of prior technocratic city designs, producing the unexpected property of self-healing federation.
 2. Rejection under KSR Rationale (B): 'Simple substitution of a federated ledger for a centralized mainframe database.'
    - Rebuttal: In traditional database architecture, decentralization introduces severe Byzantine coordination overhead. By anchoring transactions in physical hardware tokens and local-first CRDTs coupled to local sensory bounds (carrying capacity), the architecture eliminates the global consensus bottleneck, allowing sovereign physical operation during wide-area network partition.
 
 ### 5.5 Novelty Verdict
 **Verdict: NOVEL**  
-*The integration of Fresco's access-over-scarcity cybernetic engineering with the SER Framework (YubiKey/FIDO2 hardware sovereignty, stateless ephemeral execution, and reproducible open BOMs/ledgers) produces a structurally novel municipal computing and governance architecture that overcomes the historic failure modes of centralized utopianism.*
+*The integration of Fresco's access-over-scarcity cybernetic engineering with the SER Framework (U2F/HSM/FIDO2 hardware sovereignty, stateless ephemeral execution, and reproducible open BOMs/ledgers) produces a structurally novel municipal computing and governance architecture that overcomes the historic failure modes of centralized utopianism.*
 
 ---
 

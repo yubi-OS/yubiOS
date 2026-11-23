@@ -52,7 +52,7 @@ PRIMITIVES = [
     ]),
     ("cryptographic_identity", [
         r"\bcryptographic\s+identity\b", r"\bidentity\s+(attestation|provider)\b",
-        r"\bCTAP2?\b", r"\bFIDO2?\b", r"\bYubiKey\b",
+        r"\bCTAP2?\b", r"\bFIDO2?\b", r"\bU2F\/HSM\b",
         r"softhsm", r"\bPKCS#?11\b", r"\bTPM\b", r"\bTPM2?\.0\b",
         r"\bHSM\b", r"key\s+identity", r"key\s+attestation",
         r"securezynq",
@@ -212,7 +212,7 @@ EDIT_TEMPLATES = {
     "continuous_adaptive": "## Continuous / adaptive coverage\n\nThis skill supports the yubiOS continuous-monitoring layer — runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The skill is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.",
     "immutability": "## Immutability coverage\n\nThis skill upholds the yubiOS immutability layer — composefs repository, dm-verity root hash, ostree deployment, read-only / append-only semantics, sealed UKI / measured boot. The skill either preserves or strengthens an immutable artifact; mutable state is outside its scope.",
     "audit_evidence": "## Audit / evidence coverage\n\nThis skill contributes to the yubiOS audit-evidence rollup — SBOM, SLSA provenance, attestation, verification records, secure logging, TPM attestation, evidence-pack export. The skill's output is auditable end-to-end (commit, run, artifact, policy).",
-    "cryptographic_identity": "## Cryptographic identity coverage\n\nThis skill manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.",
+    "cryptographic_identity": "## Cryptographic identity coverage\n\nThis skill manages cryptographic identity — FIDO2/CTAP2 U2F/HSM, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.",
     "segmentation": "## Segmentation coverage\n\nThis skill applies the yubiOS segmentation primitive — Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.",
 }
 

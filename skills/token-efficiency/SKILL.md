@@ -19,6 +19,9 @@ Tokens are the scarce resource in every session — they're latency, cost, and a
 6. **Summarize, don't paste.** When reporting on a large fetched blob — logs, API responses, file contents — extract the fields that matter and summarize. Paste verbatim only the specific lines that need to be quoted exactly.
 7. **Cache and reuse within a session.** If something was already fetched or computed earlier in this session, reuse it instead of re-fetching or recomputing from scratch.
 8. **Match tool and model tier to task size.** A one-line fact lookup doesn't need deep research effort. A menial, well-defined subagent task doesn't need the smartest available model tier. Reserve the expensive tools and tiers for tasks that actually need the extra capability.
+9. **Offload generation tasks to the routed model, not the session context.** Any generation work whose input and output are both small relative to the item count — classify N rows, triage N messages, score N candidates, extract fields from N documents, draft N variants, translate, caption, transcribe, TTS, embed — should leave the session context entirely. Route it through `workers-ai-router`: the router maps the task intent to the right Workers AI model from the live 52-model catalog (task relevance first, then benchmark quality), and the call runs against the account's Workers AI API via the `Cloudflare` connection. Session cost drops to the two boundary messages (the batch in a file, the results in a file) instead of N full in-context generations. Decision-shaped work (yes/no gates, N-option picks, typed extraction with confidence) goes to the native-schema decision models (`clef-omni` head of the `decision-scoring` pool), never to a chat model asked to "reply with just the answer".
+
+Boundary rule: offload the *task*, not the *judgment*. The router picks the model; the session still owns prompt construction, result verification against the task's own contract, and any fallback decision when a route's pool errors out.
 
 
 ## Load-order protocol
@@ -66,6 +69,7 @@ Before declaring a session efficient, confirm each item holds:
 - [ ] Large API responses were summarized; only the specific lines or fields that needed verbatim quote were pasted.
 - [ ] File references use `[label](file://./path)` rather than re-pasting the file body.
 - [ ] The tool tier or model tier matched the size of the task — a fact lookup didn't trigger a deep-research pass; a menial subagent task didn't take the smartest tier.
+- [ ] Bulk generation work (classify/triage/score/extract/draft/embed/transcribe over N items) was offloaded through `workers-ai-router` to the routed Workers AI model, not generated in-context.
 
 If any item is unchecked, the loop hasn't closed — apply the missed practice before responding.
 ## Changelog
@@ -74,6 +78,8 @@ If any item is unchecked, the loop hasn't closed — apply the missed practice b
 - 2026-07-29 cycle 2: Hypothesis "Adding `## Red Flags` closes residual of gap #2 (structural parity) and reduces gap #3 (override cases)." Edit: added `## Red Flags` section (6 bullets covering override cases, over-searching, misapplied batching, over-efficiency, re-fetch, and duplication) before `## Verification`; appended this changelog entry. Result: re-map shows gap #2 residual CLOSED (12 → ~3 — all three sibling endpoints now present), gap #3 (override cases) REDUCED (9 → ~4 via Red Flag bullet); no new substantive gaps ≥ L×S 6; no new anti-patterns; fixpoint reached.
 
 - **2026-08-06 cycle 5 RSI**: closed `trust chain` primitive gap (corpus-wide count 23→24/70). See `refs/cycle5-results-2026-08-06.md` for the corpus-fit delta measurement.
+
+- **2026-11-23**: wired generation offload — new Core practice #9 routes bulk generation work through `workers-ai-router` (task-then-quality over the live 52-model Workers AI catalog), plus one Verification checklist item. Source: Jenny directive "wire this new skill into the token efficiency skill, to offload all generation tasks to the appropriate model".
 
 
 ---
@@ -113,7 +119,7 @@ The hyperspherical-harmonic-curve corpus audit identified this skill as having a
 
 ## Cycle 6 RSI primitive-closure (2026-08-06)
 
-This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / YubiKey / ssh-key / hmac-secret / passkey) integration is referenced.
+This skill's `cryptographic identity` primitive is closed by cycle-6 RSI. This skill's cryptographic identity (FIDO2 / PIV / U2F/HSM / ssh-key / hmac-secret / passkey) integration is referenced.
 
 The audit-trail entry: 2026-08-06 cycle 6 RSI — closed `cryptographic identity` primitive gap.
 

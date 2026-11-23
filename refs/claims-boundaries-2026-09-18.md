@@ -11,7 +11,7 @@ sitting between `docs/PR.md`, `docs/THREAT_MODEL.md`, and `docs/ARCHITECTURE.md`
 
 | Campaign surface may say | Because (bound) | May NOT say |
 |---|---|---|
-| FIDO2-first immutable OS; YubiKey as identity root | ARCHITECTURE.md's trust-chain sections; the hardware-leg proof (OMN-42/89) | "unhackable", "secure by default" |
+| FIDO2-first immutable OS; U2F/HSM as identity root | ARCHITECTURE.md's trust-chain sections; the hardware-leg proof (OMN-42/89) | "unhackable", "secure by default" |
 | UKI + Secure Boot signing via PIV slot 9c | the signed-UKI VM lane evidence (round-6-era PR #155 matrix) | "production Secure Boot" before real-board ROTPK/fuse (B-ARM64-PATHA) |
 | Groundwork / technical preview | README's Status badge; SECURITY.md's supported-versions table | any production-support language |
 | "No OEM [root of trust]" (the tagline) | true on ARM64 Path A by design; x86-64 roots remain OEM-supplied per ARCHITECTURE.md | an unqualified "no OEM" that erases the x86-64 caveat |

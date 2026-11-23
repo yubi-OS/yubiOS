@@ -43,7 +43,7 @@ State plainly what is verified today versus what is aspirational, so every other
 Per the live BLOCKERS.md (2026-07-22), the following are still open and directly block any claim of production readiness or commercial availability:
 
 - B-VM-CTAP2: no FIDO2 token enumerates in the VM CI lane, so LUKS2 FIDO2 unlock, systemd-homed, and ed25519-sk SSH are unproven even in software.
-- B-REAL-FIDO2: no physical-YubiKey run has validated unlock, homed, resident SSH, PAM presence, PIV signing, recovery, or failure handling on real hardware.
+- B-REAL-FIDO2: no physical-U2F/HSM run has validated unlock, homed, resident SSH, PAM presence, PIV signing, recovery, or failure handling on real hardware.
 - B-HARDENING-RUNTIME: the systemd hardening audit is static only; no Bats suite or systemd-analyze verify run has executed against a target image.
 - B-BOOTC-SEAL: fs-verity is proven through a mutable BLS digest anchor, not a sealed/signed UKI plus Secure Boot chain.
 - B-ARM64-PATHA and B-RK3588-TPL: no ARM64 board has proven the full secure-boot chain; the current ROCK 5B build is diagnostic packaging, not a flashable image.

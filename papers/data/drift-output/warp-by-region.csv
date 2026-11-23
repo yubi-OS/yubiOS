@@ -8,7 +8,7 @@ self-to-docs,0.217391,0.386935,0.615511,0,0,0,0,0,0,1,0,0,0,0,2,3,1.947100,true,
 self-to-docs,0.260870,0.381910,0.659730,0,1,0,2,0,0,0,0,0,0,0,2,5,3.478305,true,self:Anti-patterns I police in myself,SELF.md,Anti-patterns I police in myself,docs:Strengths,SELF.md,Strengths
 self-to-docs,0.304348,0.804020,0.207460,0,1,0,0,0,0,0,0,0,1,1,1,4,0.875036,false,,,,,,
 self-to-docs,0.347826,0.783920,0.024302,0,0,0,2,1,0,0,3,0,0,1,2,9,0.230634,false,,,,,,
-self-to-docs,0.391304,0.753769,0.660051,1,0,0,0,1,0,0,0,0,0,0,2,4,2.783996,true,self:Strengths,SELF.md,Strengths,docs:ADR-001: YubiKey as TPM replacement,ADR.md,ADR-001: YubiKey as TPM replacement
+self-to-docs,0.391304,0.753769,0.660051,1,0,0,0,1,0,0,0,0,0,0,2,4,2.783996,true,self:Strengths,SELF.md,Strengths,docs:ADR-001: U2F/HSM as TPM replacement,ADR.md,ADR-001: U2F/HSM as TPM replacement
 self-to-docs,0.434783,0.608040,0.073836,1,0,0,1,0,0,0,0,0,1,0,2,5,0.389286,false,,,,,,
 self-to-docs,0.478261,0.000000,0.102809,0,2,0,0,0,0,0,0,0,1,0,1,4,0.433632,false,,,,,,
 self-to-docs,0.521739,0.442211,0.256720,2,3,3,0,0,0,0,0,0,4,0,1,13,3.519117,true,self:Source/evidence,SELF.md,Source/evidence,docs:Pushback: what the corpus doesn't show,SOUL.md,Pushback: what the corpus doesn't show

@@ -15,10 +15,10 @@
   ],
   "items_sample": [
     {
-      "id": "docs:ADR-001: YubiKey as TPM replacement",
-      "text": "docs / ADR-001: YubiKey as TPM replacement",
+      "id": "docs:ADR-001: U2F/HSM as TPM replacement",
+      "text": "docs / ADR-001: U2F/HSM as TPM replacement",
       "source": "docs-corpus",
-      "section_header": "ADR-001: YubiKey as TPM replacement",
+      "section_header": "ADR-001: U2F/HSM as TPM replacement",
       "file": "ADR.md",
       "repo_path": "yubi-OS/yubiOS/docs/ADR.md",
       "blob_sha": "22c116303623ae5d31a7f6d61daefa3ed1b430c9"

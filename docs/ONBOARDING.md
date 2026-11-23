@@ -14,7 +14,7 @@ This guide gets a contributor or early tester oriented without requiring them to
 
 ## Local Requirements
 
-For repository work, expect Docker Buildx, a recent systemd toolchain where relevant, and a YubiKey 5 series device for real enrollment paths. CI may use SoftHSM or swu2f only where the workflow explicitly marks the artifact as TEST-only.
+For repository work, expect Docker Buildx, a recent systemd toolchain where relevant, and a U2F/HSM 5 series device for real enrollment paths. CI may use SoftHSM or swu2f only where the workflow explicitly marks the artifact as TEST-only.
 
 For installation experiments, the current documentation tracks the bootc `to-filesystem` model. Prepare and mount the target filesystems first, with the target root at `/mnt` and boot filesystem at `/mnt/boot`, then run bootc against that mounted tree:
 
@@ -38,12 +38,12 @@ sudo podman run --rm --privileged --pid=host --ipc=host \
 
 Use the exact command shape documented by the current bootc release and yubiOS workflow before writing a real disk. Never test destructive install commands against a disk with data you need.
 
-## YubiKey Setup Checklist
+## U2F/HSM Setup Checklist
 
 - Enable FIDO and CCID interfaces: `ykman config usb --enable FIDO --enable CCID`.
 - Set and record a FIDO2 PIN.
-- Enroll a primary YubiKey for LUKS2 and homed.
-- Enroll a backup YubiKey where supported.
+- Enroll a primary U2F/HSM for LUKS2 and homed.
+- Enroll a backup U2F/HSM where supported.
 - Generate and print the recovery key offline.
 - Keep PIV slot 9c material for Secure Boot signing separate from everyday SSH operations.
 

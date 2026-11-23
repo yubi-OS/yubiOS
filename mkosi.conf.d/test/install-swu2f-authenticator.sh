@@ -3,7 +3,7 @@
 #
 # Build & install the `passless` software CTAP2 FIDO2 authenticator into the
 # yubiOS TEST image (swu2f Layer 2 — see bcvk docs/swu2f.md). TEST-ONLY: the
-# production trust anchor stays the YubiKey FIDO2 device (ADR-003). passless is
+# production trust anchor stays the U2F/HSM FIDO2 device (ADR-003). passless is
 # never installed into a production profile.
 #
 # Why passless:
@@ -154,6 +154,7 @@ PY
     # `cargo install --debug` => debug profile (debug_assertions on) => the
     # PASSLESS_E2E_AUTO_ACCEPT_UV path compiles in. --root /usr installs to /usr/bin.
     cargo install --debug --locked --offline --path cmd/passless --root /usr
+    strip --strip-debug /usr/bin/passless /usr/bin/passless-git-sync 2>/dev/null || true
 )
 
 # Ship the upstream integration bits verbatim (sysusers creates the `fido` group,

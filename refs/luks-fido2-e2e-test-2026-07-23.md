@@ -4,7 +4,7 @@ Status check 2026-07-23: this file's "Latest CI milestone" section (run 29525332
 
 # LUKS2 FIDO2 end-to-end test
 
-Status: active CI coverage with hardware-free and hardware-in-the-loop paths. Production trust remains a physical YubiKey; software authenticators are TEST-only.
+Status: active CI coverage with hardware-free and hardware-in-the-loop paths. Production trust remains a physical U2F/HSM; software authenticators are TEST-only.
 
 Relates to yubiOS #20/#25/#33, yubi-OS/bcvk#3, ADR-003, ADR-026.
 
@@ -12,7 +12,7 @@ Relates to yubiOS #20/#25/#33, yubi-OS/bcvk#3, ADR-003, ADR-026.
 
 | Test | Authenticator | Where it runs | Purpose |
 |---|---|---|---|
-| `tests/vm/test-luks-fido2.sh` | Real YubiKey + `bcvk native-to-disk` | Bare metal / hardware-in-the-loop | Production-path confidence |
+| `tests/vm/test-luks-fido2.sh` | Real U2F/HSM + `bcvk native-to-disk` | Bare metal / hardware-in-the-loop | Production-path confidence |
 | `tests/vm/test-luks-fido2-ci.sh` | swtpm + swu2f via `bcvk ephemeral run` | CI, no hardware | Regression coverage |
 | `tests/vm/test-fido2-enrollment.sh` | TEST-only `0mniteck/yubios:dev` image with `passless` | CI / explicit dispatch | CTAP2 hmac-secret legs without a physical token |
 
@@ -40,8 +40,8 @@ The active failure moved inside the guest: `bootloader-update.service` failed du
 ## Guardrails
 
 - The `dev` image must never become a production install default.
-- Production images must not contain `passless` or any software authenticator used as a YubiKey stand-in.
-- Physical-YubiKey passthrough remains the final authority for release confidence.
+- Production images must not contain `passless` or any software authenticator used as a U2F/HSM stand-in.
+- Physical-U2F/HSM passthrough remains the final authority for release confidence.
 
 ## bcvk dependency
 

@@ -5,5 +5,5 @@ enable pcscd.service
 enable pcscd.socket
 # firstboot enrollment wizard trigger
 enable yubiOS-enroll.service
-# portable LUKS2 home directories (YubiKey FIDO2 unlock)
+# portable LUKS2 home directories (U2F/HSM FIDO2 unlock)
 enable systemd-homed.service

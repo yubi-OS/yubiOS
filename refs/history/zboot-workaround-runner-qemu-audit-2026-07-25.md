@@ -74,7 +74,7 @@ This document supports the yubiOS continuous-monitoring layer — runtime detect
 
 ## Cryptographic identity coverage
 
-This document manages cryptographic identity — FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
+This document manages cryptographic identity — FIDO2/CTAP2 U2F/HSM, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.
 
 
 ## Priority signals

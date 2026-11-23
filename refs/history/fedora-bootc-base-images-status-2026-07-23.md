@@ -10,7 +10,7 @@ _Refreshed: 2026-07-23 (supersedes refs/archive-bootc-upstream-base-images.md, o
 - Published image: **`quay.io/fedora/fedora-bootc`** with tags `42`, `43`, `44`, `rawhide` (variant tags for standard/minimal/minimal-plus per the docs).
 - Repo builds for Rawhide by default; can target other Fedora versions.
 
-**`clevis-dracut` / `clevis-pin-tpm2` status — confirmed still present**, same as prior research: they remain part of the standard image path (`clevis-dracut-21-14.fc44` includes a TPM2 dracut module; `clevis-21-14.fc44` depends on `clevis-pin-tpm2`). **yubiOS still needs to be aware of this if the boot chain ever shares dracut modules with clevis-based unlock** — yubiOS's FIDO2 YubiKey unlock path replaces TPM2 unlock entirely, so this should be a non-issue as long as clevis units aren't accidentally enabled, but worth a one-time sanity check against the live pinned image.
+**`clevis-dracut` / `clevis-pin-tpm2` status — confirmed still present**, same as prior research: they remain part of the standard image path (`clevis-dracut-21-14.fc44` includes a TPM2 dracut module; `clevis-21-14.fc44` depends on `clevis-pin-tpm2`). **yubiOS still needs to be aware of this if the boot chain ever shares dracut modules with clevis-based unlock** — yubiOS's FIDO2 U2F/HSM unlock path replaces TPM2 unlock entirely, so this should be a non-issue as long as clevis units aren't accidentally enabled, but worth a one-time sanity check against the live pinned image.
 
 ---
 
@@ -59,7 +59,7 @@ CentOS builds extend/adapt the Fedora image process via a git submodule. RHEL Im
 - yubiOS currently derives from `quay.io/fedora/fedora-bootc` (Fedora standard tier), per PINNED.md.
 - **Action item for next refresh: check whether Fedora Rawhide's bootc package has moved past 1.16.3 to 1.16.4+** — that's the concrete unlock signal for B-BOOTC-SEAL.
 - The `minimal-plus` tier is what Fedora IoT and CoreOS share; if yubiOS wants an IoT-adjacent image, that's the right upstream base.
-- Be aware of `clevis-dracut`/`clevis-pin-tpm2` presence in the boot chain — verify they're not conflicting with the YubiKey FIDO2 unlock path on the live pinned image.
+- Be aware of `clevis-dracut`/`clevis-pin-tpm2` presence in the boot chain — verify they're not conflicting with the U2F/HSM FIDO2 unlock path on the live pinned image.
 
 ---
 

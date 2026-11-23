@@ -1,11 +1,11 @@
 # yubiOS PAM config for sudo — copy to /etc/pam.d/sudo
 #
-# pam_u2f.so: "required" (not "sufficient") — YubiKey touch is ALWAYS needed.
+# pam_u2f.so: "required" (not "sufficient") — U2F/HSM touch is ALWAYS needed.
 # This is intentional. To skip, boot to recovery shell (see ONBOARDING.md).
 #
 # pam-u2f >= 1.3.1 required (CVE-2025-23023).
 # authfile: central key file, root-owned, mode 600.
-# cue: prints "Please touch your YubiKey" prompt.
+# cue: prints "Please touch your U2F/HSM" prompt.
 # origin: appid for the U2F credential (must match enrollment).
 #
 # Source: https://github.com/Yubico/pam-u2f

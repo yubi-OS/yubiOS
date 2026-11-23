@@ -58,7 +58,7 @@ Consider removing (reduces attack surface):
 - `podman` — avoid if not running containers inside yubiOS
 
 Not included — must add in yubiOS layer:
-- `ykman`, `pcscd`, `opensc` — YubiKey tooling
+- `ykman`, `pcscd`, `opensc` — U2F/HSM tooling
 - `pam-u2f` — FIDO2 PAM
 - `yubikey-manager` — enrollment scripts
 - Cloud agents (`cloud-init`) — add for cloud deployments
@@ -117,7 +117,7 @@ Changes in `minimal.yaml` / `standard.yaml` can affect yubiOS:
 - Bootloader/dracut changes
 
 **Recent notable change** (2 days before 2026-05-11):
-- `clevis-dracut` + `clevis-pin-tpm2` added to minimal/standard. Clevis handles LUKS auto-unlock. yubiOS replaces this with YubiKey FIDO2 unlock — verify no conflict with clevis hooks in the boot chain.
+- `clevis-dracut` + `clevis-pin-tpm2` added to minimal/standard. Clevis handles LUKS auto-unlock. yubiOS replaces this with U2F/HSM FIDO2 unlock — verify no conflict with clevis hooks in the boot chain.
 
 Renovate bumps Fedora version pins automatically; watch Renovate MRs for upstream version movement.
 

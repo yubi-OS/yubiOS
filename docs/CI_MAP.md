@@ -186,7 +186,7 @@ source, hard `/dev/kvm` gate, yubiOS image pulled into Podman storage, mandatory
 CTAP2/LUKS2/homed/ed25519-sk assertions. The vGPU variant adds the vGPU/virtio CI
 legs; both carry the DESTRUCTIVE `hw_device` input (spare block device on rock1,
 wipes it) and the real-U2F guard (`ALLOW_REAL_U2F=1` required on rock1 because a
-physical YubiKey is attached; PR #144 refuses to silently run passless tests
+physical U2F/HSM is attached; PR #144 refuses to silently run passless tests
 there). `ci_test_sealed-uki-vm.yml` — sealed-UKI Secure Boot VM e2e (PR #155
 green at V83) — joined the group on the 2026-10-05 map pass; it is the only
 `workflow_call`-callable workflow in the repo (5 jobs incl. negative tamper

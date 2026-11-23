@@ -86,7 +86,7 @@ The skill must be **refreshable** — running it on the latest commits reuses th
 - **OMN-141** (Backlog, P1): Schedule sacrificial RK3588 burn + name human owner for B-REAL-FIDO2 — blocks the entire ARM64 Path A hardware cluster (OMN-36/42/45/46/47/56/57/58). Jenny-input only.
 - **OMN-150** (Backlog, P0): Sealed composefs Phase 2 (install-time BLSConfig wiring) — depends on bootc 1.16.4+ bump OR bootc-side patch. Linear state confirms Backlog + post-launch.
 - **OMN-151** (In Progress, P2): ci_test-vgpu-vm.yml docker-storage stale on rock1 — self-mode-fixable via the fetch group re-dispatch (per PROJECT_RULES.md OMN-149 recurrence pattern).
-- **OMN-162** (Backlog, P4): 4 missing VM test scripts (negative-tamper / OCI-channel / YubiKey-passthrough / policy-rejection).
+- **OMN-162** (Backlog, P4): 4 missing VM test scripts (negative-tamper / OCI-channel / U2F/HSM-passthrough / policy-rejection).
 
 ---
 

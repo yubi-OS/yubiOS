@@ -3,7 +3,7 @@
 # yubiOS owner Secure Boot enrollment and signing, run on the booted board.
 #
 # Phases:
-#   enroll : only in setup mode. Makes PK, KEK, db from the YubiKey PIV slot 9a
+#   enroll : only in setup mode. Makes PK, KEK, db from the U2F/HSM PIV slot 9a
 #            key (signing only, SIGN.md steps 1-3), writes PK, KEK, db through the
 #            StMM variable store with efi-updatevar, then verifies them.
 #   resign : signs the systemd-boot loader and every UKI on the ESP with the db
@@ -18,7 +18,7 @@
 
 set -euo pipefail
 # Paths default to production; YUBIOS_* overrides exist so tests/unit/test-enroll-sb.bats
-# can run unprivileged without a YubiKey or a mounted efivarfs.
+# can run unprivileged without a U2F/HSM or a mounted efivarfs.
 # shellcheck source=usr/lib/yubiOS/lib.sh
 source "${YUBIOS_LIB_SH:-/usr/lib/yubiOS/lib.sh}"
 export PATH="$PATH:/usr/lib/systemd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -29,6 +29,13 @@ for _esp_cand in "$ESP" /boot/efi /boot; do
   if [ -d "$_esp_cand/EFI" ]; then ESP="$_esp_cand"; break; fi
 done
 KEYDIR="${YUBIOS_SB_KEYDIR:-/var/lib/yubiOS/secureboot}"
+if [ -n "${YUBIOS_SYSTEM_SB_KEYDIR:-}" ]; then
+  SYSTEM_KEYDIR="$YUBIOS_SYSTEM_SB_KEYDIR"
+elif [ -n "${YUBIOS_SB_KEYDIR:-}" ]; then
+  SYSTEM_KEYDIR="$YUBIOS_SB_KEYDIR"
+else
+  SYSTEM_KEYDIR="/usr/lib/yubiOS/secureboot"
+fi
 ENROLLED_MARK="${YUBIOS_SB_ENROLLED_MARK:-/var/lib/yubiOS/.sb-enrolled}"
 SB_KEY_URI="pkcs11:id=%01;type=private"
 OWNER_GUID="${YUBIOS_OWNER_GUID:-1404b45e-798b-4249-b5cd-b7f961b44894}"
@@ -45,7 +52,7 @@ fi
 [ -n "$PKCS11_LIB" ] || { echo "libykcs11 not found; set YUBIOS_PKCS11_LIB" >&2; exit 1; }
 export PKCS11_MODULE_PATH="$PKCS11_LIB"
 export PKCS11_PROVIDER_MODULE="$PKCS11_LIB"
-T="$(date +%Y-%m-%d) 00:00:00"
+T="$(date -u -d '+1 day' '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d %H:%M:%S')"
 
 for tool in ykman openssl cert-to-efi-sig-list sign-efi-sig-list efi-updatevar efi-readvar systemd-sbsign sbverify; do
   command -v "$tool" >/dev/null || { yubiOS_log "missing tool: $tool"; exit 1; }
@@ -94,6 +101,43 @@ require_slot_9a() {
 phase_enroll() {
   local sm
   sm="$(setup_mode)" || exit 1
+  if [ "$sm" != "1" ] && [ ! -f "$ENROLLED_MARK" ]; then
+    local pk_null=""
+    local cand
+    for cand in \
+      "$ESP/EFI/yubiOS/keys/PK_null.auth" \
+      "$ESP/EFI/yubiOS/secureboot/PK_null.auth" \
+      "$KEYDIR/PK_null.auth" \
+      "$SYSTEM_KEYDIR/PK_null.auth"; do
+      if [ -f "$cand" ]; then
+        pk_null="$cand"
+        break
+      fi
+    done
+    if [ -n "$pk_null" ]; then
+      yubiOS_log "SetupMode=$sm: applying initial $pk_null to clear PK and enter SetupMode=1"
+      ensure_efivars_rw
+      if efi-updatevar -f "$pk_null" PK; then
+        sm="$(setup_mode)" || exit 1
+      fi
+    fi
+    if [ "$sm" != "1" ] && [ -f "$KEYDIR/PK.crt" ]; then
+      yubiOS_log "SetupMode=$sm: signing blank ESL with $KEYDIR/PK.crt (slot 9a) to clear partial PK and enter SetupMode=1"
+      : > "$KEYDIR/null.esl"
+      sign-efi-sig-list -c "$KEYDIR/PK.crt" -t "$T" -o PK "$KEYDIR/null.esl" "$KEYDIR/PK_owner_null.forsig"
+      if openssl smime -sign -binary -provider pkcs11 -provider default \
+        -in "$KEYDIR/PK_owner_null.forsig" -out "$KEYDIR/PK_owner_null.signed" \
+        -signer "$KEYDIR/PK.crt" -inkey "$SB_KEY_URI" -outform DER -md sha256; then
+        sign-efi-sig-list -i "$KEYDIR/PK_owner_null.signed" -t "$T" PK "$KEYDIR/null.esl" "$KEYDIR/PK_owner_null.auth"
+        ensure_efivars_rw
+        if efi-updatevar -f "$KEYDIR/PK_owner_null.auth" PK; then
+          sm="$(setup_mode)" || exit 1
+          T="$(date -u -d '+1 day +1 minute' '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -u '+%Y-%m-%d %H:%M:%S')"
+        fi
+      fi
+      rm -f "$KEYDIR/PK_owner_null.forsig" "$KEYDIR/PK_owner_null.signed" "$KEYDIR/PK_owner_null.auth" 2>/dev/null || true
+    fi
+  fi
   if [ "$sm" != "1" ]; then
     yubiOS_log "Not in setup mode (SetupMode=$sm). Refusing to write keys."
     exit 1
@@ -132,19 +176,25 @@ phase_enroll() {
     -signer KEK.crt -inkey "$SB_KEY_URI" -outform DER -md sha256
   sign-efi-sig-list -i db.signed -t "$T" db db.esl db.auth
 
-  yubiOS_log "Writing PK, KEK, db through the StMM store"
+  yubiOS_log "Writing db, KEK, PK through the StMM store (PK last to lock User Mode)"
+  ensure_efivars_rw
+  efi-updatevar -f db.auth db
+  ensure_efivars_rw
+  efi-updatevar -f KEK.auth KEK
   ensure_efivars_rw
   efi-updatevar -f PK.auth PK
-  efi-updatevar -f KEK.auth KEK
-  efi-updatevar -f db.auth db
 
   yubiOS_log "Verifying enrolled variables"
   for v in PK KEK db; do efi-readvar -v "$v"; done
   [ "$(setup_mode)" = "0" ] || { yubiOS_log "SetupMode still 1 after PK write"; exit 1; }
   openssl x509 -in db.crt -outform DER -out "$KEYDIR/yubiOS-db.cer"
+  rm -f "$KEYDIR/PK_null.auth" "$KEYDIR/null.esl" 2>/dev/null || true
   if [ -d "$ESP/EFI" ]; then
-    mkdir -p "$ESP/EFI/yubiOS/secureboot" 2>/dev/null || true
-    cp -f PK.auth KEK.auth db.auth db.crt "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/secureboot/" 2>/dev/null || true
+    mkdir -p "$ESP/EFI/yubiOS/secureboot" "$ESP/EFI/yubiOS/keys" 2>/dev/null || true
+    rm -f "$ESP/EFI/yubiOS/secureboot/PK_null.auth" "$ESP/EFI/yubiOS/secureboot/null.esl" \
+          "$ESP/EFI/yubiOS/keys/PK_null.auth" "$ESP/EFI/yubiOS/keys/null.esl" 2>/dev/null || true
+    cp -f PK.auth KEK.auth db.auth PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/secureboot/" 2>/dev/null || true
+    cp -f PK.auth KEK.auth db.auth PK.crt KEK.crt db.crt PK.esl KEK.esl db.esl "$KEYDIR/yubiOS-db.cer" "$ESP/EFI/yubiOS/keys/" 2>/dev/null || true
   fi
   touch "$ENROLLED_MARK"
   yubiOS_log "Keys enrolled. Next: resign the loader and UKIs before any reboot."
@@ -184,11 +234,44 @@ phase_resign() {
   yubiOS_log "Resigned ${#images[@]} image(s) with the db key. Reboot is now safe."
 }
 
+phase_prebuilt() {
+  local sm
+  sm="$(setup_mode)" || exit 1
+  if [ "$sm" != "1" ]; then
+    yubiOS_log "Not in setup mode (SetupMode=$sm). Refusing to write keys."
+    exit 1
+  fi
+  local src_dir=""
+  for cand in "$ESP/EFI/yubiOS/secureboot" "$ESP/EFI/yubiOS/keys" "/usr/lib/yubiOS/secureboot" "$KEYDIR"; do
+    if [ -f "$cand/PK.auth" ] && [ -f "$cand/KEK.auth" ] && [ -f "$cand/db.auth" ]; then
+      src_dir="$cand"
+      break
+    fi
+  done
+  [ -n "$src_dir" ] || { yubiOS_log "No prebuilt PK.auth/KEK.auth/db.auth found under $ESP/EFI/yubiOS/{secureboot,keys} or /usr/lib/yubiOS/secureboot"; exit 1; }
+  install -d -m 0700 "$KEYDIR"
+  if [ "$src_dir" != "$KEYDIR" ]; then
+    cp -f "$src_dir"/* "$KEYDIR/" 2>/dev/null || true
+  fi
+  yubiOS_log "Writing prebuilt db, KEK, PK from $src_dir through the StMM store"
+  ensure_efivars_rw
+  efi-updatevar -f "$src_dir/db.auth" db
+  ensure_efivars_rw
+  efi-updatevar -f "$src_dir/KEK.auth" KEK
+  ensure_efivars_rw
+  efi-updatevar -f "$src_dir/PK.auth" PK
+  for v in PK KEK db; do efi-readvar -v "$v"; done
+  [ "$(setup_mode)" = "0" ] || { yubiOS_log "SetupMode still 1 after PK write"; exit 1; }
+  touch "$ENROLLED_MARK"
+  yubiOS_log "Prebuilt Secure Boot keys enrolled (SetupMode=0)."
+}
+
 case "$PHASE" in
-  enroll) phase_enroll ;;
-  resign) phase_resign ;;
-  all)    phase_enroll; phase_resign ;;
-  *)      echo "usage: enroll-sb.sh [enroll|resign|all]"; exit 2 ;;
+  enroll)   phase_enroll ;;
+  resign)   phase_resign ;;
+  prebuilt) phase_prebuilt ;;
+  all)      phase_enroll; phase_resign ;;
+  *)        echo "usage: enroll-sb.sh [enroll|resign|all] (or prebuilt)"; exit 2 ;;
 esac
 
 echo "Done. Do not reboot until resign reports success. The next boot enforces Secure Boot."

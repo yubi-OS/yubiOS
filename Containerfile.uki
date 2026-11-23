@@ -9,7 +9,7 @@
 #   1. ci_mkosi-installer.yml builds the signed UKI via mkosi's
 #      --secure-boot-key-source provider:pkcs11 --secure-boot-sign-tool
 #      systemd-sbsign path, mock-anchored to a SoftHSM token standing in
-#      for YubiKey PIV slot 9c. The signed UKI lands at
+#      for U2F/HSM PIV slot 9c. The signed UKI lands at
 #      mkosi.output/yubiOS.efi.
 #   2. The ci_mkosi-installer.yml "Assemble /uki payload + MANIFEST"
 #      step additionally copies the UKI + signing cert into a separate

@@ -37,7 +37,7 @@ openssl req -new -x509 -key "$PLAIN_KEY" \
   -subj "/CN=yubiOS FIDO2 Secure Boot" \
   -days 3650 -out "$CERT_PEM"
 
-yubiOS_log "Encrypting key with FIDO2 HMAC-secret (touch YubiKey)..."
+yubiOS_log "Encrypting key with FIDO2 HMAC-secret (touch U2F/HSM)..."
 age -r "$(age-plugin-fido2-hmac --generate)" \
     -o "$ENC_KEY" "$PLAIN_KEY"
 

@@ -25,11 +25,11 @@ input to fill in once real data exists.
 | Price per offer | O1–O7 pricing shapes (per-seat, cost-plus, flat, T&M, etc.) | Hypotheses only, flagged unvalidated in OMN-71 §2 |
 | Conversion/close rate per offer | % of pilot conversations that become paid contracts | No pilot has run yet (per OMN-84) — zero data points |
 | Fleet size / volume per customer | e.g. devices enrolled for O1, build volume for O4 | Depends on which segment (OMN-69) actually signs first |
-| Cost of goods per offer | Hardware cost for O2 (~$25–70/YubiKey per MISSION.md is the one grounded number here), support labor for O3, build infra cost for O4 | Only the hardware-unit cost has any grounding; everything else is unestimated |
+| Cost of goods per offer | Hardware cost for O2 (~$25–70/U2F/HSM per MISSION.md is the one grounded number here), support labor for O3, build infra cost for O4 | Only the hardware-unit cost has any grounding; everything else is unestimated |
 | Fixed costs | Legal (front-loaded per OMN-74), engineering, entity/compliance overhead | Framed in OMN-74 as weights, not dollar amounts |
 | Funding/capital available | Determines runway independent of revenue | Not recorded anywhere in this session's memory |
 
-**The only number in this document that isn't a placeholder** is the YubiKey
+**The only number in this document that isn't a placeholder** is the U2F/HSM
 hardware cost range (~$25–70), because that's the one figure MISSION.md itself
 states. Every other cell needs a real input before this framework becomes an
 actual model.
@@ -70,7 +70,7 @@ checkable *mechanically* once real numbers exist, without new data):
 | Readiness-gate timing | B-VM-CTAP2/B-REAL-FIDO2 stay open longer than hoped → O1/O3 revenue pushed out a full quarter or more, each quarter of delay compounding since hiring triggers (OMN-74) also don't fire | Gates close faster than expected → O1/O3 sellable earlier, pulling forward revenue that the base case assumed later |
 | Segment fit (OMN-69) | The selected segments (S1–S4) don't convert — pilots run but don't close | One segment converts unexpectedly well, changing which offer should get resourcing priority (feed back into OMN-74 §2 weights) |
 | Funding path (OMN-86) | No grant/funding lands — O7 contributes zero, and the entity-formation/legal spend (OMN-72, front-loaded) has to be self-funded | A grant lands (Alpha-Omega, NLnet, or GitHub Secure Open Source Fund per OMN-86) — non-dilutive capital extends runway without touching the revenue-dependent categories above |
-| Hardware cost | YubiKey unit cost or supply changes (outside yubiOS's control) | Bulk/partner pricing lowers O2's unit cost, improving that offer's margin |
+| Hardware cost | U2F/HSM unit cost or supply changes (outside yubiOS's control) | Bulk/partner pricing lowers O2's unit cost, improving that offer's margin |
 
 **This section defines what to stress-test, not the resulting numbers** —
 running an actual sensitivity analysis requires the base case from section 2

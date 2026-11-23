@@ -15,7 +15,7 @@ where relevant, the primary sources below that ground its design.
              hardware security key as the sole root of trust},
   year    = {2026},
   url      = {https://github.com/yubi-OS/yubiOS},
-  note    = {YubiKey replaces the TPM at every trust boundary:
+  note    = {U2F/HSM replaces the TPM at every trust boundary:
              Secure Boot signing, disk encryption, SSH, and PAM}
 }
 ```
@@ -34,7 +34,7 @@ where relevant, the primary sources below that ground its design.
 
 - Arbaugh, W. A., Farber, D. J., & Smith, J. M. (1997). *A Secure and Reliable Bootstrap Architecture.* IEEE Symposium on Security and Privacy. (Foundational chain-of-trust boot.)
 - Sailer, R., Zhang, X., Jaeger, T., & van Doorn, L. (2004). *Design and Implementation of a TCG-based Integrity Measurement Architecture.* USENIX Security Symposium. (IMA / PCR measurement.)
-- Parno, B., McCune, J. M., & Perrig, A. (2011). *Bootstrapping Trust in Modern Computers.* Springer. (Survey of TPM-rooted trust; motivates the YubiKey-as-RoT substitution.)
+- Parno, B., McCune, J. M., & Perrig, A. (2011). *Bootstrapping Trust in Modern Computers.* Springer. (Survey of TPM-rooted trust; motivates the U2F/HSM-as-RoT substitution.)
 - Trusted Computing Group. *TPM 2.0 Library Specification.* https://trustedcomputinggroup.org/resource/tpm-library-specification/
 - UEFI Forum. *Unified Extensible Firmware Interface (UEFI) Specification, v2.10.* (Secure Boot `db`/`KEK`/`PK`, Authenticode PE signing.) https://uefi.org/specifications
 
@@ -87,7 +87,7 @@ This file lists the main upstream sources used by the yubiOS docs. Prefer primar
 - Discoverable Partitions Specification: https://systemd.io/DISCOVERABLE_PARTITIONS
 - Automatic Boot Assessment: https://systemd.io/AUTOMATIC_BOOT_ASSESSMENT
 
-## FIDO2, YubiKey, And Local Auth
+## FIDO2, U2F/HSM, And Local Auth
 
 - Yubico PIV tool documentation: https://developers.yubico.com/yubico-piv-tool/
 - Yubico pam-u2f security advisory YSA-2025-01: https://www.yubico.com/support/security-advisories/ysa-2025-01/

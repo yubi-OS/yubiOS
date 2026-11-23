@@ -117,7 +117,7 @@ A secondary audience is **CI/automation** -- the workflow that dispatches
 
 **Job:** monitor and troubleshoot the LUKS2 + FIDO2 unlock path.
 
-**Prerequisites assumed:** a booted yubiOS image with TPM and a YubiKey
+**Prerequisites assumed:** a booted yubiOS image with TPM and a U2F/HSM
 attached; familiarity with `bootc upgrade` and `systemctl status`.
 
 **Out of scope for this file:** developer integration of a custom

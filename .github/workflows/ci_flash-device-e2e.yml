@@ -1,4 +1,4 @@
-name: yubiOS Device Flasher & Signed UKI E2E (SD + YubiKey 9a + VM Verify)
+name: yubiOS Device Flasher & Signed UKI E2E (SD + U2F/HSM 9a + VM Verify)
 
 on:
   workflow_dispatch:
@@ -30,13 +30,13 @@ on:
         required: false
         default: 'docker.io/0mniteck/yubios:dev'
         type: string
-      sign_with_yubikey:
-        description: 'Mint/use PIV slot 9a key on attached YubiKey (1050:0407) or test fallback to sign PK/KEK/db.auth, systemd-boot, and UKI'
+      sign_with_u2f_hsm:
+        description: 'Optional flash-time re-signing with attached U2F/HSM (default false: uses CI-signed PK/PK_null/KEK/db.auth, systemd-boot, and UKI from image)'
         required: false
-        default: true
+        default: false
         type: boolean
       piv_touch_policy:
-        description: 'Optional override for YubiKey PIV slot 9a touch policy (auto uses SIGNKEY: test->never, production->cached)'
+        description: 'Optional override for U2F/HSM PIV slot 9a touch policy (auto uses SIGNKEY: test->never, production->cached)'
         required: false
         default: 'auto'
         type: choice
@@ -74,7 +74,7 @@ jobs:
           FLASH_BOARD: ${{ inputs.board }}
           FLASH_SD_DEVICE: ${{ inputs.sd_device }}
           FLASH_OS_IMAGE: ${{ inputs.image }}
-          FLASH_SIGN_WITH_YUBIKEY: ${{ inputs.sign_with_yubikey }}
+          FLASH_SIGN_WITH_U2F_HSM: ${{ inputs.sign_with_u2f_hsm }}
           FLASH_PIV_TOUCH_POLICY: ${{ inputs.piv_touch_policy }}
           FLASH_RUN_POST_VM: ${{ inputs.run_post_install_vm_boot }}
         run: |

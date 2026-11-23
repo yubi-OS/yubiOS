@@ -43,7 +43,7 @@ Planning update: keep QEMU zstd workaround maintenance on the watch list, but pr
 | `AGENTS.md`, `SAUNA_TOOLS.md`, historical notes in `BLOCKERS.md` | Old guidance said workflow-file writes were blocked by missing `workflow` scope, while current guidance says Workflows: Write is granted. | Marked the old token-scope blocker as resolved and routed workflow writes through the connected GitHub app / granted SU path. |
 | `README.md`, `TODO.md`, `BLOCKERS.md`, `ADR.md`, `SPEC.md`, `MITIGATE.md` | `RestrictFileSystems=` was described as a v261 feature in some places. | Clarified that yubiOS currently uses `RestrictFileSystems=~@network`; v261 additionally introduced `RestrictFileSystemAccess=`. |
 | `README.md`, `TODO.md`, older knowledge index | Hard-coded yubiOS output-image digest/run numbers were presented as current even after newer commits landed. | Moved docs toward `PINNED.md` for base/action pins and toward workflow/Docker Hub state for release image freshness. |
-| `refs/luks-fido2-e2e-test.md` | swu2f Layer 2 was still described as pending, while ADR-026 and recent PRs describe the `dev` image path as live. | Updated the ref to distinguish production YubiKey trust from TEST-only swu2f coverage. |
+| `refs/luks-fido2-e2e-test.md` | swu2f Layer 2 was still described as pending, while ADR-026 and recent PRs describe the `dev` image path as live. | Updated the ref to distinguish production U2F/HSM trust from TEST-only swu2f coverage. |
 | `refs/arm64-ftpm-phase-f0.md` | Mojibake in em dash/arrow characters made the doc harder to read. | Replaced with ASCII punctuation. |
 | `refs/v261-base-image.md` | Still framed the v261 base bump as future work. | Reframed as historical/completed and pointed at `PINNED.md`. |
 

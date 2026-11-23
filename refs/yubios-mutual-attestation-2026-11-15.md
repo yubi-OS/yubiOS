@@ -7,7 +7,7 @@ Hits fetched in depth: 3
 
 ## 1. Search Anchor
 
-How can two yubiOS hosts (each equipped with a hardware TPM 2.0 or ARM64 OP-TEE `tpm_ftpm_tee` fTPM, measured-boot UKI PCRs, and an operator YubiKey exposed via PIV / `ssh-agent`) perform local and mutual peer-to-peer remote attestation via a hardened systemd/D-Bus service using a GrapheneOS Auditor-style single-use pairing ceremony?
+How can two yubiOS hosts (each equipped with a hardware TPM 2.0 or ARM64 OP-TEE `tpm_ftpm_tee` fTPM, measured-boot UKI PCRs, and an operator U2F/HSM exposed via PIV / `ssh-agent`) perform local and mutual peer-to-peer remote attestation via a hardened systemd/D-Bus service using a GrapheneOS Auditor-style single-use pairing ceremony?
 
 ## 2. Direct Competitors & Equivalents
 
@@ -18,7 +18,7 @@ How can two yubiOS hosts (each equipped with a hardware TPM 2.0 or ARM64 OP-TEE 
 - **Google `go-tpm-tools` (`google/go-tpm-tools`)** - Go library and CLI providing high-level TPM 2.0 attestation protobuf bundles combining multi-bank PCR quotes and raw TCG event logs. https://github.com/google/go-tpm-tools
   - Key observation: Bundles raw `TPMS_ATTEST` structures, signature blobs, PCR bank values, and `/sys/kernel/security/tpm0/binary_bios_measurements` into a single self-contained evidence message verified offline.
 - **OpenSSH FIDO2/PIV Agent Signing (`ssh-keygen -Y sign` / `SSH_AUTH_SOCK`)** - OpenSSH >= 8.2 arbitrary message signing (`SSHSIG` format) using keys held in `ssh-agent` (`ed25519-sk`, `ecdsa-sk`, or PKCS#11 PIV slot `9a`). https://sunhick.github.io/posts/advanced-yubikey-5c/
-  - Key observation: Allows a forwarded or local `ssh-agent` holding a YubiKey to sign domain-separated (`-n yubios-attest-v1`) attestation transcripts without exposing raw SSH authentication signatures to cross-protocol replay.
+  - Key observation: Allows a forwarded or local `ssh-agent` holding a U2F/HSM to sign domain-separated (`-n yubios-attest-v1`) attestation transcripts without exposing raw SSH authentication signatures to cross-protocol replay.
 
 ## 3. Failed Attempts & Failure Modes
 
@@ -44,9 +44,9 @@ On GrapheneOS, StrongBox is a discrete chip (Titan M) corroborating the TEE. On 
    - Fresh quote (`tpm2_quote`) over `sha256:0,1,2,4,7,11,14,15` with qualifying data:
      `extraData = SHA256("yubios-attest-v1" || challenge || challenge_index || peer_binding_hash)`.
    - Monotonic anti-rollback state from `tpm2_readclock` (reset count, restart count, clock ms) plus optional NV counter (`0x01800001` via `tpm2_nvread`) and UEFI/fTPM event log digest (`tpm2_eventlog`).
-2. **Owner StrongBox (YubiKey PIV Slot `9a`/`9c` + `ssh-agent`):**
-   - **Local PIV Attestation (`--piv-slot 9a|9c`):** signs the serialized attestation bundle digest via PKCS#11 (`libykcs11.so` / `opensc-pkcs11.so`) or slot key and attaches the YubiKey PIV certificate chain (`ykman piv export-cert`).
-   - **Paired SSH-Agent StrongBox (`SSH_AUTH_SOCK`):** signs the mutual transcript (`challenge_index_A || challenge_index_B || quote_digest_A || quote_digest_B`) using `ssh-keygen -Y sign -n yubios-attest-v1` with the operator's YubiKey key loaded in `ssh-agent`, verified by the peer via `ssh-keygen -Y verify`.
+2. **Owner StrongBox (U2F/HSM PIV Slot `9a`/`9c` + `ssh-agent`):**
+   - **Local PIV Attestation (`--piv-slot 9a|9c`):** signs the serialized attestation bundle digest via PKCS#11 (`libykcs11.so` / `opensc-pkcs11.so`) or slot key and attaches the U2F/HSM PIV certificate chain (`ykman piv export-cert`).
+   - **Paired SSH-Agent StrongBox (`SSH_AUTH_SOCK`):** signs the mutual transcript (`challenge_index_A || challenge_index_B || quote_digest_A || quote_digest_B`) using `ssh-keygen -Y sign -n yubios-attest-v1` with the operator's U2F/HSM key loaded in `ssh-agent`, verified by the peer via `ssh-keygen -Y verify`.
 
 ### 5.2 Single-Use Pairing Code & Mutual Handshake Protocol
 1. **`pair-init` (on Host B or Host A):**
@@ -56,10 +56,10 @@ On GrapheneOS, StrongBox is a discrete chip (Titan M) corroborating the TEE. On 
    - Host A invokes `yubiOS-attest pair-ssh --peer <hostB> --code YUBI-...`.
    - Phase A (Hello & EK/AK Exchange): Host A and Host B exchange `(protocol_version=1, host_id, challenge_index, fresh_nonce, ek_pub, ak_pub, ak_name)` and compute a pairing MAC using `HKDF-SHA256(single_use_code, transcript_hash)`. Host B immediately burns the single-use code (any replay fails closed).
    - Phase B (Mutual `MakeCredential` / `ActivateCredential` Challenge): Host A generates a 32-byte credential secret encrypted to `(ek_pub_B, ak_name_B)` via `tpm2_makecredential`; Host B generates a 32-byte credential secret encrypted to `(ek_pub_A, ak_name_A)`. Both hosts run `tpm2_activatecredential` on their respective fTPMs and return the recovered secrets.
-   - Phase C (Mutual Quote + YubiKey Co-Signature + Pinning): Both hosts generate fresh `tpm2_quote` bundles over `sha256:0,1,2,4,7,11,14,15` qualified by the mutual transcript + recovered credential secret, co-sign with YubiKey PIV / `ssh-agent`, verify each other via `tpm2_checkquote` + `ssh-keygen -Y verify`, and write pinned peer records to `/var/lib/yubiOS-attest/peers/<peer_id>.json`.
+   - Phase C (Mutual Quote + U2F/HSM Co-Signature + Pinning): Both hosts generate fresh `tpm2_quote` bundles over `sha256:0,1,2,4,7,11,14,15` qualified by the mutual transcript + recovered credential secret, co-sign with U2F/HSM PIV / `ssh-agent`, verify each other via `tpm2_checkquote` + `ssh-keygen -Y verify`, and write pinned peer records to `/var/lib/yubiOS-attest/peers/<peer_id>.json`.
 3. **`mutual-verify` (Subsequent Audits):**
    - Uses the pinned `challenge_index_A` and `challenge_index_B` without needing a new pairing code.
-   - Verifies AK quote signature, PCR 0/4/7/11 baseline continuity, monotonic `tpm_clock` / `os_version` non-regression (downgrade detection), and YubiKey `ssh-agent` / PIV co-signature.
+   - Verifies AK quote signature, PCR 0/4/7/11 baseline continuity, monotonic `tpm_clock` / `os_version` non-regression (downgrade detection), and U2F/HSM `ssh-agent` / PIV co-signature.
 
 ### 5.3 Hardened systemd Service & D-Bus / Socket Surface
 - **Service Unit:** `usr/lib/systemd/system/yubiOS-attestd.service` (`ConditionSecurity=measured-os`, `Type=notify`, `DynamicUser=no` / `User=yubios-attest`, `Group=tss`, exposure score `< 2.5`).

@@ -20,21 +20,21 @@ detect_fido2_device() {
   local dev
   dev=$(fido2-token -L 2>/dev/null | awk -F: 'NR==1{print $1}' | tr -d ' ')
   if [[ -z "$dev" ]]; then
-    yubiOS_die "No FIDO2 device found. Plug in your YubiKey and try again."
+    yubiOS_die "No FIDO2 device found. Plug in your U2F/HSM and try again."
   fi
   echo "$dev"
 }
 
-# Wait for YubiKey to appear on hidraw
-wait_for_yubikey() {
-  yubiOS_log "Waiting for YubiKey... (plug it in now)"
+# Wait for U2F/HSM to appear on hidraw
+wait_for_u2f_hsm() {
+  yubiOS_log "Waiting for U2F/HSM... (plug it in now)"
   local attempts=0
   while ! fido2-token -L 2>/dev/null | grep -q /dev/hidraw; do
     sleep 1
     attempts=$((attempts+1))
-    [[ $attempts -gt 30 ]] && yubiOS_die "Timed out waiting for YubiKey."
+    [[ $attempts -gt 30 ]] && yubiOS_die "Timed out waiting for U2F/HSM."
   done
-  yubiOS_log "YubiKey detected."
+  yubiOS_log "U2F/HSM detected."
 }
 
 # Verify pam-u2f version >= 1.3.1 (CVE-2025-23013 fix)
@@ -67,7 +67,7 @@ find(d["blockdevices"])
 }
 
 # Enforce CTAP 2.1 minimum PIN length (CTAP 2.1 minPinLength extension)
-# YubiKey 5.4+ supports minPinLength; enforced locally as a policy gate.
+# U2F/HSM 5.4+ supports minPinLength; enforced locally as a policy gate.
 # Source: CTAP 2.1 spec s7.2.3, https://fidoalliance.org/specs/fido-v2.1-ps-20210615/
 check_fido2_pin_length() {
   local min_len="${1:-8}"
@@ -86,7 +86,7 @@ check_fido2_pin_length() {
 enroll_pam_user() {
   local target_user="${1:-}"
   [[ -z "$target_user" ]] && yubiOS_die "Usage: enroll_pam_user <username>"
-  yubiOS_log "Enrolling PAM U2F for $target_user (touch YubiKey twice)..."
+  yubiOS_log "Enrolling PAM U2F for $target_user (touch U2F/HSM twice)..."
   pamu2fcfg -u "$target_user" -N >> /etc/yubico/u2f_keys
   yubiOS_log "Done. Test: sudo -u $target_user whoami"
 }

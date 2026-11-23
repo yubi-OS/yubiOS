@@ -21,7 +21,7 @@ on:
         default: 'docker.io/0mniteck/yubios:dev'
       allow_real_u2f:
         type: boolean
-        description: 'Host has a real YubiKey for destructive legs'
+        description: 'Host has a real U2F/HSM for destructive legs'
         default: false
       run_vm_legs:
         type: boolean

@@ -403,10 +403,10 @@ target "yubios-uki" {
   platforms   = [PLATFORM]
   labels = {
     "org.opencontainers.image.title"       = "yubiOS signed UKI"
-    "org.opencontainers.image.description" = "PKCS#11-signed UKI (kernel side of ADR-032 kernel+rootfs split). Built via mkosi --secure-boot-sign-tool systemd-sbsign against the YubiKey PIV slot 9a anchor (mocked with SoftHSM in CI; production uses the real YubiKey, ADR-002/ADR-008)."
+    "org.opencontainers.image.description" = "PKCS#11-signed UKI (kernel side of ADR-032 kernel+rootfs split). Built via mkosi --secure-boot-sign-tool systemd-sbsign against the U2F/HSM PIV slot 9a anchor (mocked with SoftHSM in CI; production uses the real U2F/HSM, ADR-002/ADR-008)."
     "io.yubios.artifact.role"               = "uki-kernel"
     "io.yubios.uki.sign-tool"               = "systemd-sbsign"
-    "io.yubios.uki.pkcs11"                  = "provider:pkcs11 against SoftHSM (CI) / YubiKey PIV slot 9a (production)"
+    "io.yubios.uki.pkcs11"                  = "provider:pkcs11 against SoftHSM (CI) / U2F/HSM PIV slot 9a (production)"
     "io.yubios.adr"                         = "ADR-032"
   }
   tags = PUSH ? [
@@ -424,7 +424,7 @@ target "pq-tls-verify" {
   context     = "."
   dockerfile-inline = <<-DOCKERFILE
     # dhi.io/debian-base:trixie-debian13-dev
-    FROM dhi.io/debian-base@sha256:f90fd43cdf3dd94840b4dc3a2a39fd2a08578e40e7895535e2e20a1275ba6013
+    FROM dhi.io/debian-base@sha256:1aa0a2307eea88ae00d07c7b3c8e804187ee272ccc89cde7b51667b3b065fb1d
     SHELL ["/bin/bash", "-c"]
     RUN <<'VERIFY'
     set -euo pipefail

@@ -4,11 +4,11 @@ Cross-checked 2026-07-23 against refs/mkosi-bcvk-fork-status-2026-07-23.md: mkos
 
 # systemd-sbsign PKCS#11 validation
 
-Status: validation path documented and wired for the yubiOS signing flow. A physical YubiKey remains required for final production signing validation.
+Status: validation path documented and wired for the yubiOS signing flow. A physical U2F/HSM remains required for final production signing validation.
 
 ## Goal
 
-Validate `systemd-sbsign` with YubiKey PIV slot 9c through PKCS#11, then verify the signed UKI with `osslsigncode`.
+Validate `systemd-sbsign` with U2F/HSM PIV slot 9c through PKCS#11, then verify the signed UKI with `osslsigncode`.
 
 ## Manual validation shape
 
@@ -25,7 +25,7 @@ osslsigncode verify -in yubiOS.signed.efi -CAfile /etc/yubico/sb-cert.pem
 
 ## Repo hook
 
-Run `tests/validate-pkcs11-uri.sh` after `yubiOS-enroll-sb` on a host with a configured YubiKey. The signing step is the primary gate; `osslsigncode` corroborates the PE signature.
+Run `tests/validate-pkcs11-uri.sh` after `yubiOS-enroll-sb` on a host with a configured U2F/HSM. The signing step is the primary gate; `osslsigncode` corroborates the PE signature.
 
 ## Consistency rule
 

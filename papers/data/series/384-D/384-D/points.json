@@ -1153,7 +1153,7 @@
       "residual": 0.005227611676599174
     },
     {
-      "slug": "docs:ADR-001: YubiKey as TPM replacement",
+      "slug": "docs:ADR-001: U2F/HSM as TPM replacement",
       "p": [
         -0.0006054427316907679,
         -0.0003670349148530713,
@@ -1763,7 +1763,7 @@
       "residual": 0.019788801577639525
     },
     {
-      "slug": "docs:FIDO2, YubiKey, And Local Auth",
+      "slug": "docs:FIDO2, U2F/HSM, And Local Auth",
       "p": [
         -0.003875231180923702,
         -0.01666207356627789,
@@ -2753,7 +2753,7 @@
       "residual": 0.09442337543447221
     },
     {
-      "slug": "docs:YubiKey Setup Checklist",
+      "slug": "docs:U2F/HSM Setup Checklist",
       "p": [
         0.4750674723411837,
         -0.003451854420819505,
@@ -4843,7 +4843,7 @@
       "residual": 0.008029310029366247
     },
     {
-      "slug": "refs:fTPM vs YubiKey",
+      "slug": "refs:fTPM vs U2F/HSM",
       "p": [
         -0.00019791445367483619,
         0.005849994236306003,
@@ -6693,7 +6693,7 @@
       "residual": 1.4883841325522407
     },
     {
-      "slug": "refs:---- Step 6: systemctl start yubikey-agent --------------------------------",
+      "slug": "refs:---- Step 6: systemctl start u2f-hsm-agent --------------------------------",
       "p": [
         0.053587291579154525,
         -0.9797163965594881,
@@ -6753,7 +6753,7 @@
       "residual": 0.07101291077761508
     },
     {
-      "slug": "refs:Asserts Gap G5 (systemd-homed LUKS2 + YubiKey FIDO2 home in bcvk VM).",
+      "slug": "refs:Asserts Gap G5 (systemd-homed LUKS2 + U2F/HSM FIDO2 home in bcvk VM).",
       "p": [
         -0.018351724412393265,
         0.10730790004112681,
@@ -6803,7 +6803,7 @@
       "residual": 0.08241306267065553
     },
     {
-      "slug": "refs:YubiKey (homectl create with --fido2-device=auto must find a real key).",
+      "slug": "refs:U2F/HSM (homectl create with --fido2-device=auto must find a real key).",
       "p": [
         -0.24859375410589285,
         -0.12140361544379723,
@@ -6823,7 +6823,7 @@
       "residual": 0.3290349170573999
     },
     {
-      "slug": "refs:---- Step 1: Boot bcvk ephemeral VM with YubiKey USB passthrough ---------",
+      "slug": "refs:---- Step 1: Boot bcvk ephemeral VM with U2F/HSM USB passthrough ---------",
       "p": [
         0.06276311014355566,
         -0.36200469408820646,
@@ -6833,7 +6833,7 @@
       "residual": 0.36604289217839875
     },
     {
-      "slug": "refs:---- Step 2: Verify YubiKey is visible in guest --------------------------",
+      "slug": "refs:---- Step 2: Verify U2F/HSM is visible in guest --------------------------",
       "p": [
         0.019566146403467873,
         0.23287443590035814,
@@ -6883,7 +6883,7 @@
       "residual": 0.00981338425312628
     },
     {
-      "slug": "refs:---- Step 5: Activate alice (YubiKey unlock) ----------------------------",
+      "slug": "refs:---- Step 5: Activate alice (U2F/HSM unlock) ----------------------------",
       "p": [
         -0.0007861777828911609,
         0.10009849509067924,
@@ -8903,7 +8903,7 @@
       "residual": 0.356561545944739
     },
     {
-      "slug": "refs:Physical-YubiKey and recovery demonstration",
+      "slug": "refs:Physical-U2F/HSM and recovery demonstration",
       "p": [
         0.4385342503284388,
         0.04271820617632391,
@@ -10583,7 +10583,7 @@
       "residual": 0.03681855968364489
     },
     {
-      "slug": "refs:Benchmark 4: YubiKey unit hardware cost",
+      "slug": "refs:Benchmark 4: U2F/HSM unit hardware cost",
       "p": [
         -0.003854359261623249,
         -0.07882044033315966,
@@ -10763,7 +10763,7 @@
       "residual": 0.012104977621770718
     },
     {
-      "slug": "refs:Benchmark 4: YubiKey unit hardware cost",
+      "slug": "refs:Benchmark 4: U2F/HSM unit hardware cost",
       "p": [
         0.051804125923232844,
         -0.008717904851012193,
@@ -19113,7 +19113,7 @@
       "residual": 0.14095467787866728
     },
     {
-      "slug": "refs:PKCS#11 / YubiKey PIV",
+      "slug": "refs:PKCS#11 / U2F/HSM PIV",
       "p": [
         -0.3154346781855871,
         -0.0974146445801408,
@@ -19303,7 +19303,7 @@
       "residual": 1.738943818198811
     },
     {
-      "slug": "refs:Authentication: FIDO2 with YubiKey (yubiOS primary path)",
+      "slug": "refs:Authentication: FIDO2 with U2F/HSM (yubiOS primary path)",
       "p": [
         -0.06287579433293314,
         0.6119703733211623,
@@ -19313,7 +19313,7 @@
       "residual": 1.8001309315750924
     },
     {
-      "slug": "refs:Enroll FIDO2 (requires YubiKey plugged in)",
+      "slug": "refs:Enroll FIDO2 (requires U2F/HSM plugged in)",
       "p": [
         -0.4862315893750383,
         -0.7118886154950625,
@@ -19683,7 +19683,7 @@
       "residual": 0.47348346384895373
     },
     {
-      "slug": "refs:/etc/systemd/system/systemd-homed.service.d/99-yubikey.conf",
+      "slug": "refs:/etc/systemd/system/systemd-homed.service.d/99-u2f-hsm.conf",
       "p": [
         0.9924730144589118,
         0.009428174618001462,
@@ -21093,7 +21093,7 @@
       "residual": 0.23022492861747193
     },
     {
-      "slug": "refs:YubiKey PIV (slot 9c, PKCS#11) signing: run yubiOS-enroll-sb post-install.",
+      "slug": "refs:U2F/HSM PIV (slot 9c, PKCS#11) signing: run yubiOS-enroll-sb post-install.",
       "p": [
         0.060037878147192365,
         0.158058776346478,
@@ -21633,7 +21633,7 @@
       "residual": 0.3944392850959098
     },
     {
-      "slug": "refs:Minimum real-hardware YubiKey validation scenarios",
+      "slug": "refs:Minimum real-hardware U2F/HSM validation scenarios",
       "p": [
         0.04171554602181697,
         -0.3702543259911399,

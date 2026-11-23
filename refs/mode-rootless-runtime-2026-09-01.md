@@ -45,7 +45,7 @@ wired into a workflow, and that the rc=77 SKIP contract be honoured in all three
 
 ## FIDO2 and isolation crossings
 
-Rootless enrolment of a YubiKey (`systemd-cryptenroll --fido2-device=auto`) is the one
+Rootless enrolment of a U2F/HSM (`systemd-cryptenroll --fido2-device=auto`) is the one
 step that needs root and a touch at the same time: interactive by necessity, so it is never
 run in batch or daemon mode; CI uses a software authenticator inside the `bcvk` VM instead.
 Containers built in batch mode inherit the runner's seccomp default profile; the Linux
@@ -55,6 +55,6 @@ differences visible.
 ## Placement
 
 Coverage: continuous attestation and measurement (the daemon column), rootless privilege
-and capabilities (focal), YubiKey FIDO2 boot (the interactive exception), container
+and capabilities (focal), U2F/HSM FIDO2 boot (the interactive exception), container
 isolation and seccomp (the constant). Omitted clusters omitted so the file lands in cell
 z1/phi2.

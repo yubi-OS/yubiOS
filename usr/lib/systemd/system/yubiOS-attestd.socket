@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+[Unit]
+Description=yubiOS Local & Mutual StrongBox Attestation IPC Socket
+Documentation=https://github.com/yubi-OS/yubiOS/blob/main/refs/yubios-mutual-attestation-2026-11-15.md
+ConditionSecurity=measured-os
+
+[Socket]
+ListenStream=/run/yubiOS-attest/attest.sock
+RuntimeDirectory=yubiOS-attest
+SocketUser=yubios-attest
+SocketGroup=yubios-attest
+SocketMode=0660
+PassCredentials=yes
+RemoveOnStop=yes
+
+[Install]
+WantedBy=sockets.target

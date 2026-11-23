@@ -56,7 +56,7 @@ PRIMITIVES = [
     ]),
     ("cryptographic_identity", [
         r"\bcryptographic\s+identity\b", r"\bidentity\s+(attestation|provider)\b",
-        r"\bCTAP2?\b", r"\bFIDO2?\b", r"\bYubiKey\b",
+        r"\bCTAP2?\b", r"\bFIDO2?\b", r"\bU2F\/HSM\b",
         r"softhsm", r"\bPKCS#?11\b", r"\bTPM\b", r"\bTPM2?\.0\b",
         r"\bHSM\b", r"key\s+identity", r"key\s+attestation",
         r"securezynq",
@@ -206,7 +206,7 @@ EDIT_TEMPLATES = {
     "continuous_adaptive": "\n\n## Continuous / adaptive coverage\n\nThis document supports the yubiOS continuous-monitoring layer \u2014 runtime detection (falco / tracee / tetragon / kubeArmor), adaptive policy, real-time monitoring. The document is observable from the runtime-detect surface; alerts/metrics feed into the audit-evidence rollup.\n",
     "immutability": "\n\n## Immutability coverage\n\nThis document upholds the yubiOS immutability layer \u2014 composefs repository, dm-verity root hash, ostree deployment, read-only / append-only semantics, sealed UKI / measured boot. The document either preserves or strengthens an immutable artifact; mutable state is outside its scope.\n",
     "audit_evidence": "\n\n## Audit / evidence coverage\n\nThis document contributes to the yubiOS audit-evidence rollup \u2014 SBOM, SLSA provenance, attestation, verification records, secure logging, TPM attestation, evidence-pack export. The document's content is auditable end-to-end (commit, run, artifact, policy).\n",
-    "cryptographic_identity": "\n\n## Cryptographic identity coverage\n\nThis document manages cryptographic identity \u2014 FIDO2/CTAP2 YubiKey, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.\n",
+    "cryptographic_identity": "\n\n## Cryptographic identity coverage\n\nThis document manages cryptographic identity \u2014 FIDO2/CTAP2 U2F/HSM, softhsm/PKCS#11/TPM, HSM-backed keys, key attestation. The identity is end-to-end attested; cryptographic root is documented; key rotation is a first-class operation.\n",
     "segmentation": "\n\n## Segmentation coverage\n\nThis document applies the yubiOS segmentation primitive \u2014 Linux namespaces, cgroups, sandbox, isolation boundary, trust boundary, jail idioms (nsjail, bwrap, firejail), landlock, seccomp. The boundary is named; the trust-domain transition is documented.\n",
 }
 

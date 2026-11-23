@@ -71,7 +71,7 @@ index 2e41ff5..3f200c7 100644
 +        }
      }
  
-     // YubiKey USB passthrough
+     // U2F/HSM USB passthrough
 @@ -1753,6 +1760,10 @@ StandardOutput=file:/dev/virtio-ports/executestatus
          kernel_cmdline.push("ignition.platform.id=qemu".to_string());
      }

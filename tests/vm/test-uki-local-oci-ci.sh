@@ -28,7 +28,7 @@ SSH_WAIT_SECS="${YUBIOS_SSH_WAIT_SECS:-300}"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/../.." && pwd)"
 
-# Optional opt-out for the real-YubiKey guard: --allow-real-u2f as first argv.
+# Optional opt-out for the real-U2F/HSM guard: --allow-real-u2f as first argv.
 # shellcheck disable=SC2034
 if [[ "${1:-}" == "--allow-real-u2f" ]]; then
   # shellcheck disable=SC2034

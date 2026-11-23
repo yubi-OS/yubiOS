@@ -205,6 +205,20 @@ EOF_BLS
       mount --bind /run/yubiOS/efi/EFI /boot/EFI
       mount --make-private /boot/EFI 2>/dev/null || true
     fi
+    if [ -d /usr/lib/yubiOS/secureboot ] && [ -f /usr/lib/yubiOS/secureboot/PK.auth ]; then
+      mkdir -p /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys 2>/dev/null || true
+      if [ ! -f /boot/EFI/yubiOS/secureboot/PK.auth ]; then
+        cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ 2>/dev/null || true
+      fi
+      if [ ! -f /boot/EFI/yubiOS/keys/PK.auth ]; then
+        cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ 2>/dev/null || true
+      fi
+    fi
+    for fw_f in u-boot-rockchip.bin u-boot-rockchip-spi.bin; do
+      if [ -f "/run/yubiOS/efi/${fw_f}" ] && [ ! -f "/boot/${fw_f}" ]; then
+        cp -f "/run/yubiOS/efi/${fw_f}" "/boot/${fw_f}" 2>/dev/null || true
+      fi
+    done
   fi
   systemctl reset-failed boot.automount boot.mount 2>/dev/null || true
 
