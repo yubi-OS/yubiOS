@@ -159,8 +159,8 @@ jobs:
               for old, new in replacements.items():
                   updated = updated.replace(old, new)
                   updated = updated.replace(old.removeprefix('sha256:'), new.removeprefix('sha256:'))
-              if path.name.startswith('Containerfile'):
-                  updated = legacy_ref.sub(r'quay.io/fedora/fedora-bootc@\1', updated)
+              if path.name.startswith('Containerfile') or ('.github' in path.parts and 'workflows' in path.parts and path.suffix == '.yml'):
+                  updated = re.sub(r'quay\.io/fedora/fedora-bootc(?::[0-9A-Za-z._-]+)?@sha256:[0-9a-f]{64}', f'quay.io/fedora/fedora-bootc@{new_index}', updated)
               if path == pinned and old_index != new_index:
                   updated = re.sub(r'Re-resolved \d{4}-\d{2}-\d{2}', f'Re-resolved {today}', updated)
               if updated != data:
