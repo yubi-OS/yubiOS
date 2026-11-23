@@ -225,6 +225,43 @@ RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/u
     printf '#include <time.h>\ntime_t time(time_t *t){time_t v=1767225600;if(t)*t=v;return v;}\n' > /tmp/faketime_sb.c && \
     gcc -shared -fPIC -O2 /tmp/faketime_sb.c -o /usr/lib/yubiOS/uki/libfaketime_sb.so && \
     rm -f /tmp/faketime_sb.c && \
+    printf '%s\n' \
+      '#define _GNU_SOURCE' \
+      '#include <dlfcn.h>' \
+      '#include <errno.h>' \
+      '#include <stdint.h>' \
+      '#include <stdarg.h>' \
+      '#include <sys/types.h>' \
+      '#include <linux/fs.h>' \
+      'int ioctl(int fd, unsigned long request, ...) {' \
+      '    static int (*real_ioctl)(int, unsigned long, void *) = NULL;' \
+      '    if (!real_ioctl) real_ioctl = dlsym(RTLD_NEXT, "ioctl");' \
+      '    va_list ap; va_start(ap, request); void *arg = va_arg(ap, void *); va_end(ap);' \
+      '    if (request == FITRIM) return 0;' \
+      '    return real_ioctl(fd, request, arg);' \
+      '}' \
+      'int fallocate(int fd, int mode, off_t offset, off_t len) {' \
+      '    static int (*real_fallocate)(int, int, off_t, off_t) = NULL;' \
+      '    if (!real_fallocate) real_fallocate = dlsym(RTLD_NEXT, "fallocate");' \
+      '    if (len > (off_t)(64ULL << 20)) { errno = EOPNOTSUPP; return -1; }' \
+      '    return real_fallocate(fd, mode, offset, len);' \
+      '}' \
+      'int fallocate64(int fd, int mode, off64_t offset, off64_t len) {' \
+      '    return fallocate(fd, mode, (off_t)offset, (off_t)len);' \
+      '}' \
+      'int sd_bus_call(void *bus, void *m, uint64_t usec, void *ret_error, void *reply) {' \
+      '    static int (*real_sd_bus_call)(void *, void *, uint64_t, void *, void *) = NULL;' \
+      '    if (!real_sd_bus_call) real_sd_bus_call = dlsym(RTLD_NEXT, "sd_bus_call");' \
+      '    if (usec > 0 && usec < 600000000ULL) usec = 600000000ULL;' \
+      '    return real_sd_bus_call(bus, m, usec, ret_error, reply);' \
+      '}' > /tmp/fast_homed.c && \
+    gcc -shared -fPIC -O2 /tmp/fast_homed.c -o /usr/lib/yubiOS/uki/libfast_homed.so -ldl && \
+    rm -f /tmp/fast_homed.c && \
+    install -d -m 0755 /usr/lib/systemd/system/systemd-homed.service.d /etc/systemd/system/systemd-homed.service.d && \
+    printf '[Service]\nEnvironment="SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1"\nEnvironment="SYSTEMD_BUS_TIMEOUT=600s"\nEnvironment="LD_PRELOAD=/usr/lib/yubiOS/uki/libfast_homed.so"\n' \
+      > /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
+    cp -f /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf \
+      /etc/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
     if [ ! -f /usr/lib/yubiOS/secureboot/PK.auth ]; then \
       LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
     fi && \

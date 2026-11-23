@@ -662,9 +662,27 @@ jobs:
           if [ "$OPTEE_FLAVOR" = "rk3588" ]; then
             optee_cfg_insecure=n
             optee_args+=(
+              CFG_DRAM_BASE=0x40000000
+              CFG_DRAM_SIZE=0xb0000000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x2fc000000
               CFG_ROCKCHIP_OTP=y
               CFG_RK_SECURE_BOOT=y
               CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
+            )
+          elif [ "$OPTEE_FLAVOR" = "rk3399" ]; then
+            optee_cfg_insecure=y
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xf7e00000
+            )
+          elif [ "$OPTEE_FLAVOR" = "rk3568" ]; then
+            optee_cfg_insecure=y
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xefe00000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x100000000
             )
           else
             optee_cfg_insecure=y
@@ -735,6 +753,18 @@ jobs:
               CFG_ROCKCHIP_OTP=y
               CFG_RK_SECURE_BOOT=y
               CFG_RK_SECURE_BOOT_SIMULATION="$OTP_FUSE_SIMULATION"
+            )
+          elif [ "$OPTEE_FLAVOR" = "rk3399" ]; then
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xf7e00000
+            )
+          elif [ "$OPTEE_FLAVOR" = "rk3568" ]; then
+            optee_args+=(
+              CFG_DRAM_BASE=0x00200000
+              CFG_DRAM_SIZE=0xefe00000
+              CFG_NSEC_DDR_1_BASE=0x100000000
+              CFG_NSEC_DDR_1_SIZE=0x100000000
             )
           fi
           make -C optee_os -j"$(nproc)" \
@@ -896,6 +926,26 @@ jobs:
           test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
           echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
 
+      - name: Apply pinned rockpro64/pinetab2 OP-TEE patch to U-Boot as a commit (fail closed, clean tree)
+        if: matrix.build_kind == 'rockchip' && (matrix.board == 'rockpro64-rk3399' || matrix.board == 'pinetab2-rk3566')
+        env:
+          RK_OPTEE_PATCH_SRC: firmware/u-boot/0002-rockpro64-pinetab2-add-optee-firmware-node.patch
+          RK_OPTEE_PATCH_SHA256: 85084a348cff9665f6922eccf745f21f426f42c30236b31ed7f5cae6bdd5c709
+          GIT_COMMITTER_NAME: yubiOS CI
+          GIT_COMMITTER_EMAIL: ci@yubi-os.invalid
+          GIT_COMMITTER_DATE: 2026-10-10T00:00:00Z
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' "$RK_OPTEE_PATCH_SHA256" "$RK_OPTEE_PATCH_SRC" | sha256sum --check --strict
+          test "$(git -C u-boot rev-parse HEAD)" = "$UBOOT_REF"
+          if grep -q 'linaro,optee-tz' u-boot/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi u-boot/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi; then
+            echo "::error::rockpro64/pinetab2 U-Boot dtsi already has an OP-TEE node; refusing to apply twice"
+            exit 1
+          fi
+          git -C u-boot am --quiet "$GITHUB_WORKSPACE/$RK_OPTEE_PATCH_SRC"
+          test -z "$(git -C u-boot status --porcelain --untracked-files=no)"
+          echo "U-Boot HEAD is now $(git -C u-boot rev-parse --short HEAD) with a clean tracked tree"
+
       - name: Build Rockchip U-Boot board image
         if: matrix.build_kind == 'rockchip'
         env:
@@ -911,6 +961,8 @@ jobs:
             u-boot/.config | tee u-boot-config-summary.txt
           make -C u-boot -j"$(nproc)" CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm u-boot.bin
           test -s u-boot/u-boot.bin
+          fdtget u-boot/u-boot.dtb /firmware/optee compatible | grep -qx 'linaro,optee-tz'
+          fdtget -l u-boot/u-boot.dtb /reserved-memory | grep -qx 'optee@30000000'
           build_args=(BL31="$BL31_BIN" TEE="$TEE_BIN")
           if [ "$REQUIRES_ROCKCHIP_TPL" = "true" ]; then
             if [ -z "${ROCKCHIP_TPL:-}" ]; then
