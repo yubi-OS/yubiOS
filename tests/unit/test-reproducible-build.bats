@@ -678,3 +678,116 @@ PY
 
     [ "$status" -eq 0 ]
 }
+
+@test "OCI diagnostics dissect differing PE sections and embedded initrd cpio members" {
+    run python3 - "$REPO_ROOT" "$BATS_TEST_TMPDIR" <<'PY'
+import io
+import pathlib
+import runpy
+import struct
+import sys
+
+root = pathlib.Path(sys.argv[1])
+mod = runpy.run_path(str(root / "scripts/lib/diagnose-oci-layout.py"))
+
+def make_newc_cpio(entries: list[tuple[str, bytes]]) -> bytes:
+    out = bytearray()
+    for ino, (name, payload) in enumerate(entries, 1):
+        name_b = name.encode("utf-8") + b"\x00"
+        hdr = (
+            f"070701{ino:08x}{0o100644:08x}{0:08x}{0:08x}{1:08x}{1700000000:08x}"
+            f"{len(payload):08x}{0:08x}{0:08x}{0:08x}{0:08x}{len(name_b):08x}{0:08x}"
+        ).encode("ascii")
+        out.extend(hdr)
+        out.extend(name_b)
+        while len(out) % 4:
+            out.append(0)
+        out.extend(payload)
+        while len(out) % 4:
+            out.append(0)
+    trailer = b"TRAILER!!!\x00"
+    hdr = (
+        f"070701{0:08x}{0:08x}{0:08x}{0:08x}{1:08x}{0:08x}"
+        f"{0:08x}{0:08x}{0:08x}{0:08x}{0:08x}{len(trailer):08x}{0:08x}"
+    ).encode("ascii")
+    out.extend(hdr)
+    out.extend(trailer)
+    while len(out) % 4:
+        out.append(0)
+    return bytes(out)
+
+def make_pe(cmdline: bytes, initrd: bytes) -> bytes:
+    dos = bytearray(0x40)
+    dos[:2] = b"MZ"
+    struct.pack_into("<I", dos, 0x3C, 0x40)
+    coff = struct.pack("<4sHHIIIHH", b"PE\x00\x00", 0xAA64, 2, 0, 0, 0, 0, 0x0002)
+    base_off = 0x40 + len(coff) + 2 * 40
+    cmd_off = (base_off + 15) & ~15
+    init_off = (cmd_off + len(cmdline) + 15) & ~15
+    sec1 = struct.pack("<8sIIIIIIHHI", b".cmdline", len(cmdline), 0x1000, len(cmdline), cmd_off, 0, 0, 0, 0, 0)
+    sec2 = struct.pack("<8sIIIIIIHHI", b".initrd\x00", len(initrd), 0x2000, len(initrd), init_off, 0, 0, 0, 0, 0)
+    buf = bytearray(init_off + len(initrd))
+    buf[:0x40] = dos
+    buf[0x40:0x40+len(coff)] = coff
+    buf[0x40+len(coff):0x40+len(coff)+40] = sec1
+    buf[0x40+len(coff)+40:0x40+len(coff)+80] = sec2
+    buf[cmd_off:cmd_off+len(cmdline)] = cmdline
+    buf[init_off:init_off+len(initrd)] = initrd
+    return bytes(buf)
+
+cpio_a = make_newc_cpio([("etc/os-release", b"ID=yubios\n"), ("usr/bin/hello", b"v1")])
+cpio_b = make_newc_cpio([("etc/os-release", b"ID=yubios\n"), ("usr/bin/hello", b"v2")])
+pe_a = make_pe(b"root=dissect quiet", cpio_a)
+pe_b = make_pe(b"root=dissect debug", cpio_b)
+
+sec_a = mod["dissect_pe_sections"](pe_a)
+sec_b = mod["dissect_pe_sections"](pe_b)
+assert sec_a[".cmdline"]["text"] == "root=dissect quiet"
+assert sec_b[".cmdline"]["text"] == "root=dissect debug"
+assert sec_a[".initrd"]["sha256"] != sec_b[".initrd"]["sha256"]
+
+recs_a = mod["dissect_cpio_segments"](mod["extract_pe_section_bytes"](pe_a, ".initrd"))
+recs_b = mod["dissect_cpio_segments"](mod["extract_pe_section_bytes"](pe_b, ".initrd"))
+assert len(recs_a) == 2 and len(recs_b) == 2
+assert recs_a[0]["sha256"] == recs_b[0]["sha256"]
+assert recs_a[1]["name"] == "usr/bin/hello" and recs_a[1]["sha256"] != recs_b[1]["sha256"]
+PY
+    [ "$status" -eq 0 ]
+}
+
+@test "manifest-filesystem.py --format uapi16 emits RFC 7464 JSON-SEQ with inodeToken hardlinks" {
+    run python3 - "$REPO_ROOT" "$BATS_TEST_TMPDIR" <<'PY'
+import json
+import os
+import pathlib
+import subprocess
+import sys
+
+root = pathlib.Path(sys.argv[1])
+tree = pathlib.Path(sys.argv[2]) / "uapi16-root"
+(tree / "usr/bin").mkdir(parents=True)
+f1 = tree / "usr/bin/tool-a"
+f2 = tree / "usr/bin/tool-b"
+f1.write_bytes(b"deterministic-binary")
+os.link(f1, f2)
+(tree / "usr/bin/link-c").symlink_to("tool-a")
+
+out = subprocess.run(
+    [sys.executable, str(root / "scripts/lib/manifest-filesystem.py"), "--format", "uapi16", str(tree)],
+    check=True,
+    stdout=subprocess.PIPE,
+    text=True,
+).stdout
+
+lines = [ln for ln in out.splitlines() if ln]
+assert all(ln.startswith("\x1e") for ln in lines), "Every UAPI.16 record must start with RFC 7464 0x1E"
+records = [json.loads(ln[1:]) for ln in lines]
+assert records[0]["mediaType"] == "application/vnd.uapi.16.manifest"
+assert records[0]["type"] == "dir"
+by_name = {r.get("name"): r for r in records[1:]}
+assert by_name["usr/bin/tool-a"]["inodeToken"] == by_name["usr/bin/tool-b"]["inodeToken"] == 1
+assert by_name["usr/bin/tool-a"]["sha256"] == by_name["usr/bin/tool-b"]["sha256"]
+assert by_name["usr/bin/link-c"]["type"] == "lnk"
+PY
+    [ "$status" -eq 0 ]
+}

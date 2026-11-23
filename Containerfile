@@ -449,10 +449,12 @@ RUN case "$(uname -m)" in \
     ! test -e /etc/machine-id && \
     ! test -e /var/lib/systemd/random-seed
 
-# Reproducibility: bootc embeds the composefs digest of this rootfs in the UKI cmdline, and that
-# digest covers file mtimes. Normalise mtimes to SOURCE_DATE_EPOCH (pseudo-filesystems excluded)
-# so two clean builds of the same sources embed the same digest.
-RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
+# Reproducibility: run Fedora add-determinism (add-det, keszybz/add-determinism) if present to
+# clamp residual .pyc/.gz/.zip/.ar metadata before normalizing all file mtimes to SOURCE_DATE_EPOCH.
+RUN if command -v add-det >/dev/null 2>&1; then \
+      SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" add-det /usr/lib /usr/share || true; \
+    fi && \
+    find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /
 
 # Flatten fedora-bootc's 65 rpm-ostree splitstream layers into a canonical base
