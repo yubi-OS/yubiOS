@@ -985,7 +985,7 @@ jobs:
             ./u-boot/scripts/config --file u-boot/.config \
               -d VIDEO -d DISPLAY -d VIDEO_ROCKCHIP \
               -d DISPLAY_ROCKCHIP_HDMI -d DISPLAY_ROCKCHIP_EDP \
-              -d USB_KEYBOARD
+              -d USB_KEYBOARD -d CONSOLE_MUX
           fi
           make -C u-boot CROSS_COMPILE="${AARCH64_PREFIX}" ARCH=arm olddefconfig
           if [ "$BOARD" = "rockpro64-rk3399" ]; then
