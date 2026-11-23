@@ -71,7 +71,7 @@ RUN ln -sf multi-user.target /usr/lib/systemd/system/default.target &&     ln -s
 # Clean build leftovers & rebuild UKI with cloud vTPM + composefs kargs at SOURCE_DATE_EPOCH
 RUN rm -rf /sysroot/ostree && mkdir -p /sysroot/ostree && ln -sfn sysroot/ostree /ostree &&     rm -f /var/lib/systemd/catalog/database           /usr/share/rpm/rpmdb.sqlite-shm /usr/share/rpm/rpmdb.sqlite-wal           /var/lib/rpm/rpmdb.sqlite-shm /var/lib/rpm/rpmdb.sqlite-wal &&     find /tmp -mindepth 1 -delete &&     find /run -mindepth 1 -maxdepth 1 ! -name systemd -exec rm -rf {} + &&     find /run/systemd -mindepth 1 -maxdepth 1 ! -name resolve -exec rm -rf {} + &&     rm -f /etc/machine-id /var/lib/systemd/random-seed &&     ! test -e /etc/machine-id &&     ! test -e /var/lib/systemd/random-seed
 
-RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump &&     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys &&     if [ -d /usr/lib/yubiOS/secureboot ]; then       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ 2>/dev/null || true;       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ 2>/dev/null || true;     fi
+RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump &&     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys &&     if [ -d /usr/lib/yubiOS/secureboot ]; then       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ &&       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ &&       rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key &&       test -s /boot/EFI/yubiOS/secureboot/PK.auth &&       test -s /boot/EFI/yubiOS/secureboot/PK_null.auth &&       test -s /boot/EFI/yubiOS/keys/PK.auth &&       test -s /boot/EFI/yubiOS/keys/PK_null.auth;     fi
 
 RUN find / -xdev -mindepth 1 \( -path /proc -o -path /sys -o -path /dev -o -path /etc/hosts -o -path /etc/resolv.conf -o -path /etc/hostname -o -path /run/systemd/resolve \) -prune -o -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + &&     touch -h -d "@${SOURCE_DATE_EPOCH}" /
 
@@ -85,7 +85,7 @@ CMD ["/sbin/init"]
 
 FROM rootfs AS uki
 ARG SOURCE_DATE_EPOCH
-RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ &&     kver="$(basename "$1")" &&     mkdir -p /out &&     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" &&     touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
+RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/*/ &&     kver="$(basename "$1")" &&     mkdir -p /out &&     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" &&     if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then       LD_PRELOAD=/target/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign         --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key         --cert /target/usr/lib/yubiOS/secureboot/db.crt         --output "/out/${kver}.efi.signed" "/out/${kver}.efi" &&       mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" &&       sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi";     fi &&     touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
 
 FROM rootfs
 COPY --from=uki /out/ /boot/EFI/Linux/

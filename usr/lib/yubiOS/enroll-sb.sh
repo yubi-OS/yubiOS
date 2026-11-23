@@ -45,7 +45,7 @@ EFIVARS="${YUBIOS_EFIVARS:-/sys/firmware/efi/efivars}"
 GUID_GLOBAL=8be4df61-93ca-11d2-aa0d-00e098032b8c
 PKCS11_LIB="${YUBIOS_PKCS11_LIB:-}"
 if [ -z "$PKCS11_LIB" ] || [ ! -e "$PKCS11_LIB" ]; then
-  for c in /usr/lib64/libykcs11.so /usr/lib64/libykcs11.so.2 /usr/lib/libykcs11.so /usr/lib/aarch64-linux-gnu/libykcs11.so; do
+  for c in /usr/lib64/libykcs11.so /usr/lib64/libykcs11.so.2 /usr/lib/libykcs11.so /usr/lib/aarch64-linux-gnu/libykcs11.so /usr/lib/x86_64-linux-gnu/libykcs11.so; do
     if [ -e "$c" ]; then PKCS11_LIB="$c"; break; fi
   done
 fi

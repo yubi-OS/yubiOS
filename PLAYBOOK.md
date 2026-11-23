@@ -4,12 +4,13 @@
 
 # yubiOS Operational Playbook: Fork, Flash, Enroll, Desktop & Upgrade Lifecycle
 
-**Last updated:** 2026-11-19 · [**Technical Preview Quick Start (`TECHNICAL_PREVIEW.md`)**](TECHNICAL_PREVIEW.md) · [**Live Hardware Asciicast Demo**](https://asciinema.org/a/y9sHQPQTIbTWNIyr)
+**Last updated:** 2026-11-22 · [**Technical Preview Quick Start (`TECHNICAL_PREVIEW.md`)**](TECHNICAL_PREVIEW.md) · [**Live Hardware Asciicast Demo**](https://asciinema.org/a/aOcdiuog37NJ9vyv)
 
 </div>
 
 **Retained hardware logs:**
-- [`refs/logs/fvf13-224bf224.new`](refs/logs/fvf13-224bf224.new) — 5-step U2F/HSM enrollment, local composefs OCI commit, and enforcing UEFI Secure Boot on Radxa ROCK 5B (`rk3588`, 16 GB RAM, 119.1 GB microSD)
+- [`refs/logs/fvf23_yubiOS_enroll_rk3588.new`](refs/logs/fvf23_yubiOS_enroll_rk3588.new) — Enforced first-boot (`SetupMode=0`), `PK_null.auth` blank ESL auto-unlock (`SetupMode=0 -> 1`), owner PIV slot `9a` `db -> KEK -> PK` re-enrollment (`SetupMode=1 -> 0`), local composefs OCI commit, LUKS2 + LVM + 3-way `/usr` OverlayFS, `systemd-homed` ext4 activation, and two enforcing UEFI Secure Boot reboots on Radxa ROCK 5B (`rk3588`, 16 GB RAM, asciicast: [https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv))
+- [`refs/logs/fvf13-224bf224.new`](refs/logs/fvf13-224bf224.new) — 5-step U2F/HSM enrollment, local composefs OCI commit, and enforcing UEFI Secure Boot on Radxa ROCK 5B (`rk3588`, 16 GB RAM, 119.1 GB microSD, asciicast: [https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr))
 - [`refs/logs/fvf14-a76322cd.new`](refs/logs/fvf14-a76322cd.new) — Full 3-boot ROCK 5B capture including GNOME Wayland desktop session (`gdm-wayland-session`, `gnome-shell`), Antimony Browser `v156.0.8078.47-1`, and `systemd-homed` login
 
 **Related ADRs:** [ADR-002](docs/ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw), [ADR-003](docs/ADR.md#adr-003-luks2--fido2-via-systemd-cryptenroll-no-tpm), [ADR-009](docs/ADR.md#adr-009-systemd-homed-for-per-user-luks2fido2-home-directories), [ADR-014](docs/ADR.md#adr-014-rootless-docker-in-docker-on-hardened-dhi-base), [ADR-018](docs/ADR.md#adr-018-yubios-owned-arm64-secure-world-stack-tf-a--op-tee--ftpm), [ADR-019](docs/ADR.md#adr-019-dual-root-of-trust-provisioning-paths-fuse-enforcing-vs-measuredattested), [ADR-020](docs/ADR.md#adr-020-u-boot-as-the-arm64-uefi-firmware--authenticated-variable-store-op-tee-standalonemm), [ADR-032](docs/ADR.md#adr-032-kernelrootfs-split-as-a-first-class-yubios-principle), [ADR-034](docs/ADR.md#adr-034-local-composefs-oci-image-repository-and-automatic-u2fhsm-uki-re-signing-on-kernel-and-os-updates)
@@ -63,8 +64,8 @@
 
 The end-to-end hardware bring-up, 5-step physical U2F/HSM enrollment, local composefs OCI repository commit (`oci:/var/lib/yubiOS/oci:yubios-local:latest`), enforcing UEFI Secure Boot reboot, and GNOME Wayland desktop login on the **Radxa ROCK 5B (`rk3588`, 16 GB RAM)** are captured in full in:
 
-- **Asciicast recording:** **[https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr)**
-- **Raw UART captures in-repo:** [`refs/logs/fvf13-224bf224.new`](refs/logs/fvf13-224bf224.new) (`5,622` lines) and [`refs/logs/fvf14-a76322cd.new`](refs/logs/fvf14-a76322cd.new) (`23,167` lines)
+- **Asciicast recordings:** **[https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv)** (Path 1 `PK_null.auth` enforced-boot auto-unlock + owner re-enrollment) and **[https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr)**
+- **Raw UART captures in-repo:** [`refs/logs/fvf23_yubiOS_enroll_rk3588.new`](refs/logs/fvf23_yubiOS_enroll_rk3588.new) (`2,286` lines), [`refs/logs/fvf13-224bf224.new`](refs/logs/fvf13-224bf224.new) (`5,622` lines), and [`refs/logs/fvf14-a76322cd.new`](refs/logs/fvf14-a76322cd.new) (`23,167` lines)
 
 ### Key Timeline Across `fvf13-224bf224.new` & `fvf14-a76322cd.new`
 

@@ -9,7 +9,7 @@
 [![License: LGPL-2.1](https://img.shields.io/badge/license-LGPL--2.1-magenta?style=flat-square)](../LICENSE)
 [![Release: v0.8.94](https://img.shields.io/badge/release-v0.8.94-blueviolet?style=flat-square)](https://github.com/yubi-OS/yubiOS/releases)
 [![U2F/HSM 5](https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square)](https://www.yubico.com)
-[![Hardware Demo](https://img.shields.io/badge/asciinema-Hardware%20Demo-00d787?style=flat-square)](https://asciinema.org/a/y9sHQPQTIbTWNIyr)
+[![Hardware Demo](https://img.shields.io/badge/asciinema-Hardware%20Demo-00d787?style=flat-square)](https://asciinema.org/a/aOcdiuog37NJ9vyv)
 
 [**Quick Start (Fork -> Deploy -> Flash)**](#quick-start-fork--builddeploy--flash--enroll) · [**Step 1: Fork**](#step-1-fork--configure-the-repository) · [**Step 2: Build or Pull**](#step-2-build-or-pull-the-yubios-image) · [**Step 3: Flash SD / Disk**](#step-3-flash-to-sd-card-or-disk) · [**Step 4: Enroll U2F/HSM**](#step-4-first-boot--5-step-u2fhsm-enrollment) · [**Step 5: Day-2 Upgrades**](#step-5-boot-desktop--day-2-upgrades) · [**Operational Playbook**](PLAYBOOK.md)
 
@@ -205,7 +205,7 @@ Sector 32768+  : GPT Partition Table
 
 ## Step 4: First Boot & 5-Step U2F/HSM Enrollment
 
-1. Move the flashed microSD card and your **U2F/HSM 5** to the target board (e.g. Radxa ROCK 5B), connect **HDMI** (and/or UART serial at `1500000 8N1`), and power on.
+1. Move the flashed microSD card and your **U2F/HSM 5** to the target board (e.g. Radxa ROCK 5B), connect **HDMI** (and/or UART serial at `115200 8N1`), and power on.
 2. **Dual-Console Enrollment Wizard (`yubiOS-enroll.service`):**
    - On first boot, `yubiOS-enroll` automatically launches **before** `gdm.service` and mirrors all output and PIN prompts across **both the HDMI monitor (`/dev/tty1`) and the serial console (`/dev/ttyS2`)** via its built-in PTY multiplexer (`YUBIOS_DUAL_CONSOLE_MUX`). You can type on either a USB keyboard or serial UART.
 3. **Complete the 5 Hardware Ceremonies:**
@@ -256,6 +256,6 @@ On the second (and every subsequent) boot:
 
 ## Deeper Documentation
 
-- [**Operational Playbook (`PLAYBOOK.md`)**](PLAYBOOK.md) — Full stage-by-stage architecture, UART log breakdown (`fvf13` & `fvf14`), and [live asciinema hardware demo](https://asciinema.org/a/y9sHQPQTIbTWNIyr).
+- [**Operational Playbook (`PLAYBOOK.md`)**](PLAYBOOK.md) — Full stage-by-stage architecture, UART log breakdown (`fvf23`, `fvf13`, & `fvf14`), and [live asciinema hardware demo](https://asciinema.org/a/aOcdiuog37NJ9vyv).
 - [**Architecture Decision Records (`docs/ADR.md`)**](ADR.md) — ADR-001 through ADR-034.
 - [**Pinned Supply-Chain Digests (`PINNED.md`)**](../PINNED.md) — Every pinned base image, fork commit, action SHA, and release binary hash.

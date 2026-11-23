@@ -1,4 +1,4 @@
-name: yubiOS Device Flasher & Signed UKI E2E (SD + U2F/HSM 9a + VM Verify)
+name: yubiOS Direct-to-SD Flash & Boot Verification (rock1 / x86_64-uefi)
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ on:
           - test
           - production
       board:
-        description: 'Target board firmware to write at sector 64 of the SD card'
+        description: 'Target board / platform to provision (Rockchip ARM64 writes U-Boot at sector 64; x86_64-uefi provisions standard UEFI GPT + BOOTX64.EFI)'
         required: true
         default: 'rock5b-rk3588'
         type: choice
@@ -20,8 +20,9 @@ on:
           - rock5b-rk3588
           - pinetab2-rk3566
           - rockpro64-rk3399
+          - x86_64-uefi
       sd_device:
-        description: 'Removable SD card block device on rock1 host (default /dev/mmcblk1; guarded against /, /boot, /mnt/extended, mmcblk0, sda)'
+        description: 'Removable target block device on runner host (default /dev/mmcblk1; guarded against /, /boot, /mnt/extended, mmcblk0, nvme0n1)'
         required: true
         default: '/dev/mmcblk1'
         type: string
@@ -31,9 +32,9 @@ on:
         default: 'docker.io/0mniteck/yubios:dev'
         type: string
       sign_with_u2f_hsm:
-        description: 'Mint/use PIV slot 9a key on attached U2F/HSM (1050:0407) or test fallback to sign PK/KEK/db.auth, systemd-boot, and UKI'
+        description: 'Optional flash-time re-signing with attached U2F/HSM (default false: uses CI-signed PK/PK_null/KEK/db.auth, systemd-boot, and UKI from image)'
         required: false
-        default: true
+        default: false
         type: boolean
       piv_touch_policy:
         description: 'Optional override for U2F/HSM PIV slot 9a touch policy (auto uses SIGNKEY: test->never, production->cached)'
@@ -46,7 +47,7 @@ on:
           - never
           - always
       run_post_install_vm_boot:
-        description: 'Optional VM boot check (default false; first-boot Secure Boot enrollment requires board StMM/OP-TEE)'
+        description: 'Optional VM boot check (default false; first-boot Secure Boot enrollment requires board StMM/OP-TEE or UEFI SetupMode=1)'
         required: false
         default: false
         type: boolean
@@ -57,8 +58,8 @@ permissions:
 
 jobs:
   flash-device-e2e:
-    name: Flash SD & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }}) on rock1
-    runs-on: [self-hosted, Linux, ARM64, KVM]
+    name: Flash Media & Verify (${{ inputs.board }} / SIGNKEY=${{ inputs.SIGNKEY }})
+    runs-on: ${{ (inputs.board == 'x86_64-uefi' || inputs.board == 'amd64-uefi') && fromJSON('["self-hosted", "Linux", "X64", "KVM"]') || fromJSON('["self-hosted", "Linux", "ARM64", "KVM"]') }}
     timeout-minutes: 180
     steps:
       - name: Reclaim workspace before checkout (self-hosted runner can accumulate root-owned files)
@@ -67,7 +68,7 @@ jobs:
       - name: Checkout yubiOS
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
 
-      - name: Run signed UKI + bootc SD flash + post-install VM boot
+      - name: Run signed UKI + bootc SD/USB flash + ESP loader architecture verification
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER }}
           FLASH_SIGNKEY: ${{ inputs.SIGNKEY }}

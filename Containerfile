@@ -9,7 +9,7 @@
 # PINNED.md; the FROM carries only the immutable OCI index digest so there is a
 # single source of identity (no tag+digest ambiguity for Build Policy/tooling).
 # quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261114.0)
-FROM quay.io/fedora/fedora-bootc@sha256:881c4dd0acb6cc416d5fd484582b79b110eed31e4c971b1fc7d2990be2b18970 AS rootfs_prep
+FROM quay.io/fedora/fedora-bootc@sha256:f387c5f622d2f095e23b1587c97a4d4659231df6c8a649329839a9336a99c5e4 AS rootfs_prep
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -222,14 +222,59 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
 # ── Permissions for enrollment and first-boot scripts + staged Secure Boot keys ──
 RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
     mkdir -p /etc/kernel/install.d /etc/ostree /usr/lib/yubiOS/secureboot /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
+    printf '#include <time.h>\ntime_t time(time_t *t){time_t v=1767225600;if(t)*t=v;return v;}\n' > /tmp/faketime_sb.c && \
+    gcc -shared -fPIC -O2 /tmp/faketime_sb.c -o /usr/lib/yubiOS/uki/libfaketime_sb.so && \
+    rm -f /tmp/faketime_sb.c && \
+    printf '%s\n' \
+      '#define _GNU_SOURCE' \
+      '#include <dlfcn.h>' \
+      '#include <errno.h>' \
+      '#include <stddef.h>' \
+      '#include <stdint.h>' \
+      '#include <stdarg.h>' \
+      '#include <sys/types.h>' \
+      '#include <linux/fs.h>' \
+      'int ioctl(int fd, unsigned long request, ...) {' \
+      '    static int (*real_ioctl)(int, unsigned long, void *) = NULL;' \
+      '    if (!real_ioctl) real_ioctl = dlsym(RTLD_NEXT, "ioctl");' \
+      '    va_list ap; va_start(ap, request); void *arg = va_arg(ap, void *); va_end(ap);' \
+      '    if (request == FITRIM) return 0;' \
+      '    return real_ioctl(fd, request, arg);' \
+      '}' \
+      'int fallocate(int fd, int mode, off_t offset, off_t len) {' \
+      '    static int (*real_fallocate)(int, int, off_t, off_t) = NULL;' \
+      '    if (!real_fallocate) real_fallocate = dlsym(RTLD_NEXT, "fallocate");' \
+      '    if (len > (off_t)(64ULL << 20)) { errno = EOPNOTSUPP; return -1; }' \
+      '    return real_fallocate(fd, mode, offset, len);' \
+      '}' \
+      'int fallocate64(int fd, int mode, off64_t offset, off64_t len) {' \
+      '    return fallocate(fd, mode, (off_t)offset, (off_t)len);' \
+      '}' \
+      'int sd_bus_call(void *bus, void *m, uint64_t usec, void *ret_error, void *reply) {' \
+      '    static int (*real_sd_bus_call)(void *, void *, uint64_t, void *, void *) = NULL;' \
+      '    if (!real_sd_bus_call) real_sd_bus_call = dlsym(RTLD_NEXT, "sd_bus_call");' \
+      '    if (usec > 0 && usec < 600000000ULL) usec = 600000000ULL;' \
+      '    return real_sd_bus_call(bus, m, usec, ret_error, reply);' \
+      '}' > /tmp/fast_homed.c && \
+    gcc -shared -fPIC -O2 /tmp/fast_homed.c -o /usr/lib/yubiOS/uki/libfast_homed.so -ldl && \
+    rm -f /tmp/fast_homed.c && \
+    install -d -m 0755 /usr/lib/systemd/system/systemd-homed.service.d /etc/systemd/system/systemd-homed.service.d && \
+    printf '[Service]\nEnvironment="SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1"\nEnvironment="SYSTEMD_BUS_TIMEOUT=600s"\nEnvironment="LD_PRELOAD=/usr/lib/yubiOS/uki/libfast_homed.so"\n' \
+      > /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
+    cp -f /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf \
+      /etc/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
     if [ ! -f /usr/lib/yubiOS/secureboot/PK.auth ]; then \
-      SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
+      LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
     fi && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ && \
+    rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key && \
     test -s /usr/lib/yubiOS/secureboot/PK.auth && \
+    test -s /usr/lib/yubiOS/secureboot/PK_null.auth && \
     test -s /boot/EFI/yubiOS/secureboot/PK.auth && \
+    test -s /boot/EFI/yubiOS/secureboot/PK_null.auth && \
     test -s /boot/EFI/yubiOS/keys/PK.auth && \
+    test -s /boot/EFI/yubiOS/keys/PK_null.auth && \
     cp -f /usr/lib/ostree/prepare-root.conf /etc/ostree/prepare-root.conf && \
     cp -f /usr/lib/kernel/install.d/05-rpmostree.install /etc/kernel/install.d/05-rpmostree.install && \
     cp -f /usr/lib/kernel/install.d/95-yubios-uki-resign.install /etc/kernel/install.d/95-yubios-uki-resign.install
@@ -245,6 +290,7 @@ RUN ln -sf /usr/lib/yubiOS/enroll.sh              /usr/bin/yubiOS-enroll       &
     ln -sf /usr/lib/yubiOS/enroll-ssh-wrapper.sh  /usr/bin/yubiOS-enroll-ssh  && \
     ln -sf /usr/lib/yubiOS/enroll-homed-wrapper.sh /usr/bin/yubiOS-enroll-homed && \
     ln -sf /usr/lib/yubiOS/uki/uki-sync-and-sign.sh /usr/bin/yubiOS-uki-sync && \
+    ln -sf /usr/lib/yubiOS/system-trust-status.sh   /usr/bin/yubiOS-trust-status && \
     if [ ! -e /usr/lib64/libykcs11.so ] && [ -e /usr/lib64/libykcs11.so.2 ]; then \
       ln -sf libykcs11.so.2 /usr/lib64/libykcs11.so; \
     fi
@@ -316,6 +362,13 @@ RUN systemctl preset-all && \
 # ── PAM: initialise u2f_keys file (populated by yubiOS-enroll-pam) ───────
 RUN mkdir -p /etc/yubico && touch /etc/yubico/u2f_keys && chmod 600 /etc/yubico/u2f_keys
 
+# ── Serial Console: default to 115200 baud across all boards & DTBs ──────
+# hadolint ignore=SC2016
+RUN install -d -m 0755 /usr/lib/systemd/system/serial-getty@.service.d && \
+    printf "[Service]\nExecStart=\nExecStart=-/sbin/agetty -o '-p -- \\\\\\\\u' --keep-baud 115200,57600,38400,9600 - \$TERM\n" \
+      > /usr/lib/systemd/system/serial-getty@.service.d/05-yubiOS-baud.conf && \
+    python3 -c 'import glob; [open(p, "wb").write(d.replace(b"serial2:1500000n8\x00", b"serial2:115200n8\x00\x00")) for p in glob.glob("/usr/lib/modules/*/dtb/rockchip/*.dtb") for d in [open(p, "rb").read()] if b"serial2:1500000n8\x00" in d]'
+
 # ── Regenerate the shipped initramfs so usr/lib/dracut.conf.d/* actually applies ──
 # COPY usr/ above lands dracut.conf.d fragments (fido2, composefs, and the
 # ADR-031 VFIO omission in 52-yubiOS-no-vfio.conf) AFTER the base image's own
@@ -381,6 +434,16 @@ RUN case "$(uname -m)" in \
       *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
     esac && \
     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd && \
+    if [ -f /usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /usr/lib/yubiOS/secureboot/db.crt ]; then \
+      LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign \
+        --key /usr/lib/yubiOS/secureboot/ci-sb-db.key \
+        --cert /usr/lib/yubiOS/secureboot/db.crt \
+        --output "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
+        "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
+      mv -f "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
+        "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
+      sbverify --cert /usr/lib/yubiOS/secureboot/db.crt "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi"; \
+    fi && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI" && \
     ! test -e /etc/machine-id && \
@@ -419,6 +482,14 @@ RUN --mount=type=bind,from=rootfs,target=/target set -- /target/usr/lib/modules/
     kver="$(basename "$1")" && \
     mkdir -p /out && \
     bootc container ukify --rootfs /target -- --splash /target/usr/share/yubiOS/splash/yubios-owner-orbit.bmp --output "/out/${kver}.efi" && \
+    if [ -f /target/usr/lib/yubiOS/secureboot/ci-sb-db.key ] && [ -f /target/usr/lib/yubiOS/secureboot/db.crt ]; then \
+      LD_PRELOAD=/target/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign \
+        --key /target/usr/lib/yubiOS/secureboot/ci-sb-db.key \
+        --cert /target/usr/lib/yubiOS/secureboot/db.crt \
+        --output "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      mv -f "/out/${kver}.efi.signed" "/out/${kver}.efi" && \
+      sbverify --cert /target/usr/lib/yubiOS/secureboot/db.crt "/out/${kver}.efi"; \
+    fi && \
     touch -h -d "@${SOURCE_DATE_EPOCH}" /out "/out/${kver}.efi"
 
 # Reproducibility diagnostic: print the composefs digest bootc embeds in the UKI and the UKI's sha256.

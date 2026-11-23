@@ -88,6 +88,9 @@ for dev in candidate_ttys:
             raw[2] &= ~(termios.CSIZE | termios.PARENB)
             raw[2] |= termios.CS8
             raw[3] &= ~(termios.ECHO | termios.ECHONL | termios.ICANON | termios.ISIG | termios.IEXTEN)
+            if dev.startswith(("/dev/ttyS", "/dev/ttyAMA")):
+                raw[4] = termios.B115200
+                raw[5] = termios.B115200
             termios.tcsetattr(fd, termios.TCSADRAIN, raw)
         except Exception:
             pass

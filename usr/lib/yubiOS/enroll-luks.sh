@@ -8,7 +8,7 @@
 #   - LVM2 Volume Group 'lvm' inside /dev/mapper/crypt:
 #       * usr_a       : 1%VG  (/dev/lvm/usr_a, ext4 + fs-verity, /usr slot A 3-way overlay)
 #       * usr_b       : 1%VG  (/dev/lvm/usr_b, ext4 + fs-verity, /usr slot B 3-way overlay)
-#       * yubios-root : 96%VG (/dev/lvm/yubios-root, btrfs, mounted at /var/home for systemd-homed)
+#       * yubios-root : 96%VG (/dev/lvm/yubios-root, ext4, mounted at /var/home for systemd-homed)
 #       * 2%VG        : left unallocated/empty at the end of the 'lvm' VG
 
 set -euo pipefail
@@ -137,8 +137,8 @@ ensure_luks_partition() {
   udevadm settle --timeout=10 || true
 
   echo "[yubiOS] Formatting /dev/lvm/usr_a and /dev/lvm/usr_b (ext4 + fs-verity)..." >&2
-  mkfs.ext4 -F -O verity,^has_journal -L yubiOS_usr_a /dev/lvm/usr_a >&2
-  mkfs.ext4 -F -O verity,^has_journal -L yubiOS_usr_b /dev/lvm/usr_b >&2
+  mkfs.ext4 -F -O verity,^has_journal -E nodiscard,lazy_itable_init=1,assume_storage_prezeroed=1 -L yubiOS_usr_a /dev/lvm/usr_a >&2
+  mkfs.ext4 -F -O verity,^has_journal -E nodiscard,lazy_itable_init=1,assume_storage_prezeroed=1 -L yubiOS_usr_b /dev/lvm/usr_b >&2
 
   mkdir -p /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init
   mount /dev/lvm/usr_a /run/yubiOS/usr-a-init >&2
@@ -151,7 +151,7 @@ ensure_luks_partition() {
   rmdir /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init 2>/dev/null || true
 
   echo "[yubiOS] Formatting /dev/lvm/yubios-root (ext4)..." >&2
-  mkfs.ext4 -F -L yubios-root /dev/lvm/yubios-root >&2
+  mkfs.ext4 -F -E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1 -L yubios-root /dev/lvm/yubios-root >&2
 
   echo "$p_luks"
 }

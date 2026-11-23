@@ -226,6 +226,14 @@ python3 "${SCRIPT_DIR}/ftpm-console-driver.py" \
   "${SCRIPT_DIR}/verify-tpm0-pcr-extend.sh" \
   "$LINUX_BOOT_TIMEOUT" 2>&1 | tee "$LINUX_LOG"
 rc="${PIPESTATUS[0]}"
+xtest_rc=0
+if [[ "$rc" -eq 0 ]] && [[ -x "${SCRIPT_DIR}/verify-gp-tee-xtest-guest.sh" ]]; then
+  python3 "${SCRIPT_DIR}/ftpm-console-driver.py" \
+    "$CONSOLE_SOCK" \
+    "${SCRIPT_DIR}/verify-gp-tee-xtest-guest.sh" \
+    120 2>&1 | tee -a "$LINUX_LOG"
+  xtest_rc="${PIPESTATUS[0]}"
+fi
 set -e
 
 kill "$QEMU_PID" 2>/dev/null || true
@@ -247,5 +255,12 @@ fi
 if [[ "$rc" -ne 0 ]]; then
   die "verify-tpm0-pcr-extend.sh failed in-guest (rc=${rc}); see ${LINUX_LOG}"
 fi
+if [[ "$xtest_rc" -eq 77 ]]; then
+  skip "verify-gp-tee-xtest-guest.sh skipped OP-TEE xtest runtime suite (rc=77: xtest not installed in guest rootfs); Stage A + verify-tpm0-pcr-extend.sh PASSED"
+  exit 77
+fi
+if [[ "$xtest_rc" -ne 0 ]]; then
+  die "verify-gp-tee-xtest-guest.sh failed in-guest (rc=${xtest_rc}); see ${LINUX_LOG}"
+fi
 
-log "PASS: Stage A firmware markers + in-guest verify-tpm0-pcr-extend.sh (live /dev/tpm0, PCR extend)"
+log "PASS: Stage A firmware markers + in-guest verify-tpm0-pcr-extend.sh + verify-gp-tee-xtest-guest.sh"
