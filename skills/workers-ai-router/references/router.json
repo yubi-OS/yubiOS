@@ -124,8 +124,10 @@
         "@cf/cloudflare/clef-omni",
         "@cf/cloudflare/clef",
         "@cf/cloudflare/clef-flash",
+        "@cf/cloudflare/clairic-flash",
         "@cf/cloudflare/clairic"
-      ]
+      ],
+      "order_note": "nativeScore from 2026-10-30 (clef-omni 80, clef 79, clef-flash 74, clairic 68); clairic-flash placed after clef-flash on bench-lite 2026-11-23 (4/4), flash latency"
     },
     "safety-moderation": {
       "match": "content moderation, safety classification",
@@ -186,7 +188,8 @@
       "match": "image+text embeddings",
       "pool": [
         "@cf/google/embeddinggemma-2"
-      ]
+      ],
+      "order_note": "bench-lite 2026-11-23: 768-dim, retrieval 3/3. NOT index-compatible with bge-m3 (1024-D): never mix in one Vectorize index"
     },
     "image-to-text": {
       "match": "captioning, OCR-ish description, image understanding (vision)",
@@ -283,7 +286,8 @@
       "contextWindow": null,
       "inputUsdPerM": null,
       "outputUsdPerM": null,
-      "benchmarked": false
+      "benchmarked": "lite-2026-11-23",
+      "bench_lite": "math 9386 correct; JSON exact match; chat sound. Reasoning model: reasoning tokens consume max_tokens budget, set >= 800 or content returns empty."
     },
     "@cf/openai/gpt-oss-120b": {
       "task": "Text Generation",
@@ -345,12 +349,13 @@
       "description": "Clairic is a System One-style model that can extract, compute, estimate, and forecast values from inputs. It is strongly typed and outputs confidence scores and probabilities against its outputs. This model is in early research preview from the Cloudflare Workers AI team.",
       "qualityScore": null,
       "subscores": {},
-      "toolCalling": null,
+      "toolCalling": "Native Schema",
       "avgLatencyMs": null,
       "contextWindow": null,
       "inputUsdPerM": null,
       "outputUsdPerM": null,
-      "benchmarked": false
+      "benchmarked": "lite-2026-11-23",
+      "bench_lite": "4/4 (boolean x3 high-confidence + estimate exact median 8.5); model/state/fields typed call; full 6-probe native harness not re-run"
     },
     "@cf/meta/llama-guard-3-8b": {
       "task": "Text Generation",
@@ -971,7 +976,9 @@
       "contextWindow": null,
       "inputUsdPerM": null,
       "outputUsdPerM": null,
-      "benchmarked": false
+      "benchmarked": "lite-2026-11-23",
+      "bench_lite": "768-dim embeddings; retrieval probe 3/3 with clean margins (0.92/0.82/0.83 top-1). Call shape {input:[...]}.",
+      "dims": 768
     },
     "@cf/baai/bge-large-en-v1.5": {
       "task": "Text Embeddings",
@@ -998,15 +1005,12 @@
       "benchmarked": true
     }
   },
-  "unbenchmarked_since_2026-10-30": [
-    "@cf/thinkingmachines/inkling-2-small",
-    "@cf/cloudflare/clairic-flash",
-    "@cf/google/embeddinggemma-2"
-  ],
+  "unbenchmarked_since_2026-10-30": [],
   "notes": [
     "low generic qualityScore on guard/rerank/sentiment specialists is a harness artifact; trust the task route, not the global number",
-    "clairic-flash and inkling-2-small have no benchmark row; treat as unproven until re-benched",
-    "embeddinggemma-2 has no benchmark row; multimodal embedding route is single-model",
+    "text-to-image, TTS, ASR, VAD routes have no quality probes in the benchmark; pools are task-complete, not quality-ranked",
+    "all 52 models verified present; the 3 catalog additions since 2026-10-30 passed bench-lite probes 2026-11-23 (see per-model bench_lite)",
+    "low generic qualityScore on guard/rerank/sentiment specialists is a harness artifact; these are decision models, trust the task route",
     "text-to-image, TTS, ASR, VAD routes have no quality probes in the benchmark; pools are task-complete, not quality-ranked"
   ]
 }

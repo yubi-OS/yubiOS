@@ -22,12 +22,12 @@ Data: `references/router.json`. Sources: live catalog (2026-11-23) + benchmark r
 | `reasoning-math` | math, logic, constraint solving | gpt-oss-120b | pool sorted by mathScore |
 | `structured-output` | JSON, SQL, strict schema | gpt-oss-120b | pool sorted by jsonScore |
 | `tool-calling` | function calling, agent tools | deepseek-v4.1-flash-1017 | only models that passed the tool probe (11) |
-| `decision-scoring` | yes/no gates, N-option picks, triage | clef-omni (native-schema decision models) | clairic, clef, clef-flash |
+| `decision-scoring` | yes/no gates, N-option picks, triage | clef-omni (native-schema decision models) | clef, clef-flash, clairic-flash, clairic |
 | `safety-moderation` | content safety classification | llama-guard-3-8b | none (single-model route) |
 | `long-context` | prompts over 100k tokens | deepseek-v4.1-flash-1017 (1M ctx) | 6 models with ctx >= 200k |
 | `cheap-high-throughput` | bulk jobs, cost dominates | granite-4.0-h-micro ($0.017/M in) | pool sorted by input price |
 | `embeddings` | text embeddings, RAG vectors | qwen3-embedding-0.6b (probe winner); bge-m3 stays the workspace default (1024-D, matches existing Vectorize indexes) | 6 embedding models |
-| `multimodal-embeddings` | image+text embeddings | embeddinggemma-2 | none (unbenchmarked) |
+| `multimodal-embeddings` | image+text embeddings | embeddinggemma-2 (768-dim, verified) | none |
 | `image-to-text` | captioning, visual Q&A | llama-3.2-11b-vision-instruct | moondream3.1-9B-A2B |
 | `image-classification` | fixed-class image labels | resnet-50 | none |
 | `text-to-image` | generate images | flux-2-dev (quality) | flux-1-schnell (fast), klein-9b/4b (light), leonardo pair (unproven) |
@@ -56,7 +56,7 @@ Data: `references/router.json`. Sources: live catalog (2026-11-23) + benchmark r
 
 - The `qualityScore` and sub-scores come from the 2026-10-30 account benchmark (83 models tested, 49 live). `router.json` carries both; `subscores` drive the coding/reasoning/structured pools.
 - Specialist guards and classifiers (llama-guard, distilbert-sst-2) score low on the generic harness. That is a harness artifact, not a defect: trust the task route, never demote them by global quality.
-- Unbenchmarked since the last sweep: `inkling-2-small`, `clairic-flash`, `embeddinggemma-2`. They sit at pool tails. Do not make one a default until a re-bench.
+- The 3 models added since the 2026-10-30 bench passed bench-lite probes 2026-11-23: `clairic-flash` 4/4 on typed boolean/estimate calls (decision-scoring pool, after clef-flash); `inkling-2-small` math+JSON exact (reasoning model, needs `max_tokens` >= 800 or content returns empty); `embeddinggemma-2` retrieval 3/3 at 768-dim (not index-compatible with bge-m3's 1024-D).
 - Text-to-image, TTS, ASR and VAD pools have no quality probes. Their order is role-based (quality default, fast variant, fallback), spelled out in each route's `order_note`.
 - Cost trade-downs are per-route too: every model in `router.json` carries `inputUsdPerM`/`outputUsdPerM`/`avgLatencyMs` where measured. Walk down the pool for cheaper, not across routes.
 - Refresh procedure: re-run `GET /ai/models/search?per_page=100&page=N` (paged until a short page), regenerate `router.json` (see `scripts/`), re-bench new models before promoting them out of pool tails.
