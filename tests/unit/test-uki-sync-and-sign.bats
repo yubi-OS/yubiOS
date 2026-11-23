@@ -133,16 +133,21 @@ make_db_crt() {
 }
 
 @test "validate-pkcs11-uri.sh --syntax-only accepts valid RFC 7512 URI and rejects path delimiter injection" {
-  run "${REPO_ROOT}/tests/validate-pkcs11-uri.sh" --syntax-only "pkcs11:manufacturer=piv_II;id=%9c;type=private" "/run/yubios/pin.txt" "/run/p11-kit/pkcs11"
+  local val_sh
+  val_sh="$(resolve tests/validate-pkcs11-uri.sh)"
+  run bash "$val_sh" --syntax-only "pkcs11:manufacturer=piv_II;id=%9c;type=private" "/run/yubios/pin.txt" "/run/p11-kit/pkcs11"
   [ "$status" -eq 0 ]
   [[ "$output" == *"PASS: PKCS#11 URI syntax valid"* ]]
 
-  run "${REPO_ROOT}/tests/validate-pkcs11-uri.sh" --syntax-only "pkcs11:manufacturer=piv_II;id=%9c;type=private" "/run/bad;inject=1/pin"
+  run bash "$val_sh" --syntax-only "pkcs11:manufacturer=piv_II;id=%9c;type=private" "/run/bad;inject=1/pin"
   [ "$status" -eq 1 ]
   [[ "$output" == *"contains RFC 7512 delimiter"* ]]
 }
 
 @test "verify-uki-signature.sh --check-cert-subject accepts yubiOS PIV cert and rejects fallback CN=mkosi" {
+  rm -f "$W/bin/openssl"
+  local ver_sh
+  ver_sh="$(resolve tests/verify-uki-signature.sh)"
   local good_cert="${BATS_TEST_TMPDIR}/good.pem"
   local bad_cert="${BATS_TEST_TMPDIR}/bad.pem"
   local cnf="${BATS_TEST_TMPDIR}/openssl.cnf"
@@ -150,10 +155,10 @@ make_db_crt() {
   openssl req -x509 -newkey rsa:2048 -nodes -config "$cnf" -keyout "${BATS_TEST_TMPDIR}/g.key" -out "$good_cert" -days 1 -subj "/CN=yubiOS-PIV-Slot-9a" 2>/dev/null
   openssl req -x509 -newkey rsa:2048 -nodes -config "$cnf" -keyout "${BATS_TEST_TMPDIR}/b.key" -out "$bad_cert" -days 1 -subj "/CN=mkosi-ephemeral" 2>/dev/null
 
-  run "${REPO_ROOT}/tests/verify-uki-signature.sh" --check-cert-subject "$good_cert" "yubiOS-PIV-Slot-9a"
+  run bash "$ver_sh" --check-cert-subject "$good_cert" "yubiOS-PIV-Slot-9a"
   [ "$status" -eq 0 ]
 
-  run "${REPO_ROOT}/tests/verify-uki-signature.sh" --check-cert-subject "$bad_cert"
+  run bash "$ver_sh" --check-cert-subject "$bad_cert"
   [ "$status" -eq 1 ]
   [[ "$output" == *"fell back to an unconfigured tool-generated default"* ]]
 }

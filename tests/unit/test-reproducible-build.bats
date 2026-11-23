@@ -779,7 +779,7 @@ out = subprocess.run(
     text=True,
 ).stdout
 
-lines = [ln for ln in out.splitlines() if ln]
+lines = [ln for ln in out.split("\n") if ln]
 assert all(ln.startswith("\x1e") for ln in lines), "Every UAPI.16 record must start with RFC 7464 0x1E"
 records = [json.loads(ln[1:]) for ln in lines]
 assert records[0]["mediaType"] == "application/vnd.uapi.16.manifest"
