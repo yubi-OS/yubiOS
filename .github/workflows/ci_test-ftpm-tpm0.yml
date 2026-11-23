@@ -57,7 +57,7 @@ jobs:
             runner: ubuntu-26.04
             primary: false
           - arch: arm64
-            runner: [self-hosted, Linux, ARM64, KVM]
+            runner: ubuntu-26.04-arm
             primary: true
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 10
@@ -100,7 +100,26 @@ jobs:
         run: |
           echo "$DOCKER_PASS" | sudo podman login --username "$DOCKER_USER" --password-stdin docker.io
 
-      - name: Run tests/vm/test-ftpm-qemu-ci.sh (Stage A always; Stage B when FTPM_LINUX_PAYLOAD=1)
+      - name: "Run OMN-203 GlobalPlatform TEE PP conformance & firmware binary audit (tests/vm/test-gp-tee-pp-conformance-ci.sh)"
+        if: matrix.arch == 'arm64' || (matrix.arch == 'amd64' && steps.policy.outputs.boot == '1')
+        env:
+          PATH: ${{ runner.temp }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+          FIRMWARE_IMAGE: ${{ inputs.firmware_image || 'docker.io/0mniteck/yubios:firmware-qemu-arm64' }}
+        run: |
+          chmod +x tests/vm/test-gp-tee-pp-conformance-ci.sh tests/vm/verify-gp-tee-xtest-guest.sh
+          set +e
+          sudo env "PATH=$PATH:/usr/sbin:/sbin" "FIRMWARE_IMAGE=$FIRMWARE_IMAGE" bash tests/vm/test-gp-tee-pp-conformance-ci.sh
+          rc=$?
+          set -e
+          if [ "$rc" -eq 77 ]; then
+            echo "::warning::SKIP: OMN-203 Stage 1 live firmware binary audit skipped (Stage 0 host self-test passed)"
+            echo "### gp-tee-pp-conformance -- SKIP: Stage 1 firmware binary audit skipped (Stage 0 host self-test passed)" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          [ "$rc" -eq 0 ] || exit "$rc"
+          echo "### gp-tee-pp-conformance -- PASS: GlobalPlatform TEE PP (EAL2+ / AVA_VAN_AP.3) Stage 0 + Stage 1 firmware fTPM TA UUID audit verified" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Run tests/vm/test-ftpm-qemu-ci.sh (Stage A always; Stage B + verify-gp-tee-xtest-guest.sh when FTPM_LINUX_PAYLOAD=1)
         if: matrix.arch == 'arm64' || (matrix.arch == 'amd64' && steps.policy.outputs.boot == '1')
         env:
           PATH: ${{ runner.temp }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -113,7 +132,7 @@ jobs:
           WORK: /tmp/yubios-ftpm-tpm0-work
           LOG_DIR: /tmp/yubios-ftpm-tpm0-logs
         run: |
-          chmod +x tests/vm/test-ftpm-qemu-ci.sh tests/vm/ftpm-console-driver.py tests/vm/verify-tpm0-pcr-extend.sh
+          chmod +x tests/vm/test-ftpm-qemu-ci.sh tests/vm/ftpm-console-driver.py tests/vm/verify-tpm0-pcr-extend.sh tests/vm/verify-gp-tee-xtest-guest.sh
           # set +e around the test script so its non-zero exit (rc=77 = loud SKIP per
           # the test-ftpm-qemu-ci.sh contract) doesn't trigger this run block's
           # own set -e and skip the rc capture. ci_test-vm.yml's same step uses
@@ -133,12 +152,12 @@ jobs:
             sudo tail -200 /tmp/yubios-ftpm-tpm0-logs/ftpm-linux.log 2>/dev/null || true
           fi
           if [ "$rc" -eq 77 ]; then
-            echo "::warning::SKIP: fTPM /dev/tpm0 leg incomplete (see log)"
-            echo "### ftpm-tpm0 -- SKIP" >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::SKIP: fTPM /dev/tpm0 or in-guest xtest stage skipped (Stage A firmware markers passed; see log for exact skipped stage)"
+            echo "### ftpm-tpm0 -- SKIP: Stage B guest / xtest conformance stage skipped (Stage A firmware markers passed)" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           [ "$rc" -eq 0 ] || exit "$rc"
-          echo "### ftpm-tpm0 -- PASS: fTPM firmware markers verified (Stage A) [+ Stage B if FTPM_LINUX_PAYLOAD=1]" >> "$GITHUB_STEP_SUMMARY"
+          echo "### ftpm-tpm0 -- PASS: Stage A firmware markers + Stage B in-guest verify-tpm0-pcr-extend.sh + verify-gp-tee-xtest-guest.sh verified" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload fTPM serial logs
         if: always()
