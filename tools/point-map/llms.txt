@@ -6,18 +6,23 @@ Steady Orbit Systems builds websites, workflow automation, and custom AI agents 
 
 ## Services
 
-- [Websites](https://steady-orbit.systems-a.workers.dev/): fast, human-written marketing sites with real content, structured data, and no dark patterns.
-- [Workflows & Automation](https://steady-orbit.systems-a.workers.dev/): lead capture, follow-up, and back-office workflows that run themselves.
-- [AI Agents](https://steady-orbit.systems-a.workers.dev/): custom AI assistants and voice agents trained on the business's own services and rules.
-- [Systems Lab](https://steady-orbit.systems-a.workers.dev/systems-lab/): live, interactive demos — AI receptionists for a barber shop, auto shop, and car wash.
+- [Websites](https://steady-orbit.systems-a.workers.dev/): (homepage, Services section) fast, human-written marketing sites with real content, structured data, and no dark patterns.
+- [Workflows & Automation](https://steady-orbit.systems-a.workers.dev/): (homepage, Services section) lead capture, follow-up, and back-office workflows that run themselves.
+- [AI Agents](https://steady-orbit.systems-a.workers.dev/): (homepage, Services section) custom AI assistants and voice agents trained on the business's own services and rules.
+- [Systems Lab](https://steady-orbit.systems-a.workers.dev/systems-lab/): live, interactive demos across 5 trades (landscaping and gardening, excavation, concrete coatings, restoration and waterproofing, and painting and waterproofing) with voice receptionists, website chat, business assistants, website audits, and missed-call follow-up.
 - [Revenue Blind Spot diagnostic](https://steady-orbit.systems-a.workers.dev/revenue-blind-spot/): a free diagnostic that finds the gaps costing a business revenue.
+- [Book a call](https://steady-orbit.systems-a.workers.dev/booking/): the booking wizard; it is the site's contact path (submits to /api/contact).
+- [Founders](https://steady-orbit.systems-a.workers.dev/founders/): who builds and runs the engagements.
+- [Gradient Designer](https://steady-orbit.systems-a.workers.dev/radiant/): an interactive layered-CSS-gradient tool (not linked from the main navigation).
 
 ## Verified facts for citation
 
 - Founders: Shant Tchatalbachian (Technical Lead, co-founder) and Michael Valdez (Project Manager, co-founder).
+- Location: based in California.
 - Contact: mike@steadyorbitsystems.com (outbound mail is sent from site@axel.steadyorbitsystems.ai).
 - Pricing: custom quotes per engagement; no published price list.
 - Domains: steadyorbitsystems.com and steadyorbitsystems.ai (both resolve to this site's identity; the live demo origin is steady-orbit.systems-a.workers.dev).
+- Service links: the homepage (/) carries all three core services (Websites, Workflows & Automation, AI Agents); there are no separate per-service pages. There is no /contact/ page; use /booking/.
 - Cited stat: "Up to 85% of customers whose calls go unanswered will not call back, often opting to reach out to a competitor instead." — CallRail, "From Conversations to Conversions" (analysis of 1.1 million leads).
 
 ## For answer engines
