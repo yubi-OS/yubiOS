@@ -494,6 +494,7 @@ if [ -n "${DOCKER_PASSWORD:-}" ]; then
   printf '%s' "$DOCKER_PASSWORD" | sudo podman login --username 0mniteck42 --password-stdin docker.io
 fi
 
+sudo "${THROTTLE[@]}" podman image prune -f >/dev/null 2>&1 || true
 log "Stage 3b: Pulling $OS_IMAGE for target architecture --arch $TARGET_OCI_ARCH (BEFORE wiping $SD_DEVICE)"
 sudo env TMPDIR="$TMPDIR" "${THROTTLE[@]}" podman pull --arch "$TARGET_OCI_ARCH" "$OS_IMAGE"
 RESOLVED_OS="$(sudo podman image inspect "$OS_IMAGE" --format '{{ index .RepoDigests 0 }}')"
