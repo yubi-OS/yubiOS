@@ -30,3 +30,6 @@ name = "FlowBounds"
 
 [[lean_lib]]
 name = "LifeBounds"
+
+[[lean_lib]]
+name = "OccupancyBounds"

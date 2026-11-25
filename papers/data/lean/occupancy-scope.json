@@ -1,0 +1,239 @@
+{
+  "schema": "wayfinder-scope/1",
+  "lean_file": "papers/data/lean/OccupancyBounds.lean",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "forbidden_axioms": [
+    "sorryAx"
+  ],
+  "theorems": [
+    {
+      "name": "Occupancy.partition_positive",
+      "status": "lean-proved",
+      "statement_sha256": "817710fbfa22d34ae6a7e8cb95d12a14df85f5db7fb98d7c0da4ad9fe03a534e"
+    },
+    {
+      "name": "Occupancy.fractions_sum",
+      "status": "lean-proved",
+      "statement_sha256": "641c6598d9dd501a8f5e7e5827aed7907ac396fd4df9e36cab7aaaff901cc6b4"
+    },
+    {
+      "name": "Occupancy.total_amount",
+      "status": "lean-proved",
+      "statement_sha256": "d3f80d373ab0f21e82b1040c6a770fefaa4540451e6773130f70467d8d712fb5"
+    },
+    {
+      "name": "Occupancy.bytes_per_entity",
+      "status": "lean-proved",
+      "statement_sha256": "5cfbff474328c636e6549b90de9327e2627579ef8951241eb70907f4449a4828"
+    },
+    {
+      "name": "Occupancy.molar_exponent",
+      "status": "lean-proved",
+      "statement_sha256": "e053ab594c9bb49252d250377df3f065a67fda7b619098b99f17d1dd3cb08520"
+    },
+    {
+      "name": "Occupancy.molecular_total",
+      "status": "lean-proved",
+      "statement_sha256": "3a21b487bf75ed1dc4936af726870a99063a87064c25b5da639bae4079ba950f"
+    },
+    {
+      "name": "Occupancy.uniform_replication",
+      "status": "lean-proved",
+      "statement_sha256": "82000eebc8aad5d7a0d6c82d54ffaeb2c69c2519898a5dde582ad699058e97a1"
+    },
+    {
+      "name": "Occupancy.cubic_shell_count",
+      "status": "lean-proved",
+      "statement_sha256": "9b57b4707d3050e5aa84874e01d18d3314a24c79de9dffb03de987bb2621296d"
+    },
+    {
+      "name": "Occupancy.regroup_shells",
+      "status": "lean-proved",
+      "statement_sha256": "fe2b54ae2ded7484f339bc4586a3d4609c454c006cfd5c329f4c61b62e106a98"
+    },
+    {
+      "name": "Occupancy.right_energy",
+      "status": "lean-proved",
+      "statement_sha256": "9eab3de57df808aa1f5194bd30c0fb69ef77f7cc64f9b48ef69f5d9985405611"
+    },
+    {
+      "name": "Occupancy.lift_unit",
+      "status": "lean-proved",
+      "statement_sha256": "09efbb3e2a3aa7025eecde826c262bbbf154461dfe2619d549d4073833dc8aa9"
+    },
+    {
+      "name": "Occupancy.ambient_lift_unit",
+      "status": "lean-proved",
+      "statement_sha256": "d2c875298e350c56c9b507567ed84998946ba653298f8ceaccfd05e1c37a4cd7"
+    },
+    {
+      "name": "Occupancy.inverse_plane_power",
+      "status": "lean-proved",
+      "statement_sha256": "993dd1b25d0bf2e8767583b273eddd858f14af682f05d9fabbc5e14af2b4e1e0"
+    },
+    {
+      "name": "Occupancy.energy_temperature_scale",
+      "status": "lean-proved",
+      "statement_sha256": "4fd6d1ed252ac7ea9fc915aecb0ee0bfa48f01333ec09beaf36dcf778e7b4364"
+    },
+    {
+      "name": "Occupancy.dyadic_level",
+      "status": "lean-proved",
+      "statement_sha256": "9461ed47cc1a74c0d1562c2a6254ab7ea0644be27a962d499611b4635748d462"
+    },
+    {
+      "name": "Occupancy.dyadic_partial",
+      "status": "lean-proved",
+      "statement_sha256": "5723d1bd56f4ac67927667ee52930d42f0331499dc5a289a53ae3219042a57dd"
+    },
+    {
+      "name": "Occupancy.dyadic_diverges",
+      "status": "lean-proved",
+      "statement_sha256": "0fd4fdb56292c28961482e34f19e38e2c4c20ea859a5fa12bcb034f9ae4c0986"
+    },
+    {
+      "name": "Occupancy.heat_power",
+      "status": "lean-proved",
+      "statement_sha256": "41657f7354f7d12daaae57802d0ac11ddf17ab8149cdcd76c261b6ad63b17847"
+    },
+    {
+      "name": "Occupancy.gram_power",
+      "status": "lean-proved",
+      "statement_sha256": "b2720213974c586d023236d2a01b70467e2e24979e3addb4192e355ecaf55935"
+    },
+    {
+      "name": "Occupancy.walsh_butterfly",
+      "status": "lean-proved",
+      "statement_sha256": "8070a7b709b7c997c7777a9b5df315505a41ef77b5d2521efe7863ac6195d66a"
+    },
+    {
+      "name": "Occupancy.walsh_hamming",
+      "status": "lean-proved",
+      "statement_sha256": "85e25b8dc47fc347092dce9a0859b97314972fcb3e47315936c58cf09a14daae"
+    },
+    {
+      "name": "Occupancy.degree_response",
+      "status": "lean-proved",
+      "statement_sha256": "4bcec38a46cad7dbe0408ebbc4cae871ea5e82f9429ef9d590ccab1f84c09a04"
+    },
+    {
+      "name": "Occupancy.free_energy_weight",
+      "status": "lean-proved",
+      "statement_sha256": "f267cd03763caa4d05636a2d20aaadb719487a194dd61c28b1d43b7eda0ff0c0"
+    },
+    {
+      "name": "Occupancy.collision_pairs",
+      "status": "lean-proved",
+      "statement_sha256": "8e285c7c43001d18830fbec1fa0b8c3a6cf157f3994d79c3894cc99878431944"
+    },
+    {
+      "name": "Occupancy.db_cascade",
+      "status": "lean-proved",
+      "statement_sha256": "b077c9bd10aa6fcf50919f9d66a78c1dad29ac442378bf3cee1ae0bf0dbb06a3"
+    },
+    {
+      "name": "Occupancy.renyi_collision",
+      "status": "lean-proved",
+      "statement_sha256": "0fade82afc79be2214e563d2f82366fc87fd6fcf776fc45235e4579d5b335fd6"
+    },
+    {
+      "name": "Occupancy.prefix_gain_add",
+      "status": "lean-proved",
+      "statement_sha256": "412a87a55f8d0d38625cbce0edf858e9658ab2df12ea94d6749e38ad696b0b0a"
+    },
+    {
+      "name": "Occupancy.spacing_ratio_bounds",
+      "status": "lean-proved",
+      "statement_sha256": "d74c26f2adc01182fc51613f93e52393e7124f371a899326a4d92f21a5fc6631"
+    },
+    {
+      "name": "Occupancy.finite_convolution",
+      "status": "lean-proved",
+      "statement_sha256": "6489538f3d1d343e4fea542bde8e1f3e0474dea2ec2d35bf78956f77a26cba6f"
+    },
+    {
+      "name": "Occupancy.square_amplitudes_summable",
+      "status": "lean-proved",
+      "statement_sha256": "1d0c16b0873d084471993490866bfb01bda9ae50afae30f43760a142eccf101b"
+    },
+    {
+      "name": "Occupancy.finite_parseval",
+      "status": "lean-proved",
+      "statement_sha256": "263881492391559f79b1687678d7a574bb99b2f6e948c7ef635467694ec940a3"
+    },
+    {
+      "name": "Occupancy.right_octant",
+      "status": "lean-proved",
+      "statement_sha256": "b7d27c12d2ab8233f60acf3eabb00f51b9da9994451868399045f3709244eae4"
+    },
+    {
+      "name": "Occupancy.gibbs_corpus_balance",
+      "status": "lean-proved",
+      "statement_sha256": "ad914aba4b469d22e1cd3634b10670246c7210b167c389b4e8c3af981541c804"
+    }
+  ],
+  "definitions": {
+    "schema": "commands-v2",
+    "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
+    "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
+    "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
+    "hash": "6a4362c391fab32166cb2c562efeef17763a1640e4d8ea7de7a465dcbd49364e",
+    "count": 48,
+    "decls": {
+      "def:bitTerm": "fd53dd4962306ce9d752da0373d3069a21395fca15cdf853de1d38781e4987e8",
+      "def:fraction": "1033e6a4aab5cf1128920af2ca3bb54401dff072a839c0eff8ce83a8b5f24a3d",
+      "def:gibbs": "313016c5f103786ed3038970eafc64d0db7cbce3018750a2c2f25db4f05de0cd",
+      "end:Occupancy": "059df6bc590b85aedf15b7ddb256b2c9750db2f0caaadf7ce1712dc58092ca7b",
+      "import:Mathlib.Analysis.PSeries": "4daa29a3feaba632f18c4278d2519ebc8b5b873e2456a2a9dff43c719f5b97e9",
+      "import:Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic": "32a6ecf3f61c9f83fbf0248aba60eedd0c89834426c763d30c308a7bd4f315af",
+      "import:Mathlib.Tactic.FieldSimp": "a48cb80f753de278ee2dd01b78ba888625df06aa06231a28429c2debf29eabfa",
+      "import:Mathlib.Tactic.Linarith": "91b57c8d36c60432cf7f644333ac489c977aeaa1387883661003cf0994235bb9",
+      "import:Mathlib.Tactic.Positivity": "055ed0abf7fd6c7fdf67d713c880f8f7a61fb6abecd14aea670ae9adee37072d",
+      "import:Mathlib.Tactic.Ring": "295c104e2ca7de183f141f3b6acfe959ed40a9c52b52584e82735138a0923d51",
+      "namespace:Occupancy": "31486f546ab13cc570319da808d90f47ffa338ff571f85ee5501ff0f56f41ed7",
+      "open:Finset": "acdafb516b081e5520d69c4842e542dbe069d5ca228c0d2bbea35a92cf13b8f7",
+      "open:scoped": "3da4aaed9c768db0668f749056a761cfb74d3f51180dc125ccd5c3a5add1b3d6",
+      "section": "e3eed6c918c6b5f803a97cb89d478aad13c09ba97ed60c87f611a083a9e14abd",
+      "theorem:ambient_lift_unit": "c6973c34cee05f9c1c40ddb62c0faf7f48a1eb9e423815c1c852f04f9b42e75e",
+      "theorem:bytes_per_entity": "1f595b4532fdc15b56d0a2ecfc6a199c096685cbab8856e0ee3bdd60dcbbb3c1",
+      "theorem:collision_pairs": "a25f0d2887e89be8119b5c25650eb9befc1ddef2d0879bb6765679be85c4c522",
+      "theorem:cubic_shell_count": "0665f3a51e6b5e105f6a5a8c5b578bb32f98c8a074d331e9da9eb39c09a5ed17",
+      "theorem:db_cascade": "aeabe04a92b17a41a7b950c2a3b689ae960c12fbee2d25db701f23b859d063cf",
+      "theorem:degree_response": "66d01f22ac156529bc1d4652234e522790f8ce12b68d04dfcf80fdeb0d43cfd3",
+      "theorem:dyadic_diverges": "62d4be9978c212962eb93992f94b1595d9a1a648d52444578d845e6ca0c7399d",
+      "theorem:dyadic_level": "a16833631b1d4a5d41ea1bd30e4da908ae9099bf5f9ef37ab97840b8a2dfc609",
+      "theorem:dyadic_partial": "888a39f60978dab2a4ee03511b67f30286ab1cfeb6a28605015d78c75aa4836d",
+      "theorem:energy_temperature_scale": "01b600fe1bf9309be567cfe4331c6ed466f2d31e7632a03e17830dde7a3a1d88",
+      "theorem:finite_convolution": "7bba0661b148cc3c320ce954a13c5a35c44c84f3c6e13ddd58a5e7e5e626df02",
+      "theorem:finite_parseval": "2b8da0c2cbf73c1a0d193bde354dd1229abb1ba1fd7640388514484af5972b13",
+      "theorem:fractions_sum": "866ed9ae47ea007a53844a6e0964a1f87cda2732f439f8fa8d27320fc0e76994",
+      "theorem:free_energy_weight": "102ae7f49178e6c81e20f08854af883dfd1d7928ac62d6b91ebd2fc0bd7d52ce",
+      "theorem:gibbs_corpus_balance": "aad543ac970b54a1eae4242c8a156a4cd01dff68babf5b6e6d8e5265b885625c",
+      "theorem:gram_power": "a0e2ab0e08d44f661687be57c15f8df191ee681d6fa5ca397081849dc1d53b41",
+      "theorem:heat_power": "1c5884838371a8288f71da7e8c6a339403bc8dfb3aec02151606f1bc8cc1d1a8",
+      "theorem:inverse_plane_power": "1a205004920f575301792a9344f1cc8629a56990a1f4ca93206146205ed75a3f",
+      "theorem:lift_unit": "b5f92f030a87436a55a58d04e08cda4cbab52e446b4406d01c24e4f19f95761e",
+      "theorem:molar_exponent": "0a8a05816e00089236f33b85201a6899ab178d8a83e24b26500f08e48cb79e7c",
+      "theorem:molecular_total": "e7cac63410f588efb05ddcb7319c5041629ee43faaa2f8113ad2e8b1a4882654",
+      "theorem:partition_positive": "37e03110b14636cb6683a6249c5121c5ae9f8d6976cbe320a24f3952b7315ce9",
+      "theorem:prefix_gain_add": "2836ac4261f95ba7ce34fa47b2c5049aabc33053ee531b63a48a8a32762d9ca3",
+      "theorem:regroup_shells": "7b187a207ba3b124c531350d594ef355ad9e80f22a9aac4909c6fd9324162add",
+      "theorem:renyi_collision": "e2e446fc19eb5571477f849d6268b01cd07f04fd02b7bcb734d7fa74ad5af62e",
+      "theorem:right_energy": "792794c623f1f850448dbc3978ec3183b3b8cc698150cada813916e722d1b02c",
+      "theorem:right_octant": "76f63094144b084947a2a937e07133817b98da17f26ceaa533d75afef531d498",
+      "theorem:spacing_ratio_bounds": "9c7b870c40452e4aab2d3da6b7a4f6a5b0e53c97c307593824c49099435e2ee1",
+      "theorem:square_amplitudes_summable": "7e709286fe98d0cb0364af05cc908f54442eefaf24bc4b5b9cbaee375e02ec33",
+      "theorem:total_amount": "113b0593f579d77e54d9b7787dc6d18d3a5d2e886f2489f138393a60342837c9",
+      "theorem:uniform_replication": "799b7a1e46f7899e7199859be1c1f4be40e6eb06b0fd67523b751d028e33b89d",
+      "theorem:walsh_butterfly": "37d2b8551fae606a48d37b7100782ce2e74ada97ed40ade7f5072d681a99609c",
+      "theorem:walsh_hamming": "f03fed57203122372426da32f1851c848e162f718a7563db12fe11b61885f27e",
+      "variable": "3f001a73723bde69a62975e9f83f2398375387bb1b6eceb6859661f96441db09"
+    },
+    "pinned_from_commit": "7d5ee590a55e"
+  }
+}

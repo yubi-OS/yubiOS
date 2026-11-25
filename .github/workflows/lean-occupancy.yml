@@ -1,0 +1,73 @@
+name: Paper 5 · occupancy
+on:
+  push:
+    branches: [main, paper5-occupancy-replay]
+    paths: &inputs
+      - '.github/workflows/lean-occupancy.yml'
+      - 'papers/data/lean/**'
+      - 'papers/data/occupancy/**'
+      - 'tools/occupancy/**'
+      - 'tools/boltzmann-collapse/**'
+      - 'tools/corpus-sonometer/**'
+      - 'tools/phonon-dispersion/**'
+      - 'tools/corpus-auditor/**'
+      - 'tools/point-map/**'
+      - 'tools/spectral-decomposer/**'
+      - 'papers/conserved-occupancy-2026-11-25.tex'
+  pull_request:
+    paths: *inputs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    name: Lean and mathlib
+    runs-on: ubuntu-26.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: papers/data/lean
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install the pinned upstream Lean release
+        run: |
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.35.0'
+          curl --fail --location --silent --show-error --retry 3 -o "$RUNNER_TEMP/lean.tar.zst" \
+            https://github.com/leanprover/lean4/releases/download/v4.35.0/lean-4.35.0-linux.tar.zst
+          echo "7289597a44543246c9227b8cae501767e095ce17f6d448b95fc4a8dc97268f6d  $RUNNER_TEMP/lean.tar.zst" | sha256sum -c -
+          tar --zstd -xf "$RUNNER_TEMP/lean.tar.zst" -C "$RUNNER_TEMP"
+          rm "$RUNNER_TEMP/lean.tar.zst"
+          echo "$RUNNER_TEMP/lean-4.35.0-linux/bin" >> "$GITHUB_PATH"
+      - name: Fetch locked dependency revisions and their upstream build cache
+        run: |
+          while IFS=$'\t' read -r name url rev; do
+            dir=".lake/packages/$name"
+            git init -q "$dir"
+            git -C "$dir" remote add origin "$url"
+            git -C "$dir" fetch -q --depth=1 origin "$rev"
+            git -C "$dir" checkout -q --detach FETCH_HEAD
+            test "$(git -C "$dir" rev-parse HEAD)" = "$rev"
+          done < <(jq -r '.packages[] | [.name,.url,.rev] | @tsv' lake-manifest.json)
+          lake exe cache get $(awk '/^import Mathlib\./ {print $2}' OccupancyBounds.lean)
+      - name: Check the statements, proofs, kernel replay and axiom coverage
+        run: |
+          python3 pin_statements.py check occupancy-scope.json
+          mkdir -p .lake/build/lib/lean
+          lake env lean -DwarningAsError=true -o .lake/build/lib/lean/OccupancyBounds.olean OccupancyBounds.lean
+          lake env leanchecker --fresh OccupancyBounds
+          python3 check_lean_axioms.py --gen --source OccupancyBounds.lean --out "$RUNNER_TEMP/OccupancyProbe.lean"
+          lake env lean "$RUNNER_TEMP/OccupancyProbe.lean" > "$RUNNER_TEMP/occupancy-axioms.txt"
+          python3 check_lean_axioms.py --mode enumerate --source OccupancyBounds.lean \
+            --axioms "$RUNNER_TEMP/occupancy-axioms.txt" --manifest occupancy-scope.json --require-coverage occupancy-scope.json
+  replay:
+    name: Both observed Cloudflare passes
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install numerical dependencies
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-numpy python3-scipy
+      - name: Recompute the frozen study
+        run: /usr/bin/python3 tools/occupancy/replay.py --output "$RUNNER_TEMP/occupancy"
