@@ -21,6 +21,8 @@ KVER=""
 KERNEL_IMAGE=""
 FROM_SIGNED_ESP=0
 ESP="${YUBIOS_ESP:-/efi}"
+# enable logo with plymouth.ignore-serial-consoles
+ENABLE_LOGO_KARG=""
 KEYDIR="${YUBIOS_SB_KEYDIR:-/var/lib/yubiOS/secureboot}"
 ENROLLED_MARK="${YUBIOS_SB_ENROLLED_MARK:-/var/lib/yubiOS/.sb-enrolled}"
 OCI_DIR="${YUBIOS_OCI_DIR:-/var/lib/yubiOS/oci}"
@@ -157,7 +159,7 @@ collect_kargs() {
   if [ "$(uname -m)" = "x86_64" ]; then
     pre_drivers="tpm_tis,tpm_crb"
   fi
-  local kargs="composefs=${cfs_digest} root=dissect mount.usr=dissect rw fsck.repair=yes selinux=0 rd.driver.pre=${pre_drivers} ima_policy=tcb ima_hash=sha256 rd.luks=1 rd.luks.options=fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes audit=0 splash quiet plymouth.ignore-serial-consoles no_console_suspend"
+  local kargs="composefs=${cfs_digest} root=dissect mount.usr=dissect rw fsck.repair=yes selinux=0 rd.driver.pre=${pre_drivers} ima_policy=tcb ima_hash=sha256 rd.luks=1 rd.luks.options=fido2-device=auto,fido2-with-client-pin=yes,fido2-with-user-presence=yes audit=0 splash quiet ${ENABLE_LOGO_KARG} no_console_suspend"
   printf '%s\n' "$kargs"
 }
 
