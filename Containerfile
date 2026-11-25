@@ -9,7 +9,7 @@
 # PINNED.md; the FROM carries only the immutable OCI index digest so there is a
 # single source of identity (no tag+digest ambiguity for Build Policy/tooling).
 # quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261114.0)
-FROM quay.io/fedora/fedora-bootc@sha256:f0cdc050f149f554ab84d3cc88e80583096e195ddb083f9670c3015e48e86b7a AS rootfs_prep
+FROM quay.io/fedora/fedora-bootc@sha256:2342f957281b061919c48a12227f9cd04f2d9825d17629fd914083aaa672002c AS rootfs_prep
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.

@@ -117,7 +117,7 @@ jobs:
 
       - name: Build RPMs and verify System Trust panel inside pinned Fedora 45 bootc container
         env:
-          FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:f0cdc050f149f554ab84d3cc88e80583096e195ddb083f9670c3015e48e86b7a # 45 (45.20261114.0)
+          FEDORA_BOOTC_IMAGE: quay.io/fedora/fedora-bootc@sha256:2342f957281b061919c48a12227f9cd04f2d9825d17629fd914083aaa672002c # 45 (45.20261114.0)
         run: |
           set -euo pipefail
           sudo podman run --rm \
