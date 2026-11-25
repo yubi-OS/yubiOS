@@ -225,129 +225,14 @@ RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/u
     printf '#include <time.h>\ntime_t time(time_t *t){time_t v=1767225600;if(t)*t=v;return v;}\n' > /tmp/faketime_sb.c && \
     gcc -shared -fPIC -O2 /tmp/faketime_sb.c -o /usr/lib/yubiOS/uki/libfaketime_sb.so && \
     rm -f /tmp/faketime_sb.c && \
-    printf '%s\n' \
-      '#define _GNU_SOURCE' \
-      '#include <dlfcn.h>' \
-      '#include <errno.h>' \
-      '#include <stddef.h>' \
-      '#include <stdint.h>' \
-      '#include <stdarg.h>' \
-      '#include <stdio.h>' \
-      '#include <stdlib.h>' \
-      '#include <string.h>' \
-      '#include <unistd.h>' \
-      '#include <sys/types.h>' \
-      '#include <linux/fs.h>' \
-      'int ioctl(int fd, unsigned long request, ...) {' \
-      '    static int (*real_ioctl)(int, unsigned long, void *) = NULL;' \
-      '    if (!real_ioctl) real_ioctl = dlsym(RTLD_NEXT, "ioctl");' \
-      '    va_list ap; va_start(ap, request); void *arg = va_arg(ap, void *); va_end(ap);' \
-      '    if (request == FITRIM) return 0;' \
-      '    return real_ioctl(fd, request, arg);' \
-      '}' \
-      'int fallocate(int fd, int mode, off_t offset, off_t len) {' \
-      '    static int (*real_fallocate)(int, int, off_t, off_t) = NULL;' \
-      '    if (!real_fallocate) real_fallocate = dlsym(RTLD_NEXT, "fallocate");' \
-      '    if (len > (off_t)(64ULL << 20)) { errno = EOPNOTSUPP; return -1; }' \
-      '    return real_fallocate(fd, mode, offset, len);' \
-      '}' \
-      'int fallocate64(int fd, int mode, off64_t offset, off64_t len) {' \
-      '    return fallocate(fd, mode, (off_t)offset, (off_t)len);' \
-      '}' \
-      'int syncfs(int fd) {' \
-      '    (void)fd;' \
-      '    return 0;' \
-      '}' \
-      'int execlp(const char *file, const char *arg, ...) {' \
-      '    if (file && strcmp(file, "fsck") == 0) _exit(0);' \
-      '    va_list ap;' \
-      '    va_start(ap, arg);' \
-      '    char *argv[64];' \
-      '    int i = 0;' \
-      '    argv[i++] = (char *)arg;' \
-      '    while (i < 63 && (argv[i] = va_arg(ap, char *)) != NULL) i++;' \
-      '    argv[i] = NULL;' \
-      '    va_end(ap);' \
-      '    return execvp(file, argv);' \
-      '}' \
-      'int sd_bus_call(void *bus, void *m, uint64_t usec, void *ret_error, void *reply) {' \
-      '    static int (*real_sd_bus_call)(void *, void *, uint64_t, void *, void *) = NULL;' \
-      '    if (!real_sd_bus_call) real_sd_bus_call = dlsym(RTLD_NEXT, "sd_bus_call");' \
-      '    if (usec > 0 && usec < 600000000ULL) usec = 600000000ULL;' \
-      '    return real_sd_bus_call(bus, m, usec, ret_error, reply);' \
-      '}' \
-      'int sd_json_parse(const char *string, int64_t flags, void **ret, unsigned *reterr_line, unsigned *reterr_column) {' \
-      '    static int (*real_sd_json_parse)(const char *, int64_t, void **, unsigned *, unsigned *) = NULL;' \
-      '    if (!real_sd_json_parse) real_sd_json_parse = dlsym(RTLD_NEXT, "sd_json_parse");' \
-      '    if (string && (flags & 1) && string[0] == '\''{'\'' && !strstr(string, "\"userName\"")) {' \
-      '        size_t slen = strlen(string);' \
-      '        if (slen < 3500) {' \
-      '            char buf[4096];' \
-      '            size_t pos = 0;' \
-      '            int has_field = 0;' \
-      '            buf[pos++] = '\''{'\'';' \
-      '            #define APPEND_RAW(s, n) do { if (pos + (n) < sizeof(buf) - 2) { memcpy(buf + pos, (s), (n)); pos += (n); } } while (0)' \
-      '            #define APPEND_KV(lit) do { if (has_field) APPEND_RAW(",", 1); APPEND_RAW((lit), strlen(lit)); has_field = 1; } while (0)' \
-      '            if (!strstr(string, "\"fido2UserPresencePermitted\":"))' \
-      '                APPEND_KV("\"fido2UserPresencePermitted\":true");' \
-      '            if (!strstr(string, "\"fido2UserVerificationPermitted\":"))' \
-      '                APPEND_KV("\"fido2UserVerificationPermitted\":true");' \
-      '            if (!strstr(string, "\"pkcs11ProtectedAuthenticationPathPermitted\":"))' \
-      '                APPEND_KV("\"pkcs11ProtectedAuthenticationPathPermitted\":true");' \
-      '            const char *tp = strstr(string, "\"tokenPin\":[");' \
-      '            if (tp && !strstr(string, "\"password\":")) {' \
-      '                const char *arr_start = tp + 11;' \
-      '                const char *arr_end = strchr(arr_start, '\'']'\'');' \
-      '                if (arr_end && (size_t)(arr_end - arr_start + 1) < 1024) {' \
-      '                    if (has_field) APPEND_RAW(",", 1);' \
-      '                    APPEND_RAW("\"password\":", 11);' \
-      '                    APPEND_RAW(arr_start, (size_t)(arr_end - arr_start + 1));' \
-      '                    has_field = 1;' \
-      '                }' \
-      '            }' \
-      '            if (strcmp(string, "{}") == 0) {' \
-      '                buf[pos++] = '\''}'\'';' \
-      '                buf[pos] = '\''\0'\'';' \
-      '                return real_sd_json_parse(buf, flags, ret, reterr_line, reterr_column);' \
-      '            } else if (has_field) {' \
-      '                APPEND_RAW(",", 1);' \
-      '                APPEND_RAW(string + 1, slen - 1);' \
-      '                buf[pos] = '\''\0'\'';' \
-      '                return real_sd_json_parse(buf, flags, ret, reterr_line, reterr_column);' \
-      '            }' \
-      '            #undef APPEND_KV' \
-      '            #undef APPEND_RAW' \
-      '        }' \
-      '    }' \
-      '    return real_sd_json_parse(string, flags, ret, reterr_line, reterr_column);' \
-      '}' \
-      'char *dgettext(const char *domainname, const char *msgid) {' \
-      '    static char *(*real_dgettext)(const char *, const char *) = NULL;' \
-      '    if (!real_dgettext) real_dgettext = dlsym(RTLD_NEXT, "dgettext");' \
-      '    if (msgid && strcmp(msgid, "Security token PIN: ") == 0)' \
-      '        return (char *)"Security token PIN (then touch token) or password: ";' \
-      '    return real_dgettext(domainname, msgid);' \
-      '}' \
-      'char *dcgettext(const char *domainname, const char *msgid, int category) {' \
-      '    static char *(*real_dcgettext)(const char *, const char *, int) = NULL;' \
-      '    if (!real_dcgettext) real_dcgettext = dlsym(RTLD_NEXT, "dcgettext");' \
-      '    if (msgid && strcmp(msgid, "Security token PIN: ") == 0)' \
-      '        return (char *)"Security token PIN (then touch token) or password: ";' \
-      '    return real_dcgettext(domainname, msgid, category);' \
-      '}' > /tmp/fast_homed.c && \
-    gcc -shared -fPIC -O2 /tmp/fast_homed.c -o /usr/lib/yubiOS/uki/libfast_homed.so -ldl && \
-    rm -f /tmp/fast_homed.c && \
     printf '[options]\nbroken_system_clock = true\n' > /etc/e2fsck.conf && \
-    install -d -m 0755 /usr/lib/systemd/system/systemd-homed.service.d /etc/systemd/system/systemd-homed.service.d \
-                       /usr/lib/systemd/system/gdm.service.d /etc/systemd/system/gdm.service.d && \
-    printf '[Service]\nEnvironment="SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-J size=64 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1"\nEnvironment="SYSTEMD_HOME_MOUNT_OPTIONS_EXT4=noquota,user_xattr,noatime,nodiscard,noinit_itable"\nEnvironment="SYSTEMD_BUS_TIMEOUT=600s"\nEnvironment="LD_PRELOAD=/usr/lib/yubiOS/uki/libfast_homed.so"\n' \
+    install -d -m 0755 /usr/lib/systemd/system/systemd-homed.service.d && \
+    printf '[Service]\n# 64 MiB home journal (zeroed synchronously in seconds) instead of the 1 GiB default.\n# No assume_storage_prezeroed/lazy_journal_init: LUKS2-on-sparse-file is not pre-zeroed.\nEnvironment="SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-J size=64"\n' \
       > /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
-    cp -f /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf \
-      /etc/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
-    printf '[Service]\nEnvironment="SYSTEMD_BUS_TIMEOUT=600s"\nEnvironment="SYSTEMD_HOME_SUSPEND=0"\nEnvironment="LD_PRELOAD=/usr/lib/yubiOS/uki/libfast_homed.so"\n' \
-      > /usr/lib/systemd/system/gdm.service.d/yubiOS-homed.conf && \
-    cp -f /usr/lib/systemd/system/gdm.service.d/yubiOS-homed.conf \
-      /etc/systemd/system/gdm.service.d/yubiOS-homed.conf && \
+    rm -f /usr/lib/yubiOS/uki/libfast_homed.so \
+          /etc/systemd/system/systemd-homed.service.d/yubiOS-homed.conf \
+          /etc/systemd/system/gdm.service.d/yubiOS-homed.conf \
+          /usr/lib/systemd/system/gdm.service.d/yubiOS-homed.conf && \
     if [ ! -f /usr/lib/yubiOS/secureboot/PK.auth ]; then \
       LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
     fi && \
@@ -471,7 +356,7 @@ RUN install -d -m 0755 /usr/lib/systemd/system/serial-getty@.service.d && \
 RUN set -- /usr/lib/modules/*/ && \
     kver="$(basename "$1")" && \
     if [ "$(uname -m)" != "aarch64" ]; then \
-      sed -i 's/optee tpm_ftpm_tee tee_stmm_efi dw_mmc dw_mmc-pltfm dw_mmc-rockchip sdhci-of-dwcmshc //' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
+      sed -i 's/optee tpm_ftpm_tee tee_stmm_efi dw_mmc.*"/"/' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
       sed -i 's/xhci_plat_hcd ehci_platform ohci_platform dwc3 dwc3_of_simple phy_rockchip_inno_usb2 phy_rockchip_naneng_combphy phy_rockchip_usbdp rockchipdrm dw_hdmi_qp phy_rockchip_samsung_hdptx analogix_dp //' /usr/lib/dracut.conf.d/50-yubiOS-fido2.conf; \
     fi && \
     dracut --no-hostonly --force --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \

@@ -62,7 +62,7 @@ fi
 if [ -b "$YUBIOS_ROOT_LV" ]; then
   mkdir -p /var/home
   if ! mountpoint -q /var/home; then
-    mount -o noatime,nodiscard,noinit_itable "$YUBIOS_ROOT_LV" /var/home 2>/dev/null \
+    mount -o noatime,noinit_itable "$YUBIOS_ROOT_LV" /var/home 2>/dev/null \
       || mount "$YUBIOS_ROOT_LV" /var/home 2>/dev/null || true
   fi
   if [ ! -e /home ] && [ ! -L /home ]; then
@@ -87,13 +87,25 @@ if [ "$max_ts" -gt 0 ] && [ "$now_ts" -le "$max_ts" ] 2>/dev/null; then
   date -s "@$((max_ts + 1))" >/dev/null 2>&1 || true
 fi
 
+# Purge the libfast_homed.so LD_PRELOAD drop-ins that fccd6e43/2641a872 copied into the persistent
+# /etc on every boot. A same-named /etc drop-in overrides the image's /usr/lib copy, so without
+# this purge an already-enrolled device would keep preloading the shim into systemd-homed,
+# systemd-homework and the whole GDM process tree (fallocate>64MiB -> EOPNOTSUPP, fsck skipped,
+# syncfs() stubbed, D-Bus secrets rewritten, all sd_bus_call timeouts forced to >=600s).
+# The image's /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf (mkfs journal
+# size only) stays authoritative.
 for unit_dropin in systemd-homed.service.d gdm.service.d; do
-  if [ -f "/usr/lib/systemd/system/${unit_dropin}/yubiOS-homed.conf" ]; then
-    mkdir -p "/etc/systemd/system/${unit_dropin}"
-    cp -f "/usr/lib/systemd/system/${unit_dropin}/yubiOS-homed.conf" \
-      "/etc/systemd/system/${unit_dropin}/yubiOS-homed.conf"
+  stale="/etc/systemd/system/${unit_dropin}/yubiOS-homed.conf"
+  if [ -f "$stale" ] && grep -qE 'LD_PRELOAD|libfast_homed|assume_storage_prezeroed' "$stale" 2>/dev/null; then
+    rm -f "$stale"
+    rmdir "/etc/systemd/system/${unit_dropin}" 2>/dev/null || true
+    YUBIOS_NEED_DAEMON_RELOAD=1
   fi
 done
+if [ "${YUBIOS_NEED_DAEMON_RELOAD:-0}" = 1 ]; then
+  # This runs Before=systemd-homed.service, so a reload makes the purge effective this boot.
+  systemctl daemon-reload >/dev/null 2>&1 || true
+fi
 
 # Ensure authselect-apply-changes cannot overwrite yubiOS PAM system-auth/password-auth
 # (which otherwise strips pam_systemd_home.so from login on tty1/kmsconvt and causes

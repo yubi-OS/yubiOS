@@ -137,8 +137,12 @@ ensure_luks_partition() {
   udevadm settle --timeout=10 || true
 
   echo "[yubiOS] Formatting /dev/lvm/usr_a and /dev/lvm/usr_b (ext4 + fs-verity)..." >&2
-  mkfs.ext4 -F -O verity,^has_journal -E nodiscard,lazy_itable_init=1,assume_storage_prezeroed=1 -L yubiOS_usr_a /dev/lvm/usr_a >&2
-  mkfs.ext4 -F -O verity,^has_journal -E nodiscard,lazy_itable_init=1,assume_storage_prezeroed=1 -L yubiOS_usr_b /dev/lvm/usr_b >&2
+  # NOTE: never pass assume_storage_prezeroed / lazy_journal_init here. These LVs sit on
+  # dm-crypt: sectors that were never written decrypt to pseudo-random bytes, not zeros, so
+  # mke2fs would flag garbage inode tables as EXT4_BG_INODE_ZEROED (verified with dumpe2fs on a
+  # random-backed image: 8/9 groups marked ITABLE_ZEROED over non-zero itables).
+  mkfs.ext4 -F -O verity,^has_journal -E nodiscard,lazy_itable_init=1 -L yubiOS_usr_a /dev/lvm/usr_a >&2
+  mkfs.ext4 -F -O verity,^has_journal -E nodiscard,lazy_itable_init=1 -L yubiOS_usr_b /dev/lvm/usr_b >&2
 
   mkdir -p /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init
   mount /dev/lvm/usr_a /run/yubiOS/usr-a-init >&2
@@ -151,7 +155,11 @@ ensure_luks_partition() {
   rmdir /run/yubiOS/usr-a-init /run/yubiOS/usr-b-init 2>/dev/null || true
 
   echo "[yubiOS] Formatting /dev/lvm/yubios-root (ext4)..." >&2
-  mkfs.ext4 -F -J size=64 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1,assume_storage_prezeroed=1 -L yubios-root /dev/lvm/yubios-root >&2
+  # 64 MiB journal is zeroed synchronously (seconds, not the 1 GiB default); inode tables stay
+  # lazily initialised and are flagged honestly (not "zeroed"), and /var/home is mounted with
+  # noinit_itable by ab-etc-merge.sh / enroll-homed.sh so ext4lazyinit never competes with
+  # systemd-homework I/O on the SD card.
+  mkfs.ext4 -F -J size=64 -E nodiscard,lazy_itable_init=1 -L yubios-root /dev/lvm/yubios-root >&2
 
   echo "$p_luks"
 }

@@ -1,23 +1,28 @@
-From 57380237cf1adf7cc4a5296f4ace1584478369bd Mon Sep 17 00:00:00 2001
+From 3cfa479bd169645f4f79031e7b7a75e41cf08de6 Mon Sep 17 00:00:00 2001
 From: yubiOS CI <ci@yubi-os.invalid>
 Date: Sat, 10 Oct 2026 00:00:00 +0000
-Subject: [PATCH] rockpro64, pinetab2: add OP-TEE firmware and reserved-memory
- nodes to U-Boot DT
+Subject: [PATCH] rockpro64, pinetab2: add OP-TEE firmware/reserved-memory
+ nodes and align rk3399 OS FDT
 
 Without the /firmware/optee node U-Boot binds no TEE device (Unable to
 open OP-TEE session, err=-19), so the fTPM, StMM and UEFI init fail on
 Pine64 RockPro64 (RK3399) and PineTab2 (RK3566). Reserve TZDRAM+SHMEM at
 0x30000000..0x32400000 under /reserved-memory matching rk3588-base.dtsi.
+
+For RockPro64 U-Boot proper (!CONFIG_XPL_BUILD), align the control FDT
+handed to EFI/Linux with the onboard Linux/Ubuntu rk3399-rockpro64.dtb
+(dmc disabled, vdd_center 750000..1350000 uV, cdn_dp edp_hpd pinctrl,
+pwm2 enabled) while keeping TPL/SPL LPDDR4 init unchanged.
 ---
- arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 23 +++++++++++++++++++++++
- arch/arm/dts/rk3566-pinetab2-u-boot.dtsi  | 23 +++++++++++++++++++++++
- 2 files changed, 46 insertions(+)
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 46 +++++++++++++++++++++++
+ arch/arm/dts/rk3566-pinetab2-u-boot.dtsi  | 23 ++++++++++++
+ 2 files changed, 69 insertions(+)
 
 diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-index cd84269..d72d569 100644
+index cd84269..f231839 100644
 --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
 +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-@@ -68,3 +68,26 @@
+@@ -68,3 +68,49 @@
  &vdd_log {
  	regulator-init-microvolt = <950000>;
  };
@@ -44,6 +49,29 @@ index cd84269..d72d569 100644
 +		};
 +	};
 +};
++
++/* Match Ubuntu 26.04 / Linux onboard rk3399-rockpro64.dtb in the U-Boot proper
++ * control FDT handed to EFI/Linux (while keeping TPL/SPL's LPDDR4 dmc/regulator
++ * init intact under CONFIG_XPL_BUILD). */
++#ifndef CONFIG_XPL_BUILD
++&dmc {
++	status = "disabled";
++};
++
++&vdd_center {
++	regulator-min-microvolt = <750000>;
++	regulator-max-microvolt = <1350000>;
++};
++
++&cdn_dp {
++	pinctrl-names = "default";
++	pinctrl-0 = <&edp_hpd>;
++};
++
++&pwm2 {
++	status = "okay";
++};
++#endif
 diff --git a/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi b/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
 index eb18008..5c4659a 100644
 --- a/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi

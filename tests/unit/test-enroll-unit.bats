@@ -186,19 +186,40 @@ run_enroll_gate() {
   [ "$status" -eq 0 ]
 }
 
-@test "enroll-homed.sh and ab-etc-merge.sh configure fast activation (noinit_itable, nodiscard, broken_system_clock, gdm drop-in)" {
+@test "homed fast path uses only documented systemd knobs (no LD_PRELOAD shim, discard on, noinit_itable, broken_system_clock)" {
   local homed="usr/lib/yubiOS/enroll-homed.sh"
+  local luks="usr/lib/yubiOS/enroll-luks.sh"
   local merge="usr/lib/yubiOS/ab-etc-merge.sh"
+  local cf="Containerfile"
   local dconf="usr/lib/dconf/db/local.d/00-yubios-wallpaper"
   [ -f "$homed" ] || homed="/$homed"
+  [ -f "$luks" ] || luks="/$luks"
   [ -f "$merge" ] || merge="/$merge"
   [ -f "$dconf" ] || dconf="/$dconf"
-  run grep -q "SYSTEMD_HOME_MOUNT_OPTIONS_EXT4=.*noinit_itable" "$homed"
+  # Online + offline discard: homework never fallocate()s the whole image (create/activate/deactivate)
+  run grep -q -- "--luks-discard=yes" "$homed"
   [ "$status" -eq 0 ]
-  run grep -q "luks-extra-mount-options=noatime,nodiscard,noinit_itable" "$homed"
+  run grep -q -- "--luks-offline-discard=no" "$homed"
+  [ "$status" -eq 0 ]
+  run grep -q -- "--luks-extra-mount-options=noinit_itable" "$homed"
+  [ "$status" -eq 0 ]
+  # Regression guard (fvf33): no symbol-interposition shim anywhere on the homed/GDM path
+  run grep -E "LD_PRELOAD=.*libfast_homed|gcc .*libfast_homed" "$homed" "$merge"
+  [ "$status" -ne 0 ]
+  # Regression guard: dm-crypt/LUKS-on-sparse-file is never "pre-zeroed"
+  run grep -E "assume_storage_prezeroed=1|lazy_journal_init=1" "$homed" "$luks"
+  [ "$status" -ne 0 ]
+  # ab-etc-merge purges stale /etc drop-ins instead of copying them in
+  run grep -q "grep -qE 'LD_PRELOAD|libfast_homed|assume_storage_prezeroed'" "$merge"
   [ "$status" -eq 0 ]
   run grep -q "broken_system_clock = true" "$merge"
   [ "$status" -eq 0 ]
   run grep -q "enable-smartcard-authentication=false" "$dconf"
   [ "$status" -eq 0 ]
+  if [ -f "$cf" ]; then
+    run grep -E "libfast_homed\.so -ldl|LD_PRELOAD=/usr/lib/yubiOS/uki/libfast_homed\.so|assume_storage_prezeroed=1" "$cf"
+    [ "$status" -ne 0 ]
+    run grep -q 'SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-J size=64"' "$cf"
+    [ "$status" -eq 0 ]
+  fi
 }
