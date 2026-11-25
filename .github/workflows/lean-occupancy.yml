@@ -70,4 +70,6 @@ jobs:
       - name: Install numerical dependencies
         run: sudo apt-get update -qq && sudo apt-get install -y python3-numpy python3-scipy
       - name: Recompute the frozen study
-        run: /usr/bin/python3 tools/occupancy/replay.py --output "$RUNNER_TEMP/occupancy"
+        run: |
+          /usr/bin/python3 tools/occupancy/replay.py --output "$RUNNER_TEMP/occupancy" \
+            --check-report papers/data/occupancy/results.json

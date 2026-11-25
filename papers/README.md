@@ -1,6 +1,12 @@
 # Lensing the Question Space + Spherical Diffusion (SLERP extension)
 **2026-08-13.** Consolidates [lensing-question-space-brainstorm-2026-08-13.md](lensing-question-space-brainstorm-2026-08-13.md) and extends it: geodesic (SLERP-style) interpolation on the hypersphere as the generator of a diffusion process, tying the whole chain together. Source works: `is-this-x-2026-08-12-Final` and `learned-latent-curves-2026-08-06`.
 
+## Paper V — Conserved occupancy and recognition
+
+[Read the paper (PDF)](conserved-occupancy-2026-11-25.pdf) · [TeX source](conserved-occupancy-2026-11-25.tex) · [Conversation summary](data/occupancy/conversation.md) · [Reproduce the measurements](../tools/occupancy/README.md) · [Lean theorems](data/lean/OccupancyBounds.lean)
+
+Paper V carries the angular and binary spectra into a held-out recognition experiment. On two sets of 36 authored notes, the powered ambient chart raised greedy packing from 3 to 7 and 6 to 11 at the reference chord. Native centroids recognized 24 and 25. Every class allocation sums back to the input amount, whether measured in note-equivalents or UTF-8 bytes.
+
 ---
 
 ## PART I — Lensing findings (consolidated)

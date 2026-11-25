@@ -121,10 +121,34 @@ def verify(dest):
     )
 
 
+def compare_report(actual, expected, path="report"):
+    """Check exact discrete endpoints and allow normal floating-point variation."""
+    if isinstance(expected, dict):
+        if actual.keys() != expected.keys():
+            raise ValueError(f"{path}: report fields changed")
+        for key, value in expected.items():
+            compare_report(actual[key], value, f"{path}.{key}")
+    elif isinstance(expected, list):
+        if len(actual) != len(expected):
+            raise ValueError(f"{path}: report length changed")
+        for i, value in enumerate(expected):
+            compare_report(actual[i], value, f"{path}[{i}]")
+    elif isinstance(expected, float):
+        if not np.isclose(actual, expected, rtol=1e-7, atol=1e-9):
+            raise ValueError(f"{path}: observed {actual}, expected {expected}")
+    elif actual != expected:
+        raise ValueError(f"{path}: observed {actual}, expected {expected}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--fixture", type=Path, default=FIXTURE)
+    parser.add_argument(
+        "--check-report",
+        type=Path,
+        help="compare all reported endpoints with a saved JSON report",
+    )
     args = parser.parse_args()
     if not __debug__:
         parser.error("Replay checks require normal Python execution")
@@ -173,6 +197,8 @@ def main():
     (args.output / "summary.json").write_text(
         json.dumps(summary, indent=2, allow_nan=False) + "\n"
     )
+    if args.check_report:
+        compare_report(summary, read(args.check_report))
     print("PASS: both caches independently reproduce the paper endpoints.")
 
 

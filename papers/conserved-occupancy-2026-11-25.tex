@@ -1,0 +1,202 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype,amsmath,amssymb,amsthm,mathtools,booktabs,array}
+\usepackage{xcolor,hyperref}
+\usepackage[round,authoryear]{natbib}
+\hypersetup{colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black,citecolor=blue!60!black}
+\newtheorem{proposition}{Proposition}
+\newcommand{\E}{\mathbb E}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\dd}{\mathrm d}
+\emergencystretch=2em
+\title{What Does a Resolved Embedding Resemble?\\
+{\large Conserved Gibbs Occupancy, Fourier Degrees and Held-Out Recognition}}
+\author{yubiOS research program}
+\date{November 25, 2026 \qquad Paper V}
+\begin{document}
+\maketitle
+\begin{abstract}
+A powered chart may separate observations without improving a classifier. We connect four yubiOS papers through an experiment in which geometry assigns each observation fractions of six mechanisms and the fractions sum to its measured amount. The construction parallels the two steps of equilibrium counting: convert a sample into a count of specified entities, then apportion that count with normalized Boltzmann weights. Two observed Cloudflare BGE-M3 passes cover 108 authored sensor notes from 18 instruments. On two held-out sets of 36, a reference-fitted spherical dilation increased greedy packing from 3 to 7 and 6 to 11 at a fixed chord. Temperature-adjusted Gibbs recognition rose from 21 to 22 and 23 to 26. The paired station tests gave $p=1.00$ and $0.50$. Native centroids recognized 24 and 25. In a four-bit representation, 181 of 630 query pairs collided, while no individual Walsh degree passed the blocked class-label test. The powered allocation of 4,856 text bytes on the second holdout assigned 928.88 bytes to drift. These outcomes distinguish resolution, resemblance and recognition in one reproducible measurement.
+\end{abstract}
+
+\section{Four instruments, one experiment}
+Paper I fits periodic curves to learned coordinates. A fitted curve can describe recurring structure even when its coefficients depend on the sampling of the curve. Paper II asks whether a measured feature survives a matched null, and organizes configurations into energy shells. Paper III and the papers README connect angular spectra to chart choice and heat flow. Paper IV counts the distinguishable positions remaining at a specified resolution and selects a prefix of a binary frame. Together these operations raise a question left open by counting alone: can a query assign more evidence to its known mechanism than to other mechanisms on an unseen instrument? \citep{p1,p2,p3,p4,readme}
+
+We authored one note for each combination of 18 instruments and six mechanisms: clipping, drift, gain, lag, offset and quantization. The mechanism is the target label. Instrument identity is the blocking variable. We embedded the text field alone. Six instruments supplied 36 references, six supplied holdout A and six supplied a fresh holdout B. The two query sets are disjoint from each other and from the reference instruments. Templates, author and domain remain shared. B tests transfer to other authored instruments within this design. Words in a note may reveal a mechanism directly. This study does not measure recognition of independently collected physical faults.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}p{.19\linewidth}p{.32\linewidth}p{.39\linewidth}@{}}
+\toprule
+Prior instrument & Quantity carried forward & Application here\\ \midrule
+I. Learned curves & Sampled Fourier synthesis, fitted frame & Check when coefficient energy equals measured power.\\
+II. Question space & Shell occupancy and matched-null residual & Form class likelihoods and test geometry against fixed margins.\\
+III. Curved corpus & Chart, spherical harmonics and diffusion & Compare degree shares under two chart powers.\\
+IV. Focal point & Prefix gain, collision and packing & Freeze a four-bit reference frame and count resolved positions.\\
+V. This paper & Conserved class allocations & Score fresh notes and compare against native centroids and blocked labels.\\
+\bottomrule
+\end{tabular}
+\caption{Each readout has a distinct denominator. The held-out labels enter the assessment after the map and the scoring rule have been fixed.}
+\end{table}
+
+\section{The amount that multiplies a Boltzmann fraction}
+For a pure substance of mass $m$ and molar mass $M$, $n=m/M$ is its amount in moles. One mole contains exactly $6.02214076\times10^{23}$ specified entities. The corresponding conversion factor is $N_A=6.02214076\times10^{23}\ {\rm mol}^{-1}$. For molecules with single-molecule levels $\epsilon_i$, degeneracies $g_i$, and temperature $T>0$, the canonical model gives \citep{si,tong}
+\begin{align}
+ N&=nN_A,& Z&=\sum_i g_i e^{-\epsilon_i/(k_BT)},&
+ p_i&=g_i e^{-\epsilon_i/(k_BT)}/Z,& \E N_i&=Np_i.\label{eq:mole}
+\end{align}
+For a mixture apply the mass conversion separately to each species. With $E_i^{\rm mol}=N_A\epsilon_i$ and $R=N_A k_B$, $E_i^{\rm mol}/(RT)=\epsilon_i/(k_BT)$. Degeneracy can enter as an effective energy $\epsilon_i-k_BT\log g_i$. These are canonical ensemble weights. The kinetic Boltzmann transport equation addresses a different physical problem.
+
+For a query $q$ and reference bank $R_c$ of size $n_c>0$, choose an energy $E(q,r)$ and bandwidth $\tau>0$. With $\pi_c\ge0$ and at least one positive prior define
+\begin{equation}
+ s_c(q)=\frac{\pi_c}{n_c}\sum_{r\in R_c}e^{-E(q,r)/\tau},
+ \qquad p_c(q)=s_c(q)\big/\sum_b s_b(q).                 \label{eq:alloc}
+\end{equation}
+Energy on a unit sphere is $1-q^\top r=\|q-r\|^2/2$. On the cube we use Hamming distance. Equal priors were used in the study. On the sphere the exponential kernel is proportional to a directional kernel in $q^\top r$ \citep{zhang}. The probabilities are normalized resemblance scores. Their calibration as predictive probabilities would require independent validation. Replicating a whole bank $k$ times multiplies its sum and size by $k$. With the chart, bandwidth and priors frozen its mean is invariant. Raw sums instead encode a frequency prior. Genuine shell multiplicities, class priors and duplicated records therefore need different accounting.
+
+\begin{proposition}[Conservation of a measured amount]
+Give query $q$ an amount $a_q$. Then $A_c=\sum_q a_qp_c(q)$ satisfies $\sum_c A_c=\sum_q a_q$. In particular write $U_c=\sum_qp_c(q)$ for note-equivalents and $B_c=\sum_q b_qp_c(q)$ for allocated UTF-8 text bytes. For $U_c>0$, $\overline b_c=B_c/U_c$ has units bytes per assigned note-equivalent.
+\end{proposition}
+\begin{proof}Interchange the finite sums and apply $\sum_c p_c(q)=1$ separately to every query. Multiplying $\overline b_c$ by $U_c$ recovers $B_c$.\end{proof}
+Equation~\eqref{eq:mole} motivates the separation of amount from allocation. $\overline b_c$ is a weighted mean of the observed lengths. It changes with the corpus, encoding or scorer. The reference bank has no physical molar mass, temperature bath or demonstrated thermal equilibrium.
+
+\section{Curvature, scale and resolution}
+Let $p$ be the normalized reference mean and $x\in S^{D-1}$, $x\ne-p$. Orthogonal projection followed by a stereographic chart, dilation and inverse chart gives
+\begin{equation}
+ w(x)=\frac{x-(p^\top x)p}{1+p^\top x},\quad
+ L_s(x)=\frac{2sw(x)+(1-s^2\|w(x)\|^2)p}{1+s^2\|w(x)\|^2},\quad
+ s=\left(|R|^{-1}\sum_{r\in R}\|w(r)\|^2\right)^{-1/2}.\label{eq:lens}
+\end{equation}
+The two numerator terms are perpendicular, so $4u+(1-u)^2=(1+u)^2$ for $u=s^2\|w\|^2$ proves unit norm. $L_1$ is identity and $L_{1/s}$ reverses $L_s$. The planar map uses the opposite pole convention, with last coordinate $(u-1)/(u+1)$. The ambient experiment uses all 1,024 coordinates. The PCA globe uses two planar coordinates lifted to $S^2$. Its density and angular coefficients can change even when labels and distinct codes stay fixed. In the ambient experiment we multiply $\tau=0.05$ by the ratio of powered to native median reference pair energies. Uniform energy scaling would cancel exactly in $E/\tau$. A stereographic dilation generally scales different pairs by different factors.
+
+On a sphere of radius $R_s$, right geodesic legs of lengths $a,b$ satisfy $\cos(c/R_s)=\cos(a/R_s)\cos(b/R_s)$ \citep{green,sphere}. On the unit sphere, writing $E_a=1-\cos a$ gives
+\begin{equation}
+ E_c=E_a+E_b-E_aE_b. \label{eq:curve}
+\end{equation}
+An octant triangle has $a=b=c=\pi/2$, so $a^2+b^2>c^2$. Greenwald's string experiment illustrates this departure from the plane. For a numerical control we took the first two A queries' angular distances from $p$, preserved both lengths, and orthogonalized their tangent directions at $p$. The legs were 0.8464 and 0.8032 radians, yielding $a^2+b^2-c^2=0.167717$ rad$^2$. This measures a constructed right angle. It makes no assertion about the angle between the two original semantic directions.
+
+For prefix length $j$, let $C_j$ be occupied code count, $D_0(j)=\log_2 C_j$, and $\Delta_j=D_0(j)-D_0(j-1)$. Gains telescope. Paper IV stops at the first gain below half a bit. The nine reference prefix counts were $2,4,6,9,12,16,24,29,32$, giving $j^\star=4$. With empirical frequencies $h_x/N$ the collision effective count is $2^{D_2}=1/\sum_x(h_x/N)^2$. Greedy packing at chord $\varepsilon$ retains points in order when each is at least $\varepsilon$ from every earlier retained point. Its count lower-bounds the maximum packing number. The representation, radius and ordering must accompany a packing result.
+
+\section{Three Fourier operations and the multiplicity test}
+A sampled curve with coefficients $\beta_i$ and sampled basis $\Phi_{qi}$ has power
+\begin{equation}
+ \|\Phi\beta\|^2=\beta^\top G\beta,\quad G=\Phi^\top\Phi.
+\end{equation}
+If $G=NI$, this equals $N\sum_i\beta_i^2$. Arbitrarily sampled learned frequencies may have cross terms. On $S^2$, orthonormal surface harmonics have $\Delta Y_{\ell m}=-\ell(\ell+1)Y_{\ell m}$ and $2\ell+1$ modes at degree $\ell$. Heat time $t$ multiplies an amplitude by $e^{-t\ell(\ell+1)}$, hence power by $e^{-2t\ell(\ell+1)}$. The continuous heat kernel is
+\[
+ K_t(x^\top y)=\sum_{\ell\ge0}\frac{2\ell+1}{4\pi}
+ e^{-t\ell(\ell+1)}P_\ell(x^\top y).
+\]
+The README relates this to the great-circle interpolant
+$\big(\sin((1-u)\theta)x+\sin(u\theta)y\big)/\sin\theta$ for $0<\theta<\pi$ \citep{readme,shoemake}. A single deterministic interpolation is a geodesic segment. Random walks with a specified transition law can model diffusion. We measured empirical angular coefficient shares through degree three; we did not fit a heat time to the powered globe.
+
+On the $d$-bit cube let $\chi_S(x)=(-1)^{S\cdot x}$, $\widehat f(S)=\sum_x f(x)\chi_S(x)$, and $f(x)=2^{-d}\sum_S\widehat f(S)\chi_S(x)$ \citep{odonnell}. The Hamming kernel $k(x)=r^{|x|}$ has $r=e^{-1/\tau}$. Multiplying one-bit transforms gives
+\begin{equation}
+ \widehat k(S)=(1+r)^{d-j}(1-r)^j,\quad
+ \widehat k(S)/\widehat k(\varnothing)=((1-r)/(1+r))^j,\quad j=|S|.\label{eq:walsh}
+\end{equation}
+There are exactly $\binom dj$ masks of degree $j$. For the normalized class histogram $h_c$, $k*h_c$ is the direct Hamming Gibbs mean. Its degree-$j$ contribution is
+\begin{equation}
+ u_{jc}(q)=2^{-d}\sum_{|S|=j}\widehat k(S)\widehat h_c(S)\chi_S(q).\label{eq:signed}
+\end{equation}
+Normalization across classes follows summation over degrees. Individual contributions may be negative. With a raw whole-corpus histogram $h$, the distinct-index pair count at Hamming separation $t$ instead uses squared coefficients,
+\begin{align}
+ K_t(j)&=\sum_i(-1)^i {j\choose i}{d-j\choose t-i},\\
+ H_t&=\tfrac12\left[2^{-d}\sum_S\widehat h(S)^2K_t(|S|)-N\,{\bf1}_{t=0}\right].\label{eq:pairs}
+\end{align}
+Out-of-range binomial coefficients are zero. In particular $H_0=\sum_x h_x(h_x-1)/2$. The same representation supplies an unsigned measure of clustering and a signed test of mechanism alignment.
+
+A multiplicity argument alone cannot establish a finite amount. With $2^n$ states at level $n$ and weight $w_n=m_0/[2^n(n+1)]$ per state,
+\begin{equation}
+ \sum_{n<L}2^nw_n=m_0\sum_{n<L}(n+1)^{-1},\qquad
+ \sum_{n\ge0}2^n w_n^2=\sum_{n\ge0}\frac{m_0^2}{2^n(n+1)^2}\le2m_0^2 .
+\end{equation}
+For $m_0>0$ the first series diverges. The second is convergent power when $w_n$ is an amplitude. A finite corpus supplies one assignment per query at a given prefix. Summing occupancies over every prefix would count observations repeatedly. The zero-mass and negative-mass cases of the algebra should not be read as positive physical amounts.
+
+\section{Design, nulls and results}
+The fixture records two Workers AI passes, 18 batches of six texts per pass \citep{bge,cf}. One omitted pooling and one requested mean pooling. Both reported CLS in all batches. Ninety-six rows were componentwise identical; the minimum same-text cosine was 0.99999867. All stored top choices agreed. The provider responses support a repeatability test of the observed endpoint. They supply no comparison of two realized pooling modes.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Statistic (36 queries per column)&A&B\\ \midrule
+Native / powered greedy packing at chord 0.9793&3 / 7&6 / 11\\
+Native / powered packing at chord 0.095&36 / 36&36 / 36\\
+Native / powered mean resultant length&0.768 / 0.454&0.727 / 0.440\\
+Native nearest reference, correct&16&17\\
+Native centroid, correct&24&25\\
+Native / powered Gibbs, fixed $\tau$, correct&21 / 23&23 / 23\\
+Native / powered Gibbs, adjusted $\tau$, correct&21 / 22&23 / 26\\
+Paired two-sided station-swap $p$, adjusted&1.000&0.500\\
+\bottomrule
+\end{tabular}
+\caption{Ambient-sphere outcomes. Reference-only power $s=2.6854$, energy scale ratio 2.3422. Each centroid is the normalized mean of that class's reference vectors.}
+\end{table}
+The primary geometric gain was visible at the reference median chord. The canonical small chord was already saturated. Remove-station Gibbs recognized 23 on A versus 16 for native nearest neighbours (eight gained, one lost, two-sided station-swap $p=0.1875$). On B a second analysis used 18 references to fit a semantic or PCA frame and 18 disjoint references for retrieval. Six-bit semantic Gibbs scored 7 and PCA Gibbs 9. Their paired $p=0.78125$. These comparisons have different reference budgets from the full 36-reference baseline.
+
+For geometry we used Curveball trades preserving each matrix's row and column sums \citep{strona,carstens}. With null location $\mu_0$ and sample standard deviation $\sigma_0>0$, report $z=(v-\mu_0)/\sigma_0$ and the repository convention $L=20\log_{10}|z|$ dBc. The sign of $z$ must travel with $L$ because the logarithm discards direction. This level expresses a ratio to the null spread. Monte Carlo upper tails use $(1+\#\{v_b\ge v\})/(B+1)$ \citep{phipson}. Two trade windows probe sensitivity; finite mixing and reuse of authored data limit inference.
+
+On A the four-bit representation gave five occupied cells and 3.26 collision-effective cells. The 630 unordered note pairs occupied shells $(181,252,161,36,0)$. Across 399 draws per window the null mean collision counts were 169.73 and 169.46 ($z=3.12,3.25$, $+9.88,+10.24$ dBc; both one-sided $p=0.0175$). A separate statistic $V_2=(\lambda_1+\lambda_2)/\sum_i\lambda_i$ on the active-bit correlation matrix was 0.865, against 199 draws per window giving $+9.29,+9.59$ dBc. The adjacent-gap diagnostic used the longer frozen probe. For ascending eigenvalues, $g_i=\lambda_{i+1}-\lambda_i$ and $\tilde r_i=\min(g_i,g_{i+1})/\max(g_i,g_{i+1})$, omitting zero denominators \citep{atas}. Six ratios averaged 0.495, inside both central null intervals $[0.278,0.744]$ and $[0.291,0.758]$. The attachment's pair-correlation analogy suggests a choice of diagnostic. Zeta-zero pair correlation and random-matrix spacing laws require their own hypotheses and ensembles \citep{montgomery}. We used the measured fixed-margin null.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}rrrrrrr@{}}
+\toprule
+Walsh degree & Masks & Signed contrast & Max-$p$ & Alone & Through degree & Omit degree\\ \midrule
+1 &4 & 0.00481 &0.3205 &6&6&7\\
+2 &6 & 0.00361 &0.3927 &7&7&5\\
+3 &4 &$-0.00164$&1.0000 &5&7&7\\
+4 &1 &$-0.00123$&1.0000 &5&7&7\\ \bottomrule
+\end{tabular}
+\caption{Holdout A, 36 cases. Last three columns count correct choices when retaining only that degree, accumulating through it, or removing it from the full score. Ties use the frozen class order.}
+\end{table}
+For each degree we averaged the true-class contribution in \eqref{eq:signed} minus the mean of the five other contributions. We compared this contrast against 9,999 within-instrument label shuffles and the observed labeling. The adjusted upper-tail test used the maximum standardized contrast over the four degrees within each permutation. No degree passed at 0.05. The complete score gave 7/36, blocked-label $p=0.3394$. Removing degree two cost two correct choices; the table records an exploratory ablation. On the PCA globe, degree-one angular power share moved from 0.285 to 0.202 under RMS power and degree-three power from 0.326 to 0.376. Globe Gibbs stayed at 6/36. Angular powers and Walsh contrasts measure different functions on different domains.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+B mechanism & Assigned notes & Assigned UTF-8 bytes & Bytes per assigned note\\ \midrule
+Clipping & 5.723 & 768.88 & 134.35\\
+Drift & 6.817 & 928.88 & 136.25\\
+Gain & 5.929 & 788.75 & 133.03\\
+Lag & 5.455 & 751.18 & 137.69\\
+Offset & 5.749 & 766.79 & 133.38\\
+Quantization & 6.326 & 851.52 & 134.60\\
+\midrule Total &36.000&4,856.00&134.89\\ \bottomrule
+\end{tabular}
+\caption{Conserved allocations for B under powered, adjusted-temperature Gibbs. True mechanism counts are six each. Displayed allocations are rounded independently.}
+\end{table}
+Drift receives 6.817 note-equivalents and 928.88 bytes, giving 136.25 bytes per assigned note-equivalent. The repeat pass assigns 928.87 bytes to drift. The byte count covers each text field alone. Replicating every offset reference eightfold in the frozen A calculation moved the largest normalized class probability by $1.7\times 10^{-16}$. Removing the within-class divisor changed 16 top choices under the replicated-bank comparison. On B the powered scorer's accuracy exceeded its own blocked-label null ($z=8.65$, $+18.74$ dBc, $p=0.0001$). Testing a scorer against shuffled labels answers whether its decisions align with labels; the paired chart comparison in Table~2 answers whether power improved them.
+
+\section{What is checked}
+\code{OccupancyBounds.lean} contains 33 named theorems. It proves positivity and normalization, interchange of finite amounts, molar exponent conversion, replication, shell multiplicity and regrouping, finite and infinite dyadic claims, the sphere-lift norm identity, and the spherical cosine-energy identity given the right-triangle law. An octant witnesses the strict squared-arc inequality. It also proves sampled Gram expansion, finite Parseval under stated orthogonality, the heat amplitude-to-power factor, Walsh product-kernel factorization and finite convolution, as well as collision, log-ratio and gap bounds. The hash-pinned scope manifest identifies every statement and the definitions on which it operates. The continuous spherical heat kernel, spherical cosine law and physical canonical model enter as cited mathematical background. The formal file does not derive a continuum physical model from embeddings.
+
+\code{tools/occupancy/replay.py} recomputes both observed passes. It uses the repository point-map, Boltzmann collapse, sonometer, fixed-margin sampler, angular decomposer and Walsh--Krawtchouk routines. The empirical checks include agreement of direct and transformed scores, byte conservation, exact per-query classifications across passes and finite-precision inverse geometry. The computed statistics depend on text, model response, fixture order and sampling seeds. The dedicated CI workflow builds against the project's pinned upstream Lean and mathlib, checks axioms, and runs both datasets without a Cloudflare credential. The optional re-embedding command accepts a separately supplied credential for a fresh measurement.
+
+What transfers from statistical mechanics is the accounting: specify the entity, preserve its amount and normalize a distribution over alternatives. Here that accounting exposes two distinct findings. The ambient chart resolved more directions at a meaningful fixed scale. On the heavily compressed cube, collisions survived a geometry null while signed degree alignment failed its class-label test. Native centroids provide a strong benchmark for the next test on independently collected notes.
+
+\begin{thebibliography}{99}\small
+\bibitem[Tchatalbachian(2026a)]{p1} S. Tchatalbachian. \emph{Learned Latent Curves and the Hyperspherical-Harmonic Variant}. Paper I, yubiOS, 6 August 2026.
+\bibitem[Tchatalbachian(2026b)]{p2} S. Tchatalbachian. \emph{Is This X? A Null-Standardized Question Space for Corpus Curvature}. Paper II, yubiOS, 12 August 2026.
+\bibitem[Tchatalbachian(2026c)]{p3} S. Tchatalbachian. \emph{The Curved-Corpus Program, Unified}. Paper III, yubiOS, 13 August 2026, revised source 22 August.
+\bibitem[Tchatalbachian(2026d)]{p4} S. Tchatalbachian. \emph{How Many Remain at Scale $\varepsilon$?} Paper IV, yubiOS, 10 November 2026.
+\bibitem[yubiOS(2026)]{readme} yubiOS. \emph{Lensing the Question Space + Spherical Diffusion}, program README, papers and instruments. \href{https://github.com/yubi-OS/yubiOS/tree/551ce15711132ad9c0c8bc369d2e7f64c9c809dc/papers}{Repository snapshot}.
+\bibitem[NIST(2019)]{si} NIST. \emph{The International System of Units}, SP 330, sec.~2. \href{https://www.nist.gov/pml/special-publication-330/sp-330-section-2}{SI defining constants and units}.
+\bibitem[Tong(2012)]{tong} D. Tong. \emph{Statistical Physics}, University of Cambridge lecture notes, ch.~1. \href{https://www.damtp.cam.ac.uk/user/tong/statphys.html}{Canonical ensemble}.
+\bibitem[Greenwald(n.d.)]{green} S. J. Greenwald. \emph{Dr. Sarah's Greenwaldian String/Yarn Experiment}. Appalachian State University. \href{https://cs.appstate.edu/sjg/futurama/Greenwaldianworksheet.pdf}{Original worksheet}.
+\bibitem[Su(n.d.)]{sphere} F. E. Su. \emph{Spherical Pythagorean Theorem}. Harvey Mudd College, Math Fun Facts. \href{https://math.hmc.edu/funfacts/spherical-pythagorean-theorem/}{Derivation}.
+\bibitem[O'Donnell(2014)]{odonnell} R. O'Donnell. \emph{Analysis of Boolean Functions}. Cambridge University Press. \href{https://www.cs.cmu.edu/~odonnell/}{Author's edition and errata}.
+\bibitem[Shoemake(1985)]{shoemake} K. Shoemake. Animating rotation with quaternion curves. \emph{SIGGRAPH}, 245--254. \href{https://doi.org/10.1145/325334.325242}{doi:10.1145/325334.325242}.
+\bibitem[Zhang and Chen(2021)]{zhang} Y. Zhang and Y.-C. Chen. Kernel smoothing, mean shift, and their learning theory with directional data. \emph{JMLR} 22(154). \href{https://www.jmlr.org/papers/v22/20-1194.html}{Article}.
+\bibitem[Chen et al.(2024)]{bge} J. Chen et al. BGE M3-Embedding. \href{https://arxiv.org/abs/2402.03216}{arXiv:2402.03216}.
+\bibitem[Cloudflare(2026)]{cf} Cloudflare. \emph{BAAI BGE-M3}, Workers AI model documentation. \href{https://developers.cloudflare.com/workers-ai/models/bge-m3/}{Model card and API}.
+\bibitem[Strona et al.(2014)]{strona} G. Strona et al. A fast and unbiased procedure to randomize ecological binary matrices with fixed row and column totals. \emph{Nature Communications} 5, 4114. \href{https://doi.org/10.1038/ncomms5114}{doi:10.1038/ncomms5114}.
+\bibitem[Carstens(2015)]{carstens} C. J. Carstens. Proof of uniform sampling of binary matrices with fixed row sums and column sums for the fast Curveball algorithm. \emph{Phys.\ Rev.\ E} 91, 042812. \href{https://doi.org/10.1103/PhysRevE.91.042812}{Article}.
+\bibitem[Atas et al.(2013)]{atas} Y. Y. Atas et al. Distribution of the ratio of consecutive level spacings in random matrix ensembles. \emph{Phys.\ Rev.\ Lett.} 110, 084101. \href{https://doi.org/10.1103/PhysRevLett.110.084101}{Article}.
+\bibitem[Montgomery(1973)]{montgomery} H. L. Montgomery. The pair correlation of zeros of the zeta function. \emph{Proc.\ Symp.\ Pure Math.} 24, 181--193. \href{https://public.websites.umich.edu/~hlm/paircor1.pdf}{Author's copy}.
+\bibitem[Phipson and Smyth(2010)]{phipson} B. Phipson and G. K. Smyth. Permutation $p$-values should never be zero. \emph{Stat.\ Appl.\ Genet.\ Mol.\ Biol.} 9(1). \href{https://doi.org/10.2202/1544-6115.1585}{Article}.
+\end{thebibliography}
+\end{document}
