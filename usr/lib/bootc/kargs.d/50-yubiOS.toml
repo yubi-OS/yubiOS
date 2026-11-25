@@ -33,6 +33,6 @@ kargs = [
   "audit=0",
   "splash",
   "quiet",
-  "plymouth.ignore-serial-consoles",
+  # To enable boot logo add plymouth.ignore-serial-consoles
   "no_console_suspend",
 ]
