@@ -109,7 +109,15 @@ def verify(dest):
         b["byte_shares"][b["class_order"].index("drift")], 928.88, atol=0.02
     )
     return dict(
-        focal_dimension=4, ambient=ambient, recognition=account, spectral=spectral
+        focal_dimension=4,
+        ambient=ambient,
+        recognition=account,
+        spectral=spectral,
+        focal_ladder=maps["trial"]["ladder"]["counts"],
+        v2=result["held_out_v2"],
+        class_replication=result["class_replication"],
+        cohort_a_methods={k: v["correct"] for k, v in result["methods"].items()},
+        cohort_b_frame_methods={k: v["correct"] for k, v in fresh["methods"].items()},
     )
 
 
@@ -153,6 +161,13 @@ def main():
         identical_rows=exact,
         observations=108,
         dimension=1024,
+        min_matched_cosine=float(
+            np.min(
+                np.sum(xs[0] * xs[1], axis=1)
+                / (np.linalg.norm(xs[0], axis=1) * np.linalg.norm(xs[1], axis=1))
+            )
+        ),
+        repeat_drift_bytes=reports[1]["recognition"]["fresh"]["rms"]["byte_shares"][1],
         **reports[0],
     )
     (args.output / "summary.json").write_text(

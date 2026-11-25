@@ -82,6 +82,22 @@ out = dict(
     squared_norm_error=float(np.max(abs(np.sum(lens(x, multiplier) ** 2, 1) - 1))),
     inverse_max_error=float(np.max(abs(lens(lens(x, multiplier), 1 / multiplier) - x))),
 )
+# Construct a right spherical triangle at the reference pole. Use the observed
+# leg lengths and Gram-Schmidt the second tangent direction.
+ends = x[36:38]
+angles = np.arccos(np.clip(ends @ pole, -1, 1))
+tangents = ends - (ends @ pole)[:, None] * pole
+first = tangents[0] / np.linalg.norm(tangents[0])
+second = tangents[1] - (tangents[1] @ first) * first
+second /= np.linalg.norm(second)
+other = np.cos(angles[1]) * pole + np.sin(angles[1]) * second
+opposite = np.arccos(np.clip(ends[0] @ other, -1, 1))
+deficit = angles @ angles - opposite**2
+assert abs(np.cos(opposite) - np.prod(np.cos(angles))) < 1e-12
+assert abs(deficit - 0.1677173272) < 1e-8
+out["right_triangle_control"] = dict(
+    legs=angles.tolist(), opposite=float(opposite), squared_arc_deficit=float(deficit)
+)
 allpred = {}
 for key, q, items in [("first", x[36:], notes[36:]), ("fresh", c, conf)]:
     truth = np.array([classes.index(v["mechanism"]) for v in items])

@@ -138,6 +138,24 @@ result = dict(
     accuracy_p=float(np.mean(acc >= acc[0])),
     chance=acc[1:].mean(),
 )
+
+
+# Test whether the signs retained at each degree change held-out choices.
+# All classes share the same degree-zero term. Ties use the original class order.
+def choice_count(scores):
+    winners = np.isclose(scores, scores.max(1, keepdims=True), rtol=0, atol=1e-12)
+    return int(np.sum(winners.argmax(1) == truth))
+
+
+result["degree_ablations"] = [
+    dict(
+        degree=j + 1,
+        only_correct=choice_count(S[j]),
+        through_correct=choice_count(S[: j + 1].sum(0)),
+        omit_correct=choice_count(S.sum(0) - S[j]),
+    )
+    for j in range(d)
+]
 charts = json.loads(load("charts.json"))
 result["degree_power"] = {
     name: shares_from_points(np.asarray(points))[0]

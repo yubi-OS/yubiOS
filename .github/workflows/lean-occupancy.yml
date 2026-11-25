@@ -53,7 +53,7 @@ jobs:
           lake exe cache get $(awk '/^import Mathlib\./ {print $2}' OccupancyBounds.lean)
       - name: Check the statements, proofs, kernel replay and axiom coverage
         run: |
-          python3 pin_statements.py check occupancy-scope.json
+          python3 pin_statements.py check --repo-root ../../.. occupancy-scope.json
           mkdir -p .lake/build/lib/lean
           lake env lean -DwarningAsError=true -o .lake/build/lib/lean/OccupancyBounds.olean OccupancyBounds.lean
           lake env leanchecker --fresh OccupancyBounds
