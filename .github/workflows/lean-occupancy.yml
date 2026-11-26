@@ -14,6 +14,7 @@ on:
       - 'tools/point-map/**'
       - 'tools/spectral-decomposer/**'
       - 'papers/conserved-occupancy-2026-11-25.tex'
+      - 'papers/conserved-occupancy-2026-11-25.bib'
   pull_request:
     paths: *inputs
   workflow_dispatch:
@@ -31,6 +32,23 @@ jobs:
         working-directory: papers/data/lean
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Check the formal claims printed in Paper V
+        run: |
+          python3 - <<'PYTHON'
+          import json
+          import re
+          from pathlib import Path
+
+          paper = Path("../../conserved-occupancy-2026-11-25.tex").read_text()
+          scope = json.loads(Path("occupancy-scope.json").read_text())
+          names = {item["name"] for item in scope["theorems"]}
+          counts = re.findall(r"\\code\{OccupancyBounds\.lean\}\s+contains\s+(\d+)\s+named theorems", paper)
+          if counts != [str(len(names))]:
+              raise SystemExit(f"Manuscript theorem count {counts} differs from {len(names)} pins")
+          claims = re.findall(r"\\proved\{(\w+)\}", paper)
+          if not claims or any(f"Occupancy.{claim}" not in names for claim in claims):
+              raise SystemExit(f"Manuscript theorem references missing from scope: {claims}")
+          PYTHON
       - name: Install the pinned upstream Lean release
         run: |
           test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.35.0'

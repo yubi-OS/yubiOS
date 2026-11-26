@@ -248,4 +248,51 @@ theorem spectral_kernel_score {G : Type*} [Fintype G] [DecidableEq G] [AddCommGr
   simp_rw [← h]
   exact finite_inversion χ _ N hN orth q
 
+def bitSign (x mask : Bool) : ℝ := if x && mask then -1 else 1
+def cubeChar {d : ℕ} (x mask : Fin d → Bool) : ℝ := ∏ i, bitSign (x i) (mask i)
+def cubeKernel {d : ℕ} (r : ℝ) (x y : Fin d → Bool) : ℝ :=
+  ∏ i, if x i = y i then 1 else r
+
+/-- The unnormalised Walsh matrix has row Gram matrix 2^d times identity. -/
+theorem cube_orthogonal (d : ℕ) (x y : Fin d → Bool) :
+    ∑ mask, cubeChar x mask * cubeChar y mask = if x=y then (2:ℝ)^d else 0 := by
+  classical
+  simp only [cubeChar, ← Finset.prod_mul_distrib]
+  rw [← Fintype.prod_sum (fun (i : Fin d) (b : Bool) => bitSign (x i) b * bitSign (y i) b)]
+  have h (i : Fin d) : (∑ b : Bool, bitSign (x i) b * bitSign (y i) b) =
+      (if x i = y i then 2 else 0) := by
+    cases x i <;> cases y i <;> norm_num [bitSign]
+  simp_rw [h]
+  split_ifs with eq
+  · subst y; simp
+  · obtain ⟨i, hi⟩ := Function.ne_iff.mp eq
+    exact Finset.prod_eq_zero (Finset.mem_univ i) (by simp [hi])
+
+/-- Transform of a Hamming kernel centered at any reference code. -/
+theorem cube_shifted_kernel (d : ℕ) (r : ℝ) (y mask : Fin d → Bool) :
+    (∑ x, cubeKernel r x y * cubeChar x mask) =
+      cubeChar y mask * ∏ i, (if mask i then 1-r else 1+r) := by
+  simp only [cubeKernel, cubeChar, ← Finset.prod_mul_distrib]
+  rw [← Fintype.prod_sum (fun (i : Fin d) (b : Bool) =>
+    (if b = y i then 1 else r) * bitSign b (mask i))]
+  apply Finset.prod_congr rfl
+  intro i _
+  cases y i <;> cases mask i <;> simp [bitSign] <;> ring
+
+/-- The executable signed Walsh reconstruction, without an orthogonality premise. -/
+theorem cube_class_score (d : ℕ) (r : ℝ) (h : (Fin d → Bool) → ℝ) (q : Fin d → Bool) :
+    (∑ mask, ((∑ y, h y*cubeChar y mask) *
+      (∏ i, if mask i then 1-r else 1+r)) * cubeChar q mask) / (2:ℝ)^d =
+      ∑ y, h y*cubeKernel r q y := by
+  have coeff (mask : Fin d → Bool) :
+      (∑ x, (∑ y, h y*cubeKernel r x y)*cubeChar x mask) =
+        (∑ y, h y*cubeChar y mask) * ∏ i, (if mask i then 1-r else 1+r) := by
+    simp_rw [Finset.sum_mul]
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl
+    intro y _
+    simp_rw [mul_assoc, ← Finset.mul_sum, cube_shifted_kernel]
+  simp_rw [← coeff]
+  exact finite_inversion cubeChar _ _ (by positivity) (cube_orthogonal d) q
+
 end Occupancy

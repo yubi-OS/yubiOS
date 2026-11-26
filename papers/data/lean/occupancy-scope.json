@@ -200,6 +200,21 @@
       "name": "Occupancy.spectral_kernel_score",
       "status": "lean-proved",
       "statement_sha256": "011dbf55fca30f450f9c3f5a1d155e66935409771c85ad273fbb39cb21ed4f85"
+    },
+    {
+      "name": "Occupancy.cube_orthogonal",
+      "status": "lean-proved",
+      "statement_sha256": "06c3ee07488e51d717b60765895b38f342786607f287fb6f3c6c15092e1ef7dd"
+    },
+    {
+      "name": "Occupancy.cube_shifted_kernel",
+      "status": "lean-proved",
+      "statement_sha256": "616b7e15fb206940145a45c74e2716f7e42da27c484b5c03c18f3212fe480e7a"
+    },
+    {
+      "name": "Occupancy.cube_class_score",
+      "status": "lean-proved",
+      "statement_sha256": "82b2032cbfadd239a63ab082b457eb49a6656677271d92d61f70ca5171f94668"
     }
   ],
   "definitions": {
@@ -207,10 +222,13 @@
     "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
     "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
     "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
-    "hash": "59cd576bf9feb50e577e77d92fc5fd8e46b049d3960aae489c4ae372f6695856",
-    "count": 53,
+    "hash": "7eca677363d115de77ffcda40e2ea8d70b4edb66fb0b2783483446218252735f",
+    "count": 59,
     "decls": {
+      "def:bitSign": "86ea50f67667f136d0db5727820c13ed57e234479ab1a43718112c0fc59f4a94",
       "def:bitTerm": "fd53dd4962306ce9d752da0373d3069a21395fca15cdf853de1d38781e4987e8",
+      "def:cubeChar": "e242ddc33b2a3de9224e8c56d22df041efe5696eddf4d731ff899d7a69774d26",
+      "def:cubeKernel": "94f15f7b9e0c89c9b8c89573d49d5b64a5affb4a690bcddb4b2b91757fd143af",
       "def:fraction": "1033e6a4aab5cf1128920af2ca3bb54401dff072a839c0eff8ce83a8b5f24a3d",
       "def:gibbs": "313016c5f103786ed3038970eafc64d0db7cbce3018750a2c2f25db4f05de0cd",
       "end:Occupancy": "059df6bc590b85aedf15b7ddb256b2c9750db2f0caaadf7ce1712dc58092ca7b",
@@ -228,8 +246,11 @@
       "theorem:bank_shell_score": "24da889064137d4ee3c8eec8420dc87b8786a6cbd4736ee01a658acad6ac873a",
       "theorem:bytes_per_entity": "1f595b4532fdc15b56d0a2ecfc6a199c096685cbab8856e0ee3bdd60dcbbb3c1",
       "theorem:collision_pairs": "a25f0d2887e89be8119b5c25650eb9befc1ddef2d0879bb6765679be85c4c522",
+      "theorem:cube_class_score": "cb9cfdc71179fab9177988cc23203978f625ecefda15e9715ccb0af846ce839a",
+      "theorem:cube_orthogonal": "0254d695fd5be0aa260dd05001e0c75d7b77977119943b3138255e4c90a609f8",
       "theorem:cube_partition": "6fc0635c84b235d41f6ec648f4951c0b9683d36ec073764637119623d9f1a066",
       "theorem:cube_shell_fractions": "13f0ad9da2862174cb89eebe87d30980e510f6518a7ad4c02fb16d4d90170c97",
+      "theorem:cube_shifted_kernel": "8caf79112668e6b3e531659a3c11b1c48c005d7983c5c898442c388d32f4debc",
       "theorem:cubic_shell_count": "0665f3a51e6b5e105f6a5a8c5b578bb32f98c8a074d331e9da9eb39c09a5ed17",
       "theorem:db_cascade": "aeabe04a92b17a41a7b950c2a3b689ae960c12fbee2d25db701f23b859d063cf",
       "theorem:degree_response": "66d01f22ac156529bc1d4652234e522790f8ce12b68d04dfcf80fdeb0d43cfd3",
