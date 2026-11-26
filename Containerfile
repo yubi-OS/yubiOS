@@ -56,6 +56,8 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       efitools \
       pkcs11-provider \
       sbsigntools \
+      keyutils \
+      attr \
       systemd-boot-unsigned \
       systemd-ukify \
       ostree \
@@ -220,7 +222,8 @@ RUN mkdir -p /etc/ssh/sshd_config.d && \
       /etc/ssh/sshd_config.d/10-yubiOS-bcvk-root-key.conf
 
 # ── Permissions for enrollment and first-boot scripts + staged Secure Boot keys ──
-RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install && \
+RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/uki/*.sh /usr/lib/kernel/install.d/*.install \
+      /usr/lib/yubiOS/ima/stage-ima-policy.sh /usr/lib/dracut/modules.d/99yubios-ima/*.sh && \
     mkdir -p /etc/kernel/install.d /etc/ostree /usr/lib/yubiOS/secureboot /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
     printf '#include <time.h>\ntime_t time(time_t *t){time_t v=1767225600;if(t)*t=v;return v;}\n' > /tmp/faketime_sb.c && \
     gcc -shared -fPIC -O2 /tmp/faketime_sb.c -o /usr/lib/yubiOS/uki/libfaketime_sb.so && \
@@ -236,6 +239,16 @@ RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/u
     if [ ! -f /usr/lib/yubiOS/secureboot/PK.auth ]; then \
       LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /; \
     fi && \
+    # Signed IMA custom policy (Option 1, no shim). CI prepares the IMA CA/signer/signature and the
+    # CA-patched drivers once on the runner (stage-ci-sb-keys.sh -> stage-ima-policy.sh --prepare-only),
+    # so this step only installs /etc/ima/ima-policy and signs the pre-patched driver with ci-sb-db.key:
+    # deterministic across Build 1 and Build 2. Runs before dracut bakes 99yubios-ima.
+    LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/ima/stage-ima-policy.sh / && \
+    test -s /usr/lib/yubiOS/ima/yubios-ima.der && \
+    test -s /usr/lib/yubiOS/ima/yubios-ima-ca.der && \
+    test -s /usr/lib/yubiOS/ima/ima-policy.sig.hex && \
+    cmp -s /usr/lib/yubiOS/ima/ima-policy /etc/ima/ima-policy && \
+    test -z "$(find /usr/lib/yubiOS/ima /etc/ima -name '*.key' -print -quit)" && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ && \
     cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ && \
     rm -f /boot/EFI/yubiOS/secureboot/ci-sb-db.key /boot/EFI/yubiOS/keys/ci-sb-db.key && \
@@ -359,9 +372,13 @@ RUN set -- /usr/lib/modules/*/ && \
       sed -i 's/optee tpm_ftpm_tee tee_stmm_efi dw_mmc.*"/"/' /usr/lib/dracut.conf.d/53-yubiOS-optee-ftpm.conf; \
       sed -i 's/xhci_plat_hcd ehci_platform ohci_platform dwc3 dwc3_of_simple phy_rockchip_inno_usb2 phy_rockchip_naneng_combphy phy_rockchip_usbdp rockchipdrm dw_hdmi_qp phy_rockchip_samsung_hdptx analogix_dp //' /usr/lib/dracut.conf.d/50-yubiOS-fido2.conf; \
     fi && \
-    dracut --no-hostonly --force --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \
+    dracut --no-hostonly --force --add yubios-ima --kver "$kver" "/usr/lib/modules/$kver/initramfs.img" && \
     lsinitrd "/usr/lib/modules/$kver/initramfs.img" > /tmp/yubiOS-initramfs-listing.txt && \
     { ! grep -q "/vfio\.ko" /tmp/yubiOS-initramfs-listing.txt; } && \
+    grep -q "pre-pivot/61-load-ima-key\.sh" /tmp/yubiOS-initramfs-listing.txt && \
+    grep -q "usr/lib/yubiOS/ima/yubios-ima\.der" /tmp/yubiOS-initramfs-listing.txt && \
+    grep -q "usr/lib/yubiOS/ima/ima-policy\.sig\.hex" /tmp/yubiOS-initramfs-listing.txt && \
+    grep -q "bin/keyctl" /tmp/yubiOS-initramfs-listing.txt && \
     if [ "$(uname -m)" = "aarch64" ]; then \
       grep -q "optee\.ko" /tmp/yubiOS-initramfs-listing.txt && \
       grep -q "tpm_ftpm_tee\.ko" /tmp/yubiOS-initramfs-listing.txt; \
@@ -412,8 +429,21 @@ RUN case "$(uname -m)" in \
         "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
       mv -f "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi.signed" \
         "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
-      sbverify --cert /usr/lib/yubiOS/secureboot/db.crt "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi"; \
+      sbverify --cert /usr/lib/yubiOS/secureboot/db.crt "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" && \
+      for drv in /usr/lib/systemd/boot/efi/drivers/*.efi; do \
+        [ -f "$drv" ] || continue; \
+        src="/usr/lib/yubiOS/ima/$(basename "$drv").patched"; [ -f "$src" ] || src="$drv"; \
+        LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so sbsign \
+          --key /usr/lib/yubiOS/secureboot/ci-sb-db.key \
+          --cert /usr/lib/yubiOS/secureboot/db.crt \
+          --output "$drv.signed" "$src" && \
+        mv -f "$drv.signed" "$drv" && \
+        sbverify --cert /usr/lib/yubiOS/secureboot/db.crt "$drv" || exit 1; \
+      done; \
     fi && \
+    mkdir -p /boot/EFI/systemd/drivers && \
+    cp -f /usr/lib/systemd/boot/efi/drivers/*.efi /boot/EFI/systemd/drivers/ && \
+    test -s "/boot/EFI/systemd/drivers/yubios-ima-mokvar-${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/systemd/systemd-boot${efi_arch}.efi" && \
     cp "/usr/lib/systemd/boot/efi/systemd-boot${efi_arch}.efi" "/boot/EFI/BOOT/BOOT${efi_upper}.EFI" && \
     ! test -e /etc/machine-id && \

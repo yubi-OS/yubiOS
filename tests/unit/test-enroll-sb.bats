@@ -29,6 +29,9 @@ setup() {
   export YUBIOS_ESP="$W/esp"
   export YUBIOS_PKCS11_LIB="$W/libykcs11.so"
   export STUB_LOG="$W/calls.log"
+  # Never pick up the image's real systemd-boot drivers when run from / inside the image.
+  export YUBIOS_SDBOOT_DRIVERS_DIR="$W/sdboot-drivers"
+  export YUBIOS_IMA_DIR="$W/ima"
   SETUPMODE_FILE="$YUBIOS_EFIVARS/SetupMode-8be4df61-93ca-11d2-aa0d-00e098032b8c"
   export SETUPMODE_FILE
   mkdir -p "$W/bin" "$W/state" "$YUBIOS_EFIVARS" "$YUBIOS_ESP/EFI"
@@ -303,6 +306,58 @@ make_db_crt() {
   [ "$(cat "$YUBIOS_ESP/EFI/BOOT/BOOTAA64.EFI")" = fallback ]
   [ "$(cat "$YUBIOS_ESP/EFI/Linux/yubios-a.efi")" = uki1 ]
   run ! ls "$YUBIOS_SB_KEYDIR"/signed-*.efi 2>/dev/null
+}
+
+# ── resign: systemd-boot drivers (yubios-ima-mokvar, signed IMA policy chain) ─────
+
+make_ima_drivers() {
+  mkdir -p "$YUBIOS_SDBOOT_DRIVERS_DIR" "$YUBIOS_IMA_DIR"
+  echo ci-signed-driver > "$YUBIOS_SDBOOT_DRIVERS_DIR/yubios-ima-mokvar-aa64.efi"
+  echo unsigned-patched-driver > "$YUBIOS_IMA_DIR/yubios-ima-mokvar-aa64.efi.patched"
+}
+
+@test "contract: resign covers EFI/systemd/drivers and populates it from the image" {
+  grep -qF '"$ESP"/EFI/systemd/drivers/*.efi' "$SB_SH"
+  grep -qF 'YUBIOS_SDBOOT_DRIVERS_DIR:-/usr/lib/systemd/boot/efi/drivers' "$SB_SH"
+  grep -qF 'YUBIOS_IMA_DIR:-/usr/lib/yubiOS/ima' "$SB_SH"
+}
+
+@test "resign copies the IMA mokvar driver to the ESP and signs it with slot 9a from the unsigned copy" {
+  make_db_crt
+  make_esp_images
+  make_ima_drivers
+  run "$SB_SH" resign
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Resigned 5 image(s) with the db key. Reboot is now safe."* ]]
+  drv="$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi"
+  [ "$(head -n1 "$drv")" = unsigned-patched-driver ]
+  [ "$(tail -n1 "$drv")" = SIGNED ]
+  grep -q "^systemd-sbsign sign .*--certificate $YUBIOS_SB_KEYDIR/db.crt .* $YUBIOS_IMA_DIR/yubios-ima-mokvar-aa64.efi.patched\$" "$STUB_LOG"
+  run grep -c "^sbverify --cert $YUBIOS_SB_KEYDIR/db.crt" "$STUB_LOG"
+  [ "$output" -eq 5 ]
+}
+
+@test "resign signs an existing ESP driver in place when no unsigned copy ships" {
+  make_db_crt
+  make_esp_images
+  mkdir -p "$YUBIOS_ESP/EFI/systemd/drivers"
+  echo esp-driver > "$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi"
+  run "$SB_SH" resign
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Resigned 5 image(s)"* ]]
+  [ "$(head -n1 "$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi")" = esp-driver ]
+  grep -q SIGNED "$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi"
+}
+
+@test "resign leaves the ESP driver untouched when its signature does not verify" {
+  make_db_crt
+  make_ima_drivers
+  mkdir -p "$YUBIOS_ESP/EFI/systemd/drivers"
+  echo esp-driver > "$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi"
+  export STUB_SBVERIFY_FAIL=1
+  run "$SB_SH" resign
+  [ "$status" -eq 1 ]
+  [ "$(cat "$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi")" = esp-driver ]
 }
 
 # ── all ───────────────────────────────────────────────────────────────────

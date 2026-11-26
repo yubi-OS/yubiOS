@@ -97,6 +97,7 @@ find_ykcs11() {
 find_softhsm2() {
   local cand
   for cand in \
+    ${YUBIOS_SOFTHSM2_LIB:+"$YUBIOS_SOFTHSM2_LIB"} \
     /usr/lib/aarch64-linux-gnu/softhsm/libsofthsm2.so \
     /usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so \
     /usr/lib64/pkcs11/libsofthsm2.so \
@@ -308,3 +309,16 @@ if [ "$REPO_ROOT" = "/" ]; then
 fi
 
 ls -la usr/lib/yubiOS/secureboot/
+
+# Signed IMA custom policy: mint the ephemeral IMA CA/signer, sign usr/lib/yubiOS/ima/ima-policy,
+# delete both private keys and pre-patch the CA into yubios-ima-mokvar-{x64,aa64}.efi.patched HERE,
+# once, so Build 1 and Build 2 COPY identical usr/lib/yubiOS/ima/ material and the Containerfile
+# step is deterministic (it only installs /etc/ima/ima-policy and signs the pre-patched driver).
+# On a workspace (CI runner) only the prepare phase runs; on / (inside an image build) both run.
+TARGET_ROOT="$(pwd -P)"
+if [ -f "$TARGET_ROOT/usr/lib/yubiOS/ima/stage-ima-policy.sh" ]; then
+  ima_mode=(--prepare-only)
+  [ "$TARGET_ROOT" = "/" ] && ima_mode=()
+  env -u OPENSSL_CONF SOURCE_DATE_EPOCH="$EPOCH" \
+    bash "$TARGET_ROOT/usr/lib/yubiOS/ima/stage-ima-policy.sh" "${ima_mode[@]}" "$TARGET_ROOT"
+fi

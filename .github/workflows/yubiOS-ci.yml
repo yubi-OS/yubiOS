@@ -371,8 +371,8 @@ jobs:
                 yubikey-manager ykcs11 fido2-tools usbutils
               SOURCE_DATE_EPOCH="'"${SOURCE_DATE_EPOCH}"'" ./usr/lib/yubiOS/uki/stage-ci-sb-keys.sh /work
             '
-          chown -R 0:0 usr/lib/yubiOS/secureboot repro-evidence
-          find usr/lib/yubiOS/secureboot repro-evidence -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} +
+          chown -R 0:0 usr/lib/yubiOS/secureboot usr/lib/yubiOS/ima repro-evidence
+          find usr/lib/yubiOS/secureboot usr/lib/yubiOS/ima repro-evidence -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} +
 
       - name: Build OCI image (${{ matrix.arch }})
         env:

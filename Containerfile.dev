@@ -153,6 +153,16 @@ RUN rm -f /etc/machine-id /var/lib/systemd/random-seed && \
 
 RUN rm -f /boot/EFI/Linux/*.efi /boot/*.dump && \
     mkdir -p /boot/EFI/Linux /boot/EFI/BOOT /boot/EFI/systemd /boot/EFI/yubiOS/secureboot /boot/EFI/yubiOS/keys && \
+    if [ -x /usr/lib/yubiOS/ima/stage-ima-policy.sh ]; then \
+      # Idempotent: keeps yubios-base's IMA CA/signer/signature (same as its initramfs), only
+      # re-signs the yubios-ima-mokvar driver while ci-sb-db.key is still present.
+      LD_PRELOAD=/usr/lib/yubiOS/uki/libfaketime_sb.so SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1700000000}" /usr/lib/yubiOS/ima/stage-ima-policy.sh / && \
+      mkdir -p /boot/EFI/systemd/drivers && \
+      cp -f /usr/lib/systemd/boot/efi/drivers/*.efi /boot/EFI/systemd/drivers/ && \
+      if [ -f /usr/lib/yubiOS/secureboot/db.crt ]; then \
+        for drv in /boot/EFI/systemd/drivers/*.efi; do sbverify --cert /usr/lib/yubiOS/secureboot/db.crt "$drv" || exit 1; done; \
+      fi; \
+    fi && \
     if [ -d /usr/lib/yubiOS/secureboot ]; then \
       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/secureboot/ && \
       cp -f /usr/lib/yubiOS/secureboot/* /boot/EFI/yubiOS/keys/ && \

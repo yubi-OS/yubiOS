@@ -7,7 +7,9 @@
 #            key (signing only, SIGN.md steps 1-3), writes PK, KEK, db through the
 #            StMM variable store with efi-updatevar, then verifies them.
 #   resign : signs the systemd-boot loader and every UKI on the ESP with the db
-#            key (slot 9a), and verifies each signature against db.crt.
+#            key (slot 9a), and verifies each signature against db.crt. This includes the
+#            systemd-boot drivers in EFI/systemd/drivers (yubios-ima-mokvar-<arch>.efi, which
+#            hands the IMA CA to the kernel), populated from /usr/lib/systemd/boot/efi/drivers.
 #   all    : enroll, then resign. Never reboots. Reboot only after resign passes,
 #            because the next boot enforces Secure Boot.
 #
@@ -200,18 +202,44 @@ phase_enroll() {
   yubiOS_log "Keys enrolled. Next: resign the loader and UKIs before any reboot."
 }
 
+# systemd-boot drivers (\EFI\systemd\drivers\*{x64,aa64}.efi) shipped by the image: the
+# yubios-ima-mokvar driver installs LINUX_EFI_MOK_VARIABLE_TABLE so the IMA CA reaches .machine.
+# Make sure the ESP carries them before resigning, so they are signed with the owner db key too.
+sync_sdboot_drivers_to_esp() {
+  local src_dir="${YUBIOS_SDBOOT_DRIVERS_DIR:-/usr/lib/systemd/boot/efi/drivers}" f
+  [ -d "$src_dir" ] || return 0
+  mkdir -p "$ESP/EFI/systemd/drivers"
+  for f in "$src_dir"/*.efi; do
+    [ -f "$f" ] || continue
+    [ -f "$ESP/EFI/systemd/drivers/$(basename "$f")" ] || cp -f "$f" "$ESP/EFI/systemd/drivers/"
+  done
+}
+
+# Sign drivers from the image's unsigned CA-patched copy when available, so the ESP driver carries
+# only the owner signature (not the CI signature plus the owner one).
+resign_source() {
+  local f="$1" ima_dir="${YUBIOS_IMA_DIR:-/usr/lib/yubiOS/ima}"
+  case "$f" in
+    "$ESP"/EFI/systemd/drivers/*)
+      if [ -f "$ima_dir/$(basename "$f").patched" ]; then printf '%s\n' "$ima_dir/$(basename "$f").patched"; return; fi ;;
+  esac
+  printf '%s\n' "$f"
+}
+
 phase_resign() {
   require_slot_9a
   [ -f "$KEYDIR/db.crt" ] || { yubiOS_log "db.crt missing. Run the enroll phase first."; exit 1; }
+  sync_sdboot_drivers_to_esp
   local -a images=()
   local f
-  for f in "$ESP"/EFI/systemd/systemd-bootaa64.efi "$ESP"/EFI/systemd/systemd-bootx64.efi "$ESP"/EFI/BOOT/BOOTAA64.EFI "$ESP"/EFI/BOOT/BOOTX64.EFI "$ESP"/EFI/Linux/*.efi "$ESP"/EFI/Linux/bootc/*.efi; do
+  for f in "$ESP"/EFI/systemd/systemd-bootaa64.efi "$ESP"/EFI/systemd/systemd-bootx64.efi "$ESP"/EFI/BOOT/BOOTAA64.EFI "$ESP"/EFI/BOOT/BOOTX64.EFI "$ESP"/EFI/Linux/*.efi "$ESP"/EFI/Linux/bootc/*.efi "$ESP"/EFI/systemd/drivers/*.efi; do
     [ -f "$f" ] && images+=("$f")
   done
   [ "${#images[@]}" -gt 0 ] || { yubiOS_log "No loader or UKI found under $ESP"; exit 1; }
   for f in "${images[@]}"; do
     yubiOS_log "Signing with the db key (touch): $f"
-    local tmp
+    local tmp src
+    src="$(resign_source "$f")"
     tmp="$(mktemp "$KEYDIR/signed-XXXXXX.efi")"
     systemd-sbsign sign \
       --private-key "$SB_KEY_URI" \
@@ -219,7 +247,7 @@ phase_resign() {
       --certificate "$KEYDIR/db.crt" \
       --certificate-source file \
       --output "$tmp" \
-      "$f"
+      "$src"
     if ! sbverify --cert "$KEYDIR/db.crt" "$tmp" >/dev/null; then
       rm -f "$tmp"
       yubiOS_log "Signature did not verify against db.crt: $f. Original left in place."

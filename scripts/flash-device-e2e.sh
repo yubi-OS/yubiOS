@@ -650,6 +650,33 @@ EOF
   sudo test -s "$MNT_DIR/boot/EFI/yubiOS/secureboot/PK_null.auth" || die "PK_null.auth missing on ESP"
   sudo test -s "$MNT_DIR/boot/EFI/yubiOS/keys/PK_null.auth" || die "keys/PK_null.auth missing on ESP"
 
+  # systemd-boot drivers (EFI/systemd/drivers/*<arch>.efi): yubios-ima-mokvar installs the
+  # LINUX_EFI_MOK_VARIABLE_TABLE that puts the IMA CA into .machine. bootc install does not copy
+  # them. U2F/HSM signing: take the unsigned CA-patched copy so the owner signature is the only one;
+  # otherwise take the CI-signed copy (verified below with every other ESP binary).
+  sdboot_arch="${EXPECTED_SDBOOT_LOADER##*systemd-boot}"
+  sdboot_arch="${sdboot_arch%.efi}"
+  sudo mkdir -p "$MNT_DIR/boot/EFI/systemd/drivers"
+  if [ "$SIGN_WITH_U2F_HSM" = "true" ]; then
+    drv_src_dir=/usr/lib/yubiOS/ima
+  else
+    drv_src_dir=/usr/lib/systemd/boot/efi/drivers
+  fi
+  # shellcheck disable=SC2016  # expanded inside the container shell
+  sudo podman run --rm --entrypoint /bin/sh -e DRV_DIR="$drv_src_dir" "$RESOLVED_OS" \
+    -c 'cd "$DRV_DIR" 2>/dev/null && set -- yubios-ima-mokvar-*.efi* && [ -f "$1" ] && tar -cf - "$@" || true' \
+    | sudo tar -C "$MNT_DIR/boot/EFI/systemd/drivers" --no-same-owner --no-same-permissions -xf - || true
+  for drv_patched in "$MNT_DIR"/boot/EFI/systemd/drivers/*.efi.patched; do
+    [ -e "$drv_patched" ] || continue
+    sudo mv -f "$drv_patched" "${drv_patched%.patched}"
+  done
+  sudo rm -f "$MNT_DIR"/boot/EFI/systemd/drivers/*.efi.tmpl
+  if sudo test -s "$MNT_DIR/boot/EFI/systemd/drivers/yubios-ima-mokvar-${sdboot_arch}.efi"; then
+    log "Staged systemd-boot driver EFI/systemd/drivers/yubios-ima-mokvar-${sdboot_arch}.efi"
+  else
+    log "WARNING: image ships no yubios-ima-mokvar-${sdboot_arch}.efi; signed IMA policy will be skipped at boot (99yubios-ima guard)"
+  fi
+
   if [ -f "$fw_bin" ]; then
     sudo cp -f "$fw_bin" "$MNT_DIR/boot/u-boot-rockchip.bin"
     sudo cp -f "$fw_bin" "$MNT_DIR/boot/EFI/yubiOS/firmware/u-boot-rockchip.bin"

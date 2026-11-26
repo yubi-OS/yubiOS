@@ -132,3 +132,22 @@ if [ -d /usr/lib/kernel/install.d ]; then
     fi
   done
 fi
+
+# Keep the signed IMA custom policy (stage-ima-policy.sh) in /etc in step with the A/B /usr:
+# copy /usr/lib/yubiOS/ima/ima-policy to /etc/ima/ima-policy and set its security.ima from
+# ima-policy.sig.hex, but only when this boot's %:.ima holds the yubios-ima signer. Without the key
+# a signed policy cannot load, and 99yubios-ima's pre-pivot guard removes it to keep PID 1's
+# ima_setup() from freezing; it reinstates the file itself on the next boot that has the key.
+ima_src="${YUBIOS_IMA_DIR:-/usr/lib/yubiOS/ima}/ima-policy"
+ima_hex="${YUBIOS_IMA_DIR:-/usr/lib/yubiOS/ima}/ima-policy.sig.hex"
+ima_dst="${YUBIOS_ETC_DIR:-/etc}/ima/ima-policy"
+if [ -s "$ima_src" ] && [ -s "$ima_hex" ] && command -v keyctl >/dev/null 2>&1 \
+   && keyctl list %:.ima 2>/dev/null | grep -q 'yubios-ima'; then
+  mkdir -p "$(dirname "$ima_dst")"
+  if ! cmp -s "$ima_src" "$ima_dst" 2>/dev/null; then
+    cp -f "$ima_src" "$ima_dst"
+  fi
+  if command -v setfattr >/dev/null 2>&1; then
+    setfattr -n security.ima -v "$(cat "$ima_hex")" "$ima_dst" 2>/dev/null || true
+  fi
+fi

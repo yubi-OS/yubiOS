@@ -244,6 +244,42 @@ sign_and_verify_pe() {
   printf '%s\n' "$signer_tag"
 }
 
+# Keep ESP/EFI/systemd/drivers populated with the image's systemd-boot drivers (the
+# yubios-ima-mokvar driver hands the IMA CA to the kernel via LINUX_EFI_MOK_VARIABLE_TABLE).
+# Owner-enrolled (db.crt present): sign the unsigned CA-patched copy with PIV slot 9a unless the
+# ESP copy already verifies against db.crt. Not enrolled: copy the CI-signed driver if missing.
+# --from-signed-esp (called by enroll-sb.sh resign, which already signed the drivers): copy only.
+sync_sdboot_drivers_to_esp() {
+  local src_dir="${YUBIOS_SDBOOT_DRIVERS_DIR:-/usr/lib/systemd/boot/efi/drivers}"
+  local ima_dir="${YUBIOS_IMA_DIR:-/usr/lib/yubiOS/ima}"
+  local f name dst tmp
+  [ -d "$src_dir" ] || return 0
+  mkdir -p "$ESP/EFI/systemd/drivers"
+  for f in "$src_dir"/*.efi; do
+    [ -f "$f" ] || continue
+    name="$(basename "$f")"
+    dst="$ESP/EFI/systemd/drivers/$name"
+    if [ "$FROM_SIGNED_ESP" != "1" ] && [ -f "$KEYDIR/db.crt" ] && [ -f "$ima_dir/$name.patched" ]; then
+      if [ -f "$dst" ] && sbverify --cert "$KEYDIR/db.crt" "$dst" >/dev/null 2>&1; then
+        continue
+      fi
+      tmp="$(mktemp "$KEYDIR/signed-drv-XXXXXX.efi")"
+      cp -f "$ima_dir/$name.patched" "$tmp"
+      if sign_and_verify_pe "$tmp" >/dev/null; then
+        mv -f "$tmp" "$dst"
+        yubiOS_log "Signed systemd-boot driver $name onto $dst"
+      else
+        rm -f "$tmp"
+        yubiOS_log "Could not sign systemd-boot driver $name; leaving $dst unchanged" >&2
+        return 1
+      fi
+    elif [ ! -f "$dst" ]; then
+      cp -f "$f" "$dst"
+      yubiOS_log "Staged systemd-boot driver $name onto $dst"
+    fi
+  done
+}
+
 commit_to_local_oci_repo() {
   local signed_uki="$1"
   local kver="$2"
@@ -380,6 +416,7 @@ main() {
     [ -f "$KEYDIR/db.crt" ] && signer_tag="piv-slot-9a"
     commit_to_local_oci_repo "$found_uki" "$kver" "$cfs_digest" "$signer_tag"
     deploy_uki_to_esp_and_bls "$found_uki" "$kver" "$cfs_digest"
+    sync_sdboot_drivers_to_esp || true
     exit 0
   fi
 
@@ -407,6 +444,7 @@ main() {
   commit_to_local_oci_repo "$staged_uki" "$kver" "$cfs_digest" "$signer_tag"
   deploy_uki_to_esp_and_bls "$staged_uki" "$kver" "$cfs_digest"
   rm -f "$staged_uki"
+  sync_sdboot_drivers_to_esp
 }
 
 main "$@"

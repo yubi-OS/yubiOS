@@ -36,6 +36,9 @@ setup() {
   export YUBIOS_PKCS11_LIB="$W/libykcs11.so"
   export YUBIOS_COMPOSEFS_DIGEST="e28bd60d1a8c71ac85caf471b58884f8063cccb9084fda20b6c82f76b43fe952"
   export STUB_LOG="$W/calls.log"
+  # Never pick up the image's real systemd-boot drivers when run from / inside the image.
+  export YUBIOS_SDBOOT_DRIVERS_DIR="$W/sdboot-drivers"
+  export YUBIOS_IMA_DIR="$W/ima"
 
   mkdir -p "$W/bin" "$W/state" "$YUBIOS_EFIVARS" "$YUBIOS_ESP/EFI/systemd" "$YUBIOS_ESP/EFI/BOOT" "$YUBIOS_ESP/EFI/Linux/bootc" "$YUBIOS_OCI_DIR" "$YUBIOS_MODULES_DIR/7.3.4-300.fc45.aarch64"
   : > "$STUB_LOG"
@@ -130,6 +133,48 @@ make_db_crt() {
   [ -f "$YUBIOS_OCI_DIR/last-deployed.json" ]
   grep -q '"reason":"enroll-sb-resign"' "$YUBIOS_OCI_DIR/last-deployed.json"
   grep -q 'SIGNED-9A' "$YUBIOS_OCI_DIR/composefs/bootc_composefs-${YUBIOS_COMPOSEFS_DIGEST}.efi"
+}
+
+make_ima_drivers() {
+  mkdir -p "$YUBIOS_SDBOOT_DRIVERS_DIR" "$YUBIOS_IMA_DIR"
+  echo "ci-signed-driver" > "$YUBIOS_SDBOOT_DRIVERS_DIR/yubios-ima-mokvar-aa64.efi"
+  echo "unsigned-patched-driver" > "$YUBIOS_IMA_DIR/yubios-ima-mokvar-aa64.efi.patched"
+}
+
+@test "uki-sync-and-sign (enrolled) signs the unsigned IMA mokvar driver onto ESP/EFI/systemd/drivers" {
+  make_db_crt
+  make_ima_drivers
+  echo "preexisting-initrd" > "$YUBIOS_MODULES_DIR/7.3.4-300.fc45.aarch64/initramfs.img"
+  run "$SYNC_SH" --reason "test-drivers" --kver 7.3.4-300.fc45.aarch64
+  [ "$status" -eq 0 ]
+  drv="$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi"
+  [ -f "$drv" ]
+  grep -q 'unsigned-patched-driver' "$drv"
+  grep -q 'SIGNED-9A' "$drv"
+  run ! grep -q 'ci-signed-driver' "$drv"
+}
+
+@test "uki-sync-and-sign --from-signed-esp only stages a missing driver and never re-signs" {
+  make_db_crt
+  make_ima_drivers
+  echo "uki-initial" > "$YUBIOS_ESP/EFI/Linux/bootc/bootc_composefs-${YUBIOS_COMPOSEFS_DIGEST}.efi"
+  run "$SYNC_SH" --reason "test-from-esp" --from-signed-esp --esp "$YUBIOS_ESP"
+  [ "$status" -eq 0 ]
+  grep -q 'ci-signed-driver' "$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi"
+  run ! grep -q '^systemd-sbsign' "$STUB_LOG"
+}
+
+@test "enroll-sb.sh resign signs the IMA mokvar driver from the unsigned patched copy" {
+  make_db_crt
+  make_ima_drivers
+  echo "loader" > "$YUBIOS_ESP/EFI/systemd/systemd-bootaa64.efi"
+  echo "uki-initial" > "$YUBIOS_ESP/EFI/Linux/bootc/bootc_composefs-${YUBIOS_COMPOSEFS_DIGEST}.efi"
+  run "$SB_SH" resign
+  [ "$status" -eq 0 ]
+  drv="$YUBIOS_ESP/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi"
+  grep -q 'unsigned-patched-driver' "$drv"
+  grep -q 'SIGNED-9A' "$drv"
+  [ "$(grep -c 'SIGNED-9A' "$drv")" -eq 1 ]
 }
 
 @test "validate-pkcs11-uri.sh --syntax-only accepts valid RFC 7512 URI and rejects path delimiter injection" {
