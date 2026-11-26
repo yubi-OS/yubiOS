@@ -28,8 +28,10 @@ mkdir -p /etc/yubico && touch /etc/yubico/u2f_keys && chmod 600 /etc/yubico/u2f_
 # -u: specify username in output
 # -r: resident key (stores handle on U2F/HSM for portability)
 # -N: no PIN prompt during registration (PIN required at AUTH time via pam module)
+# -o/-i: origin/appid pam://yubiOS, matching `origin=pam://yubiOS` in yubiOS-system-auth and
+#        yubiOS-sudo (the default is pam://<hostname>, which never matched; fvf35, OMN-36)
 # Append to central authfile
-pamu2fcfg -u "$TARGET_USER" -N >> /etc/yubico/u2f_keys
+pamu2fcfg -u "$TARGET_USER" -o pam://yubiOS -i pam://yubiOS -N >> /etc/yubico/u2f_keys
 
 echo ""
 echo "PAM U2F enrolled for $TARGET_USER."

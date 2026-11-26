@@ -227,7 +227,7 @@ RUN chmod +x /usr/lib/yubiOS/*.sh /usr/lib/yubiOS/chipsec/*.sh /usr/lib/yubiOS/u
     rm -f /tmp/faketime_sb.c && \
     printf '[options]\nbroken_system_clock = true\n' > /etc/e2fsck.conf && \
     install -d -m 0755 /usr/lib/systemd/system/systemd-homed.service.d && \
-    printf '[Service]\n# 64 MiB home journal (zeroed synchronously in seconds) instead of the 1 GiB default.\n# No assume_storage_prezeroed/lazy_journal_init: LUKS2-on-sparse-file is not pre-zeroed.\nEnvironment="SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-J size=64"\n' \
+    printf '[Service]\n# 64 MiB home journal (zeroed synchronously in seconds) instead of the 1 GiB default.\n# No assume_storage_prezeroed/lazy_journal_init: LUKS2-on-sparse-file is not pre-zeroed.\n# mke2fs keeps only the last -E and these options follow the -E systemd-homework passes, so restate nodiscard\n# (fvf35/OMN-36: no discard may punch the fully allocated image file during mkfs).\nEnvironment="SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-J size=64 -E lazy_itable_init=1,nodiscard"\n' \
       > /usr/lib/systemd/system/systemd-homed.service.d/yubiOS-homed.conf && \
     rm -f /usr/lib/yubiOS/uki/libfast_homed.so \
           /etc/systemd/system/systemd-homed.service.d/yubiOS-homed.conf \

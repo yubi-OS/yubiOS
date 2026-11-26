@@ -186,7 +186,7 @@ run_enroll_gate() {
   [ "$status" -eq 0 ]
 }
 
-@test "homed fast path uses only documented systemd knobs (no LD_PRELOAD shim, discard on, noinit_itable, broken_system_clock)" {
+@test "homed fast path uses only documented systemd knobs (no LD_PRELOAD shim, discard off, noinit_itable, broken_system_clock)" {
   local homed="usr/lib/yubiOS/enroll-homed.sh"
   local luks="usr/lib/yubiOS/enroll-luks.sh"
   local merge="usr/lib/yubiOS/ab-etc-merge.sh"
@@ -196,10 +196,16 @@ run_enroll_gate() {
   [ -f "$luks" ] || luks="/$luks"
   [ -f "$merge" ] || merge="/$merge"
   [ -f "$dconf" ] || dconf="/$dconf"
-  # Online + offline discard: homework never fallocate()s the whole image (create/activate/deactivate)
-  run grep -q -- "--luks-discard=yes" "$homed"
+  # fvf35/OMN-36: online + offline discard off. The image is allocated once at create and
+  # never FITRIM-punched at login nor re-fallocated at logout (run_fallocate early-returns).
+  run grep -q -- "--luks-discard=no" "$homed"
   [ "$status" -eq 0 ]
   run grep -q -- "--luks-offline-discard=no" "$homed"
+  [ "$status" -eq 0 ]
+  run grep -qE -- "^[[:space:]]*--luks-discard=yes" "$homed"
+  [ "$status" -ne 0 ]
+  # Create wait gate kept as defense-in-depth for homectl's fixed 2 min client timeout
+  run grep -q 'CREATE_WAIT_SECS="${YUBIOS_HOMED_CREATE_WAIT:-900}"' "$homed"
   [ "$status" -eq 0 ]
   run grep -q -- "--luks-extra-mount-options=noinit_itable" "$homed"
   [ "$status" -eq 0 ]
@@ -219,7 +225,28 @@ run_enroll_gate() {
   if [ -f "$cf" ]; then
     run grep -E "libfast_homed\.so -ldl|LD_PRELOAD=/usr/lib/yubiOS/uki/libfast_homed\.so|assume_storage_prezeroed=1" "$cf"
     [ "$status" -ne 0 ]
-    run grep -q 'SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-J size=64"' "$cf"
+    # mke2fs keeps only the last -E; the custom -E must restate nodiscard
+    run grep -q 'SYSTEMD_HOME_MKFS_OPTIONS_EXT4=-J size=64 -E lazy_itable_init=1,nodiscard"' "$cf"
     [ "$status" -eq 0 ]
   fi
+}
+
+@test "fvf35 PAM: homed failure never falls through to pam_u2f/pam_unix; pamu2fcfg origin matches the stacks" {
+  local sys="usr/lib/pam.d/yubiOS-system-auth"
+  local sudo="usr/lib/pam.d/yubiOS-sudo"
+  local pam="usr/lib/yubiOS/enroll-pam.sh"
+  [ -f "$sys" ] || sys="/$sys"
+  [ -f "$sudo" ] || sudo="/$sudo"
+  [ -f "$pam" ] || pam="/$pam"
+  # Only PAM_USER_UNKNOWN (non-homed users such as root) continues to pam_u2f/pam_unix
+  run grep -qE '^-auth[[:space:]]+\[success=done user_unknown=ignore default=die\][[:space:]]+pam_systemd_home\.so' "$sys"
+  [ "$status" -eq 0 ]
+  run grep -qE '^-auth[[:space:]].*default=ignore.*pam_systemd_home\.so' "$sys"
+  [ "$status" -ne 0 ]
+  run grep -qE '^auth[[:space:]]+required[[:space:]]+pam_u2f\.so .*nouserok.*origin=pam://yubiOS' "$sys"
+  [ "$status" -eq 0 ]
+  run grep -qE '^auth[[:space:]]+required[[:space:]]+pam_u2f\.so .*origin=pam://yubiOS' "$sudo"
+  [ "$status" -eq 0 ]
+  run grep -q -- '-o pam://yubiOS -i pam://yubiOS' "$pam"
+  [ "$status" -eq 0 ]
 }

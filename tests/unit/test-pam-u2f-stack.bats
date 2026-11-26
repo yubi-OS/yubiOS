@@ -44,12 +44,32 @@ pam_u2f_auth_line() { grep -E '^[[:space:]]*auth[[:space:]].*pam_u2f\.so' "$1" |
   [ "$status" -eq 0 ]
 }
 
+@test "system-auth: only user_unknown falls through pam_systemd_home (homed errors die)" {
+  run grep -E '^-auth[[:space:]].*pam_systemd_home\.so' "$SYS"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"success=done"* ]]
+  [[ "$output" == *"user_unknown=ignore"* ]]
+  [[ "$output" == *"default=die"* ]]
+  [[ "$output" != *"default=ignore"* ]]
+}
+
+@test "system-auth: pam_u2f uses nouserok for classic users without a key" {
+  line="$(pam_u2f_auth_line "$SYS")"
+  [[ "$line" == *" nouserok"* ]]
+}
+
 # -- sudo -------------------------------------------------------------------
 
 @test "sudo: pam_u2f is required before the system-auth include" {
   line="$(pam_u2f_auth_line "$SUDO")"
   [[ "$line" == *required* ]]
   [[ "$line" == *"authfile=/etc/yubico/u2f_keys"* ]]
+}
+
+@test "sudo: pam_u2f origin matches enrollment (pam://yubiOS), no nouserok" {
+  line="$(pam_u2f_auth_line "$SUDO")"
+  [[ "$line" == *"origin=pam://yubiOS"* ]]
+  [[ "$line" != *"nouserok"* ]]
 }
 
 # -- version floor (CVE fix) ------------------------------------------------

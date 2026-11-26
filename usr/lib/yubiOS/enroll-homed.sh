@@ -9,18 +9,31 @@
 #   yubiOS-enroll-homed [username]
 #
 # Fast-path design (no LD_PRELOAD, no interposition of systemd/glibc symbols):
-#   * --luks-discard=yes          : systemd-homework skips run_fallocate() on every
-#                                   activation (homework-luks.c home_setup_luks()) and keeps
-#                                   the sparse image sparse via online discard -> loop punch-hole.
-#   * --luks-offline-discard=no   : matches hardware-verified fvf23 (21c9b5c241); avoids
-#                                   multi-minute loop FITRIM during create/deactivate on 256 GB
-#                                   SD cards while --luks-discard=yes prevents run_fallocate()
-#                                   on every login/activation (homework-luks.c:1433).
+#   * --luks-discard=no --luks-offline-discard=no (fvf35, OMN-36): the image file is
+#                                   allocated ONCE and never punched, so no step on the
+#                                   login path is O(disk size). systemd v262 homework-luks.c:
+#                                   - create: home_truncate() fallocate(fd,0,0,size) (L2166,
+#                                     unwritten extents, fast); mkfs gets -E nodiscard
+#                                     (mkfs-util.c:423); no FITRIM (offline=no, L2547);
+#                                     run_fallocate() (L2566) returns at "Backing file is
+#                                     fully allocated already" (L1164).
+#                                   - login (AcquireHome): run_fallocate() (L1434) hits the
+#                                     same early return; no FITRIM (discard=no, L1505).
+#                                   - logout: run_fallocate_by_path() (L1721) early return.
+#                                   The old discard=yes/offline=no pair FITRIM-punched the whole
+#                                   164 GiB file at every login (L1506) and re-allocated it at
+#                                   every logout (L1721), pushing AcquireHome past
+#                                   pam_systemd_home's fixed 2 min D-Bus timeout (fvf35).
+#                                   Existing homes keep their recorded luksDiscard; switch them
+#                                   with `homectl update <user> --luks-discard=no`.
 #   * --luks-extra-mount-options=noinit_itable : ext4lazyinit does not zero inode tables in
 #                                   the background after login (documented ext4 option; the
 #                                   group descriptors stay honestly flagged "not zeroed").
-#   * SYSTEMD_HOME_MKFS_OPTIONS_EXT4="-J size=64" (systemd-homed.service.d/yubiOS-homed.conf,
-#                                   shipped in the image): 64 MiB journal instead of 1 GiB.
+#   * SYSTEMD_HOME_MKFS_OPTIONS_EXT4="-J size=64 -E lazy_itable_init=1,nodiscard"
+#                                   (systemd-homed.service.d/yubiOS-homed.conf, shipped in the
+#                                   image): 64 MiB journal instead of 1 GiB. mke2fs keeps only
+#                                   the LAST -E, and these options are appended after homework's
+#                                   own -E, so the custom -E must restate nodiscard.
 #                                   No assume_storage_prezeroed / lazy_journal_init: a LUKS2
 #                                   image on a sparse file is NOT pre-zeroed (unwritten sectors
 #                                   decrypt to pseudo-random bytes).
@@ -35,6 +48,8 @@ DISK_SIZE="${YUBIOS_HOMED_SIZE:-80%}"
 MEMBER_OF="wheel"
 # homectl's own D-Bus timeout for CreateHome is fixed at 2 min (HOME_SLOW_BUS_CALL_TIMEOUT_USEC).
 # If it expires, systemd-homed keeps working; we wait for the record instead of failing.
+# With discard=no the create normally returns well inside 2 min and homectl prints the
+# recovery key itself; this gate stays as defense-in-depth for a slow card.
 CREATE_WAIT_SECS="${YUBIOS_HOMED_CREATE_WAIT:-900}"
 
 log() { echo "[yubiOS] $*"; }
@@ -133,7 +148,7 @@ homectl create "$USERNAME" \
   --image-path="$HOME_IMAGE_PATH" \
   --fs-type="$FS_TYPE" \
   --disk-size="$DISK_SIZE" \
-  --luks-discard=yes \
+  --luks-discard=no \
   --luks-offline-discard=no \
   --luks-extra-mount-options=noinit_itable \
   --auto-resize-mode=off \

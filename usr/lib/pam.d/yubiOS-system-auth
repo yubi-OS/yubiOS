@@ -18,9 +18,15 @@
 
 # ── auth ─────────────────────────────────────────────────────────────────────
 # Homed users: FIDO2/PKCS11 handled by homed itself; success skips rest of stack.
--auth [success=done authtok_err=bad perm_denied=bad maxtries=bad default=ignore] pam_systemd_home.so
+# Only PAM_USER_UNKNOWN (root, nobody, any non-homed user) falls through to pam_u2f/pam_unix.
+# Any other result for a homed user (e.g. PAM_SERVICE_ERR when AcquireHome outlives the
+# fixed 2 min D-Bus timeout) ends the auth stack at once: no stray touch, no "Password:"
+# prompt from pam_unix for a FIDO2-only home (fvf35, OMN-36).
+-auth [success=done user_unknown=ignore default=die] pam_systemd_home.so
 # Classic users: FIDO2 second factor (touch required) + password.
-auth      required   pam_u2f.so authfile=/etc/yubico/u2f_keys cue origin=pam://yubiOS
+# nouserok: a classic account with no entry in u2f_keys (e.g. before enroll-pam) falls to
+# pam_unix instead of failing outright. origin must match `pamu2fcfg -o pam://yubiOS`.
+auth      required   pam_u2f.so authfile=/etc/yubico/u2f_keys cue nouserok origin=pam://yubiOS
 auth      sufficient pam_unix.so try_first_pass
 auth      required   pam_deny.so
 

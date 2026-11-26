@@ -6,13 +6,16 @@
 # pam-u2f >= 1.3.1 required (CVE-2025-23023).
 # authfile: central key file, root-owned, mode 600.
 # cue: prints "Please touch your U2F/HSM" prompt.
-# origin: appid for the U2F credential (must match enrollment).
+# origin: appid for the U2F credential (must match enrollment). enroll-pam.sh registers
+#   with `pamu2fcfg -o pam://yubiOS -i pam://yubiOS`; without an explicit origin pam_u2f
+#   defaults to pam://<hostname> and never matches those credentials.
+# No nouserok here: a user without a key in u2f_keys cannot sudo.
 #
 # Source: https://github.com/Yubico/pam-u2f
 # Source: https://www.yubico.com/support/security-advisories/ysa-2025-01/
 
 #%PAM-1.0
-auth       required   pam_u2f.so authfile=/etc/yubico/u2f_keys cue
+auth       required   pam_u2f.so authfile=/etc/yubico/u2f_keys cue origin=pam://yubiOS
 auth       include    system-auth
 account    include    system-auth
 session    include    system-auth
