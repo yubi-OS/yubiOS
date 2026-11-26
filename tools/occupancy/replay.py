@@ -179,6 +179,7 @@ def main():
             raise ValueError(f"Different classifications across caches: {name}")
     exact = int(np.all(xs[0] == xs[1], axis=1).sum())
     assert exact == 96
+    repeat_rms = reports[1]["recognition"]["fresh"]["rms"]
     summary = dict(
         model="@cf/baai/bge-m3",
         sha256=SHA256,
@@ -191,7 +192,7 @@ def main():
                 / (np.linalg.norm(xs[0], axis=1) * np.linalg.norm(xs[1], axis=1))
             )
         ),
-        repeat_drift_bytes=reports[1]["recognition"]["fresh"]["rms"]["byte_shares"][1],
+        repeat_drift_bytes=repeat_rms["byte_shares"][repeat_rms["class_order"].index("drift")],
         **reports[0],
     )
     (args.output / "summary.json").write_text(

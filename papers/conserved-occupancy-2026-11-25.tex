@@ -3,7 +3,7 @@
 \usepackage{microtype,amsmath,amssymb,amsthm,mathtools,booktabs,array}
 \usepackage{xcolor,hyperref}
 \usepackage[round,authoryear]{natbib}
-\hypersetup{colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black,citecolor=blue!60!black}
+\hypersetup{pdfauthor={Shant Tchatalbachian},colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black,citecolor=blue!60!black}
 \newtheorem{proposition}{Proposition}
 \newcommand{\E}{\mathbb E}
 \newcommand{\RR}{\mathbb R}
@@ -13,7 +13,7 @@
 \emergencystretch=2em
 \title{What Does a Resolved Embedding Resemble?\\
 {\large Conserved Gibbs Occupancy, Fourier Degrees and Held-Out Recognition}}
-\author{yubiOS research program}
+\author{By Shant Tchatalbachian}
 \date{November 25, 2026 \qquad Paper V}
 \begin{document}
 \maketitle
@@ -123,6 +123,8 @@ A multiplicity argument alone cannot establish a finite amount. With $2^n$ state
 For $m_0>0$ the first series diverges. The second is convergent power when $w_n$ is an amplitude. A finite corpus supplies one assignment per query at a given prefix. Summing occupancies over every prefix would count observations repeatedly. The zero-mass and negative-mass cases of the algebra should not be read as positive physical amounts.
 
 \section{Design, nulls and results}
+We used a base temperature of $\tau=0.05$ for ambient Gibbs scoring, with the reference-energy adjustment in Table~2. The focal-cube Hamming score and its Walsh reconstruction both used $\tau=0.75$. The globe Gibbs scores used $\tau=0.2$, and the semantic and PCA six-bit Hamming scores used $\tau=0.75$.
+
 The fixture records two Workers AI passes, 18 batches of six texts per pass \citep{bge,cf}. One omitted pooling and one requested mean pooling. Both reported CLS in all batches. Ninety-six rows were componentwise identical; the minimum same-text cosine was 0.99999867. All stored top choices agreed. The provider responses support a repeatability test of the observed endpoint. They supply no comparison of two realized pooling modes.
 
 \begin{table}[ht]

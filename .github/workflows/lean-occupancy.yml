@@ -40,15 +40,23 @@ jobs:
           from pathlib import Path
 
           paper = Path("../../conserved-occupancy-2026-11-25.tex").read_text()
+          paper = re.sub(r"(?<!\\)%[^\n]*", "", paper)
+          paper = paper.split(r"\begin{document}", 1)[1].split(r"\end{document}", 1)[0]
           scope = json.loads(Path("occupancy-scope.json").read_text())
           names = {item["name"] for item in scope["theorems"]}
           counts = re.findall(r"\\code\{OccupancyBounds\.lean\}\s+contains\s+(\d+)\s+named theorems", paper)
           if counts != [str(len(names))]:
               raise SystemExit(f"Manuscript theorem count {counts} differs from {len(names)} pins")
-          claims = re.findall(r"\\proved\{(\w+)\}", paper)
+          for label in re.findall(r"\\code\s*\{([^{}]*)\}", paper):
+              label = label.strip()
+              if label != "OccupancyBounds.lean" and re.fullmatch(r"[^\W\d]\w*(?:\.\w+)*['?!]*", label):
+                  raise SystemExit(f"Use the checked theorem macro for identifier {label!r}")
+          claims = [name.strip() for name in re.findall(r"\\proved\s*\{([^{}]*)\}", paper)]
           if not claims or any(f"Occupancy.{claim}" not in names for claim in claims):
               raise SystemExit(f"Manuscript theorem references missing from scope: {claims}")
           PYTHON
+      - name: Check the occupancy Lean source for forbidden tokens
+        run: python3 check_forbidden_tokens.py --allow-mathlib-imports OccupancyBounds.lean
       - name: Install the pinned upstream Lean release
         run: |
           test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.35.0'

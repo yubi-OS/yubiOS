@@ -132,7 +132,7 @@ for key, q, items in [("first", x[36:], notes[36:]), ("fresh", c, conf)]:
     diff = (
         np.array(allpred[key]["rms_scale_adjusted"]["class_gibbs"]) == truth
     ).astype(int) - (
-        np.array(allpred[key]["native_fixed"]["class_gibbs"]) == truth
+        np.array(allpred[key]["native_scale_adjusted"]["class_gibbs"]) == truth
     ).astype(int)
     ds = [int(diff[groups == g].sum()) for g in dict.fromkeys(groups)]
     cohort["paired_rms_adjusted_vs_native_gibbs"] = dict(
