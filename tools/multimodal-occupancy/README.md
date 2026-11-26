@@ -10,7 +10,7 @@ Use Python 3 with NumPy and SciPy, and Node.js with ES modules. The study inputs
 python3 tools/multimodal-occupancy/check_study.py papers/data/multimodal-digits
 ```
 
-To reproduce the observed embedding results, place the two banks matching the digests in `inference.json` alongside `records.jsonl`, then run:
+The two measured embedding banks are committed alongside `records.jsonl`. To reproduce the observed results from a clean checkout, run:
 
 ```sh
 python3 tools/multimodal-occupancy/run.py --output /tmp/digit-replay \
