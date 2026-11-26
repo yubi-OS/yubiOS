@@ -660,3 +660,43 @@ EOS
   echo "$output"
   [ "$status" -eq 0 ]
 }
+
+# ── 9. Regression from CI runs on da83db509613 (build jobs) ───────────────────
+# yubiOS-ci 45865927348 / ci_dev_image 45865931897 / ci_assured_image 45865936310 failed in the
+# Bake build right after the (now passing) key + IMA staging:
+#   ERROR: quay.io/fedora/fedora-bootc@sha256:2342f957…: not found
+# Quay moved the :45 tag to a new index on 2026-11-26 and expired the old untagged digest, so the
+# pinned FROM no longer resolves. Every pin must name the same digest (and must resolve).
+
+fedora_bootc_pins() {
+  top="$(cd "$(dirname "$STAGE_SH")/../../../.." && pwd -P)"
+  grep -rhoE 'quay\.io/fedora/fedora-bootc@sha256:[0-9a-f]{64}' "$top/Containerfile" "$top/.github/workflows" \
+    | sed 's/.*@//' | sort -u
+}
+
+@test "fedora-bootc base: Containerfile, workflows and PINNED.md pin one identical digest + version" {
+  top="$(cd "$(dirname "$STAGE_SH")/../../../.." && pwd -P)"
+  [ -f "$top/PINNED.md" ] || skip "PINNED.md not shipped in the image"
+  from="$(sed -nE 's|^FROM quay\.io/fedora/fedora-bootc@(sha256:[0-9a-f]{64}) AS rootfs_prep$|\1|p' "$top/Containerfile")"
+  [ -n "$from" ]
+  [ "$(fedora_bootc_pins)" = "$from" ]
+  grep -qF "\`$from\`" "$top/PINNED.md"
+  ver="$(sed -nE 's|^# quay\.io/fedora/fedora-bootc:45 \(org\.opencontainers\.image\.version=(45\.[0-9]{8}\.[0-9]+)\)$|\1|p' "$top/Containerfile")"
+  [ -n "$ver" ]
+  grep -F "\`$from\`" "$top/PINNED.md" | grep -qF "# 45 ($ver)"
+  ! grep -rqE 'quay\.io/fedora/fedora-bootc@sha256:2342f957281b061919c48a12227f9cd04f2d9825d17629fd914083aaa672002c' \
+    "$top/Containerfile" "$top/PINNED.md" "$top/.github/workflows"
+}
+
+@test "fedora-bootc base: pinned digest still resolves on quay.io (opt-in: YUBIOS_LIVE_REGISTRY=1)" {
+  [ "${YUBIOS_LIVE_REGISTRY:-0}" = 1 ] || skip "set YUBIOS_LIVE_REGISTRY=1 to query quay.io"
+  command -v curl >/dev/null 2>&1 || skip "curl not installed"
+  digest="$(fedora_bootc_pins)"
+  tok="$(curl -fsS 'https://quay.io/v2/auth?service=quay.io&scope=repository:fedora/fedora-bootc:pull' | sed -nE 's/.*"token": *"([^"]+)".*/\1/p')"
+  [ -n "$tok" ]
+  code="$(curl -sS -o /dev/null -w '%{http_code}' -I -H "Authorization: Bearer $tok" \
+    -H 'Accept: application/vnd.oci.image.index.v1+json,application/vnd.docker.distribution.manifest.list.v2+json' \
+    "https://quay.io/v2/fedora/fedora-bootc/manifests/$digest")"
+  echo "quay.io manifest $digest -> HTTP $code"
+  [ "$code" = 200 ]
+}

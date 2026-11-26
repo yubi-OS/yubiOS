@@ -8,8 +8,8 @@
 # tracked by .github/workflows/fetch-fedora-bootc-manifest.yml and recorded in
 # PINNED.md; the FROM carries only the immutable OCI index digest so there is a
 # single source of identity (no tag+digest ambiguity for Build Policy/tooling).
-# quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261114.0)
-FROM quay.io/fedora/fedora-bootc@sha256:2342f957281b061919c48a12227f9cd04f2d9825d17629fd914083aaa672002c AS rootfs_prep
+# quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261126.0)
+FROM quay.io/fedora/fedora-bootc@sha256:f3afa8b1d590ba2842366e0bca4f921ba4a0c7b5ee72679b632aeaa08f170a1e AS rootfs_prep
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.

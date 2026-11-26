@@ -319,7 +319,7 @@ an alias of `vms`, sharing one case arm in ci.yml):
   split-kernel-and-rootfs pattern, 2- and 3-layer squashed bases, and a
   single-layer `FROM scratch` control) on `ubuntu-26.04-arm`, 25-min timeout,
   `fail-fast: false`, pinned `BUILDKIT_IMAGE` (v0.35.0) and
-  `FEDORA_BOOTC_IMAGE` (45.20261114.0). Single `reason` input.
+  `FEDORA_BOOTC_IMAGE` (45.20261126.0). Single `reason` input.
 
 Key invariants:
 - The `hw_device` input is destructive and opt-in only; it never runs on push.
