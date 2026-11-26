@@ -1,12 +1,6 @@
 # Lensing the Question Space + Spherical Diffusion (SLERP extension)
 **2026-08-13.** Consolidates [lensing-question-space-brainstorm-2026-08-13.md](lensing-question-space-brainstorm-2026-08-13.md) and extends it: geodesic (SLERP-style) interpolation on the hypersphere as the generator of a diffusion process, tying the whole chain together. Source works: `is-this-x-2026-08-12-Final` and `learned-latent-curves-2026-08-06`.
 
-## Paper V — Conserved occupancy and recognition
-
-[Read the paper (PDF)](conserved-occupancy-2026-11-25.pdf) · [TeX source](conserved-occupancy-2026-11-25.tex) · [Conversation summary](data/occupancy/conversation.md) · [Reproduce the measurements](../tools/occupancy/README.md) · [Lean theorems](data/lean/OccupancyBounds.lean)
-
-Paper V carries the angular and binary spectra into a held-out recognition experiment. On two sets of 36 authored notes, the powered ambient chart raised greedy packing from 3 to 7 and 6 to 11 at the reference chord. Native centroids recognized 24 and 25. Every class allocation sums back to the input amount, whether measured in note-equivalents or UTF-8 bytes.
-
 ---
 
 ## PART I — Lensing findings (consolidated)
@@ -111,9 +105,10 @@ Part II: Shoemake, SIGGRAPH 1985 (slerp); White, arXiv:1609.04468 (spherical lat
 
 ---
 
-## **Unified paper v2 (2026-08-22): [`curved-corpus-unified-2026-08-22-v2.tex`](curved-corpus-unified-2026-08-22-v2.tex)** — supersedes the 08-13 tex: scope note updated for the executed $A_ℓ$ admission null (recorded negative, CI-enforced), plus a new Addendum §: the lens powered end-to-end (15-seed sweep, budget, amplitude, real-corpus run ΔJ=+126.1 with ~5× selection-null margin) and the geometry of the optimized chart — loxodromic spiral zoom (translation length 1.073, rotation 17.5°) converged onto the anti-caustic boundary (cond 997.8/1000); numbers in [`data/gapD/lens-geometry-2026-08-22.json`](data/gapD/lens-geometry-2026-08-22.json). Same-day follow-on — **loxodromic navigation executed**: J(t) along the canonical flow M^t is perfectly monotone (ρ = 1.0), crossing zero at t ≈ 0.5 and reaching the recorded optimum exactly at t = 1, with the guard failing at t = 1.05 — the optimum is the boundary point of its own flow, so lens design reduces to 1-D navigation along the loxodromic bearing. The induced flow coordinate u **fails admission** (sd(u) z = +1.64 < 3), joining A₁: no scalar coordinate yet survives the fixed-margin trial ([`data/gapD/loxodromic-navigation-2026-08-22.json`](data/gapD/loxodromic-navigation-2026-08-22.json)).
+## **Unified paper v2 (2026-08-22): [`curved-corpus-unified-2026-08-22-v2.tex`](curved-corpus-unified-2026-08-22-v2.tex)** — supersedes the 08-13 tex:
+scope note updated for the executed $A_ℓ$ admission null (recorded negative, CI-enforced), plus a new Addendum §: the lens powered end-to-end (15-seed sweep, budget, amplitude, real-corpus run ΔJ=+126.1 with ~5× selection-null margin) and the geometry of the optimized chart — loxodromic spiral zoom (translation length 1.073, rotation 17.5°) converged onto the anti-caustic boundary (cond 997.8/1000); numbers in [`data/gapD/lens-geometry-2026-08-22.json`](data/gapD/lens-geometry-2026-08-22.json). Same-day follow-on — **loxodromic navigation executed**: J(t) along the canonical flow M^t is perfectly monotone (ρ = 1.0), crossing zero at t ≈ 0.5 and reaching the recorded optimum exactly at t = 1, with the guard failing at t = 1.05 — the optimum is the boundary point of its own flow, so lens design reduces to 1-D navigation along the loxodromic bearing. The induced flow coordinate u **fails admission** (sd(u) z = +1.64 < 3), joining A₁: no scalar coordinate yet survives the fixed-margin trial ([`data/gapD/loxodromic-navigation-2026-08-22.json`](data/gapD/loxodromic-navigation-2026-08-22.json)).
 
-Machine-checked + CI-resolved status (2026-08-22, updated 2026-08-24)
+## Machine-checked + CI-resolved status (2026-08-22, updated 2026-08-24)
 
 The identity/measurement boundary of the unified paper (§6) is now enforced structurally in CI: workflow [`lean-check.yml`](../.github/workflows/lean-check.yml) runs two jobs on every push touching `data/lean/**`.
 
@@ -180,3 +175,10 @@ CI: `lean-check.yml` gains the `phonon-dispersion selftest` step; Lean §14 adds
   1. Exact input recovery from stored per-axis signed margins reproduces `frame_id` `77360296af046f8d` and `run_fingerprint` `fba40c7b482d4e2e`.
   2. Prefix bit ladder `2, 4, 8, 16, 30, 49, 79, 95, 116` selects focal dimension `n* = 7` at `tau = 0.5` bits (stable across `(0.055, 0.722)` bits), with `focal-point-corpus-specific` separation against the two-seed curveball null.
   3. Stereographic lift scale `s` is the Möbius lens power on `S^2`; RMS rescale recovers `>= 95%` of optimal packing count `N(0.095)` across globes.
+
+
+## Paper V — Conserved occupancy and recognition
+
+[Read the paper (PDF)](conserved-occupancy-2026-11-25.pdf) · [TeX source](conserved-occupancy-2026-11-25.tex) · [Conversation summary](data/occupancy/conversation.md) · [Reproduce the measurements](../tools/occupancy/README.md) · [Lean theorems](data/lean/OccupancyBounds.lean)
+
+Paper V carries the angular and binary spectra into a held-out recognition experiment. On two sets of 36 authored notes, the powered ambient chart raised greedy packing from 3 to 7 and 6 to 11 at the reference chord. Native centroids recognized 24 and 25. Every class allocation sums back to the input amount, whether measured in note-equivalents or UTF-8 bytes.
