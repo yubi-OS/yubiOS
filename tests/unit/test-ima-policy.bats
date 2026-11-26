@@ -592,3 +592,71 @@ EOS
   run cmp -s "$R/usr/lib/yubiOS/ima/ima-policy.sig" "$W/root2/usr/lib/yubiOS/ima/ima-policy.sig"
   [ "$status" -ne 0 ]
 }
+
+# ── 8. Regressions from CI runs on 0605c621a710 ───────────────────────────────
+
+# ci_dev_image 45862546139 / ci_assured_image 45862550172: stage-ci-sb-keys.sh runs in a rootless
+# container on the bind-mounted workspace; usr/lib/yubiOS/ima already exists (git checkout) and is
+# owned by another uid, so `install -d -m 0755 <existing dir>` died with
+# "install: cannot change permissions of '/work/usr/lib/yubiOS/ima': Operation not permitted".
+strict_install() {
+  REAL_INSTALL="$(command -v install)"
+  export REAL_INSTALL
+  cat > "$W/bin/install" <<'EOS'
+#!/bin/bash
+dir=0; for a in "$@"; do [ "$a" = -d ] && dir=1; done
+if [ "$dir" = 1 ]; then
+  prev=""
+  for a in "$@"; do
+    case "$prev" in -m|-o|-g) prev="$a"; continue ;; esac
+    case "$a" in -*) ;; *) if [ -d "$a" ]; then echo "install: cannot change permissions of '$a': Operation not permitted" >&2; exit 1; fi ;; esac
+    prev="$a"
+  done
+fi
+exec "$REAL_INSTALL" "$@"
+EOS
+  chmod +x "$W/bin/install"
+}
+
+@test "CI regression: --prepare-only never chmods an existing (foreign-owned) workspace directory" {
+  strict_install
+  make_root
+  run "$STAGE_SH" --prepare-only "$R"
+  [ "$status" -eq 0 ]
+  [[ "$output" != *"cannot change permissions"* ]]
+  [ -s "$R/usr/lib/yubiOS/ima/yubios-ima-mokvar-aa64.efi.patched" ]
+  # the full install phase on pre-existing etc/, drivers and ESP dirs must not chmod them either
+  mkdir -p "$R/etc/ima" "$R/usr/lib/systemd/boot/efi/drivers" "$R/boot/EFI/systemd/drivers"
+  run env YUBIOS_IMA_ARCH=aarch64 "$STAGE_SH" "$R"
+  [ "$status" -eq 0 ]
+  [ -s "$R/etc/ima/ima-policy" ] && [ -s "$R/boot/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi" ]
+}
+
+@test "CI regression: stage-ci-sb-keys.sh -> stage-ima-policy.sh with a pre-existing workspace ima dir and strict install" {
+  ci_stage_env
+  strict_install
+  WS="$W/workspace"
+  mkdir -p "$WS/usr/lib/yubiOS/uki" "$WS/usr/lib/yubiOS/ima"
+  cp "$(resolve usr/lib/yubiOS/uki/stage-ci-sb-keys.sh)" "$WS/usr/lib/yubiOS/uki/"
+  cp "$STAGE_SH" "$POLICY" "$TMPL_X64" "$TMPL_AA64" "$WS/usr/lib/yubiOS/ima/"
+  run env SOURCE_DATE_EPOCH=1767225600 bash "$WS/usr/lib/yubiOS/uki/stage-ci-sb-keys.sh" "$WS"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"done (prepare-only)"* ]]
+  [[ "$output" != *"cannot change permissions"* ]]
+}
+
+# yubiOS-ci 45862541327 shellcheck job: SC2015 (A && B || C) and SC2059 (variable printf format)
+# in stage-ima-policy.sh. The job lints every usr/lib/yubiOS/**/*.sh and scripts/**/*.sh.
+@test "CI regression: shellcheck is clean on the IMA scripts (same flags as the CI shellcheck job)" {
+  command -v shellcheck >/dev/null 2>&1 || skip "shellcheck not installed"
+  top="$(cd "$(dirname "$STAGE_SH")/../../../.." && pwd -P)"
+  [ -d "$top/usr/lib/yubiOS" ]
+  # exactly the yubiOS-ci.yml shellcheck job: every usr/lib/yubiOS + scripts *.sh in one invocation
+  run bash -c 'cd "$1" && find usr/lib/yubiOS scripts -name "*.sh" -print0 | xargs -0 shellcheck --source-path=usr/lib/yubiOS --source-path=scripts' _ "$top"
+  echo "$output"
+  [ "$status" -eq 0 ]
+  # plus the files outside that set added for the signed IMA policy
+  run shellcheck "$MOD_SETUP" "$HOOK_SH" "$(resolve tools/build-ima-mokvar-templates.sh)"
+  echo "$output"
+  [ "$status" -eq 0 ]
+}

@@ -71,6 +71,10 @@ esp_driver_dirs() {
   if [ -d "$ROOT/boot/efi/EFI" ]; then echo "$ROOT/boot/efi/EFI/systemd/drivers"; fi
 }
 
+# Create a directory only if missing. `install -d -m` chmods an EXISTING directory too, which fails
+# with EPERM when the CI workspace (bind-mounted into the rootless staging container) owns it.
+ensure_dir() { [ -d "$1" ] || install -d -m 0755 "$1"; }
+
 hexbyte() { od -An -tx1 -v -j "$2" -N 1 "$1" | tr -d ' \n'; }
 
 # Patch a DER CA into the "YUBIMOK\0" slot (mokvar_drv.c struct yubimok_slot:
@@ -78,7 +82,7 @@ hexbyte() { od -An -tx1 -v -j "$2" -N 1 "$1" | tr -d ' \n'; }
 patch_slot() {
   local tmpl="$1" der="$2" out="$3" len offs off
   len="$(wc -c < "$der" | tr -d ' ')"
-  [ "$len" -ge 64 ] && [ "$len" -le "$SLOT_MAX" ] || die "CA DER must be 64..$SLOT_MAX bytes (got $len)"
+  if [ "$len" -lt 64 ] || [ "$len" -gt "$SLOT_MAX" ]; then die "CA DER must be 64..$SLOT_MAX bytes (got $len)"; fi
   [ "$(hexbyte "$der" 0)" = 30 ] || die "CA is not DER"
   [ "$(head -c 2 "$tmpl")" = MZ ] || die "$tmpl is not a PE image"
   offs="$(LC_ALL=C grep -obUa 'YUBIMOK' "$tmpl" | cut -d: -f1)"
@@ -147,13 +151,13 @@ EOF
 
   {
     printf '\003\002\004'
-    printf "\\x${keyid:0:2}\\x${keyid:2:2}\\x${keyid:4:2}\\x${keyid:6:2}"
+    printf '%b' "\\x${keyid:0:2}\\x${keyid:2:2}\\x${keyid:4:2}\\x${keyid:6:2}"
     printf '\001\000'
     cat "$WORK/policy.rsasig"
   } > "$WORK/ima-policy.sig"
   [ "$(wc -c < "$WORK/ima-policy.sig")" -eq 265 ] || die "security.ima blob is not 265 bytes"
 
-  install -d -m 0755 "$IMA_DIR"
+  ensure_dir "$IMA_DIR"
   openssl x509 -in "$WORK/ca.pem" -outform DER -out "$WORK/ca.der"
   openssl x509 -in "$WORK/leaf.pem" -outform DER -out "$WORK/leaf.der"
   install -m 0644 "$WORK/ca.der" "$CA_DER"
@@ -206,7 +210,7 @@ sign_efi() {
 install_drivers() {
   local suf name patched dst d have_key=0 rc
   if [ -f "$SB_DIR/ci-sb-db.key" ] && [ -f "$SB_DIR/db.crt" ]; then have_key=1; fi
-  install -d -m 0755 "$SDBOOT_DRV_DIR"
+  ensure_dir "$SDBOOT_DRV_DIR"
   for suf in $(arch_suffixes); do
     name="yubios-ima-mokvar-${suf}.efi"
     patched="$IMA_DIR/${name}.patched"
@@ -228,7 +232,7 @@ install_drivers() {
       log "no Secure Boot db key: keeping existing $dst"
     fi
     while read -r d; do
-      install -d -m 0755 "$d"
+      ensure_dir "$d"
       install -m 0644 "$dst" "$d/$name"
     done < <(esp_driver_dirs)
   done
@@ -236,7 +240,8 @@ install_drivers() {
 
 prepare
 if [ "$PREPARE_ONLY" = 0 ]; then
-  install -d -m 0755 "$ROOT/etc/ima"
+  ensure_dir "$ROOT/etc"
+  ensure_dir "$ROOT/etc/ima"
   install -m 0644 "$POLICY" "$ROOT/etc/ima/ima-policy"
   set_ima_xattr "$POLICY"
   set_ima_xattr "$ROOT/etc/ima/ima-policy"

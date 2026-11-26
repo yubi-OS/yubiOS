@@ -16,5 +16,6 @@ install() {
     inst_simple /usr/lib/yubiOS/ima/yubios-ima.der
     inst_simple /usr/lib/yubiOS/ima/ima-policy
     inst_simple /usr/lib/yubiOS/ima/ima-policy.sig.hex
+    # shellcheck disable=SC2154  # $moddir is set by dracut for every module
     inst_hook pre-pivot 61 "$moddir/load-ima-key.sh"
 }
