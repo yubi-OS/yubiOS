@@ -3,7 +3,6 @@
 import argparse
 import csv
 import hashlib
-import io
 import json
 from pathlib import Path
 import subprocess
@@ -30,9 +29,18 @@ def record(modality, split, label, group, source, grid, amount, unit, raw_hash):
     if not np.all((0 <= grid) & (grid <= 16)):
         raise ValueError("grid outside measurement scale")
     text = "\n".join(" ".join(map(str, row)) for row in grid)
-    return dict(modality=modality, split=split, label=str(label), group=group,
-                source=source, source_sha256=raw_hash, text=text,
-                input_sha256=digest(text.encode()), amount=int(amount), unit=unit)
+    return dict(
+        modality=modality,
+        split=split,
+        label=str(label),
+        group=group,
+        source=source,
+        source_sha256=raw_hash,
+        text=text,
+        input_sha256=digest(text.encode()),
+        amount=int(amount),
+        unit=unit,
+    )
 
 
 def handwriting(path):
@@ -48,8 +56,17 @@ def handwriting(path):
             for label, rows in by_class.items():
                 for _, key, pixels, sha in sorted(rows)[:12]:
                     grid = np.asarray(pixels, dtype=int)
-                    yield record("handwriting", split, label, split, key, grid,
-                                 grid.sum(), "ink_pixels", sha)
+                    yield record(
+                        "handwriting",
+                        split,
+                        label,
+                        split,
+                        key,
+                        grid,
+                        grid.sum(),
+                        "ink_pixels",
+                        sha,
+                    )
 
 
 def acoustic_grid(path):
@@ -58,19 +75,27 @@ def acoustic_grid(path):
         raise ValueError(f"unexpected PCM format in {path}")
     # 32 ms Hann windows and 16 ms hop. Average power in eight linear
     # frequency bands and eight equal time intervals, then quantize 60 dB.
-    _, _, z = stft(signal.astype(float), fs=sr, nperseg=256, noverlap=128,
-                   boundary=None, padded=False)
+    _, _, z = stft(
+        signal.astype(float),
+        fs=sr,
+        nperseg=256,
+        noverlap=128,
+        boundary=None,
+        padded=False,
+    )
     power = abs(z[:-1]) ** 2
     bands = power.reshape(8, 16, -1).mean(axis=1)
     if bands.shape[1] < 8:
-        bands = np.pad(bands, ((0, 0), (0, 8-bands.shape[1])), mode="edge")
+        bands = np.pad(bands, ((0, 0), (0, 8 - bands.shape[1])), mode="edge")
     bins = np.stack([a.mean(axis=1) for a in np.array_split(bands, 8, axis=1)], axis=1)
     db = 10 * np.log10(np.maximum(bins / max(bins.max(), 1e-30), 1e-6))
     return np.rint((db + 60) * 16 / 60), len(signal)
 
 
 def speech(root):
-    rev = subprocess.check_output(["git", "-C", root, "rev-parse", "HEAD"], text=True).strip()
+    rev = subprocess.check_output(
+        ["git", "-C", root, "rev-parse", "HEAD"], text=True
+    ).strip()
     if rev != FSDD_REV or subprocess.check_output(
         ["git", "-C", root, "status", "--porcelain", "--", "recordings"]
     ):
@@ -85,8 +110,17 @@ def speech(root):
             pool = [p for p in paths if p.name.startswith(f"{label}_{speaker}_")]
             for p in sorted(pool, key=lambda p: rank(p.name))[:n]:
                 grid, amount = acoustic_grid(p)
-                yield record("speech", split, label, speaker, p.name, grid, amount,
-                             "audio_samples", digest(p.read_bytes()))
+                yield record(
+                    "speech",
+                    split,
+                    label,
+                    speaker,
+                    p.name,
+                    grid,
+                    amount,
+                    "audio_samples",
+                    digest(p.read_bytes()),
+                )
 
 
 def main():
@@ -99,7 +133,9 @@ def main():
     rows.sort(key=lambda r: (r["modality"], r["split"], rank(r["source"])))
     if len(rows) != 480 or len({r["input_sha256"] for r in rows}) != 480:
         raise ValueError("unexpected size or duplicate payload")
-    args.output.write_text("".join(json.dumps(r, separators=(",", ":")) + "\n" for r in rows))
+    args.output.write_text(
+        "".join(json.dumps(r, separators=(",", ":")) + "\n" for r in rows)
+    )
 
 
 if __name__ == "__main__":

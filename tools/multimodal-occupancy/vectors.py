@@ -20,7 +20,11 @@ def sha(path):
 def inputs(path):
     rows = [json.loads(line) for line in path.read_text().splitlines()]
     hashes = [hashlib.sha256(r["text"].encode()).hexdigest() for r in rows]
-    if not rows or hashes != [r["input_sha256"] for r in rows] or len(set(hashes)) != len(rows):
+    if (
+        not rows
+        or hashes != [r["input_sha256"] for r in rows]
+        or len(set(hashes)) != len(rows)
+    ):
         raise ValueError("empty, repeated or altered embedding inputs")
     if len({r["source"] for r in rows}) != len(rows):
         raise ValueError("duplicate observation IDs")
@@ -32,10 +36,14 @@ def pack(manifest, batches, out):
     parts, receipts = [], []
     for start in range(0, len(rows), BATCH):
         receipt = json.loads((batches / f"{start}.json").read_text())
-        group = rows[start:start+BATCH]
+        group = rows[start : start + BATCH]
         shape = [len(group), 1024]
-        if (receipt["start"] != start or receipt["count"] != len(group)
-                or receipt["shape"] != shape or receipt["inputs"] != [r["input_sha256"] for r in group]):
+        if (
+            receipt["start"] != start
+            or receipt["count"] != len(group)
+            or receipt["shape"] != shape
+            or receipt["inputs"] != [r["input_sha256"] for r in group]
+        ):
             raise ValueError(f"unexpected receipt at {start}")
         x = np.fromfile(batches / f"{start}.f32", dtype="<f4").reshape(shape)
         if not np.isfinite(x).all() or np.any(np.linalg.norm(x, axis=1) == 0):
@@ -48,12 +56,25 @@ def pack(manifest, batches, out):
     for mod in sorted({r["modality"] for r in rows}):
         if not mod.isidentifier():
             raise ValueError("use simple modality names")
-        ix = [i for i,r in enumerate(rows) if r["modality"] == mod]
+        ix = [i for i, r in enumerate(rows) if r["modality"] == mod]
         dest = out / (mod + ".npz")
-        np.savez_compressed(dest, vectors=x[ix], inputs=[rows[i]["input_sha256"] for i in ix])
+        np.savez_compressed(
+            dest, vectors=x[ix], inputs=[rows[i]["input_sha256"] for i in ix]
+        )
         files[mod] = sha(dest)
-    (out / "inference.json").write_text(json.dumps(dict(model=MODEL, dtype="float32",
-        records_sha256=sha(manifest), files=files, batches=receipts), indent=2)+"\n")
+    (out / "inference.json").write_text(
+        json.dumps(
+            dict(
+                model=MODEL,
+                dtype="float32",
+                records_sha256=sha(manifest),
+                files=files,
+                batches=receipts,
+            ),
+            indent=2,
+        )
+        + "\n"
+    )
 
 
 def acquire(manifest, batches):
@@ -61,27 +82,37 @@ def acquire(manifest, batches):
     batches.mkdir(parents=True, exist_ok=False)
     url = f"https://api.cloudflare.com/client/v4/accounts/{os.environ['CLOUDFLARE_ACCOUNT_ID']}/ai/run/{MODEL}"
     for start in range(0, len(rows), BATCH):
-        group = rows[start:start+BATCH]
-        req = Request(url, data=json.dumps({"text":[r["text"] for r in group]}).encode(),
-                      headers={"Authorization":"Bearer "+os.environ["CLOUDFLARE_API_TOKEN"],
-                               "Content-Type":"application/json"})
+        group = rows[start : start + BATCH]
+        req = Request(
+            url,
+            data=json.dumps({"text": [r["text"] for r in group]}).encode(),
+            headers={
+                "Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"],
+                "Content-Type": "application/json",
+            },
+        )
         with urlopen(req, timeout=120) as response:
             result = json.load(response)["result"]
         values = np.asarray(result["data"], dtype="<f4")
         if list(values.shape) != result["shape"] or values.shape != (len(group), 1024):
             raise ValueError("unexpected provider shape")
-        values.tofile(batches/f"{start}.f32")
-        receipt = dict(start=start,count=len(group),shape=result["shape"],pooling=result.get("pooling"),
-                       inputs=[r["input_sha256"] for r in group])
-        (batches/f"{start}.json").write_text(json.dumps(receipt))
+        values.tofile(batches / f"{start}.f32")
+        receipt = dict(
+            start=start,
+            count=len(group),
+            shape=result["shape"],
+            pooling=result.get("pooling"),
+            inputs=[r["input_sha256"] for r in group],
+        )
+        (batches / f"{start}.json").write_text(json.dumps(receipt))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode",choices=["acquire","pack"])
-    for arg in ["records","batches","output"]:
-        parser.add_argument(arg,type=Path)
+    parser.add_argument("mode", choices=["acquire", "pack"])
+    for arg in ["records", "batches", "output"]:
+        parser.add_argument(arg, type=Path)
     args = parser.parse_args()
     if args.mode == "acquire":
         acquire(args.records, args.batches)
-    pack(args.records,args.batches,args.output)
+    pack(args.records, args.batches, args.output)
