@@ -34,18 +34,10 @@ Tokens blocked (default): axiom, native_decide, macro, macro_rules, syntax,
 elab, elab_rules, import, set_option, run_cmd, #eval, attribute, notation,
 infix, infixl, infixr.
 
-INVARIANT — what this gate scans: CI (lean-check.yml, "Forbidden-token gate"
-step) invokes this script ONLY on the five source files
-papers/data/lean/{CurvedCorpus,WayfinderBounds,RadiusBounds,RayleighBounds,
-AzimuthBounds}.lean. It must NEVER be pointed at the GENERATED probe files
-(`/tmp/<base>-probe.lean`, produced by `check_lean_axioms.py --gen`): the
-probe's own enumeration machinery legitimately contains `import Lean` and a
-`run_cmd` block and would trip this gate by construction. The probe's
-machinery must never be token-scanned; the token list above and the
-five-file list in the workflow are two halves of that contract. (Verified
-2026-10-08 against the tarball of main @ 7d5ee590a55e: the gate step passes
-no --tokens flag, so it uses DEFAULT_TOKENS below — no workflow change is
-required for this expansion.)
+Scan hand-written sources only. The core Lean workflows forbid every import.
+For OccupancyBounds.lean, lean-occupancy.yml explicitly permits standalone
+Mathlib imports. Generated axiom probes have their own legitimate imports and
+environment-enumeration commands and are checked separately.
 
 Matching contract:
   1. Comments and string literals are stripped FIRST, using the exact same
@@ -137,7 +129,7 @@ def compile_token_patterns(tokens: list[str]) -> list[tuple[str, re.Pattern]]:
     return pats
 
 
-def scan_source(path: Path, tokens: list[str]) -> tuple[list[dict], int]:
+def scan_source(path: Path, tokens: list[str], *, allow_mathlib_imports: bool = False) -> tuple[list[dict], int]:
     """Scan one file. Returns (violations, scanned_char_count). Fail-closed:
     unreadable -> OSError propagates (usage error); unparseable -> ValueError.
     """
@@ -147,6 +139,10 @@ def scan_source(path: Path, tokens: list[str]) -> tuple[list[dict], int]:
     lines = stripped.split("\n")
     for token, pat in compile_token_patterns(tokens):
         for i, line in enumerate(lines):
+            if allow_mathlib_imports and token == "import" and re.fullmatch(
+                r"[ \t]*import[ \t]+Mathlib(?:\.[A-Za-z_]\w*)+[ \t]*", line
+            ):
+                continue
             for m in pat.finditer(line):
                 violations.append(
                     {
@@ -169,6 +165,8 @@ def main(argv: list[str] | None = None) -> int:
         + ",".join(DEFAULT_TOKENS)
         + ")",
     )
+    ap.add_argument("--allow-mathlib-imports", action="store_true",
+                    help="permit standalone import Mathlib.* lines in the scanned sources")
     args = ap.parse_args(argv)
 
     tokens = [t.strip() for t in args.tokens.split(",") if t.strip()]
@@ -183,7 +181,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"usage error: source not found: {path}", file=sys.stderr)
             return 2
         try:
-            violations, n = scan_source(path, tokens)
+            violations, n = scan_source(path, tokens, allow_mathlib_imports=args.allow_mathlib_imports)
         except (UnicodeDecodeError, ValueError) as exc:
             print(f"usage error: cannot scan {path}: {exc}", file=sys.stderr)
             return 2
