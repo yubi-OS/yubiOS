@@ -61,6 +61,13 @@ Give query $q$ an amount $a_q$. Then $A_c=\sum_q a_qp_c(q)$ satisfies $\sum_c A_
 \begin{proof}Interchange the finite sums and apply $\sum_c p_c(q)=1$ separately to every query. Multiplying $\overline b_c$ by $U_c$ recovers $B_c$.\end{proof}
 Equation~\eqref{eq:mole} motivates the separation of amount from allocation. $\overline b_c$ is a weighted mean of the observed lengths. It changes with the corpus, encoding or scorer. The reference bank has no physical molar mass, temperature bath or demonstrated thermal equilibrium.
 
+The existing Boltzmann-collapse tool makes the multiplicity explicit. For an exchangeable potential $\Phi(j)$ on the whole cube,
+\[
+ \pi_\tau(j)=\binom dj e^{-\Phi(j)/\tau}/Z,\qquad
+ F_\tau(j)=\Phi(j)-\tau\log\binom dj.
+\]
+For $\Phi(j)=j$, $Z=(1+r)^d$ with $r=e^{-1/\tau}$. At $d=4,\tau=0.75$ the five ideal shell probabilities are $(0.3923,0.4136,0.1635,0.0287,0.0019)$. The tool independently builds the 16-state Metropolis chain. Its stationary shell law agrees within $2.3\times10^{-16}$. For the empirical bank use $H_{qcj}=\#\{r'\in R_c:d_H(q,r')=j\}$ in place of $\binom dj$. Then $s_c(q)=(\pi_c/n_c)\sum_j H_{qcj}r^j$. This distinction keeps the combinatorics of the possible states separate from the instruments actually observed.
+
 \section{Curvature, scale and resolution}
 Let $p$ be the normalized reference mean and $x\in S^{D-1}$, $x\ne-p$. Orthogonal projection followed by a stereographic chart, dilation and inverse chart gives
 \begin{equation}
@@ -89,7 +96,7 @@ If $G=NI$, this equals $N\sum_i\beta_i^2$. Arbitrarily sampled learned frequenci
  e^{-t\ell(\ell+1)}P_\ell(x^\top y).
 \]
 The README relates this to the great-circle interpolant
-$\big(\sin((1-u)\theta)x+\sin(u\theta)y\big)/\sin\theta$ for $0<\theta<\pi$ \citep{readme,shoemake}. A single deterministic interpolation is a geodesic segment. Random walks with a specified transition law can model diffusion. We measured empirical angular coefficient shares through degree three; we did not fit a heat time to the powered globe.
+$\big(\sin((1-u)\theta)x+\sin(u\theta)y\big)/\sin\theta$ for $0<\theta<\pi$ \citep{readme,shoemake}. A single deterministic interpolation is a geodesic segment. Random walks with a specified transition law can model diffusion. With $\hat c_{\ell m}=N^{-1}\sum_q Y_{\ell m}(q)$ and $P_\ell=\sum_m|\hat c_{\ell m}|^2$, we measured $P_\ell/\sum_{k=0}^3P_k$ through degree three; we did not fit a heat time to the powered globe.
 
 On the $d$-bit cube let $\chi_S(x)=(-1)^{S\cdot x}$, $\widehat f(S)=\sum_x f(x)\chi_S(x)$, and $f(x)=2^{-d}\sum_S\widehat f(S)\chi_S(x)$ \citep{odonnell}. The Hamming kernel $k(x)=r^{|x|}$ has $r=e^{-1/\tau}$. Multiplying one-bit transforms gives
 \begin{equation}
@@ -169,16 +176,16 @@ Quantization & 6.326 & 851.52 & 134.60\\
 \end{tabular}
 \caption{Conserved allocations for B under powered, adjusted-temperature Gibbs. True mechanism counts are six each. Displayed allocations are rounded independently.}
 \end{table}
-Drift receives 6.817 note-equivalents and 928.88 bytes, giving 136.25 bytes per assigned note-equivalent. The repeat pass assigns 928.87 bytes to drift. The byte count covers each text field alone. Replicating every offset reference eightfold in the frozen A calculation moved the largest normalized class probability by $1.7\times 10^{-16}$. Removing the within-class divisor changed 16 top choices under the replicated-bank comparison. On B the powered scorer's accuracy exceeded its own blocked-label null ($z=8.65$, $+18.74$ dBc, $p=0.0001$). Testing a scorer against shuffled labels answers whether its decisions align with labels; the paired chart comparison in Table~2 answers whether power improved them.
+Drift receives 6.817 note-equivalents and 928.88 bytes, giving 136.25 bytes per assigned note-equivalent. The repeat pass assigns 928.87 bytes to drift. The byte count covers each text field alone. Replicating every offset reference eightfold in the frozen A calculation moved the largest normalized class probability by $1.7\times 10^{-16}$. Removing the within-class divisor changed 16 top choices under the replicated-bank comparison. On B the powered scorer's accuracy exceeded its own blocked-label null ($z=8.65$, $+18.74$ dBc, $p=0.0001$). The paired test enumerates all $2^6$ signs on the six station-level differences in correct counts. Testing a scorer against shuffled labels answers whether its decisions align with labels; the paired chart comparison in Table~2 answers whether power improved them.
 
 \section{What is checked}
-\code{OccupancyBounds.lean} contains 33 named theorems. It proves positivity and normalization, interchange of finite amounts, molar exponent conversion, replication, shell multiplicity and regrouping, finite and infinite dyadic claims, the sphere-lift norm identity, and the spherical cosine-energy identity given the right-triangle law. An octant witnesses the strict squared-arc inequality. It also proves sampled Gram expansion, finite Parseval under stated orthogonality, the heat amplitude-to-power factor, Walsh product-kernel factorization and finite convolution, as well as collision, log-ratio and gap bounds. The hash-pinned scope manifest identifies every statement and the definitions on which it operates. The continuous spherical heat kernel, spherical cosine law and physical canonical model enter as cited mathematical background. The formal file does not derive a continuum physical model from embeddings.
+\code{OccupancyBounds.lean} contains 38 named theorems. It proves positivity and normalization, interchange of finite amounts, molar exponent conversion, replication, shell multiplicity and regrouping, finite and infinite dyadic claims, the sphere-lift norm identity, and the spherical cosine-energy identity given the right-triangle law. An octant witnesses the strict squared-arc inequality. It also proves sampled Gram expansion, finite Parseval under stated orthogonality, the heat amplitude-to-power factor, Walsh product-kernel factorization, finite convolution, orthogonal inversion and signed class-score reconstruction, as well as collision, log-ratio and gap bounds. The upstream compiler and mathlib versions are both 4.35.0 \citep{lean,mathlib}. The hash-pinned scope manifest identifies every statement and the definitions on which it operates. The continuous spherical heat kernel, spherical cosine law and physical canonical model enter as cited mathematical background. The formal file does not derive a continuum physical model from embeddings.
 
 \code{tools/occupancy/replay.py} recomputes both observed passes. It uses the repository point-map, Boltzmann collapse, sonometer, fixed-margin sampler, angular decomposer and Walsh--Krawtchouk routines. The empirical checks include agreement of direct and transformed scores, byte conservation, exact per-query classifications across passes and finite-precision inverse geometry. The computed statistics depend on text, model response, fixture order and sampling seeds. The dedicated CI workflow builds against the project's pinned upstream Lean and mathlib, checks axioms, and runs both datasets without a Cloudflare credential. The optional re-embedding command accepts a separately supplied credential for a fresh measurement.
 
 What transfers from statistical mechanics is the accounting: specify the entity, preserve its amount and normalize a distribution over alternatives. Here that accounting exposes two distinct findings. The ambient chart resolved more directions at a meaningful fixed scale. On the heavily compressed cube, collisions survived a geometry null while signed degree alignment failed its class-label test. Native centroids provide a strong benchmark for the next test on independently collected notes.
 
-\begin{thebibliography}{99}\small
+\begin{thebibliography}{99}\small\raggedright
 \bibitem[Tchatalbachian(2026a)]{p1} S. Tchatalbachian. \emph{Learned Latent Curves and the Hyperspherical-Harmonic Variant}. Paper I, yubiOS, 6 August 2026.
 \bibitem[Tchatalbachian(2026b)]{p2} S. Tchatalbachian. \emph{Is This X? A Null-Standardized Question Space for Corpus Curvature}. Paper II, yubiOS, 12 August 2026.
 \bibitem[Tchatalbachian(2026c)]{p3} S. Tchatalbachian. \emph{The Curved-Corpus Program, Unified}. Paper III, yubiOS, 13 August 2026, revised source 22 August.
@@ -198,5 +205,7 @@ What transfers from statistical mechanics is the accounting: specify the entity,
 \bibitem[Atas et al.(2013)]{atas} Y. Y. Atas et al. Distribution of the ratio of consecutive level spacings in random matrix ensembles. \emph{Phys.\ Rev.\ Lett.} 110, 084101. \href{https://doi.org/10.1103/PhysRevLett.110.084101}{Article}.
 \bibitem[Montgomery(1973)]{montgomery} H. L. Montgomery. The pair correlation of zeros of the zeta function. \emph{Proc.\ Symp.\ Pure Math.} 24, 181--193. \href{https://public.websites.umich.edu/~hlm/paircor1.pdf}{Author's copy}.
 \bibitem[Phipson and Smyth(2010)]{phipson} B. Phipson and G. K. Smyth. Permutation $p$-values should never be zero. \emph{Stat.\ Appl.\ Genet.\ Mol.\ Biol.} 9(1). \href{https://doi.org/10.2202/1544-6115.1585}{Article}.
+\bibitem[Lean FRO(2026)]{lean} Lean contributors. Lean 4.35.0. \href{https://github.com/leanprover/lean4/releases/tag/v4.35.0}{Compiler release}.
+\bibitem[Mathlib Community(2026)]{mathlib} Leanprover Community. Mathlib 4.35.0, locked source. \href{https://github.com/leanprover-community/mathlib4/tree/56a005855ea17e0b0958f73ec801ae140b0a1679}{Verified dependency revision}.
 \end{thebibliography}
 \end{document}

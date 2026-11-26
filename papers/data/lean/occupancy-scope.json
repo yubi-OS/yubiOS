@@ -175,6 +175,31 @@
       "name": "Occupancy.gibbs_corpus_balance",
       "status": "lean-proved",
       "statement_sha256": "ad914aba4b469d22e1cd3634b10670246c7210b167c389b4e8c3af981541c804"
+    },
+    {
+      "name": "Occupancy.cube_partition",
+      "status": "lean-proved",
+      "statement_sha256": "1e6c4c4cb0d86b6bddf2f24508f179a42963d2a376f91214d195927fae89843c"
+    },
+    {
+      "name": "Occupancy.cube_shell_fractions",
+      "status": "lean-proved",
+      "statement_sha256": "ae2618f77d22a10f445e98a4c66e41b4599e512da761a0fca8eb5dccc079af28"
+    },
+    {
+      "name": "Occupancy.bank_shell_score",
+      "status": "lean-proved",
+      "statement_sha256": "ea3357687e846e987c3fae997235a62130ca554a4a4ea6ea9f9d2621bcb1e0a0"
+    },
+    {
+      "name": "Occupancy.finite_inversion",
+      "status": "lean-proved",
+      "statement_sha256": "40663eb473b2ad9bb9f4aa40ec3253ce7ef63c2e528e5ebd207b3440a8709036"
+    },
+    {
+      "name": "Occupancy.spectral_kernel_score",
+      "status": "lean-proved",
+      "statement_sha256": "011dbf55fca30f450f9c3f5a1d155e66935409771c85ad273fbb39cb21ed4f85"
     }
   ],
   "definitions": {
@@ -182,8 +207,8 @@
     "pin": "sha256 over the sorted 'command-key:normalized-text' entries of EVERY top-level command in the lean_file -- imports, open/namespace/end wrappers, attribute lines (hashed WITH the declaration they decorate), declarations of any kind, set_option lines, #print/#eval/#check, notation/syntax/macro/elab, run_cmd blocks (comments stripped, whitespace collapsed). theorem/lemma/example proof bodies are EXCLUDED: the hashed text is the statement through the first top-level ':=' (inclusive) or up to the first match-arm line. 'decls' maps each command key (<kind>:<name>, or <kind> with #N collision suffixes for unnamed commands) to its own normalized-text sha256",
     "regenerate": "python3 papers/data/lean/pin_statements.py pin <manifest.json>",
     "policy": "A commands-hash mismatch FAILS CI even when every theorem statement is unchanged: adding ANY top-level command (including an attribute-prefixed declaration, which round 2's line-start keyword regex missed), redefining a definition, or adding a set_option/#print/notation line changes what the pinned theorems actually prove or how the file elaborates, so a legitimate change requires a deliberate definitions-block regeneration IN THE SAME PR, with the command diff reviewed as a semantic change. Do NOT regenerate the block to make CI pass without reviewing the diff. Proof-body-only rewrites (kernel-checked content) do NOT change the hash and need no regeneration. A block pinning zero commands is refused (vacuous pin), and a block whose schema is not commands-v2 FAILS the gate (fail-closed; an old definition-pins/1 defs-only block cannot be verified against command hashing).",
-    "hash": "6a4362c391fab32166cb2c562efeef17763a1640e4d8ea7de7a465dcbd49364e",
-    "count": 48,
+    "hash": "59cd576bf9feb50e577e77d92fc5fd8e46b049d3960aae489c4ae372f6695856",
+    "count": 53,
     "decls": {
       "def:bitTerm": "fd53dd4962306ce9d752da0373d3069a21395fca15cdf853de1d38781e4987e8",
       "def:fraction": "1033e6a4aab5cf1128920af2ca3bb54401dff072a839c0eff8ce83a8b5f24a3d",
@@ -200,8 +225,11 @@
       "open:scoped": "3da4aaed9c768db0668f749056a761cfb74d3f51180dc125ccd5c3a5add1b3d6",
       "section": "e3eed6c918c6b5f803a97cb89d478aad13c09ba97ed60c87f611a083a9e14abd",
       "theorem:ambient_lift_unit": "c6973c34cee05f9c1c40ddb62c0faf7f48a1eb9e423815c1c852f04f9b42e75e",
+      "theorem:bank_shell_score": "24da889064137d4ee3c8eec8420dc87b8786a6cbd4736ee01a658acad6ac873a",
       "theorem:bytes_per_entity": "1f595b4532fdc15b56d0a2ecfc6a199c096685cbab8856e0ee3bdd60dcbbb3c1",
       "theorem:collision_pairs": "a25f0d2887e89be8119b5c25650eb9befc1ddef2d0879bb6765679be85c4c522",
+      "theorem:cube_partition": "6fc0635c84b235d41f6ec648f4951c0b9683d36ec073764637119623d9f1a066",
+      "theorem:cube_shell_fractions": "13f0ad9da2862174cb89eebe87d30980e510f6518a7ad4c02fb16d4d90170c97",
       "theorem:cubic_shell_count": "0665f3a51e6b5e105f6a5a8c5b578bb32f98c8a074d331e9da9eb39c09a5ed17",
       "theorem:db_cascade": "aeabe04a92b17a41a7b950c2a3b689ae960c12fbee2d25db701f23b859d063cf",
       "theorem:degree_response": "66d01f22ac156529bc1d4652234e522790f8ce12b68d04dfcf80fdeb0d43cfd3",
@@ -210,6 +238,7 @@
       "theorem:dyadic_partial": "888a39f60978dab2a4ee03511b67f30286ab1cfeb6a28605015d78c75aa4836d",
       "theorem:energy_temperature_scale": "01b600fe1bf9309be567cfe4331c6ed466f2d31e7632a03e17830dde7a3a1d88",
       "theorem:finite_convolution": "7bba0661b148cc3c320ce954a13c5a35c44c84f3c6e13ddd58a5e7e5e626df02",
+      "theorem:finite_inversion": "bd06d7c0b55f1f1ac959ccd421613818eef22dd36aedffd2e5179d3ef388744b",
       "theorem:finite_parseval": "2b8da0c2cbf73c1a0d193bde354dd1229abb1ba1fd7640388514484af5972b13",
       "theorem:fractions_sum": "866ed9ae47ea007a53844a6e0964a1f87cda2732f439f8fa8d27320fc0e76994",
       "theorem:free_energy_weight": "102ae7f49178e6c81e20f08854af883dfd1d7928ac62d6b91ebd2fc0bd7d52ce",
@@ -227,6 +256,7 @@
       "theorem:right_energy": "792794c623f1f850448dbc3978ec3183b3b8cc698150cada813916e722d1b02c",
       "theorem:right_octant": "76f63094144b084947a2a937e07133817b98da17f26ceaa533d75afef531d498",
       "theorem:spacing_ratio_bounds": "9c7b870c40452e4aab2d3da6b7a4f6a5b0e53c97c307593824c49099435e2ee1",
+      "theorem:spectral_kernel_score": "c638119a5b351799c4f05a788ca5862d0293e6603b93ef533d27a7c5a182d52b",
       "theorem:square_amplitudes_summable": "7e709286fe98d0cb0364af05cc908f54442eefaf24bc4b5b9cbaee375e02ec33",
       "theorem:total_amount": "113b0593f579d77e54d9b7787dc6d18d3a5d2e886f2489f138393a60342837c9",
       "theorem:uniform_replication": "799b7a1e46f7899e7199859be1c1f4be40e6eb06b0fd67523b751d028e33b89d",

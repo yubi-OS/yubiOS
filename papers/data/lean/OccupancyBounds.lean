@@ -201,4 +201,51 @@ theorem gibbs_corpus_balance [Nonempty C] (a : Q → ℝ) (g E : Q → C → ℝ
     ∑ c, ∑ q, a q * fraction (gibbs (g q) (E q) T) c = ∑ q, a q :=
   total_amount a _ (fun q => fractions_sum _ (partition_positive _ _ _ (hg q)).ne')
 
+/-- Partition function for every binary microstate with linear Hamming energy. -/
+theorem cube_partition (d : ℕ) (r : ℝ) :
+    ∑ j ∈ range (d+1), r^j * (d.choose j : ℝ) = (1+r)^d := by
+  rw [add_comm 1 r, add_pow]
+  simp
+
+/-- The ideal binomial shell distribution is normalized for positive Boltzmann ratio. -/
+theorem cube_shell_fractions (d : ℕ) (r : ℝ) (hr : 0 < r) :
+    ∑ j ∈ range (d+1), (r^j * (d.choose j : ℝ))/(1+r)^d = 1 := by
+  simp only [div_eq_mul_inv, ← Finset.sum_mul, cube_partition]
+  exact mul_inv_cancel₀ (by positivity)
+
+/-- Actual bank shell counts, and hence multiplicities, depend on the query. -/
+theorem bank_shell_score (dist : I → ℕ) (d : ℕ) (hd : ∀ i, dist i ≤ d) (r : ℝ) :
+    ∑ j ∈ range (d+1), (∑ i, if dist i = j then (1:ℝ) else 0) * r^j =
+      ∑ i, r^(dist i) := by
+  classical
+  rw [← regroup_shells (fun i => r^(dist i)) dist d hd]
+  apply Finset.sum_congr rfl
+  intro j _
+  rw [Finset.sum_mul]
+  apply Finset.sum_congr rfl
+  intro i _
+  by_cases h : dist i = j <;> simp [h]
+
+/-- Inversion of an orthogonal finite analysis matrix under its row Gram law. -/
+theorem finite_inversion [DecidableEq Q] (x : Q → I → ℝ) (f : Q → ℝ) (N : ℝ)
+    (hN : N ≠ 0) (orth : ∀ q z, ∑ i, x q i*x z i = if q=z then N else 0) (q : Q) :
+    (∑ i, (∑ z, f z*x z i)*x q i)/N = f q := by
+  simp_rw [Finset.sum_mul]
+  rw [Finset.sum_comm]
+  have h (z : Q) : (∑ i, f z*x z i*x q i) = f z*(if z=q then N else 0) := by
+    simp_rw [mul_assoc, ← Finset.mul_sum, orth]
+  simp_rw [h]
+  simp [mul_ite, hN]
+
+/-- Signed reconstruction of each individual class kernel score, before class normalization. -/
+theorem spectral_kernel_score {G : Type*} [Fintype G] [DecidableEq G] [AddCommGroup G]
+    (f k : G → ℝ) (χ : G → I → ℝ) (N : ℝ) (hN : N ≠ 0)
+    (character : ∀ i x y, χ (x+y) i = χ x i * χ y i)
+    (orth : ∀ x y, ∑ i, χ x i*χ y i = if x=y then N else 0) (q : G) :
+    (∑ i, ((∑ y, f y*χ y i)*(∑ z, k z*χ z i))*χ q i)/N =
+      ∑ y, f y*k (q-y) := by
+  have h (i : I) := finite_convolution f k (fun x => χ x i) (character i)
+  simp_rw [← h]
+  exact finite_inversion χ _ N hN orth q
+
 end Occupancy
