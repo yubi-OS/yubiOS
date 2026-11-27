@@ -638,6 +638,14 @@
       }
     },
     {
+      "path": "risque/SKILL.md",
+      "name": "risque",
+      "description": "Quantitative and systems-theoretic risk analysis and risk science (Risqué): SRA and Aven (C, U | K) risk ontology, Kaplan-Garrick scenario triplets, Fault and Event Tree PRA with Birnbaum, Fussell-Vesely, RAW, and RRW importance measures, STAMP and STPA unsafe control actions, NUREG/CR-6883 SPAR-H human reliability, Bayesian Beta-Binomial and Gamma-Poisson zero-failure updating, EVPI and EVSI Value of Information, Sobol global sensitivity, Extreme Value Theory (GEV, GPD) and coherent CVaR vs. VaR tail risk, Open FAIR cyber loss exceedance curves replacing ordinal 5x5 risk matrices, ALARP disproportion and F-N societal curves, and Perrow, Motter-Lai, and NIST AI RMF fail-closed safety envelopes. Triggers on: risque, Risqué, risk analysis, risk science, PRA, fault tree, event tree, minimal cut sets, Birnbaum, RAW, RRW, STPA, STAMP, SPAR-H, EVPI, EVSI, Sobol, GEV, GPD, CVaR, Expected Shortfall, Open FAIR, ALARP, F-N curve, Normal Accident Theory.",
+      "metadata": {
+        "short-description": "Risqué (risque): Quantitative risk science, PRA, STPA, Bayesian VoI, EVT/CVaR tail risk, Open FAIR & ALARP governance"
+      }
+    },
+    {
       "path": "rockchip-sd-flash/SKILL.md",
       "name": "rockchip-sd-flash",
       "description": "Write a Rockchip U-Boot loader (u-boot-rockchip.bin) to an SD card in rock1's slot via the shell bridge — digest-pinned podman pull from the CI firmware image, sha256 verification against the CI artifact, target guards, sector-64 dd write, and readback verification. Use when flashing or updating a Rockchip loader card (ROCK 5B, RockPro64, PineTab2) in rock1's SD slot after a ci_firmware-rk run, or when the user asks to put a firmware bin on the card in rock1.",
@@ -832,6 +840,14 @@
       "path": "web-perf/SKILL.md",
       "name": "web-perf",
       "description": "Analyzes web performance using Chrome DevTools MCP. Measures Core Web Vitals (LCP, INP, CLS) and supplementary metrics (FCP, TBT, Speed Index), identifies render-blocking resources, network dependency chains, layout shifts, caching issues, and accessibility gaps. Use when asked to audit, profile, debug, or optimize page load performance, Lighthouse scores, or site speed. Biases towards retrieval from current documentation over pre-trained knowledge."
+    },
+    {
+      "path": "workers-ai-router/SKILL.md",
+      "name": "workers-ai-router",
+      "description": "Route any prompt to the right Cloudflare Workers AI model out of the live 52-model catalog: task relevance first (20 intent routes: chat, coding, reasoning, structured output, tool calling, decision scoring, safety, long context, bulk, embeddings, multimodal embeddings, image-to-text, image classification, text-to-image, speech-to-text, text-to-speech, VAD, translation, rerank, sentiment), then quality within the route (pools ranked by the 2026-10-30 account benchmark). Triggers on: which workers ai model, route this prompt, pick a model for X, best workers ai model, cloudflare model for coding/embeddings/images/audio, cf model router, workers-ai-router.",
+      "metadata": {
+        "short-description": "Task-then-quality router over the live 52-model Workers AI catalog, grounded in the account benchmark"
+      }
     },
     {
       "path": "workers-best-practices/SKILL.md",
