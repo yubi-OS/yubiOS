@@ -173,7 +173,12 @@ RUN case "$(uname -m)" in \
 # Pinned in PINNED.md under "yubi-OS Release Binaries". Stock Fedora
 # gnome-control-center stays in the dnf block above (pulls runtime deps); this
 # upgrades main + filesystem subpackage together to 51.2.1-2.yubios.fc45 after
-# verifying both SHA-256 and SHA-512.
+# verifying both SHA-256 and SHA-512. Two single-package transactions: the
+# two-package `rpm -Uvh gcc.rpm gcc-fs.rpm` transaction aborted on fc45 with
+# "error: open of nter-filesystem failed" (rpm CLI lost the main package's
+# file key after the -filesystem element). Step 1 needs --nodeps only because
+# the stock main package pins the old -filesystem EVR; step 2 runs the full
+# dependency check against the new -filesystem.
 RUN case "$(uname -m)" in \
       aarch64) \
         gcc_arch="aarch64"; \
@@ -194,7 +199,8 @@ RUN case "$(uname -m)" in \
     printf '%s  /tmp/gcc.rpm\n%s  /tmp/gcc-fs.rpm\n' "${gcc_sha512}" "${gcc_fs_sha512}" > /tmp/gcc.sha512 && \
     sha256sum --check --strict /tmp/gcc.sha256 && \
     sha512sum --check --strict /tmp/gcc.sha512 && \
-    rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm /tmp/gcc-fs.rpm && \
+    rpm -Uvh --nodigest --nosignature --nodeps /tmp/gcc-fs.rpm && \
+    rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm && \
     rm -f /tmp/gcc.rpm /tmp/gcc-fs.rpm /tmp/gcc.sha256 /tmp/gcc.sha512 && \
     [ "$(rpm -q --qf '%{VERSION}-%{RELEASE} ' gnome-control-center gnome-control-center-filesystem)" = '51.2.1-2.yubios.fc45 51.2.1-2.yubios.fc45 ' ] && \
     test -f /usr/share/applications/gnome-system-trust-panel.desktop && \

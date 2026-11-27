@@ -142,8 +142,10 @@ class ImageWiringTests(unittest.TestCase):
             self.assertIn(sha512, cf)
         self.assertIn("sha256sum --check --strict /tmp/gcc.sha256", cf)
         self.assertIn("sha512sum --check --strict /tmp/gcc.sha512", cf)
-        self.assertIn("rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm /tmp/gcc-fs.rpm", cf)
-        self.assertIn("grep -c '51.2.1-2.yubios.fc45' | grep -qx 2", cf)
+        self.assertIn("rpm -Uvh --nodigest --nosignature --nodeps /tmp/gcc-fs.rpm && \\\n"
+                      "    rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm && \\\n", cf)
+        self.assertNotIn("rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm /tmp/gcc-fs.rpm", cf)
+        self.assertIn("[ \"$(rpm -q --qf '%{VERSION}-%{RELEASE} ' gnome-control-center gnome-control-center-filesystem)\" = '51.2.1-2.yubios.fc45 51.2.1-2.yubios.fc45 ' ]", cf)
         self.assertIn("test -f /usr/share/applications/gnome-system-trust-panel.desktop", cf)
         self.assertIn("test -f /usr/share/icons/hicolor/scalable/apps/org.gnome.Settings-system-trust-symbolic.svg", cf)
         # installed after the dnf block and after Antimony, before the config overlay
