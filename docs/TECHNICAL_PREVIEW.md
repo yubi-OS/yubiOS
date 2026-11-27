@@ -9,7 +9,7 @@
 [![License: LGPL-2.1](https://img.shields.io/badge/license-LGPL--2.1-magenta?style=flat-square)](../LICENSE)
 [![Release: v0.8.94](https://img.shields.io/badge/release-v0.8.94-blueviolet?style=flat-square)](https://github.com/yubi-OS/yubiOS/releases)
 [![U2F/HSM 5](https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square)](https://www.yubico.com)
-[![Hardware Demo](https://img.shields.io/badge/asciinema-Hardware%20Demo-00d787?style=flat-square)](https://asciinema.org/a/aOcdiuog37NJ9vyv)
+[![Hardware Demo](https://img.shields.io/badge/asciinema-Hardware%20Demo-00d787?style=flat-square)](https://asciinema.org/a/Dkrz2ygBlVlRFF8W)
 
 [**Quick Start (Fork -> Deploy -> Flash)**](#quick-start-fork--builddeploy--flash--enroll) · [**Step 1: Fork**](#step-1-fork--configure-the-repository) · [**Step 2: Build or Pull**](#step-2-build-or-pull-the-yubios-image) · [**Step 3: Flash SD / Disk**](#step-3-flash-to-sd-card-or-disk) · [**Step 4: Enroll U2F/HSM**](#step-4-first-boot--5-step-u2fhsm-enrollment) · [**Step 5: Day-2 Upgrades**](#step-5-boot-desktop--day-2-upgrades) · [**Operational Playbook**](PLAYBOOK.md)
 
@@ -236,7 +236,7 @@ On the second (and every subsequent) boot:
 2. **FIDO2 LUKS2 Unlock:**
    - Enter your FIDO2 PIN and touch your U2F/HSM at the boot prompt to unlock `/dev/mapper/crypt`, activate `lvm-{usr_a,usr_b,yubios--root}`, and mount the 3-way `/usr` OverlayFS.
 3. **GNOME Wayland Desktop & Antimony Browser:**
-   - Log in as `yubios` at the GDM screen (unlocked via `pam_systemd_home.so` + U2F/HSM FIDO2) into the **GNOME Wayland desktop** featuring the **Aurora Ridge 4K** default wallpaper and the provenance-gated **Antimony Browser** (`/usr/bin/antimony`).
+   - Log in as `yubios` at the GDM screen (unlocked via `pam_systemd_home.so` + U2F/HSM FIDO2) into the **GNOME Wayland desktop** featuring the **Aurora Ridge 4K** default wallpaper and the provenance-gated **Antimony Browser** (`/usr/bin/antimony`). On the Radxa ROCK 5B (`rk3588`) the `systemd-homed` / GDM login is instant after the FIDO2 touch (former login timeout `OMN-207` resolved; `fvf37` L1349–L1363 and L2017–L2032, asciicast: [https://asciinema.org/a/Dkrz2ygBlVlRFF8W](https://asciinema.org/a/Dkrz2ygBlVlRFF8W)).
 4. **Day-2 Upgrades & Automatic U2F/HSM UKI Re-Signing ([ADR-034](ADR.md#adr-034-local-composefs-oci-image-repository-and-automatic-u2fhsm-uki-re-signing-on-kernel-and-os-updates)):**
    ```bash
    # Check libostree / rpm-ostree & bootc deployment status
@@ -256,6 +256,6 @@ On the second (and every subsequent) boot:
 
 ## Deeper Documentation
 
-- [**Operational Playbook (`PLAYBOOK.md`)**](PLAYBOOK.md) — Full stage-by-stage architecture, UART log breakdown (`fvf23`, `fvf13`, & `fvf14`), and [live asciinema hardware demo](https://asciinema.org/a/aOcdiuog37NJ9vyv).
+- [**Operational Playbook (`PLAYBOOK.md`)**](PLAYBOOK.md) — Full stage-by-stage architecture, UART log breakdown (`fvf37`, `fvf23`, `fvf13`, & `fvf14`), and [live asciinema hardware demo](https://asciinema.org/a/Dkrz2ygBlVlRFF8W) (final RK3588 / Radxa ROCK 5B Technical Preview recording, `fvf37`; earlier Path 1 `PK_null.auth` capture: [https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv)).
 - [**Architecture Decision Records (`docs/ADR.md`)**](ADR.md) — ADR-001 through ADR-034.
 - [**Pinned Supply-Chain Digests (`PINNED.md`)**](../PINNED.md) — Every pinned base image, fork commit, action SHA, and release binary hash.

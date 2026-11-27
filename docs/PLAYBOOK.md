@@ -4,11 +4,12 @@
 
 # yubiOS Operational Playbook: Fork, Flash, Enroll, Desktop & Upgrade Lifecycle
 
-**Last updated:** 2026-11-22 · [**Technical Preview Quick Start (`TECHNICAL_PREVIEW.md`)**](../TECHNICAL_PREVIEW.md) · [**Live Hardware Asciicast Demo**](https://asciinema.org/a/aOcdiuog37NJ9vyv)
+**Last updated:** 2026-11-27 · [**Technical Preview Quick Start (`TECHNICAL_PREVIEW.md`)**](../TECHNICAL_PREVIEW.md) · [**Live Hardware Asciicast Demo**](https://asciinema.org/a/Dkrz2ygBlVlRFF8W)
 
 </div>
 
 **Retained hardware logs:**
+- `fvf37-73a65b45.new` (attended UART capture, `2,077` lines) — Final RK3588 Technical Preview run on Radxa ROCK 5B (`rk3588`, 16 GB RAM, 256 GB microSD `238.3 GiB` / `255,869,321,216` bytes, L543): U-Boot SPL `2027.01-rc2-gf7f5109cd84f` + TF-A `BL31: v2.15.0(release):yubiOS-551ce1571113` (L3–L13) -> `YUBIOS_TPM_OK` (L33), full attended 5-step `yubiOS-enroll` (Path 1 `PK_null.auth` at `SetupMode=0`, L465; 4 images re-signed with the U2F/HSM `db` key including `/boot/EFI/systemd/drivers/yubios-ima-mokvar-aa64.efi`, L514–L528; local composefs OCI commit, L526; homed enrollment complete, L743; `Enrollment complete`, L812), enforcing UEFI Secure Boot reboots (L973, L1633), FIDO2 LUKS2 unlock of `crypt` (L1214–L1227), signed `/etc/ima/ima-policy` (L1368–L1391), and instant FIDO2 `systemd-homed` / GDM login (`gdm.service` L1349 -> `yubios` `inactive -> active` L1358–L1363; boot 3 L2017 -> L2027–L2032), resolving `OMN-207` (asciicast: [https://asciinema.org/a/Dkrz2ygBlVlRFF8W](https://asciinema.org/a/Dkrz2ygBlVlRFF8W))
 - [`refs/logs/fvf23_yubiOS_enroll_rk3588.new`](../refs/logs/fvf23_yubiOS_enroll_rk3588.new) — Enforced first-boot (`SetupMode=0`), `PK_null.auth` blank ESL auto-unlock (`SetupMode=0 -> 1`), owner PIV slot `9a` `db -> KEK -> PK` re-enrollment (`SetupMode=1 -> 0`), local composefs OCI commit, LUKS2 + LVM + 3-way `/usr` OverlayFS, `systemd-homed` ext4 activation, and two enforcing UEFI Secure Boot reboots on Radxa ROCK 5B (`rk3588`, 16 GB RAM, asciicast: [https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv))
 - [`refs/logs/fvf13-224bf224.new`](../refs/logs/fvf13-224bf224.new) — 5-step U2F/HSM enrollment, local composefs OCI commit, and enforcing UEFI Secure Boot on Radxa ROCK 5B (`rk3588`, 16 GB RAM, 119.1 GB microSD, asciicast: [https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr))
 - [`refs/logs/fvf14-a76322cd.new`](../refs/logs/fvf14-a76322cd.new) — Full 3-boot ROCK 5B capture including GNOME Wayland desktop session (`gdm-wayland-session`, `gnome-shell`), Antimony Browser `v156.0.8078.47-1`, and `systemd-homed` login
@@ -64,7 +65,7 @@
 
 The end-to-end hardware bring-up, 5-step physical U2F/HSM enrollment, local composefs OCI repository commit (`oci:/var/lib/yubiOS/oci:yubios-local:latest`), enforcing UEFI Secure Boot reboot, and GNOME Wayland desktop login on the **Radxa ROCK 5B (`rk3588`, 16 GB RAM)** are captured in full in:
 
-- **Asciicast recordings:** **[https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv)** (Path 1 `PK_null.auth` enforced-boot auto-unlock + owner re-enrollment) and **[https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr)**
+- **Asciicast recordings:** **[https://asciinema.org/a/Dkrz2ygBlVlRFF8W](https://asciinema.org/a/Dkrz2ygBlVlRFF8W)** (final RK3588 Technical Preview, `fvf37`: 256 GB SD full attended enrollment + enforcing UEFI Secure Boot + signed `/etc/ima/ima-policy` via `yubios-ima-mokvar-aa64.efi` + instant FIDO2 `systemd-homed` / GDM login), **[https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv)** (Path 1 `PK_null.auth` enforced-boot auto-unlock + owner re-enrollment), and **[https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr)**
 - **Raw UART captures in-repo:** [`refs/logs/fvf23_yubiOS_enroll_rk3588.new`](../refs/logs/fvf23_yubiOS_enroll_rk3588.new) (`2,286` lines), [`refs/logs/fvf13-224bf224.new`](../refs/logs/fvf13-224bf224.new) (`5,622` lines), and [`refs/logs/fvf14-a76322cd.new`](../refs/logs/fvf14-a76322cd.new) (`23,167` lines)
 
 ### Key Timeline Across `fvf13-224bf224.new` & `fvf14-a76322cd.new`

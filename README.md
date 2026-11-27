@@ -69,7 +69,7 @@ Secure Boot signing uses PIV/CCID, not hidraw. Full rationale: [ADR-002](docs/AD
   <img src="https://raw.githubusercontent.com/yubi-OS/assets/main/ads/yubiOS_Technical_Preview.jpg" alt="yubiOS Technical Preview — Assume Nothing. Prove Everything." width="92%" style="border-radius:12px;"/>
 </a>
 
-**[**Technical Preview Quick Start (Fork -> Deploy -> Flash -> Enroll)**](TECHNICAL_PREVIEW.md) · [**Operational Playbook**](PLAYBOOK.md) · [**Live Hardware Asciicast Demo**](https://asciinema.org/a/aOcdiuog37NJ9vyv)**
+**[**Technical Preview Quick Start (Fork -> Deploy -> Flash -> Enroll)**](TECHNICAL_PREVIEW.md) · [**Operational Playbook**](PLAYBOOK.md) · [**Live Hardware Asciicast Demo**](https://asciinema.org/a/Dkrz2ygBlVlRFF8W)**
 
 </div>
 
@@ -231,7 +231,7 @@ On first boot `yubiOS-enroll.service` runs on tty1 and walks through:
 3. SSH resident key generation through `ed25519-sk`.
 4. sudo/login registration through pam-u2f.
 
-Each step is skippable and independently re-runnable. See [ONBOARDING.md](docs/ONBOARDING.md) and the full operational lifecycle guide in **[PLAYBOOK.md](docs/PLAYBOOK.md)** (live Radxa ROCK 5B hardware enrollment & Secure Boot reboot asciicast: **[https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv)**, raw log: [`refs/logs/fvf23_yubiOS_enroll_rk3588.new`](refs/logs/fvf23_yubiOS_enroll_rk3588.new); prior captures: [https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr), [`refs/logs/fvf13-224bf224.new`](refs/logs/fvf13-224bf224.new)).
+Each step is skippable and independently re-runnable. See [ONBOARDING.md](docs/ONBOARDING.md) and the full operational lifecycle guide in **[PLAYBOOK.md](docs/PLAYBOOK.md)** (final RK3588 Technical Preview asciicast — Radxa ROCK 5B, `fvf37`, 256 GB SD full attended 5-step enrollment + enforcing UEFI Secure Boot + signed `/etc/ima/ima-policy` via `yubios-ima-mokvar-aa64.efi` + instant FIDO2 `systemd-homed` / GDM login: **[https://asciinema.org/a/Dkrz2ygBlVlRFF8W](https://asciinema.org/a/Dkrz2ygBlVlRFF8W)**; Path 1 `PK_null.auth` enrollment & Secure Boot reboot asciicast: [https://asciinema.org/a/aOcdiuog37NJ9vyv](https://asciinema.org/a/aOcdiuog37NJ9vyv), raw log: [`refs/logs/fvf23_yubiOS_enroll_rk3588.new`](refs/logs/fvf23_yubiOS_enroll_rk3588.new); prior captures: [https://asciinema.org/a/y9sHQPQTIbTWNIyr](https://asciinema.org/a/y9sHQPQTIbTWNIyr), [`refs/logs/fvf13-224bf224.new`](refs/logs/fvf13-224bf224.new)).
 
 ## Repo layout
 
