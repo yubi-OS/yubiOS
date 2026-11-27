@@ -9,7 +9,7 @@ name: yubiOS CI
 # DEPLOY PRE-REQ: the `container.image` below must be the dhi.io/debian-base
 # *manifest-list (index)* digest, NOT a single-arch digest. A single-arch (amd64)
 # digest will FAIL to pull on ARM64 runners. Run the updated fetch-dhi-manifest
-# workflow (it now requests the OCI index media type) to get c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1,
+# workflow (it now requests the OCI index media type) to get 120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8,
 # then replace the placeholder below. The index auto-resolves per runner arch.
 
 on:
@@ -87,7 +87,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1 # trixie-debian13-dev INDEX (manifest list)
+      image: docker://dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8 # trixie-debian13-dev INDEX (manifest list)
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -124,7 +124,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -158,7 +158,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
@@ -192,7 +192,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
+      image: docker://dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8 # trixie-debian13-dev — auto-resolves to ${{ matrix.arch }}
     steps:
       - name: Install git for checkout and reproducibility
         run: |
@@ -362,7 +362,7 @@ jobs:
             -v /run/yubios-hsm:/run/yubios-hsm \
             -v "$PWD:/work" \
             -w /work \
-            "dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1" \
+            "dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8" \
             bash -c '
               set -euo pipefail
               apt-get update -qq
@@ -442,7 +442,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1 # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8 # trixie-debian13-dev
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md

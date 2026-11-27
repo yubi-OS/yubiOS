@@ -83,7 +83,7 @@ jobs:
       credentials:
         username: 0mniteck42
         password: ${{ secrets.DOCKER }}
-      image: docker://dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1 # trixie-debian13-dev
+      image: docker://dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8 # trixie-debian13-dev
     steps:
       - name: Bridge outer container network via slirp4netns on self-hosted rock1 and install git
         run: |
@@ -286,7 +286,7 @@ jobs:
             -v /run/yubios-hsm:/run/yubios-hsm \
             -v "$PWD:/work" \
             -w /work \
-            "dhi.io/debian-base@sha256:c32c0cebb2be0fb4b781e323c1a1de4637f607169f580e44f53373276d7f8de1" \
+            "dhi.io/debian-base@sha256:120051dda16c2611454d2c54a0959f23f80c32493d0e528a5d1348bca82dfbc8" \
             bash -c '
               set -euo pipefail
               apt-get update -qq
