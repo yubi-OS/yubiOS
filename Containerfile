@@ -8,8 +8,8 @@
 # tracked by .github/workflows/fetch-fedora-bootc-manifest.yml and recorded in
 # PINNED.md; the FROM carries only the immutable OCI index digest so there is a
 # single source of identity (no tag+digest ambiguity for Build Policy/tooling).
-# quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261126.0)
-FROM quay.io/fedora/fedora-bootc@sha256:f3afa8b1d590ba2842366e0bca4f921ba4a0c7b5ee72679b632aeaa08f170a1e AS rootfs_prep
+# quay.io/fedora/fedora-bootc:45 (org.opencontainers.image.version=45.20261127.0)
+FROM quay.io/fedora/fedora-bootc@sha256:28d699682aa6f6b48c96864032717c596020d5d9890f83f488454e0d72f955b7 AS rootfs_prep
 
 # BuildKit also consumes this special argument for OCI timestamps. Declaring it
 # makes the same canonical epoch visible to package/build tools in RUN steps.
@@ -196,7 +196,7 @@ RUN case "$(uname -m)" in \
     sha512sum --check --strict /tmp/gcc.sha512 && \
     rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm /tmp/gcc-fs.rpm && \
     rm -f /tmp/gcc.rpm /tmp/gcc-fs.rpm /tmp/gcc.sha256 /tmp/gcc.sha512 && \
-    rpm -q gnome-control-center gnome-control-center-filesystem | grep -c '51.2.1-2.yubios.fc45' | grep -qx 2 && \
+    [ "$(rpm -q --qf '%{VERSION}-%{RELEASE} ' gnome-control-center gnome-control-center-filesystem)" = '51.2.1-2.yubios.fc45 51.2.1-2.yubios.fc45 ' ] && \
     test -f /usr/share/applications/gnome-system-trust-panel.desktop && \
     test -f /usr/share/icons/hicolor/scalable/apps/org.gnome.Settings-system-trust-symbolic.svg
 
