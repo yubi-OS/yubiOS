@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# Keep RK3588 DWC3 host controllers (fc400000.usb / fcd00000.usb) root hubs active
+# so hotplugged USB 2.0 / USB 3.0 devices (e.g. USB audio DACs) always enumerate.
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1d6b", KERNELS=="fc400000.usb|fcd00000.usb", ATTR{power/control}="on"

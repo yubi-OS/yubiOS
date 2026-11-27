@@ -159,10 +159,74 @@ jobs:
           retention-days: 30
           if-no-files-found: error
 
+  publish-release:
+    name: Publish RPMs to yubi-OS/gnome-control-center release
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_release == true }}
+    needs: [build-rpm]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      actions: read
+    env:
+      # Cross-repo release write => named secret per playbooks/github-token-vs-secrets.md
+      # (github.token is scoped to yubi-OS/yubiOS and cannot create releases on the fork).
+      GH_TOKEN: ${{ secrets.WORKFLOW }}
+      FORK_REPO: yubi-OS/gnome-control-center
+      SRC_SHA: f127a35fa7a313bf5a4ab7334925adb351e6f83c # must equal build-rpm checkout ref
+      TAG: ${{ inputs.release_tag }}
+    steps:
+      - name: Download x86_64 RPMs
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
+        with:
+          name: gnome-control-center-rpms-amd64
+          path: dl/amd64
+      - name: Download aarch64 RPMs
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2 — see PINNED.md
+        with:
+          name: gnome-control-center-rpms-arm64
+          path: dl/arm64
+      - name: Assemble release set + SHA256SUMS/SHA512SUMS
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN" || { echo "::error::secrets.WORKFLOW is not available to this repo"; exit 1; }
+          mkdir rel
+          cp dl/amd64/gnome-control-center-[0-9]*.x86_64.rpm rel/
+          cp dl/arm64/gnome-control-center-[0-9]*.aarch64.rpm rel/
+          # noarch filesystem subpackage is built by both arches (same name, different bytes):
+          # publish the x86_64-job copy only so SHA256SUMS is unambiguous.
+          cp dl/amd64/gnome-control-center-filesystem-*.noarch.rpm rel/
+          test "$(ls rel/*.rpm | wc -l)" -eq 3
+          cd rel
+          sha256sum *.rpm > SHA256SUMS
+          sha512sum *.rpm > SHA512SUMS
+          cat SHA256SUMS
+      - name: Create release on yubi-OS/gnome-control-center (fail closed if tag exists)
+        working-directory: rel
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" -R "$FORK_REPO" >/dev/null 2>&1; then
+            echo "::error::Release $TAG already exists on $FORK_REPO; published assets are pinned in PINNED.md. Bump release_tag."
+            exit 1
+          fi
+          gh release create "$TAG" -R "$FORK_REPO" \
+            --target "$SRC_SHA" \
+            --title "gnome-control-center $TAG" \
+            --notes "yubiOS GNOME Settings with the System Trust panel. Source ${FORK_REPO}@${SRC_SHA}. Built by ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}." \
+            *.rpm SHA256SUMS SHA512SUMS
+      - name: Verify published assets
+        run: |
+          set -euo pipefail
+          mkdir verify && cd verify
+          gh release download "$TAG" -R "$FORK_REPO"
+          test "$(gh api "repos/$FORK_REPO/git/ref/tags/$TAG" --jq .object.sha)" = "$SRC_SHA"
+          sha256sum --check --strict SHA256SUMS
+          sha512sum --check --strict SHA512SUMS
+
   ci-callback:
     name: Callback to ci.yml orchestrator
     if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.ci_callback == true }}
-    needs: [build-rpm]
+    needs: [build-rpm, publish-release]
     runs-on: ubuntu-26.04
     permissions:
       contents: read
@@ -185,7 +249,7 @@ jobs:
           CI_VM_IMAGE: ${{ inputs.ci_vm_image }}
         run: |
           set -euo pipefail
-          conclusion=$(jq -r 'if .["build-rpm"].result == "failure" or .["build-rpm"].result == "cancelled" then "failure" else "success" end' <<<"$NEEDS_JSON")
+          conclusion=$(jq -r 'if ([.[].result] | any(. == "failure" or . == "cancelled")) then "failure" else "success" end' <<<"$NEEDS_JSON")
           payload=$(jq -n \
             --arg ref "$REF" \
             --arg state "$WORKFLOW_NAME" \

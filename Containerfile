@@ -83,6 +83,7 @@ RUN dnf -y --setopt=history_record=false --setopt=install_weak_deps=False \
       alsa-ucm \
       alsa-utils \
       pipewire-alsa \
+      pipewire-pulseaudio \
       at-spi2-atk \
       gtk3 \
       gtk4 \
@@ -168,6 +169,37 @@ RUN case "$(uname -m)" in \
     ln -sf /usr/lib/opt/antimony/antimony /usr/bin/antimony-stable && \
     test -x /usr/lib/opt/antimony/chrome
 
+# ── GNOME Settings + System Trust panel (yubi-OS/gnome-control-center v51.2.1-yubios.1) ──
+# Pinned in PINNED.md under "yubi-OS Release Binaries". Stock Fedora
+# gnome-control-center stays in the dnf block above (pulls runtime deps); this
+# upgrades main + filesystem subpackage together to 51.2.1-2.yubios.fc45 after
+# verifying both SHA-256 and SHA-512.
+RUN case "$(uname -m)" in \
+      aarch64) \
+        gcc_arch="aarch64"; \
+        gcc_sha256="565452664f0aae15f778610fa75456d389ea62e74e5acc9f573f5032dfd84d21"; \
+        gcc_sha512="fc34ab6bcfd4f1f9f556bece765214f99ae1f91594593e943d7ab700312badd3ecff97e3740e50bef5e7518bfb5f69ee7142d49a83b0e084d5f829fcca34b0aa" ;; \
+      x86_64) \
+        gcc_arch="x86_64"; \
+        gcc_sha256="5924324dbf2544940470dc6b7656405bcf3592f8133e8a9df1cbb5bd042d44b2"; \
+        gcc_sha512="504231f92b7ebb1bf84777c2dc3863b2cc7c90a785a9313c4169cf0866196d55003b9253bd8af6204462fbc9bb9874b28b693a014003ae0cf2e55419a3762457" ;; \
+      *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;; \
+    esac && \
+    gcc_fs_sha256="0ff4b91ecab71e20d965cf1386c8426e089b4ee6458d785ffe9d977433d61e6e" && \
+    gcc_fs_sha512="00eaa112cef405b590722e2266d0ad1f9a0124137a423cfb3035e6fc9254306cb66c042199c1ad4a3b4c4b81bf0bb2ec519f0f4462b84ea498e539df29d74fc8" && \
+    gcc_base="https://github.com/yubi-OS/gnome-control-center/releases/download/v51.2.1-yubios.1" && \
+    curl -fsSL --retry 3 --retry-delay 2 -o /tmp/gcc.rpm "${gcc_base}/gnome-control-center-51.2.1-2.yubios.fc45.${gcc_arch}.rpm" && \
+    curl -fsSL --retry 3 --retry-delay 2 -o /tmp/gcc-fs.rpm "${gcc_base}/gnome-control-center-filesystem-51.2.1-2.yubios.fc45.noarch.rpm" && \
+    printf '%s  /tmp/gcc.rpm\n%s  /tmp/gcc-fs.rpm\n' "${gcc_sha256}" "${gcc_fs_sha256}" > /tmp/gcc.sha256 && \
+    printf '%s  /tmp/gcc.rpm\n%s  /tmp/gcc-fs.rpm\n' "${gcc_sha512}" "${gcc_fs_sha512}" > /tmp/gcc.sha512 && \
+    sha256sum --check --strict /tmp/gcc.sha256 && \
+    sha512sum --check --strict /tmp/gcc.sha512 && \
+    rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm /tmp/gcc-fs.rpm && \
+    rm -f /tmp/gcc.rpm /tmp/gcc-fs.rpm /tmp/gcc.sha256 /tmp/gcc.sha512 && \
+    rpm -q gnome-control-center gnome-control-center-filesystem | grep -c '51.2.1-2.yubios.fc45' | grep -qx 2 && \
+    test -f /usr/share/applications/gnome-system-trust-panel.desktop && \
+    test -f /usr/share/icons/hicolor/scalable/apps/org.gnome.Settings-system-trust-symbolic.svg
+
 # ── yubiOS Default Wallpaper (yubi-OS/assets @ 09f209a48153c6cef4faae9b247146abce4c5441) ──
 # Pinned in PINNED.md under "External GitHub Source Refs". Verify both SHA-256 and
 # SHA-512 before installing into /usr/share/backgrounds/yubios/yubios-aurora-ridge-4k.jpg.
@@ -204,16 +236,20 @@ RUN wp_commit="09f209a48153c6cef4faae9b247146abce4c5441" && \
 # ── Overlay yubiOS config tree ───────────────────────────────────────────
 COPY usr/ /usr/
 
+# rk3588-es8316 UCM override (OMN-194): drops JackControl "Headphones Jack" so a
+# mis-reporting hp-det GPIO cannot mark the ES8316 headphone/headset ports unavailable.
+RUN test -f /usr/share/alsa/ucm2/Rockchip/rk3588-es8316/HiFi.conf && \
+    ! grep -q 'JackControl' /usr/share/alsa/ucm2/Rockchip/rk3588-es8316/HiFi.conf
+
 # ── Compile GNOME GSettings schema override, GDM dconf profile, & PM/audio configs ──
 RUN glib-compile-schemas /usr/share/glib-2.0/schemas && \
-    install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d /etc/dconf/db/gdm.d /etc/systemd/sleep.conf.d /etc/systemd/logind.conf.d /etc/wireplumber/wireplumber.conf.d && \
+    install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d /etc/dconf/db/gdm.d /etc/systemd/sleep.conf.d /etc/systemd/logind.conf.d && \
     printf 'user-db:user\nsystem-db:local\n' > /etc/dconf/profile/user && \
     printf 'user-db:user\nsystem-db:gdm\nsystem-db:local\n' > /etc/dconf/profile/gdm && \
     cp -f /usr/lib/dconf/db/local.d/00-yubios-wallpaper /etc/dconf/db/local.d/00-yubios-wallpaper && \
     cp -f /usr/lib/dconf/db/local.d/00-yubios-wallpaper /etc/dconf/db/gdm.d/00-yubios-wallpaper && \
     cp -f /usr/lib/systemd/sleep.conf.d/yubiOS-no-sleep.conf /etc/systemd/sleep.conf.d/yubiOS-no-sleep.conf && \
     cp -f /usr/lib/systemd/logind.conf.d/yubiOS-no-sleep.conf /etc/systemd/logind.conf.d/yubiOS-no-sleep.conf && \
-    cp -f /usr/share/wireplumber/wireplumber.conf.d/50-yubios-rk3588-hdmi-audio.conf /etc/wireplumber/wireplumber.conf.d/50-yubios-rk3588-hdmi-audio.conf && \
     dconf update
 
 # ── SSH: allow bcvk CI root key credentials only when present ─────────────
@@ -321,6 +357,7 @@ COPY usr/lib/systemd/system/yubios-uki-install.service /etc/systemd/system/yubio
 COPY usr/lib/systemd/system/yubios-uki-install.service /usr/lib/systemd/system/yubios-uki-install.service
 
 RUN systemctl preset-all && \
+    systemctl --global enable pipewire.socket pipewire-pulse.socket wireplumber.service && \
     systemctl preset yubios-uki-install.service && \
     systemctl enable yubiOS-lvm-usr-overlay.service && \
     mkdir -p /usr/lib/systemd/system/local-fs.target.wants /usr/lib/systemd/system/multi-user.target.wants && \
