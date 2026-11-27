@@ -82,7 +82,7 @@ permissions:
 
 env:
   BUILDKIT_IMAGE: docker.io/moby/buildkit:v0.35.0@sha256:aa632b921ef07411d2cb77292cd34213d4f7b384001d6fceef1e1f25bf9752bb # v0.35.0
-  TFA_REF: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
+  TFA_REF: 87cc230066271910096e025cf07376dba6c361d8 # release ref; see PINNED.md
   OPTEE_OS_REF: 462e8e6793b988c5b3d2b815b17d091012ceffd7 # release-descendant ref; see PINNED.md
   OPTEE_FTPM_REF: b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf # release-descendant ref; see PINNED.md
   UBOOT_REF: 8e7b49c78689957d3ee8eb217d7bdadad3026bd9 # release-descendant ref; see PINNED.md

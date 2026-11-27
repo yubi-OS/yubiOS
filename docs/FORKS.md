@@ -350,7 +350,7 @@ _No custom branches or commits ahead of upstream; repository is a pure 1:1 upstr
 
 - **Upstream Parent:** [`ARM-software/arm-trusted-firmware`](https://github.com/ARM-software/arm-trusted-firmware)
 - **Default Branch (`master`):** `a881364e03b0c5b3a8c00f20ad6fbdda53a57031` _(synced 1:1 with `ARM-software/arm-trusted-firmware:master`, `0 ahead, 0 behind`)_
-- **Latest Upstream Tag:** `v2.15.0` (`da738d5eae93af342fdc4995dd3c05acb4c9d757`)
+- **Latest Upstream Tag:** `v2.15.0` (`87cc230066271910096e025cf07376dba6c361d8`)
 
 | Branch | Head Commit SHA | Ahead / Behind (`upstream`) | Files Changed | Description |
 |---|---|---|---|---|
