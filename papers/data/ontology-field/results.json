@@ -6575,6 +6575,7 @@
         "beneficial_moves": 43,
         "mean_chord_gain": 0.4141137500000001
       }
-    }
+    },
+    "relaxation_steps": 867.6632643156531
   }
 }

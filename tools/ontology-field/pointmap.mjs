@@ -25,4 +25,4 @@ const {pi, kmean_analytic, kmean_empirical, flux_identity_analytic} = fitted.com
 if (!flux_identity_analytic.ok || Math.abs(pi.reduce((a,b) => a+b, 0)-1) > 1e-9)
   throw Error('Invalid compass shell distribution');
 process.stdout.write(JSON.stringify({focal_bits:d, prefix_counts:trial.ladder.counts,
-  reference_shell_probability:pi, analytic_mean:kmean_analytic, chain_mean:kmean_empirical, states}));
+  relaxation_steps:fitted.compass.relaxation_steps, reference_shell_probability:pi, analytic_mean:kmean_analytic, chain_mean:kmean_empirical, states}));

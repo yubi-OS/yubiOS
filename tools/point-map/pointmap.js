@@ -297,6 +297,16 @@ var PM = (function () {
     const aDn = k => 0.5 * Math.min(1, Math.exp(-(F(k - 1) - F(k)) / T));
     const residuals = Array.from({ length: d }, (_, k) => ({ k, residual: pi[k] * aUp(k) - pi[k + 1] * aDn(k + 1) }));
     const identity = assertFluxIdentity(residuals, FLUX_TOL);
+    // This symmetric tridiagonal matrix has the spectrum of the reversible kernel.
+    const kernel = Array.from({ length: d + 1 }, () => Array(d + 1).fill(0));
+    for (let k = 0; k <= d; k++) {
+      kernel[k][k] = 1 - (k < d ? aUp(k) : 0) - (k > 0 ? aDn(k) : 0);
+      if (k < d) kernel[k][k + 1] = kernel[k + 1][k] = Math.sqrt(aUp(k) * aDn(k + 1));
+    }
+    const eigen = jacobiEig(kernel);
+    const gap = 1 - Math.max(...eigen.values.slice(1).map(Math.abs));
+    // The Jacobi stopping tolerance allows a residual norm up to 1e-7.
+    const relaxation_steps = gap > 1e-5 ? 1 / gap : null;
     // empirical measurement — a separate, noisy observable, never the identity check
     let k = Math.floor(d / 2); const occ = Array(d + 1).fill(0), up = Array(d).fill(0), dn = Array(d).fill(0);
     let acc = 0, maxdk = 0;
@@ -309,7 +319,7 @@ var PM = (function () {
     }
     const fz = up.map((u, i) => ({ k: i, up: u, down: dn[i], z: (u - dn[i]) / (Math.sqrt(u + dn[i]) || 1) }));
     return {
-      T, steps, pi,
+      T, steps, pi, relaxation_steps,
       kmean_analytic: pi.reduce((s, p, i) => s + p * i, 0),
       kmean_empirical: occ.reduce((s, c, i) => s + (c / steps) * i, 0),
       acceptance: acc / steps, maxdk,
