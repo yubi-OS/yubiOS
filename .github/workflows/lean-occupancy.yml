@@ -7,6 +7,8 @@ on:
       - 'papers/data/lean/**'
       - 'papers/data/occupancy/**'
       - 'tools/occupancy/**'
+      - 'tools/multimodal-occupancy/**'
+      - 'papers/data/multimodal-digits/**'
       - 'tools/boltzmann-collapse/**'
       - 'tools/corpus-sonometer/**'
       - 'tools/phonon-dispersion/**'
@@ -99,3 +101,23 @@ jobs:
         run: |
           /usr/bin/python3 tools/occupancy/replay.py --output "$RUNNER_TEMP/occupancy" \
             --check-report papers/data/occupancy/results.json
+
+  field-study:
+    name: Public multimodal measurements
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - run: sudo apt-get update -qq && sudo apt-get install -y python3-numpy
+      - run: /usr/bin/python3 tools/multimodal-occupancy/check_study.py papers/data/multimodal-digits
+  field-replay:
+    name: Replay the four observed modality directions
+    needs: field-study
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - run: sudo apt-get update -qq && sudo apt-get install -y python3-numpy python3-scipy
+      - run: |
+          /usr/bin/python3 tools/multimodal-occupancy/run.py --output "$RUNNER_TEMP/field" \
+            --check-report papers/data/multimodal-digits/results.json
