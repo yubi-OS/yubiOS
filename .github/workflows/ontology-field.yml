@@ -1,0 +1,37 @@
+name: Ontology field atlas
+on:
+  pull_request:
+    paths: &study
+      - '.github/workflows/ontology-field.yml'
+      - 'papers/data/ontology-field/**'
+      - 'tools/ontology-field/**'
+      - 'tools/corpus-auditor/**'
+      - 'tools/spectral-decomposer/**'
+      - 'tools/point-map/**'
+      - 'tools/occupancy/**'
+      - 'tools/phonon-dispersion/**'
+  push:
+    branches: [main]
+    paths: *study
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  atlas:
+    name: Replay eight views and both nulls
+    runs-on: ubuntu-26.04
+    timeout-minutes: 12
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install numerical and plotting packages
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-numpy python3-scipy python3-matplotlib
+      - name: Verify bank, projections and held-out field
+        run: |
+          /usr/bin/python3 tools/ontology-field/run.py \
+            --check papers/data/ontology-field/results.json --atlas "$RUNNER_TEMP/atlas.png"
+          test -s "$RUNNER_TEMP/atlas.png"
+          test -s "$RUNNER_TEMP/spheres.png"

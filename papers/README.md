@@ -177,6 +177,10 @@ CI: `lean-check.yml` gains the `phonon-dispersion selftest` step; Lean §14 adds
   3. Stereographic lift scale `s` is the Möbius lens power on `S^2`; RMS rescale recovers `>= 95%` of optimal packing count `N(0.095)` across globes.
 
 
+## Ontology fields on PCA planes and spheres
+
+The [ontology field atlas](data/ontology-field/STUDY.md) follows all five papers across 96 published Schema.org definitions embedded directly by Cloudflare BGE-M3. It reports aggregate class structure, fixed-margin null deflection, matched-scale packing and conserved class amounts on frozen pre/post charts. [Replay the measurements](../tools/ontology-field/README.md).
+
 ## Paper V — Conserved occupancy and recognition
 
 [Read the paper (PDF)](conserved-occupancy-2026-11-25.pdf) · [TeX source](conserved-occupancy-2026-11-25.tex) · [Conversation summary](data/occupancy/conversation.md) · [Reproduce the measurements](../tools/occupancy/README.md) · [Lean theorems](data/lean/OccupancyBounds.lean)
