@@ -1,4 +1,4 @@
-"""Check sampling, provider receipt coverage and report invariants from public records."""
+"""Check sampling, inference metadata coverage and report invariants from public records."""
 
 from collections import Counter
 import json
@@ -60,7 +60,7 @@ def check(data):
                 assert np.isclose(sum(result["assigned_amount"]), value["total_amount"])
                 assert np.isclose(sum(result["assigned_count"]), len(q))
     print(
-        "Verified 480 public records, all batch receipts, eight raw baselines and four report balances."
+        "Verified 480 public records, all batch metadata, eight raw baselines and four report balances."
     )
 
 

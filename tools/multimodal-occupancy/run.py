@@ -26,7 +26,7 @@ def run(data, out, expected=None):
     rows = inputs(manifest)
     receipt = json.loads((data / "inference.json").read_text())
     if receipt["model"] != MODEL or receipt["records_sha256"] != sha(manifest):
-        raise ValueError("record manifest or model differs from provider receipt")
+        raise ValueError("record manifest or model differs from inference metadata")
     modalities = sorted({r["modality"] for r in rows})
     if set(modalities) != set(receipt["files"]):
         raise ValueError("vector banks and manifest modalities differ")

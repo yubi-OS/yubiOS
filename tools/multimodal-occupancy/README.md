@@ -4,7 +4,7 @@ This instrument follows the five-paper program on 480 observed digit samples dra
 
 ## Run from the repository root
 
-Use Python 3 with NumPy and SciPy, and Node.js with ES modules. The study inputs are under `papers/data/multimodal-digits`. To verify the sample design, raw-grid baselines, acquisition receipts and conservation totals:
+Use Python 3 with NumPy and SciPy, and Node.js with ES modules. The study inputs are under `papers/data/multimodal-digits`. To verify the sample design, raw-grid baselines, inference metadata and conservation totals:
 
 ```sh
 python3 tools/multimodal-occupancy/check_study.py papers/data/multimodal-digits
@@ -21,9 +21,9 @@ Use a new or empty output directory. It receives the four-direction results JSON
 
 ## Repeat the provider measurement
 
-The acquisition in this PR used Cloudflare Workers AI directly: 40 requests of 12 texts, each returning 12 × 1,024 coordinates and reporting CLS pooling. No pooling override was requested. Each bank stores the observations as little-endian float32 with the corresponding SHA-256 input IDs. The provider model ID is recorded; this API response did not identify an immutable backend revision.
+The acquisition in this PR used Cloudflare Workers AI directly: 40 requests of 12 texts, each returning 12 × 1,024 coordinates and reporting CLS pooling. No pooling override was requested. Each bank stores the observations as little-endian float32 with the corresponding SHA-256 input IDs. Batch entries record local counts, shapes, offsets and reported pooling. The archive binds each vector to its ordered input digest. Provider request IDs, timestamps and response hashes were not captured. The provider model ID is recorded; this API response did not identify an immutable backend revision.
 
-To repeat acquisition with your own Cloudflare credentials, copy the records into a new directory and run the following. The new measurement receives its own receipts and file hashes. Its values can differ from the observed run.
+To repeat acquisition with your own Cloudflare credentials, copy the records into a new directory and run the following. The new measurement receives its own metadata and file hashes. Its values can differ from the observed run.
 
 ```sh
 mkdir -p /tmp/new-digit-study
