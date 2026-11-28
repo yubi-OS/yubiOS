@@ -4,7 +4,7 @@
 # paths in .github/workflows/ci_firmware-rk.yml. This file is sourced by
 # scripts/build-local-images.sh after the pinned DHI/rootless Docker bootstrap.
 
-readonly LOCAL_TFA_REF='87cc230066271910096e025cf07376dba6c361d8' # v2.15.0
+readonly LOCAL_TFA_REF='da738d5eae93af342fdc4995dd3c05acb4c9d757' # v2.15.0
 readonly LOCAL_OPTEE_OS_REF='e1181e2d0e40f8550c0f8204a433eac54598d222' # yubios branch (4.11.0 descendant)
 readonly LOCAL_OPTEE_FTPM_REF='b78d47800ca1a162f860c031cf1bf2bb0ed6cfbf' # yubios branch (4.11.0 descendant)
 readonly LOCAL_UBOOT_REF='0257c1dedf23a082cd35afdb757b2886774b091c' # yubios branch (v2026.10 descendant)

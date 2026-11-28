@@ -89,9 +89,11 @@ jobs:
           # edk2-stable202602, so EDK2 and the edk2-platforms pre-removal
           # compatibility snapshot intentionally form a bounded release pair.
           # edk2-platforms does not publish EDK2-style stable release tags.
+          # TF-A is held at v2.15.x: v2.16.0 moved libfdt/mbed TLS into git
+          # submodules (contrib/dtc), which the firmware build does not fetch.
           # 'ms-tpm-20-ref|microsoft/ms-tpm-20-ref|^v[0-9]+\.[0-9]+r[0-9]+$'
           fork_specs=(
-            'arm-trusted-firmware|ARM-software/arm-trusted-firmware|^v[0-9]+\.[0-9]+(\.[0-9]+)?$'
+            'arm-trusted-firmware|ARM-software/arm-trusted-firmware|^v2\.15(\.[0-9]+)?$'
             'bcvk|bootc-dev/bcvk|^v[0-9]+\.[0-9]+\.[0-9]+$'
             'edk2|tianocore/edk2|^edk2-stable202602(\.[0-9]+)?$'
             'edk2-platforms|tianocore/edk2-platforms|^[0-9]{6,8}-before-platform-removals$'

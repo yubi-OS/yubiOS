@@ -32,7 +32,7 @@
 
 | Component | yubi-OS fork | Upstream release | Upstream SHA | Pinned SHA (CI) | yubiOS delta at pin | Where pinned |
 |---|---|---|---|---|---|---|
-| TF-A (BL31; BL1/BL2 + FIP on QEMU) | `yubi-OS/arm-trusted-firmware` | `v2.15.0` | `87cc230066271910096e025cf07376dba6c361d8` | `87cc230066271910096e025cf07376dba6c361d8` | none (release ref) | `PINNED.md` L62; `ci_firmware-rk.yml` L80 `TFA_REF` |
+| TF-A (BL31; BL1/BL2 + FIP on QEMU) | `yubi-OS/arm-trusted-firmware` | `v2.15.0` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | `da738d5eae93af342fdc4995dd3c05acb4c9d757` | none (release ref) | `PINNED.md` L62; `ci_firmware-rk.yml` L80 `TFA_REF` |
 | mbed TLS (TF-A TBB, QEMU lane) | upstream `Mbed-TLS/mbedtls` | `mbedtls-3.6.7` | `068ff080b369adfac81509f9b57b2afabaf82dc5` | same | none; 4.x held (TF-A v2.15.0 requires major 3) | `PINNED.md` L90-91; L88 `MBEDTLS_REF` |
 | EDK2 StandaloneMM (`BL32_AP_MM.fd`) | `yubi-OS/edk2` | `edk2-stable202602` | `b7a715f7c03c45c6b4575bf88596bfd79658b8ce` | same | HOLD at 202602 (202608 moves `ArmBaseLib`) | `PINNED.md` L64; L84 `EDK2_REF` |
 | EDK2-platforms (`PlatformStandaloneMmRpmb.dsc`) | `yubi-OS/edk2-platforms` | `20260316-before-platform-removals` | `cc384840c440415a091623a7658112fedc416094` | same | none | `PINNED.md` L65; L85, L124 `ACTIVE_PLATFORM` |

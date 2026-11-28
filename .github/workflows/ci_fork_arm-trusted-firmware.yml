@@ -95,7 +95,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 — see PINNED.md
         with:
           repository: yubi-OS/arm-trusted-firmware
-          ref: 87cc230066271910096e025cf07376dba6c361d8 # release ref; see PINNED.md
+          ref: da738d5eae93af342fdc4995dd3c05acb4c9d757 # release ref; see PINNED.md
 
       - name: Install build dependencies
         run: |
