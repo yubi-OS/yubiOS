@@ -11,18 +11,18 @@ Pine64 RockPro64 (RK3399) and PineTab2 (RK3566). Reserve TZDRAM+SHMEM at
 
 For RockPro64 U-Boot proper (!CONFIG_XPL_BUILD), align the control FDT
 handed to EFI/Linux with the onboard Linux/Ubuntu rk3399-rockpro64.dtb
-(dmc disabled, vdd_center 750000..1350000 uV, cdn_dp edp_hpd pinctrl,
+(vdd_center 750000..1350000 uV, cdn_dp edp_hpd pinctrl,
 pwm2 enabled) while keeping TPL/SPL LPDDR4 init unchanged.
 ---
- arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 46 +++++++++++++++++++++++
- arch/arm/dts/rk3566-pinetab2-u-boot.dtsi  | 23 ++++++++++++
- 2 files changed, 69 insertions(+)
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 42 +++++++++++++++++++++++
+ arch/arm/dts/rk3566-pinetab2-u-boot.dtsi  | 23 +++++++++++++
+ 2 files changed, 65 insertions(+)
 
 diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-index cd84269..f231839 100644
+index cd84269..729edde 100644
 --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
 +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-@@ -68,3 +68,49 @@
+@@ -68,3 +68,45 @@
  &vdd_log {
  	regulator-init-microvolt = <950000>;
  };
@@ -54,10 +54,6 @@ index cd84269..f231839 100644
 + * control FDT handed to EFI/Linux (while keeping TPL/SPL's LPDDR4 dmc/regulator
 + * init intact under CONFIG_XPL_BUILD). */
 +#ifndef CONFIG_XPL_BUILD
-+&dmc {
-+	status = "disabled";
-+};
-+
 +&vdd_center {
 +	regulator-min-microvolt = <750000>;
 +	regulator-max-microvolt = <1350000>;

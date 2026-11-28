@@ -932,7 +932,7 @@ jobs:
         if: matrix.build_kind == 'rockchip' && (matrix.board == 'rockpro64-rk3399' || matrix.board == 'pinetab2-rk3566')
         env:
           RK_OPTEE_PATCH_SRC: firmware/u-boot/0002-rockpro64-pinetab2-add-optee-firmware-node.patch
-          RK_OPTEE_PATCH_SHA256: 4963141a65c823779a95023314fa5ffec0ffb6894f48c25c4ac35340a47b3104
+          RK_OPTEE_PATCH_SHA256: 3e10946444cb5674981a3ac8b96540e1e026ece7fcbcc2072bac462f37e1374e
           GIT_COMMITTER_NAME: yubiOS CI
           GIT_COMMITTER_EMAIL: ci@yubi-os.invalid
           GIT_COMMITTER_DATE: 2026-10-10T00:00:00Z
