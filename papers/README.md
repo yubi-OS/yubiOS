@@ -181,7 +181,7 @@ CI: `lean-check.yml` gains the `phonon-dispersion selftest` step; Lean §14 adds
 
 [Read the paper (PDF)](conserved-occupancy-2026-11-25.pdf) · [TeX source](conserved-occupancy-2026-11-25.tex) · [Conversation summary](data/occupancy/conversation.md) · [Reproduce the measurements](../tools/occupancy/README.md) · [Lean theorems](data/lean/OccupancyBounds.lean)
 
-Paper V carries the angular and binary spectra into a held-out recognition experiment. On two sets of 36 authored notes, the powered ambient chart raised greedy packing from 3 to 7 and 6 to 11 at the reference chord. Native centroids recognized 24 and 25. Every class allocation sums back to the input amount, whether measured in note-equivalents or UTF-8 bytes.
+Paper V carries the angular and binary spectra into a held-out recognition experiment. On two sets of 36 authored notes, the powered ambient chart raised greedy packing from 3 to 7 and 6 to 11 at the reference chord. At the powered reference median chord of 1.4987, only one point was retained on each holdout. Native centroids recognized 24 and 25. Every class allocation sums back to the input amount, whether measured in note-equivalents or UTF-8 bytes.
 
 ### Paper V field instrument — handwritten and spoken digits
 
