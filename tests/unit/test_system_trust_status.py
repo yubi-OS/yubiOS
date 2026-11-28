@@ -145,6 +145,12 @@ class ImageWiringTests(unittest.TestCase):
         self.assertIn("rpm -Uvh --nodigest --nosignature --nodeps /tmp/gcc-fs.rpm && \\\n"
                       "    rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm && \\\n", cf)
         self.assertNotIn("rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm /tmp/gcc-fs.rpm", cf)
+        # System Trust desktop entry re-categorised in place right after the main RPM install
+        desktop = "/usr/share/applications/gnome-system-trust-panel.desktop"
+        self.assertIn("rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm && \\\n"
+                      f"    sed -i 's/X-GNOME-SystemSettings;/HardwareSettings;X-GNOME-DevicesSettings;/g' {desktop} && \\\n"
+                      f"    grep -q 'X-GNOME-DevicesSettings;' {desktop} && \\\n"
+                      f"    ! grep -q 'X-GNOME-SystemSettings' {desktop} && \\\n", cf)
         self.assertIn("[ \"$(rpm -q --qf '%{VERSION}-%{RELEASE} ' gnome-control-center gnome-control-center-filesystem)\" = '51.2.1-2.yubios.fc45 51.2.1-2.yubios.fc45 ' ]", cf)
         self.assertIn("test -f /usr/share/applications/gnome-system-trust-panel.desktop", cf)
         self.assertIn("test -f /usr/share/icons/hicolor/scalable/apps/org.gnome.Settings-system-trust-symbolic.svg", cf)

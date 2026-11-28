@@ -179,6 +179,11 @@ RUN case "$(uname -m)" in \
 # file key after the -filesystem element). Step 1 needs --nodeps only because
 # the stock main package pins the old -filesystem EVR; step 2 runs the full
 # dependency check against the new -filesystem.
+# The installed gnome-system-trust-panel.desktop is then re-categorised in
+# place (X-GNOME-SystemSettings -> HardwareSettings;X-GNOME-DevicesSettings;)
+# so System Trust lists in the main Settings sidebar, not the System subpage,
+# without rebuilding the checksum-pinned v51.2.1-yubios.1 RPM; the fork's
+# yubios branch carries the same Categories fix for the next release.
 RUN case "$(uname -m)" in \
       aarch64) \
         gcc_arch="aarch64"; \
@@ -201,6 +206,9 @@ RUN case "$(uname -m)" in \
     sha512sum --check --strict /tmp/gcc.sha512 && \
     rpm -Uvh --nodigest --nosignature --nodeps /tmp/gcc-fs.rpm && \
     rpm -Uvh --nodigest --nosignature /tmp/gcc.rpm && \
+    sed -i 's/X-GNOME-SystemSettings;/HardwareSettings;X-GNOME-DevicesSettings;/g' /usr/share/applications/gnome-system-trust-panel.desktop && \
+    grep -q 'X-GNOME-DevicesSettings;' /usr/share/applications/gnome-system-trust-panel.desktop && \
+    ! grep -q 'X-GNOME-SystemSettings' /usr/share/applications/gnome-system-trust-panel.desktop && \
     rm -f /tmp/gcc.rpm /tmp/gcc-fs.rpm /tmp/gcc.sha256 /tmp/gcc.sha512 && \
     [ "$(rpm -q --qf '%{VERSION}-%{RELEASE} ' gnome-control-center gnome-control-center-filesystem)" = '51.2.1-2.yubios.fc45 51.2.1-2.yubios.fc45 ' ] && \
     test -f /usr/share/applications/gnome-system-trust-panel.desktop && \

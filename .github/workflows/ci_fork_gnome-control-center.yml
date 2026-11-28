@@ -106,7 +106,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: yubi-OS/gnome-control-center
-          ref: f127a35fa7a313bf5a4ab7334925adb351e6f83c # yubios branch (51.2.1 descendant); see PINNED.md
+          ref: b522cb79104deb334842888cec2a676808fe35d3 # yubios branch (51.2.1 descendant); see PINNED.md
 
       - name: Install podman on runner
         run: |
@@ -173,7 +173,7 @@ jobs:
       # (github.token is scoped to yubi-OS/yubiOS and cannot create releases on the fork).
       GH_TOKEN: ${{ secrets.WORKFLOW }}
       FORK_REPO: yubi-OS/gnome-control-center
-      SRC_SHA: f127a35fa7a313bf5a4ab7334925adb351e6f83c # must equal build-rpm checkout ref
+      SRC_SHA: b522cb79104deb334842888cec2a676808fe35d3 # must equal build-rpm checkout ref
       TAG: ${{ inputs.release_tag }}
     steps:
       - name: Download x86_64 RPMs
