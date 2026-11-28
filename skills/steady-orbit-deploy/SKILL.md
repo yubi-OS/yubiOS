@@ -7,7 +7,18 @@ metadata:
 
 # Steady Orbit worker deploy (modules API, no wrangler)
 
-The `steady-orbit` worker is a multi-part ES module bundle: `solar-rbs-entry.mjs` (entry, serves site pages from KV) + `index.js` (legacy API relay) + the jev module family. Deploys go through the Cloudflare REST modules API with the managed Cloudflare connection. Never replace the entry module with anything else (the Sep 21 site-break lesson).
+The `steady-orbit` worker is a 98-part ES module bundle (`solar-rbs-entry.mjs` entry + `index.js` + the `jev-*` module family + 5 `fixtures/*.mjs` parts) mirrored 1:1 in the private GitHub repository `yubi-OS/SOS` (`main` branch, with KV console asset at `kv/jev-index.html`).
+
+## Canonical `yubi-OS/SOS` Git-First + Subagent PR + Cloudflare Version Tag Workflow (2026-11-28 Directive)
+
+For any change involving the 98+ `steady-orbit` modules (or `kv/jev-index.html`), **never stage changes only in `session/` or local workspace files**:
+1. **Sync & Tag Baseline on `yubi-OS/SOS`**: Ensure `yubi-OS/SOS@main` matches the current live Cloudflare Worker version `N` (`GET /accounts/{account}/workers/scripts/steady-orbit/versions?per_page=1` -> `items[0].number`) and that the baseline commit on `yubi-OS/SOS` is tagged `v<N>` (e.g. `v464`, `v466`).
+2. **Write Changes to `yubi-OS/SOS` First (Subagents Open PRs)**:
+   - Single-agent/orchestrator changes commit directly to `yubi-OS/SOS` before any Cloudflare push.
+   - When dispatching parallel `task` subagents, each subagent creates a branch off `yubi-OS/SOS@main`, commits its verified module edits to that branch via the GitHub API (`conn_3h7rj41VF6hs`), and opens a Pull Request against `yubi-OS/SOS@main`.
+3. **Orchestrator Review & Merge**: The orchestrator reviews each subagent PR on `yubi-OS/SOS`, verifies `node --check` and lane tests, posts `Reviewed By: OMNI-REVIEW`, and merges the PR into `yubi-OS/SOS@main`.
+4. **Deploy from `yubi-OS/SOS@main` to Cloudflare**: Pull the merged tree from `yubi-OS/SOS@main`, upload all 98 module parts to `PUT /accounts/{account}/workers/scripts/steady-orbit` (with `main_module: "solar-rbs-entry.mjs"`, filtering `secret_text` out of `bindings` and passing `"keep_bindings": ["secret_text"]`), and upload `kv/jev-index.html` as raw bytes (`--data-binary`) to KV namespace `SITE` (`b9de35ecd3ca44999b38cfd107c0d44a`) when modified.
+5. **Tag the New Cloudflare Deployment Version (`v<N>`) in `yubi-OS/SOS`**: Query `GET /accounts/{account}/workers/scripts/steady-orbit/versions?per_page=1` to read the newly created Cloudflare version number `N` (e.g. `467`), and create the Git tag `refs/tags/v<N>` on `yubi-OS/SOS` pointing to the deployed `main` commit SHA.
 
 ## The deploy sequence
 
