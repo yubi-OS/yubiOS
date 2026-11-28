@@ -25,3 +25,5 @@ OPENBLAS_NUM_THREADS=1 python3 tools/ontology-field/run.py --data /tmp/fresh-ont
 ```
 
 The committed report is specific to the six-family protocol. The mathematical operations are in `measure.py`; the repository point-map cross-check lives in `pointmap.mjs`. Cell tables and point coordinates in the JSON use manifest order; class-count arrays use the report's `families` order. Cell index = 4 × vertical bin + horizontal bin, ordered from the lower left. A sphere class of −1 means no reference center within chord 0.095. Empty or fixed-null cells have a null z value.
+
+The pinned SOS implementation linked from the frozen protocol requires repository access. Anonymous readers can inspect the public [endpoint catalogue](https://steadyorbitsystems.com/ENDPOINTS.md) and [agent guide](https://steadyorbitsystems.com/AGENT.md) for the deployment route contracts.
